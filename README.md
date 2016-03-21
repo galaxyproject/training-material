@@ -2,6 +2,7 @@ Training material
 =================
 
 - genome annotation
+- RNAseq
 
 ### License
 
