@@ -3,6 +3,7 @@ Training material
 
 - genome annotation
 - RNAseq
+- ChIPseq
 
 ### License
 
