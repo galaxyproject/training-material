@@ -1,10 +1,10 @@
 Training material
 =================
 
-- genome annotation
-- RNA-seq
-- ChIP-seq
-- Exome-seq
+- [Genome Annotation](https://github.com/bgruening/training-material/blob/master/genome-annotation/general-introduction/README.md)
+- [RNA-seq](https://github.com/bgruening/training-material/blob/master/rna-seq/README.md)
+- [ChIP-seq](https://github.com/bgruening/training-material/blob/master/ChIPseq/ChIPseq.md)
+- [Exome-seq](https://github.com/bgruening/training-material/blob/master/Exome-Seq/Exome-Seq.md)
 
 ### License
 
