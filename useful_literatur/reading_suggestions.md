@@ -2,32 +2,37 @@
 
 **Meacham et al. (2011):** [Identification and correction of systematic error in high-throughput sequence data](http://bmcbioinformatics.biomedcentral.com/articles/10.1186/1471-2105-12-451), (doi:10.1186/1471-2105-12-451) - Correcting for systematic base pair errors in deep sequencing; important paper if you want to do look at any allele-specifically or if you're interested in SNPs
 
-**Benjamini & Speed (2012):** GC bias of deeply sequenced samples - very good paper that systematically assesses many possible sourced of GC bias for deeply sequenced samples and eventually pinpoints it to the DNA Polymerase
+**Benjamini & Speed (2012):** [Summarizing and correcting the GC content bias in high-throughput sequencing](http://nar.oxfordjournals.org/content/40/10/e72.long), (doi: 10.1093/nar/gks001) - GC bias of deeply sequenced samples; very good paper that systematically assesses many possible sourced of GC bias for deeply sequenced samples and eventually pinpoints it to the DNA Polymerase
 
-A collection of papers on quality controls for various NGS applications: Frontiers in Genetics (2014)
----------------------------------------------------------------------------------------
-Deep sequencing
+**A collection of papers on quality controls for various NGS applications:** [Frontiers in Genetics (2014)](http://journal.frontiersin.org/researchtopic/1683/quality-assessment-and-control-of-high-throughput-sequencing-data)
 
-Overview of popular *-seq techniques (2012) - by Zentner and Henikoff, very nice description of DNase-seq, MNase-seq, FAIRE-seq etc.
 
-Paper on multiplexing - describes the individual steps of the Illumina deep sequencing protocols quite detailed
+#Deep sequencing
 
-Illumina's tech report- focuses on Illumina's sequencing technique; nice educative figures
----------------------------------------------------------------------------------------
-Mapping of short NGS reads
+**Zentner and Henikoff (2012):** [Surveying the epigenomic landscape, one base at a time](http://genomebiology.biomedcentral.com/articles/10.1186/gb-2012-13-10-250), (doi:10.1186/gb-2012-13-10-250) - Overview of popular *-seq techniques; very nice description of DNase-seq, MNase-seq, FAIRE-seq etc.
 
-Intro to various aspects of NGS read mapping: informative slides with some nice reality checks
+**Son and Taylor (2011):** [Preparing DNA Libraries for Multiplexed Paired-End Deep Sequencing for Illumina GA Sequencers](http://www.ncbi.nlm.nih.gov/pmc/articles/PMC3076644/), (doi:10.1002/9780471729259.mc01e04s20) - Paper on multiplexing; describes the individual steps of the Illumina deep sequencing protocols quite detailed
 
-Fonseca et al. (2012): Tools for mapping high-throughput sequencing data - an excellent starting point despite its "old" age, you will learn a lot about the different philosophies behind the read alignment tools!
+**Illumina's tech report** - focuses on [Illumina's sequencing technology](http://www.illumina.com/technology.html); nice educative figures
 
-Hatem et al. (2013): Benchmarking short sequence mapping tools (spoiler alert: bowtie wins)
 
-Engstrom et al. (2013): Systematic evaluation of spliced alignment programs for RNA-seq data
-Genome Mappability
+# Mapping of short NGS reads
 
-Lee and Schatz (2012): The reliability of short read mapping - very detailed paper about genome mappability issues that presents a new suite of tools for taking the mappability into account
+**informative slides** [Mapping of sequencing reads](http://people.binf.ku.dk/krogh/tmp/Mapping_Krogh_Monday.pdf) - Intro to various aspects of NGS read mapping
 
-mappability maps can be downloaded here
+**Fonseca et al. (2012):** [Tools for mapping high-throughput sequencing data](http://bioinformatics.oxfordjournals.org/content/28/24/3169.full), (doi:10.1093/bioinformatics/bts605) - an excellent starting point despite its "old" age, you will learn a lot about the different philosophies behind the read alignment tools!
+
+**Hatem et al. (2013):**[Benchmarking short sequence mapping tools](http://bmcbioinformatics.biomedcentral.com/articles/10.1186/1471-2105-14-184), (doi:10.1186/1471-2105-14-184) (spoiler alert: bowtie wins)
+
+**Engstrom et al. (2013):** [Systematic evaluation of spliced alignment programs for RNA-seq data](http://www.nature.com/nmeth/journal/v10/n12/full/nmeth.2722.html), (doi:10.1038/nmeth.2722) 
+
+**Genome Mappability**
+
+**Lee and Schatz (2012):** [The reliability of short read mapping](http://www.ncbi.nlm.nih.gov/pmc/articles/PMC3413383/?report=reader), (doi:10.1093/bioinformatics/bts330)  - very detailed paper about genome mappability issues that presents a new suite of tools for taking the mappability into account
+
+*mappability maps* can be downloaded [here](http://archive.gersteinlab.org/proj/PeakSeq/Mappability_Map/)
+
+
 ------------------------------------------------------------------------
 ChIP-seq in general
 
