@@ -16,7 +16,7 @@
 **Illumina's tech report** - focuses on [Illumina's sequencing technology](http://www.illumina.com/technology.html); nice educative figures
 
 
-# Mapping of short NGS reads
+#Mapping of short NGS reads
 
 **informative slides** [Mapping of sequencing reads](http://people.binf.ku.dk/krogh/tmp/Mapping_Krogh_Monday.pdf) - Intro to various aspects of NGS read mapping
 
@@ -33,7 +33,7 @@
 *mappability maps* can be downloaded [here](http://archive.gersteinlab.org/proj/PeakSeq/Mappability_Map/)
 
 
-# ChIP-seq in general
+#ChIP-seq in general
 
 **Landt et al. (2012):** [ChIP-seq guidelines and practices of the ENCODE and modENCODE consortia](http://genome.cshlp.org/content/22/9/1813.long), (doi:10.1101/gr.136184.111) - this is a very useful "encyclopedic" paper with many details about the tools the (mod)ENCODE consortia use. It also contains a long section about antibody validation etc., it does not explain much of the reasoning behind the bioinformatics tools, though.
 
@@ -69,8 +69,8 @@ Soneson et al. (2013): And another paper about different methods for differentia
 Roberts et al. (2011): Fragment bias correction
 
 Garber et al. (2011): Classical paper about the computational aspects of RNA-seq data analysis
----------------------------------------------------------------------------------------
-Peak Calling Methods (ChIP-seq)
+
+##Peak Calling Methods (ChIP-seq)
 
 Pepke et al. (2009): First comparison of peak callers - focuses on the explanation of basic principles of ChIP-seq data processing and the general workflows of peak calling algorithms
 
@@ -82,8 +82,8 @@ MACS
 Fen et al. (2012): How to use MACS - Nature Protocols
 
 Zhang et al. (2008): The original publication of MACS: Model-bases analysis of ChIP-seq data.
----------------------------------------------------------------------------------------
-DNA motif analysis
+
+##DNA motif analysis
 
 Das et al. (2007): Review of Motif Analysis Tools
 MEME (suite)
@@ -98,30 +98,25 @@ TRAP
 Thomas-Chollier et al. (2012): How to use TRAP - Nature Protocols
 
 Roider et al. (2006): Theoretical background of TRAP
---------------------------------------------------------------------------------------
-NGS data formats
+
+##NGS data formats
 
 UCSC has a very good overview with brief descriptions of BED, bedGraph, bigWig etc.: https://genome.ucsc.edu/FAQ/FAQformat.html
 
 VCF format (encoding SNPs, indels etc.): Very readable, albeit not exhausting description
-
 transcriptomes are often saved in GFF3 format (this is what TopHat needs, for example), but just to make things more complicated, GTF is another format used for transcriptome information, too (here are more information on GTF)
---------------------------------------------------------------------------------------
+
+
 Bioinformatic Tools (Linux, R, BEDTools etc.) - Manuals, Courses, original papers
 
-Why and how is bioinformatics software special? (Highly recommended read!)
+#Misc
 
-A Field Guide to Genomics Research- very readable introduction about the different caveats of genomics research (with cute cartoons!)
-Linux Command Line
+* Why and how is bioinformatics software special? (Highly recommended read!)
 
-Linux & Perl Primer for Biologists - very entertaining introduction to command line commands and perl scripts with a focus on bioinformatic application, i.e. handling of DNA sequences
-
-Linux Tutorial for Beginners -  thorough, but concise online tutorial introducing the very basics of handling the Linux command line
-
-Writing Linux shell scripts - useful for slightly more advanced Linux command line users
-R
-
-Hands on R course - for beginners - R is probably the most widely used open-source statistical software; through our epicenter website you can also access RStudio which provides are very nice interface to working and plotting with R. In fact, most of the plots generated within Galaxy are generated through R scripts, so if you're not happy with the default formats of the Galaxy graphs, definitely have a look at R yourself. The learning curve is steep, but it is worth it.
-BEDTools
-
-BEDTools Manual - when working with genomic intervals (e.g. genes, peaks, enriched regions...), BEDTools are invaluable! The manual is a very good read and we refer to it almost daily.
+* A Field Guide to Genomics Research- very readable introduction about the different caveats of genomics research (with cute cartoons!)
+* Linux Command Line
+* Linux & Perl Primer for Biologists - very entertaining introduction to command line commands and perl scripts with a focus on bioinformatic application, i.e. handling of DNA sequences
+* Linux Tutorial for Beginners -  thorough, but concise online tutorial introducing the very basics of handling the Linux command line
+* Writing Linux shell scripts - useful for slightly more advanced Linux command line users
+* Hands on R course - for beginners - R is probably the most widely used open-source statistical software; through our epicenter website you can also access RStudio which provides are very nice interface to working and plotting with R. In fact, most of the plots generated within Galaxy are generated through R scripts, so if you're not happy with the default formats of the Galaxy graphs, definitely have a look at R yourself. The learning curve is steep, but it is worth it.
+* BEDTools Manual - when working with genomic intervals (e.g. genes, peaks, enriched regions...), BEDTools are invaluable! The manual is a very good read and we refer to it almost daily.
