@@ -101,18 +101,14 @@ Roider et al. (2006): Theoretical background of TRAP
 
 ##NGS data formats
 
-UCSC has a very good overview with brief descriptions of BED, bedGraph, bigWig etc.: https://genome.ucsc.edu/FAQ/FAQformat.html
+* UCSC has a very good overview with brief descriptions of BED, bedGraph, bigWig etc.: https://genome.ucsc.edu/FAQ/FAQformat.html
 
-VCF format (encoding SNPs, indels etc.): Very readable, albeit not exhausting description
-transcriptomes are often saved in GFF3 format (this is what TopHat needs, for example), but just to make things more complicated, GTF is another format used for transcriptome information, too (here are more information on GTF)
+* VCF format (encoding SNPs, indels etc.): Very readable, albeit not exhausting description transcriptomes are often saved in GFF3 format (this is what TopHat needs, for example), but just to make things more complicated, GTF is another format used for transcriptome information, too (here are more information on GTF)
 
 
-Bioinformatic Tools (Linux, R, BEDTools etc.) - Manuals, Courses, original papers
-
-#Misc
+#Bioinformatic Tools (Linux, R, BEDTools etc.) - Manuals, Courses, original papers
 
 * Why and how is bioinformatics software special? (Highly recommended read!)
-
 * A Field Guide to Genomics Research- very readable introduction about the different caveats of genomics research (with cute cartoons!)
 * Linux Command Line
 * Linux & Perl Primer for Biologists - very entertaining introduction to command line commands and perl scripts with a focus on bioinformatic application, i.e. handling of DNA sequences
