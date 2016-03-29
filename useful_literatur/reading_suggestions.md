@@ -33,20 +33,19 @@
 *mappability maps* can be downloaded [here](http://archive.gersteinlab.org/proj/PeakSeq/Mappability_Map/)
 
 
-------------------------------------------------------------------------
-ChIP-seq in general
+# ChIP-seq in general
 
-Landt et al. (2012): ChIP-seq guidelines and practices of the ENCODE and modENCODE consortia   - this is a very useful "encyclopedic" paper with many details about the tools the (mod)ENCODE consortia use. It also contains a long section about antibody validation etc., it does not explain much of the reasoning behind the bioinformatics tools, though.
+**Landt et al. (2012):** [ChIP-seq guidelines and practices of the ENCODE and modENCODE consortia](http://genome.cshlp.org/content/22/9/1813.long), (doi:10.1101/gr.136184.111) - this is a very useful "encyclopedic" paper with many details about the tools the (mod)ENCODE consortia use. It also contains a long section about antibody validation etc., it does not explain much of the reasoning behind the bioinformatics tools, though.
 
-Zentner et al. (2012): Surveying the epigenomic landscape, one base at a time - short review about MNase-Seq, DNase-Seq, ChIP-exo
+**Zentner and Henikoff (2012):** [Surveying the epigenomic landscape, one base at a time](http://genomebiology.biomedcentral.com/articles/10.1186/gb-2012-13-10-250), (doi:10.1186/gb-2012-13-10-250) - Overview of popular *-seq techniques; very nice description of DNase-seq, MNase-seq, FAIRE-seq etc.
 
-Kidder et al. (2011): Technical considerations to obtaining high-quality data - nice, readable introduction into all aspects of ChIP-seq experiments (from antibodies to cell numbers to replicates to data analysis)
+**Kidder et al. (2011):** [Technical considerations to obtaining high-quality data](http://www.nature.com/ni/journal/v12/n10/abs/ni.2117.html), (doi:10.1038/ni.2117) - nice, readable introduction into all aspects of ChIP-seq experiments (from antibodies to cell numbers to replicates to data analysis)
 
-Leleu et al. (2010): Processing and analyzing ChIP-seq data - fairly detailed review of key concepts of ChIP-seq data processing (less detailed on analysis)
+**Leleu et al. (2010):** [Processing and analyzing ChIP-seq data](http://www.ncbi.nlm.nih.gov/pubmed/20861161), (doi: 10.1093/bfgp/elq022) - fairly detailed review of key concepts of ChIP-seq data processing (less detailed on analysis)
 
-Peter Park (2009): Advantages and challenges of a maturing technology 
+**Peter Park (2009):** [ChIP-seq: Advantages and challenges of a maturing technology](http://www.nature.com/nrg/journal/v10/n10/full/nrg2641.html), (doi:10.1038/nrg2641)
 
-Kharchenko et al. (2008): Design and analysis of ChIP-seq experiments for DNA-binding proteins
+**Kharchenko et al. (2008):** Design and analysis of ChIP-seq experiments for DNA-binding proteins
 
 Liu et al. (2010): Q&A: ChIP-seq technologies and the study of gene regulation - short overview of several (typical) issues of ChIP-seq analysis
 
