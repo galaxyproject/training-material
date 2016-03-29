@@ -45,19 +45,20 @@
 
 **Peter Park (2009):** [ChIP-seq: Advantages and challenges of a maturing technology](http://www.nature.com/nrg/journal/v10/n10/full/nrg2641.html), (doi:10.1038/nrg2641)
 
-**Kharchenko et al. (2008):** Design and analysis of ChIP-seq experiments for DNA-binding proteins
+**Kharchenko et al. (2008):** [Design and analysis of ChIP-seq experiments for DNA-binding proteins](http://www.ncbi.nlm.nih.gov/pubmed/19029915), (doi:10.1038/nbt.1508)
 
-Liu et al. (2010): Q&A: ChIP-seq technologies and the study of gene regulation - short overview of several (typical) issues of ChIP-seq analysis
+**Liu et al. (2010):** [Q&A: ChIP-seq technologies and the study of gene regulation](http://bmcbiol.biomedcentral.com/articles/10.1186/1741-7007-8-56), (doi:10.1186/1741-7007-8-56) - short overview of several (typical) issues of ChIP-seq analysis
 
-Carroll et al. (2014):  Impact of artifact removal on ChIP quality metrics in ChIP-seq and ChIP-exo data
----------------------------------------------------------------------------------------
-RNA-seq
+**Carroll et al. (2014):**  [Impact of artifact removal on ChIP quality metrics in ChIP-seq and ChIP-exo data](http://journal.frontiersin.org/article/10.3389/fgene.2014.00075/full),(doi:10.3389/fgene.2014.00075)
 
-Nice graphical overview of the RNA-seq processing and analysis steps: http://figshare.com/articles/RNA_seq_Workflows_and_Tools/662782
 
-Insights into properly planning your RNA-seq run! Read BEFORE your RNA-seq experiment! Auer and Doerge (2010)
+#RNA-seq
 
-A refreshingly honest view on the non-trivial aspects of RNA-seq analysis: Ian Korf, Nat Methods (2013)
+**Nice graphical overview of the RNA-seq processing and analysis steps:** http://figshare.com/articles/RNA_seq_Workflows_and_Tools/662782
+
+[Auer and Doerge (2010)](http://www.genetics.org/content/185/2/405), (doi:10.1534/genetics.110.114983); Insights into properly planning your RNA-seq run! Read BEFORE your RNA-seq experiment! 
+
+[Ian Korf, Nat Methods (2013):] A refreshingly honest view on the non-trivial aspects of RNA-seq analysis: 
 
 Dillies et al. (2012): Systematic comparison of seven representative normalization methods for the differential analysis of RNA-seq data (Total Count, Upper Quartile, Median (Med), DESeq, edgeR, Quantile and Reads Per Kilobase per Million mapped reads (RPKM) normalization)
 
