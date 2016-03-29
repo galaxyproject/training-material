@@ -56,9 +56,9 @@
 
 **Nice graphical overview of the RNA-seq processing and analysis steps:** http://figshare.com/articles/RNA_seq_Workflows_and_Tools/662782
 
-[Auer and Doerge (2010)](http://www.genetics.org/content/185/2/405), (doi:10.1534/genetics.110.114983); Insights into properly planning your RNA-seq run! Read BEFORE your RNA-seq experiment! 
+**Auer and Doerge (2010):** [Statistical Design and Analysis of RNA Sequencing Data](http://www.genetics.org/content/185/2/405), (doi:10.1534/genetics.110.114983); Insights into properly planning your RNA-seq run! Read BEFORE your RNA-seq experiment! 
 
-[Ian Korf, Nat Methods (2013):] A refreshingly honest view on the non-trivial aspects of RNA-seq analysis: 
+**Ian Korf (2013):**[Genomics: the state of the art in RNA-seq analysis](http://www.ncbi.nlm.nih.gov/pubmed/24296473), (doi:10.1038/nmeth.2735); A refreshingly honest view on the non-trivial aspects of RNA-seq analysis
 
 Dillies et al. (2012): Systematic comparison of seven representative normalization methods for the differential analysis of RNA-seq data (Total Count, Upper Quartile, Median (Med), DESeq, edgeR, Quantile and Reads Per Kilobase per Million mapped reads (RPKM) normalization)
 
