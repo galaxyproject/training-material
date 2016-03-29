@@ -5,6 +5,7 @@ Training material
 - [RNA-seq](https://github.com/bgruening/training-material/blob/master/rna-seq/README.md)
 - [ChIP-seq](https://github.com/bgruening/training-material/blob/master/ChIPseq/ChIPseq.md)
 - [Exome-seq](https://github.com/bgruening/training-material/blob/master/Exome-Seq/Exome-Seq.md)
+- [MethyC-Seq](https://github.com/bgruening/training-material/blob/master/Methylation-Seq/Methylation-Seq.md)
 
 ### License
 
