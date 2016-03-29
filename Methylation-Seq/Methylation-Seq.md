@@ -16,7 +16,8 @@ Techniques:
 ![Barchart_Methaylation](https://github.com/bgruening/presentations/raw/master/shared/resources/img/BarChart_Methylation.jpg)
 
 
-# Hands on! Bismark BS Mapper
+# Hands on!  
+# Bismark BS Mapper  
 
 Publication: [Bismark BS Mapper](http://bioinformatics.oxfordjournals.org/content/27/11/1571.long)
 
@@ -33,7 +34,8 @@ This dataset comes from "Tissue-specific methylomes reveal epigenetic memory in 
 
 This sample is from a mouse heart, though I'll provide additional datasets. Annoyingly, this is an old dataset that uses "Illumina 1.5" encoding. Consequently, I've gone ahead and converted this to "fastqsanger" format for you.
 
-**1. Run FastQC/Trim Galore!**
+**1. Run FastQC/Trim Galore!**  
+
 - Run FastQC.
 - Note the GC distribution and percentage of "T" and "C". Why is this so weird?
 - Run "Trim Galore!" (under the "Trim Galore! Advanced Settings", select a "Trim low quality ends..." value of 5 rather than the default 20).
@@ -74,7 +76,8 @@ This is just a quick method of writing a tab-delimited file (OFS="\t") skipping 
 - Plot some correlations, or compute methylation around genes/TSS/TES, maybe do some clustering (beware of what this entails), play around with the data.
 
 
+**Some nice papers:**
 
-
-
-
+Krueger et al. 2012: [DNA methylome analysis using short bisulfite sequencing data](http://www.nature.com/nmeth/journal/v9/n2/abs/nmeth.1828.html), (doi:10.1038/nmeth.1828)
+Lister and Ecker 2009: [Finding the fifth base: Genome-wide sequencing of cytosine methylation](http://genome.cshlp.org/content/19/6/959.long), ( doi: 10.1101/gr.083451.108)  
+Laird 2010 [Principles and challenges of genome-wide DNA methylation analysis](http://www.nature.com/nrg/journal/v11/n3/full/nrg2732.html), (doi:10.1038/nrg2732)
