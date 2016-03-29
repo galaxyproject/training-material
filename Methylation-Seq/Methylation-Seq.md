@@ -56,7 +56,7 @@ Should you decide to do this yourself, please note that you'll need a few hours.
 **3. Methylation bias and metric extraction**
 
 - Import the BAM files from "Shared Data" -> "Data Libraries" -> "Galaxy Courses" -> "MethylSeq"
-- Open PileOMeth and run it on one of the BAM files. First choose "Determine the position-dependent ..." from "What do you want to do?". Then run the tool again with the default setting of "Extract methylation metrics", though you might want to also set "Merge cytosine metrics..." to "yes".
+- Open [PileOMeth](https://github.com/dpryan79/PileOMeth) and run it on one of the BAM files. First choose "Determine the position-dependent ..." from "What do you want to do?". Then run the tool again with the default setting of "Extract methylation metrics", though you might want to also set "Merge cytosine metrics..." to "yes".
 
 You now have a visualization of if/where there's methylation bias and modified bedGraph files with methylation metrics in them. This could be used for downstream statistical analysis (typically in an R package).
 
