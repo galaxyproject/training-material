@@ -33,7 +33,7 @@ This exercise uses RNA-seq data from the study by [Brooks et al. 2011](http://ge
 
 - Create a new history for this RNA-seq exercise.
 
-- Import any two FASTQ files with sample id by right-clicking --> copy link location and paste the link in Galaxy --> Upload File from your computer --> paste/fetch data --> start:
+- Import any two FASTQ files with sample id by right-clicking →  copy link location and paste the link in Galaxy →  Upload File from your computer →  paste/fetch data →  start:
 
       - [GSM461176_untreat_single_subset](https://www.googledrive.com/host/0B9urRnOAUUI8TEFrWTFHcy0tQWs)
       - [GSM461177_untreat_paired_subset_1](https://www.googledrive.com/host/0B9urRnOAUUI8NXB1dTVOdWRScDA)
@@ -59,9 +59,9 @@ This exercise uses RNA-seq data from the study by [Brooks et al. 2011](http://ge
 
 **Step 2: Mapping of the reads with TopHat**
 
-- Annoying but necessary: Before continuing with the mapping step, change the file type of the FASTQ files to *fastqsanger*. This signals that the FASTQ contains Sanger-scaled quality values. **TopHat2** will otherwise not be able to accept the files for input! This can be done by clicking on the pencil item of the dataset (edit attributes) --> Datatype --> select fastqsanger
+- Annoying but necessary: Before continuing with the mapping step, change the file type of the FASTQ files to *fastqsanger*. This signals that the FASTQ contains Sanger-scaled quality values. **TopHat2** will otherwise not be able to accept the files for input! This can be done by clicking on the pencil item of the dataset (edit attributes) →  Datatype →  select fastqsanger
 
-- If you want **TopHat** to take advantage from already known reference gene annotations, make sure that the data is available in your current Galaxy history. For this exercise, please import the Ensembl gene annotation for [dm3.ensGene.gtf](https://www.googledrive.com/host/0B9urRnOAUUI8Tml0MzBabEE5MUU) by right-clicking --> copy link location and paste the link in Galaxy --> Upload File from your computer --> paste/fetch data --> start.
+- If you want **TopHat** to take advantage from already known reference gene annotations, make sure that the data is available in your current Galaxy history. For this exercise, please import the Ensembl gene annotation for [dm3.ensGene.gtf](https://www.googledrive.com/host/0B9urRnOAUUI8Tml0MzBabEE5MUU) by right-clicking →  copy link location and paste the link in Galaxy →  Upload File from your computer →  paste/fetch data →  start.
 
 - Run **TopHat2** with the two trimmed FASTQ files as input for forward and reverse reads as your reads are from a paired-end sequencing run. Align the reads to the Drosophila dm3 genome. The fragment size is 200 and the read length is 37, so why is 125 a good value for the mean inner distance? How do you know the fragment size (Hint: Go to the GEO entry of your data set, browse to the SRA entry of your sample and explore the library information)? 
 
@@ -74,7 +74,7 @@ This exercise uses RNA-seq data from the study by [Brooks et al. 2011](http://ge
 
 - **TopHat2** returns a bam file with the mapped reads and three bed files containing splice junctions, insertions and deletions. 
 
-- The exercise of step 2 worked for you? Fine! However the dataset might be a little too small to get you a good impression of how real data looks like. Please therefore import all the files from tophat2 outputs into your history by right-clicking --> copy link location and paste the link in Galaxy --> Upload File from your computer --> paste/fetch data --> start.
+- The exercise of step 2 worked for you? Fine! However the dataset might be a little too small to get you a good impression of how real data looks like. Please therefore import all the files from tophat2 outputs into your history by right-clicking →  copy link location and paste the link in Galaxy →  Upload File from your computer →  paste/fetch data →  start.
 
       - [GSM461177_untreat_paired_chr4.bam](https://www.googledrive.com/host/0B9urRnOAUUI8ZW5VWnRhUzNqUGc)
       - [GSM461177_untreat_paired_deletions_chr4.bed](https://www.googledrive.com/host/0B9urRnOAUUI8bHpSRW5ZUlR6S0k)
@@ -92,7 +92,7 @@ These files contain the TopHat results for the sample GSM461177_untreat_paired, 
 ## Transcript Assembly
 **Step 4: Predict novel transcripts with Cufflinks**
 
-- Import the bam files of all samples into your history by right-clicking --> copy link location and paste the link in Galaxy --> Upload File from your computer --> paste/fetch data --> start.
+- Import the bam files of all samples into your history by right-clicking →  copy link location and paste the link in Galaxy →  Upload File from your computer →  paste/fetch data →  start.
 
       - [GSM461177_untreat_paired_chr4.bam](https://www.googledrive.com/host/0B9urRnOAUUI8RlNiSkd0TG9TeE0)
       - [GSM461178_untreat_paired_chr4.bam](https://www.googledrive.com/host/0B9urRnOAUUI8b09JSF9rM3REeEU)
@@ -110,7 +110,7 @@ These files contain the TopHat results for the sample GSM461177_untreat_paired, 
 Methods that estimate the differential expression of genes across samples require an annotation of genomic features such as genes or exons. Some methods rely on unscaled read counts per gene to evaluate the differential gene expression.
 - The tool **htseq-count** can be used to count reads per features in different samples. The tools **htseq-count** expects a BAM file as input. In case of paired-end reads, the alignments in BAM should be sorted by read name. First use the tool **sort** of NGS: **SAM Tools** to sort all the paired-end BAM files. Sort by *read names*.
 
-- Then, we need a file in GFF/GTF format with feature, i.e. gene, annotations. If not done yet, please import the Ensembl genes for dm3 -->                                                                          [dm3.ensGene.gtf](https://www.googledrive.com/host/0B9urRnOAUUI8Tml0MzBabEE5MUU) by right-clicking --> copy link location and paste the link in Galaxy --> Upload File from your computer --> paste/fetch data --> start.
+- Then, we need a file in GFF/GTF format with feature, i.e. gene, annotations. If not done yet, please import the Ensembl genes for dm3 →                                                                           [dm3.ensGene.gtf](https://www.googledrive.com/host/0B9urRnOAUUI8Tml0MzBabEE5MUU) by right-clicking →  copy link location and paste the link in Galaxy →  Upload File from your computer →  paste/fetch data →  start.
 
 - Apply the tool **htseq-count** to the all samples. Select *dm3.ensGene.gtf* file as feature file. Use the *Union* mode for reads overlapping more than one feature. Set the *Minimum Alignment Quality* to 10.
 
@@ -119,7 +119,7 @@ Methods that estimate the differential expression of genes across samples requir
 
 **Step 6: Analyse differential gene expression with DESeq2**
 
-- In Step 5, we counted only reads that mapped to chr4. To get more meaningful results in the following analysis, please import the 3 treated and 4 untreated count files from the data library Galaxy course --> RNA-seq --> count_matrix. These files contains the read counts for all Drosophila genes and not only for reads mapped to chr4.
+- In Step 5, we counted only reads that mapped to chr4. To get more meaningful results in the following analysis, please import the 3 treated and 4 untreated count files from the data library Galaxy course →  RNA-seq →  count_matrix. These files contains the read counts for all Drosophila genes and not only for reads mapped to chr4.
 
 In our example, we have samples with two varying factors: (1) condition (either treated or untreated) and (2) sequencing type (paired-end or single-end). A multi-factor analysis allows us to assess  the effect of the treatment taking also the sequencing type into account.
 
