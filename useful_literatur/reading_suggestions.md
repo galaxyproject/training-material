@@ -112,11 +112,19 @@
 
 #Bioinformatic Tools (Linux, R, BEDTools etc.) - Manuals, Courses, original papers
 
-* Why and how is bioinformatics software special? (Highly recommended read!)
-* A Field Guide to Genomics Research- very readable introduction about the different caveats of genomics research (with cute cartoons!)
-* Linux Command Line
-* Linux & Perl Primer for Biologists - very entertaining introduction to command line commands and perl scripts with a focus on bioinformatic application, i.e. handling of DNA sequences
-* Linux Tutorial for Beginners -  thorough, but concise online tutorial introducing the very basics of handling the Linux command line
-* Writing Linux shell scripts - useful for slightly more advanced Linux command line users
-* Hands on R course - for beginners - R is probably the most widely used open-source statistical software; through our epicenter website you can also access RStudio which provides are very nice interface to working and plotting with R. In fact, most of the plots generated within Galaxy are generated through R scripts, so if you're not happy with the default formats of the Galaxy graphs, definitely have a look at R yourself. The learning curve is steep, but it is worth it.
-* BEDTools Manual - when working with genomic intervals (e.g. genes, peaks, enriched regions...), BEDTools are invaluable! The manual is a very good read and we refer to it almost daily.
+- Why and how is bioinformatics software special? **Altschul et a. (2013)** [The anatomy of successful computational biology software](http://www.ncbi.nlm.nih.gov/pubmed/24104757), (doi:10.1038/nbt.2721) **(Highly recommended to read!)**
+- **Bild et al. (2014)** [A Field Guide to Genomics Research](http://journals.plos.org/plosbiology/article?id=10.1371/journal.pbio.1001744), (doi:10.1371/journal.pbio.1001744) - Very readable introduction about the different caveats of genomics research (with cute cartoons!)
+ 
+**Linux Command Line**
+
+- [Linux & Perl Primer for Biologists](http://korflab.ucdavis.edu/Unix_and_Perl/unix_and_perl_v3.1.1.html) - Very entertaining introduction to command line commands and perl scripts with a focus on bioinformatic application, i.e. handling of DNA sequences
+- [Linux Tutorial for Beginners](http://www.ee.surrey.ac.uk/Teaching/Unix/) - Thorough, but concise online tutorial introducing the very basics of handling the Linux command line
+- [Writing Linux shell scripts](http://www.freeos.com/guides/lsst/index.html) - Useful for slightly more advanced Linux command line users
+
+**R**
+
+- [Hands on R course](http://www.uwyo.edu/mdillon/hor.html) - For beginners - R is probably the most widely used open-source statistical software; through our epicenter website you can also access RStudio which provides are very nice interface to working and plotting with R. In fact, most of the plots generated within Galaxy are generated through R scripts, so if you're not happy with the default formats of the Galaxy graphs, definitely have a look at R yourself. The learning curve is steep, but it is worth it.
+
+**BEDTools** 
+
+- [BEDTools Manual](https://github.com/bgruening/training_data/raw/master/Literature/BEDTools-User-Manual.pdf) - When working with genomic intervals (e.g. genes, peaks, enriched regions...), BEDTools are invaluable! The manual is a very good read and we refer to it almost daily.
