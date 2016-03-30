@@ -1,6 +1,6 @@
 # GALAXY WORKSHOP on ChIP-seq DATA ANALYSIS
 
-##Useful literature 
+#Useful literature 
 
 **ChIP-seq in general:**  
 
@@ -35,9 +35,27 @@
 **Fen et al. (2012):** [Identifying ChIP-seq enrichment using MACS.](http://www.ncbi.nlm.nih.gov/pubmed/22936215), (doi:10.1038/nprot.2012.101) - How to use MACS - Nature Protocols
 
 **Zhang et al. (2008):** [Model-based Analysis of ChIP-Seq (MACS)](http://genomebiology.biomedcentral.com/articles/10.1186/gb-2008-9-9-r137), (doi:10.1186/gb-2008-9-9-r137) - The original publication of MACS
+  
+##DNA motif analysis
+
+**Das et al. (2007):** [A survey of DNA motif finding algorithms](http://bmcbioinformatics.biomedcentral.com/articles/10.1186/1471-2105-8-S7-S21), (doi:10.1186/1471-2105-8-S7-S21) - Review of motif analysis tools 
+
+**MEME (suite)**
+
+**Machanick and Bailey (2011):** [MEME-ChIP: motif analysis of large DNA datasets](http://www.ncbi.nlm.nih.gov/pubmed/21486936), (doi: 10.1093/bioinformatics/btr189) - MEME-ChIP-paper
+
+**Bailey and Machanick (2012):** [Inferring direct DNA binding from ChIP-seq](http://www.ncbi.nlm.nih.gov/pubmed/22610855), (doi:10.1093/nar/gks433) - Centrimo: position-specific motif analysis, especially useful for ChIP-seq data
+
+[TomTom](http://meme-suite.org/tools/tomtom) - Meme Suite Motif comparison tool: tool for the comparison of motifs from databases (not in Galaxy yet): [Manual](http://meme-suite.org/doc/tomtom.html?man_type=web)
+
+**TRAP**
+
+**Thomas-Chollier et al. (2012):** [Transcription factor binding predictions using TRAP for the analysis of ChIP-seq data and regulatory SNPs](http://www.ncbi.nlm.nih.gov/pubmed/22051799), (doi:10.1038/nprot.2011.409) - How to use TRAP - Nature Protocols
+
+**Roider et al. (2006):** [Predicting transcription factor affinities to DNA from a biophysical model.](http://www.ncbi.nlm.nih.gov/pubmed/17098775), (doi:10.1093/bioinformatics/btl565) - Theoretical background of TRAP
 
 
-##Slides from Workshop
+#Slides from Workshop
 
 
 The slides for part 1 of this session can be downloaded from here 
