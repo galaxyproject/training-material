@@ -13,7 +13,7 @@
 
 ## Main Window
 
-(add image)
+![MainWindowIGV](http://www.broadinstitute.org/software/igv/sites/cancerinformatics.org.igv/files/images/igv_desktop_callouts.jpg)
 
 
  Tool bar
