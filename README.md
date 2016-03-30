@@ -72,7 +72,7 @@ Training material
 
 **BEDTools** 
 
-- [BEDTools Manual](https://github.com/bgruening/training_data/raw/master/Literature/BEDTools-User-Manual.pdf) - When working with genomic intervals (e.g. genes, peaks, enriched regions...), BEDTools are invaluable! The manual is a very good read and we refer to it almost daily.
+- [BEDTools Manual](http://bedtools.readthedocs.org) - When working with genomic intervals (e.g. genes, peaks, enriched regions...), BEDTools are invaluable! The manual is a very good read and we refer to it almost daily.
 
 
 
