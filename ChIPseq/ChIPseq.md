@@ -1,6 +1,6 @@
 # GALAXY WORKSHOP on ChIP-seq DATA ANALYSIS
 
-##Useful literature**  
+##Useful literature 
 
 **Landt et al. (2012):** [ChIP-seq guidelines and practices of the ENCODE and modENCODE consortia](http://genome.cshlp.org/content/22/9/1813.long), (doi:10.1101/gr.136184.111) - This is a very useful "encyclopedic" paper with many details about the tools the (mod)ENCODE consortia use. It also contains a long section about antibody validation etc.. It does not explain much of the reasoning behind the bioinformatics tools, though.
 
