@@ -79,3 +79,10 @@ Training material
 # License
 
 This work is licensed under the [Creative Commons Attribution 3.0 Unported License](http://creativecommons.org/licenses/by/3.0/).
+
+
+# Acknowledgment and Funding
+
+We would like to thank all contributors to our Galaxy courses, especially those mentioned in the [Contributors list](CONTRIBUTORS.md), the Galaxy community for their constant support and our funding partners.
+
+<a href="http://www.denbi.de/"><img src="https://raw.githubusercontent.com/bgruening/rbc_docs/master/logo/deNBI_Logo_rgb.png" width="15%"></a> 	&emsp;<a href="http://www.sfb992.uni-freiburg.de/"><img src="https://raw.githubusercontent.com/bgruening/presentations/bce348bb606c312d531c479e63a66efc2bc38d44/shared/resources/img/MEDEP.jpg" width="15%"></a> 	&emsp;<a href="http://www.ie-freiburg.mpg.de"><img src="https://raw.githubusercontent.com/bgruening/presentations/master/shared/resources/img/14_MPI_IE_logo_mit_180.gif" width="15%"></a> 	&emsp;<a href="https://www.uni-freiburg.de/"><img src="https://raw.githubusercontent.com/bgruening/presentations/a2e38e4b007994af798320db3a0131c4bb891c0e/shared/resources/img/logo_freiburg.jpg" width="15%"></a>
