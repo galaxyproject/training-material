@@ -1,10 +1,35 @@
 # GALAXY WORKSHOP on ChIP-seq DATA ANALYSIS
 
+##Useful literature**  
+
+**Landt et al. (2012):** [ChIP-seq guidelines and practices of the ENCODE and modENCODE consortia](http://genome.cshlp.org/content/22/9/1813.long), (doi:10.1101/gr.136184.111) - This is a very useful "encyclopedic" paper with many details about the tools the (mod)ENCODE consortia use. It also contains a long section about antibody validation etc.. It does not explain much of the reasoning behind the bioinformatics tools, though.
+
+**Zentner and Henikoff (2012):** [Surveying the epigenomic landscape, one base at a time](http://genomebiology.biomedcentral.com/articles/10.1186/gb-2012-13-10-250), (doi:10.1186/gb-2012-13-10-250) - Overview of popular *-seq techniques; very nice description of DNase-seq, MNase-seq, FAIRE-seq etc.
+
+**Kidder et al. (2011):** [Technical considerations to obtaining high-quality data](http://www.nature.com/ni/journal/v12/n10/abs/ni.2117.html), (doi:10.1038/ni.2117) - Nice, readable introduction into all aspects of ChIP-seq experiments (from antibodies to cell numbers to replicates to data analysis)
+
+**Leleu et al. (2010):** [Processing and analyzing ChIP-seq data](http://www.ncbi.nlm.nih.gov/pubmed/20861161), (doi: 10.1093/bfgp/elq022) - Fairly detailed review of key concepts of ChIP-seq data processing (less detailed on analysis)
+
+**Peter Park (2009):** [ChIP-seq: Advantages and challenges of a maturing technology](http://www.nature.com/nrg/journal/v10/n10/full/nrg2641.html), (doi:10.1038/nrg2641)
+
+**Kharchenko et al. (2008):** [Design and analysis of ChIP-seq experiments for DNA-binding proteins](http://www.ncbi.nlm.nih.gov/pubmed/19029915), (doi:10.1038/nbt.1508)
+
+**Liu et al. (2010):** [Q&A: ChIP-seq technologies and the study of gene regulation](http://bmcbiol.biomedcentral.com/articles/10.1186/1741-7007-8-56), (doi:10.1186/1741-7007-8-56) - Short overview of several (typical) issues of ChIP-seq analysis
+
+**Carroll et al. (2014):**  [Impact of artifact removal on ChIP quality metrics in ChIP-seq and ChIP-exo data](http://journal.frontiersin.org/article/10.3389/fgene.2014.00075/full),(doi:10.3389/fgene.2014.00075)  
+
+
+##Slides from Workshop
+
+
 The slides for part 1 of this session can be downloaded from here 
 [ChIP-seq1-galaxy_course_2015.pdf](https://drive.google.com/open?id=0B9urRnOAUUI8UmwzbTVpdmZucWM)
 
 The slides for part 2 can be downloaded from here 
-[ChIP-seq2-galaxy_course_2015.pdf](https://drive.google.com/open?id=0B9urRnOAUUI8cHpzYVBscjNKWEE).
+[ChIP-seq2-galaxy_course_2015.pdf](https://drive.google.com/open?id=0B9urRnOAUUI8cHpzYVBscjNKWEE).  
+
+
+# Hands on!  
 
 This exercise uses the dataset from the  Nature publication [Ross-Inness et al.2012](http://www.ncbi.nlm.nih.gov/pubmed/22217937). There are 8 samples, half of them are the so-called 'input' data for which the same treatment as the ChIP-seq samples is done but except for the IP. The input files are used to identify sequencing bias like open chromatin or GC bias. For each ChIP-seq experiment there is a matching input. The ChIP was performed to identify the gene targets of the Oestrogen receptor, a transcription factor known to be associated with different types of breast cancer.  For this, ChIP-seq was done in breast cancer cells from 4 patients of different outcomes (good and poor).
 
