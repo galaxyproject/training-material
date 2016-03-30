@@ -1,6 +1,27 @@
-# GALAXY WORKSHOP on RNA-seq DATA ANALYSIS
+# GALAXY WORKSHOP on RNA-seq DATA ANALYSIS  
 
-Slides used in this workshop can be found here RNA-seq_Galaxy_NGS_workshop.pdf.
+##Literature
+
+**Nice graphical overview of the RNA-seq processing and analysis steps:** http://figshare.com/articles/RNA_seq_Workflows_and_Tools/662782
+
+**Auer and Doerge (2010):** [Statistical Design and Analysis of RNA Sequencing Data](http://www.genetics.org/content/185/2/405), (doi:10.1534/genetics.110.114983) - Insights into proper planning of your RNA-seq run! Read **BEFORE** your RNA-seq experiment! 
+
+**Ian Korf (2013):**[Genomics: the state of the art in RNA-seq analysis](http://www.ncbi.nlm.nih.gov/pubmed/24296473), (doi:10.1038/nmeth.2735) - A refreshingly honest view on the non-trivial aspects of RNA-seq analysis
+
+**Dillies et al. (2012):** [A comprehensive evaluation of normalization methods for Illumina high-throughput RNA sequencing data analysis](http://bib.oxfordjournals.org/content/early/2012/09/15/bib.bbs046.long), (doi:10.1093/bib/bbs046) - Systematic comparison of seven representative normalization methods for the differential analysis of RNA-seq data (Total Count, Upper Quartile, Median (Med), DESeq, edgeR, Quantile and Reads Per Kilobase per Million mapped reads (RPKM) normalization)
+
+**Rapaport et al. (2013):** [Comprehensive evaluation of differential gene expression analysis methods for RNA-seq data](http://www.genomebiology.com/2013/14/9/R95/abstract), (doi:10.1186/gb-2013-14-9-r95) - Evaluation of methods for differential gene expression analysis
+
+**Soneson et al. (2013):** [A comparison of methods for differential expression analysis of RNA-seq data](http://bmcbioinformatics.biomedcentral.com/articles/10.1186/1471-2105-14-91), (doi:10.1186/1471-2105-14-91)
+
+**Roberts et al. (2011):** [Improving RNA-Seq expression estimates by correcting for fragment bias Fragment bias correction](http://www.ncbi.nlm.nih.gov/pubmed/21410973), (doi: 10.1186/gb-2011-12-3-r22)
+
+**Garber et al. (2011):** [Computational methods for transcriptome annotation and quantification using RNA-seq](http://www.ncbi.nlm.nih.gov/pubmed/21623353), (doi: 10.1038/nmeth.1613) - Classical paper about the computational aspects of RNA-seq data analysis
+
+
+##Hands on!
+
+**Slides used in this workshop can be found here RNA-seq_Galaxy_NGS_workshop.pdf.**
 
 **Datasets used in this exercise**
 
