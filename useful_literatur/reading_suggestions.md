@@ -60,50 +60,54 @@
 
 **Ian Korf (2013):**[Genomics: the state of the art in RNA-seq analysis](http://www.ncbi.nlm.nih.gov/pubmed/24296473), (doi:10.1038/nmeth.2735); A refreshingly honest view on the non-trivial aspects of RNA-seq analysis
 
-Dillies et al. (2012): Systematic comparison of seven representative normalization methods for the differential analysis of RNA-seq data (Total Count, Upper Quartile, Median (Med), DESeq, edgeR, Quantile and Reads Per Kilobase per Million mapped reads (RPKM) normalization)
+**Dillies et al. (2012):** [A comprehensive evaluation of normalization methods for Illumina high-throughput RNA sequencing data analysis](http://bib.oxfordjournals.org/content/early/2012/09/15/bib.bbs046.long), (doi:10.1093/bib/bbs046) - Systematic comparison of seven representative normalization methods for the differential analysis of RNA-seq data (Total Count, Upper Quartile, Median (Med), DESeq, edgeR, Quantile and Reads Per Kilobase per Million mapped reads (RPKM) normalization)
 
-Rapaport et al. (2013): Evaluation of methods for differential gene expression analysis
+**Rapaport et al. (2013):** [Comprehensive evaluation of differential gene expression analysis methods for RNA-seq data](http://www.genomebiology.com/2013/14/9/R95/abstract), (doi:10.1186/gb-2013-14-9-r95) - Evaluation of methods for differential gene expression analysis
 
-Soneson et al. (2013): And another paper about different methods for differential gene expression analysis
+**Soneson et al. (2013):** [A comparison of methods for differential expression analysis of RNA-seq data](http://bmcbioinformatics.biomedcentral.com/articles/10.1186/1471-2105-14-91), (doi:10.1186/1471-2105-14-91)
 
-Roberts et al. (2011): Fragment bias correction
+**Roberts et al. (2011):** [Improving RNA-Seq expression estimates by correcting for fragment bias Fragment bias correction](http://www.ncbi.nlm.nih.gov/pubmed/21410973), (doi: 10.1186/gb-2011-12-3-r22)
 
-Garber et al. (2011): Classical paper about the computational aspects of RNA-seq data analysis
+**Garber et al. (2011):** [Computational methods for transcriptome annotation and quantification using RNA-seq](http://www.ncbi.nlm.nih.gov/pubmed/21623353), (doi: 10.1038/nmeth.1613) - Classical paper about the computational aspects of RNA-seq data analysis
 
-##Peak Calling Methods (ChIP-seq)
+#Peak Calling Methods (ChIP-seq)
 
-Pepke et al. (2009): First comparison of peak callers - focuses on the explanation of basic principles of ChIP-seq data processing and the general workflows of peak calling algorithms
+**Pepke et al. (2009):** [Computation for ChIP-seq and RNA-seq studies](http://www.ncbi.nlm.nih.gov/pubmed/19844228), (doi: 10.1038/nmeth.1371) - First comparison of peak callers - focuses on the explanation of basic principles of ChIP-seq data processing and the general workflows of peak calling algorithms
 
-Wilbanks et al. (2010): Another comparison of peak callers - focuses more on the evaluation of the peak callers performances than Pepke et al.
+**Wilbanks et al. (2010):** [Evaluation of Algorithm Performance in ChIP-Seq Peak Detection](http://www.ncbi.nlm.nih.gov/pubmed/20628599), (doi: 10.1371/journal.pone.0011471) - Another comparison of peak callers - focuses more on the evaluation of the peak callers performances than Pepke et al.
 
-Micsinai et al. (2012): How to choose the best peak caller for your data set - their finding: default parameters, surprisingly, yield the most reproducible results regardless of the data set type
-MACS
+**Micsinai et al. (2012):** [Picking ChIP-seq peak detectors for analyzing chromatin modification experiments](http://www.ncbi.nlm.nih.gov/pubmed/22307239), (doi: 10.1093/nar/gks048) - How to choose the best peak caller for your data set - their finding: default parameters, surprisingly, yield the most reproducible results regardless of the data set type
 
-Fen et al. (2012): How to use MACS - Nature Protocols
+**MACS**
 
-Zhang et al. (2008): The original publication of MACS: Model-bases analysis of ChIP-seq data.
+**Fen et al. (2012):** [Identifying ChIP-seq enrichment using MACS.](http://www.ncbi.nlm.nih.gov/pubmed/22936215), (doi:10.1038/nprot.2012.101) - How to use MACS - Nature Protocols
+
+**Zhang et al. (2008):** [Model-based Analysis of ChIP-Seq (MACS)](http://genomebiology.biomedcentral.com/articles/10.1186/gb-2008-9-9-r137), (doi:10.1186/gb-2008-9-9-r137) - The original publication of MACS: Model-bases analysis of ChIP-seq data.
 
 ##DNA motif analysis
 
-Das et al. (2007): Review of Motif Analysis Tools
-MEME (suite)
+**Das et al. (2007):** [A survey of DNA motif finding algorithms](http://bmcbioinformatics.biomedcentral.com/articles/10.1186/1471-2105-8-S7-S21), (doi:10.1186/1471-2105-8-S7-S21) - Review of Motif Analysis Tools 
 
-Machanick and Bailey (2011): MEME-ChIP - paper
+**MEME (suite)**
 
-Bailey and Machanick (2012): Centrimo - position-specific motif analysis, especially useful for ChIP-seq data
+**Machanick and Bailey (2011):** [MEME-ChIP: motif analysis of large DNA datasets](http://www.ncbi.nlm.nih.gov/pubmed/21486936), (doi: 10.1093/bioinformatics/btr189) - MEME-ChIP-paper
 
-TomTom - tool for the comparison of motifs from databases (not in Galaxy yet): tutorial
-TRAP
+**Bailey and Machanick (2012):** [Inferring direct DNA binding from ChIP-seq](http://www.ncbi.nlm.nih.gov/pubmed/22610855), (doi:10.1093/nar/gks433) - Centrimo: position-specific motif analysis, especially useful for ChIP-seq data
 
-Thomas-Chollier et al. (2012): How to use TRAP - Nature Protocols
+[TomTom](http://meme-suite.org/tools/tomtom) - Meme Suite Motif comparison tool - tool for the comparison of motifs from databases (not in Galaxy yet): [Manual](http://meme-suite.org/doc/tomtom.html?man_type=web)
 
-Roider et al. (2006): Theoretical background of TRAP
+**TRAP**
+
+**Thomas-Chollier et al. (2012):** [Transcription factor binding predictions using TRAP for the analysis of ChIP-seq data and regulatory SNPs](http://www.ncbi.nlm.nih.gov/pubmed/22051799), (doi:10.1038/nprot.2011.409) -How to use TRAP - Nature Protocols
+
+**Roider et al. (2006):** [Predicting transcription factor affinities to DNA from a biophysical model.](http://www.ncbi.nlm.nih.gov/pubmed/17098775), (doi:10.1093/bioinformatics/btl565) - Theoretical background of TRAP
 
 ##NGS data formats
 
-* UCSC has a very good overview with brief descriptions of BED, bedGraph, bigWig etc.: https://genome.ucsc.edu/FAQ/FAQformat.html
+- UCSC has a very good overview with brief descriptions of BED, bedGraph, bigWig etc.: https://genome.ucsc.edu/FAQ/FAQformat.html
 
-* VCF format (encoding SNPs, indels etc.): Very readable, albeit not exhausting description transcriptomes are often saved in GFF3 format (this is what TopHat needs, for example), but just to make things more complicated, GTF is another format used for transcriptome information, too (here are more information on GTF)
+- [VCF format](http://gatkforums.broadinstitute.org/gatk/discussion/1268/how-should-i-interpret-vcf-files-produced-by-the-gatk) (encoding SNPs, indels etc.): Very readable, albeit not exhausting description
+- Transcriptomes are often saved in [GFF3 format](http://www.sequenceontology.org/gff3.shtml) (this is what TopHat needs, for example), but just to make things more complicated, GTF is another format used for transcriptome information, too ([here](http://gmod.org/wiki/GFF2) are more information on GTF)
 
 
 #Bioinformatic Tools (Linux, R, BEDTools etc.) - Manuals, Courses, original papers
