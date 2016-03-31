@@ -95,7 +95,7 @@ The way presented here adds a new track to a running instance of IGV and thus ke
 
 ***Optional: Display in Galaxy's build-in browser Trackster***:
 
-(add image)
+![Interval2Bed_1](http://galaxy.uni-freiburg.de/datasets/3219a51157513f8b/display/?preview=True)
 
 - Click on Visualization icon
 - Click on "Trackster"
@@ -104,6 +104,8 @@ The way presented here adds a new track to a running instance of IGV and thus ke
 - Wait until data preparation is finished
 - Select a chromsome to look at
 - Unfortunately Trackster doesn't already include gene tracks or other annotations, so we add our RefSeq genes as an additional track.
+
+![SInterval2Bed_2](http://galaxy.uni-freiburg.de/datasets/b48564b5a71ee6de/display/?preview=True)
 
 - Click on "Add tracks" icon (little plus in the upper right)
 - Check your RefSeq genes dataset
@@ -162,9 +164,10 @@ Galaxy has a second option to visualise tabular data, with built-in dynamic visu
 - Visualization 'Genes on different chromosomes' (add link)
 
 **Step 9: Name  your history**
+
 In the history column click on "Unnamed history" at the top to rename it.
 
-rename history (add figure)
+![rename_history](http://galaxy.uni-freiburg.de/datasets/94bed35828091dac/display/?preview=True)
 
 **Step 10: Make a workflow out of steps 6 to 8**
 - Click on the history options and select "Extract workflow" (Screenshot (add link) )
@@ -178,7 +181,7 @@ Top menu: Workflow
 
 The individual steps are displayed as boxes and their outputs and inputs are connected through lines. When you click on a box you see the tool options on the right. Besides the tools you should see two additional boxes titled "Input dataset". These represent the data we want to feed into our workflow. Although we have our two inputs in the workflow they are missing their connection to the first tool (Intersect), because we didn't carry over the intermediate steps. Connect each input dataset to the Intersect tool by dragging the arrow pointing outwards on the right of its box (which denotes an output) to an arrow on the left of the Intersect box pointing inwards (which denotes an input). Connect each input dataset with a different input of Intersect.
 
-(add figure)
+![sample_workflow](http://galaxy.uni-freiburg.de/datasets/e3a353337d8f6ac4/display/?preview=True)
 
 You should also change the names of the input datasets to remember that the first one contains genes and the second one peaks. Don't forget to save it in the end by clicking on "Options" (top right) and selecting "Save".
 
