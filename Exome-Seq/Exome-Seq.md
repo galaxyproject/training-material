@@ -2,6 +2,9 @@
 
 Exome sequencing means that all protein-coding genes in a genome are sequenced. In Humans there are ~180,000 exons that makes up 1% of the human genome which contain ~30 million base pairs. Mutations in the exome have usually a higher impact and severe consequences, than in the remaining 99% of the genome. For the identication of genetic variations exome sequencing is cheaper than whole-genome sequencing. With a high coverage rate of 100+ DP, 98% of all exons are covered.
 
+(Also have a look at this tutorial: https://github.com/nekrut/galaxy/wiki/Diploid-variant-calling)
+
+
 Things exome sequencing can't do:
 
 - Not all genes are in your exon data, especially those buried in stretches of repeats out towards the chromosome tips, aren’t part of exome sequencing chips.
