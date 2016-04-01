@@ -5,7 +5,7 @@
 Slides as PDF: Dataset Introduction_to_Galaxy_Uni.pdf & Manke_2015.09.21a.pdf (add link to slides)
 
 ## Scenario
-We stumbled upon a paper (Li et al., Cell Stem Cell 2012) that contains the analysis of possible target genes of an interesting protein. The targets were obtained by ChIP-seq and the raw data is available through GEO. The list of genes however is neither in the supplement of the paper nor part of the GEO submission. The closest thing we can find is a list of the regions where the signal is significantly enriched (peaks; you'll learn more on that tomorrow). The goal of this exercise is to turn this list of genomic regions into a list of possible target genes.
+We stumbled upon a paper [Li et al., Cell Stem Cell 2012](http://www.sciencedirect.com/science/article/pii/S1934590912003347) that contains the analysis of possible target genes of an interesting protein. The targets were obtained by ChIP-seq and the raw data is available through [GEO](http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE37268). The list of genes however is neither in the supplement of the paper nor part of the GEO submission. The closest thing we can find is a list of the regions where the signal is significantly enriched (peaks; you'll learn more on that tomorrow). The goal of this exercise is to turn this list of genomic regions into a list of possible target genes.
 
 (Disclaimer: We are not affiliated with the authors of the paper and we don't make a statement about the relevance or quality of the paper. It is just a fitting example and nothing else.)
 
@@ -16,11 +16,11 @@ We stumbled upon a paper (Li et al., Cell Stem Cell 2012) that contains the anal
 
 **Step 1: Upload peaks**
 
-Download the list of peaks (the file "GSE37268_mof3.out.hpeak.txt.gz") from GEO (click here to get to the GEO entry) to your computer. Use the upload button to upload the file to Galaxy and select "mm9" as the genome. Galaxy will automatically unpack the file.
+Download the list of peaks (the file "GSE37268_mof3.out.hpeak.txt.gz") from GEO [click here to get to the GEO entry](http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE37268) to your computer. Use the [upload button](http://galaxy.uni-freiburg.de/datasets/f09e43293a451965/display/?preview=True) to upload the file to Galaxy and select "mm9" as the genome. Galaxy will automatically unpack the file.
 
 Galaxy Dataset | GSE37268_mof3.out.hpeak.txt (add table)
 
-This file is not in any standard format and just by looking at it, we cannot find out what the numbers in the different columns mean. In the paper they mention that they used the peak caller HPeak. By looking at the HPeak manual we can find out that the columns contain the following information:
+This file is not in any standard format and just by looking at it, we cannot find out what the numbers in the different columns mean. In the paper they mention that they used the peak caller [HPeak](http://www.sph.umich.edu/csg/qin/HPeak/Readme.html). By looking at the HPeak manual we can find out that the columns contain the following information:
 
 - chromosome name*
 - start coordinate
@@ -50,7 +50,7 @@ Galaxy Dataset | UCSC Main on Mouse: refGene (genome)
 **Step 3: Adjust chromosome naming**
 
 Have a look at both input files (either in the little preview window in the history or click on the eye icon to see one in the main frame) and find out what are the differences in the chromosome naming.
-Apply the following workflow to GSE37268_mof3.out.hpeak.txt: Workflow 'Add "chr" at beginning of each line'. (add link)
+Apply the following workflow to GSE37268_mof3.out.hpeak.txt: [Workflow 'Add "chr" at beginning of each line'](http://galaxy.uni-freiburg.de/u/tutor/w/add-chr-at-beginning-of-line-imported-from-uploaded-file).
 After importing you can in the future use it by scrolling to the bottom of the tool panel, click on "All workflows" and then on the workflow name.
 
 From carefully reading the HPeak manual, we should remember that it puts "20" and "21" instead of "X" and "Y". So now the chromosome names all start properly with "chr", but we still have "chr20" and "chr21" instead of "chrX" and "chrY".
@@ -83,7 +83,7 @@ To visualize the peaks it's best to convert them to BED format first, because mo
 
 ***Display in IGV***:
 
-- Go to the IGV website (add link)
+- Go to the [IGV website](http://www.broadinstitute.org/software/igv/download)
 - Register or log-in to get access to the download area
 - Click on any of the "Launch" buttons (the more data you want to visualize, the bigger the GBs should be; here 750 MB should be enough)
 - Inside IGV select "Mouse mm9" in the upper left drop-down box
@@ -161,7 +161,7 @@ Galaxy has a second option to visualise tabular data, with built-in dynamic visu
 - Values for x-axis: Column: 2 [str]
 - Values for y-axis: Column: 1 [int]
 - On the very top, click "Draw"
-- Visualization 'Genes on different chromosomes' (add link)
+- [Visualization 'Genes on different chromosomes'](http://galaxy.uni-freiburg.de/u/tutor/v/genes-on-different-chromosomes)
 
 **Step 9: Name  your history**
 
@@ -170,7 +170,7 @@ In the history column click on "Unnamed history" at the top to rename it.
 ![rename_history](http://galaxy.uni-freiburg.de/datasets/94bed35828091dac/display/?preview=True)
 
 **Step 10: Make a workflow out of steps 6 to 8**
-- Click on the history options and select "Extract workflow" (Screenshot (add link) )
+- Click on the history options and select "Extract workflow" [Screenshot](http://galaxy.uni-freiburg.de/datasets/f7f7ba436d8b0911/display/?preview=True)
 - Do **not** include "awk",  either "Find and Replace", "Convert Genomic Intervals to strict BED" and "Get flanks"
 - Click "Create Workflow"
 
@@ -254,7 +254,7 @@ Result of part 2, step 16
 
 **Step 17: Generate list of unique gene names**
 
-Run the public Workflow 'Proper unique on a column' on the result of the intersect and choose the column with the gene names. The result should be a dataset with one column and 10841 lines.
+Run the public [Workflow 'Proper unique on a column'](http://galaxy.uni-freiburg.de/u/tutor/w/imported-proper-unique) on the result of the intersect and choose the column with the gene names. The result should be a dataset with one column and 10841 lines.
 
 Galaxy Dataset | unique gene names
 Result of part 2, step 17
