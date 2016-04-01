@@ -6,7 +6,7 @@
 
 
 
- The guide is available for download as a pdf file here : IGV_handout
+ The guide is available for download as a pdf file here : [IGV_handout](http://galaxy.uni-freiburg.de/u/tutor/p/IGV_Intro_Galaxy_course.pdf)
 -     To start IGV, go to the IGV downloads page: http://www.broadinstitute.org/igv/download.
 
 ## User Interface
@@ -18,31 +18,31 @@
 
  Tool bar
 
-    The tool bar provides access to commonly used functions. The menu bar and pop-up menus (not shown) provide access to all other functions.
+The [tool bar](http://www.broadinstitute.org/software/igv/?q=ToolBar) provides access to commonly used functions. The [menu bar](http://www.broadinstitute.org/software/igv/?q=MenuBar) and [pop-up menus](http://www.broadinstitute.org/software/igv/?q=PopupMenus) (not shown) provide access to all other functions.
 
  Chromosome
 
-    The red box on the chromosome ideogram indicates which portion of the chromosome is displayed. When zoomed out to display the full chromosome, the red box disappears from the ideogram.
+The red box on the chromosome ideogram indicates which portion of the chromosome is displayed. When zoomed out to display the full chromosome, the red box disappears from the ideogram.
 
  Rular
 
-    The ruler reflects the visible portion of the chromosome. The tick marks indicate chromosome locations. The span lists the number of bases currently displayed.
+The ruler reflects the visible portion of the chromosome. The tick marks indicate chromosome locations. The span lists the number of bases currently displayed.
 
  Tracks
 
-    IGV displays data in horizontal rows called tracks. Typically, each track represents one sample or experiment. This example shows methylation, gene expression, copy number and mutation data.
+IGV displays data in horizontal rows called tracks. Typically, each track represents one sample or experiment. This example shows methylation, gene expression, copy number and mutation data.
 
  Features
 
-    IGV also displays features, such as genes, in tracks. By default, IGV displays data in one panel and features in another, as shown here. Drag-and-drop a track name to move a track from one panel to another. Combine data and feature panels by selecting that option on the General tab of the Preferences window.
+IGV also displays features, such as genes, in tracks. By default, IGV displays data in one panel and features in another, as shown here. Drag-and-drop a track name to move a track from one panel to another. Combine data and feature panels by selecting that option on the General tab of the [Preferences window](http://www.broadinstitute.org/software/igv/?q=Preferences).
 
  Track names
 
-    Track names are listed in the far left panel. Legibility of the names depends on the height of the tracks; i.e., the smaller the track the less legible the name.
+Track names are listed in the far left panel. Legibility of the names depends on the height of the tracks; i.e., the smaller the track the less legible the name.
 
  Attributes
 
-    Attribute names are listed at the top of the attribute panel. Colored blocks represent attribute values, where each unique value is assigned a unique color. Hover over a colored block to see the attribute value. Click an attribute name to sort tracks based on that attribute value.
+Attribute names are listed at the top of the attribute panel. Colored blocks represent attribute values, where each unique value is assigned a unique color. Hover over a colored block to see the attribute value. Click an attribute name to sort tracks based on that attribute value.
 
 
 
@@ -256,7 +256,7 @@ Tools
 
 Run Batch Script
 
-Executes a series of sequential tasks.  Users can load at .txt file that contains a list of commands, one per line, that will be run by IGV.  The accepted commands are the same as the IGV Port Commands.
+Executes a series of sequential tasks.  Users can load at .txt file that contains a list of commands, one per line, that will be run by IGV.  The accepted commands are the same as the [IGV Port Commands](http://www.broadinstitute.org/igv/batch).
 
 
 
@@ -280,7 +280,7 @@ Data and results are represented as browsable heatmaps. Data can be exported fro
 
 BEDTools
 
-A fast, flexible suite of tools used to compare sets of genomic features. IGV uses BEDTools to compare features in loaded tracks, and view the results as a new track. See more details under Third Party Tools Integration.
+A fast, flexible suite of tools used to compare sets of genomic features. IGV uses BEDTools to compare features in loaded tracks, and view the results as a new track. See more details under [Third Party Tools Integration](http://www.broadinstitute.org/software/igv/third_party_tools#_blank).
 
 GenomeSpace
 
@@ -316,19 +316,19 @@ Log out of GenomeSpace
 
 Register
 
-Register a new account at GenomeSpace
+Register a new account at [GenomeSpace](http://www.genomespace.org/)
 
 Help
 
 User Guide...
 
-Displays the IGV User Guide.
+Displays the IGV [User Guide](http://www.broadinstitute.org/igv/UserGuide).
 
 
 
 Help Forum...
 
-In your default web browser, opens the home page for the igv-help forum.
+In your default web browser, opens the home page for the [igv-help forum](http://groups.google.com/forum/#!forum/igv-help).
 
 
 
@@ -386,7 +386,7 @@ To select tracks and display the pop-up menu, do one of the following:
 
 - Control-click track names (Mac: Command-click) to select the tracks, then right-click one of the selections to display the pop-up menu.
 
-Commands in the track pop-up menu change the display options for the selected tracks. Most changes made via the pop-up menu are lost when you exit IGV unless you save the session. In a few cases, changing the pop-up menu also changes an option in the Preferences window; these changes are persistent.
+Commands in the track pop-up menu change the display options for the selected tracks. Most changes made via the pop-up menu are lost when you exit IGV unless you [save the session](http://www.broadinstitute.org/software/igv/Sessions). In a few cases, changing the pop-up menu also changes an option in the Preferences window; these changes are persistent.
 
 ## Using IGV: Examples
 
