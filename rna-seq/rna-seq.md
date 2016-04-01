@@ -21,7 +21,7 @@
 
 ##Hands on!
 
-**Slides used in this workshop can be found here RNA-seq_Galaxy_NGS_workshop.pdf.**
+**Slides used in this workshop can be found [here](https://github.com/bgruening/training_data/raw/master/RNAseq/RNAseq_introduction.pdf).**
 
 **Datasets used in this exercise**
 
