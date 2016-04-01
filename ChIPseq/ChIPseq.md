@@ -1,62 +1,14 @@
 #ChIP-seq Galaxy Workshop
 
-##Useful literature 
+## Content
 
-###ChIP-seq in general:
+* [Hands-on example](#example)
+* [Useful literature](#literature)
+  - [ChIP-seq in general](#chipseq)
+  - [Peak calling](#peakcalling)
+  - [Motif analysis](#motifs)
 
-
-**Landt et al. (2012):** [ChIP-seq guidelines and practices of the ENCODE and modENCODE consortia](http://genome.cshlp.org/content/22/9/1813.long), (doi:10.1101/gr.136184.111) - This is a very useful "encyclopedic" paper with many details about the tools the (mod)ENCODE consortia use. It also contains a long section about antibody validation etc.. It does not explain much of the reasoning behind the bioinformatics tools, though.
-
-**Zentner and Henikoff (2012):** [Surveying the epigenomic landscape, one base at a time](http://genomebiology.biomedcentral.com/articles/10.1186/gb-2012-13-10-250), (doi:10.1186/gb-2012-13-10-250) - Overview of popular *-seq techniques; very nice description of DNase-seq, MNase-seq, FAIRE-seq etc.
-
-**Kidder et al. (2011):** [Technical considerations to obtaining high-quality data](http://www.nature.com/ni/journal/v12/n10/abs/ni.2117.html), (doi:10.1038/ni.2117) - Nice, readable introduction into all aspects of ChIP-seq experiments (from antibodies to cell numbers to replicates to data analysis)
-
-**Leleu et al. (2010):** [Processing and analyzing ChIP-seq data](http://www.ncbi.nlm.nih.gov/pubmed/20861161), (doi: 10.1093/bfgp/elq022) - Fairly detailed review of key concepts of ChIP-seq data processing (less detailed on analysis)
-
-**Peter Park (2009):** [ChIP-seq: Advantages and challenges of a maturing technology](http://www.nature.com/nrg/journal/v10/n10/full/nrg2641.html), (doi:10.1038/nrg2641)
-
-**Kharchenko et al. (2008):** [Design and analysis of ChIP-seq experiments for DNA-binding proteins](http://www.ncbi.nlm.nih.gov/pubmed/19029915), (doi:10.1038/nbt.1508)
-
-**Liu et al. (2010):** [Q&A: ChIP-seq technologies and the study of gene regulation](http://bmcbiol.biomedcentral.com/articles/10.1186/1741-7007-8-56), (doi:10.1186/1741-7007-8-56) - Short overview of several (typical) issues of ChIP-seq analysis
-
-**Carroll et al. (2014):**  [Impact of artifact removal on ChIP quality metrics in ChIP-seq and ChIP-exo data](http://journal.frontiersin.org/article/10.3389/fgene.2014.00075/full),(doi:10.3389/fgene.2014.00075)  
-
-
-###Peak Calling Methods (ChIP-seq)
-
-**Pepke et al. (2009):** [Computation for ChIP-seq and RNA-seq studies](http://www.ncbi.nlm.nih.gov/pubmed/19844228), (doi: 10.1038/nmeth.1371) - First comparison of peak callers, focuses on the explanation of basic principles of ChIP-seq data processing and general workflows of peak calling algorithms
-
-**Wilbanks et al. (2010):** [Evaluation of Algorithm Performance in ChIP-Seq Peak Detection](http://www.ncbi.nlm.nih.gov/pubmed/20628599), (doi: 10.1371/journal.pone.0011471) - Another comparison of peak callers - focuses more on the evaluation of the peak callers performances than Pepke et al. (2009)
-
-**Micsinai et al. (2012):** [Picking ChIP-seq peak detectors for analyzing chromatin modification experiments](http://www.ncbi.nlm.nih.gov/pubmed/22307239), (doi: 10.1093/nar/gks048) - How to choose the best peak caller for your data set - their finding: default parameters, surprisingly, yield the most reproducible results regardless of the data set type
-
-###MACS
-
-**Fen et al. (2012):** [Identifying ChIP-seq enrichment using MACS.](http://www.ncbi.nlm.nih.gov/pubmed/22936215), (doi:10.1038/nprot.2012.101) - How to use MACS - Nature Protocols
-
-**Zhang et al. (2008):** [Model-based Analysis of ChIP-Seq (MACS)](http://genomebiology.biomedcentral.com/articles/10.1186/gb-2008-9-9-r137), (doi:10.1186/gb-2008-9-9-r137) - The original publication of MACS
-  
-###DNA motif analysis
-
-**Das et al. (2007):** [A survey of DNA motif finding algorithms](http://bmcbioinformatics.biomedcentral.com/articles/10.1186/1471-2105-8-S7-S21), (doi:10.1186/1471-2105-8-S7-S21) - Review of motif analysis tools 
-
-###MEME (suite)
-
-**Machanick and Bailey (2011):** [MEME-ChIP: motif analysis of large DNA datasets](http://www.ncbi.nlm.nih.gov/pubmed/21486936), (doi: 10.1093/bioinformatics/btr189) - MEME-ChIP-paper
-
-**Bailey and Machanick (2012):** [Inferring direct DNA binding from ChIP-seq](http://www.ncbi.nlm.nih.gov/pubmed/22610855), (doi:10.1093/nar/gks433) - Centrimo: position-specific motif analysis, especially useful for ChIP-seq data
-
-[TomTom](http://meme-suite.org/tools/tomtom) - Meme Suite Motif comparison tool: tool for the comparison of motifs from databases (not in Galaxy yet): [Manual](http://meme-suite.org/doc/tomtom.html?man_type=web)
-
-###TRAP
-
-**Thomas-Chollier et al. (2012):** [Transcription factor binding predictions using TRAP for the analysis of ChIP-seq data and regulatory SNPs](http://www.ncbi.nlm.nih.gov/pubmed/22051799), (doi:10.1038/nprot.2011.409) - How to use TRAP - Nature Protocols
-
-**Roider et al. (2006):** [Predicting transcription factor affinities to DNA from a biophysical model.](http://www.ncbi.nlm.nih.gov/pubmed/17098775), (doi:10.1093/bioinformatics/btl565) - Theoretical background of TRAP
-
-
-##Slides from Workshop
-
+## Slides from the hands-on workshops at the University of Freiburg
 
 The slides for part 1 of this session can be downloaded from here 
 [ChIP-seq1-galaxy_course_2015.pdf](https://drive.google.com/open?id=0B9urRnOAUUI8UmwzbTVpdmZucWM)
@@ -64,20 +16,24 @@ The slides for part 1 of this session can be downloaded from here
 The slides for part 2 can be downloaded from here 
 [ChIP-seq2-galaxy_course_2015.pdf](https://drive.google.com/open?id=0B9urRnOAUUI8cHpzYVBscjNKWEE).  
 
+<a name="example"/></a>
+## Hands on example  
 
-# Hands on!  
+This exercise uses the dataset from the  Nature publication by [Ross-Inness et al.2012](http://www.ncbi.nlm.nih.gov/pubmed/22217937). 
+The ChIP was performed to identify the gene targets of the Estrogen receptor, a transcription factor known to be associated with different types of breast cancer. 
+For this, ChIP-seq was done in breast cancer cells from 4 patients of different outcomes (good and poor).
+For each ChIP-seq experiment there is a matching technical control, i.e., there are 8 samples in total, half of which are the so-called 'input' samples for which the same treatment as the ChIP-seq samples was done except for the immunoprecipitation step.
+The input files are used to identify sequencing bias like open chromatin or GC bias.
 
-This exercise uses the dataset from the  Nature publication [Ross-Inness et al.2012](http://www.ncbi.nlm.nih.gov/pubmed/22217937). There are 8 samples, half of them are the so-called 'input' data for which the same treatment as the ChIP-seq samples is done but except for the IP. The input files are used to identify sequencing bias like open chromatin or GC bias. For each ChIP-seq experiment there is a matching input. The ChIP was performed to identify the gene targets of the Oestrogen receptor, a transcription factor known to be associated with different types of breast cancer.  For this, ChIP-seq was done in breast cancer cells from 4 patients of different outcomes (good and poor).
+Because of the long processing time for the large original files, we have selected small samples for practice and provide already processed data for subsequent steps.
 
-Because processing time for the large files associated to the study we have selected small samples for practice and provide already processed data for subsequent steps.
-
-**Step 1: Quality control**
+### Step 1: Quality control**
 
 Create a new history for this exercise.
 
 - Import to the history the [FASTQ file patient1_input_good_outcome_chr11_25k_reads.fastq](https://github.com/bgruening/training_data/raw/master/ChIPseq/Galaxy1-%5Bpatient1_input_good_outcome_chr11_25k_reads.fastq%5D.fastqsanger).
 
-- Take a look at the file pressing the 'eye' icon. There is a lot of text, but can you spot where is the DNA sequence stored? Can you guess what the other information means?
+- Have a look at the file by clicking on the 'eye' icon. There is a lot of text, but can you spot where the DNA sequence is stored? Can you guess what the other information means?
 
 - Run the tool *FastQC* on one of the two FASTQ files to control the quality of the reads. An explanation of the results is found in the [fastQC web page](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/). 
 
@@ -209,3 +165,61 @@ Use the regions provided by the gene annotation file downloaded from UCSC and yo
 - Generate a heatmap with the *plotHeatmap* tool based on your output of *computeMatrix*. Set the advanced option 'Did you compute the matrix with more than one groups of regions?' appropriately.
 
 - How can you increase the "resolution" of the data in the resulting heatmap?
+
+-------------------------------------------
+
+<a name="literature"/></a>
+##Useful literature 
+
+<a name="chipseq"/></a>
+###ChIP-seq in general:
+
+**Landt et al. (2012):** [ChIP-seq guidelines and practices of the ENCODE and modENCODE consortia](http://genome.cshlp.org/content/22/9/1813.long), (doi:10.1101/gr.136184.111) - This is a very useful "encyclopedic" paper with many details about the tools the (mod)ENCODE consortia use. It also contains a long section about antibody validation etc.. It does not explain much of the reasoning behind the bioinformatics tools, though.
+
+**Zentner and Henikoff (2012):** [Surveying the epigenomic landscape, one base at a time](http://genomebiology.biomedcentral.com/articles/10.1186/gb-2012-13-10-250), (doi:10.1186/gb-2012-13-10-250) - Overview of popular *-seq techniques; very nice description of DNase-seq, MNase-seq, FAIRE-seq etc.
+
+**Kidder et al. (2011):** [Technical considerations to obtaining high-quality data](http://www.nature.com/ni/journal/v12/n10/abs/ni.2117.html), (doi:10.1038/ni.2117) - Nice, readable introduction into all aspects of ChIP-seq experiments (from antibodies to cell numbers to replicates to data analysis)
+
+**Leleu et al. (2010):** [Processing and analyzing ChIP-seq data](http://www.ncbi.nlm.nih.gov/pubmed/20861161), (doi: 10.1093/bfgp/elq022) - Fairly detailed review of key concepts of ChIP-seq data processing (less detailed on analysis)
+
+**Peter Park (2009):** [ChIP-seq: Advantages and challenges of a maturing technology](http://www.nature.com/nrg/journal/v10/n10/full/nrg2641.html), (doi:10.1038/nrg2641)
+
+**Kharchenko et al. (2008):** [Design and analysis of ChIP-seq experiments for DNA-binding proteins](http://www.ncbi.nlm.nih.gov/pubmed/19029915), (doi:10.1038/nbt.1508)
+
+**Liu et al. (2010):** [Q&A: ChIP-seq technologies and the study of gene regulation](http://bmcbiol.biomedcentral.com/articles/10.1186/1741-7007-8-56), (doi:10.1186/1741-7007-8-56) - Short overview of several (typical) issues of ChIP-seq analysis
+
+**Carroll et al. (2014):**  [Impact of artifact removal on ChIP quality metrics in ChIP-seq and ChIP-exo data](http://journal.frontiersin.org/article/10.3389/fgene.2014.00075/full),(doi:10.3389/fgene.2014.00075)  
+
+<a name="peakcalling"/></a>
+###Peak Calling Methods (ChIP-seq)
+
+**Pepke et al. (2009):** [Computation for ChIP-seq and RNA-seq studies](http://www.ncbi.nlm.nih.gov/pubmed/19844228), (doi: 10.1038/nmeth.1371) - First comparison of peak callers, focuses on the explanation of basic principles of ChIP-seq data processing and general workflows of peak calling algorithms
+
+**Wilbanks et al. (2010):** [Evaluation of Algorithm Performance in ChIP-Seq Peak Detection](http://www.ncbi.nlm.nih.gov/pubmed/20628599), (doi: 10.1371/journal.pone.0011471) - Another comparison of peak callers - focuses more on the evaluation of the peak callers performances than Pepke et al. (2009)
+
+**Micsinai et al. (2012):** [Picking ChIP-seq peak detectors for analyzing chromatin modification experiments](http://www.ncbi.nlm.nih.gov/pubmed/22307239), (doi: 10.1093/nar/gks048) - How to choose the best peak caller for your data set - their finding: default parameters, surprisingly, yield the most reproducible results regardless of the data set type
+
+#### MACS
+
+**Fen et al. (2012):** [Identifying ChIP-seq enrichment using MACS.](http://www.ncbi.nlm.nih.gov/pubmed/22936215), (doi:10.1038/nprot.2012.101) - How to use MACS - Nature Protocols
+
+**Zhang et al. (2008):** [Model-based Analysis of ChIP-Seq (MACS)](http://genomebiology.biomedcentral.com/articles/10.1186/gb-2008-9-9-r137), (doi:10.1186/gb-2008-9-9-r137) - The original publication of MACS
+
+<a name="motifs"/></a>
+### DNA motif analysis
+
+**Das et al. (2007):** [A survey of DNA motif finding algorithms](http://bmcbioinformatics.biomedcentral.com/articles/10.1186/1471-2105-8-S7-S21), (doi:10.1186/1471-2105-8-S7-S21) - Review of motif analysis tools 
+
+#### MEME (suite)
+
+**Machanick and Bailey (2011):** [MEME-ChIP: motif analysis of large DNA datasets](http://www.ncbi.nlm.nih.gov/pubmed/21486936), (doi: 10.1093/bioinformatics/btr189) - MEME-ChIP-paper
+
+**Bailey and Machanick (2012):** [Inferring direct DNA binding from ChIP-seq](http://www.ncbi.nlm.nih.gov/pubmed/22610855), (doi:10.1093/nar/gks433) - Centrimo: position-specific motif analysis, especially useful for ChIP-seq data
+
+[TomTom](http://meme-suite.org/tools/tomtom) - Meme Suite Motif comparison tool: tool for the comparison of motifs from databases (not in Galaxy yet): [Manual](http://meme-suite.org/doc/tomtom.html?man_type=web)
+
+#### TRAP
+
+**Thomas-Chollier et al. (2012):** [Transcription factor binding predictions using TRAP for the analysis of ChIP-seq data and regulatory SNPs](http://www.ncbi.nlm.nih.gov/pubmed/22051799), (doi:10.1038/nprot.2011.409) - How to use TRAP - Nature Protocols
+
+**Roider et al. (2006):** [Predicting transcription factor affinities to DNA from a biophysical model.](http://www.ncbi.nlm.nih.gov/pubmed/17098775), (doi:10.1093/bioinformatics/btl565) - Theoretical background of TRAP
