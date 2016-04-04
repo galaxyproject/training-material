@@ -11,10 +11,11 @@
 ## Slides from the hands-on workshops at the University of Freiburg
 
 The slides for part 1 of this session can be downloaded from here 
-[ChIP-seq1-galaxy_course_2015.pdf](https://drive.google.com/open?id=0B9urRnOAUUI8UmwzbTVpdmZucWM)
+[ChIP-seq1-galaxy_course_2015.pdf](https://drive.google.com/file/d/0B9urRnOAUUI8UmwzbTVpdmZucWM/view?usp=sharing)
+
 
 The slides for part 2 can be downloaded from here 
-[ChIP-seq2-galaxy_course_2015.pdf](https://drive.google.com/open?id=0B9urRnOAUUI8cHpzYVBscjNKWEE).  
+[ChIP-seq2-galaxy_course_2015.pdf](https://drive.google.com/file/d/0B9urRnOAUUI8cHpzYVBscjNKWEE/view?usp=sharing).  
 
 <a name="example"/></a>
 ## Hands on example  
@@ -27,7 +28,7 @@ The input files are used to identify sequencing bias like open chromatin or GC b
 
 Because of the long processing time for the large original files, we have selected small samples for practice and provide already processed data for subsequent steps.
 
-### Step 1: Quality control**
+### Step 1: Quality control
 
 Create a new history for this exercise.
 
