@@ -18,7 +18,7 @@ We stumbled upon a paper [Li et al., Cell Stem Cell 2012](http://www.sciencedire
 
 Download the list of peaks (the file "GSE37268_mof3.out.hpeak.txt.gz") from GEO [click here to get to the GEO entry](http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE37268) to your computer. Use the [upload button](http://galaxy.uni-freiburg.de/datasets/f09e43293a451965/display/?preview=True) to upload the file to Galaxy and select "mm9" as the genome. Galaxy will automatically unpack the file.
 
-Galaxy Dataset | [GSE37268_mof3.out.hpeak.txt](https://raw.githubusercontent.com/bgruening/training-material/master/Galaxy_Introduction/tables/Galaxy1-GSE37268_mof3.out.hpeak.txt.interval)
+Galaxy Dataset | [GSE37268_mof3.out.hpeak.txt](https://raw.githubusercontent.com/bgruening/training-material/master/Galaxy_Introduction/tables/Galaxy1-GSE37268_mof3.out.hpeak.txt)
 
 This file is not in any standard format and just by looking at it, we cannot find out what the numbers in the different columns mean. In the paper they mention that they used the peak caller [HPeak](http://www.sph.umich.edu/csg/qin/HPeak/Readme.html). By looking at the HPeak manual we can find out that the columns contain the following information:
 
