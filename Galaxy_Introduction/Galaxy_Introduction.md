@@ -18,7 +18,7 @@ We stumbled upon a paper [Li et al., Cell Stem Cell 2012](http://www.sciencedire
 
 Download the list of peaks (the file "GSE37268_mof3.out.hpeak.txt.gz") from GEO [click here to get to the GEO entry](http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE37268) to your computer. Use the [upload button](http://galaxy.uni-freiburg.de/datasets/f09e43293a451965/display/?preview=True) to upload the file to Galaxy and select "mm9" as the genome. Galaxy will automatically unpack the file.
 
-Galaxy Dataset | GSE37268_mof3.out.hpeak.txt (add table)
+Galaxy Dataset | [GSE37268_mof3.out.hpeak.txt](https://raw.githubusercontent.com/bgruening/training-material/master/Galaxy_Introduction/tables/Galaxy1-GSE37268_mof3.out.hpeak.txt.interval)
 
 This file is not in any standard format and just by looking at it, we cannot find out what the numbers in the different columns mean. In the paper they mention that they used the peak caller [HPeak](http://www.sph.umich.edu/csg/qin/HPeak/Readme.html). By looking at the HPeak manual we can find out that the columns contain the following information:
 
@@ -129,6 +129,7 @@ that intersect: result of step 3 (second Find and Replace)
 The order of the inputs is important! We want to end up with a list of genes, so the corresponding dataset needs to be the first input.
 
 **Step 7: Count genes on different chromosomes**
+
 To get a better overview of the genes we obtained, we want to look at their distribution across the different chromosomes.
 
 ***Tool***: Statistics -> Count occurrences of each record
