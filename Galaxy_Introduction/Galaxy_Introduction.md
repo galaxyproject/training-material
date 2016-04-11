@@ -45,7 +45,7 @@ We also need a list of genes in mouse, which we can obtain from UCSC. Galaxy has
 - Click button "get output"
 - Click button "Send query to Galaxy"
 
-Galaxy Dataset | UCSC Main on Mouse: refGene (genome)
+Galaxy Dataset | [UCSC Main on Mouse: refGene (genome)](https://raw.githubusercontent.com/bgruening/training-material/master/Galaxy_Introduction/tables/Galaxy2-UCSC_Main_on_Mouse__refGene_genome.bed)
 
 **Step 3: Adjust chromosome naming**
 
@@ -138,10 +138,10 @@ To get a better overview of the genes we obtained, we want to look at their dist
 
 Here you can double-check if the previous steps were correct by comparing the numbers.
 
-Galaxy Dataset | Count genes on different chromosomes
+Galaxy Dataset | [Count genes on different chromosomes](https://raw.githubusercontent.com/bgruening/training-material/master/Galaxy_Introduction/tables/Galaxy9-Count_genes_on_different_chromosomes.tabular)
 Result of part 1, step 7
 
-(add table)
+
 
 **Step 8: Draw barchart**
 ***Tool***: Bar chart (use tool search to find it)
@@ -249,17 +249,17 @@ Top menu: Shared Data -> Data Libraries
 
 Execute the workflow you generated in part 1 on the peak summit file and the new RefSeq genes BED file.
 
-Galaxy Dataset | Count genes on different chromosomes
+Galaxy Dataset | [Count genes on different chromosomes](https://raw.githubusercontent.com/bgruening/training-material/master/Galaxy_Introduction/tables/Galaxy8-Count_genes_on_different_chromosomes.tabular)
 Result of part 2, step 16
-(add table)
+
 
 **Step 17: Generate list of unique gene names**
 
 Run the public [Workflow 'Proper unique on a column'](http://galaxy.uni-freiburg.de/u/tutor/w/imported-proper-unique) on the result of the intersect and choose the column with the gene names. The result should be a dataset with one column and 10841 lines.
 
-Galaxy Dataset | unique gene names
+Galaxy Dataset | [unique gene names](https://raw.githubusercontent.com/bgruening/training-material/master/Galaxy_Introduction/tables/Galaxy12-unique_gene_names.tabular)
 Result of part 2, step 17
-(add table)
+
 
 **Step 18: Cleaning up**
 Delete old history:
