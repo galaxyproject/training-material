@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Slides as PDF: Dataset Introduction_to_Galaxy_Uni.pdf & Manke_2015.09.21a.pdf (add link to slides)
+Slides as PDF: [Introduction_to_Galaxy_Uni.pdf](https://raw.githubusercontent.com/bgruening/training-material/master/Galaxy_Introduction/slides/Introduction_to_Galaxy_Uni.pdf) & [Manke_2015.09.21a.pdf](https://raw.githubusercontent.com/bgruening/training-material/master/Galaxy_Introduction/slides/Manke_2015.09.21a.pdf)
 
 ## Scenario
 We stumbled upon a paper [Li et al., Cell Stem Cell 2012](http://www.sciencedirect.com/science/article/pii/S1934590912003347) that contains the analysis of possible target genes of an interesting protein. The targets were obtained by ChIP-seq and the raw data is available through [GEO](http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE37268). The list of genes however is neither in the supplement of the paper nor part of the GEO submission. The closest thing we can find is a list of the regions where the signal is significantly enriched (peaks; you'll learn more on that tomorrow). The goal of this exercise is to turn this list of genomic regions into a list of possible target genes.
