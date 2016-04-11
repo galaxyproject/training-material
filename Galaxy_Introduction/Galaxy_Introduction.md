@@ -171,7 +171,7 @@ In the history column click on "Unnamed history" at the top to rename it.
 ![rename_history](https://raw.githubusercontent.com/bgruening/training-material/master/Galaxy_Introduction/images/rename_history.png)
 
 **Step 10: Make a workflow out of steps 6 to 8**
-- Click on the history options and select "Extract workflow" [Screenshot](https://raw.githubusercontent.com/bgruening/training-material/master/Galaxy_Introduction/images/screenshot.jpg)
+- Click on the history options and select "Extract workflow" ![Screenshot](https://raw.githubusercontent.com/bgruening/training-material/master/Galaxy_Introduction/images/screenshot.jpg)
 - Do **not** include "awk",  either "Find and Replace", "Convert Genomic Intervals to strict BED" and "Get flanks"
 - Click "Create Workflow"
 
