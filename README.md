@@ -5,7 +5,7 @@ Training material
 - [RNA-seq](https://github.com/bgruening/training-material/blob/master/rna-seq/rna-seq.md)
 - [ChIP-seq](https://github.com/bgruening/training-material/blob/master/ChIPseq/ChIPseq.md)
 - [Exome-seq](https://github.com/bgruening/training-material/blob/master/Exome-Seq/Exome-Seq.md)
-- [MethyC-seq](https://github.com/bgruening/training-material/blob/master/Methylation-Seq/Methylation-Seq.md)
+- [MethylC-seq](https://github.com/bgruening/training-material/blob/master/Methylation-Seq/Methylation-Seq.md)
 - [Galaxy Introduction](https://github.com/bgruening/training-material/blob/master/Galaxy_Introduction/Galaxy_Introduction.md )
 - [Data Sources](https://github.com/bgruening/training-material/blob/master/Data_Sources/Data_Sources.md)
   
