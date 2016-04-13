@@ -9,14 +9,11 @@ We stumbled upon a paper [Li et al., Cell Stem Cell 2012](http://www.sciencedire
 
 (Disclaimer: We are not affiliated with the authors of the paper and we don't make a statement about the relevance or quality of the paper. It is just a fitting example and nothing else.)
 
-(add link to reference)
-
-
 ## Part 1: Naive approach
 
 **Step 1: Upload peaks**
 
-Download the list of peaks (the file "GSE37268_mof3.out.hpeak.txt.gz") from GEO [click here to get to the GEO entry](http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE37268) to your computer. Use the [upload button](http://galaxy.uni-freiburg.de/datasets/f09e43293a451965/display/?preview=True) to upload the file to Galaxy and select "mm9" as the genome. Galaxy will automatically unpack the file.
+Download the list of peaks (the file "GSE37268_mof3.out.hpeak.txt.gz") from GEO [click here to get to the GEO entry](http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE37268) to your computer. Use the [upload button](https://raw.githubusercontent.com/bgruening/training-material/master/Galaxy_Introduction/images/upload_button.png) to upload the file to Galaxy and select "mm9" as the genome. Galaxy will automatically unpack the file.
 
 Galaxy Dataset | [GSE37268_mof3.out.hpeak.txt](https://raw.githubusercontent.com/bgruening/training-material/master/Galaxy_Introduction/tables/Galaxy1-GSE37268_mof3.out.hpeak.txt)
 
