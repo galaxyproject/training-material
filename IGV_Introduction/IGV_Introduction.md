@@ -399,18 +399,18 @@ Commands in the track pop-up menu change the display options for the selected tr
 
 - Load the encode RNA-Seq BAM files: Go to File > Load from ENCODE > Select C2C12 RNA-Seq BAM files (See image in the Pdf)
 
-![load_encode_RNA-seq_BAM](http://galaxy.uni-freiburg.de/datasets/0cb4fbf07bc63e56/display/?preview=True)
+![load_encode_RNA-seq_BAM](https://raw.githubusercontent.com/bgruening/training-material/master/IGV_Introduction/images/load_encode_RNA-seq_BAM.png)
 
 
 - Go to your favorite location in the genome by entering the location in the Search box, zoom in to the reads by using Zoom button.
 
 - You can change the track properties by right-click on the track. Select View as pairs to see the left and right pairs of paired-end reads.
 
-![view_pairs](http://galaxy.uni-freiburg.de/datasets/0f12e2090049f665/display/?preview=True)
+![view_pairs](https://raw.githubusercontent.com/bgruening/training-material/master/IGV_Introduction/images/view_pairs.png)
 
 - You can make a sashimi plot to see reads aligning to each junction. Right-click > Sashimi plot.
 
-![sashimi_plot](http://galaxy.uni-freiburg.de/datasets/08c97e2d61ce0bbb/display/?preview=True)
+![sashimi_plot](https://raw.githubusercontent.com/bgruening/training-material/master/IGV_Introduction/images/sashimi_plot.png)
 
 - Save what you see by going to File > Save Image.
 
@@ -421,11 +421,11 @@ Commands in the track pop-up menu change the display options for the selected tr
 
 - Go to File > Load from ENCODE > Select C2C12 ChIP-Seq bigwig files
 
-![ChIP-Seq_bigwig](http://galaxy.uni-freiburg.de/datasets/f3a9ee08ea73d919/display/?preview=True)
+![ChIP-Seq_bigwig](https://raw.githubusercontent.com/bgruening/training-material/master/IGV_Introduction/images/ChIP-Seq_bigwig.png)
 
 - Reset the track heights to make them comparable. Right click on the track > Set data range. Then change the scale.
 
-![data_range](http://galaxy.uni-freiburg.de/datasets/c7c05e526ea144ae/display/?preview=True)
+![data_range](https://raw.githubusercontent.com/bgruening/training-material/master/IGV_Introduction/images/data_range.png)
 
 - You can also change the track colors, name and chart type (line,bar,heatmap).
 
