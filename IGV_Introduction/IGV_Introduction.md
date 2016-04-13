@@ -13,365 +13,194 @@ To start IGV, go to the IGV downloads page: http://www.broadinstitute.org/igv/do
 ![MainWindowIGV](http://www.broadinstitute.org/software/igv/sites/cancerinformatics.org.igv/files/images/igv_desktop_callouts.jpg)
 
 
- Tool bar
+**Tool bar**
 
-The [tool bar](http://www.broadinstitute.org/software/igv/?q=ToolBar) provides access to commonly used functions. The [menu bar](http://www.broadinstitute.org/software/igv/?q=MenuBar) and [pop-up menus](http://www.broadinstitute.org/software/igv/?q=PopupMenus) (not shown) provide access to all other functions.
+- The [tool bar](http://www.broadinstitute.org/software/igv/?q=ToolBar) provides access to commonly used functions. The [menu bar](http://www.broadinstitute.org/software/igv/?q=MenuBar) and [pop-up menus](http://www.broadinstitute.org/software/igv/?q=PopupMenus) (not shown) provide access to all other functions.
 
- Chromosome
+**Chromosome**
 
-The red box on the chromosome ideogram indicates which portion of the chromosome is displayed. When zoomed out to display the full chromosome, the red box disappears from the ideogram.
+- The red box on the chromosome ideogram indicates which portion of the chromosome is displayed. When zoomed out to display the full chromosome, the red box disappears from the ideogram.
 
- Rular
+**Ruler**
 
-The ruler reflects the visible portion of the chromosome. The tick marks indicate chromosome locations. The span lists the number of bases currently displayed.
+- The ruler reflects the visible portion of the chromosome. The tick marks indicate chromosome locations. The span lists the number of bases currently displayed.
 
- Tracks
+**Tracks**
 
-IGV displays data in horizontal rows called tracks. Typically, each track represents one sample or experiment. This example shows methylation, gene expression, copy number and mutation data.
+- IGV displays data in horizontal rows called tracks. Typically, each track represents one sample or experiment. This example shows methylation, gene expression, copy number and mutation data.
 
- Features
+**Features**
 
-IGV also displays features, such as genes, in tracks. By default, IGV displays data in one panel and features in another, as shown here. Drag-and-drop a track name to move a track from one panel to another. Combine data and feature panels by selecting that option on the General tab of the [Preferences window](http://www.broadinstitute.org/software/igv/?q=Preferences).
+- IGV also displays features, such as genes, in tracks. By default, IGV displays data in one panel and features in another, as shown here. Drag-and-drop a track name to move a track from one panel to another. Combine data and feature panels by selecting that option on the General tab of the [Preferences window](http://www.broadinstitute.org/software/igv/?q=Preferences).
 
- Track names
+**Track names**
 
-Track names are listed in the far left panel. Legibility of the names depends on the height of the tracks; i.e., the smaller the track the less legible the name.
+- Track names are listed in the far left panel. Legibility of the names depends on the height of the tracks; i.e., the smaller the track the less legible the name.
 
- Attributes
+**Attributes**
 
-Attribute names are listed at the top of the attribute panel. Colored blocks represent attribute values, where each unique value is assigned a unique color. Hover over a colored block to see the attribute value. Click an attribute name to sort tracks based on that attribute value.
-
-
-
-
-
+- Attribute names are listed at the top of the attribute panel. Colored blocks represent attribute values, where each unique value is assigned a unique color. Hover over a colored block to see the attribute value. Click an attribute name to sort tracks based on that attribute value.
 
 
 ## Menu Bar
 
-(use table format)
+**File**
 
-Menu
+- Load from File - Displays genomic data from one or more files.
 
-Command
+- Load from URL - Displays genomic data from a file identified by URL.
 
-Description
+- Load from Server - Displays genomic data from the IGV data server.
 
-File
+- Load from DAS - Displays genomic data from a Distributed Annotation Server (DAS)
 
-Load from File
+- New Session - Unloads all currently loaded data, as if you exited and restarted IGV
 
-Displays genomic data from one or more files.
+- Open Session - Opens a previously saved session file.
 
+- Save Session - Saves your current settings to a named session file
 
+- Save Image - Saves a snapshot of the IGV window to a graphics file, omitting the menu bar and tool bar.  Can save in .png, .jpg, or .svg format.
 
-Load from URL
+- Exit - Closes IGV.
 
-Displays genomic data from a file identified by URL.
+**Genomes**
 
+- Load Genome from File - Loads a genome into IGV from your file system.
 
+- Load Genome from URL - Loads a genome into IGV from a web URL.
 
-Load from Server
+- Load Genome from Server - Loads a genome into IGV from the IGV data server.
 
-Displays genomic data from the IGV data server.
+- Create .genome File - Save your genome file in .genome format.
 
+- Manage Genome List - Choose which genomes to display in the genome drop-down menu in the tool bar.
 
+**View**
 
-Load from DAS
+- Preferences - Opens a tabbed menu of data display preferences.
 
-Displays genomic data from a Distributed Annotation Server (DAS)
+- Color Legends - Displays color legends for track data, which may be modified.
 
+- Show Name Panel - Shows/hides the track name panel.
 
+- Set Name Panel Width - Resets the track name panel width.
 
-New Session
+- Show Attribute Display - Shows/hides attributes and attribute values.
 
-Unloads all currently loaded data, as if you exited and restarted IGV
+- Select Attributes to Show - Shows/hides selected attributes and attribute values.
 
+- Show Header Panel - Shows/hides the chromosome location header panel.
 
+- Reorder Panels - Allows the user to reorder the display panels.
 
-Open Session
+- Go to - View and select loci visited in your navigation history.
 
-Opens a previously saved session file.
+**Tracks**
 
+- Sort Tracks - Sorts track data.
 
+- Group Tracks - Groups track data.
 
-Save Session
+- Filter Tracks - Filters track data.
 
-Saves your current settings to a named session file
+- Fit Data to Window - Sets the track height to display all of the data, or as much data as possible.
 
+- Set Track Height - Sets the track height to a specified value.
 
+**Regions**
 
-Save Image
+- Region Navigator - Opens the region navigator.
 
-Saves a snapshot of the IGV window to a graphics file, omitting the menu bar and tool bar.  Can save in .png, .jpg, or .svg format.
+- Gene Lists - Opens the gene lists window.
 
+- Export Regions - Saves currently defined regions of interest to a BED file. If no regions of interest are defined, no BED file is created.
 
+- Import Regions - Imports regions of interest from a BED file.
 
-Exit
+**Tools**
 
-Closes IGV.
+- Run Batch Script - Executes a series of sequential tasks.  Users can load at .txt file that contains a list of commands, one per line, that will be run by IGV.  The accepted commands are the same as the [IGV Port Commands](http://www.broadinstitute.org/igv/batch).
 
-Genomes
+- Run igvtools - Launches the igvtools interface window.
 
-Load Genome from File
+- Find Motif - Search for a particular nucleotide sequence in the reference genome.
 
-Loads a genome into IGV from your file system.
+- Gitools Heatmaps - Data and results are represented as browsable heatmaps. Data can be exported from IGV in gitools format, or loaded directly into a running gitools session. See http://www.gitools.org for details.
 
+- BEDTools - A fast, flexible suite of tools used to compare sets of genomic features. IGV uses BEDTools to compare features in loaded tracks, and view the results as a new track. See more details under [Third Party Tools Integration](http://www.broadinstitute.org/software/igv/third_party_tools#_blank).
 
+**GenomeSpace**
 
-Load Genome from URL
+- Load File from GenomeSpace - Load a file into IGV from your GenomeSpace directory.
 
-Loads a genome into IGV from a web URL.
+- Load Genome from GenomeSpace - Load a genome into IGV from your GenomeSpace directory.
 
+- Save Session to GenomeSpace - Save current IGV session to your GenomeSpace directory.
 
+- Load Session from GenomeSpace - Load a previous session from your GenomeSpace directory.
 
-Load Genome from Server
+- Logout - Log out of GenomeSpace
 
-Loads a genome into IGV from the IGV data server.
+- Register - Register a new account at [GenomeSpace](http://www.genomespace.org/)
 
+**Help**
 
+- User Guide... - Displays the IGV [User Guide](http://www.broadinstitute.org/igv/UserGuide).
 
-Create .genome File
 
-Save your genome file in .genome format.
 
+- Help Forum... - In your default web browser, opens the home page for the [igv-help forum](http://groups.google.com/forum/#!forum/igv-help).
 
 
-Manage Genome List
 
-Choose which genomes to display in the genome drop-down menu in the tool bar.
-
-View
-
-Preferences
-
-Opens a tabbed menu of data display preferences.
-
-
-
-Color Legends
-
-Displays color legends for track data, which may be modified.
-
-
-
-Show Name Panel
-
-Shows/hides the track name panel.
-
-
-
-Set Name Panel Width
-
-Resets the track name panel width.
-
-
-
-Show Attribute Display
-
-Shows/hides attributes and attribute values.
-
-
-
-Select Attributes to Show
-
-Shows/hides selected attributes and attribute values.
-
-
-
-Show Header Panel
-
-Shows/hides the chromosome location header panel.
-
-
-
-Reorder Panels
-
-Allows the user to reorder the display panels.
-
-
-
-Go to
-
-View and select loci visited in your navigation history.
-
-Tracks
-
-Sort Tracks
-
-Sorts track data.
-
-
-
-Group Tracks
-
-Groups track data.
-
-
-
-Filter Tracks
-
-Filters track data.
-
-
-
-Fit Data to Window
-
-Sets the track height to display all of the data, or as much data as possible.
-
-
-
-Set Track Height
-
-Sets the track height to a specified value.
-
-Regions
-
-Region Navigator
-
-Opens the region navigator.
-
-
-
-Gene Lists
-
-Opens the gene lists window.
-
-
-
-Export Regions
-
-Saves currently defined regions of interest to a BED file. If no regions of interest are defined, no BED file is created.
-
-
-
-Import Regions
-
-Imports regions of interest from a BED file.
-
-Tools
-
-Run Batch Script
-
-Executes a series of sequential tasks.  Users can load at .txt file that contains a list of commands, one per line, that will be run by IGV.  The accepted commands are the same as the [IGV Port Commands](http://www.broadinstitute.org/igv/batch).
-
-
-
-Run igvtools
-
-Launches the igvtools interface window.
-
-
-
-Find Motif
-
-Search for a particular nucleotide sequence in the reference genome.
-
-
-
-Gitools Heatmaps
-
-Data and results are represented as browsable heatmaps. Data can be exported from IGV in gitools format, or loaded directly into a running gitools session. See http://www.gitools.org for details.
-
-
-
-BEDTools
-
-A fast, flexible suite of tools used to compare sets of genomic features. IGV uses BEDTools to compare features in loaded tracks, and view the results as a new track. See more details under [Third Party Tools Integration](http://www.broadinstitute.org/software/igv/third_party_tools#_blank).
-
-GenomeSpace
-
-Load File from GenomeSpace
-
-Load a file into IGV from your GenomeSpace directory.
-
-
-
-Load Genome from GenomeSpace
-
-Load a genome into IGV from your GenomeSpace directory.
-
-
-
-Save Session to GenomeSpace
-
-Save current IGV session to your GenomeSpace directory.
-
-
-
-Load Session from GenomeSpace
-
-Load a previous session from your GenomeSpace directory.
-
-
-
-Logout
-
-Log out of GenomeSpace
-
-
-
-Register
-
-Register a new account at [GenomeSpace](http://www.genomespace.org/)
-
-Help
-
-User Guide...
-
-Displays the IGV [User Guide](http://www.broadinstitute.org/igv/UserGuide).
-
-
-
-Help Forum...
-
-In your default web browser, opens the home page for the [igv-help forum](http://groups.google.com/forum/#!forum/igv-help).
-
-
-
-About IGV
-
-Displays IGV version and build number.
+- About IGV - Displays IGV version and build number.
 
 
 
 ## Tool Bar
 
-(use table format)
 
+**Genome drop-down box** ![icon_genome_dropdown](https://raw.githubusercontent.com/bgruening/training-material/master/IGV_Introduction/images/icon_genome_dropdown.jpg)
 
-Genome drop-down box
-Loads a genome.
+- Loads a genome.
 
-Chromosome drop-down box
-Zooms to a chromosome.
+**Chromosome drop-down box** ![igv_chromdrop](https://raw.githubusercontent.com/bgruening/training-material/master/IGV_Introduction/images/igv_chromdrop.jpg)
 
-Search box
-Displays the chromosome location being shown. To scroll to a different location, enter the gene name, locus, or track name and click Go.
+- Zooms to a chromosome.
 
-Whole genome view
-Zooms to whole genome view.
+**Search box** ![searchbox](https://raw.githubusercontent.com/bgruening/training-material/master/IGV_Introduction/images/searchbox.jpg)
 
+- Displays the chromosome location being shown.
+To scroll to a different location, enter the gene name, locus, or track name and click Go.
 
+**Whole genome view** ![icon_genome](https://raw.githubusercontent.com/bgruening/training-material/master/IGV_Introduction/images/icon_genome.jpg)
 
-Moves backward and forward through views of the genome like the back and forward buttons in a web browser.
+- Zooms to whole genome view.
 
-Refresh
-Refreshes the display.
+![icon_backforward](https://raw.githubusercontent.com/bgruening/training-material/master/IGV_Introduction/images/icon_backforward.jpg)
 
-Define a region
-Defines a region of interest on the chromosome.
+- Moves backward and forward through views of the genome like the back and forward buttons in a web browser.
 
+**Refresh** ![icon_refresh](https://raw.githubusercontent.com/bgruening/training-material/master/IGV_Introduction/images/icon_refresh.jpg)
 
+- Refreshes the display.
 
-Reduces the row height on all tracks to fit all data for the region in view into the window; will also expand tracks (to their maximum preferred size) to fill the view, if needed.
+**Define a region** ![icon_region_of_interest](https://raw.githubusercontent.com/bgruening/training-material/master/IGV_Introduction/images/icon_region_of_interest.jpg)
 
+- Defines a region of interest on the chromosome.
 
+![icon_squish](https://raw.githubusercontent.com/bgruening/training-material/master/IGV_Introduction/images/icon_squish.jpg)
 
-Toggles the pop-up information windows in IGV on or off.
+- Reduces the row height on all tracks to fit all data for the region in view into the window; will also expand tracks (to their maximum preferred size) to fill the view, if needed.
 
-Zoom slider
-Zooms in and out on a chromosome.
+![icon_popuponoff](https://raw.githubusercontent.com/bgruening/training-material/master/IGV_Introduction/images/icon_popuponoff.jpg)
+
+- Toggles the pop-up information windows in IGV on or off.
+
+**Zoom slider** ![icon_zoom](https://raw.githubusercontent.com/bgruening/training-material/master/IGV_Introduction/images/icon_zoom.jpg)
+
+- Zooms in and out on a chromosome.
 
 ## Pop-up Menus
 
