@@ -13,31 +13,31 @@ To start IGV, go to the IGV downloads page: http://www.broadinstitute.org/igv/do
 ![MainWindowIGV](http://www.broadinstitute.org/software/igv/sites/cancerinformatics.org.igv/files/images/igv_desktop_callouts.jpg)
 
 
-**Tool bar**
+**Tool bar** ![callout_1.jpg](https://raw.githubusercontent.com/bgruening/training-material/master/IGV_Introduction/images/callout_1.jpg)
 
 - The [tool bar](http://www.broadinstitute.org/software/igv/?q=ToolBar) provides access to commonly used functions. The [menu bar](http://www.broadinstitute.org/software/igv/?q=MenuBar) and [pop-up menus](http://www.broadinstitute.org/software/igv/?q=PopupMenus) (not shown) provide access to all other functions.
 
-**Chromosome**
+**Chromosome** ![callout_2.jpg](https://raw.githubusercontent.com/bgruening/training-material/master/IGV_Introduction/images/callout_2.jpg)
 
 - The red box on the chromosome ideogram indicates which portion of the chromosome is displayed. When zoomed out to display the full chromosome, the red box disappears from the ideogram.
 
-**Ruler**
+**Ruler** ![callout_3.jpg](https://raw.githubusercontent.com/bgruening/training-material/master/IGV_Introduction/images/callout_3.jpg)
 
 - The ruler reflects the visible portion of the chromosome. The tick marks indicate chromosome locations. The span lists the number of bases currently displayed.
 
-**Tracks**
+**Tracks** ![callout_4.jpg](https://raw.githubusercontent.com/bgruening/training-material/master/IGV_Introduction/images/callout_4.jpg)
 
 - IGV displays data in horizontal rows called tracks. Typically, each track represents one sample or experiment. This example shows methylation, gene expression, copy number and mutation data.
 
-**Features**
+**Features** ![callout_5.jpg](https://raw.githubusercontent.com/bgruening/training-material/master/IGV_Introduction/images/callout_5.jpg)
 
 - IGV also displays features, such as genes, in tracks. By default, IGV displays data in one panel and features in another, as shown here. Drag-and-drop a track name to move a track from one panel to another. Combine data and feature panels by selecting that option on the General tab of the [Preferences window](http://www.broadinstitute.org/software/igv/?q=Preferences).
 
-**Track names**
+**Track names** ![callout_6.jpg](https://raw.githubusercontent.com/bgruening/training-material/master/IGV_Introduction/images/callout_6.jpg)
 
 - Track names are listed in the far left panel. Legibility of the names depends on the height of the tracks; i.e., the smaller the track the less legible the name.
 
-**Attributes**
+**Attributes** ![callout_7.jpg](https://raw.githubusercontent.com/bgruening/training-material/master/IGV_Introduction/images/callout_7.jpg)
 
 - Attribute names are listed at the top of the attribute panel. Colored blocks represent attribute values, where each unique value is assigned a unique color. Hover over a colored block to see the attribute value. Click an attribute name to sort tracks based on that attribute value.
 
