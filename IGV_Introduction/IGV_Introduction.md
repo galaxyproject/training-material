@@ -4,10 +4,7 @@
 
 **MPI-IE & University of Freiburg**
 
-
-
- The guide is available for download as a pdf file here : [IGV_handout](http://galaxy.uni-freiburg.de/u/tutor/p/IGV_Intro_Galaxy_course.pdf)
--     To start IGV, go to the IGV downloads page: http://www.broadinstitute.org/igv/download.
+To start IGV, go to the IGV downloads page: http://www.broadinstitute.org/igv/download.
 
 ## User Interface
 
