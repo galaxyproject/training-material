@@ -20,9 +20,9 @@ The slides for part 2 can be downloaded from here
 <a name="example"/></a>
 ## Hands on example  
 
-This exercise uses the dataset from the  Nature publication by [Ross-Inness et al.2012](http://www.ncbi.nlm.nih.gov/pubmed/22217937). 
-The ChIP was performed to identify the gene targets of the Estrogen receptor, a transcription factor known to be associated with different types of breast cancer. 
-For this, ChIP-seq was done in breast cancer cells from 4 patients of different outcomes (good and poor).
+This exercise uses the dataset from the Nature publication by [Ross-Inness et al., 2012](http://www.ncbi.nlm.nih.gov/pubmed/22217937). 
+The goal was to identify the binding sites of the Estrogen receptor, a transcription factor known to be associated with different types of breast cancer. 
+To this end, ChIP-seq was performed in breast cancer cells from 4 patients of different outcomes (good and poor).
 For each ChIP-seq experiment there is a matching technical control, i.e., there are 8 samples in total, half of which are the so-called 'input' samples for which the same treatment as the ChIP-seq samples was done except for the immunoprecipitation step.
 The input files are used to identify sequencing bias like open chromatin or GC bias.
 
@@ -32,70 +32,91 @@ Because of the long processing time for the large original files, we have select
 
 Create a new history for this exercise.
 
-- Import to the history the [FASTQ file patient1_input_good_outcome_chr11_25k_reads.fastq](https://github.com/bgruening/training_data/raw/master/ChIPseq/Galaxy1-%5Bpatient1_input_good_outcome_chr11_25k_reads.fastq%5D.fastqsanger).
+- Import the [FASTQ file patient1_input_good_outcome_chr11_25k_reads.fastq](https://github.com/bgruening/training_data/raw/master/ChIPseq/Galaxy1-%5Bpatient1_input_good_outcome_chr11_25k_reads.fastq%5D.fastqsanger) into the history.
 
-- Have a look at the file by clicking on the 'eye' icon. There is a lot of text, but can you spot where the DNA sequence is stored? Can you guess what the other information means?
+- Have a look at the file by clicking on the 'eye' icon. There is a lot of text, but can you spot where the DNA sequence is stored? Can you guess what the other entries mean?
 
-- Run the tool *FastQC* on one of the two FASTQ files to control the quality of the reads. An explanation of the results is found in the [fastQC web page](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/). 
+- Run the tool *FastQC* on one of the two FASTQ files to control the quality of the reads. An explanation of the results can be found on the [FastQC web page](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/). 
 
 **Step 2: Trimming and clipping of reads**
 
-- Apply the tool *Trim Galore* to your FASTQ file. First, view the full parameter list and tell Trim Galore to trim low quality bases with a cut-off of 15 and clip a possibly trailing adapter sequence from the reads. The default sequence that appears is the generic part of Illumina adaptors and should be used. Instruct Trim Galore to trim adapter sequences with an overlap of at least 3. 
+It is often necessary to trim sequenced read, for example, to get rid of bases that were sequenced with high uncertainty (= 'low quality bases'). 
 
--> If your FASTQ files cannot be selected, you might check whether their format is FASTQ with Sanger-scaled quality values (fastqsanger). Edit the data type by clicking on the pencil item.
+- Apply the tool *Trim Galore* to your FASTQ file. Have a look at the full parameter list and then tell Trim Galore to:
+    - __trim low quality bases__ with a cut-off of 15
+    - __clip a possibly trailing adapter sequence__ (The default sequence that appears is the generic part of Illumina adaptors and should be used.) Instruct Trim Galore to trim adapter sequences with an overlap of at least 3.
+
+-> If your FASTQ files cannot be selected, you might check whether their format is FASTQ with Sanger-scaled quality values (_fastqsanger_). You can edit the data type by clicking on the 'pencil' symbol.
 
 
 **Step 3: Mapping of the reads**
 
-- Run Bowtie2 to map the single-end reads to the human (GRCh38) genome.
+In order to figure where the sequenced DNA fragments originated from in the genome, the short reads must be aligned to the reference genome. This is equivalent to solving a jigsaw puzzles, but unfortunately, not all pieces are unique. In principle, you could do a BLAST analysis to figure out where the sequenced pieces fit best in the known genome. Aligning millions of short sequences this way may, however, take a couple of weeks.
+Nowadays, there are many read alignment programs for shot-gun sequenced DNA, _bowtie2_ being one of them.
 
-- By clicking over the resulting history entry basic mapping statistics can be seen. How many reads where mapped?
+- Run _Bowtie2_ to map the single-end reads to the human genome (version GRCh38).
+
+- By clicking on the resulting history entry, you can see some basic mapping statistics once the alignment is completed. How many reads where mapped?
 
 
 **Step 4: Visualization of the reads in IGV**
 
+The read alignment step with bowtie2 resulted in a compressed, binary file (BAM) that is not human-readable (it's like the zipped version of a text file). We will show you two ways to inspect the file, (1) by visualization using a Genome Browser and (2) by converting the binary format into its text file equivalent. 
+
 - Load the reads into the IGV browser by clicking the option 'display with IGV local'. To see the reads in IGV you will need to zoom in the start of chromosome 11. Try this region if you don't see any reads: chr11:1,562,200-1,591,483
 
-- Notice that the reads have a direction. By hovering over a read extra information is displayed. Some reads have lines over them. Try to zoom in in one of those lines to identify the reason for this. 
+- Notice that the reads have a _direction_ (i.e., they are mapped to the forward or reverse strand, respectively). When hovering over a read, extra information is displayed. Some reads have lines over them. Try to zoom in in one of those lines to identify the reason for these. 
 
-Note: because the number of reads over a region can be quite large, the IGV browser by default only allows to see the reads that fall in a short window. In the preferences panel this behaviour can be changed.
+**Note**: because the number of reads over a region can be quite large, the IGV browser by default only allows to see the reads that fall into a small window. This behaviour can, in principle, be changed in the preferences panel.
 
 
 **Step 5: Inspection of the SAM format**
 
-- Go back to Galaxy and run the tool *BAM-to-SAM* using the BAM file that was created in step 2. Click 'include header in output'. Because the BAM file is a compressed format it's contents can not be directly seen unless is converted to SAM (Sequence Alignment Map) format.
+As mentioned above, you can convert the binary BAM file into a simple (but large!) text file, which is called a SAM (Sequence Alignment Map) file.
 
-- Click on the view icon ('eye'). The first part of the file, the headers, contain the chromosome names and lengths. After the header, the location and other information of each read found on the FASTQ file is given.
+- Go back to Galaxy and run the tool *BAM-to-SAM* using the BAM file that was created in step 2. Click 'include header in output'. 
+
+- Click on the view icon ('eye'). The first part of the file, the header, contains the chromosome names and lengths. After the header, the location and other information of each read found in the FASTQ file is given.
 
 
 **Step 6: Correlation between samples**
 
-- For this step we need to load into the history the mapped files (.bam files) in the shared libraries. For this, please import into the current history all BAM files found in Galaxy courses -> Hands-on.
+To assess the similarity between the replicates of the ChIP-seq and the input, respectively, it is a common technique to calculate the correlation of read counts for the different samples.
+
+We expect that the replicates of the ChIP-seq experiments should be clustered more closely to each other than the replicates of the input samples.
+
+- For this step, we need to load all files with the aligned reads for each sample (.bam files) into the shared libraries. For this, please import into the current history all BAM files found in 'Galaxy courses' -> 'Hands-on'.
  
 *bam files examples* -> link
 
-- Next, run the tool *multiBamSummary* from the deepTools package. Select only the 8 bam files imported into the history. 
-
-- Use as fragment length: 100 and, to reduce the computation time, set the distance between bins to 500000 and choose only one chromosome, for example 'chr1'.
+- Next, run the tool *multiBamSummary* from the deepTools package. This tool will split the reference genome into bins of equal size (e.g. 10kb) and will count the number of overlapping reads from each sample.
+    - Select only the 8 BAM files imported into the history.
+    - Use as fragment length: 100 (this corresponds to the length of the fragments that were sequenced; it is not the _read_ length!)
+    - To reduce the computation time, set the distance between bins to 500,000 and choose only one chromosome, for example 'chr1'.
 
 - After the computation is done, run *plotCorrelation* from the deepTools package to visualize the results. Feel free to try different parameters.
 
+More information on these two tools can be found at the [deepTools documentation page](http://deeptools.readthedocs.io/en/latest/content/list_of_tools.html).
 
-**Step 7: GC bias**
+**Step 7: GC bias assessment**
 
-- Use the tool *computeGCbias* to check if the samples have more reads from regions of the genome with high GC. For practical reasons select only one of the bam files available, preferably an input file.
+A common problem of PCR-based protocols is the observation that GC-rich regions tend to be amplified more readily than GC-poor regions.
 
-- For fragment size select 300 and limit the operation to only one chromosome.
+- Use the tool *computeGCbias* to check if the samples have more reads from regions of the genome with high GC.
+    - for practical reasons select only one of the BAM files available, preferably an input file (can you guess why it makes more sense to check the input file?)
+    - For _fragment size_, select 300.
+    - limit the operation to only one chromosome (again, this is purely to speed up the analysis)
 
 Does this dataset have a GC bias?
 
-
 **Step 8: IP strength**
 
-- To evaluate the quality of the immuno-precipitation step use the tool *plotFingerprint*. Please select one of the ChIP-samples and the matching input. Set as fragment size 100 and limit the operation to only one chromosome.
+- To evaluate the quality of the immuno-precipitation step use the tool *plotFingerprint*.
+    - Select one of the ChIP-seq samples and the matching input
+    - Set as fragment size 100.
+    - Limit the operation to only one chromosome.
 
-What do you think about the quality of the IP for this experiment?
-
+What do you think about the quality of the IP for this experiment? If you are not sure how to interpret the resulting plots, please read the information [here](http://deeptools.readthedocs.io/en/latest/content/tools/plotFingerprint.html#background)
 
 **Step 9: Generate coverage files normalized by sequencing depth**
 
