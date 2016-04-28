@@ -1,6 +1,6 @@
 # GALAXY WORKSHOP on RNA-seq DATA ANALYSIS  
 
-For a more detailed version have a look at: https://github.com/nekrut/BMMB554/wiki/10.-Reference-based-RNA-seq
+For a more detailed version have a look at: https://github.com/nekrut/galaxy/wiki/Reference-based-RNA-seq
 
 ##Hands on!
 
