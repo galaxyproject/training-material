@@ -36,15 +36,15 @@ Create a new history for this exercise.
 
 - Have a look at the file by clicking on the 'eye' icon. There is a lot of text, but can you spot where the DNA sequence is stored? Can you guess what the other entries mean?
 
-- Run the tool *FastQC* on one of the two FASTQ files to control the quality of the reads. An explanation of the results can be found on the [FastQC web page](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/). 
+- Run the tool `FastQC` on one of the two FASTQ files to control the quality of the reads. An explanation of the results can be found on the [FastQC web page](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/). 
 
 **Step 2: Trimming and clipping of reads**
 
 It is often necessary to trim sequenced read, for example, to get rid of bases that were sequenced with high uncertainty (= 'low quality bases'). 
 
-- Apply the tool *Trim Galore* to your FASTQ file. Have a look at the full parameter list and then tell Trim Galore to:
+- Apply the tool `TrimGalore` to your FASTQ file. Have a look at the full parameter list and then tell `TrimGalore` to:
     - __trim low quality bases__ with a cut-off of 15
-    - __clip a possibly trailing adapter sequence__ (The default sequence that appears is the generic part of Illumina adaptors and should be used.) Instruct Trim Galore to trim adapter sequences with an overlap of at least 3.
+    - __clip a possibly trailing adapter sequence__ (The default sequence that appears is the generic part of Illumina adaptors and should be used.) Instruct `TrimGalore` to trim adapter sequences with an overlap of at least 3.
 
 -> If your FASTQ files cannot be selected, you might check whether their format is FASTQ with Sanger-scaled quality values (_fastqsanger_). You can edit the data type by clicking on the 'pencil' symbol.
 
@@ -52,9 +52,9 @@ It is often necessary to trim sequenced read, for example, to get rid of bases t
 **Step 3: Mapping of the reads**
 
 In order to figure where the sequenced DNA fragments originated from in the genome, the short reads must be aligned to the reference genome. This is equivalent to solving a jigsaw puzzles, but unfortunately, not all pieces are unique. In principle, you could do a BLAST analysis to figure out where the sequenced pieces fit best in the known genome. Aligning millions of short sequences this way may, however, take a couple of weeks.
-Nowadays, there are many read alignment programs for shot-gun sequenced DNA, _bowtie2_ being one of them.
+Nowadays, there are many read alignment programs for shot-gun sequenced DNA, `bowtie2` being one of them.
 
-- Run _Bowtie2_ to map the single-end reads to the human genome (version GRCh38).
+- Run `bowtie2` to map the single-end reads to the human genome (version GRCh38).
 
 - By clicking on the resulting history entry, you can see some basic mapping statistics once the alignment is completed. How many reads where mapped?
 
@@ -74,7 +74,7 @@ The read alignment step with bowtie2 resulted in a compressed, binary file (BAM)
 
 As mentioned above, you can convert the binary BAM file into a simple (but large!) text file, which is called a SAM (Sequence Alignment Map) file.
 
-- Go back to Galaxy and run the tool *BAM-to-SAM* using the BAM file that was created in step 2. Click 'include header in output'. 
+- Go back to Galaxy and run the tool `BAM-to-SAM` using the BAM file that was created in step 2. Click 'include header in output'. 
 
 - Click on the view icon ('eye'). The first part of the file, the header, contains the chromosome names and lengths. After the header, the location and other information of each read found in the FASTQ file is given.
 
@@ -89,12 +89,12 @@ We expect that the replicates of the ChIP-seq experiments should be clustered mo
  
 *bam files examples* -> link
 
-- Next, run the tool *multiBamSummary* from the deepTools package. This tool will split the reference genome into bins of equal size (e.g. 10kb) and will count the number of overlapping reads from each sample.
+- Next, run the tool `multiBamSummary` from the deepTools package. This tool will split the reference genome into bins of equal size (e.g. 10kb) and will count the number of overlapping reads from each sample.
     - Select only the 8 BAM files imported into the history.
     - Use as fragment length: 100 (this corresponds to the length of the fragments that were sequenced; it is not the _read_ length!)
     - To reduce the computation time, set the distance between bins to 500,000 and choose only one chromosome, for example 'chr1'.
 
-- After the computation is done, run *plotCorrelation* from the deepTools package to visualize the results. Feel free to try different parameters.
+- After the computation is done, run `plotCorrelation` from the deepTools package to visualize the results. Feel free to try different parameters.
 
 More information on these two tools can be found at the [deepTools documentation page](http://deeptools.readthedocs.io/en/latest/content/list_of_tools.html).
 
@@ -102,7 +102,7 @@ More information on these two tools can be found at the [deepTools documentation
 
 A common problem of PCR-based protocols is the observation that GC-rich regions tend to be amplified more readily than GC-poor regions.
 
-- Use the tool *computeGCbias* to check if the samples have more reads from regions of the genome with high GC.
+- Use the tool `computeGCbias` to check if the samples have more reads from regions of the genome with high GC.
     - for practical reasons select only one of the BAM files available, preferably an input file (can you guess why it makes more sense to check the input file?)
     - For _fragment size_, select 300.
     - limit the operation to only one chromosome (again, this is purely to speed up the analysis)
@@ -111,7 +111,7 @@ Does this dataset have a GC bias?
 
 **Step 8: IP strength**
 
-- To evaluate the quality of the immuno-precipitation step use the tool *plotFingerprint*.
+- To evaluate the quality of the immuno-precipitation step use the tool `plotFingerprint`.
     - Select one of the ChIP-seq samples and the matching input
     - Set as fragment size 100.
     - Limit the operation to only one chromosome.
@@ -124,9 +124,9 @@ What do you think about the quality of the IP for this experiment? If you are no
 
 - The first file contains the reads from a ChIP-seq experiment for the transcription factor ER using human cells from a breast cancer patient. The second file contains the reads from the matching input sample. The sequencing reads were mapped to the human genome assembly hg18.
 
-- Use the SAM Tools *IdxStats* tool to find out how many reads mapped to which chromosome. Furthermore, this will also tell you the chromosome lengths and naming convention (with or without 'chr' in the beginning).
+- Use the SAM Tools `IdxStats` tool to find out how many reads mapped to which chromosome. Furthermore, this will also tell you the chromosome lengths and naming convention (with or without 'chr' in the beginning).
 
-- Run the tool *bamCoverage* to generate a signal coverage file for the ER ChIP sample normalized by sequencing depth. Set the fragment size to 100 and the bin size to 25. Normalize to 1x genomic coverage. The output file should be in human-readable format bedGraph. To speed up computation, limit the operation to chromosome 'chr11'.
+- Run the tool `bamCoverage` to generate a signal coverage file for the ER ChIP sample normalized by sequencing depth. Set the fragment size to 100 and the bin size to 25. Normalize to 1x genomic coverage. The output file should be in human-readable format bedGraph. To speed up computation, limit the operation to chromosome 'chr11'.
 
 Generally, you should adjust the effective genome size according to the used genome assembly. In our case, you however have to specify the size of chromosome chr11 only when limiting the computation to this region. We obtained this value just in the last step :-)
 
@@ -137,7 +137,7 @@ Generally, you should adjust the effective genome size according to the used gen
 
 **Step 10: Generate input-normalized coverage files**
 
-- Run the tool *bamCompare* to normalize the ChIP signal BAM file patient4_ChIP_ER_poor_outcome.bam by the input control provided by patient4_input_poor_outcome.bam.
+- Run the tool `bamCompare` to normalize the ChIP signal BAM file patient4_ChIP_ER_poor_outcome.bam by the input control provided by patient4_input_poor_outcome.bam.
 
 - Set the fragment size to 100 again and the bin size to 50. Compute the log2 ratio of the read counts of ER ChIP vs. input sample. The output file should be in human-readable format bedGraph. To speed up computation, limit the operation to chromosome 'chr11'.
 
@@ -152,7 +152,7 @@ To speed up computation, we will now restrict our analysis to chromosome 11.
 
 - To this end, please import to the history the BAM files patient4_ChIP_ER_poor_outcome_chr11.bam and patient4_input_poor_outcome_chr11.bam. These files are provided in the data library under Galaxy courses -> ChIP-seq -> bam_files.
 
-- Use the MACS2 callpeak tool to call peak regions from the alignment results in these two BAM files. Adjust the effective genome size to *Homo sapiens* genome assembly hg18, chromosome 11. Output the peaks as BED file and the HTML summary page.
+- Use the `MACS2 callpeak` tool to call peak regions from the alignment results in these two BAM files. Adjust the effective genome size to *Homo sapiens* genome assembly hg18, chromosome 11. Output the peaks as BED file and the HTML summary page.
 
 You might adjust the advanced options depending on your sample:
 
@@ -171,20 +171,22 @@ For the last exercise, we will use the data resulting from step 10.
 - If you have not done so, please generate a bigWig file with the log2 ratio of ER ChIP over input signal restricted to chromosome 'chr11' as described in step 10.
 
 - Furthermore, please download the following human gene annotation from **UCSC Table Browser**:
-Human genome assembly hg18, RefSeq Genes track, limited to region chr11. Download the data as BED file and send it to Galaxy. This will import to your history the regions of all genes on chromosome 11 that are annotated in RefSeq.
+    - Human genome assembly hg18
+    - RefSeq Genes track, limited to region chr11. Download the data a BED file and send it to Galaxy. This will import the regions of all genes on chromosome 11 that are annotated in RefSeq to your Galaxy history.
 
-- Now, run the *computeMatrix* tool to prepare a file with scores per genomic region, which is required as input for the next tool.
+- Now, run the `computeMatrix` tool to prepare a file with scores per genomic region, which is required as input for the next tool.
 
-Use the regions provided by the gene annotation file downloaded from UCSC and your log2 ratio score bigWig file obtained by bamCompare in step 10 as input. If you have trouble finding the correct input data: better rename datasets with self-explanatory names the next time ;-)
+Use the regions provided by the gene annotation file downloaded from UCSC and your log2 ratio score bigWig file obtained by `bamCompare` in step 10 as input. If you have trouble finding the correct input data: better rename datasets with self-explanatory names the next time ;-)
 
-- You can run computeMatrix in two alternative modes:
+- You can run `computeMatrix` in two alternative modes:
+    - **scale-regions**: stretches or shrinks all regions in the BED file (here: genes) to the same length (bp) as indicated by the user
+    - **reference-point**: considers only those genomic positions before (downstream) and/or after (upstream) a reference point (e.g. TSS, which corresponds to the annotated gene start in our case).
 
--> scale-regions: stretches or shrinks all regions in the BED file (here: genes) to the same length (bp) as indicated by the user
--> reference-point: considers only those genomic positions before (downstream) and/or after (upstream) a reference point (e.g. TSS, which corresponds to the annotated gene start in our case).
+- Run the tool in either mode.
+  - Ensure that the advanced option 'Convert missing values to 0?' is activated.
 
-- Run the tool in either mode. Ensure that the advanced option 'Convert missing values to 0?' is activated.
-
-- Generate a heatmap with the *plotHeatmap* tool based on your output of *computeMatrix*. Set the advanced option 'Did you compute the matrix with more than one groups of regions?' appropriately.
+- Generate a heatmap with `plotHeatmap` based on your output of `computeMatrix`.
+  - Appropriately, set the advanced option 'Did you compute the matrix with more than one groups of regions?'
 
 - How can you increase the "resolution" of the data in the resulting heatmap?
 
