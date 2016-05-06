@@ -5,19 +5,17 @@
 Slides as PDF: [Introduction_to_Galaxy_Uni.pdf](https://raw.githubusercontent.com/bgruening/training-material/master/Galaxy_Introduction/slides/Introduction_to_Galaxy_Uni.pdf) & [Manke_2015.09.21a.pdf](https://raw.githubusercontent.com/bgruening/training-material/master/Galaxy_Introduction/slides/Manke_2015.09.21a.pdf)
 
 ## Scenario
-We stumbled upon a paper [Li et al., Cell Stem Cell 2012](http://www.sciencedirect.com/science/article/pii/S1934590912003347) that contains the analysis of possible target genes of an interesting protein. The targets were obtained by ChIP-seq and the raw data is available through [GEO](http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE37268). The list of genes however is neither in the supplement of the paper nor part of the GEO submission. The closest thing we can find is a list of the regions where the signal is significantly enriched (peaks; you'll learn more on that tomorrow). The goal of this exercise is to turn this list of genomic regions into a list of possible target genes.
-
-(Disclaimer: We are not affiliated with the authors of the paper and we don't make a statement about the relevance or quality of the paper. It is just a fitting example and nothing else.)
+We stumbled upon a paper [Li et al., Cell Stem Cell 2012](http://www.sciencedirect.com/science/article/pii/S1934590912003347) that contains the analysis of possible target genes of an interesting protein. The targets were obtained by ChIP-seq and the raw data is available through [GEO](http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE37268). The list of genes however is neither in the supplement of the paper nor part of the GEO submission. The closest thing we can find is a list of the regions where the signal is significantly enriched (peaks; you'll learn more on that tomorrow). The goal of this exercise is to __turn this list of genomic regions into a list of possible target genes__.
 
 ## Part 1: Naive approach
 
 **Step 1: Upload peaks**
 
-Download the list of peaks (the file "GSE37268_mof3.out.hpeak.txt.gz") from GEO [click here to get to the GEO entry](http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE37268) to your computer. Use the [upload button](https://raw.githubusercontent.com/bgruening/training-material/master/Galaxy_Introduction/images/upload_button.png) to upload the file to Galaxy and select "mm9" as the genome. Galaxy will automatically unpack the file.
+Download the list of peaks (the file `GSE37268_mof3.out.hpeak.txt.gz`) from GEO [click here to get to the GEO entry](http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE37268) to your computer. Use the [upload button](https://raw.githubusercontent.com/bgruening/training-material/master/Galaxy_Introduction/images/upload_button.png) to upload the file to Galaxy and select "mm9" as the genome. Galaxy will automatically unpack the file.
 
 Galaxy Dataset | [GSE37268_mof3.out.hpeak.txt](https://raw.githubusercontent.com/bgruening/training-material/master/Galaxy_Introduction/tables/Galaxy1-GSE37268_mof3.out.hpeak.txt)
 
-This file is not in any standard format and just by looking at it, we cannot find out what the numbers in the different columns mean. In the paper they mention that they used the peak caller [HPeak](http://www.sph.umich.edu/csg/qin/HPeak/Readme.html). By looking at the HPeak manual we can find out that the columns contain the following information:
+This file is not in any standard format and just by looking at it, we cannot find out what the numbers in the different columns mean. In the paper the authors mention that they used the peak caller [HPeak](http://www.sph.umich.edu/csg/qin/HPeak/Readme.html). By looking at the HPeak manual we can find out that the columns contain the following information:
 
 - chromosome name*
 - start coordinate
