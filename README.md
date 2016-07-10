@@ -1,14 +1,26 @@
 Training material
 =================
 
-- [Genome Annotation](https://github.com/bgruening/training-material/blob/master/genome-annotation/general-introduction/README.md)
-- [RNA-seq](https://github.com/bgruening/training-material/blob/master/rna-seq/rna-seq.md)
-- [ChIP-seq](https://github.com/bgruening/training-material/blob/master/ChIPseq/ChIPseq.md)
-- [Exome-seq](https://github.com/bgruening/training-material/blob/master/Exome-Seq/Exome-Seq.md)
-- [MethylC-seq](https://github.com/bgruening/training-material/blob/master/Methylation-Seq/Methylation-Seq.md)
-- [Galaxy Introduction](https://github.com/bgruening/training-material/blob/master/Galaxy_Introduction/Galaxy_Introduction.md )
-- [Data Sources](https://github.com/bgruening/training-material/blob/master/Data_Sources/Data_Sources.md)
-  
+
+topic | features
+:-- | :--: | --:
+[Genome Annotation](https://github.com/bgruening/training-material/blob/master/genome-annotation/general-introduction/README.md) | :book:
+[RNA-seq](https://github.com/bgruening/training-material/blob/master/rna-seq/rna-seq.md) | :whale: [:movie_camera:](https://vimeo.com/128268401) :eyes: [:page_facing_up:](https://usegalaxy.org/u/jeremy/p/galaxy-rna-seq-analysis-exercise) [:book:](https://github.com/bgruening/training-material/blob/master/rna-seq/rna-seq.md)
+[ChIP-seq](https://github.com/bgruening/training-material/blob/master/ChIPseq/ChIPseq.md) | :book:
+[Exome-seq](https://github.com/bgruening/training-material/blob/master/Exome-Seq/Exome-Seq.md) | :book:
+[MethylC-seq](https://github.com/bgruening/training-material/blob/master/Methylation-Seq/Methylation-Seq.md) | :book:
+[Galaxy Introduction](https://github.com/bgruening/training-material/blob/master/Galaxy_Introduction/Galaxy_Introduction.md ) | :book:  
+[Data Sources](https://github.com/bgruening/training-material/blob/master/Data_Sources/Data_Sources.md) | :book: 
+
+
+The Galaxy community offers many different ways of training. The table above lists all available training features of a specific topic to give you a fast and comprehensive overview.
+
+ - :whale: The training course and material is available as Docker container.
+ - :movie_camera: The training course is available as video on our [vimeo page](https://vimeo.com/galaxyproject).
+ - :eyes: The training course is available as [Galaxy tour](https://github.com/galaxyproject/galaxy-tours)
+ - :page_facing_up: The training course and material is available as Galaxy page (:thumbsup: hands-on training).
+ - :book: The training course and material is available as annotated text on github (:thumbsup: hands-on training).
+
 
 # Literature
 
