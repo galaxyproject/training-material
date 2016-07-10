@@ -11,6 +11,8 @@ topic | features
 [MethylC-seq](https://github.com/bgruening/training-material/blob/master/Methylation-Seq/Methylation-Seq.md) | :book:
 [Galaxy Introduction](https://github.com/bgruening/training-material/blob/master/Galaxy_Introduction/Galaxy_Introduction.md ) | :book:  
 [Data Sources](https://github.com/bgruening/training-material/blob/master/Data_Sources/Data_Sources.md) | :book: 
+[Galaxy Tool Dev](http://planemo.readthedocs.io/en/latest/writing_appliance.html) | [:book:](http://planemo.readthedocs.io/en/latest/writing_appliance.html) 
+[Galaxy Docker Project](https://slides.com/bgruening/the-galaxy-docker-project/live#/) | [:book:](https://slides.com/bgruening/the-galaxy-docker-project/live#/) 
 
 
 The Galaxy community offers many different ways of training. The table above lists all available training features of a specific topic to give you a fast and comprehensive overview.
@@ -19,7 +21,7 @@ The Galaxy community offers many different ways of training. The table above lis
  - :movie_camera: The training course is available as video on our [vimeo page](https://vimeo.com/galaxyproject).
  - :eyes: The training course is available as [Galaxy tour](https://github.com/galaxyproject/galaxy-tours)
  - :page_facing_up: The training course and material is available as Galaxy page (:thumbsup: hands-on training).
- - :book: The training course and material is available as annotated text on github (:thumbsup: hands-on training).
+ - :book: The training course and material is available as annotated text (:thumbsup: hands-on training).
 
 
 # Literature
