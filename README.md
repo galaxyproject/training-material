@@ -4,9 +4,9 @@ Training material
 
 topic | features
 :-- | :--: | --:
-[Genome Annotation](https://github.com/bgruening/training-material/blob/master/genome-annotation/general-introduction/README.md) | :book:
-[RNA-seq](https://github.com/bgruening/training-material/blob/master/rna-seq/rna-seq.md) | :whale: [:movie_camera:](https://vimeo.com/128268401) :eyes: [:page_facing_up:](https://usegalaxy.org/u/jeremy/p/galaxy-rna-seq-analysis-exercise) [:book:](https://github.com/bgruening/training-material/blob/master/rna-seq/rna-seq.md)
-[ChIP-seq](https://github.com/bgruening/training-material/blob/master/ChIPseq/ChIPseq.md) | :book:
+[Genome Annotation](https://github.com/bgruening/training-material/blob/master/Genome-Annotation/general-introduction/README.md) | :book:
+[RNA-seq](https://github.com/bgruening/training-material/blob/master/RNA-Seq/) | :whale: [:movie_camera:](https://vimeo.com/128268401) :eyes: [:page_facing_up:](https://usegalaxy.org/u/jeremy/p/galaxy-rna-seq-analysis-exercise) [:book:](https://github.com/bgruening/training-material/blob/master/rna-seq/rna-seq.md)
+[ChIP-seq](https://github.com/bgruening/training-material/blob/master/ChIP-Seq/ChIPseq.md) | :book:
 [Exome-seq](https://github.com/bgruening/training-material/blob/master/Exome-Seq/Exome-Seq.md) | :book:
 [MethylC-seq](https://github.com/bgruening/training-material/blob/master/Methylation-Seq/Methylation-Seq.md) | :book:
 [Galaxy Introduction](https://github.com/bgruening/training-material/blob/master/Galaxy_Introduction/Galaxy_Introduction.md ) | :book:  
