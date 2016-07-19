@@ -11,4 +11,4 @@ This [content](https://github.com/bgruening/training-material/tree/master/Admin-
 
 ## The Galaxy Docker project
 
-Slides and a some training material for the Galaxy Docker proejct can be found at: https://slides.com/bgruening/the-galaxy-docker-project/live#/
+Slides and a some training material for the Galaxy Docker proejct can be found at: https://slides.com/bgruening/the-galaxy-docker-project/live#/ as well as on the [project github repository](https://github.com/bgruening/docker-galaxy-stable).
