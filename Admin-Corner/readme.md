@@ -6,7 +6,12 @@ This [content](https://github.com/bgruening/training-material/tree/master/Admin-
 
 
 ## Advanced Topics in administering a Galaxy server
+.
 
+
+## The Galaxy Database schema
+
+This [content](https://github.com/bgruening/training-material/tree/master/Admin-Corner/Database_Schema) is based on a presentation given at the Training Day at the Galaxy Community Conferences in Bloomington, IN in June 2016.
 
 
 ## The Galaxy Docker project
