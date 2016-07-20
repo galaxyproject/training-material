@@ -215,7 +215,7 @@ The following example is from the development server at the FMI
 
 
 
- #### All users running a job using a certain parameter
+#### All users running a job using a certain parameter
 
  
 `select jp.name, jp.value  from job_parameter jp 
@@ -260,9 +260,11 @@ To run SchemaSpy in your container you’ll need to get it, and also install som
 
 `wget http://downloads.sourceforge.net/project/schemaspy/schemaspy/SchemaSpy%205.0.0/schemaSpy_5.0.0.jar`
 
-apt-get update
-apt-get install libpostgresql-jdbc-java
-apt-get install graphviz
+`apt-get update`
+
+`apt-get install libpostgresql-jdbc-java`
+
+`apt-get install graphviz`
 
 To run SchemaSpy:
 
