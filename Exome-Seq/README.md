@@ -9,12 +9,12 @@ Exome sequencing means that all protein-coding genes in a genome are sequenced.
 
 Two tutorials are available for training on exome sequencing data analysis.
 
-In the [first tutorial](tutorial/Exome-Seq.md), you will work with a family
+In the [first tutorial](tutorials/Exome-Seq.md), you will work with a family
 where the parents are healthy but a child has a yet unknown disease. The goal is
 to identify genetic variation that is responsible for the disease using the exome
 sequencing data from both parents and the child.
 
-The [second tutorial](tutorial/Diploid-variant-calling.md) is more detailed. It
+The [second tutorial](tutorials/Diploid-variant-calling.md) is more detailed. It
 follows a similar pipeline to first tutorial on the bottle dataset, but with
 more details particularly on the theory behind.
 
