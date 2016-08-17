@@ -132,21 +132,15 @@ genome for mapping (for each dataset):
 
 ## Generating and post-processing FreeBayes calls
 
-Select **FreeBayes** from **Phenotype Association** section of the tool menu (left pane of Galaxy's interface).
-
-| Running **FreeBayes** |
-|------------------|
-| Make sure the top part of the interface looks like shown below. Here we selected `GIAB-Ashkenazim-Trio-hg19` as input and set **Using reference genome** to `hg19` and **Choose parameter selection level** to `5. Complete list of all options`:|
-|![](../images/FreeBayes_settings.png)|
-|Scrolling down to **Tweak algorithmic features?** click `Yes` and set **Calculate the marginal probability of genotypes and report as GQ in each sample field in the VCF output** to `Yes`. This would help us evaluating the quality of genotype calls.|
-|![](../images/freebayes_gq.png)|
+1. Select **FreeBayes** from **Phenotype Association** section of the tool menu (left pane of Galaxy's interface)
+2. Make sure the top part of the interface looks like shown below. Here we selected `GIAB-Ashkenazim-Trio-hg19` as input and set **Using reference genome** to `hg19` and **Choose parameter selection level** to `5. Complete list of all options`: ![](../images/FreeBayes_settings.png)
+3. Scrolling down to **Tweak algorithmic features?** click `Yes` and set **Calculate the marginal probability of genotypes and report as GQ in each sample field in the VCF output** to `Yes`. This would help us evaluating the quality of genotype calls: ![](../images/freebayes_gq.png)
 
 This produces a dataset in [VCF](http://www.1000genomes.org/wiki/Analysis/variant-call-format) format containing 35 putative variants. Before we can continue we need to post-process this dataset by breaking compound variants into multiple independent variants with **VcfAllelicPrimitives** tool found within **VCF Tools** section. This is necessary for ensuring the smooth sailing through downstream analyses:
 
-| Simplifying variant representation |
-|------------------|
-| Select FreeBayes output as the input for this tool and make sure **Maintain site and allele-level annotations when decomposing** and **Maintain genotype-level annotations when decomposing** are set to `Yes`:|
-|![](../images/vcfallelicprimitives.png)|
+1. Select FreeBayes output as the input for this tool
+2. Make sure **Maintain site and allele-level annotations when decomposing** and **Maintain genotype-level annotations when decomposing** are set to `Yes`
+|![](../images/vcfallelicprimitives.png)
 
 **VCFAllelicPrimitives** generated a VCF files containing 37 records (the input VCF only contained 35). This is because a multiple nucleotide polymorphism (`TAGG|CAGA`) at position 618851 have been converted to two:
 
@@ -158,14 +152,13 @@ This produces a dataset in [VCF](http://www.1000genomes.org/wiki/Analysis/varian
 
 At this point we are ready to begin annotating variants using [**SnpEff**](http://snpeff.sourceforge.net/SnpEff.html). **SnpEff**, a project maintained by [Pablo Cingolani](https://www.linkedin.com/in/pablocingolani) "*...annotates and predicts the effects of variants on genes (such as amino acid changes)...*" and so is critical for functional interpretation of variation data.
 
-| Annotating with **SnpEff** |
-|------------------|
-| Download `hg19` database with **SnpEff Download** () |
-| Launch annotation of your variants with **SnpEff** from **Annotation**, using the downloaded database (reference genome from your history)|
-| SnpEff will generate two outputs: (1) an annotated VCF file and (2) an HTML report. The report contains a number of useful metrics such as distribution of variants across gene features:|
-|![](../images/snpeff_chart.png)|
-| or changes to codons: |
-|![](../images/snpeff_codons.png)|
+1. Download `hg19` database with **SnpEff Download**
+2. Launch annotation of your variants with **SnpEff** from **Annotation**, using the downloaded database (reference genome from your history)
+
+SnpEff will generate two outputs: (1) an annotated VCF file and (2) an HTML report. The report contains a number of useful metrics such as distribution of variants across gene features:
+![](../images/snpeff_chart.png)
+or changes to codons:
+|![](../images/snpeff_codons.png)
 
 ## Manipulating variation data with GEMINI
 
