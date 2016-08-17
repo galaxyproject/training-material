@@ -145,7 +145,8 @@ This produces a dataset in [VCF](http://www.1000genomes.org/wiki/Analysis/varian
 
 1. Select FreeBayes output as the input for this tool
 2. Make sure **Maintain site and allele-level annotations when decomposing** and **Maintain genotype-level annotations when decomposing** are set to `Yes`
-|![](../images/vcfallelicprimitives.png)
+
+  ![](../images/vcfallelicprimitives.png)
 
 **VCFAllelicPrimitives** generated a VCF files containing 37 records (the input VCF only contained 35). This is because a multiple nucleotide polymorphism (`TAGG|CAGA`) at position 618851 have been converted to two:
 
@@ -160,10 +161,13 @@ At this point we are ready to begin annotating variants using [**SnpEff**](http:
 1. Download `hg19` database with **SnpEff Download**
 2. Launch annotation of your variants with **SnpEff** from **Annotation**, using the downloaded database (reference genome from your history)
 
-SnpEff will generate two outputs: (1) an annotated VCF file and (2) an HTML report. The report contains a number of useful metrics such as distribution of variants across gene features:
-![](../images/snpeff_chart.png)
-or changes to codons:
-|![](../images/snpeff_codons.png)
+SnpEff will generate two outputs: (1) an annotated VCF file and (2) an HTML report. The report contains a number of useful metrics such as distribution of variants across gene features
+
+  ![](../images/snpeff_chart.png)
+
+or changes to codons
+
+  ![](../images/snpeff_codons.png)
 
 ## Manipulating variation data with GEMINI
 
@@ -179,15 +183,16 @@ family1    HG004_NA24143_mother -9                   -9                   2  1  
 family1	   HG003_NA24149_father -9                   -9                   1  1         CEU
 family1	   HG002_NA24385_son	HG003_NA24149_father HG004_NA24143_mother 1  2         CEU
 ```
-So let's load data into GEMINI:
+So let's load data into GEMINI by setting VCF and PED inputs
 
-| Loading data into GEMINI |
-|------------------|
-| Set VCF and PED inputs: |
-|![](../images/gemini_load.png)|
-| This creates a sqlite database. To see the content of the database use **GEMINI_db_info**:|
-|![](../images/gemini_db_info.png)|
-|This produce a list of all tables and fields in the database.|
+  ![](../images/gemini_load.png)
+
+
+This creates a sqlite database. To see the content of the database use **GEMINI_db_info**:
+
+  ![](../images/gemini_db_info.png)
+
+This produce a list of all tables and fields in the database.
 
 ### Querying GEMINI database
 
@@ -195,18 +200,23 @@ GEMINI database is queried using the versatile SQL language (more on SQL [here](
 >
 The examples below are taken from "[Intro to Gemini](https://s3.amazonaws.com/gemini-tutorials/Intro-To-Gemini.pdf)" tutorial. For extensive documentation see "[Querying GEMINI](http://gemini.readthedocs.org/en/latest/content/querying.html)".
 
-| Querying GEMINI database |
-|------------------|
-| :question: *Select "novel" varinats that are not annotated in dbSNP database*. Type `SELECT count(*) FROM variants WHERE in_dbsnp == 0` into **The query to be issued to the database**: |
-|![](https://github.com/nekrut/galaxy/wiki/images/gemini_query1.png)|
-| As we can see from [output](https://usegalaxy.org/datasets/bbd44e69cb8906b51bb37b9032761321/display/?preview=True) there are 21 variants that are not annotated in dbSNP.|
-| :question:  *Find variants in POLRMT gene*: `SELECT * FROM variants WHERE filter is NULL and gene = 'POLRMT'`|
-|The above query will produce [output](https://usegalaxy.org/datasets/bbd44e69cb8906b5a0bb5b2cc0695697/display/?preview=True) with very large number of columns. To restrict the number of columns to a manageable set let's use this command: `SELECT rs_ids, aaf_esp_ea, impact, clinvar_disease_name, clinvar_sig FROM variants WHERE filter is NULL and gene = 'POLRMT'` (column definitions can be found [here](http://gemini.readthedocs.org/en/latest/content/database_schema.html)) |
-|[Output](https://usegalaxy.org/datasets/bbd44e69cb8906b540d65297cd1d26bb/display/?preview=True) shows varinats found within the *POLRMT* gene. |
+#### :question: *Select "novel" variants that are not annotated in dbSNP database*
+
+Type `SELECT count(*) FROM variants WHERE in_dbsnp == 0` into **The query to be issued to the database**
+
+    ![](../images/gemini_query1.png)
+
+- As we can see from [output](https://usegalaxy.org/datasets/bbd44e69cb8906b51bb37b9032761321/display/?preview=True) there are 21 variants that are not annotated in dbSNP
+
+#### :question:  *Find variants in POLRMT gene*
+
+The query `SELECT * FROM variants WHERE filter is NULL and gene = 'POLRMT'` will produce [output](https://usegalaxy.org/datasets/bbd44e69cb8906b5a0bb5b2cc0695697/display/?preview=True) with very large number of columns. To restrict the number of columns to a manageable set let's use this command: `SELECT rs_ids, aaf_esp_ea, impact, clinvar_disease_name, clinvar_sig FROM variants WHERE filter is NULL and gene = 'POLRMT'` (column definitions can be found [here](http://gemini.readthedocs.org/en/latest/content/database_schema.html))
+
+[Output](https://usegalaxy.org/datasets/bbd44e69cb8906b540d65297cd1d26bb/display/?preview=True) shows variants found within the *POLRMT* gene.
 
 ### Querying genotypes
 
-GEMINI provides access to genotype, sequencing depth, genotype quality, and genotype likelihoods for each individual (`subjectID`):
+**GEMINI** provides access to genotype, sequencing depth, genotype quality, and genotype likelihoods for each individual (`subjectID`):
 
  * `gt_types.subjectID` - three types of genotype types: `HOM_REF`, `HET`, `HOM_ALT`;
  * `gt_quals.subjectID` - genotype quality
@@ -214,28 +224,35 @@ GEMINI provides access to genotype, sequencing depth, genotype quality, and geno
  * `gt_ref_depths.subjectID` -  number of reference allele reads in this subject at position
  * `gt_alt_depths.subjectID` - number of alternate allele reads in this subject at position
 
-| Querying genotypes |
-|------------------|
-| :question: *At how many sites does child have a non-reference allele?*|
-|To answer this question we will use two fields of **GEMINI_query** interface: Type `SELECT * from variants` into **The query to be issued to the database** and `gt_types.HG002_NA24385_son <> HOM_REF` into **Restrictions to apply to genotype values**.|
-|![](https://github.com/nekrut/galaxy/wiki/images/gemini_query2.png)|
-|[Output](https://usegalaxy.org/datasets/bbd44e69cb8906b560921700703d0255/display/?preview=True)|
-| :question: *At how many sites both father and son have non reference alleles?*|
-|Type the same expression `SELECT * from variants` into **The query to be issued to the database** and `(gt_types.HG002_NA24385_son <> HOM_REF AND gt_types.HG003_NA24149_father <> HOM_REF)` into **Restrictions to apply to genotype values**.|
-|[Output](https://usegalaxy.org/datasets/bbd44e69cb8906b5aab445b3cd632ba7/display/?preview=True)|
-| :question: *List genotypes for father and son where they have non-reference alleles.*|
-|Type `SELECT gts.HG002_NA24385_son, gts.HG003_NA24149_father from variants` into **The query to be issued to the database** and `(gt_types.HG002_NA24385_son <> HOM_REF AND gt_types.HG003_NA24149_father <> HOM_REF)` into **Restrictions to apply to genotype values**.|
-|[Output](https://usegalaxy.org/datasets/bbd44e69cb8906b543c67f80be21ed02/display/?preview=True)|
+#### :question: *At how many sites does child have a non-reference allele?*
+
+To answer this question we will use two fields of **GEMINI_query** interface:
+
+- Type `SELECT * from variants` into **The query to be issued to the database**
+- Type `gt_types.HG002_NA24385_son <> HOM_REF` into **Restrictions to apply to genotype values**
+
+  ![](../images/gemini_query2.png)
+
+It will generate [this output](https://usegalaxy.org/datasets/bbd44e69cb8906b560921700703d0255/display/?preview=True)
+
+#### :question: *At how many sites both father and son have non reference alleles?*
+
+Typing the same expression `SELECT * from variants` into **The query to be issued to the database** and `(gt_types.HG002_NA24385_son <> HOM_REF AND gt_types.HG003_NA24149_father <> HOM_REF)` into **Restrictions to apply to genotype values** will generate [this output](https://usegalaxy.org/datasets/bbd44e69cb8906b5aab445b3cd632ba7/display/?preview=True)
+
+#### :question: *List genotypes for father and son where they have non-reference alleles.*
+
+Typing `SELECT gts.HG002_NA24385_son, gts.HG003_NA24149_father from variants` into **The query to be issued to the database** and `(gt_types.HG002_NA24385_son <> HOM_REF AND gt_types.HG003_NA24149_father <> HOM_REF)` into **Restrictions to apply to genotype values**.
+will generate [this output](https://usegalaxy.org/datasets/bbd44e69cb8906b543c67f80be21ed02/display/?preview=True).
 
 ### Using wildcards
 
 Wilcards simply writing SQL expressions when searching across multiple terms. The syntax for genotype filter wilcards is `COLUMN).(SAMPLE_WILDCARD).(SAMPLE_WILDCARD_RULE).(RULE_ENFORCEMENT).`. Let's look at few examples.
 
-| Using wildcards |
-|------------------|
-| :question: *At which variants are every sample heterozygous?*|
-|Type `SELECT chrom, start, end, ref, alt, gene, impact, (gts).(*) FROM variants` into **The query to be issued to the database** and `(gt_types).(*).(==HET).(all)` into **Restrictions to apply to genotype values**. Here we use wildcards for the query (`(gts.*)` = get genotypes for **all** samples) and genotype filtering (`(gt_types).(*).(==HET).(all)`, the [all operator](http://gemini.readthedocs.org/en/latest/content/querying.html#the-all-operator) implies that want results for **all** afftected individuals). |
-|[Output](https://usegalaxy.org/datasets/bbd44e69cb8906b5819e1404b5e127d1/display/?preview=True)|
+#### :question: *At which variants are every sample heterozygous?*
+
+Type `SELECT chrom, start, end, ref, alt, gene, impact, (gts).(*) FROM variants` into **The query to be issued to the database** and `(gt_types).(*).(==HET).(all)` into **Restrictions to apply to genotype values**. Here we use wildcards for the query (`(gts.*)` = get genotypes for **all** samples) and genotype filtering (`(gt_types).(*).(==HET).(all)`, the [all operator](http://gemini.readthedocs.org/en/latest/content/querying.html#the-all-operator) implies that want results for **all** afftected individuals).
+
+It will generate [this output](https://usegalaxy.org/datasets/bbd44e69cb8906b5819e1404b5e127d1/display/?preview=True)
 
 # Going further
 
@@ -254,19 +271,19 @@ This short tutorial should give you an overall idea on how generate variant data
 * Right click on :arrow_forward: symbol and open Galaxy history in another new browser tab;
 * When Galaxy history interface opens you will need to click **Import history** link highlighted with a red border in the following figure:
 
-![](https://github.com/nekrut/galaxy/wiki/images/import_history.png)
+  ![](../images/import_history.png)
 
 * If you have a wide screen arrange browsers tabs side by side:
 
-![](https://github.com/nekrut/galaxy/wiki/images/side-by-side.png)
+  ![](../images/side-by-side.png)
 
 * Proceed with tutorial. For example, to repeat the following command from GEMINI tutorial:
 
-![](https://github.com/nekrut/galaxy/wiki/images/gemini_command.png)
+  ![](../images/gemini_command.png)
 
 * Use Galaxy's **GEMINI_load** tool:
 
-![](https://github.com/nekrut/galaxy/wiki/images/galaxy_command.png)
+  ![](../images/galaxy_command.png)
 
 * and so on....
 
