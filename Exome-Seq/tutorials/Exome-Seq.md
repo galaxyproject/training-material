@@ -107,14 +107,14 @@ for each family member, we will start with one BAM file with mapping results.
   - [Mother](https://zenodo.org/record/60285/files/mother.bam)  
   - [Child = Patient](https://zenodo.org/record/60285/files/patient.bam)
 2. Specify the used genome for mapping (for each dataset)
-  1. Click on *Edit attributes* (pencil icon on right panel)
-  2. Select *Human Feb 2009* on *Database/Build*
+  1. Click on **Edit attributes** (pencil icon on right panel)
+  2. Select `Human Feb 2009` on **Database/Build**
   3. Save it
 2. Import the reference genome
-  1. Go on *Data Libraries* in *Shared data* (top panel on Galaxy's interface)
-  2. Click on *Training Data*
-  3. Select *hg19*
-  4. Click on *Import selected datasets into history* (just below the top panel)
+  1. Go on **Data Libraries** in **Shared data** (top panel on Galaxy's interface)
+  2. Click on **Training Data**
+  3. Select `hg19`
+  4. Click on **Import selected datasets into history** (just below the top panel)
   5. Import it
 2. Follow the next steps for father data and then apply the generated workflow on other datasets
 
@@ -122,17 +122,17 @@ for each family member, we will start with one BAM file with mapping results.
 
 ### Generating and post-processing FreeBayes calls
 
-To call our variants, we will use *FreeBayes*. *FreeBayes* is a Bayesian genetic
+To call our variants, we will use **FreeBayes**. **FreeBayes** is a Bayesian genetic
 variant detector designed to find small polymorphisms, specifically SNPs
 (single-nucleotide polymorphisms), indels (insertions and deletions), MNPs
 (multi-nucleotide polymorphisms), and complex events (composite insertion and
 substitution events) smaller than the length of a short-read sequencing alignment.
 
-1. Select *FreeBayes* from *Phenotype Association* section of the tool menu (left
+1. Select **FreeBayes** from **Phenotype Association** section of the tool menu (left
 panel of Galaxy's interface)
 2. Run it:
   1. Load reference genome from local cache
-  2. Use "Human (Homo sapiens): hg19" as reference genome
+  2. Use `Human (Homo sapiens): hg19` as reference genome
   3. Choose other default settings
   4. Execute
 
@@ -145,11 +145,11 @@ compound variants into multiple independent variants and filter the VCF file
 to simplify the variant representation.
 
 1. Split your allelic primitives (gaps or mismatches) into multiple VCF lines
-with *VcfAllelicPrimitives* from *VCF Tools*:
-  1. Select the *FreeBayes* output file as VCF dataset
-  2. Make sure "Maintain site and allele-level annotations when decomposing" and
-  "Maintain genotype-level annotations when decomposing" are set to "Yes"
-5. Filter your VCF file with *SnpSift Filter* from *Annotation* to
+with **VcfAllelicPrimitives** from **VCF Tools**:
+  1. Select the FreeBayes output file as VCF dataset
+  2. Make sure **Maintain site and allele-level annotations when decomposing** and
+  **Maintain genotype-level annotations when decomposing** are set to `Yes`
+5. Filter your VCF file with **SnpSift Filter** from **Annotation** to
 only conserve SNPs with a Quality >= 30 and a Coverage >= 10
 
   Have a look at the examples to help you construct the correct expression.
@@ -163,11 +163,11 @@ available on the human assembly (GRCh37/hg19).
 6. Import the [dbSNP_138.hg19.vcf](https://zenodo.org/record/60285/files/dbSNP_138.hg19.vcf)
 in your history
 7. Assign the known variant ID from dbSNP to your variants, using
-*SnpSift Annotate* from *Annotation*
+**SnpSift Annotate** from **Annotation**
 8. Annotate your variants with some functional information
-  1. Download "hg19" database with *SnpEff Download* from *Annotation*
-  2. Launch annotation of your variants with *SnpEff* from
-  *Annotation*, using the downloaded database (reference genome from your
+  1. Download `hg19` database with **SnpEff Download** from **Annotation**
+  2. Launch annotation of your variants with **SnpEff** from
+  **Annotation**, using the downloaded database (reference genome from your
   history)
 
   Look at your "INFO" column again in the generated VCF file. You will get some
@@ -188,8 +188,8 @@ you need for your further studies is included in your VCF file.
   You should now have 3 annotated variant files, from mother, father and the
   patient. It might be a good idea to rename them accordingly.
 
-3. Combine all 3 files into one with the tool *VCFcombine* from
-*VCF Tools*
+3. Combine all 3 files into one with the tool **VCFcombine** from
+**VCF Tools**
 
 Now that we have an annotated VCF file it is time to peek inside our variation data
 
@@ -204,20 +204,20 @@ family1	RS024V-FATHER	-9	-9	1	1	CEU
 family1	RS024P-PATIENT	RS024V-FATHER	RS024M-MOTHER	1	2	CEU
 ```
 
-12. Use the tool *GEMINI load* in *Gemini* to create a database out of your
+12. Use the tool **GEMINI load** in **Gemini** to create a database out of your
 combined VCF file and the PED file.
 
     This creates a sqlite database. To see the content of the database use
-    *GEMINI_db_info*.
+    **GEMINI_db_info**
 
 
 Either way you have now a database with all your variants, with pedigree
 relations, additional annotations and most importantly its fast to search.
-Have a look at all different GEMINI tools and run as many tools as possible on
+Have a look at all different **Gemini** tools and run as many tools as possible on
 your GEMINI databases. Try to get a feeling of what is possible with a variant
 database in GEMINI.
 
-*GEMINI query* is the most versatile of all the GEMINI tools. You can use it to
+**GEMINI query** is the most versatile of all the GEMINI tools. You can use it to
 ask 'interesting' questions in simple SQL (see the GEMINI handbook on its usage).
 For example:
 
@@ -234,7 +234,7 @@ the SNP if it exists
 
 **Tips: Switch on the `--header` parameter**
 
-To go further on Gemini, you can have a look at the following tutorials:
+To go further on **Gemini**, you can have a look at the following tutorials:
 
 - [Introduction](https://s3.amazonaws.com/gemini-tutorials/Intro-To-Gemini.pdf)
 - [Identifying *de novo* mutations underlying Mendelian disease](https://s3.amazonaws.com/gemini-tutorials/Gemini-DeNovo-Tutorial.pdf)
@@ -242,4 +242,4 @@ To go further on Gemini, you can have a look at the following tutorials:
 - [Identifying autosomal dominant variants underlying Mendelian disease](https://s3.amazonaws.com/gemini-tutorials/Gemini-Dominant-Tutorial.pdf)
 
 And for a more detailed tutorial on variant data generation in Galaxy, have a
-look at the [tutorial on diploid variant calling](https://github.com/nekrut/galaxy/wiki/Diploid-variant-calling). 
+look at the [tutorial on diploid variant calling](https://github.com/nekrut/galaxy/wiki/Diploid-variant-calling).
