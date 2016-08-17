@@ -97,18 +97,23 @@ It will launch a flavored Galaxy instance available on [http://localhost:8080](h
 ## Data pre-processing
 
 Most the data pre-processing have already be done on the raw exome sequencing.
-So, for each family member, we will start with one BAM file with mapping results
-of raw exome sequencing against `hg19` version of the human genome.
+The raw exome sequences were mapped on `hg19` version of the human genome. So,
+for each family member, we will start with one BAM file with mapping results.
 
 1. Import all 3 BAM's into a new history:
   - [Father](https://zenodo.org/record/60285/files/father.bam)  
   - [Mother](https://zenodo.org/record/60285/files/mother.bam)  
   - [Child = Patient](https://zenodo.org/record/60285/files/patient.bam)
-2. Edit attributes
+2. Specify the used genome for mapping (for each dataset)
+  1. Click on *Edit attributes* (pencil icon on right panel)
+  2. Select *Human Feb 2009* on *Database/Build*
+  3. Save it
 2. Import the reference genome
-  1. Click on *UCSC Main table browser* from *Get Data* section of the tool menu
-  (left panel of Galaxy's interface)
-  2.
+  1. Go on *Data Libraries* in *Shared data* (top panel on Galaxy's interface)
+  2. Click on *Training Data*
+  3. Select *hg19*
+  4. Click on *Import selected datasets into history* (just below the top panel)
+  5. Import it
 2. Follow the next steps for father data and then apply the generated workflow on other datasets
 
 ## Variant calling
@@ -121,13 +126,13 @@ variant detector designed to find small polymorphisms, specifically SNPs
 (multi-nucleotide polymorphisms), and complex events (composite insertion and
 substitution events) smaller than the length of a short-read sequencing alignment.
 
-1. Select *FreeBayes* from *NGS: Variant Analysis* section of the tool menu (left
+1. Select *FreeBayes* from *Phenotype Association* section of the tool menu (left
 panel of Galaxy's interface)
 2. Run it:
   1. Load reference genome from local cache
   2. Use "Human (Homo sapiens): hg19" as reference genome
-  3. Choose default settings
-  4. Call all variants
+  3. Choose other default settings
+  4. Execute
 
 Congratulations, you have created you first VCF file, one of most complicated
 file formats in bioinformatics. In such a file your called variants are stored
@@ -138,23 +143,37 @@ compound variants into multiple independent variants and filter the VCF file
 to simplify the variant representation.
 
 1. Split your allelic primitives (gaps or mismatches) into multiple VCF lines
-with *VcfAllelicPrimitives* from *NGS: VCF Manipulation*:
+with *VcfAllelicPrimitives* from *VCF Tools*:
   1. Select the *FreeBayes* output file as VCF dataset
   2. Make sure "Maintain site and allele-level annotations when decomposing" and
   "Maintain genotype-level annotations when decomposing" are set to "Yes"
-5. Filter your VCF file with *SnpSift Filter* from *NGS: VCF Manipulation* to
+5. Filter your VCF file with *SnpSift Filter* from *Annotation* to
 only conserve SNPs with a Quality >= 30 and a Coverage >= 10
+
   Have a look at the examples to help you construct the correct expression.
 
 ### Annotate your variants
 
-6. Get the [dbSNP_138.hg19.vcf](https://zenodo.org/record/60285/files/dbSNP_138.hg19.vcf) (what is it?)
-7. Assign know variants ID's form dbSNP to your variants, using *SnpSift Annotate*.
-8. Annotate your variants with some functional information with *SnpEff*
+To annotate the variants, we use the [dbSNP](http://www.ncbi.nlm.nih.gov/SNP/),
+the NCBI database of genetic variation. Here, we use the dbSNP Build 138 data,
+available on the human assembly (GRCh37/hg19).
 
-Look at your "INFO" column again in the VCF file. You will get some gene names
-for your variants, but also a predicted impact and if your variant is located
-inside of a known gene.
+6. Import the [dbSNP_138.hg19.vcf](https://zenodo.org/record/60285/files/dbSNP_138.hg19.vcf)
+in your history
+7. Assign the known variant ID from dbSNP to your variants, using
+*SnpSift Annotate* from *Annotation*
+8. Annotate your variants with some functional information
+  1. Download "hg19" database with *SnpEff Download* from *Annotation*
+  2. Launch annotation of your variants with *SnpEff* from
+  *Annotation*, using the downloaded database (reference genome from your
+  history)
+
+  Look at your "INFO" column again in the generated VCF file. You will get some
+  gene names for your variants, but also a predicted impact and if your variant
+  is located inside of a known gene.
+
+  You can also have a look at the HTML report. It contains a number of useful
+  metrics such as distribution of variants across gene features.
 
 ### Get the final VCF
 
@@ -165,26 +184,60 @@ you need for your further studies is included in your VCF file.
 2. Apply this workflow to the other BAM files
 
   You should now have 3 annotated variant files, from mother, father and the
-  patient. It might be a good idea to rename them accordingly
+  patient. It might be a good idea to rename them accordingly.
 
-3. Combine all 3 files into one with the tool *VCFcombine*
+3. Combine all 3 files into one with the tool *VCFcombine* from
+*VCF Tools*
+
+Now that we have an annotated VCF file it is time to peek inside our variation data
 
 ## Post-processing and variant analysis
 
-11. Create a pedigree file (PED) with the content given in the table at the bottom. (how?)
-12. Use the tool *GEMINI load* (version 0.18.1) to create a database out of your combined VCF file and the PED file.
+11. Create a pedigree file (PED) like this
 
-    This can take some time, especially if we had a big vcf file.
+```
+#family_id	sample_id	paternal_id	maternal_id	sex	phenotype	ethnicity
+family1	RS024M-MOTHER	-9	-9	2	1	CEU
+family1	RS024V-FATHER	-9	-9	1	1	CEU
+family1	RS024P-PATIENT	RS024V-FATHER	RS024M-MOTHER	1	2	CEU
+```
 
-13. Import the new
-[GEMINI test database 0.18.1](https://github.com/bgruening/training_data/raw/master/GEMINI%20test%20database.tar.gz)
-14. Either way you have know a database with all your variants, with pedigree relations, additional annotations and most importantly its fast to search. Have a look at all different GEMINI tools and run as many tools as possible on your test GEMINI databases.
+12. Use the tool *GEMINI load* in *Gemini* to create a database out of your
+combined VCF file and the PED file.
 
-Try to get a feeling of what is possible with a variant database in GEMINI.
+    This creates a sqlite database. To see the content of the database use
+    *GEMINI_db_info*.
 
-- GEMINI query is the most versatile of all the GEMINI tools. You can use it to ask 'interesting' questions in simple SQL (see the GEMINI handbook on its usage). Switch on the --header parameter.
-- "select chrom, start, end from variants" will show you some information on all variants that were found in any of the three samples
-- "select chrom, start, end, (gts).(*) from variants" will also show you the genotype of each sample also with the help wildcards
-- "select chrom, start, end, gene, impact, (gts).(*) from variants v where v.impact_severity='HIGH'" will show you some more information and filter out only those variants that have a high impact
-- "select chrom, vcf_if, start, end, ref, alt, gene, impact, (gts).(*) from variants v where v.impact_severity='HIGH'" also shows you the reference allele and the alternative allele and the RSID for the snp if it exists
-- Pick one of your found variants and look at this position in IGV with all 3 BAM files loaded.
+
+Either way you have now a database with all your variants, with pedigree
+relations, additional annotations and most importantly its fast to search.
+Have a look at all different GEMINI tools and run as many tools as possible on
+your GEMINI databases. Try to get a feeling of what is possible with a variant
+database in GEMINI.
+
+*GEMINI query* is the most versatile of all the GEMINI tools. You can use it to
+ask 'interesting' questions in simple SQL (see the GEMINI handbook on its usage).
+For example:
+
+- `select chrom, start, end from variants` will show you some information on all
+variants that were found in any of the three samples
+- `select chrom, start, end, (gts).(*) from variants` will also show you the
+genotype of each sample also with the help wildcards
+- `select chrom, start, end, gene, impact, (gts).(*) from variants v where v.impact_severity='HIGH'`
+will show you some more information and filter out only those variants that
+have a high impact
+- `select chrom, vcf_if, start, end, ref, alt, gene, impact, (gts).(*) from variants v where v.impact_severity='HIGH'`
+also shows you the reference allele and the alternative allele and the RSID for
+the SNP if it exists
+
+**Tips: Switch on the `--header` parameter**
+
+To go further on Gemini, you can have a look at the following tutorials:
+
+- [Introduction](https://s3.amazonaws.com/gemini-tutorials/Intro-To-Gemini.pdf)
+- [Identifying *de novo* mutations underlying Mendelian disease](https://s3.amazonaws.com/gemini-tutorials/Gemini-DeNovo-Tutorial.pdf)
+- [Identifying autosomal recessive variants underlying Mendelian disease](https://s3.amazonaws.com/gemini-tutorials/Gemini-Recessive-Tutorial.pdf)
+- [Identifying autosomal dominant variants underlying Mendelian disease](https://s3.amazonaws.com/gemini-tutorials/Gemini-Dominant-Tutorial.pdf)
+
+And for a more detailed tutorial on variant data generation in Galaxy, have a
+look at the [tutorial on diploid variant calling](https://github.com/nekrut/galaxy/wiki/Diploid-variant-calling). 
