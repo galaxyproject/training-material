@@ -1,4 +1,5 @@
-## Variant calling: Diploid case
+Variant calling: Diploid case
+===
 
 > Much of Galaxy-related features described in this section have been developed by Björn Grüning (@bgruening) and configured by Dave Bouvier (@davebx).
 
@@ -19,7 +20,7 @@ A typical workflow for variation discovery involves the following steps (e.g., s
 
 However, continuing evolution of variant detection methods has made some of these steps obsolete. For instance, omitting quality score recalibration and re-alignment (steps 3 and 4 above) when using haplotype-aware variant callers such as [FreeBayes](https://github.com/ekg/freebayes) does not have an effect on the resulting calls (see Brad Chapman's methodological comparisons at [bcbio](http://bit.ly/1S9kFJN)). Before going forward with an actual genotype calling in Galaxy let's take a look as some basic ideas behind modern variant callers.
 
-### How does SNP calling and genotyping work?
+# How does SNP calling and genotyping work?
 
 Consider a set of sequencing reads derived from a diploid individual:
 
@@ -33,71 +34,71 @@ READ4:            cggcaGtagcatat
 READ5:     atcatgacggcaGtagc
 ```
 
-The capitalized position contains a G->A [transition](https://en.wikipedia.org/wiki/Transition_(genetics)). So, in principle this can be a heterozygous site with two alleles `G` and `A`. A commonly used naïve procedure would define a site as *heterozygous* if there is a non-reference allele with frequency between 20% and 80%. In this case `A` is present in 1/5 or 20% of the cases, so we can say that this is a heterozygous site. Yet it is only represented by a single read and is hardly reliable. Here are some of the possibilities that would explain this *variant*. It can be:
+The capitalized position contains a G->A [transition](https://en.wikipedia.org/wiki/Transition_(genetics)). So, in principle this can be a heterozygous site with two alleles **G** and **A**. A commonly used naïve procedure would define a site as *heterozygous* if there is a non-reference allele with frequency between 20% and 80%. In this case **A** is present in 1/5 or 20% of the cases, so we can say that this is a heterozygous site. Yet it is only represented by a single read and is hardly reliable. Here are some of the possibilities that would explain this *variant*. It can be:
 
  * A true variant;
  * A library preparation artifact (e.g., a PCR error);
  * A base call error;
  * A misalignment (though unlikely in the above example).
 
-The modern variant callers attempt to assign a reliability estimate for each genotype call. This is done using Bayes reasoning (for a great visual explanation see [blog](https://oscarbonilla.com/2009/05/visualizing-bayes-theorem/) by Oscar Bonilla). Here we present a SNP-relevant "translation" on this explanation (with inspiration from [Erik Garrison](https://github.com/ekg)). 
+The modern variant callers attempt to assign a reliability estimate for each genotype call. This is done using Bayes reasoning (for a great visual explanation see [blog](https://oscarbonilla.com/2009/05/visualizing-bayes-theorem/) by Oscar Bonilla). Here we present a SNP-relevant "translation" on this explanation (with inspiration from [Erik Garrison](https://github.com/ekg)).
 
-Suppose you have `A` samples with a variant in a population. You are performing re-sequencing and observe a variant in `B` of your sequencing reads. We want to estimate the probability of having the real polymorphism `A` given our observations in `B`. The logic is as follows:
- * The probability of having polymorphism **A** in the population is *P*(*A*) = |*A*|/|*U*|;
- * The probability of seeing a variant given our identification approach (i.e., sequencing) is *P*(*B*) = |*B*|/|*U*|;
- * Now, the probability of having a variant and it being observed in our sequencing data is the overlap between **A** and **B** sets *P*(*AB*) = |*AB*|/|*U*|. 
+Suppose you have **A** samples with a variant in a population. You are performing re-sequencing and observe a variant in **B** of your sequencing reads. We want to estimate the probability of having the real polymorphism **A** given our observations in **B**. The logic is as follows:
+ * The probability of having polymorphism **A** in the population is *P(A) = |A|/|U|*;
+ * The probability of seeing a variant given our identification approach (i.e., sequencing) is *P(B) = |B|/|U|*;
+ * Now, the probability of having a variant and it being observed in our sequencing data is the overlap between **A** and **B** sets *P(AB) = |AB|/|U|*.
 
 | Polymorphisms | Variant Calls | Polymorphisms and Variant Calls |
 |---------------|---------------|---------------------------------|
-|![](https://github.com/nekrut/galaxy/wiki/images/pA.png)|![](https://github.com/nekrut/BMMB554/blob/master/images/pB.png)|![](https://github.com/nekrut/galaxy/wiki/images/pAB.png)|
+|![](../images/pA.png)|![](../images/pB.png)|![](../images/pAB.png)|
 
-Now we can ask the following question: *What is the probability of a having a real polymorphism* **A** *given our observation of variants in reads* **B**? In other words *what is the probability of* **A** *given* **B**? Or, as stated in the original [blog](https://oscarbonilla.com/2009/05/visualizing-bayes-theorem/): "*given that we are in region `B` what is the probability that we are in the region `AB`*?":
+Now we can ask the following question: *What is the probability of a having a real polymorphism* ***A*** *given our observation of variants in reads* ***B***? In other words *what is the probability of* ***A*** *given* ***B***? Or, as stated in the original [blog](https://oscarbonilla.com/2009/05/visualizing-bayes-theorem/): "*given that we are in region* ***B*** *what is the probability that we are in the region* ***AB***?":
 
- * *P*(*A*|*B*) = |*AB*|/|*B*|.
- * Dividing by |*U*|: *P*(*A*|*B*) = (|*AB*|/|*U*|) / (|*B*|/|*U*|)
- * Because we know that *P*(*AB*) = |*AB*|/|*U*| and *P*(*B*) = |*B*|/|*U*| we can rewrite the equation in the previous bullet point as *P*(*A*|*B*) = *P*(*AB*)/*P*(*B*)
+ * *P(A|B) = |AB|/|B|*.
+ * Dividing by *|U|*: *P(A|B) = (|AB|/|U|) / (|B|/|U|)*
+ * Because we know that *P(AB) = |AB|/|U|* and *P(B) = |B|/|U|*, we can rewrite the equation in the previous bullet point as *P(A|B) = P(AB)/P(B)*
 
-Now, let's ask an opposite question. Given a true polymorphism **A** what are the chances that we do detect it (i.e., find ourselves in **AB**)? It will be *P*(*B*|*A*) = *P*(*AB*)/*P*(*A*). So, because we know that *P*(*A*|*B*) = *P*(*AB*)/*P*(*B*) and we just reasoned that *P*(*B*|*A*) = *P*(*AB*)/*P*(*A*), we can say that *P*(*A*|*B*)*P*(*B*) = *P*(*B*|*A*)*P*(*A*) leading us to the Bayes formula *P*(*A*|*B*) = *P*(*B*|*A*)*P*(*A*)/*P*(*B*). 
+Now, let's ask an opposite question. Given a true polymorphism **A** what are the chances that we do detect it (*i.e.*, find ourselves in **AB**)? It will be *P(B|A) = P(AB)/P(A)*. So, because we know that *P(A|B) = P(AB)/P(B)* and we just reasoned that *P(B|A) = P(AB)/P(A)*, we can say that *P(A|B)P(B) = P(B|A)P(A)* leading us to the Bayes formula *P(A|B) = P(B|A)P(A)/P(B)*.
 
-Translating this into "genomics terms" the probability of having a genotype **G** given reads **R** is:  *P*(*G*|*R*) = *P*(*R*|*G*)*P*(*G*)/*P*(*R*). Because in a given calculation of *P*(*G*|*R*) reads are fixed we can re-write the Bayes formula in the following way *P*(*G*|*R*) ~ *P*(*R*|*G*)*P*(*G*) with *P*(*R*) becoming a constant. This leaves us with the need to estimate two things:
+Translating this into "genomics terms" the probability of having a genotype **G** given reads **R** is:  *P(G|R) = P(R|G)P(G)/P(R)*. Because in a given calculation of *P(G|R)* reads are fixed we can re-write the Bayes formula in the following way *P(G|R) ~ P(R|G)P(G)* with *P(R)* becoming a constant. This leaves us with the need to estimate two things:
 
- 1. *P*(*R*|*G*), the data likelihood;
- 2. *P*(*G*), the prior probability for the variant. 
+ 1. *P(R|G)*, the data likelihood;
+ 2. *P(G)*, the prior probability for the variant.
 
 In the simplest case we can estimate these as follows:
 
-#### *P*(*R*|*G*)
+#### *P(R|G)*
 
-Suppose *R*<sub>*i*</sub> is a base in read *i* corresponding to a genome position with genotype *G*. The probability of seeing *R*<sub>*i*</sub> given *G*, *P*(*R*<sub>*i*</sub>|*G*), is given by the quality score of *R*<sub>*i*</sub> (the quality scores are given by base calling software and reported as [phred scores](https://en.wikipedia.org/wiki/Phred_quality_score)). Thus the genotype likelihood *P*(*R*|*G*) is the product of *P*(*R*<sub>*i*</sub>|*G*) over all *i*. In reality however there are many other sources of uncertainty (in addition to base qualities) that are incorporated in the calculation of data likelihoods including NGS technology-related issues, dependency of error rates on substitution type (e.g., transitions versus transversions), sequencing context etc...
+Suppose *R<sub>i</sub>* is a base in read *i* corresponding to a genome position with genotype *G*. The probability of seeing *R<sub>i</sub>* given *G*, *P(R<sub>i</sub>|G)*, is given by the quality score of *R<sub>i</sub>* (the quality scores are given by base calling software and reported as [phred scores](https://en.wikipedia.org/wiki/Phred_quality_score)). Thus the genotype likelihood *P(R|G)* is the product of *P(R<sub>i</sub>|G)* over all *i*. In reality however there are many other sources of uncertainty (in addition to base qualities) that are incorporated in the calculation of data likelihoods including NGS technology-related issues, dependency of error rates on substitution type (e.g., transitions versus transversions), sequencing context etc...
 
-#### *P*(*G*) - a single sample case
+#### *P(G)* - a single sample case
 
-One can assign an equal probability to all possible genotypes, or to source this information based on previously obtained knowledge containing in a database, such as [dbSNP](http://www.ncbi.nlm.nih.gov/SNP/). In this case (as exemplified in [Nielsen et al.](http://www.nature.com/nrg/journal/v12/n6/full/nrg2986.html)) we may, for instance, have a site with a **G/T** polymorphism and genotypes **GG**, **TT**, and **GT** having frequencies of 0.45, 0.45, 0.09, respectively. We will use these values as priors.
+One can assign an equal probability to all possible genotypes, or to source this information based on previously obtained knowledge containing in a database, such as [dbSNP](http://www.ncbi.nlm.nih.gov/SNP/). In this case (as exemplified in [Nielsen et al.](http://www.nature.com/nrg/journal/v12/n6/full/nrg2986.html) we may, for instance, have a site with a **G/T** polymorphism and genotypes **GG**, **TT**, and **GT** having frequencies of 0.45, 0.45, 0.09, respectively. We will use these values as priors.
 
-#### *P*(*G*) - a multi-sample case
+#### *P(G)* - a multi-sample case
 
 Genotype calling reliability can be significantly improved when analyzing multiple samples jointly. In this case genotype frequencies can be inferred from allele frequencies using Hardy-Weinberg equilibrium ([HWE](https://en.wikipedia.org/wiki/Hardy%E2%80%93Weinberg_principle)). The following example (again from [Nielsen et al.](http://www.nature.com/nrg/journal/v12/n6/full/nrg2986.html)) illustrates this idea: suppose you are calling genotypes for a single individual using a combination of multiple samples. There are two genotypes, **AT** and **AA**, with equally large genotype likelihoods. If, however, in our collection of multiple samples the frequency of **A** is 1% (*p* = 0.01; *q* = 1 - *p* = 0.99), then from the HWE we have:
 
-| AA (*p*<sup>2</sup>)   |   AT (2*pq*) |   TT (*q*<sup>2</sup>)| 
+| AA (*p<sup>2</sup>*)   |   AT (2*pq*) |   TT (*q<sup>2</sup>*)|
 |---------|---------|--------|
 | 0.0001 | 0.0198 | 0.9801 |
 
-This makes it highly unlikely that **AA** is a true genotype of this individual. 
+This makes it highly unlikely that **AA** is a true genotype of this individual.
 
 #### Calling with FreeBayes
 
-[FreeBayes](https://github.com/ekg/freebayes) is an open source varinat caller that has been battle tested by the 1000 Genomes community and is extensively used today (also see [bcbio](https://bcbio.wordpress.com/)). It has a number of features that simply variant discovery workflows. These include (from FreeBayes github page):
- 
+[FreeBayes](https://github.com/ekg/freebayes) is an open source variant caller that has been battle tested by the 1000 Genomes community and is extensively used today (also see [bcbio](https://bcbio.wordpress.com/)). It has a number of features that simply variant discovery workflows. These include (from FreeBayes github page):
+
 * **Indel realignment is accomplished internally** using a read-independent method, and issues resulting from discordant alignments are dramatically reducedy through the direct detection of haplotypes;
 * **The need for base quality recalibration is avoided** through the direct detection of haplotypes. Sequencing platform errors tend to cluster (e.g. at the ends of reads), and generate unique, non-repeating haplotypes at a given locus;
-* **Variant quality recalibration is avoided** by incorporating a number of metrics, such as read placement bias and allele balance, directly into the Bayesian model; 
+* **Variant quality recalibration is avoided** by incorporating a number of metrics, such as read placement bias and allele balance, directly into the Bayesian model;
 * **Ability to incorporate non-diploid cases** such as pooled datasets or data from polyploid samples.
 
-Freebayes id a *haplotype-based* variant caller. This implies that instead of looking at an individual positions within an alignment of reads to the reference genome, it looks at a haplotype window, length of which is dynamically determined (see section 3.2. in [FreeBayes manuscript](http://arxiv.org/pdf/1207.3907v2.pdf)):
+Freebayes is a *haplotype-based* variant caller. This implies that instead of looking at an individual positions within an alignment of reads to the reference genome, it looks at a haplotype window, length of which is dynamically determined (see section 3.2. in [FreeBayes manuscript](http://arxiv.org/pdf/1207.3907v2.pdf)):
 
 |Haplotype-based calling |
 |------------------------|
-|![](https://github.com/nekrut/galaxy/wiki/images/freebayes.png)|
+|![](../images/freebayes.png)|
 |<sub>Looking at a haplotype window makes misalignments tolerable. In this case a low complexity poly(A) stretch is misaligned. As a result looking at individual positions will result in calling multiple spurious varians. In the case of FreeBayes looking at a haplotype identifies two alleles (this is a diploid example) `A(7)` and `A(6)`, while `A(8)` is likely an error. Image by [Erik Garrison](https://github.com/ekg/freebayes)</sub>|
 
 ### Let's try it
@@ -110,7 +111,7 @@ In this example we will perform variant calling and annotation using [genome in 
 * HG003- NA24149 - hu6E4515 (father)
 * HG004- NA24143 - hu8E87A9 (mother)
 
-Yet for a quick tutorial these datasets are way too big, so we created a downsampled dataset. This dataset was produced by mapping the trio reads against `hg19` version of the human genome, merging the resulting bam files together (we use readgroups to label individual reads so they can be traced to each of the original individuals), and restricting alignments to a small portion of chromosome 19 containing the [*POLRMT*](http://www.ncbi.nlm.nih.gov/gene?cmd=Retrieve&dopt=Graphics&list_uids=5442) gene. 
+Yet for a quick tutorial these datasets are way too big, so we created a downsampled dataset. This dataset was produced by mapping the trio reads against `hg19` version of the human genome, merging the resulting bam files together (we use readgroups to label individual reads so they can be traced to each of the original individuals), and restricting alignments to a small portion of chromosome 19 containing the [*POLRMT*](http://www.ncbi.nlm.nih.gov/gene?cmd=Retrieve&dopt=Graphics&list_uids=5442) gene.
 
 Here is what to do to load the data:
 
@@ -123,7 +124,7 @@ Here is what to do to load the data:
 
 #### Generating and post-processing FreeBayes calls
 
-Select **FreeBayes** from **NGS: Variant Analysis** section of the tool menu (left pane of Galaxy's interface). 
+Select **FreeBayes** from **NGS: Variant Analysis** section of the tool menu (left pane of Galaxy's interface).
 
 | Running FreeBayes |
 |------------------|
@@ -159,7 +160,7 @@ At this point we are ready to begin annotating variants using [SnpEff](http://sn
 |![](https://github.com/nekrut/galaxy/wiki/images/snpeff_codons.png)|
 
 ### Manipulating variation data with GEMINI
-Now that we have an annotated VCF file it is time to peek inside our variation data. [Aaron Quinlan](http://quinlanlab.org/), creator of [GEMINI](http://gemini.readthedocs.org/en/latest/index.html), calls it *Detective work*. 
+Now that we have an annotated VCF file it is time to peek inside our variation data. [Aaron Quinlan](http://quinlanlab.org/), creator of [GEMINI](http://gemini.readthedocs.org/en/latest/index.html), calls it *Detective work*.
 
 #### Loading data into GEMINI
 
@@ -169,7 +170,7 @@ The first step is to convert a VCF file we would like to analyze into a GEMINI d
 #family_id sample_id            paternal_id          maternal_id         sex phenotype ethnicity
 family1    HG004_NA24143_mother -9                   -9                   2  1         CEU
 family1	   HG003_NA24149_father -9                   -9                   1  1         CEU
-family1	   HG002_NA24385_son	HG003_NA24149_father HG004_NA24143_mother 1  2         CEU 
+family1	   HG002_NA24385_son	HG003_NA24149_father HG004_NA24143_mother 1  2         CEU
 ```
 So let's load data into GEMINI:
 
@@ -183,9 +184,9 @@ So let's load data into GEMINI:
 
 #### Querying GEMINI database
 
-GEMINI database is queried using the versatile SQL language (more on SQL [here](http://swcarpentry.github.io/sql-novice-survey)). In Galaxy's version of GEMINI this is done using **GEMINI_query** tool. Within this tool SQL commands are typed directly into the **The query to be issued to the database** text box. Let's begin getting information from some of the tables we discovered with **GEMINI_db_info** tool above. 
+GEMINI database is queried using the versatile SQL language (more on SQL [here](http://swcarpentry.github.io/sql-novice-survey)). In Galaxy's version of GEMINI this is done using **GEMINI_query** tool. Within this tool SQL commands are typed directly into the **The query to be issued to the database** text box. Let's begin getting information from some of the tables we discovered with **GEMINI_db_info** tool above.
 >
-The examples below are taken from "[Intro to Gemini](https://s3.amazonaws.com/gemini-tutorials/Intro-To-Gemini.pdf)" tutorial. For extensive documentation see "[Querying GEMINI](http://gemini.readthedocs.org/en/latest/content/querying.html)". 
+The examples below are taken from "[Intro to Gemini](https://s3.amazonaws.com/gemini-tutorials/Intro-To-Gemini.pdf)" tutorial. For extensive documentation see "[Querying GEMINI](http://gemini.readthedocs.org/en/latest/content/querying.html)".
 
 | Querying GEMINI database |
 |------------------|
@@ -231,7 +232,7 @@ Wilcards simply writing SQL expressions when searching across multiple terms. Th
 
 #### Going further
 
-This short tutorial should give you an overall idea on how generate variant data in Galaxy and process it with GEMINI. Yet there is much more to learn. Below we list GEMINI tutorials and links to Galaxy libraries with relevant data. 
+This short tutorial should give you an overall idea on how generate variant data in Galaxy and process it with GEMINI. Yet there is much more to learn. Below we list GEMINI tutorials and links to Galaxy libraries with relevant data.
 
 | Tutorial | PDF | Data | Galaxy History |
 |:----------|:-----:|:------:|:----------------:|
@@ -263,6 +264,6 @@ This short tutorial should give you an overall idea on how generate variant data
 * and so on....
 
 ### If things don't work...
-...you need to complain. Use [Galaxy's BioStar Channel](https://usegalaxy.org/biostar/biostar_redirect) to do this. 
+...you need to complain. Use [Galaxy's BioStar Channel](https://usegalaxy.org/biostar/biostar_redirect) to do this.
 
 ### :clap: The End
