@@ -24,6 +24,8 @@ The Galaxy community offers many different ways of training. The table above lis
  - :book: The training course and material is available as annotated text (:thumbsup: hands-on training).
 
 
+<a href="https://wiki.galaxyproject.org/Teach/GTN"><img src="https://github.com/bgruening/training-material/blob/master/shared/images/GTNLogo1000.png" width="35%">
+
 # License
 
 This work is licensed under the [Creative Commons Attribution 3.0 Unported License](http://creativecommons.org/licenses/by/3.0/).
