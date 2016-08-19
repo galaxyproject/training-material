@@ -1,12 +1,17 @@
 # Galaxy - Exome sequencing training material
 
-FROM quay.io/bgruening/galaxy:dev
+FROM bgruening/galaxy-stable:16.04
 
 MAINTAINER Björn A. Grüning, bjoern.gruening@gmail.com
 
 ENV GALAXY_CONFIG_BRAND Exome sequencing
 ENV ENABLE_TTS_INSTALL True
 
+# Enable Conda dependency resolution
+ENV GALAXY_CONFIG_CONDA_AUTO_INSTALL=True \
+    GALAXY_CONFIG_CONDA_AUTO_INIT=True
+
+# Install tools
 ADD exome_seq.yaml $GALAXY_ROOT/tools.yaml
 RUN install-tools $GALAXY_ROOT/tools.yaml
 
