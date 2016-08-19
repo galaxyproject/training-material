@@ -103,20 +103,20 @@ The raw exome sequences were mapped on `hg19` version of the human genome. So,
 for each family member, we will start with one BAM file with mapping results.
 
 1. Import all 3 BAM's into a new history:
-  - [Father](https://zenodo.org/record/60520/files/father.bam)  
-  - [Mother](https://zenodo.org/record/60520/files/mother.bam)  
-  - [Child = Patient](https://zenodo.org/record/60520/files/patient.bam)
+    - [Father](https://zenodo.org/record/60520/files/father.bam)  
+    - [Mother](https://zenodo.org/record/60520/files/mother.bam)  
+    - [Child = Patient](https://zenodo.org/record/60520/files/patient.bam)
 2. Specify the used genome for mapping (for each dataset)
-  1. Click on **Edit attributes** (pencil icon on right panel)
-  2. Select `Human Feb 2009` on **Database/Build**
-  3. Save it
+    1. Click on **Edit attributes** (pencil icon on right panel)
+    2. Select `Human Feb 2009` on **Database/Build**
+    3. Save it
 2. Import the reference genome
-  1. Go on **Data Libraries** in **Shared data** (top panel on Galaxy's interface)
-  2. Click on **Training Data**
-  3. Select `hg19`
-  4. Click on **Import selected datasets into history** (just below the top panel)
-  5. Import it
-  6. Convert it from 2bit to fasta with **twoBitToFa** from **Convert Formats**
+    1. Go on **Data Libraries** in **Shared data** (top panel on Galaxy's interface)
+    2. Click on **Training Data**
+    3. Select `hg19`
+    4. Click on **Import selected datasets into history** (just below the top panel)
+    5. Import it
+    6. Convert it from 2bit to fasta with **twoBitToFa** from **Convert Formats**
 2. Follow the next steps for father data and then apply the generated workflow on other datasets
 
 ## Variant calling
@@ -132,10 +132,10 @@ substitution events) smaller than the length of a short-read sequencing alignmen
 1. Select **FreeBayes** from **Phenotype Association** section of the tool menu (left
 panel of Galaxy's interface)
 2. Run it:
-  1. Load reference genome from local cache
-  2. Use `Human (Homo sapiens): hg19` as reference genome
-  3. Choose other default settings
-  4. Execute
+    1. Load reference genome from local cache
+    2. Use `Human (Homo sapiens): hg19` as reference genome
+    3. Choose other default settings
+    4. Execute
 
 Congratulations, you have created you first VCF file, one of most complicated
 file formats in bioinformatics. In such a file your called variants are stored
@@ -147,9 +147,9 @@ to simplify the variant representation.
 
 1. Split your allelic primitives (gaps or mismatches) into multiple VCF lines
 with **VcfAllelicPrimitives** from **VCF Tools**:
-  1. Select the FreeBayes output file as VCF dataset
-  2. Make sure **Maintain site and allele-level annotations when decomposing** and
-  **Maintain genotype-level annotations when decomposing** are set to `Yes`
+    1. Select the FreeBayes output file as VCF dataset
+    2. Make sure **Maintain site and allele-level annotations when decomposing** and
+    **Maintain genotype-level annotations when decomposing** are set to `Yes`
 5. Filter your VCF file with **SnpSift Filter** from **Annotation** to
 only conserve SNPs with a Quality >= 30 and a Coverage >= 10
 
@@ -165,17 +165,17 @@ in your history (Build 138 data, available on the human assembly (GRCh37/hg19))
 7. Assign the known variant ID from dbSNP to your variants, using
 **SnpSift Annotate** from **Annotation**
 8. Annotate your variants with some functional information
-  1. Download `hg19` database with **SnpEff Download** from **Annotation**
-  2. Launch annotation of your variants with **SnpEff** from
-  **Annotation**, using the downloaded database (reference genome from your
-  history)
+    1. Download `hg19` database with **SnpEff Download** from **Annotation**
+    2. Launch annotation of your variants with **SnpEff** from
+    **Annotation**, using the downloaded database (reference genome from your
+    history)
 
-  Look at your "INFO" column again in the generated VCF file. You will get some
-  gene names for your variants, but also a predicted impact and if your variant
-  is located inside of a known gene.
+    Look at your "INFO" column again in the generated VCF file. You will get some
+    gene names for your variants, but also a predicted impact and if your variant
+    is located inside of a known gene.
 
-  You can also have a look at the HTML report. It contains a number of useful
-  metrics such as distribution of variants across gene features.
+    You can also have a look at the HTML report. It contains a number of useful
+    metrics such as distribution of variants across gene features.
 
 ### Get the final VCF
 
@@ -185,8 +185,8 @@ you need for your further studies is included in your VCF file.
 1. Extract your history to a workflow
 2. Apply this workflow to the other BAM files
 
-  You should now have 3 annotated variant files, from mother, father and the
-  patient. It might be a good idea to rename them accordingly.
+    You should now have 3 annotated variant files, from mother, father and the
+    patient. It might be a good idea to rename them accordingly.
 
 3. Combine all 3 files into one with the tool **VCFcombine** from
 **VCF Tools**
