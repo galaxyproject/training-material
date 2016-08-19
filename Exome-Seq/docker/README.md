@@ -85,7 +85,7 @@ image:
 - Clone this repository
 - Move to the current subdirectory (`cd Exome-Seq/docker`)
 - Build an image of the docker content with `docker build -t galaxy-exome-seq-training .`
-- Run your container with `docker run -p 8080:80 galaxy-exome-seq-training`
+- Run your container with `docker run -d -p 8080:80 galaxy-exome-seq-training`
 - Access your Galaxy instance via [http://localhost:8080](http://localhost:8080)
 
 Once you are done with your container, you can stop and deleted it as described
