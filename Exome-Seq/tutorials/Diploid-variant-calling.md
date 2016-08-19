@@ -121,14 +121,20 @@ In this example we will perform variant calling and annotation using [genome in 
 * HG003- NA24149 - hu6E4515 (father)
 * HG004- NA24143 - hu8E87A9 (mother)
 
-Yet for a quick tutorial these datasets are way too big, so we created a downsampled dataset. This dataset was produced by mapping the trio reads against `hg19` version of the human genome, merging the resulting bam files together (we use readgroups to label individual reads so they can be traced to each of the original individuals), and restricting alignments to a small portion of chromosome 19 containing the [*POLRMT*](http://www.ncbi.nlm.nih.gov/gene?cmd=Retrieve&dopt=Graphics&list_uids=5442) gene.
+Yet for a quick tutorial these datasets are way too big, so we created a [downsampled dataset](http://dx.doi.org/10.5281/zenodo.60520). This dataset was produced by mapping the trio reads against `hg19` version of the human genome, merging the resulting bam files together (we use readgroups to label individual reads so they can be traced to each of the original individuals), and restricting alignments to a small portion of chromosome 19 containing the [*POLRMT*](http://www.ncbi.nlm.nih.gov/gene?cmd=Retrieve&dopt=Graphics&list_uids=5442) gene.
 
-Here is what to do to import the data into your history and then specify the used
-genome for mapping (for each dataset):
-
-1. Click on **Edit attributes** (pencil icon on right panel)
-2. Select `Human Feb 2009` on **Database/Build**
-3. Save it
+1. Import [the data](https://zenodo.org/record/60520/files/GIAB-Ashkenazim-Trio.txt) into your history
+2. Specify the used genome for mapping
+    1. Click on **Edit attributes** (pencil icon on right panel)
+    2. Select `Human Feb 2009` on **Database/Build**
+    3. Save it
+3. Import the reference genome
+    1. Go on **Data Libraries** in **Shared data** (top panel on Galaxy's interface)
+    2. Click on **Training Data**
+    3. Select `hg19`
+    4. Click on **Import selected datasets into history** (just below the top panel)
+    5. Import it
+    6. Convert it from 2bit to fasta with **twoBitToFa** from **Convert Formats**
 
 ## Generating and post-processing FreeBayes calls
 
