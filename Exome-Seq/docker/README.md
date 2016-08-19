@@ -12,7 +12,7 @@
 To launch:
 
 ```
-docker run -d -p 8080:80 bgruening/galaxy-exome-seq-training
+docker run -i -t -p 8080:80 bgruening/galaxy-training-exom-seq
 ```
 
 Explanation of this command line:
