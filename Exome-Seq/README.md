@@ -1,3 +1,7 @@
+[![Docker Automated buil](https://img.shields.io/docker/automated/bgruening/galaxy-training-exome-seq.svg?maxAge=2592000)](https://hub.docker.com/r/bgruening/galaxy-training-exome-seq/)
+[![Docker Pulls](https://img.shields.io/docker/pulls/bgruening/galaxy-training-exome-seq.svg?maxAge=2592000)](https://hub.docker.com/r/bgruening/galaxy-training-exome-seq/)
+[![Docker Stars](https://img.shields.io/docker/stars/bgruening/galaxy-training-exome-seq.svg?maxAge=2592000)](https://hub.docker.com/r/bgruening/galaxy-training-exome-seq/)
+
 Training course and material for Exome sequencing
 ====
 
