@@ -10,7 +10,7 @@ topic | features
 [Exome-seq](https://github.com/bgruening/training-material/blob/master/Exome-Seq/README.md) | :whale: :book:
 [MethylC-seq](https://github.com/bgruening/training-material/blob/master/Methylation-Seq/Methylation-Seq.md) | :book:
 [Galaxy Introduction](https://github.com/bgruening/training-material/blob/master/Galaxy_Introduction/Galaxy_Introduction.md ) | :book:  
-[Data Sources](https://github.com/bgruening/training-material/blob/master/Data_Sources/Data_Sources.md) | :book: 
+[Data Sources](https://github.com/bgruening/training-material/blob/master/Dev-Corner/Data-Sources/Data_Sources.md) | :book: 
 [Galaxy Tool Dev](http://planemo.readthedocs.io/en/latest/writing_appliance.html) | [:book:](http://planemo.readthedocs.io/en/latest/writing_appliance.html) 
 [Galaxy Docker Project](https://slides.com/bgruening/the-galaxy-docker-project/live#/) | [:book:](https://slides.com/bgruening/the-galaxy-docker-project/live#/) 
 
