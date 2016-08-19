@@ -116,6 +116,7 @@ for each family member, we will start with one BAM file with mapping results.
   3. Select `hg19`
   4. Click on **Import selected datasets into history** (just below the top panel)
   5. Import it
+  6. Convert it from 2bit to fasta with **twoBitToFa** from **Convert Formats**
 2. Follow the next steps for father data and then apply the generated workflow on other datasets
 
 ## Variant calling
