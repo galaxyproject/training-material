@@ -103,9 +103,9 @@ The raw exome sequences were mapped on `hg19` version of the human genome. So,
 for each family member, we will start with one BAM file with mapping results.
 
 1. Import all 3 BAM's into a new history:
-  - [Father](https://zenodo.org/record/60285/files/father.bam)  
-  - [Mother](https://zenodo.org/record/60285/files/mother.bam)  
-  - [Child = Patient](https://zenodo.org/record/60285/files/patient.bam)
+  - [Father](https://zenodo.org/record/60520/files/father.bam)  
+  - [Mother](https://zenodo.org/record/60520/files/mother.bam)  
+  - [Child = Patient](https://zenodo.org/record/60520/files/patient.bam)
 2. Specify the used genome for mapping (for each dataset)
   1. Click on **Edit attributes** (pencil icon on right panel)
   2. Select `Human Feb 2009` on **Database/Build**
@@ -160,8 +160,8 @@ To annotate the variants, we use the [dbSNP](http://www.ncbi.nlm.nih.gov/SNP/),
 the NCBI database of genetic variation. Here, we use the dbSNP Build 138 data,
 available on the human assembly (GRCh37/hg19).
 
-6. Import the [dbSNP_138.hg19.vcf](https://zenodo.org/record/60285/files/dbSNP_138.hg19.vcf)
-in your history
+6. Import the [dbSNP_138.hg19.vcf](https://zenodo.org/record/60520/files/dbSNP_138.hg19.vcf)
+in your history (Build 138 data, available on the human assembly (GRCh37/hg19))
 7. Assign the known variant ID from dbSNP to your variants, using
 **SnpSift Annotate** from **Annotation**
 8. Annotate your variants with some functional information

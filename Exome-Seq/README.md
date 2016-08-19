@@ -20,8 +20,10 @@ more details particularly on the theory behind.
 
 ## Input datasets
 
+[![DOI](https://zenodo.org/badge/doi/10.5281/zenodo.60520.svg)](http://dx.doi.org/10.5281/zenodo.60520)
+
 The input datasets for both tutorials are available on
-[Zenodo with a dedicated DOI](http://dx.doi.org/10.5281/zenodo.60285).
+[Zenodo with a dedicated DOI](http://dx.doi.org/10.5281/zenodo.60520).
 
 ## Galaxy instance
 
