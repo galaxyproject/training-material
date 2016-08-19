@@ -12,7 +12,7 @@
 To launch:
 
 ```
-docker run -i -t -p 8080:80 bgruening/galaxy-training-exom-seq
+docker run -i -t -p 8080:80 bgruening/galaxy-training-exome-seq
 ```
 
 Explanation of this command line:
@@ -25,8 +25,8 @@ port 8080 on your host.
   Inside the container a Apache Webserver is running on port 80 and that port
   can be bound to a local port on your host computer. With this parameter you
   can access your Galaxy instance via [http://localhost:8080](http://localhost:8080)
-- `bgruening/galaxy-exome-seq-training` is the Image/Container name,
-that directs docker to the correct path in the [docker index](https://index.docker.io/u/bgruening/galaxy-exome-seq-training/).
+- `bgruening/galaxy-training-exome-seq` is the Image/Container name,
+that directs docker to the correct path in the [docker index](https://index.docker.io/u/bgruening/galaxy-training-exome-seq/).
 - `-d` will start the docker container in daemon mode
 
 For a more detailed description, please consult
@@ -40,7 +40,7 @@ To install Tool Shed repositories or to save your data, you need to export the
 computed data to the host computer with
 
 ```
-docker run -d -p 8080:80 -v /home/user/galaxy_storage/:/export/ bgruening/galaxy-exome-seq-training
+docker run -d -p 8080:80 -v /home/user/galaxy_storage/:/export/ bgruening/galaxy-training-exome-seq
 ```
 
 With the additional `-v /home/user/galaxy_storage/:/export/` parameter, Docker
