@@ -1,0 +1,9 @@
+language: python
+
+before_script:
+  # check links in our markdown files
+  - pip install vl
+  - vl --version
+
+script:
+  - find . -name "*.md" -exec vl {} \;
