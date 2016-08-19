@@ -158,8 +158,7 @@ only conserve SNPs with a Quality >= 30 and a Coverage >= 10
 ### Annotate your variants
 
 To annotate the variants, we use the [dbSNP](http://www.ncbi.nlm.nih.gov/SNP/),
-the NCBI database of genetic variation. Here, we use the dbSNP Build 138 data,
-available on the human assembly (GRCh37/hg19).
+the NCBI database of genetic variation and then `hg19` database with **SnpEff**.
 
 6. Import the [dbSNP_138.hg19.vcf](https://zenodo.org/record/60520/files/dbSNP_138.hg19.vcf)
 in your history (Build 138 data, available on the human assembly (GRCh37/hg19))
