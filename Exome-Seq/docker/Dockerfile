@@ -22,3 +22,6 @@ RUN startup_lite && \
     sleep 30 && \
     . $GALAXY_VIRTUAL_ENV/bin/activate && \
     python $GALAXY_ROOT/setup_data_libraries.py -i $GALAXY_ROOT/library_data.yaml
+
+ADD https://raw.githubusercontent.com/galaxyproject/galaxy-tours/8bbd07bd906bf8182f1aa3bc6a573a98bd888667/exom-seq/exom-seq.yaml \
+  $GALAXY_ROOT/config/plugins/tours/exom-seq.yaml
