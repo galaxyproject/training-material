@@ -7,7 +7,7 @@ topic | features
 [Genome Annotation](https://github.com/bgruening/training-material/blob/master/Genome-Annotation/general-introduction/README.md) | :book:
 [RNA-seq](https://github.com/bgruening/training-material/blob/master/RNA-Seq/) | :whale: [:movie_camera:](https://vimeo.com/128268401) :eyes: [:page_facing_up:](https://usegalaxy.org/u/jeremy/p/galaxy-rna-seq-analysis-exercise) [:book:](https://github.com/bgruening/training-material/blob/master/rna-seq/rna-seq.md)
 [ChIP-seq](https://github.com/bgruening/training-material/blob/master/ChIP-Seq/ChIPseq.md) | :book:
-[Exome-seq](https://github.com/bgruening/training-material/blob/master/Exome-Seq/README.md) | :whale: :book:
+[Exome-seq](https://github.com/bgruening/training-material/blob/master/Exome-Seq/README.md) | [:whale:](https://github.com/bgruening/training-material/tree/master/Exome-Seq/docker) [:book:](https://github.com/bgruening/training-material/tree/master/Exome-Seq/tutorials) [:mortar_board:](http://bgruening.github.io/training-material/Exome-Seq/slides/index.html#/) [:eyes:](https://github.com/bgruening/training-material/tree/master/Exome-Seq/docker)
 [MethylC-seq](https://github.com/bgruening/training-material/blob/master/Methylation-Seq/Methylation-Seq.md) | :book:
 [Galaxy Introduction](https://github.com/bgruening/training-material/blob/master/Galaxy_Introduction/Galaxy_Introduction.md ) | :book:  
 [Data Sources](https://github.com/bgruening/training-material/blob/master/Dev-Corner/Data-Sources/Data_Sources.md) | :book: 
@@ -22,7 +22,7 @@ The Galaxy community offers many different ways of training. The table above lis
  - :eyes: The training course is available as [Galaxy tour](https://github.com/galaxyproject/galaxy-tours)
  - :page_facing_up: The training course and material is available as Galaxy page (:thumbsup: hands-on training).
  - :book: The training course and material is available as annotated text (:thumbsup: hands-on training).
-
+ - :mortar_board: Slides as Introduction
 
 <a href="https://wiki.galaxyproject.org/Teach/GTN"><img src="https://github.com/bgruening/training-material/blob/master/shared/images/GTNLogo1000.png" width="35%">
 
