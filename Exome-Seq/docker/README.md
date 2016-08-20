@@ -1,9 +1,12 @@
-:whale: Galaxy Docker repository for Exome sequencing training material
+Galaxy Docker repository for Exome sequencing training material :whale: :eyes:
 ====
+
+This Docker Image contains everything what is needed to run this training, including a interactive Galaxy Tour.
 
 # Requirements
 
-- [`docker`](https://docs.docker.com/installation/)
+- [Docker](https://docs.docker.com/installation/) for Linux / Windows / OSX
+- [Kitematic](https://kitematic.com/) for Windows / OS-X
 
 # Usage
 
