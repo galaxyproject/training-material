@@ -1,9 +1,20 @@
 language: python
 
 before_script:
+  # Spell checking?
+  #- apt-get install -y hunspell pandoc
+  #- wget https://cgit.freedesktop.org/libreoffice/dictionaries/tree/en/en_GB.aff
+  #- |
+  #  cat <<EOF >custom.dict
+  #  seq
+  #  MethylC
+  #  EOF
+
   # check links in our markdown files
   - pip install vl
   - vl --version
 
 script:
-  - find . -name "*.md" -exec vl --allow-codes 401 {} \;
+  #- pandoc -s README.md -f markdown -t plain -o README.md_plain
+  #- hunspell -d en_GB README.md_plain -p custom.dict -l
+  - find . -name "*.md" -exec vl -t 5 -s 1000 --allow-codes 401 --whitelist http://localhost:8080 {} \;
