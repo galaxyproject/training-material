@@ -26,6 +26,8 @@ The Galaxy community offers many different ways of training. The table above lis
 
 <a href="https://wiki.galaxyproject.org/Teach/GTN"><img src="https://github.com/bgruening/training-material/blob/master/shared/images/GTNLogo1000.png" width="35%">
 
+<script src="https://embed.github.com/view/geojson/bgruening/galaxy-maps/master/server.geojson"></script>
+
 # License
 
 This work is licensed under the [Creative Commons Attribution 3.0 Unported License](http://creativecommons.org/licenses/by/3.0/).
