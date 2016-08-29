@@ -13,7 +13,7 @@
 # * input: filename of the Github Flavored Markdown (GFM) syntax document
 # * output: filename of the HTML document to generate
 #
-# eg: ./gfm2html README.md > index.html
+# eg: ./gfm2html.sh README.md > index.html
 
 # read markdown file
 if [[ ! -n "$1" ]]; then
