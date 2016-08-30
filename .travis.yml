@@ -1,15 +1,22 @@
 sudo: false
 language: python
 python: 2.7
-before_script:
-    - git config user.name "Travis-CI"
-    - git config user.email "noreply@travis-ci.org"
-    - COMMIT_MESSAGE="[ci skip] Update site on `date "+%Y-%m-%d %H:%M:%S"`"
-script:
-    - ./gfm2html.sh README.md > index.html
-    - git add index.html
-    - git commit -m "${COMMIT_MESSAGE}"
-    - git push https://bebatut:${GH_TOKEN}@github.com/bebatut/training-material.git master
+
 env:
-  global:
-    secure: w6HLlMrD5EqyfzSCuBUFJtLp5v5DGILIocy1rt5+QJLXoEvjuMTCgcT3k+1hWqzLme4kKTjmLFOB86rXX/jVha8Kpxd6c5uW7v5Fb1MW5ttB0bexcFQuD63mOdroCuT7ootnI5svggG0m2m9hZKuAAlgVwno4RWe05l97+oyJR2p+h/rurTxrwIc3d+1P0HBWZ7wWb1chY1h/8dP44FV02hBd4/DKGBCYavmwsCbsdzmjq4gkbVD9lLlqI/8cvyoy+TboY9ZkYinUKmxz2DGwnc7o8zuxCGOGgDaopsuwwEhh+k1xCEo2BgQA1LajQpIM5MaoYbIuCHd4ENNzv52CRffufsfCJ/Had/7zaZ1qhdExQbXXR7v/pMKVtmKBnFVoTVTAoYy6gFq6mAHHgH6vA9ijZWPThq8IM9NPlRvLUeC5vGc4XC1jDTxg5UmxYpGpGtTt2Va/OOom6WH/pDh2uCPlhiq/oPdhsRXc34eTLixuwhtkwUlyUM0sBPoEkFI2ofjEeXT+UEajUHzVPo+JUibVy9fUjOvmaurP3g8bnPTUhBHBrxt9RksT/cWPpE8NlL0aNIaZVSq5KW6vGQ1BR5h11GbYU9uQz74QVul6v6bNwmnhZi4YmiDfsJ76f1hTYi13Xnl5A6XjehrN8ZMMEHlWT2iR/5D1hFr3I9omkY=
+    global:
+        #- DEPLOY_DOCS: "$(if [[ $TRAVIS_BRANCH == 'master' && $TRAVIS_PULL_REQUEST == 'false' ]]; then echo -n 'true' ; else echo -n 'false' ; fi)"
+        - secure: "w6HLlMrD5EqyfzSCuBUFJtLp5v5DGILIocy1rt5+QJLXoEvjuMTCgcT3k+1hWqzLme4kKTjmLFOB86rXX/jVha8Kpxd6c5uW7v5Fb1MW5ttB0bexcFQuD63mOdroCuT7ootnI5svggG0m2m9hZKuAAlgVwno4RWe05l97+oyJR2p+h/rurTxrwIc3d+1P0HBWZ7wWb1chY1h/8dP44FV02hBd4/DKGBCYavmwsCbsdzmjq4gkbVD9lLlqI/8cvyoy+TboY9ZkYinUKmxz2DGwnc7o8zuxCGOGgDaopsuwwEhh+k1xCEo2BgQA1LajQpIM5MaoYbIuCHd4ENNzv52CRffufsfCJ/Had/7zaZ1qhdExQbXXR7v/pMKVtmKBnFVoTVTAoYy6gFq6mAHHgH6vA9ijZWPThq8IM9NPlRvLUeC5vGc4XC1jDTxg5UmxYpGpGtTt2Va/OOom6WH/pDh2uCPlhiq/oPdhsRXc34eTLixuwhtkwUlyUM0sBPoEkFI2ofjEeXT+UEajUHzVPo+JUibVy9fUjOvmaurP3g8bnPTUhBHBrxt9RksT/cWPpE8NlL0aNIaZVSq5KW6vGQ1BR5h11GbYU9uQz74QVul6v6bNwmnhZi4YmiDfsJ76f1hTYi13Xnl5A6XjehrN8ZMMEHlWT2iR/5D1hFr3I9omkY="
+
+script: true
+
+after_success:
+  #- if [[ $DEPLOY_DOCS == "true" ]]; then ./deploy_docs; fi
+  - git config user.name "Travis-CI"
+  - git config user.email "noreply@travis-ci.org"
+  - git remote rm origin && git remote add origin https://bebatut:${GH_TOKEN}@github.com/bebatut/training-material
+  - git fetch origin
+  - git checkout master
+  - ./src/gfm2html.sh README.md > index.html
+  - git add index.html
+  - git commit -m "[ci skip] Update site on `date "+%Y-%m-%d %H:%M:%S"`"
+  - git push origin master
