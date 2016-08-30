@@ -13,7 +13,7 @@ before_script:
 
 script:
   - set -e
-  - gfm2html README.md > index.html
+  - ./gfm2html.sh README.md > index.html
   - git add index.html
   - 'git commit -m "${COMMIT_MESSAGE}"'
   - git push -f https://github.com/bebatut/training-material/ master:master
