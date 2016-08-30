@@ -2,5 +2,18 @@ sudo: false
 language: python
 python: 2.7
 
+before_script:
+  - openssl aes-256-cbc -K $encrypted_d4cd903c2fde_key -iv $encrypted_d4cd903c2fde_iv -in .travisdeploykey.enc -out .travisdeploykey -d
+  - chmod go-rwx .travisdeploykey
+  - eval `ssh-agent -s`
+  - ssh-add .travisdeploykey
+  - git config user.name "Travis CI"
+  - git config user.email "noreply@travis-ci.org"
+  - COMMIT_MESSAGE="Publishing site on `date "+%Y-%m-%d %H:%M:%S"` from `git log -n 1 --format='commit %h - %s'`"
+
 script:
-  - ./gfm2html.sh README.md > index.html
+  - set -e
+  - gfm2html README.md > index.html
+  - git add index.html
+  - 'git commit -m "${COMMIT_MESSAGE}"'
+  - git push -f https://github.com/bebatut/training-material/ master:master
