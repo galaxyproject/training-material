@@ -1,0 +1,16 @@
+sudo: false
+language: python
+python: 2.7
+
+env:
+    global:
+        - secure: "rU2ZKn3GO4+xrhlHQEOy1o817iV8Hga0Bzigu4KL4kHMgJkyeBB9nZKnWv/8h+fkQDpFe1Q8dJnukvfvHMqW7UQ9o+Vr01G0SEpxvp+KFFEE4rRyIWgv7gmU6ZywWTNF9tNYD2YMULAx5e+pKbAzaUltTfqdJ2jYTt2ksPGarpdqSrx9ty5ZPY1O4Wrsczcf1hPFpVKL6q50WIQ97D6U6KfOthMZi3aJgeMx1ATyuKocFJiLeBFv5u3KfzgAMJRwInQ3kMCQHsPpt5k4tIG7U4qXH03Poun0tuk8ZOx9W/D3odZ9wukpsAwr9E3tMpV+OEkWT8cCOKWvEiFWR6B+cMZRjs+OSStCwG0xXrRs3Ht4QWoUCqrAUFNR8L2Xo7wMqlSBknqXoN87xWU9aL8UFLYrhvVl1vkAxU+bpBh57Tj4bpq2wSzaMIgyZXfwFJhMBTrrdtaxEZI9km+Qf/Hy4c71NCJzWAqbA4PS/pmuEw5TCtUoDRag9X6H9JFA3LCnJP04WdIt2c9tGWMX8wzXZrXTbqUtTRO/NMCEBFW32RKQcVlcKyZ2SPEGPqaL5XLaLSrAtnWwfN+2zmDnhfPKKfdy6RK6OA4t1ZBGNQQAZOs/ZlTqXADhsjc71mjHhbAHThQ6+HXi0FsZs+xl/cuQffMr/gYLDFGjrkaulo7XG+w="
+
+script: true
+
+after_success:
+  - |
+    if [[ $TRAVIS_BRANCH == 'master' && $TRAVIS_PULL_REQUEST == 'false' ]]
+    then
+      ./bin/deploy_docs
+    fi
