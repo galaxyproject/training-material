@@ -19,16 +19,16 @@ set -e
 # read markdown file
 if [[ ! -n "$1" ]]; then
   echo "No input file specified!"
-  exit
+  exit 1
 elif [[ -d "$1" ]]; then
   echo "$1 is a directory."
-  exit
+  exit 1
 elif [[ ! -e "$1" ]]; then
   echo "The file $1 not exist!"
-  exit
+  exit 1
 elif [[ ! -r "$1" ]]; then
   echo "The $1 file cannot be read! Verify the permissions!"
-  exit
+  exit 1
 else
 text=$(<"$1")
 text=${text//\"/\\\"}
