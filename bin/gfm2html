@@ -44,6 +44,12 @@ fi
 
 # convert markdown to html using Github API v3
 result=$(curl --silent https://api.github.com/markdown -d "{\"text\": \"$text\", \"mode\": \"gfm\", \"context\": \"\"}")
+stringtosearch='"message": '
+if `echo $result | grep "$stringtosearch" 1>/dev/null 2>&1`
+then
+  echo $result
+  exit 1
+fi
 
 # output html
 echo "<!doctype html>
