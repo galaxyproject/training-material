@@ -9,11 +9,12 @@
 # Requirements: cURL (sudo apt-get install curl)
 # Input/Output: filename/STDOUT
 #
-# Usage: gfm2html <input> > output
+# Usage: gfm2html <input> <output>
 # * input: filename of the Github Flavored Markdown (GFM) syntax document
 # * output: filename of the HTML document to generate
 #
-# eg: ./gfm2html.sh README.md > index.html
+# eg: ./gfm2html README.md index.html
+set -e
 
 # read markdown file
 if [[ ! -n "$1" ]]; then
@@ -36,11 +37,16 @@ text=${text//
 /\\\n}
 fi
 
+if [[ ! -n "$2" ]]; then
+  echo "No input file specified!"
+  exit 1
+fi
+
 # convert markdown to html using Github API v3
 result=$(curl --silent https://api.github.com/markdown -d "{\"text\": \"$text\", \"mode\": \"gfm\", \"context\": \"\"}")
 
 # output html
-printf "<!doctype html>
+echo "<!doctype html>
 <html>
   <head>
     <meta charset=\"utf-8\">
@@ -53,7 +59,7 @@ printf "<!doctype html>
     <script src=\"//html5shiv.googlecode.com/svn/trunk/html5.js\"></script>
     <![endif]-->
   </head>
-\n
+
 <body>
   <div class=\"wrapper\">
     <header>
@@ -74,7 +80,7 @@ printf "<!doctype html>
 
     <section>
     <p style=\"text-align:center;\"><script src=\"https://embed.github.com/view/geojson/bgruening/galaxy-maps/master/server.geojson?height=300&width=400\"></script></p>
-    %s
+    "$result"
 
     </section>
 
@@ -85,4 +91,4 @@ printf "<!doctype html>
     <script src=\"javascripts/landing_page.js\"></script>
   </div>
 </body>
-</html>" "$result"
+</html>" > $2
