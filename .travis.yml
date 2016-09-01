@@ -10,7 +10,8 @@ script: true
 
 after_success:
   - |
-    if [[ $TRAVIS_BRANCH == 'master' && $TRAVIS_PULL_REQUEST == 'false' ]]
+    if [ "$TRAVIS_PULL_REQUEST" == "false" -a "$TRAVIS_BRANCH" == "master" ]
     then
+      echo "Generate and deploy index.html"
       ./bin/deploy_docs
     fi
