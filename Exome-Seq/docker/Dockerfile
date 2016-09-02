@@ -1,6 +1,6 @@
 # Galaxy - Exome sequencing training material
 
-FROM bgruening/docker-galaxy-ngs-preprocessing
+FROM bgruening/galaxy-exome-seq
 
 MAINTAINER Björn A. Grüning, bjoern.gruening@gmail.com
 
