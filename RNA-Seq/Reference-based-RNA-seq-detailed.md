@@ -4,25 +4,25 @@
 
 RNAseq can be roughly divided into two "types":
 
- * **Reference genome-based** - an assembled genome exists for a species for which an RNAseq experiment is performed. It allows reads to be aligned against the reference genome and significantly improves our ability to reconstruct transcripts. This category would obviously include humans and most model organisms but excludes the majority of truly biologically intereting species (e.g., [Hyacinth macaw](https://en.wikipedia.org/wiki/Hyacinth_macaw));
+ * **Reference genome-based** - an assembled genome exists for a species for which an RNAseq experiment is performed. It allows reads to be aligned against the reference genome and significantly improves our ability to reconstruct transcripts. This category would obviously include humans and most model organisms but excludes the majority of truly biologically interesting species (e.g., [Hyacinth macaw](https://en.wikipedia.org/wiki/Hyacinth_macaw));
  * **Reference genome-free** - no genome assembly for the species of interest is available. In this case one would need to assemble the reads into transcripts using *de novo* approaches. This type of RNAseq is as much of an art as well as science because assembly is heavily parameter-dependent and difficult to do well. 
 
 In this short introduction to RNAseq we will focus on the **Reference genome-based** type of RNA seq.
 
 ## Experimental procedures affect downstream analyses
 
-The *Everything's connected* slide by Dündar et al. (2015) explains the overall idea:
+The *Everything's connected* slide by Dündar *et al.* (2015) explains the overall idea:
 
 ![](https://github.com/nekrut/galaxy/wiki/images/everything_connected.png)
 
 There is a variety of ways in which RNA is treated during its conversion to cDNA and eventual preparation of sequencing libraries. In general the experimental workflow includes the following steps:
 
  * RNA purification;
- * Reverse transcription using Reverse Transcriptase (RT), which produces the first strand of cDNA ("c" stands for *complimentary*);
+ * Reverse transcription using Reverse Transcriptase (RT), which produces the first strand of cDNA ("c" stands for *complementary*);
  * Second strand synthesis using DNA polymerase;
  * Library preparation for sequencing.
 
-In listing these basic steps we are ignoring a vast amount of details such as, for example, normalization strategies and procedures needed to deal with rare RNAs or degraded samples (see Adiconis et al. [2013](http://nature.com/nmeth/journal/v10/n7/full/nmeth.2483.html)). Yet, there are two important experimental considerations that would effect the ways in which one analyses data and interprets the results. These are:
+In listing these basic steps we are ignoring a vast amount of details such as, for example, normalization strategies and procedures needed to deal with rare RNAs or degraded samples (see Adiconis *et al.* [2013](http://nature.com/nmeth/journal/v10/n7/full/nmeth.2483.html)). Yet, there are two important experimental considerations that would effect the ways in which one analyses data and interprets the results. These are:
 
  * Priming for the first cDNA strand synthesis;
  * Stranded versus Non-stranded libraries.
@@ -46,12 +46,12 @@ RNAs that are typically targeted in RNAseq experiments are single stranded (e.g.
 |-------------|
 | ![](https://github.com/nekrut/galaxy/wiki/images/dna_rna.png) |
 
-During a typical RNAseq experiment the information about strandedness is lost after both strands of cDNA are synthesized, size selected, and converted into sequencing library. However, this information can be quite useful for various aspects of RNAseq analysis such as transcript reconstruction and quantification. There is a number of methods for creating so called *stranded* RNAseq libraries that preserve the strand information (for an excellent overview see Levin et al. [2010](http://www.nature.com/nmeth/journal/v7/n9/full/nmeth.1491.html)):
+During a typical RNAseq experiment the information about strandedness is lost after both strands of cDNA are synthesized, size selected, and converted into sequencing library. However, this information can be quite useful for various aspects of RNAseq analysis such as transcript reconstruction and quantification. There is a number of methods for creating so called *stranded* RNAseq libraries that preserve the strand information (for an excellent overview see Levin *et al.* [2010](http://www.nature.com/nmeth/journal/v7/n9/full/nmeth.1491.html)):
 
 |Generation of stranded RNAseq libraries|
 |------------|
 |[![](https://github.com/nekrut/galaxy/wiki/images/stranded_protocols.png)](http://www.nature.com/nmeth/journal/v7/n9/fig_tab/nmeth.1491_F1.html)|
-|<sub>Different types of stranded library generation protocols from Levin et al. [2010](http://www.nature.com/nmeth/journal/v7/n9/full/nmeth.1491.html)</sub>|
+|<sub>Different types of stranded library generation protocols from Levin *et al.* [2010](http://www.nature.com/nmeth/journal/v7/n9/full/nmeth.1491.html)</sub>|
 
 Depending on the approach and whether one performs single- or paired-end sequencing there are multiple possibilities on how to interpret the results of mapping of these reads to genome/transcriptome:
 
@@ -91,7 +91,7 @@ The implication of stranded RNAseq is that you can distinguish whether the reads
 | Stranded RNAseq data looks like this |
 |---------|
 | ![](https://github.com/nekrut/galaxy/wiki/images/stranded_result.png) |
-| <sub>This example contrasts unstranded and stranded RNAseq experiments. Red transcripts are from + strand and blue are from - strand. In stranded example reads are clearly stratified between the two strands.  A small number of reads from opposite strand may represent anti-sense transcription. The image from GATC Biotech.</sub>|
+| <sub>This example contrasts unstranded and stranded RNAseq experiments. Red transcripts are from + strand and blue are from - strand. In the stranded example reads are clearly stratified between the two strands.  A small number of reads from opposite strand may represent anti-sense transcription. The image from GATC Biotech.</sub>|
 
 ### Replicates: Biological or Technical and how many?
 
@@ -101,7 +101,7 @@ An RNAseq experiment without a sufficient number of replicates will be a waste o
 
  * **Biological replicates**. There is an on-going debate over what kinds of samples represent true biological replicates. Obviously, the variability between different samples will be greater between RNA extracted from two unrelated humans than between RNA extracted from two different batches of the same cell line. In the latter case, most of the variation that will eventually be detected was probably introduced by the experimenter (e.g., slightly differing media and plating conditions). Nevertheless, this is variation the researcher is typically not interested in assessing, therefore the ENCODE consortium defines biological replicates as RNA from an independent growth of cells/tissue (ENCODE [2011](https://genome.ucsc.edu/ENCODE/protocols/dataStandards/ENCODE_RNAseq_Standards_V1.0.pdf)).
 
-The number of replicates should be as high as practically possible. Most RNAseq experiments include three replicates and some have as many as 12 (see Schurch et al. [2015](http://arxiv.org/abs/1505.02017)).
+The number of replicates should be as high as practically possible. Most RNAseq experiments include three replicates and some have as many as 12 (see Schurch *et al.* [2015](http://arxiv.org/abs/1505.02017)).
 
 ## Read mapping
 
@@ -110,59 +110,59 @@ After sequencing is performed you have a collection of sequencing reads for each
  * Reads that map entirely within exons;
  * Reads that cannot be mapped within an exon across their entire length because they span two or more exons.
 
-Spliced mappers have been developed to efficiently map transcript-derived reads against genome.
+Spliced mappers have been developed to efficiently map transcript-derived reads against genomes.
 
 ### TopHat, TopHat2, and HiSat
 
-[Tophat](http://bioinformatics.oxfordjournals.org/content/25/9/1105.abstract) was one of the first tools designed specifically to address this problem by identifying potential exons using reads that do map to the genome, generating possible splices between neighboring exons, and comparing reads that did not initially map to the genome agaisnt these *in silico* created junctions:
+[Tophat](http://bioinformatics.oxfordjournals.org/content/25/9/1105.abstract) was one of the first tools designed specifically to address this problem by identifying potential exons using reads that do map to the genome, generating possible splices between neighboring exons, and comparing reads that did not initially map to the genome against these *in silico* created junctions:
 
 | TopHat and TopHat2: Mapping RNAseq regions to genome |
 |-------|
 |[![](https://github.com/nekrut/galaxy/wiki/images/tophat.png)](http://bioinformatics.oxfordjournals.org/content/25/9/1105/F1.expansion.html)|
-|<sub>In TopHat reads are mapped against the genome and are separated into two categories: (1) those that map, and (2) those that initially unmapped (IUM). "Piles" of reads representing potential exons are extended in search of potential donor/acceptor splice sites and potential splice junctions are reconstructed. IUMs are then mapped to these junctions. Image from Trapnell et al. [2009](http://bioinformatics.oxfordjournals.org/content/25/9/1105.full).</sub>|
+|<sub>In TopHat reads are mapped against the genome and are separated into two categories: (1) those that map, and (2) those that are initially unmapped (IUM). "Piles" of reads representing potential exons are extended in search of potential donor/acceptor splice sites and potential splice junctions are reconstructed. IUMs are then mapped to these junctions. Image from Trapnell *et al.* [2009](http://bioinformatics.oxfordjournals.org/content/25/9/1105.full).</sub>|
 |TopHat has been subsequently improved with the development of TopHat2:|
 |[![](https://github.com/nekrut/galaxy/wiki/images/tophat2.png)](https://genomebiology.biomedcentral.com/articles/10.1186/gb-2013-14-4-r36)|
-|<sub>Image from Kim et al. [2012](https://genomebiology.biomedcentral.com/articles/10.1186/gb-2013-14-4-r36) summarizes steps involved in aligning of RNAseq reads with TopHat2</sub>|
+|<sub>Image from Kim *et al.* [2012](https://genomebiology.biomedcentral.com/articles/10.1186/gb-2013-14-4-r36) summarizes steps involved in aligning of RNAseq reads with TopHat2</sub>|
 
-To further optimize and speed up spliced read alignment Kim at al. [2015](http://www.nature.com/nmeth/journal/v12/n4/full/nmeth.3317.html) developed [HISAT](http://ccb.jhu.edu/software/hisat2/index.shtml). It uses a set of [FM-indices](https://en.wikipedia.org/wiki/FM-index) consisting one global genome-wide index and a collection of ~48,000 local overlapping 42 kb indices (~55,000 56 kb indices in HiSat2). This allows to find initial seed locations for potential read alignments in the genome using global index and to rapidly refine these alignments using a corresponding local index:
+To further optimize and speed up spliced read alignment Kim *at al.* [2015](http://www.nature.com/nmeth/journal/v12/n4/full/nmeth.3317.html) developed [HISAT](http://ccb.jhu.edu/software/hisat2/index.shtml). It uses a set of [FM-indices](https://en.wikipedia.org/wiki/FM-index) consisting one global genome-wide index and a collection of ~48,000 local overlapping 42 kb indices (~55,000 56 kb indices in HISAT2). This allows to find initial seed locations for potential read alignments in the genome using global index and to rapidly refine these alignments using a corresponding local index:
 
-|Hierarchical Graph FM index in HiSat/HiSat2|
+|Hierarchical Graph FM index in HISAT/HISAT2|
 |---------|
 |![](https://github.com/nekrut/galaxy/wiki/images/hisat.png)|
-|<sub>A part of the read (blue arrow) is first mapped to the genome using the global FM index. The HiSat then tries to extend the alignment directly utilizing the genome sequence (violet arrow). In (**a**) it succeeds and this read aligned as it completely resides within an exon. In (**b**) the extension hits a mismatch. Now HiSat takes advantage of the local FM index overlapping this location to find the appropriate matting for the remainder of this read (green arrow). The (**c**) shows a combination these two strategies: the beginning of the read is mapped using global FM index (blue arrow), extended until it reaches the end of the exon (violet arrow), mapped using local FM index (green arrow) and extended again (violet arrow). Image from Kim at al. [2015](http://www.nature.com/nmeth/journal/v12/n4/full/nmeth.3317.html)</sub>.|
+|<sub>A part of the read (blue arrow) is first mapped to the genome using the global FM index. HISAT then tries to extend the alignment directly utilizing the genome sequence (violet arrow). In (**a**) it succeeds and this read aligned as it completely resides within an exon. In (**b**) the extension hits a mismatch. Now HISAT takes advantage of the local FM index overlapping this location to find the appropriate mapping for the remainder of this read (green arrow). The (**c**) shows a combination these two strategies: the beginning of the read is mapped using global FM index (blue arrow), extended until it reaches the end of the exon (violet arrow), mapped using local FM index (green arrow) and extended again (violet arrow). Image from Kim *at al.* [2015](http://www.nature.com/nmeth/journal/v12/n4/full/nmeth.3317.html)</sub>.|
 
 ### STAR mapper
 
-[STAR aligner](https://github.com/alexdobin/STAR) is a fast alternative for mapping RNAseq reads against genome utilizing uncompressed [suffix array](https://en.wikipedia.org/wiki/Suffix_array). It operates in [two stages](http://bioinformatics.oxfordjournals.org/content/early/2012/10/25/bioinformatics.bts635.abstract). In the first stage it performs seed search:
+[STAR aligner](https://github.com/alexdobin/STAR) is a fast alternative for mapping RNAseq reads against a genome utilizing uncompressed [suffix array](https://en.wikipedia.org/wiki/Suffix_array). It operates in [two stages](http://bioinformatics.oxfordjournals.org/content/early/2012/10/25/bioinformatics.bts635.abstract). In the first stage it performs seed search:
 
 | STAR's seed search |
 |------------|
 |![](https://github.com/nekrut/galaxy/wiki/images/star.png)|
-|<sub>Here a read is split between two consecutive exons. STAR starts to look for a *maximum mappable prefix* (MMP) from the beginning of the read until it can no longer match continuously. After this point it start to MMP for the unmatched portion of the read (**a**). In the case of mismatches (**b**) and unalignable regions (**c**) MMPs serve as anchors from which to extend alignments. Image from Dobin et al. [2013](http://bioinformatics.oxfordjournals.org/content/early/2012/10/25/bioinformatics.bts635.full.pdf+html).</sub>|
+|<sub>Here a read is split between two consecutive exons. STAR starts to look for a *maximum mappable prefix* (MMP) from the beginning of the read until it can no longer match continuously. After this point it starts to MMP for the unmatched portion of the read (**a**). In the case of mismatches (**b**) and unalignable regions (**c**), MMPs serve as anchors from which to extend alignments. Image from Dobin *et al.* [2013](http://bioinformatics.oxfordjournals.org/content/early/2012/10/25/bioinformatics.bts635.full.pdf+html).</sub>|
 
 At the second stage STAR stitches MMPs to generate read-level alignments that (contrary to MMPs) can contain mismatches and indels. A scoring scheme is used to evaluate and prioritize stitching combinations and to evaluate reads that map to multiple locations. STAR is extremely fast but requires a substantial amount of RAM to run efficiently. 
 
 ## Transcript reconstruction
 
-The previous step - mapping - assigns RNAseq reads to genomic locations and identifies splice junctions from reads that originate from different exons. At transcript reconstruction step this information is taken further in attempt to build transcript models. There is a number of tools for performing this task. A benchmarking paper by Hayer et al. [2015](http://bioinformatics.oxfordjournals.org/content/early/2015/09/03/bioinformatics.btv488.full.pdf+html) attempted to compare performance of existing approaches with one of the outcomes shown below:
+The previous step - mapping - assigns RNAseq reads to genomic locations and identifies splice junctions from reads that originate from different exons. At transcript reconstruction step this information is taken further in attempt to build transcript models. There is a number of tools for performing this task. A benchmarking paper by Hayer *et al.* [2015](http://bioinformatics.oxfordjournals.org/content/early/2015/09/03/bioinformatics.btv488.full.pdf+html) attempted to compare performance of existing approaches with one of the outcomes shown below:
 
 |Comparison of transcript reconsruction approaches|
 |----------------|
 |[![](https://github.com/nekrut/galaxy/wiki/images/rnaseq_comparison.png)](http://bioinformatics.oxfordjournals.org/content/early/2015/09/08/bioinformatics.btv488/F5.large.jpg)|
-|<sub>Here *recall* (the number of correctly constructed forms divided by the total number of real forms) versus *precision* (true positives divided by the sum of true positives and false positives) are plotted for seven transcript assemblers tested on two simulated datasets: *EnsemblPerfect* and *EnsemblRealistic*. The shaded region is indicating suboptimal performance (i.e., the white, unshaded region is "good"). The figure is from Hayer et al. [2015](http://bioinformatics.oxfordjournals.org/content/early/2015/09/03/bioinformatics.btv488.full.pdf+html).</sub>|
+|<sub>Here *recall* (the number of correctly constructed forms divided by the total number of real forms) versus *precision* (true positives divided by the sum of true positives and false positives) are plotted for seven transcript assemblers tested on two simulated datasets: *EnsemblPerfect* and *EnsemblRealistic*. The shaded region is indicating suboptimal performance (i.e., the white, unshaded region is "good"). The figure is from Hayer *et al.* [2015](http://bioinformatics.oxfordjournals.org/content/early/2015/09/03/bioinformatics.btv488.full.pdf+html).</sub>|
 
-Based on these results [Cufflinks](http://cole-trapnell-lab.github.io/cufflinks/) and [StringTie])(https://ccb.jhu.edu/software/stringtie/) have satisfactory performence. The following discussion is based on inner workings of StringTie. 
+Based on these results [Cufflinks](http://cole-trapnell-lab.github.io/cufflinks/) and [StringTie])(https://ccb.jhu.edu/software/stringtie/) have satisfactory performance. The following discussion is based on inner workings of StringTie. 
 
 ### Transcriptome assembly with StringTie 
 
-[StringTie](https://ccb.jhu.edu/software/stringtie/) assembles transcripts from spliced read alignemnts produced by tools such as STAR, TopHat, or HISAT and simultaneously estimates their abundances using counts of reads assigned to each transcript. The following images illustrates details of StringTie workflow:
+[StringTie](https://ccb.jhu.edu/software/stringtie/) assembles transcripts from spliced read alignments produced by tools such as STAR, TopHat, or HISAT and simultaneously estimates their abundances using counts of reads assigned to each transcript. The following image illustrates details of the StringTie workflow:
 
 |StringTie workflow|
 |-------|
 |![](https://github.com/nekrut/galaxy/wiki/images/stringtie1.png)|
-|<sub>Image from Pertea et al. [2015](http://www.nature.com/nbt/journal/v33/n3/full/nbt.3122.html)</sub>|
+|<sub>Image from Pertea *et al.* [2015](http://www.nature.com/nbt/journal/v33/n3/full/nbt.3122.html)</sub>|
 
-In essence StringTie builds an alternative splice graph from overlapping reads in a given locus. In such a graph nodes correspond to exons (or, rather, contiguous regions of genome covered by reads; colored regions on the figure above), while edges are represented by reads connecting these exons. Next, it identifies a path within the splice graph that has the highest weight (largest number of reads on edges). Such path would correspond to an assembled transcript at this iteration of the algorithm. Because the edge weight is equal to the number of the reads StringTie estimates the coverage level for this transcript (see below) which can be used to estimate the transcript's abundance. Reads that are associated with the transcript that was just assembled are then removed and the graph is updated to perform the next iteration of the algorithm. 
+In essence, StringTie builds an alternative splice graph from overlapping reads in a given locus. In such a graph nodes correspond to exons (or, rather, contiguous regions of genome covered by reads; colored regions on the figure above), while edges are represented by reads connecting these exons. Next, it identifies a path within the splice graph that has the highest weight (largest number of reads on edges). Such path would correspond to an assembled transcript at this iteration of the algorithm. Because the edge weight is equal to the number of the reads, StringTie estimates the coverage level for this transcript (see below) which can be used to estimate the transcript's abundance. Reads that are associated with the transcript that was just assembled are then removed and the graph is updated to perform the next iteration of the algorithm. 
 
 ## Transcript quantification
 
@@ -170,7 +170,7 @@ Transcriptome quantification attempts to estimate expression levels of individua
 
 ### Assigning reads to transcripts
 
-To associate reads with transcripts they (the reads) need to be aligned to the transcriptome. Tools like Cufflinks and StringTie reconstruct transcripts from spliced read alignments generated by other programs (TopHat, HISAT, STAR), so they already have the information about which reads belong to each reconstructed transcript. Other tools such as [Sailfish](http://www.cs.cmu.edu/~ckingsf/software/sailfish/), [Kallisto](http://pachterlab.github.io/kallisto/), and [Salmon](http://combine-lab.github.io/salmon/) perform *lightweight* alignment of RNAseq reads against existing transcriptome sequences. The goal of lightweight alignment is to quickly distribute the reads across transcripts they likely originate from without worrying too much about producing high quality alignments. The upside of this is that the entire procedure can be performed very quickly. The downside is that these tools require high quality transcriptome as input, which is not a problem if you work with humans or mice, but is a problem if you are studying Hyacinth macaw or any other brilliantly colored creatures. 
+To associate reads with transcripts the reads need to be aligned to the transcriptome. Tools like Cufflinks and StringTie reconstruct transcripts from spliced read alignments generated by other programs (TopHat, HISAT, STAR), so they already have the information about which reads belong to each reconstructed transcript. Other tools such as [Sailfish](http://www.cs.cmu.edu/~ckingsf/software/sailfish/), [Kallisto](http://pachterlab.github.io/kallisto/), and [Salmon](http://combine-lab.github.io/salmon/) perform *lightweight* alignment of RNAseq reads against existing transcriptome sequences. The goal of lightweight alignment is to quickly distribute the reads across transcripts they likely originate from without worrying too much about producing high quality alignments. The upside of this is that the entire procedure can be performed very quickly. The downside is that these tools require high quality transcriptome as input, which is not a problem if you work with humans or mice, but is a problem if you are studying Hyacinth macaw or any other brilliantly colored creatures. 
 
 #### Lightweight alignment
 
