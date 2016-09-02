@@ -24,7 +24,7 @@ The Galaxy community offers many different ways of training. The table above lis
  - :book: The training course and material is available as annotated text (:thumbsup: hands-on training).
  - :mortar_board: Slides as Introduction
 
-<a href="https://wiki.galaxyproject.org/Teach/GTN"><img src="https://github.com/bgruening/training-material/blob/master/shared/images/GTNLogo1000.png" width="35%">
+<a href="https://wiki.galaxyproject.org/Teach/GTN"><img src="./shared/images/GTNLogo1000.png" width="35%">
 
 # License
 
