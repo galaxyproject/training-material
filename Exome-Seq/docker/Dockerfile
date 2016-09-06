@@ -11,10 +11,6 @@ ENV ENABLE_TTS_INSTALL True
 ENV GALAXY_CONFIG_CONDA_AUTO_INSTALL=True \
     GALAXY_CONFIG_CONDA_AUTO_INIT=True
 
-# Install tools
-ADD exome_seq.yaml $GALAXY_ROOT/tools.yaml
-RUN install-tools $GALAXY_ROOT/tools.yaml
-
 # Data libraries
 ADD setup_data_libraries.py $GALAXY_ROOT/setup_data_libraries.py
 ADD library_data.yaml $GALAXY_ROOT/library_data.yaml
