@@ -12,7 +12,7 @@ ENV GALAXY_CONFIG_CONDA_AUTO_INSTALL=True \
     GALAXY_CONFIG_CONDA_AUTO_INIT=True
 
 # Install tools
-ADD chip_seq.yaml $GALAXY_ROOT/tools.yaml
+ADD chip_seq.yml $GALAXY_ROOT/tools.yaml
 RUN install-tools $GALAXY_ROOT/tools.yaml
 
 # Add a Galaxy tour
