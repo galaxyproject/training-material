@@ -1,19 +1,20 @@
-## The Basics for setting up a Galaxy Server
+Training course and material for Galaxy Server administration
+====
 
-#### '10 rules' for Setting up a Galaxy Instance as a Service
+Here, you will find the the basics for setting up a Galaxy Server.
 
-This [content](https://github.com/bgruening/training-material/tree/master/Admin-Corner/10rules_for_GaaS) is based on a presentation given at the Training Day at the Galaxy Community Conferences in Norwich, UK and Bloomington, IN in July 2015 and June 2016, respectively.
+# Slides
 
+Two deck of slides are available:
 
-## Advanced Topics in administering a Galaxy server
-.
+- ['10 rules' for Setting up a Galaxy Instance as a Service](http://bgruening.github.io/training-material/Admin-Corner/slides/10rules_for_GaaS.html)
 
+    This content is based on a presentation given at the Training Day at the Galaxy Community Conferences in Norwich, UK and Bloomington, IN in July 2015 and June 2016, respectively.
 
-## The Galaxy Database schema
+- [The Galaxy Docker project](http://galaxy.slides.com/bgruening/the-galaxy-docker-project#/)
 
-This [content](https://github.com/bgruening/training-material/tree/master/Admin-Corner/Database_Schema) is based on a presentation given at the Training Day at the Galaxy Community Conferences in Bloomington, IN in June 2016.
+    Some training material can also be found on the [project github repository](https://github.com/bgruening/docker-galaxy-stable).
 
+# Tutorials
 
-## The Galaxy Docker project
-
-Slides and a some training material for the Galaxy Docker proejct can be found at: https://slides.com/bgruening/the-galaxy-docker-project/live#/ as well as on the [project github repository](https://github.com/bgruening/docker-galaxy-stable).
+The [tutorial on the Galaxy Database schema](tutorial/Database_Schema.md) is based on a presentation given at the Training Day at the Galaxy Community Conferences in Bloomington, IN in June 2016.
