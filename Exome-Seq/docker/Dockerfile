@@ -17,7 +17,7 @@ ADD library_data.yaml $GALAXY_ROOT/library_data.yaml
 
 # Download training data and populate the data library
 RUN startup_lite && \
-    sleep 30 && \
+    sleep 50 && \
     . $GALAXY_VIRTUAL_ENV/bin/activate && \
     python $GALAXY_ROOT/setup_data_libraries.py -i $GALAXY_ROOT/library_data.yaml
 
