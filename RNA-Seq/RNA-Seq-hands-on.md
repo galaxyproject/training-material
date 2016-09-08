@@ -16,22 +16,9 @@ This exercise uses RNA-seq data from the study by [Brooks et al. 2011](http://ge
 
 - Create a new history for this RNA-seq exercise.
 
-- Import any two FASTQ files with sample id by right-clicking →  copy link location and paste the link in Galaxy →  Upload File from your computer →  paste/fetch data →  start:
+- Import any two FASTQ files with sample id from [Zenodo](http://dx.doi.org/10.5281/zenodo.61771) (select data file with "fastq" ending). Load them into Galaxy by right-clicking →  copy link location and paste the link in Galaxy →  Upload File from your computer →  paste/fetch data → start.
 
-      - [GSM461176_untreat_single_subset](https://www.googledrive.com/host/0B9urRnOAUUI8TEFrWTFHcy0tQWs)
-      - [GSM461177_untreat_paired_subset_1](https://www.googledrive.com/host/0B9urRnOAUUI8NXB1dTVOdWRScDA)
-      - [GSM461177_untreat_paired_subset_2](https://www.googledrive.com/host/0B9urRnOAUUI8MXlQYUk2LWhkUlk)
-      - [GSM461178_untreat_paired_subset_1](https://www.googledrive.com/host/0B9urRnOAUUI8cnpsem9mWml4OVk)
-      - [GSM461178_untreat_paired_subset_2](https://www.googledrive.com/host/0B9urRnOAUUI8Y1BuYVdQNEhYRE0)
-      - [GSM461179_treat_single_subset](https://www.googledrive.com/host/0B9urRnOAUUI8cXd2Qmgya3NhdDA)
-      - [GSM461180_treat_paired_subset_1](https://www.googledrive.com/host/0B9urRnOAUUI8SU1XdjJDX016MVk)
-      - [GSM461180_treat_paired_subset_2](https://www.googledrive.com/host/0B9urRnOAUUI8a3NIbWR6dS1Vb0k)
-      - [GSM461181_treat_paired_subset_1](https://www.googledrive.com/host/0B9urRnOAUUI8TGhhR01PemYtbzQ)
-      - [GSM461181_treat_paired_subset_2](https://www.googledrive.com/host/0B9urRnOAUUI8VHN4RURLcVY3X28)
-      - [GSM461182_untreat_single_subset](https://www.googledrive.com/host/0B9urRnOAUUI8YlBIcXhEclhINlk)
-
-
- These two files contain the first 100.000 paired-end reads of one untreated sample. Rename the datasets   according to the samples if you like. As default, Galaxy takes the link as name.
+ These two files contain the first 100.000 paired-end reads of one untreated sample. Rename the datasets according to the samples if you like. As default, Galaxy takes the link as name.
 
 - Run the tool **FastQC** on one of the two FASTQ files to control the quality of the reads. What is the read length? Is there anything what you find striking?
 
@@ -44,11 +31,11 @@ This exercise uses RNA-seq data from the study by [Brooks et al. 2011](http://ge
 
 - Annoying but necessary: Before continuing with the mapping step, change the file type of the FASTQ files to *fastqsanger*. This signals that the FASTQ contains Sanger-scaled quality values. **TopHat2** will otherwise not be able to accept the files for input! This can be done by clicking on the pencil item of the dataset (edit attributes) →  Datatype →  select fastqsanger
 
-- If you want **TopHat** to take advantage from already known reference gene annotations, make sure that the data is available in your current Galaxy history. For this exercise, please import the Ensembl gene annotation for [Drosophila_melanogaster.BDGP5.78.gtf](https://drive.google.com/file/d/0B9urRnOAUUI8cE1YM0k3WmJ3Njg/view?usp=sharing) by right-clicking → copy link location and paste the link in Galaxy → Upload File from your computer → paste/fetch data → start.
+- If you want **TopHat** to take advantage from already known reference gene annotations, make sure that the data is available in your current Galaxy history. For this exercise, please import the Ensembl gene annotation for Drosophila melanogaster (Drosophila_melanogaster.BDGP5.78.gtf) from [Zenodo](http://dx.doi.org/10.5281/zenodo.61771) by right-clicking → copy link location and paste the link in Galaxy → Upload File from your computer → paste/fetch data → start.
 
 - Run **TopHat2** with the two trimmed FASTQ files as input for forward and reverse reads as your reads are from a paired-end sequencing run. Align the reads to the Drosophila dm3 genome. The fragment size is 200 and the read length is 37, so why is 125 a good value for the mean inner distance? How do you know the fragment size (Hint: Go to the GEO entry of your data set, browse to the SRA entry of your sample and explore the library information)? 
 
-  Enable the *Coverage Search* for novel splice junctions to increase sensitivity. Also enable *Use Own Junctions*, *Use Gene Annotation Model* and select the appropriate *Gene Model Annotations* (dm3.ensGene.gtf) for your organism to enable the transcriptome alignment of **TopHat**.
+  Enable the *Coverage Search* for novel splice junctions to increase sensitivity. Also enable *Use Own Junctions*, *Use Gene Annotation Model* and select the appropriate *Gene Model Annotations* (Drosophila_melanogaster.BDGP5.78.gtf) for your organism to enable the transcriptome alignment of **TopHat**.
   
   The TopHat algorithm splits reads into segments to map the reads across splice junctions. The default minimum length of read segments is 25, but a value of 18 seems to be a more appropriate value for this input data. Why?
 
@@ -57,13 +44,7 @@ This exercise uses RNA-seq data from the study by [Brooks et al. 2011](http://ge
 
 - **TopHat2** returns a bam file with the mapped reads and three bed files containing splice junctions, insertions and deletions. 
 
-- The exercise of step 2 worked for you? Fine! However the dataset might be a little too small to get you a good impression of how real data looks like. Please therefore import all the files from tophat2 outputs into your history by right-clicking →  copy link location and paste the link in Galaxy →  Upload File from your computer →  paste/fetch data →  start.
-
-      - [GSM461177_untreat_paired_chr4.bam](https://www.googledrive.com/host/0B9urRnOAUUI8ZW5VWnRhUzNqUGc)
-      - [GSM461177_untreat_paired_deletions_chr4.bed](https://www.googledrive.com/host/0B9urRnOAUUI8bHpSRW5ZUlR6S0k)
-      - [GSM461177_untreat_paired_insertions_chr4.bed](https://www.googledrive.com/host/0B9urRnOAUUI8MTBQbVZYSGhIU3M)
-      - [GSM461177_untreat_paired_junctions_chr4.bed](https://www.googledrive.com/host/0B9urRnOAUUI8ZmZDZkIxcU4zSFU)
-
+- The exercise of step 2 worked for you? Fine! However the dataset might be a little too small to get you a good impression of how real data looks like. Please therefore import the following 4 files from tophat2 outputs into your history (GSM461177_untreat_paired_chr4.bam, GSM461177_untreat_paired_deletions_chr4.bed,GSM461177_untreat_paired_insertions_chr4.bed, GSM461177_untreat_paired_junctions_chr4.bed) from [Zenodo](http://dx.doi.org/10.5281/zenodo.61771) by right-clicking →  copy link location and paste the link in Galaxy →  Upload File from your computer →  paste/fetch data →  start.
 
 These files contain the TopHat results for the sample GSM461177_untreat_paired, but are restricted to reads that map to chr4 of Drosophila dm3.
 
@@ -75,11 +56,7 @@ These files contain the TopHat results for the sample GSM461177_untreat_paired, 
 ## Transcript Assembly
 **Step 4: Predict novel transcripts with Cufflinks**
 
-- Import the bam files of all samples into your history by right-clicking →  copy link location and paste the link in Galaxy →  Upload File from your computer →  paste/fetch data →  start.
-
-      - [GSM461177_untreat_paired_chr4.bam](https://www.googledrive.com/host/0B9urRnOAUUI8RlNiSkd0TG9TeE0)
-      - [GSM461178_untreat_paired_chr4.bam](https://www.googledrive.com/host/0B9urRnOAUUI8b09JSF9rM3REeEU)
-
+- Import the bam files (GSM461177_untreat_paired_chr4.bam,GSM461178_untreat_paired_chr4.bam) of all samples from [Zenodo](http://dx.doi.org/10.5281/zenodo.61771) into your history by right-clicking → copy link location and paste the link in Galaxy →  Upload File from your computer →  paste/fetch data →  start.
 
 - The tool **Cufflinks** can be used to annotate novel transcripts and splice isoforms. We will assemble the reads from the two untreated paired-end samples into transcripts. Please run **Cufflinks** separately on the bam files GSM461177_untreat_paired_chr4.bam and GSM461178_untreat_paired_chr4.bam. For real-world applications, please carefully read the [manual](http://cole-trapnell-lab.github.io/cufflinks/cufflinks/index.html) and select the appropriate options (consider especially *Use Reference Annotation*, *Perform Bias Correction* and *Use multi-read correct*).
 
@@ -93,7 +70,7 @@ These files contain the TopHat results for the sample GSM461177_untreat_paired, 
 Methods that estimate the differential expression of genes across samples require an annotation of genomic features such as genes or exons. Some methods rely on unscaled read counts per gene to evaluate the differential gene expression.
 - The tool **htseq-count** can be used to count reads per features in different samples. The tools **htseq-count** expects a BAM file as input. In case of paired-end reads, the alignments in BAM should be sorted by read name. First use the tool **sort** of NGS: **SAM Tools** to sort all the paired-end BAM files. Sort by *read names*.
 
-- Then, we need a file in GFF/GTF format with feature, i.e. gene, annotations. If not done yet, please import the Ensembl genes for dm3 →                                                                           [dm3.ensGene.gtf](https://www.googledrive.com/host/0B9urRnOAUUI8Tml0MzBabEE5MUU) by right-clicking →  copy link location and paste the link in Galaxy →  Upload File from your computer →  paste/fetch data →  start.
+- Then, we need a file in GFF/GTF format with feature, i.e. gene, annotations. If not done yet, please import the Ensembl genes for dm3 →                                                                           (Drosophila_melanogaster.BDGP5.78.gtf) from [Zenodo](http://dx.doi.org/10.5281/zenodo.61771) by right-clicking →  copy link location and paste the link in Galaxy →  Upload File from your computer →  paste/fetch data →  start.
 
 - Apply the tool **htseq-count** to the all samples. Select *dm3.ensGene.gtf* file as feature file. Use the *Union* mode for reads overlapping more than one feature. Set the *Minimum Alignment Quality* to 10.
 
