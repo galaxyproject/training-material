@@ -11,7 +11,7 @@ We stumbled upon a paper [Li et al., Cell Stem Cell 2012](http://www.sciencedire
 
 **Step 1: Upload peaks**
 
-Download the list of peaks (the file `GSE37268_mof3.out.hpeak.txt.gz`) from GEO [click here to get to the GEO entry](http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE37268) to your computer. Use the [upload button](https://raw.githubusercontent.com/bgruening/training-material/master/Galaxy_Introduction/images/upload_button.png) to upload the file to Galaxy and select "mm9" as the genome. Galaxy will automatically unpack the file.
+Download the list of peaks (the file `GSE37268_mof3.out.hpeak.txt.gz`) from GEO [click here to get to the GEO entry](http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE37268) to your computer. Use the [upload button](../images/upload_button.png) to upload the file to Galaxy and select "mm9" as the genome. Galaxy will automatically unpack the file.
 
 Galaxy Dataset | [GSE37268_mof3.out.hpeak.txt](https://raw.githubusercontent.com/bgruening/training-material/master/Galaxy_Introduction/tables/Galaxy1-GSE37268_mof3.out.hpeak.txt)
 
@@ -90,7 +90,7 @@ The way presented here adds a new track to a running instance of IGV and thus ke
 
 ***Optional: Display in Galaxy's build-in browser Trackster***:
 
-![Interval2Bed_1](https://raw.githubusercontent.com/bgruening/training-material/master/Galaxy_Introduction/images/Interval2Bed_1.png)
+![Interval2Bed_1](../images/Interval2Bed_1.png)
 
 - Click on Visualization icon
 - Click on "Trackster"
@@ -100,7 +100,7 @@ The way presented here adds a new track to a running instance of IGV and thus ke
 - Select a chromsome to look at
 - Unfortunately Trackster doesn't already include gene tracks or other annotations, so we add our RefSeq genes as an additional track.
 
-![SInterval2Bed_2](https://raw.githubusercontent.com/bgruening/training-material/master/Galaxy_Introduction/images/SInterval2Bed_2.png)
+![SInterval2Bed_2](../images/SInterval2Bed_2.png)
 
 - Click on "Add tracks" icon (little plus in the upper right)
 - Check your RefSeq genes dataset
@@ -163,12 +163,12 @@ Galaxy has a second option to visualise tabular data, with built-in dynamic visu
 
 In the history column click on "Unnamed history" at the top to rename it.
 
-![rename_history](https://raw.githubusercontent.com/bgruening/training-material/master/Galaxy_Introduction/images/rename_history.png)
+![rename_history](../images/rename_history.png)
 
 **Step 10: Make a workflow out of steps 6 to 8**
 - Click on the history options and select "Extract workflow"
 
- ![Screenshot](https://raw.githubusercontent.com/bgruening/training-material/master/Galaxy_Introduction/images/screenshot.jpg)
+ ![Screenshot](../images/screenshot.jpg)
 
 - Do **not** include "awk",  either "Find and Replace", "Convert Genomic Intervals to strict BED" and "Get flanks"
 - Click "Create Workflow"
@@ -180,7 +180,7 @@ Top menu: Workflow
 
 The individual steps are displayed as boxes and their outputs and inputs are connected through lines. When you click on a box you see the tool options on the right. Besides the tools you should see two additional boxes titled "Input dataset". These represent the data we want to feed into our workflow. Although we have our two inputs in the workflow they are missing their connection to the first tool (Intersect), because we didn't carry over the intermediate steps. Connect each input dataset to the Intersect tool by dragging the arrow pointing outwards on the right of its box (which denotes an output) to an arrow on the left of the Intersect box pointing inwards (which denotes an input). Connect each input dataset with a different input of Intersect.
 
-![sample_workflow](https://raw.githubusercontent.com/bgruening/training-material/master/Galaxy_Introduction/images/sample_workflow.png)
+![sample_workflow](../images/sample_workflow.png)
 
 You should also change the names of the input datasets to remember that the first one contains genes and the second one peaks. Don't forget to save it in the end by clicking on "Options" (top right) and selecting "Save".
 
