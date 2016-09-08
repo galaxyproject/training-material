@@ -13,7 +13,7 @@ We stumbled upon a paper [Li et al., Cell Stem Cell 2012](http://www.sciencedire
 
 Download the list of peaks (the file `GSE37268_mof3.out.hpeak.txt.gz`) from GEO [click here to get to the GEO entry](http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE37268) to your computer. Use the [upload button](../images/upload_button.png) to upload the file to Galaxy and select "mm9" as the genome. Galaxy will automatically unpack the file.
 
-Galaxy Dataset | [GSE37268_mof3.out.hpeak.txt](https://raw.githubusercontent.com/bgruening/training-material/master/Galaxy_Introduction/tables/Galaxy1-GSE37268_mof3.out.hpeak.txt)
+Galaxy Dataset | [GSE37268_mof3.out.hpeak.txt](../input_data/Galaxy1-GSE37268_mof3.out.hpeak.txt)
 
 This file is not in any standard format and just by looking at it, we cannot find out what the numbers in the different columns mean. In the paper the authors mention that they used the peak caller [HPeak](http://www.sph.umich.edu/csg/qin/HPeak/Readme.html). By looking at the HPeak manual we can find out that the columns contain the following information:
 
@@ -40,7 +40,7 @@ We also need a list of genes in mouse, which we can obtain from UCSC. Galaxy has
 - Click button "get output"
 - Click button "Send query to Galaxy"
 
-Galaxy Dataset | [UCSC Main on Mouse: refGene (genome)](https://raw.githubusercontent.com/bgruening/training-material/master/Galaxy_Introduction/tables/Galaxy2-UCSC_Main_on_Mouse__refGene_genome.bed)
+Galaxy Dataset | [UCSC Main on Mouse: refGene (genome)](../input_data/Galaxy2-UCSC_Main_on_Mouse__refGene_genome.bed)
 
 **Step 3: Adjust chromosome naming**
 
@@ -133,7 +133,7 @@ To get a better overview of the genes we obtained, we want to look at their dist
 
 Here you can double-check if the previous steps were correct by comparing the numbers.
 
-Galaxy Dataset | [Count genes on different chromosomes](https://raw.githubusercontent.com/bgruening/training-material/master/Galaxy_Introduction/tables/Galaxy9-Count_genes_on_different_chromosomes.tabular)
+Galaxy Dataset | [Count genes on different chromosomes](../input_data/Galaxy9-Count_genes_on_different_chromosomes.tabular)
 Result of part 1, step 7
 
 
@@ -247,7 +247,7 @@ Top menu: Shared Data -> Data Libraries
 
 Execute the workflow you generated in part 1 on the peak summit file and the new RefSeq genes BED file.
 
-Galaxy Dataset | [Count genes on different chromosomes](https://raw.githubusercontent.com/bgruening/training-material/master/Galaxy_Introduction/tables/Galaxy8-Count_genes_on_different_chromosomes.tabular)
+Galaxy Dataset | [Count genes on different chromosomes](../input_data/Galaxy8-Count_genes_on_different_chromosomes.tabular)
 Result of part 2, step 16
 
 
@@ -255,7 +255,7 @@ Result of part 2, step 16
 
 Run the public [Workflow 'Proper unique on a column'](http://galaxy.uni-freiburg.de/u/tutor/w/imported-proper-unique) on the result of the intersect and choose the column with the gene names. The result should be a dataset with one column and 10841 lines.
 
-Galaxy Dataset | [unique gene names](https://raw.githubusercontent.com/bgruening/training-material/master/Galaxy_Introduction/tables/Galaxy12-unique_gene_names.tabular)
+Galaxy Dataset | [unique gene names](../input_data/Galaxy12-unique_gene_names.tabular)
 Result of part 2, step 17
 
 
