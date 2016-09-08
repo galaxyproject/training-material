@@ -1,6 +1,6 @@
 GALAXY WORKSHOP on GENOME ANNOTATION
 ------------------------------------
- 
+
 Genome annotation is the process of attaching biological information to sequences.
 It consists of three main steps:
 
@@ -16,7 +16,7 @@ It consists of three main steps:
 DNA and protein sequences are written in FASTA format where you have in the first line a ">" followed by the description. In the second line the sequence starts.
 
 
-![FASTA file](images/fasta_format.png)
+![FASTA file](../images/fasta_format.png)
 
 
 
@@ -24,7 +24,7 @@ DNA and protein sequences are written in FASTA format where you have in the firs
 
 The general feature format (gene-finding format, generic feature format, GFF) is a file format used for describing genes and other features of DNA, RNA and protein sequences.
 
-<img src="images/gff3_format.png" width="70%">
+<img src="../images/gff3_format.png" width="70%">
 
 
 
@@ -32,20 +32,20 @@ The general feature format (gene-finding format, generic feature format, GFF) is
 
 The genbank sequence format is a rich format for storing sequences and associated annotations.
 
-![genbank file](images/gb_full.png)
+![genbank file](../images/gb_full.png)
 
 
 # 2. Structural Annotation
 
-For the genome annotation we us a piece of the *Aspergillus fumigatus* [genome sequence](Aspergillus_sequence.fasta) as input file. 
+For the genome annotation we us a piece of the *Aspergillus fumigatus* [genome sequence](Aspergillus_sequence.fasta) as input file.
 
 
 
 ## 2.1 Sequence Features
 
-First we want to get some general information about our sequence. Count the number of bases in your sequence (**compute sequence length**), and check for sequence composition and GC content (**geecee**). Plot the sequence composition as bar chart. 
+First we want to get some general information about our sequence. Count the number of bases in your sequence (**compute sequence length**), and check for sequence composition and GC content (**geecee**). Plot the sequence composition as bar chart.
 
-<img src="images/barchart_sequencecomposition.png" width="30%">
+<img src="../images/barchart_sequencecomposition.png" width="30%">
 
 
 
@@ -56,12 +56,12 @@ At first you need to identify those structures of the genome which code for prot
 We use **Augustus** for gene prediction. Use the genome sequence (FASTA file) as input. Choose the right *model organism*, *gff* format output, and select all possible output options.
 
 
-![augustus](images/augustus.png)
+![augustus](../images/augustus.png)
 
 
 Augustus will provide three output files: *gff3*, *coding sequences* (CDS) and *protein sequences*. How many genes are predicted?
 
-![augustus_output](images/augustus_out.png)
+![augustus_output](../images/augustus_out.png)
 
 
 ## 2.3 tRNA and tmRNA Prediction
@@ -83,20 +83,20 @@ Functional gene annotation means the description of the biochemical and biologic
 - pathway information
 
 
-For similarity searches we use *NCBI BLAST+ blastp* to find similar proteins in a protein database. As input file, select the protein sequences from Augustus, choose the protein BLAST database *SwissProt* and the output format *xml*. 
+For similarity searches we use *NCBI BLAST+ blastp* to find similar proteins in a protein database. As input file, select the protein sequences from Augustus, choose the protein BLAST database *SwissProt* and the output format *xml*.
 
 
-<img src="images/blastP.png" width="70%">
+<img src="../images/blastP.png" width="70%">
 
 
 
 Parsing the xml output (**Parse blast XML output**) results in changing the format style into tabular. What information do you see in the BLAST output?
 
-From BLAST search results we we want to get only the best hit for each protein. Therefore apply the tool **BLAST top hit descriptions** with *number of descriptions =1* on the xml output file. For how many proteins we do not get a BLAST hit? Choose the tool **Select lines that match an expression** and enter the following information: *Select lines from* [select the BLAST top hit descriptions result file]; *that* [not matching]; *the pattern* [gi]. 
+From BLAST search results we we want to get only the best hit for each protein. Therefore apply the tool **BLAST top hit descriptions** with *number of descriptions =1* on the xml output file. For how many proteins we do not get a BLAST hit? Choose the tool **Select lines that match an expression** and enter the following information: *Select lines from* [select the BLAST top hit descriptions result file]; *that* [not matching]; *the pattern* [gi].
 
 
 
-<img src="images/selectlines.png" width="50%">
+<img src="../images/selectlines.png" width="50%">
 
 
 
@@ -117,10 +117,10 @@ For functional description of those proteins we want to search for motifs or dom
 
 ### 3.1.1 BLAST Programs
 
-![BLAST programs](images/blastprograms.png)
+![BLAST programs](../images/blastprograms.png)
 
 
-![BLAST databases](images/blast%20database.png)
+![BLAST databases](../images/blast%20database.png)
 
 
 
@@ -129,7 +129,7 @@ If you have an organism which is not available in a BLAST database, you can use 
 
 **NCBI BLAST+ makeblastdb** creates a BLAST database from your own FASTA sequence file. Molecule type of input is protein or nucleotide.
 
- 
+
 
 ### 3.1.3 Further Reading about BLAST Tools in Galaxy
 
@@ -159,22 +159,12 @@ Import this [dataset](Streptomyces_coelicolor_part.genbank) into your Galaxy his
 
 Which gene clusters are identified?
 
- 
+
 When you have a whole genome **antiSMASH** analysis, your result may look like this:
 
-<img src="images/antismash_full.png" width="80%">
+<img src="../images/antismash_full.png" width="80%">
 
 
 At the end, you can extract a reproducible workflow out of your history. The workflow should look like this:
 
-![GenomeAnnotation Workflow](images/work%20flow_Screenshot%20from%202015-06-23%2009-33-23.png)
-
-
-
-
-
-
-
-
-
-
+![GenomeAnnotation Workflow](../images/work%20flow_Screenshot%20from%202015-06-23%2009-33-23.png)
