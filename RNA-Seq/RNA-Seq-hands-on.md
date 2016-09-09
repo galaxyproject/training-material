@@ -48,11 +48,14 @@ This exercise uses RNA-seq data from the study by [Brooks et al. 2011](http://ge
 
 - **TopHat2** returns a bam file with the mapped reads and three bed files containing splice junctions, insertions and deletions. 
 
-- The exercise of step 2 worked for you? Fine! However the dataset might be a little too small to get you a good impression of how real data looks like. Please therefore import the following 4 files from tophat2 outputs into your history (GSM461177_untreat_paired_chr4.bam, GSM461177_untreat_paired_deletions_chr4.bed,GSM461177_untreat_paired_insertions_chr4.bed, GSM461177_untreat_paired_junctions_chr4.bed) from [Zenodo](http://dx.doi.org/10.5281/zenodo.61771) by right-clicking →  copy link location and paste the link in Galaxy →  Upload File from your computer →  paste/fetch data →  start.
+- The exercise of step 2 worked for you? Fine! However the dataset might be a little too small to get you a good impression of how real data looks like.
+> well, that's disappointing. But too small? My bam file from Step 2 is 11.4 MB, the following one is 2.2 MB? "Restricted to chr4" also sounds smaller.
+- Please therefore import the following 4 files from tophat2 outputs into your history (GSM461177_untreat_paired_chr4.bam, GSM461177_untreat_paired_deletions_chr4.bed,GSM461177_untreat_paired_insertions_chr4.bed, GSM461177_untreat_paired_junctions_chr4.bed) from [Zenodo](http://dx.doi.org/10.5281/zenodo.61771) by right-clicking →  copy link location and paste the link in Galaxy →  Upload File from your computer →  paste/fetch data →  start.
 
 These files contain the TopHat results for the sample GSM461177_untreat_paired, but are restricted to reads that map to chr4 of Drosophila dm3.
 
 - Visualise this bam file and the three bed files in **IGV**. You might for example inspect the region between 560 kb to 600 kb on chr4. Which information does each of the bed files contain? 
+> I had to change the file types from the uploaded bed files from "tabular" to "bed" first in order to get the IGV link. Why isn't galaxy automatically treating .bed as bed? Is Java preinstalled on the systems?
 
 - Also inspect the results using a **Sashimi plot** (activate by right-clicking on the reads).
 
