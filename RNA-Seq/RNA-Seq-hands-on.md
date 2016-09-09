@@ -17,6 +17,7 @@ This exercise uses RNA-seq data from the study by [Brooks et al. 2011](http://ge
 - Create a new history for this RNA-seq exercise.
 
 - Import any two FASTQ files with sample id from [Zenodo](http://dx.doi.org/10.5281/zenodo.61771) (select data file with "fastq" ending). Load them into Galaxy by right-clicking →  copy link location and paste the link in Galaxy →  Upload File from your computer →  paste/fetch data → start.
+> Any two? Looking further ahead, it seams like it should be a pair (1 and 2) of a paired, untreated files? So I can choose between GSM461178 and GSM461177?
 
  These two files contain the first 100.000 paired-end reads of one untreated sample. Rename the datasets according to the samples if you like. As default, Galaxy takes the link as name.
 
