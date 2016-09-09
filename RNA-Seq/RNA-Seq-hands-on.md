@@ -55,7 +55,7 @@ This exercise uses RNA-seq data from the study by [Brooks et al. 2011](http://ge
 These files contain the TopHat results for the sample GSM461177_untreat_paired, but are restricted to reads that map to chr4 of Drosophila dm3.
 
 - Visualise this bam file and the three bed files in **IGV**. You might for example inspect the region between 560 kb to 600 kb on chr4. Which information does each of the bed files contain? 
-> I had to change the file types from the uploaded bed files from "tabular" to "bed" first in order to get the IGV link. Why isn't galaxy automatically treating .bed as bed? Is Java preinstalled on the systems?
+> I had to change the file types from the uploaded bed files from "tabular" to "bed" first in order to get the IGV link. Is Java preinstalled on the systems?
 
 - Also inspect the results using a **Sashimi plot** (activate by right-clicking on the reads).
 
@@ -87,6 +87,7 @@ Methods that estimate the differential expression of genes across samples requir
 **Step 6: Analyse differential gene expression with DESeq2**
 
 - In Step 5, we counted only reads that mapped to chr4. To get more meaningful results in the following analysis, please import the 3 treated and 4 untreated count files from the data library Galaxy course →  RNA-seq →  count_matrix. These files contains the read counts for all Drosophila genes and not only for reads mapped to chr4.
+> They are on Zenodo as well, aren't they?
 
 In our example, we have samples with two varying factors: (1) condition (either treated or untreated) and (2) sequencing type (paired-end or single-end). A multi-factor analysis allows us to assess  the effect of the treatment taking also the sequencing type into account.
 
