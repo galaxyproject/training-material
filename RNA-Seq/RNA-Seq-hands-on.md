@@ -87,6 +87,7 @@ Methods that estimate the differential expression of genes across samples requir
 **Step 6: Analyse differential gene expression with DESeq2**
 
 - In Step 5, we counted only reads that mapped to chr4. To get more meaningful results in the following analysis, please import the 3 treated and 4 untreated count files from the data library Galaxy course →  RNA-seq →  count_matrix. These files contains the read counts for all Drosophila genes and not only for reads mapped to chr4.
+ 
 > They are on Zenodo as well, aren't they?
 
 In our example, we have samples with two varying factors: (1) condition (either treated or untreated) and (2) sequencing type (paired-end or single-end). A multi-factor analysis allows us to assess  the effect of the treatment taking also the sequencing type into account.
