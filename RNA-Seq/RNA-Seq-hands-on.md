@@ -24,6 +24,7 @@ This exercise uses RNA-seq data from the study by [Brooks et al. 2011](http://ge
 - Run the tool **FastQC** on one of the two FASTQ files to control the quality of the reads. What is the read length? Is there anything what you find striking?
 
 - Trim low quality bases from the 3' end using **Trim Galore** on both paired-end datasets.
+> What all these tools are doing exactly is known to the audience? In order to use Trim Galore, I had to change the file type from FASTA to FASTA sanged already at this point (later it's mentioned)
 
 - Re-run **FastQC** and inspect the differences.
 
@@ -34,9 +35,11 @@ This exercise uses RNA-seq data from the study by [Brooks et al. 2011](http://ge
 
 - If you want **TopHat** to take advantage from already known reference gene annotations, make sure that the data is available in your current Galaxy history. For this exercise, please import the Ensembl gene annotation for Drosophila melanogaster (Drosophila_melanogaster.BDGP5.78.gtf) from [Zenodo](http://dx.doi.org/10.5281/zenodo.61771) by right-clicking → copy link location and paste the link in Galaxy → Upload File from your computer → paste/fetch data → start.
 
-- Run **TopHat2** with the two trimmed FASTQ files as input for forward and reverse reads as your reads are from a paired-end sequencing run. Align the reads to the Drosophila dm3 genome. The fragment size is 200 and the read length is 37, so why is 125 a good value for the mean inner distance? How do you know the fragment size (Hint: Go to the GEO entry of your data set, browse to the SRA entry of your sample and explore the library information)? 
+- Run **TopHat2** with the two trimmed FASTQ files as input for forward and reverse reads as your reads are from a paired-end sequencing run. Align the reads to the Drosophila dm3 genome. The fragment size is 200 and the read length is 37, so why is 125 a good value for the mean inner distance? How do you know the fragment size (Hint: Go to the GEO entry of your data set, browse to the SRA entry of your sample and explore the library information)?
+> I don't get the hint ;-)
 
   Enable the *Coverage Search* for novel splice junctions to increase sensitivity. Also enable *Use Own Junctions*, *Use Gene Annotation Model* and select the appropriate *Gene Model Annotations* (Drosophila_melanogaster.BDGP5.78.gtf) for your organism to enable the transcriptome alignment of **TopHat**.
+> The imported file was shown as gff, so I had to convert it to gff3 in order to use it.
   
   The TopHat algorithm splits reads into segments to map the reads across splice junctions. The default minimum length of read segments is 25, but a value of 18 seems to be a more appropriate value for this input data. Why?
 
