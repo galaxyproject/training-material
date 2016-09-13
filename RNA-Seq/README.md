@@ -9,13 +9,17 @@ A deck of slides will be available soon here: http://bgruening.github.io/trainin
 
 # Tutorials
 
-A [tutorial](tutorial/qc_guide.md) is the starting point for an exhaustive NGS-QC SOP collection.
+Two tutorials are available:
+
+In the [first tutorial](tutorials/RNA-Seq-hands-on.md), you will work from the study by Brooks et al. 2011, in which the pasilla gene in Drosophila melanogaster was depleted by RNAi and the effects on splicing events were analysed by RNA-seq.
+
+The [second tutorial](tutorials/Reference-based-RNA-seq-detailed.md) is more detailed. It follows a similar pipeline to first tutorial on the bottle dataset, but with more details particularly on the theory behind.
 
 ## Input datasets
 
 [![DOI](https://zenodo.org/badge/doi/10.5281/zenodo.61771.svg)](http://dx.doi.org/10.5281/zenodo.61771)
 
-The input datasets for both tutorials are available on
+The input datasets for first tutorial are available on
 [Zenodo with a dedicated DOI](http://dx.doi.org/10.5281/zenodo.61771).
 
 ## Galaxy instance
