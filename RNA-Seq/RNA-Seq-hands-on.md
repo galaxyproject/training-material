@@ -16,15 +16,13 @@ This exercise uses RNA-seq data from the study by [Brooks et al. 2011](http://ge
 
 - Create a new history for this RNA-seq exercise.
 
-- Import any two FASTQ files with sample id from [Zenodo](http://dx.doi.org/10.5281/zenodo.61771) (select data file with "fastq" ending). Load them into Galaxy by right-clicking →  copy link location and paste the link in Galaxy →  Upload File from your computer →  paste/fetch data → start.
-> Any two? Looking further ahead, it seams like it should be a pair (1 and 2) of a paired, untreated files? So I can choose between GSM461178 and GSM461177?
+- Import a FASTQ file pair (e.g. GSM461177_untreat_paired_subset1 and 2) with sample id from [Zenodo](http://dx.doi.org/10.5281/zenodo.61771) (select data file with "fastq" ending). Load them into Galaxy by right-clicking →  copy link location and paste the link in Galaxy →  Upload File from your computer →  paste/fetch data → start.
 
  These two files contain the first 100.000 paired-end reads of one untreated sample. Rename the datasets according to the samples if you like. As default, Galaxy takes the link as name.
 
 - Run the tool **FastQC** on one of the two FASTQ files to control the quality of the reads. What is the read length? Is there anything what you find striking?
 
-- Trim low quality bases from the 3' end using **Trim Galore** on both paired-end datasets.
-> What all these tools are doing exactly is known to the audience? In order to use Trim Galore, I had to change the file type from FASTA to FASTA sanged already at this point (later it's mentioned)
+- Trim low quality bases from the 3' end using **Trim Galore** on both paired-end datasets. In order to use Trim Galore, you may have to change the file type from fastq to fastqsanger. For this, click on the pencil button displayed in your dataset in the history, choose "datatype", and select "fastqsanger" -> "save".
 
 - Re-run **FastQC** and inspect the differences.
 
@@ -36,10 +34,9 @@ This exercise uses RNA-seq data from the study by [Brooks et al. 2011](http://ge
 - If you want **TopHat** to take advantage from already known reference gene annotations, make sure that the data is available in your current Galaxy history. For this exercise, please import the Ensembl gene annotation for Drosophila melanogaster (Drosophila_melanogaster.BDGP5.78.gtf) from [Zenodo](http://dx.doi.org/10.5281/zenodo.61771) by right-clicking → copy link location and paste the link in Galaxy → Upload File from your computer → paste/fetch data → start.
 
 - Run **TopHat2** with the two trimmed FASTQ files as input for forward and reverse reads as your reads are from a paired-end sequencing run. Align the reads to the Drosophila dm3 genome. The fragment size is 200 and the read length is 37, so why is 125 a good value for the mean inner distance? How do you know the fragment size (Hint: Go to the GEO entry of your data set, browse to the SRA entry of your sample and explore the library information)?
-> I don't get the hint ;-)
 
   Enable the *Coverage Search* for novel splice junctions to increase sensitivity. Also enable *Use Own Junctions*, *Use Gene Annotation Model* and select the appropriate *Gene Model Annotations* (Drosophila_melanogaster.BDGP5.78.gtf) for your organism to enable the transcriptome alignment of **TopHat**.
-> The imported file was shown as gff, so I had to convert it to gff3 in order to use it.
+Therefore you may have to change the data format from the Drosophila annotation file to gff3 (click on the pencil button).
   
   The TopHat algorithm splits reads into segments to map the reads across splice junctions. The default minimum length of read segments is 25, but a value of 18 seems to be a more appropriate value for this input data. Why?
 
@@ -49,14 +46,11 @@ This exercise uses RNA-seq data from the study by [Brooks et al. 2011](http://ge
 - **TopHat2** returns a bam file with the mapped reads and three bed files containing splice junctions, insertions and deletions. 
 
 - The exercise of step 2 worked for you? Fine! However the dataset might be a little too small to get you a good impression of how real data looks like.
-> well, that's disappointing. But too small? My bam file from Step 2 is 11.4 MB, the following one is 2.2 MB? "Restricted to chr4" also sounds smaller.
 - Please therefore import the following 4 files from tophat2 outputs into your history (GSM461177_untreat_paired_chr4.bam, GSM461177_untreat_paired_deletions_chr4.bed,GSM461177_untreat_paired_insertions_chr4.bed, GSM461177_untreat_paired_junctions_chr4.bed) from [Zenodo](http://dx.doi.org/10.5281/zenodo.61771) by right-clicking →  copy link location and paste the link in Galaxy →  Upload File from your computer →  paste/fetch data →  start.
 
 These files contain the TopHat results for the sample GSM461177_untreat_paired, but are restricted to reads that map to chr4 of Drosophila dm3.
 
-- Visualise this bam file and the three bed files in **IGV**. You might for example inspect the region between 560 kb to 600 kb on chr4. Which information does each of the bed files contain? 
-> I had to change the file types from the uploaded bed files from "tabular" to "bed" first in order to get the IGV link. Is Java preinstalled on the systems?
-
+- Visualise this bam file and the three bed files in **IGV**. You might for example inspect the region between 560 kb to 600 kb on chr4. Which information does each of the bed files contain? You may have to change the data type from "tabular" to "bed" (use the pencil button).
 - Also inspect the results using a **Sashimi plot** (activate by right-clicking on the reads).
 
 
@@ -86,9 +80,7 @@ Methods that estimate the differential expression of genes across samples requir
 
 **Step 6: Analyse differential gene expression with DESeq2**
 
-- In Step 5, we counted only reads that mapped to chr4. To get more meaningful results in the following analysis, please import the 3 treated and 4 untreated count files from the data library Galaxy course →  RNA-seq →  count_matrix. These files contains the read counts for all Drosophila genes and not only for reads mapped to chr4.
- 
-> They are on Zenodo as well, aren't they?
+- In Step 5, we counted only reads that mapped to chr4. To get more meaningful results in the following analysis, please import the 3 treated and 4 untreated count files from [Zenodo](http://dx.doi.org/10.5281/zenodo.61771) by right-clicking →  copy link location and paste the link in Galaxy →  Upload File from your computer →  paste/fetch data →  start. These files contains the read counts for all Drosophila genes and not only for reads mapped to chr4.
 
 In our example, we have samples with two varying factors: (1) condition (either treated or untreated) and (2) sequencing type (paired-end or single-end). A multi-factor analysis allows us to assess  the effect of the treatment taking also the sequencing type into account.
 
