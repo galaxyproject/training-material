@@ -16,29 +16,31 @@ This exercise uses RNA-seq data from the study by [Brooks et al. 2011](http://ge
 
 - Create a new history for this RNA-seq exercise.
 
-- Import a FASTQ file pair (e.g. GSM461177_untreat_paired_subset1 and 2) with sample id from [Zenodo](http://dx.doi.org/10.5281/zenodo.61771) (select data file with "fastq" ending). Load them into Galaxy by right-clicking →  copy link location and paste the link in Galaxy →  Upload File from your computer →  paste/fetch data → start.
+- Import a FASTQ file pair (e.g. GSM461177_untreat_paired_subset_1 and 2) with sample id from [Zenodo](http://dx.doi.org/10.5281/zenodo.61771) (select data file with "fastq" ending). Load them into Galaxy by right-clicking →  copy link location and paste the link in Galaxy → Get Data →  Upload File from your computer →  paste/fetch data → Start. 
 
- These two files contain the first 100.000 paired-end reads of one untreated sample. Rename the datasets according to the samples if you like. As default, Galaxy takes the link as name.
+ (Recommended: Select the correct file type ("fastqsanger") and genome ("dm3") directly in the upload dialogue. A lot of downstream programs will require these information. With the upload you can assign the correct settings for all uploaded files at once!)
+
+ Both files contain the first 100.000 paired-end reads of one untreated sample. Rename the datasets according to the samples (recommended). As default, Galaxy takes the link as name.
 
 - Run the tool **FastQC** on one of the two FASTQ files to control the quality of the reads. What is the read length? Is there anything what you find striking?
 
-- Trim low quality bases from the 3' end using **Trim Galore** on both paired-end datasets. In order to use Trim Galore, you may have to change the file type from fastq to fastqsanger. For this, click on the pencil button displayed in your dataset in the history, choose "datatype", and select "fastqsanger" -> "save".
+- Trim low quality bases from the 3' end using **Trim Galore** on both paired-end datasets. In order to use Trim Galore make sure that the file type is set to *fastqsanger* (not *fastq*)! I you haven't changed it yet, click on the pencil button displayed in your dataset in the history, choose Datatype → select fastqsanger → Save.
 
 - Re-run **FastQC** and inspect the differences.
 
 
 **Step 2: Mapping of the reads with TopHat**
 
-- Annoying but necessary: Before continuing with the mapping step, change the file type of the FASTQ files to *fastqsanger*. This signals that the FASTQ contains Sanger-scaled quality values. **TopHat2** will otherwise not be able to accept the files for input! This can be done by clicking on the pencil item of the dataset (edit attributes) →  Datatype →  select fastqsanger
+- Prerequisite 1: The mapper TopHat is another program which definitly requires the correct setting for the qulity values contained in the FASTQs. TopHat2 won't accept the files for input without it. In this example the correct setting is "fastqsanger" signalling a file with Sanger-scaled quality scores. It is the most frequent type, e.g. used by the current generation of Illumina high-throughput sequencers.
+Again: In case you need to change the file type to *fastqsanger* click on the pencil item of the dataset (edit attributes) → Datatype → select fastqsanger → Save.
 
-- If you want **TopHat** to take advantage from already known reference gene annotations, make sure that the data is available in your current Galaxy history. For this exercise, please import the Ensembl gene annotation for Drosophila melanogaster (Drosophila_melanogaster.BDGP5.78.gtf) from [Zenodo](http://dx.doi.org/10.5281/zenodo.61771) by right-clicking → copy link location and paste the link in Galaxy → Upload File from your computer → paste/fetch data → start.
+- Prerequisite 2: If you want TopHat to take advantage from already known reference gene annotations, load the reference annotation file into your current Galaxy history. For this exercise, please import the Ensembl gene annotation for Drosophila melanogaster (Drosophila_melanogaster.BDGP5.78.gtf) from [Zenodo](http://dx.doi.org/10.5281/zenodo.61771) by right-clicking → copy link location and paste the link in Galaxy → Upload File from your computer → paste/fetch data → Start. The file type of this file has to be changed to "gff3"!
 
-- Run **TopHat2** with the two trimmed FASTQ files as input for forward and reverse reads as your reads are from a paired-end sequencing run. Align the reads to the Drosophila dm3 genome. The fragment size is 200 and the read length is 37, so why is 125 a good value for the mean inner distance? How do you know the fragment size (Hint: Go to the GEO entry of your data set, browse to the SRA entry of your sample and explore the library information)?
+- Run **TopHat** (version 2) with the two trimmed FASTQ files as input (`paired-end (as individual datasets)`). Note, this data comes from a paired-end sequencing run and therefore consists of two files that belong together, one containing the forward and the other the backward parts of the transcript fragments. Align the reads to the built in reference Drosophila `dm3` genome. The fragment size is 200 and the read length is 37, so why is `125` a good value for the mean inner distance? How do you know the fragment size (Hint: Go to the GEO entry of your data set, browse to the SRA entry of your sample and explore the library information)?
 
-  Enable the *Coverage Search* for novel splice junctions to increase sensitivity. Also enable *Use Own Junctions*, *Use Gene Annotation Model* and select the appropriate *Gene Model Annotations* (Drosophila_melanogaster.BDGP5.78.gtf) for your organism to enable the transcriptome alignment of **TopHat**.
-Therefore you may have to change the data format from the Drosophila annotation file to gff3 (click on the pencil button).
-  
-  The TopHat algorithm splits reads into segments to map the reads across splice junctions. The default minimum length of read segments is 25, but a value of 18 seems to be a more appropriate value for this input data. Why?
+  Also enable the `Full parameter list`: Enable `coverage search` for novel splice junctions to increase sensitivity. Use `own junctions`, `Use Gene Annotation Model` and select the appropriate `Gene Model Annotations` (`Drosophila_melanogaster.BDGP5.78.gtf`) for your organism to enable the transcriptome alignment of **TopHat**.
+
+  The TopHat algorithm splits reads into segments to map the reads across splice junctions. The default minimum length of read segments is 25, but a value of `18` seems to be a more appropriate value for this input data. Why?
 
 
 **Step 3: Inspecting the TopHat results**
