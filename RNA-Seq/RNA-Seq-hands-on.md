@@ -16,13 +16,15 @@ This exercise uses RNA-seq data from the study by [Brooks et al. 2011](http://ge
 
 - Create a new history for this RNA-seq exercise.
 
-- Import a FASTQ file pair (e.g. GSM461177_untreat_paired_subset1 and 2) with sample id from [Zenodo](http://dx.doi.org/10.5281/zenodo.61771) (select data file with "fastq" ending). Load them into Galaxy by right-clicking →  copy link location and paste the link in Galaxy →  Upload File from your computer →  paste/fetch data → start.
+- Import a FASTQ file pair (e.g. GSM461177_untreat_paired_subset_1 and 2) with sample id from [Zenodo](http://dx.doi.org/10.5281/zenodo.61771) (select data file with "fastq" ending). Load them into Galaxy by right-clicking →  copy link location and paste the link in Galaxy → Get Data →  Upload File from your computer →  paste/fetch data → start. 
 
- These two files contain the first 100.000 paired-end reads of one untreated sample. Rename the datasets according to the samples if you like. As default, Galaxy takes the link as name.
+ (Recommended: Select the correct file type ("fastqsanger") and genome ("dm3") directly in the upload dialogue. A lot of downstream programs will require these information. With the upload you can assign the correct settings for all uploaded files at once!)
+
+ Both files contain the first 100.000 paired-end reads of one untreated sample. Rename the datasets according to the samples (recommended). As default, Galaxy takes the link as name.
 
 - Run the tool **FastQC** on one of the two FASTQ files to control the quality of the reads. What is the read length? Is there anything what you find striking?
 
-- Trim low quality bases from the 3' end using **Trim Galore** on both paired-end datasets. In order to use Trim Galore, you may have to change the file type from fastq to fastqsanger. For this, click on the pencil button displayed in your dataset in the history, choose "datatype", and select "fastqsanger" -> "save".
+- Trim low quality bases from the 3' end using **Trim Galore** on both paired-end datasets. In order to use Trim Galore make sure that the file type is set to **fastqsanger** (not fastq)! I you haven't changed it yet, click on the pencil button displayed in your dataset in the history, choose "Datatype" → select "fastqsanger" → "Save".
 
 - Re-run **FastQC** and inspect the differences.
 
