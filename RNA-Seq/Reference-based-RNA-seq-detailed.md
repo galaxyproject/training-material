@@ -112,7 +112,7 @@ After sequencing is performed you have a collection of sequencing reads for each
 
 Spliced mappers have been developed to efficiently map transcript-derived reads against genomes.
 
-### TopHat, TopHat2, and HiSat
+### TopHat, TopHat2, and HISAT
 
 [Tophat](http://bioinformatics.oxfordjournals.org/content/25/9/1105.abstract) was one of the first tools designed specifically to address this problem by identifying potential exons using reads that do map to the genome, generating possible splices between neighboring exons, and comparing reads that did not initially map to the genome against these *in silico* created junctions:
 
@@ -146,7 +146,7 @@ At the second stage STAR stitches MMPs to generate read-level alignments that (c
 
 The previous step - mapping - assigns RNAseq reads to genomic locations and identifies splice junctions from reads that originate from different exons. At transcript reconstruction step this information is taken further in attempt to build transcript models. There is a number of tools for performing this task. A benchmarking paper by Hayer *et al.* [2015](http://bioinformatics.oxfordjournals.org/content/early/2015/09/03/bioinformatics.btv488.full.pdf+html) attempted to compare performance of existing approaches with one of the outcomes shown below:
 
-|Comparison of transcript reconsruction approaches|
+|Comparison of transcript reconstruction approaches|
 |----------------|
 |[![](https://github.com/nekrut/galaxy/wiki/images/rnaseq_comparison.png)](http://bioinformatics.oxfordjournals.org/content/early/2015/09/08/bioinformatics.btv488/F5.large.jpg)|
 |<sub>Here *recall* (the number of correctly constructed forms divided by the total number of real forms) versus *precision* (true positives divided by the sum of true positives and false positives) are plotted for seven transcript assemblers tested on two simulated datasets: *EnsemblPerfect* and *EnsemblRealistic*. The shaded region is indicating suboptimal performance (i.e., the white, unshaded region is "good"). The figure is from Hayer *et al.* [2015](http://bioinformatics.oxfordjournals.org/content/early/2015/09/03/bioinformatics.btv488.full.pdf+html).</sub>|
@@ -179,29 +179,29 @@ To associate reads with transcripts the reads need to be aligned to the transcri
 |Assigning reads to transcripts: Sailfish|
 |--------|
 |![](https://github.com/nekrut/galaxy/wiki/images/sailfish.png)|
-|<sub>Sailfish indexes input transcriptome for a fixed *k*-mer length and compares *k*-mers derived from RNAseq reads against this index. Image from Patro et al. [2014](http://www.nature.com/nbt/journal/v32/n5/full/nbt.2862.html)</sub>|
+|<sub>Sailfish indexes input transcriptome for a fixed *k*-mer length and compares *k*-mers derived from RNAseq reads against this index. Image from Patro *et al.* [2014](http://www.nature.com/nbt/journal/v32/n5/full/nbt.2862.html)</sub>|
 
 The current version of Sailfish uses [quasi-alignment](http://biorxiv.org/content/biorxiv/early/2015/10/22/029652.full.pdf) to extend exact matches found with *k*-mers:
 
 |Quasi-alignment of reads in Sailfish|
 |--------|
 |![](https://github.com/nekrut/galaxy/wiki/images/quasi_aln.png)|
-|<sub>In Sailfish version [0.7.0](https://github.com/kingsfordgroup/sailfish/releases/tag/v0.7.0) and up transcriptome is concatenated into a single sequence using `$` separators from which a [suffix array](https://en.wikipedia.org/wiki/Suffix_array) and a [hash table](https://en.wikipedia.org/wiki/Hash_table) are constructed. A *k*-mer from an RNAseq read (green) is looked up in the hash table, which immediately gives its position in the suffix array allowing to extend the march as described in the legend and the [paper](http://biorxiv.org/content/biorxiv/early/2015/10/22/029652.full.pdf). Image from  Srivastava et al. [2015](http://biorxiv.org/content/biorxiv/early/2015/10/22/029652.full.pdf)</sub>|
+|<sub>In Sailfish version [0.7.0](https://github.com/kingsfordgroup/sailfish/releases/tag/v0.7.0) and up transcriptome is concatenated into a single sequence using `$` separators from which a [suffix array](https://en.wikipedia.org/wiki/Suffix_array) and a [hash table](https://en.wikipedia.org/wiki/Hash_table) are constructed. A *k*-mer from an RNAseq read (green) is looked up in the hash table, which immediately gives its position in the suffix array allowing to extend the march as described in the legend and the [paper](http://biorxiv.org/content/biorxiv/early/2015/10/22/029652.full.pdf). Image from  Srivastava *et al.* [2015](http://biorxiv.org/content/biorxiv/early/2015/10/22/029652.full.pdf)</sub>|
 
 [Kallisto](http://pachterlab.github.io/kallisto/) also utilizes *k*-mer matching but uses a different data structure. It constructs a [De Bruijn graph](https://en.wikipedia.org/wiki/De_Bruijn_graph) from transcriptome input (pane **b** of the figure below). This graph is different from De Bruijn graphs used for genome assembly in that its nodes are *k*-mers and transcripts correspond to paths through the graph. To accommodate multiple transcripts that can lay along the same path (or sub-path) the paths are "colored" with each transcript given a distinct "color" (in genome assembly the graph is built from the reads and nodes usually correspond to overlaps between *k*-mers forming incoming and outgoing edges). Non-branching sections of the graph that have identical coloring are "glued" into contigs. Finally a [hash table](https://en.wikipedia.org/wiki/Hash_table) is built that stores the position of each transcriptome *k*-mer within the graph:
 
 |Assigning reads to transcripts: Kallisto|
 |---------|
 |![](https://github.com/nekrut/galaxy/wiki/images/kallisto.png)|
-|<sub>Here a black read is being associated with a set consisting of red, blue, and green transcripts (**a**). First, a graph is built from transcriptome (**b**). Next, by finding common *k*-mers between the read and the graph the read is "threaded" along a path (**c** and **d**). The colors along that path would indicate which transcripts it is likely derived from. Specifically, this is done by taking intersection of "colors" (**c**). It this case the read is assigned to two transcripts: red and blue. Image from Bray et al. [2015](http://arxiv.org/pdf/1505.02710v2.pdf)</sub>|
+|<sub>Here a black read is being associated with a set consisting of red, blue, and green transcripts (**a**). First, a graph is built from transcriptome (**b**). Next, by finding common *k*-mers between the read and the graph the read is "threaded" along a path (**c** and **d**). The colors along that path would indicate which transcripts it is likely derived from. Specifically, this is done by taking intersection of "colors" (**c**). It this case the read is assigned to two transcripts: red and blue. Image from Bray *et al.* [2015](http://arxiv.org/pdf/1505.02710v2.pdf)</sub>|
 
 [Salmon](https://combine-lab.github.io/salmon/about/) does not use *k*-mer matching approach. Instead it creates [bwa](https://github.com/lh3/bwa)-like [FM-index](https://en.wikipedia.org/wiki/FM-index) and uses it to finds chains of *Maximal Exact Matches* (MEMs) and *Super Maximal Exact Matches* (SMEMs) between a read and the transcriptome.   
-Patro et al. [2015](http://biorxiv.org/content/biorxiv/early/2015/06/27/021592.full.pdf) define a MEM as "*a substring that is shared by the query (read) and reference (transcript) that cannot be extended in either direction without introducing a mismatch*". Similraly, a SMEM is defined as a "*MEM that is not contained within any other MEM on the query.*" One of the advantages of utilizing the FM-index is that a new index does not need to re-generated for a search with different set of parameters. In the case of Sailfish and Kallisto an index is dependent on *k*-mer length and has to be recomputed every time the *k* is changed. The overall schematics of Salmon operation is as follows:
+Patro *et al.* [2015](http://biorxiv.org/content/biorxiv/early/2015/06/27/021592.full.pdf) define a MEM as "*a substring that is shared by the query (read) and reference (transcript) that cannot be extended in either direction without introducing a mismatch*". Similarly, a SMEM is defined as a "*MEM that is not contained within any other MEM on the query.*" One of the advantages of utilizing the FM-index is that a new index does not need to re-generated for a search with different set of parameters. In the case of Sailfish and Kallisto an index is dependent on *k*-mer length and has to be recomputed every time the *k* is changed. The overall schematics of Salmon operation is as follows:
 
 |Assigning reads to transcripts: Salmon|
 |---------|
 |![](https://github.com/nekrut/galaxy/wiki/images/salmon.png)|
-|Image from Patro et al. [2015](http://biorxiv.org/content/biorxiv/early/2015/06/27/021592.full.pdf)|
+|Image from Patro *et al.* [2015](http://biorxiv.org/content/biorxiv/early/2015/06/27/021592.full.pdf)|
 
 ### Estimating transcript levels
 
@@ -209,12 +209,12 @@ Once reads are apportioned across individual transcripts they can be quantified.
 
 #### Flow networks
 
-StringTie, which performs assembly and quantification simultaneously converts splice graph into a flow network for which it solves [the maximum flow problem](https://en.wikipedia.org/wiki/Maximum_flow_problem). The maximum flow is such network represents the expression level for a given transcript:
+StringTie, which performs assembly and quantification simultaneously converts splice graphs into a flow network for which it solves [the maximum flow problem](https://en.wikipedia.org/wiki/Maximum_flow_problem). The maximum flow in such network represents the expression level for a given transcript:
 
 |StringTie flow network|
 |--------|
 |![](https://github.com/nekrut/galaxy/wiki/images/stringtie2.png)|
-|<sub>Here each exon node from the splice graph is split into *in* and *out* nodes connected with an edge weighted by the number of reads corresponding to that exon. For example, the first exon is covered by seven reads and so the edge between 1-in and 1-out has a weight of 7. Expression level would correspond to the maximum flow through a path representing a given transcript. Image from Pertea et al. [2015](http://www.nature.com/nbt/journal/v33/n3/full/nbt.3122.html)</sub>|
+|<sub>Here each exon node from the splice graph is split into *in* and *out* nodes connected with an edge weighted by the number of reads corresponding to that exon. For example, the first exon is covered by seven reads and so the edge between 1-in and 1-out has a weight of 7. Expression level would correspond to the maximum flow through a path representing a given transcript. Image from Pertea *et al.* [2015](http://www.nature.com/nbt/journal/v33/n3/full/nbt.3122.html)</sub>|
 
 #### Expectation Maximization
 
@@ -224,7 +224,7 @@ red   =  (0.33 + 0.0 + 0.5 + 1.0 + 0.5)/(2.33 + 1.33 + 1.33) = 0.47
 green =  (0.33 + 0.5 + 0.0 + 0.0 + 0.5)/(2.33 + 1.33 + 1.33) = 0.27
 blue  =  (0.33 + 0.5 + 0.5 + 0.0 + 0.0)/(2.33 + 1.33 + 1.33) = 0.27
 ```
-During next expectation stage read are re-apportioned across transcripts and the procedure is repeated until convergence:
+During next expectation stage reads are re-apportioned across transcripts and the procedure is repeated until convergence:
 
 |Expectation Maximization (EM)|
 |--------|
@@ -238,12 +238,12 @@ As we've seen above quantification for a transcript is estimated using the numbe
  * Normalization for comparison within a **single** sample;
  * Normalization for comparison among **multiple** samples/conditions. 
 
-In their [tutorial](http://chagall.med.cornell.edu/RNASEQcourse/) Dündar et al. have compiled a table summarizing various metrics. Below is description of normalization technique for within sample comparisons (between sample comparison can be found in the next section on differential expression analysis):
+In their [tutorial](http://chagall.med.cornell.edu/RNASEQcourse/) Dündar *et al.* have compiled a table summarizing various metrics. Below is description of normalization technique for within sample comparisons (between sample comparison can be found in the next section on differential expression analysis):
 
 |RNAseq normalization metrics: Within sample comparisons|
 |-------|
 |![](https://github.com/nekrut/galaxy/wiki/images/within_norm.png)|
-|<sub>Table from Dündar et al. [2015](http://chagall.med.cornell.edu/RNASEQcourse/)</sub>|
+|<sub>Table from Dündar *et al.* [2015](http://chagall.med.cornell.edu/RNASEQcourse/)</sub>|
 
 In addition, an excellent overview of these metrics can be found [here](https://haroldpimentel.wordpress.com/2014/05/08/what-the-fpkm-a-review-rna-seq-expression-units/). 
 
@@ -256,14 +256,14 @@ The goal of differential expression analysis (DE) is to find gene (DGE) or trans
  * Estimate the *magnitude* of expression differences;
  * Estimate the *significance* of expression differences.
 
-For this expression is estimated from read counts and attempts are made to correct for variability in measurements using replicates that are absolutely essential accurate results (see below). We begin our short discussion on DE by reproducing a figure from Trapnell et al. [2013](http://www.nature.com/nbt/journal/v31/n1/abs/nbt.2450.html) highlighting some of the challenges associated with judging expression differences from read counts:
+For this expression is estimated from read counts and attempts are made to correct for variability in measurements using replicates that are absolutely essential accurate results (see below). We begin our short discussion on DE by reproducing a figure from Trapnell *et al.* [2013](http://www.nature.com/nbt/journal/v31/n1/abs/nbt.2450.html) highlighting some of the challenges associated with judging expression differences from read counts:
 
-|Differential expression: Read counts and Expression levels |
+|Differential expression: Read counts and expression levels |
 |-------|
 |![](https://github.com/nekrut/galaxy/wiki/images/diff.png)|
-|<sub>**Change in fragment count for a gene does not necessarily equal a change in expression**. (**a**) Simple read-counting schemes sum the fragments incident on a gene’s exons. The exon-union model counts reads falling on any of a gene’s exons, whereas the exon-intersection model counts only reads on constitutive exons. (**b**) Both of the exon-union and exon intersection counting schemes may incorrectly estimate a change in expression in genes with multiple isoforms. The true expression is estimated by the sum of the length-normalized isoform read counts. The discrepancy between a change in the union or intersection count and a change in gene expression is driven by a change in the abundance of the isoforms with respect to one another. In the top row, the gene generates the same number of reads in conditions A and B, but in condition B, all of the reads come from the shorter of the two isoforms, and thus the true expression for the gene is higher in condition B. The intersection count scheme underestimates the true change in gene expression, and the union scheme fails to detect the change entirely. In the middle row, the intersection count fails to detect a change driven by a shift in the dominant isoform for the gene. The union scheme detects a shift in the wrong direction. In the bottom row, the gene’s expression is constant, but the isoforms undergo a complete switch between conditions A and B. Both simplified counting schemes register a change in count that does not reflect a change in gene expression. Figure from Trapnell et al. [2013] (http://www.nature.com/nbt/journal/v31/n1/abs/nbt.2450.html)</sub>|
+|<sub>**Change in fragment count for a gene does not necessarily equal a change in expression**. (**a**) Simple read-counting schemes sum the fragments incident on a gene’s exons. The exon-union model counts reads falling on any of a gene’s exons, whereas the exon-intersection model counts only reads on constitutive exons. (**b**) Both of the exon-union and exon intersection counting schemes may incorrectly estimate a change in expression in genes with multiple isoforms. The true expression is estimated by the sum of the length-normalized isoform read counts. The discrepancy between a change in the union or intersection count and a change in gene expression is driven by a change in the abundance of the isoforms with respect to one another. In the top row, the gene generates the same number of reads in conditions A and B, but in condition B, all of the reads come from the shorter of the two isoforms, and thus the true expression for the gene is higher in condition B. The intersection count scheme underestimates the true change in gene expression, and the union scheme fails to detect the change entirely. In the middle row, the intersection count fails to detect a change driven by a shift in the dominant isoform for the gene. The union scheme detects a shift in the wrong direction. In the bottom row, the gene’s expression is constant, but the isoforms undergo a complete switch between conditions A and B. Both simplified counting schemes register a change in count that does not reflect a change in gene expression. Figure from Trapnell *et al.* [2013] (http://www.nature.com/nbt/journal/v31/n1/abs/nbt.2450.html)</sub>|
 
-> The following discussion of DGE logic is reproduced from Dündar et al. [2015](http://chagall.med.cornell.edu/RNASEQcourse/).
+> The following discussion of DGE logic is reproduced from Dündar *et al.* [2015](http://chagall.med.cornell.edu/RNASEQcourse/).
 
 To determine the genes whose read count differences between two conditions are greater than expected by chance, DGE tools must make assumptions about the distribution of read counts. The null hypothesis – that the mean read counts of the samples of condition **A** are equal to the mean read counts of the samples of condition **B** – is tested for each gene individually. One of the most popular choices to model the read counts is the [Poisson distribution](https://en.wikipedia.org/wiki/Poisson_distribution) because:
  
@@ -277,7 +277,7 @@ The nice feature of a Poisson distribution is that variance = mean. Thus, if the
 In contrast to the Poisson distribution, we now need to estimate two parameters from the read counts: the mean as well as the dispersion. The precision of these estimates strongly depends on the number (and variation) of replicates – the more replicates, the better the grasp on the underlying mean expression values of unchanged genes and the variance that is due to biological variation rather than the experimental treatment. For most RNA-seq experiments, only two to three replicates are available, which is not enough for reliable mean and variance estimates. Some tools therefore compensate for the lack of replication by borrowing information across genes with similar expression values and shrink a given gene’s variance towards the regressed values. These fitted values of the mean and dispersion are then used instead of the raw estimates
 to test for differential gene expression.
 
-The best performing tools tend to be [edgeR](https://bioconductor.org/packages/release/bioc/html/edgeR.html), [DESeq/DESeq2](https://bioconductor.org/packages/release/bioc/html/DESeq2.html), and [limma-voom](https://www.bioconductor.org/packages/release/bioc/html/limma.html) (see Rapaport et al. ([2013](http://link.springer.com/article/10.1186/gb-2013-14-9-r95)); Soneson and Delorenzi ([2013](https://bmcbioinformatics.biomedcentral.com/articles/10.1186/1471-2105-14-91)); Schurch et al. ([2015](http://arxiv.org/abs/1505.02017)) for reviews of DGE tools). DESeq and limma-voom tend to be more conservative than edgeR (better control of false positives), but edgeR is recommended for experiments with fewer than 12 replicates (Schurch et al., [2015](http://arxiv.org/abs/1505.02017)).
+The best performing tools tend to be [edgeR](https://bioconductor.org/packages/release/bioc/html/edgeR.html), [DESeq/DESeq2](https://bioconductor.org/packages/release/bioc/html/DESeq2.html), and [limma-voom](https://www.bioconductor.org/packages/release/bioc/html/limma.html) (see Rapaport *et al.* ([2013](http://link.springer.com/article/10.1186/gb-2013-14-9-r95)); Soneson and Delorenzi ([2013](https://bmcbioinformatics.biomedcentral.com/articles/10.1186/1471-2105-14-91)); Schurch *et al.* ([2015](http://arxiv.org/abs/1505.02017)) for reviews of DGE tools). DESeq and limma-voom tend to be more conservative than edgeR (better control of false positives), but edgeR is recommended for experiments with fewer than 12 replicates (Schurch et al., [2015](http://arxiv.org/abs/1505.02017)).
 
 ## Let's try it
 
@@ -389,7 +389,7 @@ We will expand RNA seq tutorials this year to incorporate:
 
  - *ad hoc* analyses with R using Galaxy's interactive environment. This will allow executing R code directly in Galaxy as it is used in many RNAseq tutorials;
  - reference-free RNAseq with `Trinity`;
- - Differential Transcript expression with `Sailfish` and `DESeq2`.
+ - differential transcript expression with `Sailfish` and `DESeq2`.
 
 ## If things don't work...
 ...you need to complain. Use [Galaxy's BioStar Channel](https://usegalaxy.org/biostar/biostar_redirect) to do this. 
