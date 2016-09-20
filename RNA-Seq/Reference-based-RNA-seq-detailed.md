@@ -283,13 +283,13 @@ The best performing tools tend to be [edgeR](https://bioconductor.org/packages/r
 
 ### The data
 
-In this example we will use a downsampled version of simulated *Drosophila melanogaster* RNA-seq data used by Trapnell et al. [2012](http://www.nature.com/nprot/journal/v7/n3/full/nprot.2012.016.html). These include two conditions (**C1** and **C2**), each containing three replicates (**R1**, **R2**, and **R3**) sequenced as a paired end library. Thus in total there are 12 fastq datasets.  
+In this example we will use a downsampled version of simulated *Drosophila melanogaster* RNA-seq data used by Trapnell *et al.* [2012](http://www.nature.com/nprot/journal/v7/n3/full/nprot.2012.016.html). These include two conditions (**C1** and **C2**), each containing three replicates (**R1**, **R2**, and **R3**) sequenced as a paired end library. Thus in total there are 12 fastq datasets.  
 
 Here is what to do to load the data:
 
 | Loading the data and create dataset collections |
 |------------------|
-| Go to the [data library](https://usegalaxy.org/library/list#folders/Ff4ce53393dae30ee) and select all fastq files. Then Click `to History` button:|
+| Go to the [data library](https://usegalaxy.org/library/list#folders/Ff4ce53393dae30ee) and select all fastq files. Then click `to History` button:|
 |![](https://github.com/nekrut/galaxy/wiki/images/rnaseq_library.png)|
 |The datasets will appear in your history:|
 |![](https://github.com/nekrut/galaxy/wiki/images/rnaseq_data_in_history.png)|
@@ -370,13 +370,13 @@ Before we can use `HTseq-count` we need to download gene annotations for version
 
 | DESeq2 in Galaxy |
 |-----------|
-|The `DESeq2` Galaxy's interface is shown below. `DESeq2` allows to incorporate multiple *factors* in the analysis. In our case we only have one factor, which we call **Conditions**. This is because we are trying to find genes that are differentially expressed between two conditions. The first condition will the first **factor level**, while condition 2 will be the second **factor level**. Here the input for this first factor level is set to a collection `84: htseq-count on collection 37` and the input for the second input is set to `92: htseq-count on collection 57`. Make sure that **Visualising the analysis results** is set to `Yes`:|
+|The `DESeq2` Galaxy's interface is shown below. `DESeq2` allows to incorporate multiple *factors* in the analysis. In our case we only have one factor, which we call **Conditions**. This is because we are trying to find genes that are differentially expressed between two conditions. The first condition will be the first **factor level**, while condition 2 will be the second **factor level**. Here the input for this first factor level is set to a collection `84: htseq-count on collection 37` and the input for the second input is set to `92: htseq-count on collection 57`. Make sure that **Visualising the analysis results** is set to `Yes`:|
 |![](https://github.com/nekrut/galaxy/wiki/images/deseq2_interface.png)|
 |This will produce [output](https://usegalaxy.org/datasets/bbd44e69cb8906b5d648fe21c36ac662/display/?preview=True) as shown below. The columns are: (**1**) gene identifier, (**2**) mean normalised counts, averaged over all samples from both conditions, (**3**) logarithm (base 2) of the fold change, (**4**) the standard error estimate for the log2 fold change estimate, (**5**) [Wald test](https://en.wikipedia.org/wiki/Wald_test) statistic, (**6**) p value for the statistical significance of this change, and (**7**) *p*-value adjusted for multiple testing with the Benjamini-Hochberg procedure which controls false discovery rate ([FDR](https://en.wikipedia.org/wiki/False_discovery_rate)). There is only one gene with significant change in gene expression between conditions: `CG1803-RC` with *p*-value = 1.6x10<sup>-05</sup>: |
 |![](https://github.com/nekrut/galaxy/wiki/images/deseq2_output.png)|
 | In addition to the [list of genes](https://usegalaxy.org/datasets/bbd44e69cb8906b5d648fe21c36ac662/display/?preview=True) DESeq2 outputs a graphical summary of the result. It includes a number of plots that should be used to evaluate the quality of the experiment. The histogram of *p*-values below shows that in our sample there is in fact just one instance of a significant *p*-value:|
 |![](https://github.com/nekrut/galaxy/wiki/images/p_val_hist.png)|
-|The [MA plot](https://en.wikipedia.org/wiki/MA_plot) below shows the relationship between the expression change (M) and average expression strength (A). Genes with adjusted *p*-value < 0.1 are in red (there is only one such gene in thi sample at the bottom of the graph):|
+|The [MA plot](https://en.wikipedia.org/wiki/MA_plot) below shows the relationship between the expression change (M) and average expression strength (A). Genes with adjusted *p*-value < 0.1 are in red (there is only one such gene in this sample at the bottom of the graph):|
 |![](https://github.com/nekrut/galaxy/wiki/images/MA_plot.png)|
 |The Principal Component Analysis ([PCA](https://en.wikipedia.org/wiki/Principal_component_analysis)) shows the separation between Condition 1 and 2. This type of plot is useful for visualizing the overall effect of experimental covariates and batch effects (each replicate is plotted as an individual data point): |
 |![](https://github.com/nekrut/galaxy/wiki/images/pca.png)|
