@@ -1,6 +1,6 @@
 # Galaxy - DNA Methylation data analysis training material
 
-FROM bgruening/galaxy-ngs-preprocessing
+FROM bgruening/galaxy-epigenetics
 
 MAINTAINER Björn A. Grüning, bjoern.gruening@gmail.com
 
