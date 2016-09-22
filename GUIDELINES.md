@@ -3,11 +3,8 @@ Guidelines
 
 First of all, **thank you** for contributing.
 
-Here, you can find few rules to follow in order to add and maintain the training material.
 
-By contributing, you agree that we may redistribute your work under [our license](LICENSE.md), and to follow the Guidelines in this document.
-
-In exchange, we will address your issues and/or assess your change proposal as promptly as we can, and help you become a member of our community.
+By contributing, you agree that we may redistribute your work under [our license](LICENSE.md), and to follow the Guidelines in this document. In exchange, we will address your issues and/or assess your change proposal as promptly as we can, and help you become a member of our community.
 
 # How to contribute
 
@@ -15,16 +12,15 @@ The easiest way to start contributing is to file an issue to tell us about a spe
 
 Once, you are feeling more comfortable, you can propose changes to this training material.
 
-We use [GitHub flow][https://guides.github.com/introduction/flow/] to manage changes:
-1.  Create a fork of this repository on GitHub.
-2.  Clone your fork of this repository to create a local copy on your computer.
-3.  Create a new branch in your local copy for each significant change.
-4.  Commit the change in that branch.
-5.  Push that branch to your fork of this repository on GitHub.
-6.  Submit a pull request from that branch to the [master repository][https://github.com/bgruening/training-material].
-7.  If you receive feedback,
-    make changes in your local clone and push to your branch on GitHub:
-    the pull request will update automatically.
+We use [GitHub flow](https://guides.github.com/introduction/flow/) to manage changes:
+
+1. Create a fork of this repository on GitHub
+2. Clone your fork of this repository to create a local copy on your computer
+3. Create a new branch in your local copy for each significant change
+4. Commit the changes in that branch
+5. Push that branch to your fork on GitHub
+6. Submit a pull request from that branch to the [master repository](https://github.com/bgruening/training-material)
+7. If you receive feedback, make changes in your local clone and push to your branch on GitHub: the pull request will update automatically
 
 For beginners, the GitHub interface will help you in the process in edition of one file. It will automatically create a fork of this repository where you can safely work and then submit the changes as a pull request.
 
