@@ -1,8 +1,8 @@
 # Galaxy - <topic name> training material
 
-FROM bgruening/<base-galaxy-flavor>
+FROM <base-galaxy-flavor>
 
-MAINTAINER Björn A. Grüning, bjoern.gruening@gmail.com
+MAINTAINER <maintener-name>, <maintener-email>
 
 ENV GALAXY_CONFIG_BRAND Topic Name
 ENV ENABLE_TTS_INSTALL True

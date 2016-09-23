@@ -23,7 +23,7 @@ The input datasets for the tutorials are available on
 For these tutorials, you can use the dedicated Docker image:
 
 ```
-docker run -d -p 8080:80 bgruening/<name-of-docker-image>
+docker run -d -p 8080:80 <name-of-docker-image>
 ```
 
 It will launch a flavored Galaxy instance available on

@@ -17,7 +17,7 @@ Galaxy Docker repository for Exome sequencing training material :whale: :eyes:
 To launch:
 
 ```
-docker run -d -p 8080:80 bgruening/galaxy-training-exome-seq
+docker run -d -p 8080:80 <name-of-docker-image>
 ```
 
 For more details about this command line or specific usage, please consult the
