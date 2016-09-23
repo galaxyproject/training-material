@@ -34,7 +34,7 @@ Introduction about this part
 
 Short introduction about this subpart.
 
-***:pencil: Hands on!***
+***:pencil2: Hands on!***
 
 1. First step
 2. Second step
@@ -44,7 +44,7 @@ Short introduction about this subpart.
 
 Short introduction about this subpart.
 
-***:pencil: Hands on!***
+***:pencil2: Hands on!***
 
 1. First step
 2. Second step
@@ -52,7 +52,7 @@ Short introduction about this subpart.
 
 Some blabla
 
-***:pencil: Hands on!***
+***:pencil2: Hands on!***
 
 1. First step
 2. Second step
@@ -62,7 +62,7 @@ Some blabla
 
 Short introduction about this subpart.
 
-***:pencil: Hands on!***
+***:pencil2: Hands on!***
 
 1. First step
 2. Second step
@@ -72,7 +72,7 @@ Short introduction about this subpart.
 
 Short introduction about this subpart.
 
-***:pencil: Hands on!***
+***:pencil2: Hands on!***
 
 1. First step
 2. Second step
@@ -80,7 +80,7 @@ Short introduction about this subpart.
 
 Some blabla
 
-***:pencil: Hands on!***
+***:pencil2: Hands on!***
 
 1. First step
 2. Second step
