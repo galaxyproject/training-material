@@ -59,16 +59,14 @@ The input data required for the tutorials must be upload on [Zenodo](https://zen
 
 ## `slides` directory
 
-The slides related to the topic must be in the `slides` directory. The slides
+One slide deck must be available for each tutorial and it follows the same structure (but with a more detailed introduction). The slide decks are in the `slides` directory. The slides
 must be in [`reveal.js`](https://github.com/hakimel/reveal.js/) format, in a
-`html` file.
-
-A template for the `html` file can be found in
+`html` file. A template for the `html` file can be found in
 [`shared/templates/slides.html` file](shared/templates/slides.html).
 You can also use the [`reveal.js` editor](https://slides.com/?ref=github)
 to help you.
 
-Once the slides are on the `master` branch, they will be available at `http://bgruening.github.io/training-material/<topic>/slides/<hmtl_name>.html`
+Once the slides are on the `master` branch, they will be available at `http://bgruening.github.io/training-material/<topic>/slides/<tutorial_name>.html`
 
 ## `docker` directory
 
