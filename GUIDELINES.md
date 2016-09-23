@@ -12,7 +12,7 @@ The easiest way to start contributing is to file an issue to tell us about a spe
 
 Once, you are feeling more comfortable, you can propose changes to this training material. We strongly recommend you to read and follow [Software Carpentry's recommendations on lesson writing](http://swcarpentry.github.io/instructor-training/19-lessons/) if you planned to add or change some training material.
 
-We use [GitHub flow](https://guides.github.com/introduction/flow/) to manage changes:
+To manage changes, we use [GitHub flow](https://guides.github.com/introduction/flow/):
 
 1. Create a fork of this repository on GitHub
 2. Clone your fork of this repository to create a local copy on your computer
@@ -80,7 +80,5 @@ The `docker` image must also integrate a Galaxy tour from the [`galaxy-tours` re
 
 ## `README.md` file
 
-The `README.md` introduces rapidly the topic and summarizes all this information with the links (where to find the slides, the tutorials and their
-topics, the Docker image and the input dataset). It also collect the interesting  badges (Docker, DOI, ...).
-
-We recommend you to use the [`shared/templates/README.md`](shared/templates/README.md) as a template.
+The `README.md` introduces rapidly the topic, summarizes all this information about the training materials (where to find the slides, the tutorials and their
+topics, the Docker image and the input dataset) and add the needed references. We recommend you to use the [`shared/templates/README.md`](shared/templates/README.md) as a template.
