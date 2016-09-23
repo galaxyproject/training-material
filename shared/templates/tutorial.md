@@ -17,9 +17,9 @@ Tutorial name
 
 ***:heavy_check_mark: Requirements***
 
-- *First objective of this tutorial (a single sentence describing what a learner will be able to do once they have sat through the lesson)*
-- *Second objective*
-- *Third objective*
+- *Galaxy introduction*
+- *Second requirement*
+- *Third requirement*
 - *...*
 
 # Introduction
