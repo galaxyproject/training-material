@@ -2,7 +2,7 @@
 
 FROM <base-galaxy-flavor>
 
-MAINTAINER <maintener-name>, <maintener-email>
+MAINTAINER <maintainer-name>, <maintainer-email>
 
 ENV GALAXY_CONFIG_BRAND Topic Name
 ENV ENABLE_TTS_INSTALL True
