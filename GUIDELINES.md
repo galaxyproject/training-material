@@ -74,7 +74,7 @@ Once the slides are on the `master` branch, they will be available at `http://bg
 
 For each topic, a flavored Docker image must integrate the needed tools for
 the tutorials. The corresponding image must be based on official Galaxy Docker
-images. We recommend you to use the [`shared/templates/Dockerfile`](shared/templates/Dockerfile) as a template.
+images. We recommend you to use the content of [`shared/templates/docker`](shared/templates/docker) as a template.
 
 The `docker` image must also integrate a Galaxy tour from the [`galaxy-tours` repository](https://github.com/galaxyproject/galaxy-tours)
 
