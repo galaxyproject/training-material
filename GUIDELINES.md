@@ -10,7 +10,7 @@ By contributing, you agree that we may redistribute your work under [our license
 
 The easiest way to start contributing is to file an issue to tell us about a spelling mistake or a factual error. You can then introduce yourself and meet some of our community members.
 
-Once, you are feeling more comfortable, you can propose changes to this training material.
+Once, you are feeling more comfortable, you can propose changes to this training material. We strongly recommend you to read and follow [Software Carpentry's recommendations on lesson writing](http://swcarpentry.github.io/instructor-training/19-lessons/) if you planned to add or change some training material.
 
 We use [GitHub flow](https://guides.github.com/introduction/flow/) to manage changes:
 
