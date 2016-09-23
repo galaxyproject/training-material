@@ -1,19 +1,22 @@
 Tutorial name
 =============
 
-***:question: Questions***
+***:grey_question: Questions***
+
 - *Major question that would be addressed in this tutorial (mostly general biological questions)*
 - *Second question*
 - *Third question*
 - *...*
 
-***:question: Objectives***
+***:dart: Objectives***
+
 - *First objective of this tutorial (It is a single sentence describing what a learner will be able to do once they have sat through the lesson. The objectives must be technical, but also theoretical, objectives. You can check [SWC lessons](http://swcarpentry.github.io/instructor-training/19-lessons/) to help you writing learning objectives.)*
 - *Second objective*
 - *Third objective*
 - *...*
 
-***Requirements***
+***:heavy_check_mark: Requirements***
+
 - *First objective of this tutorial (a single sentence describing what a learner will be able to do once they have sat through the lesson)*
 - *Second objective*
 - *Third objective*
@@ -81,7 +84,8 @@ Some blabla
 
 Conclusion about the technical key points. And then relation between the technics and the biological question to end with a global view.
 
-***:exclamation: Key Points***
+***:grey_exclamation: Key Points***
+
 - *Simple sentence to sum up the first key point of the tutorial (Take home message)*
 - *Second key point*
 - *Third key point*
