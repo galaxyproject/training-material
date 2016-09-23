@@ -36,10 +36,9 @@ Each each training material is related to a topic. All training material (slides
 │   ├── README.md
 │   ├── tools.yaml
 ├── images
-├── slides
-│   ├── index.html
-├── tutorials
 ├── README.md
+├── slides
+├── tutorials
 ```
 
 ## `images` directory
