@@ -53,7 +53,7 @@ All images for the slides must be in `images` directory. The images must be in g
 ## `tutorials` directory
 
 This directory collect the tutorials related to the topic. The tutorials must
-be written in `markdown` and follow the [`shared/templates/tutorial.md` template](shared/templates/tutorial.md). The tutorials must be well structured (to help the trainees) and we recommend to have at least one scheme or diagram to sum up the pipeline used (for example).
+be written in `markdown` and follow the [`shared/templates/tutorials/tutorial.md` template](shared/templates/tutorials/tutorial.md). The tutorials must be well structured (to help the trainees) and we recommend to have at least one scheme or diagram to sum up the pipeline used (for example).
 
 The input data required for the tutorials must be upload on [Zenodo](https://zenodo.org/) to obtain a dedicated DOI (in the [Galaxy training network community](https://zenodo.org/communities/galaxy-training/?page=1&size=20)).
 
