@@ -9,19 +9,17 @@ If you have any question, you can reach us using the [Gitter chat](https://gitte
 
 # Table of contents
 
-[What should I know before I get started?](#what-should-i-know-before-i-get-started)
-
-[How Can I Contribute?](#how-can-i-contribute)
-    * [Reporting mistakes or errors](#reporting-mistakes-or-errors)
-    * [Your first content contribution](#your-first-content-contribution)
-    * [Pull Requests](#pull-requests)
-
-[Structure of the training material](#structure-of-the-training-material)
-    * [`images` directory](#images-directory)
-    * [`tutorials` directory](#tutorials-directory)
-    * [`slides` directory](#slides-directory)
-    * [`docker` directory](#docker-directory)
-    * [`README.md` file](#README.md-file)
+- [What should I know before I get started?](#what-should-i-know-before-i-get-started)
+- [How Can I Contribute?](#how-can-i-contribute)
+    - [Reporting mistakes or errors](#reporting-mistakes-or-errors)
+    - [Your first content contribution](#your-first-content-contribution)
+    - [Pull Requests](#pull-requests)
+- [Structure of the training material](#structure-of-the-training-material)
+    - [`images` directory](#images-directory)
+    - [`tutorials` directory](#tutorials-directory)
+    - [`slides` directory](#slides-directory)
+    - [`docker` directory](#docker-directory)
+    - [`README.md` file](#README.md-file)
 
 # What should I know before I get started?
 
