@@ -23,11 +23,9 @@ If you have any question, you can reach us using the [Gitter chat](https://gitte
 
 # What should I know before I get started?
 
-By contributing, you agree that we may redistribute your work under [our license](LICENSE.md).  
+This repository is a project of unification of the Galaxy training material. You can found more information about this project in this [small presentation](http://bgruening.github.io/training-material/shared/slides/project_presentation#/)
 
-This project adheres to the Contributor Covenant [code of conduct](CODE_OF_CONDUCT.md).
-By participating, you are expected to uphold this code.
-Please report unacceptable behavior to [berenice.batut@gmail.com](mailto:berenice.batut@gmail.com).
+By contributing, you agree that we may redistribute your work under [our license](LICENSE.md).  
 
 We will address your issues and/or assess your change proposal as promptly as we can, and help you become a member of our community.
 
