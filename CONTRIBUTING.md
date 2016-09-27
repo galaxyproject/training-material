@@ -20,6 +20,9 @@ If you have any question, you can reach us using the [Gitter chat](https://gitte
     - [`slides` directory](#slides-directory)
     - [`docker` directory](#docker-directory)
     - [`README.md` file](#README.md-file)
+- [How the training material is maintained?](#how-the-training-material-is-maintained)
+    - [Maintainers](#maintainers)
+    - [Labels](#labels)
 
 # What should I know before I get started?
 
@@ -132,3 +135,26 @@ The `docker` image must also integrate a Galaxy tour from the [`galaxy-tours` re
 
 The `README.md` introduces rapidly the topic, summarizes all this information about the training materials (where to find the slides, the tutorials and their
 topics, the Docker image and the input dataset, references, contributors and maintainers) and add the needed references. We recommend you to use the [`templates/README.md`](templates/README.md) as a template.
+
+# How the training material is maintained?
+
+## Maintainers
+
+Each training topic has one or two maintainers who act as editors. They are responsible for making sure issues and change requests are looked at. They have final say over what is included in the training material related to the topic. But, they are not responsible for writing training material content or deciding what lessons ought to exist, both coming from the community.
+
+## Labels
+
+This repository use the following labels for issues, pull requests and project management:
+
+- Type
+    - `bug`: errors to be fixed
+    - `improvement`: enhancement to an existing functionality
+    - `feature`: new functionality
+    - `discussion`: discussion threads
+    - `question`: often turn into discussion threads
+- Status
+    - `help-wanted`: requests for assistance
+    - `newcomer-friendly`: suitable for people who are still learning the ropes
+    - `work-in-progress`: someone is working on this
+    - `review-needed`: requests for review
+- Topic: each topic has its own label to easily relate the issue or pull request to the topic, but the label `template-and-tools` is used for questions/issues/pull requests related to the templates and tools rather than the lessons themselves
