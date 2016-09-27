@@ -10,7 +10,7 @@ If you have any question, you can reach us using the [Gitter chat](https://gitte
 # Table of contents
 
 - [What should I know before I get started?](#what-should-i-know-before-i-get-started)
-- [How Can I Contribute?](#how-can-i-contribute)
+- [How can I contribute?](#how-can-i-contribute)
     - [Reporting mistakes or errors](#reporting-mistakes-or-errors)
     - [Your first content contribution](#your-first-content-contribution)
     - [Pull Requests](#pull-requests)
