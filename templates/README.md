@@ -55,6 +55,13 @@ It will launch a flavored Galaxy instance available on
 
 # Contributors
 
+This material is maintained by:
+
+- Maintainer 1
+- Maintainer 2
+
+For any question related to this topic and the content, you can contact them.
+
 The following individuals have contributed to this training material:
 
 - Name 1
