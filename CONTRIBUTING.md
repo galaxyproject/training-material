@@ -41,7 +41,7 @@ Once, you are feeling more comfortable, you can propose changes to this training
 
 In [issues](https://github.com/bgruening/training-material/issues) and [project management system](https://github.com/bgruening/training-material/projects), you will find lists of issues to fix and features to changes (with the "easy pick" label for example). Feel free to solve them.
 
-We strongly recommend you to read and follow [Software Carpentry's recommendations on lesson writing](http://swcarpentry.github.io/instructor-training/19-lessons/) if you planned to add or change some training material, and also to check the [structure of the training material](#structure-of-the-training-material).
+We strongly recommend you to read and follow Software Carpentry's recommendations on [lesson design](https://swcarpentry.github.io/lesson-example/01-design/) and [lesson writing](http://swcarpentry.github.io/instructor-training/19-lessons/) if you planned to add or change some training material, and also to check the [structure of the training material](#how-the-training-material-is-structured).
 
 ## Pull Requests
 
