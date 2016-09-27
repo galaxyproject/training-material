@@ -85,21 +85,21 @@ All images for the slides must be in `images` directory. The images must be in g
 This directory collect the tutorials related to the topic. The tutorials must
 be written in `markdown` and follow the [`templates/tutorials/tutorial.md` template](templates/tutorials/tutorial.md). The tutorials must be well structured (to help the trainees) with
 
-- Header
+1. Header
 
-![Tutorial header](shared/images/tutorial_header.png)
+    ![Tutorial header](shared/images/tutorial_header.png)
 
-- Introduction
+2. Introduction
 
-![Tutorial introduction](shared/images/tutorial_introduction.png)
+    ![Tutorial introduction](shared/images/tutorial_introduction.png)
 
-- Several parts
+3. Several parts
 
-![Tutorial part](shared/images/tutorial_part.png)
+    ![Tutorial part](shared/images/tutorial_part.png)
 
-- Conclusion and key points
+4. Conclusion and key points
 
-![Tutorial footer](shared/images/tutorial_footer.png)
+    ![Tutorial footer](shared/images/tutorial_footer.png)
 
 
 We recommend to have at least one scheme or diagram to sum up the pipeline used.
