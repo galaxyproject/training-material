@@ -14,7 +14,7 @@ If you have any question, you can reach us using the [Gitter chat](https://gitte
     - [Reporting mistakes or errors](#reporting-mistakes-or-errors)
     - [Your first content contribution](#your-first-content-contribution)
     - [Pull Requests](#pull-requests)
-- [Structure of the training material](#structure-of-the-training-material)
+- [How the training material is structured?](#how-the-training-material-is-structured)
     - [`images` directory](#images-directory)
     - [`tutorials` directory](#tutorials-directory)
     - [`slides` directory](#slides-directory)
@@ -57,7 +57,7 @@ To manage changes, we use [GitHub flow](https://guides.github.com/introduction/f
 
 For beginners, the GitHub interface will help you in the process in edition of one file. It will automatically create a fork of this repository where you can safely work and then submit the changes as a pull request.
 
-# Structure of the training material
+# How the training material is structured?
 
 Each each training material is related to a topic. All training material (slides, tutorials, ...) related to a topic is found in a dedicated directory (*e.g.* `Exome-seq` directory contains the material related to exome sequencing analysis). These repository have to have the following structure (as in `Exome-seq` directory):
 
@@ -83,7 +83,26 @@ All images for the slides must be in `images` directory. The images must be in g
 ## `tutorials` directory
 
 This directory collect the tutorials related to the topic. The tutorials must
-be written in `markdown` and follow the [`templates/tutorials/tutorial.md` template](templates/tutorials/tutorial.md). The tutorials must be well structured (to help the trainees) and we recommend to have at least one scheme or diagram to sum up the pipeline used (for example).
+be written in `markdown` and follow the [`templates/tutorials/tutorial.md` template](templates/tutorials/tutorial.md). The tutorials must be well structured (to help the trainees) with
+
+- Header
+
+![Tutorial header](shared/images/tutorial_header.png)
+
+- Introduction
+
+![Tutorial introduction](shared/images/tutorial_introduction.png)
+
+- Several parts
+
+![Tutorial part](shared/images/tutorial_part.png)
+
+- Conclusion and key points
+
+![Tutorial footer](shared/images/tutorial_footer.png)
+
+
+We recommend to have at least one scheme or diagram to sum up the pipeline used.
 
 The input data required for the tutorials must be upload on [Zenodo](https://zenodo.org/) to obtain a dedicated DOI (in the [Galaxy training network community](https://zenodo.org/communities/galaxy-training/?page=1&size=20)).
 
