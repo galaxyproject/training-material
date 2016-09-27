@@ -83,7 +83,7 @@ All images for the slides must be in `images` directory. The images must be in g
 ## `tutorials` directory
 
 This directory collect the tutorials related to the topic. The tutorials must
-be written in `markdown` and follow the [`shared/templates/tutorials/tutorial.md` template](shared/templates/tutorials/tutorial.md). The tutorials must be well structured (to help the trainees) and we recommend to have at least one scheme or diagram to sum up the pipeline used (for example).
+be written in `markdown` and follow the [`templates/tutorials/tutorial.md` template](templates/tutorials/tutorial.md). The tutorials must be well structured (to help the trainees) and we recommend to have at least one scheme or diagram to sum up the pipeline used (for example).
 
 The input data required for the tutorials must be upload on [Zenodo](https://zenodo.org/) to obtain a dedicated DOI (in the [Galaxy training network community](https://zenodo.org/communities/galaxy-training/?page=1&size=20)).
 
@@ -95,7 +95,7 @@ Several slide decks are expected for every topic:
 - One slide deck for for each tutorial (with the questions addressed in this tutorial, the objectives, an introduction of the type of analyses used, ...), following the same structure as the tutorial.
 
 The slides must be in [`reveal.js`](https://github.com/hakimel/reveal.js/) format, in a `html` file. Template for the `html` files can be found in
-[`shared/templates/slides/`](shared/templates/slides/).
+[`templates/slides/`](templates/slides/).
 You can also use the [`reveal.js` editor](https://slides.com/?ref=github)
 to help you.
 
@@ -105,11 +105,11 @@ The slide decks are in the `slides` directory. The general introduction slide de
 
 For each topic, a flavored Docker image must integrate the needed tools for
 the tutorials. The corresponding image must be based on official Galaxy Docker
-images. We recommend you to use the content of [`shared/templates/docker`](shared/templates/docker) as a template.
+images. We recommend you to use the content of [`templates/docker`](templates/docker) as a template.
 
 The `docker` image must also integrate a Galaxy tour from the [`galaxy-tours` repository](https://github.com/galaxyproject/galaxy-tours)
 
 ## `README.md` file
 
 The `README.md` introduces rapidly the topic, summarizes all this information about the training materials (where to find the slides, the tutorials and their
-topics, the Docker image and the input dataset, references, contributors and maintainers) and add the needed references. We recommend you to use the [`shared/templates/README.md`](shared/templates/README.md) as a template.
+topics, the Docker image and the input dataset, references, contributors and maintainers) and add the needed references. We recommend you to use the [`templates/README.md`](templates/README.md) as a template.
