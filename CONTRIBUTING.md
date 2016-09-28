@@ -26,7 +26,7 @@ If you have any question, you can reach us using the [Gitter chat](https://gitte
 
 # What should I know before I get started?
 
-This repository is a project of unification of the Galaxy training material. You can found more information about this project in this [small presentation](http://bgruening.github.io/training-material/shared/slides/project_presentation#/)
+This repository is a project of unification of the Galaxy training material. You can find more information about this project in this [small presentation](http://bgruening.github.io/training-material/shared/slides/project_presentation#/)
 
 By contributing, you agree that we may redistribute your work under [our license](LICENSE.md).  
 
