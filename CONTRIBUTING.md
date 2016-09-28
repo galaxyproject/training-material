@@ -86,7 +86,7 @@ All images for the slides must be in `images` directory. The images must be in g
 ## `tutorials` directory
 
 This directory collect the tutorials related to the topic. The tutorials must
-be written in `markdown` and follow the [`templates/tutorials/tutorial.md` template](templates/tutorials/tutorial.md). The tutorials must be well structured (to help the trainees) with
+be written in `markdown` and follow the [`templates/tutorials/tutorial.md` template](templates/tutorials/tutorial.md). The tutorials must be well structured (to help the trainees) with:
 
 1. Header
 
@@ -140,11 +140,11 @@ topics, the Docker image and the input dataset, references, contributors and mai
 
 ## Maintainers
 
-Each training topic has one or two maintainers who act as editors. They are responsible for making sure issues and change requests are looked at. They have final say over what is included in the training material related to the topic. But, they are not responsible for writing training material content or deciding what lessons ought to exist, both coming from the community.
+Each training topic has one or two maintainers who act as editors. They are responsible for making sure issues and change requests are looked at. They have the final say over what is included in the training material related to the topic. But, they are not responsible for writing training material content or deciding what lessons ought to exist, both coming from the community.
 
 ## Labels
 
-This repository use the following labels for issues, pull requests and project management:
+This repository is using the following labels for issues, pull requests and project management:
 
 - Type
     - `bug`: errors to be fixed
@@ -154,7 +154,7 @@ This repository use the following labels for issues, pull requests and project m
     - `question`: often turn into discussion threads
 - Status
     - `help-wanted`: requests for assistance
-    - `newcomer-friendly`: suitable for people who are still learning the ropes
+    - `newcomer-friendly`: suitable for people who wants to start contributing
     - `work-in-progress`: someone is working on this
     - `review-needed`: requests for review
-- Topic: each topic has its own label to easily relate the issue or pull request to the topic, but the label `template-and-tools` is used for questions/issues/pull requests related to the templates and tools rather than the lessons themselves
+- Topic: each topic has its own label to easily relate the issue or pull request to the topic, but the label `template-and-tools` is used for questions/issues/pull requests related to the templates and tools rather than the lessons themselves.
