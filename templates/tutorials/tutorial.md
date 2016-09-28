@@ -1,28 +1,28 @@
 Tutorial name
 =============
 
-***:grey_question: Questions***
+:grey_question: ***Questions***
 
 - *Major question that would be addressed in this tutorial (mostly general biological questions)*
 - *Second question*
 - *Third question*
 - *...*
 
-***:dart: Objectives***
+:dart: ***Objectives***
 
 - *First objective of this tutorial (It is a single sentence describing what a learner will be able to do once they have sat through the lesson. The objectives must be technical, but also theoretical, objectives. You can check [SWC lessons](http://swcarpentry.github.io/instructor-training/19-lessons/) to help you writing learning objectives.)*
 - *Second objective*
 - *Third objective*
 - *...*
 
-***:heavy_check_mark: Requirements***
+:heavy_check_mark: ***Requirements***
 
 - *Galaxy introduction*
 - *Second requirement*
 - *Third requirement*
 - *...*
 
-***:hourglass: Time estimation***: *1d/3h/6h*
+:hourglass: ***Time estimation*** *1d/3h/6h*
 
 # Introduction
 
@@ -36,7 +36,7 @@ Introduction about this part
 
 Short introduction about this subpart.
 
-***:pencil2: Hands on!***
+:pencil2: ***Hands on!***
 
 1. First step
 2. Second step
@@ -46,7 +46,7 @@ Short introduction about this subpart.
 
 Short introduction about this subpart.
 
-***:pencil2: Hands on!***
+:pencil2: ***Hands on!***
 
 1. First step
 2. Second step
@@ -54,7 +54,7 @@ Short introduction about this subpart.
 
 Some blabla
 
-***:pencil2: Hands on!***
+:pencil2: ***Hands on!***
 
 1. First step
 2. Second step
@@ -64,7 +64,7 @@ Some blabla
 
 Short introduction about this subpart.
 
-***:pencil2: Hands on!***
+:pencil2: ***Hands on!***
 
 1. First step
 2. Second step
@@ -74,7 +74,7 @@ Short introduction about this subpart.
 
 Short introduction about this subpart.
 
-***:pencil2: Hands on!***
+:pencil2: ***Hands on!***
 
 1. First step
 2. Second step
@@ -82,7 +82,7 @@ Short introduction about this subpart.
 
 Some blabla
 
-***:pencil2: Hands on!***
+:pencil2: ***Hands on!***
 
 1. First step
 2. Second step
@@ -92,7 +92,7 @@ Some blabla
 
 Conclusion about the technical key points. And then relation between the technics and the biological question to end with a global view.
 
-***:grey_exclamation: Key Points***
+:grey_exclamation: ***Key Points***
 
 - *Simple sentence to sum up the first key point of the tutorial (Take home message)*
 - *Second key point*
