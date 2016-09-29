@@ -9,7 +9,7 @@ Several deck of slides are available for this topic:
 
 - [General introduction about Galaxy server administration](http://bgruening.github.io/training-material/Admin-Corner/slides/)
 - Slide deck related to the tutorials:
-    - ['10 rules' for Setting up a Galaxy Instance as a Service](http://bgruening.github.io/training-material/Admin-Corner/slides/10rules_for_GaaS.html)
+    - [Setting up a Galaxy Instance as a Service](http://bgruening.github.io/training-material/Admin-Corner/slides/setting_up_galaxy_instance.html)
     - [Docker and Galaxy](http://bgruening.github.io/training-material/Admin-Corner/slides/galaxy_docker.html)
     - [Galaxy Database schema](http://bgruening.github.io/training-material/Admin-Corner/slides/database_schema.html)
     - [Moving from MySQL to PostgreSQL](http://bgruening.github.io/training-material/Admin-Corner/slides/mysql_to_postgresql.html)
@@ -18,7 +18,7 @@ Several deck of slides are available for this topic:
 
 4 tutorials with hands-on are available for this topic:
 
-- ['10 rules' for Setting up a Galaxy Instance as a Service](tutorial/10rules_for_GaaS.md)
+- [Setting up a Galaxy Instance as a Service](tutorial/setting_up_galaxy_instance.md)
 - [Docker and Galaxy](tutorial/galaxy_docker.md)
 - [Galaxy Database schema](tutorial/database_schema.md)
 - [Moving from MySQL to PostgreSQL](tutorial/mysql_to_postgresql.md)

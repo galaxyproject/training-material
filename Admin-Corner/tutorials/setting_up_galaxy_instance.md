@@ -1,5 +1,5 @@
-10 rules for Setting up a Galaxy Instance as a Service
-======================================================
+Setting up a Galaxy Instance as a Service
+=========================================
 
 :grey_question: ***Questions***
 
