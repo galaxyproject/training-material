@@ -3,9 +3,10 @@
 The following individuals have contributed to this training material:
 
 * Andreas Richter 
-* Anton Nekrutenko
-* Anika Erxleben 
-* Björn Grüning 
+* Anton Nekrutenko (@nekrut)
+* Anika Erxleben (@erxleben)
+* Bérénice Batut (@bebatut)
+* Björn Grüning (@bgruening)
 * Devon Ryan 
 * Fabian Kilpert
 * Fidel Ramirez
