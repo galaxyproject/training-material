@@ -7,12 +7,12 @@ Administration of Galaxy Servers can be a complex task. Here, we propose some ma
 
 Several deck of slides are available for this topic:
 
-- [General introduction about Galaxy server administration](slides/index.html)
+- [General introduction about Galaxy server administration](http://bgruening.github.io/training-material/Admin-Corner/slides/)
 - Slide deck related to the tutorials:
-    - ['10 rules' for Setting up a Galaxy Instance as a Service](slides/10rules_for_GaaS.html)
-    - [Docker and Galaxy](slides/galaxy_docker.html)
-    - [Galaxy Database schema](slides/database_schema.html)
-    - [Moving from MySQL to PostgreSQL](slides/mysql_to_postgresql.html)
+    - ['10 rules' for Setting up a Galaxy Instance as a Service](http://bgruening.github.io/training-material/Admin-Corner/slides/10rules_for_GaaS.html)
+    - [Docker and Galaxy](http://bgruening.github.io/training-material/Admin-Corner/slides/galaxy_docker.html)
+    - [Galaxy Database schema](http://bgruening.github.io/training-material/Admin-Corner/slides/database_schema.html)
+    - [Moving from MySQL to PostgreSQL](http://bgruening.github.io/training-material/Admin-Corner/slides/mysql_to_postgresql.html)
 
 # Tutorials
 
