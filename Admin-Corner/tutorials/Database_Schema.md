@@ -1,12 +1,33 @@
-# GCC2016 Galaxy Database Schema Tutorial
+Galaxy Database Schema
+======================
 
-Dave  Clements, Johns Hopkins University
+:grey_question: ***Questions***
 
-Hans-Rudolf Hotz, Friedrich Miescher Institute
+- *Major question that would be addressed in this tutorial (mostly general biological questions)*
+- *Second question*
+- *Third question*
+- *...*
 
+:dart: ***Objectives***
 
+- *First objective of this tutorial (It is a single sentence describing what a learner will be able to do once they have sat through the lesson. The objectives must be technical, but also theoretical, objectives. You can check [SWC lessons](http://swcarpentry.github.io/instructor-training/19-lessons/) to help you writing learning objectives.)*
+- *Second objective*
+- *Third objective*
+- *...*
 
-## 0. Requirements
+:heavy_check_mark: ***Requirements***
+
+- *Galaxy introduction*
+- *Deploy a Galaxy Docker Image*
+- *Access to a Galaxy server and its PostgreSQL database*
+- *Third requirement*
+- *...*
+
+:hourglass: ***Time estimation*** *1d/3h/6h*
+
+# Introduction
+
+# Requirements
 For the hands-on examples you need access to a Galaxy server and access to its PostgreSQL database. You can set-up this yourself, or use the Galaxy Docker Image provided by Björn Grüning (https://github.com/bgruening/docker-galaxy-stable). During this tutorial, we will work with the Galaxy Docker Image.
 
 Setting up Docker and using the Galaxy Docker Image:
@@ -17,45 +38,35 @@ Execute:  docker run -d -p 8080:80 bgruening/galaxy-stable
 (this will download the Galaxy Docker Image, when executed the first time, and
 start it)
 Test the Docker image in your web browser: http://localhost:8080
-(see first paragraph of Björn’s introduction, for special cases when using the 
+(see first paragraph of Björn’s introduction, for special cases when using the
 Docker Toolbox on Mac and Windows). Quit by: docker kill NAME (you get the name with:  docker ps )
 
+# Introduction
 
-
-
-
-
-
-
-    
-
-
-
-## 1. Introduction
-
-Database versus Object Model
+## Database versus Object Model
 The session description is database centric and we’ll be focusing on the relational database that backs Galaxy servers.  But that’s only half the picture of the this data.  The other is the object model which is the object-oriented view of this same data.  The object model is used by the code to manipulate and access the database.  The translation between the two worlds is handled by an object-relational mapping implemented with SQLAlchemy (http://www.sqlalchemy.org/).
 
 Today we are covering the database and how to access it with SQL.  We aren’t going to cover the corresponding object model or object relational mapping.
 
-Database Platform
+## Database Platform
 The default out-of-the-box Galaxy installation uses SQLite (https://www.sqlite.org/).  SQLite is a lightweight database management system (DBMS) that can be packaged inside Galaxy and does not require any additional steps at initial setup time.
 
 However, SQLite is not the recommended DBMS for running a Galaxy server. The recommended production DMBS for Galaxy is PostgreSQL (https://www.postgresql.org/). PostgreSQL offers a full set of DBMS features and robust support for multiple simultaneous users.
 
 This workshop will be entirely based in PostgreSQL (also referred to as Postgres).
 
-
-What is in (and not in) the Galaxy database
+## What is in (and not in) the Galaxy database?
 The Galaxy database contains management information about your server.  The database tracks users, groups, jobs, histories, datasets, workflows and so on.  
 
 What’s not in the database is the data. Datasets are stored outside the database. The database does keep metadata – information about the datasets such as data type. The tools themselves are not stored in the database either.
 
-## 2. Understanding the Database Schema 
+## Understanding the Database Schema
+
 ER diagrams and SchemaSpy
+
 Entity-relationship diagrams are a way to understand tables and the relationships between them inside a relational database.  SchemaSpy (http://schemaspy.sourceforge.net/) is a free (and remarkable tool) for generating ER diagrams.  We’be used it generate a description of the database backing the server in this container.  See
 
-  https://galaxyproject.org/schema/SchemaSpy/index.html 
+  https://galaxyproject.org/schema/SchemaSpy/index.html
 
 The “Tables” tab is a good place to start learning the structure of the database.  Each table represents a different type of thing, and often that thing is itself a relationship. For example, each record in the dataset table has information about a specific dataset, while records in the history_dataset_association table have information about what histories that dataset is in.
 
@@ -69,16 +80,17 @@ The Galaxy database uses a number of naming and design conventions.  Understandi
 id attributes
 Every table has an id column that uniquely identifies each row.  (The id column is the primary key in database terminology.) Beyond uniquely identifying a row in the table, ID values have no meaning.  ID values are unique within a table, but not across the database.
 
-Relationships between tables, and _id columns 
+Relationships between tables, and `_id` columns
 Relationships between tables are implemented by exporting id columns from one table into another.  Imported ids are called foreign keys in database nomenclature, and are uniformly named
    table_the_id_came_from_id
 
 There are a few notable exceptions to this rule.  If the ID is from a table that is prefixed with galaxy_, for example, galaxy_user or galaxy_session, the  galaxy_ will be dropped from the column name.  For example, galaxy_user.id becomes user_id in the over 50 tables it is imported into
 
 Relationship tables
+
 As mentioned previously, some tables, such as history_dataset_association represent relationships between things, rather than things themselves.  In this case history_dataset_association describes relationships between datasets and histories.
 
-Relationship table names typically contain the names of tables they are relating, suffixed with _association.
+Relationship table names typically contain the names of tables they are relating, suffixed with `_association`.
 
 Why are nulls allowed in almost every column?
 We have no idea.  In practice, they aren’t nulls in most of those columns.
@@ -88,33 +100,48 @@ PostgreSQL supports comments to table definitions, but there are none shown in t
 
 There is nothing in the database that results from direct manipulation of the table definitions through DDL.  Everything comes in through SQLAlchemy.
 
-## 3. Start Docker and Galaxy
+# Start Docker and Galaxy
 
-Let’s start the Galaxy Docker Image -  this time as an interactive session:
+:pencil2: ***Hands on!***
 
-`docker run -i -t -p 8080:80 bgruening/galaxy-stable /bin/bash`
+1. Start the Galaxy Docker Image -  this time as an interactive session
 
-This will provide an interactive session. Next, you can start Galaxy and its PostgreSQL server with:
+    ```
+    docker run -i -t -p 8080:80 bgruening/galaxy-stable /bin/bash
+    ```
 
-`startup > log 2>&1 &`
+2. Start Galaxy and its PostgreSQL server
 
-You can follow the startup process with: 
+    ```
+    startup > log 2>&1 &
+    ```
 
-`tail -f log`
+3. Follow the startup process
+
+    ```
+    tail -f log
+    ```
 
 
-## 4. Important tables
-Connect to the PostgreSQL database with:
+# Important tables
 
-`psql -d galaxy -U galaxy`
+:pencil2: ***Hands on!***
 
-and list all tables:
+1. Connect to the PostgreSQL database
 
-`\dt`
+    ```
+    psql -d galaxy -U galaxy
+    ```
 
-(Enter q to exit the view results page, and space to see the next results page.)
+2. List all tables
 
-#### Table “galaxy_user”
+    ```
+    \dt
+    ```
+
+Enter `q` to exit the view results page, and space to see the next results page.
+
+## Table “galaxy_user”
 
 `select * from galaxy_user;`
 
@@ -122,7 +149,7 @@ As described in Björn’s introduction, an Admin user is already pre-set (email
 
 `select * from galaxy_user\x\g\x`
 
-#### Table “job”
+## Table “job”
 
 `select * from job;`
 
@@ -130,31 +157,29 @@ Run a few jobs on the galaxy website (e.g upload file a simple table and add col
 
 `select * from job\x\g\x`
 
-#### Table “job_parameter”
+## Table “job_parameter”
 
 `select * from job_parameter;`
 
 
-#### Table “history”
-  
+## Table “history”
+
 `select * from history;`
- 
+
 Give your current history a name and check the database again.
 
 
-#### Table “dataset”
+## Table “dataset”
 
 `select * from dataset`
 
 
-#### Table “history_dataset_association”
+## Table “history_dataset_association”
 
 `select * from history_dataset_association\x\g\x`
 
 
-
-
-## 5. More (hands-on) Examples - What is not covered by the reports app
+# More (hands-on) Examples, not covered by the reports app
 
 Have a look at the reports up (which is also provided in the Docker Image):
 
@@ -162,7 +187,7 @@ http://admin:admin@localhost:8080/reports/
 
 Depending on your local needs, some queries are missing, like:
 
-#### Jobs per tool per year  /  jobs per tool since 2015
+## Jobs per tool per year  /  jobs per tool since 2015
 
 You can add the numbers per month from the reports, or:
 
@@ -171,13 +196,11 @@ You can add the numbers per month from the reports, or:
 `select j.id, j.create_time from job j
     where j.create_time >= '2015-12-31'
     and j.create_time < '2016-12-31';`
-    
+
 `select j.id,j.create_time from job j
     where EXTRACT(year FROM j.create_time) = 2016
     and j.tool_id='upload1';`
-    
-    
-    
+
 ...and now include the user
 
 `select count(j.id) from job j, galaxy_user u
@@ -185,15 +208,14 @@ You can add the numbers per month from the reports, or:
     and u.email = 'hansrudolf.hotz@fmi.ch'
     and EXTRACT(year FROM j.create_time) = 2016
     and j.tool_id='upload1';`    
-    
+
 `select u.email, count(*) from job j, galaxy_user u
     where j.user_id = u.id
     and EXTRACT(year FROM j.create_time) = 2016
     and j.tool_id='upload1'
     GROUP BY u.email;`
 
-
-#### Jobs per tool of a certain version
+## Jobs per tool of a certain version
 
 Imagine the current version of a tool is working fine, however a previous version had a bug: now you wanna warn all the users who have used the broken version, without alerting users who never used the broken one.
 
@@ -204,7 +226,7 @@ The following example is from the development server at the FMI
 
 
 `select j.user_id from job j
-    where j.tool_id = 'qAlign' 
+    where j.tool_id = 'qAlign'
     and j.tool_version = '1.0.4quasr';`
 
 
@@ -213,24 +235,18 @@ The following example is from the development server at the FMI
     and j.tool_id = 'qAlign'
     and j.tool_version = '1.0.4quasr';`
 
+## All users running a job using a certain parameter
 
 
-#### All users running a job using a certain parameter
-
- 
-`select jp.name, jp.value  from job_parameter jp 
+`select jp.name, jp.value  from job_parameter jp
     where name = 'iterate' \x\g\x`
 
-`select u.email, jp.name, jp.value 
+`select u.email, jp.name, jp.value
     from job_parameter jp, job j, galaxy_user u
-    where jp.name = 'iterate' 
+    where jp.name = 'iterate'
     and j.tool_id = 'addValue'
     and jp.job_id = j.id
     and j.user_id = u.id;`
-
-
-
-
 
 Close the PostgreSQL client
 
@@ -240,19 +256,18 @@ Quit the interactive docker
 
 `exit`
 
-
-## 6. Other Topics
+# Other Topics
 
 #### How to move from MySQL to PostgreSQL
 
-Slides: https://docs.google.com/presentation/d/1N3BDNQT3s7eQEO3BO89TQbTYwKp92fxHDRWQwC-T1kA 
+Slides: https://docs.google.com/presentation/d/1N3BDNQT3s7eQEO3BO89TQbTYwKp92fxHDRWQwC-T1kA
 
-https://wiki.galaxyproject.org/Community/Log/2015/MySQL2PostgreSQL 
+https://wiki.galaxyproject.org/Community/Log/2015/MySQL2PostgreSQL
 
 #### Is there ever a need to manually change the contents of a table
 
 Slides:
-https://docs.google.com/presentation/d/1l4DD0IaJjuvk1zAT1Sjv26bLyrSOg3VUm7rD-TQl_Zs 
+https://docs.google.com/presentation/d/1l4DD0IaJjuvk1zAT1Sjv26bLyrSOg3VUm7rD-TQl_Zs
 
 #### Run SchemaSpy in this container
 
@@ -270,4 +285,20 @@ To run SchemaSpy:
 
 `java -jar schemaSpy_5.0.0.jar -t pgsql -db galaxy -u galaxy -host localhost -s public -dp /usr/share/java/postgresql-jdbc4-9.2.jar -o SpyOut`
 
-The SpyOut directory will contain the generated reports and diagrams, anchored at index.html. 
+The SpyOut directory will contain the generated reports and diagrams, anchored at index.html.
+
+
+General introduction about the topic and then an introduction of the tutorial (the questions and the objectives). It is nice also to have a scheme to sum up the pipeline used during the tutorial. The idea is to give to trainees insight into the content of the tutorial and the (theoretical and technical) key concepts they will learn.
+
+# Conclusion
+
+Conclusion about the technical key points. And then relation between the technics and the biological question to end with a global view.
+
+:grey_exclamation: ***Key Points***
+
+- *Simple sentence to sum up the first key point of the tutorial (Take home message)*
+- *Second key point*
+- *Third key point*
+- *...*
+
+# :clap: Thank you
