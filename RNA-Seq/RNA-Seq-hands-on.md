@@ -8,7 +8,7 @@ For a more detailed version have a look at: https://github.com/nekrut/galaxy/wik
 
 **Datasets used in this exercise**
 
-This exercise uses RNA-seq data from the study by [Brooks et al. 2011](http://genome.cshlp.org/content/21/2/193.long), in which the pasilla gene in *Drosophila melanogaster* was depleted by RNAi and the effects on splicing events were analysed by RNA-seq. The data is available at NCBI Gene Expression Omnibus under accession number [GSE18508](http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE18508). Here, we analyse three treated (pasilla-depleted) and four untreated (wt) samples. It should be highlighted that each sample constitutes a separate biological replicate of the corresponding condition (treated or untreated). Also note that two of the treated and two of the untreated samples are from a paired-end sequencing assay, while the remaining samples are from a single-end sequencing experiment. 
+This exercise uses RNA-seq data from the study by [Brooks et al. 2011](http://genome.cshlp.org/content/21/2/193.long), in which the pasilla gene in *Drosophila melanogaster* was depleted by RNAi and the effects on splicing events were analysed by RNA-seq. The data is available at NCBI Gene Expression Omnibus (GEO) under accession number [GSE18508](http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE18508). Here, we analyse three treated (pasilla-depleted) and four untreated (wt) samples. It should be highlighted that each sample constitutes a separate biological replicate of the corresponding condition (treated or untreated). Also note that two of the treated and two of the untreated samples are from a paired-end sequencing assay, while the remaining samples are from a single-end sequencing experiment. 
 
 
 ## Spliced Read Mapping to the Reference Genome
@@ -16,41 +16,66 @@ This exercise uses RNA-seq data from the study by [Brooks et al. 2011](http://ge
 
 - Create a new history for this RNA-seq exercise.
 
-- Import any two FASTQ files with sample id from [Zenodo](http://dx.doi.org/10.5281/zenodo.61771) (select data file with "fastq" ending). Load them into Galaxy by right-clicking →  copy link location and paste the link in Galaxy →  Upload File from your computer →  paste/fetch data → start.
+- Import a FASTQ file pair (e.g. GSM461177_untreat_paired_subset_1 and 2) with sample id from [Zenodo](http://dx.doi.org/10.5281/zenodo.61771) (select data file with "fastq" ending). Load them into Galaxy by right-clicking →  copy link location and paste the link in Galaxy → Get Data →  Upload File from your computer →  paste/fetch data → Start. 
 
- These two files contain the first 100.000 paired-end reads of one untreated sample. Rename the datasets according to the samples if you like. As default, Galaxy takes the link as name.
+ (Recommended: Select the correct file type ("fastqsanger") and genome ("dm3") directly in the upload dialogue. A lot of downstream programs will require these information. With the upload you can assign the correct settings for all uploaded files at once!)
+
+ Both files contain the first 100.000 paired-end reads of one untreated sample. Rename the datasets according to the samples (recommended). As default, Galaxy takes the link as name.
 
 - Run the tool **FastQC** on one of the two FASTQ files to control the quality of the reads. What is the read length? Is there anything what you find striking?
 
-- Trim low quality bases from the 3' end using **Trim Galore** on both paired-end datasets.
+- Trim low quality bases from the 3' end using **Trim Galore** on both paired-end datasets. In order to use Trim Galore make sure that the file type is set to *fastqsanger* (not *fastq*), change it if necessary: click on the pencil button displayed in your dataset in the history, choose Datatype → select fastqsanger → Save.
 
 - Re-run **FastQC** and inspect the differences.
 
 
-**Step 2: Mapping of the reads with TopHat**
+**Step 2: Mapping of the reads with TopHat (version 2)**
 
-- Annoying but necessary: Before continuing with the mapping step, change the file type of the FASTQ files to *fastqsanger*. This signals that the FASTQ contains Sanger-scaled quality values. **TopHat2** will otherwise not be able to accept the files for input! This can be done by clicking on the pencil item of the dataset (edit attributes) →  Datatype →  select fastqsanger
+Preparation:
 
-- If you want **TopHat** to take advantage from already known reference gene annotations, make sure that the data is available in your current Galaxy history. For this exercise, please import the Ensembl gene annotation for Drosophila melanogaster (Drosophila_melanogaster.BDGP5.78.gtf) from [Zenodo](http://dx.doi.org/10.5281/zenodo.61771) by right-clicking → copy link location and paste the link in Galaxy → Upload File from your computer → paste/fetch data → start.
+- Tophat needs information about the type of **quality scores** in the FASTQ files. The most common type nowadays is `fastqsanger`, signalling Sanger-scaled quality scores, which are also used by the current generation of Illumina high-throughput sequencers. Make sure that the  type is set correctly.
 
-- Run **TopHat2** with the two trimmed FASTQ files as input for forward and reverse reads as your reads are from a paired-end sequencing run. Align the reads to the Drosophila dm3 genome. The fragment size is 200 and the read length is 37, so why is 125 a good value for the mean inner distance? How do you know the fragment size (Hint: Go to the GEO entry of your data set, browse to the SRA entry of your sample and explore the library information)? 
+- If you want TopHat to take advantage from already known reference gene annotations, load a reference annotation file into your current Galaxy history. For this exercise please import the Ensembl gene annotation for Drosophila melanogaster (`Drosophila_melanogaster.BDGP5.78.gtf`). From [Zenodo](http://dx.doi.org/10.5281/zenodo.61771): right-click → copy link location and paste the link in Galaxy → Upload File from your computer → paste/fetch data → Start.
 
-  Enable the *Coverage Search* for novel splice junctions to increase sensitivity. Also enable *Use Own Junctions*, *Use Gene Annotation Model* and select the appropriate *Gene Model Annotations* (Drosophila_melanogaster.BDGP5.78.gtf) for your organism to enable the transcriptome alignment of **TopHat**.
-  
-  The TopHat algorithm splits reads into segments to map the reads across splice junctions. The default minimum length of read segments is 25, but a value of 18 seems to be a more appropriate value for this input data. Why?
+- TopHat also needs to know two important parameters about the sequencing library: 1) the *strandedness* being *unstranded* or *stranded* (if *stranded* there are many types) and 2) the *inner distance* between the two reads for paired-end data. **These information should usually come with your FASTQ files!!!** If not, try to find them on the site where you downloaded the data or in the corresponding publication.
 
+ Another option is to estimate these parameters from a *preliminary mapping* of a *downsampled* file, then run some analysis programs, and eventually redo the actual mapping on the original files with the optimized parameters. 
+ 
 
-**Step 3: Inspecting the TopHat results**
+*Preliminary mapping* (**NOT necessary if you don't need to estimate parameters!!!**):
 
-- **TopHat2** returns a bam file with the mapped reads and three bed files containing splice junctions, insertions and deletions. 
+- Downsample the FASTQ file. For the provided files downsampling is not necessary as they only contain 100k reads. For real data use the Galaxy tool `Select first` to downsample to 200k to 1M reads.
 
-- The exercise of step 2 worked for you? Fine! However the dataset might be a little too small to get you a good impression of how real data looks like. Please therefore import the following 4 files from tophat2 outputs into your history (GSM461177_untreat_paired_chr4.bam, GSM461177_untreat_paired_deletions_chr4.bed,GSM461177_untreat_paired_insertions_chr4.bed, GSM461177_untreat_paired_junctions_chr4.bed) from [Zenodo](http://dx.doi.org/10.5281/zenodo.61771) by right-clicking →  copy link location and paste the link in Galaxy →  Upload File from your computer →  paste/fetch data →  start.
+- Run **TopHat** with some minimal settings. Just stick with the defaults for the settings you don't know, *strandedness* and *insert size*. As this data comes from paired-end sequencing, switch from single-end to `paired-end (as individual datasets)` and specify the FASTQ files. Align the reads to the built in reference Drosophila melanogaster `dm3` genome → Execute.
 
-These files contain the TopHat results for the sample GSM461177_untreat_paired, but are restricted to reads that map to chr4 of Drosophila dm3.
+- Let's estimate the *inner distance*: Run RSeQC `Inner Distance` on the BAM file using the `Drosophila_melanogaster.BDGP5.78.gtf` reference gene model. Inspect the resulting PDF. What is the mean value for the inner distance? (If you already have read the corresponding paper carefully you might know that the fragment size is ~200bp. With read lengths of 2x37bp an educated guess could also be `125` for the inner distance. It's up to you decision, which value you prefer...)
 
-- Visualise this bam file and the three bed files in **IGV**. You might for example inspect the region between 560 kb to 600 kb on chr4. Which information does each of the bed files contain? 
+- Check the strandedness of the library: Run RSeQC `Infer Experiment` with the same files. Check the results and search the tool's documentation for help on the meaning. As it is sometimes quite difficult to find out which settings correspond to those of other programs a table might be helpful:
 
-- Also inspect the results using a **Sashimi plot** (activate by right-clicking on the reads).
+ |       | RSeQC Infer Experiment |      TopHat2      |    HISAT2    | htseq-count | featureCounts |
+ |:-----:|:----------------------:|:-----------------:|:------------:|:-----------:|:-------------:|
+ |   PE  |    "1++,1--,2+-,2-+"   | 'fr-secondstrand' |     'FR'     |    'yes'    |      '1'      |
+ |   PE  |    "1+-,1-+,2++,2--"   |  'fr-firststrand' |     'RF'     |  'reverse'  |      '2'      |
+ |   SE  |         "++,--"        | 'fr-secondstrand' |      'F'     |    'yes'    |      '1'      |
+ |   SE  |         "+-,-+"        |  'fr-firststrand' |      'R'     |  'reverse'  |      '2'      |
+ | SE,PE |        undecided       |  'fr-unstranded'  |    default   |     'no'    |      '0'      |
+
+*Actual Mapping*:
+
+- Run **TopHat** with the full parameter set to get the best mapping results. Use `paired-end (as individual datasets)` and specify the FASTQ files. Set `Mean Inner Distance` to `112` (or `125`?). Select the built in reference *Drosophila melanogaster* `dm3` genome. Allow `Tophat settings to use` → `Full parameter list`: Set the correct `library type` → `FR First Strand`. Supply `own junction data` → `Yes`, `Use Gene Annotation Model` → `Yes` and select the appropriate `Gene Model Annotations` → `Drosophila_melanogaster.BDGP5.78.gtf` for your organism to enable transcriptome alignment. Enable `coverage-based search for junctions` → `Yes (--coverage-search)` for novel splice junctions to increase sensitivity.  The TopHat algorithm splits reads into segments to map the reads across splice junctions. The default `minimum length of read segments` is 25 by default, but a value of `18` seems to be a more appropriate value for this input data. Why?
+
+ 
+**Step 3: Inspecting TopHat results**
+
+- **TopHat** returns a BAM file with the mapped reads and three bed files containing splice junctions, insertions and deletions. 
+
+- The mapping exercise worked for you? Great! However, the datasets are too small to get you a good impression of how real data looks like.
+
+- Please therefore import the following 4 files from Tophat outputs into your history (`GSM461177_untreat_paired_chr4.bam`, `GSM461177_untreat_paired_deletions_chr4.bed`,`GSM461177_untreat_paired_insertions_chr4.bed`, `GSM461177_untreat_paired_junctions_chr4.bed`) from [Zenodo](http://dx.doi.org/10.5281/zenodo.61771) by right-clicking →  copy link location and paste the link in Galaxy → Get data → Upload File from your computer → paste/fetch data → Start.
+ These files are restricted to reads that map to chr4 of Drosophila dm3.
+
+- Visualise this bam file and the three bed files in **IGV**. You might for example inspect the region on chr4 between 560 kb to 600 kb (`chr4:560,000-600,000`). Which information does each of the bed files contain? You may have to change the data type from "tabular" to "bed" (use the pencil button). 
+- Inspect the results using a **Sashimi plot** (right-click on the bam file → select `Sashimi Plot` from the context menu). Look around to find other regions with in interesting junctions, e.g. `chr4:870,000-940,000`.
 
 
 ## Transcript Assembly
@@ -79,7 +104,7 @@ Methods that estimate the differential expression of genes across samples requir
 
 **Step 6: Analyse differential gene expression with DESeq2**
 
-- In Step 5, we counted only reads that mapped to chr4. To get more meaningful results in the following analysis, please import the 3 treated and 4 untreated count files from the data library Galaxy course →  RNA-seq →  count_matrix. These files contains the read counts for all Drosophila genes and not only for reads mapped to chr4.
+- In Step 5, we counted only reads that mapped to chr4. To get more meaningful results in the following analysis, please import the 3 treated and 4 untreated count files from [Zenodo](http://dx.doi.org/10.5281/zenodo.61771) by right-clicking →  copy link location and paste the link in Galaxy →  Upload File from your computer →  paste/fetch data →  start. These files contains the read counts for all Drosophila genes and not only for reads mapped to chr4.
 
 In our example, we have samples with two varying factors: (1) condition (either treated or untreated) and (2) sequencing type (paired-end or single-end). A multi-factor analysis allows us to assess  the effect of the treatment taking also the sequencing type into account.
 
