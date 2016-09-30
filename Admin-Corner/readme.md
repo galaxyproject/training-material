@@ -1,19 +1,38 @@
-## The Basics for setting up a Galaxy Server
+Galaxy Server administration
+====
 
-#### '10 rules' for Setting up a Galaxy Instance as a Service
+Administration of Galaxy Servers can be a complex task. Here, we propose some materials to learn how to setting up a Galaxy instance, how to use Docker for Galaxy and the Galaxy Database schema.
 
-This [content](https://github.com/bgruening/training-material/tree/master/Admin-Corner/10rules_for_GaaS) is based on a presentation given at the Training Day at the Galaxy Community Conferences in Norwich, UK and Bloomington, IN in July 2015 and June 2016, respectively.
+# Slides
 
+Several deck of slides are available for this topic:
 
-## Advanced Topics in administering a Galaxy server
-.
+- [General introduction about Galaxy server administration](http://bgruening.github.io/training-material/Admin-Corner/slides/)
+- Slide deck related to the tutorials:
+    - [Setting up a Galaxy Instance as a Service](http://bgruening.github.io/training-material/Admin-Corner/slides/setting_up_galaxy_instance.html)
+    - [Docker and Galaxy](http://bgruening.github.io/training-material/Admin-Corner/slides/galaxy_docker.html)
+    - [Galaxy Database schema](http://bgruening.github.io/training-material/Admin-Corner/slides/database_schema.html)
+    - [Moving from MySQL to PostgreSQL](http://bgruening.github.io/training-material/Admin-Corner/slides/mysql_to_postgresql.html)
 
+# Tutorials
 
-## The Galaxy Database schema
+4 tutorials with hands-on are available for this topic:
 
-This [content](https://github.com/bgruening/training-material/tree/master/Admin-Corner/Database_Schema) is based on a presentation given at the Training Day at the Galaxy Community Conferences in Bloomington, IN in June 2016.
+- [Setting up a Galaxy Instance as a Service](tutorial/setting_up_galaxy_instance.md)
+- [Docker and Galaxy](tutorial/galaxy_docker.md)
+- [Galaxy Database schema](tutorial/database_schema.md)
+- [Moving from MySQL to PostgreSQL](tutorial/mysql_to_postgresql.md)
 
+# Contributors
 
-## The Galaxy Docker project
+This material is maintained by:
 
-Slides and a some training material for the Galaxy Docker proejct can be found at: https://slides.com/bgruening/the-galaxy-docker-project/live#/ as well as on the [project github repository](https://github.com/bgruening/docker-galaxy-stable).
+- Maintainer 1
+- Maintainer 2
+
+For any question related to this topic and the content, you can contact them.
+
+The following individuals have contributed to this training material:
+
+- Dave Clements
+- Hans-Rudolf Hotz
