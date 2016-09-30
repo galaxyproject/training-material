@@ -1,26 +1,29 @@
-Training course and material for Galaxy introduction
-====
+Galaxy introduction
+===================
 
-Here, you will find the material for introduction to Galaxy.
+Galaxy is a scientific workflow, data integration, and data and analysis persistence and publishing platform that aims to make computational biology accessible to research scientists that do not have computer programming experience.
+
+Here, you will find some material to learn how to use Galaxy.
 
 # Slides
 
-Two deck of slides are available:
+Several deck of slides are available for this topic:
 
-- [Introduction to Galaxy](./slides/Introduction_to_Galaxy_Uni.pdf)
-- [Galaxy course](./slides/Manke_2015.09.21a.pdf)
+- [General introduction about Galaxy](http://bgruening.github.io/training-material/Introduction/slides/)
+- Slide deck related to the tutorials:
+    - [Galaxy Introduction Exercise: From Peaks to Genes](http://bgruening.github.io/training-material/Dev-Corner/slides/introduction.html)
+    - [Getting to know workflows](http://bgruening.github.io/training-material/Dev-Corner/slides/workflows.html)
+    - [Processing many samples at once](http://bgruening.github.io/training-material/Dev-Corner/slides/processing_many_samples.html)
+    - [Using the Integrative Genomics Viewer](http://bgruening.github.io/training-material/Dev-Corner/slides/igv.html)
 
 # Tutorials
 
-Several tutorials are available:
+Several tutorials with hands-on are available for this topic:
 
-- [Galaxy Introduction Exercise: From Peaks to Genes](./tutorials/Introduction.md)
-- [Galaxy 101-1: The first thing you should try](./tutorials/Galaxy101-1.md)
-- [Galaxy 101-2: Getting to know workflows](./tutorials/Galaxy101-2.md)
-- [Overview of sequencing technologies](./tutorials/NGS-technologies.md)
-- [Processing many samples at once](./tutorials/Processing-many-samples-at-once.md)
-- [Using the Integrative Genomics Viewer](./tutorials/IGV_Introduction.md)
-
+- [Galaxy Introduction Exercise: From Peaks to Genes](tutorial/introduction.md)
+- [Getting to know workflows](tutorial/workflows.md)
+- [Processing many samples at once](tutorial/processing_many_samples.md)
+- [Using the Integrative Genomics Viewer](./tutorials/igv.md)
 
 ## Input datasets
 
@@ -36,3 +39,17 @@ docker run -d -p 8080:80 bgruening/galaxy-introduction-training
 
 It will launch a flavored Galaxy instance available on
 [http://localhost:8080](http://localhost:8080).
+
+# Contributors
+
+This material is maintained by:
+
+- Maintainer 1
+- Maintainer 2
+
+For any question related to this topic and the content, you can contact them.
+
+The following individuals have contributed to this training material:
+
+- Name 1
+- Name 2
