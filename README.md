@@ -1,5 +1,7 @@
 [![Gitter](https://badges.gitter.im/Galaxy-Training-Network/training-material.svg)](https://gitter.im/Galaxy-Training-Network/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) 
 
+_This repository will be moved to the https://github.com/galaxyproject as soon as we are convident about our guidelines and our initial training material._
+
 Training material
 =================
 
