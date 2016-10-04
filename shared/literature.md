@@ -17,23 +17,6 @@
 
 **Illumina's technical report** - focuses on [Illumina's sequencing technology](http://www.illumina.com/technology.html); nice educative figures
 
-
-##Mapping of short NGS reads
-
-**informative slides** [Mapping of sequencing reads](http://people.binf.ku.dk/krogh/tmp/Mapping_Krogh_Monday.pdf) - Introduction to various aspects of NGS read mapping
-
-**Fonseca et al. (2012):** [Tools for mapping high-throughput sequencing data](http://bioinformatics.oxfordjournals.org/content/28/24/3169.full), (doi:10.1093/bioinformatics/bts605) - An excellent starting point despite its "old" age, you will learn a lot about the different philosophies behind the read alignment tools!
-
-**Hatem et al. (2013):** [Benchmarking short sequence mapping tools](http://bmcbioinformatics.biomedcentral.com/articles/10.1186/1471-2105-14-184), (doi:10.1186/1471-2105-14-184) (spoiler alert: bowtie wins)
-
-**Engstrom et al. (2013):** [Systematic evaluation of spliced alignment programs for RNA-seq data](http://www.nature.com/nmeth/journal/v10/n12/full/nmeth.2722.html), (doi:10.1038/nmeth.2722) 
-
-**Genome Mappability**
-
-**Lee and Schatz (2012):** [The reliability of short read mapping](http://www.ncbi.nlm.nih.gov/pmc/articles/PMC3413383/?report=reader), (doi:10.1093/bioinformatics/bts330)  - Very detailed paper about genome mappability issues that presents a new suite of tools for taking the mappability into account
-
-*mappability maps* can be downloaded [here](http://archive.gersteinlab.org/proj/PeakSeq/Mappability_Map/)  
-
 ##NGS data formats
 
 - UCSC has a very good overview with brief descriptions of BED, bedGraph, bigWig etc.: https://genome.ucsc.edu/FAQ/FAQformat.html
@@ -47,7 +30,7 @@
 
 - Why and how is bioinformatics software special? **Altschul et a. (2013)** [The anatomy of successful computational biology software](http://www.ncbi.nlm.nih.gov/pubmed/24104757), (doi:10.1038/nbt.2721) **(Highly recommended to read!)**
 - **Bild et al. (2014)** [A Field Guide to Genomics Research](http://journals.plos.org/plosbiology/article?id=10.1371/journal.pbio.1001744), (doi:10.1371/journal.pbio.1001744) - Very readable introduction about the different caveats of genomics research (with cute cartoons!)
- 
+
 **Linux Command Line**
 
 - [Linux & Perl Primer for Biologists](http://korflab.ucdavis.edu/Unix_and_Perl/unix_and_perl_v3.1.1.html) - Very entertaining introduction to command line commands and perl scripts with a focus on bioinformatic application, i.e. handling of DNA sequences
@@ -58,8 +41,6 @@
 
 - [Hands on R course](http://www.uwyo.edu/mdillon/hor.html) - For beginners - R is probably the most widely used open-source statistical software; through our epicenter website you can also access RStudio which provides are very nice interface to working and plotting with R. In fact, most of the plots generated within Galaxy are generated through R scripts, so if you're not happy with the default formats of the Galaxy graphs, definitely have a look at R yourself. The learning curve is steep, but it is worth it.
 
-**BEDTools** 
+**BEDTools**
 
 - [BEDTools Manual](http://bedtools.readthedocs.org) - When working with genomic intervals (e.g. genes, peaks, enriched regions...), BEDTools are invaluable! The manual is a very good read and we refer to it almost daily.
-
-
