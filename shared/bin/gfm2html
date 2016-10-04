@@ -1,0 +1,100 @@
+#!/usr/bin/env bash
+
+# Convert a Github Flavored Markdown Syntax file to HTML for the landing page
+# using CSS stylesheet and JS scripts
+#
+# This script is highly based on the one of Evertton de Lima available on
+# https://gist.github.com/evertton/4133083
+#
+# Requirements: cURL (sudo apt-get install curl)
+# Input/Output: filename/STDOUT
+#
+# Usage: gfm2html <input> <output>
+# * input: filename of the Github Flavored Markdown (GFM) syntax document
+# * output: filename of the HTML document to generate
+#
+# eg: ./gfm2html README.md index.html
+set -e
+
+# read markdown file
+if [[ ! -n "$1" ]]; then
+  echo "No input file specified!"
+  exit 1
+elif [[ -d "$1" ]]; then
+  echo "$1 is a directory."
+  exit 1
+elif [[ ! -e "$1" ]]; then
+  echo "The file $1 not exist!"
+  exit 1
+elif [[ ! -r "$1" ]]; then
+  echo "The $1 file cannot be read! Verify the permissions!"
+  exit 1
+else
+text=$(<"$1")
+text=${text//\"/\\\"}
+text=${text//	/\\\t}
+text=${text//
+/\\\n}
+fi
+
+if [[ ! -n "$2" ]]; then
+  echo "No input file specified!"
+  exit 1
+fi
+
+# convert markdown to html using Github API v3
+result=$(curl --silent https://api.github.com/markdown -d "{\"text\": \"$text\", \"mode\": \"gfm\", \"context\": \"\"}")
+stringtosearch='"message": '
+if `echo $result | grep "$stringtosearch" 1>/dev/null 2>&1`
+then
+  echo $result
+  exit 1
+fi
+
+# output html
+echo "<!doctype html>
+<html>
+  <head>
+    <meta charset=\"utf-8\">
+    <meta http-equiv=\"X-UA-Compatible\" content=\"chrome=1\">
+    <title>Galaxy training material by bgruening</title>
+
+    <link rel=\"stylesheet\" href=\"shared/css/landing_page.css\">
+    <meta name=\"viewport\" content=\"width=device-width\">
+    <!--[if lt IE 9]>
+    <script src=\"//html5shiv.googlecode.com/svn/trunk/html5.js\"></script>
+    <![endif]-->
+  </head>
+
+<body>
+  <div class=\"wrapper\">
+    <header>
+      <h1>Galaxy training material</h1>
+      <p>A collection of training material from offered Galaxy courses</p>
+
+      <p style=\"text-align:center;\"><a href=\"https://wiki.galaxyproject.org/Teach/GTN\"><img src=\"shared/images/GTNLogo1000.png\" width=\"200\"></a></p><a href=\"https://wiki.galaxyproject.org/Teach/GTN\">
+
+      <p class=\"view\"><a href=\"https://github.com/bgruening/training-material\">View the Project on GitHub <small>bgruening/training-material</small></a></p>
+
+
+      <ul>
+        <li><a href=\"https://github.com/bgruening/training-material/zipball/master\">Download <strong>ZIP File</strong></a></li>
+        <li><a href=\"https://github.com/bgruening/training-material/tarball/master\">Download <strong>TAR Ball</strong></a></li>
+        <li><a href=\"https://github.com/bgruening/training-material\">View On <strong>GitHub</strong></a></li>
+      </ul>
+    </header>
+
+    <section>
+    <p style=\"text-align:center;\"><script src=\"https://embed.github.com/view/geojson/bgruening/galaxy-maps/master/server.geojson?height=300&width=400\"></script></p>
+    "$result"
+
+    </section>
+
+    <footer>
+      <p>This project is maintained by <a href=\"https://github.com/bgruening\">bgruening</a></p>
+      <p><small>Hosted on GitHub Pages &mdash; Theme by <a href=\"https://github.com/orderedlist\">orderedlist</a></small></p>
+    </footer>
+    <script src=\"javascripts/landing_page.js\"></script>
+  </div>
+</body>
+</html>" > $2
