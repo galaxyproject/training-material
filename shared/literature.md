@@ -1,14 +1,5 @@
 # Literature
 
-##Sequencing biases
-
-**Meacham et al. (2011):** [Identification and correction of systematic error in high-throughput sequence data](http://bmcbioinformatics.biomedcentral.com/articles/10.1186/1471-2105-12-451), (doi:10.1186/1471-2105-12-451) - Correcting for systematic base pair errors in deep sequencing; important paper if you want to look at any allele-specificy or if you're interested in SNPs
-
-**Benjamini & Speed (2012):** [Summarizing and correcting the GC content bias in high-throughput sequencing](http://nar.oxfordjournals.org/content/40/10/e72.long), (doi: 10.1093/nar/gks001) - GC bias of deeply sequenced samples; very good paper that systematically assesses many possible sourced of GC bias for deeply sequenced samples and eventually pinpoints it to the DNA polymerase
-
-**A collection of papers on quality controls for various NGS applications:** [Frontiers in Genetics (2014)](http://journal.frontiersin.org/researchtopic/1683/quality-assessment-and-control-of-high-throughput-sequencing-data)
-
-
 ##Deep sequencing
 
 **Zentner and Henikoff (2012):** [Surveying the epigenomic landscape, one base at a time](http://genomebiology.biomedcentral.com/articles/10.1186/gb-2012-13-10-250), (doi:10.1186/gb-2012-13-10-250) - Overview of popular *-seq techniques; very nice description of DNase-seq, MNase-seq, FAIRE-seq etc.

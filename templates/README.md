@@ -35,21 +35,21 @@ It will launch a flavored Galaxy instance available on
 
 **Name et al:** [*Book name*](link/to/the/book)
 
-    One line to describe why the book is interesting for this topic
+> One line to describe why the book is interesting for this topic
 
 **Name et al:** [*Book name*](link/to/the/book)
 
-    One line to describe why the book is interesting for this topic
+> One line to describe why the book is interesting for this topic
 
 ## Papers
 
 **Name et al:** [*Article name*](link/to/the/article)
 
-    One line to describe why the article is interesting for this topic
+> One line to describe why the article is interesting for this topic
 
 **Name et al:** [*Article name*](link/to/the/article)
 
-    One line to describe why the article is interesting for this topic
+> One line to describe why the article is interesting for this topic
 
 ## Websites
 
