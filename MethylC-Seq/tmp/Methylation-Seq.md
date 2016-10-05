@@ -12,8 +12,8 @@ Techniques:
 - BS-seq [(Cokus et al. 2008)](http://www.nature.com/nature/journal/v452/n7184/full/nature06745.html)
 - MeDIP-seq [(Jacinto et al. 2008)](http://www.biotechniques.com/BiotechniquesJournal/2008/January/Methyl-DNA-immunoprecipitation-MeDIP-Hunting-down-the-DNA-methylome/biotechniques-44645.html)  
 
-![Table_Methylation](https://github.com/bgruening/presentations/raw/master/shared/resources/img/Table_Methylation.jpg)
-![Barchart_Methaylation](https://github.com/bgruening/presentations/raw/master/shared/resources/img/BarChart_Methylation.jpg)
+![Table_Methylation](../images/Table_Methylation.jpg)
+![Barchart_Methaylation](../images/BarChart_Methylation.jpg)
 
 
 # Hands on!  
@@ -23,7 +23,7 @@ Publication: [Bismark BS Mapper](http://bioinformatics.oxfordjournals.org/conten
 
 **0. Import the dataset from ENA**
 
-This dataset comes from "Tissue-specific methylomes reveal epigenetic memory in adult mouse tissue". This dataset is available on ENA, which we can import directly into Galaxy: 
+This dataset comes from "Tissue-specific methylomes reveal epigenetic memory in adult mouse tissue". This dataset is available on ENA, which we can import directly into Galaxy:
 
 - "Get Data" -> "EBI SRA"
 - Search for "SRR630216", which is a "short read archive" run accession number.
