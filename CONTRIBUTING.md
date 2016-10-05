@@ -5,7 +5,7 @@ Contributing to Galaxy Training material
 
 The following is a set of guidelines for contributing to this training material on GitHub.
 
-If you have any question, you can reach us using the [Gitter chat](https://gitter.im/Galaxy-Training-Network/Lobby?utm_source=share-link&utm_medium=link&utm_campaign=share-link).
+If you have any questions, you can reach us using the [Gitter chat](https://gitter.im/Galaxy-Training-Network/Lobby?utm_source=share-link&utm_medium=link&utm_campaign=share-link).
 
 # Table of contents
 
@@ -62,7 +62,7 @@ For beginners, the GitHub interface will help you in the process in edition of o
 
 # How the training material is structured?
 
-Each each training material is related to a topic. All training material (slides, tutorials, ...) related to a topic is found in a dedicated directory (*e.g.* `Exome-seq` directory contains the material related to exome sequencing analysis). These repository have to have the following structure (as in `Exome-seq` directory):
+Each training material is related to a topic. All training material (slides, tutorials, ...) related to a topic is found in a dedicated directory (*e.g.* `Exome-seq` directory contains the material related to exome sequencing analysis). These repositories have to have the following structure (as in `Exome-seq` directory):
 
 ```
 ├── docker
