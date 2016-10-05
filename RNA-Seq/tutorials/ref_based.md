@@ -24,7 +24,7 @@ Reference based RNA-seq data analysis
 
 :hourglass: ***Time estimation*** *1d/3h/6h*
 
-[:book: **Associated slide deck**](../slides/ref_based.hmtl)
+[:book: **Associated slide deck**](http://bgruening.github.io/training-material/RNA-Seq/slides/ref_based.html)
 
 # Introduction
 
