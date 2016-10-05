@@ -10,18 +10,18 @@
 
 ## Slides from the hands-on workshops at the University of Freiburg
 
-The slides for part 1 of this session can be downloaded from here 
+The slides for part 1 of this session can be downloaded from here
 [ChIP-seq1-galaxy_course_2015.pdf](https://drive.google.com/file/d/0B9urRnOAUUI8UmwzbTVpdmZucWM/view?usp=sharing)
 
 
-The slides for part 2 can be downloaded from here 
+The slides for part 2 can be downloaded from here
 [ChIP-seq2-galaxy_course_2015.pdf](https://drive.google.com/file/d/0B9urRnOAUUI8cHpzYVBscjNKWEE/view?usp=sharing).  
 
 <a name="example"/></a>
 ## Hands on example  
 
-This exercise uses the dataset from the Nature publication by [Ross-Inness et al., 2012](http://www.ncbi.nlm.nih.gov/pubmed/22217937). 
-The goal was to identify the binding sites of the Estrogen receptor, a transcription factor known to be associated with different types of breast cancer. 
+This exercise uses the dataset from the Nature publication by [Ross-Inness et al., 2012](http://www.ncbi.nlm.nih.gov/pubmed/22217937).
+The goal was to identify the binding sites of the Estrogen receptor, a transcription factor known to be associated with different types of breast cancer.
 To this end, ChIP-seq was performed in breast cancer cells from 4 patients of different outcomes (good and poor).
 For each ChIP-seq experiment there is a matching technical control, i.e., there are 8 samples in total, half of which are the so-called 'input' samples for which the same treatment as the ChIP-seq samples was done except for the immunoprecipitation step.
 The input files are used to identify sequencing bias like open chromatin or GC bias.
@@ -36,11 +36,11 @@ Create a new history for this exercise.
 
 - Have a look at the file by clicking on the 'eye' icon. There is a lot of text, but can you spot where the DNA sequence is stored? Can you guess what the other entries mean?
 
-- Run the tool `FastQC` on one of the two FASTQ files to control the quality of the reads. An explanation of the results can be found on the [FastQC web page](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/). 
+- Run the tool `FastQC` on one of the two FASTQ files to control the quality of the reads. An explanation of the results can be found on the [FastQC web page](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/).
 
 **Step 2: Trimming and clipping of reads**
 
-It is often necessary to trim sequenced read, for example, to get rid of bases that were sequenced with high uncertainty (= 'low quality bases'). 
+It is often necessary to trim sequenced read, for example, to get rid of bases that were sequenced with high uncertainty (= 'low quality bases').
 
 - Apply the tool `TrimGalore` to your FASTQ file. Have a look at the full parameter list and then tell `TrimGalore` to:
     - __trim low quality bases__ with a cut-off of 15
@@ -61,11 +61,11 @@ Nowadays, there are many read alignment programs for shot-gun sequenced DNA, `bo
 
 **Step 4: Visualization of the reads in IGV**
 
-The read alignment step with bowtie2 resulted in a compressed, binary file (BAM) that is not human-readable (it's like the zipped version of a text file). We will show you two ways to inspect the file, (1) by visualization using a Genome Browser and (2) by converting the binary format into its text file equivalent. 
+The read alignment step with bowtie2 resulted in a compressed, binary file (BAM) that is not human-readable (it's like the zipped version of a text file). We will show you two ways to inspect the file, (1) by visualization using a Genome Browser and (2) by converting the binary format into its text file equivalent.
 
 - Load the reads into the IGV browser by clicking the option 'display with IGV local'. To see the reads in IGV you will need to zoom in the start of chromosome 11. Try this region if you don't see any reads: chr11:1,562,200-1,591,483
 
-- Notice that the reads have a _direction_ (i.e., they are mapped to the forward or reverse strand, respectively). When hovering over a read, extra information is displayed. Some reads have lines over them. Try to zoom in in one of those lines to identify the reason for these. 
+- Notice that the reads have a _direction_ (i.e., they are mapped to the forward or reverse strand, respectively). When hovering over a read, extra information is displayed. Some reads have lines over them. Try to zoom in in one of those lines to identify the reason for these.
 
 **Note**: because the number of reads over a region can be quite large, the IGV browser by default only allows to see the reads that fall into a small window. This behaviour can, in principle, be changed in the preferences panel.
 
@@ -74,7 +74,7 @@ The read alignment step with bowtie2 resulted in a compressed, binary file (BAM)
 
 As mentioned above, you can convert the binary BAM file into a simple (but large!) text file, which is called a SAM (Sequence Alignment Map) file.
 
-- Go back to Galaxy and run the tool `BAM-to-SAM` using the BAM file that was created in step 2. Click 'include header in output'. 
+- Go back to Galaxy and run the tool `BAM-to-SAM` using the BAM file that was created in step 2. Click 'include header in output'.
 
 - Click on the view icon ('eye'). The first part of the file, the header, contains the chromosome names and lengths. After the header, the location and other information of each read found in the FASTQ file is given.
 
@@ -86,7 +86,7 @@ To assess the similarity between the replicates of the ChIP-seq and the input, r
 We expect that the replicates of the ChIP-seq experiments should be clustered more closely to each other than the replicates of the input samples.
 
 - For this step, we need to load all files with the aligned reads for each sample (.bam files) into the shared libraries. For this, please import into the current history all BAM files found in 'Galaxy courses' -> 'Hands-on'.
- 
+
 *bam files examples* -> link
 
 - Next, run the tool `multiBamSummary` from the deepTools package. This tool will split the reference genome into bins of equal size (e.g. 10kb) and will count the number of overlapping reads from each sample.
@@ -148,7 +148,7 @@ Generally, you should adjust the effective genome size according to the used gen
 
 **Step 11: Call enriched regions (peaks)**
 
-To speed up computation, we will now restrict our analysis to chromosome 11. 
+To speed up computation, we will now restrict our analysis to chromosome 11.
 
 - To this end, please import to the history the BAM files patient4_ChIP_ER_poor_outcome_chr11.bam and patient4_input_poor_outcome_chr11.bam. These files are provided in the data library under Galaxy courses -> ChIP-seq -> bam_files.
 
@@ -193,7 +193,7 @@ Use the regions provided by the gene annotation file downloaded from UCSC and yo
 -------------------------------------------
 
 <a name="literature"/></a>
-##Useful literature 
+##Useful literature
 
 <a name="chipseq"/></a>
 ###ChIP-seq in general:
@@ -232,7 +232,7 @@ Use the regions provided by the gene annotation file downloaded from UCSC and yo
 <a name="motifs"/></a>
 ### DNA motif analysis
 
-**Das et al. (2007):** [A survey of DNA motif finding algorithms](http://bmcbioinformatics.biomedcentral.com/articles/10.1186/1471-2105-8-S7-S21), (doi:10.1186/1471-2105-8-S7-S21) - Review of motif analysis tools 
+**Das et al. (2007):** [A survey of DNA motif finding algorithms](http://bmcbioinformatics.biomedcentral.com/articles/10.1186/1471-2105-8-S7-S21), (doi:10.1186/1471-2105-8-S7-S21) - Review of motif analysis tools
 
 #### MEME (suite)
 
