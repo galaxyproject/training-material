@@ -178,50 +178,31 @@ To associate reads with transcripts the reads need to be aligned to the transcri
 
 |Assigning reads to transcripts: Sailfish|
 |--------|
-<<<<<<< HEAD:RNA-Seq/tutorials/Reference-based-RNA-seq-detailed.md
 |![](../images/sailfish.png)|
 |<sub>Sailfish indexes input transcriptome for a fixed *k*-mer length and compares *k*-mers derived from RNAseq reads against this index. Image from Patro et al. [2014](http://www.nature.com/nbt/journal/v32/n5/full/nbt.2862.html)</sub>|
-=======
-|![](https://github.com/nekrut/galaxy/wiki/images/sailfish.png)|
-|<sub>Sailfish indexes input transcriptome for a fixed *k*-mer length and compares *k*-mers derived from RNAseq reads against this index. Image from Patro *et al.* [2014](http://www.nature.com/nbt/journal/v32/n5/full/nbt.2862.html)</sub>|
->>>>>>> ee7c93aad8cef850d1bbd27e3dac288d148e7d4d:RNA-Seq/Reference-based-RNA-seq-detailed.md
 
 The current version of Sailfish uses [quasi-alignment](http://biorxiv.org/content/biorxiv/early/2015/10/22/029652.full.pdf) to extend exact matches found with *k*-mers:
 
 |Quasi-alignment of reads in Sailfish|
 |--------|
-<<<<<<< HEAD:RNA-Seq/tutorials/Reference-based-RNA-seq-detailed.md
 |![](../images/quasi_aln.png)|
 |<sub>In Sailfish version [0.7.0](https://github.com/kingsfordgroup/sailfish/releases/tag/v0.7.0) and up transcriptome is concatenated into a single sequence using `$` separators from which a [suffix array](https://en.wikipedia.org/wiki/Suffix_array) and a [hash table](https://en.wikipedia.org/wiki/Hash_table) are constructed. A *k*-mer from an RNAseq read (green) is looked up in the hash table, which immediately gives its position in the suffix array allowing to extend the march as described in the legend and the [paper](http://biorxiv.org/content/biorxiv/early/2015/10/22/029652.full.pdf). Image from  Srivastava et al. [2015](http://biorxiv.org/content/biorxiv/early/2015/10/22/029652.full.pdf)</sub>|
-=======
-|![](https://github.com/nekrut/galaxy/wiki/images/quasi_aln.png)|
-|<sub>In Sailfish version [0.7.0](https://github.com/kingsfordgroup/sailfish/releases/tag/v0.7.0) and up transcriptome is concatenated into a single sequence using `$` separators from which a [suffix array](https://en.wikipedia.org/wiki/Suffix_array) and a [hash table](https://en.wikipedia.org/wiki/Hash_table) are constructed. A *k*-mer from an RNAseq read (green) is looked up in the hash table, which immediately gives its position in the suffix array allowing to extend the march as described in the legend and the [paper](http://biorxiv.org/content/biorxiv/early/2015/10/22/029652.full.pdf). Image from  Srivastava *et al.* [2015](http://biorxiv.org/content/biorxiv/early/2015/10/22/029652.full.pdf)</sub>|
->>>>>>> ee7c93aad8cef850d1bbd27e3dac288d148e7d4d:RNA-Seq/Reference-based-RNA-seq-detailed.md
 
 [Kallisto](http://pachterlab.github.io/kallisto/) also utilizes *k*-mer matching but uses a different data structure. It constructs a [De Bruijn graph](https://en.wikipedia.org/wiki/De_Bruijn_graph) from transcriptome input (pane **b** of the figure below). This graph is different from De Bruijn graphs used for genome assembly in that its nodes are *k*-mers and transcripts correspond to paths through the graph. To accommodate multiple transcripts that can lay along the same path (or sub-path) the paths are "colored" with each transcript given a distinct "color" (in genome assembly the graph is built from the reads and nodes usually correspond to overlaps between *k*-mers forming incoming and outgoing edges). Non-branching sections of the graph that have identical coloring are "glued" into contigs. Finally a [hash table](https://en.wikipedia.org/wiki/Hash_table) is built that stores the position of each transcriptome *k*-mer within the graph:
 
 |Assigning reads to transcripts: Kallisto|
 |---------|
-<<<<<<< HEAD:RNA-Seq/tutorials/Reference-based-RNA-seq-detailed.md
 |![](../images/kallisto.png)|
 |<sub>Here a black read is being associated with a set consisting of red, blue, and green transcripts (**a**). First, a graph is built from transcriptome (**b**). Next, by finding common *k*-mers between the read and the graph the read is "threaded" along a path (**c** and **d**). The colors along that path would indicate which transcripts it is likely derived from. Specifically, this is done by taking intersection of "colors" (**c**). It this case the read is assigned to two transcripts: red and blue. Image from Bray et al. [2015](http://arxiv.org/pdf/1505.02710v2.pdf)</sub>|
-=======
-|![](https://github.com/nekrut/galaxy/wiki/images/kallisto.png)|
-|<sub>Here a black read is being associated with a set consisting of red, blue, and green transcripts (**a**). First, a graph is built from transcriptome (**b**). Next, by finding common *k*-mers between the read and the graph the read is "threaded" along a path (**c** and **d**). The colors along that path would indicate which transcripts it is likely derived from. Specifically, this is done by taking intersection of "colors" (**c**). It this case the read is assigned to two transcripts: red and blue. Image from Bray *et al.* [2015](http://arxiv.org/pdf/1505.02710v2.pdf)</sub>|
->>>>>>> ee7c93aad8cef850d1bbd27e3dac288d148e7d4d:RNA-Seq/Reference-based-RNA-seq-detailed.md
+
 
 [Salmon](https://combine-lab.github.io/salmon/about/) does not use *k*-mer matching approach. Instead it creates [bwa](https://github.com/lh3/bwa)-like [FM-index](https://en.wikipedia.org/wiki/FM-index) and uses it to finds chains of *Maximal Exact Matches* (MEMs) and *Super Maximal Exact Matches* (SMEMs) between a read and the transcriptome.   
 Patro *et al.* [2015](http://biorxiv.org/content/biorxiv/early/2015/06/27/021592.full.pdf) define a MEM as "*a substring that is shared by the query (read) and reference (transcript) that cannot be extended in either direction without introducing a mismatch*". Similarly, a SMEM is defined as a "*MEM that is not contained within any other MEM on the query.*" One of the advantages of utilizing the FM-index is that a new index does not need to re-generated for a search with different set of parameters. In the case of Sailfish and Kallisto an index is dependent on *k*-mer length and has to be recomputed every time the *k* is changed. The overall schematics of Salmon operation is as follows:
 
 |Assigning reads to transcripts: Salmon|
 |---------|
-<<<<<<< HEAD:RNA-Seq/tutorials/Reference-based-RNA-seq-detailed.md
 |![](../images/salmon.png)|
 |Image from Patro et al. [2015](http://biorxiv.org/content/biorxiv/early/2015/06/27/021592.full.pdf)|
-=======
-|![](https://github.com/nekrut/galaxy/wiki/images/salmon.png)|
-|Image from Patro *et al.* [2015](http://biorxiv.org/content/biorxiv/early/2015/06/27/021592.full.pdf)|
->>>>>>> ee7c93aad8cef850d1bbd27e3dac288d148e7d4d:RNA-Seq/Reference-based-RNA-seq-detailed.md
 
 ### Estimating transcript levels
 
@@ -233,13 +214,8 @@ StringTie, which performs assembly and quantification simultaneously converts sp
 
 |StringTie flow network|
 |--------|
-<<<<<<< HEAD:RNA-Seq/tutorials/Reference-based-RNA-seq-detailed.md
 |![](../images/stringtie2.png)|
 |<sub>Here each exon node from the splice graph is split into *in* and *out* nodes connected with an edge weighted by the number of reads corresponding to that exon. For example, the first exon is covered by seven reads and so the edge between 1-in and 1-out has a weight of 7. Expression level would correspond to the maximum flow through a path representing a given transcript. Image from Pertea et al. [2015](http://www.nature.com/nbt/journal/v33/n3/full/nbt.3122.html)</sub>|
-=======
-|![](https://github.com/nekrut/galaxy/wiki/images/stringtie2.png)|
-|<sub>Here each exon node from the splice graph is split into *in* and *out* nodes connected with an edge weighted by the number of reads corresponding to that exon. For example, the first exon is covered by seven reads and so the edge between 1-in and 1-out has a weight of 7. Expression level would correspond to the maximum flow through a path representing a given transcript. Image from Pertea *et al.* [2015](http://www.nature.com/nbt/journal/v33/n3/full/nbt.3122.html)</sub>|
->>>>>>> ee7c93aad8cef850d1bbd27e3dac288d148e7d4d:RNA-Seq/Reference-based-RNA-seq-detailed.md
 
 #### Expectation Maximization
 
@@ -267,13 +243,9 @@ In their [tutorial](http://chagall.med.cornell.edu/RNASEQcourse/) Dündar *et al
 
 |RNAseq normalization metrics: Within sample comparisons|
 |-------|
-<<<<<<< HEAD:RNA-Seq/tutorials/Reference-based-RNA-seq-detailed.md
 |![](../images/within_norm.png)|
 |<sub>Table from Dündar et al. [2015](http://chagall.med.cornell.edu/RNASEQcourse/)</sub>|
-=======
-|![](https://github.com/nekrut/galaxy/wiki/images/within_norm.png)|
-|<sub>Table from Dündar *et al.* [2015](http://chagall.med.cornell.edu/RNASEQcourse/)</sub>|
->>>>>>> ee7c93aad8cef850d1bbd27e3dac288d148e7d4d:RNA-Seq/Reference-based-RNA-seq-detailed.md
+
 
 In addition, an excellent overview of these metrics can be found [here](https://haroldpimentel.wordpress.com/2014/05/08/what-the-fpkm-a-review-rna-seq-expression-units/).
 
@@ -290,13 +262,8 @@ For this expression is estimated from read counts and attempts are made to corre
 
 |Differential expression: Read counts and expression levels |
 |-------|
-<<<<<<< HEAD:RNA-Seq/tutorials/Reference-based-RNA-seq-detailed.md
 |![](../images/diff.png)|
 |<sub>**Change in fragment count for a gene does not necessarily equal a change in expression**. (**a**) Simple read-counting schemes sum the fragments incident on a gene’s exons. The exon-union model counts reads falling on any of a gene’s exons, whereas the exon-intersection model counts only reads on constitutive exons. (**b**) Both of the exon-union and exon intersection counting schemes may incorrectly estimate a change in expression in genes with multiple isoforms. The true expression is estimated by the sum of the length-normalized isoform read counts. The discrepancy between a change in the union or intersection count and a change in gene expression is driven by a change in the abundance of the isoforms with respect to one another. In the top row, the gene generates the same number of reads in conditions A and B, but in condition B, all of the reads come from the shorter of the two isoforms, and thus the true expression for the gene is higher in condition B. The intersection count scheme underestimates the true change in gene expression, and the union scheme fails to detect the change entirely. In the middle row, the intersection count fails to detect a change driven by a shift in the dominant isoform for the gene. The union scheme detects a shift in the wrong direction. In the bottom row, the gene’s expression is constant, but the isoforms undergo a complete switch between conditions A and B. Both simplified counting schemes register a change in count that does not reflect a change in gene expression. Figure from Trapnell et al. [2013] (http://www.nature.com/nbt/journal/v31/n1/abs/nbt.2450.html)</sub>|
-=======
-|![](https://github.com/nekrut/galaxy/wiki/images/diff.png)|
-|<sub>**Change in fragment count for a gene does not necessarily equal a change in expression**. (**a**) Simple read-counting schemes sum the fragments incident on a gene’s exons. The exon-union model counts reads falling on any of a gene’s exons, whereas the exon-intersection model counts only reads on constitutive exons. (**b**) Both of the exon-union and exon intersection counting schemes may incorrectly estimate a change in expression in genes with multiple isoforms. The true expression is estimated by the sum of the length-normalized isoform read counts. The discrepancy between a change in the union or intersection count and a change in gene expression is driven by a change in the abundance of the isoforms with respect to one another. In the top row, the gene generates the same number of reads in conditions A and B, but in condition B, all of the reads come from the shorter of the two isoforms, and thus the true expression for the gene is higher in condition B. The intersection count scheme underestimates the true change in gene expression, and the union scheme fails to detect the change entirely. In the middle row, the intersection count fails to detect a change driven by a shift in the dominant isoform for the gene. The union scheme detects a shift in the wrong direction. In the bottom row, the gene’s expression is constant, but the isoforms undergo a complete switch between conditions A and B. Both simplified counting schemes register a change in count that does not reflect a change in gene expression. Figure from Trapnell *et al.* [2013] (http://www.nature.com/nbt/journal/v31/n1/abs/nbt.2450.html)</sub>|
->>>>>>> ee7c93aad8cef850d1bbd27e3dac288d148e7d4d:RNA-Seq/Reference-based-RNA-seq-detailed.md
 
 > The following discussion of DGE logic is reproduced from Dündar *et al.* [2015](http://chagall.med.cornell.edu/RNASEQcourse/).
 
@@ -324,13 +291,8 @@ Here is what to do to load the data:
 
 | Loading the data and create dataset collections |
 |------------------|
-<<<<<<< HEAD:RNA-Seq/tutorials/Reference-based-RNA-seq-detailed.md
 | Go to the [data library](https://usegalaxy.org/library/list#folders/Ff4ce53393dae30ee) and select all fastq files. Then Click `to History` button:|
 |![](../images/rnaseq_library.png)|
-=======
-| Go to the [data library](https://usegalaxy.org/library/list#folders/Ff4ce53393dae30ee) and select all fastq files. Then click `to History` button:|
-|![](https://github.com/nekrut/galaxy/wiki/images/rnaseq_library.png)|
->>>>>>> ee7c93aad8cef850d1bbd27e3dac288d148e7d4d:RNA-Seq/Reference-based-RNA-seq-detailed.md
 |The datasets will appear in your history:|
 |![](../images/rnaseq_data_in_history.png)|
 | Twelve datasets make a lot of clicking necessary. To avoid this annoyance we will combine them into two collections - **c1** and **c2** as shown in the video below. Also, see this [tutorial](https://github.com/nekrut/galaxy/wiki/Processing-many-samples-at-once) for yet another explanation of dataset collections. |
@@ -410,25 +372,14 @@ Before we can use `HTseq-count` we need to download gene annotations for version
 
 | DESeq2 in Galaxy |
 |-----------|
-<<<<<<< HEAD:RNA-Seq/tutorials/Reference-based-RNA-seq-detailed.md
 |The `DESeq2` Galaxy's interface is shown below. `DESeq2` allows to incorporate multiple *factors* in the analysis. In our case we only have one factor, which we call **Conditions**. This is because we are trying to find genes that are differentially expressed between two conditions. The first condition will the first **factor level**, while condition 2 will be the second **factor level**. Here the input for this first factor level is set to a collection `84: htseq-count on collection 37` and the input for the second input is set to `92: htseq-count on collection 57`. Make sure that **Visualising the analysis results** is set to `Yes`:|
 |![](../images/deseq2_interface.png)|
-=======
-|The `DESeq2` Galaxy's interface is shown below. `DESeq2` allows to incorporate multiple *factors* in the analysis. In our case we only have one factor, which we call **Conditions**. This is because we are trying to find genes that are differentially expressed between two conditions. The first condition will be the first **factor level**, while condition 2 will be the second **factor level**. Here the input for this first factor level is set to a collection `84: htseq-count on collection 37` and the input for the second input is set to `92: htseq-count on collection 57`. Make sure that **Visualising the analysis results** is set to `Yes`:|
-|![](https://github.com/nekrut/galaxy/wiki/images/deseq2_interface.png)|
->>>>>>> ee7c93aad8cef850d1bbd27e3dac288d148e7d4d:RNA-Seq/Reference-based-RNA-seq-detailed.md
 |This will produce [output](https://usegalaxy.org/datasets/bbd44e69cb8906b5d648fe21c36ac662/display/?preview=True) as shown below. The columns are: (**1**) gene identifier, (**2**) mean normalised counts, averaged over all samples from both conditions, (**3**) logarithm (base 2) of the fold change, (**4**) the standard error estimate for the log2 fold change estimate, (**5**) [Wald test](https://en.wikipedia.org/wiki/Wald_test) statistic, (**6**) p value for the statistical significance of this change, and (**7**) *p*-value adjusted for multiple testing with the Benjamini-Hochberg procedure which controls false discovery rate ([FDR](https://en.wikipedia.org/wiki/False_discovery_rate)). There is only one gene with significant change in gene expression between conditions: `CG1803-RC` with *p*-value = 1.6x10<sup>-05</sup>: |
 |![](../images/deseq2_output.png)|
 | In addition to the [list of genes](https://usegalaxy.org/datasets/bbd44e69cb8906b5d648fe21c36ac662/display/?preview=True) DESeq2 outputs a graphical summary of the result. It includes a number of plots that should be used to evaluate the quality of the experiment. The histogram of *p*-values below shows that in our sample there is in fact just one instance of a significant *p*-value:|
-<<<<<<< HEAD:RNA-Seq/tutorials/Reference-based-RNA-seq-detailed.md
 |![](../images/p_val_hist.png)|
 |The [MA plot](https://en.wikipedia.org/wiki/MA_plot) below shows the relationship between the expression change (M) and average expression strength (A). Genes with adjusted *p*-value < 0.1 are in red (there is only one such gene in thi sample at the bottom of the graph):|
 |![](../images/MA_plot.png)|
-=======
-|![](https://github.com/nekrut/galaxy/wiki/images/p_val_hist.png)|
-|The [MA plot](https://en.wikipedia.org/wiki/MA_plot) below shows the relationship between the expression change (M) and average expression strength (A). Genes with adjusted *p*-value < 0.1 are in red (there is only one such gene in this sample at the bottom of the graph):|
-|![](https://github.com/nekrut/galaxy/wiki/images/MA_plot.png)|
->>>>>>> ee7c93aad8cef850d1bbd27e3dac288d148e7d4d:RNA-Seq/Reference-based-RNA-seq-detailed.md
 |The Principal Component Analysis ([PCA](https://en.wikipedia.org/wiki/Principal_component_analysis)) shows the separation between Condition 1 and 2. This type of plot is useful for visualizing the overall effect of experimental covariates and batch effects (each replicate is plotted as an individual data point): |
 |![](../images/pca.png)|
 |A heatmap of sample-to-sample distance matrix gives us an overview over similarities and dissimilarities between samples:|
