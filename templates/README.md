@@ -5,11 +5,17 @@ Topic name
 
 # Slides
 
-Information on where the slide decks can be found, generally `http://bgruening.github.io/training-material/<topic_name>/slides/index.html` and what is inside the slide decks.
+Several deck of slides are available for this topic:
+
+- [General introduction about <topic name>](http://bgruening.github.io/training-material/templates/slides/)
+- Slide deck related to the tutorials:
+    - [Tutorial name](http://bgruening.github.io/training-material/templates/slides/tutorial.html)
 
 # Tutorials
 
-Information about the tutorials (which tutorials are available, what are their questions and objectives, ...)
+Several tutorial with hands-on are available for this topic:
+
+- [Tutorial name](tutorials/tutorial.md)
 
 ## Input datasets
 
