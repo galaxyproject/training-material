@@ -50,7 +50,7 @@ We strongly recommend you to read and follow Software Carpentry's recommendation
 
 To manage changes, we use [GitHub flow](https://guides.github.com/introduction/flow/) based on Pull Requests:
 
-1. Create a fork of this repository on GitHub
+1. [Create a fork](https://help.github.com/articles/fork-a-repo/) of this repository on GitHub
 2. Clone your fork of this repository to create a local copy on your computer
 3. Create a new branch in your local copy for each significant change
 4. Commit the changes in that branch
