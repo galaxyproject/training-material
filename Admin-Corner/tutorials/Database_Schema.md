@@ -78,6 +78,7 @@ Also see the “Run SchemaSpy in this container” section below for how to inst
 The Galaxy database uses a number of naming and design conventions.  Understanding these can make navigating the database much easier.
 
 * id attributes
+
 Every table has an id column that uniquely identifies each row.  (The id column is the primary key in database terminology.) Beyond uniquely identifying a row in the table, ID values have no meaning.  ID values are unique within a table, but not across the database.
 
 * Relationships between tables, and `_id` columns
