@@ -46,7 +46,7 @@ You think to yourself Wow! This is a simple question ... I know exactly where th
 
 Time to get started, browse to your Galaxy instance and log in or register. The Galaxy interface consist of three main parts. The available tools are listed on the left, your analysis history is recorded on the right, and the middle pane will show the tools and datasets.
 
-![](../images/galaxy_interface.png)
+![](../images/galaxy-interface.png)
 
 :pencil2: ***Hands on!***
 
