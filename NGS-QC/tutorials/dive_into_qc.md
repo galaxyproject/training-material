@@ -38,7 +38,7 @@ General introduction about the topic and then an introduction of the tutorial (t
 
 # Check the quality of your sequences
 
-Introduction about this part
+Chacking sequences quality, and raw data quality in general, is one of the most important part of an analysis. Taking time to evaluate deeply each part of your data can give a lot of benefit on the next steps and avoids loosing time re-executing several times the entire workflow.
 
 ## Run FastQC
 
@@ -52,21 +52,29 @@ Short introduction about this subpart.
 
 ## Check the FastQC output
 
-Short introduction about this subpart.
+FastQC outputs are an html report and a raw data file. If the raw data file allows the user to start from original data to create its own grpahs and stats and the html report shows directly a graphical web page, the two outputs are divided in sections :
 
-:pencil2: ***Hands on!***
+:pencil2: ***Basics statistics***
 
-1. First step
-2. Second step
-3. Third step
+We find here simple statistics on the analysed file. We can thus find here:
+-the ASCII encoding type, relevant when using FastQ groomer next to FastQC to convert your fastQ files to the fastqsanger format.
+-number of sequences
+-sequence length
+-the overall GC content
 
-Some blabla
+:pencil2: ***Per base sequence quality ***
 
-:pencil2: ***Hands on!***
+A red line indicates the mean value of the quality score when the yellow box allows the user to determine inter-quartiles values (25% - 75%). box plot top and bottom show respectively the 90% and 10% treshold. The 3 parts of the graph (green, orange, red), represent respectively very good, quite good and not so good ;) quality. It's classical to see the overall score decreasing with le sequence length as sequencing qulity is decreasing with time.
 
-1. First step
-2. Second step
-3. Third step
+A warning indicates that one of the first quartile is under 10 or if a median value is under 25. 
+An error indicates that one of the first quartile is under 5 or if a median value is under 20.
+
+:pencil2: ***Per sequence quality score ***
+
+Allows to detect if a subset of sequences show weak quality. This can for example happen when sequencing step have difficulties to capture sequences on images because on a corner of the field of view. Thus, this can indicate a systematic problem on a flowcell part.
+
+A warning indicates an error rate of 0.2% when the peak is under 27. 
+An error indicates an error rate of 1% when the peak is under 20.
 
 :grey_exclamation: ***Key Points***
 
