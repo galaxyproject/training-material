@@ -8,7 +8,7 @@ Training material
 
 topic | features
 :-- | :--: | --:
-[Genome Annotation](https://github.com/bgruening/training-material/blob/master/Genome-Annotation/general-introduction/README.md) | :book:
+[Genome Annotation](Genome-Annotation/general-introduction/README.md) | :book:
 [RNA-seq](https://github.com/bgruening/training-material/blob/master/RNA-Seq/) | :whale: [:movie_camera:](https://vimeo.com/128268401) [:page_facing_up:](https://usegalaxy.org/u/jeremy/p/galaxy-rna-seq-analysis-exercise) [:book:](https://github.com/bgruening/training-material/blob/master/RNA-Seq/)
 [ChIP-seq](https://github.com/bgruening/training-material/blob/master/ChIP-Seq/ChIPseq.md) | :book:
 [Exome-seq](https://github.com/bgruening/training-material/blob/master/Exome-Seq/README.md) | [:whale:](https://github.com/bgruening/training-material/tree/master/Exome-Seq/docker) [:book:](https://github.com/bgruening/training-material/tree/master/Exome-Seq/tutorials) [:mortar_board:](http://bgruening.github.io/training-material/Exome-Seq/slides/index.html#/) [:eyes:](https://github.com/bgruening/training-material/tree/master/Exome-Seq/docker)
