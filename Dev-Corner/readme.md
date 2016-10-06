@@ -19,9 +19,9 @@ Several deck of slides are available for this topic:
 
 4 tutorials with hands-on are available for this topic:
 
-- [Tool development and integration into Galaxy](tutorial/tool_integration.md)
-- [Data source integration](tutorial/data_source_integration.md)
-- [Visualizations in Galaxy](tutorial/visualizations.md)
+- [Tool development and integration into Galaxy](tutorials/tool_integration.md)
+- [Data source integration](tutorials/data_source_integration.md)
+- [Visualizations in Galaxy](tutorials/visualizations.md)
 
 ## Galaxy instance
 
