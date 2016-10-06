@@ -13,6 +13,7 @@ The following individuals have contributed to this training material:
 * Friederike Duendar (@friedue)
 * Thomas Manke (@thomasmanke)
 * Torsten Houwaart
+* Markus Wolfien (@mwolfien)
 
 
 # Institutional sponsors
