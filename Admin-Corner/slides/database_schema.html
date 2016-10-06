@@ -1,4 +1,8 @@
 <!doctype html>
+<!-- 
+3d requirement: psql: needed?
+
+-->
 <html lang="en">
 
 	<head>
@@ -36,7 +40,7 @@
 	</head>
 
 	<body>
-		<div class="reveal">
+	  <div class="reveal">
             <div class="slides">
                 <section data-markdown>
                     <script type="text/template">
@@ -62,27 +66,46 @@
                 <section>
                     <section data-markdown>
                         <script type="text/template">
-                            ## Small introduction (vertical part)
+                            ## Small introduction
+			    Tools, jobs, histories, users, and so on are stored in a table database, with more information than is available on the web interface.
+			    
+			    Manual modification of the database, extraction of analytics information and migrating from MySQL to PostgreSQL
+			    can be achieved through SQL queries.
+			    
+                        </script>
+                    </section>
+			
+                    <section data-markdown>
+                        <script type="text/template">	
+			    
+			    - Learn some of the design concepts of the Galaxy database
+			    - Extract information from the Galaxy database
+			    - Get to know SchemaSpy
+                            </script>
+                    </section>
+
+
+                    <section data-markdown>
+                        <script type="text/template">
+                            ### Requirements
+			    In order to dive into the database, you should know some how to:
+			    - basics on Galaxy [(Galaxy introduction)](https://github.com/bgruening/training-material/tree/master/Introduction)
+			    - [deploy a Galaxy Docker Image](https://github.com/bgruening/training-material/blob/master/Admin-Corner/tutorials/galaxy_docker.md)
+			    - or Access to a Galaxy server and its PostgreSQL database
+		
+
                         </script>
                     </section>
 
                     <section data-markdown>
                         <script type="text/template">
-                            ### Subpart1.1
-
-                            - list
-                            - list
-                            - list
-                        </script>
-                    </section>
-
-                    <section data-markdown>
-                        <script type="text/template">
-                            ### Subpart1.2
-
-                            With an image...
-
-                            <img src="../../shared/images/GTNLogo1000.png" alt="GTNLogo1000" class="no-border" width=30%/>
+                            ## Galaxy database schema
+			    Galaxy data can be accessed making use of:
+			    - the database approach (focus of this tutorial)
+			    - the object model (used by the Python source code)
+			    
+			    Translation between object model and database schemais done by an
+			    object-relational mapping implemented with [SQLAlchemy](http://www.sqlalchemy.org/)
                         </script>
                     </section>
                 </section>
@@ -90,78 +113,57 @@
                 <section>
                     <section data-markdown>
                         <script type="text/template">
-                            ### <i class="fa fa-question-circle" aria-hidden="true"></i> Questions
-
-                            - Major question that would be addressed in this tutorial (same as the markdown)
-                            - Second question
-
-                            <aside class="notes">
-                                Oh hey, these are some notes. They'll be hidden in your presentation, but you can see them if you open the speaker notes window.
-
-                                To see the notes, hit **'s'** on your keyboard
-                            </aside>
+                            ## Database platform
+			    
+			    Galaxy uses sqlite out of the box. 
+			    
+			    Yet, it is advised to set up an instance with PostgreSQL (which support multiple users simultaneously)
+			    
                         </script>
                     </section>
+
 
                     <section data-markdown>
                         <script type="text/template">
-                            ### <i class="fa fa-bullseye" aria-hidden="true"></i> Objectives
+                            ## What is in the database
+			    users, groups, jobs, histories, datasets, workflows
 
-                            - First objective of this tutorial (same as the markdown)
-                            - Second objective
-                            - Third objective
-                            - ...
+			    ## What is not in the database
+			    - Data: only metadata such as datatypes is recorded.
+			    - Tools, only an XML file containing the tools description is in the tool shed.
+			    
                         </script>
                     </section>
-                </section>
-
-                <section>
+ 	       </section>
+      
+               <section>
                     <section data-markdown>
                         <script type="text/template">
-                            ## Part 1
+                            ## Database schema (1/2)
+			    
                         </script>
                     </section>
 
-                    <section data-markdown>
-                        <script type="text/template">
-                            ### Small introduction
-
-                            Introduction about this part
-                        </script>
-                    </section>
 
                     <section data-markdown>
                         <script type="text/template">
-                            ### Subpart 1
-
-                            Short introduction about this subpart.
-
-                            <i class="fa fa-pencil" aria-hidden="true"></i> ***Hands on!***
+                            ## Database schema (2/2)
+			    
                         </script>
                     </section>
 
+                  
                     <section data-markdown>
                         <script type="text/template">
-                            ### Subpart1.2
-
-                            Short introduction about this subpart.
-
-                            <i class="fa fa-pencil" aria-hidden="true"></i> ***Hands on!***
+                            ## Hands-on!
+			    
                         </script>
                     </section>
-                </section>
+ 	       </section>
 
+		    
+		   
 
-                <section data-markdown>
-                    <script type="text/template">
-                        ### <i class="fa fa-exclamation-circle" aria-hidden="true"></i> Key points
-
-                        - Simple sentence to sum up the first key point of the tutorial (Take home message)
-                        - Second key point
-                        - Third key point
-                        - ...
-                    </script>
-                </section>
 			</div>
 
 		</div>
