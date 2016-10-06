@@ -8,13 +8,13 @@ Training material
 
 topic | features
 :-- | :--: | --:
-[Genome Annotation](Genome-Annotation/general-introduction/README.md) | :book:
+[Genome Annotation](Genome-Annotation/general-introduction/) | :book:
 [RNA-seq](RNA-Seq/) | :whale: [:movie_camera:](https://vimeo.com/128268401) [:page_facing_up:](https://usegalaxy.org/u/jeremy/p/galaxy-rna-seq-analysis-exercise) [:book:](RNA-Seq/)
-[ChIP-seq](ChIP-Seq/ChIPseq.md) | :book:
-[Exome-seq](Exome-Seq/README.md) | [:whale:](Exome-Seq/docker) [:book:](Exome-Seq/tutorials) [:mortar_board:](Exome-Seq/slides/index.html#/) [:eyes:](Exome-Seq/docker)
-[MethylC-seq](Methylation-Seq/Methylation-Seq.md) | :book:
-[Galaxy Introduction](https://github.com/bgruening/training-material/blob/master/Galaxy_Introduction/Galaxy_Introduction.md ) | :book:  
-[Data Sources](https://github.com/bgruening/training-material/blob/master/Dev-Corner/Data-Sources/Data_Sources.md) | :book: 
+[ChIP-seq](ChIP-Seq/) | :book:
+[Exome-seq](Exome-Seq/) | [:whale:](Exome-Seq/docker) [:book:](Exome-Seq/tutorials) [:mortar_board:](Exome-Seq/slides/index.html#/) [:eyes:](Exome-Seq/docker)
+[MethylC-seq](Methylation-Seq/) | :book:
+[Galaxy Introduction](Galaxy_Introduction/) | :book:  
+[Data Sources](Dev-Corner/tutorials/data_source_integration.md) | :book: 
 [Galaxy Tool Dev](http://planemo.readthedocs.io/en/latest/writing_appliance.html) | [:book:](http://planemo.readthedocs.io/en/latest/writing_appliance.html) 
 [Galaxy Docker Project](https://slides.com/bgruening/the-galaxy-docker-project/live#/) | [:book:](https://slides.com/bgruening/the-galaxy-docker-project/live#/) 
 
