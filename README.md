@@ -13,7 +13,7 @@ topic | features
 [ChIP-seq](https://github.com/bgruening/training-material/blob/master/ChIP-Seq/ChIPseq.md) | :book:
 [Exome-seq](https://github.com/bgruening/training-material/blob/master/Exome-Seq/README.md) | [:whale:](https://github.com/bgruening/training-material/tree/master/Exome-Seq/docker) [:book:](https://github.com/bgruening/training-material/tree/master/Exome-Seq/tutorials) [:mortar_board:](http://bgruening.github.io/training-material/Exome-Seq/slides/index.html#/) [:eyes:](https://github.com/bgruening/training-material/tree/master/Exome-Seq/docker)
 [MethylC-seq](https://github.com/bgruening/training-material/blob/master/Methylation-Seq/Methylation-Seq.md) | :book:
-[Galaxy Introduction](https://github.com/bgruening/training-material/blob/master/Galaxy_Introduction/Galaxy_Introduction.md ) | :book:  
+[Galaxy Introduction](https://github.com/bgruening/training-material/blob/master/Introduction/README.md ) | :book:  
 [Data Sources](https://github.com/bgruening/training-material/blob/master/Dev-Corner/Data-Sources/Data_Sources.md) | :book: 
 [Galaxy Tool Dev](http://planemo.readthedocs.io/en/latest/writing_appliance.html) | [:book:](http://planemo.readthedocs.io/en/latest/writing_appliance.html) 
 [Galaxy Docker Project](https://slides.com/bgruening/the-galaxy-docker-project/live#/) | [:book:](https://slides.com/bgruening/the-galaxy-docker-project/live#/) 
