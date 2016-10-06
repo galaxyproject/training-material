@@ -8,13 +8,13 @@ Training material
 
 topic | features
 :-- | :--: | --:
-[Genome Annotation](https://github.com/bgruening/training-material/blob/master/Genome-Annotation/general-introduction/README.md) | :book:
-[RNA-seq](https://github.com/bgruening/training-material/blob/master/RNA-Seq/) | :whale: [:movie_camera:](https://vimeo.com/128268401) [:page_facing_up:](https://usegalaxy.org/u/jeremy/p/galaxy-rna-seq-analysis-exercise) [:book:](https://github.com/bgruening/training-material/blob/master/RNA-Seq/)
-[ChIP-seq](https://github.com/bgruening/training-material/tree/master/ChIP-Seq) | :book:
-[Exome-seq](https://github.com/bgruening/training-material/blob/master/Exome-Seq/README.md) | [:whale:](https://github.com/bgruening/training-material/tree/master/Exome-Seq/docker) [:book:](https://github.com/bgruening/training-material/tree/master/Exome-Seq/tutorials) [:mortar_board:](http://bgruening.github.io/training-material/Exome-Seq/slides/index.html#/) [:eyes:](https://github.com/bgruening/training-material/tree/master/Exome-Seq/docker)
-[MethylC-seq](https://github.com/bgruening/training-material/tree/master/MethylC-Seq) | :book:
-[Galaxy Introduction](https://github.com/bgruening/training-material/tree/master/Introduction) | :book:  
-[Data Sources](https://github.com/bgruening/training-material/blob/master/Dev-Corner/tutorials/data_source_integration.md) | :book: 
+[Genome Annotation](Genome-Annotation/general-introduction/README.md) | :book:
+[RNA-seq](RNA-Seq/) | :whale: [:movie_camera:](https://vimeo.com/128268401) [:page_facing_up:](https://usegalaxy.org/u/jeremy/p/galaxy-rna-seq-analysis-exercise) [:book:](RNA-Seq/)
+[ChIP-seq](ChIP-Seq/) | :book:
+[Exome-seq](Exome-Seq/) | [:whale:](Exome-Seq/docker) [:book:](Exome-Seq/tutorials) [:mortar_board:](Exome-Seq/slides/index.html#/) [:eyes:](Exome-Seq/docker)
+[MethylC-seq](MethylC-Seq) | :book:
+[Galaxy Introduction](Introduction) | :book:  
+[Data Sources](Dev-Corner/tutorials/data_source_integration.md) | :book: 
 [Galaxy Tool Dev](http://planemo.readthedocs.io/en/latest/writing_appliance.html) | [:book:](http://planemo.readthedocs.io/en/latest/writing_appliance.html) 
 [Galaxy Docker Project](https://slides.com/bgruening/the-galaxy-docker-project/live#/) | [:book:](https://slides.com/bgruening/the-galaxy-docker-project/live#/) 
 
