@@ -3,35 +3,33 @@ Galaxy Database Schema
 
 :grey_question: ***Questions***
 
-- *Major question that would be addressed in this tutorial (mostly general biological questions)*
-- *Second question*
-- *Third question*
-- *...*
+- *Running a production Galaxy server, you some times end up in with a situation, where you manually need to interact with the Galaxy database: how do you do that*
+- *How to extract usage information, which can not be gathered using the given report tools*
+- *How to move from MySQL to PostgreSQL*
+- *Is there ever a need to manually change the contents of a table*
 
 :dart: ***Objectives***
 
-- *First objective of this tutorial (It is a single sentence describing what a learner will be able to do once they have sat through the lesson. The objectives must be technical, but also theoretical, objectives. You can check [SWC lessons](http://swcarpentry.github.io/instructor-training/19-lessons/) to help you writing learning objectives.)*
-- *Second objective*
-- *Third objective*
-- *...*
+- *Learn some of the design concepts of the Galaxy database*
+- *Extract information from the Galaxy database*
+- *Get to know SchemaSpy*
 
 :heavy_check_mark: ***Requirements***
 
 - *Galaxy introduction*
 - *Deploy a Galaxy Docker Image*
-- *Access to a Galaxy server and its PostgreSQL database*
-- *Third requirement*
-- *...*
+- *or Access to a Galaxy server and its PostgreSQL database*
 
-:hourglass: ***Time estimation*** *1d/3h/6h*
 
-# Introduction
+:hourglass: ***Time estimation*** *2h*
+
+
 
 # Requirements
 For the hands-on examples you need access to a Galaxy server and access to its PostgreSQL database. You can set-up this yourself, or use the Galaxy Docker Image provided by Björn Grüning (https://github.com/bgruening/docker-galaxy-stable). During this tutorial, we will work with the Galaxy Docker Image.
 
 Setting up Docker and using the Galaxy Docker Image:
-(please do this before the tutorial, preferably when you are still at home using a fast internet connection. We will be at hand to help during the “Training Office Hours” on Saturday evening (https://gcc16.sched.org/event/5Yax/training-office-hours )
+(please do this before the tutorial, preferably when you are still at home using a fast internet connection)
 
 Follow the instruction to install the Docker engine: https://docs.docker.com/engine/installation/   
 Execute:  docker run -d -p 8080:80 bgruening/galaxy-stable
@@ -288,17 +286,15 @@ To run SchemaSpy:
 The SpyOut directory will contain the generated reports and diagrams, anchored at index.html.
 
 
-General introduction about the topic and then an introduction of the tutorial (the questions and the objectives). It is nice also to have a scheme to sum up the pipeline used during the tutorial. The idea is to give to trainees insight into the content of the tutorial and the (theoretical and technical) key concepts they will learn.
 
 # Conclusion
 
-Conclusion about the technical key points. And then relation between the technics and the biological question to end with a global view.
+There is a lot of information stored in the Galaxy database. Use this information for trouble shooting when necessary and use it as a source for extendend user statistics.
 
 :grey_exclamation: ***Key Points***
 
-- *Simple sentence to sum up the first key point of the tutorial (Take home message)*
-- *Second key point*
-- *Third key point*
-- *...*
+- *Be carefull, when you interact with the Galaxy database. And make sure you always have a backup*
+
+
 
 # :clap: Thank you
