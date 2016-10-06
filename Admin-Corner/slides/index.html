@@ -58,31 +58,40 @@
                         # Galaxy Server administration
                     </script>
                 </section>
-
+		
+                <section data-markdown>
+	                 <script type="text/template">
+                    ## Requirement
+                    [General introduction about Galaxy](../../Introduction/slides/index.html)
+                </script>
+		</section>
+            
                 <section>
                     <section data-markdown>
                         <script type="text/template">
-                            # Part1 of topic introduction (vertical part)
+                            ## Galaxy is available in several different ways 
                         </script>
                     </section>
 
                     <section data-markdown>
                         <script type="text/template">
-                            ### Subpart1.1
+                            ###  Several different ways
 
-                            - list
-                            - list
-                            - list
+                            - [Main](http://usegalaxy.org/) and [others](https://wiki.galaxyproject.org/PublicGalaxyServers) free public servers
+                            - Run your [local instance](https://wiki.galaxyproject.org/Admin/GetGalaxy) or a [docker](https://github.com/bgruening/docker-galaxy-stable) image
+                            - Use Galaxy on the [Cloud](https://wiki.galaxyproject.org/Cloud)
+                            - Get the SlipStream [Galaxy Appliance](http://www.bioteam.net/slipstream/galaxy-edition)
                         </script>
                     </section>
 
+
                     <section data-markdown>
                         <script type="text/template">
-                            ### Subpart1.2
+                            ### Which option to choose ?
 
-                            With an image...
-
-                            <img src="../../shared/images/GTNLogo1000.png" alt="GTNLogo1000" class="no-border" width=30%/>
+                            <a href="https://wiki.galaxyproject.org/BigPicture/Choices">
+                                <img src="../images/options-to-choose.png" alt="options-to-choose" class="no-border" width=100%/>
+                            </a>
                         </script>
                     </section>
                 </section>
@@ -90,24 +99,64 @@
                 <section>
                     <section data-markdown>
                         <script type="text/template">
-                            ## Part2 of topic introduction
+                            ## Galaxy Locally
                         </script>
                     </section>
 
                     <section data-markdown>
                         <script type="text/template">
-                            ### Subpart2.1
-
-                            To see the notes, hit **'s'** on your keyboard
-
-                            <aside class="notes">
-                                Oh hey, these are some notes. They'll be hidden in your presentation, but you can see them if you open the speaker notes window.
-                            </aside>
+                            ### Reasons to Install Your Own Galaxy
+                            - You want to run a local [production Galaxy](https://wiki.galaxyproject.org/Admin/Config/Performance/ProductionServer) 
+                            - You want to develop [Galaxy tools](https://wiki.galaxyproject.org/Admin/Tools/AddToolTutorial)
+                            - You to [Develop Galaxy](https://wiki.galaxyproject.org/Develop) itself
                         </script>
                     </section>
+                    <section data-markdown>
+	                <script type="text/template">
+                        ### Requirements
+                        - UNIX/Linux or Mac OS X (or [Windows](https://wiki.galaxyproject.org/Admin/Config/Windows))
+                        - Python 2.7
+                        - Git (optional)
+                        - GNU Make, gcc to compile and install tool dependencies
+                        - Additional tool requirements as detailed in [Tool Dependencies](https://wiki.galaxyproject.org/Admin/Tools/ToolDependencies)
+                        </script>
+		    </section>
+                   
                 </section>
-
-
+ 		
+		<section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ## Galaxy in production
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ## Reasons to install Galaxy in production:
+                            - [install](https://wiki.galaxyproject.org/Admin/Tools/AddToolTutorial) and use tools unavailable on [public Galaxies](https://wiki.galaxyproject.org/PublicGalaxyServers)
+                            - use sensitive data (e.g. clinical) 
+                            - process large datasets that are too big for public Galaxies 
+                            - [plug-in](https://wiki.galaxyproject.org/Admin/Internals/DataSources) new datasources 
+                        </script>
+                    </section>
+                    <section data-markdown>
+	                <script type="text/template">
+                        ### By default Galaxy
+                        - Uses SQLite
+                        - Uses a built-in HTTP Server
+                        - Runs all tools locally
+                        - Runs in a single process  
+                        </script>
+                    </section>
+                    <section data-markdown>
+	                <script type="text/template">
+                        ### Galaxy in production, basic configuration
+                        - Switching to a database server
+                        - Using a proxy server
+                        - Using a compute cluster
+                        </script>
+                    </section>
+		</section>
                 <section data-markdown>
                     <script type="text/template">
                         ### Tutorials
