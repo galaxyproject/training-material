@@ -23,6 +23,8 @@ Galaxy Database Schema
 
 :hourglass: ***Time estimation*** *2h*
 
+[:book: **Associated slide deck**](https://bgruening.github.io/training-material/Admin-Corner/slides/database_schema.html)
+
 
 
 # Requirements
