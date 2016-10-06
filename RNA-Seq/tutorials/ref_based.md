@@ -3,14 +3,14 @@ Reference based RNA-seq data analysis
 
 :grey_question: ***Questions***
 
-- *Major question that would be addressed in this tutorial (mostly general biological questions)*
+- *What are the effects of Pasilla (PS) gene depletion on splicing events?*
 - *Second question*
 - *Third question*
 - *...*
 
 :dart: ***Objectives***
 
-- *First objective of this tutorial (It is a single sentence describing what a learner will be able to do once they have sat through the lesson. The objectives must be technical, but also theoretical, objectives. You can check [SWC lessons](http://swcarpentry.github.io/instructor-training/19-lessons/) to help you writing learning objectives.)*
+- *Identification of *
 - *Second objective*
 - *Third objective*
 - *...*
@@ -18,8 +18,8 @@ Reference based RNA-seq data analysis
 :heavy_check_mark: ***Requirements***
 
 - *Galaxy introduction*
-- *Second requirement*
-- *Third requirement*
+- *Quality control*
+- *Mapping*
 - *...*
 
 :hourglass: ***Time estimation*** *1d/3h/6h*
@@ -28,19 +28,37 @@ Reference based RNA-seq data analysis
 
 # Introduction
 
-General introduction about the topic and then an introduction of the tutorial (the questions and the objectives). It is nice also to have a scheme to sum up the pipeline used during the tutorial. The idea is to give to trainees insight into the content of the tutorial and the (theoretical and technical) key concepts they will learn.
+In this exercise, we use RNA-seq data from the study by [Brooks et al. 2011](http://genome.cshlp.org/content/21/2/193.long). In this study, the Pasilla (PS) gene was depleted in *Drosophila melanogaster* by RNAi. The authors wanted to analyze the effects of Pasilla gene depletion on splicing events.
 
-# Part 1
+Total RNA was isolated and used for preparing either single-end or paired-end RNA-seq libraries used for sequencing. RNA sequencing data are then available. The genome of *Drosophila melanogaster* is known and can be used for this analysis. The effects of Pasilla gene depletion on splicing events are then analyzed with reference based RNA-seq data analysis.
 
-Introduction about this part
+Reference based RNA-seq data analysis is ...
+*add a small introduction about reference based RNA-seq data analysis*
 
-## Subpart 1
+The data is available at NCBI Gene Expression Omnibus (GEO) under accession number [GSE18508](http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE18508).
+Here, we have 7 samples:
+- 3 treated samples with Pasilla (PS) gene depletion (called "pasilla-depleted")
+- 4 untreated samples (called "wt")
+
+Each sample constitutes a separate biological replicate of the corresponding condition (treated or untreated). Moreover, two of the treated and two of the untreated samples are from a paired-end sequencing assay, while the remaining samples are from a single-end sequencing experiment.
+
+In this tutorial, we will analyze the data with:
+
+1. Pretreatments
+2. Mapping
+3. ...
+
+# Pretreatments
+
+
+
+## Data preparation
 
 Short introduction about this subpart.
 
 :pencil2: ***Hands on!***
 
-1. First step
+1. Create a new history for this RNA-seq exercise
 2. Second step
 3. Third step
 
