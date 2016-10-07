@@ -2,7 +2,7 @@
 
 The following individuals have contributed to this training material:
 
-* Andreas Richter 
+* Andreas Richter
 * Anton Nekrutenko (@nekrut)
 * Anika Erxleben (@erxleben)
 * Bérénice Batut (@bebatut)
@@ -13,6 +13,7 @@ The following individuals have contributed to this training material:
 * Friederike Duendar (@friedue)
 * Thomas Manke (@thomasmanke)
 * Torsten Houwaart
+* Anthony Bretaudeau (@abretaud)
 
 
 # Institutional sponsors
