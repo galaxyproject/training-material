@@ -30,11 +30,12 @@ This practical aims to familiarize you with the Galaxy user interface. It will t
 In this very simple example analysis we will introduce you to the basics of Galaxy. In this tutorial you will perform the following tasks:
 
 - Getting data from UCSC
-- Running simple data manipulation tools
+- Running simple data manipulation tools on this data
 - Displaying your data at the UCSC main genome viewer
-- Understanding Galaxy’s Tool and History system
+- Understanding Galaxy’s tool and history system
 - Extracting a workflow from your analysis history
 - Running a workflow on new data
+- Sharing your work with others
 
 Suppose you get the following question:
 
@@ -56,13 +57,13 @@ Time to get started, browse to your Galaxy instance and log in or register. The 
  ![](../images/rename_history.png)
 
 
-## Getting data from UCSC genome browser
+## Getting data from the UCSC table browser
 
-Now we are ready to do some analysis, but first we will need to get some data into our history. Galaxy can fetch data directly from external data sources. We will now get a list of all the exon locations on chromosome 22 from the UCSC genome browser.
+Now we are ready to do some analysis, but first we will need to get some data into our history. You can upload files from your computer, but Galaxy can also fetch data directly from external sources. We will now import a list of all the exon locations on chromosome 22 directly from the UCSC table browser.
 
 :pencil2: ***Hands on!***
 
-1. In the tool menu, navigate to `Get Data -> UCSC Main`
+1. In the tool menu, navigate to `Get Data -> UCSC Main - table browser`
 
  ![](../images/101_01.png)
 
@@ -83,9 +84,9 @@ Now we are ready to do some analysis, but first we will need to get some data in
 
  ![](../images/101_03.png)
 
- Make sure **Create one BED record per** is set to `Coding Exons` and then click on the **Send Query to Galaxy** button.
+ Make sure that **Create one BED record per** is set to `Coding Exons` and then click on the **Send Query to Galaxy** button.
 
- After this you will see your first History item in Galaxy’s right pane. It will go through
+ After this you will see your first history item in Galaxy’s right pane. It will go through
  the gray (preparing/queued) and yellow (running) states to become green (success):
 
  ![](../images/101_04.png)
@@ -94,7 +95,7 @@ Now we are ready to do some analysis, but first we will need to get some data in
 
  ![](../images/101_exons.png)
 
- The first three columns are the location of the exon, and the fourth column contains the ID (name) of the exons.
+ Each line represents an exon, the first three columns are the genomic location, and the fourth column contains the ID (name) of the exon.
 
 5. Let's rename our dataset to something more recognizable. Click on the **pencil icon** to edit a file's attributes, in the next screen change the name of the dataset to `Exons`, then click the **Save** button at the bottom of the screen. Your history should now look something like this:
 
@@ -104,10 +105,9 @@ Now we are ready to do some analysis, but first we will need to get some data in
 
 Now we have information about the exon locations, but our question was which exon contains the largest number of SNPs, so let's get some information about SNP locations from UCSC as well:
 
-
 :pencil2: ***Hands on!***
 
-1. Return to the UCSC tool `Get Data -> UCSC Main`
+1. Return to the UCSC tool `Get Data -> UCSC Main - table browser`
 2. This time change the setting in **group** to `Variation`
 
  ![](../images/101_06.png)
@@ -118,7 +118,7 @@ Now we have information about the exon locations, but our question was which exo
 
  ![](../images/101_07.png)
 
- Make sure that **Create one BED per** is set to `Whole Gene` (Whole Gene here really means Whole Feature), and click **Send Query to Galaxy**. You will get your second item in your analysis history.
+ Make sure that **Create one BED per** is set to `Whole Gene` (Whole Gene here really means Whole Feature), and click on **Send Query to Galaxy**. You will get your second item in your analysis history.
 
 5. Now **rename** your new dataset to `SNPs` so we can easily remember what the file contains.
 
@@ -128,7 +128,7 @@ Let’s remind ourselves that our objective was to find which exon contains the 
 
 :pencil2: ***Hands on!***
 
-1. Different Galaxy servers may have tools available under different sections, therefore it is often useful to use the **search bar** at the top of the tools panel to find your tool. Enter the word `join` in the search bar of the tool panel, and select the tool named `Join - the intervals of two datasets side-by-side`
+1. Different Galaxy servers may have tools available under different sections, therefore it is often useful to use the **search bar** at the top of the tool panel to find your tool. Enter the word `join` in the search bar of the tool panel, and select the tool named `Join - the intervals of two datasets side-by-side`
 
 2. Select your file with exons as the first file, and the file with SNPs as the second file, and make sure **return** is set to `INNER JOIN` so that only matches are included in the output (i.e. only exons with SNPs in it and only SNPs that fall in exons)
 
@@ -142,7 +142,7 @@ Let’s remind ourselves that our objective was to find which exon contains the 
 
  Remember that variations are possible due to using different versions of UCSC databases, as long as you have similar looking columns you did everything right :)
 
-Let’s take a look at this dataset. The first six columns correspond to exons, and the last six columns correspond to the SNPs. Column 4 contains the exon IDs, and column 10 contains the SNP IDs. In our screenshot you see that the first 5 lines in the file all have the same exon ID (`uc010gqp.2_cds_10_0_chr22_16287254_r`) but different SNP IDs, this means these lines represent 5 different SNPs that all overlapped with the same exon. So we can find the total number of SNPs in an exon simply by counting the number of lines that have the exon ID in the fourth column.
+Let’s take a look at this dataset. The first six columns correspond to the exons, and the last six columns correspond to the SNPs. Column 4 contains the exon IDs, and column 10 contains the SNP IDs. In our screenshot you see that the first 5 lines in the file all have the same exon ID (`uc010gqp.2_cds_10_0_chr22_16287254_r`) but different SNP IDs, this means these lines represent 5 different SNPs that all overlapped with the same exon. So we can find the total number of SNPs in an exon simply by counting the number of lines that have the exon ID in the fourth column.
 
 :question: Question: for the first 3 exons in your file, what is the number of SNPs that fall into that exon?
 
@@ -185,7 +185,7 @@ Now we have a list of all exons and the number of SNPs they contain, but we woul
 
  ![](../images/101_16.png)
 
-You should now see the same file as we had before, but the exons with the highest number of SNPs on top.
+You should now see the same file as we had before, but the exons with the highest number of SNPs are now on top.
 
 :question: Question: Which exon has the highest number of SNPs in your file (remember, it is okay if this is different to the screenshot above)
 
@@ -205,7 +205,7 @@ Let's say we want a list with just the top-5 exons with highest number of SNPs.
 
 ## Recovering exon info and displaying data in genome browsers
 
-Congratulations! you have now determined which exons on chromosome 22 have the highest number of SNPS, but what else can we learn about them? One way to learn more about a genetic location is to view it in a genome browser. However, in the process of getting our answer, we have lost information about the location of these exons on the chromosome. But fear not, Galaxy saves all of your data, so we can recover this information back into our file quite easily.
+Congratulations! you have now determined which exons on chromosome 22 have the highest number of SNPS, but what else can we learn about them? One way to learn more about a genetic location is to view it in a genome browser. However, in the process of getting our answer, we have lost information about the location of these exons on the chromosome. But fear not, Galaxy saves all of your data, so we can recover this information quite easily.
 
 :pencil2: ***Hands on!***
 
@@ -219,7 +219,7 @@ Congratulations! you have now determined which exons on chromosome 22 have the h
 
  ![](../images/101_19.png)
 
-4. A good way to learn about these exons is to look at their genomic surrounding. This can be done by using genome browsers. First, we have to tell Galaxy to which **Genome build** this data uses (hg19), we can do this as follows:
+4. A good way to learn about these exons is to look at their genomic surrounding. This can be done by using genome browsers. First, we have to tell Galaxy which **Genome build** this data uses (hg19), we can do this as follows:
 
  ![](../images/101_20.png)
 
@@ -227,7 +227,7 @@ Congratulations! you have now determined which exons on chromosome 22 have the h
 
  ![](../images/101_displayucsc.png)
 
-6. This will upload the data to UCSC as custom track. To see your data look at the `User Supplied Track` near the top. You can enter the coordinates of one of your exons at the top to jump to that location.
+6. This will upload the data to UCSC as custom track. To see your data look at the `User Track` near the top. You can enter the coordinates of one of your exons at the top to jump to that location.
 
  ![](../images/101_21.png)
 
@@ -247,7 +247,9 @@ An alternative overview of your histories can be accessed by clicking on the **V
 
 ![](../images/101_history-overview.png)
 
-Here you see a more detailed view of each history, and can perform the same operations, such as switching to a different history, deleting a history, purging it (permanently deleting it, this action cannot be reversed), or copying a history.
+Here you see a more detailed view of each history, and can perform the same operations, such as switching to a different history, deleting a history, purging it (permanently deleting it, this action cannot be reversed), or copying datasets or even entire histories.
+
+You can always return to your analysis view by clicking on **Analyze Data** in the top menu bar.
 
 ## Converting your analysis history to a workflow
 
@@ -300,7 +302,7 @@ We can examine the workflow in Galaxy's workflow editor. Here you can view/chang
 
  If you click on this asterisk for any of the output datasets, then *only* files with an asterisk will be shown, and all outputs without an asterisk will be hidden. (Note that clicking *all* outputs has the same effect as clicking *none* of the outputs, in both cases all the datasets will be shown)
 
-3. **Click the asterisk** next to `out_file1` in the `Select First` and `Compare two Datasets` tools. Now when we run the workflow, we will only see the final two outputs, our list with the top-5 exons and their SNP counts, and the file with exons ready for viewing in a genome browser. Once you have done this, you will notice that the **minimap** at the bottom-right corner of your screen will have a colour-coded view of your workflow, with the orange box representing a tool with an output that will be shown.
+3. **Click the asterisk** next to `out_file1` in the `Select First` and `Compare two Datasets` tools. Now when we run the workflow, we will only see the final two outputs, our list with the top-5 exons and their SNP counts, and the file with exons ready for viewing in a genome browser. Once you have done this, you will notice that the **minimap** at the bottom-right corner of your screen will have a colour-coded view of your workflow, with orange boxes representing a tool with an output that will be shown.
 
  ![](../images/101_31.png)
 
@@ -393,7 +395,7 @@ Well done! You have just performed your first analysis in Galaxy. You also creat
 :grey_exclamation: ***Key Points***
 
 - *Galaxy provides an* **easy-to-use** *graphical user interface for often complex commandline tools*
-- *Galaxy keeps a full record of your analysis* **history**
+- *Galaxy keeps a* **full record of your analysis** *in a history*
 - **Workflows** *enable you to repeat your analysis on different data*
 - *Galaxy can connect to* **external sources** *for data import and visualization purposes*
 - *Galaxy provides ways to* **share** *your results and methods with othes*
