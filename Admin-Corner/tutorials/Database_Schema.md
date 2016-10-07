@@ -1,7 +1,5 @@
 # Galaxy Database Schema
 
-# Forewords
-
 
 ### :grey_question: Questions
 
@@ -26,6 +24,7 @@
 ### :hourglass: Time estimation *2h*
 
 [:book:  __Associated slide deck__](https://bgruening.github.io/training-material/Admin-Corner/slides/database_schema.html)
+
 
 
 
@@ -76,9 +75,9 @@ What’s not in the database is the data. **Datasets are stored outside the data
 The database does **keep metadata** – information about the datasets **such as data type**. 
 The **tools themselves are not stored in the database** either.
 
-## Understanding the Database Schema
+# Database Schema
 
-### ER diagrams and SchemaSpy
+## ER diagrams and SchemaSpy
 
 Entity-relationship diagrams are a way to understand tables and the relationships between them inside a relational database. SchemaSpy (http://schemaspy.sourceforge.net/) is a free (and remarkable tool) for generating ER diagrams.  We’be used it generate a description of the database backing the server in this container.  See
 
@@ -86,7 +85,7 @@ Entity-relationship diagrams are a way to understand tables and the relationship
 
 ![ER diagram (run table)](../images/run-1degree.png)
 
-### galaxy tables
+## galaxy tables
 
 The “Tables” tab is a good place to start learning the structure of the database.  **Each table represents a different type of thing**, and often that thing is itself a relationship. For example, each record in the dataset table has information about a specific dataset, while records in the history_dataset_association table have information about what histories that dataset is in.
 
@@ -94,7 +93,7 @@ The “Tables” tab is a good place to start learning the structure of the data
 
 Also see the “Run SchemaSpy in this container” section below for how to install and then run SchemaSpy yourself.
 
-### Database conventions
+## Database conventions
 The Galaxy database uses a number of naming and design conventions.  Understanding these can make navigating the database much easier.
 
 * id attributes
@@ -107,18 +106,18 @@ Relationships between tables are implemented by exporting id columns from one ta
 
 There are a few notable exceptions to this rule.  If the ID is from a table that is prefixed with galaxy_, for example, galaxy_user or galaxy_session, the  galaxy_ will be dropped from the column name.  For example, galaxy_user.id becomes user_id in the over 50 tables it is imported into
 
-### Relationship tables
+## Relationship tables
 
 As mentioned previously, **some tables**, such as history_dataset_association **represent relationships between things**, rather than things themselves.  In this case history_dataset_association describes relationships between datasets and histories.
 
 **Relationship table names** typically **contain the names of tables they are relating, suffixed with `_association`**.
 
-### Nulls and comments
+## Nulls and comments
 
 Why are nulls allowed in almost every column?
-We have no idea.  In practice, they aren’t nulls in most of those columns.
+We have no idea.  **In practice, they aren’t nulls in most of those columns**.
 
-### Annotations and comments
+## Annotations and comments
 
 Why aren’t there comments, on anything?
 **PostgreSQL supports comments to table definitions**, **but** there are **none shown in the SchemaSpy report**.
