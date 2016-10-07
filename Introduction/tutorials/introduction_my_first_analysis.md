@@ -51,7 +51,12 @@ Time to get started, browse to your Galaxy instance and log in or register. The 
 
 :pencil2: ***Hands on!***
 
-1. Make sure you have an empty analysis history. To start a new history, click on the **gear icon** at the top of the history pane, and select the option **Create New** from the menu.
+1. Make sure you have an empty analysis history.
+
+ :bulb: **Starting a new history**
+ * Click the **gear icon** at the top of the history panel
+ * Select the option **Create New** from the menu
+
 2. **Rename your history** to make it easy to recognize. You can do this by clicking on the title of the history (by default the title is *Unnamed history*) and typing **Galaxy 101** as the name.
 
  ![](../images/rename_history.png)
@@ -67,7 +72,7 @@ Now we are ready to do some analysis, but first we will need to get some data in
 
  ![](../images/101_01.png)
 
-2. You will be taken to the **UCSC table browser**, which looks something like this:
+ You will be taken to the **UCSC table browser**, which looks something like this:
 
  ![](../images/101_02.png)
 
@@ -80,7 +85,7 @@ Now we are ready to do some analysis, but first we will need to get some data in
  - **output format** should be set to `BED - browser extensible data`
  - **Send output to** should have the option `Galaxy` checked
 
-3. Click on the **get output** button and you will see the next screen:
+2. Click on the **get output** button and you will see the next screen:
 
  ![](../images/101_03.png)
 
@@ -91,13 +96,18 @@ Now we are ready to do some analysis, but first we will need to get some data in
 
  ![](../images/101_04.png)
 
-4. To **view the contents** of the file, click on the **eye icon**. Your file should look something like this:
+3. To **view the contents** of the file, click on the **eye icon**. Your file should look something like this:
 
  ![](../images/101_exons.png)
 
  Each line represents an exon, the first three columns are the genomic location, and the fourth column contains the ID (name) of the exon.
 
-5. Let's rename our dataset to something more recognizable. Click on the **pencil icon** to edit a file's attributes, in the next screen change the name of the dataset to `Exons`, then click the **Save** button at the bottom of the screen. Your history should now look something like this:
+4. Let's rename our dataset to something more recognizable.
+ - Click on the **pencil icon** to edit a file's attributes.
+ - In the next screen change the name of the dataset to `Exons`.
+ - Click the **Save** button at the bottom of the screen.
+
+ Your history should now look something like this:
 
  ![](../images/101_rename.png)
 
@@ -108,27 +118,30 @@ Now we have information about the exon locations, but our question was which exo
 :pencil2: ***Hands on!***
 
 1. Return to the UCSC tool `Get Data -> UCSC Main - table browser`
-2. This time change the setting in **group** to `Variation`
+
+2. Change the setting in **group** to `Variation`
 
  ![](../images/101_06.png)
 
-3. The **track** setting shows the version of the SNP database to get. In this example it is version 142, but you may select the latest one. Your results may vary slightly from the ones in this tutorial when you select a different version, but in general it is a good idea to select the latest version, as this will contain the most up-to-date SNP information.
+ The **track** setting shows the version of the SNP database to get. In this example it is version 142, but you may select the latest one. Your results may vary slightly from the ones in this tutorial when you select a different version, but in general it is a good idea to select the latest version, as this will contain the most up-to-date SNP information.
 
-4. Click on the `get output` button to find a menu similar to this:
+3. Click on the `get output` button to find a menu similar to this:
 
  ![](../images/101_07.png)
 
  Make sure that **Create one BED per** is set to `Whole Gene` (Whole Gene here really means Whole Feature), and click on **Send Query to Galaxy**. You will get your second item in your analysis history.
 
-5. Now **rename** your new dataset to `SNPs` so we can easily remember what the file contains.
+4. Now **rename** your new dataset to `SNPs` so we can easily remember what the file contains.
 
 # Finding Exons with the highest number of SNPs
 
 Let’s remind ourselves that our objective was to find which exon contains the most SNPs. This  first step in answering this question will be joining the file with the exon locations with the file containing the SNP locations (here `join` is just a fancy word for printing the SNPs and exons that overlap side-by-side).
 
+Different Galaxy servers may have tools available under different sections, therefore it is often useful to use the **search bar** at the top of the tool panel to find your tool.
+
 :pencil2: ***Hands on!***
 
-1. Different Galaxy servers may have tools available under different sections, therefore it is often useful to use the **search bar** at the top of the tool panel to find your tool. Enter the word `join` in the search bar of the tool panel, and select the tool named `Join - the intervals of two datasets side-by-side`
+1. Enter the word `join` in the search bar of the tool panel, and select the tool named `Join - the intervals of two datasets side-by-side`
 
 2. Select your file with exons as the first file, and the file with SNPs as the second file, and make sure **return** is set to `INNER JOIN` so that only matches are included in the output (i.e. only exons with SNPs in it and only SNPs that fall in exons)
 
@@ -144,7 +157,7 @@ Let’s remind ourselves that our objective was to find which exon contains the 
 
 Let’s take a look at this dataset. The first six columns correspond to the exons, and the last six columns correspond to the SNPs. Column 4 contains the exon IDs, and column 10 contains the SNP IDs. In our screenshot you see that the first 5 lines in the file all have the same exon ID (`uc010gqp.2_cds_10_0_chr22_16287254_r`) but different SNP IDs, this means these lines represent 5 different SNPs that all overlapped with the same exon. So we can find the total number of SNPs in an exon simply by counting the number of lines that have the exon ID in the fourth column.
 
-:question: Question: for the first 3 exons in your file, what is the number of SNPs that fall into that exon?
+:question: For the first 3 exons in your file, what is the number of SNPs that fall into that exon?
 
 ## Counting the number of SNPs per exon
 We've just seen how to count the number of SNPs in each exon, so let's do this for all the exons in our file.
@@ -167,7 +180,7 @@ We've just seen how to count the number of SNPs in each exon, so let's do this f
 
 This file contains only two columns, the first contains the exon IDs, and the second the number of times that exon ID appeared in the file (in other words, how many SNPs were present in that exon)
 
-:question: Question: How many exons are there in total in your file? (*Hint: each line now represents a different exon, so you can see the answer to this when you expand the history item, as in the image above*)
+:question: How many exons are there in total in your file? (*Hint: each line now represents a different exon, so you can see the answer to this when you expand the history item, as in the image above*)
 
 ## Sorting exons by SNPs count
 
@@ -187,7 +200,7 @@ Now we have a list of all exons and the number of SNPs they contain, but we woul
 
 You should now see the same file as we had before, but the exons with the highest number of SNPs are now on top.
 
-:question: Question: Which exon has the highest number of SNPs in your file (remember, it is okay if this is different to the screenshot above)
+:question: Which exon has the highest number of SNPs in your file (remember, it is okay if this is different to the screenshot above)
 
 ## Selecting top five exons
 
@@ -219,15 +232,20 @@ Congratulations! you have now determined which exons on chromosome 22 have the h
 
  ![](../images/101_19.png)
 
-4. A good way to learn about these exons is to look at their genomic surrounding. This can be done by using genome browsers. First, we have to tell Galaxy which **Genome build** this data uses (hg19), we can do this as follows:
+
+A good way to learn about these exons is to look at their genomic surrounding. This can be done by using genome browsers. Galaxy can launch a genome browser such as IGV on your local machine, and it can connect to online genome browsers as well. An example of such an online genome browser is the UCSC genome browser.
+
+:pencil2: ***Hands on!***
+
+1. First, we have to tell Galaxy which **Genome build** this data uses (hg19), we can do this as follows:
 
  ![](../images/101_20.png)
 
-5. To **visualize the data in UCSC genome browser**, click on `display at UCSC main` option visible when you expand the history item.
+2. To **visualize the data in UCSC genome browser**, click on `display at UCSC main` option visible when you expand the history item.
 
  ![](../images/101_displayucsc.png)
 
-6. This will upload the data to UCSC as custom track. To see your data look at the `User Track` near the top. You can enter the coordinates of one of your exons at the top to jump to that location.
+ This will upload the data to UCSC as custom track. To see your data look at the `User Track` near the top. You can enter the coordinates of one of your exons at the top to jump to that location.
 
  ![](../images/101_21.png)
 
@@ -302,7 +320,9 @@ We can examine the workflow in Galaxy's workflow editor. Here you can view/chang
 
  If you click on this asterisk for any of the output datasets, then *only* files with an asterisk will be shown, and all outputs without an asterisk will be hidden. (Note that clicking *all* outputs has the same effect as clicking *none* of the outputs, in both cases all the datasets will be shown.)
 
-3. **Click the asterisk** next to `out_file1` in the `Select First` and `Compare two Datasets` tools. Now when we run the workflow, we will only see the final two outputs, our list with the top-5 exons and their SNP counts, and the file with exons ready for viewing in a genome browser. Once you have done this, you will notice that the **minimap** at the bottom-right corner of your screen will have a colour-coded view of your workflow, with orange boxes representing a tool with an output that will be shown.
+3. **Click the asterisk** next to `out_file1` in the `Select First` and `Compare two Datasets` tools.
+
+ Now when we run the workflow, we will only see the final two outputs, our list with the top-5 exons and their SNP counts, and the file with exons ready for viewing in a genome browser. Once you have done this, you will notice that the **minimap** at the bottom-right corner of your screen will have a colour-coded view of your workflow, with orange boxes representing a tool with an output that will be shown.
 
  ![](../images/101_31.png)
 
@@ -370,7 +390,7 @@ Now that we have built our workflow, let's use it on some different data. For ex
 
  **Note:** because most intermediate steps of the workflow were hidden, once it is finished you will only see the final two datasets. If we want to view the intermediate files after all, we can unhide all hidden datasets by selecting `Include Hidden datasets` from the history options menu.
 
-:question: Question: which exon had the highest number of repeats? How many repeats were there?
+:question: Which exon had the highest number of repeats? How many repeats were there?
 
 ## Share your work
 
