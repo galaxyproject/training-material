@@ -3,7 +3,7 @@ OS := $(shell uname)
 SLIDE_PATTERN := slides/
 
 pdf:
-    ifeq ($(URL), )
+    ifeq ($(FILE), )
 		@echo "Please specify a file. 'make pdf FILE=...'"
     else
 		$(DECKTAPE_DIR)phantomjs $(DECKTAPE_DIR)decktape.js $(FILE) $(basename $(FILE)).pdf
