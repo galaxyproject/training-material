@@ -203,9 +203,9 @@
 					<section data-markdown>
                         <script type="text/template">
                             ### Data Pre-processing
-                            - Adapter clipping
-                            - Quality trimming
-                            - Please, see [NGS Quality control](../../NGS-QC/slides/index.html) for further advice
+                            - Adapter clipping to trim the sequencing adapters 
+                            - Quality trimming to remove wrongly called bases and those with a low quality
+                            - Please, see [NGS Quality control](../../NGS-QC/slides/index.html) for further information
                         </script>
                     </section>
 					
@@ -225,18 +225,23 @@
 					<section data-markdown>
                         <script type="text/template">
                             ### Normalization
-                            - Why normalize?
-                            - RPKM/FPKM
-                            - TMM
+                            - Within-sample normalization is neccessary to correct for feature length and library-size effects 
+                            - [*FPKM/RPKM*](http://www.nature.com/nmeth/journal/v5/n7/abs/nmeth.1226.html) (Cufflinks/Cuffdiff)
+                            - [*TMM*](https://genomebiology.biomedcentral.com/articles/10.1186/gb-2010-11-3-r25) (edgeR)
+                            - [*DESeq2*](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-014-0550-8) (DESeq2)
+							
                         </script>
                     </section>
 					
 					<section data-markdown>
                         <script type="text/template">
                             ### Differential Expression Analysis
-                            - DE analysis describes ...
-                            - Methods
-                            - Drawbacks
+                            
+                             <img src="../images/RNA_seq_DEscheme.png" alt="Account for variability of gene expression across biological replicates with the help of gene counts" class="no-border" width=65%/>
+							 
+                            <tiny>Account for variability of gene expression across biological replicates with the help of gene counts
+                            </tiny>
+							 
                         </script>
                     </section>
 					
@@ -246,18 +251,41 @@
 
                             <img src="../images/RNA_seq_numreplicates.png" alt="Conesa et al, Genome Biol, 2016" class="no-border" width=65%/>
 
-                            <small>
-                            [*Conesa et al, Genome Biol, 2016*](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-016-0881-8)
-                            </small>
+                            
+                            <small> [*Conesa et al, Genome Biol, 2016*](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-016-0881-8)</small>
                         </script>
                     </section>
 					
 					<section data-markdown>
                         <script type="text/template">
                             ### Alternative Splicing Detection
-                            - A
-                            - B
-                            - C
+							
+                            <img src="../images/RNA_seq_splicescheme.png" alt="Conesa et al, Genome Biol, 2016" class="no-border" width=75%/>
+                            <small>
+                            [*Hooper, Hum. Genomics, 2014*](http://humgenomics.biomedcentral.com/articles/10.1186/1479-7364-8-3)
+                            </small>
+							
+                        </script>
+                    </section>
+					
+					<section data-markdown>
+                        <script type="text/template">
+                            ### Visualization
+                            - Integrative Genomics Viewer ([*IGV*](http://bib.oxfordjournals.org/content/14/2/178.full?keytype=ref&%2520ijkey=qTgjFwbRBAzRZWC)) to have a look at your aligned bam files
+                            - [*Sashimi plots*](http://bioinformatics.oxfordjournals.org/content/early/2015/01/21/bioinformatics.btv034) - Quantitative visualization of read coverage along exons and splice junctions
+                            - [*CummeRbund*](http://compbio.mit.edu/cummeRbund/manual_2_0.html) - a visualization package for Cufflinks high-throughput sequencing data
+                        </script>
+                    </section>
+					
+					<section data-markdown>
+                        <script type="text/template">
+                            ### Where do I find data?
+                            - Sequencing data you prepared yourself or you obtained from your colleques
+                            - Sequence Read Archive - [*SRA*](https://www.ncbi.nlm.nih.gov/sra)
+                            - Gene Expression Omnibus - [*GEO*](https://www.ncbi.nlm.nih.gov/geo/)
+                            - Ensembl - [*e!*](http://www.ensembl.org/info/website/tutorials/sequence.html)
+                            - The Cancer Genome Atlas - [*TCGA*](https://tcga-data.nci.nih.gov/docs/publications/tcga/?)
+                            - ... our tutorial
                         </script>
                     </section>
 					
