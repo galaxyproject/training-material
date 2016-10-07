@@ -18,10 +18,10 @@ Several deck of slides are available for this topic:
 
 4 tutorials with hands-on are available for this topic:
 
-- [Setting up a Galaxy Instance as a Service](tutorial/setting_up_galaxy_instance.md)
-- [Docker and Galaxy](tutorial/galaxy_docker.md)
-- [Galaxy Database schema](tutorial/database_schema.md)
-- [Moving from MySQL to PostgreSQL](tutorial/mysql_to_postgresql.md)
+- [Setting up a Galaxy Instance as a Service](tutorials/setting_up_galaxy_instance.md)
+- [Docker and Galaxy](tutorials/galaxy_docker.md)
+- [Galaxy Database schema](tutorials/Database_Schema.md)
+- [Moving from MySQL to PostgreSQL](tutorials/mysql_to_postgresql.md)
 
 # Contributors
 
