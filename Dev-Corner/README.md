@@ -45,5 +45,5 @@ For any question related to this topic and the content, you can contact them.
 
 The following individuals have contributed to this training material:
 
-- Name 1
+- Gianmauro Cuccuru
 - Name 2
