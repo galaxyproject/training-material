@@ -24,7 +24,7 @@ Reference based RAD-seq data analysis
 
 :hourglass: ***Time estimation*** *1d/3h/6h*
 
-[:book: **Associated slide deck**](http://bgruening.github.io/training-material/RAD-Seq/slides/pop_genomics.html)
+[:book: **Associated slide deck**](http://bgruening.github.io/training-material/RAD-Seq/slides/geneticsm.html)
 
 # Introduction
 
