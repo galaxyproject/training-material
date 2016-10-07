@@ -94,6 +94,7 @@ The Galaxy database uses a number of naming and design conventions.  Understandi
 Every table has an id column that uniquely identifies each row.  (The id column is the primary key in database terminology.) Beyond uniquely identifying a row in the table, ID values have no meaning.  ID values are unique within a table, but not across the database.
 
 * Relationships between tables, and `_id` columns
+
 Relationships between tables are implemented by exporting id columns from one table into another.  Imported ids are called foreign keys in database nomenclature, and are uniformly named
    table_the_id_came_from_id
 
@@ -109,6 +110,8 @@ As mentioned previously, **some tables**, such as history_dataset_association **
 
 Why are nulls allowed in almost every column?
 We have no idea.  In practice, they aren’t nulls in most of those columns.
+
+### Annotations and comments
 
 Why aren’t there comments, on anything?
 **PostgreSQL supports comments to table definitions**, **but** there are **none shown in the SchemaSpy report**.
@@ -182,10 +185,8 @@ Run a few jobs on the galaxy website (e.g upload file a simple table and add col
 
 `select * from job_parameter;`
 
-
 Table “history”
 ---
-
 `select * from history;`
 
 Give your current history a name and check the database again.
