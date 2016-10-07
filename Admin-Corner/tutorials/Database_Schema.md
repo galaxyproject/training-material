@@ -166,7 +166,9 @@ Run a few jobs on the galaxy website (e.g upload file a simple table and add col
 `select * from job_parameter;`
 
 
-## Table “history”
+ Table “history”
+===
+===
 
 `select * from history;`
 
