@@ -7,7 +7,7 @@
         <title>Options for using Galaxy</title>
 
         <link rel="stylesheet" href="../../shared/reveal.js/css/reveal.css">
-        <link rel="stylesheet" href="../../shared/reveal.js/css/theme/simple.css" id="theme">
+        <link rel="stylesheet" href="../../shared/reveal.js/css/theme/night.css" id="theme">
 
         <!-- Code syntax highlighting -->
         <link rel="stylesheet" href="../../shared/reveal.js/lib/css/zenburn.css">
@@ -126,7 +126,7 @@
                         <script type="text/template">
                             ## Public Galaxy Servers
 
-                            Most can be classified as:
+                            Classified as:
 
                             1. General purpose genomics servers
                             1. Domain specific servers.
@@ -195,26 +195,32 @@
 
                     <section data-markdown>
                         <script type="text/template">
-                            ### CloudLaunch instances
+                            ### CloudLaunch / CloudMan instances
 
-                            Image showing cloudman landing page?
+                            [<img src="../../shared/images/cloudman_based_server_landing_page.png" alt="Galaxy server launched from CloudMan" width="80%" />](http://wiki.galaxyproject.org/CloudMan)
 
-                            Come with hundreds of tools and many pre-defined reference genomes.
+                            Comes with 100's of tools & many pre-defined reference genomes.
 
                             <aside class="notes">
+                                CloudLaunch starts a CloudMan based Galaxy instance.
+                                CloudMan is a cloud management tool that moves much / all of the cloud management work into a Graphical user interface.
                             </aside>
                         </script>
                     </section>
 
                     <section data-markdown>
                         <script type="text/template">
-                            ### CloudLaunch instances
+                            ### CloudMan
 
-                            Image Scaling of 
+                            [<img src="../../shared/images/cloudman_management_console_showing_autoscaled_w_1_worker.png" alt="CloudMan enables you to autoscale the size of your server, dependding on load" width="50%" />](http://wiki.galaxyproject.org/CloudMan)
 
-                            CloudMan instances also enable you to statically or dynamically scale compute power.
+                            CloudMan enables you to statically or dynamically scale compute power.
 
                             <aside class="notes">
+                                - This example shows a Galaxy Server with a head node and one worker node, and that is configured to scale up to 5 worker nodes, if demand justifies it.
+                                - Before leaving this cloud section stress the importance of shutting down and removing everything when you are done.
+                                - Cloud instances can be incredibly cost effective, but only if you are actually using them when they are up.
+                                - Paying to have a cloud instance up for two weeks that you only use for 8 hours is not cost effective.
                             </aside>
                         </script>
                     </section>
@@ -237,11 +243,16 @@
                 <section>
                     <section data-markdown>
                         <script type="text/template">
-                            ### Locally
+                            ### Run your own Galaxy locally
 
-                            Galaxy is open source software and can be installed on local compute infrastrucutre, from lab servers to insitutional compute clusters.
-
+                            - Galaxy is [open source software](http://getgalaxy.org/) and can be installed on local compute infrastructure, from lab servers to insitutional compute clusters.
+                            - Installing Galaxy locally is relatively easy, but
+                              - the initial install does not include reference genomes and only has a few tools
+                              - Installing tools and genomes, setting up authentication, and connecting to institutional compute resources all takes work.
+                            - There are hundreds, if not thousands of local Galaxy installs around the world.
                             <aside class="notes">
+                                - Installing tools and genomes has become much easier in recent years, and can now often be done with the Galaxy Admin GUI.
+                                - Authentication and connecting to institutional compute resources is still heavy lifting.
                             </aside>
                         </script>
                     </section>
@@ -249,19 +260,19 @@
 
                 <section data-markdown>
                     <script type="text/template">
-                        ### <i class="fa fa-exclamation-circle" aria-hidden="true"></i> Key points
+                        ### Commercial support
 
-                        - Simple sentence to sum up the first key point of the tutorial (Take home message)
-                        - Second key point
-                        - Third key point
-                        - ...
+                        - You can buy a [preconfigured Galaxy server](http://www.bioteam.net/products/galaxy-appliance/) from [BioTeam](http://www.bioteam.net/)
+                        - [Globus Genomics](https://www.globus.org/genomics) and [GenomeCloud](http://www.genome-cloud.com/) provide cloud-based Galaxy servers.
+                        - (And [commercially provided consulting and training](https://wiki.galaxyproject.org/Support/Commercial) are also available) 
+
                     </script>
                 </section>
-                        </div>
+            </div>
 
-                </div>
+        </div>
 
-                <script type="text/javascript" src="../../shared/reveal.js/lib/js/head.min.js"></script>
+        <script type="text/javascript" src="../../shared/reveal.js/lib/js/head.min.js"></script>
         <script type="text/javascript" src="../../shared/reveal.js/js/reveal.js"></script>
         <script type="text/javascript">
             Reveal.initialize({
