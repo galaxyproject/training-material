@@ -1,33 +1,40 @@
-Galaxy Database Schema
-======================
+# Galaxy Database Schema
 
-:grey_question: ***Questions***
+# Introduction
 
-- *Running a production Galaxy server, you some times end up in with a situation, where you manually need to interact with the Galaxy database: how do you do that*
-- *How to extract usage information, which can not be gathered using the given report tools*
-- *How to move from MySQL to PostgreSQL*
-- *Is there ever a need to manually change the contents of a table*
-
-:dart: ***Objectives***
-
-- *Learn some of the design concepts of the Galaxy database*
-- *Extract information from the Galaxy database*
-- *Get to know SchemaSpy*
-
-:heavy_check_mark: ***Requirements***
-
-- *Galaxy introduction*
-- *Deploy a Galaxy Docker Image*
-- *or Access to a Galaxy server and its PostgreSQL database*
-
-
-:hourglass: ***Time estimation*** *2h*
-
-[:book: **Associated slide deck**](https://bgruening.github.io/training-material/Admin-Corner/slides/database_schema.html)
+### a few words
 
 
 
-# Requirements
+### :grey_question: Questions
+
+- _Running a production Galaxy server, you some times end up in with a situation, where you **manually need to interact with the Galaxy database**: how do you do that_
+- _How to **extract usage information**, which can not be gathered using the given report tools_
+- _How to **move from MySQL to PostgreSQL** _
+- _Is there ever a need to **manually change the contents of a table** _
+
+### :dart: Objectives
+
+- _Learn some of the **design concepts of the Galaxy database**_
+- _**Extract information from the Galaxy database**_
+- _**Get to know SchemaSpy**_
+
+### :heavy_check_mark: Requirements
+
+- **[Galaxy introduction](https://github.com/bgruening/training-material/tree/master/Introduction)**
+- **[Deploy a Galaxy Docker Image](https://github.com/bgruening/training-material/blob/master/Admin-Corner/tutorials/galaxy_docker.md)**
+- **or access to a Galaxy server and its [PostgreSQL database](https://wiki.postgresql.org/wiki/PostgreSQL_Tutorials)**
+
+
+### :hourglass: Time estimation *2h*
+
+[:book:  __Associated slide deck__](https://bgruening.github.io/training-material/Admin-Corner/slides/database_schema.html)
+
+
+
+ Requirements
+===
+
 For the hands-on examples you need access to a Galaxy server and access to its PostgreSQL database. You can set-up this yourself, or use the Galaxy Docker Image provided by Björn Grüning (https://github.com/bgruening/docker-galaxy-stable). During this tutorial, we will work with the Galaxy Docker Image.
 
 Setting up Docker and using the Galaxy Docker Image:
@@ -43,64 +50,74 @@ Docker Toolbox on Mac and Windows). Quit by: docker kill NAME (you get the name 
 
 # Introduction
 
-## Database versus Object Model
-The session description is database centric and we’ll be focusing on the relational database that backs Galaxy servers.  But that’s only half the picture of the this data.  The other is the object model which is the object-oriented view of this same data.  The object model is used by the code to manipulate and access the database.  The translation between the two worlds is handled by an object-relational mapping implemented with SQLAlchemy (http://www.sqlalchemy.org/).
+## Database schema versus Object Model
+**The session description is database centric** and we’ll be focusing on the relational database that backs Galaxy servers.
+But that’s only half the picture of the this data.
+The other is the object model which is the object-oriented view of this same data.  
+**The object model is used by the code to manipulate and access the database**.  
+The **translation** between the two worlds is **handled by an object-relational mapping** implemented with **SQLAlchemy** (http://www.sqlalchemy.org/).
 
 Today we are covering the database and how to access it with SQL.  We aren’t going to cover the corresponding object model or object relational mapping.
 
 ## Database Platform
-The default out-of-the-box Galaxy installation uses SQLite (https://www.sqlite.org/).  SQLite is a lightweight database management system (DBMS) that can be packaged inside Galaxy and does not require any additional steps at initial setup time.
+The **default out-of-the-box Galaxy installation uses SQLite** (https://www.sqlite.org/).  SQLite is a lightweight database management system (DBMS) that can be packaged inside Galaxy and does not require any additional steps at initial setup time.
 
-However, SQLite is not the recommended DBMS for running a Galaxy server. The recommended production DMBS for Galaxy is PostgreSQL (https://www.postgresql.org/). PostgreSQL offers a full set of DBMS features and robust support for multiple simultaneous users.
+However, **SQLite is not the recommended DBMS for running a Galaxy server**. The recommended **production DMBS for Galaxy is PostgreSQL** (https://www.postgresql.org/). **PostgreSQL** offers a **full set of DBMS features** and **robust support for multiple simultaneous users**.
 
 This workshop will be entirely based in PostgreSQL (also referred to as Postgres).
 
 ## What is in (and not in) the Galaxy database?
-The Galaxy database contains management information about your server.  The database tracks users, groups, jobs, histories, datasets, workflows and so on.  
+The Galaxy database contains management information about your server.  **The database tracks users, groups, jobs, histories, datasets, workflows** and so on.  
 
-What’s not in the database is the data. Datasets are stored outside the database. The database does keep metadata – information about the datasets such as data type. The tools themselves are not stored in the database either.
+What’s not in the database is the data. **Datasets are stored outside the database**. The database does **keep metadata** – information about the datasets **such as data type**. The **tools themselves are not stored in the database** either.
 
 ## Understanding the Database Schema
 
-ER diagrams and SchemaSpy
+### ER diagrams and SchemaSpy
 
-Entity-relationship diagrams are a way to understand tables and the relationships between them inside a relational database.  SchemaSpy (http://schemaspy.sourceforge.net/) is a free (and remarkable tool) for generating ER diagrams.  We’be used it generate a description of the database backing the server in this container.  See
+**Entity-relationship diagrams** are a way to **understand tables and the relationships between them** inside a relational database. **SchemaSpy** (http://schemaspy.sourceforge.net/) is a free (and remarkable **tool**) **for generating ER diagrams**.  We’be used it generate a description of the database backing the server in this container.  See
 
   https://galaxyproject.org/schema/SchemaSpy/index.html
 
-The “Tables” tab is a good place to start learning the structure of the database.  Each table represents a different type of thing, and often that thing is itself a relationship. For example, each record in the dataset table has information about a specific dataset, while records in the history_dataset_association table have information about what histories that dataset is in.
+![ER diagram (run table)](../images/run-1degree.png)
+
+The “Tables” tab is a good place to start learning the structure of the database.  **Each table represents a different type of thing**, and often that thing is itself a relationship. For example, each record in the dataset table has information about a specific dataset, while records in the history_dataset_association table have information about what histories that dataset is in.
 
 Each SchemaSpy table’s page shows the attributes in that table, as well as any constraints on those attributes, and the relationships between that table and other tables.
 
 Also see the “Run SchemaSpy in this container” section below for how to install and then run SchemaSpy yourself.
 
-Database conventions
+### Database conventions
 The Galaxy database uses a number of naming and design conventions.  Understanding these can make navigating the database much easier.
 
-id attributes
+* id attributes
 Every table has an id column that uniquely identifies each row.  (The id column is the primary key in database terminology.) Beyond uniquely identifying a row in the table, ID values have no meaning.  ID values are unique within a table, but not across the database.
 
-Relationships between tables, and `_id` columns
+* Relationships between tables, and `_id` columns
 Relationships between tables are implemented by exporting id columns from one table into another.  Imported ids are called foreign keys in database nomenclature, and are uniformly named
    table_the_id_came_from_id
 
 There are a few notable exceptions to this rule.  If the ID is from a table that is prefixed with galaxy_, for example, galaxy_user or galaxy_session, the  galaxy_ will be dropped from the column name.  For example, galaxy_user.id becomes user_id in the over 50 tables it is imported into
 
-Relationship tables
+### Relationship tables
 
-As mentioned previously, some tables, such as history_dataset_association represent relationships between things, rather than things themselves.  In this case history_dataset_association describes relationships between datasets and histories.
+As mentioned previously, **some tables**, such as history_dataset_association **represent relationships between things**, rather than things themselves.  In this case history_dataset_association describes relationships between datasets and histories.
 
-Relationship table names typically contain the names of tables they are relating, suffixed with `_association`.
+**Relationship table names** typically **contain the names of tables they are relating, suffixed with `_association`**.
+
+### Nulls and comments
 
 Why are nulls allowed in almost every column?
 We have no idea.  In practice, they aren’t nulls in most of those columns.
 
 Why aren’t there comments, on anything?
-PostgreSQL supports comments to table definitions, but there are none shown in the SchemaSpy report. Why? The table definitions are actually generated by SQLAlchemy, the object-relational mapping software used by Galaxy, and SQLAlchemy does not support it.
+**PostgreSQL supports comments to table definitions**, **but** there are **none shown in the SchemaSpy report**.
+Why? The **table definitions are** actually **generated by SQLAlchemy**, the object-relational mapping software used by Galaxy, **and SQLAlchemy does not support it**.
 
 There is nothing in the database that results from direct manipulation of the table definitions through DDL.  Everything comes in through SQLAlchemy.
 
-# Start Docker and Galaxy
+ Start Docker and Galaxy
+===
 
 :pencil2: ***Hands on!***
 
@@ -123,7 +140,8 @@ There is nothing in the database that results from direct manipulation of the ta
     ```
 
 
-# Important tables
+ Important tables
+===
 
 :pencil2: ***Hands on!***
 
@@ -141,7 +159,8 @@ There is nothing in the database that results from direct manipulation of the ta
 
 Enter `q` to exit the view results page, and space to see the next results page.
 
-## Table “galaxy_user”
+ Table “galaxy_user”
+---
 
 `select * from galaxy_user;`
 
@@ -149,7 +168,8 @@ As described in Björn’s introduction, an Admin user is already pre-set (email
 
 `select * from galaxy_user\x\g\x`
 
-## Table “job”
+ Table “job”
+---
 
 `select * from job;`
 
@@ -157,29 +177,36 @@ Run a few jobs on the galaxy website (e.g upload file a simple table and add col
 
 `select * from job\x\g\x`
 
-## Table “job_parameter”
+ Table “job_parameter”
+---
 
 `select * from job_parameter;`
 
 
-## Table “history”
+Table “history”
+---
 
 `select * from history;`
 
 Give your current history a name and check the database again.
 
 
-## Table “dataset”
+Table “dataset”
+---
+
+
 
 `select * from dataset`
 
 
-## Table “history_dataset_association”
+ Table “history_dataset_association”
+---
 
 `select * from history_dataset_association\x\g\x`
 
 
-# More (hands-on) Examples, not covered by the reports app
+More (hands-on) Examples, not covered by the reports app
+===
 
 Have a look at the reports up (which is also provided in the Docker Image):
 
@@ -187,7 +214,8 @@ http://admin:admin@localhost:8080/reports/
 
 Depending on your local needs, some queries are missing, like:
 
-## Jobs per tool per year  /  jobs per tool since 2015
+ Jobs per tool per year  /  jobs per tool since 2015
+---
 
 You can add the numbers per month from the reports, or:
 
@@ -215,7 +243,8 @@ You can add the numbers per month from the reports, or:
     and j.tool_id='upload1'
     GROUP BY u.email;`
 
-## Jobs per tool of a certain version
+Jobs per tool of a certain version
+---
 
 Imagine the current version of a tool is working fine, however a previous version had a bug: now you wanna warn all the users who have used the broken version, without alerting users who never used the broken one.
 
@@ -235,8 +264,8 @@ The following example is from the development server at the FMI
     and j.tool_id = 'qAlign'
     and j.tool_version = '1.0.4quasr';`
 
-## All users running a job using a certain parameter
-
+All users running a job using a certain parameter
+---
 
 `select jp.name, jp.value  from job_parameter jp
     where name = 'iterate' \x\g\x`
@@ -260,9 +289,9 @@ Quit the interactive docker
 
 #### How to move from MySQL to PostgreSQL
 
-Slides: https://docs.google.com/presentation/d/1N3BDNQT3s7eQEO3BO89TQbTYwKp92fxHDRWQwC-T1kA
+**[Slides](https://docs.google.com/presentation/d/1N3BDNQT3s7eQEO3BO89TQbTYwKp92fxHDRWQwC-T1kA)**
 
-https://wiki.galaxyproject.org/Community/Log/2015/MySQL2PostgreSQL
+**[Community Log Board entry](https://wiki.galaxyproject.org/Community/Log/2015/MySQL2PostgreSQL)**
 
 #### Is there ever a need to manually change the contents of a table
 
@@ -291,11 +320,15 @@ The SpyOut directory will contain the generated reports and diagrams, anchored a
 
 # Conclusion
 
-There is a lot of information stored in the Galaxy database. Use this information for trouble shooting when necessary and use it as a source for extendend user statistics.
+### When to interact with the database
 
-:grey_exclamation: ***Key Points***
+There is a lot of information stored in the Galaxy database. Use this information for **trouble shooting** when necessary
+and use it as a **source for extendend user statistics**.
 
-- *Be carefull, when you interact with the Galaxy database. And make sure you always have a backup*
+### :grey_exclamation: Key Points
+
+- _**Be carefull, when you interact with the Galaxy database**.
+ And **make sure you always have a backup**_
 
 
 

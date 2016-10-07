@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Topic name</title>
+
+		<link rel="stylesheet" href="../../shared/reveal.js/css/reveal.css">
+		<link rel="stylesheet" href="../../shared/reveal.js/css/theme/simple.css" id="theme">
+
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="../../shared/reveal.js/lib/css/zenburn.css">
+
+		<link rel="stylesheet" href="../../shared/css/custom.css" id="theme">
+
+		<!-- Printing and PDF exports -->
+        <script>
+          if( window.location.search.match( /print-pdf/gi ) ) {
+            var link = document.createElement( 'link' );
+            link.rel = 'stylesheet';
+            link.type = 'text/css';
+            link.href = '../../shared/reveal.js/css/print/pdf.css';
+            document.getElementsByTagName( 'head' )[0].appendChild( link );
+          }
+        </script>
+		<!--<script>
+            if (window.location.search.match(/print-pdf/gi)) {
+                document.write('<link rel="stylesheet" href="css/pdf.css" type="text/css">');
+            }
+        </script>-->
+
+		<!--[if lt IE 9]>
+        <script src="../../reveal.js/lib/js/html5shiv.js"></script>
+        <![endif]-->
+	</head>
+
+	<body>
+    <div class="reveal">
+        <div class="slides">
+<section id="welcome" class="level1">
+<h1>Welcome!</h1>
+<p><img src="../../shared/images/GTNLogo1000.png" alt="GTNLogo1000"
+class="no-border" width=30%/></p>
+<p>The easiest way to <strong>navigate</strong> this slide deck is <strong>by hitting <code>[space]</code> on your keyboard</strong></p>
+<p>You can also navigate with arrow keys, but be careful because some slides can be nested inside of each other (vertically)</p>
+</section>
+<section id="galaxy-database-schema" class="level1">
+<h1>Galaxy Database Schema</h1>
+</section>
+<section id="introduction" class="level1">
+<h1>Introduction</h1>
+<section id="a-few-words" class="level3">
+<h3>a few words</h3>
+</section>
+<section id="questions" class="level3">
+<h3>Questions</h3>
+<p>manually need to interact with the Galaxy database</p>
+<p>extract usage information</p>
+<p>move from MySQL to PostgreSQL</p>
+<p>manually change the contents of a table</p>
+</section>
+<section id="objectives" class="level3">
+<h3>Objectives</h3>
+<p>design concepts of the Galaxy database</p>
+<p>Extract information from the Galaxy database</p>
+<p>Get to know SchemaSpy</p>
+</section>
+<section id="requirements" class="level3">
+<h3>Requirements</h3>
+<p><a href="https://github.com/bgruening/training-material/tree/master/Introduction">Galaxy introduction</a></p>
+<p><a href="https://github.com/bgruening/training-material/blob/master/Admin-Corner/tutorials/galaxy_docker.md">Deploy a Galaxy Docker Image</a></p>
+<p>or access to a Galaxy server and its <a href="https://wiki.postgresql.org/wiki/PostgreSQL_Tutorials">PostgreSQL database</a></p>
+</section>
+</section>
+<section id="introduction-1" class="level1">
+<h1>Introduction</h1>
+<section id="database-schema-versus-object-model" class="level2">
+<h2>Database schema versus Object Model</h2>
+<p>The session description is database centric</p>
+<p>The object model is used by the code to manipulate and access the database</p>
+<p>translation handled by an object-relational mapping SQLAlchemy</p>
+</section>
+<section id="database-platform" class="level2">
+<h2>Database Platform</h2>
+<p>default out-of-the-box Galaxy installation uses SQLite</p>
+<p>SQLite is not the recommended DBMS for running a Galaxy server production DMBS for Galaxy is PostgreSQL PostgreSQL full set of DBMS features robust support for multiple simultaneous users</p>
+</section>
+<section id="what-is-in-and-not-in-the-galaxy-database" class="level2">
+<h2>What is in (and not in) the Galaxy database?</h2>
+<p>The database tracks users, groups, jobs, histories, datasets, workflows</p>
+<p>Datasets are stored outside the database keep metadata such as data type tools themselves are not stored in the database</p>
+</section>
+<section id="understanding-the-database-schema" class="level2">
+<h2>Understanding the Database Schema</h2>
+<section id="er-diagrams-and-schemaspy" class="level3">
+<h3>ER diagrams and SchemaSpy</h3>
+<p>Entity-relationship diagrams understand tables and the relationships between them SchemaSpy tool for generating ER diagrams</p>
+<figure>
+<img src="../images/run-1degree.png" alt="ER diagram (run table)" /><figcaption>ER diagram (run table)</figcaption>
+</figure>
+<p>Each table represents a different type of thing</p>
+</section>
+<section id="database-conventions" class="level3">
+<h3>Database conventions</h3>
+</section>
+<section id="relationship-tables" class="level3">
+<h3>Relationship tables</h3>
+<p>some tables represent relationships between things</p>
+<p>Relationship table names contain the names of tables they are relating, suffixed with <code>_association</code></p>
+</section>
+<section id="nulls-and-comments" class="level3">
+<h3>Nulls and comments</h3>
+<p>PostgreSQL supports comments to table definitions but none shown in the SchemaSpy report</p>
+<p>table definitions are generated by SQLAlchemy and SQLAlchemy does not support it</p>
+<ul>
+<li></li>
+<li></li>
+</ul>
+</section>
+</section>
+</section>
+<section id="other-topics" class="level1">
+<h1>Other Topics</h1>
+<section id="how-to-move-from-mysql-to-postgresql" class="level4">
+<h4>How to move from MySQL to PostgreSQL</h4>
+<p><a href="https://docs.google.com/presentation/d/1N3BDNQT3s7eQEO3BO89TQbTYwKp92fxHDRWQwC-T1kA">Slides</a></p>
+<p><a href="https://wiki.galaxyproject.org/Community/Log/2015/MySQL2PostgreSQL">Community Log Board entry</a></p>
+</section>
+<section id="is-there-ever-a-need-to-manually-change-the-contents-of-a-table" class="level4">
+<h4>Is there ever a need to manually change the contents of a table</h4>
+</section>
+<section id="run-schemaspy-in-this-container" class="level4">
+<h4>Run SchemaSpy in this container</h4>
+</section>
+</section>
+<section id="conclusion" class="level1">
+<h1>Conclusion</h1>
+<section id="when-to-interact-with-the-database" class="level3">
+<h3>When to interact with the database</h3>
+<p>trouble shooting</p>
+<p>source for extendend user statistics</p>
+</section>
+<section id="key-points" class="level3">
+<h3>Key Points</h3>
+<p>Be carefull, when you interact with the Galaxy database</p>
+<p>make sure you always have a backup</p>
+</section>
+</section>
+<section id="thank-you" class="level1">
+<h1>Thank you</h1>
+</section>
+        </div>
+    </div>
+
+		<script type="text/javascript" src="../../shared/reveal.js/lib/js/head.min.js"></script>
+        <script type="text/javascript" src="../../shared/reveal.js/js/reveal.js"></script>
+        <script type="text/javascript">
+            Reveal.initialize({
+                slideNumber: !window.location.search.match(/print-pdf/gi),
+                history: true,
+		controls: true,
+                progress: true,
+                theme: Reveal.getQueryHash().theme,
+                transition: Reveal.getQueryHash().transition || 'concave',
+
+                dependencies: [
+                    { src: '../../shared/reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+                    { src: '../../shared/reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                    { src: '../../shared/reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                    { src: '../../shared/js/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+                    { src: '../../shared/reveal.js/plugin/notes/notes.js', async: true },
+                ]
+            });
+        </script>
+
+	</body>
+</html>
