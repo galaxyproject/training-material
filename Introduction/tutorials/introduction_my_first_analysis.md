@@ -47,7 +47,7 @@ You think to yourself Wow! This is a simple question ... I know exactly where th
 
 Time to get started, browse to your Galaxy instance and log in or register. The Galaxy interface consist of three main parts. The available tools are listed on the left, your analysis history is recorded on the right, and the middle pane will show the tools and datasets.
 
-![](../images/galaxy-interface.png)
+![](../../shared/images/galaxy_interface.png)
 
 :pencil2: ***Hands on!***
 
@@ -59,7 +59,7 @@ Time to get started, browse to your Galaxy instance and log in or register. The 
 
 2. **Rename your history** to make it easy to recognize. You can do this by clicking on the title of the history (by default the title is *Unnamed history*) and typing **Galaxy 101** as the name.
 
- ![](../images/rename_history.png)
+ ![](../../shared/images/rename_history.png)
 
 
 ## Getting data from the UCSC table browser
@@ -255,7 +255,7 @@ UCSC provides a large number of tracks that can help you get a sense of your gen
 
 In Galaxy your analyses live in histories such as your current one. Histories can be very large, and you can have as many histories as you want. You can control your histories (switching, copying, sharing, creating a fresh history, etc) in the **Options** menu on the top of the history pane (gear symbol):
 
-![](../images/101_22.png)
+![](../../shared/images/history_options_menu.png)
 
 If you create a new history, your current history does not disappear. If you would like to list all of your histories just choose `Saved Histories` from the history menu and you will see a list of all your histories in the center pane:
 
@@ -281,7 +281,7 @@ Galaxy makes this very easy with the `Extract workflow` option. This means any t
 
 2. Go to the history **Options menu** (gear symbol) and select the `Extract Workflow` option.
 
- ![](../images/101_24.png)
+ ![](../../shared/images/history_menu_extract_workflow.png)
 
  The center pane will change as shown below and you will be able to choose which steps to include/exclude and how to name the newly created workflow.
 
@@ -316,7 +316,7 @@ We can examine the workflow in Galaxy's workflow editor. Here you can view/chang
  **Hiding intermediate steps**  
  When a workflow is executed, the user is usually primarily interested in the final product and not in all intermediate steps. By default all the outputs of a workflow will be shown, but we can explicitly tell Galaxy which output to show and which to hide for a given workflow. This behaviour is controlled by the little asterisk next to every output dataset:
 
- ![](../images/101_29.png)
+ ![](../../shared/images/workflow_editor_mark_output.png)
 
  If you click on this asterisk for any of the output datasets, then *only* files with an asterisk will be shown, and all outputs without an asterisk will be hidden. (Note that clicking *all* outputs has the same effect as clicking *none* of the outputs, in both cases all the datasets will be shown.)
 
@@ -347,7 +347,7 @@ We can examine the workflow in Galaxy's workflow editor. Here you can view/chang
 
 8. **Save your workflow** (important!) by clicking on the gear icon at the top right of the screen, and selecting `Save`.
 
- ![](../images/101_35.png)
+ ![](../../shared/images/workflow_editor_save.png)
 
 9. **Return** to the analysis view by clicking on `Analyze Data` at the top menu bar.
 
