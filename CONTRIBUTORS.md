@@ -7,6 +7,7 @@ The following individuals have contributed to this training material:
 * Anika Erxleben (@erxleben)
 * Bérénice Batut (@bebatut)
 * Björn Grüning (@bgruening)
+* Clemens Blank (@blankclemens)
 * Devon Ryan (@dpryan79)
 * Fabian Kilpert (@kilpert)
 * Fidel Ramirez (@fidelram)
