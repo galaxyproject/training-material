@@ -58,7 +58,7 @@ Time to get started, browse to your Galaxy instance and log in or register. The 
 
 ## Getting data from UCSC genome browser
 
-Now we are ready to do some analysis, but first we will need to get some data into our history. Galaxy can fetch data directly from external data sources. We will now get a list of all the exon locations on chromosome 22 from the UCSC geneme browser.
+Now we are ready to do some analysis, but first we will need to get some data into our history. Galaxy can fetch data directly from external data sources. We will now get a list of all the exon locations on chromosome 22 from the UCSC genome browser.
 
 :pencil2: ***Hands on!***
 
@@ -71,18 +71,19 @@ Now we are ready to do some analysis, but first we will need to get some data in
  ![](../images/101_02.png)
 
  Make sure that your settings are exactly the same as shown on the screen:
- - **assembly** should be set to Feb. 2009 (GRCh37/hg19)
+ - **clade** should be set to `Mammal`
+ - **genome** should be set to `Human`
+ - **assembly** should be set to `Feb. 2009 (GRCh37/hg19)`
  - **group** should be set to `Genes and Gene Predictions`
  - **position** should be set to `chr22`
  - **output format** should be set to `BED - browser extensible data`
  - **Send output to** should have the option `Galaxy` checked
 
-3. Click on **get output** and you will see the next screen:
+3. Click on the **get output** button and you will see the next screen:
 
  ![](../images/101_03.png)
 
- Make sure **Create one BED record per** is set to `Coding Exons` and then click **Send Query to
- Galaxy**.
+ Make sure **Create one BED record per** is set to `Coding Exons` and then click on the **Send Query to Galaxy** button.
 
  After this you will see your first History item in Galaxy’s right pane. It will go through
  the gray (preparing/queued) and yellow (running) states to become green (success):
@@ -101,7 +102,7 @@ Now we are ready to do some analysis, but first we will need to get some data in
 
 ### Obtaining SNP information from UCSC
 
-Now we have information about the exon locations, but our question was which exon contains the largest number of SNPs, so let's get this information from UCSC as well:
+Now we have information about the exon locations, but our question was which exon contains the largest number of SNPs, so let's get some information about SNP locations from UCSC as well:
 
 
 :pencil2: ***Hands on!***
@@ -111,9 +112,9 @@ Now we have information about the exon locations, but our question was which exo
 
  ![](../images/101_06.png)
 
-3. The **track** setting shows the version of the SNP database to get. In this example it is version 142, but you may select the latest one. Your results may vary slightly from the ones in this tutorial when you select a different version, but in general it is a good idea to select the latest version.
+3. The **track** setting shows the version of the SNP database to get. In this example it is version 142, but you may select the latest one. Your results may vary slightly from the ones in this tutorial when you select a different version, but in general it is a good idea to select the latest version, as this will contain the most up-to-date SNP information.
 
-4. Click `get output` to find a menu similar to this:
+4. Click on the `get output` button to find a menu similar to this:
 
  ![](../images/101_07.png)
 
@@ -127,13 +128,13 @@ Let’s remind ourselves that our objective was to find which exon contains the 
 
 :pencil2: ***Hands on!***
 
-1. Different galaxy servers may have tools available under different sections, therefore it is often useful to use the **search bar** at the top of the tools panel to find your tool. Enter the word `join` in the search bar of the tool panel, and select the tool named `Join - the intervals of two datasets side-by-side`
+1. Different Galaxy servers may have tools available under different sections, therefore it is often useful to use the **search bar** at the top of the tools panel to find your tool. Enter the word `join` in the search bar of the tool panel, and select the tool named `Join - the intervals of two datasets side-by-side`
 
 2. Select your file with exons as the first file, and the file with SNPs as the second file, and make sure **return** is set to `INNER JOIN` so that only matches are included in the output (i.e. only exons with SNPs in it and only SNPs that fall in exons)
 
  ![](../images/101_11.png)
 
- **Note** if you scroll down on this page, you will find an explanation of the tool.
+ **Note:** if you scroll down on this page, you will find an explanation of the tool.
 
 3. Click the **Execute** button and view the resulting file (with the eye icon). If everything went okay, you should see a file that looks similar to this:
 
@@ -141,7 +142,7 @@ Let’s remind ourselves that our objective was to find which exon contains the 
 
  Remember that variations are possible due to using different versions of UCSC databases, as long as you have similar looking columns you did everything right :)
 
-Let’s take a look at this dataset. The first six columns correspond to exons, and the last six columns correspond to the SNPs. Column 4 conains the exon IDs, and column 10 contains the SNP IDs. In our screenshot you see that the first 5 lines in the file all have the same exon ID (`uc010gqp.2_cds_10_0_chr22_16287254_r`) but different SNP IDs, this means these lines represent 5 different SNPs that all overlapped with the same exon. So we can find the total number of SNPs in an exon simply by counting the number of lines that have the exon ID in the fourth column.
+Let’s take a look at this dataset. The first six columns correspond to exons, and the last six columns correspond to the SNPs. Column 4 contains the exon IDs, and column 10 contains the SNP IDs. In our screenshot you see that the first 5 lines in the file all have the same exon ID (`uc010gqp.2_cds_10_0_chr22_16287254_r`) but different SNP IDs, this means these lines represent 5 different SNPs that all overlapped with the same exon. So we can find the total number of SNPs in an exon simply by counting the number of lines that have the exon ID in the fourth column.
 
 :question: Question: for the first 3 exons in your file, what is the number of SNPs that fall into that exon?
 
@@ -207,7 +208,7 @@ Congratulations! you have now determined which exons on chromosome 22 have the h
 :pencil2: ***Hands on!***
 
 1. Open the tool `Compare two Datasets - to find common or distinct rows`
-2. Set the parameters to compare the column 4 of the exon file with column one of the top-5 exons file to find mathing rows.
+2. Set the parameters to compare the column 4 of the exon file with column one of the top-5 exons file to find matching rows.
 
  ![](../images/101_18.png)
 
@@ -215,7 +216,7 @@ Congratulations! you have now determined which exons on chromosome 22 have the h
 
  ![](../images/101_19.png)
 
-4. A good way to learn about these exons is to look at their genomic surrounding. This can be done by using genome browsers. First, we have to tell galaxy to which **Genome build** this data uses (hg19), we can do this as follows:
+4. A good way to learn about these exons is to look at their genomic surrounding. This can be done by using genome browsers. First, we have to tell Galaxy to which **Genome build** this data uses (hg19), we can do this as follows:
 
  ![](../images/101_20.png)
 
@@ -231,7 +232,7 @@ UCSC provides a large number of tracks that can help you get a sense of your gen
 
 ## Understanding histories
 
-In Galaxy your analyses live in histories such as your current one. Histories can be very large, you can have as many histories as you want. You can control your histories (switching, copying, sharing, creating a fresh history, etc) in the **Options** menu on the top of the history pane (gear symbol):
+In Galaxy your analyses live in histories such as your current one. Histories can be very large, and you can have as many histories as you want. You can control your histories (switching, copying, sharing, creating a fresh history, etc) in the **Options** menu on the top of the history pane (gear symbol):
 
 If you create a new history, your current history does not disappear. If you would like to list all of your histories just choose `Saved Histories` from the history menu and you will see a list of all your histories in the center pane:
 
