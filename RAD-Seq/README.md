@@ -7,9 +7,10 @@ RAD-Sequencing is a reduced representation library method used to obtain genomic
 
 Several deck of slides are available for this topic:
 
-- [General introduction about RNA seq data analysis](http://bgruening.github.io/training-material/RAD-Seq/slides/)
+- [General introduction about RAD seq data analysis](http://bgruening.github.io/training-material/RAD-Seq/slides/)
 - Slide deck related to the tutorials:
-    - [Reference-based RAD-Seq data analysis](http://bgruening.github.io/training-material/RAD-Seq/slides/ref_based.html)
+    - [Population genomics data analysis](http://bgruening.github.io/training-material/RAD-Seq/slides/pop_genomics.html)
+	- [Genetic map data analysis](http://bgruening.github.io/training-material/RAD-Seq/slides/genetic_map.html)
 
 # Tutorials
 
