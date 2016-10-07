@@ -181,7 +181,7 @@ Now we have a list of all exons and the number of SNPs they contain, but we woul
 
  ![](../images/101_15.png)
 
-3. Click **Execute** and examine the output file
+3. Click **Execute** and examine the output file.
 
  ![](../images/101_16.png)
 
@@ -243,7 +243,7 @@ If you create a new history, your current history does not disappear. If you wou
 
 ![](../images/101_23.png)
 
-An alternative overview of your histories can be accessed by clicking on the **View all histories** button at top of your history pane (window icon)
+An alternative overview of your histories can be accessed by clicking on the **View all histories** button at top of your history pane (window icon).
 
 ![](../images/101_history-overview.png)
 
@@ -300,7 +300,7 @@ We can examine the workflow in Galaxy's workflow editor. Here you can view/chang
 
  ![](../images/101_29.png)
 
- If you click on this asterisk for any of the output datasets, then *only* files with an asterisk will be shown, and all outputs without an asterisk will be hidden. (Note that clicking *all* outputs has the same effect as clicking *none* of the outputs, in both cases all the datasets will be shown)
+ If you click on this asterisk for any of the output datasets, then *only* files with an asterisk will be shown, and all outputs without an asterisk will be hidden. (Note that clicking *all* outputs has the same effect as clicking *none* of the outputs, in both cases all the datasets will be shown.)
 
 3. **Click the asterisk** next to `out_file1` in the `Select First` and `Compare two Datasets` tools. Now when we run the workflow, we will only see the final two outputs, our list with the top-5 exons and their SNP counts, and the file with exons ready for viewing in a genome browser. Once you have done this, you will notice that the **minimap** at the bottom-right corner of your screen will have a colour-coded view of your workflow, with orange boxes representing a tool with an output that will be shown.
 
@@ -317,7 +317,7 @@ We can examine the workflow in Galaxy's workflow editor. Here you can view/chang
 
  ![](../images/101_33.png)
 
-5. **Repeat** this process for the other input dataset. Name it `Features`. We used it to calculate highest number of SNPS, but workflow would also work with other features, so we give it a bit more generic name.
+5. **Repeat** this process for the other input dataset. Name it `Features`. We used it to calculate highest number of SNPS, but this workflow would also work with other features, so we give it a bit more generic name.
 
 6. Let's also **rename the outputs**. Click on the `Select first` tool and in the menu on the right click on `Configure Output` and enter a descriptive name for the output dataset in the `Rename dataset` box.
 
@@ -325,7 +325,7 @@ We can examine the workflow in Galaxy's workflow editor. Here you can view/chang
 
 7. **Repeat** this for the output of the `Compare two Datasets` tool.
 
-8. **Save your workflow** (important!) by clicking on the gear icon at the top right of the screen, and selecting `Save`
+8. **Save your workflow** (important!) by clicking on the gear icon at the top right of the screen, and selecting `Save`.
 
  ![](../images/101_35.png)
 
@@ -347,11 +347,12 @@ Now that we have built our workflow, let's use it on some different data. For ex
 
 3. We wanted to know something about the repetitive elements per exon. We get this data from UCSC.
 
+ - **assembly** should be set to `Feb. 2009 (GRCh37/hg19)`
  - **group** parameter should be `Repeats`
  - **position** should be `chr22`
  - leave the rest of the settings to the defaults
 
- Click on `Get output` and then `send query to Galaxy` on the next screen
+ Click on `Get output` and then `send query to Galaxy` on the next screen.
 
 4. Open the **workflow menu** (top menu bar). Find the workflow you made in the previous section, and select the option `Run`.
 
@@ -378,7 +379,7 @@ One of the most important features of Galaxy comes at the end of an analysis. Wh
 To share a history, click on the gear symbol in the history pane and select `Share or Publish`. On this page you can do 3 things:
 
 1. **Make accessible via Link**. This generates a link that you can give out to others. Anybody with this link will be able to view your history (even without a Galaxy account).
-2. **Publish History**. This will not only create a link, but will also publish your history. This means your history will be listed under `Shared Data → Published Histories` in the top menu
+2. **Publish History**. This will not only create a link, but will also publish your history. This means your history will be listed under `Shared Data → Published Histories` in the top menu.
 3. **Share with Individual Users**. This will share the history only with specific users on the Galaxy instance.
 
 :pencil2: ***Hands on!***
