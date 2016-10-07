@@ -1,20 +1,20 @@
 <!doctype html>
 <html lang="en">
 
-	<head>
-		<meta charset="utf-8">
+  <head>
+    <meta charset="utf-8">
 
-		<title>Tool development and integration into Galaxy</title>
+    <title>Tool development and integration into Galaxy</title>
 
-		<link rel="stylesheet" href="../../shared/reveal.js/css/reveal.css">
-		<link rel="stylesheet" href="../../shared/reveal.js/css/theme/simple.css" id="theme">
+    <link rel="stylesheet" href="../../shared/reveal.js/css/reveal.css">
+    <link rel="stylesheet" href="../../shared/reveal.js/css/theme/simple.css" id="theme">
 
-		<!-- Code syntax highlighting -->
-		<link rel="stylesheet" href="../../shared/reveal.js/lib/css/zenburn.css">
+    <!-- Code syntax highlighting -->
+    <link rel="stylesheet" href="../../shared/reveal.js/lib/css/zenburn.css">
         <link rel="stylesheet" href="../../shared/font-awesome/css/font-awesome.min.css">
-		<link rel="stylesheet" href="../../shared/css/custom.css" id="theme">
+    <link rel="stylesheet" href="../../shared/css/custom.css" id="theme">
 
-		<!-- Printing and PDF exports -->
+    <!-- Printing and PDF exports -->
         <script>
           if( window.location.search.match( /print-pdf/gi ) ) {
             var link = document.createElement( 'link' );
@@ -24,19 +24,19 @@
             document.getElementsByTagName( 'head' )[0].appendChild( link );
           }
         </script>
-		<!--<script>
+    <!--<script>
             if (window.location.search.match(/print-pdf/gi)) {
                 document.write('<link rel="stylesheet" href="css/pdf.css" type="text/css">');
             }
         </script>-->
 
-		<!--[if lt IE 9]>
+    <!--[if lt IE 9]>
         <script src="../../shared/reveal.js/lib/js/html5shiv.js"></script>
         <![endif]-->
-	</head>
+  </head>
 
-	<body>
-		<div class="reveal">
+  <body>
+    <div class="reveal">
             <div class="slides">
                 <section data-markdown>
                     <script type="text/template">
@@ -59,6 +59,7 @@
                     </script>
                 </section>
 
+                <!-- WRAPPER -->
                 <section>
                     <section data-markdown>
                         <script type="text/template">
@@ -79,9 +80,9 @@
                         <script type="text/template">
                         ### Galaxy tool / wrapper
 
-                        <img src="../images/graphlan_screenshot.png" alt="Galaxy ToolShed" height=400/>
+                        <img src="../images/graphlan_screenshot.png" alt="Tool Form" height=400/>
 
-                        ```
+                        ```bash
                         graphlan.py --format "png" --size 7 input_tree.txt png_image.png
                         ```
 
@@ -105,35 +106,50 @@
                         <script type="text/template">
                         ### Wrapper
 
-                        ```
-                        <tool id="tool_id" name="Name of the tool" version="0.1.0">
-                            <requirements></requirements>
-                            <stdio>
-                                <exit_code range="1:" />
-                            </stdio>
-                            <command><![CDATA[
-                                TODO: Fill in command template.
-                            ]]></command>
-                            <inputs>
-                            </inputs>
-                            <outputs>
-                            </outputs>
-                            <help><![CDATA[
-                                TODO: Fill in help.
-                            ]]></help>
-                            <citations></citations>
-                        </tool>
-                        ```
-                        <small>[Galaxy Tool XML File](https://wiki.galaxyproject.org/Admin/Tools/ToolConfigSyntax)</small>
+                        <img src="../images/wrapper_layers.png" height=400/>
 
                         </script>
                     </section>
 
                     <section data-markdown>
                         <script type="text/template">
-                        ### How to invoke the tool?
+                        ### Wrapper
 
-                        ```
+                        <img src="../images/wrapper_big_picture_1.png" height=400/>
+
+                        <small>[Galaxy Tool XML File](https://docs.galaxyproject.org/en/latest/dev/schema.html)</small>
+
+                        </script>
+                    </section>
+
+                    <section data-markdown>
+                        <script type="text/template">
+                        ### Wrapper
+
+                        <img src="../images/wrapper_big_picture_2.png" height=400/>
+
+                        <small>[Galaxy Tool XML File](https://docs.galaxyproject.org/en/latest/dev/schema.html)</small>
+
+                        </script>
+                    </section>
+
+                    <section data-markdown>
+                        <script type="text/template">
+                        ### Wrapper
+
+                        <img src="../images/wrapper_big_picture_3.png" height=400/>
+
+                        <small>[Galaxy Tool XML File](https://docs.galaxyproject.org/en/latest/dev/schema.html)</small>
+
+                        </script>
+                    </section>
+
+                    <section data-markdown>
+                        <script type="text/template">
+                        ### `command`
+                        #### How to invoke the tool?
+
+                        ```xml
                         <command><![CDATA[
                             graphlan.py
                                 --format $format
@@ -154,17 +170,19 @@
 
                     <section data-markdown>
                         <script type="text/template">
-                        ### What options to pass?
+                          ### `command`
+                          #### What options to pass?
 
-                        <img src="../images/graphlan_screenshot.png" alt="Galaxy ToolShed"/>
+                          <img src="../images/graphlan_screenshot.png" alt="Galaxy ToolShed"/>
                         </script>
                     </section>
 
                     <section data-markdown>
                         <script type="text/template">
-                        ### What options to pass?
+                        ### `inputs` > `param` -> `command`
+                        #### What options to pass?
 
-                        ```
+                        ```xml
                         <inputs>
                             <param name="dpi" type="..." label="..." optional="True"/>
 
@@ -174,7 +192,7 @@
 
                         Directly linked to `<command>`
 
-                        ```
+                        ```xml
                         <command><![CDATA[
                             graphlan.py
                                 ...
@@ -191,12 +209,13 @@
 
                     <section data-markdown>
                         <script type="text/template">
-                        ### Data input
+                        ### `inputs` > `param`
+                        #### Data
 
                         <img src="../images/input_data.png" alt="Data inputs"/>
 
-                        ```
-                        <param name="..." type="data" format="txt" label="..." help="..."/>
+                        ```xml
+                        <param name="..." type="data" format="txt" label="..." help="..." />
                         ```
 
                         <small>[List of possible formats](https://bitbucket.org/galaxy/galaxy-central/src/tip/config/datatypes_conf.xml.sample?fileviewer=file-view-default)</small>
@@ -207,17 +226,18 @@
 
                     <section data-markdown>
                         <script type="text/template">
-                        ### Integer/Float input
+                        ### `inputs` > `param`
+                        #### Integer/Float
 
                         <img src="../images/input_integer.png" alt="Integer inputs"/>
 
-                        ```
+                        ```xml
                         <param name="..." type="integer" value="7" label="..." help="..."/>
                         ```
 
                         <img src="../images/input_integer_range.png" alt="Integer input with range"/>
 
-                        ```
+                        ```xml
                         <param name="..." type="float" min="0" max="10" value="1" label="..."
                         help="..."/>
                         ```
@@ -227,11 +247,12 @@
 
                     <section data-markdown>
                         <script type="text/template">
-                        ### Text input
+                        ### `inputs` > `param`
+                        #### Text
 
                         <img src="../images/input_text.png" alt="Text input"/>
 
-                        ```
+                        ```xml
                         <param name="..." type="text" value="" label="..." help="..."/>
                         ```
 
@@ -240,11 +261,12 @@
 
                     <section data-markdown>
                         <script type="text/template">
-                        ### Select input
+                        ### `inputs` > `param`
+                        #### Select
 
                         <img src="../images/input_select.png" alt="Select input"/>
 
-                        ```
+                        ```xml
                         <param name="..." type="select" label="..." help="...">
                             <option value="png" selected="true">PNG</option>
                             <option value="pdf">PDF</option>
@@ -259,11 +281,12 @@
 
                     <section data-markdown>
                         <script type="text/template">
-                        ### Select input
+                        ### `inputs` > `param`
+                        #### Select
 
                         <img src="../images/input_select_checkboxes.png" alt="Select input"/>
 
-                        ```
+                        ```xml
                         <param name="..." type="select" display="radio" label="..." help="...">
                             <option value="min" selected="true">Mininum</option>
                             <option value="mean" >Mean</option>
@@ -277,11 +300,12 @@
 
                     <section data-markdown>
                         <script type="text/template">
-                        ### Select input
+                        ### `inputs` > `param`
+                        #### Select
 
                         <img src="../images/input_select_multiple.png" alt="Select input"/>
 
-                        ```
+                        ```xml
                         <param name="..." type="select" multiple="true" label="..." help="...">
                             <option value="ld" selected="true">Length distribution</option>
                             <option value="gc" selected="true">GC content distribution</option>
@@ -294,11 +318,12 @@
 
                     <section data-markdown>
                         <script type="text/template">
-                        ### Boolean input
+                        ### `inputs` > `param`
+                        #### Boolean
 
                         <img src="../images/input_boolean.png" alt="Select input"/>
 
-                        ```
+                        ```xml
                         <param name="..." type="boolean" checked="false" truevalue="--log"
                         falsevalue="" label="..."  help="..." />
                         ```
@@ -308,7 +333,8 @@
 
                     <section data-markdown>
                         <script type="text/template">
-                        ### What files the tool will produce as output?
+                        ### `output`
+                        #### What files the tool will produce as output?
 
                         <img src="../images/output.png" alt="Outputs" height=550/>
 
@@ -317,9 +343,9 @@
 
                     <section data-markdown>
                         <script type="text/template">
-                        ### Outputs
+                        ### `outputs`
 
-                        ```
+                        ```xml
                         <outputs>
                             <data format="txt" name="tree" label="${tool.name} on ${on_string}:
                             Tree" />
@@ -334,9 +360,10 @@
 
                     <section data-markdown>
                         <script type="text/template">
-                        ### Conditional outputs
+                        ### `outputs`
+                        #### Conditional
 
-                        ```
+                        ```xml
                         <outputs>
                             <data format="png" name="png_output_image" label="${tool.name} on
                             ${on_string}: Image">
@@ -350,29 +377,7 @@
 
                     <section data-markdown>
                         <script type="text/template">
-                        ### Tests
-
-                        ```
-                        <tests>
-                            <test>
-                                <param name="input_tree" value="input_tree.txt"/>
-                                <param name="format" value="png"/>
-                                <param name="dpi" value="100"/>
-                                <param name="size" value="7"/>
-                                <param name="pad" value="2"/>
-                                <output name="png_output_image" file="png_image.png" />
-                            </test>
-                        </tests>
-                        ```
-
-                        <small>`input_tree.txt` and `png_image.png` in `test-data` repository</small>
-
-                        </script>
-                    </section>
-
-                    <section data-markdown>
-                        <script type="text/template">
-                        ### Help
+                        ### `help`
 
                         <img src="../images/help.png" alt="Select input"/>
 
@@ -399,7 +404,7 @@
 
                     <section data-markdown>
                         <script type="text/template">
-                        ### Citations
+                        ### `citations`
 
                         <img src="../images/citations.png" alt="Citations"/>
 
@@ -418,7 +423,7 @@
 
                     <section data-markdown>
                         <script type="text/template">
-                        ### Wrapper
+                        ### Wrapper directory tree
 
                         ```
                         graphlan/
@@ -432,10 +437,247 @@
                         [Details of XML tag sets](https://wiki.galaxyproject.org/Admin/Tools/ToolConfigSyntax)
                         </script>
                     </section>
+                </section>
+
+                <!-- FUNCTIONAL TEST -->
+                <section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ## Funtional tests
+                        </script>
+                    </section>
 
                     <section data-markdown>
                         <script type="text/template">
-                        ### What about tool installation?
+                            ### Functional tests
+                            #### Good practices
+
+                            1. Build tests using inputs/parameters/outputs
+                            2. Run the tests --> Failed --> Coffee 
+                            3. Develop
+                            4. Run the tests --> Failed  --> Coffee
+                            5. Develop
+                            6. Run the tests --> Succeed --> Beer
+
+                        </script>
+                    </section>
+
+                    <section data-markdown>
+                        <script type="text/template">
+                        ### `tests`
+
+                        ```
+                        <tests>
+                            <test>
+                                <param name="input_tree" value="input_tree.txt"/>
+                                <param name="format" value="png"/>
+                                <param name="dpi" value="100"/>
+                                <param name="size" value="7"/>
+                                <param name="pad" value="2"/>
+                                <output name="png_output_image" file="png_image.png" />
+                            </test>
+                        </tests>
+                        ```
+
+                        <small>`input_tree.txt` and `png_image.png` in `test-data` repository</small>
+
+                        </script>
+                    </section>
+
+                    <section data-markdown>
+                        <script type="text/template">
+                        ### `tests`
+                        #### Comparison Methods
+
+                        ```xml
+                        <output name="out_file1" file="cf_maf2fasta_concat.dat" ftype="fasta"/>
+                        ```
+
+                        ```xml
+                        <test>
+                            <output name="out_file1">
+                                <assert_contents>
+                                    <has_text text="chr7" />
+                                    <not_has_text text="chr8" />
+                                    <has_text_matching expression="1274\d+53" />
+                                    <has_line_matching expression=".*\s+127489808\s+127494553" />
+                                    <!-- &#009; is XML escape code for tab -->
+                                    <has_line line="chr7&#009;127471195&#009;127489808" />
+                                    <has_n_columns n="3" />
+                                </assert_contents>
+                            </output>
+                        </test>
+                        ```
+                         
+
+                        <small>[https://docs.galaxyproject.org/en/latest/dev/schema.html#tool|tests|test](https://docs.galaxyproject.org/en/latest/dev/schema.html#tool|tests|test)</small>
+
+                        </script>
+                    </section>
+
+                    <section data-markdown>
+                        <script type="text/template">
+                        ### `tests`
+                        #### Comparison Methods on the output itself
+
+                        ```xml
+                        <test>
+                            <output ...
+                                md5
+                                compare
+                                    diff
+                                    sim_size
+                                lines_diff
+                            ...
+
+                        ```
+                        <small>[https://docs.galaxyproject.org/en/latest/dev/schema.html#tool|tests|test|output|assert_contents](https://docs.galaxyproject.org/en/latest/dev/schema.html#tool|tests|test|output|assert_contents)</small>
+
+                        </script>
+                    </section>
+
+                    <section data-markdown>
+                        <script type="text/template">
+                        ### `tests`
+                        #### Comparison Methods within the output
+
+                        ```xml
+                        <test>
+                            <output>
+                                <assert_contents>
+                                    <has_text />
+                                    <not_has_text />
+                                    <has_text_matching />
+                                    <has_text />
+                                    <...>
+                        ```
+                        <small>[https://docs.galaxyproject.org/en/latest/dev/schema.html#tool|tests|test|output|assert_contents](https://docs.galaxyproject.org/en/latest/dev/schema.html#tool|tests|test|output|assert_contents)</small>
+
+                        </script>
+                    </section>
+                </section>
+
+                <!-- PLANEMO -->
+                <section>
+                    <section data-markdown>
+                        <script type="text/template">
+                        <img src="../images/planemo-logo.png" alt="Galaxy ToolShed" class="no-border"/>
+
+                        > Command-line utilities to assist in building and publishing Galaxy tools.
+
+                        </script>
+                    </section>
+
+                    <section data-markdown>
+                        <script type="text/template">
+                        <img src="../images/planemo-logo.png" alt="Galaxy ToolShed" class="no-border" height=25/>
+                        #### Building Galaxy Tools
+
+                        <img src="../images/planemo_tool_building.png" alt="Building tools" class="no-border"/>
+
+                        </script>
+                    </section>
+
+                    <section data-markdown>
+                        <script type="text/template">
+                        <img src="../images/planemo-logo.png" alt="Galaxy ToolShed" class="no-border" height=25/>
+                        #### Publishing to the ToolShed
+
+                        <img src="../images/planemo_toolshed_publishing.png" alt="Publishing on ToolShed" class="no-border"/>
+                        </script>
+                    </section>
+
+                    <section data-markdown>
+                        <script type="text/template">
+                        <img src="../images/planemo-logo.png" alt="Galaxy ToolShed" class="no-border" height=25/>
+                        #### Links
+
+                        - [Documentation](https://planemo.readthedocs.io/en/latest/)
+                        - [Tutorial](https://planemo.readthedocs.io/en/latest/writing_standalone.html)
+                        </script>
+                    </section>
+
+                    <section data-markdown>
+                        <script type="text/template">
+                        <img src="../images/planemo-logo.png" alt="Galaxy ToolShed" class="no-border" height=25/>
+                        ### Summary
+                        </script>
+                    </section>
+
+                    <section data-markdown>
+                        <script type="text/template">
+                        <img src="../images/planemo-logo.png" alt="Galaxy ToolShed" class="no-border" height=25/>
+                        #### The big picture
+
+                        <img src="../images/big_picture.png" alt="The big picture" class="no-border" height="550" />
+                        </script>
+                    </section>
+
+                    <section data-markdown>
+                        <script type="text/template">
+                        <img src="../images/planemo-logo.png" alt="Galaxy ToolShed" class="no-border" height=25/>
+                        #### Checklist (1/3)
+
+                        <p style="text-align: left;">
+                          <input type="checkbox"/> Create of a dedicated repository <br/>
+                          <input type="checkbox"/> Create of the main `.xml` file with <br/>
+                          ```planemo create``` <br/>
+                          <input type="checkbox"/> Fill the `.xml` file <br/>
+                          <input type="checkbox"/> Test the wrapper structure with <br/>
+                          ```planemo lint```<br/>
+                        </p>
+
+                        </script>
+                    </section>
+
+                    <section data-markdown>
+                        <script type="text/template" >
+                        <img src="../images/planemo-logo.png" alt="Galaxy ToolShed" class="no-border" height=25/>
+                        #### Checklist (2/3)
+                        
+                        <p style="text-align: left;">
+                          <input type="checkbox"/> Write the `tool_dependencies.xml` file <br/>
+                          <input type="checkbox"/> Initiate the `.shed.yml` file with <br/>
+                          ```planemo shed_init``` <br/>
+                          <input type="checkbox"/> Create the repository on ToolShed with <br/>
+                          ```planemo shed_create```<br/>
+                          <input type="checkbox"/> Install and test the wrapper on a Galaxy instance <br/>
+                        </p>
+
+                        </script>
+                    </section>
+
+                    <section data-markdown>
+                        <script type="text/template">
+                        <img src="../images/planemo-logo.png" alt="Galaxy ToolShed" class="no-border" height=25/>
+                        #### Checklist (3/3)
+
+                        <p style="text-align: left;">
+                          <input type="checkbox"/> Improve the wrapper and push modification on toolshed <br/>
+                          ```planemo shed_update``` <br/>
+                          <input type="checkbox"/> Add functional tests <br/>
+                          <input type="checkbox"/> Run functional tests <br/>
+                          ```planemo test```<br/>
+                        </p>
+                        <aside class="notes">
+                            Gildas: for me tests come before shed_*. Ideally, tests come before command, input, output ... They are the first thing to do... Ideally
+                        </aside>
+                        </script>
+                    </section>
+                </section>
+
+                <!-- DEPENDENCIES -->
+                <section>
+                    <section data-markdown>
+                        <script type="text/template">
+                        ## Dependencies
+                        </script>
+                    </section>
+
+                    <section data-markdown>
+                        <script type="text/template">
+                        ### Dependencies
+                        #### What about tool installation?
 
                         <img src="../images/galaxy_instance.png" alt="Galaxy instance" height=500/>
 
@@ -444,7 +686,8 @@
 
                     <section data-markdown>
                         <script type="text/template">
-                        ### Embedded tool
+                        ### Dependencies
+                        #### Embedded tool
 
                         ```
                         graphlan/
@@ -468,7 +711,8 @@
 
                     <section data-markdown>
                         <script type="text/template">
-                        ### External tool
+                        ### Dependencies
+                        #### External tool
 
                         Definition of requirements in `.xml` file
 
@@ -480,6 +724,68 @@
                         ```
 
                         Local installation using `conda` package
+                        </script>
+                    </section>
+
+                    <section data-markdown>
+                        <script type="text/template">
+                        <img src="../images/conda_logo.svg" class="no-border" />
+                        </script>
+                    </section>
+
+                    <section data-markdown>
+                        <script type="text/template">
+                        <img src="../images/conda_logo.svg" class="no-border" height=25 />
+                        #### miniconda installation
+
+                        # TODO
+                        </script>
+                    </section>
+
+                    <section data-markdown>
+                        <script type="text/template">
+                        <img src="../images/conda_logo.svg" class="no-border"  height=25 />
+                        #### `conda search`
+
+                        # TODO
+                        </script>
+                    </section>
+
+                    <section data-markdown>
+                        <script type="text/template">
+                        <img src="../images/bioconda.png" class="no-border"  height=25 />
+                        #### Bioconda
+
+                        # TODO
+                        </script>
+                    </section>
+
+                    <section data-markdown>
+                        <script type="text/template">
+                        <img src="../images/bioconda.png" class="no-border"  height=25 />
+                        #### Bioconda contributing
+
+                        # TODO
+                        </script>
+                    </section>
+
+                    <section data-markdown>
+                        <script type="text/template">
+                        <img src="../images/conda_logo.svg" class="no-border"  height=25 />
+                        #### `conda build`
+
+                        # TODO
+                        </script>
+                    </section>
+
+
+                </section>
+
+                <!-- PUBLISHING TOOLSHED -->
+                <section>
+                    <section data-markdown>
+                        <script type="text/template">
+                        ## Publishing on Toolshed
                         </script>
                     </section>
 
@@ -507,7 +813,9 @@
 
                     <section data-markdown>
                         <script type="text/template">
-                        ### Wrapper
+                        ### Publishing on ToolShed
+
+                        Metadata description: `.shed.yml` file
 
                         ```
                         graphlan/
@@ -519,109 +827,6 @@
                         ```
                         </script>
                     </section>
-
-                    <section data-markdown>
-                        <script type="text/template">
-                        <img src="../images/planemo-logo.png" alt="Galaxy ToolShed" class="no-border"/>
-
-                        > Command-line utilities to assist in building and publishing Galaxy tools.
-
-                        </script>
-                    </section>
-
-                    <section data-markdown>
-                        <script type="text/template">
-                        ### Building Galaxy Tools
-
-                        <img src="../images/planemo_tool_building.png" alt="Building tools" class="no-border"/>
-
-                        </script>
-                    </section>
-
-                    <section data-markdown>
-                        <script type="text/template">
-                        ### Publishing to the ToolShed
-
-                        <img src="../images/planemo_toolshed_publishing.png" alt="Publishing on ToolShed" class="no-border"/>
-                        </script>
-                    </section>
-
-                    <section data-markdown>
-                        <script type="text/template">
-                        <img src="../images/planemo-logo.png" alt="Galaxy ToolShed" class="no-border"/>
-
-                        - [Documentation](https://planemo.readthedocs.io/en/latest/)
-                        - [Tutorial](https://planemo.readthedocs.io/en/latest/writing_standalone.html)
-                        </script>
-                    </section>
-
-                    <section data-markdown>
-                        <script type="text/template">
-                        # Summary
-                        </script>
-                    </section>
-
-                    <section data-markdown>
-                        <script type="text/template">
-                        ### The big picture
-
-                        <img src="../images/big_picture.png" alt="The big picture" class="no-border" height="550" />
-                        </script>
-                    </section>
-
-                    <section data-markdown>
-                        <script type="text/template">
-                        ### Checklist (1/3)
-
-                        <ul class="requirements">
-                            <li>
-                                <p><i class="fa fa-square-o"></i> Create of a dedicated repository</p>
-                                <p><i class="fa fa-square-o"></i> Create of the main `.xml` file</p>
-                                ```planemo create```
-                                <p><i class="fa fa-square-o"></i> Fill the `.xml` file</p>
-                                <p><i class="fa fa-square-o"></i> Test the wrapper structure with </p>
-                                ```planemo lint```
-                            </li>
-                        </ul>
-
-                        </script>
-                    </section>
-
-                    <section data-markdown>
-                        <script type="text/template">
-                        ### Checklist (2/3)
-
-                        <ul class="requirements">
-                            <li>
-                                <p><i class="fa fa-square-o"></i> Write the `tool_dependencies.xml` file</p>
-                                <p><i class="fa fa-square-o"></i> Initiate the `.shed.yml` file with </p>
-                                ```planemo shed_init```
-                                <p><i class="fa fa-square-o"></i> Create the repository on ToolShed</p>
-                                    ```planemo shed_create```
-                                <p><i class="fa fa-square-o"></i> Install and test the wrapper on a Galaxy instance</p>
-                            </li>
-                        </ul>
-
-                        </script>
-                    </section>
-
-                    <section data-markdown>
-                        <script type="text/template">
-                        ### Checklist (3/3)
-
-                        <ul class="requirements">
-                            <li>
-                                <p><i class="fa fa-square-o"></i> Improve the wrapper and push modification on toolshed</p>
-                                ```planemo shed_update```
-                                <p><i class="fa fa-square-o"></i> Add functional tests</p>
-                                <p><i class="fa fa-square-o"></i> Run functional tests</p>
-                                ```planemo test```
-                            </li>
-                        </ul>
-
-                        </script>
-                    </section>
-
                 </section>
 
                 <section>
@@ -633,7 +838,7 @@
                             - Second question
 
                             <aside class="notes">
-                                Oh hey, these are some notes. They'll be hidden in your presentation, but you can see them if you open the speaker notes window.
+                                Oh hey, these are some notes. They&rsquo;ll be hidden in your presentation, but you can see them if you open the speaker notes window.
 
                                 To see the notes, hit **'s'** on your keyboard
                             </aside>
@@ -652,6 +857,7 @@
                     </section>
                 </section>
 
+                <!-- TEMPLATE -->
                 <section>
                     <section data-markdown>
                         <script type="text/template">
@@ -699,11 +905,11 @@
                         - ...
                     </script>
                 </section>
-			</div>
+      </div>
 
-		</div>
+    </div>
 
-		<script type="text/javascript" src="../../shared/reveal.js/lib/js/head.min.js"></script>
+    <script type="text/javascript" src="../../shared/reveal.js/lib/js/head.min.js"></script>
         <script type="text/javascript" src="../../shared/reveal.js/js/reveal.js"></script>
         <script type="text/javascript">
             Reveal.initialize({
@@ -723,5 +929,5 @@
             });
         </script>
 
-	</body>
+  </body>
 </html>
