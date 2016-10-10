@@ -102,7 +102,20 @@ To make sense of the reads, their positions within *Drosophila melanogaster* gen
 
 > Want to learning more about mapping? Follow our [training](http://bgruening.github.io/training-material/NGS-mapping/slides)
 
-For this tutorial, we will use [TopHat](https://ccb.jhu.edu/software/tophat/index.shtml), a mapping tool developed for RNA-Seq reads. It aligns RNA-Seq reads to mammalian-sized genomes using [Bowtie](http://bowtie-bio.sourceforge.net/index.shtml), and then analyzes the mapping results to identify splice junctions between exons.
+Because in the case of eukaryotic transcriptome most reads originate from processed mRNAs lacking exons, they cannot be simply mapped back to the genome. Instead they can be separated into two categories:
+
+- Reads that map entirely within exons
+- Reads that cannot be mapped within an exon across their entire length because they span two or more exons
+
+Spliced mappers have been developed to efficiently map transcript-derived reads against genomes. [TopHat](https://ccb.jhu.edu/software/tophat/index.shtml) was one of the first tools designed specifically to address this problem:
+
+1. Identification of potential exons using reads that do map to the genome
+2. Generation of possible splices between neighboring exons
+3. Comparison of reads that did not initially map to the genome against these *in silico* created junctions
+
+![](../images/tophat2.png)
+
+*[Kim et al, Genome Biology, 2013](https://genomebiology.biomedcentral.com/articles/10.1186/gb-2013-14-4-r36)*
 
 To help annotations of RNA sequences, we can take advantage from already known reference gene annotations.
 
@@ -110,12 +123,12 @@ To help annotations of RNA sequences, we can take advantage from already known r
 
 1. Load the Ensembl gene annotation for *Drosophila melanogaster* ([`Drosophila_melanogaster.BDGP5.78.gtf`](https://zenodo.org/record/61771/files/Drosophila_melanogaster.BDGP5.78.gtf)) from [Zenodo](http://dx.doi.org/10.5281/zenodo.61771) into your current Galaxy history
 
-TopHat also needs to know two important parameters about the sequencing library
+TopHat needs to know two important parameters about the sequencing library
 
-- The *strandedness*: *unstranded* or *stranded*?  and if *stranded* there are many types)
-- The *inner distance* between the two reads for paired-end data
+- The library type and its strandedness type
+- The inner distance between the two reads for paired-end data
 
-**These information should usually come with your FASTQ files!!!** If not, try to find them on the site where you downloaded the data or in the corresponding publication. Another option is to estimate these parameters with a *preliminary mapping* of a *downsampled* file and some analysis programs. Afterward, the actual mapping can be redo on the original files with the optimized parameters.
+These information should usually come with your FASTQ files! If not, try to find them on the site where you downloaded the data or in the corresponding publication. Another option is to estimate these parameters with a *preliminary mapping* of a *downsampled* file and some analysis programs. Afterward, the actual mapping can be redo on the original files with the optimized parameters.
 
 ## Preliminary mapping
 
@@ -131,7 +144,7 @@ TopHat also needs to know two important parameters about the sequencing library
     - "Paired-end (as individual datasets)" instead of "Single-end"
     - "Drosophila melanogaster: dm3" as reference genome
     - the defaults for *strandedness* and *insert size*
-    
+
 3. **Inner Distance** :wrench:: Run **Inner Distance** on the BAM file using the `Drosophila_melanogaster.BDGP5.78.gtf` reference gene model to estimate the *inner distance*
 4. Inspect the resulting PDF
 
