@@ -9,7 +9,7 @@ Move from dev instance to production instance
 :dart: ***Objectives***
 
 - *Learn to install a Galaxy server.*
-- *Upgrade a basic galaxy installation to a production environment* 
+- *Upgrade a basic galaxy installation to a production environment*.
 - *Get a basic understanding of entry points in the main galaxy configuration file.*
 
 :heavy_check_mark: ***Requirements***
@@ -48,6 +48,12 @@ This will start up the server on localhost and port 8080, so Galaxy can be acces
 
 Galaxy's server will start printing its output to your terminal. To stop the Galaxy server, just hit Ctrl-c in the terminal from which Galaxy is running. 
 
+## Access Galaxy over the network
+In the basic installation Galaxy is bind to the loopback interface.
+To bind Galaxy to any avalaible network interface edit the config/galaxy.ini file and change the host setting to:
+
+	host = 0.0.0.0
+
 ## What did you just installed ?
 The galaxy you have just installed is configured with the following:
 
@@ -56,8 +62,32 @@ The galaxy you have just installed is configured with the following:
 
 The tools are run locally and the galaxy server itself run in a single process. 
 
+## Usefull things to know ...
+
+- The command: git clone -b release_16.07 https://github.com/galaxyproject/galaxy.git
+
+*We use the "-b" option to clone a specific branch of the repository. 
+In the example above we clone the branch release_16.07 because the lastest release is 16.07.
+A new version of Galaxy is released every 3 months.
+It is strongly encouraged to run this tutorial with the latest release. 
+See the [GitHub](https://github.com/galaxyproject/galaxy) repository to get the latest one.*
+
+- Galaxy configuration files
+
+*In the config/ directory all the files are suffixed with ".sample".
+Sample files are default files read by Galaxy when the server starts.
+When you work on a configuration it is strongly encouraged to save these samples and to work on a file without prefix. 
+So, go ahead: copy galaxy.ini.sample to galaxy.ini*
+
+
 ## What's next ?
 Next, you will configure your Galaxy server for production.
+The first thing to do is to disable the developer settings.
+
+# Disable developer settings.
+As previously mentionned the basic installation is for development only.
+
+
 
 
 ## Subpart 1
