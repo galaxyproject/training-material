@@ -72,13 +72,12 @@ A new version of Galaxy is released every 3 months.
 It is strongly encouraged to run this tutorial with the latest release. 
 See the [GitHub](https://github.com/galaxyproject/galaxy) repository to get the latest one.*
 
-- Galaxy configuration files
+- Galaxy configuration filenames
 
 *In the config/ directory all the files are suffixed with ".sample".
-Sample files are default files read by Galaxy when the server starts.
-When you work on a configuration it is strongly encouraged to save these samples and to work on a file without prefix. 
-So, go ahead: copy galaxy.ini.sample to galaxy.ini*
-
+Sample files are default files provided by Galaxy.
+When you change a configuration it is strongly encouraged to work directly on a filename without the 'sample' suffix. 
+So, go ahead save the 'galaxy.ini.sample' and create a 'galaxy.ini'*
 
 ## What's next ?
 Next, you will configure your Galaxy server for production.
@@ -86,9 +85,23 @@ The first thing to do is to disable the developer settings.
 
 # Disable developer settings.
 As previously mentionned the basic installation is for development only.
+A set of option are usefull for development but become irrelevant for production:
 
+- debug:
 
+	debug = False
 
+Setting debug to False disable middleware that loads the entire response in memory for displaying debugging information in the page. 
+If left enabled, the proxy server may timeout waiting for a response or your Galaxy process may run out of memory if it's serving large files. 
+
+- use_interactive:
+
+	use_interactive = False
+
+Setting use_interactive to false disable displaying and live debugging of tracebacks via the web. 
+Leaving it enabled will expose your configuration (database password, id_secret, etc.). 
+
+- filter-with: 
 
 ## Subpart 1
 
