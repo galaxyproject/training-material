@@ -160,7 +160,7 @@
                                 #if $pad
                                     --pad $pad
                                 #end if
-                                $input_tree
+                                "$input_tree"
                                 ...
                         ]]></command>
                         ```
@@ -453,7 +453,7 @@
                             #### Good practices
 
                             1. Build tests using inputs/parameters/outputs
-                            2. Run the tests --> Failed --> Coffee 
+                            2. Run the tests --> Failed --> Coffee
                             3. Develop
                             4. Run the tests --> Failed  --> Coffee
                             5. Develop
@@ -508,7 +508,7 @@
                             </output>
                         </test>
                         ```
-                         
+
 
                         <small>[https://docs.galaxyproject.org/en/latest/dev/schema.html#tool|tests|test](https://docs.galaxyproject.org/en/latest/dev/schema.html#tool|tests|test)</small>
 
@@ -634,7 +634,7 @@
                         <script type="text/template" >
                         <img src="../images/planemo-logo.png" alt="Galaxy ToolShed" class="no-border" height=25/>
                         #### Checklist (2/3)
-                        
+
                         <p style="text-align: left;">
                           <input type="checkbox"/> Write the `tool_dependencies.xml` file <br/>
                           <input type="checkbox"/> Initiate the `.shed.yml` file with <br/>
@@ -723,19 +723,37 @@
                         </requirements>
                         ```
 
+                        Local installation using ~~tool_dependencies.xml~~
+                        </script>
+                    </section>
+
+                    <section data-markdown>
+                        <script type="text/template">
+                        ### Dependencies
+                        #### External tool
+
+                        Definition of requirements in `.xml` file
+
+                        ```
+                        <requirements>
+                            <requirement type="package" version="1.66">biopython</requirement>
+                            <requirement type="package" version="1.0.0">graphlan</requirement>
+                        </requirements>
+                        ```
+
                         Local installation using `conda` package
                         </script>
                     </section>
 
                     <section data-markdown>
                         <script type="text/template">
-                        <img src="../images/conda_logo.svg" class="no-border" />
+                        <img src="../images/conda_logo.png" class="no-border" />
                         </script>
                     </section>
 
                     <section data-markdown>
                         <script type="text/template">
-                        <img src="../images/conda_logo.svg" class="no-border" height=25 />
+                        <img src="../images/conda_logo.png" class="no-border" height=25 />
                         #### miniconda installation
 
                         # TODO
@@ -744,7 +762,7 @@
 
                     <section data-markdown>
                         <script type="text/template">
-                        <img src="../images/conda_logo.svg" class="no-border"  height=25 />
+                        <img src="../images/conda_logo.png" class="no-border"  height=25 />
                         #### `conda search`
 
                         # TODO
@@ -771,7 +789,7 @@
 
                     <section data-markdown>
                         <script type="text/template">
-                        <img src="../images/conda_logo.svg" class="no-border"  height=25 />
+                        <img src="../images/conda_logo.png" class="no-border"  height=25 />
                         #### `conda build`
 
                         # TODO
