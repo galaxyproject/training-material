@@ -22,6 +22,7 @@ Several deck of slides are available for this topic:
 - [Docker and Galaxy](tutorials/galaxy_docker.md)
 - [Galaxy Database schema](tutorials/Database_Schema.md)
 
+
 # Contributors
 
 This material is maintained by:

@@ -40,7 +40,7 @@ The easiest way to start contributing is to file an issue to tell us about a spe
 
 ## Your first content contribution
 
-Once, you are feeling more comfortable, you can propose changes to this training material.
+Once you are feeling more comfortable, you can propose changes to this training material.
 
 In [issues](https://github.com/bgruening/training-material/issues) and [project management system](https://github.com/bgruening/training-material/projects), you will find lists of issues to fix and features to changes (with the "newcomer-friendly" label for example). Feel free to solve them.
 
@@ -51,18 +51,18 @@ We strongly recommend you to read and follow Software Carpentry's recommendation
 To manage changes, we use [GitHub flow](https://guides.github.com/introduction/flow/) based on Pull Requests:
 
 1. [Create a fork](https://help.github.com/articles/fork-a-repo/) of this repository on GitHub
-2. Clone your fork of this repository to create a local copy on your computer
+2. Clone your fork of this repository to create a local copy on your computer and init needed submodules (`git submodule init` and `git submodule update`)
 3. Create a new branch in your local copy for each significant change
 4. Commit the changes in that branch
 5. Push that branch to your fork on GitHub
 6. Submit a pull request from that branch to the [master repository](https://github.com/bgruening/training-material)
 7. If you receive feedback, make changes in your local clone and push to your branch on GitHub: the pull request will update automatically
 
-For beginners, the GitHub interface will help you in the process in edition of one file. It will automatically create a fork of this repository where you can safely work and then submit the changes as a pull request.
+For beginners, the GitHub interface will help you in the process of editing a file. It will automatically create a fork of this repository where you can safely work and then submit the changes as a pull request without having to touch the command line.
 
-# How the training material is structured?
+# How is the training material structured?
 
-Each training material is related to a topic. All training material (slides, tutorials, ...) related to a topic is found in a dedicated directory (*e.g.* `Exome-seq` directory contains the material related to exome sequencing analysis). These repositories have to have the following structure (as in `Exome-seq` directory):
+Each training material is related to a topic. All training materials (slides, tutorials, ...) related to a topic are found in a dedicated directory (*e.g.* `Exome-seq` directory contains the material related to exome sequencing analysis). These repositories have to have the following structure (as in `Exome-seq` directory):
 
 ```
 ├── docker
@@ -85,7 +85,7 @@ All images for the slides must be in `images` directory. The images must be in g
 
 ## `tutorials` directory
 
-This directory collect the tutorials related to the topic. The tutorials must
+This directory collects the tutorials related to the topic. The tutorials must
 be written in `markdown` and follow the [`templates/tutorials/tutorial.md` template](templates/tutorials/tutorial.md). The tutorials must be well structured (to help the trainees) with:
 
 1. Header
@@ -127,20 +127,19 @@ The slide decks are in the `slides` directory. The general introduction slide de
 
 For each topic, a flavored Docker image must integrate the needed tools for
 the tutorials. The corresponding image must be based on official Galaxy Docker
-images. We recommend you to use the content of [`templates/docker`](templates/docker) as a template.
+images. We recommend to use the content of [`templates/docker`](templates/docker) as a template.
 
 The `docker` image must also integrate a Galaxy tour from the [`galaxy-tours` repository](https://github.com/galaxyproject/galaxy-tours)
 
 ## `README.md` file
 
-The `README.md` introduces rapidly the topic, summarizes all this information about the training materials (where to find the slides, the tutorials and their
-topics, the Docker image and the input dataset, references, contributors and maintainers) and add the needed references. We recommend you to use the [`templates/README.md`](templates/README.md) as a template.
+The `README.md` rapidly introduces the topic, summarizes all the information about the training materials (where to find the slides, the tutorials and their topics, the Docker image and the input dataset, references, contributors and maintainers) and adds the needed references. We recommend to use the [`templates/README.md`](templates/README.md) as a template.
 
-# How the training material is maintained?
+# How is the training material maintained?
 
 ## Maintainers
 
-Each training topic has one or two maintainers who act as editors. They are responsible for making sure issues and change requests are looked at. They have the final say over what is included in the training material related to the topic. But, they are not responsible for writing training material content or deciding what lessons ought to exist, both coming from the community.
+Each training topic has one or two maintainers who act as editors. They are responsible for making sure issues and change requests are looked at. They have the final say over what is included in the training material related to the topic. But they are not responsible for writing training material content or deciding what lessons ought to exist, both will be coming from the community.
 
 ## Labels
 
