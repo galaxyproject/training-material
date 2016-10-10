@@ -10,8 +10,8 @@ Reference based RNA-seq data analysis
 
 :dart: ***Objectives***
 
-- *Identification of *
-- *Second objective*
+- *Analysis of RNA sequencing data using a reference genome*
+- *Analysis of the differential gene expression*
 - *Third objective*
 - *...*
 
