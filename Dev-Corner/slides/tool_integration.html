@@ -45,17 +45,7 @@
                         <img src="../../shared/images/GTNLogo1000.png" alt="GTNLogo1000"
                         class="no-border" width=30%/>
 
-                        The easiest way to **navigate** this slide deck
-                        is **by hitting `[space]` on your keyboard**
-
-                        You can also navigate with arrow keys, but be careful because some
-                        slides can be nested inside of each other (vertically)
-                    </script>
-                </section>
-
-                <section data-markdown>
-                    <script type="text/template">
-                        # Tool development and integration into Galaxy
+                        ## Tool development and integration into Galaxy
                     </script>
                 </section>
 
@@ -157,11 +147,20 @@
                                     --dpi $dpi
                                 #end if
                                 --size $size
-                                #if $pad
-                                    --pad $pad
-                                #end if
                                 "$input_tree"
-                                ...
+                        ]]></command>
+                        ```
+
+                        <small>If the script is provided near the wrapper xml</small>
+                        ```xml
+                        <command><![CDATA[
+                            python $__tool_directory__/graphlan.py
+                                --format $format
+                                #if $dpi
+                                    --dpi $dpi
+                                #end if
+                                --size $size
+                                "$input_tree"
                         ]]></command>
                         ```
 
@@ -173,7 +172,7 @@
                           ### `command`
                           #### What options to pass?
 
-                          <img src="../images/graphlan_screenshot.png" alt="Galaxy ToolShed"/>
+                          <img src="../images/graphlan_screenshot.png" alt="input"/>
                         </script>
                     </section>
 
@@ -186,7 +185,7 @@
                         <inputs>
                             <param name="dpi" type="..." label="..." optional="True"/>
 
-                            <param name="size" type="..." value="7" label="..." help="..."/>
+                            <param argumement="--size" type="..." value="7" label="..." help="..."/>
                         </inputs>
                         ```
 
@@ -209,16 +208,15 @@
 
                     <section data-markdown>
                         <script type="text/template">
-                        ### `inputs` > `param`
-                        #### Data
+                        ### `inputs` > `param` > `data`
 
-                        <img src="../images/input_data.png" alt="Data inputs"/>
+                        <img src="../images/input_data.png" alt="input data"/>
 
                         ```xml
                         <param name="..." type="data" format="txt" label="..." help="..." />
                         ```
 
-                        <small>[List of possible formats](https://bitbucket.org/galaxy/galaxy-central/src/tip/config/datatypes_conf.xml.sample?fileviewer=file-view-default)</small>
+                        <small>[List of possible formats](https://github.com/galaxyproject/galaxy/blob/dev/config/datatypes_conf.xml.sample)</small>
 
 
                         </script>
@@ -226,16 +224,15 @@
 
                     <section data-markdown>
                         <script type="text/template">
-                        ### `inputs` > `param`
-                        #### Integer/Float
+                        ### `inputs` > `param` > `integer`|`float`
 
-                        <img src="../images/input_integer.png" alt="Integer inputs"/>
+                        <img src="../images/input_integer.png" alt="input integer"/>
 
                         ```xml
                         <param name="..." type="integer" value="7" label="..." help="..."/>
                         ```
 
-                        <img src="../images/input_integer_range.png" alt="Integer input with range"/>
+                        <img src="../images/input_integer_range.png" alt="input integer with range"/>
 
                         ```xml
                         <param name="..." type="float" min="0" max="10" value="1" label="..."
@@ -247,10 +244,9 @@
 
                     <section data-markdown>
                         <script type="text/template">
-                        ### `inputs` > `param`
-                        #### Text
+                        ### `inputs` > `param` > `text`
 
-                        <img src="../images/input_text.png" alt="Text input"/>
+                        <img src="../images/input_text.png" alt="input text"/>
 
                         ```xml
                         <param name="..." type="text" value="" label="..." help="..."/>
@@ -261,10 +257,9 @@
 
                     <section data-markdown>
                         <script type="text/template">
-                        ### `inputs` > `param`
-                        #### Select
+                        ### `inputs` > `param` > `select`
 
-                        <img src="../images/input_select.png" alt="Select input"/>
+                        <img src="../images/input_select.png" alt="input select"/>
 
                         ```xml
                         <param name="..." type="select" label="..." help="...">
@@ -281,10 +276,9 @@
 
                     <section data-markdown>
                         <script type="text/template">
-                        ### `inputs` > `param`
-                        #### Select
+                        ### `inputs` > `param` > `select`
 
-                        <img src="../images/input_select_checkboxes.png" alt="Select input"/>
+                        <img src="../images/input_select_checkboxes.png" alt="input select"/>
 
                         ```xml
                         <param name="..." type="select" display="radio" label="..." help="...">
@@ -300,10 +294,9 @@
 
                     <section data-markdown>
                         <script type="text/template">
-                        ### `inputs` > `param`
-                        #### Select
+                        ### `inputs` > `param` > `select`
 
-                        <img src="../images/input_select_multiple.png" alt="Select input"/>
+                        <img src="../images/input_select_multiple.png" alt="input select"/>
 
                         ```xml
                         <param name="..." type="select" multiple="true" label="..." help="...">
@@ -318,10 +311,9 @@
 
                     <section data-markdown>
                         <script type="text/template">
-                        ### `inputs` > `param`
-                        #### Boolean
+                        ### `inputs` > `param` > `boolean`
 
-                        <img src="../images/input_boolean.png" alt="Select input"/>
+                        <img src="../images/input_boolean.png" alt="input select"/>
 
                         ```xml
                         <param name="..." type="boolean" checked="false" truevalue="--log"
@@ -333,10 +325,72 @@
 
                     <section data-markdown>
                         <script type="text/template">
-                        ### `output`
+                        ### `inputs` > `param` > `conditional`
+
+                        <img src="../images/input_conditional.png" alt="input conditional"/>
+
+                        ```xml
+                        <command interpreter="bash"><![CDATA[
+                            #if $input_format.format == "fasta":
+                                phyml_fasta_id_encode_wrapper.sh $input_format.input $output_tree
+                            #end if
+                            #if $input_format.format == "phylip":
+                                phyml.sh
+                            #end if
+                        ]]></command>
+                        <inputs>
+                           <conditional name="input_format">
+                            <param type="select" name="format" label="Input format">
+                              <option value="phylip">Phylip</option>
+                              <option value="fasta">Fasta</option>
+                            </param>
+                            <when value="phylip">
+                              <param format="phylip" name="input" type="data"  />
+                            </when>
+                            <when value="fasta">
+                              <param format="fasta" name="input" type="data"  />
+                            </when>
+                          </conditional>
+                        </inputs>
+                        ```
+
+                        </script>
+                    </section>
+
+                    <section data-markdown>
+                        <script type="text/template">
+                        ### `inputs` > `param` > `repeat`
+
+                        <img src="../images/input_repeat.png" alt="input repeat"/>
+
+                        ```xml
+                        <command><![CDATA[
+                          #for $i, $s in enumerate( $series )
+                            rank_of_series=$i
+                            input_path=${s.input}
+                            x_colom=${s.xcol}
+                            y_colom=${s.ycol}
+                          #end for
+                        ]]></command>
+
+                        <inputs>
+                          <repeat name="series" title="Series">
+                            <param name="input" type="data" format="tabular" label="Dataset"/>
+                            <param name="xcol" type="data_column" data_ref="input" label="Column for x axis"/>
+                            <param name="ycol" type="data_column" data_ref="input" label="Column for y axis"/>
+                          </repeat>
+                        </inputs>
+                        ```
+
+                        </script>
+                    </section>
+
+                    <section data-markdown>
+                        <script type="text/template">
+                        ### `outputs`
                         #### What files the tool will produce as output?
 
-                        <img src="../images/output.png" alt="Outputs" height=550/>
+                        <img src="../images/output.png" alt="outputs" height=550/>
 
                         </script>
                     </section>
@@ -360,7 +414,7 @@
 
                     <section data-markdown>
                         <script type="text/template">
-                        ### `outputs`
+                        ### `outputs` > `filter`
                         #### Conditional
 
                         ```xml
@@ -379,7 +433,7 @@
                         <script type="text/template">
                         ### `help`
 
-                        <img src="../images/help.png" alt="Select input"/>
+                        <img src="../images/help.png" alt="help"/>
 
                         ```
                         <help><![CDATA[
@@ -406,7 +460,7 @@
                         <script type="text/template">
                         ### `citations`
 
-                        <img src="../images/citations.png" alt="Citations"/>
+                        <img src="../images/citations.png" alt="citations"/>
 
                         ```
                         <citations>
@@ -437,6 +491,158 @@
                         [Details of XML tag sets](https://wiki.galaxyproject.org/Admin/Tools/ToolConfigSyntax)
                         </script>
                     </section>
+
+                    <section data-markdown>
+                        <script type="text/template">
+                        ### Other tags
+                        </script>
+                    </section>
+
+                    <section data-markdown>
+                        <script type="text/template">
+                        ### `stdio`
+
+                        ```
+                        <stdio>
+                          <exit_code range=":-2" level="warning" description="Low disk space" />
+                          <exit_code range="1:" level="fatal"  />
+                          <regex match="Error:"  level="fatal" />
+                        </stdio>
+
+                        ```
+                        </script>
+                    </section>
+
+                    <section data-markdown>
+                        <script type="text/template">
+                        ### `configfiles`
+
+                        <div align="left">
+                          Like `command` allow cheetah code<br/>
+                          <br/>
+                          <ul>
+                            <li>Create a config file</li>
+                            <li>Create a whole script or a module</li>
+                          </ul>
+                        </div>
+
+
+                        </script>
+                    </section>
+
+                    <section data-markdown>
+                        <script type="text/template">
+                        ### `configfiles`
+
+                        ```xml
+                        <command><![CDATA[ mb $script_nexus  ]]></command>
+
+                        <configfiles>
+                        	<configfile name="script_nexus"><![CDATA[
+                        set autoclose = yes;
+                        execute $input_data;
+                        #if str( $data_type.type ) == "nuc“
+                                  lset nst=$data_type.lset_params.lset_Nst;
+                        #end if
+                        mcmcp ngen=$mcmcp_ngen;
+                        mcmc;
+                        quit
+                        	]]></configfile>
+                        </configfiles>
+
+                        ```
+
+                        ```bash
+                        set autoclose = yes;
+                        execute dataset_42.dat;
+                        lset nst=2 ;
+                        mcmcp ngen=100000;
+                        mcmc;
+                        quit
+                        ```
+                        </script>
+                    </section>
+
+                    <section data-markdown>
+                        <script type="text/template">
+                        ### `command` > Reserved Variables
+
+                        ```xml
+                        <command><![CDATA[
+                          ${input_foobar.ext}
+
+                          --search_pfam "${ filter( lambda x: str( x[0] ) == str( $search.pfam_db ), $__app__.tool_data_tables[ 'pfam_databases' ].get_fields() )[0][-1] }"
+
+                          library $__app__.config.user_library_import_dir/$__user_email__/$inputs.library
+
+                          #if isinstance( $input1.datatype, $__app__.datatypes_registry.get_datatype_by_extension('gff').__class__):
+                        ]]></command>
+                        ```
+                        <small>[Reserved Variables List](https://docs.galaxyproject.org/en/latest/dev/schema.html#tool|command)</small>
+                        </script>
+                    </section>
+
+                    <section data-markdown>
+                        <script type="text/template">
+                        ### `macro`
+
+                        <img src="../images/macro.png" alt="macro"/>
+
+                        </script>
+                    </section>
+
+                    <section data-markdown>
+                        <script type="text/template">
+                        ### Dataset collection
+                        </script>
+                    </section>
+
+                    <section data-markdown>
+                        <script type="text/template">
+                        ### Dataset collection
+
+                        # TODO
+
+                        </script>
+                    </section>
+
+                    <section data-markdown>
+                        <script type="text/template">
+                        ### Some Config
+                        </script>
+                    </section>
+
+                    <section data-markdown>
+                        <script type="text/template">
+                        ### `job_conf.xml`
+
+                        <img src="../images/job_conf.xml_1.png" alt="job_conf.xml" height="500"/>
+                        ```bash
+                        blastn -query foo_bar -num_threads 8
+                        ```
+                        </script>
+                    </section>
+
+                    <section data-markdown>
+                        <script type="text/template">
+                        ### `job_conf.xml`
+
+                        <img src="../images/job_conf.xml_2.png" alt="job_conf.xml" height="500"/>
+                        ```bash
+                        blastn -query foo_bar -num_threads 4
+                        ```
+                        </script>
+                    </section>
+
+                    <section data-markdown>
+                        <script type="text/template">
+                        ### `tool_data_table_conf.xml`
+
+                        <img src="../images/tool_data_table_conf.xml.png" alt="tool_data_table_conf.xml"/>
+
+                        </script>
+                    </section>
+
                 </section>
 
                 <!-- FUNCTIONAL TEST -->
@@ -561,7 +767,7 @@
                 <section>
                     <section data-markdown>
                         <script type="text/template">
-                        <img src="../images/planemo-logo.png" alt="Galaxy ToolShed" class="no-border"/>
+                        <img src="../images/planemo-logo.png" alt="Galaxy ToolShed" class="no-border" width=750/>
 
                         > Command-line utilities to assist in building and publishing Galaxy tools.
 
@@ -748,6 +954,7 @@
                     <section data-markdown>
                         <script type="text/template">
                         <img src="../images/conda_logo.png" class="no-border" />
+                        > Package, dependency and environment management
                         </script>
                     </section>
 
@@ -799,6 +1006,37 @@
 
                 </section>
 
+                <!-- GITHUB + TRAVIS.CI + PLANEMO + CONDA -->
+                <section>
+                    <section data-markdown>
+                        <script type="text/template">
+                        <img src="../images/github_logo.png" alt="github" height="150"/><br/>
+                        <img src="../images/travis_ci_logo.png" alt="travis ci" height="150"/><br/>
+                        <img src="../images/planemo-logo.png" alt="planemo" height="100"/><br/>
+                        <img src="../images/conda_logo.png" alt="conda" height="90"/>
+                        </script>
+                    </section>
+
+                    <section data-markdown>
+                        <script type="text/template">
+                        ### GitHub side
+
+                        <img src="../images/github_travis_github.png" alt="Travis in GitHub"/>
+
+                        </script>
+                    </section>
+
+                    <section data-markdown>
+                        <script type="text/template">
+                        ### Travis CI side
+
+                        <img src="../images/github_travis_travis.png" alt="GitHub in Travis"/>
+
+                        </script>
+                    </section>
+
+                </section>
+
                 <!-- PUBLISHING TOOLSHED -->
                 <section>
                     <section data-markdown>
@@ -847,6 +1085,7 @@
                     </section>
                 </section>
 
+                <!-- PUBLISHING TOOLSHED -->
                 <section>
                     <section data-markdown>
                         <script type="text/template">
