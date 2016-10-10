@@ -237,7 +237,45 @@ However, the datasets are too small to get you a good impression of how real dat
 
 # Analysis of the differential expression
 
+To identify exons that are regulated by Pasilla gene, we need to identify genes and exons which are differentially expressed between samples with PS gene depletion and control samples.
+
 ## Count the number of reads per annotated gene
+
+To compare the expression of single genes between different conditions (*e.g.* with or without PS depletion), an essential step is the quantification
+of reads per gene. [**HTseq-count**](http://www-huber.embl.de/users/anders/HTSeq/doc/count.html) is one of the most popular tools for gene quantification.
+
+To quantify the number of reads mapped to a gene, an annotation of the genomic features as the genes is needed.
+
+:pencil2: ***Hands on!***
+
+1. Load the Ensembl gene annotation for *Drosophila melanogaster* ([`Drosophila_melanogaster.BDGP5.78.gtf`](https://zenodo.org/record/61771/files/Drosophila_melanogaster.BDGP5.78.gtf)) from [Zenodo](http://dx.doi.org/10.5281/zenodo.61771) into your current Galaxy history
+
+In case of paired-end reads, the alignments in BAM should be sorted by read name.
+
+:pencil2: ***Hands on!***
+
+1. **Sort BAM dataset** :wrench:: Sort the paired-end BAM file by "Read names" with **Sort BAM dataset**
+
+In principle, the counting of reads overlapping with genomic features is a fairly simple task, but there are some details that need to be decided. **HTseq-count** offers 3 choices ("union", "intersection_strict" and "intersection_nonempty") to handle read mapping to multiple locations, reads overlapping introns, or reads that overlap more than one genomic feature:
+
+![](../images/htseq_count.png)
+
+*[HTseq documentation](http://www-huber.embl.de/users/anders/HTSeq/doc/count.html)*
+
+The recommended mode is "union", which counts overlaps even if a read only shares parts of its sequence with a genomic feature and disregards reads that overlap more than one feature.
+
+:pencil2: ***Hands on!***
+
+1. **HTseq-count** :wrench:: Run **HTseq-count** on the sorted BAM file with
+    - `Drosophila_melanogaster.BDGP5.78.gtf` as "GFF file"
+    - The "Union" mode
+    - A "Minimum alignment quality" of 10
+2. Inspect the result files
+
+    :question: How many reads could not have been assigned to any feature?
+
+    :question: Which feature is the most found feature?
+
 
 ## Analysis of the differential gene expression
 
