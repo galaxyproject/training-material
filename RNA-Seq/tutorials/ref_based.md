@@ -205,14 +205,20 @@ However, the datasets are too small to get you a good impression of how real dat
     - [`GSM461177_untreat_paired_deletions_chr4.bed`](https://zenodo.org/record/61771/files/GSM461177_untreat_paired_deletions_chr4.bed)
     - [`GSM461177_untreat_paired_insertions_chr4.bed`](https://zenodo.org/record/61771/files/GSM461177_untreat_paired_insertions_chr4.bed)
     - [`GSM461177_untreat_paired_junctions_chr4.bed`](https://zenodo.org/record/61771/files/GSM461177_untreat_paired_junctions_chr4.bed)
-2. **IGV** :wrench:: Visualize this BAM file and the three BED files
-
-    You might for example inspect the region on Chromosome 4 between 560 kb to 600 kb (`chr4:560,000-600,000`)
-
-    :question: Which information does each of the BED files contain?
+2. **IGV** :wrench:: Visualize this BAM file and the three BED files, particularly the region on Chromosome 4 between 560 kb to 600 kb (`chr4:560,000-600,000`)
 
     > :+1: **Change the data type from "tabular" to "bed"**
     <br>
+
+    :question: What do the different colors for the mapped read mean when we zoom on `chr4:565,805-569,143`?
+
+    ![](../images/tophat_bam_output_color_reads.png)
+
+    > Check [IGV documentation](http://software.broadinstitute.org/software/igv/AlignmentData) to find some clues
+
+    :question: Which information does the `GSM461177_untreat_paired_junctions_chr4.bed` BED files contain? How is this information represented in IGV? How many reads are mapped in "JUNC00012240"? And how many are mapped over "JUNC00012240"? What do these reads represent?
+
+    :question: Which information does the `GSM461177_untreat_paired_insertions_chr4.bed` and `GSM461177_untreat_paired_deletions_chr4.bed` BED files contain? How is this information represented in IGV? How many reads are mapped and contain the insertion found at 566,827?
 
 3. **IGV** :wrench:: Inspect the results using a **Sashimi plot**
 
@@ -221,9 +227,15 @@ However, the datasets are too small to get you a good impression of how real dat
     > * Select **Sashimi Plot** from the context menu
     <br>
 
-4. **IGV** :wrench:: Look around to find other regions with in interesting junctions, *e.g.* `chr4:870,000-940,000`.
+    ![](../images/tophat_igv_sashimi.png)
 
-# Analysis of the differential gene expression
+    :question: What do the numbered line represent? And the number on these lines?
+
+    > Check [IGV documentation on Sashimi plots](http://software.broadinstitute.org/software/igv/Sashimi) to find some clues
+
+4. **IGV** :wrench:: Look around to find other regions with in interesting junctions, *e.g.* `chr4:870,000-940,000`
+
+# Analysis of the differential expression
 
 ## Count the number of reads per annotated gene
 
