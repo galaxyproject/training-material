@@ -23,7 +23,7 @@ before_script:
 script:
   #- pandoc -s README.md -f markdown -t plain -o README.md_plain
   #- hunspell -d en_GB README.md_plain -p custom.dict -l
-  - find . -name "*.md" -ls -exec vl -t 5 -s 1000 --allow-codes 401 --whitelist http://localhost:8080 {} \;
+  - find . -name "*.md" -not -path "./shared/reveal.js/*" -ls -exec vl -t 5 -s 1000 --allow-codes 401 --whitelist http://localhost:8080 {} \;
 
 after_success:
   - |
