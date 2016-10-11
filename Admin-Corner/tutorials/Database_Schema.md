@@ -16,8 +16,8 @@ Galaxy Database Schema
 
 :heavy_check_mark: ***Requirements***
 
-- *Galaxy introduction*
-- *Deploy a Galaxy Docker Image*
+- [*Galaxy introduction*](../../Introduction)
+- [*Deploy a Galaxy Docker Image*](./galaxy_docker.md)
 - *or Access to a Galaxy server and its PostgreSQL database*
 
 

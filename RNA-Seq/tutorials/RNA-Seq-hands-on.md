@@ -8,7 +8,7 @@ For a more detailed version have a look at: https://github.com/nekrut/galaxy/wik
 
 **Datasets used in this exercise**
 
-This exercise uses RNA-seq data from the study by [Brooks et al. 2011](http://genome.cshlp.org/content/21/2/193.long), in which the pasilla gene in *Drosophila melanogaster* was depleted by RNAi and the effects on splicing events were analysed by RNA-seq. The data is available at NCBI Gene Expression Omnibus (GEO) under accession number [GSE18508](http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE18508). Here, we analyse three treated (pasilla-depleted) and four untreated (wt) samples. It should be highlighted that each sample constitutes a separate biological replicate of the corresponding condition (treated or untreated). Also note that two of the treated and two of the untreated samples are from a paired-end sequencing assay, while the remaining samples are from a single-end sequencing experiment. 
+This exercise uses RNA-seq data from the study by [Brooks et al. 2011](http://genome.cshlp.org/content/21/2/193.long), in which the pasilla gene in *Drosophila melanogaster* was depleted by RNAi and the effects on splicing events were analysed by RNA-seq. The data is available at NCBI Gene Expression Omnibus (GEO) under accession number [GSE18508](http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE18508). Here, we analyse three treated (pasilla-depleted) and four untreated (wt) samples. It should be highlighted that each sample constitutes a separate biological replicate of the corresponding condition (treated or untreated). Also note that two of the treated and two of the untreated samples are from a paired-end sequencing assay, while the remaining samples are from a single-end sequencing experiment.
 
 
 ## Spliced Read Mapping to the Reference Genome
@@ -16,7 +16,7 @@ This exercise uses RNA-seq data from the study by [Brooks et al. 2011](http://ge
 
 - Create a new history for this RNA-seq exercise.
 
-- Import a FASTQ file pair (e.g. GSM461177_untreat_paired_subset_1 and 2) with sample id from [Zenodo](http://dx.doi.org/10.5281/zenodo.61771) (select data file with "fastq" ending). Load them into Galaxy by right-clicking →  copy link location and paste the link in Galaxy → Get Data →  Upload File from your computer →  paste/fetch data → Start. 
+- Import a FASTQ file pair (e.g. GSM461177_untreat_paired_subset_1 and 2) with sample id from [Zenodo](http://dx.doi.org/10.5281/zenodo.61771) (select data file with "fastq" ending). Load them into Galaxy by right-clicking →  copy link location and paste the link in Galaxy → Get Data →  Upload File from your computer →  paste/fetch data → Start.
 
  (Recommended: Select the correct file type ("fastqsanger") and genome ("dm3") directly in the upload dialogue. A lot of downstream programs will require these information. With the upload you can assign the correct settings for all uploaded files at once!)
 
@@ -39,8 +39,8 @@ Preparation:
 
 - TopHat also needs to know two important parameters about the sequencing library: 1) the *strandedness* being *unstranded* or *stranded* (if *stranded* there are many types) and 2) the *inner distance* between the two reads for paired-end data. **These information should usually come with your FASTQ files!!!** If not, try to find them on the site where you downloaded the data or in the corresponding publication.
 
- Another option is to estimate these parameters from a *preliminary mapping* of a *downsampled* file, then run some analysis programs, and eventually redo the actual mapping on the original files with the optimized parameters. 
- 
+Another option is to estimate these parameters from a *preliminary mapping* of a *downsampled* file, then run some analysis programs, and eventually redo the actual mapping on the original files with the optimized parameters. 
+
 
 *Preliminary mapping* (**NOT necessary if you don't need to estimate parameters!!!**):
 
@@ -64,17 +64,17 @@ Preparation:
 
 - Run **TopHat** with the full parameter set to get the best mapping results. Use `paired-end (as individual datasets)` and specify the FASTQ files. Set `Mean Inner Distance` to `112` (or `125`?). Select the built in reference *Drosophila melanogaster* `dm3` genome. Allow `Tophat settings to use` → `Full parameter list`: Set the correct `library type` → `FR First Strand`. Supply `own junction data` → `Yes`, `Use Gene Annotation Model` → `Yes` and select the appropriate `Gene Model Annotations` → `Drosophila_melanogaster.BDGP5.78.gtf` for your organism to enable transcriptome alignment. Enable `coverage-based search for junctions` → `Yes (--coverage-search)` for novel splice junctions to increase sensitivity.  The TopHat algorithm splits reads into segments to map the reads across splice junctions. The default `minimum length of read segments` is 25 by default, but a value of `18` seems to be a more appropriate value for this input data. Why?
 
- 
+
 **Step 3: Inspecting TopHat results**
 
-- **TopHat** returns a BAM file with the mapped reads and three bed files containing splice junctions, insertions and deletions. 
+- **TopHat** returns a BAM file with the mapped reads and three bed files containing splice junctions, insertions and deletions.
 
 - The mapping exercise worked for you? Great! However, the datasets are too small to get you a good impression of how real data looks like.
 
 - Please therefore import the following 4 files from Tophat outputs into your history (`GSM461177_untreat_paired_chr4.bam`, `GSM461177_untreat_paired_deletions_chr4.bed`,`GSM461177_untreat_paired_insertions_chr4.bed`, `GSM461177_untreat_paired_junctions_chr4.bed`) from [Zenodo](http://dx.doi.org/10.5281/zenodo.61771) by right-clicking →  copy link location and paste the link in Galaxy → Get data → Upload File from your computer → paste/fetch data → Start.
  These files are restricted to reads that map to chr4 of Drosophila dm3.
 
-- Visualise this bam file and the three bed files in **IGV**. You might for example inspect the region on chr4 between 560 kb to 600 kb (`chr4:560,000-600,000`). Which information does each of the bed files contain? You may have to change the data type from "tabular" to "bed" (use the pencil button). 
+- Visualise this bam file and the three bed files in **IGV**. You might for example inspect the region on chr4 between 560 kb to 600 kb (`chr4:560,000-600,000`). Which information does each of the bed files contain? You may have to change the data type from "tabular" to "bed" (use the pencil button).
 - Inspect the results using a **Sashimi plot** (right-click on the bam file → select `Sashimi Plot` from the context menu). Look around to find other regions with in interesting junctions, e.g. `chr4:870,000-940,000`.
 
 
@@ -112,7 +112,7 @@ In our example, we have samples with two varying factors: (1) condition (either 
 
 - Inspect the result files. The **DESeq2** tool page describes the content of the columns in the two tabular output files. The file with the independent filtering results should be used for further downstream analysis as it excludes genes with only few read counts as these genes will not be called as significantly differentially expressed.
 
-- **Filter** for all genes from the DESeq2 result file that have a significant adjusted p-value of 0.05 or below (**Filter** tool: condition *c7<=0.05*). Please note that the output was already sorted by adjusted p-value. 
+- **Filter** for all genes from the DESeq2 result file that have a significant adjusted p-value of 0.05 or below (**Filter** tool: condition *c7<=0.05*). Please note that the output was already sorted by adjusted p-value.
 
 - Similarly, separate the up and down regulated genes (3rd column contains fold changes).
 
@@ -127,14 +127,14 @@ In our example, we have samples with two varying factors: (1) condition (either 
 -------------------------------------------
 
 <a name="literature"/></a>
-##Useful literature 
+##Useful literature
 
 <a name="chipseq"/></a>
 ###ChIP-seq in general:
 
 **Nice graphical overview of the RNA-seq processing and analysis steps:** http://figshare.com/articles/RNA_seq_Workflows_and_Tools/662782
 
-**Auer and Doerge (2010):** [Statistical Design and Analysis of RNA Sequencing Data](http://www.genetics.org/content/185/2/405), (doi:10.1534/genetics.110.114983) - Insights into proper planning of your RNA-seq run! Read **BEFORE** your RNA-seq experiment! 
+**Auer and Doerge (2010):** [Statistical Design and Analysis of RNA Sequencing Data](http://www.genetics.org/content/185/2/405), (doi:10.1534/genetics.110.114983) - Insights into proper planning of your RNA-seq run! Read **BEFORE** your RNA-seq experiment!
 
 **Ian Korf (2013):**[Genomics: the state of the art in RNA-seq analysis](http://www.ncbi.nlm.nih.gov/pubmed/24296473), (doi:10.1038/nmeth.2735) - A refreshingly honest view on the non-trivial aspects of RNA-seq analysis
 

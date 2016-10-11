@@ -1,7 +1,7 @@
 Mapping of NGS data
 ===================
 
-After [quality control](../NGS-QC/README.md), mapping sequences on reference genomes is the second step of most NGS data analysis process. 
+After [quality control](../NGS-QC/README.md), mapping sequences on reference genomes is the second step of most NGS data analysis process.
 
 # Slides
 
@@ -9,7 +9,7 @@ Several deck of slides are available for this topic:
 
 - [General introduction about mapping](http://bgruening.github.io/training-material/NGS-mapping/slides/)
 - Slide deck related to the tutorials:
-    - [Dive into mapping](http://bgruening.github.io/training-material/Dev-Corner/slides/dive_into_mapping.html)
+    - [Dive into mapping](http://bgruening.github.io/training-material/NGS-mapping/slides/dive_into_mapping.html)
 
 # Tutorials
 
@@ -30,7 +30,7 @@ docker run -d -p 8080:80 bgruening/galaxy-ngs-mapping-training
 ```
 
 It will launch a flavored Galaxy instance available on
-[http://localhost:8080](http://localhost:8080).
+[http://localhost:8080 ](http://localhost:8080).
 
 # References
 
