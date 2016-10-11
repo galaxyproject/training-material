@@ -393,9 +393,32 @@ For more information about **DESeq2** and its outputs, you can have a look at [*
 
 ## Analysis of the functional enrichment among differentially expressed genes
 
+We have extracted genes that are differentially expressed in treated (with PS gene depletion) samples compared to untreated samples. We would like to know functional enrichment among the differentially expressed genes.
+
+The Database for Annotation, Visualization and Integrated Discovery ([DAVID](https://david.ncifcrf.gov/)) provides a comprehensive set of functional annotation tools for investigators to understand biological meaning behind large list of genes.
+
+We use then DAVID to identify functional annotations of the up regulated genes and the down regulated genes.
+
+:pencil2: ***Hands on!***
+
+1. **Select first lines from a dataset** :wrench:: Extract the first 300 lines of the 2 datasets generated previously (up regulated genes and down regulated genes)
+2. **DAVID** :wrench:: Run **DAVID** on these files with
+    - First column as "Column with identifiers"
+    - "FLYBASE_GENE_ID" as "Identifier type"
+
+    The output of the **DAVID** tool is a HTML file with a link to the DAVID website.
+
+3. Inspect the Functional Annotation Chart
+
+    :question: What functional categories are the most represented? How to interpret that?
+
+4. Inspect the Functional Annotation Clusterings
+
+    :question: What functional annotations are the first clusters related to? How to interpret that?
+
+
 # Conclusion
 
-Conclusion about the technical key points. And then relation between the technics and the biological question to end with a global view.
 
 :grey_exclamation: ***Key Points***
 
