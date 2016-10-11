@@ -276,8 +276,120 @@ The recommended mode is "union", which counts overlaps even if a read only share
 
     :question: Which feature is the most found feature?
 
-
 ## Analysis of the differential gene expression
+
+In previous section, we counted only reads that mapped to Chromosome 4 for only one sample. To be able to identify differentially gene expression induced by PS depletion, all datasets (3 treated and 4 untreated) must be analyzed with the similar process.
+
+You can export a workflow from the previous steps and rerun it on the 7 samples whose the raw sequences are available on [Zenodo](http://dx.doi.org/10.5281/zenodo.61771). For time saving, we run the previous steps for you and obtain 7 count files.
+
+:pencil2: ***Hands on!***
+
+1. Create a new history
+2. Import the seven count files from [Zenodo](http://dx.doi.org/10.5281/zenodo.61771)
+
+These files contains for each gene the number of sequences reads mapped to it. We could compare directly the files and then having the differential gene expression. But the number of sequenced reads mapped to a gene depends on:
+
+- Its own expression level
+- Its length
+- The sequencing depth
+- The expression of all other genes within the sample
+
+Either for within or inter-sample comparison, the counts need to be normalized. We can then use the Differential Gene Expression (DGE) analysis, whose two basic tasks are:
+
+- Estimate the magnitude of expression differences between the samples
+- Estimate the significance of expression differences between the samples
+
+For this expression is estimated from read counts and attempts are made to correct for variability in measurements using replicates that are absolutely essential accurate results. Indeed, [**DESeq2**](https://bioconductor.org/packages/release/bioc/html/DESeq2.html) is great tool for DGE analysis. It takes read counts produced by **HTseq-count** and apply size factor normalization:
+
+- Computation for each gene of the geometric mean of read counts across all samples
+- Division of every gene count by the geometric mean
+- Use of the median of these ratios as sample's size factor for normalization
+
+Multiple factors can then been incorporated in the the analysis. In our example, we have samples with two varying factors:
+
+- Condition (either treated or untreated)
+- Sequencing type (paired-end or single-end)
+
+A multi-factor analysis allows us to assess the effect of the treatment taking also the sequencing type into account.
+
+:pencil2: ***Hands on!***
+
+1. **DESeq2** :wrench:: Run **DESeq2** with:
+    - "Condition" as first factor with "treated" and "untreated" as levels and selection of count files corresponding to both levels
+    - "Sequencing" as first factor with "PE" and "SE" as levels and selection of count files corresponding to both levels
+
+    > :bulb: File names have all information needed
+
+The first output of **DESeq2** is a tabular file. The columns are:
+
+1.	Gene Identifiers
+2.	Mean normalised counts, averaged over all samples from both conditions
+3.	Logarithm (to basis 2) of the fold change
+
+    The log2 fold changes are based on primary factor level 1 vs. factor level 2. The order of factor levels is then important. For example, for the factor 'Condition' given in above table, DESeq2 computes fold changes of 'treated' samples against 'untreated', i.e. the values correspond to up or down regulations of genes in Treated samples.
+
+4.	standard error estimate for the log2 fold change estimate
+5.	[Wald](https://en.wikipedia.org/wiki/Wald_test) statistic
+6.	*p*-value for the statistical significance of this change
+7.	*p*-value adjusted for multiple testing with the Benjamini-Hochberg procedure which controls false discovery rate ([FDR](https://en.wikipedia.org/wiki/False_discovery_rate))
+
+:pencil2: ***Hands on!***
+
+1. **Filter** :wrench:: Run **Filter** to extract genes with a significant change in gene expression (adjusted *p*-value equal or below 0.05) between treated and untreated sample
+
+    :question: How many genes have a significant change in gene expression between conditions?
+
+    > :bulb: The file with the independent filtering results can be used for further downstream analysis as it excludes genes with only few read counts as these genes will not be called as significantly differentially expressed.
+
+2. **Filter** :wrench:: Extract genes that are significantly up regulated and those down regulated in treated samples
+
+    :question: Is there more up regulated or down regulated genes in treated samples?
+
+3. **Summary Statistics for any numerical column** :wrench: and **Histogram of a numeric column** :wrench:: Build the log2 fold change distribution of up regulated and down regulated genes
+
+    :question: Are up regulated genes more expressed than the down regulated genes? Are the distribution similar?
+
+In addition to the list of genes, **DESeq2** outputs a graphical summary of the result, useful to evaluate the quality of the experiment:
+
+1. Histogram of *p*-values for all tests
+
+    ![](../images/DeSeq2_histogram.png)
+
+    The area shaded in blue indicates the subset of the tests that pass the filtering after Benjamini-Hochberg procedure, the area in khaki those that do not pass.
+
+    :question: Why are some tests filtered? Does it improve the *p*-value distribution?
+
+2. [MA plot](https://en.wikipedia.org/wiki/MA_plot): global view of the relationship between the expression change between conditions (log ratios, M), the average expression strength of the genes (average mean, A) and the ability of the algorithm to detect differential gene expression: genes that pass the significance threshold (adjusted p-value < 0.1) are colored in red
+
+    ![](../images/DESeq2_MA_plot.png)
+
+    :question: Are the expression changes symmetrically dispersed? Is it similar to previous observations?
+
+    :question: Why can we observe a shrinkage of fold changes for genes with low counts?
+
+3. Principal Component Analysis ([PCA](https://en.wikipedia.org/wiki/Principal_component_analysis)) and the first two axes
+
+    ![](../images/DESeq2_PCA.png)
+
+    Each replicate is plotted as an individual data point. This type of plot is useful for visualizing the overall effect of experimental covariates and batch effects.
+
+    :question: What is the first axis separating? And the second axis?
+
+4. Heatmap of sample-to-sample distance matrix: overview over similarities and dissimilarities between samples
+
+    ![](../images/DESeq2_heatmap.png)
+
+    :question: How are grouped the samples? Which samples are most similar?
+
+5. Dispersion estimates: gene-wise estimates
+(black), the fitted values (red), and the final maximum a posteriori estimates used in testing
+(blue)
+
+    ![](../images/DESeq2_dispersion.png)
+
+    > This dispersion plot is typical, with the final estimates shrunk from the gene-wise estimates towards the fitted estimates. Some gene-wise estimates are flagged as outliers and not shrunk towards the fitted value. The amount of shrinkage can be more or less than seen here, depending on the sample size, the number of coefficients, the row mean and the variability of the gene-wise estimates.
+
+For more information about **DESeq2** and its outputs, you can have a look at [**DESeq2** documentation](https://www.bioconductor.org/packages/devel/bioc/vignettes/DESeq2/inst/doc/DESeq2.pdf).
 
 ## Analysis of the functional enrichment among differentially expressed genes
 
