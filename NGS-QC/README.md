@@ -9,7 +9,7 @@ Several deck of slides are available for this topic:
 
 - [General introduction about quality control](http://bgruening.github.io/training-material/NGS-QC/slides/)
 - Slide deck related to the tutorials:
-    - [Dive into quality control](http://bgruening.github.io/training-material/Dev-Corner/slides/dive_into_qc.html)
+    - [Dive into quality control](http://bgruening.github.io/training-material/NGS-QC/slides/dive_into_qc.html)
 
 # Tutorials
 
@@ -30,7 +30,7 @@ docker run -d -p 8080:80 bgruening/galaxy-ngs-qc-training
 ```
 
 It will launch a flavored Galaxy instance available on
-[http://localhost:8080](http://localhost:8080).
+[http://localhost:8080 ](http://localhost:8080).
 
 # References
 

@@ -33,7 +33,7 @@ docker run -d -p 8080:80 <name-of-docker-image>
 ```
 
 It will launch a flavored Galaxy instance available on
-[http://localhost:8080](http://localhost:8080).
+[http://localhost:8080 ](http://localhost:8080).
 
 # References
 
