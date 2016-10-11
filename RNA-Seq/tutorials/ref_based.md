@@ -412,9 +412,11 @@ We use then DAVID to identify functional annotations of the up regulated genes a
 
     :question: What functional annotations are the first clusters related to? How to interpret that?
 
-
 # Conclusion
 
+In this tutorial, we analyze real RNA sequencing data to extract useful information, such as which genes are up- or down-regulated by depletion of Pasilla gene and which genes are regulated by Pasilla gene. To answer these questions, we analyze RNA sequence datasets using a Reference based RNA-seq data analysis approach. This approach can be sum up with the following scheme:
+
+![](../images/ref_based_workflow.png)
 
 :grey_exclamation: ***Key Points***
 
