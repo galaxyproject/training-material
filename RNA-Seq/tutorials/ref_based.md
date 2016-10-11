@@ -4,23 +4,19 @@ Reference based RNA-seq data analysis
 :grey_question: ***Questions***
 
 - *What are the effects of Pasilla (PS) gene depletion on splicing events?*
-- *Second question*
-- *Third question*
-- *...*
+- *How to analyze RNA sequencing data using a reference genome?*
 
 :dart: ***Objectives***
 
 - *Analysis of RNA sequencing data using a reference genome*
 - *Analysis of the differential gene expression*
-- *Third objective*
-- *...*
+- *Identification of functional enrichment among differentially expressed genes*
 
 :heavy_check_mark: ***Requirements***
 
 - *Galaxy introduction*
 - *Quality control*
 - *Mapping*
-- *...*
 
 :hourglass: ***Time estimation*** *1d/3h/6h*
 
@@ -28,7 +24,7 @@ Reference based RNA-seq data analysis
 
 # Introduction
 
-In this exercise, we use RNA-seq data from the study by [Brooks et al. 2011](http://genome.cshlp.org/content/21/2/193.long). In this study, the Pasilla (PS) gene, *Drosophila* homologue of the Human splicing regulators Nova-1 and Nova-2 Proteins, was depleted in *Drosophila melanogaster* by RNAi. The authors wanted to identify exons that are regulated by Pasilla gene.
+In [Brooks et al. 2011](http://genome.cshlp.org/content/21/2/193.long) study, the Pasilla (PS) gene, *Drosophila* homologue of the Human splicing regulators Nova-1 and Nova-2 Proteins, was depleted in *Drosophila melanogaster* by RNAi. The authors wanted to identify exons that are regulated by Pasilla gene using RNA sequencing data.
 
 Total RNA was isolated and used for preparing either single-end or paired-end RNA-seq libraries for 3 treated (PS depleted) samples and 4 untreated samples . These libraries were sequenced to obtain a collection of RNA sequencing reads for each sample. The effects of Pasilla gene depletion on splicing events can then be analyzed. The genome of *Drosophila melanogaster* is known and can be used as reference genome to ease this analysis.  
 
@@ -37,9 +33,9 @@ Reference based RNA-seq data analysis is ...
 
 In this tutorial, we will analyze the data with:
 
-1. Pretreatments
-2. Mapping
-3. ...
+1. [Pretreatments](#pretreatments)
+2. [Mapping](#mapping)
+3. [Analysis of the differential expression](#analysis-of-the-differential-expression)
 
 # Pretreatments
 
