@@ -14,13 +14,13 @@ If you have any questions, you can reach us using the [Gitter chat](https://gitt
     - [Reporting mistakes or errors](#reporting-mistakes-or-errors)
     - [Your first content contribution](#your-first-content-contribution)
     - [Pull Requests](#pull-requests)
-- [How the training material is structured?](#how-the-training-material-is-structured)
+- [How is the training material structured?](#how-the-training-material-is-structured)
     - [`images` directory](#images-directory)
     - [`tutorials` directory](#tutorials-directory)
     - [`slides` directory](#slides-directory)
     - [`docker` directory](#docker-directory)
     - [`README.md` file](#README.md-file)
-- [How the training material is maintained?](#how-the-training-material-is-maintained)
+- [How is the training material maintained?](#how-the-training-material-is-maintained)
     - [Maintainers](#maintainers)
     - [Labels](#labels)
 
@@ -42,9 +42,9 @@ The easiest way to start contributing is to file an issue to tell us about a spe
 
 Once you are feeling more comfortable, you can propose changes to this training material.
 
-In [issues](https://github.com/bgruening/training-material/issues) and [project management system](https://github.com/bgruening/training-material/projects), you will find lists of issues to fix and features to changes (with the "newcomer-friendly" label for example). Feel free to solve them.
+In [issues](https://github.com/bgruening/training-material/issues) and [project management system](https://github.com/bgruening/training-material/projects), you will find lists of issues to fix and features to change (with the "newcomer-friendly" label for example). Feel free to solve them.
 
-We strongly recommend you to read and follow Software Carpentry's recommendations on [lesson design](https://swcarpentry.github.io/lesson-example/01-design/) and [lesson writing](http://swcarpentry.github.io/instructor-training/19-lessons/) if you planned to add or change some training material, and also to check the [structure of the training material](#how-the-training-material-is-structured).
+We strongly recommend you read and follow Software Carpentry's recommendations on [lesson design](https://swcarpentry.github.io/lesson-example/01-design/) and [lesson writing](http://swcarpentry.github.io/instructor-training/19-lessons/) if you plan to add or change some training materials, and also to check the [structure of the training material](#how-the-training-material-is-structured).
 
 ## Pull Requests
 
@@ -56,13 +56,13 @@ To manage changes, we use [GitHub flow](https://guides.github.com/introduction/f
 4. Commit the changes in that branch
 5. Push that branch to your fork on GitHub
 6. Submit a pull request from that branch to the [master repository](https://github.com/bgruening/training-material)
-7. If you receive feedback, make changes in your local clone and push to your branch on GitHub: the pull request will update automatically
+7. If you receive feedback, make changes in your local clone and push them to your branch on GitHub: the pull request will update automatically
 
 For beginners, the GitHub interface will help you in the process of editing a file. It will automatically create a fork of this repository where you can safely work and then submit the changes as a pull request without having to touch the command line.
 
 # How is the training material structured?
 
-Each training material is related to a topic. All training materials (slides, tutorials, ...) related to a topic are found in a dedicated directory (*e.g.* `Exome-seq` directory contains the material related to exome sequencing analysis). These repositories have to have the following structure (as in `Exome-seq` directory):
+Each training material is related to a topic. All training materials (slides, tutorials, ...) related to a topic are found in a dedicated directory (*e.g.* `Exome-seq` directory contains the material related to exome sequencing analysis). These repositories have to have the following structures (as in `Exome-seq` directory):
 
 ```
 ├── docker
@@ -77,11 +77,11 @@ Each training material is related to a topic. All training materials (slides, tu
 
 ## `images` directory
 
-The `images` directory collect all images/pictures needed for the training materials related to the topic, *i.e* pictures for the slides or the tutorials.
+The `images` directory collects all images/pictures needed for the training materials related to the topic, *i.e* pictures for the slides or the tutorials.
 
 Images shared between several topics are in the `shared/images` directory at the root.
 
-All images for the slides must be in `images` directory. The images must be in good quality. The sources (`svg` or other) of the images must also be added to the `images` directory. We encourage you to use [yEd](http://www.yworks.com/products/yed) to easily generate diagrams and [Inkscape](https://inkscape.org/en/) for any other image.
+All images for the slides must be in `images` directory. The images must be in good quality. The sources (`svg` or other) of the images must also be added to the `images` directory. We encourage you to use [yEd](http://www.yworks.com/products/yed) to easily generate diagrams and [Inkscape](https://inkscape.org/en/) for any other images.
 
 ## `tutorials` directory
 
@@ -125,7 +125,7 @@ The slide decks are in the `slides` directory. The general introduction slide de
 
 ## `docker` directory
 
-For each topic, a flavored Docker image must integrate the needed tools for
+For each topic, a flavored Docker image must integrate the tools needed for
 the tutorials. The corresponding image must be based on official Galaxy Docker
 images. We recommend to use the content of [`templates/docker`](templates/docker) as a template.
 
@@ -153,7 +153,7 @@ This repository is using the following labels for issues, pull requests and proj
     - `question`: often turn into discussion threads
 - Status
     - `help-wanted`: requests for assistance
-    - `newcomer-friendly`: suitable for people who wants to start contributing
+    - `newcomer-friendly`: suitable for people who want to start contributing
     - `work-in-progress`: someone is working on this
     - `review-needed`: requests for review
 - Topic: each topic has its own label to easily relate the issue or pull request to the topic, but the label `template-and-tools` is used for questions/issues/pull requests related to the templates and tools rather than the lessons themselves.
