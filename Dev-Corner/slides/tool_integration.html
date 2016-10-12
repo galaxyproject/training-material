@@ -45,8 +45,17 @@
                         <img src="../../shared/images/GTNLogo1000.png" alt="GTNLogo1000"
                         class="no-border" width=30%/>
 
-                        ## Tool development and integration into Galaxy
+                        The easiest way to **navigate** this slide deck
+                        is **by hitting `[space]` on your keyboard**
 
+                        You can also navigate with arrow keys, but be careful because some
+                        slides can be nested inside of each other (vertically)
+                    </script>
+                </section>
+
+                <section data-markdown>
+                    <script type="text/template">
+                        # Tool development and integration into Galaxy
                     </script>
                 </section>
 
@@ -116,20 +125,46 @@
 
                     <section data-markdown>
                         <script type="text/template">
-                              ### Questions
+                            ### <i class="fa fa-pencil" aria-hidden="true"></i> Hands-on
 
-                              - How to "wrap" / interface a tool for Galaxy
+                            <img src="../images/exercise.png" alt="exercise"/>
 
                         </script>
                     </section>
 
                     <section data-markdown>
                         <script type="text/template">
-                            ### Objectives
+                            ### <i class="fa fa-pencil" aria-hidden="true"></i> Hands-on
+
+                            #### The Goal
+                            Developing a wrapper for Seqtk
+
+                            <small>A tool for processing sequence data in FASTA and FASTQ files</small>
+
+                        </script>
+                    </section>
+
+                    <section data-markdown>
+                        <script type="text/template">
+                            ### <i class="fa fa-question-circle" aria-hidden="true"></i> Questions
+
+                            - What is a tool for Galaxy?
+                            - How to build a tool/wrapper with the good practices?
+                            - How deal with the tool environment?
+                            - How to publish a tool?
+
+                        </script>
+                    </section>
+
+                    <section data-markdown>
+                        <script type="text/template">
+                            ### <i class="fa fa-bullseye" aria-hidden="true"></i> Objectives
 
                             - Discover what is a wrapper and its structure
                             - Use the Planemo utilities to develop a good wrapper
                             - Deal with the dependencies
+                            - Set functional tests
+                            - Publish tools in the Toolshed
 
                         </script>
                     </section>
@@ -213,17 +248,17 @@
                     <section data-markdown>
                         <script type="text/template">
                             ### `command`
-                            #### What options to pass?
+                            #### Pass parameters?
 
-                            <img src="../images/graphlan_screenshot.png" alt="input"/>
+                            <img src="../images/graphlan_screenshot.png" height=500 alt="input"/>
 
                         </script>
                     </section>
 
                     <section data-markdown>
                         <script type="text/template">
-                            ### `inputs` > `param` -> `command`
-                            #### What options to pass?
+                            ### `inputs` > `param` &lt;-> `command`
+                            #### Pass parameters?
 
                             ```xml
                             <inputs>
@@ -233,7 +268,7 @@
                             </inputs>
                             ```
 
-                            Directly linked to `<command>`
+                            #### Directly linked to `<command>`
 
                             ```xml
                             <command><![CDATA[
@@ -370,7 +405,7 @@
                         <script type="text/template">
                             ### `inputs` > `param` > `conditional`
 
-                            <img src="../images/input_conditional.png" alt="input conditional"/>
+                            <img src="../images/input_conditional.png" height="120" alt="input conditional" />
 
                             ```xml
                             <command interpreter="bash"><![CDATA[
@@ -404,7 +439,7 @@
                         <script type="text/template">
                             ### `inputs` > `param` > `repeat`
 
-                            <img src="../images/input_repeat.png" alt="input repeat"/>
+                            <img src="../images/input_repeat.png" height="190" alt="input repeat"/>
 
                             ```xml
                             <command><![CDATA[
@@ -536,24 +571,6 @@
 
                     <section data-markdown>
                         <script type="text/template">
-                            ### Wrapper directory tree
-
-                            ```
-                            graphlan/
-                            ├── graphlan.xml
-                            ├── test_data/
-                                ├── input_tree.txt
-                                ├── png_image.png
-
-                            ```
-
-                            [Details of XML tag sets](https://wiki.galaxyproject.org/Admin/Tools/ToolConfigSyntax)
-
-                        </script>
-                    </section>
-
-                    <section data-markdown>
-                        <script type="text/template">
                             <img src="../images/planemo-logo.png" alt="Planemo" class="no-border" height=25/>
                             #### Building Galaxy Tools
 
@@ -564,7 +581,7 @@
 
                     <section data-markdown>
                         <script type="text/template">
-                            ### Hands-on
+                            ### <i class="fa fa-pencil" aria-hidden="true"></i> Hands-on
 
                             <img src="../images/exercise.png" alt="exercise"/>
 
@@ -573,37 +590,52 @@
 
                     <section data-markdown>
                         <script type="text/template">
-                            ### Hands-on
+                            ### <i class="fa fa-pencil" aria-hidden="true"></i> Hands-on
 
-                            #### The Goal
-                            A wrapper for Seqtk, a tool for processing sequence data in FASTA and FASTQ files.
+                            #### Before: install Seqtk
+                            *No brain needed*
+                            ```bash
+                            planemo conda_init
 
-                        </script>
-                    </section>
-
-                    <section data-markdown>
-                        <script type="text/template">
-                            ### Hands-on
-
-                            #### Before: install Seqtk and test it
-                            <small>Not need brain</small>
-                            - `planemo conda_init`
-                            - `conda install seqtk`
-                            - `wget https://raw.githubusercontent.com/galaxyproject/galaxy-test-data/master/2.fastq`
-                            - `seqtk seq -A 2.fastq > 2.fasta`
-                            - `cat 2.fasta`
+                            conda install seqtk
+                            ```
 
                         </script>
                     </section>
 
                     <section data-markdown>
                         <script type="text/template">
-                            ### Hands-on
+                            ### <i class="fa fa-pencil" aria-hidden="true"></i> Hands-on
+
+                            #### Before: observe and test Seqtk
+
+                            ```bash
+                            seqtk
+
+                            seqtk seq
+
+                            wget https://raw.githubusercontent.com/galaxyproject/
+                                 galaxy-test-data/master/2.fastq
+
+                            cat 2.fastq
+
+                            seqtk seq -A 2.fastq > 2.fasta
+
+                            cat 2.fasta
+                            ```
+
+                        </script>
+                    </section>
+
+                    <section data-markdown>
+                        <script type="text/template">
+                            ### <i class="fa fa-pencil" aria-hidden="true"></i> Hands-on
 
                             #### Steps
-                            1. Use `planemo tool_init` and fill the template
-                            2. Use `planemo lint` until all is green
-                            3. Use `planemo serve --install_galaxy` to display your tool form
+                            1. Init the wrapper with `planemo tool_init`
+                            2. Fill the template
+                            3. Test the template with `planemo lint`
+                            4. Display the tool with `planemo serve --install_galaxy`
 
                         </script>
                     </section>
@@ -614,7 +646,7 @@
                 <section>
                     <section data-markdown>
                         <script type="text/template">
-                            ## Funtional tests
+                            ## Functional tests
                         </script>
                     </section>
 
@@ -680,7 +712,7 @@
                             </test>
                             ```
 
-                            <small>[https://docs.galaxyproject.org/en/latest/dev/schema.html#tool|tests|test](https://docs.galaxyproject.org/en/latest/dev/schema.html#tool|tests|test)</small>
+                            <small>[Complete information](https://docs.galaxyproject.org/en/latest/dev/schema.html#tool|tests|test)</small>
 
                         </script>
                     </section>
@@ -692,7 +724,7 @@
 
                             ```xml
                             <test>
-                                <output ...
+                                &lt;output ...
                                     md5
                                     compare
                                         diff
@@ -702,7 +734,7 @@
 
                             ```
 
-                            <small>[https://docs.galaxyproject.org/en/latest/dev/schema.html#tool|tests|test|output|assert_contents](https://docs.galaxyproject.org/en/latest/dev/schema.html#tool|tests|test|output|assert_contents)</small>
+                            <small>[Complete information](https://docs.galaxyproject.org/en/latest/dev/schema.html#tool|tests|test|output)</small>
 
                         </script>
                     </section>
@@ -722,10 +754,28 @@
                                       <has_text />
                                       <...>
                           ```
-                          <small>[https://docs.galaxyproject.org/en/latest/dev/schema.html#tool|tests|test|output|assert_contents](https://docs.galaxyproject.org/en/latest/dev/schema.html#tool|tests|test|output|assert_contents)</small>
+                          <small>[Complete information](https://docs.galaxyproject.org/en/latest/dev/schema.html#tool|tests|test|output|assert_contents)</small>
 
                         </script>
                     </section>
+
+                    <section data-markdown>
+                        <script type="text/template">
+                            ### Wrapper directory tree
+
+                            ```
+                            graphlan/
+                            ├── graphlan.xml
+                            ├── wrapper.py
+                            ├── test_data/
+                                ├── input_tree.txt
+                                ├── png_image.png
+
+                            ```
+
+                        </script>
+                    </section>
+
 
                     <section data-markdown>
                         <script type="text/template">
@@ -739,7 +789,7 @@
 
                     <section data-markdown>
                         <script type="text/template">
-                            ### Hands-on
+                            ### <i class="fa fa-pencil" aria-hidden="true"></i> Hands-on
 
                             <img src="../images/exercise.png" alt="exercise"/>
 
@@ -748,7 +798,7 @@
 
                     <section data-markdown>
                         <script type="text/template">
-                            ### Hands-on
+                            ### <i class="fa fa-pencil" aria-hidden="true"></i> Hands-on
 
                             #### The Goal
                             At functional test to the Seqtk wrapper for Seqtk
@@ -758,7 +808,7 @@
 
                     <section data-markdown>
                         <script type="text/template">
-                            ### Hands-on
+                            ### <i class="fa fa-pencil" aria-hidden="true"></i> Hands-on
 
                             #### Steps
                             1. Fill a `<test>` tag using the file you generate previously with `seqtk`
@@ -779,7 +829,7 @@
                     <section data-markdown>
                         <script type="text/template">
                             ### Dependencies
-                            #### What about tool installation?
+                            #### How Galaxy will deal with dependencies?
 
                             <img src="../images/galaxy_instance.png" alt="Galaxy instance" height=500/>
 
@@ -862,7 +912,7 @@
                             <img src="../images/conda_logo.png" class="no-border"  height=25 />
                             #### Miniconda
 
-                            <img src="../images/miniconda_vs_anaconda.png" alt="Miniconda" class="no-border" height="500"/>
+                            <img src="../images/miniconda_vs_anaconda.png" alt="Miniconda" class="no-border" height="450"/>
 
                         </script>
                     </section>
@@ -879,7 +929,7 @@
 
                     <section data-markdown>
                         <script type="text/template">
-                            ### Hands-on
+                            ### <i class="fa fa-pencil" aria-hidden="true"></i> Hands-on
 
                             <img src="../images/exercise.png" alt="exercise"/>
 
@@ -888,7 +938,7 @@
 
                     <section data-markdown>
                         <script type="text/template">
-                            ### Hands-on
+                            ### <i class="fa fa-pencil" aria-hidden="true"></i> Hands-on
 
                             #### The Goal
                             Use Conda package installation during the functional test of the wrapper for Seqtk
@@ -898,7 +948,7 @@
 
                     <section data-markdown>
                         <script type="text/template">
-                            ### Hands-on
+                            ### <i class="fa fa-pencil" aria-hidden="true"></i> Hands-on
 
                             #### Before
                             1. `conda uninstall seqtk`
@@ -908,7 +958,7 @@
 
                     <section data-markdown>
                         <script type="text/template">
-                            ### Hands-on
+                            ### <i class="fa fa-pencil" aria-hidden="true"></i> Hands-on
 
                             #### Steps
                             1. Fill a `<requirement>` tag to target a `seqtk` conda package
@@ -952,141 +1002,13 @@
 
                     <section data-markdown>
                         <script type="text/template">
-                            ### Hands-on
+                            ### <i class="fa fa-pencil" aria-hidden="true"></i> Hands-on
 
                             <img src="../images/exercise.png" alt="exercise"/>
 
                         </script>
                     </section>
 
-                </section>
-
-
-                <!-- PLANEMO -->
-                <section>
-                    <section data-markdown>
-                        <script type="text/template">
-                            <img src="../images/planemo-logo.png" alt="Planemo" class="no-border" width=750/>
-
-                            > Command-line utilities to assist in building and publishing Galaxy tools.
-
-                        </script>
-                    </section>
-
-                    <section data-markdown>
-                        <script type="text/template">
-                            <img src="../images/planemo-logo.png" alt="Planemo" class="no-border" height=25/>
-                            ### Summary
-
-                        </script>
-                    </section>
-
-                    <section data-markdown>
-                        <script type="text/template">
-                            <img src="../images/planemo-logo.png" alt="Planemo" class="no-border" height=25/>
-                            #### The big picture
-
-                            <img src="../images/big_picture.png" alt="The big picture" class="no-border" height="550" />
-
-                        </script>
-                    </section>
-
-                    <section data-markdown>
-                        <script type="text/template">
-                            <img src="../images/planemo-logo.png" alt="Planemo" class="no-border" height=25/>
-                            #### Checklist (1/3)
-
-                            <p style="text-align: left;">
-                              <input type="checkbox"/> Create of a dedicated repository <br/>
-                              <input type="checkbox"/> Create of the main `.xml` file with <br/>
-                              ```planemo create``` <br/>
-                              <input type="checkbox"/> Fill the `.xml` file <br/>
-                              <input type="checkbox"/> Test the wrapper structure with <br/>
-                              ```planemo lint```<br/>
-                            </p>
-
-                        </script>
-                    </section>
-
-                    <section data-markdown>
-                        <script type="text/template" >
-                            <img src="../images/planemo-logo.png" alt="Planemo" class="no-border" height=25/>
-                            #### Checklist (2/3)
-
-                            <p style="text-align: left;">
-                              <input type="checkbox"/> Write the `tool_dependencies.xml` file <br/>
-                              <input type="checkbox"/> Initiate the `.shed.yml` file with <br/>
-                              ```planemo shed_init``` <br/>
-                              <input type="checkbox"/> Create the repository on ToolShed with <br/>
-                              ```planemo shed_create```<br/>
-                              <input type="checkbox"/> Install and test the wrapper on a Galaxy instance <br/>
-                            </p>
-
-                        </script>
-                    </section>
-
-                    <section data-markdown>
-                        <script type="text/template">
-                            <img src="../images/planemo-logo.png" alt="Planemo" class="no-border" height=25/>
-                            #### Checklist (3/3)
-
-                            <p style="text-align: left;">
-                              <input type="checkbox"/> Improve the wrapper and push modification on toolshed <br/>
-                              ```planemo shed_update``` <br/>
-                              <input type="checkbox"/> Add functional tests <br/>
-                              <input type="checkbox"/> Run functional tests <br/>
-                              ```planemo test```<br/>
-                            </p>
-
-                            <aside class="notes">
-                                Gildas: for me tests come before shed_*. Ideally, tests come before command, input, output ... They are the first thing to do... Ideally
-                            </aside>
-
-                        </script>
-                    </section>
-                </section>
-
-
-                <!-- GITHUB + TRAVIS.CI + PLANEMO + CONDA -->
-                <section>
-                    <section data-markdown>
-                        <script type="text/template">
-                            <img src="../images/github_logo.png" alt="github" height="150"/><br/>
-                            <img src="../images/travis_ci_logo.png" alt="travis ci" height="150"/><br/>
-                            <img src="../images/planemo-logo.png" alt="planemo" height="100"/><br/>
-                            <img src="../images/conda_logo.png" alt="conda" height="90"/>
-
-                        </script>
-                    </section>
-
-                    <section data-markdown>
-                        <script type="text/template">
-                            ### GitHub side
-
-                            <img src="../images/github_travis_github.png" alt="Travis in GitHub"/>
-
-                        </script>
-                    </section>
-
-                    <section data-markdown>
-                        <script type="text/template">
-                            ### Travis CI side
-
-                            <img src="../images/github_travis_travis.png" alt="GitHub in Travis"/>
-
-                        </script>
-                    </section>
-
-                    <section data-markdown>
-                        <script type="text/template">
-                            ### IUC: Intergalactic Utilities Commission
-
-                            - Lobbyist :)
-                            - Host orphan tools: [GitHub](https://github.com/galaxyproject/tools-iuc)
-                            - [IUC-standards](http://galaxy-iuc-standards.readthedocs.io/)
-
-                        </script>
-                    </section>
                 </section>
 
 
@@ -1149,6 +1071,112 @@
                         </script>
                     </section>
                 </section>
+
+
+                <!-- PLANEMO -->
+                <section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            <img src="../images/planemo-logo.png" alt="Planemo" class="no-border" width=750/>
+
+                            > Command-line utilities to assist in building and publishing Galaxy tools.
+
+                        </script>
+                    </section>
+
+                    <section data-markdown>
+                        <script type="text/template">
+                            <img src="../images/planemo-logo.png" alt="Planemo" class="no-border" height=25/>
+
+                            <img src="../images/big_picture.png" alt="The big picture" class="no-border" height="600" />
+
+                        </script>
+                    </section>
+
+                    <section data-markdown>
+                        <script type="text/template">
+                            <img src="../images/planemo-logo.png" alt="Planemo" class="no-border" height=25/>
+                            #### Checklist (1/3)
+
+                            <p style="text-align: left;">
+                              <input type="checkbox"/> Create of a dedicated repository <br/>
+                              <input type="checkbox"/> Create of the main `.xml` file with <br/>
+                              ```planemo create``` <br/>
+                              <input type="checkbox"/> Fill the `.xml` file <br/>
+                              <input type="checkbox"/> Test the wrapper structure with <br/>
+                              ```planemo lint```<br/>
+                            </p>
+
+                        </script>
+                    </section>
+
+                    <section data-markdown>
+                        <script type="text/template">
+                            <img src="../images/planemo-logo.png" alt="Planemo" class="no-border" height=25/>
+                            #### Checklist (2/3)
+
+                            <p style="text-align: left;">
+                              <input type="checkbox"/> Check if the dependencies are available <br/>
+                              <input type="checkbox"/> If not create some conda packages<br/>
+                              <input type="checkbox"/> Add functional tests <br/>
+                              <input type="checkbox"/> Run functional tests <br/>
+                              ```planemo test```<br/>
+                            </p>
+
+                        </script>
+                    </section>
+
+                    <section data-markdown>
+                        <script type="text/template" >
+                            <img src="../images/planemo-logo.png" alt="Planemo" class="no-border" height=25/>
+                            #### Checklist (3/3)
+
+                            <p style="text-align: left;">
+                              <input type="checkbox"/> Initiate the `.shed.yml` file with <br/>
+                              ```planemo shed_init``` <br/>
+                              <input type="checkbox"/> Create the repository on ToolShed with <br/>
+                              ```planemo shed_create```<br/>
+                              <input type="checkbox"/> Install and test the wrapper on a Galaxy instance <br/>
+                              <input type="checkbox"/> Improve the wrapper and push modification on toolshed <br/>
+                              ```planemo shed_update``` <br/>
+                            </p>
+
+                        </script>
+                    </section>
+                </section>
+
+
+                <!-- GITHUB + TRAVIS.CI + PLANEMO + CONDA -->
+                <section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            <img src="../images/github_logo.png" alt="github" height="150"/><br/>
+                            <img src="../images/travis_ci_logo.png" alt="travis ci" height="150"/><br/>
+                            <img src="../images/planemo-logo.png" alt="planemo" height="100"/><br/>
+                            <img src="../images/conda_logo.png" alt="conda" height="90"/>
+
+                        </script>
+                    </section>
+
+                    <section data-markdown>
+                        <script type="text/template">
+                            ### GitHub side
+
+                            <img src="../images/github_travis_github.png" alt="Travis in GitHub"/>
+
+                        </script>
+                    </section>
+
+                    <section data-markdown>
+                        <script type="text/template">
+                            ### Travis CI side
+
+                            <img src="../images/github_travis_travis.png" alt="GitHub in Travis"/>
+
+                        </script>
+                    </section>
+                </section>
+
 
                 <!-- ADVANCED -->
                 <section>
@@ -1302,64 +1330,39 @@
                     </section>
                 </section>
 
-                <!-- END -->
+                <!-- CONCLUSION -->
                 <section>
                   <section data-markdown>
                       <script type="text/template">
-                          ## END
+                          ## Conclusion
 
+                      </script>
+                  </section>
+
+                  <section data-markdown>
+                      <script type="text/template">
+                          ### IUC: Intergalactic Utilities Commission
+
+                          - Lobbyist :)
+                          - Host orphan tools: [GitHub](https://github.com/galaxyproject/tools-iuc)
+                          - [IUC-standards](http://galaxy-iuc-standards.readthedocs.io/)
+
+                      </script>
+                  </section>
+
+                  <section data-markdown>
+                      <script type="text/template">
+                          ### <i class="fa fa-exclamation-circle" aria-hidden="true"></i> Key points
+
+                          - Simple sentence to sum up the first key point of the tutorial (Take home message)
+                          - Second key point
+                          - Third key point
+                          - ...
                       </script>
                   </section>
                 </section>
 
-                <!-- TEMPLATE -->
-                <section>
-                    <section data-markdown>
-                        <script type="text/template">
-                            ## Part 1
-                        </script>
-                    </section>
 
-                    <section data-markdown>
-                        <script type="text/template">
-                            ### Small introduction
-
-                            Introduction about this part
-                        </script>
-                    </section>
-
-                    <section data-markdown>
-                        <script type="text/template">
-                            ### Subpart 1
-
-                            Short introduction about this subpart.
-
-                            <i class="fa fa-pencil" aria-hidden="true"></i> [***Hands on!***](../tutorials/tool_integration.md#subpart-1)
-                        </script>
-                    </section>
-
-                    <section data-markdown>
-                        <script type="text/template">
-                            ### Subpart1.2
-
-                            Short introduction about this subpart.
-
-                            <i class="fa fa-pencil" aria-hidden="true"></i> ***Hands on!***
-                        </script>
-                    </section>
-                </section>
-
-
-                <section data-markdown>
-                    <script type="text/template">
-                        ### <i class="fa fa-exclamation-circle" aria-hidden="true"></i> Key points
-
-                        - Simple sentence to sum up the first key point of the tutorial (Take home message)
-                        - Second key point
-                        - Third key point
-                        - ...
-                    </script>
-                </section>
       </div>
 
     </div>
