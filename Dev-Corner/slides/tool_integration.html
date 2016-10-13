@@ -134,18 +134,6 @@
 
                     <section data-markdown>
                         <script type="text/template">
-                            ### <i class="fa fa-pencil" aria-hidden="true"></i> Hands-on
-
-                            #### The Goal
-                            Developing a wrapper for Seqtk
-
-                            <small>A tool for processing sequence data in FASTA and FASTQ files</small>
-
-                        </script>
-                    </section>
-
-                    <section data-markdown>
-                        <script type="text/template">
                             ### <i class="fa fa-question-circle" aria-hidden="true"></i> Questions
 
                             - What is a tool for Galaxy?
@@ -163,11 +151,24 @@
                             - Discover what is a wrapper and its structure
                             - Use the Planemo utilities to develop a good wrapper
                             - Deal with the dependencies
-                            - Set functional tests
+                            - Write functional tests
                             - Publish tools in the Toolshed
 
                         </script>
                     </section>
+
+                    <section data-markdown>
+                        <script type="text/template">
+                            ### <i class="fa fa-pencil" aria-hidden="true"></i> Hands-on
+
+                            #### The Goal
+                            Developing a wrapper for Seqtk
+
+                            <small>A tool for processing sequence data in FASTA and FASTQ files</small>
+
+                        </script>
+                    </section>
+
                 </section>
 
                 <!-- WRAPPER -->
@@ -229,7 +230,7 @@
                             ]]></command>
                             ```
 
-                            <small>If the script is provided near the wrapper xml</small>
+                            <small>If the script is provided with the wrapper xml</small>
                             ```xml
                             <command><![CDATA[
                                 python $__tool_directory__/graphlan.py
@@ -257,14 +258,14 @@
 
                     <section data-markdown>
                         <script type="text/template">
-                            ### `inputs` > `param` &lt;-> `command`
+                            ### `inputs` > `param` To `command`
                             #### Pass parameters?
 
                             ```xml
                             <inputs>
                                 <param name="dpi" type="..." label="..." optional="True"/>
 
-                                <param argumement="--size" type="..." value="7" label="..." help="..."/>
+                                <param argument="--size" type="..." value="7" label="..." help="..."/>
                             </inputs>
                             ```
 
@@ -302,7 +303,7 @@
 
                     <section data-markdown>
                         <script type="text/template">
-                            ### `inputs` > `param` > `integer`|`float`
+                            ### `inputs` > `param` > `integer` | `float`
 
                             <img src="../images/input_integer.png" alt="input integer"/>
 
@@ -511,6 +512,11 @@
                         <script type="text/template">
                             ### `stdio`
 
+
+                            ```xml
+                            <command detect_errors="aggressive"> ... </command>
+                            ```
+                            or if you need more precision
                             ```
                             <stdio>
                               <exit_code range=":-2" level="warning" description="Low disk space" />
@@ -529,7 +535,7 @@
 
                             <img src="../images/help.png" alt="help"/>
 
-                            ```
+                            ```xml
                             <help><![CDATA[
 
                             **What it does**
@@ -595,9 +601,9 @@
                             #### Before: install Seqtk
                             *No brain needed*
                             ```bash
-                            planemo conda_init
+                            $ planemo conda_init
 
-                            conda install seqtk
+                            $ conda install seqtk
                             ```
 
                         </script>
@@ -610,18 +616,18 @@
                             #### Before: observe and test Seqtk
 
                             ```bash
-                            seqtk
+                            $ seqtk
 
-                            seqtk seq
+                            $ seqtk seq
 
-                            wget https://raw.githubusercontent.com/galaxyproject/
+                            $ wget https://raw.githubusercontent.com/galaxyproject/
                                  galaxy-test-data/master/2.fastq
 
-                            cat 2.fastq
+                            $ cat 2.fastq
 
-                            seqtk seq -A 2.fastq > 2.fasta
+                            $ seqtk seq -A 2.fastq > 2.fasta
 
-                            cat 2.fasta
+                            $ cat 2.fasta
                             ```
 
                         </script>
@@ -653,6 +659,17 @@
                     <section data-markdown>
                         <script type="text/template">
                             ### Functional tests
+
+                            - Functional testing is a quality assurance (QA) process.
+                            - The tests confort developers and users that the tools can run across different servers/architectures. And that the last modifications didn't break the different features.
+                            - Tools are tested by feeding them input(s) and parameter(s) and examining the output(s) (typically a diff)
+
+                          </script>
+                    </section>
+
+                    <section data-markdown>
+                        <script type="text/template">
+                            ### Functional tests
                             #### Good practices
 
                             1. Build tests using inputs/parameters/outputs
@@ -669,7 +686,7 @@
                         <script type="text/template">
                             ### `tests`
 
-                            ```
+                            ```xml
                             <tests>
                                 <test>
                                     <param name="input_tree" value="input_tree.txt"/>
@@ -724,13 +741,13 @@
 
                             ```xml
                             <test>
-                                &lt;output ...
+                                <output ...
                                     md5
                                     compare
                                         diff
                                         sim_size
                                     lines_diff
-                                ...
+                                ... />
 
                             ```
 
@@ -801,7 +818,7 @@
                             ### <i class="fa fa-pencil" aria-hidden="true"></i> Hands-on
 
                             #### The Goal
-                            At functional test to the Seqtk wrapper for Seqtk
+                            Add functional test to the Seqtk wrapper for Seqtk
 
                         </script>
                     </section>
@@ -811,8 +828,8 @@
                             ### <i class="fa fa-pencil" aria-hidden="true"></i> Hands-on
 
                             #### Steps
-                            1. Fill a `<test>` tag using the file you generate previously with `seqtk`
-                            2. Use `planemo test --install_galaxy ...` until all is green
+                            1. Fill a `<test>` tag using the file you generated previously with `seqtk`
+                            2. Use `planemo test --install_galaxy ...` until everything is green
 
                         </script>
                     </section>
@@ -1099,8 +1116,8 @@
                             #### Checklist (1/3)
 
                             <p style="text-align: left;">
-                              <input type="checkbox"/> Create of a dedicated repository <br/>
-                              <input type="checkbox"/> Create of the main `.xml` file with <br/>
+                              <input type="checkbox"/> Create a dedicated repository <br/>
+                              <input type="checkbox"/> Create the main `.xml` file with <br/>
                               ```planemo create``` <br/>
                               <input type="checkbox"/> Fill the `.xml` file <br/>
                               <input type="checkbox"/> Test the wrapper structure with <br/>
@@ -1117,7 +1134,7 @@
 
                             <p style="text-align: left;">
                               <input type="checkbox"/> Check if the dependencies are available <br/>
-                              <input type="checkbox"/> If not create some conda packages<br/>
+                              <input type="checkbox"/> If not, create some conda packages<br/>
                               <input type="checkbox"/> Add functional tests <br/>
                               <input type="checkbox"/> Run functional tests <br/>
                               ```planemo test```<br/>
@@ -1268,7 +1285,7 @@
                         <script type="text/template">
                             ### `macro`
 
-                        <img src="../images/macro.png" alt="macro"/>
+                            <img src="../images/macro.png" alt="macro"/>
 
                         </script>
                     </section>
@@ -1354,10 +1371,12 @@
                       <script type="text/template">
                           ### <i class="fa fa-exclamation-circle" aria-hidden="true"></i> Key points
 
-                          - Simple sentence to sum up the first key point of the tutorial (Take home message)
-                          - Second key point
-                          - Third key point
-                          - ...
+                          - Use Planemo
+                          - Use Conda
+                          - Use GitHub
+                          - Use Travis
+                          - No more excuse to develop crappy Galaxy tools
+
                       </script>
                   </section>
                 </section>
