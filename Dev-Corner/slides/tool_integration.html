@@ -926,8 +926,19 @@
 
                     <section data-markdown>
                         <script type="text/template">
+                            <img src="../images/conda_logo.png" class="no-border"  height=50 />
+
+                            - Based on recipes describing how to install the software which are then builded for their distribution
+                            - At installation, no compilation, executables come with their dependencies, libraries...
+                            - Not restricted to Galaxy
+
+                        </script>
+                    </section>
+
+                    <section data-markdown>
+                        <script type="text/template">
                             <img src="../images/conda_logo.png" class="no-border"  height=25 />
-                            #### Miniconda
+                            ### Miniconda
 
                             <img src="../images/miniconda_vs_anaconda.png" alt="Miniconda" class="no-border" height="450"/>
 
@@ -937,9 +948,9 @@
                     <section data-markdown>
                         <script type="text/template">
                             <img src="../images/planemo-logo.png" alt="Planemo" class="no-border" height=25/>
-                            #### Test Galaxy Tools using Conda packages
+                            ### Test Galaxy Tools using Conda packages
 
-                            <img src="../images/planemo_tool_building.png" alt="Testing tools" class="no-border"/>
+                            <img src="../images/planemo_tool_building.png" height="500" alt="Testing tools" class="no-border" />
 
                         </script>
                     </section>
@@ -985,24 +996,17 @@
                         </script>
                     </section>
 
-
-
                     <section data-markdown>
                         <script type="text/template">
-                            <img src="../images/bioconda.png" class="no-border"  height=25 />
-                            #### Bioconda
+                            <img src="../images/conda_logo.png" class="no-border"  height=25 />
+                            ### Write a Conda package
+                            #### Files
 
-                            # TODO
+                            - `meta.yaml`: contains all the metadata in the recipe.
+                            - `build.sh`: the Unix script that installs the files
 
-                        </script>
-                    </section>
-
-                    <section data-markdown>
-                        <script type="text/template">
-                            <img src="../images/bioconda.png" class="no-border"  height=25 />
-                            #### Bioconda contributing
-
-                            # TODO
+                            <small>[Documentation about how to build a conda packages from scratch](http://conda.pydata.org/docs/build_tutorials/pkgs2.html)</small>
+                            <small>[Bioconda guidelines](https://github.com/bioconda/bioconda-recipes/blob/master/GUIDELINES.md)
 
                         </script>
                     </section>
@@ -1010,9 +1014,57 @@
                     <section data-markdown>
                         <script type="text/template">
                             <img src="../images/conda_logo.png" class="no-border"  height=25 />
-                            #### `conda build`
+                            ### Write a Conda package
 
-                            # TODO
+                            <img src="../images/conda_files.png" alt="meta.yaml and build.sh" />
+
+                        </script>
+                    </section>
+
+                    <section data-markdown>
+                        <script type="text/template">
+                            <img src="../images/conda_logo.png" class="no-border"  height=25 />
+                            ### Write a Conda package
+                            #### skeleton
+
+                            - Python<br/>
+                            `conda skeleton pypi <packagename>`
+                            - R<br/>
+                            `conda skeleton cran <packagename>`
+                            - Bioconductor<br/>
+                            `bioconductor_skeleton.py <packagename>`
+                            - Perl<br/>
+                            `conda skeleton cpan <packagename>`
+
+                            <small>[Building conda packages with conda skeleton](http://conda.pydata.org/docs/build_tutorials/pkgs.html)</small>
+
+                        </script>
+                    </section>
+
+                    <section data-markdown>
+                        <script type="text/template">
+                            <img src="../images/conda_logo.png" class="no-border"  height=25 />
+                            ### Write a Conda package
+                            #### `conda build` and test the package
+
+                            ```bash
+                            $ conda install conda-build
+
+                            $ conda build .
+
+                            ```
+
+                        </script>
+                    </section>
+
+                    <section data-markdown>
+                        <script type="text/template">
+                            <img src="../images/bioconda.png" class="no-border"  height=25 />
+                            ### Bioconda
+
+                            - A channel dedicated to bioinformatics packages
+                            - Open to [contribution](https://github.com/bioconda/bioconda-recipes/blob/master/CONTRIBUTING.md)
+                            - GitHub repository: https://github.com/bioconda/bioconda-recipes
 
                         </script>
                     </section>
