@@ -1294,14 +1294,76 @@
                         <script type="text/template">
                             ### Dataset collection
 
+                            <div align="left">
+                              To group related datasets, and treat them as a single unit<br/>
+                              <br/>
+                              <ul>
+                                <li>`list`: a simple list of files</li>
+                                <li>`paired`: a pair of files, `forward` and `reverse` for NGS</li>
+                                <li>composite: e.g. `list:paired` for a list of dataset pairs</li>
+                              </ul>
+                            </div>
+
                         </script>
                     </section>
 
                     <section data-markdown>
                         <script type="text/template">
-                            ### Dataset collection
+                            ### Dataset collection > input
 
-                            # TODO
+                            <div align="left">
+                                Accept both datasets and collections:
+                            </div>
+                            ```xml
+                            <param type="data" multiple="true" name="inputs" label="Input BAM(s)" format="bam" />
+                            ```
+
+                            <div align="left">
+                                Accept only collections:
+                            </div>
+                            ```xml
+                            <param type="data_collection" collection_type="list|paired|list:paired|..." name="inputs" label="Input BAM(s)" format="bam" />
+                            ```
+
+                            <div align="left">
+                                In the command:
+                            </div>
+                            ```xml
+                            <command><![CDATA[
+                                ...
+                                    #for $input in $inputs
+                                        --input "$input"
+                                        --sample_name "$input.element_identifier"
+                                    #end for
+                            ]]></command>
+                            ```
+
+                        </script>
+                    </section>
+
+                    <section data-markdown>
+                        <script type="text/template">
+                            ### Dataset collection > output
+
+                            <p align="left">A single paired collection:</p>
+                            ```xml
+                            <collection name="paired_output" type="paired" label="Split Pair">
+                                <data name="forward" format="txt" />
+                                <data name="reverse" format_source="input1" from_work_dir="reverse.txt" />
+                            </collection>
+                            ```
+
+                            <p align="left">Unknown number of files:</p>
+                            ```xml
+                            <collection name="output" type="list" label="Unknown number of files">
+                                <discover_datasets pattern="__name_and_ext__" directory="outputs" />
+                            </collection>
+                            ```
+
+                            <div align="left">
+                                `__name_and_ext__`: a predefined regexp,
+                                catches the dataset identifier + the format
+                            </div>
 
                         </script>
                     </section>
