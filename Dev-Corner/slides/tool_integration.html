@@ -1244,6 +1244,91 @@
 
                         </script>
                     </section>
+
+                    <section data-markdown>
+                        <script type="text/template">
+                            <img src="../images/ansible_logo.png" alt="ansible" height="200"/><br/>
+                            <img src="../images/conda_logo.png" alt="conda" height="90"/><br/>
+                            <img src="../images/docker_logo.png" alt="docker" height="120"/>
+
+                        </script>
+                    </section>
+
+                    <section data-markdown>
+                        <script type="text/template">
+                            ### Docker Galaxy Flavors
+
+                            <img src="../images/galaxydocker_logo.png" alt="GitHub in Travis"/>
+
+                            <small>[Docker Galaxy Stable](https://github.com/bgruening/docker-galaxy-stable)</small>
+
+                        </script>
+                    </section>
+
+                    <section data-markdown>
+                        <script type="text/template">
+                            ### Docker Galaxy Flavors
+                            #### Dockerfile
+
+                            ```
+                            # Galaxy - My own flavour
+                            # VERSION       0.1
+
+                            FROM quay.io/bgruening/galaxy:16.07
+
+                            MAINTAINER Björn A. Grüning, bjoern.gruening@gmail.com
+
+                            ENV GALAXY_CONFIG_BRAND deepTools
+
+                            # Adding the tool definitions to the container
+                            ADD my_tool_list.yml $GALAXY_ROOT/my_tool_list.yml
+
+                            # Install deepTools
+                            RUN install-tools $GALAXY_ROOT/my_tool_list.yml
+                            ```
+
+                        </script>
+                    </section>
+
+                    <section data-markdown>
+                        <script type="text/template">
+                            ### Docker Galaxy Flavors
+                            #### tool_list.yml
+
+                            ```bash
+                            api_key: admin
+                            galaxy_instance: http://127.0.0.1:8080/
+                            tools:
+                            - name: fastqc
+                              owner: devteam
+                              tool_panel_section_id: cshl_library_information
+                              tool_shed_url: https://toolshed.g2.bx.psu.edu
+                              revisions:
+                              - '8c650f7f76e9'  # v0.62
+                              - 'd2cf2c0c8a11'  # v0.63
+                            - name: suite_deeptools
+                              owner: bgruening
+                              tool_panel_section_label: 'deepTools'
+                              tool_shed_url: https://toolshed.g2.bx.psu.edu
+                              revisions:
+                             - '7f5562625ae2'
+                            ```
+
+                        </script>
+                    </section>
+
+                    <section data-markdown>
+                        <script type="text/template">
+                            ### Docker Galaxy Flavors
+                            #### RUN
+
+                            ```bash
+                            docker run -d -p 8080:80 galaxy-deeptools
+                            ```
+
+                        </script>
+                    </section>
+
                 </section>
 
 
