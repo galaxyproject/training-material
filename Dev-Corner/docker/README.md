@@ -5,7 +5,7 @@ Galaxy Docker repository for Galaxy development training material :whale: :eyes:
 
 # Requirements
 
-- [Docker](https://docs.docker.com/installation/) for Linux / Windows / OSX
+- [Docker](https://docs.docker.com/engine/installation/) for Linux / Windows / OSX
 - [Kitematic](https://kitematic.com/) for Windows / OS-X (Optional)
 
 # Usage
