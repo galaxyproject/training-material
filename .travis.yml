@@ -23,7 +23,7 @@ before_script:
 script:
   #- pandoc -s README.md -f markdown -t plain -o README.md_plain
   #- hunspell -d en_GB README.md_plain -p custom.dict -l
-  - find . -name "*.md" -not -path "./shared/reveal.js/*" -not -path "./shared/font-awesome/*" | xargs -L 1 -I '{}' sh -c "echo {}; vl -t 5 -s 1000 --allow-codes 401 --whitelist http://localhost:8080 {}"
+  - find .  \( -name "*.md" -o -name "*.html" \) -not -path "./shared/reveal.js/*" -not -path "./shared/font-awesome/*" | xargs -L 1 -I '{}' sh -c "echo {}; vl -t 5 -s 1000 --allow-codes 401 --whitelist http://localhost:8080 {}"
 
 after_success:
   - |
