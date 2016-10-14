@@ -641,8 +641,22 @@
                             1. Init the wrapper with `planemo tool_init`
                             2. Fill the template
                             3. Test the template with `planemo lint`
-                            4. Display the tool with `planemo serve --install_galaxy`
+                            <small>Don't worry now about "No tests found"</small>
+                            4. Display the tool with `planemo serve`
+                            5. and try it with a file
 
+                            <aside class="notes">
+                                ```bash
+                                # 1.
+                                planemo tool_init
+                                # -> hands_on-tool_integration/seqtk/seqtk_seq_step1.xml
+                                # 2. -> hands_on-tool_integration/seqtk/seqtk_seq_step2.xml
+                                # 3.
+                                planemo lint # seqtk_seq_step2.xml
+                                # 4.
+                                planemo serve # seqtk_seq_step2.xml
+                                ```
+                            </aside>
                         </script>
                     </section>
 
@@ -829,7 +843,15 @@
 
                             #### Steps
                             1. Fill a `<test>` tag using the file you generated previously with `seqtk`
-                            2. Use `planemo test --install_galaxy ...` until everything is green
+                            2. Use `planemo test` ... until everything is green
+
+                            <aside class="notes">
+                                ```bash
+                                # 1. -> hands_on-tool_integration/seqtk/seqtk_seq_step3.xml
+                                # 2.
+                                planemo test # seqtk_seq_step3.xml
+                                ```
+                            </aside>
 
                         </script>
                     </section>
@@ -990,9 +1012,18 @@
 
                             #### Steps
                             1. Fill a `<requirement>` tag to target a `seqtk` conda package
-                            2. Use `planemo conda_install` to install tools and set an environment
-                            3. Use `planemo test --conda_dependency_resolution ...`
+                            2. Use `planemo conda_install .` to install tools and set an environment
+                            3. Use `planemo test --conda_dependency_resolution`
 
+                            <aside class="notes">
+                                ```bash
+                                # 1. -> hands_on-tool_integration/seqtk/seqtk_seq_step4.xml
+                                # 2.
+                                planemo conda_install .
+                                # 3.
+                                planemo test --conda_dependency_resolution # seqtk_seq_step4.xml
+                                ```
+                            </aside>
                         </script>
                     </section>
 
