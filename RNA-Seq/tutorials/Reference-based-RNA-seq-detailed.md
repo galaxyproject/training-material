@@ -325,7 +325,7 @@ Finally, use **D. melanogaster** link (highlighted above) and follow the on-scre
 
 ![](https://github.com/nekrut/galaxy/wiki/images/igv_tophat.png)
 
-and [sashimi plots](https://www.broadinstitute.org/igv/Sashimi) highlighting potential splice junctions:
+and [sashimi plots](https://www.broadinstitute.org/software/igv/Sashimi) highlighting potential splice junctions:
 
 ![](https://github.com/nekrut/galaxy/wiki/images/sashimi.png)
 

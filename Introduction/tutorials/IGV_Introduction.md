@@ -4,7 +4,7 @@
 
 **MPI-IE & University of Freiburg**
 
-To start IGV, go to the IGV downloads page: http://www.broadinstitute.org/igv/download.
+To start IGV, go to the IGV downloads page: http://www.broadinstitute.org/software/igv/download.
 
 ## User Interface
 
@@ -120,7 +120,7 @@ To start IGV, go to the IGV downloads page: http://www.broadinstitute.org/igv/do
 
 **Tools**
 
-- Run Batch Script - Executes a series of sequential tasks.  Users can load at .txt file that contains a list of commands, one per line, that will be run by IGV.  The accepted commands are the same as the [IGV Port Commands](http://www.broadinstitute.org/igv/batch).
+- Run Batch Script - Executes a series of sequential tasks.  Users can load at .txt file that contains a list of commands, one per line, that will be run by IGV.  The accepted commands are the same as the [IGV Port Commands](http://www.broadinstitute.org/software/igv/batch).
 
 - Run igvtools - Launches the igvtools interface window.
 
@@ -146,7 +146,7 @@ To start IGV, go to the IGV downloads page: http://www.broadinstitute.org/igv/do
 
 **Help**
 
-- User Guide... - Displays the IGV [User Guide](http://www.broadinstitute.org/igv/UserGuide).
+- User Guide... - Displays the IGV [User Guide](http://www.broadinstitute.org/software/igv/UserGuide).
 
 
 
