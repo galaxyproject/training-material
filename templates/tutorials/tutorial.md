@@ -1,0 +1,104 @@
+Tutorial name
+=============
+
+:grey_question: ***Questions***
+
+- *Major question that would be addressed in this tutorial (mostly general biological questions)*
+- *Second question*
+- *Third question*
+- *...*
+
+:dart: ***Objectives***
+
+- *First objective of this tutorial (It is a single sentence describing what a learner will be able to do once they have sat through the lesson. The objectives must be technical, but also theoretical, objectives. You can check [SWC lessons](http://swcarpentry.github.io/instructor-training/19-lessons/) to help you writing learning objectives.)*
+- *Second objective*
+- *Third objective*
+- *...*
+
+:heavy_check_mark: ***Requirements***
+
+- *Galaxy introduction*
+- *Second requirement*
+- *Third requirement*
+- *...*
+
+:hourglass: ***Time estimation*** *1d/3h/6h*
+
+[:book: **Associated slide deck**](http://bgruening.github.io/training-material/templates/slides/tutorial.html)
+
+# Introduction
+
+General introduction about the topic and then an introduction of the tutorial (the questions and the objectives). It is nice also to have a scheme to sum up the pipeline used during the tutorial. The idea is to give to trainees insight into the content of the tutorial and the (theoretical and technical) key concepts they will learn.
+
+# Part 1
+
+Introduction about this part
+
+## Subpart 1
+
+Short introduction about this subpart.
+
+:pencil2: ***Hands on!***
+
+1. First step
+2. Second step
+3. Third step
+
+## Subpart 2
+
+Short introduction about this subpart.
+
+:pencil2: ***Hands on!***
+
+1. First step
+2. Second step
+3. Third step
+
+Some blabla
+
+:pencil2: ***Hands on!***
+
+1. First step
+2. Second step
+3. Third step
+
+# Part 2
+
+Short introduction about this subpart.
+
+:pencil2: ***Hands on!***
+
+1. First step
+2. Second step
+3. Third step
+
+## Subpart 2
+
+Short introduction about this subpart.
+
+:pencil2: ***Hands on!***
+
+1. First step
+2. Second step
+3. Third step
+
+Some blabla
+
+:pencil2: ***Hands on!***
+
+1. First step
+2. Second step
+3. Third step
+
+# Conclusion
+
+Conclusion about the technical key points. And then relation between the technics and the biological question to end with a global view.
+
+:grey_exclamation: ***Key Points***
+
+- *Simple sentence to sum up the first key point of the tutorial (Take home message)*
+- *Second key point*
+- *Third key point*
+- *...*
+
+# :clap: Thank you

@@ -89,10 +89,10 @@ particularly on the theory behind.
 For this tutorials, you can use the [dedicated Docker image](docker/README.md):
 
 ```
-docker run -d -p 8080:80 bgruening/galaxy-exome-seq-training
+docker run -d -p 8080:80 bgruening/galaxy-training-exome-seq
 ```
 
-It will launch a flavored Galaxy instance available on [http://localhost:8080](http://localhost:8080).
+It will launch a flavored Galaxy instance available on [http://localhost:8080 ](http://localhost:8080).
 
 You can also use [Freiburg Galaxy instance](http://galaxy.uni-freiburg.de/).
 
