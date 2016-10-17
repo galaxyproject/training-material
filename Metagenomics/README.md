@@ -9,7 +9,15 @@ Information on where the slide decks can be found, generally `http://bgruening.g
 
 # Tutorials
 
-Information about the tutorials (which tutorials are available, what are their questions and objectives, ...)
+**Metagenomics with Mothur MiSeq SOP**
+
+Requirements:
+- Tools:
+  - mothur suite (owner: iuc)
+  - regex find and replace (owner: jjohnson)
+
+- Reference datasets
+  - Silva (TODO: instructions)
 
 ## Input datasets
 
