@@ -797,8 +797,8 @@
                             ```
                             graphlan/
                             ├── graphlan.xml
-                            ├── wrapper.py
-                            ├── test_data/
+                            ├── graphlan.py
+                            ├── test-data/
                                 ├── input_tree.txt
                                 ├── png_image.png
 
@@ -883,9 +883,6 @@
                             ```
                             graphlan/
                             ├── graphlan.xml
-                            ├── test_data/
-                                ├── input_tree.txt
-                                ├── png_image.png
                             ├── graphlan.py
 
                             ```
@@ -1104,6 +1101,77 @@
                             ### <i class="fa fa-pencil" aria-hidden="true"></i> Hands-on
 
                             <img src="../images/exercise.png" alt="exercise"/>
+
+                        </script>
+                    </section>
+
+                    <section data-markdown>
+                        <script type="text/template">
+                            ### <i class="fa fa-pencil" aria-hidden="true"></i> Hands-on
+
+                            #### The Goal
+                            Build a conda package for the suite seqtk
+
+                        </script>
+                    </section>
+
+                    <section data-markdown>
+                        <script type="text/template">
+                            ### <i class="fa fa-pencil" aria-hidden="true"></i> Hands-on
+
+                            #### Steps
+                            1. RTFM: https://github.com/bioconda/bioconda-recipes/blob/master/GUIDELINES.md#cc
+                            2. https://github.com/lh3/seqtk/
+                            3. Complete a `meta.yaml` and a `build.sh`
+                            4. Test the build with `conda build .`
+
+                            <aside class="notes">
+                                meta.yaml
+                                ```bash
+                                package:
+                                  name: seqtk
+                                  version: 1.2
+
+                                source:
+                                  fn: v1.2.tar.gz
+                                  url: https://github.com/lh3/seqtk/archive/v1.2.tar.gz
+
+                                build:
+                                  number: 0
+                                  skip: False
+
+
+                                requirements:
+                                  build:
+                                    - gcc   # [not osx]
+                                    - llvm  # [osx]
+                                    - zlib
+                                  run:
+                                    - zlib
+
+
+                                about:
+                                  home: https://github.com/lh3/seqtk
+                                  license: MIT License
+                                  summary: Seqtk is a fast and lightweight tool for processing sequences in the FASTA or FASTQ format
+
+                                test:
+                                  commands:
+                                - seqtk seq
+                                ```
+
+                                build.sh
+                                ```bash
+                                #!/bin/bash
+
+                                export C_INCLUDE_PATH=${PREFIX}/include
+                                export LIBRARY_PATH=${PREFIX}/lib
+
+                                make all
+                                mkdir -p $PREFIX/bin
+                                cp -f seqtk $PREFIX/bin/
+                                ```
+                            </aside>
 
                         </script>
                     </section>
