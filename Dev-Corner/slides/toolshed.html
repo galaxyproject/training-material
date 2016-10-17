@@ -1,0 +1,710 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Galaxy ToolShed</title>
+
+		<link rel="stylesheet" href="../../shared/reveal.js/css/reveal.css">
+		<link rel="stylesheet" href="../../shared/reveal.js/css/theme/simple.css" id="theme">
+
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="../../shared/reveal.js/lib/css/zenburn.css">
+        <link rel="stylesheet" href="../../shared/font-awesome/css/font-awesome.min.css">
+		<link rel="stylesheet" href="../../shared/css/custom.css" id="theme">
+
+		<!-- Printing and PDF exports -->
+        <script>
+          if( window.location.search.match( /print-pdf/gi ) ) {
+            var link = document.createElement( 'link' );
+            link.rel = 'stylesheet';
+            link.type = 'text/css';
+            link.href = '../../shared/reveal.js/css/print/pdf.css';
+            document.getElementsByTagName( 'head' )[0].appendChild( link );
+          }
+        </script>
+		<!--<script>
+            if (window.location.search.match(/print-pdf/gi)) {
+                document.write('<link rel="stylesheet" href="css/pdf.css" type="text/css">');
+            }
+        </script>-->
+
+		<!--[if lt IE 9]>
+        <script src="../../shared/reveal.js/lib/js/html5shiv.js"></script>
+        <![endif]-->
+	</head>
+
+	<body>
+		<div class="reveal">
+            <div class="slides">
+                <section data-markdown>
+                    <script type="text/template">
+                        ## Welcome!
+
+                        <img src="../../shared/images/GTNLogo1000.png" alt="GTNLogo1000"
+                        class="no-border" width=30%/>
+
+                        The easiest way to **navigate** this slide deck
+                        is **by hitting `[space]` on your keyboard**
+
+                        You can also navigate with arrow keys, but be careful because some
+                        slides can be nested inside of each other (vertically)
+                    </script>
+                </section>
+
+                <section data-markdown>
+                    <script type="text/template">
+                        # TOOL SHED
+                        ## Sharing Galaxy tools
+                    </script>
+                </section>
+
+                <section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ## What is a toolshed?
+                        </script>
+                    </section>
+
+                    <section data-markdown>
+                        <script type="text/template">
+                            ### <img src="../images/toolShed.jpg" class="no-border"> = Galaxy AppStore
+
+                            - Galaxy tools,
+                            - ~~Recipes for installing and compilling tools~~,
+                            - Data Managers,
+                            - Custom datatypes,
+                            - Exported workflows.
+                        </script>
+                    </section>
+
+                    <section data-markdown>
+                        <script type="text/template">
+                            ### <img src="../images/toolShed.jpg" class="no-border"> = Galaxy AppStore
+
+                            - For Galaxy administrators, facilitates:
+                              - installing/updating tools
+
+                            - For tool developers, facilitates:
+                              - sharing of Galaxy utilities
+                              - versioning
+
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ### Available tool sheds
+                            <img src="../images/main_toolShed_ss.png" class="no-border" width="80%">
+                            - [Galaxy community toolshed](https://toolshed.g2.bx.psu.edu/)
+                            - [Galaxy community test toolshed](https://testtoolshed.g2.bx.psu.edu/) -> Sandbox for testing
+                            - [IFB toolshed](http://toolshed.france-bioinformatique.fr/)
+                            - [List of public toolshed](https://wiki.galaxyproject.org/PublicGalaxyServers#Public_ToolSheds)
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ### Example of tool
+                            <img src="../images/exampletool_ss.png" class="no-border" width="80%">
+
+                        </script>
+                    </section>
+                </section>
+                <section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ##Installing tools from a toolshed
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ### Connect your Galaxy to a ToolShed
+                            - Connect your Galaxy to a Tool Shed in `config/tool_sheds_conf.xml`:
+                            ```
+                              <tool_sheds>
+                                <tool_shed name="Galaxy main tool shed" url="https://toolshed.g2.bx.psu.edu/"/>
+                              </tool_sheds>
+                            ```
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ### Connect your Galaxy to a ToolShed
+                            - Set dependencies resolution
+                              - in `config/galaxy.ini`:
+                            ```
+                            conda_prefix = /conda
+                            conda_auto_install = True
+                            conda_auto_init = False
+                            tool_dependency_dir = ../tool_dependencies
+                            ```
+                              - in config/dependency_resolvers_conf.xml:
+                            ```
+                            <dependency_resolvers>
+                                  <conda />
+                                  <conda versionless="true" />
+                                  <tool_shed_packages />
+                                  <galaxy_packages />
+                                  <galaxy_packages versionless="true" />
+                            </dependency_resolvers>
+                            ```
+                            - Restart Galaxy
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ### Go to the admin interface and select your tool
+                            <img src="../images/admin_searchtoolshed_ss.png" class="no-border" >
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ### Go to the admin interface and select your tool
+                            1. <img src="../images/goToToolshed_ss.png" class="no-border" >
+                            2. <img src="../images/searchTool_ss.png" class="no-border" >
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ### Go to the admin interface and select your tool
+                            <img src="../images/searchResults_ss.png" class="no-border" >
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ### Install your tool
+                            1. <img src="../images/goToToolInstall_ss.png" class="no-border" >
+                            2. <img src="../images/launchInstallTool_ss.png" class="no-border" >
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ### Install your tool
+                            <img src="../images/installTool_ss.png" class="no-border" >
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ### Check
+                            <img src="../images/checkToolInstall_ss.png" class="no-border" >
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ##  You can not only install a tool but also install workflows!
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ###  How to install a workflow?
+                            - Admin > Search Tool Shed
+                              1. <img src="../images/toolshedWorkflow_ss.png" class="no-border" >
+                              2. <img src="../images/schemaWorkflow_ss.png" class="no-border" >
+                            - The tools come with the workflow if not installed
+
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ###  How to install a workflow?
+                            <img src="../images/workflowNotInstalled_ss.png" class="no-border" >
+                            - No workflow?
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ###  How to install a workflow?
+                            <img src="../images/workflowInstalled_ss.png" class="no-border" >
+                            - Click on the imported workflow
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ###  How to install a workflow?
+                            <img src="../images/makeAvailableWorkflow_ss.png" class="no-border" >
+                            - Click on the workflow at the bottom of the “Contents of this repository” section
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ###  How to install a workflow?
+                            - Repository Actions > Import workflow to Galaxy
+                            <img src="../images/exportWorkflow_ss.png" class="no-border" >
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ###  How to install a workflow?
+                            <img src="../images/workflowOK_ss.png" class="no-border" >
+                            - Done!
+                        </script>
+                    </section>
+                </section>
+                <section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ##  Share your tool on a toolshed
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ###  Tool with dependencies
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ###  Tool with dependencies
+                            <img src="../images/toolshedPackage.png" class="no-border" >
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ###  Tool with dependencies
+                            - Report the requirement in your wrapper in order to **load environment with Conda**
+                            `tandem_repeats_finder_wrapper.xml`
+                            ```
+                            <requirements>
+                              <requirement type="package" version="4.0">tandem_repeats_finder</requirement>
+                            </requirements>
+                            ```
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ###  Tool suite: relationship between required repositories
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ###  Tool suite
+                            <img src="../images/toolsuite.png" class="no-border" >
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ###  Tool suite
+                            <img src="../images/toolsuite2.png" class="no-border" >
+                            - One tool by repository
+
+                            - How to link tools ?
+                              - To install them together
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ###  Tool suite
+                            - Repository dependencies
+                              - relationship between a dependent repository and one or more required repository (tools, datatypes, workflows,...)
+                              - -> One file
+                            ```
+                            <?xml version="1.0"?>
+                            <repositories description="Pipeline phylogeny">
+                               <repository toolshed="http://testtoolshed.g2.bx.psu.edu"
+                                 name="fasta_to_phylip" owner="gandres" changeset_revision="a895633568" />
+                               <repository name="mafft" owner="gandres" />
+                               <repository name="phyml" owner="gandres" />
+                            […]
+                            </repositories>
+                            ```
+                            - « toolshed » and « changeset_revision » are optional **but they are completed during upload on the toolshed**
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ###  Tool suite
+                            <img src="../images/toolsuite3.png" class="no-border" >
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ###  Tool suite
+                            ```
+                            <?xml version="1.0"?>
+                            <repositories description="Pipeline phylogeny">
+                               <repository name="mafft" owner="gandres" />
+                            </repositories>
+                            ```
+                            <img src="../images/toToolshed.png" class="no-border" >
+                            ```
+                            <?xml version="1.0"?>
+                            <repositories description="Pipeline phylogeny">
+                               <repository name="mafft" owner="gandres" toolshed="http://testtoolshed.g2.bx.psu.edu" changeset_revision="a895633568"/>
+                            </repositories>
+                            ```
+                        </script>
+                    </Section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ###  Tool suite
+                            - New tool version
+                              - Latest version is no longer **changeset_revision="a895633568**
+                              - Reload `repository_dependencies.xml` file in your repository
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ###  Workflow
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ###  Workflow
+                            <img src="../images/workflow.png" class="no-border" >
+                            - How to order tools ?
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ###  Workflow
+                            - In galaxy
+                            <img src="../images/galaxyWorkflowEx.png" class="no-border" >
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ###  Workflow
+                            <img src="../images/shareWorkflow.png" class="no-border" >
+                            - You get a file: Galaxy-Workflow-NAME.ga
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ###  Workflow
+                            - You have your file Galaxy-Workflow-NAME.ga
+                            - How to automatically import all tools?
+                              - -> `repository_dependencies.xml`
+                            ```
+                            <?xml version="1.0"?>
+                            <repositories description="Phylogeny workflow">
+                               <repository name="suite_phylogeny" owner="galaxy" />
+                            </repositories>
+                            ```
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ###  Workflow
+                            <img src="../images/workflowRepDep.png" class="no-border" >
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ###  Workflow
+                            <img src="../images/workflowRepDep2.png" class="no-border" >
+                            - **Everything must be on the toolshed**
+                        </script>
+                    </section>
+                </section>
+                <section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ## Publication with Planemo
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ### Configuration
+                            ```bash
+                            planemo config_init
+                            ```
+                            - Creates .planemo.yml file in your home directory
+                            <img src="../images/planemoYml.png" class="no-border" >
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ### Configuration
+                            ```bash
+                            planemo config_init
+                            ```
+                            <img src="../images/planemoYmlConfigured.png"  >
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ### Creation
+                            ```bash
+                            planemo shed_init --name="tandem_repeats_finder_2"
+                                                 --owner="gandres"
+                                                 --description="Tandem Repeats Finder description"
+                                                 --long_description="A long long description."
+                                                 --category="Sequence Analysis"
+                                                 [--remote_repository_url=<URL to .shed.yml on github>]
+                                                 [--homepage_url=<Homepage for tool.>]
+                            ```
+                            - Create .shed.yml file in the current repository (tool repository)
+                        </script>
+                    </section>
+                    <section data-markdown >
+                        <script type="text/template">
+                            ### Creation
+                            <img src="../images/namingConvention.png"  >
+                            <!-- - Naming conventions
+                            | Repository Type | Recommended Name         | Examples                 |
+                            | --------------- |-------------------------:| ------------------------:|
+                            | Data Managers   | `data_manager_$name`     | `data_manager_bowtie2`   |
+                            | Packages        | `package_$name_$version` | `package_aragorn_1_2_36` |
+                            | Tool Suites     | `suite_$name`            | `suite_samtools`         |
+                            | Tools           | `$name`                  | `stringle`, `bowtie2`    | -->
+                            - Planemo will determine the repository type based these conventions
+                        </script>
+                    </section>
+                    <section data-markdown >
+                        <script type="text/template">
+                            ### Creation
+                            ```
+                            $ planemo shed_lint --tools
+                            ```
+                            ```
+                            Linting repository […]/tandem_repeats_finder
+                            Applying linter expansion... CHECK
+                            .. INFO: Included files all found.
+                            Applying linter tool_dependencies_xsd... CHECK
+                            .. INFO: tool_dependencies.xml found and appears to be valid XML
+                            Applying linter tool_dependencies_actions... CHECK
+                            .. INFO: Parsed tool dependencies.
+                            Applying linter repository_dependencies... CHECK
+                            .. INFO: No repository_dependencies.xml, skipping.
+                            Applying linter shed_yaml... CHECK
+                            .. INFO: .shed.yml found and appears to be valid YAML.
+                            Applying linter readme... CHECK
+                            .. INFO: No README found skipping.
+                            +Linting tool […]/tandem_repeats_finder/tandem_repeats_finder_wrapper.xml
+                            […]
+                            ```
+                        </script>
+                    </section>
+                    <section data-markdown >
+                        <script type="text/template">
+                            ### Creation
+                            ```
+                            $ planemo shed_create --shed_target testtoolshed
+                            ```
+                            ```
+                            Repository created
+                            cd ‘[…]/tandem_repeats_finder' && git rev-parse HEAD
+                            Repository tandem_repeats_finder_2 updated successfully.
+                            ```
+                            <img src="../images/shedCreate.png" width="60%" >
+                        </script>
+                    </section>
+                    <section data-markdown >
+                        <script type="text/template">
+                            ### Creation
+                            ```
+                            $ planemo shed_create --shed_target testtoolshed
+                            ```
+                            ```
+                            Repository created
+                            cd ‘[…]/tandem_repeats_finder' && git rev-parse HEAD
+                            Repository tandem_repeats_finder_2 updated successfully.
+                            ```
+                            <img src="../images/shedCreate.png" width="60%" >
+                            - Don't forget **--shed_target**. Default is main toolshed
+                        </script>
+                    </section>
+                    <section data-markdown >
+                        <script type="text/template">
+                            ### Update
+                            ```
+                            $ planemo shed_diff --shed_target testtoolshed
+
+                            ```
+                            <img src="../images/planemoUpdate.png" width="60%" >
+                            - Need to be updated
+                        </script>
+                    </section>
+                    <section data-markdown >
+                        <script type="text/template">
+                            ### Update
+                            ```
+                            $ planemo shed_update --check_diff --shed_target testtoolshed
+
+                            ```
+                            <img src="../images/planemoUpdated.png" width="60%" >
+                            - Tool updated
+                        </script>
+                    </section>
+                    <section data-markdown >
+                        <script type="text/template">
+                            ### Update
+                            ```
+                            $ planemo shed_update --check_diff --shed_target testtoolshed
+
+                            ```
+                            <img src="../images/checkToolUpdate.png" width="60%" >
+                            - Tool updated
+                        </script>
+                    </section>
+                </section>
+                <section>
+                    <section data-markdown >
+                        <script type="text/template">
+                            ## References
+                            - [ToolShed](https://wiki.galaxyproject.org/ToolShed/Tour)
+                            - [Install tools from the ToolShed](https://wiki.galaxyproject.org/Admin/Tools/AddToolFromToolShedTutorial)
+                            - [Publish tools with Planemo](https://planemo.readthedocs.io/en/latest/publishing.html)
+                        </script>
+                    </section>
+                </section>
+                <section>
+                    <section data-markdown >
+                        <script type="text/template">
+                            ## Hands-on
+                        </script>
+                    </section>
+                    <section data-markdown >
+                        <script type="text/template">
+                            ### Start and configure your toolshed
+                            - To start your toolshed (in galaxy home directory):
+                              - `./run_tool_shed.sh`
+                            - Toolshed available at:
+                              - `http://localhost:9009`
+                            - Login under User tab:
+                              - galaxy/azerty
+                        </script>
+                    </section>
+                    <section data-markdown >
+                        <script type="text/template">
+                            ### Publish your tool with Planemo
+                            - Goal: Publish the seqtk_seq tool in your local toolshed with Planemo
+                        </script>
+                    </section>
+                    <section data-markdown >
+                        <script type="text/template">
+                            ### Publish your tool with Planemo
+                            - `planemo config_init`
+                              - create file .planemo.yml in your home directory
+                            ```
+                            [...]  local:
+                            #key: "<TODO>"
+                            #email: "galaxy@localhost.fr"
+                            #password: "azerty"
+                            ```
+                            - `planemo shed_init --name=seqtk_seq --owner=galaxy --description="common transformation of FASTA/Q" --category="Fasta Manipulation"`
+                              - create file .shed.yml in your working dir.:
+                            ```
+                            [categories: [Fasta Manipulation,Fastq Manipulation]
+                            description: common transformation of FASTA/Q
+                            name: seqtk_seq
+                            owner: galaxy
+                            ```
+                        </script>
+                    </section>
+                    <section data-markdown >
+                        <script type="text/template">
+                            ### Publish your tool with Planemo
+                            - `planemo shed_lint .`
+                              - Check Tool Shed repository for common issues.
+                            - `planemo shed_create --shed_target local`
+                              - Create a repository in the toolshed and upload files
+
+                            Modify your tool wrapper and then:
+                            - `planemo shed_diff --shed_target local`
+                              - Diff between local repository and Tool Shed.
+                            - planemo shed_update --check_diff --shed_target local
+                              - Update Tool Shed repository
+                        </script>
+                    </section>
+                </section>
+                <!-- <section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ### <i class="fa fa-question-circle" aria-hidden="true"></i> Questions
+
+                            - Major question that would be addressed in this tutorial (same as the markdown)
+                            - Second question
+
+                            <aside class="notes">
+                                Oh hey, these are some notes. They'll be hidden in your presentation, but you can see them if you open the speaker notes window.
+
+                                To see the notes, hit **'s'** on your keyboard
+                            </aside>
+                        </script>
+                    </section>
+
+                    <section data-markdown>
+                        <script type="text/template">
+                            ### <i class="fa fa-bullseye" aria-hidden="true"></i> Objectives
+
+                            - First objective of this tutorial (same as the markdown)
+                            - Second objective
+                            - Third objective
+                            - ...
+                        </script>
+                    </section>
+                </section>
+
+                <section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ## Part 1
+                        </script>
+                    </section>
+
+                    <section data-markdown>
+                        <script type="text/template">
+                            ### Small introduction
+
+                            Introduction about this part
+                        </script>
+                    </section>
+
+                    <section data-markdown>
+                        <script type="text/template">
+                            ### Subpart 1
+
+                            Short introduction about this subpart.
+
+                            <i class="fa fa-pencil" aria-hidden="true"></i> ***Hands on!***
+                        </script>
+                    </section>
+
+                    <section data-markdown>
+                        <script type="text/template">
+                            ### Subpart1.2
+
+                            Short introduction about this subpart.
+
+                            <i class="fa fa-pencil" aria-hidden="true"></i> ***Hands on!***
+                        </script>
+                    </section>
+                </section>
+
+
+                <section data-markdown>
+                    <script type="text/template">
+                        ### <i class="fa fa-exclamation-circle" aria-hidden="true"></i> Key points
+
+                        - Simple sentence to sum up the first key point of the tutorial (Take home message)
+                        - Second key point
+                        - Third key point
+                        - ...
+                    </script>
+                </section> -->
+			</div>
+
+		</div>
+
+		<script type="text/javascript" src="../../shared/reveal.js/lib/js/head.min.js"></script>
+        <script type="text/javascript" src="../../shared/reveal.js/js/reveal.js"></script>
+        <script type="text/javascript">
+            Reveal.initialize({
+                slideNumber: !window.location.search.match(/print-pdf/gi),
+                history: true,
+
+                theme: Reveal.getQueryHash().theme,
+                transition: Reveal.getQueryHash().transition || 'concave',
+
+                dependencies: [
+                    { src: '../../shared/reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+                    { src: '../../shared/reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                    { src: '../../shared/reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                    { src: '../../shared/js/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+                    { src: '../../shared/reveal.js/plugin/notes/notes.js', async: true },
+                ]
+            });
+        </script>
+
+	</body>
+</html>
