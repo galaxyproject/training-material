@@ -38,12 +38,13 @@ It will launch a flavored Galaxy instance available on
 
 This material is maintained by:
 
-- Maintainer 1
+- Stephanie Le Gras (slegras@igbmc.fr
 - Maintainer 2
 
 For any question related to this topic and the content, you can contact them.
 
 The following individuals have contributed to this training material:
 
-- Name 1
-- Name 2
+- Gwendoline Andres
+- Loraine Gueguen (loraine.gueguen@sb-roscoff.fr)
+- Stephanie Le Gras (slegras@igbmc.fr)
