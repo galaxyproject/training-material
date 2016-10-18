@@ -139,7 +139,7 @@
                             - Set dependencies resolution
                               - in `config/galaxy.ini`:
                             ```
-                            conda_prefix = /conda
+                            conda_prefix = <tool_dependency_dir>/_conda/
                             conda_auto_install = True
                             conda_auto_init = False
                             tool_dependency_dir = ../tool_dependencies
@@ -177,11 +177,14 @@
                     <section data-markdown>
                         <script type="text/template">
                             ### Install a tool from the Tool Shed
-                            - Types of repository
-                              - Tool (orange): contains tools
-                              - Tool dependencies (red): contains only tool\_dependencies.xml. Required name: package_*
-                              - Tool suite (blue): contains only repository\_dependencies.xml. Required name: suite_*
-                            <img src="../images/typeOfRep_ss.png" class="no-border" width="75%" >
+                            - <span style="font-size:70%">Types of repository</span>
+                              - <span style="font-size:55%">Tool (orange): contains tools (tool wrappers)</span>
+                              - <span style="font-size:55%">Tool dependencies (red): contains only the file tool\_dependencies.xml.
+                              !! tool\_dependencies.xml file is no longer supported because of the use of conda!
+                              Required name: package_* </span>
+                              - <span style="font-size:55%">Tool suite (blue): contains only the file repository\_dependencies.xml.
+                              Required name: suite_* </span>
+                            <img src="../images/typeOfRep_ss.png" class="no-border" width="70%" >
                         </script>
                     </section>
                     <section data-markdown>
@@ -197,8 +200,8 @@
                             ### Install a tool from the Tool Shed
                             - Install the tool
                             <img src="../images/installTool_ss.png" class="no-border" width="80%">
-
                             - <span style="font-size:70%"> Selecting TS AND conda will make Galaxy to install both</span>
+                            - <span style="font-size:70%"> Recommended: use conda </span>
                         </script>
                     </section>
                     <section data-markdown>
