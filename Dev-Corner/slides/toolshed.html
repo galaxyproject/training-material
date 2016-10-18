@@ -208,6 +208,22 @@
                             <img src="../images/checkToolInstall_ss.png" class="no-border" >
                         </script>
                     </section>
+										<section data-markdown>
+                        <script type="text/template">
+                            ### Manage installed tools
+                            - Admin > Manage installed tools
+                            <img src="../images/manageInstalledRep_ss.png" class="no-border" >
+                            <img src="../images/repStatus_ss.png" class="no-border" >
+                        </script>
+                    </section>
+										<section data-markdown>
+                        <script type="text/template">
+                            ### Manage installed tools
+                            - Click on the name of a tool
+                              - Manage and browse the repository
+                            <img src="../images/manageRep_ss.png" class="no-border" >
+                        </script>
+                    </section>
                     <section data-markdown>
                         <script type="text/template">
                             ## Tips: How to install workflows
@@ -411,7 +427,41 @@
                         <script type="text/template">
                             ###  Workflow
                             <img src="../images/workflowRepDep2.png" class="no-border" >
-                            - **Everything must be on the toolshed**
+                            - **Everything must be on the same toolshed**
+                        </script>
+                    </section>
+										<section data-markdown>
+                        <script type="text/template">
+                            ## Tips: what about tools working with *.loc files or new datatypes
+                        </script>
+                    </section>
+										<section data-markdown>
+                        <script type="text/template">
+                            ### Tools with *.loc files or new datatypes
+                            - add them to the Tool Shed repository (tarball).
+
+                            - \*.loc files and datatypes files should be provided as *.sample file in a `tool-data` directory.
+
+                            - tool-data/*.loc.sample files come along with `tool_data_table_conf.xml.sample`.
+                            Their content or the file themselves are put to the right location on tool set up.
+                        </script>
+                    </section>
+										<section data-markdown>
+                        <script type="text/template">
+                            ### Tools with *.loc files or new datatypes
+                            <img src="../images/repWithLoc_ss.png" class="no-border" width="60%">
+                            - <span style="font-size:60%">`tool_data_table_conf.xml.sample`</span>
+                            ```
+                            <tables>
+                            	<!-- Locations of indexes in the Bowtie2 mapper format -->
+                            	<table name="bowtie2_indexes" comment_char="#">
+                            		<columns>value, dbkey, name, path</columns>
+                            		<file path="tool-data/bowtie2_indices.loc" />
+                            	</table>
+                            </tables>
+                            ```
+                            <span style="font-size:60%">On install, the content of the file and the right
+                            path to the *.loc file is added to `shed_tool_data_table_conf.xml`</span>
                         </script>
                     </section>
                 </section>
