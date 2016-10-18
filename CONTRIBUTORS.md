@@ -2,7 +2,7 @@
 
 The following individuals have contributed to this training material:
 
-* Andreas Richter 
+* Andreas Richter
 * Anton Nekrutenko (@nekrut)
 * Anika Erxleben (@erxleben)
 * Bérénice Batut (@bebatut)
@@ -11,6 +11,7 @@ The following individuals have contributed to this training material:
 * Fabian Kilpert (@kilpert)
 * Fidel Ramirez (@fidelram)
 * Friederike Duendar (@friedue)
+* Gildas Le Corguillé (@lecorguille)
 * Thomas Manke (@thomasmanke)
 * Torsten Houwaart
 * Jennifer Del Giudice (@jennydg)
