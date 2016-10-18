@@ -39,8 +39,8 @@ It will launch a flavored Galaxy instance available on
 
 This material is maintained by:
 
-- Stephanie Le Gras (slegras@igbmc.fr
-- Maintainer 2
+- Stephanie Le Gras (slegras@igbmc.fr)
+- Loraine Gueguen (loraine.gueguen@sb-roscoff.fr)
 
 For any question related to this topic and the content, you can contact them.
 
