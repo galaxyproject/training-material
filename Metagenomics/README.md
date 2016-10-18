@@ -19,6 +19,10 @@ Requirements:
 - Reference datasets
   - Silva (TODO: instructions)
 
+- input data
+  - get from zenodo here: TODO
+  - optional: put in a data library named *Galaxy training: Metagenomics with Mothur - MiSeq SOP* to prevent mass uploading during a class
+
 ## Input datasets
 
 *Zenodo DOI badge, e.g. [![DOI](https://zenodo.org/badge/doi/10.5281/zenodo.60520.svg)](http://dx.doi.org/10.5281/zenodo.60520)*

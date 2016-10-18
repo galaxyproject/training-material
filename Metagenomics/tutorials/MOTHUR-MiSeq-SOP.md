@@ -31,7 +31,9 @@ In this tutorial we will perform the following steps:
 3. OTU-based analysis
 4. Phylotype-based analysis
 5. Phylogeny-based analysis
+6. Vizualisation with Phinch
 
+Each of the Mothur tools in Galaxy contains a link to the mothur wiki in the help section. Here you can find more details about all the inputs, outputs and parameters for the tool.
 
 # Part 1: Obtaining and preparing data
 
@@ -50,7 +52,7 @@ Now that we know what our input data is, let's get it into our history:
 1. Create a **new history** and name it "Mothur MiSeq SOP"
 
 2. **Import** the training data **to your history**. There are two ways to do this. The easiest is using the data available from a *shared data library*, if this is not possible you can download the data yourself and upload it to your Galaxy instance.
-  - From data libray:
+  - From data library:
       - Navigate to the shared data library named *Galaxy training: Metagenomics with Mothur - MiSeq SOP* and import all fastq files you encounter there.
   - From your computer:
       - obtain data directly from [here](http://www.mothur.org/w/images/d/d6/MiSeqSOPData.zip)  <!-- TODO: zenodo link-->
@@ -67,7 +69,10 @@ Now that we know what our input data is, let's get it into our history:
 
      ![](../images/create_collection.png)
 
- - Enter a name for your new collection at the bottom right of the screen.
+ - You can change the name for each of your pairs here as well. These names will be used as sample names in the downstream analysis.
+
+ - Once you are happy with your pairings, enter a name for your new collection at the bottom right of the screen.
+
  - Click the **Create List** button. A new dataset collection item should now appear in your history.
 
 ## Reference Data
@@ -120,21 +125,18 @@ This will simply concatenate all the fasta files into a single file. In order to
     - Set **method** to *automatically from collection*
     - Set **fasta collection** to the `trim.contigs.fasta` output of the make.contigs step
 
-The group file consists of two columns, the first is the sequence read name, and the second is the group (sample) it belongs to. The sample names were generated from the file names. Looking out our group file, we see that the group names are perhaps longer than we would like them. To avoid this in the future we can rename our files before uploading, or, if you are comfortable with regular expressions, we can use Galaxy to edit our file names for us.
+The *group file* consists of two columns, the first is the sequence read name, and the second is the group (sample) it belongs to. The sample names were generated from the dataset names of the pairs in our collection.
 
-**4: *Rename groups* (OPTIONAL)**  
-Our group names are all of form `<sample name>_S188_L001__001`. The following will strip the part after the sample name from the group names.
-
-  - **Tool:** Column Regex Find And Replace
-  - **Parameters:**
-    - Set **using column** to `column 2`
-    - Set **Find Regex** to `(.*)_S[0-9]+_.*`
-    - Set **fasta collection** to the `trim.contigs.fasta` output of the make.contigs step
-  - Execute and rename resulting dataset to something recognizable
+```
+seq1  sample1
+seq2  sample1
+seq3  sample2
+..
+```
 
 :information_source: For those familiar with using mothur from the commandline, steps 2 and 3 generated files equivalent to the `stability.groups` and `stability.trim.fasta` files normally output by make.contigs when providing a stability file.
 
-**5: *Summarize data***  
+**4: *Summarize data***  
 To get more information about the resulting fasta files, we can use the `Summary.seqs` tool.
 
   - **Tool:** Summary.seqs
@@ -159,12 +161,14 @@ Mean:        1        252.811    252.811    0.70063  4.44854
 
 This tells us that we have 152360 sequences that for the most part vary between 248 and 253 bases. Interestingly, the longest read in the dataset is 502 bp. Be suspicious of this. Recall that the reads are supposed to be 251 bp each. This read clearly didn't assemble well (or at all). Also, note that at least 2.5% of our sequences had some ambiguous base calls. We'll take care of these issues in the next step when we run `screen.seqs`.
 
-**6: Filter reads based on quality and length**  
+**5: Filter reads based on quality and length**  
+
+The following tool will remove any sequences with ambiguous bases and anything longer than 275 bp.
 
 - **Tool:** Screen.seqs
 - **Parameters:**
   - Set **fasta** parameter to the merged fasta file from step 2
-  - Set **group** parameter to the group file created in step 3 (or 4)
+  - Set **group** parameter to the group file created in step 3
   - Set **maxlength** parameter to `275`
   - Set **maxambig** parameter to `0`
 
@@ -173,28 +177,105 @@ After the tool has finished, run summary.seqs tool on the filtered fasta (`good.
 :question: How many reads were removed in this screening step?
 <!-- answer: 23,488. Answer can be found by looking at number of lines in bad.accnos output of screen.seqs or comparing total number of seqs between the two summary.seqs logfiles -->
 
-
-# Part 2
-
-Short introduction about this subpart.
+## Processing improved sequences
+We anticipate that many of our sequences are duplicates of each other. Because it's computationally wasteful to align the same thing a bazillion times, we'll unique our sequences using the unique.seqs command:
 
 :pencil2: ***Hands on!***
 
-1. First step
-2. Second step
-3. Third step
+**1: Remove duplicate sequences**  
 
-## Subpart 2
+- **Tool:** Unique.seqs
+- **Parameters:**
+  - Set **fasta** to the `good.fasta` output from Screen.seqs
 
-Short introduction about this subpart.
+This tool outputs two files, one is the fasta file containing only unique sequences, and a *names files*. The names file consists of two columns, the first contains the sequence names for each of the unique sequences, and the second column contains all other sequence names that are identical to the sequence in the first column.
 
-:pencil2: ***Hands on!***
+```
+name   representatives
+seq1    seq2,seq3,seq5,seq11
+seq4    seq6,seq9,seq10
+seq7    seq8
+...
+```
 
-1. First step
-2. Second step
-3. Third step
+:question: How many sequences were unique? how many duplicates were removed?
 
-Some blabla
+**2: Generate count table**
+
+To reduce file sizes further and streamline analysis, we can now summarize the data in a *count table*.
+
+- **Tool:** Count.seqs
+- **Parameters:**
+  - Set **name** to the `names` output from Unique.seqs
+  - Set **Use a Group file** to `yes`
+  - Set **group** to the group file output by the Make.groups tools
+  - Set **groups** to all (or leave blank)
+
+The count_table will look something like this:
+
+```
+Representative_Sequence                      total   F3D0   F3D1  F3D141  F3D142  ...
+M00967_43_000000000-A3JHG_1_1101_14069_1827  4402    370    29    257     142
+M00967_43_000000000-A3JHG_1_1101_18044_1900  28      1      0     1       0
+M00967_43_000000000-A3JHG_1_1101_13234_1983  10522   425    281   340     205
+...
+```
+
+The first column contains the representative sequence, and the subsequent columns contain the number of duplicates of this sequence observed per sample.
+
+**3: Align sequences**
+
+- **Tool:** Align.seqs
+- **Parameters:**
+  - Set **fasta** to the fasta output from Unique.seqs
+  - Set **reference** to the `silva.v4.fasta` reference file
+    - If your Galaxy is preconfigured with this reference data you will be able to find it in dropdown menu.
+    - If not, set **Select Reference Template From** to `Your History` and select the appropriate file from your history.
+
+This should finish fairly quickly, let's create another summary to see what is going on
+
+- **Tool:** Summary.seqs
+- **Parameters:**
+  - Set **fasta** parameter to the aligned output from previous step
+  - Set **count** parameter to count_table we made earlier
+
+```
+            Start    End      NBases  Ambigs   Polymer  NumSeqs
+Minimum:    1250     10693    250     0        3        1
+2.5%-tile:  1968     11550    252     0        3        3222
+25%-tile:   1968     11550    252     0        4        32219
+Median:     1968     11550    252     0        4        64437
+75%-tile:   1968     11550    253     0        5        96655
+97.5%-tile: 1968     11550    253     0        6        125651
+Maximum:    1982     13400    270     0        12       128872
+Mean:       1967.99  11550    252.462 0        4.36693
+# of unique seqs:   16426
+total # of seqs:    128872
+```
+
+So what does this mean? You'll see that the bulk of the sequences start at position 1968 and end at position 11550. Some sequences start at position 1250 or 1982 and end at 10693 or 13400. These deviants from the mode positions are likely due to an insertion or deletion at the terminal ends of the aliignments. Sometimes you'll see sequences that start and end at the same position indicating a very poor alignment, which is generally due to non-specific amplification. To make sure that everything overlaps the same region we'll re-run screen.seqs to get sequences that start at or before position 1968 and end at or after position 11550. We'll also set the maximum homopolymer length to 8 since there's nothing in the database with a stretch of 9 or more of the same base in a row (this really could have been done in the first execution of screen.seqs above).
+
+- **Tool:** Screen.seqs
+- **Parameters:**
+  - Set **fasta** parameter to the aligned fasta
+  - Set **start** parameter to 1968
+  - Set **end** parameter to 11550
+  - Set **maxhomop** to 8
+  - Set **summary** to the most recent summary file (from after align.seqs)
+  - Set **count** to our count_table
+
+
+**Note:** we supply the count table so that it can be updated for the sequences we're removing and we're also using the summary file so we don't have to figure out again all the start and stop positions.
+
+
+## Assessing error rates
+## Preparing for analysis
+
+# OTU-based analysis
+## alpha diversity
+## beta diversity
+# Phylotype-based analysis
+# Phylogeny-based analysis
 
 :pencil2: ***Hands on!***
 
