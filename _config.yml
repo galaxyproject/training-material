@@ -15,18 +15,31 @@
 # in the templates via {{ site.myvariable }}.
 title: Galaxy Training Material
 email: your-email@domain.com
-description: > # 
+description: > #
   A collection of training material from offered Galaxy courses
-baseurl: "" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
-twitter_username: jekyllrb
-github_username:  jekyll
+github_repository: "https://github.com/bgruening/training-material"
+github_username: "bgruening"
 
-# Build settings
+# Serving
+baseurl: "" # the subpath of your site, e.g. /blog
+
+# Where things are
+source:       .
+destination:  ./_site
+plugins_dir:  _plugins
+layouts_dir:  _layouts
+data_dir:     _data
+includes_dir: _includes
+
+# Conversion
 markdown: kramdown
-theme: minima
-gems:
-  - jekyll-feed
+
+# Handling Reading
 exclude:
   - Gemfile
   - Gemfile.lock
+
+# Plugins
+gems:
+  - jekyll-feed
