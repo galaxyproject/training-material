@@ -59,7 +59,7 @@ Here, we have 7 samples:
 
 Each sample constitutes a separate biological replicate of the corresponding condition (treated or untreated). Moreover, two of the treated and two of the untreated samples are from a paired-end sequencing assay, while the remaining samples are from a single-end sequencing experiment.
 
-> ### <i class="fa fa-pencil"></i> Hands-on: Data upload
+> ### :pencil2: Hands-on: Data upload
 >
 > 1. Create a new history for this RNA-seq exercise
 > 2. Import a FASTQ file pair (*e.g.*  [`GSM461177_untreat_paired_subset_1`](https://zenodo.org/record/61771/files/GSM461177_untreat_paired_subset_1.fastq) and [`GSM461177_untreat_paired_subset_2`](https://zenodo.org/record/61771/files/GSM461177_untreat_paired_subset_2.fastq)) from [Zenodo](http://dx.doi.org/10.5281/zenodo.61771)
@@ -92,9 +92,9 @@ Both files contain the first 100.000 paired-end reads of one sample. The sequenc
 
 For quality control, we use similar tools as described in [NGS-QC tutorial](https://github.com/bgruening/training-material/blob/master/NGS-QC/tutorials/dive_into_qc.md).
 
-> ### <i class="fa fa-pencil"></i> Hands-on: Quality control
+> ### :pencil2: Hands-on: Quality control
 >
-> 1. **FastQC** <i class="fa fa-cog"></i>: Run on one of the two FASTQ files to control the quality of the reads as
+> 1. **FastQC** :wrench:: Run on one of the two FASTQ files to control the quality of the reads as
 >
 >    > ### :question: Questions
 >    >
@@ -102,8 +102,8 @@ For quality control, we use similar tools as described in [NGS-QC tutorial](http
 >    > - Is there anything what you find striking?
 >    {: .question}
 >
-> 2. **Trim Galore** <i class="fa fa-cog"></i>: Trim low quality bases from the 3' end using  on both paired-end datasets.
-> 3. **FastQC** <i class="fa fa-cog"></i>: Re-run and inspect the differences
+> 2. **Trim Galore** :wrench:: Trim low quality bases from the 3' end using  on both paired-end datasets.
+> 3. **FastQC** :wrench:: Re-run and inspect the differences
 {: .hands_on}
 
 As the genome of *Drosophila melanogaster* is known, we can use this information and map the sequences on this genome to identify the effects of Pasilla gene depletion on splicing events.
@@ -131,7 +131,7 @@ Spliced mappers have been developed to efficiently map transcript-derived reads 
 
 To help annotations of RNA sequences, we can take advantage from already known reference gene annotations.
 
-> ### <i class="fa fa-pencil"></i> Hands-on:
+> ### :pencil2: Hands-on:
 >
 > 1. Load the Ensembl gene annotation for *Drosophila melanogaster* ([`Drosophila_melanogaster.BDGP5.78.gtf`](https://zenodo.org/record/61771/files/Drosophila_melanogaster.BDGP5.78.gtf)) from [Zenodo](http://dx.doi.org/10.5281/zenodo.61771) into your current Galaxy history
 {: .hands_on}
@@ -147,16 +147,16 @@ These information should usually come with your FASTQ files! If not, try to find
 
 *This step is not necessary if you don't need to estimate parameters*
 
-> ### <i class="fa fa-pencil"></i> Hands-on:
+> ### :pencil2: Hands-on:
 >
-> 1. **Select first** <i class="fa fa-cog"></i>: Downsample the FASTQ file to 200k to 1M reads
+> 1. **Select first** :wrench:: Downsample the FASTQ file to 200k to 1M reads
 >
 >    > ### :warning: Warning
 >    >
 >    > For the provided files downsampling is not necessary as they only contain 100k reads
 >    {: .warning}
 >
-> 2. **TopHat** <i class="fa fa-cog"></i>: Run **TopHat** with:
+> 2. **TopHat** :wrench:: Run **TopHat** with:
 >    - "Paired-end (as individual datasets)" instead of "Single-end"
 >    - "Drosophila melanogaster: dm3" as reference genome
 >    - the defaults for *strandedness* and *insert size*
@@ -170,7 +170,7 @@ These information should usually come with your FASTQ files! If not, try to find
 >
 >    If you already have read the corresponding paper carefully you might know that the fragment size is ~200bp. With read lengths of 2x37bp an educated guess could also be `125` for the inner distance. It's up to you decision, which value you prefer...
 >
-> 5. **Infer Experiment** <i class="fa fa-cog"></i>: Run **Infer Experiment** with the same files
+> 5. **Infer Experiment** :wrench:: Run **Infer Experiment** with the same files
 > 6. Check the results and search the tool's documentation for help on the meaning.
 {: .hands_on}
 
@@ -188,9 +188,9 @@ SE,PE | undecided | "FR Unstranded" | default | "no" | "0"
 
 With the sequencing library parameters, the full RNA sequences can be mapped on the *Drosophila melanogaster* genome.
 
-> ### <i class="fa fa-pencil"></i> Hands-on:
+> ### :pencil2: Hands-on:
 >
-> 1. **TopHat** <i class="fa fa-cog"></i>: Run **TopHat** with the full parameter set to get the best mapping results:
+> 1. **TopHat** :wrench:: Run **TopHat** with the full parameter set to get the best mapping results:
 >    - "Paired-end (as individual datasets)" instead of "Single-end"
 >    - "Mean Inner Distance" to "112" (or "125"?)
 >    - "Drosophila melanogaster: dm3" as reference genome
@@ -221,14 +221,14 @@ The mapping exercise worked for you? Great! :tada:
 
 However, the datasets are too small to get you a good impression of how real data looks like. So we run TopHat for you on a real dataset. We extract only the reads mapped to Chromosome 4 of *Drosophila*.
 
-> ### <i class="fa fa-pencil"></i> Hands-on:
+> ### :pencil2: Hands-on:
 >
 > 1. Import from [Zenodo](http://dx.doi.org/10.5281/zenodo.61771) the following files:
 >    - [`GSM461177_untreat_paired_chr4.bam`](https://zenodo.org/record/61771/files/GSM461177_untreat_paired_chr4.bam)
 >    - [`GSM461177_untreat_paired_deletions_chr4.bed`](https://zenodo.org/record/61771/files/GSM461177_untreat_paired_deletions_chr4.bed)
 >    - [`GSM461177_untreat_paired_insertions_chr4.bed`](https://zenodo.org/record/61771/files/GSM461177_untreat_paired_insertions_chr4.bed)
 >    - [`GSM461177_untreat_paired_junctions_chr4.bed`](https://zenodo.org/record/61771/files/GSM461177_untreat_paired_junctions_chr4.bed)
-> 2. **IGV** <i class="fa fa-cog"></i>: Visualize this BAM file and the three BED files, particularly the region on Chromosome 4 between 560 kb to 600 kb (`chr4:560,000-600,000`)
+> 2. **IGV** :wrench:: Visualize this BAM file and the three BED files, particularly the region on Chromosome 4 between 560 kb to 600 kb (`chr4:560,000-600,000`)
 >
 >    > ### :+1: Tip:
 >    >
@@ -259,7 +259,7 @@ However, the datasets are too small to get you a good impression of how real dat
 >    > - How many reads are mapped and contain the insertion found at 566,827?
 >    {: .question}
 >
-> 3. **IGV** <i class="fa fa-cog"></i>: Inspect the results using a **Sashimi plot**
+> 3. **IGV** :wrench:: Inspect the results using a **Sashimi plot**
 >
 >    > ### :bulb: Tip: Creation of a Sashimi plot
 >    >
@@ -277,7 +277,7 @@ However, the datasets are too small to get you a good impression of how real dat
 >
 >    > Check [IGV documentation on Sashimi plots](http://software.broadinstitute.org/software/igv/Sashimi) to find some clues
 >
-> 4. **IGV** <i class="fa fa-cog"></i>: Look around to find other regions with in interesting junctions, *e.g.* `chr4:870,000-940,000`
+> 4. **IGV** :wrench:: Look around to find other regions with in interesting junctions, *e.g.* `chr4:870,000-940,000`
 {: .hands_on}
 
 # Analysis of the differential expression
@@ -291,16 +291,16 @@ of reads per gene. [**HTseq-count**](http://www-huber.embl.de/users/anders/HTSeq
 
 To quantify the number of reads mapped to a gene, an annotation of the genomic features as the genes is needed.
 
-> ### <i class="fa fa-pencil"></i> Hands-on:
+> ### :pencil2: Hands-on:
 >
 > 1. Load the Ensembl gene annotation for *Drosophila melanogaster* ([`Drosophila_melanogaster.BDGP5.78.gtf`](https://zenodo.org/record/61771/files/Drosophila_melanogaster.BDGP5.78.gtf)) from [Zenodo](http://dx.doi.org/10.5281/zenodo.61771) into your current Galaxy history
 {: .hands_on}
 
 In case of paired-end reads, the alignments in BAM should be sorted by read name.
 
-> ### <i class="fa fa-pencil"></i> Hands-on:
+> ### :pencil2: Hands-on:
 >
-> 1. **Sort BAM dataset** <i class="fa fa-cog"></i>: Sort the paired-end BAM file by "Read names" with **Sort BAM dataset**
+> 1. **Sort BAM dataset** :wrench:: Sort the paired-end BAM file by "Read names" with **Sort BAM dataset**
 {: .hands_on}
 
 In principle, the counting of reads overlapping with genomic features is a fairly simple task, but there are some details that need to be decided. **HTseq-count** offers 3 choices ("union", "intersection_strict" and "intersection_nonempty") to handle read mapping to multiple locations, reads overlapping introns, or reads that overlap more than one genomic feature:
@@ -311,9 +311,9 @@ In principle, the counting of reads overlapping with genomic features is a fairl
 
 The recommended mode is "union", which counts overlaps even if a read only shares parts of its sequence with a genomic feature and disregards reads that overlap more than one feature.
 
-> ### <i class="fa fa-pencil"></i> Hands-on:
+> ### :pencil2: Hands-on:
 >
-> 1. **HTseq-count** <i class="fa fa-cog"></i>: Run **HTseq-count** on the sorted BAM file with
+> 1. **HTseq-count** :wrench:: Run **HTseq-count** on the sorted BAM file with
 >    - `Drosophila_melanogaster.BDGP5.78.gtf` as "GFF file"
 >    - The "Union" mode
 >    - A "Minimum alignment quality" of 10
@@ -332,7 +332,7 @@ In previous section, we counted only reads that mapped to Chromosome 4 for only 
 
 You can export a workflow from the previous steps and rerun it on the 7 samples whose the raw sequences are available on [Zenodo](http://dx.doi.org/10.5281/zenodo.61771). For time saving, we run the previous steps for you and obtain 7 count files.
 
-> ### <i class="fa fa-pencil"></i> Hands-on:
+> ### :pencil2: Hands-on:
 >
 > 1. Create a new history
 > 2. Import the seven count files from [Zenodo](http://dx.doi.org/10.5281/zenodo.61771)
@@ -363,9 +363,9 @@ Multiple factors can then been incorporated in the the analysis. In our example,
 
 A multi-factor analysis allows us to assess the effect of the treatment taking also the sequencing type into account.
 
-> ### <i class="fa fa-pencil"></i> Hands-on:
+> ### :pencil2: Hands-on:
 >
-> 1. **DESeq2** <i class="fa fa-cog"></i>: Run **DESeq2** with:
+> 1. **DESeq2** :wrench:: Run **DESeq2** with:
 >    - "Condition" as first factor with "treated" and "untreated" as levels and selection of count files corresponding to both levels
 >    - "Sequencing" as first factor with "PE" and "SE" as levels and selection of count files corresponding to both levels
 >
@@ -388,9 +388,9 @@ The first output of **DESeq2** is a tabular file. The columns are:
 6.	*p*-value for the statistical significance of this change
 7.	*p*-value adjusted for multiple testing with the Benjamini-Hochberg procedure which controls false discovery rate ([FDR](https://en.wikipedia.org/wiki/False_discovery_rate))
 
-> ### <i class="fa fa-pencil"></i> Hands-on:
+> ### :pencil2: Hands-on:
 >
->1. **Filter** <i class="fa fa-cog"></i>: Run **Filter** to extract genes with a significant change in gene expression (adjusted *p*-value equal or below 0.05) between treated and untreated sample
+>1. **Filter** :wrench:: Run **Filter** to extract genes with a significant change in gene expression (adjusted *p*-value equal or below 0.05) between treated and untreated sample
 >
 >    > ### :question: Question
 >    >
@@ -402,14 +402,14 @@ The first output of **DESeq2** is a tabular file. The columns are:
 >    > The file with the independent filtering results can be used for further downstream analysis as it excludes genes with only few read counts as these genes will not be called as significantly differentially expressed.
 >    {: .tip}
 >
-> 2. **Filter** <i class="fa fa-cog"></i>: Extract genes that are significantly up regulated and those down regulated in treated samples
+> 2. **Filter** :wrench:: Extract genes that are significantly up regulated and those down regulated in treated samples
 >
 >    > ### :question: Question
 >    >
 >    > Is there more up regulated or down regulated genes in treated samples?
 >    {: .question}
 >
-> 3. **Summary Statistics for any numerical column** <i class="fa fa-cog"></i> and **Histogram of a numeric column** <i class="fa fa-cog"></i>: Build the log2 fold change distribution of up regulated and down regulated genes
+> 3. **Summary Statistics for any numerical column** :wrench: and **Histogram of a numeric column** :wrench:: Build the log2 fold change distribution of up regulated and down regulated genes
 >
 >    > ### :question: Questions
 >    >
@@ -482,10 +482,10 @@ The Database for Annotation, Visualization and Integrated Discovery ([DAVID](htt
 
 We use then DAVID to identify functional annotations of the up regulated genes and the down regulated genes.
 
-> ### <i class="fa fa-pencil"></i> Hands-on:
+> ### :pencil2: Hands-on:
 >
-> 1. **Select first lines from a dataset** <i class="fa fa-cog"></i>: Extract the first 300 lines of the 2 datasets generated previously (up regulated genes and down regulated genes)
-> - **DAVID** <i class="fa fa-cog"></i>: Run **DAVID** on these files with
+> 1. **Select first lines from a dataset** :wrench:: Extract the first 300 lines of the 2 datasets generated previously (up regulated genes and down regulated genes)
+> 2. **DAVID** :wrench:: Run **DAVID** on these files with
 >     - First column as "Column with identifiers"
 >     - "FLYBASE_GENE_ID" as "Identifier type"
 >
