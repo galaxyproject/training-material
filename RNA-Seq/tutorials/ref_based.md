@@ -3,7 +3,7 @@ layout: tutorial
 
 title: "Reference based RNA-seq data analysis"
 name: "ref_based"
-related_topic: "RNA_Seq"
+related_topic: "RNA-Seq"
 zenodo_link: ""
 
 questions:
