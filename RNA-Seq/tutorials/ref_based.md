@@ -80,9 +80,10 @@ Each sample constitutes a separate biological replicate of the corresponding con
 >    > * Select `fastqsanger`
 >    {: .tip}
 >
-> :+1: **Edit the "Database/Build" to select "dm3"**
->
-> :+1: **Rename the datasets according to the samples**
+>    > ### :nut_and_bolt: Comments
+>    > - Edit the "Database/Build" to select "dm3"
+>    > - Rename the datasets according to the samples
+>    {: .comment}
 > As default, Galaxy takes the link as name.
 {: .hands_on}
 
@@ -112,7 +113,10 @@ As the genome of *Drosophila melanogaster* is known, we can use this information
 
 To make sense of the reads, their positions within *Drosophila melanogaster* genome must be determined. This process is known as aligning or 'mapping' the read to the reference genome.
 
+> ### :nut_and_bolt: Comment
+>
 > Want to learning more about mapping? Follow our [training](http://bgruening.github.io/training-material/NGS-mapping/slides)
+> {: .comment}
 
 Because in the case of eukaryotic transcriptome most reads originate from processed mRNAs lacking exons, they cannot be simply mapped back to the genome. Instead they can be separated into two categories:
 
@@ -151,10 +155,10 @@ These information should usually come with your FASTQ files! If not, try to find
 >
 > 1. **Select first** :wrench:: Downsample the FASTQ file to 200k to 1M reads
 >
->    > ### :warning: Warning
+>    > ### :nut_and_bolt: Comment
 >    >
 >    > For the provided files downsampling is not necessary as they only contain 100k reads
->    {: .warning}
+>    {: .comment}
 >
 > 2. **TopHat** :wrench:: Run **TopHat** with:
 >    - "Paired-end (as individual datasets)" instead of "Single-end"
@@ -230,10 +234,10 @@ However, the datasets are too small to get you a good impression of how real dat
 >    - [`GSM461177_untreat_paired_junctions_chr4.bed`](https://zenodo.org/record/61771/files/GSM461177_untreat_paired_junctions_chr4.bed)
 > 2. **IGV** :wrench:: Visualize this BAM file and the three BED files, particularly the region on Chromosome 4 between 560 kb to 600 kb (`chr4:560,000-600,000`)
 >
->    > ### :+1: Tip:
->    >
->    > Change the data type from "tabular" to "bed"
->    {: .tip}
+>    > ### :nut_and_bolt: Comment
+>    > - Change the data type from "tabular" to "bed"
+>    > - Rename the datasets according to the samples
+>    {: .comment}
 >
 >    > ### :question: Question
 >    >
@@ -242,7 +246,10 @@ However, the datasets are too small to get you a good impression of how real dat
 >
 >    ![](../images/tophat_bam_output_color_reads.png)
 >
+>    > ### :nut_and_bolt: Comment
+>    >
 >    > Check [IGV documentation](http://software.broadinstitute.org/software/igv/AlignmentData) to find some clues
+>    {: .comment}
 >
 >    > ### :question: Question
 >    >
@@ -275,7 +282,10 @@ However, the datasets are too small to get you a good impression of how real dat
 >    > - And the number on these lines?
 >    {: .question}
 >
+>    > ### :nut_and_bolt: Comment
+>    >
 >    > Check [IGV documentation on Sashimi plots](http://software.broadinstitute.org/software/igv/Sashimi) to find some clues
+>    {: .comment}
 >
 > 4. **IGV** :wrench:: Look around to find other regions with in interesting junctions, *e.g.* `chr4:870,000-940,000`
 {: .hands_on}
@@ -369,10 +379,10 @@ A multi-factor analysis allows us to assess the effect of the treatment taking a
 >    - "Condition" as first factor with "treated" and "untreated" as levels and selection of count files corresponding to both levels
 >    - "Sequencing" as first factor with "PE" and "SE" as levels and selection of count files corresponding to both levels
 >
->    > ### :bulb: Tip
+>    > ### :nut_and_bolt: Comment
 >    >
 >    > File names have all information needed
->    {: .tip}
+>    {: .comment}
 {: .hands_on}
 
 The first output of **DESeq2** is a tabular file. The columns are:
@@ -397,10 +407,10 @@ The first output of **DESeq2** is a tabular file. The columns are:
 >    > How many genes have a significant change in gene expression between conditions?
 >    {: .question}
 >
->    > ### :bulb: Tip
+>    > ### :nut_and_bolt: Comment
 >    >
 >    > The file with the independent filtering results can be used for further downstream analysis as it excludes genes with only few read counts as these genes will not be called as significantly differentially expressed.
->    {: .tip}
+>    {: .comment}
 >
 > 2. **Filter** :wrench:: Extract genes that are significantly up regulated and those down regulated in treated samples
 >
