@@ -1,19 +1,40 @@
-## The Basics for setting up a Galaxy Server
+Galaxy Server administration
+====
 
-#### '10 rules' for Setting up a Galaxy Instance as a Service
+Administration of Galaxy Servers can be a complex task. Here, we propose some materials to learn how to setting up a Galaxy instance, how to use Docker for Galaxy and the Galaxy Database schema.
 
-This [content](https://github.com/bgruening/training-material/tree/master/Admin-Corner/10rules_for_GaaS) is based on a presentation given at the Training Day at the Galaxy Community Conferences in Norwich, UK and Bloomington, IN in July 2015 and June 2016, respectively.
+# Slides
+
+Several deck of slides are available for this topic:
+
+- [General introduction about Galaxy server administration](http://bgruening.github.io/training-material/Admin-Corner/slides/)
+- Slide deck related to the tutorials:
+    - [Setting up a Galaxy Instance as a Service](http://bgruening.github.io/training-material/Admin-Corner/slides/setting_up_galaxy_instance.html)
+    - [Docker and Galaxy](http://bgruening.github.io/training-material/Admin-Corner/slides/galaxy_docker.html)
+    - [Galaxy Database schema](http://bgruening.github.io/training-material/Admin-Corner/slides/database_schema.html)
+
+# Tutorials
+
+4 tutorials with hands-on are available for this topic:
+
+- [Move from dev instance to production instance](tutorials/dev_to_production.html)
+- [Setting up a Galaxy Instance as a Service](tutorials/setting_up_galaxy_instance.md)
+- [Docker and Galaxy](tutorials/galaxy_docker.md)
+- [Galaxy Database schema](tutorials/Database_Schema.md)
 
 
-## Advanced Topics in administering a Galaxy server
-.
+# Contributors
 
+This material is maintained by:
 
-## The Galaxy Database schema
+- Maintainer 1
+- Maintainer 2
 
-This [content](https://github.com/bgruening/training-material/tree/master/Admin-Corner/Database_Schema) is based on a presentation given at the Training Day at the Galaxy Community Conferences in Bloomington, IN in June 2016.
+For any question related to this topic and the content, you can contact them.
 
+The following individuals have contributed to this training material:
 
-## The Galaxy Docker project
-
-Slides and a some training material for the Galaxy Docker proejct can be found at: https://slides.com/bgruening/the-galaxy-docker-project/live#/ as well as on the [project github repository](https://github.com/bgruening/docker-galaxy-stable).
+- Dave Clements
+- Hans-Rudolf Hotz
+- Olivier Inizan
+- Valentin Marcon

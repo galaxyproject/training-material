@@ -1,0 +1,296 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Dive into quality control</title>
+
+		<link rel="stylesheet" href="../../shared/reveal.js/css/reveal.css">
+		<link rel="stylesheet" href="../../shared/reveal.js/css/theme/simple.css" id="theme">
+
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="../../shared/reveal.js/lib/css/zenburn.css">
+        <link rel="stylesheet" href="../../shared/font-awesome/css/font-awesome.min.css">
+		<link rel="stylesheet" href="../../shared/css/custom.css" id="theme">
+
+		<!-- Printing and PDF exports -->
+        <script>
+          if( window.location.search.match( /print-pdf/gi ) ) {
+            var link = document.createElement( 'link' );
+            link.rel = 'stylesheet';
+            link.type = 'text/css';
+            link.href = '../../shared/reveal.js/css/print/pdf.css';
+            document.getElementsByTagName( 'head' )[0].appendChild( link );
+          }
+        </script>
+		<!--<script>
+            if (window.location.search.match(/print-pdf/gi)) {
+                document.write('<link rel="stylesheet" href="css/pdf.css" type="text/css">');
+            }
+        </script>-->
+
+		<!--[if lt IE 9]>
+        <script src="../../shared/reveal.js/lib/js/html5shiv.js"></script>
+        <![endif]-->
+	</head>
+
+	<body>
+		<div class="reveal">
+            <div class="slides">
+                <section data-markdown>
+                    <script type="text/template">
+                        ## Welcome!
+
+                        <img src="../../shared/images/GTNLogo1000.png" alt="GTNLogo1000"
+                        class="no-border" width=30%/>
+
+                        The easiest way to **navigate** this slide deck
+                        is **by hitting `[space]` on your keyboard**
+
+                        You can also navigate with arrow keys, but be careful because some
+                        slides can be nested inside of each other (vertically)
+                    </script>
+                </section>
+
+                <section data-markdown>
+                    <script type="text/template">
+                        ## Requirements
+
+                        Before diving into this slide deck, <br/>
+                        we recommend you to have a look at:
+
+                        1. [Galaxy introduction](../../Introduction/slides/index.html)
+                        2. [NGS quality control introduction](index.html)
+                    </script>
+                </section>
+
+                <section data-markdown>
+                    <script type="text/template">
+                        # Dive into quality control
+                    </script>
+                </section>
+
+                <section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ## Small introduction (vertical part)
+                        </script>
+                    </section>
+
+                    <section data-markdown>
+                        <script type="text/template">
+                            ### Subpart1.1
+
+                            - list
+                            - list
+                            - list
+                        </script>
+                    </section>
+
+                    <section data-markdown>
+                        <script type="text/template">
+                            ### Subpart1.2
+
+                            With an image...
+
+                            <img src="../../shared/images/GTNLogo1000.png" alt="GTNLogo1000" class="no-border" width=30%/>
+                        </script>
+                    </section>
+                </section>
+
+                <section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ### <i class="fa fa-question-circle" aria-hidden="true"></i> Questions
+
+                            - How to control quality of NGS data?
+                            - What are the quality parameters to check for each dataset?
+                            - How to improve the quality of a sequence dataset?
+                        </script>
+                    </section>
+
+                    <section data-markdown>
+                        <script type="text/template">
+                            ### <i class="fa fa-bullseye" aria-hidden="true"></i> Objectives
+
+                            - Manipulate FastQ files
+                            - Control quality from a FastQ file
+                            - Use FastQC tool
+                            - Understand FastQC output
+                            - Use tools for quality correction
+                        </script>
+                    </section>
+                </section>
+
+                <section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ## Get your sequence dataset
+
+                            <i class="fa fa-pencil" aria-hidden="true"></i> ***Hands on!***
+
+                        </script>
+                    </section>
+                </section>
+
+                <section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ## Check the quality of your sequences
+                        </script>
+                    </section>
+
+                    <section data-markdown>
+                        <script type="text/template">
+                            ### How to check the quality of a FastQ file?
+
+                            FastQC introduction
+                        </script>
+                    </section>
+
+                    <section data-markdown>
+                        <script type="text/template">
+                            ### Run FastQC
+
+                            <i class="fa fa-pencil" aria-hidden="true"></i> ***Hands on!***
+                        </script>
+                    </section>
+
+                    <section data-markdown>
+                        <script type="text/template">
+                            ### Check the FastQC output
+
+                            <i class="fa fa-pencil" aria-hidden="true"></i> ***Hands on!***
+
+                            *add info about the traffic lights in FastQC output*
+                        </script>
+                    </section>
+
+                    <section data-markdown>
+                        <script type="text/template">
+                            ### Sequence length distribution
+
+                            *add an image here*
+                        </script>
+                    </section>
+
+                    <section data-markdown>
+                        <script type="text/template">
+                            ### Per sequence quality
+
+                            *add an image here*
+
+                            <small>[What is quality score?](index.html#/3/2)</small>
+                        </script>
+                    </section>
+
+                    <section data-markdown>
+                        <script type="text/template">
+                            ### Per base sequence content
+
+                            *add an image here*
+                        </script>
+                    </section>
+
+                    <section data-markdown>
+                        <script type="text/template">
+                            ### Duplicate sequences
+
+                            *add an image here*
+                        </script>
+                    </section>
+
+                    <section data-markdown>
+                        <script type="text/template">
+                            ### Adaptor contamination
+
+                            *add an image here*
+                        </script>
+                    </section>
+
+                    <section data-markdown>
+                        <script type="text/template">
+                            ### <i class="fa fa-exclamation-circle" aria-hidden="true"></i> Key points
+
+                            Parameters to check during quality control:
+
+                            1. Parameter
+                            2. Parameter
+                        </script>
+                    </section>
+                </section>
+
+                <section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ## Improve the quality of your sequences
+                        </script>
+                    </section>
+
+                    <section data-markdown>
+                        <script type="text/template">
+                            ### How to improve the quality of your sequences?
+
+                            - Identify possible things to improve
+                            - Remove too small sequences
+                            - Remove sequences with small mean quality score
+                            - Cut/Trim sequences from small quality score part
+                        </script>
+                    </section>
+
+                    <section data-markdown>
+                        <script type="text/template">
+                            ### Run TrimGalore or PRINSEQ?
+
+                            <i class="fa fa-pencil" aria-hidden="true"></i> ***Hands on!***
+                        </script>
+                    </section>
+
+                    <section data-markdown>
+                        <script type="text/template">
+                            ### Check the improvement in quality score
+
+                            rerun FastQC
+
+                            <i class="fa fa-pencil" aria-hidden="true"></i> ***Hands on!***
+                        </script>
+                    </section>
+                </section>
+
+
+                <section data-markdown>
+                    <script type="text/template">
+                        ### <i class="fa fa-exclamation-circle" aria-hidden="true"></i> Key points
+
+                        1. Check the quality of your sequences
+                        2. Improve the quality of your sequences
+                        3. Check the quality improvement
+                    </script>
+                </section>
+			</div>
+
+		</div>
+
+		<script type="text/javascript" src="../../shared/reveal.js/lib/js/head.min.js"></script>
+        <script type="text/javascript" src="../../shared/reveal.js/js/reveal.js"></script>
+        <script type="text/javascript">
+            Reveal.initialize({
+                slideNumber: !window.location.search.match(/print-pdf/gi),
+                history: true,
+
+                theme: Reveal.getQueryHash().theme,
+                transition: Reveal.getQueryHash().transition || 'concave',
+
+                dependencies: [
+                    { src: '../../shared/reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+                    { src: '../../shared/reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                    { src: '../../shared/reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                    { src: '../../shared/js/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+                    { src: '../../shared/reveal.js/plugin/notes/notes.js', async: true },
+                ]
+            });
+        </script>
+
+	</body>
+</html>

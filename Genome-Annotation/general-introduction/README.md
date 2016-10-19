@@ -16,7 +16,7 @@ It consists of three main steps:
 DNA and protein sequences are written in FASTA format where you have in the first line a ">" followed by the description. In the second line the sequence starts.
 
 
-![FASTA file](https://raw.githubusercontent.com/bgruening/training-material/master/genome-annotation/general-introduction/fasta_format.png)
+![FASTA file](images/fasta_format.png)
 
 
 
@@ -24,7 +24,7 @@ DNA and protein sequences are written in FASTA format where you have in the firs
 
 The general feature format (gene-finding format, generic feature format, GFF) is a file format used for describing genes and other features of DNA, RNA and protein sequences.
 
-<img src="https://raw.githubusercontent.com/bgruening/training-material/master/genome-annotation/general-introduction/gff3_format.png" width="70%">
+<img src="images/gff3_format.png" width="70%">
 
 
 
@@ -32,12 +32,12 @@ The general feature format (gene-finding format, generic feature format, GFF) is
 
 The genbank sequence format is a rich format for storing sequences and associated annotations.
 
-![genbank file](https://raw.githubusercontent.com/bgruening/training-material/master/genome-annotation/general-introduction/gb_full.png)
+![genbank file](images/gb_full.png)
 
 
 # 2. Structural Annotation
 
-For the genome annotation we us a piece of the *Aspergillus fumigatus* ![genome sequence](https://raw.githubusercontent.com/bgruening/training-material/master/genome-annotation/general-introduction/Aspergillus_sequence.fasta) as input file. 
+For the genome annotation we us a piece of the *Aspergillus fumigatus* [genome sequence](Aspergillus_sequence.fasta) as input file. 
 
 
 
@@ -45,7 +45,7 @@ For the genome annotation we us a piece of the *Aspergillus fumigatus* ![genome 
 
 First we want to get some general information about our sequence. Count the number of bases in your sequence (**compute sequence length**), and check for sequence composition and GC content (**geecee**). Plot the sequence composition as bar chart. 
 
-<img src="https://raw.githubusercontent.com/bgruening/training-material/master/genome-annotation/general-introduction/barchart_sequencecomposition.png" width="30%">
+<img src="images/barchart_sequencecomposition.png" width="30%">
 
 
 
@@ -56,12 +56,12 @@ At first you need to identify those structures of the genome which code for prot
 We use **Augustus** for gene prediction. Use the genome sequence (FASTA file) as input. Choose the right *model organism*, *gff* format output, and select all possible output options.
 
 
-![augustus](https://raw.githubusercontent.com/bgruening/training-material/master/genome-annotation/general-introduction/augustus.png)
+![augustus](images/augustus.png)
 
 
 Augustus will provide three output files: *gff3*, *coding sequences* (CDS) and *protein sequences*. How many genes are predicted?
 
-![augustus_output](https://raw.githubusercontent.com/bgruening/training-material/master/genome-annotation/general-introduction/augustus_out.png)
+![augustus_output](images/augustus_out.png)
 
 
 ## 2.3 tRNA and tmRNA Prediction
@@ -86,7 +86,7 @@ Functional gene annotation means the description of the biochemical and biologic
 For similarity searches we use *NCBI BLAST+ blastp* to find similar proteins in a protein database. As input file, select the protein sequences from Augustus, choose the protein BLAST database *SwissProt* and the output format *xml*. 
 
 
-<img src="https://raw.githubusercontent.com/bgruening/training-material/master/genome-annotation/general-introduction/blastP.png" width="70%">
+<img src="images/blastP.png" width="70%">
 
 
 
@@ -96,7 +96,7 @@ From BLAST search results we we want to get only the best hit for each protein. 
 
 
 
-<img src="https://raw.githubusercontent.com/bgruening/training-material/master/genome-annotation/general-introduction/selectlines.png" width="50%">
+<img src="images/selectlines.png" width="50%">
 
 
 
@@ -117,10 +117,10 @@ For functional description of those proteins we want to search for motifs or dom
 
 ### 3.1.1 BLAST Programs
 
-![BLAST programs](https://raw.githubusercontent.com/bgruening/training-material/master/genome-annotation/general-introduction/blastprograms.png)
+![BLAST programs](images/blastprograms.png)
 
 
-![BLAST databases](https://raw.githubusercontent.com/bgruening/training-material/master/genome-annotation/general-introduction/blast%20database.png)
+![BLAST databases](images/blast%20database.png)
 
 
 
@@ -155,19 +155,19 @@ Cock et al. (2013): [Galaxy tools and workflows for sequence analysis with appli
 
 For identification of gene clusters, **antiSMASH** is used. The tool uses genbank file as input files and predicts gene clusters. Output files are a html visualization and the gene cluster proteins.
 
-Import this [dataset](https://raw.githubusercontent.com/bgruening/training-material/master/genome-annotation/general-introduction/Streptomyces_coelicolor_part.genbank) into your Galaxy history and run **antiSMASH** to detect gene clusters. The genbank file contains a part of the *Streptomyces coelicolor* genome sequence.
+Import this [dataset](Streptomyces_coelicolor_part.genbank) into your Galaxy history and run **antiSMASH** to detect gene clusters. The genbank file contains a part of the *Streptomyces coelicolor* genome sequence.
 
 Which gene clusters are identified?
 
  
 When you have a whole genome **antiSMASH** analysis, your result may look like this:
 
-<img src="https://raw.githubusercontent.com/bgruening/training-material/master/genome-annotation/general-introduction/antismash_full.png" width="80%">
+<img src="images/antismash_full.png" width="80%">
 
 
 At the end, you can extract a reproducible workflow out of your history. The workflow should look like this:
 
-![GenomeAnnotation Workflow](https://raw.githubusercontent.com/bgruening/training-material/master/genome-annotation/general-introduction/work%20flow_Screenshot%20from%202015-06-23%2009-33-23.png)
+![GenomeAnnotation Workflow](images/work%20flow_Screenshot%20from%202015-06-23%2009-33-23.png)
 
 
 

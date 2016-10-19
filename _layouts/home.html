@@ -1,0 +1,76 @@
+---
+layout: base
+---
+{% include main_header.html %}
+
+<section>
+    <p style="text-align:center;"><script src="https://embed.github.com/view/geojson/bgruening/galaxy-maps/master/server.geojson?height=300&width=400">
+    </script>
+    </p>
+    <p><em>This repository will be moved to the <a href="https://github.com/galaxyproject">https://github.com/galaxyproject</a> as soon as we are confident about our guidelines and our initial training material.</em></p>
+
+    <h1>Training material</h1>
+
+    <h2>Galaxy use</h2>
+
+    <table class="table table-striped">
+        <tr>
+              <td class="col-md-1">Lesson</td>
+              <td class="col-md-3">Introduction</td>
+              <td class="col-md-7">Tutorials</td>
+        </tr>
+
+        {% for topic in site.data.content %}
+            {% if topic.type == "use" %}
+            <tr>
+                  <td class="col-md-1"><a href="{{ page.root }}/{{ topic.url}}">{{ topic.title }}</a></td>
+                  <td class="col-md-3">Link</td>
+                  <td class="col-md-7">Link</td>
+            </tr>
+            {% endif %}
+        {% endfor %}
+    </table>
+
+    <h2>Galaxy development and administration</h2>
+
+    <table class="table table-striped">
+        <tr>
+              <td class="col-md-1">Lesson</td>
+              <td class="col-md-3">Introduction</td>
+              <td class="col-md-7">Tutorials</td>
+        </tr>
+
+        {% for topic in site.data.content %}
+            {% if topic.type == "admin-dev" %}
+            <tr>
+                  <td class="col-md-1"><a href="{{ page.root }}/{{ topic.url}}">{{ topic.title }}</a></td>
+                  <td class="col-md-3">Link</td>
+                  <td class="col-md-7">Link</td>
+            </tr>
+            {% endif %}
+        {% endfor %}
+    </table>
+
+    <h1>License</h1>
+
+    <p>This work is licensed under the <a href="http://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0 Unported License</a>.</p>
+
+    <h1>Acknowledgment and Funding</h1>
+
+    <p>We would like to thank all contributors to our Galaxy courses, especially those mentioned in the <a href="CONTRIBUTORS.md">Contributors list</a>, the Galaxy community for their constant support and our funding partners.</p>
+
+    <p>
+    <a href="http://www.denbi.de/"><img src="https://raw.githubusercontent.com/bgruening/rbc_docs/master/logo/deNBI_Logo_rgb.png" width="15%" style="max-width:100%;"></a>  
+    <a href="http://www.sfb992.uni-freiburg.de/"><img src="https://raw.githubusercontent.com/bgruening/presentations/bce348bb606c312d531c479e63a66efc2bc38d44/shared/resources/img/MEDEP.jpg" width="15%" style="max-width:100%;"></a>  
+    <a href="http://www.ie-freiburg.mpg.de"><img src="https://raw.githubusercontent.com/bgruening/presentations/master/shared/resources/img/14_MPI_IE_logo_mit_180.gif" width="15%" style="max-width:100%;"></a>  
+    <a href="https://www.uni-freiburg.de/"><img src="https://raw.githubusercontent.com/bgruening/presentations/a2e38e4b007994af798320db3a0131c4bb891c0e/shared/resources/img/logo_freiburg.jpg" width="15%" style="max-width:100%;"></a>
+    <br>
+    <a href="https://wiki.galaxyproject.org/Teach/GTN"><img src="./shared/images/GTNLogo1000.png" width="15%" style="max-width:100%;"></a>
+    <a href="http://www.france-bioinformatique.fr/"><img src="https://github.com/vdda/ifb/blob/master/logo-ifb.png" width="15%" style="max-width:100%;"></a>
+    </p>
+
+    <p>You want to help us on this project? Please, see the <a href="CONTRIBUTING.md"><code>CONTRIBUTING</code></a> file.</p>
+
+</section>
+
+{% include main_footer.html %}

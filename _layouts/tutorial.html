@@ -1,0 +1,51 @@
+---
+layout: base
+---
+
+<section class="tutorial">
+
+    <h1>{{ page.title }}</h1>
+
+    <blockquote class="overview">
+        <h3>Overview</h2>
+
+        <p class="bold"><i class="fa fa-question-circle"></i> Questions</p>
+        <ul>
+        {% for question in page.questions %}
+	       <li>{{ question }}</li>
+	    {% endfor %}
+        </ul>
+
+        <p class="bold"><i class="fa fa-bullseye"></i> Objectives</p>
+        <ul>
+        {% for objective in page.objectives %}
+	       <li>{{ objective }}</li>
+	    {% endfor %}
+        </ul>
+
+        <p class="bold">Requirements</p>
+        <ul>
+        {% for requirement in page.requirements %}
+	       <li><a href="{{ requirement.link }}">{{ requirement.title }}</a></li>
+	    {% endfor %}
+        </ul>
+
+        <p><span class="bold"> :beers: Time estimation:</span> {{ page.time_estimation }}</p>
+
+    </blockquote>
+
+{{ content }}
+
+    <blockquote class="key_points">
+        <h3><i class="fa fa-exclamation-circle"></i> Key points</h2>
+
+        <ul>
+        {% for key_point in page.key_points %}
+           <li>{{ key_point }}</li>
+        {% endfor %}
+        </ul>
+    </blockquote>
+
+    <h2> Thank you</h2>
+
+</section>
