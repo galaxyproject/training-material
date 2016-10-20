@@ -212,22 +212,22 @@ However, the datasets are too small to get you a good impression of how real dat
 
     > Check [IGV documentation](http://software.broadinstitute.org/software/igv/AlignmentData) to find some clues
 
-    :question: Which information does the `GSM461177_untreat_paired_junctions_chr4.bed` BED files contain? How is this information represented in IGV? How many reads are mapped in "JUNC00012240"? And how many are mapped over "JUNC00012240"? What do these reads represent?
+    :question: Which information does the `GSM461177_untreat_paired_junctions_chr4.bed` BED files contain? How is this information represented in IGV? How many reads are mapped in "JUNC00012240"? And how many are mapped over "JUNC00012240"? (WHY TWICE THE QUESTION FOR jun00012240?) What do these reads represent?
 
     :question: Which information does the `GSM461177_untreat_paired_insertions_chr4.bed` and `GSM461177_untreat_paired_deletions_chr4.bed` BED files contain? How is this information represented in IGV? How many reads are mapped and contain the insertion found at 566,827?
 
 3. **IGV** :wrench:: Inspect the results using a **Sashimi plot**
 
     > :bulb: **Creation of a Sashimi plot**
-    > * Right click on the bam file
+    > * Right click on the BAM file
     > * Select **Sashimi Plot** from the context menu
     <br>
 
     ![](../images/tophat_igv_sashimi.png)
 
-    :question: What do the numbered line represent? And the number on these lines?
+    :question: What does the numbered line represent? And the number on these lines?
 
-    > Check [IGV documentation on Sashimi plots](http://software.broadinstitute.org/software/igv/Sashimi) to find some clues
+    > Check [IGV documentation on Sashimi plots](http://software.broadinstitute.org/software/igv/Sashimi) to find some clues.
 
 4. **IGV** :wrench:: Look around to find other regions with in interesting junctions, *e.g.* `chr4:870,000-940,000`
 
@@ -238,9 +238,9 @@ To identify exons that are regulated by Pasilla gene, we need to identify genes 
 ## Count the number of reads per annotated gene
 
 To compare the expression of single genes between different conditions (*e.g.* with or without PS depletion), an essential step is the quantification
-of reads per gene. [**HTseq-count**](http://www-huber.embl.de/users/anders/HTSeq/doc/count.html) is one of the most popular tools for gene quantification.
+of reads per gene. [**HTSeq-count**](http://www-huber.embl.de/users/anders/HTSeq/doc/count.html) is one of the most popular tools for gene quantification.
 
-To quantify the number of reads mapped to a gene, an annotation of the genomic features as the genes is needed.
+To quantify the number of reads mapped to a gene, an annotation of the genomic features as it is in the genes is needed.
 
 :pencil2: ***Hands on!***
 
@@ -252,29 +252,29 @@ In case of paired-end reads, the alignments in BAM should be sorted by read name
 
 1. **Sort BAM dataset** :wrench:: Sort the paired-end BAM file by "Read names" with **Sort BAM dataset**
 
-In principle, the counting of reads overlapping with genomic features is a fairly simple task, but there are some details that need to be decided. **HTseq-count** offers 3 choices ("union", "intersection_strict" and "intersection_nonempty") to handle read mapping to multiple locations, reads overlapping introns, or reads that overlap more than one genomic feature:
+In principle, the counting of reads overlapping with genomic features is a fairly simple task, but there are some details that need to be decided. **HTSeq-count** offers 3 choices ("union", "intersection_strict" and "intersection_nonempty") to handle read mapping to multiple locations, reads overlapping introns, or reads that overlap more than one genomic feature:
 
 ![](../images/htseq_count.png)
 
-*[HTseq documentation](http://www-huber.embl.de/users/anders/HTSeq/doc/count.html)*
+*[HTSeq documentation](http://www-huber.embl.de/users/anders/HTSeq/doc/count.html)*
 
 The recommended mode is "union", which counts overlaps even if a read only shares parts of its sequence with a genomic feature and disregards reads that overlap more than one feature.
 
 :pencil2: ***Hands on!***
 
-1. **HTseq-count** :wrench:: Run **HTseq-count** on the sorted BAM file with
+1. **HTSeq-count** :wrench:: Run **HTSeq-count** on the sorted BAM file with
     - `Drosophila_melanogaster.BDGP5.78.gtf` as "GFF file"
-    - The "Union" mode
+    - The "union" mode
     - A "Minimum alignment quality" of 10
 2. Inspect the result files
 
     :question: How many reads could not have been assigned to any feature?
 
-    :question: Which feature is the most found feature?
+    :question: Which feature is the most found one?
 
 ## Analysis of the differential gene expression
 
-In previous section, we counted only reads that mapped to Chromosome 4 for only one sample. To be able to identify differentially gene expression induced by PS depletion, all datasets (3 treated and 4 untreated) must be analyzed with the similar process.
+In the previous section, we counted only reads that mapped to Chromosome 4 for only one sample. To be able to identify differentially gene expression induced by PS depletion, all datasets (3 treated and 4 untreated) must be analyzed with the similar procedure.
 
 You can export a workflow from the previous steps and rerun it on the 7 samples whose the raw sequences are available on [Zenodo](http://dx.doi.org/10.5281/zenodo.61771). For time saving, we run the previous steps for you and obtain 7 count files.
 
@@ -295,7 +295,7 @@ Either for within or inter-sample comparison, the counts need to be normalized. 
 - Estimate the magnitude of expression differences between the samples
 - Estimate the significance of expression differences between the samples
 
-For this expression is estimated from read counts and attempts are made to correct for variability in measurements using replicates that are absolutely essential accurate results. Indeed, [**DESeq2**](https://bioconductor.org/packages/release/bioc/html/DESeq2.html) is great tool for DGE analysis. It takes read counts produced by **HTseq-count** and apply size factor normalization:
+This expression analysis is estimated from read counts and attempts are made to correct for variability in measurements using replicates that are absolutely essential accurate results. Indeed, [**DESeq2**](https://bioconductor.org/packages/release/bioc/html/DESeq2.html) is great tool for DGE analysis. It takes read counts produced by **HTseq-count** and apply size factor normalization:
 
 - Computation for each gene of the geometric mean of read counts across all samples
 - Division of every gene count by the geometric mean
