@@ -9,7 +9,7 @@ Reference based RNA-seq data analysis
 :dart: ***Objectives***
 
 - *Analysis of RNA sequencing data using a reference genome*
-- *Analysis of the differential gene expression*
+- *Analysis of differentially expressed genes*
 - *Identification of functional enrichment among differentially expressed genes*
 
 :heavy_check_mark: ***Requirements***
@@ -17,6 +17,7 @@ Reference based RNA-seq data analysis
 - *Galaxy introduction*
 - *Quality control*
 - *Mapping*
+- *IGV*
 
 :hourglass: ***Time estimation*** *1d/3h/6h*
 
@@ -24,9 +25,9 @@ Reference based RNA-seq data analysis
 
 # Introduction
 
-In [Brooks et al. 2011](http://genome.cshlp.org/content/21/2/193.long) study, the Pasilla (PS) gene, *Drosophila* homologue of the Human splicing regulators Nova-1 and Nova-2 Proteins, was depleted in *Drosophila melanogaster* by RNAi. The authors wanted to identify exons that are regulated by Pasilla gene using RNA sequencing data.
+In the study of [Brooks *et al.* 2011](http://genome.cshlp.org/content/21/2/193.long), the Pasilla (PS) gene, *Drosophila* homologue of the Human splicing regulators Nova-1 and Nova-2 Proteins, was depleted in *Drosophila melanogaster* by RNAi. The authors wanted to identify exons that are regulated by Pasilla gene using RNA sequencing data.
 
-Total RNA was isolated and used for preparing either single-end or paired-end RNA-seq libraries for 3 treated (PS depleted) samples and 4 untreated samples . These libraries were sequenced to obtain a collection of RNA sequencing reads for each sample. The effects of Pasilla gene depletion on splicing events can then be analyzed. The genome of *Drosophila melanogaster* is known and can be used as reference genome to ease this analysis.  
+Total RNA was isolated and used for preparing either single-end or paired-end RNA-seq libraries for 3 treated (PS depleted) samples and 4 untreated samples. These libraries were sequenced to obtain a collection of RNA sequencing reads for each sample. The effects of Pasilla gene depletion on splicing events can then be analyzed. The genome of *Drosophila melanogaster* is known and can be used as reference genome to ease this analysis.  
 
 Reference based RNA-seq data analysis is ...
 *add a small introduction about reference based RNA-seq data analysis*
@@ -83,22 +84,22 @@ For quality control, we use similar tools as described in [NGS-QC tutorial](http
 
 :pencil2: ***Hands on!*** Quality control
 
-1. **FastQC** :wrench:: Run on one of the two FASTQ files to control the quality of the reads as
+1. **FastQC** :wrench:: Run FastQC on one of the two FASTQ files to control the quality of the reads to know
 
     :question: What is the read length? Is there anything what you find striking?
 
-2. **Trim Galore** :wrench:: Trim low quality bases from the 3' end using  on both paired-end datasets.
+2. **Trim Galore** :wrench:: Trim low quality bases from the 3' end using on both paired-end datasets.
 3. **FastQC** :wrench:: Re-run and inspect the differences
 
 As the genome of *Drosophila melanogaster* is known, we can use this information and map the sequences on this genome to identify the effects of Pasilla gene depletion on splicing events.
 
 # Mapping
 
-To make sense of the reads, their positions within *Drosophila melanogaster* genome must be determined. This process is known as aligning or 'mapping' the read to the reference genome.
+To make sense of the reads, their positions within *Drosophila melanogaster* genome must be determined. This process is known as aligning or 'mapping' the reads to the reference genome.
 
 > Want to learning more about mapping? Follow our [training](http://bgruening.github.io/training-material/NGS-mapping/slides)
 
-Because in the case of eukaryotic transcriptome most reads originate from processed mRNAs lacking exons, they cannot be simply mapped back to the genome. Instead they can be separated into two categories:
+Because in the case of a eukaryotic transcriptome, most reads originate from processed mRNAs lacking exons, they cannot be simply mapped back to the genome. Instead they can be separated into two categories:
 
 - Reads that map entirely within exons
 - Reads that cannot be mapped within an exon across their entire length because they span two or more exons
@@ -111,9 +112,9 @@ Spliced mappers have been developed to efficiently map transcript-derived reads 
 
 ![](../images/tophat2.png)
 
-*[Kim et al, Genome Biology, 2013](https://genomebiology.biomedcentral.com/articles/10.1186/gb-2013-14-4-r36)*
+*[Kim et al., Genome Biology, 2013](https://genomebiology.biomedcentral.com/articles/10.1186/gb-2013-14-4-r36)*
 
-To help annotations of RNA sequences, we can take advantage from already known reference gene annotations.
+To help annotating RNA sequences, we can take advantage from already known reference gene annotations.
 
 :pencil2: ***Hands on!***
 
@@ -124,7 +125,7 @@ TopHat needs to know two important parameters about the sequencing library
 - The library type and its strandedness type
 - The inner distance between the two reads for paired-end data
 
-These information should usually come with your FASTQ files! If not, try to find them on the site where you downloaded the data or in the corresponding publication. Another option is to estimate these parameters with a *preliminary mapping* of a *downsampled* file and some analysis programs. Afterward, the actual mapping can be redo on the original files with the optimized parameters.
+These information should usually come with your FASTQ files, ask your sequencing facility! If not, try to find them on the site where you downloaded the data or in the corresponding publication. Another option is to estimate these parameters with a *preliminary mapping* of a *downsampled* file and some analysis programs. Afterward, the actual mapping can be redone on the original files with the optimized parameters.
 
 ## Preliminary mapping
 
@@ -146,7 +147,7 @@ These information should usually come with your FASTQ files! If not, try to find
 
     :question: What is the mean value for the inner distance?
 
-    If you already have read the corresponding paper carefully you might know that the fragment size is ~200bp. With read lengths of 2x37bp an educated guess could also be `125` for the inner distance. It's up to you decision, which value you prefer...
+    If you already have read the corresponding paper carefully you might know that the fragment size is ~200bp. With read lengths of 2x37bp, an educated guess could also be `125` for the inner distance. It's up to your decision, which value you prefer...
 
 5. **Infer Experiment** :wrench:: Run **Infer Experiment** with the same files
 6. Check the results and search the tool's documentation for help on the meaning.
@@ -169,7 +170,7 @@ With the sequencing library parameters, the full RNA sequences can be mapped on 
 
 1. **TopHat** :wrench:: Run **TopHat** with the full parameter set to get the best mapping results:
     - "Paired-end (as individual datasets)" instead of "Single-end"
-    - "Mean Inner Distance" to "112" (or "125"?)
+    - "Mean Inner Distance" to "200" (or "125"?)
     - "Drosophila melanogaster: dm3" as reference genome
     - "Full parameter list" for "TopHat settings to use"
     - "FR First Strand" as "Library type"
@@ -184,15 +185,15 @@ With the sequencing library parameters, the full RNA sequences can be mapped on 
     - `Drosophila_melanogaster.BDGP5.78.gtf` as Gene Model Annotations (to enable transcriptome alignment)
     - "Yes (--coverage-search)" to use coverage-based search for junctions
 
-        The TopHat algorithm splits reads into segments to map the reads across splice junctions. Coverage-based search for junctions increases the sensitivity
+        The TopHat algorithm splits reads into segments to map the reads across splice junctions. Coverage-based search for junctions increases the sensitivity.
 
-**TopHat** generated a BAM file with the mapped reads and three BED files containing splice junctions, insertions and deletions.
+**TopHat** generates a BAM file with the mapped reads and three BED files containing splice junctions, insertions and deletions.
 
 The mapping exercise worked for you? Great! :tada:
 
 ## Inspection of TopHat results
 
-However, the datasets are too small to get you a good impression of how real data looks like. So we run TopHat for you on a real dataset. We extract only the reads mapped to Chromosome 4 of *Drosophila*.
+However, the datasets are too small to give you a good impression of how real data looks like. So we run TopHat for you on a real dataset. We extract only the reads mapped to Chromosome 4 of *Drosophila*.
 
 :pencil2: ***Hands on!***
 
@@ -201,7 +202,7 @@ However, the datasets are too small to get you a good impression of how real dat
     - [`GSM461177_untreat_paired_deletions_chr4.bed`](https://zenodo.org/record/61771/files/GSM461177_untreat_paired_deletions_chr4.bed)
     - [`GSM461177_untreat_paired_insertions_chr4.bed`](https://zenodo.org/record/61771/files/GSM461177_untreat_paired_insertions_chr4.bed)
     - [`GSM461177_untreat_paired_junctions_chr4.bed`](https://zenodo.org/record/61771/files/GSM461177_untreat_paired_junctions_chr4.bed)
-2. **IGV** :wrench:: Visualize this BAM file and the three BED files, particularly the region on Chromosome 4 between 560 kb to 600 kb (`chr4:560,000-600,000`)
+2. **IGV** :wrench:: Visualize this BAM file and the three BED files, particularly the region on Chromosome 4 between 560 kb to 600 kb (`chr4:560,000-600,000`).
 
     > :+1: **Change the data type from "tabular" to "bed"**
     <br>
@@ -210,7 +211,7 @@ However, the datasets are too small to get you a good impression of how real dat
 
     ![](../images/tophat_bam_output_color_reads.png)
 
-    > Check [IGV documentation](http://software.broadinstitute.org/software/igv/AlignmentData) to find some clues
+    > Check [IGV documentation](http://software.broadinstitute.org/software/igv/AlignmentData) to find some clues.
 
     :question: Which information does the `GSM461177_untreat_paired_junctions_chr4.bed` BED files contain? How is this information represented in IGV? How many reads are mapped in "JUNC00012240"? And how many are mapped over "JUNC00012240"? What do these reads represent?
 
