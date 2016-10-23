@@ -44,11 +44,14 @@ Total RNA was isolated and used for preparing either single-end or paired-end RN
 Reference based RNA-seq data analysis is ...
 *add a small introduction about reference based RNA-seq data analysis*
 
-In this tutorial, we will analyze the data with:
-
-1. [Pretreatments](#pretreatments)
-2. [Mapping](#mapping)
-3. [Analysis of the differential expression](#analysis-of-the-differential-expression)
+> ### Agenda
+>
+> In this tutorial, we will analyze the data with:
+>
+> 1. [Pretreatments](#pretreatments)
+> 2. [Mapping](#mapping)
+> 3. [Analysis of the differential expression](#analysis-of-the-differential-expression)
+> {: .agenda}
 
 # Pretreatments
 
