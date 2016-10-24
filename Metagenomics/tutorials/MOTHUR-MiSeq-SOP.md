@@ -23,19 +23,26 @@ This tutorial will demonstrate how to perform the *standard operating procedure 
 <!-- TODO: add citation
 Kozich JJ, Westcott SL, Baxter NT, Highlander SK, Schloss PD. (2013): Development of a dual-index sequencing strategy and curation pipeline for analyzing amplicon sequence data on the MiSeq Illumina sequencing platform. Applied and Environmental Microbiology. 79(17):5112-20. -->
 
-:information_source: Your results may deviate slightly from the ones presented in this tutorial due to differing tool or reference data versions.
-
 ## Overview
 In this tutorial we will perform the following steps:
 
 1. Obtaining and preparing input data
 2. Quality Control
+  - Reducing sequencing and PCR errors
+  - Processing improved sequences
+  - Assessing error rate
+  - Preparing for analysis  
 3. OTU-based analysis
-4. Phylotype-based analysis
-5. Phylogeny-based analysis
-6. Vizualisation with Phinch
+  - alpha diversity
+  - beta diversity
+  - population-level analysis
+4. Vizualisations
+  - Phinch
+  - Krona
 
 Each of the Mothur tools in Galaxy contains a link to the mothur wiki in the help section. Here you can find more details about all the inputs, outputs and parameters for the tool.
+
+:information_source: Your results may deviate slightly from the ones presented in this tutorial due to differing tool or reference data versions or stochastic processes in the algorithms.
 
 # Part 1: Obtaining and preparing data
 
@@ -401,13 +408,13 @@ In the log file we see somthing like this:
 
 ```
 It took 0 to read 32 sequences.
-Overall error rate:	6.5108e-05
-Errors	Sequences
-0	3998
-1	3
-2	0
-3	2
-4	1
+Overall error rate:    6.5108e-05
+Errors    Sequences
+0    3998
+1    3
+2    0
+3    2
+4    1
 ```
 
 That rocks, eh? Our error rate is 0.0065%. We can now cluster the sequences into OTUs to see how many spurious OTUs we have:
@@ -445,16 +452,112 @@ We're almost to the point where you can have some fun with your data (I'm alread
   - Set **count table**, **fasta**, and **taxonomy** to the respective outputs from Remove.lineage
   - Set **groups** to `Mock`
 
-### OTUs
-### Phylotypes
-### Phylogenetic
+Now we have a couple of options for clustering sequences into OTUs. For a small dataset like this, we could do the traditional approach using dist.seqs and cluster as we did with the Mock sample.
 
-# Analysis
-## OTU-based analysis
-### alpha diversity
-### beta diversity
-# Phylotype-based analysis
-# Phylogeny-based analysis
+The alternative is to use the cluster.split command. In this approach, we use the taxonomic information to split the sequences into bins and then cluster within each bin. The Schloss lab have published results showing that if you split at the level of Order or Family, and cluster to a 0.03 cutoff, you'll get just as good of clustering as you would with the "traditional" approach. The advantage of the cluster.split approach is that it should be faster, use less memory, and can be run on multiple processors. In an ideal world we would prefer the traditional route because "Trad is rad", but we also think that kind of humor is funny.... In this command we use `taxlevel=4`, which corresponds to the level of *Order*. This is the approach that we generally use in the Schloss lab.
+
+- **Tool:** Cluster.split
+- **Parameters:**  
+  - Set **Split by** to `classification`
+  - Set **fasta** to the fasta output from Remove.groups
+  - Set **taxonomy** to the taxonomy output from Remove.groups
+  - Set **taxlevel** to `4`
+  - Set **count** to the count table output from Remove.groups
+  - Set **cutoff** to `0.15`
+
+Next we want to know how many sequences are in each OTU from each group and we can do this using the `Make.shared` command. Here we tell mothur that we're really only interested in the 0.03 cutoff level:
+
+- **Tool:** Make.shared
+- **Parameters:**  
+  - Set **Select input type** to `OTU list`
+  - Set **list** to list output from Cluster.split
+  - Set **count** to the count table from Remove.groups
+  - Set **label** to `0.03`
+
+We probably also want to know the taxonomy for each of our OTUs. We can get the consensus taxonomy for each OTU using the `Classify.otu` command:
+
+- **Tool:** Classify.otu
+- **Parameters:**  
+  - Set **list** to output from Cluster.split
+  - Set **count** to the count table from Remove.groups
+  - Set **taxonomy** to the taxonomy output from Remove.groups
+  - Set **label** to `0.03`
+
+Opening the taxonomy output for level 0.03 shows something like:
+
+```
+OTU       Size    Taxonomy
+Otu001    17      Bacteria(100);"Verrucomicrobia"(100);Verrucomicrobiae(100);Verrucomicrobiales(100);Verrucomicrobiaceae(100);Akkermansia(100);
+Otu002    1       Bacteria(100);"Proteobacteria"(100);Gammaproteobacteria(100);Aeromonadales(100);Aeromonadaceae(100);Aeromonas(100);
+Otu003    6       Bacteria(100);"Proteobacteria"(100);Betaproteobacteria(100);Neisseriales(100);Neisseriaceae(100);Neisseria(100);
+Otu004    1       Bacteria(100);"Proteobacteria"(100);Gammaproteobacteria(100);unclassified(100);unclassified(100);unclassified(100);
+Otu005    1       Bacteria(100);"Proteobacteria"(100);Gammaproteobacteria(100);Xanthomonadales(100);Xanthomonadaceae(100);Stenotrophomonas(100);
+Otu006    598     Bacteria(100);Firmicutes(100);Clostridia(100);Clostridiales(100);Ruminococcaceae(100);unclassified(100);
+Otu007    513     Bacteria(100);Firmicutes(100);Clostridia(100);Clostridiales(100);Lachnospiraceae(100);unclassified(100);
+Otu008    1442    Bacteria(100);Firmicutes(100);Clostridia(100);Clostridiales(100);Lachnospiraceae(100);unclassified(100);
+```
+
+This is telling you that Otu001 was observed 17 times in your samples and that all of the sequences (100%) were classified as being members of the Akkermansia.
+
+In this tutorial we will continue with this otu-based approach, for the phylotype and phylogenic approaches, please see the extra credit section at the end of this tutorial.
+
+# Step 3: OTU-based Analysis
+
+Let's do something more interesting and actually analyze our data. We'll focus on the OTU-based dataset. The analysis using the phylotype-based analysis is essentially the same. Also, remember that our initial question had to do with the stability and change in community structure in these samples when comparing early and late samples. Keep in mind that the group names have either a F or M (sex of animal) followed by a number (number of animal) followed by a D and a three digit number (number of days post weaning).
+
+:pencil2: ***Hands on!***
+
+What we now want to do is see how many sequences we have in each sample. We'll do this with the `Count.groups` command:
+
+- **Tool:** Count.groups
+- **Parameters:**
+  - Set **shared** to the shared file from Make.shared
+
+Take a look at the output. We see that our smallest sample had 2440 sequences in it. That is a reasonable number. Despite what some say, subsampling and rarefying your data is an important thing to do. We'll generate a subsampled file for our analyses with the `Sub.sample` command:
+
+- **Tool:** Sub.sample
+- **Parameters:**
+  - Set **Select type of data to subsample** to `OTU Shared`
+  - Set **shared** to output from Make.shared from the OTU section above
+  - Set **size** to `2440`
+
+
+## Alpha diversity
+
+Let's start our analysis by analyzing the alpha diversity of the samples. First we will generate rarefaction curves describing the number of OTUs observed as a function of sampling effort. We'll do this with the `Rarefaction.single` command:
+
+- **Tool:** Rarefaction.single
+- **Parameters:**
+  - Set **shared** to shared file from Make.shared
+
+<!-- TODO: plot rarefaction curves -->
+
+Alas, rarefaction is not a measure of richness, but a measure of diversity. If you consider two communities with the same richness, but different evenness then after sampling a large number of individuals their rarefaction curves will asymptote to the same value. Since they have different evennesses the shapes of the curves will differ. Therefore, selecting a number of individuals to cutoff the rarefaction curve isn't allowing a researcher to compare samples based on richness, but their diversity. Finally, let's get a table containing the number of sequences, the sample coverage, the number of observed OTUs, and the Inverse Simpson diversity estimate using the `Summary.single` command. To standardize everything, let's randomly select 2441 sequences from each sample 1000 times and calculate the average:
+
+- **Tool:** Summary.single
+- **Parameters:**
+  - Set **share** to shared file from Make.shared
+  - Set **calc** to nseqs,coverage,sobs,invsimpson
+  - Set **size** to 2440
+
+These data will be outputted to a table called the summary file. Interestingly, the sample coverages were all above 97%, indicating that we did a pretty good job of sampling the communities. Plotting the richness or diversity of the samples would show that there was little difference between the different animals or between the early and late time points. You could follow this up with a repeated-measures ANOVA and find that there was no significant difference based on sex or early vs. late.
+
+<!-- TODO: plot this table too -->
+
+## Beta diversity
+
+Let's calculate the similarity of the membership and structure found in the various samples. We'll do this with the `Dist.shared` command that will allow us to rarefy our data to a common number of sequences.
+
+- **Tool:** Dist.shared
+- **Parameters:**
+  - Set **shared** to the shared file from Make.shared
+  - Set **calc** to thetayc,jclass
+  - Set **size** to 2440
+
+## Population-level Analysis
+
+# Step 4: Visualisations
+
 
 :pencil2: ***Hands on!***
 
@@ -474,3 +577,52 @@ Conclusion about the technical key points. And then relation between the technic
 - *...*
 
 # :clap: Thank you
+
+
+
+
+# Extra Credit (Optional)
+
+In this tutorial we focussed on the OTU based approach, but the original SOP also mentions phylotype- and phylogeny-based methods. These are described below for the interested reader.
+
+## Phylotype-based analysis
+
+For some analyses you may desire to bin your sequences in to phylotypes according to their taxonomic classification. We can do this using the phylotype command:
+
+- **Tool:** Phylotype
+- **Parameters:**  
+  - Set **taxonomy** to output from Remove.groups
+
+The cutoff numbering is a bit different for phylotype compared to Cluster and Cluster.split. Here you see 1 through 6 listed as options; these correspond to Genus through Kingdom levels, respectively. So if you want the genus-level shared file we'll do the following:
+
+- **Tool:** Make.shared
+- **Parameters:**  
+  - Set **Select input type** to `OTU list`
+  - Set **list** to list output from Phylotype
+  - Set **count** to the count table from Remove.groups
+  - Set **label** to `1`
+
+We also want to know who these OTUs are and can run classify.otu on our phylotypes:
+
+- **Tool:** Classify.otu
+- **Parameters:**  
+  - Set **list** to output from Phylotype
+  - Set **count** to output from Remove.groups
+  - Set **taxonomy** to output from Remove.groups
+  - Set **label** to `1`
+
+the subsequent analysis is virtually the same as the OTU based apporach.
+
+## Phylogeny-based analysis
+
+If you are interested in using methods that depend on a phylogenetic tree such as calculating phylogenetic diversity or the unifrac commands, you'll need to generate a tree.
+
+- **Tool:** Dist.seqs
+- **Parameters:**
+  - Set **fasta** to fasta output from Remove.groups
+  - Set **output** to `Phylip formatted Lower Triangle Matrix`
+
+- **Tool:** Clearcut
+- **Parameters:**
+  - Set **Distance Matrix** to `Phylip Distance Matrix`
+  - Set **phylip** to the distance matrix from Dist.seqs
