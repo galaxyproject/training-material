@@ -12,25 +12,48 @@ layout: base
 
     <table class="table table-striped">
         <tr>
-              <td class="col-md-1">Lesson</td>
-              <td class="col-md-3">Hands-on</td>
-              <td class="col-md-7">Slides</td>
-              <td class="col-md-9">Input dataset</td>
+              <td class="bold">Lesson</td>
+              <td class="bold">Hands-on</td>
+              <td class="bold">Slides</td>
+              <td class="bold">Input dataset</td>
+              <td class="bold">Galaxy tour</td>
         </tr>
 
         <tr>
-              <td class="col-md-1">Introduction</td>
-              <td class="col-md-3"></td>
-              <td class="col-md-7"><a href="{{ site.url }}/{{ page.url }}/slides/introduction">Link</a></td>
-              <td class="col-md-9"></td>
+              <td>Introduction</td>
+              <td></td>
+              <td><a href="{{ site.url }}/{{ page.url }}/slides">:mortar_board:</a></td>
+              <td></td>
+              <td></td>
         </tr>
 
         {% for tutorial in page.tutorials %}
             <tr>
-                  <td class="col-md-1"><a href="{{ site.url }}{{ page.url }}tutorials/{{ tutorial.name }}">{{ tutorial.title }}</a></td>
-                  <td class="col-md-3"><a href="{{ site.url }}{{ page.url }}tutorials/{{  tutorial.name }}">Link</a></td>
-                  <td class="col-md-7"><a href="{{ site.url }}{{ page.url }}slides/{{  tutorial.name }}">Link</a></td>
-                  <td class="col-md-9"><a href="{{ tutorial.zenodo_link }}">Link</a></td>
+                <td>{{ tutorial.title }}</td>
+
+                <td>
+                    {% if tutorial.hands-on != "" %}
+                    <a href="{{ site.url }}{{ page.url }}tutorials/{{ tutorial.hands-on }}">:book:</a>
+                    {% endif %}
+                </td>
+
+                <td>
+                    {% if tutorial.slides != "" %}
+                    <a href="{{ site.url }}{{ page.url }}slides/{{ tutorial.name }}">:mortar_board:</a>
+                    {% endif %}
+                </td>
+
+                <td>
+                    {% if tutorial.zenodo_link != "" %}
+                    <a href="{{ tutorial.zenodo_link }}">:open_file_folder:</a>
+                    {% endif %}
+                </td>
+
+                <td>
+                    {% if tutorial.galaxy_tour != "" %}
+                    <a href="https://github.com/galaxyproject/galaxy-tours">:eyes:</a>
+                    {% endif %}
+                </td>
             </tr>
         {% endfor %}
     </table>
