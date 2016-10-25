@@ -9,7 +9,16 @@ tutorials:
 -
     title: "Reference based RNA-seq data analysis"
     name: "ref_based"
+    zenodo_link: "https://zenodo.org/record/61771#.WA9TyJN96EI"
+    slides: "ref_based"
+    hands-on: "ref_based"
+    galaxy_tour: "ref_based_rna_seq"
+-
+    title: "De novo RNA-seq data analysis"
     zenodo_link: ""
+    slides: ""
+    hands-on: ""
+    galaxy_tour: ""
 
 maintainers:
 -
