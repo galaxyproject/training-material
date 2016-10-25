@@ -2,7 +2,7 @@
 layout: tutorial
 
 title: "Reference based RNA-seq data analysis"
-name: "ref_based"
+tutorial_name: "ref_based"
 related_topic: "RNA-Seq"
 zenodo_link: ""
 

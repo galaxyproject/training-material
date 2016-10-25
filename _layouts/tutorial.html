@@ -1,8 +1,49 @@
 ---
 layout: base
 ---
+<header>
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a id="site-title" class="navbar-brand" href="https://wiki.galaxyproject.org/Teach/GTN">
+              <img class="pull-left img-responsive" src="{{site.logo}}">
+            </a>
+            <a id="site-title" class="navbar-brand name-holder" href="{{ site.url }}/{{ page.related_topic }}/tutorials/{{ page.name }}">
+              {{ page.title }}
+            </a>
+          </div>
+
+          <div class="collapse navbar-collapse" id="navbar">
+
+            <ul id="main-menu" class="nav navbar-nav navbar-right">
+              <li><a href="{{ site.url }}"><i class="fa fa-home"></i> Home</a></li>
+              <li><a href="{{ site.url }}/{{ page.related_topic }}"> {{ page.related_topic }}</a></li>
+              <li><a href="{{ site.url }}/{{ page.related_topic }}/slides"> Introduction</a></li>
+              <li><a href="{{ site.url }}/{{ page.related_topic }}/slides/{{ page.tutorial_name }}/"><i class="fa fa-file-powerpoint-o"></i> Associated slides</a></li>
+              <li><a href="{{ site.github_repository }}/tree/master/{{ page.related_topic }}/docker"><i class="fa fa-ship"></i> Docker image</a></li>
+
+              {% if page.zenodo_link != "" %}
+                <li><a href="{{ page.zenodo_link }}"><i class="fa fa-folder-open"></i> Input Dataset</a></li>
+              {% endif %}
+            </ul>
+          </div>
+          <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+</header>
+
 <section class="tutorial">
-    <ul class="tutorial-header">
+    <!--<ul class="tutorial-header">
             <li><a href="{{ site.url }}">Home</a></li>
             <li><a href="{{ site.url }}/{{ page.related_topic }}">Related topic</a></li>
     	    <li><a href="{{ site.url }}/{{ page.related_topic }}/tutorials/introduction">Topic Introduction</a></li>
@@ -10,7 +51,7 @@ layout: base
             <li><a href="{{ site.url }}/{{ page.related_topic }}/slides/{{ page.name }}">Associated slides</a></li>
             <li><a href="{{ site.github_repository }}/tree/master/{{ page.related_topic }}/docker">Docker image</a></li>
             <li><a href="{{ page.zenodo_link }}">Input Dataset</a></li>
-    </ul>
+    </ul>-->
 
     <h1>{{ page.title }}</h1>
 
