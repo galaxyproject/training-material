@@ -1,5 +1,5 @@
 ---
-layout: tutorial
+layout: tutorial_text
 
 title: "Reference based RNA-seq data analysis"
 tutorial_name: "ref_based"
