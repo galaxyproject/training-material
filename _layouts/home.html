@@ -15,17 +15,19 @@ layout: base
 
     <table class="table table-striped">
         <tr>
-              <td class="col-md-1">Lesson</td>
-              <td class="col-md-3">Introduction</td>
-              <td class="col-md-7">Tutorials</td>
+              <td>Lesson</td>
+              <td>Introduction</td>
+              <td>Tutorials</td>
+              <td>Docker image</td>
         </tr>
 
         {% for topic in site.data.content %}
             {% if topic.type == "use" %}
             <tr>
-                  <td class="col-md-1"><a href="{{ site.url }}/{{ topic.url}}">{{ topic.title }}</a></td>
-                  <td class="col-md-3">Link</td>
-                  <td class="col-md-7">Link</td>
+                  <td><a href="{{ site.url }}/{{ topic.url}}">{{ topic.title }}</a></td>
+                  <td><a href="{{ site.url }}/{{ topic.url}}/slides"> :mortar_board: </a></td>
+                  <td>{{ topic.tutorial_number }}</td>
+                  <td><a href="{{ site.github_repository }}/tree/master/{{ topic.url }}/docker">:whale: </a></td>
             </tr>
             {% endif %}
         {% endfor %}
@@ -35,17 +37,19 @@ layout: base
 
     <table class="table table-striped">
         <tr>
-              <td class="col-md-1">Lesson</td>
-              <td class="col-md-3">Introduction</td>
-              <td class="col-md-7">Tutorials</td>
+              <td>Lesson</td>
+              <td>Introduction</td>
+              <td>Tutorials</td>
+              <td>Docker image</td>
         </tr>
 
         {% for topic in site.data.content %}
             {% if topic.type == "admin-dev" %}
             <tr>
-                  <td class="col-md-1"><a href="{{ site.url }}/{{ topic.url}}">{{ topic.title }}</a></td>
-                  <td class="col-md-3">Link</td>
-                  <td class="col-md-7">Link</td>
+                  <td><a href="{{ site.url }}/{{ topic.url}}">{{ topic.title }}</a></td>
+                  <td><a href="{{ site.url }}/{{ topic.url}}/slides"> :mortar_board: </a></td>
+                  <td>{{ topic.tutorial_number }}</td>
+                  <td><a href="{{ site.github_repository }}/tree/master/{{ topic.url }}/docker">:whale: </a></td>
             </tr>
             {% endif %}
         {% endfor %}
