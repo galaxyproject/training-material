@@ -15,6 +15,8 @@ Requirements:
 - Tools:
   - mothur suite (owner: iuc)
   - regex find and replace (owner: jjohnson)
+  - xy_plot (owner: devteam)
+  - collapse_collections (owner nml)
 
 - Reference datasets
   - Silva (TODO: instructions)

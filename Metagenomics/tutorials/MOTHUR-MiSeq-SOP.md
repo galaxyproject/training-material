@@ -531,6 +531,41 @@ Let's start our analysis by analyzing the alpha diversity of the samples. First 
   - Set **shared** to shared file from Make.shared
 
 <!-- TODO: plot rarefaction curves -->
+Examine the rarefaction curve output.
+
+```
+numsampled    0.03-F3D0    lci-F3D0    hci-F3D0    0.03-F3D1   ...
+1              1.0000       1.0000      1.0000      1.0000
+100           41.6560      35.0000     48.0000     45.0560
+200           59.0330      51.0000     67.0000     61.5740
+300           70.5640      62.0000     79.0000     71.4700
+400           78.8320      71.0000     87.0000     78.4730
+500           85.3650      77.0000     94.0000     83.9990
+...
+```
+
+This file displays the number of OTUs identified per amount of sequences used (numsampled). What we would like to see is the number of additional OTUs identified when adding more sequences reaching a plateau. Then we know we have covered our full diversity. This information would be easier to interpret in the form of a graph. Let's plot the rarefaction curve for a couple of our sequences:
+
+<!-- the following is because plotting tool will not detect columns in file in collections yet -->
+First let's make our life a little bit easier. As we only have one dataset in our collection anyways, we can collapse it:
+- **Tool:** Collapse Collection
+- **Parameters:**
+  - Set **Collection of files to collapse to a single dataset** to the rarefaction curve collection
+
+Now we are ready to plot our rarefaction curves
+
+- **Tool:** Plotting tool
+- **Parameters:**
+  - Set **Plot Title** to `Rarefaction`
+  - Set **Label for x axis** to `Number of Sequences`
+  - Set **Label for y axis** to `Number of OTUs`
+  - Click on Insert Series,
+      - Set **Dataset** to the collapsed rarefaction curve collection
+      - Set **Column for x axis** to `Column 1`
+      - Set **Column for y-axis** to `Column 2`
+   - Add as many of the samples as you want, ignore the columns starting with lci or hci and use only those like `0.03-<samplename>`
+
+
 
 Alas, rarefaction is not a measure of richness, but a measure of diversity. If you consider two communities with the same richness, but different evenness then after sampling a large number of individuals their rarefaction curves will asymptote to the same value. Since they have different evennesses the shapes of the curves will differ. Therefore, selecting a number of individuals to cutoff the rarefaction curve isn't allowing a researcher to compare samples based on richness, but their diversity. Finally, let's get a table containing the number of sequences, the sample coverage, the number of observed OTUs, and the Inverse Simpson diversity estimate using the `Summary.single` command. To standardize everything, let's randomly select 2441 sequences from each sample 1000 times and calculate the average:
 
@@ -542,7 +577,7 @@ Alas, rarefaction is not a measure of richness, but a measure of diversity. If y
 
 These data will be outputted to a table called the summary file. Interestingly, the sample coverages were all above 97%, indicating that we did a pretty good job of sampling the communities. Plotting the richness or diversity of the samples would show that there was little difference between the different animals or between the early and late time points. You could follow this up with a repeated-measures ANOVA and find that there was no significant difference based on sex or early vs. late.
 
-<!-- TODO: plot this table too -->
+<!-- TODO: plot this table too? -->
 
 ## Beta diversity
 
