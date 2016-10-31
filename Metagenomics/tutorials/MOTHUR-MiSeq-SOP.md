@@ -547,7 +547,8 @@ numsampled    0.03-F3D0    lci-F3D0    hci-F3D0    0.03-F3D1   ...
 This file displays the number of OTUs identified per amount of sequences used (numsampled). What we would like to see is the number of additional OTUs identified when adding more sequences reaching a plateau. Then we know we have covered our full diversity. This information would be easier to interpret in the form of a graph. Let's plot the rarefaction curve for a couple of our sequences:
 
 <!-- the following is because plotting tool will not detect columns in file in collections yet -->
-First let's make our life a little bit easier. As we only have one dataset in our collection anyways, we can collapse it:
+First let's make our life a little bit easier. As we only have one dataset in our collection anyways, we can collapse it into a single file.
+
 - **Tool:** Collapse Collection
 - **Parameters:**
   - Set **Collection of files to collapse to a single dataset** to the rarefaction curve collection
@@ -559,25 +560,26 @@ Now we are ready to plot our rarefaction curves
   - Set **Plot Title** to `Rarefaction`
   - Set **Label for x axis** to `Number of Sequences`
   - Set **Label for y axis** to `Number of OTUs`
+  - Set **Output File Type** to `PNG`
   - Click on Insert Series,
       - Set **Dataset** to the collapsed rarefaction curve collection
+      - Set **Header in first line?** to `Yes`
       - Set **Column for x axis** to `Column 1`
-      - Set **Column for y-axis** to `Column 2`
-   - Add as many of the samples as you want, ignore the columns starting with lci or hci and use only those like `0.03-<samplename>`
+      - Set **Column for y-axis** to `Column 2` and `Column 5` and every third column until end (as many as you like)
 
+  From the resulting image we can see that all rarefaction curves had already started to level off so we are confident we cover a large part of our sample diversity.
 
+  ![](../images/rarefaction_curves.png)
 
 Alas, rarefaction is not a measure of richness, but a measure of diversity. If you consider two communities with the same richness, but different evenness then after sampling a large number of individuals their rarefaction curves will asymptote to the same value. Since they have different evennesses the shapes of the curves will differ. Therefore, selecting a number of individuals to cutoff the rarefaction curve isn't allowing a researcher to compare samples based on richness, but their diversity. Finally, let's get a table containing the number of sequences, the sample coverage, the number of observed OTUs, and the Inverse Simpson diversity estimate using the `Summary.single` command. To standardize everything, let's randomly select 2441 sequences from each sample 1000 times and calculate the average:
 
 - **Tool:** Summary.single
 - **Parameters:**
   - Set **share** to shared file from Make.shared
-  - Set **calc** to nseqs,coverage,sobs,invsimpson
+  - Set **calc** to `nseqs,coverage,sobs,invsimpson`
   - Set **size** to 2440
 
 These data will be outputted to a table called the summary file. Interestingly, the sample coverages were all above 97%, indicating that we did a pretty good job of sampling the communities. Plotting the richness or diversity of the samples would show that there was little difference between the different animals or between the early and late time points. You could follow this up with a repeated-measures ANOVA and find that there was no significant difference based on sex or early vs. late.
-
-<!-- TODO: plot this table too? -->
 
 ## Beta diversity
 
@@ -587,7 +589,103 @@ Let's calculate the similarity of the membership and structure found in the vari
 - **Parameters:**
   - Set **shared** to the shared file from Make.shared
   - Set **calc** to thetayc,jclass
-  - Set **size** to 2440
+  - Set **subsample** to 2440
+
+- **Tool:** Heatmap.sim
+- **Parameters:**
+  - Set **Generate Heatmap for** to `phylip`
+  - Set **phylip** to collection of dist files output by Dist.shared
+
+<!-- TODO: way to view the SVGs inside Galaxy -->
+
+Look at some of the resulting heatmaps (you may have to download the svg images). In all of these heatmaps the red colors indicate communities that are more similar than those with black colors. For example this is the heatmap for th `thetayc` calculator
+
+![](../images/heatmap.sim_thetayc.svg)
+
+When generating Venn diagrams we are limited by the number of samples that we can analyze simultaneously. Let's take a look at the Venn diagrams for the first 4 time points of female 3 using the `venn` command:
+- **Tool:** Collapse Collection
+  - Set **Collection** to subsample.shared output collection from Sub.sample step
+
+- **Tool:** Venn
+- **Parameters:**
+  - Set `OTU Shared` to shared file from previous step
+  - Set `groups` to `F3D0,F3D1,F3D2,F3D3`
+
+This generates a 4-way Venn diagram and a table listing the shared OTUs.
+
+![](../images/venn.svg)
+
+ This shows that there were a total of 180 OTUs observed between the 4 time points. Only 76 of those OTUs were shared by all four time points. We could look deeper at the shared file to see whether those OTUs were numerically rare or just had a low incidence.
+
+ Next, let's generate a dendrogram to describe the similarity of the samples to each other. We will generate a dendrogram using the jclass and thetayc calculators within the `tree.shared` command:
+
+- **Tool:** Tree.shared
+- **Parameters:**
+  - Set **Select input format** to Phylip Distance Matrix
+  - Set **phylip** to dist files collection from Dist.shared
+
+
+<!-- TODO: is there Galaxy tool that can do this? -->
+open the output file `thetayc.0.03.lt.ave` and copy its contents to this online treeviewer: http://etetoolkit.org/treeview/
+
+![](../images/tree.png)
+
+Inspection of the the tree shows that the early and late communities cluster with themselves to the exclusion of the others. We can test to deterine whether the clustering within the tree is statistically significant or not using by choosing from the parsimony, unifrac.unweighted, or unifrac.weighted commands. To run these we will first need to create a design file that indicates which treatment each sample belongs to. There is a file called mouse.time.design in the shared data library and on Zenodo. Make sure the datatype is set to `mothur.design`. If this is not the case, please change the datatype using the pencil icon.
+
+ :bulb: Changing datatype of a datasets
+   - Click on **pencil icon** on dataset
+   - Click on the **Datatype** tab
+   - Select the new datatype from dropdown menu
+   - Click **Save**
+
+The design file look something like this:
+
+```
+group	time
+F3D0	Early
+F3D1	Early
+F3D141	Late
+F3D142	Late
+F3D143	Late
+F3D144	Late
+F3D145	Late
+F3D146	Late
+F3D147	Late
+F3D148	Late
+F3D149	Late
+F3D150	Late
+F3D2	Early
+F3D3	Early
+F3D5	Early
+F3D6	Early
+F3D7	Early
+F3D8	Early
+F3D9	Early
+```
+
+Using the `parsimony` command let's look at the pairwise comparisons. Specifically, let's focus on the early vs. late comparisons for each mouse:
+
+- **Tool:** Parsimony
+- **Parameters:**
+  - Set **tree** to the `tre` output collection from Tree.Shared
+  - Set **group** to the design file described above
+
+In the logfile for `thetayc.0.03.lt.ave` we see
+
+```
+Tree#   Groups      ParsScore   ParsSig
+1       Early-Late  1           0.001
+```
+
+There was clearly a significant difference between the clustering of the early and late time points. Recall that this method ignores the branch length.
+
+The two distance matrices that we generated earlier (i.e. `jclass.0.03.lt.ave.dist` and `thetayc.0.03.lt.ave.dist`) can then be visualized using the pcoa or nmds plots. Principal Coordinates (PCoA) uses an eigenvector-based approach to represent multidimensional data in as few dimensions as possible. Our data is highly dimensional (~9 dimensions).
+
+- **Tool:** Pcoa
+- **Parameters:**
+  - Set **phylip** to dist files collection from Dist.shared
+
+
 
 ## Population-level Analysis
 
