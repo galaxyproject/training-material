@@ -898,7 +898,7 @@ These data tell us that OTUs 1, 2, and 3 was significantly different between the
 Another non-parametric tool we can use as an alternative to metastats is lefse:
 
 
-- **Tool:** Make.lefse
+- **Tool:** Lefse
 - **Parameters:**
   - Set **shared** to subsample.shared
   - Set **design** to `mouse.time.design`

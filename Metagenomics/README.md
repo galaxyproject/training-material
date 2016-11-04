@@ -9,21 +9,32 @@ Information on where the slide decks can be found, generally `http://bgruening.g
 
 # Tutorials
 
-**Metagenomics with Mothur MiSeq SOP**
+## Metagenomics with Mothur: MiSeq SOP
 
-Requirements:
+**Trainer/admin instructions:**
+
+The following contains instructions on configuring your Galaxy instance for this tutorial:
+
 - Tools:
-  - mothur suite (owner: iuc)
-  - regex find and replace (owner: jjohnson)
-  - xy_plot (owner: devteam)
-  - collapse_collections (owner nml)
+  - mothur suite (MTS, owner: iuc)
+  - regex find and replace (MTS, owner: jjohnson)
+  - xy_plot (MTS, owner: devteam)
+  - collapse_collections (MTS, owner nml)
 
-- Reference datasets
-  - Silva (TODO: instructions)
+- Data
+  - Get from zenodo here: TODO
+  - Optional: put in a data library named *Galaxy training: Metagenomics with Mothur - MiSeq SOP* to prevent mass uploading during a class (training manual instruct users to check for presence of this data library before uploading data themselves).
 
-- input data
-  - get from zenodo here: TODO
-  - optional: put in a data library named *Galaxy training: Metagenomics with Mothur - MiSeq SOP* to prevent mass uploading during a class
+- Galaxy Config
+  - Requires at least Galaxy version 16.04 (for Phinch external display application)
+  - For Phinch viewing, make sure your webserver is configured to allow requests from the Phinch server. For example in nginx add following to your config:
+
+    ```
+    location /galaxy {
+      add_header Access-Control-Allow-Origin "http://www.bx.psu.edu";
+      ..
+    }
+    ```
 
 ## Input datasets
 
