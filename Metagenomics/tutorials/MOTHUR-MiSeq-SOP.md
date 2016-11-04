@@ -194,7 +194,7 @@ After the tool has finished, run **summary.seqs** tool on the filtered fasta (`g
 <!-- collapsible section until we have templating for answers -->
 <details>
   <summary>Click to view answer</summary>
-  :white_check_mark: 23,488. Can be determined by looking at the number of lines in bad.accnos output of screen.seqs or by comparing the total number of seqs between the two summary.seqs logfiles
+  :white_check_mark: 23,488. This can be determined by looking at the number of lines in bad.accnos output of screen.seqs or by comparing the total number of seqs between the two summary.seqs logfiles
 </details>
 
 
@@ -224,7 +224,7 @@ seq7    seq8
 <!-- collapsible section until we have templating for answers -->
 <details>
   <summary>Click to view answer</summary>
-  :white_check_mark: 16,426 unique sequences, 112,446 duplicates.
+  :white_check_mark: 16,426 unique sequences and 112,446 duplicates.
 </details>
 
 
@@ -301,7 +301,7 @@ To make sure that everything overlaps the same region we'll re-run screen.seqs t
 <!-- collapsible section until we have templating for answers -->
 <details>
   <summary>Click to view answer</summary>
-  :white_check_mark: 128 sequences were removed. Number of lines in bad.accnos output.
+  :white_check_mark: 128 sequences were removed. This is the number of lines in the `bad.accnos` output.
 </details>
 
 Now we know our sequences overlap the same alignment coordinates, we want to make sure they only overlap that region. So we'll filter the sequences to remove the overhangs at both ends. Since we've done paired-end sequencing, this shouldn't be much of an issue, but whatever. In addition, there are many columns in the alignment that only contain gap characters (i.e. "."). These can be pulled out without losing any information. We'll do all this with filter.seqs:
@@ -404,7 +404,7 @@ Now that everything is classified we want to remove our undesirables. We do this
 
 Also of note is that *unknown* only pops up as a classification if the classifier cannot classify your sequence to one of the domains.
 
-:question: How many representative sequences were removed in this step?
+:question: How many representative sequences were removed in this step?  
 :question: How many total sequences were removed in this step? (Hint: run `summary.seqs` with count table)
 <!-- collapsible section until we have templating for answers -->
 <details>
@@ -433,13 +433,13 @@ Selected 4060 sequences from your count file
 ```
 This tells us that we had 67 unique sequences and a total of 4,060 total sequences in our Mock sample. We can now use the **seq.error** command to measure the error rates:
 
-- **Tool:** Get.groups
+- **Tool:** Seq.error
 - **Parameters:**
   - Set **fasta** to the fasta from Get.groups
   - Set **reference** to `HMP_MOCK.v35.fasta` file from your history
   - Set **count** to the count table from Get.groups
 
-In the log file we see somthing like this:
+In the log file we see something like this:
 
 ```
 It took 0 to read 32 sequences.
@@ -474,12 +474,15 @@ That rocks, eh? Our error rate is 0.0065%. We can now cluster the sequences into
 - **Parameters:**
   - Set **shared** to the shared file from Make.shared
 
-Open the rarefaction output (in the output collection). You'll see that for 4060 sequences, we'd have 34 OTUs from the Mock community. This number of course includes some stealthy chimeras that escaped our detection methods. If we used 3000 sequences, we would have about 31 OTUs. In a perfect world with no chimeras and no sequencing errors, we'd have 20 OTUs. This is not a perfect world. But this is pretty darn good!
+Open the rarefaction output (dataset named `sobs` inside the `rarefaction curves` output collection). You'll see that for 4060 sequences, we'd have 34 OTUs from the Mock community. This number of course includes some stealthy chimeras that escaped our detection methods. If we used 3000 sequences, we would have about 31 OTUs. In a perfect world with no chimeras and no sequencing errors, we'd have 20 OTUs. This is not a perfect world. But this is pretty darn good!
 
-Now that we have assessed our error rates we are ready for some real analysis
+Now that we have assessed our error rates we are ready for some real analysis.
 
 ## Preparing for analysis
-We're almost to the point where you can have some fun with your data (I'm already having fun, aren't you?). We'd like to do two things- assign sequences to OTUs and phylotypes. First, we want to remove the Mock sample from our dataset using the remove.groups command:
+
+**1: Remove Mock community from our dataset**
+
+We're almost to the point where you can have some fun with your data (I'm already having fun, aren't you?). We'd like to do two things - assign sequences to OTUs and phylotypes. But first, we want to remove the Mock sample from our dataset using the remove.groups command:
 
 - **Tool:** Remove.groups
 - **Parameters:**
@@ -487,13 +490,16 @@ We're almost to the point where you can have some fun with your data (I'm alread
   - Set **count table**, **fasta**, and **taxonomy** to the respective outputs from Remove.lineage
   - Set **groups** to `Mock`
 
-Now we have a couple of options for clustering sequences into OTUs. For a small dataset like this, we could do the traditional approach using dist.seqs and cluster as we did with the Mock sample.
 
-The alternative is to use the cluster.split command. In this approach, we use the taxonomic information to split the sequences into bins and then cluster within each bin. The Schloss lab have published results showing that if you split at the level of Order or Family, and cluster to a 0.03 cutoff, you'll get just as good of clustering as you would with the "traditional" approach. The advantage of the cluster.split approach is that it should be faster, use less memory, and can be run on multiple processors. In an ideal world we would prefer the traditional route because "Trad is rad", but we also think that kind of humor is funny.... In this command we use `taxlevel=4`, which corresponds to the level of *Order*. This is the approach that we generally use in the Schloss lab.
+**2: Cluster sequences into OTUs**
+
+Now we have a couple of options for clustering sequences into OTUs. For a small dataset like this, we could do the traditional approach using `dist.seqs` and `cluster` as we did with the Mock sample.
+
+The alternative is to use the cluster.split command. In this approach, we use the taxonomic information to split the sequences into bins and then cluster within each bin. The Schloss lab have published results showing that if you split at the level of Order or Family, and cluster to a 0.03 cutoff, you'll get just as good of clustering as you would with the "traditional" approach. The advantage of the `cluster.split` approach is that it should be faster, use less memory, and can be run on multiple processors. In an ideal world we would prefer the traditional route because "Trad is rad", but we also think that kind of humor is funny.... In this command we use `taxlevel=4`, which corresponds to the level of *Order*. This is the approach that we generally use in the Schloss lab.
 
 - **Tool:** Cluster.split
 - **Parameters:**  
-  - Set **Split by** to `classification`
+  - Set **Split by** to `Classification`
   - Set **fasta** to the fasta output from Remove.groups
   - Set **taxonomy** to the taxonomy output from Remove.groups
   - Set **taxlevel** to `4`
@@ -518,7 +524,7 @@ We probably also want to know the taxonomy for each of our OTUs. We can get the 
   - Set **taxonomy** to the taxonomy output from Remove.groups
   - Set **label** to `0.03`
 
-Opening the taxonomy output for level 0.03 shows something like:
+Opening the taxonomy output for level 0.03 shows a file like the following:
 
 ```
 OTU       Size    Taxonomy
@@ -536,7 +542,7 @@ This is telling you that Otu001 was observed 17 times in your samples and that a
 
 In this tutorial we will continue with this otu-based approach, for the phylotype and phylogenic approaches, please see the extra credit section at the end of this tutorial.
 
-# Step 3: OTU-based Analysis
+# OTU-based Analysis
 
 Let's do something more interesting and actually analyze our data. We'll focus on the OTU-based dataset. The analysis using the phylotype-based analysis is essentially the same. Also, remember that our initial question had to do with the stability and change in community structure in these samples when comparing early and late samples. Keep in mind that the group names have either a F or M (sex of animal) followed by a number (number of animal) followed by a D and a three digit number (number of days post weaning).
 
