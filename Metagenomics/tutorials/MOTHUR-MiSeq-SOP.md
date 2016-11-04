@@ -60,13 +60,13 @@ Now that we know what our input data is, let's get it into our history:
 
 1. Create a **new history** and name it "Mothur MiSeq SOP"
 
-2. **Import** the training data **to your history**. There are two ways to do this. The easiest is using the data available from a *shared data library*, if this is not possible you can download the data yourself and upload it to your Galaxy instance.
+2. **Import** the training data to your history. There are two ways to do this. The easiest is using the data available from a *Shared Data Library*, if this is not possible on your Galaxy instance, you can download the data yourself and upload it to your Galaxy instance.
  - From data library:
-    - Navigate to the shared data library named *Galaxy training: Metagenomics with Mothur - MiSeq SOP* and import all fastq files you encounter there.
+    - Navigate to the shared data library named *Galaxy training: Metagenomics with Mothur - MiSeq SOP* and import all files listed in the *Input Data* folder
   - From your computer:
     - obtain data directly from [here](http://www.mothur.org/w/images/d/d6/MiSeqSOPData.zip)  <!-- TODO: zenodo link-->
-    - unzip it
-    - upload all fastq files to your history (40 files)
+    - download `inputdata.zip` and unzip it
+    - upload all files to your history.
 
 3. Create a **paired collection**. Since we have paired end data, each sample consist of two seperate fastq files, one containing the forward reads, and one containing the reverse reads. We can recognize the pairing from the file names, which will differ only by `_R1` or `_R2` in the filename. We can tell Galaxy about this paired naming convention, so that our tools will know which files belong together.
 
@@ -74,7 +74,7 @@ Now that we know what our input data is, let's get it into our history:
 
     ![](../../shared/images/history_menu_buttons2.png)
 
- - Select all the fastq files (40 in total), then click on **for all selected..** and select **Build list of dataset pairs** from the dropdown menu.
+ - Select all the fastq files (40 in total), then click on **for all selected..** and select **Build List of Dataset Pairs** from the dropdown menu.
 
  - In the next dialog window you can create the list of pairs. By default Galaxy will look for pairs of files that differ only by a `_1` and `_2` part in their names. In our case however, these should be `_R1` and `_R2`. Please change these values accordingly. You should now see a list of pairs suggested by Galaxy,
 
@@ -84,7 +84,7 @@ Now that we know what our input data is, let's get it into our history:
 
      ![](../images/create_collection2.png)
 
-    The middle segment is the name for each pair. You can change these names by clicking on them. These names will be used as sample names in the downstream analysis so make sure they are informative.
+    The middle segment is the name for each pair. You can change these names by clicking on them. These names will be used as sample names in the downstream analysis so always make sure they are informative.
 
  - Once you are happy with your pairings, enter a name for your new collection at the bottom right of the screen.
 
@@ -96,7 +96,7 @@ Apart from our input data we will also need some additional reference data.
 
 :pencil2: ***Hands on!***
 
-1. Go back to the data library and locate the following files or download them from Zenodo and upload them to your history
+1. Go back to the data library and import all files from the *Reference Data* folder, or download them from Zenodo (`inputdata.zip`) and upload them to your history:
   - `silva.v4.fasta`
   - `HMP_MOCK.v35.fasta`
   - `trainset9_032012.pds.fasta`
@@ -113,21 +113,16 @@ We have a very simple algorithm to do this. First, we align the pairs of sequenc
 
 :pencil2: ***Hands on!***
 
-**1: *Combine forward and reverse reads***  
+**1: Combine forward and reverse reads**  
   - **Tool:** Make.contigs
   - **Parameters:**
     - Set `Fastq pair` to the collection you created in the previous step
     - Leave all other parameters to the default settings
   - Execute
 
-  :bulb: **Collections as input**  
-  To provide a collection as input for a tool, click on the `Dataset collection` button in front of the parameter. The dropdown menu will now list collections as possible inputs.
+The output from this tool will be 6 new collections, one for each type of output file (e.g. one collection with the `trim.contig.fasta` files for each pair, and another for all `scrap.contig.fasta` files). Before we continue with the analysis, we would like to combine this data into a single file. To this end we will merge all the trimmed fasta files and create a group file:
 
-   ![](../../shared/images/tools_collection_input.png)
-
-The output from this tool will be 6 new collections, one for each type of output file (e.g. one collection with the `trim.contig.fasta` files for each pair, and another for all `scrap.contig.fasta` files). Before we continue with the analysis, we would like to combine this data into a single file. To this end we will merge all the trimmed fasta files and create a group files
-
-**2: *Merge fasta outputs***
+**2: Merge fasta outputs**
   - **Tool:** Merge.files
   - **Parameters:**
     - Set **merge** to *fasta files*
@@ -141,13 +136,13 @@ To provide a collection as input for a tool, click on the `Dataset collection` b
  ![](../../shared/images/tools_collection_input.png)
 
 
-**3: *Make group file***
+**3: Make group file**
   - **Tool:** Make.group
   - **Parameters:**
     - Set **Method** to *Automatically from collection*
     - Set **fasta collection** to the `trim.contigs.fasta` output of the make.contigs step
 
-The *group file* consists of two columns, the first is the sequence read name, and the second is the group (sample) it belongs to. The sample names were generated from the dataset names of the pairs in our collection.
+Examine the output. The *group file* consists of two columns, the first is the sequence read name, and the second is the group (sample) it belongs to. The sample names were generated from the dataset names of the pairs in our collection.
 
 ```
 seq1  sample1
@@ -156,7 +151,7 @@ seq3  sample2
 ..
 ```
 
-**4: *Summarize data***  
+**4: Summarize data**  
 To get more information about the resulting fasta files, we can use the `Summary.seqs` tool.
 
   - **Tool:** Summary.seqs
@@ -195,10 +190,16 @@ The following tool will remove any sequences with ambiguous bases and anything l
 After the tool has finished, run **summary.seqs** tool on the filtered fasta (`good.fasta`) and examine the logfile output.
 
 :question: How many reads were removed in this screening step?
-<!-- answer: 23,488. Answer can be found by looking at number of lines in bad.accnos output of screen.seqs or comparing total number of seqs between the two summary.seqs logfiles -->
+
+<!-- collapsible section until we have templating for answers -->
+<details>
+  <summary>Click to view answer</summary>
+  :white_check_mark: 23,488. Can be determined by looking at the number of lines in bad.accnos output of screen.seqs or by comparing the total number of seqs between the two summary.seqs logfiles
+</details>
+
 
 ## Processing improved sequences
-We anticipate that many of our sequences are duplicates of each other. Because it's computationally wasteful to align the same thing a bazillion times, we'll unique our sequences using the unique.seqs command:
+We anticipate that many of our sequences are duplicates of each other. Because it's computationally wasteful to align the same thing a bazillion times, we'll unique our sequences using the `unique.seqs` command:
 
 :pencil2: ***Hands on!***
 
@@ -208,7 +209,7 @@ We anticipate that many of our sequences are duplicates of each other. Because i
 - **Parameters:**
   - Set **fasta** to the `good.fasta` output from Screen.seqs
 
-This tool outputs two files, one is the fasta file containing only unique sequences, and a *names files*. The names file consists of two columns, the first contains the sequence names for each of the unique sequences, and the second column contains all other sequence names that are identical to the sequence in the first column.
+This tool outputs two files, one is a fasta file containing only unique sequences, and a *names files*. The names file consists of two columns, the first contains the sequence names for each of the unique sequences, and the second column contains all other sequence names that are identical to the representative sequence in the first column.
 
 ```
 name    representatives
@@ -219,7 +220,13 @@ seq7    seq8
 ```
 
 :question: How many sequences were unique? how many duplicates were removed?
-<!-- answer: 16,426 unique sequences, 112,446 duplicates-->
+
+<!-- collapsible section until we have templating for answers -->
+<details>
+  <summary>Click to view answer</summary>
+  :white_check_mark: 16,426 unique sequences, 112,446 duplicates.
+</details>
+
 
 **2: Generate count table**
 
@@ -232,7 +239,7 @@ To reduce file sizes further and streamline analysis, we can now summarize the d
   - Set **group** to the group file output by the Screen.seqs tools
   - Set **groups** to all (or leave blank)
 
-The count_table will look something like this:
+The *count_table* output will look something like this:
 
 ```
 Representative_Sequence                      total   F3D0   F3D1  F3D141  F3D142  ...
@@ -274,7 +281,11 @@ Mean:       1967.99  11550    252.462 0        4.36693
 total # of seqs:    128872
 ```
 
-So what does this mean? You'll see that the bulk of the sequences start at position 1968 and end at position 11550. Some sequences start at position 1250 or 1982 and end at 10693 or 13400. These deviants from the mode positions are likely due to an insertion or deletion at the terminal ends of the alignments. Sometimes you'll see sequences that start and end at the same position indicating a very poor alignment, which is generally due to non-specific amplification. To make sure that everything overlaps the same region we'll re-run screen.seqs to get sequences that start at or before position 1968 and end at or after position 11550. We'll also set the maximum homopolymer length to 8 since there's nothing in the database with a stretch of 9 or more of the same base in a row (this really could have been done in the first execution of screen.seqs above).
+So what does this mean? You'll see that the bulk of the sequences start at position 1968 and end at position 11550. Some sequences start at position 1250 or 1982 and end at 10693 or 13400. These deviants from the mode positions are likely due to an insertion or deletion at the terminal ends of the alignments. Sometimes you'll see sequences that start and end at the same position indicating a very poor alignment, which is generally due to non-specific amplification.
+
+**4: Remove poorly aligned sequences**
+
+To make sure that everything overlaps the same region we'll re-run screen.seqs to get sequences that start at or before position 1968 and end at or after position 11550. We'll also set the maximum homopolymer length to 8 since there's nothing in the database with a stretch of 9 or more of the same base in a row (this really could have been done in the first execution of screen.seqs above).
 
 - **Tool:** Screen.seqs
 - **Parameters:**
@@ -287,7 +298,11 @@ So what does this mean? You'll see that the bulk of the sequences start at posit
 **Note:** we supply the count table so that it can be updated for the sequences we're removing.
 
 :question: How many sequences were removed in this step?
-<!--answer: 128 -->
+<!-- collapsible section until we have templating for answers -->
+<details>
+  <summary>Click to view answer</summary>
+  :white_check_mark: 128 sequences were removed. Number of lines in bad.accnos output.
+</details>
 
 Now we know our sequences overlap the same alignment coordinates, we want to make sure they only overlap that region. So we'll filter the sequences to remove the overhangs at both ends. Since we've done paired-end sequencing, this shouldn't be much of an issue, but whatever. In addition, there are many columns in the alignment that only contain gap characters (i.e. "."). These can be pulled out without losing any information. We'll do all this with filter.seqs:
 
@@ -313,8 +328,11 @@ This means that our initial alignment was 13425 columns wide and that we were ab
   - Set **fasta** to the `filtered fasta` output from Filter.seqs
   - Set **name file or count table** to the count table from the last Screen.seqs
 
+This identified 3 duplicate sequences that we've now merged with previous unique sequences.
 
-This identified 3 duplicate sequences that we've now merged with previous unique sequences. The next thing we want to do to further de-noise our sequences is to pre-cluster the sequences using the pre.cluster command allowing for up to 2 differences between sequences. This command will split the sequences by group and then sort them by abundance and go from most abundant to least and identify sequences that are within 2 nt of each other. If they are then they get merged. We generally favor allowing 1 difference for every 100 bp of sequence:
+**5: Perform preliminary clustering of sequences**
+
+The next thing we want to do to further de-noise our sequences is to pre-cluster the sequences using the `pre.cluster` command allowing for up to 2 differences between sequences. This command will split the sequences by group and then sort them by abundance and go from most abundant to least and identify sequences that are within 2 nt of each other. If they are then they get merged. We generally favor allowing 1 difference for every 100 bp of sequence:
 
 - **Tool:** Pre.cluster
 - **Parameters:**
@@ -322,7 +340,11 @@ This identified 3 duplicate sequences that we've now merged with previous unique
   - Set **name file or count table** to the count table from the last Unique.seqs
   - Set **diffs** to 2
 
-We now have 5672 unique sequences. At this point we have removed as much sequencing error as we can and it is time to turn our attention to removing chimeras. We'll do this using the UCHIME algorithm that is called within mothur using the chimera.uchime command. Again, this command will split the data by sample and check for chimeras. Our preferred way of doing this is to use the abundant sequences as our reference. In addition, if a sequence is flagged as chimeric in one sample, the the default (dereplicate=No) is to remove it from all samples. Our experience suggests that this is a bit aggressive since we've seen rare sequences get flagged as chimeric when they're the most abundant sequence in another sample. This is how we do it:
+We now have 5672 unique sequences.
+
+**6: Remove chimeric sequences**
+
+At this point we have removed as much sequencing error as we can and it is time to turn our attention to removing chimeras. We'll do this using the UCHIME algorithm that is called within mothur using the chimera.uchime command. Again, this command will split the data by sample and check for chimeras. Our preferred way of doing this is to use the abundant sequences as our reference. In addition, if a sequence is flagged as chimeric in one sample, the the default (dereplicate=No) is to remove it from all samples. Our experience suggests that this is a bit aggressive since we've seen rare sequences get flagged as chimeric when they're the most abundant sequence in another sample. This is how we do it:
 
 - **Tool:** Chimera.uchime
 - **Parameters:**
@@ -341,7 +363,6 @@ Running chimera.uchime with the count file will remove the chimeric sequences fr
 
 If we run summary.seqs again with latest fasta and count table we see:
 
-
 ```
             Start   End    NBases    Ambigs    Polymer    NumSeqs
 Minimum:    1       376    249        0        3          1
@@ -356,7 +377,11 @@ Mean:       1       376    252.467    0        4.37281
 total # of seqs:    119330
 ```
 
-Note that we went from 128,655 to 119,330 sequences for a reduction of 7.3%; this is a reasonable number of sequences to be flagged as chimeric. As a final quality control step, we need to see if there are any "undesirables" in our dataset. Sometimes when we pick a primer set they will amplify other stuff that gets to this point in the pipeline such as 18S rRNA gene fragments or 16S rRNA from Archaea, chloroplasts, and mitochondria. There's also just the random stuff that we want to get rid of. Now you may say, "But wait I want that stuff". Fine. But, the primers we use, are only supposed to amplify members of the Bacteria and if they're hitting Eukaryota or Archaea, then its a mistake. Also, realize that chloroplasts and mitochondria have no functional role in a microbial community. But I digress. Let's go ahead and classify those sequences using the Bayesian classifier with the **classify.seqs** command:
+Note that we went from 128,655 to 119,330 sequences for a reduction of 7.3%; this is a reasonable number of sequences to be flagged as chimeric.
+
+**7: Remove unwanted sequences**
+
+As a final quality control step, we need to see if there are any "undesirables" in our dataset. Sometimes when we pick a primer set they will amplify other stuff that gets to this point in the pipeline such as 18S rRNA gene fragments or 16S rRNA from Archaea, chloroplasts, and mitochondria. There's also just the random stuff that we want to get rid of. Now you may say, "But wait I want that stuff". Fine. But, the primers we use, are only supposed to amplify members of the Bacteria and if they're hitting Eukaryota or Archaea, then its a mistake. Also, realize that chloroplasts and mitochondria have no functional role in a microbial community. But I digress. Let's go ahead and classify those sequences using the Bayesian classifier with the **classify.seqs** command:
 
 - **Tool:** Classify.seqs
 - **Parameters:**
@@ -377,7 +402,17 @@ Now that everything is classified we want to remove our undesirables. We do this
   - Set **fasta** to the fasta output from Remove.seqs
   - Set **count** to count table from Chimera.uchime
 
-Also of note is that *unknown* only pops up as a classification if the classifier cannot classify your sequence to one of the domains. If you run summary.seqs you'll see that we now have 2608 unique sequences and a total of 119168 total sequences. This means about 200 of our sequences were in these various groups. At this point we have curated our data as far as possible and we're ready to see what our error rate is.
+Also of note is that *unknown* only pops up as a classification if the classifier cannot classify your sequence to one of the domains.
+
+:question: How many representative sequences were removed in this step?
+:question: How many total sequences were removed in this step? (Hint: run `summary.seqs` with count table)
+<!-- collapsible section until we have templating for answers -->
+<details>
+  <summary>Click to view answer</summary>
+  :white_check_mark: 20 representative sequences were removed. The fasta file output by Remove.seqs had 2628 sequences while the fasta output from `remove.lineages` contained 2608 sequences.
+
+  :white_check_mark: If you run summary.seqs you'll see that we now have 2608 unique sequences representing a total of 119168 total sequences. This means about 200 of our sequences were in these various groups. At this point we have curated our data as far as possible and we're ready to see what our error rate is.
+</details>
 
 
 ## Assessing error rates
@@ -973,52 +1008,3 @@ Conclusion about the technical key points. And then relation between the technic
 - *...*
 
 # :clap: Thank you
-
-
-
-
-# Extra Credit (Optional)
-
-In this tutorial we focussed on the OTU based approach, but the original SOP also mentions phylotype- and phylogeny-based methods. These are described below for the interested reader.
-
-## Phylotype-based analysis
-
-For some analyses you may desire to bin your sequences in to phylotypes according to their taxonomic classification. We can do this using the phylotype command:
-
-- **Tool:** Phylotype
-- **Parameters:**  
-  - Set **taxonomy** to output from Remove.groups
-
-The cutoff numbering is a bit different for phylotype compared to Cluster and Cluster.split. Here you see 1 through 6 listed as options; these correspond to Genus through Kingdom levels, respectively. So if you want the genus-level shared file we'll do the following:
-
-- **Tool:** Make.shared
-- **Parameters:**  
-  - Set **Select input type** to `OTU list`
-  - Set **list** to list output from Phylotype
-  - Set **count** to the count table from Remove.groups
-  - Set **label** to `1`
-
-We also want to know who these OTUs are and can run classify.otu on our phylotypes:
-
-- **Tool:** Classify.otu
-- **Parameters:**  
-  - Set **list** to output from Phylotype
-  - Set **count** to output from Remove.groups
-  - Set **taxonomy** to output from Remove.groups
-  - Set **label** to `1`
-
-the subsequent analysis is virtually the same as the OTU based apporach.
-
-## Phylogeny-based analysis
-
-If you are interested in using methods that depend on a phylogenetic tree such as calculating phylogenetic diversity or the unifrac commands, you'll need to generate a tree.
-
-- **Tool:** Dist.seqs
-- **Parameters:**
-  - Set **fasta** to fasta output from Remove.groups
-  - Set **output** to `Phylip formatted Lower Triangle Matrix`
-
-- **Tool:** Clearcut
-- **Parameters:**
-  - Set **Distance Matrix** to `Phylip Distance Matrix`
-  - Set **phylip** to the distance matrix from Dist.seqs

@@ -23,7 +23,7 @@ The following contains instructions on configuring your Galaxy instance for this
 
 - Data
   - Get from zenodo here: TODO
-  - Optional: put in a data library named *Galaxy training: Metagenomics with Mothur - MiSeq SOP* to prevent mass uploading during a class (training manual instruct users to check for presence of this data library before uploading data themselves).
+  - Optional: put in a data library named *Galaxy training: Metagenomics with Mothur - MiSeq SOP* to prevent mass uploading during a class (training manual instruct users to check for presence of this data library before uploading data themselves). Create a subfolder named *Input Data* and put the contents of `input_data.zip` there. Also create another folder named *Reference Data* and place contents of reference_data.zip there.
 
 - Galaxy Config
   - Requires at least Galaxy version 16.04 (for Phinch external display application)
