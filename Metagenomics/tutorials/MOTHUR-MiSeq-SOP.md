@@ -64,7 +64,7 @@ Now that we know what our input data is, let's get it into our history:
   - From data library:
     - Navigate to the shared data library named *Galaxy training: Metagenomics with Mothur - MiSeq SOP* and import all files listed in the *Input Data* folder
   - From your computer:
-    - obtain data directly from [here](http://www.mothur.org/w/images/d/d6/MiSeqSOPData.zip)  <!-- TODO: zenodo link-->
+    - obtain data directly from [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.165147.svg)](https://doi.org/10.5281/zenodo.165147)
     - download `inputdata.zip` and unzip it
     - upload all files to your history.
 

@@ -41,10 +41,9 @@ The following contains instructions on configuring your Galaxy instance for this
 
 ## Input datasets
 
-*Zenodo DOI badge, e.g. [![DOI](https://zenodo.org/badge/doi/10.5281/zenodo.60520.svg)](http://dx.doi.org/10.5281/zenodo.60520)*
+**Metagenomics with Mothur: MiSeq SOP** The input datasets for the tutorials are available on
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.165147.svg)](https://doi.org/10.5281/zenodo.165147)
 
-The input datasets for the tutorials are available on
-[Zenodo with a dedicated DOI](http://dx.doi.org/10.5281/zenodo.60520).
 
 ## Galaxy instance
 
