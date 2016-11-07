@@ -20,6 +20,8 @@ The following contains instructions on configuring your Galaxy instance for this
   - regex find and replace (MTS, owner: jjohnson)
   - xy_plot (MTS, owner: devteam)
   - collapse_collections (MTS, owner nml)
+  - newick_display (MTS, owner dcorreia)
+  - krona_text (MTS, owner saskia_hiltemann)
 
 - Data
   - Get from zenodo here: TODO
@@ -35,6 +37,7 @@ The following contains instructions on configuring your Galaxy instance for this
       ..
     }
     ```
+  - For viewing of the html outputs in Galaxy (e.g. Krona, tools that output SVGs wrapped in HTML), change the following line in your galaxy.ini file  `sanitize_all_html = False`.
 
 ## Input datasets
 
