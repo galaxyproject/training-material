@@ -58,14 +58,14 @@ Because of the large size of the original dataset (3.9 GB) you are given 21 of t
 
 Now that we know what our input data is, let's get it into our history:
 
-1. Create a **new history** and name it "Mothur MiSeq SOP"
+1. Create a **new history** and name it *Mothur MiSeq SOP*
 
 2. **Import** the training data to your history. There are two ways to do this. The easiest is using the data available from a *Shared Data Library*, if this is not possible on your Galaxy instance, you can download the data yourself and upload it to your Galaxy instance.
   - From data library:
     - Navigate to the shared data library named *Galaxy training: Metagenomics with Mothur - MiSeq SOP* and import all files listed in the *Input Data* folder
   - From your computer:
-    - obtain data directly from [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.165147.svg)](https://doi.org/10.5281/zenodo.165147)
-    - download `inputdata.zip` and unzip it
+    - obtain data directly from Zenodo: [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.165147.svg)](https://doi.org/10.5281/zenodo.165147)
+    - download `input_data.zip` and unzip it
     - upload all files to your history.
 
 
@@ -97,7 +97,7 @@ Apart from our input data we will also need some additional reference data.
 
 :pencil2: ***Hands on!***
 
-1. Go back to the data library and import all files from the *Reference Data* folder, or download them from Zenodo (`inputdata.zip`) and upload them to your history:
+1. Go back to the data library and import all files from the *Reference Data* folder, or download them from Zenodo (`reference_data.zip`) and upload them to your history:
   - `silva.v4.fasta`
   - `HMP_MOCK.v35.fasta`
   - `trainset9_032012.pds.fasta`
@@ -194,7 +194,7 @@ After the tool has finished, run **summary.seqs** tool on the filtered fasta (`g
 
 <!-- collapsible section until we have templating for answers -->
 <details>
-  <summary>Click to view answer</summary>
+  <summary> :small_red_triangle: Click to view answer</summary>
   :white_check_mark: 23,488. This can be determined by looking at the number of lines in bad.accnos output of screen.seqs or by comparing the total number of seqs between the two summary.seqs logfiles
 </details>
 
@@ -224,7 +224,7 @@ seq7    seq8
 
 <!-- collapsible section until we have templating for answers -->
 <details>
-  <summary>Click to view answer</summary>
+  <summary> :small_red_triangle: Click to view answer</summary>
   :white_check_mark: 16,426 unique sequences and 112,446 duplicates.
 </details>
 
@@ -301,7 +301,7 @@ To make sure that everything overlaps the same region we'll re-run screen.seqs t
 :question: How many sequences were removed in this step?
 <!-- collapsible section until we have templating for answers -->
 <details>
-  <summary>Click to view answer</summary>
+  <summary> :small_red_triangle: Click to view answer</summary>
   :white_check_mark: 128 sequences were removed. This is the number of lines in the `bad.accnos` output.
 </details>
 
@@ -409,7 +409,7 @@ Also of note is that *unknown* only pops up as a classification if the classifie
 :question: How many total sequences were removed in this step? (Hint: run `summary.seqs` with the count table)
 <!-- collapsible section until we have templating for answers -->
 <details>
-  <summary>Click to view answers</summary>
+  <summary> :small_red_triangle: Click to view answers</summary>
   :white_check_mark: 20 representative sequences were removed. The fasta file output by Remove.seqs had 2628 sequences while the fasta output from `remove.lineages` contained 2608 sequences.
 
   :white_check_mark: If you run summary.seqs you'll see that we now have 2608 unique sequences representing a total of 119,168 total sequences (down from 119,330 before). This means 162 of our sequences were in these various groups.
@@ -835,7 +835,7 @@ we find that the lowest stress value was 0.11 with an R-squared value of 0.95; t
 
 <!-- collapsible section until we have templating for answers -->
 <details>
-  <summary>Click to view answer</summary>
+  <summary> :small_red_triangle: Click to view answer</summary>
   :white_check_mark: The stress value drops to 0.05 and the R2 value goes up to 0.99 (see logfile). Not bad.
 </details>
 
@@ -987,7 +987,7 @@ Again we can cross reference these OTU labels with the consensus classifications
 
 <!-- collapsible section until we have templating for answers -->
 <details>
-  <summary>Click to view answer</summary>
+  <summary>:small_red_triangle: Click to view answer</summary>
   :white_check_mark: Note down the names of the top 5 OTUs as output by summary output of get.communitytype. Then look at the taxonomy file output by `Classify.otu`. In our example these top 5 OTUs were classified as belonging to Porphyromonadaceae (top 3 OTUs), Alistipes and Lactobacillus.
 </details>
 
@@ -1016,7 +1016,7 @@ These data tell us that OTUs 1, 2, and 3 was significantly different between the
 :question: Which of the top 10 OTUs in your output were significantly different beween early and late samples?
 
 <details>
-  <summary>Click to view answer</summary>
+  <summary> :small_red_triangle: Click to view answer</summary>
   :white_check_mark: Looking at the p-value cut-off and using your favorite cutoff threshold (say 0.01). Answer to the question is all OTUs with a value lower than this threshold. Note that these OTU labels may be different for you and may very between one repetition of this tutorial to the next, and therefore may vary between you and your neighbour as well.
 </details>
 
@@ -1113,7 +1113,7 @@ The resulting file is an HTML file containing an interactvie visualisation. For 
 :question: what percentage of your sample was labelled `Lactobacillus`?
 
 <details>
-  <summary>Click to view answer</summary>
+  <summary> :small_red_triangle: Click to view answer</summary>
   :white_check_mark: Explore the Krona plot, double click on `Firmicutes`, here you should see Lactobacillus clearly (16% in our case), click on this segment and the right-hand side will show you the percentages at any point in the hierarchy (here 5% of all)
 
   ![](../images/krona_lacto.png)
