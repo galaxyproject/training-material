@@ -99,7 +99,7 @@ To make sense of the reads, their positions within *Drosophila melanogaster* gen
 
 > Want to learning more about mapping? Follow our [training](http://bgruening.github.io/training-material/NGS-mapping/slides)
 
-In the case of an eukaryotic transcriptome, most reads originate from processed mRNAs lacking exons, therefore they cannot be simply mapped back to the genome. Instead they can be separated into two categories:
+In the case of an eukaryotic transcriptome, most reads originate from processed mRNAs lacking exons. Therefore, they cannot be simply mapped back to the genome. Instead they can be separated into two categories:
 
 - Reads that map entirely within exons
 - Reads that cannot be mapped within an exon across their entire length because they span two or more exons
