@@ -172,7 +172,7 @@ With the sequencing library parameters, the full RNA sequences can be mapped on 
     - "Mean Inner Distance" to the value of **Inner Distance**
     - "Drosophila melanogaster: dm3" as reference genome
     - "Full parameter list" for "TopHat settings to use"
-    - "Library type" according to the **Infer Experiment** tool.
+    - "Library type" according to the **Infer Experiment**
     - "18" for the "Minimum length of read segments"
 
         By default, TopHat proposes to fix the minimum length of read segments to 25, but a value of `18` seems to be a more appropriate value for this input data.
