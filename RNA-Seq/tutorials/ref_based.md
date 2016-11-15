@@ -42,10 +42,9 @@ In this tutorial, we will analyze the data with:
 
 ## Data upload
 
-The data is available at NCBI Gene Expression Omnibus (GEO) under accession number [GSE18508](http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE18508).
-Here, we have 7 samples:
-- 3 treated samples with Pasilla (PS) gene depletion (called "pasilla-depleted")
-- 4 untreated samples (called "wt")
+We will look at 7 samples:
+- 3 treated samples with Pasilla (PS) gene depletion
+- 4 untreated samples
 
 Each sample constitutes a separate biological replicate of the corresponding condition (treated or untreated). Moreover, two of the treated and two of the untreated samples are from a paired-end sequencing assay, while the remaining samples are from a single-end sequencing experiment.
 
@@ -89,7 +88,7 @@ For quality control, we use similar tools as described in [NGS-QC tutorial](http
     :question: What is the read length? Is there anything what you find striking?
 
 2. **Trim Galore** :wrench:: Trim low quality bases from the 3' end using on both paired-end datasets.
-3. **FastQC** :wrench:: Re-run and inspect the differences
+3. **FastQC** :wrench:: Re-run and inspect the differences.
 
 As the genome of *Drosophila melanogaster* is known, we can use this information and map the sequences on this genome to identify the effects of Pasilla gene depletion on splicing events.
 
@@ -135,9 +134,9 @@ These information should usually come with your FASTQ files, ask your sequencing
 
 1. **Select first** :wrench:: Downsample the FASTQ file to 200k to 1M reads
 
-    :warning: For the provided files downsampling is not necessary as they only contain 100k reads
+    :warning: For the provided files downsampling is not necessary as they only contain 100k reads.
 
-2. **TopHat** :wrench:: Run **TopHat** with:
+2. **TopHat** :wrench:: Run **TopHat** on the trimmed samples with:
     - "Paired-end (as individual datasets)" instead of "Single-end"
     - "Drosophila melanogaster: dm3" as reference genome
     - the defaults for *strandedness* and *insert size*
@@ -147,7 +146,7 @@ These information should usually come with your FASTQ files, ask your sequencing
 
     :question: What is the mean value for the inner distance?
 
-    If you already have read the corresponding paper carefully you might know that the fragment size is ~200bp. With read lengths of 2x37bp, an educated guess could also be `125` for the inner distance. It's up to your decision, which value you prefer...
+    If you already have read the corresponding paper carefully you might know that the fragment size is ~200bp. With read lengths of 2x37bp, an educated guess for the inner distance could be `125`. Does this correspond with the calculated value?
 
 5. **Infer Experiment** :wrench:: Run **Infer Experiment** with the same files
 6. Check the results and search the tool's documentation for help on the meaning.
@@ -170,10 +169,10 @@ With the sequencing library parameters, the full RNA sequences can be mapped on 
 
 1. **TopHat** :wrench:: Run **TopHat** with the full parameter set to get the best mapping results:
     - "Paired-end (as individual datasets)" instead of "Single-end"
-    - "Mean Inner Distance" to "200" (or "125"?)
+    - "Mean Inner Distance" to the value of **Inner Distance**
     - "Drosophila melanogaster: dm3" as reference genome
     - "Full parameter list" for "TopHat settings to use"
-    - "FR First Strand" as "Library type"
+    - "Library type" according to the **Infer Experiment** tool.
     - "18" for the "Minimum length of read segments"
 
         By default, TopHat proposes to fix the minimum length of read segments to 25, but a value of `18` seems to be a more appropriate value for this input data.
@@ -193,7 +192,7 @@ The mapping exercise worked for you? Great! :tada:
 
 ## Inspection of TopHat results
 
-However, the datasets are too small to give you a good impression of how real data looks like. So we run TopHat for you on a real dataset. We extract only the reads mapped to Chromosome 4 of *Drosophila*.
+However, the datasets are too small to give you a good impression of how real data looks like. That's why we run TopHat for you on a real dataset. We extract only the reads mapped to Chromosome 4 of *Drosophila*.
 
 :pencil2: ***Hands on!***
 
@@ -213,7 +212,7 @@ However, the datasets are too small to give you a good impression of how real da
 
     > Check [IGV documentation](http://software.broadinstitute.org/software/igv/AlignmentData) to find some clues.
 
-    :question: Which information does the `GSM461177_untreat_paired_junctions_chr4.bed` BED files contain? How is this information represented in IGV? How many reads are mapped in "JUNC00012240"? And how many are mapped over "JUNC00012240"? (WHY TWICE THE QUESTION FOR jun00012240?) What do these reads represent?
+    :question: Which information does the `GSM461177_untreat_paired_junctions_chr4.bed` BED files contain? How is this information represented in IGV? What do these reads represent?
 
     :question: Which information does the `GSM461177_untreat_paired_insertions_chr4.bed` and `GSM461177_untreat_paired_deletions_chr4.bed` BED files contain? How is this information represented in IGV? How many reads are mapped and contain the insertion found at 566,827?
 
@@ -241,18 +240,6 @@ To identify exons that are regulated by Pasilla gene, we need to identify genes 
 To compare the expression of single genes between different conditions (*e.g.* with or without PS depletion), an essential step is the quantification
 of reads per gene. [**HTSeq-count**](http://www-huber.embl.de/users/anders/HTSeq/doc/count.html) is one of the most popular tools for gene quantification.
 
-To quantify the number of reads mapped to a gene, an annotation of the genomic features as it is in the genes is needed.
-
-:pencil2: ***Hands on!***
-
-1. Load the Ensembl gene annotation for *Drosophila melanogaster* ([`Drosophila_melanogaster.BDGP5.78.gtf`](https://zenodo.org/record/61771/files/Drosophila_melanogaster.BDGP5.78.gtf)) from [Zenodo](http://dx.doi.org/10.5281/zenodo.61771) into your current Galaxy history
-
-In case of paired-end reads, the alignments in BAM should be sorted by read name.
-
-:pencil2: ***Hands on!***
-
-1. **Sort BAM dataset** :wrench:: Sort the paired-end BAM file by "Read names" with **Sort BAM dataset**
-
 In principle, the counting of reads overlapping with genomic features is a fairly simple task, but there are some details that need to be decided. **HTSeq-count** offers 3 choices ("union", "intersection_strict" and "intersection_nonempty") to handle read mapping to multiple locations, reads overlapping introns, or reads that overlap more than one genomic feature:
 
 ![](../images/htseq_count.png)
@@ -263,11 +250,15 @@ The recommended mode is "union", which counts overlaps even if a read only share
 
 :pencil2: ***Hands on!***
 
-1. **HTSeq-count** :wrench:: Run **HTSeq-count** on the sorted BAM file with
+To quantify the number of reads mapped to a gene, an annotation of the genomic features as it is in the genes is needed.
+
+1. Load the Ensembl gene annotation for *Drosophila melanogaster* ([`Drosophila_melanogaster.BDGP5.78.gtf`](https://zenodo.org/record/61771/files/Drosophila_melanogaster.BDGP5.78.gtf)) from [Zenodo](http://dx.doi.org/10.5281/zenodo.61771) into your current Galaxy history
+
+2. **HTSeq-count** :wrench:: Run **HTSeq-count** on the BAM file with
     - `Drosophila_melanogaster.BDGP5.78.gtf` as "GFF file"
     - The "union" mode
     - A "Minimum alignment quality" of 10
-2. Inspect the result files
+3. Inspect the result files
 
     :question: How many reads could not have been assigned to any feature?
 
