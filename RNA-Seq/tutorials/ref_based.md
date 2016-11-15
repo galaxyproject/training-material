@@ -296,24 +296,24 @@ Either for within or inter-sample comparison, the counts need to be normalized. 
 - Estimate the magnitude of expression differences between the samples
 - Estimate the significance of expression differences between the samples
 
-This expression analysis is estimated from read counts and attempts are made to correct for variability in measurements using replicates that are absolutely essential accurate results. Indeed, [**DESeq2**](https://bioconductor.org/packages/release/bioc/html/DESeq2.html) is great tool for DGE analysis. It takes read counts produced by **HTseq-count** and apply size factor normalization:
+This expression analysis is estimated from read counts and attempts are made to correct for variability in measurements using replicates that are absolutely essential for accurate results. Indeed, [**DESeq2**](https://bioconductor.org/packages/release/bioc/html/DESeq2.html) is great tool for DGE analysis. It takes read counts produced by **HTSeq-count** and apply size factor normalization:
 
 - Computation for each gene of the geometric mean of read counts across all samples
 - Division of every gene count by the geometric mean
 - Use of the median of these ratios as sample's size factor for normalization
 
-Multiple factors can then been incorporated in the the analysis. In our example, we have samples with two varying factors:
+Multiple factors can then been incorporated in the analysis. In our example, we have samples with two varying factors:
 
 - Condition (either treated or untreated)
 - Sequencing type (paired-end or single-end)
 
-A multi-factor analysis allows us to assess the effect of the treatment taking also the sequencing type into account.
+A multi-factor analysis allows us to assess the effect of the treatment as well as taking the sequencing type into account.
 
 :pencil2: ***Hands on!***
 
 1. **DESeq2** :wrench:: Run **DESeq2** with:
     - "Condition" as first factor with "treated" and "untreated" as levels and selection of count files corresponding to both levels
-    - "Sequencing" as first factor with "PE" and "SE" as levels and selection of count files corresponding to both levels
+    - "Sequencing" as second factor with "PE" and "SE" as levels and selection of count files corresponding to both levels
 
     > :bulb: File names have all information needed
 
@@ -323,7 +323,7 @@ The first output of **DESeq2** is a tabular file. The columns are:
 2.	Mean normalised counts, averaged over all samples from both conditions
 3.	Logarithm (to basis 2) of the fold change
 
-    The log2 fold changes are based on primary factor level 1 vs. factor level 2. The order of factor levels is then important. For example, for the factor 'Condition' given in above table, DESeq2 computes fold changes of 'treated' samples against 'untreated', i.e. the values correspond to up or down regulations of genes in Treated samples.
+    The log2 fold changes are based on primary factor level 1 vs. factor level 2. The order of factor levels is then important. For example, for the factor 'Condition' given in above table, DESeq2 computes fold changes of 'treated' samples against 'untreated', i.e. the values correspond to up or down regulations of genes in treated samples.
 
 4.	standard error estimate for the log2 fold change estimate
 5.	[Wald](https://en.wikipedia.org/wiki/Wald_test) statistic
@@ -338,13 +338,13 @@ The first output of **DESeq2** is a tabular file. The columns are:
 
     > :bulb: The file with the independent filtering results can be used for further downstream analysis as it excludes genes with only few read counts as these genes will not be called as significantly differentially expressed.
 
-2. **Filter** :wrench:: Extract genes that are significantly up regulated and those down regulated in treated samples
+2. **Filter** :wrench:: Extract genes that are significantly upregulated and those downregulated in treated samples
 
-    :question: Is there more up regulated or down regulated genes in treated samples?
+    :question: Are there more upregulated or downregulated genes in the treated samples?
 
 3. **Summary Statistics for any numerical column** :wrench: and **Histogram of a numeric column** :wrench:: Build the log2 fold change distribution of up regulated and down regulated genes
 
-    :question: Are up regulated genes more expressed than the down regulated genes? Are the distribution similar?
+    :question: Are upregulated genes more expressed than the downregulated genes? Is the distribution similar to those from step 2?
 
 In addition to the list of genes, **DESeq2** outputs a graphical summary of the result, useful to evaluate the quality of the experiment:
 
@@ -352,7 +352,7 @@ In addition to the list of genes, **DESeq2** outputs a graphical summary of the 
 
     ![](../images/DeSeq2_histogram.png)
 
-    The area shaded in blue indicates the subset of the tests that pass the filtering after Benjamini-Hochberg procedure, the area in khaki those that do not pass.
+    The area shaded in blue indicates the subset of the tests that passes    the filtering after Benjamini-Hochberg procedure, the area in khaki those that do not pass.
 
     :question: Why are some tests filtered? Does it improve the *p*-value distribution?
 
@@ -376,7 +376,7 @@ In addition to the list of genes, **DESeq2** outputs a graphical summary of the 
 
     ![](../images/DESeq2_heatmap.png)
 
-    :question: How are grouped the samples? Which samples are most similar?
+    :question: How are the samples grouped? Which samples are most similar?
 
 5. Dispersion estimates: gene-wise estimates
 (black), the fitted values (red), and the final maximum a posteriori estimates used in testing
@@ -392,13 +392,13 @@ For more information about **DESeq2** and its outputs, you can have a look at [*
 
 We have extracted genes that are differentially expressed in treated (with PS gene depletion) samples compared to untreated samples. We would like to know functional enrichment among the differentially expressed genes.
 
-The Database for Annotation, Visualization and Integrated Discovery ([DAVID](https://david.ncifcrf.gov/)) provides a comprehensive set of functional annotation tools for investigators to understand biological meaning behind large list of genes.
+The Database for Annotation, Visualization and Integrated Discovery ([DAVID](https://david.ncifcrf.gov/)) provides a comprehensive set of functional annotation tools for investigators to understand the biological meaning behind large list of genes.
 
-We use then DAVID to identify functional annotations of the up regulated genes and the down regulated genes.
+We use then DAVID to assign functional annotations to the upregulated and downregulated genes.
 
 :pencil2: ***Hands on!***
 
-1. **Select first lines from a dataset** :wrench:: Extract the first 300 lines of the 2 datasets generated previously (up regulated genes and down regulated genes)
+1. **Select first lines from a dataset** :wrench:: Extract the first 300 lines of the 2 datasets generated previously (upregulated and downregulated genes)
 2. **DAVID** :wrench:: Run **DAVID** on these files with
     - First column as "Column with identifiers"
     - "FLYBASE_GENE_ID" as "Identifier type"
@@ -411,11 +411,11 @@ We use then DAVID to identify functional annotations of the up regulated genes a
 
 4. Inspect the Functional Annotation Clusterings
 
-    :question: What functional annotations are the first clusters related to? How to interpret that?
+    :question: To what functional annotations are the first clusters related to? How to interpret that?
 
 # Conclusion
 
-In this tutorial, we analyze real RNA sequencing data to extract useful information, such as which genes are up- or down-regulated by depletion of Pasilla gene and which genes are regulated by Pasilla gene. To answer these questions, we analyze RNA sequence datasets using a Reference based RNA-seq data analysis approach. This approach can be sum up with the following scheme:
+In this tutorial, we analyze real RNA sequencing data to extract useful information, such as which genes are up- or downregulated by depletion of Pasilla gene, and which genes are regulated by Pasilla gene. To answer these questions, we analyze RNA sequence datasets using a reference based RNA-seq data analysis approach. This approach can be sum up with the following scheme:
 
 ![](../images/ref_based_workflow.png)
 
