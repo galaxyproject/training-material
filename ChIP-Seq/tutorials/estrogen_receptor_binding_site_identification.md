@@ -5,7 +5,8 @@ Identification of the binding sites of the Estrogen receptor with ChIP-sequencin
 
 - *How can we analyze raw ChIP-seq data?*
 - *What are the binding sites of the Estrogen receptor?*
-- *Third question*
+- *Which genes appear to be regulated by the Estrogen receptor?*
+- *Fourth question*
 - *...*
 
 :dart: ***Objectives***
