@@ -4,7 +4,7 @@ Identification of the binding sites of the T-cell acute lymphocytic leukemia pro
 :grey_question: ***Questions***
 
 - *How is raw ChIP-seq data processed and analyzed?*
-- *What are the binding sites of Ta1?*
+- *What are the binding sites of Tal1?*
 - *Which genes are regulated by Tal1?*
 - *...*
 
