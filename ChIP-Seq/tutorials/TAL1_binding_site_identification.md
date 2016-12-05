@@ -47,7 +47,10 @@ As for any NGS data analysis, ChIP-seq data must be [quality controlled](../../N
 
 1. Create and name a new history for this tutorial
 
-1. Import the ChIP-seq raw data from [here]()
+1. Import the ChIP-seq raw data from Zenodo
+
+    - Download all files from [Zenodo](link).
+    - Load files into Galaxy by right-clicking → copy link location and paste the link in Galaxy → Get Data → Upload File from your computer → paste/fetch data → Start.
 
 2. Examine the data by clicking on the 'eye' icon. 
 
