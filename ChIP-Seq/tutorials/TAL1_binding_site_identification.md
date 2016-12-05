@@ -4,17 +4,19 @@ Identification of the binding sites of the T-cell acute lymphocytic leukemia pro
 :grey_question: ***Questions***
 
 - *How is raw ChIP-seq data processed and analyzed?*
-- *What are the binding sites of TAL1?*
-- *Which genes are regulated by TAL1?*
+- *What are the binding sites of Ta1?*
+- *Which genes are regulated by Tal1?*
 - *...*
 
 :dart: ***Objectives***
 
-- *Analysis of ChIP-seq data*
-- *Mastering the ChIP-seq data analysis workflow*
-- *Identifying TAL1 binding sites*
-- *Determining genes regulated by TAL1*
-- *...*
+- *Inspect read quality with FastQC*
+- *Perform read trimming with Trimmomatic*
+- *Align trimmed reads with BWA*
+- *Identify Tal1 "peaks" with MACS2 (and generate bedgraph files for visualization)*
+- *Intersect Tal1 peaks from G1E and Megakaryocytes to identify unique and common Tal1 binding sites*
+- *Identify unique/common Tal1 peaks occupying gene promoters*
+- *Visually inspect Tal1 peaks with Trackster*
 
 :heavy_check_mark: ***Requirements***
 
@@ -28,9 +30,9 @@ Identification of the binding sites of the T-cell acute lymphocytic leukemia pro
 # Introduction
 
 This tutorial uses ChIP-seq datasets from a study published by [Wu et al., 2012](http://genome.cshlp.org/content/24/12/1945.full.pdf+html).
-The goal of this study was to investigate "the dynamics of occupancy and the role in gene regulation of the transcription factor TAL1, a critical regulator of hematopoiesis, at multiple stages of hematopoietic differentiation."
+The goal of this study was to investigate "the dynamics of occupancy and the role in gene regulation of the transcription factor Tal1, a critical regulator of hematopoiesis, at multiple stages of hematopoietic differentiation."
 To this end, ChIP-seq was performed in the G1E cell line - a GATA-null immortalized cell line derived from targeted disruption of GATA-1 in mouse embryonic stem cells - and megakaryocytes.
-This dataset (GEO Accession [GSE51338](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE51338)) consists of biological replicate TAL1 ChIP-seq experiments and input control experiments for which the same treatment as the ChIP-seq samples was done except for the immunoprecipitation step.
+This dataset (GEO Accession [GSE51338](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE51338)) consists of biological replicate Tal1 ChIP-seq experiments and input control experiments for which the same treatment as the ChIP-seq samples was done except for the immunoprecipitation step.
 Input control experiments are used to identify and remove sampling bias, for example open/accessible chromatin or GC bias.
 
 Because of the long processing time for the large original files, we have downsampled the original raw data files to include only a subset of genomic loci.
@@ -45,9 +47,7 @@ As for any NGS data analysis, ChIP-seq data must be [quality controlled](../../N
 
 1. Create and name a new history for this tutorial
 
-1. Import the ChIP-seq raw data from Zenodo
-
-    - Import all files from Zenodo. Load them into Galaxy by right-clicking → copy link location and paste the link in Galaxy → Get Data → Upload File from your computer → paste/fetch data → Start.
+1. Import the ChIP-seq raw data from [here]()
 
 2. Examine the data by clicking on the 'eye' icon. 
 
@@ -77,10 +77,10 @@ Nowadays, there are many read alignment programs for shot-gun sequenced DNA, `bo
 
 :pencil2: ***Hands on!***
 
-1. Run the tool `bwa` to map the single-end reads to the mouse genome version mm10.
+1. Run the tool `bowtie2` to map the single-end reads to the mouse genome version mm10.
 
     - By clicking on the resulting history entry, you can see some basic mapping statistics once the alignment is completed. 
-    - How many reads were mapped?
+    - How many reads where mapped?
 
 ### Step 4: Visualizing aligned reads in IGV
 
