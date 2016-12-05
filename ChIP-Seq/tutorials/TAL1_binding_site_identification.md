@@ -45,7 +45,9 @@ As for any NGS data analysis, ChIP-seq data must be [quality controlled](../../N
 
 1. Create and name a new history for this tutorial
 
-1. Import the ChIP-seq raw data from [here]()
+1. Import the ChIP-seq raw data from Zenodo
+
+    - Import all files from Zenodo. Load them into Galaxy by right-clicking → copy link location and paste the link in Galaxy → Get Data → Upload File from your computer → paste/fetch data → Start.
 
 2. Examine the data by clicking on the 'eye' icon. 
 
@@ -75,10 +77,10 @@ Nowadays, there are many read alignment programs for shot-gun sequenced DNA, `bo
 
 :pencil2: ***Hands on!***
 
-1. Run the tool `bowtie2` to map the single-end reads to the mouse genome version mm10.
+1. Run the tool `bwa` to map the single-end reads to the mouse genome version mm10.
 
     - By clicking on the resulting history entry, you can see some basic mapping statistics once the alignment is completed. 
-    - How many reads where mapped?
+    - How many reads were mapped?
 
 ### Step 4: Visualizing aligned reads in IGV
 
