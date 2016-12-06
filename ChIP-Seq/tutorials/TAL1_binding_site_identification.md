@@ -6,7 +6,6 @@ Identification of the binding sites of the T-cell acute lymphocytic leukemia pro
 - *How is raw chIP-seq data processed and analyzed?*
 - *What are the binding sites of Tal1?*
 - *Which genes are regulated by Tal1?*
-- *...*
 
 :dart: ***Objectives***
 
@@ -27,6 +26,24 @@ Identification of the binding sites of the T-cell acute lymphocytic leukemia pro
 
 :hourglass: ***Time estimation*** *3h*
 
+# Content
+
+* [Introduction](#introduction)
+* [Hands-on example of ChIP-seq analysis](#example)
+  - [Step 1: Quality control](#step1)
+  - [Step 2: Trimming/clipping reads](#step2)
+  - [Step 3: Aligning reads to a genome](#step3)
+  - [Step 4: Determining Tal1 binding sites](#step4)
+  - [Step 5: Inspection of Tal1 peaks](#step5)
+  - [Step 6: Identifying unique/common Tal1 peaks](#step6)
+  - [Step 7: Assessing correlation between samples](#step7)
+  - [Step 8: Assessing GC bias](#step8)
+  - [Step 9: Assessing IP strength](#step9)
+  - [Additional analyses](#stepA)
+* [Concluding remarks](#conclusion)
+* [Useful literature](#literature)
+  
+<a name="introduction"/></a>
 # Introduction
  
 This tutorial uses ChIP-seq datasets from a study published by [Wu et al., 2012](http://genome.cshlp.org/content/24/12/1945.full.pdf+html).
@@ -50,8 +67,10 @@ Because of the long processing time for the large original files, we have downsa
 | Megakaryocyte | chIP-seq | Tal1 | 1 | SRR549006 | SE | 50 | No | 35.2 |
 | Megakaryocyte | chIP-seq | Tal1 | 2 | SRR549007 | SE | 50 | No | 39.6 |
 
+<a name="example"/></a>
 # Analysis
 
+<a name="step1"/></a>
 ### Step 1: Quality control
 
 As for any NGS data analysis, ChIP-seq data must be quality controlled before being aligned to a reference genome.
@@ -80,13 +99,14 @@ As for any NGS data analysis, ChIP-seq data must be quality controlled before be
 
   **INSERT SCREENSHOT HERE OF FASTQC OUTPUT ON ONE DATASET**
 
+<a name="step2"/></a>
 ### Step 2: Trimming and clipping reads
 
 It is often necessary to trim a sequenced read to remove bases sequenced with high uncertainty (*i.e.* low-quality bases). In addition, artificial adaptor sequences used in library preparation protocols need to be removed before attempting to align the reads to a reference genome. More explanation of quality trimming can be found in the [NGS-QC tutorial](./../NGS-QC/tutorials/dive_into_qc.md).
 
 :pencil2: ***Hands on!***
 
-1. Run the tool `Trimmomatic` on each FASTQ file to trim low-quality bases. Explore the full parameter list for `Trimmomatic` in the Tool Form and set the following `Trimmomatic` parameters:
+1. Run the tool `Trimmomatic` on each FASTQ file to trim low-quality bases (remember how to run tools on all files at once?). Explore the full parameter list for `Trimmomatic` in the Tool Form and set the following `Trimmomatic` parameters:
 
     - **Paired end data?** No
     - **Perform initial ILLUMINACLIP?** No
@@ -100,6 +120,7 @@ It is often necessary to trim a sequenced read to remove bases sequenced with hi
 
 **HINT**: If your FASTQ files cannot be selected, check whether their format is FASTQ with Sanger-scaled quality values (*fastqsanger*). If you didn't set this datatype when importing the data, you can edit the data type by clicking on the 'pencil' symbol.
 
+<a name="step3"/></a>
 ### Step 3: Aligning reads to a reference genome
 
 To determine where DNA fragments originated from in the genome, the sequenced reads must be aligned to a reference genome. This is equivalent to solving a jigsaw puzzle, but unfortunately, not all pieces are unique. In principle, you could do a BLAST analysis to figure out where the sequenced pieces fit best in the known genome. Aligning millions of short sequences this way, however, can take a couple of weeks.
@@ -123,6 +144,7 @@ Nowadays, there are many read alignment programs for sequenced DNA, `BWA` being 
 
     - How many reads were mapped to chromosome 16 from each file?
 
+<a name="step4"/></a>
 ### Step 4: Determining Tal1 binding sites 
 
 Now that `BWA` has aligned the reads to the genome, we will use the tool `MACS2` to identify regions of Tal1 occupancy, which are called "peaks". Peaks are determined from pileups of sequenced reads across the genome that correspond to where Tal1 binds.
@@ -138,6 +160,7 @@ Now that `BWA` has aligned the reads to the genome, we will use the tool `MACS2`
 
 2. Rename your files to reflect the origin and contents.
 
+<a name="step5"/></a>
 ### Step 5: Inspection of peaks and aligned data
 
 It is critical to visualize your NGS data on a genome browser after alignemnt. Evaluation criteria will differ for the various NGS experiment types, but for chIP-seq data we want to ensure reads from a Treatment sample are enriched at "peaks" and do not localize non-specifically (like the Control condition).
@@ -165,6 +188,7 @@ It is critical to visualize your NGS data on a genome browser after alignemnt. E
     
   **INSERT SCREENSHOT HERE**
 
+<a name="step6"/></a>
 ### Step 6: Identifying unique and common Tal1 peaks between the G1E and megakaryocyte states
 
 We've just processed chIP-seq data from two stages of hematopoiesis and have lists of Tal1 occupied sites (peaks) in both cellular states. Now lets identify Tal1 peaks that are shared between the two cellular states and also those that are specific to one cellular state.
@@ -173,21 +197,29 @@ We've just processed chIP-seq data from two stages of hematopoiesis and have lis
 
 1. 
 
-
+<a name="step7"/></a>
 ### Step 7: Assessing correlation between samples
 
 To assess the similarity between the replicates of the ChIP-seq and the input, respectively, it is a common technique to calculate the correlation of read counts for the different samples.
 We expect that the replicates of the ChIP-seq experiments should be clustered more closely to each other than the replicates of the input samples.
 We will be using tools from the package `deepTools` for the next few steps. More information on deepTools can be found [here](http://deeptools.readthedocs.io/en/latest/content/list_of_tools.html).
 
-1. Run the tool `multiBamSummary` from the `deepTools` package. This tool will split the reference genome into bins of equal size (e.g. 10kb) and will count the number of overlapping reads from each sample. Set the following `multiBamSummary` parameters:
+1. Run the tool `multiBamSummary` from the `deepTools` package. This tool will split the reference genome into bins of equal size and will count the number of overlapping reads from each sample. Set the following `multiBamSummary` parameters:
 
     - Select all of the aligned BAM files
     - **Bin size in bp** 10000
 
-2. Run the tool `plotCorrelation` from the `deepTools` package to visualize the results. Feel free to try different parameters.
+2. Run the tool `plotCorrelation` from the `deepTools` package to visualize the results. Feel free to try different parameters, but to start set the following `plotCorrelation` parameters:
 
+    - **Correlation method** Spearman
+    - **Plotting type** Heatmap
+    - **Title of the plot** (enter appropriate title here)
+    - **Plot the correlation value** Yes
+    - **Skip zeros** Yes
 
+Why do we want to skip zeros for this tutorial?
+
+<a name="step8"/></a>
 ### Step 8: Assessing GC bias
 
 A common problem of PCR-based protocols is the observation that GC-rich regions tend to be amplified more readily than GC-poor regions.
@@ -196,26 +228,45 @@ We will now check whether the samples have more reads from regions of the genome
 1. Run the tool `computeGCbias` from the `deepTools` package.
 
     - For practical reasons, select only one of the aligned BAM files, preferably an input file
+    - **Reference genome** locally cached
+    - **Using reference genome** mm10
+    - **Effective genome size** user specified
+    - **Effective genome size** 10000000
+    - **Fragment length used for the sequencing** 50
     - Why does it make more sense to check the input file?
-    - For _fragment size_, select 300.
-    - limit the operation to only one chromosome (again, this is purely to speed up the analysis)
 
 Does this dataset have a GC bias?
 
+2. Explore the tool `correctGCbias` from the `deepTools` package.
+
+    - What does this tool do?
+    - What is the output of this tool?
+    - What are some caveats to be aware of if using the output of this tool in downstream analyses?
+    
+<a name="step9"/></a>
 ### Step 9: Assessing IP strength
 
 We will now evaluate the quality of the immuno-precipitation step in the ChIP-seq protocol
 
 1. Run the tool `plotFingerprint` from the `deepTools` package.
 
-    - Select one of the ChIP-seq samples and the matching input
-    - Set as fragment size 100.
+    - Select all of the aligned BAM files
+    - **Show advanced options** yes
+    - **Bin size in bases** 50
+    - **Skip zeros** Yes
 
-What do you think about the quality of the IP for this experiment? If you are not sure how to interpret the resulting plots, please read the information [here](http://deeptools.readthedocs.io/en/latest/content/tools/plotFingerprint.html#background)
+2. View the output image.
 
-# OPTIONAL STEPS
+    - What does this graph represent?
+    - How do input datasets differ from IP datasets?
+    - What do you think about the quality of the IP for this experiment? 
+    
+For additional informaton on how to interpret the resulting plots, read the information [here](http://deeptools.readthedocs.io/en/latest/content/tools/plotFingerprint.html#background)
 
-### Step 10: Generate coverage files normalized by sequencing depth
+<a name="stepA"/></a>
+# OPTIONAL ADDITIONAL ANALYSES
+
+### Generate coverage files normalized by sequencing depth
 
 - Run the tool `bamCoverage` to generate a signal coverage file for the ER ChIP sample normalized by sequencing depth. Set the fragment size to 100 and the bin size to 25. Normalize to 1x genomic coverage. The output file should be in human-readable format bedGraph. To speed up computation, limit the operation to chromosome 'chr11'.
 
@@ -225,7 +276,7 @@ Generally, you should adjust the effective genome size according to the used gen
 
 - Re-run the tool and generate a *bigWig* output file. Inspect the signal coverage in IGV. Remember that the bigWig file contains only the signal on chromosome 11!
 
-### Step 10: Generate input-normalized coverage files
+### Generate input-normalized coverage files
 
 - Run the tool `bamCompare` to normalize the ChIP signal BAM file patient4_ChIP_ER_poor_outcome.bam by the input control provided by patient4_input_poor_outcome.bam.
 
@@ -235,6 +286,7 @@ Generally, you should adjust the effective genome size according to the used gen
 
 - Re-run the tool and generate a bigWig output file. Inspect the log2 ratio in IGV. Remember that the bigWig file contains only the signal on chromosome 11!
 
+<a name="conclusion"/></a>
 # Conclusion
 
 In this exercise you imported raw Illumina sequencing data, evaluated the quality before and after you trimmed reads with low confidence scores, algined the trimmed reads, identified Tal1 peaks relative to the negative control (background), and visualized the aligned reads and Tal1 peaks relative to gene structures and positions. 
@@ -247,3 +299,60 @@ In this exercise you imported raw Illumina sequencing data, evaluated the qualit
 - *...*
 
 # :clap: Thank you
+
+-------------------------------------------
+
+<a name="literature"/></a>
+##Useful literature
+
+###ChIP-seq in general:
+
+**Landt et al. (2012):** [ChIP-seq guidelines and practices of the ENCODE and modENCODE consortia](http://genome.cshlp.org/content/22/9/1813.long), (doi:10.1101/gr.136184.111) - This is a very useful "encyclopedic" paper with many details about the tools the (mod)ENCODE consortia use. It also contains a long section about antibody validation etc.. It does not explain much of the reasoning behind the bioinformatics tools, though.
+
+**Zentner and Henikoff (2012):** [Surveying the epigenomic landscape, one base at a time](http://genomebiology.biomedcentral.com/articles/10.1186/gb-2012-13-10-250), (doi:10.1186/gb-2012-13-10-250) - Overview of popular *-seq techniques; very nice description of DNase-seq, MNase-seq, FAIRE-seq etc.
+
+**Kidder et al. (2011):** [Technical considerations to obtaining high-quality data](http://www.nature.com/ni/journal/v12/n10/abs/ni.2117.html), (doi:10.1038/ni.2117) - Nice, readable introduction into all aspects of ChIP-seq experiments (from antibodies to cell numbers to replicates to data analysis)
+
+**Leleu et al. (2010):** [Processing and analyzing ChIP-seq data](http://www.ncbi.nlm.nih.gov/pubmed/20861161), (doi: 10.1093/bfgp/elq022) - Fairly detailed review of key concepts of ChIP-seq data processing (less detailed on analysis)
+
+**Peter Park (2009):** [ChIP-seq: Advantages and challenges of a maturing technology](http://www.nature.com/nrg/journal/v10/n10/full/nrg2641.html), (doi:10.1038/nrg2641)
+
+**Kharchenko et al. (2008):** [Design and analysis of ChIP-seq experiments for DNA-binding proteins](http://www.ncbi.nlm.nih.gov/pubmed/19029915), (doi:10.1038/nbt.1508)
+
+**Liu et al. (2010):** [Q&A: ChIP-seq technologies and the study of gene regulation](http://bmcbiol.biomedcentral.com/articles/10.1186/1741-7007-8-56), (doi:10.1186/1741-7007-8-56) - Short overview of several (typical) issues of ChIP-seq analysis
+
+**Carroll et al. (2014):**  [Impact of artifact removal on ChIP quality metrics in ChIP-seq and ChIP-exo data](http://journal.frontiersin.org/article/10.3389/fgene.2014.00075/full),(doi:10.3389/fgene.2014.00075)  
+
+<a name="peakcalling"/></a>
+###Peak Calling Methods (ChIP-seq)
+
+**Pepke et al. (2009):** [Computation for ChIP-seq and RNA-seq studies](http://www.ncbi.nlm.nih.gov/pubmed/19844228), (doi: 10.1038/nmeth.1371) - First comparison of peak callers, focuses on the explanation of basic principles of ChIP-seq data processing and general workflows of peak calling algorithms
+
+**Wilbanks et al. (2010):** [Evaluation of Algorithm Performance in ChIP-Seq Peak Detection](http://www.ncbi.nlm.nih.gov/pubmed/20628599), (doi: 10.1371/journal.pone.0011471) - Another comparison of peak callers - focuses more on the evaluation of the peak callers performances than Pepke et al. (2009)
+
+**Micsinai et al. (2012):** [Picking ChIP-seq peak detectors for analyzing chromatin modification experiments](http://www.ncbi.nlm.nih.gov/pubmed/22307239), (doi: 10.1093/nar/gks048) - How to choose the best peak caller for your data set - their finding: default parameters, surprisingly, yield the most reproducible results regardless of the data set type
+
+#### MACS
+
+**Fen et al. (2012):** [Identifying ChIP-seq enrichment using MACS.](http://www.ncbi.nlm.nih.gov/pubmed/22936215), (doi:10.1038/nprot.2012.101) - How to use MACS - Nature Protocols
+
+**Zhang et al. (2008):** [Model-based Analysis of ChIP-Seq (MACS)](http://genomebiology.biomedcentral.com/articles/10.1186/gb-2008-9-9-r137), (doi:10.1186/gb-2008-9-9-r137) - The original publication of MACS
+
+<a name="motifs"/></a>
+### DNA motif analysis
+
+**Das et al. (2007):** [A survey of DNA motif finding algorithms](http://bmcbioinformatics.biomedcentral.com/articles/10.1186/1471-2105-8-S7-S21), (doi:10.1186/1471-2105-8-S7-S21) - Review of motif analysis tools
+
+#### MEME suite
+
+**Bailey and Machanick (2012):** [Inferring direct DNA binding from ChIP-seq](http://www.ncbi.nlm.nih.gov/pubmed/22610855), (doi:10.1093/nar/gks433) - Centrimo: position-specific motif analysis, especially useful for ChIP-seq data
+
+**Machanick and Bailey (2011):** [MEME-ChIP: motif analysis of large DNA datasets](http://www.ncbi.nlm.nih.gov/pubmed/21486936), (doi: 10.1093/bioinformatics/btr189) - MEME-ChIP-paper
+
+[TomTom](http://meme-suite.org/tools/tomtom) - Meme Suite Motif comparison tool: tool for the comparison of motifs from databases (not in Galaxy yet): [Manual](http://meme-suite.org/doc/tomtom.html?man_type=web)
+
+#### TRAP
+
+**Thomas-Chollier et al. (2012):** [Transcription factor binding predictions using TRAP for the analysis of ChIP-seq data and regulatory SNPs](http://www.ncbi.nlm.nih.gov/pubmed/22051799), (doi:10.1038/nprot.2011.409) - How to use TRAP - Nature Protocols
+
+**Roider et al. (2006):** [Predicting transcription factor affinities to DNA from a biophysical model.](http://www.ncbi.nlm.nih.gov/pubmed/17098775), (doi:10.1093/bioinformatics/btl565) - Theoretical background of TRAP
