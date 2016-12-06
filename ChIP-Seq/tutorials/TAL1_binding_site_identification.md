@@ -56,16 +56,16 @@ Because of the long processing time for the large original files, we have downsa
 
 **Table 1**: Metadata for ChIP-seq experiments in this tutorial. SE: single-end.
 
-| Cellular state | Datatype | chIP Ab | Replicate | SRA Accession | Library type | Read length | Stranded? | DS.1 size (MB) |
+| Cellular state | Datatype | chIP Ab | Replicate | SRA Accession | Library type | Read length | Stranded? | DS.3 size (MB) |
 |---|---|:-:|:-:|---|:-:|:-:|:-:|---|
-| G1E | chIP-seq | input | 1 | SRR507859 | SE | 50 | No | 3.9 |
-| G1E | chIP-seq | input | 2 | SRR507860 | SE | 50 | No | 44.7 |
-| G1E | chIP-seq | Tal1 | 1 | SRR492444 | SE | 50 | No | 450.5 |
-| G1E | chIP-seq | Tal1 | 2 | SRR492445 | SE | 50 | No | 924 |
-| Megakaryocyte | chIP-seq | input | 1	| SRR492453 | SE | 50 | No | 5.6 |
-| Megakaryocyte | chIP-seq | input | 2 | SRR492454 | SE | 50 | No | 47.1 |
-| Megakaryocyte | chIP-seq | Tal1 | 1 | SRR549006 | SE | 50 | No | 35.2 |
-| Megakaryocyte | chIP-seq | Tal1 | 2 | SRR549007 | SE | 50 | No | 39.6 |
+| G1E | chIP-seq | input | 1 | SRR507859 | SE | 50 | No | 35.8 |
+| G1E | chIP-seq | input | 2 | SRR507860 | SE | 50 | No | 427.1 |
+| G1E | chIP-seq | Tal1 | 1 | SRR492444 | SE | 50 | No | 32.3 |
+| G1E | chIP-seq | Tal1 | 2 | SRR492445 | SE | 50 | No | 62.7 |
+| Megakaryocyte | chIP-seq | input | 1	| SRR492453 | SE | 50 | No | 57.2 |
+| Megakaryocyte | chIP-seq | input | 2 | SRR492454 | SE | 50 | No | 403.8 |
+| Megakaryocyte | chIP-seq | Tal1 | 1 | SRR549006 | SE | 50 | No | 340.3 |
+| Megakaryocyte | chIP-seq | Tal1 | 2 | SRR549007 | SE | 50 | No | 356.9 |
 
 <a name="example"/></a>
 # Analysis
