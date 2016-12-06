@@ -13,8 +13,8 @@ Identification of the binding sites of the T-cell acute lymphocytic leukemia pro
 - *Inspect read quality with FastQC*
 - *Perform read trimming with Trimmomatic*
 - *Align trimmed reads with BWA*
-- *Identify Tal1 "peaks" with MACS2 (and generate bedgraph files for visualization)*
-- *Intersect Tal1 peaks from G1E and Megakaryocytes to identify unique and common Tal1 binding sites*
+- *Identify Tal1 binding sites with MACS2*
+- *Determine unique and common Tal1 binding sites Tal1 peaks from G1E and Megakaryocytes*
 - *Identify unique/common Tal1 peaks occupying gene promoters*
 - *Visually inspect Tal1 peaks with Trackster*
 
