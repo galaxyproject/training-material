@@ -116,7 +116,11 @@ It is often necessary to trim a sequenced read to remove bases sequenced with hi
     
 2. Rerun the tool `FastQC` on each trimmed/clipped FASTQ file to determine whether low-quality and adaptor sequences were correctly removed.
 
-  **INSERT SCREENSHOT HERE OF FASTQC OUTPUT ON SAME DATASET AFTER TRIMMING**
+    | :grey_question: Question |
+    |:---|
+    | How did the range of read lengths change after trimming/clipping? |
+
+**INSERT SCREENSHOT HERE OF FASTQC OUTPUT ON SAME DATASET AFTER TRIMMING**
 
 **HINT**: If your FASTQ files cannot be selected, check whether their format is FASTQ with Sanger-scaled quality values (*fastqsanger*). If you didn't set this datatype when importing the data, you can edit the data type by clicking on the pencil symbol.
 
@@ -137,12 +141,16 @@ Nowadays, there are many read alignment programs for sequenced DNA, `BWA` being 
 
 2. Click on a file produced by running `BWA`.
 
-    - What datatype is the `BWA` output file?
-    - How many reads were mapped from each file?
+    | :grey_question: Questions |
+    |:---|
+    | What datatype is the `BWA` output file? |
+    | How many reads were mapped from each file? |
 
 3. Run the tool `IdxStats` to find out how many reads mapped to which chromosome.
 
-    - How many reads were mapped to chromosome 16 from each file?
+    | :grey_question: Question |
+    |:---|
+    | How many reads were mapped to chromosome 16 from each file? |
 
 <a name="step4"/></a>
 ### Step 4: Determining Tal1 binding sites 
@@ -184,7 +192,9 @@ It is critical to visualize your NGS data on a genome browser after alignemnt. E
 
 4. Navigate to the Gata1 locus (chr16:92501466-92926074) to inspect the aligned reads and Tal1 peak calls. (Mo: This region should have Tal1 peaks in both cellular states)
 
-    - What do you see?
+    | :grey_question: Question |
+    |:---|
+    | What do you see? |
     
   **INSERT SCREENSHOT HERE**
 
@@ -217,7 +227,9 @@ We will be using tools from the package `deepTools` for the next few steps. More
     - **Plot the correlation value** Yes
     - **Skip zeros** Yes
 
-Why do we want to skip zeros for this tutorial?
+    | :grey_question: Question |
+    |:---|
+    | Why do we want to skip zeros in `plotCorrelation`? |
 
 <a name="step8"/></a>
 ### Step 8: Assessing GC bias
@@ -233,14 +245,19 @@ We will now check whether the samples have more reads from regions of the genome
     - **Effective genome size** user specified
     - **Effective genome size** 10000000
     - **Fragment length used for the sequencing** 50
-    - Why does it make more sense to check the input file?
-    - Does this dataset have a GC bias?
+
+    | :grey_question: Questions |
+    |:---|
+    | Why does it make more sense to check the input file? |
+    | Does this dataset have a GC bias? |
 
 2. Explore the tool `correctGCbias` from the `deepTools` package.
 
-    - What does this tool do?
-    - What is the output of this tool?
-    - What are some caveats to be aware of if using the output of this tool in downstream analyses?
+    | :grey_question: Questions |
+    |:---|
+    | What does this tool do? |
+    | What is the output of this tool? |
+    | What are some caveats to be aware of if using the output of this tool in downstream analyses? |
     
 <a name="step9"/></a>
 ### Step 9: Assessing IP strength
@@ -256,9 +273,11 @@ We will now evaluate the quality of the immuno-precipitation step in the ChIP-se
 
 2. View the output image.
 
-    - What does this graph represent?
-    - How do input datasets differ from IP datasets?
-    - What do you think about the quality of the IP for this experiment? 
+    | :grey_question: Questions |
+    |:---|
+    | What does this graph represent? |
+    | How do input datasets differ from IP datasets? |
+    | What do you think about the quality of the IP for this experiment? |
     
 For additional informaton on how to interpret the resulting plots, read the information [here](http://deeptools.readthedocs.io/en/latest/content/tools/plotFingerprint.html#background)
 
