@@ -162,7 +162,7 @@ Now that `BWA` has aligned the reads to the genome, we will use the tool `MACS2`
 
 1. Run the tool `MACS2 callpeak` with the aligned read files from the previous step as Treatment (Tal1) and Control (input). 
 
-    - **Effective genome size** Mouse (10,000,000,000)
+    - **Effective genome size** Mouse (10,000,000)
 
   **INSERT SCREENSHOT HERE OF MACS2 TOOL FORM**
 
