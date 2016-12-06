@@ -20,6 +20,11 @@ If you have any questions, you can reach us using the [Gitter chat](https://gitt
     - [`slides` directory](#slides-directory)
     - [`docker` directory](#docker-directory)
     - [`README.md` file](#README.md-file)
+- [How do I add new content?](#how-do-i-add-content)
+    - [How do I add a new topic?](#how-do-i-add-a-new-topic)
+    - [How do I add a new tutorial?](#how-do-i-add-a-new-tutorial)
+    - [How do I fill a tutorial hands-on?](#how-do-i-fill-a-tutorial-hands-on)
+    - [How do I fill introduction slides?](#how-do-i-fill-introduction-slides)
 - [How is the training material maintained?](#how-the-training-material-is-maintained)
     - [Maintainers](#maintainers)
     - [Labels](#labels)
@@ -75,6 +80,8 @@ Each training material is related to a topic. All training materials (slides, tu
 ├── tutorials
 ```
 
+> Want to add a new topic? Check out [how to add new topic](#how-do-i-add-content).
+
 ## `images` directory
 
 The `images` directory collects all images/pictures needed for the training materials related to the topic, *i.e* pictures for the slides or the tutorials.
@@ -85,43 +92,19 @@ All images for the slides must be in `images` directory. The images must be in g
 
 ## `tutorials` directory
 
-This directory collects the tutorials related to the topic. The tutorials must
-be written in `markdown` and follow the [`templates/tutorials/tutorial.md` template](templates/tutorials/tutorial.md). The tutorials must be well structured (to help the trainees) with:
+This directory collects the tutorials related to the topic. The tutorials are hands-on built for workshop and self training. 
 
-1. Header
+The template for the tutorials are different from the other pages to help users to focus on the content of the tutorial. To improve the output of the tutorial, several metadata are mandatory for every tutorials such as the requirements or the objectives of the tutorials. Boxes are also used to highlight some key points as the hands-on or the tips.  
 
-    ![Tutorial header](shared/images/tutorial_header.png)
+The content of tutorial is generated with [Jekyll](http://jekyllrb.com/) from a markdown files and some metadata (*e.g.* the requirements, the Zenodo link, the questions) defined with the metadata of the related topic
 
-2. Introduction
-
-    ![Tutorial introduction](shared/images/tutorial_introduction.png)
-
-3. Several parts
-
-    ![Tutorial part](shared/images/tutorial_part.png)
-
-4. Conclusion and key points
-
-    ![Tutorial footer](shared/images/tutorial_footer.png)
-
-
-We recommend to have at least one scheme or diagram to sum up the pipeline used.
-
-The input data required for the tutorials must be upload on [Zenodo](https://zenodo.org/) to obtain a dedicated DOI (in the [Galaxy training network community](https://zenodo.org/communities/galaxy-training/?page=1&size=20)).
+> Want to contribute to a tutorial?
+> - [Check out how to add a new tutorial?](#how-do-i-add-a-tutorial-hands-on)
+> - [Check out how to fill a new tutorial?](#how-do-i-fill-a-tutorial-hands-on)
 
 ## `slides` directory
 
-Several slide decks are expected for every topic:
-
-- One slide deck with a general introduction of the topic
-- One slide deck for for each tutorial (with the questions addressed in this tutorial, the objectives, an introduction of the type of analyses used, ...), following the same structure as the tutorial.
-
-The slides must be in [`reveal.js`](https://github.com/hakimel/reveal.js/) format, in a `html` file. Template for the `html` files can be found in
-[`templates/slides/`](templates/slides/).
-You can also use the [`reveal.js` editor](https://slides.com/?ref=github)
-to help you.
-
-The slide decks are in the `slides` directory. The general introduction slide deck must be named `index.html` and the slide deck for each tutorial must have the same name as the tutorial `markdown` file. Once the slides are on the `master` branch, they will be available at `http://bgruening.github.io/training-material/<topic>/slides/<slide_name>.html`
+A slide deck is expected for every topic: the one with a general introduction of the topic. The slides are rendered using `remark.js` but written in markdown to facilate any contribution. [Check out how to fill introduction slides](#how-do-i-fill-introduction-slides).
 
 ## `docker` directory
 
@@ -131,9 +114,160 @@ images. We recommend to use the content of [`templates/docker`](templates/docker
 
 The `docker` image must also integrate a Galaxy tour from the [`galaxy-tours` repository](https://github.com/galaxyproject/galaxy-tours)
 
-## `README.md` file
+# How do I add new content?
 
-The `README.md` rapidly introduces the topic, summarizes all the information about the training materials (where to find the slides, the tutorials and their topics, the Docker image and the input dataset, references, contributors and maintainers) and adds the needed references. We recommend to use the [`templates/README.md`](templates/README.md) as a template.
+## How do I add a new topic?
+
+1. Add a `yml` file into the `data` directory similar to the one for [`RNA-Seq`](data/RNA-Seq.yml) and fill it with meta information on the topic
+    - `name`: name of the topic (same name as the `yml` file and the directory)
+    - `title`: title of the topic
+    - `type`: targeted users (`"use"` or `""`) 
+    - `summary`: summary of the content of the topic
+    - `docker_image`: name of the [Docker image](#docker-directory) with the tools for this topic
+    - `tutorials`: list of tutorials available for this topic. Check out [how to add a new tutorial](#how-do-i-add-a-new-tutorial) for more information
+    - `maintainers`: the two maintainers of the topic with their `name`, `github_username`, `email`
+    - `contributors`: list of people who contributed to the topic with `name`, `github_username`, `email`
+    - `references`: list of references for this topic with `authors`, `title`, `link`, `summary`
+
+    This information is used with [Jekyll](http://jekyllrb.com/) to generate the webpage related to the topic
+
+2. Copy the template directory, rename it (with the same name as the `yml` file one) and fill it
+    1. Add introduction slides
+
+        > Check out [how to fill introduction slides](#how-do-i-fill-introduction-slides)
+
+    2. Add tutorials
+
+        > Check out [how to add a new tutorial](#how-do-i-add-a-new-tutorial)
+
+## How do I add a new tutorial?
+
+1. Complete the `yml` file of the related topic that is in `data` directory with the meta information about the tutorial
+    - `title`: title of the tutorial
+    - `name`: name of the tutorial (name of the subdirectory where the files related to the tutorial will be stored)
+    - `zenodo_link`: link on Zenodo to the input data for the tutorial (not ideal but it can be empty)
+    - `galaxy_tour`: name of the galaxy tour
+    - `hands_on` (`"yes"` or `"no"`): tell if an hands on is available for this tutorial
+    - `slides` (`"yes"` or `"no"`): tell if slides are available for this tutorial
+    - `questions`: list of questions that are adressed in the tutorial
+    - `objectives`: list of objectives of the tutorial
+    - `requirements`: list of requirements to with `title` and `link`
+    - `time_estimation`: estimation of the time needed to complete the hands-on
+    - `key_points`: take home messages
+
+    This information will appear in the top and bottom of the online hands-on generated using [Jekyll](http://jekyllrb.com/)
+
+    ![](shared/images/tutorial_header.png)
+
+- Fill the hands-on file
+
+    > Check out [how to fill it](#how-do-i-fill-a-tutorial-hands-on)
+
+## How do I fill a tutorial hands-on?
+
+When you want to fill a tutorial hands-on, you need to check the metadata about the tutorial in the `yml` file  in `data` directory. They are used to generate the header and the footer of the tutorials. 
+
+The content of a tutorial hands-on is written in `markdown`. They are rendered by [Jekyll](http://jekyllrb.com/) into the webpage for the tutorial. 
+
+To improve the learning experience, we strongly recommend you to: 
+- Add boxes to highlight:
+    - Hands-on parts
+
+        ```
+        > ### :pencil2: Hands-on:
+        >
+        > 1. **Sort BAM dataset** :wrench:: Sort the paired-end BAM file by "Read names" with **Sort BAM dataset**
+        {: .hands_on}
+        ```
+
+        ![](shared/images/tutorial_hand_on_box.png)
+
+    - Questions (to make the learners think about what they are doing)
+
+        ```
+        > ### :question: Questions
+        >
+        > - Why are some tests filtered?
+        > - Does it improve the *p*-value distribution?
+        {: .question}
+        ```
+
+        ![](shared/images/tutorial_question_box.png)
+
+    - Tips
+
+        ```
+        > ### :bulb: Tip: Importing data via links
+        >
+        > * Copy the link location
+        > * Open the Galaxy Upload Manager
+        > * Select **Paste/Fetch Data**
+        > * Paste the link into the text field
+        > * Press **Start**    
+        {: .tip}
+        ```
+
+        ![](shared/images/tutorial_tip_box.png)
+
+    - Comments
+
+        ```
+        > ### :nut_and_bolt: Comments
+        > - Edit the "Database/Build" to select "dm3"
+        > - Rename the datasets according to the samples
+        {: .comment}
+        ```
+
+        ![](shared/images/tutorial_comment_box.png)
+
+    To render the boxes correctly, the previous syntaxes have to be followed. The boxes can be nested, .e.g. for having tips inside hands-on.
+
+- Add an agenda at the end of the introduction to indicate the plan of the tutorial
+    
+    ```
+    > ### Agenda
+    >
+    > In this tutorial, we will analyze the data with:
+    >
+    > 1. [Pretreatments](#pretreatments)
+    > 2. [Mapping](#mapping)
+    > 3. [Analysis of the differential expression](#analysis-of-the-differential-expression)
+    > {: .agenda}
+    ```
+
+    ![](shared/images/tutorial_agenda_box.png)
+
+- Add pictures of the expected results
+- Add at least one scheme or diagram to sum up the pipeline used at the end.
+
+The input data required for the tutorials must be upload on [Zenodo](https://zenodo.org/) to obtain a dedicated DOI (in the [Galaxy training network community](https://zenodo.org/communities/galaxy-training/?page=1&size=20)).
+
+## How do I fill introduction slides? (not up to date)
+
+The introduction slides must be in the `index.html` file in `slides` directory for each topic. Even if the extension is `html`, slides are written in markdown. `---` is used to separate the slides.
+
+```
+---
+layout: base_slides
+---
+
+# What is RNA sequencing?
+
+---
+
+### Where my data comes from?
+
+![](../images/ecker_2012.jpg)
+
+<small>[*Ecker et al, Nature, 2012*](http://www.nature.com/nature/journal/v489/n7414/full/489052a.html)</small>
+
+---
+```
+
+The first slides (with the title, the requirements,...) are automatically generated using the metadata of the topic. Then the content to fill starts with the introduction. 
+
+They are then rendered with [`Remark`](https://remarkjs.com/). Template for the `html` files can be found in
+[`templates/slides/`](templates/slides/). Once the slides are on the `master` branch, they will be available at `http://bgruening.github.io/training-material/<topic>/slides/<slide_name>.html`
 
 # How is the training material maintained?
 
