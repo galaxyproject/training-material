@@ -117,7 +117,11 @@ Nowadays, there are many read alignment programs for sequenced DNA, `BWA` being 
 2. Click on a file produced by running `BWA`.
 
     - What datatype is the `BWA` output file?
-    - How many reads where mapped from each file?
+    - How many reads were mapped from each file?
+
+3. Run the tool `IdxStats` to find out how many reads mapped to which chromosome.
+
+    - How many reads were mapped to chromosome 16 from each file?
 
 ### Step 4: Determining Tal1 binding sites 
 
@@ -169,6 +173,67 @@ We've just processed chIP-seq data from two stages of hematopoiesis and have lis
 
 1. 
 
+
+### Step 7: Assessing correlation between samples
+
+To assess the similarity between the replicates of the ChIP-seq and the input, respectively, it is a common technique to calculate the correlation of read counts for the different samples.
+We expect that the replicates of the ChIP-seq experiments should be clustered more closely to each other than the replicates of the input samples.
+We will be using tools from the package `deepTools` for the next few steps. More information on deepTools can be found [here](http://deeptools.readthedocs.io/en/latest/content/list_of_tools.html).
+
+1. Run the tool `multiBamSummary` from the `deepTools` package. This tool will split the reference genome into bins of equal size (e.g. 10kb) and will count the number of overlapping reads from each sample. Set the following `multiBamSummary` parameters:
+
+    - Select all of the aligned BAM files
+    - **Bin size in bp** 10000
+
+2. Run the tool `plotCorrelation` from the `deepTools` package to visualize the results. Feel free to try different parameters.
+
+
+### Step 8: Assessing GC bias
+
+A common problem of PCR-based protocols is the observation that GC-rich regions tend to be amplified more readily than GC-poor regions.
+We will now check whether the samples have more reads from regions of the genome with high GC.
+ 
+1. Run the tool `computeGCbias` from the `deepTools` package.
+
+    - For practical reasons, select only one of the aligned BAM files, preferably an input file
+    - Why does it make more sense to check the input file?
+    - For _fragment size_, select 300.
+    - limit the operation to only one chromosome (again, this is purely to speed up the analysis)
+
+Does this dataset have a GC bias?
+
+### Step 9: Assessing IP strength
+
+We will now evaluate the quality of the immuno-precipitation step in the ChIP-seq protocol
+
+1. Run the tool `plotFingerprint` from the `deepTools` package.
+
+    - Select one of the ChIP-seq samples and the matching input
+    - Set as fragment size 100.
+
+What do you think about the quality of the IP for this experiment? If you are not sure how to interpret the resulting plots, please read the information [here](http://deeptools.readthedocs.io/en/latest/content/tools/plotFingerprint.html#background)
+
+# OPTIONAL STEPS
+
+### Step 10: Generate coverage files normalized by sequencing depth
+
+- Run the tool `bamCoverage` to generate a signal coverage file for the ER ChIP sample normalized by sequencing depth. Set the fragment size to 100 and the bin size to 25. Normalize to 1x genomic coverage. The output file should be in human-readable format bedGraph. To speed up computation, limit the operation to chromosome 'chr11'.
+
+Generally, you should adjust the effective genome size according to the used genome assembly. In our case, you however have to specify the size of chromosome chr11 only when limiting the computation to this region. We obtained this value just in the last step :-)
+
+- Inspect the bedGraph output file.
+
+- Re-run the tool and generate a *bigWig* output file. Inspect the signal coverage in IGV. Remember that the bigWig file contains only the signal on chromosome 11!
+
+### Step 10: Generate input-normalized coverage files
+
+- Run the tool `bamCompare` to normalize the ChIP signal BAM file patient4_ChIP_ER_poor_outcome.bam by the input control provided by patient4_input_poor_outcome.bam.
+
+- Set the fragment size to 100 again and the bin size to 50. Compute the log2 ratio of the read counts of ER ChIP vs. input sample. The output file should be in human-readable format bedGraph. To speed up computation, limit the operation to chromosome 'chr11'.
+
+- Inspect the bedGraph output file.
+
+- Re-run the tool and generate a bigWig output file. Inspect the log2 ratio in IGV. Remember that the bigWig file contains only the signal on chromosome 11!
 
 # Conclusion
 
