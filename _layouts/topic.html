@@ -2,11 +2,12 @@
 layout: base
 ---
 {% include main_header.html %}
+{% assign topic = site.data[page.topic_name] %}
+
 <section>
+    <h1>{{ topic.title }}</h1>
 
-    <h1>{{ page.title }}</h1>
-
-    <p>{{ page.summary }}</p>
+    <p>{{ topic.summary }}</p>
 
     <h2>Material</h2>
 
@@ -27,18 +28,18 @@ layout: base
               <td></td>
         </tr>
 
-        {% for tutorial in page.tutorials %}
+        {% for tutorial in topic.tutorials %}
             <tr>
                 <td>{{ tutorial.title }}</td>
 
                 <td>
-                    {% if tutorial.hands-on != "" %}
-                    <a href="{{ site.url }}{{ page.url }}tutorials/{{ tutorial.hands-on }}">:book:</a>
+                    {% if tutorial.hands_on == "yes" %}
+                    <a href="{{ site.url }}{{ page.url }}tutorials/{{ tutorial.name }}">:book:</a>
                     {% endif %}
                 </td>
 
                 <td>
-                    {% if tutorial.slides != "" %}
+                    {% if tutorial.slides == "yes" %}
                     <a href="{{ site.url }}{{ page.url }}slides/{{ tutorial.name }}">:mortar_board:</a>
                     {% endif %}
                 </td>
@@ -63,7 +64,7 @@ layout: base
     <p>For these tutorials, you can use the dedicated Docker image:</p>
 
     <pre><code>
-    docker run -d -p 8080:80 {{ page.docker_image }}
+    docker run -d -p 8080:80 {{ topic.docker_image }}
     </code></pre>
 
     <p>It will launch a flavored Galaxy instance available on <a href="http://localhost:8080">http://localhost:8080</a>.</p>
@@ -73,7 +74,7 @@ layout: base
     <p>This material is maintained by:</p>
 
     <ul>
-        {% for maintainer in page.maintainers %}
+        {% for maintainer in topic.maintainers %}
             <li><a href="http://github.com/{{ maintainer.github_username }}">{{ maintainer.name }}</a> (<a href="mailto:{{ maintainer.email }}">{{ maintainer.email }}</a>)</li>
         {% endfor %}
     </ul>
@@ -83,14 +84,14 @@ layout: base
     <p>The following persons have contributed to this training material:</p>
 
     <ul>
-        {% for contributor in page.contributors %}
+        {% for contributor in topic.contributors %}
             <li><a href="http://github.com/{{ contributor.github_username }}">{{ contributor.name }}</a> (<a href="mailto:{{ contributor.email }}">{{ contributor.email }}</a>)</li>
         {% endfor %}
     </ul>
 
     <h2>References</h2>
 
-    {% for reference in page.references %}
+    {% for reference in topic.references %}
         <p>
         <span class="bold">{{ reference.authors }}:</span> <a href="{{ reference.link }}">{{ reference.title }}</a>
 

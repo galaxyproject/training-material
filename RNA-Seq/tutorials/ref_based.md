@@ -1,38 +1,7 @@
 ---
 layout: tutorial_text
-
-title: "Reference based RNA-seq data analysis"
-tutorial_name: "ref_based"
-related_topic: "RNA-Seq"
-zenodo_link: ""
-
-questions:
-- "What are the effects of Pasilla (PS) gene depletion on splicing events?"
-- "How to analyze RNA sequencing data using a reference genome?"
-
-objectives:
-- "Analysis of RNA sequencing data using a reference genome"
-- "Analysis of the differential gene expression"
-- "Identification of functional enrichment among differentially expressed genes"
-
-requirements:
--
-    title: "Galaxy introduction"
-    link: ""
--
-    title: "Quality control"
-    link: ""
--
-    title: "Mapping"
-    link: ""
-
-time_estimation: "1d/3h/6h"
-
-key_points:
-- "Simple sentence to sum up the first key point of the tutorial (Take home message)"
-- "Second key point"
-- "Third key point"
-- "..."
+topic_name: RNA-Seq
+tutorial_name: ref_based
 ---
 
 # Introduction

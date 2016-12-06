@@ -21,13 +21,19 @@ layout: base
               <td class="bold">Docker image</td>
         </tr>
 
-        {% for topic in site.data.content %}
-            {% if topic.type == "use" %}
+        {% for topic in site.data %}
+            {% if topic[1].type == "use" %}
             <tr>
-                  <td><a href="{{ site.url }}/{{ topic.url}}">{{ topic.title }}</a></td>
-                  <td><a href="{{ site.url }}/{{ topic.url}}/slides"> :mortar_board: </a></td>
-                  <td>{{ topic.tutorial_number }}</td>
-                  <td><a href="{{ site.github_repository }}/tree/master/{{ topic.url }}/docker">:whale: </a></td>
+                  <td><a href="{{ site.url }}/{{ topic[1].name }}">{{ topic[1].title }}</a></td>
+                  <td><a href="{{ site.url }}/{{ topic[1].name }}/slides"> :mortar_board: </a></td>
+
+                  {% assign tutorial_number = 0 %}
+                  {% for tuto in topic[1].tutorials %}
+                      {% assign tutorial_number = forloop.index %}
+                  {% endfor %}
+
+                  <td>{{ tutorial_number }}</td>
+                  <td><a href="{{ site.github_repository }}/tree/master/{{ topic[1].name }}/docker">:whale: </a></td>
             </tr>
             {% endif %}
         {% endfor %}
@@ -44,12 +50,12 @@ layout: base
         </tr>
 
         {% for topic in site.data.content %}
-            {% if topic.type == "admin-dev" %}
+            {% if topic[1].type == "admin-dev" %}
             <tr>
-                  <td><a href="{{ site.url }}/{{ topic.url}}">{{ topic.title }}</a></td>
-                  <td><a href="{{ site.url }}/{{ topic.url}}/slides"> :mortar_board: </a></td>
+                  <td><a href="{{ site.url }}/{{ topic[1].url}}">{{ topic[1].title }}</a></td>
+                  <td><a href="{{ site.url }}/{{ topic[1].url}}/slides"> :mortar_board: </a></td>
                   <td>{{ topic.tutorial_number }}</td>
-                  <td><a href="{{ site.github_repository }}/tree/master/{{ topic.url }}/docker">:whale: </a></td>
+                  <td><a href="{{ site.github_repository }}/tree/master/{{ topic[1].url }}/docker">:whale: </a></td>
             </tr>
             {% endif %}
         {% endfor %}
