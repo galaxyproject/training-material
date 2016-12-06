@@ -150,7 +150,7 @@ Nowadays, there are many read alignment programs for sequenced DNA, `BWA` being 
 
     | :grey_question: Question |
     |:---|
-    | How many reads were mapped to chromosome 16 from each file? |
+    | How many reads were mapped to chromosome 19 from each file? |
 
 <a name="step4"/></a>
 ### Step 4: Determining Tal1 binding sites 
@@ -162,7 +162,7 @@ Now that `BWA` has aligned the reads to the genome, we will use the tool `MACS2`
 
 1. Run the tool `MACS2 callpeak` with the aligned read files from the previous step as Treatment (Tal1) and Control (input). 
 
-    - **Effective genome size** Mouse (2,150,570,000)
+    - **Effective genome size** Mouse (10,000,000,000)
 
   **INSERT SCREENSHOT HERE OF MACS2 TOOL FORM**
 
@@ -205,7 +205,9 @@ We've just processed chIP-seq data from two stages of hematopoiesis and have lis
 
 :pencil2: ***Hands on!***
 
-1. 
+1. Run the tool `bedIntersect` to find peaks that exist both in G1E and megakaryocytes.
+
+2. Run the tool `bedIntersect` to find peaks that exist only in G1E or megakaryocytes, but not both.
 
 <a name="step7"/></a>
 ### Step 7: Assessing correlation between samples
@@ -245,19 +247,19 @@ We will now check whether the samples have more reads from regions of the genome
     - **Effective genome size** user specified
     - **Effective genome size** 10000000
     - **Fragment length used for the sequencing** 50
-
-    | :grey_question: Questions |
-    |:---|
-    | Why does it make more sense to check the input file? |
-    | Does this dataset have a GC bias? |
+    
+      | :grey_question: Questions |
+      |:---|
+      | Why does it make more sense to check the input file? |
+      | Does this dataset have a GC bias? |
 
 2. Explore the tool `correctGCbias` from the `deepTools` package.
 
-    | :grey_question: Questions |
-    |:---|
-    | What does this tool do? |
-    | What is the output of this tool? |
-    | What are some caveats to be aware of if using the output of this tool in downstream analyses? |
+      | :grey_question: Questions |
+      |:---|
+      | What does this tool do? |
+      | What is the output of this tool? |
+      | What are some caveats to be aware of if using the output of this tool in downstream analyses? |
     
 <a name="step9"/></a>
 ### Step 9: Assessing IP strength
@@ -286,9 +288,9 @@ For additional informaton on how to interpret the resulting plots, read the info
 
 ### Generate coverage files normalized by sequencing depth
 
-- Run the tool `bamCoverage` to generate a signal coverage file for the ER ChIP sample normalized by sequencing depth. Set the fragment size to 100 and the bin size to 25. Normalize to 1x genomic coverage. The output file should be in human-readable format bedGraph. To speed up computation, limit the operation to chromosome 'chr19'.
+- Run the tool `bamCoverage` to generate a signal coverage file for the ER ChIP sample normalized by sequencing depth. Set the fragment size to 100 and the bin size to 25. Normalize to 1x genomic coverage. The output file should be in human-readable format bedGraph. To speed up computation, limit the operation to chromosome 19.
 
-- Generally, you should adjust the effective genome size according to the used genome assembly. In our case, you however have to specify the size of chromosome chr11 only when limiting the computation to this region. We obtained this value just in the last step :-)
+- Generally, you should adjust the effective genome size according to the used genome assembly. In our case, you however have to specify the size of chromosome chr19 only when limiting the computation to this region.
 
 - Inspect the bedGraph output file.
 
@@ -296,13 +298,13 @@ For additional informaton on how to interpret the resulting plots, read the info
 
 ### Generate input-normalized coverage files
 
-- Run the tool `bamCompare` to normalize the ChIP signal BAM file patient4_ChIP_ER_poor_outcome.bam by the input control provided by patient4_input_poor_outcome.bam.
+- Run the tool `bamCompare` to normalize the ChIP signal BAM file by the input control.
 
-- Set the fragment size to 100 again and the bin size to 50. Compute the log2 ratio of the read counts of ER ChIP vs. input sample. The output file should be in human-readable format bedGraph. To speed up computation, limit the operation to chromosome 'chr11'.
+- Set the fragment size to 100 again and the bin size to 50. Compute the log2 ratio of the read counts of Tal1 ChIP vs. input sample. The output file should be in human-readable format bedGraph. To speed up computation, limit the operation to chromosome chr19.
 
 - Inspect the bedGraph output file.
 
-- Re-run the tool and generate a bigWig output file. Inspect the log2 ratio in IGV. Remember that the bigWig file contains only the signal on chromosome 11!
+- Re-run the tool and generate a bigWig output file. Inspect the log2 ratio in Trackster. Remember that the bigWig file contains only the signal on chromosome 19!
 
 <a name="conclusion"/></a>
 # Conclusion
