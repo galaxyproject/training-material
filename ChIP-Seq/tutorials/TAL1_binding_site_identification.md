@@ -190,7 +190,7 @@ It is critical to visualize your NGS data on a genome browser after alignemnt. E
 
   **INSERT SCREENSHOT HERE**
 
-4. Navigate to the Gata1 locus (chr16:92501466-92926074) to inspect the aligned reads and Tal1 peak calls. (Mo: This region should have Tal1 peaks in both cellular states)
+4. Navigate to the Runx1 locus (chr16:92501466-92926074) to inspect the aligned reads and Tal1 peak calls. 
 
     | :grey_question: Question |
     |:---|
@@ -205,9 +205,16 @@ We've just processed chIP-seq data from two stages of hematopoiesis and have lis
 
 :pencil2: ***Hands on!***
 
-1. Run the tool `bedIntersect` to find peaks that exist both in G1E and megakaryocytes.
+1. Run the tool `bedIntersect` to find peaks that exist both in G1E and megakaryocytes. 
+  - Select the "Tal1 G1E peaks" and "Tal1 Mega peaks" files as the inputs. Running this tool with the default settings will return overlapping peaks of both files. 
+2. Run the tool `bedIntersect` to find peaks that exist only in G1E.
+  - Select "Tal1 G1E peaks" as the first input and "Tal1 Mega peaks" as the second input file.
+  - **Report only those alignments that **do not** overlap the BED file** Yes
+3. Run the tool `bedIntersect` to find peaks that exist only in megakaryocytes.
+  - Select "Tal1 Mega peaks" as the first input and "Tal1 G1E peaks" as the second input file.
+  - **Report only those alignments that overlap the BED file** Yes  
+4. Re-name the three files we generated to reflect their contents. 
 
-2. Run the tool `bedIntersect` to find peaks that exist only in G1E or megakaryocytes, but not both.
 
 <a name="step7"/></a>
 ### Step 7: Assessing correlation between samples
