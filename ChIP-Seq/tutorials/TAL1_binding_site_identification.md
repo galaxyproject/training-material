@@ -21,8 +21,8 @@ Identification of the binding sites of the T-cell acute lymphocytic leukemia pro
 :heavy_check_mark: ***Requirements***
 
 - *Galaxy introduction* (add link)
-- *NGS-QC* (add link)
-- *NGS-mapping* (add link)
+- *NGS-QC* (add [link](../../NGS-QC/slides/dive_into_qc.md))
+- *NGS-mapping* (add [link](../../NGS-mapping/slides/dive_into_mapping.md))
 - *Trackster* (add link)
 
 :hourglass: ***Time estimation*** *3h*
@@ -32,18 +32,29 @@ Identification of the binding sites of the T-cell acute lymphocytic leukemia pro
 This tutorial uses ChIP-seq datasets from a study published by [Wu et al., 2012](http://genome.cshlp.org/content/24/12/1945.full.pdf+html).
 The goal of this study was to investigate "the dynamics of occupancy and the role in gene regulation of the transcription factor Tal1, a critical regulator of hematopoiesis, at multiple stages of hematopoietic differentiation."
 To this end, chIP-seq was performed in the G1E cell line - a GATA-null immortalized cell line derived from targeted disruption of GATA-1 in mouse embryonic stem cells - and megakaryocytes.
-This dataset (GEO Accession [GSE51338](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE51338)) consists of biological replicate Tal1 ChIP-seq experiments and input control experiments for which the same treatment as the ChIP-seq samples was done except for the immunoprecipitation step.
+This dataset (GEO Accession: [GSE51338](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE51338)) consists of biological replicate Tal1 ChIP-seq and input control experiments.
 Input control experiments are used to identify and remove sampling bias, for example open/accessible chromatin or GC bias.
 
 Because of the long processing time for the large original files, we have downsampled the original raw data files to include only a subset of genomic loci.
 
-INSERT TABLE WITH SAMPLE META-DATA
+**Table 1**: Metadata for ChIP-seq experiments in this tutorial. SE: single-end.
+
+| Cellular state | Datatype | chIP Ab | Replicate | SRA Accession | Library type | Read length | Stranded? | DS.1 size (MB) |
+|---|---|---|---|---|---|---|---|---|
+| G1E | chIP-seq | input | 1 | SRR507859 | SE | 50 | No | 3.9 |
+| G1E | chIP-seq | input | 2 | SRR507860 | SE | 50 | No | 44.7 |
+| G1E | chIP-seq | Tal1 | 1 | SRR492444 | SE | 50 | No | 450.5 |
+| G1E | chIP-seq | Tal1 | 2 | SRR492445 | SE | 50 | No | 924 |
+| Megakaryocyte | chIP-seq | input | 1	| SRR492453 | SE | 50 | No | 5.6 |
+| Megakaryocyte | chIP-seq | input | 2 | SRR492454 | SE | 50 | No | 47.1 |
+| Megakaryocyte | chIP-seq | Tal1 | 1 | SRR549006 | SE | 50 | No | 35.2 |
+| Megakaryocyte | chIP-seq | Tal1 | 2 | SRR549007 | SE | 50 | No | 39.6 |
 
 # Analysis
 
 ### Step 1: Quality control
 
-As for any NGS data analysis, ChIP-seq data must be [quality controlled](../../NGS-QC/slides/dive_into_qc.html) before being aligned to a reference genome.
+As for any NGS data analysis, ChIP-seq data must be quality controlled before being aligned to a reference genome.
 
 :pencil2: ***Hands on!***
 
@@ -51,8 +62,12 @@ As for any NGS data analysis, ChIP-seq data must be [quality controlled](../../N
 
 2. Import the ChIP-seq raw data from Zenodo
 
-    - Download all files from [Zenodo](link).
-    - Import files directly into Galaxy by providing links: for each file right-click → copy link location and paste the link in Galaxy → Get Data → Upload File from your computer → paste/fetch data → set datatype to 'fastqsanger' → Start.
+    - Access all required tutorial files at [Zenodo](link).
+    - Import files directly into Galaxy by performing the following for each fastq file:
+     - In Zenodo: Right-click a filename → Copy Link Address
+     - In Galaxy: Get Data → Upload File from your computer → Paste/Fetch data
+     - Paste the copied link into the dialog box and set the datatype to 'fastqsanger'
+     - Click Start
 
 3. Examine the data by clicking on the 'eye' icon. 
 
@@ -60,15 +75,18 @@ As for any NGS data analysis, ChIP-seq data must be [quality controlled](../../N
     
 4. Run the tool `FastQC` on each FASTQ file to determine the quality of the raw data. An explanation of the results can be found on the [FastQC web page](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/).
 
+    **HINT**: You can run this tool on all the FASTQ files at once! To do this, select the "Multiple datasets" icon (looks like two stacked pages) under the "Input FASTQ file" heading. Then, shift+click to select all the FASTQ files in your history.
+
 ### Step 2: Trimming and clipping reads
 
-It is often necessary to trim a sequenced read, for example, to remove bases sequenced with high uncertainty (= 'low quality bases'). In addition, artificial adaptor sequences used in the library preparation protocol need to be removed before attempting to align the reads to a reference genome. More explanation of quality trimming can be found in the [NGS-QC tutorial](./../NGS-QC/tutorials/dive_into_qc.md).
+It is often necessary to trim a sequenced read, for example, to remove bases sequenced with high uncertainty (*i.e.* low-quality bases). In addition, artificial adaptor sequences used in the library preparation protocol need to be removed before attempting to align the reads to a reference genome. More explanation of quality trimming can be found in the [NGS-QC tutorial](./../NGS-QC/tutorials/dive_into_qc.md).
 
 :pencil2: ***Hands on!***
 
 1. Run the tool `Trimmomatic` on each FASTQ file to trim low-quality bases. Explore the full parameter list for `Trimmomatic` in the Tool Form and set `Trimmomatic` parameters to:
+
     - **Paired end data?** No
-    - **Perform initial ILLUMINACLIP?** NO
+    - **Perform initial ILLUMINACLIP?** No
     - **Select Trimmomatic operation to perform** Sliding window trimming (SLIDINGWINDOW)
     - **Number of bases to average across** 4
     - **Average quality required** 20
@@ -80,7 +98,7 @@ It is often necessary to trim a sequenced read, for example, to remove bases seq
 ### Step 3: Aligning reads to a reference genome
 
 In order to figure where the sequenced DNA fragments originated from in the genome, the short reads must be aligned to the reference genome. This is equivalent to solving a jigsaw puzzle, but unfortunately, not all pieces are unique. In principle, you could do a BLAST analysis to figure out where the sequenced pieces fit best in the known genome. Aligning millions of short sequences this way may, however, take a couple of weeks.
-Nowadays, there are many read alignment programs for shot-gun sequenced DNA, `BWA` being one of them.
+Nowadays, there are many read alignment programs for shot-gun sequenced DNA, `BWA` being one of them. You can read more about the BWA algorithm and tool [here](https://academic.oup.com/bioinformatics/article-lookup/doi/10.1093/bioinformatics/btp324).
 
 :pencil2: ***Hands on!***
 
@@ -93,19 +111,21 @@ Nowadays, there are many read alignment programs for shot-gun sequenced DNA, `BW
 
 ### Step 4: Determining Tal1 binding sites 
 
-Now that 'BWA' has aligned the reads to the genome, we will use the tool 'MACS2' to identify regions of Tal1 occupancy, which are called "peaks". 
-'MACS2' will perform two tasks: 1) identify regions of Tal1 occupancy ("peaks") and 2) generate bedgraph files for visual inspection of the data on a genome browser. 
+Now that `BWA` has aligned the reads to the genome, we will use the tool `MACS2` to identify regions of Tal1 occupancy, which are called "peaks". 
+`MACS2` will perform two tasks: 1) identify regions of Tal1 occupancy ("peaks") and 2) generate bedgraph files for visual inspection of the data on a genome browser. 
 
 :pencil2: ***Hands on!***
 
-1. Run the tool 'MACS2 callpeak' with the aligned read files from the previous step as Treatment (Tal1) and Control (input). 
+1. Run the tool `MACS2 callpeak` with the aligned read files from the previous step as Treatment (Tal1) and Control (input). 
+
     - **Effective genome size** Mouse (2,150,570,000)
+
 2. Rename your files to reflect the origin and contents.
 
 ### Step 5: Inspection of peaks and aligned data
 
 It is critical to visualize your NGS data on a genome browser after alignemnt. Evaluation criteria will differ for the various NGS experiment types, but for chIP-seq data we want to ensure reads from a Treatment sample are enriched at "peaks" and do not localize non-specifically (like the Control condition).
-'MACS2' generated a bedgraph and a bed file that we'll use to visualize read abundance and peaks, respectively, at regions 'MACS2' determined to be Tal1 peaks using the genome browser Trackster. We'll first need to tidy up the peak file before we send it to Trackster. We'll also import a gene annotation file so we can visualize aligned reads and Tal1 peaks relative to gene features and positions.
+`MACS2` generated a bedgraph and a bed file that we'll use to visualize read abundance and peaks, respectively, at regions `MACS2` determined to be Tal1 peaks using the genome browser Trackster. We'll first need to tidy up the peak file before we send it to Trackster. We'll also import a gene annotation file so we can visualize aligned reads and Tal1 peaks relative to gene features and positions.
 
 :pencil2: ***Hands on!***
 
@@ -117,7 +137,8 @@ It is critical to visualize your NGS data on a genome browser after alignemnt. E
 
 3. Click 'Add Datasets to visualization' and select the history containing the data from this analysis. Select the bedgraph files and the peak files (that you renamed).  
 
-4. Navigate to the Gata1 locus (chr16:92501466-92926074) to inspect the aligned reads and Tal1 peak calls. (Mo:This region should have Tal1 peaks in both cellular states)
+4. Navigate to the Gata1 locus (chr16:92501466-92926074) to inspect the aligned reads and Tal1 peak calls. (Mo: This region should have Tal1 peaks in both cellular states)
+
     - What do you see?
     
 ### Step 6: Identifying unique and common Tal1 peaks between the G1E and megakaryocyte states
