@@ -1,8 +1,11 @@
 <!DOCTYPE html>
 <html>
+
+{% assign topic = site.data[page.topic_name] %}
+
   <head>
     <meta charset="utf-8">
-    <title>{{ page.title | strip_html }}</title>
+    <title>{{ topic.title | strip_html }}</title>
     <link rel="stylesheet" href="{{ site.url }}/assets/css/slides.css">
   </head>
   <body>
@@ -12,20 +15,20 @@ layout: true
 class: center, middle, inverse
 
 <div class="my-footer"><span>
-{% if page.logo %}
-<img src="{{ site.url }}{{ page.logo }}" style="height: 40px;"/>
-{% else %}
+{% if page.logo == "GTN" %}
 <img src="{{ site.url }}{{ site.logo }}" style="height: 40px;"/>
+{% else %}
+<img src="{{ page.logo }}" style="height: 40px;"/>
 {% endif %}
 </span></div>
 ---
 
 ## Welcome!
 
-{% if page.logo %}
-<img src="{{ site.url }}{{ page.logo }}" alt="Logo" width=30%/>
+{% if page.logo == "GTN" %}
+<img src="{{ site.url }}{{ site.logo }}" style="height: 40px;"/>
 {% else %}
-<img src="{{ site.url }}{{ site.logo }}" alt="Logo" width=30%/>
+<img src="{{ page.logo }}" style="height: 40px;"/>
 {% endif %}
 
 The easiest way to **navigate** this slide deck
@@ -36,7 +39,7 @@ slides can be nested inside of each other (vertically)
 
 ---
 
-# {{ page.title }}
+# {{ topic.title }}
 
 ---
 
@@ -44,7 +47,7 @@ slides can be nested inside of each other (vertically)
 
 Before diving into this slide deck, we recommend you to have a look at:
 
-{% for requirement in page.requirements %}
+{% for requirement in topic.requirements %}
 - [{{ requirement.title }}]({{ requirement.link }})
 {% endfor %}
 

@@ -286,6 +286,8 @@ The introduction slides must be in the `index.html` file in `slides` directory f
 ```
 ---
 layout: base_slides
+topic_name: RNA-Seq
+logo: "GTN"
 ---
 
 # What is RNA sequencing?
