@@ -12,8 +12,9 @@ Identification of the binding sites of the T-cell acute lymphocytic leukemia pro
 - *Inspect read quality with FastQC*
 - *Perform read trimming with Trimmomatic*
 - *Align trimmed reads with BWA*
+- *Assess quality and reproducibility of experiments*
 - *Identify Tal1 binding sites with MACS2*
-- *Determine unique and common Tal1 binding sites Tal1 peaks from G1E and Megakaryocytes*
+- *Determine unique/common Tal1 binding sites from G1E and Megakaryocytes*
 - *Identify unique/common Tal1 peaks occupying gene promoters*
 - *Visually inspect Tal1 peaks with Trackster*
 
@@ -33,13 +34,13 @@ Identification of the binding sites of the T-cell acute lymphocytic leukemia pro
   - [Step 1: Quality control](#step1)
   - [Step 2: Trimming/clipping reads](#step2)
   - [Step 3: Aligning reads to a genome](#step3)
-  - [Step 4: Determining Tal1 binding sites](#step4)
-  - [Step 5: Inspection of Tal1 peaks](#step5)
-  - [Step 6: Identifying unique/common Tal1 peaks](#step6)
-  - [Step 7: Assessing correlation between samples](#step7)
-  - [Step 8: Assessing GC bias](#step8)
-  - [Step 9: Assessing IP strength](#step9)
-  - [Additional analyses](#stepA)
+  - [Step 4: Assessing correlation between samples](#step4)
+  - [Step 5: Assessing GC bias](#step5)
+  - [Step 6: Assessing IP strength](#step6)
+  - [Step 7: Determining Tal1 binding sites](#step7)
+  - [Step 8: Inspection of Tal1 peaks](#step8)
+  - [Step 9: Identifying unique/common Tal1 peaks](#step9)
+  - [Additional optional analyses](#stepA)
 * [Concluding remarks](#conclusion)
 * [Useful literature](#literature)
   
@@ -85,17 +86,19 @@ As for any NGS data analysis, ChIP-seq data must be quality controlled before be
     - In Galaxy: Get Data → Upload File from your computer → Paste/Fetch data
     - Paste the copied link into the dialog box and set the datatype to 'fastqsanger'
     - Click Start
-    - Repeat for all eight FASTQ files
+    - Repeat for all FASTQ files
 
   **INSERT SCREENSHOT HERE OF EITHER ZENODO OR THE DATASETS LOADED INTO THE HISTORY**
 
-3. In Galaxy, examine the data by clicking on the 'eye' icon.
+3. In Galaxy, examine the data in a FASTQ file by clicking on the eye icon.
 
-    - This is what raw Illuimna sequencing reads look like
+    | :grey_question: Question |
+    |:---|
+    | <ul><li>What are four key features of a FASTQ file?</li><li>What is the main difference between a FASTQ and a FASTA file?</li></ul> |
     
 4. Run the tool `FastQC` on each FASTQ file to assess the quality of the raw data. An explanation of the results can be found on the [FastQC web page](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/).
 
-    **HINT**: You can run this tool - and many other tools - on all the FASTQ files at once! To do this, select the "Multiple datasets" icon (looks like two stacked pages) under the "Input FASTQ file" heading in the `FASTQC` Tool Form. Then, shift+click to select multiple FASTQ files.
+    **HINT**: You can run this tool - and many other tools - on all the FASTQ files at once! To do this, first select the "Multiple datasets" icon (two stacked pages) under the "Input FASTQ file" heading in the `FASTQC` Tool Form, then shift+click to select multiple FASTQ files.
 
   **INSERT SCREENSHOT HERE OF FASTQC OUTPUT ON ONE DATASET**
 
@@ -118,7 +121,7 @@ It is often necessary to trim a sequenced read to remove bases sequenced with hi
 
     | :grey_question: Question |
     |:---|
-    | <ul><li>How did the range of read lengths change after trimming/clipping?</li><ul> |
+    | <ul><li>How did the range of read lengths change after trimming/clipping?</li>What do you think could account for enriched k-mers in the Tal1 ChIP-seq experiments?<li></li></ul> |
 
 **INSERT SCREENSHOT HERE OF FASTQC OUTPUT ON SAME DATASET AFTER TRIMMING**
 
@@ -143,16 +146,84 @@ Nowadays, there are many read alignment programs for sequenced DNA, `BWA` being 
 
     | :grey_question: Questions |
     |:---|
-    | <ul><li>What datatype is the `BWA` output file?</li><li>How many reads were mapped from each file?</li><ul> |
+    | <ul><li>What datatype is the `BWA` output file?</li><li>How many reads were mapped from each file?</li></ul> |
 
 3. Run the tool `IdxStats` to find out how many reads mapped to which chromosome.
 
     | :grey_question: Question |
     |:---|
-    | <ul><li>How many reads were mapped to chromosome 19 from each file?</li></ul> |
+    | <ul><li>How many reads were mapped to chromosome 19 in each experiment?</li><li>If humans have 23 chromosomes, what are all the other reference chromosomes (e.g. what is chr1_GL456210_random)?</li></ul> |
 
 <a name="step4"/></a>
-### Step 4: Determining Tal1 binding sites 
+### Step 4: Assessing correlation between samples
+
+To assess the similarity between the replicates sequencing datasets, it is a common technique to calculate the correlation of read counts for the different samples.
+We expect that the replicates of the ChIP-seq experiments should be clustered more closely to each other than the replicates of the input samples.
+We will be use tools from the package `deepTools` for the next few steps. More information on deepTools can be found [here](http://deeptools.readthedocs.io/en/latest/content/list_of_tools.html).
+
+1. Run the tool `multiBamSummary` from the `deepTools` package. This tool splits the reference genome into bins of equal size and counts the number of reads in each bin from each sample. Set the following `multiBamSummary` parameters:
+
+    - Select all of the aligned BAM files
+    - **Bin size in bp** 10000
+
+2. Run the tool `plotCorrelation` from the `deepTools` package to visualize the results from the previous step. Feel free to try different parameters. To start, set the following `plotCorrelation` parameters:
+
+    - **Correlation method** Spearman
+    - **Plotting type** Heatmap
+    - **Plot the correlation value** Yes
+    - **Skip zeros** Yes
+
+    | :grey_question: Question |
+    |:---|
+    | <ul><li>Why do we want to skip zeros in `plotCorrelation`?</li><li>What happens if the Pearson correlation method is used instead of the Spearman?</li></ul> |
+
+<a name="step5"/></a>
+### Step 5: Assessing GC bias
+
+A common problem of PCR-based protocols is the observation that GC-rich regions tend to be amplified more readily than GC-poor regions.
+We will now check whether the samples have more reads from regions of the genome with high GC.
+ 
+1. Run the tool `computeGCbias` from the `deepTools` package.
+
+    - First, select an aligned BAM files for an input dataset
+    - **Reference genome** locally cached
+    - **Using reference genome** mm10
+    - **Effective genome size** user specified
+    - **Effective genome size** 10000000
+    - **Fragment length used for the sequencing** 50
+    
+      | :grey_question: Questions |
+      |:---|
+      | <ul><li>Why would we worry more about checking for GC bias in an input file?</li><li>Does this dataset have a GC bias?</li></ul> |
+
+2. Explore the tool `correctGCbias` from the `deepTools` package.
+
+    | :grey_question: Questions |
+    |:---|
+    | <ul><li>What does this tool do?</li><li>What is the output of this tool?</li><li>What are some caveats to be aware of if using the output of this tool in downstream analyses?</li></ul> |
+
+<a name="step6"/></a>
+### Step 6: Assessing IP strength
+
+We will now evaluate the quality of the immuno-precipitation step in the ChIP-seq protocol
+
+1. Run the tool `plotFingerprint` from the `deepTools` package.
+
+    - Select all of the aligned BAM files
+    - **Show advanced options** yes
+    - **Bin size in bases** 50
+    - **Skip zeros** Yes
+
+2. View the output image.
+
+    | :grey_question: Questions |
+    |:---|
+    | <ul><li>What does this graph represent?</li><li>How do input datasets differ from IP datasets?</li><li>What do you think about the quality of the IP for this experiment?</li></ul> |
+    
+For additional informaton on how to interpret the resulting plots, read the information [here](http://deeptools.readthedocs.io/en/latest/content/tools/plotFingerprint.html#background)
+
+<a name="step7"/></a>
+### Step 7: Determining Tal1 binding sites 
 
 Now that `BWA` has aligned the reads to the genome, we will use the tool `MACS2` to identify regions of Tal1 occupancy, which are called "peaks". Peaks are determined from pileups of sequenced reads across the genome that correspond to where Tal1 binds.
 `MACS2` will perform two tasks: 1) identify regions of Tal1 occupancy (peaks) and 2) generate bedgraph files for visual inspection of the data on a genome browser. More information about `MACS2` can be found [here](http://genomebiology.biomedcentral.com/articles/10.1186/gb-2008-9-9-r137).
@@ -161,14 +232,22 @@ Now that `BWA` has aligned the reads to the genome, we will use the tool `MACS2`
 
 1. Run the tool `MACS2 callpeak` with the aligned read files from the previous step as Treatment (Tal1) and Control (input). 
 
-    - **Effective genome size** Mouse (10,000,000)
+    - Select replicate **ChIP-Seq Treatment Files** for one cell type
+    - Select replicate **ChIP-Seq Control Files** for the same cell type
+    - **Effective genome size** User defined
+    - **Effective genome size** 10,000,000
+    - **Are your inputs Paired-end BAM files?** YEs
+
+    | :grey_question: Questions |
+    |:---|
+    | <ul><li>Why do we need to set the Effective genome size to 10,000,000?</li></ul> |
 
   **INSERT SCREENSHOT HERE OF MACS2 TOOL FORM**
 
 2. Rename your files to reflect the origin and contents.
 
-<a name="step5"/></a>
-### Step 5: Inspection of peaks and aligned data
+<a name="step8"/></a>
+### Step 8: Inspection of peaks and aligned data
 
 It is critical to visualize your NGS data on a genome browser after alignemnt. Evaluation criteria will differ for the various NGS experiment types, but for chIP-seq data we want to ensure reads from a Treatment sample are enriched at "peaks" and do not localize non-specifically (like the Control condition).
 `MACS2` generated a bedgraph and a BED file that we'll use to visualize read abundance and peaks, respectively, at regions `MACS2` determined to be Tal1 peaks using the genome browser Trackster. We'll first need to tidy up the peak file before we send it to Trackster. We'll also import a gene annotation file so we can visualize aligned reads and Tal1 peaks relative to gene features and positions.
@@ -197,8 +276,8 @@ It is critical to visualize your NGS data on a genome browser after alignemnt. E
     
   **INSERT SCREENSHOT HERE**
 
-<a name="step6"/></a>
-### Step 6: Identifying unique and common Tal1 peaks between the G1E and megakaryocyte states
+<a name="step9"/></a>
+### Step 9: Identifying unique and common Tal1 peaks between the G1E and megakaryocyte states
 
 We've just processed chIP-seq data from two stages of hematopoiesis and have lists of Tal1 occupied sites (peaks) in both cellular states. Now lets identify Tal1 peaks that are shared between the two cellular states and also those that are specific to one cellular state.
 
@@ -219,76 +298,6 @@ We've just processed chIP-seq data from two stages of hematopoiesis and have lis
   - **Report only those alignments that overlap the BED file** Yes  
   
 4. Re-name the three files we generated to reflect their contents. 
-
-
-<a name="step7"/></a>
-### Step 7: Assessing correlation between samples
-
-To assess the similarity between the replicates of the ChIP-seq and the input, respectively, it is a common technique to calculate the correlation of read counts for the different samples.
-We expect that the replicates of the ChIP-seq experiments should be clustered more closely to each other than the replicates of the input samples.
-We will be using tools from the package `deepTools` for the next few steps. More information on deepTools can be found [here](http://deeptools.readthedocs.io/en/latest/content/list_of_tools.html).
-
-1. Run the tool `multiBamSummary` from the `deepTools` package. This tool will split the reference genome into bins of equal size and will count the number of overlapping reads from each sample. Set the following `multiBamSummary` parameters:
-
-    - Select all of the aligned BAM files
-    - **Bin size in bp** 10000
-
-2. Run the tool `plotCorrelation` from the `deepTools` package to visualize the results. Feel free to try different parameters, but to start set the following `plotCorrelation` parameters:
-
-    - **Correlation method** Spearman
-    - **Plotting type** Heatmap
-    - **Title of the plot** (enter appropriate title here)
-    - **Plot the correlation value** Yes
-    - **Skip zeros** Yes
-
-    | :grey_question: Question |
-    |:---|
-    | <ul><li>Why do we want to skip zeros in `plotCorrelation`?</li></ul> |
-
-<a name="step8"/></a>
-### Step 8: Assessing GC bias
-
-A common problem of PCR-based protocols is the observation that GC-rich regions tend to be amplified more readily than GC-poor regions.
-We will now check whether the samples have more reads from regions of the genome with high GC.
- 
-1. Run the tool `computeGCbias` from the `deepTools` package.
-
-    - For practical reasons, select only one of the aligned BAM files, preferably an input file
-    - **Reference genome** locally cached
-    - **Using reference genome** mm10
-    - **Effective genome size** user specified
-    - **Effective genome size** 10000000
-    - **Fragment length used for the sequencing** 50
-    
-      | :grey_question: Questions |
-      |:---|
-      | <ul><li>Why does it make more sense to check the input file?</li><li>Does this dataset have a GC bias?</li></ul> |
-
-2. Explore the tool `correctGCbias` from the `deepTools` package.
-
-    | :grey_question: Questions |
-    |:---|
-    | <ul><li>What does this tool do?</li><li>What is the output of this tool?</li><li>What are some caveats to be aware of if using the output of this tool in downstream analyses?</li></ul> |
-
-<a name="step9"/></a>
-### Step 9: Assessing IP strength
-
-We will now evaluate the quality of the immuno-precipitation step in the ChIP-seq protocol
-
-1. Run the tool `plotFingerprint` from the `deepTools` package.
-
-    - Select all of the aligned BAM files
-    - **Show advanced options** yes
-    - **Bin size in bases** 50
-    - **Skip zeros** Yes
-
-2. View the output image.
-
-    | :grey_question: Questions |
-    |:---|
-    | <ul><li>What does this graph represent?</li><li>How do input datasets differ from IP datasets?</li><li>What do you think about the quality of the IP for this experiment?</li></ul> |
-    
-For additional informaton on how to interpret the resulting plots, read the information [here](http://deeptools.readthedocs.io/en/latest/content/tools/plotFingerprint.html#background)
 
 <a name="stepA"/></a>
 # OPTIONAL ADDITIONAL ANALYSES
