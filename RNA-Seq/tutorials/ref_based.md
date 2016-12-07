@@ -1,5 +1,5 @@
 ---
-layout: tutorial_text
+layout: tutorial_hands_on
 topic_name: RNA-Seq
 tutorial_name: ref_based
 ---
