@@ -153,11 +153,12 @@ You can then visualize locally ([http://localhost:4000/](http://localhost:4000/)
     This information is used with [Jekyll](http://jekyllrb.com/) to generate the webpage related to the topic
 
 2. Copy the template directory, rename it (with the same name as the `yml` file one) and fill it
-    1. Add introduction slides
+    1. Change the `topic_name` in the `index.md` to fit the name of the directory and the name in `yml` file
+    2. Add introduction slides
 
         > Check out [how to fill introduction slides](#how-do-i-fill-introduction-slides)
 
-    2. Add tutorials
+    3. Add tutorials
 
         > Check out [how to add a new tutorial](#how-do-i-add-a-new-tutorial)
 
@@ -189,7 +190,11 @@ You can then visualize locally ([http://localhost:4000/](http://localhost:4000/)
 
 ## How do I fill a tutorial hands-on?
 
-When you want to fill a tutorial hands-on, you need to check the metadata about the tutorial in the `yml` file  in `data` directory. They are used to generate the header and the footer of the tutorials. 
+1. Check that the metadata about the tutorial in the `yml` file in `data` directory are filled and correct
+
+    They are used to generate the header and the footer of the tutorials. 
+
+2. Fill the markdown file with the tutorial (after changing the `topic_name` and `tutorial_name`)
 
 The content of a tutorial hands-on is written in `markdown`. They are rendered by [Jekyll](http://jekyllrb.com/) into the webpage for the tutorial. 
 
