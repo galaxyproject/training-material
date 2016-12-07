@@ -118,7 +118,7 @@ It is often necessary to trim a sequenced read to remove bases sequenced with hi
 
     | :grey_question: Question |
     |:---|
-    | How did the range of read lengths change after trimming/clipping? |
+    | <ul><li>How did the range of read lengths change after trimming/clipping?</li><ul> |
 
 **INSERT SCREENSHOT HERE OF FASTQC OUTPUT ON SAME DATASET AFTER TRIMMING**
 
@@ -143,14 +143,13 @@ Nowadays, there are many read alignment programs for sequenced DNA, `BWA` being 
 
     | :grey_question: Questions |
     |:---|
-    | What datatype is the `BWA` output file? |
-    | How many reads were mapped from each file? |
+    | <ul><li>What datatype is the `BWA` output file?</li><li>How many reads were mapped from each file?</li><ul> |
 
 3. Run the tool `IdxStats` to find out how many reads mapped to which chromosome.
 
     | :grey_question: Question |
     |:---|
-    | How many reads were mapped to chromosome 19 from each file? |
+    | <ul><li>How many reads were mapped to chromosome 19 from each file?</li></ul> |
 
 <a name="step4"/></a>
 ### Step 4: Determining Tal1 binding sites 
@@ -194,7 +193,7 @@ It is critical to visualize your NGS data on a genome browser after alignemnt. E
 
     | :grey_question: Question |
     |:---|
-    | What do you see? |
+    | <ul><li>What do you see?</li></ul> |
     
   **INSERT SCREENSHOT HERE**
 
@@ -206,13 +205,19 @@ We've just processed chIP-seq data from two stages of hematopoiesis and have lis
 :pencil2: ***Hands on!***
 
 1. Run the tool `bedIntersect` to find peaks that exist both in G1E and megakaryocytes. 
+
   - Select the "Tal1 G1E peaks" and "Tal1 Mega peaks" files as the inputs. Running this tool with the default settings will return overlapping peaks of both files. 
+  
 2. Run the tool `bedIntersect` to find peaks that exist only in G1E.
+
   - Select "Tal1 G1E peaks" as the first input and "Tal1 Mega peaks" as the second input file.
-  - **Report only those alignments that **do not** overlap the BED file** Yes
+  - **Report only those alignments that \*\*do not\*\* overlap the BED file** Yes
+  
 3. Run the tool `bedIntersect` to find peaks that exist only in megakaryocytes.
+
   - Select "Tal1 Mega peaks" as the first input and "Tal1 G1E peaks" as the second input file.
   - **Report only those alignments that overlap the BED file** Yes  
+  
 4. Re-name the three files we generated to reflect their contents. 
 
 
@@ -238,7 +243,7 @@ We will be using tools from the package `deepTools` for the next few steps. More
 
     | :grey_question: Question |
     |:---|
-    | Why do we want to skip zeros in `plotCorrelation`? |
+    | <ul><li>Why do we want to skip zeros in `plotCorrelation`?</li></ul> |
 
 <a name="step8"/></a>
 ### Step 8: Assessing GC bias
@@ -257,17 +262,14 @@ We will now check whether the samples have more reads from regions of the genome
     
       | :grey_question: Questions |
       |:---|
-      | Why does it make more sense to check the input file? |
-      | Does this dataset have a GC bias? |
+      | <ul><li>Why does it make more sense to check the input file?</li><li>Does this dataset have a GC bias?</li></ul> |
 
 2. Explore the tool `correctGCbias` from the `deepTools` package.
 
-      | :grey_question: Questions |
-      |:---|
-      | What does this tool do? |
-      | What is the output of this tool? |
-      | What are some caveats to be aware of if using the output of this tool in downstream analyses? |
-    
+    | :grey_question: Questions |
+    |:---|
+    | <ul><li>What does this tool do?</li><li>What is the output of this tool?</li><li>What are some caveats to be aware of if using the output of this tool in downstream analyses?</li></ul> |
+
 <a name="step9"/></a>
 ### Step 9: Assessing IP strength
 
@@ -284,9 +286,7 @@ We will now evaluate the quality of the immuno-precipitation step in the ChIP-se
 
     | :grey_question: Questions |
     |:---|
-    | What does this graph represent? |
-    | How do input datasets differ from IP datasets? |
-    | What do you think about the quality of the IP for this experiment? |
+    | <ul><li>What does this graph represent?</li><li>How do input datasets differ from IP datasets?</li><li>What do you think about the quality of the IP for this experiment?</li></ul> |
     
 For additional informaton on how to interpret the resulting plots, read the information [here](http://deeptools.readthedocs.io/en/latest/content/tools/plotFingerprint.html#background)
 
@@ -324,7 +324,7 @@ In this exercise you imported raw Illumina sequencing data, evaluated the qualit
 - *Genomic dataset analyses require multiple methods of quality assessment to ensure that the data are appropriate for answering the biology question of interest.*
 - *By using the sharable and transparent Galaxy platform, data analyses can easily be shared and reproduced.*
 
-# :clap: Congratulations on successfully completing this tutorial!
+## :clap: Congratulations on successfully completing this tutorial!
 
 <a name="literature"/></a>
 # Useful literature
