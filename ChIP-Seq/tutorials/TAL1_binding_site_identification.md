@@ -148,11 +148,11 @@ Nowadays, there are many read alignment programs for sequenced DNA, `BWA` being 
     |:---|
     | <ul><li>What datatype is the `BWA` output file?</li><li>How many reads were mapped from each file?</li></ul> |
 
-3. Run the tool `IdxStats` to find out how many reads mapped to which chromosome.
+3. Run the tool `IdxStats` and look at the output (poke it in the eye!).
 
     | :grey_question: Question |
     |:---|
-    | <ul><li>How many reads were mapped to chromosome 19 in each experiment?</li><li>If humans have 23 chromosomes, what are all the other reference chromosomes (e.g. what is chr1_GL456210_random)?</li></ul> |
+    | <ul><li>What does each column in the output represent (hint: look at the Tool Form)?</li><li>How many reads were mapped to chromosome 19 in each experiment?</li><li>If humans have 23 chromosomes, what are all the other reference chromosomes (e.g. what is chr1_GL456210_random)?</li></ul> |
 
 <a name="step4"/></a>
 ### Step 4: Assessing correlation between samples
@@ -275,6 +275,9 @@ It is critical to visualize your NGS data on a genome browser after alignemnt. E
     | <ul><li>What do you see?</li></ul> |
     
   **INSERT SCREENSHOT HERE**
+  
+    <img src="../images/image.jpg" alt="image1" width="500"/>   
+    <figcaption><b>Figure 1:</b>Runx1 locus.</figcaption>
 
 <a name="step9"/></a>
 ### Step 9: Identifying unique and common Tal1 peaks between the G1E and megakaryocyte states
@@ -295,7 +298,7 @@ We've just processed chIP-seq data from two stages of hematopoiesis and have lis
 3. Run the tool `bedIntersect` to find peaks that exist only in megakaryocytes.
 
   - Select "Tal1 Mega peaks" as the first input and "Tal1 G1E peaks" as the second input file.
-  - **Report only those alignments that overlap the BED file** Yes  
+  - **Report only those alignments that \*\*do not\*\* overlap the BED file** Yes  
   
 4. Re-name the three files we generated to reflect their contents. 
 
@@ -303,10 +306,6 @@ We've just processed chIP-seq data from two stages of hematopoiesis and have lis
 # OPTIONAL ADDITIONAL ANALYSES
 
 ### Generate coverage files normalized by sequencing depth
-
-- Run the tool `bamCoverage` to generate a signal coverage file for the ER ChIP sample normalized by sequencing depth. Set the fragment size to 100 and the bin size to 25. Normalize to 1x genomic coverage. The output file should be in human-readable format bedGraph. To speed up computation, limit the operation to chromosome 19.
-
-- Generally, you should adjust the effective genome size according to the used genome assembly. In our case, you however have to specify the size of chromosome chr19 only when limiting the computation to this region.
 
 - Inspect the bedGraph output file.
 
