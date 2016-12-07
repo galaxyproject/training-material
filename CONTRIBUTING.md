@@ -160,9 +160,11 @@ The `docker` image must also integrate a Galaxy tour from the [`galaxy-tours` re
 
     ![](shared/images/tutorial_header.png)
 
-- Fill the hands-on file
+2. Fill the hands-on file
 
     > Check out [how to fill it](#how-do-i-fill-a-tutorial-hands-on)
+
+3. Add yourself as contributor for the topic in the `yml` file of the related topic that is in `data` directory
 
 ## How do I fill a tutorial hands-on?
 
@@ -243,6 +245,8 @@ To improve the learning experience, we strongly recommend you to:
 
 The input data required for the tutorials must be upload on [Zenodo](https://zenodo.org/) to obtain a dedicated DOI (in the [Galaxy training network community](https://zenodo.org/communities/galaxy-training/?page=1&size=20)).
 
+You can also add yourself as contributor for the topic in the `yml` file of the related topic that is in `data` directory
+
 ## How do I fill introduction slides? (not up to date)
 
 The introduction slides must be in the `index.html` file in `slides` directory for each topic. Even if the extension is `html`, slides are written in markdown. `---` is used to separate the slides.
@@ -269,6 +273,8 @@ The first slides (with the title, the requirements,...) are automatically genera
 
 They are then rendered with [`Remark`](https://remarkjs.com/). Template for the `html` files can be found in
 [`templates/slides/`](templates/slides/). Once the slides are on the `master` branch, they will be available at `http://bgruening.github.io/training-material/<topic>/slides/<slide_name>.html`
+
+You can also add yourself as contributor for the topic in the `yml` file of the related topic that is in `data` directory
 
 # How is the training material maintained?
 
