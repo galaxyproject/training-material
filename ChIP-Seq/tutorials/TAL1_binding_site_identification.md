@@ -121,7 +121,7 @@ It is often necessary to trim a sequenced read to remove bases sequenced with hi
 
     | :grey_question: Question |
     |:---|
-    | <ul><li>How did the range of read lengths change after trimming/clipping?</li>What do you think could account for enriched k-mers in the Tal1 ChIP-seq experiments?<li></li></ul> |
+    | <ul><li>How did the range of read lengths change after trimming/clipping?</li><li>What do you think could account for enriched k-mers in the Tal1 ChIP-seq experiments?</li></ul> |
 
 **INSERT SCREENSHOT HERE OF FASTQC OUTPUT ON SAME DATASET AFTER TRIMMING**
 
