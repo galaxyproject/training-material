@@ -173,9 +173,9 @@ We will be use tools from the package `deepTools` for the next few steps. More i
     - **Plot the correlation value**: Yes
     - **Skip zeros**: Yes
 
-    | :grey_question: Questions |
-    |:---|
-    | <ul><li>Why do we want to skip zeros in `plotCorrelation`?</li><li>What happens if the Pearson correlation method is used instead of the Spearman method?</li></ul> |
+| :grey_question: Questions |
+|:---|
+| <ul><li>Why do we want to skip zeros in `plotCorrelation`?</li><li>What happens if the Pearson correlation method is used instead of the Spearman method?</li></ul> |
 
 <a name="step5"/></a>
 ### Step 5: Assessing GC bias
