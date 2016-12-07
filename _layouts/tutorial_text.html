@@ -35,7 +35,7 @@ layout: base
               <li><a href="{{ site.url }}"><i class="fa fa-home"></i> Home</a></li>
               <li><a href="{{ site.url }}/{{ topic.name }}"> {{ topic.name }}</a></li>
               <li><a href="{{ site.url }}/{{ topic.name }}/slides"> Introduction</a></li>
-              <li><a href="{{ site.url }}/{{ topic.name }}/slides/{{ tutorial.name }}/"><i class="fa fa-file-powerpoint-o"></i> Associated slides</a></li>
+              <!--<li><a href="{{ site.url }}/{{ topic.name }}/slides/{{ tutorial.name }}/"><i class="fa fa-file-powerpoint-o"></i> Associated slides</a></li>-->
               <li><a href="{{ site.github_repository }}/tree/master/{{ topic.name }}/docker"><i class="fa fa-ship"></i> Docker image</a></li>
 
               {% if tutorial.zenodo_link != "" %}
@@ -56,23 +56,28 @@ layout: base
         <p class="bold"> :grey_question: Questions</p>
         <ul>
         {% for question in tutorial.questions %}
-	       <li>{{ question }}</li>
-	    {% endfor %}
+          <li>{{ question }}</li>
+        {% endfor %}
         </ul>
 
         <p class="bold"> :dart: Objectives</p>
         <ul>
         {% for objective in tutorial.objectives %}
-	       <li>{{ objective }}</li>
-	    {% endfor %}
+          <li>{{ objective }}</li>
+        {% endfor %}
         </ul>
 
         <p class="bold"> :heavy_check_mark: Requirements</p>
+        {% if topic.requirements != "" or tutorial.requirements != "" %}
         <ul>
-        {% for requirement in tutorial.requirements %}
-	       <li><a href="{{ requirement.link }}">{{ requirement.title }}</a></li>
-	    {% endfor %}
+          {% for requirement in topic.requirements %}
+            <li><a href="{{ requirement.link }}">{{ requirement.title }}</a></li>
+          {% endfor %}
+          {% for requirement in tutorial.requirements %}
+            <li><a href="{{ requirement.link }}">{{ requirement.title }}</a></li>
+          {% endfor %}
         </ul>
+        {% endif %}
 
         <p><span class="bold"> :hourglass: Time estimation:</span> {{ tutorial.time_estimation }}</p>
 

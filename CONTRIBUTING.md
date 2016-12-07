@@ -124,6 +124,7 @@ The `docker` image must also integrate a Galaxy tour from the [`galaxy-tours` re
     - `type`: targeted users (`"use"` or `""`) 
     - `summary`: summary of the content of the topic
     - `docker_image`: name of the [Docker image](#docker-directory) with the tools for this topic
+    - `requirements`: list of requirements general for this topic, with a `title` and a `link`
     - `tutorials`: list of tutorials available for this topic. Check out [how to add a new tutorial](#how-do-i-add-a-new-tutorial) for more information
     - `maintainers`: the two maintainers of the topic with their `name`, `github_username`, `email`
     - `contributors`: list of people who contributed to the topic with `name`, `github_username`, `email`
@@ -151,7 +152,7 @@ The `docker` image must also integrate a Galaxy tour from the [`galaxy-tours` re
     - `slides` (`"yes"` or `"no"`): tell if slides are available for this tutorial
     - `questions`: list of questions that are adressed in the tutorial
     - `objectives`: list of objectives of the tutorial
-    - `requirements`: list of requirements to with `title` and `link`
+    - `requirements`: list of requirements specific to this tutorial (in addition to the one of the topic), with a `title` and a `link`
     - `time_estimation`: estimation of the time needed to complete the hands-on
     - `key_points`: take home messages
 

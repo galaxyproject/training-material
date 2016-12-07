@@ -9,6 +9,18 @@ layout: base
 
     <p>{{ topic.summary }}</p>
 
+    <h2>Requirements</h2>
+
+    <p>Before diving into this topic, we recommend you to have a look at:</p>
+
+    {% if topic.requirements != "" %}
+    <ul>
+        {% for requirement in topic.requirements %}
+            <li><a href="{{ requirement.link }}">{{ requirement.title }}</a></li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
     <h2>Material</h2>
 
     <table class="table table-striped">
