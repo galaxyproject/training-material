@@ -92,7 +92,7 @@ As for any NGS data analysis, ChIP-seq data must be quality controlled before be
 
 3. In Galaxy, examine the data in a FASTQ file by clicking on the eye icon.
 
-    | :grey_question: Question |
+    | :grey_question: Questions |
     |:---|
     | <ul><li>What are four key features of a FASTQ file?</li><li>What is the main difference between a FASTQ and a FASTA file?</li></ul> |
     
@@ -111,15 +111,15 @@ It is often necessary to trim a sequenced read to remove bases sequenced with hi
 
 1. Run the tool `Trimmomatic` on each FASTQ file to trim low-quality bases (remember how to run tools on all files at once?). Explore the full parameter list for `Trimmomatic` in the Tool Form and set the following `Trimmomatic` parameters:
 
-    - **Paired end data?** No
-    - **Perform initial ILLUMINACLIP?** No
-    - **Select Trimmomatic operation to perform** Sliding window trimming (SLIDINGWINDOW)
-    - **Number of bases to average across** 4
-    - **Average quality required** 20
+    - **Paired end data?**: No
+    - **Perform initial ILLUMINACLIP?**: No
+    - **Select Trimmomatic operation to perform**: Sliding window trimming (SLIDINGWINDOW)
+    - **Number of bases to average across**: 4
+    - **Average quality required**: 20
     
 2. Rerun the tool `FastQC` on each trimmed/clipped FASTQ file to determine whether low-quality and adaptor sequences were correctly removed.
 
-    | :grey_question: Question |
+    | :grey_question: Questions |
     |:---|
     | <ul><li>How did the range of read lengths change after trimming/clipping?</li><li>What do you think could account for enriched k-mers in the Tal1 ChIP-seq experiments?</li></ul> |
 
@@ -137,8 +137,8 @@ Nowadays, there are many read alignment programs for sequenced DNA, `BWA` being 
 
 1. Run the tool `Map with BWA` to map the trimmed/clipped reads to the mouse genome. Set the following `Map with BWA` parameters:
 
-    - **Using reference genome** Mouse (mus musculus): mm10
-    - **Single or Paired-end reads** Single
+    - **Using reference genome**: Mouse (mus musculus) mm10
+    - **Single or Paired-end reads**: Single
 
   **INSERT SCREENSHOT HERE OF BWA TOOL FORM**
 
@@ -150,7 +150,7 @@ Nowadays, there are many read alignment programs for sequenced DNA, `BWA` being 
 
 3. Run the tool `IdxStats` and look at the output (poke it in the eye!).
 
-    | :grey_question: Question |
+    | :grey_question: Questions |
     |:---|
     | <ul><li>What does each column in the output represent (hint: look at the Tool Form)?</li><li>How many reads were mapped to chromosome 19 in each experiment?</li><li>If humans have 23 chromosomes, what are all the other reference chromosomes (e.g. what is chr1_GL456210_random)?</li></ul> |
 
@@ -159,23 +159,23 @@ Nowadays, there are many read alignment programs for sequenced DNA, `BWA` being 
 
 To assess the similarity between the replicates sequencing datasets, it is a common technique to calculate the correlation of read counts for the different samples.
 We expect that the replicates of the ChIP-seq experiments should be clustered more closely to each other than the replicates of the input samples.
-We will be use tools from the package `deepTools` for the next few steps. More information on deepTools can be found [here](http://deeptools.readthedocs.io/en/latest/content/list_of_tools.html).
+We will be use tools from the package `deepTools` for the next few steps. More information on `deepTools` can be found [here](http://deeptools.readthedocs.io/en/latest/content/list_of_tools.html).
 
 1. Run the tool `multiBamSummary` from the `deepTools` package. This tool splits the reference genome into bins of equal size and counts the number of reads in each bin from each sample. Set the following `multiBamSummary` parameters:
 
     - Select all of the aligned BAM files
-    - **Bin size in bp** 10000
+    - **Bin size in bp**: 10000
 
 2. Run the tool `plotCorrelation` from the `deepTools` package to visualize the results from the previous step. Feel free to try different parameters. To start, set the following `plotCorrelation` parameters:
 
-    - **Correlation method** Spearman
-    - **Plotting type** Heatmap
-    - **Plot the correlation value** Yes
-    - **Skip zeros** Yes
+    - **Correlation method**: Spearman
+    - **Plotting type**: Heatmap
+    - **Plot the correlation value**: Yes
+    - **Skip zeros**: Yes
 
-    | :grey_question: Question |
+    | :grey_question: Questions |
     |:---|
-    | <ul><li>Why do we want to skip zeros in `plotCorrelation`?</li><li>What happens if the Pearson correlation method is used instead of the Spearman?</li></ul> |
+    | <ul><li>Why do we want to skip zeros in `plotCorrelation`?</li><li>What happens if the Pearson correlation method is used instead of the Spearman method?</li></ul> |
 
 <a name="step5"/></a>
 ### Step 5: Assessing GC bias
@@ -186,11 +186,11 @@ We will now check whether the samples have more reads from regions of the genome
 1. Run the tool `computeGCbias` from the `deepTools` package.
 
     - First, select an aligned BAM files for an input dataset
-    - **Reference genome** locally cached
-    - **Using reference genome** mm10
-    - **Effective genome size** user specified
-    - **Effective genome size** 10000000
-    - **Fragment length used for the sequencing** 50
+    - **Reference genome**: locally cached
+    - **Using reference genome**: mm10
+    - **Effective genome size**: user specified
+    - **Effective genome size**: 10000000
+    - **Fragment length used for the sequencing**: 50
     
       | :grey_question: Questions |
       |:---|
@@ -205,14 +205,14 @@ We will now check whether the samples have more reads from regions of the genome
 <a name="step6"/></a>
 ### Step 6: Assessing IP strength
 
-We will now evaluate the quality of the immuno-precipitation step in the ChIP-seq protocol
+We will now evaluate the quality of the immuno-precipitation step in the ChIP-seq protocol.
 
 1. Run the tool `plotFingerprint` from the `deepTools` package.
 
     - Select all of the aligned BAM files
-    - **Show advanced options** yes
-    - **Bin size in bases** 50
-    - **Skip zeros** Yes
+    - **Show advanced options**: yes
+    - **Bin size in bases**: 50
+    - **Skip zeros**: Yes
 
 2. View the output image.
 
@@ -234,9 +234,9 @@ Now that `BWA` has aligned the reads to the genome, we will use the tool `MACS2`
 
     - Select replicate **ChIP-Seq Treatment Files** for one cell type
     - Select replicate **ChIP-Seq Control Files** for the same cell type
-    - **Effective genome size** User defined
-    - **Effective genome size** 10,000,000
-    - **Are your inputs Paired-end BAM files?** YEs
+    - **Effective genome size**: User defined
+    - **Effective genome size**: 10000000
+    - **Are your inputs Paired-end BAM files?**: Yes
 
     | :grey_question: Questions |
     |:---|
@@ -264,15 +264,15 @@ It is critical to visualize your NGS data on a genome browser after alignemnt. E
 
   **INSERT SCREENSHOT HERE**
 
-3. Click 'Add Datasets to visualization' and select the history containing the data from this analysis. Select the bedgraph files and the peak files (that you renamed).  
+3. Click 'Add Datasets to visualization' and select the history containing the data from this analysis. Select the bedgraph files and the peak files that you renamed.
 
   **INSERT SCREENSHOT HERE**
 
 4. Navigate to the Runx1 locus (chr16:92501466-92926074) to inspect the aligned reads and Tal1 peak calls. 
 
-    | :grey_question: Question |
+    | :grey_question: Questions |
     |:---|
-    | <ul><li>What do you see?</li></ul> |
+    | <ul><li>What do you see?</li><li>What gene other than Runx1 could be regulated by Tal1?</li></ul> |
     
   **INSERT SCREENSHOT HERE**
   
@@ -293,33 +293,23 @@ We've just processed chIP-seq data from two stages of hematopoiesis and have lis
 2. Run the tool `bedIntersect` to find peaks that exist only in G1E.
 
   - Select "Tal1 G1E peaks" as the first input and "Tal1 Mega peaks" as the second input file.
-  - **Report only those alignments that \*\*do not\*\* overlap the BED file** Yes
+  - **Report only those alignments that \*\*do not\*\* overlap the BED file**: Yes
   
 3. Run the tool `bedIntersect` to find peaks that exist only in megakaryocytes.
 
   - Select "Tal1 Mega peaks" as the first input and "Tal1 G1E peaks" as the second input file.
-  - **Report only those alignments that \*\*do not\*\* overlap the BED file** Yes  
+  - **Report only those alignments that \*\*do not\*\* overlap the BED file**: Yes  
   
 4. Re-name the three files we generated to reflect their contents. 
+
+    | :grey_question: Questions |
+    |:---|
+    | <ul><li>How many Tal1 binding sites are common to both G1E cells and megakaryocytes?</li><li>How many are unique to G1E cells?</li><li>How many are unique to megakaryocytes?</li></ul> |
 
 <a name="stepA"/></a>
 # OPTIONAL ADDITIONAL ANALYSES
 
-### Generate coverage files normalized by sequencing depth
-
-- Inspect the bedGraph output file.
-
-- Re-run the tool and generate a *bigWig* output file. Inspect the signal coverage in Trackster.
-
-### Generate input-normalized coverage files
-
-- Run the tool `bamCompare` to normalize the ChIP signal BAM file by the input control.
-
-- Set the fragment size to 100 again and the bin size to 50. Compute the log2 ratio of the read counts of Tal1 ChIP vs. input sample. The output file should be in human-readable format bedGraph. To speed up computation, limit the operation to chromosome chr19.
-
-- Inspect the bedGraph output file.
-
-- Re-run the tool and generate a bigWig output file. Inspect the log2 ratio in Trackster. Remember that the bigWig file contains only the signal on chromosome 19!
+### Additional analyses in progress
 
 <a name="conclusion"/></a>
 # Conclusion
