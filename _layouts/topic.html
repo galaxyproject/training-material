@@ -32,41 +32,44 @@ layout: base
               <td class="bold">Galaxy tour</td>
         </tr>
 
-        <tr>
-              <td>Introduction</td>
-              <td></td>
-              <td><a href="{{ site.url }}/{{ page.url }}/slides">:mortar_board:</a></td>
-              <td></td>
-              <td></td>
-        </tr>
-
-        {% for tutorial in topic.tutorials %}
+        {% for material in topic.material %}
             <tr>
-                <td>{{ tutorial.title }}</td>
+                <td>{{ material.title }}</td>
+            
+                {% if material.type == "introduction" %}                     
+                    <td></td>
+                    <td>    
+                        {% if material.slides == "yes" %}
+                        <a href="{{ site.url }}/{{ page.url }}/slides">:mortar_board:</a>
+                        {% endif %}
+                    </td>
+                    <td></td>
+                    <td></td>
+                {% elsif material.type == "tutorial" %}
+                    <td>
+                        {% if material.hands_on == "yes" %}
+                        <a href="{{ site.url }}{{ page.url }}tutorials/{{ material.name }}">:book:</a>
+                        {% endif %}
+                    </td>
 
-                <td>
-                    {% if tutorial.hands_on == "yes" %}
-                    <a href="{{ site.url }}{{ page.url }}tutorials/{{ tutorial.name }}">:book:</a>
-                    {% endif %}
-                </td>
+                    <td>
+                        {% if material.slides == "yes" %}
+                        <a href="{{ site.url }}{{ page.url }}slides/{{ material.name }}">:mortar_board:</a>
+                        {% endif %}
+                    </td>
 
-                <td>
-                    {% if tutorial.slides == "yes" %}
-                    <a href="{{ site.url }}{{ page.url }}slides/{{ tutorial.name }}">:mortar_board:</a>
-                    {% endif %}
-                </td>
+                    <td>
+                        {% if material.zenodo_link != "" %}
+                        <a href="{{ material.zenodo_link }}">:open_file_folder:</a>
+                        {% endif %}
+                    </td>
 
-                <td>
-                    {% if tutorial.zenodo_link != "" %}
-                    <a href="{{ tutorial.zenodo_link }}">:open_file_folder:</a>
-                    {% endif %}
-                </td>
-
-                <td>
-                    {% if tutorial.galaxy_tour != "" %}
-                    <a href="https://github.com/galaxyproject/galaxy-tours">:eyes:</a>
-                    {% endif %}
-                </td>
+                    <td>
+                        {% if material.galaxy_tour != "" %}
+                        <a href="https://github.com/galaxyproject/galaxy-tours">:eyes:</a>
+                        {% endif %}
+                    </td>
+                {% endif %}
             </tr>
         {% endfor %}
     </table>

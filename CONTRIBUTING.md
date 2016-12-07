@@ -125,7 +125,19 @@ The `docker` image must also integrate a Galaxy tour from the [`galaxy-tours` re
     - `summary`: summary of the content of the topic
     - `docker_image`: name of the [Docker image](#docker-directory) with the tools for this topic
     - `requirements`: list of requirements general for this topic, with a `title` and a `link`
-    - `tutorials`: list of tutorials available for this topic. Check out [how to add a new tutorial](#how-do-i-add-a-new-tutorial) for more information
+    - `material`: list of material available for this topic
+
+        For each material, you need to fill at least:
+
+        - `title`
+        - `type`: two possible types `introduction` or `tutorial`
+            
+            > For introduction material, [how to fill introduction slides](#how-do-i-fill-introduction-slides)
+
+            > For tutorial material, check out [how to add a new tutorial](#how-do-i-add-a-new-tutorial)
+        - `slides` (`"yes"` or `"no"`): tell if slides are available for this material
+
+        
     - `maintainers`: the two maintainers of the topic with their `name`, `github_username`, `email`
     - `contributors`: list of people who contributed to the topic with `name`, `github_username`, `email`
     - `references`: list of references for this topic with `authors`, `title`, `link`, `summary`
@@ -143,13 +155,14 @@ The `docker` image must also integrate a Galaxy tour from the [`galaxy-tours` re
 
 ## How do I add a new tutorial?
 
-1. Complete the `yml` file of the related topic that is in `data` directory with the meta information about the tutorial
+1. Add the metadata about the tutorial in `material` section in the `yml` file of the related topic that is in `data` directory
     - `title`: title of the tutorial
+    - `type: "tutorial"`
     - `name`: name of the tutorial (name of the subdirectory where the files related to the tutorial will be stored)
     - `zenodo_link`: link on Zenodo to the input data for the tutorial (not ideal but it can be empty)
     - `galaxy_tour`: name of the galaxy tour
-    - `hands_on` (`"yes"` or `"no"`): tell if an hands on is available for this tutorial
-    - `slides` (`"yes"` or `"no"`): tell if slides are available for this tutorial
+    - `hands_on`(`"yes"` or `"no"`): tell if an hands on is available for this material
+    - `slides` (`"yes"` or `"no"`): tell if slides are available for this material
     - `questions`: list of questions that are adressed in the tutorial
     - `objectives`: list of objectives of the tutorial
     - `requirements`: list of requirements specific to this tutorial (in addition to the one of the topic), with a `title` and a `link`
@@ -247,7 +260,13 @@ The input data required for the tutorials must be upload on [Zenodo](https://zen
 
 You can also add yourself as contributor for the topic in the `yml` file of the related topic that is in `data` directory
 
-## How do I fill introduction slides? (not up to date)
+## How do I fill introduction slides? 
+
+Before starting filling the slides, you have to add the metadata about the tutorial in `material` section in the `yml` file of the related topic that is in `data` directory:
+
+- `title`
+- `type: "introduction"`
+- `slides` (`"yes"` or `"no"`): tell if slides are available for this material
 
 The introduction slides must be in the `index.html` file in `slides` directory for each topic. Even if the extension is `html`, slides are written in markdown. `---` is used to separate the slides.
 
