@@ -20,7 +20,7 @@ If you have any questions, you can reach us using the [Gitter chat](https://gitt
     - [`slides` directory](#slides-directory)
     - [`docker` directory](#docker-directory)
     - [`README.md` file](#README.md-file)
-- [How do I add new content?](#how-do-i-add-content)
+- [How do I add new content?](#how-do-i-add-new-content)
     - [How do I add a new topic?](#how-do-i-add-a-new-topic)
     - [How do I add a new tutorial?](#how-do-i-add-a-new-tutorial)
     - [How do I fill a tutorial hands-on?](#how-do-i-fill-a-tutorial-hands-on)
