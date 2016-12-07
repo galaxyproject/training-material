@@ -2,10 +2,19 @@
 <html>
 
 {% assign topic = site.data[page.topic_name] %}
+{% assign title = topic.title %}
+{% if page.tutorial_name %}
+  {% for tuto in topic.material %}
+    {% if tuto.name == page.tutorial_name %}
+        {% assign tutorial = tuto %}
+        {% assign title = tutorial.title %}
+    {% endif %}
+  {% endfor %}
+{% endif %}
 
   <head>
     <meta charset="utf-8">
-    <title>{{ topic.title | strip_html }}</title>
+    <title>{{ title | strip_html }}</title>
     <link rel="stylesheet" href="{{ site.url }}/assets/css/slides.css">
   </head>
   <body>
@@ -32,14 +41,13 @@ class: center, middle, inverse
 {% endif %}
 
 The easiest way to **navigate** this slide deck
-is **by hitting `[space]` on your keyboard**
+is <br>**by hitting `[space]` on your keyboard**
 
-You can also navigate with arrow keys, but be careful because some
-slides can be nested inside of each other (vertically)
+You can also navigate with arrow keys.
 
 ---
 
-# {{ topic.title }}
+# {{ title }}
 
 ---
 
