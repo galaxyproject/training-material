@@ -116,6 +116,14 @@ The `docker` image must also integrate a Galaxy tour from the [`galaxy-tours` re
 
 # How do I add new content?
 
+Most of the content is written in markdown with some metadata (or variables) stored in YAML. To generate the website, we are using [Jekyll](http://jekyllrb.com/) and its templating system. So if you want to visualise locally how the website will look like, you need to run a local Jekyll server. We help you to do that with the [Makefile](Makefile):
+
+```
+$ make serve
+```
+
+You can then visualize locally ([http://localhost:4000/](http://localhost:4000/)) the website before pushing your changes. 
+
 ## How do I add a new topic?
 
 1. Add a `yml` file into the `data` directory similar to the one for [`RNA-Seq`](data/RNA-Seq.yml) and fill it with meta information on the topic
