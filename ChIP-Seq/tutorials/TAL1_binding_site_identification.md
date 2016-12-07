@@ -53,7 +53,7 @@ To this end, chIP-seq was performed in the G1E cell line - a GATA-null immortali
 This dataset (GEO Accession: [GSE51338](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE51338)) consists of biological replicate Tal1 ChIP-seq and input control experiments.
 Input control experiments are used to identify and remove sampling bias, for example open/accessible chromatin or GC bias.
 
-Because of the long processing time for the large original files, we have downsampled the original raw data files to include only a subset of genomic loci.
+Because of the long processing time for the large original files, we have downsampled the original raw data files to include only reads that align to chromosome 19 and a subset of interesting genomic loci pulled from the Wu et al. publication.
 
 **Table 1**: Metadata for ChIP-seq experiments in this tutorial. SE: single-end.
 
