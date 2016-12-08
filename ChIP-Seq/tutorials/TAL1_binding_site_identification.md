@@ -47,17 +47,17 @@ Identification of the binding sites of the T-cell acute lymphocytic leukemia pro
 <a name="introduction"/></a>
 # Introduction
  
-This tutorial uses ChIP-seq datasets from a study published by [Wu et al., 2012](http://genome.cshlp.org/content/24/12/1945.full.pdf+html).
+This tutorial uses ChIP-seq datasets from a study published by [Wu et al., 2014](http://genome.cshlp.org/content/24/12/1945.full.pdf+html).
 The goal of this study was to investigate "the dynamics of occupancy and the role in gene regulation of the transcription factor Tal1, a critical regulator of hematopoiesis, at multiple stages of hematopoietic differentiation."
-To this end, chIP-seq was performed in the G1E cell line - a GATA-null immortalized cell line derived from targeted disruption of GATA-1 in mouse embryonic stem cells - and megakaryocytes.
+To this end, ChIP-seq experiments were performed in multiple mouse cell types including G1E - a GATA-null immortalized cell line derived from targeted disruption of GATA-1 in mouse embryonic stem cells - and megakaryocytes.
 This dataset (GEO Accession: [GSE51338](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE51338)) consists of biological replicate Tal1 ChIP-seq and input control experiments.
 Input control experiments are used to identify and remove sampling bias, for example open/accessible chromatin or GC bias.
 
-Because of the long processing time for the large original files, we have downsampled the original raw data files to include only reads that align to chromosome 19 and a subset of interesting genomic loci pulled from the Wu et al. publication.
+Because of the long processing time for the large original files, we have downsampled the original raw data files to include only reads that align to chromosome 19 and a subset of interesting genomic loci pulled from the Wu et al. (2014) publication.
 
 **Table 1**: Metadata for ChIP-seq experiments in this tutorial. SE: single-end.
 
-| Cellular state | Datatype | chIP Ab | Replicate | SRA Accession | Library type | Read length | Stranded? | DS.3 size (MB) |
+| Cellular state | Datatype | ChIP Ab | Replicate | SRA Accession | Library type | Read length | Stranded? | DS.3 size (MB) |
 |---|---|:-:|:-:|---|:-:|:-:|:-:|---|
 | G1E | chIP-seq | input | 1 | SRR507859 | SE | 50 | No | 35.8 |
 | G1E | chIP-seq | input | 2 | SRR507860 | SE | 50 | No | 427.1 |
