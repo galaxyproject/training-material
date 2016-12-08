@@ -181,18 +181,19 @@ We will be use tools from the package `deepTools` for the next few steps. More i
 1. Run the tool `multiBamSummary` from the `deepTools` package. This tool splits the reference genome into bins of equal size and counts the number of reads in each bin from each sample. Set the following `multiBamSummary` parameters:
 
     - Select all of the aligned BAM files
-    - **Bin size in bp**: 10000
+    - **Bin size in bp**: 1000
 
 2. Run the tool `plotCorrelation` from the `deepTools` package to visualize the results from the previous step. Feel free to try different parameters. To start, set the following `plotCorrelation` parameters:
 
-    - **Correlation method**: Spearman
+    - **Correlation method**: Pearson
     - **Plotting type**: Heatmap
     - **Plot the correlation value**: Yes
     - **Skip zeros**: Yes
+    - **Remove regions with very large counts**: Yes
 
 | :grey_question: Questions |
 |:---|
-| <ul><li>Why do we want to skip zeros in `plotCorrelation`?</li><li>What happens if the Pearson correlation method is used instead of the Spearman method?</li></ul> |
+| <ul><li>Why do we want to skip zeros in `plotCorrelation`?</li><li>What happens if the Spearman correlation method is used instead of the Spearman method?</li><li>What does the output of making a Scatterplot instead of a Heatmap look like?</li></ul> |
 
 For additional informaton on how to interpret the resulting plots, read the information [here](http://deeptools.readthedocs.io/en/latest/content/tools/plotCorrelation.html#background)
 
