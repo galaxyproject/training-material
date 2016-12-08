@@ -15,7 +15,7 @@ Download the list of peaks (the file `GSE37268_mof3.out.hpeak.txt.gz`) from GEO 
 
 Galaxy Dataset | [GSE37268_mof3.out.hpeak.txt](../input_data/Galaxy1-GSE37268_mof3.out.hpeak.txt)
 
-This file is not in any standard format and just by looking at it, we cannot find out what the numbers in the different columns mean. In the paper the authors mention that they used the peak caller [HPeak](http://www.sph.umich.edu/csg/qin/HPeak/Readme.html). By looking at the HPeak manual we can find out that the columns contain the following information:
+This file is not in any standard format and just by looking at it, we cannot find out what the numbers in the different columns mean. In the paper the authors mention that they used the peak caller [HPeak](https://www.ncbi.nlm.nih.gov/pubmed/20598134). By looking at the HPeak manual we can find out that the columns contain the following information:
 
 - chromosome name*
 - start coordinate
