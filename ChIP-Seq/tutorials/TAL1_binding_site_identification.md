@@ -80,7 +80,8 @@ As for any NGS data analysis, ChIP-seq data must be quality controlled before be
 
 1. Create and name a new history for this tutorial.
 
-2. Import the ChIP-seq raw data (\*.fastqsanger) from [Zenodo](https://doi.org/10.5281/zenodo.197100).
+2. Import the ChIP-seq raw data (\*.fastqsanger) from Zenodo [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.197100.svg)](https://doi.org/10.5281/zenodo.197100)
+
 
     - In Zenodo: Right-click a FASTQ filename → Copy Link Address
     - In Galaxy: Get Data → Upload File from your computer → Paste/Fetch data
