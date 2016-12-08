@@ -18,8 +18,6 @@ Several deck of slides are available for this topic:
     - [Data source integration](http://bgruening.github.io/training-material/Dev-Corner/slides/data_source_integration.html)
     - [Visualizations in Galaxy](http://bgruening.github.io/training-material/Dev-Corner/slides/visualizations.html)
 
-- [Contribution with GitHub](http://bgruening.github.io/training-material/Dev-Corner/slides/github_contribution.html)
-
 # Tutorials (coming soon)
 
 **Help needed** to build 3 tutorials with hands-on for this topic:
