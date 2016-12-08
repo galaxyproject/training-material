@@ -184,7 +184,7 @@ We will be use tools from the package `deepTools` for the next few steps. More i
     - **Bin size in bp**: 500
 
     <img src="../images/multiBamSummary.png"/>   
-    <figcaption><b>Figure X:</b>Select all of the aligned BAM files and change Bin size.</figcaption>
+    <figcaption><b>Figure X:</b> Select all of the aligned BAM files and change Bin size.</figcaption>
 
 2. Run the tool `plotCorrelation` from the `deepTools` package to visualize the results from the previous step. Feel free to try different parameters. To start, set the following `plotCorrelation` parameters:
 
@@ -195,14 +195,14 @@ We will be use tools from the package `deepTools` for the next few steps. More i
     - **Remove regions with very large counts**: Yes
 
     <img src="../images/plotCorrelation.png"/>   
-    <figcaption><b>Figure X:</b>Select the newly generation correlation matrix file from the previous step.</figcaption>
+    <figcaption><b>Figure X:</b> Select the newly generation correlation matrix file from the previous step.</figcaption>
 
 | :grey_question: Questions |
 |:---|
 | <ul><li>Why do we want to skip zeros in `plotCorrelation`?</li><li>What happens if the Spearman correlation method is used instead of the Spearman method?</li><li>What does the output of making a Scatterplot instead of a Heatmap look like?</li></ul> |
 
 <img src="../images/plotCorrelation_heatmap.png"/>   
-<figcaption><b>Figure X:</b>Are replicate datasets the most highly correlated?</figcaption>
+<figcaption><b>Figure X:</b> Output from `plotCorrelation`.</figcaption>
 
 For additional informaton on how to interpret the resulting plots, read the information [here](http://deeptools.readthedocs.io/en/latest/content/tools/plotCorrelation.html#background)
 
@@ -222,11 +222,11 @@ We will now check whether the samples have more reads from regions of the genome
     - **Fragment length used for the sequencing**: 50
     
     <img src="../images/computeGCBias.png"/>   
-    <figcaption><b>Figure X:</b>Select a single aligned BAM file to check GC bias for that dataset.</figcaption>
+    <figcaption><b>Figure X:</b> Select a single aligned BAM file to check GC bias for that dataset.</figcaption>
 
-      | :grey_question: Questions |
-      |:---|
-      | <ul><li>Why would we worry more about checking for GC bias in an input file?</li><li>Does this dataset have a GC bias?</li></ul> |
+    | :grey_question: Questions |
+    |:---|
+    | <ul><li>Why would we worry more about checking for GC bias in an input file?</li><li>Does this dataset have a GC bias?</li></ul> |
 
 2. Explore the tool `correctGCbias` from the `deepTools` package.
 
@@ -250,7 +250,7 @@ We will now evaluate the quality of the immuno-precipitation step in the ChIP-se
 
     <img src="../images/plotFingerprint1.png"/>   
     <img src="../images/plotFingerprint2.png"/>   
-    <figcaption><b>Figure X:</b>Select all of the aligned BAM file to assess IP strength.</figcaption>
+    <figcaption><b>Figure X:</b> Select all of the aligned BAM file to assess IP strength.</figcaption>
 
 2. View the output image.
 
