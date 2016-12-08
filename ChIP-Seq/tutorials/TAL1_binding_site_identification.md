@@ -178,10 +178,13 @@ To assess the similarity between the replicates sequencing datasets, it is a com
 We expect that the replicates of the ChIP-seq experiments should be clustered more closely to each other than the replicates of the input samples.
 We will be use tools from the package `deepTools` for the next few steps. More information on `deepTools` can be found [here](http://deeptools.readthedocs.io/en/latest/content/list_of_tools.html).
 
-1. Run the tool `multiBamSummary` from the `deepTools` package. This tool splits the reference genome into bins of equal size and counts the number of reads in each bin from each sample. Set the following `multiBamSummary` parameters:
+1. Run the tool `multiBamSummary` from the `deepTools` package. This tool splits the reference genome into bins of equal size and counts the number of reads in each bin from each sample. We set a small **Bin size** here because we are working with a subset of reads that align to only a fraction of the genome. Set the following `multiBamSummary` parameters:
 
     - Select all of the aligned BAM files
-    - **Bin size in bp**: 1000
+    - **Bin size in bp**: 500
+
+    <img src="../images/multiBamSummary.png"/>   
+    <figcaption><b>Figure X:</b>Select all of the aligned BAM files and change Bin size.</figcaption>
 
 2. Run the tool `plotCorrelation` from the `deepTools` package to visualize the results from the previous step. Feel free to try different parameters. To start, set the following `plotCorrelation` parameters:
 
@@ -191,9 +194,15 @@ We will be use tools from the package `deepTools` for the next few steps. More i
     - **Skip zeros**: Yes
     - **Remove regions with very large counts**: Yes
 
+    <img src="../images/plotCorrelation.png"/>   
+    <figcaption><b>Figure X:</b>Select the newly generation correlation matrix file from the previous step.</figcaption>
+
 | :grey_question: Questions |
 |:---|
 | <ul><li>Why do we want to skip zeros in `plotCorrelation`?</li><li>What happens if the Spearman correlation method is used instead of the Spearman method?</li><li>What does the output of making a Scatterplot instead of a Heatmap look like?</li></ul> |
+
+<img src="../images/plotCorrelation_heatmap.png"/>   
+<figcaption><b>Figure X:</b>Are replicate datasets the most highly correlated?</figcaption>
 
 For additional informaton on how to interpret the resulting plots, read the information [here](http://deeptools.readthedocs.io/en/latest/content/tools/plotCorrelation.html#background)
 
@@ -212,6 +221,9 @@ We will now check whether the samples have more reads from regions of the genome
     - **Effective genome size**: 10000000
     - **Fragment length used for the sequencing**: 50
     
+    <img src="../images/computeGCBias.png"/>   
+    <figcaption><b>Figure X:</b>Select a single aligned BAM file to check GC bias for that dataset.</figcaption>
+
       | :grey_question: Questions |
       |:---|
       | <ul><li>Why would we worry more about checking for GC bias in an input file?</li><li>Does this dataset have a GC bias?</li></ul> |
@@ -235,6 +247,10 @@ We will now evaluate the quality of the immuno-precipitation step in the ChIP-se
     - **Show advanced options**: yes
     - **Bin size in bases**: 50
     - **Skip zeros**: Yes
+
+    <img src="../images/plotFingerprint1.png"/>   
+    <img src="../images/plotFingerprint2.png"/>   
+    <figcaption><b>Figure X:</b>Select all of the aligned BAM file to assess IP strength.</figcaption>
 
 2. View the output image.
 
