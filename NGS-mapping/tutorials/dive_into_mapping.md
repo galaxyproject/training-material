@@ -3,10 +3,9 @@ Dive into mapping
 
 :grey_question: ***Questions***
 
-- *Major question that would be addressed in this tutorial (mostly general biological questions)*
-- *Second question*
-- *Third question*
-- *...*
+- *What is sequence alignment and how does it work?*
+- *Why do we need it?*
+- *What are typical troubles?*
 
 :dart: ***Objectives***
 
@@ -26,9 +25,56 @@ Dive into mapping
 
 # Introduction
 
-General introduction about the topic and then an introduction of the tutorial (the questions and the objectives). It is nice also to have a scheme to sum up the pipeline used during the tutorial. The idea is to give to trainees insight into the content of the tutorial and the (theoretical and technical) key concepts they will learn.
+An important role in NGS data analysis is to search for the correct locations of a read in the genome. The basic concept to do this is to 
+align or to map two sequences of DNA in the computer. The idea is to compute how similar two given sequences are. The more similar they are, the liklier it is
+that these two sequences are having something in common. This can be a relationship in a phylogentic tree or a potential position in the genome. 
 
-# Part 1
+# The basic idea
+Given two sequences:
+AACCGCCTT
+AGGGGCCTT
+
+To find out how similar two sequences are a similarity or a distance score can be computed.
+
+## Similarity
+A match is given if at the same position the same nucleotide in both sequences is given, e.g.
+at position 1 both have an "A". The more matches two sequences are having, the more similar they are.
+
+## Distance
+To compute the distance the mismatches needs to be counted. A mismatch is given if at the same position in both sequences two different nucliotides are given
+e.g. at position 2 "A" in the first sequence and "G" in the second. The less mismatches are given, the better.
+
+
+## Gaps
+The basic idea is lacking of two important real world szenarios:
+1. Sequences of different length
+
+2. Deletion and or insertions in a sequence.
+
+Lets have a look at the following two sequnces:
+AAT
+AAAT
+How to handle the different sizes? Should it count as a mismatch? Or would it be more realistic to assume that at position 3 of the second sequences an additional "A"
+was included respectivly a deletion at position 3 of sequence one? To overcome this issue, gaps are introduced. 
+
+A gap is noted as "-". It is inserted in one sequence to show that at this position a deletion or insertion in one of the sequences happend:
+AA-T
+AAAT
+
+A gap counts now as a mismatch.
+# Parameters, parameters, parameters
+
+# Quality
+
+# State of the art algorithms
+The algorithms that are used for real-world data are all based on the idea of precomputation of an index. 
+
+## Hashing
+
+## BWT
+
+
+H
 
 Introduction about this part
 
