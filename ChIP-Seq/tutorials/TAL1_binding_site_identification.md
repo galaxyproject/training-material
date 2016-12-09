@@ -170,7 +170,7 @@ We will be use tools from the package `deepTools` for the next few steps. More i
     - Select all of the aligned BAM files
     - **Bin size in bp**: 1000
 
-    ![multiBamSummary](../images/multiBamSummary.png)
+    ![multiBamSummary](../images/multiBamSummary_1000bin.png)
     <figcaption><b>Figure X:</b> Select all of the aligned BAM files and change Bin size.</figcaption>
 
 2. Run the tool `plotCorrelation` from the `deepTools` package to visualize the results from the previous step. Feel free to try different parameters. To start, set the following `plotCorrelation` parameters:
