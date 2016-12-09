@@ -84,15 +84,17 @@ layout: base
         {% endfor %}
     </table>
 
-    <h2>Galaxy instance</h2>
+    {% if topic.docker_image != "" %}
+        <h2>Galaxy instance</h2>
 
-    <p>For these tutorials, you can use the dedicated Docker image:</p>
+        <p>For these tutorials, you can use the dedicated Docker image:</p>
 
-    <pre><code>
-    docker run -d -p 8080:80 {{ topic.docker_image }}
-    </code></pre>
+        <pre><code>
+        docker run -d -p 8080:80 {{ topic.docker_image }}
+        </code></pre>
 
-    <p>It will launch a flavored Galaxy instance available on <a href="http://localhost:8080">http://localhost:8080</a>.</p>
+        <p>It will launch a flavored Galaxy instance available on <a href="http://localhost:8080">http://localhost:8080</a>.</p>
+    {% endif %}
 
     <h2>Contributors</h2>
 
