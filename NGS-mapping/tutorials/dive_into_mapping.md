@@ -136,22 +136,18 @@ Consider the example below:
 ```
 
 1. At which position the sequence is aligned best?
-2. How to handle the case multiple positions are the best?
+2. What if multiple positions are the best?
 3. What about the environment of a match?
 4. Should gaps be allowed and if yes, how long they should be?
 
 Even without a computer scientist background it is easy to see that a lot of computing resources (Runtime, memory) are required to solve this issue. 
-And for a biologist even more important is the quality of the mappings.
-approches handle the case different, they precompute not every match to the genome everytime from scratch. 
-
-## State of the art algorithms 
-The algorithms that are used for real-world data are all based on the idea of precomputation of an index. 
-
-### Hashing
-
-### BWT
+And for a biologist even more important is the quality of the mappings. To compute NGS-data different algorithm are developed and they handle the three main 
+constrains, quality, runtime and memory usage, all different. What all have in common is that they preprocess the genome and store it. If sequences needs to be mapped 
+the runtime is significant faster.
 
 # Conclusion
 
-1. The more you know about your data the better the mapping will be.
+1. Know your data: The more you know the better you can choose the parameter setting for your algorithm.
 2. Mapping is not a trivial task and it can happen that the second or tenth best alignment is the alignment you are searching for.
+3. Try different mapping algorithms if the result does not satisfy you.
+
