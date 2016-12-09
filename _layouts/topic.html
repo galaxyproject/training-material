@@ -28,8 +28,11 @@ layout: base
               <td class="bold">Lesson</td>
               <td class="bold">Hands-on</td>
               <td class="bold">Slides</td>
-              <td class="bold">Input dataset</td>
-              <td class="bold">Galaxy tour</td>
+
+              {% if topic.type != "admin-dev" %}
+                  <td class="bold">Input dataset</td>
+                  <td class="bold">Galaxy tour</td>
+              {% endif %}
         </tr>
 
         {% for material in topic.material %}
@@ -43,8 +46,11 @@ layout: base
                         <a href="{{ site.url }}/{{ page.url }}/slides">:mortar_board:</a>
                         {% endif %}
                     </td>
-                    <td></td>
-                    <td></td>
+                    {% if topic.type != "admin-dev" %}
+                        <td></td>
+                        <td></td>
+                    {% endif %}
+
                 {% elsif material.type == "tutorial" %}
                     <td>
                         {% if material.hands_on == "yes" %}
@@ -60,17 +66,19 @@ layout: base
                         {% endif %}
                     </td>
 
-                    <td>
-                        {% if material.zenodo_link != "" %}
-                        <a href="{{ material.zenodo_link }}">:open_file_folder:</a>
-                        {% endif %}
-                    </td>
+                    {% if topic.type != "admin-dev" %}
+                        <td>
+                            {% if material.zenodo_link != "" %}
+                            <a href="{{ material.zenodo_link }}">:open_file_folder:</a>
+                            {% endif %}
+                        </td>
 
-                    <td>
-                        {% if material.galaxy_tour != "" %}
-                        <a href="https://github.com/galaxyproject/galaxy-tours">:eyes:</a>
-                        {% endif %}
-                    </td>
+                        <td>
+                            {% if material.galaxy_tour != "" %}
+                            <a href="https://github.com/galaxyproject/galaxy-tours">:eyes:</a>
+                            {% endif %}
+                        </td>
+                    {% endif %}
                 {% endif %}
             </tr>
         {% endfor %}
