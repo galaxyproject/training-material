@@ -9,16 +9,16 @@ layout: base
 
     <p>{{ topic.summary }}</p>
 
-    <h2>Requirements</h2>
-
-    <p>Before diving into this topic, we recommend you to have a look at:</p>
-
     {% if topic.requirements != "" %}
-    <ul>
-        {% for requirement in topic.requirements %}
-            <li><a href="{{ requirement.link }}">{{ requirement.title }}</a></li>
-        {% endfor %}
-    </ul>
+        <h2>Requirements</h2>
+
+        <p>Before diving into this topic, we recommend you to have a look at:</p>
+
+        <ul>
+            {% for requirement in topic.requirements %}
+                <li><a href="{{ requirement.link }}">{{ requirement.title }}</a></li>
+            {% endfor %}
+        </ul>
     {% endif %}
 
     <h2>Material</h2>
@@ -106,17 +106,19 @@ layout: base
         {% endfor %}
     </ul>
 
-    <h2>References</h2>
+    {% if topic.references %}
+        <h2>References</h2>
 
-    {% for reference in topic.references %}
-        <p>
-        <span class="bold">{{ reference.authors }}:</span> <a href="{{ reference.link }}">{{ reference.title }}</a>
+        {% for reference in topic.references %}
+            <p>
+            <span class="bold">{{ reference.authors }}:</span> <a href="{{ reference.link }}">{{ reference.title }}</a>
 
-        {% if reference.summary != "" %}
-        <br/><cite>{{ reference.summary }}</cite>
-        {% endif %}
-        </p>
-    {% endfor %}
+            {% if reference.summary != "" %}
+            <br/><cite>{{ reference.summary }}</cite>
+            {% endif %}
+            </p>
+        {% endfor %}
+    {% endif %}
 </section>
 
 {% include main_footer.html %}
