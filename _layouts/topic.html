@@ -102,7 +102,16 @@ layout: base
 
     <ul>
         {% for maintainer in topic.maintainers %}
-            <li><a href="http://github.com/{{ maintainer.github_username }}">{{ maintainer.name }}</a> (<a href="mailto:{{ maintainer.email }}">{{ maintainer.email }}</a>)</li>
+            <li>
+            {% if maintainer.github_username != "" %}
+                <a href="http://github.com/{{ maintainer.github_username }}">{{ maintainer.name }}</a>
+            {% else %}
+                {{ maintainer.name }}
+            {% endif %}
+            {% if maintainer.email != "" %}
+                (<a href="mailto:{{ maintainer.email }}">{{ maintainer.email }}</a>)
+            {% endif %}
+            </li>
         {% endfor %}
     </ul>
 
@@ -112,7 +121,16 @@ layout: base
 
     <ul>
         {% for contributor in topic.contributors %}
-            <li><a href="http://github.com/{{ contributor.github_username }}">{{ contributor.name }}</a> (<a href="mailto:{{ contributor.email }}">{{ contributor.email }}</a>)</li>
+            <li>
+            {% if contributor.github_username != "" %}
+                <a href="http://github.com/{{ contributor.github_username }}">{{ contributor.name }}</a> 
+            {% else %}
+                {{ contributor.name }}
+            {% endif %}
+            {% if contributor.email != "" %}
+                (<a href="mailto:{{ contributor.email }}">{{ contributor.email }}</a>)
+            {% endif %}
+            </li>
         {% endfor %}
     </ul>
 
