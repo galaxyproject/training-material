@@ -3,7 +3,7 @@
 
 # Settings
 MAKEFILES=Makefile $(wildcard *.mk)
-JEKYLL=jekyll
+JEKYLL=bundle exec jekyll
 PARSER=bin/markdown_ast.rb
 DST=_site
 
