@@ -29,3 +29,8 @@ clean :
 	@rm -rf .sass-cache
 	@find . -name .DS_Store -exec rm {} \;
 	@find . -name '*~' -exec rm {} \;
+
+install:
+	gem install jekyll
+	gem install jemoji
+	gem install jekyll-feed
