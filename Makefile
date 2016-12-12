@@ -3,7 +3,7 @@
 
 # Settings
 MAKEFILES=Makefile $(wildcard *.mk)
-JEKYLL=jekyll
+JEKYLL=bundle exec jekyll
 PARSER=bin/markdown_ast.rb
 DST=_site
 
@@ -29,3 +29,8 @@ clean :
 	@rm -rf .sass-cache
 	@find . -name .DS_Store -exec rm {} \;
 	@find . -name '*~' -exec rm {} \;
+
+install:
+	gem install jekyll
+	gem install jemoji
+	gem install jekyll-feed

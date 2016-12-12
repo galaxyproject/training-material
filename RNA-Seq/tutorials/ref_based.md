@@ -6,12 +6,11 @@ tutorial_name: ref_based
 
 # Introduction
 
-In [Brooks et al. 2011](http://genome.cshlp.org/content/21/2/193.long) study, the Pasilla (PS) gene, *Drosophila* homologue of the Human splicing regulators Nova-1 and Nova-2 Proteins, was depleted in *Drosophila melanogaster* by RNAi. The authors wanted to identify exons that are regulated by Pasilla gene using RNA sequencing data.
+In the study of [Brooks *et al.* 2011](http://genome.cshlp.org/content/21/2/193.long), the Pasilla (PS) gene, *Drosophila* homologue of the Human splicing regulators Nova-1 and Nova-2 Proteins, was depleted in *Drosophila melanogaster* by RNAi. The authors wanted to identify exons that are regulated by Pasilla gene using RNA sequencing data.
 
-Total RNA was isolated and used for preparing either single-end or paired-end RNA-seq libraries for 3 treated (PS depleted) samples and 4 untreated samples . These libraries were sequenced to obtain a collection of RNA sequencing reads for each sample. The effects of Pasilla gene depletion on splicing events can then be analyzed. The genome of *Drosophila melanogaster* is known and can be used as reference genome to ease this analysis.  
+Total RNA was isolated and used for preparing either single-end or paired-end RNA-seq libraries for treated (PS depleted) samples and untreated samples. These libraries were sequenced to obtain a collection of RNA sequencing reads for each sample. The effects of Pasilla gene depletion on splicing events can then be analyzed. The genome of *Drosophila melanogaster* is known and assembled. It can be used as reference genome to ease this analysis.  
 
-Reference based RNA-seq data analysis is ...
-*add a small introduction about reference based RNA-seq data analysis*
+In a reference based RNA-seq data analysis, the reads are aligned (or mapped) against a reference genome, *Drosophila melanogaster* here, to significantly improve the ability to reconstruct transcripts and then identify differences of expression between several conditions.
 
 > ### Agenda
 >
@@ -26,12 +25,16 @@ Reference based RNA-seq data analysis is ...
 
 ## Data upload
 
-The data is available at NCBI Gene Expression Omnibus (GEO) under accession number [GSE18508](http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE18508).
-Here, we have 7 samples:
-- 3 treated samples with Pasilla (PS) gene depletion (called "pasilla-depleted")
-- 4 untreated samples (called "wt")
+The original data is available at NCBI Gene Expression Omnibus (GEO) under accession number [GSE18508](http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE18508). 
+
+We will look at the 7 first samples:
+
+- 3 treated samples with Pasilla (PS) gene depletion: [GSM461179](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM461179), [GSM461180](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM461180), [GSM461181](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM4611810)
+- 4 untreated samples: [GSM461176](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM461176), [GSM461177](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM461177), [GSM461178](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM461178), [GSM461182](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM461182)
 
 Each sample constitutes a separate biological replicate of the corresponding condition (treated or untreated). Moreover, two of the treated and two of the untreated samples are from a paired-end sequencing assay, while the remaining samples are from a single-end sequencing experiment.
+
+We extracted sequences from the SRA files to build FASTQ files.
 
 > ### :pencil2: Hands-on: Data upload
 >
@@ -69,7 +72,7 @@ For quality control, we use similar tools as described in [NGS-QC tutorial](http
 
 > ### :pencil2: Hands-on: Quality control
 >
-> 1. **FastQC** :wrench:: Run on one of the two FASTQ files to control the quality of the reads as
+> 1. **FastQC** :wrench:: Run FASTQC on one of the two FASTQ files to control the quality of the reads
 >
 >    > ### :question: Questions
 >    >
@@ -77,7 +80,7 @@ For quality control, we use similar tools as described in [NGS-QC tutorial](http
 >    > - Is there anything what you find striking?
 >    {: .question}
 >
-> 2. **Trim Galore** :wrench:: Trim low quality bases from the 3' end using  on both paired-end datasets.
+> 2. **Trim Galore** :wrench:: Trim low quality bases from the 3' end using on both paired-end datasets
 > 3. **FastQC** :wrench:: Re-run and inspect the differences
 {: .hands_on}
 
@@ -85,14 +88,14 @@ As the genome of *Drosophila melanogaster* is known, we can use this information
 
 # Mapping
 
-To make sense of the reads, their positions within *Drosophila melanogaster* genome must be determined. This process is known as aligning or 'mapping' the read to the reference genome.
+To make sense of the reads, their positions within *Drosophila melanogaster* genome must be determined. This process is known as aligning or 'mapping' the reads to the reference genome.
 
 > ### :nut_and_bolt: Comment
 >
 > Want to learning more about mapping? Follow our [training](http://bgruening.github.io/training-material/NGS-mapping/slides)
 > {: .comment}
 
-Because in the case of eukaryotic transcriptome most reads originate from processed mRNAs lacking exons, they cannot be simply mapped back to the genome. Instead they can be separated into two categories:
+Because in the case of a eukaryotic transcriptome, most reads originate from processed mRNAs lacking exons, they cannot be simply mapped back to the genome. Instead they can be separated into two categories:
 
 - Reads that map entirely within exons
 - Reads that cannot be mapped within an exon across their entire length because they span two or more exons
@@ -105,9 +108,9 @@ Spliced mappers have been developed to efficiently map transcript-derived reads 
 
 ![](../images/tophat2.png)
 
-*[Kim et al, Genome Biology, 2013](https://genomebiology.biomedcentral.com/articles/10.1186/gb-2013-14-4-r36)*
+*[Kim et al., Genome Biology, 2013](https://genomebiology.biomedcentral.com/articles/10.1186/gb-2013-14-4-r36)*
 
-To help annotations of RNA sequences, we can take advantage from already known reference gene annotations.
+To help annotating RNA sequences, we can take advantage from already known reference gene annotations.
 
 > ### :pencil2: Hands-on:
 >
@@ -119,7 +122,7 @@ TopHat needs to know two important parameters about the sequencing library
 - The library type and its strandedness type
 - The inner distance between the two reads for paired-end data
 
-These information should usually come with your FASTQ files! If not, try to find them on the site where you downloaded the data or in the corresponding publication. Another option is to estimate these parameters with a *preliminary mapping* of a *downsampled* file and some analysis programs. Afterward, the actual mapping can be redo on the original files with the optimized parameters.
+These information should usually come with your FASTQ files, ask your sequencing facility! If not, try to find them on the site where you downloaded the data or in the corresponding publication. Another option is to estimate these parameters with a *preliminary mapping* of a *downsampled* file and some analysis programs. Afterward, the actual mapping can be redone on the original files with the optimized parameters.
 
 ## Preliminary mapping
 
@@ -146,10 +149,10 @@ These information should usually come with your FASTQ files! If not, try to find
 >    > What is the mean value for the inner distance?
 >    {: .question}
 >
->    If you already have read the corresponding paper carefully you might know that the fragment size is ~200bp. With read lengths of 2x37bp an educated guess could also be `125` for the inner distance. It's up to you decision, which value you prefer...
+>    If you already have read the corresponding paper carefully you might know that the fragment size is ~200bp. With read lengths of 2x37bp an educated guess could also be `125` for the inner distance. It's up to your decision, which value you prefer...
 >
 > 5. **Infer Experiment** :wrench:: Run **Infer Experiment** with the same files
-> 6. Check the results and search the tool's documentation for help on the meaning.
+> 6. Check the results and search the tool's documentation for help on the meaning
 {: .hands_on}
 
 As it is sometimes quite difficult to find out which settings correspond to those of other programs, the following table might be helpful to identify the library type:
@@ -170,7 +173,7 @@ With the sequencing library parameters, the full RNA sequences can be mapped on 
 >
 > 1. **TopHat** :wrench:: Run **TopHat** with the full parameter set to get the best mapping results:
 >    - "Paired-end (as individual datasets)" instead of "Single-end"
->    - "Mean Inner Distance" to "112" (or "125"?)
+>    - "Mean Inner Distance" to "200"
 >    - "Drosophila melanogaster: dm3" as reference genome
 >    - "Full parameter list" for "TopHat settings to use"
 >    - "FR First Strand" as "Library type"
@@ -188,16 +191,16 @@ With the sequencing library parameters, the full RNA sequences can be mapped on 
 >    - `Drosophila_melanogaster.BDGP5.78.gtf` as Gene Model Annotations (to enable transcriptome alignment)
 >    - "Yes (--coverage-search)" to use coverage-based search for junctions
 >
->        The TopHat algorithm splits reads into segments to map the reads across splice junctions. Coverage-based search for junctions increases the sensitivity
+>        The TopHat algorithm splits reads into segments to map the reads across splice junctions. Coverage-based search for junctions increases the sensitivity.
 {: .hands_on}
 
-**TopHat** generated a BAM file with the mapped reads and three BED files containing splice junctions, insertions and deletions.
+**TopHat** generates a BAM file with the mapped reads and three BED files containing splice junctions, insertions and deletions.
 
 The mapping exercise worked for you? Great! :tada:
 
 ## Inspection of TopHat results
 
-However, the datasets are too small to get you a good impression of how real data looks like. So we run TopHat for you on a real dataset. We extract only the reads mapped to Chromosome 4 of *Drosophila*.
+However, the datasets are too small to give you a good impression of how real data looks like. So we run TopHat for you on a real dataset. We extract only the reads mapped to Chromosome 4 of *Drosophila*.
 
 > ### :pencil2: Hands-on:
 >
@@ -229,8 +232,8 @@ However, the datasets are too small to get you a good impression of how real dat
 >    >
 >    > - Which information does the `GSM461177_untreat_paired_junctions_chr4.bed` BED files contain?
 >    > - How is this information represented in IGV?
->    > - How many reads are mapped in "JUNC00012240"?
->    > - And how many are mapped over "JUNC00012240"? What do these reads represent?
+>    > - How many reads are mapped in "JUNC00013368" visible when we zoom on `chr4:568,476-571,814`?
+>    > - And how many are mapped over "JUNC00013369"? What do these reads represent?
 >    {: .question}
 >
 >    > ### :question: Question
@@ -244,7 +247,7 @@ However, the datasets are too small to get you a good impression of how real dat
 >
 >    > ### :bulb: Tip: Creation of a Sashimi plot
 >    >
->    > * Right click on the bam file
+>    > * Right click on the BAM file
 >    > * Select **Sashimi Plot** from the context menu
 >    {: .tip}
 >
@@ -252,7 +255,7 @@ However, the datasets are too small to get you a good impression of how real dat
 >
 >    > ### :question: Question
 >    >
->    > - What do the numbered line represent?
+>    > - What does the numbered line represent?
 >    > - And the number on these lines?
 >    {: .question}
 >
@@ -271,9 +274,9 @@ To identify exons that are regulated by Pasilla gene, we need to identify genes 
 ## Count the number of reads per annotated gene
 
 To compare the expression of single genes between different conditions (*e.g.* with or without PS depletion), an essential step is the quantification
-of reads per gene. [**HTseq-count**](http://www-huber.embl.de/users/anders/HTSeq/doc/count.html) is one of the most popular tools for gene quantification.
+of reads per gene. [**HTSeq-count**](http://www-huber.embl.de/users/anders/HTSeq/doc/count.html) is one of the most popular tools for gene quantification.
 
-To quantify the number of reads mapped to a gene, an annotation of the genomic features as the genes is needed.
+To quantify the number of reads mapped to a gene, an annotation of the genomic features as it is in the genes is needed.
 
 > ### :pencil2: Hands-on:
 >
@@ -287,32 +290,32 @@ In case of paired-end reads, the alignments in BAM should be sorted by read name
 > 1. **Sort BAM dataset** :wrench:: Sort the paired-end BAM file by "Read names" with **Sort BAM dataset**
 {: .hands_on}
 
-In principle, the counting of reads overlapping with genomic features is a fairly simple task, but there are some details that need to be decided. **HTseq-count** offers 3 choices ("union", "intersection_strict" and "intersection_nonempty") to handle read mapping to multiple locations, reads overlapping introns, or reads that overlap more than one genomic feature:
+In principle, the counting of reads overlapping with genomic features is a fairly simple task, but there are some details that need to be decided. **HTSeq-count** offers 3 choices ("union", "intersection_strict" and "intersection_nonempty") to handle read mapping to multiple locations, reads overlapping introns, or reads that overlap more than one genomic feature:
 
 ![](../images/htseq_count.png)
 
-*[HTseq documentation](http://www-huber.embl.de/users/anders/HTSeq/doc/count.html)*
+*[HTSeq documentation](http://www-huber.embl.de/users/anders/HTSeq/doc/count.html)*
 
 The recommended mode is "union", which counts overlaps even if a read only shares parts of its sequence with a genomic feature and disregards reads that overlap more than one feature.
 
 > ### :pencil2: Hands-on:
 >
-> 1. **HTseq-count** :wrench:: Run **HTseq-count** on the sorted BAM file with
+> 1. **HTSeq-count** :wrench:: Run **HTSeq-count** on the sorted BAM file with
 >    - `Drosophila_melanogaster.BDGP5.78.gtf` as "GFF file"
->    - The "Union" mode
+>    - The "union" mode
 >    - A "Minimum alignment quality" of 10
 > 2. Inspect the result files
 >
 >    > ### :question: Question
 >    >
 >    > - How many reads could not have been assigned to any feature?
->    > - Which feature is the most found feature?
+>    > - Which feature is the most found one?
 >    {: .question}
 {: .hands_on}
 
 ## Analysis of the differential gene expression
 
-In previous section, we counted only reads that mapped to Chromosome 4 for only one sample. To be able to identify differentially gene expression induced by PS depletion, all datasets (3 treated and 4 untreated) must be analyzed with the similar process.
+In the previous section, we counted only reads that mapped to Chromosome 4 for only one sample. To be able to identify differentially gene expression induced by PS depletion, all datasets (3 treated and 4 untreated) must be analyzed with the similar procedure.
 
 You can export a workflow from the previous steps and rerun it on the 7 samples whose the raw sequences are available on [Zenodo](http://dx.doi.org/10.5281/zenodo.61771). For time saving, we run the previous steps for you and obtain 7 count files.
 
@@ -334,7 +337,7 @@ Either for within or inter-sample comparison, the counts need to be normalized. 
 - Estimate the magnitude of expression differences between the samples
 - Estimate the significance of expression differences between the samples
 
-For this expression is estimated from read counts and attempts are made to correct for variability in measurements using replicates that are absolutely essential accurate results. Indeed, [**DESeq2**](https://bioconductor.org/packages/release/bioc/html/DESeq2.html) is great tool for DGE analysis. It takes read counts produced by **HTseq-count** and apply size factor normalization:
+This expression analysis is estimated from read counts and attempts are made to correct for variability in measurements using replicates that are absolutely essential accurate results. Indeed, [**DESeq2**](https://bioconductor.org/packages/release/bioc/html/DESeq2.html) is great tool for DGE analysis. It takes read counts produced by **HTseq-count** and apply size factor normalization:
 
 - Computation for each gene of the geometric mean of read counts across all samples
 - Division of every gene count by the geometric mean
@@ -364,6 +367,7 @@ The first output of **DESeq2** is a tabular file. The columns are:
 1.	Gene Identifiers
 2.	Mean normalised counts, averaged over all samples from both conditions
 3.	Logarithm (to basis 2) of the fold change
+
 
     The log2 fold changes are based on primary factor level 1 vs. factor level 2. The order of factor levels is then important. For example, for the factor 'Condition' given in above table, DESeq2 computes fold changes of 'treated' samples against 'untreated', i.e. the values correspond to up or down regulations of genes in Treated samples.
 
@@ -408,6 +412,7 @@ In addition to the list of genes, **DESeq2** outputs a graphical summary of the 
 
     ![](../images/DeSeq2_histogram.png)
 
+
     The area shaded in blue indicates the subset of the tests that pass the filtering after Benjamini-Hochberg procedure, the area in khaki those that do not pass.
 
     > ### :question: Questions
@@ -420,11 +425,13 @@ In addition to the list of genes, **DESeq2** outputs a graphical summary of the 
 
     ![](../images/DESeq2_MA_plot.png)
 
+
     > ### :question: Questions
     >
     > - Are the expression changes symmetrically dispersed? Is it similar to previous observations?
     > - Why can we observe a shrinkage of fold changes for genes with low counts?
     {: .question}
+
 
 3. Principal Component Analysis ([PCA](https://en.wikipedia.org/wiki/Principal_component_analysis)) and the first two axes
 
@@ -438,9 +445,11 @@ In addition to the list of genes, **DESeq2** outputs a graphical summary of the 
     > - And the second axis?
     {: .question}
 
+
 4. Heatmap of sample-to-sample distance matrix: overview over similarities and dissimilarities between samples
 
     ![](../images/DESeq2_heatmap.png)
+
 
     > ### :question: Questions
     >
@@ -455,6 +464,7 @@ In addition to the list of genes, **DESeq2** outputs a graphical summary of the 
     ![](../images/DESeq2_dispersion.png)
 
     This dispersion plot is typical, with the final estimates shrunk from the gene-wise estimates towards the fitted estimates. Some gene-wise estimates are flagged as outliers and not shrunk towards the fitted value. The amount of shrinkage can be more or less than seen here, depending on the sample size, the number of coefficients, the row mean and the variability of the gene-wise estimates.
+
 
 For more information about **DESeq2** and its outputs, you can have a look at [**DESeq2** documentation](https://www.bioconductor.org/packages/release/bioc/manuals/DESeq2/man/DESeq2.pdf).
 
@@ -494,5 +504,6 @@ We use then DAVID to identify functional annotations of the up regulated genes a
 # Conclusion
 
 In this tutorial, we analyze real RNA sequencing data to extract useful information, such as which genes are up- or down-regulated by depletion of Pasilla gene and which genes are regulated by Pasilla gene. To answer these questions, we analyze RNA sequence datasets using a Reference based RNA-seq data analysis approach. This approach can be sum up with the following scheme:
+
 
 ![](../images/ref_based_workflow.png)
