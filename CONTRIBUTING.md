@@ -116,7 +116,15 @@ The `docker` image must also integrate a Galaxy tour from the [`galaxy-tours` re
 
 # How do I add new content?
 
-Most of the content is written in markdown with some metadata (or variables) stored in YAML. To generate the website, we are using [Jekyll](http://jekyllrb.com/) and its templating system. So if you want to visualise locally how the website will look like, you need to run a local Jekyll server. We help you to do that with the [Makefile](Makefile):
+Most of the content is written in markdown with some metadata (or variables) stored in YAML. To generate the website, we are using [Jekyll](http://jekyllrb.com/) and its templating system. 
+
+So if you want to visualise locally how the website will look like, you need to run a local Jekyll server. So, Jekyll must be installed using [RubyGems](https://rubygems.org/pages/download):
+
+```
+$ make install
+```
+
+To run a local Jekyll server and visualize the changes, launch using the [Makefile](Makefile):
 
 ```
 $ make serve
@@ -126,7 +134,7 @@ You can then visualize locally ([http://localhost:4000/](http://localhost:4000/)
 
 ## How do I add a new topic?
 
-1. Add a `yml` file into the `data` directory similar to the one for [`RNA-Seq`](data/RNA-Seq.yml) and fill it with meta information on the topic
+1. Add a `yml` file into the `metadata` directory similar to the one for [`RNA-Seq`](metadata/RNA-Seq.yml) and fill it with meta information on the topic
     - `name`: name of the topic (same name as the `yml` file and the directory)
     - `title`: title of the topic
     - `type`: targeted users (`"use"` or `""`) 
@@ -164,7 +172,7 @@ You can then visualize locally ([http://localhost:4000/](http://localhost:4000/)
 
 ## How do I add a new tutorial?
 
-1. Add the metadata about the tutorial in `material` section in the `yml` file of the related topic that is in `data` directory
+1. Add the metadata about the tutorial in `material` section in the `yml` file of the related topic that is in `metadata` directory
     - `title`: title of the tutorial
     - `type: "tutorial"`
     - `name`: name of the tutorial (name of the subdirectory where the files related to the tutorial will be stored)
@@ -186,11 +194,11 @@ You can then visualize locally ([http://localhost:4000/](http://localhost:4000/)
 
     > Check out [how to fill it](#how-do-i-fill-a-tutorial-hands-on)
 
-3. Add yourself as contributor for the topic in the `yml` file of the related topic that is in `data` directory
+3. Add yourself as contributor for the topic in the `yml` file of the related topic that is in `metadata` directory
 
 ## How do I fill a tutorial hands-on?
 
-1. Check that the metadata about the tutorial in the `yml` file in `data` directory are filled and correct
+1. Check that the metadata about the tutorial in the `yml` file in `metadata` directory are filled and correct
 
     They are used to generate the header and the footer of the tutorials. 
 
@@ -271,11 +279,11 @@ To improve the learning experience, we strongly recommend you to:
 
 The input data required for the tutorials must be upload on [Zenodo](https://zenodo.org/) to obtain a dedicated DOI (in the [Galaxy training network community](https://zenodo.org/communities/galaxy-training/?page=1&size=20)).
 
-You can also add yourself as contributor for the topic in the `yml` file of the related topic that is in `data` directory
+You can also add yourself as contributor for the topic in the `yml` file of the related topic that is in `metadata` directory
 
 ## How do I fill introduction slides? 
 
-Before starting filling the slides, you have to add the metadata about the tutorial in `material` section in the `yml` file of the related topic that is in `data` directory:
+Before starting filling the slides, you have to add the metadata about the tutorial in `material` section in the `yml` file of the related topic that is in `metadata` directory:
 
 - `title`
 - `type: "introduction"`
@@ -285,7 +293,7 @@ The introduction slides must be in the `index.html` file in `slides` directory f
 
 ```
 ---
-layout: base_slides
+layout: introduction_slides
 topic_name: RNA-Seq
 logo: "GTN"
 ---
@@ -308,7 +316,7 @@ The first slides (with the title, the requirements,...) are automatically genera
 They are then rendered with [`Remark`](https://remarkjs.com/). Template for the `html` files can be found in
 [`templates/slides/`](templates/slides/). Once the slides are on the `master` branch, they will be available at `http://bgruening.github.io/training-material/<topic>/slides/<slide_name>.html`
 
-You can also add yourself as contributor for the topic in the `yml` file of the related topic that is in `data` directory
+You can also add yourself as contributor for the topic in the `yml` file of the related topic that is in `metadata` directory
 
 # How is the training material maintained?
 

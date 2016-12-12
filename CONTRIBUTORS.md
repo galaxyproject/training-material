@@ -14,6 +14,7 @@ The following individuals have contributed to this training material:
 * Gildas Le Corguillé (@lecorguille)
 * Thomas Manke (@thomasmanke)
 * Torsten Houwaart
+* Markus Wolfien (@mwolfien)
 * Jennifer Del Giudice (@jennydg)
 * Yvan Le Bras (@yvanlebras)
 

@@ -1,5 +1,5 @@
 ---
-layout: base_slides
+layout: introduction_slides
 topic_name: RNA-Seq
 logo: "GTN"
 ---
@@ -8,15 +8,29 @@ logo: "GTN"
 
 ---
 
-### Where my data comes from?
+### RNA sequencing
 
-![](../images/ecker_2012.jpg)
+RNA 
 
-<small>[*Ecker et al, Nature, 2012*](http://www.nature.com/nature/journal/v489/n7414/full/489052a.html)</small>
+- Transcribed form of the DNA 
+- Active state of the DNA
+
+RNA sequencing 
+
+- RNA quantification at single base resolution
+- Cost efficient analysis of the whole transcriptome in a high-throuput manner
 
 ---
 
-### RNA sequencing
+### Where my data comes from?
+
+![](../images/RNA_seq_zang2016.png)
+
+<small>[*Zang and Mortazavi, Nature, 2012*](http://www.nature.com/ni/journal/v13/n9/full/ni.2407.html)</small>
+
+---
+
+### Principle of RNA sequencing
 
 ![](../images/korf_2013.jpg)
 
@@ -24,7 +38,7 @@ logo: "GTN"
 
 ---
 
-### RNA sequencing
+### Principle of RNA sequencing <br>Quantification
 
 ![](../images/pepke_2009.jpg)
 
@@ -32,12 +46,129 @@ logo: "GTN"
 
 ---
 
+### Challenges of RNA sequencing
+                            
+- Different origin for the sample RNA and the reference genome
+- Presence of incompletely processed RNAs or transcriptional noise
+- Sequencing biases (*e.g.* PCR library preparation)
+
+---
+
+### Benefits of RNA sequencing
+
+![](../images/wordcloud.png)
+
+---
+
 ## How to analyze RNA seq data?
 
 ---
 
-### RNA-seq Workflows and Tools
+ ### FASTQ-files
 
-![](../images/turner_2013.png)
+```bash
+@4:1:4888:1039:Y 
+TGAACGCTGTTTCCAAGAAATGCTGGAAGAGGTCGATGGGTGTTATCTCTG
++ 
+IIIHIIIIIIIIIIIIIIIIIIIIIIIIIH!CBCBBBB@=B@A?1@==<@=
+```
+                            
+- 50+ million reads per data set (~15 GB data for one human fastq-file)
+- Unique identifier per read
+- Nucleotide sequence with single base resolution
+- Quality score for each base
 
-<small>[*Turner, 2013*](https://figshare.com/articles/RNA_seq_Workflows_and_Tools/662782)</small>
+---
+
+### Overview of the Data Processing
+
+![](../images/RNA_seq_processing.png)
+
+- No available standardized workflow 
+- Multiple possible best practices for every dataset
+
+---
+
+### Data Pre-processing
+
+*See [NGS Quality control](../../NGS-QC/slides/index.html)*
+
+1. Adapter clipping to trim the sequencing adapters 
+2. Quality trimming to remove wrongly called and low quality bases
+
+---
+
+### Genomic Alignment<br>3 strategies
+
+![](../images/RNA_seq_conesa2016.png)
+
+<small>
+[*Conesa et al, Genome Biol, 2016*](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-016-0881-8)
+</small>
+
+---
+
+### Differential Expression Analysis
+
+![Account for variability of gene expression across biological replicates with the help of gene counts](../images/RNA_seq_DEscheme.png)
+ 
+<tiny>Account for variability of gene expression across biological replicates<br>with the help of gene counts
+</tiny>
+
+---
+
+### Differential Expression Analysis<br>Within-sample Normalization
+
+Neccessary to correct for feature length and library-size effects
+
+- [*FPKM/RPKM*](http://www.nature.com/nmeth/journal/v5/n7/abs/nmeth.1226.html) (Cufflinks/Cuffdiff)
+- [*TMM*](https://genomebiology.biomedcentral.com/articles/10.1186/gb-2010-11-3-r25) (edgeR)
+- [*DESeq2*](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-014-0550-8) (DESeq2)
+							
+---
+
+### Differential Expression Analysis<br>Number of Replicates for DE Genes
+
+![](../images/RNA_seq_numreplicates.png)
+
+
+<small> [*Conesa et al, Genome Biol, 2016*](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-016-0881-8)</small>
+
+---
+
+### Detection of Alternative Splicing
+
+![](../images/RNA_seq_splicescheme.png)
+
+<small>
+[*Hooper, Hum. Genomics, 2014*](http://humgenomics.biomedcentral.com/articles/10.1186/1479-7364-8-3)
+</small>
+
+---
+
+### Visualization
+
+- Integrative Genomics Viewer ([*IGV*](http://bib.oxfordjournals.org/content/14/2/178.full?keytype=ref&%2520ijkey=qTgjFwbRBAzRZWC)) 
+
+    Visualization of the aligned BAM files
+
+- [*Sashimi plots*](http://bioinformatics.oxfordjournals.org/content/early/2015/01/21/bioinformatics.btv034)
+    
+    Quantitative visualization of read coverage along exons and splice junctions
+
+- [*CummeRbund*](http://compbio.mit.edu/cummeRbund/manual_2_0.html)
+
+    Visualization package for Cufflinks high-throughput sequencing data
+
+---
+
+### Where do I find data?
+
+- Sequencing data you prepared yourself or you obtained from your colleques
+- Sequence Read Archive - [*SRA*](https://www.ncbi.nlm.nih.gov/sra)
+- Gene Expression Omnibus - [*GEO*](https://www.ncbi.nlm.nih.gov/geo/)
+- Ensembl - [*e!*](http://www.ensembl.org/info/website/tutorials/sequence.html)
+- The Cancer Genome Atlas - [*TCGA*](https://tcga-data.nci.nih.gov/docs/publications/tcga/?)
+- ... our tutorial
+
+
