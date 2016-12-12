@@ -14,7 +14,7 @@ In a reference based RNA-seq data analysis, the reads are aligned (or mapped) ag
 
 > ### Agenda
 >
-> In this tutorial, we will analyze the data with:
+> In this tutorial, we will deal with:
 >
 > 1. [Pretreatments](#pretreatments)
 > 2. [Mapping](#mapping)
@@ -34,7 +34,7 @@ We will look at the 7 first samples:
 
 Each sample constitutes a separate biological replicate of the corresponding condition (treated or untreated). Moreover, two of the treated and two of the untreated samples are from a paired-end sequencing assay, while the remaining samples are from a single-end sequencing experiment.
 
-We extracted sequences from the SRA files to build FASTQ files.
+We extracted sequences from the sequence read archive (SRA) files to build FASTQ files.
 
 > ### :pencil2: Hands-on: Data upload
 >
@@ -50,11 +50,12 @@ We extracted sequences from the SRA files to build FASTQ files.
 >    > * Press **Start**    
 >    {: .tip}
 >
->    > ### :bulb: Tip: Changing the file type `fastq` to `fastqsanger` once data is in history
+>    > ### :bulb: Tip: Changing the file type `fastq` to `fastqsanger` once the data file is in your history
 >    >
 >    > * Click on the pencil button displayed in your dataset in the history
 >    > * Choose **Datatype** on the top
 >    > * Select `fastqsanger`
+>    > * press **save**
 >    {: .tip}
 >
 >    > ### :nut_and_bolt: Comments
@@ -64,7 +65,7 @@ We extracted sequences from the SRA files to build FASTQ files.
 > As default, Galaxy takes the link as name.
 {: .hands_on}
 
-Both files contain the first 100.000 paired-end reads of one sample. The sequences are raw sequences from sequencing. They needs to be controlled for their quality.
+Both files contain the first 100.000 paired-end reads of one sample. The sequences are raw sequences from sequencing. They need to be controlled for their quality.
 
 ## Quality control
 
@@ -80,7 +81,7 @@ For quality control, we use similar tools as described in [NGS-QC tutorial](http
 >    > - Is there anything what you find striking?
 >    {: .question}
 >
-> 2. **Trim Galore** :wrench:: Trim low quality bases from the 3' end using on both paired-end datasets
+> 2. **Trim Galore** :wrench:: Trim low quality bases from the 3' end on both paired-end datasets
 > 3. **FastQC** :wrench:: Re-run and inspect the differences
 {: .hands_on}
 
@@ -92,7 +93,7 @@ To make sense of the reads, their positions within *Drosophila melanogaster* gen
 
 > ### :nut_and_bolt: Comment
 >
-> Want to learning more about mapping? Follow our [training](http://bgruening.github.io/training-material/NGS-mapping/slides)
+> Do you want to learn more about mapping? Follow our [training](http://bgruening.github.io/training-material/NGS-mapping/slides)
 > {: .comment}
 
 Because in the case of a eukaryotic transcriptome, most reads originate from processed mRNAs lacking exons, they cannot be simply mapped back to the genome. Instead they can be separated into two categories:
@@ -200,7 +201,7 @@ The mapping exercise worked for you? Great! :tada:
 
 ## Inspection of TopHat results
 
-However, the datasets are too small to give you a good impression of how real data looks like. So we run TopHat for you on a real dataset. We extract only the reads mapped to Chromosome 4 of *Drosophila*.
+However, the datasets are too small to give you a good impression of how real data looks like. So we have run TopHat for you on a real dataset. We extracted only the reads mapped to chromosome 4 of *Drosophila*.
 
 > ### :pencil2: Hands-on:
 >
@@ -209,7 +210,7 @@ However, the datasets are too small to give you a good impression of how real da
 >    - [`GSM461177_untreat_paired_deletions_chr4.bed`](https://zenodo.org/record/61771/files/GSM461177_untreat_paired_deletions_chr4.bed)
 >    - [`GSM461177_untreat_paired_insertions_chr4.bed`](https://zenodo.org/record/61771/files/GSM461177_untreat_paired_insertions_chr4.bed)
 >    - [`GSM461177_untreat_paired_junctions_chr4.bed`](https://zenodo.org/record/61771/files/GSM461177_untreat_paired_junctions_chr4.bed)
-> 2. **IGV** :wrench:: Visualize this BAM file and the three BED files, particularly the region on Chromosome 4 between 560 kb to 600 kb (`chr4:560,000-600,000`)
+> 2. **IGV** :wrench:: Visualize this BAM file and the three BED files, particularly the region on chromosome 4 between 560 kb to 600 kb (`chr4:560,000-600,000`)
 >
 >    > ### :nut_and_bolt: Comment
 >    > - Change the data type from "tabular" to "bed"
@@ -256,7 +257,7 @@ However, the datasets are too small to give you a good impression of how real da
 >    > ### :question: Question
 >    >
 >    > - What does the numbered line represent?
->    > - And the number on these lines?
+>    > - What does the number means?
 >    {: .question}
 >
 >    > ### :nut_and_bolt: Comment
@@ -264,12 +265,12 @@ However, the datasets are too small to give you a good impression of how real da
 >    > Check [IGV documentation on Sashimi plots](http://software.broadinstitute.org/software/igv/Sashimi) to find some clues
 >    {: .comment}
 >
-> 4. **IGV** :wrench:: Look around to find other regions with in interesting junctions, *e.g.* `chr4:870,000-940,000`
+> 4. **IGV** :wrench:: Look around to find other regions with interesting junctions, *e.g.* `chr4:870,000-940,000`
 {: .hands_on}
 
-# Analysis of the differential expression
+# Analysis of the differential gene expression
 
-To identify exons that are regulated by Pasilla gene, we need to identify genes and exons which are differentially expressed between samples with PS gene depletion and control samples.
+To identify exons that are regulated by the Pasilla gene, we need to identify genes and exons which are differentially expressed between samples with PS gene depletion and control samples.
 
 ## Count the number of reads per annotated gene
 
@@ -301,7 +302,7 @@ The recommended mode is "union", which counts overlaps even if a read only share
 > ### :pencil2: Hands-on:
 >
 > 1. **HTSeq-count** :wrench:: Run **HTSeq-count** on the sorted BAM file with
->    - `Drosophila_melanogaster.BDGP5.78.gtf` as "GFF file"
+>    - `Drosophila_melanogaster.BDGP5.78.gtf` as "GFF file". The file is in GTF format which is a specific instance of the GFF version 2 format.
 >    - The "union" mode
 >    - A "Minimum alignment quality" of 10
 > 2. Inspect the result files
@@ -315,7 +316,7 @@ The recommended mode is "union", which counts overlaps even if a read only share
 
 ## Analysis of the differential gene expression
 
-In the previous section, we counted only reads that mapped to Chromosome 4 for only one sample. To be able to identify differentially gene expression induced by PS depletion, all datasets (3 treated and 4 untreated) must be analyzed with the similar procedure.
+In the previous section, we counted only reads that mapped to chromosome 4 for only one sample. To be able to identify differential gene expression induced by PS depletion, all datasets (3 treated and 4 untreated) must be analyzed with the similar procedure.
 
 You can export a workflow from the previous steps and rerun it on the 7 samples whose the raw sequences are available on [Zenodo](http://dx.doi.org/10.5281/zenodo.61771). For time saving, we run the previous steps for you and obtain 7 count files.
 
@@ -325,25 +326,25 @@ You can export a workflow from the previous steps and rerun it on the 7 samples 
 > 2. Import the seven count files from [Zenodo](http://dx.doi.org/10.5281/zenodo.61771)
 {: .hands_on}
 
-These files contains for each gene the number of sequences reads mapped to it. We could compare directly the files and then having the differential gene expression. But the number of sequenced reads mapped to a gene depends on:
+These files contain for each gene the number of reads mapped to it. We could compare directly the files and then having the differential gene expression. But the number of sequenced reads mapped to a gene depends on:
 
 - Its own expression level
 - Its length
 - The sequencing depth
 - The expression of all other genes within the sample
 
-Either for within or inter-sample comparison, the counts need to be normalized. We can then use the Differential Gene Expression (DGE) analysis, whose two basic tasks are:
+Either for within or for inter-sample comparison, the counts need to be normalized. We can then use the Differential Gene Expression (DGE) analysis, whose two basic tasks are:
 
 - Estimate the magnitude of expression differences between the samples
 - Estimate the significance of expression differences between the samples
 
-This expression analysis is estimated from read counts and attempts are made to correct for variability in measurements using replicates that are absolutely essential accurate results. Indeed, [**DESeq2**](https://bioconductor.org/packages/release/bioc/html/DESeq2.html) is great tool for DGE analysis. It takes read counts produced by **HTseq-count** and apply size factor normalization:
+This expression analysis is estimated from read counts and attempts are made to correct for variability in measurements using replicates that are absolutely essential accurate results. For your own analysis, we advice you to use at least 3, better 5 biological replicates. Indeed, [**DESeq2**](https://bioconductor.org/packages/release/bioc/html/DESeq2.html) is a great tool for DGE analysis. It takes read counts produced by **HTseq-count** and applies size factor normalization:
 
 - Computation for each gene of the geometric mean of read counts across all samples
 - Division of every gene count by the geometric mean
 - Use of the median of these ratios as sample's size factor for normalization
 
-Multiple factors can then been incorporated in the the analysis. In our example, we have samples with two varying factors:
+Multiple factors can then be incorporated in the analysis. In our example, we have samples with two varying factors:
 
 - Condition (either treated or untreated)
 - Sequencing type (paired-end or single-end)
@@ -364,14 +365,14 @@ A multi-factor analysis allows us to assess the effect of the treatment taking a
 
 The first output of **DESeq2** is a tabular file. The columns are:
 
-1.	Gene Identifiers
-2.	Mean normalised counts, averaged over all samples from both conditions
+1.	Gene identifiers
+2.	Mean normalized counts, averaged over all samples from both conditions
 3.	Logarithm (to basis 2) of the fold change
 
 
-    The log2 fold changes are based on primary factor level 1 vs. factor level 2. The order of factor levels is then important. For example, for the factor 'Condition' given in above table, DESeq2 computes fold changes of 'treated' samples against 'untreated', i.e. the values correspond to up or down regulations of genes in Treated samples.
+    The log2 fold changes are based on primary factor level 1 vs. factor level 2. The order of factor levels is then important. For example, for the factor 'Condition' given in above table, DESeq2 computes fold changes of 'treated' samples against 'untreated', i.e. the values correspond to up- or downregulations of genes in treated samples.
 
-4.	standard error estimate for the log2 fold change estimate
+4.	Standard error estimate for the log2 fold change estimate
 5.	[Wald](https://en.wikipedia.org/wiki/Wald_test) statistic
 6.	*p*-value for the statistical significance of this change
 7.	*p*-value adjusted for multiple testing with the Benjamini-Hochberg procedure which controls false discovery rate ([FDR](https://en.wikipedia.org/wiki/False_discovery_rate))
@@ -382,27 +383,27 @@ The first output of **DESeq2** is a tabular file. The columns are:
 >
 >    > ### :question: Question
 >    >
->    > How many genes have a significant change in gene expression between conditions?
+>    > How many genes have a significant change in gene expression between these conditions?
 >    {: .question}
 >
 >    > ### :nut_and_bolt: Comment
 >    >
->    > The file with the independent filtering results can be used for further downstream analysis as it excludes genes with only few read counts as these genes will not be called as significantly differentially expressed.
+>    > The file with the independent filtered results can be used for further downstream analysis as it excludes genes with only few read counts as these genes will not be considered as significantly differentially expressed.
 >    {: .comment}
 >
-> 2. **Filter** :wrench:: Extract genes that are significantly up regulated and those down regulated in treated samples
+> 2. **Filter** :wrench:: Extract genes that are significantly upregulated and those downregulated in treated samples
 >
 >    > ### :question: Question
 >    >
->    > Is there more up regulated or down regulated genes in treated samples?
+>    > Are there more upregulated or downregulated genes in the treated samples?
 >    {: .question}
 >
-> 3. **Summary Statistics for any numerical column** :wrench: and **Histogram of a numeric column** :wrench:: Build the log2 fold change distribution of up regulated and down regulated genes
+> 3. **Summary Statistics for any numerical column** :wrench: and **Histogram of a numeric column** :wrench:: Build the log2 fold change distribution of upregulated and downregulated genes
 >
 >    > ### :question: Questions
 >    >
->    > - Are up regulated genes more expressed than the down regulated genes?
->    > -  Are the distribution similar?
+>    > - Are upregulated genes more expressed than the downregulated genes?
+>    > - Is the distribution similar?
 >    {: .question}
 {: .hands_on}
 
@@ -413,7 +414,7 @@ In addition to the list of genes, **DESeq2** outputs a graphical summary of the 
     ![](../images/DeSeq2_histogram.png)
 
 
-    The area shaded in blue indicates the subset of the tests that pass the filtering after Benjamini-Hochberg procedure, the area in khaki those that do not pass.
+    The area shaded in blue indicates the subset of the tests that passes the filtering after Benjamini-Hochberg procedure, the area in khaki those that did not pass.
 
     > ### :question: Questions
     >
@@ -421,7 +422,7 @@ In addition to the list of genes, **DESeq2** outputs a graphical summary of the 
     > - Does it improve the *p*-value distribution?
     {: .question}
 
-2. [MA plot](https://en.wikipedia.org/wiki/MA_plot): global view of the relationship between the expression change between conditions (log ratios, M), the average expression strength of the genes (average mean, A) and the ability of the algorithm to detect differential gene expression: genes that pass the significance threshold (adjusted p-value < 0.1) are colored in red
+2. [MA plot](https://en.wikipedia.org/wiki/MA_plot): global view of the relationship between the expression change of conditions (log ratios, M), the average expression strength of the genes (average mean, A), and the ability of the algorithm to detect differential gene expression. The genes that passed the significance threshold (adjusted p-value < 0.1) are colored in red.
 
     ![](../images/DESeq2_MA_plot.png)
 
@@ -453,8 +454,8 @@ In addition to the list of genes, **DESeq2** outputs a graphical summary of the 
 
     > ### :question: Questions
     >
-    > - How are grouped the samples?
-    > - Which samples are most similar?
+    > - How are the samples grouped?
+    > - Which samples are the most similar?
     {: .question}
 
 5. Dispersion estimates: gene-wise estimates
@@ -470,15 +471,15 @@ For more information about **DESeq2** and its outputs, you can have a look at [*
 
 ## Analysis of the functional enrichment among differentially expressed genes
 
-We have extracted genes that are differentially expressed in treated (with PS gene depletion) samples compared to untreated samples. We would like to know functional enrichment among the differentially expressed genes.
+We have extracted genes that are differentially expressed in treated (with PS gene depletion) samples compared to untreated samples. We would like to know the functional enrichment among the differentially expressed genes.
 
-The Database for Annotation, Visualization and Integrated Discovery ([DAVID](https://david.ncifcrf.gov/)) provides a comprehensive set of functional annotation tools for investigators to understand biological meaning behind large list of genes.
+The Database for Annotation, Visualization and Integrated Discovery ([DAVID](https://david.ncifcrf.gov/)) provides a comprehensive set of functional annotation tools for investigators to understand the biological meaning behind large lists of genes.
 
-We use then DAVID to identify functional annotations of the up regulated genes and the down regulated genes.
+We use then DAVID to identify functional annotations of the upregulated genes and the downregulated genes.
 
 > ### :pencil2: Hands-on:
 >
-> 1. **Select first lines from a dataset** :wrench:: Extract the first 300 lines of the 2 datasets generated previously (up regulated genes and down regulated genes)
+> 1. **Select first lines from a dataset** :wrench:: Extract the first 300 lines of the 2 datasets generated previously (upregulated genes and downregulated genes)
 > 2. **DAVID** :wrench:: Run **DAVID** on these files with
 >     - First column as "Column with identifiers"
 >     - "FLYBASE_GENE_ID" as "Identifier type"
@@ -503,7 +504,7 @@ We use then DAVID to identify functional annotations of the up regulated genes a
 
 # Conclusion
 
-In this tutorial, we analyze real RNA sequencing data to extract useful information, such as which genes are up- or down-regulated by depletion of Pasilla gene and which genes are regulated by Pasilla gene. To answer these questions, we analyze RNA sequence datasets using a Reference based RNA-seq data analysis approach. This approach can be sum up with the following scheme:
+In this tutorial, we have analyzed real RNA sequencing data to extract useful information, such as which genes are up- or downregulated by depletion of the Pasilla gene and which genes are regulated by the Pasilla gene. To answer these questions, we analyzed RNA sequence datasets using a reference-based RNA-seq data analysis approach. This approach can be sum up with the following scheme:
 
 
 ![](../images/ref_based_workflow.png)
