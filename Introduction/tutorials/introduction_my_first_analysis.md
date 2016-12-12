@@ -77,6 +77,7 @@ Now we are ready to do some analysis, but first we will need to get some data in
  ![](../images/101_02.png)
 
  Make sure that your settings are exactly the same as shown on the screen:
+ 
  - **clade** should be set to `Mammal`
  - **genome** should be set to `Human`
  - **assembly** should be set to `Feb. 2009 (GRCh37/hg19)`
