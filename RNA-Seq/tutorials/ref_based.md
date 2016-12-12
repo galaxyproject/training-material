@@ -91,8 +91,8 @@ For quality control, we use similar tools as described in [NGS-QC tutorial](http
 
     :question: What is the read length? Is there anything what you find striking?
 
-2. **Trim Galore** :wrench:: Trim low quality bases from the 3' end using on both paired-end datasets.
-3. **FastQC** :wrench:: Re-run and inspect the differences.
+2. **Trim Galore** :wrench:: Trim low quality bases from the 3' end using on both paired-end datasets
+3. **FastQC** :wrench:: Re-run and inspect the differences
 
 As the genome of *Drosophila melanogaster* is known, we can use this information and map the sequences on this genome to identify the effects of Pasilla gene depletion on splicing events.
 
@@ -153,7 +153,7 @@ These information should usually come with your FASTQ files, ask your sequencing
     If you already have read the corresponding paper carefully you might know that the fragment size is ~200bp. With read lengths of 2x37bp, an educated guess for the inner distance could be `125`. Does this correspond with the calculated value?
 
 5. **Infer Experiment** :wrench:: Run **Infer Experiment** with the same files
-6. Check the results and search the tool's documentation for help on the meaning.
+6. Check the results and search the tool's documentation for help on the meaning
 
 As it is sometimes quite difficult to find out which settings correspond to those of other programs, the following table might be helpful to identify the library type:
 
@@ -205,7 +205,7 @@ However, the datasets are too small to give you a good impression of how real da
     - [`GSM461177_untreat_paired_deletions_chr4.bed`](https://zenodo.org/record/61771/files/GSM461177_untreat_paired_deletions_chr4.bed)
     - [`GSM461177_untreat_paired_insertions_chr4.bed`](https://zenodo.org/record/61771/files/GSM461177_untreat_paired_insertions_chr4.bed)
     - [`GSM461177_untreat_paired_junctions_chr4.bed`](https://zenodo.org/record/61771/files/GSM461177_untreat_paired_junctions_chr4.bed)
-2. **IGV** :wrench:: Visualize this BAM file and the three BED files, particularly the region on Chromosome 4 between 560 kb to 600 kb (`chr4:560,000-600,000`).
+2. **IGV** :wrench:: Visualize this BAM file and the three BED files, particularly the region on Chromosome 4 between 560 kb to 600 kb (`chr4:560,000-600,000`)
 
     > :+1: **Change the data type from "tabular" to "bed"**
     <br>
@@ -214,7 +214,7 @@ However, the datasets are too small to give you a good impression of how real da
 
     ![](../images/tophat_bam_output_color_reads.png)
 
-    > Check [IGV documentation](http://software.broadinstitute.org/software/igv/AlignmentData) to find some clues.
+    > Check [IGV documentation](http://software.broadinstitute.org/software/igv/AlignmentData) to find some clues
 
     :question: Which information does the `GSM461177_untreat_paired_junctions_chr4.bed` BED files contain? How is this information represented in IGV? What do these reads represent?
 
@@ -231,7 +231,7 @@ However, the datasets are too small to give you a good impression of how real da
 
     :question: What does the numbered line represent? And the number on these lines?
 
-    > Check [IGV documentation on Sashimi plots](http://software.broadinstitute.org/software/igv/Sashimi) to find some clues.
+    > Check [IGV documentation on Sashimi plots](http://software.broadinstitute.org/software/igv/Sashimi) to find some clues
 
 4. **IGV** :wrench:: Look around to find other regions with in interesting junctions, *e.g.* `chr4:870,000-940,000`
 
@@ -398,7 +398,7 @@ We use then DAVID to assign functional annotations to the upregulated and downre
     - First column as "Column with identifiers"
     - "FLYBASE_GENE_ID" as "Identifier type"
 
-    The output of the **DAVID** tool is a HTML file with a link to the DAVID website.
+    The output of the **DAVID** tool is a HTML file with a link to the DAVID website
 
 3. Inspect the Functional Annotation Chart
 
