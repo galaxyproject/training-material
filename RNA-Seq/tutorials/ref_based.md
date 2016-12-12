@@ -55,7 +55,7 @@ We extracted sequences from the sequence read archive (SRA) files to build FASTQ
 >    > * Click on the pencil button displayed in your dataset in the history
 >    > * Choose **Datatype** on the top
 >    > * Select `fastqsanger`
->    > * press **save**
+>    > * Press **save**
 >    {: .tip}
 >
 >    > ### :nut_and_bolt: Comments
@@ -143,7 +143,7 @@ These information should usually come with your FASTQ files, ask your sequencing
 >    - "Drosophila melanogaster: dm3" as reference genome
 >    - the defaults for *strandedness* and *insert size*
 >
-> 3. **Inner Distance** <i class="fa fa-cog"></i>: Run **Inner Distance** on the BAM file using the `Drosophila_melanogaster.BDGP5.78.gtf` reference gene model to estimate the *inner distance*
+> 3. **Inner Distance** <i class="fa fa-cog"></i>: Run **Inner Distance** on the BAM file using the imported `Drosophila_melanogaster.BDGP5.78.gtf` reference gene model to estimate the *inner distance*
 > 4. Inspect the resulting PDF
 >
 >    > ### :question: Question
@@ -302,7 +302,10 @@ The recommended mode is "union", which counts overlaps even if a read only share
 > ### :pencil2: Hands-on:
 >
 > 1. **HTSeq-count** :wrench:: Run **HTSeq-count** on the sorted BAM file with
->    - `Drosophila_melanogaster.BDGP5.78.gtf` as "GFF file". The file is in GTF format which is a specific instance of the GFF version 2 format.
+>    - `Drosophila_melanogaster.BDGP5.78.gtf` as "GFF file"
+>
+>       The file is in GTF format which is a specific instance of the GFF version 2 format.
+>
 >    - The "union" mode
 >    - A "Minimum alignment quality" of 10
 > 2. Inspect the result files
