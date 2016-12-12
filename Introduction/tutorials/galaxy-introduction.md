@@ -1,6 +1,6 @@
 ---
 layout: tutorial_hands_on
-topic_name: Galaxy Introduction
+topic_name: Introduction
 tutorial_name: galaxy-introduction
 ---
 
@@ -12,12 +12,10 @@ This practical aims to familiarize you with the Galaxy user interface. It will t
 >
 > In this tutorial, we will:
 >
-> - [Familiarize ourself with the basics of Galaxy](#pretreatments)
-> - [Learn how to obtain data from external sources](#data-upload)
-> - [Learn how to run tools](#analysis)
-> - [Learn how histories work](#galaxy-management)
-> - [Learn how to create a workflow](#converting-your-analysis-history-to-a-workflow)
-> - [Learn how to share your work](#share-your-work)
+> - [Obtain data from external sources](#data-upload)
+> - [Analyze the data](#analysis)
+> - [Manage histories and workflows](#galaxy-management)
+> - [Share the work](#share-your-work)
 {: .agenda}
 
 # Pretreatments
@@ -371,9 +369,8 @@ Now that we have built our workflow, let's use it on some different data. For ex
 > 2. We will need the list of exons again. We don't have to get this from UCSC again, we can just **copy** it from our previous history. The easiest way to do this is to go to the history overview (window icon at top of history pane). Here you can just drag and drop datasets from one history to another.
 >
 >    ![](../images/101_copydataset.png)
->
+> 
 > 3. We wanted to know something about the repetitive elements per exon. We get this data from UCSC.
->
 >    - **assembly** should be set to `Feb. 2009 (GRCh37/hg19)`
 >    - **group** parameter should be `Repeats`
 >    - **position** should be `chr22`
