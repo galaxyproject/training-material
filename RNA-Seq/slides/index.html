@@ -1,6 +1,5 @@
-<<<<<<< HEAD
 ---
-layout: base_slides
+layout: introduction_slides
 topic_name: RNA-Seq
 logo: "GTN"
 ---
@@ -10,12 +9,18 @@ logo: "GTN"
 ---
 
 ### RNA sequencing
-                            
-- RNA is the transcribed form of the DNA and represents its active state
-- Sequencing enables RNA quantification at single base resolution                           
+
+RNA 
+
+- Transcribed form of the DNA 
+- Active state of the DNA
+
+RNA sequencing 
+
+- RNA quantification at single base resolution
 - Cost efficient analysis of the whole transcriptome in a high-throuput manner
 
----                       
+---
 
 ### Where my data comes from?
 
@@ -25,7 +30,7 @@ logo: "GTN"
 
 ---
 
-### RNA sequencing - Principle
+### Principle of RNA sequencing
 
 ![](../images/korf_2013.jpg)
 
@@ -33,7 +38,7 @@ logo: "GTN"
 
 ---
 
-### RNA sequencing - Quantification
+### Principle of RNA sequencing <br>Quantification
 
 ![](../images/pepke_2009.jpg)
 
@@ -41,15 +46,15 @@ logo: "GTN"
 
 ---
 
-### RNA sequencing - Challanges
+### Challenges of RNA sequencing
                             
-- Sample RNA and the reference genome have a different origin
-- Incompletely processed RNAs or transcriptional noise
-- Biases in sequencing (e.g. PCR library preparation)
+- Different origin for the sample RNA and the reference genome
+- Presence of incompletely processed RNAs or transcriptional noise
+- Sequencing biases (*e.g.* PCR library preparation)
 
 ---
 
-### RNA sequencing - Benefits
+### Benefits of RNA sequencing
 
 ![](../images/wordcloud.png)
 
@@ -61,7 +66,7 @@ logo: "GTN"
 
  ### FASTQ-files
 
-```
+```bash
 @4:1:4888:1039:Y 
 TGAACGCTGTTTCCAAGAAATGCTGGAAGAGGTCGATGGGTGTTATCTCTG
 + 
@@ -75,34 +80,27 @@ IIIHIIIIIIIIIIIIIIIIIIIIIIIIIH!CBCBBBB@=B@A?1@==<@=
 
 ---
 
-### Data Processing - Overview
+### Overview of the Data Processing
 
 ![](../images/RNA_seq_processing.png)
 
-- Currently no standardized workflow available
-- Every dataset can have multiple best practices
+- No available standardized workflow 
+- Multiple possible best practices for every dataset
 
 ---
 
 ### Data Pre-processing
 
-- Adapter clipping to trim the sequencing adapters 
-- Quality trimming to remove wrongly called bases and those with a low quality
-- Please, see [NGS Quality control](../../NGS-QC/slides/index.html) for further information
+*See [NGS Quality control](../../NGS-QC/slides/index.html)*
+
+1. Adapter clipping to trim the sequencing adapters 
+2. Quality trimming to remove wrongly called and low quality bases
 
 ---
 
-### RNA-seq Workflows and Tools
+### Genomic Alignment<br>3 strategies
 
-![](../images/turner_2013.png)
-
-<small>[*Turner, 2013*](https://figshare.com/articles/RNA_seq_Workflows_and_Tools/662782)</small>
-
----
-
-### Genomic Alignment
-
-![](/images/RNA_seq_conesa2016.png)
+![](../images/RNA_seq_conesa2016.png)
 
 <small>
 [*Conesa et al, Genome Biol, 2016*](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-016-0881-8)
@@ -110,24 +108,26 @@ IIIHIIIIIIIIIIIIIIIIIIIIIIIIIH!CBCBBBB@=B@A?1@==<@=
 
 ---
 
-### Normalization
-- Within-sample normalization is neccessary to correct for feature length and library-size effects 
+### Differential Expression Analysis
+
+![Account for variability of gene expression across biological replicates with the help of gene counts](../images/RNA_seq_DEscheme.png)
+ 
+<tiny>Account for variability of gene expression across biological replicates<br>with the help of gene counts
+</tiny>
+
+---
+
+### Differential Expression Analysis<br>Within-sample Normalization
+
+Neccessary to correct for feature length and library-size effects
+
 - [*FPKM/RPKM*](http://www.nature.com/nmeth/journal/v5/n7/abs/nmeth.1226.html) (Cufflinks/Cuffdiff)
 - [*TMM*](https://genomebiology.biomedcentral.com/articles/10.1186/gb-2010-11-3-r25) (edgeR)
 - [*DESeq2*](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-014-0550-8) (DESeq2)
 							
 ---
 
-### Differential Expression Analysis
-
-![Account for variability of gene expression across biological replicates with the help of gene counts](../images/RNA_seq_DEscheme.png)
- 
-<tiny>Account for variability of gene expression across biological replicates with the help of gene counts
-</tiny>
-							 
----
-
-### Number of Replicates for DE Genes
+### Differential Expression Analysis<br>Number of Replicates for DE Genes
 
 ![](../images/RNA_seq_numreplicates.png)
 
@@ -136,7 +136,7 @@ IIIHIIIIIIIIIIIIIIIIIIIIIIIIIH!CBCBBBB@=B@A?1@==<@=
 
 ---
 
-### Alternative Splicing Detection
+### Detection of Alternative Splicing
 
 ![](../images/RNA_seq_splicescheme.png)
 
@@ -147,9 +147,18 @@ IIIHIIIIIIIIIIIIIIIIIIIIIIIIIH!CBCBBBB@=B@A?1@==<@=
 ---
 
 ### Visualization
-- Integrative Genomics Viewer ([*IGV*](http://bib.oxfordjournals.org/content/14/2/178.full?keytype=ref&%2520ijkey=qTgjFwbRBAzRZWC)) to have a look at your aligned bam files
-- [*Sashimi plots*](http://bioinformatics.oxfordjournals.org/content/early/2015/01/21/bioinformatics.btv034) - Quantitative visualization of read coverage along exons and splice junctions
-- [*CummeRbund*](http://compbio.mit.edu/cummeRbund/manual_2_0.html) - a visualization package for Cufflinks high-throughput sequencing data
+
+- Integrative Genomics Viewer ([*IGV*](http://bib.oxfordjournals.org/content/14/2/178.full?keytype=ref&%2520ijkey=qTgjFwbRBAzRZWC)) 
+
+    Visualization of the aligned BAM files
+
+- [*Sashimi plots*](http://bioinformatics.oxfordjournals.org/content/early/2015/01/21/bioinformatics.btv034)
+    
+    Quantitative visualization of read coverage along exons and splice junctions
+
+- [*CummeRbund*](http://compbio.mit.edu/cummeRbund/manual_2_0.html)
+
+    Visualization package for Cufflinks high-throughput sequencing data
 
 ---
 
@@ -161,11 +170,5 @@ IIIHIIIIIIIIIIIIIIIIIIIIIIIIIH!CBCBBBB@=B@A?1@==<@=
 - Ensembl - [*e!*](http://www.ensembl.org/info/website/tutorials/sequence.html)
 - The Cancer Genome Atlas - [*TCGA*](https://tcga-data.nci.nih.gov/docs/publications/tcga/?)
 - ... our tutorial
-
----
-
-### Tutorial
-
-- [Reference based RNA seq data analysis](ref_based.html)
 
 
