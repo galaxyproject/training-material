@@ -1,185 +1,92 @@
-<!doctype html>
-<html lang="en">
+---
+layout: introduction_slides
+topic_name: NGS-mapping
+logo: "GTN"
+---
 
-	<head>
-		<meta charset="utf-8">
+# What is mapping?
 
-		<title>Mapping of NGS data</title>
+---
 
-		<link rel="stylesheet" href="../../assets/reveal.js/css/reveal.css">
-		<link rel="stylesheet" href="../../assets/reveal.js/css/theme/simple.css" id="theme">
+# Mapping
 
-		<!-- Code syntax highlighting -->
-		<link rel="stylesheet" href="../../assets/reveal.js/lib/css/zenburn.css">
+- Search the position of a read in the genome
 
-		<link rel="stylesheet" href="../../assets/css/slide_custom.css" id="theme">
+![alt text](images/igv_mapping.png "IGV Browser")
 
-		<!-- Printing and PDF exports -->
-        <script>
-          if( window.location.search.match( /print-pdf/gi ) ) {
-            var link = document.createElement( 'link' );
-            link.rel = 'stylesheet';
-            link.type = 'text/css';
-            link.href = '../../assets/reveal.js/css/print/pdf.css';
-            document.getElementsByTagName( 'head' )[0].appendChild( link );
-          }
-        </script>
-		<!--<script>
-            if (window.location.search.match(/print-pdf/gi)) {
-                document.write('<link rel="stylesheet" href="css/pdf.css" type="text/css">');
-            }
-        </script>-->
+---
 
-		<!--[if lt IE 9]>
-        <script src="../../assets/reveal.js/lib/js/html5shiv.js"></script>
-        <![endif]-->
-	</head>
+# Sequence alignment
 
-	<body>
-		<div class="reveal">
-            <div class="slides">
-                <section data-markdown>
-                    <script type="text/template">
-                        ## Welcome!
+```
+A A C C G C C T T
 
-                        <img src="../../shared/images/GTNLogo1000.png" alt="GTNLogo1000"
-                        class="no-border" width=30%/>
+A G G G G C C T T
 
-                        The easiest way to **navigate** this slide deck
-                        is **by hitting `[space]` on your keyboard**
+1 2 3 4 5 6 7 8 9
+```
 
-                        You can also navigate with arrow keys, but be careful because some
-                        slides can be nested inside of each other (vertically)
-                    </script>
-                </section>
+---
 
-                <section data-markdown>
-                    <script type="text/template">
-                        ## Requirements
+# Sequence alignment
 
-                        Before diving into this slide deck, <br/>
-                        we recommend you to have a look at:
+```
+A A C C G C C T T
+|       | | | | |
+A G G G G C C T T
 
-                        2. [NGS Quality control](./../NGS-QC/slides/index.html)
-                    </script>
-                </section>
+1 2 3 4 5 6 7 8 9
+```
 
-                <section data-markdown>
-                    <script type="text/template">
-                        # Mapping of NGS data
-                    </script>
-                </section>
+---
 
-                <section>
-                    <section data-markdown>
-                        <script type="text/template">
-                            ## What is mapping? Why is it needed?
-                        </script>
-                    </section>
+# Looks easy...
 
-                    <section data-markdown>
-                        <script type="text/template">
-                            ### Subpart1.1
+Lego time: Who wants to volunteer?
 
-                            - list
-                            - list
-                            - list
-                        </script>
-                    </section>
+---
 
-                    <section data-markdown>
-                        <script type="text/template">
-                            ### Subpart1.2
+- Know your data!
+- Maybe not the "best" result is the one you are searching for
+- Try different mappers
 
-                            With an image...
+---
 
-                            <img src="../../shared/images/GTNLogo1000.png" alt="GTNLogo1000" class="no-border" width=30%/>
-                        </script>
-                    </section>
-                </section>
+## Tools, tools, tools
 
-                <section>
-                    <section data-markdown>
-                        <script type="text/template">
-                            ## How is mapping working?
-                        </script>
-                    </section>
+- Bowtie	
+- HISAT	
+- MAQ	
+- BWA	
+- Eland	
+- SOAP	
+- STAR	
+- BISMARCK	
 
-                    <section data-markdown>
-                        <script type="text/template">
-                            ### How is mapping working?
+And many more!
 
-                            General idea behind mapping
-                        </script>
-                    </section>
+---
 
-                    <section data-markdown>
-                        <script type="text/template">
-                            ### Different mapping tools for different data type
+# Hands-on!
 
-                            - RNA-seq
-                            - ChIP-seq
-                            - ...
-                        </script>
-                    </section>
-                </section>
+---
 
-                <section>
-                    <section data-markdown>
-                        <script type="text/template">
-                            ## Outputs of mapping tools
-                        </script>
-                    </section>
+# SAM/BAM file format
 
-                    <section data-markdown>
-                        <script type="text/template">
-                            ### BAM/SAM files
+![alt text](../images/bam_file.png "SAM/BAM file")
 
-                            images to explain BAM/SAM files
-                        </script>
-                    </section>
+---
 
-                    <section data-markdown>
-                        <script type="text/template">
-                            ### How to visualize mapping information?
+# SAM/BAM file format
 
-                            images
-                        </script>
-                    </section>
-                </section>
+![alt text](../images/bam_file_explained.png "SAM/BAM file detail")
 
+SAM: Sequence Alignment/Map format
 
-                <section data-markdown>
-                    <script type="text/template">
-                        ### Tutorial
+BAM: Binary SAM
 
-                        - [Tutorial 1](tutorial1.html)
-                        - [Tutorial 2](tutorial1.html)
-                    </script>
-                </section>
-			</div>
+---
 
-		</div>
+# IGV Browser -- Hands-on
 
-		<script type="text/javascript" src="../../assets/reveal.js/lib/js/head.min.js"></script>
-        <script type="text/javascript" src="../../assets/reveal.js/js/reveal.js"></script>
-        <script type="text/javascript">
-            Reveal.initialize({
-                slideNumber: !window.location.search.match(/print-pdf/gi),
-                history: true,
-
-                theme: Reveal.getQueryHash().theme,
-                transition: Reveal.getQueryHash().transition || 'concave',
-
-                dependencies: [
-                    { src: '../../assets/reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
-                    { src: '../../assets/reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-                    { src: '../../assets/reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-                    { src: '../../assets/js/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
-                    { src: '../../assets/reveal.js/plugin/notes/notes.js', async: true },
-                ]
-            });
-        </script>
-
-	</body>
-</html>
+![alt text](../images/igv_part2.png "igv detail")
