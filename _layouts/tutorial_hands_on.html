@@ -67,8 +67,8 @@ layout: base
         {% endfor %}
         </ul>
 
+        {% if topic.requirements or tutorial.requirements %}
         <p class="bold"> :heavy_check_mark: Requirements</p>
-        {% if topic.requirements != "" or tutorial.requirements != "" %}
         <ul>
           {% for requirement in topic.requirements %}
             <li><a href="{{ requirement.link }}">{{ requirement.title }}</a></li>
