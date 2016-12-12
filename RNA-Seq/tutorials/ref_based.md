@@ -216,7 +216,7 @@ However, the datasets are too small to give you a good impression of how real da
 
     > Check [IGV documentation](http://software.broadinstitute.org/software/igv/AlignmentData) to find some clues
 
-    :question: Which information does the `GSM461177_untreat_paired_junctions_chr4.bed` BED files contain? How is this information represented in IGV? What do these reads represent?
+    :question: Which information does the `GSM461177_untreat_paired_junctions_chr4.bed` BED files contain? How is this information represented in IGV? How many reads are mapped in "JUNC00013368" visible when we zoom on `chr4:568,476-571,814`? And how many are mapped over "JUNC00013369"? What do these reads represent?
 
     :question: Which information does the `GSM461177_untreat_paired_insertions_chr4.bed` and `GSM461177_untreat_paired_deletions_chr4.bed` BED files contain? How is this information represented in IGV? How many reads are mapped and contain the insertion found at 566,827?
 
