@@ -75,24 +75,37 @@
                     <section data-markdown>
                         <script type="text/template">
                             # What is RNA sequencing?
+							
                         </script>
                     </section>
 
+					<section data-markdown>
+                        <script type="text/template">
+                            ### RNA sequencing
+							
+                            - RNA is the transcribed form of the DNA and represents its active state
+                            - Sequencing enables RNA quantification at single base resolution							
+                            - Cost efficient analysis of the whole transcriptome in a high-throuput manner
+                        </script>
+                    </section>
+					
+					
+					
                     <section data-markdown>
                         <script type="text/template">
                             ### Where my data comes from?
-
-                            <img src="../images/ecker_2012.jpg" alt="Ecker et al 2012" class="no-border" width=70%/>
+							
+                            <img src="../images/RNA_seq_zang2016.png" alt="Zang and Mortazavi 2012" class="no-border" width=35%/>
 
                             <small>
-                            [*Ecker et al, Nature, 2012*](http://www.nature.com/nature/journal/v489/n7414/full/489052a.html)
+                            [*Zang and Mortazavi, Nature, 2012*](http://www.nature.com/ni/journal/v13/n9/full/ni.2407.html)
                             </small>
                         </script>
                     </section>
 
                     <section data-markdown>
                         <script type="text/template">
-                            ### RNA sequencing
+                            ### RNA sequencing - Principle
 
                             <img src="../images/korf_2013.jpg" alt="Korf, Nat Met, 2013" class="no-border" width=50%/>
 
@@ -101,10 +114,10 @@
                             </small>
                         </script>
                     </section>
-
-                    <section data-markdown>
+					
+					<section data-markdown>
                         <script type="text/template">
-                            ### RNA sequencing
+                            ### RNA sequencing - Quantification
 
                             <img src="../images/pepke_2009.jpg" alt="Pepke et al, Nat Met, 2009" class="no-border" width=50%/>
 
@@ -113,6 +126,28 @@
                             </small>
                         </script>
                     </section>
+					
+					<section data-markdown>
+                        <script type="text/template">
+                            ### RNA sequencing - Challanges
+
+							
+                            - Sample RNA and the reference genome have a different origin
+                            - Incompletely processed RNAs or transcriptional noise
+                            - Biases in sequencing (e.g. PCR library preparation)
+                            </small>
+                        </script>
+                    </section>
+					
+					 <section data-markdown>
+                        <script type="text/template">
+                            ### RNA sequencing - Benefits
+
+                            <img src="../images/wordcloud.png" alt="Korf, Nat Met, 2013" class="no-border" width=55%/>
+
+                        </script>
+                    </section>
+
                 </section>
 
                 <section>
@@ -122,7 +157,7 @@
                         </script>
                     </section>
 
-                    <section data-markdown>
+                    <!--<section data-markdown>
                         <script type="text/template">
                             ### RNA-seq Workflows and Tools
 
@@ -132,7 +167,129 @@
                             [*Turner, 2013*](https://figshare.com/articles/RNA_seq_Workflows_and_Tools/662782)
                             </small>
                         </script>
+                    </section>-->
+					
+					<section data-markdown>
+                        <script type="text/template">
+                            ### fastq-files
+
+                            <pre><code data-trim data-noescape>
+			@4:1:4888:1039:Y 
+			TGAACGCTGTTTCCAAGAAATGCTGGAAGAGGTCGATGGGTGTTATCTCTG
+			+ 
+			IIIHIIIIIIIIIIIIIIIIIIIIIIIIIH!CBCBBBB@=B@A?1@==<@=
+                            </code></pre>
+							
+                            - 50+ million reads per data set (~15 GB data for one human fastq-file)
+                            - Unique identifier per read
+                            - Nucleotide sequence with single base resolution
+                            - Quality score for each base
+
+
+                        </script>
                     </section>
+					
+					<section data-markdown>
+                        <script type="text/template">
+                            ### Data Processing - Overview
+
+                            <img src="../images/RNA_seq_processing.png" class="no-border" width=70%/>
+
+                            - Currently no standardized workflow available
+                            - Every dataset can have multiple best practices
+                        </script>
+                    </section>
+					
+					<section data-markdown>
+                        <script type="text/template">
+                            ### Data Pre-processing
+                            - Adapter clipping to trim the sequencing adapters 
+                            - Quality trimming to remove wrongly called bases and those with a low quality
+                            - Please, see [NGS Quality control](../../NGS-QC/slides/index.html) for further information
+                        </script>
+                    </section>
+					
+					
+					<section data-markdown>
+                        <script type="text/template">
+                            ### Genomic Alignment
+
+                            <img src="../images/RNA_seq_conesa2016.png" alt="Conesa et al, Genome Biol, 2016" class="no-border" width=80%/>
+
+                            <small>
+                            [*Conesa et al, Genome Biol, 2016*](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-016-0881-8)
+                            </small>
+                        </script>
+                    </section>
+					
+					<section data-markdown>
+                        <script type="text/template">
+                            ### Normalization
+                            - Within-sample normalization is neccessary to correct for feature length and library-size effects 
+                            - [*FPKM/RPKM*](http://www.nature.com/nmeth/journal/v5/n7/abs/nmeth.1226.html) (Cufflinks/Cuffdiff)
+                            - [*TMM*](https://genomebiology.biomedcentral.com/articles/10.1186/gb-2010-11-3-r25) (edgeR)
+                            - [*DESeq2*](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-014-0550-8) (DESeq2)
+							
+                        </script>
+                    </section>
+					
+					<section data-markdown>
+                        <script type="text/template">
+                            ### Differential Expression Analysis
+                            
+                             <img src="../images/RNA_seq_DEscheme.png" alt="Account for variability of gene expression across biological replicates with the help of gene counts" class="no-border" width=65%/>
+							 
+                            <tiny>Account for variability of gene expression across biological replicates with the help of gene counts
+                            </tiny>
+							 
+                        </script>
+                    </section>
+					
+					<section data-markdown>
+                        <script type="text/template">
+                            ### Number of Replicates for DE Genes
+
+                            <img src="../images/RNA_seq_numreplicates.png" alt="Conesa et al, Genome Biol, 2016" class="no-border" width=65%/>
+
+                            
+                            <small> [*Conesa et al, Genome Biol, 2016*](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-016-0881-8)</small>
+                        </script>
+                    </section>
+					
+					<section data-markdown>
+                        <script type="text/template">
+                            ### Alternative Splicing Detection
+							
+                            <img src="../images/RNA_seq_splicescheme.png" alt="Conesa et al, Genome Biol, 2016" class="no-border" width=75%/>
+                            <small>
+                            [*Hooper, Hum. Genomics, 2014*](http://humgenomics.biomedcentral.com/articles/10.1186/1479-7364-8-3)
+                            </small>
+							
+                        </script>
+                    </section>
+					
+					<section data-markdown>
+                        <script type="text/template">
+                            ### Visualization
+                            - Integrative Genomics Viewer ([*IGV*](http://bib.oxfordjournals.org/content/14/2/178.full?keytype=ref&%2520ijkey=qTgjFwbRBAzRZWC)) to have a look at your aligned bam files
+                            - [*Sashimi plots*](http://bioinformatics.oxfordjournals.org/content/early/2015/01/21/bioinformatics.btv034) - Quantitative visualization of read coverage along exons and splice junctions
+                            - [*CummeRbund*](http://compbio.mit.edu/cummeRbund/manual_2_0.html) - a visualization package for Cufflinks high-throughput sequencing data
+                        </script>
+                    </section>
+					
+					<section data-markdown>
+                        <script type="text/template">
+                            ### Where do I find data?
+                            - Sequencing data you prepared yourself or you obtained from your colleques
+                            - Sequence Read Archive - [*SRA*](https://www.ncbi.nlm.nih.gov/sra)
+                            - Gene Expression Omnibus - [*GEO*](https://www.ncbi.nlm.nih.gov/geo/)
+                            - Ensembl - [*e!*](http://www.ensembl.org/info/website/tutorials/sequence.html)
+                            - The Cancer Genome Atlas - [*TCGA*](https://tcga-data.nci.nih.gov/docs/publications/tcga/?)
+                            - ... our tutorial
+                        </script>
+                    </section>
+					
+					
                 </section>
 
 
