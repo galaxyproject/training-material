@@ -77,8 +77,13 @@ For quality control, we use similar tools as described in [NGS-QC tutorial](http
 >
 >    > ### :question: Questions
 >    >
->    > - What is the read length?
->    > - Is there anything what you find striking?
+>    > 1. What is the read length?
+>    > 2. Is there anything what you find striking?
+>    >
+>    >    <details>
+>    >    <summary>Click to view answers</summary>
+>    >    Content goes here.
+>    >    </details>
 >    {: .question}
 >
 > 2. **Trim Galore** :wrench:: Trim low quality bases from the 3' end on both paired-end datasets
@@ -148,6 +153,11 @@ These information should usually come with your FASTQ files, ask your sequencing
 >
 >    > ### :question: Question
 >    > What is the mean value for the inner distance?
+>    >
+>    > <details>
+>    > <summary>Click to view answer</summary>
+>    > Content goes here.
+>    > </details>
 >    {: .question}
 >
 >    If you already have read the corresponding paper carefully you might know that the fragment size is ~200bp. With read lengths of 2x37bp an educated guess could also be `125` for the inner distance. It's up to your decision, which value you prefer...
@@ -185,6 +195,11 @@ With the sequencing library parameters, the full RNA sequences can be mapped on 
 >        > ### :question: Question
 >        >
 >        > Why?
+>        > 
+>        > <details>
+>        > <summary>Click to view answer</summary>
+>        > Content goes here.
+>        > </details>
 >        {: .question}
 >
 >    - "Yes" for use of own junction data
@@ -220,6 +235,11 @@ However, the datasets are too small to give you a good impression of how real da
 >    > ### :question: Question
 >    >
 >    > What do the different colors for the mapped read mean when we zoom on `chr4:565,805-569,143`?
+>    >
+>    > <details>
+>    > <summary>Click to view answer</summary>
+>    > Content goes here.
+>    > </details>
 >    {: .question}
 >
 >    ![](../images/tophat_bam_output_color_reads.png)
@@ -231,17 +251,27 @@ However, the datasets are too small to give you a good impression of how real da
 >
 >    > ### :question: Question
 >    >
->    > - Which information does the `GSM461177_untreat_paired_junctions_chr4.bed` BED files contain?
->    > - How is this information represented in IGV?
->    > - How many reads are mapped in "JUNC00013368" visible when we zoom on `chr4:568,476-571,814`?
->    > - And how many are mapped over "JUNC00013369"? What do these reads represent?
+>    > 1. Which information does the `GSM461177_untreat_paired_junctions_chr4.bed` BED files contain?
+>    > 2. How is this information represented in IGV?
+>    > 3. How many reads are mapped in "JUNC00013368" visible when we zoom on `chr4:568,476-571,814`?
+>    > 4. And how many are mapped over "JUNC00013369"? What do these reads represent?
+>    >
+>    >    <details>
+>    >    <summary>Click to view answers</summary>
+>    >    Content goes here.
+>    >    </details>
 >    {: .question}
 >
 >    > ### :question: Question
 >    >
->    > - Which information does the `GSM461177_untreat_paired_insertions_chr4.bed` and `GSM461177_untreat_paired_deletions_chr4.bed` BED files contain?
->    > - How is this information represented in IGV?
->    > - How many reads are mapped and contain the insertion found at 566,827?
+>    > 1. Which information does the `GSM461177_untreat_paired_insertions_chr4.bed` and `GSM461177_untreat_paired_deletions_chr4.bed` BED files contain?
+>    > 2. How is this information represented in IGV?
+>    > 3. How many reads are mapped and contain the insertion found at 566,827?
+>    > 
+>    >    <details>
+>    >    <summary>Click to view answers</summary>
+>    >    Content goes here.
+>    >    </details>
 >    {: .question}
 >
 > 3. **IGV** :wrench:: Inspect the results using a **Sashimi plot**
@@ -256,8 +286,13 @@ However, the datasets are too small to give you a good impression of how real da
 >
 >    > ### :question: Question
 >    >
->    > - What does the numbered line represent?
->    > - What does the number means?
+>    > 1. What does the numbered line represent?
+>    > 2. What does the number means?
+>    > 
+>    >    <details>
+>    >    <summary>Click to view answers</summary>
+>    >    Content goes here.
+>    >    </details>
 >    {: .question}
 >
 >    > ### :nut_and_bolt: Comment
@@ -312,8 +347,13 @@ The recommended mode is "union", which counts overlaps even if a read only share
 >
 >    > ### :question: Question
 >    >
->    > - How many reads could not have been assigned to any feature?
->    > - Which feature is the most found one?
+>    > 1. How many reads could not have been assigned to any feature?
+>    > 2. Which feature is the most found one?
+>    > 
+>    >    <details>
+>    >    <summary>Click to view answers</summary>
+>    >    Content goes here.
+>    >    </details>
 >    {: .question}
 {: .hands_on}
 
@@ -387,6 +427,11 @@ The first output of **DESeq2** is a tabular file. The columns are:
 >    > ### :question: Question
 >    >
 >    > How many genes have a significant change in gene expression between these conditions?
+>    > 
+>    > <details>
+>    > <summary>Click to view answers</summary>
+>    > Content goes here.
+>    > </details>
 >    {: .question}
 >
 >    > ### :nut_and_bolt: Comment
@@ -399,14 +444,24 @@ The first output of **DESeq2** is a tabular file. The columns are:
 >    > ### :question: Question
 >    >
 >    > Are there more upregulated or downregulated genes in the treated samples?
+>    > 
+>    > <details>
+>    > <summary>Click to view answers</summary>
+>    > Content goes here.
+>    > </details>
 >    {: .question}
 >
 > 3. **Summary Statistics for any numerical column** :wrench: and **Histogram of a numeric column** :wrench:: Build the log2 fold change distribution of upregulated and downregulated genes
 >
 >    > ### :question: Questions
 >    >
->    > - Are upregulated genes more expressed than the downregulated genes?
->    > - Is the distribution similar?
+>    > 1. Are upregulated genes more expressed than the downregulated genes?
+>    > 2. Is the distribution similar?
+>    > 
+>    >    <details>
+>    >    <summary>Click to view answers</summary>
+>    >    Content goes here.
+>    >    </details>
 >    {: .question}
 {: .hands_on}
 
@@ -421,8 +476,13 @@ In addition to the list of genes, **DESeq2** outputs a graphical summary of the 
 
     > ### :question: Questions
     >
-    > - Why are some tests filtered?
-    > - Does it improve the *p*-value distribution?
+    > 1. Why are some tests filtered?
+    > 2. Does it improve the *p*-value distribution?
+    > 
+    >    <details>
+    >    <summary>Click to view answers</summary>
+    >    Content goes here.
+    >    </details>
     {: .question}
 
 2. [MA plot](https://en.wikipedia.org/wiki/MA_plot): global view of the relationship between the expression change of conditions (log ratios, M), the average expression strength of the genes (average mean, A), and the ability of the algorithm to detect differential gene expression. The genes that passed the significance threshold (adjusted p-value < 0.1) are colored in red.
@@ -432,8 +492,13 @@ In addition to the list of genes, **DESeq2** outputs a graphical summary of the 
 
     > ### :question: Questions
     >
-    > - Are the expression changes symmetrically dispersed? Is it similar to previous observations?
-    > - Why can we observe a shrinkage of fold changes for genes with low counts?
+    > 1. Are the expression changes symmetrically dispersed? Is it similar to previous observations?
+    > 2. Why can we observe a shrinkage of fold changes for genes with low counts?    
+    > 
+    >    <details>
+    >    <summary>Click to view answers</summary>
+    >    Content goes here.
+    >    </details>
     {: .question}
 
 
@@ -445,8 +510,13 @@ In addition to the list of genes, **DESeq2** outputs a graphical summary of the 
 
     > ### :question: Questions
     >
-    > - What is the first axis separating?
-    > - And the second axis?
+    > 1. What is the first axis separating?
+    > 2. And the second axis?    
+    > 
+    >    <details>
+    >    <summary>Click to view answers</summary>
+    >    Content goes here.
+    >    </details>
     {: .question}
 
 
@@ -457,8 +527,13 @@ In addition to the list of genes, **DESeq2** outputs a graphical summary of the 
 
     > ### :question: Questions
     >
-    > - How are the samples grouped?
-    > - Which samples are the most similar?
+    > 1. How are the samples grouped?
+    > 2. Which samples are the most similar?
+    > 
+    >    <details>
+    >    <summary>Click to view answers</summary>
+    >    Content goes here.
+    >    </details>
     {: .question}
 
 5. Dispersion estimates: gene-wise estimates
@@ -494,14 +569,24 @@ We use then DAVID to identify functional annotations of the upregulated genes an
 >    > ### :question: Questions
 >    >
 >    > What functional categories are the most represented? How to interpret that?
+>    >  
+>    > <details>
+>    > <summary>Click to view answers</summary>
+>    > Content goes here.
+>    > </details>
 >    {: .question}
 >
 > 3. Inspect the Functional Annotation Clusterings
 >
 >    > ### :question: Questions
 >    >
->    > - What functional annotations are the first clusters related to?
->    > - How to interpret that?
+>    > 1. What functional annotations are the first clusters related to?
+>    > 2. How to interpret that?
+>    >  
+>    >    <details>
+>    >    <summary>Click to view answers</summary>
+>    >    Content goes here.
+>    >    </details>
 >    {: .question}
 {: .hands_on}
 
