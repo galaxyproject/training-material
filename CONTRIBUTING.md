@@ -1,4 +1,4 @@
-Contributing to Galaxy Training material
+gitContributing to Galaxy Training material
 ===
 
 :+1::tada: First off, thanks for taking the time to contribute! :tada::+1:
@@ -219,13 +219,18 @@ To improve the learning experience, we strongly recommend you to:
 
         ![](shared/images/tutorial_hand_on_box.png)
 
-    - Questions (to make the learners think about what they are doing)
+    - Questions (to make the learners think about what they are doing) and the collapsing and expanding answers
 
         ```
         > ### :question: Questions
         >
-        > - Why are some tests filtered?
-        > - Does it improve the *p*-value distribution?
+        > 1. Why are some tests filtered?
+        > 2. Does it improve the *p*-value distribution?
+        > 
+        >    <details>
+        >    <summary>Click to view answers</summary>
+        >    Content goes here.
+        >    </details>
         {: .question}
         ```
 
