@@ -1,135 +1,188 @@
-Dive into quality control
-=========================
-
-:grey_question: ***Questions***
-
-- *How to control quality of NGS data?*
-- *What are the quality parameters to check for each dataset?*
-- *How to improve the quality of a sequence dataset?*
-
-:dart: ***Objectives***
-
-- *Manipulate FastQ files*
-- *Control quality from a FastQ file*
-- *Use FastQC tool*
-- *Understand FastQC output*
-- *Use tools for quality correction*
-
-:heavy_check_mark: ***Requirements***
-
-- *Galaxy introduction*
-- *Second requirement*
-- *Third requirement*
-- *...*
-
-:hourglass: ***Time estimation*** *1d/3h/6h*
+---
+layout: tutorial_hands_on
+topic_name: NGS-QC
+tutorial_name: dive_into_qc
+---
 
 # Introduction
 
-General introduction about the topic and then an introduction of the tutorial (the questions and the objectives). It is nice also to have a scheme to sum up the pipeline used during the tutorial. The idea is to give to trainees insight into the content of the tutorial and the (theoretical and technical) key concepts they will learn.
+During the sequencing process, some errors may be introduced like incorporation of ambiguous nucleotides. Analyzing poor data wastes CPU and people time. 
 
-# Get your sequence dataset
+The quality control of the sequences right after sequencing is then an essential step to ensure that the raw data looks good before processing them. It reduces the biases in data that may compromised the downstream analyses with low-quality sequences, sequence artifacts, ... The process is the same for any type of sequencing data.
 
-:pencil2: ***Hands on!***
+> ### Agenda
+>
+> In this tutorial, we will deal with:
+>
+> 1. [Sequence dataset importing](#sequence-dataset-importing)
+> 2. [Quality checking of the sequences](#quality-checking-of-the-sequences)
+> 3. [Improvement of the quality of the sequences](#improvement-of-the-quality-of-the-sequences)
+> {: .agenda}
 
-1. First step
-2. Second step
-3. Third step
+# Sequence dataset importing
 
-# Check the quality of your sequences
+> ### :pencil2: Hands-on: Data upload
+>
+> 1. Create a new history
+> 2. Import the FASTQ file: [`GSM461178_untreat_paired_subset_1`](https://zenodo.org/record/61771/files/GSM461178_untreat_paired_subset_1.fastq)
+>
+>    > ### :bulb: Tip: Importing data via links
+>    >
+>    > * Copy the link location
+>    > * Open the Galaxy Upload Manager
+>    > * Select **Paste/Fetch Data**
+>    > * Paste the link into the text field
+>    > * Press **Start**    
+>    {: .tip}
+>
+>    > ### :bulb: Tip: Changing the file type `fastq` to `fastqsanger` once the data file is in your history
+>    >
+>    > * Click on the pencil button displayed in your dataset in the history
+>    > * Choose **Datatype** on the top
+>    > * Select `fastqsanger`
+>    > * Press **save**
+>    {: .tip}
+>
+>    > ### :nut_and_bolt: Comments
+>    > 
+>    > Rename the dataset to "First dataset"
+>    {: .comment}
+> As default, Galaxy takes the link as name.
+{: .hands_on}
 
-Introduction about this part
+# Quality checking of the sequences
 
-## Run FastQC
+To estimate sequence quality and treatments to do on the data, many indicators can be checked:
 
-Short introduction about this subpart.
+- Quality score of the sequences with
+    - Per base sequence quality
+    - Per sequence quality scores
+    - Per tile sequence quality
+- Sequence content with 
+    - Per base sequence content
+    - Per sequence GC content
+    - Per base N content
+- Sequence length with the sequence length distribution
+- Duplicated sequences
+- Tag sequences with 
+    - Adapter contamination
+    - Kmer Content
 
-:pencil2: ***Hands on!***
+[FastQC](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/) is an open-source tool provide a simple way to do some quality control checks on raw sequence data coming from high throughput sequencing pipelines. It generates quality graphics and estimates numerous quality informations and threshold. For each studied indicators, FastQC providing a quick overview to tell in which areas there may be problems.
 
-1. First step
-2. Second step
-3. Third step
+> ### :pencil2: Hands-on: Run FastQC
+>
+> 1. Run FastQC on the imported FastQ file with default parameters
+> 2. Inspect the FastQC report on the webpage
+>
+>    > ### :bulb: Tip: Inspecting the content of a file in Galaxy
+>    >
+>    > * Click on the eye ("View data") on the right of the file name in the history
+>    > * Inspect the content of the file on the middle 
+>    {: .tip}
+>
+>    > ### :question: Questions
+>    >
+>    > 1. How good are the quality scores?
+>    > 2. Why is there warning for the per base sequence content and the per sequence GC content graphs?
+>    > 3. What must be done to improve the sequences?
+>    > 
+>    >    <details>
+>    >    <summary>Click to view answers</summary>
+>    >    1. No warning
+>    >    2. ttt
+>    >    </details>
+>    {: .question}
+{: .hands_on}
 
-## Check the FastQC output
+# Improvement of the quality of the sequences
 
-Short introduction about this subpart.
+Based on previous quality graphs, sequences must be treated to obtain good dataset and then the bias in downstream analysis.
 
-:pencil2: ***Hands on!***
+In general, quality treatments are:
 
-1. First step
-2. Second step
-3. Third step
+- Filtering of sequences
+    - with small mean quality score
+    - too small
+    - with too many N bases
+    - based on their GC content
+    - ...
+- Cutting/Trimming sequences
+    - from low quality score parts
+    - tails
+    - ...
 
-Some blabla
+To improve the quality of the sequences, we use [Trim Galore!](http://www.bioinformatics.babraham.ac.uk/projects/trim_galore/) tool. It automates quality and adapter trimming as well as quality control. 
 
-:pencil2: ***Hands on!***
+> ### :pencil2: Hands-on
+>
+> 1. Run Trim Galore on the imported data file
+>
+>    > ### :question: Questions
+>    >
+>    > Which parameters must be applied to follow the previous recommendations?
+>    > 
+>    > <details>
+>    > <summary>Click to view answers</summary>
+>    > 1. No warning
+>    > 2. ttt
+>    > </details>
+>    {: .question}
+>
+> 2. Re-run FastQC on the quality controlled data file and inspect the new FastQC report
+>
+>    > ### :question: Questions
+>    > 
+>    > 2. Why is there warning for the per base sequence content and the per sequence GC content?
+>    > 
+>    >    <details>
+>    >    <summary>Click to view answers</summary>
+>    >    1. No warning
+>    >    2. ttt
+>    >    </details>
+>    {: .question}
+{: .hands_on}
 
-1. First step
-2. Second step
-3. Third step
+# Control the quality of a second dataset
 
-:grey_exclamation: ***Key Points***
+This dataset was a not a bad one: the quality was pretty good. Now, we can practice ourself on a different dataset to control and improve quality of the sequences.
 
-- *Parameters to check during quality control*
-    1. *Parameter*
-    2. *Parameter*
-    3. *...*
-
-# Improve the quality of your sequences
-
-Short introduction about this subpart.
-
-:pencil2: ***Hands on!***
-
-1. First step
-2. Second step
-3. Third step
-
-## Run TrimGalore or PRINSEQ?
-
-Short introduction about this subpart.
-
-:pencil2: ***Hands on!***
-
-1. First step
-2. Second step
-3. Third step
-
-Some blabla
-
-:pencil2: ***Hands on!***
-
-1. First step
-2. Second step
-3. Third step
-
-## Check the improvement in quality score
-
-Short introduction about this subpart.
-
-:pencil2: ***Hands on!***
-
-1. First step
-2. Second step
-3. Third step
-
-Some blabla
-
-:pencil2: ***Hands on!***
-
-1. First step
-2. Second step
-3. Third step
+> ### :pencil2: Hands-on
+>
+> 1. Create a new history
+> 2. Import the FASTQ file: [`GSM461182_untreat_single_subset`](https://zenodo.org/record/61771/files/GSM461182_untreat_single_subset.fastq)
+> 3. Run FastQC on this new dataset
+>
+>    > ### :question: Questions
+>    >
+>    > 1. How good is this dataset?
+>    > 2. What must be done to improve the sequences?
+>    > 
+>    >    <details>
+>    >    <summary>Click to view answers</summary>
+>    >    1. No warning
+>    >    2. ttt
+>    >    </details>
+>    {: .question}
+>
+> 3. Run Trim Galore 
+> 4. Re-run FastQC to check the impact of Trim Galore
+>
+>    > ### :question: Questions
+>    >
+>    > Has the quality of the dataset been improved after Trim Galore?
+>    > 
+>    >    <details>
+>    >    <summary>Click to view answers</summary>
+>    >    1. No warning
+>    >    2. ttt
+>    >    </details>
+>    {: .question}
+{: .hands_on}
 
 # Conclusion
 
-Conclusion about the technical key points. And then relation between the technics and the biological question to end with a global view.
+In this tutorial, we have controlled the quality of two datasets to ensure that the raw data looks good before analysing them with tools to extract RNA-Seq, ChIP-Seq or any other type of information. The approach of quality control is similar for any type of sequencing data:
 
-:grey_exclamation: ***Key Points***
+![](../images/dive_into_qc_workflow.png)
 
-- *Quality control steps*
-    1. *Check the quality of your sequences*
-    2. *Improve the quality of your sequences*
-    3. *Check the quality improvement*
-
-# :clap: Thank you
