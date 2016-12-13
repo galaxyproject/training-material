@@ -14,28 +14,30 @@ We start with the bad dataset.
 1. Load the dataset from 
 [zenodo](https://zenodo.org/record/61771/files/GSM461180_treat_paired_subset_2.fastq) into Galaxy.
 
-2. Search in the tool bar on the left the mapper "bowtie2"
+2. It is a good practice to give the datasets names that are easy to understand. Please rename the file to 'bad.fastq'.
 
-3. The dataset can not be selected because a "fastqsanger" format is accepted as the only 
+3. Search in the tool bar on the left the mapper "bowtie2".
+
+4. The dataset can not be selected because a "fastqsanger" format is accepted as the only 
 valid format. To change the format, click in the history at your dataset on the 'pencil' button. 
 Select the tab 'data type' and choose as a new data type 'fastqsanger'. Click on save and go
  back to bowtie2. Now the dataset should be in the list of fastq files that can be processed.
 
-4. Select the uploaded dataset GSM461180_treat_paired_subset_2.fastq as the fastq file.
+5. Select the uploaded dataset 'bad.fastq' as the fastq file.
 
-5. Choose as a reference genome human hg19. To do that, select 'Use a built-in genome index'
+6. Choose as a reference genome human hg19. To do that, select 'Use a built-in genome index'
  for the item 'Will you select a reference genome from your history or use a built-in index?' 
  and for the item 'Select reference genome' the human hg19 genome. 
 
-6. All other parameters use there default value. Click on "Execute". It will take now a while
+7. All other parameters use there default value. Click on "Execute". It will take now a while
  to process this dataset. Please upload in the meanwhile the 'good' dataset to galaxy and change 
  its format to 'fastqsanger' as it is described above.
 
-7. Click on the right history panel on the Bowtie2 item. Here you can see that a BAM file was 
+8. Click on the right history panel on the Bowtie2 item. Here you can see that a BAM file was 
 computed and you can see additional information like how many reads are successfully mapped, 
 how many reads there were in total and so on. 
 
-8. Look careful at the information which is given here. Is everything as expected?
+9. Look careful at the information which is given here. Is everything as expected?
 
 ```
 100000 reads; of these: 100000 (100.00%) were unpaired; 
@@ -54,12 +56,12 @@ The careful observing reader may have noticed the following:
 which is more or less the worst possible result that could happen.
 Before continue reading think a moment what could be the reason.
 
-9. The reason for the bad result is that the wrong reference genome was selected. We used 'hg19' 
+10. The reason for the bad result is that the wrong reference genome was selected. We used 'hg19' 
 for humans but our data is 'Drosophila melanogaster' or short 'dm3'.
 Be always careful at this step to select the right reference genome! Even within the same species 
 there are multiple versions like for humans 'hg18' and 'hg19'.
 
-10. Rerun now Bowtie2 with the correct reference genome. To speed up things we compute now the 
+11. Rerun now Bowtie2 with the correct reference genome. To speed up things we compute now the 
 'good' and the 'bad' fastq file at once. 
 For the parameter 'FASTQ file' select the second item 'multiple datasets'. You can select multiple 
 datasets by holding the 'Ctrl' button (German keyboard: 'Strg', macOS: 'cmd') on your keyboard and clicking with the 
@@ -85,6 +87,7 @@ available via "More...". Is this is not the case you can add it manually via the
 # The IGV Browser
 
 The IGV browser helps you to discover insights about your data. It is structured as follows:
+
 ![alt text](../images/igv_browser.png "IGV Browser")
 
 1. The tool bar provides access to commonly used functions. The menu
@@ -116,3 +119,5 @@ name.
 represent attribute values, where each unique value is assigned a unique
 color. Hover over a colored block to see the attribute value. Click an
 attribute name to sort tracks based on that attribute value.
+
+The genome and your mappings are loaded now. Start playing around to get some insights in your data!
