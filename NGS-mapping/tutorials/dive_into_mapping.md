@@ -4,85 +4,91 @@ topic_name: NGS-mapping
 tutorial_name: dive_into_mapping
 ---
 
-# Mapping of data
-In the following we will consider two datasets. One will be a "bad" one the other a "good" in 
-terms of the data quality. We want to show how the quality of 
-your reads can influence the result of the mapping and thereof how good your insight will be.
+# Next generation sequencing data mapping
+In the following we will process a dataset with a mapper, 'Bowtie2' and we will visualize the data with the software 'IGV'.
 
-We start with the bad dataset.
+> ### Agenda
+>
+> In this tutorial we will:
+>
+> 1. [Map the data](#mapping)
+> 3. [Visualize the mapped data](#visualization)
+> {: .agenda}
 
-1. Load the dataset from 
-[zenodo](https://zenodo.org/record/61771/files/GSM461180_treat_paired_subset_2.fastq) into Galaxy.
+# Mapping
+> ### :pencil2: Hands-on: Mapping with Bowtie2
+>
+> 1. Load the dataset from [zenodo](https://zenodo.org/record/61771/files/GSM461180_treat_paired_subset_2.fastq) into Galaxy.
+> 2. Search in the tool bar on the left the mapper "bowtie2".
+> 3. The dataset can not be selected because a "fastqsanger" format is accepted as the only valid format. To change the format, click in the history at your dataset on the 'pencil' button. Select the tab 'data type' and choose as a new data type 'fastqsanger'. Click on save and go back to bowtie2. Now the dataset should be in the list of fastq files that can be processed.
+> 4. Select the uploaded dataset 'bad.fastq' as the fastq file.
+> 5. Choose as a reference genome human hg19. To do that, select 'Use a built-in genome index' for the item 'Will you select a reference genome from your history or use a built-in index?' and for the item 'Select reference genome' the human hg19 genome. 
+> 6. All other parameters use there default value. Click on "Execute". It will take now a while to process this dataset. 
+> 7. Click on the right history panel on the Bowtie2 item. Look careful at the information which is given here:
+>    
+>           100000 reads; of these: 100000 (100.00%) were unpaired
+>           of these: 99953 (99.95%) aligned 0 times
+>           19 (0.02%) aligned exactly 1 time
+>           28 (0.03%) aligned >1 times
+>           0.05% overall alignment rate
+> 
+> 
+>    > ### :question: Questions
+>    >
+>    > - What information is provided here?
+>    > - Is everything as expected?
+>    {: .question}
+>
+>    Here you can see that a BAM file was computed and you can see additional information like how many reads are successfully mapped or how many reads there were in total. The careful observing reader may have noticed the following: 
+>
+>         100000 (100.00%) were unpaired
+>
+>
+>    > ### :question: Questions
+>    >
+>    > - Why is the mapping so bad?
+>    {: .question}
+>
+>
+>
+> 9. The reason for the bad result is that the wrong reference genome was selected. We used 'hg19' for humans but our data is 'Drosophila melanogaster' or short 'dm3'. Be always careful at this step to select the right reference genome! Even within the same species there are multiple versions like for humans 'hg18' and 'hg19'.
+> 10. Rerun Bowtie2 with the correct reference genome.
+>
+>       > ### :nut_and_bolt: Comments
+>       > - It is a good practice to give the datasets names that are easy to understand.
+>       > - You can select multiple fastq files by selecting the second item 'multiple datasets'. Hold the 'Ctrl' button (German keyboard: 'Strg', macOS: 'cmd') on your keyboard and click with the mouse on the datasets.
+>       {: .comment}
+>
+{: .hands_on}
 
-2. It is a good practice to give the datasets names that are easy to understand. Please rename the file to 'bad.fastq'.
+# Visualization
 
-3. Search in the tool bar on the left the mapper "bowtie2".
+A general desciption of the user interface of the IGV browser can be read here: [IGV Browser description](#IGV-browser)
 
-4. The dataset can not be selected because a "fastqsanger" format is accepted as the only 
-valid format. To change the format, click in the history at your dataset on the 'pencil' button. 
-Select the tab 'data type' and choose as a new data type 'fastqsanger'. Click on save and go
- back to bowtie2. Now the dataset should be in the list of fastq files that can be processed.
+> ### :pencil2: Hands-on: Visualization with the IGV browser
+> 1. Click on the right history panel on the Bowtie2 item. 
+> 2. To display the result in IGV open the IGV browser local on your computer. 
+> 3. Choose in the history on the computed Bowtie2 results and click on 'local' at 'display with IGV'.
+> 4. Now the BAM file should be opened in the IGV browser and the genome should be loaded automatically. If this is not the case check if the needed reference genome is available. 
+>
+>       > ### :bulb: Tip: Get access to more genomes
+>       >
+>       >If it is not there check if its 
+>       >available via "More...". Is this is not the case you can add it manually via the menu 
+>       >"Genomes -> Load Genome from..."
+>       >
+>       > ![alt text](../images/igv_select_genome.png "Select genome") 
+>       {: .tip}
+>
+>       > ### :question: Questions
+>       >
+>       > - Why is the result so bad?
+>       {: .question}
+>
+{: .hands_on}
 
-5. Select the uploaded dataset 'bad.fastq' as the fastq file.
-
-6. Choose as a reference genome human hg19. To do that, select 'Use a built-in genome index'
- for the item 'Will you select a reference genome from your history or use a built-in index?' 
- and for the item 'Select reference genome' the human hg19 genome. 
-
-7. All other parameters use there default value. Click on "Execute". It will take now a while
- to process this dataset. Please upload in the meanwhile the 'good' dataset to galaxy and change 
- its format to 'fastqsanger' as it is described above.
-
-8. Click on the right history panel on the Bowtie2 item. Here you can see that a BAM file was 
-computed and you can see additional information like how many reads are successfully mapped, 
-how many reads there were in total and so on. 
-
-9. Look careful at the information which is given here. Is everything as expected?
-
-```
-100000 reads; of these: 100000 (100.00%) were unpaired; 
-of these: 99953 (99.95%) aligned 0 times 
-19 (0.02%) aligned exactly 1 time 
-28 (0.03%) aligned >1 times 
-0.05% overall alignment rate
-```
-
-The careful observing reader may have noticed the following: 
-
-```
-'100000 (100.00%) were unpaired'
-```
-
-which is more or less the worst possible result that could happen.
-Before continue reading think a moment what could be the reason.
-
-10. The reason for the bad result is that the wrong reference genome was selected. We used 'hg19' 
-for humans but our data is 'Drosophila melanogaster' or short 'dm3'.
-Be always careful at this step to select the right reference genome! Even within the same species 
-there are multiple versions like for humans 'hg18' and 'hg19'.
-
-11. Rerun now Bowtie2 with the correct reference genome. To speed up things we compute now the 
-'good' and the 'bad' fastq file at once. 
-For the parameter 'FASTQ file' select the second item 'multiple datasets'. You can select multiple 
-datasets by holding the 'Ctrl' button (German keyboard: 'Strg', macOS: 'cmd') on your keyboard and clicking with the 
-mouse on the datasets.
-
-# Load data to the IGV Browser
-
-1. Click on the right history panel on the Bowtie2 item.
-
-2. To display the result in IGV open the IGV browser local on your computer. 
-
-3. Choose in the history on the computed Bowtie2 results for the bad mapping and click on 'local' at 'display with IGV'.
-
-4. Now the BAM file should be opened in the IGV browser and the genome should be loaded automatical. If this is not the case 
-check if the needed reference genome is available. 
-
-![alt text](../images/igv_select_genome.png "Select genome") 
-
-If it is not there check if its 
-available via "More...". Is this is not the case you can add it manually via the menu 
-"Genomes -> Load Genome from..."
+To show you the difference between a good and a bad dataset we provided an additional dataset which will give you a bad mapping.
+Get the [dataset](https://zenodo.org/record/61771/files/GSM461180_treat_paired_subset_2.fastq) into galaxy and do the steps from above again.
 
 # The IGV Browser
 
@@ -121,3 +127,6 @@ color. Hover over a colored block to see the attribute value. Click an
 attribute name to sort tracks based on that attribute value.
 
 The genome and your mappings are loaded now. Start playing around to get some insights in your data!
+
+Please upload in the meanwhile the 
+ to galaxy and change its format to 'fastqsanger' as it is described above.
