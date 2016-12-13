@@ -72,7 +72,7 @@ To estimate sequence quality and treatments to do on the data, many indicators c
 
 > ### :pencil2: Hands-on: Run FastQC
 >
-> 1. Run FastQC on the imported FastQ file with default parameters
+> 1. **FastQC** :wrench:: Run FastQC on the imported FastQ file with default parameters
 > 2. Inspect the FastQC report on the webpage
 >
 >    > ### :bulb: Tip: Inspecting the content of a file in Galaxy
@@ -89,8 +89,11 @@ To estimate sequence quality and treatments to do on the data, many indicators c
 >    > 
 >    >    <details>
 >    >    <summary>Click to view answers</summary>
->    >    1. No warning
->    >    2. ttt
+>    >    <ol type="1">
+>    >    <li>The scores of the sequences are quite good: no warning from FastQC, even if we can see a slight decrease of the quality at the end of sequences </li>
+>    >    <li>In the beginning of sequences, the sequence content per base is not really good and the percentage are not equal. For the GC content, the distribution is bit shifted on the left and too high</li>
+>    >    <li>We can trim a bit the end of the sequences, but not too much as the sequences are already small</li>
+>    >    </ol>
 >    >    </details>
 >    {: .question}
 {: .hands_on}
@@ -116,7 +119,7 @@ To improve the quality of the sequences, we use [Trim Galore!](http://www.bioinf
 
 > ### :pencil2: Hands-on
 >
-> 1. Run Trim Galore on the imported data file
+> 1. **Trim Galore** :wrench:: Run Trim Galore on the imported data file
 >
 >    > ### :question: Questions
 >    >
@@ -124,34 +127,45 @@ To improve the quality of the sequences, we use [Trim Galore!](http://www.bioinf
 >    > 
 >    > <details>
 >    > <summary>Click to view answers</summary>
->    > 1. No warning
->    > 2. ttt
+>    > We use the default ones:
+>    > <ul>
+>    > <li>Automatic detection and trimming of adapter sequences</li>
+>    > <li>Trimming low-quality ends (below 20) from reads in addition to adapter removal</li>
+>    > <li>Removing reads shorter than 20 bp</li>
+>    > </ul>
 >    > </details>
 >    {: .question}
 >
-> 2. Re-run FastQC on the quality controlled data file and inspect the new FastQC report
+> 2. **FastQC** :wrench:: Re-run FastQC on the quality controlled data file and inspect the new FastQC report
 >
 >    > ### :question: Questions
 >    > 
->    > 2. Why is there warning for the per base sequence content and the per sequence GC content?
+>    > 1. How many sequences have been removed?
+>    > 2. Has the quality of the sequences been improved?
+>    > 3. Can you explain why the per base sequence content is not good now?
 >    > 
 >    >    <details>
 >    >    <summary>Click to view answers</summary>
->    >    1. No warning
->    >    2. ttt
+>    >    <ol type="1">
+>    >    <li>Before Trim Galore, the dataset was made of 100,000 sequences. After Trim Galore, there is 99,653 sequences.</li>
+>    >    <li>The per base quality score is better but other indicators are bad now. The sequence length distribution is not clear as before because sequences have different size after the trimming</li>
+>    >    <li>The per base sequence content is red now. The trimming of the end of some sequences may have biased </li>
+>    >    </ol>
 >    >    </details>
 >    {: .question}
 {: .hands_on}
 
+The quality of the previous dataset was pretty good from beginning. The quality treatment improved the quality score but to the cost of other parameters.
+
 # Control the quality of a second dataset
 
-This dataset was a not a bad one: the quality was pretty good. Now, we can practice ourself on a different dataset to control and improve quality of the sequences.
+Now, we would like to see the impact to quality control and treatment on a bad dataset.
 
 > ### :pencil2: Hands-on
 >
 > 1. Create a new history
 > 2. Import the FASTQ file: [`GSM461182_untreat_single_subset`](https://zenodo.org/record/61771/files/GSM461182_untreat_single_subset.fastq)
-> 3. Run FastQC on this new dataset
+> 3. **FastQC** :wrench:: Run FastQC on this new dataset
 >
 >    > ### :question: Questions
 >    >
@@ -160,22 +174,28 @@ This dataset was a not a bad one: the quality was pretty good. Now, we can pract
 >    > 
 >    >    <details>
 >    >    <summary>Click to view answers</summary>
->    >    1. No warning
->    >    2. ttt
+>    >    <ol type="1">
+>    >    <li>There is red warning for the per base sequence quality (pretty bad along the sequence but worst at the end of sequences), the per base sequence content (bad at the beginning of the sequences), the per sequence GC content. </li>
+>    >    <li>The end of sequences must be cut. And we can also also remove the beginning of the sequences (the first 13 bases) to improve the per base sequence content</li>
+>    >    </ol>
 >    >    </details>
 >    {: .question}
 >
-> 3. Run Trim Galore 
-> 4. Re-run FastQC to check the impact of Trim Galore
+> 3. **Trim Galore** :wrench:: Run Trim Galore on the new dataset to fit the previous choices
+> 4. **FastQC** :wrench:: Re-run FastQC to check the impact of Trim Galore
 >
 >    > ### :question: Questions
 >    >
->    > Has the quality of the dataset been improved after Trim Galore?
+>    > 1. How many sequences have been removed?
+>    > 2. Has the quality of the sequences been improved?
+>    > 3. Can you explain why the per base sequence content is not good now?
 >    > 
 >    >    <details>
 >    >    <summary>Click to view answers</summary>
->    >    1. No warning
->    >    2. ttt
+>    >    <ol type="1">
+>    >    <li>Before Trim Galore, the dataset was made of 100,000 sequences. After Trim Galore, there is 97,644 sequences.</li>
+>    >    <li>The per base quality score is better (not red anymore). But the per base sequence content is still red even if it is a bit better.</li>
+>    >    </ol>
 >    >    </details>
 >    {: .question}
 {: .hands_on}
