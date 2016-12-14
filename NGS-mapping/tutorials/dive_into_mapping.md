@@ -40,7 +40,7 @@ In the following we will process a dataset with a mapper, 'Bowtie2', and we will
 >    > * Press **save**
 >    {: .tip}
 >
-> 2. Search in the tool bar on the left the mapper 'bowtie2'.
+> 2. **Bowtie2** :wrench:: Search in the tool bar on the left the mapper 'bowtie2' and run the mapper with the dataset.
 >
 >    > ### :bulb: Tip: Search for tools
 >    >
@@ -77,7 +77,7 @@ In the following we will process a dataset with a mapper, 'Bowtie2', and we will
 >    {: .question}
 >
 >
-> 10. Rerun Bowtie2 with the correct reference genome 'Drosophila melanogaster' or short 'dm3'.
+> 10. **Bowtie2** :wrench:: Rerun Bowtie2 with the correct reference genome 'Drosophila melanogaster' or short 'dm3'.
 >
 >       > ### :nut_and_bolt: Comments
 >       > - It is a good practice to give the datasets names that are easy to understand.
@@ -93,10 +93,10 @@ A general description of the user interface of the IGV browser can be read here:
 >
 >The Integrative Genomics Viewer (IGV) is a high-performance visualization tool for interactive exploration of large, integrated genomic datasets. It supports a wide variety of data types, including array-based and next-generation sequence data, and genomic annotations. In the following we will use it to visualize the computed mapping.
 >
-> 1. To display the result in IGV open the IGV browser local on your computer. 
-> 2. Click on the right history panel on the Bowtie2 item. 
-> 3. Choose in the history on the computed Bowtie2 results and click on 'local' at 'display with IGV'.
-> 4. Now the BAM file should be opened in the IGV browser and the genome should be loaded automatically.
+> 1. **IGV** :wrench:: To display the result in IGV open the IGV browser local on your computer. 
+> 2. **Galaxy** :wrench:: Click on the right history panel on the Bowtie2 item. 
+> 3. **Galaxy** :wrench:: Choose in the history on the computed Bowtie2 results and click on 'local' at 'display with IGV'.
+> 4. **IGV** :wrench:: The BAM file should be opened in the IGV browser and the genome should be loaded automatically.
 >
 >       > ### :bulb: Tip: Get access to more genomes
 >       >
@@ -106,8 +106,8 @@ A general description of the user interface of the IGV browser can be read here:
 >       >
 >       > ![alt text](../images/igv_select_genome.png "Select genome") 
 >       {: .tip}
-> 5. The interesting part is at chromosome 4, position 86,761 to 87,907. Navigate to it.
-> 6. There are two views:
+> 5. **IGV** :wrench:: The interesting part is at chromosome 4, position 86,761 to 87,907. Navigate to it.
+> 6. **IGV** :wrench:: There are two views:
 >       - the aligned reads view
 >       - the coverage view
 >
@@ -132,8 +132,8 @@ A general description of the user interface of the IGV browser can be read here:
 
 > ### :pencil2: Hands-on: Differences between a good and a bad mapping
 >
-> 1. To show you the difference between a good and a bad dataset we provided an additional dataset which will give you a bad mapping. Get the [dataset](https://zenodo.org/record/61771/files/GSM461182_untreat_single_subset.fastq) into galaxy and do the steps from above again.
-> 2. Load the two mappings into IGV and compare them!
+> 1. **Galaxy** :wrench:: To show you the difference between a good and a bad dataset we provided an additional dataset which will give you a bad mapping. Get the [dataset](https://zenodo.org/record/61771/files/GSM461182_untreat_single_subset.fastq) into galaxy and do the steps from above again.
+> 2. **IGV** :wrench:: Load the two mappings into IGV and compare them!
 >
 >       > ### :question: Questions
 >       >
