@@ -127,10 +127,10 @@ To improve the quality of the sequences, we use [Trim Galore!](http://www.bioinf
 >    > 
 >    > <details>
 >    > <summary>Click to view answers</summary>
->    > We use the default ones:
 >    > <ul>
->    > <li>Automatic detection and trimming of adapter sequences</li>
+>    > <li>If you already know the which adapter sequences were used during the library preparation, please use them. Otherwise, use the option for automatic detection and trimming of adapter sequences
 >    > <li>Trimming low-quality ends (below 20) from reads in addition to adapter removal</li>
+>    > <li>Option for required number bases overlap with adapter sequence can be tweaked. The default value "1" is too stringent that on average 25% of reads will be trimmed. In order to reduce these falsely trimmed bases, please set it to 5 bases.</li>
 >    > <li>Removing reads shorter than 20 bp</li>
 >    > </ul>
 >    > </details>
@@ -176,7 +176,8 @@ Now, we would like to see the impact to quality control and treatment on a bad d
 >    >    <summary>Click to view answers</summary>
 >    >    <ol type="1">
 >    >    <li>There is red warning for the per base sequence quality (pretty bad along the sequence but worst at the end of sequences), the per base sequence content (bad at the beginning of the sequences), the per sequence GC content. </li>
->    >    <li>The end of sequences must be cut. And we can also also remove the beginning of the sequences (the first 13 bases) to improve the per base sequence content</li>
+>    >    <li>The end of sequences must be cut.</li>
+>    >    <li> Generally, 5' ends of the reads are not of bad quality unless there is something went wrong. The problem with this particular data set is that it was sequenced using Genome Analyzer, which is one of the oldest Illumina sequencing machines. They had problems with reading the fragments which are at the edges of the flowcell. Unfortunately, the first 100k reads which we selected for the analysis are from the left most edge of the flow cell. After some calibration, Genome Analyzer sequences properly. But with the latest sequencing machines, usually we do not see this problem. If you see this problem in your datasets please investigate, do not just trim them.</li>
 >    >    </ol>
 >    >    </details>
 >    {: .question}
