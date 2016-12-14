@@ -104,7 +104,7 @@ Now we are ready to do some analysis, but first we will need to get some data in
 Now we have information about the exon locations, but our question was which exon contains the largest number of SNPs, so let's get some information about SNP locations from UCSC as well:
 
 > ### :pencil2: Hands-on: SNP information
-> 1. Return to the UCSC tool `Get Data -> UCSC Main - table browser`
+> 1. **UCSC Main** :wrench:: Return to the UCSC tool `UCSC Main - table browser`
 >
 > 2. Change the setting in **group** to `Variation`
 >
@@ -134,7 +134,7 @@ Let’s remind ourselves that our objective was to find which exon contains the 
 
 > ### :pencil2: Hands-on: Finding Exons
 >
-> 1. Enter the word `join` in the search bar of the tool panel, and select the tool named `Join - the intervals of two datasets side-by-side`
+> 1. **Join** :wrench:: Enter the word `join` in the search bar of the tool panel, and select the tool named `Join - the intervals of two datasets side-by-side`
 >
 > 2. Select your file with exons as the first file, and the file with SNPs as the second file, and make sure **return** is set to `INNER JOIN` so that only matches are included in the output (i.e. only exons with SNPs in it and only SNPs that fall in exons)
 >
@@ -164,7 +164,7 @@ We've just seen how to count the number of SNPs in each exon, so let's do this f
 
 > ### :pencil2: Hands-on: Counting SNPs
 >
-> 1. Open the tool `Group - data by a column and perform aggregate operation on other columns`
+> 1. **Group** :wrench:: Open the tool `Group - data by a column and perform aggregate operation on other columns`
 >
 >    ![](../images/101_13.png)
 >
@@ -195,7 +195,7 @@ Now we have a list of all exons and the number of SNPs they contain, but we woul
 
 > ### :pencil2: Hands-on: Sorting
 >
-> 1. Navigate to the tool `Sort - data in ascending or descending order`
+> 1. **Sort** :wrench:: Navigate to the tool `Sort - data in ascending or descending order`
 >
 > 2. Set the **on column** parameter to `Column: 2`, by default it will select a numerical sort in descending order, which is exactly what we want in this case.
 >
@@ -221,7 +221,7 @@ Let's say we want a list with just the top-5 exons with highest number of SNPs.
 
 > ### :pencil2: Hands-on: Select first
 >
-> 1. Open the tool `Select first - lines from a dataset`
+> 1. **Select first** :wrench:: Open the tool `Select first - lines from a dataset`
 >
 > 2. Set **select first** to `5` and choose the sorted dataset from the previous step as the input.
 >
@@ -236,7 +236,7 @@ Congratulations! you have now determined which exons on chromosome 22 have the h
 
 > ### :pencil2: Hands-on: Compare two Datasets
 >
-> 1. Open the tool `Compare two Datasets - to find common or distinct rows`
+> 1. **Compare two Datasets** :wrench:: Open the tool `Compare two Datasets - to find common or distinct rows`
 >
 > 2. Set the parameters to compare the column 4 of the exon file with column 1 of the top-5 exons file to find matching rows.
 >
