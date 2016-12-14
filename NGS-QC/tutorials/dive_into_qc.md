@@ -70,7 +70,7 @@ To estimate sequence quality and treatments to do on the data, many indicators c
 
 [FastQC](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/) is an open-source tool provide a simple way to do some quality control checks on raw sequence data coming from high throughput sequencing pipelines. It generates quality graphics and estimates numerous quality informations and threshold. For each studied indicators, FastQC providing a quick overview to tell in which areas there may be problems.
 
-> ### :pencil2: Hands-on: Run FastQC
+> ### :pencil2: Hands-on: Quality checking
 >
 > 1. **FastQC** :wrench:: Run FastQC on the imported FastQ file with default parameters
 > 2. Inspect the FastQC report on the webpage
@@ -117,7 +117,7 @@ In general, quality treatments are:
 
 To improve the quality of the sequences, we use [Trim Galore!](http://www.bioinformatics.babraham.ac.uk/projects/trim_galore/) tool. It automates quality and adapter trimming as well as quality control. 
 
-> ### :pencil2: Hands-on
+> ### :pencil2: Hands-on: Quality treatment and re-checking
 >
 > 1. **Trim Galore** :wrench:: Run Trim Galore on the imported data file
 >
@@ -161,7 +161,7 @@ The quality of the previous dataset was pretty good from beginning. The quality 
 
 Now, we would like to see the impact to quality control and treatment on a bad dataset.
 
-> ### :pencil2: Hands-on
+> ### :pencil2: Hands-on: Quality control and treatment
 >
 > 1. Create a new history
 > 2. Import the FASTQ file: [`GSM461182_untreat_single_subset`](https://zenodo.org/record/61771/files/GSM461182_untreat_single_subset.fastq)
