@@ -71,10 +71,22 @@ layout: base
         <p class="bold"> :heavy_check_mark: Requirements</p>
         <ul>
           {% for requirement in topic.requirements %}
-            <li><a href="{{ requirement.link }}">{{ requirement.title }}</a></li>
+            <li>
+                {% if requirement.type == "internal" %}
+                <a href="{{ site.url }}{{ requirement.link }}">{{ requirement.title }}</a>
+                {% elsif material.type == "external" %}
+                <a href="{{ requirement.link }}">{{ requirement.title }}</a>
+                {% endif %}
+            </li>
           {% endfor %}
           {% for requirement in tutorial.requirements %}
-            <li><a href="{{ requirement.link }}">{{ requirement.title }}</a></li>
+            <li>
+                {% if requirement.type == "internal" %}
+                <a href="{{ site.url }}{{ requirement.link }}">{{ requirement.title }}</a>
+                {% elsif material.type == "external" %}
+                <a href="{{ requirement.link }}">{{ requirement.title }}</a>
+                {% endif %}
+            </li>
           {% endfor %}
         </ul>
         {% endif %}

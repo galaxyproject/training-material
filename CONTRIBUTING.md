@@ -140,7 +140,7 @@ You can then visualize locally ([http://localhost:4000/](http://localhost:4000/)
     - `type`: targeted users (`"use"` or `""`) 
     - `summary`: summary of the content of the topic
     - `docker_image`: name of the [Docker image](#docker-directory) with the tools for this topic
-    - `requirements`: list of requirements general for this topic, with a `title` and a `link`
+    - `requirements`: list of requirements general for this topic, with a `title`, a `link` (relative for internal (inside training material) requirement or full for external requirement) and the type of link (`internal` or `external`)
     - `material`: list of material available for this topic
 
         For each material, you need to fill at least:
@@ -182,7 +182,7 @@ You can then visualize locally ([http://localhost:4000/](http://localhost:4000/)
     - `slides` (`"yes"` or `"no"`): tell if slides are available for this material
     - `questions`: list of questions that are adressed in the tutorial
     - `objectives`: list of objectives of the tutorial
-    - `requirements`: list of requirements specific to this tutorial (in addition to the one of the topic), with a `title` and a `link`
+    - `requirements`: list of requirements specific to this tutorial (in addition to the one of the topic), with a `title`, a `link` (relative for internal (inside training material) requirement or full for external requirement) and the type of link (`internal` or `external`)
     - `time_estimation`: estimation of the time needed to complete the hands-on
     - `key_points`: take home messages
 

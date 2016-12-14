@@ -57,7 +57,11 @@ You can also navigate with arrow keys.
 Before diving into this slide deck, we recommend you to have a look at:
 
 {% for requirement in topic.requirements %}
+  {% if requirement.type == "internal" %}
+- [{{ requirement.title }}]({{ site.url }}{{ requirement.link }})
+  {% elsif material.type == "external" %}
 - [{{ requirement.title }}]({{ requirement.link }})
+  {% endif %}
 {% endfor %}
 
 ---
