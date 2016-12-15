@@ -41,6 +41,10 @@ We have extracted sequences from the Sequence Read Archive (SRA) files to build 
 > 1. Create a new history for this RNA-seq exercise
 > 2. Import a FASTQ file pair (*e.g.*  [`GSM461177_untreat_paired_subset_1`](https://zenodo.org/record/61771/files/GSM461177_untreat_paired_subset_1.fastq) and [`GSM461177_untreat_paired_subset_2`](https://zenodo.org/record/61771/files/GSM461177_untreat_paired_subset_2.fastq)) from [Zenodo](http://dx.doi.org/10.5281/zenodo.61771)
 >
+>    > ### :nut_and_bolt: Comments
+>    > If you are using the [Freiburg Galaxy instance](http://galaxy.uni-freiburg.de), you can load the dataset using 'Shared Data' <i class="fa fa-long-arrow-right"></i> 'Data Libraries' <i class="fa fa-long-arrow-right"></i> 'Galaxy Courses' <i class="fa fa-long-arrow-right"></i> 'RNA-Seq' <i class="fa fa-long-arrow-right"></i> 'fastq'
+>    {: .comment}
+>
 >    > ### :bulb: Tip: Importing data via links
 >    >
 >    > * Copy the link location
@@ -133,6 +137,10 @@ To help finding the needed previous information and afterward annotating RNA seq
 > ### :pencil2: Hands-on: Drosophila annotation file upload
 >
 > 1. Load the Ensembl gene annotation for *Drosophila melanogaster* ([`Drosophila_melanogaster.BDGP5.78.gtf`](https://zenodo.org/record/61771/files/Drosophila_melanogaster.BDGP5.78.gtf)) from [Zenodo](http://dx.doi.org/10.5281/zenodo.61771) into your current Galaxy history and rename it
+>
+>    > ### :nut_and_bolt: Comments
+>    > If you are using the [Freiburg Galaxy instance](http://galaxy.uni-freiburg.de), you can load the dataset using 'Shared Data' <i class="fa fa-long-arrow-right"></i> 'Data Libraries' <i class="fa fa-long-arrow-right"></i> 'Galaxy Courses' <i class="fa fa-long-arrow-right"></i> 'RNA-Seq' <i class="fa fa-long-arrow-right"></i> 'annotation'
+>    {: .comment}
 {: .hands_on}
 
 ## Preliminary mapping
@@ -262,13 +270,13 @@ The mapping exercise worked for you? Great! :tada:
 > You can do the same process on the other sequence files available on [Zenodo](http://dx.doi.org/10.5281/zenodo.61771)
 > 
 > - Paired-end data
->     - [GSM461178_untreat_paired_subset_1](GSM461178_untreat_paired_subset_1.fastq) and [GSM461178_untreat_paired_subset_2](GSM461178_untreat_paired_subset_2.fastq)
->     - [GSM461180_treat_paired_subset_1](GSM461180_treat_paired_subset_1.fastq) and [GSM461180_treat_paired_subset_2](GSM461180_treat_paired_subset_2.fastq)
->     - [GSM461181_treat_paired_subset_1](GSM461181_treat_paired_subset_1.fastq) and [GSM461181_treat_paired_subset_2](GSM461181_treat_paired_subset_2.fastq)
+>     - `[GSM461178_untreat_paired_subset_1](GSM461178_untreat_paired_subset_1.fastq)` and `[GSM461178_untreat_paired_subset_2](GSM461178_untreat_paired_subset_2.fastq)`
+>     - `[GSM461180_treat_paired_subset_1](GSM461180_treat_paired_subset_1.fastq)` and `[GSM461180_treat_paired_subset_2](GSM461180_treat_paired_subset_2.fastq)`
+>     - `[GSM461181_treat_paired_subset_1](GSM461181_treat_paired_subset_1.fastq)` and `[GSM461181_treat_paired_subset_2](GSM461181_treat_paired_subset_2.fastq)`
 > - Single-end data
->     - [GSM461176_untreat_single_subset](GSM461176_untreat_single_subset.fastq)
->     - [GSM461179_treat_single_subset](GSM461179_treat_single_subset.fastq)
->     - [GSM461182_untreat_single_subset](GSM461182_untreat_single_subset.fastq)
+>     - `[GSM461176_untreat_single_subset](GSM461176_untreat_single_subset.fastq)`
+>     - `[GSM461179_treat_single_subset](GSM461179_treat_single_subset.fastq)`
+>     - `[GSM461182_untreat_single_subset](GSM461182_untreat_single_subset.fastq)`
 >
 > This is really interesting to redo on the other datasets, specially to check how the parameters are inferred given the different type of data.
 {: .hands_on}
@@ -285,6 +293,11 @@ However, the datasets we used were a subset of the original data. They are then 
 >    - [`GSM461177_untreat_paired_deletions_chr4.bed`](https://zenodo.org/record/61771/files/GSM461177_untreat_paired_deletions_chr4.bed)
 >    - [`GSM461177_untreat_paired_insertions_chr4.bed`](https://zenodo.org/record/61771/files/GSM461177_untreat_paired_insertions_chr4.bed)
 >    - [`GSM461177_untreat_paired_junctions_chr4.bed`](https://zenodo.org/record/61771/files/GSM461177_untreat_paired_junctions_chr4.bed)
+> 
+>    > ### :nut_and_bolt: Comments
+>    > If you are using the [Freiburg Galaxy instance](http://galaxy.uni-freiburg.de), you can load the dataset using 'Shared Data' <i class="fa fa-long-arrow-right"></i> 'Data Libraries' <i class="fa fa-long-arrow-right"></i> 'Galaxy Courses' <i class="fa fa-long-arrow-right"></i> 'RNA-Seq' <i class="fa fa-long-arrow-right"></i> 'sample_tophat2_out'
+>    {: .comment}
+>
 > 3. **IGV** :wrench:: Visualize this BAM file and the three BED files, particularly the region on chromosome 4 between 560 kb to 600 kb (`chr4:560,000-600,000`)
 >
 >    > ### :nut_and_bolt: Comment
@@ -336,7 +349,7 @@ However, the datasets we used were a subset of the original data. They are then 
 >    >    <details>
 >    >    <summary>Click to view answers</summary>
 >    >    <ol type="1">
->    >    <li>The coverage for each alignment track is plotted as a bar graph. Arcs representing splice junctions connect exons</li>
+>    >    <li>The coverage for each alignment track is plotted as a bar graph. Arcs representing splice junctions connecting exons</li>
 >    >    <li>Arcs display the number of reads split across the junction (junction depth). </li>
 >    >    <li>JUNC00013370 starts at 574338 and ends at 578091.</li>
 >    >    </ol>
@@ -357,7 +370,7 @@ To identify exons that are regulated by the Pasilla gene, we need to identify ge
 
 ## Count the number of reads per annotated gene
 
-To compare the expression of single genes between different conditions (*e.g.* with or without PS depletion), an first essential step is to quantify the number of reads per gene. [**HTSeq-count**](http://www-huber.embl.de/users/anders/HTSeq/doc/count.html) is one of the most popular tools for gene quantification.
+To compare the expression of single genes between different conditions (*e.g.* with or without PS depletion), an first essential step is to quantify the number of reads per gene. [**HTSeq-count**](http://www-huber.embl.de/users/anders/HTSeq/doc/count.html) is one of the most popular tool for gene quantification.
 
 To quantify the number of reads mapped to a gene, an annotation of the genomic features as it is in the genes is needed. We already upload on Galaxy the [`Drosophila_melanogaster.BDGP5.78.gtf`](https://zenodo.org/record/61771/files/Drosophila_melanogaster.BDGP5.78.gtf) with the Ensembl gene annotation for *Drosophila melanogaster*.
 
@@ -388,13 +401,11 @@ The recommended mode is "union", which counts overlaps even if a read only share
 >
 >    > ### :question: Question
 >    >
->    > 1. Which feature has the most reads mapped on it?
+>    > Which feature has the most reads mapped on it?
 >    > 
 >    >    <details>
 >    >    <summary>Click to view answers</summary>
->    >    <ol type="1">
->    >    <li>To display the most found feature, we need first to sort the output file with the feature and the number of reads found for these feature. We do that using Sort tool, on the second column and in descending order. And we found that FBgn0017545 is the feature with the most reads mapped on it with 4,030 reads.</li>
->    >    </ol>
+>    >    To display the most found feature, we need first to sort the output file with the feature and the number of reads found for these feature. We do that using Sort tool, on the second column and in descending order. And we found that FBgn0017545 is the feature with the most reads mapped on it with 4,030 reads.
 >    >    </details>
 >    {: .question}
 {: .hands_on}
@@ -414,7 +425,7 @@ These files contain for each gene the number of reads mapped to it. We could com
 
 Either for within or for inter-sample comparison, the counts need to be normalized. We can then use the Differential Gene Expression (DGE) analysis, whose two basic tasks are:
 
-- Estimate the bilogical variance using the replicates for each condition
+- Estimate the biological variance using the replicates for each condition
 - Estimate the significance of expression differences between any two conditions
 
 This expression analysis is estimated from read counts and attempts are made to correct for variability in measurements using replicates that are absolutely essential accurate results. For your own analysis, we advice you to use at least 3, better 5 biological replicates. 
@@ -443,6 +454,11 @@ Here treatment is the primary factor which we are interested in.The sequencing t
 >    - [GSM461180_treat_paired.counts](https://zenodo.org/record/61771/files/GSM461180_treat_paired.counts)
 >    - [GSM461181_treat_paired.counts](https://zenodo.org/record/61771/files/GSM461181_treat_paired.counts)
 >    - [GSM461182_untreat_single.counts](https://zenodo.org/record/61771/files/GSM461182_untreat_single.counts)
+>
+>    > ### :nut_and_bolt: Comments
+>    > If you are using the [Freiburg Galaxy instance](http://galaxy.uni-freiburg.de), you can load the dataset using 'Shared Data' <i class="fa fa-long-arrow-right"></i> 'Data Libraries' <i class="fa fa-long-arrow-right"></i> 'Galaxy Courses' <i class="fa fa-long-arrow-right"></i> 'RNA-Seq' <i class="fa fa-long-arrow-right"></i> 'count_tables'
+>    {: .comment}
+>
 > 3. **DESeq2** :wrench:: Run **DESeq2** with:
 >    - "Treatment" as first factor with "treated" and "untreated" as levels and selection of count files corresponding to both levels
 >
@@ -493,8 +509,10 @@ The first output of **DESeq2** is a tabular file. The columns are:
 >    {: .comment}
 >
 > 2. **Filter** :wrench:: Extract genes that are significantly up and downregulated in treated samples
->    
->    Rename the generated files to use them more easily afterwards.
+>
+>    > ### :nut_and_bolt: Comments
+>    > Rename your datasets for the downstream analyses
+>    {: .comment}
 >
 >    > ### :question: Question
 >    >
@@ -504,18 +522,6 @@ The first output of **DESeq2** is a tabular file. The columns are:
 >    > <summary>Click to view answers</summary>
 >    > To obtain the up-regulated genes, we filter the previously generated file (with the significant change in gene expression) with the expression "c3>0" (the log2 fold changes must be greater than 0). We obtain 331 genes (44.07% of the genes with a significant change in gene expression). For the down-regulated genes, we did the inverse and we 420 genes (55.93% of the genes with a significant change in gene expression)
 >    > </details>
->    {: .question}
->
-> 3. **Summary Statistics for any numerical column** :wrench:: Compute statistics for the log2 fold change of upregulated and downregulated genes
->
->    > ### :question: Questions
->    >
->    > Are upregulated genes more expressed than the downregulated genes?
->    > 
->    >    <details>
->    >    <summary>Click to view answers</summary>
->    >    The mean log2 fold change for the upregulated genes is 0.651192 and for the downregulated genes is -0.65569. So, in absolute, the downregulated genes are more expressed
->    >    </details>
 >    {: .question}
 {: .hands_on}
 
@@ -528,17 +534,6 @@ In addition to the list of genes, **DESeq2** outputs a graphical summary of the 
 2. [MA plot](https://en.wikipedia.org/wiki/MA_plot): global view of the relationship between the expression change of conditions (log ratios, M), the average expression strength of the genes (average mean, A), and the ability of the algorithm to detect differential gene expression. The genes that passed the significance threshold (adjusted p-value < 0.1) are colored in red.
 
     ![](../images/DESeq2_MA_plot.png)
-
-
-    > ### :question: Questions
-    >
-    > Are the expression changes symmetrically dispersed? Is it similar to previous observations?
-    > 
-    >    <details>
-    >    <summary>Click to view answers</summary>
-    >    No they are not symmetrically dispersed, because we see previously a slight difference in the mean of the log2 fold change
-    >    </details>
-    {: .question}
 
 
 3. Principal Component Analysis ([PCA](https://en.wikipedia.org/wiki/Principal_component_analysis)) and the first two axes
@@ -636,13 +631,13 @@ We use then DAVID to identify functional annotations of the upregulated genes an
 
 Now, we would like to know the differential exon usage between treated (PS depleted) and untreated samples using RNA-seq exon counts. We will rework on the mapping results ([`GSM461177_untreat_paired_chr4.bam`](https://zenodo.org/record/61771/files/GSM461177_untreat_paired_chr4.bam)).
 
-We use [DEXSeq](http://www.bioconductor.org/packages/release/bioc/html/DEXSeq.html). DEXSeq detects with high sensitivity genes, and in many cases exons, that are subject to differential exon usage. 
+We use [DEXSeq](http://www.bioconductor.org/packages/release/bioc/html/DEXSeq.html). DEXSeq detects high sensitivity genes, and in many cases exons, that are subject to differential exon usage. 
 
 First, we need to count the number of reads mapping the exons. 
 
 ## Count the number of reads per exon
 
-This step is similar to the step of counting the number of reads per annotated gene (#count-the-number-of-reads-per-annotated-gene). Here instead of HTSeq-count, we are using DEXSeq-Count. 
+This step is similar to the step of [counting the number of reads per annotated gene](#count-the-number-of-reads-per-annotated-gene). Here instead of HTSeq-count, we are using DEXSeq-Count. 
 
 > ### :pencil2: Hands-on: Counting the number of reads per exon
 >
@@ -690,6 +685,11 @@ As for DESeq2, we counted only reads that mapped to exons on chromosome 4 for on
 >    - [untreated2_single.txt](https://zenodo.org/record/61771/files/untreated2_single.txt)
 >    - [untreated3_paired.txt](https://zenodo.org/record/61771/files/untreated3_paired.txt)
 >    - [untreated4_paired.txt](https://zenodo.org/record/61771/files/untreated4_paired.txt)
+>
+>    > ### :nut_and_bolt: Comments
+>    > If you are using the [Freiburg Galaxy instance](http://galaxy.uni-freiburg.de), you can load the dataset using 'Shared Data' <i class="fa fa-long-arrow-right"></i> 'Data Libraries' <i class="fa fa-long-arrow-right"></i> 'Galaxy Courses' <i class="fa fa-long-arrow-right"></i> 'RNA-Seq' <i class="fa fa-long-arrow-right"></i> 'dexseq'
+>    {: .comment}
+>
 > 3. **DEXSeq** :wrench:: Run **DEXSeq** with
 >    - "Condition" as first factor with "treated" and "untreated" as levels and selection of count files corresponding to both levels
 >    - "Sequencing" as second factor with "PE" and "SE" as levels and selection of count files corresponding to both levels
@@ -729,8 +729,6 @@ Similarly to DESeq2, DEXSeq generates a table with:
 >    > </details>
 >    {: .question}
 {: .hands_on}
-
-After having result table, you may want to filter for significant exon usages as you did in step 6. But this time, the adjusted p-value is in column 8.
 
 # Annotation of the result tables with gene information
 
