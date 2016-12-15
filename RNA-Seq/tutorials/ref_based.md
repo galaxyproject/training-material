@@ -71,7 +71,7 @@ Both files contain the first 100.000 paired-end reads of one sample. The sequenc
 
 ## Quality control
 
-For quality control, we use similar tools as described in [NGS-QC tutorial](../../NGS-QC/tutorials/dive_into_qc): [FastQC](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/)) and [Trim Galore](http://www.bioinformatics.babraham.ac.uk/projects/trim_galore/).
+For quality control, we use similar tools as described in [NGS-QC tutorial](../../NGS-QC/tutorials/dive_into_qc): [FastQC](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/) and [Trim Galore](http://www.bioinformatics.babraham.ac.uk/projects/trim_galore/).
 
 > ### :pencil2: Hands-on: Quality control
 >
@@ -137,10 +137,10 @@ To help finding the needed previous information and afterward annotating RNA seq
 
 ## Preliminary mapping
 
-In a prelimary mapping, we will estimate the needed parameters (library and strandedness type and inner distance) to run afterward efficiently TopHat.
+In a preliminary mapping, we will estimate the needed parameters (library and strandedness type and inner distance) to run afterwards efficiently TopHat.
 
 > ### :nut_and_bolt: Comment
-> This step is not necessary if you don't need to estimate the library and its strandedness types or the inner distance between the two reads for paired-end data
+> This step is not necessary if you don't need to estimate the library and its strandedness types or the inner distance between the two reads for paired-end data.
 {: .comment}
 
 > ### :pencil2: Hands-on: Preliminary mapping and parameter estimation
