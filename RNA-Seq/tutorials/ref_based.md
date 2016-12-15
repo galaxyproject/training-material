@@ -34,7 +34,7 @@ We will look at the 7 first samples:
 
 Each sample constitutes a separate biological replicate of the corresponding condition (treated or untreated). Moreover, two of the treated and two of the untreated samples are from a paired-end sequencing assay, while the remaining samples are from a single-end sequencing experiment.
 
-We have extracted sequences from the sequence read archive (SRA) files to build FASTQ files.
+We have extracted sequences from the Sequence Read Archive (SRA) files to build FASTQ files.
 
 > ### :pencil2: Hands-on: Data upload
 >
@@ -123,8 +123,8 @@ Spliced mappers have been developed to efficiently map transcript-derived reads 
 
 TopHat needs to know two important parameters about the sequencing library
 
-- The library type and its strandedness type
-- The inner distance between the two reads for paired-end data
+- The library type
+- The mean inner distance between the mate pairs for paired-end data
 
 These information should usually come with your FASTQ files, ask your sequencing facility! If not, try to find them on the site where you downloaded the data or in the corresponding publication. Another option is to estimate these parameters with a *preliminary mapping* of a *downsampled* file and some analysis programs. Afterward, the actual mapping can be redone on the original files with the optimized parameters.
 
@@ -137,10 +137,10 @@ To help finding the needed previous information and afterward annotating RNA seq
 
 ## Preliminary mapping
 
-In a preliminary mapping, we will estimate the needed parameters (library and strandedness type and inner distance) to run afterwards efficiently TopHat.
+In a preliminary mapping, we will estimate the needed parameters (library type and inner distance) to run TopHat efficiently afterwards.
 
 > ### :nut_and_bolt: Comment
-> This step is not necessary if you don't need to estimate the library and its strandedness types or the inner distance between the two reads for paired-end data.
+> This step is not necessary if you don't need to estimate the library type and the mean inner distance between the mate pairs for paired-end data.
 {: .comment}
 
 > ### :pencil2: Hands-on: Preliminary mapping and parameter estimation
@@ -195,7 +195,7 @@ In a preliminary mapping, we will estimate the needed parameters (library and st
 >    >    <summary>Click to view answer</summary>
 >    >    <ol type="1">
 >    >    <li>Fraction of reads explained by "1++,1--,2+-,2-+": 0.5176 and Fraction of reads explained by "1+-,1-+,2++,2--": 0.4824</li>
->    >    <li>Most of the reads are explained by "1++,1--,2+-,2-+". So the library type is PE and in TopHat it means "FR Second Strand"</li>
+>    >    <li>As reads are not explained by any configuration significantly, it is an "unstranded" library.</li>
 >    >    </ol>
 >    >    </details>
 >    {: .question}
@@ -203,7 +203,7 @@ In a preliminary mapping, we will estimate the needed parameters (library and st
 
 ## Actual mapping
 
-With the sequencing library parameters, we can now map the full RNA sequences on the *Drosophila melanogaster* genome using TopHat.
+With these estimated parameters, we can now map all the RNA sequences on the *Drosophila melanogaster* genome using TopHat.
 
 > ### :pencil2: Hands-on: Spliced mapping
 >
@@ -223,14 +223,14 @@ With the sequencing library parameters, we can now map the full RNA sequences on
 >        > 
 >        > <details>
 >        > <summary>Click to view answer</summary>
->        > If you look at the FastQC report after Trim Galore, the minimum length of the reads is 20 in both datasets. To be careful, we chosed a value of 18.
+>        > Remember that the total length of the reads are 37 bases. With 25, we left with segments of lengths 25 (or more) and 12 (or less) bases. The 12 base long reads lead to huge number of multi mappings. Setting this option to 18 results in bit longer segments and in best case both of them can be mapped properly.           
 >        > </details>
 >        {: .question}
 >
 >    - "Yes" for use of own junction data
 >    - "Yes" for use of Gene Annotation Model
 >    - `Drosophila_melanogaster.BDGP5.78.gtf` as Gene Model Annotations (to enable transcriptome alignment)
->    - "Yes (--coverage-search)" to use coverage-based search for junctions
+>    - "No (--coverage-search)" to use coverage-based search for junctions as it needs a lot a time. But consider this option for real world data.
 >
 >        The TopHat algorithm splits reads into segments to map the reads across splice junctions. Coverage-based search for junctions increases the sensitivity.
 >
@@ -240,7 +240,7 @@ With the sequencing library parameters, we can now map the full RNA sequences on
 >    >
 >    > 1. How many forward reads were mapped? And how many reverse reads?
 >    > 2. What is the "overall read mapping rate"? And the "concordant pair alignment rate"?
->    > 3. Why have some reads multiple alignments?
+>    > 3. Why do some reads have multiple alignments?
 >    > 
 >    >    <details>
 >    >    <summary>Click to view answer</summary>
@@ -388,13 +388,11 @@ The recommended mode is "union", which counts overlaps even if a read only share
 >
 >    > ### :question: Question
 >    >
->    > 1. How many reads could not have been assigned to any feature?
->    > 2. Which feature has the most read mapped on it?
+>    > 1. Which feature has the most reads mapped on it?
 >    > 
 >    >    <details>
 >    >    <summary>Click to view answers</summary>
 >    >    <ol type="1">
->    >    <li>16,196 reads were not assigned to any feature.</li>
 >    >    <li>To display the most found feature, we need first to sort the output file with the feature and the number of reads found for these feature. We do that using Sort tool, on the second column and in descending order. And we found that FBgn0017545 is the feature with the most reads mapped on it with 4,030 reads.</li>
 >    >    </ol>
 >    >    </details>
@@ -416,8 +414,8 @@ These files contain for each gene the number of reads mapped to it. We could com
 
 Either for within or for inter-sample comparison, the counts need to be normalized. We can then use the Differential Gene Expression (DGE) analysis, whose two basic tasks are:
 
-- Estimate the magnitude of expression differences between the samples
-- Estimate the significance of expression differences between the samples
+- Estimate the bilogical variance using the replicates for each condition
+- Estimate the significance of expression differences between any two conditions
 
 This expression analysis is estimated from read counts and attempts are made to correct for variability in measurements using replicates that are absolutely essential accurate results. For your own analysis, we advice you to use at least 3, better 5 biological replicates. 
 
@@ -429,10 +427,10 @@ This expression analysis is estimated from read counts and attempts are made to 
 
 Multiple factors can then be incorporated in the analysis. In our example, we have samples with two varying factors:
 
-- Condition (either treated or untreated)
+- Treatment (either treated or untreated)
 - Sequencing type (paired-end or single-end)
 
-A multi-factor analysis allows us to assess the effect of the treatment taking also the sequencing type into account.
+Here treatment is the primary factor which we are interested in.The sequencing type is some further information that we know about the data that might effect the analysis. This particular multi-factor analysis allows us to assess the effect of the treatment taking also the sequencing type into account.
 
 > ### :pencil2: Hands-on:
 >
@@ -446,7 +444,7 @@ A multi-factor analysis allows us to assess the effect of the treatment taking a
 >    - [GSM461181_treat_paired.counts](https://zenodo.org/record/61771/files/GSM461181_treat_paired.counts)
 >    - [GSM461182_untreat_single.counts](https://zenodo.org/record/61771/files/GSM461182_untreat_single.counts)
 > 3. **DESeq2** :wrench:: Run **DESeq2** with:
->    - "Condition" as first factor with "treated" and "untreated" as levels and selection of count files corresponding to both levels
+>    - "Treatment" as first factor with "treated" and "untreated" as levels and selection of count files corresponding to both levels
 >
 >       > ### :nut_and_bolt: Comment
 >       >
@@ -468,7 +466,7 @@ The first output of **DESeq2** is a tabular file. The columns are:
 3.	Logarithm (to basis 2) of the fold change
 
 
-    The log2 fold changes are based on primary factor level 1 vs. factor level 2. The order of factor levels is then important. For example, for the factor 'Condition', DESeq2 computes fold changes of 'treated' samples against 'untreated', *i.e.* the values correspond to up- or downregulations of genes in treated samples.
+    The log2 fold changes are based on primary factor level 1 vs. factor level 2. The order of factor levels is then important. For example, for the factor 'Treatment', DESeq2 computes fold changes of 'treated' samples against 'untreated', *i.e.* the values correspond to up- or downregulations of genes in treated samples.
 
 4.	Standard error estimate for the log2 fold change estimate
 5.	[Wald](https://en.wikipedia.org/wiki/Wald_test) statistic
@@ -485,7 +483,7 @@ The first output of **DESeq2** is a tabular file. The columns are:
 >    > 
 >    > <details>
 >    > <summary>Click to view answers</summary>
->    > To filter, you need to add the expression "c7<=0.05". And we get 751 genes (5.05%) with a significant change in gene expression between treated and untreated samples
+>    > To filter, you need to add the expression "c7&lt;0.05". And we get 751 genes (5.05%) with a significant change in gene expression between treated and untreated samples.
 >    > </details>
 >    {: .question}
 >
@@ -494,7 +492,7 @@ The first output of **DESeq2** is a tabular file. The columns are:
 >    > The file with the independent filtered results can be used for further downstream analysis as it excludes genes with only few read counts as these genes will not be considered as significantly differentially expressed.
 >    {: .comment}
 >
-> 2. **Filter** :wrench:: Extract genes that are significantly upregulated and those downregulated in treated samples
+> 2. **Filter** :wrench:: Extract genes that are significantly up and downregulated in treated samples
 >    
 >    Rename the generated files to use them more easily afterwards.
 >
@@ -516,7 +514,7 @@ The first output of **DESeq2** is a tabular file. The columns are:
 >    > 
 >    >    <details>
 >    >    <summary>Click to view answers</summary>
->    >    The mean log2 fold change for the upregulated genes is 0.651192 and for the downregulated genes is -0.65569. So, in absolute, the downregulated genes are more expressed</li>
+>    >    The mean log2 fold change for the upregulated genes is 0.651192 and for the downregulated genes is -0.65569. So, in absolute, the downregulated genes are more expressed
 >    >    </details>
 >    {: .question}
 {: .hands_on}
@@ -539,7 +537,6 @@ In addition to the list of genes, **DESeq2** outputs a graphical summary of the 
     >    <details>
     >    <summary>Click to view answers</summary>
     >    No they are not symmetrically dispersed, because we see previously a slight difference in the mean of the log2 fold change
-    >    </ol>
     >    </details>
     {: .question}
 
