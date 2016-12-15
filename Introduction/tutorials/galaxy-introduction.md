@@ -11,10 +11,11 @@ This practical aims to familiarize you with the Galaxy user interface. It will t
 > ### Agenda
 >
 > In this tutorial, we will:
-> - [Obtain data from external sources](#data-upload)
-> - [Analyze the data](#analysis)
-> - [Manage histories and workflows](#galaxy-management)
-> - [Share the work](#share-your-work)
+>
+> 1. [Obtain data from external sources](#data-upload)
+> 2. [Analyze the data](#analysis)
+> 3. [Manage histories and workflows](#galaxy-management)
+> 4. [Share the work](#share-your-work)
 {: .agenda}
 
 # Pretreatments
