@@ -21,8 +21,11 @@ In the following we will process a dataset with a mapper, 'Bowtie2', and we will
 >
 > We will process data inside Galaxy with Bowtie2 and have a look at the results.
 >
-> 1. Load the dataset in Galaxy: 'Shared Data' -> 'Data Libraries' -> 'Galaxy Courses' -> 'RNA-Seq' -> 'fastq' -> 'GSM461178_untreat_paired_subset_1.fastq'. Or load the dataset from [Zenodo](https://zenodo.org/record/61771/files/GSM461178_untreat_paired_subset_1.fastq) into Galaxy. 
-> 
+> 1. Load the ['GSM461178_untreat_paired_subset_1.fastq'](https://zenodo.org/record/61771/files/GSM461178_untreat_paired_subset_1.fastq) dataset from [Zenodo](https://zenodo.org/record/61771) into Galaxy. 
+>
+>    > ### :nut_and_bolt: Comments
+>    > If you are using the [Freiburg Galaxy instance](http://galaxy.uni-freiburg.de), you can load the dataset using 'Shared Data' -> 'Data Libraries' -> 'Galaxy Courses' -> 'RNA-Seq' -> 'fastq'
+>    {: .comment}
 >    
 >    > ### :bulb: Tip: Importing data via links
 >    >
@@ -133,9 +136,12 @@ A general description of the user interface of the IGV browser can be read here:
 
 > ### :pencil2: Hands-on: Differences between a good and a bad mapping
 >
-> 1. **Galaxy** :wrench:: To show you the difference between a good and a bad dataset we provided an additional dataset which will give you a bad mapping. 
->   - Load the dataset in Galaxy: 'Shared Data' -> 'Data Libraries' -> 'Galaxy Courses' -> 'RNA-Seq' -> 'fastq' -> 'GSM461182_untreat_single_subset.fastq'. Do the steps from above again. 
->   - For worldwide data access: Get the [dataset](https://zenodo.org/record/61771/files/GSM461182_untreat_single_subset.fastq) from Zenodo.
+> 1. **Galaxy** :wrench:: To show you the difference between a good and a bad dataset we provided an additional dataset which will give you a bad mapping. Load the ['GSM461182_untreat_single_subset.fastq'](https://zenodo.org/record/61771/files/GSM461178_untreat_paired_subset_1.fastq) dataset from [Zenodo](https://zenodo.org/record/61771) into Galaxy. 
+>
+>    > ### :nut_and_bolt: Comments
+>    > If you are using the [Freiburg Galaxy instance](http://galaxy.uni-freiburg.de), you can load the dataset using 'Shared Data' -> 'Data Libraries' -> 'Galaxy Courses' -> 'RNA-Seq' -> 'fastq'
+>    {: .comment}
+>
 > 2. **IGV** :wrench:: Load the two mappings into IGV and compare them!
 >
 >       > ### :question: Questions
