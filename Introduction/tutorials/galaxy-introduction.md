@@ -299,7 +299,7 @@ Galaxy makes this very easy with the `Extract workflow` option. This means any t
 >
 > 2. Go to the history **Options menu** (gear symbol) and select the `Extract Workflow` option.
 >
->    ![](../history_menu_extract_workflow.png)
+>    ![](../images/history_menu_extract_workflow.png)
 >
 >    The center pane will change as shown below and you will be able to choose which steps to include/exclude and how to name the newly created workflow.
 >
