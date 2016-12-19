@@ -1,0 +1,351 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Training course for GitHub contribution</title>
+    <link rel="stylesheet" href="../../assets/reveal.js/css/reveal.css">
+    <link rel="stylesheet" href="../../assets/reveal.js/css/theme/simple.css" id="theme">
+    <!-- Code syntax highlighting -->
+    <link rel="stylesheet" href="../../assets/reveal.js/lib/css/zenburn.css">
+    <link rel="stylesheet" href="../../assets/css/font-awesome.css">
+    <link rel="stylesheet" href="../../assets/css/slide_custom.css" id="theme">
+    <!-- Printing and PDF exports -->
+    <script>
+      if( window.location.search.match( /print-pdf/gi ) ) {
+        var link = document.createElement( 'link' );
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = '../../assets/reveal.js/css/print/pdf.css';
+        document.getElementsByTagName( 'head' )[0].appendChild( link );
+      }
+    </script>
+    <!--<script>
+      if (window.location.search.match(/print-pdf/gi)) {
+          document.write('<link rel="stylesheet" href="css/pdf.css" type="text/css">');
+      }
+      </script>-->
+    <!--[if lt IE 9]>
+    <script src="reveal.js/lib/js/html5shiv.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="reveal">
+      <!-- Any section element inside of this container is displayed as a slide -->
+      <div class="slides">
+        <section data-markdown>
+          <script type="text/template">
+            ## Welcome!
+
+            <img src="../../shared/images/GTNLogo1000.png" alt="GTNLogo1000"
+            class="no-border" width=30%/>
+
+            The easiest way to **navigate** this slide deck
+            is **by hitting `[space]` on your keyboard**
+
+            You can also navigate with arrow keys, but be careful because some
+            slides can be nested inside of each other (vertically)
+          </script>
+        </section>
+        <section data-markdown>
+          <script type="text/template">
+            # Contributing with GitHub
+          </script>
+        </section>
+        <section data-markdown>
+          <script type="text/template">
+            ### Steps
+
+            - Fork (copy) a GitHub repository in your GitHub space
+
+            - Clone your GitHub repository on your system
+
+            - Create a new branch (one branch = one new feature)
+
+            - Make your changes on this branch
+
+            - Push your branch on your GitHub repository
+
+            - Merge your branch on the original GitHub repository
+
+          </script>
+        </section>
+
+        <!-- FORK -->
+        <section>
+          <section data-markdown>
+            <script type="text/template">
+              ## 1. Fork a repository
+            </script>
+          </section>
+          <section data-markdown>
+            <script type="text/template">
+              ### Fork from a GitHub repository
+
+              <img src="../images/PR_fork.png" alt="Fork" class="no-border" width=90%/>
+
+            </script>
+          </section>
+          <section data-markdown>
+            <script type="text/template">
+              ### Welcome on your fork repository
+
+              <img src="../images/PR_fork_repo.png" alt="new repo" class="no-border" width=90%/>
+
+            </script>
+          </section>
+
+          <section data-markdown>
+            <script type="text/template">
+              ### Welcome on your fork repository
+
+              <img src="../images/PR_schema_01.png" alt="new repo" class="no-border" width=70%/>
+
+            </script>
+          </section>
+
+        </section>
+        <!-- Clone -->
+        <section>
+          <section data-markdown>
+            <script type="text/template">
+              ## 2. Clone your GitHub repository
+            </script>
+          </section>
+          <section data-markdown>
+              <script type="text/template">
+              ### Get your GitHub URL
+
+              <img src="../images/PR_github_url.png" alt="github url" class="no-border" width=90%/>
+            </script>
+          </section>
+
+          <section data-markdown>
+            <script type="text/template">
+              ### Clone your GitHub repository
+
+              - On your terminal:
+
+              	- clone your repository
+
+              	```bash
+              	$ git clone your_fork_github_url
+              	```
+                <img src="../images/PR_url.png" alt="github url" class="no-border" width=70%/>
+
+              	- go into your repository
+
+              	```bash
+              	$ cd training-material
+              	```
+            </script>
+        </section>
+        <section data-markdown>
+            <script type="text/template">
+            ### Clone your GitHub repository
+
+            <img src="../images/PR_schema_02.png" alt="github url" class="no-border" width=80%/>
+          </script>
+        </section>
+
+        </section>
+        <!-- Create new branch -->
+        <section>
+          <section data-markdown>
+            <script type="text/template">
+              ## 3. Make your changes
+            </script>
+          </section>
+          <section data-markdown>
+            <script type="text/template">
+              ### Create your branch
+              List your branches
+
+              ```bash
+              $ git branch
+
+                * master
+              ```
+              <img src="../images/PR_branch_master.png" alt="github url" class="no-border" width=50%/>
+
+              Create a new branch
+
+              ```bash
+              $ git checkout -b my_new_branch
+
+              Switched to a new branch 'my_new_branch'
+              ```
+
+            </script>
+          </section>
+          <section data-markdown>
+            <script type="text/template">
+              ### Make your changes
+
+              List your branches
+
+              ```bash
+              $ git branch
+
+              	master
+              	* my_new_branch
+              ```
+              <img src="../images/PR_branches_01.png" alt="github url" class="no-border" width=50%/>
+
+              Make changes and commits
+
+              ```bash
+              $ git add newfile1 newfile2 ...
+              $ git commit -m "my contribution"
+              ```
+
+              <img src="../images/PR_branches_02.png" alt="github url" class="no-border" width=70%/>
+
+
+            </script>
+          </section>
+
+          <section data-markdown>
+              <script type="text/template">
+              ### Make changes and commits
+
+              <img src="../images/PR_schema_03.png" alt="github url" class="no-border" width=70%/>
+            </script>
+          </section>
+
+          <section data-markdown>
+            <script type="text/template">
+              ### Push your branch on *your* GitHub repository
+
+              ```bash
+              $ git push origin my_new_branch
+              ```
+
+              <img src="../images/PR_schema_04.png" alt="github url" class="no-border" width=70%/>
+
+            </script>
+          </section>
+
+        </section>
+        <!-- Pull request -->
+        <section>
+          <section data-markdown>
+            <script type="text/template">
+              ## 4. The pull request
+            </script>
+          </section>
+
+
+          <section data-markdown>
+              <script type="text/template">
+              ### Can't push on the *original* GitHub repository
+
+              <img src="../images/PR_schema_05.png" alt="github url" class="no-border" width=60%/>
+            </script>
+          </section>
+
+          <section data-markdown>
+            <script type="text/template">
+              ### Create your pull request
+
+              <img src="../images/PR_button.png" alt="pull_request_button" class="no-border" width=90%/>
+
+            </script>
+          </section>
+
+          <section data-markdown>
+            <script type="text/template">
+              ### Select the branches and write a description
+
+              <img src="../images/PR_form.png" alt="pull_request_form" class="no-border" width=80%/>
+
+            </script>
+          </section>
+
+          <section data-markdown>
+            <script type="text/template">
+              ### Your pull request is waiting approval
+
+              Automated tests can be executed by travis
+               - Green cross= OK
+               - Red cross = not OK
+
+              <img src="../images/PR_list.png" alt="pull_request_list" class="no-border" width=80%/>
+
+            </script>
+          </section>
+          <section data-markdown>
+            <script type="text/template">
+              ### Your pull request is accepted (congrats)
+
+              - Automated tests are ok
+              - Authors have accepted your feature
+              - Branches are merged
+
+              <img src="../images/PR_merged_branche.png" alt="merged_branches" class="no-border" width=80%/>
+
+            </script>
+          </section>
+
+          <section data-markdown>
+            <script type="text/template">
+              ### Your feature is now in the original code
+
+              <img src="../images/PR_schema_06.png" alt="Fork" class="no-border" width=60%/>
+
+            </script>
+          </section>
+
+          <section data-markdown>
+            <script type="text/template">
+            ### Your pull request need modifications (oops)
+
+            - Automated tests are non ok
+            - Authors have not accepted your feature
+
+            You have to make modifications on your branch and push it
+
+            </script>
+          </section>
+
+        </section>
+        <section data-markdown>
+          <script type="text/template">
+            ### Summary
+
+            <img src="../images/PR_global_schema.png" alt="Fork" class="no-border" width=80%/>
+
+          </script>
+        </section>
+        <section data-markdown>
+          <script type="text/template">
+            ### <i class="fa fa-exclamation-circle" aria-hidden="true"></i> Key points
+
+            - Work on *your* fork
+            - 1 pull request = 1 branch
+            - Be careful on the branch you're working on
+
+          </script>
+        </section>
+      </div>
+    </div>
+    <script type="text/javascript" src="../../assets/reveal.js/lib/js/head.min.js"></script>
+    <script type="text/javascript" src="../../assets/reveal.js/js/reveal.js"></script>
+    <script type="text/javascript">
+      Reveal.initialize({
+          slideNumber: !window.location.search.match(/print-pdf/gi),
+          history: true,
+
+          theme: Reveal.getQueryHash().theme,
+          transition: Reveal.getQueryHash().transition || 'concave',
+
+          dependencies: [
+              { src: '../../assets/reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+              { src: '../../assets/reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+              { src: '../../assets/reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+              { src: '../../assets/reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+              { src: '../../assets/reveal.js/plugin/notes/notes.js', async: true },
+          ]
+      });
+    </script>
+  </body>
+</html>
