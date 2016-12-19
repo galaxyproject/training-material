@@ -1,0 +1,24 @@
+---
+layout: base_slides
+---
+
+{{ content }}
+
+---
+
+{% assign topic = site.data[page.topic_name] %}
+
+## Tutorials
+
+
+{% for material in topic.material %}
+    {% if material.type == "tutorial" %}
+        {% if material.hands_on == "yes" %}
+- [{{ material.title }}]({{ site.url }}/{{ topic.name }}/tutorials/{{ material.name }})
+        {% elsif material.hands_on == "github" %}
+- [{{ material.title }}]({{ site.github_repository }}/tree/master/{{ topic.name }}/tutorials/{{ material.name }}.md)
+        {% elsif material.slides == "yes" %}
+- [{{ material.title }}]({{ site.url }}/{{ topic.name }}/slides/{{ material.name }})
+        {% endif %}
+    {% endif %}
+{% endfor %}
