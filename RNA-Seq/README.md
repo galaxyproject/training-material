@@ -8,8 +8,6 @@ RNA-sequencing is a method used to reveal the presence and quantity of RNA in a 
 Several deck of slides are available for this topic:
 
 - [General introduction about RNA seq data analysis](http://bgruening.github.io/training-material/RNA-Seq/slides/)
-- Slide deck related to the tutorials:
-    - [Reference-based RNA-seq data analysis](http://bgruening.github.io/training-material/RNA-Seq/slides/ref_based.html)
 
 # Tutorials
 
