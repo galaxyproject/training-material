@@ -9,8 +9,6 @@ Here, we propose some materials to learn how to analyze ChIP-seq data.
 Several deck of slides are available for this topic:
 
 - [General introduction about ChIP-seq data analysis](http://bgruening.github.io/training-material/ChIP-Seq/slides)
-- Slide deck related to the tutorials:
-    - [Identification of the binding sites of the Estrogen receptor with ChIP-sequencing](http://bgruening.github.io/training-material/ChIP-Seq/slides/estrogen_receptor_binding_site_identification.html)
 
 # Tutorials
 
