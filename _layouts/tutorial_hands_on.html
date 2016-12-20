@@ -36,7 +36,10 @@ layout: base
               <li><a href="{{ site.url }}/{{ topic.name }}"> {{ topic.name }}</a></li>
               <li><a href="{{ site.url }}/{{ topic.name }}/slides"><i class="fa fa-graduation-cap"></i> Introduction slides</a></li>
               <!--<li><a href="{{ site.url }}/{{ topic.name }}/slides/{{ tutorial.name }}/"><i class="fa fa-file-powerpoint-o"></i> Associated slides</a></li>-->
-              <li><a href="{{ site.github_repository }}/tree/master/{{ topic.name }}/docker"><i class="fa fa-ship"></i> Docker image</a></li>
+
+              {% if topic.docker_image != "" %}
+                <li><a href="{{ site.github_repository }}/tree/master/{{ topic.name }}/docker"><i class="fa fa-ship"></i> Docker image</a></li>
+              {% endif %}
 
               {% if tutorial.zenodo_link != "" %}
                 <li><a href="{{ tutorial.zenodo_link }}"><i class="fa fa-folder-open"></i> Input Dataset</a></li>
