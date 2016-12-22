@@ -61,6 +61,28 @@
                 <section>
                     <section data-markdown>
                         <script type="text/template">
+                            ### <i class="fa fa-question-circle" aria-hidden="true"></i> Questions
+
+                            - What is a Tool Shed?
+                            - How to install tools and workflows from a Tool Shed into a Galaxy instance?
+                            - What are the Tool Shed repository types?
+                            - How to publish with Planemo?
+                        </script>
+                    </section>
+
+                    <section data-markdown>
+                        <script type="text/template">
+                            ### <i class="fa fa-bullseye" aria-hidden="true"></i> Objectives
+
+                            - Discover what is a Tool Shed
+                            - Be able to install tools and workflows from a Tool Shed into a Galaxy instance
+                            - Be able to publish tools with Planemo
+                       </script>
+                    </section>
+                </section>
+                <section>
+                    <section data-markdown>
+                        <script type="text/template">
                             ## 1. What is a Tool Shed?
                             <img src="../images/toolShed.jpg" class="no-border" width="40%">
                         </script>
@@ -200,7 +222,7 @@
                             ### Install a tool from the Tool Shed
                             - Install the tool
                             <img src="../images/installTool_ss.png" class="no-border" width="80%">
-                            - <span style="font-size:70%"> Selecting TS AND conda will make Galaxy to install both</span>
+                            - <span style="font-size:70%"> Selecting Tool Shed AND conda will make Galaxy to install both</span>
                             - <span style="font-size:70%"> Recommended: use conda </span>
                         </script>
                     </section>
@@ -317,7 +339,7 @@
                     <section data-markdown>
                         <script type="text/template">
                             ###  Tool suite
-                            <img src="../images/toolsuite.png" class="no-border" >
+                            <img src="../images/toolSuite.png" class="no-border" >
                             - Works but...
                         </script>
                     </section>
@@ -325,7 +347,7 @@
                         <script type="text/template">
                             ###  Tool suite
                             <img src="../images/toolsuite2.png" class="no-border" >
-                            - One tool by repository
+                            - One tool per repository
 
                             - How to link tools ?
                               - To install them together
@@ -368,7 +390,8 @@
                             ```
                             <?xml version="1.0"?>
                             <repositories description="Pipeline phylogeny">
-                               <repository name="mafft" owner="gandres" toolshed="http://testtoolshed.g2.bx.psu.edu" changeset_revision="a895633568"/>
+                               <repository name="mafft" owner="gandres" toolshed=
+"http://testtoolshed.g2.bx.psu.edu" changeset_revision="a895633568"/>
                             </repositories>
                             ```
                         </script>
@@ -479,26 +502,26 @@
                     </section>
                     <section data-markdown>
                         <script type="text/template">
-                            ### Configuration
+                            ### Configure the target Tool Shed
                             ```bash
                             planemo config_init
                             ```
                             - Creates .planemo.yml file in your home directory
-                            <img src="../images/planemoYml.png" class="no-border" >
+                            <img src="../images/planemoYml.png" class="no-border" width="50%">
                         </script>
                     </section>
                     <section data-markdown>
                         <script type="text/template">
-                            ### Configuration
+                            ### Configure the target Tool Shed
                             ```bash
                             planemo config_init
                             ```
-                            <img src="../images/planemoYmlConfigured.png"  >
+                            <img src="../images/planemoYmlConfigured.png"  width="60%" >
                         </script>
                     </section>
                     <section data-markdown>
                         <script type="text/template">
-                            ### Creation
+                            ### Configure repository
                             ```bash
                             planemo shed_init --name="tandem_repeats_finder_2"
                                                  --owner="gandres"
@@ -513,8 +536,8 @@
                     </section>
                     <section data-markdown >
                         <script type="text/template">
-                            ### Creation
-                            <img src="../images/namingConvention.png"  >
+                            ### Configure repository
+                            <img src="../images/namingConvention.png" width="70%" >
                             <!-- - Naming conventions
                             | Repository Type | Recommended Name         | Examples                 |
                             | --------------- |-------------------------:| ------------------------:|
@@ -527,7 +550,7 @@
                     </section>
 										<section data-markdown >
                         <script type="text/template">
-                            ### Creation
+                            ### Configure repository
                             - Tools and tool suite .shed.yml:
                               - implicity define repositories for each individual tool in the directory and build a suite for those
                               <img src="../images/planemoAutomaticSuite.png"  >
@@ -535,7 +558,7 @@
                     </section>
                     <section data-markdown >
                         <script type="text/template">
-                            ### Creation
+                            ### Check
                             ```
                             $ planemo shed_lint --tools
                             ```
@@ -560,7 +583,7 @@
                     </section>
                     <section data-markdown >
                         <script type="text/template">
-                            ### Creation
+                            ### Create repository
                             ```
                             $ planemo shed_create --shed_target testtoolshed
                             ```
@@ -574,7 +597,7 @@
                     </section>
                     <section data-markdown >
                         <script type="text/template">
-                            ### Creation
+                            ### Create repository
                             ```
                             $ planemo shed_create --shed_target testtoolshed
                             ```
@@ -589,34 +612,34 @@
                     </section>
                     <section data-markdown >
                         <script type="text/template">
-                            ### Update
+                            ### Update repository
                             ```
                             $ planemo shed_diff --shed_target testtoolshed
 
                             ```
-                            <img src="../images/planemoUpdate.png" width="60%" >
+                            <img src="../images/planemoUpdate.png" width="80%" >
                             - Need to be updated
                         </script>
                     </section>
                     <section data-markdown >
                         <script type="text/template">
-                            ### Update
+                            ### Update repository
                             ```
                             $ planemo shed_update --check_diff --shed_target testtoolshed
 
                             ```
-                            <img src="../images/planemoUpdated.png" width="60%" >
+                            <img src="../images/planemoUpdated.png" width="80%" >
                             - Tool updated
                         </script>
                     </section>
                     <section data-markdown >
                         <script type="text/template">
-                            ### Update
+                            ### Update repository
                             ```
                             $ planemo shed_update --check_diff --shed_target testtoolshed
 
                             ```
-                            <img src="../images/checkToolUpdate.png" width="60%" >
+                            <img src="../images/checkToolUpdate.png" width="70%" >
                             - Tool updated
                         </script>
                     </section>
@@ -634,24 +657,46 @@
                 <section>
                     <section data-markdown >
                         <script type="text/template">
-                            ## Hands-on
+                            ### <i class="fa fa-pencil" aria-hidden="true"></i> Hands-on
+                            
+                            <img src="../images/exercise.png" alt="exercise">
                         </script>
                     </section>
                     <section data-markdown >
                         <script type="text/template">
-                            ### Start and configure your toolshed
-                            - To start your toolshed (in galaxy home directory):
+                            ### <i class="fa fa-pencil" aria-hidden="true"></i> Hands-on
+                            
+                            #### The goal
+                            Publish your tool (seqtk_seq) in your local toolshed with Planemo
+                        </script>
+                    </section>
+                    <section data-markdown >
+                        <script type="text/template">
+                            ### <i class="fa fa-pencil" aria-hidden="true"></i> Hands-on
+
+                            #### Step 1: Start and configure your toolshed
+                            - Start your toolshed (in galaxy home directory):
                               - `./run_tool_shed.sh`
                             - Toolshed available at:
                               - `http://localhost:9009`
-                            - Login under User tab:
-                              - galaxy/azerty
                         </script>
                     </section>
                     <section data-markdown >
                         <script type="text/template">
-                            ### Publish your tool with Planemo
-                            - Goal: Publish the seqtk_seq tool in your local toolshed with Planemo
+                            ### <i class="fa fa-pencil" aria-hidden="true"></i> Hands-on
+
+                            #### Step 2: Use planemo to publish your tool
+                         </script>
+                    </section>
+                    <section data-markdown >
+                        <script type="text/template">
+                            ### <i class="fa fa-pencil" aria-hidden="true"></i> Hands-on
+
+                            #### Step 2: Use planemo to publish your tool
+                            - `planemo config_init`
+                            - `planemo shed_init`
+                            - `planemo shed_lint`
+                            - `planemo shed_create`
                         </script>
                     </section>
                     <section data-markdown >
@@ -659,9 +704,9 @@
                             ## Answers
                         </script>
                     </section>
-										<section data-markdown >
+		    <section data-markdown >
                         <script type="text/template">
-                            ### Publish your tool with Planemo
+                            ### <i class="fa fa-pencil" aria-hidden="true"></i> Hands-on
                             - `planemo config_init`
                               - create file .planemo.yml in your home directory
                             ```
@@ -674,7 +719,7 @@
                     </section>
                     <section data-markdown >
                         <script type="text/template">
-                            ### Publish your tool with Planemo
+                            ### <i class="fa fa-pencil" aria-hidden="true"></i> Hands-on
                             - `planemo shed_init --name=seqtk_seq --owner=galaxy --description="common transformation of FASTA/Q" --category="Fasta Manipulation"`
                               - create file .shed.yml in your working dir.:
                             ```
@@ -687,12 +732,16 @@
                     </section>
                     <section data-markdown >
                         <script type="text/template">
-                            ### Publish your tool with Planemo
+                            ### <i class="fa fa-pencil" aria-hidden="true"></i> Hands-on
                             - `planemo shed_lint .`
                               - Check Tool Shed repository for common issues.
                             - `planemo shed_create --shed_target local`
                               - Create a repository in the toolshed and upload files
-
+                        </script>
+                    </section>
+                    <section data-markdown >
+                        <script type="text/template">
+                            ### <i class="fa fa-pencil" aria-hidden="true"></i> Hands-on
                             Modify your tool wrapper and then:
                             - `planemo shed_diff --shed_target local`
                               - Diff between local repository and Tool Shed.
@@ -700,6 +749,14 @@
                               - Update Tool Shed repository
                         </script>
                     </section>
+                </section>
+                <section data-markdown>
+                    <script type="text/template">
+                        ### <i class="fa fa-exclamation-circle" aria-hidden="true"></i> Key points
+
+                        - Use Planemo
+                        - Contribute to the Main Tool Shed 
+                    </script>
                 </section>
                 <!-- <section>
                     <section data-markdown>
