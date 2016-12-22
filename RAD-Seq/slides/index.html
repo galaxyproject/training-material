@@ -1,105 +1,174 @@
-<!doctype html>
-<html lang="en">
+---
+layout: introduction_slides
+topic_name: RAD-Seq
+logo: "GTN"
+---
 
-	<head>
-		<meta charset="utf-8">
+# What is RNA sequencing?
 
-		<title>RAD seq data analysis</title>
+---
 
-		<link rel="stylesheet" href="../../shared/reveal.js/css/reveal.css">
-		<link rel="stylesheet" href="../../shared/reveal.js/css/theme/simple.css" id="theme">
+### RNA sequencing
 
-		<!-- Code syntax highlighting -->
-		<link rel="stylesheet" href="../../shared/reveal.js/lib/css/zenburn.css">
+RNA 
 
-		<link rel="stylesheet" href="../../shared/css/custom.css" id="theme">
+- Transcribed form of the DNA 
+- Active state of the DNA
 
-		<!-- Printing and PDF exports -->
-        <script>
-          if( window.location.search.match( /print-pdf/gi ) ) {
-            var link = document.createElement( 'link' );
-            link.rel = 'stylesheet';
-            link.type = 'text/css';
-            link.href = '../../shared/reveal.js/css/print/pdf.css';
-            document.getElementsByTagName( 'head' )[0].appendChild( link );
-          }
-        </script>
-		<!--<script>
-            if (window.location.search.match(/print-pdf/gi)) {
-                document.write('<link rel="stylesheet" href="css/pdf.css" type="text/css">');
-            }
-        </script>-->
+RNA sequencing 
 
-		<!--[if lt IE 9]>
-        <script src="../../shared/reveal.js/lib/js/html5shiv.js"></script>
-        <![endif]-->
-	</head>
+- RNA quantification at single base resolution
+- Cost efficient analysis of the whole transcriptome in a high-throuput manner
 
-	<body>
-		<div class="reveal">
-            <div class="slides">
-                <section data-markdown>
-                    <script type="text/template">
-                        ## Welcome!
+---
 
-                        <img src="../../shared/images/GTNLogo1000.png" alt="GTNLogo1000"
-                        class="no-border" width=30%/>
+### Where my data comes from?
 
-                        The easiest way to **navigate** this slide deck
-                        is **by hitting `[space]` on your keyboard**
+![](../images/RNA_seq_zang2016.png)
 
-                        You can also navigate with arrow keys, but be careful because some
-                        slides can be nested inside of each other (vertically)
-                    </script>
-                </section>
+<small>[*Zang and Mortazavi, Nature, 2012*](http://www.nature.com/ni/journal/v13/n9/full/ni.2407.html)</small>
 
-                <section data-markdown>
-                    <script type="text/template">
-                        # RAD seq data analysis
-                    </script>
-                </section>
+---
 
-                <section data-markdown>
-                    <script type="text/template">
-                        ## Requirements
+### Principle of RNA sequencing
 
-                        Before diving into this slide deck, <br/>
-                        we recommend you to have a look at:
+![](../images/korf_2013.jpg)
 
-                        1. [NGS Quality control](../../NGS-QC/slides/index.html)
-                        2. [NGS mapping](../../NGS-QC/slides/index.html)
-                    </script>
-                </section>
+<small>[*Korf, Nat Met, 2013*](http://www.nature.com/nmeth/journal/v10/n12/full/nmeth.2735.html)</small>
 
-                <section>
-                    <section data-markdown>
-                        <script type="text/template">
-                            # What is RAD sequencing?
-                        </script>
-                    </section>
-			</div>
+---
 
-		</div>
+### Principle of RNA sequencing <br>Quantification
 
-		<script type="text/javascript" src="../../shared/reveal.js/lib/js/head.min.js"></script>
-        <script type="text/javascript" src="../../shared/reveal.js/js/reveal.js"></script>
-        <script type="text/javascript">
-            Reveal.initialize({
-                slideNumber: !window.location.search.match(/print-pdf/gi),
-                history: true,
+![](../images/pepke_2009.jpg)
 
-                theme: Reveal.getQueryHash().theme,
-                transition: Reveal.getQueryHash().transition || 'concave',
+<small>[*Pepke et al, Nat Met, 2009*](http://www.nature.com/nmeth/journal/v6/n11s/full/nmeth.1371.html)</small>
 
-                dependencies: [
-                    { src: '../../shared/reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
-                    { src: '../../shared/reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-                    { src: '../../shared/reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-                    { src: '../../shared/js/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
-                    { src: '../../shared/reveal.js/plugin/notes/notes.js', async: true },
-                ]
-            });
-        </script>
+---
 
-	</body>
-</html>
+### Challenges of RNA sequencing
+                            
+- Different origin for the sample RNA and the reference genome
+- Presence of incompletely processed RNAs or transcriptional noise
+- Sequencing biases (*e.g.* PCR library preparation)
+
+---
+
+### Benefits of RNA sequencing
+
+![](../images/wordcloud.png)
+
+---
+
+## How to analyze RNA seq data?
+
+---
+
+ ### FASTQ-files
+
+```bash
+@4:1:4888:1039:Y 
+TGAACGCTGTTTCCAAGAAATGCTGGAAGAGGTCGATGGGTGTTATCTCTG
++ 
+IIIHIIIIIIIIIIIIIIIIIIIIIIIIIH!CBCBBBB@=B@A?1@==<@=
+```
+                            
+- 50+ million reads per data set (~15 GB data for one human fastq-file)
+- Unique identifier per read
+- Nucleotide sequence with single base resolution
+- Quality score for each base
+
+---
+
+### Overview of the Data Processing
+
+![](../images/RNA_seq_processing.png)
+
+- No available standardized workflow 
+- Multiple possible best practices for every dataset
+
+---
+
+### Data Pre-processing
+
+*See [NGS Quality control](../../NGS-QC/slides/index.html)*
+
+1. Adapter clipping to trim the sequencing adapters 
+2. Quality trimming to remove wrongly called and low quality bases
+
+---
+
+### Genomic Alignment<br>3 strategies
+
+![](../images/RNA_seq_conesa2016.png)
+
+<small>
+[*Conesa et al, Genome Biol, 2016*](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-016-0881-8)
+</small>
+
+---
+
+### Differential Expression Analysis
+
+![Account for variability of gene expression across biological replicates with the help of gene counts](../images/RNA_seq_DEscheme.png)
+ 
+<tiny>Account for variability of gene expression across biological replicates<br>with the help of gene counts
+</tiny>
+
+---
+
+### Differential Expression Analysis<br>Within-sample Normalization
+
+Neccessary to correct for feature length and library-size effects
+
+- [*FPKM/RPKM*](http://www.nature.com/nmeth/journal/v5/n7/abs/nmeth.1226.html) (Cufflinks/Cuffdiff)
+- [*TMM*](https://genomebiology.biomedcentral.com/articles/10.1186/gb-2010-11-3-r25) (edgeR)
+- [*DESeq2*](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-014-0550-8) (DESeq2)
+							
+---
+
+### Differential Expression Analysis<br>Number of Replicates for DE Genes
+
+![](../images/RNA_seq_numreplicates.png)
+
+
+<small> [*Conesa et al, Genome Biol, 2016*](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-016-0881-8)</small>
+
+---
+
+### Detection of Alternative Splicing
+
+![](../images/RNA_seq_splicescheme.png)
+
+<small>
+[*Hooper, Hum. Genomics, 2014*](http://humgenomics.biomedcentral.com/articles/10.1186/1479-7364-8-3)
+</small>
+
+---
+
+### Visualization
+
+- Integrative Genomics Viewer ([*IGV*](http://bib.oxfordjournals.org/content/14/2/178.full?keytype=ref&%2520ijkey=qTgjFwbRBAzRZWC)) 
+
+    Visualization of the aligned BAM files
+
+- [*Sashimi plots*](http://bioinformatics.oxfordjournals.org/content/early/2015/01/21/bioinformatics.btv034)
+    
+    Quantitative visualization of read coverage along exons and splice junctions
+
+- [*CummeRbund*](http://compbio.mit.edu/cummeRbund/manual_2_0.html)
+
+    Visualization package for Cufflinks high-throughput sequencing data
+
+---
+
+### Where do I find data?
+
+- Sequencing data you prepared yourself or you obtained from your colleques
+- Sequence Read Archive - [*SRA*](https://www.ncbi.nlm.nih.gov/sra)
+- Gene Expression Omnibus - [*GEO*](https://www.ncbi.nlm.nih.gov/geo/)
+- Ensembl - [*e!*](http://www.ensembl.org/info/website/tutorials/sequence.html)
+- The Cancer Genome Atlas - [*TCGA*](https://tcga-data.nci.nih.gov/docs/publications/tcga/?)
+- ... our tutorial
+
+
