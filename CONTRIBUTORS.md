@@ -13,6 +13,7 @@ The following individuals have contributed to this training material:
 * Friederike Duendar (@friedue)
 * Gildas Le Corguillé (@lecorguille)
 * Loraine Brillet-Guéguen (@loraine-gueguen)
+* Stephanie Le Gras (@slegras)
 * Thomas Manke (@thomasmanke)
 * Torsten Houwaart
 * Markus Wolfien (@mwolfien)
