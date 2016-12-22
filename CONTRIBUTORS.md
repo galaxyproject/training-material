@@ -11,6 +11,7 @@ The following individuals have contributed to this training material:
 * Fabian Kilpert (@kilpert)
 * Fidel Ramirez (@fidelram)
 * Friederike Duendar (@friedue)
+* Loraine Brillet-Guéguen (@loraine-gueguen)
 * Thomas Manke (@thomasmanke)
 * Torsten Houwaart
 * Jennifer Del Giudice (@jennydg)
