@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
-topic_name: RNA-Seq
-tutorial_name: ref_based
+topic_name: RAD-Seq
+tutorial_name: ref_based_rad
 ---
 
 # Introduction
