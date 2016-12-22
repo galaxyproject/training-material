@@ -76,8 +76,3 @@ This is just a quick method of writing a tab-delimited file (OFS="\t") skipping 
 - Plot some correlations, or compute methylation around genes/TSS/TES, maybe do some clustering (beware of what this entails), play around with the data.
 
 
-**Some nice papers:**
-
-Krueger et al. 2012: [DNA methylome analysis using short bisulfite sequencing data](http://www.nature.com/nmeth/journal/v9/n2/abs/nmeth.1828.html), (doi:10.1038/nmeth.1828)
-Lister and Ecker 2009: [Finding the fifth base: Genome-wide sequencing of cytosine methylation](http://genome.cshlp.org/content/19/6/959.long), ( doi: 10.1101/gr.083451.108)  
-Laird 2010 [Principles and challenges of genome-wide DNA methylation analysis](http://www.nature.com/nrg/journal/v11/n3/full/nrg2732.html), (doi:10.1038/nrg2732)

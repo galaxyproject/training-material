@@ -12,19 +12,22 @@ Several deck of slides are available for this topic:
 - [General introduction about Galaxy and development in Galaxy](http://bgruening.github.io/training-material/Dev-Corner/slides/)
 - Slide deck related to the tutorials:
     - [Tool development and integration into Galaxy](http://bgruening.github.io/training-material/Dev-Corner/slides/tool_integration.html)
+- [Contributing with GitHub](http://bgruening.github.io/training-material/Dev-Corner/slides/github_contribution.html)
+
+- **Help needed** for those topics:
     - [Data source integration](http://bgruening.github.io/training-material/Dev-Corner/slides/data_source_integration.html)
     - [Visualizations in Galaxy](http://bgruening.github.io/training-material/Dev-Corner/slides/visualizations.html)
     - [Tool Shed](http://bgruening.github.io/training-material/Dev-Corner/slides/toolshed.html)
 
-# Tutorials
+# Tutorials (coming soon)
 
-4 tutorials with hands-on are available for this topic:
+**Help needed** to build 3 tutorials with hands-on for this topic:
 
-- [Tool development and integration into Galaxy](tutorial/tool_integration.md)
-- [Data source integration](tutorial/data_source_integration.md)
-- [Visualizations in Galaxy](tutorial/visualizations.md)
+- [Tool development and integration into Galaxy](https://github.com/bgruening/training-material/issues/74)
+- [Data source integration](https://github.com/bgruening/training-material/issues/76)
+- [Visualizations in Galaxy](https://github.com/bgruening/training-material/issues/77)
 
-## Galaxy instance
+## Galaxy instance ([under construction](https://github.com/bgruening/training-material/issues/78))
 
 For these tutorials, you can use the [dedicated Docker image](docker/README.md):
 
@@ -39,13 +42,17 @@ It will launch a flavored Galaxy instance available on
 
 This material is maintained by:
 
-- Stephanie Le Gras (slegras@igbmc.fr)
-- Loraine Gueguen (loraine.gueguen@sb-roscoff.fr)
+- Gildas Le Corguillé (@lecorguille)
+- Maintainer 2
 
 For any question related to this topic and the content, you can contact them.
 
 The following individuals have contributed to this training material:
 
-- Gwendoline Andres
-- Loraine Gueguen (loraine.gueguen@sb-roscoff.fr)
-- Stephanie Le Gras (slegras@igbmc.fr)
+- Anthony Bretaudeau (@abretaud)
+- Bérénice Batut (@bebatut)
+- Gildas Le Corguillé (@lecorguille)
+- Gwendoline Andres (@gwenandres)
+- Loraine Gueguen (@loraine-gueguen)
+- Stephanie Le Gras (@slegras)
+

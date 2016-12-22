@@ -1,0 +1,128 @@
+---
+layout: base
+---
+{% assign topic = site.data[page.topic_name] %}
+{% for tuto in topic.material %}
+    {% if tuto.name == page.tutorial_name %}
+        {% assign tutorial = tuto %}
+    {% endif %}
+{% endfor %}
+
+<header>
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a id="site-title" class="navbar-brand" href="https://wiki.galaxyproject.org/Teach/GTN">
+              <img class="pull-left img-responsive" src="{{ site.url }}/{{ site.logo }}">
+            </a>
+            <a id="site-title" class="navbar-brand name-holder" href="{{ site.url }}/{{ topic.name }}/tutorials/{{ tutorial.name }}">
+              {{ tutorial.title }}
+            </a>
+          </div>
+
+          <div class="collapse navbar-collapse" id="navbar">
+
+            <ul id="main-menu" class="nav navbar-nav navbar-right">
+              <li><a href="{{ site.url }}"><i class="fa fa-home"></i> Home</a></li>
+              <li><a href="{{ site.url }}/{{ topic.name }}"> {{ topic.name }}</a></li>
+              <li><a href="{{ site.url }}/{{ topic.name }}/slides"><i class="fa fa-graduation-cap"></i> Introduction slides</a></li>
+              <!--<li><a href="{{ site.url }}/{{ topic.name }}/slides/{{ tutorial.name }}/"><i class="fa fa-file-powerpoint-o"></i> Associated slides</a></li>-->
+
+              {% if topic.docker_image != "" %}
+                <li><a href="{{ site.github_repository }}/tree/master/{{ topic.name }}/docker"><i class="fa fa-ship"></i> Docker image</a></li>
+              {% endif %}
+
+              {% if tutorial.zenodo_link != "" %}
+                <li><a href="{{ tutorial.zenodo_link }}"><i class="fa fa-folder-open"></i> Input Dataset</a></li>
+              {% endif %}
+
+              {% if tutorial.references != "" %}
+                <li><a href="{{ site.url }}/{{ topic.name }}#references"><i class="fa fa-book"></i> Literature</a></li>
+              {% endif %}
+            </ul>
+          </div>
+        </div>
+    </nav>
+</header>
+
+<section class="tutorial">
+    <h1>{{ tutorial.title }}</h1>
+
+    <blockquote class="overview">
+        <h3>Overview</h3>
+
+        <p class="bold"> :grey_question: Questions</p>
+        <ul>
+        {% for question in tutorial.questions %}
+          <li>{{ question }}</li>
+        {% endfor %}
+        </ul>
+
+        <p class="bold"> :dart: Objectives</p>
+        <ul>
+        {% for objective in tutorial.objectives %}
+          <li>{{ objective }}</li>
+        {% endfor %}
+        </ul>
+
+        {% if topic.requirements or tutorial.requirements %}
+        <p class="bold"> :heavy_check_mark: Requirements</p>
+        <ul>
+          {% for requirement in topic.requirements %}
+            <li>
+                {% if requirement.type == "internal" %}
+                <a href="{{ site.url }}{{ requirement.link }}">{{ requirement.title }}</a>
+                {% elsif requirement.type == "external" %}
+                <a href="{{ requirement.link }}">{{ requirement.title }}</a>
+                {% endif %}
+            </li>
+          {% endfor %}
+          {% for requirement in tutorial.requirements %}
+            <li>
+                {% if requirement.type == "internal" %}
+                <a href="{{ site.url }}{{ requirement.link }}">{{ requirement.title }}</a>
+                {% elsif requirement.type == "external" %}
+                <a href="{{ requirement.link }}">{{ requirement.title }}</a>
+                {% endif %}
+            </li>
+          {% endfor %}
+        </ul>
+        {% endif %}
+
+        <p><span class="bold"> :hourglass: Time estimation:</span> {{ tutorial.time_estimation }}</p>
+
+    </blockquote>
+
+{{ content }}
+
+    <blockquote class="key_points">
+        <h3> :grey_exclamation: Key points</h3>
+
+        <ul>
+        {% for key_point in tutorial.key_points %}
+           <li>{{ key_point }}</li>
+        {% endfor %}
+        </ul>
+    </blockquote>
+
+    {% if topic.references %}
+      <h1>Useful literature</h1>
+      <p>Useful information regarding this type of analysis with descriptions and paper references for the tools used in this tutorial, and literature for this analysis techniques and interpretations can be found <a href="{{ site.url }}/{{ topic.name }}#references">here</a>.</p>
+    {% endif %}
+
+    <h3>:clap: Congratulations on successfully completing this tutorial!</h3>
+
+
+    <hr>
+
+    <i>Found a typo ? Something is wrong in this tutorial? Edit it on <a href="{{ site.github_repository }}/tree/master/{{ topic.name }}/tutorials/{{ tutorial.name }}.md">GitHub</a>!</i>
+</section>
