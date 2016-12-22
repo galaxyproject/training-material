@@ -13,11 +13,11 @@ Several deck of slides are available for this topic:
 - Slide deck related to the tutorials:
     - [Tool development and integration into Galaxy](http://bgruening.github.io/training-material/Dev-Corner/slides/tool_integration.html)
 - [Contributing with GitHub](http://bgruening.github.io/training-material/Dev-Corner/slides/github_contribution.html)
+- [Tool Shed](http://bgruening.github.io/training-material/Dev-Corner/slides/toolshed.html)
 
 - **Help needed** for those topics:
     - [Data source integration](http://bgruening.github.io/training-material/Dev-Corner/slides/data_source_integration.html)
     - [Visualizations in Galaxy](http://bgruening.github.io/training-material/Dev-Corner/slides/visualizations.html)
-    - [Tool Shed](http://bgruening.github.io/training-material/Dev-Corner/slides/toolshed.html)
 
 # Tutorials (coming soon)
 
