@@ -8,6 +8,8 @@ tutorial_name: ref_based_rad
 
 In the study of [Hohenlohe *et al.* 2010](http://journals.plos.org/plosgenetics/article?id=10.1371/journal.pgen.1000862), a genome scan of nucleotide diversity and differentiation in natural populations of threespine stickleback *Gasterosteus aculeatus* was conducted. Authors used Illumina-sequenced RAD tags to identify and type over 45,000 single nucleotide polymorphisms (SNPs) in each of 100 individuals from two oceanic and three freshwater populations.
 
+![](../images/RAD4_Population_Genomics/Hohenlohe_et_al_2010)
+
 We here proposed to re-analyze these data at least until the population genomics statistics calculation step using STACKS pipeline. *Gasterosteus aculeatus* draft genome will be used here as reference genome. In a reference-based RAD-seq data analysis, the reads are aligned (or mapped) against a reference genome to constrain our analysis to focus on already discovered loci. A de-novo approach can also be conduct (see [de_novo tutorial]()), enhancing discoverability of new loci of interest but also of false positive one.
 
 
@@ -25,24 +27,25 @@ We here proposed to re-analyze these data at least until the population genomics
 
 ## Data upload
 
-The original data is available at NCBI Gene Expression Omnibus (GEO) under accession number [GSE18508](http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE18508). 
+The original data is available at NCBI SRA ENA under accession number [SRR034316](https://trace.ncbi.nlm.nih.gov/Traces/sra/?run=SRR034316) as part of the NCBI SRA ENA study accession number [SRP001747](https://trace.ncbi.nlm.nih.gov/Traces/sra/?study=SRP001747). 
 
-We will look at the 7 first samples:
+We will look at the first run SRR034316 out of 7:
 
-- 3 treated samples with Pasilla (PS) gene depletion: [GSM461179](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM461179), [GSM461180](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM461180), [GSM461181](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM4611810)
-- 4 untreated samples: [GSM461176](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM461176), [GSM461177](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM461177), [GSM461178](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM461178), [GSM461182](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM461182)
+- Here are 16 samples from 2 populations
 
-Each sample constitutes a separate biological replicate of the corresponding condition (treated or untreated). Moreover, two of the treated and two of the untreated samples are from a paired-end sequencing assay, while the remaining samples are from a single-end sequencing experiment.
+You can directly used archive from the Sequence Read Archive (SRA) for raw reads.
 
-We have extracted sequences from the Sequence Read Archive (SRA) files to build FASTQ files.
+![](../images/RAD4_Population_Genomics/Input_data_ENA.png)
+
+To download all training datasets (i.e reads, reference genome, population map file and barcodes file), you need to use the corresponding Zenodo repository.
 
 > ### :pencil2: Hands-on: Data upload
 >
-> 1. Create a new history for this RNA-seq exercise
-> 2. Import a FASTQ file pair (*e.g.*  [`GSM461177_untreat_paired_subset_1`](https://zenodo.org/record/61771/files/GSM461177_untreat_paired_subset_1.fastq) and [`GSM461177_untreat_paired_subset_2`](https://zenodo.org/record/61771/files/GSM461177_untreat_paired_subset_2.fastq)) from [Zenodo](http://dx.doi.org/10.5281/zenodo.61771)
+> 1. Create a new history for this RAD-seq exercise. If you are not inspired, you can name it "STACKS 1.42 RAD: population genomics with reference genome" for example...
+> 2. Import FASTQ file (*e.g.*  [`SRR034310`](https://zenodo.org/record/218574/files/ftp___ftp.sra.ebi.ac.uk_vol1_fastq_SRR034_SRR034310_SRR034310.fastq.gz)) and corresponding reference genome FASTA file [`Reference_genome_11_chromosomes`](https://zenodo.org/record/218574/files/Reference_genome_11_chromosomes.fa)) as population map information file [`Population_map.txt`](https://zenodo.org/record/218574/files/Population_map)) and barcodes file [`Barcodes_SRR034310`](https://zenodo.org/record/218574/files/Barcodes_SRR034310.tabular)) from [Zenodo](http://doi.org/10.5281/zenodo.218574)
 >
 >    > ### :nut_and_bolt: Comments
->    > If you are using the [Freiburg Galaxy instance](http://galaxy.uni-freiburg.de), you can load the dataset using 'Shared Data' <i class="fa fa-long-arrow-right"></i> 'Data Libraries' <i class="fa fa-long-arrow-right"></i> 'Galaxy Courses' <i class="fa fa-long-arrow-right"></i> 'RNA-Seq' <i class="fa fa-long-arrow-right"></i> 'fastq'
+>    > If you are using the [GenOuest Galaxy instance](http://galaxy.genouest.org), you can load the dataset using 'Shared Data' <i class="fa fa-long-arrow-right"></i> 'Data Libraries' <i class="fa fa-long-arrow-right"></i> '1 Galaxy teaching folder' <i class="fa fa-long-arrow-right"></i> 'EnginesOn' <i class="fa fa-long-arrow-right"></i> 'RADseq' <i class="fa fa-long-arrow-right"></i> 'Stickelback population genomics' <i class="fa fa-long-arrow-right"></i> 'SRR034310' 
 >    {: .comment}
 >
 >    > ### :bulb: Tip: Importing data via links
@@ -54,7 +57,7 @@ We have extracted sequences from the Sequence Read Archive (SRA) files to build 
 >    > * Press **Start**    
 >    {: .tip}
 >
->    > ### :bulb: Tip: Changing the file type `fastq` to `fastqsanger` once the data file is in your history
+>    > ### :bulb: Tip: Changing the file type `fastq` to `fastqsanger` once the data file is in your history. As we know here that the datatype is fastqsanger, we can directly change it through the upcoming method. Normally, you need to execute FastQGroomer to be sure to have a correct fastqsanger file format. And if you don't know how your quality score is encoded on raw fastQ files, please, use the FastQC tool to determine it!
 >    >
 >    > * Click on the pencil button displayed in your dataset in the history
 >    > * Choose **Datatype** on the top
@@ -65,205 +68,142 @@ We have extracted sequences from the Sequence Read Archive (SRA) files to build 
 >    As default, Galaxy takes the link as name. It also do not link the dataset to a database or a reference genome.
 > 
 >    > ### :nut_and_bolt: Comments
->    > - Edit the "Database/Build" to select "dm3"
+>    > - Add the "stickleback" custom build from the Fasta reference genome file
+>    > - Edit the "Database/Build" to select "stickleback"
 >    > - Rename the datasets according to the samples
 >    {: .comment}
 > 
 {: .hands_on}
 
-Both files contain the first 100.000 paired-end reads of one sample. The sequences are raw sequences from the sequencing machine, without any pretreatments. They need to be controlled for their quality.
+The sequences are raw sequences from the sequencing machine, without any pretreatments. They need to be demultiplexed. To do so, we can use the Process Radtags tool from STACKS.
 
-## Quality control
+## Demultiplexing reads
 
-For quality control, we use similar tools as described in [NGS-QC tutorial](../../NGS-QC/tutorials/dive_into_qc): [FastQC](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/) and [Trim Galore](http://www.bioinformatics.babraham.ac.uk/projects/trim_galore/).
+For demultiplexing, we use the Process Radtags tool from [STACKS](http://www.g3journal.org/content/1/3/171.full) . 
 
-> ### :pencil2: Hands-on: Quality control
+> ### :pencil2: Hands-on: Demultiplexing reads
 >
-> 1. **FastQC** :wrench:: Run FastQC on both FastQ files to control the quality of the reads
+> 1. **Process Radtags** :wrench:: Run `Stacks: process radtags` on FastQ file to demultiplex the reads
+>
+> ![](../images/RAD4_Population_Genomics/Process_radtags_in)
+>
 >
 >    > ### :question: Questions
 >    >
->    > 1. What is the read length?
->    > 2. Is there anything what you find striking when you compare both reports?
+>    > 1. How many reads where on the original dataset?
+>    > 2. How many are kept?
+>    > 3. Can you try to explain the reason why we loose a lot of reads here?
+>    > 4. What kind of infiormation this result gives concerning the upcoming data analysis and the barcodes design in general ?
 >    >
 >    >    <details>
 >    >    <summary>Click to view answers</summary>
 >    >    <ol type="1">
->    >    <li>The read length is 37 bp</li>
->    >    <li>The report for GSM461177_untreat_paired_subset_1 is quite good compared to the one for GSM461177_untreat_paired_subset_2. For the latter, the per base sequence quality is bad around the 25th bp (same for the per base N content), because the quality in the 2nd tile is bad (maybe because of some event during sequencing). We need to be careful for the quality treatment and to do it with paired-end information</li>
+>    >    <li>8895289 total reads</li>
+>    >    </ol>
+>    >    <ol type="2">
+>    >    <li>8139531 retained reads</li>
+>    >    </ol>
+>    >    <ol type="3">
+>    >    <li>Exploring the `results.log` file allows to see that there is no sequences filtered for low quality statement. As we don't specify the corresponding advanced option, Process radtags didn't apply quality related filtering. So here, all not retained sequences are not recorded because of an ambiguous barcode or an ambiguous RAD-Tag. This means that some barcodes are not exactly what was specified on the barcode file and that sometimes, no SbfI restriction enzyme site was found. This can be due to some sequencing problems but here, this is also due to the addition, in the original sequencing library, of RAD-seq samples from another study. This is something often used to avoid having too much sequences beginning with the exact same nucleotides sequences and thus Illumina related issues during sequencing and clusters analysis </li>
+>    >    </ol>
+>    >    <ol type="4">
+>    >    <li>Sequencing quality is essential! Each time your sequencing quality decreases, you loose data and thus essential biological information!</li>
+>    >    </ol>
+>    >    </details>
+>    {: .question}
+> ![](../images/RAD4_Population_Genomics/Process_radtags_out)
+>
+> 2. **Process Radtags** :wrench:: Re-Run `Stacks: process radtags` on FastQ file playing with parameters 
+>
+> In `advanced options`, activate the `Discard reads with low quality scores` option and play with the score limit (default vs 20 for example) and examine the change in reads retained. Note that you can play also with the sliding window score threshold, by default 15% of the length of the read. This sliding window parameter allows notably the user to deal with the declining quality at the 3' end of reads.
+>
+> ![](../images/RAD4_Population_Genomics/Process_radtags_in_advancedparameter0)
+>
+> ![](../images/RAD4_Population_Genomics/Process_radtags_in_advancedparameter1)
+>
+> To do that, you can use data handling Galaxy tools to cut the interesting lines of each `result.log with Stacks: process radtags` files OR, as I made, just copy/paste these lines on the Galaxy upload tool using Paste/fetch data section and modifying the File header by sample and filename by Score 10 / Score 20 and noscorelimit for example... Before Starting the upload, you can select the `Convert spaces to tabs` option through the `Upload configuration` wheel.
+>
+> ![](../images/RAD4_Population_Genomics/Process_radtags_in_advancedparameter_compare_copy)
+>
+> ![](../images/RAD4_Population_Genomics/Process_radtags_in_advancedparameter_compare_paste)
+>
+> You can use the `Charts` functionality through the Visualize button reachable on the `Radtags logs` file you just generated. 
+>
+> ![](../images/RAD4_Population_Genomics/Process_radtags_charts)
+>
+> If like me you don't have payed attention to the organization of you file for the graphical representation you obtain a non optimal bars diagram with a not intelligent X-axis ordering. There is a lot of diffferent manner to fix this. You can use the copy/paste "bidouille" like seen previously, or you can use Galaxy tools to manipulate the `radtags logs` (did you change the filename from `pasted entry` to another label ?) file to generate a better graph. For example, you can use `Select lines that match an expression` tool to select rows then use the `Concatenate datasets tail-to-head` tool to reorganize these lines in a new file... OR, as I made, you can just sort the file using the first column.
+>
+> ![](../images/RAD4_Population_Genomics/Process_radtags_charts_tablemodif)
+>
+> And you obtain a file like this one, ready to generate a beautiful and smart bar diagram!
+>
+> ![](../images/RAD4_Population_Genomics/Process_radtags_charts_tablemodif_view)
+>
+> ![](../images/RAD4_Population_Genomics/Process_radtags_charts_end)
+>
+>Using filter like `clean data, remove any read with an uncalled base` has here few impact:
+>
+> ![](../images/RAD4_Population_Genomics/Process_radtags_out_parameter2)
+>
+
+The demultiplexed sequences are raw sequences from the sequencing machine, without any pretreatments. They need to be controlled for their quality.
+
+## Quality control
+
+For quality control, we use similar tools as described in [NGS-QC tutorial](../../NGS-QC/tutorials/dive_into_qc): [FastQC](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/).
+
+> ### :pencil2: Hands-on: Quality control
+>
+> 1. **FastQC** :wrench:: Run FastQC on FastQ files to control the quality of the reads
+>
+>    > ### :question: Questions
+>    >
+>    > 1. What is the read length?
+>    >
+>    >    <details>
+>    >    <summary>Click to view answers</summary>
+>    >    <ol type="1">
+>    >    <li>The read length is 32 bp</li>
 >    >    </ol>
 >    >    </details>
 >    {: .question}
 >
-> 2. **Trim Galore** :wrench:: Treat for the quality of sequences by running Trim Galore on the paired-end datasets
-> 3. **FastQC** :wrench:: Re-run FastQC on Trim Galore's outputs and inspect the differences
-{: .hands_on}
 
-As the genome of *Drosophila melanogaster* is known and assembled, we can use this information and map the sequences on this genome to identify the effects of Pasilla gene depletion on splicing events.
+As it exists a draft genome for *Gasterosteus aculeatus*, we can use this information and map the sequences on this genome to identify polymorphism.
 
 # Mapping
 
-To make sense of the reads, their positions within *Drosophila melanogaster* genome must be determined. This process is known as aligning or 'mapping' the reads to the reference genome.
+To make sense of the reads, their positions within *Gasterosteus aculeatus* genome must be determined. This process is known as aligning or 'mapping' the reads to the reference genome.
 
 > ### :nut_and_bolt: Comment
 >
 > Do you want to learn more about the principles behind mapping? Follow our [training](../../NGS-mapping)
 > {: .comment}
 
-Because in the case of a eukaryotic transcriptome, most reads originate from processed mRNAs lacking exons, they cannot be simply mapped back to the genome as we normally do for DNA data. Instead the reads must be separated into two categories:
+Here we will use BWA. BWA is a fast light-weighted tool that aligns relatively short sequences (queries) to a sequence database (large), such as the human reference genome. It is developed by Heng Li at the Sanger Insitute.
 
-- Reads that map entirely within exons
-- Reads that cannot be mapped within an exon across their entire length because they span two or more exons
+*[Li et Durbin, Bioinformatics, 2009](https://www.ncbi.nlm.nih.gov/pubmed/19451168)*
 
-Spliced mappers have been developed to efficiently map transcript-derived reads against genomes. [TopHat](https://ccb.jhu.edu/software/tophat/index.shtml) was one of the first tools designed specifically to address this problem:
 
-1. Identification of potential exons using reads that do map to the genome
-2. Generation of possible splices between neighboring exons
-3. Comparison of reads that did not initially map to the genome against these *in silico* created junctions
-
-![](../images/tophat2.png)
-
-*[Kim et al., Genome Biology, 2013](https://genomebiology.biomedcentral.com/articles/10.1186/gb-2013-14-4-r36)*
-
-TopHat needs to know two important parameters about the sequencing library
-
-- The library type
-- The mean inner distance between the mate pairs for paired-end data
-
-These information should usually come with your FASTQ files, ask your sequencing facility! If not, try to find them on the site where you downloaded the data or in the corresponding publication. Another option is to estimate these parameters with a *preliminary mapping* of a *downsampled* file and some analysis programs. Afterward, the actual mapping can be redone on the original files with the optimized parameters.
-
-To help finding the needed previous information and afterward annotating RNA sequences, we can take advantage from already known reference gene annotations.
-
-> ### :pencil2: Hands-on: Drosophila annotation file upload
+> 1. **BWA** :wrench:: Run **BWA** with the Commonly Used settings after specifying the fasta reference genome file from history, the fact that you are working with single-end libraries and finally the collection of demultiplexed FastQ files.
 >
-> 1. Load the Ensembl gene annotation for *Drosophila melanogaster* ([`Drosophila_melanogaster.BDGP5.78.gtf`](https://zenodo.org/record/61771/files/Drosophila_melanogaster.BDGP5.78.gtf)) from [Zenodo](http://dx.doi.org/10.5281/zenodo.61771) into your current Galaxy history and rename it
->
->    > ### :nut_and_bolt: Comments
->    > If you are using the [Freiburg Galaxy instance](http://galaxy.uni-freiburg.de), you can load the dataset using 'Shared Data' <i class="fa fa-long-arrow-right"></i> 'Data Libraries' <i class="fa fa-long-arrow-right"></i> 'Galaxy Courses' <i class="fa fa-long-arrow-right"></i> 'RNA-Seq' <i class="fa fa-long-arrow-right"></i> 'annotation'
->    {: .comment}
-{: .hands_on}
+>    ![](../images/RAD4_Population_Genomics/reference/Map_with_BWA.png)
 
-## Preliminary mapping
-
-In a preliminary mapping, we will estimate the needed parameters (library type and inner distance) to run TopHat efficiently afterwards.
-
-> ### :nut_and_bolt: Comment
-> This step is not necessary if you don't need to estimate the library type and the mean inner distance between the mate pairs for paired-end data.
-{: .comment}
-
-> ### :pencil2: Hands-on: Preliminary mapping and parameter estimation
->
-> 1. **Select first** :wrench:: Downsample the FastQ files to 200k or 1M reads
->
->    > ### :nut_and_bolt: Comment
->    >
->    > For the provided files downsampling is not necessary as they only contain 100k reads
->    {: .comment}
->
-> 2. **TopHat** :wrench:: Run **TopHat** with:
->    - "Paired-end (as individual datasets)" instead of "Single-end"
->    - The Trim Galore outputs in the correct order (forward and reverse reads)
->    - "Drosophila melanogaster: dm3" as reference genome
->    - Default values for *strandedness* and *insert size*
->
-> 3. **Inner Distance** :wrench:: Run **Inner Distance** on the BAM file generated by TopHat using the imported `Drosophila_melanogaster.BDGP5.78.gtf` reference gene model to estimate the *inner distance* between the two reads for paired-end data
-> 4. Inspect the resulting PDF
->
->    > ### :question: Question
->    > What is the mean value for the inner distance?
->    >
->    > <details>
->    > <summary>Click to view answer</summary>
->    > The mean value is 112. But, if you already have read the corresponding paper carefully you might know that the fragment size is ~200bp. With read lengths of 2x37bp an educated guess could also be 125 for the inner distance. It's up to your decision, which value you prefer. 
->    > </details>
->    {: .question}
->
-> 5. **Infer Experiment** :wrench:: Run **Infer Experiment** with the same files
-> 6. Check the results and search the tool's documentation for help on the meaning
->    
->    > ### :nut_and_bolt: Comment
->    > As it is sometimes quite difficult to find out which settings correspond to those of other programs, the following table might be helpful to identify the library type:
->    > 
->    > Library type | **Infer Experiment** | **TopHat** | **HISAT2** | **htseq-count** | **featureCounts**
->    > --- | --- | --- | --- | --- | ---
->    > PE | "1++,1--,2+-,2-+" | "FR Second Strand" | "FR" | "yes" | "1"
->    > PE | "1+-,1-+,2++,2--" | "FR First Strand" | "RF" | "reverse" | "2"
->    > SE | "++,--" | "FR Second Strand" | "F" | "yes" | "1"
->    > SE | "+-,-+" | "FR First Strand" | "R" | "reverse" | "2"
->    > SE,PE | undecided | "FR Unstranded" | default | "no" | "0"
->    > 
->    {: .comment}
->    
->    > ### :question: Question
->    > 
->    > 1. Which fraction of the different type of library type?
->    > 2. Which library type do you chose? What is the correspondance in **TopHat**?
->    >
->    >    <details>
->    >    <summary>Click to view answer</summary>
->    >    <ol type="1">
->    >    <li>Fraction of reads explained by "1++,1--,2+-,2-+": 0.5176 and Fraction of reads explained by "1+-,1-+,2++,2--": 0.4824</li>
->    >    <li>As reads are not explained by any configuration significantly, it is an "unstranded" library.</li>
->    >    </ol>
->    >    </details>
->    {: .question}
-{: .hands_on}
-
-## Actual mapping
-
-With these estimated parameters, we can now map all the RNA sequences on the *Drosophila melanogaster* genome using TopHat.
-
-> ### :pencil2: Hands-on: Spliced mapping
->
-> 1. **TopHat** :wrench:: Run **TopHat** with the full parameter set to get the best mapping results:
->    - "Paired-end (as individual datasets)" instead of "Single-end"
->    - "Mean Inner Distance" to the previously determined value
->    - "Drosophila melanogaster: dm3" as reference genome
->    - "Full parameter list" for "TopHat settings to use"
->    - "Library type" to the previously determined value
->    - "18" for the "Minimum length of read segments"
->
->        By default, TopHat proposes to fix the minimum length of read segments to 25, but a value of 18 seems to be a more appropriate value for this input data.
->
->        > ### :question: Question
->        >
->        > Why?
->        > 
->        > <details>
->        > <summary>Click to view answer</summary>
->        > Remember that the total length of the reads are 37 bases. With 25, we left with segments of lengths 25 (or more) and 12 (or less) bases. The 12 base long reads lead to huge number of multi mappings. Setting this option to 18 results in bit longer segments and in best case both of them can be mapped properly.           
->        > </details>
->        {: .question}
->
->    - "Yes" for use of own junction data
->    - "Yes" for use of Gene Annotation Model
->    - `Drosophila_melanogaster.BDGP5.78.gtf` as Gene Model Annotations (to enable transcriptome alignment)
->    - "No (--coverage-search)" to use coverage-based search for junctions as it needs a lot a time. But consider this option for real world data.
->
->        The TopHat algorithm splits reads into segments to map the reads across splice junctions. Coverage-based search for junctions increases the sensitivity.
->
-> 2. Inspect the "align summary" file
->
->    > ### :question: Question
->    >
->    > 1. How many forward reads were mapped? And how many reverse reads?
->    > 2. What is the "overall read mapping rate"? And the "concordant pair alignment rate"?
->    > 3. Why do some reads have multiple alignments?
->    > 
->    >    <details>
->    >    <summary>Click to view answer</summary>
->    >    <ol type="1">
->    >    <li>90.7% of the forward reads were mapped and 85.8% of the reverse reads</li>
->    >    <li>The "overall read mapping rate" is the rate of mapping when we take into account all reads (forward and reverse reads). Here it is 88.3%. The "concordant pair alignment rate" is (number of aligned pair - number of discordant alignments)/(number of paired reads). Here the value is 80.3%, a quite good value. Maximizing this value is the goal.</li>
->    >    <li>The reads are small and with pseudogenes and other valid genome duplications, it is possible that the reads are mapped multiple times</li>
->    >    </ol>
->    >    </details>
->    {: .question}
-{: .hands_on}
-
-**TopHat** generates a BAM file with the mapped reads and three BED files containing splice junctions, insertions and deletions.
+**BWA** generates BAM files with the mapped reads.
 
 The mapping exercise worked for you? Great! :tada:
+
+
+
+
+
+
+
+
+
+
+
+
 
 > ### :pencil2: (Optional) Hands-on: Map other datasets
 >
