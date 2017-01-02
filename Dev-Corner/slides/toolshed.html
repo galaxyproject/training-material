@@ -121,7 +121,6 @@
                             - [Galaxy community Tool Shed](https://toolshed.g2.bx.psu.edu/) -> Main Tool Shed
                             - [Galaxy community test Tool Shed](https://testtoolshed.g2.bx.psu.edu/) -> Sandbox for testing
                             - [List of public Tool Sheds](https://wiki.galaxyproject.org/PublicGalaxyServers#Public_ToolSheds)
-                            - [IFB Tool Shed](http://toolshed.france-bioinformatique.fr/)
                         </script>
                     </section>
                     <section data-markdown>
@@ -148,35 +147,33 @@
                         <script type="text/template">
                             ### Connect your Galaxy to a Tool Shed
                             - Connect your Galaxy to a Tool Shed in `config/tool_sheds_conf.xml`:
-                            ```
+                            ```bash
                               <tool_sheds>
                                 <tool_shed name="Galaxy main tool shed" url="https://toolshed.g2.bx.psu.edu/" />
                               </tool_sheds>
                             ```
+                            - Restart Galaxy
                         </script>
                     </section>
                     <section data-markdown>
                         <script type="text/template">
-                            ### Connect your Galaxy to a Tool Shed
-                            - Set dependencies resolution
+                            ### Keep default dependencies resolution
                               - in `config/galaxy.ini`:
-                            ```
-                            conda_prefix = <tool_dependency_dir>/_conda/
-                            conda_auto_install = True
+                            ```txt
+                            conda_prefix = <tool_dependency_dir>/_conda
+                            conda_auto_install = False
                             conda_auto_init = False
-                            tool_dependency_dir = ../tool_dependencies
                             ```
-                              - in config/dependency_resolvers_conf.xml (be careful order matters):
-                            ```
+                              - in `config/dependency_resolvers_conf.xml` (order matters):
+                            ```xml
                             <dependency_resolvers>
-                                  <conda />
-                                  <conda versionless="true" />
                                   <tool_shed_packages />
                                   <galaxy_packages />
                                   <galaxy_packages versionless="true" />
+                                  <conda />
+                                  <conda versionless="true" />
                             </dependency_resolvers>
                             ```
-                            - Restart Galaxy
                         </script>
                     </section>
                     <section data-markdown>
@@ -199,14 +196,11 @@
                     <section data-markdown>
                         <script type="text/template">
                             ### Install a tool from the Tool Shed
-                            - <span style="font-size:70%">Types of repository</span>
-                              - <span style="font-size:55%">Tool (orange): contains tools (tool wrappers)</span>
-                              - <span style="font-size:55%">Tool dependencies (red): contains only the file tool\_dependencies.xml.
-                              !! tool\_dependencies.xml file is no longer supported because of the use of conda!
-                              Required name: package_* </span>
-                              - <span style="font-size:55%">Tool suite (blue): contains only the file repository\_dependencies.xml.
-                              Required name: suite_* </span>
-                            <img src="../images/typeOfRep_ss.png" class="no-border" width="70%" >
+                            - Types of repository</span>
+                              - <span style="color:orange"> Tools (`$name`)</span>
+                              - <span style="color:blue"> Tool suites (`suite_$name`)</span>
+                              - <span style="color:red"> Tool dependencies (`package_$name_$version`)</span> (gradually removed, replaced by Conda dependencies)
+                            <img src="../images/typeOfRep_ss.png" class="no-border" width="85%" >
                         </script>
                     </section>
                     <section data-markdown>
@@ -230,14 +224,14 @@
                         <script type="text/template">
                             ### Install a tool from the Tool Shed
                             - Check
-                            <img src="../images/checkToolInstall_ss.png" class="no-border" >
+                            <img src="../images/monitor_installing_toolshed_rep.png" class="no-border" width="100%">
                         </script>
                     </section>
                     <section data-markdown>
                         <script type="text/template">
                             ### Manage installed tools
                             - Admin > Manage installed tools
-                            <img src="../images/manageInstalledRep_ss.png" class="no-border" >
+                            <img src="../images/manage_installed_tools.png" width="100%">
                             <img src="../images/repStatus_ss.png" class="no-border" >
                         </script>
                     </section>
@@ -246,7 +240,7 @@
                             ### Manage installed tools
                             - Click on the name of a tool
                               - Manage and browse the repository
-                            <img src="../images/manageRep_ss.png" class="no-border" >
+                            <img src="../images/managed_an_installed_tool.png" class="no-border" width="80%" >
                         </script>
                     </section>
                     <section data-markdown>
@@ -323,7 +317,7 @@
                             ###  Tool with dependencies
                             - Report the requirement in your wrapper in order to **load environment with Conda**
                             `tandem_repeats_finder_wrapper.xml`
-                            ```
+                            ```xml
                             <requirements>
                               <requirement type="package" version="4.0">tandem_repeats_finder</requirement>
                             </requirements>
@@ -359,7 +353,7 @@
                             - Repository dependencies
                               - relationship between a dependent repository and one or more required repository (tools, datatypes, workflows,...)
                               - -> One file
-                            ```
+                            ```xml
                             <?xml version="1.0"?>
                             <repositories description="Pipeline phylogeny">
                                <repository toolshed="http://testtoolshed.g2.bx.psu.edu"
@@ -380,14 +374,14 @@
                     <section data-markdown>
                         <script type="text/template">
                             ###  Tool suite
-                            ```
+                            ```xml
                             <?xml version="1.0"?>
                             <repositories description="Pipeline phylogeny">
                                <repository name="mafft" owner="gandres" />
                             </repositories>
                             ```
                             <img src="../images/toToolshed.png" class="no-border" >
-                            ```
+                            ```xml
                             <?xml version="1.0"?>
                             <repositories description="Pipeline phylogeny">
                                <repository name="mafft" owner="gandres" toolshed=
@@ -437,7 +431,7 @@
                             - You have your file Galaxy-Workflow-NAME.ga
                             - How to automatically import all tools?
                               - -> `repository_dependencies.xml`
-                            ```
+                            ```xml
                             <?xml version="1.0"?>
                             <repositories description="Phylogeny workflow">
                                <repository name="suite_phylogeny" owner="galaxy" />
@@ -466,12 +460,12 @@
                     </section>
                     <section data-markdown>
                         <script type="text/template">
-                            ### Tools with *.loc files or new datatypes
+                            ### Tools with `*.loc` files or new datatypes
                             - add them to the Tool Shed repository.
 
-                            - \*.loc files and datatypes files should be provided as *.sample file in a `tool-data` directory.
+                            - `*.loc` files and `datatypes` files should be provided as `*.sample` file in a `tool-data` directory.
 
-                            - tool-data/*.loc.sample files come along with `tool_data_table_conf.xml.sample`.
+                            - `tool-data/*.loc.sample` files come along with `tool_data_table_conf.xml.sample`.
                             Their content or the file themselves are put to the right location on tool set up.
                         </script>
                     </section>
@@ -480,7 +474,7 @@
                             ### Tools with *.loc files or new datatypes
                             <img src="../images/repWithLoc_ss.png" class="no-border" width="60%">
                             - <span style="font-size:60%">`tool_data_table_conf.xml.sample`</span>
-                            ```
+                            ```xml
                             <tables>
                             	<!-- Locations of indexes in the Bowtie2 mapper format -->
                             	<table name="bowtie2_indexes" comment_char="#">
@@ -497,7 +491,7 @@
                 <section>
                     <section data-markdown>
                         <script type="text/template">
-                            ## 4. Publication with Planemo
+                            ## 4. Publishing with Planemo
                         </script>
                     </section>
                     <section data-markdown>
@@ -506,17 +500,53 @@
                             ```bash
                             planemo config_init
                             ```
-                            - Creates .planemo.yml file in your home directory
-                            <img src="../images/planemoYml.png" class="no-border" width="50%">
+                            - Creates `.planemo.yml` file in your home directory:
+
+                            ```yml
+                            ## Planemo Global Configuration File.
+                            ## Everything in this file is completely optional - these values can all be
+                            ## configured via command line options for the corresponding commands.
+                            ## [...]
+                            sheds:
+                                 toolshed:
+                                       #key: "<TODO>"
+                                       #email: "<TODO>"
+                                       #password: "<TODO>"
+                                 testtoolshed:
+                                       #key: "<TODO>"
+                                       #email: "<TODO>"
+                                       #password: "<TODO>"
+                                 local:
+                                       #key: "<TODO>"
+                                       #email: "<TODO>"
+                                       #password: "<TODO>"
+                            ```
                         </script>
                     </section>
                     <section data-markdown>
                         <script type="text/template">
-                            ### Configure the target Tool Shed
-                            ```bash
-                            planemo config_init
+                            ### Configure the target Tool Shed                            
+                            - Add your Tool Shed API key in `.planemo.yml`
+                            
+                            ```yml
+                            ## Planemo Global Configuration File.
+                            ## Everything in this file is completely optional - these values can all be
+                            ## configured via command line options for the corresponding commands.
+                            ## [...]
+                            sheds:
+                                 toolshed:
+                                       key: "xxxxxxxxxmytoolshedAPIkeyxxxxxxx"
+                                       #email: "<TODO>"
+                                       #password: "<TODO>"
+                                 testtoolshed:
+                                       #key: "<TODO>"
+                                       #email: "<TODO>"
+                                       #password: "<TODO>"
+                                 local:
+                                       #key: "<TODO>"
+                                       #email: "<TODO>"
+                                       #password: "<TODO>"
                             ```
-                            <img src="../images/planemoYmlConfigured.png"  width="60%" >
                         </script>
                     </section>
                     <section data-markdown>
@@ -531,38 +561,60 @@
                                                  [--remote_repository_url=<URL to .shed.yml on github>]
                                                  [--homepage_url=<Homepage for tool.>]
                             ```
-                            - Create .shed.yml file in the current repository (tool repository)
+                            - Creates `.shed.yml` file in the current repository (tool repository):
+
+                            ```yml
+                            categories: [Sequence Analysis]
+                            description: Tandem Repeats Finder description
+                            long_description: A long long description.
+                            name: tandem_repeats_finder_2
+                            owner: gandres
+                            ```
                         </script>
                     </section>
                     <section data-markdown >
                         <script type="text/template">
                             ### Configure repository
-                            <img src="../images/namingConvention.png" width="70%" >
-                            <!-- - Naming conventions
+                            
+                            #### Naming conventions
+                            <small>
+                             
                             | Repository Type | Recommended Name         | Examples                 |
-                            | --------------- |-------------------------:| ------------------------:|
+                            | --------------- |--------------------------| -------------------------|
                             | Data Managers   | `data_manager_$name`     | `data_manager_bowtie2`   |
                             | Packages        | `package_$name_$version` | `package_aragorn_1_2_36` |
                             | Tool Suites     | `suite_$name`            | `suite_samtools`         |
-                            | Tools           | `$name`                  | `stringle`, `bowtie2`    | -->
-                            - Planemo will determine the repository type based on these conventions
+                            | Tools           | `$name`                  | `stringle`, `bowtie2`    | 
+                             
+                            </small>
+                            <span style="color:red">Planemo will determine the repository type based on these conventions</span>
                         </script>
                     </section>
 										<section data-markdown >
                         <script type="text/template">
                             ### Configure repository
-                            - Tools and tool suite .shed.yml:
-                              - implicity define repositories for each individual tool in the directory and build a suite for those
-                              <img src="../images/planemoAutomaticSuite.png"  >
+                            - Tools and tool suite `.shed.yml`: implicitly define repositories for each individual tool in the directory and build a suite for those tools.
+                            
+                            - Example: `trinity/.shed.yml`
+
+                            ```yml
+                            [...]
+                            auto_tool_repositories:
+                                name_template: "{{ tool_id }}"
+                                description_template: "{{ tool_name }} (from the Trinity tool suite)"
+                            suite:
+                                name: "suite_trinity"
+                                description: Trinity tools to assemble transcript sequences from Illumina RNA-Seq data.
+                            ```
                         </script>
                     </section>
                     <section data-markdown >
                         <script type="text/template">
                             ### Check
+                            ```bash
+                            planemo shed_lint --tools
                             ```
-                            $ planemo shed_lint --tools
-                            ```
-                            ```
+                            ```bash
                             Linting repository […]/tandem_repeats_finder
                             Applying linter expansion... CHECK
                             .. INFO: Included files all found.
@@ -584,63 +636,83 @@
                     <section data-markdown >
                         <script type="text/template">
                             ### Create repository
+                            
+                            ```bash
+                            planemo shed_create --shed_target testtoolshed
                             ```
-                            $ planemo shed_create --shed_target testtoolshed
-                            ```
-                            ```
-                            Repository created
-                            cd ‘[…]/tandem_repeats_finder' && git rev-parse HEAD
-                            Repository tandem_repeats_finder_2 updated successfully.
-                            ```
-                            <img src="../images/shedCreate.png" width="60%" >
-                        </script>
-                    </section>
-                    <section data-markdown >
-                        <script type="text/template">
-                            ### Create repository
-                            ```
-                            $ planemo shed_create --shed_target testtoolshed
-                            ```
-                            ```
-                            Repository created
-                            cd ‘[…]/tandem_repeats_finder' && git rev-parse HEAD
-                            Repository tandem_repeats_finder_2 updated successfully.
-                            ```
-                            <img src="../images/shedCreate.png" width="60%" >
                             - Don't forget **--shed_target**. Default is main toolshed
                         </script>
                     </section>
                     <section data-markdown >
                         <script type="text/template">
-                            ### Update repository
+                            ### Create repository
+                            ```bash
+                            planemo shed_create --shed_target testtoolshed
                             ```
-                            $ planemo shed_diff --shed_target testtoolshed
+                            ```bash
+                            Repository created
+                            cd '[…]/tandem_repeats_finder' && git rev-parse HEAD
+                            Repository tandem_repeats_finder_2 updated successfully.
+                            ```
+                            <img src="../images/shedCreate.png" width="80%" >
+                        </script>
+                    </section>
+                    <section data-markdown >
+                        <script type="text/template">
+                            ### Update repository
+                            ```bash
+                            planemo shed_diff --shed_target testtoolshed
 
                             ```
-                            <img src="../images/planemoUpdate.png" width="80%" >
+                            ```bash
+                            wget -q --recursive -O - 'https://testtoolshed.g2.bx.psu.edu/repository/download?repository_id=6306166e4da9a8bf&changeset_revision=default&file_type=gz' | tar -xzf - -C /tmp/tool_shed_diff_DMcOrR/_testtoolshed_ --strip-components 1
+                            mkdir "/tmp/tool_shed_diff_DMcOrR/_local_"; tar -xzf "/tmp/tmp5ousfg" -C "/tmp/tool_shed_diff_DMcOrR/_local_"; rm -rf /tmp/tmp5ousfg
+                            cd "/tmp/tool_shed_diff_DMcOrR"; diff -r _local_ _testtoolshed_
+                            diff -r _local_/tandem_repeats_finder.xml _testtoolshed_/tandem_repeats_finder.xml
+                            41d40
+                            <     <param name="fileout_label2" type="text" value="Unused" label="none" help="Output name for files" />
+                            ```
                             - Need to be updated
                         </script>
                     </section>
                     <section data-markdown >
                         <script type="text/template">
                             ### Update repository
-                            ```
-                            $ planemo shed_update --check_diff --shed_target testtoolshed
+                            ```bash
+                            planemo shed_update --check_diff --shed_target testtoolshed
 
                             ```
-                            <img src="../images/planemoUpdated.png" width="80%" >
+                            ```bash
+                            wget -q --recursive -O - 'https://testtoolshed.g2.bx.psu.edu/repository/download?repository_id=6306166e4da9a8bf&changeset_revision=default&file_type=gz' | tar -xzf - -C /tmp/tool_shed_diff_DMcOrR/_testtoolshed_ --strip-components 1
+                            mkdir "/tmp/tool_shed_diff_DMcOrR/_local_"; tar -xzf "/tmp/tmp5ousfg" -C "/tmp/tool_shed_diff_DMcOrR/_local_"; rm -rf /tmp/tmp5ousfg
+                            cd "/tmp/tool_shed_diff_DMcOrR"; diff -r _local_ _testtoolshed_
+                            diff -r _local_/tandem_repeats_finder.xml _testtoolshed_/tandem_repeats_finder.xml
+                            41d40
+                            <     <param name="fileout_label2" type="text" value="Unused" label="none" help="Output name for files" />
+                            Repository tandem_repeats_finder updated successfully.
+                            Repository metadata updated.
+                            ```
                             - Tool updated
                         </script>
                     </section>
                     <section data-markdown >
                         <script type="text/template">
                             ### Update repository
-                            ```
-                            $ planemo shed_update --check_diff --shed_target testtoolshed
+                            ```bash
+                            planemo shed_update --check_diff --shed_target testtoolshed
 
                             ```
                             <img src="../images/checkToolUpdate.png" width="70%" >
                             - Tool updated
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            <img src="../images/planemo-logo.png" alt="Planemo" class="no-border" height=25/>
+                            #### Publishing to the Tool Shed
+
+                            <img src="../images/planemo_toolshed_publishing.png" alt="Publishing on ToolShed" class="no-border"/>
+
                         </script>
                     </section>
                 </section>
@@ -676,9 +748,13 @@
 
                             #### Step 1: Start and configure your toolshed
                             - Start your toolshed (in galaxy home directory):
-                              - `./run_tool_shed.sh`
-                            - Toolshed available at:
-                              - `http://localhost:9009`
+                            ```bash
+                            ./run_tool_shed.sh
+                            ```
+                            - Toolshed available at `http://localhost:9009`
+                            <aside class="notes">
+                            login: galaxy/azerty
+                            </aside>
                         </script>
                     </section>
                     <section data-markdown >
@@ -697,56 +773,53 @@
                             - `planemo shed_init`
                             - `planemo shed_lint`
                             - `planemo shed_create`
-                        </script>
-                    </section>
-                    <section data-markdown >
-                        <script type="text/template">
-                            ## Answers
-                        </script>
-                    </section>
-		    <section data-markdown >
-                        <script type="text/template">
-                            ### <i class="fa fa-pencil" aria-hidden="true"></i> Hands-on
-                            - `planemo config_init`
-                              - create file .planemo.yml in your home directory
+                            
+                            <aside class="notes">
+                            ```bash
+                            planemo config_init
                             ```
+                              - Creates file `.planemo.yml` in your home directory.
+                            ```yml
                             [...]  local:
                             #key: "<TODO>"
-                            #email: "galaxy@localhost.fr"
-                            #password: "azerty"
+                            email: "galaxy@localhost.fr"
+                            password: "azerty"
                             ```
+                            ```bash
+                            planemo shed_init --name=seqtk_seq --owner=galaxy --description="common transformation of FASTA/Q" --category="Fasta Manipulation"
+                            ```
+                            ```bash
+                            planemo shed_lint .
+                            ```
+                            ```bash
+                            planemo shed_create --shed_target local
+                            ```
+                            </aside>
+                         </script>
+                    </section>
+                    <section data-markdown >
+                        <script type="text/template">
+                            ### <i class="fa fa-pencil" aria-hidden="true"></i> Hands-on
+
+                            #### Step 3: Update your tool and then use planemo to update your tool on the Tool Shed
                         </script>
                     </section>
                     <section data-markdown >
                         <script type="text/template">
                             ### <i class="fa fa-pencil" aria-hidden="true"></i> Hands-on
-                            - `planemo shed_init --name=seqtk_seq --owner=galaxy --description="common transformation of FASTA/Q" --category="Fasta Manipulation"`
-                              - create file .shed.yml in your working dir.:
+
+                            #### Step 3: Update your tool and then use planemo to update your tool on the Tool Shed
+                            - `planemo shed_diff`
+                            - `planemo shed_update`
+                            
+                            <aside class="notes">
+                            ```bash
+                            planemo shed_diff --shed_target local
                             ```
-                            [categories: [Fasta Manipulation,Fastq Manipulation]
-                            description: common transformation of FASTA/Q
-                            name: seqtk_seq
-                            owner: galaxy
+                            ```bash
+                            planemo shed_update --check_diff --shed_target local
                             ```
-                        </script>
-                    </section>
-                    <section data-markdown >
-                        <script type="text/template">
-                            ### <i class="fa fa-pencil" aria-hidden="true"></i> Hands-on
-                            - `planemo shed_lint .`
-                              - Check Tool Shed repository for common issues.
-                            - `planemo shed_create --shed_target local`
-                              - Create a repository in the toolshed and upload files
-                        </script>
-                    </section>
-                    <section data-markdown >
-                        <script type="text/template">
-                            ### <i class="fa fa-pencil" aria-hidden="true"></i> Hands-on
-                            Modify your tool wrapper and then:
-                            - `planemo shed_diff --shed_target local`
-                              - Diff between local repository and Tool Shed.
-                            - planemo shed_update --check_diff --shed_target local
-                              - Update Tool Shed repository
+                            </aside>
                         </script>
                     </section>
                 </section>
