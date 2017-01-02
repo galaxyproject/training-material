@@ -21,7 +21,6 @@ We here proposed to re-analyze these data at least until the population genomics
 > 2. [Mapping](#mapping)
 > 3. [SNP calling using STACKS](#snp-calling-from-radtags)
 > 4. [Calculate population genomics statistics](#calculate-population-genomics-statistics)
-> {: .agenda}
 
 # Pretreatments
 
@@ -54,7 +53,6 @@ To download all training datasets (i.e reads, reference genome, population map f
 >    > * Select **Paste/Fetch Data**
 >    > * Paste the link into the text field
 >    > * Press **Start**    
->    {: .tip}
 >
 >    > ### :bulb: Tip: Changing the file type `fastq` to `fastqsanger` once the data file is in your history. As we know here that the datatype is fastqsanger, we can directly change it through the upcoming method. Normally, you need to execute FastQGroomer to be sure to have a correct fastqsanger file format. And if you don't know how your quality score is encoded on raw fastQ files, please, use the FastQC tool to determine it!
 >    >
@@ -62,7 +60,6 @@ To download all training datasets (i.e reads, reference genome, population map f
 >    > * Choose **Datatype** on the top
 >    > * Select `fastqsanger`
 >    > * Press **Save**
->    {: .tip}
 > 
 >    As default, Galaxy takes the link as name. It also do not link the dataset to a database or a reference genome.
 > 
@@ -70,9 +67,7 @@ To download all training datasets (i.e reads, reference genome, population map f
 >    > - Add the "stickleback" custom build from the Fasta reference genome file
 >    > - Edit the "Database/Build" to select "stickleback"
 >    > - Rename the datasets according to the samples
->    {: .comment}
 > 
-{: .hands_on}
 
 The sequences are raw sequences from the sequencing machine, without any pretreatments. They need to be demultiplexed. To do so, we can use the Process Radtags tool from STACKS.
 
@@ -109,7 +104,6 @@ For demultiplexing, we use the Process Radtags tool from [STACKS](http://www.g3j
 >    >    <li>Sequencing quality is essential! Each time your sequencing quality decreases, you loose data and thus essential biological information!</li>
 >    >    </ol>
 >    >    </details>
->    {: .question}
 > ![](../images/RAD4_Population_Genomics/Process_radtags_out)
 >
 > 2. **Process Radtags** :wrench:: Re-Run `Stacks: process radtags` on FastQ file playing with parameters 
@@ -165,7 +159,6 @@ For quality control, we use similar tools as described in [NGS-QC tutorial](../.
 >    >    <li>The read length is 32 bp</li>
 >    >    </ol>
 >    >    </details>
->    {: .question}
 >
 
 As it exists a draft genome for *Gasterosteus aculeatus*, we can use this information and map the sequences on this genome to identify polymorphism.
@@ -177,7 +170,6 @@ To make sense of the reads, their positions within *Gasterosteus aculeatus* geno
 > ### :nut_and_bolt: Comment
 >
 > Do you want to learn more about the principles behind mapping? Follow our [training](../../NGS-mapping)
-> {: .comment}
 
 Here we will use BWA. BWA is a fast light-weighted tool that aligns relatively short sequences (queries) to a sequence database (large), such as the human reference genome. It is developed by Heng Li at the Sanger Insitute.
 
@@ -199,7 +191,6 @@ Run `Stacks: Reference map` Galaxy tool. This program will run pstacks, cstacks,
 > ### :nut_and_bolt: Comment
 >
 > Information on ref_map.pl and its parameters can be found online: http://creskolab.uoregon.edu/stacks/comp/ref_map.php.
-> {: .comment}
 
 
 > **Stacks: Reference map** :wrench:: Run **Stacks** selecting the population usage. Specify each BWA-aligned individual as a sample, a population map and a minimum depth of coverage of 3.
@@ -209,7 +200,6 @@ Run `Stacks: Reference map` Galaxy tool. This program will run pstacks, cstacks,
 >    > ### :nut_and_bolt: Comment
 >    >
 >    > If you are using a file presenting population information and individual name in a different manner than expected by STACKS, you can use Galaxy tools like `Regex Replace` or `Cut columns from a table` to generate it.
->    > {: .comment}
 
 > Once Stacks has completed running, investigate the output files: `result.log` and `catalog.*` (snps, alleles and tags). Notice that each locus now has a chromosome/base pair specified in each of the *tags.tsv files and in the catalog files.
 >
@@ -238,7 +228,6 @@ Run `Stacks: Reference map` Galaxy tool. This program will run pstacks, cstacks,
 >    >    <li>3500</li>
 >    >    </ol>
 >    >    </details>
->    {: .question}
 
 # Conclusion
 
