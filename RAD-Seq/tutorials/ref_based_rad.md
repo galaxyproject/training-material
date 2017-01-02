@@ -19,8 +19,8 @@ We here proposed to re-analyze these data at least until the population genomics
 >
 > 1. [Pretreatments](#pretreatments)
 > 2. [Mapping](#mapping)
-> 3. [Building loci using STACKS](#snp-calling-from-radtags)
-> 4. [Calculate population genomics statistics](#pop-genomics-stat)
+> 3. [SNP calling using STACKS](#snp-calling-from-radtags)
+> 4. [Calculate population genomics statistics](#calculate-population-genomics-statistics)
 > {: .agenda}
 
 # Pretreatments
@@ -193,7 +193,7 @@ Here we will use BWA. BWA is a fast light-weighted tool that aligns relatively s
 
 We next want to run Stacks on the freshwater and oceanic populations.
 
-# Building loci using STACKS
+# SNP calling from radtag
 
 Run `Stacks: Reference map` Galaxy tool. This program will run pstacks, cstacks, and sstacks on the members of the population, accounting for the alignments of each read.
 
@@ -217,7 +217,7 @@ Run `Stacks: Reference map` Galaxy tool. This program will run pstacks, cstacks,
 >    ![](../images/RAD4_Population_Genomics/reference/reference_map_out.png)
 >
 
-# snp-calling-from-radtag
+# Calculate population genomics statistics
 > **Stacks: populations** :wrench:: Run the last step of **Stacks: Reference map** pipeline specifying data filtering options (minimum percentage of individuals in a population required to process a locus for that population: 0.75 , output options (VCF and Structure) and enabling SNP and haplotype-based F statistics calculation.
 >
 >    ![](../images/RAD4_Population_Genomics/reference/populations_in.png)
