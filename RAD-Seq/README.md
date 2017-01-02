@@ -16,11 +16,13 @@ Several deck of slides are available for this topic:
 
 A tutorial with hands-on is available for this topic:
 
-- [Reference-based RAD-Seq data analysis](tutorials/ref_based.md)
+- [Reference-based RAD-Seq data analysis](tutorials/ref_based_rad.md)
+- [de-novo RAD-Seq data analysis](tutorials/de_novo_rad.md)
 
 ## Input datasets
 
-The input datasets for the tutorials will be soon available on Zenodo.
+The input datasets for the tutorials are available on Zenodo:
+- [population gneomics tutorials](http://doi.org/10.5281/zenodo.218574).
 
 ## Galaxy instance
 
