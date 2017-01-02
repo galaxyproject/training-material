@@ -8,7 +8,7 @@ tutorial_name: de_novo_based_rad
 
 In the study of [Hohenlohe *et al.* 2010](http://journals.plos.org/plosgenetics/article?id=10.1371/journal.pgen.1000862), a genome scan of nucleotide diversity and differentiation in natural populations of threespine stickleback *Gasterosteus aculeatus* was conducted. Authors used Illumina-sequenced RAD tags to identify and type over 45,000 single nucleotide polymorphisms (SNPs) in each of 100 individuals from two oceanic and three freshwater populations.
 
-![](../images/RAD4_Population_Genomics/Hohenlohe_et_al_2010)
+![](../images/RAD4_Population_Genomics/Hohenlohe_et_al_2010.png)
 
 We here proposed to re-analyze these data at least until the population genomics statistics calculation step using STACKS pipeline. Existing *Gasterosteus aculeatus* draft genome will not be used here so the analysis will be performed de novo. In a de novo RAD-seq data analysis, the reads are aligned one on each other to create stacks and then clustered to build loci. A reference approach can also be conducted (see [ref_based tutorial](/ref_based_rad)), allowing to work on existing assembled loci.
 
@@ -78,7 +78,7 @@ For demultiplexing, we use the Process Radtags tool from [STACKS](http://www.g3j
 >
 > 1. **Process Radtags** :wrench:: Run `Stacks: process radtags` on FastQ file to demultiplex the reads
 >
-> ![](../images/RAD4_Population_Genomics/Process_radtags_in)
+> ![](../images/RAD4_Population_Genomics/Process_radtags_in.png)
 >
 >
 >    > ### :question: Questions
@@ -103,39 +103,39 @@ For demultiplexing, we use the Process Radtags tool from [STACKS](http://www.g3j
 >    >    <li>Sequencing quality is essential! Each time your sequencing quality decreases, you loose data and thus essential biological information!</li>
 >    >    </ol>
 >    >    </details>
-> ![](../images/RAD4_Population_Genomics/Process_radtags_out)
+> ![](../images/RAD4_Population_Genomics/Process_radtags_out_log.png)
 >
 > 2. **Process Radtags** :wrench:: Re-Run `Stacks: process radtags` on FastQ file playing with parameters 
 >
 > In `advanced options`, activate the `Discard reads with low quality scores` option and play with the score limit (default vs 20 for example) and examine the change in reads retained. Note that you can play also with the sliding window score threshold, by default 15% of the length of the read. This sliding window parameter allows notably the user to deal with the declining quality at the 3' end of reads.
 >
-> ![](../images/RAD4_Population_Genomics/Process_radtags_in_advancedparameter0)
+> ![](../images/RAD4_Population_Genomics/Process_radtags_in_advancedparameter0.PNG)
 >
-> ![](../images/RAD4_Population_Genomics/Process_radtags_in_advancedparameter1)
+> ![](../images/RAD4_Population_Genomics/Process_radtags_in_advancedparameter1.PNG)
 >
 > To do that, you can use data handling Galaxy tools to cut the interesting lines of each `result.log with Stacks: process radtags` files OR, as I made, just copy/paste these lines on the Galaxy upload tool using Paste/fetch data section and modifying the File header by sample and filename by Score 10 / Score 20 and noscorelimit for example... Before Starting the upload, you can select the `Convert spaces to tabs` option through the `Upload configuration` wheel.
 >
-> ![](../images/RAD4_Population_Genomics/Process_radtags_in_advancedparameter_compare_copy)
+> ![](../images/RAD4_Population_Genomics/Process_radtags_in_advancedparameter_compare_copy.PNG)
 >
-> ![](../images/RAD4_Population_Genomics/Process_radtags_in_advancedparameter_compare_paste)
+> ![](../images/RAD4_Population_Genomics/Process_radtags_in_advancedparameter_compare_paste.PNG)
 >
 > You can use the `Charts` functionality through the Visualize button reachable on the `Radtags logs` file you just generated. 
 >
-> ![](../images/RAD4_Population_Genomics/Process_radtags_charts)
+> ![](../images/RAD4_Population_Genomics/Process_radtags_charts.PNG)
 >
 > If like me you don't have payed attention to the organization of you file for the graphical representation you obtain a non optimal bars diagram with a not intelligent X-axis ordering. There is a lot of diffferent manner to fix this. You can use the copy/paste "bidouille" like seen previously, or you can use Galaxy tools to manipulate the `radtags logs` (did you change the filename from `pasted entry` to another label ?) file to generate a better graph. For example, you can use `Select lines that match an expression` tool to select rows then use the `Concatenate datasets tail-to-head` tool to reorganize these lines in a new file... OR, as I made, you can just sort the file using the first column.
 >
-> ![](../images/RAD4_Population_Genomics/Process_radtags_charts_tablemodif)
+> ![](../images/RAD4_Population_Genomics/Process_radtags_charts_tablemodif.PNG)
 >
 > And you obtain a file like this one, ready to generate a beautiful and smart bar diagram!
 >
-> ![](../images/RAD4_Population_Genomics/Process_radtags_charts_tablemodif_view)
+> ![](../images/RAD4_Population_Genomics/Process_radtags_charts_tablemodif_view.PNG)
 >
-> ![](../images/RAD4_Population_Genomics/Process_radtags_charts_end)
+> ![](../images/RAD4_Population_Genomics/Process_radtags_charts_end.PNG)
 >
 >Using filter like `clean data, remove any read with an uncalled base` has here few impact:
 >
-> ![](../images/RAD4_Population_Genomics/Process_radtags_out_parameter2)
+> ![](../images/RAD4_Population_Genomics/Process_radtags_out_parameter2.png)
 >
 
 The demultiplexed sequences are raw sequences from the sequencing machine, without any pretreatments. They need to be controlled for their quality.
@@ -214,4 +214,4 @@ Run `Stacks: De novo map` Galaxy tool. This program will run pstacks, cstacks, a
 In this tutorial, we have analyzed real RAD sequencing data to extract useful information, such as which loci are candidate regarding the genetic differentiation between freshwater and oceanic Stickelback populations. To answer these questions, we analyzed RAD sequence datasets using a de novo RAD-seq data analysis approach. This approach can be sum up with the following scheme:
 
 
-![](../images/denovo_based_workflow.png)
+![](../images/denovo_based_workflow.PNG)
