@@ -193,7 +193,7 @@ Here we will use BWA. BWA is a fast light-weighted tool that aligns relatively s
 
 We next want to run Stacks on the freshwater and oceanic populations.
 
-# SNP calling from radtag
+# SNP calling from radtags
 
 Run `Stacks: Reference map` Galaxy tool. This program will run pstacks, cstacks, and sstacks on the members of the population, accounting for the alignments of each read.
 
