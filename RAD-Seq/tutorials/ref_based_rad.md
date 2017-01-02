@@ -46,7 +46,6 @@ To download all training datasets (i.e reads, reference genome, population map f
 >
 >    > ### :nut_and_bolt: Comments
 >    > If you are using the [GenOuest Galaxy instance](http://galaxy.genouest.org), you can load the dataset using 'Shared Data' <i class="fa fa-long-arrow-right"></i> 'Data Libraries' <i class="fa fa-long-arrow-right"></i> '1 Galaxy teaching folder' <i class="fa fa-long-arrow-right"></i> 'EnginesOn' <i class="fa fa-long-arrow-right"></i> 'RADseq' <i class="fa fa-long-arrow-right"></i> 'Stickelback population genomics' <i class="fa fa-long-arrow-right"></i> 'SRR034310' 
->    {: .comment}
 >
 >    > ### :bulb: Tip: Importing data via links
 >    >
