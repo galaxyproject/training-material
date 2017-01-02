@@ -86,7 +86,6 @@
                             ## Why visualizations?
                             
                             <img src="../images/vis_alignment.png" class="no-border" width="99%"/>
-
                         </script>
                     </section>
                 </section>
@@ -124,6 +123,16 @@
                             </table>
                             
                             *shed: installable via tool shed = functional tests, dependency management and versioning
+                            <aside class="notes">
+                                Tools have some great advantages over all other tools, simply because they integrate so well with the Galaxy ecosystem.
+                                Therefore several visualizations have been implemented as such a tools.
+                                However, there are some boundaries to Galaxy that limit such vizualization.
+                                For example, interactive tools require HTML which is for security reasons disabled in Galaxy.
+                                Because these visualizations work client-side and within a browser, it is hard to make use of served side indexing.
+                                As consequence, large data files (BAM) are transported entirely before being visualized.
+                                
+                                The visualisation plugin system was originally developed to solve most of these issues.
+                            </aside>
                         </script>
                     </section>
                 </section>
@@ -131,35 +140,61 @@
                 <section>
                     <section data-markdown>
                         <script type="text/template">
-                            ## Part 1
+                            ### Galaxy visualization plugins
+                            
+                            - Plugin development directory:
+                                  $GALAXY_ROOT/config/plugins
+                            - Example (in mainline)
+                                * Charts
+                            
+                            <img src="../images/vis_plugin_menu.png" class="no-border" width="55%"/>
                         </script>
                     </section>
 
                     <section data-markdown>
                         <script type="text/template">
-                            ### Small introduction
-
-                            Introduction about this part
+                            ### Write first plugin
+                            
+                            - Elements of visualization plugin:
+                                * configured Datatype: e.g. BAM
+                                * description: name, version, description, license
+                                * HTML + js (template): variables will be replaced (e.g. resolved data file url)
+                            - Assignment: Boxplot of chromosome contents in BAM file
+                                * Data is present as Metadata
                         </script>
                     </section>
 
                     <section data-markdown>
                         <script type="text/template">
-                            ### Subpart 1
-
-                            Short introduction about this subpart.
-
-                            <i class="fa fa-pencil" aria-hidden="true"></i> ***Hands on!***
+                            ### Write first plugin
+                            
+                            - For XML file hooking visualization into galaxy:
+                                  mkdir -p $GALAXY_ROOT/config/plugins/$PLUGIN_NAME/config ;
+                            - For templates of HTML files:
+                                  mkdir -p $GALAXY_ROOT/config/plugins/$PLUGIN_NAME/templates
+                            - For files that need to be exposed via the webserver (static images, compiled JS files)
+                                  mkdir -p $GALAXY_ROOT/config/plugins/$PLUGIN_NAME/static
                         </script>
                     </section>
 
                     <section data-markdown>
                         <script type="text/template">
-                            ### Subpart1.2
+                            ### Write first plugin:  hooking visualization into galaxy
+                                  $GALAXY_ROOT/config/plugins/$PLUGIN_NAME/config/$PLUGIN_NAME.xml ;
+                            <img src="../images/vis_plugin_conf_xml.png" class="no-border" width="75%"/>
+                            * Data types must match with class names in
+                                   $GALAXY_ROOT/lib/galaxy/datatypes/
+                        </script>
+                    </section>
 
-                            Short introduction about this subpart.
-
-                            <i class="fa fa-pencil" aria-hidden="true"></i> ***Hands on!***
+                    <section data-markdown>
+                        <script type="text/template">
+                            ### Write first plugin: *alignment_rname_boxplot*
+                            
+                            - For templates of HTML files:
+                                  touch $GALAXY_ROOT/config/plugins/$PLUGIN_NAME/templates/$PLUGIN_NAME.mako ;
+                                * Link to data types and HTML template file
+                            <img src="../images/vis_plugin_conf_xml.png" class="no-border" width="75%"/>
                         </script>
                     </section>
                 </section>
