@@ -13,6 +13,7 @@ Several deck of slides are available for this topic:
 - Slide deck related to the tutorials:
     - [Tool development and integration into Galaxy](http://bgruening.github.io/training-material/Dev-Corner/slides/tool_integration.html)
 - [Contributing with GitHub](http://bgruening.github.io/training-material/Dev-Corner/slides/github_contribution.html)
+- [Tool Shed](http://bgruening.github.io/training-material/Dev-Corner/slides/toolshed.html)
 
 - **Help needed** for those topics:
     - [Data source integration](http://bgruening.github.io/training-material/Dev-Corner/slides/data_source_integration.html)
@@ -51,3 +52,7 @@ The following individuals have contributed to this training material:
 - Anthony Bretaudeau (@abretaud)
 - Bérénice Batut (@bebatut)
 - Gildas Le Corguillé (@lecorguille)
+- Gwendoline Andres (@gwenandres)
+- Loraine Gueguen (@loraine-gueguen)
+- Stephanie Le Gras (@slegras)
+
