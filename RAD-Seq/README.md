@@ -7,16 +7,16 @@ RAD-Sequencing is a reduced representation library method used to obtain genomic
 
 Several deck of slides are available for this topic:
 
-- [General introduction about RAD seq data analysis](http://bgruening.github.io/training-material/RAD-Seq/slides/"
+- [General introduction about RAD seq data analysis](http://bgruening.github.io/training-material/RAD-Seq/slides/)
 - Slide deck related to the tutorials:
-    - [Population genomics data analysis](http://bgruening.github.io/training-material/RAD-Seq/slides/pop_genomics.html"
-	- [Genetic map data analysis](http://bgruening.github.io/training-material/RAD-Seq/slides/genetic_map.html"
+    - [Population genomics data analysis](http://bgruening.github.io/training-material/RAD-Seq/slides/pop_genomics.html)
+	- [Genetic map data analysis](http://bgruening.github.io/training-material/RAD-Seq/slides/genetic_map.html)
 
 # Tutorials
 
 A tutorial with hands-on is available for this topic:
 
-- [Reference-based RAD-Seq data analysis](tutorials/ref_based.md"
+- [Reference-based RAD-Seq data analysis](tutorials/ref_based.md)
 
 ## Input datasets
 
@@ -39,152 +39,152 @@ It will launch a flavored Galaxy instance available on
 
 -
     authors: "Amores, A., et al. 2011"
-    title: "Genome evolution and meiotic maps by massively parallel DNA sequencing
+    title: "Genome evolution and meiotic maps by massively parallel DNA sequencing"
     link: "https://www.ncbi.nlm.nih.gov/pubmed/21828280"
 
 -
     authors: "Catchen, J. M. et al. 2011"
-    title: "Stacks: building and genotyping loci de novo from short-read sequences
+    title: "Stacks: building and genotyping loci de novo from short-read sequences"
     link: "http://www.g3journal.org/content/1/3/171.full"
 
 -
     authors: "Davey, J. W., et al. 2011"
-    title: "Genome-wide genetic marker discovery and genotyping using next-generation sequencing
+    title: "Genome-wide genetic marker discovery and genotyping using next-generation sequencing"
     link: "https://www.ncbi.nlm.nih.gov/pubmed/21681211"
 
 -
     authors: "Etter, P. D., et al. 2011"
-    title: "SNP Discovery and Genotyping for Evolutionary Genetics using RAD sequencing
+    title: "SNP Discovery and Genotyping for Evolutionary Genetics using RAD sequencing"
     link: "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3658458/"
 
 -
     authors: "Ekblom, R., and J. Galindo. 2010"
-    title: "Applications of next generation sequencing in molecular ecology of non-model organisms
+    title: "Applications of next generation sequencing in molecular ecology of non-model organisms"
     link: "https://www.ncbi.nlm.nih.gov/pubmed/21139633"
 
 -
     authors: "Hohenlohe, P. A. et al. 2010"
-    title: "Population genomics of parallel adaptation in threespine stickleback using sequenced RAD tags
+    title: "Population genomics of parallel adaptation in threespine stickleback using sequenced RAD tags"
     link: "http://journals.plos.org/plosgenetics/article?id=10.1371/journal.pgen.1000862"
 
 -
     authors: "Gompert, Z., and C. A. Buerkle. 2011a"
-    title: "A hierarchical Bayesian model for next-generation population genomics
+    title: "A hierarchical Bayesian model for next-generation population genomics"
     link: "http://www.genetics.org/content/187/3/903"
 
 -
     authors: "Gompert, Z., and C. A. Buerkle. 2011b"
-    title: "Bayesian estimation of genomic clines
+    title: "Bayesian estimation of genomic clines"
     link: "http://onlinelibrary.wiley.com/doi/10.1111/j.1365-294X.2011.05074.x/abstract"
 
 -
     authors: "Lynch, M. 2009"
-    title: "Estimation of allele frequencies from high-coverage genome-sequencing projects
+    title: "Estimation of allele frequencies from high-coverage genome-sequencing projects"
     link: "http://www.genetics.org/content/182/1/295"
 
 -
     authors: "Nielsen, R., et al. 2005"
-    title: "Genomic scans for selective sweeps using SNP data
+    title: "Genomic scans for selective sweeps using SNP data"
     link: "http://genome.cshlp.org/content/15/11/1566.abstract"
 
 -
     authors: "Hohenlohe, P. A., et al. 2010"
-    title: "Using population genomics to detect selection in natural populations: Key concepts and methodological considerations
+    title: "Using population genomics to detect selection in natural populations: Key concepts and methodological considerations"
     link: "https://www.ncbi.nlm.nih.gov/pubmed/21218185"
 
 -
     authors: "Stapley, J., et al. 2010"
-    title: "Adaptation genomics: the next generation
+    title: "Adaptation genomics: the next generation"
     link: "http://www.cell.com/trends/ecology-evolution/abstract/S0169-5347(10)00216-8"
 
 -
     authors: "Luikart, G.,et al. 2003"
-    title: "The power and promise of population genomics: from genotyping to genome typing
+    title: "The power and promise of population genomics: from genotyping to genome typing"
     link: "http://www.nature.com/nrg/journal/v4/n12/full/nrg1226.html"
 
 -
     authors: "Nielsen, R., et al. 2011"
-    title: "Genotype and SNP calling from next-generation sequencing data
+    title: "Genotype and SNP calling from next-generation sequencing data"
     link: "http://www.nature.com/nrg/journal/v12/n6/full/nrg2986.html"
 
 > Genetic mapping using RRL and RAD sequencing
 
 -
     authors: "Altshuler, D., et al. 2000"
-    title: "An SNP map of the human genome generated by reduced representation shotgun sequencing
+    title: "An SNP map of the human genome generated by reduced representation shotgun sequencing"
     link: "https://www.ncbi.nlm.nih.gov/pubmed/11029002"
 
 -
     authors: "Baxter, S. W., et al. 2011"
-    title: "Linkage mapping and comparative genomics using next-generation RAD sequencing of a non-model organism
+    title: "Linkage mapping and comparative genomics using next-generation RAD sequencing of a non-model organism"
     link: "http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0019315"
 
 -
     authors: "Chutimanitsakun, Y., et al. 2011"
-    title: "Construction and application for QTL analysis of a Restriction Site Associated DNA (RAD) linkage map in barley
+    title: "Construction and application for QTL analysis of a Restriction Site Associated DNA (RAD) linkage map in barley"
     link: "http://bmcgenomics.biomedcentral.com/articles/10.1186/1471-2164-12-4"
 
 -
     authors: "Gore, M. A., et al. 2009"
-    title: "A first-generation haplotype map of maize
+    title: "A first-generation haplotype map of maize"
     link: "http://science.sciencemag.org/content/326/5956/1115"
 
 > RAD-seq genotyping methodology
 
 -
     authors: "Baird, N. A., et al. 2008"
-    title: "Rapid SNP discovery and genetic mapping using sequenced RAD markers
+    title: "Rapid SNP discovery and genetic mapping using sequenced RAD markers"
     link: "http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0003376"
 
 -
     authors: "Emerson, K. J., et al. 2010"
-    title: "Resolving postglacial phylogeography using high-throughput sequencing
+    title: "Resolving postglacial phylogeography using high-throughput sequencing"
     link: "http://www.pnas.org/content/107/37/16196"
 
 -
     authors: "Etter, P. D., et al. 2011"
-    title: "Local De Novo Assembly of RAD Paired-End Contigs Using Short Sequencing Reads
+    title: "Local De Novo Assembly of RAD Paired-End Contigs Using Short Sequencing Reads"
     link: "http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0018561"
 
 -
     authors: "Hohenlohe, P. A., et al. 2011"
-    title: "Next-generation RAD sequencing identifies thousands of SNPs for assessing hybridization between rainbow and westslope cutthroat trout
+    title: "Next-generation RAD sequencing identifies thousands of SNPs for assessing hybridization between rainbow and westslope cutthroat trout"
     link: "https://www.ncbi.nlm.nih.gov/pubmed/21429168"
 
 -
     authors: "Miller, M. R., et al. 2007"
-    title: "Rapid and cost-effective polymorphism identification and genotyping using restriction site associated DNA (RAD) markers
+    title: "Rapid and cost-effective polymorphism identification and genotyping using restriction site associated DNA (RAD) markers"
     link: "https://www.ncbi.nlm.nih.gov/pubmed/17189378"
 
 -
     authors: "Willing, E. M., et al. 2011"
-    title: "Paired-end RAD-seq for de novo assembly and marker design without available reference
+    title: "Paired-end RAD-seq for de novo assembly and marker design without available reference"
     link: "https://www.ncbi.nlm.nih.gov/pubmed/21712251"
 
 > Other reduced representation library (RRL) methodologies
 
 -
     authors: "Andolfatto, P., et al. 2011"
-    title: "Multiplexed shotgun genotyping for rapid and efficient genetic mapping
+    title: "Multiplexed shotgun genotyping for rapid and efficient genetic mapping"
     link: "https://www.ncbi.nlm.nih.gov/pubmed/21233398"
 
 -
     authors: "Elshire, R. J., et al. 2011"
-    title: "A Robust, Simple Genotyping-by-Sequencing (GBS) Approach for High Diversity Species
+    title: "A Robust, Simple Genotyping-by-Sequencing (GBS) Approach for High Diversity Species"
     link: "http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0019379"
 
 -
     authors: "Rigola, D., et al. 2009"
-    title: "High-Throughput Detection of Induced Mutations and Natural Variation Using KeyPoint™ Technology (http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0004761"
+    title: "High-Throughput Detection of Induced Mutations and Natural Variation Using KeyPoint™ Technology" (http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0004761"
 
 -
     authors: "van Orsouw, N. J., et al. 2007"
-    title: "Complexity reduction of polymorphic sequences (CRoPS): a novel approach for large-scale polymorphism discovery in complex genomes
+    title: "Complexity reduction of polymorphic sequences (CRoPS): a novel approach for large-scale polymorphism discovery in complex genomes"
     link: "http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0001172"
 
 -
     authors: "van Tassell, C. P., et al. 2008"
-    title: "SNP discovery and allele frequency estimation by deep sequencing of reduced representation libraries
+    title: "SNP discovery and allele frequency estimation by deep sequencing of reduced representation libraries"
     link: "https://www.ncbi.nlm.nih.gov/pubmed/18297082"
 
 ## Websites
