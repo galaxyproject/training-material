@@ -99,7 +99,7 @@ For demultiplexing, we use the Process Radtags tool from [STACKS](http://www.g3j
 >    >    <li>Sequencing quality is essential! Each time your sequencing quality decreases, you loose data and thus essential biological information!</li>
 >    >    </ol>
 >    >    </details>
-> ![](../images/RAD4_Population_Genomics/Process_radtags_out.png)
+> ![](../images/RAD4_Population_Genomics/Process_radtags_out_log.png)
 >
 > 2. **Process Radtags** :wrench:: Re-Run `Stacks: process radtags` on FastQ file playing with parameters 
 >
