@@ -968,6 +968,37 @@
 
                     <section data-markdown>
                         <script type="text/template">
+                            <img src="../../shared/images/conda_logo.png" class="no-border"  height=25 />
+                            ### Channels
+
+                            Packages are provided through Channels within Continuum.Anaconda. It's the way to contribute.
+
+                            Galaxy via Conda will search packages in 5 channels: iuc,bioconda,r,defaults,conda-forge
+
+                        </script>
+                    </section>
+
+                    <section data-markdown>
+                        <script type="text/template">
+                            <img src="../../shared/images/conda_logo.png" class="no-border"  height=25 />
+                            ### Tips and tricks
+                            #### Because you don't want Conda binaries all the time in your $PATH
+
+                            ```
+                            vi ~/.bashrc
+                            ```
+                            ```bash
+                            function conda2activate () {
+                              export PATH=~/miniconda2/bin:$PATH; }
+                            function conda2deactivate () {
+                              export PATH=$(echo $PATH | sed "s|$HOME/miniconda2/bin:||g"); }
+                            ```
+
+                        </script>
+                    </section>
+
+                    <section data-markdown>
+                        <script type="text/template">
                             <img src="../images/planemo-logo.png" alt="Planemo" class="no-border" height=25/>
                             ### Test Galaxy Tools using Conda packages
 
@@ -1028,15 +1059,54 @@
 
                     <section data-markdown>
                         <script type="text/template">
+                            <img src="../../shared/images/conda_logo.png" class="no-border"  height=50 />
+                            ### Write a Conda package
+
+                            You will have to and you can implement a Conda package if a specific tool or version is not available.
+
+                            <div align="left">
+                              <br />
+                              <small>[Documentation about how to build a conda packages from scratch](http://conda.pydata.org/docs/build_tutorials/pkgs2.html)</small></br />
+                              <small>[Bioconda guidelines](https://bioconda.github.io/guidelines.html)</small>
+                            </div>
+                        </script>
+                    </section>
+
+
+
+                    <section data-markdown>
+                        <script type="text/template">
                             <img src="../../shared/images/conda_logo.png" class="no-border"  height=25 />
                             ### Write a Conda package
                             #### Files
 
                             - `meta.yaml`: contains all the metadata in the recipe.
                             - `build.sh`: the Unix script that installs the files
+                        </script>
+                    </section>
 
-                            <small>[Documentation about how to build a conda packages from scratch](http://conda.pydata.org/docs/build_tutorials/pkgs2.html)</small>
-                            <small>[Bioconda guidelines](https://github.com/bioconda/bioconda-recipes/blob/master/GUIDELINES.md)
+                    <section data-markdown>
+                        <script type="text/template">
+                            <img src="../../shared/images/conda_logo.png" class="no-border"  height=25 />
+                            ### Write a Conda package
+                            #### `meta.yaml` basic information
+
+                            ```
+                            package:
+                              name: bwa
+                              version: "0.7.15"
+                            about:
+                              home: http://bio-bwa.sourceforge.net
+                              license: MIT
+                              summary: The BWA read mapper.
+                            build:
+                              number: 0
+                              skip: True # [osx]
+                            source:
+                                fn: v0.7.15.tar.gz
+                                url: https://github.com/lh3/bwa/archive/v0.7.15.tar.gz
+                                md5: 54fdee953c5c256d36885a1c5c6b118c
+                            ```
 
                         </script>
                     </section>
@@ -1045,9 +1115,67 @@
                         <script type="text/template">
                             <img src="../../shared/images/conda_logo.png" class="no-border"  height=25 />
                             ### Write a Conda package
+                            #### `meta.yaml` requirements
 
-                            <img src="../images/conda_files.png" alt="meta.yaml and build.sh" />
+                            ```
+                            requirements:
+                              build:
+                                - gcc   # [not osx]
+                                - llvm  # [osx]
+                                - zlib
+                              run:
+                                - zlib
+                                - bowtie2
+                            ```
+                            <small>
+                              - `build`: requirements needed during the build step (here compilation)
+                              - `run` : requirements needed at runtime
 
+                            </small>
+                        </script>
+                    </section>
+
+                    <section data-markdown>
+                        <script type="text/template">
+                            <img src="../../shared/images/conda_logo.png" class="no-border"  height=25 />
+                            ### Write a Conda package
+                            #### `meta.yaml` requirements
+
+                            ```
+                            test:
+                              commands:
+                                - bowtie2 --version
+                                - bwa 2>&1 | grep 'index sequences in the'
+                                - '$R -e "library(''xcms'')"'
+                            ```
+                            <small>
+                              Those Test are launched at the end of `conda build`
+                            </small>
+                        </script>
+                    </section>
+
+                    <section data-markdown>
+                        <script type="text/template">
+                            <img src="../../shared/images/conda_logo.png" class="no-border"  height=25 />
+                            ### Write a Conda package
+                            #### `build.sh`
+
+                            ```
+                            #!/bin/bash
+                            ./configure --prefix=$PREFIX
+                            make
+                            make install
+                            ```
+                            ```
+                            #!/bin/bash
+                            mkdir -p $PREFIX/bin
+                            cp *.py $PREFIX/bin
+                            ```
+                            <small>
+                            - $PREFIX will usually contain `bin/` `lib/` `include/` that are filled with the requirements files
+                            - $PREFIX will be loaded at runtime $PATH, LD_LIBRARY_PATH, PYTHONPATH ...
+
+                            </small>
                         </script>
                     </section>
 
@@ -1057,14 +1185,10 @@
                             ### Write a Conda package
                             #### skeleton
 
-                            - Python<br/>
-                            `conda skeleton pypi <packagename>`
-                            - R<br/>
-                            `conda skeleton cran <packagename>`
-                            - Bioconductor<br/>
-                            `bioconductor_skeleton.py <packagename>`
-                            - Perl<br/>
-                            `conda skeleton cpan <packagename>`
+                            - `conda skeleton pypi <packagename>`
+                            - `conda skeleton cran <packagename>`
+                            - `bioconductor_skeleton.py <packagename>`
+                            - `conda skeleton cpan <packagename>`
 
                             <small>[Building conda packages with conda skeleton](http://conda.pydata.org/docs/build_tutorials/pkgs.html)</small>
 
@@ -1083,6 +1207,26 @@
                             $ conda build .
 
                             ```
+                            1. BUILD START: Build/Compile the package
+                            2. TEST START: Source the env previously generated
+                            3. TEST START: Launch the functional tests
+                            4. Provide a .tar.bz2
+                            ```
+
+                        </script>
+                    </section>
+
+                    <section data-markdown>
+                        <script type="text/template">
+                            <img src="../../shared/images/conda_logo.png" class="no-border"  height=25 />
+                            ### Install a Conda package for test
+                            #### `conda install`
+
+                            To continue your `planemo test`, you may want to use your new package before it's available through an official channel.
+
+
+                            1. Get the path of your new package .tar.bz2
+                            2. `conda install ~/miniconda2/conda-bld/linux-64/bwa-0.7.15-0.tar.bz2`
 
                         </script>
                     </section>
@@ -1091,10 +1235,25 @@
                         <script type="text/template">
                             <img src="../../shared/images/bioconda_logo.png" class="no-border"  height=50 />
 
-                            - A channel dedicated to bioinformatics packages
+                            - A channel dedicated to bioinformatics packages https://anaconda.org/bioconda
                             - Open to [contribution](https://github.com/bioconda/bioconda-recipes/blob/master/CONTRIBUTING.md)
                             - GitHub repository: https://github.com/bioconda/bioconda-recipes
 
+                        </script>
+                    </section>
+
+                    <section data-markdown>
+                        <script type="text/template">
+                            <img src="../../shared/images/bioconda_logo.png" class="no-border"  height=50 />
+
+                            1. Clone `bioconda/bioconda-recipes.git` or a fork
+                            2. Fill two files `meta.yaml` and `build.sh`
+                            3. Build your new package and test it using `conda build`
+                            4. Push on GitHub
+                            5. Wait the fonctional test on your branch
+                            6. Pull Request on `bioconda/bioconda-recipes.git`
+                            7. Wait the fonctional test on the master branch
+                            8. Enjoy your new Conda package installed from https://anaconda.org/bioconda
                         </script>
                     </section>
 
@@ -1159,7 +1318,7 @@
 
                                 test:
                                   commands:
-                                - seqtk seq
+                                    - seqtk seq
                                 ```
 
                                 build.sh
