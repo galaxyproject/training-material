@@ -184,7 +184,7 @@ Run `Stacks: De novo map` Galaxy tool. This program will run pstacks, cstacks, a
 >    ![](../images/RAD4_Population_Genomics/denovo/denovo_out.png)
 >
 
-# snp-calling-from-radtag
+# SNP calling from radtag
 > **Stacks: populations** :wrench:: Run the last step of **Stacks: De novo map** pipeline specifying data filtering options (minimum percentage of individuals in a population required to process a locus for that population: 0.75 , output options (VCF and Structure) and enabling SNP and haplotype-based F statistics calculation.
 >
 >    ![](../images/RAD4_Population_Genomics/denovo/populations_in.png)
