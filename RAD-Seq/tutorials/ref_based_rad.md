@@ -105,29 +105,29 @@ For demultiplexing, we use the Process Radtags tool from [STACKS](http://www.g3j
 >
 > In `advanced options`, activate the `Discard reads with low quality scores` option and play with the score limit (default vs 20 for example) and examine the change in reads retained. Note that you can play also with the sliding window score threshold, by default 15% of the length of the read. This sliding window parameter allows notably the user to deal with the declining quality at the 3' end of reads.
 >
-> ![](../images/RAD4_Population_Genomics/Process_radtags_in_advancedparameter0.png)
+> ![](../images/RAD4_Population_Genomics/Process_radtags_in_advancedparameter0.PNG)
 >
-> ![](../images/RAD4_Population_Genomics/Process_radtags_in_advancedparameter1.png)
+> ![](../images/RAD4_Population_Genomics/Process_radtags_in_advancedparameter1.PNG)
 >
 > To do that, you can use data handling Galaxy tools to cut the interesting lines of each `result.log with Stacks: process radtags` files OR, as I made, just copy/paste these lines on the Galaxy upload tool using Paste/fetch data section and modifying the File header by sample and filename by Score 10 / Score 20 and noscorelimit for example... Before Starting the upload, you can select the `Convert spaces to tabs` option through the `Upload configuration` wheel.
 >
-> ![](../images/RAD4_Population_Genomics/Process_radtags_in_advancedparameter_compare_copy.png)
+> ![](../images/RAD4_Population_Genomics/Process_radtags_in_advancedparameter_compare_copy.PNG)
 >
-> ![](../images/RAD4_Population_Genomics/Process_radtags_in_advancedparameter_compare_paste.png)
+> ![](../images/RAD4_Population_Genomics/Process_radtags_in_advancedparameter_compare_paste.PNG)
 >
 > You can use the `Charts` functionality through the Visualize button reachable on the `Radtags logs` file you just generated. 
 >
-> ![](../images/RAD4_Population_Genomics/Process_radtags_charts.png)
+> ![](../images/RAD4_Population_Genomics/Process_radtags_charts.PNG)
 >
 > If like me you don't have payed attention to the organization of you file for the graphical representation you obtain a non optimal bars diagram with a not intelligent X-axis ordering. There is a lot of diffferent manner to fix this. You can use the copy/paste "bidouille" like seen previously, or you can use Galaxy tools to manipulate the `radtags logs` (did you change the filename from `pasted entry` to another label ?) file to generate a better graph. For example, you can use `Select lines that match an expression` tool to select rows then use the `Concatenate datasets tail-to-head` tool to reorganize these lines in a new file... OR, as I made, you can just sort the file using the first column.
 >
-> ![](../images/RAD4_Population_Genomics/Process_radtags_charts_tablemodif.png)
+> ![](../images/RAD4_Population_Genomics/Process_radtags_charts_tablemodif.PNG)
 >
 > And you obtain a file like this one, ready to generate a beautiful and smart bar diagram!
 >
-> ![](../images/RAD4_Population_Genomics/Process_radtags_charts_tablemodif_view.png)
+> ![](../images/RAD4_Population_Genomics/Process_radtags_charts_tablemodif_view.PNG)
 >
-> ![](../images/RAD4_Population_Genomics/Process_radtags_charts_end.png)
+> ![](../images/RAD4_Population_Genomics/Process_radtags_charts_end.PNG)
 >
 >Using filter like `clean data, remove any read with an uncalled base` has here few impact:
 >
