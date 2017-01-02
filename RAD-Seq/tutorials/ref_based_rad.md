@@ -8,7 +8,7 @@ tutorial_name: ref_based_rad
 
 In the study of [Hohenlohe *et al.* 2010](http://journals.plos.org/plosgenetics/article?id=10.1371/journal.pgen.1000862), a genome scan of nucleotide diversity and differentiation in natural populations of threespine stickleback *Gasterosteus aculeatus* was conducted. Authors used Illumina-sequenced RAD tags to identify and type over 45,000 single nucleotide polymorphisms (SNPs) in each of 100 individuals from two oceanic and three freshwater populations.
 
-![](../images/RAD4_Population_Genomics/Hohenlohe_et_al_2010)
+![](../images/RAD4_Population_Genomics/Hohenlohe_et_al_2010.png)
 
 We here proposed to re-analyze these data at least until the population genomics statistics calculation step using STACKS pipeline. *Gasterosteus aculeatus* draft genome will be used here as reference genome. In a reference-based RAD-seq data analysis, the reads are aligned (or mapped) against a reference genome to constrain our analysis to focus on already discovered loci. A de-novo approach can also be conducted (see [de_novo tutorial](de_novo_based_rad), enhancing discoverability of new loci of interest but also of false positive one.
 
