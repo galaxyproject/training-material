@@ -1459,9 +1459,107 @@
 
                     <section data-markdown>
                         <script type="text/template">
-                            ### `macro`
+                            ### `macros`
 
                             <img src="../images/macro.png" alt="macro"/>
+
+                            <small>[Planemo documents about macros ](http://planemo.readthedocs.io/en/latest/_writing_suites.html#macros)</small>
+                        </script>
+                    </section>
+
+                    <section data-markdown>
+                        <script type="text/template">
+                            ### `macros`
+                            #### XML elements
+
+                            <div align="left">
+                                macros.xml
+                            </div>
+
+                            ```xml
+                            <macros>
+                              <xml name="requirements">
+                                <requirements>
+                                  <requirement type="package" version="2.5.0">blast</requirement>
+                                </requirements>
+                              </xml>
+                              <xml name="stdio">
+                                <stdio>
+                                  <exit_code range="1" level="fatal" />
+                                </stdio>
+                              </xml>
+                            </macros>
+                            ```
+
+                            <div align="left">
+                              ncbi_blastn_wrapper.xml
+                            </div>
+                            ```xml
+                            <macros>
+                              <import>macros.xml</import>
+                            </macros>
+                            <expand macro="requirements"/>
+                            ```
+
+                        </script>
+                    </section>
+
+                    <section data-markdown>
+                        <script type="text/template">
+                            ### `macros`
+                            #### Tokens
+
+                            <div align="left">
+                                macros.xml
+                            </div>
+
+                            ```xml
+                            <macros>
+                              <token name="@THREADS@">-num_threads "\${GALAXY_SLOTS:-8}"</token>
+                            </macros>
+                            ```
+
+                            <div align="left">
+                              ncbi_blastn_wrapper.xml
+                            </div>
+                            ```xml
+                            <command>
+                              blastn -query "$query" @THREADS@ [...]
+                            </command>
+                            ```
+
+                        </script>
+                    </section>
+
+                    <section data-markdown>
+                        <script type="text/template">
+                            ### `macros`
+                            #### `<yield/>`
+
+                            <div align="left">
+                                macros.xml
+                            </div>
+
+                            ```xml
+                            <macros>
+                              <xml name="requirements">
+                                <requirements>
+                                  <requirement type="package" version="2.2.0">trinity</requirement>
+                                  <yield/>
+                                </requirements>
+                              </xml>
+                            </macros>
+                            ```
+
+                            <div align="left">
+                              trinity.xml
+                            </div>
+                            ```xml
+                            <expand macro="requirements">
+                              <requirement type="package" version="1.1.2">bowtie</requirement>
+                              <requirement type="set_environment">TRINITY_MEM_OPTIONS</requirement>
+                            </expand>
+                            ```
 
                         </script>
                     </section>
