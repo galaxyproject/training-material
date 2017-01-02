@@ -229,4 +229,4 @@ Run `Stacks: Reference map` Galaxy tool. This program will run pstacks, cstacks,
 In this tutorial, we have analyzed real RAD sequencing data to extract useful information, such as which loci are candidate regarding the genetic differentiation between freshwater and oceanic Stickelback populations. To answer these questions, we analyzed RAD sequence datasets using a reference-based RAD-seq data analysis approach. This approach can be sum up with the following scheme:
 
 
-![](../images/ref_based_workflow.png)
+![](../images/ref_based_workflow.PNG)
