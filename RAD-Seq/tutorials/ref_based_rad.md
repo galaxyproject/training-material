@@ -26,11 +26,11 @@ We here proposed to re-analyze these data at least until the population genomics
 
 ## Data upload
 
-The original data is available at NCBI SRA ENA under accession number [SRR034316](https://trace.ncbi.nlm.nih.gov/Traces/sra/?run=SRR034316) as part of the NCBI SRA ENA study accession number [SRP001747](https://trace.ncbi.nlm.nih.gov/Traces/sra/?study=SRP001747). 
+The original data is available at NCBI SRA ENA under accession number [SRR034310](https://trace.ncbi.nlm.nih.gov/Traces/sra/?run=SRR034310) as part of the NCBI SRA ENA study accession number [SRP001747](https://trace.ncbi.nlm.nih.gov/Traces/sra/?study=SRP001747). 
 
 We will look at the first run SRR034316 out of 7:
 
-- Here are 16 samples from 2 populations
+- Here are 16 samples from 2 populations, 8 from Bear Paw (freshwater) and 8 from Rabbit Slough (oceanic)
 
 You can directly used archive from the Sequence Read Archive (SRA) for raw reads.
 
