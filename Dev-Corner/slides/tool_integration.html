@@ -129,7 +129,7 @@
 
                             - What is a tool for Galaxy?
                             - How to build a tool/wrapper with the good practices?
-                            - How deal with the tool environment?
+                            - How to deal with the tool environment?
                             - How to publish a tool?
 
                         </script>
@@ -977,11 +977,42 @@
                     <section data-markdown>
                         <script type="text/template">
                             <img src="../../shared/images/conda_logo.png" class="no-border"  height=25 />
+                            ### Quickstart
+                            #### Use Conda outside Planemo
+
+                            <div align="left">
+                            - Install a package
+                            </div>
+
+                            ```bash
+                            conda install bioconductor-deseq2
+                            ```
+
+                            <div align="left">
+                            - Install some packages within an isolate environment
+                            </div>
+
+                            ```bash
+                            $ conda create -n bioconductor-deseq2 bioconductor-deseq2 r-ggplot2
+                            $ conda env list
+                                bioconductor-deseq2   *  ~/miniconda2/envs/bioconductor-deseq2
+                                root                     ~/miniconda2
+                            $ source activate bioconductor-deseq2
+                            (bioconductor-deseq2) $ R
+                            ```
+
+
+                        </script>
+                    </section>
+
+                    <section data-markdown>
+                        <script type="text/template">
+                            <img src="../../shared/images/conda_logo.png" class="no-border"  height=25 />
                             ### Tips and tricks
                             #### Because you don't want Conda binaries all the time in your $PATH
 
-                            ```
-                            vi ~/.bashrc
+                            ```bash
+                            $ vi ~/.bashrc
                             ```
                             ```bash
                             function conda2activate () {
@@ -1145,7 +1176,7 @@
                                 - '$R -e "library(''xcms'')"'
                             ```
                             <small>
-                              These test are launched at the end of `conda build`
+                              Those tests are launched at the end of `conda build`
                             </small>
                         </script>
                     </section>
@@ -1384,24 +1415,6 @@
                               <input type="checkbox"/> Add functional tests <br/>
                               <input type="checkbox"/> Run functional tests <br/>
                               ```planemo test```<br/>
-                            </p>
-
-                        </script>
-                    </section>
-
-                    <section data-markdown>
-                        <script type="text/template" >
-                            <img src="../images/planemo-logo.png" alt="Planemo" class="no-border" height=25/>
-                            #### Checklist (3/3)
-
-                            <p style="text-align: left;">
-                              <input type="checkbox"/> Initiate the `.shed.yml` file with <br/>
-                              ```planemo shed_init``` <br/>
-                              <input type="checkbox"/> Create the repository on ToolShed with <br/>
-                              ```planemo shed_create```<br/>
-                              <input type="checkbox"/> Install and test the wrapper on a Galaxy instance <br/>
-                              <input type="checkbox"/> Improve the wrapper and push modification on toolshed <br/>
-                              ```planemo shed_update``` <br/>
                             </p>
 
                         </script>
