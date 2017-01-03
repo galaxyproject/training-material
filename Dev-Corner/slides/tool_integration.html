@@ -1062,7 +1062,7 @@
                             <img src="../../shared/images/conda_logo.png" class="no-border"  height=50 />
                             ### Write a Conda package
 
-                            You will have to and you can implement a Conda package if a specific tool or version is not available.
+                            You can implement a new Conda package. This will be necessary if a specific tool or version is not available.
 
                             <div align="left">
                               <br />
@@ -1080,7 +1080,7 @@
                             ### Write a Conda package
                             #### Files
 
-                            - `meta.yaml`: contains all the metadata in the recipe.
+                            - `meta.yaml`: contains all the metadata of the recipe
                             - `build.sh`: the Unix script that installs the files
                         </script>
                     </section>
@@ -1129,7 +1129,7 @@
                             ```
                             <small>
                               - `build`: requirements needed during the build step (here compilation)
-                              - `run` : requirements needed at runtime
+                              - `run`: requirements needed at runtime
 
                             </small>
                         </script>
@@ -1139,7 +1139,7 @@
                         <script type="text/template">
                             <img src="../../shared/images/conda_logo.png" class="no-border"  height=25 />
                             ### Write a Conda package
-                            #### `meta.yaml` requirements
+                            #### `meta.yaml` test
 
                             ```
                             test:
@@ -1149,7 +1149,7 @@
                                 - '$R -e "library(''xcms'')"'
                             ```
                             <small>
-                              Those Test are launched at the end of `conda build`
+                              These test are launched at the end of `conda build`
                             </small>
                         </script>
                     </section>
@@ -1173,7 +1173,7 @@
                             ```
                             <small>
                             - $PREFIX will usually contain `bin/` `lib/` `include/` that are filled with the requirements files
-                            - $PREFIX will be loaded at runtime $PATH, LD_LIBRARY_PATH, PYTHONPATH ...
+                            - $PREFIX will be loaded in the user environment at runtime: $PATH, LD_LIBRARY_PATH, PYTHONPATH ...
 
                             </small>
                         </script>
@@ -1211,7 +1211,6 @@
                             2. TEST START: Source the env previously generated
                             3. TEST START: Launch the functional tests
                             4. Provide a .tar.bz2
-                            ```
 
                         </script>
                     </section>
@@ -1247,13 +1246,14 @@
                             <img src="../../shared/images/bioconda_logo.png" class="no-border"  height=50 />
 
                             1. Clone `bioconda/bioconda-recipes.git` or a fork
-                            2. Fill two files `meta.yaml` and `build.sh`
-                            3. Build your new package and test it using `conda build`
-                            4. Push on GitHub
-                            5. Wait the fonctional test on your branch
-                            6. Pull Request on `bioconda/bioconda-recipes.git`
-                            7. Wait the fonctional test on the master branch
-                            8. Enjoy your new Conda package installed from https://anaconda.org/bioconda
+                            2. Create a new branch "package_new_login"
+                            3. Fill two files `meta.yaml` and `build.sh`
+                            4. Build your new package and test it using `conda build`
+                            5. Push on GitHub
+                            6. Wait for the functional tests on your branch
+                            7. Pull a Request on `bioconda/bioconda-recipes.git`
+                            8. Wait for the functional tests on the master branch
+                            9. Enjoy your new Conda package installed from https://anaconda.org/bioconda
                         </script>
                     </section>
 
