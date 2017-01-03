@@ -51,10 +51,10 @@ To download all training datasets (i.e reads, reference genome, population map f
 >    > * Copy the link location
 >    > * Open the Galaxy Upload Manager
 >    > * Select **Paste/Fetch Data**
->    >     *https://zenodo.org/record/218574/files/ftp___ftp.sra.ebi.ac.uk_vol1_fastq_SRR034_SRR034310_SRR034310.fastq.gz
->    >     *https://zenodo.org/record/218574/files/Reference_genome_11_chromosomes.fa
->    >     *https://zenodo.org/record/218574/files/Population_map
->    >     *https://zenodo.org/record/218574/files/Barcodes_SRR034310.tabular
+>    >     * https://zenodo.org/record/218574/files/ftp___ftp.sra.ebi.ac.uk_vol1_fastq_SRR034_SRR034310_SRR034310.fastq.gz
+>    >     * https://zenodo.org/record/218574/files/Reference_genome_11_chromosomes.fa
+>    >     * https://zenodo.org/record/218574/files/Population_map
+>    >     * https://zenodo.org/record/218574/files/Barcodes_SRR034310.tabular
 >    > * Paste the link into the text field
 >    > * Press **Start**    
 >
