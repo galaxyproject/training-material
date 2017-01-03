@@ -177,8 +177,6 @@
                        <script type="text/template">
                           ## Wrapper
 
-                          <small><img src="../images/exercise.png" alt="exercise" height="50"/><br/>[Galaxy Tool XML File](https://docs.galaxyproject.org/en/latest/dev/schema.html)</small>
-
                        </script>
                    </section>
 
@@ -205,6 +203,15 @@
                             ### Wrapper
 
                             <img src="../images/wrapper_big_picture_3.png"/>
+
+                        </script>
+                    </section>
+
+                    <section data-markdown>
+                        <script type="text/template">
+                           ### Wrapper
+
+                           <small><img src="../images/exercise.png" alt="exercise" height="50"/><br/>[Galaxy Tool XML File](https://docs.galaxyproject.org/en/latest/dev/schema.html)</small>
 
                         </script>
                     </section>
@@ -1012,6 +1019,7 @@
                             <img src="../../shared/images/conda_logo.png" class="no-border"  height=25 />
                             ### Tips and tricks
                             #### Because you don't want Conda binaries all the time in your $PATH
+                            <small>In fact, Conda will mask some of your binaries like python and so all your Python libraries ...</small>
 
                             ```bash
                             $ vi ~/.bashrc
@@ -1237,9 +1245,10 @@
 
                             ```
                             1. BUILD START: Build/Compile the package
-                            2. TEST START: Source the env previously generated
-                            3. TEST START: Launch the functional tests
-                            4. Provide a .tar.bz2
+                            2. BUILD START: Provide a .tar.bz2
+                            3. TEST START: Install the .tar.bz2 previously generated
+                            4. TEST START: Launch the functional tests
+                            5. (Provide the .tar.bz2 path)
 
                         </script>
                     </section>
@@ -1279,9 +1288,9 @@
                             3. Fill two files `meta.yaml` and `build.sh`
                             4. Build your new package and test it using `conda build`
                             5. Push on GitHub
-                            6. Wait for the functional tests on your branch
-                            7. Pull a Request on `bioconda/bioconda-recipes.git`
-                            8. Wait for the functional tests on the master branch
+                            6. Wait for the functional tests to pass on your branch
+                            7. Create a Pull Request on `bioconda/bioconda-recipes.git`
+                            8. Wait for the functional tests to pass on the master branch
                             9. Enjoy your new Conda package installed from https://anaconda.org/bioconda
                         </script>
                     </section>
