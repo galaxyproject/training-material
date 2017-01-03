@@ -129,7 +129,7 @@
 
                             - What is a tool for Galaxy?
                             - How to build a tool/wrapper with the good practices?
-                            - How deal with the tool environment?
+                            - How to deal with the tool environment?
                             - How to publish a tool?
 
                         </script>
@@ -184,9 +184,7 @@
                         <script type="text/template">
                             ### Wrapper
 
-                            <img src="../images/wrapper_big_picture_1.png" height=400/>
-
-                            <small>[Galaxy Tool XML File](https://docs.galaxyproject.org/en/latest/dev/schema.html)</small>
+                            <img src="../images/wrapper_big_picture_1.png"/>
 
                         </script>
                     </section>
@@ -195,9 +193,7 @@
                         <script type="text/template">
                             ### Wrapper
 
-                            <img src="../images/wrapper_big_picture_2.png" height=400/>
-
-                            <small>[Galaxy Tool XML File](https://docs.galaxyproject.org/en/latest/dev/schema.html)</small>
+                            <img src="../images/wrapper_big_picture_2.png"/>
 
                         </script>
                     </section>
@@ -206,9 +202,16 @@
                         <script type="text/template">
                             ### Wrapper
 
-                            <img src="../images/wrapper_big_picture_3.png" height=400/>
+                            <img src="../images/wrapper_big_picture_3.png"/>
 
-                            <small>[Galaxy Tool XML File](https://docs.galaxyproject.org/en/latest/dev/schema.html)</small>
+                        </script>
+                    </section>
+
+                    <section data-markdown>
+                        <script type="text/template">
+                           ### Wrapper
+
+                           <small><img src="../images/exercise.png" alt="exercise" height="50"/><br/>[Galaxy Tool XML File](https://docs.galaxyproject.org/en/latest/dev/schema.html)</small>
 
                         </script>
                     </section>
@@ -601,9 +604,11 @@
                             #### Before: install Seqtk
                             *No brain needed*
                             ```bash
+                            $ . ~/.venv_planemo/bin activate  # not mandatory
                             $ planemo conda_init
                             $ export PATH=~/miniconda2/bin:$PATH
                             $ conda config --add channels conda-forge
+                            $ conda config --add channels defaults
                             $ conda config --add channels r
                             $ conda config --add channels bioconda
                             $ conda install seqtk
@@ -968,6 +973,69 @@
 
                     <section data-markdown>
                         <script type="text/template">
+                            <img src="../../shared/images/conda_logo.png" class="no-border"  height=25 />
+                            ### Channels
+
+                            Packages are provided through Channels within Continuum.Anaconda. It's the way to contribute.
+
+                            Galaxy via Conda will search packages in 5 channels: iuc,bioconda,r,defaults,conda-forge
+
+                        </script>
+                    </section>
+
+                    <section data-markdown>
+                        <script type="text/template">
+                            <img src="../../shared/images/conda_logo.png" class="no-border"  height=25 />
+                            ### Quickstart
+                            #### Use Conda outside Planemo
+
+                            <div align="left">
+                            - Install a package
+                            </div>
+
+                            ```bash
+                            conda install bioconductor-deseq2
+                            ```
+
+                            <div align="left">
+                            - Install some packages within an isolate environment
+                            </div>
+
+                            ```bash
+                            $ conda create -n deseq2 bioconductor-deseq2 r-ggplot2
+                            $ conda env list
+                                deseq2        *  ~/miniconda2/envs/deseq2
+                                root             ~/miniconda2
+                            $ source activate bioconductor-deseq2
+                            (deseq2) $ R
+                            ```
+
+
+                        </script>
+                    </section>
+
+                    <section data-markdown>
+                        <script type="text/template">
+                            <img src="../../shared/images/conda_logo.png" class="no-border"  height=25 />
+                            ### Tips and tricks
+                            #### Because you don't want Conda binaries all the time in your $PATH
+                            <small>In fact, Conda will mask some of your binaries like python and so all your Python libraries ...</small>
+
+                            ```bash
+                            $ vi ~/.bashrc
+                            ```
+                            ```bash
+                            function conda2activate () {
+                              export PATH=~/miniconda2/bin:$PATH; }
+                            function conda2deactivate () {
+                              export PATH=$(echo $PATH | sed "s|$HOME/miniconda2/bin:||g"); }
+                            ```
+
+                        </script>
+                    </section>
+
+                    <section data-markdown>
+                        <script type="text/template">
                             <img src="../images/planemo-logo.png" alt="Planemo" class="no-border" height=25/>
                             ### Test Galaxy Tools using Conda packages
 
@@ -1028,15 +1096,54 @@
 
                     <section data-markdown>
                         <script type="text/template">
+                            <img src="../../shared/images/conda_logo.png" class="no-border"  height=50 />
+                            ### Write a Conda package
+
+                            You can implement a new Conda package. This will be necessary if a specific tool or version is not available.
+
+                            <div align="left">
+                              <br />
+                              <small>[Documentation about how to build a conda packages from scratch](http://conda.pydata.org/docs/build_tutorials/pkgs2.html)</small></br />
+                              <small>[Bioconda guidelines](https://bioconda.github.io/guidelines.html)</small>
+                            </div>
+                        </script>
+                    </section>
+
+
+
+                    <section data-markdown>
+                        <script type="text/template">
                             <img src="../../shared/images/conda_logo.png" class="no-border"  height=25 />
                             ### Write a Conda package
                             #### Files
 
-                            - `meta.yaml`: contains all the metadata in the recipe.
+                            - `meta.yaml`: contains all the metadata of the recipe
                             - `build.sh`: the Unix script that installs the files
+                        </script>
+                    </section>
 
-                            <small>[Documentation about how to build a conda packages from scratch](http://conda.pydata.org/docs/build_tutorials/pkgs2.html)</small>
-                            <small>[Bioconda guidelines](https://github.com/bioconda/bioconda-recipes/blob/master/GUIDELINES.md)
+                    <section data-markdown>
+                        <script type="text/template">
+                            <img src="../../shared/images/conda_logo.png" class="no-border"  height=25 />
+                            ### Write a Conda package
+                            #### `meta.yaml` basic information
+
+                            ```
+                            package:
+                              name: bwa
+                              version: "0.7.15"
+                            about:
+                              home: http://bio-bwa.sourceforge.net
+                              license: MIT
+                              summary: The BWA read mapper.
+                            build:
+                              number: 0
+                              skip: True # [osx]
+                            source:
+                                fn: v0.7.15.tar.gz
+                                url: https://github.com/lh3/bwa/archive/v0.7.15.tar.gz
+                                md5: 54fdee953c5c256d36885a1c5c6b118c
+                            ```
 
                         </script>
                     </section>
@@ -1045,9 +1152,67 @@
                         <script type="text/template">
                             <img src="../../shared/images/conda_logo.png" class="no-border"  height=25 />
                             ### Write a Conda package
+                            #### `meta.yaml` requirements
 
-                            <img src="../images/conda_files.png" alt="meta.yaml and build.sh" />
+                            ```
+                            requirements:
+                              build:
+                                - gcc   # [not osx]
+                                - llvm  # [osx]
+                                - zlib
+                              run:
+                                - zlib
+                                - bowtie2
+                            ```
+                            <small>
+                              - `build`: requirements needed during the build step (here compilation)
+                              - `run`: requirements needed at runtime
 
+                            </small>
+                        </script>
+                    </section>
+
+                    <section data-markdown>
+                        <script type="text/template">
+                            <img src="../../shared/images/conda_logo.png" class="no-border"  height=25 />
+                            ### Write a Conda package
+                            #### `meta.yaml` test
+
+                            ```
+                            test:
+                              commands:
+                                - bowtie2 --version
+                                - bwa 2>&1 | grep 'index sequences in the'
+                                - '$R -e "library(''xcms'')"'
+                            ```
+                            <small>
+                              Those tests are launched at the end of `conda build`
+                            </small>
+                        </script>
+                    </section>
+
+                    <section data-markdown>
+                        <script type="text/template">
+                            <img src="../../shared/images/conda_logo.png" class="no-border"  height=25 />
+                            ### Write a Conda package
+                            #### `build.sh`
+
+                            ```
+                            #!/bin/bash
+                            ./configure --prefix=$PREFIX
+                            make
+                            make install
+                            ```
+                            ```
+                            #!/bin/bash
+                            mkdir -p $PREFIX/bin
+                            cp *.py $PREFIX/bin
+                            ```
+                            <small>
+                            - $PREFIX will usually contain `bin/` `lib/` `include/` that are filled with the requirements files
+                            - $PREFIX will be loaded in the user environment at runtime: $PATH, LD_LIBRARY_PATH, PYTHONPATH ...
+
+                            </small>
                         </script>
                     </section>
 
@@ -1057,14 +1222,10 @@
                             ### Write a Conda package
                             #### skeleton
 
-                            - Python<br/>
-                            `conda skeleton pypi <packagename>`
-                            - R<br/>
-                            `conda skeleton cran <packagename>`
-                            - Bioconductor<br/>
-                            `bioconductor_skeleton.py <packagename>`
-                            - Perl<br/>
-                            `conda skeleton cpan <packagename>`
+                            - `conda skeleton pypi <packagename>`
+                            - `conda skeleton cran <packagename>`
+                            - `bioconductor_skeleton.py <packagename>`
+                            - `conda skeleton cpan <packagename>`
 
                             <small>[Building conda packages with conda skeleton](http://conda.pydata.org/docs/build_tutorials/pkgs.html)</small>
 
@@ -1083,6 +1244,26 @@
                             $ conda build .
 
                             ```
+                            1. BUILD START: Build/Compile the package
+                            2. BUILD START: Provide a .tar.bz2
+                            3. TEST START: Install the .tar.bz2 previously generated
+                            4. TEST START: Launch the functional tests
+                            5. (Provide the .tar.bz2 path)
+
+                        </script>
+                    </section>
+
+                    <section data-markdown>
+                        <script type="text/template">
+                            <img src="../../shared/images/conda_logo.png" class="no-border"  height=25 />
+                            ### Install a Conda package for test
+                            #### `conda install`
+
+                            To continue your `planemo test`, you may want to use your new package before it's available through an official channel.
+
+
+                            1. Get the path of your new package .tar.bz2
+                            2. `conda install ~/miniconda2/conda-bld/linux-64/bwa-0.7.15-0.tar.bz2`
 
                         </script>
                     </section>
@@ -1091,10 +1272,26 @@
                         <script type="text/template">
                             <img src="../../shared/images/bioconda_logo.png" class="no-border"  height=50 />
 
-                            - A channel dedicated to bioinformatics packages
+                            - A channel dedicated to bioinformatics packages https://anaconda.org/bioconda
                             - Open to [contribution](https://github.com/bioconda/bioconda-recipes/blob/master/CONTRIBUTING.md)
                             - GitHub repository: https://github.com/bioconda/bioconda-recipes
 
+                        </script>
+                    </section>
+
+                    <section data-markdown>
+                        <script type="text/template">
+                            <img src="../../shared/images/bioconda_logo.png" class="no-border"  height=50 />
+
+                            1. Clone `bioconda/bioconda-recipes.git` or a fork
+                            2. Create a new branch "package_new_login"
+                            3. Fill two files `meta.yaml` and `build.sh`
+                            4. Build your new package and test it using `conda build`
+                            5. Push on GitHub
+                            6. Wait for the functional tests to pass on your branch
+                            7. Create a Pull Request on `bioconda/bioconda-recipes.git`
+                            8. Wait for the functional tests to pass on the master branch
+                            9. Enjoy your new Conda package installed from https://anaconda.org/bioconda
                         </script>
                     </section>
 
@@ -1128,117 +1325,14 @@
                             4. Test the build with `conda build .`
 
                             <aside class="notes">
-                                meta.yaml
-                                ```bash
-                                package:
-                                  name: seqtk
-                                  version: 1.2
-
-                                source:
-                                  fn: v1.2.tar.gz
-                                  url: https://github.com/lh3/seqtk/archive/v1.2.tar.gz
-
-                                build:
-                                  number: 0
-                                  skip: False
-
-
-                                requirements:
-                                  build:
-                                    - gcc   # [not osx]
-                                    - llvm  # [osx]
-                                    - zlib
-                                  run:
-                                    - zlib
-
-
-                                about:
-                                  home: https://github.com/lh3/seqtk
-                                  license: MIT License
-                                  summary: Seqtk is a fast and lightweight tool for processing sequences in the FASTA or FASTQ format
-
-                                test:
-                                  commands:
-                                - seqtk seq
-                                ```
-
-                                build.sh
-                                ```bash
-                                #!/bin/bash
-
-                                export C_INCLUDE_PATH=${PREFIX}/include
-                                export LIBRARY_PATH=${PREFIX}/lib
-
-                                make all
-                                mkdir -p $PREFIX/bin
-                                cp -f seqtk $PREFIX/bin/
-                                ```
+                              ```bash
+                              # hands_on-conda/seqtk/meta.yaml
+                              # hands_on-conda/seqtk/build.sh
                             </aside>
 
                         </script>
                     </section>
 
-                </section>
-
-
-                <!-- PUBLISHING TOOLSHED -->
-                <section>
-                    <section data-markdown>
-                        <script type="text/template">
-                            ## Publishing on Toolshed
-
-                        </script>
-                    </section>
-
-                    <section data-markdown>
-                        <script type="text/template">
-                            ### Publishing on ToolShed
-
-                            Metadata description: `.shed.yml` file
-
-                            ```
-                            categories:
-                              - Metagenomics
-                              - Graphics
-                              - Phylogenetics
-                            description: "GraPhlAn is a software tool for producing high-quality
-                            circular representations of taxonomic and phylogenetic trees"
-                            homepage_url: "https://bitbucket.org/nsegata/graphlan/overview"
-                            name: graphlan
-                            owner: bebatut
-                            remote_repository_url: "https://github.com/ASaiM/galaxytools/tree/master/tools/graphlan/"
-                            ```
-
-                        </script>
-                    </section>
-
-                    <section data-markdown>
-                        <script type="text/template">
-                            ### Publishing on ToolShed
-
-                            Metadata description: `.shed.yml` file
-
-                            ```
-                            graphlan/
-                            ├── graphlan.xml
-                            ├── test_data/
-                                ├── input_tree.txt
-                                ├── png_image.png
-                            ├── .shed.yml
-                            ```
-
-                        </script>
-                    </section>
-
-                    <section data-markdown>
-                        <script type="text/template">
-                            <img src="../images/planemo-logo.png" alt="Planemo" class="no-border" height=25/>
-                            #### Publishing to the ToolShed
-
-                            <img src="../images/planemo_toolshed_publishing.png" alt="Publishing on ToolShed" class="no-border"/>
-
-                        </script>
-                    </section>
                 </section>
 
 
@@ -1290,24 +1384,6 @@
                               <input type="checkbox"/> Add functional tests <br/>
                               <input type="checkbox"/> Run functional tests <br/>
                               ```planemo test```<br/>
-                            </p>
-
-                        </script>
-                    </section>
-
-                    <section data-markdown>
-                        <script type="text/template" >
-                            <img src="../images/planemo-logo.png" alt="Planemo" class="no-border" height=25/>
-                            #### Checklist (3/3)
-
-                            <p style="text-align: left;">
-                              <input type="checkbox"/> Initiate the `.shed.yml` file with <br/>
-                              ```planemo shed_init``` <br/>
-                              <input type="checkbox"/> Create the repository on ToolShed with <br/>
-                              ```planemo shed_create```<br/>
-                              <input type="checkbox"/> Install and test the wrapper on a Galaxy instance <br/>
-                              <input type="checkbox"/> Improve the wrapper and push modification on toolshed <br/>
-                              ```planemo shed_update``` <br/>
                             </p>
 
                         </script>
@@ -1520,9 +1596,107 @@
 
                     <section data-markdown>
                         <script type="text/template">
-                            ### `macro`
+                            ### `macros`
 
                             <img src="../images/macro.png" alt="macro"/>
+
+                            <small>[Planemo documents about macros ](http://planemo.readthedocs.io/en/latest/_writing_suites.html#macros)</small>
+                        </script>
+                    </section>
+
+                    <section data-markdown>
+                        <script type="text/template">
+                            ### `macros`
+                            #### XML elements
+
+                            <div align="left">
+                                macros.xml
+                            </div>
+
+                            ```xml
+                            <macros>
+                              <xml name="requirements">
+                                <requirements>
+                                  <requirement type="package" version="2.5.0">blast</requirement>
+                                </requirements>
+                              </xml>
+                              <xml name="stdio">
+                                <stdio>
+                                  <exit_code range="1" level="fatal" />
+                                </stdio>
+                              </xml>
+                            </macros>
+                            ```
+
+                            <div align="left">
+                              ncbi_blastn_wrapper.xml
+                            </div>
+                            ```xml
+                            <macros>
+                              <import>macros.xml</import>
+                            </macros>
+                            <expand macro="requirements"/>
+                            ```
+
+                        </script>
+                    </section>
+
+                    <section data-markdown>
+                        <script type="text/template">
+                            ### `macros`
+                            #### Tokens
+
+                            <div align="left">
+                                macros.xml
+                            </div>
+
+                            ```xml
+                            <macros>
+                              <token name="@THREADS@">-num_threads "\${GALAXY_SLOTS:-8}"</token>
+                            </macros>
+                            ```
+
+                            <div align="left">
+                              ncbi_blastn_wrapper.xml
+                            </div>
+                            ```xml
+                            <command>
+                              blastn -query "$query" @THREADS@ [...]
+                            </command>
+                            ```
+
+                        </script>
+                    </section>
+
+                    <section data-markdown>
+                        <script type="text/template">
+                            ### `macros`
+                            #### `<yield/>`
+
+                            <div align="left">
+                                macros.xml
+                            </div>
+
+                            ```xml
+                            <macros>
+                              <xml name="requirements">
+                                <requirements>
+                                  <requirement type="package" version="2.2.0">trinity</requirement>
+                                  <yield/>
+                                </requirements>
+                              </xml>
+                            </macros>
+                            ```
+
+                            <div align="left">
+                              trinity.xml
+                            </div>
+                            ```xml
+                            <expand macro="requirements">
+                              <requirement type="package" version="1.1.2">bowtie</requirement>
+                              <requirement type="set_environment">TRINITY_MEM_OPTIONS</requirement>
+                            </expand>
+                            ```
 
                         </script>
                     </section>
