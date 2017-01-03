@@ -36,7 +36,7 @@ You can directly used archive from the Sequence Read Archive (SRA) for raw reads
 
 ![](../images/RAD4_Population_Genomics/Input_data_ENA.png)
 
-To download all training datasets (i.e reads, reference genome, population map file and barcodes file), you need to use the corresponding Zenodo repository.
+To download all training datasets (i.e reads, reference genome, population map file and barcodes file), you need to use the corresponding [Zenodo](http://doi.org/10.5281/zenodo.218574) repository.
 
 > ### :pencil2: Hands-on: Data upload
 >
@@ -51,6 +51,10 @@ To download all training datasets (i.e reads, reference genome, population map f
 >    > * Copy the link location
 >    > * Open the Galaxy Upload Manager
 >    > * Select **Paste/Fetch Data**
+>    >     *https://zenodo.org/record/218574/files/ftp___ftp.sra.ebi.ac.uk_vol1_fastq_SRR034_SRR034310_SRR034310.fastq.gz
+>    >     *https://zenodo.org/record/218574/files/Reference_genome_11_chromosomes.fa
+>    >     *https://zenodo.org/record/218574/files/Population_map
+>    >     *https://zenodo.org/record/218574/files/Barcodes_SRR034310.tabular
 >    > * Paste the link into the text field
 >    > * Press **Start**    
 >
