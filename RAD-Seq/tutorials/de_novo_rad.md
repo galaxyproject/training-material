@@ -51,6 +51,11 @@ To download all training datasets (i.e reads, population map file and barcodes f
 >    > * Open the Galaxy Upload Manager
 >    > * Select **Paste/Fetch Data**
 >    > * Paste the link into the text field
+>    > * Paste the following links into the text field
+>    >    'https://zenodo.org/record/218574/files/ftp___ftp.sra.ebi.ac.uk_vol1_fastq_SRR034_SRR034310_SRR034310.fastq.gz
+>    >     https://zenodo.org/record/218574/files/Reference_genome_11_chromosomes.fa
+>    >     https://zenodo.org/record/218574/files/Population_map
+>    >     https://zenodo.org/record/218574/files/Barcodes_SRR034310.tabular'
 >    > * Press **Start**  
 >
 >    > ### :bulb: Tip: Changing the file type `fastq` to `fastqsanger` once the data file is in your history. As we know here that the datatype is fastqsanger, we can directly change it through the upcoming method. Normally, you need to execute FastQGroomer to be sure to have a correct fastqsanger file format. And if you don't know how your quality score is encoded on raw fastQ files, please, use the FastQC tool to determine it!
