@@ -192,10 +192,40 @@
                             ### Write first plugin: *alignment_rname_boxplot*
                             
                             - For templates of HTML files:
-                                  touch $GALAXY_ROOT/config/plugins/$PLUGIN_NAME/templates/$PLUGIN_NAME.mako ;
-                                * Link to data types and HTML template file
+                                  $GALAXY_ROOT/config/plugins/$PLUGIN_NAME/templates/$PLUGIN_NAME.mako ;
+                            - Link to data types and HTML template file
                                 * Every invocation of visualization: template compiled
+                            
                             <img src="../images/vis_mako_hello_world_dual.png" class="no-border" width="95%"/>
+                        </script>
+                    </section>
+
+                    <section data-markdown>
+                        <script type="text/template">
+                            ### Write first plugin: *alignment_rname_boxplot*
+                            
+                            - Access to *hda* **pre** template compilation:
+                                * `$hda.file_name`
+                                * `$hda.metadata.dbkey`
+                                * Avoid unnecessary copies of whole files
+                            - Access to *hda* **post** template compilation -> via URLs
+                                * file is downloaded by browser (client side)
+                                    - for large files this is inconvenient
+                                * correction for non-root URLs
+                                * resolving history uid to hash
+                            
+                            <img src="../images/vis_nested_url.png" class="no-border" width="65%"/>
+                        </script>
+                    </section>
+                    
+                    <section data-markdown>
+                        <script type="text/template">
+                            ### Write first plugin: *alignment_rname_boxplot*
+                            
+                            - Access to *hda* **post** template compilation
+                                * Essential variables
+                            
+                            <img src="../images/vis_important_variables.png" class="no-border" width="65%"/>
                         </script>
                     </section>
                 </section>
