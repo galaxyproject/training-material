@@ -25,6 +25,7 @@ If you have any questions, you can reach us using the [Gitter chat](https://gitt
     - [How do I add a new tutorial?](#how-do-i-add-a-new-tutorial)
     - [How do I fill a tutorial hands-on?](#how-do-i-fill-a-tutorial-hands-on)
     - [How do I fill introduction slides?](#how-do-i-fill-introduction-slides)
+    - [How do I fill tutorial slides?](#how-do-i-fill-tutorial-slides)
 - [How is the training material maintained?](#how-the-training-material-is-maintained)
     - [Maintainers](#maintainers)
     - [Labels](#labels)
@@ -102,9 +103,11 @@ The content of tutorial is generated with [Jekyll](http://jekyllrb.com/) from a 
 > - [Check out how to add a new tutorial?](#how-do-i-add-a-tutorial-hands-on)
 > - [Check out how to fill a new tutorial?](#how-do-i-fill-a-tutorial-hands-on)
 
+Sometimes, an hands-on tutorial is not the most appropriate format for a tutorial and slides are better. The content must be then added in the `slides` directory.
+
 ## `slides` directory
 
-A slide deck is expected for every topic: the one with a general introduction of the topic. The slides are rendered using `remark.js` but written in markdown to facilate any contribution. [Check out how to fill introduction slides](#how-do-i-fill-introduction-slides).
+A slide deck is expected for every topic: the one with a general introduction of the topic. The slides are rendered using `remark.js` but written in markdown to facilate any contribution. [Check out how to fill introduction slides](#how-do-i-fill-introduction-slides) or [how to fill tutorial slides](#how-do-i-fill-tutorial-slides).
 
 ## `docker` directory
 
@@ -284,7 +287,9 @@ To improve the learning experience, we strongly recommend you to:
 
 The input data required for the tutorials must be upload on [Zenodo](https://zenodo.org/) to obtain a dedicated DOI (in the [Galaxy training network community](https://zenodo.org/communities/galaxy-training/?page=1&size=20)).
 
-You can also add yourself as contributor for the topic in the `yml` file of the related topic that is in `metadata` directory
+You can also add yourself as contributor for the topic in the `yml` file of the related topic that is in `metadata` directory.
+
+> Sometimes, an hands-on tutorial is not the most appropriate format for a tutorial and slides are better. [Check out how to fill tutorial slides?](#how-do-i-fill-tutorial-slides).
 
 ## How do I fill introduction slides?
 
@@ -330,6 +335,29 @@ They are then rendered with [`Remark`](https://remarkjs.com/). Template for the 
 [`templates/slides/`](templates/slides/). Once the slides are on the `master` branch, they will be available at `http://bgruening.github.io/training-material/<topic>/slides/<slide_name>.html`
 
 You can also add yourself as contributor for the topic in the `yml` file of the related topic that is in `metadata` directory
+
+## How do I fill tutorial slides?
+
+Filling tutorial slides are similar a combination of filling introduction slides and filling an hands-on tutorial:
+
+1. Filling the metadata file with useful information about the tutorial and its format (`slides: "yes"`)
+2. Filling an `html` file in the `slides` directory
+    
+    The name of the file must be the same as the name of the tutorial
+
+    The header of the file must be something like:
+
+    ```
+    ---
+    layout: tutorial_slides
+    topic_name: "Dev-Corner"
+    tutorial_name: tool_integration
+    logo: "GTN"
+    ---
+    ```
+
+    Filling the content is then similar to filling the content of [introduction slides](#how-do-i-fill-introduction-slides). The first slides (with the title, the requirements, the questions, the objectives) are automatically generated using the metadata of the topic and the tutorial.
+
 
 # How is the training material maintained?
 
