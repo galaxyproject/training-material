@@ -92,7 +92,7 @@ All images for the slides must be in `images` directory. The images must be in g
 
 ## `tutorials` directory
 
-This directory collects the tutorials related to the topic. The tutorials are hands-on built for workshop and self training. 
+This directory collects the tutorials related to the topic. The tutorials are hands-on built for workshop and self training.
 
 The template for the tutorials are different from the other pages to help users to focus on the content of the tutorial. To improve the output of the tutorial, several metadata are mandatory for every tutorials such as the requirements or the objectives of the tutorials. Boxes are also used to highlight some key points as the hands-on or the tips.  
 
@@ -116,7 +116,7 @@ The `docker` image must also integrate a Galaxy tour from the [`galaxy-tours` re
 
 # How do I add new content?
 
-Most of the content is written in markdown with some metadata (or variables) stored in YAML. To generate the website, we are using [Jekyll](http://jekyllrb.com/) and its templating system. 
+Most of the content is written in markdown with some metadata (or variables) stored in YAML. To generate the website, we are using [Jekyll](http://jekyllrb.com/) and its templating system.
 
 So if you want to visualise locally how the website will look like, you need to run a local Jekyll server. So, Jekyll must be installed using [RubyGems](https://rubygems.org/pages/download):
 
@@ -130,14 +130,14 @@ To run a local Jekyll server and visualize the changes, launch using the [Makefi
 $ make serve
 ```
 
-You can then visualize locally ([http://localhost:4000/](http://localhost:4000/)) the website before pushing your changes. 
+You can then visualize locally ([http://localhost:4000/](http://localhost:4000/)) the website before pushing your changes.
 
 ## How do I add a new topic?
 
 1. Add a `yml` file into the `metadata` directory similar to the one for [`RNA-Seq`](metadata/RNA-Seq.yml) and fill it with meta information on the topic
     - `name`: name of the topic (same name as the `yml` file and the directory)
     - `title`: title of the topic
-    - `type`: targeted users (`"use"` or `""`) 
+    - `type`: targeted users (`"use"` or `""`)
     - `summary`: summary of the content of the topic
     - `docker_image`: name of the [Docker image](#docker-directory) with the tools for this topic
     - `requirements`: list of requirements general for this topic, with a `title`, a `link` (relative for internal (inside training material) requirement or full for external requirement) and the type of link (`internal` or `external`)
@@ -147,13 +147,13 @@ You can then visualize locally ([http://localhost:4000/](http://localhost:4000/)
 
         - `title`
         - `type`: two possible types `introduction` or `tutorial`
-            
+
             > For introduction material, [how to fill introduction slides](#how-do-i-fill-introduction-slides)
 
             > For tutorial material, check out [how to add a new tutorial](#how-do-i-add-a-new-tutorial)
         - `slides` (`"yes"` or `"no"`): tell if slides are available for this material
 
-        
+
     - `maintainers`: the two maintainers of the topic with their `name`, `github_username`, `email`
     - `contributors`: list of people who contributed to the topic with `name`, `github_username`, `email`
     - `references`: list of references for this topic with `authors`, `title`, `link`, `summary`
@@ -200,13 +200,13 @@ You can then visualize locally ([http://localhost:4000/](http://localhost:4000/)
 
 1. Check that the metadata about the tutorial in the `yml` file in `metadata` directory are filled and correct
 
-    They are used to generate the header and the footer of the tutorials. 
+    They are used to generate the header and the footer of the tutorials.
 
 2. Fill the markdown file with the tutorial (after changing the `topic_name` and `tutorial_name`)
 
-The content of a tutorial hands-on is written in `markdown`. They are rendered by [Jekyll](http://jekyllrb.com/) into the webpage for the tutorial. 
+The content of a tutorial hands-on is written in `markdown`. They are rendered by [Jekyll](http://jekyllrb.com/) into the webpage for the tutorial.
 
-To improve the learning experience, we strongly recommend you to: 
+To improve the learning experience, we strongly recommend you to:
 - Add boxes to highlight:
     - Hands-on parts
 
@@ -226,7 +226,7 @@ To improve the learning experience, we strongly recommend you to:
         >
         > 1. Why are some tests filtered?
         > 2. Does it improve the *p*-value distribution?
-        > 
+        >
         >    <details>
         >    <summary>Click to view answers</summary>
         >    Content goes here.
@@ -265,7 +265,7 @@ To improve the learning experience, we strongly recommend you to:
     To render the boxes correctly, the previous syntaxes have to be followed. The boxes can be nested, .e.g. for having tips inside hands-on.
 
 - Add an agenda at the end of the introduction to indicate the plan of the tutorial
-    
+
     ```
     > ### Agenda
     >
@@ -286,7 +286,7 @@ The input data required for the tutorials must be upload on [Zenodo](https://zen
 
 You can also add yourself as contributor for the topic in the `yml` file of the related topic that is in `metadata` directory
 
-## How do I fill introduction slides? 
+## How do I fill introduction slides?
 
 Before starting filling the slides, you have to add the metadata about the tutorial in `material` section in the `yml` file of the related topic that is in `metadata` directory:
 
@@ -311,12 +311,20 @@ logo: "GTN"
 
 ![](../images/ecker_2012.jpg)
 
+<!-- add a resized image in percentage: 10%, 25%, 50%, or 75% -->
+.image-25[![](../images/ecker_2012.jpg)]
+
 <small>[*Ecker et al, Nature, 2012*](http://www.nature.com/nature/journal/v489/n7414/full/489052a.html)</small>
+
+???
+
+Slide notes
+-> Pressing **P** will toggle presenter mode.
 
 ---
 ```
 
-The first slides (with the title, the requirements,...) are automatically generated using the metadata of the topic. Then the content to fill starts with the introduction. 
+The first slides (with the title, the requirements,...) are automatically generated using the metadata of the topic. Then the content to fill starts with the introduction.
 
 They are then rendered with [`Remark`](https://remarkjs.com/). Template for the `html` files can be found in
 [`templates/slides/`](templates/slides/). Once the slides are on the `master` branch, they will be available at `http://bgruening.github.io/training-material/<topic>/slides/<slide_name>.html`
