@@ -8,12 +8,12 @@ Training material
 
 topic | features
 :-- | :--: | --:
-[Genome Annotation](Genome-Annotation/general-introduction/README.md) | :book:
-[RNA-seq](RNA-Seq/) | :whale: [:movie_camera:](https://vimeo.com/128268401) [:page_facing_up:](https://usegalaxy.org/u/jeremy/p/galaxy-rna-seq-analysis-exercise) [:book:](RNA-Seq/)
-[ChIP-seq](ChIP-Seq/) | :book:
-[Exome-seq](Exome-Seq/) | [:whale:](Exome-Seq/docker) [:book:](Exome-Seq/tutorials) [:mortar_board:](Exome-Seq/slides/index.html#/) [:eyes:](Exome-Seq/docker)
-[MethylC-seq](MethylC-Seq) | :book:
-[Galaxy Introduction](Introduction) | :book:  
+[Genome Annotation](Genome-Annotation/) | [:book:](Genome-Annotation/tutorials/general-introduction.md)
+[RNA-seq](RNA-Seq/) | [:whale:](RNA-Seq/docker/) [:movie_camera:](https://vimeo.com/128268401) [:page_facing_up:](https://usegalaxy.org/u/jeremy/p/galaxy-rna-seq-analysis-exercise) [:book:](RNA-Seq/tutorials/ref_based.md) [:mortar_board:](RNA-Seq/slides/index.html)
+[ChIP-seq](ChIP-Seq/) | [:whale:](ChIP-Seq/docker/) [:book:](ChIP-Seq/) [:mortar_board:](ChIP-Seq/slides/index.html)
+[Exome-seq](Exome-Seq/) | [:whale:](Exome-Seq/docker) [:book:](Exome-Seq/tutorials) [:mortar_board:](Exome-Seq/slides/index.html/)
+[MethylC-seq](MethylC-Seq) | [:book:](MethylC-Seq/tutorials/Methylation-Seq.md)
+[Galaxy Introduction](Introduction) | [:whale:](Introduction/docker/)[:book:](Introduction/tutorials/)
 [Data Sources](Dev-Corner/tutorials/data_source_integration.md) | :book:
 [Planemo documents](http://planemo.readthedocs.io/en/latest/writing_appliance.html) | [:book:](http://planemo.readthedocs.io/en/latest/writing_appliance.html)
 [Galaxy Tool Dev Corner](Dev-Corner) | [:book:](Dev-Corner/readme.md)
