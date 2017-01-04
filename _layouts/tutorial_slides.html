@@ -2,9 +2,18 @@
 layout: base_slides
 ---
 
+{% assign topic = site.data[page.topic_name] %}
+{% for tuto in topic.material %}
+    {% if tuto.name == page.tutorial_name %}
+        {% assign tutorial = tuto %}
+        {% assign title = tutorial.title %}
+    {% endif %}
+{% endfor %}
+
+
 ### :grey_question: Questions
 
-{% for question in page.questions %}
+{% for question in tutorial.questions %}
 - {{ question }}
 {% endfor %}
 
@@ -12,7 +21,7 @@ layout: base_slides
 
 ### :dart: Objectives
 
-{% for objective in page.objectives %}
+{% for objective in tutorial.objectives %}
 - {{ objective }}
 {% endfor %}
 

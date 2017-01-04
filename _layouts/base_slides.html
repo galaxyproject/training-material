@@ -64,6 +64,16 @@ Before diving into this slide deck, we recommend you to have a look at:
   {% endif %}
 {% endfor %}
 
+{% if page.tutorial_name %}
+  {% for requirement in tutorial.requirements %}
+    {% if requirement.type == "internal" %}
+- [{{ requirement.title }}]({{ site.url }}{{ requirement.link }})
+    {% elsif material.type == "external" %}
+- [{{ requirement.title }}]({{ requirement.link }})
+    {% endif %}
+  {% endfor %}
+{% endif %}
+
 ---
 
 {{ content }}
