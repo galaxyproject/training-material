@@ -8,7 +8,6 @@ Training material
 
 topic | features
 :-- | :--: | --:
-<<<<<<< HEAD
 [Genome Annotation](Genome-Annotation/) | [:book:](Genome-Annotation/tutorials/general-introduction.md)
 [RNA-seq](RNA-Seq/) | [:whale:](RNA-Seq/docker/) [:movie_camera:](https://vimeo.com/128268401) [:page_facing_up:](https://usegalaxy.org/u/jeremy/p/galaxy-rna-seq-analysis-exercise) [:book:](RNA-Seq/tutorials/ref_based.md) [:mortar_board:](RNA-Seq/slides/index.html)
 [ChIP-seq](ChIP-Seq/) | [:whale:](ChIP-Seq/docker/) [:book:](ChIP-Seq/) [:mortar_board:](ChIP-Seq/slides/index.html)
