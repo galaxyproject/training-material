@@ -18,15 +18,26 @@ Visualizations in Galaxy
 :heavy_check_mark: ***Requirements***
 
 - *Galaxy introduction*
-- *Second requirement*
-- *Third requirement*
+- *Javascript Knowledge*
 - *...*
 
 :hourglass: ***Time estimation*** *1d/3h/6h*
 
 # Introduction
 
-General introduction about the topic and then an introduction of the tutorial (the questions and the objectives). It is nice also to have a scheme to sum up the pipeline used during the tutorial. The idea is to give to trainees insight into the content of the tutorial and the (theoretical and technical) key concepts they will learn.
+Visualizations may be very helpful in understanding data better.
+These can be simple barplots but also projections of high dimensional data or even genomes.
+What is characteristical about visualizations is that they often require endless tweaking and change in settings like zoom and colors.
+Most often visualizations are ideally interactive, where changing the settings is effectively the browsing through the data.
+For this reason it may be inconvenient to make use of a static galaxy tool because it misses interactive features.
+Therefore galaxy offers the option to create *visualizations plugins*, file format specific javascripts that intergrate with the history menu.
+
+In this tutorial we shall go through how this works and create a simple tool ourselves.
+The tool will create a visualization of the number of aligned reads per chromosome in a BAM file, and we will discuss possible optimizations.
+
+Because visualizations are written in HTML5 and JavaScript it is essential to have a good understand if you want to make visualizations ready for production.
+However, for this tutorial we will keep it very basic.
+
 
 Documentation about Galaxy visualizations can be found here. It can be used as base:
 
@@ -39,7 +50,9 @@ Documentation about Galaxy visualizations can be found here. It can be used as b
 
 # Part 1
 
-Introduction about this part
+The visualization we want to write is a tool that shows the number of aligned reads per chromosome, of a BAM file.
+The first thing we need to do is to come up with a name.
+Let's call it **.
 
 ## Subpart 1
 
