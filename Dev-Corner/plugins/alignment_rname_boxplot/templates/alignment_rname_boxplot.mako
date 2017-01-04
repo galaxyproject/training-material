@@ -1,0 +1,100 @@
+<!DOCTYPE HTML>
+<%
+    ## Generates hash (hdadict['id']) of history item
+    hdadict = trans.security.encode_dict_ids( hda.to_dict() )
+    
+    ## Finds the parent directory of galaxy (/, /galaxy, etc.)
+    root     = h.url_for( '/' )
+    
+    ## Determines the exposed URL of the ./static directory
+    app_root = root + 'plugins/visualizations/'+visualization_name+'/static/'
+    
+    ## Actual file URL:
+    file_url = root + 'datasets/' + hdadict['id'] + "/display?to_ext=" + hda.ext;
+
+
+    ## Ensure BAI index is symlinked
+    bai_target = hda.file_name+'.bai'
+    import os
+    
+    if not os.path.isfile(bai_target):
+        os.symlink(hda.metadata.bam_index.file_name, bai_target)
+    
+    
+    ## Extract idxstats
+    import pysam
+    bam_idxstats_data = pysam.idxstats(hda.file_name)
+    
+    
+    ## Cleanup ? os.remove(bai_target)
+%>
+<html>
+    <head>
+       <title>${hda.name | h} | ${visualization_name | h}</title>
+       
+       <style>
+            .chart div {
+              font: 10px sans-serif;
+              background-color: steelblue;
+              text-align: right;
+              padding: 3px;
+              margin: 1px;
+              color: white;
+            }
+       </style>
+       <script>
+           bam_idxstats_data = ${bam_idxstats_data};
+           function parse_data(data) {
+                /*
+                 Data comes in as tuple of unsplit lines:
+                 ["chr1\t1000\t0\t0", "chr2\t2500\t0\t0"]
+                 
+                 We need to split it up, and ideally only keep reference names without an underscore
+                */
+                var output = {};
+                
+                for(var i = 0; i < data.length ; i++) {
+                    var line = data[i];
+                    var chunks = line.split("\t");
+                    
+                    if(chunks[0].split("_").length == 1) { // only if it does not contain underscore
+                        output[chunks[0]] = parseInt(chunks[2]);
+                    }
+                }
+                
+                return output;
+           }
+           
+           function calc_sum(parsed) {
+               output = 0;
+               for (var key in parsed) {
+                  output += parsed[key];
+               }
+               return output;
+           }
+           
+           function plot_data(parsed) {
+               var sum = calc_sum(parsed);
+               
+               for (var key in parsed) {
+                    var value = parsed[key];
+                    var ratio = 100.0 * value / sum;
+                    
+                    var div = document.createElement("div");
+                    div.innerHTML = '<nobr>'+key+': '+value+" ("+ratio+"%)</nobr>";
+                    div.title = key+': '+value+" ("+ratio+"%)";
+                    div.style.width = document.documentElement.clientWidth * ratio;
+                    
+                    document.getElementById("chart").appendChild(div);
+               }
+           }
+       </script>
+    </head>
+    <body onload="plot_data(parse_data(bam_idxstats_data));">
+        <center>
+            <h1>Bam contents of ${hda.name | h}</h1>
+            
+            <div id="chart" class="chart" style="width: 50%; border: 1px dashed gray;text-align: left;" />
+        </center>
+    </body>
+</html>
