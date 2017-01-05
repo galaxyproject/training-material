@@ -153,34 +153,34 @@
 
                     <section data-markdown>
                         <script type="text/template">
-                            ### Write first plugin
+                            ### Write first plugin: elements
                             
                             - Elements of visualization plugin:
-                                * configured Datatype: e.g. BAM
-                                * description: name, version, description, license
-                                * HTML + js (template): variables will be replaced (e.g. resolved data file url)
-                            - Assignment: Boxplot of chromosome contents in BAM file
-                                * Data is present as Metadata
+                                * Configured Datatype: e.g. BAM
+                                * Description: name, version, description, license
+                                * HTML + js (template)
+                                    - Compiled page has variables replaced (e.g. urls)
                         </script>
                     </section>
 
                     <section data-markdown>
                         <script type="text/template">
-                            ### Write first plugin
+                            ### Write first plugin: project structure
                             
-                            - For XML file hooking visualization into galaxy:
+                            - For XML file plug visualization into Galaxy:
                                   mkdir -p $GALAXY_ROOT/config/plugins/$PLUGIN_NAME/config ;
                             - For templates of HTML files:
                                   mkdir -p $GALAXY_ROOT/config/plugins/$PLUGIN_NAME/templates
-                            - For files that need to be exposed via the webserver (static images, compiled JS files)
+                            - For files that need to be exposed via the webserver (static images, uglified JS files)
                                   mkdir -p $GALAXY_ROOT/config/plugins/$PLUGIN_NAME/static
                         </script>
                     </section>
 
                     <section data-markdown>
                         <script type="text/template">
-                            ### Write first plugin:  hooking visualization into galaxy
+                            ### Write first plugin: xml file
                                   $GALAXY_ROOT/config/plugins/$PLUGIN_NAME/config/$PLUGIN_NAME.xml ;
+                            - Hooks visualization into Galaxy
                             <img src="../images/vis_plugin_conf_xml.png" class="no-border" width="75%"/>
                             * Data types must match with class names in
                                    $GALAXY_ROOT/lib/galaxy/datatypes/
@@ -189,7 +189,7 @@
 
                     <section data-markdown>
                         <script type="text/template">
-                            ### Write first plugin: *alignment_rname_boxplot*
+                            ### Write first plugin: mako file
                             
                             - For templates of HTML files:
                                   $GALAXY_ROOT/config/plugins/$PLUGIN_NAME/templates/$PLUGIN_NAME.mako ;
@@ -202,17 +202,18 @@
 
                     <section data-markdown>
                         <script type="text/template">
-                            ### Write first plugin: *alignment_rname_boxplot*
+                            ### Write first plugin: mako file
                             
                             - Access to *hda* **pre** template compilation:
                                 * `$hda.file_name`
                                 * `$hda.metadata.dbkey`
-                                * Avoid unnecessary copies of whole files
+                                * Avoid (unnecessary) copies of whole files
                             - Access to *hda* **post** template compilation -> via URLs
-                                * file is downloaded by browser (client side)
-                                    - for large files this is inconvenient
-                                * resolving history uid to hash
-                                * correction for extended root URLs:
+                                * Download data file by browser (client side)
+                                    - Inconvenient for large files:
+                                        * Indices & query protocols (e.g. DAS protocol)
+                                * Resolving history uid to hash
+                                * Correction for extended root URLs:
                             
                             <img src="../images/vis_nested_url.png" class="no-border" width="65%"/>
                         </script>
@@ -220,10 +221,10 @@
                     
                     <section data-markdown>
                         <script type="text/template">
-                            ### Write first plugin: *alignment_rname_boxplot*
+                            ### Write first plugin: mako syntax
                             
                             - Access to *hda* **post** template compilation
-                                * Essential variables
+                                * Essential variables in Python part
                             
                             <img src="../images/vis_important_variables.png" class="no-border" width="100%"/>
                         </script>
@@ -231,10 +232,11 @@
                     
                     <section data-markdown>
                         <script type="text/template">
-                            ### Write first plugin: *alignment_rname_boxplot*
+                            ### Write first plugin: javascript and jQuery
                             
-                            - HTML / JS implementation(s)
+                            - HTML / JS implementation make often use of jQuery
                                 * Galaxy ships with jQuery
+
                                       <script type="text/javascript"
                                       src="${root}/static/scripts/libs/jquery/jquery.js" />
                         </script>
@@ -242,7 +244,7 @@
                     
                     <section data-markdown>
                         <script type="text/template">
-                            ### Write first plugin: *alignment_rname_boxplot*
+                            ### Write first plugin: generic template
                             
                             <img src="../images/vis_generic_template.png" class="no-border" height="100%"/>
                         </script>
@@ -250,7 +252,7 @@
                            
                     <section data-markdown>
                         <script type="text/template">
-                            ### Write first plugin: *alignment_rname_boxplot*
+                            ### Write first plugin: static files
                             
                             - External libraries and static files go in `./static` dir:
                             
@@ -265,10 +267,16 @@
                         <script type="text/template">
                             ### <i class="fa fa-exclamation-circle" aria-hidden="true"></i> Summary
 
-                            - Simple sentence to sum up the first key point of the tutorial (Take home message)
-                            - Second key point
-                            - Third key point
-                            - ...
+                            - Galaxy visualization plugins:
+                                * Explicitly Datatype specific
+                                * Written in HTML5 / JS
+                                * Require minor python / Galaxy ecosystem knowledge
+                                * Have access to the whole Galaxy system
+                                    - pre-compilation: python
+                                    - post-compilation: JS / API
+                                * Can be installed without additional configuration
+                                * Can not be connected to workflows
+                                * Can not (out of the box) save and share
                         </script>
                     </section>
                         
@@ -280,6 +288,7 @@
                             - Look at existing plugins:
                                 * Galaxy mainline
                                 * https://github.com/bgruening/galaxytools/tree/master/visualisations
+                            - API is now very extensive, everything is accessible with jQuery!
                         </script>
                     </section>
                 </section>
