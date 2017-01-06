@@ -1099,99 +1099,6 @@ planemo test
 
 ---
 
-.image-50[![](../images/github_logo.png)]
-
-.image-50[![](../images/travis_ci_logo.png)]
-
-.image-50[![](../images/planemo-logo.png)]
-
-.image-50[![](../../shared/images/conda_logo.png)]
-
----
-
-### GitHub side
-
-![](../images/github_travis_github.png)
-
----
-
-### Travis CI side
-
-![](../images/github_travis_travis.png)
-
----
-
-.image-50[![](../../shared/images/ansible_logo.png)]
-
-.image-50[![](../../shared/images/conda_logo.png)]
-
-.image-50[![](../../shared/images/docker_logo.png)]
-
----
-
-### Docker Galaxy Flavors
-
-![](../images/galaxydocker_logo.png)
-
-.footnote[[Docker Galaxy Stable](https://github.com/bgruening/docker-galaxy-stable)]
-
----
-
-### Docker Galaxy Flavors
-#### Dockerfile
-
-```yaml
-# Galaxy - My own flavour
-# VERSION       0.1
-
-FROM quay.io/bgruening/galaxy:16.07
-
-MAINTAINER Björn A. Grüning, bjoern.gruening@gmail.com
-
-ENV GALAXY_CONFIG_BRAND deepTools
-
-# Adding the tool definitions to the container
-ADD my_tool_list.yml $GALAXY_ROOT/my_tool_list.yml
-
-# Install deepTools
-RUN install-tools $GALAXY_ROOT/my_tool_list.yml
-```
-
----
-
-### Docker Galaxy Flavors
-#### tool_list.yml
-
-```yaml
-api_key: admin
-galaxy_instance: http://127.0.0.1:8080/
-tools:
-- name: fastqc
-  owner: devteam
-  tool_panel_section_id: cshl_library_information
-  tool_shed_url: https://toolshed.g2.bx.psu.edu
-  revisions:
-    - '8c650f7f76e9'  # v0.62
-    - 'd2cf2c0c8a11'  # v0.63
-- name: suite_deeptools
-  owner: bgruening
-  tool_panel_section_label: 'deepTools'
-  tool_shed_url: https://toolshed.g2.bx.psu.edu
-  revisions:
-    - '7f5562625ae2'
-```
-
----
-
-### Docker Galaxy Flavors
-#### RUN
-
-```bash
-docker run -d -p 8080:80 galaxy-deeptools
-```
-
----
-
 ## Advanced features
 
 ---
@@ -1460,6 +1367,99 @@ blastn -query foo_bar -num_threads 4
 - Gain of usability
 
 .footnote[[Documentation: Adding Datatypes](https://wiki.galaxyproject.org/Admin/Datatypes/Adding%20Datatypes)]
+
+---
+
+.image-50[![](../images/github_logo.png)]
+
+.image-50[![](../images/travis_ci_logo.png)]
+
+.image-50[![](../images/planemo-logo.png)]
+
+.image-50[![](../../shared/images/conda_logo.png)]
+
+---
+
+### GitHub side
+
+![](../images/github_travis_github.png)
+
+---
+
+### Travis CI side
+
+![](../images/github_travis_travis.png)
+
+---
+
+.image-50[![](../../shared/images/ansible_logo.png)]
+
+.image-50[![](../../shared/images/conda_logo.png)]
+
+.image-50[![](../../shared/images/docker_logo.png)]
+
+---
+
+### Docker Galaxy Flavors
+
+![](../images/galaxydocker_logo.png)
+
+.footnote[[Docker Galaxy Stable](https://github.com/bgruening/docker-galaxy-stable)]
+
+---
+
+### Docker Galaxy Flavors
+#### Dockerfile
+
+```yaml
+# Galaxy - My own flavour
+# VERSION       0.1
+
+FROM quay.io/bgruening/galaxy:16.07
+
+MAINTAINER Björn A. Grüning, bjoern.gruening@gmail.com
+
+ENV GALAXY_CONFIG_BRAND deepTools
+
+# Adding the tool definitions to the container
+ADD my_tool_list.yml $GALAXY_ROOT/my_tool_list.yml
+
+# Install deepTools
+RUN install-tools $GALAXY_ROOT/my_tool_list.yml
+```
+
+---
+
+### Docker Galaxy Flavors
+#### tool_list.yml
+
+```yaml
+api_key: admin
+galaxy_instance: http://127.0.0.1:8080/
+tools:
+- name: fastqc
+  owner: devteam
+  tool_panel_section_id: cshl_library_information
+  tool_shed_url: https://toolshed.g2.bx.psu.edu
+  revisions:
+    - '8c650f7f76e9'  # v0.62
+    - 'd2cf2c0c8a11'  # v0.63
+- name: suite_deeptools
+  owner: bgruening
+  tool_panel_section_label: 'deepTools'
+  tool_shed_url: https://toolshed.g2.bx.psu.edu
+  revisions:
+    - '7f5562625ae2'
+```
+
+---
+
+### Docker Galaxy Flavors
+#### RUN
+
+```bash
+docker run -d -p 8080:80 galaxy-deeptools
+```
 
 ---
 
