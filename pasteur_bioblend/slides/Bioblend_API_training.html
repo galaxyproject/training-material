@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>BioBlend_API</title>
+    <meta charset="utf-8">
+    <style>
+      @import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
+      @import url(https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic);
+      @import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
+
+      body { font-family: 'Droid Serif'; }
+      h1, h2, h3 {
+        font-family: 'Yanone Kaffeesatz';
+        font-weight: normal;
+      }
+      .remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
+    </style>
+  </head>
+  <body>
+    <textarea id="source">
+
+class: center, middle
+
+.left[.top[<img src="../images/LogoIP-CNRS-C3BI-NBV4small-e1460524231316.png" width="200">]]
+
+#.center[BioBlend module, a python library to use Galaxy API]
+##.right[.bottom[Olivia Doppelt-Azeroual]]
+
+---
+
+# Plan
+
+1. Introduction
+2. Applications
+3. It's your turn...
+
+---
+
+# Introduction
+
+* The Galaxy API enables developers to access Galaxy functionalities using Python scripts
+
+* BioBlend is a Python overlay implemented to facilitate the writing of those scripts
+
+  *  Implemented by Enis Afgane
+
+  *  It is available on github: https://github.com/afgane/bioblend and is in the pip packages (pip install bioblend)
+
+  *  A complete documentation is available at http://bioblend.readthedocs.io/en/latest/
+
+  *  BioBlend enables the manipulation of Galaxy entities (libraries; histories; datasets) as Python Objects
+
+
+---
+
+# Applications
+
+  * On the Galaxy@Pasteur instance, we use BioBlend for several tasks and projects:
+
+    * For Galaxy administration : the automated creation of libraries for new internal users, the groups allocation for new users,...
+
+    * For several project : in ReGaTE, we use BioBlend to retrieve a list of installed tools on a Galaxy instance (article in review in GigaScience)
+
+    * In MetaGenSense (in press), BioBlend is used to mime all Galaxy steps from the upload of big data to the workflow launching and the data results and transfer
+
+---
+
+# Basics on BioBlend
+
+* To start interacting distantly with a Galaxy instance with BioBlend, you need to: 
+  1. have an account on it and retrieve your **API key**
+  2. Instanciate a Galaxy instance object : 
+  	```python
+		from bioblend import galaxy
+		gi = galaxy.GalaxyInstance(url='yourGalaxyUrl', key="yourAPIkey")
+	```
+
+  3. Start playing:
+     * you can upload file in your library
+       ```python
+     	     blabla
+     
+       ```
+     * upload data in your current history
+     
+     * launch a tool distantly
+     
+     ...
+
+---
+
+# La suite
+
+
+* Qu'est ce qu'il faut pour exécuter un outil?:
+
+```python
+help(gi.tools.run_tool)
+```
+
+
+```asciidoc
+run_tool(self, history_id, tool_id, tool_inputs) method of bioblend.galaxy.tools.ToolClient instance
+    Runs tool specified by ``tool_id`` in history indicated
+    by ``history_id`` with inputs from ``dict`` ``tool_inputs``.
+    
+    :type tool_inputs: dict
+    :param tool_inputs: dictionary of input datasets and parameters
+      for the tool (see below)
+    
+    The ``tool_inputs`` dict should contain input datasets and parameters
+    in the (largely undocumented) format used by the Galaxy API.
+```
+
+    </textarea>
+    <script src="https://remarkjs.com/downloads/remark-latest.min.js">
+    </script>
+    <script>
+      var slideshow = remark.create();
+    </script>
+  </body>
+</html>
+
+---
