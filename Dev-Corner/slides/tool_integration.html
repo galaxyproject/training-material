@@ -1196,18 +1196,17 @@ docker run -d -p 8080:80 galaxy-deeptools
 
 ---
 
-### Other tags
+### Other tags: `configfiles`
+
+Like `command`, uses cheetah code to write:
+
+- A config file
+- A whole script or a module
+- Any text file needed for the tool execution
 
 ---
 
-### `configfiles`
-
-Like `command` allow cheetah code
-
-- Create a config file
-- Create a whole script or a module
-
----
+class: packed
 
 ### `configfiles`
 
@@ -1240,25 +1239,6 @@ quit
 
 ---
 
-### `command` > Reserved Variables
-
-```xml
-<command><![CDATA[
-${input_foobar.ext}
-
---search_pfam "${ filter( lambda x: str( x[0] ) == str( $search.pfam_db ),
-  $__app__.tool_data_tables[ 'pfam_databases' ].get_fields() )[0][-1] }"
-
-library $__app__.config.user_library_import_dir/$__user_email__/$inputs.library
-
-#if isinstance( $input1.datatype,
-  $__app__.datatypes_registry.get_datatype_by_extension('gff').__class__):
-]]></command>
-```
-.footnote[[Reserved Variables List](https://docs.galaxyproject.org/en/latest/dev/schema.html#tool|command)]
-
----
-
 ### `macros`
 
 ![](../images/macro.png)
@@ -1266,6 +1246,8 @@ library $__app__.config.user_library_import_dir/$__user_email__/$inputs.library
 .footnote[[Planemo documents about macros ](http://planemo.readthedocs.io/en/latest/_writing_suites.html#macros)]
 
 ---
+
+class: packed
 
 ### `macros` > `xml`
 
@@ -1344,6 +1326,25 @@ trinity.xml
 
 ---
 
+### `command` > Reserved Variables
+
+```xml
+<command><![CDATA[
+${input_foobar.ext}
+
+--search_pfam "${ filter( lambda x: str( x[0] ) == str( $search.pfam_db ),
+  $__app__.tool_data_tables[ 'pfam_databases' ].get_fields() )[0][-1] }"
+
+library $__app__.config.user_library_import_dir/$__user_email__/$inputs.library
+
+#if isinstance( $input1.datatype,
+  $__app__.datatypes_registry.get_datatype_by_extension('gff').__class__):
+]]></command>
+```
+.footnote[[Reserved Variables List](https://docs.galaxyproject.org/en/latest/dev/schema.html#tool-command)]
+
+---
+
 ### Dataset collection
 
 To group related datasets, and treat them as a single unit
@@ -1418,6 +1419,8 @@ catches the dataset identifier + the format
 
 ![](../images/job_conf.xml_1.png)
 
+8 is the default value if not set in destination
+
 ```bash
 blastn -query foo_bar -num_threads 8
 ```
@@ -1434,13 +1437,19 @@ blastn -query foo_bar -num_threads 4
 
 ---
 
-### `tool_data_table_conf.xml`
+### Data tables
 
-![](../images/tool_data_table_conf.xml.png)
+- They list all reference data used by tools
+- e.g.: Blast databanks, BWA indexes, Fasta files
+- Stored in `.loc` files
+- Populated by hand or using Data Managers
+- Data Managers are dedicated kind of Galaxy tools
 
 ---
 
-### Datatypes
+### Using a data table in a tool
+
+![](../images/tool_data_table_conf.xml.png)
 
 ---
 
