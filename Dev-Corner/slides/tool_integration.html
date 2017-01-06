@@ -30,8 +30,8 @@ graphlan.py --format "png" --size 7 input_tree.txt png_image.png
 - Description of the user interface
 - Link between the tool and Galaxy instance
 - How to invoke the tool
-- What options to pass
-- What files the tool will produce as output
+- Which options to pass
+- Which files the tool will produce as output
 
 ---
 
@@ -92,7 +92,7 @@ graphlan.py --format "png" --size 7 input_tree.txt png_image.png
 
 .image-10[![](../images/exercise.png)]
 
-<small>[Galaxy Tool XML File](https://docs.galaxyproject.org/en/latest/dev/schema.html)</small>
+<small>[Galaxy Tool XML File documentation](https://docs.galaxyproject.org/en/latest/dev/schema.html)</small>
 
 ---
 
@@ -104,7 +104,7 @@ graphlan.py --format "png" --size 7 input_tree.txt png_image.png
 graphlan.py
 --format $format
 #if $dpi
---dpi $dpi
+  --dpi $dpi
 #end if
 --size $size
 "$input_tree"
@@ -115,12 +115,7 @@ graphlan.py
 ```xml
 <command><![CDATA[
 python $__tool_directory__/graphlan.py
---format $format
-#if $dpi
---dpi $dpi
-#end if
---size $size
-"$input_tree"
+# command params...
 ]]></command>
 ```
 
@@ -133,7 +128,7 @@ python $__tool_directory__/graphlan.py
 
 ---
 
-### `inputs` > `param` To `command`
+### `inputs` > `param` to `command`
 #### How to pass the parameters?
 
 ```xml
@@ -151,7 +146,7 @@ python $__tool_directory__/graphlan.py
 graphlan.py
 ...
 #if $dpi
---dpi $dpi
+  --dpi $dpi
 #end if
 --size $size
 ...
@@ -221,10 +216,10 @@ help="..."/>
 
 ```xml
 <param name="..." type="select" display="radio" label="..." help="...">
-  <option value="min" selected="true">Mininum</option>
-  <option value="mean" >Mean</option>
-  <option value="max" >Max</option>
-  <option value="sum" >Sum</option>
+  <option value="min" selected="true">Minimum</option>
+  <option value="mean">Mean</option>
+  <option value="max">Max</option>
+  <option value="sum">Sum</option>
 </param>
 ```
 
@@ -254,6 +249,8 @@ help="..."/>
 
 ---
 
+class: packed
+
 ### `inputs` > `param` > `conditional`
 
 ![](../images/input_conditional.png)
@@ -262,8 +259,7 @@ help="..."/>
 <command><![CDATA[
 #if $input_format.format == "fasta":
   phyml_fasta_id_encode_wrapper.sh $input_format.input $output_tree
-#end if
-#if $input_format.format == "phylip":
+#else if $input_format.format == "phylip":
   phyml.sh
 #end if
 ]]></command>
@@ -284,6 +280,8 @@ help="..."/>
 ```
 
 ---
+
+class: packed
 
 ### `inputs` > `param` > `repeat`
 
@@ -311,7 +309,7 @@ help="..."/>
 ---
 
 ### `outputs`
-#### What files the tool will produce as output?
+#### Which files the tool will produce as output?
 
 ![](../images/output.png)
 
@@ -333,9 +331,18 @@ help="..."/>
 #### Conditional
 
 ```xml
+<inputs>
+  <param type="select" name="format" label="Output format">
+    <option value="png">PNG</option>
+    <option value="pdf">PDF</option>
+  </param>
+</inputs>
 <outputs>
   <data format="png" name="png_output" label="${tool.name} on ${on_string}: PNG">
     <filter>format=="png"</filter>
+  </data>
+  <data format="pdf" name="pdf_output" label="${tool.name} on ${on_string}: PDF">
+    <filter>format=="pdf"</filter>
   </data>
 </outputs>
 ```
