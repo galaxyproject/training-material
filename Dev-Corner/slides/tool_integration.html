@@ -412,6 +412,69 @@ For more information, check the `user manual
 
 ---
 
+### Other tips
+
+Always quote text/data parameters
+
+```xml
+<command><![CDATA[
+graphlan.py
+--format '$format'
+#if $dpi
+  --dpi $dpi
+#end if
+--size $size
+'$input_tree'
+]]></command>
+```
+
+- For security reason
+- Prefer single quotes over double quotes
+
+---
+
+### Other tips
+
+Use &amp;&amp; to run multiple commands
+
+```xml
+<command><![CDATA[
+graphlan.py
+--format '$format'
+&&
+echo "Yeeha it worked"
+]]></command>
+```
+
+<small>The job will exit on the first error encountered.</small>
+
+---
+
+### Other tips
+
+Use the `argument` tag when a param reflects a command line argument
+
+```xml
+<param argument="--size" type="integer" value="7" label="..." help="..."/>
+```
+
+- Will be printed in the param help section
+- No need to write `name="size"`, it is implicit
+
+---
+
+### Other tips
+
+Use sections to group related parameters
+
+```xml
+<section name="advanced" title="Advanced options" expanded="False">
+    <param argument="--size" type="integer" value="7" label="..." help="..."/>
+</section>
+```
+
+---
+
 ###.image-25[![](../images/planemo-logo.png)]
 
 #### Building Galaxy Tools
