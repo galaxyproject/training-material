@@ -351,18 +351,24 @@ class: packed
 
 ### `stdio`
 
+Error if tool exit code is not 0 (default):
+```xml
+<command detect_errors="exit_code"> ... </command>
+```
+Error if tool exit code is not 0 or either "Exception:" or "Error:" appears in standard error/output:
 ```xml
 <command detect_errors="aggressive"> ... </command>
 ```
-or if you need more precision
+If you need more precision:
 ```xml
 <stdio>
   <exit_code range=":-2" level="warning" description="Low disk space" />
   <exit_code range="1:" level="fatal"  />
   <regex match="Error:"  level="fatal" />
 </stdio>
-
 ```
+
+<small>"Warning" level allow to add information to stderr without marking the dataset as failed</small>
 
 ---
 
