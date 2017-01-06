@@ -432,7 +432,7 @@ For more information, check the `user manual
 *No brain needed*
 
 ```bash
-$ . ~/.venv_planemo/bin activate  # not mandatory
+$ . ~/.venv_planemo/bin/activate  # not mandatory
 $ planemo conda_init
 $ export PATH=~/miniconda2/bin:$PATH
 $ conda config --add channels conda-forge
@@ -470,7 +470,7 @@ $ cat 2.fasta
 1. Init the wrapper with `planemo tool_init`
 2. Fill the template
 3. Test the template with `planemo lint`
-<small>Don't worry now about "No tests found"</small>
+<small>(Don't worry about "No tests found" for now)</small>
 4. Display the tool with `planemo serve`
 5. and try it with a file
 
@@ -496,7 +496,7 @@ planemo serve # seqtk_seq_step2.xml
 ### Functional tests
 
 - Functional testing is a quality assurance (QA) process.
-- The tests confort developers and users that the tools can run across different servers/architectures. And that the last modifications didn't break the different features.
+- The tests confort developers and users that the tools can run across different servers/architectures. And that the latest modifications don't break older features.
 - Tools are tested by feeding them input(s) and parameter(s) and examining the output(s) (typically a diff)
 
 ---
@@ -528,70 +528,7 @@ planemo serve # seqtk_seq_step2.xml
 </tests>
 ```
 
-<small>`input_tree.txt` and `png_image.png` in `test-data` repository</small>
-
----
-
-### `tests`
-#### Comparison Methods
-
-```xml
-<output name="out_file1" file="cf_maf2fasta_concat.dat" ftype="fasta"/>
-```
-
-```xml
-<test>
-  <output name="out_file1">
-    <assert_contents>
-    <has_text text="chr7" />
-    <not_has_text text="chr8" />
-    <has_text_matching expression="1274\d+53" />
-    <has_line_matching expression=".*\s+127489808\s+127494553" />
-    <!-- &#009; is XML escape code for tab -->
-    <has_line line="chr7&#009;127471195&#009;127489808" />
-    <has_n_columns n="3" />
-    </assert_contents>
-  </output>
-</test>
-```
-
-.footnote[[Complete information](https://docs.galaxyproject.org/en/latest/dev/schema.html#tool|tests|test)]
-
----
-
-### `tests`
-#### Comparison Methods on the output itself
-
-```xml
-<test>
-  <output ...
-    md5
-    compare
-    diff
-    sim_size
-    lines_diff
-    ... />
-
-```
-
-.footnote[[Complete information](https://docs.galaxyproject.org/en/latest/dev/schema.html#tool|tests|test|output)]
-
----
-
-### `tests`
-#### Comparison Methods within the output
-
-```xml
-<test>
-  <output>
-    <assert_contents>
-    <has_text />
-    <not_has_text />
-    <has_text_matching />
-    <has_text />
-    <...>
-```
-.footnote[[Complete information](https://docs.galaxyproject.org/en/latest/dev/schema.html#tool|tests|test|output|assert_contents)]
+<small>`input_tree.txt` and `png_image.png` must be in the `test-data` directory</small>
 
 ---
 
@@ -601,11 +538,106 @@ planemo serve # seqtk_seq_step2.xml
 graphlan/
 ├── graphlan.xml
 ├── graphlan.py
-├── test-data/
-├── input_tree.txt
-├── png_image.png
+└── test-data/
+    ├── input_tree.txt
+    └── png_image.png
 
 ```
+
+---
+
+### `tests`
+#### Comparison Methods: comparing to an expected result
+
+```xml
+<output name="out_file1" file="cf_maf2fasta_concat.dat" ftype="fasta"/>
+```
+
+.footnote[[Complete documentation](https://docs.galaxyproject.org/en/latest/dev/schema.html#tool-tests-test)]
+
+---
+
+### `tests`
+#### Comparison Methods: comparing to an expected result
+
+```xml
+<test>
+  <output ...
+    compare="diff|re_match|sim_size|contains|re_match_multiline"
+    ... />
+
+```
+
+.footnote[[Complete documentation](https://docs.galaxyproject.org/en/latest/dev/schema.html#tool-tests-test-output)]
+
+---
+
+### `tests`
+#### Comparison Methods: comparing to an expected result
+
+```xml
+<test>
+  <output ...
+    compare="diff"
+    lines_diff="4"
+    ... />
+
+```
+
+.footnote[[Complete documentation](https://docs.galaxyproject.org/en/latest/dev/schema.html#tool-tests-test-output)]
+
+---
+
+### `tests`
+#### Comparison Methods: comparing to an expected result
+
+```xml
+<test>
+  <output ...
+    compare="sim_size"
+    delta="1000"
+    ... />
+
+```
+
+.footnote[[Complete documentation](https://docs.galaxyproject.org/en/latest/dev/schema.html#tool-tests-test-output)]
+
+---
+
+### `tests`
+#### Comparison Methods: comparing to an expected result
+
+```xml
+<test>
+  <output ...
+    md5="68b329da9893e34099c7d8ad5cb9c940"
+    ... />
+
+```
+
+.footnote[[Complete documentation](https://docs.galaxyproject.org/en/latest/dev/schema.html#tool-tests-test-output)]
+
+---
+
+### `tests`
+#### Comparison Methods: checking the content
+
+```xml
+<test>
+  <output name="out_file1">
+    <assert_contents>
+      <has_text text="chr7" />
+      <not_has_text text="chr8" />
+      <has_text_matching expression="1274\d+53" />
+      <has_line_matching expression=".*\s+127489808\s+127494553" />
+      <!-- &#009; is XML escape code for tab -->
+      <has_line line="chr7&#009;127471195&#009;127489808" />
+      <has_n_columns n="3" />
+    </assert_contents>
+  </output>
+</test>
+```
+.footnote[[Complete documentation](https://docs.galaxyproject.org/en/latest/dev/schema.html#tool-tests-test-output-assert-contents)]
 
 ---
 
@@ -664,7 +696,7 @@ planemo test # seqtk_seq_step3.xml
 ```
 graphlan/
 ├── graphlan.xml
-├── graphlan.py
+└── graphlan.py
 
 ```
 
@@ -717,14 +749,18 @@ Package, dependency and environment management
 
 .image-50[![](../../shared/images/conda_logo.png)]
 
-- Based on recipes describing how to install the software which are then builded for their distribution
-- At installation, no compilation, executables come with their dependencies, libraries...
+- Based on recipes describing how to install the software which are then built for their distribution
+- At installation, no compilation, binaries come with their dependencies, libraries...
 - Not restricted to Galaxy
 
 ---
 
-###.image-25[![](../../shared/images/conda_logo.png)] <br/> Miniconda
+###.image-25[![](../../shared/images/conda_logo.png)] <br/> Conda distributions
 
+```
+
+
+```
 ![](../images/miniconda_vs_anaconda.png)
 
 ---
@@ -733,7 +769,8 @@ Package, dependency and environment management
 
 - Packages are provided through Channels within Continuum.Anaconda. It's the way to contribute.
 
-- Galaxy via Conda will search packages in 5 channels: iuc,bioconda,r,defaults,conda-forge
+- Galaxy via Conda will search packages in 5 channels: <br>
+iuc, bioconda, defaults, r, conda-forge
 
 ---
 
@@ -762,7 +799,7 @@ $ source activate bioconductor-deseq2
 
 ###.image-25[![](../../shared/images/conda_logo.png)] <br/> Tips and tricks
 #### Because you don't want Conda binaries all the time in your $PATH
-<small>In fact, Conda will mask some of your binaries like python and so all your Python libraries ...</small>
+<small>Conda masks some of your binaries like python (with all corresponding python modules) with its own versions</small>
 
 ```bash
 $ vi ~/.bashrc
@@ -792,7 +829,7 @@ function conda2deactivate () {
 ### <i class="fa fa-pencil" aria-hidden="true"></i> Hands-on
 
 #### The Goal
-- Use Conda package installation during the functional test of the wrapper for Seqtk
+- Use Conda package installation during the functional tests of the wrapper for Seqtk
 
 ---
 
@@ -822,15 +859,15 @@ planemo test --conda_dependency_resolution # seqtk_seq_step4.xml
 
 ---
 
-###.image-25[![](../../shared/images/conda_logo.png)] <br/> Write a Conda package
+###.image-25[![](../../shared/images/conda_logo.png)] <br/> Writing a Conda recipe
 
-You can implement a new Conda package. This will be necessary if a specific tool or version is not available.
+You can create a new Conda package. This will be necessary if a specific tool or version is not available.
 
-.footnote[[Documentation about how to build a conda packages from scratch](http://conda.pydata.org/docs/build_tutorials/pkgs2.html) <br/> [Bioconda guidelines](https://bioconda.github.io/guidelines.html)]
+.footnote[[Documentation about how to write conda recipes from scratch](http://conda.pydata.org/docs/build_tutorials/pkgs2.html) <br/> [Bioconda guidelines](https://bioconda.github.io/guidelines.html)]
 
 ---
 
-###.image-25[![](../../shared/images/conda_logo.png)] <br/> Write a Conda package
+###.image-25[![](../../shared/images/conda_logo.png)] <br/> Writing a Conda recipe
 #### Files
 
 - `meta.yaml`: contains all the metadata of the recipe
@@ -838,7 +875,7 @@ You can implement a new Conda package. This will be necessary if a specific tool
 
 ---
 
-###.image-25[![](../../shared/images/conda_logo.png)] <br/> Write a Conda package
+###.image-25[![](../../shared/images/conda_logo.png)] <br/> Writing a Conda recipe
 #### `meta.yaml` basic information
 
 ```yaml
@@ -860,7 +897,7 @@ source:
 
 ---
 
-###.image-25[![](../../shared/images/conda_logo.png)] <br/> Write a Conda package
+###.image-25[![](../../shared/images/conda_logo.png)] <br/> Writing a Conda recipe
 #### `meta.yaml` requirements
 
 ```yaml
@@ -881,7 +918,7 @@ requirements:
 
 ---
 
-###.image-25[![](../../shared/images/conda_logo.png)] <br/> Write a Conda package
+###.image-25[![](../../shared/images/conda_logo.png)] <br/> Writing a Conda recipe
 #### `meta.yaml` test
 
 ```yaml
@@ -892,12 +929,13 @@ test:
     - '$R -e "library(''xcms'')"'
 ```
 <small>
-Those tests are launched at the end of `conda build`
+Those tests are launched at the end of `conda build`. <br>
+They need to return 0 on success.
 </small>
 
 ---
 
-###.image-25[![](../../shared/images/conda_logo.png)] <br/> Write a Conda package
+###.image-25[![](../../shared/images/conda_logo.png)] <br/> Writing a Conda recipe
 #### `build.sh`
 
 ```bash
@@ -912,25 +950,28 @@ mkdir -p $PREFIX/bin
 cp *.py $PREFIX/bin
 ```
 <small>
-- $PREFIX will usually contain `bin/` `lib/` `include/` that are filled with the requirements files
-- $PREFIX will be loaded in the user environment at runtime: $PATH, LD_LIBRARY_PATH, PYTHONPATH ...
+- $PREFIX is a variable defined by conda when building the package
+- $PREFIX usually contains `bin/` `lib/` `include/` that are filled with the package files
+- $PREFIX will be loaded in the user environment at runtime: PATH, LD_LIBRARY_PATH, PYTHONPATH, ...
 </small>
 
 ---
 
-###.image-25[![](../../shared/images/conda_logo.png)] <br/> Write a Conda package
-#### skeleton
+###.image-25[![](../../shared/images/conda_logo.png)] <br/> Writing a Conda recipe
+#### Building recipe skeletons
 
 - `conda skeleton pypi <packagename>`
 - `conda skeleton cran <packagename>`
 - `bioconductor_skeleton.py <packagename>`
 - `conda skeleton cpan <packagename>`
 
+Generates pre-filled recipes <small>(not guaranteed to work out of the box)</small>
+
 .footnote[[Building conda packages with conda skeleton](http://conda.pydata.org/docs/build_tutorials/pkgs.html)]
 
 ---
 
-###.image-25[![](../../shared/images/conda_logo.png)] <br/> Write a Conda package
+###.image-25[![](../../shared/images/conda_logo.png)] <br/> Writing a Conda recipe
 #### `conda build` and test the package
 
 ```bash
@@ -939,11 +980,11 @@ $ conda install conda-build
 $ conda build .
 
 ```
-1. BUILD START: Build/Compile the package
-2. BUILD START: Provide a .tar.bz2
-3. TEST START: Install the .tar.bz2 previously generated
-4. TEST START: Launch the functional tests
-5. (Provide the .tar.bz2 path)
+1. BUILD START: Builds/Compiles the package
+2. BUILD START: Provides a .tar.bz2
+3. TEST START: Installs the .tar.bz2 previously generated
+4. TEST START: Launches the functional tests
+5. (Provides the .tar.bz2 path)
 
 ---
 
@@ -953,8 +994,10 @@ $ conda build .
 To continue your `planemo test`, you may want to use your new package before it's available through an official channel.
 
 
-1. Get the path of your new package .tar.bz2
-2. `conda install ~/miniconda2/conda-bld/linux-64/bwa-0.7.15-0.tar.bz2`
+Get the path of your new package .tar.bz2
+```bash
+conda install ~/miniconda2/conda-bld/linux-64/bwa-0.7.15-0.tar.bz2
+```
 
 ---
 
@@ -997,10 +1040,10 @@ Build a conda package for the suite seqtk
 ### <i class="fa fa-pencil" aria-hidden="true"></i> Hands-on
 
 #### Steps
-1. [RTFM](https://github.com/bioconda/bioconda-recipes/blob/master/GUIDELINES.md#cc)
-2. https://github.com/lh3/seqtk/
-3. Complete a `meta.yaml` and a `build.sh`
-4. Test the build with `conda build .`
+1. [RTFM](https://bioconda.github.io/guidelines.html)
+2. Follow seqtk installation instructions: https://github.com/lh3/seqtk/
+3. Write a `meta.yaml` and a `build.sh`
+4. Test the recipe with `conda build .`
 
 ???
 
@@ -1027,9 +1070,13 @@ Build a conda package for the suite seqtk
 #### Checklist (1/3)
 
 - Create a dedicated repository
+```bash
+mkdir my_tool
+cd my_tool
+```
 - Create the main `.xml` file with
 ```bash
-planemo create
+planemo tool_init
 ```
 - Fill the `.xml` file
 - Test the wrapper structure with
@@ -1042,8 +1089,8 @@ planemo lint
 ###.image-25[![](../images/planemo-logo.png)]
 #### Checklist (2/3)
 
-- Check if the dependencies are available
-- If not, create some conda packages
+- Check if the dependencies are available on Conda
+- If not, create the missing Conda packages
 - Add functional tests
 - Run functional tests
 ```bash
