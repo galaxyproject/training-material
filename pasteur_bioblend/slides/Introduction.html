@@ -4,9 +4,7 @@
     <title>BioBlend_API</title>
     <meta charset="utf-8">
     <style>
-      @import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
-      @import url(https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic);
-      @import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
+      @import url("../shared/css/fonts.css");
 
       body { font-family: 'Droid Serif'; }
       h1, h2, h3 {
@@ -18,24 +16,7 @@
   </head>
   <body>
     <textarea id="source">
-
-class: center, middle
-
-.left[.top[<img src="../images/LogoIP-CNRS-C3BI-NBV4small-e1460524231316.png" width="200">]]
-
-#.center[BioBlend module, a python library to use Galaxy API]
-##.right[.bottom[Olivia Doppelt-Azeroual]]
-
----
-
-# Plan
-
-1. Introduction
-2. Applications
-3. It's your turn...
-
----
-
+name: introduction
 # Introduction
 
 * The Galaxy API enables developers to access Galaxy functionalities using Python scripts
@@ -52,7 +33,7 @@ class: center, middle
 
 
 ---
-
+name: application
 # Applications
 
   * On the Galaxy@Pasteur instance, we use BioBlend for several tasks and projects:
@@ -64,7 +45,7 @@ class: center, middle
     * In MetaGenSense (in press), BioBlend is used to mime all Galaxy steps from the upload of big data to the workflow launching and the data results and transfer
 
 ---
-
+name: basic
 # Basics on BioBlend
 
 * To start interacting distantly with a Galaxy instance with BioBlend, you need to: 
@@ -87,38 +68,12 @@ class: center, middle
      
      ...
 
----
-
-# La suite
-
-
-* Qu'est ce qu'il faut pour exécuter un outil?:
-
-```python
-help(gi.tools.run_tool)
-```
-
-
-```asciidoc
-run_tool(self, history_id, tool_id, tool_inputs) method of bioblend.galaxy.tools.ToolClient instance
-    Runs tool specified by ``tool_id`` in history indicated
-    by ``history_id`` with inputs from ``dict`` ``tool_inputs``.
-    
-    :type tool_inputs: dict
-    :param tool_inputs: dictionary of input datasets and parameters
-      for the tool (see below)
-    
-    The ``tool_inputs`` dict should contain input datasets and parameters
-    in the (largely undocumented) format used by the Galaxy API.
-```
-
+    [return](index#plan)
     </textarea>
-    <script src="https://remarkjs.com/downloads/remark-latest.min.js">
+    <script src="../shared/js/remark-latest.min.js">
     </script>
     <script>
       var slideshow = remark.create();
     </script>
   </body>
 </html>
-
----
