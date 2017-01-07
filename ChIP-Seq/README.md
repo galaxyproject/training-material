@@ -14,7 +14,7 @@ Several deck of slides are available for this topic:
 
 A tutorial with hands-on is available for this topic:
 
-- [Identification of the binding sites of the T-cell acute lymphocytic leukemia protein 1 (TAL1) with ChIP-sequencing](tutorials/TAL1_binding_site_identification.md.md)
+- [Identification of the binding sites of the T-cell acute lymphocytic leukemia protein 1 (TAL1) with ChIP-sequencing](tutorials/TAL1_binding_site_identification.md)
 
 ## Input datasets
 
