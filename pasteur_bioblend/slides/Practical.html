@@ -6,53 +6,61 @@
     <style>
       @import url("../shared/css/fonts.css");
 
-      body { font-family: 'Droid Serif'; }
+      body { font-family: 'Yanone KaffeesatzDroid Serif'; }
       h1, h2, h3 {
         font-family: 'Yanone Kaffeesatz';
         font-weight: normal;
       }
-      .remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
+      .remark-code, .remark-inline-code { font-family: 'Droid Serif'; }
     </style>
   </head>
   <body>
     <textarea id="source">
 
+
 name: start
 
-###Preparation du TP
-Il vous faut tout d'abord recuperer votre cle d'authentification api, sur l'interface galaxy, onglet user, menu Api Keys vous pourrez generer puis sauver votre cle
+####Before we start
+        1. Authentication for Bioblend - Get your API key:
+            * On your Galaxy, click on the User tab and ont the "API Keys" line
+            * Click on "Generate a new key now"
 
-Pour avoir une base commune installez les outils bam_to_sam et samtools_sort (owner iuc) depuis l'interface admin et le toolsheds "main" (onglet admin, Search Tool Shed, Galaxy Main Tool Shed)
-
-Recuperez le workflow (.ga) depuis https://github.com/fmareuil/formationbioblend (git clone https://github.com/fmareuil/formationbioblend.git)
-
-Installez le workflow depuis l'interface workflow / Upload or import workflow
-
-###But
-
-1. Se familiariser avec la librairie bioblend
-2. Executer un outil grace a bioblend sur son galaxy
-3. Executer un workflow grace a bioblend sur son galaxy
+        2. Install the tools and workflow on your Galaxy:
+            1. The tools:
+                Admin tab
+                * In the Tools and Tool Shed category, click on the line "Search Tool Shed"
+                * Select the "Galaxy Main Tool Shed", and the "Browse valid repositories" line
+                * Search and install "bam_to_sam" and "samtools_sort" from IUC owner using the
+            2. The workflow:
+                * Get the workflow file (.ga) from https://github.com/fmareuil/formationbioblend
+                * Import the workflow in galaxy:
+                        Click on Workflow tab and "Upload or import workflow" button
+            3. Launch ipython on a terminal
+####Goal
+```Goal
+    1. Get familiar with BioBlend with ipython
+    2. Launch a Galaxy job / Visualize your actions with Galaxy
+    3. Launch a Galaxy workflow / Visualize your actions with Galaxy
+```
 
 ---
-Pour commencer, demarrez ipython et connectez vous a votre galaxy avec bioblend
-Recuperez votre api key et l'url de galaxy
+### Connect with Galaxy using ipython:
 
-* Chargez le module bioblend :
-
+    ####Get your API key and your Galaxy URL
+    ####Import the BioBlend module:
 ```python
 from bioblend.galaxy import GalaxyInstance
 ```
-
-* Creez un objet GalaxyInstance avec votre url et votre key
+    ####Create your GalaxyInstance instance object using your url and your key
 
 ```python
 gi = GalaxyInstance(url="http://127.0.0.1:8080", key="votre key")
 ```
+### ipython +++:
+        *Automatic completion
+        ==> type .bold[gi.] and the tab puis appuyez sur la touche tab key
 
-* ipython: la completion automatique
-Tapez `gi.` puis appuyez sur la touche tab
-Utilisez `help(command)`, `object??`, `object?`... pour comprendre les methodes/classes
+        *You can use `help(command)`, `object??`, `object?`... to understand BioBlend methods and classes
 
 
 ---
@@ -68,17 +76,17 @@ help(gi.tools.run_tool)
 run_tool(self, history_id, tool_id, tool_inputs) method of bioblend.galaxy.tools.ToolClient instance
     Runs tool specified by ``tool_id`` in history indicated
     by ``history_id`` with inputs from ``dict`` ``tool_inputs``.
-    
+
     :type tool_inputs: dict
     :param tool_inputs: dictionary of input datasets and parameters
       for the tool (see below)
-    
+
     The ``tool_inputs`` dict should contain input datasets and parameters
     in the (largely undocumented) format used by the Galaxy API.
 ```
 
 ---
-* Les historiques : 
+* Les historiques :
     * Essayer de recuperer la liste entiere des donnees d'un historique
     * Creez un nouvel historique, ce sera, notre historique de travail
 ```python
@@ -131,11 +139,11 @@ myinputs = inputs().set_param("param1",'value').set_dataset_param("data1",'datas
 ---
 * Les outils :
     * Recuperez des details sur l'outil `samtool sort`
-```python     
+```python
 detail_tool = gi.tools.show_tool(list_tool[0]['id'],io_details=True)
 ```
     * Avec les infos de detail_tool['inputs'], on peut instancier notre objet InputBuilder.
-```python    
+```python
 myinputs = inputs().set_dataset_param("input1", data_history['id'], src='hda').set_param("sort_mode","")
 ```
     * Executez l'outil `samtool sort`
@@ -153,10 +161,10 @@ help(gi.workflows.run_workflow)
 ```asciidoc
 run_workflow(self, workflow_id, dataset_map=None, params=None, history_id=None, history_name=None, import_inputs_to_history=False, replacement_params=None) method of bioblend.galaxy.workflows.WorkflowClient instance
     Run the workflow identified by ``workflow_id``
-    
+
     :type workflow_id: string
     :param workflow_id: Encoded workflow ID
-    
+
     :type dataset_map: string or dict
     :param dataset_map: A mapping of workflow inputs to datasets. The datasets...
 ```
@@ -168,7 +176,7 @@ detailworkflow = gi.workflows.show_workflow(mon_workflow[0]['id'])
 
 ---
 * Les workflows :
-    * Construisez le dataset_map (`cle = "cle de l'input du workflow" valeur = {id : 'id d'une data', src : 'localisation de la data'}`) 
+    * Construisez le dataset_map (`cle = "cle de l'input du workflow" valeur = {id : 'id d'une data', src : 'localisation de la data'}`)
 ```python
 dataset_map = {}
 dataset_map[detailworkflow['inputs'].keys()[0]] = {'id' : data_history['id'], 'src' : 'hda'}
@@ -190,3 +198,5 @@ gi.workflows.run_workflow(detailworkflow['id'],dataset_map=dataset_map, history_
     </script>
   </body>
 </html>
+
+
