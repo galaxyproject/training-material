@@ -10,10 +10,6 @@ This tutorial was based upon parts of the Galaxy-P 101 tutorial (https://usegala
 
 Identifying peptides in proteomic datasets is commonly done by using search engines that compare the MS2 spectra of peptides to theoretical spectra. These theoretical spectra are generated from a FASTA database containing proteins that are expected in the measured sample. Typically, those FASTA databases will contain all proteins of the organism the sample derived from.
 
-
-
-The most common method of FDR calculation is by adding known non-existing proteins, so-called "decoys" to the database. This can be done by reverting or shuffling the real protein entries and adding the fake entries to the real database. Some search engines depend on decoy databases, others can perform this step automatically.
-
 > ### Agenda
 >
 > In this tutorial, we will deal with:
@@ -35,7 +31,7 @@ In this tutorial, we will explore using Protein Database Downloader for database
 > ### :pencil2: Hands-on: Loading a Search Database
 >
 > 1. Create a new history for this Database Handling exercise.
-> 2. Go to Tools –> Get Data. Then click on Protein Database Downloader.
+> 2. Go to Tools –> Get Data. Then click on "Protein Database Downloader".
 > 3. Select in the drop-down menues Taxonomy: Homo sapiens (Human) and reviewed: UniprotKB/Swiss-Prot (reviewed only).
 > 4. Click on “Execute”.
 >	>### :bulb: Tip: Types of uniprot databases
@@ -55,25 +51,22 @@ A widely used database for common contaminants is the **c**ommon **R**epository 
 > 2. Select Download from: cRAP (contaminants).
 > 3. Click on "Execute".
 
-## [Using the Database Merge Tool](#using-the-database-merge-tool)
+# Merging databases
 
-In order to merge these two FASTA files in your history, go to Tools –> FASTA Manipulation –> Merge FASTA Databases.
+Depending on the search engine you are using you might need to merge all fasta entries in a single database. Before doing so, you should add an identifier to all cRAP entries to distinguish them from the proteins of interest.
 
-![../_images/101_8.png](../_images/101_8.png)
+> ### :pencil2: Hands-on: Merging databases
+> 1. [Insert description to add contaminant tag here]
+> 2. In the tools sidebar go to "FASTA/FASTQ manipulation". Click on "FASTA Merge Files and Filter Unique Sequences".
+> 3. Click on “Insert Input FASTA File(s)” and add the main database.
+> 4. Click on “Insert Input FASTA File(s)” and add the cRAP database.
+> 3. Click on "Execute".
 
-Click on “Add new Input FASTA File(s)” – twice – so that your set up for merging files looks like this:
+# Creating a Decoy Database
 
-![../_images/101_9.png](../_images/101_9.png)
+The most common method of FDR calculation is by adding known non-existing proteins, so-called "decoys" to the database. This can be done by reverting or shuffling the real protein entries and adding those fake entries to the database. Some peptide search engines depend on premade decoy databases, others can perform this step automatically.
 
-Click on Execute and you will be able to see your third History Item in Galaxy’s right pane.
-
-![../_images/101_10.png](../_images/101_10.png)</div>
-
-<div class="section" id="creating-a-decoy-database">
-
-## Creating a Decoy Database[¶](#creating-a-decoy-database "Permalink to this headline")
-
-Our next step is to create a decoy database out of the merged file (3rd history item on the list).
+> ### :pencil2: Hands-on: Creating a Decoy Database
 
 For this, go to Tools -> FASTA Manipulation –> ‘Create Decoy Database’.
 
@@ -96,4 +89,3 @@ Now we will rename the history items to “Human UniProt”, “cRAP”, “Merg
 Please feel free to explore tabs – Convert Format, Datatype, Permissions while you are editing the attributes. This is especially important while troubleshooting for steps that fail wherein a datatype has not been set properly or needs to be changed for subsequent steps.
 
 ![../_images/101_15.png](../_images/101_15.png)</div>
-
