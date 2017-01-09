@@ -477,6 +477,83 @@ Use sections to group related parameters
 
 ###.image-25[![](../images/planemo-logo.png)]
 
+#### `planemo tool_init`
+
+Creates a skeleton of xml file
+
+```bash
+$ mkdir new_tool
+$ cd new_tool
+$ planemo tool_init --id 'some_short_id' --name 'My super tool'
+```
+
+Complicated version:
+
+```bash
+$ planemo tool_init --id 'seqtk_seq' \
+                    --name 'Convert to FASTA (seqtk)' \
+                    --requirement seqtk@1.0-r68 \
+                    --example_command 'seqtk seq -a 2.fastq > 2.fasta' \
+                    --example_input 2.fastq \
+                    --example_output 2.fasta \
+                    --test_case \
+                    --cite_url 'https://github.com/lh3/seqtk' \
+                    --help_from_command 'seqtk seq'
+```
+
+---
+
+class: packed
+
+###.image-25[![](../images/planemo-logo.png)]
+
+#### `planemo lint`
+
+Checks the syntax of a wrapper
+
+```bash
+$ planemo lint
+```
+
+```bash
+Linting tool /opt/galaxy/tools/seqtk_seq.xml
+Applying linter tests... CHECK
+.. CHECK: 1 test(s) found.
+Applying linter output... CHECK
+.. INFO: 1 outputs found.
+Applying linter inputs... CHECK
+.. INFO: Found 1 input parameters.
+Applying linter help... CHECK
+.. CHECK: Tool contains help section.
+.. CHECK: Help contains valid reStructuredText.
+Applying linter general... CHECK
+.. CHECK: Tool defines a version [0.1.0].
+.. CHECK: Tool defines a name [Convert to FASTA (seqtk)].
+.. CHECK: Tool defines an id [seqtk_seq].
+Applying linter command... CHECK
+.. INFO: Tool contains a command.
+Applying linter citations... CHECK
+.. CHECK: Found 1 likely valid citations.
+```
+
+---
+
+###.image-25[![](../images/planemo-logo.png)]
+
+#### `planemo serve`
+
+View your new tool in a local Galaxy instance
+
+```bash
+$ planemo serve
+```
+
+Open http://127.0.0.1:9090/ in your web browser to view your new tool
+
+---
+
+###.image-25[![](../images/planemo-logo.png)]
+
 #### Building Galaxy Tools
 
 ![](../images/planemo_tool_building_lint.png)
@@ -729,6 +806,20 @@ graphlan/
   </test>
 </tests>
 ```
+
+---
+
+###.image-25[![](../images/planemo-logo.png)]
+
+#### `planemo test`
+
+Runs all functional tests
+
+```bash
+$ planemo test
+```
+
+An HTML report is automatically created with logs in case of failing test
 
 ---
 
