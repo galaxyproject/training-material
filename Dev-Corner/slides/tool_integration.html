@@ -490,15 +490,15 @@ $ planemo tool_init --id 'some_short_id' --name 'My super tool'
 Complicated version:
 
 ```bash
-$ planemo tool_init --id 'seqtk_seq' \
-                    --name 'Convert to FASTA (seqtk)' \
-                    --requirement seqtk@1.0-r68 \
-                    --example_command 'seqtk seq -a 2.fastq > 2.fasta' \
-                    --example_input 2.fastq \
-                    --example_output 2.fasta \
-                    --test_case \
-                    --cite_url 'https://github.com/lh3/seqtk' \
-                    --help_from_command 'seqtk seq'
+$ planemo tool_init  --id "samtools_sort" --name "Samtools sort" \
+                     --description "Sort alignments by leftmost coordinates, or by read nam" \
+                     --requirement samtools \
+                     --example_command "samtools sort -o 1.bam null > 1_sorted.bam" \
+                     --example_input 1.bam \
+                     --example_output 1_sorted.bam \
+                     --test_case --version_command "samtools --version | head -1" \
+                     --help_from_command "samtools sort" \
+                     --doi 10.1093/bioinformatics/btp352'
 ```
 
 ---
