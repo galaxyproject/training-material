@@ -20,7 +20,7 @@
 
 name: start
 
-####Before we start
+###Before we start
         1. Authentication for Bioblend - Get your API key:
             * On your Galaxy, click on the User tab and ont the "API Keys" line
             * Click on "Generate a new key now"
@@ -36,7 +36,7 @@ name: start
                 * Import the workflow in galaxy:
                         Click on Workflow tab and "Upload or import workflow" button
             3. Launch ipython on a terminal
-####Goal
+###Goal
 ```Goal
     1. Get familiar with BioBlend with ipython
     2. Launch a Galaxy job / Visualize your actions with Galaxy
@@ -56,52 +56,88 @@ from bioblend.galaxy import GalaxyInstance
 ```python
 gi = GalaxyInstance(url="http://127.0.0.1:8080", key="votre key")
 ```
-### ipython +++:
+### Why ipython:
         *Automatic completion
         ==> type .bold[gi.] and the tab puis appuyez sur la touche tab key
 
-        *You can use `help(command)`, `object??`, `object?`... to understand BioBlend methods and classes
+        *To better understand BioBlend methods and classes, you can use
+            [help(command)], [object??], [object?]...
 
 
 ---
 
-* Qu'est ce qu'il faut pour exécuter un outil?:
+### Understanding the run_tool method
 
-```python
-help(gi.tools.run_tool)
-```
+* To launch a Galaxy job, the method run_tool is needed:
+    * The help command lets the user know which elements
+        ```python
+        help(gi.tools.run_tool)
+        ```
+        ```asciidoc
+        run_tool(self, history_id, tool_id, tool_inputs) method of bioblend.galaxy.tools.ToolClient instance
+            Runs tool specified by *tool_id* in history indicated by *history_id* with inputs from *dict* *tool_inputs*.
 
+            :type tool_inputs: dict
+            :param tool_inputs: dictionary of input datasets and parameters for the tool (see below)
 
-```asciidoc
-run_tool(self, history_id, tool_id, tool_inputs) method of bioblend.galaxy.tools.ToolClient instance
-    Runs tool specified by ``tool_id`` in history indicated
-    by ``history_id`` with inputs from ``dict`` ``tool_inputs``.
+            The tool_inputs dict should contain input datasets and parameters in the (largely undocumented) format used by the Galaxy API.
+        ```
+    * To resume, in this first part, we need to retrieve:
+            1. A *history_id*, where the input data is and where the output data will be
+            2. A *tool_id*, which will tell Galaxy which tool to execute
+            3. tool_inputs, the data used to run the tool
 
-    :type tool_inputs: dict
-    :param tool_inputs: dictionary of input datasets and parameters
-      for the tool (see below)
-
-    The ``tool_inputs`` dict should contain input datasets and parameters
-    in the (largely undocumented) format used by the Galaxy API.
-```
 
 ---
-* Les historiques :
-    * Essayer de recuperer la liste entiere des donnees d'un historique
-    * Creez un nouvel historique, ce sera, notre historique de travail
+### Histories Object
+
+* Try to get your histories list with BioBlend using the online documentation : bioblend.readthedocs.org
+
+* Create a new history: it will be our work history for this tutorial
+
+---
+### Histories Object
+
+* Try to get your histories list with BioBlend using the online documentation : bioblend.readthedocs.org
+
+* Create a new history: it will be our work history for this tutorial
+
+
 ```python
 liste_histories = gi.histories.get_histories()
+
 new_history = gi.histories.create_history(name='my_history')
 ```
-    * Il n'y a pas de methode pour uploader une donnee depuis le "file system", par contre il y a une methode pour le faire depuis une "library"
+
+* Now that your history is created, you will need to upload some data in it.
+
+
+---
+### Histories Object
+
+* Try to get your histories list with BioBlend using the online documentation : bioblend.readthedocs.org
+
+* Create a new history: it will be our work history for this tutorial
+
+
+```python
+liste_histories = gi.histories.get_histories()
+
+new_history = gi.histories.create_history(name='my_history')
+```
+
+* Now that your history is created, you will need to upload some data in it. (METTRE UN LOGO QUI VEUT DIRE A VOTRE TOUR DE CHERCHER)
+
+* No BioBlend method to directly upload data from your file system to a history exists, a data can be uploaded in a history from a Galaxy library
+
+
 ```python
 help(gi.histories.upload_dataset_from_library)
 ```
 
-.bold[Il faut maintenant creer une library et uploader une donnee dedans]
-
 ---
-* Les librairies :
+### Librairies Object
+
     * Verifier s'il y a une methode pour uploader une donnee depuis le systeme de fichiers
     help(gi.libraries.upload_file_from_local_path)
     * Creez une library, positionnez correctement les droits galaxy sur la "library" (il vous faudra l'id' de votre role, regardez `gi.roles`) puis importez un fichier bam dedans
@@ -116,7 +152,7 @@ data_history = gi.histories.upload_dataset_from_library(new_history['id'], list_
 ```
 
 ---
-* Les outils :
+### Tools Object
     * Pour executer un outil il me faut aussi son 'id', help(gi.tools.run_tool)
     * Recuperer l'id de l'outil samtools sort, son nom dans le xml est sort
 ```python
@@ -137,7 +173,7 @@ myinputs = inputs().set_param("param1",'value').set_dataset_param("data1",'datas
 .bold[Il nous faut plus d'information sur l'outil]
 
 ---
-* Les outils :
+### Tools Object
     * Recuperez des details sur l'outil `samtool sort`
 ```python
 detail_tool = gi.tools.show_tool(list_tool[0]['id'],io_details=True)
@@ -152,7 +188,7 @@ gi.tools.run_tool(new_history['id'], detail_tool['id'], myinputs)
 ```
 
 ---
-* Les workflows :
+### Workflows Object
     * Qu'est ce qu'il faut pour executer un workflow
 ```python
 help(gi.workflows.run_workflow)
@@ -175,6 +211,8 @@ detailworkflow = gi.workflows.show_workflow(mon_workflow[0]['id'])
 ```
 
 ---
+### Workflows Object
+
 * Les workflows :
     * Construisez le dataset_map (`cle = "cle de l'input du workflow" valeur = {id : 'id d'une data', src : 'localisation de la data'}`)
 ```python
