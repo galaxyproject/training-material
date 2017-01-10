@@ -204,7 +204,19 @@ data_history = gi.histories.upload_dataset_from_library(new_history['id'],
 
 ---
 ### Tools Object
-* To run a tool, its ID is needed:
+* To run a tool, use the run_tool method from the tools class:
+```asciidoc
+      run_tool(self, history_id, tool_id, tool_inputs)
+      runs tool specified by tool_id in history indicated by history_id with inputs from
+      dict tool_inputs.
+      param history_id: encoded ID of the history in which to run the tool
+      param tool_id: ID of the tool to be run
+      param tool_inputs: dictionary of input datasets and parameters
+        for the tool (see below)
+
+      The *tool_inputs* dict should contain input datasets and parameters in the (largely undocumented) format used by the Galaxy API.
+```
+      its ID is needed:
       <img src="../images/clue.png" width="30">   help(gi.tools.run_tool)
 * Get the samtools sort tool id
       <img src="../images/clue.png" width="30">   its name in "sort"
