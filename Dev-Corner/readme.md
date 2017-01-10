@@ -9,25 +9,25 @@ Here, you will find some materials to learn how to contribute to Galaxy project.
 
 Several deck of slides are available for this topic:
 
-- [General introduction about Galaxy and development in Galaxy](http://bgruening.github.io/training-material/Dev-Corner/slides/)
+- [General introduction about Galaxy and development in Galaxy](http://galaxyproject.github.io/training-material/Dev-Corner/slides/)
 - Slide deck related to the tutorials:
-    - [Tool development and integration into Galaxy](http://bgruening.github.io/training-material/Dev-Corner/slides/tool_integration.html)
-    - [Contributing with GitHub](http://bgruening.github.io/training-material/Dev-Corner/slides/github_contribution.html)
-    - [Tool Shed](http://bgruening.github.io/training-material/Dev-Corner/slides/toolshed.html)
+    - [Tool development and integration into Galaxy](http://galaxyproject.github.io/training-material/Dev-Corner/slides/tool_integration.html)
+    - [Contributing with GitHub](http://galaxyproject.github.io/training-material/Dev-Corner/slides/github_contribution.html)
+    - [Tool Shed](http://galaxyproject.github.io/training-material/Dev-Corner/slides/toolshed.html)
 
 - **Help needed** for those topics:
-    - [Data source integration](http://bgruening.github.io/training-material/Dev-Corner/slides/data_source_integration.html)
-    - [Visualizations in Galaxy](http://bgruening.github.io/training-material/Dev-Corner/slides/visualizations.html)
+    - [Data source integration](http://galaxyproject.github.io/training-material/Dev-Corner/slides/data_source_integration.html)
+    - [Visualizations in Galaxy](http://galaxyproject.github.io/training-material/Dev-Corner/slides/visualizations.html)
 
 # Tutorials (coming soon)
 
 **Help needed** to build 3 tutorials with hands-on for this topic:
 
-- [Tool development and integration into Galaxy](https://github.com/bgruening/training-material/issues/74)
-- [Data source integration](https://github.com/bgruening/training-material/issues/76)
-- [Visualizations in Galaxy](https://github.com/bgruening/training-material/issues/77)
+- [Tool development and integration into Galaxy](https://github.com/galaxyproject/training-material/issues/74)
+- [Data source integration](https://github.com/galaxyproject/training-material/issues/76)
+- [Visualizations in Galaxy](https://github.com/galaxyproject/training-material/issues/77)
 
-## Galaxy instance ([under construction](https://github.com/bgruening/training-material/issues/78))
+## Galaxy instance ([under construction](https://github.com/galaxyproject/training-material/issues/78))
 
 For these tutorials, you can use the [dedicated Docker image](docker/README.md):
 

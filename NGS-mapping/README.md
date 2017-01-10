@@ -5,9 +5,9 @@ After [quality control](../NGS-QC/README.md), mapping sequences on reference gen
 
 # Slides
 
-Several deck of slides are available for this topic:
+A deck of slides is available for this topic:
 
-- [General introduction about mapping](http://bgruening.github.io/training-material/NGS-mapping/slides/)
+- [General introduction about mapping](http://galaxyproject.github.io/training-material/NGS-mapping/slides/)
 
 # Tutorials
 
