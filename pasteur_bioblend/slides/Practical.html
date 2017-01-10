@@ -4,7 +4,7 @@
     <title>BioBlend_API</title>
     <meta charset="utf-8">
     <style>
-       .left-column5 {
+      .left-column5 {
       width: 5%;
       float: left;
       }
@@ -24,11 +24,19 @@
       width: 5%;
       float: right;
       }
-
+      
+      .reduce70 {
+      font-size: 70%
+      }
+      
+      .reduce90 {
+      font-size: 90%
+      }
+      
       @import url("../shared/css/fonts.css");
 
       body { font-family: 'Droid Serif'; }
-      h1, h2, h3, h4, h5 {
+      h1, h2, h3, h4, h5, h6 {
         font-family: 'Yanone Kaffeesatz';
         font-weight: normal;
       }
@@ -113,7 +121,8 @@ gi = GalaxyInstance(url="http://127.0.0.1:8080", key="your key")
 
 
 ---
-### Histories Object
+.right-column5[.reduce70[*history_id*]]
+.left-column95[### Histories Object]
 
 * Try to get your histories list with BioBlend using the online documentation:  
 [http://bioblend.readthedocs.org](http://bioblend.readthedocs.org)
@@ -122,7 +131,8 @@ gi = GalaxyInstance(url="http://127.0.0.1:8080", key="your key")
 *it will be our work history for this tutorial*
 
 ---
-### Histories Object
+.right-column5[.reduce70[*history_id*]]
+.left-column95[### Histories Object]
 
 * Try to get your histories list with BioBlend using the online documentation:  
 [http://bioblend.readthedocs.org](http://bioblend.readthedocs.org)
@@ -142,7 +152,8 @@ new_history = gi.histories.create_history(name='my_history')
 ]
 
 ---
-### Histories Object
+.right-column5[.reduce70[*history_id*]]
+.left-column95[### Histories Object]
 
 * Try to get your histories list with BioBlend using the online documentation:  
 [http://bioblend.readthedocs.org](http://bioblend.readthedocs.org)
@@ -172,7 +183,8 @@ help(gi.histories.upload_dataset_from_library)
 ```
 
 ---
-### Librairies Object
+.right-column5[.reduce70[*history_id*]]
+.left-column95[### Librairies Object]
 
 * Check if there is a method to upload a data from your filesystem
 
@@ -196,7 +208,8 @@ you will need your role id, look for the method *gi.roles*
 * import a BAM file in your library
 
 ---
-### Librairies Object
+.right-column5[.reduce70[*history_id*]]
+.left-column95[### Librairies Object]
 
 * Check if there is a method to upload a data from your filesystem
       
@@ -237,7 +250,8 @@ list_data = gi.libraries.upload_file_from_local_path(new_lib['id'], local_path)
 
 
 ---
-### Librairies Object
+.right-column5[.reduce70[*history_id*]]
+.left-column95[### Librairies Object]
 
 * Check if there is a method to upload a data from your filesystem
 
@@ -281,18 +295,54 @@ data_history = gi.histories.upload_dataset_from_library(new_history['id'],
 ```
 
 ---
-### Tools Object
+.right-column5[.reduce70[*history_id tool_id*]]
+.left-column95[### Tools Object]
+
 * To run a tool, its ID is needed:
-      <img src="../images/clue.png" width="30"/>   help(gi.tools.run_tool)
+
+.left-column5[
+<img src="../images/clue.png" width="30"/>
+]
+.right-column95[
+```python
+help(gi.tools.run_tool)
+```
+]
+
 * Get the samtools sort tool id
-      <img src="../images/clue.png" width="30"/>   its name in "sort"
+
+.left-column5[
+<img src="../images/clue.png" width="30"/>
+]
+.right-column95[
+its name is "sort"
+]
 
 ---
-### Tools Object
+.right-column5[.reduce70[*history_id tool_id*]]
+.left-column95[### Tools Object]
+
 * To run a tool, its ID is needed:
-      <img src="../images/clue.png" width="30"/>   help(gi.tools.run_tool)
+
+.left-column5[
+<img src="../images/clue.png" width="30"/>
+]
+.right-column95[
+```python
+help(gi.tools.run_tool)
+```
+]
+
 * Get the samtools sort tool id
-      <img src="../images/clue.png" width="30"/>   its name in "sort"
+
+.left-column5[
+<img src="../images/clue.png" width="30"/>
+]
+
+.right-column95[
+its name is "sort"
+]
+
 
 ```python
 list_tool = gi.tools.get_tools(name='sort')
