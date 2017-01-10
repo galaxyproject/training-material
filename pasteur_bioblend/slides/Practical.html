@@ -49,7 +49,7 @@
 
 name: start
 
-###Before we start
+### Before we start
 1. Authentication for Bioblend - Get your API key:
 	* On your Galaxy, click on the User tab and ont the "API Keys" line
 	* Click on "Generate a new key now"
@@ -68,7 +68,7 @@ name: start
 
 ---
 
-###Goal
+### Goal
 1. Get familiar with BioBlend with ipython
 2. Launch a Galaxy job / Visualize your actions with Galaxy
 3. Launch a Galaxy workflow / Visualize your actions with Galaxy
@@ -98,16 +98,16 @@ gi = GalaxyInstance(url="http://127.0.0.1:8080", key="your key")
 
 ---
 
-### Understanding the run_tool method
+### To launch a Galaxy job
 
-* To launch a Galaxy job, the method run_tool is needed:
-	* The help command lets the user know which elements
+* Understanding the run_tool method; **run_tool** method:
+	* The help command lets the user know what are the arguments
         ```python
         help(gi.tools.run_tool)
         ```
-        ```asciidoc
+        ```asciicode
         run_tool(self, history_id, tool_id, tool_inputs) method of bioblend.galaxy.tools.ToolClient instance
-            Runs tool specified by *tool_id* in history indicated by *history_id* with inputs from *dict* *tool_inputs*.
+            Runs tool specified by **tool_id** in history indicated by *history_id* with inputs from *dict* *tool_inputs*.
 
             :type tool_inputs: dict
             :param tool_inputs: dictionary of input datasets and parameters for the tool (see below)
@@ -117,28 +117,28 @@ gi = GalaxyInstance(url="http://127.0.0.1:8080", key="your key")
     * To resume, in this first part, we need to retrieve:
         1. A *history_id*, where the input data is and where the output data will be
         2. A *tool_id*, which will tell Galaxy which tool to execute
-        3. *tool_inputs*, the data used to run the tool
+        3. *tool_inputs*, dictionary storing the data used to run the tool
 
 
 ---
 .right-column5[.reduce70[*history_id*]]
 .left-column95[### Histories Object]
 
-* Try to get your histories list with BioBlend using the online documentation:  
-[http://bioblend.readthedocs.org](http://bioblend.readthedocs.org)
-
-* Create a new history:  
-*it will be our work history for this tutorial*
+* Try to get your histories list with BioBlend 
+* Create a new history (*It will be our work history for this tutorial*)
+      
+.left-column5[<img src="../images/clue.png" width="30"/>] [http://bioblend.readthedocs.org](http://bioblend.readthedocs.org)
+.right-column5[<img src="../images/yourturn.jpg" width="100"/>] 
 
 ---
 .right-column5[.reduce70[*history_id*]]
 .left-column95[### Histories Object]
 
-* Try to get your histories list with BioBlend using the online documentation:  
-[http://bioblend.readthedocs.org](http://bioblend.readthedocs.org)
-
-* Create a new history:  
-*it will be our work history for this tutorial*
+* Try to get your histories list with BioBlend 
+* Create a new history (*It will be our work history for this tutorial*)
+      
+.left-column5[<img src="../images/clue.png" width="30"/>] [http://bioblend.readthedocs.org](http://bioblend.readthedocs.org)
+.right-column5[<img src="../images/yourturn.jpg" width="100"/>] 
 
 
 ```python
@@ -146,35 +146,44 @@ list_histories = gi.histories.get_histories()
 
 new_history = gi.histories.create_history(name='my_history')
 ```
-
-.left-column95[
-* Now that your history is created, you will need to upload some data in it.
-]
-
 ---
-.right-column5[.reduce70[*history_id*]]
-.left-column95[### Histories Object]
+### Histories Object
 
-* Try to get your histories list with BioBlend using the online documentation:  
-[http://bioblend.readthedocs.org](http://bioblend.readthedocs.org)
-
-* Create a new history:  
-*it will be our work history for this tutorial*
+* Try to get your histories list with BioBlend 
+* Create a new history (*It will be our work history for this tutorial*)
+      
+.left-column5[<img src="../images/clue.png" width="30"/>] [http://bioblend.readthedocs.org](http://bioblend.readthedocs.org)
+.right-column5[<img src="../images/yourturn.jpg" width="100"/>] 
 
 
 ```python
 list_histories = gi.histories.get_histories()
 
 new_history = gi.histories.create_history(name='my_history')
-```
-
-.left-column95[
+```      
+      
 * Now that your history is created, you will need to upload some data in it.
-]
-.right-column5[
-<img src="../images/yourturn.jpg" width="50"/>
-]
 
+---
+.right-column5[.reduce70[*history_id*]]
+.left-column95[### Histories Object]
+
+* Try to get your histories list with BioBlend 
+* Create a new history (*It will be our work history for this tutorial*)
+      
+.left-column5[<img src="../images/clue.png" width="30"/>] [http://bioblend.readthedocs.org](http://bioblend.readthedocs.org)
+.right-column5[<img src="../images/yourturn.jpg" width="100"/>] 
+
+
+```python
+list_histories = gi.histories.get_histories()
+
+new_history = gi.histories.create_history(name='my_history')
+```      
+
+* Now that your history is created, you will need to upload some data in it.
+
+      
 * No BioBlend method to directly upload data from your file system to a history exists, a data can be uploaded in a history from a Galaxy library
 
 
@@ -189,7 +198,20 @@ help(gi.histories.upload_dataset_from_library)
 * Check if there is a method to upload a data from your filesystem
 
 .left-column5[
-<img src="../images/yourturn.jpg" width="50"/>
+<img src="../images/clue.png" width="30"/>
+]
+.right-column95[
+```python
+help(gi.libraries.upload_file_from_local_path)
+```
+]
+---
+### Librairies Object
+
+* Check if there is a method to upload a data from your filesystem
+
+.left-column5[
+<img src="../images/clue.png" width="30"/>
 ]
 .right-column95[
 ```python
@@ -203,10 +225,10 @@ help(gi.libraries.upload_file_from_local_path)
 <img src="../images/clue.png" width="30"/>
 ]
 .right-column95[
-you will need your role id, look for the method *gi.roles*
+you will need your role *id*, look for the methods of the Class *gi.roles*
 ]
-* import a BAM file in your library
-
+.right-column95[<img src="../images/yourturn.jpg" width="100"/>] 
+      
 ---
 .right-column5[.reduce70[*history_id*]]
 .left-column95[### Librairies Object]
@@ -228,38 +250,27 @@ help(gi.libraries.upload_file_from_local_path)
 <img src="../images/clue.png" width="30"/>
 ]
 .right-column95[
-you will need your role id, look for the method *gi.roles*
+you will need your role *id*, look for the methods of the Class *gi.roles*
 ]
-      
-* import a BAM file in your library
-
-      
+          
 ```python
 new_lib = gi.libraries.create_library('my_library')
 gi.libraries.set_library_permissions(new_lib['id'], access_in=['role_id'],
       modify_in=['role_id'], add_in=['role_id'], manage_in=['role_id'])
-list_data = gi.libraries.upload_file_from_local_path(new_lib['id'], local_path)
 ```
-
-.left-column95[
-* Transfer the BAM file from your library in your new history
-]
-.right-column5[
-<img src="../images/yourturn.jpg" width="50"/>
-]
-
-
+      
+* import a BAM file in your library      
+      
 ---
-.right-column5[.reduce70[*history_id*]]
-.left-column95[### Librairies Object]
+### Librairies Object
 
 * Check if there is a method to upload a data from your filesystem
-
+      
 .left-column5[
 <img src="../images/clue.png" width="30"/>
 ]
 .right-column95[
-```python
+```python 
 help(gi.libraries.upload_file_from_local_path)
 ```
 ]
@@ -270,24 +281,65 @@ help(gi.libraries.upload_file_from_local_path)
 <img src="../images/clue.png" width="30"/>
 ]
 .right-column95[
-you will need your role id, look for the method *gi.roles*
+you will need your role *id*, look for the methods of the Class *gi.roles*
 ]
-
-* import a BAM file in your library
-
+          
 ```python
 new_lib = gi.libraries.create_library('my_library')
 gi.libraries.set_library_permissions(new_lib['id'], access_in=['role_id'],
       modify_in=['role_id'], add_in=['role_id'], manage_in=['role_id'])
-list_data = gi.libraries.upload_file_from_local_path(new_lib['id'], local_path)
+```
+      
+* import a BAM file in your library
+```python
+      list_data = gi.libraries.upload_file_from_local_path(new_lib['id'], local_path)
 ```
 
-.left-column95[
 * Transfer the BAM file from your library in your new history
-]
 .right-column5[
-<img src="../images/yourturn.jpg" width="50" />
+<img src="../images/yourturn.jpg" width="50"/>
 ]
+
+      
+---
+.right-column5[.reduce70[*history_id*]]
+.left-column95[### Librairies Object]
+
+* Check if there is a method to upload a data from your filesystem
+      
+.left-column5[
+<img src="../images/clue.png" width="30"/>
+]
+.right-column95[
+```python 
+help(gi.libraries.upload_file_from_local_path)
+```
+]
+
+* Create a library and set the rights to this library
+
+.left-column5[
+<img src="../images/clue.png" width="30"/>
+]
+.right-column95[
+you will need your role *id*, look for the methods of the Class *gi.roles*
+]
+          
+```python
+new_lib = gi.libraries.create_library('my_library')
+gi.libraries.set_library_permissions(new_lib['id'], access_in=['role_id'],
+      modify_in=['role_id'], add_in=['role_id'], manage_in=['role_id'])
+```
+      
+* import a BAM file in your library
+```python
+      list_data = gi.libraries.upload_file_from_local_path(new_lib['id'], local_path)
+```
+* Transfer the BAM file from your library in your new history
+.right-column5[
+<img src="../images/yourturn.jpg" width="50"/>
+]
+      
 
 ```python
 data_history = gi.histories.upload_dataset_from_library(new_history['id'],
@@ -295,79 +347,51 @@ data_history = gi.histories.upload_dataset_from_library(new_history['id'],
 ```
 
 ---
-.right-column5[.reduce70[*history_id tool_id*]]
-.left-column95[### Tools Object]
+### Tools Object (1/3)
 
-* To run a tool, its ID is needed:
-
-.left-column5[
-<img src="../images/clue.png" width="30"/>
-]
-.right-column95[
-```python
-help(gi.tools.run_tool)
-```
-]
+* To run a tool, its 'id' is needed:
+      <img src="../images/clue.png" width="30"/>  help(gi.tools.run_tool)
 
 * Get the samtools sort tool id
-
-.left-column5[
-<img src="../images/clue.png" width="30"/>
-]
-.right-column95[
-its name is "sort"
-]
+      <img src="../images/clue.png" width="30"/>  its name in "sort"
 
 ---
-.right-column5[.reduce70[*history_id tool_id*]]
-.left-column95[### Tools Object]
-
-* To run a tool, its ID is needed:
-
-.left-column5[
-<img src="../images/clue.png" width="30"/>
-]
-.right-column95[
-```python
-help(gi.tools.run_tool)
-```
-]
+### Tools Object (1/3)
+* To run a tool, its 'id' is needed:
+      <img src="../images/clue.png" width="30"/>  help(gi.tools.run_tool)
 
 * Get the samtools sort tool id
-
-.left-column5[
-<img src="../images/clue.png" width="30"/>
-]
-
-.right-column95[
-its name is "sort"
-]
-
+      <img src="../images/clue.png" width="30"/>  its name in "sort"
 
 ```python
 list_tool = gi.tools.get_tools(name='sort')
 ```
 
-* tool_inputs, qu'est ce que c'est? (pas beaucoup de doc, c'est un dict python)
-* Construction d'un objet tool_inputs a l'aide de methodes specifiques :
+---
+### Tools Object (2/3)
+* To run a tool, the dictionary *tool_inputs* is needed
+
+* It is a python dictionary defined by specific methods from the bioblend.galaxy.tools.inputs Class
+
 
 ```python
 from bioblend.galaxy.tools.inputs import inputs
 ```
 
-* la methode inputs est en fait une classe InputsBuilder help(inputs)
-* Pour chaque input defini dans le xml d'un outil on peut lui attribuer une valeur avec les methodes set_param ou set_dataset_param de la classe InputsBuilder
-* En cas d'input de type data il faut utiliser la methode set_dataset_param
+* The *inputs* method is a Class called InputsBuilder:<img src="../images/clue.png" width="30"/>  help(inputs)
+* Each input defined in the tool XML needs to be defined using the methods *set_param* or *set_dataset_param* from InputsBuilder Class
+ ==> If the input format is "data", the method to use is *set_dataset_param*
 
-
+* Here is an example:       
 ```python
 myinputs = inputs().set_param("param1",'value').set_dataset_param("data1",'dataset_id',src="hda")
 ```
-
-.center[**Il nous faut plus d'information sur l'outil**]
+      
+.center[**To run the tool samtools sort, we need more information on the tool itself**]       
+      
 
 ---
-### Tools Object
+### Tools Object (3/3)
 * Recuperez des details sur l'outil `samtool sort`
 
 ```python
