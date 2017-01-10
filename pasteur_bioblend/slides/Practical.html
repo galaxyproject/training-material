@@ -7,7 +7,7 @@
       @import url("../shared/css/fonts.css");
 
       body { font-family: 'Droid Serif'; }
-      h1, h2, h3 {
+      h1, h2, h3, h4, h5 {
         font-family: 'Yanone Kaffeesatz';
         font-weight: normal;
       }
@@ -15,31 +15,31 @@
     </style>
   </head>
   <body>
-    <textarea id="source">
+  <textarea id="source">
 
 
 name: start
 
-####Before we start
+###Before we start
 1. Authentication for Bioblend - Get your API key:
 	* On your Galaxy, click on the User tab and ont the "API Keys" line
 	* Click on "Generate a new key now"
 
 2. Install the tools and workflow on your Galaxy:
-	1. The tools:  
+	1. The tools:
 	Admin tab
 		* In the Tools and Tool Shed category, click on the line "Search Tool Shed"
 		* Select the "Galaxy Main Tool Shed", and the "Browse valid repositories" line
 		* Search and install "bam_to_sam" and "samtools_sort" from IUC owner using the
 	2. The workflow:
 		* Get the workflow file (.ga) from https://github.com/fmareuil/formationbioblend
-		* Import the workflow in galaxy:  
+		* Import the workflow in galaxy:
 		Click on Workflow tab and "Upload or import workflow" button
 	3. Launch ipython on a terminal
 
 ---
 
-####Goal
+###Goal
     1. Get familiar with BioBlend with ipython
     2. Launch a Galaxy job / Visualize your actions with Galaxy
     3. Launch a Galaxy workflow / Visualize your actions with Galaxy
@@ -60,7 +60,7 @@ from bioblend.galaxy import GalaxyInstance
 gi = GalaxyInstance(url="http://127.0.0.1:8080", key="your key")
 ```
 ### Why ipython:
-* Automatic completion  
+* Automatic completion
 ==> type **gi.** and the tab puis appuyez sur la touche tab key
 
 * To better understand BioBlend methods and classes, you can use
@@ -94,19 +94,19 @@ gi = GalaxyInstance(url="http://127.0.0.1:8080", key="your key")
 ---
 ### Histories Object
 
-* Try to get your histories list with BioBlend using the online documentation:  
+* Try to get your histories list with BioBlend using the online documentation:
 [http://bioblend.readthedocs.org](http://bioblend.readthedocs.org)
 
-* Create a new history:  
+* Create a new history:
 *it will be our work history for this tutorial*
 
 ---
 ### Histories Object
 
-* Try to get your histories list with BioBlend using the online documentation:  
+* Try to get your histories list with BioBlend using the online documentation:
 [http://bioblend.readthedocs.org](http://bioblend.readthedocs.org)
 
-* Create a new history:  
+* Create a new history:
 *it will be our work history for this tutorial*
 
 
@@ -122,10 +122,10 @@ new_history = gi.histories.create_history(name='my_history')
 ---
 ### Histories Object
 
-* Try to get your histories list with BioBlend using the online documentation:  
+* Try to get your histories list with BioBlend using the online documentation:
 [http://bioblend.readthedocs.org](http://bioblend.readthedocs.org)
 
-* Create a new history:  
+* Create a new history:
 *it will be our work history for this tutorial*
 
 
@@ -146,26 +146,75 @@ help(gi.histories.upload_dataset_from_library)
 ---
 ### Librairies Object
 
-* Verifier s'il y a une methode pour uploader une donnee depuis le systeme de fichiers  
-*help(gi.libraries.upload_file_from_local_path)*
-* Creez une library, positionnez correctement les droits galaxy sur la "library" (il vous faudra l'id' de votre role, regardez `gi.roles`) puis importez un fichier bam dedans
+* Check if there is a method to upload a data from your filesystem
+<img src="../images/yourturn.jpg" width="50">   help(gi.libraries.upload_file_from_local_path)
+* Create a library and set the rights to this library
+    <img src="../images/clue.png" width="30">   you will need your role id, look for the method `gi.roles`
+* import a BAM file in your library
+
+---
+### Librairies Object
+
+* Check if there is a method to upload a data from your filesystem
+    <img src="../images/clue.png" width="30">
+      ```python
+         help(gi.libraries.upload_file_from_local_path)
+      ```
+* Create a library and set the rights to this library
+    <img src="../images/clue.png" width="30">   you will need your role id, look for the method *gi.roles*
+* import a BAM file in your library
 
 ```python
 new_lib = gi.libraries.create_library('my_library')
-gi.libraries.set_library_permissions(new_lib['id'], access_in=['role_id'], modify_in=['role_id'], add_in=['role_id'], manage_in=['role_id'])
+gi.libraries.set_library_permissions(new_lib['id'], access_in=['role_id'],
+      modify_in=['role_id'], add_in=['role_id'], manage_in=['role_id'])
 list_data = gi.libraries.upload_file_from_local_path(new_lib['id'], local_path)
 ```
 
-* Copiez le fichier bam de votre library dans un nouveau history
+* Transfer the BAM file from your library in your new history
+<center><img src="../images/yourturn.jpg" width="50" </center>
+
+
+---
+### Librairies Object
+
+* Check if there is a method to upload a data from your filesystem
+    <img src="../images/clue.png" width="30">
+      ```python
+      help(gi.libraries.upload_file_from_local_path)
+      ```
+* Create a library and set the rights to this library
+    <img src="../images/clue.png" width="30">   you will need your role id, look for the method `gi.roles`
+* import a BAM file in your library
 
 ```python
-data_history = gi.histories.upload_dataset_from_library(new_history['id'], list_data[0]['id'])
+new_lib = gi.libraries.create_library('my_library')
+gi.libraries.set_library_permissions(new_lib['id'], access_in=['role_id'],
+      modify_in=['role_id'], add_in=['role_id'], manage_in=['role_id'])
+list_data = gi.libraries.upload_file_from_local_path(new_lib['id'], local_path)
+```
+
+* Transfer the BAM file from your library in your new history
+<center><img src="../images/yourturn.jpg" width="50" </center>
+
+```python
+data_history = gi.histories.upload_dataset_from_library(new_history['id'],
+      list_data[0]['id'])
 ```
 
 ---
 ### Tools Object
-* Pour executer un outil il me faut aussi son 'id', help(gi.tools.run_tool)
-* Recuperer l'id de l'outil samtools sort, son nom dans le xml est sort
+* To run a tool, its ID is needed:
+      <img src="../images/clue.png" width="30">   help(gi.tools.run_tool)
+* Get the samtools sort tool id
+      <img src="../images/clue.png" width="30">   its name in "sort"
+
+---
+### Tools Object
+* To run a tool, its ID is needed:
+      <img src="../images/clue.png" width="30">   help(gi.tools.run_tool)
+* Get the samtools sort tool id
+      <img src="../images/clue.png" width="30">   its name in "sort"
 
 ```python
 list_tool = gi.tools.get_tools(name='sort')
@@ -254,7 +303,7 @@ gi.workflows.run_workflow(detailworkflow['id'], dataset_map=dataset_map, history
 
 [return](index#plan)
     </textarea>
-    <script src="../shared/js/remark-latest.min.js">
+  <script src="../shared/js/remark-latest.min.js">
     </script>
     <script>
       var slideshow = remark.create();
