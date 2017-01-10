@@ -4,6 +4,27 @@
     <title>BioBlend_API</title>
     <meta charset="utf-8">
     <style>
+       .left-column5 {
+      width: 5%;
+      float: left;
+      }
+
+     .right-column95 {
+      width: 93%;
+      float: right;
+      }
+
+
+      .left-column95 {
+      width: 93%;
+      float: left;
+      }
+
+     .right-column5 {
+      width: 5%;
+      float: right;
+      }
+
       @import url("../shared/css/fonts.css");
 
       body { font-family: 'Droid Serif'; }
@@ -11,7 +32,7 @@
         font-family: 'Yanone Kaffeesatz';
         font-weight: normal;
       }
-      .remark-code, .remark-inline-code { font-family: 'Droid Serif'; }
+      .remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
     </style>
   </head>
   <body>
@@ -122,10 +143,10 @@ new_history = gi.histories.create_history(name='my_history')
 ---
 ### Histories Object
 
-* Try to get your histories list with BioBlend using the online documentation:
+* Try to get your histories list with BioBlend using the online documentation:  
 [http://bioblend.readthedocs.org](http://bioblend.readthedocs.org)
 
-* Create a new history:
+* Create a new history:  
 *it will be our work history for this tutorial*
 
 
@@ -135,7 +156,13 @@ list_histories = gi.histories.get_histories()
 new_history = gi.histories.create_history(name='my_history')
 ```
 
-* Now that your history is created, you will need to upload some data in it <img src="../images/yourturn.jpg" width="50">.
+.left-column95[
+* Now that your history is created, you will need to upload some data in it.
+]
+.right-column5[
+<img src="../images/yourturn.jpg" width="50"/>
+]
+
 * No BioBlend method to directly upload data from your file system to a history exists, a data can be uploaded in a history from a Galaxy library
 
 
@@ -147,23 +174,51 @@ help(gi.histories.upload_dataset_from_library)
 ### Librairies Object
 
 * Check if there is a method to upload a data from your filesystem
-<img src="../images/yourturn.jpg" width="50">   help(gi.libraries.upload_file_from_local_path)
+      
+.left-column5[
+<img src="../images/yourturn.jpg" width="50"/>
+]
+.right-column95[
+```python
+help(gi.libraries.upload_file_from_local_path)
+```
+]
+      
 * Create a library and set the rights to this library
-    <img src="../images/clue.png" width="30">   you will need your role id, look for the method `gi.roles`
+  
+.left-column5[
+<img src="../images/clue.png" width="30"/>
+]
+.right-column95[
+you will need your role id, look for the method `gi.roles`
+]
 * import a BAM file in your library
 
 ---
 ### Librairies Object
 
 * Check if there is a method to upload a data from your filesystem
-    <img src="../images/clue.png" width="30">
-      ```python
-         help(gi.libraries.upload_file_from_local_path)
-      ```
+      
+.left-column5[
+<img src="../images/clue.png" width="30"/>]
+.right-column95[
+```python 
+help(gi.libraries.upload_file_from_local_path)
+```
+]
+
 * Create a library and set the rights to this library
-    <img src="../images/clue.png" width="30">   you will need your role id, look for the method *gi.roles*
+
+.left-column5[
+<img src="../images/clue.png" width="30"/>
+]
+.right-column95[
+you will need your role id, look for the method *gi.roles*
+]
+      
 * import a BAM file in your library
 
+      
 ```python
 new_lib = gi.libraries.create_library('my_library')
 gi.libraries.set_library_permissions(new_lib['id'], access_in=['role_id'],
@@ -171,20 +226,24 @@ gi.libraries.set_library_permissions(new_lib['id'], access_in=['role_id'],
 list_data = gi.libraries.upload_file_from_local_path(new_lib['id'], local_path)
 ```
 
+.left-column95[
 * Transfer the BAM file from your library in your new history
-<center><img src="../images/yourturn.jpg" width="50" </center>
+]
+.right-column5[
+<img src="../images/yourturn.jpg" width="50"/>
+]
 
 
 ---
 ### Librairies Object
 
 * Check if there is a method to upload a data from your filesystem
-    <img src="../images/clue.png" width="30">
+    <img src="../images/clue.png" width="30"/>
       ```python
       help(gi.libraries.upload_file_from_local_path)
       ```
 * Create a library and set the rights to this library
-    <img src="../images/clue.png" width="30">   you will need your role id, look for the method `gi.roles`
+    <img src="../images/clue.png" width="30"/>   you will need your role id, look for the method `gi.roles`
 * import a BAM file in your library
 
 ```python
@@ -195,7 +254,7 @@ list_data = gi.libraries.upload_file_from_local_path(new_lib['id'], local_path)
 ```
 
 * Transfer the BAM file from your library in your new history
-<center><img src="../images/yourturn.jpg" width="50" </center>
+<img src="../images/yourturn.jpg" width="50" />
 
 ```python
 data_history = gi.histories.upload_dataset_from_library(new_history['id'],
@@ -205,16 +264,16 @@ data_history = gi.histories.upload_dataset_from_library(new_history['id'],
 ---
 ### Tools Object
 * To run a tool, its ID is needed:
-      <img src="../images/clue.png" width="30">   help(gi.tools.run_tool)
+      <img src="../images/clue.png" width="30"/>   help(gi.tools.run_tool)
 * Get the samtools sort tool id
-      <img src="../images/clue.png" width="30">   its name in "sort"
+      <img src="../images/clue.png" width="30"/>   its name in "sort"
 
 ---
 ### Tools Object
 * To run a tool, its ID is needed:
-      <img src="../images/clue.png" width="30">   help(gi.tools.run_tool)
+      <img src="../images/clue.png" width="30"/>   help(gi.tools.run_tool)
 * Get the samtools sort tool id
-      <img src="../images/clue.png" width="30">   its name in "sort"
+      <img src="../images/clue.png" width="30"/>   its name in "sort"
 
 ```python
 list_tool = gi.tools.get_tools(name='sort')
