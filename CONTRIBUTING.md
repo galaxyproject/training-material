@@ -1,4 +1,4 @@
-gitContributing to Galaxy Training material
+Contributing to Galaxy Training material
 ===
 
 :+1::tada: First off, thanks for taking the time to contribute! :tada::+1:
