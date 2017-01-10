@@ -333,7 +333,7 @@ data_history = gi.histories.upload_dataset_from_library(new_history['id'],
 ```
 
 ---
-### Tools Object
+### Tools Object (1/3)
 
 * To run a tool, its 'id' is needed:
       <img src="../images/clue.png" width="30"/>  help(gi.tools.run_tool)
@@ -342,7 +342,7 @@ data_history = gi.histories.upload_dataset_from_library(new_history['id'],
       <img src="../images/clue.png" width="30"/>  its name in "sort"
 
 ---
-### Tools Object
+### Tools Object (1/3)
 * To run a tool, its 'id' is needed:
       <img src="../images/clue.png" width="30"/>  help(gi.tools.run_tool)
 
@@ -354,30 +354,30 @@ list_tool = gi.tools.get_tools(name='sort')
 ```
 
 ---
-### Tools Object
-* To run a tool, the dictionnary *tool_inputs* needs to be built
+### Tools Object (2/3)
+* To run a tool, the dictionary *tool_inputs* is needed
 
-* What is tool_inputs, the documentation is not complete but it is a python dictionary
+* It is a python dictionary defined by specific methods from the bioblend.galaxy.tools.inputs Class
 
-* Specific methods are needed to build the *tool_inputs* object:
 
 ```python
 from bioblend.galaxy.tools.inputs import inputs
 ```
 
-* The input method is a Class called InputsBuilder:<img src="../images/clue.png" width="30"/>  help(inputs)
-* Each Pour chaque input defini dans le xml d'un outil on peut lui attribuer une valeur avec les methodes set_param ou set_dataset_param de la classe InputsBuilder
-* En cas d'input de type data il faut utiliser la methode set_dataset_param
+* The *inputs* method is a Class called InputsBuilder:<img src="../images/clue.png" width="30"/>  help(inputs)
+* Each input defined in the tool XML needs to be defined using the methods *set_param* or *set_dataset_param* from InputsBuilder Class
+ ==> If the input format is "data", the method to use is *set_dataset_param*
 
-
+* Here is an example:       
 ```python
 myinputs = inputs().set_param("param1",'value').set_dataset_param("data1",'dataset_id',src="hda")
 ```
-
-.center[**Il nous faut plus d'information sur l'outil**]
+      
+.center[**To run the tool samtools sort, we need more information on the tool itself**]       
+      
 
 ---
-### Tools Object
+### Tools Object (3/3)
 * Recuperez des details sur l'outil `samtool sort`
 
 ```python
