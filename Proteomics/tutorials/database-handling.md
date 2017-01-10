@@ -68,12 +68,14 @@ Depending on the search engine you are using you might need to merge all fasta e
 
 > ### :pencil2: Hands-on: Merging databases
 > First we will add the tag "CONTAMINANT" to each entry in the cRAP database.
+>
 > 1. Run **FASTA-to-Tabular** :wrench: on your crap database.
 > 2. Run **Add column** :wrench: on the new output. In the field `Add this value` enter "CONTAMINANT" and execute.
 > 3. Run **Tabular-to-FASTA** :wrench:. Use column 1 and column 3 as Title columns and column 2 as sequence column.
 > 4. Rename the output to "Tagged cRAP database".
 >	
 > Now we can merge the databases:
+>
 > 1. Run **FASTA Merge Files and Filter Unique Sequences** :wrench: on the main database and the tagged cRAP database.
 >
 >	> ### Optional: Merging mycoplasma databases
