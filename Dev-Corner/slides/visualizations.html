@@ -9,6 +9,19 @@ logo: "GTN"
 
 ---
 
+## Overview
+
+- :mortar_board: These slides:
+  - Various ways to visualize your data in Galaxy
+  - A closer look at Plugins
+  - A closer look at Interactive Environments
+
+
+- :wrench: Available Tutorials:
+  - Creating a visualization plugin
+
+---
+
 ## Why visualizations?
 
 - Anscombe's Quartet
@@ -36,30 +49,29 @@ var y: ~-4.125, corr 0.816, lr: y=0.5x + 3
 
 ## Types of visualizations in Galaxy
 
-- As Galaxy tool (e.g. JBrowse, iReport)
-- As 3rd party app (e.g. IGV, UCSC)
+- Galaxy tools (e.g. JBrowse, Krona, ..)
+- 3rd party app (e.g. IGV, UCSC)
 - Trackster
-- Interactive environments
-- As visualization *plugin*
+- Visualization *plugins* (e.g. Charts)
+- Interactive Environments (GIE)
 
 ---
 
 ### Pros and cons
 
-| Type      | Interactive | Workflow | Toolshed | Tweakable | SS indexing        |
+| Type      | Interactive | Workflow | Toolshed | Tweakable  | SS indexing        |
 |-----------|-------------|----------|-----------|-----------|--------------------|
-| Tool      | -           | +        | +         | +         | -                  |
+| Tool      | +/-         | +        | +         | +         | -                  |
 | 3rd party | +           | -        | -         | -         | +                  |
 | Trackster | +           | -        | -         | -         | +                  |
-| IE        | +           | -        | -         | +         | -                  |
-| plugin    | +           | -        | -         | +         | -                  |
-
+| Plugins   | +           | -        | -         | +         | -                  |
+| GIEs      | +           | -        | -         | +         | -                  |
 
 .footnote[*shed: installable via tool shed = functional tests, dependency management and versioning]
 
 ---
 
-## Galaxy visualization: plugins
+## Plugins
 
 - Plugin development directory: `$GALAXY_ROOT/config/plugins`
 - **Example** (in mainline)
@@ -69,17 +81,21 @@ var y: ~-4.125, corr 0.816, lr: y=0.5x + 3
 
 ---
 
-## Writing a viz plugin: elements
+## Plugins
 
 - Elements of visualization plugin:
-    * Configured Datatype: e.g. BAM
-    * Description: name, version, description, license
+    * Configured Datatype (e.g. BAM)
+    * Description
+       - name
+       - version
+       - description
+       - license
     * HTML + js (template)
         - Compiled page has variables replaced (e.g. urls)
 
 ---
 
-## Writing a viz plugin: project structure
+## Plugins: Project structure
 
 - For XML file plug visualization into Galaxy:
 ```bash
@@ -96,7 +112,7 @@ mkdir -p $GALAXY_ROOT/config/plugins/$PLUGIN_NAME/static
 ```
 ---
 
-## Writing a viz plugin: xml file
+## Plugins: XML file
 
 ```bash
 $GALAXY_ROOT/config/plugins/$PLUGIN_NAME/config/$PLUGIN_NAME.xml
@@ -110,7 +126,7 @@ $GALAXY_ROOT/config/plugins/$PLUGIN_NAME/config/$PLUGIN_NAME.xml
 
 ---
 
-## Writing a viz plugin: mako file
+## Plugins: Mako file
 
 - For templates of HTML files:
 ```bash
@@ -123,7 +139,7 @@ $GALAXY_ROOT/config/plugins/$PLUGIN_NAME/templates/$PLUGIN_NAME.mako ;
 
 ---
 
-## Writing a viz plugin: mako file
+## Plugins: Mako file
 
 - Access to *hda* **pre** template compilation:
     * `$hda.file_name`
@@ -140,7 +156,7 @@ $GALAXY_ROOT/config/plugins/$PLUGIN_NAME/templates/$PLUGIN_NAME.mako ;
 
 ---
 
-## Writing a viz plugin: mako syntax
+## Plugins: Mako syntax
 
 - Access to *hda* **post** template compilation
     * Essential variables in Python part
@@ -149,7 +165,7 @@ $GALAXY_ROOT/config/plugins/$PLUGIN_NAME/templates/$PLUGIN_NAME.mako ;
 
 ---
 
-## Writing a viz plugin:  javascript and jQuery
+## Plugins:  Javascript and jQuery
 
 - HTML / JS implementation make often use of jQuery
     * Galaxy ships with jQuery
@@ -160,13 +176,13 @@ $GALAXY_ROOT/config/plugins/$PLUGIN_NAME/templates/$PLUGIN_NAME.mako ;
 
 ---
 
-## Writing a viz plugin:  generic template
+## Plugins: Generic template
 
 ![](../images/vis_generic_template.png)
 
 ---
 
-## Writing a viz plugin: static files
+## Plugins: Static files
 
 - External libraries and static files go in `./static` dir:
 
@@ -175,10 +191,10 @@ $GALAXY_ROOT/config/plugins/$PLUGIN_NAME/templates/$PLUGIN_NAME.mako ;
 
 ---
 
-## Summary
+## Plugins: Summary
 
 - Galaxy visualization plugins:
-    * Explicitly Datatype specific
+    * Datatype-specific
     * Written in HTML5 / JS
     * Require minor python / Galaxy ecosystem knowledge
     * Have access to the whole Galaxy system
@@ -190,10 +206,430 @@ $GALAXY_ROOT/config/plugins/$PLUGIN_NAME/templates/$PLUGIN_NAME.mako ;
 
 ---
 
-## More tips and tricks
+## Plugins: More tips and tricks
 
 - Galaxy has UI guidelines with corresponding CSS (https://wiki.galaxyproject.org/VisualizationsRegistry/Cookbook)
 - Look at existing plugins:
     * Galaxy mainline
     * https://github.com/bgruening/galaxytools/tree/master/visualisations
 - API is now very extensive, everything is accessible with jQuery!
+
+---
+
+## Interactive Environments
+
+---
+
+## Interactive Environments: Intro
+
+- Embedded access to third-party application inside of Galaxy
+- Interactively analyze data, access analysis products within Galaxy
+- Bring analysis to the data instead of vice-versa
+  - no need to download/re-upload your data
+
+
+- **Examples:**
+  - Jupyter notebooks
+  - Rstudio
+  - IOBIO (bam/vcf visualisations)
+  - Phinch
+  - ..
+
+.footnote[ Admin Docs: http://bit.ly/28XtGux ]
+
+---
+
+## Interactive Environments: Intro
+
+- Docker Containers are launched on-demand by users..
+- ..and killed automatically when users stop using them
+- Web services embedded securely within Galaxy
+
+
+- Can be bound to specific datatypes (IOBIO/Phinch)
+- Or more general purpose applications (Jupyter/Rstudio)
+  - IE launcher
+
+---
+
+## Interactive Environments: Intro
+
+![](../images/vis_IE_launcher.png)
+
+---
+
+## Interactive Environments: Jupyter
+
+  - General purpose/ multi-dataset
+  - Provides special functions to interact with the Galaxy history (get/put datasets)
+  - Ability to save and load notebooks
+
+![](../images/vis_IE_ipython1.png)
+
+---
+
+## Interactive Environments: Jupyter
+
+![](../images/vis_IE_ipython2.png)
+
+---
+
+## Interactive Environments: Jupyter
+
+![](../images/vis_IE_ipython3.png)
+
+---
+
+## Interactive Environments: IOBIO
+
+- Visualizes single dataset
+- Only available for datasets of specific formats
+
+![](../images/vis_IE_iobio.png)
+
+---
+
+## Interactive Environments: IOBIO
+
+![](../images/vis_IE_iobio2.png)
+
+
+---
+
+## Interactive Environments: Admin
+
+- Prerequisites: NodeJs (npm) and Docker; Galaxy user must be able to talk to the docker daemon
+- Enable IEs in `galaxy.ini`
+  ```bash
+  interactive_environment_plugins_directory = config/plugins/interactive_environments
+  ```
+- Install node proxy
+  ```bash
+  $ cd $GALAXY/lib/galaxy/web/proxy/js/
+  $ npm install .
+  ```
+
+.footnote[ Advanced configurations: http://galaxy.readthedocs.io/en/master/admin/interactive_environments.html]
+
+---
+
+## Interactive Environments: Development
+
+- Not hard to build!
+- All the magic is in:
+  ```bash
+  $GALAXY/config/plugins/interactive_environments/$ie_name/
+  ```
+
+
+| Component                          | File                         |
+|------------------------------------|------------------------------|
+| Visualization Plugin Configuration | ../config/${ie_name}.xml     |
+| IE specific Configuration          | ../config/${ie_name}.ini     |
+| Mako Template                      | ../templates/${ie_name}.mako |
+
+---
+
+## Interactive Environments: Hello World Example
+
+- Hello World GIE available as part of Galaxy Documentation (http://bit.ly/2906ahO)
+- All files in this example available from https://github.com/erasche/hello-world-interactive-environment/
+- Create a GIE that shows the directory listing of `import` folder (datasets loaded into GIE by user)
+
+```bash
+$ tree $GALAXY_ROOT/config/plugins/interactive_environments/helloworld/
+config/plugins/interactive_environments/helloworld/
+├── config
+│   ├── helloworld.ini
+│   ├── helloworld.ini.sample
+│   └── helloworld.xml
+├── static
+│   └── js
+│       └── helloworld.js
+└── templates
+    └── helloworld.mako
+```
+
+---
+
+Create GIE plugin XML file `config/helloworld.xml`
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE interactive_environment SYSTEM "../../interactive_environments.dtd">
+<!-- This is the name which will show up in the User's Browser -->
+<interactive_environment name="HelloWorld">
+  <data_sources>
+    <data_source>
+      <model_class>HistoryDatasetAssociation</model_class>
+
+      <!-- filter which types of datasets are appropriate for this GIE -->
+      <test type="isinstance" test_attr="datatype"
+            result_type="datatype">tabular.Tabular</test>
+      <test type="isinstance" test_attr="datatype"
+            result_type="datatype">data.Text</test>
+      <to_param param_attr="id">dataset_id</to_param>
+    </data_source>
+  </data_sources>
+  <params>
+    <param type="dataset" var_name_in_template="hda" required="true">dataset_id</param>
+  </params>
+  <!-- Be sure that your entrypoint name is correct! -->
+  <entry_point entry_point_type="mako">helloworld.mako</entry_point>
+</interactive_environment>
+```
+
+---
+
+Set up `.ini` file, which controls docker interaction `config/helloworld.ini.sample`
+
+```ini
+[main]
+# Unused
+
+[docker]
+# Command to execute docker. For example `sudo docker` or `docker-lxc`.
+#command = docker {docker_args}
+
+# The docker image name that should be started.
+image = hello-ie
+
+# Additional arguments that are passed to the `docker run` command.
+#command_inject = --sig-proxy=true -e DEBUG=false
+
+# URL to access the Galaxy API with from the spawn Docker container, if empty
+# this falls back to galaxy.ini's galaxy_infrastructure_url and finally to the
+# Docker host of the spawned container if that is also not set.
+#galaxy_url =
+
+# The Docker hostname. It can be useful to run the Docker daemon on a different
+# host than Galaxy.
+#docker_hostname = localhost
+
+[..]
+```
+
+---
+
+- Create mako template `templates/helloworld.mako`
+  - Loads configuration from `ini` file
+  - launches docker container,
+  - builds a URL to the correct endpoint through Galaxy NodeJS proxy
+  - set environment variable `CUSTOM` to be passed to containter
+  - attach dataset selected by user (`hda`)
+
+```mako
+<%namespace name="ie" file="ie.mako" />
+<%
+# Sets ID and sets up a lot of other variables
+ie_request.load_deploy_config()
+
+# Define a volume that will be mounted into the container.
+# This is a useful way to provide access to large files in the container,
+# if the user knows ahead of time that they will need it.
+user_file = ie_request.volume(
+    hda.file_name, '/import/file.dat', how='ro')
+
+# Launch the IE. This builds and runs the docker command in the background.
+ie_request.launch(
+    volumes=[user_file],
+    env_override={
+        'custom': '42'
+    }
+)
+[..]
+```
+
+---
+
+(continued)
+
+```mako
+[..]
+# Only once the container is launched can we template our URLs. The ie_request
+# doesn't have all of the information needed until the container is running.
+url = ie_request.url_template('${PROXY_URL}/helloworld/')
+%>
+
+<html>
+<head>
+${ ie.load_default_js() }
+</head>
+<body>
+<script type="text/javascript">
+${ ie.default_javascript_variables() }
+var url = '${ url }';
+${ ie.plugin_require_config() }
+requirejs(['interactive_environments', 'plugin/helloworld'], function(){
+    load_notebook(url);
+});
+</script>
+<div id="main" width="100%" height="100%">
+</div>
+</body>
+</html>
+```
+
+---
+Lastly we must write the `load_notebook` function, `static/hs/helloworld.js`
+
+```javascript
+function load_notebook(url){
+    $( document ).ready(function() {
+        test_ie_availability(url, function(){
+            append_notebook(url)
+        });
+    });
+}
+```
+
+---
+
+## Interactive Environments: Hello World Example
+
+- The only thing missing now is the GIE (Docker :whale:) container itself
+- Container typically consists of:
+  - Dockerfile
+  - Proxy configuration (e.g. nginx)
+  - Custom startup script/entrypoint
+  - Script to monitor traffic and kill unused containers
+  - The actual application for the users (here: simple python process which serves
+    directory contents of `/import` folder of container)
+
+.footnote[ :whale:]
+---
+
+```dockerfile
+FROM ubuntu:14.04
+# These environment variables are passed from Galaxy to the container
+# and help you enable connectivity to Galaxy from within the container.
+# This means your user can import/export data from/to Galaxy.
+ENV DEBIAN_FRONTEND=noninteractive \
+    API_KEY=none \
+    DEBUG=false \
+    PROXY_PREFIX=none \
+    GALAXY_URL=none \
+    GALAXY_WEB_PORT=10000 \
+    HISTORY_ID=none \
+    REMOTE_HOST=none
+
+RUN apt-get -qq update && \
+    apt-get install --no-install-recommends -y \
+    wget procps nginx python python-pip net-tools nginx
+
+# Our very important scripts. Make sure you've run `chmod +x startup.sh
+# monitor_traffic.sh` outside of the container!
+ADD ./startup.sh /startup.sh
+ADD ./monitor_traffic.sh /monitor_traffic.sh
+
+# /import will be the universal mount-point for IPython
+# The Galaxy instance can copy in data that needs to be present to the
+# container
+RUN mkdir /import
+
+[..]
+```
+
+.footnote[ :whale:]
+---
+
+(continued)
+
+```dockerfile
+[..]
+# Nginx configuration
+COPY ./proxy.conf /proxy.conf
+
+VOLUME ["/import"]
+WORKDIR /import/
+
+# EXTREMELY IMPORTANT! You must expose a SINGLE port on your container.
+EXPOSE 80
+CMD /startup.sh
+```
+
+.footnote[ :whale:]
+---
+
+- Proxy configuration (nginx)
+  - reverse proxy our directory listing process running on port 8000
+
+```nginx
+server {
+    listen 80;
+    server_name localhost;
+    access_log /var/log/nginx/localhost.access.log;
+
+    # Note the trailing slash used everywhere!
+    location PROXY_PREFIX/helloworld/ {
+        proxy_buffering off;
+        proxy_pass         http://127.0.0.1:8000/;
+        proxy_redirect     http://127.0.0.1:8000/ PROXY_PREFIX/helloworld/;
+    }
+}
+```
+
+.footnote[ :whale:]
+---
+
+- Create the `startup.sh` file which starts our directory listing service
+
+```bash
+#!/bin/bash
+# First, replace the PROXY_PREFIX value in /proxy.conf with the value from
+# the environment variable.
+sed -i "s|PROXY_PREFIX|${PROXY_PREFIX}|" /proxy.conf;
+# Then copy into the default location for ubuntu+nginx
+cp /proxy.conf /etc/nginx/sites-enabled/default;
+
+# Here you would normally start whatever service you want to start. In our
+# example we start a simple directory listing service on port 8000
+cd /import/ && python -mSimpleHTTPServer &
+
+# Launch traffic monitor which will automatically kill the container if
+# traffic stops
+/monitor_traffic.sh &
+# And finally launch nginx in foreground mode. This will make debugging
+# easier as logs will be available from `docker logs ...`
+nginx -g 'daemon off;'
+```
+
+.footnote[ :whale:]
+---
+
+- Lastly, the script to monitor traffic and shut down if user is no longer connected, `monitor_traffic.sh`
+
+```bash
+#!/bin/bash
+while true; do
+    sleep 60
+    if [ `netstat -t | grep -v CLOSE_WAIT | grep ':80' | wc -l` -lt 3 ]
+    then
+        pkill nginx
+    fi
+done
+```
+.footnote[ :whale:]
+---
+
+## Interactive Environments: Hello World Example
+
+- We are now ready to build our container, and try out our new GIE!
+- If the container is hosted on a service like Dockerhub or quay.io, it will be automatically
+fetched on first run.
+
+```bash
+$ cd hello-ie
+$ docker build -t hello-ie .
+```
+
+![](../images/vis_IE_helloworld.png)
+
+.footnote[Try it yourself: https://github.com/erasche/hello-world-interactive-environment]
+---
+
+## Interactive Environments: Customization
+
+- Often some additional functionality specific to your GIE is desired
+  - Jupyter: loading/storing notebooks from history
+  - Rstudio: loading/storing Rdata object files from history
