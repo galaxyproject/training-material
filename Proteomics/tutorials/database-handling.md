@@ -35,6 +35,7 @@ In this tutorial, we will explore using Protein Database Downloader for database
 > 3. Select in the drop-down menues `Taxonomy`: "Homo sapiens (Human)" and `reviewed`: "UniprotKB/Swiss-Prot (reviewed only)".
 > 4. Click on “Execute”. There will be a new dataset "Protein database" in your history, now.
 > 5. Rename the "Protein database" to "Main database".
+>
 >	>### :bulb: Tip: Types of uniprot databases
 >	> Uniprot offers several types of databases. You may choose to download only reviewed (UniProtKB/Swissprot) databases, only unreviewed (UniProtKB/TREMBL) or both (UniProtKB). In well researched organisms, e.g. Homo sapiens or D. melanogaster, reviewed databases are always kept up-to-date and may lead to cleaner search results. In other organisms, it might be wiser to include the TREMBL database not to miss important proteins.
 >	>
@@ -52,10 +53,12 @@ A widely used database for common contaminants is the **c**ommon **R**epository 
 > 1. Open **Protein Database Downloader** :wrench:. 
 > 2. Select `Download from`: "cRAP (contaminants)" and execute.
 > 3. Rename the new database to "crap database".
+>
 > > ### Optional: Mycoplasma databases
 >	> 90 - 95 % of mycoplasma infection in cell culture stem from the following species: M. orale, M. hyorhinis, M. arginini, M. fermentans, M. hominis and A. laidlawii ([Drexler and Uphoff, Cytotechnology, 2002](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3463982/)).
 >	>
 >	> 1. Use **Protein Database Downloader** :wrench: to download the six Mycoplasma databases. We will merge them to the main database in the next part of the tutorial.
+> >
 >	> ### :nut_and_bolt: Comment
 >	> The reviewed mycoplasma databases do not contain all known proteins. It is better to include also the TREMBL database. Mycoplasma proteomes are very small, so even downloading TREMBL will not blow up your main database unneccessarily.
 
@@ -72,6 +75,7 @@ Depending on the search engine you are using you might need to merge all fasta e
 >	
 > Now we can merge the databases:
 > 1. Run **FASTA Merge Files and Filter Unique Sequences** :wrench: on the main database and the tagged cRAP database.
+>
 >	> ### Optional: Merging mycoplasma databases
 >	> At this step you may also merge the mycoplasma protein databases that you downloaded earlier on. Simply enter them as additional inputs in **FASTA Merge Files and Filter Unique Sequences** :wrench:. You can enter any number of databases when you click on `Insert Input FASTA file(s)`.
 
