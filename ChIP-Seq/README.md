@@ -8,7 +8,7 @@ Here, we propose some materials to learn how to analyze ChIP-seq data.
 
 Several deck of slides are available for this topic:
 
-- [General introduction about ChIP-seq data analysis](http://bgruening.github.io/training-material/ChIP-Seq/slides)
+- [General introduction about ChIP-seq data analysis](http://galaxyproject.github.io/training-material/ChIP-Seq/slides)
 
 # Tutorials
 
