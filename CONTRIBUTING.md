@@ -32,7 +32,7 @@ If you have any questions, you can reach us using the [Gitter chat](https://gitt
 
 # What should I know before I get started?
 
-This repository is a project of unification of the Galaxy training material. You can find more information about this project in this [small presentation](http://bgruening.github.io/training-material/shared/slides/project_presentation#/)
+This repository is a project of unification of the Galaxy training material. You can find more information about this project in this [small presentation](http://galaxyproject.github.io/training-material/shared/slides/project_presentation#/)
 
 By contributing, you agree that we may redistribute your work under [our license](LICENSE.md).  
 
@@ -48,7 +48,7 @@ The easiest way to start contributing is to file an issue to tell us about a spe
 
 Once you are feeling more comfortable, you can propose changes to this training material.
 
-In [issues](https://github.com/bgruening/training-material/issues) and [project management system](https://github.com/bgruening/training-material/projects), you will find lists of issues to fix and features to change (with the "newcomer-friendly" label for example). Feel free to solve them.
+In [issues](https://github.com/galaxyproject/training-material/issues) and [project management system](https://github.com/galaxyproject/training-material/projects), you will find lists of issues to fix and features to change (with the "newcomer-friendly" label for example). Feel free to solve them.
 
 We strongly recommend you read and follow Software Carpentry's recommendations on [lesson design](https://swcarpentry.github.io/lesson-example/01-design/) and [lesson writing](http://swcarpentry.github.io/instructor-training/19-lessons/) if you plan to add or change some training materials, and also to check the [structure of the training material](#how-the-training-material-is-structured).
 
@@ -61,7 +61,7 @@ To manage changes, we use [GitHub flow](https://guides.github.com/introduction/f
 3. Create a new branch in your local copy for each significant change
 4. Commit the changes in that branch
 5. Push that branch to your fork on GitHub
-6. Submit a pull request from that branch to the [master repository](https://github.com/bgruening/training-material)
+6. Submit a pull request from that branch to the [master repository](https://github.com/galaxyproject/training-material)
 7. If you receive feedback, make changes in your local clone and push them to your branch on GitHub: the pull request will update automatically
 
 For beginners, the GitHub interface will help you in the process of editing a file. It will automatically create a fork of this repository where you can safely work and then submit the changes as a pull request without having to touch the command line.
@@ -332,7 +332,7 @@ Slide notes
 The first slides (with the title, the requirements,...) are automatically generated using the metadata of the topic. Then the content to fill starts with the introduction.
 
 They are then rendered with [`Remark`](https://remarkjs.com/). Template for the `html` files can be found in
-[`templates/slides/`](templates/slides/). Once the slides are on the `master` branch, they will be available at `http://bgruening.github.io/training-material/<topic>/slides/<slide_name>.html`
+[`templates/slides/`](templates/slides/). Once the slides are on the `master` branch, they will be available at `http://galaxyproject.github.io/training-material/<topic>/slides/<slide_name>.html`
 
 You can also add yourself as contributor for the topic in the `yml` file of the related topic that is in `metadata` directory
 
