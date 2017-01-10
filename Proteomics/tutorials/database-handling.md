@@ -60,7 +60,7 @@ A widely used database for common contaminants is the **c**ommon **R**epository 
 >	> 1. Use **Protein Database Downloader** :wrench: to download the six Mycoplasma databases. We will merge them to the main database in the next part of the tutorial.
 > >
 >	> ### :nut_and_bolt: Comment
->	> The reviewed mycoplasma databases do not contain all known proteins. It is better to include also the TREMBL database. Mycoplasma proteomes are very small, so even downloading TREMBL will not blow up your main database unneccessarily.
+>	> The reviewed mycoplasma databases do not contain all known proteins. It is better to include also the TREMBL database. Mycoplasma proteomes are very small, so even downloading TREMBL will not bloat your main database unneccessarily.
 
 # Merging databases
 
@@ -81,7 +81,12 @@ Depending on the search engine you are using you might need to merge all fasta e
 
 # Creating a Decoy Database
 
-The most common method of FDR calculation is by adding known non-existing proteins, so-called "decoys" to the database. This can be done by reverting or shuffling the real protein entries and adding those fake entries to the database. Some peptide search engines depend on premade decoy databases, others can perform this step automatically.
+The most common method of peptide and protein FDR calculation is by adding known non-existing proteins, so-called "decoys" to the database. This can be done by reverting or shuffling the real protein entries and adding those fake entries to the database. Some peptide search engines depend on premade decoy databases, others can perform this step automatically.
 
 > ### :pencil2: Hands-on: Creating a Decoy Database
 > 1. Run **DecoyDatabase**  :wrench: on the merged database.
+
+# Concluding remarks
+To keep your databases up-to-date, or if you need several databases for different organisms, it would make sense to create a workflow out of the Hands-On sections (to learn about workflows see ../Introduction/tutorials/workflows.md). You might also want to combine the mycoplasma databases to a single file, which you then easily can add to each of your main databases.
+
+Often you may not want to use the most recent database for reasons of reproducibility. If so, you can transfer the final database of this tutorial into other histories to work with it.
