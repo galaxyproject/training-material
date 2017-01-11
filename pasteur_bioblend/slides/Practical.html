@@ -55,13 +55,13 @@ name: start
 	* Click on "Generate a new key now"
 
 2. Install the tools and workflow on your Galaxy:
-	1. The tools:  
-	Admin tab
-		* In the Tools and Tool Shed category, click on the line "Search Tool Shed"
-		* Select the "Galaxy Main Tool Shed", and the "Browse valid repositories" line
-		* Search and install "bam_to_sam" and "samtools_sort" from IUC owner using the
+	1. The tools:  Click on the Admin tab
+		* In the Tools and Tool Shed category, click on the line **Search Tool Shed**
+		* Select the **"Galaxy Main Tool Shed"**, and the **"Browse valid repositories"** line
+		* Search and install *bam_to_sam* and *samtools_sort* from IUC owner
 	2. The workflow:
-		* Get the workflow file (.ga) from https://github.com/fmareuil/formationbioblend
+		* Get the workflow file (.ga) from
+      https://github.com/fmareuil/formationbioblend
 		* Import the workflow in galaxy:  
 		Click on Workflow tab and "Upload or import workflow" button
 	3. Launch ipython on a terminal
@@ -94,6 +94,9 @@ gi = GalaxyInstance(url="http://127.0.0.1:8080", key="your key")
 
 * To better understand BioBlend methods and classes, you can use
 *help(command), object??, object?...*
+
+
+.center[During all the training, each command results are stored in variables]
 
 
 ---
@@ -179,7 +182,7 @@ help(gi.histories.upload_dataset_from_library)
 
 ---
 .right-column5[.reduce70[*history_id*]]
-.left-column95[### Librairies Object]
+.left-column95[### Libraries Object]
 
 * Check if there is a method to upload a data from your filesystem
 
@@ -193,7 +196,7 @@ help(gi.libraries.upload_file_from_local_path)
 ]
 ---
 .right-column5[.reduce70[*history_id*]]
-.left-column95[### Librairies Object]
+.left-column95[### Libraries Object]
 
 * Check if there is a method to upload a data from your filesystem
 
@@ -218,7 +221,7 @@ you will need your role *id*, look for the methods of the Class *gi.roles*
       
 ---
 .right-column5[.reduce70[*history_id*]]
-.left-column95[### Librairies Object]
+.left-column95[### Libraries Object]
 
 * Check if there is a method to upload a data from your filesystem
       
@@ -251,7 +254,7 @@ gi.libraries.set_library_permissions(new_lib['id'], access_in=['role_id'],
 .center[<img src="../images/yourturn.jpg" width="100"/>]      
 ---
 .right-column5[.reduce70[*history_id*]]
-.left-column95[### Librairies Object]
+.left-column95[### Libraries Object]
 
 * Check if there is a method to upload a data from your filesystem
       
@@ -387,7 +390,6 @@ list_tool = gi.tools.get_tools(name='sort')
 ---
 .right-column5[.reduce70[*history_id tool_id tool_inputs*]]
 .left-column95[### Tools Object (2/3)]
-
 .reduce90[
 * To run a tool, the dictionary *tool_inputs* is needed
 
@@ -398,7 +400,7 @@ list_tool = gi.tools.get_tools(name='sort')
 from bioblend.galaxy.tools.inputs import inputs
 ```
 
-* The *inputs* method is a Class called InputsBuilder:
+* The *inputs* method is a class called InputsBuilder:
 
 .left-column5[
 <img src="../images/clue.png" width="30"/>
@@ -424,19 +426,98 @@ myinputs = inputs().set_param("param1",'value').set_dataset_param("data1",'datas
 .right-column5[.reduce70[*history_id tool_id tool_inputs*]]
 .left-column95[### Tools Object (3/3)]
 
-* Recuperez des details sur l'outil `samtool sort`
+* Get the details on the "samtool sort" tool
+.center[
+<img src="../images/yourturn.jpg" width="100"/>
+]
+
+
+---
+.right-column5[.reduce70[*history_id tool_id tool_inputs*]]
+.left-column95[### Tools Object (3/3)]
+
+* Get the details on the "samtool sort" tool
+
 
 ```python
 detail_tool = gi.tools.show_tool(list_tool[0]['id'],io_details=True)
 ```
 
-* Avec les infos de detail_tool['inputs'], on peut instancier notre objet InputBuilder.
+---
+.right-column5[.reduce70[*history_id tool_id tool_inputs*]]
+.left-column95[### Tools Object (3/3)]
+
+* Get the details on the "samtool sort" tool
+
+
+```python
+detail_tool = gi.tools.show_tool(list_tool[0]['id'],io_details=True)
+```
+
+* Inputs information can be displayed with detail_tool['inputs'], use this to instantiate the inputs
+.center[
+<img src="../images/yourturn.jpg" width="100"/>
+]
+
+
+---
+.right-column5[.reduce70[*history_id tool_id tool_inputs*]]
+.left-column95[### Tools Object (3/3)]
+
+* Get the details on the "samtool sort" tool
+
+
+```python
+detail_tool = gi.tools.show_tool(list_tool[0]['id'],io_details=True)
+```
+
+* Inputs information can be displayed with detail_tool['inputs'], use this to instantiate the inputs object
 
 ```python
 myinputs = inputs().set_dataset_param("input1", data_history['id'], src='hda').set_param("sort_mode","")
 ```
 
-* Executez l'outil `samtool sort`
+---
+.right-column5[.reduce70[*history_id tool_id tool_inputs*]]
+.left-column95[### Tools Object (3/3)]
+
+* Get the details on the "samtool sort" tool
+
+
+```python
+detail_tool = gi.tools.show_tool(list_tool[0]['id'],io_details=True)
+```
+* Inputs information can be displayed with detail_tool['inputs'], use this to instantiate the inputs object
+
+```python
+myinputs = inputs().set_dataset_param("input1", data_history['id'], src='hda').set_param("sort_mode","")
+```
+
+* Now you can launch `samtool sort`
+.center[
+<img src="../images/yourturn.jpg" width="100"/>
+]
+
+
+---
+.right-column5[.reduce70[*history_id tool_id tool_inputs*]]
+.left-column95[### Tools Object (3/3)]
+
+* Get the details on the "samtool sort" tool
+
+
+```python
+detail_tool = gi.tools.show_tool(list_tool[0]['id'],io_details=True)
+```
+* Inputs information can be displayed with detail_tool['inputs'], use this to instantiate the inputs object
+
+
+```python
+myinputs = inputs().set_dataset_param("input1", data_history['id'], src='hda').set_param("sort_mode","")
+```
+
+* Now you can launch `samtool sort`
+
 
 ```python
 gi.tools.run_tool(new_history['id'], detail_tool['id'], myinputs)
@@ -444,8 +525,26 @@ gi.tools.run_tool(new_history['id'], detail_tool['id'], myinputs)
 
 ---
 ### Workflows Object
-* Qu'est ce qu'il faut pour executer un workflow
 
+* We are going to use the same process now Launch a Workflow
+* To know what are the elements needed:
+
+.left-column5[
+<img src="../images/clue.png" width="30"/>
+]
+```python
+help(gi.workflows.run_workflow)
+```
+
+---
+### Workflows Object
+
+* We are going to use the same process now Launch a Workflow
+* To know what are the elements needed:
+
+.left-column5[
+<img src="../images/clue.png" width="30"/>
+]
 ```python
 help(gi.workflows.run_workflow)
 ```
@@ -461,7 +560,31 @@ run_workflow(self, workflow_id, dataset_map=None, params=None, history_id=None, 
     :param dataset_map: A mapping of workflow inputs to datasets. The datasets...
 ```
 
-* Recuperez le detail du workflow avec l'api
+---
+### Workflows Object
+
+* We are going to use the same process now Launch a Workflow
+* To know what are the elements needed:
+
+.left-column5[
+<img src="../images/clue.png" width="30"/>
+]
+```python
+help(gi.workflows.run_workflow)
+```
+
+```asciidoc
+run_workflow(self, workflow_id, dataset_map=None, params=None, history_id=None, history_name=None, import_inputs_to_history=False, replacement_params=None) method of bioblend.galaxy.workflows.WorkflowClient instance
+    Run the workflow identified by ``workflow_id``
+
+    :type workflow_id: string
+    :param workflow_id: Encoded workflow ID
+
+    :type dataset_map: string or dict
+    :param dataset_map: A mapping of workflow inputs to datasets. The datasets...
+```
+
+* Get the workflow details using the get_workflows method
 
 ```python
 mon_workflow = gi.workflows.get_workflows(name="wf_formation (imported from uploaded file)")
