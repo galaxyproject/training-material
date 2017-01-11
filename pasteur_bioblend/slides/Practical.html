@@ -51,8 +51,38 @@
   </head>
   <body>
   <textarea id="source">
+name: introduction
+## Introduction
 
+* The Galaxy API enables developers to access Galaxy functionalities using Python scripts
 
+* BioBlend is a Python overlay implemented to facilitate the writing of those scripts
+
+  *  Implemented by Enis Afgane
+
+  *  It is available on github: https://github.com/afgane/bioblend and is in the pip packages (pip install bioblend)
+
+  *  A complete documentation is available at http://bioblend.readthedocs.io/en/latest/
+
+  *  BioBlend enables the manipulation of Galaxy entities (libraries; histories; datasets) as Python Objects
+
+[return](index#plan)
+---
+name: application
+## Applications
+
+  * On the [https://galaxy.pasteur.fr](https://galaxy.pasteur.fr) instance, we use BioBlend for several tasks and projects:
+
+    * For Galaxy administration: the automated creation of libraries for new internal users, the groups allocation for new users,...
+
+    * For several project:
+      * In ReGaTE, we use BioBlend to retrieve a list of installed tools on a Galaxy instance (article in review in GigaScience)
+
+      * In MetaGenSense (in press), BioBlend is used to mime all Galaxy steps from the upload of big data to the workflow launching and the data results and transfer
+      
+[return](index#plan)
+
+---
 name: start
 
 ### Goal
@@ -60,9 +90,11 @@ name: start
 2. Launch a Galaxy job / Visualize your actions with Galaxy
 3. Launch a Galaxy workflow / Visualize your actions with Galaxy
 
-
+[return](index#plan)
 ---
-      ### Before we start
+name: basic
+
+### Before we start
 1. Authentication for Bioblend - Get your API key:
 	* On your Galaxy, click on the User tab and ont the "API Keys" line
 	* Click on "Generate a new key now"
@@ -103,8 +135,9 @@ gi = GalaxyInstance(url="http://127.0.0.1:8080", key="your key")
 
 .center[.enlarge120[**During all the training, each command results are stored in variables**]]
 
-
+[return](index#plan)
 ---
+name: launch
 
 ### To launch a Galaxy job
 
@@ -127,8 +160,10 @@ gi = GalaxyInstance(url="http://127.0.0.1:8080", key="your key")
         2. A *tool_id*, which will tell Galaxy which tool to execute
         3. *tool_inputs*, dictionary storing the data used to run the tool
 
-
+[return](index#plan)
 ---
+name: history
+
 .right-column5[.reduce70[*history_id*]]
 .left-column95[### Histories Object]
 
@@ -198,8 +233,10 @@ new_history = gi.histories.create_history(name='my_history')
 ```python
 help(gi.histories.upload_dataset_from_library)
 ```
-
+[return](index#plan)
 ---
+name: library
+
 .right-column5[.reduce70[*history_id*]]
 .left-column95[### Libraries Object]
 
@@ -358,8 +395,10 @@ data_history = gi.histories.upload_dataset_from_library(new_history['id'],
       list_data[0]['id'])
 ```
 ]
-
+[return](index#plan)
 ---
+name: tool
+
 .right-column5[.reduce70[*history_id tool_id*]]
 .left-column95[### Tools Object (1/3)]
 
@@ -529,7 +568,8 @@ detail_tool = gi.tools.show_tool(list_tool[0]['id'],io_details=True)
 * Inputs information can be displayed with detail_tool['inputs'], use this to instantiate the inputs object
 
 ```python
-myinputs = inputs().set_dataset_param("input1", data_history['id'], src='hda').set_param("sort_mode","")
+myinputs = inputs().set_dataset_param("input1", data_history['id'], src='hda')
+                .set_param("sort_mode","")
 ```
 
 ---
@@ -545,7 +585,8 @@ detail_tool = gi.tools.show_tool(list_tool[0]['id'],io_details=True)
 * Inputs information can be displayed with detail_tool['inputs'], use this to instantiate the inputs object
 
 ```python
-myinputs = inputs().set_dataset_param("input1", data_history['id'], src='hda').set_param("sort_mode","")
+myinputs = inputs().set_dataset_param("input1", data_history['id'], src='hda')
+                .set_param("sort_mode","")
 ```
 
 * Now you can launch `samtool sort`
@@ -568,7 +609,8 @@ detail_tool = gi.tools.show_tool(list_tool[0]['id'],io_details=True)
 
 
 ```python
-myinputs = inputs().set_dataset_param("input1", data_history['id'], src='hda').set_param("sort_mode","")
+myinputs = inputs().set_dataset_param("input1", data_history['id'], src='hda')
+                .set_param("sort_mode","")
 ```
 
 * Now you can launch `samtool sort`
@@ -577,8 +619,10 @@ myinputs = inputs().set_dataset_param("input1", data_history['id'], src='hda').s
 ```python
 gi.tools.run_tool(new_history['id'], detail_tool['id'], myinputs)
 ```
-
+[return](index#plan)
 ---
+name: workflow
+
 ### Workflows Object (1/2)
 
 * We are going to use the same process now to Launch a Workflow
@@ -587,9 +631,11 @@ gi.tools.run_tool(new_history['id'], detail_tool['id'], myinputs)
 .left-column5[
 <img src="../images/clue.png" width="30"/>
 ]
+.right-column95[
 ```python
 help(gi.workflows.run_workflow)
 ```
+]
 
 ---
 ### Workflows Object (1/2)
@@ -600,6 +646,7 @@ help(gi.workflows.run_workflow)
 .left-column5[
 <img src="../images/clue.png" width="30"/>
 ]
+.right-column95[
 ```python
 help(gi.workflows.run_workflow)
 ```
@@ -614,6 +661,7 @@ run_workflow(self, workflow_id, dataset_map=None, params=None, history_id=None,
 
     :type dataset_map: string or dict : A mapping of workflow inputs to datasets.
 ```
+]
 
 ---
 ### Workflows Object (1/2)
@@ -624,6 +672,7 @@ run_workflow(self, workflow_id, dataset_map=None, params=None, history_id=None,
 .left-column5[
 <img src="../images/clue.png" width="30"/>
 ]
+.right-column95[
 ```python
 help(gi.workflows.run_workflow)
 ```
@@ -634,10 +683,12 @@ run_workflow(self, workflow_id, dataset_map=None, params=None, history_id=None,
     method of bioblend.galaxy.workflows.WorkflowClient instance
     Run the workflow identified by ``workflow_id``
 
-    :type workflow_id: string Encoded workflow ID
+    :type workflow_id: string : Encoded workflow ID
 
-    :type dataset_map: string or dict: A mapping of workflow inputs to datasets.
+    :type dataset_map: string or dict : A mapping of workflow inputs to datasets.
+
 ```
+]
 
 * Get the workflows list using the *get_workflows* method from the class Workflow
 * Get the worflow details using the *show_workflow*
@@ -653,6 +704,7 @@ run_workflow(self, workflow_id, dataset_map=None, params=None, history_id=None,
 .left-column5[
 <img src="../images/clue.png" width="30"/>
 ]
+.right-column95[
 ```python
 help(gi.workflows.run_workflow)
 ```
@@ -665,16 +717,17 @@ run_workflow(self, workflow_id, dataset_map=None, params=None, history_id=None,
 
     :type workflow_id: string : Encoded workflow ID
 
-    :type dataset_map: string or dict: A mapping of workflow inputs to datasets.
+    :type dataset_map: string or dict : A mapping of workflow inputs to datasets.
 ```
+]
 
 * Get the workflows list using the *get_workflows* method from the class Workflow
 * Get the worflow details using the *show_workflow*
 
 
 ```python
-mon_workflow = gi.workflows.get_workflows(name="wf_formation")
-detailworkflow = gi.workflows.show_workflow(mon_workflow[0]['id'])
+my_workflow = gi.workflows.get_workflows(name="wf_formation")
+detailworkflow = gi.workflows.show_workflow(my_workflow[0]['id'])
 ```
 ---
 ### Workflows Object (2/2)
@@ -686,7 +739,8 @@ detailworkflow = gi.workflows.show_workflow(mon_workflow[0]['id'])
 ]
 ```python
 dataset_map = {}
-dataset_map[detailworkflow['inputs'].keys()[0]] = {'id' : data_history['id'], 'src' : 'hda'}
+dataset_map[detailworkflow['inputs'].keys()[0]] = {'id' : data_history['id'], 
+                                                'src' : 'hda'}
 ```
 
 * Launch the workflow
@@ -702,13 +756,15 @@ dataset_map[detailworkflow['inputs'].keys()[0]] = {'id' : data_history['id'], 's
 ]
 ```python
 dataset_map = {}
-dataset_map[detailworkflow['inputs'].keys()[0]] = {'id' : data_history['id'], 'src' : 'hda'}
+dataset_map[detailworkflow['inputs'].keys()[0]] = {'id' : data_history['id'], 
+                                                'src' : 'hda'}
 ```
 
 * Launch the workflow
 
 ```python
-gi.workflows.run_workflow(detailworkflow['id'], dataset_map=dataset_map, history_id=new_history['id'])
+gi.workflows.run_workflow(detailworkflow['id'], dataset_map=dataset_map,
+                     history_id=new_history['id'])
 ```
 ---
 ### Workflows Object (2/2)
@@ -720,16 +776,18 @@ gi.workflows.run_workflow(detailworkflow['id'], dataset_map=dataset_map, history
 ]
 ```python
 dataset_map = {}
-dataset_map[detailworkflow['inputs'].keys()[0]] = {'id' : data_history['id'], 'src' : 'hda'}
+dataset_map[detailworkflow['inputs'].keys()[0]] = {'id' : data_history['id'], 
+                                                'src' : 'hda'}
 ```
 
 * Launch the workflow
 
 ```python
-gi.workflows.run_workflow(detailworkflow['id'], dataset_map=dataset_map, history_id=new_history['id'])
+gi.workflows.run_workflow(detailworkflow['id'], dataset_map=dataset_map,
+                     history_id=new_history['id'])
 ```
 
-.center[**Now you can try to test Bioblend with other tools and workflow.**]
+.center[**Now you can try to test Bioblend with other tools and workflows.**]
 
 
 
