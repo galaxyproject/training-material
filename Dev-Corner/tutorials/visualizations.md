@@ -129,7 +129,7 @@ exposed Galaxy URL prior to client-side rendering.
 The most basic part of the mako file are the variables used for further web development, given
 below.
 
-```python
+```mako
 <!DOCTYPE HTML>
 <%
     ## Generates hash (hdadict['id']) of history item
@@ -199,7 +199,7 @@ during compilation on the server, but is not yet exported into the HTML page nor
 To dump the idxstats into a HTML file, please create the mako file
 `./templates/alignment_rname_boxplot.mako` and fill it with the following code:
 
-```python
+```mako
 <!DOCTYPE HTML>
 <%
     ## Generates hash (hdadict['id']) of history item
@@ -303,7 +303,7 @@ Converting the data is not the scope of the tutorial, so here we provide such a 
 The great thing about the mako system is that it does not require to restart galaxy in order to make
 functional changes to the mako files. Change the mako file to the following:
 
-```html
+```mako
 <!DOCTYPE HTML>
 <%
     ## Generates hash (hdadict['id']) of history item
@@ -377,7 +377,7 @@ The full contents of this plugin are provided in
 To try out this example, simply copy this folder to the `$GALAXY_ROOT/config/plugins/visualizations/` folder
 on your (local) Galaxy and restart Galaxy.
 
-```html
+```mako
 <!DOCTYPE HTML>
 <%
      ## Generates hash (hdadict['id']) of history item
