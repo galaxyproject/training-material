@@ -97,14 +97,14 @@ gi = GalaxyInstance(url="http://127.0.0.1:8080", key="your key")
 *help(command), object??, object?...*
 
 
-.center[During all the training, each command results are stored in variables]
+.center[**During all the training, each command results are stored in variables**]
 
 
 ---
 
 ### To launch a Galaxy job
 
-* Understanding the run_tool method; **run_tool** method:
+* Understanding the **run_tool** method:
 	* The help command lets the user know what are the arguments
         ```python
         help(gi.tools.run_tool)
@@ -251,7 +251,7 @@ gi.libraries.set_library_permissions(new_lib['id'], access_in=['role_id'],
       modify_in=['role_id'], add_in=['role_id'], manage_in=['role_id'])
 ```
       
-* import a BAM file in your library
+* Import a BAM file in your library
     
 .center[<img src="../images/yourturn.jpg" width="100"/>]
 ]
@@ -285,7 +285,7 @@ gi.libraries.set_library_permissions(new_lib['id'], access_in=['role_id'],
       modify_in=['role_id'], add_in=['role_id'], manage_in=['role_id'])
 ```
       
-* import a BAM file in your library
+* Import a BAM file in your library
 
 ```python
 list_data = gi.libraries.upload_file_from_local_path(new_lib['id'], local_path)
@@ -327,7 +327,7 @@ gi.libraries.set_library_permissions(new_lib['id'], access_in=['role_id'],
       modify_in=['role_id'], add_in=['role_id'], manage_in=['role_id'])
 ```
       
-* import a BAM file in your library
+* Import a BAM file in your library
 
 ```python
 list_data = gi.libraries.upload_file_from_local_path(new_lib['id'], local_path)
@@ -396,16 +396,16 @@ list_tool = gi.tools.get_tools(name='sort')
 .right-column5[.reduce70[*history_id tool_id tool_inputs*]]
 .left-column95[### Tools Object (2/3)]
 .reduce90[
-* To run a tool, the dictionary *tool_inputs* is needed
+* The dictionary *tool_inputs* is needed to run a tool
 
-* It is a python dictionary defined by specific methods from the bioblend.galaxy.tools.inputs Class
+* It is a python dictionary defined by specific methods from the *bioblend.galaxy.tools.inputs* Class
 
 
 ```python
 from bioblend.galaxy.tools.inputs import inputs
 ```
 
-* The *inputs* method is a class called InputsBuilder:
+* The *inputs* method instanciates a class called *InputsBuilder*:
 
 .left-column5[
 <img src="../images/clue.png" width="30"/>
@@ -415,13 +415,14 @@ from bioblend.galaxy.tools.inputs import inputs
 help(inputs)
 ```
 ]
-* Each input defined in the tool XML needs to be defined using the methods *set_param* or *set_dataset_param* from InputsBuilder Class  
+* Each input from the tool XML needs to be defined using the methods *set_param* or *set_dataset_param* from *InputsBuilder* Class
 ==> If the input format is "data", the method to use is *set_dataset_param*
 
 * Here is an example:
        
 ```python
-myinputs = inputs().set_param("param1",'value').set_dataset_param("data1",'dataset_id',src="hda")
+myinputs = inputs().set_param("param1",'value')
+      .set_dataset_param("data1",'dataset_id',src="hda")
 ```
       
 .center[**To run the tool samtools sort, we need more information on the tool itself**]       
@@ -459,7 +460,7 @@ detail_tool = gi.tools.show_tool(list_tool[0]['id'],io_details=True)
 detail_tool = gi.tools.show_tool(list_tool[0]['id'],io_details=True)
 ```
 
-* Inputs information can be displayed with detail_tool['inputs'], use this to instantiate the inputs
+* Inputs information can be displayed with *detail_tool['inputs']*, use this to instantiate the inputs object
 .center[
 <img src="../images/yourturn.jpg" width="100"/>
 ]
