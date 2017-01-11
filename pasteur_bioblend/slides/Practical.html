@@ -450,6 +450,37 @@ detail_tool = gi.tools.show_tool(list_tool[0]['id'],io_details=True)
 ```
 
 ---
+
+.right-column5[.reduce70[*history_id tool_id tool_inputs*]]
+.left-column95[### Tools Object (3/3)]
+
+* Get the details on the "samtool sort" tool
+
+
+```python
+detail_tool = gi.tools.show_tool(list_tool[0]['id'],io_details=True)
+```
+```python
+detail_tool['inputs']
+[{u'argument': None,
+   u'edam_formats': [u'format_2572'],
+   u'extensions': [u'bam'],
+   ...
+   u'multiple': False,
+   u'name': u'input1', <---------------------------------------|
+   u'optional': False,                                         |
+   u'options': {u'hda': [], u'hdca': []},                      | 
+   u'type': u'data'},                                          | Critical
+  {...                                                         | information
+   u'name': u'sort_mode', <------------------------------------|
+   u'optional': False,                                         |
+   u'options': [[u'Chromosomal coordinates', u'', True], <-----|
+    [u'Read names', u'-n', False]],
+   u'type': u'select',
+   u'value': u''}]
+```
+
+---
 .right-column5[.reduce70[*history_id tool_id tool_inputs*]]
 .left-column95[### Tools Object (3/3)]
 
