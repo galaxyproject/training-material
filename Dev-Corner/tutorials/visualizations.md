@@ -112,10 +112,10 @@ It also includes a configuration of the template file, which is a mako template
 ## Creating the visualization
 
 We have linked Galaxy to a mako file (which we did not yet create).
-This file is a blueprint for the visualization.
+The mako file is a blueprint for the visualization.
 This means that for every invocation of the visualization, the mako file will be compiled to render a HTML file.
 It is trivial to understand that compilation needs to take place in a few ms because otherwise loading becomes too slow, so computational intensive tasks can not be done prior to loading the visualization.
-A bit of server side rendering at itself is not a problem, but the visualizations written in HTML and/or JS are supposed to to the actual calculations and conversions at the client side (in the browser).
+A bit of server side rendering at itself is not a problem, but the visualizations written in HTML and/or JS are supposed to do the actual calculations and conversions at the client side (in the browser).
 Therefore, unlike static galaxy tools, parsing files does not take place at the server, but instead data will be downloaded by the client via an exposed Galaxy URL prior to client side rendering.
 
 The most trivial part of the mako file are the variables used for further web development, given below:
@@ -137,8 +137,7 @@ The most trivial part of the mako file are the variables used for further web de
   %>
 ```
 
-The `hdadict` is a variable that contains a file identifier that has been encoded to it's exposable uid.
-Here `root` is the root of Galaxy on the webserver (e.g. /, /galaxy/, /galaxy-pub/) and `app_root` is the exposed url of the static files.
+The `hdadict` is a variable that contains a file identifier that has been encoded to it's exposable uid, `root` is the root of Galaxy on the webserver (e.g. /, /galaxy/, /galaxy-pub/) and `app_root` is the exposed url of the static files.
 The `file_url` is the exposed url of the dataset selected for visualization.
 
 We could obtain the BAM file client side by downloading the BAM/SAM file via *file_url* and a javascript.
