@@ -1,0 +1,94 @@
+---
+layout: tutorial_slides
+topic_name: "Dev-Corner"
+tutorial_name: interactive_tour
+logo: "GTN"
+---
+
+### An interactive tour?
+
+![](../images/galaxy_tour_demo.gif)
+
+Awesome to learn how to use Galaxy or a tool. Is not it?
+
+---
+
+### What is it behind?
+
+![](../images/galaxy_tour_yml.png)
+
+A yaml file: [core.galaxy_ui.yaml](https://raw.githubusercontent.com/galaxyproject/galaxy/097300ea6219e14b66b23a0e05f2808b16f10015/config/plugins/tours/core.galaxy_ui.yaml)
+
+---
+
+### Top of the yaml<br>Metadata related to the Tour
+
+```
+id: galaxy_ui
+name: Galaxy UI
+description: A gentle introduction to the Galaxy User Interface
+title_default: "Welcome to Galaxy"
+```
+
+---
+
+### Content of the yaml<br>Steps of the Tour
+
+```
+# A tour is made of several steps, each of them beginning with a dash '-'
+steps:
+    - title: "Welcome to Galaxy"
+      content: "This short tour will guide you through Galaxy's user interface.<br>
+                You can navigate with your arrow keys and leave the tour at any time point with 'Escape' or the 'End tour' button."
+      backdrop: true
+
+    - title: "Upload your data"
+      element: ".upload-button"
+      intro: "Galaxy supports many ways to get in your data.<br>
+              Use this button to upload your data."
+      position: "right"
+      postclick:
+        - ".upload-button"
+```
+
+---
+
+### Description of a step
+
+Argument | Description
+---  | ---
+`title`  | Header of each step-container
+`content` or `intro` | Text that is shown to the user 
+`element` | [JQuery Selector](http://api.jquery.com/category/selectors/) of the element you want to describe
+`position` | Position of the text box relative to the selected element
+`preclick` or `postclick` | Triggerred click() events on arbitrary elements before (`preclick`) or after (`postclick`) the element is shown
+`textinsert` |
+
+.footnote[[Full reference of the properties we can attach to one step-container](http://bootstraptour.com/api/)]
+
+---
+
+### How to obtain the JQuery Selector of the element?
+
+![](../images/interactive_tour_element_grabbing.gif)
+
+---
+
+### Too boring to find all JQuery Selector and fill all steps?
+
+---
+
+### Want to have Interactive Tours in your Galaxy instance?
+
+- Select a yaml file
+  - Collection of Interactive Tours for Galaxy: [https://github.com/galaxyproject/galaxy-tours](https://github.com/galaxyproject/galaxy-tours)
+  - Create yourself
+- Add it in the `config/plugins/tours` directory of your Galaxy instance
+- Restart the Galaxy instance
+
+---
+
+### <i class="fa fa-pencil" aria-hidden="true"></i> Hands-on
+
+![](../images/exercise.png)
+
