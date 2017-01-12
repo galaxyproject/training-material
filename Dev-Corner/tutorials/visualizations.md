@@ -137,6 +137,8 @@ below.
 ```mako
 <!DOCTYPE HTML>
 <%
+    import os
+
     ## Generates hash (hdadict['id']) of history item
     hdadict = trans.security.encode_dict_ids( hda.to_dict() )
 
@@ -147,7 +149,7 @@ below.
     app_root = root + 'plugins/visualizations/'+visualization_name+'/static/'
 
     ## Actual file URL:
-    file_url = root + 'datasets/' + hdadict['id'] + "/display?to_ext=" + hda.ext;
+    file_url = os.path.join(root, 'datasets', hdadict['id'], "display?to_ext="+hda.ext)
 %>
 ```
 
@@ -227,6 +229,8 @@ and fill it with the following code:
     ```mako
     <!DOCTYPE HTML>
     <%
+        import os
+
         ## Generates hash (hdadict['id']) of history item
         hdadict = trans.security.encode_dict_ids( hda.to_dict() )
 
@@ -237,11 +241,10 @@ and fill it with the following code:
         app_root = root + 'plugins/visualizations/'+visualization_name+'/static/'
 
         ## Actual file URL:
-        file_url = root + 'datasets/' + hdadict['id'] + "/display?to_ext=" + hda.ext;
+        file_url = os.path.join(root, 'datasets', hdadict['id'], "display?to_ext="+hda.ext)
 
         ## Ensure BAI index is symlinked
         bai_target = hda.file_name+'.bai'
-        import os
 
         if not os.path.isfile(bai_target):
             os.symlink(hda.metadata.bam_index.file_name, bai_target)
@@ -335,6 +338,8 @@ functional changes to the mako files.
     ```mako
     <!DOCTYPE HTML>
     <%
+        import os
+
         ## Generates hash (hdadict['id']) of history item
         hdadict = trans.security.encode_dict_ids( hda.to_dict() )
 
@@ -345,11 +350,10 @@ functional changes to the mako files.
         app_root = root + 'plugins/visualizations/'+visualization_name+'/static/'
 
         ## Actual file URL:
-        file_url = root + 'datasets/' + hdadict['id'] + "/display?to_ext=" + hda.ext;
+        file_url = os.path.join(root, 'datasets', hdadict['id'], "display?to_ext="+hda.ext)
 
         ## Ensure BAI index is symlinked
         bai_target = hda.file_name+'.bai'
-        import os
 
         if not os.path.isfile(bai_target):
             os.symlink(hda.metadata.bam_index.file_name, bai_target)
@@ -407,28 +411,29 @@ The contents of the mako file for this example are given below.
 ```mako
 <!DOCTYPE HTML>
 <%
-     ## Generates hash (hdadict['id']) of history item
-     hdadict = trans.security.encode_dict_ids( hda.to_dict() )
+    import os
 
-     ## Finds the parent directory of galaxy (/, /galaxy, etc.)
-     root     = h.url_for( '/' )
+    ## Generates hash (hdadict['id']) of history item
+    hdadict = trans.security.encode_dict_ids( hda.to_dict() )
 
-     ## Determines the exposed URL of the ./static directory
-     app_root = root + 'plugins/visualizations/'+visualization_name+'/static/'
+    ## Finds the parent directory of galaxy (/, /galaxy, etc.)
+    root     = h.url_for( '/' )
 
-     ## Actual file URL:
-     file_url = root + 'datasets/' + hdadict['id'] + "/display?to_ext="+ hda.ext;
+    ## Determines the exposed URL of the ./static directory
+    app_root = root + 'plugins/visualizations/'+visualization_name+'/static/'
 
-     ## Ensure BAI index is symlinked
-     bai_target = hda.file_name+'.bai'
-     import os
+    ## Actual file URL:
+    file_url = os.path.join(root, 'datasets', hdadict['id'], "display?to_ext="+hda.ext)
 
-     if not os.path.isfile(bai_target):
-         os.symlink(hda.metadata.bam_index.file_name, bai_target)
+    ## Ensure BAI index is symlinked
+    bai_target = hda.file_name+'.bai'
 
-     ## Extract idxstats
-     import pysam
-     bam_idxstats_data = pysam.idxstats(hda.file_name)
+    if not os.path.isfile(bai_target):
+        os.symlink(hda.metadata.bam_index.file_name, bai_target)
+
+    ## Extract idxstats
+    import pysam
+    bam_idxstats_data = pysam.idxstats(hda.file_name)
 
 %>
 <html>

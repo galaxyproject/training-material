@@ -1,30 +1,28 @@
 <!DOCTYPE HTML>
 <%
-     ## Generates hash (hdadict['id']) of history item
-     hdadict = trans.security.encode_dict_ids( hda.to_dict() )
+    import os
 
-     ## Finds the parent directory of galaxy (/, /galaxy, etc.)
-     root     = h.url_for( '/' )
+    ## Generates hash (hdadict['id']) of history item
+    hdadict = trans.security.encode_dict_ids( hda.to_dict() )
 
-     ## Determines the exposed URL of the ./static directory
-     app_root = root + 'plugins/visualizations/'+visualization_name+'/static/'
+    ## Finds the parent directory of galaxy (/, /galaxy, etc.)
+    root     = h.url_for( '/' )
 
-     ## Actual file URL:
-     file_url = root + 'datasets/' + hdadict['id'] + "/display?to_ext="+ hda.ext;
+    ## Determines the exposed URL of the ./static directory
+    app_root = root + 'plugins/visualizations/'+visualization_name+'/static/'
 
-     ## Ensure BAI index is symlinked
-     bai_target = hda.file_name+'.bai'
-     import os
+    ## Actual file URL:
+    file_url = os.path.join(root, 'datasets', hdadict['id'], "display?to_ext="+hda.ext)
 
-     if not os.path.isfile(bai_target):
-         os.symlink(hda.metadata.bam_index.file_name, bai_target)
+    ## Ensure BAI index is symlinked
+    bai_target = hda.file_name+'.bai'
 
-     ## Extract idxstats
-     import pysam
-     bam_idxstats_data = pysam.idxstats(hda.file_name)
+    if not os.path.isfile(bai_target):
+        os.symlink(hda.metadata.bam_index.file_name, bai_target)
 
-
-     ## Cleanup ? os.remove(bai_target)
+    ## Extract idxstats
+    import pysam
+    bam_idxstats_data = pysam.idxstats(hda.file_name)
 %>
 <html>
      <head>
