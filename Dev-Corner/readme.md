@@ -54,5 +54,6 @@ The following individuals have contributed to this training material:
 - Gildas Le Corguillé (@lecorguille)
 - Gwendoline Andres (@gwenandres)
 - Loraine Gueguen (@loraine-gueguen)
+- Saskia Hiltemann (@shiltemann)
 - Stephanie Le Gras (@slegras)
-
+- Youri Hoogstrate (@yhoogstrate)
