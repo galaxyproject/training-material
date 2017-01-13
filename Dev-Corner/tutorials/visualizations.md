@@ -1,21 +1,8 @@
-Visualizations in Galaxy
-============================================
-
-:grey_question: ***Questions***
-
-- *How can visualization plugins benefit science?*
-
-:dart: ***Objectives***
-
-- *Implement a first Galaxy visualization*
-- *Understand the client side vs. server side principle*
-
-:heavy_check_mark: ***Requirements***
-
-- *Galaxy introduction*
-- *Javascript knowledge*
-
-:hourglass: ***Time estimation*** *1.5h*
+---
+layout: tutorial_hands_on
+topic_name: Dev-Corner
+tutorial_name: visualizations
+---
 
 # Introduction
 
@@ -40,12 +27,12 @@ However, for this tutorial we will keep it basic.
 
 Additional documentation about Galaxy visualizations can be found here:
 
-- https://new.galaxyproject.org/VisualizationsRegistry
-- https://new.galaxyproject.org/VisualizationsRegistry/Cookbook
-- https://new.galaxyproject.org/VisualizationsRegistry/Code
-- https://new.galaxyproject.org/DataProviders
-- https://new.galaxyproject.org/DataProviders/Cookbook
-- https://new.galaxyproject.org/Develop/Visualizations
+- [VisualizationsRegistry](https://new.galaxyproject.org/VisualizationsRegistry)
+- [VisualizationsRegistry/Cookbook](https://new.galaxyproject.org/VisualizationsRegistry/Cookbook)
+- [VisualizationsRegistry/Code](https://new.galaxyproject.org/VisualizationsRegistry/Code)
+- [DataProviders](https://new.galaxyproject.org/DataProviders)
+- [DataProviders/Cookbook](https://new.galaxyproject.org/DataProviders/Cookbook)
+- [Develop/Visualizations](https://new.galaxyproject.org/Develop/Visualizations)
 
 # Part 1
 
@@ -54,60 +41,64 @@ reads per chromosome of a BAM file. The first thing we need to do is to come up 
 Let's call it *alignment_rname_boxplot*. Note that the reference sequences (usually chromosomes)
 to which we align are named `RNAME` in the BAM/SAM specification.
 
-:pencil2: ***Hands on!***
-
 The development of a Galaxy visualization takes place within the Galaxy codebase.
-After cloning an instance of Galaxy in a path, further referred to as `$GALAXY_ROOT`,
-we find the plugin directory as follows:
 
-```bash
-$ cd $GALAXY_ROOT/config/plugins/visualizations
-```
-
-In here we need to make a new directory for our new plugin project:
-
-```bash
-$ mkdir alignment_rname_boxplot
-$ cd alignment_rname_boxplot
-```
-
-We need to make three (sub-)directories to complete the structure of the project:
-
-```bash
-$ mkdir config
-$ mkdir static
-$ mkdir templates
-```
+> ### :pencil2: Hands-on: Data upload
+>
+> 1. Clone an instance of Galaxy in a path, further referred to as `$GALAXY_ROOT`
+> 2. Explore the plugin directory as follows:
+> 
+>    ```bash
+>    $ cd $GALAXY_ROOT/config/plugins/visualizations
+>    ```
+>
+> 3. Create a new directory for our new plugin project
+>
+>    ```bash
+>    $ mkdir alignment_rname_boxplot
+>    $ cd alignment_rname_boxplot
+>    ```
+> 
+> 4. Make three (sub-)directories to complete the structure of the project:
+>
+>    ```bash
+>    $ mkdir config
+>    $ mkdir static
+>    $ mkdir templates
+>    ```
+{: .hands_on}
 
 ## Linking the plugin with Galaxy
 
 To create a bridge between our not-yet-written plugin and Galaxy, we need to write a
 configuration in XML format.
 
-:pencil2: ***Hands on!***
-
-- Create the file  `config/alignment_rname_boxplot.xml` with the following contents:
-
-    ```xml
-    <?xml version="1.0" encoding="UTF-8"?>
-    <!DOCTYPE visualization SYSTEM "../../visualization.dtd">
-    <visualization name="alignment_rname_boxplot">
-        <data_sources>
-            <data_source>
-                <model_class>HistoryDatasetAssociation</model_class>
-
-                <test type="isinstance" test_attr="datatype" result_type="datatype">binary.Bam</test>
-                <test type="isinstance" test_attr="datatype" result_type="datatype">tabular.Sam</test>
-
-                <to_param param_attr="id">dataset_id</to_param>
-            </data_source>
-        </data_sources>
-        <params>
-            <param type="dataset" var_name_in_template="hda" required="true">dataset_id</param>
-        </params>
-        <template>alignment_rname_boxplot.mako</template>
-    </visualization>
-    ```
+> ### :pencil2: Hands-on: Data upload
+>
+> Create the file  `config/alignment_rname_boxplot.xml` with the following contents:
+>
+>    ```xml
+>    <?xml version="1.0" encoding="UTF-8"?>
+>    <!DOCTYPE visualization SYSTEM "../../visualization.dtd">
+>    <visualization name="alignment_rname_boxplot">
+>        <data_sources>
+>            <data_source>
+>                <model_class>HistoryDatasetAssociation</model_class>
+>
+>                <test type="isinstance" test_attr="datatype" result_type="datatype">binary.Bam</test>
+>                <test type="isinstance" test_attr="datatype" result_type="datatype">tabular.Sam</test>
+>
+>                <to_param param_attr="id">dataset_id</to_param>
+>            </data_source>
+>        </data_sources>
+>        <params>
+>            <param type="dataset" var_name_in_template="hda" required="true">dataset_id</param>
+>        </params>
+>        <template>alignment_rname_boxplot.mako</template>
+>    </visualization>
+>    ```
+>
+{: .hands_on}
 
 This configures the plugin's name, which shall appear on pressing the visualization button in
 the history menu. It also links the plugin to two file formats: BAM and SAM, which means that
@@ -219,65 +210,69 @@ To do that, we add an HTML section to the end of the mako file.
 Here you see `${bam_idxstats_data | h}`, which prints the python variable into
 the HTML page and also does HTML escaping by providing the ` | h`-flag (for security reasons).
 
-:pencil2: ***Hands on!***
-
 Let's put this all together.
 
-- Please create the mako file `templates/alignment_rname_boxplot.mako`
-and fill it with the following code:
-
-    ```mako
-    <!DOCTYPE HTML>
-    <%
-        import os
-
-        ## Generates hash (hdadict['id']) of history item
-        hdadict = trans.security.encode_dict_ids( hda.to_dict() )
-
-        ## Finds the parent directory of galaxy (/, /galaxy, etc.)
-        root     = h.url_for( '/' )
-
-        ## Determines the exposed URL of the ./static directory
-        app_root = root + 'plugins/visualizations/'+visualization_name+'/static/'
-
-        ## Actual file URL:
-        file_url = os.path.join(root, 'datasets', hdadict['id'], "display?to_ext="+hda.ext)
-
-        ## Ensure BAI index is symlinked
-        bai_target = hda.file_name+'.bai'
-
-        if not os.path.isfile(bai_target):
-            os.symlink(hda.metadata.bam_index.file_name, bai_target)
-
-        ## Extract idxstats
-        import pysam
-        bam_idxstats_data = pysam.idxstats(hda.file_name)
-    %>
-    <html>
-        <head>
-            <title>${hda.name | h} | ${visualization_name | h}</title>
-        </head>
-        <body>
-            ${bam_idxstats_data | h}
-        </body>
-    </html>
-    ```
-
- We are now ready to test this very basic visualization, we just need a (small) BAM file for it.
- You can find small examples in the test files of IUC tools.
-
-- Please download
- [this example bam file](https://github.com/galaxyproject/tools-iuc/raw/master/tools/hisat2/test-data/hisat_output_1.bam)
-
-- Go the galaxy root directory and start Galaxy:
-
-    ```bash
-    $ cd $GALAXY_ROOT
-    $ ./run.sh
-    ```
-
-- Upload the example BAM file to your history. If everything went well, our plugin has appeared
-as a visualization option for the dataset (Note: you must be logged in to be able to use visualizations).
+> ### :pencil2: Hands-on: Data upload
+>
+> 1. Create the mako file `templates/alignment_rname_boxplot.mako`
+> 2. Fill it with the following code:
+>
+>    ```mako
+>    <!DOCTYPE HTML>
+>    <%
+>        import os
+>    
+>        ## Generates hash (hdadict['id']) of history item
+>        hdadict = trans.security.encode_dict_ids( hda.to_dict() )
+>    
+>        ## Finds the parent directory of galaxy (/, /galaxy, etc.)
+>        root     = h.url_for( '/' )
+>    
+>        ## Determines the exposed URL of the ./static directory
+>        app_root = root + 'plugins/visualizations/'+visualization_name+'/static/'
+>    
+>        ## Actual file URL:
+>        file_url = os.path.join(root, 'datasets', hdadict['id'], "display?to_ext="+hda.ext)
+>    
+>        ## Ensure BAI index is symlinked
+>        bai_target = hda.file_name+'.bai'
+>    
+>        if not os.path.isfile(bai_target):
+>            os.symlink(hda.metadata.bam_index.file_name, bai_target)
+>    
+>        ## Extract idxstats
+>        import pysam
+>        bam_idxstats_data = pysam.idxstats(hda.file_name)
+>    %>
+>    <html>
+>        <head>
+>            <title>${hda.name | h} | ${visualization_name | h}</title>
+>        </head>
+>        <body>
+>            ${bam_idxstats_data | h}
+>        </body>
+>    </html>
+>    ```
+>    
+>    We are now ready to test this very basic visualization, we just need a (small) BAM file for it. You can find small examples in the test files of IUC tools.
+>
+> 3. Download [the example BAM file](https://github.com/galaxyproject/tools-iuc/raw/master/tools/hisat2/test-data/hisat_output_1.bam)
+> 4. Go the galaxy root directory and start Galaxy:
+>    
+>    ```bash
+>    $ cd $GALAXY_ROOT
+>    $ ./run.sh
+>    ```
+>
+> 5. Upload the example BAM file to your history
+>    
+>    If everything went well, our plugin has appeared as a visualization option for the dataset
+>
+>    > ### :nut_and_bolt: Comments
+>    > You must be logged in to be able to use visualizations
+>    {: .comment}
+> 
+{: .hands_on}
 
 All the visualization does at the moment, is show the contents of idxstats, compiled to HTML:
 
@@ -331,66 +326,67 @@ Converting the data is not the scope of the tutorial, so here we provide such a 
 The great thing about the mako system is that it does not require to restart galaxy in order to make
 functional changes to the mako files.
 
-:pencil2: ***Hands on!***
-
-- Change the mako file to the following:
-
-    ```mako
-    <!DOCTYPE HTML>
-    <%
-        import os
-
-        ## Generates hash (hdadict['id']) of history item
-        hdadict = trans.security.encode_dict_ids( hda.to_dict() )
-
-        ## Finds the parent directory of galaxy (/, /galaxy, etc.)
-        root     = h.url_for( '/' )
-
-        ## Determines the exposed URL of the ./static directory
-        app_root = root + 'plugins/visualizations/'+visualization_name+'/static/'
-
-        ## Actual file URL:
-        file_url = os.path.join(root, 'datasets', hdadict['id'], "display?to_ext="+hda.ext)
-
-        ## Ensure BAI index is symlinked
-        bai_target = hda.file_name+'.bai'
-
-        if not os.path.isfile(bai_target):
-            os.symlink(hda.metadata.bam_index.file_name, bai_target)
-
-        ## Extract idxstats
-        import pysam
-        bam_idxstats_data = pysam.idxstats(hda.file_name)
-
-    %>
-    <html>
-        <head>
-           <title>${hda.name | h} | ${visualization_name | h}</title>
-            <script>
-                bam_idxstats_data = ${bam_idxstats_data};
-                function parse_data(data) {
-                    var output = {};
-                    for(var i = 0; i < data.length ; i++) {
-                        var line = data[i];
-                        var chunks = line.split("\t");
-
-                        if(chunks[0].split("_").length == 1) { // only if it does not contain underscore
-                            output[chunks[0]] = parseInt(chunks[2]);
-                        }
-                    }
-                    return output;
-                }
-            </script>
-        </head>
-        <body onload="bam_idxstats = parse_data(bam_idxstats_data);">
-            ${bam_idxstats_data | h}
-        </body>
-    </html>
-    ```
-
-- Retrigger the visualization and open the developers console of your browser. In the console,
-type: `bam_idxstats` and press [Enter]. This should give the parsed contents as a dictionary,
-which can directly be used in Javascript.
+> ### :pencil2: Hands-on: Data upload
+>
+> 1. Change the mako file to the following:
+>    
+>    ```mako
+>    <!DOCTYPE HTML>
+>    <%
+>        import os
+>    
+>        ## Generates hash (hdadict['id']) of history item
+>        hdadict = trans.security.encode_dict_ids( hda.to_dict() )
+>    
+>        ## Finds the parent directory of galaxy (/, /galaxy, etc.)
+>        root     = h.url_for( '/' )
+>    
+>        ## Determines the exposed URL of the ./static directory
+>        app_root = root + 'plugins/visualizations/'+visualization_name+'/static/'
+>    
+>        ## Actual file URL:
+>        file_url = os.path.join(root, 'datasets', hdadict['id'], "display?to_ext="+hda.ext)
+>    
+>        ## Ensure BAI index is symlinked
+>        bai_target = hda.file_name+'.bai'
+>    
+>        if not os.path.isfile(bai_target):
+>            os.symlink(hda.metadata.bam_index.file_name, bai_target)
+>    
+>        ## Extract idxstats
+>        import pysam
+>        bam_idxstats_data = pysam.idxstats(hda.file_name)
+>    
+>    %>
+>    <html>
+>        <head>
+>           <title>${hda.name | h} | ${visualization_name | h}</title>
+>            <script>
+>                bam_idxstats_data = ${bam_idxstats_data};
+>                function parse_data(data) {
+>                    var output = {};
+>                    for(var i = 0; i < data.length ; i++) {
+>                        var line = data[i];
+>                        var chunks = line.split("\t");
+>    
+>                        if(chunks[0].split("_").length == 1) { // only if it does not contain underscore
+>                            output[chunks[0]] = parseInt(chunks[2]);
+>                        }
+>                    }
+>                    return output;
+>                }
+>            </script>
+>        </head>
+>        <body onload="bam_idxstats = parse_data(bam_idxstats_data);">
+>            ${bam_idxstats_data | h}
+>        </body>
+>    </html>
+>    ```
+>
+> 2. Retrigger the visualization and open the developers console of your browser: In the console, type: `bam_idxstats` and press [Enter]
+>   This should give the parsed contents as a dictionary, which can directly be used in Javascript.
+> 
+{: .hands_on}
 
 From this point forward you are encouraged to continue on your own to see if you are able to create
 a simple visualization from this dictionary. Think of tables, DIVs or even more complicated
@@ -533,15 +529,17 @@ All of those additional settings can be implemented for interactive behaviour,
 contributing to quicker understanding of the data which is generally not so convenient
 using static Galaxy tools.
 
-### Tip: static files
-
-In the example we included Javascript and CSS into the HTML website.
-Remember that for every new invocation of the visualization the entire CSS en JS are copied
-and transferred as well. This is a waste of (redundant) bandwidth as we could save the
-files in the static directory and refer to them within the HTML. The browser shall check
-it's cache for the presence of libs and style sheets and only update them if they have changed.
+> ### :bulb: Tip: Static files
+>
+> In the example we included Javascript and CSS into the HTML website.
+> Remember that for every new invocation of the visualization the entire CSS en JS are copied
+> and transferred as well. This is a waste of (redundant) bandwidth as we could save the
+> files in the static directory and refer to them within the HTML. The browser shall check
+> it's cache for the presence of libs and style sheets and only update them if they have changed.
+{: .tip}
 
 ### Improvements
+
 Another thing you may realize is that we still do the calculation (pysam.idxstats) server side.
 Although this is a marginal calculation, it is causing delay and the bigger the files, the worse
 this delay becomes. The underlying problem is that we did not obtain and parse the BAI file via
@@ -561,20 +559,9 @@ care of at the server side. This is what has been done in Trackster.
 ### More examples
 
 For more examples of visualization plugins, you can browse this
-[github repo](https://github.com/bgruening/galaxytools/tree/master/visualisations)
+[GitHub repo](https://github.com/bgruening/galaxytools/tree/master/visualisations)
 
 # Conclusion
 
 We have just created a visualization plugin in Galaxy to visualize the number of alignments
 per `RNAME` (chromosome) in a BAM file.
-
-:grey_exclamation: ***Key Points***
-
-- *Visualizations require a different way of thinking*
-    * server and client side
-    * downloading files rather than system level access
-- *Interactivity is what makes visualizations different from static tools*
-- *Requires understanding of both the Galaxy ecosystem as well as HTML5/JS*
-- *Performance is more important than for static Galaxy tools*
-
-# :clap: Thank you
