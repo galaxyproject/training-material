@@ -110,6 +110,7 @@ name: start
 
 ##Let's start ...
 ---
+name: familiar	  
 ## Connect with Galaxy using ipython:
 
 * Get your API key and your Galaxy URL
@@ -144,16 +145,20 @@ name: launch
         ```python
         help(gi.tools.run_tool)
         ```
-        ```asciicode
-        run_tool(self, history_id, tool_id, tool_inputs) method of bioblend.galaxy.tools.ToolClient instance
-            Runs tool specified by **tool_id** in history indicated by *history_id* with inputs from *dict* *tool_inputs*.
-
-            :type tool_inputs: dict
-            :param tool_inputs: dictionary of input datasets and parameters for the tool (see below)
-
-            The tool_inputs dict should contain input datasets and parameters in the (largely undocumented) format used by the Galaxy API.
+    
+```asciicode
+run_tool(self, history_id, tool_id, tool_inputs) 
+   Runs tool specified by tool_id in history indicated
+   by history_id with inputs from dict tool_inputs
+   :param history_id: encoded ID of the history in which to run the tool	  
+   :param tool_id: ID of the tool to be run
+   :param tool_inputs: dictionary of input datasets and parameters
+      for the tool (see below)
+   The tool_inputs dict should contain input datasets and parameters
+   in the (largely undocumented) format used by the Galaxy API.
         ```
-    * To resume, in this first part, we need to retrieve:
+
+* To resume, in this first part, we need to retrieve:
         1. A *history_id*, where the input data is and where the output data will be
         2. A *tool_id*, which will tell Galaxy which tool to execute
         3. *tool_inputs*, dictionary storing the data used to run the tool
@@ -790,7 +795,6 @@ gi.workflows.run_workflow(detailworkflow['id'], dataset_map=dataset_map,
 
 
 .center[**Thank you for your attention**]
-
 
 [return](index#plan)
     </textarea>    
