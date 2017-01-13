@@ -5,11 +5,11 @@ Bioblend API initiation
 
 # Slides
 
-https://c3bi-pasteur-fr.github.io/training-material/pasteur_bioblend/slides/#1
+https://c3bi-pasteur-fr.github.io/Galaxy_training_material/pasteur_bioblend/slides/#1
 
 ## Websites
 
-https://c3bi-pasteur-fr.github.io/training-material/pasteur_bioblend/slides/#1
+https://github.com/C3BI-pasteur-fr/Galaxy_training_material/
 
 # Contributors
 
