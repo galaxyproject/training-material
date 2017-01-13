@@ -168,19 +168,43 @@ dependency, a library that can do any native samtools command within python.
 The `*.metadata.bam_index` is a special kind of file in the Galaxy ecosystem. It is actually an
 invisible file in Galaxy, linked to another history item, but does have a unique filename.
 So, for the BAM file `./database/files/000/dataset_001.dat`, our BAI file (index) is **not**
-`./database/files/000/dataset_001.dat.bai` but could be `./database/files/000/dataset_002.dat` or
-`./database/files/000/dataset_003.dat`. We can create a symlink to this index file to ensure the
-bam file and its index share the same prefix, as expected by samtools and pysam.
+`./database/files/000/dataset_001.dat.bai` but could be `./database/files/_metadata_files/000/metadata_5.dat`.
+We can create a symlink to this index file to ensure the BAM file and its index share the same
+prefix, as expected by samtools and pysam. To keep the Galaxy database clean it would be desired
+to save all data (as symlinks, to reduce data) into Galaxy's temporary file directory like this:
+
+![](../images/vis_tmp_caching.png)
 
 We can create this symlink as follows in our mako template:
 
 ```python
-## Ensure BAI index is symlinked
-bai_target = hda.file_name+'.bai'
 import os
+import tempfile
+import pysam
 
+## Generates hash (hdadict['id']) of history item
+hdadict = trans.security.encode_dict_ids( hda.to_dict() )
+
+## File path in tmp dir:
+temp_data_dir = tempfile.gettempdir()+'/plugins/visualizations/'+visualization_name
+alignment_file = temp_data_dir + '/' + hdadict['id'] + '_' + os.path.basename(hda.file_name)
+bai_target = alignment_file + '.bai'
+
+## Ensure temp dir exists
+if not os.path.exists(temp_data_dir):
+    os.makedirs(temp_data_dir)
+
+## Make symlink to datafile in tmp dir
+if not os.path.isfile(alignment_file):
+    os.symlink(hda.file_name , alignment_file)
+
+## Make symlink to datafile in temp dir (to keep Galaxy storage dir clean)
 if not os.path.isfile(bai_target):
-   os.symlink(hda.metadata.bam_index.file_name, bai_target)
+    if not os.path.isfile(hda.metadata.bam_index.file_name):
+        pysam.index(alignment_file)
+    else:
+        os.symlink(hda.metadata.bam_index.file_name, bai_target)
+
 ```
 
 Now the BAM file has a `.bai` file with the same prefix, and we can run the `idxstats`
@@ -188,8 +212,7 @@ as follows:
 
 ```python
 ## Extract idxstats
-import pysam
-data = pysam.idxstats(hda.file_name)
+bam_idxstats_data = pysam.idxstats(alignment_file)
 ```
 
 With the lines of python code above, the idxstats data is parsed into the RAM of python
@@ -221,28 +244,43 @@ Let's put this all together.
 >    <!DOCTYPE HTML>
 >    <%
 >        import os
->    
+>        import tempfile
+>        import pysam
+>
 >        ## Generates hash (hdadict['id']) of history item
 >        hdadict = trans.security.encode_dict_ids( hda.to_dict() )
->    
+>
 >        ## Finds the parent directory of galaxy (/, /galaxy, etc.)
->        root     = h.url_for( '/' )
->    
+>        root = h.url_for( '/' )
+>
 >        ## Determines the exposed URL of the ./static directory
 >        app_root = root + 'plugins/visualizations/'+visualization_name+'/static/'
->    
+>
 >        ## Actual file URL:
 >        file_url = os.path.join(root, 'datasets', hdadict['id'], "display?to_ext="+hda.ext)
->    
->        ## Ensure BAI index is symlinked
->        bai_target = hda.file_name+'.bai'
->    
+>
+>        # File path in tmp dir:
+>        temp_data_dir = tempfile.gettempdir()+'/plugins/visualizations/'+visualization_name
+>        alignment_file = temp_data_dir + '/' + hdadict['id'] + '_' + os.path.basename(hda.file_name)
+>        bai_target = alignment_file + '.bai'
+>        
+>        ## Ensure temp dir exists
+>        if not os.path.exists(temp_data_dir):
+>            os.makedirs(temp_data_dir)
+>        
+>        ## Make symlink to datafile in tmp dir
+>        if not os.path.isfile(alignment_file):
+>            os.symlink(hda.file_name , alignment_file)
+>
+>        ## Make symlink to datafile in temp dir (to keep Galaxy storage dir clean)
 >        if not os.path.isfile(bai_target):
->            os.symlink(hda.metadata.bam_index.file_name, bai_target)
->    
+>            if not os.path.isfile(hda.metadata.bam_index.file_name):
+>                pysam.index(alignment_file)
+>            else:
+>                os.symlink(hda.metadata.bam_index.file_name, bai_target)
+>
 >        ## Extract idxstats
->        import pysam
->        bam_idxstats_data = pysam.idxstats(hda.file_name)
+>        bam_idxstats_data = pysam.idxstats(alignment_file)
 >    %>
 >    <html>
 >        <head>
@@ -269,7 +307,7 @@ Let's put this all together.
 >    If everything went well, our plugin has appeared as a visualization option for the dataset
 >
 >    > ### :nut_and_bolt: Comments
->    > You must be logged in to be able to use visualizations
+>    > You must be logged in in Galaxy to be able to use visualizations
 >    {: .comment}
 > 
 {: .hands_on}
@@ -334,29 +372,43 @@ functional changes to the mako files.
 >    <!DOCTYPE HTML>
 >    <%
 >        import os
->    
+>        import tempfile
+>        import pysam
+>
 >        ## Generates hash (hdadict['id']) of history item
 >        hdadict = trans.security.encode_dict_ids( hda.to_dict() )
->    
+>
 >        ## Finds the parent directory of galaxy (/, /galaxy, etc.)
->        root     = h.url_for( '/' )
->    
+>        root = h.url_for( '/' )
+>
 >        ## Determines the exposed URL of the ./static directory
 >        app_root = root + 'plugins/visualizations/'+visualization_name+'/static/'
->    
+>
 >        ## Actual file URL:
 >        file_url = os.path.join(root, 'datasets', hdadict['id'], "display?to_ext="+hda.ext)
->    
->        ## Ensure BAI index is symlinked
->        bai_target = hda.file_name+'.bai'
->    
+>
+>        # File path in tmp dir:
+>        temp_data_dir = tempfile.gettempdir()+'/plugins/visualizations/'+visualization_name
+>        alignment_file = temp_data_dir + '/' + hdadict['id'] + '_' + os.path.basename(hda.file_name)
+>        bai_target = alignment_file + '.bai'
+>        
+>        ## Ensure temp dir exists
+>        if not os.path.exists(temp_data_dir):
+>            os.makedirs(temp_data_dir)
+>        
+>        ## Make symlink to datafile in tmp dir
+>        if not os.path.isfile(alignment_file):
+>            os.symlink(hda.file_name , alignment_file)
+>
+>        ## Make symlink to datafile in temp dir (to keep Galaxy storage dir clean)
 >        if not os.path.isfile(bai_target):
->            os.symlink(hda.metadata.bam_index.file_name, bai_target)
->    
+>            if not os.path.isfile(hda.metadata.bam_index.file_name):
+>                pysam.index(alignment_file)
+>            else:
+>                os.symlink(hda.metadata.bam_index.file_name, bai_target)
+>
 >        ## Extract idxstats
->        import pysam
->        bam_idxstats_data = pysam.idxstats(hda.file_name)
->    
+>        bam_idxstats_data = pysam.idxstats(alignment_file)
 >    %>
 >    <html>
 >        <head>
@@ -389,7 +441,7 @@ functional changes to the mako files.
 {: .hands_on}
 
 From this point forward you are encouraged to continue on your own to see if you are able to create
-a simple visualization from this dictionary. Think of tables, DIVs or even more complicated
+a simple visualization of this dictionary. Think of tables, DIVs or even more complicated
 solutions :).
 
 Below is an example visualization, which creates a bar plot showing the number of reads per
@@ -408,6 +460,8 @@ The contents of the mako file for this example are given below.
 <!DOCTYPE HTML>
 <%
     import os
+    import tempfile
+    import pysam
 
     ## Generates hash (hdadict['id']) of history item
     hdadict = trans.security.encode_dict_ids( hda.to_dict() )
@@ -421,16 +475,28 @@ The contents of the mako file for this example are given below.
     ## Actual file URL:
     file_url = os.path.join(root, 'datasets', hdadict['id'], "display?to_ext="+hda.ext)
 
-    ## Ensure BAI index is symlinked
-    bai_target = hda.file_name+'.bai'
+    # File path in tmp dir:
+    temp_data_dir = tempfile.gettempdir()+'/plugins/visualizations/'+visualization_name
+    alignment_file = temp_data_dir + '/' + hdadict['id'] + '_' + os.path.basename(hda.file_name)
+    bai_target = alignment_file + '.bai'
 
+    ## Ensure temp dir exists
+    if not os.path.exists(temp_data_dir):
+        os.makedirs(temp_data_dir)
+
+    ## Make symlink to datafile in tmp dir
+    if not os.path.isfile(alignment_file):
+        os.symlink(hda.file_name , alignment_file)
+
+    ## Make symlink to datafile in temp dir (to keep Galaxy storage dir clean)
     if not os.path.isfile(bai_target):
-        os.symlink(hda.metadata.bam_index.file_name, bai_target)
+        if not os.path.isfile(hda.metadata.bam_index.file_name):
+            pysam.index(alignment_file)
+        else:
+            os.symlink(hda.metadata.bam_index.file_name, bai_target)
 
     ## Extract idxstats
-    import pysam
-    bam_idxstats_data = pysam.idxstats(hda.file_name)
-
+    bam_idxstats_data = pysam.idxstats(alignment_file)
 %>
 <html>
      <head>
@@ -484,7 +550,12 @@ The contents of the mako file for this example are given below.
 
                 for (var key in parsed) {
                      var value = parsed[key];
-                     var ratio = 100.0 * value / max;
+                     if (max > 0) {
+                        var ratio = 100.0 * value / max;
+                     }
+                     else {
+                        var ratio = 100.0; // fixes null division
+                     }
 
                      var div = document.createElement("div");
                      div.innerHTML = '<nobr>'+key+'</nobr>';
@@ -519,23 +590,24 @@ The contents of the mako file for this example are given below.
 
 ```
 
-In the given example, the `RNAME` queries containing an underscore were removed.
-This is because there are many alternative chromosomes, making the list very large
-for certain reference genomes. However, for certain studies it might be desired to
+In the given example, the `RNAME`-queries containing an underscore were excluded
+because there are many alternative chromosomes, making the list very large for
+certain reference genomes. However, for certain studies it might be desired to
 just look at those.
 
 The current plot is a box plot, but one can imagine a pie-chart may be convenient too.
 All of those additional settings can be implemented for interactive behaviour,
-contributing to quicker understanding of the data which is generally not so convenient
-using static Galaxy tools.
+contributing to quicker understanding of the data which is generally not so easy
+to achieve with static Galaxy tools.
 
 > ### :bulb: Tip: Static files
 >
 > In the example we included Javascript and CSS into the HTML website.
 > Remember that for every new invocation of the visualization the entire CSS en JS are copied
 > and transferred as well. This is a waste of (redundant) bandwidth as we could save the
-> files in the static directory and refer to them within the HTML. The browser shall check
-> it's cache for the presence of libs and style sheets and only update them if they have changed.
+> files in the static directory (`${app_root}`) and refer to them within the HTML. The browser
+> shall check it's cache for the presence of libs and style sheets and only update them if
+> they have changed.
 {: .tip}
 
 ### Improvements
@@ -547,7 +619,7 @@ Javascript. This would be a more elaborate solution, but requires more developme
 need to develop a function able to parse the binary file.
 
 Another thing we could do is create a static `samtools idxstats` tool, that creates a file of
-datatype `tabular.Idxstats` and include that datatype into Galaxy. We then make the visualization
+datatype `tabular.Idxstats` and register that datatype in Galaxy. We then make the visualization
 specific for that datatype, just plotting the results of the `idxstats`.
 
 A fundamental and more complicated problem is that BAM files are simply too big to transfer for

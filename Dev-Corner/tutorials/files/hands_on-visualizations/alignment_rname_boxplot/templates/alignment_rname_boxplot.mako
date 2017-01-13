@@ -1,6 +1,8 @@
 <!DOCTYPE HTML>
 <%
     import os
+    import tempfile
+    import pysam
 
     ## Generates hash (hdadict['id']) of history item
     hdadict = trans.security.encode_dict_ids( hda.to_dict() )
@@ -14,15 +16,28 @@
     ## Actual file URL:
     file_url = os.path.join(root, 'datasets', hdadict['id'], "display?to_ext="+hda.ext)
 
-    ## Ensure BAI index is symlinked
-    bai_target = hda.file_name+'.bai'
+    # File path in tmp dir:
+    temp_data_dir = tempfile.gettempdir()+'/plugins/visualizations/'+visualization_name
+    alignment_file = temp_data_dir + '/' + hdadict['id'] + '_' + os.path.basename(hda.file_name)
+    bai_target = alignment_file + '.bai'
 
+    ## Ensure temp dir exists
+    if not os.path.exists(temp_data_dir):
+        os.makedirs(temp_data_dir)
+
+    ## Make symlink to datafile in tmp dir
+    if not os.path.isfile(alignment_file):
+        os.symlink(hda.file_name , alignment_file)
+
+    ## Make symlink to datafile in temp dir (to keep Galaxy storage dir clean)
     if not os.path.isfile(bai_target):
-        os.symlink(hda.metadata.bam_index.file_name, bai_target)
+        if not os.path.isfile(hda.metadata.bam_index.file_name):
+            pysam.index(alignment_file)
+        else:
+            os.symlink(hda.metadata.bam_index.file_name, bai_target)
 
     ## Extract idxstats
-    import pysam
-    bam_idxstats_data = pysam.idxstats(hda.file_name)
+    bam_idxstats_data = pysam.idxstats(alignment_file)
 %>
 <html>
      <head>
@@ -76,7 +91,12 @@
 
                 for (var key in parsed) {
                      var value = parsed[key];
-                     var ratio = 100.0 * value / max;
+                     if (max > 0) {
+                        var ratio = 100.0 * value / max;
+                     }
+                     else {
+                        var ratio = 100.0; // fixes null division
+                     }
 
                      var div = document.createElement("div");
                      div.innerHTML = '<nobr>'+key+'</nobr>';
