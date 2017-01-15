@@ -4,7 +4,6 @@
     <title>BioBlend_API</title>
     <meta charset="utf-8">
     <link rel="stylesheet" href="../../assets/css/slides.css">
-    <link rel="stylesheet" href="../../assets/css/font-awesome.css" id="theme">
     <style>
 
       .left-column5 {
@@ -156,12 +155,12 @@ run_tool(self, history_id, tool_id, tool_inputs)
       for the tool (see below)
    The tool_inputs dict should contain input datasets and parameters
    in the (largely undocumented) format used by the Galaxy API.
-        ```
+```
 
 * To resume, in this first part, we need to retrieve:
-        1. A *history_id*, where the input data is and where the output data will be
-        2. A *tool_id*, which will tell Galaxy which tool to execute
-        3. *tool_inputs*, dictionary storing the data used to run the tool
+  1. A *history_id*, where the input data is and where the output data will be
+  2. A *tool_id*, which will tell Galaxy which tool to execute
+  3. *tool_inputs*, dictionary storing the data used to run the tool
 
 [return](index#plan)
 ---
@@ -304,6 +303,7 @@ you will need your role *id*, look for the methods of the Class *gi.roles*
 ]
           
 ```python
+role_id = gi.roles.get_roles()[0]['id']
 new_lib = gi.libraries.create_library('my_library')
 gi.libraries.set_library_permissions(new_lib['id'], access_in=['role_id'],
       modify_in=['role_id'], add_in=['role_id'], manage_in=['role_id'])
@@ -338,6 +338,7 @@ you will need your role *id*, look for the methods of the Class *gi.roles*
 ]
 
 ```python
+role_id = gi.roles.get_roles()[0]['id']
 new_lib = gi.libraries.create_library('my_library')
 gi.libraries.set_library_permissions(new_lib['id'], access_in=['role_id'],
       modify_in=['role_id'], add_in=['role_id'], manage_in=['role_id'])
@@ -380,6 +381,7 @@ you will need your role *id*, look for the methods of the Class *gi.roles*
 ]
 
 ```python
+role_id = gi.roles.get_roles()[0]['id']
 new_lib = gi.libraries.create_library('my_library')
 gi.libraries.set_library_permissions(new_lib['id'], access_in=['role_id'],
       modify_in=['role_id'], add_in=['role_id'], manage_in=['role_id'])
@@ -729,7 +731,7 @@ run_workflow(self, workflow_id, dataset_map=None, params=None, history_id=None,
 
 
 ```python
-my_workflow = gi.workflows.get_workflows(name="wf_formation")
+my_workflow = gi.workflows.get_workflows(name="wf_formation (imported from uploaded file)") 
 detailworkflow = gi.workflows.show_workflow(my_workflow[0]['id'])
 ```
 ---
@@ -796,9 +798,10 @@ gi.workflows.run_workflow(detailworkflow['id'], dataset_map=dataset_map,
 
 .center[**Thank you for your attention**]
 
+
 [return](index#plan)
     </textarea>    
-    <script src="https://gnab.github.io/remark/downloads/remark-latest.min.js" type="text/javascript">
+    <script src="https://remarkjs.com/downloads/remark-latest.min.js" type="text/javascript">
     </script>
     <script type="text/javascript">
       var slideshow = remark.create({navigation: {scroll: false,}});
