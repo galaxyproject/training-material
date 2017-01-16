@@ -36,8 +36,8 @@ In this tutorial, we will explore using Protein Database Downloader for database
 > 4. Click on “Execute”. There will be a new dataset "Protein database" in your history, now.
 > 5. Rename the "Protein database" to "Main database".
 >
->	>### :bulb: Tip: Types of uniprot databases
->	> Uniprot offers several types of databases. You may choose to download only reviewed (UniProtKB/Swissprot) databases, only unreviewed (UniProtKB/TREMBL) or both (UniProtKB). In well researched organisms, e.g. Homo sapiens or D. melanogaster, reviewed databases are always kept up-to-date and may lead to cleaner search results. In other organisms, it might be wiser to include the TREMBL database not to miss important proteins.
+>	> ### :bulb: Tip: Types of uniprot databases
+>	> Uniprot offers several types of databases. You may choose to download only reviewed (UniProtKB/Swissprot) databases, only unreviewed (UniProtKB/TREMBL) or both (UniProtKB). In well researched organisms, e.g. Homo sapiens or D. melanogaster, reviewed (Swissprot) databases are always kept up-to-date and may lead to cleaner search results. In other organisms, it might be wiser to include the unreviewed (TREMBL) database not to miss important proteins.
 >	>
 >	> You may also include protein isoforms.
 
@@ -87,6 +87,13 @@ The most common method of peptide and protein FDR calculation is by adding known
 
 > ### :pencil2: Hands-on: Creating a Decoy Database
 > 1. Run **DecoyDatabase**  :wrench: on the merged database.
+> 2. Set the flag (-append) to `Yes` and execute.
+>
+>	> ### :bulb: Tip: Decoy tags
+>	> The string you enter as a decoy tag will be added as a prefix or suffix (your choice) to the description of each decoy protein entry. Thus you can see from which entry in the real database the decoy was computed.
+>	>
+>	> ### :nut_and_bolt: Comment
+>	> **DecoyDatabase**  :wrench: may also take several databases as input which are then automatically merged into one database.
 
 # Concluding remarks
 To keep your databases up-to-date, or if you need several databases for different organisms, it would make sense to create a workflow out of the Hands-On sections (to learn about workflows see [this tutorial](../../Introduction/tutorials/workflows.md)). You might also want to combine the mycoplasma databases to a single file, which you then easily can add to each of your main databases.
