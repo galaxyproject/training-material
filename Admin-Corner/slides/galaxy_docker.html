@@ -1,128 +1,71 @@
-<!doctype html>
-<html lang="en">
+---
+layout: tutorial_slides
+topic_name: "Admin-Corner"
+tutorial_name: galaxy_docker
+logo: "GTN"
+---
 
-	<head>
-		<meta charset="utf-8">
 
-		<title>Docker and Galaxy</title>
+### Preparation
 
-		<link rel="stylesheet" href="../../assets/reveal.js/css/reveal.css">
-		<link rel="stylesheet" href="../../assets/reveal.js/css/theme/simple.css" id="theme">
+- docker pull quay.io/bgruening/galaxy:gcc2016
+- docker pull quay.io/bgruening/galaxy-docs-slurm:gcc2016
+- git clone -b gcc2016 https://github.com/bgruening/docker-galaxy-stable.git
 
-		<!-- Code syntax highlighting -->
-		<link rel="stylesheet" href="../../assets/reveal.js/lib/css/zenburn.css">
-        <link rel="stylesheet" href="../../assets/css/font-awesome.css">
-		<link rel="stylesheet" href="../../assets/css/slide_custom.css" id="theme">
+---
 
-		<!-- Printing and PDF exports -->
-        <script>
-          if( window.location.search.match( /print-pdf/gi ) ) {
-            var link = document.createElement( 'link' );
-            link.rel = 'stylesheet';
-            link.type = 'text/css';
-            link.href = '../../assets/reveal.js/css/print/pdf.css';
-            document.getElementsByTagName( 'head' )[0].appendChild( link );
-          }
-        </script>
-		<!--<script>
-            if (window.location.search.match(/print-pdf/gi)) {
-                document.write('<link rel="stylesheet" href="css/pdf.css" type="text/css">');
-            }
-        </script>-->
+### Agenda 
 
-		<!--[if lt IE 9]>
-        <script src="../../assets/reveal.js/lib/js/html5shiv.js"></script>
-        <![endif]-->
-	</head>
+- Docker basics
+- Galaxy Docker image (usage)
+- Galaxy Docker (internals)
+- Galaxy flavours
 
-	<body>
-		<div class="reveal">
-            <div class="slides">
-                <section data-markdown>
-                    <script type="text/template">
-                        ## Welcome!
+???
 
-                        <img src="../../shared/images/GTNLogo1000.png" alt="GTNLogo1000" width=30%/>
+Here you will learn the internals of the Docker Galaxy Image.
+We will show you tips and tricks on how to run the Galaxy Docker
+Image successfully in production, how to manage updates and how
+to bind the container to a cluster scheduler. Moreover,
+you will learn how to create your own Galaxy flavour mixing a
+variety of different tools and visualisations.
 
-                        The easiest way to **navigate** this slide deck
-                        is **by hitting `[space]` on your keyboard**
+---
 
-                        You can also navigate with arrow keys, but be careful because some
-                        slides can be nested inside of each other (vertically)
-                    </script>
-                </section>
-				<section data-markdown>
-					<script type="text/template">
-						## Preparation
+### Container vs. VM
 
-						* docker pull quay.io/bgruening/galaxy:gcc2016
-						* docker pull quay.io/bgruening/galaxy-docs-slurm:gcc2016
-						* git clone -b gcc2016 https://github.com/bgruening/docker-galaxy-stable.git
-					</script>
-				</section>
-				<section data-markdown>
-					<script type="text/template">
-						## Outline
+.image-30[![](../images/containers.png)]
+.image-30[![](../images/vms.png)]
 
-						* Docker basics
-						* Galaxy Docker image (usage)
-						* Galaxy Docker (internals)
-						* Galaxy flavours
+---
 
-						Here you will learn the internals of the Docker Galaxy Image.
-						We will show you tips and tricks on how to run the Galaxy Docker
-						Image successfully in production, how to manage updates and how
-						to bind the container to a cluster scheduler. Moreover,
-						you will learn how to create your own Galaxy flavour mixing a
-						variety of different tools and visualisations.
+### Docker basics
 
-					</script>
-				</section>
+![](../images/container_explainer.png)
 
-				<section data-markdown>
-					<script type="text/template">
-						##Container vs. VM
-						<img src="../images/containers.png" width=30%>
-						<img src="../images/vms.png" width=30%>
-					</script>
-				</section>
+---
 
-				<section>
-				<!-- Docker basics section -->
-				<section data-markdown>
-					<script type="text/template">
-						##Docker basics
-						<img src="../images/container_explainer.png" class="no-border">
+### Container lifecycle
 
-					</script>
-				</section>
+- containers vs. image
+- data persistence
+- mounting volumes
 
-				<section data-markdown>
-					<script type="text/template">
-						## Container lifecycle
+---
 
-						* containers vs. image
-						* data persistence
-						* mounting volumes
-					</script>
-				</section>
-				<section data-markdown>
-					<script type="text/template">
-					## pull
+### pull
 
-					* docker pull hello-world
-					* docker pull docker/whalesay
-					* docker pull bgruening/galaxy-stable:16.01
-					* docker pull quay.io/bgruening/galaxy
-					* docker images
-					</script>
-				</section>
+- docker pull hello-world
+- docker pull docker/whalesay
+- docker pull bgruening/galaxy-stable:16.01
+- docker pull quay.io/bgruening/galaxy
+- docker images
 
-				<section data-markdown>
-					<script type="text/template">
-						## run
+---
 
-<pre><code style="font-size: .8em; line-height: 1em; max-height: 500px;">
+### run
+
+```
 bag@bag:~$ docker run hello-world
 
 Hello from Docker.
@@ -144,15 +87,12 @@ To generate this message, Docker took the following steps:
 
 	For more examples and ideas, visit:
 	https://docs.docker.com/engine/userguide/
+```
 
-</code></pre>
-				</script>
-			</section>
+---
 
+### run
 
-			<section data-markdown>
-				<script type="text/template">
-					 ## run
 ```
 % docker run docker/whalesay cowsay Galaxy
  	________
@@ -172,12 +112,12 @@ To generate this message, Docker took the following steps:
 
 
 ```
-					</script>
-				</section>
-				<section data-markdown>
-   					<script type="text/template">
-						## run
-<pre><code style="font-size: .8em; line-height: 1em; max-height: 500px;">
+
+---
+
+### run
+
+```
 Usage:	docker run [OPTIONS] IMAGE [COMMAND] [ARG...]
 
 Run a command in a new container
@@ -204,12 +144,11 @@ Run a command in a new container
   -t, --tty                       Allocate a pseudo-TTY
   -v, --volume=[]                 Bind mount a volume
   ...
-</code></pre>
-					</script>
-				</section>
-				<section data-markdown>
-   					<script type="text/template">
-						## Control during startup
+```
+---
+
+### Control during startup
+
 ```
 % docker run -i -t
     -p 8080:80 -p 8021:21 -p 9002:9002
@@ -223,132 +162,114 @@ Run a command in a new container
 
     quay.io/bgruening/galaxy
 ```
-					</script>
-				</section>
-				<section data-markdown>
-					<script type="text/template">
-						## exec
-						Run a command in a running container
+---
+
+### exec
+
+Run a command in a running container
 
 ```
 % docker exec <container name> supervisorctl restart galaxy:
 ```
-					</script>
-				</section>
 
-				<section data-markdown>
-					<script type="text/template">
-						## stop
+---
 
-						Stop a running container.
-						Sending SIGTERM and then SIGKILL after a grace period
+### stop
+
+Stop a running container.
+Sending SIGTERM and then SIGKILL after a grace period
+
 ```
 % docker stop <container name>
 ```
-					</script>
-				</section>
 
-				<section data-markdown>
-					<script type="text/template">
-						## build
+---
+### build
 
-						Build an image from a Dockerfile
+Build an image from a Dockerfile
+
 ```
-% docker build -t image_name <Dockerfile>```
-					</script>
-				</section>
-				<section data-markdown>
-					<script type="text/template">
-						## ps
+% docker build -t image_name <Dockerfile>
+```
 
-						List containers
+---
+
+### ps
+
+List containers
+
 ```
 % docker ps
 ```
-					</script>
-				</section>
-				<!-- close Docker basic section -->
-				</section>
-				<section>
-				<section data-markdown>
-					<script type="text/template">
-						## Galaxy Docker Container
-						https://github.com/bgruening/docker-galaxy-stable
 
-						* FTP-Server
-						* Webserver
-						* Scheduler
-						* Process control UI
-						* ToolShed ready
-						* Interactive Environment ready
+---
+
+### Galaxy Docker Container
+
+https://github.com/bgruening/docker-galaxy-stable
+
+- FTP-Server
+- Webserver
+- Scheduler
+- Process control UI
+- ToolShed ready
+- Interactive Environment ready
 
 ```
 docker run -i -t -p 8080:80 quay.io/bgruening/galaxy:gcc2016
 ```
 doi: 10.5281/zenodo.51627
-					</script>
-				</section>
 
-				<section data-markdown>
-					<script type="text/template">
-						## Things to try
+---
 
-						* adding Data
-						* integrated FTP server
-						* becoming an Admin
-						* restart Galaxy
-						* using export mounts (persistent data)
-						* trouble shooting (logging)
-						* installing tools
-						* install visualizations (biojs)
-						* ...
-					</script>
-				</section>
+### Things to try
 
-				<section data-markdown>
-					<script type="text/template">
-						## Galaxy + SLURM = <i class="fa fa-heart" aria-hidden="true"></i>
+- adding Data
+- integrated FTP server
+- becoming an Admin
+- restart Galaxy
+- using export mounts (persistent data)
+- trouble shooting (logging)
+- installing tools
+- install visualizations (biojs)
+- ...
 
-						https://github.com/bgruening/docker-galaxy-stable/tree/dev/docs/Running_jobs_outside_of_the_container.md
-					</script>
-				</section>
-				</section>
-				<section>
-				<section data-markdown>
-					<script type="text/template">
-						## Docker flavours
+---
 
-						https://github.com/bgruening/docker-galaxy-stable/tree/dev/docs/Running_jobs_outside_of_the_container.md
+### Galaxy + SLURM = <i class="fa fa-heart" aria-hidden="true"></i>
 
-						<img src="../images/rna-workbench-chart.png" />
+https://github.com/bgruening/docker-galaxy-stable/tree/dev/docs/Running_jobs_outside_of_the_container.md
 
-					</script>
-				</section>
+---
 
-				<section data-markdown>
-					<script type="text/template">
-						## Galactic Flavours
+### Docker flavours
 
-						* <a href="https://github.com/bgruening/docker-galaxy-blast" target="_blank">NCBI-Blast</a>
-						* <a href="https://github.com/bgruening/docker-recipes/blob/master/galaxy-chemicaltoolbox" target="_blank">ChemicalToolBox</a>
-						* <a href="https://github.com/anhi/docker-scripts/tree/master/ballaxy" target="_blank">ballaxy</a>
-						* <a href="https://github.com/bgruening/docker-recipes/blob/master/galaxy-deeptools" target="_blank">NGS-deepTools</a>
-						* <a href="https://github.com/gregvonkuster/docker-galaxy-ChIP-exo" target="_blank">Galaxy ChIP-exo</a>
-						* <a href="https://github.com/bgruening/docker-galaxyp" target="_blank">Galaxy Proteomics</a>
-						* <a href="https://github.com/bgruening/docker-galaxy-imaging" target="_blank">Imaging</a>
-						* <a href="https://github.com/gregvonkuster/docker-galaxy-csg" target="_blank">Constructive Solid Geometry</a>
-						* <a href="https://github.com/bgruening/galaxy-metagenomics" target="_blank">Galaxy for metagenomics</a>
-						* <a href="https://github.com/lappsgrid-incubator/docker-galaxy-lappsgrid" target="_blank">Galaxy with the Language Application Grid tools</a>
-						* <a href="https://github.com/gianlucacorrado/galaxy-RNAcommender" target="_blank">RNAcommender</a>
-						* <a href="https://github.com/bgruening/galaxy-open-molecule-generator" target="_blank">OpenMoleculeGenerator</a>
+https://github.com/bgruening/docker-galaxy-stable/tree/dev/docs/Running_jobs_outside_of_the_container.md
 
-					</script>
-				</section>
+![](../images/rna-workbench-chart.png)
 
-				<section data-markdown>
-					<script type="text/template">
-					## Create your own Flavour
-<pre><code style="font-size: .8em; line-height: 1em; max-height: 500px;">
+---
+
+### Galactic Flavours
+
+- [NCBI-Blast](https://github.com/bgruening/docker-galaxy-blast)
+- [ChemicalToolBox](https://github.com/bgruening/docker-recipes/blob/master/galaxy-chemicaltoolbox)
+- [ballaxy](https://github.com/anhi/docker-scripts/tree/master/ballaxy)
+- [NGS-deepTools](https://github.com/bgruening/docker-recipes/blob/master/galaxy-deeptools)
+- [Galaxy ChIP-exo](https://github.com/gregvonkuster/docker-galaxy-ChIP-exo)
+- [Galaxy Proteomics](https://github.com/bgruening/docker-galaxyp)
+- [Imaging](https://github.com/bgruening/docker-galaxy-imaging)
+- [Constructive Solid Geometry](https://github.com/gregvonkuster/docker-galaxy-csg)
+- [Galaxy for metagenomics](https://github.com/bgruening/galaxy-metagenomics)
+- [Galaxy with the Language Application Grid tools](https://github.com/lappsgrid-incubator/do
+- [RNAcommender](https://github.com/gianlucacorrado/galaxy-RNAcommender)
+- [OpenMoleculeGenerator](https://github.com/bgruening/galaxy-open-molecule-generator)
+
+---
+
+### Create your own Flavour
+
+```
 # Galaxy - My own flavour
 #
 # VERSION       0.1
@@ -367,12 +288,12 @@ ADD my_tool_list.yml $GALAXY_ROOT/my_tool_list.yml
 
 # Install deepTools
 RUN install-tools $GALAXY_ROOT/my_tool_list.yml
-</code></pre>
-					</script>
-				</section>
-				<section data-markdown>
-					<script type="text/template">
-						## The tools file
+```
+
+---
+
+### The tools file
+
 ```
 galaxy_instance: http://localhost:8080
 tools:
@@ -382,37 +303,11 @@ tools:
   tool_shed_url: https://toolshed.g2.bx.psu.edu
   #revisions:
 ```
-					</script>
-				</section>
-				<section data-markdown>
-					<script type="text/template">
-						### Galaxy Flavor Generator
-						<img src="../images/galaxy_flavour_generator.png" width="60%"/>
 
-						https://github.com/galaxyFlavorsGenerators/galaxyFlavorGenerator
-					</script>
-				</section>
-			</section>
+---
 
-		<script type="text/javascript" src="../../assets/reveal.js/lib/js/head.min.js"></script>
-        <script type="text/javascript" src="../../assets/reveal.js/js/reveal.js"></script>
-        <script type="text/javascript">
-            Reveal.initialize({
-                slideNumber: !window.location.search.match(/print-pdf/gi),
-                history: true,
+### Galaxy Flavor Generator
 
-                theme: Reveal.getQueryHash().theme,
-                transition: Reveal.getQueryHash().transition || 'concave',
+![](../images/galaxy_flavour_generator.png)
 
-                dependencies: [
-                    { src: '../../assets/reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
-                    { src: '../../assets/reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-                    { src: '../../assets/reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-                    { src: '../../assets/reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
-                    { src: '../../assets/reveal.js/plugin/notes/notes.js', async: true },
-                ]
-            });
-        </script>
-
-	</body>
-</html>
+https://github.com/galaxyFlavorsGenerators/galaxyFlavorGenerator
