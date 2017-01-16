@@ -114,7 +114,7 @@ graphlan.py
 <small>If the script is provided with the wrapper xml</small>
 ```xml
 <command><![CDATA[
-python $__tool_directory__/graphlan.py
+python '$__tool_directory__/graphlan.py'
 # command params...
 ]]></command>
 ```
@@ -932,7 +932,7 @@ Package, dependency and environment management
 .image-50[![](../../shared/images/conda_logo.png)]
 
 - Based on recipes describing how to install the software which are then built for their distribution
-- At installation, no compilation, binaries come with their dependencies, libraries...
+- No compilation at installation: binaries with their dependencies, libraries...
 - Not restricted to Galaxy
 
 ---
@@ -949,10 +949,13 @@ Package, dependency and environment management
 
 ###.image-25[![](../../shared/images/conda_logo.png)] <br/> Channels
 
-- Packages are provided through Channels within Continuum.Anaconda. It's the way to contribute.
-
-- Galaxy via Conda will search packages in 5 channels: <br>
-iuc, bioconda, defaults, r, conda-forge
+- Packages through channels within Continuum.Anaconda
+- Conda channel searched by Galaxy for packages:
+    - iuc
+    - bioconda
+    - defaults
+    - r
+    - conda-forge
 
 ---
 
@@ -963,18 +966,18 @@ iuc, bioconda, defaults, r, conda-forge
 
 
 ```bash
-conda install bioconductor-deseq2
+conda install pyyaml
 ```
 
 - Install some packages within an isolate environment
 
 ```bash
-$ conda create -n deseq2 bioconductor-deseq2 r-ggplot2
+$ conda create -n yaml pyyaml
 $ conda env list
-deseq2        *  ~/miniconda2/envs/deseq2
+yaml        *  ~/miniconda2/envs/yaml
 root             ~/miniconda2
-$ source activate bioconductor-deseq2
-(deseq2) $ R
+$ source activate yaml
+(yaml) $ 
 ```
 
 ---
