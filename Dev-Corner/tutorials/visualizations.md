@@ -254,7 +254,7 @@ Let's put this all together.
 >    </html>
 >    ```
 >    
->    We are now ready to test this very basic visualization, we just need a (small) BAM file for it. You can find small examples in the test files of IUC tools.
+>    We are now ready to test this very basic visualization, we just need a (small) BAM file for it.
 >
 > 3. Download [the example BAM file](https://zenodo.org/record/248730/files/tutorial.bam)
 > 4. Go the galaxy root directory and start Galaxy:
