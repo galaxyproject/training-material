@@ -77,7 +77,7 @@ configuration in XML format.
 >
 > Create the file  `config/alignment_rname_boxplot.xml` with the following contents:
 >
->    ```xml
+>    ```html
 >    <?xml version="1.0" encoding="UTF-8"?>
 >    <!DOCTYPE visualization SYSTEM "../../visualization.dtd">
 >    <visualization name="alignment_rname_boxplot">
