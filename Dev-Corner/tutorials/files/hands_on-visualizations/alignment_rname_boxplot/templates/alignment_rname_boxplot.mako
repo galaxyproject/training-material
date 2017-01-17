@@ -61,22 +61,26 @@
                  return output;
             }
 
-            function calc_max(parsed) {
-                output = 0;
+            function calc_stats(parsed) {
+                max = 0;
+                sum = 0;
                 for (var key in parsed) {
-                   if (parsed[key] > output){
-                     output = parsed[key];
-                 }
+                    if (parsed[key] > max){
+                        max = parsed[key];
+                    }
+                    sum += parsed[key]
                 }
-                return output;
+                return [max, sum];
             }
 
             function plot_data(parsed) {
-                var max = calc_max(parsed);
+                var max = calc_stats(parsed)[0];
+                var sum = calc_stats(parsed)[1];
 
                 for (var key in parsed) {
                      var value = parsed[key];
-                     var ratio = 100.0 * value / max;
+                     var ratio = 100.0 * value / sum;
+                     var ratio2 = 100.0 * value / max;
 
                      var div = document.createElement("div");
                      div.innerHTML = '<nobr>'+key+'</nobr>';
@@ -85,7 +89,7 @@
                      var div = document.createElement("div");
                      div.innerHTML = '<nobr>'+value+" ("+Math.round(ratio*100)/100+"%)</nobr>";
                      div.title = key+': '+value+" ("+Math.round(ratio*100)/100+"%)";
-                     div.style.width =  ratio+'%';
+                     div.style.width =  ratio2+'%';
                      document.getElementById("chart").appendChild(div);
                 }
             }
