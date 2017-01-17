@@ -277,18 +277,19 @@ Let's put this all together.
 All the visualization does at the moment, is show the contents of idxstats, compiled to HTML:
 
 ```
-['phiX174\t5386\t19\t1\n', '*\t0\t0\t0\n']
+['chrA\t5386\t2\t0\n', 'chrB\t5386\t4\t0\n', 'chrC\t5386\t1\t0\n', 'chrD\t5386\t6\t1\n',
+'chrE\t5386\t3\t0\n', 'chrF\t5386\t2\t0\n', 'chrG\t5386\t1\t0\n', '*\t0\t0\t0\n']
 ```
 
-It contains two entries, one to `phiX` and one to `*`, of which the former is a chromosome
-and the latter represents the unmapped reads. Entries are tab delimited (`\t`) and for the
-phiX entry it indicates that the length of the RNAME is 5386 bases and 19 reads are aligned to it.
+It contains eight entries, one for each of our (made-up) chromosomes and one to `*`, which represents
+the unmapped reads. Entries are tab delimited (`\t`) and for the `chrA` entry it indicates that the
+length of the RNAME (chromosome) is 5386 bases and 2 reads are aligned to it.
 
 To make the data a bit more usable for Javascript , we convert it into a simple dictionary
 of the following syntax:
 
 ```python
-{'phiX': 19, '*': 0}
+{'chrA':2, 'chrB':4, 'chrC':1, 'chrD':6, 'chrE':3, 'chrF':2, 'chrG':1, '*': 0}
 ```
 
 Although it is possible to do this in python we recommend doing this in JS.
@@ -383,7 +384,7 @@ functional changes to the mako files.
 >    </html>
 >    ```
 >
-> 2. Retrigger the visualization and open the developers console of your browser: In the console, type: `bam_idxstats` and press [Enter]
+> 2. Retrigger the visualization and open the developers console of your browser: In the console, type: `bam_idxstats_data` and press [Enter]
 >   This should give the parsed contents as a dictionary, which can directly be used in Javascript.
 >
 {: .hands_on}
