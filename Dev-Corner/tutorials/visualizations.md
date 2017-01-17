@@ -125,7 +125,7 @@ exposed Galaxy URL prior to client-side rendering.
 The most basic part of the mako file are the variables used for further web development, given
 below.
 
-```mako
+```html
 <!DOCTYPE HTML>
 <%
     import os
@@ -217,7 +217,7 @@ Let's put this all together.
 > 1. Create the mako file `templates/alignment_rname_boxplot.mako`
 > 2. Fill it with the following code:
 >
->    ```mako
+>    ```html
 >    <!DOCTYPE HTML>
 >    <%
 >        import os
@@ -331,7 +331,7 @@ functional changes to the mako files.
 >
 > 1. Change the mako file to the following:
 >    
->    ```mako
+>    ```html
 >    <!DOCTYPE HTML>
 >    <%
 >        import os
@@ -405,7 +405,7 @@ on your (local) Galaxy and restart Galaxy.
 
 The contents of the mako file for this example are given below.
 
-```mako
+```html
 <!DOCTYPE HTML>
 <%
     import os
