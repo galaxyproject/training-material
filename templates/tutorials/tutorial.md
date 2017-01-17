@@ -1,34 +1,21 @@
-Tutorial name
-=============
-
-:grey_question: ***Questions***
-
-- *Major question that would be addressed in this tutorial (mostly general biological questions)*
-- *Second question*
-- *Third question*
-- *...*
-
-:dart: ***Objectives***
-
-- *First objective of this tutorial (It is a single sentence describing what a learner will be able to do once they have sat through the lesson. The objectives must be technical, but also theoretical, objectives. You can check [SWC lessons](http://swcarpentry.github.io/instructor-training/19-lessons/) to help you writing learning objectives.)*
-- *Second objective*
-- *Third objective*
-- *...*
-
-:heavy_check_mark: ***Requirements***
-
-- *Galaxy introduction*
-- *Second requirement*
-- *Third requirement*
-- *...*
-
-:hourglass: ***Time estimation*** *1d/3h/6h*
-
-[:book: **Associated slide deck**](http://bgruening.github.io/training-material/templates/slides/tutorial.html)
+---
+layout: tutorial_hands_on
+topic_name: topic_name
+tutorial_name: tutorial_name
+---
 
 # Introduction
 
 General introduction about the topic and then an introduction of the tutorial (the questions and the objectives). It is nice also to have a scheme to sum up the pipeline used during the tutorial. The idea is to give to trainees insight into the content of the tutorial and the (theoretical and technical) key concepts they will learn.
+
+> ### Agenda
+>
+> In this tutorial, we will deal with:
+>
+> 1. [Pretreatments](#pretreatments)
+> 2. [Mapping](#mapping)
+> 3. [Analysis of the differential expression](#analysis-of-the-differential-expression)
+> {: .agenda}
 
 # Part 1
 
@@ -38,67 +25,74 @@ Introduction about this part
 
 Short introduction about this subpart.
 
-:pencil2: ***Hands on!***
-
-1. First step
-2. Second step
-3. Third step
+> ### :pencil2: Hands-on: Data upload
+>
+> 1. Step1
+> 2. Step2
+>
+>    > ### :nut_and_bolt: Comments
+>    > A comment
+>    {: .comment}
+>
+>    > ### :bulb: Tip: A tip
+>    >
+>    > * Step1
+>    > * Step2
+>    {: .tip}
+{: .hands_on}
 
 ## Subpart 2
 
 Short introduction about this subpart.
 
-:pencil2: ***Hands on!***
-
-1. First step
-2. Second step
-3. Third step
+> ### :pencil2: Hands-on: Data upload
+>
+> 1. Step1
+> 2. Step2
+>
+>    > ### :question: Question
+>    >
+>    > Question?
+>    >
+>    > <details>
+>    > <summary>Click to view answers</summary>
+>    > Answer to question
+>    > </details>
+>    {: .question}
+{: .hands_on}
 
 Some blabla
-
-:pencil2: ***Hands on!***
-
-1. First step
-2. Second step
-3. Third step
+> ### :pencil2: Hands-on: Data upload
+>
+> 1. Step1
+> 2. Step2
+>
+>    > ### :question: Questions
+>    >
+>    > 1. Question1?
+>    > 2. Question2?
+>    >
+>    >    <details>
+>    >    <summary>Click to view answers</summary>
+>    >    <ol type="1">
+>    >    <li>Answer for question1</li>
+>    >    <li>Answer for question2</li>
+>    >    </ol>
+>    >    </details>
+>    {: .question}
+>
+> 3. Step3
+{: .hands_on}
 
 # Part 2
 
 Short introduction about this subpart.
 
-:pencil2: ***Hands on!***
-
-1. First step
-2. Second step
-3. Third step
-
-## Subpart 2
-
-Short introduction about this subpart.
-
-:pencil2: ***Hands on!***
-
-1. First step
-2. Second step
-3. Third step
-
-Some blabla
-
-:pencil2: ***Hands on!***
-
-1. First step
-2. Second step
-3. Third step
+> ### :nut_and_bolt: Comment
+>
+> Do you want to learn more about the principles behind mapping? Follow our [training](../../NGS-mapping)
+> {: .comment}
 
 # Conclusion
 
 Conclusion about the technical key points. And then relation between the technics and the biological question to end with a global view.
-
-:grey_exclamation: ***Key Points***
-
-- *Simple sentence to sum up the first key point of the tutorial (Take home message)*
-- *Second key point*
-- *Third key point*
-- *...*
-
-# :clap: Thank you
