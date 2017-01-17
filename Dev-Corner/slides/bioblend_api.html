@@ -68,15 +68,15 @@ name: goal
 
 ## Goal
 1. Get familiar with BioBlend using ipython
-2. Launch a Galaxy job / Visualize your actions with Galaxy
-3. Launch a Galaxy workflow / Visualize your actions with Galaxy
+2. Launch a Galaxy job / Visualize your actions in Galaxy
+3. Launch a Galaxy workflow / Visualize your actions in Galaxy
 
 
 
 ---
 ## Before we start
 1. Authentication for Bioblend - Get your API key:
-	* On your Galaxy, click on the User tab and ont the "API Keys" line
+* On your Galaxy, click on the User tab and on the "API Keys" line
 	* Click on "Generate a new key now"
 
 2. Install the tools and workflow on your Galaxy:
@@ -129,7 +129,7 @@ name: launch
 ## To launch a Galaxy job
 
 * Understanding the **run_tool** method:
-	* The help command lets the user know what are the arguments
+	* The help command lets the user know what the arguments are
         ```python
         help(gi.tools.run_tool)
         ```
@@ -294,8 +294,8 @@ you will need your role *id*, look for the methods of the Class *gi.roles*
 ```python
 role_id = gi.roles.get_roles()[0]['id']
 new_lib = gi.libraries.create_library('my_library')
-gi.libraries.set_library_permissions(new_lib['id'], access_in=['role_id'],
-      modify_in=['role_id'], add_in=['role_id'], manage_in=['role_id'])
+gi.libraries.set_library_permissions(new_lib['id'], access_in=role_id,
+      modify_in=role_id, add_in=role_id, manage_in=role_id)
 ```
       
 * Import a BAM file in your library
