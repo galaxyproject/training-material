@@ -1,0 +1,792 @@
+---
+layout: base_slides
+topic_name: "Dev-Corner"
+tutorial_name: bioblend_api
+logo: "GTN"
+---
+
+.left.top[<img src="../images/LogoIP-CNRS-C3BI-NBV4small-e1460524231316.png" width="200"/>]
+
+.center[#BioBlend module, a python library to use Galaxy API  
+####Olivia Doppelt-Azeroual, Fabien Mareuil]
+
+.left.bottom[<img src="../../shared/images/GTNLogo1000.png" width="200"/>]
+---
+layout: false
+name: plan
+
+## Plan
+
+* [Introduction](bioblend_api#introduction)
+
+* [Applications](bioblend_api#application)
+
+* [Hands on basics](bioblend_api#goal)
+
+* [It's your turn...](bioblend_api#start)
+        
+  * [To get familiar with BioBlend](bioblend_api#familiar)
+      
+  * [To launch a Galaxy job](bioblend_api#launch)
+
+  * [To launch a Galaxy workflow](bioblend_api#workflow)
+
+---
+name: introduction
+## Introduction
+
+* The Galaxy API enables developers to access Galaxy functionalities using Python scripts
+
+* BioBlend is a Python overlay implemented to facilitate the writing of those scripts
+
+  *  Implemented by Enis Afgane
+
+  *  It is available on github: https://github.com/afgane/bioblend and is in the pip packages (pip install bioblend)
+
+  *  A complete documentation is available at http://bioblend.readthedocs.io/en/latest/
+
+  *  BioBlend enables the manipulation of Galaxy entities (libraries; histories; datasets) as Python Objects
+
+[return](index#plan)
+---
+name: application
+## Applications
+
+  * On the [https://galaxy.pasteur.fr ](https://galaxy.pasteur.fr ) instance, we use BioBlend for several tasks and projects:
+
+    * For Galaxy administration: the automated creation of libraries for new internal users, the groups allocation for new users,...
+
+    * For several project:
+      * In ReGaTE, we use BioBlend to retrieve a list of installed tools on a Galaxy instance (article in review in GigaScience)
+
+      * In MetaGenSense (in press), BioBlend is used to mime all Galaxy steps from the upload of big data to the workflow launching and the data results and transfer
+      
+[return](index#plan)
+
+---
+name: goal
+
+## Goal
+1. Get familiar with BioBlend using ipython
+2. Launch a Galaxy job / Visualize your actions with Galaxy
+3. Launch a Galaxy workflow / Visualize your actions with Galaxy
+
+
+
+---
+## Before we start
+1. Authentication for Bioblend - Get your API key:
+	* On your Galaxy, click on the User tab and ont the "API Keys" line
+	* Click on "Generate a new key now"
+
+2. Install the tools and workflow on your Galaxy:
+	1. The tools:  Click on the Admin tab
+		* In the Tools and Tool Shed category, click on the line **Search Tool Shed**
+		* Select the **"Galaxy Main Tool Shed"**, and the **"Browse valid repositories"** line
+		* Search and install *bam_to_sam* from devteam and *samtools_sort* from IUC owner
+	2. The workflow:
+		* Get the workflow file (.ga) from
+      https://github.com/fmareuil/formationbioblend
+		* Import the workflow in galaxy:  
+		Click on Workflow tab and "Upload or import workflow" button
+	3. Launch ipython on a terminal
+
+[return](index#plan)
+---
+class: center, middle
+name: start
+
+##Let's start ...
+---
+name: familiar	  
+## Connect with Galaxy using ipython:
+
+* Get your API key and your Galaxy URL
+* Import the GalaxyInstance object from BioBlend module:
+
+```python
+from bioblend.galaxy import GalaxyInstance
+```
+* Create your GalaxyInstance instance object using your url and your key
+
+```python
+gi = GalaxyInstance(url="http://localhost:8080", key="your key")
+```
+#### Why ipython:
+* Automatic completion  
+==> type *gi.* and the tab puis appuyez sur la touche tab key
+
+* To better understand BioBlend methods and classes, you can use
+*help(command), object??, object?...*
+
+
+.center[.enlarge120[**During all the training, each command results are stored in variables**]]
+
+[return](index#plan)
+---
+name: launch
+
+## To launch a Galaxy job
+
+* Understanding the **run_tool** method:
+	* The help command lets the user know what are the arguments
+        ```python
+        help(gi.tools.run_tool)
+        ```
+    
+```asciicode
+run_tool(self, history_id, tool_id, tool_inputs) 
+   Runs tool specified by tool_id in history indicated
+   by history_id with inputs from dict tool_inputs
+   :param history_id: encoded ID of the history in which to run the tool	  
+   :param tool_id: ID of the tool to be run
+   :param tool_inputs: dictionary of input datasets and parameters
+      for the tool (see below)
+   The tool_inputs dict should contain input datasets and parameters
+   in the (largely undocumented) format used by the Galaxy API.
+```
+
+* To resume, in this first part, we need to retrieve:
+  1. A *history_id*, where the input data is and where the output data will be
+  2. A *tool_id*, which will tell Galaxy which tool to execute
+  3. *tool_inputs*, a dictionary storing the data used to run the tool
+
+[return](index#plan)
+---
+name: history
+
+.right-column5[.reduce70[*history_id*]]
+.left-column95[## Histories Object]
+
+* Try to get your histories list with BioBlend 
+* Create a new history (*It will be our work history for this tutorial*)
+      
+.left-column5[
+<img src="../images/clue.png" width="30"/>
+]
+.right-column95[
+[http://bioblend.readthedocs.org ](http://bioblend.readthedocs.org )
+]
+
+.center[<img src="../images/yourturn.jpg" width="100"/>] 
+      
+---
+.right-column5[.reduce70[*history_id*]]
+.left-column95[## Histories Object]
+
+* Try to get your histories list with BioBlend 
+* Create a new history (*It will be our work history for this tutorial*)
+      
+.left-column5[
+<img src="../images/clue.png" width="30"/>
+]
+.right-column95[
+[http://bioblend.readthedocs.org ](http://bioblend.readthedocs.org )
+]
+
+
+```python
+list_histories = gi.histories.get_histories()
+
+new_history = gi.histories.create_history(name='my_history')
+```   
+      
+* Now that your history is created, you will need to upload some data in it.
+
+.center[<img src="../images/yourturn.jpg" width="100"/>] 
+
+---
+.right-column5[.reduce70[*history_id*]]
+.left-column95[## Histories Object]
+
+* Try to get your histories list with BioBlend 
+* Create a new history (*It will be our work history for this tutorial*)
+      
+.left-column5[
+<img src="../images/clue.png" width="30"/>
+]
+.right-column95[
+[http://bioblend.readthedocs.org ](http://bioblend.readthedocs.org )
+]
+
+```python
+list_histories = gi.histories.get_histories()
+
+new_history = gi.histories.create_history(name='my_history')
+```   
+      
+* Now that your history is created, you will need to upload some data in it.
+
+      
+* No BioBlend method to directly upload data from your file system to a history exists, a data can be uploaded in a history from a Galaxy library
+
+
+```python
+help(gi.histories.upload_dataset_from_library)
+```
+[return](index#plan)
+---
+name: library
+
+.right-column5[.reduce70[*history_id*]]
+.left-column95[## Libraries Object]
+
+.reduce90[* Check if there is a method to upload a data from your filesystem
+
+.left-column5[
+<img src="../images/clue.png" width="30"/>
+]
+.right-column95[
+```python
+help(gi.libraries.upload_file_from_local_path)
+```
+]
+]
+---
+.right-column5[.reduce70[*history_id*]]
+.left-column95[## Libraries Object]
+
+.reduce90[* Check if there is a method to upload a data from your filesystem
+
+.left-column5[
+<img src="../images/clue.png" width="30"/>
+]
+.right-column95[
+```python
+help(gi.libraries.upload_file_from_local_path)
+```
+]
+      
+* Create a library and set the rights to this library
+
+.left-column5[
+<img src="../images/clue.png" width="30"/>
+]
+.right-column95[
+you will need your role *id*, look for the methods of the Class *gi.roles*
+]
+.center[<img src="../images/yourturn.jpg" width="100"/>]
+]
+---
+.right-column5[.reduce70[*history_id*]]
+.left-column95[## Libraries Object]
+
+.reduce90[* Check if there is a method to upload a data from your filesystem
+      
+.left-column5[
+<img src="../images/clue.png" width="30"/>
+]
+.right-column95[
+```python 
+help(gi.libraries.upload_file_from_local_path)
+```
+]
+
+* Create a library and set the rights to this library
+
+.left-column5[
+<img src="../images/clue.png" width="30"/>
+]
+.right-column95[
+you will need your role *id*, look for the methods of the Class *gi.roles*
+]
+          
+```python
+role_id = gi.roles.get_roles()[0]['id']
+new_lib = gi.libraries.create_library('my_library')
+gi.libraries.set_library_permissions(new_lib['id'], access_in=['role_id'],
+      modify_in=['role_id'], add_in=['role_id'], manage_in=['role_id'])
+```
+      
+* Import a BAM file in your library
+    
+.center[<img src="../images/yourturn.jpg" width="100"/>]
+]
+---
+.right-column5[.reduce70[*history_id*]]
+.left-column95[## Libraries Object]
+
+.reduce90[* Check if there is a method to upload a data from your filesystem
+      
+.left-column5[
+<img src="../images/clue.png" width="30"/>
+]
+.right-column95[
+```python 
+help(gi.libraries.upload_file_from_local_path)
+```
+]
+
+* Create a library and set the rights to this library
+
+.left-column5[
+<img src="../images/clue.png" width="30"/>
+]
+.right-column95[
+you will need your role *id*, look for the methods of the Class *gi.roles*
+]
+
+```python
+role_id = gi.roles.get_roles()[0]['id']
+new_lib = gi.libraries.create_library('my_library')
+gi.libraries.set_library_permissions(new_lib['id'], access_in=['role_id'],
+      modify_in=['role_id'], add_in=['role_id'], manage_in=['role_id'])
+```
+      
+* Import a BAM file in your library
+
+```python
+list_data = gi.libraries.upload_file_from_local_path(new_lib['id'], local_path)
+```
+
+* Transfer the BAM file from your library in your new history
+.center[
+<img src="../images/yourturn.jpg" width="50"/>
+]
+]
+      
+---
+.right-column5[.reduce70[*history_id*]]
+.left-column95[## Libraries Object]
+
+.reduce90[* Check if there is a method to upload a data from your filesystem
+      
+.left-column5[
+<img src="../images/clue.png" width="30"/>
+]
+.right-column95[
+```python 
+help(gi.libraries.upload_file_from_local_path)
+```
+]
+
+* Create a library and set the rights to this library
+
+.left-column5[
+<img src="../images/clue.png" width="30"/>
+]
+.right-column95[
+you will need your role *id*, look for the methods of the Class *gi.roles*
+]
+
+```python
+role_id = gi.roles.get_roles()[0]['id']
+new_lib = gi.libraries.create_library('my_library')
+gi.libraries.set_library_permissions(new_lib['id'], access_in=['role_id'],
+      modify_in=['role_id'], add_in=['role_id'], manage_in=['role_id'])
+```
+      
+* Import a BAM file in your library
+
+```python
+list_data = gi.libraries.upload_file_from_local_path(new_lib['id'], local_path)
+```
+
+* Transfer the BAM file from your library in your new history
+
+```python
+data_history = gi.histories.upload_dataset_from_library(new_history['id'],
+      list_data[0]['id'])
+```
+]
+[return](index#plan)
+---
+name: tool
+
+.right-column5[.reduce70[*history_id tool_id*]]
+.left-column95[## Tools Object (1/3)]
+
+* To run a tool, its 'id' is needed:
+
+.left-column5[
+<img src="../images/clue.png" width="30"/>
+]
+.right-column95[
+```python
+help(gi.tools.run_tool)
+```
+]
+
+* Get the samtools sort tool id
+
+
+.left-column5[<img src="../images/clue.png" width="30"/>].right-column95[its name is "sort"]
+
+
+.center[
+<img src="../images/yourturn.jpg" width="100"/>
+]
+
+
+---
+.right-column5[.reduce70[*history_id tool_id*]]
+.left-column95[## Tools Object (1/3)]
+
+* To run a tool, its 'id' is needed:
+
+.left-column5[
+<img src="../images/clue.png" width="30"/>
+]
+.right-column95[
+```python
+help(gi.tools.run_tool)
+```
+]
+
+* Get the samtools sort tool id
+
+.left-column5[<img src="../images/clue.png" width="30"/>].right-column95[its name is "sort"]
+
+
+```python
+list_tool = gi.tools.get_tools(name='sort')
+```
+
+---
+.right-column5[.reduce70[*history_id tool_id tool_inputs*]]
+.left-column95[## Tools Object (2/3)]
+.reduce90[
+* The dictionary *tool_inputs* is needed to run a tool
+
+* It is a python dictionary defined by specific methods from the *bioblend.galaxy.tools.inputs* Class
+
+
+```python
+from bioblend.galaxy.tools.inputs import inputs
+```
+
+* The *inputs* method instanciates a class called *InputsBuilder*:
+
+.left-column5[
+<img src="../images/clue.png" width="30"/>
+]
+.right-column95[
+```python
+help(inputs)
+```
+]
+* Each input from the tool XML needs to be defined using the methods *set_param* or *set_dataset_param* from *InputsBuilder* Class
+==> If the input format is "data", the method to use is *set_dataset_param*
+
+* Here is an example:
+       
+```python
+myinputs = inputs().set_param("param1",'value')
+      .set_dataset_param("data1",'dataset_id',src="hda")
+```
+      
+.center[**To run the tool samtools sort, we need more information on the tool itself**]       
+      
+]
+---
+.right-column5[.reduce70[*history_id tool_id tool_inputs*]]
+.left-column95[## Tools Object (3/3)]
+
+* Get the details on the "samtool sort" tool
+.center[
+<img src="../images/yourturn.jpg" width="100"/>
+]
+
+
+---
+.right-column5[.reduce70[*history_id tool_id tool_inputs*]]
+.left-column95[## Tools Object (3/3)]
+
+* Get the details on the "samtool sort" tool
+
+
+```python
+detail_tool = gi.tools.show_tool(list_tool[0]['id'],io_details=True)
+```
+
+---
+
+.right-column5[.reduce70[*history_id tool_id tool_inputs*]]
+.left-column95[## Tools Object (3/3)]
+
+* Get the details on the "samtool sort" tool
+
+
+```python
+detail_tool = gi.tools.show_tool(list_tool[0]['id'],io_details=True)
+```
+```python
+detail_tool['inputs']
+[{u'argument': None,
+   u'edam_formats': [u'format_2572'],
+   u'extensions': [u'bam'],
+   ...
+   u'multiple': False,
+   u'name': u'input1', <---------------------------------------|
+   u'optional': False,                                         |
+   u'options': {u'hda': [], u'hdca': []},                      | 
+   u'type': u'data'},                                          | Critical
+  {...                                                         | information
+   u'name': u'sort_mode', <------------------------------------|
+   u'optional': False,                                         |
+   u'options': [[u'Chromosomal coordinates', u'', True], <-----|
+    [u'Read names', u'-n', False]],
+   u'type': u'select',
+   u'value': u''}]
+```
+
+---
+.right-column5[.reduce70[*history_id tool_id tool_inputs*]]
+.left-column95[## Tools Object (3/3)]
+
+* Get the details on the "samtool sort" tool
+
+
+```python
+detail_tool = gi.tools.show_tool(list_tool[0]['id'],io_details=True)
+```
+
+* Inputs information can be displayed with *detail_tool['inputs']*, use this to instantiate the inputs object
+.center[
+<img src="../images/yourturn.jpg" width="100"/>
+]
+
+
+---
+.right-column5[.reduce70[*history_id tool_id tool_inputs*]]
+.left-column95[## Tools Object (3/3)]
+
+* Get the details on the "samtool sort" tool
+
+
+```python
+detail_tool = gi.tools.show_tool(list_tool[0]['id'],io_details=True)
+```
+
+* Inputs information can be displayed with detail_tool['inputs'], use this to instantiate the inputs object
+
+```python
+myinputs = inputs().set_dataset_param("input1", data_history['id'], src='hda')
+                .set_param("sort_mode","")
+```
+
+---
+.right-column5[.reduce70[*history_id tool_id tool_inputs*]]
+.left-column95[## Tools Object (3/3)]
+
+* Get the details on the "samtool sort" tool
+
+
+```python
+detail_tool = gi.tools.show_tool(list_tool[0]['id'],io_details=True)
+```
+* Inputs information can be displayed with detail_tool['inputs'], use this to instantiate the inputs object
+
+```python
+myinputs = inputs().set_dataset_param("input1", data_history['id'], src='hda')
+                .set_param("sort_mode","")
+```
+
+* Now you can launch `samtool sort`
+.center[
+<img src="../images/yourturn.jpg" width="100"/>
+]
+
+
+---
+.right-column5[.reduce70[*history_id tool_id tool_inputs*]]
+.left-column95[## Tools Object (3/3)]
+
+* Get the details on the "samtool sort" tool
+
+
+```python
+detail_tool = gi.tools.show_tool(list_tool[0]['id'],io_details=True)
+```
+* Inputs information can be displayed with detail_tool['inputs'], use this to instantiate the inputs object
+
+
+```python
+myinputs = inputs().set_dataset_param("input1", data_history['id'], src='hda')
+                .set_param("sort_mode","")
+```
+
+* Now you can launch `samtool sort`
+
+
+```python
+gi.tools.run_tool(new_history['id'], detail_tool['id'], myinputs)
+```
+[return](index#plan)
+---
+name: workflow
+
+## Workflows Object (1/2)
+
+* We are going to use the same process now to Launch a Workflow
+* To know what are the elements needed:
+
+.left-column5[
+<img src="../images/clue.png" width="30"/>
+]
+.right-column95[
+```python
+help(gi.workflows.run_workflow)
+```
+]
+
+---
+## Workflows Object (1/2)
+
+* We are going to use the same process now to Launch a Workflow
+* To know what are the elements needed:
+
+.left-column5[
+<img src="../images/clue.png" width="30"/>
+]
+.right-column95[
+```python
+help(gi.workflows.run_workflow)
+```
+
+```asciidoc
+run_workflow(self, workflow_id, dataset_map=None, params=None, history_id=None,
+    history_name=None, import_inputs_to_history=False, replacement_params=None)
+    method of bioblend.galaxy.workflows.WorkflowClient instance
+    Run the workflow identified by ``workflow_id``
+
+    :type workflow_id: string : Encoded workflow ID
+
+    :type dataset_map: string or dict : A mapping of workflow inputs to datasets.
+```
+]
+
+---
+## Workflows Object (1/2)
+
+* We are going to use the same process now to Launch a Workflow
+* To know what are the elements needed:
+
+.left-column5[
+<img src="../images/clue.png" width="30"/>
+]
+.right-column95[
+```python
+help(gi.workflows.run_workflow)
+```
+
+```asciidoc
+run_workflow(self, workflow_id, dataset_map=None, params=None, history_id=None,
+    history_name=None, import_inputs_to_history=False, replacement_params=None)
+    method of bioblend.galaxy.workflows.WorkflowClient instance
+    Run the workflow identified by ``workflow_id``
+
+    :type workflow_id: string : Encoded workflow ID
+
+    :type dataset_map: string or dict : A mapping of workflow inputs to datasets.
+
+```
+]
+
+* Get the workflows list using the *get_workflows* method from the class Workflow
+* Get the worflow details using the *show_workflow*
+
+.center[<img src="../images/yourturn.jpg" width="60"/>]
+
+---
+## Workflows Object (1/2)
+
+* We are going to use the same process now to Launch a Workflow
+* To know what are the elements needed:
+
+.left-column5[
+<img src="../images/clue.png" width="30"/>
+]
+.right-column95[
+```python
+help(gi.workflows.run_workflow)
+```
+
+```asciidoc
+run_workflow(self, workflow_id, dataset_map=None, params=None, history_id=None,
+    history_name=None, import_inputs_to_history=False, replacement_params=None)
+    method of bioblend.galaxy.workflows.WorkflowClient instance
+    Run the workflow identified by ``workflow_id``
+
+    :type workflow_id: string : Encoded workflow ID
+
+    :type dataset_map: string or dict : A mapping of workflow inputs to datasets.
+```
+]
+
+* Get the workflows list using the *get_workflows* method from the class Workflow
+* Get the worflow details using the *show_workflow*
+
+
+```python
+my_workflow = gi.workflows.get_workflows(name="wf_formation (imported from uploaded file)") 
+detailworkflow = gi.workflows.show_workflow(my_workflow[0]['id'])
+```
+---
+## Workflows Object (2/2)
+
+* Build the *dataset_map* (*key = "input workflow id key" value = {id : 'dataset id', src : 'location of the data'}*)
+
+.left-column5[
+<img src="../images/clue.png" width="30"/>
+]
+```python
+dataset_map = {}
+dataset_map[detailworkflow['inputs'].keys()[0]] = {'id' : data_history['id'], 
+                                                'src' : 'hda'}
+```
+
+* Launch the workflow
+.center[<img src="../images/yourturn.jpg" width="100"/>]
+
+---
+## Workflows Object (2/2)
+
+* Build the *dataset_map* (*key = "input workflow id key" value = {id : 'dataset id', src : 'location of the data'}*)
+
+.left-column5[
+<img src="../images/clue.png" width="30"/>
+]
+```python
+dataset_map = {}
+dataset_map[detailworkflow['inputs'].keys()[0]] = {'id' : data_history['id'], 
+                                                'src' : 'hda'}
+```
+
+* Launch the workflow
+
+```python
+gi.workflows.run_workflow(detailworkflow['id'], dataset_map=dataset_map,
+                     history_id=new_history['id'])
+```
+---
+## Workflows Object (2/2)
+
+* Build the *dataset_map* (*key = "input workflow id key" value = {id : 'dataset id', src : 'location of the data'}*)
+
+.left-column5[
+<img src="../images/clue.png" width="30"/>
+]
+```python
+dataset_map = {}
+dataset_map[detailworkflow['inputs'].keys()[0]] = {'id' : data_history['id'], 
+                                                'src' : 'hda'}
+```
+
+* Launch the workflow
+
+```python
+gi.workflows.run_workflow(detailworkflow['id'], dataset_map=dataset_map,
+                     history_id=new_history['id'])
+```
+
+.center[**Now you can try to test Bioblend with other tools and workflows.**]
+
+
+
+.center[**Thank you for your attention**]
+
+
+[return](index#plan)
+---
+layout: true
