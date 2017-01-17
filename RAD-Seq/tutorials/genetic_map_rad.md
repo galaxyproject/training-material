@@ -32,7 +32,7 @@ To download all training datasets, you need to use the corresponding [Zenodo](xx
 > ### :pencil2: Hands-on: Data upload
 >
 > 1. Create a new history for this RAD-seq exercise. If you are not inspired, you can name it "STACKS 1.42 RAD: genetic map" for example...
-> 2. Import Fasta files (*e.g.*  [`SRR034310`](https://zenodo.org/record/218574/files/ftp___ftp.sra.ebi.ac.uk_vol1_fastq_SRR034_SRR034310_SRR034310.fastq.gz)  as population map information file [`Population_map.txt`](https://zenodo.org/record/218574/files/Population_map) and barcodes file [`Barcodes_SRR034310`](https://zenodo.org/record/218574/files/Barcodes_SRR034310.tabular)) from [Zenodo](http://doi.org/10.5281/zenodo.218574)
+> 2. Import Fasta files (*e.g.*  [`SRR034310`](ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR034/SRR034310/SRR034310.fastq.gz)  as population map information file [`Population_map.txt`](https://zenodo.org/record/218574/files/Population_map) and barcodes file [`Barcodes_SRR034310`](https://zenodo.org/record/218574/files/Barcodes_SRR034310.tabular)) from [Zenodo](http://doi.org/10.5281/zenodo.218574)
 >
 >    > ### :nut_and_bolt: Comments
 >    > If you are using the [GenOuest Galaxy instance](http://galaxy.genouest.org), you can load the dataset using 'Shared Data' <i class="fa fa-long-arrow-right"></i> 'Data Libraries' <i class="fa fa-long-arrow-right"></i> '1 Galaxy teaching folder' <i class="fa fa-long-arrow-right"></i> 'EnginesOn' <i class="fa fa-long-arrow-right"></i> 'RADseq' <i class="fa fa-long-arrow-right"></i> 'Genetic map' 
@@ -44,7 +44,7 @@ To download all training datasets, you need to use the corresponding [Zenodo](xx
 >    > * Select **Paste/Fetch Data**
 >    > * Paste the link into the text field
 >    > * Paste the following links into the text field
->    >     * https://zenodo.org/record/**********************
+>    >     * ******
 >    >     * https://zenodo.org/record/**********************
 >    >     * https://zenodo.org/record/**********************
 >    >     * https://zenodo.org/record/**********************
