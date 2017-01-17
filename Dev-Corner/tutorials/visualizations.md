@@ -47,7 +47,7 @@ The development of a Galaxy visualization takes place within the Galaxy codebase
 >
 > 1. Clone an instance of Galaxy in a path, further referred to as `$GALAXY_ROOT`
 > 2. Explore the plugin directory as follows:
-> 
+>
 >    ```bash
 >    $ cd $GALAXY_ROOT/config/plugins/visualizations
 >    ```
@@ -58,7 +58,7 @@ The development of a Galaxy visualization takes place within the Galaxy codebase
 >    $ mkdir alignment_rname_boxplot
 >    $ cd alignment_rname_boxplot
 >    ```
-> 
+>
 > 4. Make three (sub-)directories to complete the structure of the project:
 >
 >    ```bash
@@ -256,7 +256,7 @@ Let's put this all together.
 >    
 >    We are now ready to test this very basic visualization, we just need a (small) BAM file for it. You can find small examples in the test files of IUC tools.
 >
-> 3. Download [the example BAM file](https://github.com/galaxyproject/tools-iuc/raw/master/tools/hisat2/test-data/hisat_output_1.bam)
+> 3. Download [the example BAM file](https://zenodo.org/record/248730/files/tutorial.bam)
 > 4. Go the galaxy root directory and start Galaxy:
 >    
 >    ```bash
@@ -271,7 +271,7 @@ Let's put this all together.
 >    > ### :nut_and_bolt: Comments
 >    > You must be logged in to be able to use visualizations
 >    {: .comment}
-> 
+>
 {: .hands_on}
 
 All the visualization does at the moment, is show the contents of idxstats, compiled to HTML:
@@ -385,7 +385,7 @@ functional changes to the mako files.
 >
 > 2. Retrigger the visualization and open the developers console of your browser: In the console, type: `bam_idxstats` and press [Enter]
 >   This should give the parsed contents as a dictionary, which can directly be used in Javascript.
-> 
+>
 {: .hands_on}
 
 From this point forward you are encouraged to continue on your own to see if you are able to create
@@ -393,7 +393,7 @@ a simple visualization from this dictionary. Think of tables, DIVs or even more 
 solutions :).
 
 Below is an example visualization, which creates a bar plot showing the number of reads per
-chromosome (on a different dataset).
+chromosome.
 
 ![](../images/vis_plugins_example.png)
 
@@ -430,7 +430,6 @@ The contents of the mako file for this example are given below.
     ## Extract idxstats
     import pysam
     bam_idxstats_data = pysam.idxstats(hda.file_name)
-
 %>
 <html>
      <head>
@@ -469,22 +468,26 @@ The contents of the mako file for this example are given below.
                  return output;
             }
 
-            function calc_max(parsed) {
-                output = 0;
+            function calc_stats(parsed) {
+                max = 0;
+                sum = 0;
                 for (var key in parsed) {
-                   if (parsed[key] > output){
-                     output = parsed[key];
-                 }
+                    if (parsed[key] > max){
+                        max = parsed[key];
+                    }
+                    sum += parsed[key]
                 }
-                return output;
+                return [max, sum];
             }
 
             function plot_data(parsed) {
-                var max = calc_max(parsed);
+                var max = calc_stats(parsed)[0];
+                var sum = calc_stats(parsed)[1];
 
                 for (var key in parsed) {
                      var value = parsed[key];
-                     var ratio = 100.0 * value / max;
+                     var ratio = 100.0 * value / sum;
+                     var ratio2 = 100.0 * value / max;
 
                      var div = document.createElement("div");
                      div.innerHTML = '<nobr>'+key+'</nobr>';
@@ -493,7 +496,7 @@ The contents of the mako file for this example are given below.
                      var div = document.createElement("div");
                      div.innerHTML = '<nobr>'+value+" ("+Math.round(ratio*100)/100+"%)</nobr>";
                      div.title = key+': '+value+" ("+Math.round(ratio*100)/100+"%)";
-                     div.style.width =  ratio+'%';
+                     div.style.width =  ratio2+'%';
                      document.getElementById("chart").appendChild(div);
                 }
             }
