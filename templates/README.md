@@ -7,9 +7,9 @@ Topic name
 
 Several deck of slides are available for this topic:
 
-- [General introduction about <topic name>](http://bgruening.github.io/training-material/templates/slides/)
+- [General introduction about <topic name>](http://galaxyproject.github.io/training-material/templates/slides/)
 - Slide deck related to the tutorials:
-    - [Tutorial name](http://bgruening.github.io/training-material/templates/slides/tutorial.html)
+    - [Tutorial name](http://galaxyproject.github.io/training-material/templates/slides/tutorial.html)
 
 # Tutorials
 

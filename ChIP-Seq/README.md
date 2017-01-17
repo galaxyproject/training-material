@@ -8,13 +8,13 @@ Here, we propose some materials to learn how to analyze ChIP-seq data.
 
 Several deck of slides are available for this topic:
 
-- [General introduction about ChIP-seq data analysis](http://bgruening.github.io/training-material/ChIP-Seq/slides)
+- [General introduction about ChIP-seq data analysis](http://galaxyproject.github.io/training-material/ChIP-Seq/slides)
 
 # Tutorials
 
 A tutorial with hands-on is available for this topic:
 
-- [Identification of the binding sites of the T-cell acute lymphocytic leukemia protein 1 (TAL1) with ChIP-sequencing](tutorials/TAL1_binding_site_identification.md.md)
+- [Identification of the binding sites of the T-cell acute lymphocytic leukemia protein 1 (TAL1) with ChIP-sequencing](tutorials/TAL1_binding_site_identification.md)
 
 ## Input datasets
 

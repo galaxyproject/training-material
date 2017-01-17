@@ -35,16 +35,13 @@ class: center, middle, inverse
 
 ## Welcome!
 
+This material is the result of a collaborative work. <br/>Thanks to [all the contributors]({{ site.url }}/{{ topic.name }}#contributors) and the [Galaxy Training Network](https://wiki.galaxyproject.org/Teach/GTN)!
+
 {% if page.logo == "GTN" %}
-<img src="{{ site.url }}{{ site.logo }}" style="height: 40px;"/>
+<img src="{{ site.url }}{{ site.logo }}" style="height: 100px;"/>
 {% else %}
 <img src="{{ page.logo }}" style="height: 40px;"/>
 {% endif %}
-
-The easiest way to **navigate** this slide deck
-is <br>**by hitting `[space]` on your keyboard**
-
-You can also navigate with arrow keys.
 
 ---
 
@@ -76,7 +73,9 @@ Before diving into this slide deck, we recommend you to have a look at:
 
 ---
 
-{{ content }}
+{{ content | xml_escape }}
+
+.footnote[Found a typo? Something is wrong in this tutorial? <br/>Edit it on [GitHub]({{ site.github_repository }}/tree/master/{{ topic.name }}/slides/{{ page.name }})]
 
     </textarea>
     <script src="https://gnab.github.io/remark/downloads/remark-latest.min.js" type="text/javascript">

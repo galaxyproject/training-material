@@ -6,9 +6,9 @@ Here, we propose some materials to learn how to analyze MethylC-seq data.
 
 # Slides
 
-Several deck of slides are available for this topic:
+A deck of slides is available for this topic:
 
-- [General introduction about DNA Methylation data analysis](http://bgruening.github.io/training-material/MethylC-Seq/slides/)
+- [General introduction about DNA Methylation data analysis](http://galaxyproject.github.io/training-material/MethylC-Seq/slides/)
 
 # Tutorials
 
