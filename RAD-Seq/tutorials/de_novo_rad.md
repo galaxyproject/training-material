@@ -10,7 +10,7 @@ In the study of [Hohenlohe *et al.* 2010](http://journals.plos.org/plosgenetics/
 
 ![](../images/RAD4_Population_Genomics/Hohenlohe_et_al_2010.png)
 
-We here proposed to re-analyze these data at least until the population genomics statistics calculation step using STACKS pipeline. Existing *Gasterosteus aculeatus* draft genome will not be used here so the analysis will be performed de novo. In a de novo RAD-seq data analysis, the reads are aligned one on each other to create stacks and then clustered to build loci. A reference approach can also be conducted (see [ref_based tutorial](/ref_based_rad)), allowing to work on existing assembled loci.
+We here proposed to re-analyze these data at least until the population genomics statistics calculation step using STACKS pipeline. Existing *Gasterosteus aculeatus* draft genome will not be used here so the analysis will be performed de novo. In a de novo RAD-seq data analysis, the reads are aligned one on each other to create stacks and then clustered to build loci. A reference approach can also be conducted (see [ref_based tutorial](ref_based_rad.md), allowing to work on existing assembled loci.
 
 
 > ### Agenda
