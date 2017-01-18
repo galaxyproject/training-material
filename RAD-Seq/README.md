@@ -21,7 +21,7 @@ A tutorial with hands-on is available for this topic:
 
 The input datasets for the tutorials are available on CeSGO hub and ENA:
 - [population genomics tutorials CeSGO files](https://cesgo.genouest.org/resources/370/supportingdocs).
-- [population genomics tutorials SRA raw reads](ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR034/SRR034310/SRR034310.fastq.gz).
+- [population genomics tutorials SRA raw reads](https://trace.ncbi.nlm.nih.gov/Traces/sra/?run=SRR034310).
 
 ## Galaxy instance
 
