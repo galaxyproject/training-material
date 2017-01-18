@@ -14,10 +14,12 @@ Several deck of slides are available for this topic:
     - [Tool development and integration into Galaxy](http://galaxyproject.github.io/training-material/Dev-Corner/slides/tool_integration.html)
     - [Contributing with GitHub](http://galaxyproject.github.io/training-material/Dev-Corner/slides/github_contribution.html)
     - [Tool Shed](http://galaxyproject.github.io/training-material/Dev-Corner/slides/toolshed.html)
+    - [BioBlend module, a Python library to use Galaxy API](http://galaxyproject.github.io/training-material/Dev-Corner/slides/bioblend_api.html)
+    - [Visualizations in Galaxy](http://galaxyproject.github.io/training-material/Dev-Corner/slides/visualizations.html)
 
 - **Help needed** for those topics:
     - [Data source integration](http://galaxyproject.github.io/training-material/Dev-Corner/slides/data_source_integration.html)
-    - [Visualizations in Galaxy](http://galaxyproject.github.io/training-material/Dev-Corner/slides/visualizations.html)
+ 
 
 # Tutorials (coming soon)
 
@@ -51,9 +53,11 @@ The following individuals have contributed to this training material:
 
 - Anthony Bretaudeau (@abretaud)
 - Bérénice Batut (@bebatut)
+- Fabien Mareuil (@fmareuil)
 - Gildas Le Corguillé (@lecorguille)
 - Gwendoline Andres (@gwenandres)
 - Loraine Gueguen (@loraine-gueguen)
+- Olivia Doppelt Azeroual (@odoppelt)
 - Saskia Hiltemann (@shiltemann)
 - Stephanie Le Gras (@slegras)
 - Youri Hoogstrate (@yhoogstrate)
