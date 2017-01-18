@@ -40,12 +40,15 @@ In this tutorial, we will explore using Protein Database Downloader for database
 >	> Uniprot offers several types of databases. You may choose to download only reviewed (UniProtKB/Swissprot) databases, only unreviewed (UniProtKB/TREMBL) or both (UniProtKB). In well researched organisms, e.g. Homo sapiens or D. melanogaster, reviewed (Swissprot) databases are always kept up-to-date and may lead to cleaner search results. In other organisms, it might be wiser to include the unreviewed (TREMBL) database not to miss important proteins.
 >	>
 >	> You may also include protein isoforms.
+>
+>	> ### :question: Question
+>	> What is the difference between a "reference proteome set" and a "complete proteome set"?
 
 # Contaminant databases
 
 In proteomic samples, some protein contaminants are very common, stemming from the experimenter or contaminated cell culture. Common contaminants are therefore added to the database. This has two benefits: 
 1. Contamination can be observed, heavily contaminated samples can be excluded from analysis.
-2. Contaminant peptides are not misassigned to similar peptides in the database reducing the risk of identifying false positives.
+2. Contaminant peptides cannot be misassigned to similar peptides in the database reducing the risk of identifying false positives.
 
 A widely used database for common contaminants is the **c**ommon **R**epository of **A**dventitious **P**roteins (cRAP). When using samples generated in cell cultures, it is furthermore recommended to include Mycoplasma proteomes in the search database. Mycoplasma infections are very common in cell culture and often go unnoticed ([Drexler and Uphoff, Cytotechnology, 2002](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3463982/)).
 
@@ -54,13 +57,23 @@ A widely used database for common contaminants is the **c**ommon **R**epository 
 > 2. Select `Download from`: "cRAP (contaminants)" and execute.
 > 3. Rename the new database to "crap database".
 >
-> > ### Optional: Mycoplasma databases
->	> 90 - 95 % of mycoplasma infection in cell culture stem from the following species: M. orale, M. hyorhinis, M. arginini, M. fermentans, M. hominis and A. laidlawii ([Drexler and Uphoff, Cytotechnology, 2002](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3463982/)).
->	>
->	> 1. Use **Protein Database Downloader** :wrench: to download the six Mycoplasma databases. We will merge them to the main database in the next part of the tutorial.
-> >
->	> ### :nut_and_bolt: Comment
->	> The reviewed mycoplasma databases do not contain all known proteins. It is better to include also the TREMBL database. Mycoplasma proteomes are very small, so even downloading TREMBL will not bloat your main database unneccessarily.
+> ### :question: Question
+> The cRAP database contains some human proteins. What does it mean if you identify those typical contaminants in a human sample? What does it mean in a non-human sample?
+>    <details>
+>    <summary>Click to view answers</summary>
+>    	<ol type="1">
+>    		<li> In samples stemming from a human source, identified human contaminants do not necessarily mean a contaminated sample. The proteins may as well stem from the original sample. Be careful with the interpretation. </li>
+			<li> In samples from non-human sources, identified human contaminants do mean contamination by the experimenter. </li>
+>   	 </ol>
+>    </details>
+
+> ### :pencil2: Optional Hands-On: Mycoplasma databases
+> 90 - 95 % of mycoplasma infection in cell culture stem from the following species: M. orale, M. hyorhinis, M. arginini, M. fermentans, M. hominis and A. laidlawii ([Drexler and Uphoff, Cytotechnology, 2002](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3463982/)).
+>
+> 1. Use **Protein Database Downloader** :wrench: to download the six Mycoplasma databases. We will merge them to the main database in the next part of the tutorial.
+> 
+> ### :nut_and_bolt: Comment
+> The reviewed mycoplasma databases do not contain all known proteins. It is better to include also the TREMBL database. Mycoplasma proteomes are very small, so even downloading TREMBL will not bloat your main database unneccessarily.
 
 # Merging databases
 
@@ -99,3 +112,5 @@ The most common method of peptide and protein FDR calculation is by adding known
 To keep your databases up-to-date, or if you need several databases for different organisms, it would make sense to create a workflow out of the Hands-On sections (to learn about workflows see [this tutorial](../../Introduction/tutorials/workflows.md)). You might also want to combine the mycoplasma databases to a single file, which you then easily can add to each of your main databases.
 
 Often you may not want to use the most recent database for reasons of reproducibility. If so, you can transfer the final database of this tutorial into other histories to work with it.
+
+Further reading about construction of the optimal database: ([Kumar et al., Methods in molecular biology, 2017](https://www.ncbi.nlm.nih.gov/pubmed/27975281)).
