@@ -189,7 +189,7 @@ as follows:
 ```python
 ## Extract idxstats
 import pysam
-data = pysam.idxstats(hda.file_name)
+bam_idxstats_data = pysam.idxstats(hda.file_name)
 ```
 
 With the lines of python code above, the idxstats data is parsed into the RAM of python
