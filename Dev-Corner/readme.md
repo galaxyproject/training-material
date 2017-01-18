@@ -16,18 +16,20 @@ Several deck of slides are available for this topic:
     - [Tool Shed](http://galaxyproject.github.io/training-material/Dev-Corner/slides/toolshed.html)
     - [BioBlend module, a Python library to use Galaxy API](http://galaxyproject.github.io/training-material/Dev-Corner/slides/bioblend_api.html)
     - [Visualizations in Galaxy](http://galaxyproject.github.io/training-material/Dev-Corner/slides/visualizations.html)
+    - [Galaxy Interactive Tours](http://galaxyproject.github.io/training-material/Dev-Corner/slides/interactive_tour.html)
 
 - **Help needed** for those topics:
     - [Data source integration](http://galaxyproject.github.io/training-material/Dev-Corner/slides/data_source_integration.html)
  
 
-# Tutorials (coming soon)
+# Tutorials
 
-**Help needed** to build 3 tutorials with hands-on for this topic:
+- [Visualizations in Galaxy](http://galaxyproject.github.io/training-material/Dev-Corner/tutorials/visualizations)
+
+**Help needed** to build 2 tutorials with hands-on for this topic:
 
 - [Tool development and integration into Galaxy](https://github.com/galaxyproject/training-material/issues/74)
 - [Data source integration](https://github.com/galaxyproject/training-material/issues/76)
-- [Visualizations in Galaxy](https://github.com/galaxyproject/training-material/issues/77)
 
 ## Galaxy instance ([under construction](https://github.com/galaxyproject/training-material/issues/78))
 
