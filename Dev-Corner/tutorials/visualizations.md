@@ -399,7 +399,7 @@ chromosome.
 ![](../images/vis_plugins_example.png)
 
 The full contents of this plugin are provided in
-[files/hands_on-visualizations/alignment_rname_boxplot/](files/hands_on-visualizations/alignment_rname_boxplot/).
+[https://github.com/galaxyproject/training-material/tree/master/Dev-Corner/tutorials/files/hands_on-visualizations/alignment_rname_boxplot](https://github.com/galaxyproject/training-material/tree/master/Dev-Corner/tutorials/files/hands_on-visualizations/alignment_rname_boxplot).
 To try out this example, simply copy this folder to the `$GALAXY_ROOT/config/plugins/visualizations/` folder
 on your (local) Galaxy and restart Galaxy.
 
