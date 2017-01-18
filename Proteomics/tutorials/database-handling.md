@@ -16,8 +16,9 @@ Identifying peptides in proteomic datasets is commonly done by using search engi
 >
 > 1. [Loading a Search Database](#Loading-a-Search-Database)
 > 2. [Merging Databases](#Merging-Databases) 
-> 3. [Creating Decoy Databases](#Creating-Decoy-Databases)
+> 3. [Creating Decoy Databases](#Decoy-database)
 
+<a name="Loading-a-Search-Database"/></a>
 # Loading a Search Database
 
 There are a many options for how you can upload your search database (FASTA file with protein sequences). Three among these are:
@@ -75,6 +76,7 @@ A widely used database for common contaminants is the **c**ommon **R**epository 
 > ### :nut_and_bolt: Comment
 > The reviewed mycoplasma databases do not contain all known proteins. It is better to include also the TREMBL database. Mycoplasma proteomes are very small, so even downloading TREMBL will not bloat your main database unneccessarily.
 
+<a name="Merging-Databases"/></a>
 # Merging databases
 
 Depending on the search engine you are using you might need to merge all fasta entries in a single database. Before doing so, you should add an identifier to all cRAP entries to distinguish them from the proteins of interest.
@@ -94,6 +96,7 @@ Depending on the search engine you are using you might need to merge all fasta e
 >	> ### Optional: Merging mycoplasma databases
 >	> At this step you may also merge the mycoplasma protein databases that you downloaded earlier on. Simply enter them as additional inputs in **FASTA Merge Files and Filter Unique Sequences** :wrench:. You can enter any number of databases when you click on `Insert Input FASTA file(s)`.
 
+<a name="Decoy-database"/></a>
 # Creating a Decoy Database
 
 The most common method of peptide and protein FDR calculation is by adding known non-existing proteins, so-called "decoys" to the database. This can be done by reverting or shuffling the real protein entries and adding those fake entries to the database. Some peptide search engines depend on premade decoy databases, others can perform this step automatically.
