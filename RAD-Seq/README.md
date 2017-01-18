@@ -19,8 +19,9 @@ A tutorial with hands-on is available for this topic:
 
 ## Input datasets
 
-The input datasets for the tutorials are available on Zenodo:
-- [population genomics tutorials](http://doi.org/10.5281/zenodo.218574).
+The input datasets for the tutorials are available on CeSGO hub and ENA:
+- [population genomics tutorials CeSGO files](https://cesgo.genouest.org/resources/370/supportingdocs).
+- [population genomics tutorials SRA raw reads](ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR034/SRR034310/SRR034310.fastq.gz).
 
 ## Galaxy instance
 
