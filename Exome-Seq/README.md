@@ -9,7 +9,7 @@ Exome sequencing means that all protein-coding genes in a genome are sequenced.
 
 # Slides
 
-Slides can be found here: http://bgruening.github.io/training-material/Exome-Seq/slides/index.html
+Slides can be found here: http://galaxyproject.github.io/training-material/Exome-Seq/slides/index.html
 
 # Tutorials
 

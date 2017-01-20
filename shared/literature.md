@@ -14,7 +14,7 @@
 
 - [VCF format](http://gatkforums.broadinstitute.org/gatk/discussion/1268/how-should-i-interpret-vcf-files-produced-by-the-gatk) (encoding SNPs, indels etc.): Very readable, albeit not exhausting description
 
-- Transcriptomes are often saved in [GFF3 format](https://github.com/The-Sequence-Ontology/Specifications/blob/master/gff3.md) (this is what TopHat needs, for example), but just to make things more complicated, GTF is another format used for transcriptome information, too ([here](http://gmod.org/wiki/GFF2) are more information on GTF)
+- Transcriptomes are often saved in [GFF3 format](https://github.com/The-Sequence-Ontology/Specifications/blob/master/gff3.md) (this is what TopHat needs, for example), but just to make things more complicated, GTF is another format used for transcriptome information, too
 
 
 ##Bioinformatic Tools (Linux, R, BEDTools etc.) - Manuals, courses, original papers

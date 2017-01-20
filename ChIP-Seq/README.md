@@ -8,19 +8,18 @@ Here, we propose some materials to learn how to analyze ChIP-seq data.
 
 Several deck of slides are available for this topic:
 
-- [General introduction about ChIP-seq data analysis](http://bgruening.github.io/training-material/ChIP-Seq/slides)
-- Slide deck related to the tutorials:
-    - [Identification of the binding sites of the Estrogen receptor with ChIP-sequencing](http://bgruening.github.io/training-material/ChIP-Seq/slides/estrogen_receptor_binding_site_identification.html)
+- [General introduction about ChIP-seq data analysis](http://galaxyproject.github.io/training-material/ChIP-Seq/slides)
 
 # Tutorials
 
 A tutorial with hands-on is available for this topic:
 
-- [Identification of the binding sites of the Estrogen receptor with ChIP-sequencing](tutorials/estrogen_receptor_binding_site_identification.md)
+- [Identification of the binding sites of the T-cell acute lymphocytic leukemia protein 1 (TAL1) with ChIP-sequencing](tutorials/TAL1_binding_site_identification.md)
 
 ## Input datasets
 
-The input datasets for the tutorial will be available soon on Zenodo.
+The input datasets for the tutorial are available on [Zenodo](https://doi.org/10.5281/zenodo.197100
+).
 
 ## Galaxy instance
 
@@ -107,12 +106,14 @@ It will launch a flavored Galaxy instance available on
 
 This material is maintained by:
 
-- Maintainer 1
-- Maintainer 2
+- Mallory Freeberg
+- Mo Heydarian
 
 For any question related to this topic and the content, you can contact them.
 
 The following individuals have contributed to this training material:
 
-- Name 1
-- Name 2
+- Mallory Freeberg
+- Mo Heydarian
+- Friederike Dündar
+- Bérénice Batut

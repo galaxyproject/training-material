@@ -1,0 +1,163 @@
+---
+layout: base
+---
+{% include main_header.html %}
+{% assign topic = site.data[page.topic_name] %}
+
+<section>
+    <h1>{{ topic.title }}</h1>
+
+    <p>{{ topic.summary }}</p>
+
+    {% if topic.requirements %}
+        <a name="requirements"></a>
+        <h2>Requirements</h2>
+
+        <p>Before diving into this topic, we recommend you to have a look at:</p>
+
+        <ul>
+            {% for requirement in topic.requirements %}
+                <li>
+                    {% if requirement.type == "internal" %}
+                    <a href="{{ site.url }}{{ requirement.link }}">{{ requirement.title }}</a>
+                    {% elsif material.type == "external" %}
+                    <a href="{{ requirement.link }}">{{ requirement.title }}</a>
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    <a name="material"></a>
+    <h2>Material</h2>
+
+    <table class="table table-striped">
+        <tr>
+              <td class="bold">Lesson</td>
+              <td class="bold">Hands-on</td>
+              <td class="bold">Slides</td>
+
+              {% if topic.type != "admin-dev" %}
+                  <td class="bold">Input dataset</td>
+                  <td class="bold">Galaxy tour</td>
+              {% endif %}
+        </tr>
+
+        {% for material in topic.material %}
+            <tr>
+                <td>{{ material.title }}</td>
+            
+                {% if material.type == "introduction" %}                     
+                    <td></td>
+                    <td>    
+                        {% if material.slides == "yes" %}
+                        <a href="{{ site.url }}/{{ page.url }}/slides">:mortar_board:</a>
+                        {% endif %}
+                    </td>
+                    {% if topic.type != "admin-dev" %}
+                        <td></td>
+                        <td></td>
+                    {% endif %}
+
+                {% elsif material.type == "tutorial" %}
+                    <td>
+                        {% if material.hands_on == "yes" %}
+                        <a href="{{ site.url }}{{ page.url }}tutorials/{{ material.name }}">:book:</a>
+                        {% elsif material.hands_on == "github" %}
+                        <a href="{{ site.github_repository }}/tree/master/{{ topic.name }}/tutorials/{{ material.name }}.md">:book:</a>
+                        {% endif %}
+                    </td>
+
+                    <td>
+                        {% if material.slides == "yes" %}
+                        <a href="{{ site.url }}{{ page.url }}slides/{{ material.name }}">:mortar_board:</a>
+                        {% endif %}
+                    </td>
+
+                    {% if topic.type != "admin-dev" %}
+                        <td>
+                            {% if material.zenodo_link != "" %}
+                            <a href="{{ material.zenodo_link }}">:open_file_folder:</a>
+                            {% endif %}
+                        </td>
+
+                        <td>
+                            {% if material.galaxy_tour != "" %}
+                            <a href="https://github.com/galaxyproject/galaxy-tours">:eyes:</a>
+                            {% endif %}
+                        </td>
+                    {% endif %}
+                {% endif %}
+            </tr>
+        {% endfor %}
+    </table>
+
+    {% if topic.docker_image != "" %}
+        <a name="docker_image"></a>
+        <h2>Galaxy instance</h2>
+
+        <p>For these tutorials, you can use the dedicated Docker image:</p>
+
+        <pre><code>
+        docker run -d -p 8080:80 {{ topic.docker_image }}
+        </code></pre>
+
+        <p>It will launch a flavored Galaxy instance available on <a href="http://localhost:8080">http://localhost:8080</a>.</p>
+    {% endif %}
+
+    <a name="contributors"></a>
+    <h2>Contributors</h2>
+
+    <p>This material is maintained by:</p>
+
+    <ul>
+        {% for maintainer in topic.maintainers %}
+            <li>
+            {% if maintainer.github_username != "" %}
+                <a href="http://github.com/{{ maintainer.github_username }}">{{ maintainer.name }}</a>
+            {% else %}
+                {{ maintainer.name }}
+            {% endif %}
+            {% if maintainer.email != "" %}
+                (<a href="mailto:{{ maintainer.email }}">{{ maintainer.email }}</a>)
+            {% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+
+    <p><em>For any question related to this topic and the content, you can contact them.</em></p>
+
+    <p>The following persons have contributed to this training material:</p>
+
+    <ul>
+        {% for contributor in topic.contributors %}
+            <li>
+            {% if contributor.github_username != "" %}
+                <a href="http://github.com/{{ contributor.github_username }}">{{ contributor.name }}</a> 
+            {% else %}
+                {{ contributor.name }}
+            {% endif %}
+            {% if contributor.email != "" %}
+                (<a href="mailto:{{ contributor.email }}">{{ contributor.email }}</a>)
+            {% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+
+    {% if topic.references %}
+        <a name="references"></a>
+        <h2>References</h2>
+
+        {% for reference in topic.references %}
+            <p>
+            <span class="bold">{{ reference.authors }}:</span> <a href="{{ reference.link }}">{{ reference.title }}</a>
+
+            {% if reference.summary != "" %}
+            <br/><cite>{{ reference.summary }}</cite>
+            {% endif %}
+            </p>
+        {% endfor %}
+    {% endif %}
+</section>
+
+{% include main_footer.html %}

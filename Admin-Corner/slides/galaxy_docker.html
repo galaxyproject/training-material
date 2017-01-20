@@ -1,184 +1,286 @@
-<!doctype html>
-<html lang="en">
+---
+layout: tutorial_slides
+topic_name: "Admin-Corner"
+tutorial_name: galaxy_docker
+logo: "GTN"
+---
 
-	<head>
-		<meta charset="utf-8">
+### Preparation
 
-		<title>Docker and Galaxy</title>
+```
+$ docker pull quay.io/bgruening/galaxy:gcc2016
+$ docker pull quay.io/bgruening/galaxy-docs-slurm:gcc2016
+$ git clone -b gcc2016 https://github.com/bgruening/docker-galaxy-stable.git
+```
 
-		<link rel="stylesheet" href="../../shared/reveal.js/css/reveal.css">
-		<link rel="stylesheet" href="../../shared/reveal.js/css/theme/simple.css" id="theme">
+???
 
-		<!-- Code syntax highlighting -->
-		<link rel="stylesheet" href="../../shared/reveal.js/lib/css/zenburn.css">
-        <link rel="stylesheet" href="../../shared/font-awesome/css/font-awesome.min.css">
-		<link rel="stylesheet" href="../../shared/css/custom.css" id="theme">
+Here you will learn the internals of the Docker Galaxy Image.
+We will show you tips and tricks on how to run the Galaxy Docker
+Image successfully in production, how to manage updates and how
+to bind the container to a cluster scheduler. Moreover,
+you will learn how to create your own Galaxy flavour mixing a
+variety of different tools and visualisations
 
-		<!-- Printing and PDF exports -->
-        <script>
-          if( window.location.search.match( /print-pdf/gi ) ) {
-            var link = document.createElement( 'link' );
-            link.rel = 'stylesheet';
-            link.type = 'text/css';
-            link.href = '../../shared/reveal.js/css/print/pdf.css';
-            document.getElementsByTagName( 'head' )[0].appendChild( link );
-          }
-        </script>
-		<!--<script>
-            if (window.location.search.match(/print-pdf/gi)) {
-                document.write('<link rel="stylesheet" href="css/pdf.css" type="text/css">');
-            }
-        </script>-->
+---
 
-		<!--[if lt IE 9]>
-        <script src="../../shared/reveal.js/lib/js/html5shiv.js"></script>
-        <![endif]-->
-	</head>
+## Why Docker? <br>What is it?
 
-	<body>
-		<div class="reveal">
-            <div class="slides">
-                <section data-markdown>
-                    <script type="text/template">
-                        ## Welcome!
+![](../images/docker_whale.png)
 
-                        <img src="../../shared/images/GTNLogo1000.png" alt="GTNLogo1000" width=30%/>
+---
 
-                        The easiest way to **navigate** this slide deck
-                        is **by hitting `[space]` on your keyboard**
+### Deployment issues of bioinformatics tools
 
-                        You can also navigate with arrow keys, but be careful because some
-                        slides can be nested inside of each other (vertically)
-                    </script>
-                </section>
-				<section data-markdown>
-					<script type="text/template">
-						## Preparation
+- Different environments
+- Different OS
+- Different packaging
+- Conflict between tools or versions
 
-						* docker pull quay.io/bgruening/galaxy:gcc2016
-						* docker pull quay.io/bgruening/galaxy-docs-slurm:gcc2016
-						* git clone -b gcc2016 https://github.com/bgruening/docker-galaxy-stable.git
-					</script>
-				</section>
-				<section data-markdown>
-					<script type="text/template">
-						## Outline
+<i class="fa fa-long-arrow-right"></i> Impact on usuability and reproducibility
 
-						* Docker basics
-						* Galaxy Docker image (usage)
-						* Galaxy Docker (internals)
-						* Galaxy flavours
+---
 
-						Here you will learn the internals of the Docker Galaxy Image.
-						We will show you tips and tricks on how to run the Galaxy Docker
-						Image successfully in production, how to manage updates and how
-						to bind the container to a cluster scheduler. Moreover,
-						you will learn how to create your own Galaxy flavour mixing a
-						variety of different tools and visualisations.
+### Deployment issue
 
-					</script>
-				</section>
+![](../images/deployment_issue.svg)
 
-				<section data-markdown>
-					<script type="text/template">
-						##Container vs. VM
-						<img src="../images/containers.png" width=30%>
-						<img src="../images/vms.png" width=30%>
-					</script>
-				</section>
+---
 
-				<section>
-				<!-- Docker basics section -->
-				<section data-markdown>
-					<script type="text/template">
-						##Docker basics
-						<img src="../images/container_explainer.png" class="no-border">
+### Deployment issue
 
-					</script>
-				</section>
+Matrix from Hell
 
-				<section data-markdown>
-					<script type="text/template">
-						## Container lifecycle
+![](../images/deployment_issue_matrix.svg)
 
-						* containers vs. image
-						* data persistence
-						* mounting volumes
-					</script>
-				</section>
-				<section data-markdown>
-					<script type="text/template">
-					## pull
+---
 
-					* docker pull hello-world
-					* docker pull docker/whalesay
-					* docker pull bgruening/galaxy-stable:16.01
-					* docker pull quay.io/bgruening/galaxy
-					* docker images
-					</script>
-				</section>
+### Transport Pre 1960
 
-				<section data-markdown>
-					<script type="text/template">
-						## run
+![](../images/cargo_transport_issue.svg)
 
-<pre><code style="font-size: .8em; line-height: 1em; max-height: 500px;">
-bag@bag:~$ docker run hello-world
+---
 
-Hello from Docker.
+### Transport Pre 1960
+
+Matrix from Hell
+
+![](../images/cargo_transport_matrix.svg)
+
+---
+
+### Intermodal shipping container
+
+![](../images/cargo_transport_solution.svg)
+
+???
+
+A standard container
+- Virtually loading any goods
+- Sealed until it reaches final delivery
+- Can be 
+  - loaded and unloaded
+  - stacked
+  - transported efficiently over long distances
+  - transferred from one mode of transport to another
+
+---
+
+### Docker
+
+![](../images/deployment_solution.svg)
+
+
+???
+
+Docker = An engine that encapsulated any tools as a 
+- lightweight
+- portable
+- self sufficient container
+- manipulated using standard operations
+- run consistently on virtually any hardware platform
+
+---
+
+### A Docker container?
+
+![](../images/WhatIsDocker_1_kernal-2_1.png)
+
+Lightweight and Open
+
+???
+
+- lightweight: same OS kernel, instant start, less RAM use
+- open: open standard, run on all major unix distributions and windows
+
+---
+
+### Virtual machines vs Containers
+
+![](../images/container_vs_vm.svg)
+
+Containers more portable and efficient
+
+???
+
+Similar resource isolation and allocation benefits
+
+*but* a different architectural approach
+
+- VM: application +  necessary binaries and libraries + entire guest operating system 
+  - All of which can amount to tens of GBs
+- Container: application and all of its dependencies 
+  - Share the kernel with other containers
+  - Rnning as isolated processes in user space on the host operating system
+
+---
+
+## How to use Docker?
+
+![](../images/docker-usage.jpg)
+
+---
+
+### The client
+
+![](../images/docker_command.png)
+
+???
+
+Docker Engine = the core Docker technology on your computer
+
+Client: to talk with Docker
+
+`docker --help`
+
+---
+
+### Containers? Images?
+
+![](../images/docker_concept_image_container.png)
+
+???
+
+Image: 
+- recipe that tell how to build your container
+- A filesystem and parameters to use at runtime
+- snapshot of the content of a container: it doesn’t have state and never changes once built
+
+Container
+- a running instance of an image
+- you can execute several time the same recipe and if you follow every time the same recipe, you will have the same meal several time. Same for containers
+
+---
+
+### How to get images?
+
+![](../images/docker_concept_pull.png)
+
+???
+
+Docker Registry: 
+
+- stateless
+- highly scalable server side application 
+
+to stores and distribute Docker images
+
+Example: docker hub, quay.io
+
+---
+
+### `docker pull`
+
+```sh
+$ docker pull hello-world
+Using default tag: latest
+latest: Pulling from library/hello-world
+c04b14da8d14: Pull complete
+Digest: sha256:0256e8a36e2070f7bf2d0b0763dbabdd67798512411de4cdcf9431a1feb60fd9
+Status: Downloaded newer image for hello-world:latest
+```
+
+---
+
+### Creation of containers
+
+![](../images/docker_concept_run.png)
+
+---
+
+### `docker run`
+
+```sh
+$ docker run hello-world
+
+Hello from Docker!
 This message shows that your installation appears to be working correctly.
 
 To generate this message, Docker took the following steps:
-	 1. The Docker client contacted the Docker daemon.
-	 2. The Docker daemon pulled the "hello-world" image from the Docker Hub.
-	 3. The Docker daemon created a new container from that image which runs the
-	    executable that produces the output you are currently reading.
-	 4. The Docker daemon streamed that output to the Docker client, which sent it
-	    to your terminal.
+ 1. The Docker client contacted the Docker daemon.
+ 2. The Docker daemon pulled the "hello-world" image from the Docker Hub.
+ 3. The Docker daemon created a new container from that image which runs the
+    executable that produces the output you are currently reading.
+ 4. The Docker daemon streamed that output to the Docker client, which sent it
+    to your terminal.
 
-	To try something more ambitious, you can run an Ubuntu container with:
-	 $ docker run -it ubuntu bash
+To try something more ambitious, you can run an Ubuntu container with:
+ $ docker run -it ubuntu bash
 
-	Share images, automate workflows, and more with a free Docker Hub account:
-	https://hub.docker.com
+Share images, automate workflows, and more with a free Docker Hub account:
+ https://hub.docker.com
 
-	For more examples and ideas, visit:
-	https://docs.docker.com/engine/userguide/
-
-</code></pre>
-				</script>
-			</section>
-
-
-			<section data-markdown>
-				<script type="text/template">
-					 ## run
+For more examples and ideas, visit:
+ https://docs.docker.com/engine/userguide/
 ```
-% docker run docker/whalesay cowsay Galaxy
- 	________
-	< Galaxy >
-	 --------
-	    \
-	     \
-	      \
-	                    ##        .
-	              ## ## ##       ==
-	           ## ## ## ##      ===
-	       /""""""""""""""""___/ ===
-	  ~~~ {~~ ~~~~ ~~~ ~~~~ ~~ ~ /  ===- ~~~
-	       \______ o          __/
-	        \    \        __/
-	          \____\______/
 
+---
 
+### `docker run`
+
+```sh
+$ docker run docker/whalesay cowsay Galaxy
+Unable to find image 'docker/whalesay:latest' locally
+latest: Pulling from docker/whalesay
+e190868d63f8: Pull complete
+909cd34c6fd7: Pull complete
+0b9bfabab7c1: Pull complete
+a3ed95caeb02: Pull complete
+00bf65475aba: Pull complete
+c57b6bcc83e3: Pull complete
+8978f6879e2f: Pull complete
+8eed3712d2cf: Pull complete
+Digest: sha256:178598e51a26abbc958b8a2e48825c90bc22e641de3d31e18aaf55f3258ba93b
+Status: Downloaded newer image for docker/whalesay:latest
+ ________
+< Galaxy >
+ --------
+    \
+     \
+      \
+                    ##        .
+              ## ## ##       ==
+           ## ## ## ##      ===
+       /""""""""""""""""___/ ===
+  ~~~ {~~ ~~~~ ~~~ ~~~~ ~~ ~ /  ===- ~~~
+       \______ o          __/
+        \    \        __/
+          \____\______/
 ```
-					</script>
-				</section>
-				<section data-markdown>
-   					<script type="text/template">
-						## run
-<pre><code style="font-size: .8em; line-height: 1em; max-height: 500px;">
-Usage:	docker run [OPTIONS] IMAGE [COMMAND] [ARG...]
+
+???
+
+- Automatic `pull` if image not findable
+- Interaction with the container to say something
+
+---
+
+### `docker run`
+
+```sh
+$ docker run --help
+
+Usage:  docker run [OPTIONS] IMAGE [COMMAND] [ARG...]
 
 Run a command in a new container
 
@@ -187,7 +289,6 @@ Run a command in a new container
   --cpu-shares                    CPU shares (relative weight)
   ...
   -d, --detach                    Run container in background and print container ID
-
   -e, --env=[]                    Set environment variables
   --entrypoint                    Overwrite the default ENTRYPOINT of the image
   --env-file=[]                   Read in a file of environment variables
@@ -204,16 +305,40 @@ Run a command in a new container
   -t, --tty                       Allocate a pseudo-TTY
   -v, --volume=[]                 Bind mount a volume
   ...
-</code></pre>
-					</script>
-				</section>
-				<section data-markdown>
-   					<script type="text/template">
-						## Control during startup
 ```
-% docker run -i -t
+
+---
+
+### Run an interactive container
+
+```sh
+$ docker run -t -i docker/whalesay
+root@7de97f8dd5eb:/cowsay#
+root@7de97f8dd5eb:/cowsay# cowsay Galaxy
+ ________
+< Galaxy >
+ --------
+    \
+     \
+      \
+                    ##        .
+              ## ## ##       ==
+           ## ## ## ##      ===
+       /""""""""""""""""___/ ===
+  ~~~ {~~ ~~~~ ~~~ ~~~~ ~~ ~ /  ===- ~~~
+       \______ o          __/
+        \    \        __/
+          \____\______/
+root@7de97f8dd5eb:/cowsay#
+```
+
+---
+
+### Control during startup
+
+```
+$ docker run -i -t
     -p 8080:80 -p 8021:21 -p 9002:9002
-    -v /home/user/galaxy_storage/:/export/
     --privileged=true
     -e "NONUSE=reports"
     -e "GALAXY_CONFIG_ADMIN_USERS=albert@einstein.gov"
@@ -223,132 +348,391 @@ Run a command in a new container
 
     quay.io/bgruening/galaxy
 ```
-					</script>
-				</section>
-				<section data-markdown>
-					<script type="text/template">
-						## exec
-						Run a command in a running container
+
+???
+
+possibility to add many different parameters to control the container when starting it
+
+---
+
+### Management of data
+
+```sh
+$ mkdir data
+$ docker run docker/whalesay cowsay Galaxy > data/cowsay
+$ more data/cowsay
+ ________
+< Galaxy >
+ --------
+    \
+     \
+      \
+                    ##        .
+              ## ## ##       ==
+           ## ## ## ##      ===
+       /""""""""""""""""___/ ===
+  ~~~ {~~ ~~~~ ~~~ ~~~~ ~~ ~ /  ===- ~~~
+       \______ o          __/
+        \    \        __/
+          \____\______/
+$ docker run -t -i docker/whalesay
+root@f4fa8ed32ef8:/cowsay# ls
+ChangeLog  INSTALL  LICENSE  MANIFEST  README  Wrap.pm.diff  cows  cowsay  cowsay.1  install.pl  install.sh  pgp_public_key.txt
+root@f4fa8ed32ef8:/cowsay# cowsay Hello Galaxy > cowsay2
+```
+
+Can we access the `cowsay` file inside the container? <br>And the `cowsay2` file outside the container?
+
+---
+
+### Management of data
+
+![](../images/docker_volume_closed.png)
+
+???
+
+A container is closed
+
+---
+
+### Management of data
+
+![](../images/docker_volume_open.png)
+
+???
+
+A container is closed
+
+---
+
+### Data volume
+
+![](../images/docker_volume.png)
+
+???
+
+Data volume 
+- a specially-designated directory 
+- within one or more containers 
+- bypasses the Union File System
+
+Data volumes designed to persist data, independent of the container’s life cycle:
+- Initialisation when a container is created
+- Possibility of sharing and reusing among containers
+- Direct changes to a data volume
+- Persistence of data volumes even if the container itself is deleted
+
+---
+
+### Data volume
+
+![](../images/docker_run_volume.png)
+
+???
+
+How to get a data volume?
+
+---
+
+### Data volume
+
+```sh
+$ ls data/
+cowsay_Galaxy
+$ docker run -t -i -v $PWD/data:/data docker/whalesay
+root@f4fa8ed32ef8:/cowsay# ls /data
+cowsay_Galaxy
+root@f4fa8ed32ef8:/cowsay# cowsay Galaxy2 > /data/cowsay_Galaxy2
+root@f4fa8ed32ef8:/cowsay# ls /data
+cowsay_Galaxy  cowsay_Galaxy2
+root@f4fa8ed32ef8:/cowsay# exit
+$ ls data/
+cowsay_Galaxy   cowsay_Galaxy2
+```
+
+---
+
+### Execution of commands <br>inside a running container
+
+![](../images/docker_concept_exec.png)
+
+???
+
+Run a command in a running container
+
+---
+
+### `docker exec`
+
+```sh
+$ docker run -d docker/whalesay /bin/sh -c "while true; do sleep 1; done"
+7179e85085ef14634f8b50f908a255707743dec0a5d1fd7fb3cd9036334d5177
+$ docker exec 7179e85085ef14634f8b50f908a255707743dec0a5d1fd7fb3cd9036334d5177 \
+cowsay Galaxy
+ ________
+< Galaxy >
+ --------
+    \
+     \
+      \
+                    ##        .
+              ## ## ##       ==
+           ## ## ## ##      ===
+       /""""""""""""""""___/ ===
+  ~~~ {~~ ~~~~ ~~~ ~~~~ ~~ ~ /  ===- ~~~
+       \______ o          __/
+        \    \        __/
+          \____\______/
+```
+
+
+---
+
+### Stop/Start containers
+
+![](../images/docker_concept_start_stop.png)
+
+Note: Sending SIGTERM and then SIGKILL after a grace period
+
+---
+
+### `docker stop` & `docker start`
+
+```sh
+$ docker stop 7179e85085ef14634f8b50f908a255707743dec0a5d1fd7fb3cd9036334d5177
+7179e85085ef14634f8b50f908a255707743dec0a5d1fd7fb3cd9036334d5177
+$
+$ docker exec 7179e85085ef14634f8b50f908a255707743dec0a5d1fd7fb3cd9036334d5177 \
+cowsay Galaxy
+Error response from daemon: Container 7179e85085ef14634f8b50f908a255707743dec0a5d1fd7fb3cd9036334d5177 \
+is not running
+$
+$ docker start 7179e85085ef14634f8b50f908a255707743dec0a5d1fd7fb3cd9036334d5177
+7179e85085ef14634f8b50f908a255707743dec0a5d1fd7fb3cd9036334d5177
+$
+$ docker exec 7179e85085ef14634f8b50f908a255707743dec0a5d1fd7fb3cd9036334d5177 \
+cowsay Galaxy
+ ________
+< Galaxy >
+ --------
+    \
+     \
+      \
+                    ##        .
+              ## ## ##       ==
+           ## ## ## ##      ===
+       /""""""""""""""""___/ ===
+  ~~~ {~~ ~~~~ ~~~ ~~~~ ~~ ~ /  ===- ~~~
+       \______ o          __/
+        \    \        __/
+          \____\______/
+```
+
+---
+
+### View all containers
+
+![](../images/docker_concept_ps.png)
+
+---
+
+### `docker ps`
+
+```sh
+$ docker ps
+CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS               NAMES
+7179e85085ef        docker/whalesay     "/bin/sh -c 'while tr"   12 minutes ago      Up 2 seconds                            agitated_lovelace
+$
+$ docker ps -a
+CONTAINER ID        IMAGE                  COMMAND                  CREATED             STATUS                          PORTS               NAMES
+7de97f8dd5eb        docker/whalesay        "/bin/bash"              4 minutes ago       Exited (0) About a minute ago                       trusting_swanson
+9218bbee9c48        docker/whalesay        "/bin/bash"              5 minutes ago       Exited (0) 4 minutes ago                            evil_swirles
+7179e85085ef        docker/whalesay        "/bin/sh -c 'while tr"   13 minutes ago      Up 55 seconds                                       agitated_lovelace
+ad275579c454        ubuntu                 "/bin/sh -c 'while tr"   15 minutes ago      Exited (137) 13 minutes ago                         condescending_mestorf
+66179c4d16da        ubuntu                 "/bin/bash"              About an hour ago   Exited (130) 15 minutes ago                         determined_pasteur
+27386c8b69b3        ubuntu                 "/bin/sh"                About an hour ago   Exited (0) About an hour ago                        lonely_ramanujan
+4cfefa19e6fa        docker/whalesay        "/bin/bash"              About an hour ago   Exited (0) About an hour ago                        thirsty_chandrasekhar
+82687eb94ab9        docker/whalesay        "cowsay Galaxy"          2 hours ago         Exited (0) 2 hours ago                              fervent_babbage
+6dbabb9384ad        tmp-bioconda-builder   "/usr/local/bin/tini "   8 days ago          Exited (0) 7 days ago                               tender_bhaskara
+5d6f09b94727        tmp-bioconda-builder   "/usr/local/bin/tini "   8 days ago          Exited (0) 8 days ago                               jolly_brattain
+4e6f38b4c34c        tmp-bioconda-builder   "/usr/local/bin/tini "   8 days ago          Created                                             angry_colden
+b3e6c7412a75        tmp-bioconda-builder   "/usr/local/bin/tini "   8 days ago          Created                                             desperate_visvesvaraya
+1ec56c9e37f8        tmp-bioconda-builder   "/usr/local/bin/tini "   8 days ago          Created                                             hopeful_khorana
+2b129d00eb10        tmp-bioconda-builder   "/usr/local/bin/tini "   8 days ago          Created                                             gigantic_ptolemy
+da45ab698f58        fb77c13d04c0           "/usr/local/bin/tini "   13 days ago         Exited (0) 13 days ago                              jovial_yalow
+48dc3ed4e173        fb77c13d04c0           "/usr/local/bin/tini "   13 days ago         Created                                             focused_ritchie
+e9195b6512dd        a2107450fdf2           "/usr/local/bin/tini "   2 weeks ago         Created                                             thirsty_bardeen
+```
+
+Note: Name of containers and id
+
+---
+
+### Creation of a new image
+
+![](../images/docker_concept_build.png)
+
+???
+
+Need a Dockerfile. I will describe it later. Here it is just to give you a broad overview of the principles 
+
+---
+
+### View all images
+
+![](../images/docker_concept_image.png)
+
+---
+
+### Push your image on a registry
+
+![](../images/docker_concept_push.png)
+
+---
+
+### <i class="fa fa-pencil"></i> Hands on! (1)
+
+Play with `quay.io/biocontainers/samtools:1.3--1`:
+
+1. Get the image
+2. Launch `samtools` container interactively
+  1. Print the help page for `samtools`
+3. Launch a `samtools` container in detach mode
+  1. Check if it exists and find its name
+  2. Stop it and restart it
+  3. Print the help page using this container
+
+---
+
+### <i class="fa fa-pencil"></i> Hands on! (2)
+
+Play with `quay.io/biocontainers/samtools:1.3--1`:
+
+1. Create locally a `samtool_dir` directory
+2. Launch an interactive container with a volume pointing at `samtool_dir` directory
+  1. Add a [toy sam file](https://raw.githubusercontent.com/samtools/samtools/develop/examples/toy.sam) into the local `samtool_dir` directory
+  2. Check if the existence of the file from inside the container
+  3. Visualize the content of the toy file with `samtools view` commands
+  4. Generate stats of the toy file into a `toy_stat` file into the local `samtool_dir` directory
+
+???
+
+data volume is the way to make your tool connecting 
+
+---
+
+## How to containerize your tools?
+
+![](../images/docker-container.jpg)
+
+???
+
+Now I am sure all of you want to containerize his tool :)
+
+---
+
+### How to create your image?
+
+![](../images/docker_build.svg)
+
+---
+
+### A Dockerfile?
+
+A text document that contains all the commands a user could call on the command line to assemble an image
+
+```sh
+# Comment
+INSTRUCTION arguments
+```
+
+.footnote[[Best practices](https://docs.docker.com/engine/userguide/eng-image/dockerfile_best-practices/)]
+
+???
+
+The paper describing the recipe for you container
+
+Review of the commands
+
+---
+
+### Dockerfile & Layers
+
+![](../images/dockerfile_layers.svg)
+
+---
+
+## How to integrate Galaxy inside Docker Container?
+
+---
+
+### Galaxy Docker Container
+
+A Docker launching a Galaxy instance and
+
+- FTP-Server
+- Webserver
+- Scheduler
+- Process control UI
+- ToolShed ready
+- Interactive Environment ready
+
 
 ```
-% docker exec <container name> supervisorctl restart galaxy:
+docker run -i -t -p 8080:80 quay.io/bgruening
 ```
-					</script>
-				</section>
 
-				<section data-markdown>
-					<script type="text/template">
-						## stop
+http://bgruening.github.io/docker-galaxy-stable/
 
-						Stop a running container.
-						Sending SIGTERM and then SIGKILL after a grace period
+---
+
+### <i class="fa fa-pencil"></i> Hands on!
+
+Launch a Galaxy Docker Container and try to
+
+- Add Data
+- Become an Admin
+- Restart Galaxy
+- Use export mounts (persistent data)
+- Trouble shooting (logging)
+- Install tools
+- Install visualizations (BioJS)
+- ...
+
+---
+
+### Galaxy + SLURM = <i class="fa fa-heart" aria-hidden="true"></i>
+
+https://github.com/bgruening/docker-galaxy-stable/tree/dev/docs/Running_jobs_outside_of_the_container.md
+
+---
+
+### Docker flavours
+
+![](../images/rna-workbench-chart.png)
+
+---
+
+### Galactic Flavours
+
+- [NCBI-Blast](https://github.com/bgruening/docker-galaxy-blast)
+- [ChemicalToolBox](https://github.com/bgruening/docker-recipes/blob/master/galaxy-chemicaltoolbox)
+- [ballaxy](https://github.com/anhi/docker-scripts/tree/master/ballaxy)
+- [NGS-deepTools](https://github.com/bgruening/docker-recipes/blob/master/galaxy-deeptools)
+- [Galaxy ChIP-exo](https://github.com/gregvonkuster/docker-galaxy-ChIP-exo)
+- [Galaxy Proteomics](https://github.com/bgruening/docker-galaxyp)
+- [Imaging](https://github.com/bgruening/docker-galaxy-imaging)
+- [Constructive Solid Geometry](https://github.com/gregvonkuster/docker-galaxy-csg)
+- [Galaxy for metagenomics](https://github.com/bgruening/galaxy-metagenomics)
+- [Galaxy with the Language Application Grid tools](https://github.com/lappsgrid-incubator)
+- [RNAcommender](https://github.com/gianlucacorrado/galaxy-RNAcommender)
+- [OpenMoleculeGenerator](https://github.com/bgruening/galaxy-open-molecule-generator)
+
+---
+
+### Create your own Flavour
+
 ```
-% docker stop <container name>
-```
-					</script>
-				</section>
-
-				<section data-markdown>
-					<script type="text/template">
-						## build
-
-						Build an image from a Dockerfile
-```
-% docker build -t image_name <Dockerfile>```
-					</script>
-				</section>
-				<section data-markdown>
-					<script type="text/template">
-						## ps
-
-						List containers
-```
-% docker ps
-```
-					</script>
-				</section>
-				<!-- close Docker basic section -->
-				</section>
-				<section>
-				<section data-markdown>
-					<script type="text/template">
-						## Galaxy Docker Container
-						https://github.com/bgruening/docker-galaxy-stable
-
-						* FTP-Server
-						* Webserver
-						* Scheduler
-						* Process control UI
-						* ToolShed ready
-						* Interactive Environment ready
-
-```
-docker run -i -t -p 8080:80 quay.io/bgruening/galaxy:gcc2016
-```
-doi: 10.5281/zenodo.51627
-					</script>
-				</section>
-
-				<section data-markdown>
-					<script type="text/template">
-						## Things to try
-
-						* adding Data
-						* integrated FTP server
-						* becoming an Admin
-						* restart Galaxy
-						* using export mounts (persistent data)
-						* trouble shooting (logging)
-						* installing tools
-						* install visualizations (biojs)
-						* ...
-					</script>
-				</section>
-
-				<section data-markdown>
-					<script type="text/template">
-						## Galaxy + SLURM = <i class="fa fa-heart" aria-hidden="true"></i>
-
-						https://github.com/bgruening/docker-galaxy-stable/tree/dev/docs/Running_jobs_outside_of_the_container.md
-					</script>
-				</section>
-				</section>
-				<section>
-				<section data-markdown>
-					<script type="text/template">
-						## Docker flavours
-
-						https://github.com/bgruening/docker-galaxy-stable/tree/dev/docs/Running_jobs_outside_of_the_container.md
-
-						<img src="../images/rna-workbench-chart.png" />
-
-					</script>
-				</section>
-
-				<section data-markdown>
-					<script type="text/template">
-						## Galactic Flavours
-
-						* <a href="https://github.com/bgruening/docker-galaxy-blast" target="_blank">NCBI-Blast</a>
-						* <a href="https://github.com/bgruening/docker-recipes/blob/master/galaxy-chemicaltoolbox" target="_blank">ChemicalToolBox</a>
-						* <a href="https://github.com/anhi/docker-scripts/tree/master/ballaxy" target="_blank">ballaxy</a>
-						* <a href="https://github.com/bgruening/docker-recipes/blob/master/galaxy-deeptools" target="_blank">NGS-deepTools</a>
-						* <a href="https://github.com/gregvonkuster/docker-galaxy-ChIP-exo" target="_blank">Galaxy ChIP-exo</a>
-						* <a href="https://github.com/bgruening/docker-galaxyp" target="_blank">Galaxy Proteomics</a>
-						* <a href="https://github.com/bgruening/docker-galaxy-imaging" target="_blank">Imaging</a>
-						* <a href="https://github.com/gregvonkuster/docker-galaxy-csg" target="_blank">Constructive Solid Geometry</a>
-						* <a href="https://github.com/bgruening/galaxy-metagenomics" target="_blank">Galaxy for metagenomics</a>
-						* <a href="https://github.com/lappsgrid-incubator/docker-galaxy-lappsgrid" target="_blank">Galaxy with the Language Application Grid tools</a>
-						* <a href="https://github.com/gianlucacorrado/galaxy-RNAcommender" target="_blank">RNAcommender</a>
-						* <a href="https://github.com/bgruening/galaxy-open-molecule-generator" target="_blank">OpenMoleculeGenerator</a>
-
-					</script>
-				</section>
-
-				<section data-markdown>
-					<script type="text/template">
-					## Create your own Flavour
-<pre><code style="font-size: .8em; line-height: 1em; max-height: 500px;">
 # Galaxy - My own flavour
 #
 # VERSION       0.1
@@ -367,12 +751,12 @@ ADD my_tool_list.yml $GALAXY_ROOT/my_tool_list.yml
 
 # Install deepTools
 RUN install-tools $GALAXY_ROOT/my_tool_list.yml
-</code></pre>
-					</script>
-				</section>
-				<section data-markdown>
-					<script type="text/template">
-						## The tools file
+```
+
+---
+
+### The tools file
+
 ```
 galaxy_instance: http://localhost:8080
 tools:
@@ -382,37 +766,17 @@ tools:
   tool_shed_url: https://toolshed.g2.bx.psu.edu
   #revisions:
 ```
-					</script>
-				</section>
-				<section data-markdown>
-					<script type="text/template">
-						### Galaxy Flavor Generator
-						<img src="../images/galaxy_flavour_generator.png" width="60%"/>
 
-						https://github.com/galaxyFlavorsGenerators/galaxyFlavorGenerator
-					</script>
-				</section>
-			</section>
+---
 
-		<script type="text/javascript" src="../../shared/reveal.js/lib/js/head.min.js"></script>
-        <script type="text/javascript" src="../../shared/reveal.js/js/reveal.js"></script>
-        <script type="text/javascript">
-            Reveal.initialize({
-                slideNumber: !window.location.search.match(/print-pdf/gi),
-                history: true,
+### <i class="fa fa-pencil"></i> Hands on!
 
-                theme: Reveal.getQueryHash().theme,
-                transition: Reveal.getQueryHash().transition || 'concave',
+Create a Galaxy Flavour
 
-                dependencies: [
-                    { src: '../../shared/reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
-                    { src: '../../shared/reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-                    { src: '../../shared/reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-                    { src: '../../shared/js/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
-                    { src: '../../shared/reveal.js/plugin/notes/notes.js', async: true },
-                ]
-            });
-        </script>
+---
 
-	</body>
-</html>
+### Galaxy Flavor Generator
+
+![](../images/galaxy_flavour_generator.png)
+
+https://github.com/galaxyFlavorsGenerators/galaxyFlavorGenerator
