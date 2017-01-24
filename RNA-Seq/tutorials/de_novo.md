@@ -3,7 +3,7 @@
 ---
 layout: tutorial_hands_on
 topic_name: RNA-Seq
-tutorial_name: de_novo
+tutorial_name: de_novo transcriptome reconstruction
 ---
 
 # Introduction
@@ -206,106 +206,52 @@ The recommended mode is "union", which counts overlaps even if a read only share
 
 > ### :pencil2: Hands-on: Counting the number of reads per transcript
 >
-> 1. **HTSeq-count** :wrench:: Run FeatureCounts on the aligned reads (HISAT output) using the Cuffmerge transcriptome database as the annotation file.
+> 1. **FeatureCounts** :wrench:: Run FeatureCounts on the aligned reads (HISAT output) using the Cuffmerge transcriptome database as the annotation file.
 >
+>    - Using the batch mode for input selection, choose the four aligned read files
 >    - "Gene annotation file" choose "in your history" and select the GTF file output by Cuffmerge. >    - The "union" mode
 >    - Expand the "Options for paired end reads" section and under "Orientation of the two read from the same pair" select "Forward, Reverse (fr)".
 >    - Expand the "Advanced options" and under "GFF gene identifier" specify "transcript_id"
-> ![](../images/cuffmerge.png)
+> ![](../images/FeatureCounts.png)
 >
->
->
-> 3. Inspect the result files
->
->    > ### :question: Question
->    >
->    > Which feature has the most reads mapped on it?
->    > 
->    >    <details>
->    >    <summary>Click to view answers</summary>
->    >    To display the most found feature, we need first to sort the output file with the feature and the number of reads found for these feature. We do that using Sort tool, on the second column and in descending order. And we found that FBgn0017545 is the feature with the most reads mapped on it with 4,030 reads.
->    >    </details>
->    {: .question}
-{: .hands_on}
+> {: .hands_on}
 
 ## Analysis of the differential gene expression
 
-In the previous section, we counted only reads that mapped to chromosome 4 for only one sample. To be able to identify differential gene expression induced by PS depletion, all datasets (3 treated and 4 untreated) must be analyzed with the similar procedure.
+Expression analysis is estimated from read counts and attempts are made to correct for variability in measurements using replicates - this is absolutely essential to obtaining accurate results. For your own experiments, we recommend having at least two biological replicates. 
 
-You can export a workflow from the previous steps and rerun it on the 7 samples whose the raw sequences are available on [Zenodo](http://dx.doi.org/10.5281/zenodo.61771). For time saving, we run the previous steps for you and obtain 7 count files, available on [Zenodo](http://dx.doi.org/10.5281/zenodo.61771)
-
-These files contain for each gene the number of reads mapped to it. We could compare directly the files and then having the differential gene expression. But the number of sequenced reads mapped to a gene depends on:
-
-- Its own expression level
-- Its length
-- The sequencing depth
-- The expression of all other genes within the sample
-
-Either for within or for inter-sample comparison, the counts need to be normalized. We can then use the Differential Gene Expression (DGE) analysis, whose two basic tasks are:
-
-- Estimate the biological variance using the replicates for each condition
-- Estimate the significance of expression differences between any two conditions
-
-This expression analysis is estimated from read counts and attempts are made to correct for variability in measurements using replicates that are absolutely essential accurate results. For your own analysis, we advice you to use at least 3, better 5 biological replicates. 
-
-[**DESeq2**](https://bioconductor.org/packages/release/bioc/html/DESeq2.html) is a great tool for DGE analysis. It takes read counts produced by **HTseq-count** and applies size factor normalization:
+[**DESeq2**](https://bioconductor.org/packages/release/bioc/html/DESeq2.html) is a great tool for differential gene expression analysis. It takes read counts produced by **FeatureCounts** and applies size factor normalization:
 
 - Computation for each gene of the geometric mean of read counts across all samples
 - Division of every gene count by the geometric mean
 - Use of the median of these ratios as sample's size factor for normalization
 
-Multiple factors can then be incorporated in the analysis. In our example, we have samples with two varying factors:
-
-- Treatment (either treated or untreated)
-- Sequencing type (paired-end or single-end)
-
-Here treatment is the primary factor which we are interested in.The sequencing type is some further information that we know about the data that might effect the analysis. This particular multi-factor analysis allows us to assess the effect of the treatment taking also the sequencing type into account.
 
 > ### :pencil2: Hands-on:
 >
-> 1. Create a new history
-> 2. Import the seven count files from [Zenodo](http://dx.doi.org/10.5281/zenodo.61771)
->    - [GSM461176_untreat_single.counts](https://zenodo.org/record/61771/files/GSM461176_untreat_single.counts)
->    - [GSM461177_untreat_paired.counts](https://zenodo.org/record/61771/files/GSM461177_untreat_paired.counts)
->    - [GSM461178_untreat_paired.counts](https://zenodo.org/record/61771/files/GSM461178_untreat_paired.counts)
->    - [GSM461179_treat_single.counts](https://zenodo.org/record/61771/files/GSM461179_treat_single.counts)
->    - [GSM461180_treat_paired.counts](https://zenodo.org/record/61771/files/GSM461180_treat_paired.counts)
->    - [GSM461181_treat_paired.counts](https://zenodo.org/record/61771/files/GSM461181_treat_paired.counts)
->    - [GSM461182_untreat_single.counts](https://zenodo.org/record/61771/files/GSM461182_untreat_single.counts)
->
->    > ### :nut_and_bolt: Comments
->    > If you are using the [Freiburg Galaxy instance](http://galaxy.uni-freiburg.de), you can load the dataset using 'Shared Data' <i class="fa fa-long-arrow-right"></i> 'Data Libraries' <i class="fa fa-long-arrow-right"></i> 'Galaxy Courses' <i class="fa fa-long-arrow-right"></i> 'RNA-Seq' <i class="fa fa-long-arrow-right"></i> 'count_tables'
->    {: .comment}
->
-> 3. **DESeq2** :wrench:: Run **DESeq2** with:
->    - "Treatment" as first factor with "treated" and "untreated" as levels and selection of count files corresponding to both levels
+> 1. **DESeq2** :wrench:: Run **DESeq2** with:
+>    - Specify "G1E" as the first factor level (condition) and select the count files corresponding to the two replicates
+>    - Specify "Mega" as the second factor level (condition) and select the count files corresponding to the two replicates
 >
 >       > ### :nut_and_bolt: Comment
 >       >
 >       > You can select several files by keeping the CTRL (or COMMAND) key pressed and clicking on the interesting files 
 >       {: .comment}
+>    - Under "Visualising the analysis results" select "Yes"
+>    - Under "Output normalized counts table" select "Yes"
 >
->    - "Sequencing" as second factor with "PE" and "SE" as levels and selection of count files corresponding to both levels
->
->    > ### :nut_and_bolt: Comment
->    >
->    > File names have all information needed
->    {: .comment}
 {: .hands_on}
 
 The first output of **DESeq2** is a tabular file. The columns are:
 
 1.	Gene identifiers
 2.	Mean normalized counts, averaged over all samples from both conditions
-3.	Logarithm (to basis 2) of the fold change
-
-
-    The log2 fold changes are based on primary factor level 1 vs. factor level 2. The order of factor levels is then important. For example, for the factor 'Treatment', DESeq2 computes fold changes of 'treated' samples against 'untreated', *i.e.* the values correspond to up- or downregulations of genes in treated samples.
-
+3.	Logarithm (to base 2) of the fold change (the values correspond to up- or downregulation relative to the condition listed as Factor level 1)
 4.	Standard error estimate for the log2 fold change estimate
 5.	[Wald](https://en.wikipedia.org/wiki/Wald_test) statistic
 6.	*p*-value for the statistical significance of this change
 7.	*p*-value adjusted for multiple testing with the Benjamini-Hochberg procedure which controls false discovery rate ([FDR](https://en.wikipedia.org/wiki/False_discovery_rate))
+
 
 > ### :pencil2: Hands-on:
 >
@@ -313,20 +259,16 @@ The first output of **DESeq2** is a tabular file. The columns are:
 >
 >    > ### :question: Question
 >    >
->    > How many genes have a significant change in gene expression between these conditions?
+>    > How many transcripts have a significant change in expression between these conditions?
 >    > 
 >    > <details>
 >    > <summary>Click to view answers</summary>
->    > To filter, you need to add the expression "c7&lt;0.05". And we get 751 genes (5.05%) with a significant change in gene expression between treated and untreated samples.
+>    > To filter, use "c7&lt;0.05". And we get 276 transcripts with a significant change in gene expression between the G1E and megakaryocyte cellular states.
 >    > </details>
 >    {: .question}
 >
->    > ### :nut_and_bolt: Comment
->    >
->    > The file with the independent filtered results can be used for further downstream analysis as it excludes genes with only few read counts as these genes will not be considered as significantly differentially expressed.
->    {: .comment}
 >
-> 2. **Filter** :wrench:: Extract genes that are significantly up and downregulated in treated samples
+> 2. **Filter** :wrench:: Determine how many transcripts are up or down regulated in the G1E state.
 >
 >    > ### :nut_and_bolt: Comments
 >    > Rename your datasets for the downstream analyses
@@ -338,7 +280,7 @@ The first output of **DESeq2** is a tabular file. The columns are:
 >    > 
 >    > <details>
 >    > <summary>Click to view answers</summary>
->    > To obtain the up-regulated genes, we filter the previously generated file (with the significant change in gene expression) with the expression "c3>0" (the log2 fold changes must be greater than 0). We obtain 331 genes (44.07% of the genes with a significant change in gene expression). For the down-regulated genes, we did the inverse and we 420 genes (55.93% of the genes with a significant change in gene expression)
+>    > To obtain the up-regulated genes in the G1E state, we filter the previously generated file (with the significant change in transcript expression) with the expression "c3>0" (the log2 fold changes must be greater than 0). We obtain 129  genes (46.7% of the genes with a significant change in gene expression). For the down-regulated genes in the G1E state, we did the inverse and we find 147 transcripts (53.3% of the genes with a significant change in transcript expression)
 >    > </details>
 >    {: .question}
 {: .hands_on}
@@ -360,19 +302,6 @@ In addition to the list of genes, **DESeq2** outputs a graphical summary of the 
 
     Each replicate is plotted as an individual data point. This type of plot is useful for visualizing the overall effect of experimental covariates and batch effects.
 
-    > ### :question: Questions
-    >
-    > 1. What is the first axis separating?
-    > 2. And the second axis?    
-    > 
-    >    <details>
-    >    <summary>Click to view answers</summary>
-    >    <ol type="1">
-    >    <li>The first axis is seperating the treated samples from the untreated samples, as defined when DeSeq was launched</li>
-    >    <li>The second axis is separating the single-end datasets from the paired-end datasets</li>
-    >    </ol>
-    >    </details>
-    {: .question}
 
 
 4. Heatmap of sample-to-sample distance matrix: overview over similarities and dissimilarities between samples
@@ -380,16 +309,6 @@ In addition to the list of genes, **DESeq2** outputs a graphical summary of the 
     ![](../images/DESeq2_heatmap.png)
 
 
-    > ### :question: Questions
-    >
-    > How are the samples grouped?
-    > 
-    >    <details>
-    >    <summary>Click to view answers</summary>
-    >    They are first grouped depending on the treatment (the first factor) and after on the library type (the second factor), as defined when DeSeq was launched
-    >    </ol>
-    >    </details>
-    {: .question}
 
 5. Dispersion estimates: gene-wise estimates
 (black), the fitted values (red), and the final maximum a posteriori estimates used in testing
@@ -402,160 +321,79 @@ In addition to the list of genes, **DESeq2** outputs a graphical summary of the 
 
 For more information about **DESeq2** and its outputs, you can have a look at [**DESeq2** documentation](https://www.bioconductor.org/packages/release/bioc/manuals/DESeq2/man/DESeq2.pdf).
 
-## Analysis of the functional enrichment among differentially expressed genes
+# Visualization
+Now that we have a list of transcript expression levels and their differential expression levels, it is time to visually inspect our transcript structures and the reads they were predicted from. It is a good practice to visually inspect (and present) loci bearing transcripts of interest. Fortuantely, there is a built-in genome browser in Galaxy, **Trackster**, that make this task simple (and even fun!!). 
 
-We have extracted genes that are differentially expressed in treated (with PS gene depletion) samples compared to untreated samples. We would like to know the functional enrichment among the differentially expressed genes.
+In this last section, we will convert our aligned read data from BAM format to bigWig format to simplify observing where our stranded RNA-seq data aligned to. We'll then initiate a session on Trackster, load it with our data, and visually inspect our interesting loci. 
 
-The Database for Annotation, Visualization and Integrated Discovery ([DAVID](https://david.ncifcrf.gov/)) provides a comprehensive set of functional annotation tools for investigators to understand the biological meaning behind large lists of genes.
 
-We use then DAVID to identify functional annotations of the upregulated genes and the downregulated genes.
+> ### :pencil2: Hands-on: Converting aligned read files to bigWig format
+>
+> 1. **** :wrench:: Run **bamCoverage** on all four aligned read files (HISAT output)
+>    - Under "Bin size in bases" speficy 1
+>    - Under "Effective genome size" select "mm9 (2150570000)"
+>    - Expose the "Advanced options" by selecting "yes"
+>    - Under "Only include reads originating from fragments from the forward or reverse strand" select "forward"
+> 2. **** :wrench:: Rename the outputs to reflect the origin of the reads and that they represent the reads mappign to the PLUS strand
+>![](../images/bamCoverage forward.png)
+>
+> 3. **** :wrench:: Run **bamCoverage** on all four aligned read files (HISAT output)
+>    - Under "Bin size in bases" speficy 1
+>    - Under "Effective genome size" select "mm9 (2150570000)"
+>    - Expose the "Advanced options" by selecting "yes"
+>    - Under "Only include reads originating from fragments from the forward or reverse strand" select "reverse"
+> 4. **** :wrench:: Rename the outputs to reflect the origin of the reads and that they represent the reads mappign to the MINUS strand
+> ![](../images/bamCoverage forward.png)
 
-> ### :pencil2: Hands-on:
+
+
+> ### :pencil2: Hands-on: Trackster based visualization
+> 1. **** :wrench:: On the center console at the top of the Galaxy interface, choose " Visualization" -> "New track browser"
+>    - Name your visualization someting descriptive under "Browser name:"
+>    - Choose "Mouse Dec. 2011 (GRCm38/mm10) (mm10)" as the "Reference genome build (dbkey)
+>    - Click "Create" to initiate your Trackster session
+> ![](../images/Trackster1.png)
 >
-> 1. **Sort** :wrench:: Sort the 2 datasets generated previously (upregulated genes and downregulated genes) given the log2 fold change, in descending or ascending order (to obtain the higher absolute log2 fold changes on the top)
-> 1. **Select first lines from a dataset** :wrench:: Extract the first 100 lines of sorted files
-> 2. **DAVID** :wrench:: Run **DAVID** on these files with
->     - First column as "Column with identifiers"
->     - "FLYBASE_GENE_ID" as "Identifier type"
+> 2. **** :wrench:: Click "Add datasets to visualization"
+>    - Select the "RefSeq GTF mm10" file
+>    - Select the output files from Stringtie
+>    - Select the output file from Cuffmerge
+>    - Select the output files from bamCoverage
+> ![](../images/Trackster1.png)
 >
->    The output of the **DAVID** tool is a HTML file with a link to the DAVID website.
+> 3. **** :wrench:: Using the grey labels on the left side of each track, drag and arrange the track order to your preference
 >
-> 2. Inspect the Functional Annotation Chart
+> 4. **** :wrench:: Hover over the grey label on the left side of the "RefSeq GTF mm10" track and click the "Edit settings" icon.
+>    - Adjust the block color to blue (#0000ff) and antisense strand color to red (#ff0000) 
 >
->    > ### :question: Questions
->    >
->    > What functional categories are the most represented? 
->    >  
->    > <details>
->    > <summary>Click to view answers</summary>
->    > The up-regulated genes are mostly related to membrane (in the number of genes). The most represented functional categories are linked to signal and pathways for the down-regulated genes.
->    > </details>
+> 5. **** :wrench:: Repeat the previous step on the output files from StringTie and Cuffmerge
+>
+> 6. **** :wrench:: Hover over the grey label on the left side of the "G1E R1 plus" track and click the "Edit settings" icon.
+>    - Adjust the color to blue (#0000ff) 
+>
+> 7. **** :wrench:: Repeat the previous step on the other three bigWig files representing the plus strand
+>
+> 8. **** :wrench:: Hover over the grey label on the left side of the "G1E R1 minus" track and click the "Edit settings" icon.
+>    - Adjust the color to red (#ff0000) 
+>
+> 9. **** :wrench:: Repeat the previous step on the other three bigWig files representing the minus strand
+>
+> 10. **** :wrench:: Adjust the track height of the bigWig files to be consistant for each set of plus strand and minus strand tracks 
+> 11. **** :wrench:: Direct Trackster to the coordinates: chr11:96193539-96206376, what do you see?
+>    >    <details>
+>    >    <summary>Click to view answers</summary>
+>    >    <ol type="1">
+>    >    <li>There are two clusters of transcripts that are exclusively expressed in the G1E background</li>
+>    >    <li>The left-most transcript is the Hoxb13 transcript</li>
+>    >    <li>The center cluster of transcripts are not present in the RefSeq annotation and are determined by Cuffmerge to be "u" and "x"</li>
+>    >    </ol>
+>    >    </details>
 >    {: .question}
 >
-> 3. Inspect the Functional Annotation Clusterings
 >
->    > ### :question: Questions
->    >
->    > What functional annotations are the first clusters related to?
->    >  
->    > <details>
->    > <summary>Click to view answers</summary>
->    > For the up-regulated genes, the first cluster is more composed of functions related to chaperone and stress response. The down-regulated genes are more linked to ligase activity.
->    > </details>
->    {: .question}
-{: .hands_on}
-
-# Inference of the differential exon usage
-
-Now, we would like to know the differential exon usage between treated (PS depleted) and untreated samples using RNA-seq exon counts. We will rework on the mapping results ([`GSM461177_untreat_paired_chr4.bam`](https://zenodo.org/record/61771/files/GSM461177_untreat_paired_chr4.bam)).
-
-We use [DEXSeq](http://www.bioconductor.org/packages/release/bioc/html/DEXSeq.html). DEXSeq detects high sensitivity genes, and in many cases exons, that are subject to differential exon usage. 
-
-First, we need to count the number of reads mapping the exons. 
-
-## Count the number of reads per exon
-
-This step is similar to the step of [counting the number of reads per annotated gene](#count-the-number-of-reads-per-annotated-gene). Here instead of HTSeq-count, we are using DEXSeq-Count. 
-
-> ### :pencil2: Hands-on: Counting the number of reads per exon
 >
-> 1. Copy the `Drosophila_melanogaster.BDGP5.78.gtf` file from the first history
-> 2. **DEXSeq-Count** :wrench:: Use the **DEXSeq-Count** to prepare the *Drosophila* annotations to extract only exons with corresponding gene ids
->     - "Prepare annotation" of "Mode of operation" 
 >
->    The output is again a GTF file that is ready to use for counting
->   
-> 3. Copy the `GSM461177_untreat_paired_chr4.bam` file from the second history
-> 4. **DEXSeq-Count** :wrench:: Count reads using **DEXSeq-Count** with
->     - `GSM461177_untreat_paired_chr4.bam` as "Input bam file"
->     - The formatted GTF file
-> 5. Inspect the result files
->
->    > ### :question: Question
->    >
->    > Which exon has the most read mapped on it? From which gene has this exon beed extracted? Is it similar to the previous result with HTSeq-count?
->    > 
->    > <details>
->    > <summary>Click to view answers</summary>
->    > FBgn0017545:004 is the exon with the most read mapped on it. It is part of FBgn0017545, the feature with the most reads mapped with HTSeq-count
->    > </details>
->    {: .question}
-{: .hands_on}
 
-## Differential exon usage
-
-DEXSeq usage is similar to DESeq2. It uses similar statistics to find differentially used exons. 
-
-As for DESeq2, we counted only reads that mapped to exons on chromosome 4 for only one sample in the previous step. To be able to identify differential exon usage induced by PS depletion, all datasets (3 treated and 4 untreated) must be analyzed with the similar procedure. For time saving, we did that for you. The results are available on [Zenodo](http://dx.doi.org/10.5281/zenodo.61771):
-
-- [dexseq.gtf](https://zenodo.org/record/61771/files/dexseq.gtf): the results of the running DEXSeq-count in 'Prepare annotation' mode
-- Seven files, counts files generated in 'Count reads' mode
-
-> ### :pencil2: Hands-on:
->
-> 1. Create a new history
-> 2. Import the seven count files and the dexseq.gtf from [Zenodo](http://dx.doi.org/10.5281/zenodo.61771)
->    - [dexseq.gtf](https://zenodo.org/record/61771/files/dexseq.gtf)
->    - [treated1_single.txt](https://zenodo.org/record/61771/files/treated1_single.txt)
->    - [treated2_paired.txt](https://zenodo.org/record/61771/files/treated2_paired.txt)
->    - [treated3_paired.txt](https://zenodo.org/record/61771/files/treated3_paired.txt)
->    - [untreated1_single.txt](https://zenodo.org/record/61771/files/untreated1_single.txt)
->    - [untreated2_single.txt](https://zenodo.org/record/61771/files/untreated2_single.txt)
->    - [untreated3_paired.txt](https://zenodo.org/record/61771/files/untreated3_paired.txt)
->    - [untreated4_paired.txt](https://zenodo.org/record/61771/files/untreated4_paired.txt)
->
->    > ### :nut_and_bolt: Comments
->    > If you are using the [Freiburg Galaxy instance](http://galaxy.uni-freiburg.de), you can load the dataset using 'Shared Data' <i class="fa fa-long-arrow-right"></i> 'Data Libraries' <i class="fa fa-long-arrow-right"></i> 'Galaxy Courses' <i class="fa fa-long-arrow-right"></i> 'RNA-Seq' <i class="fa fa-long-arrow-right"></i> 'dexseq'
->    {: .comment}
->
-> 3. **DEXSeq** :wrench:: Run **DEXSeq** with
->    - "Condition" as first factor with "treated" and "untreated" as levels and selection of count files corresponding to both levels
->    - "Sequencing" as second factor with "PE" and "SE" as levels and selection of count files corresponding to both levels
->
->    > ### :nut_and_bolt: Comment
->    >
->    > Unlike DESeq2, DEXSeq does not allow flexible primary factor names. Always use your primary factor name as "condition"
->    {: .comment}
-{: .hands_on}
-
-Similarly to DESeq2, DEXSeq generates a table with:
-
-1.  Exon identifiers
-2.  Gene identifiers
-3.  Exon identifiers in the Gene
-4.  Mean normalized counts, averaged over all samples from both conditions
-5.  Logarithm (to basis 2) of the fold change
-
-
-    The log2 fold changes are based on primary factor level 1 vs. factor level 2. The order of factor levels is then important. For example, for the factor 'Condition', DESeq2 computes fold changes of 'treated' samples against 'untreated', *i.e.* the values correspond to up- or downregulations of genes in treated samples.
-
-6.  Standard error estimate for the log2 fold change estimate
-7.  *p*-value for the statistical significance of this change
-8.  *p*-value adjusted for multiple testing with the Benjamini-Hochberg procedure which controls false discovery rate ([FDR](https://en.wikipedia.org/wiki/False_discovery_rate))
-
-> ### :pencil2: Hands-on:
->
-> 1. **Filter** :wrench:: Run **Filter** to extract exons with a significant usage (adjusted *p*-value equal or below 0.05) between treated and untreated samples
->
->    > ### :question: Question
->    >
->    > How many exons have a significant change in usage between these conditions?
->    > 
->    > <details>
->    > <summary>Click to view answers</summary>
->    > We get 38 exons (12.38%) with a significant usage change between treated and untreated samples
->    > </details>
->    {: .question}
-{: .hands_on}
-
-# Annotation of the result tables with gene information
-
-Unfortunately, in the process of counting, we loose all the information of the gene except its identifiant. In order to get the information back to our final counting tables, we can use a tool to make the correspondance between identifiant and annotation.
-
-> ### :pencil2: Hands-on:
->
-> 1. **Annotate DE(X)Seq result** :wrench:: Run **Annotate DE(X)Seq result** on a counting table (from DESeq or DEXSeq) using the `Drosophila_melanogaster.BDGP5.78.gtf` as annotation file
-{: .hands_on}
 
 # Conclusion
 
