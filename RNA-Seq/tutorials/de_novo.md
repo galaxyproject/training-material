@@ -8,90 +8,85 @@ tutorial_name: de_novo
 
 The data provided here are part of a Galaxy tutorial that analyzes RNA-seq data from a study published by *Wu et al.*, 2014 (DOI:10.1101/gr.164830.113). The goal of this study was to investigate "the dynamics of occupancy and the role in gene regulation of the transcription factor Tal1, a critical regulator of hematopoiesis, at multiple stages of hematopoietic differentiation." To this end, RNA-seq libraries were constructed from multiple mouse cell types including G1E - a GATA-null immortalized cell line derived from targeted disruption of GATA-1 in mouse embryonic stem cells - and megakaryocytes. This RNA-seq data was used to determine differential gene expression between G1E and megakaryocytes and later correlated with Tal1 occupancy. This dataset (GEO Accession: GSE51338) consists of biological replicate, paired-end, polyA selected RNA-seq libraries. Because of the long processing time for the large original files, we have downsampled the original raw data files to include only reads that align to chromosome 19 and a subset of interesting genomic loci identified by Wu et al.
 
-> ### Agenda
->
-> In this tutorial, we will deal with:
->
-> 1. [Pretreatments](#pretreatments)
-> 2. [Mapping](#mapping)
-> 3. [Analysis of the differential expression](#analysis-of-the-differential-expression)
-> {: .agenda}
+# Analysis strategy
 
-# Pretreatments
+The goal of this exercise is to identify what transcripts are present in the G1E and megakaryocyte cellualr states and which of these are differentially expressed between the two. We will use a 'de novo transcript reconstruction' stratgey to infer transcript structures from the mapped reads in the absence of the actual annotated transcript structures. This will allow us to identify novel genes and novel isoforms of annotated genes, as well as identify differentially expressed transcripts. 
+
+> ### Agenda
+> 
+> In this tutorial, we will:
+>
+> 1. Data upload
+> 2. Read trimming
+> 3. Read mapping
+> 4. De novo transcript reconstriction
+> 5. Transcriptome assembly
+> 6. Read counting and differential expression analysis
+> 7. Visualization
 
 ## Data upload
 
-The original data is available at NCBI Gene Expression Omnibus (GEO) under accession number [GSE18508](http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE18508). 
-
-We will look at the 7 first samples:
-
-- 3 treated samples with Pasilla (PS) gene depletion: [GSM461179](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM461179), [GSM461180](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM461180), [GSM461181](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM4611810)
-- 4 untreated samples: [GSM461176](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM461176), [GSM461177](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM461177), [GSM461178](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM461178), [GSM461182](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM461182)
-
-Each sample constitutes a separate biological replicate of the corresponding condition (treated or untreated). Moreover, two of the treated and two of the untreated samples are from a paired-end sequencing assay, while the remaining samples are from a single-end sequencing experiment.
-
-We have extracted sequences from the Sequence Read Archive (SRA) files to build FASTQ files.
+Due to the large size of this dataset, we have downsampled it to only inlcude reads mapping to chromosome 19 and certain loci with relevance to hematopoeisis. This data is avaialble at [`Zenodo`](https://zenodo.org/record/254485#.WIeQKbYrLUp), where you can find the forward and reverse reads corresponding to replicate RNA-seq libraries from G1E and megakaryocyte cells and an annotation file of RefSeq transcripts we will use to generate our transcriptome database. 
 
 > ### :pencil2: Hands-on: Data upload
 >
 > 1. Create a new history for this RNA-seq exercise
-> 2. Import a FASTQ file pair (*e.g.*  [`GSM461177_untreat_paired_subset_1`](https://zenodo.org/record/61771/files/GSM461177_untreat_paired_subset_1.fastq) and [`GSM461177_untreat_paired_subset_2`](https://zenodo.org/record/61771/files/GSM461177_untreat_paired_subset_2.fastq)) from [Zenodo](http://dx.doi.org/10.5281/zenodo.61771)
+> 2. Open the data upload manager (Get Data -> Upload file)
+> 3. Copy and paste the links for the reads and annotation file 
+> 4. Select **Paste/Fetch Data**
+> 5. Paste the link(s) into the text field
+> 6. Change the datatype of the read files to **fastqsanger**
+> 7. Change the datatype of the annotation file to **gtf** and assign the Genome as **mm10**
+> 8. Press **Start**
+> 9. Rename the files in your history to retain just the necessary information (eg. "G1E R1 forward reads")
 >
->    > ### :nut_and_bolt: Comments
->    > If you are using the [Freiburg Galaxy instance](http://galaxy.uni-freiburg.de), you can load the dataset using 'Shared Data' <i class="fa fa-long-arrow-right"></i> 'Data Libraries' <i class="fa fa-long-arrow-right"></i> 'Galaxy Courses' <i class="fa fa-long-arrow-right"></i> 'RNA-Seq' <i class="fa fa-long-arrow-right"></i> 'fastq'
->    {: .comment}
+>    > <details>
+>    > <summary>:bulb: Tip: Importing data via links</summary>
+>    > <ol type="2">
+>    > <li>For ease, we've included links to the read files </li>
+>    > <li>https://zenodo.org/record/254485/files/G1E_R1_forward_downsampled_SRR549355.fastqsanger.gz
+>    > https://zenodo.org/record/254485/files/G1E_R1_reverse_downsampled_SRR549355.fastqsanger.gz
+>    > https://zenodo.org/record/254485/files/G1E_R2_forward_downsampled_SRR549356.fastqsanger.gz
+>    > https://zenodo.org/record/254485/files/G1E_R2_reverse_downsampled_SRR549356.fastqsanger.gz
+>    > https://zenodo.org/record/254485/files/Megakaryocyte_R1_forward_downsampled_SRR549357.fastqsanger.gz
+>    > https://zenodo.org/record/254485/files/Megakaryocyte_R1_reverse_downsampled_SRR549357.fastqsanger.gz
+>    > https://zenodo.org/record/254485/files/Megakaryocyte_R2_forward_downsampled_SRR549358.fastqsanger.gz
+>    > https://zenodo.org/record/254485/files/Megakaryocyte_R2_reverse_downsampled_SRR549358.fastqsanger.gz</li>
+>    > <li>You'll need to fetch the link to the annotation file yourself ;)</li>
+>    > </ol>
+>    > </details>
 >
->    > ### :bulb: Tip: Importing data via links
->    >
->    > * Copy the link location
->    > * Open the Galaxy Upload Manager
->    > * Select **Paste/Fetch Data**
->    > * Paste the link into the text field
->    > * Press **Start**    
->    {: .tip}
->
->    > ### :bulb: Tip: Changing the file type `fastq` to `fastqsanger` once the data file is in your history
->    >
->    > * Click on the pencil button displayed in your dataset in the history
->    > * Choose **Datatype** on the top
->    > * Select `fastqsanger`
->    > * Press **Save**
->    {: .tip}
 > 
->    As default, Galaxy takes the link as name. It also do not link the dataset to a database or a reference genome.
-> 
->    > ### :nut_and_bolt: Comments
->    > - Edit the "Database/Build" to select "dm3"
->    > - Rename the datasets according to the samples
->    {: .comment}
-> 
-{: .hands_on}
-
-Both files contain the first 100.000 paired-end reads of one sample. The sequences are raw sequences from the sequencing machine, without any pretreatments. They need to be controlled for their quality.
+> {: .hands_on}
 
 ## Quality control
 
-For quality control, we use similar tools as described in [NGS-QC tutorial](../../NGS-QC/tutorials/dive_into_qc): [FastQC](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/) and [Trim Galore](http://www.bioinformatics.babraham.ac.uk/projects/trim_galore/).
+For quality control, we use similar tools as described in [NGS-QC tutorial](../../NGS-QC/tutorials/dive_into_qc): [FastQC](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/) and [Trimmomatic](http://www.usadellab.org/cms/?page=trimmomatic).
 
 > ### :pencil2: Hands-on: Quality control
 >
-> 1. **FastQC** :wrench:: Run FastQC on both FastQ files to control the quality of the reads
+> 1. **FastQC** :wrench:: Run FastQC on the forward and reverse read files to assess the quality of the reads
 >
 >    > ### :question: Questions
 >    >
 >    > 1. What is the read length?
->    > 2. Is there anything what you find striking when you compare both reports?
+>    > 2. Is there anything interesting about the quality of the base calls based on the position in the reads? 
 >    >
 >    >    <details>
 >    >    <summary>Click to view answers</summary>
 >    >    <ol type="1">
->    >    <li>The read length is 37 bp</li>
->    >    <li>The report for GSM461177_untreat_paired_subset_1 is quite good compared to the one for GSM461177_untreat_paired_subset_2. For the latter, the per base sequence quality is bad around the 25th bp (same for the per base N content), because the quality in the 2nd tile is bad (maybe because of some event during sequencing). We need to be careful for the quality treatment and to do it with paired-end information</li>
+>    >    <li>The read length is 99 bp</li>
+>    >    <li>The quality of base calls declines throughout a sequencing run. ADD MORE HERE</li>
 >    >    </ol>
 >    >    </details>
 >    {: .question}
 >
-> 2. **Trim Galore** :wrench:: Treat for the quality of sequences by running Trim Galore on the paired-end datasets
+> 2. **Trimmomatic** :wrench:: Trim off the low quality bases from the ends of the reads to increase mapping efficiency. Run Trimmomatic on each pair of forward and reverse reads. 
+>
+> ![](../images/trimmomatic.png)
+>
+>
+>
 > 3. **FastQC** :wrench:: Re-run FastQC on Trim Galore's outputs and inspect the differences
 {: .hands_on}
 
