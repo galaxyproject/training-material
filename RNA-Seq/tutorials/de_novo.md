@@ -87,14 +87,30 @@ For quality control, we use similar tools as described in [NGS-QC tutorial](../.
 >
 >
 >
-> 3. **FastQC** :wrench:: Re-run FastQC on Trim Galore's outputs and inspect the differences
-{: .hands_on}
+> 3. **FastQC** :wrench:: Re-run FastQC on Trimmomatics's outputs and inspect the differences
+>
+>
+>
+>    > ### :question: Questions
+>    >
+>    > 1. What is the read length?
+>    > 2. Is there anything interesting about the quality of the base calls based on the position in the reads? 
+>    >
+>    >    <details>
+>    >    <summary>Click to view answers</summary>
+>    >    <ol type="1">
+>    >    <li>The read length is 99 bp</li>
+>    >    <li>The quality of base calls declines throughout a sequencing run. ADD MORE HERE</li>
+>    >    </ol>
+>    >    </details>
+>    {: .question}
+> {: .hands_on}
 
-As the genome of *Drosophila melanogaster* is known and assembled, we can use this information and map the sequences on this genome to identify the effects of Pasilla gene depletion on splicing events.
+Now that we have trimmed our reads and are fortuante that there is a great reference genome assembly for mouse, we will map our trimmed reads to the genome
 
 # Mapping
 
-To make sense of the reads, their positions within *Drosophila melanogaster* genome must be determined. This process is known as aligning or 'mapping' the reads to the reference genome.
+To make sense of the reads, their positions within mouse genome must be determined. This process is known as aligning or 'mapping' the reads to the reference genome.
 
 > ### :nut_and_bolt: Comment
 >
@@ -106,72 +122,8 @@ Because in the case of a eukaryotic transcriptome, most reads originate from pro
 - Reads that map entirely within exons
 - Reads that cannot be mapped within an exon across their entire length because they span two or more exons
 
-Spliced mappers have been developed to efficiently map transcript-derived reads against genomes. [TopHat](https://ccb.jhu.edu/software/tophat/index.shtml) was one of the first tools designed specifically to address this problem:
+Spliced mappers have been developed to efficiently map transcript-derived reads against genomes. [HISAT2](https://ccb.jhu.edu/software/hisat2/index.shtml) is an accurate and fast tool for mapping spliced reads to a genome. 
 
-1. Identification of potential exons using reads that do map to the genome
-2. Generation of possible splices between neighboring exons
-3. Comparison of reads that did not initially map to the genome against these *in silico* created junctions
-
-![](../images/tophat2.png)
-
-*[Kim et al., Genome Biology, 2013](https://genomebiology.biomedcentral.com/articles/10.1186/gb-2013-14-4-r36)*
-
-TopHat needs to know two important parameters about the sequencing library
-
-- The library type
-- The mean inner distance between the mate pairs for paired-end data
-
-These information should usually come with your FASTQ files, ask your sequencing facility! If not, try to find them on the site where you downloaded the data or in the corresponding publication. Another option is to estimate these parameters with a *preliminary mapping* of a *downsampled* file and some analysis programs. Afterward, the actual mapping can be redone on the original files with the optimized parameters.
-
-To help finding the needed previous information and afterward annotating RNA sequences, we can take advantage from already known reference gene annotations.
-
-> ### :pencil2: Hands-on: Drosophila annotation file upload
->
-> 1. Load the Ensembl gene annotation for *Drosophila melanogaster* ([`Drosophila_melanogaster.BDGP5.78.gtf`](https://zenodo.org/record/61771/files/Drosophila_melanogaster.BDGP5.78.gtf)) from [Zenodo](http://dx.doi.org/10.5281/zenodo.61771) into your current Galaxy history and rename it
->
->    > ### :nut_and_bolt: Comments
->    > If you are using the [Freiburg Galaxy instance](http://galaxy.uni-freiburg.de), you can load the dataset using 'Shared Data' <i class="fa fa-long-arrow-right"></i> 'Data Libraries' <i class="fa fa-long-arrow-right"></i> 'Galaxy Courses' <i class="fa fa-long-arrow-right"></i> 'RNA-Seq' <i class="fa fa-long-arrow-right"></i> 'annotation'
->    {: .comment}
-{: .hands_on}
-
-## Preliminary mapping
-
-In a preliminary mapping, we will estimate the needed parameters (library type and inner distance) to run TopHat efficiently afterwards.
-
-> ### :nut_and_bolt: Comment
-> This step is not necessary if you don't need to estimate the library type and the mean inner distance between the mate pairs for paired-end data.
-{: .comment}
-
-> ### :pencil2: Hands-on: Preliminary mapping and parameter estimation
->
-> 1. **Select first** :wrench:: Downsample the FastQ files to 200k or 1M reads
->
->    > ### :nut_and_bolt: Comment
->    >
->    > For the provided files downsampling is not necessary as they only contain 100k reads
->    {: .comment}
->
-> 2. **TopHat** :wrench:: Run **TopHat** with:
->    - "Paired-end (as individual datasets)" instead of "Single-end"
->    - The Trim Galore outputs in the correct order (forward and reverse reads)
->    - "Drosophila melanogaster: dm3" as reference genome
->    - Default values for *strandedness* and *insert size*
->
-> 3. **Inner Distance** :wrench:: Run **Inner Distance** on the BAM file generated by TopHat using the imported `Drosophila_melanogaster.BDGP5.78.gtf` reference gene model to estimate the *inner distance* between the two reads for paired-end data
-> 4. Inspect the resulting PDF
->
->    > ### :question: Question
->    > What is the mean value for the inner distance?
->    >
->    > <details>
->    > <summary>Click to view answer</summary>
->    > The mean value is 112. But, if you already have read the corresponding paper carefully you might know that the fragment size is ~200bp. With read lengths of 2x37bp an educated guess could also be 125 for the inner distance. It's up to your decision, which value you prefer. 
->    > </details>
->    {: .question}
->
-> 5. **Infer Experiment** :wrench:: Run **Infer Experiment** with the same files
-> 6. Check the results and search the tool's documentation for help on the meaning
->    
 >    > ### :nut_and_bolt: Comment
 >    > As it is sometimes quite difficult to find out which settings correspond to those of other programs, the following table might be helpful to identify the library type:
 >    > 
@@ -185,28 +137,9 @@ In a preliminary mapping, we will estimate the needed parameters (library type a
 >    > 
 >    {: .comment}
 >    
->    > ### :question: Question
->    > 
->    > 1. Which fraction of the different type of library type?
->    > 2. Which library type do you chose? What is the correspondance in **TopHat**?
->    >
->    >    <details>
->    >    <summary>Click to view answer</summary>
->    >    <ol type="1">
->    >    <li>Fraction of reads explained by "1++,1--,2+-,2-+": 0.5176 and Fraction of reads explained by "1+-,1-+,2++,2--": 0.4824</li>
->    >    <li>As reads are not explained by any configuration significantly, it is an "unstranded" library.</li>
->    >    </ol>
->    >    </details>
->    {: .question}
-{: .hands_on}
-
-## Actual mapping
-
-With these estimated parameters, we can now map all the RNA sequences on the *Drosophila melanogaster* genome using TopHat.
-
 > ### :pencil2: Hands-on: Spliced mapping
 >
-> 1. **TopHat** :wrench:: Run **TopHat** with the full parameter set to get the best mapping results:
+> 1. **** :wrench:: Run **HISAT2** with the full parameter set to get the best mapping results:
 >    - "Paired-end (as individual datasets)" instead of "Single-end"
 >    - "Mean Inner Distance" to the previously determined value
 >    - "Drosophila melanogaster: dm3" as reference genome
