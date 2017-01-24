@@ -1,3 +1,5 @@
+
+
 ---
 layout: tutorial_hands_on
 topic_name: RNA-Seq
@@ -119,8 +121,8 @@ To make sense of the reads, their positions within mouse genome must be determin
 
 Because in the case of a eukaryotic transcriptome, most reads originate from processed mRNAs lacking exons, they cannot be simply mapped back to the genome as we normally do for DNA data. Instead the reads must be separated into two categories:
 
-- Reads that map entirely within exons
-- Reads that cannot be mapped within an exon across their entire length because they span two or more exons
+- Reads that map perfectly to the genomic sequence (exons)
+- Reads with mature splice junctions that need to be mapped across introns
 
 Spliced mappers have been developed to efficiently map transcript-derived reads against genomes. [HISAT2](https://ccb.jhu.edu/software/hisat2/index.shtml) is an accurate and fast tool for mapping spliced reads to a genome. 
 
@@ -139,188 +141,80 @@ Spliced mappers have been developed to efficiently map transcript-derived reads 
 >    
 > ### :pencil2: Hands-on: Spliced mapping
 >
-> 1. **** :wrench:: Run **HISAT2** with the full parameter set to get the best mapping results:
+> 1. **** :wrench:: Run **HISAT2** on one forward/reverse read pair and modify the following settings:
 >    - "Paired-end (as individual datasets)" instead of "Single-end"
->    - "Mean Inner Distance" to the previously determined value
->    - "Drosophila melanogaster: dm3" as reference genome
->    - "Full parameter list" for "TopHat settings to use"
->    - "Library type" to the previously determined value
->    - "18" for the "Minimum length of read segments"
+>    - "Mouse (Mus Musculus): mm10" as reference genome
+>    - "Spliced alignment parameters" choose to "Specify spliced alignment parameters"
+>    - "Specify strand-specific information" choose "First Strand (R/RF)"
+>    - "Transcriptome assembly reporting" to "Report alignments tailored for transcript assemblers including StringTie."
 >
->        By default, TopHat proposes to fix the minimum length of read segments to 25, but a value of 18 seems to be a more appropriate value for this input data.
+> ![](../images/hisat.png)
 >
->        > ### :question: Question
->        >
->        > Why?
->        > 
->        > <details>
->        > <summary>Click to view answer</summary>
->        > Remember that the total length of the reads are 37 bases. With 25, we left with segments of lengths 25 (or more) and 12 (or less) bases. The 12 base long reads lead to huge number of multi mappings. Setting this option to 18 results in bit longer segments and in best case both of them can be mapped properly.           
->        > </details>
->        {: .question}
+> 2. **** :wrench:: Run **HISAT2** on the remaining forward/reverse read pairs with the same parameters.
 >
->    - "Yes" for use of own junction data
->    - "Yes" for use of Gene Annotation Model
->    - `Drosophila_melanogaster.BDGP5.78.gtf` as Gene Model Annotations (to enable transcriptome alignment)
->    - "No (--coverage-search)" to use coverage-based search for junctions as it needs a lot a time. But consider this option for real world data.
->
->        The TopHat algorithm splits reads into segments to map the reads across splice junctions. Coverage-based search for junctions increases the sensitivity.
->
-> 2. Inspect the "align summary" file
->
->    > ### :question: Question
->    >
->    > 1. How many forward reads were mapped? And how many reverse reads?
->    > 2. What is the "overall read mapping rate"? And the "concordant pair alignment rate"?
->    > 3. Why do some reads have multiple alignments?
->    > 
->    >    <details>
->    >    <summary>Click to view answer</summary>
->    >    <ol type="1">
->    >    <li>90.7% of the forward reads were mapped and 85.8% of the reverse reads</li>
->    >    <li>The "overall read mapping rate" is the rate of mapping when we take into account all reads (forward and reverse reads). Here it is 88.3%. The "concordant pair alignment rate" is (number of aligned pair - number of discordant alignments)/(number of paired reads). Here the value is 80.3%, a quite good value. Maximizing this value is the goal.</li>
->    >    <li>The reads are small and with pseudogenes and other valid genome duplications, it is possible that the reads are mapped multiple times</li>
->    >    </ol>
->    >    </details>
->    {: .question}
-{: .hands_on}
 
-**TopHat** generates a BAM file with the mapped reads and three BED files containing splice junctions, insertions and deletions.
 
-The mapping exercise worked for you? Great! :tada:
 
-> ### :pencil2: (Optional) Hands-on: Map other datasets
->
-> You can do the same process on the other sequence files available on [Zenodo](http://dx.doi.org/10.5281/zenodo.61771)
-> 
-> - Paired-end data
->     - `[GSM461178_untreat_paired_subset_1](GSM461178_untreat_paired_subset_1.fastq)` and `[GSM461178_untreat_paired_subset_2](GSM461178_untreat_paired_subset_2.fastq)`
->     - `[GSM461180_treat_paired_subset_1](GSM461180_treat_paired_subset_1.fastq)` and `[GSM461180_treat_paired_subset_2](GSM461180_treat_paired_subset_2.fastq)`
->     - `[GSM461181_treat_paired_subset_1](GSM461181_treat_paired_subset_1.fastq)` and `[GSM461181_treat_paired_subset_2](GSM461181_treat_paired_subset_2.fastq)`
-> - Single-end data
->     - `[GSM461176_untreat_single_subset](GSM461176_untreat_single_subset.fastq)`
->     - `[GSM461179_treat_single_subset](GSM461179_treat_single_subset.fastq)`
->     - `[GSM461182_untreat_single_subset](GSM461182_untreat_single_subset.fastq)`
->
-> This is really interesting to redo on the other datasets, specially to check how the parameters are inferred given the different type of data.
-{: .hands_on}
+# De novo transcript reconstruction
+Now that we have mapped our reads to the mouse genome with HISAT2, we want to determine transcript structures that are represented by the aligned reads, this is called 'de novo transcriptome reconstruction'. This unbiased approach permits the comprehensive identification of all transcripts present in a sample, including annotated genes, novel isoforms of annotated genes, and novel genes. While common gene/transcript databases are quite large, they are not comprehensive and this 'de novo transcriptome reconstruction' approach ensures you are truly analyzing the complete transcriptome(s) from your experiemntal samples. The leading tool for transcript reconstruction is Stringtie. Here, we will use Stringtie to predict transcript structures soley based on the reads aligned by HISAT2. 
 
-## Inspection of TopHat results
+> ### :pencil2: Hands-on: Transcriptome reconstruction
+>
+> 1. **** :wrench:: Run **Stringtie** on the HISAT alignments using the default parameters. 
+> ![](../images/stringtie.png)
+>    - Use batch mode to run all four samples from one tool form. 
 
-However, the datasets we used were a subset of the original data. They are then too small to give you a good impression of how real data looks like. So we have run TopHat for you on the real datasets. We extracted only the reads mapped to chromosome 4 of *Drosophila*.
+# Transcriptome assembly
 
-> ### :pencil2: Hands-on: Inspection of TopHat results
+We just generated four transcriptomes with Stringtie representing each of the four RNA-seq libraries we're analyzing. Since these were generated in the absence of a reference transcriptome and we ultimately would like to know what transcript structure corresponds to which annotated transcript (if any) we have to make a **transcriptome database**. We will use the tool Cuffmerge to combine redundant transcript structures across the four samples, provide non-redundant identifiers, and with the help of the reference annotation file we provide to annotate the nature/origin of each transcript (reference, novel isoform, intergenic transcript, antisense, etc.) 
+
+> ### :pencil2: Hands-on: Transcriptome assembly
 >
-> 1. Create a new history
-> 2. Import from [Zenodo](http://dx.doi.org/10.5281/zenodo.61771) into the new history the following files:
->    - [`GSM461177_untreat_paired_chr4.bam`](https://zenodo.org/record/61771/files/GSM461177_untreat_paired_chr4.bam)
->    - [`GSM461177_untreat_paired_deletions_chr4.bed`](https://zenodo.org/record/61771/files/GSM461177_untreat_paired_deletions_chr4.bed)
->    - [`GSM461177_untreat_paired_insertions_chr4.bed`](https://zenodo.org/record/61771/files/GSM461177_untreat_paired_insertions_chr4.bed)
->    - [`GSM461177_untreat_paired_junctions_chr4.bed`](https://zenodo.org/record/61771/files/GSM461177_untreat_paired_junctions_chr4.bed)
-> 
->    > ### :nut_and_bolt: Comments
->    > If you are using the [Freiburg Galaxy instance](http://galaxy.uni-freiburg.de), you can load the dataset using 'Shared Data' <i class="fa fa-long-arrow-right"></i> 'Data Libraries' <i class="fa fa-long-arrow-right"></i> 'Galaxy Courses' <i class="fa fa-long-arrow-right"></i> 'RNA-Seq' <i class="fa fa-long-arrow-right"></i> 'sample_tophat2_out'
->    {: .comment}
+> 1. **** :wrench:: Run **Cuffmerge** on the Stringtie assembled transcripts along with the RefSeq annotation file we imported earlier. 
+>    - Use batch mode to inlcude all four Stringtie assemblies. 
+>    - Choose "Use Reference Annotation" -> "Yes" and select the "RefSeq GTF mm10" file. 
+> ![](../images/cuffmerge.png)
 >
-> 3. **IGV** :wrench:: Visualize this BAM file and the three BED files, particularly the region on chromosome 4 between 560 kb to 600 kb (`chr4:560,000-600,000`)
 >
->    > ### :nut_and_bolt: Comment
->    > - Change the data type from "tabular" to "bed"
->    > - Rename the datasets according to the samples
->    {: .comment}
+>    > Transcript categorization used by Cuffmerge
 >
->    > ### :nut_and_bolt: Comment
->    >
->    > Check [IGV documentation](http://software.broadinstitute.org/software/igv/AlignmentData)
->    {: .comment}
->
->    > ### :question: Question
->    >
->    > 1. Which information does the `GSM461177_untreat_paired_junctions_chr4.bed` BED file contain?
->    > 2. How is this information represented in the BED file? And in IGV?
->    > 3. Where is the "JUNC00013368" junction situated? What is its score?
->    > 4. How many reads are concerned by the "JUNC00013368" junction, visible when we zoom on `chr4:568,476-571,814`? Can you relate that to the score?
->    > 5. And how many are concerned by the "JUNC00013369" junction? 
->    >
->    >    <details>
->    >    <summary>Click to view answers</summary>
->    >    <ol type="1">
->    >    <li>`GSM461177_untreat_paired_junctions_chr4.bed` BED file contain the splicing events, *i.e.* when at least a single read splits across two exons in the alignment track</li>
->    >    <li>The BED file is a tabular with: Chrom, Start, End, Name, Score, Strand, ThickStart, ThickEnd, ItemRGB, BlockCount, BlockSizes, BlockStart. In IGV, the junctions are represented by an arc from the beginning to the end of the junction. The color of the arc represent the strand on which the junction is found. The height of the arc, and its thickness, are proportional to the depth of read coverage. </li>
->    >    <li>The "JUNC00013368" junction starts at 568,736 and ends at 569,905. It has a score of 6.</li>
->    >    <li>6 reads split across "JUNC00013368", exactly the score</li>
->    >    <li>8 reads split across "JUNC00013369". 3 reads are also mapped in the junction chromosome part: these reads are then part of the exon and be implied in a different splicing.</li>
->    >    </ol>
->    >    </details>
->    {: .question}
->
-> 3. **IGV** :wrench:: Unzoom to `chr4:560,000-600,000` and inspect the splice junctions using a **Sashimi plot**
->
->    > ### :bulb: Tip: Creation of a Sashimi plot
->    >
->    > * Right click on the BAM file
->    > * Select **Sashimi Plot** from the context menu
->    {: .tip}
->
->    ![](../images/tophat_igv_sashimi.png)
->
->    > ### :question: Question
->    >
->    > 1. What does the bar graph represent? And the numbered line?
->    > 2. What does the number means?
->    > 3. What is the name of the junction where 10 reads split? What is its position on the genome?
->    > 
->    >    <details>
->    >    <summary>Click to view answers</summary>
->    >    <ol type="1">
->    >    <li>The coverage for each alignment track is plotted as a bar graph. Arcs representing splice junctions connecting exons</li>
->    >    <li>Arcs display the number of reads split across the junction (junction depth). </li>
->    >    <li>JUNC00013370 starts at 574338 and ends at 578091.</li>
->    >    </ol>
->    >    </details>
->    {: .question}
->
->    > ### :nut_and_bolt: Comment
->    >
->    > Check [IGV documentation on Sashimi plots](http://software.broadinstitute.org/software/igv/Sashimi) to find some clues
->    {: .comment}
->
-> 4. **IGV** :wrench:: Look around to find other regions with interesting junctions, *e.g.* `chr4:870,000-940,000`
-{: .hands_on}
+>    > |**Class code** | **Transcript category**| 
+>    > |---|---|
+>    > |= | Annotated in reference|
+>    > |j | Novel isoform of reference| 
+>    > |u | Intergenic|
+>    > |x | Anti-sense|
+>    > |r | Repetitive|
+>    > |c | Contained in exon of reference| 
+>    > |s | Anti-sense spliced intronic|
+
+
+
+
 
 # Analysis of the differential gene expression
 
-To identify exons that are regulated by the Pasilla gene, we need to identify genes and exons which are differentially expressed between samples with PS gene depletion and control samples.
+We just generated a transriptome database that represents the transcripts present in our RNA-seq libraries generated from G1E and megakaryocytes. This database provides the location of our transcripts with non-redundant identifiers, as well as information regarding the origin of the transcript. 
 
-## Count the number of reads per annotated gene
+We now want to identify which transcripts are expressed and which of those are differentially expressed between the Gf1E and megakaryocyte cellular states. To do this we will use a counting approach using FeatureCounts to count reads per transcript and providing this information to DESeq2 to generate normalized transcript counts (abundance estimates) and significance testing for differential expression   
 
-To compare the expression of single genes between different conditions (*e.g.* with or without PS depletion), an first essential step is to quantify the number of reads per gene. [**HTSeq-count**](http://www-huber.embl.de/users/anders/HTSeq/doc/count.html) is one of the most popular tool for gene quantification.
+## Count the number of reads per transcript
 
-To quantify the number of reads mapped to a gene, an annotation of the genomic features as it is in the genes is needed. We already upload on Galaxy the [`Drosophila_melanogaster.BDGP5.78.gtf`](https://zenodo.org/record/61771/files/Drosophila_melanogaster.BDGP5.78.gtf) with the Ensembl gene annotation for *Drosophila melanogaster*.
-
-In principle, the counting of reads overlapping with genomic features is a fairly simple task, but there are some details that need to be decided. **HTSeq-count** offers 3 choices ("union", "intersection_strict" and "intersection_nonempty") to handle read mapping to multiple locations, reads overlapping introns, or reads that overlap more than one genomic feature:
-
-![](../images/htseq_count.png)
-
-*[HTSeq documentation](http://www-huber.embl.de/users/anders/HTSeq/doc/count.html)*
+To compare the abundance of transcripts between different cellular states, a first essential step is to quantify the number of reads per transcript. [**FeatureCounts**](http://bioinf.wehi.edu.au/featureCounts/) is one of the most popular tools for counting reads in genomic features, in our case, we'll be using FeatureCounts to count reads aligning in exons of our Cuffmerge generated transcriptome database.
 
 The recommended mode is "union", which counts overlaps even if a read only shares parts of its sequence with a genomic feature and disregards reads that overlap more than one feature.
 
-> ### :pencil2: Hands-on: Counting the number of reads per annotated gene
+> ### :pencil2: Hands-on: Counting the number of reads per transcript
 >
-> 1. Copy the `Drosophila_melanogaster.BDGP5.78.gtf` file from the first history
+> 1. **HTSeq-count** :wrench:: Run FeatureCounts on the aligned reads (HISAT output) using the Cuffmerge transcriptome database as the annotation file.
 >
->    > ### :bulb: Tip: Copying a file from an history to an other
->    >
->    > * Click on "View all histories" in the top right
->    > * Drag and drop the file you want to copy to your new history
->    > * Click on "Done" on the top left
->    {: .tip}
+>    - "Gene annotation file" choose "in your history" and select the GTF file output by Cuffmerge. >    - The "union" mode
+>    - Expand the "Options for paired end reads" section and under "Orientation of the two read from the same pair" select "Forward, Reverse (fr)".
+>    - Expand the "Advanced options" and under "GFF gene identifier" specify "transcript_id"
+> ![](../images/cuffmerge.png)
 >
-> 2. **HTSeq-count** :wrench:: Run **HTSeq-count** on the sorted BAM file with
->    - `Drosophila_melanogaster.BDGP5.78.gtf` as "GFF file"
->    - The "union" mode
->    - A "Minimum alignment quality" of 10
+>
+>
 > 3. Inspect the result files
 >
 >    > ### :question: Question
