@@ -38,14 +38,6 @@ RNA sequencing
 
 ---
 
-### Principle of RNA sequencing <br>Quantification
-
-![](../images/pepke_2009.jpg)
-
-<small>[*Pepke et al, Nat Met, 2009*](http://www.nature.com/nmeth/journal/v6/n11s/full/nmeth.1371.html)</small>
-
----
-
 ### Challenges of RNA sequencing
                             
 - Different origin for the sample RNA and the reference genome
@@ -60,11 +52,7 @@ RNA sequencing
 
 ---
 
-## How to analyze RNA seq data?
-
----
-
- ### FASTQ-files
+### FASTQ-files
 
 ```bash
 @4:1:4888:1039:Y 
@@ -80,25 +68,68 @@ IIIHIIIIIIIIIIIIIIIIIIIIIIIIIH!CBCBBBB@=B@A?1@==<@=
 
 ---
 
+### 2 main research applications for RNA-Seq
+
+- Transcript discovery
+
+    > *Which RNA molecules are in my sample?*
+
+    - Novel isoforms and alternative splicing 
+    - Non-coding RNAs
+    - Single nucleotide variations
+    - Fusion genes
+
+- RNA quantification
+
+    > *What is the concentration of RNAs?*
+
+    - Absolute gene expression (within sample)
+    - Differential gene expression (between biological samples)
+    - Isoform expression / differential exon usage / alternative splicing
+
+---
+
+## How to analyze RNA seq data for RNA quantification?
+
+---
+
+### RNA quantification
+
+![](../images/pepke_2009.jpg)
+
+<small>[*Pepke et al, Nat Met, 2009*](http://www.nature.com/nmeth/journal/v6/n11s/full/nmeth.1371.html)</small>
+
+---
+
 ### Overview of the Data Processing
 
-![](../images/RNA_seq_processing.png)
+![](../images/rna_quantification.png)
 
 - No available standardized workflow 
 - Multiple possible best practices for every dataset
 
 ---
 
-### Data Pre-processing
+## Data Pre-processing
 
-*See [NGS Quality control](../../NGS-QC/slides/index.html)*
+.image-50[![](../images/rna_quantification_preprocessing.png)]
 
 1. Adapter clipping to trim the sequencing adapters 
 2. Quality trimming to remove wrongly called and low quality bases
 
+.footnote[See [NGS Quality control](../../NGS-QC/slides/index.html)]
+
 ---
 
-### Genomic Alignment<br>3 strategies
+## Annotation of RNA-Seq reads
+
+.image-75[![](../images/rna_quantification_annotation.png)]
+
+How do I identify my reads?
+
+---
+
+### 3 main strategies for annotations
 
 ![](../images/RNA_seq_conesa2016.png)
 
@@ -108,31 +139,124 @@ IIIHIIIIIIIIIIIIIIIIIIIIIIIIIH!CBCBBBB@=B@A?1@==<@=
 
 ---
 
-### Differential Expression Analysis
+### Sources of reference annotations
 
-![Account for variability of gene expression across biological replicates with the help of gene counts](../images/RNA_seq_DEscheme.png)
- 
-<tiny>Account for variability of gene expression across biological replicates<br>with the help of gene counts
-</tiny>
+- Joint projects to produce and maintain annotations on selected organisms: EMBL-EBI, UCSC, RefSeq, Ensembl, ...
+- Annotations of known genes, repeats, ... in GTF
 
 ---
 
-### Differential Expression Analysis<br>Within-sample Normalization
+### Transcriptome alignment
 
-Neccessary to correct for feature length and library-size effects
+![](../images/transcriptome_alignment.png)
+
+*See [NGS Mapping](../../NGS-mapping/slides/index.html)*
+
+- Need reliable gene models
+- No detection of novel genes
+
+.footnote[Figures by Ernest Turro, EMBO Practical Course on Analysis of HTS Data, 2012]
+
+---
+
+### Genome alignment
+
+Splice-aware read alignment
+
+![](../images/genome_alignment.png)
+
+Detection of novel genes and isoforms
+
+.footnote[Figures by Ernest Turro, EMBO Practical Course on Analysis of HTS Data, 2012]
+
+---
+
+### *De novo* transcriptome assembly
+
+No need for a reference genomes...
+
+---
+
+## Quantification of transcript level
+
+![](../images/rna_quantification_quantification.png)
+
+What is the expression level of the genomic features?
+
+---
+
+### Counting the number of reads per features
+
+Easy!!
+
+But some challenges
+
+- How to handle multi-mapping reads (*i.e.* reads with multiple alignments)?
+- How to distinguish between different isoforms?
+    - At gene level?
+    - At transcript level?
+    - At exon level?
+
+---
+
+
+## Differential Expression Analysis
+
+![](../images/rna_quantification.png)
+
+---
+
+### Differential Expression Analysis
+
+.image-75[![](../images/RNA_seq_DEscheme.png)]
+ 
+Account for variability of expression across biological replicates<br>with the help of counts
+
+---
+
+### Normalization
+
+Make the expression levels comparable across
+
+- Features: genes, isoforms
+- Libraries: samples
+
+---
+
+### Normalization methods
 
 - [*FPKM/RPKM*](http://www.nature.com/nmeth/journal/v5/n7/abs/nmeth.1226.html) (Cufflinks/Cuffdiff)
 - [*TMM*](https://genomebiology.biomedcentral.com/articles/10.1186/gb-2010-11-3-r25) (edgeR)
 - [*DESeq2*](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-014-0550-8) (DESeq2)
-							
+    
+    Normalise counts *k<sub>ij</sub>* for gene *i* in library *j* by size factor *s<sub>j</sub>*
+
+.footnote[*"Only the DESeq and TMM normalization methods are robust to the presence of different library sizes and widely different library compositions..."* - Dillies et al., Brief Bioinf, 2013]
+
 ---
 
-### Differential Expression Analysis<br>Number of Replicates for DE Genes
+### Analysis of Differential Gene Expression (DGE)
 
-![](../images/RNA_seq_numreplicates.png)
+Idea
 
+- Model the gene counts by negative binomial distribution
+- Account for variability of gene expression across biological replicates
+
+---
+
+### Impact of sequencing depth and number of replicates
+
+.image-50[![](../images/RNA_seq_numreplicates.png)]
 
 <small> [*Conesa et al, Genome Biol, 2016*](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-016-0881-8)</small>
+
+**Recommendation: At least 3 biological replicates**
+
+???
+
+- number of replicates has greater effect on DE detection accuracy than sequencing depth (more replicates = increased statistical power)
+- DE detection of lowly expressed genes is very sensitive to number of reads and replication
+- DE detection of highly expressed genes possible already at low sequencing depth
 
 ---
 
