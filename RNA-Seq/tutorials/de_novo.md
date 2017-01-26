@@ -142,7 +142,7 @@ Spliced mappers have been developed to efficiently map transcript-derived reads 
 >    - **Specify strand-specific information**: First Strand (R/RF)
 >    - **Transcriptome assembly reporting**: Report alignments tailored for transcript assemblers including StringTie.
 >
-> ![](../images/hisat.png)
+>       ![](../images/hisat.png)
 >
 > 2. **HISAT2** :wrench:: Run `HISAT2` on the remaining forward/reverse read pairs with the same parameters.
 >
