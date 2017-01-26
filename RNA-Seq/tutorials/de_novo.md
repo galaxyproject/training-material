@@ -65,7 +65,7 @@ For quality control, we use similar tools as described in [NGS-QC tutorial](../.
 
 > ### :pencil2: Hands-on: Quality control
 >
-> 1. **FastQC** :wrench:: Run FastQC on the forward and reverse read files to assess the quality of the reads.
+> 1. **FastQC** :wrench:: Run `FastQC` on the forward and reverse read files to assess the quality of the reads.
 >
 >    > ### :question: Questions
 >    >
@@ -81,12 +81,12 @@ For quality control, we use similar tools as described in [NGS-QC tutorial](../.
 >    >    </details>
 >    {: .question}
 >
-> 2. **Trimmomatic** :wrench:: Trim off the low quality bases from the ends of the reads to increase mapping efficiency. Run Trimmomatic on each pair of forward and reverse reads. 
+> 2. **Trimmomatic** :wrench:: Trim off the low quality bases from the ends of the reads to increase mapping efficiency. Run `Trimmomatic` on each pair of forward and reverse reads. 
 >
 > ![](../images/trimmomatic.png)
 >
 >
-> 3. **FastQC** :wrench:: Re-run FastQC on Trimmomatics's outputs and inspect the differences.
+> 3. **FastQC** :wrench:: Re-run `FastQC` on Trimmomatics's outputs and inspect the differences.
 >
 >    > ### :question: Questions
 >    >
@@ -119,7 +119,7 @@ In the case of a eukaryotic transcriptome, most reads originate from processed m
 - Reads contained within mature exons that align perfectly to the genomic sequence
 - Reads that span splice junctions in the mature mRNA that align across introns
 
-Spliced mappers have been developed to efficiently map transcript-derived reads against genomes. [HISAT2](https://ccb.jhu.edu/software/hisat2/index.shtml) is an accurate and fast tool for mapping spliced reads to a genome. Others include [example]() and [example](), but we will be using HISAT2 in this tutorial.
+Spliced mappers have been developed to efficiently map transcript-derived reads against genomes. [`HISAT2`](https://ccb.jhu.edu/software/hisat2/index.shtml) is an accurate and fast tool for mapping spliced reads to a genome. Others include [example]() and [example](), but we will be using `HISAT2` in this tutorial.
 
 >    > ### :nut_and_bolt: Comment
 >    > As it is sometimes quite difficult to determine which settings correspond to those of other programs, the following table might be helpful to identify the library type:
@@ -136,7 +136,7 @@ Spliced mappers have been developed to efficiently map transcript-derived reads 
 >    
 > ### :pencil2: Hands-on: Spliced mapping
 >
-> 1. **** :wrench:: Run **HISAT2** on one forward/reverse read pair and modify the following settings:
+> 1. **HISAT2** :wrench:: Run `HISAT2` on one forward/reverse read pair and modify the following settings:
 >    - **Single end or paired reads?**: Individual paired-end reads
 >    - **Source for the reference genome to align against**: Use a built-in genome > Mouse (Mus Musculus): mm10
 >    - **Spliced alignment parameters**: Specify spliced alignment parameters
@@ -145,7 +145,7 @@ Spliced mappers have been developed to efficiently map transcript-derived reads 
 >
 > ![](../images/hisat.png)
 >
-> 2. **** :wrench:: Run **HISAT2** on the remaining forward/reverse read pairs with the same parameters.
+> 2. **HISAT2** :wrench:: Run `HISAT2` on the remaining forward/reverse read pairs with the same parameters.
 >
 
 # De novo transcript reconstruction
@@ -153,26 +153,26 @@ Now that we have mapped our reads to the mouse genome with `HISAT2`, we want to 
 
 > ### :pencil2: Hands-on: Transcriptome reconstruction
 >
-> 1. **** :wrench:: Run `Stringtie` on the HISAT alignments using the default parameters. 
+> 1. **Stringtie** :wrench:: Run `Stringtie` on the `HISAT` alignments using the default parameters. 
 > ![](../images/stringtie.png)
 >    - Use batch mode to run all four samples from one tool form. 
 
 # Transcriptome assembly
 
-We just generated four transcriptomes with Stringtie representing each of the four RNA-seq libraries we're analyzing. Since these were generated in the absence of a reference transcriptome, and we ultimately would like to know what transcript structure corresponds to which annotated transcript (if any), we have to make a **transcriptome database**. We will use the tool Cuffmerge to combine redundant transcript structures across the four samples, provide non-redundant identifiers, and with the help of a reference annotation file annotate the nature/origin of each transcript (reference, novel isoform, intergenic transcript, antisense, etc.) 
+We just generated four transcriptomes with Stringtie representing each of the four RNA-seq libraries we're analyzing. Since these were generated in the absence of a reference transcriptome, and we ultimately would like to know what transcript structure corresponds to which annotated transcript (if any), we have to make a **transcriptome database**. We will use the tool `Cuffmerge` to combine redundant transcript structures across the four samples, provide non-redundant identifiers, and with the help of a reference annotation file annotate the nature/origin of each transcript (reference, novel isoform, intergenic transcript, antisense, etc.) 
 
 > ### :pencil2: Hands-on: Transcriptome assembly
 >
-> 1. **** :wrench:: Run `Cuffmerge` on the Stringtie assembled transcripts along with the RefSeq annotation file we imported earlier. 
+> 1. **Cuffmerge** :wrench:: Run `Cuffmerge` on the `Stringtie` assembled transcripts along with the RefSeq annotation file we imported earlier. 
 >    - Use batch mode to inlcude all four `Stringtie` assemblies. 
 >    - **Use Reference Annotation**: Yes, then select the "RefSeq GTF mm10" file. 
 > ![](../images/cuffmerge.png)
 >
 >
->    > Transcript categorization used by Cuffmerge
+>    > Transcript categorization used by `Cuffmerge`
 >
 >    > |**Class code** | **Transcript category**| 
->    > |---|---|
+>    > |:---:|:---|
 >    > |= | Annotated in reference|
 >    > |j | Novel isoform of reference| 
 >    > |u | Intergenic|
@@ -286,7 +286,6 @@ In addition to the list of genes, `DESeq2` outputs a graphical summary of the re
 
     ![](../images/DESeq2_MA_plot.png)
 
-
 3. Principal Component Analysis ([PCA](https://en.wikipedia.org/wiki/Principal_component_analysis)) and the first two axes
 
     ![](../images/DESeq2_PCA.png)
@@ -294,12 +293,9 @@ In addition to the list of genes, `DESeq2` outputs a graphical summary of the re
     Each replicate is plotted as an individual data point. This type of plot is useful for visualizing the overall effect of experimental covariates and batch effects.
 
 
-
 4. Heatmap of sample-to-sample distance matrix: overview over similarities and dissimilarities between samples
 
     ![](../images/DESeq2_heatmap.png)
-
-
 
 5. Dispersion estimates: gene-wise estimates
 (black), the fitted values (red), and the final maximum a posteriori estimates used in testing
@@ -310,7 +306,7 @@ In addition to the list of genes, `DESeq2` outputs a graphical summary of the re
     This dispersion plot is typical, with the final estimates shrunk from the gene-wise estimates towards the fitted estimates. Some gene-wise estimates are flagged as outliers and not shrunk towards the fitted value. The amount of shrinkage can be more or less than seen here, depending on the sample size, the number of coefficients, the row mean and the variability of the gene-wise estimates.
 
 
-For more information about **DESeq2** and its outputs, you can have a look at [**DESeq2** documentation](https://www.bioconductor.org/packages/release/bioc/manuals/DESeq2/man/DESeq2.pdf).
+For more information about `DESeq2` and its outputs, you can have a look at [`DESeq2` documentation](https://www.bioconductor.org/packages/release/bioc/manuals/DESeq2/man/DESeq2.pdf).
 
 # Visualization
 Now that we have a list of transcript expression levels and their differential expression levels, it is time to visually inspect our transcript structures and the reads they were predicted from. It is a good practice to visually inspect (and present) loci bearing transcripts of interest. Fortuantely, there is a built-in genome browser in Galaxy, **Trackster**, that make this task simple (and even fun!!). 
@@ -320,32 +316,28 @@ In this last section, we will convert our aligned read data from BAM format to b
 
 > ### :pencil2: Hands-on: Converting aligned read files to bigWig format
 >
-> 1. **** :wrench:: Run **bamCoverage** on all four aligned read files (HISAT output)
->    - Under "Bin size in bases" speficy 1
->    - Under "Effective genome size" select "mm9 (2150570000)"
+> 1. **bamCoverage** :wrench:: Run `bamCoverage` on all four aligned read files (`HISAT` output) with the following parameters:
+>    - **Bin size in bases**: 1
+>    - **Effective genome size**: mm9 (2150570000)
 >    - Expose the "Advanced options" by selecting "yes"
->    - Under "Only include reads originating from fragments from the forward or reverse strand" select "forward"
-> 2. **** :wrench:: Rename the outputs to reflect the origin of the reads and that they represent the reads mappign to the PLUS strand
+>    - **Only include reads originating from fragments from the forward or reverse strand**: forward
+> 2. **Rename** :wrench:: Rename the outputs to reflect the origin of the reads and that they represent the reads mappign to the PLUS strand
 >![](../images/bamCoverage forward.png)
 >
-> 3. **** :wrench:: Run **bamCoverage** on all four aligned read files (HISAT output)
->    - Under "Bin size in bases" speficy 1
->    - Under "Effective genome size" select "mm9 (2150570000)"
->    - Expose the "Advanced options" by selecting "yes"
->    - Under "Only include reads originating from fragments from the forward or reverse strand" select "reverse"
-> 4. **** :wrench:: Rename the outputs to reflect the origin of the reads and that they represent the reads mappign to the MINUS strand
+> 3. **bamCoverage** :wrench:: Repeat Step 1 except changing the following parameter:
+>    - **Only include reads originating from fragments from the forward or reverse strand**: reverse
+> 4. **Rename** :wrench:: Rename the outputs to reflect the origin of the reads and that they represent the reads mappign to the MINUS strand
 > ![](../images/bamCoverage forward.png)
 
-
-
 > ### :pencil2: Hands-on: Trackster based visualization
-> 1. **** :wrench:: On the center console at the top of the Galaxy interface, choose " Visualization" -> "New track browser"
+>
+> 1. **Viz** :wrench:: On the center console at the top of the Galaxy interface, choose " Visualization" -> "New track browser"
 >    - Name your visualization someting descriptive under "Browser name:"
 >    - Choose "Mouse Dec. 2011 (GRCm38/mm10) (mm10)" as the "Reference genome build (dbkey)
 >    - Click "Create" to initiate your Trackster session
 > ![](../images/Trackster1.png)
 >
-> 2. **** :wrench:: Click "Add datasets to visualization"
+> 2. **Viz** :wrench:: Click "Add datasets to visualization"
 >    - Select the "RefSeq GTF mm10" file
 >    - Select the output files from Stringtie
 >    - Select the output file from Cuffmerge
@@ -381,14 +373,10 @@ In this last section, we will convert our aligned read data from BAM format to b
 >    >    </details>
 >    {: .question}
 >
->
->
->
-
 
 # Conclusion
 
-In this tutorial, we have analyzed real RNA sequencing data to extract useful information, such as which genes are up- or downregulated by depletion of the Pasilla gene and which genes are regulated by the Pasilla gene. To answer these questions, we analyzed RNA sequence datasets using a reference-based RNA-seq data analysis approach. This approach can be sum up with the following scheme:
+In this tutorial, we have analyzed real RNA sequencing data to extract useful information, such as which genes are up- or down-regulated by depletion of the Pasilla gene and which genes are regulated by the Pasilla gene. To answer these questions, we analyzed RNA sequence datasets using a reference-based RNA-seq data analysis approach. This approach can be sum up with the following scheme:
 
 
 ![](../images/ref_based_workflow.png)
