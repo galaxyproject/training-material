@@ -85,7 +85,6 @@ For quality control, we use similar tools as described in [NGS-QC tutorial](../.
 >
 > ![](../images/trimmomatic.png)
 >
->
 > 3. **FastQC** :wrench:: Re-run `FastQC` on Trimmomatics's outputs and inspect the differences.
 >
 >    > ### :question: Questions
@@ -149,24 +148,24 @@ Spliced mappers have been developed to efficiently map transcript-derived reads 
 >
 
 # De novo transcript reconstruction
-Now that we have mapped our reads to the mouse genome with `HISAT2`, we want to determine transcript structures that are represented by the aligned reads. This is called *de novo* transcriptome reconstruction. This unbiased approach permits the comprehensive identification of all transcripts present in a sample, including annotated genes, novel isoforms of annotated genes, and novel genes. While common gene/transcript databases are quite large, they are not comprehensive, and the *de novo* transcriptome reconstruction approach ensures complete transcriptome(s) identification from the experimental samples. The leading tool for transcript reconstruction is Stringtie. Here, we will use `Stringtie` to predict transcript structures based on the reads aligned by `HISAT2`. 
+Now that we have mapped our reads to the mouse genome with `HISAT2`, we want to determine transcript structures that are represented by the aligned reads. This is called *de novo* transcriptome reconstruction. This unbiased approach permits the comprehensive identification of all transcripts present in a sample, including annotated genes, novel isoforms of annotated genes, and novel genes. While common gene/transcript databases are quite large, they are not comprehensive, and the *de novo* transcriptome reconstruction approach ensures complete transcriptome(s) identification from the experimental samples. The leading tool for transcript reconstruction is `Stringtie`. Here, we will use `Stringtie` to predict transcript structures based on the reads aligned by `HISAT2`. 
 
 > ### :pencil2: Hands-on: Transcriptome reconstruction
 >
 > 1. **Stringtie** :wrench:: Run `Stringtie` on the `HISAT` alignments using the default parameters. 
-> ![](../images/stringtie.png)
 >    - Use batch mode to run all four samples from one tool form. 
+> ![](../images/Stringtie.png)
 
 # Transcriptome assembly
 
-We just generated four transcriptomes with Stringtie representing each of the four RNA-seq libraries we're analyzing. Since these were generated in the absence of a reference transcriptome, and we ultimately would like to know what transcript structure corresponds to which annotated transcript (if any), we have to make a **transcriptome database**. We will use the tool `Cuffmerge` to combine redundant transcript structures across the four samples, provide non-redundant identifiers, and with the help of a reference annotation file annotate the nature/origin of each transcript (reference, novel isoform, intergenic transcript, antisense, etc.) 
+We just generated four transcriptomes with `Stringtie` representing each of the four RNA-seq libraries we are analyzing. Since these were generated in the absence of a reference transcriptome, and we ultimately would like to know what transcript structure corresponds to which annotated transcript (if any), we have to make a **transcriptome database**. We will use the tool `Cuffmerge` to combine redundant transcript structures across the four samples, provide non-redundant identifiers, and with the help of a reference annotation file annotate the nature/origin of each transcript (reference, novel isoform, intergenic transcript, antisense, etc.) 
 
 > ### :pencil2: Hands-on: Transcriptome assembly
 >
 > 1. **Cuffmerge** :wrench:: Run `Cuffmerge` on the `Stringtie` assembled transcripts along with the RefSeq annotation file we imported earlier. 
 >    - Use batch mode to inlcude all four `Stringtie` assemblies. 
 >    - **Use Reference Annotation**: Yes, then select the "RefSeq GTF mm10" file. 
-> ![](../images/cuffmerge.png)
+> ![](../images/Cuffmerge.png)
 >
 >
 >    > Transcript categorization used by `Cuffmerge`
@@ -292,14 +291,11 @@ In addition to the list of genes, `DESeq2` outputs a graphical summary of the re
 
     Each replicate is plotted as an individual data point. This type of plot is useful for visualizing the overall effect of experimental covariates and batch effects.
 
-
 4. Heatmap of sample-to-sample distance matrix: overview over similarities and dissimilarities between samples
 
     ![](../images/DESeq2_heatmap.png)
 
-5. Dispersion estimates: gene-wise estimates
-(black), the fitted values (red), and the final maximum a posteriori estimates used in testing
-(blue)
+5. Dispersion estimates: gene-wise estimates (black), the fitted values (red), and the final maximum a posteriori estimates used in testing (blue)
 
     ![](../images/DESeq2_dispersion.png)
 
@@ -309,10 +305,9 @@ In addition to the list of genes, `DESeq2` outputs a graphical summary of the re
 For more information about `DESeq2` and its outputs, you can have a look at [`DESeq2` documentation](https://www.bioconductor.org/packages/release/bioc/manuals/DESeq2/man/DESeq2.pdf).
 
 # Visualization
-Now that we have a list of transcript expression levels and their differential expression levels, it is time to visually inspect our transcript structures and the reads they were predicted from. It is a good practice to visually inspect (and present) loci bearing transcripts of interest. Fortuantely, there is a built-in genome browser in Galaxy, **Trackster**, that make this task simple (and even fun!!). 
+Now that we have a list of transcript expression levels and their differential expression levels, it is time to visually inspect our transcript structures and the reads they were predicted from. It is a good practice to visually inspect (and present) loci bearing transcripts of interest. Fortuantely, there is a built-in genome browser in Galaxy, **Trackster**, that make this task simple (and even fun!). 
 
 In this last section, we will convert our aligned read data from BAM format to bigWig format to simplify observing where our stranded RNA-seq data aligned to. We'll then initiate a session on Trackster, load it with our data, and visually inspect our interesting loci. 
-
 
 > ### :pencil2: Hands-on: Converting aligned read files to bigWig format
 >
@@ -327,7 +322,7 @@ In this last section, we will convert our aligned read data from BAM format to b
 > 3. **bamCoverage** :wrench:: Repeat Step 1 except changing the following parameter:
 >    - **Only include reads originating from fragments from the forward or reverse strand**: reverse
 > 4. **Rename** :wrench:: Rename the outputs to reflect the origin of the reads and that they represent the reads mappign to the MINUS strand
-> ![](../images/bamCoverage forward.png)
+> ![](../images/bamCoverage reverse.png)
 
 > ### :pencil2: Hands-on: Trackster based visualization
 >
@@ -339,36 +334,36 @@ In this last section, we will convert our aligned read data from BAM format to b
 >
 > 2. **Viz** :wrench:: Click "Add datasets to visualization"
 >    - Select the "RefSeq GTF mm10" file
->    - Select the output files from Stringtie
->    - Select the output file from Cuffmerge
->    - Select the output files from bamCoverage
+>    - Select the output files from `Stringtie`
+>    - Select the output file from `Cuffmerge`
+>    - Select the output files from `bamCoverage`
 > ![](../images/Trackster1.png)
 >
-> 3. **** :wrench:: Using the grey labels on the left side of each track, drag and arrange the track order to your preference
+> 3. :wrench:: Using the grey labels on the left side of each track, drag and arrange the track order to your preference
 >
-> 4. **** :wrench:: Hover over the grey label on the left side of the "RefSeq GTF mm10" track and click the "Edit settings" icon.
+> 4. :wrench:: Hover over the grey label on the left side of the "RefSeq GTF mm10" track and click the "Edit settings" icon.
 >    - Adjust the block color to blue (#0000ff) and antisense strand color to red (#ff0000) 
 >
-> 5. **** :wrench:: Repeat the previous step on the output files from StringTie and Cuffmerge
+> 5. :wrench:: Repeat the previous step on the output files from `StringTie` and `Cuffmerge`
 >
-> 6. **** :wrench:: Hover over the grey label on the left side of the "G1E R1 plus" track and click the "Edit settings" icon.
+> 6. :wrench:: Hover over the grey label on the left side of the "G1E R1 plus" track and click the "Edit settings" icon.
 >    - Adjust the color to blue (#0000ff) 
 >
-> 7. **** :wrench:: Repeat the previous step on the other three bigWig files representing the plus strand
+> 7. :wrench:: Repeat the previous step on the other three bigWig files representing the plus strand
 >
-> 8. **** :wrench:: Hover over the grey label on the left side of the "G1E R1 minus" track and click the "Edit settings" icon.
+> 8. :wrench:: Hover over the grey label on the left side of the "G1E R1 minus" track and click the "Edit settings" icon.
 >    - Adjust the color to red (#ff0000) 
 >
-> 9. **** :wrench:: Repeat the previous step on the other three bigWig files representing the minus strand
+> 9. :wrench:: Repeat the previous step on the other three bigWig files representing the minus strand
 >
-> 10. **** :wrench:: Adjust the track height of the bigWig files to be consistant for each set of plus strand and minus strand tracks 
-> 11. **** :wrench:: Direct Trackster to the coordinates: chr11:96193539-96206376, what do you see?
+> 10. :wrench:: Adjust the track height of the bigWig files to be consistant for each set of plus strand and minus strand tracks 
+> 11. :wrench:: Direct Trackster to the coordinates: chr11:96193539-96206376, what do you see?
 >    >    <details>
 >    >    <summary>Click to view answers</summary>
 >    >    <ol type="1">
 >    >    <li>There are two clusters of transcripts that are exclusively expressed in the G1E background</li>
 >    >    <li>The left-most transcript is the Hoxb13 transcript</li>
->    >    <li>The center cluster of transcripts are not present in the RefSeq annotation and are determined by Cuffmerge to be "u" and "x"</li>
+>    >    <li>The center cluster of transcripts are not present in the RefSeq annotation and are determined by `Cuffmerge` to be "u" and "x"</li>
 >    >    </ol>
 >    >    </details>
 >    {: .question}
