@@ -1,5 +1,3 @@
-
-
 ---
 layout: tutorial_hands_on
 topic_name: RNA-Seq
@@ -8,20 +6,20 @@ tutorial_name: de_novo transcriptome reconstruction
 
 # Introduction
 
-The data provided here are part of a Galaxy tutorial that analyzes RNA-seq data from a study published by *Wu et al.*, 2014 (DOI:10.1101/gr.164830.113). The goal of this study was to investigate "the dynamics of occupancy and the role in gene regulation of the transcription factor Tal1, a critical regulator of hematopoiesis, at multiple stages of hematopoietic differentiation." To this end, RNA-seq libraries were constructed from multiple mouse cell types including G1E - a GATA-null immortalized cell line derived from targeted disruption of GATA-1 in mouse embryonic stem cells - and megakaryocytes. This RNA-seq data was used to determine differential gene expression between G1E and megakaryocytes and later correlated with Tal1 occupancy. This dataset (GEO Accession: GSE51338) consists of biological replicate, paired-end, polyA selected RNA-seq libraries. Because of the long processing time for the large original files, we have downsampled the original raw data files to include only reads that align to chromosome 19 and a subset of interesting genomic loci identified by Wu et al.
+The data provided here are part of a Galaxy tutorial that analyzes RNA-seq data from a study published by *Wu et al.* in 2014 [DOI:10.1101/gr.164830.113](http://genome.cshlp.org/content/early/2014/10/12/gr.164830.113.abstract). The goal of this study was to investigate "the dynamics of occupancy and the role in gene regulation of the transcription factor Tal1, a critical regulator of hematopoiesis, at multiple stages of hematopoietic differentiation." To this end, RNA-seq libraries were constructed from multiple mouse cell types including G1E - a GATA-null immortalized cell line derived from targeted disruption of GATA-1 in mouse embryonic stem cells - and megakaryocytes. This RNA-seq data was used to determine differential gene expression between G1E and megakaryocytes and later correlated with Tal1 occupancy. This dataset (GEO Accession: GSE51338) consists of biological replicate, paired-end, poly(A) selected RNA-seq libraries. Because of the long processing time for the large original files, we have downsampled the original raw data files to include only reads that align to chromosome 19 and a subset of interesting genomic loci identified by Wu *et al*.
 
 # Analysis strategy
 
-The goal of this exercise is to identify what transcripts are present in the G1E and megakaryocyte cellualr states and which of these are differentially expressed between the two. We will use a 'de novo transcript reconstruction' stratgey to infer transcript structures from the mapped reads in the absence of the actual annotated transcript structures. This will allow us to identify novel genes and novel isoforms of annotated genes, as well as identify differentially expressed transcripts. 
+The goal of this exercise is to identify what transcripts are present in the G1E and megakaryocyte cellualr states and which transcripts are differentially expressed between the two states. We will use a *de novo* transcript reconstruction stratgey to infer transcript structures from the mapped reads in the absence of the actual annotated transcript structures. This will allow us to identify novel transcripts and novel isoforms of known transcripts, as well as identify differentially expressed transcripts. 
 
 > ### Agenda
 > 
-> In this tutorial, we will:
+> In this tutorial, we will address:
 >
 > 1. Data upload
 > 2. Read trimming
 > 3. Read mapping
-> 4. De novo transcript reconstriction
+> 4. *De novo* transcript reconstriction
 > 5. Transcriptome assembly
 > 6. Read counting and differential expression analysis
 > 7. Visualization
@@ -40,12 +38,12 @@ Due to the large size of this dataset, we have downsampled it to only inlcude re
 > 6. Change the datatype of the read files to **fastqsanger**
 > 7. Change the datatype of the annotation file to **gtf** and assign the Genome as **mm10**
 > 8. Press **Start**
-> 9. Rename the files in your history to retain just the necessary information (eg. "G1E R1 forward reads")
+> 9. Rename the files in your history to retain just the necessary information (*e.g.* "G1E R1 forward reads")
 >
 >    > <details>
 >    > <summary>:bulb: Tip: Importing data via links</summary>
 >    > <ol type="2">
->    > <li>For ease, we've included links to the read files </li>
+>    > <li>For ease, below are the links to the read files.</li>
 >    > <li>https://zenodo.org/record/254485/files/G1E_R1_forward_downsampled_SRR549355.fastqsanger.gz
 >    > https://zenodo.org/record/254485/files/G1E_R1_reverse_downsampled_SRR549355.fastqsanger.gz
 >    > https://zenodo.org/record/254485/files/G1E_R2_forward_downsampled_SRR549356.fastqsanger.gz
@@ -67,7 +65,7 @@ For quality control, we use similar tools as described in [NGS-QC tutorial](../.
 
 > ### :pencil2: Hands-on: Quality control
 >
-> 1. **FastQC** :wrench:: Run FastQC on the forward and reverse read files to assess the quality of the reads
+> 1. **FastQC** :wrench:: Run FastQC on the forward and reverse read files to assess the quality of the reads.
 >
 >    > ### :question: Questions
 >    >
@@ -78,7 +76,7 @@ For quality control, we use similar tools as described in [NGS-QC tutorial](../.
 >    >    <summary>Click to view answers</summary>
 >    >    <ol type="1">
 >    >    <li>The read length is 99 bp</li>
->    >    <li>The quality of base calls declines throughout a sequencing run. ADD MORE HERE</li>
+>    >    <li>The quality of base calls declines throughout a sequencing run. ADD MORE HERE.</li>
 >    >    </ol>
 >    >    </details>
 >    {: .question}
@@ -88,10 +86,7 @@ For quality control, we use similar tools as described in [NGS-QC tutorial](../.
 > ![](../images/trimmomatic.png)
 >
 >
->
-> 3. **FastQC** :wrench:: Re-run FastQC on Trimmomatics's outputs and inspect the differences
->
->
+> 3. **FastQC** :wrench:: Re-run FastQC on Trimmomatics's outputs and inspect the differences.
 >
 >    > ### :question: Questions
 >    >
@@ -101,14 +96,14 @@ For quality control, we use similar tools as described in [NGS-QC tutorial](../.
 >    >    <details>
 >    >    <summary>Click to view answers</summary>
 >    >    <ol type="1">
->    >    <li>The read length is 99 bp</li>
->    >    <li>The quality of base calls declines throughout a sequencing run. ADD MORE HERE</li>
+>    >    <li>The read lengths range from # to # bp</li>
+>    >    <li>The average quality of base calls remains high throughout a sequencing run.</li>
 >    >    </ol>
 >    >    </details>
 >    {: .question}
 > {: .hands_on}
 
-Now that we have trimmed our reads and are fortuante that there is a great reference genome assembly for mouse, we will map our trimmed reads to the genome
+Now that we have trimmed our reads and are fortuante that there is a great reference genome assembly for mouse, we will map our trimmed reads to the genome.
 
 # Mapping
 
@@ -119,15 +114,15 @@ To make sense of the reads, their positions within mouse genome must be determin
 > Do you want to learn more about the principles behind mapping? Follow our [training](../../NGS-mapping)
 > {: .comment}
 
-Because in the case of a eukaryotic transcriptome, most reads originate from processed mRNAs lacking exons, they cannot be simply mapped back to the genome as we normally do for DNA data. Instead the reads must be separated into two categories:
+In the case of a eukaryotic transcriptome, most reads originate from processed mRNAs lacking introns. Therefore, they cannot be simply mapped back to the genome as we normally do for reads derived from DNA sequences. Instead, the reads must be separated into two categories:
 
-- Reads that map perfectly to the genomic sequence (exons)
-- Reads with mature splice junctions that need to be mapped across introns
+- Reads contained within mature exons that align perfectly to the genomic sequence
+- Reads that span splice junctions in the mature mRNA that align across introns
 
-Spliced mappers have been developed to efficiently map transcript-derived reads against genomes. [HISAT2](https://ccb.jhu.edu/software/hisat2/index.shtml) is an accurate and fast tool for mapping spliced reads to a genome. 
+Spliced mappers have been developed to efficiently map transcript-derived reads against genomes. [HISAT2](https://ccb.jhu.edu/software/hisat2/index.shtml) is an accurate and fast tool for mapping spliced reads to a genome. Others include [example]() and [example](), but we will be using HISAT2 in this tutorial.
 
 >    > ### :nut_and_bolt: Comment
->    > As it is sometimes quite difficult to find out which settings correspond to those of other programs, the following table might be helpful to identify the library type:
+>    > As it is sometimes quite difficult to determine which settings correspond to those of other programs, the following table might be helpful to identify the library type:
 >    > 
 >    > Library type | **Infer Experiment** | **TopHat** | **HISAT2** | **htseq-count** | **featureCounts**
 >    > --- | --- | --- | --- | --- | ---
@@ -142,37 +137,35 @@ Spliced mappers have been developed to efficiently map transcript-derived reads 
 > ### :pencil2: Hands-on: Spliced mapping
 >
 > 1. **** :wrench:: Run **HISAT2** on one forward/reverse read pair and modify the following settings:
->    - "Paired-end (as individual datasets)" instead of "Single-end"
->    - "Mouse (Mus Musculus): mm10" as reference genome
->    - "Spliced alignment parameters" choose to "Specify spliced alignment parameters"
->    - "Specify strand-specific information" choose "First Strand (R/RF)"
->    - "Transcriptome assembly reporting" to "Report alignments tailored for transcript assemblers including StringTie."
+>    - **Single end or paired reads?**: Individual paired-end reads
+>    - **Source for the reference genome to align against**: Use a built-in genome > Mouse (Mus Musculus): mm10
+>    - **Spliced alignment parameters**: Specify spliced alignment parameters
+>    - **Specify strand-specific information**: First Strand (R/RF)
+>    - **Transcriptome assembly reporting**: Report alignments tailored for transcript assemblers including StringTie.
 >
 > ![](../images/hisat.png)
 >
 > 2. **** :wrench:: Run **HISAT2** on the remaining forward/reverse read pairs with the same parameters.
 >
 
-
-
 # De novo transcript reconstruction
-Now that we have mapped our reads to the mouse genome with HISAT2, we want to determine transcript structures that are represented by the aligned reads, this is called 'de novo transcriptome reconstruction'. This unbiased approach permits the comprehensive identification of all transcripts present in a sample, including annotated genes, novel isoforms of annotated genes, and novel genes. While common gene/transcript databases are quite large, they are not comprehensive and this 'de novo transcriptome reconstruction' approach ensures you are truly analyzing the complete transcriptome(s) from your experiemntal samples. The leading tool for transcript reconstruction is Stringtie. Here, we will use Stringtie to predict transcript structures soley based on the reads aligned by HISAT2. 
+Now that we have mapped our reads to the mouse genome with `HISAT2`, we want to determine transcript structures that are represented by the aligned reads. This is called *de novo* transcriptome reconstruction. This unbiased approach permits the comprehensive identification of all transcripts present in a sample, including annotated genes, novel isoforms of annotated genes, and novel genes. While common gene/transcript databases are quite large, they are not comprehensive, and the *de novo* transcriptome reconstruction approach ensures complete transcriptome(s) identification from the experimental samples. The leading tool for transcript reconstruction is Stringtie. Here, we will use `Stringtie` to predict transcript structures based on the reads aligned by `HISAT2`. 
 
 > ### :pencil2: Hands-on: Transcriptome reconstruction
 >
-> 1. **** :wrench:: Run **Stringtie** on the HISAT alignments using the default parameters. 
+> 1. **** :wrench:: Run `Stringtie` on the HISAT alignments using the default parameters. 
 > ![](../images/stringtie.png)
 >    - Use batch mode to run all four samples from one tool form. 
 
 # Transcriptome assembly
 
-We just generated four transcriptomes with Stringtie representing each of the four RNA-seq libraries we're analyzing. Since these were generated in the absence of a reference transcriptome and we ultimately would like to know what transcript structure corresponds to which annotated transcript (if any) we have to make a **transcriptome database**. We will use the tool Cuffmerge to combine redundant transcript structures across the four samples, provide non-redundant identifiers, and with the help of the reference annotation file we provide to annotate the nature/origin of each transcript (reference, novel isoform, intergenic transcript, antisense, etc.) 
+We just generated four transcriptomes with Stringtie representing each of the four RNA-seq libraries we're analyzing. Since these were generated in the absence of a reference transcriptome, and we ultimately would like to know what transcript structure corresponds to which annotated transcript (if any), we have to make a **transcriptome database**. We will use the tool Cuffmerge to combine redundant transcript structures across the four samples, provide non-redundant identifiers, and with the help of a reference annotation file annotate the nature/origin of each transcript (reference, novel isoform, intergenic transcript, antisense, etc.) 
 
 > ### :pencil2: Hands-on: Transcriptome assembly
 >
-> 1. **** :wrench:: Run **Cuffmerge** on the Stringtie assembled transcripts along with the RefSeq annotation file we imported earlier. 
->    - Use batch mode to inlcude all four Stringtie assemblies. 
->    - Choose "Use Reference Annotation" -> "Yes" and select the "RefSeq GTF mm10" file. 
+> 1. **** :wrench:: Run `Cuffmerge` on the Stringtie assembled transcripts along with the RefSeq annotation file we imported earlier. 
+>    - Use batch mode to inlcude all four `Stringtie` assemblies. 
+>    - **Use Reference Annotation**: Yes, then select the "RefSeq GTF mm10" file. 
 > ![](../images/cuffmerge.png)
 >
 >
@@ -189,64 +182,62 @@ We just generated four transcriptomes with Stringtie representing each of the fo
 >    > |s | Anti-sense spliced intronic|
 
 
-
-
-
 # Analysis of the differential gene expression
 
-We just generated a transriptome database that represents the transcripts present in our RNA-seq libraries generated from G1E and megakaryocytes. This database provides the location of our transcripts with non-redundant identifiers, as well as information regarding the origin of the transcript. 
+We just generated a transriptome database that represents the transcripts present in the G1E and megakaryocytes samples. This database provides the location of our transcripts with non-redundant identifiers, as well as information regarding the origin of the transcript. 
 
-We now want to identify which transcripts are expressed and which of those are differentially expressed between the Gf1E and megakaryocyte cellular states. To do this we will use a counting approach using FeatureCounts to count reads per transcript and providing this information to DESeq2 to generate normalized transcript counts (abundance estimates) and significance testing for differential expression   
+We now want to identify which transcripts are differentially expressed between the G1E and megakaryocyte cellular states. To do this we will implement a counting approach using `FeatureCounts` to count reads per transcript. Then we will provide this information to `DESeq2` to generate normalized transcript counts (abundance estimates) and significance testing for differential expression.
 
 ## Count the number of reads per transcript
 
-To compare the abundance of transcripts between different cellular states, a first essential step is to quantify the number of reads per transcript. [**FeatureCounts**](http://bioinf.wehi.edu.au/featureCounts/) is one of the most popular tools for counting reads in genomic features, in our case, we'll be using FeatureCounts to count reads aligning in exons of our Cuffmerge generated transcriptome database.
+To compare the abundance of transcripts between different cellular states, the first essential step is to quantify the number of reads per transcript. [`FeatureCounts`](http://bioinf.wehi.edu.au/featureCounts/) is one of the most popular tools for counting reads in genomic features. In our case, we'll be using `FeatureCounts` to count reads aligning in exons of our `Cuffmerge` generated transcriptome database.
 
 The recommended mode is "union", which counts overlaps even if a read only shares parts of its sequence with a genomic feature and disregards reads that overlap more than one feature.
 
 > ### :pencil2: Hands-on: Counting the number of reads per transcript
 >
-> 1. **FeatureCounts** :wrench:: Run FeatureCounts on the aligned reads (HISAT output) using the Cuffmerge transcriptome database as the annotation file.
+> 1. **FeatureCounts** :wrench:: Run `FeatureCounts` on the aligned reads (`HISAT` output) using the `Cuffmerge` transcriptome database as the annotation file.
 >
->    - Using the batch mode for input selection, choose the four aligned read files
->    - "Gene annotation file" choose "in your history" and select the GTF file output by Cuffmerge. >    - The "union" mode
->    - Expand the "Options for paired end reads" section and under "Orientation of the two read from the same pair" select "Forward, Reverse (fr)".
->    - Expand the "Advanced options" and under "GFF gene identifier" specify "transcript_id"
+>    - Using the batch mode for input selection, choose the four `HISAT` aligned read files
+>    - **Gene annotation file**:  in your history, then select the GTF file output by Cuffmerge (this specifies the "union" mode)
+>    - Expand **Options for paired end reads**
+>    - **Orientation of the two read from the same pair**: Forward, Reverse (fr)
+>    - Expand **Advanced options**
+>    - **GFF gene identifier**: enter "transcript_id"
 > ![](../images/FeatureCounts.png)
 >
 > {: .hands_on}
 
 ## Analysis of the differential gene expression
 
-Expression analysis is estimated from read counts and attempts are made to correct for variability in measurements using replicates - this is absolutely essential to obtaining accurate results. For your own experiments, we recommend having at least two biological replicates. 
+Transcrip expression is estimated from read counts, and attempts are made to correct for variability in measurements using replicates. This is absolutely essential to obtaining accurate results. For your own experiments, we recommend having at least two biological replicates. 
 
-[**DESeq2**](https://bioconductor.org/packages/release/bioc/html/DESeq2.html) is a great tool for differential gene expression analysis. It takes read counts produced by **FeatureCounts** and applies size factor normalization:
+[`DESeq2`](https://bioconductor.org/packages/release/bioc/html/DESeq2.html) is a great tool for differential gene expression analysis. It takes read counts produced by `FeatureCounts` and applies size factor normalization:
 
 - Computation for each gene of the geometric mean of read counts across all samples
 - Division of every gene count by the geometric mean
 - Use of the median of these ratios as sample's size factor for normalization
 
-
 > ### :pencil2: Hands-on:
 >
-> 1. **DESeq2** :wrench:: Run **DESeq2** with:
+> 1. **DESeq2** :wrench:: Run `DESeq2` with the following parameters:
 >    - Specify "G1E" as the first factor level (condition) and select the count files corresponding to the two replicates
 >    - Specify "Mega" as the second factor level (condition) and select the count files corresponding to the two replicates
 >
 >       > ### :nut_and_bolt: Comment
 >       >
->       > You can select several files by keeping the CTRL (or COMMAND) key pressed and clicking on the interesting files 
+>       > You can select several files by holding down the CTRL (or COMMAND) key and clicking on the desired files 
 >       {: .comment}
->    - Under "Visualising the analysis results" select "Yes"
->    - Under "Output normalized counts table" select "Yes"
+>    - **Visualising the analysis results**: Yes
+>    - **Output normalized counts table**: Yes
 >
 {: .hands_on}
 
-The first output of **DESeq2** is a tabular file. The columns are:
+The first output of `DESeq2` is a tabular file. The columns are:
 
 1.	Gene identifiers
 2.	Mean normalized counts, averaged over all samples from both conditions
-3.	Logarithm (to base 2) of the fold change (the values correspond to up- or downregulation relative to the condition listed as Factor level 1)
+3.	Logarithm (base 2) of the fold change (the values correspond to up- or downregulation relative to the condition listed as Factor level 1)
 4.	Standard error estimate for the log2 fold change estimate
 5.	[Wald](https://en.wikipedia.org/wiki/Wald_test) statistic
 6.	*p*-value for the statistical significance of this change
@@ -255,7 +246,7 @@ The first output of **DESeq2** is a tabular file. The columns are:
 
 > ### :pencil2: Hands-on:
 >
->1. **Filter** :wrench:: Run **Filter** to extract genes with a significant change in gene expression (adjusted *p*-value equal or below 0.05) between treated and untreated samples
+>1. **Filter** :wrench:: Run `Filter` to extract genes with a significant change in gene expression (adjusted *p*-value equal to or below 0.05) between treated and untreated samples
 >
 >    > ### :question: Question
 >    >
@@ -285,7 +276,7 @@ The first output of **DESeq2** is a tabular file. The columns are:
 >    {: .question}
 {: .hands_on}
 
-In addition to the list of genes, **DESeq2** outputs a graphical summary of the results, useful to evaluate the quality of the experiment:
+In addition to the list of genes, `DESeq2` outputs a graphical summary of the results, useful to evaluate the quality of the experiment:
 
 1. Histogram of *p*-values for all tests
 
