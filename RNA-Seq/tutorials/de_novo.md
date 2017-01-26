@@ -85,7 +85,7 @@ For quality control, we use similar tools as described in [NGS-QC tutorial](../.
 >
 > ![](../images/trimmomatic.png)
 >
-> 3. **FastQC** :wrench:: Re-run `FastQC` on Trimmomatics's outputs and inspect the differences.
+> 3. **FastQC** :wrench:: Re-run `FastQC` on trimmed reads and inspect the differences.
 >
 >    > ### :question: Questions
 >    >
@@ -95,14 +95,14 @@ For quality control, we use similar tools as described in [NGS-QC tutorial](../.
 >    >    <details>
 >    >    <summary>Click to view answers</summary>
 >    >    <ol type="1">
->    >    <li>The read lengths range from # to # bp</li>
->    >    <li>The average quality of base calls remains high throughout a sequencing run.</li>
+>    >    <li>The read lengths range from 1 to 99 bp after trimming</li>
+>    >    <li>The average quality of base calls does not drop off as sharply at the 3' ends of reads.</li>
 >    >    </ol>
 >    >    </details>
 >    {: .question}
 > {: .hands_on}
 
-Now that we have trimmed our reads and are fortuante that there is a great reference genome assembly for mouse, we will map our trimmed reads to the genome.
+Now that we have trimmed our reads and are fortuante that there is a reference genome assembly for mouse, we will align our trimmed reads to the genome.
 
 # Mapping
 
@@ -115,21 +115,21 @@ To make sense of the reads, their positions within mouse genome must be determin
 
 In the case of a eukaryotic transcriptome, most reads originate from processed mRNAs lacking introns. Therefore, they cannot be simply mapped back to the genome as we normally do for reads derived from DNA sequences. Instead, the reads must be separated into two categories:
 
-- Reads contained within mature exons that align perfectly to the genomic sequence
-- Reads that span splice junctions in the mature mRNA that align across introns
+- Reads contained within mature exons - these align perfectly to the reference genome
+- Reads that span splice junctions in the mature mRNA - these align with gaps to the reference genome
 
-Spliced mappers have been developed to efficiently map transcript-derived reads against genomes. [`HISAT2`](https://ccb.jhu.edu/software/hisat2/index.shtml) is an accurate and fast tool for mapping spliced reads to a genome. Others include [example]() and [example](), but we will be using `HISAT2` in this tutorial.
+Spliced mappers have been developed to efficiently map transcript-derived reads against genomes. [`HISAT2`](https://ccb.jhu.edu/software/hisat2/index.shtml) is an accurate and fast tool for mapping spliced reads to a genome. Another popular spliced aligner is [`TopHat`](https://ccb.jhu.edu/software/tophat/index.shtml), but we will be using `HISAT2` in this tutorial.
 
 >    > ### :nut_and_bolt: Comment
 >    > As it is sometimes quite difficult to determine which settings correspond to those of other programs, the following table might be helpful to identify the library type:
 >    > 
 >    > Library type | **Infer Experiment** | **TopHat** | **HISAT2** | **htseq-count** | **featureCounts**
 >    > --- | --- | --- | --- | --- | ---
->    > PE | "1++,1--,2+-,2-+" | "FR Second Strand" | "FR" | "yes" | "1"
->    > PE | "1+-,1-+,2++,2--" | "FR First Strand" | "RF" | "reverse" | "2"
->    > SE | "++,--" | "FR Second Strand" | "F" | "yes" | "1"
->    > SE | "+-,-+" | "FR First Strand" | "R" | "reverse" | "2"
->    > SE,PE | undecided | "FR Unstranded" | default | "no" | "0"
+>    > PE | 1++,1--,2+-,2-+ | FR Second Strand | FR | yes | 1
+>    > PE | 1+-,1-+,2++,2-- | FR First Strand | RF | reverse | 2
+>    > SE | ++,-- | FR Second Strand | F | yes | 1
+>    > SE | +-,-+ | FR First Strand | R | reverse | 2
+>    > SE,PE | undecided | FR Unstranded | default | no | 0
 >    > 
 >    {: .comment}
 >    
@@ -152,7 +152,7 @@ Now that we have mapped our reads to the mouse genome with `HISAT2`, we want to 
 
 > ### :pencil2: Hands-on: Transcriptome reconstruction
 >
-> 1. **Stringtie** :wrench:: Run `Stringtie` on the `HISAT` alignments using the default parameters. 
+> 1. **Stringtie** :wrench:: Run `Stringtie` on the `HISAT2` alignments using the default parameters. 
 >    - Use batch mode to run all four samples from one tool form. 
 > ![](../images/Stringtie.png)
 
@@ -195,9 +195,9 @@ The recommended mode is "union", which counts overlaps even if a read only share
 
 > ### :pencil2: Hands-on: Counting the number of reads per transcript
 >
-> 1. **FeatureCounts** :wrench:: Run `FeatureCounts` on the aligned reads (`HISAT` output) using the `Cuffmerge` transcriptome database as the annotation file.
+> 1. **FeatureCounts** :wrench:: Run `FeatureCounts` on the aligned reads (`HISAT2` output) using the `Cuffmerge` transcriptome database as the annotation file.
 >
->    - Using the batch mode for input selection, choose the four `HISAT` aligned read files
+>    - Using the batch mode for input selection, choose the four `HISAT2` aligned read files
 >    - **Gene annotation file**:  in your history, then select the GTF file output by Cuffmerge (this specifies the "union" mode)
 >    - Expand **Options for paired end reads**
 >    - **Orientation of the two read from the same pair**: Forward, Reverse (fr)
@@ -209,7 +209,7 @@ The recommended mode is "union", which counts overlaps even if a read only share
 
 ## Analysis of the differential gene expression
 
-Transcrip expression is estimated from read counts, and attempts are made to correct for variability in measurements using replicates. This is absolutely essential to obtaining accurate results. For your own experiments, we recommend having at least two biological replicates. 
+Transcript expression is estimated from read counts, and attempts are made to correct for variability in measurements using replicates. This is absolutely essential to obtaining accurate results. We recommend having at least two biological replicates. 
 
 [`DESeq2`](https://bioconductor.org/packages/release/bioc/html/DESeq2.html) is a great tool for differential gene expression analysis. It takes read counts produced by `FeatureCounts` and applies size factor normalization:
 
@@ -253,10 +253,9 @@ The first output of `DESeq2` is a tabular file. The columns are:
 >    > 
 >    > <details>
 >    > <summary>Click to view answers</summary>
->    > To filter, use "c7&lt;0.05". And we get 276 transcripts with a significant change in gene expression between the G1E and megakaryocyte cellular states.
+>    > To filter, use "c7>00.5". And we get 276 transcripts with a significant change in gene expression between the G1E and megakaryocyte cellular states.
 >    > </details>
 >    {: .question}
->
 >
 > 2. **Filter** :wrench:: Determine how many transcripts are up or down regulated in the G1E state.
 >
@@ -305,16 +304,16 @@ In addition to the list of genes, `DESeq2` outputs a graphical summary of the re
 For more information about `DESeq2` and its outputs, you can have a look at [`DESeq2` documentation](https://www.bioconductor.org/packages/release/bioc/manuals/DESeq2/man/DESeq2.pdf).
 
 # Visualization
-Now that we have a list of transcript expression levels and their differential expression levels, it is time to visually inspect our transcript structures and the reads they were predicted from. It is a good practice to visually inspect (and present) loci bearing transcripts of interest. Fortuantely, there is a built-in genome browser in Galaxy, **Trackster**, that make this task simple (and even fun!). 
+Now that we have a list of transcript expression levels and their differential expression levels, it is time to visually inspect our transcript structures and the reads they were predicted from. It is a good practice to visually inspect (and present) loci with transcripts of interest. Fortuantely, there is a built-in genome browser in Galaxy, **Trackster**, that make this task simple (and even fun!). 
 
 In this last section, we will convert our aligned read data from BAM format to bigWig format to simplify observing where our stranded RNA-seq data aligned to. We'll then initiate a session on Trackster, load it with our data, and visually inspect our interesting loci. 
 
 > ### :pencil2: Hands-on: Converting aligned read files to bigWig format
 >
-> 1. **bamCoverage** :wrench:: Run `bamCoverage` on all four aligned read files (`HISAT` output) with the following parameters:
+> 1. **bamCoverage** :wrench:: Run `bamCoverage` on all four aligned read files (`HISAT2` output) with the following parameters:
 >    - **Bin size in bases**: 1
 >    - **Effective genome size**: mm9 (2150570000)
->    - Expose the "Advanced options" by selecting "yes"
+>    - Expand the **Advanced options**
 >    - **Only include reads originating from fragments from the forward or reverse strand**: forward
 > 2. **Rename** :wrench:: Rename the outputs to reflect the origin of the reads and that they represent the reads mappign to the PLUS strand
 >![](../images/bamCoverage forward.png)
