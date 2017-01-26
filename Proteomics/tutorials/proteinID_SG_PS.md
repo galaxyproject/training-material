@@ -59,7 +59,7 @@ It is generally recommended to use more than one peptide search engine and use t
 > 2. Run ***Search GUI*** :wrench: to search the mgf file against the protein database.
 > 3. Run ***Peptide Shaker*** :wrench: on the Search GUI output. Enable the following outputs: `Zip File for import to Desktop App`, `mzidentML File`, `PSM Report`, `Peptide Report`, `Protein Report`.
 >
->	> :question: Questions: 
+>	> ### :question: Questions: 
 >	> 1. How many peptides were identified? How many proteins?
 >	> 2. How many peptides with oxidized methionine were identified?
 
@@ -72,14 +72,14 @@ The FASTA database used for the peptide to spectrum matching contained some entr
 > 1. Run **Select** :wrench: on the Peptide Shaker Protein Report to select all lines that match the pattern "CONTAMINANT".
 > 2. Remove all contaminants from your protein list by running **Select** :wrench: on the Peptide Shaker Protein Report. Select only those lines that DO NOT match the pattern "CONTAMINANT".
 >
->	> :question: Questions: 
+>	> ### :question: Questions: 
 >	> 1. Which contaminants did you identify? Where do these contaminations come from?
 >	> 2. How many mycoplasma proteins did you identify? Does this mean that the analyzed HeLa cells were infected with mycoplasma?
->
->    <details>
->    <summary>Click to view answers</summary>
->    	<ol type="1">
->    		<li> TRY_BOVIN is bovine trypsin. It was used to degrade the proteins to peptides. ALBU_BOVIN is bovine serum albumin. It is added to cell culture medium in high amounts.</li>
+>	>
+>	>    <details>
+>	>    <summary>Click to view answers</summary>
+>	>    	<ol type="1">
+>	>    		<li> TRY_BOVIN is bovine trypsin. It was used to degrade the proteins to peptides. ALBU_BOVIN is bovine serum albumin. It is added to cell culture medium in high amounts.</li>
 			<li> There should be five mycoplasma proteins in your protein list. However, all of them stem from different mycoplasma species. Also, every protein was identified by one peptide only. You can see this is column 17-19 of your output. This observations makes it very likely that we are facing false positives here. As we were allowing for a false discovery rate of 1 %, we would expect 12 false positive proteins in our list. False positives are distributed to random peptides in the FASTA database. Our database consists of about 20,000 human proteins and 4,000 mycoplasma proteins. Therefore, we would expect 20 % of all false positives to match to mycoplasma proteins.</li>
->   	 </ol>
->    </details>
+>	>   	 </ol>
+>	>    </details>
