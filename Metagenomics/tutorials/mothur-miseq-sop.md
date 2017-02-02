@@ -7,48 +7,77 @@ tutorial_name: mothur-miseq-sop
 ## Overview
 In this tutorial we will perform the following steps:
 
-1. Obtaining and preparing input data
-2. Quality Control
-  - Reducing sequencing and PCR errors
-  - Processing improved sequences
-  - Assessing error rate
-  - Preparing for analysis  
-3. OTU-based analysis
-  - alpha diversity
-  - beta diversity
-  - population-level analysis
-4. Vizualisations
-  - Phinch
-  - Krona
+> ### Agenda
+>
+> In this tutorial, we will:
+>
+> 1. [Obtain and prepare our input data](#preprocessing)
+> 2. [Perform Quality Control](#quality-control)
+>   - Reducing sequencing and PCR errors
+>   - Processing improved sequences
+>   - Assessing error rate
+>   - Preparing for analysis  
+> 3. [Perform OTU-based analysis](#otu-analysis)
+>   - alpha diversity
+>   - beta diversity
+>   - population-level analysis
+> 4. [Visualize our data](#visualization)
+>   - Phinch
+>   - Krona
+{: .agenda}
+
 
 Each of the Mothur tools in Galaxy contains a link to the mothur wiki in the help section. Here you can find more details about all the inputs, outputs and parameters for the tool.
 
-:information_source: Your results may deviate slightly from the ones presented in this tutorial due to differing tool or reference data versions or stochastic processes in the algorithms.
+> ### :nut_and_bolt: Note
+> Your results may deviate slightly from the ones presented in this tutorial due to differing tool or reference data versions or stochastic processes in the algorithms.
+{: .comment}
 
-# Part 1: Obtaining and preparing data
 
-## Understanding our input data
-In this tutorial we are interested in understanding the effect of normal variation in the gut microbiome on host health. To that end fresh feces from mice were collected on a daily basis for 365 days post weaning. During the first 150 days post weaning (dpw), nothing was done to our mice except allow them to eat, get fat, and be merry. We were curious whether the rapid change in weight observed during the first 10 dpw affected the stability microbiome compared to the microbiome observed between days 140 and 150. We will address this question in this tutorial using a combination of OTU, phylotype, and phylogenetic methods.
+## Part 1: Obtaining and preparing data
+
+### Understanding our input data
+In this tutorial we are interested in understanding the effect of normal variation in the gut microbiome on host health. To that end, fresh feces from mice were collected on a daily basis for 365 days post weaning. During the first 150 days post weaning (dpw), nothing was done to our mice except allow them to eat, get fat, and be merry. We were curious whether the rapid change in weight observed during the first 10 dpw affected the stability microbiome compared to the microbiome observed between days 140 and 150. We will address this question in this tutorial using a combination of OTU, phylotype, and phylogenetic methods.
+
+![](../images/experiment_setup.png)
 
 To make this tutorial easier to execute, we are providing only part of the data - you are given the flow files for one animal at 10 time points (5 early and 5 late). In addition, to sequencing samples from mice fecal material, we resequenced a mock community composed of genomic DNA from 21 bacterial strains. We will use the 10 fecal samples to look at how to analyze microbial communities and the mock community to measure the error rate and its effect on other analyses.
 
-:information_source: **Dataset details**  
-Because of the large size of the original dataset (3.9 GB) you are given 21 of the 362 pairs of fastq files. For example, you will see two files: `F3D0_S188_L001_R1_001.fastq` and `F3D0_S188_L001_R2_001.fastq`. These two files correspond to Female 3 on Day 0 (i.e. the day of weaning). The first and all those with R1 correspond to read 1 while the second and all those with R2 correspond to the second or reverse read. These sequences are 250 bp and overlap in the V4 region of the 16S rRNA gene; this region is about 253 bp long. So looking at the datasets you will see 22 fastq files representing 10 time points from Female 3 and 1 mock community. You will also see `HMP_MOCK.v35.fasta` which contains the sequences used in the mock community that were sequenced in fasta format.
+> ### :nut_and_bolt: Dataset details
+> Because of the large size of the original dataset (3.9 GB) you are given 21 of the 362 pairs of fastq files. For example, you will see two files: `F3D0_S188_L001_R1_001.fastq`, and `F3D0_S188_L001_R2_001.fastq`  
+>
+>These two files correspond to Female 3 on Day 0 (F3D0) (i.e. the day of weaning). The first file ( and all those with R1 in the name) correspond to the forward reads, while the second (and all those with R2 in the name) correspond to the reverse reads.
+>
+>These sequences are 250 bp and overlap in the V4 region of the 16S rRNA gene; this region is about 253 bp long. Looking at the datasets, you will see 22 fastq files, representing 10 time points from Female 3 and 1 mock community. You will also see `HMP_MOCK.v35.fasta` which contains the sequences used in the mock community that were sequenced in fasta format.
+{: .comment}
 
-:pencil2: ***Hands on!***
+Now that we know what our input data is, let's get it into our Galaxy history:
 
-Now that we know what our input data is, let's get it into our history:
-
-1. Create a **new history** and name it *Mothur MiSeq SOP*
-
-2. **Import** the training data to your history. There are two ways to do this. The easiest is using the data available from a *Shared Data Library*, if this is not possible on your Galaxy instance, you can download the data yourself and upload it to your Galaxy instance.
-  - From data library:
-    - Navigate to the shared data library named *Galaxy training: Metagenomics with Mothur - MiSeq SOP* and import all files listed in the *Input Data* folder
-  - From your computer:
-    - obtain data directly from Zenodo: [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.165147.svg)](https://doi.org/10.5281/zenodo.165147)
-    - download `input_data.zip` and unzip it
-    - upload all files to your history.
-
+> ### :pencil2: Hands-on: Obtaining our data
+>
+> 1. Make sure you have an empty analysis history. Give it a name.
+>
+>    > ### :bulb: Starting a new history
+>    >
+>    > * Click the **gear icon** at the top of the history panel
+>    > * Select the option **Create New** from the menu
+>    {: .tip}
+>
+> 2. **Import Sample Data.** The data for this course may be available from a shared library in Galaxy (ask your instructor). If this is not the case, you can upload it yourself.
+> - From data library:
+>   - Navigate to the shared data library named *Galaxy training: Metagenomics with Mothur - MiSeq SOP* and import all files listed in the *Input Data* folder
+> - From your computer:
+>   - obtain data directly from Zenodo: [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.165147.svg)](https://doi.org/10.5281/zenodo.165147)
+>   - download `input_data.zip` and unzip it
+>   - upload all files to your history.
+>
+> 3. **Import Reference Data.**  Go back to the data library and import all files from the *Reference Data* folder, or download them from Zenodo (`reference_data.zip`) and upload them to your history:
+>  - `silva.v4.fasta`
+>  - `HMP_MOCK.v35.fasta`
+>  - `trainset9_032012.pds.fasta`
+>  - `trainset9_032012.pds.tax`
+>
+{: .hands_on}
 
 3. Create a **paired collection**. Since we have paired end data, each sample consist of two seperate fastq files, one containing the forward reads, and one containing the reverse reads. We can recognize the pairing from the file names, which will differ only by `_R1` or `_R2` in the filename. We can tell Galaxy about this paired naming convention, so that our tools will know which files belong together.
 
@@ -78,11 +107,7 @@ Apart from our input data we will also need some additional reference data.
 
 :pencil2: ***Hands on!***
 
-1. Go back to the data library and import all files from the *Reference Data* folder, or download them from Zenodo (`reference_data.zip`) and upload them to your history:
-  - `silva.v4.fasta`
-  - `HMP_MOCK.v35.fasta`
-  - `trainset9_032012.pds.fasta`
-  - `trainset9_032012.pds.tax`
+
 
 # Step 2: Quality Control
 
