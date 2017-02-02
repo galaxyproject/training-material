@@ -1,27 +1,8 @@
-Metagenomics with Mothur: MiSeq SOP
-==================================
-
-:grey_question: ***Questions***
-
-- *What is the effect of normal variation in the gut microbiome on host health?*
-
-:dart: ***Objectives***
-
-- *Learn how to analyse 16S rRNA sequences in Galaxy using the Mothur toolsuite*
-- *Learn how to use dataset collections to process a large number of samples at once*
-
-:heavy_check_mark: ***Requirements***
-
-- *Basic knowledge of Galaxy (e.g. Galaxy Introduction module)*
-
-:hourglass: ***Time estimation*** *3h*
-
-# Introduction
-
-This tutorial will demonstrate how to perform the *standard operating procedure (SOP)* for the analysis of 16S rRNA gene sequences generated using Illumina's MiSeq platform, with the [Mothur toolsuite](http://www.mothur.org/wiki) within Galaxy. This SOP was developed by the Schloss lab and described [here](http://www.mothur.org/wiki/MiSeq_SOP) on the Mothur wiki.
-
-<!-- TODO: add citation
-Kozich JJ, Westcott SL, Baxter NT, Highlander SK, Schloss PD. (2013): Development of a dual-index sequencing strategy and curation pipeline for analyzing amplicon sequence data on the MiSeq Illumina sequencing platform. Applied and Environmental Microbiology. 79(17):5112-20. -->
+---
+layout: tutorial_hands_on
+topic_name: Metagenomics
+tutorial_name: mothur-miseq-sop
+---
 
 ## Overview
 In this tutorial we will perform the following steps:
