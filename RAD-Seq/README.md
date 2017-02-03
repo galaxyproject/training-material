@@ -14,8 +14,8 @@ Several deck of slides are available for this topic:
 
 A tutorial with hands-on is available for this topic:
 
-- [Reference-based RAD-Seq data analysis](tutorials/ref_based_rad.md)
-- [de-novo RAD-Seq data analysis](tutorials/de_novo_rad.md)
+- [Reference-based RAD-Seq data analysis](http://galaxyproject.github.io/training-material//RAD-Seq/tutorials/ref_based_rad)
+- [de-novo RAD-Seq data analysis](http://galaxyproject.github.io/training-material//RAD-Seq/tutorials/de_novo_rad)
 
 ## Input datasets
 
