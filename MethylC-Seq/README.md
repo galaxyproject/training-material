@@ -14,7 +14,7 @@ A deck of slides is available for this topic:
 
 A tutorial with hands-on is available for this topic:
 
-- [MethylC-Seq data analysis](tutorials/methylc_seq.md)
+- [MethylC-Seq data analysis](http://galaxyproject.github.io/training-material/MethylC-Seq/tutorials/Methylation-Seq.html)
 
 ## Input datasets
 
