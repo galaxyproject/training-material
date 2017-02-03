@@ -16,7 +16,7 @@ Several deck of slides are available for this topic:
 Some tutorials with hands-on are available for this topic:
 
 - [Move from dev instance to production instance](tutorials/dev_to_production.html)
-- [Galaxy Database schema](tutorials/Database_Schema.md)
+- [Galaxy Database schema](http://galaxyproject.github.io/training-material/Admin-Corner/slides/database_schema.html)
 
 
 # Contributors
