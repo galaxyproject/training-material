@@ -13,7 +13,7 @@ A deck of slides is available for this topic:
 
 A tutorial with hands-on is available for this topic:
 
-- [Dive into mapping](tutorials/dive_into_mapping.md)
+- [Dive into mapping](http://galaxyproject.github.io/training-material//NGS-mapping/tutorials/dive_into_mapping)
 
 ## Input datasets
 
