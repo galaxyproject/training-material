@@ -13,7 +13,7 @@ A deck of slides is available for this topic:
 
 A tutorial with hands-on is available for this topic:
 
-- [Reference-based RNA-seq data analysis](tutorials/ref_based.md)
+- [Reference-based RNA-seq data analysis](http://galaxyproject.github.io/training-material//RNA-Seq/tutorials/ref_based)
 
 ## Input datasets
 
