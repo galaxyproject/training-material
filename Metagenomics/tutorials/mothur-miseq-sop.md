@@ -5,7 +5,9 @@ tutorial_name: mothur-miseq-sop
 ---
 
 # Overview
-In this tutorial we will perform the following steps:
+In this tutorial we will perform the
+[Standard Operating Procedure (SOP) for MiSeq data](https://www.mothur.org/wiki/MiSeq_SOP), developed by the
+creators of the Mothur software package, the [Schloss lab](http://www.schlosslab.org/), within Galaxy.
 
 > ### Agenda
 >
@@ -20,20 +22,22 @@ In this tutorial we will perform the following steps:
 >   - [Remove contamination](#removal-of-non-bacterial-sequences)
 >   - [Assess error rate by sequencing a mock community](#assessing-error-rates-based-n-our-mock-community)
 >   - [Prepare for analysis](#preparing-for-analysis)  
-> 3. [Performing OTU-based analysis](#otu-analysis)
->   - alpha diversity
->   - beta diversity
->   - population-level analysis
-> 4. [Visualizing our data](#visualization)
->   - Phinch
->   - Krona
+> 3. [Perform OTU-based analysis](#otu-based-analysis)
+>   - [Alpha diversity](#alpha-diversity)
+>   - [Beta diversity](#beta-diversity)
+>   - [Population-level analysis](#population-level-analysis)
+> 4. [Visualizing our data](#visualizations)
+>   - [Phinch](#phinch)
+>   - [Krona](#krona)
 {: .agenda}
 
 
-Each of the Mothur tools in Galaxy contains a link to the mothur wiki in the help section. Here you can find more details about all the inputs, outputs and parameters for the tool.
-
 > ### :nut_and_bolt: Note
-> Your results may deviate slightly from the ones presented in this tutorial due to differing tool or reference data versions or stochastic processes in the algorithms.
+> Each of the Mothur tools in Galaxy contains a link to the mothur wiki in the help section. Here you can find
+> more details about all the inputs, outputs and parameters for the tool. <br><br>
+>
+> Your results may deviate slightly from the ones presented in this tutorial due to differing tool or
+> reference data versions or stochastic processes in the algorithms.
 {: .comment}
 
 
@@ -481,10 +485,10 @@ merged. We generally recommend allowing 1 difference for every 100 basepairs of 
 At this point we have removed as much sequencing error as we can, and it is time to turn our attention to
 removing chimeras.
 
-> ### Background: Chimeras
+> ### :book: Background: Chimeras
 > ![](../images/chimeras.jpg)
 > (slide credit: http://slideplayer.com/slide/4559004/ )
-{: .comment}
+{: .tip}
 
 We'll do this chimera removal using the `UCHIME` algorithm that is called within Mothur, using the
 `chimera.uchime` command. This command will split the data by sample and check for chimeras.
@@ -533,7 +537,7 @@ Now you may say, "But wait I want that stuff". Fine. But, the primers we use, ar
 
 Let's go ahead and classify those sequences using the Bayesian classifier with the `classify.seqs` command:
 
-> ### Hands-on: Remove undesired sequences
+> ### :pencil2: Hands-on: Remove undesired sequences
 > - **Tool:** Classify.seqs
 > - **Parameters:**
 >   - Set **fasta** to the fasta output from Remove.seqs
@@ -583,7 +587,7 @@ At this point we have curated our data as far as possible and we're ready to see
 
 Measuring the error rate of your sequences is something you can only do if you have co-sequenced a mock community. This is something we include for every 95 samples we sequence. You should too because it will help you gauge your error rates and allow you to see how well your curation is going, and whether something is wrong with your sequencing setup.
 
-> ### Hands-on: Assess error rates based on a mock community
+> ### :pencil2: Hands-on: Assess error rates based on a mock community
 >
 > First, let's extract the sequences belonging to our mock samples from our data:
 >
@@ -629,7 +633,7 @@ Measuring the error rate of your sequences is something you can only do if you h
 
 We can now cluster the mock sequences into OTUs to see how many spurious OTUs we have:
 
-> ### Background: Operational Taxonomic Units (OTUs)
+> ### :book: Background: Operational Taxonomic Units (OTUs)
 >
 > In 16S metagenomics approaches, OTUs are clusters of similar sequence variants of the 16S rDNA marker gene
 > sequence. Each of these cluster is intended to represent a taxonomic unit of a bacteria species or genus
@@ -640,10 +644,10 @@ We can now cluster the mock sequences into OTUs to see how many spurious OTUs we
 > ![](../images/OTU_graph.png)
 >
 > (Image credit: Danzeisen et al. 2013, 10.7717/peerj.237)
-{: .comment}
+{: .tip}
 
 
-> ### Hands-on: Cluster mock sequences into OTUs
+> ### :pencil2: Hands-on: Cluster mock sequences into OTUs
 >
 > First we calculate the pairwise distances between our sequences
 >
@@ -686,7 +690,7 @@ We can now cluster the mock sequences into OTUs to see how many spurious OTUs we
 
 Open the rarefaction output (dataset named `sobs` inside the `rarefaction curves` output collection). You'll see that for 4060 sequences, we'd have 34 OTUs from the Mock community. This number of course includes some stealthy chimeras that escaped our detection methods. If we used 3000 sequences, we would have about 31 OTUs. In a perfect world with no chimeras and no sequencing errors, we'd have 20 OTUs. This is not a perfect world. But this is pretty darn good!
 
-> ### Background: Rarefaction
+> ### :book: Background: Rarefaction
 >
 > To estimate the fraction of species sequenced, rarefaction curves are typically used. A rarefaction curve
 > plots the number of species as a function of the number of individuals sampled. The curve usually begins
@@ -699,56 +703,72 @@ Open the rarefaction output (dataset named `sobs` inside the `rarefaction curves
 > Green, most or all species have been sampled; blue, this habitat has not been exhaustively sampled; red,
 > species rich habitat, only a small fraction has been sampled.
 >
-> (*A primer on Metagenomics*, Wooley et al, http://dx.doi.org/10.1371/journal.pcbi.1000667)
-{: .comment}
+> (*A Primer on Metagenomics*, Wooley et al. 2010, http://dx.doi.org/10.1371/journal.pcbi.1000667)
+{: .tip}
 
 Now that we have assessed our error rates we are ready for some real analysis.
 
 ## Preparing for analysis
 
-**1: Remove Mock community from our dataset**
-
+### Removing Mock sample
 We're almost to the point where you can have some fun with your data (I'm already having fun, aren't you?). We'd like to do two things - assign sequences to OTUs and phylotypes. But first, we want to remove the Mock sample from our dataset using the remove.groups command:
 
-- **Tool:** Remove.groups
-- **Parameters:**
-  - Set **Select input type** to `fasta , name, taxonomy, or list with a group file or count table`
-  - Set **count table**, **fasta**, and **taxonomy** to the respective outputs from Remove.lineage
-  - Set **groups** to `Mock`
+> ### :pencil2: Hands-on: Remove Mock community from our dataset
+>
+> - **Tool:** Remove.groups
+> - **Parameters:**
+>   - Set **Select input type** to `fasta , name, taxonomy, or list with a group file or count table`
+>   - Set **count table**, **fasta**, and **taxonomy** to the respective outputs from Remove.lineage
+>   - Set **groups** to `Mock`
+{: .hands_on}
 
 
-**2: Cluster sequences into OTUs**
+### Clustering sequences into OTUs
 
-Now we have a couple of options for clustering sequences into OTUs. For a small dataset like this, we could do the traditional approach using `dist.seqs` and `cluster` as we did with the Mock sample.
+Now, we have a couple of options for clustering sequences into OTUs. For a small dataset like this, we could do the traditional approach using `dist.seqs` and `cluster` as we did with the Mock sample.
 
-The alternative is to use the cluster.split command. In this approach, we use the taxonomic information to split the sequences into bins and then cluster within each bin. The Schloss lab have published results showing that if you split at the level of Order or Family, and cluster to a 0.03 cutoff, you'll get just as good of clustering as you would with the "traditional" approach. The advantage of the `cluster.split` approach is that it should be faster, use less memory, and can be run on multiple processors. In an ideal world we would prefer the traditional route because "Trad is rad", but we also think that kind of humor is funny.... In this command we use `taxlevel=4`, which corresponds to the level of *Order*. This is the approach that we generally use in the Schloss lab.
+The alternative is to use the `cluster.split` command. In this approach, we use the taxonomic information to
+split the sequences into bins and then cluster within each bin. The Schloss lab have published results
+showing that if you split at the level of Order or Family, and cluster to a 0.03 cutoff, you'll get just as
+good of clustering as you would with the "traditional" approach.
 
-- **Tool:** Cluster.split
-- **Parameters:**  
-  - Set **Split by** to `Classification`
-  - Set **fasta** to the fasta output from Remove.groups
-  - Set **taxonomy** to the taxonomy output from Remove.groups
-  - Set **taxlevel** to `4`
-  - Set **count** to the count table output from Remove.groups
-  - Set **cutoff** to `0.15`
+The advantage of the `cluster.split` approach is that it should be faster, use less memory, and can be run on
+multiple processors. In an ideal world we would prefer the traditional route because "Trad is rad", but we
+also think that kind of humor is funny.... In this command we use `taxlevel=4`, which corresponds to the level
+of *Order*. This is the approach that we  generally use in the Schloss lab.
 
-Next we want to know how many sequences are in each OTU from each group and we can do this using the `Make.shared` command. Here we tell Mothur that we're really only interested in the 0.03 cutoff level:
-
-- **Tool:** Make.shared
-- **Parameters:**  
-  - Set **Select input type** to `OTU list`
-  - Set **list** to list output from Cluster.split
-  - Set **count** to the count table from Remove.groups
-  - Set **label** to `0.03`
-
-We probably also want to know the taxonomy for each of our OTUs. We can get the consensus taxonomy for each OTU using the `Classify.otu` command:
-
-- **Tool:** Classify.otu
-- **Parameters:**  
-  - Set **list** to output from Cluster.split
-  - Set **count** to the count table from Remove.groups
-  - Set **taxonomy** to the taxonomy output from Remove.groups
-  - Set **label** to `0.03`
+> ### :pencil2: Hands-on: Cluster our data into OTUs
+>
+> - **Tool:** Cluster.split
+> - **Parameters:**  
+>   - Set **Split by** to `Classification`
+>   - Set **fasta** to the fasta output from Remove.groups
+>   - Set **taxonomy** to the taxonomy output from Remove.groups
+>   - Set **taxlevel** to `4`
+>   - Set **count** to the count table output from Remove.groups
+>   - Set **cutoff** to `0.15`
+>
+> Next we want to know how many sequences are in each OTU from each group and we can do this using the
+> `Make.shared` command. Here we tell Mothur that we're really only interested in the 0.03 cutoff level:
+>
+> - **Tool:** Make.shared
+> - **Parameters:**  
+>   - Set **Select input type** to `OTU list`
+>   - Set **list** to list output from Cluster.split
+>   - Set **count** to the count table from Remove.groups
+>   - Set **label** to `0.03`
+>
+> We probably also want to know the taxonomy for each of our OTUs. We can get the consensus taxonomy for each
+> OTU using the `Classify.otu` command:
+>
+> - **Tool:** Classify.otu
+> - **Parameters:**  
+>   - Set **list** to output from Cluster.split
+>   - Set **count** to the count table from Remove.groups
+>   - Set **taxonomy** to the taxonomy output from Remove.groups
+>   - Set **label** to `0.03`
+>
+{: .hands_on}
 
 Opening the taxonomy output for level 0.03 shows a file structured like the following:
 
@@ -766,40 +786,52 @@ Otu008    1442    Bacteria(100);Firmicutes(100);Clostridia(100);Clostridiales(10
 
 This example file is telling you that Otu001 was observed 17 times in your samples and that all of the sequences (100%) were classified as being members of the Akkermansia.
 
-In this tutorial we will continue with this otu-based approach, for the phylotype and phylogenic approaches, please refer to the [mothur wiki page](http://www.mothur.org/wiki/MiSeq_SOP).
+In this tutorial we will continue with this otu-based approach, for the phylotype and phylogenic approaches, please refer to the [Mothur wiki page](http://www.mothur.org/wiki/MiSeq_SOP).
 
-# Step 3: OTU-based Analysis
+# OTU-based Analysis
 
-Let's do something more interesting and actually analyze our data. We'll focus on the OTU-based dataset. The phylotype-based analysis is essentially the same. Also, remember that our initial question had to do with the stability and change in community structure in these samples when comparing early and late samples. Keep in mind that the group names have either a F or M (sex of animal) followed by a number (number of animal) followed by a D and a three digit number (number of days post weaning).
+Let's do something more interesting and actually analyze our data. We'll focus on the OTU-based dataset. The
+phylotype-based analysis is essentially the same. Also, remember that our initial question had to do with the
+stability and change in community structure in these samples when comparing early and late samples.
 
-:pencil2: ***Hands on!***
+Keep in mind that the group names have either a F or M (sex of animal) followed by a number (number of
+animal) followed by a D and a three digit number (number of days post weaning).
 
-**1: Subsample the data**
-
-What we now want to do is see how many sequences we have in each sample. We'll do this with the `Count.groups` command:
-
-- **Tool:** Count.groups
-- **Parameters:**
-  - Set **shared** to the shared file from Make.shared
-
-Take a look at the output. We see that our smallest sample had 2440 sequences in it. That is a reasonable number. Despite what some say, subsampling and rarefying your data is an important thing to do. We'll generate a subsampled file for our analyses with the `Sub.sample` command:
-
-- **Tool:** Sub.sample
-- **Parameters:**
-  - Set **Select type of data to subsample** to `OTU Shared`
-  - Set **shared** to output from Make.shared from the OTU section above
-  - Set **size** to `2440`
-
-**NOTE:** since subsampling is a stochastic process, your results from any tools using this subsampled data will vary from the ones presented here.
+> ### :pencil2: Hands-on: Subsampling
+>
+> What we now want to do is see how many sequences we have in each sample. We'll do this with the
+> `Count.groups` command:
+>
+> - **Tool:** Count.groups
+> - **Parameters:**
+>   - Set **shared** to the shared file from Make.shared
+>
+> Take a look at the output. We see that our smallest sample had 2440 sequences in it. That is a reasonable
+> number. Despite what some say, subsampling and rarefying your data is an important thing to do.
+>
+> We'll generate a subsampled file for our analyses with the `Sub.sample` command:
+>
+> - **Tool:** Sub.sample
+> - **Parameters:**
+>   - Set **Select type of data to subsample** to `OTU Shared`
+>   - Set **shared** to output from Make.shared from the OTU section above
+>   - Set **size** to `2440`
+>
+> **Note:** since subsampling is a stochastic process, your results from any tools using this subsampled data
+> will vary from the ones presented here.
+{: .hands_on}
 
 ## Alpha diversity
 
-Let's start our analysis by analyzing the alpha diversity of the samples. First we will generate rarefaction curves describing the number of OTUs observed as a function of sampling effort. We'll do this with the `Rarefaction.single` command:
+Let's start our analysis by analyzing the alpha diversity of the samples. First we will generate rarefaction
+curves describing the number of OTUs observed as a function of sampling effort. We'll do this with the
+`Rarefaction.single` command:
 
-- **Tool:** Rarefaction.single
-- **Parameters:**
-  - Set **shared** to shared file from Make.shared
-
+> ### :pencil2:-Hands-on: Rarefaction
+> - **Tool:** Rarefaction.single
+> - **Parameters:**
+>   - Set **shared** to shared file from Make.shared
+{: .hands_on}
 
 Examine the rarefaction curve output.
 
@@ -814,29 +846,36 @@ numsampled    0.03-F3D0    lci-F3D0    hci-F3D0    0.03-F3D1   ...
 ...
 ```
 
-This file displays the number of OTUs identified per amount of sequences used (numsampled). What we would like to see is the number of additional OTUs identified when adding more sequences reaching a plateau. Then we know we have covered our full diversity. This information would be easier to interpret in the form of a graph. Let's plot the rarefaction curve for a couple of our sequences:
+This file displays the number of OTUs identified per amount of sequences used (numsampled). What we would like
+to see is the number of additional OTUs identified when adding more sequences reaching a plateau. Then we know
+we have covered our full diversity. This information would be easier to interpret in the form of a graph.
+Let's plot the rarefaction curve for a couple of our sequences:
 
-<!-- the following is because plotting tool will not detect columns in files inside collections yet -->
-First let's make our life a little bit easier. As we only have one dataset in our collection anyways, we can collapse it into a single file.
-
-- **Tool:** Collapse Collection
-- **Parameters:**
-  - Set **Collection of files to collapse to a single dataset** to the rarefaction curve collection
-
-Now we are ready to plot our rarefaction curves:
-
-- **Tool:** Plotting tool
-- **Parameters:**
-  - Set **Plot Title** to `Rarefaction`
-  - Set **Label for x axis** to `Number of Sequences`
-  - Set **Label for y axis** to `Number of OTUs`
-  - Set **Output File Type** to `PNG`
-  - Click on Insert Series,
-    - Set **Dataset** to the collapsed rarefaction curve collection
-    - Set **Header in first line?** to `Yes`
-    - Set **Column for x axis** to `Column 1`
-    - Set **Column for y-axis** to `Column 2` and `Column 5` and every third column until the end (we are skipping the low confidence and high confidence interval columns)
-
+> ### :pencil2: Hands-on: Plotting Rarefaction
+> <!-- the following tool is because plotting tool will not detect columns in files inside collections yet -->
+> First let's make our life a little bit easier. As we only have one dataset in our collection anyways, we can
+> collapse it into a single file.
+>
+> - **Tool:** Collapse Collection
+> - **Parameters:**
+>   - Set **Collection of files to collapse to a single dataset** to the rarefaction curve collection
+>
+> Now we are ready to plot our rarefaction curves:
+>
+> - **Tool:** Plotting tool
+> - **Parameters:**
+>   - Set **Plot Title** to `Rarefaction`
+>   - Set **Label for x axis** to `Number of Sequences`
+>   - Set **Label for y axis** to `Number of OTUs`
+>   - Set **Output File Type** to `PNG`
+>   - Click on Insert Series,
+>     - Set **Dataset** to the collapsed rarefaction curve collection
+>     - Set **Header in first line?** to `Yes`
+>     - Set **Column for x axis** to `Column 1`
+>     - Set **Column for y-axis** to `Column 2` and `Column 5` and every third column until the end (we are
+>       skipping the low confidence and high confidence interval columns)
+>
+{: .hands_on}
 
 From the resulting image we can see that the rarefaction curves for all samples have started to level off so we are confident we cover a large part of our sample diversity.
 
@@ -846,13 +885,16 @@ Alas, rarefaction is not a measure of richness, but a measure of diversity. If y
 
 Finally, let's get a table containing the number of sequences, the sample coverage, the number of observed OTUs, and the Inverse Simpson diversity estimate using the `Summary.single` command. To standardize everything, let's randomly select 2441 sequences from each sample 1000 times and calculate the average:
 
-- **Tool:** Summary.single
-- **Parameters:**
-  - Set **share** to shared file from Make.shared
-  - Set **calc** to `nseqs,coverage,sobs,invsimpson`
-  - Set **size** to 2440
+> ### :pencil2: Hands-on: Summary.single
+>
+> - **Tool:** Summary.single
+> - **Parameters:**
+>   - Set **share** to shared file from Make.shared
+>   - Set **calc** to `nseqs,coverage,sobs,invsimpson`
+>   - Set **size** to 2440
+{: .hands_on}
 
-These data will be outputted to a table called the summary file.
+The data will be outputted to a table called the *summary file*:
 
 ```
 label   group   sobs          coverage    invsimpson   invsimpson_lci   invsimpson_hci  nseqs
@@ -881,25 +923,31 @@ Interestingly, the sample coverages were all above 97%, indicating that we did a
 
 ## Beta diversity
 
-**1: Calculate similarities between different samples**
+> ### :pencil2: Hands-on: Beta diversity
+>
+> Let's calculate the similarity of the membership and structure found in the various samples. We'll do this
+> with the `Dist.shared` command that will allow us to rarefy our data to a common number of sequences.
+>
+> - **Tool:** Dist.shared
+> - **Parameters:**
+>   - Set **shared** to the shared file from Make.shared
+>   - Set **calc** to thetayc,jclass
+>   - Set **subsample** to 2440
+>
+> Let's visualize our data in a Heatmap
+>
+> - **Tool:** Heatmap.sim
+> - **Parameters:**
+>   - Set **Generate Heatmap for** to `phylip`
+>   - Set **phylip** to output by Dist.shared (this is a collection input)
+>  
+> <!-- TODO: way to view the SVGs inside Galaxy? -->
+{: .hands_on}
 
-Let's calculate the similarity of the membership and structure found in the various samples. We'll do this with the `Dist.shared` command that will allow us to rarefy our data to a common number of sequences.
+Look at some of the resulting heatmaps (you may have to download the SVG images first). In all of these
+heatmaps the red colors indicate communities that are more similar than those with black colors.
 
-- **Tool:** Dist.shared
-- **Parameters:**
-  - Set **shared** to the shared file from Make.shared
-  - Set **calc** to thetayc,jclass
-  - Set **subsample** to 2440
-
-
-- **Tool:** Heatmap.sim
-- **Parameters:**
-  - Set **Generate Heatmap for** to `phylip`
-  - Set **phylip** to output by Dist.shared (this is a collection input)
-
-<!-- TODO: way to view the SVGs inside Galaxy? -->
-
-Look at some of the resulting heatmaps (you may have to download the svg images). In all of these heatmaps the red colors indicate communities that are more similar than those with black colors. For example this is the heatmap for the `thetayc` calculator (output `thetayc.0.03.lt.ave`):
+For example this is the heatmap for the `thetayc` calculator (output `thetayc.0.03.lt.ave`):
 
 ![](../images/heatmap.sim_thetayc.png)
 
@@ -907,38 +955,55 @@ and the jclass calulator (output `jclass.0.03.lt.ave`):
 
 ![](../images/heatmap.sim_jclass.png)
 
-When generating Venn diagrams we are limited by the number of samples that we can analyze simultaneously. Let's take a look at the Venn diagrams for the first 4 time points of female 3 using the `venn` command:
+When generating Venn diagrams we are limited by the number of samples that we can analyze simultaneously.
+Let's take a look at the Venn diagrams for the first 4 time points of female 3 using the `venn` command:
 
-<!-- need to collapse collection again for group select to work -->
-- **Tool:** Collapse Collection
-  - Set **Collection** to Subsample.shared output collection from Sub.sample step
-- After the tool has finished, rename the output to `Subsample.shared` to make it easier to recognize in further analysis
-
-- **Tool:** Venn
-- **Parameters:**
-  - Set `OTU Shared` to Subsample.shared file from previous step
-  - Set `groups` to `F3D0,F3D1,F3D2,F3D3`
+> ### :pencil2: Hands-on: Venn diagram
+>
+> <!-- need to collapse collection again for group select to work -->
+> First we collapse our collection again
+>
+> - **Tool:** Collapse Collection
+> - **Parameters:**
+>   - Set **Collection** to Subsample.shared output collection from Sub.sample step
+>
+> After the tool has finished, rename the output to `Subsample.shared` to make it easier to recognize in
+> further analysis
+>
+> - **Tool:** Venn
+> - **Parameters:**
+>   - Set `OTU Shared` to Subsample.shared file from previous step
+>   - Set `groups` to `F3D0,F3D1,F3D2,F3D3`
+{: .hands_on}
 
 This generates a 4-way Venn diagram and a table listing the shared OTUs.
 
 ![](../images/venn.png)
 
- This shows that there were a total of 180 OTUs observed between the 4 time points. Only 76 of those OTUs were shared by all four time points. We could look deeper at the shared file to see whether those OTUs were numerically rare or just had a low incidence.
+This shows that there were a total of 180 OTUs observed between the 4 time points. Only 76 of those OTUs were
+hared by all four time points. We could look deeper at the shared file to see whether those OTUs were
+umerically rare or just had a low incidence.
 
- Next, let's generate a dendrogram to describe the similarity of the samples to each other. We will generate a dendrogram using the jclass and thetayc calculators within the `tree.shared` command:
+Next, let's generate a dendrogram to describe the similarity of the samples to each other. We will generate a
+dendrogram using the jclass and thetayc calculators within the `tree.shared` command:
 
-- **Tool:** Tree.shared
-- **Parameters:**
-  - Set **Select input format** to Phylip Distance Matrix
-  - Set **phylip** to dist files from Dist.shared (collection)
+> ### :pencil2: Tree
+>
+> - **Tool:** Tree.shared
+> - **Parameters:**
+>   - Set **Select input format** to Phylip Distance Matrix
+>   - Set **phylip** to dist files from Dist.shared (collection)
+>
+> Looking at the output we see it is just text, not very informative in its current form, so let's draw the
+> trees:
+>
+> - **Tool:** Newick display
+> - **Parameters:**
+>  - Set **Newick file** to output from Tree.shared (collection)
+{: .hands_on}
 
-Looking at the output we see it is just text, not vrey informative in its current form, so let's draw the trees:
-
-- **Tool:** Newick display
-- **Parameters:**
-  - Set **Newick file** to output from Tree.shared (collection)
-
-Inspection of the the tree shows that the early and late communities cluster with themselves to the exclusion of the others.
+Inspection of the the tree shows that the early and late communities cluster with themselves to the exclusion
+of the others.
 
 `thetayc.0.03.lt.ave`:
 
@@ -948,16 +1013,26 @@ Inspection of the the tree shows that the early and late communities cluster wit
 
 ![](../images/tree.jclass.png)
 
-**2: Determine statistical significance of clusterings**
+### Determine statistical significance of clusterings
 
-We can perform a test to determine whether the clustering within the tree is statistically significant or not using by choosing from the `parsimony`, `unifrac.unweighted`, or `unifrac.weighted` commands. To run these we will first need to create a design file that indicates which treatment each sample belongs to. There is a file called `mouse.time.design` in the shared data library and on Zenodo. Make sure the datatype is set to `mothur.design`. If this is not the case, please change the datatype using the pencil icon.
+We can perform a test to determine whether the clustering within the tree is statistically significant or not
+using by choosing from the `parsimony`, `unifrac.unweighted`, or `unifrac.weighted` commands. To run these we
+will first need to create a design file that indicates which treatment each sample belongs to.
 
-- :bulb: Changing datatype of a datasets
-  - Click on the **pencil icon** of the dataset
-  - Click on the **Datatype** tab
-  - Select the new datatype from dropdown menu
-  - Click **Save**
+> ### :pencil2: Hands-on: Obtain design file
+>
+> - Import the file called `mouse.time.design` to your history
+>   - Go to the shared data library or the files you downloaded from Zenodo.
+>   - Make sure the datatype > is set to `mothur.design`.
+>
+{: .hands_on}
 
+> ### :bulb: Changing datatype of a datasets
+>  - Click on the **pencil icon** of the dataset
+>  - Click on the **Datatype** tab
+>  - Select the new datatype from dropdown menu
+>  - Click **Save**
+{: .tip}
 
 The design file look something like this:
 
@@ -986,10 +1061,12 @@ F3D9     Early
 
 Using the `parsimony` command let's look at the pairwise comparisons. Specifically, let's focus on the early vs. late comparisons for each mouse:
 
-- **Tool:** Parsimony
-- **Parameters:**
-  - Set **tree** to the `tre` output from Tree.Shared (collection)
-  - Set **group** to the design file described above
+> ### :pencil2: Hands-on: Compare Early-vs-Late
+> - **Tool:** Parsimony
+> - **Parameters:**
+>   - Set **tree** to the `tre` output from Tree.Shared (collection)
+>   - Set **group** to the design file described above
+{: .hands_on}
 
 In the logfile for `thetayc.0.03.lt.ave` we see
 
@@ -1000,13 +1077,19 @@ Tree#   Groups      ParsScore   ParsSig
 
 There was clearly a significant difference between the clustering of the early and late time points. Recall that this method ignores the branch length.
 
-The two distance matrices that we generated earlier (i.e. `jclass.0.03.lt.ave.dist` and `thetayc.0.03.lt.ave.dist`) can then be visualized using the pcoa or nmds plots. Principal Coordinates (PCoA) uses an eigenvector-based approach to represent multidimensional data in as few dimensions as possible. Our data is highly dimensional (~9 dimensions).
+The two distance matrices that we generated earlier (i.e. `jclass.0.03.lt.ave.dist` and `thetayc.0.03.lt.ave.dist`) can then be visualized using the pcoa or nmds plots.
 
-- **Tool:** Pcoa
-- **Parameters:**
-  - Set **phylip** to dist files from Dist.shared (collection)
+Principal Coordinates (PCoA) uses an eigenvector-based approach to represent multidimensional data in as few dimensions as possible. Our data is highly dimensional (~9 dimensions).
 
-The loadings files will tell you what fraction of the total variance in the data are represented by each of the axes. For instance the loading file for `thetayc.0.03.lt.ave` looks something like:
+> ### :pencil2: Hands-on: PCoA
+>
+> - **Tool:** Pcoa
+> - **Parameters:**
+>   - Set **phylip** to dist files from Dist.shared (collection)
+{: .hands_on}
+
+The loadings files will tell you what fraction of the total variance in the data are represented by each of
+the axes. For instance the loading file for `thetayc.0.03.lt.ave` looks something like:
 
 ```
 axis  loading
@@ -1018,7 +1101,8 @@ axis  loading
 ...
 ```
 
-In this case the first and second axis represent about 45 and 14% of the variation (59% of the total) for the thetaYC distances. The output to the logfile:
+In this case the first and second axis represent about 45 and 14% of the variation (59% of the total) for the
+thetaYC distances. The output to the logfile:
 
 ```
 Processing...
@@ -1027,47 +1111,66 @@ Rsq 2 axis: 0.882025
 Rsq 3 axis: 0.978093
 ```
 
-indicates that the R-squared between the original distance matrix and the distance between the points in 2D PCoA space was 0.88, but that if you add a third dimension the R-squared value increases to 0.98. All in all, not bad.
+indicates that the R-squared between the original distance matrix and the distance between the points in 2D
+PCoA space was 0.88, but that if you add a third dimension the R-squared value increases to 0.98. All in all,
+not bad.
 
-Alternatively, non-metric multidimensional scaling (NMDS) tries to preserve the distance between samples using a user defined number of dimensions. We can run our data through NMDS with 2 dimensions with the following tool:
+Alternatively, non-metric multidimensional scaling (NMDS) tries to preserve the distance between samples using
+a user defined number of dimensions. We can run our data through NMDS with 2 dimensions with the following
+tool:
 
-- **Tool:** Nmds
-- **Parameters:**
-  - Set **phylip** to dist files from Dist.shared (collection)
+> ### :pencil2: Hands-on: Nmds
+>
+> - **Tool:** Nmds
+> - **Parameters:**
+>  - Set **phylip** to dist files from Dist.shared (collection)
+>
+> Opening the `stress` file for `thetayc.0.03.lt.ave` we can inspect the stress and R^2 values, which describe
+> the quality of the ordination. Each line in this file represents a different iteration and the configuration
+> obtained in the iteration with the lowest stress is reported in the `axes` file. In the logfile:
+>
+> ```
+> Number of dimensions:           2
+> Lowest stress :                 0.113657
+> R-squared for configuration:    0.947622
+> ```
+>
+> We find that the lowest stress value was 0.11 with an R-squared value of 0.95; that stress level is
+> actually pretty good. You can test what happens with three dimensions in the following way:
+>
+> - **Tool:** Nmds
+> - **Parameters:**
+>   - Set **phylip** to dist files collection from Dist.shared
+>   - Set **mindim** to `3`
+>   - Set **maxdim** to `3`
+{: .hands_on}
 
-Opening the `stress` file for `thetayc.0.03.lt.ave` we can inspect the stress and R^2 values, which describe the quality of the ordination. Each line in this file represents a different iteration and the configuration obtained in the iteration with the lowest stress is reported in the `axes` file. In the logfile:
+> ### :question: Question
+>
+> What are stress and R-squared values when using 3 dimensions?
+>
+> <details>
+>   <summary> Click to view answer</summary>
+>   The stress value drops to 0.05 and the R2 value goes up to 0.99 (see logfile). Not bad.
+> </details>
+{: .question}
 
-```
-Number of dimensions:           2
-Lowest stress :                 0.113657
-R-squared for configuration:    0.947622
-```
+In general, we would like a stress value below 0.20 and a value below 0.10 is even better. Thus, we can conclude that, NMDS is better than PCoA. We can plot the three dimensions of the NMDS data by plotting the contents of the `axes` file. <!-- TODO: tool for 3D plots in Galaxy? -->
 
-we find that the lowest stress value was 0.11 with an R-squared value of 0.95; that stress level is actually pretty good. You can test what happens with three dimensions in the following way:
+Again, it is clear that the early and late samples cluster separately from each other. Ultimately, ordination
+is a data visualization tool. We might ask if the spatial separation that we see between the early and late
+plots in the NMDS plot is statistically significant. To do this we have two statistical tools at our disposal.
+The first analysis of molecular variance (AMOVA), tests whether the centers of the clouds representing a group
+are more separated than the variation among samples of the same treatment. This is done using the distance
+matrices we created earlier and does not actually use ordination.
 
-- **Tool:** Nmds
-- **Parameters:**
-  - Set **phylip** to dist files collection from Dist.shared
-  - Set **mindim** to `3`
-  - Set **maxdim** to `3`
-
-:question: what are stress and R-squared values when using 3 dimensions?
-
-<!-- collapsible section until we have templating for answers -->
-<details>
-  <summary> :small_red_triangle: Click to view answer</summary>
-  :white_check_mark: The stress value drops to 0.05 and the R2 value goes up to 0.99 (see logfile). Not bad.
-</details>
-
-
-In general, you would like a stress value below 0.20 and a value below 0.10 is even better. Thus, we can conclude that, NMDS is better than PCoA. We can plot the three dimensions of the NMDS data by plotting the contents of the `axes` file. <!-- TODO: tool for 3D plots in Galaxy? -->
-
-Again, it is clear that the early and late samples cluster separately from each other. Ultimately, ordination is a data visualization tool. We might ask if the spatial separation that we see between the early and late plots in the NMDS plot is statistically significant. To do this we have two statistical tools at our disposal. The first analysis of molecular variance (amova), tests whether the centers of the clouds representing a group are more separated than the variation among samples of the same treatment. This is done using the distance matrices we created earlier and does not actually use ordination.
-
-- **Tool:** Amova
-- **Parameters:**
-  - Set **phylip** to dist files from Dist.shared (collection)
-  - Set **design** to mouse.time.design file from your history
+> ### :pencil2: Hands-on: Amova
+>
+> - **Tool:** Amova
+> - **Parameters:**
+>   - Set **phylip** to dist files from Dist.shared (collection)
+>   - Set **design** to mouse.time.design file from your history
+{: .hands_on}
 
 in logfile for thetaYC we find:
 
@@ -1081,30 +1184,41 @@ Fs:    19.3445
 p-value: <0.001*
 ```
 
-Here we see from the AMOVA that the "cloud" early and late time points has a significantly different centroid for this mouse. Thus, the observed separation in early and late samples is statistically significant. We can also see whether the variation in the early samples is significantly different from the variation in the late samples using the homova command:
+Here we see from the AMOVA that the "cloud" early and late time points has a significantly different centroid
+for this mouse. Thus, the observed separation in early and late samples is statistically significant. We can
+also see whether the variation in the early samples is significantly different from the variation in the late
+samples using the `Homova` command:
 
-- **Tool:** Homova
-- **Parameters:**
-  - Set **phylip** to dist files from Dist.shared (collection)
-  - Set **design** to mouse.time.design file from your history
+> ### :pencil2: Hands-on: Homova
+>
+> - **Tool:** Homova
+> - **Parameters:**
+>   - Set **phylip** to dist files from Dist.shared (collection)
+>   - Set **design** to mouse.time.design file from your history
+{: .hands_on}
 
 ```
 HOMOVA        BValue     P-value    SSwithin/(Ni-1)_values
 Early-Late    7.51408    <0.001*    0.0603208    0.00773943
 ```
 
-We see that there is a significant difference in the variation with the early samples having a larger amount of variation (0.061) than the late samples (0.008). This was what we found in the original study - the early samples were less stable than the late samples.
+We see that there is a significant difference in the variation with the early samples having a larger amount
+of variation (0.061) than the late samples (0.008). This was what we found in the original study - the early
+samples were less stable than the late samples.
 
 Next, we might ask which OTUs are responsible for shifting the samples along the two axes. We can determine this by measuring the correlation of the relative abundance of each OTU with the two axes in the NMDS dataset. We do this with the `corr.axes` tool:
 
-- **Tool:** Corr.axes
-- **Parameters:**
-  - Set **axes** to axes output from Nmds in 3 dimension
-  - Set **shared** to shared output from collapse collection on Sub.sample
-  - Set **method** to `Spearman`
-  - Set **numaxes** to `3`
+> ### :pencil2: Hands-on: Correlation
+>
+> - **Tool:** Corr.axes
+> - **Parameters:**
+>   - Set **axes** to axes output from Nmds in 3 dimension
+>   - Set **shared** to shared output from collapse collection on Sub.sample
+>   - Set **method** to `Spearman`
+>   - Set **numaxes** to `3`
+{: .hands_on}
 
-Examinig the axes output, we see the data for the first five OTUs look something like this..
+Examining the axes output, we see the data for the first five OTUs look something like this..
 
 ```
 OTU         axis1       p-value      axis2       p-value     axis3       p-value     length
@@ -1116,7 +1230,9 @@ Otu0005    -0.315327    0.180955     0.046553    0.843432    0.097497    0.67913
 ...
 ```
 
-What these results show is that OTUs 1 and 2 are responsible for moving points in a negative direction along axis 2. Recalling that we classified each OTU earlier (see taxonomy output from `Classify.otu`), we can see that these first five OTUs are mainly members of the Porphyromonadaceae:
+What these results show is that OTUs 1 and 2 are responsible for moving points in a negative direction along
+axis 2. Recalling that we classified each OTU earlier (see taxonomy output from `Classify.otu`), we can see
+that these first five OTUs are mainly members of the Porphyromonadaceae:
 
 ```
 OTU        Size   Taxonomy
@@ -1128,9 +1244,17 @@ Otu0005    7479    Bacteria(100);"Bacteroidetes"(100);"Bacteroidia"(100);"Bacter
 ...
 ```
 
-This helps to illustrate the power of OTUs over phylotypes since each of these OTUs is behaving differently. These data can be plotted in what's known as a biplot where lines radiating from the origin (axis1=0, axis2=0, axis3=0) to the correlation values with each axis are mapped on top of the PCoA or NMDS plots. <!-- TODO: make this plot? -->
+This helps to illustrate the power of OTUs over phylotypes since each of these OTUs is behaving differently.
+These data can be plotted in what's known as a biplot where lines radiating from the origin (axis1=0, axis2=0,
+axis3=0) to the correlation values with each axis are mapped on top of the PCoA or NMDS plots.
+<!-- TODO: make this plot? -->
 
-Later, using the metastats command, we will see another method for describing which populations are responsible for differences seen between specific treatments. An alternative approach to building a biplot would be to provide data indicating metadata about each sample. For example, we may know the weight, height, blood pressure, etc. of the subjects in these samples. For discussion purposes the file `mouse.dpw.metadata` is provided and looks something like this:
+Later, using the metastats command, we will see another method for describing which populations are
+responsible for differences seen between specific treatments.
+
+An alternative approach to building a biplot would be to provide data indicating metadata about each sample.
+For example, we may know the weight, height, blood pressure, etc. of the subjects in these samples. For
+discussion purposes the file `mouse.dpw.metadata` is provided and looks something like this:
 
 ```
 group    dpw
@@ -1155,28 +1279,34 @@ F3D8     8
 F3D9     9
 ```
 
-- **Tool:** Corr.axes
-- **Parameters:**
-  - Set **axes** to axes output from Nmds in 3 dimension
-  - Set **Generate Collector Curvers for** to Metadata table
-  - Set **metadata table** to `mouse.dpw.metadata`
-  - Set **method** to `Spearman`
-  - Set **numaxes** to `3`
-
-This will output a file like the following:
-
-```
-Feature    axis1       p-value      axis2       p-value     axis3       p-value     length
-dpw        0.205263    0.383832    -0.292982    0.213861    0.821053    0.000016    0.895600
-```
-Indicating that as the dpw increases the communities shift to in the positive direction along axis 3.
-
-Another tool we can use is get.communitytype to see whether our data can be partitioned in to separate community types
-
-<!-- TODO: add this tool to mothur suite -->
-- **Tool:** Get.communitype
-- **Parameters:**
-  - Set **shared** to Subsample.shared file
+> ### :pencil2: Hands-on
+>
+> - **Tool:** Corr.axes
+> - **Parameters:**
+>   - Set **axes** to axes output from Nmds in 3 dimension
+>   - Set **Generate Collector Curvers for** to Metadata table
+>   - Set **metadata table** to `mouse.dpw.metadata`
+>   - Set **method** to `Spearman`
+>   - Set **numaxes** to `3`
+>
+> This will output a file like the following:
+>
+> ```
+> Feature    axis1       p-value      axis2       p-value     axis3       p-value     length
+> dpw        0.205263    0.383832    -0.292982    0.213861    0.821053    0.000016    0.895600
+> ```
+>
+> Indicating that as the dpw increases, the communities shift to in the positive direction along axis 3.
+>
+> Another tool we can use is `get.communitytype` to see whether our data can be partitioned in to separate
+> community types
+>
+> <!-- TODO: add this tool to mothur suite -->
+> - **Tool:** Get.communitype
+> - **Parameters:**
+>   - Set **shared** to Subsample.shared file
+>
+{: .hands_on}
 
 In logfile we find the following output:
 
@@ -1189,7 +1319,10 @@ K    NLE        logDet    BIC         AIC         Laplace
 5    11662.52  -250.61    13957.71    13221.52    10104.59
 ```
 
-We see that the minimum Laplace value is for a K value of 2 (9348.28). This indicates that our samples belonged to two community types. Opening the `design` output we see that all of the late samples and the Day 0 sample belonged to Partition_1 and the other early samples belonged to Partition_2. We can look at the `summary` output to see which OTUs were most responsible for separating the communities:
+We see that the minimum Laplace value is for a K value of 2 (9348.28). This indicates that our samples
+belonged to two community types. Opening the `design` output we see that all of the late samples and the Day 0
+sample belonged to Partition_1 and the other early samples belonged to Partition_2. We can look at the
+`summary` output to see which OTUs were most responsible for separating the communities:
 
 ```
 OTU        P0.mean  P1.mean  P1.lci  P1.uci  P2.mean  P2.lci  P2.uci  Difference   CumFraction
@@ -1201,24 +1334,37 @@ Otu0019    2.07     3.48     2.90    4.18    0.94     0.63    1.40    2.54      
 ...
 ```
 
-Again we can cross reference these OTU labels with the consensus classifications in the taxonomy file to get the names of these organisms.
+Again we can cross reference these OTU labels with the consensus classifications in the taxonomy file to get
+the names of these organisms.
 
-:question: What organisms were the top 5 contributing OTUs classified as?
-
-<!-- collapsible section until we have templating for answers -->
-<details>
-  <summary>:small_red_triangle: Click to view answer</summary>
-  :white_check_mark: Note down the names of the top 5 OTUs as output by summary output of get.communitytype. Then look at the taxonomy file output by `Classify.otu`. In our example these top 5 OTUs were classified as belonging to Porphyromonadaceae (top 3 OTUs), Alistipes and Lactobacillus.
-</details>
+> ### :question: Question
+>
+> What organisms were the top 5 contributing OTUs classified as?
+>
+> <details>
+>   <summary> Click to view answer</summary>
+>   Note down the names of the top 5 OTUs as output by thesummary output of get.communitytype.
+>   Then look at the taxonomy file output by Classify.otu. <br><br>
+>
+>   In our example these top 5 OTUs were classified
+>   as belonging to Porphyromonadaceae (top 3 OTUs), Alistipes and Lactobacillus.
+> </details>
+{: .question}
 
 ## Population-level Analysis
 
-In addition to the use of `corr.axes` and `get.communitytype` we have several tools to differentiate between different groupings of samples. The first we'll demonstrate is `metastats`, which is a non-parametric T-test that determines whether there are any OTUs that are differentially represented between the samples from men and women in this study.
+In addition to the use of `corr.axes` and `get.communitytype` we have several tools to differentiate between
+different groupings of samples. The first we'll demonstrate is `metastats`, which is a non-parametric T-test
+that determines whether there are any OTUs that are differentially represented between the samples from men
+and women in this study.
 
-- **Tool:** Metastats
-- **Parameters:**
-  - Set **shared** to Subsample.shared
-  - Set **design** to `mouse.time.design`
+> ### :pencil2: Hands-on: T-test
+>
+> - **Tool:** Metastats
+> - **Parameters:**
+>   - Set **shared** to Subsample.shared
+>   - Set **design** to `mouse.time.design`
+{: .hands_on}
 
 Looking at the first 5 OTUs from `Late-Early` output file we see the following:
 
@@ -1233,20 +1379,28 @@ Otu0005    0.068139      0.000087          0.002957        0.070058      0.00016
 
 These data tell us that OTUs 1, 2, and 3 was significantly different between the early and late samples.
 
-:question: Which of the top 10 OTUs in your output were significantly different beween early and late samples?
-
-<details>
-  <summary> :small_red_triangle: Click to view answer</summary>
-  :white_check_mark: Looking at the p-value cut-off and using your favorite cutoff threshold (say 0.01). Answer to the question is all OTUs with a value lower than this threshold. Note that these OTU labels may be different for you and may very between one repetition of this tutorial to the next, and therefore may vary between you and your neighbour as well.
-</details>
+> ### :question: Question
+>
+>  Which of the top 10 OTUs in your output were significantly different beween early and late samples?
+>
+> <details>
+>  <summary> Click to view answer</summary>
+>  Looking at the p-value cut-off and using your favorite cutoff threshold (say 0.01).
+>  Answer to the question is all OTUs with a value lower than this threshold. Note that these OTU labels may
+>  be different for you and may very between one repetition of this tutorial to the next, and therefore may
+>  vary between you and your neighbour as well.
+> </details>
+{: .question}
 
 Another non-parametric tool we can use as an alternative to metastats is lefse:
 
-
-- **Tool:** Lefse
-- **Parameters:**
-  - Set **shared** to Subsample.shared
-  - Set **design** to `mouse.time.design`
+> ### :pencil2: Hands-on: Lefse
+>
+> - **Tool:** Lefse
+> - **Parameters:**
+>   - Set **shared** to Subsample.shared
+>   - Set **design** to `mouse.time.design`
+{: .hands_on}
 
 Looking at the top of the lefse summary file we see:
 
@@ -1263,10 +1417,13 @@ Again, OTUs 1, 2, and 3 are significantly different between the two groups and a
 
 Finally, Mothur has an implementation of the random forest algorithm build into her as classify.rf. This will tell us which features (i.e. OTUs) are useful in discriminating between the two groups of samples:
 
-- **Tool:** Classify.rf
-- **Parameters:**
-  - Set **shared** to Subsample.shared
-  - Set **design** to `mouse.time.design`
+> ### :pencil2: Hands-on: Classify.rf
+>
+> - **Tool:** Classify.rf
+> - **Parameters:**
+>   - Set **shared** to Subsample.shared
+>   - Set **design** to `mouse.time.design`
+{: .hands_on}
 
 in the logfile we see:
 
@@ -1299,55 +1456,61 @@ Otu0042    0.07
 
 # Step 4: Visualisations
 
-Mothur does not have a lot of visualisation tools built in, but external tools may be used for this. For instance we can convert our shared file to the more widely used `biom` format and view it in a platform like [Phinch](http://www.phinch.org/).
+Mothur does not have a lot of visualisation tools built in, but external tools may be used for this. For
+instance we can convert our shared file to the more widely used `biom` format and view it in a platform like
+[Phinch](http://www.phinch.org/).
 
-:pencil2: ***Hands on!***
+## Phinch
 
-**1: Phinch**
+> ### :pencil2: Hands-on: Phinch
+>
+> - **Tool:** Make.biom
+> - **Parameters:**
+>   - Set **shared** to Subsample.shared
+>   - Set **constaxonomy** to taxonomy output from Classify.otu (collection)
+>  - Set **metadata** to `mouse.dpw.metadata`
+>
+> The Galaxy project runs an instance of Phinch, and if you look at the output biom file, you will see a link
+> to view the file at Phinch:
+>
+> ![](../../shared/images/viewatphinch.png)
+>
+> Clicking on this link will lead you to the Phinch website, which will automatically load in your file, and
+> where you can several interactive visualisations:
+>
+> ![](../../shared/images/phinch_overviewpage.png)
+{: .hands_on}
 
-- **Tool:** Make.biom
-- **Parameters:**
-  - Set **shared** to Subsample.shared
-  - Set **constaxonomy** to taxonomy output from Classify.otu (collection)
-  - Set **metadata** to `mouse.dpw.metadata`
+## Krona
 
-The Galaxy project runs an instance of Phinch, and if you look at the output biom file, you will see a link to view the file at Phinch:
+A second tool we can use to visualize our data, is [Krona]()
 
-![](../../shared/images/viewatphinch.png)
-
-Clicking on this link will lead you to the Phinch website, which will automatically load in your file, and where you can several interactive visualisations:
-
-![](../../shared/images/phinch_overviewpage.png)
-
-**2: Krona**
-
-- **Tool:** Visualize with Krona
-- **Parameters:**
-  - Set **input file** to taxonomy output from Classify.otu (collection)
-  - Set **Is this output from mothur?** to yes
+> ### :pencil2: Hands-on: Krona
+>
+> - **Tool:** Visualize with Krona
+> - **Parameters:**
+>   - Set **input file** to taxonomy output from Classify.otu (collection)
+>   - Set **Is this output from mothur?** to yes
+{: .hands_on}
 
 The resulting file is an HTML file containing an interactvie visualisation. For instance try double-clicking the innermost ring labeled "Bacteria"
 
 ![](../images/krona.png)
 
-:question: what percentage of your sample was labelled `Lactobacillus`?
-
-<details>
-  <summary> :small_red_triangle: Click to view answer</summary>
-  :white_check_mark: Explore the Krona plot, double click on `Firmicutes`, here you should see Lactobacillus clearly (16% in our case), click on this segment and the right-hand side will show you the percentages at any point in the hierarchy (here 5% of all)
-
-  ![](../images/krona_lacto.png)
-</details>
+> ### :question: Question
+>
+>  what percentage of your sample was labelled `Lactobacillus`?
+>
+> <details>
+>   <summary> Click to view answer</summary>
+>   Explore the Krona plot, double click on Firmicutes, here you should see Lactobacillus
+>   clearly (16% in our case), click on this segment and the right-hand side will show you the percentages at
+>   any point in the hierarchy (here 5% of all)
+>
+>  ![](../images/krona_lacto.png)
+> </details>
+{: .question}
 
 # Conclusion
 
-Conclusion about the technical key points. And then relation between the technics and the biological question to end with a global view.
-
-:grey_exclamation: ***Key Points***
-
-- *Simple sentence to sum up the first key point of the tutorial (Take home message)*
-- *Second key point*
-- *Third key point*
-- *...*
-
-# :clap: Thank you
+You have now seen how to perform the Schloss lab's Standard Operating Procedure for MiSeq data.
