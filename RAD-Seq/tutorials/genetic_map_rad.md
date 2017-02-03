@@ -106,19 +106,65 @@ Run `Stacks: De novo map` Galaxy tool. This program will run ustacks, cstacks, a
 >
 >    > ### :question: Question
 >    >
->    > 1. Can you identify to what correspond the number 425?
->    > 2. Looking at the catalog.tags file, identify specific and shared loci from each parent.
+>    > 1. Can you identify the meanning of the number 425?
+>    > 2. Looking at the catalog.tags file, identify specific and shared loci from each individual. Count nuber of catalog loci coming from the first individual, from the second and thus find on both parents.
 >    >
 >    >    <details>
 >    >    <summary>Click to view answers</summary>
 >    >    <ol type="1">
->    >    <li>0.75</li>
+>    >    <li> Here, the catalog is made with 459 tags, 425 coming from the "reference individual", here female. Some of these 425 can be shared with the other parent.</li>
 >    >    <li>3500</li>
 >    >    </ol>
 >    >    </details>
+>
 >    sstacks
 >
 >    ![](../images/RAD2_Genetic_Map/denovomap_map_log_sstacks.png)
+>
+>
+>    Endly, genotypes is executed. It search for markers identified on the parents and the associate progenies haplotypes. If the first parent have a GA (ex: aatggtgtGgtccctcgtAc) and AC (ex: aatggtgtAgtccctcgtCc) haplotypes, and the second parent only a GA (ex: aatggtgtGgtccctcgtAc) haplotype, STACKS declare a ab/aa marker for this locus. Genotypes program then associate GA to a and AC to b and then scan progeny to determine which haplotype is found on each of them.
+>
+>    ![](../images/RAD2_Genetic_Map/denovo_map_log_genotypes1.png)
+>
+>
+>    ![](../images/RAD2_Genetic_Map/denovo_map_log_genotypes2.png)
+>
+>
+>    ![](../images/RAD2_Genetic_Map/denovo_map_log_end.png)
+>
+>    Finally, 447 loci, markers, are kept to generate the batch_1.genotypess_1.tsv file. 459 loci are stored on the observed haplotype file batch_1.haplotypes_1.tsv.
+>
+
+### Matches files
+>
+>    Here are sample1.snps (left) and sample2.snps (right)
+>
+>    ![](../images/RAD2_Genetic_Map/denovo_map_matches1.png)
+>
+>    Catalog_ID (= catalog Stacks_ID) is composed by the Stack_ID from the "reference" individual, here sample1, but number is different from sample2 Stack_ID. Thus, in the 'catalog.alleles.tsv', the Stack_ID numbered 3 correspond to the Stack_ID number 16 from sample2!
+>
+>    Here you can observe matches files (you maybe have to change the tsv datatype into a tabular one to display correctly the datasets).
+>
+>    ![](../images/RAD2_Genetic_Map/denovo_map_matches2.png)
+>
+>    Conidering catalog SNPs 27 & 28:
+>
+>    ![](../images/RAD2_Genetic_Map/denovo_map_matches_snps.png)
+>
+>   and corresponding catalog haplotypes:
+>
+>    ![](../images/RAD2_Genetic_Map/denovo_map_matches_alleles_haplotypes.png)
+>
+>    heterozygoty is observed on each parent (one ab, the other ac) and we have 19 genotypes on the 22 individuals.
+>
+>    ![](../images/RAD2_Genetic_Map/denovo_map_matches_markers.png)
+>
+>
+>    ![](../images/RAD2_Genetic_Map/denovo_map_matches_alleles_male_female.png)
+>
+>
+>    ![](../images/RAD2_Genetic_Map/denovo_map_matches_snps_male_female.png)
+>
 >
 # Genotypes determination
 > **Stacks: populations** :wrench:: Run the last step of **Stacks: De novo map** pipeline specifying data filtering options (minimum percentage of individuals in a population required to process a locus for that population: 0.75 , output options (VCF and Structure) and enabling SNP and haplotype-based F statistics calculation.
