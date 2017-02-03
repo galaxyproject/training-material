@@ -9,16 +9,17 @@ In this tutorial we will perform the following steps:
 
 > ### Agenda
 >
-> In this tutorial, we will cover:
+> In this tutorial, we will:
 >
-> 1. [Obtaining and preparing our input data](#obtaining-and-preparing-data)
-    - [Understanding our input data](#understanding-our-input-data)
-    - [Importing the data into Galaxy](#importing-the-data-into-galaxy)
-> 2. [Performing Quality Control](#quality-control)
->   - [Reducing sequencing and PCR errors](#reducing-sequencing-and-pcr-errors)
->   - Processing improved sequences
->   - Assessing error rate
->   - Preparing for analysis  
+> 1. [Obtain and prepare our input data](#obtaining-and-preparing-data)
+>   - [Import the data into Galaxy](#importing-the-data-into-galaxy)
+> 2. [Perform Quality Control](#quality-control)
+>   - [Reduce sequencing and PCR errors](#reducing-sequencing-and-pcr-errors)
+>   - [Align sequence to a reference](#sequence-alignment)
+>   - [Chimera Removal](#chimera-removal)
+>   - [Remove contamination](#removal-of-non-bacterial-sequences)
+>   - [Assess error rate by sequencing a mock community](#assessing-error-rates-based-n-our-mock-community)
+>   - [Prepare for analysis](#preparing-for-analysis)  
 > 3. [Performing OTU-based analysis](#otu-analysis)
 >   - alpha diversity
 >   - beta diversity
@@ -47,17 +48,17 @@ To make this tutorial easier to execute, we are providing only part of the data 
 
 > ### :nut_and_bolt: Dataset details
 > Because of the large size of the original dataset (3.9 GB) you are given 20 of the 362 pairs of fastq
->files. For example, you will see two files: `F3D0_S188_L001_R1_001.fastq`, and
->`F3D0_S188_L001_R2_001.fastq`  
+> files. For example, you will see two files: `F3D0_S188_L001_R1_001.fastq`, and
+> `F3D0_S188_L001_R2_001.fastq`  
 >
->These two files correspond to Female 3 on Day 0 (F3D0) (i.e. the day of weaning). The first file
->(and all those with R1 in the name) correspond to the forward reads, while the second (and all
+> These two files correspond to Female 3 on Day 0 (F3D0) (i.e. the day of weaning). The first file
+> (and all those with R1 in the name) correspond to the forward reads, while the second (and all
 > those with R2 in the name) correspond to the reverse reads.
 >
->These sequences are 250 bp and overlap in the V4 region of the 16S rRNA gene; this region is about
->253 bp long. Looking at the datasets, you will see 22 fastq files, representing 10 time points from
->Female 3 and 1 mock community. You will also see `HMP_MOCK.v35.fasta` which contains the sequences used
->in the mock community that were sequenced in fasta format.
+> These sequences are 250 bp and overlap in the V4 region of the 16S rRNA gene; this region is about
+> 253 bp long. Looking at the datasets, you will see 22 fastq files, representing 10 time points from
+> Female 3 and 1 mock community. You will also see `HMP_MOCK.v35.fasta` which contains the sequences used
+> in the mock community that were sequenced in fasta format.
 {: .comment}
 
 <!-- note: mothur seems to have forgotten day 4 in their SOP example data, therefore this description and results in this document differ slightly from the description on their website -->
@@ -470,7 +471,7 @@ merged. We generally recommend allowing 1 difference for every 100 basepairs of 
 >  How many unique sequences are we left with after this clustering of highly similar sequences?
 > <details>
 >   <summary> Click to view answer</summary>
->   5672. <br
+>   5672. <br>
 >   This is the number of lines in the fasta output
 > </details>
 {: .question}
@@ -480,8 +481,8 @@ merged. We generally recommend allowing 1 difference for every 100 basepairs of 
 At this point we have removed as much sequencing error as we can, and it is time to turn our attention to
 removing chimeras.
 
-> ### Extra: Chimeras
-> ![](../images/chimeras.jpg) <br><br>
+> ### Background: Chimeras
+> ![](../images/chimeras.jpg)
 > (slide credit: http://slideplayer.com/slide/4559004/ )
 {: .comment}
 
@@ -512,125 +513,194 @@ when they're the most abundant sequence in another sample. This is how we do it:
 >
 {: .hands_on}
 
-If we run summary.seqs again with latest fasta and count table we see:
+> ### :question: Question
+>
+>  How many sequences were flagged as chimeric? what is the percentage? (Hint: summary.seqs)
+> <details>
+>   <summary> Click to view answer</summary>
+>   If we run summary.seqs on the resulting fasta file and count table, we see that we went from 128,655
+>   sequences down to 119,330 sequences in this step, for a reduction of 7.3%. This is a reasonable number of
+>   sequences to be flagged as chimeric.
+> </details>
+{: .question}
 
-```
-            Start   End    NBases    Ambigs    Polymer    NumSeqs
-Minimum:    1       376    249        0        3          1
-2.5%-tile:  1       376    252        0        3          2984
-25%-tile:   1       376    252        0        4          29833
-Median:     1       376    252        0        4          59666
-75%-tile:   1       376    253        0        5          89498
-97.5%-tile: 1       376    253        0        6          116347
-Maximum:    1       376    256        0        8          119330
-Mean:       1       376    252.467    0        4.37281
-# of unique seqs:    2628
-total # of seqs:    119330
-```
 
-Note that we went from 128,655 to 119,330 sequences for a reduction of 7.3%; this is a reasonable number of sequences to be flagged as chimeric.
+### Removal of non-bacterial sequences
 
-**7: Remove unwanted sequences**
+As a final quality control step, we need to see if there are any "undesirables" in our dataset. Sometimes when we pick a primer set they will amplify other stuff that survives to this point in the pipeline, such as 18S rRNA gene fragments or 16S rRNA from Archaea, chloroplasts, and mitochondria. There's also just the random stuff that we want to get rid of.
 
-As a final quality control step, we need to see if there are any "undesirables" in our dataset. Sometimes when we pick a primer set they will amplify other stuff that gets to this point in the pipeline such as 18S rRNA gene fragments or 16S rRNA from Archaea, chloroplasts, and mitochondria. There's also just the random stuff that we want to get rid of. Now you may say, "But wait I want that stuff". Fine. But, the primers we use, are only supposed to amplify members of the Bacteria and if they're hitting Eukaryota or Archaea, then its a mistake. Also, realize that chloroplasts and mitochondria have no functional role in a microbial community. But I digress. Let's go ahead and classify those sequences using the Bayesian classifier with the **classify.seqs** command:
+Now you may say, "But wait I want that stuff". Fine. But, the primers we use, are only supposed to amplify members of the Bacteria and if they're hitting Eukaryota or Archaea, then it is a mistake. Also, realize that chloroplasts and mitochondria have no functional role in a microbial community.
 
-- **Tool:** Classify.seqs
-- **Parameters:**
-  - Set **fasta** to the fasta output from Remove.seqs
-  - Set **reference** to `trainset9032012.pds.fasta` from your history
-  - Set **taxonomy** to `trainset9032012.pds.tax` from your history
-  - Set **count** to the count table file from Chimera.uchime
-  - Set **cutoff** to 80
+Let's go ahead and classify those sequences using the Bayesian classifier with the `classify.seqs` command:
 
-Have a look at the taxonomy output. You will see that every read now has a classification.
-
-Now that everything is classified we want to remove our undesirables. We do this with the remove.lineage command:
-
-- **Tool:** Remove.lineage
-- **Parameters:**
-  - Set **taxonomy** to the taxonomy output from Classify.seqs
-  - Set **taxon** to `Chloroplast-Mitochondria-unknown-Archaea-Eukaryota` in the textbox under *Manually select taxons for filtering*
-  - Set **fasta** to the fasta output from Remove.seqs
-  - Set **count** to count table from Chimera.uchime
+> ### Hands-on: Remove undesired sequences
+> - **Tool:** Classify.seqs
+> - **Parameters:**
+>   - Set **fasta** to the fasta output from Remove.seqs
+>   - Set **reference** to `trainset9032012.pds.fasta` from your history
+>   - Set **taxonomy** to `trainset9032012.pds.tax` from your history
+>   - Set **count** to the count table file from Chimera.uchime
+>   - Set **cutoff** to 80
+>
+> Have a look at the taxonomy output. You will see that every read now has a classification.
+>
+> Now that everything is classified we want to remove our undesirables. We do this with the remove.lineage
+> command:
+>
+> - **Tool:** Remove.lineage
+> - **Parameters:**
+>   - Set **taxonomy** to the taxonomy output from Classify.seqs
+>   - Set **taxon** to `Chloroplast-Mitochondria-unknown-Archaea-Eukaryota` in the textbox under *Manually
+> select taxons for filtering*
+>   - Set **fasta** to the fasta output from Remove.seqs
+>   - Set **count** to count table from Chimera.uchime
+{: .hands_on}
 
 Also of note is that *unknown* only pops up as a classification if the classifier cannot classify your sequence to one of the domains.
 
-:question: How many representative sequences were removed in this step?  
-:question: How many total sequences were removed in this step? (Hint: run `summary.seqs` with the count table)
-<!-- collapsible section until we have templating for answers -->
-<details>
-  <summary> :small_red_triangle: Click to view answers</summary>
-  :white_check_mark: 20 representative sequences were removed. The fasta file output by Remove.seqs had 2628 sequences while the fasta output from `remove.lineages` contained 2608 sequences.
-
-  :white_check_mark: If you run summary.seqs you'll see that we now have 2608 unique sequences representing a total of 119,168 total sequences (down from 119,330 before). This means 162 of our sequences were in these various groups.
-</details>
+> ### :question: Questions
+>
+> 1. How many unique (representative) sequences were removed in this step?
+> 2. How many sequences in total?
+>
+>    <details>
+>      <summary> Click to view answer</summary><br>
+>      20 representative sequences were removed. <br>
+>      The fasta file output from Remove.seqs had 2628 sequences while the fasta output from Remove.lineages
+>      contained 2608 sequences.
+>      <br><br>
+>      162 total sequences were removed. <br>
+>      If you run summary.seqs with the count table, you will see that we now have 2608 unique sequences
+>      representing a total of 119,168 total sequences (down from 119,330 before). This means 162 of our  
+>      sequences were in represented by these 20 representative sequences.
+>    </details>
+{: .question}
 
 At this point we have curated our data as far as possible and we're ready to see what our error rate is.
 
-## Assessing error rates
 
-Measuring the error rate of your sequences is something you can only do if you have co-sequenced a mock community. This is something we include for every 95 samples we sequence. You should too because it will help you gauge your error rates and allow you to see how well your curation is going and whether something is wrong with your sequencing set up. First we want to pull the sequences out that were from our "Mock" sample using the get.groups command:
+## Assessing error rates based on our mock community
 
-- **Tool:** Get.groups
-- **Parameters:**
-  - Set **group file or count table** to the count table from Remove.lineage
-  - Set **groups** to `Mock`
-  - Set **fasta** to fasta output from Remove.lineage
+Measuring the error rate of your sequences is something you can only do if you have co-sequenced a mock community. This is something we include for every 95 samples we sequence. You should too because it will help you gauge your error rates and allow you to see how well your curation is going, and whether something is wrong with your sequencing setup.
 
-In the log file we see the following
+> ### Hands-on: Assess error rates based on a mock community
+>
+> First, let's extract the sequences belonging to our mock samples from our data:
+>
+> - **Tool:** Get.groups
+> - **Parameters:**
+>   - Set **group file or count table** to the count table from Remove.lineage
+>   - Set **groups** to `Mock`
+>   - Set **fasta** to fasta output from Remove.lineage
+>
+> In the log file we see the following
+>
+> ```
+> Selected 67 sequences from your fasta file.
+> Selected 4060 sequences from your count file
+> ```
+> This tells us that we had 67 unique sequences and a total of 4,060 total sequences in our Mock sample. We
+> can now use the `seq.error` command to measure the error rates based on our mock reference:
+>
+> - **Tool:** Seq.error
+> - **Parameters:**
+>   - Set **fasta** to the fasta from Get.groups
+>   - Set **reference** to `HMP_MOCK.v35.fasta` file from your history
+>   - Set **count** to the count table from Get.groups
+>
+> In the log file we see something like this:
+>
+> ```
+> It took 0 to read 32 sequences.
+> Overall error rate:    6.5108e-05
+> Errors    Sequences
+> 0    3998
+> 1    3
+> 2    0
+> 3    2
+> 4    1
+> ```
+>
+> That rocks, eh? Our error rate is 0.0065%.
+>
+{: .hands_on}
 
-```
-Selected 67 sequences from your fasta file.
-Selected 4060 sequences from your count file
-```
-This tells us that we had 67 unique sequences and a total of 4,060 total sequences in our Mock sample. We can now use the **seq.error** command to measure the error rates:
+### Cluster mock sequences into OTUs
 
-- **Tool:** Seq.error
-- **Parameters:**
-  - Set **fasta** to the fasta from Get.groups
-  - Set **reference** to `HMP_MOCK.v35.fasta` file from your history
-  - Set **count** to the count table from Get.groups
+We can now cluster the mock sequences into OTUs to see how many spurious OTUs we have:
 
-In the log file we see something like this:
-
-```
-It took 0 to read 32 sequences.
-Overall error rate:    6.5108e-05
-Errors    Sequences
-0    3998
-1    3
-2    0
-3    2
-4    1
-```
-
-That rocks, eh? Our error rate is 0.0065%. We can now cluster the sequences into OTUs to see how many spurious OTUs we have:
-
-- **Tool:** Dist.seqs
-- **Parameters:**
-  - Set **fasta** to the fasta from Get.groups
-  - Set **cutoff** to `0.20`
+> ### Background: Operational Taxonomic Units (OTUs)
+>
+> In 16S metagenomics approaches, OTUs are clusters of similar sequence variants of the 16S rDNA marker gene
+> sequence. Each of these cluster is intended to represent a taxonomic unit of a bacteria species or genus
+> depending on the sequence similarity threshold. Typically, OTU cluster are defined by a 97% identity
+> threshold of the 16S gene sequence variants at genus level. 98% or 99% identity is suggested for species
+> separation.
+>
+> ![](../images/OTU_graph.png)
+>
+> (Image credit: Danzeisen et al. 2013, 10.7717/peerj.237)
+{: .comment}
 
 
-- **Tool:** Cluster
-- **Parameters:**
-  - Set **column** to the dist output from Dist.seqs
-  - Set **count** to the count table from Get.groups
+> ### Hands-on: Cluster mock sequences into OTUs
+>
+> First we calculate the pairwise distances between our sequences
+>
+> - **Tool:** Dist.seqs
+> - **Parameters:**
+>   - Set **fasta** to the fasta from Get.groups
+>   - Set **cutoff** to `0.20`
+>  
+> Next we group sequences into OTUs
+>
+> - **Tool:** Cluster
+> - **Parameters:**
+>   - Set **column** to the dist output from Dist.seqs
+>   - Set **count** to the count table from Get.groups
+>
+> Now we make a *shared* file that summarizes all our data into one handy table
+>
+> - **Tool:** Make.shared
+> - **Parameters:**
+>     - Set **list** to the OTU list from Cluster
+>     - Set **count** to the count table from Get.groups
+>     - Set **label** to `0.03`
+>
+> And now we generate intra-sample rarefaction curves
+>
+> - **Tool:** Rarefaction.single
+> - **Parameters:**
+>   - Set **shared** to the shared file from Make.shared
+{: .hands_on}
 
-
-- **Tool:** Make.shared
-- **Parameters:**
-    - Set **list** to the OTU list from Cluster
-    - Set **count** to the count table from Get.groups
-    - Set **label** to `0.03`
-
-
-- **Tool:** Rarefaction.single
-- **Parameters:**
-  - Set **shared** to the shared file from Make.shared
-
+> ### :question: Question
+>
+>  How many OTUs were identified in our mock community?
+> <details>
+>   <summary> Click to view answer</summary>
+>   34. <br>
+>   Open the shared file or OTU list and look at the header line. You will see a column for each OTU
+>  </details>
+{: .question}
 
 Open the rarefaction output (dataset named `sobs` inside the `rarefaction curves` output collection). You'll see that for 4060 sequences, we'd have 34 OTUs from the Mock community. This number of course includes some stealthy chimeras that escaped our detection methods. If we used 3000 sequences, we would have about 31 OTUs. In a perfect world with no chimeras and no sequencing errors, we'd have 20 OTUs. This is not a perfect world. But this is pretty darn good!
+
+> ### Background: Rarefaction
+>
+> To estimate the fraction of species sequenced, rarefaction curves are typically used. A rarefaction curve
+> plots the number of species as a function of the number of individuals sampled. The curve usually begins
+> with a steep slope, which at some point begins to flatten as fewer species are being discovered per sample:
+> the gentler the slope, the less contribution of the sampling to the total number of operational taxonomic
+> units or OTUs.
+>
+> ![](../images/rarefaction.png)
+>
+> Green, most or all species have been sampled; blue, this habitat has not been exhaustively sampled; red,
+> species rich habitat, only a small fraction has been sampled.
+>
+> (*A primer on Metagenomics*, Wooley et al, http://dx.doi.org/10.1371/journal.pcbi.1000667)
+{: .comment}
 
 Now that we have assessed our error rates we are ready for some real analysis.
 
