@@ -13,7 +13,7 @@ A deck of slides is available for this topic:
 
 A tutorial with hands-on is available for this topic:
 
-- [Dive into quality control](tutorials/dive_into_qc.md)
+- [Dive into quality control](http://galaxyproject.github.io/training-material//NGS-QC/tutorials/dive_into_qc)
 
 ## Input datasets
 
