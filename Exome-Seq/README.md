@@ -15,12 +15,12 @@ Slides can be found here: http://galaxyproject.github.io/training-material/Exome
 
 Two tutorials are available for training on exome sequencing data analysis.
 
-In the [first tutorial](tutorials/Exome-Seq.md), you will work with a family
+In the [first tutorial](http://galaxyproject.github.io/training-material/Exome-Seq/tutorials/Diploid-variant-calling.html), you will work with a family
 where the parents are healthy but a child has a yet unknown disease. The goal is
 to identify genetic variation that is responsible for the disease using the exome
 sequencing data from both parents and the child.
 
-The [second tutorial](tutorials/Diploid-variant-calling.md) is more detailed. It
+The [second tutorial](http://galaxyproject.github.io/training-material/Exome-Seq/tutorials/Exome-Seq.html) is more detailed. It
 follows a similar pipeline to first tutorial on the bottle dataset, but with
 more details particularly on the theory behind.
 
