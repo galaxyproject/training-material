@@ -44,159 +44,82 @@ To download all training datasets, you need to use the corresponding [Zenodo](xx
 >    > * Select **Paste/Fetch Data**
 >    > * Paste the link into the text field
 >    > * Paste the following links into the text field
->    >     * ******
->    >     * https://zenodo.org/record/**********************
->    >     * https://zenodo.org/record/**********************
->    >     * https://zenodo.org/record/**********************
->    >     * https://zenodo.org/record/**********************
->    >     * https://zenodo.org/record/**********************
->    >     * https://zenodo.org/record/**********************
->    >     * https://zenodo.org/record/**********************
->    >     * https://zenodo.org/record/**********************
->    >     * https://zenodo.org/record/**********************
->    >     * https://zenodo.org/record/**********************
->    >     * https://zenodo.org/record/**********************
->    >     * https://zenodo.org/record/**********************
->    >     * https://zenodo.org/record/**********************
->    >     * https://zenodo.org/record/**********************
->    >     * https://zenodo.org/record/**********************
->    >     * https://zenodo.org/record/**********************
->    >     * https://zenodo.org/record/**********************
->    >     * https://zenodo.org/record/**********************
->    >     * https://zenodo.org/record/**********************
+>    >     * https://cesgo.genouest.org/resources/375/download/female.fa
+>    >     * https://cesgo.genouest.org/resources/376/download/male.fa
+>    >     * https://cesgo.genouest.org/resources/377/download/progeny_1.fa
+>    >     * https://cesgo.genouest.org/resources/378/download/progeny_2.fa
+>    >     * https://cesgo.genouest.org/resources/379/download/progeny_3.fa
+>    >     * https://cesgo.genouest.org/resources/380/download/progeny_4.fa
+>    >     * https://cesgo.genouest.org/resources/381/download/progeny_5.fa
+>    >     * https://cesgo.genouest.org/resources/382/download/progeny_6.fa
+>    >     * https://cesgo.genouest.org/resources/383/download/progeny_7.fa
+>    >     * https://cesgo.genouest.org/resources/384/download/progeny_8.fa
+>    >     * https://cesgo.genouest.org/resources/385/download/progeny_9.fa
+>    >     * https://cesgo.genouest.org/resources/386/download/progeny_10.fa
+>    >     * https://cesgo.genouest.org/resources/387/download/progeny_11.fa
+>    >     * https://cesgo.genouest.org/resources/388/download/progeny_12.fa
+>    >     * https://cesgo.genouest.org/resources/389/download/progeny_13.fa
+>    >     * https://cesgo.genouest.org/resources/390/download/progeny_14.fa
+>    >     * https://cesgo.genouest.org/resources/391/download/progeny_15.fa
+>    >     * https://cesgo.genouest.org/resources/392/download/progeny_16.fa
+>    >     * https://cesgo.genouest.org/resources/393/download/progeny_17.fa
+>    >     * https://cesgo.genouest.org/resources/394/download/progeny_18.fa
+>    >     * https://cesgo.genouest.org/resources/395/download/progeny_19.fa
+>    >     * https://cesgo.genouest.org/resources/417/download/progeny_20.fa
 >    > * Press **Start**  
 >
->    > ### :bulb: Tip: Changing the file type `fastq` to `fastqsanger` once the data file is in your history. As we know here that the datatype is fastqsanger, we can directly change it through the upcoming method. Normally, you need to execute FastQGroomer to be sure to have a correct fastqsanger file format. And if you don't know how your quality score is encoded on raw fastQ files, please, use the FastQC tool to determine it!
->    >
->    > * Click on the pencil button displayed in your dataset in the history
->    > * Choose **Datatype** on the top
->    > * Select `fastqsanger`
->    > * Press **Save**
-> 
 >    As default, Galaxy takes the link as name. It also do not link the dataset to a database or a reference genome.
 > 
->    > ### :nut_and_bolt: Comments
->    > - Add the "stickleback" custom build from the Fasta reference genome file
->    > - Edit the "Database/Build" to select "stickleback"
->    > - Rename the datasets according to the samples
-> 
-
-The sequences are raw sequences from the sequencing machine, without any pretreatments. They need to be demultiplexed. To do so, we can use the Process Radtags tool from STACKS.
-
-## Demultiplexing reads
-
-For demultiplexing, we use the Process Radtags tool from [STACKS](http://www.g3journal.org/content/1/3/171.full) . 
-
-> ### :pencil2: Hands-on: Demultiplexing reads
->
-> 1. **Process Radtags** :wrench:: Run `Stacks: process radtags` on FastQ file to demultiplex the reads
->
-> ![](../images/RAD4_Population_Genomics/Process_radtags_in.png)
->
->
->    > ### :question: Questions
->    >
->    > 1. How many reads where on the original dataset?
->    > 2. How many are kept?
->    > 3. Can you try to explain the reason why we loose a lot of reads here?
->    > 4. What kind of infiormation this result gives concerning the upcoming data analysis and the barcodes design in general ?
->    >
->    >    <details>
->    >    <summary>Click to view answers</summary>
->    >    <ol type="1">
->    >    <li>8895289 total reads</li>
->    >    </ol>
->    >    <ol type="2">
->    >    <li>8139531 retained reads</li>
->    >    </ol>
->    >    <ol type="3">
->    >    <li>Exploring the `results.log` file allows to see that there is no sequences filtered for low quality statement. As we don't specify the corresponding advanced option, Process radtags didn't apply quality related filtering. So here, all not retained sequences are not recorded because of an ambiguous barcode or an ambiguous RAD-Tag. This means that some barcodes are not exactly what was specified on the barcode file and that sometimes, no SbfI restriction enzyme site was found. This can be due to some sequencing problems but here, this is also due to the addition, in the original sequencing library, of RAD-seq samples from another study. This is something often used to avoid having too much sequences beginning with the exact same nucleotides sequences and thus Illumina related issues during sequencing and clusters analysis </li>
->    >    </ol>
->    >    <ol type="4">
->    >    <li>Sequencing quality is essential! Each time your sequencing quality decreases, you loose data and thus essential biological information!</li>
->    >    </ol>
->    >    </details>
-> ![](../images/RAD4_Population_Genomics/Process_radtags_out_log.png)
->
-> 2. **Process Radtags** :wrench:: Re-Run `Stacks: process radtags` on FastQ file playing with parameters 
->
-> In `advanced options`, activate the `Discard reads with low quality scores` option and play with the score limit (default vs 20 for example) and examine the change in reads retained. Note that you can play also with the sliding window score threshold, by default 15% of the length of the read. This sliding window parameter allows notably the user to deal with the declining quality at the 3' end of reads.
->
-> ![](../images/RAD4_Population_Genomics/Process_radtags_in_advancedparameter0.PNG)
->
-> ![](../images/RAD4_Population_Genomics/Process_radtags_in_advancedparameter1.PNG)
->
-> To do that, you can use data handling Galaxy tools to cut the interesting lines of each `result.log with Stacks: process radtags` files OR, as I made, just copy/paste these lines on the Galaxy upload tool using Paste/fetch data section and modifying the File header by sample and filename by Score 10 / Score 20 and noscorelimit for example... Before Starting the upload, you can select the `Convert spaces to tabs` option through the `Upload configuration` wheel.
->
-> ![](../images/RAD4_Population_Genomics/Process_radtags_in_advancedparameter_compare_copy.PNG)
->
-> ![](../images/RAD4_Population_Genomics/Process_radtags_in_advancedparameter_compare_paste.PNG)
->
-> You can use the `Charts` functionality through the Visualize button reachable on the `Radtags logs` file you just generated. 
->
-> ![](../images/RAD4_Population_Genomics/Process_radtags_charts.PNG)
->
-> If like me you don't have payed attention to the organization of you file for the graphical representation you obtain a non optimal bars diagram with a not intelligent X-axis ordering. There is a lot of diffferent manner to fix this. You can use the copy/paste "bidouille" like seen previously, or you can use Galaxy tools to manipulate the `radtags logs` (did you change the filename from `pasted entry` to another label ?) file to generate a better graph. For example, you can use `Select lines that match an expression` tool to select rows then use the `Concatenate datasets tail-to-head` tool to reorganize these lines in a new file... OR, as I made, you can just sort the file using the first column.
->
-> ![](../images/RAD4_Population_Genomics/Process_radtags_charts_tablemodif.PNG)
->
-> And you obtain a file like this one, ready to generate a beautiful and smart bar diagram!
->
-> ![](../images/RAD4_Population_Genomics/Process_radtags_charts_tablemodif_view.PNG)
->
-> ![](../images/RAD4_Population_Genomics/Process_radtags_charts_end.PNG)
->
->Using filter like `clean data, remove any read with an uncalled base` has here few impact:
->
-> ![](../images/RAD4_Population_Genomics/Process_radtags_out_parameter2.png)
->
-
-The demultiplexed sequences are raw sequences from the sequencing machine, without any pretreatments. They need to be controlled for their quality.
-
-## Quality control
-
-For quality control, we use similar tools as described in [NGS-QC tutorial](../../NGS-QC/tutorials/dive_into_qc): [FastQC](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/).
-
-> ### :pencil2: Hands-on: Quality control
->
-> 1. **FastQC** :wrench:: Run FastQC on FastQ files to control the quality of the reads
->
->    > ### :question: Questions
->    >
->    > 1. What is the read length?
->    >
->    >    <details>
->    >    <summary>Click to view answers</summary>
->    >    <ol type="1">
->    >    <li>The read length is 32 bp</li>
->    >    </ol>
->    >    </details>
->
-
-As it exists a draft genome for *Gasterosteus aculeatus*, we can use this information and map the sequences on this genome to identify polymorphism.
 
 # Building loci using STACKS
 
-Run `Stacks: De novo map` Galaxy tool. This program will run pstacks, cstacks, and sstacks on the members of the population, accounting for the alignments of each read.
+Run `Stacks: De novo map` Galaxy tool. This program will run ustacks, cstacks, and sstacks on each individual, accounting for the alignments of each read.
 
 > ### :nut_and_bolt: Comment
 >
-> Information on ref_map.pl and its parameters can be found online: http://creskolab.uoregon.edu/stacks/comp/ref_map.php.
+> Information on denovo_map.pl and its parameters can be found online: http://creskolab.uoregon.edu/stacks/comp/denovo_map.php.
 
 
-> **Stacks: De novo map** :wrench:: Run **Stacks** selecting the population usage. Specify each individual as a sample, a population map and a minimum depth of coverage of 3.
+> **Stacks: De novo map** :wrench:: Run **Stacks** selecting the Genetic map usage. Specify each parent as a sample in the appropriate box, then each of the 20 progenies and specify a CP Cross type, 3 for the Minimum number of identical raw reads required to create a stack, 3 for minimum number of identical, raw reads required to create a stack in 'progeny' individuals, 3 for the number of mismatches allowed between loci when building the catalog and activate the option "remove, or break up, highly repetitive RAD-Tags in the ustacks program".
 >
->    ![](../images/RAD4_Population_Genomics/denovo/denovo_in.png)
+>    ![](../images/RAD2_Genetic_Map/denovomap_in.png)
 
->    > ### :nut_and_bolt: Comment
+>    Once Stacks has completed running, you will see 5 new data collections and 8 datasets.
+>
+>    ![](../images/RAD2_Genetic_Map/denovomap_out.png)
+>
+>     Investigate the output files: `result.log` and `catalog.*` (snps, alleles and tags).
+>
+>    Looking at the first file, denovo_map.log, you can see the command line used and the start as end execution time.
+>
+>    ![](../images/RAD2_Genetic_Map/denovomap_map_log_top.png)
+>
+>    Then are the different STACKS steps:
+>    ustacks
+>
+>    ![](../images/RAD2_Genetic_Map/denovomap_map_log_ustacks.png)
+>
+>    cstacks
+>
+>    ![](../images/RAD2_Genetic_Map/denovomap_map_log_cstacks.png)
+>
+>
+>    > ### :question: Question
 >    >
->    > If you are using a file presenting population information and individual name in a different manner than expected by STACKS, you can use Galaxy tools like `Regex Replace` or `Cut columns from a table` to generate it.
-
-> Once Stacks has completed running, investigate the output files: `result.log` and `catalog.*` (snps, alleles and tags). Notice that each locus now has a chromosome/base pair specified in each of the *tags.tsv files and in the catalog files.
+>    > 1. Can you identify to what correspond the number 425?
+>    > 2. Looking at the catalog.tags file, identify specific and shared loci from each parent.
+>    >
+>    >    <details>
+>    >    <summary>Click to view answers</summary>
+>    >    <ol type="1">
+>    >    <li>0.75</li>
+>    >    <li>3500</li>
+>    >    </ol>
+>    >    </details>
+>    sstacks
 >
->    ![](../images/RAD4_Population_Genomics/denovo/denovo_out.png)
+>    ![](../images/RAD2_Genetic_Map/denovomap_map_log_sstacks.png)
 >
-
 # Genotypes determination
 > **Stacks: populations** :wrench:: Run the last step of **Stacks: De novo map** pipeline specifying data filtering options (minimum percentage of individuals in a population required to process a locus for that population: 0.75 , output options (VCF and Structure) and enabling SNP and haplotype-based F statistics calculation.
 >

@@ -64,12 +64,6 @@ To download all training datasets (i.e reads, population map file and barcodes f
 >    > * Select `fastqsanger`
 >    > * Press **Save**
 > 
->    As default, Galaxy takes the link as name. It also do not link the dataset to a database or a reference genome.
-> 
->    > ### :nut_and_bolt: Comments
->    > - Add the "stickleback" custom build from the Fasta reference genome file
->    > - Edit the "Database/Build" to select "stickleback"
->    > - Rename the datasets according to the samples
 > 
 
 The sequences are raw sequences from the sequencing machine, without any pretreatments. They need to be demultiplexed. To do so, we can use the Process Radtags tool from STACKS.
@@ -168,11 +162,11 @@ As it exists a draft genome for *Gasterosteus aculeatus*, we can use this inform
 
 # Building loci using STACKS
 
-Run `Stacks: De novo map` Galaxy tool. This program will run pstacks, cstacks, and sstacks on the members of the population, accounting for the alignments of each read.
+Run `Stacks: De novo map` Galaxy tool. This program will run ustacks, cstacks, and sstacks on the members of the population, accounting for the alignments of each read.
 
 > ### :nut_and_bolt: Comment
 >
-> Information on ref_map.pl and its parameters can be found online: http://creskolab.uoregon.edu/stacks/comp/ref_map.php.
+> Information on denovo_map.pl and its parameters can be found online: http://creskolab.uoregon.edu/stacks/comp/denovo_map.php.
 
 
 > **Stacks: De novo map** :wrench:: Run **Stacks** selecting the population usage. Specify each individual as a sample, a population map and a minimum depth of coverage of 3.
@@ -183,7 +177,7 @@ Run `Stacks: De novo map` Galaxy tool. This program will run pstacks, cstacks, a
 >    >
 >    > If you are using a file presenting population information and individual name in a different manner than expected by STACKS, you can use Galaxy tools like `Regex Replace` or `Cut columns from a table` to generate it.
 
-> Once Stacks has completed running, investigate the output files: `result.log` and `catalog.*` (snps, alleles and tags). Notice that each locus now has a chromosome/base pair specified in each of the *tags.tsv files and in the catalog files.
+> Once Stacks has completed running, investigate the output files: `result.log` and `catalog.*` (snps, alleles and tags).
 >
 >    ![](../images/RAD4_Population_Genomics/denovo/denovo_out.png)
 >
@@ -197,7 +191,7 @@ Run `Stacks: De novo map` Galaxy tool. This program will run pstacks, cstacks, a
 
 
 
->	Now look at the output in the file `batch_1.sumstats` nammed `SNP and Haplotype-based F statistics with Stacks: populations ...` on your history. This file is also reachable on the data collection nammed `Full output from ref_map .....` with his original name `batch_1.sumstats`. There are a large number of statistics calculated at each SNP, so use Galaxy tools like filter, cut, and sort to focus on some.
+>	Now look at the output in the file `batch_1.sumstats` nammed `SNP and Haplotype-based F statistics with Stacks: populations ...` on your history. This file is also reachable on the data collection nammed `Full output from denovo_map .....` with his original name `batch_1.sumstats`. There are a large number of statistics calculated at each SNP, so use Galaxy tools like filter, cut, and sort to focus on some.
 
 >
 >    > ### :question: Question
