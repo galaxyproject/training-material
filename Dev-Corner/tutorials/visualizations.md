@@ -27,12 +27,12 @@ However, for this tutorial we will keep it basic.
 
 Additional documentation about Galaxy visualizations can be found here:
 
-- [VisualizationsRegistry](https://new.galaxyproject.org/VisualizationsRegistry)
-- [VisualizationsRegistry/Cookbook](https://new.galaxyproject.org/VisualizationsRegistry/Cookbook)
-- [VisualizationsRegistry/Code](https://new.galaxyproject.org/VisualizationsRegistry/Code)
-- [DataProviders](https://new.galaxyproject.org/DataProviders)
-- [DataProviders/Cookbook](https://new.galaxyproject.org/DataProviders/Cookbook)
-- [Develop/Visualizations](https://new.galaxyproject.org/Develop/Visualizations)
+- [VisualizationsRegistry](https://new.galaxyproject.org/visualizations-registry)
+- [VisualizationsRegistry/Cookbook](https://new.galaxyproject.org/visualizations-registry/cookbook)
+- [VisualizationsRegistry/Code](https://new.galaxyproject.org/visualizations-registry/code)
+- [DataProviders](https://new.galaxyproject.org/data-providers)
+- [DataProviders/Cookbook](https://new.galaxyproject.org/data-providers/cookbook)
+- [Develop/Visualizations](https://new.galaxyproject.org/develop/visualizations)
 
 # Part 1
 
