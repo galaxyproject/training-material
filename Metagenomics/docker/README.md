@@ -1,6 +1,6 @@
-[![Docker Automated build](https://img.shields.io/docker/automated/bgruening/galaxy-training-exome-seq.svg?maxAge=2592000)](https://hub.docker.com/r/bgruening/galaxy-training-exome-seq/)
-[![Docker Pulls](https://img.shields.io/docker/pulls/bgruening/galaxy-training-exome-seq.svg?maxAge=2592000)](https://hub.docker.com/r/bgruening/galaxy-training-exome-seq/)
-[![Docker Stars](https://img.shields.io/docker/stars/bgruening/galaxy-training-exome-seq.svg?maxAge=2592000)](https://hub.docker.com/r/bgruening/galaxy-training-exome-seq/)
+[![Docker Automated build](https://img.shields.io/docker/automated/bgruening/galaxy-training-exome-seq.svg?maxAge=2592000) ](https://hub.docker.com/r/bgruening/galaxy-training-exome-seq/)
+[![Docker Pulls](https://img.shields.io/docker/pulls/bgruening/galaxy-training-exome-seq.svg?maxAge=2592000) ](https://hub.docker.com/r/bgruening/galaxy-training-exome-seq/)
+[![Docker Stars](https://img.shields.io/docker/stars/bgruening/galaxy-training-exome-seq.svg?maxAge=2592000) ](https://hub.docker.com/r/bgruening/galaxy-training-exome-seq/)
 
 Galaxy Docker repository for Exome sequencing training material :whale: :eyes:
 ====
