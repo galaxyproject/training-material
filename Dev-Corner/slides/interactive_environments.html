@@ -5,41 +5,60 @@ tutorial_name: interactive_environments
 logo: "GTN"
 ---
 
-### Intro
+### Why IEs?
 
 - Embedded access to third-party application inside of Galaxy
 - Interactively analyze data, access analysis products within Galaxy
-- Bring analysis to the data instead of vice-versa
+
+![](../images/vis_IE_ipython0.png)
+
+- Bring external analysis platform to the data instead of vice-versa
   - no need to download/re-upload your data
-
-
-- **Examples:**
-  - Jupyter notebooks
-  - Rstudio
-  - IOBIO (bam/vcf visualisations)
-  - Phinch
-  - ..
-
-.footnote[ Admin Docs: http://bit.ly/28XtGux ]
 
 ---
 
-### Intro
+### Who should use IEs?
+
+- Everyone!
+- Programing Environments for Bioinformaticians and Data Scientists
+  - Jupyter
+  - Rstudio
+- Visualization IEs are great for life scientists
+  - IOBIO (bam/vcf visualizations)
+  - Phinch (metagenomics visualizations)
+
+---
+
+### How to launch an IE?
+
+- Can be bound to specific datatypes
+  - Available under the visualizations button on the dataset
+
+.image-25[![](../images/vis_IE_button.png)]
+
+- Or more general-purpose applications (Jupyter/Rstudio)
+- IE launcher
+
+.image-25[![](../images/vis_IE_launcher_menu.png)]
+---
+
+### IE Launcher
+
+- Choose between different available docker images
+- Attach one or more datasets from history
+
+.image-75[![](../images/vis_IE_launcher.png)]
+
+---
+
+### How does it work?
 
 - Docker Containers are launched on-demand by users..
 - ..and killed automatically when users stop using them
-- Web services embedded securely within Galaxy
 
+![](../images/vis_IE_infra.png)
 
-- Can be bound to specific datatypes (IOBIO/Phinch)
-- Or more general purpose applications (Jupyter/Rstudio)
-  - IE launcher
-
----
-
-### Intro
-
-![](../images/vis_IE_launcher.png)
+.footnote[ Admin Docs: http://bit.ly/28XtGux ]
 
 ---
 
@@ -48,6 +67,7 @@ logo: "GTN"
   - General purpose/ multi-dataset
   - Provides special functions to interact with the Galaxy history (get/put datasets)
   - Ability to save and load notebooks
+  - [Video demo](https://www.youtube.com/watch?v=UOFFkDuJxgk)
 
 .image-75[![](../images/vis_IE_ipython1.png)]
 
@@ -62,6 +82,16 @@ logo: "GTN"
 ### Jupyter
 
 ![](../images/vis_IE_ipython3.png)
+
+---
+
+### Rstudio
+
+- General purpose/ multi-dataset
+- Provides special functions to interact with the Galaxy history
+- Ability to save and load workbook and R history object
+
+![](../images/vis_IE_rstudio.png)
 
 ---
 
@@ -129,8 +159,10 @@ logo: "GTN"
 
 ### Hello World Example
 
-- Hello World GIE available as part of Galaxy Documentation (http://bit.ly/2906ahO)
-- All files in this example available from https://github.com/erasche/hello-world-interactive-environment/
+- Hello World GIE available as part of Galaxy Documentation  
+  (http://bit.ly/2906ahO)
+- All files in this example available from
+  https://github.com/erasche/hello-world-interactive-environment/
 - Create a GIE that shows the directory listing of `import` folder (datasets loaded into GIE by user)
 
 ```bash
