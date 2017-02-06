@@ -83,7 +83,7 @@ Run `Stacks: De novo map` Galaxy tool. This program will run ustacks, cstacks, a
 >
 >    ![](../images/RAD2_Genetic_Map/denovomap_out.png)
 >
->     Investigate the output files: `result.log` and `catalog.*` (snps, alleles and tags).
+>    Investigate the output files: `result.log` and `catalog.*` (snps, alleles and tags).
 >
 >    Looking at the first file, denovo_map.log, you can see the command line used and the start as end execution time.
 >
