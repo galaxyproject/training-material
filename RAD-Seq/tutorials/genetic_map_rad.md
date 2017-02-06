@@ -38,7 +38,6 @@ The original data is available at [STACKS website](http://creskolab.uoregon.edu/
 >    > * Copy the link location
 >    > * Open the Galaxy Upload Manager
 >    > * Select **Paste/Fetch Data**
->    > * Paste the link into the text field
 >    > * Paste the following links into the text field
 >    >     * https://cesgo.genouest.org/resources/375/download/female.fa
 >    >     * https://cesgo.genouest.org/resources/376/download/male.fa
