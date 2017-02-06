@@ -87,17 +87,17 @@ Run `Stacks: De novo map` Galaxy tool. This program will run ustacks, cstacks, a
 >
 >    Looking at the first file, denovo_map.log, you can see the command line used and the start as end execution time.
 >
->    ![](../images/RAD2_Genetic_Map/denovomap_map_log_top.png)
+>    ![](../images/RAD2_Genetic_Map/denovo_map_log_top.png)
 >
 >    Then are the different STACKS steps:
 >
 >    ustacks
 >
->    ![](../images/RAD2_Genetic_Map/denovomap_map_log_ustacks.png)
+>    ![](../images/RAD2_Genetic_Map/denovo_map_log_ustacks.png)
 >
 >    cstacks
 >
->    ![](../images/RAD2_Genetic_Map/denovomap_map_log_cstacks.png)
+>    ![](../images/RAD2_Genetic_Map/denovo_map_log_cstacks.png)
 >
 >
 >    > ### :question: Question
@@ -115,7 +115,7 @@ Run `Stacks: De novo map` Galaxy tool. This program will run ustacks, cstacks, a
 >
 >    sstacks
 >
->    ![](../images/RAD2_Genetic_Map/denovomap_map_log_sstacks.png)
+>    ![](../images/RAD2_Genetic_Map/denovo_map_log_sstacks.png)
 >
 >
 >    Endly, genotypes is executed. It search for markers identified on the parents and the associate progenies haplotypes. If the first parent have a GA (ex: aatggtgtGgtccctcgtAc) and AC (ex: aatggtgtAgtccctcgtCc) haplotypes, and the second parent only a GA (ex: aatggtgtGgtccctcgtAc) haplotype, STACKS declare a ab/aa marker for this locus. Genotypes program then associate GA to a and AC to b and then scan progeny to determine which haplotype is found on each of them.
