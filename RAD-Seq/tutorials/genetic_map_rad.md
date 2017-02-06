@@ -90,6 +90,7 @@ Run `Stacks: De novo map` Galaxy tool. This program will run ustacks, cstacks, a
 >    ![](../images/RAD2_Genetic_Map/denovomap_map_log_top.png)
 >
 >    Then are the different STACKS steps:
+>
 >    ustacks
 >
 >    ![](../images/RAD2_Genetic_Map/denovomap_map_log_ustacks.png)
