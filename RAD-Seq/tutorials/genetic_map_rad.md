@@ -25,10 +25,6 @@ We here proposed to re-analyze these data at least until genotypes determination
 
 The original data is available at [STACKS website](http://creskolab.uoregon.edu/stacks/tutorial/stacks_samples.tar.gz). 
 
-![](../images/*********************.png)
-
-To download all training datasets, you need to use the corresponding [Zenodo](xxxxxxxxxxxxxxxxxxx) repository.
-
 > ### :pencil2: Hands-on: Data upload
 >
 > 1. Create a new history for this RAD-seq exercise. If you are not inspired, you can name it "STACKS 1.42 RAD: genetic map" for example...
@@ -147,11 +143,11 @@ Run `Stacks: De novo map` Galaxy tool. This program will run ustacks, cstacks, a
 >
 >    ![](../images/RAD2_Genetic_Map/denovo_map_matches2.png)
 >
->    Conidering catalog SNPs 27 & 28:
+>    Conidering catalog SNPs 27 & 28, on the 302 catalog locus:
 >
 >    ![](../images/RAD2_Genetic_Map/denovo_map_matches_snps.png)
 >
->   and corresponding catalog haplotypes:
+>   and corresponding catalog haplotypes, 3 on the 4 possible (AA, AT, GT but no GA):
 >
 >    ![](../images/RAD2_Genetic_Map/denovo_map_matches_alleles_haplotypes.png)
 >
@@ -159,41 +155,67 @@ Run `Stacks: De novo map` Galaxy tool. This program will run ustacks, cstacks, a
 >
 >    ![](../images/RAD2_Genetic_Map/denovo_map_matches_markers.png)
 >
+>    We then can see that Stack_ID 330 for female correspond to the 39 for male:
+>
 >
 >    ![](../images/RAD2_Genetic_Map/denovo_map_matches_alleles_male_female.png)
 >
->
->    ![](../images/RAD2_Genetic_Map/denovo_map_matches_snps_male_female.png)
->
->
+
 # Genotypes determination
-> **Stacks: populations** :wrench:: Run the last step of **Stacks: De novo map** pipeline specifying data filtering options (minimum percentage of individuals in a population required to process a locus for that population: 0.75 , output options (VCF and Structure) and enabling SNP and haplotype-based F statistics calculation.
+> **Stacks: genotypes** :wrench:: Re-Run the last step of **Stacks: De novo map** pipeline specifying more options as: 
+>    > 1. The genetic map type (ie F1, F2 (left figure, F1xF1), Double Haploid, Back Cross (F1xF0), Cross Pollination (right figure, F1 or F2 but resulting from the croos of pure homozygous parents))
+>    >
+>    >    ![](../images/RAD2_Genetic_Map/Genetic_map_F2.png)    ![](../images/RAD2_Genetic_Map/Genetic_map_CrossPollination.png)
+>    >
+>    >
+>    > 2. Genotyping informations export format for input in ganatic mapper tools (ie JoinMap, R/qtl, ...). To be notice that R/qtl format for an F2 cross type can be an input for MapMaker or Carthagene.
+>    >
+>    > 3. Tresholds concernaing a minimal number of progeny and/or minimum stacks depth to consider a locus
+>    >
+>    > 4. Automatic corrections. Concerning this last option, it's possible to to ask genotypes making automatic corrections on some errors as homozygous tags verification in the progeny to be sure a SNP is missing. Thus, if SNP detection model can't identify a site as heterygous or homozygous, this site is temporarily tagged as homozygous to facilitate the search, by sstacks, of concordance with the loci catalog. If a second allele is detected on the catalog (ie, in parents) is found on a progeny with a weak frequency (<10% of a stack reads), genotypes program can correct the genotype. Additionnaly, it will delete a homozygous genotype on a particular individual if locus genotype is supported by less than 5 reads. Thus corrected genotypes are marked uppercase.
 >
->    ![](../images/RAD4_Population_Genomics/denovo/populations_in.png)
+>    Here is an example of a locus originally marke as homozygous before automatic correction because on allele is supported by less than 5 reads. After correction, this locus is marked as heterygous.
 >
->    ![](../images/RAD4_Population_Genomics/denovo/populations_log.png)
+>    ![](../images/RAD2_Genetic_Map/genotypes_automatic_correction.png)
+>
+> You can re-run **Stacks: genotypes** :wrench:: program modifying the number of genotyped progeny to consider a marker and thus be more or less stringent. Compare results.
+>
+### Genotypes.tsv files
+>
+>    One line by locus, one column by individual (aa, ab, AB if automatic correction applied, bb, bc, ...) with observed genotype for each locus:
+>
+>    ![](../images/RAD2_Genetic_Map/genotypes_tsv.png)
+>
+### Genotypes.txt files
+>
+>    One line by individual, and for each individual, for each catalog locus, genotype:
+>
+>    ![](../images/RAD2_Genetic_Map/genotypes_txt.png)
+>
+### Haplotypes.tsv files
+>
+>    One line by locus, one column by individual (aa, ab, AB if automatic correction applied, bb, bc, ...) with observed genotype for each locus:
+>
+>    ![](../images/RAD2_Genetic_Map/haplotypes_tsv.png)
 
-
-
->	Now look at the output in the file `batch_1.sumstats` nammed `SNP and Haplotype-based F statistics with Stacks: populations ...` on your history. This file is also reachable on the data collection nammed `Full output from ref_map .....` with his original name `batch_1.sumstats`. There are a large number of statistics calculated at each SNP, so use Galaxy tools like filter, cut, and sort to focus on some.
 
 >
 >    > ### :question: Question
 >    >
->    > 1. What is the maximum value of FST at any SNP?
->    > 2. How many SNPs reach this FST value?
+>    > 1. The use of the deleverage algorithm allows to not consider loci obtained from merging more than 3 stacks. Why 3 if biologically, you are waiting something related to 2 for diploid organisms?
+>    > 2. Re-execute **Stacks: De novo map** pipeline modifying the p-value treshold for the SNP model. What is the difference regarding to unverified haplotypes ?
 >    >
 >    >    <details>
 >    >    <summary>Click to view answers</summary>
 >    >    <ol type="1">
->    >    <li>0.75</li>
->    >    <li>3500</li>
+>    >    <li>This value of 3 is important to use if we don't want to blacklist loci for whom 99.9% of individuals have one and/or the alt allele and 0.01% have a third one, resulting of a sequencing error.</li>
+>    >    <li>We see a moficiation of the number of unverified haplotypes</li>
 >    >    </ol>
 >    >    </details>
 
 # Conclusion
 
-In this tutorial, we have analyzed real RAD sequencing data to extract useful information, such as which loci are candidate regarding the genetic differentiation between freshwater and oceanic Stickelback populations. To answer these questions, we analyzed RAD sequence datasets using a de novo RAD-seq data analysis approach. This approach can be sum up with the following scheme:
+In this tutorial, we have analyzed real RAD sequencing data to extract useful information, such as genotypes and haplotypes to generate input files for downstream genetic map creation. This approach can be sum up with the following scheme:
 
 
-![](../images/denovo_based_workflow.PNG)
+![](../images/genetic_map_workflow.PNG)
