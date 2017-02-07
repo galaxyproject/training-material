@@ -47,10 +47,8 @@ To download all training datasets (i.e reads, population map file and barcodes f
 >
 >    > ### :bulb: Tip: Importing data via links
 >    >
->    > * Copy the link location
 >    > * Open the Galaxy Upload Manager
 >    > * Select **Paste/Fetch Data**
->    > * Paste the link into the text field
 >    > * Paste the following links into the text field
 >    >     * ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR034/SRR034310/SRR034310.fastq.gz
 >    >     * https://cesgo.genouest.org/resources/373/download/Population_map.txt
