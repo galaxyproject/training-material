@@ -23,7 +23,7 @@ We here proposed to re-analyze these data at least until genotypes determination
 
 ## Data upload
 
-The original data is available at [STACKS website](http://creskolab.uoregon.edu/stacks/tutorial/stacks_samples.tar.gz). 
+The original data is available at [STACKS website](http://creskolab.uoregon.edu/stacks/tutorial/stacks_samples.tar.gz) and the subset used here is findable on [CeSGO hub](https://cesgo.genouest.org/resources/370/supportingdocs)
 
 > ### :pencil2: Hands-on: Data upload
 >
@@ -168,7 +168,7 @@ Run `Stacks: De novo map` Galaxy tool. This program will run ustacks, cstacks, a
 >    >    ![](../images/RAD2_Genetic_Map/Genetic_map_F2.png)    ![](../images/RAD2_Genetic_Map/Genetic_map_CrossPollination.png)
 >    >
 >    >
->    > 2. Genotyping informations export format for input in ganatic mapper tools (ie JoinMap, R/qtl, ...). To be notice that R/qtl format for an F2 cross type can be an input for MapMaker or Carthagene.
+>    > 2. Genotyping informations export format for input in genetic mapper tools (ie JoinMap, R/qtl, ...). To be notice that R/qtl format for an F2 cross type can be an input for MapMaker or Carthagene.
 >    >
 >    > 3. Tresholds concernaing a minimal number of progeny and/or minimum stacks depth to consider a locus
 >    >
