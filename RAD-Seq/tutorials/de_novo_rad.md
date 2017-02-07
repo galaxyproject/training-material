@@ -138,7 +138,7 @@ For quality control, we use similar tools as described in [NGS-QC tutorial](http
 
 > ### :pencil2: Hands-on: Quality control
 >
-> 1. **FastQC** :wrench:: Run FastQC on FastQ files to control the quality of the reads
+> 1. **FastQC** :wrench:: Run FastQC on FastQ files to control the quality of the reads. Warning! Don't forget you are working on data collections....
 >
 >    > ### :question: Questions
 >    >
