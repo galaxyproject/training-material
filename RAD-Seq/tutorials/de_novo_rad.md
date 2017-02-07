@@ -134,7 +134,7 @@ The demultiplexed sequences are raw sequences from the sequencing machine, witho
 
 ## Quality control
 
-For quality control, we use similar tools as described in [NGS-QC tutorial](../../NGS-QC/tutorials/dive_into_qc): [FastQC](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/).
+For quality control, we use similar tools as described in [NGS-QC tutorial](http://galaxyproject.github.io/training-material//NGS-QC/tutorials/dive_into_qc): [FastQC](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/).
 
 > ### :pencil2: Hands-on: Quality control
 >
