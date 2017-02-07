@@ -8,7 +8,7 @@ tutorial_name: genetic_map
 
 Original description is reachable on a [dedicated page of the official STACKS website](http://catchenlab.life.illinois.edu/stacks/tut_gar.php). Writers describe that they developed a genetic map in the spotted gar and present here data from a single linkage group. The gar genetic map is an F1 pseudotest cross between two parents and 94 of their F1 progeny. They took the markers that appeared in one of the linkage groups and worked backwards to provide the raw reads from all of the stacks contributing to that linkage group. 
 
-We here proposed to re-analyze these data at least until genotypes determination. Data are already clean so you don't have to demultiplex it using barcode information through Process Radtags tool.
+We here proposed to re-analyze these data at least until genotypes determination. Data are already clean so you don't have to demultiplex it using barcode information through `Process Radtags tool`.
 
 
 > ### Agenda
@@ -23,7 +23,7 @@ We here proposed to re-analyze these data at least until genotypes determination
 
 ## Data upload
 
-The original data is available at [STACKS website](http://creskolab.uoregon.edu/stacks/tutorial/stacks_samples.tar.gz) and the subset used here is findable on [CeSGO hub](https://cesgo.genouest.org/resources/370/supportingdocs)
+The original data is available at [STACKS website](http://creskolab.uoregon.edu/stacks/tutorial/stacks_samples.tar.gz) and the subset used here is findable on [CeSGO hub](https://cesgo.genouest.org/resources/370/supportingdocs).
 
 > ### :pencil2: Hands-on: Data upload
 >
@@ -68,11 +68,11 @@ The original data is available at [STACKS website](http://creskolab.uoregon.edu/
 
 # Building loci using STACKS
 
-Run `Stacks: De novo map` Galaxy tool. This program will run ustacks, cstacks, and sstacks on each individual, accounting for the alignments of each read.
+Run `Stacks: De novo map` Galaxy tool. This program will run `ustacks`, `cstacks`, and `sstacks` on each individual, accounting for the alignments of each read.
 
 > ### :nut_and_bolt: Comment
 >
-> Information on denovo_map.pl and its parameters can be found online: http://creskolab.uoregon.edu/stacks/comp/denovo_map.php.
+> Information on `denovo_map.pl` and its parameters can be found online: http://creskolab.uoregon.edu/stacks/comp/denovo_map.php.
 
 
 > **Stacks: De novo map** :wrench:: Run **Stacks** selecting the Genetic map usage. Specify each parent as a sample in the appropriate box, then each of the 20 progenies and specify a CP Cross type, 3 for the Minimum number of identical raw reads required to create a stack, 3 for minimum number of identical raw reads required to create a stack in 'progeny' individuals, 3 for the number of mismatches allowed between loci when building the catalog and activate the option "remove, or break up, highly repetitive RAD-Tags in the ustacks program".
@@ -85,17 +85,17 @@ Run `Stacks: De novo map` Galaxy tool. This program will run ustacks, cstacks, a
 >
 >    Investigate the output files: `result.log` and `catalog.*` (snps, alleles and tags).
 >
->    Looking at the first file, denovo_map.log, you can see the command line used and the start as end execution time.
+>    Looking at the first file, `denovo_map.log`, you can see the command line used and the start as end execution time.
 >
 >    ![](../images/RAD2_Genetic_Map/denovo_map_log_top.png)
 >
 >    Then are the different STACKS steps:
 >
->    ustacks
+>    `ustacks`
 >
 >    ![](../images/RAD2_Genetic_Map/denovo_map_log_ustacks.png)
 >
->    cstacks
+>    `cstacks`
 >
 >    ![](../images/RAD2_Genetic_Map/denovo_map_log_cstacks.png)
 >
@@ -113,12 +113,12 @@ Run `Stacks: De novo map` Galaxy tool. This program will run ustacks, cstacks, a
 >    >    </ol>
 >    >    </details>
 >
->    sstacks
+>    `sstacks`
 >
 >    ![](../images/RAD2_Genetic_Map/denovo_map_log_sstacks.png)
 >
 >
->    Endly, genotypes is executed. It search for markers identified on the parents and the associate progenies haplotypes. If the first parent have a GA (ex: aatggtgtGgtccctcgtAc) and AC (ex: aatggtgtAgtccctcgtCc) haplotypes, and the second parent only a GA (ex: aatggtgtGgtccctcgtAc) haplotype, STACKS declare a ab/aa marker for this locus. Genotypes program then associate GA to a and AC to b and then scan progeny to determine which haplotype is found on each of them.
+>    Endly, `genotypes` is executed. It search for markers identified on the parents and the associate progenies haplotypes. If the first parent have a GA (ex: aatggtgtGgtccctcgtAc) and AC (ex: aatggtgtAgtccctcgtCc) haplotypes, and the second parent only a GA (ex: aatggtgtGgtccctcgtAc) haplotype, STACKS declare a ab/aa marker for this locus. Genotypes program then associate GA to a and AC to b and then scan progeny to determine which haplotype is found on each of them.
 >
 >    ![](../images/RAD2_Genetic_Map/denovo_map_log_genotypes1.png)
 >
@@ -128,16 +128,16 @@ Run `Stacks: De novo map` Galaxy tool. This program will run ustacks, cstacks, a
 >
 >    ![](../images/RAD2_Genetic_Map/denovo_map_log_end.png)
 >
->    Finally, 447 loci, markers, are kept to generate the batch_1.genotypess_1.tsv file. 459 loci are stored on the observed haplotype file batch_1.haplotypes_1.tsv.
+>    Finally, 447 loci, markers, are kept to generate the `batch_1.genotypess_1.tsv` file. 459 loci are stored on the observed haplotype file `batch_1.haplotypes_1.tsv`.
 >
 
 ### Matches files
 >
->    Here are sample1.snps (left) and sample2.snps (right)
+>    Here are `sample1.snps` (left) and `sample2.snps` (right)
 >
 >    ![](../images/RAD2_Genetic_Map/denovo_map_matches1.png)
 >
->    Catalog_ID (= catalog Stacks_ID) is composed by the Stack_ID from the "reference" individual, here sample1, but number is different from sample2 Stack_ID. Thus, in the 'catalog.alleles.tsv', the Stack_ID numbered 3 correspond to the Stack_ID number 16 from sample2!
+>    Catalog_ID (= catalog Stacks_ID) is composed by the `Stack_ID` from the "reference" individual, here sample1, but number is different from sample2 `Stack_ID`. Thus, in the `catalog.alleles.tsv`, the `Stack_ID` numbered 3 correspond to the `Stack_ID` number 16 from sample2!
 >
 >    Here you can observe matches files (you maybe have to change the tsv datatype into a tabular one to display correctly the datasets).
 >
@@ -162,7 +162,7 @@ Run `Stacks: De novo map` Galaxy tool. This program will run ustacks, cstacks, a
 >
 
 # Genotypes determination
-> **Stacks: genotypes** :wrench:: Re-Run the last step of **Stacks: De novo map** pipeline specifying more options as: 
+> **Stacks: genotypes** :wrench:: Re-Run the last step of `Stacks: De novo map` pipeline specifying more options as: 
 >    > 1. The genetic map type (ie F1, F2 (left figure, F1xF1), Double Haploid, Back Cross (F1xF0), Cross Pollination (right figure, F1 or F2 but resulting from the croos of pure homozygous parents))
 >    >
 >    >    ![](../images/RAD2_Genetic_Map/Genetic_map_F2.png)    ![](../images/RAD2_Genetic_Map/Genetic_map_CrossPollination.png)
@@ -172,13 +172,13 @@ Run `Stacks: De novo map` Galaxy tool. This program will run ustacks, cstacks, a
 >    >
 >    > 3. Tresholds concernaing a minimal number of progeny and/or minimum stacks depth to consider a locus
 >    >
->    > 4. Automatic corrections. Concerning this last option, it's possible to to ask genotypes making automatic corrections on some errors as homozygous tags verification in the progeny to be sure a SNP is missing. Thus, if SNP detection model can't identify a site as heterygous or homozygous, this site is temporarily tagged as homozygous to facilitate the search, by sstacks, of concordance with the loci catalog. If a second allele is detected on the catalog (ie, in parents) is found on a progeny with a weak frequency (<10% of a stack reads), genotypes program can correct the genotype. Additionnaly, it will delete a homozygous genotype on a particular individual if locus genotype is supported by less than 5 reads. Thus corrected genotypes are marked uppercase.
+>    > 4. Automatic corrections. Concerning this last option, it's possible to to ask genotypes making automatic corrections on some errors as homozygous tags verification in the progeny to be sure a SNP is missing. Thus, if SNP detection model can't identify a site as heterygous or homozygous, this site is temporarily tagged as homozygous to facilitate the search, by sstacks, of concordance with the loci catalog. If a second allele is detected on the catalog (ie, in parents) is found on a progeny with a weak frequency (<10% of a stack reads number), genotypes program can correct the genotype. Additionnaly, it will delete a homozygous genotype on a particular individual if locus genotype is supported by less than 5 reads. Thus corrected genotypes are marked uppercase.
 >
 >    Here is an example of a locus originally marke as homozygous before automatic correction because on allele is supported by less than 5 reads. After correction, this locus is marked as heterygous.
 >
 >    ![](../images/RAD2_Genetic_Map/genotypes_automatic_correction.png)
 >
-> You can re-run **Stacks: genotypes** :wrench:: program modifying the number of genotyped progeny to consider a marker and thus be more or less stringent. Compare results.
+>    You can re-run **Stacks: genotypes** :wrench:: program modifying the number of genotyped progeny to consider a marker and thus be more or less stringent. Compare results.
 >
 ### Genotypes.tsv files
 >
