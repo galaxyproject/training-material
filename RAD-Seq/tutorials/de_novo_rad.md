@@ -88,7 +88,7 @@ For demultiplexing, we use the Process Radtags tool from [STACKS](http://www.g3j
 >    >
 >    >    <details>
 >    >    <summary>Click to view answers</summary>
->    >    <ol type="1">
+>    >    <ol type="2">
 >    >    <li>8895289 total reads</li>
 >    >    <li>8139531 retained reads</li>
 >    >    <li>Exploring the `results.log` file allows you to see that there is no sequences filtered for low quality statement. As we don't specify the corresponding advanced option, Process radtags didn't apply quality related filtering. So here, all not retained sequences are not recorded because of an ambiguous barcode or an ambiguous RAD-Tag. This means that some barcodes are not exactly what was specified on the barcode file and that sometimes, no SbfI restriction enzyme site was found. This can be due to some sequencing problems but here, this is also due to the addition, in the original sequencing library, of RAD-seq samples from another study. This is something often used to avoid having too much sequences beginning with the exact same nucleotides sequences and thus Illumina related issues during sequencing and clusters analysis </li>
