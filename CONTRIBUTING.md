@@ -81,7 +81,7 @@ Each training material is related to a topic. All training materials (slides, tu
 ├── tutorials
 ```
 
-> Want to add a new topic? Check out [how to add new topic](#how-do-i-add-content).
+> Want to add a new topic? Check out [how to add a new topic](#how-do-i-add-a-new-topic).
 
 ## `images` directory
 
