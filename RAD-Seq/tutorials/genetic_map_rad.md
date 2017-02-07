@@ -31,7 +31,7 @@ The original data is available at [STACKS website](http://creskolab.uoregon.edu/
 > 2. Import Fasta files from parents and 20 progenies.
 >
 >    > ### :nut_and_bolt: Comments
->    > If you are using the [GenOuest Galaxy instance](http://galaxy.genouest.org), you can load the dataset using 'Shared Data' <i class="fa fa-long-arrow-right"></i> 'Data Libraries' <i class="fa fa-long-arrow-right"></i> '1 Galaxy teaching folder' <i class="fa fa-long-arrow-right"></i> 'EnginesOn' <i class="fa fa-long-arrow-right"></i> 'RADseq' <i class="fa fa-long-arrow-right"></i> 'Genetic map' 
+>    > If you are using the [GenOuest Galaxy instance](http://galaxy.genouest.org), you can load the dataset using 'Shared Data' -> 'Data Libraries' -> '1 Galaxy teaching folder' -> 'EnginesOn' -> 'RADseq' -> 'Genetic map' 
 >
 >    > ### :bulb: Tip: Importing data via links
 >    >
@@ -75,7 +75,7 @@ Run `Stacks: De novo map` Galaxy tool. This program will run `ustacks`, `cstacks
 > Information on `denovo_map.pl` and its parameters can be found online: http://creskolab.uoregon.edu/stacks/comp/denovo_map.php.
 
 
-> **Stacks: De novo map** :wrench:: Run **Stacks** selecting the Genetic map usage. Specify each parent as a sample in the appropriate box, then each of the 20 progenies and specify a CP Cross type, 3 for the Minimum number of identical raw reads required to create a stack, 3 for minimum number of identical raw reads required to create a stack in 'progeny' individuals, 3 for the number of mismatches allowed between loci when building the catalog and activate the option "remove, or break up, highly repetitive RAD-Tags in the ustacks program".
+> **Stacks: De novo map** :wrench:: Run Stacks selecting the Genetic map usage. Specify each parent as a sample in the appropriate box, then each of the 20 progenies and specify a CP Cross type, 3 for the Minimum number of identical raw reads required to create a stack, 3 for minimum number of identical raw reads required to create a stack in 'progeny' individuals, 3 for the number of mismatches allowed between loci when building the catalog and activate the option "remove, or break up, highly repetitive RAD-Tags in the ustacks program".
 >
 >    ![](../images/RAD2_Genetic_Map/denovomap_in.png)
 
