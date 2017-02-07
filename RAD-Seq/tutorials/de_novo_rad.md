@@ -19,8 +19,7 @@ We here proposed to re-analyze these data at least until the population genomics
 >
 > 1. [Pretreatments](#pretreatments)
 > 2. [Building loci using STACKS](#building-loci-using-stacks)
-> 3. [SNP calling from radtag](#snp-calling-from-radtag)
-> 4. [Calculate population genomics statistics](#pop-genomics-stat)
+> 3. [Calculate population genomics statistics](#calculate-population-genomics-statistics)
 
 # Pretreatments
 
@@ -184,7 +183,7 @@ Run `Stacks: De novo map` Galaxy tool. This program will run ustacks, cstacks, a
 >    ![](../images/RAD4_Population_Genomics/denovo/denovo_out.png)
 >
 
-# SNP calling from radtag
+# Calculate population genomics statistics
 > **Stacks: populations** :wrench:: Run the last step of **Stacks: De novo map** pipeline specifying data filtering options (minimum percentage of individuals in a population required to process a locus for that population: 0.75 , output options (VCF and Structure) and enabling SNP and haplotype-based F statistics calculation.
 >
 >    ![](../images/RAD4_Population_Genomics/denovo/populations_in.png)
