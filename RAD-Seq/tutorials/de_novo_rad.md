@@ -73,7 +73,7 @@ For demultiplexing, we use the Process Radtags tool from [STACKS](http://www.g3j
 
 > ### :pencil2: Hands-on: Demultiplexing reads
 >
-> 1. **Process Radtags** :wrench:: Run `Stacks: process radtags` on FastQ file to demultiplex the reads. You have to 1/point a tabular file mapping sample names and barcodes, 2/select the sbfI enzyme used for restriction. Finally, ask to capture discarded reads to a file and execute.
+> 1. **Process Radtags** :wrench:: Run `Stacks: process radtags` on FastQ file to demultiplex the reads. You have to 1/point a tabular file mapping sample names and barcodes, 2/select the sbfI enzyme used for restriction. Finally, you can ask to capture discarded reads to a file (or not) and execute.
 >
 > ![](../images/RAD4_Population_Genomics/Process_radtags_in.png)
 >
@@ -99,7 +99,7 @@ For demultiplexing, we use the Process Radtags tool from [STACKS](http://www.g3j
 >
 > 2. **Process Radtags** :wrench:: Re-Run `Stacks: process radtags` on FastQ file playing with parameters 
 >
-> In `advanced options`, activate the `Discard reads with low quality scores` option and play with the score limit (default vs 20 for example) and examine the change in reads retained. Note that you can play also with the sliding window score threshold, by default 15% of the length of the read. This sliding window parameter allows notably the user to deal with the declining quality at the 3' end of reads.
+> In `advanced options`, after activation of the `Discard reads with low quality scores` option, play with the score limit (default vs 20 for example) and examine the change in reads retained. Note that you can play also with the sliding window score threshold, by default 15% of the length of the read. This sliding window parameter allows notably the user to deal with the declining quality at the 3' end of reads.
 >
 > ![](../images/RAD4_Population_Genomics/Process_radtags_in_advancedparameter0.PNG)
 >
