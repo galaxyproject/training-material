@@ -49,7 +49,6 @@ To download all training datasets (i.e reads, reference genome, population map f
 >
 >    > ### :bulb: Tip: Importing data via links
 >    >
->    > * Copy the link location
 >    > * Open the Galaxy Upload Manager
 >    > * Select **Paste/Fetch Data**
 >    > * Paste the following links into the text field
