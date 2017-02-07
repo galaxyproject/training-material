@@ -18,8 +18,9 @@ We here proposed to re-analyze these data at least until the population genomics
 > In this tutorial, we will deal with:
 >
 > 1. [Pretreatments](#pretreatments)
-> 2. [Building loci using STACKS](#snp-calling-from-radtags)
-> 3. [Calculate population genomics statistics](#pop-genomics-stat)
+> 2. [Building loci using STACKS](#building-loci-using-stacks)
+> 3. [SNP calling from radtag](#snp-calling-from-radtag)
+> 4. [Calculate population genomics statistics](#pop-genomics-stat)
 
 # Pretreatments
 
