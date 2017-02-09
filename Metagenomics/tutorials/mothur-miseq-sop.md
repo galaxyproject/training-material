@@ -121,26 +121,25 @@ create a collection now:
 > which will differ only by `_R1` or `_R2` in the filename. We can tell Galaxy about this paired naming
 > convention, so that our tools will know which files belong together.
 >
-> - Click on the **checkmark icon** at top of your history.
+> 1. Click on the **checkmark icon** at top of your history.
 >   ![](../../shared/images/history_menu_buttons2.png)
-> - Select all the fastq files (40 in total), then click on **for all selected..** and select
+>
+> 2. Select all the fastq files (40 in total), then click on **for all selected..** and select
 >   **Build List of Dataset Pairs** from the dropdown menu.
-> - In the next dialog window you can create the list of pairs. By default Galaxy will look for pairs
+> 3. In the next dialog window you can create the list of pairs. By default Galaxy will look for pairs
 >   of files that differ only by a `_1` and `_2` part in their names. In our case however, these
 >   should be `_R1` and `_R2`. Please change these values accordingly. You should now see a list of
 >   pairs suggested by Galaxy,
+>   ![](../images/create_collection.png) <br><br>
 >
->   ![](../images/create_collection.png)
->
-> - Examine the pairings, if it looks good, you can click on **auto-pair** to create the suggested
+> 4. Examine the pairings, if it looks good, you can click on **auto-pair** to create the suggested
 >   pairs.
->   ![](../images/create_collection2.png)
->
+>   ![](../images/create_collection2.png) <br><br>
 >   The middle segment is the name for each pair. You can change these names by clicking on them. These
 >   names will be used as sample names in the downstream analysis so always make sure they are
 >   informative.
 >
-> - Once you are happy with your pairings, enter a name for your new collection at the bottom right of
+> 5. Once you are happy with your pairings, enter a name for your new collection at the bottom right of
 >   the screen. Then click the **Create List** button. A new dataset collection item will now appear in
 >   your history.
 {: .hands_on}
@@ -220,7 +219,7 @@ read_name3  sample2
 ..
 ```
 
-### Cleaning our data
+### Data Cleaning
 
 Next we want to improve the quality of our data. But first, let's get a feel of our data
 
@@ -374,14 +373,19 @@ Mean:       1967.99  11550    252.462 0        4.36693
 total # of seqs:    128872
 ```
 
-So what does this mean? You'll see that the bulk of the sequences start at position 1968 and end at position 11550. Some sequences start at position 1250 or 1982 and end at 10693 or 13400. These deviants from the mode positions are likely due to an insertion or deletion at the terminal ends of the alignments. Sometimes you'll see sequences that start and end at the same position indicating a very poor alignment, which is generally due to non-specific amplification.
+So what does this mean? You'll see that the bulk of the sequences start at position 1968 and end at position 11550.
+Some sequences start at position 1250 or 1982 and end at 10693 or 13400. These deviants from the mode positions
+are likely due to an insertion or deletion at the terminal ends of the alignments. Sometimes you'll see sequences
+that start and end at the same position indicating a very poor alignment, which is generally due to non-specific amplification.
+
+### More Data Cleaning
+
+To make sure that everything overlaps the same region we'll re-run screen.seqs to get sequences that
+start at or before position 1968 and end at or after position 11550. We'll also set the maximum
+homopolymer length to 8 since there's nothing in the database with a stretch of 9 or more of the same
+base in a row (this also could have been done in the first execution of screen.seqs above).
 
 > ### :pencil2: Hands-on: Remove poorly aligned sequences
->
-> To make sure that everything overlaps the same region we'll re-run screen.seqs to get sequences that
-> start at or before position 1968 and end at or after position 11550. We'll also set the maximum
-> homopolymer length to 8 since there's nothing in the database with a stretch of 9 or more of the same
-> base in a row (this really could have been done in the first execution of screen.seqs above).
 >
 > - **Screen.seqs** :wrench: with the following parameters
 >   - "fasta" to the aligned fasta file
@@ -391,21 +395,21 @@ So what does this mean? You'll see that the bulk of the sequences start at posit
 >   - "count" to our most recent count_table
 >
 > **Note:** we supply the count table so that it can be updated for the sequences we're removing.
+>
+> > ### :question: Question
+> >
+> >  How many sequences were removed in this step?
+> > <details>
+> >   <summary> Click to view answer</summary>
+> >   128 sequences were removed. This is the number of lines in the bad.accnos output.
+> > </details>
+> {: .question}
 {: .hands_on}
 
 
-> ### :question: Question
->
->  How many sequences were removed in this step?
-> <details>
->   <summary> Click to view answer</summary>
->   128 sequences were removed. This is the number of lines in the bad.accnos output.
-> </details>
-{: .question}
-
 Now we know our sequences overlap the same alignment coordinates, we want to make sure they *only* overlap
 that region. So we'll filter the sequences to remove the overhangs at both ends. Since we've done
-paired-end sequencing, this shouldn't be much of an issue, but whatever. In addition, there are many
+paired-end sequencing, this shouldn't be much of an issue. In addition, there are many
 columns in the alignment that only contain gap characters (i.e. "."). These can be pulled out without
 losing any information. We'll do all this with filter.seqs:
 
@@ -433,18 +437,19 @@ This means that our initial alignment was 13425 columns wide and that we were ab
 > - **Unique.seqs** :wrench: with the following parameters
 >   - "fasta" to the `filtered fasta` output from Filter.seqs
 >   - "name file or count table" to the count table from the last Screen.seqs
+>
+> > ### :question: Question
+> >
+> >  How many duplicate sequences did our filter step produce?
+> > <details>
+> >   <summary> Click to view answer</summary>
+> >   3. <br
+> >   This can be seen in the log file, which tells us the number of sequences was reduced from 16298 to
+> >   16295
+> > </details>
+> {: .question}
 {: .hands_on}
 
-> ### :question: Question
->
->  How many duplicate sequences did our filter step produce?
-> <details>
->   <summary> Click to view answer</summary>
->   3. <br
->   This can be seen in the log file, which tells us the number of sequences was reduced from 16298 to
->   16295
-> </details>
-{: .question}
 
 ### Pre-clustering
 The next thing we want to do to further de-noise our sequences, is to pre-cluster the sequences using the
@@ -459,23 +464,22 @@ merged. We generally recommend allowing 1 difference for every 100 basepairs of 
 >   - "fasta" to the fasta output from the last Unique.seqs run
 >   - "name file or count table" to the count table from the last Unique.seqs
 >   - "diffs" to 2
-{: .hands_on}
-
-
-> ### :question: Question
 >
->  How many unique sequences are we left with after this clustering of highly similar sequences?
-> <details>
->   <summary> Click to view answer</summary>
->   5672. <br>
->   This is the number of lines in the fasta output
-> </details>
-{: .question}
+> > ### :question: Question
+> >
+> >  How many unique sequences are we left with after this clustering of highly similar sequences?
+> > <details>
+> >   <summary> Click to view answer</summary>
+> >   5672. <br>
+> >   This is the number of lines in the fasta output
+> > </details>
+> {: .question}
+{: .hands_on}
 
 
 ### Chimera Removal
 At this point we have removed as much sequencing error as we can, and it is time to turn our attention to
-removing chimeras.
+removing sequencing artefacts known as chimeras.
 
 > ### :book: Background: Chimeras
 > ![](../images/chimeras.jpg)
@@ -505,18 +509,18 @@ when they're the most abundant sequence in another sample. This is how we do it:
 >   - "accnos" to the uchime.accnos file from Chimera.uchime
 >   - "fasta" to the fasta output from Pre.cluster
 >
+> > ### :question: Question
+> >
+> >  How many sequences were flagged as chimeric? what is the percentage? (Hint: summary.seqs)
+> > <details>
+> >   <summary> Click to view answer</summary>
+> >   If we run summary.seqs on the resulting fasta file and count table, we see that we went from 128,655
+> >   sequences down to 119,330 sequences in this step, for a reduction of 7.3%. This is a reasonable number of
+> >   sequences to be flagged as chimeric.
+> > </details>
+> {: .question}
 {: .hands_on}
 
-> ### :question: Question
->
->  How many sequences were flagged as chimeric? what is the percentage? (Hint: summary.seqs)
-> <details>
->   <summary> Click to view answer</summary>
->   If we run summary.seqs on the resulting fasta file and count table, we see that we went from 128,655
->   sequences down to 119,330 sequences in this step, for a reduction of 7.3%. This is a reasonable number of
->   sequences to be flagged as chimeric.
-> </details>
-{: .question}
 
 
 ### Removal of non-bacterial sequences
@@ -547,27 +551,27 @@ Let's go ahead and classify those sequences using the Bayesian classifier with t
 > select taxons for filtering*
 >   - "fasta" to the fasta output from Remove.seqs
 >   - "count" to count table from Chimera.uchime
+>
+> > ### :question: Questions
+> >
+> > 1. How many unique (representative) sequences were removed in this step?
+> >  2. How many sequences in total?
+> >
+> >    <details>
+> >      <summary> Click to view answer</summary><br>
+> >      20 representative sequences were removed. <br>
+> >      The fasta file output from Remove.seqs had 2628 sequences while the fasta output from Remove.lineages
+> >      contained 2608 sequences.
+> >      <br><br>
+> >      162 total sequences were removed. <br>
+> >      If you run summary.seqs with the count table, you will see that we now have 2608 unique sequences
+> >      representing a total of 119,168 total sequences (down from 119,330 before). This means 162 of our  
+> >      sequences were in represented by these 20 representative sequences.
+> >    </details>
+> {: .question}
 {: .hands_on}
 
 Also of note is that *unknown* only pops up as a classification if the classifier cannot classify your sequence to one of the domains.
-
-> ### :question: Questions
->
-> 1. How many unique (representative) sequences were removed in this step?
-> 2. How many sequences in total?
->
->    <details>
->      <summary> Click to view answer</summary><br>
->      20 representative sequences were removed. <br>
->      The fasta file output from Remove.seqs had 2628 sequences while the fasta output from Remove.lineages
->      contained 2608 sequences.
->      <br><br>
->      162 total sequences were removed. <br>
->      If you run summary.seqs with the count table, you will see that we now have 2608 unique sequences
->      representing a total of 119,168 total sequences (down from 119,330 before). This means 162 of our  
->      sequences were in represented by these 20 representative sequences.
->    </details>
-{: .question}
 
 At this point we have curated our data as far as possible and we're ready to see what our error rate is.
 
@@ -659,17 +663,19 @@ We can now cluster the mock sequences into OTUs to see how many spurious OTUs we
 >
 > - **Rarefaction.single** :wrench: with the following parameters
 >   - "shared" to the shared file from Make.shared
+>
+> > ### :question: Question
+> >
+> >  How many OTUs were identified in our mock community?
+> > <details>
+> >   <summary> Click to view answer</summary>
+> >   34. <br>
+> >   Open the shared file or OTU list and look at the header line. You will see a column for each OTU
+> >  </details>
+> {: .question}
 {: .hands_on}
 
-> ### :question: Question
->
->  How many OTUs were identified in our mock community?
-> <details>
->   <summary> Click to view answer</summary>
->   34. <br>
->   Open the shared file or OTU list and look at the header line. You will see a column for each OTU
->  </details>
-{: .question}
+
 
 Open the rarefaction output (dataset named `sobs` inside the `rarefaction curves` output collection). You'll see that for 4060 sequences, we'd have 34 OTUs from the Mock community. This number of course includes some stealthy chimeras that escaped our detection methods. If we used 3000 sequences, we would have about 31 OTUs. In a perfect world with no chimeras and no sequencing errors, we'd have 20 OTUs. This is not a perfect world. But this is pretty darn good!
 
@@ -1106,17 +1112,19 @@ tool:
 >   - "phylip" to dist files collection from Dist.shared
 >   - "mindim" to `3`
 >   - "maxdim" to `3`
+>
+> > ### :question: Question
+> >
+> > What are stress and R-squared values when using 3 dimensions?
+> >
+> > <details>
+> >   <summary> Click to view answer</summary>
+> >   The stress value drops to 0.05 and the R2 value goes up to 0.99 (see logfile). Not bad.
+> > </details>
+> {: .question}
 {: .hands_on}
 
-> ### :question: Question
->
-> What are stress and R-squared values when using 3 dimensions?
->
-> <details>
->   <summary> Click to view answer</summary>
->   The stress value drops to 0.05 and the R2 value goes up to 0.99 (see logfile). Not bad.
-> </details>
-{: .question}
+
 
 In general, we would like a stress value below 0.20 and a value below 0.10 is even better. Thus, we can conclude that, NMDS is better than PCoA. We can plot the three dimensions of the NMDS data by plotting the contents of the `axes` file. <!-- TODO: tool for 3D plots in Galaxy? -->
 
