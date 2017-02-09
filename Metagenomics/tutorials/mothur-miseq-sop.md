@@ -1545,4 +1545,7 @@ innermost ring labeled "Bacteria"
 
 # Conclusion
 
-You have now seen how to perform the Schloss lab's Standard Operating Procedure for MiSeq data.
+You have now seen how to perform the Schloss lab's Standard Operating Procedure (SOP) for MiSeq data.
+You have worked your way through the following pipeline:
+
+![](../images/mothur_sop_pipeline.jpg)
