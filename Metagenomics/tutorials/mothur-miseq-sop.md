@@ -703,7 +703,13 @@ Now that we have assessed our error rates we are ready for some real analysis.
 ## Preparing for analysis
 
 ### Removing Mock sample
-We're almost to the point where you can have some fun with your data (I'm already having fun, aren't you?). We'd like to do two things - assign sequences to OTUs and phylotypes. But first, we want to remove the Mock sample from our dataset using the remove.groups command:
+We're almost to the point where you can have some fun with your data (I'm already having fun, aren't you?).
+Next, we would assign sequences to OTUs, but first, we should remove the Mock sample from our dataset, it has
+served its purpose by allowing us to estimate our error rate, but in subsequent steps we only want to use
+our real samples.
+
+using
+the `remove.groups` command:
 
 > ### :pencil2: Hands-on: Remove Mock community from our dataset
 >
