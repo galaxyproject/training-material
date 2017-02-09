@@ -856,7 +856,7 @@ Let's start our analysis by analyzing the alpha diversity of the samples. First 
 curves describing the number of OTUs observed as a function of sampling effort. We'll do this with the
 `Rarefaction.single` command:
 
-> ### :pencil2:-Hands-on: Rarefaction
+> ### :pencil2: Hands-on: Calculate Rarefaction
 > - **Rarefaction.single** :wrench: with the following parameters
 >   - "shared" to shared file from Make.shared
 {: .hands_on}
@@ -879,7 +879,7 @@ to see is the number of additional OTUs identified when adding more sequences re
 we have covered our full diversity. This information would be easier to interpret in the form of a graph.
 Let's plot the rarefaction curve for a couple of our sequences:
 
-> ### :pencil2: Hands-on: Plotting Rarefaction
+> ### :pencil2: Hands-on: Plot Rarefaction
 > <!-- the following tool is because plotting tool will not detect columns in files inside collections yet -->
 > First let's make our life a little bit easier. As we only have one dataset in our collection anyways, we can
 > collapse it into a single file.
