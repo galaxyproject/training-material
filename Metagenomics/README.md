@@ -5,27 +5,20 @@ Topic name
 
 # Slides
 
-Information on where the slide decks can be found, generally `http://bgruening.github.io/training-material/<topic_name>/slides/index.html` and what is inside the slide decks.
-
 # Tutorials
 
-## Metagenomics with Mothur: MiSeq SOP
+## 16S Microbial Analysis with Mothur: MiSeq SOP
 
 **Trainer/admin instructions:**
 
-The following contains instructions on configuring your Galaxy instance for this tutorial:
+Instructions for configuring your Galaxy instance for this tutorial:
 
 - Tools:
   - mothur suite (MTS, owner: iuc)
-  - regex find and replace (MTS, owner: jjohnson)
   - xy_plot (MTS, owner: devteam)
   - collapse_collections (MTS, owner nml)
   - newick_display (MTS, owner dcorreia)
   - krona_text (MTS, owner saskia_hiltemann)
-
-- Data
-  - Get from zenodo here: TODO
-  - Optional: put in a data library named *Galaxy training: Metagenomics with Mothur - MiSeq SOP* to prevent mass uploading during a class (training manual instruct users to check for presence of this data library before uploading data themselves). Create a subfolder named *Input Data* and put the contents of `input_data.zip` there. Also create another folder named *Reference Data* and place contents of reference_data.zip there.
 
 - Galaxy Config
   - Requires at least Galaxy version 16.04 (for Phinch external display application)
@@ -38,6 +31,7 @@ The following contains instructions on configuring your Galaxy instance for this
     }
     ```
   - For viewing of the html outputs in Galaxy (e.g. Krona, tools that output SVGs wrapped in HTML), change the following line in your galaxy.ini file  `sanitize_all_html = False`.
+  - For viewing SVGs directly withing galaxy, set `serve_xss_vulnerable_mimetypes = True` in `galaxy.ini`
 
 ## Input datasets
 
@@ -60,23 +54,7 @@ It will launch a flavored Galaxy instance available on
 
 ## Books
 
-**Name et al:** [*Book name*](link/to/the/book)
-
-    One line to describe why the book is interesting for this topic
-
-**Name et al:** [*Book name*](link/to/the/book)
-
-    One line to describe why the book is interesting for this topic
-
 ## Papers
-
-**Name et al:** [*Article name*](link/to/the/article)
-
-    One line to describe why the article is interesting for this topic
-
-**Name et al:** [*Article name*](link/to/the/article)
-
-    One line to describe why the article is interesting for this topic
 
 ## Websites
 
@@ -84,12 +62,12 @@ It will launch a flavored Galaxy instance available on
 
 This material is maintained by:
 
-- Maintainer 1
+- Saskia Hiltemann
 - Maintainer 2
 
 For any question related to this topic and the content, you can contact them.
 
 The following individuals have contributed to this training material:
 
-- Name 1
-- Name 2
+- Saskia Hiltemann
+- Stefan Boers
