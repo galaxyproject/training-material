@@ -177,7 +177,7 @@ fragment, resulting in an overlap in the middle. We will now combine these pairs
 
 > ### :pencil2: Hands-on: Combine forward and reverse reads into contigs
 >
-> - **Make.contigs** :wrench: with the following parameters:
+> - **Make.contigs** :wrench: with the following parameters
 >   - "Fastq pair" to the *collection* you created in the previous step
 >   - Leave all other parameters to the default settings <br><br>
 >
@@ -200,11 +200,11 @@ file. To retain knowledge of which reads belong to which samples, we will also c
 
 > ### :pencil2: Hands-on: Merge sample data
 >
-> 1. **Merge.files** :wrench: with the following parameters:
+> 1. **Merge.files** :wrench: with the following parameters
 >   - "merge" to *fasta files*
 >   - "inputs" to the `trim.contigs.fasta` *collection* output of the previous step <br><br>
 >
-> 2. **Make.group** :wrench: with the following parameters:
+> 2. **Make.group** :wrench: with the following parameters
 >   - "Method" to *Automatically from collection*
 >   - "fasta collection" to the `trim.contigs.fasta` output of the make.contigs step
 >
@@ -262,7 +262,7 @@ The following tool will remove any sequences with ambiguous bases and anything l
 
 > ### :pencil2: Hands-on: Filter reads based on quality and length
 >
-> - **Screen.seqs** :wrench: with the following parameters:
+> - **Screen.seqs** :wrench: with the following parameters
 >   - "fasta" to the merged fasta file from merge.files
 >   - "group" the group file we created in with make.group
 >   - "maxlength" parameter to `275`
@@ -887,12 +887,12 @@ Let's plot the rarefaction curve for a couple of our sequences:
 > First let's make our life a little bit easier. As we only have one dataset in our collection anyways, we can
 > collapse it into a single file.
 >
-> - **Collapse** :wrench: with the following parameters Collection
+> - **Collapse Collection** :wrench: with the following parameters
 >   - "Collection of files to collapse to a single dataset" to the rarefaction curve collection
 >
 > Now we are ready to plot our rarefaction curves:
 >
-> - **Plotting** :wrench: with the following parameters tool
+> - **Plotting tool** :wrench: with the following parameters
 >   - "Plot Title" to `Rarefaction`
 >   - "Label for x axis" to `Number of Sequences`
 >   - "Label for y axis" to `Number of OTUs`
@@ -999,7 +999,7 @@ Let's take a look at the Venn diagrams for the first 4 time points of female 3 u
 > <!-- need to collapse collection again for group select to work -->
 > First we collapse our collection again
 >
-> - **Collapse** :wrench: with the following parameters Collection
+> - **Collapse Collection** :wrench: with the following parameters
 >   - "Collection" to Subsample.shared output collection from Sub.sample step
 >
 > After the tool has finished, rename the output to `Subsample.shared` to make it easier to recognize in
@@ -1027,7 +1027,7 @@ dendrogram using the jclass and thetayc calculators within the `tree.shared` com
 >   - "Select input format" to Phylip Distance Matrix
 >   - "phylip" to dist files from Dist.shared (collection)
 >
-> 2. **Newick** :wrench: with the following parameters display
+> 2. **Newick display** :wrench: with the following parameters
 >  - "Newick file" to output from Tree.shared (collection)
 {: .hands_on}
 
@@ -1052,7 +1052,7 @@ will first need to create a design file that indicates which treatment each samp
 >
 > - Import the file called `mouse.time.design` to your history
 >   - Go to the shared data library or the files you downloaded from Zenodo.
->   - Make sure the datatype > is set to `mothur.design`.
+> - Make sure the datatype is set to `mothur.design`.
 >
 > > ### :bulb: Changing datatype of a datasets
 > >  - Click on the **pencil icon** of the dataset
@@ -1153,7 +1153,7 @@ tool:
 > ### :pencil2: Hands-on: Nmds
 >
 > - **Nmds** :wrench: with the following parameters
->  - "phylip" to dist files from Dist.shared (collection)
+>   - "phylip" to dist files from Dist.shared (collection)
 >
 > Opening the `stress` file for `thetayc.0.03.lt.ave` we can inspect the stress and R^2 values, which describe
 > the quality of the ordination. Each line in this file represents a different iteration and the configuration
@@ -1497,7 +1497,7 @@ instance we can convert our shared file to the more widely used `biom` format an
 > - **Make.biom** :wrench: with the following parameters
 >   - "shared" to Subsample.shared
 >   - "constaxonomy" to taxonomy output from Classify.otu (collection)
->  - "metadata" to `mouse.dpw.metadata`
+>   - "metadata" to `mouse.dpw.metadata`
 >
 > The Galaxy project runs an instance of Phinch, and if you look at the output biom file, you will see a link
 > to view the file at Phinch:
