@@ -73,7 +73,8 @@ setup, we additionally resequenced a mock community composed of genomic DNA from
 > in the mock community that were sequenced in fasta format.
 {: .comment}
 
-<!-- note: mothur seems to have forgotten day 4 in their SOP example data, therefore this description and results in this document differ slightly from the description on their website -->
+<!-- note: mothur seems to have forgotten day 4 in their SOP example data, therefore this description and results
+in this document differ slightly from the description on their website -->
 
 
 ## Importing the data into Galaxy
@@ -160,7 +161,8 @@ remembering which reads came from which samples using a *group* file.
 > across the alignment and identify any positions where the two reads disagree. If one sequence has a
 > base and the other has a gap, the quality score of the base must be over 25 to be considered real. If
 > both sequences have a base at that position, then we require one of the bases to have a quality score
-> 6 or more points better than the other. If it is less than 6 points better, then we set the consensus > base to an N.
+> 6 or more points better than the other. If it is less than 6 points better, then we set the consensus
+> base to an N.
 {: .comment}
 
 ### Merging our data
@@ -344,7 +346,8 @@ the number of duplicates of this sequence observed in each sample.
 
 ### Sequence Alignment
 
-For more information on the topic of alignment, please see our training materials [here](https://galaxyproject.github.io/training-material/NGS-mapping/)
+For more information on the topic of alignment, please see our training materials
+[here](https://galaxyproject.github.io/training-material/NGS-mapping/)
 
 We are now ready to align our sequences to the reference.
 
@@ -379,7 +382,8 @@ total # of seqs:    128872
 So what does this mean? You'll see that the bulk of the sequences start at position 1968 and end at position 11550.
 Some sequences start at position 1250 or 1982 and end at 10693 or 13400. These deviants from the mode positions
 are likely due to an insertion or deletion at the terminal ends of the alignments. Sometimes you'll see sequences
-that start and end at the same position indicating a very poor alignment, which is generally due to non-specific amplification.
+that start and end at the same position indicating a very poor alignment, which is generally due to non-specific
+amplification.
 
 ### More Data Cleaning
 
@@ -433,7 +437,10 @@ Length of the original alignment: 13425
 Number of sequences used to construct filter: 16298
 ```
 
-This means that our initial alignment was 13425 columns wide and that we were able to remove 13049 terminal gap characters using `trump=.` and vertical gap characters using `vertical=yes`. The final alignment length is 376 columns. Because we've perhaps created some redundancy across our sequences by trimming the ends, we can re-run unique.seqs:
+This means that our initial alignment was 13425 columns wide and that we were able to remove 13049 terminal gap
+characters using `trump=.` and vertical gap characters using `vertical=yes`. The final alignment length is 376
+columns. Because we've perhaps created some redundancy across our sequences by trimming the ends, we can re-run
+`unique.seqs`:
 
 > ### :pencil2: Hands-on: Re-obtain unique sequences
 >
@@ -528,9 +535,14 @@ when they're the most abundant sequence in another sample. This is how we do it:
 
 ### Removal of non-bacterial sequences
 
-As a final quality control step, we need to see if there are any "undesirables" in our dataset. Sometimes when we pick a primer set they will amplify other stuff that survives to this point in the pipeline, such as 18S rRNA gene fragments or 16S rRNA from Archaea, chloroplasts, and mitochondria. There's also just the random stuff that we want to get rid of.
+As a final quality control step, we need to see if there are any "undesirables" in our dataset. Sometimes when
+we pick a primer set they will amplify other stuff that survives to this point in the pipeline, such as
+18S rRNA gene fragments or 16S rRNA from Archaea, chloroplasts, and mitochondria. There's also just the
+random stuff that we want to get rid of.
 
-Now you may say, "But wait I want that stuff". Fine. But, the primers we use, are only supposed to amplify members of the Bacteria and if they're hitting Eukaryota or Archaea, then it is a mistake. Also, realize that chloroplasts and mitochondria have no functional role in a microbial community.
+Now you may say, "But wait I want that stuff". Fine. But, the primers we use, are only supposed to amplify
+members of the Bacteria and if they're hitting Eukaryota or Archaea, then it is a mistake. Also, realize
+that chloroplasts and mitochondria have no functional role in a microbial community.
 
 Let's go ahead and classify those sequences using the Bayesian classifier with the `classify.seqs` command:
 
@@ -574,14 +586,18 @@ Let's go ahead and classify those sequences using the Bayesian classifier with t
 > {: .question}
 {: .hands_on}
 
-Also of note is that *unknown* only pops up as a classification if the classifier cannot classify your sequence to one of the domains.
+Also of note is that *unknown* only pops up as a classification if the classifier cannot classify your
+sequence to one of the domains.
 
 At this point we have curated our data as far as possible and we're ready to see what our error rate is.
 
 
 ## Assessing error rates based on our mock community
 
-Measuring the error rate of your sequences is something you can only do if you have co-sequenced a mock community. This is something we include for every 95 samples we sequence. You should too because it will help you gauge your error rates and allow you to see how well your curation is going, and whether something is wrong with your sequencing setup.
+Measuring the error rate of your sequences is something you can only do if you have co-sequenced a mock
+community. This is something we include for every 95 samples we sequence. You should too because it will
+help you gauge your error rates and allow you to see how well your curation is going, and whether something
+is wrong with your sequencing setup.
 
 > ### :pencil2: Hands-on: Assess error rates based on a mock community
 >
@@ -680,7 +696,11 @@ We can now cluster the mock sequences into OTUs to see how many spurious OTUs we
 
 
 
-Open the rarefaction output (dataset named `sobs` inside the `rarefaction curves` output collection). You'll see that for 4060 sequences, we'd have 34 OTUs from the Mock community. This number of course includes some stealthy chimeras that escaped our detection methods. If we used 3000 sequences, we would have about 31 OTUs. In a perfect world with no chimeras and no sequencing errors, we'd have 20 OTUs. This is not a perfect world. But this is pretty darn good!
+Open the rarefaction output (dataset named `sobs` inside the `rarefaction curves` output collection).
+You'll see that for 4060 sequences, we'd have 34 OTUs from the Mock community. This number of course
+includes some stealthy chimeras that escaped our detection methods. If we used 3000 sequences, we would
+have about 31 OTUs. In a perfect world with no chimeras and no sequencing errors, we'd have 20 OTUs.
+This is not a perfect world. But this is pretty darn good!
 
 > ### :book: Background: Rarefaction
 >
@@ -722,7 +742,8 @@ the `remove.groups` command:
 
 ### Clustering sequences into OTUs
 
-Now, we have a couple of options for clustering sequences into OTUs. For a small dataset like this, we could do the traditional approach using `dist.seqs` and `cluster` as we did with the Mock sample.
+Now, we have a couple of options for clustering sequences into OTUs. For a small dataset like this, we could
+do the traditional approach using `dist.seqs` and `cluster` as we did with the Mock sample.
 
 The alternative is to use the `cluster.split` command. In this approach, we use the taxonomic information to
 split the sequences into bins and then cluster within each bin. The Schloss lab have published results
@@ -778,9 +799,11 @@ Otu007    513     Bacteria(100);Firmicutes(100);Clostridia(100);Clostridiales(10
 Otu008    1442    Bacteria(100);Firmicutes(100);Clostridia(100);Clostridiales(100);Lachnospiraceae(100);unclassified(100);
 ```
 
-This example file is telling you that Otu001 was observed 17 times in your samples and that all of the sequences (100%) were classified as being members of the Akkermansia.
+This example file is telling you that Otu001 was observed 17 times in your samples and that all of the
+sequences (100%) were classified as being members of the Akkermansia.
 
-In this tutorial we will continue with this otu-based approach, for the phylotype and phylogenic approaches, please refer to the [Mothur wiki page](http://www.mothur.org/wiki/MiSeq_SOP).
+In this tutorial we will continue with this otu-based approach, for the phylotype and phylogenic
+approaches, please refer to the [Mothur wiki page](http://www.mothur.org/wiki/MiSeq_SOP).
 
 # OTU-based Analysis
 
@@ -866,13 +889,20 @@ Let's plot the rarefaction curve for a couple of our sequences:
 >
 {: .hands_on}
 
-From the resulting image we can see that the rarefaction curves for all samples have started to level off so we are confident we cover a large part of our sample diversity.
+From the resulting image we can see that the rarefaction curves for all samples have started to level
+off so we are confident we cover a large part of our sample diversity.
 
 ![](../images/rarefaction_curves.png)
 
-Alas, rarefaction is not a measure of richness, but a measure of diversity. If you consider two communities with the same richness, but different evenness then after sampling a large number of individuals their rarefaction curves will asymptote to the same value. Since they have different evennesses the shapes of the curves will differ. Therefore, selecting a number of individuals to cutoff the rarefaction curve isn't allowing a researcher to compare samples based on richness, but their diversity.
+Alas, rarefaction is not a measure of richness, but a measure of diversity. If you consider two communities
+with the same richness, but different evenness then after sampling a large number of individuals their
+rarefaction curves will asymptote to the same value. Since they have different evennesses the shapes of
+the curves will differ. Therefore, selecting a number of individuals to cutoff the rarefaction curve isn't
+allowing a researcher to compare samples based on richness, but their diversity.
 
-Finally, let's get a table containing the number of sequences, the sample coverage, the number of observed OTUs, and the Inverse Simpson diversity estimate using the `Summary.single` command. To standardize everything, let's randomly select 2441 sequences from each sample 1000 times and calculate the average:
+Finally, let's get a table containing the number of sequences, the sample coverage, the number of observed
+OTUs, and the Inverse Simpson diversity estimate using the `Summary.single` command. To standardize everything,
+let's randomly select 2441 sequences from each sample 1000 times and calculate the average:
 
 > ### :pencil2: Hands-on: Summary.single
 >
@@ -907,7 +937,10 @@ label   group   sobs          coverage    invsimpson   invsimpson_lci   invsimps
 0.03    F3D9    162.000000    0.994803    24.120541    23.105499        25.228865       5773.000000
 ```
 
-Interestingly, the sample coverages were all above 97%, indicating that we did a pretty good job of sampling the communities. Plotting the richness or diversity of the samples would show that there was little difference between the different animals or between the early and late time points. You could follow this up with a repeated-measures ANOVA and find that there was no significant difference based on sex or early vs. late.
+Interestingly, the sample coverages were all above 97%, indicating that we did a pretty good job of sampling
+the communities. Plotting the richness or diversity of the samples would show that there was little difference
+between the different animals or between the early and late time points. You could follow this up with a
+repeated-measures ANOVA and find that there was no significant difference based on sex or early vs. late.
 
 ## Beta diversity
 
@@ -1041,7 +1074,8 @@ F3D8     Early
 F3D9     Early
 ```
 
-Using the `parsimony` command let's look at the pairwise comparisons. Specifically, let's focus on the early vs. late comparisons for each mouse:
+Using the `parsimony` command let's look at the pairwise comparisons. Specifically, let's focus on the
+early vs. late comparisons for each mouse:
 
 > ### :pencil2: Hands-on: Compare Early-vs-Late
 > - **Parsimony** :wrench: with the following parameters
@@ -1056,11 +1090,14 @@ Tree#   Groups      ParsScore   ParsSig
 1       Early-Late  1           0.001
 ```
 
-There was clearly a significant difference between the clustering of the early and late time points. Recall that this method ignores the branch length.
+There was clearly a significant difference between the clustering of the early and late time points.
+Recall that this method ignores the branch length.
 
-The two distance matrices that we generated earlier (i.e. `jclass.0.03.lt.ave.dist` and `thetayc.0.03.lt.ave.dist`) can then be visualized using the pcoa or nmds plots.
+The two distance matrices that we generated earlier (i.e. `jclass.0.03.lt.ave.dist` and
+    `thetayc.0.03.lt.ave.dist`) can then be visualized using the pcoa or nmds plots.
 
-Principal Coordinates (PCoA) uses an eigenvector-based approach to represent multidimensional data in as few dimensions as possible. Our data is highly dimensional (~9 dimensions).
+Principal Coordinates (PCoA) uses an eigenvector-based approach to represent multidimensional
+data in as few dimensions as possible. Our data is highly dimensional (~9 dimensions).
 
 > ### :pencil2: Hands-on: PCoA
 >
@@ -1068,8 +1105,8 @@ Principal Coordinates (PCoA) uses an eigenvector-based approach to represent mul
 >   - "phylip" to dist files from Dist.shared (collection)
 {: .hands_on}
 
-The loadings files will tell you what fraction of the total variance in the data are represented by each of
-the axes. For instance the loading file for `thetayc.0.03.lt.ave` looks something like:
+The loadings files will tell you what fraction of the total variance in the data are represented
+by each of the axes. For instance the loading file for `thetayc.0.03.lt.ave` looks something like:
 
 ```
 axis  loading
@@ -1081,8 +1118,8 @@ axis  loading
 ...
 ```
 
-In this case the first and second axis represent about 45 and 14% of the variation (59% of the total) for the
-thetaYC distances. The output to the logfile:
+In this case the first and second axis represent about 45 and 14% of the variation (59% of the total)
+for the thetaYC distances. The output to the logfile:
 
 ```
 Processing...
@@ -1135,7 +1172,9 @@ tool:
 
 
 
-In general, we would like a stress value below 0.20 and a value below 0.10 is even better. Thus, we can conclude that, NMDS is better than PCoA. We can plot the three dimensions of the NMDS data by plotting the contents of the `axes` file. <!-- TODO: tool for 3D plots in Galaxy? -->
+In general, we would like a stress value below 0.20 and a value below 0.10 is even better. Thus, we can conclude that,
+NMDS is better than PCoA. We can plot the three dimensions of the NMDS data by plotting the contents of the `axes`
+file. <!-- TODO: tool for 3D plots in Galaxy? -->
 
 Again, it is clear that the early and late samples cluster separately from each other. Ultimately, ordination
 is a data visualization tool. We might ask if the spatial separation that we see between the early and late
@@ -1184,7 +1223,9 @@ We see that there is a significant difference in the variation with the early sa
 of variation (0.061) than the late samples (0.008). This was what we found in the original study - the early
 samples were less stable than the late samples.
 
-Next, we might ask which OTUs are responsible for shifting the samples along the two axes. We can determine this by measuring the correlation of the relative abundance of each OTU with the two axes in the NMDS dataset. We do this with the `corr.axes` tool:
+Next, we might ask which OTUs are responsible for shifting the samples along the two axes. We can determine
+this by measuring the correlation of the relative abundance of each OTU with the two axes in the NMDS dataset.
+We do this with the `corr.axes` tool:
 
 > ### :pencil2: Hands-on: Correlation
 >
@@ -1355,7 +1396,7 @@ These data tell us that OTUs 1, 2, and 3 was significantly different between the
 
 > ### :question: Question
 >
->  Which of the top 10 OTUs in your output were significantly different beween early and late samples?
+>  Which of the top 10 OTUs in your output were significantly different between early and late samples?
 >
 > <details>
 >  <summary> Click to view answer</summary>
@@ -1386,9 +1427,11 @@ Otu0004    4.4691      -
 Otu0005    4.84546     -
 ```
 
-Again, OTUs 1, 2, and 3 are significantly different between the two groups and are significantly elevated in the late samples
+Again, OTUs 1, 2, and 3 are significantly different between the two groups and are significantly elevated in the
+late samples
 
-Finally, Mothur has an implementation of the random forest algorithm build into her as classify.rf. This will tell us which features (i.e. OTUs) are useful in discriminating between the two groups of samples:
+Finally, Mothur has an implementation of the random forest algorithm build into her as classify.rf. This will tell
+us which features (i.e. OTUs) are useful in discriminating between the two groups of samples:
 
 > ### :pencil2: Hands-on: Classify.rf
 >
@@ -1410,7 +1453,8 @@ Late    0        10      0
 time    0        0       0
 ```
 
-We can ignore the time row and column and see that our samples were all correctly assigned to the proper groups. Looking at `summary` output, we see the top 10 OTUs that resulted in the greatest mean decrease in activity were:
+We can ignore the time row and column and see that our samples were all correctly assigned to the proper groups.
+Looking at `summary` output, we see the top 10 OTUs that resulted in the greatest mean decrease in activity were:
 
 ```
 OTU        Mean decrease accuracy
@@ -1428,7 +1472,7 @@ Otu0042    0.07
 
 # Step 4: Visualisations
 
-Mothur does not have a lot of visualisation tools built in, but external tools may be used for this. For
+Mothur does not have a lot of visualization tools built in, but external tools may be used for this. For
 instance we can convert our shared file to the more widely used `biom` format and view it in a platform like
 [Phinch](http://www.phinch.org/).
 
@@ -1463,7 +1507,8 @@ A second tool we can use to visualize our data, is [Krona]()
 >   - Set **Is this output from mothur?** to yes
 {: .hands_on}
 
-The resulting file is an HTML file containing an interactvie visualisation. For instance try double-clicking the innermost ring labeled "Bacteria"
+The resulting file is an HTML file containing an interactive visualization. For instance try double-clicking the
+innermost ring labeled "Bacteria"
 
 ![](../images/krona.png)
 
