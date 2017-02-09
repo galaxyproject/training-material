@@ -1023,14 +1023,11 @@ dendrogram using the jclass and thetayc calculators within the `tree.shared` com
 
 > ### :pencil2: Tree
 >
-> - **Tree.shared** :wrench: with the following parameters
+> 1. **Tree.shared** :wrench: with the following parameters
 >   - "Select input format" to Phylip Distance Matrix
 >   - "phylip" to dist files from Dist.shared (collection)
 >
-> Looking at the output we see it is just text, not very informative in its current form, so let's draw the
-> trees:
->
-> - **Newick** :wrench: with the following parameters display
+> 2. **Newick** :wrench: with the following parameters display
 >  - "Newick file" to output from Tree.shared (collection)
 {: .hands_on}
 
@@ -1057,14 +1054,14 @@ will first need to create a design file that indicates which treatment each samp
 >   - Go to the shared data library or the files you downloaded from Zenodo.
 >   - Make sure the datatype > is set to `mothur.design`.
 >
+> > ### :bulb: Changing datatype of a datasets
+> >  - Click on the **pencil icon** of the dataset
+> >  - Click on the **Datatype** tab
+> >  - Select the new datatype from dropdown menu
+> >  - Click **Save**
+> {: .tip}
 {: .hands_on}
 
-> ### :bulb: Changing datatype of a datasets
->  - Click on the **pencil icon** of the dataset
->  - Click on the **Datatype** tab
->  - Select the new datatype from dropdown menu
->  - Click **Save**
-{: .tip}
 
 The design file look something like this:
 
@@ -1519,7 +1516,7 @@ A second tool we can use to visualize our data, is [Krona]()
 
 > ### :pencil2: Hands-on: Krona
 >
-> - **Visualize** :wrench: with the following parameters with Krona
+> - **Visualize with Krona** :wrench: with the following parameters
 >   - "input file" to taxonomy output from Classify.otu (collection)
 >   - Set **Is this output from mothur?** to yes
 {: .hands_on}
