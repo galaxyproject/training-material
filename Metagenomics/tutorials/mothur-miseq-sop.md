@@ -36,7 +36,7 @@ creators of the Mothur software package, the [Schloss lab](http://www.schlosslab
 > ### :nut_and_bolt: Note
 > Each of the Mothur tools in Galaxy contains a link to the mothur wiki in the help section. Here you can find
 > more details about all the inputs, outputs and parameters for the tool.
-> <br>
+> <br><br>
 > Your results may deviate slightly from the ones presented in this tutorial due to differing tool or
 > reference data versions or stochastic processes in the algorithms.
 {: .comment}
@@ -163,43 +163,48 @@ remembering which reads came from which samples using a *group* file.
 > 6 or more points better than the other. If it is less than 6 points better, then we set the consensus > base to an N.
 {: .comment}
 
+### Merging our data
 
-> ### :pencil2: Hands-on: Merging samples
+#### Make contigs from paired-end reads
+
+In this experiment we used paired-end sequencing, this means sequencing was done from from both ends of each
+fragment, resulting in an overlap in the middle. We will now combine these pairs of reads into *contigs*.
+
+![](../images/16S_merge_contigs.png)
+
+
+> ### :pencil2: Hands-on: Combine forward and reverse reads into contigs
 >
-> **1: Combine forward and reverse reads**  
->
-> - **Tool:** Make.contigs
-> - **Parameters:**
->   - Set `Fastq pair` to the collection you created in the previous step
->   - Leave all other parameters to the default settings
->
-> The output from this tool will be 6 new collections, one for each type of output file (e.g. one
-> collection with the `trim.contig.fasta` files for each pair, and another for all `scrap.contig.fasta`
-> files). Before we continue with the analysis, we would like to combine this data into a single file.
-> To this end we will merge all the trimmed fasta files and create a group file:
->
->**2: Merge fasta outputs**
->
-> - **Tool:** Merge.files
-> - **Parameters:**
->   - Set **merge** to *fasta files*
->   - Set **inputs** to the `trim.contigs.fasta` *collection* output of the previous step
+> - **Make.contigs** :wrench: with the following parameters:
+>   - "Fastq pair" to the *collection* you created in the previous step
+>   - Leave all other parameters to the default settings <br><br>
 >
 >    > ### :bulb: Collections as input
 >    > To provide a collection as input for a tool, click on the `Dataset collection` button in front
 >    > of the parameter. The drop-down menu will now list collections as possible inputs.
 >    > ![](../../shared/images/tools_collection_input.png)
 >    {: .tip}
+{: .hands_on}
+
+By supplying a collection as input, the tool was run multiple times; once for every dataset in the collection.
+The output from this tool will be 6 new collections, one for each type of output the tool generates (e.g. one
+collection with the `trim.contig.fasta` output files for each pair, another for all the `scrap.contig.fasta`
+files).
+
+#### Combine samples into a single dataset
+
+Before we continue with the analysis, we would like to combine all the data from each sample into a single fasta
+file. To retain knowledge of which reads belong to which samples, we will also create a *group file*
+
+> ### :pencil2: Hands-on: Merge sample data
 >
-> This will simply concatenate all the fasta files into a single file. In order to retain the knowledge
-> of which reads came from which samples, we also create a group file.
+> 1. **Merge.files** :wrench: with the following parameters:
+>   - "merge" to *fasta files*
+>   - "inputs" to the `trim.contigs.fasta` *collection* output of the previous step <br><br>
 >
->**3: Make group file**
->
-> - **Tool:** Make.group
-> - **Parameters:**
->   - Set **Method** to *Automatically from collection*
->   - Set **fasta collection** to the `trim.contigs.fasta` output of the make.contigs step
+> 2. **Make.group** :wrench: with the following parameters:
+>   - "Method" to *Automatically from collection*
+>   - "fasta collection" to the `trim.contigs.fasta` output of the make.contigs step
 >
 {: .hands_on}
 
@@ -214,13 +219,14 @@ read_name3  sample2
 ..
 ```
 
+### Cleaning our data
+
 Next we want to improve the quality of our data. But first, let's get a feel of our data
 
 > ### :pencil2: Hands-on: Summarize data
 >
-> - **Tool:** Summary.seqs
-> - **Parameters:**
->   - Set `fasta` parameter to the merged fasta file
+> - **Summary.seqs** :wrench: with the following parameters
+>   - "fasta" parameter to the merged fasta file
 >   - We do not need to supply a names or count file
 >
 {: .hands_on}
@@ -247,51 +253,57 @@ are supposed to be 251 bp each. This read clearly didn't assemble well (or at al
 least 2.5% of our sequences had some ambiguous base calls. We'll take care of these issues in the next
 step when we run `screen.seqs`.
 
+The following tool will remove any sequences with ambiguous bases and anything longer than 275 bp.
+
 > ### :pencil2: Hands-on: Filter reads based on quality and length
 >
-> The following tool will remove any sequences with ambiguous bases and anything longer than 275 bp.
+> - **Screen.seqs** :wrench: with the following parameters:
+>   - "fasta" to the merged fasta file from merge.files
+>   - "group" the group file we created in with make.group
+>   - "maxlength" parameter to `275`
+>   - "maxambig" parameter to `0`
 >
-> - **Tool:** Screen.seqs
-> - **Parameters:**
->   - Set **fasta** parameter to the merged fasta file
->   - Set **group** parameter to the group file we created earlier
->   - Set **maxlength** parameter to `275`
->   - Set **maxambig** parameter to `0`
->
-> After the tool has finished, let's get another summary of our resulting data-upload
->
-> - **Tool:** Summary.seqs
-> - **Parameters:**
->    - Set **fasta** to the `good.fasta` output of Sreen.seqs
->    - Set **count** to the count_table output of Screen.seqs
+> > ### :question: Question
+> >
+> > How many reads were removed in this screening step? (Hint: run the summary.seqs tool again)
+> >
+> >    <details>
+> >    <summary>Click to view answer</summary>
+> >    23,488. <br>
+> >    This can be determined by looking at the number of lines in bad.accnos output of screen.seqs
+> >    or by comparing the total number of seqs between of the summary log before and after this screening
+> >    step
+> >    </details>
+> {: .question}
 {: .hands_on}
-
-Examine the logfile output from the summary step.
-
-> ### :question: Question
->
-> How many reads were removed in this screening step?
->
->    <details>
->    <summary>Click to view answer</summary>
->    23,488. <br>
->    This can be determined by looking at the number of lines in bad.accnos output of screen.seqs
->    or by comparing the total number of seqs between of the summary log before and after this screening
->    step
->    </details>
-{: .question}
-
 
 ## Processing improved sequences
 
 ### Optimize files for computation
-We anticipate that many of our sequences are duplicates of each other. Because it's computationally wasteful to align the same thing a bazillion times, we'll unique our sequences using the `unique.seqs` command:
+Because we are sequencing many of the same organisms, we anticipate that many of our sequences are
+duplicates of each other. Because it's computationally wasteful to align the same thing a bazillion
+times, we'll unique our sequences using the `unique.seqs` command:
 
 > ### :pencil2: Hands-on: Remove duplicate sequences
 >
-> - **Tool:** Unique.seqs
-> - **Parameters:**
->   - Set **fasta** to the `good.fasta` output from Screen.seqs
+> - **Unique.seqs** :wrench: with the following parameters
+>   - "fasta" to the `good.fasta` output from Screen.seqs
+>
+>
+> > ### :question: Question
+> >
+> > How many sequences were unique? how many duplicates were removed?
+> >
+> >    <details>
+> >    <summary>Click to view answer</summary>
+> >    16,426 unique sequences and 112,446 duplicates. <br>
+> >    This can be determined from the number of lines in the fasta (or names) output, compared to the
+> >    number of lines in the fasta file before this step. The log file also contains a line showing the
+> >    total number of sequences before and the command: <br><br>
+> >    mothur > unique.seqs(fasta=fasta.dat) <br>
+> >    128872	16426
+> >    </details>
+> {: .question}
 {: .hands_on}
 
 This tool outputs two files, one is a fasta file containing only the unique sequences, and a *names files*.
@@ -307,30 +319,14 @@ read_name7    read_name8
 ...
 ```
 
-> ### :question: Question
->
-> How many sequences were unique? how many duplicates were removed?
->
->    <details>
->    <summary>Click to view answer</summary>
->    16,426 unique sequences and 112,446 duplicates. <br>
->    This can be determined from the number of lines in the fasta (or names) output, compared to the
->    number of lines in the fasta file before this step. The log file also contains a line showing the
->    total number of sequences before and the command: <br><br>
->    mothur > unique.seqs(fasta=fasta.dat) <br>
->    128872	16426
->    </details>
-{: .question}
-
 To reduce file sizes further and streamline analysis, we can now summarize the data in a *count table*.
 
 > ### :pencil2: Hands-on: Generate count table
 >
-> - **Tool:** Count.seqs
-> - **Parameters:**
->   - Set **name** to the `names` output from Unique.seqs
->   - Set **Use a Group file** to `yes`
->   - Set **group** to the group file we created using the Make.group tool
+> - **Count.seqs** :wrench: with the following parameters
+>   - "name" to the `names` output from Unique.seqs
+>   - "Use a Group file" to `yes`
+>   - "group" to the group file we created using the Make.group tool
 {: .hands_on}
 
 The *count_table* output will look something like this:
@@ -351,22 +347,13 @@ We are now ready to align our sequences to the reference.
 
 > ### :pencil2: Hands-on: Align sequences
 >
-> - **Tool:** Align.seqs
-> - **Parameters:**
->   - Set **fasta** to the fasta output from Unique.seqs
->   - Set **reference** to the `silva.v4.fasta` reference file
->     - If your Galaxy is preconfigured with this reference data you will be able to find it in dropdown
->       menu.
->     - If not, change the  **Select Reference Template From** parameter to `Your History` and select the
->       appropriate file from your history.
->
-> This can take a minute or two. After the job completes, let's create another summary to see what is
-> going on:
->
-> - **Tool:** Summary.seqs
-> - **Parameters:**
->   - Set **fasta** parameter to the aligned output from previous step
->   - Set **count** parameter to `count_table` output from Count.seqs
+> 1. **Align.seqs** :wrench: with the following parameters
+>   - "fasta" to the fasta output from Unique.seqs
+>   - "reference" to the `silva.v4.fasta` reference file
+> <br><br>
+> 2. **Summary.seqs** :wrench: with the following parameters
+>   - "fasta" parameter to the aligned output from previous step
+>   - "count" parameter to `count_table` output from Count.seqs
 >
 {: .hands_on}
 
@@ -395,13 +382,12 @@ So what does this mean? You'll see that the bulk of the sequences start at posit
 > homopolymer length to 8 since there's nothing in the database with a stretch of 9 or more of the same
 > base in a row (this really could have been done in the first execution of screen.seqs above).
 >
-> - **Tool:** Screen.seqs
-> - **Parameters:**
->   - Set **fasta** parameter to the aligned fasta file
->   - Set **start** parameter to 1968
->   - Set **end** parameter to 11550
->   - Set **maxhomop** to 8
->   - Set **count** to our most recent count_table
+> - **Screen.seqs** :wrench: with the following parameters
+>   - "fasta" to the aligned fasta file
+>   - "start" to 1968
+>   - "end" to 11550
+>   - "maxhomop" to 8
+>   - "count" to our most recent count_table
 >
 > **Note:** we supply the count table so that it can be updated for the sequences we're removing.
 {: .hands_on}
@@ -424,11 +410,10 @@ losing any information. We'll do all this with filter.seqs:
 
 > ### :pencil2: Hands-on: Filter sequences
 >
-> - **Tool:** Filter.seqs
-> - **Parameters:**
->   - Set **fasta** to good.fasta output from Sreen.seqs
->   - Set **vertical** to Yes
->   - Set **trump** to `.`
+> - **Filter.seqs** :wrench: with the following parameters
+>   - "fasta"" to good.fasta output from Sreen.seqs
+>   - "vertical" to Yes
+>   - "trump" to `.`
 {: .hands_on}
 
 In the log file we see the following information:
@@ -444,10 +429,9 @@ This means that our initial alignment was 13425 columns wide and that we were ab
 
 > ### :pencil2: Hands-on: Re-obtain unique sequences
 >
-> - **Tool:** Unique.seqs
-> - **Parameters:**
->   - Set **fasta** to the `filtered fasta` output from Filter.seqs
->   - Set **name file or count table** to the count table from the last Screen.seqs
+> - **Unique.seqs** :wrench: with the following parameters
+>   - "fasta" to the `filtered fasta` output from Filter.seqs
+>   - "name file or count table" to the count table from the last Screen.seqs
 {: .hands_on}
 
 > ### :question: Question
@@ -470,11 +454,10 @@ merged. We generally recommend allowing 1 difference for every 100 basepairs of 
 
 > ### :pencil2: Hands-on: Perform preliminary clustering of sequences
 >
-> - **Tool:** Pre.cluster
-> - **Parameters:**
->   - Set **fasta** to the fasta output from the last Unique.seqs run
->   - Set **name file or count table** to the count table from the last Unique.seqs
->   - Set **diffs** to 2
+> - **Pre.cluster** :wrench: with the following parameters
+>   - "fasta" to the fasta output from the last Unique.seqs run
+>   - "name file or count table" to the count table from the last Unique.seqs
+>   - "diffs" to 2
 {: .hands_on}
 
 
@@ -508,20 +491,18 @@ when they're the most abundant sequence in another sample. This is how we do it:
 
 > ### :pencil2: Hands-on: Remove chimeric sequences
 >
-> - **Tool:** Chimera.uchime
-> - **Parameters:**
->   - Set **fasta** to the fasta output from Pre.cluster
->   - Set **Select Reference Template from** to `Self`
->     - Set **count** to the count table from the last Pre.cluster
->   - Set **dereplicate** to Yes
+> - **Chimera.uchime** :wrench: with the following parameters
+>   - "fasta" to the fasta output from Pre.cluster
+>   - "Select Reference Template from" to `Self`
+>   - "count" to the count table from the last Pre.cluster
+>   - "dereplicate" to Yes
 >
 > Running chimera.uchime with the count file will remove the chimeric sequences from the count table, but we
 > still need to remove those sequences from the fasta file as well. We do this using remove.seqs:
 >
-> - **Tool:** Remove.seqs
-> - **Parameters:**
->   - Set **accnos** to the uchime.accnos file from Chimera.uchime
->   - Set **fasta** to the fasta output from Pre.cluster
+> - **Remove.seqs** :wrench: with the following parameters
+>   - "accnos" to the uchime.accnos file from Chimera.uchime
+>   - "fasta" to the fasta output from Pre.cluster
 >
 {: .hands_on}
 
@@ -546,26 +527,25 @@ Now you may say, "But wait I want that stuff". Fine. But, the primers we use, ar
 Let's go ahead and classify those sequences using the Bayesian classifier with the `classify.seqs` command:
 
 > ### :pencil2: Hands-on: Remove undesired sequences
-> - **Tool:** Classify.seqs
-> - **Parameters:**
->   - Set **fasta** to the fasta output from Remove.seqs
->   - Set **reference** to `trainset9032012.pds.fasta` from your history
->   - Set **taxonomy** to `trainset9032012.pds.tax` from your history
->   - Set **count** to the count table file from Chimera.uchime
->   - Set **cutoff** to 80
+>
+> - **Classify.seqs** :wrench: with the following parameters
+>   - "fasta" to the fasta output from Remove.seqs
+>   - "reference" to `trainset9032012.pds.fasta` from your history
+>   - "taxonomy" to `trainset9032012.pds.tax` from your history
+>   - "count" to the count table file from Chimera.uchime
+>   - "cutoff" to 80
 >
 > Have a look at the taxonomy output. You will see that every read now has a classification.
 >
 > Now that everything is classified we want to remove our undesirables. We do this with the remove.lineage
 > command:
 >
-> - **Tool:** Remove.lineage
-> - **Parameters:**
->   - Set **taxonomy** to the taxonomy output from Classify.seqs
->   - Set **taxon** to `Chloroplast-Mitochondria-unknown-Archaea-Eukaryota` in the textbox under *Manually
+> - **Remove.lineage** :wrench: with the following parameters
+>   - "taxonomy" to the taxonomy output from Classify.seqs
+>   - "taxon" to `Chloroplast-Mitochondria-unknown-Archaea-Eukaryota` in the textbox under *Manually
 > select taxons for filtering*
->   - Set **fasta** to the fasta output from Remove.seqs
->   - Set **count** to count table from Chimera.uchime
+>   - "fasta" to the fasta output from Remove.seqs
+>   - "count" to count table from Chimera.uchime
 {: .hands_on}
 
 Also of note is that *unknown* only pops up as a classification if the classifier cannot classify your sequence to one of the domains.
@@ -599,11 +579,10 @@ Measuring the error rate of your sequences is something you can only do if you h
 >
 > First, let's extract the sequences belonging to our mock samples from our data:
 >
-> - **Tool:** Get.groups
-> - **Parameters:**
->   - Set **group file or count table** to the count table from Remove.lineage
->   - Set **groups** to `Mock`
->   - Set **fasta** to fasta output from Remove.lineage
+> - **Get.groups** :wrench: with the following parameters
+>   - "group file or count table" to the count table from Remove.lineage
+>   - "groups" to `Mock`
+>   - "fasta" to fasta output from Remove.lineage
 >
 > In the log file we see the following
 >
@@ -614,11 +593,10 @@ Measuring the error rate of your sequences is something you can only do if you h
 > This tells us that we had 67 unique sequences and a total of 4,060 total sequences in our Mock sample. We
 > can now use the `seq.error` command to measure the error rates based on our mock reference:
 >
-> - **Tool:** Seq.error
-> - **Parameters:**
->   - Set **fasta** to the fasta from Get.groups
->   - Set **reference** to `HMP_MOCK.v35.fasta` file from your history
->   - Set **count** to the count table from Get.groups
+> - **Seq.error** :wrench: with the following parameters
+>   - "fasta" to the fasta from Get.groups
+>   - "reference" to `HMP_MOCK.v35.fasta` file from your history
+>   - "count" to the count table from Get.groups
 >
 > In the log file we see something like this:
 >
@@ -659,31 +637,27 @@ We can now cluster the mock sequences into OTUs to see how many spurious OTUs we
 >
 > First we calculate the pairwise distances between our sequences
 >
-> - **Tool:** Dist.seqs
-> - **Parameters:**
->   - Set **fasta** to the fasta from Get.groups
->   - Set **cutoff** to `0.20`
+> - **Dist.seqs** :wrench: with the following parameters
+>   - "fasta" to the fasta from Get.groups
+>   - "cutoff" to `0.20`
 >  
 > Next we group sequences into OTUs
 >
-> - **Tool:** Cluster
-> - **Parameters:**
->   - Set **column** to the dist output from Dist.seqs
->   - Set **count** to the count table from Get.groups
+> - **Cluster** :wrench: with the following parameters
+>   - "column" to the dist output from Dist.seqs
+>   - "count" to the count table from Get.groups
 >
 > Now we make a *shared* file that summarizes all our data into one handy table
 >
-> - **Tool:** Make.shared
-> - **Parameters:**
->     - Set **list** to the OTU list from Cluster
->     - Set **count** to the count table from Get.groups
->     - Set **label** to `0.03`
+> - **Make.shared** :wrench: with the following parameters
+>     - "list" to the OTU list from Cluster
+>     - "count" to the count table from Get.groups
+>     - "label" to `0.03`
 >
 > And now we generate intra-sample rarefaction curves
 >
-> - **Tool:** Rarefaction.single
-> - **Parameters:**
->   - Set **shared** to the shared file from Make.shared
+> - **Rarefaction.single** :wrench: with the following parameters
+>   - "shared" to the shared file from Make.shared
 {: .hands_on}
 
 > ### :question: Question
@@ -723,11 +697,10 @@ We're almost to the point where you can have some fun with your data (I'm alread
 
 > ### :pencil2: Hands-on: Remove Mock community from our dataset
 >
-> - **Tool:** Remove.groups
-> - **Parameters:**
->   - Set **Select input type** to `fasta , name, taxonomy, or list with a group file or count table`
->   - Set **count table**, **fasta**, and **taxonomy** to the respective outputs from Remove.lineage
->   - Set **groups** to `Mock`
+> - **Remove.groups** :wrench: with the following parameters
+>   - "Select input type" to `fasta , name, taxonomy, or list with a group file or count table`
+>   - "count table", **fasta**, and **taxonomy** to the respective outputs from Remove.lineage
+>   - "groups" to `Mock`
 {: .hands_on}
 
 
@@ -747,34 +720,31 @@ of *Order*. This is the approach that we  generally use in the Schloss lab.
 
 > ### :pencil2: Hands-on: Cluster our data into OTUs
 >
-> - **Tool:** Cluster.split
-> - **Parameters:**  
->   - Set **Split by** to `Classification`
->   - Set **fasta** to the fasta output from Remove.groups
->   - Set **taxonomy** to the taxonomy output from Remove.groups
->   - Set **taxlevel** to `4`
->   - Set **count** to the count table output from Remove.groups
->   - Set **cutoff** to `0.15`
+> - **Cluster.split** :wrench: with the following parameters
+>   - "Split by" to `Classification`
+>   - "fasta" to the fasta output from Remove.groups
+>   - "taxonomy" to the taxonomy output from Remove.groups
+>   - "taxlevel" to `4`
+>   - "count" to the count table output from Remove.groups
+>   - "cutoff" to `0.15`
 >
 > Next we want to know how many sequences are in each OTU from each group and we can do this using the
 > `Make.shared` command. Here we tell Mothur that we're really only interested in the 0.03 cutoff level:
 >
-> - **Tool:** Make.shared
-> - **Parameters:**  
->   - Set **Select input type** to `OTU list`
->   - Set **list** to list output from Cluster.split
->   - Set **count** to the count table from Remove.groups
->   - Set **label** to `0.03`
+> - **Make.shared** :wrench: with the following parameters
+>   - "Select input type" to `OTU list`
+>   - "list" to list output from Cluster.split
+>   - "count" to the count table from Remove.groups
+>   - "label" to `0.03`
 >
 > We probably also want to know the taxonomy for each of our OTUs. We can get the consensus taxonomy for each
 > OTU using the `Classify.otu` command:
 >
-> - **Tool:** Classify.otu
-> - **Parameters:**  
->   - Set **list** to output from Cluster.split
->   - Set **count** to the count table from Remove.groups
->   - Set **taxonomy** to the taxonomy output from Remove.groups
->   - Set **label** to `0.03`
+> - **Classify.otu** :wrench: with the following parameters
+>   - "list" to output from Cluster.split
+>   - "count" to the count table from Remove.groups
+>   - "taxonomy" to the taxonomy output from Remove.groups
+>   - "label" to `0.03`
 >
 {: .hands_on}
 
@@ -810,20 +780,18 @@ animal) followed by a D and a three digit number (number of days post weaning).
 > What we now want to do is see how many sequences we have in each sample. We'll do this with the
 > `Count.groups` command:
 >
-> - **Tool:** Count.groups
-> - **Parameters:**
->   - Set **shared** to the shared file from Make.shared
+> - **Count.groups** :wrench: with the following parameters
+>   - "shared" to the shared file from Make.shared
 >
 > Take a look at the output. We see that our smallest sample had 2440 sequences in it. That is a reasonable
 > number. Despite what some say, subsampling and rarefying your data is an important thing to do.
 >
 > We'll generate a subsampled file for our analyses with the `Sub.sample` command:
 >
-> - **Tool:** Sub.sample
-> - **Parameters:**
->   - Set **Select type of data to subsample** to `OTU Shared`
->   - Set **shared** to output from Make.shared from the OTU section above
->   - Set **size** to `2440`
+> - **Sub.sample** :wrench: with the following parameters
+>   - "Select type of data to subsample" to `OTU Shared`
+>   - "shared" to output from Make.shared from the OTU section above
+>   - "size" to `2440`
 >
 > **Note:** since subsampling is a stochastic process, your results from any tools using this subsampled data
 > will vary from the ones presented here.
@@ -836,9 +804,8 @@ curves describing the number of OTUs observed as a function of sampling effort. 
 `Rarefaction.single` command:
 
 > ### :pencil2:-Hands-on: Rarefaction
-> - **Tool:** Rarefaction.single
-> - **Parameters:**
->   - Set **shared** to shared file from Make.shared
+> - **Rarefaction.single** :wrench: with the following parameters
+>   - "shared" to shared file from Make.shared
 {: .hands_on}
 
 Examine the rarefaction curve output.
@@ -864,23 +831,21 @@ Let's plot the rarefaction curve for a couple of our sequences:
 > First let's make our life a little bit easier. As we only have one dataset in our collection anyways, we can
 > collapse it into a single file.
 >
-> - **Tool:** Collapse Collection
-> - **Parameters:**
->   - Set **Collection of files to collapse to a single dataset** to the rarefaction curve collection
+> - **Collapse** :wrench: with the following parameters Collection
+>   - "Collection of files to collapse to a single dataset" to the rarefaction curve collection
 >
 > Now we are ready to plot our rarefaction curves:
 >
-> - **Tool:** Plotting tool
-> - **Parameters:**
->   - Set **Plot Title** to `Rarefaction`
->   - Set **Label for x axis** to `Number of Sequences`
->   - Set **Label for y axis** to `Number of OTUs`
->   - Set **Output File Type** to `PNG`
+> - **Plotting** :wrench: with the following parameters tool
+>   - "Plot Title" to `Rarefaction`
+>   - "Label for x axis" to `Number of Sequences`
+>   - "Label for y axis" to `Number of OTUs`
+>   - "Output File Type" to `PNG`
 >   - Click on Insert Series,
->     - Set **Dataset** to the collapsed rarefaction curve collection
+>     - "Dataset" to the collapsed rarefaction curve collection
 >     - Set **Header in first line?** to `Yes`
->     - Set **Column for x axis** to `Column 1`
->     - Set **Column for y-axis** to `Column 2` and `Column 5` and every third column until the end (we are
+>     - "Column for x axis" to `Column 1`
+>     - "Column for y-axis" to `Column 2` and `Column 5` and every third column until the end (we are
 >       skipping the low confidence and high confidence interval columns)
 >
 {: .hands_on}
@@ -895,11 +860,10 @@ Finally, let's get a table containing the number of sequences, the sample covera
 
 > ### :pencil2: Hands-on: Summary.single
 >
-> - **Tool:** Summary.single
-> - **Parameters:**
->   - Set **share** to shared file from Make.shared
->   - Set **calc** to `nseqs,coverage,sobs,invsimpson`
->   - Set **size** to 2440
+> - **Summary.single** :wrench: with the following parameters
+>   - "share" to shared file from Make.shared
+>   - "calc" to `nseqs,coverage,sobs,invsimpson`
+>   - "size" to 2440
 {: .hands_on}
 
 The data will be outputted to a table called the *summary file*:
@@ -936,18 +900,16 @@ Interestingly, the sample coverages were all above 97%, indicating that we did a
 > Let's calculate the similarity of the membership and structure found in the various samples. We'll do this
 > with the `Dist.shared` command that will allow us to rarefy our data to a common number of sequences.
 >
-> - **Tool:** Dist.shared
-> - **Parameters:**
->   - Set **shared** to the shared file from Make.shared
->   - Set **calc** to thetayc,jclass
->   - Set **subsample** to 2440
+> - **Dist.shared** :wrench: with the following parameters
+>   - "shared" to the shared file from Make.shared
+>   - "calc" to thetayc,jclass
+>   - "subsample" to 2440
 >
 > Let's visualize our data in a Heatmap
 >
-> - **Tool:** Heatmap.sim
-> - **Parameters:**
->   - Set **Generate Heatmap for** to `phylip`
->   - Set **phylip** to output by Dist.shared (this is a collection input)
+> - **Heatmap.sim** :wrench: with the following parameters
+>   - "Generate Heatmap for" to `phylip`
+>   - "phylip" to output by Dist.shared (this is a collection input)
 >  
 > <!-- TODO: way to view the SVGs inside Galaxy? -->
 {: .hands_on}
@@ -971,15 +933,13 @@ Let's take a look at the Venn diagrams for the first 4 time points of female 3 u
 > <!-- need to collapse collection again for group select to work -->
 > First we collapse our collection again
 >
-> - **Tool:** Collapse Collection
-> - **Parameters:**
->   - Set **Collection** to Subsample.shared output collection from Sub.sample step
+> - **Collapse** :wrench: with the following parameters Collection
+>   - "Collection" to Subsample.shared output collection from Sub.sample step
 >
 > After the tool has finished, rename the output to `Subsample.shared` to make it easier to recognize in
 > further analysis
 >
-> - **Tool:** Venn
-> - **Parameters:**
+> - **Venn** :wrench: with the following parameters
 >   - Set `OTU Shared` to Subsample.shared file from previous step
 >   - Set `groups` to `F3D0,F3D1,F3D2,F3D3`
 {: .hands_on}
@@ -997,17 +957,15 @@ dendrogram using the jclass and thetayc calculators within the `tree.shared` com
 
 > ### :pencil2: Tree
 >
-> - **Tool:** Tree.shared
-> - **Parameters:**
->   - Set **Select input format** to Phylip Distance Matrix
->   - Set **phylip** to dist files from Dist.shared (collection)
+> - **Tree.shared** :wrench: with the following parameters
+>   - "Select input format" to Phylip Distance Matrix
+>   - "phylip" to dist files from Dist.shared (collection)
 >
 > Looking at the output we see it is just text, not very informative in its current form, so let's draw the
 > trees:
 >
-> - **Tool:** Newick display
-> - **Parameters:**
->  - Set **Newick file** to output from Tree.shared (collection)
+> - **Newick** :wrench: with the following parameters display
+>  - "Newick file" to output from Tree.shared (collection)
 {: .hands_on}
 
 Inspection of the the tree shows that the early and late communities cluster with themselves to the exclusion
@@ -1070,10 +1028,9 @@ F3D9     Early
 Using the `parsimony` command let's look at the pairwise comparisons. Specifically, let's focus on the early vs. late comparisons for each mouse:
 
 > ### :pencil2: Hands-on: Compare Early-vs-Late
-> - **Tool:** Parsimony
-> - **Parameters:**
->   - Set **tree** to the `tre` output from Tree.Shared (collection)
->   - Set **group** to the design file described above
+> - **Parsimony** :wrench: with the following parameters
+>   - "tree" to the `tre` output from Tree.Shared (collection)
+>   - "group" to the design file described above
 {: .hands_on}
 
 In the logfile for `thetayc.0.03.lt.ave` we see
@@ -1091,9 +1048,8 @@ Principal Coordinates (PCoA) uses an eigenvector-based approach to represent mul
 
 > ### :pencil2: Hands-on: PCoA
 >
-> - **Tool:** Pcoa
-> - **Parameters:**
->   - Set **phylip** to dist files from Dist.shared (collection)
+> - **Pcoa** :wrench: with the following parameters
+>   - "phylip" to dist files from Dist.shared (collection)
 {: .hands_on}
 
 The loadings files will tell you what fraction of the total variance in the data are represented by each of
@@ -1129,9 +1085,8 @@ tool:
 
 > ### :pencil2: Hands-on: Nmds
 >
-> - **Tool:** Nmds
-> - **Parameters:**
->  - Set **phylip** to dist files from Dist.shared (collection)
+> - **Nmds** :wrench: with the following parameters
+>  - "phylip" to dist files from Dist.shared (collection)
 >
 > Opening the `stress` file for `thetayc.0.03.lt.ave` we can inspect the stress and R^2 values, which describe
 > the quality of the ordination. Each line in this file represents a different iteration and the configuration
@@ -1146,11 +1101,10 @@ tool:
 > We find that the lowest stress value was 0.11 with an R-squared value of 0.95; that stress level is
 > actually pretty good. You can test what happens with three dimensions in the following way:
 >
-> - **Tool:** Nmds
-> - **Parameters:**
->   - Set **phylip** to dist files collection from Dist.shared
->   - Set **mindim** to `3`
->   - Set **maxdim** to `3`
+> - **Nmds** :wrench: with the following parameters
+>   - "phylip" to dist files collection from Dist.shared
+>   - "mindim" to `3`
+>   - "maxdim" to `3`
 {: .hands_on}
 
 > ### :question: Question
@@ -1174,10 +1128,9 @@ matrices we created earlier and does not actually use ordination.
 
 > ### :pencil2: Hands-on: Amova
 >
-> - **Tool:** Amova
-> - **Parameters:**
->   - Set **phylip** to dist files from Dist.shared (collection)
->   - Set **design** to mouse.time.design file from your history
+> - **Amova** :wrench: with the following parameters
+>   - "phylip" to dist files from Dist.shared (collection)
+>   - "design" to mouse.time.design file from your history
 {: .hands_on}
 
 in logfile for thetaYC we find:
@@ -1199,10 +1152,9 @@ samples using the `Homova` command:
 
 > ### :pencil2: Hands-on: Homova
 >
-> - **Tool:** Homova
-> - **Parameters:**
->   - Set **phylip** to dist files from Dist.shared (collection)
->   - Set **design** to mouse.time.design file from your history
+> - **Homova** :wrench: with the following parameters
+>   - "phylip" to dist files from Dist.shared (collection)
+>   - "design" to mouse.time.design file from your history
 {: .hands_on}
 
 ```
@@ -1218,12 +1170,11 @@ Next, we might ask which OTUs are responsible for shifting the samples along the
 
 > ### :pencil2: Hands-on: Correlation
 >
-> - **Tool:** Corr.axes
-> - **Parameters:**
->   - Set **axes** to axes output from Nmds in 3 dimension
->   - Set **shared** to shared output from collapse collection on Sub.sample
->   - Set **method** to `Spearman`
->   - Set **numaxes** to `3`
+> - **Corr.axes** :wrench: with the following parameters
+>   - "axes" to axes output from Nmds in 3 dimension
+>   - "shared" to shared output from collapse collection on Sub.sample
+>   - "method" to `Spearman`
+>   - "numaxes" to `3`
 {: .hands_on}
 
 Examining the axes output, we see the data for the first five OTUs look something like this..
@@ -1289,13 +1240,12 @@ F3D9     9
 
 > ### :pencil2: Hands-on
 >
-> - **Tool:** Corr.axes
-> - **Parameters:**
->   - Set **axes** to axes output from Nmds in 3 dimension
->   - Set **Generate Collector Curvers for** to Metadata table
->   - Set **metadata table** to `mouse.dpw.metadata`
->   - Set **method** to `Spearman`
->   - Set **numaxes** to `3`
+> - **Corr.axes** :wrench: with the following parameters
+>   - "axes" to axes output from Nmds in 3 dimension
+>   - "Generate Collector Curvers for" to Metadata table
+>   - "metadata table" to `mouse.dpw.metadata`
+>   - "method" to `Spearman`
+>   - "numaxes" to `3`
 >
 > This will output a file like the following:
 >
@@ -1310,9 +1260,8 @@ F3D9     9
 > community types
 >
 > <!-- TODO: add this tool to mothur suite -->
-> - **Tool:** Get.communitype
-> - **Parameters:**
->   - Set **shared** to Subsample.shared file
+> - **Get.communitype** :wrench: with the following parameters
+>   - "shared" to Subsample.shared file
 >
 {: .hands_on}
 
@@ -1368,10 +1317,9 @@ and women in this study.
 
 > ### :pencil2: Hands-on: T-test
 >
-> - **Tool:** Metastats
-> - **Parameters:**
->   - Set **shared** to Subsample.shared
->   - Set **design** to `mouse.time.design`
+> - **Metastats** :wrench: with the following parameters
+>   - "shared" to Subsample.shared
+>   - "design" to `mouse.time.design`
 {: .hands_on}
 
 Looking at the first 5 OTUs from `Late-Early` output file we see the following:
@@ -1404,10 +1352,9 @@ Another non-parametric tool we can use as an alternative to metastats is lefse:
 
 > ### :pencil2: Hands-on: Lefse
 >
-> - **Tool:** Lefse
-> - **Parameters:**
->   - Set **shared** to Subsample.shared
->   - Set **design** to `mouse.time.design`
+> - **Lefse** :wrench: with the following parameters
+>   - "shared" to Subsample.shared
+>   - "design" to `mouse.time.design`
 {: .hands_on}
 
 Looking at the top of the lefse summary file we see:
@@ -1427,10 +1374,9 @@ Finally, Mothur has an implementation of the random forest algorithm build into 
 
 > ### :pencil2: Hands-on: Classify.rf
 >
-> - **Tool:** Classify.rf
-> - **Parameters:**
->   - Set **shared** to Subsample.shared
->   - Set **design** to `mouse.time.design`
+> - **Classify.rf** :wrench: with the following parameters
+>   - "shared" to Subsample.shared
+>   - "design" to `mouse.time.design`
 {: .hands_on}
 
 in the logfile we see:
@@ -1472,11 +1418,10 @@ instance we can convert our shared file to the more widely used `biom` format an
 
 > ### :pencil2: Hands-on: Phinch
 >
-> - **Tool:** Make.biom
-> - **Parameters:**
->   - Set **shared** to Subsample.shared
->   - Set **constaxonomy** to taxonomy output from Classify.otu (collection)
->  - Set **metadata** to `mouse.dpw.metadata`
+> - **Make.biom** :wrench: with the following parameters
+>   - "shared" to Subsample.shared
+>   - "constaxonomy" to taxonomy output from Classify.otu (collection)
+>  - "metadata" to `mouse.dpw.metadata`
 >
 > The Galaxy project runs an instance of Phinch, and if you look at the output biom file, you will see a link
 > to view the file at Phinch:
@@ -1495,9 +1440,8 @@ A second tool we can use to visualize our data, is [Krona]()
 
 > ### :pencil2: Hands-on: Krona
 >
-> - **Tool:** Visualize with Krona
-> - **Parameters:**
->   - Set **input file** to taxonomy output from Classify.otu (collection)
+> - **Visualize** :wrench: with the following parameters with Krona
+>   - "input file" to taxonomy output from Classify.otu (collection)
 >   - Set **Is this output from mothur?** to yes
 {: .hands_on}
 
