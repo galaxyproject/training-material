@@ -223,6 +223,9 @@ read_name3  sample2
 
 ### Data Cleaning
 
+For more information on the topic of quality control, please see our training materials
+[here](https://galaxyproject.github.io/training-material/NGS-QC/)
+
 Next we want to improve the quality of our data. But first, let's get a feel of our data
 
 > ### :pencil2: Hands-on: Summarize data
@@ -570,7 +573,7 @@ Let's go ahead and classify those sequences using the Bayesian classifier with t
 > > ### :question: Questions
 > >
 > > 1. How many unique (representative) sequences were removed in this step?
-> >  2. How many sequences in total?
+> > 2. How many sequences in total?
 > >
 > >    <details>
 > >      <summary> Click to view answer</summary><br>
