@@ -343,6 +343,9 @@ The first column contains the read names of the representative sequence, and the
 the number of duplicates of this sequence observed in each sample.
 
 ### Sequence Alignment
+
+For more information on the topic of alignment, please see our training materials [here](https://galaxyproject.github.io/training-material/NGS-mapping/)
+
 We are now ready to align our sequences to the reference.
 
 > ### :pencil2: Hands-on: Align sequences
