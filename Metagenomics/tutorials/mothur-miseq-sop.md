@@ -92,13 +92,14 @@ Now that we know what our input data is, let's get it into our Galaxy history:
 >
 > 2. **Import Sample Data.** The data for this course may be available from a shared library in Galaxy
 > (ask your instructor). If this is not the case, you can upload it yourself.
-> - From data library:
+> - Option 1: From data library:
 >   - Navigate to the shared data library, you should find 20 pairs of fastq files; 19 from the mice,
 > and one pair from the mock community.
-> - From your computer:
->   - obtain data directly from Zenodo: [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.165147.svg)](https://doi.org/10.5281/zenodo.165147)
->   - download `input_data.zip` and unzip it
->   - upload all files to your history.
+> - Option 2: From your computer:
+>   - Obtain data directly from Zenodo: [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.165147.svg)](https://doi.org/10.5281/zenodo.165147)
+>   - Download `input_data.zip` and unzip it
+>   - Upload all files to your history.
+> <br><br>
 >
 > 3. **Import Reference Data.**  Go back to the data library and import the following reference
 > datasets, or download them from Zenodo (`reference_data.zip`) and upload them to your history:
@@ -699,7 +700,7 @@ We're almost to the point where you can have some fun with your data (I'm alread
 >
 > - **Remove.groups** :wrench: with the following parameters
 >   - "Select input type" to `fasta , name, taxonomy, or list with a group file or count table`
->   - "count table", **fasta**, and **taxonomy** to the respective outputs from Remove.lineage
+>   - "count table", "fasta", and "taxonomy" to the respective outputs from Remove.lineage
 >   - "groups" to `Mock`
 {: .hands_on}
 
