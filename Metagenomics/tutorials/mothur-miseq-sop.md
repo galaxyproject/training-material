@@ -599,45 +599,59 @@ community. This is something we include for every 95 samples we sequence. You sh
 help you gauge your error rates and allow you to see how well your curation is going, and whether something
 is wrong with your sequencing setup.
 
-> ### :pencil2: Hands-on: Assess error rates based on a mock community
+> ### :nut_and_bolt: Definition
 >
-> First, let's extract the sequences belonging to our mock samples from our data:
+> **Mock community:** A defined mixture of microbial cells and/or viruses or nucleic acid molecules created
+> *in vitro* to simulate the composition of a microbiome sample or the nucleic acid isolated therefrom.
 >
-> - **Get.groups** :wrench: with the following parameters
+{: .note}
+
+First, let's extract the sequences belonging to our mock samples from our data:
+
+> ### :pencil2: Hands-on: extract mock sample from our dataset
+>
+>
+>
+> 1. **Get.groups** :wrench: with the following parameters
 >   - "group file or count table" to the count table from Remove.lineage
 >   - "groups" to `Mock`
 >   - "fasta" to fasta output from Remove.lineage
 >
-> In the log file we see the following
->
-> ```
-> Selected 67 sequences from your fasta file.
-> Selected 4060 sequences from your count file
-> ```
-> This tells us that we had 67 unique sequences and a total of 4,060 total sequences in our Mock sample. We
-> can now use the `seq.error` command to measure the error rates based on our mock reference:
->
+{: .hands_on}
+
+In the log file we see the following:
+
+```
+Selected 67 sequences from your fasta file.
+Selected 4060 sequences from your count file
+```
+
+This tells us that we had 67 unique sequences and a total of 4,060 total sequences in our Mock sample. We
+can now use the `seq.error` command to measure the error rates based on our mock reference.
+
+> ### :pencil2: Hands-on: Assess error rates based on a mock community
 > - **Seq.error** :wrench: with the following parameters
 >   - "fasta" to the fasta from Get.groups
 >   - "reference" to `HMP_MOCK.v35.fasta` file from your history
 >   - "count" to the count table from Get.groups
 >
-> In the log file we see something like this:
->
-> ```
-> It took 0 to read 32 sequences.
-> Overall error rate:    6.5108e-05
-> Errors    Sequences
-> 0    3998
-> 1    3
-> 2    0
-> 3    2
-> 4    1
-> ```
->
-> That rocks, eh? Our error rate is 0.0065%.
->
 {: .hands_on}
+
+ In the log file we see something like this:
+
+```
+It took 0 to read 32 sequences.
+Overall error rate:    6.5108e-05
+Errors    Sequences
+0    3998
+1    3
+2    0
+3    2
+4    1
+```
+
+That rocks, eh? Our error rate is 0.0065%!
+
 
 ### Cluster mock sequences into OTUs
 
