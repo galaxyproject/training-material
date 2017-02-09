@@ -14,6 +14,7 @@ creators of the Mothur software package, the [Schloss lab](http://www.schlosslab
 > In this tutorial, we will:
 >
 > 1. [Obtain and prepare our input data](#obtaining-and-preparing-data)
+    - [Understand our experimental setup](#understanding-our-input-data)
 >   - [Import the data into Galaxy](#importing-the-data-into-galaxy)
 > 2. [Perform Quality Control](#quality-control)
 >   - [Reduce sequencing and PCR errors](#reducing-sequencing-and-pcr-errors)
@@ -34,8 +35,8 @@ creators of the Mothur software package, the [Schloss lab](http://www.schlosslab
 
 > ### :nut_and_bolt: Note
 > Each of the Mothur tools in Galaxy contains a link to the mothur wiki in the help section. Here you can find
-> more details about all the inputs, outputs and parameters for the tool. <br><br>
->
+> more details about all the inputs, outputs and parameters for the tool.
+> <br>
 > Your results may deviate slightly from the ones presented in this tutorial due to differing tool or
 > reference data versions or stochastic processes in the algorithms.
 {: .comment}
@@ -44,11 +45,18 @@ creators of the Mothur software package, the [Schloss lab](http://www.schlosslab
 # Obtaining and preparing data
 
 ## Understanding our input data
-In this tutorial we are interested in understanding the effect of normal variation in the gut microbiome on host health. To that end, fresh feces from mice were collected on a daily basis for 365 days post weaning. During the first 150 days post weaning (dpw), nothing was done to our mice except allow them to eat, get fat, and be merry. We were curious whether the rapid change in weight observed during the first 10 dpw affected the stability microbiome compared to the microbiome observed between days 140 and 150. We will address this question in this tutorial using a combination of OTU, phylotype, and phylogenetic methods.
+In this tutorial we are interested in understanding the effect of normal variation in the gut microbiome on host health.
+To that end, fresh feces from mice were collected on a daily basis for 365 days post weaning. During the first 150 days
+post weaning (dpw), nothing was done to our mice except allow them to eat, get fat, and be merry. We were curious whether
+the rapid change in weight observed during the first 10 dpw affected the stability microbiome compared to the microbiome
+observed between days 140 and 150. We will address this question in this tutorial using a combination of OTU, phylotype,
+and phylogenetic methods.
 
 ![](../images/experiment_setup.png)
 
-To make this tutorial easier to execute, we are providing only part of the data - you are given the flow files for one animal at 10 time points (5 early and 5 late). In addition, to sequencing samples from mice fecal material, we resequenced a mock community composed of genomic DNA from 21 bacterial strains. We will use the 10 fecal samples to look at how to analyze microbial communities and the mock community to measure the error rate and its effect on other analyses.
+To make this tutorial easier to execute, we are providing only part of the data - you are given the flow files for one
+animal at 10 time points (5 early and 5 late). In order to assess the error rate of our analysis pipeline and experimental
+setup, we additionally resequenced a mock community composed of genomic DNA from 21 bacterial strains.
 
 > ### :nut_and_bolt: Dataset details
 > Because of the large size of the original dataset (3.9 GB) you are given 20 of the 362 pairs of fastq
