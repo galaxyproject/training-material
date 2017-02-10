@@ -19,6 +19,7 @@ The genome of *Drosophila melanogaster* is known and assembled. It can be used a
 > 1. [Pretreatments](#pretreatments)
 > 2. [Mapping](#mapping)
 > 3. [Analysis of the differential expression](#analysis-of-the-differential-expression)
+> 4. [Inference of the differential exon usage](#inference-of-the-differential-exon-usage)
 > {: .agenda}
 
 # Pretreatments
@@ -39,7 +40,7 @@ We have extracted sequences from the Sequence Read Archive (SRA) files to build 
 > ### :pencil2: Hands-on: Data upload
 >
 > 1. Create a new history for this RNA-seq exercise
-> 2. Import a FASTQ file pair (*e.g.*  [`GSM461177_untreat_paired_subset_1`](https://zenodo.org/record/61771/files/GSM461177_untreat_paired_subset_1.fastq) and [`GSM461177_untreat_paired_subset_2`](https://zenodo.org/record/61771/files/GSM461177_untreat_paired_subset_2.fastq)) from [Zenodo](http://dx.doi.org/10.5281/zenodo.61771)
+> 2. Import a FASTQ file pair (*e.g.*  [`GSM461177_untreat_paired_chr4_R1.fastq`](https://zenodo.org/record/61771/files/GSM461177_untreat_paired_chr4_R1.fastq) and [`GSM461177_untreat_paired_chr4_R2.fastq`](https://zenodo.org/record/61771/files/GSM461177_untreat_paired_chr4_R2.fastq)) from [Zenodo](http://dx.doi.org/10.5281/zenodo.61771)
 >
 >    > ### :nut_and_bolt: Comments
 >    > If you are using the [Freiburg Galaxy instance](http://galaxy.uni-freiburg.de), you can load the dataset using 'Shared Data' <i class="fa fa-long-arrow-right"></i> 'Data Libraries' <i class="fa fa-long-arrow-right"></i> 'Galaxy Courses' <i class="fa fa-long-arrow-right"></i> 'RNA-Seq' <i class="fa fa-long-arrow-right"></i> 'fastq'
@@ -90,13 +91,39 @@ For quality control, we use similar tools as described in [NGS-QC tutorial](../.
 >    >    <summary>Click to view answers</summary>
 >    >    <ol type="1">
 >    >    <li>The read length is 37 bp</li>
->    >    <li>The report for GSM461177_untreat_paired_subset_1 is quite good compared to the one for GSM461177_untreat_paired_subset_2. For the latter, the per base sequence quality is bad around the 25th bp (same for the per base N content), because the quality in the 2nd tile is bad (maybe because of some event during sequencing). We need to be careful for the quality treatment and to do it with paired-end information</li>
+>    >    <li>Both reports for GSM461177_untreat_paired_chr4_R1 and for GSM461177_untreat_paired_chr4_R2 are quite ok. For GSM461177_untreat_paired_chr4_R1, there is several warnings and an issue on the Kmer content. For GSM461177_untreat_paired_chr4_R2, the quality in the 2nd tile is bad (maybe because of some event during sequencing). We need to be careful for the quality treatment and to do it with paired-end information</li>
 >    >    </ol>
 >    >    </details>
 >    {: .question}
 >
 > 2. **Trim Galore** :wrench:: Treat for the quality of sequences by running Trim Galore on the paired-end datasets
+>
+>    > ### :question: Questions
+>    >
+>    > Why is Trim Galore run once on the paired-end dataset and not twice on each dataset?
+>    >
+>    > <details>
+>    > <summary>Click to view answers</summary>
+>    > Trim Galore can remove sequences if they become too short during the trimming process. For paired-end files Trim Galore! removes entire sequence pairs if one (or both) of the two reads became shorter than the set length cutoff. Reads of a read-pair that are longer than a given threshold but for which the partner read has become too short can optionally be written out to single-end files. This ensures that the information of a read pair is not lost entirely if only one read is of good quality.
+>    > </details>
+>    {: .question}
+>
 > 3. **FastQC** :wrench:: Re-run FastQC on Trim Galore's outputs and inspect the differences
+>
+>    > ### :question: Questions
+>    >
+>    > 1. How are the changes in the read length?
+>    > 2. Is there any characteristics impacted by Trim Galore?
+>    >
+>    >    <details>
+>    >    <summary>Click to view answers</summary>
+>    >    <ol type="1">
+>    >    <li>The read length is then now from 20 to 37 bp</li>
+>    >    <li>For GSM461177_untreat_paired_chr4_R1, the per base sequence content is now red. For GSM461177_untreat_paired_chr4_R2, the per tile sequence quality is still bad but now also the per base sequence content and the Kmer Content</li>
+>    >    </ol>
+>    >    </details>
+>    {: .question}
+>
 {: .hands_on}
 
 As the genome of *Drosophila melanogaster* is known and assembled, we can use this information and map the sequences on this genome to identify the effects of Pasilla gene depletion on splicing events.
@@ -125,70 +152,84 @@ Spliced mappers have been developed to efficiently map transcript-derived reads 
 
 *[Kim et al., Genome Biology, 2013](https://genomebiology.biomedcentral.com/articles/10.1186/gb-2013-14-4-r36)*
 
-TopHat needs to know two important parameters about the sequencing library
+Here, we will use HISAT, a successor to TopHat2 that is faster with low memory requirements.
 
-- The library type
-- The mean inner distance between the mate pairs for paired-end data
+To run efficiently the mapping, HISAT needs to know on important parameters about the sequencing library: the library type.
 
-These information should usually come with your FASTQ files, ask your sequencing facility! If not, try to find them on the site where you downloaded the data or in the corresponding publication. Another option is to estimate these parameters with a *preliminary mapping* of a *downsampled* file and some analysis programs. Afterward, the actual mapping can be redone on the original files with the optimized parameters.
+This information should usually come with your FASTQ files, ask your sequencing facility! If not, try to find them on the site where you downloaded the data or in the corresponding publication. Another option is to estimate these parameters with a *preliminary mapping* of a *downsampled* file and some analysis programs. Afterward, the actual mapping can be redone on the original files with the optimized parameters.
 
-To help finding the needed previous information and afterward annotating RNA sequences, we can take advantage from already known reference gene annotations.
+## Preliminary mapping
 
-> ### :pencil2: Hands-on: Drosophila annotation file upload
+In a preliminary mapping, we will estimate the library type to run HISAT efficiently afterwards.
+
+> ### :nut_and_bolt: Comment
+> This step is not necessary if you don't need to estimate the library type of your data.
+{: .comment}
+
+The library type corresponds to a protocol used to generate the data: which strand the RNA fragment is synthesized from.
+
+![](../images/strand_library_type.png)
+
+*[Credit: Zhao Zhang](http://onetipperday.sterding.com/2012/07/how-to-tell-which-library-type-to-use.html)*
+
+In the previous illustration, you could see that for example dUTP method is to only sequence the strand from the first strand synthesis (the original RNA strand is degradated due to the dUTP incorporated).
+
+Examples of protocol | Description | Library Type (HISAT)
+--- | --- | ---
+Standard Illumina | Reads from the left-most end of the fragment (in transcript coordinates) map to the transcript strand, and the right-most end maps to the opposite strand | Unstranded (default)
+dUTP, NSR, NNSR | Same as above except we enforce the rule that the right-most end of the fragment (in transcript coordinates) is the first sequenced (or only sequenced for single-end reads). Equivalently, it is assumed that only the strand generated during first strand synthesis is sequenced. | First strand (FR/F)
+Ligation, Standard SOLiD | Same as above except we enforce the rule that the left-most end of the fragment (in transcript coordinates) is the first sequenced (or only sequenced for single-end reads). Equivalently, it is assumed that only the strand generated during second strand synthesis is sequenced. | Second strand (RF/R)
+
+If you do not know the library type, you can find it by yourself by mapping the reads on the reference genome and infer the library type from the mapping results by comparing reads mapping information to the annotation of the reference genome.
+
+![](../images/library_type_mapping.png)
+
+The sequencer always read from 5' to 3'. So, in First Strand case, all reads from the left-most end of RNA fragment (always from 5' to 3') are mapped to transcript-strand, and (for pair-end sequencing) reads from the right-most end are always mapped to the opposite strand.
+
+We can now try to determine the library type of our data.
+
+> ### :pencil2: Hands-on: Determining the library type
 >
 > 1. Load the Ensembl gene annotation for *Drosophila melanogaster* ([`Drosophila_melanogaster.BDGP5.78.gtf`](https://zenodo.org/record/61771/files/Drosophila_melanogaster.BDGP5.78.gtf)) from [Zenodo](http://dx.doi.org/10.5281/zenodo.61771) into your current Galaxy history and rename it
 >
 >    > ### :nut_and_bolt: Comments
 >    > If you are using the [Freiburg Galaxy instance](http://galaxy.uni-freiburg.de), you can load the dataset using 'Shared Data' <i class="fa fa-long-arrow-right"></i> 'Data Libraries' <i class="fa fa-long-arrow-right"></i> 'Galaxy Courses' <i class="fa fa-long-arrow-right"></i> 'RNA-Seq' <i class="fa fa-long-arrow-right"></i> 'annotation'
 >    {: .comment}
-{: .hands_on}
-
-## Preliminary mapping
-
-In a preliminary mapping, we will estimate the needed parameters (library type and inner distance) to run TopHat efficiently afterwards.
-
-> ### :nut_and_bolt: Comment
-> This step is not necessary if you don't need to estimate the library type and the mean inner distance between the mate pairs for paired-end data.
-{: .comment}
-
-> ### :pencil2: Hands-on: Preliminary mapping and parameter estimation
 >
-> 1. **Select first** :wrench:: Downsample the FastQ files to 200k or 1M reads
+> 2. **Select first** :wrench:: Downsample the both FastQ files generated by Trim Galore to 200k or 1M reads
 >
->    > ### :nut_and_bolt: Comment
+>    > ### :question: Questions
 >    >
->    > For the provided files downsampling is not necessary as they only contain 100k reads
->    {: .comment}
->
-> 2. **TopHat** :wrench:: Run **TopHat** with:
->    - "Paired-end (as individual datasets)" instead of "Single-end"
->    - The Trim Galore outputs in the correct order (forward and reverse reads)
->    - "Drosophila melanogaster: dm3" as reference genome
->    - Default values for *strandedness* and *insert size*
->
-> 3. **Inner Distance** :wrench:: Run **Inner Distance** on the BAM file generated by TopHat using the imported `Drosophila_melanogaster.BDGP5.78.gtf` reference gene model to estimate the *inner distance* between the two reads for paired-end data
-> 4. Inspect the resulting PDF
->
->    > ### :question: Question
->    > What is the mean value for the inner distance?
+>    > How many rows must be selected to conserve 200k reads?
 >    >
 >    > <details>
->    > <summary>Click to view answer</summary>
->    > The mean value is 112. But, if you already have read the corresponding paper carefully you might know that the fragment size is ~200bp. With read lengths of 2x37bp an educated guess could also be 125 for the inner distance. It's up to your decision, which value you prefer. 
+>    > <summary>Click to view answers</summary>
+>    > In a FastQ file, a read corresponds to 4 lines. So to conserve 200,000 reads, 800,000 must be selected.
 >    > </details>
 >    {: .question}
 >
-> 5. **Infer Experiment** :wrench:: Run **Infer Experiment** with the same files
-> 6. Check the results and search the tool's documentation for help on the meaning
+> 3. **HISAT** :wrench:: Run **HISAT** with:
+>    - "FASTQ" as "Input data format"
+>    - "Individual paired reads"
+>    - Downsampled "Trimmed reads pair 1" (Trim Galore output) as "Forward reads"
+>    - Downsampled "Trimmed reads pair 2" (Trim Galore output) as "Reverse reads"
+>    - "dm3" as reference genome
+>    - Default values for other parameters
+>
+> 4. **Infer Experiment** :wrench:: Run **Infer Experiment** to determine the library type:
+>    - HISAT output as "Input BAM/SAM file"  
+>    - Drosophila annotation as "Reference gene model"
+>
+> 5. Check the results and search the tool's documentation for help on the meaning
 >    
 >    > ### :nut_and_bolt: Comment
 >    > As it is sometimes quite difficult to find out which settings correspond to those of other programs, the following table might be helpful to identify the library type:
 >    > 
->    > Library type | **Infer Experiment** | **TopHat** | **HISAT2** | **htseq-count** | **featureCounts**
+>    > Sequencing type | **Infer Experiment** | **TopHat** | **HISAT2** | **htseq-count** | **featureCounts**
 >    > --- | --- | --- | --- | --- | ---
->    > PE | "1++,1--,2+-,2-+" | "FR Second Strand" | "FR" | "yes" | "1"
+>    > Paired-End (PE) | "1++,1--,2+-,2-+" | "FR Second Strand" | "FR" | "yes" | "1"
 >    > PE | "1+-,1-+,2++,2--" | "FR First Strand" | "RF" | "reverse" | "2"
->    > SE | "++,--" | "FR Second Strand" | "F" | "yes" | "1"
+>    > Single-End (SE) | "++,--" | "FR Second Strand" | "F" | "yes" | "1"
 >    > SE | "+-,-+" | "FR First Strand" | "R" | "reverse" | "2"
 >    > SE,PE | undecided | "FR Unstranded" | default | "no" | "0"
 >    > 
@@ -202,8 +243,8 @@ In a preliminary mapping, we will estimate the needed parameters (library type a
 >    >    <details>
 >    >    <summary>Click to view answer</summary>
 >    >    <ol type="1">
->    >    <li>Fraction of reads explained by "1++,1--,2+-,2-+": 0.5176 and Fraction of reads explained by "1+-,1-+,2++,2--": 0.4824</li>
->    >    <li>As reads are not explained by any configuration significantly, it is an "unstranded" library.</li>
+>    >    <li>Fraction of reads explained by "1++,1--,2+-,2-+": 0.0151 and Fraction of reads explained by "1+-,1-+,2++,2--": 0.9843</li>
+>    >    <li>The library type seems then to be First Strand.</li>
 >    >    </ol>
 >    >    </details>
 >    {: .question}
@@ -211,57 +252,56 @@ In a preliminary mapping, we will estimate the needed parameters (library type a
 
 ## Actual mapping
 
-With these estimated parameters, we can now map all the RNA sequences on the *Drosophila melanogaster* genome using TopHat.
+We can now map all the RNA sequences on the *Drosophila melanogaster* genome using HISAT.
 
 > ### :pencil2: Hands-on: Spliced mapping
 >
-> 1. **TopHat** :wrench:: Run **TopHat** with the full parameter set to get the best mapping results:
->    - "Paired-end (as individual datasets)" instead of "Single-end"
->    - "Mean Inner Distance" to the previously determined value
->    - "Drosophila melanogaster: dm3" as reference genome
->    - "Full parameter list" for "TopHat settings to use"
->    - "Library type" to the previously determined value
->    - "18" for the "Minimum length of read segments"
+> 1. **HISAT** :wrench:: Run **HISAT** with:
+>    - "FASTQ" as "Input data format"
+>    - "Individual paired reads"
+>    - "Trimmed reads pair 1" (Trim Galore output) as "Forward reads"
+>    - "Trimmed reads pair 2" (Trim Galore output) as "Reverse reads"
+>    - "dm3" as reference genome
+>    - Default values for other parameters except "Spliced alignment parameters"
+>    - "Specify strand-specific information" to the previously determined value
+>    - `Drosophila_melanogaster.BDGP5.78.gtf` as "GTF file with known splice sites"
 >
->        By default, TopHat proposes to fix the minimum length of read segments to 25, but a value of 18 seems to be a more appropriate value for this input data.
->
->        > ### :question: Question
->        >
->        > Why?
->        > 
->        > <details>
->        > <summary>Click to view answer</summary>
->        > Remember that the total length of the reads are 37 bases. With 25, we left with segments of lengths 25 (or more) and 12 (or less) bases. The 12 base long reads lead to huge number of multi mappings. Setting this option to 18 results in bit longer segments and in best case both of them can be mapped properly.           
->        > </details>
->        {: .question}
->
->    - "Yes" for use of own junction data
->    - "Yes" for use of Gene Annotation Model
->    - `Drosophila_melanogaster.BDGP5.78.gtf` as Gene Model Annotations (to enable transcriptome alignment)
->    - "No (--coverage-search)" to use coverage-based search for junctions as it needs a lot a time. But consider this option for real world data.
->
->        The TopHat algorithm splits reads into segments to map the reads across splice junctions. Coverage-based search for junctions increases the sensitivity.
->
-> 2. Inspect the "align summary" file
+> 2. Inspect the mapping statistics
+>    - Click on "View details" (Warning icon)
+>    - Click on "stderr" (Tool Standard Error)
 >
 >    > ### :question: Question
 >    >
->    > 1. How many forward reads were mapped? And how many reverse reads?
->    > 2. What is the "overall read mapping rate"? And the "concordant pair alignment rate"?
->    > 3. Why do some reads have multiple alignments?
+>    > 1. How many paired reads were mapped 1 time? And how many paired reads were mapped more than 1 time?
+>    > 2. How many reads were mapped but without their mate pair?
+>    > 3. What is the overall alignment rate?
 >    > 
 >    >    <details>
 >    >    <summary>Click to view answer</summary>
 >    >    <ol type="1">
->    >    <li>90.7% of the forward reads were mapped and 85.8% of the reverse reads</li>
->    >    <li>The "overall read mapping rate" is the rate of mapping when we take into account all reads (forward and reverse reads). Here it is 88.3%. The "concordant pair alignment rate" is (number of aligned pair - number of discordant alignments)/(number of paired reads). Here the value is 80.3%, a quite good value. Maximizing this value is the goal.</li>
->    >    <li>The reads are small and with pseudogenes and other valid genome duplications, it is possible that the reads are mapped multiple times</li>
+>    >    <li>29.06% and 6.10%</li>
+>    >    <li>11,963 reads (the reads aligned discordantly 1 time)</li>
+>    >    <li>The overall alignment rate is 75.77%. It counts proportion of mapped reads: (12017+2486+11963+7390/2+1413/2)/40736</li>
 >    >    </ol>
 >    >    </details>
 >    {: .question}
 {: .hands_on}
 
-**TopHat** generates a BAM file with the mapped reads and three BED files containing splice junctions, insertions and deletions.
+**HISAT** generates a BAM file with the mapped reads.
+
+> ### :question: Question
+>
+> 1. What is a BAM file?
+> 2. What does such file contain?
+> 
+>    <details>
+>    <summary>Click to view answer</summary>
+>    <ol type="1">
+>    <li>BAM file is the binary version of SAM file</li>
+>    <li>It contains information about the mapping: for each mapped read, the position on the reference genome, the mapping quality, ...</li>
+>    </ol>
+>    </details>
+{: .question}
 
 The mapping exercise worked for you? Great! :tada:
 
@@ -270,40 +310,26 @@ The mapping exercise worked for you? Great! :tada:
 > You can do the same process on the other sequence files available on [Zenodo](http://dx.doi.org/10.5281/zenodo.61771)
 > 
 > - Paired-end data
->     - `[GSM461178_untreat_paired_subset_1](GSM461178_untreat_paired_subset_1.fastq)` and `[GSM461178_untreat_paired_subset_2](GSM461178_untreat_paired_subset_2.fastq)`
->     - `[GSM461180_treat_paired_subset_1](GSM461180_treat_paired_subset_1.fastq)` and `[GSM461180_treat_paired_subset_2](GSM461180_treat_paired_subset_2.fastq)`
->     - `[GSM461181_treat_paired_subset_1](GSM461181_treat_paired_subset_1.fastq)` and `[GSM461181_treat_paired_subset_2](GSM461181_treat_paired_subset_2.fastq)`
+>     - [`GSM461178_untreat_paired_chr4_R1`](GSM461178_untreat_paired_chr4_R1.fastq) and [`GSM461178_untreat_paired_chr4_R2`](GSM461178_untreat_paired_chr4_R2.fastq)
+>     - [`GSM461180_treat_paired_chr4_R1`](GSM461180_treat_paired_chr4_R1.fastq) and [`GSM461180_treat_paired_chr4_R2`](GSM461180_treat_paired_chr4_R2.fastq)
+>     - [`GSM461181_treat_paired_chr4_R1`](GSM461181_treat_paired_chr4_R1.fastq) and [`GSM461181_treat_paired_chr4_R2`](GSM461181_treat_paired_chr4_R2.fastq)
 > - Single-end data
->     - `[GSM461176_untreat_single_subset](GSM461176_untreat_single_subset.fastq)`
->     - `[GSM461179_treat_single_subset](GSM461179_treat_single_subset.fastq)`
->     - `[GSM461182_untreat_single_subset](GSM461182_untreat_single_subset.fastq)`
+>     - [`GSM461176_untreat_single_chr4`](GSM461176_untreat_single_chr4.fastq)
+>     - [`GSM461179_treat_single_chr4`](GSM461179_treat_single_chr4.fastq)
+>     - [`GSM461182_untreat_single_chr4`](GSM461182_untreat_single_chr4.fastq)
 >
 > This is really interesting to redo on the other datasets, specially to check how the parameters are inferred given the different type of data.
 {: .hands_on}
 
-## Inspection of TopHat results
+## Inspection of HISAT results
 
-However, the datasets we used were a subset of the original data. They are then too small to give you a good impression of how real data looks like. So we have run TopHat for you on the real datasets. We extracted only the reads mapped to chromosome 4 of *Drosophila*.
+The BAM file contains information about where the reads are mapped on the reference genome. But it is binary file and with the information for more than 3 millions of reads, it makes it difficult to visualize it, to inspect how the reads are mapped on the reference genome.
 
-> ### :pencil2: Hands-on: Inspection of TopHat results
+There is 
+
+> ### :pencil2: Hands-on: Inspection of HISAT results
 >
-> 1. Create a new history
-> 2. Import from [Zenodo](http://dx.doi.org/10.5281/zenodo.61771) into the new history the following files:
->    - [`GSM461177_untreat_paired_chr4.bam`](https://zenodo.org/record/61771/files/GSM461177_untreat_paired_chr4.bam)
->    - [`GSM461177_untreat_paired_deletions_chr4.bed`](https://zenodo.org/record/61771/files/GSM461177_untreat_paired_deletions_chr4.bed)
->    - [`GSM461177_untreat_paired_insertions_chr4.bed`](https://zenodo.org/record/61771/files/GSM461177_untreat_paired_insertions_chr4.bed)
->    - [`GSM461177_untreat_paired_junctions_chr4.bed`](https://zenodo.org/record/61771/files/GSM461177_untreat_paired_junctions_chr4.bed)
-> 
->    > ### :nut_and_bolt: Comments
->    > If you are using the [Freiburg Galaxy instance](http://galaxy.uni-freiburg.de), you can load the dataset using 'Shared Data' <i class="fa fa-long-arrow-right"></i> 'Data Libraries' <i class="fa fa-long-arrow-right"></i> 'Galaxy Courses' <i class="fa fa-long-arrow-right"></i> 'RNA-Seq' <i class="fa fa-long-arrow-right"></i> 'sample_tophat2_out'
->    {: .comment}
->
-> 3. **IGV** :wrench:: Visualize this BAM file and the three BED files, particularly the region on chromosome 4 between 560 kb to 600 kb (`chr4:560,000-600,000`)
->
->    > ### :nut_and_bolt: Comment
->    > - Change the data type from "tabular" to "bed"
->    > - Rename the datasets according to the samples
->    {: .comment}
+> 1. **IGV** :wrench:: Visualize the HISAT output BAM file, particularly the region on chromosome 4 between 560 kb to 600 kb (`chr4:560,000-600,000`)
 >
 >    > ### :nut_and_bolt: Comment
 >    >
@@ -312,20 +338,16 @@ However, the datasets we used were a subset of the original data. They are then 
 >
 >    > ### :question: Question
 >    >
->    > 1. Which information does the `GSM461177_untreat_paired_junctions_chr4.bed` BED file contain?
->    > 2. How is this information represented in the BED file? And in IGV?
->    > 3. Where is the "JUNC00013368" junction situated? What is its score?
->    > 4. How many reads are concerned by the "JUNC00013368" junction, visible when we zoom on `chr4:568,476-571,814`? Can you relate that to the score?
->    > 5. And how many are concerned by the "JUNC00013369" junction? 
+>    > 1. Which information does appear on the top in grey?
+>    > 2. What does the horizontal bar in the following screenshot represent?
 >    >
+>    >    ![](../images/junction_igv_screenshot.png)
+>    > 
 >    >    <details>
 >    >    <summary>Click to view answers</summary>
 >    >    <ol type="1">
->    >    <li>`GSM461177_untreat_paired_junctions_chr4.bed` BED file contain the splicing events, *i.e.* when at least a single read splits across two exons in the alignment track</li>
->    >    <li>The BED file is a tabular with: Chrom, Start, End, Name, Score, Strand, ThickStart, ThickEnd, ItemRGB, BlockCount, BlockSizes, BlockStart. In IGV, the junctions are represented by an arc from the beginning to the end of the junction. The color of the arc represent the strand on which the junction is found. The height of the arc, and its thickness, are proportional to the depth of read coverage. </li>
->    >    <li>The "JUNC00013368" junction starts at 568,736 and ends at 569,905. It has a score of 6.</li>
->    >    <li>6 reads split across "JUNC00013368", exactly the score</li>
->    >    <li>8 reads split across "JUNC00013369". 3 reads are also mapped in the junction chromosome part: these reads are then part of the exon and be implied in a different splicing.</li>
+>    >    <li>The coverage plot: the sum of mapped reads at each position</li>
+>    >    <li>They represent the junctions events (or splice sites): when reads are mapped over an intron</li>
 >    >    </ol>
 >    >    </details>
 >    {: .question}
@@ -336,22 +358,22 @@ However, the datasets we used were a subset of the original data. They are then 
 >    >
 >    > * Right click on the BAM file
 >    > * Select **Sashimi Plot** from the context menu
->    {: .tip}
->
->    ![](../images/tophat_igv_sashimi.png)
+>    {: .tip}    
 >
 >    > ### :question: Question
 >    >
->    > 1. What does the bar graph represent? And the numbered line?
+>    > ![](../images/hisat_igv_sashimi.png)
+>    >
+>    > 1. What does the vertical bar graph represent? And the numbered arcs?
 >    > 2. What does the number means?
->    > 3. What is the name of the junction where 10 reads split? What is its position on the genome?
+>    > 3. Why do we observe 4 different blue group of linked boxes on the bottom? 
 >    > 
 >    >    <details>
 >    >    <summary>Click to view answers</summary>
 >    >    <ol type="1">
 >    >    <li>The coverage for each alignment track is plotted as a bar graph. Arcs representing splice junctions connecting exons</li>
 >    >    <li>Arcs display the number of reads split across the junction (junction depth). </li>
->    >    <li>JUNC00013370 starts at 574338 and ends at 578091.</li>
+>    >    <li>The 4 group of linked boxes on the bottom represent the 4 possible RNAs, changing because of different splicing events of the first intron.</li>
 >    >    </ol>
 >    >    </details>
 >    {: .question}
@@ -361,20 +383,31 @@ However, the datasets we used were a subset of the original data. They are then 
 >    > Check [IGV documentation on Sashimi plots](http://software.broadinstitute.org/software/igv/Sashimi) to find some clues
 >    {: .comment}
 >
-> 4. **IGV** :wrench:: Look around to find other regions with interesting junctions, *e.g.* `chr4:870,000-940,000`
 {: .hands_on}
+
+After the mapping, we have in the generated mapping file the information about where the reads are mapped on the reference genome. So for each mapped read, we know where it is mapped and how good it was mapped. 
+
+The next step in the RNA-Seq data analysis is quantification of expression level of the genomic features (gene, transcript, exons, ...) to be able then to compare several samples for the different expression analysis. The quantification consist into taking each known genomic feature (*e.g.* gene) of the reference genome and then counting how many reads are mapped on this genomic feature. So, in this step, we start with an information per mapped reads to end with an information per genomic feature.
+
+> ### :nut_and_bolt: Comment
+> 
+> The quantification depends on the definition of the genomic features of the reference genome, and then on the annotations. We strongly recommend you to use an annotation corresponding to the same version of the reference genome you used for the mapping.
+{: .comment}
+
+To identify exons that are regulated by the Pasilla gene, we need to identify genes and exons which are differentially expressed between samples with PS gene depletion and control samples.
+In this tutorial, we will then analyze the differential gene expression, but also the differential exon usage.
 
 # Analysis of the differential gene expression
 
-To identify exons that are regulated by the Pasilla gene, we need to identify genes and exons which are differentially expressed between samples with PS gene depletion and control samples.
+We will first investigate the differential gene expression to identify which genes are impacted by the Pasilla gene depletion
 
 ## Count the number of reads per annotated gene
 
 To compare the expression of single genes between different conditions (*e.g.* with or without PS depletion), an first essential step is to quantify the number of reads per gene. [**HTSeq-count**](http://www-huber.embl.de/users/anders/HTSeq/doc/count.html) is one of the most popular tool for gene quantification.
 
-To quantify the number of reads mapped to a gene, an annotation of the genomic features as it is in the genes is needed. We already upload on Galaxy the [`Drosophila_melanogaster.BDGP5.78.gtf`](https://zenodo.org/record/61771/files/Drosophila_melanogaster.BDGP5.78.gtf) with the Ensembl gene annotation for *Drosophila melanogaster*.
+To quantify the number of reads mapped to a gene, an annotation of the gene position is needed. We already upload on Galaxy the [`Drosophila_melanogaster.BDGP5.78.gtf`](https://zenodo.org/record/61771/files/Drosophila_melanogaster.BDGP5.78.gtf) with the Ensembl gene annotation for *Drosophila melanogaster*.
 
-In principle, the counting of reads overlapping with genomic features is a fairly simple task, but there are some details that need to be decided. **HTSeq-count** offers 3 choices ("union", "intersection_strict" and "intersection_nonempty") to handle read mapping to multiple locations, reads overlapping introns, or reads that overlap more than one genomic feature:
+In principle, the counting of reads overlapping with genomic features is a fairly simple task. But there are some details that need to be decided, such how to handle multi-mapping reads. **HTSeq-count** offers 3 choices ("union", "intersection_strict" and "intersection_nonempty") to handle read mapping to multiple locations, reads overlapping introns, or reads that overlap more than one genomic feature:
 
 ![](../images/htseq_count.png)
 
@@ -384,76 +417,78 @@ The recommended mode is "union", which counts overlaps even if a read only share
 
 > ### :pencil2: Hands-on: Counting the number of reads per annotated gene
 >
-> 1. Copy the `Drosophila_melanogaster.BDGP5.78.gtf` file from the first history
->
->    > ### :bulb: Tip: Copying a file from an history to an other
->    >
->    > * Click on "View all histories" in the top right
->    > * Drag and drop the file you want to copy to your new history
->    > * Click on "Done" on the top left
->    {: .tip}
->
-> 2. **HTSeq-count** :wrench:: Run **HTSeq-count** on the sorted BAM file with
+> 1. **HTSeq-count** :wrench:: Run **HTSeq-count** on the sorted BAM file with
 >    - `Drosophila_melanogaster.BDGP5.78.gtf` as "GFF file"
->    - The "union" mode
+>    - The "Union" mode
 >    - A "Minimum alignment quality" of 10
-> 3. Inspect the result files
+> 2. Inspect the result files
 >
 >    > ### :question: Question
 >    >
->    > Which feature has the most reads mapped on it?
+>    > 1. Which information does the result file contain? 
+>    > 2. Which feature has the most reads mapped on it?
 >    > 
 >    >    <details>
 >    >    <summary>Click to view answers</summary>
->    >    To display the most found feature, we need first to sort the output file with the feature and the number of reads found for these feature. We do that using Sort tool, on the second column and in descending order. And we found that FBgn0017545 is the feature with the most reads mapped on it with 4,030 reads.
+>    >    <ol type="1">
+>    >    <li>The useful result file is a tabular file with two columns: the gene id and the number of reads mapped on the corresponding gene</li>
+>    >    <li>To display the most found feature, we need first to sort the output file with the feature and the number of reads found for these feature. We do that using Sort tool, on the second column and in descending order. And we found that FBgn0017545 is the feature with the most reads mapped on it with 4,030 reads.</li>
+>    >    </ol>
 >    >    </details>
 >    {: .question}
 {: .hands_on}
 
 ## Analysis of the differential gene expression
 
-In the previous section, we counted only reads that mapped to chromosome 4 for only one sample. To be able to identify differential gene expression induced by PS depletion, all datasets (3 treated and 4 untreated) must be analyzed with the similar procedure.
+In the previous section, we counted only reads that mapped to genes of chromosome 4 and for only one sample. To be able to identify differential gene expression induced by PS depletion, all datasets (3 treated and 4 untreated) must be analyzed with the similar procedure and for whole genome.
 
-You can export a workflow from the previous steps and rerun it on the 7 samples whose the raw sequences are available on [Zenodo](http://dx.doi.org/10.5281/zenodo.61771). For time saving, we run the previous steps for you and obtain 7 count files, available on [Zenodo](http://dx.doi.org/10.5281/zenodo.61771)
+For time and computer saving, we run the previous steps for you and obtain 7 count files, available on [Zenodo](http://dx.doi.org/10.5281/zenodo.61771).
 
-These files contain for each gene the number of reads mapped to it. We could compare directly the files and then having the differential gene expression. But the number of sequenced reads mapped to a gene depends on:
+These files contain for each gene of Drosophila the number of reads mapped to it. We could compare directly the files and then having the differential gene expression. But the number of sequenced reads mapped to a gene depends on:
 
 - Its own expression level
 - Its length
-- The sequencing depth
+- The sequencing depth of the sample
 - The expression of all other genes within the sample
 
-Either for within or for inter-sample comparison, the counts need to be normalized. We can then use the Differential Gene Expression (DGE) analysis, whose two basic tasks are:
+Either for within or for inter-sample comparison, the gene counts need to be normalized. We can then use the Differential Gene Expression (DGE) analysis, whose two basic tasks are:
 
 - Estimate the biological variance using the replicates for each condition
 - Estimate the significance of expression differences between any two conditions
 
 This expression analysis is estimated from read counts and attempts are made to correct for variability in measurements using replicates that are absolutely essential accurate results. For your own analysis, we advice you to use at least 3, better 5 biological replicates. 
 
-[**DESeq2**](https://bioconductor.org/packages/release/bioc/html/DESeq2.html) is a great tool for DGE analysis. It takes read counts produced by **HTseq-count** and applies size factor normalization:
+[**DESeq2**](https://bioconductor.org/packages/release/bioc/html/DESeq2.html) is a great tool for DGE analysis. It takes read counts produced by **HTseq-count**, combine them into a big table (with gene in the rows and samples in the columns) and applies size factor normalization:
 
 - Computation for each gene of the geometric mean of read counts across all samples
 - Division of every gene count by the geometric mean
 - Use of the median of these ratios as sample's size factor for normalization
 
-Multiple factors can then be incorporated in the analysis. In our example, we have samples with two varying factors:
+Multiple factors with several levels can then be incorporated in the analysis. With the normalization, we can then compare with statistical liability the gene expression of different levels of a factor. 
+
+In our example, we have samples with two varying factors that can explain differences in gene expression:
 
 - Treatment (either treated or untreated)
 - Sequencing type (paired-end or single-end)
 
-Here treatment is the primary factor which we are interested in.The sequencing type is some further information that we know about the data that might effect the analysis. This particular multi-factor analysis allows us to assess the effect of the treatment taking also the sequencing type into account.
+Here treatment is the primary factor which we are interested in. The sequencing type is some further information that we know about the data that might effect the analysis. This particular multi-factor analysis allows us to assess the effect of the treatment taking also the sequencing type into account.
 
-> ### :pencil2: Hands-on:
+> ### :nut_and_bolt: Comment
+> 
+> We recommend you to add as many factors as you think that may affect the gene expression. It can be the sequencing type like here, but it can also be the manipulation (if different persons are involved in the library preparation), ...
+{: .comment}
+
+> ### :pencil2: Hands-on: Analysis of the differential gene expression (1)
 >
 > 1. Create a new history
 > 2. Import the seven count files from [Zenodo](http://dx.doi.org/10.5281/zenodo.61771)
->    - [GSM461176_untreat_single.counts](https://zenodo.org/record/61771/files/GSM461176_untreat_single.counts)
->    - [GSM461177_untreat_paired.counts](https://zenodo.org/record/61771/files/GSM461177_untreat_paired.counts)
->    - [GSM461178_untreat_paired.counts](https://zenodo.org/record/61771/files/GSM461178_untreat_paired.counts)
->    - [GSM461179_treat_single.counts](https://zenodo.org/record/61771/files/GSM461179_treat_single.counts)
->    - [GSM461180_treat_paired.counts](https://zenodo.org/record/61771/files/GSM461180_treat_paired.counts)
->    - [GSM461181_treat_paired.counts](https://zenodo.org/record/61771/files/GSM461181_treat_paired.counts)
->    - [GSM461182_untreat_single.counts](https://zenodo.org/record/61771/files/GSM461182_untreat_single.counts)
+>    - [`GSM461176_untreat_single.counts`](https://zenodo.org/record/61771/files/GSM461176_untreat_single.counts)
+>    - [`GSM461177_untreat_paired.counts`](https://zenodo.org/record/61771/files/GSM461177_untreat_paired.counts)
+>    - [`GSM461178_untreat_paired.counts`](https://zenodo.org/record/61771/files/GSM461178_untreat_paired.counts)
+>    - [`GSM461179_treat_single.counts`](https://zenodo.org/record/61771/files/GSM461179_treat_single.counts)
+>    - [`GSM461180_treat_paired.counts`](https://zenodo.org/record/61771/files/GSM461180_treat_paired.counts)
+>    - [`GSM461181_treat_paired.counts`](https://zenodo.org/record/61771/files/GSM461181_treat_paired.counts)
+>    - [`GSM461182_untreat_single.counts`](https://zenodo.org/record/61771/files/GSM461182_untreat_single.counts)
 >
 >    > ### :nut_and_bolt: Comments
 >    > If you are using the [Freiburg Galaxy instance](http://galaxy.uni-freiburg.de), you can load the dataset using 'Shared Data' <i class="fa fa-long-arrow-right"></i> 'Data Libraries' <i class="fa fa-long-arrow-right"></i> 'Galaxy Courses' <i class="fa fa-long-arrow-right"></i> 'RNA-Seq' <i class="fa fa-long-arrow-right"></i> 'count_tables'
@@ -462,10 +497,10 @@ Here treatment is the primary factor which we are interested in.The sequencing t
 > 3. **DESeq2** :wrench:: Run **DESeq2** with:
 >    - "Treatment" as first factor with "treated" and "untreated" as levels and selection of count files corresponding to both levels
 >
->       > ### :nut_and_bolt: Comment
+>       > ### :bulb: Tip
 >       >
 >       > You can select several files by keeping the CTRL (or COMMAND) key pressed and clicking on the interesting files 
->       {: .comment}
+>       {: .tips}
 >
 >    - "Sequencing" as second factor with "PE" and "SE" as levels and selection of count files corresponding to both levels
 >
@@ -489,7 +524,7 @@ The first output of **DESeq2** is a tabular file. The columns are:
 6.	*p*-value for the statistical significance of this change
 7.	*p*-value adjusted for multiple testing with the Benjamini-Hochberg procedure which controls false discovery rate ([FDR](https://en.wikipedia.org/wiki/False_discovery_rate))
 
-> ### :pencil2: Hands-on:
+> ### :pencil2: Hands-on: Analysis of the differential gene expression (2)
 >
 >1. **Filter** :wrench:: Run **Filter** to extract genes with a significant change in gene expression (adjusted *p*-value equal or below 0.05) between treated and untreated samples
 >
@@ -528,17 +563,8 @@ The first output of **DESeq2** is a tabular file. The columns are:
 In addition to the list of genes, **DESeq2** outputs a graphical summary of the results, useful to evaluate the quality of the experiment:
 
 1. Histogram of *p*-values for all tests
-
-    ![](../images/DeSeq2_histogram.png)
-
 2. [MA plot](https://en.wikipedia.org/wiki/MA_plot): global view of the relationship between the expression change of conditions (log ratios, M), the average expression strength of the genes (average mean, A), and the ability of the algorithm to detect differential gene expression. The genes that passed the significance threshold (adjusted p-value < 0.1) are colored in red.
-
-    ![](../images/DESeq2_MA_plot.png)
-
-
 3. Principal Component Analysis ([PCA](https://en.wikipedia.org/wiki/Principal_component_analysis)) and the first two axes
-
-    ![](../images/DESeq2_PCA.png)
 
     Each replicate is plotted as an individual data point. This type of plot is useful for visualizing the overall effect of experimental covariates and batch effects.
 
@@ -559,9 +585,6 @@ In addition to the list of genes, **DESeq2** outputs a graphical summary of the 
 
 4. Heatmap of sample-to-sample distance matrix: overview over similarities and dissimilarities between samples
 
-    ![](../images/DESeq2_heatmap.png)
-
-
     > ### :question: Questions
     >
     > How are the samples grouped?
@@ -577,8 +600,6 @@ In addition to the list of genes, **DESeq2** outputs a graphical summary of the 
 (black), the fitted values (red), and the final maximum a posteriori estimates used in testing
 (blue)
 
-    ![](../images/DESeq2_dispersion.png)
-
     This dispersion plot is typical, with the final estimates shrunk from the gene-wise estimates towards the fitted estimates. Some gene-wise estimates are flagged as outliers and not shrunk towards the fitted value. The amount of shrinkage can be more or less than seen here, depending on the sample size, the number of coefficients, the row mean and the variability of the gene-wise estimates.
 
 
@@ -590,7 +611,7 @@ We have extracted genes that are differentially expressed in treated (with PS ge
 
 The Database for Annotation, Visualization and Integrated Discovery ([DAVID](https://david.ncifcrf.gov/)) provides a comprehensive set of functional annotation tools for investigators to understand the biological meaning behind large lists of genes.
 
-We use then DAVID to identify functional annotations of the upregulated genes and the downregulated genes.
+The query to DAVID can be done only on 100 genes. So, we will need to select the ones where the most interested in.
 
 > ### :pencil2: Hands-on:
 >
@@ -629,11 +650,9 @@ We use then DAVID to identify functional annotations of the upregulated genes an
 
 # Inference of the differential exon usage
 
-Now, we would like to know the differential exon usage between treated (PS depleted) and untreated samples using RNA-seq exon counts. We will rework on the mapping results ([`GSM461177_untreat_paired_chr4.bam`](https://zenodo.org/record/61771/files/GSM461177_untreat_paired_chr4.bam)).
+Now, we would like to know the differential exon usage between treated (PS depleted) and untreated samples using RNA-seq exon counts. We will rework on the mapping results we generated previously.
 
-We use [DEXSeq](http://www.bioconductor.org/packages/release/bioc/html/DEXSeq.html). DEXSeq detects high sensitivity genes, and in many cases exons, that are subject to differential exon usage. 
-
-First, we need to count the number of reads mapping the exons. 
+We will use [DEXSeq](http://www.bioconductor.org/packages/release/bioc/html/DEXSeq.html). DEXSeq detects high sensitivity genes, and in many cases exons, that are subject to differential exon usage. But first, as for the differential gene expression, we need to count the number of reads mapping the exons. 
 
 ## Count the number of reads per exon
 
@@ -641,15 +660,13 @@ This step is similar to the step of [counting the number of reads per annotated 
 
 > ### :pencil2: Hands-on: Counting the number of reads per exon
 >
-> 1. Copy the `Drosophila_melanogaster.BDGP5.78.gtf` file from the first history
-> 2. **DEXSeq-Count** :wrench:: Use the **DEXSeq-Count** to prepare the *Drosophila* annotations to extract only exons with corresponding gene ids
+> 1. **DEXSeq-Count** :wrench:: Use the **DEXSeq-Count** to prepare the *Drosophila* annotations (`Drosophila_melanogaster.BDGP5.78.gtf`) to extract only exons with corresponding gene ids
 >     - "Prepare annotation" of "Mode of operation" 
 >
->    The output is again a GTF file that is ready to use for counting
->   
-> 3. Copy the `GSM461177_untreat_paired_chr4.bam` file from the second history
+>    The output is again a GTF file that is ready to be used for counting
+> 
 > 4. **DEXSeq-Count** :wrench:: Count reads using **DEXSeq-Count** with
->     - `GSM461177_untreat_paired_chr4.bam` as "Input bam file"
+>     - HISAT output as "Input bam file"
 >     - The formatted GTF file
 > 5. Inspect the result files
 >
@@ -668,7 +685,7 @@ This step is similar to the step of [counting the number of reads per annotated 
 
 DEXSeq usage is similar to DESeq2. It uses similar statistics to find differentially used exons. 
 
-As for DESeq2, we counted only reads that mapped to exons on chromosome 4 for only one sample in the previous step. To be able to identify differential exon usage induced by PS depletion, all datasets (3 treated and 4 untreated) must be analyzed with the similar procedure. For time saving, we did that for you. The results are available on [Zenodo](http://dx.doi.org/10.5281/zenodo.61771):
+As for DESeq2, in the previous step, we counted only reads that mapped to exons on chromosome 4 and for only one sample. To be able to identify differential exon usage induced by PS depletion, all datasets (3 treated and 4 untreated) must be analyzed with the similar procedure. For time saving, we did that for you. The results are available on [Zenodo](http://dx.doi.org/10.5281/zenodo.61771):
 
 - [dexseq.gtf](https://zenodo.org/record/61771/files/dexseq.gtf): the results of the running DEXSeq-count in 'Prepare annotation' mode
 - Seven files, counts files generated in 'Count reads' mode
@@ -708,7 +725,6 @@ Similarly to DESeq2, DEXSeq generates a table with:
 4.  Mean normalized counts, averaged over all samples from both conditions
 5.  Logarithm (to basis 2) of the fold change
 
-
     The log2 fold changes are based on primary factor level 1 vs. factor level 2. The order of factor levels is then important. For example, for the factor 'Condition', DESeq2 computes fold changes of 'treated' samples against 'untreated', *i.e.* the values correspond to up- or downregulations of genes in treated samples.
 
 6.  Standard error estimate for the log2 fold change estimate
@@ -744,4 +760,4 @@ Unfortunately, in the process of counting, we loose all the information of the g
 In this tutorial, we have analyzed real RNA sequencing data to extract useful information, such as which genes are up- or downregulated by depletion of the Pasilla gene and which genes are regulated by the Pasilla gene. To answer these questions, we analyzed RNA sequence datasets using a reference-based RNA-seq data analysis approach. This approach can be sum up with the following scheme:
 
 
-![](../images/ref_based_workflow.png)
+![](../images/rna_quantification.png)
