@@ -34,3 +34,4 @@ install:
 	gem install jekyll
 	gem install jemoji
 	gem install jekyll-feed
+	gem install bundler
