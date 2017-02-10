@@ -40,7 +40,7 @@ We have extracted sequences from the Sequence Read Archive (SRA) files to build 
 > ### :pencil2: Hands-on: Data upload
 >
 > 1. Create a new history for this RNA-seq exercise
-> 2. Import a FASTQ file pair (*e.g.*  [`GSM461177_untreat_paired_chr4_R1.fastq`](https://zenodo.org/record/61771/files/GSM461177_untreat_paired_chr4_R1.fastq) and [`GSM461177_untreat_paired_chr4_R2.fastq`](https://zenodo.org/record/61771/files/GSM461177_untreat_paired_chr4_R2.fastq)) from [Zenodo](http://dx.doi.org/10.5281/zenodo.61771)
+> 2. Import a FASTQ file pair (*e.g.*  [`GSM461177_untreat_paired_chr4_R1.fastq`](https://zenodo.org/record/290221/files/GSM461177_untreat_paired_chr4_R1.fastq) and [`GSM461177_untreat_paired_chr4_R2.fastq`](https://zenodo.org/record/290221/files/GSM461177_untreat_paired_chr4_R2.fastq)) from [Zenodo](http://dx.doi.org/10.5281/zenodo.290221)
 >
 >    > ### :nut_and_bolt: Comments
 >    > If you are using the [Freiburg Galaxy instance](http://galaxy.uni-freiburg.de), you can load the dataset using 'Shared Data' <i class="fa fa-long-arrow-right"></i> 'Data Libraries' <i class="fa fa-long-arrow-right"></i> 'Galaxy Courses' <i class="fa fa-long-arrow-right"></i> 'RNA-Seq' <i class="fa fa-long-arrow-right"></i> 'fastq'
@@ -190,7 +190,7 @@ We can now try to determine the library type of our data.
 
 > ### :pencil2: Hands-on: Determining the library type
 >
-> 1. Load the Ensembl gene annotation for *Drosophila melanogaster* ([`Drosophila_melanogaster.BDGP5.78.gtf`](https://zenodo.org/record/61771/files/Drosophila_melanogaster.BDGP5.78.gtf)) from [Zenodo](http://dx.doi.org/10.5281/zenodo.61771) into your current Galaxy history and rename it
+> 1. Load the Ensembl gene annotation for *Drosophila melanogaster* ([`Drosophila_melanogaster.BDGP5.78.gtf`](https://zenodo.org/record/290221/files/Drosophila_melanogaster.BDGP5.78.gtf)) from [Zenodo](http://dx.doi.org/10.5281/zenodo.290221) into your current Galaxy history and rename it
 >
 >    > ### :nut_and_bolt: Comments
 >    > If you are using the [Freiburg Galaxy instance](http://galaxy.uni-freiburg.de), you can load the dataset using 'Shared Data' <i class="fa fa-long-arrow-right"></i> 'Data Libraries' <i class="fa fa-long-arrow-right"></i> 'Galaxy Courses' <i class="fa fa-long-arrow-right"></i> 'RNA-Seq' <i class="fa fa-long-arrow-right"></i> 'annotation'
@@ -307,7 +307,7 @@ The mapping exercise worked for you? Great! :tada:
 
 > ### :pencil2: (Optional) Hands-on: Map other datasets
 >
-> You can do the same process on the other sequence files available on [Zenodo](http://dx.doi.org/10.5281/zenodo.61771)
+> You can do the same process on the other sequence files available on [Zenodo](http://dx.doi.org/10.5281/zenodo.290221)
 > 
 > - Paired-end data
 >     - [`GSM461178_untreat_paired_chr4_R1`](GSM461178_untreat_paired_chr4_R1.fastq) and [`GSM461178_untreat_paired_chr4_R2`](GSM461178_untreat_paired_chr4_R2.fastq)
@@ -405,7 +405,7 @@ We will first investigate the differential gene expression to identify which gen
 
 To compare the expression of single genes between different conditions (*e.g.* with or without PS depletion), an first essential step is to quantify the number of reads per gene. [**HTSeq-count**](http://www-huber.embl.de/users/anders/HTSeq/doc/count.html) is one of the most popular tool for gene quantification.
 
-To quantify the number of reads mapped to a gene, an annotation of the gene position is needed. We already upload on Galaxy the [`Drosophila_melanogaster.BDGP5.78.gtf`](https://zenodo.org/record/61771/files/Drosophila_melanogaster.BDGP5.78.gtf) with the Ensembl gene annotation for *Drosophila melanogaster*.
+To quantify the number of reads mapped to a gene, an annotation of the gene position is needed. We already upload on Galaxy the [`Drosophila_melanogaster.BDGP5.78.gtf`](https://zenodo.org/record/290221/files/Drosophila_melanogaster.BDGP5.78.gtf) with the Ensembl gene annotation for *Drosophila melanogaster*.
 
 In principle, the counting of reads overlapping with genomic features is a fairly simple task. But there are some details that need to be decided, such how to handle multi-mapping reads. **HTSeq-count** offers 3 choices ("union", "intersection_strict" and "intersection_nonempty") to handle read mapping to multiple locations, reads overlapping introns, or reads that overlap more than one genomic feature:
 
@@ -442,7 +442,7 @@ The recommended mode is "union", which counts overlaps even if a read only share
 
 In the previous section, we counted only reads that mapped to genes of chromosome 4 and for only one sample. To be able to identify differential gene expression induced by PS depletion, all datasets (3 treated and 4 untreated) must be analyzed with the similar procedure and for whole genome.
 
-For time and computer saving, we run the previous steps for you and obtain 7 count files, available on [Zenodo](http://dx.doi.org/10.5281/zenodo.61771).
+For time and computer saving, we run the previous steps for you and obtain 7 count files, available on [Zenodo](http://dx.doi.org/10.5281/zenodo.290221).
 
 These files contain for each gene of Drosophila the number of reads mapped to it. We could compare directly the files and then having the differential gene expression. But the number of sequenced reads mapped to a gene depends on:
 
@@ -481,14 +481,14 @@ Here treatment is the primary factor which we are interested in. The sequencing 
 > ### :pencil2: Hands-on: Analysis of the differential gene expression (1)
 >
 > 1. Create a new history
-> 2. Import the seven count files from [Zenodo](http://dx.doi.org/10.5281/zenodo.61771)
->    - [`GSM461176_untreat_single.counts`](https://zenodo.org/record/61771/files/GSM461176_untreat_single.counts)
->    - [`GSM461177_untreat_paired.counts`](https://zenodo.org/record/61771/files/GSM461177_untreat_paired.counts)
->    - [`GSM461178_untreat_paired.counts`](https://zenodo.org/record/61771/files/GSM461178_untreat_paired.counts)
->    - [`GSM461179_treat_single.counts`](https://zenodo.org/record/61771/files/GSM461179_treat_single.counts)
->    - [`GSM461180_treat_paired.counts`](https://zenodo.org/record/61771/files/GSM461180_treat_paired.counts)
->    - [`GSM461181_treat_paired.counts`](https://zenodo.org/record/61771/files/GSM461181_treat_paired.counts)
->    - [`GSM461182_untreat_single.counts`](https://zenodo.org/record/61771/files/GSM461182_untreat_single.counts)
+> 2. Import the seven count files from [Zenodo](http://dx.doi.org/10.5281/zenodo.290221)
+>    - [`GSM461176_untreat_single.deseq.counts`](https://zenodo.org/record/290221/files/GSM461176_untreat_single.deseq.counts)
+>    - [`GSM461177_untreat_paired.deseq.counts`](https://zenodo.org/record/290221/files/GSM461177_untreat_paired.deseq.counts)
+>    - [`GSM461178_untreat_paired.deseq.counts`](https://zenodo.org/record/290221/files/GSM461178_untreat_paired.deseq.counts)
+>    - [`GSM461179_treat_single.deseq.counts`](https://zenodo.org/record/290221/files/GSM461179_treat_single.deseq.counts)
+>    - [`GSM461180_treat_paired.deseq.counts`](https://zenodo.org/record/290221/files/GSM461180_treat_paired.deseq.counts)
+>    - [`GSM461181_treat_paired.deseq.counts`](https://zenodo.org/record/290221/files/GSM461181_treat_paired.deseq.counts)
+>    - [`GSM461182_untreat_single.deseq.counts`](https://zenodo.org/record/290221/files/GSM461182_untreat_single.deseq.counts)
 >
 >    > ### :nut_and_bolt: Comments
 >    > If you are using the [Freiburg Galaxy instance](http://galaxy.uni-freiburg.de), you can load the dataset using 'Shared Data' <i class="fa fa-long-arrow-right"></i> 'Data Libraries' <i class="fa fa-long-arrow-right"></i> 'Galaxy Courses' <i class="fa fa-long-arrow-right"></i> 'RNA-Seq' <i class="fa fa-long-arrow-right"></i> 'count_tables'
@@ -500,7 +500,7 @@ Here treatment is the primary factor which we are interested in. The sequencing 
 >       > ### :bulb: Tip
 >       >
 >       > You can select several files by keeping the CTRL (or COMMAND) key pressed and clicking on the interesting files 
->       {: .tips}
+>       {: .tip}
 >
 >    - "Sequencing" as second factor with "PE" and "SE" as levels and selection of count files corresponding to both levels
 >
@@ -685,23 +685,23 @@ This step is similar to the step of [counting the number of reads per annotated 
 
 DEXSeq usage is similar to DESeq2. It uses similar statistics to find differentially used exons. 
 
-As for DESeq2, in the previous step, we counted only reads that mapped to exons on chromosome 4 and for only one sample. To be able to identify differential exon usage induced by PS depletion, all datasets (3 treated and 4 untreated) must be analyzed with the similar procedure. For time saving, we did that for you. The results are available on [Zenodo](http://dx.doi.org/10.5281/zenodo.61771):
+As for DESeq2, in the previous step, we counted only reads that mapped to exons on chromosome 4 and for only one sample. To be able to identify differential exon usage induced by PS depletion, all datasets (3 treated and 4 untreated) must be analyzed with the similar procedure. For time saving, we did that for you. The results are available on [Zenodo](http://dx.doi.org/10.5281/zenodo.290221):
 
-- [dexseq.gtf](https://zenodo.org/record/61771/files/dexseq.gtf): the results of the running DEXSeq-count in 'Prepare annotation' mode
+- [dexseq.gtf](https://zenodo.org/record/290221/files/dexseq.gtf): the results of the running DEXSeq-count in 'Prepare annotation' mode
 - Seven files, counts files generated in 'Count reads' mode
 
 > ### :pencil2: Hands-on:
 >
 > 1. Create a new history
-> 2. Import the seven count files and the dexseq.gtf from [Zenodo](http://dx.doi.org/10.5281/zenodo.61771)
->    - [dexseq.gtf](https://zenodo.org/record/61771/files/dexseq.gtf)
->    - [treated1_single.txt](https://zenodo.org/record/61771/files/treated1_single.txt)
->    - [treated2_paired.txt](https://zenodo.org/record/61771/files/treated2_paired.txt)
->    - [treated3_paired.txt](https://zenodo.org/record/61771/files/treated3_paired.txt)
->    - [untreated1_single.txt](https://zenodo.org/record/61771/files/untreated1_single.txt)
->    - [untreated2_single.txt](https://zenodo.org/record/61771/files/untreated2_single.txt)
->    - [untreated3_paired.txt](https://zenodo.org/record/61771/files/untreated3_paired.txt)
->    - [untreated4_paired.txt](https://zenodo.org/record/61771/files/untreated4_paired.txt)
+> 2. Import the seven count files and the dexseq.gtf from [Zenodo](http://dx.doi.org/10.5281/zenodo.290221)
+>    - [`dexseq.gtf`](https://zenodo.org/record/290221/files/dexseq.gtf)
+>    - [`GSM461176_untreat_single.dexseq.counts`](https://zenodo.org/record/290221/files/GSM461176_untreat_single.dexseq.counts)
+>    - [`GSM461177_untreat_paired.dexseq.counts`](https://zenodo.org/record/290221/files/GSM461177_untreat_paired.dexseq.counts)
+>    - [`GSM461178_untreat_paired.dexseq.counts`](https://zenodo.org/record/290221/files/GSM461178_untreat_paired.dexseq.counts)
+>    - [`GSM461179_treat_single.dexseq.counts`](https://zenodo.org/record/290221/files/GSM461179_treat_single.dexseq.counts)
+>    - [`GSM461180_treat_paired.dexseq.counts`](https://zenodo.org/record/290221/files/GSM461180_treat_paired.dexseq.counts)
+>    - [`GSM461181_treat_paired.dexseq.counts`](https://zenodo.org/record/290221/files/GSM461181_treat_paired.dexseq.counts)
+>    - [`GSM461182_untreat_single.dexseq.counts`](https://zenodo.org/record/290221/files/GSM461182_untreat_single.dexseq.counts)
 >
 >    > ### :nut_and_bolt: Comments
 >    > If you are using the [Freiburg Galaxy instance](http://galaxy.uni-freiburg.de), you can load the dataset using 'Shared Data' <i class="fa fa-long-arrow-right"></i> 'Data Libraries' <i class="fa fa-long-arrow-right"></i> 'Galaxy Courses' <i class="fa fa-long-arrow-right"></i> 'RNA-Seq' <i class="fa fa-long-arrow-right"></i> 'dexseq'
