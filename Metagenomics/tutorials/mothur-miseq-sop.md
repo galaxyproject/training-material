@@ -853,7 +853,14 @@ animal) followed by a D and a three digit number (number of days post weaning).
 > will vary from the ones presented here.
 {: .hands_on}
 
-## Alpha diversity
+## Calculate Species Diversity
+
+Diversity indices provide valuable mathematical tools to describe the ecological complexity of a single sample
+(*alpha diversity*) or to detect species differences between samples (*beta diversity*). However, diversity
+is not a determined physical quantity for which a consensus definition and unit of measure have been established,
+and several diversity indices are currently available [Finotello et al. 2016].
+
+### Alpha diversity
 
 Let's start our analysis by analyzing the alpha diversity of the samples. First we will generate rarefaction
 curves describing the number of OTUs observed as a function of sampling effort. We'll do this with the
@@ -863,6 +870,10 @@ curves describing the number of OTUs observed as a function of sampling effort. 
 > - **Rarefaction.single** :wrench: with the following parameters
 >   - "shared" to shared file from Make.shared
 {: .hands_on}
+
+Note that we used the default diversity measure here (*sobs*; observed species richness), but there are many
+more options available under the *calc* parameter. The mothur wiki describes some of these calculators
+[here](https://mothur.org/wiki/Calculators).
 
 Examine the rarefaction curve output.
 
@@ -959,11 +970,15 @@ the communities. Plotting the richness or diversity of the samples would show th
 between the different animals or between the early and late time points. You could follow this up with a
 repeated-measures ANOVA and find that there was no significant difference based on sex or early vs. late.
 
-## Beta diversity
+### Beta diversity
+
+Beta diversity is a measure of the similarity of the membership and structure found between *different* samples.
+The default calculator in the following section is *thetaYC*, which is the [Yue & Clayton theta similarity
+coefficient](http://csyue.nccu.edu.tw/ch/2005communicationindex.pdf)
 
 > ### :pencil2: Hands-on: Beta diversity
 >
-> Let's calculate the similarity of the membership and structure found in the various samples. We'll do this
+> Let's calculate . We'll do this
 > with the `Dist.shared` command that will allow us to rarefy our data to a common number of sequences.
 >
 > - **Dist.shared** :wrench: with the following parameters
