@@ -371,7 +371,8 @@ the number of duplicates of this sequence observed in each sample.
 For more information on the topic of alignment, please see our training materials
 [here](https://galaxyproject.github.io/training-material/NGS-mapping/)
 
-We are now ready to align our sequences to the reference.
+We are now ready to align our sequences to the reference. This step is an important
+step to perform to improve the clustering of your OTUs [[Schloss 2013]](https://doi.org/10.1038/ismej.2012.102)
 
 > ### :pencil2: Hands-on: Align sequences
 >
