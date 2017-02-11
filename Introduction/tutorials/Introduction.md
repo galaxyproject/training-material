@@ -244,7 +244,7 @@ You might have noticed that the UCSC file is in `BED` format and has a database 
 
 It's time to find the overlapping intervals (finally!):
 
-> ### :pencil2: Find Overlaps
+> ### :pencil2: Hands-on: Find Overlaps
 >
 > 1. **Intersect** :wrench:: Run **Intersect** with the following settings:
 >     - **Return**: `Overlapping Intervals`
@@ -260,7 +260,7 @@ It's time to find the overlapping intervals (finally!):
 We do have a the list of genes (column 4 ) which correspond to the peak regions.
 To get a better overview of the genes we obtained, we want to look at their distribution across the different chromosomes.
 
-> ### :pencil2: Count genes on different chromosomes
+> ### :pencil2: Hands-on: Count genes on different chromosomes
 >
 > 1. **Group** :wrench:: Run **Group** with the following settings:
 >     - **Select data**: The result of the intersection
@@ -287,7 +287,7 @@ To get a better overview of the genes we obtained, we want to look at their dist
 
 Since we have some nice data, let's draw a barchart out of it!
 
-> ### :pencil2: Draw barchart
+> ### :pencil2: Hands-on: Draw barchart
 >
 > 1. **Charts** : Select the **Visualize icon** at the latest history item and select `Charts`
 > 2. Choose a title at **Provide a title**, e.g. `Gene counts per chromosome`
