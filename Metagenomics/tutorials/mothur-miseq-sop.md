@@ -14,7 +14,7 @@ creators of the Mothur software package, the [Schloss lab](http://www.schlosslab
 > In this tutorial, we will:
 >
 > 1. [Obtain and prepare our input data](#obtaining-and-preparing-data)
-    - [Understand our experimental setup](#understanding-our-input-data)
+>   - [Understand our experimental setup](#understanding-our-input-data)
 >   - [Import the data into Galaxy](#importing-the-data-into-galaxy)
 > 2. [Perform Quality Control](#quality-control)
 >   - [Reduce sequencing and PCR errors](#reducing-sequencing-and-pcr-errors)
@@ -43,6 +43,25 @@ creators of the Mothur software package, the [Schloss lab](http://www.schlosslab
 
 
 # Obtaining and preparing data
+
+In this tutorial we use 16S rRNA data, but similar pipelines can be used for WGS data.
+
+> ### :book: Background: The 16S ribosomal RNA gene
+> ![](../images/16S_gene.png) <br><br>
+>
+> The 16S rRNA gene has several properties that make it ideally suited for our purposes
+> 1. Present in all living organisms
+> 2. Single copy (no recombination)
+> 3. Highly conserved + highly variable regions
+> 4. Huge reference databases
+>
+> ![](../images/16S_variableregions.jpg)
+>
+> The highly conserved regions make it easy to target the gene across different organisms,
+> while the highly variable regions allow us to distinguish between different species.
+>
+> (slide credit [http://www.slideshare.net/beiko/ccbc-tutorial-beiko ](http://www.slideshare.net/beiko/ccbc-tutorial-beiko ))
+{: .tip}
 
 ## Understanding our input data
 In this tutorial we are interested in understanding the effect of normal variation in the gut microbiome on host health.
@@ -496,7 +515,7 @@ removing sequencing artefacts known as chimeras.
 
 > ### :book: Background: Chimeras
 > ![](../images/chimeras.jpg)
-> (slide credit: http://slideplayer.com/slide/4559004/ )
+> (slide credit: [http://slideplayer.com/slide/4559004/ ](http://slideplayer.com/slide/4559004/ ))
 {: .tip}
 
 We'll do this chimera removal using the `UCHIME` algorithm that is called within Mothur, using the
