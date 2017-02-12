@@ -92,7 +92,7 @@ graphlan.py --format "png" --size 7 input_tree.txt png_image.png
 
 .image-10[![](../images/exercise.png)]
 
-<small>[Galaxy Tool XML File documentation](https://docs.galaxyproject.org/en/latest/dev/schema.html)</small>
+<small>Galaxy tool XML is formally defined in a XML Schema Definition (XSD), used to generate the [online documentation](https://docs.galaxyproject.org/en/latest/dev/schema.html)</small>
 
 ---
 
@@ -392,7 +392,7 @@ For more information, check the `user manual
 ]]></help>
 ```
 
-.footnote[[reStructuredText markdown format](http://docutils.sourceforge.net/docs/user/rst/quickref.html)]
+.footnote[[reStructuredText markup format](http://docutils.sourceforge.net/rst.html)]
 
 ---
 
@@ -409,6 +409,8 @@ For more information, check the `user manual
   <citation type="doi">10.1038/nbt.2198</citation>
 </citations>
 ```
+
+<small>If no DOI is available, a BibTeX citation can be specified with `type="bibtex"`</small>
 
 ---
 
@@ -442,7 +444,7 @@ Use &amp;&amp; to run multiple commands
 graphlan.py
 --format '$format'
 &&
-echo "Yeeha it worked"
+echo "Yeah it worked!"
 ]]></command>
 ```
 
@@ -452,13 +454,13 @@ echo "Yeeha it worked"
 
 ### Other tips
 
-Use the `argument` tag when a param reflects a command line argument
+Use the `argument` tag when a param name reflects the command line argument
 
 ```xml
 <param argument="--size" type="integer" value="7" label="..." help="..."/>
 ```
 
-- Will be printed in the param help section
+- It will be printed at the end of the param help section
 - No need to write `name="size"`, it is implicit
 
 ---
@@ -1225,10 +1227,10 @@ Build a conda package for the suite seqtk
 ### <i class="fa fa-pencil" aria-hidden="true"></i> Hands-on
 
 #### Steps
-1. [RTFM](https://bioconda.github.io/guidelines.html)
-2. Follow seqtk installation instructions: https://github.com/lh3/seqtk/
+1. Read the [guidelines for bioconda recipes](https://bioconda.github.io/guidelines.html)
+2. Follow seqtk [installation instructions](https://github.com/lh3/seqtk/)
 3. Write a `meta.yaml` and a `build.sh`
-4. Test the recipe with `conda build .`
+4. Test the recipe with `conda build`
 
 ???
 
