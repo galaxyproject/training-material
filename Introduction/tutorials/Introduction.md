@@ -49,7 +49,7 @@ computer and upload it to Galaxy.
 >
 > 2. Press **Choose local file** and search for your file.
 >
-> 3. As **Type** select `tabular`.
+> 3. As **Type** select `interval`.
 >
 > 4. Press **Start** and wait for the upload to finish. Galaxy will automatically unpack the file.
 >
@@ -188,8 +188,9 @@ As we directly see, the peak file lacks `chr` before any chromosome number. But 
 {: .hands_on}
 
 In order to convert the chromosome names we have therefore two things to do:
-- add `chr`
-- change 20 and 21 to X and Y
+
+ - add `chr`
+ - change 20 and 21 to X and Y
 
 > ### :pencil2: Hands-on: Adjust chromosome names
 >
@@ -297,7 +298,7 @@ Since we have some nice data, let's draw a barchart out of it!
 >
 {: .hands_on}
 
-## Deploy your analysis
+## Extracting workflow
 
 When you look carefully at your history, you can see that it contains all steps of our analysis, from the beginning to the end. By building this history we have actually built a complete record of our analysis with Galaxy preserving all parameter settings applied at every step.
 Wouldn't it be nice to just convert this history into a workflow that we’ll be able to execute again and again?
