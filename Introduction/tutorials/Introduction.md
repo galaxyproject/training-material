@@ -125,9 +125,15 @@ we also need a list of genes in mice, which we can obtain from UCSC.
 >    - Click the **Save** button at the bottom of the screen.
 >
 >    > ### :nut_and_bolt: BED file format
->    > The **BED - Browser Extensible Data** format provides a flexible way to define the data lines that are displayed in an annotation track. BED lines have three required fields and nine additional optional fields. The number of fields per line must be consistent throughout any single set of data in an annotation track. The order of the optional fields is binding: lower-numbered fields must always be populated if higher-numbered fields are used.
+>    > The **BED - Browser Extensible Data** format provides a flexible way to encode gene regions. BED lines have three required fields:
 >    >
->    > You can find more information about it at [UCSC](https://genome.ucsc.edu/FAQ/FAQformat#format1) including a description of the columns.
+>    >      - chromosome ID
+>    >      - start position
+>    >      - end position
+>    >
+>    > There can be up to and nine additional optional fields, but the number of fields per line must be consistent throughout any single set of data. 
+>    >
+>    > You can find more information about it at [UCSC](https://genome.ucsc.edu/FAQ/FAQformat#format1) including a description of the optional fields.
 >    {: .comment}
 > 
 {: .hands_on}
