@@ -378,6 +378,7 @@ We need to generate a new BED file from the original peak file that contains the
 > 2. Rerun this tool on the last result with:
 >   - **Add expression**: `c8+1`
 >   - **as a new column to**: the result from step 1
+>   - **Round result?**: `YES`
 >
 {: .hands_on}
 
