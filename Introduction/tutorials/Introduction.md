@@ -123,6 +123,12 @@ we also need a list of genes in mice, which we can obtain from UCSC.
 >      ![](../images/edit_icon.png)
 >    - In the next screen change the name of the dataset to `Genes`.
 >    - Click the **Save** button at the bottom of the screen.
+>
+>    > ### :nut_and_bolt: BED file format
+>    > The **BED - Browser Extensible Data** format provides a flexible way to define the data lines that are displayed in an annotation track. BED lines have three required fields and nine additional optional fields. The number of fields per line must be consistent throughout any single set of data in an annotation track. The order of the optional fields is binding: lower-numbered fields must always be populated if higher-numbered fields are used.
+>    >
+>    > You can find more information about it at [UCSC](https://genome.ucsc.edu/FAQ/FAQformat#format1) including a description of the columns.
+>    {: .comment}
 > 
 {: .hands_on}
 
