@@ -112,8 +112,6 @@ tutorial_name: dna_methylation
 >    {: .question}
 >
 > 
-> You now have a visualization of if/where there's methylation bias and modified bedGraph files with methylation metrics in them. This could be used for downstream statistical analysis (typically in an R package).
->
 {: .hands_on}
 
 # CpG island extraction with PileOMeth 
@@ -146,7 +144,6 @@ tutorial_name: dna_methylation
 > 6. Have a look at the produced pdf document. What is the data showing?
 >
 > 
-> You now have a visualization of if/where there's methylation bias and modified bedGraph files with methylation metrics in them. This could be used for downstream statistical analysis (typically in an R package).
 >
 {: .hands_on}
 
@@ -165,6 +162,5 @@ tutorial_name: dna_methylation
 > 7. **plotProfile** :wrench:: Choose for ```Matrix file from the computeMatrix tool``` the computed matrix from the tool ```computeMatrix```. 
 > 8. Take a look at the computed visualization. What can you see here?
 > 
-> You now have a visualization of if/where there's methylation bias and modified bedGraph files with methylation metrics in them. This could be used for downstream statistical analysis (typically in an R package).
 >
 {: .hands_on}
