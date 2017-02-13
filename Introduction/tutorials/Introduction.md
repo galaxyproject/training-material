@@ -209,8 +209,8 @@ In order to convert the chromosome names we have therefore two things to do:
 > 1. **Replace Text** :wrench:: Run **Replace Text in a specific column**  with the following settings:
 >     - As **File to process** our peak file `GSE37268_mof3.out.hpeak.txt`
 >     - **in column**: `1`
->     - **Find pattern**: `[0-9]+`- this will look for numerical digits
->     - **Replace with**: `chr&` - `&` is a placeholder for the find result
+>     - **Find pattern**: `[0-9]+` (this will look for numerical digits)
+>     - **Replace with**: `chr&` (`&` is a placeholder for the find result)
 > 2. Click **Execute**
 > 3. Let's rerun the tool for the final changes two times. You can shortcut this by pressing the **rerun icon** in the history, but don't forget to adjust the settings:
 >    - As **File to process** use the output from the last run, e.g. something like `Replace Text on data ...`
