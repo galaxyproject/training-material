@@ -128,8 +128,8 @@ we also need a list of genes in mice, which we can obtain from UCSC.
 >    > The **BED - Browser Extensible Data** format provides a flexible way to encode gene regions. BED lines have three required fields:
 >    >
 >    >      - chromosome ID
->    >      - start position
->    >      - end position
+>    >      - start position (0-based)
+>    >      - end position (end-exclusive)
 >    >
 >    > There can be up to and nine additional optional fields, but the number of fields per line must be consistent throughout any single set of data. 
 >    >
