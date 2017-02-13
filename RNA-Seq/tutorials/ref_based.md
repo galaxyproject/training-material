@@ -72,7 +72,7 @@ We have extracted sequences from the Sequence Read Archive (SRA) files to build 
 > 
 {: .hands_on}
 
-Both files contain the first 100.000 paired-end reads of one sample. The sequences are raw sequences from the sequencing machine, without any pretreatments. They need to be controlled for their quality.
+Both files contain the reads that belong to chromosome 4 of a paired-end sample. The sequences are raw sequences from the sequencing machine, without any pretreatments. They need to be controlled for their quality.
 
 ## Quality control
 
@@ -225,12 +225,12 @@ We can now try to determine the library type of our data.
 >    > ### :nut_and_bolt: Comment
 >    > As it is sometimes quite difficult to find out which settings correspond to those of other programs, the following table might be helpful to identify the library type:
 >    > 
->    > Sequencing type | **Infer Experiment** | **TopHat** | **HISAT2** | **htseq-count** | **featureCounts**
+>    > Sequencing type | **Infer Experiment** | **TopHat** | **HISAT** | **htseq-count** | **featureCounts**
 >    > --- | --- | --- | --- | --- | ---
->    > Paired-End (PE) | "1++,1--,2+-,2-+" | "FR Second Strand" | "FR" | "yes" | "1"
->    > PE | "1+-,1-+,2++,2--" | "FR First Strand" | "RF" | "reverse" | "2"
->    > Single-End (SE) | "++,--" | "FR Second Strand" | "F" | "yes" | "1"
->    > SE | "+-,-+" | "FR First Strand" | "R" | "reverse" | "2"
+>    > Paired-End (PE) | "1++,1--,2+-,2-+" | "FR Second Strand" | "Second Strand F/FR" | "yes" | "1"
+>    > PE | "1+-,1-+,2++,2--" | "FR First Strand" | "First Strand R/RF" | "reverse" | "2"
+>    > Single-End (SE) | "++,--" | "FR Second Strand" | "Second Strand F/FR" | "yes" | "1"
+>    > SE | "+-,-+" | "FR First Strand" | "First Strand R/RF" | "reverse" | "2"
 >    > SE,PE | undecided | "FR Unstranded" | default | "no" | "0"
 >    > 
 >    {: .comment}
@@ -238,7 +238,7 @@ We can now try to determine the library type of our data.
 >    > ### :question: Question
 >    > 
 >    > 1. Which fraction of the different type of library type?
->    > 2. Which library type do you chose? What is the correspondance in **TopHat**?
+>    > 2. Which library type do you chose? What is the correspondance in **HISAT**?
 >    >
 >    >    <details>
 >    >    <summary>Click to view answer</summary>
@@ -417,10 +417,12 @@ The recommended mode is "union", which counts overlaps even if a read only share
 
 > ### :pencil2: Hands-on: Counting the number of reads per annotated gene
 >
-> 1. **HTSeq-count** :wrench:: Run **HTSeq-count** on the sorted BAM file with
+> 1. **HTSeq-count** :wrench:: Run **HTSeq-count** on the BAM file with
 >    - `Drosophila_melanogaster.BDGP5.78.gtf` as "GFF file"
 >    - The "Union" mode
 >    - A "Minimum alignment quality" of 10
+>    - Appropriate value for "Stranded" option
+>       
 > 2. Inspect the result files
 >
 >    > ### :question: Question
@@ -456,7 +458,7 @@ Either for within or for inter-sample comparison, the gene counts need to be nor
 - Estimate the biological variance using the replicates for each condition
 - Estimate the significance of expression differences between any two conditions
 
-This expression analysis is estimated from read counts and attempts are made to correct for variability in measurements using replicates that are absolutely essential accurate results. For your own analysis, we advice you to use at least 3, better 5 biological replicates. 
+This expression analysis is estimated from read counts and attempts are made to correct for variability in measurements using replicates that are absolutely essential accurate results. For your own analysis, we advice you to use at least 3, better 5 biological replicates per condition. You can have different number of replicates per condition.
 
 [**DESeq2**](https://bioconductor.org/packages/release/bioc/html/DESeq2.html) is a great tool for DGE analysis. It takes read counts produced by **HTseq-count**, combine them into a big table (with gene in the rows and samples in the columns) and applies size factor normalization:
 
@@ -576,7 +578,7 @@ In addition to the list of genes, **DESeq2** outputs a graphical summary of the 
     >    <details>
     >    <summary>Click to view answers</summary>
     >    <ol type="1">
-    >    <li>The first axis is seperating the treated samples from the untreated samples, as defined when DeSeq was launched</li>
+    >    <li>The first axis is seperating the treated samples from the untreated samples, as defined when DESeq2 was launched</li>
     >    <li>The second axis is separating the single-end datasets from the paired-end datasets</li>
     >    </ol>
     >    </details>
@@ -591,7 +593,8 @@ In addition to the list of genes, **DESeq2** outputs a graphical summary of the 
     > 
     >    <details>
     >    <summary>Click to view answers</summary>
-    >    They are first grouped depending on the treatment (the first factor) and after on the library type (the second factor), as defined when DeSeq was launched
+    >    <ol type="1">    
+    >    <li>They are first grouped depending on the treatment (the first factor) and after on the library type (the second factor), as defined when DESeq2 was launched</li>
     >    </ol>
     >    </details>
     {: .question}
@@ -619,7 +622,7 @@ The query to DAVID can be done only on 100 genes. So, we will need to select the
 > 1. **Select first lines from a dataset** :wrench:: Extract the first 100 lines of sorted files
 > 2. **DAVID** :wrench:: Run **DAVID** on these files with
 >     - First column as "Column with identifiers"
->     - "FLYBASE_GENE_ID" as "Identifier type"
+>     - "ENSEMBL_GENE_ID" as "Identifier type"
 >
 >    The output of the **DAVID** tool is a HTML file with a link to the DAVID website.
 >
