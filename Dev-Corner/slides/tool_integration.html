@@ -28,7 +28,7 @@ graphlan.py --format "png" --size 7 input_tree.txt png_image.png
 ### Wrapper
 
 - Description of the user interface
-- Link between the tool and Galaxy instance
+- Link between the tool and the Galaxy instance
 - How to invoke the tool
 - Which options to pass
 - Which files the tool will produce as output
@@ -38,6 +38,13 @@ graphlan.py --format "png" --size 7 input_tree.txt png_image.png
 ### Wrapper
 
 ![](../images/wrapper_layers.png)
+
+???
+
+1. `<inputs>` (datasets and parameters) specified in the tool XML are exposed in the Galaxy tool UI
+2. When the user fills the form and click the `Execute` button, Galaxy fills the `<command>` template in the XML with the inputs entered by the user and execute the Cheetah code, producing a script as output
+3. Galaxy creates a job for the generated script and executes it somewhere (bowtie is run in this case)
+4. Some (not necessarily all) output files become new history datasets, as specified in the `<outputs>` XML tag set
 
 ---
 
@@ -73,6 +80,11 @@ graphlan.py --format "png" --size 7 input_tree.txt png_image.png
 ### Wrapper
 
 ![](../images/wrapper_big_picture_1.png)
+
+???
+
+- CDATA tags are used to prevent the interpretation of ampersands and less-than signs as XML special characters
+- The tool name and description are combined in the left panel (tool menu), keep them short!
 
 ---
 
@@ -118,6 +130,11 @@ python '$__tool_directory__/graphlan.py'
 # command params...
 ]]></command>
 ```
+
+???
+
+- In the first case, `graphlan.py` is expected to be on the PATH when the job executes
+- In the second case, `$__tool_directory__` is a special variable which is substituted by Galaxy with the directory where the tool XML is
 
 ---
 
@@ -181,6 +198,11 @@ graphlan.py
 <param name="..." type="float" min="0" max="10" value="1" label="..."
 help="..."/>
 ```
+
+???
+
+- In the first case, Galaxy creates a text box which accepts only integer values
+- In the second case, since *both* `min` and `max` are specified, a slider is shown in addition
 
 ---
 
@@ -324,6 +346,10 @@ class: packed
     Annotation" />
 </outputs>
 ```
+
+???
+
+`${tool.name} on ${on_string}` is the default output label, need to modify this if the tool generates more than 1 output
 
 ---
 
@@ -979,7 +1005,7 @@ $ conda env list
 yaml        *  ~/miniconda2/envs/yaml
 root             ~/miniconda2
 $ source activate yaml
-(yaml) $ 
+(yaml) $
 ```
 
 ---
