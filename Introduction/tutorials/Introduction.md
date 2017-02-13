@@ -9,13 +9,13 @@ tutorial_name: Introduction
 # Introduction
 We stumbled upon a paper [Li et al., Cell Stem Cell 2012](https://www.ncbi.nlm.nih.gov/pubmed/22862943) that contains the analysis of possible target genes of an interesting protein in mice. The targets were obtained by ChIP-seq and the raw data is available through [GEO](http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE37268).
 The list of genes however is neither in the supplement of the paper nor part of the GEO submission.
-The closest thing we can find is a list of the regions where the signal is
+All information we can find is a list of the regions where the signal is
 significantly enriched (so called *peaks*).
 The goal of this exercise is to **turn this list of genomic regions into a list of possible target genes**.
 
 # Pretreatments
 
-Browse to your Galaxy instance and log in or register. The Galaxy interface consist of three main parts. The available tools are listed on the left, your analysis history is recorded on the right, and the middle pane will show the tools and datasets.
+Browse to your Galaxy instance and log in or register. The Galaxy interface consist of three main parts. The available tools are listed on the left, your analysis history is recorded on the right, and the middle panel will show the tools and datasets.
 
 ![](../images/galaxy_interface.png)
 
@@ -43,7 +43,7 @@ computer and upload it to Galaxy.
 
 > ### :pencil2: Hands-on: Data upload
 >
-> 1. Click on the upload button in the upper left ot the interface.
+> 1. Click on the upload button in the upper left of the interface.
 >
 >    ![](../images/upload_button.png)
 >
@@ -54,7 +54,7 @@ computer and upload it to Galaxy.
 > 4. Press **Start** and wait for the upload to finish. Galaxy will automatically unpack the file.
 >
 >     > ### :nut_and_bolt: Comment
->     > After this you will see your first history item in Galaxy’s right pane. It will go through
+>     > After this you will see your first history item in Galaxy’s right panel. It will go through
 >     > the gray (preparing/queued) and yellow (running) states to become green (success):
 >     >
 >     > ![](../images/intro_01.png)
@@ -95,7 +95,7 @@ we also need a list of genes in mice, which we can obtain from UCSC.
 >
 >     ![](../images/101_01.png)
 >
->     You will be taken to the **UCSC table browser**, which looks something like this:
+>     You will be taken to the **UCSC table browser**, which looks similar to this:
 >
 >     ![](../images/intro_02.png)
 >
@@ -131,7 +131,7 @@ we also need a list of genes in mice, which we can obtain from UCSC.
 >    >      - start position (0-based)
 >    >      - end position (end-exclusive)
 >    >
->    > There can be up to and nine additional optional fields, but the number of fields per line must be consistent throughout any single set of data. 
+>    > There can be up to nine additional optional fields, but the number of fields per line must be consistent throughout any single set of data. 
 >    >
 >    > You can find more information about it at [UCSC](https://genome.ucsc.edu/FAQ/FAQformat#format1) including a description of the optional fields.
 >    {: .comment}
@@ -142,7 +142,7 @@ Now we collected all the data we need to start our analysis.
 
 # Part 1: Naive approach
 
-## File preperation
+## File preparation
 
 Let's have a look at our files to see what we actually have here.
 
@@ -174,7 +174,7 @@ This peak file is not in any standard format and just by looking at it, we canno
  - not relevant
  - not relevant
 
-In order to compare the the two files, we have to make sure that the chromosome names follow the same format.
+In order to compare the two files, we have to make sure that the chromosome names follow the same format.
 As we directly see, the peak file lacks `chr` before any chromosome number. But what happens with chromosome 20 and 21? Will it be X and Y instead? Let's check:
 
 > ### :pencil2: Hands-on: View end of file
@@ -270,7 +270,7 @@ It's time to find the overlapping intervals (finally!):
 >    {: .comment}
 {: .hands_on}
 
-We do have a the list of genes (column 4 ) which correspond to the peak regions.
+We do have the list of genes (column 4) which correspond to the peak regions.
 To get a better overview of the genes we obtained, we want to look at their distribution across the different chromosomes.
 
 > ### :pencil2: Hands-on: Count genes on different chromosomes
@@ -284,7 +284,7 @@ To get a better overview of the genes we obtained, we want to look at their dist
 >
 >    > ### :question: Questions
 >    >
->    > Which chromosome contained the highest number of target genes?
+>    > Which chromosome contains the highest number of target genes?
 >    >
 >    >    <details>
 >    >    <summary>Click to view answers</summary>
@@ -315,7 +315,7 @@ Since we have some nice data, let's draw a barchart out of it!
 When you look carefully at your history, you can see that it contains all steps of our analysis, from the beginning to the end. By building this history we have actually built a complete record of our analysis with Galaxy preserving all parameter settings applied at every step.
 Wouldn't it be nice to just convert this history into a workflow that we’ll be able to execute again and again?
 
-Galaxy makes this very easy with the `Extract workflow` option. This means any time you want to build a workflow, you can just perform it manually once, and then convert it to a workflow, so that next time it will be a lot less work to do the same analysis. It also allows you to share or publish your analysis with ease.
+Galaxy makes this very easy with the `Extract workflow` option. This means any time you want to build a workflow, you can just perform your data analysis step-by-step, and then convert it from your history into a workflow, so next time it will be a lot less work to do the same analysis. It also allows you to share or publish your analysis with ease.
 
 > ### :pencil2: Hands-on: Extract workflow
 >
@@ -325,7 +325,7 @@ Galaxy makes this very easy with the `Extract workflow` option. This means any t
 >
 >    ![](../images/history_menu_extract_workflow.png)
 >
->    The center pane will change and you will be able to choose which steps to include/exclude and how to name the newly created workflow.
+>    The center panel will change and you will be able to choose which steps to include/exclude into your workflow, and how to name the newly created one.
 >
 > 3. **Uncheck** any steps that shouldn't be included in the workflow. Since we did some steps which where specific to our custom peak file, we might to exclude:
 >   - all **Replace Text** steps
@@ -344,7 +344,7 @@ Galaxy makes this very easy with the `Extract workflow` option. This means any t
 >    > ### :nut_and_bolt: The workflow editor
 >    > We can examine the workflow in Galaxy's workflow editor. Here you can view/change the parameter settings of each step, add and remove tools, and connect an output from one tool to the input of another, all in an easy and graphical manner. You can also use this editor to build workflows from scratch.
 >    {: .comment}
-> 8. Although we have our two inputs in the workflow they are missing their connection to the first tool (Intersect), because we didn't carry over some of the intermediate steps. Connect each input dataset to the Intersect tool by dragging the arrow pointing outwards on the right of its box (which denotes an output) to an arrow on the left of the Intersect box pointing inwards (which denotes an input). Connect each input dataset with a different input of Intersect.
+> 8. Although we have our two inputs in the workflow they are missing their connection to the first tool (Intersect), because we didn't carry over some of the intermediate steps. Connect each input dataset to the Intersect tool by dragging the arrow pointing outwards on the right of its box (which denotes an output) to an arrow on the left of the Intersect box pointing inwards (which denotes an input). All possible connections appear in green colour. Connect each input dataset with a different input of Intersect.
 > 9. Rename the Input datasets: The upper one should be the `Reference regions` and the lower the `Peak regions`
 > 10. Click on the **gear icon** at the top right and press **Auto Re-layout** to clean up our view:
 >    ![](../images/intro_07.png)
@@ -362,9 +362,9 @@ Now it's time to reuse our workflow for a more sophisticated approach.
 
 # Part 2: More sophisticated approach
 
-In part 1 we used an overlap definition of 1 bp (default setting). In order to get a more meaningful definition, we now want to use the information of the position of the peak summit and check for overlap of the summits with genes. 
+In part 1 we used an overlap definition of 1 bp (default setting). In order to get a more meaningful definition, we now want to use the information of the position of the peak summit and check for overlaps of the summits with genes. 
 
-## Preperation
+## Preparation
 
 Create a new history and name it. If you forgot how to do that, you can have a look at the beginning of this tutorial.
 The history is now empty, but we need our peak file again. Before we upload it twice we can copy it from our former history:
@@ -409,7 +409,7 @@ Now we cut out just the chromosome plus the start and end of the summit:
 The RefSeq genes we downloaded from UCSC did only contain the RefSeq identifiers, but not the gene names. To get a list of gene names in the end, we use another BED file from the Data Libraries.
 
 > ### :nut_and_bolt: Comments
-> There are several ways to get the gene names in, if you need to do it yourself. On way is to retrieve a mapping through Biomart and then join the two files (Tool: **Join, Substract and Group** - **Join two Datasets side by side on a specified field**). Another is to get the full RefSeq table from UCSC and manually convert it to BED format.
+> There are several ways to get the gene names in, if you need to do it yourself. On way is to retrieve a mapping through Biomart and then join the two files (Tool: **Join, Substract and Group** - **Join two Datasets side by side on a specified field**). Another possibility is to get the full RefSeq table from UCSC and manually convert it to BED format.
 {: .comment}
 
 > ### :pencil2: Hands-on: Get new gene file from Data Library
@@ -423,7 +423,7 @@ The RefSeq genes we downloaded from UCSC did only contain the RefSeq identifiers
 
 ## Repeat workflow
 
-It's time to reuse the workflow we created earlier.
+It's time to reuse the workflow we have created earlier.
 
 > ### :pencil2: Hands-on: Run a workflow
 > 1. Open the workflow menu (top menu bar). Find the workflow you made in the previous section, and select the option **Run**
@@ -432,7 +432,7 @@ It's time to reuse the workflow we created earlier.
 {: .hands_on}
 
 We used our workflow to rerun our analysis with the peak summits. The **Group** tool again produced a list containing the amount of genes found in each chromosome.
-But woudln't it be more interesting to know about the amount of peaks in each unique gene? Let's rerun the workflow with different settings:
+But wouldn't it be more interesting to know about the amount of peaks in each unique gene? Let's rerun the workflow with different settings:
 
 > ### :pencil2: Hands-on: Run a workflow with changed settings
 > 1. Open the workflow menu (top menu bar). Find the workflow you made in the previous section, and select the option **Run**
