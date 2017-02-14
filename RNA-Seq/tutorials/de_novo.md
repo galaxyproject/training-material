@@ -83,7 +83,7 @@ For quality control, we use similar tools as described in [NGS-QC tutorial](../.
 >
 > 2. **Trimmomatic** :wrench:: Trim off the low quality bases from the ends of the reads to increase mapping efficiency. Run `Trimmomatic` on each pair of forward and reverse reads. 
 >
-> ![](../images/trimmomatic.png)
+>    ![](../images/trimmomatic.png)
 >
 > 3. **FastQC** :wrench:: Re-run `FastQC` on trimmed reads and inspect the differences.
 >
