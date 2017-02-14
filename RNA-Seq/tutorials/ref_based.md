@@ -310,13 +310,13 @@ The mapping exercise worked for you? Great! :tada:
 > You can do the same process on the other sequence files available on [Zenodo](http://dx.doi.org/10.5281/zenodo.290221)
 > 
 > - Paired-end data
->     - [`GSM461178_untreat_paired_chr4_R1`](GSM461178_untreat_paired_chr4_R1.fastq) and [`GSM461178_untreat_paired_chr4_R2`](GSM461178_untreat_paired_chr4_R2.fastq)
->     - [`GSM461180_treat_paired_chr4_R1`](GSM461180_treat_paired_chr4_R1.fastq) and [`GSM461180_treat_paired_chr4_R2`](GSM461180_treat_paired_chr4_R2.fastq)
->     - [`GSM461181_treat_paired_chr4_R1`](GSM461181_treat_paired_chr4_R1.fastq) and [`GSM461181_treat_paired_chr4_R2`](GSM461181_treat_paired_chr4_R2.fastq)
+>     - `GSM461178_untreat_paired_chr4_R1` and `GSM461178_untreat_paired_chr4_R2`
+>     - `GSM461180_treat_paired_chr4_R1` and `GSM461180_treat_paired_chr4_R2`
+>     - `GSM461181_treat_paired_chr4_R1` and `GSM461181_treat_paired_chr4_R2`
 > - Single-end data
->     - [`GSM461176_untreat_single_chr4`](GSM461176_untreat_single_chr4.fastq)
->     - [`GSM461179_treat_single_chr4`](GSM461179_treat_single_chr4.fastq)
->     - [`GSM461182_untreat_single_chr4`](GSM461182_untreat_single_chr4.fastq)
+>     - `GSM461176_untreat_single_chr4`
+>     - `GSM461179_treat_single_chr4`
+>     - `GSM461182_untreat_single_chr4`
 >
 > This is really interesting to redo on the other datasets, specially to check how the parameters are inferred given the different type of data.
 {: .hands_on}
@@ -484,13 +484,13 @@ Here treatment is the primary factor which we are interested in. The sequencing 
 >
 > 1. Create a new history
 > 2. Import the seven count files from [Zenodo](http://dx.doi.org/10.5281/zenodo.290221)
->    - [`GSM461176_untreat_single.deseq.counts`](https://zenodo.org/record/290221/files/GSM461176_untreat_single.deseq.counts)
->    - [`GSM461177_untreat_paired.deseq.counts`](https://zenodo.org/record/290221/files/GSM461177_untreat_paired.deseq.counts)
->    - [`GSM461178_untreat_paired.deseq.counts`](https://zenodo.org/record/290221/files/GSM461178_untreat_paired.deseq.counts)
->    - [`GSM461179_treat_single.deseq.counts`](https://zenodo.org/record/290221/files/GSM461179_treat_single.deseq.counts)
->    - [`GSM461180_treat_paired.deseq.counts`](https://zenodo.org/record/290221/files/GSM461180_treat_paired.deseq.counts)
->    - [`GSM461181_treat_paired.deseq.counts`](https://zenodo.org/record/290221/files/GSM461181_treat_paired.deseq.counts)
->    - [`GSM461182_untreat_single.deseq.counts`](https://zenodo.org/record/290221/files/GSM461182_untreat_single.deseq.counts)
+>    - `GSM461176_untreat_single.deseq.counts`
+>    - `GSM461177_untreat_paired.deseq.counts`
+>    - `GSM461178_untreat_paired.deseq.counts`
+>    - `GSM461179_treat_single.deseq.counts`
+>    - `GSM461180_treat_paired.deseq.counts`
+>    - `GSM461181_treat_paired.deseq.counts`
+>    - `GSM461182_untreat_single.deseq.counts`
 >
 >    > ### :nut_and_bolt: Comments
 >    > If you are using the [Freiburg Galaxy instance](http://galaxy.uni-freiburg.de), you can load the dataset using 'Shared Data' <i class="fa fa-long-arrow-right"></i> 'Data Libraries' <i class="fa fa-long-arrow-right"></i> 'Galaxy Courses' <i class="fa fa-long-arrow-right"></i> 'RNA-Seq' <i class="fa fa-long-arrow-right"></i> 'count_tables'
@@ -528,7 +528,7 @@ The first output of **DESeq2** is a tabular file. The columns are:
 
 > ### :pencil2: Hands-on: Analysis of the differential gene expression (2)
 >
->1. **Filter** :wrench:: Run **Filter** to extract genes with a significant change in gene expression (adjusted *p*-value equal or below 0.05) between treated and untreated samples
+> 1. **Filter** :wrench:: Run **Filter** to extract genes with a significant change in gene expression (adjusted *p*-value equal or below 0.05) between treated and untreated samples
 >
 >    > ### :question: Question
 >    >
@@ -599,9 +599,7 @@ In addition to the list of genes, **DESeq2** outputs a graphical summary of the 
     >    </details>
     {: .question}
 
-5. Dispersion estimates: gene-wise estimates
-(black), the fitted values (red), and the final maximum a posteriori estimates used in testing
-(blue)
+5. Dispersion estimates: gene-wise estimates (black), the fitted values (red), and the final maximum a posteriori estimates used in testing (blue)
 
     This dispersion plot is typical, with the final estimates shrunk from the gene-wise estimates towards the fitted estimates. Some gene-wise estimates are flagged as outliers and not shrunk towards the fitted value. The amount of shrinkage can be more or less than seen here, depending on the sample size, the number of coefficients, the row mean and the variability of the gene-wise estimates.
 
@@ -697,14 +695,14 @@ As for DESeq2, in the previous step, we counted only reads that mapped to exons 
 >
 > 1. Create a new history
 > 2. Import the seven count files and the dexseq.gtf from [Zenodo](http://dx.doi.org/10.5281/zenodo.290221)
->    - [`dexseq.gtf`](https://zenodo.org/record/290221/files/dexseq.gtf)
->    - [`GSM461176_untreat_single.dexseq.counts`](https://zenodo.org/record/290221/files/GSM461176_untreat_single.dexseq.counts)
->    - [`GSM461177_untreat_paired.dexseq.counts`](https://zenodo.org/record/290221/files/GSM461177_untreat_paired.dexseq.counts)
->    - [`GSM461178_untreat_paired.dexseq.counts`](https://zenodo.org/record/290221/files/GSM461178_untreat_paired.dexseq.counts)
->    - [`GSM461179_treat_single.dexseq.counts`](https://zenodo.org/record/290221/files/GSM461179_treat_single.dexseq.counts)
->    - [`GSM461180_treat_paired.dexseq.counts`](https://zenodo.org/record/290221/files/GSM461180_treat_paired.dexseq.counts)
->    - [`GSM461181_treat_paired.dexseq.counts`](https://zenodo.org/record/290221/files/GSM461181_treat_paired.dexseq.counts)
->    - [`GSM461182_untreat_single.dexseq.counts`](https://zenodo.org/record/290221/files/GSM461182_untreat_single.dexseq.counts)
+>    - `dexseq.gtf`
+>    - `GSM461176_untreat_single.dexseq.counts`
+>    - `GSM461177_untreat_paired.dexseq.counts`
+>    - `GSM461178_untreat_paired.dexseq.counts`
+>    - `GSM461179_treat_single.dexseq.counts`
+>    - `GSM461180_treat_paired.dexseq.counts`
+>    - `GSM461181_treat_paired.dexseq.counts`
+>    - `GSM461182_untreat_single.dexseq.counts`
 >
 >    > ### :nut_and_bolt: Comments
 >    > If you are using the [Freiburg Galaxy instance](http://galaxy.uni-freiburg.de), you can load the dataset using 'Shared Data' <i class="fa fa-long-arrow-right"></i> 'Data Libraries' <i class="fa fa-long-arrow-right"></i> 'Galaxy Courses' <i class="fa fa-long-arrow-right"></i> 'RNA-Seq' <i class="fa fa-long-arrow-right"></i> 'dexseq'
