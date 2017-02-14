@@ -142,7 +142,7 @@ Spliced mappers have been developed to efficiently map transcript-derived reads 
 >    - **Specify strand-specific information**: First Strand (R/RF)
 >    - **Transcriptome assembly reporting**: Report alignments tailored for transcript assemblers including StringTie.
 >
->       ![](../images/hisat.png)
+>       ![](../images/hisat_tool_form.png)
 >
 > 2. **HISAT2** :wrench:: Run `HISAT2` on the remaining forward/reverse read pairs with the same parameters.
 >
@@ -203,7 +203,7 @@ The recommended mode is "union", which counts overlaps even if a read only share
 >    - **Orientation of the two read from the same pair**: Forward, Reverse (fr)
 >    - Expand **Advanced options**
 >    - **GFF gene identifier**: enter "transcript_id"
-> ![](../images/FeatureCounts.png)
+> ![](../images/FeatureCounts_tool_form.png)
 >
 > {: .hands_on}
 
@@ -278,11 +278,11 @@ In addition to the list of genes, `DESeq2` outputs a graphical summary of the re
 
 1. Histogram of *p*-values for all tests
 
-    ![](../images/DeSeq2_histogram.png)
+    ![](../images/DESeq2_pval.png)
 
 2. [MA plot](https://en.wikipedia.org/wiki/MA_plot): global view of the relationship between the expression change of conditions (log ratios, M), the average expression strength of the genes (average mean, A), and the ability of the algorithm to detect differential gene expression. The genes that passed the significance threshold (adjusted p-value < 0.1) are colored in red.
 
-    ![](../images/DESeq2_MA_plot.png)
+    ![](../images/DESeq2_MAplot.png)
 
 3. Principal Component Analysis ([PCA](https://en.wikipedia.org/wiki/Principal_component_analysis)) and the first two axes
 
@@ -296,7 +296,7 @@ In addition to the list of genes, `DESeq2` outputs a graphical summary of the re
 
 5. Dispersion estimates: gene-wise estimates (black), the fitted values (red), and the final maximum a posteriori estimates used in testing (blue)
 
-    ![](../images/DESeq2_dispersion.png)
+    ![](../images/DESeq2_dispersion1.png)
 
     This dispersion plot is typical, with the final estimates shrunk from the gene-wise estimates towards the fitted estimates. Some gene-wise estimates are flagged as outliers and not shrunk towards the fitted value. The amount of shrinkage can be more or less than seen here, depending on the sample size, the number of coefficients, the row mean and the variability of the gene-wise estimates.
 
@@ -329,14 +329,13 @@ In this last section, we will convert our aligned read data from BAM format to b
 >    - Name your visualization someting descriptive under "Browser name:"
 >    - Choose "Mouse Dec. 2011 (GRCm38/mm10) (mm10)" as the "Reference genome build (dbkey)
 >    - Click "Create" to initiate your Trackster session
-> ![](../images/Trackster1.png)
+> ![](../images/Trackster opening window.png)
 >
 > 2. **Viz** :wrench:: Click "Add datasets to visualization"
 >    - Select the "RefSeq GTF mm10" file
 >    - Select the output files from `Stringtie`
 >    - Select the output file from `Cuffmerge`
 >    - Select the output files from `bamCoverage`
-> ![](../images/Trackster1.png)
 >
 > 3. :wrench:: Using the grey labels on the left side of each track, drag and arrange the track order to your preference
 >
@@ -356,6 +355,7 @@ In this last section, we will convert our aligned read data from BAM format to b
 > 9. :wrench:: Repeat the previous step on the other three bigWig files representing the minus strand
 >
 > 10. :wrench:: Adjust the track height of the bigWig files to be consistant for each set of plus strand and minus strand tracks 
+> ![](../images/Trackster_viz_hoxb13_locus.png)
 > 11. :wrench:: Direct Trackster to the coordinates: chr11:96193539-96206376, what do you see?
 >    >    <details>
 >    >    <summary>Click to view answers</summary>
@@ -373,4 +373,4 @@ In this last section, we will convert our aligned read data from BAM format to b
 In this tutorial, we have analyzed real RNA sequencing data to extract useful information, such as which genes are up- or down-regulated by depletion of the Pasilla gene and which genes are regulated by the Pasilla gene. To answer these questions, we analyzed RNA sequence datasets using a reference-based RNA-seq data analysis approach. This approach can be sum up with the following scheme:
 
 
-![](../images/ref_based_workflow.png)
+![](../images/schematic for RNAseq de novo tutorial.png)
