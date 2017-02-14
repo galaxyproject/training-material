@@ -40,7 +40,7 @@ tutorial_name: dna_methylation
 >   The computation will take a while and we continue with the theory. 
 >
 > 3. Go to the webpage result page and have a closer look at 'Per base sequence content'
->
+>    .image-75[![](../images/fastqc.png)]
 >    > ### :question: Questions
 >    >
 >    > - Note the GC distribution and percentage of "T" and "C". Why is this so weird?
@@ -95,7 +95,7 @@ tutorial_name: dna_methylation
 > 3. **PileOMeth** :wrench:: Select for the option ```sorted_alignments.bam``` the imported bam file which was the result of the ```bwameth``` alignment.
 > 4. **PileOMeth** :wrench:: Use for ```What do you want to do?``` the value ```Determine the position-dependent methylation bias in the dataset, producing diagnostic SVG images```.
 > 5. **PileOMeth** :wrench:: Click ```Execute```.
-> TODO include result image!
+>    .image-75[![](../images/methylation_bias.svg)]
 >    > ### :question: Questions
 >    >
 >    > - Consider the ```original top strand``` output. Is there methylation bias in the distribution? 
