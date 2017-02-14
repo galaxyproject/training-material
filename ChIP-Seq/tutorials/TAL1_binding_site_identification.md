@@ -324,18 +324,18 @@ We have processed ChIP-seq data from two stages of hematopoiesis and have lists 
 
 > ### :pencil2: Hands-on: Identifying unique and common Tal1 peaks between states
 >
-> 1. **bedIntersect** :wrench:: Run the tool **bedIntersect** to find peaks that exist both in G1E and megakaryocytes. 
+> 1. **Intersect intervals** :wrench:: Run the tool **Intersect intervals** to find peaks that exist both in G1E and megakaryocytes. 
 >
 >    Select the "Tal1 G1E peaks" and "Tal1 Mega peaks" files as the inputs. 
 >
 >    Running this tool with the default settings will return overlapping peaks of both files. 
 >  
-> 2. **bedIntersect** :wrench:: Run the tool **bedIntersect** to find peaks that exist only in G1E.
+> 2. **Intersect intervals** :wrench:: Run the tool **Intersect intervals** to find peaks that exist only in G1E.
 >
 >    - Select "Tal1 G1E peaks" as the first input and "Tal1 Mega peaks" as the second input file.
 >    - **Report only those alignments that \*\*do not\*\* overlap the BED file**: Yes
 >  
-> 3. **bedIntersect** :wrench:: Run the tool **bedIntersect** to find peaks that exist only in megakaryocytes.
+> 3. **Intersect intervals** :wrench:: Run the tool **Intersect intervals** to find peaks that exist only in megakaryocytes.
 >
 >    - Select "Tal1 Mega peaks" as the first input and "Tal1 G1E peaks" as the second input file.
 >    - **Report only those alignments that \*\*do not\*\* overlap the BED file**: Yes  
