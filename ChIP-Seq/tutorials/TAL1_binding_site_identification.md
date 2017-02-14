@@ -237,7 +237,21 @@ We will now evaluate the quality of the immuno-precipitation step in the ChIP-se
     
 For additional informaton on how to interpret **plotFingerprint** plots, read the information [here](http://deeptools.readthedocs.io/en/latest/content/tools/plotFingerprint.html#background)
 
-### Step 6: Determining Tal1 binding sites 
+# Step 6: Generating Input normalized coverage files
+
+We will generate Input normalized coverage (bigwig) files for the ChIP samples, using **bamCompare** tool from **deepTools2 **. bamCompare provides multiple options to compare the two files (eg. log2ratio, subtraction etc..). We will use log2 ratio of the ChIP samples over Input.
+
+> ### :pencil2: Hands-on: Generate Input-normalized bigwigs
+>
+> 1. Search for **bamCompare** under galaxy toolshed.
+> 2. Select the treatment sample, for example "Megakaryocyte_Tal1_R2.bam", as first sample, and the input sample "Megakaryocyte_Input_R2.bam" as second file.
+> 3. Check that you are using log2 ratio to compare the file, and click "Execute".
+> 
+> ![](../images/bamcom.png)
+>
+
+
+# Step 6: Determining Tal1 binding sites 
 
 Now that **BWA** has aligned the reads to the genome, we will use the tool **MACS2** to identify regions of Tal1 occupancy, which are called "peaks". Peaks are determined from pileups of sequenced reads across the genome that correspond to where Tal1 binds.
 
@@ -336,6 +350,56 @@ We have processed ChIP-seq data from two stages of hematopoiesis and have lists 
 >    > 3. How many are unique to megakaryocytes?
 >    {: .question}
 {: .hands_on}
+
+# Step 9: Plot the signal on the peaks between samples
+
+Plotting your region of interest will involve using two tools from the **deepTools** suite. 
++ computeMatrix : Computes the signal on given regions, using the bigwig coverage files from different samples.
++ plotHeatmap : Plots heatMap of the signals using the computeMatrix output.
+
+optionally, you can also use `plotProfile`to create a profile plot using to computeMatrix output.
+
+
+
+### computeMatrix
+
+> ### :pencil2: Hands-on: calculate signal matrix on the MACS2 output
+> 
+> 1. Search for "computeMatrix" under galaxy toolshed.
+> 2. Under "Regions to plot", select the MACS2 output (narrowpeaks) for G1E cells (Tal1 over Input).
+> 3. Under "Reference point for plotting", select "Center of region".
+> 4. Under "Score file", select the bigWigs (log2 ratios from bamCompare).
+> 5. From the output options, select "reference point".
+> 6. For region upstream and downstream of region file : Enter 5000 
+>
+> ![compMatrix](../images/compM.png)
+>
+> 7. Under advanced options , select "Yes" for "Convert missing values to zero" and "Skip zeros".
+> 8. Select "Execute"
+> 
+> ![computeMatrix](../images/compM2.png)
+
+
+### plotHeatmap
+
+> ### :pencil2: Hands-on: plot a Heatmap using computeMarix output
+> 
+>
+> 1. Select "plotHeatmap" from the galaxy toolshed.
+> 2. Select the computeMatrix output as an input.
+> 3. Under advanced options, go to "Labels for the samples ", and enter sample labels (in the order you added them in compueMatrix ), seperated by space.
+> 4. Click "Execute"
+>
+> ![plotHM](../images/plothm.png)
+>
+> The output shall look like this : 
+>
+> ![hm](../images/hm.png)
+
+
+
+
+
 
 # Additional optional analyses
 
