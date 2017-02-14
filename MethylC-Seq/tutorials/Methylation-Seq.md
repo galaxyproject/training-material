@@ -98,7 +98,7 @@ tutorial_name: dna_methylation
 > 4. **PileOMeth** :wrench:: Use for ```What do you want to do?``` the value ```Determine the position-dependent methylation bias in the dataset, producing diagnostic SVG images```.
 > 5. **PileOMeth** :wrench:: Click ```Execute```.
 >
->    ![](../images/methylation_bias.svg)
+>    ![](../images/methylation_bias_example_data.png)
 >
 >    > ### :question: Questions
 >    >
