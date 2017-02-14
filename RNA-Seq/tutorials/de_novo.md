@@ -76,7 +76,7 @@ For quality control, we use similar tools as described in [NGS-QC tutorial](../.
 >    >    <summary>Click to view answers</summary>
 >    >    <ol type="1">
 >    >    <li>The read length is 99 bp</li>
->    >    <li>The quality of base calls declines throughout a sequencing run. ADD MORE HERE.</li>
+>    >    <li>The quality of base calls declines throughout a sequencing run. </li>
 >    >    </ol>
 >    >    </details>
 >    {: .question}
@@ -100,6 +100,7 @@ For quality control, we use similar tools as described in [NGS-QC tutorial](../.
 >    >    </ol>
 >    >    </details>
 >    {: .question}
+> ![](../images/BeforeAndAfterTrimming.png)
 > {: .hands_on}
 
 Now that we have trimmed our reads and are fortuante that there is a reference genome assembly for mouse, we will align our trimmed reads to the genome.
@@ -118,12 +119,12 @@ In the case of a eukaryotic transcriptome, most reads originate from processed m
 - Reads contained within mature exons - these align perfectly to the reference genome
 - Reads that span splice junctions in the mature mRNA - these align with gaps to the reference genome
 
-Spliced mappers have been developed to efficiently map transcript-derived reads against genomes. [`HISAT2`](https://ccb.jhu.edu/software/hisat2/index.shtml) is an accurate and fast tool for mapping spliced reads to a genome. Another popular spliced aligner is [`TopHat`](https://ccb.jhu.edu/software/tophat/index.shtml), but we will be using `HISAT2` in this tutorial.
+Spliced mappers have been developed to efficiently map transcript-derived reads against genomes. [`HISAT`](https://ccb.jhu.edu/software/hisat2/index.shtml) is an accurate and fast tool for mapping spliced reads to a genome. Another popular spliced aligner is [`TopHat`](https://ccb.jhu.edu/software/tophat/index.shtml), but we will be using `HISAT` in this tutorial.
 
 >    > ### :nut_and_bolt: Comment
 >    > As it is sometimes quite difficult to determine which settings correspond to those of other programs, the following table might be helpful to identify the library type:
 >    > 
->    > Library type | **Infer Experiment** | **TopHat** | **HISAT2** | **htseq-count** | **featureCounts**
+>    > Library type | **Infer Experiment** | **TopHat** | **HISAT** | **htseq-count** | **featureCounts**
 >    > --- | --- | --- | --- | --- | ---
 >    > PE | 1++,1--,2+-,2-+ | FR Second Strand | FR | yes | 1
 >    > PE | 1+-,1-+,2++,2-- | FR First Strand | RF | reverse | 2
@@ -135,7 +136,7 @@ Spliced mappers have been developed to efficiently map transcript-derived reads 
 >    
 > ### :pencil2: Hands-on: Spliced mapping
 >
-> 1. **HISAT2** :wrench:: Run `HISAT2` on one forward/reverse read pair and modify the following settings:
+> 1. **HISAT** :wrench:: Run `HISAT` on one forward/reverse read pair and modify the following settings:
 >    - **Single end or paired reads?**: Individual paired-end reads
 >    - **Source for the reference genome to align against**: Use a built-in genome > Mouse (Mus Musculus): mm10
 >    - **Spliced alignment parameters**: Specify spliced alignment parameters
@@ -144,15 +145,15 @@ Spliced mappers have been developed to efficiently map transcript-derived reads 
 >
 >       ![](../images/hisat_tool_form.png)
 >
-> 2. **HISAT2** :wrench:: Run `HISAT2` on the remaining forward/reverse read pairs with the same parameters.
+> 2. **HISAT** :wrench:: Run `HISAT` on the remaining forward/reverse read pairs with the same parameters.
 >
 
 # De novo transcript reconstruction
-Now that we have mapped our reads to the mouse genome with `HISAT2`, we want to determine transcript structures that are represented by the aligned reads. This is called *de novo* transcriptome reconstruction. This unbiased approach permits the comprehensive identification of all transcripts present in a sample, including annotated genes, novel isoforms of annotated genes, and novel genes. While common gene/transcript databases are quite large, they are not comprehensive, and the *de novo* transcriptome reconstruction approach ensures complete transcriptome(s) identification from the experimental samples. The leading tool for transcript reconstruction is `Stringtie`. Here, we will use `Stringtie` to predict transcript structures based on the reads aligned by `HISAT2`. 
+Now that we have mapped our reads to the mouse genome with `HISAT`, we want to determine transcript structures that are represented by the aligned reads. This is called *de novo* transcriptome reconstruction. This unbiased approach permits the comprehensive identification of all transcripts present in a sample, including annotated genes, novel isoforms of annotated genes, and novel genes. While common gene/transcript databases are quite large, they are not comprehensive, and the *de novo* transcriptome reconstruction approach ensures complete transcriptome(s) identification from the experimental samples. The leading tool for transcript reconstruction is `Stringtie`. Here, we will use `Stringtie` to predict transcript structures based on the reads aligned by `HISAT`. 
 
 > ### :pencil2: Hands-on: Transcriptome reconstruction
 >
-> 1. **Stringtie** :wrench:: Run `Stringtie` on the `HISAT2` alignments using the default parameters. 
+> 1. **Stringtie** :wrench:: Run `Stringtie` on the `HISAT` alignments using the default parameters. 
 >    - Use batch mode to run all four samples from one tool form. 
 > ![](../images/Stringtie.png)
 
@@ -195,9 +196,9 @@ The recommended mode is "union", which counts overlaps even if a read only share
 
 > ### :pencil2: Hands-on: Counting the number of reads per transcript
 >
-> 1. **FeatureCounts** :wrench:: Run `FeatureCounts` on the aligned reads (`HISAT2` output) using the `Cuffmerge` transcriptome database as the annotation file.
+> 1. **FeatureCounts** :wrench:: Run `FeatureCounts` on the aligned reads (`HISAT` output) using the `Cuffmerge` transcriptome database as the annotation file.
 >
->    - Using the batch mode for input selection, choose the four `HISAT2` aligned read files
+>    - Using the batch mode for input selection, choose the four `HISAT` aligned read files
 >    - **Gene annotation file**:  in your history, then select the GTF file output by Cuffmerge (this specifies the "union" mode)
 >    - Expand **Options for paired end reads**
 >    - **Orientation of the two read from the same pair**: Forward, Reverse (fr)
@@ -310,17 +311,17 @@ In this last section, we will convert our aligned read data from BAM format to b
 
 > ### :pencil2: Hands-on: Converting aligned read files to bigWig format
 >
-> 1. **bamCoverage** :wrench:: Run `bamCoverage` on all four aligned read files (`HISAT2` output) with the following parameters:
+> 1. **bamCoverage** :wrench:: Run `bamCoverage` on all four aligned read files (`HISAT` output) with the following parameters:
 >    - **Bin size in bases**: 1
 >    - **Effective genome size**: mm9 (2150570000)
 >    - Expand the **Advanced options**
 >    - **Only include reads originating from fragments from the forward or reverse strand**: forward
-> 2. **Rename** :wrench:: Rename the outputs to reflect the origin of the reads and that they represent the reads mappign to the PLUS strand
+> 2. **Rename** :wrench:: Rename the outputs to reflect the origin of the reads and that they represent the reads mapping to the PLUS strand
 >![](../images/bamCoverage forward.png)
 >
 > 3. **bamCoverage** :wrench:: Repeat Step 1 except changing the following parameter:
 >    - **Only include reads originating from fragments from the forward or reverse strand**: reverse
-> 4. **Rename** :wrench:: Rename the outputs to reflect the origin of the reads and that they represent the reads mappign to the MINUS strand
+> 4. **Rename** :wrench:: Rename the outputs to reflect the origin of the reads and that they represent the reads mapping to the MINUS strand
 > ![](../images/bamCoverage reverse.png)
 
 > ### :pencil2: Hands-on: Trackster based visualization
