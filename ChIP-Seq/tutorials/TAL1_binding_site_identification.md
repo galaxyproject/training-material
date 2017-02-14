@@ -248,7 +248,6 @@ We will generate Input normalized coverage (bigwig) files for the ChIP samples, 
 > 3. Check that you are using log2 ratio to compare the file, and click "Execute".
 > 
 > ![](../images/bamcom.png)
->
 {: .hands_on}
 
 # Step 7: Determining Tal1 binding sites 
@@ -378,7 +377,6 @@ optionally, you can also use `plotProfile`to create a profile plot using to comp
 > 8. Select "Execute"
 > 
 > ![computeMatrix](../images/compM2.png)
->
 {: .hands_on}
 
 ### plotHeatmap
@@ -396,7 +394,6 @@ optionally, you can also use `plotProfile`to create a profile plot using to comp
 > The output shall look like this : 
 >
 > ![hm](../images/hm.png)
->
 {: .hands_on}
 
 
