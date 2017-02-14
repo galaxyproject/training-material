@@ -1,190 +1,233 @@
-<!doctype html>
-<html lang="en">
+---
+layout: tutorial_slides
+topic_name: "Dev-Corner"
+tutorial_name: visualizations
+logo: "GTN"
+---
 
-	<head>
-		<meta charset="utf-8">
+### Why visualizations?
 
-		<title>Visualizations in Galaxy</title>
+- Anscombe's Quartet
 
-		<link rel="stylesheet" href="../../shared/reveal.js/css/reveal.css">
-		<link rel="stylesheet" href="../../shared/reveal.js/css/theme/simple.css" id="theme">
+.image-75[ ![](https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Anscombe.svg/650px-Anscombe.svg.png) ]
 
-		<!-- Code syntax highlighting -->
-		<link rel="stylesheet" href="../../shared/reveal.js/lib/css/zenburn.css">
-        <link rel="stylesheet" href="../../shared/font-awesome/css/font-awesome.min.css">
-		<link rel="stylesheet" href="../../shared/css/custom.css" id="theme">
+```python
+mean x: 9, var x: 11, mean y: 7.5,
+var y: ~-4.125, corr 0.816, lr: y=0.5x + 3
+```
 
-		<!-- Printing and PDF exports -->
-        <script>
-          if( window.location.search.match( /print-pdf/gi ) ) {
-            var link = document.createElement( 'link' );
-            link.rel = 'stylesheet';
-            link.type = 'text/css';
-            link.href = '../../shared/reveal.js/css/print/pdf.css';
-            document.getElementsByTagName( 'head' )[0].appendChild( link );
-          }
-        </script>
-		<!--<script>
-            if (window.location.search.match(/print-pdf/gi)) {
-                document.write('<link rel="stylesheet" href="css/pdf.css" type="text/css">');
-            }
-        </script>-->
+---
 
-		<!--[if lt IE 9]>
-        <script src="../../shared/reveal.js/lib/js/html5shiv.js"></script>
-        <![endif]-->
-	</head>
+### Why visualizations?
 
-	<body>
-		<div class="reveal">
-            <div class="slides">
-                <section data-markdown>
-                    <script type="text/template">
-                        ## Welcome!
+![](../images/vis_alignment_plaintext.png)
 
-                        <img src="../../shared/images/GTNLogo1000.png" alt="GTNLogo1000"
-                        class="no-border" width=30%/>
+---
 
-                        The easiest way to **navigate** this slide deck
-                        is **by hitting `[space]` on your keyboard**
+### Why visualizations?
 
-                        You can also navigate with arrow keys, but be careful because some
-                        slides can be nested inside of each other (vertically)
-                    </script>
-                </section>
+![](../images/vis_alignment.png)
 
-                <section data-markdown>
-                    <script type="text/template">
-                        # Visualizations in Galaxy
-                    </script>
-                </section>
+---
 
-                <section>
-                    <section data-markdown>
-                        <script type="text/template">
-                            ## Small introduction (vertical part)
-                        </script>
-                    </section>
+### Types of visualizations in Galaxy
 
-                    <section data-markdown>
-                        <script type="text/template">
-                            ### Subpart1.1
+- Galaxy tools (e.g. JBrowse, Krona, ..)
+- 3rd party app (e.g. IGV, UCSC)
+- Trackster
+- Visualization *plugins* (e.g. Charts)
+- Interactive Environments (GIE)
 
-                            - list
-                            - list
-                            - list
-                        </script>
-                    </section>
+---
 
-                    <section data-markdown>
-                        <script type="text/template">
-                            ### Subpart1.2
+### Pros and cons
 
-                            With an image...
+| Type      | Interactive | Workflow | Toolshed | Tweakable  | SS indexing        |
+|-----------|-------------|----------|-----------|-----------|--------------------|
+| Tool      | +/-         | +        | +         | +         | -                  |
+| 3rd party | +           | -        | -         | -         | +                  |
+| Trackster | +           | -        | -         | -         | +                  |
+| Plugins   | +           | -        | -         | +         | -                  |
+| GIEs      | +           | -        | -         | +         | -                  |
 
-                            <img src="../../shared/images/GTNLogo1000.png" alt="GTNLogo1000" class="no-border" width=30%/>
-                        </script>
-                    </section>
-                </section>
+.footnote[*shed: installable via tool shed = functional tests, dependency management and versioning]
 
-                <section>
-                    <section data-markdown>
-                        <script type="text/template">
-                            ### <i class="fa fa-question-circle" aria-hidden="true"></i> Questions
+---
 
-                            - Major question that would be addressed in this tutorial (same as the markdown)
-                            - Second question
+### Plugins
 
-                            <aside class="notes">
-                                Oh hey, these are some notes. They'll be hidden in your presentation, but you can see them if you open the speaker notes window.
+- Plugin development directory: `$GALAXY_ROOT/config/plugins`
+- **Example** (in mainline)
+    * Charts
 
-                                To see the notes, hit **'s'** on your keyboard
-                            </aside>
-                        </script>
-                    </section>
+![](../images/vis_plugin_menu.png)
 
-                    <section data-markdown>
-                        <script type="text/template">
-                            ### <i class="fa fa-bullseye" aria-hidden="true"></i> Objectives
+---
 
-                            - First objective of this tutorial (same as the markdown)
-                            - Second objective
-                            - Third objective
-                            - ...
-                        </script>
-                    </section>
-                </section>
+### Plugins: Charts
 
-                <section>
-                    <section data-markdown>
-                        <script type="text/template">
-                            ## Part 1
-                        </script>
-                    </section>
+- Builtin visualization in particular for numerical tabular data
 
-                    <section data-markdown>
-                        <script type="text/template">
-                            ### Small introduction
+![](../images/vis_charts_01.png)
 
-                            Introduction about this part
-                        </script>
-                    </section>
+---
 
-                    <section data-markdown>
-                        <script type="text/template">
-                            ### Subpart 1
+### Plugins: Charts
 
-                            Short introduction about this subpart.
+![](../images/vis_charts_02.png)
 
-                            <i class="fa fa-pencil" aria-hidden="true"></i> ***Hands on!***
-                        </script>
-                    </section>
+---
 
-                    <section data-markdown>
-                        <script type="text/template">
-                            ### Subpart1.2
+### Plugins: Charts
 
-                            Short introduction about this subpart.
+![](../images/vis_charts_03.png)
 
-                            <i class="fa fa-pencil" aria-hidden="true"></i> ***Hands on!***
-                        </script>
-                    </section>
-                </section>
+---
 
+### Plugins: Charts
 
-                <section data-markdown>
-                    <script type="text/template">
-                        ### <i class="fa fa-exclamation-circle" aria-hidden="true"></i> Key points
+![](../images/vis_charts_04.png)
 
-                        - Simple sentence to sum up the first key point of the tutorial (Take home message)
-                        - Second key point
-                        - Third key point
-                        - ...
-                    </script>
-                </section>
-			</div>
+---
 
-		</div>
+### Plugins: Charts
 
-		<script type="text/javascript" src="../../shared/reveal.js/lib/js/head.min.js"></script>
-        <script type="text/javascript" src="../../shared/reveal.js/js/reveal.js"></script>
-        <script type="text/javascript">
-            Reveal.initialize({
-                slideNumber: !window.location.search.match(/print-pdf/gi),
-                history: true,
+ - Allows exporting to flat and vector based graphics
 
-                theme: Reveal.getQueryHash().theme,
-                transition: Reveal.getQueryHash().transition || 'concave',
+![](../images/vis_charts_05.png)
 
-                dependencies: [
-                    { src: '../../shared/reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
-                    { src: '../../shared/reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-                    { src: '../../shared/reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-                    { src: '../../shared/js/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
-                    { src: '../../shared/reveal.js/plugin/notes/notes.js', async: true },
-                ]
-            });
-        </script>
+---
 
-	</body>
-</html>
+### Plugins
+
+- Elements of visualization plugin:
+    * Configured Datatype (e.g. BAM)
+    * Description
+       - name
+       - version
+       - description
+       - license
+    * HTML + js (template)
+        - Compiled page has replaced variables (e.g. urls)
+
+---
+
+### Plugins: Project structure
+
+- For XML file plug visualization into Galaxy:
+```bash
+$ mkdir -p $GALAXY_ROOT/config/plugins/$PLUGIN_NAME/config ;
+```
+- For templates of HTML files:
+```bash
+$ mkdir -p $GALAXY_ROOT/config/plugins/$PLUGIN_NAME/templates
+```
+
+- For files that need to be exposed via the webserver (static images, uglified JS files)
+```bash
+$ mkdir -p $GALAXY_ROOT/config/plugins/$PLUGIN_NAME/static
+```
+---
+
+### Plugins: XML file
+
+```bash
+$ touch $GALAXY_ROOT/config/plugins/$PLUGIN_NAME/config/$PLUGIN_NAME.xml
+```
+
+- Hooks visualizations into Galaxy
+
+![](../images/vis_plugin_conf_xml.png)
+
+* Data types must match with class names in `$GALAXY_ROOT/lib/galaxy/datatypes/`
+
+---
+
+### Plugins: Mako file
+
+- For templates of HTML files:
+```bash
+$ touch $GALAXY_ROOT/config/plugins/$PLUGIN_NAME/templates/$PLUGIN_NAME.mako
+```
+- Link to data types and HTML template file
+    * Every invocation of visualization: template compiled
+
+![](../images/vis_mako_hello_world_dual.png)
+
+---
+
+### Plugins: Mako file
+
+- Access to *hda* **pre** template compilation:
+    * `$hda.file_name`
+    * `$hda.metadata.dbkey`
+    * Avoid (unnecessary) copies of whole files
+- Access to *hda* **post** template compilation -> via URLs
+    * Download data file by browser (client side)
+        - Inconvenient for large files:
+            * Indices and query protocols (e.g. DAS protocol)
+    * Resolving history uid to hash
+    * Correction for extended root URLs:
+
+![](../images/vis_nested_url.png)
+
+---
+
+### Plugins: Mako syntax
+
+- Access to *hda* **post** template compilation:
+    * Obtain *hdadict['id']*
+    - Essential Python variables:
+
+![](../images/vis_important_variables.png)
+
+---
+
+### Plugins:  Javascript and jQuery
+
+- HTML / JS implementation make often use of jQuery
+    * Galaxy ships with jQuery
+
+```html
+<script type="text/javascript" src="${root}/static/scripts/libs/jquery/jquery.js" />
+```
+
+---
+
+### Plugins: Generic template
+
+![](../images/vis_generic_template.png)
+
+---
+
+### Plugins: Static files
+
+- External libraries and static files go in `./static` dir:
+
+![](../images/vis_generic_template_static.png)
+![](../images/vis_static_dir.png)
+
+---
+
+### Plugins: Summary
+
+- Galaxy visualization plugins:
+    * Datatype-specific
+    * Written in HTML5 / JS
+    * Require minor python / Galaxy ecosystem knowledge
+    * Have access to the whole Galaxy system
+        - pre-compilation: python
+        - post-compilation: JS / API
+    * Can be installed without additional configuration
+    * Can not be connected to workflows
+    * Can not (out of the box) save and share
+
+---
+
+### Plugins: More tips and tricks
+
+- Galaxy has UI guidelines with corresponding CSS (https://wiki.galaxyproject.org/VisualizationsRegistry/Cookbook)
+- Look at existing plugins:
+    * Galaxy mainline
+    * https://github.com/bgruening/galaxytools/tree/master/visualisations
+- API is now very extensive, everything is accessible with jQuery!

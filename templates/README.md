@@ -7,9 +7,9 @@ Topic name
 
 Several deck of slides are available for this topic:
 
-- [General introduction about <topic name>](http://bgruening.github.io/training-material/templates/slides/)
+- [General introduction about <topic name>](http://galaxyproject.github.io/training-material/templates/slides/)
 - Slide deck related to the tutorials:
-    - [Tutorial name](http://bgruening.github.io/training-material/templates/slides/tutorial.html)
+    - [Tutorial name](http://galaxyproject.github.io/training-material/templates/slides/tutorial.html)
 
 # Tutorials
 
@@ -33,7 +33,7 @@ docker run -d -p 8080:80 <name-of-docker-image>
 ```
 
 It will launch a flavored Galaxy instance available on
-[http://localhost:8080](http://localhost:8080).
+[http://localhost:8080 ](http://localhost:8080).
 
 # References
 

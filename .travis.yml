@@ -6,12 +6,21 @@ env:
     global:
         - secure: "fYXw0BvPxuzGI6T3H9Dtu6hkNQPzrzj25e9g6a+I7Fd1ahxPY6dH3nY+Zm2dk93Uf2R/ZKrLvt4aIn5mU/LwNLeZmuAqUSnbGR74XP7juqsWU3uDx2KPPMSyrBLiQf+OtYplOKbbpH2vcrpQ7OF2bnVU+JItTyzSkvWDYS+/NwtpvWtAZ1Gt5EmafCo+M9q9y5o0yBOFsrfS5QNMiCFQodzhqj7ofxrMKjiUMQueVGAO9EcdMrZL0N5X1semi4XSr8m4UiNMkiPr+khm6Cj1HTtDQPfIM/SNv2oCBp5sedYNThEhlkmuy4y67XCMP7CtDfaprwRh8g6VhqRiB+hzNEO5i3qAyU2BwGAv9kzgDUXOF9W7uEQht/rhYhGDQpJogMQGMZectiog7YhDZOuWOzDCOEBjAqaD9TWfF1BmZ/jz9SIGQjtZCdC/S3KGnFCIUNtg3kUuiF6qvfpqtdTh3evTGLt1+9arxVl/uvllVDXPEfFqULNKo+2/8sktMdx37ad8D4RFWTBtrJBS1nQo7R1fdqWeTMNG1lUVLYOQTAu4PKgr2a0QL8UoNk690xyuh5bfNUuJRUdm0kVoLBWtnh1Uk5x9gHcuM1djpNAKg7NPZayDiLTiiGYiuht7cV6IBo7UhS6Zpry5fEzGbl3kNcJHaT2gL4j2f7Nq/ADwaEU="
 
-script: true
+before_script:
+  # Spell checking?
+  #- apt-get install -y hunspell pandoc
+  #- wget https://cgit.freedesktop.org/libreoffice/dictionaries/tree/en/en_GB.aff
+  #- |
+  #  cat <<EOF >custom.dict
+  #  seq
+  #  MethylC
+  #  EOF
 
-after_success:
-  - |
-    if [ "$TRAVIS_PULL_REQUEST" == "false" -a "$TRAVIS_BRANCH" == "master" ]
-    then
-      echo "Generate and deploy index.html"
-      ./shared/bin/deploy_docs
-    fi
+  # check links in our markdown files
+  - pip install vl
+  - vl --version
+
+script:
+  #- pandoc -s README.md -f markdown -t plain -o README.md_plain
+  #- hunspell -d en_GB README.md_plain -p custom.dict -l
+  - find .  \( -name "*.md" -o -name "*.html" \) -not -path "./assets/reveal.js/*" | xargs -L 1 -I '{}' sh -c "echo {}; vl -t 5 -s 1000 --allow-codes 401,403 --whitelist http://localhost:8080 {}"

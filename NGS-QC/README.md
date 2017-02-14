@@ -5,17 +5,15 @@ Quality control is an important preprocessing step in NGS data analyses. Here, w
 
 # Slides
 
-Several deck of slides are available for this topic:
+A deck of slides is available for this topic:
 
-- [General introduction about quality control](http://bgruening.github.io/training-material/NGS-QC/slides/)
-- Slide deck related to the tutorials:
-    - [Dive into quality control](http://bgruening.github.io/training-material/Dev-Corner/slides/dive_into_qc.html)
+- [General introduction about quality control](http://galaxyproject.github.io/training-material/NGS-QC/slides/)
 
 # Tutorials
 
 A tutorial with hands-on is available for this topic:
 
-- [Dive into quality control](tutorials/dive_into_qc.md)
+- [Dive into quality control](http://galaxyproject.github.io/training-material//NGS-QC/tutorials/dive_into_qc)
 
 ## Input datasets
 
@@ -30,7 +28,7 @@ docker run -d -p 8080:80 bgruening/galaxy-ngs-qc-training
 ```
 
 It will launch a flavored Galaxy instance available on
-[http://localhost:8080](http://localhost:8080).
+[http://localhost:8080 ](http://localhost:8080).
 
 # References
 

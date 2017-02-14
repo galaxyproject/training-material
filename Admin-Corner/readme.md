@@ -7,19 +7,16 @@ Administration of Galaxy Servers can be a complex task. Here, we propose some ma
 
 Several deck of slides are available for this topic:
 
-- [General introduction about Galaxy server administration](http://bgruening.github.io/training-material/Admin-Corner/slides/)
+- [General introduction about Galaxy server administration](http://galaxyproject.github.io/training-material/Admin-Corner/slides/)
 - Slide deck related to the tutorials:
-    - [Setting up a Galaxy Instance as a Service](http://bgruening.github.io/training-material/Admin-Corner/slides/setting_up_galaxy_instance.html)
-    - [Docker and Galaxy](http://bgruening.github.io/training-material/Admin-Corner/slides/galaxy_docker.html)
-    - [Galaxy Database schema](http://bgruening.github.io/training-material/Admin-Corner/slides/database_schema.html)
-    
+    - [Docker and Galaxy](http://galaxyproject.github.io/training-material/Admin-Corner/slides/galaxy_docker.html)
+
 # Tutorials
 
-3 tutorials with hands-on are available for this topic:
+Some tutorials with hands-on are available for this topic:
 
-- [Setting up a Galaxy Instance as a Service](tutorials/setting_up_galaxy_instance.md)
-- [Docker and Galaxy](tutorials/galaxy_docker.md)
-- [Galaxy Database schema](tutorials/Database_Schema.md)
+- [Move from dev instance to production instance](tutorials/dev_to_production.html)
+- [Galaxy Database schema](http://galaxyproject.github.io/training-material/Admin-Corner/slides/database_schema.html)
 
 
 # Contributors
@@ -35,3 +32,5 @@ The following individuals have contributed to this training material:
 
 - Dave Clements
 - Hans-Rudolf Hotz
+- Olivier Inizan
+- Valentin Marcon

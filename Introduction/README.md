@@ -7,14 +7,9 @@ Here, you will find some material to learn how to use Galaxy.
 
 # Slides
 
-Several deck of slides are available for this topic:
+A deck of slides is available for this topic:
 
-- [General introduction about Galaxy](http://bgruening.github.io/training-material/Introduction/slides/)
-- Slide deck related to the tutorials:
-    - [Galaxy Introduction Exercise: From Peaks to Genes](http://bgruening.github.io/training-material/Dev-Corner/slides/introduction.html)
-    - [Getting to know workflows](http://bgruening.github.io/training-material/Dev-Corner/slides/workflows.html)
-    - [Processing many samples at once](http://bgruening.github.io/training-material/Dev-Corner/slides/processing_many_samples.html)
-    - [Using the Integrative Genomics Viewer](http://bgruening.github.io/training-material/Dev-Corner/slides/igv.html)
+- [General introduction about Galaxy](http://galaxyproject.github.io/training-material/Introduction/slides/)
 
 # Tutorials
 
@@ -38,7 +33,7 @@ docker run -d -p 8080:80 bgruening/galaxy-introduction-training
 ```
 
 It will launch a flavored Galaxy instance available on
-[http://localhost:8080](http://localhost:8080).
+[http://localhost:8080 ](http://localhost:8080).
 
 # Contributors
 

@@ -5,17 +5,15 @@ RNA-sequencing is a method used to reveal the presence and quantity of RNA in a 
 
 # Slides
 
-Several deck of slides are available for this topic:
+A deck of slides is available for this topic:
 
-- [General introduction about RNA seq data analysis](http://bgruening.github.io/training-material/RNA-Seq/slides/)
-- Slide deck related to the tutorials:
-    - [Reference-based RNA-seq data analysis](http://bgruening.github.io/training-material/RNA-Seq/slides/ref_based.html)
+- [General introduction about RNA seq data analysis](http://galaxyproject.github.io/training-material/RNA-Seq/slides/)
 
 # Tutorials
 
 A tutorial with hands-on is available for this topic:
 
-- [Reference-based RNA-seq data analysis](tutorials/ref_based.md)
+- [Reference-based RNA-seq data analysis](http://galaxyproject.github.io/training-material//RNA-Seq/tutorials/ref_based)
 
 ## Input datasets
 
@@ -30,7 +28,7 @@ docker run -d -p 8080:80 bgruening/galaxy-rna-seq-training
 ```
 
 It will launch a flavored Galaxy instance available on
-[http://localhost:8080](http://localhost:8080).
+[http://localhost:8080 ](http://localhost:8080).
 
 # References
 
@@ -47,7 +45,7 @@ It will launch a flavored Galaxy instance available on
 
 > A refreshingly honest view on the non-trivial aspects of RNA-seq analysis
 
-**Marie-Agnès Dillies et al:** [A comprehensive evaluation of normalization methods for Illumina high-throughput RNA sequencing data analysis](http://bib.oxfordjournals.org/content/14/6/671g)
+**Marie-Agnès Dillies et al:** [A comprehensive evaluation of normalization methods for Illumina high-throughput RNA sequencing data analysis](http://bib.oxfordjournals.org/content/14/6/671)
 
 > Systematic comparison of seven representative normalization methods for the differential analysis of RNA-seq data (Total Count, Upper Quartile, Median (Med), DESeq, edgeR, Quantile and Reads Per Kilobase per Million mapped reads (RPKM) normalization)
 

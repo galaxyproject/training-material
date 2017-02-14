@@ -1,0 +1,42 @@
+---
+layout: base_slides
+---
+
+{% assign topic = site.data[page.topic_name] %}
+{% for tuto in topic.material %}
+    {% if tuto.name == page.tutorial_name %}
+        {% assign tutorial = tuto %}
+        {% assign title = tutorial.title %}
+    {% endif %}
+{% endfor %}
+
+
+### :grey_question: Questions
+
+{% for question in tutorial.questions %}
+- {{ question }}
+{% endfor %}
+
+---
+
+### :dart: Objectives
+
+{% for objective in tutorial.objectives %}
+- {{ objective }}
+{% endfor %}
+
+---
+
+{{ content }}
+
+---
+
+### :grey_exclamation: Key points
+
+{% for key_point in tutorial.key_points %}
+- {{ key_point }}
+{% endfor %}
+
+---
+
+## :clap: Congratulations <br>on successfully completing this tutorial!
