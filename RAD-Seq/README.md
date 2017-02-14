@@ -21,7 +21,6 @@ A tutorial with hands-on is available for this topic:
 ## Input datasets
 
 The input datasets for the tutorials are available on CeSGO hub and ENA:
-
 - [population genomics tutorials CeSGO files](https://cesgo.genouest.org/resources/370/supportingdocs).
 - [population genomics tutorials SRA raw reads](https://trace.ncbi.nlm.nih.gov/Traces/sra/?run=SRR034310).
 
@@ -103,6 +102,7 @@ It will launch a flavored Galaxy instance available on
 **van Orsouw, N. J., et al. 2007:** [Complexity reduction of polymorphic sequences (CRoPS): a novel approach for large-scale polymorphism discovery in complex genomes] (http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0001172)
 
 **van Tassell, C. P., et al. 2008:** [SNP discovery and allele frequency estimation by deep sequencing of reduced representation libraries] (https://www.ncbi.nlm.nih.gov/pubmed/18297082)
+
 
 ## Websites
 
