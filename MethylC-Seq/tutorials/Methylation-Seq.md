@@ -96,13 +96,14 @@ tutorial_name: dna_methylation
 > 2. **PileOMeth** :wrench:: Choose at the first option ```Load reference genome from``` ```Local cache``` and for ```Using reference genome``` the value ```hg38```.
 > 3. **PileOMeth** :wrench:: Select for the option ```sorted_alignments.bam``` the imported bam file which was the result of the ```bwameth``` alignment.
 > 4. **PileOMeth** :wrench:: Use for ```What do you want to do?``` the value ```Determine the position-dependent methylation bias in the dataset, producing diagnostic SVG images```.
-> 5. **PileOMeth** :wrench:: Click ```Execute```.
+> 5. **PileOMeth** :wrench:: Set the parameters ```keepSingleton``` and ```keepDiscordant``` to ```Yes```.
+> 6. **PileOMeth** :wrench:: Click ```Execute```.
 >
 >    ![](../images/methylation_bias_example_data.png)
 >
 >    > ### :question: Questions
 >    >
->    > - Consider the ```original top strand``` output. Is there methylation bias in the distribution? 
+>    > - Consider the ```original top strand``` output. Is there a methylation bias? 
 >    > - If we would trim, what would be the start and the end positions?
 >    > 
 >    > 
@@ -126,11 +127,12 @@ tutorial_name: dna_methylation
 > We will extract the methylation on the resulting BAM file of the alignment step.
 > 
 > 1. **Galaxy** :wrench:: Search for the tool 'PileOMeth'
-> 2. **PileOMeth** :wrench:: Choose at the first option ```Load reference genome from``` ```Local cache``` and for ```Using reference genome``` the value ```hg38```.
-> 3. **PileOMeth** :wrench:: Select for the option ```sorted_alignments.bam``` the imported bam file which was the result of the ```bwameth``` alignment.
+> 2. **PileOMeth** :wrench:: Choose at the first option ```Load reference genome from``` the value: ```Local cache``` and for ```Using reference genome``` the value: ```hg38```.
+> 3. **PileOMeth** :wrench:: Select for the option ```sorted_alignments.bam``` the imported bam file which was the result of a ```bwameth``` alignment.
 > 4. **PileOMeth** :wrench:: Use for ```What do you want to do?``` the value ```Extract methylation metrics from an alignment file in BAM/CRAN format```.
 > 5. **PileOMeth** :wrench:: Choose ```Yes``` for the option ```Merge per-Cytosine metrics from CpG and CHG contexts into per-CPG or per-CHG metrics```.
-> 5. **PileOMeth** :wrench:: All other options use the default value.
+> 6. **PileOMeth** :wrench:: Set the parameters ```keepSingleton```, ```keepDiscordant``` and ```fraction``` to ```Yes```.
+> 7. **PileOMeth** :wrench:: All other options use the default value.
 >
 > 
 >
@@ -140,15 +142,28 @@ tutorial_name: dna_methylation
 
 > ### :pencil2: Hands-on: Metilene
 > 
-> We compute now the 
+> With metilene it is possible to detect differentially methylated regions (DMRs) which is a necessary prerequisite for characterizing different epigenetic states.
 > 
 > 1. **Galaxy** :wrench:: Import from the data library the files ```NB1_CpG.meth.bedGraph```, ```NB2_CpG.meth.bedGraph```, ```BT089_CpG.meth.bedGraph```, ```BT126_CpG.meth.bedGraph``` and  ```BT198_CpG.meth.bedGraph```.
 > 2. **Galaxy** :wrench:: Search for the tool ```Metilene```
 > 3. **Metilene** :wrench:: Choose for the first option ```Input group 1``` the imported files starting with ``NB`` and for ```Input group 2``` the imported files ```Input group 2```.
 > 4. **Metilene** :wrench:: Select for the option ```BED file containing regions of interest``` the imported BAM file CpGIslands.bed. //the computed bam file from PileOMeth.
-> 5. The computation will take now some time. Maybe it is a good time to do a coffee break :)
-> 6. Have a look at the produced pdf document. What is the data showing?
+> 
 >
+>    > ### :question: Questions
+>    >
+>    > - Have a look at the produced pdf document. What is the data showing?
+>    > 
+>    > 
+>    >
+>    >    <details>
+>    >    <summary>Click to view answers</summary>
+>    >    <ol type="1">
+>    >    <li></li>
+>    >    <li></li>
+>    >    </ol>
+>    >    </details>
+>    {: .question}
 > 
 >
 {: .hands_on}
@@ -159,7 +174,9 @@ tutorial_name: dna_methylation
 > 
 > We will extract the methylation on the resulting BAM file of the alignment step.
 > 
-> 0. Convert with awk: 'BEGIN{OFS="\t"}{$1="chr"$1; print}' 
+> 0. Convert with awk: ```'BEGIN{OFS="\t"}{$1="chr"$1; print}'```
+> 0. Remove the first line with the tool ```tail```. Select as Operation ```Keep everything from this line``` and choose the value ```2```.
+> 0. grep
 > 1. **Galaxy** :wrench:: Search for the tool ```Wig/BedGraph-to-bigWig```
 > 2. **Wig/BedGraph-to-bigWig** :wrench:: Use all computed bedGraph files which were computed by Metilene and transform it to a bigWig file.
 > 3. **Galaxy** :wrench:: Search for the tool ```computeMatrix```.
