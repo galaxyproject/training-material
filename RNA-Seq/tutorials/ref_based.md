@@ -40,7 +40,7 @@ We have extracted sequences from the Sequence Read Archive (SRA) files to build 
 > ### :pencil2: Hands-on: Data upload
 >
 > 1. Create a new history for this RNA-seq exercise
-> 2. Import a FASTQ file pair (*e.g.*  [`GSM461177_untreat_paired_chr4_R1.fastq`](https://zenodo.org/record/290221/files/GSM461177_untreat_paired_chr4_R1.fastq) and [`GSM461177_untreat_paired_chr4_R2.fastq`](https://zenodo.org/record/290221/files/GSM461177_untreat_paired_chr4_R2.fastq)) from [Zenodo](http://dx.doi.org/10.5281/zenodo.290221)
+> 2. Import a FASTQ file pair (*e.g.*  `GSM461177_untreat_paired_chr4_R1.fastq` and `GSM461177_untreat_paired_chr4_R2.fastq`) from [Zenodo](http://dx.doi.org/10.5281/zenodo.290221)
 >
 >    > ### :nut_and_bolt: Comments
 >    > If you are using the [Freiburg Galaxy instance](http://galaxy.uni-freiburg.de), you can load the dataset using 'Shared Data' <i class="fa fa-long-arrow-right"></i> 'Data Libraries' <i class="fa fa-long-arrow-right"></i> 'Galaxy Courses' <i class="fa fa-long-arrow-right"></i> 'RNA-Seq' <i class="fa fa-long-arrow-right"></i> 'fastq'
@@ -405,7 +405,7 @@ We will first investigate the differential gene expression to identify which gen
 
 To compare the expression of single genes between different conditions (*e.g.* with or without PS depletion), an first essential step is to quantify the number of reads per gene. [**HTSeq-count**](http://www-huber.embl.de/users/anders/HTSeq/doc/count.html) is one of the most popular tool for gene quantification.
 
-To quantify the number of reads mapped to a gene, an annotation of the gene position is needed. We already upload on Galaxy the [`Drosophila_melanogaster.BDGP5.78.gtf`](https://zenodo.org/record/290221/files/Drosophila_melanogaster.BDGP5.78.gtf) with the Ensembl gene annotation for *Drosophila melanogaster*.
+To quantify the number of reads mapped to a gene, an annotation of the gene position is needed. We already upload on Galaxy the `Drosophila_melanogaster.BDGP5.78.gtf` with the Ensembl gene annotation for *Drosophila melanogaster*.
 
 In principle, the counting of reads overlapping with genomic features is a fairly simple task. But there are some details that need to be decided, such how to handle multi-mapping reads. **HTSeq-count** offers 3 choices ("union", "intersection_strict" and "intersection_nonempty") to handle read mapping to multiple locations, reads overlapping introns, or reads that overlap more than one genomic feature:
 
