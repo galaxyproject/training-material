@@ -249,9 +249,9 @@ We will generate Input normalized coverage (bigwig) files for the ChIP samples, 
 > 
 > ![](../images/bamcom.png)
 >
+{: .hands_on}
 
-
-# Step 6: Determining Tal1 binding sites 
+# Step 7: Determining Tal1 binding sites 
 
 Now that **BWA** has aligned the reads to the genome, we will use the tool **MACS2** to identify regions of Tal1 occupancy, which are called "peaks". Peaks are determined from pileups of sequenced reads across the genome that correspond to where Tal1 binds.
 
@@ -275,7 +275,7 @@ More information about **MACS2** can be found [here](http://genomebiology.biomed
 > 2. Rename your files after **MACS2 callpeak** finishes to reflect the origin and contents.
 {: .hands_on}
 
-# Step 7: Inspection of peaks and aligned data
+# Step 8: Inspection of peaks and aligned data
 
 It is critical to visualize NGS data on a genome browser after alignment to evaluate the "goodness" of the analysis. Evaluation criteria will differ for various NGS experiment types, but for ChIP-seq data we want to ensure reads from a Treatment/IP sample are enriched at peaks and do not localize non-specifically (like the Control/input condition).
 
@@ -319,7 +319,7 @@ First, we will reformat the peak file before we send it to Trackster, and then w
 >    <figcaption><b>Figure 16:</b> The Runx1 locus.</figcaption>
 {: .hands_on}
 
-# Step 8: Identifying unique and common Tal1 peaks between states
+# Step 9: Identifying unique and common Tal1 peaks between states
 
 We have processed ChIP-seq data from two stages of hematopoiesis and have lists of Tal1 occupied sites (peaks) in both cellular states. The next analysis step is to identify Tal1 peaks that are *shared* between the two cellular states and peaks that are *specific* to either cellular state.
 
@@ -351,7 +351,7 @@ We have processed ChIP-seq data from two stages of hematopoiesis and have lists 
 >    {: .question}
 {: .hands_on}
 
-# Step 9: Plot the signal on the peaks between samples
+# Step 10: Plot the signal on the peaks between samples
 
 Plotting your region of interest will involve using two tools from the **deepTools** suite. 
 + computeMatrix : Computes the signal on given regions, using the bigwig coverage files from different samples.
@@ -378,7 +378,8 @@ optionally, you can also use `plotProfile`to create a profile plot using to comp
 > 8. Select "Execute"
 > 
 > ![computeMatrix](../images/compM2.png)
-
+>
+{: .hands_on}
 
 ### plotHeatmap
 
@@ -395,7 +396,8 @@ optionally, you can also use `plotProfile`to create a profile plot using to comp
 > The output shall look like this : 
 >
 > ![hm](../images/hm.png)
-
+>
+{: .hands_on}
 
 
 
