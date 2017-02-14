@@ -207,7 +207,7 @@ The recommended mode is "union", which counts overlaps even if a read only share
 >
 > {: .hands_on}
 
-## Analysis of the differential gene expression
+## Perform differential gene expression testing
 
 Transcript expression is estimated from read counts, and attempts are made to correct for variability in measurements using replicates. This is absolutely essential to obtaining accurate results. We recommend having at least two biological replicates. 
 
@@ -253,7 +253,7 @@ The first output of `DESeq2` is a tabular file. The columns are:
 >    > 
 >    > <details>
 >    > <summary>Click to view answers</summary>
->    > To filter, use "c7>00.5". And we get 276 transcripts with a significant change in gene expression between the G1E and megakaryocyte cellular states.
+>    > To filter, use "c7>0.05". And we get 276 transcripts with a significant change in gene expression between the G1E and megakaryocyte cellular states.
 >    > </details>
 >    {: .question}
 >
