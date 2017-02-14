@@ -23,12 +23,12 @@ This practical aims to familiarize you with the Galaxy user interface. It will t
 Suppose you get the following question:
 
 > ### :question: Question
-> *Mom (or Dad) ... Which coding exon has the highest number of single nucleotide polymorphisms on chromosome 22?*
+> *Mom (or Dad) ... Which coding exon has the highest number of single nucleotide polymorphisms (SNPs) on human chromosome 22?*
 {: .question}
 
-You think to yourself Wow! This is a simple question ... I know exactly where the data is (at UCSC) but how do I actually compute this? The truth is, there is really no straightforward way of answering this question in a time frame comparable to the attention span of a 7-year-old. Well ... actually there is and it is called Galaxy. So let’s try it...
+You think to yourself "Wow! This is a simple question... I know where the data are available at the [UCSC Genome Browser](https://genome.ucsc.edu/), but how do I actually compute this?" The truth is, there is really no straightforward way of answering this question in a time frame comparable to the attention span of a 7-year-old. Well, actually there is and it is called **Galaxy**. So let's try it...
 
-Browse to your Galaxy instance and log in or register. The Galaxy interface consist of three main parts. The available tools are listed on the left, your analysis history is recorded on the right, and the middle pane will show the tools and datasets.
+Browse to your Galaxy instance and log in or register. The Galaxy interface consists of three main parts. The available tools are listed on the left, your analysis history is recorded on the right, and the middle pane will show the tools and datasets.
 
 ![](../images/galaxy_interface.png)
 
@@ -46,7 +46,7 @@ Browse to your Galaxy instance and log in or register. The Galaxy interface cons
 >   ![](../../shared/images/rename_history.png)
 {: .hands_on}
 
-## Data upload
+## Upload exon locations
 
 Now we are ready to do some analysis, but first we will need to get some data into our history. You can upload files from your computer, but Galaxy can also fetch data directly from external sources. We will now import a list of all the exon locations on chromosome 22 directly from the UCSC table browser.
 
@@ -66,7 +66,7 @@ Now we are ready to do some analysis, but first we will need to get some data in
 >     >- **genome** should be set to `Human`
 >     >- **assembly** should be set to `Feb. 2009 (GRCh37/hg19)`
 >     >- **group** should be set to `Genes and Gene Predictions`
->     >- **position** should be set to `chr22`
+>     >- **region** should be changed to `position` with value `chr22`
 >     >- **output format** should be set to `BED - browser extensible data`
 >     >- **Send output to** should have the option `Galaxy` checked
 >     {: .comment}
@@ -75,16 +75,16 @@ Now we are ready to do some analysis, but first we will need to get some data in
 >
 >    ![](../images/101_03.png)
 >
->    Make sure that **Create one BED record per** is set to `Coding Exons` and then click on the **Send Query to Galaxy** button.
+>    Change **Create one BED record per** to `Coding Exons` and then click on the **Send Query to Galaxy** button.
 >
 >     > ### :nut_and_bolt: Comment
->     > After this you will see your first history item in Galaxy’s right pane. It will go through
+>     > After this you will see your first history item in Galaxy's right pane. It will go through
 >     > the gray (preparing/queued) and yellow (running) states to become green (success):
 >     >
 >     > ![](../images/101_04.png)
 >     {: .comment}
 >
-> 3. To **view the contents** of the file, click on the **eye icon**. Your file should look something like this:
+> 3. When the dataset is green, click on the **eye icon** to **view the contents** of the file. It should look something like this:
 >
 >    ![](../images/101_exons.png)
 >
@@ -100,14 +100,14 @@ Now we are ready to do some analysis, but first we will need to get some data in
 >    ![](../images/101_rename.png)
 {: .hands_on}
 
-## Obtaining SNP information from UCSC
+## Upload SNP information
 
 Now we have information about the exon locations, but our question was which exon contains the largest number of SNPs, so let's get some information about SNP locations from UCSC as well:
 
 > ### :pencil2: Hands-on: SNP information
 > 1. **UCSC Main** :wrench:: Return to the UCSC tool `UCSC Main - table browser`
 >
-> 2. Change the setting in **group** to `Variation`
+> 2. Change the setting in **group** to `Variation` and again **region** to `position` with value `chr22`
 >
 >    ![](../images/101_06.png)
 >
@@ -124,9 +124,9 @@ Now we have information about the exon locations, but our question was which exo
 
 # Analysis
 
-## Finding Exons with the highest number of SNPs
+## Find exons with the highest number of SNPs
 
-Let’s remind ourselves that our objective was to find which exon contains the most SNPs. Therefore we will be joining the file with the exon locations with the file containing the SNP locations (here `join` is just a fancy word for printing the SNPs and exons that overlap side-by-side).
+Let's remind ourselves that our objective was to find which exon contains the most SNPs. Therefore we have to join the file with the exon locations with the file containing the SNP locations (here "join" is just a fancy word for printing the SNPs and exons that overlap side-by-side).
 
 > ### :bulb: Search bar
 >
@@ -153,14 +153,14 @@ Let’s remind ourselves that our objective was to find which exon contains the 
 >
 {: .hands_on}
 
-Let’s take a look at this dataset. The first six columns correspond to the exons, and the last six columns correspond to the SNPs. Column 4 contains the exon IDs, and column 10 contains the SNP IDs. In our screenshot you see that the first 5 lines in the file all have the same exon ID (`uc010gqp.2_cds_10_0_chr22_16287254_r`) but different SNP IDs, meaning these lines represent 5 different SNPs that all overlap the same exon. Therefore we can find the total number of SNPs in an exon simply by counting the number of lines that have the same exon ID in the fourth column.
+Let's take a look at this dataset. The first six columns correspond to the exons, and the last six columns correspond to the SNPs. Column 4 contains the exon IDs, and column 10 contains the SNP IDs. In our screenshot you see that the first 5 lines in the file all have the same exon ID (`uc010gqp.2_cds_10_0_chr22_16287254_r`) but different SNP IDs, meaning these lines represent 5 different SNPs that all overlap the same exon. Therefore we can find the total number of SNPs in an exon simply by counting the number of lines that have the same exon ID in the fourth column.
 
 > ### :question: Question
 > For the first 3 exons in your file, what is the number of SNPs that fall into that exon?
 {: .question}
 
 
-## Counting the number of SNPs per exon
+## Count the number of SNPs per exon
 We've just seen how to count the number of SNPs in each exon, so let's do this for all the exons in our file.
 
 > ### :pencil2: Hands-on: Counting SNPs
@@ -190,7 +190,7 @@ This file contains only two columns. The first contains the exon IDs, and the se
 > *Hint: Each line now represents a different exon, so you can see the answer to this when you expand the history item, as in the image above*.
 {: .question}
 
-## Sorting exons by SNPs count
+## Sort the exons by SNPs count
 
 Now we have a list of all exons and the number of SNPs they contain, but we would like to know which exons has the *highest number* of SNPs. We can do this by sorting the file on the second column.
 
@@ -216,7 +216,7 @@ Now we have a list of all exons and the number of SNPs they contain, but we woul
 > Keep in mind this may depend on your settings when getting the data from UCSC.
 {: .question}
 
-## Selecting top five exons
+## Select the top five exons
 
 Let's say we want a list with just the top-5 exons with highest number of SNPs.
 
@@ -287,9 +287,9 @@ Here you see a more detailed view of each history, and can perform the same oper
 
 You can always return to your analysis view by clicking on **Analyze Data** in the top menu bar.
 
-## Converting your analysis history to a workflow
+## Convert your analysis history into a workflow
 
-When you look carefully at your history, you can see that it contains all steps of our analysis, from the beginning to the end. By building this history we have actually built a complete record of our analysis with Galaxy preserving all parameter settings applied at every step. Wouldn’t it be nice to just convert this history into a workflow that we’ll be able to execute again and again?
+When you look carefully at your history, you can see that it contains all steps of our analysis, from the beginning to the end. By building this history we have actually built a complete record of our analysis with Galaxy preserving all parameter settings applied at every step. Wouldn't it be nice to just convert this history into a workflow that we'll be able to execute again and again?
 
 Galaxy makes this very easy with the `Extract workflow` option. This means any time you want to build a workflow, you can just perform it manually once, and then convert it to a workflow, so that next time it will be a lot less work to do the same analysis.
 
@@ -316,7 +316,7 @@ Galaxy makes this very easy with the `Extract workflow` option. This means any t
 >    ![](../images/101_26.png)
 {: .hands_on}
 
-## The Workflow Editor
+## The workflow editor
 
 We can examine the workflow in Galaxy's workflow editor. Here you can view/change the parameter settings of each step, add and remove tools, and connect an output from one tool to the input of another, all in an easy and graphical manner. You can also use this editor to build workflows from scratch.
 

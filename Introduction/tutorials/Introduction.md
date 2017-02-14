@@ -1,278 +1,479 @@
-# Galaxy Introduction Exercise: From Peaks to Genes
+---
+layout: tutorial_hands_on
+topic_name: Introduction
+tutorial_name: Introduction
+---
 
-## Introduction
+# From peaks to genes
 
-Slides as PDF: [Introduction_to_Galaxy_Uni.pdf](../slides/Introduction_to_Galaxy_Uni.pdf) & [Manke_2015.09.21a.pdf](../slides/Manke_2015.09.21a.pdf)
+# Introduction
+We stumbled upon a paper [Li et al., Cell Stem Cell 2012](https://www.ncbi.nlm.nih.gov/pubmed/22862943) that contains the analysis of possible target genes of an interesting protein in mice. The targets were obtained by ChIP-seq and the raw data is available through [GEO](http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE37268).
+The list of genes however is neither in the supplement of the paper nor part of the GEO submission.
+The closest thing we can find is a list of the regions where the signal is
+significantly enriched (so called *peaks*).
+The goal of this exercise is to **turn this list of genomic regions into a list of possible target genes**.
 
-## Scenario
-We stumbled upon a paper [Li et al., Cell Stem Cell 2012](https://www.ncbi.nlm.nih.gov/pubmed/22862943) that contains the analysis of possible target genes of an interesting protein. The targets were obtained by ChIP-seq and the raw data is available through [GEO](http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE37268). The list of genes however is neither in the supplement of the paper nor part of the GEO submission. The closest thing we can find is a list of the regions where the signal is significantly enriched (peaks; you'll learn more on that tomorrow). The goal of this exercise is to __turn this list of genomic regions into a list of possible target genes__.
+# Pretreatments
 
-## Part 1: Naive approach
+Browse to your Galaxy instance and log in or register. The Galaxy interface consist of three main parts. The available tools are listed on the left, your analysis history is recorded on the right, and the middle pane will show the tools and datasets.
 
-**Step 1: Upload peaks**
+![](../images/galaxy_interface.png)
 
-Download the list of peaks (the file `GSE37268_mof3.out.hpeak.txt.gz`) from GEO [click here to get to the GEO entry](http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE37268) to your computer. Use the [upload button](../images/upload_button.png) to upload the file to Galaxy and select "mm9" as the genome. Galaxy will automatically unpack the file.
+Let's start with a fresh history.
 
-Galaxy Dataset | [GSE37268_mof3.out.hpeak.txt](../input_data/Galaxy1-GSE37268_mof3.out.hpeak.txt)
+> ### :pencil2: Hands-on: Create history
+>
+> 1. Make sure you have an empty analysis history.
+>
+>    > ### :bulb: Starting a new history
+>    >
+>    > * Click the **Gear** icon at the top of the history panel
+>    > * Select the option **Create New** from the menu
+>    {: .tip}
+>
+> 2. **Rename your history** to make it easy to recognize. You can do this by clicking on the title of the history (by default the title is *Unnamed history*) and typing **Galaxy Introduction** as the name.
+>   ![](../../shared/images/rename_history.png)
+{: .hands_on}
 
-This file is not in any standard format and just by looking at it, we cannot find out what the numbers in the different columns mean. In the paper the authors mention that they used the peak caller [HPeak](https://www.ncbi.nlm.nih.gov/pubmed/20598134). By looking at the HPeak manual we can find out that the columns contain the following information:
+## Data upload
 
-- chromosome name*
-- start coordinate
-- end coordinate
-- length
-- location within the peak that has the highest hypothetical DNA fragment coverage (summit)
-- not relevant
-- not relevant
+Download the list of peak regions (the file `GSE37268_mof3.out.hpeak.txt.gz`) from
+[GEO](http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE37268) to your
+computer and upload it to Galaxy.
 
-(\*Note that the first column only contains the chromosome number, and X and Y are replaced by 20 and 21 for easier numerical manipulations.)
+> ### :pencil2: Hands-on: Data upload
+>
+> 1. Click on the upload button in the upper left ot the interface.
+>
+>    ![](../images/upload_button.png)
+>
+> 2. Press **Choose local file** and search for your file.
+>
+> 3. As **Type** select `interval`.
+>
+> 4. Press **Start** and wait for the upload to finish. Galaxy will automatically unpack the file.
+>
+>     > ### :nut_and_bolt: Comment
+>     > After this you will see your first history item in Galaxy’s right pane. It will go through
+>     > the gray (preparing/queued) and yellow (running) states to become green (success):
+>     >
+>     > ![](../images/intro_01.png)
+>     {: .comment}
+>
+>    > ### :bulb: Tip: Importing data via links
+>    >
+>    > * Copy the link location
+>    > * Open the Galaxy Upload Manager
+>    > * Select **Paste/Fetch Data**
+>    > * Paste the link into the text field
+>    > * Press **Start**    
+>    {: .tip}
+>
+>    > ### :bulb: Tip: Changing the file type once the data file is in your history
+>    >
+>    > * Click on the pencil button displayed in your dataset in the history
+>    > * Choose **Datatype** on the top
+>    > * Select `interval` in this case
+>    > * Press **Save**
+>    {: .tip}
+> 
+>    As default, Galaxy takes the link as name. It also doesn't link the dataset to a database or a reference genome.
+> 
+>    > ### :nut_and_bolt: Comments
+>    > - Edit the "Database/Build" to select "mm9", the database build for mice used in the paper
+>    > - Rename the datasets according to the samples
+>    {: .comment}
+> 
+{: .hands_on}
 
-**Step 2: Get genes from UCSC**
+In order to find the related genes to these peak regions,
+we also need a list of genes in mice, which we can obtain from UCSC.
 
-We also need a list of genes in mouse, which we can obtain from UCSC. Galaxy has the UCSC table browser integrated as a tool, so we don't need to download the data to our computers.
+> ### :pencil2: Hands-on: Data upload from UCSC
+>
+> 1. In the tool menu, navigate to `Get Data -> UCSC Main - table browser`
+>
+>     ![](../images/101_01.png)
+>
+>     You will be taken to the **UCSC table browser**, which looks something like this:
+>
+>     ![](../images/intro_02.png)
+>
+>     > ### :nut_and_bolt: Settings
+>     >
+>     >- **clade** should be set to `Mammal`
+>     >- **genome** should be set to `Mouse`
+>     >- **assembly** should be set to `July 2007 (NCBI37/mm9)`
+>     >- **group** should be set to `Genes and Gene Predictions`
+>     >- **track** should be set to `RefSeq Genes`
+>     >- **table** should be `refGene`
+>     >- **region** should be `genome`
+>     >- **output format** should be set to `BED - browser extensible data`
+>     >- **Send output to** should have the option `Galaxy` checked
+>     {: .comment}
+>
+> 2. Click on the **get output** button and you will see the next screen:
+>
+>    ![](../images/intro_03.png)
+>
+>    Make sure that **Create one BED record per** is set to `Whole Gene` and click on the **Send Query to Galaxy** button.
+>
+> 3. Let's rename our dataset to something more recognizable.
+>    - Click on the **pencil icon** to edit a file's attributes.
+>      ![](../images/edit_icon.png)
+>    - In the next screen change the name of the dataset to `Genes`.
+>    - Click the **Save** button at the bottom of the screen.
+>
+>    > ### :nut_and_bolt: BED file format
+>    > The **BED - Browser Extensible Data** format provides a flexible way to encode gene regions. BED lines have three required fields:
+>    >
+>    >      - chromosome ID
+>    >      - start position (0-based)
+>    >      - end position (end-exclusive)
+>    >
+>    > There can be up to and nine additional optional fields, but the number of fields per line must be consistent throughout any single set of data. 
+>    >
+>    > You can find more information about it at [UCSC](https://genome.ucsc.edu/FAQ/FAQformat#format1) including a description of the optional fields.
+>    {: .comment}
+> 
+{: .hands_on}
 
-***Tool***: Get Data -> UCSC main table browser
-- Select clade "Mammal", genome "Mouse", assembly "mm9"
-- Select group "Genes and Gene Prediction Tracks", track "RefSeq Genes"
-- Select table "refGene"
-- Select region "genome"
-- Select output format "BED"
-- Click button "get output"
-- Click button "Send query to Galaxy"
+Now we collected all the data we need to start our analysis.
 
-Galaxy Dataset | [UCSC Main on Mouse: refGene (genome)](../input_data/Galaxy2-UCSC_Main_on_Mouse__refGene_genome.bed)
+# Part 1: Naive approach
 
-**Step 3: Adjust chromosome naming**
+## File preperation
 
-Have a look at both input files (either in the little preview window in the history or click on the eye icon to see one in the main frame) and find out what are the differences in the chromosome naming.
-Apply the following workflow to GSE37268_mof3.out.hpeak.txt: [Workflow 'Add "chr" at beginning of each line'](http://galaxy.uni-freiburg.de/u/tutor/w/add-chr-at-beginning-of-line-imported-from-uploaded-file).
-After importing you can in the future use it by scrolling to the bottom of the tool panel, click on "All workflows" and then on the workflow name.
+Let's have a look at our files to see what we actually have here.
 
-From carefully reading the HPeak manual, we should remember that it puts "20" and "21" instead of "X" and "Y". So now the chromosome names all start properly with "chr", but we still have "chr20" and "chr21" instead of "chrX" and "chrY".
+> ### :pencil2: Hands-on: View file content
+>
+> To **view the contents** of the file, click on the **eye icon**. For our peak file, it should look something like this:
+>
+>    ![](../images/intro_04.png)
+>
+> While the regions of the genes from UCSC look slightly different:
+>
+>    ![](../images/intro_05.png)
+>
+>    > ### :question: Questions
+>    >
+>    > While the file from UCSC has labels for the columns, the peak file does not. Can you guess what the columns stand for?
+>    >
+>    {: .question}
+>
+{: .hands_on}
 
-***Tool***: Text Manipulation -> Replace text
-- Input: result of workflow (awk on data X)
-- Find pattern: chr20
-- Replace with: chrX
-- Check "find whole words"
-- Replace text in: specific column, in column c1
-- Do the same for "chr21" and "chrY", make sure you use the result of the first replacement as input (use rerun button and change input and search/replace)
-- Make sure the format of the output file is "interval", otherwise change it by clicking the pencil icon (do not convert to new format, but change data type).
+This peak file is not in any standard format and just by looking at it, we cannot find out what the numbers in the different columns mean. In the paper the authors mention that they used the peak caller [HPeak](https://www.ncbi.nlm.nih.gov/pubmed/20598134). By looking at the HPeak manual we can find out that the columns contain the following information:
 
-**Step 4: Visualize peaks**
+ - chromosome name by number
+ - start coordinate
+ - end coordinate
+ - length
+ - location within the peak that has the highest hypothetical DNA fragment coverage (summit)
+ - not relevant
+ - not relevant
 
-***Genomic Intervals to BED***:
+In order to compare the the two files, we have to make sure that the chromosome names follow the same format.
+As we directly see, the peak file lacks `chr` before any chromosome number. But what happens with chromosome 20 and 21? Will it be X and Y instead? Let's check:
 
-To visualize the peaks it's best to convert them to BED format first, because most viewers cannot deal with interval (because interval format just exists in Galaxy).
+> ### :pencil2: Hands-on: View end of file
+>
+> 1. **Select last** :wrench:: Search for the **Select last** tool in the tool panel to the left and select the following settings:
+>     - As **Text file** our peak file `GSE37268_mof3.out.hpeak.txt`
+>     - **Operation**: `Keep last lines`
+>     - **Number of lines**: Choose a value, e.g. `100`
+> 2. Click **Execute**
+> 3. Wait for the job to finish and inspect the file through the **eye icon**.
+>
+>    > ### :question: Questions
+>    >
+>    > 1. Are the chromosomes 20 and 21 named X and Y?
+>    >
+>    >    <details>
+>    >    <summary>Click to view answers</summary>
+>    >    <ol type="1">
+>    >    <li>Not at all. One more thing to fix.</li>
+>    >    </ol>
+>    >    </details>
+>    {: .question}
+{: .hands_on}
 
-- Click on the pencil icon of the latest dataset
-- Under the header "Convert to new format" select "Convert Genomic Intervals to BED"
-- Click "Convert"
-- Look at the new dataset. Some columns with generic names have been added and others were removed to comply to BED format rules.
-- This generated a new dataset in BED format which we'll use for visualization. We will however continue to work with the interval dataset.
+In order to convert the chromosome names we have therefore two things to do:
 
-***Display in UCSC browser***:
+ - add `chr`
+ - change 20 and 21 to X and Y
 
-- Expand dataset in history panel
-- Click on "display at UCSC main"
+> ### :pencil2: Hands-on: Adjust chromosome names
+>
+> 1. **Replace Text** :wrench:: Run **Replace Text in a specific column**  with the following settings:
+>     - As **File to process** our peak file `GSE37268_mof3.out.hpeak.txt`
+>     - **in column**: `1`
+>     - **Find pattern**: `[0-9]+`- this will look for numerical digits
+>     - **Replace with**: `chr&` - `&` is a placeholder for the find result
+> 2. Click **Execute**
+> 3. Let's rerun the tool for the final changes two times. You can shortcut this by pressing the **rerun icon** in the history, but don't forget to adjust the settings:
+>    - As **File to process** use the output from the last run, e.g. something like `Replace Text on data ...`
+>    - **in column**: `1`
+>    - **Find pattern**: `chr20`
+>    - **Replace with**: `chrX`
+> 4. Rerun this tool accordingly for chromosome Y.
+> 5. Wait for the jobs to finish and inspect the latest file through the **eye icon**. Have we been successful?
+>
+{: .hands_on}
 
-***Display in IGV***:
+We have quite some files now and should take care that we don't loose track. Let's rename our latest result to something more handy, e.g. `Peak regions`.
 
-- Go to the [IGV website](http://www.broadinstitute.org/software/igv/download)
-- Register or log-in to get access to the download area
-- Click on any of the "Launch" buttons (the more data you want to visualize, the bigger the GBs should be; here 750 MB should be enough)
-- Inside IGV select "Mouse mm9" in the upper left drop-down box
-- Go back to Galaxy
-- Click on the link "local" after "display with IGV" (expanded history view of BED dataset)
-- Go back to IGV, which should now have a track named "galaxy_xxxx.bed"
 
-The way presented here adds a new track to a running instance of IGV and thus keeps all other tracks which you may have visualized. However, you can also launch IGV directly from within Galaxy by selecting "web current" instead of "local", but then each time a new instance of IGV is started (and this way it's not possible to view several tracks from Galaxy side-by-side).
+## Analysis
 
-***Optional: Display in Galaxy's build-in browser Trackster***:
+Before we compare both region files we will add the promoter region to the gene records.
 
-![Interval2Bed_1](../images/Interval2Bed_1.png)
+> ### :pencil2: Hands-on: Add promoter region to gene records
+>
+> 1. **Get Flanks** :wrench:: Run **Get Flanks**, which returns flanking regions for every gene with the following settings:
+>     - As **Select data** use the file from UCSC
+>     - **Region**: `Around Start`
+>     - **Location**: `Upstream`
+>     - **Offset**: `10000`
+>     - **Length**: `12000`
+{: .hands_on}
 
-- Click on Visualization icon
-- Click on "Trackster"
-- Type in a name and select "mm9" as reference genome
-- Click "Create"
-- Wait until data preparation is finished
-- Select a chromsome to look at
-- Unfortunately Trackster doesn't already include gene tracks or other annotations, so we add our RefSeq genes as an additional track.
+Compare the resulting BED file with the input.
+Look at the contents and compare the rows in the input to the rows in the output to find out how the start and end positions changed.
+Rename the dataset (by clicking on the pencil icon) to reflect your findings.
 
-![SInterval2Bed_2](../images/SInterval2Bed_2.png)
+You might have noticed that the UCSC file is in `BED` format and has a database associated to it. That's what we want for our peak file as well:
 
-- Click on "Add tracks" icon (little plus in the upper right)
-- Check your RefSeq genes dataset
-- Click "Insert" at the bottom (you may have to scroll down)
-- Wait for data preparation to finish
-- Save the visualization by clicking on the disk icon next to the plus icon
-- Unlike the UCSC browser, Trackster will remember the whole visualization including the chromosome location you looked at when you save it. You can go back any time by selecting "Visualization" in the top menu.
+> ### :pencil2: Hands-on: Change format and database
+>
+> 1. Click on the **pencil icon** in the history entry of our peak region file:
+>      ![](../images/edit_icon.png)
+> 2. In the next screen select as **Database/Build**: `Mouse July 2007 (NCBI37/mm9) (mm9)`
+> 3. Click **Save**
+> 4. Click on the **pencil icon** again and switch to the `Convert Format` tab
+> 5. Select `Convert Genomic Intervals To BED` and press **Convert**
+{: .hands_on}
 
-**Step 5: Add promoter region to gene records**
-***Tool***: Text Manipulation -> Get flanks
-- Input dataset: RefSeq genes from UCSC (UCSC Main on Mouse: refGene (genome))
-- Options: Region: "Around Start", Location: "Upstream",  Offset: 10000, Length: 12000
+It's time to find the overlapping intervals (finally!):
 
-Inspect the resulting BED file and through comparing with the input find out what this operation actually did. Just look at the contents and compare the rows in the input to the rows in the output to find out how the start and end positions changed. Rename the dataset (by clicking on the pencil icon) to reflect your findings.
+> ### :pencil2: Hands-on: Find Overlaps
+>
+> 1. **Intersect** :wrench:: Run **Intersect** with the following settings:
+>     - **Return**: `Overlapping Intervals`
+>     - **of**: the UCSC file with promoter regions
+>     - **that intersect**: our converted peak region file
+>     - **for at least**: `1`
+> 
+>    > ### :nut_and_bolt: Comments
+>    > The order of the inputs is important! We want to end up with a list of genes, so the corresponding dataset needs to be the first input.
+>    {: .comment}
+{: .hands_on}
 
-**Step 6: Find overlaps**
-***Tool***: Text Manipulation -> Intersect
-- Return: Overlapping Intervals of: result of step 5 (Get flanks on data X)
-that intersect: result of step 3 (second Find and Replace)
-
-The order of the inputs is important! We want to end up with a list of genes, so the corresponding dataset needs to be the first input.
-
-**Step 7: Count genes on different chromosomes**
-
+We do have a the list of genes (column 4 ) which correspond to the peak regions.
 To get a better overview of the genes we obtained, we want to look at their distribution across the different chromosomes.
 
-***Tool***: Statistics -> Count occurrences of each record
-- Input: result from step 6 (Intersect on data X and data X)
-- Select column 1 (c1) with the chromosome names
+> ### :pencil2: Hands-on: Count genes on different chromosomes
+>
+> 1. **Group** :wrench:: Run **Group** with the following settings:
+>     - **Select data**: The result of the intersection
+>     - **Group by column**: `Column 1`
+>     - Press **Insert Operation** and choose:
+>     - **Type**: `Count`
+>     - **On column**: `Column 1`
+>
+>    > ### :question: Questions
+>    >
+>    > Which chromosome contained the highest number of target genes?
+>    >
+>    >    <details>
+>    >    <summary>Click to view answers</summary>
+>    >    <ol type="1">
+>    >    <li>The result varies with different settings. If you followed step by step it should be chromosome 7 with 1671 genes.</li>
+>    >    </ol>
+>    >    </details>
+>    {: .question}
+> 
+{: .hands_on}
 
-Here you can double-check if the previous steps were correct by comparing the numbers.
+## Visualization
 
-Galaxy Dataset | [Count genes on different chromosomes](../input_data/Galaxy9-Count_genes_on_different_chromosomes.tabular)
-Result of part 1, step 7
+Since we have some nice data, let's draw a barchart out of it!
+
+> ### :pencil2: Hands-on: Draw barchart
+>
+> 1. **Charts** : Select the **Visualize icon** at the latest history item and select `Charts`
+> 2. Choose a title at **Provide a title**, e.g. `Gene counts per chromosome`
+> 3. Switch to the **Select data** tab and play around with the settings
+> 4. Press **Visualize** and the top right to inspect your result
+> 5. Click on **Editor** and repeat with different settings
+>
+{: .hands_on}
+
+## Extracting workflow
+
+When you look carefully at your history, you can see that it contains all steps of our analysis, from the beginning to the end. By building this history we have actually built a complete record of our analysis with Galaxy preserving all parameter settings applied at every step.
+Wouldn't it be nice to just convert this history into a workflow that we’ll be able to execute again and again?
+
+Galaxy makes this very easy with the `Extract workflow` option. This means any time you want to build a workflow, you can just perform it manually once, and then convert it to a workflow, so that next time it will be a lot less work to do the same analysis. It also allows you to share or publish your analysis with ease.
+
+> ### :pencil2: Hands-on: Extract workflow
+>
+> 1. **Clean up** your history. If you had any failed jobs (red), please remove those datasets from your history by clicking on the `x` button. This will make the creation of a workflow easier.
+>
+> 2. Go to the history **Options menu** (gear symbol) and select the `Extract Workflow` option.
+>
+>    ![](../images/history_menu_extract_workflow.png)
+>
+>    The center pane will change and you will be able to choose which steps to include/exclude and how to name the newly created workflow.
+>
+> 3. **Uncheck** any steps that shouldn't be included in the workflow. Since we did some steps which where specific to our custom peak file, we might to exclude:
+>   - all **Replace Text** steps
+>   - **Convert Genomic Intervals to strict BED**
+>   - **Get flanks**
+> 4. Rename the workflow to something descriptive, for example `From peaks to genes`
+>
+> 5. Click on the **Create Workflow** button near the top.
+>
+>    You will get a message that the workflow was created. But where did it go?
+>
+> 6. Click on **Workflow** in the top menu of Galaxy. Here you have a list of all your workflows. 
+> 7. Select the newly generated workflow and click on **Edit**. You should see something similar to this:
+>   ![](../images/intro_06.png)
+>
+>    > ### :nut_and_bolt: The workflow editor
+>    > We can examine the workflow in Galaxy's workflow editor. Here you can view/change the parameter settings of each step, add and remove tools, and connect an output from one tool to the input of another, all in an easy and graphical manner. You can also use this editor to build workflows from scratch.
+>    {: .comment}
+> 8. Although we have our two inputs in the workflow they are missing their connection to the first tool (Intersect), because we didn't carry over some of the intermediate steps. Connect each input dataset to the Intersect tool by dragging the arrow pointing outwards on the right of its box (which denotes an output) to an arrow on the left of the Intersect box pointing inwards (which denotes an input). Connect each input dataset with a different input of Intersect.
+> 9. Rename the Input datasets: The upper one should be the `Reference regions` and the lower the `Peak regions`
+> 10. Click on the **gear icon** at the top right and press **Auto Re-layout** to clean up our view:
+>    ![](../images/intro_07.png)
+> 11. Click on the **gear icon** at the top right and press **Save** to save your changes:
+>
+>    > ### :bulb: Tip: Hiding intermediate steps
+>    > When a workflow is executed, the user is usually primarily interested in the final product and not in all intermediate steps. By default all the outputs of a workflow will be shown, but we can explicitly tell Galaxy which output to show and which to hide for a given workflow. This behaviour is controlled by the little asterisk next to every output dataset:
+>    > ![](../../shared/images/workflow_editor_mark_output.png)
+>    >
+>    > If you click on this asterisk for any of the output datasets, then *only* files with an asterisk will be shown, and all outputs without an asterisk will be hidden (Note that clicking *all* outputs has the same effect as clicking *none* of the outputs, in both cases all the datasets will be shown).
+>    {: .tip}
+{: .hands_on}
+
+Now it's time to reuse our workflow for a more sophisticated approach.
+
+# Part 2: More sophisticated approach
+
+In part 1 we used an overlap definition of 1 bp (default setting). In order to get a more meaningful definition, we now want to use the information of the position of the peak summit and check for overlap of the summits with genes. 
+
+## Preperation
+
+Create a new history and name it. If you forgot how to do that, you can have a look at the beginning of this tutorial.
+The history is now empty, but we need our peak file again. Before we upload it twice we can copy it from our former history:
+
+> ### :pencil2: Hands-on: Copy history items
+>
+> 1. Click on the **View all histories icon** at the top right of your history
+> 2. You should see both of your histories side-by-side now. Use drag-and-drop with your mouse to copy the edited peak file (after the replace steps) but still in interval format, which contains the summit information, to your new history.
+> 2. Press **Done** in the top left to go back to your analysis window
+>
+{: .hands_on}
+
+## Create peak summit file
+
+We need to generate a new BED file from the original peak file that contains the positions of the peak summits. The start of the summit is the start of the peak (column 2) plus the location within the peak that has the highest hypothetical DNA fragment coverage (column 5). As the end we simply define `start + 1`.
+
+> ### :pencil2: Hands-on: Create peak summit file
+>
+> 1. **Compute** :wrench:: Run **Compute an expression on every row** with the following settings:
+>   - **Add expression**: `c2+c5`
+>   - **as a new column to**: our peak file
+>   - **Round result?**: `YES`
+> 2. Rerun this tool on the last result with:
+>   - **Add expression**: `c8+1`
+>   - **as a new column to**: the result from step 1
+>   - **Round result?**: `YES`
+>
+{: .hands_on}
+
+Now we cut out just the chromosome plus the start and end of the summit:
+
+> ### :pencil2: Hands-on: Cut out columns
+> 1. **Cut** :wrench:: Run **Cut columns from a table** with the following settings:
+>   - **Cut columns**: `c1,c8,c9`
+>   - **From**: our latest history item
+> 2. The output from **Cut** will have the format `tabular`. Change it to `interval` since that's what the tool **Intersect** expects.
+>
+{: .hands_on}
+
+## Get gene names
+
+The RefSeq genes we downloaded from UCSC did only contain the RefSeq identifiers, but not the gene names. To get a list of gene names in the end, we use another BED file from the Data Libraries.
+
+> ### :nut_and_bolt: Comments
+> There are several ways to get the gene names in, if you need to do it yourself. On way is to retrieve a mapping through Biomart and then join the two files (Tool: **Join, Substract and Group** - **Join two Datasets side by side on a specified field**). Another is to get the full RefSeq table from UCSC and manually convert it to BED format.
+{: .comment}
+
+> ### :pencil2: Hands-on: Get new gene file from Data Library
+> 1. Click in the top menu on **Shared Data**
+> 2. Navigate to `Genomes + Annotations -> Annotations`
+> 3. Check the dataset `mm9.RefSeq_genes_from_UCSC`
+> 4. Click **to History**, select it and press **Import**
+> 5. Click in the top menu on **Analyze Data** to get back to your main page. You should see a new item in your history.
+> 6. Inspect the file content to check if it contains gene names.
+{: .hands_on}
+
+## Repeat workflow
+
+It's time to reuse the workflow we created earlier.
+
+> ### :pencil2: Hands-on: Run a workflow
+> 1. Open the workflow menu (top menu bar). Find the workflow you made in the previous section, and select the option **Run**
+> 2. Choose as inputs our imported gene BED file and the result of the **Cut** tool
+> 3. Click **Run workflow**. The outputs should appear in the history but it might take some time until they are finished.
+{: .hands_on}
+
+We used our workflow to rerun our analysis with the peak summits. The **Group** tool again produced a list containing the amount of genes found in each chromosome.
+But woudln't it be more interesting to know about the amount of peaks in each unique gene? Let's rerun the workflow with different settings:
+
+> ### :pencil2: Hands-on: Run a workflow with changed settings
+> 1. Open the workflow menu (top menu bar). Find the workflow you made in the previous section, and select the option **Run**
+> 2. Choose as inputs our imported gene BED file and the result of the **Cut** tool
+> 3. Click on the title of the Group tool to expand the options.
+> 4. Change the following settings by clicking at the **edit icon** on the left:
+>   - **Group by column**: `7`
+>   - **Operation -> On column**: `7`
+> 5. Click **Run workflow**
+{: .hands_on}
+
+Congratulations! You should have a file with all the unique gene names and a count on how many peaks they contained.
+
+> ### :question: Questions
+>
+> The list of unique genes is not sorted. Try to sort it on your own!
+>
+>    <details>
+>    <summary>Click to view answers</summary>
+>    You can use the tool "Sort data in ascending or descending order" on column 2 and a numerical sort.
+>    </details>
+{: .question}
 
 
+# Share your work
 
-**Step 8: Draw barchart**
-***Tool***: Bar chart (use tool search to find it)
-- Input: result of step 7
-- Use X Tick labels: Yes, column 2
-- Numerical column: c1
-- Plot title is up to you
-- Label for Y axis: number of genes
+One of the most important features of Galaxy comes at the end of an analysis. When you have published striking findings, it is important that other researchers are able to reproduce your in-silico experiment. Galaxy enables users to easily share their workflows and histories with others.
 
-Galaxy has a second option to visualise tabular data, with built-in dynamic visualisations:
+To share a history, click on the gear symbol in the history pane and select `Share or Publish`. On this page you can do 3 things:
 
-- Expand the dataset view and click on the visualization icon (see step 4, same button as Trackster)
-- Choose "Charts"
-- Enter a chart title, e.g. "Genes on different chromsomes"
-- Select "Bar diagrams" -> "Regular"
-- On the top, click on "Add Data"
-- Enter a label, e.g. "count"
-- Values for x-axis: Column: 2 [str]
-- Values for y-axis: Column: 1 [int]
-- On the very top, click "Draw"
-- [Visualization 'Genes on different chromosomes'](http://galaxy.uni-freiburg.de/u/tutor/v/genes-on-different-chromosomes)
+1. **Make accessible via Link**. This generates a link that you can give out to others. Anybody with this link will be able to view your history.
+2. **Publish History**. This will not only create a link, but will also publish your history. This means your history will be listed under `Shared Data → Published Histories` in the top menu.
+3. **Share with Individual Users**. This will share the history only with specific users on the Galaxy instance.
 
-**Step 9: Name  your history**
+> ### :pencil2: Hands-on: Share history and workflow
+>
+> 1. Share one of your histories with your neighbour.
+> 2. See if you can do the same with your workflow!
+> 3. Find the history and/or workflow shared by your neighbour. Histories shared with specific users can be accessed by those users in their history menu (gear icon) under `Histories shared with me`.
+{: .hands_on}
 
-In the history column click on "Unnamed history" at the top to rename it.
+# Conclusion
 
-![rename_history](../images/rename_history.png)
-
-**Step 10: Make a workflow out of steps 6 to 8**
-- Click on the history options and select "Extract workflow"
-
- ![Screenshot](../images/screenshot.jpg)
-
-- Do **not** include "awk",  either "Find and Replace", "Convert Genomic Intervals to strict BED" and "Get flanks"
-- Click "Create Workflow"
-
-To make sure our workflow is correct we look at it in the editor and make some small adjustments.
-
-Top menu: Workflow
-- Click on the name of your new workflow and select "Edit"
-
-The individual steps are displayed as boxes and their outputs and inputs are connected through lines. When you click on a box you see the tool options on the right. Besides the tools you should see two additional boxes titled "Input dataset". These represent the data we want to feed into our workflow. Although we have our two inputs in the workflow they are missing their connection to the first tool (Intersect), because we didn't carry over the intermediate steps. Connect each input dataset to the Intersect tool by dragging the arrow pointing outwards on the right of its box (which denotes an output) to an arrow on the left of the Intersect box pointing inwards (which denotes an input). Connect each input dataset with a different input of Intersect.
-
-![sample_workflow](../images/sample_workflow.png)
-
-You should also change the names of the input datasets to remember that the first one contains genes and the second one peaks. Don't forget to save it in the end by clicking on "Options" (top right) and selecting "Save".
-
-**Step 11: Share workflow**
-Share your new workflow with the person to your left.
-
-Top menu: Workflow
-- Click on your workflow's name and select "Share or publish"
-- Click "Share with a user"
-- Enter the email address of the person to your left (the same as he/she uses to login to Galaxy)
-- Hit "Share"
-- Wait for the person on your right to do the same
-- Reload the workflows by clicking again on "Workflow" in the top menu
-- Under the header "Workflows shared with you by others" you should now see your right neighbor's workflow
-- Click on its name and select "View"
-- Compare with your workflow
-
-## Part 2: More sophisticated approach
-
-**Step 12: Create new history**
-- History options: Create New
-- Rename new history
-
-**Step 13: Copy over peak file to new history**
-
-History options: Saved Histories
-- Click on name of old history to reactivate it
-History options: Copy Datasets
-- Select result of step 3 (result of second Find and Replace)
-- Select new history as destination
-- Click "Copy History Items"
-- In the green bar appearing on the top, click on the name of the new history to go back to it
-
-**Step 14: Make peak summit file**
-
-In part 1 we used an overlap definition of 1 bp (default setting). In order to get a more meaningful definition, we now want to use the information of the position of the peak summit and check for overlap of the summits with genes. So we need to generate a new BED file from the original peak file that contains the positions of the peak summits. The start of the summit is the start of the peak (column 2) plus the location within the peak that has the highest hypothetical DNA fragment coverage (column 5) and as the end we simply define start + 1.
-
-We use the tool "Compute an expression on every row" twice to add two rows to the peak file containing start and end of the summit.
-
-***Tool***: Compute an expression on every row
-- Expression: c2+c5, as a new column to peak file, round: yes
-- Expression: c8+1, as a new column to result of previous execution of compute tool, round: yes
-
-Then we cut out just the chromosome and start, end of the summit.
-
-***Tool***: Cut columns from a table
-- Columns: c1,c8,c9
-- Change the format of the output file to "interval" by clicking the pencil icon, selecting "interval" as new type and clicking "Save" (do not convert to new format, but change data type). Consider renaming this dataset to remember that it contains the peak summits.
-
-**Step 15: Get new gene file from Data Library**
-
-The RefSeq genes we downloaded from UCSC did only contain the RefSeq identifiers, but not the gene names. To get a list of gene names in the end, we use another BED file from the Data Libraries*.
-
-Top menu: Shared Data -> Data Libraries
-- Click on library "Genomes + Annotations"
-- Expand folder "Annotations"
-- Check the dataset "mm9.RefSeq_genes_from_UCSC"
-- Select "Import to current history" on the bottom
-- Hit "Go"
-
-(* There are several ways to get the gene names in, if you need to do it yourself. On way is to retrieve a mapping through Biomart and then join the two files (tool: Join, Substract and Group -> Join two Datasets side by side on a specified field). Another to get the full RefSeq table from UCSC and manually convert it to BED format.)
-
-**Step 16: Repeat workflow**
-
-Execute the workflow you generated in part 1 on the peak summit file and the new RefSeq genes BED file.
-
-Galaxy Dataset | [Count genes on different chromosomes](../input_data/Galaxy8-Count_genes_on_different_chromosomes.tabular)
-Result of part 2, step 16
-
-
-**Step 17: Generate list of unique gene names**
-
-Run the public [Workflow 'Proper unique on a column'](http://galaxy.uni-freiburg.de/u/tutor/w/imported-proper-unique) on the result of the intersect and choose the column with the gene names. The result should be a dataset with one column and 10841 lines.
-
-Galaxy Dataset | [unique gene names](../input_data/Galaxy12-unique_gene_names.tabular)
-Result of part 2, step 17
-
-
-**Step 18: Cleaning up**
-Delete old history:
-
-History options: Saved histories
-- Check your old history from part 1
-- Click "Delete Permanently" on the bottom
-
-Download your workflow:
-
-Top menu: Workflow
-- Click on your workflow's name and select "Download or Export"
-- Click on "Download workflow to file so that it can be saved or imported into another Galaxy server"
-- Save the workflow file on your computer
-- Clean up second history:
-Delete all datasets that are neither initial input nor final results. Everything that can be easily recreated or is just part of an intermediate step can go. What I would keep are the peak summits, the intersect result, the bar chart and the list of unique gene names (for a real analysis I would recommend to also download all final results). Deleted datasets can be undeleted for some time (see history options) and will only be ultimately removed from the server if they aren't used somewhere else or by somebody else and stay deleted for several weeks.
-
-## END
+Well done! You have just performed your first analysis in Galaxy. You also created a workflow from your analysis so you can easily repeat the exact same analysis on other datasets. Additionally you shared your results and methods with others.
