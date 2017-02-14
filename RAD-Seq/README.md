@@ -16,7 +16,7 @@ A tutorial with hands-on is available for this topic:
 
 - [Reference-based RAD-Seq data analysis](http://galaxyproject.github.io/training-material//RAD-Seq/tutorials/ref_based_rad)
 - [de-novo RAD-Seq data analysis](http://galaxyproject.github.io/training-material//RAD-Seq/tutorials/de_novo_rad)
-- [Genetic map from RAD-Seq data](http://galaxyproject.github.io/training-material//RAD-Seq/tutorials/genetic_map_rad.md)
+- [Genetic map from RAD-Seq data](http://galaxyproject.github.io/training-material//RAD-Seq/tutorials/genetic_map_rad)
 
 ## Input datasets
 
