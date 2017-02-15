@@ -153,7 +153,7 @@ tutorial_name: dna_methylation
 > 1. **Galaxy** :wrench:: Import from the data library the files ```NB1_CpG.meth.bedGraph```, ```NB2_CpG.meth.bedGraph```, ```BT089_CpG.meth.bedGraph```, ```BT126_CpG.meth.bedGraph``` and  ```BT198_CpG.meth.bedGraph```.
 > 2. **Galaxy** :wrench:: Search for the tool ```Metilene```
 > 3. **Metilene** :wrench:: Choose for the first option ```Input group 1``` the imported files starting with ``NB`` and for ```Input group 2``` the imported files ```Input group 2```.
-> 4. **Metilene** :wrench:: Select for the option ```BED file containing regions of interest``` the imported BAM file CpGIslands.bed. //the computed bam file from PileOMeth.
+> 4. **Metilene** :wrench:: Select for the option ```BED file containing regions of interest``` the imported BAM file CpGIslands.bed.
 > 5. More information about metilene can be found here: http://www.bioinf.uni-leipzig.de/Software/metilene/
 >
 >    > ### :question: Questions
