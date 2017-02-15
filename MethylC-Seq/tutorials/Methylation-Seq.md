@@ -177,7 +177,7 @@ tutorial_name: dna_methylation
 
 > ### :pencil2: Hands-on: 
 > 
-> We will extract the methylation on the resulting BAM file of the alignment step with the help of deepTools.
+> We visualize some example with the help of deepTools.
 > 
 > 1. **Galaxy** :wrench:: Search for the tool ```Wig/BedGraph-to-bigWig```
 > 2. **Wig/BedGraph-to-bigWig** :wrench:: Use the result of metilene which starts with ```metilene qval<0.05 bedgraph on data...``` to transform it to a bigWig file.
@@ -190,7 +190,7 @@ tutorial_name: dna_methylation
 >    >    <details>
 >    >    <summary>Click to view answers</summary>
 >    >    <ol type="1">
->    >    <li>The error message says: <code>hashMustFindVal: '1' not found</code>. The reason is the source of the reference genome which was used. There is <code>ensembl</code> and <code>USCS</code> as sources which differ in naming the chromosomes. Ensembl is using just numbers e.g. <code>1</code> for chromosome one. USCS is using <code>chr1</code> for the same. Be carefule with this especially if you have data from different sources.</li>
+>    >    <li>The error message says: <code>hashMustFindVal: '1' not found</code>. The reason is the source of the reference genome which was used. There is <code>ensembl</code> and <code>USCS</code> as sources which differ in naming the chromosomes. Ensembl is using just numbers e.g. <code>1</code> for chromosome one. USCS is using <code>chr1</code> for the same. Be careful with this especially if you have data from different sources.</li>
 >    >    </ol>
 >    >    </details>
 >    {: .question}
