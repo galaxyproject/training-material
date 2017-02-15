@@ -65,7 +65,7 @@ Before proceeding with the analysis, we need to find out how good the data actua
 >
 >![](../images/mt_qc_plot.png)
 >
->FastQC plot for one of the mitochondrial datasets shows that qualities are acceptable for 250 bp reads (mostly in the green, which is at or above [phred score](https://en.wikipedia.org/wiki/Phred_quality_scorescore) of 30). 
+>FastQC plot for one of the mitochondrial datasets shows that qualities are acceptable for 250 bp reads (mostly in the green, which is at or above [phred score](https://en.wikipedia.org/wiki/Phred_quality_score) of 30). 
 {: .hands_on}
 
 
