@@ -14,7 +14,6 @@ tutorial_name: dna_methylation
 > 2. [Align the data](#alignment)
 > 3. [Methylation bias and metric extraction](#Methylation\ bias\ and\ metric\ extraction)
 > 4. [Visualize the mapped data](#visualization)
-> 5. [Metilene](#Metilene)
 > 
 > 
 > This tutorial is based on [I-Hsuan Lin et al.: 'Hierarchical Clustering of Breast Cancer Methylomes Revealed Differentially Methylated and Expressed Breast Cancer Genes'](http://dx.doi.org/10.1371/journal.pone.0118453)
@@ -28,7 +27,12 @@ tutorial_name: dna_methylation
 > We load now one example data set which will be used for the tutorial. 
 >
 > 1. Load the two example dataset from our data library: subset_1.fastq.gz and subset_2.fastq.gz. 
->   
+>
+>    > ### :bulb: Tip: Get data from the library
+>    >
+>    > * Clink on ```Shared Data``` --> ```Data Libraries``` and here ```MethylSeq_2017```
+>    > * Select the uploaded datasets ```subset_1.fastq.gz``` and ```subset_1.fastq.gz``` as the fastq files
+>    {: .tip}
 >
 > 2. **FastQC**
 > 
