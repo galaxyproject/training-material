@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 topic_name: DNA methylation
-tutorial_name: methylation-seq
+tutorial_name: Methylation-Seq
 ---
 
 # Galaxy workshop on DNA Methylation data analysis
