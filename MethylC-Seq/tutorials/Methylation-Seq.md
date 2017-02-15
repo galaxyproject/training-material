@@ -10,10 +10,12 @@ tutorial_name: dna_methylation
 >
 > In this tutorial we will:
 >
-> 1. [Load data and quality control](#Load\ data\ and\ quality\ control)
+> 1. [Load data and quality control](#load-data-and-quality-control)
 > 2. [Align the data](#alignment)
-> 3. [Methylation bias and metric extraction](#Methylation\ bias\ and\ metric\ extraction)
-> 4. [Visualize the mapped data](#visualization)
+> 3. [Methylation bias and metric extraction](#methylation-bias-and-metric-extraction)
+> 4. [CpG island extraction with PileOMeth](#cpg-island-extraction-with-pileometh)
+> 5. [Metilene](#metilene)
+> 6. [Visualize the mapped data](#visualization)
 > 
 > 
 > This tutorial is based on [I-Hsuan Lin et al.: 'Hierarchical Clustering of Breast Cancer Methylomes Revealed Differentially Methylated and Expressed Breast Cancer Genes'](http://dx.doi.org/10.1371/journal.pone.0118453)
