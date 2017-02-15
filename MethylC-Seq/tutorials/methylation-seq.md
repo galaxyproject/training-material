@@ -146,6 +146,54 @@ tutorial_name: methylation-seq
 >
 {: .hands_on}
 
+
+# Visualization 
+
+> ### :pencil2: Hands-on: 
+> 
+> We visualize the example with the help of deepTools.
+> 
+> 1. **Galaxy** :wrench:: Search for the tool ```Wig/BedGraph-to-bigWig```
+> 2. **Wig/BedGraph-to-bigWig** :wrench:: Use the result of PileOMeth to transform it to a bigWig file.
+>
+>    > ### :question: Questions
+>    >
+>    > - The execution fails. Do you have an idea why?
+>    > 
+>    >
+>    >    <details>
+>    >    <summary>Click to view answers</summary>
+>    >    <ol type="1">
+>    >    <li>The output file is having one line too much in in the beginning and column five and six should not be there. We need to fix this.</li>
+>    >    </ol>
+>    >    </details>
+>    {: .question}
+> 
+> 3. **Galaxy** :wrench:: Search for ```tail``. use ```Select last lines from a dataset (tail)```
+> 4. **tail** :wrench:: Use the mode ```Operation``` the value ```Keep everything from this line on``` and choose ```2``` as a value.
+> 5. **Galaxy** :wrench:: Search for awk
+> 6. **awk** :wrench:: Convert with awk the bedgraph file and use as ```AWK Program```: ```'BEGIN{OFS="\t"}{print $1, $2, $3, $4}'```
+> 7. **Galaxy** :wrench:: Search for the tool ```computeMatrix```.
+> 8. **computeMatrix** :wrench:: Use the file ```CpGIslands.bed```as ```Regions to plot``` and the in the previous step created bigwig file as the ```score file```.
+> 9. **computeMatrix** :wrench:: Use for the option ```computeMatrix has two main output options``` the value ```reference-point```. 
+> 10. **Galaxy** :wrench:: Search for the tool ```plotProfile```.
+> 11. **plotProfile** :wrench:: Choose for ```Matrix file from the computeMatrix tool``` the computed matrix from the tool ```computeMatrix```. 
+> 
+> The output should look something like this:
+> 
+> ![](../images/methylation_output.png)
+>
+> Lets see how the methylation looks for a view provided files:
+> 1. **Galaxy** :wrench:: Import from the data library the files ```NB1_CpG.meth.bedGraph```, ```NB2_CpG.meth.bedGraph```, ```BT089_CpG.meth.bedGraph```, ```BT126_CpG.meth.bedGraph``` and  ```BT198_CpG.meth.bedGraph```.
+> 2. **Galaxy** :wrench:: Search for ```tail`` and select all new imported files as input.
+> 3. **tail** :wrench:: Use the mode ```Operation``` the value ```Keep everything from this line on``` and choose ```2``` as a value.
+> 4. A convertion to bigWig would fail right now, probably with some error message like ```hashMustFindVal: '1' not found```. The reason is the source of the reference genome which was used. There is ensembl and USCS as sources which differ in naming the chromosomes. Ensembl is using just numbers e.g. 1 for chromosome one. USCS is using chr1 for the same. Be careful with this especially if you have data from different sources. We need to convert this.
+> 5. **awk** :wrench:: Convert with awk the bedgraph files and use as ```AWK Program```: ```'BEGIN{OFS="\t"}{$1="chr"$1; print}'```
+> 
+> More information about deepTools can be found here: https://deeptools.github.io/
+>
+{: .hands_on}
+
 # Metilene 
 
 > ### :pencil2: Hands-on: Metilene
@@ -174,38 +222,3 @@ tutorial_name: methylation-seq
 > 
 >
 {: .hands_on}
-
-# Visualization 
-
-> ### :pencil2: Hands-on: 
-> 
-> We visualize some example with the help of deepTools.
-> 
-> 1. **Galaxy** :wrench:: Search for the tool ```Wig/BedGraph-to-bigWig```
-> 2. **Wig/BedGraph-to-bigWig** :wrench:: Use the result of metilene which starts with ```metilene qval<0.05 bedgraph on data...``` to transform it to a bigWig file.
->
->    > ### :question: Questions
->    >
->    > - The execution fails. Do you have an idea why?
->    > 
->    >
->    >    <details>
->    >    <summary>Click to view answers</summary>
->    >    <ol type="1">
->    >    <li>The error message says: <code>hashMustFindVal: '1' not found</code>. The reason is the source of the reference genome which was used. There is <code>ensembl</code> and <code>USCS</code> as sources which differ in naming the chromosomes. Ensembl is using just numbers e.g. <code>1</code> for chromosome one. USCS is using <code>chr1</code> for the same. Be careful with this especially if you have data from different sources.</li>
->    >    </ol>
->    >    </details>
->    {: .question}
-> 
-> 3. **Galaxy** :wrench:: Search for awk
-> 3. **awk** :wrench:: Convert with awk the bedgraph file and use as ```AWK Program```: ```'BEGIN{OFS="\t"}{$1="chr"$1; print}'```
-> 4. **Galaxy** :wrench:: Search for the tool ```computeMatrix```.
-> 5. **computeMatrix** :wrench:: Use the file ```CpGIslands.bed```as ```Regions to plot```  and the in the prevoius step created bigwig file as the ```score file```.
-> 6. **computeMatrix** :wrench:: Use for the option ```computeMatrix has two main output options``` the value ```reference-point```. 
-> 7. **Galaxy** :wrench:: Search for the tool ```plotProfile```.
-> 8. **plotProfile** :wrench:: Choose for ```Matrix file from the computeMatrix tool``` the computed matrix from the tool ```computeMatrix```. 
-> 
-> More information about deepTools can be found here: https://deeptools.github.io/
->
-{: .hands_on}
-
