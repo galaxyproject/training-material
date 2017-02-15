@@ -190,7 +190,7 @@ tutorial_name: dna_methylation
 >    >    <details>
 >    >    <summary>Click to view answers</summary>
 >    >    <ol type="1">
->    >    <li>The error message says: <code>hashMustFindVal: '1' not found</code> The reason is the source of the reference genome which was used. There is ```ensembl``` and ```USCS``` as sources which differ in naming the chromosomes. Ensembl is using just numbers e.g. ```1``` for chromosome one. USCS is using ```chr1``` for the same. Be carefule with this especially if you have data from different sources.</li>
+>    >    <li>The error message says: <code>hashMustFindVal: '1' not found</code>. The reason is the source of the reference genome which was used. There is <code>ensembl</code> and <code>USCS</code> as sources which differ in naming the chromosomes. Ensembl is using just numbers e.g. <code>1</code> for chromosome one. USCS is using <code>chr1</code> for the same. Be carefule with this especially if you have data from different sources.</li>
 >    >    </ol>
 >    >    </details>
 >    {: .question}
