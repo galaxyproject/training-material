@@ -179,17 +179,30 @@ tutorial_name: dna_methylation
 > 
 > We will extract the methylation on the resulting BAM file of the alignment step with the help of deepTools.
 > 
-> 0. Convert with awk: ```'BEGIN{OFS="\t"}{$1="chr"$1; print}'```
-> 0. Remove the first line with the tool ```tail```. Select as Operation ```Keep everything from this line``` and choose the value ```2```.
-> 0. grep
 > 1. **Galaxy** :wrench:: Search for the tool ```Wig/BedGraph-to-bigWig```
 > 2. **Wig/BedGraph-to-bigWig** :wrench:: Use all computed bedGraph files which were computed by Metilene and transform it to a bigWig file.
-> 3. **Galaxy** :wrench:: Search for the tool ```computeMatrix```.
-> 4. **computeMatrix** :wrench:: Use the file ```CpGIslands.bed``` and the result of PileOMeth as input for computeMatrix.
-> 5. **computeMatrix** :wrench:: Use the converted bigWig file as the score file.
-> 6. **Galaxy** :wrench:: Search for the tool ```plotProfile```.
-> 7. **plotProfile** :wrench:: Choose for ```Matrix file from the computeMatrix tool``` the computed matrix from the tool ```computeMatrix```. 
-> 8. More information about deepTools can be found here: https://deeptools.github.io/
+>
+>    > ### :question: Questions
+>    >
+>    > - The execution fails. Do you have an idea why?
+>    > 
+>    >
+>    >    <details>
+>    >    <summary>Click to view answers</summary>
+>    >    <ol type="1">
+>    >    <li>The error message says: ```hashMustFindVal: '1' not found``` The reason is the source of the reference genome which was used. There is ```ensembl``` and ```USCS``` as sources which differ in naming the chromosomes. Ensembl is using just numbers e.g. ```1``` for chromosome one. USCS is using ```chr1``` for the same. Be carefule with this especially if you have data from different sources.</li>
+>    >    </ol>
+>    >    </details>
+>    {: .question}
+> 
+> 3. Convert with awk: ```'BEGIN{OFS="\t"}{$1="chr"$1; print}'```
+> 4. **Galaxy** :wrench:: Search for the tool ```computeMatrix```.
+> 5. **computeMatrix** :wrench:: Use the file ```CpGIslands.bed```as ```Regions to plot```  and the in the prevoius step created bigwig file as the ```score file```.
+> 6. **computeMatrix** :wrench:: Use for the option ```computeMatrix has two main output options``` the value ```reference-point```. 
+> 7. **Galaxy** :wrench:: Search for the tool ```plotProfile```.
+> 8. **plotProfile** :wrench:: Choose for ```Matrix file from the computeMatrix tool``` the computed matrix from the tool ```computeMatrix```. 
+> 
+> More information about deepTools can be found here: https://deeptools.github.io/
 >
 {: .hands_on}
 
