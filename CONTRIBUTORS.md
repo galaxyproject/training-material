@@ -25,5 +25,5 @@ The following individuals have contributed to this training material:
 
 * Collaborative Research Centre (CRC) 992 - Medical Epigenetics
 * de.NBI - German Network for Bioinformatics Infrastructure
-* NHGRI - National Human Genome Research Institute at the National Institutes of Health, USA
+* NHGRI - National Human Genome Research Institute at the National Institutes of Health (USA)
 * NSF - National Science Foundation (USA)
