@@ -180,7 +180,7 @@ tutorial_name: dna_methylation
 > We will extract the methylation on the resulting BAM file of the alignment step with the help of deepTools.
 > 
 > 1. **Galaxy** :wrench:: Search for the tool ```Wig/BedGraph-to-bigWig```
-> 2. **Wig/BedGraph-to-bigWig** :wrench:: Use all computed bedGraph files which were computed by Metilene and transform it to a bigWig file.
+> 2. **Wig/BedGraph-to-bigWig** :wrench:: Use the result of metilene which starts with ```metilene qval<0.05 bedgraph on data...``` to transform it to a bigWig file.
 >
 >    > ### :question: Questions
 >    >
@@ -190,12 +190,13 @@ tutorial_name: dna_methylation
 >    >    <details>
 >    >    <summary>Click to view answers</summary>
 >    >    <ol type="1">
->    >    <li>The error message says: ```hashMustFindVal: '1' not found``` The reason is the source of the reference genome which was used. There is ```ensembl``` and ```USCS``` as sources which differ in naming the chromosomes. Ensembl is using just numbers e.g. ```1``` for chromosome one. USCS is using ```chr1``` for the same. Be carefule with this especially if you have data from different sources.</li>
+>    >    <li>The error message says: <code>hashMustFindVal: '1' not found</code> The reason is the source of the reference genome which was used. There is ```ensembl``` and ```USCS``` as sources which differ in naming the chromosomes. Ensembl is using just numbers e.g. ```1``` for chromosome one. USCS is using ```chr1``` for the same. Be carefule with this especially if you have data from different sources.</li>
 >    >    </ol>
 >    >    </details>
 >    {: .question}
 > 
-> 3. Convert with awk: ```'BEGIN{OFS="\t"}{$1="chr"$1; print}'```
+> 3. **Galaxy** :wrench:: Search for awk
+> 3. **awk** :wrench:: Convert with awk the bedgraph file and use as ```AWK Program```: ```'BEGIN{OFS="\t"}{$1="chr"$1; print}'```
 > 4. **Galaxy** :wrench:: Search for the tool ```computeMatrix```.
 > 5. **computeMatrix** :wrench:: Use the file ```CpGIslands.bed```as ```Regions to plot```  and the in the prevoius step created bigwig file as the ```score file```.
 > 6. **computeMatrix** :wrench:: Use for the option ```computeMatrix has two main output options``` the value ```reference-point```. 
