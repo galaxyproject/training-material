@@ -317,12 +317,12 @@ In this last section, we will convert our aligned read data from BAM format to b
 >    - Expand the **Advanced options**
 >    - **Only include reads originating from fragments from the forward or reverse strand**: forward
 > 2. **Rename** :wrench:: Rename the outputs to reflect the origin of the reads and that they represent the reads mapping to the PLUS strand
->![](../images/bamCoverage forward.png)
+>![](../images/bamCoverage_forward.png)
 >
 > 3. **bamCoverage** :wrench:: Repeat Step 1 except changing the following parameter:
 >    - **Only include reads originating from fragments from the forward or reverse strand**: reverse
 > 4. **Rename** :wrench:: Rename the outputs to reflect the origin of the reads and that they represent the reads mapping to the MINUS strand
-> ![](../images/bamCoverage reverse.png)
+> ![](../images/bamCoverage_reverse.png)
 
 > ### :pencil2: Hands-on: Trackster based visualization
 >
@@ -330,7 +330,7 @@ In this last section, we will convert our aligned read data from BAM format to b
 >    - Name your visualization someting descriptive under "Browser name:"
 >    - Choose "Mouse Dec. 2011 (GRCm38/mm10) (mm10)" as the "Reference genome build (dbkey)
 >    - Click "Create" to initiate your Trackster session
-> ![](../images/Trackster opening window.png)
+> ![](../images/Trackster_opening_window.png)
 >
 > 2. **Viz** :wrench:: Click "Add datasets to visualization"
 >    - Select the "RefSeq GTF mm10" file
@@ -374,4 +374,4 @@ In this last section, we will convert our aligned read data from BAM format to b
 In this tutorial, we have analyzed real RNA sequencing data to extract useful information, such as which genes are up- or down-regulated by depletion of the Pasilla gene and which genes are regulated by the Pasilla gene. To answer these questions, we analyzed RNA sequence datasets using a reference-based RNA-seq data analysis approach. This approach can be sum up with the following scheme:
 
 
-![](../images/schematic for RNAseq de novo tutorial.png)
+![](../images/schematic_for_RNAseq_de_novo_tutorial.png)
