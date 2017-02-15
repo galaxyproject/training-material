@@ -1,6 +1,6 @@
 ---
 layout: tutorial_hands_on
-topic_name: Variation
+topic_name: Usegalaxy
 tutorial_name: non_dip
 ---
 
@@ -13,15 +13,6 @@ The majority of life on Earth is non-diploid and represented by prokaryotes, vir
 * 2015 - [Extensive tissue-related and allele-related mtDNA heteroplasmy suggests positive selection for somatic mutations](http://www.pnas.org/content/112/8/2491.abstract).
 
 As an example of non-diploid system we will be using human mitochondrial genome as an example. However, this approach will also work for most bacterial and viral genomes as well.
-
-> ### Agenda
->
-> In this tutorial, we will deal with:
->
-> 1. [Pretreatments](#pretreatments)
-> 2. [Mapping](#mapping)
-> 3. [Analysis of the differential expression](#analysis-of-the-differential-expression)
-> {: .agenda}
 
 There are two ways one can call variants: 
 
@@ -405,7 +396,7 @@ Similarly to VCF.BIOIO expanding a history item representing a VCF dataset will 
 >At the bottom there is a link "display at IGV: local Human hg38"
 >The difference between "local" and "Human hg38" links is explained in the following video:
 >
->{{< vimeo 123414437 >}}
+> {% vimeo 123414437 %}
 >
 >Visualizing our FreeBayes dataset will produce this:
 >
