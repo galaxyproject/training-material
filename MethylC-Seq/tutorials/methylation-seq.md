@@ -185,7 +185,7 @@ tutorial_name: methylation-seq
 >
 > Lets see how the methylation looks for a view provided files:
 > 1. **Galaxy** :wrench:: Import from the data library the files ```NB1_CpG.meth.bedGraph```
-> 2. **Wig/BedGraph-to-bigWig** :wrench:: Use the result of PileOMeth to transform it to a bigWig file.
+> 2. **Wig/BedGraph-to-bigWig** :wrench:: Use the imported file to transform it to a bigWig file.
 > 
 >    > ### :question: Questions
 >    >
