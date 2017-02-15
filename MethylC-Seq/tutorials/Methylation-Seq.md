@@ -17,6 +17,8 @@ tutorial_name: dna_methylation
 > 5. [Metilene](#Metilene)
 > 
 > 
+> This tutorial is based on [I-Hsuan Lin et al.: 'Hierarchical Clustering of Breast Cancer Methylomes Revealed Differentially Methylated and Expressed Breast Cancer Genes'](http://dx.doi.org/10.1371/journal.pone.0118453)
+>
 > {: .agenda}
 
 
@@ -148,7 +150,7 @@ tutorial_name: dna_methylation
 > 2. **Galaxy** :wrench:: Search for the tool ```Metilene```
 > 3. **Metilene** :wrench:: Choose for the first option ```Input group 1``` the imported files starting with ``NB`` and for ```Input group 2``` the imported files ```Input group 2```.
 > 4. **Metilene** :wrench:: Select for the option ```BED file containing regions of interest``` the imported BAM file CpGIslands.bed. //the computed bam file from PileOMeth.
-> 
+> 5. More information about metilene can be found here: http://www.bioinf.uni-leipzig.de/Software/metilene/
 >
 >    > ### :question: Questions
 >    >
@@ -159,8 +161,7 @@ tutorial_name: dna_methylation
 >    >    <details>
 >    >    <summary>Click to view answers</summary>
 >    >    <ol type="1">
->    >    <li></li>
->    >    <li></li>
+>    >    <li>It shows the distribution of DMR differences, DMR length in nucleotides and number CpGs, DMR differences vs. q-values, mean methylation group 1 vs. mean methylation group 2 and DMR length in nucleotides vs. length in CpGs</li>
 >    >    </ol>
 >    >    </details>
 >    {: .question}
@@ -172,7 +173,7 @@ tutorial_name: dna_methylation
 
 > ### :pencil2: Hands-on: 
 > 
-> We will extract the methylation on the resulting BAM file of the alignment step.
+> We will extract the methylation on the resulting BAM file of the alignment step with the help of deepTools.
 > 
 > 0. Convert with awk: ```'BEGIN{OFS="\t"}{$1="chr"$1; print}'```
 > 0. Remove the first line with the tool ```tail```. Select as Operation ```Keep everything from this line``` and choose the value ```2```.
@@ -184,6 +185,7 @@ tutorial_name: dna_methylation
 > 5. **computeMatrix** :wrench:: Use the converted bigWig file as the score file.
 > 6. **Galaxy** :wrench:: Search for the tool ```plotProfile```.
 > 7. **plotProfile** :wrench:: Choose for ```Matrix file from the computeMatrix tool``` the computed matrix from the tool ```computeMatrix```. 
-> 
+> 8. More information about deepTools can be found here: https://deeptools.github.io/
 >
 {: .hands_on}
+
