@@ -184,11 +184,24 @@ tutorial_name: methylation-seq
 > ![](../images/methylation_output.png)
 >
 > Lets see how the methylation looks for a view provided files:
-> 1. **Galaxy** :wrench:: Import from the data library the files ```NB1_CpG.meth.bedGraph```, ```NB2_CpG.meth.bedGraph```, ```BT089_CpG.meth.bedGraph```, ```BT126_CpG.meth.bedGraph``` and  ```BT198_CpG.meth.bedGraph```.
-> 2. **Galaxy** :wrench:: Search for ```tail`` and select all new imported files as input.
-> 3. **tail** :wrench:: Use the mode ```Operation``` the value ```Keep everything from this line on``` and choose ```2``` as a value.
-> 4. A convertion to bigWig would fail right now, probably with some error message like ```hashMustFindVal: '1' not found```. The reason is the source of the reference genome which was used. There is ensembl and USCS as sources which differ in naming the chromosomes. Ensembl is using just numbers e.g. 1 for chromosome one. USCS is using chr1 for the same. Be careful with this especially if you have data from different sources. We need to convert this.
-> 5. **awk** :wrench:: Convert with awk the bedgraph files and use as ```AWK Program```: ```'BEGIN{OFS="\t"}{$1="chr"$1; print}'```
+> 1. **Galaxy** :wrench:: Import from the data library the files ```NB1_CpG.meth.bedGraph```
+> 2. **Wig/BedGraph-to-bigWig** :wrench:: Use the result of PileOMeth to transform it to a bigWig file.
+> 
+>>    > ### :question: Questions
+>    >
+>    > - The execution fails. Do you have an idea why?
+>    > 
+>    >
+>    >    <details>
+>    >    <summary>Click to view answers</summary>
+>    >    <ol type="1">
+>    >    <li>A convertion to bigWig would fail right now, probably with some error message like ```hashMustFindVal: '1' not found```. The reason is the source of the reference genome which was used. There is ensembl and USCS as sources which differ in naming the chromosomes. Ensembl is using just numbers e.g. 1 for chromosome one. USCS is using chr1 for the same. Be careful with this especially if you have data from different sources. We need to convert this.</li>
+>    >    </ol>
+>    >    </details>
+>    {: .question}
+>
+> 3. It is difficult to fix this with a galaxy tool. Every chromosome is named different, the list to transfer the ensembl notation to ucsc notation is having more than 500 entries. We did this for you, please import ```NB1_CpG.meth_ucsc.bedGraph```, ```NB2_CpG.meth_ucsc.bedGraph```, ```BT089_CpG.meth_ucsc.bedGraph```, ```BT126_CpG.meth_ucsc.bedGraph``` and  ```BT198_CpG.meth_ucsc.bedGraph```
+> 4. Compute the matrix and plot the profile as described above.
 > 
 > More information about deepTools can be found here: https://deeptools.github.io/
 >
