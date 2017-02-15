@@ -1,6 +1,6 @@
 ---
 layout: tutorial_hands_on
-topic_name: DNA methylation
+topic_name: MethylC-Seq
 tutorial_name: methylation-seq
 ---
 
