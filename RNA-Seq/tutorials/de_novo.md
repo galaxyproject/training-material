@@ -287,13 +287,13 @@ In addition to the list of genes, `DESeq2` outputs a graphical summary of the re
 
 3. Principal Component Analysis ([PCA](https://en.wikipedia.org/wiki/Principal_component_analysis)) and the first two axes
 
-    ![](../images/DESeq2_PCA.png)
+    ![](../images/DESeq2_PCAplot.png)
 
     Each replicate is plotted as an individual data point. This type of plot is useful for visualizing the overall effect of experimental covariates and batch effects.
 
 4. Heatmap of sample-to-sample distance matrix: overview over similarities and dissimilarities between samples
 
-    ![](../images/DESeq2_heatmap.png)
+    ![](../images/DESeq2_heatmap_G1E_mega.png)
 
 5. Dispersion estimates: gene-wise estimates (black), the fitted values (red), and the final maximum a posteriori estimates used in testing (blue)
 
