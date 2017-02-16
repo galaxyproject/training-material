@@ -53,7 +53,7 @@ It will launch a flavored Galaxy instance available on
 
 **Gompert, Z., and C. A. Buerkle. 2011a:** [A hierarchical Bayesian model for next-generation population genomics] (http://www.genetics.org/content/187/3/903)
 
-**Gompert, Z., and C. A. Buerkle. 2011b:** [Bayesian estimation of genomic clines] (http://onlinelibrary.wiley.com/doi/10.1111/j.1365-294X.2011.05074.x/abstract)
+**Gompert, Z., and C. A. Buerkle. 2011b:** [Bayesian estimation of genomic clines] (https://www.ncbi.nlm.nih.gov/pubmed/21453352)
 
 **Lynch, M. 2009:** [Estimation of allele frequencies from high-coverage genome-sequencing projects] (http://www.genetics.org/content/182/1/295)
 
