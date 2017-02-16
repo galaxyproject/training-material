@@ -13,9 +13,8 @@ tutorial_name: methylation-seq
 > 1. [Load data and quality control](#load-data-and-quality-control)
 > 2. [Align the data](#alignment)
 > 3. [Methylation bias and metric extraction](#methylation-bias-and-metric-extraction)
-> 4. [CpG island extraction with PileOMeth](#cpg-island-extraction-with-pileometh)
-> 5. [Visualize the mapped data](#visualization)
-> 6. [Metilene](#metilene)
+> 4. [Visualize the mapped data](#visualization)
+> 5. [Metilene](#metilene)
 > 
 > 
 > This tutorial is based on [I-Hsuan Lin et al.: 'Hierarchical Clustering of Breast Cancer Methylomes Revealed Differentially Methylated and Expressed Breast Cancer Genes'](http://dx.doi.org/10.1371/journal.pone.0118453)
@@ -26,28 +25,27 @@ tutorial_name: methylation-seq
 # Load data and quality control
 > ### :pencil2: Hands-on: Get the data and look at the quality
 > 
-> We load now one example data set which will be used for the tutorial. 
+> We load now the example dataset which will be used for the tutorial. 
 >
-> 1. Load the two example dataset from our data library: subset_1.fastq.gz and subset_2.fastq.gz. 
+> 1. Load the two example datasets from our data library: subset_1.fastq.gz and subset_2.fastq.gz. 
 >
 >    > ### :bulb: Tip: Get data from the library
 >    >
->    > * Clink on ```Shared Data``` --> ```Data Libraries``` and here ```MethylSeq_2017```
->    > * Select the uploaded datasets ```subset_1.fastq.gz``` and ```subset_1.fastq.gz``` as the fastq files
+>    > * Click on ```Shared Data``` --> ```Data Libraries``` and here ```MethylSeq_2017```
+>    > * Select the uploaded datasets ```subset_1.fastq.gz``` and ```subset_2.fastq.gz``` as the fastq files
 >    {: .tip}
 >
 > 2. **FastQC**
 > 
 >    > ### :bulb: Tip: Search for tools
 >    >
->    > * Clink into the search field on the left
+>    > * Click into the search field on the left
 >    > * Type **fastqc**
 >    > * Select **FastQC**
->    > * Select the uploaded datasets ```subset_1.fastq.gz``` and ```subset_1.fastq.gz``` as the fastq files
+>    > * Select the uploaded datasets ```subset_1.fastq.gz``` and ```subset_2.fastq.gz``` as the fastq files
 >    {: .tip}
->   The computation will take a while and we continue with the theory. 
 >
-> 3. Go to the webpage result page and have a closer look at 'Per base sequence content'
+> 3. Go to the web page result page and have a closer look at 'Per base sequence content'
 >
 >    ![](../images/fastqc.png)
 >
@@ -100,12 +98,12 @@ tutorial_name: methylation-seq
 > 
 > We will extract the methylation on the resulting BAM file of the alignment step.
 > 
-> 1. **Galaxy** :wrench:: Search for the tool ```PileOMeth```
-> 2. **PileOMeth** :wrench:: Choose at the first option ```Load reference genome from``` ```Local cache``` and for ```Using reference genome``` the value ```hg38```.
-> 3. **PileOMeth** :wrench:: Select for the option ```sorted_alignments.bam``` the imported bam file which was the result of the ```bwameth``` alignment.
-> 4. **PileOMeth** :wrench:: Use for ```What do you want to do?``` the value ```Determine the position-dependent methylation bias in the dataset, producing diagnostic SVG images```.
-> 5. **PileOMeth** :wrench:: Set the parameters ```keepSingleton``` and ```keepDiscordant``` to ```Yes```.
-> 6. **PileOMeth** :wrench:: Click ```Execute```.
+> 1. **Galaxy** :wrench:: Search for the tool ```MethylDackel```
+> 2. **MethylDackel** :wrench:: Choose at the first option ```Load reference genome from``` ```Local cache``` and for ```Using reference genome``` the value ```hg38```.
+> 3. **MethylDackel** :wrench:: Select for the option ```sorted_alignments.bam``` the imported bam file which was the result of the ```bwameth``` alignment.
+> 4. **MethylDackel** :wrench:: Use for ```What do you want to do?``` the value ```Determine the position-dependent methylation bias in the dataset, producing diagnostic SVG images```.
+> 5. **MethylDackel** :wrench:: Set the parameters ```keepSingleton``` and ```keepDiscordant``` to ```Yes```.
+> 6. **MethylDackel** :wrench:: Click ```Execute```.
 >
 >    ![](../images/methylation_bias_example_data.png)
 >
@@ -120,7 +118,7 @@ tutorial_name: methylation-seq
 >    >    <summary>Click to view answers</summary>
 >    >    <ol type="1">
 >    >    <li>The distribution of the methylation is more or less equal. Only at the start and the end we could trim a bit but a +- 5% variation is acceptable. </li>
->    >    <li>To trim the reads we would include for the first strand only the postions 0 to 145, for the second 6 to 149.</li>
+>    >    <li>To trim the reads we would include for the first strand only the positions 0 to 145, for the second 6 to 149.</li>
 >    >    </ol>
 >    >    </details>
 >    {: .question}
@@ -128,19 +126,17 @@ tutorial_name: methylation-seq
 > 
 {: .hands_on}
 
-# CpG island extraction with PileOMeth 
 
-> ### :pencil2: Hands-on: Methylation extraction with PileOMeth
+> ### :pencil2: Hands-on: Methylation extraction with MethylDackel
 > 
-> We will extract the methylation on the resulting BAM file of the alignment step.
 > 
-> 1. **Galaxy** :wrench:: Search for the tool 'PileOMeth'
-> 2. **PileOMeth** :wrench:: Choose at the first option ```Load reference genome from``` the value: ```Local cache``` and for ```Using reference genome``` the value: ```hg38```.
-> 3. **PileOMeth** :wrench:: Select for the option ```sorted_alignments.bam``` the imported bam file which was the result of a ```bwameth``` alignment.
-> 4. **PileOMeth** :wrench:: Use for ```What do you want to do?``` the value ```Extract methylation metrics from an alignment file in BAM/CRAN format```.
-> 5. **PileOMeth** :wrench:: Choose ```Yes``` for the option ```Merge per-Cytosine metrics from CpG and CHG contexts into per-CPG or per-CHG metrics```.
-> 6. **PileOMeth** :wrench:: Set the parameters ```keepSingleton```, ```keepDiscordant``` and ```fraction``` to ```Yes```.
-> 7. **PileOMeth** :wrench:: All other options use the default value.
+> 1. **Galaxy** :wrench:: Search for the tool 'MethylDackel'
+> 2. **MethylDackel** :wrench:: Choose at the first option ```Load reference genome from``` the value: ```Local cache``` and for ```Using reference genome``` the value: ```hg38```.
+> 3. **MethylDackel** :wrench:: Select for the option ```sorted_alignments.bam``` the imported bam file which was the result of a ```bwameth``` alignment.
+> 4. **MethylDackel** :wrench:: Use for ```What do you want to do?``` the value ```Extract methylation metrics from an alignment file in BAM/CRAN format```.
+> 5. **MethylDackel** :wrench:: Choose ```Yes``` for the option ```Merge per-Cytosine metrics from CpG and CHG contexts into per-CPG or per-CHG metrics```.
+> 6. **MethylDackel** :wrench:: Set the parameter ```fraction``` to ```Yes```.
+> 7. **MethylDackel** :wrench:: All other options use the default value.
 >
 > 
 >
@@ -154,7 +150,7 @@ tutorial_name: methylation-seq
 > We visualize the example with the help of deepTools.
 > 
 > 1. **Galaxy** :wrench:: Search for the tool ```Wig/BedGraph-to-bigWig```
-> 2. **Wig/BedGraph-to-bigWig** :wrench:: Use the result of PileOMeth to transform it to a bigWig file.
+> 2. **Wig/BedGraph-to-bigWig** :wrench:: Use the result of MethylDackel to transform it to a bigWig file.
 >
 >    > ### :question: Questions
 >    >
@@ -195,7 +191,7 @@ tutorial_name: methylation-seq
 >    >    <details>
 >    >    <summary>Click to view answers</summary>
 >    >    <ol type="1">
->    >    <li>A convertion to bigWig would fail right now, probably with some error message like <code>hashMustFindVal: '1' not found</code>. The reason is the source of the reference genome which was used. There is ensembl and UCSC as sources which differ in naming the chromosomes. Ensembl is using just numbers e.g. 1 for chromosome one. UCSC is using chr1 for the same. Be careful with this especially if you have data from different sources. We need to convert this.</li>
+>    >    <li>A conversion to bigWig would fail right now, probably with some error message like <code>hashMustFindVal: '1' not found</code>. The reason is the source of the reference genome which was used. There is ensembl and UCSC as sources which differ in naming the chromosomes. Ensembl is using just numbers e.g. 1 for chromosome one. UCSC is using chr1 for the same. Be careful with this especially if you have data from different sources. We need to convert this.</li>
 >    >    </ol>
 >    >    </details>
 >    {: .question}
