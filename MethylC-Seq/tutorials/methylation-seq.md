@@ -169,7 +169,7 @@ tutorial_name: methylation-seq
 >    >    </details>
 >    {: .question}
 > 
-> 3. **Galaxy** :wrench:: Search for ```tail``. use ```Select last lines from a dataset (tail)```
+> 3. **Galaxy** :wrench:: Search for ```tail```. use ```Select last lines from a dataset (tail)```
 > 4. **tail** :wrench:: Use the mode ```Operation``` the value ```Keep everything from this line on``` and choose ```2``` as a value.
 > 5. **Galaxy** :wrench:: Search for awk
 > 6. **awk** :wrench:: Convert with awk the bedgraph file and use as ```AWK Program```: ```'BEGIN{OFS="\t"}{print $1, $2, $3, $4}'```
@@ -195,7 +195,7 @@ tutorial_name: methylation-seq
 >    >    <details>
 >    >    <summary>Click to view answers</summary>
 >    >    <ol type="1">
->    >    <li>A convertion to bigWig would fail right now, probably with some error message like ```hashMustFindVal: '1' not found```. The reason is the source of the reference genome which was used. There is ensembl and USCS as sources which differ in naming the chromosomes. Ensembl is using just numbers e.g. 1 for chromosome one. USCS is using chr1 for the same. Be careful with this especially if you have data from different sources. We need to convert this.</li>
+>    >    <li>A convertion to bigWig would fail right now, probably with some error message like <code>hashMustFindVal: '1' not found</code>. The reason is the source of the reference genome which was used. There is ensembl and UCSC as sources which differ in naming the chromosomes. Ensembl is using just numbers e.g. 1 for chromosome one. UCSC is using chr1 for the same. Be careful with this especially if you have data from different sources. We need to convert this.</li>
 >    >    </ol>
 >    >    </details>
 >    {: .question}
