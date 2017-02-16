@@ -396,7 +396,7 @@ Similarly to VCF.BIOIO expanding a history item representing a VCF dataset will 
 >At the bottom there is a link "display at IGV: local Human hg38"
 >The difference between "local" and "Human hg38" links is explained in the following video:
 >
-> {% vimeo 123414437 %}
+> <div class="embed-responsive embed-responsive-16by9"><iframe src="https://player.vimeo.com/video/123414437?portrait=0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>
 >
 >Visualizing our FreeBayes dataset will produce this:
 >
