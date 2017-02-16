@@ -14,7 +14,7 @@ identify the genetic variants in all of an individual's genes. Exome sequencing
 is cheaper also than whole-genome sequencing. With a high coverage rate of
 100+ DP, 98% of all exons are covered.
 
-Things exome sequencing can't identify genetic variation in:
+Items where exome sequencing can't identify genetic variation in:
 
 - All genes
 
@@ -73,7 +73,7 @@ change the sequence, but can increase disease risk.
 ---
 
 In this tutorial, a child has a yet unknown disease. His parents are healthy.
-We will try to identify genetic variation that is responsible for the disease
+We will try to identify the genetic variation that is responsible for the disease
 using the exome sequencing data from both parents and the child.
 
 We will follow the pipeline:
@@ -94,11 +94,11 @@ docker run -d -p 8080:80 bgruening/galaxy-training-exome-seq
 
 It will launch a flavored Galaxy instance available on [http://localhost:8080 ](http://localhost:8080).
 
-You can also use [Freiburg Galaxy instance](http://galaxy.uni-freiburg.de/).
+You can also use [Freiburg Galaxy instance](http://galaxy.uni-freiburg.de/) if you have an account there.
 
 ## Data pre-processing
 
-Most the data pre-processing have already be done on the raw exome sequencing.
+Most of the data pre-processing have already be done on the raw exome sequencing.
 The raw exome sequences were mapped on `hg19` version of the human genome. So,
 for each family member, we will start with one BAM file with mapping results.
 
@@ -151,9 +151,9 @@ with **VcfAllelicPrimitives** from **VCF Tools**:
     2. Make sure **Maintain site and allele-level annotations when decomposing** and
     **Maintain genotype-level annotations when decomposing** are set to `Yes`
 5. Filter your VCF file with **SnpSift Filter** from **Annotation** to
-only conserve SNPs with a Quality >= 30 and a Coverage >= 10
+only conserve SNPs with a quality >= 30 and a coverage >= 10
 
-  Have a look at the examples to help you construct the correct expression.
+  Have a look at the examples which help you constructing the correct expression.
 
 ### Annotate your variants
 
@@ -218,7 +218,7 @@ your GEMINI databases. Try to get a feeling of what is possible with a variant
 database in GEMINI.
 
 **GEMINI query** is the most versatile of all the GEMINI tools. You can use it to
-ask 'interesting' questions in simple SQL (see the GEMINI handbook on its usage).
+ask 'interesting' questions in simple SQL (see the GEMINI [handbook](http://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1003153) on its usage).
 For example:
 
 - `select chrom, start, end from variants` will show you some information on all
