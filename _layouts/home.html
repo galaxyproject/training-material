@@ -4,25 +4,27 @@ layout: base
 {% include main_header.html %}
 
 <section>
-    <p style="text-align:center;"><script src="https://embed.github.com/view/geojson/bgruening/galaxy-maps/master/server.geojson?height=300&width=400">
+
+    
+   
+
+   <!--<p style="text-align:center;"><script src="https://embed.github.com/view/geojson/bgruening/galaxy-maps/master/server.geojson?height=300&width=400">
     </script>
-    </p>
+    </p> -->
 
-    <h1>Training material</h1>
+    <h1>Tutorials:</h1>
 
-    <h2>Galaxy use</h2>
+    <h2>Galaxy for Biologists</h2>
 
     <table class="table table-striped">
-        <tr>
-              <td class="bold">Lesson</td>
-              <td class="bold">Introduction</td>
-              <td class="bold">Tutorials</td>
-              <td class="bold">Docker image</td>
+        <tr class="row">
+              <td class="bold" class="col-md-10">Topic</td>
+              <td class="bold" class="col-md-2">Tutorials</td>
         </tr>
 
         {% for topic in site.data %}
             {% if topic[1].type == "use" %}
-            <tr>
+            <tr class="row">
                   {% assign tutorial_number=0 %}
                   {% assign introduction=0 %}
                   {% for tuto in topic[1].material %}
@@ -34,32 +36,24 @@ layout: base
                       {% endif %}
                   {% endfor %}
 
-                  <td><a href="{{ site.url }}/{{ topic[1].name }}">{{ topic[1].title }}</a></td>
-                  <td>
-                    {% if introduction != 0 %}
-                    <a href="{{ site.url }}/{{ topic[1].name }}/slides"> :mortar_board: </a>
-                    {% endif %}
-                  </td>
-                  <td>{{ tutorial_number }}</td>
-                  <td><a href="{{ site.github_repository }}/tree/master/{{ topic[1].name }}/docker">:whale: </a></td>
+                  <td class="col-md-10"><a href="{{ site.url }}/{{ topic[1].name }}">{{ topic[1].title }}</a></td>
+                  <td class="col-md-2">{{ tutorial_number }}</td>
             </tr>
             {% endif %}
         {% endfor %}
     </table>
 
-    <h2>Galaxy development and administration</h2>
+    <h2>Galaxy for Developers and Admins</h2>
 
     <table class="table table-striped">
-        <tr>
-              <td class="bold">Lesson</td>
-              <td class="bold">Introduction</td>
-              <td class="bold">Tutorials</td>
-              <td class="bold">Docker image</td>
+        <tr class="row">
+              <td class="bold" class="col-md-10">Topic</td>
+              <td class="bold" class="col-md-2">Tutorials</td>
         </tr>
 
         {% for topic in site.data %}
             {% if topic[1].type == "admin-dev" %}
-            <tr>
+            <tr class="row">
                   {% assign tutorial_number=0 %}
                   {% assign introduction=0 %}
                   {% for tuto in topic[1].material %}
@@ -71,15 +65,8 @@ layout: base
                       {% endif %}
                   {% endfor %}
 
-                  <td><a href="{{ site.url }}/{{ topic[1].name }}">{{ topic[1].title }}</a></td>
-                  <td>
-                    {% if introduction != 0 %}
-                    <a href="{{ site.url }}/{{ topic[1].name }}/slides"> :mortar_board: </a>
-                    {% endif %}
-                  </td>
-
-                  <td>{{ tutorial_number }}</td>
-                  <td><a href="{{ site.github_repository }}/tree/master/{{ topic[1].name }}/docker">:whale: </a></td>
+                  <td class="col-md-10"><a href="{{ site.url }}/{{ topic[1].name }}">{{ topic[1].title }}</a></td>
+                  <td class="col-md-2">{{ tutorial_number }}</td>               
             </tr>
             {% endif %}
         {% endfor %}
