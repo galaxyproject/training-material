@@ -34,7 +34,7 @@ If you have any questions, you can reach us using the [Gitter chat](https://gitt
 
 This repository is a project of unification of the Galaxy training material. You can find more information about this project in this [small presentation](http://galaxyproject.github.io/training-material/shared/slides/project_presentation#/)
 
-By contributing, you agree that we may redistribute your work under [our license](LICENSE.md).  
+By contributing, you agree that we may redistribute your work under [this repository's license](LICENSE.md).
 
 We will address your issues and/or assess your change proposal as promptly as we can, and help you become a member of our community.
 
@@ -68,7 +68,7 @@ For beginners, the GitHub interface will help you in the process of editing a fi
 
 # How is the training material structured?
 
-Each training material is related to a topic. All training materials (slides, tutorials, ...) related to a topic are found in a dedicated directory (*e.g.* `Exome-seq` directory contains the material related to exome sequencing analysis). These repositories have to have the following structures (as in `Exome-seq` directory):
+Each training material is related to a topic. All training materials (slides, tutorials, ...) related to a topic are found in a dedicated directory (e.g. `Exome-seq` directory contains the material related to exome sequencing analysis). These repositories have to have the following structures (as in `Exome-seq` directory):
 
 ```
 ├── docker
@@ -95,9 +95,9 @@ All images for the slides must be in `images` directory. The images must be in g
 
 This directory collects the tutorials related to the topic. The tutorials are hands-on built for workshop and self training.
 
-The template for the tutorials are different from the other pages to help users to focus on the content of the tutorial. To improve the output of the tutorial, several metadata are mandatory for every tutorials such as the requirements or the objectives of the tutorials. Boxes are also used to highlight some key points as the hands-on or the tips.  
+The template for the tutorials are different from the other pages to help users to focus on the content of the tutorial. To improve the output of the tutorial, several metadata are mandatory for every tutorials, such as the requirements or the objectives of the tutorials. Boxes are also used to highlight some key points as the hands-on or the tips.
 
-The content of tutorial is generated with [Jekyll](http://jekyllrb.com/) from a markdown files and some metadata (*e.g.* the requirements, the Zenodo link, the questions) defined with the metadata of the related topic
+The content of each tutorial is generated with [Jekyll](http://jekyllrb.com/) from a Markdown file and some metadata (e.g. the requirements, the Zenodo link, the questions) defined inside the metadata of the related topic.
 
 > Want to contribute to a tutorial?
 > - [Check out how to add a new tutorial?](#how-do-i-add-a-tutorial-hands-on)
@@ -107,7 +107,7 @@ Sometimes, an hands-on tutorial is not the most appropriate format for a tutoria
 
 ## `slides` directory
 
-A slide deck is expected for every topic: the one with a general introduction of the topic. The slides are rendered using `remark.js` but written in markdown to facilate any contribution. [Check out how to fill introduction slides](#how-do-i-fill-introduction-slides) or [how to fill tutorial slides](#how-do-i-fill-tutorial-slides).
+A slide deck is expected for every topic: the one with a general introduction of the topic. The slides are rendered using `remark.js` but written in Markdown to facilitate collaboration. [Check out how to fill introduction slides](#how-do-i-fill-introduction-slides) or [how to fill tutorial slides](#how-do-i-fill-tutorial-slides).
 
 ## `docker` directory
 
@@ -119,7 +119,7 @@ The `docker` image must also integrate a Galaxy tour from the [`galaxy-tours` re
 
 # How do I add new content?
 
-Most of the content is written in markdown with some metadata (or variables) stored in YAML. To generate the website, we are using [Jekyll](http://jekyllrb.com/) and its templating system.
+Most of the content is written in Markdown with some metadata (or variables) stored in YAML. To generate the website, we are using [Jekyll](http://jekyllrb.com/) and its templating system.
 
 So if you want to visualise locally how the website will look like, you need to run a local Jekyll server. So, Jekyll must be installed using [RubyGems](https://rubygems.org/pages/download):
 
@@ -203,11 +203,11 @@ You can then visualize locally ([http://localhost:4000/](http://localhost:4000/)
 
 1. Check that the metadata about the tutorial in the `yml` file in `metadata` directory are filled and correct
 
-    They are used to generate the header and the footer of the tutorials.
+    They are used to automatically generate the header and the footer of the tutorials.
 
-2. Fill the markdown file with the tutorial (after changing the `topic_name` and `tutorial_name`)
+2. Fill the Markdown file with the tutorial (after changing the `topic_name` and `tutorial_name`)
 
-The content of a tutorial hands-on is written in `markdown`. They are rendered by [Jekyll](http://jekyllrb.com/) into the webpage for the tutorial.
+The content of a tutorial hands-on is written in Markdown. They are rendered by [Jekyll](http://jekyllrb.com/) into the webpage for the tutorial.
 
 To improve the learning experience, we strongly recommend you to:
 - Add boxes to highlight:
@@ -248,7 +248,7 @@ To improve the learning experience, we strongly recommend you to:
         > * Open the Galaxy Upload Manager
         > * Select **Paste/Fetch Data**
         > * Paste the link into the text field
-        > * Press **Start**    
+        > * Press **Start**
         {: .tip}
         ```
 
@@ -265,7 +265,7 @@ To improve the learning experience, we strongly recommend you to:
 
         ![](shared/images/tutorial_comment_box.png)
 
-    To render the boxes correctly, the previous syntaxes have to be followed. The boxes can be nested, .e.g. for having tips inside hands-on.
+    To render the boxes correctly, the previous syntaxes have to be followed. The boxes can be nested, e.g. for having tips inside hands-on.
 
 - Add an agenda at the end of the introduction to indicate the plan of the tutorial
 
@@ -299,7 +299,7 @@ Before starting filling the slides, you have to add the metadata about the tutor
 - `type: "introduction"`
 - `slides` (`"yes"` or `"no"`): tell if slides are available for this material
 
-The introduction slides must be in the `index.html` file in `slides` directory for each topic. Even if the extension is `html`, slides are written in markdown. `---` is used to separate the slides.
+The introduction slides must be in the `index.html` file in `slides` directory for each topic. Even if the extension is `html`, slides are written in Markdown. `---` is used to separate the slides.
 
 ```
 ---
@@ -342,7 +342,7 @@ Filling tutorial slides are similar a combination of filling introduction slides
 
 1. Filling the metadata file with useful information about the tutorial and its format (`slides: "yes"`)
 2. Filling an `html` file in the `slides` directory
-    
+
     The name of the file must be the same as the name of the tutorial
 
     The header of the file must be something like:
