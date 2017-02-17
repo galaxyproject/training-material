@@ -34,7 +34,7 @@ The goal of this example is to detect heteroplasmies (variants within mitochondr
 
 For this tutorial we have prepared a subset of data previously [published](http://www.pnas.org/content/111/43/15474.abstract) by our group. Let's import these data into Galaxy.
 
-> ### :pencil2: Data upload from a Galaxy Library
+> ### Data upload from a Galaxy Library
 >
 > ![](../images/mt_lib.png)
 >

@@ -57,7 +57,7 @@ A typical workflow for variation discovery involves the following steps (e.g., s
 
 However, continuing evolution of variant detection methods has made some of these steps obsolete. For instance, omitting quality score recalibration and re-alignment (steps 3 and 4 above) when using haplotype-aware variant callers such as [FreeBayes](https://github.com/ekg/freebayes) does not have an effect on the resulting calls (see Brad Chapman's methodological comparisons at [bcbio](http://bit.ly/1S9kFJN)). Before going forward with an actual genotype calling in Galaxy let's take a look as some basic ideas behind modern variant callers.
 
-### How does SNP calling and genotyping work?
+## How does SNP calling and genotyping work?
 
 Consider a set of sequencing reads derived from a diploid individual:
 
@@ -171,41 +171,46 @@ Yet for a quick tutorial these datasets are way too big, so we created a downsam
 
 Here is what to do to load the data:
 
-## Loading the data
-
-Go to the [data library](https://usegalaxy.org/library/list#folders/F9ff2d127cd7ed6bc) and select both BAM and PED datasets. Then Click **to History** button:
-
-![](../images/library_import.png)
-
-Galaxy will ask you if you want to import these data into a new history, which you might want (in the case below I called this history `genotyping try`):
-
-![](../images/history_import.png)
-
-The datasets will appear in your history:
-
-![](../images/library_import_complete.png)
+> ### Data upload from Galaxy Library
+>
+>Go to the [data library](https://usegalaxy.org/library/list#folders/F9ff2d127cd7ed6bc) and select both BAM and PED datasets. Then Click **to History** button:
+>
+>![](../images/library_import.png)
+>
+>Galaxy will ask you if you want to import these data into a new history, which you might want (in the case below I called this history `genotyping try`):
+>
+>![](../images/history_import.png)
+>
+>The datasets will appear in your history:
+>
+>![](../images/library_import_complete.png)
+>
+{: .hands_on}
 
 ## Generating and post-processing FreeBayes calls
 
-Select **FreeBayes** from **NGS: Variant Analysis** section of the tool menu (left pane of Galaxy's interface).
+>### Running FreeBayes
+>
+>Select **FreeBayes** from **NGS: Variant Analysis** section of the tool menu (left pane of Galaxy's interface).
+>Make sure the top part of the interface looks like shown below. Here we selected `GIAB-Ashkenazim-Trio-hg19` as input and set **Using reference genome** to `hg19` and **Choose parameter selection level** to `5`. The interface should look like this:
+>
+>![](../images/FreeBayes_settings.png)
+>
+>Scrolling down to **Tweak algorithmic features?** click `Yes` and set **Calculate the marginal probability of genotypes and report as GQ in each sample field in the VCF output** to `Yes`. This would help us evaluating the quality of genotype calls.
+>
+>![](../images/freebayes_gq.png)
+>
+>Depending on how busy Galaxy is this may take a little bit of time (coffee break?). Eventially this will produce a dataset in [VCF](http://www.1000genomes.org/wiki/Analysis/variant-call-format) format containing 35 putative variants. Before we can continue we need to post-process this dataset by breaking compound variants into multiple independent variants with **VcfAllelicPrimitives** tool found within **NGS: VCF Manipulation** section. This is necessary for ensuring the smooth sailing through downstream analyses:
+>
+{: .hands_on}
 
-### Running FreeBayes
-
-Make sure the top part of the interface looks like shown below. Here we selected `GIAB-Ashkenazim-Trio-hg19` as input and set **Using reference genome** to `hg19` and **Choose parameter selection level** to `5`. The interface should look like this:
-
-![](../images/FreeBayes_settings.png)
-
-Scrolling down to **Tweak algorithmic features?** click `Yes` and set **Calculate the marginal probability of genotypes and report as GQ in each sample field in the VCF output** to `Yes`. This would help us evaluating the quality of genotype calls.
-
-![](../images/freebayes_gq.png)
-
-Depending on how busy Galaxy is this may take a little bit of time (coffee break?). Eventially this will produce a dataset in [VCF](http://www.1000genomes.org/wiki/Analysis/variant-call-format) format containing 35 putative variants. Before we can continue we need to post-process this dataset by breaking compound variants into multiple independent variants with **VcfAllelicPrimitives** tool found within **NGS: VCF Manipulation** section. This is necessary for ensuring the smooth sailing through downstream analyses:
-
-### Simplifying variant representation
-
-Select FreeBayes output as the input for this tool and make sure **Maintain site and allele-level annotations when decomposing** and **Maintain genotype-level annotations when decomposing** are set to `Yes`:
-
-![](../images/vcfallelicprimitives.png)
+>### Simplifying variant representation
+>
+>Select FreeBayes output as the input for this tool and make sure **Maintain site and allele-level annotations when decomposing** and **Maintain genotype-level annotations when decomposing** are set to `Yes`:
+>
+>![](../images/vcfallelicprimitives.png)
+>
+{: .hands_on}
 
 **VCFAllelicPrimities** generated a VCF files containing 37 records (the input VCF only contained 35). This is because a multiple nucleotide polymorphism (`TAGG|CAGA`) at position 618851 have been converted to two:
 
@@ -226,87 +231,96 @@ chr19 618854 . G A 81.7546
 
 At this point we are ready to begin annotating variants using [SnpEff](http://snpeff.sourceforge.net/SnpEff.html). SnpEff, a project maintained by [Pablo Cingolani](https://www.linkedin.com/in/pablocingolani) "*...annotates and predicts the effects of variants on genes (such as amino acid changes)...*" and so is critical for functional interpretation of variation data.
 
-Select the latest version of annotation database matching genome version against which reads were mapped and VCF produced. In this case it is `GRCh37.75: hg19`:
+>### Running SNPeff
+>
+>Select **NGS: Variant Analysis** &#8594; **SnpEff**. Select the latest version of annotation database matching genome version against which reads were mapped and VCF produced. In this case it is `GRCh37.75: hg19`:
+>
+>![](../images/snpeff.png)
+>
+>SnpEff will generate two outputs: (1) an annotated VCF file and (2) an HTML report. The report contains a number of useful metrics such as distribution of variants across gene features:
+>
+>![](../images/snpeff_chart.png)
+>
+>or changes to codons:
+>
+>![](../images/snpeff_codons.png)
+>
+{: .hands_on}
 
-![](../images/snpeff.png)
-
-SnpEff will generate two outputs: (1) an annotated VCF file and (2) an HTML report. The report contains a number of useful metrics such as distribution of variants across gene features:
-
-![](../images/snpeff_chart.png)
-
-or changes to codons:
-
-![](../images/snpeff_codons.png)
-
-### Manipulating variation data with GEMINI
+## Manipulating variation data with GEMINI
 
 Now that we have an annotated VCF file it is time to peek inside our variation data. [Aaron Quinlan](http://quinlanlab.org/), creator of [GEMINI](http://gemini.readthedocs.org/en/latest/index.html), calls it *Detective work*.
 
-#### Loading data into GEMINI
+### Loading data into GEMINI
 
 The first step is to convert a VCF file we would like to analyze into a GEMINI database. For this we will use **GEMINI Load** tool from **NGS: GEMINI** section. GEMINI takes as input a VCF file and a [PED](http://pngu.mgh.harvard.edu/~purcell/plink/data.shtml) file describing the relationship between samples. In the case of our dataset the PED file looks like this (accessible from [here](https://usegalaxy.org/library/list#folders/F9ff2d127cd7ed6bc/datasets/418b2500e809568b)):
 
+| #family_id | sample_id | paternal_id | maternal_id | sex | phenotype | ethnicity|
+|-----------|-----------|-------------|-------------|-----|-----------|----------|
+|family1    | HG004_NA24143_mother |-9                    | -9                   | 2 | 1 | CEU|
+|family1	   | HG003_NA24149_father |-9                    | -9                   | 1 | 1 | CEU|
+|family1	   | HG002_NA24385_son	  | HG003_NA24149_father | HG004_NA24143_mother | 1 | 2 | CEU|
+{: .table .table-responsive}
 
-#family_id | sample_id | paternal_id | maternal_id | sex | phenotype | ethnicity
------------|-----------|-------------|-------------|-----|-----------|----------
-family1    | HG004_NA24143_mother |-9                    | -9                   | 2 | 1 | CEU
-family1	   | HG003_NA24149_father |-9                    | -9                   | 1 | 1 | CEU
-family1	   | HG002_NA24385_son	  | HG003_NA24149_father | HG004_NA24143_mother | 1 | 2 | CEU
 
+>### Loading data to GEMINI
+>
+>So let's load data into GEMINI. Set VCF and PED inputs:
+>
+>![](../images/gemini_load.png)
+>
+>This creates a sqlite database. To see the content of the database use **GEMINI_db_info**:
+>
+>![](../images/gemini_db_info.png)
+>
+>This produce a list of [all tables and fields](https://github.com/nekrut/galaxy/wiki/datasets/gemini_tables.txt) in the database.
+>
+{: .hands_on}
 
-So let's load data into GEMINI. Set VCF and PED inputs:
-
-![](../images/gemini_load.png)
-
-This creates a sqlite database. To see the content of the database use **GEMINI_db_info**:
-
-![](../images/gemini_db_info.png)
-
-This produce a list of [all tables and fields](https://github.com/nekrut/galaxy/wiki/datasets/gemini_tables.txt) in the database.
-
-#### Querying GEMINI database
+### Querying GEMINI database
 
 GEMINI database is queried using the versatile SQL language (more on SQL [here](http://swcarpentry.github.io/sql-novice-survey)). In Galaxy's version of GEMINI this is done using **GEMINI_query** tool. Within this tool SQL commands are typed directly into the **The query to be issued to the database** text box. Let's begin getting information from some of the tables we discovered with **GEMINI_db_info** tool above.
 
 The examples below are taken from "[Intro to Gemini](https://s3.amazonaws.com/gemini-tutorials/Intro-To-Gemini.pdf)" tutorial. For extensive documentation see "[Querying GEMINI](http://gemini.readthedocs.org/en/latest/content/querying.html)".
 
-<div class="alert alert-info" role="alert">
-Are there "novel" varinats that are not annotated in dbSNP database?
-</div>
+> ### Are there "novel" varinats that are not annotated in dbSNP database?
+>
+>
+>To answer this question we will type the following query:
+>
+>```
+>SELECT count(*) FROM variants WHERE in_dbsnp == 0
+>```
+>
+>into **The query to be issued to the database** field of the interface:
+>
+>![](../images/gemini_query1.png)
+>
+>As we can see from [output (Click this link to see it)](https://usegalaxy.org/datasets/bbd44e69cb8906b51bb37b9032761321/display/?preview=True) there are 21 variants that are not annotated in dbSNP.
+>
+{: .question}
 
-To answer this question we will type the following query:
+>### Which variants are found within POLRMT gene?
+>
+>To answer this type:
+>
+>```
+>SELECT * FROM variants WHERE filter is NULL and gene = 'POLRMT'
+>```
+>
+>The above query will produce [output](https://usegalaxy.org/datasets/bbd44e69cb8906b5a0bb5b2cc0695697/display/?preview=True) with very large number of columns. To restrict the number of columns to a manageable set let's use this command (you may need to scroll sideways): 
+>
+>```
+>SELECT rs_ids, aaf_esp_ea, impact, clinvar_disease_name, clinvar_sig FROM variants WHERE filter is NULL and gene = 'POLRMT'
+>```
+>
+>(column definitions can be found [here](http://gemini.readthedocs.org/en/latest/content/database_schema.html))
+>
+>[Output](https://usegalaxy.org/datasets/bbd44e69cb8906b540d65297cd1d26bb/display/?preview=True) shows varinats found within the *POLRMT* gene.
+>
+{: .question}
 
-```
-SELECT count(*) FROM variants WHERE in_dbsnp == 0
-```
-
-into **The query to be issued to the database** field of the interface:
-
-![](../images/gemini_query1.png)
-
-As we can see from [output (Click this link to see it)](https://usegalaxy.org/datasets/bbd44e69cb8906b51bb37b9032761321/display/?preview=True) there are 21 variants that are not annotated in dbSNP.
-
-<div class="alert alert-info" role="alert">
-Which variants are found within POLRMT gene?
-</div>
-
-To answer this type:
-
-```
-SELECT * FROM variants WHERE filter is NULL and gene = 'POLRMT'
-```
-
-The above query will produce [output](https://usegalaxy.org/datasets/bbd44e69cb8906b5a0bb5b2cc0695697/display/?preview=True) with very large number of columns. To restrict the number of columns to a manageable set let's use this command (you may need to scroll sideways): 
-
-```
-SELECT rs_ids, aaf_esp_ea, impact, clinvar_disease_name, clinvar_sig FROM variants WHERE filter is NULL and gene = 'POLRMT'
-```
-
-(column definitions can be found [here](http://gemini.readthedocs.org/en/latest/content/database_schema.html))
-
-[Output](https://usegalaxy.org/datasets/bbd44e69cb8906b540d65297cd1d26bb/display/?preview=True) shows varinats found within the *POLRMT* gene.
-
-#### Querying genotypes
+### Querying genotypes
 
 GEMINI provides access to genotype, sequencing depth, genotype quality, and genotype likelihoods for each individual (`subjectID`):
 
@@ -316,65 +330,68 @@ GEMINI provides access to genotype, sequencing depth, genotype quality, and geno
  * `gt_ref_depths.subjectID` -  number of reference allele reads in this subject at position
  * `gt_alt_depths.subjectID` - number of alternate allele reads in this subject at position
 
-<div class="alert alert-info" role="alert">
-At how many sites does child in our trio have a non-reference allele?
-</div>
 
-To answer this we will use two fields of **GEMINI_query** interface. In the **The query to be issued to the database** we will type:
+>### At how many sites does child in our trio have a non-reference allele?
+>
+>To answer this we will use two fields of **GEMINI_query** interface. In the **The query to be issued to the database** we will type:
+>
+>```
+>SELECT * from variants
+>```
+>
+>and in the field **Restrictions to apply to genotype values** we will enter:
+>
+>```
+>gt_types.HG002_NA24385_son <> HOM_REF
+>```
+>
+>![](../images/gemini_query2.png)
+>
+>This produce [a list of sites](https://usegalaxy.org/datasets/bbd44e69cb8906b560921700703d0255/display/?preview=True)
+>
+{: .question}
 
-```
-SELECT * from variants
-```
 
-and in the field **Restrictions to apply to genotype values** we will enter:
+>### At how many sites both father and son have non reference alleles?
+>
+>To answer this we will type the same expression 
+>
+>```
+>SELECT * from variants
+>```
+>
+>into **The query to be issued to the database** field and 
+>
+>```
+>(gt_types.HG002_NA24385_son <> HOM_REF AND gt_types.HG003_NA24149_father <> HOM_REF)
+>```
+>
+>into **Restrictions to apply to genotype values**.
+>
+>This will produce the following [output](https://usegalaxy.org/datasets/bbd44e69cb8906b5aab445b3cd632ba7/display/?preview=True)
+>
+{: .question}
 
-```
-gt_types.HG002_NA24385_son <> HOM_REF
-```
 
-![](../images/gemini_query2.png)
+>### List genotypes for father and son where they have non-reference alleles.
+>
+>Type the following:
+>
+>```
+>SELECT gts.HG002_NA24385_son, gts.HG003_NA24149_father from variants
+>```
+>
+>into **The query to be issued to the database** and 
+>
+>```
+>(gt_types.HG002_NA24385_son <> HOM_REF AND gt_types.HG003_NA24149_father <> HOM_REF)
+>```
+>
+>into **Restrictions to apply to genotype values**. Output will look like [this](https://usegalaxy.org/datasets/bbd44e69cb8906b543c67f80be21ed02/display/?preview=True).
+>
+{: .question}
 
-This produce [a list of sites](https://usegalaxy.org/datasets/bbd44e69cb8906b560921700703d0255/display/?preview=True)
-
-<div class="alert alert-info" role="alert">
-At how many sites both father and son have non reference alleles?
-</div>
-
-To answer this we will type the same expression 
-
-```
-SELECT * from variants
-```
-
- into **The query to be issued to the database** field and 
-
- ```
- (gt_types.HG002_NA24385_son <> HOM_REF AND gt_types.HG003_NA24149_father <> HOM_REF)
- ```
-
- into **Restrictions to apply to genotype values**.
-
-This will produce the following [output](https://usegalaxy.org/datasets/bbd44e69cb8906b5aab445b3cd632ba7/display/?preview=True)
-
-<div class="alert alert-info" role="alert">
-List genotypes for father and son where they have non-reference alleles.
-</div>
-
-Type the following:
-
-```
-SELECT gts.HG002_NA24385_son, gts.HG003_NA24149_father from variants
-```
-
-into **The query to be issued to the database** and 
-
-```
-(gt_types.HG002_NA24385_son <> HOM_REF AND gt_types.HG003_NA24149_father <> HOM_REF)
-```
-
-into **Restrictions to apply to genotype values**. Output will look like [this](https://usegalaxy.org/datasets/bbd44e69cb8906b543c67f80be21ed02/display/?preview=True).
-
-#### Using wildcards
+### Using wildcards
 
 Wilcards simply writing SQL expressions when searching across multiple terms. The syntax for genotype filter wilcards is
 
@@ -384,31 +401,31 @@ Wilcards simply writing SQL expressions when searching across multiple terms. Th
 
 Let's try a few examples.
 
-<div class="alert alert-info" role="alert">
-At which variants all samples are heterozygous?
-</div>
-
-Type
-
-```
-SELECT chrom, start, end, ref, alt, gene, impact, (gts).(*) FROM variants
-```
-
-into **The query to be issued to the database** and 
-
-```
-(gt_types).(*).(==HET).(all)
-``` 
-
-into **Restrictions to apply to genotype values**. Here we use wildcards for the query 
-
- * `(gts.*)` = get genotypes for **all** samples
-
- and genotype filtering
-
- * `(gt_types).(*).(==HET).(all)`
-
- the [all operator](http://gemini.readthedocs.org/en/latest/content/querying.html#the-all-operator) implies that want results for **all** afftected individuals). Output will look like [this](https://usegalaxy.org/datasets/bbd44e69cb8906b5819e1404b5e127d1/display/?preview=True).
+>### At which variants all samples are heterozygous?
+>
+>Type
+>
+>```
+>SELECT chrom, start, end, ref, alt, gene, impact, (gts).(*) FROM variants
+>```
+>
+>into **The query to be issued to the database** and 
+>
+>```
+>(gt_types).(*).(==HET).(all)
+>``` 
+>
+>into **Restrictions to apply to genotype values**. Here we use wildcards for the query 
+>
+> * `(gts.*)` = get genotypes for **all** samples
+>
+>and genotype filtering
+>
+> * `(gt_types).(*).(==HET).(all)`
+>
+>the [all operator](http://gemini.readthedocs.org/en/latest/content/querying.html#the-all-operator) implies that want results for **all** afftected individuals). Output will look like [this](https://usegalaxy.org/datasets/bbd44e69cb8906b5819e1404b5e127d1/display/?preview=True).
+>
+{: .question}
 
 ### Going further
 
