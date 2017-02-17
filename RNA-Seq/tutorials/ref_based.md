@@ -152,15 +152,15 @@ Spliced mappers have been developed to efficiently map transcript-derived reads 
 
 *[Kim et al., Genome Biology, 2013](https://genomebiology.biomedcentral.com/articles/10.1186/gb-2013-14-4-r36)*
 
-Here, we will use HISAT, a successor to TopHat2 that is faster with low memory requirements.
+Here, we will use HISAT2, a successor to TopHat2 that is faster with low memory requirements.
 
-To run efficiently the mapping, HISAT needs to know on important parameters about the sequencing library: the library type.
+To run efficiently the mapping, HISAT2 needs to know on important parameters about the sequencing library: the library type.
 
 This information should usually come with your FASTQ files, ask your sequencing facility! If not, try to find them on the site where you downloaded the data or in the corresponding publication. Another option is to estimate these parameters with a *preliminary mapping* of a *downsampled* file and some analysis programs. Afterward, the actual mapping can be redone on the original files with the optimized parameters.
 
 ## Preliminary mapping
 
-In a preliminary mapping, we will estimate the library type to run HISAT efficiently afterwards.
+In a preliminary mapping, we will estimate the library type to run HISAT2 efficiently afterwards.
 
 > ### :nut_and_bolt: Comment
 > This step is not necessary if you don't need to estimate the library type of your data.
@@ -174,7 +174,7 @@ The library type corresponds to a protocol used to generate the data: which stra
 
 In the previous illustration, you could see that for example dUTP method is to only sequence the strand from the first strand synthesis (the original RNA strand is degradated due to the dUTP incorporated).
 
-Examples of protocol | Description | Library Type (HISAT)
+Examples of protocol | Description | Library Type (HISAT2)
 --- | --- | ---
 Standard Illumina | Reads from the left-most end of the fragment (in transcript coordinates) map to the transcript strand, and the right-most end maps to the opposite strand | Unstranded (default)
 dUTP, NSR, NNSR | Same as above except we enforce the rule that the right-most end of the fragment (in transcript coordinates) is the first sequenced (or only sequenced for single-end reads). Equivalently, it is assumed that only the strand generated during first strand synthesis is sequenced. | First strand (FR/F)
@@ -208,7 +208,7 @@ We can now try to determine the library type of our data.
 >    > </details>
 >    {: .question}
 >
-> 3. **HISAT** :wrench:: Run **HISAT** with:
+> 3. **HISAT2** :wrench:: Run **HISAT2** with:
 >    - "FASTQ" as "Input data format"
 >    - "Individual paired reads"
 >    - Downsampled "Trimmed reads pair 1" (Trim Galore output) as "Forward reads"
@@ -217,7 +217,7 @@ We can now try to determine the library type of our data.
 >    - Default values for other parameters
 >
 > 4. **Infer Experiment** :wrench:: Run **Infer Experiment** to determine the library type:
->    - HISAT output as "Input BAM/SAM file"  
+>    - HISAT2 output as "Input BAM/SAM file"
 >    - Drosophila annotation as "Reference gene model"
 >
 > 5. Check the results and search the tool's documentation for help on the meaning
@@ -225,7 +225,7 @@ We can now try to determine the library type of our data.
 >    > ### :nut_and_bolt: Comment
 >    > As it is sometimes quite difficult to find out which settings correspond to those of other programs, the following table might be helpful to identify the library type:
 >    > 
->    > Sequencing type | **Infer Experiment** | **TopHat** | **HISAT** | **htseq-count** | **featureCounts**
+>    > Sequencing type | **Infer Experiment** | **TopHat** | **HISAT2** | **htseq-count** | **featureCounts**
 >    > --- | --- | --- | --- | --- | ---
 >    > Paired-End (PE) | "1++,1--,2+-,2-+" | "FR Second Strand" | "Second Strand F/FR" | "yes" | "1"
 >    > PE | "1+-,1-+,2++,2--" | "FR First Strand" | "First Strand R/RF" | "reverse" | "2"
@@ -238,7 +238,7 @@ We can now try to determine the library type of our data.
 >    > ### :question: Question
 >    > 
 >    > 1. Which fraction of the different type of library type?
->    > 2. Which library type do you chose? What is the correspondance in **HISAT**?
+>    > 2. Which library type do you chose? What is the correspondance in **HISAT2**?
 >    >
 >    >    <details>
 >    >    <summary>Click to view answer</summary>
@@ -252,11 +252,11 @@ We can now try to determine the library type of our data.
 
 ## Actual mapping
 
-We can now map all the RNA sequences on the *Drosophila melanogaster* genome using HISAT.
+We can now map all the RNA sequences on the *Drosophila melanogaster* genome using HISAT2.
 
 > ### :pencil2: Hands-on: Spliced mapping
 >
-> 1. **HISAT** :wrench:: Run **HISAT** with:
+> 1. **HISAT2** :wrench:: Run **HISAT2** with:
 >    - "FASTQ" as "Input data format"
 >    - "Individual paired reads"
 >    - "Trimmed reads pair 1" (Trim Galore output) as "Forward reads"
@@ -287,7 +287,7 @@ We can now map all the RNA sequences on the *Drosophila melanogaster* genome usi
 >    {: .question}
 {: .hands_on}
 
-**HISAT** generates a BAM file with the mapped reads.
+**HISAT2** generates a BAM file with the mapped reads.
 
 > ### :question: Question
 >
@@ -321,15 +321,15 @@ The mapping exercise worked for you? Great! :tada:
 > This is really interesting to redo on the other datasets, specially to check how the parameters are inferred given the different type of data.
 {: .hands_on}
 
-## Inspection of HISAT results
+## Inspection of HISAT2 results
 
 The BAM file contains information about where the reads are mapped on the reference genome. But it is binary file and with the information for more than 3 millions of reads, it makes it difficult to visualize it, to inspect how the reads are mapped on the reference genome.
 
 There is 
 
-> ### :pencil2: Hands-on: Inspection of HISAT results
+> ### :pencil2: Hands-on: Inspection of HISAT2 results
 >
-> 1. **IGV** :wrench:: Visualize the HISAT output BAM file, particularly the region on chromosome 4 between 560 kb to 600 kb (`chr4:560,000-600,000`)
+> 1. **IGV** :wrench:: Visualize the HISAT2 output BAM file, particularly the region on chromosome 4 between 560 kb to 600 kb (`chr4:560,000-600,000`)
 >
 >    > ### :nut_and_bolt: Comment
 >    >
@@ -667,7 +667,7 @@ This step is similar to the step of [counting the number of reads per annotated 
 >    The output is again a GTF file that is ready to be used for counting
 > 
 > 4. **DEXSeq-Count** :wrench:: Count reads using **DEXSeq-Count** with
->     - HISAT output as "Input bam file"
+>     - HISAT2 output as "Input bam file"
 >     - The formatted GTF file
 > 5. Inspect the result files
 >
