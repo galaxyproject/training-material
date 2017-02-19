@@ -26,7 +26,7 @@ The goal of this exercise is to identify what transcripts are present in the G1E
 
 ## Data upload
 
-Due to the large size of this dataset, we have downsampled it to only inlcude reads mapping to chromosome 19 and certain loci with relevance to hematopoeisis. This data is avaialble at [`Zenodo`](https://zenodo.org/record/254485#.WIeQKbYrLUp), where you can find the forward and reverse reads corresponding to replicate RNA-seq libraries from G1E and megakaryocyte cells and an annotation file of RefSeq transcripts we will use to generate our transcriptome database. 
+Due to the large size of this dataset, we have downsampled it to only inlcude reads mapping to chromosome 19 and certain loci with relevance to hematopoeisis. This data is avaialble at [`Zenodo`](https://zenodo.org/record/254485), where you can find the forward and reverse reads corresponding to replicate RNA-seq libraries from G1E and megakaryocyte cells and an annotation file of RefSeq transcripts we will use to generate our transcriptome database. 
 
 > ### :pencil2: Hands-on: Data upload
 >
@@ -43,16 +43,16 @@ Due to the large size of this dataset, we have downsampled it to only inlcude re
 >    > <details>
 >    > <summary>:bulb: Tip: Importing data via links</summary>
 >    > <ol type="2">
->    > <li>For ease, below are the links to the read files.</li>
->    > <li>https://zenodo.org/record/254485/files/G1E_R1_forward_downsampled_SRR549355.fastqsanger.gz
->    > https://zenodo.org/record/254485/files/G1E_R1_reverse_downsampled_SRR549355.fastqsanger.gz
->    > https://zenodo.org/record/254485/files/G1E_R2_forward_downsampled_SRR549356.fastqsanger.gz
->    > https://zenodo.org/record/254485/files/G1E_R2_reverse_downsampled_SRR549356.fastqsanger.gz
->    > https://zenodo.org/record/254485/files/Megakaryocyte_R1_forward_downsampled_SRR549357.fastqsanger.gz
->    > https://zenodo.org/record/254485/files/Megakaryocyte_R1_reverse_downsampled_SRR549357.fastqsanger.gz
->    > https://zenodo.org/record/254485/files/Megakaryocyte_R2_forward_downsampled_SRR549358.fastqsanger.gz
->    > https://zenodo.org/record/254485/files/Megakaryocyte_R2_reverse_downsampled_SRR549358.fastqsanger.gz</li>
->    > <li>You'll need to fetch the link to the annotation file yourself ;)</li>
+>    > <li>Below are the links to the read files that can be copied and pasted in the upload manager.</li>
+>    > <li>https://<i></i>zenodo.org/record/254485/files/G1E_R1_forward_downsampled_SRR549355.fastqsanger.gz
+>    > https://<i></i>zenodo.org/record/254485/files/G1E_R1_reverse_downsampled_SRR549355.fastqsanger.gz
+>    > https://<i></i>zenodo.org/record/254485/files/G1E_R2_forward_downsampled_SRR549356.fastqsanger.gz
+>    > https://<i></i>zenodo.org/record/254485/files/G1E_R2_reverse_downsampled_SRR549356.fastqsanger.gz
+>    > https://<i></i>zenodo.org/record/254485/files/Megakaryocyte_R1_forward_downsampled_SRR549357.fastqsanger.gz
+>    > https://<i></i>zenodo.org/record/254485/files/Megakaryocyte_R1_reverse_downsampled_SRR549357.fastqsanger.gz
+>    > https://<i></i>zenodo.org/record/254485/files/Megakaryocyte_R2_forward_downsampled_SRR549358.fastqsanger.gz
+>    > https://<i></i>zenodo.org/record/254485/files/Megakaryocyte_R2_reverse_downsampled_SRR549358.fastqsanger.gz</li>
+>    > <li>You will need to fetch the link to the annotation file yourself ;)</li>
 >    > </ol>
 >    > </details>
 >
