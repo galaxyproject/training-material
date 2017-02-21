@@ -1,0 +1,17 @@
+cp ~/git/BMMB554/hugo/static/img/ds.png ./
+cp ~/git/BMMB554/hugo/static/img/het.png ./
+cp ~/git/BMMB554/hugo/static/img/steps.png ./
+cp ~/git/BMMB554/hugo/static/img/abl1-r-qc.png ./
+cp ~/git/BMMB554/hugo/static/img/makeCons.png ./
+cp ~/git/BMMB554/hugo/static/img/contentTrimmer.png ./
+cp ~/git/BMMB554/hugo/static/img/combineFandQ.png ./
+cp ~/git/BMMB554/hugo/static/img/multiDataset.png ./
+cp ~/git/BMMB554/hugo/static/img/bwa-mem.png ./
+cp ~/git/BMMB554/hugo/static/img/bwa.png ./
+cp ~/git/BMMB554/hugo/static/img/mergeSamFiles.png ./
+cp ~/git/BMMB554/hugo/static/img/leftAlign.png ./
+cp ~/git/BMMB554/hugo/static/img/nvc.png ./
+cp ~/git/BMMB554/hugo/static/img/va.png ./
+cp ~/git/BMMB554/hugo/static/img/filter.png ./
+cp ~/git/BMMB554/hugo/static/img/fromReads.png ./
+cp ~/git/BMMB554/hugo/static/img/fromDCS.png ./
