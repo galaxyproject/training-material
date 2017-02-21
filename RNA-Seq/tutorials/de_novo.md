@@ -105,6 +105,11 @@ For quality control, we use similar tools as described in [NGS-QC tutorial](../.
 
 Now that we have trimmed our reads and are fortuante that there is a reference genome assembly for mouse, we will align our trimmed reads to the genome.
 
+> ### :nut_and_bolt: Comment
+>
+> Instead of running a single tool multiple times on all your data, would you rather run a single tool on multiple datasets at once? Check out the [dataset collections](https://new.galaxyproject.org/tutorials/collections/) feature of Galaxy!
+> {: .comment}
+
 # Mapping
 
 To make sense of the reads, their positions within mouse genome must be determined. This process is known as aligning or 'mapping' the reads to the reference genome.
@@ -204,6 +209,7 @@ The recommended mode is "union", which counts overlaps even if a read only share
 >    - **Orientation of the two read from the same pair**: Forward, Reverse (fr)
 >    - Expand **Advanced options**
 >    - **GFF gene identifier**: enter "transcript_id"
+>    - **Strand specificity of the protocol**: select "Stranded (forwards)"
 > ![](../images/FeatureCounts_tool_form.png)
 >
 > {: .hands_on}
@@ -246,7 +252,7 @@ The first output of `DESeq2` is a tabular file. The columns are:
 
 > ### :pencil2: Hands-on:
 >
->1. **Filter** :wrench:: Run `Filter` to extract genes with a significant change in gene expression (adjusted *p*-value equal to or below 0.05) between treated and untreated samples
+>1. **Filter** :wrench:: Run `Filter` to extract genes with a significant change in gene expression (adjusted *p*-value less than 0.05) between treated and untreated samples
 >
 >    > ### :question: Question
 >    >
@@ -254,7 +260,7 @@ The first output of `DESeq2` is a tabular file. The columns are:
 >    > 
 >    > <details>
 >    > <summary>Click to view answers</summary>
->    > To filter, use "c7>0.05". And we get 276 transcripts with a significant change in gene expression between the G1E and megakaryocyte cellular states.
+>    > To filter, use "c7<0.05". And we get 278 transcripts with a significant change in gene expression between the G1E and megakaryocyte cellular states.
 >    > </details>
 >    {: .question}
 >
@@ -270,7 +276,7 @@ The first output of `DESeq2` is a tabular file. The columns are:
 >    > 
 >    > <details>
 >    > <summary>Click to view answers</summary>
->    > To obtain the up-regulated genes in the G1E state, we filter the previously generated file (with the significant change in transcript expression) with the expression "c3>0" (the log2 fold changes must be greater than 0). We obtain 129  genes (46.7% of the genes with a significant change in gene expression). For the down-regulated genes in the G1E state, we did the inverse and we find 147 transcripts (53.3% of the genes with a significant change in transcript expression)
+>    > To obtain the up-regulated genes in the G1E state, we filter the previously generated file (with the significant change in transcript expression) with the expression "c3>0" (the log2 fold changes must be greater than 0). We obtain 131  genes (47.1% of the genes with a significant change in gene expression). For the down-regulated genes in the G1E state, we did the inverse and we find 147 transcripts (52.9% of the genes with a significant change in transcript expression)
 >    > </details>
 >    {: .question}
 {: .hands_on}
