@@ -354,7 +354,7 @@ Let's now take a look at some of the alignments. We will use IGV for this purpos
 >
 >![](../images/igv_tophat.png)
 >
->and [sashimi plots](https://www.broadinstitute.org/igv/Sashimi) highlighting potential splice junctions:
+>and [sashimi plots](http://software.broadinstitute.org/software/igv/Sashimi) highlighting potential splice junctions:
 >
 >![](../images/sashimi.png)
 
