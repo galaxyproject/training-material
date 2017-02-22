@@ -205,7 +205,7 @@ QC datasets you have uploaded before.
 Mapping of NGS reads against reference sequences is one of the key steps of the analysis. Now it is time to see how this is done in practice. Below is a list of key publications highlighting mainstream mapping tools:
 
 - 2009 Bowtie 1 - [Langmead et al.](http://genomebiology.com/content/10/3/R25)
-- 2012 Bowtie 2 - [Langmead and Salzberg](http://www.nature.com/nmeth/journal/v9/n4/full/nmeth.1923.htm)
+- 2012 Bowtie 2 - [Langmead and Salzberg](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3322381/)
 - 2009 BWA - [Li and Durbin](http://bioinformatics.oxfordjournals.org/content/25/14/1754.long)
 - 2010 BWA - [Li and Durbin](http://bioinformatics.oxfordjournals.org/content/26/5/589)
 - 2013 BWA-MEM - [Li](http://arxiv.org/abs/1303.3997)
