@@ -13,9 +13,17 @@ Identifying the proteins contained in a sample is an important step in any prote
 3. Peptide inference
 4. Protein inference
 
-A plethora of different software solutions exists for each step. In this tutorial, we will show how to use ***msconvert*** :wrench: and ***PeakPickerHiRes*** :wrench: for step 1, ***Search GUI*** :wrench: and ***Peptide Shaker*** :wrench: for the steps 2-4.
+A plethora of different software solutions exists for each step. In this tutorial, we will show how to
+use ***msconvert*** :wrench: and ***PeakPickerHiRes*** :wrench: for step 1,
+***Search GUI*** :wrench: and ***Peptide Shaker*** :wrench: for the steps 2-4.
 
-As an example dataset, we will use an LC-MS/MS analysis of HeLa cell lysate published in [Vaudel et al., 2014, Proteomics](https://www.ncbi.nlm.nih.gov/pubmed/24678044). Detailed information about the dataset can be found on [PRIDE](https://www.ebi.ac.uk/pride/archive/projects/PXD000674) . For step 2 we will use a validated human Uniprot FASTA database without appended decoys. If you already completed the tutorial on [Database Handling](./database-handling.md) you can use the constructed database before the **DecoyDatabase** :wrench: step.
+As an example dataset, we will use an LC-MS/MS analysis of HeLa cell lysate published
+in [Vaudel et al., 2014, Proteomics](https://www.ncbi.nlm.nih.gov/pubmed/24678044). Detailed information
+about the dataset can be found on [PRIDE](https://www.ebi.ac.uk/pride/archive/projects/PXD000674).
+For step 2 we will use a validated human Uniprot FASTA database without appended decoys.
+If you already completed the tutorial on [Database Handling](./database-handling.md)
+you can use the constructed database before the **DecoyDatabase** :wrench: step.
+
 
 > ### Agenda
 >

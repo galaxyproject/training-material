@@ -5,15 +5,15 @@ Quality control is an important preprocessing step in NGS data analyses. Here, w
 
 # Slides
 
-Several deck of slides are available for this topic:
+A deck of slides is available for this topic:
 
-- [General introduction about quality control](http://bgruening.github.io/training-material/NGS-QC/slides/)
+- [General introduction about quality control](http://galaxyproject.github.io/training-material/NGS-QC/slides/)
 
 # Tutorials
 
 A tutorial with hands-on is available for this topic:
 
-- [Dive into quality control](tutorials/dive_into_qc.md)
+- [Dive into quality control](http://galaxyproject.github.io/training-material//NGS-QC/tutorials/dive_into_qc)
 
 ## Input datasets
 

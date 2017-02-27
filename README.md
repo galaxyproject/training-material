@@ -1,6 +1,5 @@
 [![Gitter](https://badges.gitter.im/Galaxy-Training-Network/training-material.svg)](https://gitter.im/Galaxy-Training-Network/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-_This repository will be moved to the https://github.com/galaxyproject as soon as we are confident about our guidelines and our initial training material._
 
 Training material
 =================
@@ -31,7 +30,7 @@ The Galaxy community offers many different ways of training. The table above lis
 
 # License
 
-This work is licensed under the [Creative Commons Attribution 3.0 Unported License](http://creativecommons.org/licenses/by/3.0/).
+This work is licensed under the [Creative Commons Attribution 4.0 International License](http://creativecommons.org/licenses/by/4.0/).
 
 # Acknowledgment and Funding
 
