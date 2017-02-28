@@ -26,8 +26,7 @@ We summarized the pros and cons in the table below:
 
 > ### Table: Drawbacks and Benefits of Labelled Quantitation
 > category | label-free | labelled
-> :-|:-:|:-:
-
+> :--|:--:|:--:
 > machine time | more | **less**
 > wet lab complexity & time | **little** | medium
 > comparability of samples | difficult | **easy**
@@ -36,7 +35,7 @@ We summarized the pros and cons in the table below:
 >
 > The **superior technique** in each line is marked in **bold**.
 
-### Explanations of Our **Bewertung**
+### Drawbacks and Benefits: Detailed Explanation
 - Machine time: In label-free experiments, each sample is measured in a separate MS run. In labelled experiments, samples of each condition are combined prior to the MS run. This cuts down the machine time needed by the complexity of the labelling technique (usually between 2 and 8 times less machine time).
 - Wet lab complexity & time: While label-free samples can be measured without much preparation, all labelling techniques need additional pretreatments in the wet lab. The samples have to be labelled either metabolically (e.g. by SILAC) or chemically (e.g. ICAT or iTRAQ) and the different conditions have to be combined. Thus, label-free techniques are less prone to wet lab errors than labelling techniques.
 - Comparability of samples: A drawback of the label-free approaches is that exterior conditions (e.g. temperature, experimenter) may differ between samples. Such differences do not occur in labelled experiments, because all samples are measured in the very same MS run. Thus, label-free are more prone to errors introduced by the measurement conditions than labelled. 
