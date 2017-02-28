@@ -46,10 +46,10 @@ layout: base
         {% for material in topic.material %}
             <tr>
                 <td>{{ material.title }}</td>
-            
-                {% if material.type == "introduction" %}                     
+
+                {% if material.type == "introduction" %}
                     <td></td>
-                    <td>    
+                    <td>
                         {% if material.slides == "yes" %}
                         <a href="{{ site.url }}/{{ page.url }}/slides">:mortar_board:</a>
                         {% endif %}
@@ -105,6 +105,12 @@ layout: base
         <p>It will launch a flavored Galaxy instance available on <a href="http://localhost:8080">http://localhost:8080</a>.</p>
     {% endif %}
 
+    {% if topic.galaxy_instance %}
+        <h2>Galaxy instance</h2>
+
+        <p>For these tutorials, use Galaxy instance at <a href="{{ topic.galaxy_instance }}">{{ topic.galaxy_instance }}</a>.</p>
+    {% endif %}
+
     <a name="contributors"></a>
     <h2>Contributors</h2>
 
@@ -114,7 +120,7 @@ layout: base
         {% for maintainer in topic.maintainers %}
             <li>
             {% if maintainer.github_username != "" %}
-                <a href="http://github.com/{{ maintainer.github_username }}">{{ maintainer.name }}</a>
+                <a href="https://github.com/{{ maintainer.github_username }}">{{ maintainer.name }}</a>
             {% else %}
                 {{ maintainer.name }}
             {% endif %}
@@ -133,7 +139,7 @@ layout: base
         {% for contributor in topic.contributors %}
             <li>
             {% if contributor.github_username != "" %}
-                <a href="http://github.com/{{ contributor.github_username }}">{{ contributor.name }}</a> 
+                <a href="https://github.com/{{ contributor.github_username }}">{{ contributor.name }}</a> 
             {% else %}
                 {{ contributor.name }}
             {% endif %}

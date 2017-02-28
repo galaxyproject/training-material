@@ -2,28 +2,24 @@
 layout: base
 ---
 {% include main_header.html %}
-
+<a href="https://github.com/galaxyproject/training-material">
+  <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/652c5b9acfaddf3a9c326fa6bde407b87f7be0f4/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6f72616e67655f6666373630302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_orange_ff7600.png">
+</a>
 <section>
-    <p style="text-align:center;"><script src="https://embed.github.com/view/geojson/bgruening/galaxy-maps/master/server.geojson?height=300&width=400">
-    </script>
-    </p>
-    <p><em>This repository will be moved to the <a href="https://github.com/galaxyproject">https://github.com/galaxyproject</a> as soon as we are confident about our guidelines and our initial training material.</em></p>
 
-    <h1>Training material</h1>
+    <h1>Tutorials:</h1>
 
-    <h2>Galaxy use</h2>
+    <h2>Galaxy for Scientists</h2>
 
     <table class="table table-striped">
-        <tr>
-              <td class="bold">Lesson</td>
-              <td class="bold">Introduction</td>
-              <td class="bold">Tutorials</td>
-              <td class="bold">Docker image</td>
+        <tr class="row">
+              <td class="bold" class="col-md-10">Topic</td>
+              <td class="bold" class="col-md-2">Tutorials</td>
         </tr>
 
         {% for topic in site.data %}
             {% if topic[1].type == "use" %}
-            <tr>
+            <tr class="row">
                   {% assign tutorial_number=0 %}
                   {% assign introduction=0 %}
                   {% for tuto in topic[1].material %}
@@ -35,32 +31,24 @@ layout: base
                       {% endif %}
                   {% endfor %}
 
-                  <td><a href="{{ site.url }}/{{ topic[1].name }}">{{ topic[1].title }}</a></td>
-                  <td>
-                    {% if introduction != 0 %}
-                    <a href="{{ site.url }}/{{ topic[1].name }}/slides"> :mortar_board: </a>
-                    {% endif %}
-                  </td>
-                  <td>{{ tutorial_number }}</td>
-                  <td><a href="{{ site.github_repository }}/tree/master/{{ topic[1].name }}/docker">:whale: </a></td>
+                  <td class="col-md-10"><a href="{{ site.url }}/{{ topic[1].name }}">{{ topic[1].title }}</a></td>
+                  <td class="col-md-2">{{ tutorial_number }}</td>
             </tr>
             {% endif %}
         {% endfor %}
     </table>
 
-    <h2>Galaxy development and administration</h2>
+    <h2>Galaxy for Developers and Admins</h2>
 
     <table class="table table-striped">
-        <tr>
-              <td class="bold">Lesson</td>
-              <td class="bold">Introduction</td>
-              <td class="bold">Tutorials</td>
-              <td class="bold">Docker image</td>
+        <tr class="row">
+              <td class="bold" class="col-md-10">Topic</td>
+              <td class="bold" class="col-md-2">Tutorials</td>
         </tr>
 
         {% for topic in site.data %}
             {% if topic[1].type == "admin-dev" %}
-            <tr>
+            <tr class="row">
                   {% assign tutorial_number=0 %}
                   {% assign introduction=0 %}
                   {% for tuto in topic[1].material %}
@@ -72,15 +60,8 @@ layout: base
                       {% endif %}
                   {% endfor %}
 
-                  <td><a href="{{ site.url }}/{{ topic[1].name }}">{{ topic[1].title }}</a></td>
-                  <td>
-                    {% if introduction != 0 %}
-                    <a href="{{ site.url }}/{{ topic[1].name }}/slides"> :mortar_board: </a>
-                    {% endif %}
-                  </td>
-
-                  <td>{{ tutorial_number }}</td>
-                  <td><a href="{{ site.github_repository }}/tree/master/{{ topic[1].name }}/docker">:whale: </a></td>
+                  <td class="col-md-10"><a href="{{ site.url }}/{{ topic[1].name }}">{{ topic[1].title }}</a></td>
+                  <td class="col-md-2">{{ tutorial_number }}</td>
             </tr>
             {% endif %}
         {% endfor %}
@@ -88,23 +69,26 @@ layout: base
 
     <h1>License</h1>
 
-    <p>This work is licensed under the <a href="http://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0 Unported License</a>.</p>
+    <p>This work is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</p>
 
     <h1>Acknowledgment and Funding</h1>
 
     <p>We would like to thank all contributors to our Galaxy courses, especially those mentioned in the <a href="CONTRIBUTORS.md">Contributors list</a>, the Galaxy community for their constant support and our funding partners.</p>
 
     <p>
-    <a href="http://www.denbi.de/"><img src="https://raw.githubusercontent.com/bgruening/rbc_docs/master/logo/deNBI_Logo_rgb.png" width="15%" style="max-width:100%;"></a>  
-    <a href="http://www.sfb992.uni-freiburg.de/"><img src="https://raw.githubusercontent.com/bgruening/presentations/bce348bb606c312d531c479e63a66efc2bc38d44/shared/resources/img/MEDEP.jpg" width="15%" style="max-width:100%;"></a>  
-    <a href="http://www.ie-freiburg.mpg.de"><img src="https://raw.githubusercontent.com/bgruening/presentations/master/shared/resources/img/14_MPI_IE_logo_mit_180.gif" width="15%" style="max-width:100%;"></a>  
-    <a href="https://www.uni-freiburg.de/"><img src="https://raw.githubusercontent.com/bgruening/presentations/a2e38e4b007994af798320db3a0131c4bb891c0e/shared/resources/img/logo_freiburg.jpg" width="15%" style="max-width:100%;"></a>
-    <br>
-    <a href="https://wiki.galaxyproject.org/Teach/GTN"><img src="./shared/images/GTNLogo1000.png" width="15%" style="max-width:100%;"></a>
-    <a href="http://www.france-bioinformatique.fr/"><img src="http://www.france-bioinformatique.fr/sites/default/files/ifb-logo_1.png" width="15%" style="max-width:100%;"></a>
+      <a href="https://www.denbi.de/"><img src="https://raw.githubusercontent.com/bgruening/rbc_docs/master/logo/deNBI_Logo_rgb.png" width="15%" style="max-width:100%;"></a>
+      <a href="http://www.sfb992.uni-freiburg.de/"><img src="https://raw.githubusercontent.com/bgruening/presentations/bce348bb606c312d531c479e63a66efc2bc38d44/shared/resources/img/MEDEP.jpg" width="15%" style="max-width:100%;"></a>
+      <a href="https://www.ie-freiburg.mpg.de"><img src="https://raw.githubusercontent.com/bgruening/presentations/master/shared/resources/img/14_MPI_IE_logo_mit_180.gif" width="15%" style="max-width:100%;"></a>
+      <a href="https://www.uni-freiburg.de/"><img src="https://raw.githubusercontent.com/bgruening/presentations/a2e38e4b007994af798320db3a0131c4bb891c0e/shared/resources/img/logo_freiburg.jpg" width="15%" style="max-width:100%;"></a>
+      <br>
+      <a href="https://wiki.galaxyproject.org/Teach/GTN"><img src="./shared/images/GTNLogo1000.png" width="15%" style="max-width:100%;"></a>
+      <a href="https://www.france-bioinformatique.fr/"><img src="https://www.france-bioinformatique.fr/sites/default/files/ifb-logo_1.png" width="15%" style="max-width:100%;"></a>
     </p>
+    <p>Do you want to help with this project? Please see the <a href="https://github.com/galaxyproject/training-material/blob/master/CONTRIBUTING.md">CONTRIBUTING</a> file to get you started.</p>
 
-    <p>You want to help us on this project? Please, see the <a href="CONTRIBUTING.md"><code>CONTRIBUTING</code></a> file.</p>
+    <div class="embed-responsive embed-responsive-4by3">
+      <iframe class="embed-responsive-item" src="https://www.google.com/maps/d/embed?mid=1r8LJy6la-JeIrg23aZjpwVNjJDE"></iframe>
+    </div>
 
 </section>
 

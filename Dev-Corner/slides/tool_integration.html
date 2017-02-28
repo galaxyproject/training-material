@@ -28,16 +28,23 @@ graphlan.py --format "png" --size 7 input_tree.txt png_image.png
 ### Wrapper
 
 - Description of the user interface
-- Link between the tool and Galaxy instance
+- Link between the tool and the Galaxy instance
 - How to invoke the tool
-- What options to pass
-- What files the tool will produce as output
+- Which options to pass
+- Which files the tool will produce as output
 
 ---
 
 ### Wrapper
 
 ![](../images/wrapper_layers.png)
+
+???
+
+1. `<inputs>` (datasets and parameters) specified in the tool XML are exposed in the Galaxy tool UI
+2. When the user fills the form and click the `Execute` button, Galaxy fills the `<command>` template in the XML with the inputs entered by the user and execute the Cheetah code, producing a script as output
+3. Galaxy creates a job for the generated script and executes it somewhere (bowtie is run in this case)
+4. Some (not necessarily all) output files become new history datasets, as specified in the `<outputs>` XML tag set
 
 ---
 
@@ -74,6 +81,11 @@ graphlan.py --format "png" --size 7 input_tree.txt png_image.png
 
 ![](../images/wrapper_big_picture_1.png)
 
+???
+
+- CDATA tags are used to prevent the interpretation of ampersands and less-than signs as XML special characters
+- The tool name and description are combined in the left panel (tool menu), keep them short!
+
 ---
 
 ### Wrapper
@@ -92,7 +104,7 @@ graphlan.py --format "png" --size 7 input_tree.txt png_image.png
 
 .image-10[![](../images/exercise.png)]
 
-<small>[Galaxy Tool XML File](https://docs.galaxyproject.org/en/latest/dev/schema.html)</small>
+<small>Galaxy tool XML is formally defined in a XML Schema Definition (XSD), used to generate the [online documentation](https://docs.galaxyproject.org/en/latest/dev/schema.html)</small>
 
 ---
 
@@ -104,7 +116,7 @@ graphlan.py --format "png" --size 7 input_tree.txt png_image.png
 graphlan.py
 --format $format
 #if $dpi
---dpi $dpi
+  --dpi $dpi
 #end if
 --size $size
 "$input_tree"
@@ -114,15 +126,15 @@ graphlan.py
 <small>If the script is provided with the wrapper xml</small>
 ```xml
 <command><![CDATA[
-python $__tool_directory__/graphlan.py
---format $format
-#if $dpi
---dpi $dpi
-#end if
---size $size
-"$input_tree"
+python '$__tool_directory__/graphlan.py'
+# command params...
 ]]></command>
 ```
+
+???
+
+- In the first case, `graphlan.py` is expected to be on the PATH when the job executes
+- In the second case, `$__tool_directory__` is a special variable which is substituted by Galaxy with the directory where the tool XML is
 
 ---
 
@@ -133,7 +145,7 @@ python $__tool_directory__/graphlan.py
 
 ---
 
-### `inputs` > `param` To `command`
+### `inputs` > `param` to `command`
 #### How to pass the parameters?
 
 ```xml
@@ -151,7 +163,7 @@ python $__tool_directory__/graphlan.py
 graphlan.py
 ...
 #if $dpi
---dpi $dpi
+  --dpi $dpi
 #end if
 --size $size
 ...
@@ -187,6 +199,11 @@ graphlan.py
 help="..."/>
 ```
 
+???
+
+- In the first case, Galaxy creates a text box which accepts only integer values
+- In the second case, since *both* `min` and `max` are specified, a slider is shown in addition
+
 ---
 
 ### `inputs` > `param` > `text`
@@ -221,10 +238,10 @@ help="..."/>
 
 ```xml
 <param name="..." type="select" display="radio" label="..." help="...">
-  <option value="min" selected="true">Mininum</option>
-  <option value="mean" >Mean</option>
-  <option value="max" >Max</option>
-  <option value="sum" >Sum</option>
+  <option value="min" selected="true">Minimum</option>
+  <option value="mean">Mean</option>
+  <option value="max">Max</option>
+  <option value="sum">Sum</option>
 </param>
 ```
 
@@ -254,6 +271,8 @@ help="..."/>
 
 ---
 
+class: packed
+
 ### `inputs` > `param` > `conditional`
 
 ![](../images/input_conditional.png)
@@ -262,8 +281,7 @@ help="..."/>
 <command><![CDATA[
 #if $input_format.format == "fasta":
   phyml_fasta_id_encode_wrapper.sh $input_format.input $output_tree
-#end if
-#if $input_format.format == "phylip":
+#else if $input_format.format == "phylip":
   phyml.sh
 #end if
 ]]></command>
@@ -284,6 +302,8 @@ help="..."/>
 ```
 
 ---
+
+class: packed
 
 ### `inputs` > `param` > `repeat`
 
@@ -311,7 +331,7 @@ help="..."/>
 ---
 
 ### `outputs`
-#### What files the tool will produce as output?
+#### Which files the tool will produce as output?
 
 ![](../images/output.png)
 
@@ -327,15 +347,28 @@ help="..."/>
 </outputs>
 ```
 
+???
+
+`${tool.name} on ${on_string}` is the default output label, need to modify this if the tool generates more than 1 output
+
 ---
 
 ### `outputs` > `filter`
 #### Conditional
 
 ```xml
+<inputs>
+  <param type="select" name="format" label="Output format">
+    <option value="png">PNG</option>
+    <option value="pdf">PDF</option>
+  </param>
+</inputs>
 <outputs>
   <data format="png" name="png_output" label="${tool.name} on ${on_string}: PNG">
     <filter>format=="png"</filter>
+  </data>
+  <data format="pdf" name="pdf_output" label="${tool.name} on ${on_string}: PDF">
+    <filter>format=="pdf"</filter>
   </data>
 </outputs>
 ```
@@ -344,18 +377,24 @@ help="..."/>
 
 ### `stdio`
 
+Error if tool exit code is not 0 (default):
+```xml
+<command detect_errors="exit_code"> ... </command>
+```
+Error if tool exit code is not 0 or either "Exception:" or "Error:" appears in standard error/output:
 ```xml
 <command detect_errors="aggressive"> ... </command>
 ```
-or if you need more precision
+If you need more precision:
 ```xml
 <stdio>
   <exit_code range=":-2" level="warning" description="Low disk space" />
   <exit_code range="1:" level="fatal"  />
   <regex match="Error:"  level="fatal" />
 </stdio>
-
 ```
+
+<small>"Warning" level allow to add information to stderr without marking the dataset as failed</small>
 
 ---
 
@@ -379,7 +418,7 @@ For more information, check the `user manual
 ]]></help>
 ```
 
-.footnote[[reStructuredText markdown format](http://docutils.sourceforge.net/docs/user/rst/quickref.html)]
+.footnote[[reStructuredText markup format](http://docutils.sourceforge.net/rst.html)]
 
 ---
 
@@ -396,6 +435,148 @@ For more information, check the `user manual
   <citation type="doi">10.1038/nbt.2198</citation>
 </citations>
 ```
+
+<small>If no DOI is available, a BibTeX citation can be specified with `type="bibtex"`</small>
+
+---
+
+### Other tips
+
+Always quote text/data parameters
+
+```xml
+<command><![CDATA[
+graphlan.py
+--format '$format'
+#if $dpi
+  --dpi $dpi
+#end if
+--size $size
+'$input_tree'
+]]></command>
+```
+
+- For security reason
+- Prefer single quotes over double quotes
+
+---
+
+### Other tips
+
+Use &amp;&amp; to run multiple commands
+
+```xml
+<command><![CDATA[
+graphlan.py
+--format '$format'
+&&
+echo "Yeah it worked!"
+]]></command>
+```
+
+<small>The job will exit on the first error encountered.</small>
+
+---
+
+### Other tips
+
+Use the `argument` tag when a param name reflects the command line argument
+
+```xml
+<param argument="--size" type="integer" value="7" label="..." help="..."/>
+```
+
+- It will be printed at the end of the param help section
+- No need to write `name="size"`, it is implicit
+
+---
+
+### Other tips
+
+Use sections to group related parameters
+
+```xml
+<section name="advanced" title="Advanced options" expanded="False">
+    <param argument="--size" type="integer" value="7" label="..." help="..."/>
+</section>
+```
+
+---
+
+###.image-25[![](../images/planemo-logo.png)]
+
+#### `planemo tool_init`
+
+Creates a skeleton of xml file
+
+```bash
+$ mkdir new_tool
+$ cd new_tool
+$ planemo tool_init --id 'some_short_id' --name 'My super tool'
+```
+
+Complicated version:
+
+```bash
+$ planemo tool_init  --id "samtools_sort" --name "Samtools sort" \
+                     --description "Sort alignments by leftmost coordinates, or by read nam" \
+                     --requirement samtools \
+                     --example_command "samtools sort -o 1.bam null > 1_sorted.bam" \
+                     --example_input 1.bam \
+                     --example_output 1_sorted.bam \
+                     --test_case --version_command "samtools --version | head -1" \
+                     --help_from_command "samtools sort" \
+                     --doi 10.1093/bioinformatics/btp352'
+```
+
+---
+
+class: packed
+
+###.image-25[![](../images/planemo-logo.png)]
+
+#### `planemo lint`
+
+Checks the syntax of a wrapper
+
+```bash
+$ planemo lint
+```
+
+```bash
+Linting tool /opt/galaxy/tools/seqtk_seq.xml
+Applying linter tests... CHECK
+.. CHECK: 1 test(s) found.
+Applying linter output... CHECK
+.. INFO: 1 outputs found.
+Applying linter inputs... CHECK
+.. INFO: Found 1 input parameters.
+Applying linter help... CHECK
+.. CHECK: Tool contains help section.
+.. CHECK: Help contains valid reStructuredText.
+Applying linter general... CHECK
+.. CHECK: Tool defines a version [0.1.0].
+.. CHECK: Tool defines a name [Convert to FASTA (seqtk)].
+.. CHECK: Tool defines an id [seqtk_seq].
+Applying linter command... CHECK
+.. INFO: Tool contains a command.
+Applying linter citations... CHECK
+.. CHECK: Found 1 likely valid citations.
+```
+
+---
+
+###.image-25[![](../images/planemo-logo.png)]
+
+#### `planemo serve`
+
+View your new tool in a local Galaxy instance
+
+```bash
+$ planemo serve
+```
+
+Open http://127.0.0.1:9090/ in your web browser to view your new tool
 
 ---
 
@@ -419,7 +600,7 @@ For more information, check the `user manual
 *No brain needed*
 
 ```bash
-$ . ~/.venv_planemo/bin activate  # not mandatory
+$ . ~/.venv_planemo/bin/activate  # not mandatory
 $ planemo conda_init
 $ export PATH=~/miniconda2/bin:$PATH
 $ conda config --add channels conda-forge
@@ -454,12 +635,13 @@ $ cat 2.fasta
 ### <i class="fa fa-pencil" aria-hidden="true"></i> Hands-on
 
 #### Steps
-1. Init the wrapper with `planemo tool_init`
-2. Fill the template
-3. Test the template with `planemo lint`
-<small>Don't worry now about "No tests found"</small>
-4. Display the tool with `planemo serve`
-5. and try it with a file
+1. Create a new directory for your tool, `cd` into it
+2. Init the wrapper with `planemo tool_init`
+3. Fill the template
+4. Test the template with `planemo lint`
+<small>(Don't worry about "No tests found" for now)</small>
+5. Display the tool with `planemo serve`
+6. and try it with a file
 
 ???
 
@@ -483,7 +665,7 @@ planemo serve # seqtk_seq_step2.xml
 ### Functional tests
 
 - Functional testing is a quality assurance (QA) process.
-- The tests confort developers and users that the tools can run across different servers/architectures. And that the last modifications didn't break the different features.
+- The tests confort developers and users that the tools can run across different servers/architectures. And that the latest modifications don't break older features.
 - Tools are tested by feeding them input(s) and parameter(s) and examining the output(s) (typically a diff)
 
 ---
@@ -515,70 +697,7 @@ planemo serve # seqtk_seq_step2.xml
 </tests>
 ```
 
-<small>`input_tree.txt` and `png_image.png` in `test-data` repository</small>
-
----
-
-### `tests`
-#### Comparison Methods
-
-```xml
-<output name="out_file1" file="cf_maf2fasta_concat.dat" ftype="fasta"/>
-```
-
-```xml
-<test>
-  <output name="out_file1">
-    <assert_contents>
-    <has_text text="chr7" />
-    <not_has_text text="chr8" />
-    <has_text_matching expression="1274\d+53" />
-    <has_line_matching expression=".*\s+127489808\s+127494553" />
-    <!-- &#009; is XML escape code for tab -->
-    <has_line line="chr7&#009;127471195&#009;127489808" />
-    <has_n_columns n="3" />
-    </assert_contents>
-  </output>
-</test>
-```
-
-.footnote[[Complete information](https://docs.galaxyproject.org/en/latest/dev/schema.html#tool|tests|test)]
-
----
-
-### `tests`
-#### Comparison Methods on the output itself
-
-```xml
-<test>
-  <output ...
-    md5
-    compare
-    diff
-    sim_size
-    lines_diff
-    ... />
-
-```
-
-.footnote[[Complete information](https://docs.galaxyproject.org/en/latest/dev/schema.html#tool|tests|test|output)]
-
----
-
-### `tests`
-#### Comparison Methods within the output
-
-```xml
-<test>
-  <output>
-    <assert_contents>
-    <has_text />
-    <not_has_text />
-    <has_text_matching />
-    <has_text />
-    <...>
-```
-.footnote[[Complete information](https://docs.galaxyproject.org/en/latest/dev/schema.html#tool|tests|test|output|assert_contents)]
+<small>`input_tree.txt` and `png_image.png` must be in the `test-data` directory</small>
 
 ---
 
@@ -588,11 +707,147 @@ planemo serve # seqtk_seq_step2.xml
 graphlan/
 ├── graphlan.xml
 ├── graphlan.py
-├── test-data/
-├── input_tree.txt
-├── png_image.png
+└── test-data/
+    ├── input_tree.txt
+    └── png_image.png
 
 ```
+
+---
+
+### `tests`
+#### Comparison Methods: comparing to an expected result
+
+```xml
+<output name="out_file1" file="cf_maf2fasta_concat.dat" ftype="fasta"/>
+```
+
+.footnote[[Complete documentation](https://docs.galaxyproject.org/en/latest/dev/schema.html#tool-tests-test)]
+
+---
+
+### `tests`
+#### Comparison Methods: comparing to an expected result
+
+```xml
+<test>
+  <output ...
+    compare="diff|re_match|sim_size|contains|re_match_multiline"
+    ... />
+
+```
+
+.footnote[[Complete documentation](https://docs.galaxyproject.org/en/latest/dev/schema.html#tool-tests-test-output)]
+
+---
+
+### `tests`
+#### Comparison Methods: comparing to an expected result
+
+```xml
+<test>
+  <output ...
+    compare="diff"
+    lines_diff="4"
+    ... />
+
+```
+
+.footnote[[Complete documentation](https://docs.galaxyproject.org/en/latest/dev/schema.html#tool-tests-test-output)]
+
+---
+
+### `tests`
+#### Comparison Methods: comparing to an expected result
+
+```xml
+<test>
+  <output ...
+    compare="sim_size"
+    delta="1000"
+    ... />
+
+```
+
+.footnote[[Complete documentation](https://docs.galaxyproject.org/en/latest/dev/schema.html#tool-tests-test-output)]
+
+---
+
+### `tests`
+#### Comparison Methods: comparing to an expected result
+
+```xml
+<test>
+  <output ...
+    md5="68b329da9893e34099c7d8ad5cb9c940"
+    ... />
+
+```
+
+.footnote[[Complete documentation](https://docs.galaxyproject.org/en/latest/dev/schema.html#tool-tests-test-output)]
+
+---
+
+### `tests`
+#### Comparison Methods: checking the content
+
+```xml
+<test>
+  <output name="out_file1">
+    <assert_contents>
+      <has_text text="chr7" />
+      <not_has_text text="chr8" />
+      <has_text_matching expression="1274\d+53" />
+      <has_line_matching expression=".*\s+127489808\s+127494553" />
+      <!-- &#009; is XML escape code for tab -->
+      <has_line line="chr7&#009;127471195&#009;127489808" />
+      <has_n_columns n="3" />
+    </assert_contents>
+  </output>
+</test>
+```
+.footnote[[Complete documentation](https://docs.galaxyproject.org/en/latest/dev/schema.html#tool-tests-test-output-assert-contents)]
+
+---
+
+### `tests`
+#### Tests with conditionals, repeats, sections
+
+```xml
+<tests>
+  <test>
+    <section name="advanced">
+        <repeat name="names">
+            <param name="first" value="Abraham"/>
+            <param name="last" value="Lincoln"/>
+        </repeat>
+        <repeat name="names">
+            <param name="first" value="Donald"/>
+            <param name="last" value="Trump"/>
+        </repeat>
+        <conditional name="image">
+          <param name="output_image" value="yes"/>
+          <param name="format" value="png"/>
+        </conditional>
+    </section>
+    (...)
+  </test>
+</tests>
+```
+
+---
+
+###.image-25[![](../images/planemo-logo.png)]
+
+#### `planemo test`
+
+Runs all functional tests
+
+```bash
+$ planemo test
+```
+
+An HTML report is automatically created with logs in case of failing test
 
 ---
 
@@ -651,7 +906,7 @@ planemo test # seqtk_seq_step3.xml
 ```
 graphlan/
 ├── graphlan.xml
-├── graphlan.py
+└── graphlan.py
 
 ```
 
@@ -704,23 +959,31 @@ Package, dependency and environment management
 
 .image-50[![](../../shared/images/conda_logo.png)]
 
-- Based on recipes describing how to install the software which are then builded for their distribution
-- At installation, no compilation, executables come with their dependencies, libraries...
+- Based on recipes describing how to install the software which are then built for their distribution
+- No compilation at installation: binaries with their dependencies, libraries...
 - Not restricted to Galaxy
 
 ---
 
-###.image-25[![](../../shared/images/conda_logo.png)] <br/> Miniconda
+###.image-25[![](../../shared/images/conda_logo.png)] <br/> Conda distributions
 
+```
+
+
+```
 ![](../images/miniconda_vs_anaconda.png)
 
 ---
 
 ###.image-25[![](../../shared/images/conda_logo.png)] <br/> Channels
 
-- Packages are provided through Channels within Continuum.Anaconda. It's the way to contribute.
-
-- Galaxy via Conda will search packages in 5 channels: iuc,bioconda,r,defaults,conda-forge
+- Packages through channels within Continuum.Anaconda
+- Conda channel searched by Galaxy for packages:
+    - iuc
+    - bioconda
+    - defaults
+    - r
+    - conda-forge
 
 ---
 
@@ -731,25 +994,25 @@ Package, dependency and environment management
 
 
 ```bash
-conda install bioconductor-deseq2
+conda install pyyaml
 ```
 
 - Install some packages within an isolate environment
 
 ```bash
-$ conda create -n deseq2 bioconductor-deseq2 r-ggplot2
+$ conda create -n yaml pyyaml
 $ conda env list
-deseq2        *  ~/miniconda2/envs/deseq2
+yaml        *  ~/miniconda2/envs/yaml
 root             ~/miniconda2
-$ source activate bioconductor-deseq2
-(deseq2) $ R
+$ source activate yaml
+(yaml) $
 ```
 
 ---
 
 ###.image-25[![](../../shared/images/conda_logo.png)] <br/> Tips and tricks
 #### Because you don't want Conda binaries all the time in your $PATH
-<small>In fact, Conda will mask some of your binaries like python and so all your Python libraries ...</small>
+<small>Conda masks some of your binaries like python (with all corresponding python modules) with its own versions</small>
 
 ```bash
 $ vi ~/.bashrc
@@ -779,7 +1042,7 @@ function conda2deactivate () {
 ### <i class="fa fa-pencil" aria-hidden="true"></i> Hands-on
 
 #### The Goal
-- Use Conda package installation during the functional test of the wrapper for Seqtk
+- Use Conda package installation during the functional tests of the wrapper for Seqtk
 
 ---
 
@@ -809,15 +1072,15 @@ planemo test --conda_dependency_resolution # seqtk_seq_step4.xml
 
 ---
 
-###.image-25[![](../../shared/images/conda_logo.png)] <br/> Write a Conda package
+###.image-25[![](../../shared/images/conda_logo.png)] <br/> Writing a Conda recipe
 
-You can implement a new Conda package. This will be necessary if a specific tool or version is not available.
+You can create a new Conda package. This will be necessary if a specific tool or version is not available.
 
-.footnote[[Documentation about how to build a conda packages from scratch](http://conda.pydata.org/docs/build_tutorials/pkgs2.html) <br/> [Bioconda guidelines](https://bioconda.github.io/guidelines.html)]
+.footnote[[Documentation about how to write conda recipes from scratch](http://conda.pydata.org/docs/build_tutorials/pkgs2.html) <br/> [Bioconda guidelines](https://bioconda.github.io/guidelines.html)]
 
 ---
 
-###.image-25[![](../../shared/images/conda_logo.png)] <br/> Write a Conda package
+###.image-25[![](../../shared/images/conda_logo.png)] <br/> Writing a Conda recipe
 #### Files
 
 - `meta.yaml`: contains all the metadata of the recipe
@@ -825,7 +1088,7 @@ You can implement a new Conda package. This will be necessary if a specific tool
 
 ---
 
-###.image-25[![](../../shared/images/conda_logo.png)] <br/> Write a Conda package
+###.image-25[![](../../shared/images/conda_logo.png)] <br/> Writing a Conda recipe
 #### `meta.yaml` basic information
 
 ```yaml
@@ -847,7 +1110,7 @@ source:
 
 ---
 
-###.image-25[![](../../shared/images/conda_logo.png)] <br/> Write a Conda package
+###.image-25[![](../../shared/images/conda_logo.png)] <br/> Writing a Conda recipe
 #### `meta.yaml` requirements
 
 ```yaml
@@ -868,7 +1131,7 @@ requirements:
 
 ---
 
-###.image-25[![](../../shared/images/conda_logo.png)] <br/> Write a Conda package
+###.image-25[![](../../shared/images/conda_logo.png)] <br/> Writing a Conda recipe
 #### `meta.yaml` test
 
 ```yaml
@@ -879,12 +1142,13 @@ test:
     - '$R -e "library(''xcms'')"'
 ```
 <small>
-Those tests are launched at the end of `conda build`
+Those tests are launched at the end of `conda build`. <br>
+They need to return 0 on success.
 </small>
 
 ---
 
-###.image-25[![](../../shared/images/conda_logo.png)] <br/> Write a Conda package
+###.image-25[![](../../shared/images/conda_logo.png)] <br/> Writing a Conda recipe
 #### `build.sh`
 
 ```bash
@@ -899,25 +1163,28 @@ mkdir -p $PREFIX/bin
 cp *.py $PREFIX/bin
 ```
 <small>
-- $PREFIX will usually contain `bin/` `lib/` `include/` that are filled with the requirements files
-- $PREFIX will be loaded in the user environment at runtime: $PATH, LD_LIBRARY_PATH, PYTHONPATH ...
+- $PREFIX is a variable defined by conda when building the package
+- $PREFIX usually contains `bin/` `lib/` `include/` that are filled with the package files
+- $PREFIX will be loaded in the user environment at runtime: PATH, LD_LIBRARY_PATH, PYTHONPATH, ...
 </small>
 
 ---
 
-###.image-25[![](../../shared/images/conda_logo.png)] <br/> Write a Conda package
-#### skeleton
+###.image-25[![](../../shared/images/conda_logo.png)] <br/> Writing a Conda recipe
+#### Building recipe skeletons
 
 - `conda skeleton pypi <packagename>`
 - `conda skeleton cran <packagename>`
 - `bioconductor_skeleton.py <packagename>`
 - `conda skeleton cpan <packagename>`
 
+Generates pre-filled recipes <small>(not guaranteed to work out of the box)</small>
+
 .footnote[[Building conda packages with conda skeleton](http://conda.pydata.org/docs/build_tutorials/pkgs.html)]
 
 ---
 
-###.image-25[![](../../shared/images/conda_logo.png)] <br/> Write a Conda package
+###.image-25[![](../../shared/images/conda_logo.png)] <br/> Writing a Conda recipe
 #### `conda build` and test the package
 
 ```bash
@@ -926,11 +1193,11 @@ $ conda install conda-build
 $ conda build .
 
 ```
-1. BUILD START: Build/Compile the package
-2. BUILD START: Provide a .tar.bz2
-3. TEST START: Install the .tar.bz2 previously generated
-4. TEST START: Launch the functional tests
-5. (Provide the .tar.bz2 path)
+1. BUILD START: Builds/Compiles the package
+2. BUILD START: Provides a .tar.bz2
+3. TEST START: Installs the .tar.bz2 previously generated
+4. TEST START: Launches the functional tests
+5. (Provides the .tar.bz2 path)
 
 ---
 
@@ -940,8 +1207,10 @@ $ conda build .
 To continue your `planemo test`, you may want to use your new package before it's available through an official channel.
 
 
-1. Get the path of your new package .tar.bz2
-2. `conda install ~/miniconda2/conda-bld/linux-64/bwa-0.7.15-0.tar.bz2`
+Get the path of your new package .tar.bz2
+```bash
+conda install ~/miniconda2/conda-bld/linux-64/bwa-0.7.15-0.tar.bz2
+```
 
 ---
 
@@ -984,10 +1253,10 @@ Build a conda package for the suite seqtk
 ### <i class="fa fa-pencil" aria-hidden="true"></i> Hands-on
 
 #### Steps
-1. [RTFM](https://github.com/bioconda/bioconda-recipes/blob/master/GUIDELINES.md#cc)
-2. https://github.com/lh3/seqtk/
-3. Complete a `meta.yaml` and a `build.sh`
-4. Test the build with `conda build .`
+1. Read the [guidelines for bioconda recipes](https://bioconda.github.io/guidelines.html)
+2. Follow seqtk [installation instructions](https://github.com/lh3/seqtk/)
+3. Write a `meta.yaml` and a `build.sh`
+4. Test the recipe with `conda build`
 
 ???
 
@@ -1014,9 +1283,13 @@ Build a conda package for the suite seqtk
 #### Checklist (1/3)
 
 - Create a dedicated repository
+```bash
+mkdir my_tool
+cd my_tool
+```
 - Create the main `.xml` file with
 ```bash
-planemo create
+planemo tool_init
 ```
 - Fill the `.xml` file
 - Test the wrapper structure with
@@ -1029,13 +1302,284 @@ planemo lint
 ###.image-25[![](../images/planemo-logo.png)]
 #### Checklist (2/3)
 
-- Check if the dependencies are available
-- If not, create some conda packages
+- Check if the dependencies are available on Conda
+- If not, create the missing Conda packages
 - Add functional tests
 - Run functional tests
 ```bash
 planemo test
 ```
+
+---
+
+## Advanced features
+
+---
+
+### Other tags: `configfiles`
+
+Like `command`, uses cheetah code to write:
+
+- A config file
+- A whole script or a module
+- Any text file needed for the tool execution
+
+---
+
+class: packed
+
+### `configfiles`
+
+```xml
+<command><![CDATA[ mb $script_nexus  ]]></command>
+
+<configfiles>
+  <configfile name="script_nexus"><![CDATA[
+set autoclose = yes;
+execute $input_data;
+#if str( $data_type.type ) == "nuc“
+  lset nst=$data_type.lset_params.lset_Nst;
+#end if
+mcmcp ngen=$mcmcp_ngen;
+mcmc;
+quit
+  ]]></configfile>
+</configfiles>
+
+```
+
+```bash
+set autoclose = yes;
+execute dataset_42.dat;
+lset nst=2 ;
+mcmcp ngen=100000;
+mcmc;
+quit
+```
+
+---
+
+### `macros`
+
+![](../images/macro.png)
+
+.footnote[[Planemo documents about macros ](http://planemo.readthedocs.io/en/latest/_writing_suites.html#macros)]
+
+---
+
+class: packed
+
+### `macros` > `xml`
+
+macros.xml
+
+```xml
+<macros>
+  <xml name="requirements">
+    <requirements>
+      <requirement type="package" version="2.5.0">blast</requirement>
+    </requirements>
+  </xml>
+  <xml name="stdio">
+    <stdio>
+      <exit_code range="1" level="fatal" />
+    </stdio>
+  </xml>
+</macros>
+```
+
+ncbi_blastn_wrapper.xml
+
+```xml
+<macros>
+  <import>macros.xml</import>
+</macros>
+<expand macro="requirements"/>
+<expand macro="stdio"/>
+```
+
+---
+
+### `macros` > `token`
+
+macros.xml
+
+```xml
+<macros>
+  <token name="@THREADS@">-num_threads "\${GALAXY_SLOTS:-8}"</token>
+</macros>
+```
+
+ncbi_blastn_wrapper.xml
+
+```xml
+<command>
+  blastn -query "$query" @THREADS@ [...]
+</command>
+```
+
+---
+
+### `macros` > `yield`
+
+macros.xml
+
+```xml
+<macros>
+  <xml name="requirements">
+    <requirements>
+      <requirement type="package" version="2.2.0">trinity</requirement>
+      <yield/>
+    </requirements>
+  </xml>
+</macros>
+```
+
+trinity.xml
+
+```xml
+<expand macro="requirements">
+  <requirement type="package" version="1.1.2">bowtie</requirement>
+  <requirement type="set_environment">TRINITY_MEM_OPTIONS</requirement>
+</expand>
+```
+
+---
+
+### `command` > Reserved Variables
+
+```xml
+<command><![CDATA[
+${input_foobar.ext}
+
+--search_pfam "${ filter( lambda x: str( x[0] ) == str( $search.pfam_db ),
+  $__app__.tool_data_tables[ 'pfam_databases' ].get_fields() )[0][-1] }"
+
+library $__app__.config.user_library_import_dir/$__user_email__/$inputs.library
+
+#if isinstance( $input1.datatype,
+  $__app__.datatypes_registry.get_datatype_by_extension('gff').__class__):
+]]></command>
+```
+.footnote[[Reserved Variables List](https://docs.galaxyproject.org/en/latest/dev/schema.html#tool-command)]
+
+---
+
+### Dataset collection
+
+To group related datasets, and treat them as a single unit
+
+- `list`: a simple list of files
+- `paired`: a pair of files, `forward` and `reverse` for NGS
+- composite: e.g. `list:paired` for a list of dataset pairs
+
+---
+
+### Dataset collection > input
+
+Accept both datasets and collections:
+
+```xml
+<param type="data" multiple="true" name="inputs" label="Input BAM(s)"
+  format="bam" />
+```
+
+Accept only collections:
+
+```xml
+<param type="data_collection" collection_type="list|paired|list:paired|..."
+  name="inputs" label="Input BAM(s)" format="bam" />
+```
+
+In the command:
+
+```xml
+<command><![CDATA[
+...
+#for $input in $inputs
+--input "$input"
+--sample_name "$input.element_identifier"
+#end for
+]]></command>
+```
+
+---
+
+### Dataset collection > output
+
+A single paired collection:
+
+```xml
+<collection name="paired_output" type="paired" label="Split Pair">
+  <data name="forward" format="txt" />
+  <data name="reverse" format_source="input1" from_work_dir="reverse.txt" />
+</collection>
+```
+
+Unknown number of files:
+
+```xml
+<collection name="output" type="list" label="Unknown number of files">
+  <discover_datasets pattern="__name_and_ext__" directory="outputs" />
+</collection>
+```
+
+
+`__name_and_ext__`: a predefined regexp,
+
+catches the dataset identifier + the format
+
+---
+
+### Some Config
+
+---
+
+### `job_conf.xml`
+
+![](../images/job_conf.xml_1.png)
+
+8 is the default value if not set in destination
+
+```bash
+blastn -query foo_bar -num_threads 8
+```
+
+---
+
+### `job_conf.xml`
+
+![](../images/job_conf.xml_2.png)
+
+```bash
+blastn -query foo_bar -num_threads 4
+```
+
+---
+
+### Data tables
+
+- They list all reference data used by tools
+- e.g.: Blast databanks, BWA indexes, Fasta files
+- Stored in `.loc` files
+- Populated by hand or using Data Managers
+- Data Managers are dedicated kind of Galaxy tools
+
+---
+
+### Using a data table in a tool
+
+![](../images/tool_data_table_conf.xml.png)
+
+---
+
+### Datatypes
+
+- Every Galaxy dataset is associated with a datatype
+- Datatype can be detected or user specified
+- Gain of usability
+
+.footnote[[Documentation: Adding Datatypes](https://wiki.galaxyproject.org/Admin/Datatypes/Adding%20Datatypes)]
 
 ---
 
@@ -1129,268 +1673,6 @@ tools:
 ```bash
 docker run -d -p 8080:80 galaxy-deeptools
 ```
-
----
-
-## Advanced features
-
----
-
-### Other tags
-
----
-
-### `configfiles`
-
-Like `command` allow cheetah code
-
-- Create a config file
-- Create a whole script or a module
-
----
-
-### `configfiles`
-
-```xml
-<command><![CDATA[ mb $script_nexus  ]]></command>
-
-<configfiles>
-  <configfile name="script_nexus"><![CDATA[
-set autoclose = yes;
-execute $input_data;
-#if str( $data_type.type ) == "nuc“
-  lset nst=$data_type.lset_params.lset_Nst;
-#end if
-mcmcp ngen=$mcmcp_ngen;
-mcmc;
-quit
-  ]]></configfile>
-</configfiles>
-
-```
-
-```bash
-set autoclose = yes;
-execute dataset_42.dat;
-lset nst=2 ;
-mcmcp ngen=100000;
-mcmc;
-quit
-```
-
----
-
-### `command` > Reserved Variables
-
-```xml
-<command><![CDATA[
-${input_foobar.ext}
-
---search_pfam "${ filter( lambda x: str( x[0] ) == str( $search.pfam_db ),
-  $__app__.tool_data_tables[ 'pfam_databases' ].get_fields() )[0][-1] }"
-
-library $__app__.config.user_library_import_dir/$__user_email__/$inputs.library
-
-#if isinstance( $input1.datatype,
-  $__app__.datatypes_registry.get_datatype_by_extension('gff').__class__):
-]]></command>
-```
-.footnote[[Reserved Variables List](https://docs.galaxyproject.org/en/latest/dev/schema.html#tool|command)]
-
----
-
-### `macros`
-
-![](../images/macro.png)
-
-.footnote[[Planemo documents about macros ](http://planemo.readthedocs.io/en/latest/_writing_suites.html#macros)]
-
----
-
-### `macros` > `xml`
-
-macros.xml
-
-```xml
-<macros>
-  <xml name="requirements">
-    <requirements>
-      <requirement type="package" version="2.5.0">blast</requirement>
-    </requirements>
-  </xml>
-  <xml name="stdio">
-    <stdio>
-      <exit_code range="1" level="fatal" />
-    </stdio>
-  </xml>
-</macros>
-```
-
-ncbi_blastn_wrapper.xml
-
-```xml
-<macros>
-  <import>macros.xml</import>
-</macros>
-<expand macro="requirements"/>
-<expand macro="stdio"/>
-```
-
----
-
-### `macros` > `token`
-
-macros.xml
-
-```xml
-<macros>
-  <token name="@THREADS@">-num_threads "\${GALAXY_SLOTS:-8}"</token>
-</macros>
-```
-
-ncbi_blastn_wrapper.xml
-
-```xml
-<command>
-  blastn -query "$query" @THREADS@ [...]
-</command>
-```
-
----
-
-### `macros` > `yield`
-
-macros.xml
-
-```xml
-<macros>
-  <xml name="requirements">
-    <requirements>
-      <requirement type="package" version="2.2.0">trinity</requirement>
-      <yield/>
-    </requirements>
-  </xml>
-</macros>
-```
-
-trinity.xml
-
-```xml
-<expand macro="requirements">
-  <requirement type="package" version="1.1.2">bowtie</requirement>
-  <requirement type="set_environment">TRINITY_MEM_OPTIONS</requirement>
-</expand>
-```
-
----
-
-### Dataset collection
-
-To group related datasets, and treat them as a single unit
-
-- `list`: a simple list of files
-- `paired`: a pair of files, `forward` and `reverse` for NGS
-- composite: e.g. `list:paired` for a list of dataset pairs
-
----
-
-### Dataset collection > input
-
-Accept both datasets and collections:
-
-```xml
-<param type="data" multiple="true" name="inputs" label="Input BAM(s)"
-  format="bam" />
-```
-
-Accept only collections:
-
-```xml
-<param type="data_collection" collection_type="list|paired|list:paired|..."
-  name="inputs" label="Input BAM(s)" format="bam" />
-```
-
-In the command:
-
-```xml
-<command><![CDATA[
-...
-#for $input in $inputs
---input "$input"
---sample_name "$input.element_identifier"
-#end for
-]]></command>
-```
-
----
-
-### Dataset collection > output
-
-A single paired collection:
-
-```xml
-<collection name="paired_output" type="paired" label="Split Pair">
-  <data name="forward" format="txt" />
-  <data name="reverse" format_source="input1" from_work_dir="reverse.txt" />
-</collection>
-```
-
-Unknown number of files:
-
-```xml
-<collection name="output" type="list" label="Unknown number of files">
-  <discover_datasets pattern="__name_and_ext__" directory="outputs" />
-</collection>
-```
-
-
-`__name_and_ext__`: a predefined regexp,
-
-catches the dataset identifier + the format
-
----
-
-### Some Config
-
----
-
-### `job_conf.xml`
-
-![](../images/job_conf.xml_1.png)
-
-```bash
-blastn -query foo_bar -num_threads 8
-```
-
----
-
-### `job_conf.xml`
-
-![](../images/job_conf.xml_2.png)
-
-```bash
-blastn -query foo_bar -num_threads 4
-```
-
----
-
-### `tool_data_table_conf.xml`
-
-![](../images/tool_data_table_conf.xml.png)
-
----
-
-### Datatypes
-
----
-
-### Datatypes
-
-- Every Galaxy dataset is associated with a datatype
-- Datatype can be detected or user specified
-- Gain of usability
-
-.footnote[[Documentation: Adding Datatypes](https://wiki.galaxyproject.org/Admin/Datatypes/Adding%20Datatypes)]
 
 ---
 

@@ -181,7 +181,7 @@ Now that we have an annotated VCF file it is time to peek inside our variation d
 
 #### Loading data into GEMINI
 
-The first step is to convert a VCF file we would like to analyze into a GEMINI database. For this we will use **GEMINI Load** tool from **Gemini** section. GEMINI takes as input a VCF file and a [PED](http://pngu.mgh.harvard.edu/~purcell/plink/data.shtml) file describing the relationship between samples. In the case of our dataset the PED file looks like this (second imported file):
+The first step is to convert a VCF file we would like to analyze into a GEMINI database. For this we will use **GEMINI Load** tool from **Gemini** section. GEMINI takes as input a VCF file and a [PED](https://www.cog-genomics.org/plink2/formats#ped) file describing the relationship between samples. In the case of our dataset the PED file looks like this (second imported file):
 
 ```
 #family_id sample_id            paternal_id          maternal_id         sex phenotype ethnicity
