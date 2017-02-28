@@ -24,16 +24,16 @@ Label-free techniques are immensely popular in the proteomics community and may 
 
 We summarized the pros and cons in the table below:
 
-> ### Table: Drawbacks and Benefits of Labelled Quantitation
-> category | label-free | labelled
-> :--|:--:|:--:
-> machine time | more | **less**
-> wet lab complexity & time | **little** | medium
-> comparability of samples | difficult | **easy**
-> data analysis | complex | complex
-> experimental design | **flexibel** | fixed
->
-> The **superior technique** in each line is marked in **bold**.
+### Drawbacks and Benefits: Overview Table
+category | label-free | labelled
+:--|:--:|:--:
+machine time | more | **less**
+wet lab complexity & time | **little** | medium
+comparability of samples | difficult | **easy**
+data analysis | complex | complex
+experimental design | **flexibel** | fixed
+
+The **superior technique** in each line is marked in **bold**.
 
 ### Drawbacks and Benefits: Detailed Explanation
 - Machine time: In label-free experiments, each sample is measured in a separate MS run. In labelled experiments, samples of each condition are combined prior to the MS run. This cuts down the machine time needed by the complexity of the labelling technique (usually between 2 and 8 times less machine time).
