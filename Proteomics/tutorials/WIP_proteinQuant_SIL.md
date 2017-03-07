@@ -33,9 +33,8 @@ The tool settings need to be carefully tested and evaluated manually to obtain o
 
 > ### :pencil2: Hands-on: MS1 Feature Detection
 > 
-> Here, we will use a quantitative comparison of **HEK _OR_ E.coli** cell lysate as a test dataset. In this experiment, the very same cell lysate was once labelled with light, once with heavy **dimethyl _OR_ SILAC** and both samples were subsequently mixed in a certain ratio. Your objective in this hands-on-tutorial is to find out the correct mixing ratio. *And no, the ratio is not mentioned in the description of the dataset on PRIDE. We left out that particular information on purpose. Haha.*
-> 
-> 
+> Here, we will use a quantitative comparison of **HEK _OR_ E.coli** cell lysate as a test dataset. In this experiment, the very same cell lysate was once labelled with light, once with heavy **dimethyl _OR_ SILAC** and both samples were subsequently mixed in a certain ratio.
+> Your objective in this hands-on-tutorial is to find out the correct mixing ratio. *And no, the ratio is not mentioned in the description of the dataset on PRIDE. We left out that particular information on purpose. Haha.*
 
 <a name="importing-ids"/></a>
 # Importing and Converting Peptide and Protein IDs
