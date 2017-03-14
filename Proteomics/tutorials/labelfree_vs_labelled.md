@@ -19,6 +19,7 @@ A basic overview of different quantitation techniques is shown below ([original 
 >
 > 1. [Drawbacks and Benefits of Labelled Quantitation](#pro-contra)
 > 2. [Guideline: How to Choose Your Technique](#conclusion)
+> {: .agenda}
 
 <a name="pro-contra"/></a>
 # Drawbacks and Benefits of Labelled Quantitation
