@@ -65,7 +65,7 @@ In chemical labelling, samples are labelled *in vitro* after extracting the prot
 # Guideline: How to Choose Your Technique
 Considering the points mentioned above, the following guideline may help you in finding the right method for your scientific question:
 
-1. **Experimental design** & **Comparability of samples**: If you cannot predict the availability of samples in beforehand, flexibility is highly important. Therefore, we advise you to use a label-free approach for animal or clinical samples.
+1. **Study design** & **Comparability of samples**: If you cannot predict the availability of samples in beforehand, flexibility is highly important. Therefore, we advise you to use a label-free approach for animal or clinical samples.
 2. **Wet lab complexity** & **Data analysis**: Your experience matters! If you see only weak advantages of one approach, stick to the technique you are already used to. It will save time and reduce the likelihood of errors, both in the wet lab and *in silico*.
 3. **Machine time**: If you have only limited access to the mass spectrometer, choose a labelling approach.
 4. **Wet lab complexity & time**: If you have limited lab resources (e.g. time, man-power, chemicals), choose a label-free approach.
