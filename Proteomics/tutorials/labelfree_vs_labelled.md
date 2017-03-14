@@ -17,11 +17,11 @@ A basic overview of different quantitation techniques is shown below ([original 
 >
 > In this tutorial, we will deal with:
 >
-> 1. [Drawbacks and Benefits of Labelled Quantitation](#pro-contra)
-> 2. [Guideline: How to Choose Your Technique](#conclusion)
+> 1. [Drawbacks and Benefits of Labelled Quantitation](#drawbacks-and-benefits-of-labelled-quantitation)
+> 2. [Guideline: How to Choose Your Technique](#guideline:-how-to-choose-your-technique)
 > {: .agenda}
 
-<a name="pro-contra"/></a>
+
 # Drawbacks and Benefits of Labelled Quantitation
 Label-free techniques are immensely popular in the proteomics community and may be the most straight-forward laboratory technique in the field. However, labelled approaches have some benefits, which make them the method-of-choice for some scientific questions. 
 
@@ -47,7 +47,7 @@ Including a well-chosen standard in label-free experiments (e.g. a labelled cont
 - **Experimental design**: Label-free approaches have the advantage of being very adaptable, even after having started the experiment. New samples may be included at any time. In contrast, labelled approaches need the same number (n) of each condition. Thus, new samples cannot be measured, if they cannot be matched to a control. 
 Labelled techniques like the ["Super-SILAC"](https://www.ncbi.nlm.nih.gov/pubmed/20364148) approach do reduce this problem, but also need to be carefully planned in beforehand.
 
-<a name="conclusion"/></a>
+
 # Guideline: How to Choose Your Technique
 Considering the points mentioned above, the following guideline may help you in finding the right method for your scientific question:
 
