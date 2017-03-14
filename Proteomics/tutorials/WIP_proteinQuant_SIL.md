@@ -21,7 +21,7 @@ If you still are in the planning phase of your quantitative proteomics experimen
 > In this tutorial, we will deal with:
 >
 > 2. [MS1 Feature Detection](#ms1-feature-detection)
-> 1. [Importing and Converting Peptide and Protein IDs](#importing-ids)
+> 1. [Importing and Converting Peptide and Protein IDs](#importing-and-converting-peptide-and-protein-ids)
 > 3. [Quant to ID matching](#quant-to-id-matching)
 > 4. [Evaluation and Optimization of Quantitation Results](#evaluation-and-optimization-of-quantitation-results)
 {: .agenda}
@@ -38,7 +38,7 @@ The tool settings need to be carefully tested and evaluated manually to obtain o
 > Your objective in this hands-on-tutorial is to find out the correct mixing ratio.
 {: .hands_on}
 
-<a name="importing-ids"/></a>
+
 # Importing and Converting Peptide and Protein IDs
 
 
