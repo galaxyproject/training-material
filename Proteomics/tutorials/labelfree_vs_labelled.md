@@ -1,5 +1,5 @@
 ---
-layout: tutorial
+layout: tutorial_hands_on
 topic_name: Proteomics
 tutorial_name: labelfree-vs-labelled
 ---
@@ -34,7 +34,7 @@ machine time | more | **less**
 wet lab complexity & time | **little** | medium
 comparability of samples | difficult | **easy**
 data analysis | complex | complex
-experimental design | **flexibel** | fixed
+study design | **flexibel** | fixed
 
 The **superior technique** in each line is marked in **bold**.
 
@@ -42,11 +42,25 @@ The **superior technique** in each line is marked in **bold**.
 - **Machine time**: In label-free experiments, each sample is measured in a separate MS run. In labelled experiments, samples of each condition are combined prior to the MS run. This cuts down the machine time needed by the complexity of the labelling technique (usually between 2 and 8 times less machine time).
 - **Wet lab complexity & time**: While label-free samples can be measured without much preparation, all labelling techniques need additional pretreatments in the wet lab. The samples have to be labelled either metabolically (e.g. by SILAC) or chemically (e.g. ICAT or iTRAQ) and the different conditions have to be combined. Thus, label-free techniques are less prone to wet lab errors than labelling techniques.
 - **Comparability of samples**: A drawback of the label-free approaches is that exterior conditions (e.g. temperature, experimenter) may differ between samples. Such differences do not occur in labelled experiments, because all samples are measured in the very same MS run. Thus, label-free are more prone to errors introduced by the measurement conditions than labelled. 
-Including a well-chosen standard in label-free experiments (e.g. a labelled control sample mixed to each sample prior to the MS run) may reduce this problem, but has to be carefully planned in beforehand.
+Including a well-chosen standard in label-free experiments (e.g. a labelled control sample mixed to each sample prior to the MS run or the ["Super-SILAC"](https://www.ncbi.nlm.nih.gov/pubmed/20364148) approach) may reduce this problem, but has to be carefully planned in beforehand.
 - **Data analysis**: Data analysis of each type of experiment has it's special pitfalls. In our opinion, the benefits and drawbacks cancel each other out.
-- **Experimental design**: Label-free approaches have the advantage of being very adaptable, even after having started the experiment. New samples may be included at any time. In contrast, labelled approaches need the same number (n) of each condition. Thus, new samples cannot be measured, if they cannot be matched to a control. 
+- **Study design**: Label-free approaches have the advantage of being very adaptable, even after having started the study. New samples may be included at any time. In contrast, labelled approaches need the same number (n) of each condition. Thus, new samples cannot be measured, if they cannot be matched to a control. 
 Labelled techniques like the ["Super-SILAC"](https://www.ncbi.nlm.nih.gov/pubmed/20364148) approach do reduce this problem, but also need to be carefully planned in beforehand.
 
+> ### :question: Questions
+> 
+> 1. What is the difference between metabolic and chemical labelling? 
+> 2. What is the "Super-SILAC" approach?
+>
+>    >    <details>
+>    >    <summary>Click to view answers</summary>
+>    >    <ol type="1">
+>    >    <li>In metabolic labelling (e.g. "SILAC"), samples like cells or whole animals are labelled *in vivo* by providing amino acids containing stable isotope before starting the experiment.
+In chemical labelling, samples are labelled *in vitro* after extracting the proteins.</li>
+>    >    <li>The "Super-SILAC" approach features mixing of easy obtainable control samples that are related to the sample of interest. An example is to use a mixture of several breast cancer cell lines to compare to breast cancer patient samples. The control sample usually is labelled with heavy isotopes, while the sample of interest is unlabelled. The "Super-SILAC" approach thus combines benefits of labelled and label-free experiments.</li>
+>    >    </ol>
+>    >    </details>
+> {: .question}
 
 # Guideline: How to Choose Your Technique
 Considering the points mentioned above, the following guideline may help you in finding the right method for your scientific question:
