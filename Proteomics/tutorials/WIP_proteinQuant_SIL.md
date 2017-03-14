@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
-topic_name: Peptide and Protein Quantification via Stable Isotope Labelling (SIL)
-tutorial_name: proteinQuant_SIL
+topic_name: Proteomics
+tutorial_name: WIP_proteinQuant_SIL
 ---
 
 # Introduction
@@ -24,6 +24,7 @@ If you still are in the planning phase of your quantitative proteomics experimen
 > 1. [Importing and Converting Peptide and Protein IDs](#importing-ids)
 > 3. [Quant to ID matching](#quant-to-id-matching)
 > 4. [Evaluation and Optimization of Quantitation Results](#evaluation-and-optimization-of-quantitation-results)
+{: .agenda}
 
 
 # MS1 Feature Detection
@@ -34,7 +35,8 @@ The tool settings need to be carefully tested and evaluated manually to obtain o
 > ### :pencil2: Hands-on: MS1 Feature Detection
 > 
 > Here, we will use a quantitative comparison of **HEK _OR_ E.coli** cell lysate as a test dataset. In this experiment, the very same cell lysate was once labelled with light, once with heavy **dimethyl _OR_ SILAC** and both samples were subsequently mixed in a certain ratio.
-> Your objective in this hands-on-tutorial is to find out the correct mixing ratio. *And no, the ratio is not mentioned in the description of the dataset on PRIDE. We left out that particular information on purpose. Haha.*
+> Your objective in this hands-on-tutorial is to find out the correct mixing ratio.
+{: .hands_on}
 
 <a name="importing-ids"/></a>
 # Importing and Converting Peptide and Protein IDs
