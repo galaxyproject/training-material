@@ -2,7 +2,7 @@ GalaxyP Training material
 =================
 
 topic | features
-:-- | :--: | --:
+:-- | :--: 
 [Database Handling](tutorials/database-handling.md) | [:book:](tutorials/database-handling.md)
 [Peptide and Protein ID](tutorials/proteinID_SG_PS.md) | [:book:](tutorials/proteinID_SG_PS.md)
 [Protein Quantitation by Stable Isotope Labelling (SIL)](tutorials/WIP_proteinQuant_SIL.md) | [:book:](tutorials/WIP_proteinQuant_SIL.md)
