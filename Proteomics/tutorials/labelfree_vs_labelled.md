@@ -18,7 +18,7 @@ A basic overview of different quantitation techniques is shown below ([original 
 > In this tutorial, we will deal with:
 >
 > 1. [Drawbacks and Benefits of Labelled Quantitation](#drawbacks-and-benefits-of-labelled-quantitation)
-> 2. [Guideline: How to Choose Your Technique](#guideline:-how-to-choose-your-technique)
+> 2. [Guideline: How to Choose Your Technique](#guideline-how-to-choose-your-technique)
 > {: .agenda}
 
 
@@ -55,8 +55,7 @@ Labelled techniques like the ["Super-SILAC"](https://www.ncbi.nlm.nih.gov/pubmed
 >    >    <details>
 >    >    <summary>Click to view answers</summary>
 >    >    <ol type="1">
->    >    <li>In metabolic labelling (e.g. "SILAC"), samples like cells or whole animals are labelled *in vivo* by providing amino acids containing stable isotope before starting the experiment.
-In chemical labelling, samples are labelled *in vitro* after extracting the proteins.</li>
+>    >    <li>In metabolic labelling (e.g. "SILAC"), samples like cells or whole animals are labelled *in vivo* by providing amino acids containing stable isotope before starting the experiment. In chemical labelling, samples are labelled *in vitro* after extracting the proteins.</li>
 >    >    <li>The "Super-SILAC" approach features mixing of easy obtainable control samples that are related to the sample of interest. An example is to use a mixture of several breast cancer cell lines to compare to breast cancer patient samples. The control sample usually is labelled with heavy isotopes, while the sample of interest is unlabelled. The "Super-SILAC" approach thus combines benefits of labelled and label-free experiments.</li>
 >    >    </ol>
 >    >    </details>
