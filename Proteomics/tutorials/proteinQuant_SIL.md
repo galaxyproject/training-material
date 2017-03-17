@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 topic_name: Proteomics
-tutorial_name: WIP_proteinQuant_SIL
+tutorial_name: proteinQuant_SIL
 ---
 
 # Introduction
