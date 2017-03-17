@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
-topic_name: Peptide and Protein Quantification via Stable Isotope Labelling (SIL)
-tutorial_name: proteinQuant_SIL
+topic_name: Proteomics
+tutorial_name: WIP_proteinQuant_SIL
 ---
 
 # Introduction
@@ -16,15 +16,19 @@ The tutorial covers *relative* quantitation only (i.e. comparison of abundances 
 
 If you still are in the planning phase of your quantitative proteomics experiment, you may want to consider our tutorial on different [labelling methods](./labelfree-vs-labelled.md) first.
 
+> :pencil2: Hands-on: Introduction
+> In the Hands-on section of this tutorial, we will use a quantitative comparison of **HEK _OR_ E.coli** cell lysate as a test dataset. In this experiment, the very same cell lysate was once labelled with light, once with heavy **dimethyl _OR_ SILAC** and both samples were subsequently mixed in a certain ratio.
+> Your objective in this hands-on-tutorial is to find out the correct mixing ratio of the test sample.
+
 > ### Agenda
 >
 > In this tutorial, we will deal with:
 >
-> 2. [MS1 Feature Detection](#ms1-feature-detection)
-> 1. [Importing and Converting Peptide and Protein IDs](#importing-ids)
+> 1. [MS1 Feature Detection](#ms1-feature-detection)
+> 2. [Importing and Converting Peptide and Protein IDs](#importing-and-converting-peptide-and-protein-ids)
 > 3. [Quant to ID matching](#quant-to-id-matching)
 > 4. [Evaluation and Optimization of Quantitation Results](#evaluation-and-optimization-of-quantitation-results)
-
+{: .agenda}
 
 # MS1 Feature Detection
 Quantitation on MS1 level may in principle be carried out without prior knowledge of peptide / protein IDs. However, some quantitation algorithms take the IDs as an input to make sure that every PSM that was identified is also quantified. This is not the case in our example here. 
@@ -33,11 +37,11 @@ The tool settings need to be carefully tested and evaluated manually to obtain o
 
 > ### :pencil2: Hands-on: MS1 Feature Detection
 > 
-> Here, we will use a quantitative comparison of **HEK _OR_ E.coli** cell lysate as a test dataset. In this experiment, the very same cell lysate was once labelled with light, once with heavy **dimethyl _OR_ SILAC** and both samples were subsequently mixed in a certain ratio.
-> Your objective in this hands-on-tutorial is to find out the correct mixing ratio. *And no, the ratio is not mentioned in the description of the dataset on PRIDE. We left out that particular information on purpose. Haha.*
+> {: .hands_on}
 
-<a name="importing-ids"/></a>
+
 # Importing and Converting Peptide and Protein IDs
 
-
 # Quant to ID matching
+
+# Evaluation and Optimization of Quantitation Results
