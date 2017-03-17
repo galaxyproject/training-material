@@ -16,7 +16,7 @@ The tutorial covers *relative* quantitation only (i.e. comparison of abundances 
 
 If you still are in the planning phase of your quantitative proteomics experiment, you may want to consider our tutorial on different [labelling methods](./labelfree-vs-labelled.md) first.
 
-> :pencil2: Hands-on: Introduction
+> ### :pencil2: Hands-on: Introduction
 > In the Hands-on section of this tutorial, we will use a quantitative comparison of **HEK _OR_ E.coli** cell lysate as a test dataset. In this experiment, the very same cell lysate was once labelled with light, once with heavy **dimethyl _OR_ SILAC** and both samples were subsequently mixed in a certain ratio.
 > Your objective in this hands-on-tutorial is to find out the correct mixing ratio of the test sample.
 
