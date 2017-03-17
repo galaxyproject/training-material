@@ -1,6 +1,6 @@
 ---
 layout: tutorial_hands_on
-topic_name: Peptide and Protein ID
+topic_name: proteomics
 tutorial_name: proteinID_SG_PS
 ---
 
@@ -34,6 +34,7 @@ you can use the constructed database before the **DecoyDatabase** :wrench: step.
 > 3. [Peptide and Protein Inference](#peptide-and-protein-id) 
 > 4. [Analysis of Contaminants](#analysis-of-contaminants)
 > 5. [Peptide and Protein Evaluation](#evaluation-of-peptide-and-protein-ids)
+> {: .agenda}
 
 
 # Preparing raw data
@@ -49,16 +50,22 @@ Raw data conversion is the first step of any proteomic data analysis. The most c
 >
 >	> ### :nut_and_bolt: Comment: Local Use of MSConvert
 >	> The vendor libraries used by MSConvert need a Windows system and is therefore rarely implemented in Galaxy instances. If ***msconvert*** :wrench: is not available in your Galaxy instance, please install the software on a Windows computer and run the conversion locally. You can find a detailed description of the necessary steps [here](http://genesis.ugent.be/files/costore/practicals/bioinformatics-for-proteomics/1-Peptide-and-Protein-Identification/1.2-Peak-List-Generation/1.2-Peak-List-Generation.pdf). Afterwards, upload the resulting mzML file to your Galaxy history.
+>   > {: .comment}
 >
 > 5. Run ***PeakPickerHiRes*** :wrench: on the resulting mzML file.
+>
 >	> ### :nut_and_bolt: Comment: Peak Picking
 >	> Depending on your machine settings, raw data will be generated either in profile mode or centroid mode. For most peptide search engines, the data have to be converted to centroid mode, a process called "peak picking". Machine vendors offer algorithms to extract peaks from profile raw data. This is implemented in ***msconvert*** :wrench: and can be run in parallel to the mzML conversion. However, the OpenMS tool ***PeakPickerHiRes*** :wrench: is reported to generate better results ([Lange et al., 2006, Pac Symp Biocomput](https://www.ncbi.nlm.nih.gov/pubmed/17094243)) and is therefore recommended for quantitative studies ([Vaudel et al., 2010, Proteomics](https://www.ncbi.nlm.nih.gov/pubmed/19953549)).
 >	> If your data were generated on a low resolution mass spectrometer, use ***PeakPickerWavelet*** :wrench: instead.
+>   > {: .comment}
+> 
 > 6. Run ***FileConverter*** :wrench: on the picked mzML to convert to mgf format.
 > 7. Change the ***Datatype*** of the ***FileConverter*** :wrench: output to mgf by clicking the pencil :pencil: icon.
+> {: .hands_on}
+
 
 # Peptide and Protein ID
-MS/MS experiments identify peptides by isolating them and subsequently colliding them with a gas for fragmentation. This method generates a spectrum of peptide fragment masses for each isolated peptide - an MS2 spectrum. To find out the peptide sequences, the MS2 spectrum is compared to a theoretical spectrum generated from a protein database. This step is called peptide-to-spectrum (also: spectrum-to-sequence) matching. Accoringly, a peptide that is successfully matched to a sequence is termed PSM (Peptide-Spectrum-Match). There can be multiple PSMs per peptide, if the peptide was fragmented several times. Different peptide search engines have been developed to fulfill the matching procedure. 
+MS/MS experiments identify peptides by isolating them and subsequently colliding them with a gas for fragmentation. This method generates a spectrum of peptide fragment masses for each isolated peptide - an MS2 spectrum. To find out the peptide sequences, the MS2 spectrum is compared to a theoretical spectrum generated from a protein database. This step is called peptide-to-spectrum (also: spectrum-to-sequence) matching. Accordingly, a peptide that is successfully matched to a sequence is termed PSM (Peptide-Spectrum-Match). There can be multiple PSMs per peptide, if the peptide was fragmented several times. Different peptide search engines have been developed to fulfill the matching procedure. 
 
 It is generally recommended to use more than one peptide search engine and use the combined results for the final peptide inference ([Shteynberg et al., 2013, Mol. Cell. Proteomics](https://www.ncbi.nlm.nih.gov/pubmed/23720762)). Again, there are several software solutions for this, e.g. iProphet (TPP) or ConsensusID (OpenMS). In this tutorial we will use ***Search GUI*** :wrench:, as it can automatically search the data using several search engines. Its partner tool ***Peptide Shaker*** :wrench: is then used to combine and evaluate the search engine results. 
 
@@ -81,6 +88,8 @@ In bottom-up proteomics, it is necessary to combine the identified peptides to p
 				<li> 328 peptides contain an oxidized methionine (MeO). To get to this number, you can use ***Select*** :wrench: on the Peptide Report and search for either "Oxidation of M" or "M\<ox\>".</li>
 >	>   	 </ol>
 >	>    </details>
+>   > {: .question}
+> {: .hands_on}
 
 # Analysis of Contaminants
 The FASTA database used for the peptide to spectrum matching contained some entries that were not expected to stem from the HeLa cell lysate, but are common contaminations in LC-MS/MS samples. The main reason to add those is to avoid false assignment of the spectra to other proteins. However, it also enables you to check for contaminations in your samples. 
@@ -101,6 +110,8 @@ The FASTA database used for the peptide to spectrum matching contained some entr
 				<li> There should be five mycoplasma proteins in your protein list. However, all of them stem from different mycoplasma species. Also, every protein was identified by one peptide only. You can see this is column 17-19 of your output. These observations makes it very likely that we are facing false positives here. As we were allowing for a false discovery rate of 1 %, we would expect 12 false positive proteins in our list. False positives are distributed to random peptides in the FASTA database. Our database consists of about 20,000 human proteins and 4,000 mycoplasma proteins. Therefore, we would expect 20 % of all false positives to match to mycoplasma proteins.</li>
 >	>   	 </ol>
 >	>    </details>
+>   > {: .question}
+> {: .hands_on}
 
 # Evaluation of Peptide and Protein IDs
 ***Peptide Shaker*** :wrench: provides us even with validation results for the identified PSM, peptides and proteins. It classifies all these IDs in either "Confident" or "Doubtful". On each level, the meaning differs somewhat. PSMs are marked as "Doubtful" when the measured MS2 spectrum did not fit perfectly to the theoretical spectrum. Peptides have a combined scoring of their PSMs. They are marked as "Doubtful", when the score is below a set threshold. The threshold is defined by the false discovery rate (FDR). At last, proteins are marked as "Doubtful", when they were identified by only a single peptide or when only identified by "Doubtful" peptides.
