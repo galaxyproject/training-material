@@ -1,10 +1,11 @@
-# Secretome Prediction using GO annotations and WoLF PSORT
-
-A workflow to predict secretome proteins, originally published in [(Sigloch et al., BBA, 2016)](https://www.ncbi.nlm.nih.gov/pubmed/?term=sigloch+cathepsin).
+# Secretome Prediction using GO annotations and localization prediction
 
 ## Introduction
 
 The cellular secretome contains both proteins that are secreted by cells and proteins that are shed from the cellular surface. Here, we describe an approach to predict those proteins in an input list that would be expected in the cellular secretome. This approach combines Gene Ontology (GO) annotation and the [WoLF PSORT](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC1933216/) algorithm for localization prediction. 
+
+> ### :nut_and_bolt: Comment: Localization Prediction by WoLF PSORT
+> WoLF PSORT :wrench: is currently the only localization prediction algorithm implemented in Galaxy. However, it is rather out-of-date. You may want to replace WoLF PSORT by a newer algorithm with a better performance. If so, remember that you will probably have to adjust the settings for all tools in the workflow that are processing the WoLF PSORT :wrench: output.
 
 We chose to include all proteins that are annotated as, or predicted to be, lysosomal proteins. Lysosomal proteins are routinely secreted by malignant and non-malignant cells in high amounts, due to "leakiness" of the mannose-6-phosphate receptor pathway [1,2]. 
 Furthermore, we chose to exclude proteins annotated as being part of extracellular organelles, e.g. exosomes. While exosomes are secreted by malignant and non-malignant cells, exosomal proteins are expected in the secretome at very low amounts, if not especially enriched for.
@@ -20,11 +21,16 @@ The figure below gives an overview of the Galaxy workflow:
 The workflow needs three input files:
 
   1) A tabular file, the first column containing uniprot accession numbers of the proteins of interest. [Test data](test_data.tabular)
-  2) The complete uniprot GO database for the organism of interest.
+  2) The complete uniprot GO database for the organism of interest, available [via FTP](ftp://ftp.ebi.ac.uk/pub/databases/GO/goa/). To download the human GOA file needed for the test input, paste the following link to the Galaxy upload tool: ftp://ftp.ebi.ac.uk/pub/databases/GO/goa/HUMAN/goa_human.gaf.gz.
   3) The complete GO Open Biomedical Ontology (OBO), i.e. "GO term tree", accessible at http://purl.obolibrary.org/obo/go/go.obo.
 
 > ### :nut_and_bolt: Comment: Test data
 > The provided test dataset for input 1 is a list of human proteins, identified by LC-MS/MS in the cellular supernatant of MDA-MB-231 cells, originally published in [(Sigloch et al., BBA, 2016)](https://www.ncbi.nlm.nih.gov/pubmed/?term=sigloch+cathepsin).
+> {: .comment}
+
+> ### :nut_and_bolt: Comment: Uniprot Gene Ontology Association (GOA) files
+> - Information about different GOA file types can be found [here](https://www.ebi.ac.uk/GOA/downloads).
+> - Information about the structure of the files can be found [here](ftp://ftp.ebi.ac.uk/pub/databases/GO/goa/HUMAN/README).
 > {: .comment}
 
 ## Citation
