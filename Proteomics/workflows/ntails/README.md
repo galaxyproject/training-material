@@ -4,7 +4,7 @@ N-Tails is a special Proteomics technique to analyze peptide abundancy changes o
 This is best explained by an example: directly after translation, a protein has exactly one N-terminus. When a protease is cutting the protein in half, each half has its own N-terminus. While the N-terminus of the first half protein is exactly the same as the one of the full protein precursor ("native N-terminus"), the N-terminus of the second half is different ("neo-N-terminus") and depends on the amino acid sequence where the protein was cut. 
 The N-Tails technique includes the use of heavy isotope dimethyl labelling.
 
-The figure below illustrates the mechanism of N-Tails. It was originally published by [Stefan Tholen (2014)](link zu doktorarbeit in freidok). Further reading on N-Tails and other N-terminal techniques, see [Tholen et al., Springer Vienna, 2013](http://dx.doi.org/10.1007/978-3-7091-0885-7_5).
+The figure below illustrates the mechanism of N-Tails. It was originally published by Stefan Tholen (doctoral thesis, not available online). Further reading on N-Tails and other N-terminal techniques, see [Tholen et al., Springer Vienna, 2013](http://dx.doi.org/10.1007/978-3-7091-0885-7_5).
 
 ![N-Tails technique](../../images/WF_ntails_technique.png)
 
@@ -16,9 +16,9 @@ The N-Tails technique was originally designed to research protease biology and h
 > This warning is not specific for the N-Tails technique, but applies as well to other proteomic N-terminal screening techniques (e.g. COFRADIC).
 > {: .comment}
 
-This workflow was originally built in the OpenMS framework "TOPPAS" and published in [Lai et al., ?, 201?](). It was converted to OpenMS v2.1 and rebuild for the Galaxy framework by Melanie Föll. It was designed for data analysis of a three samples combined in one MS run, a technique based on dimethyl stable isotope labeling (SIL). For more information on SIL, consult [this tutorial](../../tutorials/proteinQuant_SIL.md). The original data were generated using pre-fractionation. Thus, peptides of one biological experiment are measured in multiple consecutive MS runs (one run per fraction). 
+This workflow was originally built in the OpenMS framework "TOPPAS" and published in [Lai, Weisser et al., MCP, 2016](https://www.ncbi.nlm.nih.gov/pubmed/27087653). It was converted to OpenMS v2.1, rebuild for the Galaxy framework and tested on the original dataset by Melanie Föll. It was designed for data analysis of a three samples combined in one MS run, a technique based on dimethyl stable isotope labeling (SIL). For more information on SIL, consult [this tutorial](../../tutorials/proteinQuant_SIL.md). The original data were generated using pre-fractionation. Thus, peptides of one biological experiment are measured in multiple consecutive MS runs (one run per fraction). 
 
-The figure below gives an overview of the used Galaxy nodes. For further description of the workflow, please consider the [original publication]().
+The figure below gives an overview of the used Galaxy nodes. For further description of the workflow, please consider the [original publication](https://www.ncbi.nlm.nih.gov/pubmed/27087653).
 
 ![N-Tails Galaxy Workflow](../../images/WF_ntails_tripleDimethylLabel.PNG)
 
@@ -40,4 +40,4 @@ The workflow needs three input files:
 If you use this workflow directly, or any derivative of it, in work leading to a scientific publication,
 please cite:
 
-Lai et al ???
+Lai, Z.W., Weisser, J., Nilse, L., Costa, F., Keller, E., Tholen, M., Kizhakkedathu, J.N., Biniossek, M., Bronsert, P., and Schilling, O. (2016). Formalin-Fixed, Paraffin-Embedded Tissues (FFPE) as a Robust Source for the Profiling of Native and Protease-Generated Protein Amino Termini. Mol. Cell. Proteomics 15, 2203–2213.
