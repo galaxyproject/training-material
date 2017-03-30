@@ -127,6 +127,8 @@ So if you want to visualise locally how the website will look like, you need to 
 $ make install
 ```
 
+If you encounter any errors make sure `ruby` and it's corresponding developer packages (e.g. `ruby-dev`, `ruby2.3-dev`) are installed.
+
 To run a local Jekyll server and visualize the changes, launch using the [Makefile](Makefile):
 
 ```
