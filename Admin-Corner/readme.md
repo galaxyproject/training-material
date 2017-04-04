@@ -8,6 +8,7 @@ Administration of Galaxy Servers can be a complex task. Here, we propose some ma
 Several deck of slides are available for this topic:
 
 - [General introduction about Galaxy server administration](http://galaxyproject.github.io/training-material/Admin-Corner/slides/)
+- [Galaxy Database schema](http://galaxyproject.github.io/training-material/Admin-Corner/slides/database_schema.html)
 - Slide deck related to the tutorials:
     - [Docker and Galaxy](http://galaxyproject.github.io/training-material/Admin-Corner/slides/galaxy_docker.html)
 
@@ -16,7 +17,7 @@ Several deck of slides are available for this topic:
 Some tutorials with hands-on are available for this topic:
 
 - [Move from dev instance to production instance](http://galaxyproject.github.io/training-material/Admin-Corner/tutorials/dev_to_production.html#/)
-- [Galaxy Database schema](http://galaxyproject.github.io/training-material/Admin-Corner/slides/database_schema.html)
+- [Galaxy Database schema](http://galaxyproject.github.io/training-material/Admin-Corner/tutorials/Database_Schema.html#/)
 
 
 # Contributors
