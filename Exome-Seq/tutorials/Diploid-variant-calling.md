@@ -1,4 +1,4 @@
-Variant calling: Diploid case
+﻿Variant calling: Diploid case
 ===
 
 > Much of Galaxy-related features described in this section have been developed by Björn Grüning (@bgruening) and configured by Dave Bouvier (@davebx).
@@ -110,8 +110,6 @@ docker run -d -p 8080:80 bgruening/galaxy-exome-seq-training
 ```
 
 It will launch a flavored Galaxy instance available on [http://localhost:8080 ](http://localhost:8080).
-
-You can also use [Freiburg Galaxy instance](http://galaxy.uni-freiburg.de/).
 
 ## The data
 

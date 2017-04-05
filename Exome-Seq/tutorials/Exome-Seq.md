@@ -1,4 +1,4 @@
-Galaxy workshop on Exome sequencing data analysis
+﻿Galaxy workshop on Exome sequencing data analysis
 ===
 
 Exome sequencing means that all protein-coding genes in a genome are sequenced.
@@ -93,8 +93,6 @@ docker run -d -p 8080:80 bgruening/galaxy-training-exome-seq
 ```
 
 It will launch a flavored Galaxy instance available on [http://localhost:8080 ](http://localhost:8080).
-
-You can also use [Freiburg Galaxy instance](http://galaxy.uni-freiburg.de/) if you have an account there.
 
 ## Data pre-processing
 

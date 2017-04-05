@@ -1,4 +1,4 @@
----
+﻿---
 layout: tutorial_hands_on
 topic_name: RNA-Seq
 tutorial_name: ref_based
@@ -41,10 +41,6 @@ We have extracted sequences from the Sequence Read Archive (SRA) files to build 
 >
 > 1. Create a new history for this RNA-seq exercise
 > 2. Import a FASTQ file pair (*e.g.*  `GSM461177_untreat_paired_chr4_R1.fastq` and `GSM461177_untreat_paired_chr4_R2.fastq`) from [Zenodo](http://dx.doi.org/10.5281/zenodo.290221)
->
->    > ### :nut_and_bolt: Comments
->    > If you are using the [Freiburg Galaxy instance](http://galaxy.uni-freiburg.de), you can load the dataset using 'Shared Data' <i class="fa fa-long-arrow-right"></i> 'Data Libraries' <i class="fa fa-long-arrow-right"></i> 'Galaxy Courses' <i class="fa fa-long-arrow-right"></i> 'RNA-Seq' <i class="fa fa-long-arrow-right"></i> 'fastq'
->    {: .comment}
 >
 >    > ### :bulb: Tip: Importing data via links
 >    >
