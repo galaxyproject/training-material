@@ -12,9 +12,10 @@ Incorporation of stable isotopes results in different peptide masses on MS1 leve
 
 This tutorial deals with protein quantitation via stable isotope labelling (SIL). We will use tools of the OpenMS suite.  
 Because we solely cover *quantitation*, you need to perform peptide and protein ID in beforehand. To learn about protein ID in Galaxy, please consider [this tutorial](./proteinID_SG_PS.md).
-The tutorial covers *relative* quantitation only (i.e. comparison of abundances in different samples, no absolute quantitation of peptides / proteins).
 
-If you still are in the planning phase of your quantitative proteomics experiment, you may want to consider our tutorial on different [labelling methods](./labelfree-vs-labelled.md) first.
+This tutorial covers *relative* quantitation only (i.e. comparison of abundances in different samples, no *absolute* quantitation of peptides / proteins).
+
+If you still are in the planning phase of your quantitative proteomics experiment, you may want to consider our tutorial on different [quantitation methods](./labelfree-vs-labelled.md) first.
 
 > ### :pencil2: Hands-on: Introduction
 > In the Hands-on section of this tutorial, we will use a quantitative comparison of **HEK _OR_ E.coli** cell lysate as a test dataset. In this experiment, the very same cell lysate was once labelled with light, once with heavy **dimethyl _OR_ SILAC** and both samples were subsequently mixed in a certain ratio. For a detailed description of the dataset, please refer to the description in the [PRIDE archive]().
@@ -78,19 +79,19 @@ The tool settings need to be carefully tested and evaluated manually to obtain o
 >  
 > Benchmarking parameters for `FeatureFinderMultiplex`:
 >     1. Number of features that can be linked to peptide IDs (and vice-versa). 
->     2. Although the first parameter gives a good measure of quality, it does not rule out that false positive features or IDs were matched. To control for false positives, you will have to scan through your data manually. To do so, open both the `FeatureFinderMultiplex` consensusXML output and the mzidentML file into [TOPPView](). 
+>     2. Although the first parameter gives a good measure of quality, it does not rule out that false positive features or IDs were matched. To check for false positives, you will have to scan through your data manually. To do so, open both the `FeatureFinderMultiplex` consensusXML output and the mzidentML file into [TOPPView](). 
 >         - **Caution** Manual evaluation is prone to biases, as you can look solely at small parts of your data. To avoid this, try to look at the *very same* areas / the same features of all different result files.
 >     3. If you were using the option **`knockouts present` **, check, if the detected "knockout features" fit to your expectations.
     
 > ### Hands-on: Evaluation and Optimization of Quantitation Results
 > 
 > 1. Run the whole WF again, change ** a single setting (averagine?)** in `FeatureFinderMultiplex`.
-> 1. Run `FileInfo` :wrench: on the results -> number of ID-Feature-matches
-> 2. Run `dongs` :wrench: on the results -> restrict to a small areas
+> 2. Run `FileInfo` :wrench: on the results -> number of ID-Feature-matches
+> 3. Run `dongs` :wrench: on the results -> restrict to a small areas
 > 4. Open results in TOPPView.
 >
 >   > ### :question: Questions
 >   > 1. Which setting led to more ID-Feature-matches?
->   > 1. Using the default settings, how many features were not mapped to IDs? How many IDs were not mapped to features?
+>   > 2. Using the default settings, how many features were not mapped to IDs? How many IDs were not mapped to features?
 >   > {: .questions}
 > {: .hands_on}
