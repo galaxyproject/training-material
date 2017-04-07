@@ -37,15 +37,22 @@ In this tutorial, we will explore **Protein Database Downloader** :wrench: for g
 > 4. Click on `Execute`. There will be a new dataset named `Protein database` in your history, now.
 > 5. Rename the `Protein database` to `Main database`.
 >
->	> ### :bulb: Tip: Types of uniprot databases
->	> Uniprot offers several types of databases. You may choose to download only reviewed (UniProtKB/Swissprot) databases, only unreviewed (UniProtKB/TREMBL) or both (UniProtKB). In well researched organisms, e.g. Homo sapiens or D. melanogaster, reviewed (Swissprot) databases are always kept up-to-date and may lead to cleaner search results. In other organisms, it might be wiser to include the unreviewed (TREMBL) database not to miss important proteins.
->   >
->	> You may also include protein isoforms by setting the tick box `Include isoform data` to `Yes`.
->   > {: .tip}
+>	 > ### :bulb: Tip: Types of uniprot databases
+>	 > Uniprot offers several types of databases. You may choose to download only reviewed (UniProtKB/Swissprot) databases, only unreviewed (UniProtKB/TREMBL) or both (UniProtKB). In well researched organisms, e.g. Homo sapiens or D. melanogaster, reviewed (Swissprot) databases are always kept up-to-date and may lead to cleaner search results. In other organisms, it might be wiser to include the unreviewed (TREMBL) database not to miss important proteins.
+>  >
+>	 > You may also include protein isoforms by setting the tick box `Include isoform data` to `Yes`.
+>  > {: .tip}
 >
->	> ### :question: Question
->	> What is the difference between a "reference proteome set" and a "complete proteome set"?
->   > {: .question}
+>	 > ### :question: Question
+>  > What is the difference between a "reference proteome set" and a "complete proteome set"?
+>  >
+>  >  <details>
+>  >  <summary>Click to view answer!</summary>
+>  >  <ol type="1">
+>  >  <li> A UniProt complete proteome consists of the set of proteins thought to be expressed by an organism whose genome has been completely sequenced. A reference proteome is the complete proteome of a representative, well-studied model organism or an organism of interest for biomedical research. Reference proteomes constitute a representative cross-section of the taxonomic diversity to be found within UniProtKB. They include the proteomes of well-studied model organisms and other proteomes of interest for biomedical and biotechnological research. Species of particular importance may be represented by numerous reference proteomes for specific ecotypes or strains of interest. [Link to source](http://www.uniprot.org/help/reference_proteome)</li>
+>  >  </ol>
+>  >  </details>
+>  > {: .question}
 > {: .hands_on}
 
 
@@ -70,18 +77,18 @@ A widely used database for common contaminants is the **c**ommon **R**epository 
 > 4. Rename the **Tabular-to-FASTA** :wrench: output to "Tagged cRAP database".
 >
 >
->   > ### :question: Question
->   > 1. The cRAP database contains some human proteins. What does it mean if you identify those typical contaminants in a human sample? 
->   > 2. What does it mean in a non-human sample?
->   >
->   >    <details>
->   >    <summary>Click to view answers</summary>
->   >    	<ol type="1">
->   >    		<li> In samples stemming from a human source, identified human contaminants do not necessarily mean a contaminated sample. The proteins may as well stem from the original sample. Be careful with the interpretation. </li>
-			<li> In samples from non-human sources, identified human contaminants do mean contamination by the experimenter. </li>
->   >   	 </ol>
->   >    </details>
->   > {: .question}
+>  > ### :question: Question
+>  > 1. The cRAP database contains some human proteins. What does it mean if you identify those typical contaminants in a human sample? 
+>  > 2. What does it mean in a non-human sample?
+>  >
+>  >  <details>
+>  >  <summary>Click to view answers!</summary>
+>  >  <ol type="1">
+>  >  <li> In samples stemming from a human source, identified human contaminants do not necessarily mean a contaminated sample. The proteins may as well stem from the original sample. Be careful with the interpretation. </li>
+>  >  <li> In samples from non-human sources, identified human contaminants do mean contamination by the experimenter. </li>
+>  >  </ol>
+>  >  </details>
+>  > {: .question}
 > {: .hands_on}
 
 
@@ -93,9 +100,9 @@ A widely used database for common contaminants is the **c**ommon **R**epository 
 > 3. Tag each entry in the combined database with the string "MYCOPLASMA_CONTAMINANT" by using **FASTA-to-Tabular** :wrench:, **Add column** :wrench: and **Tabular-to-FASTA** :wrench:, as explained [above](#HO-Contaminant-Databases).
 > 4. Rename the **Tabular-to-FASTA** :wrench: output to "Tagged Mycoplasma database".
 > 
->   > ### :nut_and_bolt: Comment
->   > The reviewed mycoplasma databases do not contain all known proteins. It is better to include also the TREMBL database. Mycoplasma proteomes are relatively small, so even downloading TREMBL will not bloat your main database unneccessarily.
->   > {: .comment}
+>  > ### :nut_and_bolt: Comment
+>  > The reviewed mycoplasma databases do not contain all known proteins. It is better to include also the TREMBL database. Mycoplasma proteomes are relatively small, so even downloading TREMBL will not bloat your main database unneccessarily.
+>  > {: .comment}
 > {: .hands_on}
 
 
@@ -122,11 +129,11 @@ The most common method of peptide and protein FDR calculation is by adding known
 >
 >	> ### :bulb: Tip: Decoy tags
 >	> The string you enter as a decoy tag will be added as a prefix or suffix (your choice) to the description of each decoy protein entry. Thus you can see from which entry in the real database the decoy was computed.
->   > {: .tip}
+> > {: .tip}
 >
 >	> ### :nut_and_bolt: Comment
 >	> **DecoyDatabase**  :wrench: may also take several databases as input which are then automatically merged into one database.
->   > {: .comment}
+> > {: .comment}
 > {: .hands_on}
 
 
