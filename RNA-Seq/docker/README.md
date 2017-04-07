@@ -13,7 +13,7 @@ Galaxy Docker repository for RNA-Seq training material :whale: :eyes:
 To launch:
 
 ```
-docker run -d -p 8080:80 bgruening/galaxy-rna-seq-training
+docker run -d -p 8080:80 biocontainers/galaxy-rna-seq-training
 ```
 
 For more details about this command line or specific usage, please consult the
