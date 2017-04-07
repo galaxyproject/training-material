@@ -76,11 +76,6 @@ change the sequence, but can increase disease risk.
 >  revealed in exome sequencing.
 
 ---
-> ### :nut_and_bolt: Comments
-> In this tutorial, a child has a yet unknown disease. His parents are healthy.
-> We will try to identify the genetic variation that is responsible for the disease
-> using the exome sequencing data from both parents and the child.
-{: .comment}
 
 We will follow the pipeline:
 
@@ -90,18 +85,6 @@ We will follow the pipeline:
 > follows a similar pipeline using genome in the bottle data, but with more details
 > particularly on the theory behind.
 {: .tip}
-
-> ### :pencil2: Hands-on:
->
-> For this tutorials, you can use the [dedicated Docker image](docker/README.md):
->
-> ```
-> docker run -d -p 8080:80 bgruening/galaxy-training-exome-seq
-> ```
->
->It will launch a flavored Galaxy instance available on [http://localhost:8080 ](http://localhost:8080).
->
-{: .hands_on}
 
 ---
 ### Agenda
@@ -115,6 +98,12 @@ In Exome-Seq tutorial, we will deal with:
 {: .agenda}
 
 # Data-preprocessing
+
+> ### :nut_and_bolt: Comments
+> In this tutorial, a child has a yet unknown disease. His parents are healthy.
+> We will try to identify the genetic variation that is responsible for the disease
+> using the exome sequencing data from both parents and the child.
+{: .comment}
 
 Most of the data pre-processing have already be done on the raw exome sequencing.
 The raw exome sequences were mapped on `hg19` version of the human genome. So,
