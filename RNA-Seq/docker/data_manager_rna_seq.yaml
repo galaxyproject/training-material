@@ -11,9 +11,8 @@ data_managers:
       # Items refere to a list of variables you want to run this data manager. You can use them inside the param field with {{ item }}
       # In case of genome for example you can run this DM with multiple genomes, or you could give multiple URLs.
       items:
-        #- ce8
+        - mm10
         - dm3
-        #- mm9
       # Name of the data-tables you want to reload after your DM are finished. This can be important for subsequent data managers
       data_table_reload:
         - all_fasta
@@ -23,9 +22,8 @@ data_managers:
       params:
         - 'all_fasta_source': '{{ item }}'
       items:
-        #- ce8
+        - mm10
         - dm3
-        #- mm9
       data_table_reload:
         # Bowtie creates indices for Bowtie and TopHat
         - bowtie2_indexes
