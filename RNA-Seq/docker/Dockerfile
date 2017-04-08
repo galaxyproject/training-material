@@ -1,6 +1,6 @@
 # Galaxy - RNA-Seq training material
 
-FROM bgruening/galaxy-rna-seq:17.01
+FROM bgruening/galaxy-rna-seq:dev
 
 MAINTAINER Björn A. Grüning, bjoern.gruening@gmail.com
 
