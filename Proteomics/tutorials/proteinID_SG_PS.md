@@ -49,14 +49,14 @@ Raw data conversion is the first step of any proteomic data analysis. The most c
 >
 >	> ### :nut_and_bolt: Comment: Local Use of MSConvert
 >	> The vendor libraries used by MSConvert need a Windows system and is therefore rarely implemented in Galaxy instances. If ***msconvert*** :wrench: is not available in your Galaxy instance, please install the software on a Windows computer and run the conversion locally. You can find a detailed description of the necessary steps [here](http://genesis.ugent.be/files/costore/practicals/bioinformatics-for-proteomics/1-Peptide-and-Protein-Identification/1.2-Peak-List-Generation/1.2-Peak-List-Generation.pdf). Afterwards, upload the resulting mzML file to your Galaxy history.
->   > {: .comment}
+> > {: .comment}
 >
 > 5. Run ***PeakPickerHiRes*** :wrench: on the resulting mzML file.
 >
 >	> ### :nut_and_bolt: Comment: Peak Picking
 >	> Depending on your machine settings, raw data will be generated either in profile mode or centroid mode. For most peptide search engines, the data have to be converted to centroid mode, a process called "peak picking". Machine vendors offer algorithms to extract peaks from profile raw data. This is implemented in ***msconvert*** :wrench: and can be run in parallel to the mzML conversion. However, the OpenMS tool ***PeakPickerHiRes*** :wrench: is reported to generate better results ([Lange et al., 2006, Pac Symp Biocomput](https://www.ncbi.nlm.nih.gov/pubmed/17094243)) and is therefore recommended for quantitative studies ([Vaudel et al., 2010, Proteomics](https://www.ncbi.nlm.nih.gov/pubmed/19953549)).
 >	> If your data were generated on a low resolution mass spectrometer, use ***PeakPickerWavelet*** :wrench: instead.
->   > {: .comment}
+> > {: .comment}
 > 
 > 6. Run ***FileConverter*** :wrench: on the picked mzML to convert to mgf format.
 > 7. Change the ***Datatype*** of the ***FileConverter*** :wrench: output to mgf by clicking the pencil :pencil: icon.
@@ -68,7 +68,7 @@ MS/MS experiments identify peptides by isolating them and subsequently colliding
 
 It is generally recommended to use more than one peptide search engine and use the combined results for the final peptide inference ([Shteynberg et al., 2013, Mol. Cell. Proteomics](https://www.ncbi.nlm.nih.gov/pubmed/23720762)). Again, there are several software solutions for this, e.g. iProphet (TPP) or ConsensusID (OpenMS). In this tutorial we will use ***Search GUI*** :wrench:, as it can automatically search the data using several search engines. Its partner tool ***Peptide Shaker*** :wrench: is then used to combine and evaluate the search engine results. 
 
-In bottom-up proteomics, it is necessary to combine the identified peptides to proteins. This is not a trivial task, as proteins are redundant to some degree. Thus, not every peptide can be assigned to only one protein. Luckily, the ***Peptide Shaker*** :wrench: already takes care of protein inference and even gives us some information on validity of the protein IDs. We will discuss validation in a later [step](#peptide-and-protein-validation) of this tutorial.
+In bottom-up proteomics, it is necessary to combine the identified peptides to proteins. This is not a trivial task, as proteins are redundant to some degree. Thus, not every peptide can be assigned to only one protein. Luckily, the ***Peptide Shaker*** :wrench: already takes care of protein inference and even gives us some information on validity of the protein IDs. We will discuss validation in a [later step](#evaluation-of-peptide-and-protein-ids) of this tutorial.
 
 > ### :pencil2: Hands-on: Peptide and Protein Identification
 >
@@ -80,30 +80,43 @@ In bottom-up proteomics, it is necessary to combine the identified peptides to p
 >	> 1. How many peptides were identified? How many proteins?
 >	> 2. How many peptides with oxidized methionine were identified?
 >	>
->	>    <details>
->	>    <summary>Click to view answers</summary>
->	>    	<ol type="1">
->	>			<li> You should have identified 3,325 peptides and 1,170 proteins.</li>
-				<li> 328 peptides contain an oxidized methionine (MeO). To get to this number, you can use ***Select*** :wrench: on the Peptide Report and search for either "Oxidation of M" or "M\<ox\>".</li>
->	>   	</ol>
->	>    </details>
+>	>  <details>
+>	>  <summary>Click to view answers</summary>
+>	>   <ol type="1">
+>	>	  <li> You should have identified 3,325 peptides and 1,170 proteins.</li>
+>	>	  <li> 328 peptides contain an oxidized methionine (MeO). To get to this number, you can use ***Select*** :wrench: on the Peptide Report and search for either "Oxidation of M" or "M\<ox\>".</li>
+>	>   </ol>
+>	>  </details>
 > > {: .question}
 > {: .hands_on}
 
 > ### :nut_and_bolt: Comment: Important Search GUI and Peptide Shaker Parameters
 > In this tutorial, we ran both ***Search GUI*** :wrench: and ***Peptide Shaker*** :wrench: with standard settings. When you are processing files of a different experiment, you may need to adjust some of the parameters.
 > 1. **Search GUI**
+>
 > Search GUI bundles numerous sequence database search software tools for matching MS/MS to peptide sequences within a database. Describing the parameters for all of these programs is beyond the scope of this tutorial, but some of the key parameters for this software are described below:
-> - *Database search programs.* A number of popular sequence database searching programs are available, and can be selected by the user. The more selected, the more processor time is necessary; however, matching MS/MS spectra to peptide sequence with more programs provides more confidence in results. In practice, 2-3 programs used offers high confidence while keeping analysis times reasonable.
-> - *Data quality parameters.* Values that reflect the performance of the instrument used can be entered. These include mass accuracy measures for both precursor ions and the resulting MS/MS fragment ions. For the workflow provided here, these have been set with default values for high resolution Orbitrap mass spectrometer instrumentation.
-> - *Covalent modifications.* A variety of covalent modifications are built in to the Search GUI parameters. Typing the modification into the field (e.g. “oxidation”) brings up the available modifications of that type to specific side chains or the n- or c-terminus of the protein and/or peptide.
+>
+> a) *Database search programs.* A number of popular sequence database searching programs are available, and can be selected by the user. The more selected, the more processor time is necessary; however, matching MS/MS spectra to peptide sequence with more programs provides more confidence in results. 
+> In practice, 2-3 programs used offers high confidence while keeping analysis times reasonable.
+>
+> b) *Data quality parameters.* Values that reflect the performance of the instrument used can be entered. These include mass accuracy measures for both precursor ions and the resulting MS/MS fragment ions. For the workflow provided here, these have been set with default values for high resolution Orbitrap mass spectrometer instrumentation.
+>
+> c) *Covalent modifications.* A variety of covalent modifications are built in to the Search GUI parameters. Typing the modification into the field (e.g. “oxidation”) brings up the available modifications of that type to specific side chains or the n- or c-terminus of the protein and/or peptide.
+>
 > ![parameters_SG](../images/parameters_SG.png)
 >
 > 2. **Peptide Shaker**
+>
 > The Galaxy implementation of Peptide Shaker is fairly simple in terms of parameters available to the user:
-> a) *Processing and filtering options.* If desired, users can select “Advanced” processing or filtering options. The processing options allow a customized level of false discovery rate (FDR) to be set for peptide and protein identifications, while the filtering options offer selection of length of peptides to be considered, and thresholds for mass accuracy. The default, validated values for processing and filtering are set in stored workflows, and follow community standards (e.g. 1% FDR levels, etc)
-> b) *Outputs.* Peptide Shaker offers a variety of outputs which a user can select. A compressed file (.zip) can be made containing all information needed to view the results in the standalone Peptide Shaker viewer; a peptide spectrum match (PSM) report file, which provides all relevant information on all peptide sequences matched to MS/MS spectra in the analysis; a mzidentML file can be created that contains all peptide sequence matching information and can be utilized by compatible downstream software. Other outputs are focused on the inferred proteins identified from the PSMs, as well as phosphorylation reports, relevant in a phosphoprotoemics experiment has been undertaken. The Certificate of Analysis provides details on all the parameters used by both Search GUI and Peptide Shaker in the analysis. All outputs can be downloaded from the Galaxy instance to the local computer if desired.
+>
+> a) *Processing and filtering options.* If desired, users can select “Advanced” processing or filtering options. The processing options allow a customized level of false discovery rate (FDR) to be set for peptide and protein identifications, while the filtering options offer selection of length of peptides to be considered, and thresholds for mass accuracy. 
+> The default, validated values for processing and filtering are set in stored workflows, and follow community standards (e.g. 1% FDR levels, etc.).
+>
+> b) *Outputs.* Peptide Shaker offers a variety of outputs which a user can select. A compressed file (.zip) can be made containing all information needed to view the results in the standalone Peptide Shaker viewer; a peptide spectrum match (PSM) report file, which provides all relevant information on all peptide sequences matched to MS/MS spectra in the analysis; a mzidentML file can be created that contains all peptide sequence matching information and can be utilized by compatible downstream software. 
+> Other outputs are focused on the inferred proteins identified from the PSMs, as well as phosphorylation reports, relevant in a phosphoprotoemics experiment has been undertaken. The Certificate of Analysis provides details on all the parameters used by both Search GUI and Peptide Shaker in the analysis. All outputs can be downloaded from the Galaxy instance to the local computer if desired.
+>
 > ![parameters_PS](../images/parameters_PS.png)
+>
 > {: .comment}
 
 # Analysis of Contaminants
@@ -118,14 +131,14 @@ The FASTA database used for the peptide to spectrum matching contained some entr
 >	> 1. Which contaminants did you identify? Where do these contaminations come from?
 >	> 2. How many mycoplasma proteins did you identify? Does this mean that the analyzed HeLa cells were infected with mycoplasma?
 >	>
->	>    <details>
->	>    <summary>Click to view answers</summary>
->	>    	<ol type="1">
->	>			<li> TRY_BOVIN is bovine trypsin. It was used to degrade the proteins to peptides. ALBU_BOVIN is bovine serum albumin. It is added to cell culture medium in high amounts.</li>
-				<li> There should be five mycoplasma proteins in your protein list. However, all of them stem from different mycoplasma species. Also, every protein was identified by one peptide only. You can see this in column 17-19 of your output. These observations make it very likely that we are facing false positives here. As we were allowing for a false discovery rate of 1 %, we would expect 12 false positive proteins in our list. False positives are distributed to random peptides in the FASTA database. Our database consists of about 20,000 human proteins and 4,000 mycoplasma proteins. Therefore, we would expect 20 % of all false positives to match to mycoplasma proteins.</li>
->	>   	</ol>
->	>    </details>
->   > {: .question}
+>	>  <details>
+>	>  <summary>Click to view answers</summary>
+>	>  	<ol type="1">
+>	>		<li> TRY_BOVIN is bovine trypsin. It was used to degrade the proteins to peptides. ALBU_BOVIN is bovine serum albumin. It is added to cell culture medium in high amounts.</li>
+> >   <li> There should be five mycoplasma proteins in your protein list. However, all of them stem from different mycoplasma species. Also, every protein was identified by one peptide only. You can see this in column 17-19 of your output. These observations make it very likely that we are facing false positives here. As we were allowing for a false discovery rate of 1 %, we would expect 12 false positive proteins in our list. False positives are distributed to random peptides in the FASTA database. Our database consists of about 20,000 human proteins and 4,000 mycoplasma proteins. Therefore, we would expect 20 % of all false positives to match to mycoplasma proteins.</li>
+>	>   </ol>
+>	>  </details>
+> > {: .question}
 > {: .hands_on}
 
 # Evaluation of Peptide and Protein IDs
