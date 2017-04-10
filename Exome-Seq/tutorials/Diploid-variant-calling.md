@@ -1,11 +1,8 @@
-﻿---
+---
 layout: tutorial_hands_on
 topic_name: Exome-Seq
 tutorial_name: Diploid-variant-calling
 ---
-
-Variant calling: Diploid case
-===
 
 > Much of Galaxy-related features described in this section have been developed by Björn Grüning (@bgruening) and configured by Dave Bouvier (@davebx).
 
@@ -46,7 +43,7 @@ In this tutorial, we will deal with:
 Before going forward with an actual genotype calling in Galaxy let's take a look as some basic ideas behind modern variant callers.
 
 ### :pencil2: Hands-on: SNP calling and genotyping examples:
-
+>
 > Consider a set of sequencing reads derived from a diploid individual:
 > 
 > ```
@@ -65,6 +62,8 @@ Before going forward with an actual genotype calling in Galaxy let's take a look
 >  * A library preparation artifact (e.g., a PCR error);
 >  * A base call error;
 >  * A misalignment (though unlikely in the above example).
+>
+{: .hands_on}
  
 The modern variant callers attempt to assign a reliability estimate for each genotype call. This is done using Bayes reasoning.
 > :bulb: **Tip:** For a great visual explanation see [blog](https://oscarbonilla.com/2009/05/visualizing-bayes-theorem/) by Oscar Bonilla). Here we present a >SNP-relevant "translation" on this explanation (with inspiration from [Erik Garrison](https://github.com/ekg)).
@@ -116,7 +115,6 @@ In the simplest case we can estimate these as follows:
 > 
 > This makes it highly unlikely that **AA** is a true genotype of this individual.
 >
-{: .hands_on}
 
 ---
 
@@ -188,7 +186,7 @@ Yet for a quick tutorial these datasets are way too big, so we created a [downsa
 > 3. Scrolling down to **Tweak algorithmic features?** click `Yes` and set **Calculate the marginal probability of genotypes and report as GQ in each sample field in the VCF output** to `Yes`. This would help us evaluating the quality of genotype calls:
 > 
 >   ![](../images/freebayes_gq.png)
-{: .hands_on}}
+{: .hands_on}
 
 This produces a dataset in [VCF](http://www.1000genomes.org/wiki/Analysis/variant-call-format) format containing 35 putative variants. Before we can continue we need to post-process this dataset by breaking compound variants into multiple independent variants with **VcfAllelicPrimitives** tool found within **VCF Tools** section. This is necessary for ensuring the smooth sailing through downstream analyses:
 
@@ -362,3 +360,4 @@ This short tutorial should give you an overall idea on how generate variant data
 > ### :bulb: **Tip:** If things don't work...
 > ...you need to complain. Use [Galaxy's BioStar Channel](https://usegalaxy.org/biostar/biostar_redirect) to do this.
 {: .tip}
+
