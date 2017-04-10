@@ -1,4 +1,4 @@
-﻿---
+---
 layout: tutorial_hands_on
 topic_name: Exome-Seq
 tutorial_name: Exome-Seq
