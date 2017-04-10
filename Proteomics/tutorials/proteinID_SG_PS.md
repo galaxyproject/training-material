@@ -103,7 +103,7 @@ In bottom-up proteomics, it is necessary to combine the identified peptides to p
 >
 > c) *Covalent modifications.* A variety of covalent modifications are built in to the Search GUI parameters. Typing the modification into the field (e.g. “oxidation”) brings up the available modifications of that type to specific side chains or the n- or c-terminus of the protein and/or peptide.
 >
-> ![parameters_SG](../images/parameters_SG.png)
+> ![parameters_SG](../images/parameters_SG.PNG)
 >
 > 2. **Peptide Shaker**
 >
@@ -115,7 +115,7 @@ In bottom-up proteomics, it is necessary to combine the identified peptides to p
 > b) *Outputs.* Peptide Shaker offers a variety of outputs which a user can select. A compressed file (.zip) can be made containing all information needed to view the results in the standalone Peptide Shaker viewer; a peptide spectrum match (PSM) report file, which provides all relevant information on all peptide sequences matched to MS/MS spectra in the analysis; a mzidentML file can be created that contains all peptide sequence matching information and can be utilized by compatible downstream software. 
 > Other outputs are focused on the inferred proteins identified from the PSMs, as well as phosphorylation reports, relevant in a phosphoprotoemics experiment has been undertaken. The Certificate of Analysis provides details on all the parameters used by both Search GUI and Peptide Shaker in the analysis. All outputs can be downloaded from the Galaxy instance to the local computer if desired.
 >
-> ![parameters_PS](../images/parameters_PS.png)
+> ![parameters_PS](../images/parameters_PS.PNG)
 >
 > {: .comment}
 
