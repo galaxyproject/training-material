@@ -19,12 +19,12 @@ The figure below gives an overview of the Galaxy workflow:
 
 The workflow needs three input files:
 
-  1) A tabular file, the first column containing uniprot accession numbers of the proteins of interest. [Test data](test_data.tabular)
+  1) A tabular file, the first column containing uniprot accession numbers of the proteins of interest. [Test data](http://doi.org/10.5281/zenodo.519260)
   2) The complete uniprot GO database for the organism of interest, available [via FTP](ftp://ftp.ebi.ac.uk/pub/databases/GO/goa/). To download the human GOA file needed for the test input, paste the following link to the Galaxy upload tool: ftp://ftp.ebi.ac.uk/pub/databases/GO/goa/HUMAN/goa_human.gaf.gz.
   3) The complete GO Open Biomedical Ontology (OBO), i.e. "GO term tree", accessible at http://purl.obolibrary.org/obo/go/go.obo.
 
 > ### :nut_and_bolt: Comment: Test data
-> The provided test dataset for input 1 is a list of human proteins, identified by LC-MS/MS in the cellular supernatant of MDA-MB-231 cells, originally published in [(Sigloch et al., BBA, 2016)](https://www.ncbi.nlm.nih.gov/pubmed/?term=sigloch+cathepsin).
+> The provided test dataset for input 1 is a list of human proteins, identified by LC-MS/MS in the cellular supernatant of MDA-MB-231 cells. It can be accessed over [Zenodo](http://doi.org/10.5281/zenodo.519260). The dataset was originally published in [(Sigloch et al., BBA, 2016)](https://www.ncbi.nlm.nih.gov/pubmed/?term=sigloch+cathepsin).
 > {: .comment}
 
 > ### :nut_and_bolt: Comment: Uniprot Gene Ontology Association (GOA) files
