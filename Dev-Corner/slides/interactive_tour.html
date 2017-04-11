@@ -5,7 +5,7 @@ tutorial_name: interactive_tour
 logo: "GTN"
 ---
 
-### An interactive tour?
+### What are Galaxy Interactive Tours?
 
 ![](../images/galaxy_tour_demo.gif)
 
@@ -17,11 +17,11 @@ An awesome way to learn how to use Galaxy or a specific tool, isn't it?
 
 ![](../images/galaxy_tour_yml.png)
 
-A yaml file: [core.galaxy_ui.yaml](https://raw.githubusercontent.com/galaxyproject/galaxy/097300ea6219e14b66b23a0e05f2808b16f10015/config/plugins/tours/core.galaxy_ui.yaml)
+A single YAML file: [core.galaxy_ui.yaml](https://raw.githubusercontent.com/galaxyproject/galaxy/097300ea6219e14b66b23a0e05f2808b16f10015/config/plugins/tours/core.galaxy_ui.yaml)
 
 ---
 
-### At the top of the yaml<br>Metadata related to the Tour
+### At the top of the YAML:<br>Metadata related to the Tour
 
 ```
 id: galaxy_ui
@@ -32,21 +32,22 @@ title_default: "Welcome to Galaxy"
 
 ---
 
-### Content of the yaml<br>Steps of the Tour
+### Content of the YAML:<br>Steps of the Tour
 
 ```
 # A tour is made of several steps, each of them beginning with a dash '-'
 steps:
     - title: "Welcome to Galaxy"
       content: "This short tour will guide you through Galaxy's user interface.<br>
-                You can navigate with your arrow keys and leave the tour at any time point with 'Escape' or the 'End tour' button."
+                You can navigate with your arrow keys and leave the tour at any
+                time point with 'Escape' or the 'End tour' button."
       backdrop: true
 
     - title: "Upload your data"
       element: ".upload-button"
       content: "Galaxy supports many ways to get in your data.<br>
-              Use this button to upload your data."
-      position: "right"
+               Use this button to upload your data."
+      placement: "right"
       postclick:
         - ".upload-button"
 ```
@@ -60,11 +61,12 @@ Argument | Description
 `title`  | Header of each step-container
 `content` | Text that is shown to the user 
 `element` | [JQuery Selector](http://api.jquery.com/category/selectors/) of the element you want to describe / click
-`position` | Position of the text box relative to the selected element
-`preclick` or `postclick` | Triggerred click() events on arbitrary elements before (`preclick`) or after (`postclick`) the element is shown
-`textinsert` | 
+`placement` | Placement of the text box relative to the selected element
+`preclick` or `postclick` | Elements that recieve a click() event before (`preclick`) or after (`postclick`) the step is shown
+`textinsert` | Text to insert if element is a text box (e.g. tool search or upload)
+`backdrop` | `true/false`: 	Show a dark backdrop behind the popover and its element, highlighting the current step
 
-.footnote[[Full reference of the properties we can attach to one step-container](http://bootstraptour.com/api/)]
+.footnote[[Full reference of the properties](http://bootstraptour.com/api/)]
 
 ---
 
@@ -76,11 +78,36 @@ Argument | Description
 
 ### Want to integrate Interactive Tours in your Galaxy instance?
 
-- Select a yaml file
+- Select a YAML file
   - [From our community collection of Interactive Tours](https://github.com/galaxyproject/galaxy-tours)
-  - Create yourself one
-- Add it in the `config/plugins/tours` directory of your Galaxy instance
-- Restart the Galaxy instance
+  - Create one by yourself
+- Copy it to your tours directory or your Galaxy instance
+  - default: `config/plugins/tours`
+  - configurable via `tour_config_dir` in `galaxy.ini`
+- Restart Galaxy or reload the tour with the API, e.g.:
+  - `curl GALAXY_URL/api/tours/TOUR_FILE_NAME -d key=ADMIN_API_KEY`
+
+---
+
+### Want to contribute?
+
+- Create Tours and share them with the world!
+  - on the [community collection of Interactive Tours](https://github.com/galaxyproject/galaxy-tours) or
+  - add them to the [Galaxy Training Network](http://galaxyproject.github.io/training-material/)
+- Improve the Tours implementation
+- Improve creating of Tours
+  - by enhancing the [Galaxy Tour Builder](https://github.com/dannon/tourbuilder) web extension
+
+---
+
+### Developing the Tours logic
+
+- Tours initialisation: `lib/galaxy/tours/__init__.py`
+- JavaScript logic: `client/galaxy/scripts/mvc/tours.js`
+- Tour styles: `client/galaxy/style/less/tour.less`
+- API: `lib/galaxy/webapps/galaxy/api/tours.py`
+  - `lib/galaxy/webapps/galaxy/buildapp.py`
+- bootstrap-tour library: `client/galaxy/scripts/libs/bootstrap-tour.js`
 
 ---
 
