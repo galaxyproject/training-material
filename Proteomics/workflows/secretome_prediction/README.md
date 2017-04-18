@@ -24,7 +24,7 @@ The workflow needs three input files:
   3) The complete GO Open Biomedical Ontology (OBO), i.e. "GO term tree", accessible at http://purl.obolibrary.org/obo/go/go.obo.
 
 > ### :nut_and_bolt: Comment: Test data
-> The provided test dataset for input 1 is a list of human proteins, identified by LC-MS/MS in the cellular supernatant of MDA-MB-231 cells. It can be accessed over [Zenodo](http://doi.org/10.5281/zenodo.519260). The dataset was originally published in [(Sigloch et al., BBA, 2016)](https://www.ncbi.nlm.nih.gov/pubmed/?term=sigloch+cathepsin).
+> The provided test dataset for input 1 is a list of human proteins, identified by LC-MS/MS in the cellular supernatant of MDA-MB-231 cells. It can be accessed over [Zenodo](http://doi.org/10.5281/zenodo.519260). The dataset was originally published in [(Sigloch et al., BBA, 2016)](https://www.ncbi.nlm.nih.gov/pubmed/27526672).
 > {: .comment}
 
 > ### :nut_and_bolt: Comment: Uniprot Gene Ontology Association (GOA) files
