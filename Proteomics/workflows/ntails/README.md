@@ -29,11 +29,10 @@ The workflow needs three input files:
   1) A collection of mzML files (multiple fractions of the same experiment).
   2) A FASTA protein database for the organism of interest. For more information on protein databases, consult [this tutorial](../../tutorials/database_handling.md)
 
-> ### :nut_and_bolt: Comment: Customizing the Workflow
-> 
-> 1. Running the workflow on a non-prefractionated sample: Simply use only one file as an input.
-> 2. Running the workflow on a double dimethyl labeling (only light and heavy labeling): remove the third `MSGFPlusAdapter` :wrench: and the following `PeptideIndexer` :wrench: . Make sure that the mass changes are correctly given in the `MSGFPlusAdapter` :wrench: .
-> {: .comment}
+## Customizing the Workflow
+
+- *Running the workflow on a non-prefractionated sample:* Simply use only one file as an input.
+- *Running the workflow on a double dimethyl labeling (only light and heavy labeling):* remove the third `MSGFPlusAdapter` :wrench: and the following `PeptideIndexer` :wrench: . Make sure that the mass changes are correctly given in the `MSGFPlusAdapter` :wrench: .
 
 ## Citation
 
