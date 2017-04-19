@@ -77,7 +77,7 @@ In bottom-up proteomics, it is necessary to combine the identified peptides to p
 > ### :pencil2: Hands-On: Peptide and Protein Identification
 >
 > 1. Copy the prepared protein database from the tutorial "Database handling" into your current history by using the multiple history view or upload the ready-made database from this [link]().
-> 2. Run ***Search GUI*** :wrench: to search the mgf file against the protein database.
+> 2. Open ***Search GUI*** :wrench: to search the mgf file against the protein database. Select the `DB-Search Engines`: `X!Tandem` and `MS-GF+`. Add the `Fixed Modifications`: `Carbamidomethylation of C` and the `Variable Modifications`: `Oxidation of M`, then click `Execute`.
 > 3. Run ***Peptide Shaker*** :wrench: on the Search GUI output. Enable the following outputs: `Zip File for import to Desktop App`, `mzidentML File`, `PSM Report`, `Peptide Report`, `Protein Report`. You can find a detailed description of possible Peptide Shaker outputs [below](:nut_and_bolt:-comment:-search-gui-and-peptide-shaker-parameters).
 >
 >	> ### :question: Questions: 
@@ -171,6 +171,10 @@ The FASTA database used for the peptide to spectrum matching contained some entr
 >	>  </details>
 > > {: .question}
 > {: .hands_on}
+
+# Premade Workflow
+
+A premade workflow for this tutorial can be found at ../workflows/proteinID_SG_PS
 
 # Further Reading
 
