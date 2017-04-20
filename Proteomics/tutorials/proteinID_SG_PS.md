@@ -1,6 +1,6 @@
 ---
 layout: tutorial_hands_on
-topic_name: proteomics
+topic_name: Proteomics
 tutorial_name: proteinID_SG_PS
 ---
 
