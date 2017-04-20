@@ -28,6 +28,7 @@ Label-free techniques are immensely popular in the proteomics community and may 
 We summarized the pros and cons in the table below:
 
 ## Drawbacks and Benefits: Overview Table
+
 category | label-free | labelled
 :--|:--:|:--:
 machine time | more | **less**
