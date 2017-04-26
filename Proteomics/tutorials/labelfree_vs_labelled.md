@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 topic_name: Proteomics
-tutorial_name: labelfree-vs-labelled
+tutorial_name: labelfree_vs_labelled
 ---
 
 
@@ -28,6 +28,7 @@ Label-free techniques are immensely popular in the proteomics community and may 
 We summarized the pros and cons in the table below:
 
 ## Drawbacks and Benefits: Overview Table
+
 category | label-free | labelled
 :--|:--:|:--:
 machine time | more | **less**
