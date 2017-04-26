@@ -100,12 +100,14 @@ In bottom-up proteomics, it is necessary to combine the identified peptides to p
 >
 > Search GUI bundles numerous sequence database search software tools for matching MS/MS to peptide sequences within a database. Describing the parameters for all of these programs is beyond the scope of this tutorial, but some of the key parameters for this software are described below:
 >
-> a) *Database search programs.* A number of popular sequence database searching programs are available, and can be selected by the user. The more selected, the more processor time is necessary; however, matching MS/MS spectra to peptide sequence with more programs provides more confidence in results. 
+> a) **Database search programs.** A number of popular sequence database searching programs are available, and can be selected by the user. The more selected, the more processor time is necessary; however, matching MS/MS spectra to peptide sequence with more programs provides more confidence in results. 
 > In practice, 2-3 programs used offers high confidence while keeping analysis times reasonable.
 >
-> b) *Data quality parameters.* Values that reflect the performance of the instrument used can be entered. These include mass accuracy measures for both precursor ions and the resulting MS/MS fragment ions. For the workflow provided here, these have been set with default values for high resolution Orbitrap mass spectrometer instrumentation.
+> b) **Data quality parameters.** Values that reflect the performance of the instrument used can be entered. These include mass accuracy measures for both precursor ions and the resulting MS/MS fragment ions. For the workflow provided here, these have been set with default values for high resolution Orbitrap mass spectrometer instrumentation.
 >
-> c) *Covalent modifications.* A variety of covalent modifications are built in to the Search GUI parameters. Typing the modification into the field (e.g. “oxidation”) brings up the available modifications of that type to specific side chains or the n- or c-terminus of the protein and/or peptide.
+> c) **Enzyme cleavage.** Although almost all proteomic samples are digested to peptides by trypsin, some other enzymes are used occasionally. Enzymes do not cut at 100 % of the possible cleavage sites, so you might want to allow searching for peptides where a few cleavage sites were missed.
+>
+> d) **Covalent modifications.** A variety of covalent modifications are built in to the Search GUI parameters. Typing the modification into the field (e.g. “oxidation”) brings up the available modifications of that type to specific side chains or the n- or c-terminus of the protein and/or peptide.
 >
 > ![parameters_SG](../images/parameters_SG.PNG)
 >
@@ -113,10 +115,10 @@ In bottom-up proteomics, it is necessary to combine the identified peptides to p
 >
 > The Galaxy implementation of Peptide Shaker is fairly simple in terms of parameters available to the user:
 >
-> a) *Processing and filtering options.* If desired, users can select “Advanced” processing or filtering options. The processing options allow a customized level of false discovery rate (FDR) to be set for peptide and protein identifications, while the filtering options offer selection of length of peptides to be considered, and thresholds for mass accuracy. 
+> a) **Processing and filtering options.** If desired, users can select “Advanced” processing or filtering options. The processing options allow a customized level of false discovery rate (FDR) to be set for peptide and protein identifications, while the filtering options offer selection of length of peptides to be considered, and thresholds for mass accuracy. 
 > The default, validated values for processing and filtering are set in stored workflows, and follow community standards (e.g. 1% FDR levels, etc.).
 >
-> b) *Outputs.* Peptide Shaker offers a variety of outputs which a user can select. A compressed file (.zip) can be made containing all information needed to view the results in the standalone Peptide Shaker viewer; a peptide spectrum match (PSM) report file, which provides all relevant information on all peptide sequences matched to MS/MS spectra in the analysis; a mzidentML file can be created that contains all peptide sequence matching information and can be utilized by compatible downstream software. 
+> b) **Outputs.** Peptide Shaker offers a variety of outputs which a user can select. A compressed file (.zip) can be made containing all information needed to view the results in the standalone Peptide Shaker viewer; a peptide spectrum match (PSM) report file, which provides all relevant information on all peptide sequences matched to MS/MS spectra in the analysis; a mzidentML file can be created that contains all peptide sequence matching information and can be utilized by compatible downstream software. 
 > Other outputs are focused on the inferred proteins identified from the PSMs, as well as phosphorylation reports, relevant in a phosphoprotoemics experiment has been undertaken. The Certificate of Analysis provides details on all the parameters used by both Search GUI and Peptide Shaker in the analysis. All outputs can be downloaded from the Galaxy instance to the local computer if desired.
 >
 > ![parameters_PS](../images/parameters_PS.PNG)
