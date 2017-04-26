@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 topic_name: Proteomics
-tutorial_name: labelfree-vs-labelled
+tutorial_name: labelfree_vs_labelled
 ---
 
 
