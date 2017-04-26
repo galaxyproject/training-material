@@ -176,7 +176,7 @@ The FASTA database used for the peptide to spectrum matching contained some entr
 
 # Premade Workflow
 
-A premade workflow for this tutorial can be found at ../workflows/proteinID_SG_PS
+A premade workflow for this tutorial can be found [here](../workflows/proteinID_SG_PS).
 
 # Further Reading
 
