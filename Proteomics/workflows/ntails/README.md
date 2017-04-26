@@ -6,7 +6,7 @@ The N-Tails technique includes the use of heavy isotope dimethyl labelling.
 
 The figure below illustrates the mechanism of N-Tails. It was originally published by Stefan Tholen (doctoral thesis, not available online). Further reading on N-Tails and other N-terminal techniques, see [Tholen et al., Springer Vienna, 2013](http://dx.doi.org/10.1007/978-3-7091-0885-7_5).
 
-![N-Tails technique](../../images/WF_ntails_technique.png)
+![N-Tails technique](../../images/wf_ntails_technique.png)
 
 The N-Tails technique was originally designed to research protease biology and has most often been used in this field. It was originally published in [Kleifeld et al., Nat. Biotechnol., 2010](http://www.ncbi.nlm.nih.gov/pubmed/20208520).
 
@@ -20,7 +20,7 @@ This workflow was originally built in the OpenMS framework "TOPPAS" and publishe
 
 The figure below gives an overview of the used Galaxy nodes. For further description of the workflow, please consider the [original publication](https://www.ncbi.nlm.nih.gov/pubmed/27087653).
 
-![N-Tails Galaxy Workflow](../../images/WF_ntails_tripleDimethylLabel.PNG)
+![N-Tails Galaxy Workflow](../../images/wf_ntails_tripleDimethylLabel.png)
 
 ## Input
 

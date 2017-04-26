@@ -6,7 +6,7 @@ You can find two versions of the same workflow: one is designed for a single MS 
  
 An overview of the workflow is given below:
 
-![Protein ID Workflow](../../images/wf_proteinID_SG_PS.PNG)
+![Protein ID Workflow](../../images/wf_proteinID_SG_PS.png)
 
 ## Inputs
 

@@ -13,7 +13,7 @@ For secretome prediction, we combine localization data from the Gene Ontology da
 
 The figure below gives an overview of the Galaxy workflow:
 
-![Overview Secretome Prediction WF](../../images/WF_secretomePrediction_goWolfpsort.png)
+![Overview Secretome Prediction WF](../../images/wf_secretomePrediction_goWolfpsort.png)
 
 ## Input
 

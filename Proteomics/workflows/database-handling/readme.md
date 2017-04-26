@@ -5,14 +5,14 @@ You can find two versions of the same workflow: one creates a database with only
 
 An overview of the workflow is given below:
 
-![Database Handling Workflow](../../images/wf_database-handling.PNG)
+![Database Handling Workflow](../../images/wf_databaseHandling.png)
 
 ## Inputs and Customization
 
 For this workflow, you need no prior inputs. You can change the database to download after starting to run the workflow (default: Homo sapiens). To do so, click on the `Taxonomy` option in `1: Protein Database Downloader`. 
 You may also change other options about the database to download (`reviewed`, `Proteome Set` and `Include isoform data`). Please refer to the [database handling tutorial](https://galaxyproject.github.io/training-material//Proteomics/tutorials/database-handling) for details.
 
-![Input_options](../../images/wf_database-handling_options.PNG)
+![Input_options](../../images/wf_databaseHandling_options.png)
 
 ## Outputs
 
