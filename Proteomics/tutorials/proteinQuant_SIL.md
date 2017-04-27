@@ -11,9 +11,7 @@ The second type of chemical tags are isotopic. They are chemically identical, bu
 Incorporation of stable isotopes results in different peptide masses on MS1 level, which give rise to coeluting ion traces in the TIC with a mass difference typical for each different chemical tag.
 
 This tutorial deals with protein quantitation via stable isotope labelling (SIL). We will use tools of the OpenMS suite.  
-Because we solely cover *quantitation*, you need to perform peptide and protein ID in beforehand. To learn about protein ID in Galaxy, please consider [this tutorial](./proteinID_SG_PS.md).
-
-This tutorial covers *relative* quantitation only (i.e. comparison of abundances in different samples, no *absolute* quantitation of peptides / proteins).
+Because we solely cover *quantitation*, you need to perform peptide and protein ID in beforehand. To learn about protein ID in Galaxy, please consider [this tutorial](./proteinID_SG_PS.md). This tutorial covers *relative* quantitation only (i.e. comparison of abundances in different samples, no *absolute* quantitation of peptides / proteins).
 
 If you still are in the planning phase of your quantitative proteomics experiment, you may want to consider our tutorial on different [quantitation methods](./labelfree-vs-labelled.md) first.
 
@@ -27,7 +25,7 @@ If you still are in the planning phase of your quantitative proteomics experimen
 > In this tutorial, we will deal with:
 >
 > 1. [MS1 Feature Detection](#ms1-feature-detection)
-> 2. [Importing and Converting Peptide and Protein IDs](#importing-and-converting-peptide-and-protein-ids)
+> 2. [Peptide and Protein Identification and Conversion](#peptide-and-protein-identification-and-conversion)
 > 3. [Quant to ID matching](#quant-to-id-matching)
 > 4. [Expert level: Evaluation and Optimization of Quantitation Results](#expert-level-evaluation-and-optimization-of-quantitation-results)
 {: .agenda}
@@ -54,11 +52,11 @@ The tool settings need to be carefully tested and evaluated manually to obtain o
 
 > ### :pencil2: Hands-on: Peptide and Protein Identification and Conversion
 > 1. Run the workflow "ProteinID_SG_PS" on the test dataset.
-> 2. Use **`IDConverter`** to convert the mzid output of `Peptide Shaker` :wrench: to mzidentML.
+> 2. Use **`IDFileConverter`** to convert the mzid output of `Peptide Shaker` :wrench: to idXML.
 
 # Quant to ID matching
 
-> ### Hands-on: Quant to ID matching
+> ### :pencil2: Hands-on: Quant to ID matching
 > 
 > 1. Run `ProteinQuantifier` :wrench: on 
 > 2. 
@@ -73,17 +71,20 @@ The tool settings need to be carefully tested and evaluated manually to obtain o
     - `Average elution time`: To improve results, you may look at the mzML file first and find out the average elution time of peaks. **How?**
     - `Averagine similarity`: describes the similarity of two features. Play around with this parameter to optimize the number of features detected. Be careful, reducing it may lead to false positives.
  
-> ### Comment: Benchmarking parameters for opimization - What is a good result?
+> ### :nut_and_bolt: Comment: Benchmarking parameters for opimization - What is a good result?
 >
 > The quality of the results can be measured by so-called "benchmarking parameters". 
 >  
 > Benchmarking parameters for `FeatureFinderMultiplex`:
+>
 >     1. Number of features that can be linked to peptide IDs (and vice-versa). 
 >     2. Although the first parameter gives a good measure of quality, it does not rule out that false positive features or IDs were matched. To check for false positives, you will have to scan through your data manually. To do so, open both the `FeatureFinderMultiplex` consensusXML output and the mzidentML file into [TOPPView](). 
->         - **Caution** Manual evaluation is prone to biases, as you can look solely at small parts of your data. To avoid this, try to look at the *very same* areas / the same features of all different result files.
->     3. If you were using the option **`knockouts present` **, check, if the detected "knockout features" fit to your expectations.
+>
+>     **Caution** Manual evaluation is prone to biases, as you can look solely at small parts of your data. To avoid this, try to look at the *very same* areas / the same features of all different result files.
+>
+>     3. If you were using the option `knockouts present`, check, if the detected "knockout features" fit to your expectations.
     
-> ### Hands-on: Evaluation and Optimization of Quantitation Results
+> ### :pencil2: Hands-on: Evaluation and Optimization of Quantitation Results
 > 
 > 1. Run the whole WF again, change ** a single setting (averagine?)** in `FeatureFinderMultiplex`.
 > 2. Run `FileInfo` :wrench: on the results -> number of ID-Feature-matches
