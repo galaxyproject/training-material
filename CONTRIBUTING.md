@@ -14,19 +14,18 @@ If you have any questions, you can reach us using the [Gitter chat](https://gitt
     - [Reporting mistakes or errors](#reporting-mistakes-or-errors)
     - [Your first content contribution](#your-first-content-contribution)
     - [Pull Requests](#pull-requests)
-- [How is the training material structured?](#how-the-training-material-is-structured)
+- [How is the training material structured?](#how-is-the-training-material-structured)
     - [`images` directory](#images-directory)
     - [`tutorials` directory](#tutorials-directory)
     - [`slides` directory](#slides-directory)
     - [`docker` directory](#docker-directory)
-    - [`README.md` file](#README.md-file)
 - [How do I add new content?](#how-do-i-add-new-content)
     - [How do I add a new topic?](#how-do-i-add-a-new-topic)
     - [How do I add a new tutorial?](#how-do-i-add-a-new-tutorial)
     - [How do I fill a tutorial hands-on?](#how-do-i-fill-a-tutorial-hands-on)
     - [How do I fill introduction slides?](#how-do-i-fill-introduction-slides)
     - [How do I fill tutorial slides?](#how-do-i-fill-tutorial-slides)
-- [How is the training material maintained?](#how-the-training-material-is-maintained)
+- [How is the training material maintained?](#how-is-the-training-material-maintained)
     - [Maintainers](#maintainers)
     - [Labels](#labels)
 
@@ -93,14 +92,14 @@ All images for the slides must be in `images` directory. The images must be in g
 
 ## `tutorials` directory
 
-This directory collects the tutorials related to the topic. The tutorials are hands-on built for workshop and self training.
+This directory collects the tutorials related to the topic. The tutorials are hands-on built for workshop and self-training.
 
-The template for the tutorials are different from the other pages to help users to focus on the content of the tutorial. To improve the output of the tutorial, several metadata are mandatory for every tutorials, such as the requirements or the objectives of the tutorials. Boxes are also used to highlight some key points as the hands-on or the tips.
+The templates for the tutorials are different from the other pages to help users to focus on the content of the tutorial. To improve the output of the tutorial, several metadata are mandatory for every tutorials, such as the requirements or the objectives of the tutorials. Boxes are also used to highlight some key points as the hands-on or the tips.
 
 The content of each tutorial is generated with [Jekyll](http://jekyllrb.com/) from a Markdown file and some metadata (e.g. the requirements, the Zenodo link, the questions) defined inside the metadata of the related topic.
 
 > Want to contribute to a tutorial?
-> - [Check out how to add a new tutorial?](#how-do-i-add-a-tutorial-hands-on)
+> - [Check out how to add a new tutorial?](#how-do-i-add-a-new-tutorial)
 > - [Check out how to fill a new tutorial?](#how-do-i-fill-a-tutorial-hands-on)
 
 Sometimes, an hands-on tutorial is not the most appropriate format for a tutorial and slides are better. The content must be then added in the `slides` directory.
@@ -126,6 +125,8 @@ So if you want to visualise locally how the website will look like, you need to 
 ```
 $ make install
 ```
+
+If you encounter any errors make sure `ruby` and it's corresponding developer packages (e.g. `ruby-dev`, `ruby2.3-dev`) are installed.
 
 To run a local Jekyll server and visualize the changes, launch using the [Makefile](Makefile):
 
