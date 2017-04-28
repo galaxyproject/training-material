@@ -17,7 +17,9 @@ tutorial_name: methylation-seq
 > 5. [Metilene](#metilene)
 > 
 > 
-> This tutorial is based on [I-Hsuan Lin et al.: 'Hierarchical Clustering of Breast Cancer Methylomes Revealed Differentially Methylated and Expressed Breast Cancer Genes'](http://dx.doi.org/10.1371/journal.pone.0118453)
+> This tutorial is based on [I-Hsuan Lin et al.: 'Hierarchical Clustering of Breast Cancer Methylomes Revealed Differentially Methylated and Expressed Breast Cancer Genes'](http://dx.doi.org/10.1371/journal.pone.0118453).
+>
+> The data we use in this tutorial is available at [Zenodo](https://zenodo.org/record/557099).
 >
 > {: .agenda}
 
@@ -75,7 +77,7 @@ tutorial_name: methylation-seq
 > 1. **Galaxy** :wrench:: Search for the tool ```bwameth```
 > 2. **bwameth** :wrench:: Select for the option ```Select a genome reference from your history or a built-in index?``` ```Use a built-in idex``` and here the human ```hg38``` genome.
 > 3. **bwameth** :wrench:: Choose for the option ```Is this library mate-paired?``` ```Paired-end``` and use the two imported datasets as an input. 
-> 4. **bwameth** :wrench:: Please do not compute the alignment now because it would need about 45 minutes. We provide for you a precomputed alignment in the data library. Import ```aligned_subset.bam``` to your history.
+> 4. **bwameth** :wrench:: Compute now the alignment. Please notice that depending on your system this computation can take some time. If you want to skip this, we provide for you a precomputed alignment. Import ```aligned_subset.bam``` to your history.
 >
 >    > ### :question: Questions
 >    >
@@ -100,7 +102,7 @@ tutorial_name: methylation-seq
 > 
 > 1. **Galaxy** :wrench:: Search for the tool ```MethylDackel```
 > 2. **MethylDackel** :wrench:: Choose at the first option ```Load reference genome from``` ```Local cache``` and for ```Using reference genome``` the value ```hg38```.
-> 3. **MethylDackel** :wrench:: Select for the option ```sorted_alignments.bam``` the imported bam file which was the result of the ```bwameth``` alignment.
+> 3. **MethylDackel** :wrench:: Select for the option ```sorted_alignments.bam``` the computed bam file of step 4 of the ```bwameth``` alignment.
 > 4. **MethylDackel** :wrench:: Use for ```What do you want to do?``` the value ```Determine the position-dependent methylation bias in the dataset, producing diagnostic SVG images```.
 > 5. **MethylDackel** :wrench:: Set the parameters ```keepSingleton``` and ```keepDiscordant``` to ```Yes```.
 > 6. **MethylDackel** :wrench:: Click ```Execute```.
@@ -132,7 +134,7 @@ tutorial_name: methylation-seq
 > 
 > 1. **Galaxy** :wrench:: Search for the tool 'MethylDackel'
 > 2. **MethylDackel** :wrench:: Choose at the first option ```Load reference genome from``` the value: ```Local cache``` and for ```Using reference genome``` the value: ```hg38```.
-> 3. **MethylDackel** :wrench:: Select for the option ```sorted_alignments.bam``` the imported bam file which was the result of a ```bwameth``` alignment.
+> 3. **MethylDackel** :wrench:: Select for the option ```sorted_alignments.bam``` the computed bam file of step 4 of the ```bwameth``` alignment.
 > 4. **MethylDackel** :wrench:: Use for ```What do you want to do?``` the value ```Extract methylation metrics from an alignment file in BAM/CRAN format```.
 > 5. **MethylDackel** :wrench:: Choose ```Yes``` for the option ```Merge per-Cytosine metrics from CpG and CHG contexts into per-CPG or per-CHG metrics```.
 > 6. **MethylDackel** :wrench:: Set the parameter ```fraction``` to ```Yes```.
@@ -196,7 +198,7 @@ tutorial_name: methylation-seq
 >    >    </details>
 >    {: .question}
 >
-> 3. It is difficult to fix this with a galaxy tool. Every chromosome is named different, the list to transfer the ensembl notation to ucsc notation is having more than 500 entries. We did this for you, please import ```NB1_CpG.meth_ucsc.bedGraph```, ```NB2_CpG.meth_ucsc.bedGraph```, ```BT089_CpG.meth_ucsc.bedGraph```, ```BT126_CpG.meth_ucsc.bedGraph``` and  ```BT198_CpG.meth_ucsc.bedGraph```
+> 3. **Replace column** :wrench: Every chromosome is named different, the list to transfer the ensembl notation to ucsc notation is having more than 500 entries. To convert it you can use the tool **Replace column**. Choose for ```File in which you want to replace some values``` the bedGraph file and for ```Replace information file``` [this](https://raw.githubusercontent.com/dpryan79/ChromosomeMappings/master/GRCh38_ensembl2UCSC.txt) conversion file. For ```Which column should be replaced?``` choose ```Column: 1```, for ```Skip this many starting lines``` a ```1``` and for ```Delimited by``` ```Tab```. In case this tool is not available in your galaxy instance, we precomputed the files for you: Please import ```NB1_CpG.meth_ucsc.bedGraph```, ```NB2_CpG.meth_ucsc.bedGraph```, ```BT089_CpG.meth_ucsc.bedGraph```, ```BT126_CpG.meth_ucsc.bedGraph``` and  ```BT198_CpG.meth_ucsc.bedGraph```.
 > 4. Compute the matrix and plot the profile as described above.
 > 
 > More information about deepTools can be found here: https://deeptools.github.io/
