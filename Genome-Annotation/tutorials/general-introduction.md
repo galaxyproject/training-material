@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
-topic_name: Genome Annotation
-tutorial_name: General introduction
+topic_name: Genome-Annotation
+tutorial_name: general-introduction
 ---
  
 # Introduction
