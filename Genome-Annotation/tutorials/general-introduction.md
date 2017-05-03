@@ -48,16 +48,18 @@ It consists of three main steps:
 > For the genome annotation we use a piece of the *Aspergillus fumigatus* [genome sequence](../input_data/Aspergillus_sequence.fasta) as input file. 
 {: .comment}
 
-
 ## Sequence Features
 
 > ### :pencil2: Hands-on: Sequence composition
-> First we want to get some general information about our sequence. Count the number of bases in your sequence (**compute sequence length**), and check for sequence composition and GC content (**geecee**). Plot the sequence composition as bar chart. 
+>
+> First we want to get some general information about our sequence.
+> 1. Count the number of bases in your sequence (**compute sequence length**)
+> 2. Check for sequence composition and GC content (**geecee**).
+> 3. Plot the sequence composition as bar chart. 
 >
 > <img src="../images/barchart_sequencecomposition.png" width="30%">
 >
 {: .hands_on}
-
 
 ## Gene Prediction
 
@@ -67,29 +69,33 @@ At first you need to identify those structures of the genome which code for prot
 > We use **Augustus** for gene prediction.
 {: .comment}
 
-> ### :pencil2: Hands-on: Gene prediction
-> :wrench: Use the genome sequence (FASTA file) as input. Choose the right *model organism*, *gff* format output, and select all possible output options.
->
-> ![augustus](../images/augustus.png)
->
-> Augustus will provide three output files: *gff3*, *coding sequences* (CDS) and *protein sequences*.
->
-> > ### :question: Question
-> > How many genes are predicted?
-> {: .question}
->
-> ![augustus_output](../images/augustus_out.png)
->
-{: .hands_on}
+### Gene prediction
 
+:wrench: Use the genome sequence (FASTA file) as input. Choose the right *model organism*, *gff* format output, and select all possible output options.
+
+![augustus](../images/augustus.png)
+
+Augustus will provide three output files: *gff3*, *coding sequences* (CDS) and *protein sequences*.
+
+> ### :question: Questions
+>
+> How many genes are predicted?
+>
+> <details>
+> <summary></summary>
+> </details>
+{: .question}
+
+![augustus_output](../images/augustus_out.png)
 
 ## tRNA and tmRNA Prediction
 
 Use **Aragorn** for tRNA and tmRNA prediction. As input file use the *Aspergillus* genome sequence. You can choose the genetic code (e.g. bacteria). Select the topology of your genome (circular or linear).  Are there tRNAs or tmRNAs in the sequence?
 
-> :bulb: **Tip:** read more about **Aragorn** [here](http://nar.oxfordjournals.org/content/32/1/11.full.pdf+html).
+> ### :bulb: Tip:
+>
+> read more about **Aragorn** [here](http://nar.oxfordjournals.org/content/32/1/11.full.pdf+html).
 {: .tip}  
-
 
 # Functional Annotation
 
@@ -105,34 +111,42 @@ Functional gene annotation means the description of the biochemical and biologic
 
 For similarity searches we use *NCBI BLAST+ blastp* to find similar proteins in a protein database.
 
-> ### :pencil2: Hands-on: Similarity search
-> :wrench: As input file, select the protein sequences from Augustus, choose the protein BLAST database *SwissProt* and the output format *xml*. 
+### Similarity search
+
+:wrench: As input file, select the protein sequences from Augustus, choose the protein BLAST database *SwissProt* and the output format *xml*. 
+
+<img src="../images/blastP.png" width="70%">
+
+Parsing the xml output (**Parse blast XML output**) results in changing the format style into tabular.
+
+> ### :question: Questions
 >
-> <img src="../images/blastP.png" width="70%">
+> What information do you see in the BLAST output?
 >
-> Parsing the xml output (**Parse blast XML output**) results in changing the format style into tabular.
+> <details>
+> <summary></summary>
+> </details>
+{: .question}
+
+From BLAST search results we want to get only the best hit for each protein.
+:wrench: Therefore apply the tool **BLAST top hit descriptions** with *number of descriptions =1* on the xml output file. 
+
+> ### :question: Questions
 >
-> > ### :question: Question
-> > What information do you see in the BLAST output?
-> {: .question}
+> For how many proteins we do not get a BLAST hit? 
 >
-> From BLAST search results we want to get only the best hit for each protein.
-> :wrench: Therefore apply the tool **BLAST top hit descriptions** with *number of descriptions =1* on the xml output file. 
->
-> > ### :question: Question
-> > For how many proteins we do not get a BLAST hit? 
-> {: .question}
->
-> :wrench:Choose the tool **Select lines that match an expression** and enter the following information: *Select lines from* [select the BLAST top hit descriptions result file]; *that* [not matching]; *the pattern* [gi]. 
->
-> <img src="../images/selectlines.png" width="50%">
->
+> <details>
+> <summary></summary>
+> </details>
+{: .question}
+
+:wrench:Choose the tool **Select lines that match an expression** and enter the following information: *Select lines from* [select the BLAST top hit descriptions result file]; *that* [not matching]; *the pattern* [gi]. 
+
+<img src="../images/selectlines.png" width="50%">
+
 > :bulb: The result file will contain all proteins which do not have an entry in the second column and therefore have no similar protein in the SwissProt database.
->
->
+
 > :bulb: For functional description of those proteins we want to search for motifs or domains which may classify them more. To get a protein sequence FASTA file with only the not annotated proteins, use the tool **Filter sequences by ID from a tabular file** and select for *Sequence file to filter on the identifiers* [Augustus protein sequences] and for *Tabular file containing sequence identifiers* the protein file with not annotated sequences. The output file is a FASTA file with only those sequences without description.
->
-{: .hands_on}
 
 This file will be the input for more detailed analysis:
 
@@ -151,6 +165,7 @@ This file will be the input for more detailed analysis:
 ![BLAST databases](../images/blast%20database.png)
 
 > ### :bulb: Tip: 
+>
 > If you have an organism which is not available in a BLAST database, you can use its genome sequence in FASTA file for BLAST searches "sequence file against sequence file". If you need to search in these sequences on a regularly basis, you can create a own BLAST database from the sequences of the organism. The advantage of having a own database for your organism is the duration of the BLAST search which speeds up a lot.
 {: .tip} 
 
@@ -169,12 +184,14 @@ This file will be the input for more detailed analysis:
 1. **VSEARCH**: For processing metagenomic sequences, including searching, clustering, chimera detection, dereplication, sorting, masking and shuffling. VSEARCH stands for vectorized search, as the tool takes advantage of parallelism in the form of SIMD vectorization as well as multiple threads to perform accurate alignments at high speed. VSEARCH uses an optimal global aligner (full dynamic programming Needleman-Wunsch), in contrast to USEARCH which by default uses a heuristic seed and extend aligner. This results in more accurate alignments and overall improved sensitivity (recall) with VSEARCH, especially for alignments with gaps.
 
 > ### :bulb: Tip: 
+>
 > Documentation for vsearch see [here](https://github.com/torognes/vsearch).
 {: .tip}
 
 2. **Diamond**: Diamond is a high-throughput program for aligning a file of short reads against a protein reference database such as NR, at 20,000 times the speed of Blastx, with high sensitivity.
 
-> ### :bulb: Tip: 
+> ### :bulb: Tip:
+>
 > [Buchfink et al. (2015): Fast and sensitive protein alignment using Diamond.](http://www.nature.com/nmeth/journal/v12/n1/abs/nmeth.3176.html)
 {: .tip}
 
@@ -185,13 +202,18 @@ This file will be the input for more detailed analysis:
 
 For identification of gene clusters, **antiSMASH** is used. The tool uses genbank file as input files and predicts gene clusters. Output files are a html visualization and the gene cluster proteins.
 
-> ### :pencil2: Hands-on:
+> ### antiSMASH analysis
+>
 > :wrench: Import this [dataset](../input-data/Streptomyces_coelicolor_part.genbank) into your Galaxy history and run **antiSMASH** to detect gene clusters. The genbank file contains a part of the *Streptomyces coelicolor* genome sequence.
 >
-{: .hands_on}
 
-> ### :question: Question
-> Which gene clusters are identified?
+> ### :question: Questions
+>
+> Which gene clusters are identified? 
+>
+> <details>
+> <summary></summary>
+> </details>
 {: .question}
 
 When you have a whole genome **antiSMASH** analysis, your result may look like this:
