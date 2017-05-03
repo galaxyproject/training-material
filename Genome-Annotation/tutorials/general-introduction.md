@@ -65,7 +65,7 @@ It consists of three main steps:
 
 At first you need to identify those structures of the genome which code for proteins. This step of annotation is called “structural annotation”. It contains the identification and location of open reading frames (ORFs), identification of gene structures and coding regions, and the location of regulatory motifs. Galaxy contains several tools for the structural annotation. Tools for gene prediction are **Augustus** (for eukaryotes and prokaryotes) and **glimmer3** (only for prokaryotes).
 
-> ### :nut_and_bolt: Comments
+> ### :nut_and_bolt: Comment
 > We use **Augustus** for gene prediction.
 {: .comment}
 
