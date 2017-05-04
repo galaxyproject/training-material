@@ -180,21 +180,21 @@ This file will be the input for more detailed analysis:
 
 ## More Similarity Search Tools in Galaxy
 
-1. **VSEARCH**: For processing metagenomic sequences, including searching, clustering, chimera detection, dereplication, sorting, masking and shuffling. VSEARCH stands for vectorized search, as the tool takes advantage of parallelism in the form of SIMD vectorization as well as multiple threads to perform accurate alignments at high speed. VSEARCH uses an optimal global aligner (full dynamic programming Needleman-Wunsch), in contrast to USEARCH which by default uses a heuristic seed and extend aligner. This results in more accurate alignments and overall improved sensitivity (recall) with VSEARCH, especially for alignments with gaps.
+* **VSEARCH**: For processing metagenomic sequences, including searching, clustering, chimera detection, dereplication, sorting, masking and shuffling. VSEARCH stands for vectorized search, as the tool takes advantage of parallelism in the form of SIMD vectorization as well as multiple threads to perform accurate alignments at high speed. VSEARCH uses an optimal global aligner (full dynamic programming Needleman-Wunsch), in contrast to USEARCH which by default uses a heuristic seed and extend aligner. This results in more accurate alignments and overall improved sensitivity (recall) with VSEARCH, especially for alignments with gaps.
 
 > ### :bulb: Tip: 
 >
 > Documentation for vsearch see [here](https://github.com/torognes/vsearch).
 {: .tip}
 
-2. **Diamond**: Diamond is a high-throughput program for aligning a file of short reads against a protein reference database such as NR, at 20,000 times the speed of Blastx, with high sensitivity.
+* **Diamond**: Diamond is a high-throughput program for aligning a file of short reads against a protein reference database such as NR, at 20,000 times the speed of Blastx, with high sensitivity.
 
 > ### :bulb: Tip:
 >
 > [Buchfink et al. (2015): Fast and sensitive protein alignment using Diamond.](http://www.nature.com/nmeth/journal/v12/n1/abs/nmeth.3176.html)
 {: .tip}
 
-3. **Kraken**: Kraken BLAST is a highly scalable, extremely fast, commercial, parallelized implementation of the NCBI BLAST application.
+* **Kraken**: Kraken BLAST is a highly scalable, extremely fast, commercial, parallelized implementation of the NCBI BLAST application.
 
 ## Identification of Gene Clusters
 
