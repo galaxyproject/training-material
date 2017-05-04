@@ -20,7 +20,7 @@ It consists of three main steps:
 > 1. [Introduction into File Formats](#introduction-into-file-formats)
 > 2. [Structural Annotation](#structural-annotation)
 > 3. [Functional Annotation](#functional-annotation)
-> {: .agenda}
+{: .agenda}
  
 # Introduction into File Formats
 
@@ -140,7 +140,7 @@ From BLAST search results we want to get only the best hit for each protein.
 > </details>
 {: .question}
 
-:wrench:Choose the tool **Select lines that match an expression** and enter the following information: *Select lines from* [select the BLAST top hit descriptions result file]; *that* [not matching]; *the pattern* [gi]. 
+:wrench: Choose the tool **Select lines that match an expression** and enter the following information: *Select lines from* [select the BLAST top hit descriptions result file]; *that* [not matching]; *the pattern* [gi]. 
 
 <img src="../images/selectlines.png" width="50%">
 
@@ -178,7 +178,6 @@ This file will be the input for more detailed analysis:
 > Cock et al. (2013): [Galaxy tools and workflows for sequence analysis with applications in molecular plant pathology](https://peerj.com/articles/167/)
 {: .tip}
 
-
 ## More Similarity Search Tools in Galaxy
 
 1. **VSEARCH**: For processing metagenomic sequences, including searching, clustering, chimera detection, dereplication, sorting, masking and shuffling. VSEARCH stands for vectorized search, as the tool takes advantage of parallelism in the form of SIMD vectorization as well as multiple threads to perform accurate alignments at high speed. VSEARCH uses an optimal global aligner (full dynamic programming Needleman-Wunsch), in contrast to USEARCH which by default uses a heuristic seed and extend aligner. This results in more accurate alignments and overall improved sensitivity (recall) with VSEARCH, especially for alignments with gaps.
@@ -196,7 +195,6 @@ This file will be the input for more detailed analysis:
 {: .tip}
 
 3. **Kraken**: Kraken BLAST is a highly scalable, extremely fast, commercial, parallelized implementation of the NCBI BLAST application.
-
 
 ## Identification of Gene Clusters
 
