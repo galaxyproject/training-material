@@ -75,31 +75,31 @@ change the sequence, but can increase disease risk.
 >  Computational tools will need to sort out networks of interacting genes
 >  revealed in exome sequencing.
 
----
-
 We will follow the pipeline:
 
 ![Exome sequencing pipeline in Galaxy](../images/genVAST.png)
 
-> :bulb: **Tip:** For a more detailed tutorial, have a look at the [tutorial on diploid variant calling](https://github.com/nekrut/galaxy/wiki/Diploid-variant-calling). It
+> ### :bulb: Tip:
+>
+> For a more detailed tutorial, have a look at the [tutorial on diploid variant calling](https://github.com/nekrut/galaxy/wiki/Diploid-variant-calling). It
 > follows a similar pipeline using genome in the bottle data, but with more details
 > particularly on the theory behind.
 {: .tip}
 
----
-### Agenda
-
-In Exome-Seq tutorial, we will deal with:
-
-1. [Data-preprocessing](#data-preprocessing)
-2. [Variant calling](#variant-calling)
-3. [Post-processing](#post-processing)
-4. [Variant analysis](#variant-analysis)
+> ### Agenda
+>
+> In Exome-Seq tutorial, we will deal with:
+>
+> 1. [Data-preprocessing](#data-preprocessing)
+> 2. [Variant calling](#variant-calling)
+> 3. [Post-processing](#post-processing)
+> 4. [Variant analysis](#variant-analysis)
 {: .agenda}
 
 # Data-preprocessing
 
 > ### :nut_and_bolt: Comments
+>
 > In this tutorial, a child has a yet unknown disease. His parents are healthy.
 > We will try to identify the genetic variation that is responsible for the disease
 > using the exome sequencing data from both parents and the child.
@@ -110,6 +110,7 @@ The raw exome sequences were mapped on `hg19` version of the human genome. So,
 for each family member, we will start with one BAM file with mapping results.
 
 > ### :pencil2: Hands-on: Data pre-processing
+>
 > 1.  Import all 3 BAM's into a new history:
 >     - [Father](https://zenodo.org/record/60520/files/father.bam)  
 >     - [Mother](https://zenodo.org/record/60520/files/mother.bam)  
@@ -129,7 +130,6 @@ for each family member, we will start with one BAM file with mapping results.
 >
 {: .hands_on}
 
----
 # Variant calling
 
 ## Generating FreeBayes calls
@@ -141,6 +141,7 @@ variant detector designed to find small polymorphisms, specifically SNPs
 substitution events) smaller than the length of a short-read sequencing alignment.
 
 > ### :pencil2: Hands-on: Generating FreeBayes calls
+>
 > 1. Select **FreeBayes** from **Phenotype Association** section of the tool menu (left
 > panel of Galaxy's interface)
 > 2. Run it:wrench::
@@ -163,6 +164,7 @@ compound variants into multiple independent variants and filter the VCF file
 to simplify the variant representation.
 
 > ### :pencil2: Hands-on: Post-processing FreeBayes calls
+>
 > 1. Split your allelic primitives (gaps or mismatches) into multiple VCF lines
 > with **VcfAllelicPrimitives** from **VCF Tools** :wrench::
 >    1. Select the FreeBayes output file as VCF dataset
@@ -173,8 +175,9 @@ to simplify the variant representation.
 >
 {: .hands_on}
 
-
-> :bulb: **Tip:** Have a look at the examples which help you constructing the correct expression.
+> ### :bulb: Tip:
+>
+> Have a look at the examples which help you constructing the correct expression.
 {: .tip}
 
 ## Annotate your variants
@@ -183,6 +186,7 @@ To annotate the variants, we use the [dbSNP](http://www.ncbi.nlm.nih.gov/SNP/),
 the NCBI database of genetic variation and then `hg19` database with **SnpEff**.
 
 > ### :pencil2: Hands-on: Annotating variants
+>
 > 1. Import the [dbSNP_138.hg19.vcf](https://zenodo.org/record/60520/files/dbSNP_138.hg19.vcf)
 >in your history (Build 138 data, available on the human assembly (GRCh37/hg19))
 > 2. Assign the known variant ID from dbSNP to your variants, using
@@ -195,11 +199,11 @@ the NCBI database of genetic variation and then `hg19` database with **SnpEff**.
 >
 {: .hands_on}
 
-    Look at your **"INFO"** column again in the generated VCF file. You will get some
-    gene names for your variants, but also a predicted impact and if your variant
-    is located inside of a known gene.
+Look at your **"INFO"** column again in the generated VCF file. You will get some gene names for your variants, but also a predicted impact and if your variant is located inside of a known gene.
 
-> :bulb: **Tip:** You can also have a look at the HTML report. It contains a number of useful
+> ### :bulb: Tip:
+>
+> You can also have a look at the HTML report. It contains a number of useful
 metrics such as distribution of variants across gene features.
 {: .tip}
 
@@ -209,6 +213,7 @@ At this stage, you have your first annotated variants and in theory everything
 you need for your further studies is included in your VCF file.
 
 > ### :pencil2: Hands-on: Getting VCF file
+>
 > 1. Extract your history to a workflow :wrench:
 > 2. Apply this workflow to the other BAM files :wrench:
 >
@@ -224,10 +229,10 @@ you need for your further studies is included in your VCF file.
 
 Now that we have an annotated VCF file it is time to peek inside our variation data
 
----
 # Post-processing
 
-> ### :pencil2: Hands-on: Getting VCF file
+> ### :pencil2: Hands-on: Post-processing
+>
 > 1. Create a pedigree file (PED) like this
 > 
 > ```
@@ -240,50 +245,53 @@ Now that we have an annotated VCF file it is time to peek inside our variation d
 > 2. Use the tool **GEMINI load** in **Gemini** to create a database out of your
 > combined VCF file and the PED file.
 >
->  > ### :nut_and_bolt: Comments
->  > This creates a sqlite database. To see the content of the database use
->  > **GEMINI_db_info**
-> {: .comment}
+>    > ### :nut_and_bolt: Comments
+>    >
+>    > This creates a sqlite database. To see the content of the database use
+>    > **GEMINI_db_info**
+>{: .comment}
 >
 {: .hands_on}
 
 Either way you have now a database with all your variants, with pedigree
 relations, additional annotations and most importantly its fast to search.
-> :bulb: **Tip:**
+> ### :bulb: Tip:
+>
 > Have a look at all different **Gemini** tools and run as many tools as possible on
 > your GEMINI databases. Try to get a feeling of what is possible with a variant
 > database in GEMINI.
 {: .tip}
 
----
 # Variant analysis
 
 **GEMINI query** is the most versatile of all the GEMINI tools. You can use it to
 ask 'interesting' questions in simple SQL (see the GEMINI [handbook](http://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1003153) on its usage).
 
-> ### :pencil2: Hands-on: **GEMINI query** examples:
-> - `select chrom, start, end from variants` will show you some information on all
-> variants that were found in any of the three samples
-> - `select chrom, start, end, (gts).(*) from variants` will also show you the
-> genotype of each sample also with the help wildcards
-> - `select chrom, start, end, gene, impact, (gts).(*) from variants v where v.impact_severity='HIGH'`
-> will show you some more information and filter out only those variants that
-> have a high impact
-> - `select chrom, vcf_if, start, end, ref, alt, gene, impact, (gts).(*) from variants v where v.impact_severity='HIGH'`
-> also shows you the reference allele and the alternative allele and the RSID for
-> the SNP if it exists
-{: .hands_on}
+### **GEMINI query** examples:
+- `select chrom, start, end from variants` will show you some information on all
+variants that were found in any of the three samples
+- `select chrom, start, end, (gts).(*) from variants` will also show you the
+genotype of each sample also with the help wildcards
+- `select chrom, start, end, gene, impact, (gts).(*) from variants v where v.impact_severity='HIGH'`
+will show you some more information and filter out only those variants that
+have a high impact
+- `select chrom, vcf_if, start, end, ref, alt, gene, impact, (gts).(*) from variants v where v.impact_severity='HIGH'`
+also shows you the reference allele and the alternative allele and the RSID for
+the SNP if it exists
 
-> :bulb: **Tip:**
+> ### :bulb: Tip:
+>
 > Switch on the `--header` parameter**
 >
-> > :bulb: **Tip:** To go further on **Gemini**, you can have a look at the following tutorials:
+> > ### :bulb: Tip:
+> >
+> > To go further on **Gemini**, you can have a look at the following tutorials:
 > >
 > > - [Introduction](https://s3.amazonaws.com/gemini-tutorials/Intro-To-Gemini.pdf)
 > > - [Identifying *de novo* mutations underlying Mendelian disease](https://s3.amazonaws.com/gemini-tutorials/Gemini-DeNovo-Tutorial.pdf)
 > > - [Identifying autosomal recessive variants underlying Mendelian disease](https://s3.amazonaws.com/gemini-tutorials/Gemini-Recessive-Tutorial.pdf)
 > > - [Identifying autosomal dominant variants underlying Mendelian disease](https://s3.amazonaws.com/gemini-tutorials/Gemini-Dominant-Tutorial.pdf)
-> 
+> {: .tip}
 > And for a more detailed tutorial on variant data generation in Galaxy, have a
 > look at the [tutorial on diploid variant calling](https://github.com/nekrut/galaxy/wiki/Diploid-variant-calling).
 {: .tip}
