@@ -44,15 +44,14 @@ It consists of three main steps:
 
 # Structural Annotation
 
-> ### :nut_and_bolt: Comments
-> For the genome annotation we use a piece of the *Aspergillus fumigatus* [genome sequence](../input_data/Aspergillus_sequence.fasta) as input file. 
-{: .comment}
+For the genome annotation we use a piece of the *Aspergillus fumigatus* [genome sequence](../input_data/Aspergillus_sequence.fasta) as input file. 
 
 ## Sequence Features
 
+First we want to get some general information about our sequence.
+
 > ### :pencil2: Hands-on: Sequence composition
 >
-> First we want to get some general information about our sequence.
 > 1. Count the number of bases in your sequence (**compute sequence length**)
 > 2. Check for sequence composition and GC content (**geecee**).
 > 3. Plot the sequence composition as bar chart. 
@@ -65,32 +64,45 @@ It consists of three main steps:
 
 At first you need to identify those structures of the genome which code for proteins. This step of annotation is called “structural annotation”. It contains the identification and location of open reading frames (ORFs), identification of gene structures and coding regions, and the location of regulatory motifs. Galaxy contains several tools for the structural annotation. Tools for gene prediction are **Augustus** (for eukaryotes and prokaryotes) and **glimmer3** (only for prokaryotes).
 
-> ### :nut_and_bolt: Comment
+> ### :pencil2: Hands-on: Gene prediction
+>
 > We use **Augustus** for gene prediction.
-{: .comment}
-
-### Gene prediction
-
-:wrench: Use the genome sequence (FASTA file) as input. Choose the right *model organism*, *gff* format output, and select all possible output options.
-
-![augustus](../images/augustus.png)
-
-Augustus will provide three output files: *gff3*, *coding sequences* (CDS) and *protein sequences*.
-
-> ### :question: Questions
+> 1. Use the genome sequence (FASTA file) as input.
+> 2. Choose the right *model organism*, *gff* format output.
+> 3. Select all possible output options.
+> 
+> ![augustus](../images/augustus.png)
+> 
+> Augustus will provide three output files: *gff3*, *coding sequences* (CDS) and *protein sequences*.
 >
-> How many genes are predicted?
+>    > ### :question: Question
+>    >
+>    > How many genes are predicted?
+>    >
+>    > <details>
+>    > <summary>Click to view answer</summary>
+>    > Check the output: <a href="../images/augustus_out.png">augustus_output</a>
+>    > </details>
+> {: .question}
 >
-> <details>
-> <summary></summary>
-> </details>
-{: .question}
+{: .hands_on}
 
-![augustus_output](../images/augustus_out.png)
-
-## tRNA and tmRNA Prediction
-
-Use **Aragorn** for tRNA and tmRNA prediction. As input file use the *Aspergillus* genome sequence. You can choose the genetic code (e.g. bacteria). Select the topology of your genome (circular or linear).  Are there tRNAs or tmRNAs in the sequence?
+> ### :pencil2: Hands-on: tRNA and tmRNA Prediction
+>
+> Use **Aragorn** for tRNA and tmRNA prediction.
+> 1. As input file use the *Aspergillus* genome sequence. You can choose the genetic code (e.g. bacteria).
+> 2. Select the topology of your genome (circular or linear). 
+>
+>    > ### :question: Question
+>    >
+>    > Are there tRNAs or tmRNAs in the sequence?
+>    >
+>    > <details>
+>    > <summary></summary>
+>    > </details>
+>    {: .question}
+>
+{: .hands_on}
 
 > ### :bulb: Tip:
 >
@@ -111,42 +123,46 @@ Functional gene annotation means the description of the biochemical and biologic
 
 For similarity searches we use *NCBI BLAST+ blastp* to find similar proteins in a protein database.
 
-### Similarity search
-
-:wrench: As input file, select the protein sequences from Augustus, choose the protein BLAST database *SwissProt* and the output format *xml*. 
-
-<img src="../images/blastP.png" width="70%">
-
-Parsing the xml output (**Parse blast XML output**) results in changing the format style into tabular.
-
-> ### :question: Questions
+> ### :pencil2: Hands-on:  Similarity search
 >
-> What information do you see in the BLAST output?
+> 1. :wrench: As input file, select the protein sequences from Augustus.
+> 2. Choose the protein BLAST database *SwissProt* and the output format *xml*. 
 >
-> <details>
-> <summary></summary>
-> </details>
-{: .question}
-
-From BLAST search results we want to get only the best hit for each protein.
-:wrench: Therefore apply the tool **BLAST top hit descriptions** with *number of descriptions =1* on the xml output file. 
-
-> ### :question: Questions
+> <img src="../images/blastP.png" width="70%">
+> 
+> 3. Parsing the xml output (**Parse blast XML output**) results in changing the format style into tabular.
 >
-> For how many proteins we do not get a BLAST hit? 
+>    > ### :question: Questions
+>    >
+>    > What information do you see in the BLAST output?
+>    >
+>    > <details>
+>    > <summary></summary>
+>    > </details>
+> {: .question}
 >
-> <details>
-> <summary></summary>
-> </details>
-{: .question}
-
-:wrench: Choose the tool **Select lines that match an expression** and enter the following information: *Select lines from* [select the BLAST top hit descriptions result file]; *that* [not matching]; *the pattern* [gi]. 
-
-<img src="../images/selectlines.png" width="50%">
-
-> :bulb: The result file will contain all proteins which do not have an entry in the second column and therefore have no similar protein in the SwissProt database.
-
-> :bulb: For functional description of those proteins we want to search for motifs or domains which may classify them more. To get a protein sequence FASTA file with only the not annotated proteins, use the tool **Filter sequences by ID from a tabular file** and select for *Sequence file to filter on the identifiers* [Augustus protein sequences] and for *Tabular file containing sequence identifiers* the protein file with not annotated sequences. The output file is a FASTA file with only those sequences without description.
+>
+> From BLAST search results we want to get only the best hit for each protein.
+> 4. :wrench: Therefore apply the tool **BLAST top hit descriptions** with *number of descriptions =1* on the xml output file. 
+>
+>    > ### :question: Question
+>    >
+>    > For how many proteins we do not get a BLAST hit? 
+>    >
+>    > <details>
+>    > <summary></summary>
+>    > </details>
+> {: .question}
+>
+> 5. :wrench: Choose the tool **Select lines that match an expression** and enter the following information: *Select lines from* [select the BLAST top hit descriptions result file]; *that* [not matching]; *the pattern* [gi]. 
+> 
+> <img src="../images/selectlines.png" width="50%">
+>
+>    > :bulb: The result file will contain all proteins which do not have an entry in the second column and therefore have no similar protein in the SwissProt database.
+>    >
+>    > :bulb: For functional description of those proteins we want to search for motifs or domains which may classify them more. To get a protein sequence FASTA file with only the not annotated proteins, use the tool **Filter sequences by ID from a tabular file** and select for *Sequence file to filter on the identifiers* [Augustus protein sequences] and for *Tabular file containing sequence identifiers* the protein file with not annotated sequences. The output file is a FASTA file with only those sequences without description.
+>
+{: .hands_on}
 
 This file will be the input for more detailed analysis:
 
