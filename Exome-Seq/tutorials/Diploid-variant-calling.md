@@ -175,18 +175,20 @@ Yet for a quick tutorial these datasets are way too big, so we created a [downsa
 
 This produces a dataset in [VCF](http://www.1000genomes.org/wiki/Analysis/variant-call-format) format containing 35 putative variants. Before we can continue we need to post-process this dataset by breaking compound variants into multiple independent variants with **VcfAllelicPrimitives** tool found within **VCF Tools** section. This is necessary for ensuring the smooth sailing through downstream analyses:
 
-### :pencil2: Post-processing
-
-1. Select FreeBayes output as the input for this tool :wrench:
-2. Make sure **Maintain site and allele-level annotations when decomposing** and **Maintain genotype-level annotations when decomposing** are set to `Yes`
-
-  ![](../images/vcfallelicprimitives.png)
-
-**VCFAllelicPrimitives** generated a VCF files containing 37 records (the input VCF only contained 35). This is because a multiple nucleotide polymorphism (`TAGG|CAGA`) at position 618851 have been converted to two:
-
-| Before | After |
-|--------|---------|
-|`chr19 618851 . TAGG CAGA 81.7546`<br> | `chr19 618851 . T C 81.7546`<br>`chr19 618854 . G A 81.7546`|
+> ### :pencil2: Hands-on: Post-processing
+>
+> 1. Select FreeBayes output as the input for this tool :wrench:
+> 2. Make sure **Maintain site and allele-level annotations when decomposing** and **Maintain genotype-level annotations when decomposing** are set to `Yes`
+>
+>   ![](../images/vcfallelicprimitives.png)
+>
+> **VCFAllelicPrimitives** generated a VCF files containing 37 records (the input VCF only contained 35). This is because a multiple nucleotide polymorphism (`TAGG|CAGA`) at position 618851 have been converted to two:
+> 
+> | Before | After |
+> |--------|---------|
+> |`chr19 618851 . TAGG CAGA 81.7546`<br> | `chr19 618851 . T C 81.7546`<br>`chr19 618854 . G A 81.7546`|
+>
+{: .hands_on}
 
 ## Annotating variants with SnpEff
 
@@ -244,13 +246,15 @@ GEMINI database is queried using the versatile SQL language (more on SQL [here](
 > The examples below are taken from "[Intro to Gemini](https://s3.amazonaws.com/gemini-tutorials/Intro-To-Gemini.pdf)" tutorial. For extensive documentation see "[Querying GEMINI](http://gemini.readthedocs.org/en/latest/content/querying.html)".
 {: .tip}
 
-### :pencil2: Selecting "novel" variants that are not annotated in dbSNP database
-
-Type `SELECT count(*) FROM variants WHERE in_dbsnp == 0` into **The query to be issued to the database**
- 
-    ![](../images/gemini_query1.png)
- 
-As we can see from [output](https://usegalaxy.org/datasets/bbd44e69cb8906b51bb37b9032761321/display/?preview=True) there are 21 variants that are not annotated in dbSNP
+> ### :pencil2: Hands-on: Selecting "novel" variants that are not annotated in dbSNP database
+>
+> Type `SELECT count(*) FROM variants WHERE in_dbsnp == 0` into **The query to be issued to the database**
+> 
+>     ![](../images/gemini_query1.png)
+>  
+> As we can see from [output](https://usegalaxy.org/datasets/bbd44e69cb8906b51bb37b9032761321/display/?preview=True) there are 21 variants that are not annotated in dbSNP
+>
+{: .hands_on}
 
 > ### :pencil2: Find variants in POLRMT gene
 >
@@ -262,7 +266,7 @@ As we can see from [output](https://usegalaxy.org/datasets/bbd44e69cb8906b51bb37
 
 **GEMINI** provides access to genotype, sequencing depth, genotype quality, and genotype likelihoods for each individual (`subjectID`):
 
-### :pencil2: Querying
+#### Querying
 
 * `gt_types.subjectID` - three types of genotype types: `HOM_REF`, `HET`, `HOM_ALT`;
 * `gt_quals.subjectID` - genotype quality
@@ -314,25 +318,25 @@ This short tutorial should give you an overall idea on how generate variant data
 
 ## How to use these tutorials?
 
-> * Right click on the :notebook: symbol and open tutorial in a new browser tab;
-> * Right click on :arrow_forward: symbol and open Galaxy history in another new browser tab;
-> * When Galaxy history interface opens you will need to click **Import history** link highlighted with a red border in the following figure:
->
->   ![](../images/import_history.png)
->
-> * If you have a wide screen arrange browsers tabs side by side:
->
->   ![](../images/side-by-side.png)
->
-> * Proceed with tutorial. For example, to repeat the following command from GEMINI tutorial:
->
->   ![](../images/gemini_command.png)
->
-> * Use Galaxy's **GEMINI_load** tool:
-> 
->   ![](../images/galaxy_command.png)
-> 
-> * and so on....
+* Right click on the :notebook: symbol and open tutorial in a new browser tab;
+* Right click on :arrow_forward: symbol and open Galaxy history in another new browser tab;
+* When Galaxy history interface opens you will need to click **Import history** link highlighted with a red border in the following figure:
+
+  ![](../images/import_history.png)
+
+* If you have a wide screen arrange browsers tabs side by side:
+
+  ![](../images/side-by-side.png)
+
+* Proceed with tutorial. For example, to repeat the following command from GEMINI tutorial:
+
+  ![](../images/gemini_command.png)
+
+* Use Galaxy's **GEMINI_load** tool:
+ 
+  ![](../images/galaxy_command.png)
+ 
+* and so on....
 
 
 > ### :bulb: Tip: If things don't work...

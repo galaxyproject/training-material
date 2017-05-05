@@ -19,7 +19,7 @@ identify the genetic variants in all of an individual's genes. Exome sequencing
 is cheaper also than whole-genome sequencing. With a high coverage rate of
 100+ DP, 98% of all exons are covered.
 
-### Items where exome sequencing can't identify genetic variation in:
+Items where exome sequencing can't identify genetic variation in:
 
 - *All genes*
 
@@ -98,12 +98,9 @@ We will follow the pipeline:
 
 # Data-preprocessing
 
-> ### :nut_and_bolt: Comments
->
-> In this tutorial, a child has a yet unknown disease. His parents are healthy.
-> We will try to identify the genetic variation that is responsible for the disease
-> using the exome sequencing data from both parents and the child.
-{: .comment}
+In this tutorial, a child has a yet unknown disease. His parents are healthy.
+We will try to identify the genetic variation that is responsible for the disease
+using the exome sequencing data from both parents and the child.
 
 Most of the data pre-processing have already be done on the raw exome sequencing.
 The raw exome sequences were mapped on `hg19` version of the human genome. So,
