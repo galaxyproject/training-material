@@ -602,7 +602,7 @@ Open http://127.0.0.1:9090/ in your web browser to view your new tool
 ```bash
 $ . ~/.venv_planemo/bin/activate  # not mandatory
 $ planemo conda_init
-$ export PATH=~/miniconda2/bin:$PATH
+$ export PATH=~/miniconda3/bin:$PATH
 $ conda config --add channels conda-forge
 $ conda config --add channels defaults
 $ conda config --add channels r
@@ -1002,8 +1002,8 @@ conda install pyyaml
 ```bash
 $ conda create -n yaml pyyaml
 $ conda env list
-yaml        *  ~/miniconda2/envs/yaml
-root             ~/miniconda2
+yaml        *  ~/miniconda3/envs/yaml
+root             ~/miniconda3
 $ source activate yaml
 (yaml) $
 ```
@@ -1018,10 +1018,10 @@ $ source activate yaml
 $ vi ~/.bashrc
 ```
 ```bash
-function conda2activate () {
-  export PATH=~/miniconda2/bin:$PATH; }
-function conda2deactivate () {
-  export PATH=$(echo $PATH | sed "s|$HOME/miniconda2/bin:||g"); }
+function conda3activate () {
+  export PATH=~/miniconda3/bin:$PATH; }
+function conda3deactivate () {
+  export PATH=$(echo $PATH | sed "s|$HOME/miniconda3/bin:||g"); }
 ```
 
 ---
@@ -1058,7 +1058,7 @@ function conda2deactivate () {
 #### Steps
 1. Fill a `<requirement>` tag to target a `seqtk` conda package
 2. Use `planemo conda_install .` to install tools and set an environment
-3. Use `planemo test --conda_dependency_resolution`
+3. Use `planemo test`
 
 ???
 
@@ -1067,7 +1067,7 @@ function conda2deactivate () {
 # 2.
 planemo conda_install .
 # 3.
-planemo test --conda_dependency_resolution # seqtk_seq_step4.xml
+planemo test # seqtk_seq_step4.xml
 ```
 
 ---
@@ -1163,9 +1163,9 @@ mkdir -p $PREFIX/bin
 cp *.py $PREFIX/bin
 ```
 <small>
-- $PREFIX is a variable defined by conda when building the package
-- $PREFIX usually contains `bin/` `lib/` `include/` that are filled with the package files
-- $PREFIX will be loaded in the user environment at runtime: PATH, LD_LIBRARY_PATH, PYTHONPATH, ...
+- `$PREFIX` is a variable defined by conda when building the package
+- `$PREFIX` usually contains `bin/` `lib/` `include/` that are filled with the package files
+- `$PREFIX` will be loaded in the user environment at runtime: `PATH`, `LD_LIBRARY_PATH`, `PYTHONPATH`, ...
 </small>
 
 ---
@@ -1193,6 +1193,9 @@ $ conda install conda-build
 $ conda build .
 
 ```
+
+(`planemo conda_init` now includes `conda-build` so that first command may not be needed.)
+
 1. BUILD START: Builds/Compiles the package
 2. BUILD START: Provides a .tar.bz2
 3. TEST START: Installs the .tar.bz2 previously generated
@@ -1209,7 +1212,7 @@ To continue your `planemo test`, you may want to use your new package before it'
 
 Get the path of your new package .tar.bz2
 ```bash
-conda install ~/miniconda2/conda-bld/linux-64/bwa-0.7.15-0.tar.bz2
+conda install ~/miniconda3/conda-bld/linux-64/bwa-0.7.15-0.tar.bz2
 ```
 
 ---
