@@ -1476,24 +1476,120 @@ echo $__app__.tool_data_tables[ 'pfam_databases' ].get_fields() )[0][-1]
 
 ---
 
+### Multiple input
+
+```xml
+<param name="..." type="data" format="txt" label="..." help="..." />
+```
+
+![](../images/input_data.png)
+
+Possible to select multiple dataset:
+
+![](../images/input_data_multiple.png)
+
+- Useful to launch the same tool on multiple datasets independently
+- One job per dataset
+
+---
+
+### Multiple input
+
+```xml
+<param name="..." type="data" format="txt" multiple="true" label="..." help="..." />
+```
+
+![](../images/input_data_multiple2.png)
+
+In the command:
+
+```xml
+<command><![CDATA[
+...
+#for $input in $inputs
+    --input "$input"
+#end for
+]]></command>
+```
+
+One job for all selected dataset
+
+---
+
+### Multiple output
+
+```xml
+<outputs>
+    <data format="txt" name="output">
+        <discover_datasets pattern="__designation_and_ext__"
+            directory="output_dir" visible="true" />
+    </data>
+</outputs>
+```
+
+- `__designation_and_ext__`: a predefined regexp,
+
+- catches the dataset identifier + the datatype
+
+If the output file extension is not present/usable:
+
+```xml
+<outputs>
+    <data format="txt" name="output">
+        <discover_datasets pattern="__designation__" format="txt"
+            directory="output_dir" visible="true" />
+    </data>
+</outputs>
+```
+
+---
+
 ### Dataset collection
 
-To group related datasets, and treat them as a single unit
+To group related datasets, and treat them as a single entity
 
-- `list`: a simple list of files
-- `paired`: a pair of files, `forward` and `reverse` for NGS
+- `list`: a simple list of datasets
+- `paired`: a pair of datasets, `forward` and `reverse` for NGS
 - composite: e.g. `list:paired` for a list of dataset pairs
+
+Usage
+
+- Useful to launch a workflow on many samples
+- Sample names are kept along the workflow: `element_identifier`
+- Galaxy tools are available to manipulate collections
+
+---
+
+.center[### Dataset collection]
+
+.center[Creation from history]
+
+.pull-left[
+![](../images/historyWithCheckboxes.png)
+]
+
+.pull-right[
+![](../images/buildPairs.png)
+]
+
+---
+
+### Dataset collection
+
+Creation when uploading (>=17.05)
+
+![](../images/upload_collection.png)
 
 ---
 
 ### Dataset collection > input
 
-Accept both datasets and collections:
-
 ```xml
 <param type="data" multiple="true" name="inputs" label="Input BAM(s)"
   format="bam" />
 ```
+
+![](../images/input_data_collection.png)
 
 Accept only collections:
 
@@ -1501,8 +1597,6 @@ Accept only collections:
 <param type="data_collection" collection_type="list|paired|list:paired|..."
   name="inputs" label="Input BAM(s)" format="bam" />
 ```
-
-In the command:
 
 ```xml
 <command><![CDATA[
@@ -1536,9 +1630,8 @@ Unknown number of files:
 ```
 
 
-`__name_and_ext__`: a predefined regexp,
-
-catches the dataset identifier + the format
+- `__name_and_ext__`: a predefined regexp,
+- catches the dataset identifier + the datatype
 
 ---
 
