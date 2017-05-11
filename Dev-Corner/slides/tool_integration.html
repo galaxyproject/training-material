@@ -1238,6 +1238,8 @@ conda install ~/miniconda3/conda-bld/linux-64/bwa-0.7.15-0.tar.bz2
 8. Wait for the functional tests to pass on the master branch
 9. Enjoy your new Conda package installed from https://anaconda.org/bioconda
 
+See [Contributing with GitHub](github_contribution.html)
+
 ---
 
 ### <i class="fa fa-pencil" aria-hidden="true"></i> Hands-on
@@ -1453,18 +1455,24 @@ trinity.xml
 
 ```xml
 <command><![CDATA[
-${input_foobar.ext}
+# Email’s numeric ID (id column of galaxy_user table in the database)
+echo $__user_id__
 
---search_pfam "${ filter( lambda x: str( x[0] ) == str( $search.pfam_db ),
-  $__app__.tool_data_tables[ 'pfam_databases' ].get_fields() )[0][-1] }"
+# User’s email address
+echo $__user_email__
 
-library $__app__.config.user_library_import_dir/$__user_email__/$inputs.library
+# The galaxy.app.UniverseApplication instance, gives access to all other configuration file variables.
+# Should be used as a last resort, may go away in future releases.
+echo $__app__.config.user_library_import_dir
+echo $__app__.tool_data_tables[ 'pfam_databases' ].get_fields() )[0][-1]
 
-#if isinstance( $input1.datatype,
-  $__app__.datatypes_registry.get_datatype_by_extension('gff').__class__):
+# Check a dataset type
+#if $input1.is_of_type('gff'):
+    echo "input1 type is ${input1.datatype}"
+#end if
 ]]></command>
 ```
-.footnote[[Reserved Variables List](https://docs.galaxyproject.org/en/latest/dev/schema.html#tool-command)]
+.footnote[[Reserved Variables List](https://docs.galaxyproject.org/en/latest/dev/schema.html#reserved-variables)]
 
 ---
 
