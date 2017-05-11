@@ -151,34 +151,14 @@
                     <section data-markdown>
                         <script type="text/template">
                             ### Connect your Galaxy to a Tool Shed
-                            - Connect your Galaxy to a Tool Shed in `config/tool_sheds_conf.xml`:
+                            - Only for third party toolsheds (Main and Test by default)
+                            - In `config/tool_sheds_conf.xml`:
                             ```bash
                               <tool_sheds>
                                 <tool_shed name="Galaxy main tool shed" url="https://toolshed.g2.bx.psu.edu/" />
                               </tool_sheds>
                             ```
                             - Restart Galaxy
-                        </script>
-                    </section>
-                    <section data-markdown>
-                        <script type="text/template">
-                            ### Keep default dependencies resolution
-                              - in `config/galaxy.ini`:
-                            ```txt
-                            conda_prefix = <tool_dependency_dir>/_conda
-                            conda_auto_install = False
-                            conda_auto_init = False
-                            ```
-                              - in `config/dependency_resolvers_conf.xml` (order matters):
-                            ```xml
-                            <dependency_resolvers>
-                                  <tool_shed_packages />
-                                  <galaxy_packages />
-                                  <galaxy_packages versionless="true" />
-                                  <conda />
-                                  <conda versionless="true" />
-                            </dependency_resolvers>
-                            ```
                         </script>
                     </section>
                     <section data-markdown>
@@ -321,45 +301,31 @@
                     </section>
                     <section data-markdown>
                         <script type="text/template">
-                            ###  Tool with dependencies
-                            - Report the requirement in your wrapper in order to **load environment with Conda**
-                            `tandem_repeats_finder_wrapper.xml`
-                            ```xml
-                            <requirements>
-                              <requirement type="package" version="4.0">tandem_repeats_finder</requirement>
-                            </requirements>
-                            ```
-                        </script>
-                    </section>
-                    <section data-markdown>
-                        <script type="text/template">
                             ### 3.2 Tool suite
-                            #### Relationship between required repositories
+                            #### Group of related repositories
                         </script>
                     </section>
                     <section data-markdown>
                         <script type="text/template">
                             ###  Tool suite
                             <img src="../images/toolSuite.png" class="no-border" >
-                            - Works but...
+                            - Works but no way to install a single tool
                         </script>
                     </section>
                     <section data-markdown>
                         <script type="text/template">
                             ###  Tool suite
                             <img src="../images/toolsuite2.png" class="no-border" >
-                            - One tool per repository
+                            - One repository per individual tool
 
-                            - How to link tools ?
-                              - To install them together
+                            - A special 'Tool suite' repository listing the individual repositories
                         </script>
                     </section>
                     <section data-markdown>
                         <script type="text/template">
                             ###  Tool suite
-                            - Repository dependencies
-                              - relationship between a dependent repository and one or more required repository (tools, datatypes, workflows,...)
-                              - -> One file
+                            - relationship between a dependent repository and one or more required repository (tools, datatypes, workflows,...)
+                            - -> One XML file
                             ```xml
                             <?xml version="1.0"?>
                             <repositories description="Pipeline phylogeny">
@@ -370,39 +336,13 @@
                             […]
                             </repositories>
                             ```
+                            No need to write it yourself, Planemo does it for you
                         </script>
                     </section>
                     <section data-markdown>
                         <script type="text/template">
                             ###  Tool suite
                             <img src="../images/toolsuite3.png" class="no-border" >
-                        </script>
-                    </section>
-                    <section data-markdown>
-                        <script type="text/template">
-                            ###  Tool suite
-                            ```xml
-                            <?xml version="1.0"?>
-                            <repositories description="Pipeline phylogeny">
-                               <repository name="mafft" owner="gandres" />
-                            </repositories>
-                            ```
-                            <img src="../images/toToolshed.png" class="no-border" >
-                            ```xml
-                            <?xml version="1.0"?>
-                            <repositories description="Pipeline phylogeny">
-                               <repository name="mafft" owner="gandres" toolshed=
-"http://testtoolshed.g2.bx.psu.edu" changeset_revision="a895633568"/>
-                            </repositories>
-                            ```
-                        </script>
-                    </Section>
-                    <section data-markdown>
-                        <script type="text/template">
-                            ###  Tool suite
-                            - New tool version
-                              - Latest version is no longer **changeset_revision="a895633568**
-                              - Reload `repository_dependencies.xml` file in your repository
                         </script>
                     </section>
                     <section data-markdown>
@@ -414,7 +354,7 @@
                         <script type="text/template">
                             ###  Workflow
                             <img src="../images/workflow.png" class="no-border" >
-                            - How to order tools ?
+                            - A succession of tools to perform a complete analysis
                         </script>
                     </section>
                     <section data-markdown>
@@ -436,7 +376,7 @@
                         <script type="text/template">
                             ###  Workflow
                             - You have your file Galaxy-Workflow-NAME.ga
-                            - How to automatically import all tools?
+                            - How to automatically install the tools used in the workflow?
                               - -> `repository_dependencies.xml`
                             ```xml
                             <?xml version="1.0"?>
@@ -681,7 +621,7 @@
                             41d40
                             <     <param name="fileout_label2" type="text" value="Unused" label="none" help="Output name for files" />
                             ```
-                            - Need to be updated
+                            - The repository needs to be updated
                         </script>
                     </section>
                     <section data-markdown >
@@ -701,7 +641,7 @@
                             Repository tandem_repeats_finder updated successfully.
                             Repository metadata updated.
                             ```
-                            - Tool updated
+                            - The repository has been updated
                         </script>
                     </section>
                     <section data-markdown >
@@ -712,7 +652,7 @@
 
                             ```
                             <img src="../images/checkToolUpdate.png" width="70%" >
-                            - Tool updated
+                            - The repository has been updated
                         </script>
                     </section>
                     <section data-markdown>
@@ -763,13 +703,75 @@
                     </section>
                 </section>
 
+                <!-- GITHUB REPOS -->
+                <section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ## 6. Contributing to a community
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ### Contributing to a community
+                            Many tools developped by the community on GitHub repositories
+                            - [Intergalactic Utilities Commission](https://github.com/galaxyproject/tools-iuc)
+                            - [GalaxyP](https://github.com/galaxyproteomics/tools-galaxyp)
+                            - ...
+
+                            Added value:
+                            - Easier development for developers
+                            - Easier contribution for user
+                            - Automated tests on each contribution
+                            - Automated publishing to ToolShed
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ### Intergalactic Utilities Commission (IUC)
+                            Develops high quality Galaxy tools
+                            Establishes and follows [best practices](http://galaxy-iuc-standards.readthedocs.io/en/latest/)
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ### How should I publish my tool?
+
+                            Using an existing GitHub repository
+
+                            - Open a pull request
+                            - Follow the guidelines and comments from maintainers
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ### How should I publish my tool?
+
+                            Using your own GitHub repository
+
+                            - Reasons: ownership, specific practices, exotic tools
+                            - Follow the same structure
+                            - Use `.travis.yml` to automate tests and publishing
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                            ### How should I publish my tool?
+
+                            Using planemo by hand
+
+                            - Ok for few tools
+                            - Makes contributing harder
+                        </script>
+                    </section>
+                </section>
+
                 <!-- REFERENCES -->
                 <section>
                     <section data-markdown >
                         <script type="text/template">
                             ## References
-                            - [ToolShed](https://wiki.galaxyproject.org/ToolShed/Tour)
-                            - [Install tools from the ToolShed](https://wiki.galaxyproject.org/Admin/Tools/AddToolFromToolShedTutorial)
+                            - [ToolShed](https://galaxyproject.org/toolshed/tour/)
+                            - [Install tools from the ToolShed](https://galaxyproject.org/admin/tools/add-tool-from-toolshed-tutorial/)
                             - [Publish tools with Planemo](https://planemo.readthedocs.io/en/latest/publishing.html)
                         </script>
                     </section>
