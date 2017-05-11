@@ -10,137 +10,109 @@ Give a short introduction to small RNAs and why we care about them. The data pro
 
 # Analysis strategy
 
-The goal of this exercise is to identify what small RNAs, specifically piRNAs, are present in wild-type and mutant flies. We will identify piRNAs from aligned reads as well as identify differentially expressed piRNAs. We will generally follow a popular piRNAs analysis pipeline developed by the Zamore Lab and ZLab at UMass Med School called [PiPipes](https://github.com/bowhan/piPipes). Although PiPipes was developed for analysis of piRNAs, many of the basical principles can be applied to other classes of small RNAs.
+The goal of this exercise is to identify what small RNAs, specifically piRNAs, are present in wild-type and mutant flies. In this study, we have biological triplicate small RNA- and mRNA-seq samples for both wild-type and (whatever) mutant flies. We will identify piRNAs from aligned reads as well as identify differentially expressed piRNAs. We will generally follow a popular piRNA analysis pipeline developed by the Zamore Lab and ZLab at UMass Med School called [PiPipes](https://github.com/bowhan/piPipes). Although PiPipes was developed for analysis of piRNAs, many of the basical principles can be applied to other classes of small RNAs. It is of note that this tutorial assumes libraries have been de-multiplexed if necessary so that the input data files are FASTQ formatted (although not necessarily trimmed of adaptors or for low quality). This tutorial also assumes that the FASTQ files use the Sanger Phred encoding scheme (**more about this and what to do if data are not using Sanger/Illumina 1.9+ encoding)**. Because small RNAs are, well, small, single-end sequencing is almost always used for sRNA-seq libraries.
 
 > ### Agenda
 >
 > In this tutorial, we will address:
 >
 > 1. Data upload
-> 2. Read trimming
-> 3. Read aligning
-> 4. Annotating
-> 5. Abundance estimating
-> 6. Differential expression testing
-> 7. Visualization
+> 1. Read quality checking and trimming
+> 1. Read alignment
+> 1. Small RNA annotation
+> 1. Small RNA abundance estimation
+> 1. Small RNA differential expression testing
+> 1. Small RNA and mRNA integration
+> 1. Visualization
 
 ## Data upload
 
 Due to the large size of the original sRNA-seq and mRNA-seq datasets, we have downsampled them to only inlcude reads mapping to something interesting. These datasets are avaialble at [`Zenodo`](https://zenodo.org/record/####), where you can find the FASTQ files corresponding to replicate sRNA-seq and mRNA-seq libraries and an annotation file of known RefSeq transcripts for dm3.
 
-**UPDATES STOPPED HERE**
-
 > ### :pencil2: Hands-on: Data upload
 >
-> 1. Create a new history for this RNA-seq exercise
+> 1. Create a new history for this sRNA-seq exercise
 > 2. Open the data upload manager (Get Data -> Upload file)
-> 3. Copy and paste the links for the reads and annotation file
+> 3. Copy and paste the links for the reads (.fq) and annotation (.gtf) files
 > 4. Select **Paste/Fetch Data**
-> 5. Paste the link(s) into the text field
-> 6. Change the datatype of the read files to **fastqsanger**
-> 7. Change the datatype of the annotation file to **gtf** and assign the Genome as **mm10**
-> 8. Press **Start**
-> 9. Rename the files in your history to retain just the necessary information (*e.g.* "G1E R1 forward reads")
+> 5. Paste the links into the text field
+> 6. Set the datatype of the read (.fq) files to **fastqsanger**
+> 7. Set the datatype of the annotation (.gtf) file to **gtf** and assign the Genome as **dm3**
+> 8. Click **Start**
+> 9. Rename the files in your history to retain just the necessary information (*e.g.* "WT sRNAs replicate 1")
 >
 >    > <details>
 >    > <summary>:bulb: Tip: Importing data via links</summary>
 >    > <ol type="2">
 >    > <li>Below are the links to the read files that can be copied and pasted in the upload manager.</li>
->    > <li>https://<i></i>zenodo.org/record/254485/files/G1E_R1_forward_downsampled_SRR549355.fastqsanger.gz
->    > https://<i></i>zenodo.org/record/254485/files/G1E_R1_reverse_downsampled_SRR549355.fastqsanger.gz
->    > https://<i></i>zenodo.org/record/254485/files/G1E_R2_forward_downsampled_SRR549356.fastqsanger.gz
->    > https://<i></i>zenodo.org/record/254485/files/G1E_R2_reverse_downsampled_SRR549356.fastqsanger.gz
->    > https://<i></i>zenodo.org/record/254485/files/Megakaryocyte_R1_forward_downsampled_SRR549357.fastqsanger.gz
->    > https://<i></i>zenodo.org/record/254485/files/Megakaryocyte_R1_reverse_downsampled_SRR549357.fastqsanger.gz
->    > https://<i></i>zenodo.org/record/254485/files/Megakaryocyte_R2_forward_downsampled_SRR549358.fastqsanger.gz
->    > https://<i></i>zenodo.org/record/254485/files/Megakaryocyte_R2_reverse_downsampled_SRR549358.fastqsanger.gz</li>
->    > <li>You will need to fetch the link to the annotation file yourself ;)</li>
+>    > <li>https://<i></i>zenodo.org/record/...fq.gz
+>    > https://<i></i>zenodo.org/record/...fq.gz</li>
+>    > <li>You will also need to fetch the annotation (.gtf) file link.</li>
 >    > </ol>
 >    > </details>
 >
->
 > {: .hands_on}
 
-## Quality control
+## Read quality checking and trimming
 
-For quality control, we use similar tools as described in [NGS-QC tutorial](../../NGS-QC/tutorials/dive_into_qc): [FastQC](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/) and [Trimmomatic](http://www.usadellab.org/cms/?page=trimmomatic).
+Small RNA sequencing library preparations typically involve adding an artificial adaptor sequence to the 3' ends of the small RNA reads. These sequences need to be removed or trimmed before attemping to align the reads to a reference. Before performing the adaptor trimming step, let's confirm that the universal small RNA-seq 3' adaptor was indeeded used in this library prepration. To accomplish this, we can use the [FastQC](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/) tool described in the [NGS-QC tutorial](../../NGS-QC/tutorials/dive_into_qc).
 
 > ### :pencil2: Hands-on: Quality control
 >
-> 1. **FastQC** :wrench:: Run `FastQC` on the forward and reverse read files to assess the quality of the reads.
+> 1. **FastQC** :wrench:: Run `FastQC` on the FASTQ read files to identify any adaptors and assess the quality of the reads.
 >
 >    > ### :question: Questions
 >    >
 >    > 1. What is the read length?
->    > 2. Is there anything interesting about the quality of the base calls based on the position in the reads?
+>    > 1. Is there anything interesting about the quality of the base calls based on the position in the reads?
+>    > 1. Are there any adaptors present in these reads? Which one(s)?
 >    >
 >    >    <details>
 >    >    <summary>Click to view answers</summary>
 >    >    <ol type="1">
->    >    <li>The read length is 99 bp</li>
+>    >    <li>The read length is ## bp</li>
 >    >    <li>The quality of base calls declines throughout a sequencing run. </li>
+>    >    <li>Yes, Illumina TruSeq adaptors are present. </li>
 >    >    </ol>
 >    >    </details>
 >    {: .question}
 >
-> 2. **Trimmomatic** :wrench:: Trim off the low quality bases from the ends of the reads to increase mapping efficiency. Run `Trimmomatic` on each pair of forward and reverse reads.
+> 1. **Trim Galore!** :wrench:: Trim off Illumina adaptors from the 3' ends of the reads by running `Trim Galore!` on every FASTQ file with the following parameters:
+>    - **Is this library paired- or single-end?**: Single-end
+>    - **Reads in FASTQ format**: Select "Multiple datasets" and then highlight all sRNA FASTQ files
+>    - **Trimming reads?**: Illumina small RNA adapters
+>    - **Trim Galore! advanced settings**: Full parameter list
+>    - **Overlap with adapter sequence required to trim a sequence**: 6
+>    - **Discard reads that became shorter than length INT**: 12
 >
 >    ![](../images/trimmomatic.png)
 >
-> 3. **FastQC** :wrench:: Re-run `FastQC` on trimmed reads and inspect the differences.
+> 1. **FastQC** :wrench:: Re-run `FastQC` on trimmed reads and inspect the differences.
 >
 >    > ### :question: Questions
 >    >
 >    > 1. What is the read length?
->    > 2. Is there anything interesting about the quality of the base calls based on the position in the reads?
+>    > 1. Are there any adaptors present in these reads? Which one(s)?
 >    >
 >    >    <details>
 >    >    <summary>Click to view answers</summary>
 >    >    <ol type="1">
 >    >    <li>The read lengths range from 1 to 99 bp after trimming</li>
->    >    <li>The average quality of base calls does not drop off as sharply at the 3' ends of reads.</li>
+>    >    <li>No, Illumina TruSeq adaptors are no longer present. </li>
 >    >    </ol>
 >    >    </details>
 >    {: .question}
 > ![](../images/BeforeAndAfterTrimming.png)
 > {: .hands_on}
 
-Now that we have trimmed our reads and are fortuante that there is a reference genome assembly for mouse, we will align our trimmed reads to the genome.
+Now that we have trimmed our reads and are fortuante that there is a reference genome assembly for Drosophila, we will align our trimmed reads to the genome. For miRNA analyses, it is useful to align to the reference set of known miRNAs first, and then re-align any unaligned reads to the reference genome.
 
-> ### :nut_and_bolt: Comment
->
-> Instead of running a single tool multiple times on all your data, would you rather run a single tool on multiple datasets at once? Check out the [dataset collections](https://galaxyproject.org/tutorials/collections/) feature of Galaxy!
-> {: .comment}
+## Read alignment
 
-# Mapping
+To quantify small RNA abundance and identify their putative targets, we need to know where the sequenced reads align to a reference genome. In the case of a eukaryotes, some small RNAs are transcribed off of mRNA targets which could include originating from an exon-exon boundary. Therefore, we must use a splice-aware aligner to account for this possibility. [`HISAT`](https://ccb.jhu.edu/software/hisat2/index.shtml) is an accurate and fast tool for aligning spliced reads to a genome. Another popular spliced aligner is [`TopHat`](https://ccb.jhu.edu/software/tophat/index.shtml), but we will be using `HISAT` in this tutorial.
 
-To make sense of the reads, their positions within mouse genome must be determined. This process is known as aligning or 'mapping' the reads to the reference genome.
+**UPDATES STOPPED HERE**
 
-> ### :nut_and_bolt: Comment
->
-> Do you want to learn more about the principles behind mapping? Follow our [training](../../NGS-mapping)
-> {: .comment}
-
-In the case of a eukaryotic transcriptome, most reads originate from processed mRNAs lacking introns. Therefore, they cannot be simply mapped back to the genome as we normally do for reads derived from DNA sequences. Instead, the reads must be separated into two categories:
-
-- Reads contained within mature exons - these align perfectly to the reference genome
-- Reads that span splice junctions in the mature mRNA - these align with gaps to the reference genome
-
-Spliced mappers have been developed to efficiently map transcript-derived reads against genomes. [`HISAT`](https://ccb.jhu.edu/software/hisat2/index.shtml) is an accurate and fast tool for mapping spliced reads to a genome. Another popular spliced aligner is [`TopHat`](https://ccb.jhu.edu/software/tophat/index.shtml), but we will be using `HISAT` in this tutorial.
-
->    > ### :nut_and_bolt: Comment
->    > As it is sometimes quite difficult to determine which settings correspond to those of other programs, the following table might be helpful to identify the library type:
->    >
->    > Library type | **Infer Experiment** | **TopHat** | **HISAT** | **htseq-count** | **featureCounts**
->    > --- | --- | --- | --- | --- | ---
->    > PE | 1++,1--,2+-,2-+ | FR Second Strand | FR | yes | 1
->    > PE | 1+-,1-+,2++,2-- | FR First Strand | RF | reverse | 2
->    > SE | ++,-- | FR Second Strand | F | yes | 1
->    > SE | +-,-+ | FR First Strand | R | reverse | 2
->    > SE,PE | undecided | FR Unstranded | default | no | 0
->    >
->    {: .comment}
->    
 > ### :pencil2: Hands-on: Spliced mapping
 >
 > 1. **HISAT** :wrench:: Run `HISAT` on one forward/reverse read pair and modify the following settings:
