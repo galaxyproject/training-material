@@ -31,15 +31,15 @@ Due to the large size of the original sRNA-seq and mRNA-seq datasets, we have do
 
 > ### :pencil2: Hands-on: Data upload
 >
-> 1. Create a new history for this sRNA-seq exercise
-> 2. Open the data upload manager (Get Data -> Upload file)
-> 3. Copy and paste the links for the reads (.fq) and annotation (.gtf) files
-> 4. Select **Paste/Fetch Data**
-> 5. Paste the links into the text field
-> 6. Set the datatype of the read (.fq) files to **fastqsanger**
-> 7. Set the datatype of the annotation (.gtf) file to **gtf** and assign the Genome as **dm3**
-> 8. Click **Start**
-> 9. Rename the files in your history to retain just the necessary information (*e.g.* "WT sRNAs replicate 1")
+> 1. Create a new history and name it something meaningful (*e.g.* sRNA-seq tutorial)
+> 1. Open the data upload manager by selecting *Get Data* from the Tool Panel and clicking *Upload File*
+> 1. Select *Paste/Fetch Data*
+> 1. Copy and paste the links for the read (.fq) and annotation (.gtf) files into the text field
+> 1. Set the datatype of the read (.fq) files to **fastqsanger**
+> 1. Set the datatype of the annotation (.gtf) file to **gtf** and assign the Genome as **dm3**
+> 1. Click *Start*
+> 1. Rename the files in your history to retain just the necessary information (*e.g.* WT sRNA-seq replicate 1)
+> 1. Build a *Dataset list*
 >
 >    > <details>
 >    > <summary>:bulb: Tip: Importing data via links</summary>
@@ -70,9 +70,9 @@ Small RNA sequencing library preparations typically involve adding an artificial
 >    >    <details>
 >    >    <summary>Click to view answers</summary>
 >    >    <ol type="1">
->    >    <li>The read length is ## bp</li>
+>    >    <li>The read length is 51 bp. </li>
 >    >    <li>The quality of base calls declines throughout a sequencing run. </li>
->    >    <li>Yes, Illumina TruSeq adaptors are present. </li>
+>    >    <li>Yes, "Illumina Small RNA 3' Adapters" are present. </li>
 >    >    </ol>
 >    >    </details>
 >    {: .question}
@@ -105,22 +105,23 @@ Small RNA sequencing library preparations typically involve adding an artificial
 > ![](../images/BeforeAndAfterTrimming.png)
 > {: .hands_on}
 
-Now that we have trimmed our reads and are fortuante that there is a reference genome assembly for Drosophila, we will align our trimmed reads to the genome. For miRNA analyses, it is useful to align to the reference set of known miRNAs first, and then re-align any unaligned reads to the reference genome.
+Now that we have trimmed our reads of the Illumina Small RNA 3' adaptors, we will align our trimmed reads to the reference *Drosophila* genome (dm3). For miRNA analyses, it is useful to align to the reference set of known miRNAs first, and then re-align any unaligned reads to the reference genome.
 
 ## Read alignment
 
-To quantify small RNA abundance and identify their putative targets, we need to know where the sequenced reads align to a reference genome. In the case of a eukaryotes, some small RNAs are transcribed off of mRNA targets which could include originating from an exon-exon boundary. Therefore, we must use a splice-aware aligner to account for this possibility. [`HISAT`](https://ccb.jhu.edu/software/hisat2/index.shtml) is an accurate and fast tool for aligning spliced reads to a genome. Another popular spliced aligner is [`TopHat`](https://ccb.jhu.edu/software/tophat/index.shtml), but we will be using `HISAT` in this tutorial.
+To quantify small RNA abundance and identify their putative targets, we need to know where the sequenced reads align to a reference genome. In the case of a eukaryotes, some small RNAs are transcribed off of mRNA targets which could include originating from an exon-exon boundary. Therefore, we must use a splice-aware aligner to account for this possibility. [`HISAT2`](https://ccb.jhu.edu/software/hisat2/index.shtml) is an accurate and fast tool for aligning spliced reads to a genome. Another popular spliced aligner is [`TopHat2`](https://ccb.jhu.edu/software/tophat/index.shtml), but we will be using `HISAT2` in this tutorial.
 
 **UPDATES STOPPED HERE**
 
-> ### :pencil2: Hands-on: Spliced mapping
+> ### :pencil2: Hands-on: Splice-aware alignment
 >
-> 1. **HISAT** :wrench:: Run `HISAT` on one forward/reverse read pair and modify the following settings:
->    - **Single end or paired reads?**: Individual paired-end reads
->    - **Source for the reference genome to align against**: Use a built-in genome > Mouse (Mus Musculus): mm10
+> 1. **HISAT2** :wrench:: Run `HISAT2` on trimmed reads with the following parameters:
+>    - **Single end or paired reads?**: Individual unpaired reads
+>    - **Reads**: Select "Multiple datasets" and then highlight all sRNA FASTQ files
+>    - **Source for the reference genome to align against**: Use a built-in genome
+>    - **Select a reference genome**: Fruit fly (Drosophila melanogaster): dm3
 >    - **Spliced alignment parameters**: Specify spliced alignment parameters
 >    - **Specify strand-specific information**: First Strand (R/RF)
->    - **Transcriptome assembly reporting**: Report alignments tailored for transcript assemblers including StringTie.
 >
 >       ![](../images/hisat_tool_form.png)
 >
