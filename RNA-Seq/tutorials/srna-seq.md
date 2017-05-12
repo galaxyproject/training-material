@@ -39,7 +39,7 @@ Due to the large size of the original sRNA-seq and mRNA-seq datasets, we have do
 > 1. Set the datatype of the annotation (.gtf) file to **gtf** and assign the Genome as **dm3**
 > 1. Click *Start*
 > 1. Rename the files in your history to retain just the necessary information (*e.g.* WT sRNA-seq replicate 1)
-> 1. Build a *Dataset list*
+> 1. Build a *Dataset list* for each set of replicates (optional)
 >
 >    > <details>
 >    > <summary>:bulb: Tip: Importing data via links</summary>
@@ -64,14 +64,14 @@ Small RNA sequencing library preparations typically involve adding an artificial
 >    > ### :question: Questions
 >    >
 >    > 1. What is the read length?
->    > 1. Is there anything interesting about the quality of the base calls based on the position in the reads?
+>    > 1. What does the base/read quality look like?
 >    > 1. Are there any adaptors present in these reads? Which one(s)?
 >    >
 >    >    <details>
 >    >    <summary>Click to view answers</summary>
 >    >    <ol type="1">
 >    >    <li>The read length is 51 bp. </li>
->    >    <li>The quality of base calls declines throughout a sequencing run. </li>
+>    >    <li>ANSWER. </li>
 >    >    <li>Yes, "Illumina Small RNA 3' Adapters" are present. </li>
 >    >    </ol>
 >    >    </details>
