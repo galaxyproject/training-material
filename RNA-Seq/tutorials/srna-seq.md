@@ -6,17 +6,17 @@ tutorial_name: small RNA sequencing analysis
 
 # Introduction
 
-**Give a short introduction to small RNAs and why we care about them.** The data used in this Galaxy tutorial are from polyphosphatase-treated small RNA sequencing experiments in *Drosophila*. The goal of this study was to determine how piRNA and piRNA target expression changes in flies mutant for Kinesin-like protein at 10A (*Klp10A*). To that end, mRNA-seq experiments were performed in parallel to determine whether targets of differentially expressed piRNAs were also differentially expressed and can be analyzed by following the *de novo* transcriptome reconstruction tutorial **(add link)**. Because of the long processing time for the large original files - which contained 7-22 million reads - we have downsampled the fastq reads to include only those that align to **something interesting (flamenco, gypsy (retro-elements), diminutive (*dm/Myc*), ZAM element (LTR-retrotransposon), cluster 20A, maybe just all of the X-chromosome)**.
+**Give a short introduction to small RNAs and why we care about them.** The data used in this Galaxy tutorial are from polyphosphatase-treated small RNA sequencing experiments in *Drosophila*. The goal of this study was to determine how piRNA and piRNA target expression changes in flies mutant for Kinesin-like protein at 10A (*klp10A*). To that end, mRNA-seq experiments were performed in parallel to determine whether targets of differentially expressed piRNAs were also differentially expressed and can be analyzed by following the *de novo* transcriptome reconstruction tutorial **(add link)**. Because of the long processing time for the large original files - which contained 7-22 million reads - we have downsampled the fastq reads to include only those that align to **something interesting (flamenco, gypsy (retro-elements), diminutive (*dm/Myc*), ZAM element (LTR-retrotransposon), cluster 20A, maybe just all of the X-chromosome)**.
 
 # Analysis strategy
 
-The goal of this exercise is to identify what small RNAs, specifically piRNAs, are present in wild-type (WT) flies and flies treated with *klp10A* RNAi (*klp10A* KD). In this study, biological triplicate small RNA- and mRNA-seq samples for both WT and *klp10A* KD flies. We will quantify piRNA expressed from aligned reads as well as identify differentially expressed piRNAs. We will generally follow a popular piRNA analysis pipeline developed by the Zamore Lab and ZLab at UMass Med School called [PiPipes](https://github.com/bowhan/piPipes). Although PiPipes was developed for analysis of piRNAs, many of the basical principles can be applied to other classes of small RNAs. It is of note that this tutorial assumes libraries have been de-multiplexed, if necessary, so that the input data files are a single FASTQ formatted file for each sample. This tutorial also assumes that the quality scores are encoded using the Sanger/Illumina 1.9 encoding scheme (**Check with FASTQC tool, and if not, use the FASTQ Groomer tool to convert FASTQ files to Sanger/Illumina 1.9+ encoding)**. Because small RNAs are, well, small, single-end sequencing is almost always used for sRNA-seq libraries. This tutorial uses the *Collections* feature of Galaxy to orgainze each set of replicates into a single group, making tool form submission easier.
+The goal of this exercise is to identify what small RNAs, specifically piRNAs, are present in wild-type (WT) flies and flies treated with *klp10A* RNAi (*klp10A* KD). In this study, biological triplicate small RNA- and mRNA-seq samples for both WT and *klp10A* KD flies. We will quantify piRNA expressed from aligned reads as well as identify differentially expressed piRNAs. We will generally follow a popular piRNA analysis pipeline developed by the Zamore Lab and ZLab at UMass Med School called [PiPipes](https://github.com/bowhan/piPipes). Although PiPipes was developed for analysis of piRNAs, many of the basical principles can be applied to other classes of small RNAs. It is of note that this tutorial uses datasets that have been de-multiplexed so that the input data files are a single FASTQ formatted file for each sample. This tutorial also uses datasets for which the quality scores are encoded using the Sanger/Illumina 1.9 encoding scheme (**Check with FASTQC tool, and if not, use the FASTQ Groomer tool to convert FASTQ files to Sanger/Illumina 1.9+ encoding)**. Because small RNAs are, well, small, single-end sequencing is almost always used for sRNA-seq libraries. This tutorial uses the *Collections* feature of Galaxy to orgainze each set of replicates into a single group, making tool form submission easier.
 
 > ### Agenda
 >
 > In this tutorial, we will address:
 >
-> 1. Data upload
+> 1. Data upload and organization
 > 1. Read quality checking and trimming
 > 1. Read alignment
 > 1. Small RNA annotation
@@ -25,52 +25,48 @@ The goal of this exercise is to identify what small RNAs, specifically piRNAs, a
 > 1. Small RNA and mRNA integration
 > 1. Visualization
 
-## Data upload
+## Data upload and organization
 
-Due to the large size of the original sRNA-seq and mRNA-seq datasets, we have downsampled them to only inlcude reads mapping to something interesting. These datasets are avaialble at [`Zenodo`](https://zenodo.org/record/####), where you can find the FASTQ files corresponding to replicate sRNA-seq and mRNA-seq libraries and an annotation file of known RefSeq transcripts for dm3.
+Due to the large size of the original sRNA-seq datasets, we have downsampled them to only inlcude reads mapping to **something interesting**. These datasets are avaialble at [`Zenodo`](https://zenodo.org/record/####), where you can find the FASTQ files corresponding to replicate sRNA-seq and mRNA-seq libraries and an annotation file of known RefSeq transcripts for the *Drosophila melanogaster* genome version dm3.
 
-> ### :pencil2: Hands-on: Data upload
+> ### :pencil2: Hands-on: Data upload and organization
 >
 > 1. Create a new history and name it something meaningful (*e.g.* sRNA-seq tutorial)
 > 1. Open the data upload manager by selecting *Get Data* from the Tool Panel and clicking *Upload File*
 > 1. Select *Paste/Fetch Data*
-> 1. Copy and paste the links for the read (.fq) and annotation (.gtf) files into the text field
-> 1. Set the datatype of the read (.fq) files to **fastqsanger**
-> 1. Set the datatype of the annotation (.gtf) file to **gtf** and assign the Genome as **dm3**
+> 1. Copy and paste each link for the 6 read (.fq) and 1 annotation (.gtf) files into a separate text field
+>    > 1. Set the datatype of the read (.fq) files to **fastqsanger**
+>    > 1. Set the datatype of the annotation (.gtf) file to **gtf** and assign the Genome as **dm3**
 > 1. Click *Start*
-> 1. Rename the files in your history to retain just the necessary information (*e.g.* WT sRNA-seq replicate 1)
-> 1. Build a *Dataset list* for each set of replicates (optional)
->
->    > <details>
->    > <summary>:bulb: Tip: Importing data via links</summary>
->    > <ol type="2">
->    > <li>Below are the links to the read files that can be copied and pasted in the upload manager.</li>
->    > <li>https://<i></i>zenodo.org/record/...fq.gz
->    > https://<i></i>zenodo.org/record/...fq.gz</li>
->    > <li>You will also need to fetch the annotation (.gtf) file link.</li>
->    > </ol>
->    > </details>
+> 1. Rename the files in your history to something meaningful (*e.g.* WT sRNA-seq replicate 1)
+> 1. Build a *Dataset list* for each set of replicates
+>    > 1. Click the *Operations on multiple datasets* check box at the top of the history panel
+>    > 1. Check the three boxes next to the wild-type (WT) sRNA-seq samples
+>    > 1. Click *For all selected...* and choose *Build dataset list*
+>    > 1. Ensure the three WT samples are the only ones selected, and enter a name for the new collection (*e.g.* WT sRNA-seq replicates)
+>    > 1. Click *Create list*
+>    > 1. Repeat steps ii. through v. for the *klp10A* KD samples.
 >
 > {: .hands_on}
 
 ## Read quality checking and trimming
 
-Small RNA sequencing library preparations typically involve adding an artificial adaptor sequence to the 3' ends of the small RNA reads. These sequences need to be removed or trimmed before attemping to align the reads to a reference. Before performing the adaptor trimming step, let's confirm that the universal small RNA-seq 3' adaptor was indeeded used in this library prepration. To accomplish this, we can use the [FastQC](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/) tool described in the [NGS-QC tutorial](../../NGS-QC/tutorials/dive_into_qc).
+Small RNA sequencing library preparations involve adding an artificial adaptor sequence to both the 5' and 3' ends of the small RNAs. While the 5' adaptor anchors reads to the sequencing surface and thus are not sequenced, the 3' adaptor is typically sequence immediately follow the RNA sequence. These artificial sequences need to be removed before attemping to align the reads to a reference. We know that the datasets used here contain the Illumina universal small RNA-seq 3' adaptor, but let's confirm this using the [FastQC](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/) tool (further described in the [NGS-QC tutorial](../../NGS-QC/tutorials/dive_into_qc)).
 
 > ### :pencil2: Hands-on: Quality control
 >
-> 1. **FastQC** :wrench:: Run `FastQC` on the FASTQ read files to identify any adaptors and assess the quality of the reads.
+> 1. **FastQC** :wrench:: Run `FastQC` on the FASTQ read files to identify adaptors and assess the quality of the reads. Select the `FASTQC` tool. Under the **Short read data from your current history** option select the *Dataset collections* tab and then choose one of the dataset collections to analyze. Repeat for the second dataset collection.
 >
 >    > ### :question: Questions
 >    >
->    > 1. What is the read length?
+>    > 1. What is the read length for each samples?
 >    > 1. What does the base/read quality look like?
 >    > 1. Are there any adaptors present in these reads? Which one(s)?
 >    >
 >    >    <details>
 >    >    <summary>Click to view answers</summary>
 >    >    <ol type="1">
->    >    <li>The read length is 51 bp. </li>
+>    >    <li>All samples have a read length of 51 nt. </li>
 >    >    <li>ANSWER. </li>
 >    >    <li>Yes, "Illumina Small RNA 3' Adapters" are present. </li>
 >    >    </ol>
