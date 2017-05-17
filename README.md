@@ -5,18 +5,17 @@ Training material
 =================
 
 
-topic | features
-:-- | :--: | --:
-[Genome Annotation](Genome-Annotation/) | [:book:](Genome-Annotation/tutorials/general-introduction.md)
-[RNA-seq](RNA-Seq/) | [:whale:](RNA-Seq/docker/) [:movie_camera:](https://vimeo.com/128268401) [:page_facing_up:](https://usegalaxy.org/u/jeremy/p/galaxy-rna-seq-analysis-exercise) [:book:](RNA-Seq/tutorials/ref_based.md) [:mortar_board:](RNA-Seq/slides/index.html)
-[ChIP-seq](ChIP-Seq/) | [:whale:](ChIP-Seq/docker/) [:book:](ChIP-Seq/) [:mortar_board:](ChIP-Seq/slides/index.html)
-[Exome-seq](Exome-Seq/) | [:whale:](Exome-Seq/docker) [:book:](Exome-Seq/tutorials) [:mortar_board:](Exome-Seq/slides/index.html/)
-[MethylC-seq](MethylC-Seq) | [:book:](MethylC-Seq/tutorials/Methylation-Seq.md)
-[Galaxy Introduction](Introduction) | [:whale:](Introduction/docker/)[:book:](Introduction/tutorials/)
-[Data Sources](Dev-Corner/tutorials/data_source_integration.md) | :book:
-[Planemo documents](http://planemo.readthedocs.io/en/latest/writing_appliance.html) | [:book:](http://planemo.readthedocs.io/en/latest/writing_appliance.html)
-[Galaxy Tool Dev Corner](Dev-Corner) | [:book:](Dev-Corner/readme.md)
-[Galaxy Docker Project](https://slides.com/bgruening/the-galaxy-docker-project/) | [:book:](https://slides.com/bgruening/the-galaxy-docker-project/)
+| topic | features |
+| :-- | :--: |
+| [Genome Annotation](Genome-Annotation/) | [:book:](Genome-Annotation/tutorials/general-introduction.md) |
+| [RNA-seq](RNA-Seq/) | [:whale:](RNA-Seq/docker/) [:movie_camera:](https://vimeo.com/128268401) [:page_facing_up:](https://usegalaxy.org/u/jeremy/p/galaxy-rna-seq-analysis-exercise) [:book:](RNA-Seq/tutorials/ref_based.md) [:mortar_board:](RNA-Seq/slides/index.html) |
+| [ChIP-seq](ChIP-Seq/) | [:whale:](ChIP-Seq/docker/) [:book:](ChIP-Seq/) [:mortar_board:](ChIP-Seq/slides/index.html) |
+| [Exome-seq](Exome-Seq/) | [:whale:](Exome-Seq/docker) [:book:](Exome-Seq/tutorials) [:mortar_board:](Exome-Seq/slides/index.html/) |
+| [MethylC-seq](MethylC-Seq) | [:book:](MethylC-Seq/tutorials/Methylation-Seq.md) |
+| [Galaxy Introduction](Introduction) | [:whale:](Introduction/docker/)[:book:](Introduction/tutorials/) |
+| [Data Sources](Dev-Corner/tutorials/data_source_integration.md) | :book: |
+| [Galaxy Tool Dev Corner](Dev-Corner) | [:book:](Dev-Corner/readme.md) |
+| [Galaxy Docker Project](https://slides.com/bgruening/the-galaxy-docker-project/) | [:book:](https://slides.com/bgruening/the-galaxy-docker-project/) |
 
 
 The Galaxy community offers many different ways of training. The table above lists all available training features of a specific topic to give you a fast and comprehensive overview.
