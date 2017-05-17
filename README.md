@@ -14,7 +14,6 @@ Training material
 | [MethylC-seq](MethylC-Seq) | [:book:](MethylC-Seq/tutorials/Methylation-Seq.md) |
 | [Galaxy Introduction](Introduction) | [:whale:](Introduction/docker/)[:book:](Introduction/tutorials/) |
 | [Data Sources](Dev-Corner/tutorials/data_source_integration.md) | :book: |
-| [Planemo documents](http://planemo.readthedocs.io/en/latest/writing_appliance.html) | [:book:](http://planemo.readthedocs.io/en/latest/writing_appliance.html) |
 | [Galaxy Tool Dev Corner](Dev-Corner) | [:book:](Dev-Corner/readme.md) |
 | [Galaxy Docker Project](https://slides.com/bgruening/the-galaxy-docker-project/) | [:book:](https://slides.com/bgruening/the-galaxy-docker-project/) |
 
