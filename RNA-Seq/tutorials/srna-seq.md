@@ -27,7 +27,7 @@ The goal of this exercise is to identify what small RNAs, specifically piRNAs, a
 
 ## Data upload and organization
 
-Due to the large size of the original sRNA-seq datasets, we have downsampled them to only inlcude reads mapping to **something interesting**. These datasets are avaialble at [`Zenodo`](https://zenodo.org/record/####), where you can find the FASTQ files corresponding to replicate sRNA-seq and mRNA-seq libraries and an annotation file of known RefSeq transcripts for the *Drosophila melanogaster* genome version dm3.
+Due to the large size of the original sRNA-seq datasets, we have downsampled them to only inlcude reads mapping to **something interesting, probably chromosome X**. These datasets are avaialble at [`Zenodo`](https://zenodo.org/record/####), where you can find the FASTQ files corresponding to replicate sRNA-seq and mRNA-seq libraries and an annotation file of known RefSeq transcripts for the *Drosophila melanogaster* genome version dm3.
 
 > ### :pencil2: Hands-on: Data upload and organization
 >
@@ -35,17 +35,17 @@ Due to the large size of the original sRNA-seq datasets, we have downsampled the
 > 1. Open the data upload manager by selecting *Get Data* from the Tool Panel and clicking *Upload File*
 > 1. Select *Paste/Fetch Data*
 > 1. Copy and paste each link for the 6 read (.fq) and 1 annotation (.gtf) files into a separate text field
->    > 1. Set the datatype of the read (.fq) files to **fastqsanger**
->    > 1. Set the datatype of the annotation (.gtf) file to **gtf** and assign the Genome as **dm3**
+>    - Set the datatype of the read (.fq) files to **fastqsanger**
+>    - Set the datatype of the annotation (.gtf) file to **gtf** and assign the Genome as **dm3**
 > 1. Click *Start*
 > 1. Rename the files in your history to something meaningful (*e.g.* WT sRNA-seq replicate 1)
 > 1. Build a *Dataset list* for each set of replicates
->    > 1. Click the *Operations on multiple datasets* check box at the top of the history panel
->    > 1. Check the three boxes next to the wild-type (WT) sRNA-seq samples
->    > 1. Click *For all selected...* and choose *Build dataset list*
->    > 1. Ensure the three WT samples are the only ones selected, and enter a name for the new collection (*e.g.* WT sRNA-seq replicates)
->    > 1. Click *Create list*
->    > 1. Repeat steps ii. through v. for the *klp10A* KD samples.
+>    - Click the *Operations on multiple datasets* check box at the top of the history panel
+>    - Check the three boxes next to the wild-type (WT) sRNA-seq samples
+>    - Click *For all selected...* and choose *Build dataset list*
+>    - Ensure the three WT samples are the only ones selected, and enter a name for the new collection (*e.g.* WT sRNA-seq replicates)
+>    - Click *Create list*
+>    - Repeat steps ii. through v. for the *klp10A* KD samples.
 >
 > {: .hands_on}
 
@@ -93,8 +93,8 @@ Small RNA sequencing library preparations involve adding an artificial adaptor s
 >    >    <details>
 >    >    <summary>Click to view answers</summary>
 >    >    <ol type="1">
->    >    <li>The read lengths range from 1 to 99 bp after trimming</li>
->    >    <li>No, Illumina TruSeq adaptors are no longer present. </li>
+>    >    <li>The read lengths range from 12 to 51 nt after trimming.</li>
+>    >    <li>No, Illumina TruSeq adaptors are no longer present.</li>
 >    >    </ol>
 >    >    </details>
 >    {: .question}
@@ -105,15 +105,13 @@ Now that we have trimmed our reads of the Illumina Small RNA 3' adaptors, we wil
 
 ## Read alignment
 
-To quantify small RNA abundance and identify their putative targets, we need to know where the sequenced reads align to a reference genome. In the case of a eukaryotes, some small RNAs are transcribed off of mRNA targets which could include originating from an exon-exon boundary. Therefore, we must use a splice-aware aligner to account for this possibility. [`HISAT2`](https://ccb.jhu.edu/software/hisat2/index.shtml) is an accurate and fast tool for aligning spliced reads to a genome. Another popular spliced aligner is [`TopHat2`](https://ccb.jhu.edu/software/tophat/index.shtml), but we will be using `HISAT2` in this tutorial.
-
-**UPDATES STOPPED HERE**
+To quantify small RNA abundance and identify their putative targets, we need to know where the sequenced reads align to a reference genome. In the case of a eukaryotes, some small RNAs are transcribed from mRNA templates, which means that some small RNAs can originate from an exon-exon (spliced) boundary. Therefore, a splice-aware aligner must be used to account for this possibility. [`HISAT2`](https://ccb.jhu.edu/software/hisat2/index.shtml) is an accurate and fast tool for aligning spliced reads to a genome, and we will be using `HISAT2` in this tutorial.
 
 > ### :pencil2: Hands-on: Splice-aware alignment
 >
-> 1. **HISAT2** :wrench:: Run `HISAT2` on trimmed reads with the following parameters:
+> 1. **HISAT2** :wrench:: Run `HISAT2` on one collection of trimmed reads with the following parameters:
 >    - **Single end or paired reads?**: Individual unpaired reads
->    - **Reads**: Select "Multiple datasets" and then highlight all sRNA FASTQ files
+>    - **Reads**: Select "Dataset collection" and choose one collection of trimmed FASTQ files
 >    - **Source for the reference genome to align against**: Use a built-in genome
 >    - **Select a reference genome**: Fruit fly (Drosophila melanogaster): dm3
 >    - **Spliced alignment parameters**: Specify spliced alignment parameters
@@ -121,28 +119,31 @@ To quantify small RNA abundance and identify their putative targets, we need to 
 >
 >       ![](../images/hisat_tool_form.png)
 >
-> 2. **HISAT** :wrench:: Run `HISAT` on the remaining forward/reverse read pairs with the same parameters.
+> 1. **HISAT2** :wrench:: Run `HISAT` on the second collection of trimmed reads with the same parameters.
 >
 
-# De novo transcript reconstruction
-Now that we have mapped our reads to the mouse genome with `HISAT`, we want to determine transcript structures that are represented by the aligned reads. This is called *de novo* transcriptome reconstruction. This unbiased approach permits the comprehensive identification of all transcripts present in a sample, including annotated genes, novel isoforms of annotated genes, and novel genes. While common gene/transcript databases are quite large, they are not comprehensive, and the *de novo* transcriptome reconstruction approach ensures complete transcriptome(s) identification from the experimental samples. The leading tool for transcript reconstruction is `Stringtie`. Here, we will use `Stringtie` to predict transcript structures based on the reads aligned by `HISAT`.
+**UPDATES STOPPED HERE**
 
-> ### :pencil2: Hands-on: Transcriptome reconstruction
+## Small RNA annotation
+**TODO Describe what is meant by small RNA annotation. Describe sense v. antisense meaning. Describe that different classes of small RNAs are in a small RNA-seq library. Talk about size distribution and nt composition biases in fly piRNAs and in other classes of small RNAs.**
+
+> ### :pencil2: Hands-on: Small RNA annotation
 >
-> 1. **Stringtie** :wrench:: Run `Stringtie` on the `HISAT` alignments using the default parameters.
+> 1. **Tool** :wrench:: Run `Tool` on one collection of `HISAT` alignments using the default parameters.
 >    - Use batch mode to run all four samples from one tool form.
-> ![](../images/Stringtie.png)
-
-# Transcriptome assembly
-
-We just generated four transcriptomes with `Stringtie` representing each of the four RNA-seq libraries we are analyzing. Since these were generated in the absence of a reference transcriptome, and we ultimately would like to know what transcript structure corresponds to which annotated transcript (if any), we have to make a **transcriptome database**. We will use the tool `Cuffmerge` to combine redundant transcript structures across the four samples, provide non-redundant identifiers, and with the help of a reference annotation file annotate the nature/origin of each transcript (reference, novel isoform, intergenic transcript, antisense, etc.)
-
-> ### :pencil2: Hands-on: Transcriptome assembly
 >
-> 1. **Cuffmerge** :wrench:: Run `Cuffmerge` on the `Stringtie` assembled transcripts along with the RefSeq annotation file we imported earlier.
+> ![](../images/image.png)
+
+## Small RNA abundance estimation
+
+**TODO RPM for small RNA counts.**
+
+> ### :pencil2: Hands-on: Small RNA abundance estimation
+>
+> 1. **Tool** :wrench:: Run `Tool` on the `Tool`-annotated small RNAs.
 >    - Use batch mode to inlcude all four `Stringtie` assemblies.
 >    - **Use Reference Annotation**: Yes, then select the "RefSeq GTF mm10" file.
-> ![](../images/Cuffmerge.png)
+> ![](../images/image.png)
 >
 >
 >    > Transcript categorization used by `Cuffmerge`
