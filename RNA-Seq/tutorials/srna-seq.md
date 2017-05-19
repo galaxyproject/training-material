@@ -81,7 +81,7 @@ Small RNA sequencing library preparations involve adding an artificial adaptor s
 >    - **Overlap with adapter sequence required to trim a sequence**: 6
 >    - **Discard reads that became shorter than length INT**: 12
 >
->    ![](../images/trimmomatic.png)
+>    ![](../images/image.png)
 >
 > 1. **FastQC** :wrench:: Re-run `FastQC` on trimmed reads and inspect the differences.
 >
@@ -98,7 +98,7 @@ Small RNA sequencing library preparations involve adding an artificial adaptor s
 >    >    </ol>
 >    >    </details>
 >    {: .question}
-> ![](../images/BeforeAndAfterTrimming.png)
+> ![](../images/image.png)
 > {: .hands_on}
 
 Now that we have trimmed our reads of the Illumina Small RNA 3' adaptors, we will align our trimmed reads to the reference *Drosophila* genome (dm3). For miRNA analyses, it is useful to align to the reference set of known miRNAs first, and then re-align any unaligned reads to the reference genome.
@@ -117,7 +117,7 @@ To quantify small RNA abundance and identify their putative targets, we need to 
 >    - **Spliced alignment parameters**: Specify spliced alignment parameters
 >    - **Specify strand-specific information**: First Strand (R/RF)
 >
->       ![](../images/hisat_tool_form.png)
+>       ![](../images/image.png)
 >
 > 1. **HISAT2** :wrench:: Run `HISAT` on the second collection of trimmed reads with the same parameters.
 >
@@ -145,27 +145,16 @@ To quantify small RNA abundance and identify their putative targets, we need to 
 >    - **Use Reference Annotation**: Yes, then select the "RefSeq GTF mm10" file.
 > ![](../images/image.png)
 >
->
->    > Transcript categorization used by `Cuffmerge`
->
->    > |**Class code** | **Transcript category**|
->    > |:---:|:---|
->    > |= | Annotated in reference|
->    > |j | Novel isoform of reference|
->    > |u | Intergenic|
->    > |x | Anti-sense|
->    > |r | Repetitive|
->    > |c | Contained in exon of reference|
->    > |s | Anti-sense spliced intronic|
 
+## Small RNA differential expression testing
 
-# Analysis of the differential gene expression
+### Analysis of the differential gene expression
 
 We just generated a transriptome database that represents the transcripts present in the G1E and megakaryocytes samples. This database provides the location of our transcripts with non-redundant identifiers, as well as information regarding the origin of the transcript.
 
 We now want to identify which transcripts are differentially expressed between the G1E and megakaryocyte cellular states. To do this we will implement a counting approach using `FeatureCounts` to count reads per transcript. Then we will provide this information to `DESeq2` to generate normalized transcript counts (abundance estimates) and significance testing for differential expression.
 
-## Count the number of reads per transcript
+### Count the number of reads per transcript
 
 To compare the abundance of transcripts between different cellular states, the first essential step is to quantify the number of reads per transcript. [`FeatureCounts`](http://bioinf.wehi.edu.au/featureCounts/) is one of the most popular tools for counting reads in genomic features. In our case, we'll be using `FeatureCounts` to count reads aligning in exons of our `Cuffmerge` generated transcriptome database.
 
@@ -182,11 +171,11 @@ The recommended mode is "union", which counts overlaps even if a read only share
 >    - Expand **Advanced options**
 >    - **GFF gene identifier**: enter "transcript_id"
 >    - **Strand specificity of the protocol**: select "Stranded (forwards)"
-> ![](../images/FeatureCounts_tool_form.png)
+> ![](../images/image.png)
 >
 > {: .hands_on}
 
-## Perform differential gene expression testing
+### Perform differential gene expression testing
 
 Transcript expression is estimated from read counts, and attempts are made to correct for variability in measurements using replicates. This is absolutely essential to obtaining accurate results. We recommend having at least two biological replicates.
 
@@ -232,7 +221,7 @@ The first output of `DESeq2` is a tabular file. The columns are:
 >    >
 >    > <details>
 >    > <summary>Click to view answers</summary>
->    > To filter, use "c7<0.05". And we get 278 transcripts with a significant change in gene expression between the G1E and megakaryocyte cellular states.
+>    > To filter, use "c7 lessthan 0.05". And we get 278 transcripts with a significant change in gene expression between the G1E and megakaryocyte cellular states.
 >    > </details>
 >    {: .question}
 >
@@ -257,35 +246,39 @@ In addition to the list of genes, `DESeq2` outputs a graphical summary of the re
 
 1. Histogram of *p*-values for all tests
 
-    ![](../images/DESeq2_pval.png)
+    ![](../images/image.png)
 
 2. [MA plot](https://en.wikipedia.org/wiki/MA_plot): global view of the relationship between the expression change of conditions (log ratios, M), the average expression strength of the genes (average mean, A), and the ability of the algorithm to detect differential gene expression. The genes that passed the significance threshold (adjusted p-value < 0.1) are colored in red.
 
-    ![](../images/DESeq2_MAplot.png)
+    ![](../images/image.png)
 
 3. Principal Component Analysis ([PCA](https://en.wikipedia.org/wiki/Principal_component_analysis)) and the first two axes
 
-    ![](../images/DESeq2_PCAplot.png)
+    ![](../images/image.png)
 
     Each replicate is plotted as an individual data point. This type of plot is useful for visualizing the overall effect of experimental covariates and batch effects.
 
 4. Heatmap of sample-to-sample distance matrix: overview over similarities and dissimilarities between samples
 
-    ![](../images/DESeq2_heatmap_G1E_mega.png)
+    ![](../images/image.png)
 
 5. Dispersion estimates: gene-wise estimates (black), the fitted values (red), and the final maximum a posteriori estimates used in testing (blue)
 
-    ![](../images/DESeq2_dispersion1.png)
+    ![](../images/image.png)
 
     This dispersion plot is typical, with the final estimates shrunk from the gene-wise estimates towards the fitted estimates. Some gene-wise estimates are flagged as outliers and not shrunk towards the fitted value. The amount of shrinkage can be more or less than seen here, depending on the sample size, the number of coefficients, the row mean and the variability of the gene-wise estimates.
 
 
 For more information about `DESeq2` and its outputs, you can have a look at [`DESeq2` documentation](https://www.bioconductor.org/packages/release/bioc/manuals/DESeq2/man/DESeq2.pdf).
 
-# Visualization
+## Small RNA and mRNA integration
+
+**TODO**
+
+## Visualization
 Now that we have a list of transcript expression levels and their differential expression levels, it is time to visually inspect our transcript structures and the reads they were predicted from. It is a good practice to visually inspect (and present) loci with transcripts of interest. Fortuantely, there is a built-in genome browser in Galaxy, **Trackster**, that make this task simple (and even fun!).
 
-In this last section, we will convert our aligned read data from BAM format to bigWig format to simplify observing where our stranded RNA-seq data aligned to. We'll then initiate a session on Trackster, load it with our data, and visually inspect our interesting loci.
+In this last section, we will convert our aligned read data from BAM format to bigWig format to simplify observing where our stranded RNA-seq data aligned to. We will then initiate a session on Trackster, load it with our data, and visually inspect our interesting loci.
 
 > ### :pencil2: Hands-on: Converting aligned read files to bigWig format
 >
@@ -295,12 +288,12 @@ In this last section, we will convert our aligned read data from BAM format to b
 >    - Expand the **Advanced options**
 >    - **Only include reads originating from fragments from the forward or reverse strand**: forward
 > 2. **Rename** :wrench:: Rename the outputs to reflect the origin of the reads and that they represent the reads mapping to the PLUS strand
->![](../images/bamCoverage_forward.png)
+>![](../images/image.png)
 >
 > 3. **bamCoverage** :wrench:: Repeat Step 1 except changing the following parameter:
 >    - **Only include reads originating from fragments from the forward or reverse strand**: reverse
 > 4. **Rename** :wrench:: Rename the outputs to reflect the origin of the reads and that they represent the reads mapping to the MINUS strand
-> ![](../images/bamCoverage_reverse.png)
+> ![](../images/image.png)
 
 > ### :pencil2: Hands-on: Trackster based visualization
 >
@@ -308,7 +301,7 @@ In this last section, we will convert our aligned read data from BAM format to b
 >    - Name your visualization someting descriptive under "Browser name:"
 >    - Choose "Mouse Dec. 2011 (GRCm38/mm10) (mm10)" as the "Reference genome build (dbkey)
 >    - Click "Create" to initiate your Trackster session
-> ![](../images/Trackster_opening_window.png)
+> ![](../images/image.png)
 >
 > 2. **Viz** :wrench:: Click "Add datasets to visualization"
 >    - Select the "RefSeq GTF mm10" file
@@ -334,7 +327,7 @@ In this last section, we will convert our aligned read data from BAM format to b
 > 9. :wrench:: Repeat the previous step on the other three bigWig files representing the minus strand
 >
 > 10. :wrench:: Adjust the track height of the bigWig files to be consistant for each set of plus strand and minus strand tracks
-> ![](../images/Trackster_viz_hoxb13_locus.png)
+> ![](../images/image.png)
 > 11. :wrench:: Direct Trackster to the coordinates: chr11:96193539-96206376, what do you see?
 >    >    <details>
 >    >    <summary>Click to view answers</summary>
@@ -347,9 +340,9 @@ In this last section, we will convert our aligned read data from BAM format to b
 >    {: .question}
 >
 
-# Conclusion
+## Conclusion
 
 In this tutorial, we have analyzed real RNA sequencing data to extract useful information, such as which genes are up- or down-regulated by depletion of the Pasilla gene and which genes are regulated by the Pasilla gene. To answer these questions, we analyzed RNA sequence datasets using a reference-based RNA-seq data analysis approach. This approach can be sum up with the following scheme:
 
 
-![](../images/schematic_for_RNAseq_de_novo_tutorial.png)
+![](../images/schematic_for_sRNAseq_tutorial.png)
