@@ -38,14 +38,14 @@ Due to the large size of the original sRNA-seq datasets, we have downsampled the
 >    - Set the datatype of the read (.fq) files to **fastqsanger**
 >    - Set the datatype of the annotation (.gtf) file to **gtf** and assign the Genome as **dm3**
 > 1. Click *Start*
-> 1. Rename the files in your history to something meaningful (*e.g.* WT sRNA-seq replicate 1)
+> 1. Rename the files in your history to something meaningful (*e.g.* control_sRNA_rep1.fq)
 > 1. Build a *Dataset list* for each set of replicates
 >    - Click the *Operations on multiple datasets* check box at the top of the history panel
->    - Check the three boxes next to the wild-type (WT) sRNA-seq samples
+>    - Check the three boxes next to the control RNAi (control) sRNA-seq samples
 >    - Click *For all selected...* and choose *Build dataset list*
->    - Ensure the three WT samples are the only ones selected, and enter a name for the new collection (*e.g.* WT sRNA-seq replicates)
+>    - Ensure the three control samples are the only ones selected, and enter a name for the new collection (*e.g.* control sRNA-seq)
 >    - Click *Create list*
->    - Repeat steps ii. through v. for the *klp10A* KD samples.
+>    - Repeat steps ii. through v. for the *klp10A* RNAi samples.
 >
 > {: .hands_on}
 
@@ -59,7 +59,7 @@ Small RNA sequencing library preparations involve adding an artificial adaptor s
 >
 >    > ### :question: Questions
 >    >
->    > 1. What is the read length for each samples?
+>    > 1. What is the read length for each sample?
 >    > 1. What does the base/read quality look like?
 >    > 1. Are there any adaptors present in these reads? Which one(s)?
 >    >
@@ -67,7 +67,7 @@ Small RNA sequencing library preparations involve adding an artificial adaptor s
 >    >    <summary>Click to view answers</summary>
 >    >    <ol type="1">
 >    >    <li>All samples have a read length of 51 nt. </li>
->    >    <li>ANSWER. </li>
+>    >    <li>The read quality across the entire length of the reads is good (phred score > 28 for the most part). </li>
 >    >    <li>Yes, "Illumina Small RNA 3' Adapters" are present. </li>
 >    >    </ol>
 >    >    </details>
@@ -75,7 +75,7 @@ Small RNA sequencing library preparations involve adding an artificial adaptor s
 >
 > 1. **Trim Galore!** :wrench:: Trim off Illumina adaptors from the 3' ends of the reads by running `Trim Galore!` on every FASTQ file with the following parameters:
 >    - **Is this library paired- or single-end?**: Single-end
->    - **Reads in FASTQ format**: Select "Multiple datasets" and then highlight all sRNA FASTQ files
+>    - **Reads in FASTQ format**: Select "Dataset collections" and then select the control sRNA-seq dataset
 >    - **Trimming reads?**: Illumina small RNA adapters
 >    - **Trim Galore! advanced settings**: Full parameter list
 >    - **Overlap with adapter sequence required to trim a sequence**: 6
@@ -94,7 +94,7 @@ Small RNA sequencing library preparations involve adding an artificial adaptor s
 >    >    <summary>Click to view answers</summary>
 >    >    <ol type="1">
 >    >    <li>The read lengths range from 12 to 51 nt after trimming.</li>
->    >    <li>No, Illumina TruSeq adaptors are no longer present.</li>
+>    >    <li>No, Illumina Small RNA 3' Adaptors are no longer present. No other adaptoers are present.</li>
 >    >    </ol>
 >    >    </details>
 >    {: .question}
