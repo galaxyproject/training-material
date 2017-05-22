@@ -128,6 +128,17 @@ $ make install
 
 If you encounter any errors make sure `ruby` and it's corresponding developer packages (e.g. `ruby-dev`, `ruby2.3-dev`) are installed.
 
+If you are installing it on Mac OSX, you need to install it this way as `/usr/bin/` is not writable:
+
+```
+sudo gem update —system
+sudo gem install -n /usr/local/bin/ gem name
+sudo gem install -n /usr/local/bin/ jemoji
+sudo gem install -n /usr/local/bin/ jekyll
+sudo gem install -n /usr/local/bin/ jekyll-feed
+sudo gem install -n /usr/local/bin/ bundler
+```
+
 To run a local Jekyll server and visualize the changes, launch using the [Makefile](Makefile):
 
 ```
