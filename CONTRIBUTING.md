@@ -195,7 +195,7 @@ You can then visualize locally ([http://localhost:4000/](http://localhost:4000/)
     - `galaxy_tour`: name of the galaxy tour
     - `hands_on`(`"yes"` or `"no"`): tell if an hands on is available for this material
     - `slides` (`"yes"` or `"no"`): tell if slides are available for this material
-    - `questions`: list of questions that are adressed in the tutorial
+    - `questions`: list of questions that are addressed in the tutorial
     - `objectives`: list of objectives of the tutorial
     - `requirements`: list of requirements specific to this tutorial (in addition to the one of the topic), with a `title`, a `link` (relative for internal (inside training material) requirement or full for external requirement) and the type of link (`internal` or `external`)
     - `time_estimation`: estimation of the time needed to complete the hands-on
