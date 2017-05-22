@@ -1,4 +1,4 @@
-## Galaxy - small RNA-seq
+# Galaxy - small RNA-seq
 
 FROM bgruening/galaxy-rna-seq:17.01
 
@@ -12,9 +12,28 @@ ENV GALAXY_CONFIG_CONDA_AUTO_INSTALL=True \
     GALAXY_CONFIG_CONDA_AUTO_INIT=True
 
 # Install tools
-ADD smallRNAseq.yml $GALAXY_ROOT/tools.yaml
+ADD srna-seq-tools.yml $GALAXY_ROOT/tools.yaml
 RUN install-tools $GALAXY_ROOT/tools.yaml && \
     /tool_deps/_conda/bin/conda clean --tarballs
 
-## Galaxy interactive tour
-ADD ./RNA-seq/* $GALAXY_ROOT/config/plugins/tours/
+# Galaxy interactive tour
+ADD ./srna-seq-tours/* $GALAXY_ROOT/config/plugins/tours/
+
+# Add data library defintion file
+ADD library_data.yaml $GALAXY_ROOT/library_data.yaml
+
+# Add workflows to the Docker image
+ADD ./srna-seq-workflow/* $GALAXY_HOME/workflows/
+
+# Download training data and populate the data library
+RUN startup_lite && \
+    sleep 30 && \
+    pip install ephemeris -U && \
+    workflow-install --workflow_path $GALAXY_HOME/workflows/ -g http://localhost:8080 -u $GALAXY_DEFAULT_ADMIN_USER -p $GALAXY_DEFAULT_ADMIN_PASSWORD && \
+    setup-data-libraries -i $GALAXY_ROOT/library_data.yaml -g http://localhost:8080 -u $GALAXY_DEFAULT_ADMIN_USER -p $GALAXY_DEFAULT_ADMIN_PASSWORD
+
+# Add visualisations
+
+# Container Style
+ADD assets/img/full_logo.png $GALAXY_CONFIG_DIR/web/welcome_image.png
+ADD welcome.html $GALAXY_CONFIG_DIR/web/welcome.html
