@@ -18,6 +18,9 @@ logo: "GTN"
   - Many more non-public
   - Both general-purpose and domain-specific
 
+???
+
+The Galaxy Team is composed by bioinformaticians and software engineers
 
 ---
 
@@ -27,26 +30,59 @@ logo: "GTN"
 - Reproducibility
 - Transparency
 
+???
+
+Accessibility: Users without programming experience can easily specify parameters and run tools and workflows.
+Reproducibility: Galaxy captures information so that any user can repeat and understand a complete computational analysis.
+Transparency: Users share and publish analyses via the web and create Pages, interactive, web-based documents that describe a complete analysis.
+
 ---
 
-### A Third slide
+# User Interface
 
-Some text
+---
+
+### Main UI
+
+TODO: add image here
+
+---
+
+### Tools
+
+- Each tool is just a text file describing:
+  - inputs + parameters => commands => outputs
+  - Help, tests, citations, requirements,...
+- Every software can be embedded
+- [Tool Shed](https://toolshed.g2.bx.psu.edu/): free tool store
+- New versions can be installed without removing old ones to ensure reproducibility
+
+---
+
+### Histories
+
+- At the heart of Galaxy’s reproducibility
+- For each dataset, the history tracks:
+  - Name, format, size, creation time, datatype-specific metadata
+  - Tool id and version, inputs, parameters
+  - Stdout, stderr
+  - State (<span style="color: grey">grey</span>: waiting; <span style="color: yellow">yellow</span>: running; <span style="color: green">green</span>: success; <span style="color: red">red</span>: failed)
+  - Hidden, deleted, purged
+- Each history should correspond to a different analysis
 
 ???
 
-Slide notes
--> Pressing **P** will toggle presenter mode.
-
+Purged means permanently deleted
 
 ---
 
-# Part 2
+### Workflows
 
----
+- Graphical editing
+- Can be **extracted** from a history
+- Re-run the same analysis on different inputs
+- Parameters can be changed before running
+- Workflow **scheduling**
+  - A job is submitted as soon as its inputs are ready
+- **Sub**-workflows: a workflow inside another workflow
 
-### An other slide
-
-With text and a resized image
-
-.image-25[![](../images/ecker_2012.jpg)]
