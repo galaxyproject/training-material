@@ -15,3 +15,6 @@ ENV GALAXY_CONFIG_CONDA_AUTO_INSTALL=True \
 ADD smallRNAseq.yml $GALAXY_ROOT/tools.yaml
 RUN install-tools $GALAXY_ROOT/tools.yaml && \
     /tool_deps/_conda/bin/conda clean --tarballs
+
+## Galaxy interactive tour
+ADD ./RNA-seq/* $GALAXY_ROOT/config/plugins/tours/
