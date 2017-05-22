@@ -58,3 +58,32 @@ TODO: add image here
 - Multiple versions can be installed at the same time for ensure reproducibility
 
 ---
+
+### Histories
+
+- At the heart of Galaxy’s reproducibility
+- For each dataset, the history tracks:
+  - Name, format, size, creation time, datatype-specific metadata
+  - Tool id and version, inputs, parameters
+  - Stdout, stderr
+  - State (<span style="color: grey">grey</span>: waiting; <span style="color: yellow">yellow</span>: running; <span style="color: green">green</span>: success; <span style="color: red">red</span>: failed)
+  - Hidden, deleted, purged
+- Each history should correspond to a different analysis
+
+???
+
+Purged means permanently deleted
+
+---
+
+### Workflows
+
+- Graphical editing
+- Can be **extracted** from a history
+- Re-run the same analysis on different inputs
+- Parameters can be changed before running
+- Workflow **scheduling**
+  - A job is submitted as soon as its input are ready
+- **Sub**-workflows: a workflow inside another workflow
+
+---
