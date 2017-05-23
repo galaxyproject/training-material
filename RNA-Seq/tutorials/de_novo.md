@@ -267,7 +267,7 @@ The first output of `DESeq2` is a tabular file. The columns are:
 >    >
 >    > <details>
 >    > <summary>Click to view answers</summary>
->    > To filter, use "c7<0.05". And we get 278 transcripts with a significant change in gene expression between the G1E and megakaryocyte cellular states.
+>    > To filter, use "c7<0.05". And we get 249 transcripts with a significant change in gene expression between the G1E and megakaryocyte cellular states.
 >    > </details>
 >    {: .question}
 >
