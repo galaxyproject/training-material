@@ -1,140 +1,88 @@
-<!doctype html>
-<html lang="en">
+---
+layout: introduction_slides
+topic_name: Introduction
+logo: "GTN"
+---
 
-	<head>
-		<meta charset="utf-8">
+# What is Galaxy?
 
-		<title>Galaxy</title>
+---
 
-		<link rel="stylesheet" href="../../shared/reveal.js/css/reveal.css">
-		<link rel="stylesheet" href="../../shared/reveal.js/css/theme/simple.css" id="theme">
+### What is Galaxy?
 
-		<!-- Code syntax highlighting -->
-		<link rel="stylesheet" href="../../shared/reveal.js/lib/css/zenburn.css">
+- Web-based platform for computational biomedical research https://galaxyproject.org/
+  - Developed at Penn State, Johns Hopkins and G. Washington universities with substantial outside contributions
+  - Open source under [Academic Free License](https://opensource.org/licenses/AFL-3.0)
+- &gt;4300 [citations](http://www.citeulike.org/group/16008/)
+- &gt;80 [public Galaxy servers](https://new.galaxyproject.org/public-galaxy-servers/)
+  - Many more non-public
+  - Both general-purpose and domain-specific
 
-		<link rel="stylesheet" href="../../shared/css/custom.css" id="theme">
+???
 
-		<!-- Printing and PDF exports -->
-        <script>
-          if( window.location.search.match( /print-pdf/gi ) ) {
-            var link = document.createElement( 'link' );
-            link.rel = 'stylesheet';
-            link.type = 'text/css';
-            link.href = '../../shared/reveal.js/css/print/pdf.css';
-            document.getElementsByTagName( 'head' )[0].appendChild( link );
-          }
-        </script>
-		<!--<script>
-            if (window.location.search.match(/print-pdf/gi)) {
-                document.write('<link rel="stylesheet" href="css/pdf.css" type="text/css">');
-            }
-        </script>-->
+The Galaxy Team is composed by bioinformaticians and software engineers
 
-		<!--[if lt IE 9]>
-        <script src="../../shared/reveal.js/lib/js/html5shiv.js"></script>
-        <![endif]-->
-	</head>
+---
 
-	<body>
-		<div class="reveal">
-            <div class="slides">
-                <section data-markdown>
-                    <script type="text/template">
-                        ## Welcome!
+### Core values
 
-                        <img src="../../shared/images/GTNLogo1000.png" alt="GTNLogo1000"
-                        class="no-border" width=30%/>
+- Accessibility
+- Reproducibility
+- Transparency
 
-                        The easiest way to **navigate** this slide deck
-                        is **by hitting `[space]` on your keyboard**
+???
 
-                        You can also navigate with arrow keys, but be careful because some
-                        slides can be nested inside of each other (vertically)
-                    </script>
-                </section>
+Accessibility: Users without programming experience can easily specify parameters and run tools and workflows.
+Reproducibility: Galaxy captures information so that any user can repeat and understand a complete computational analysis.
+Transparency: Users share and publish analyses via the web and create Pages, interactive, web-based documents that describe a complete analysis.
 
-                <section data-markdown>
-                    <script type="text/template">
-                        # Galaxy
-                    </script>
-                </section>
+---
 
-                <section>
-                    <section data-markdown>
-                        <script type="text/template">
-                            ## What is Galaxy?
-                        </script>
-                    </section>
+# User Interface
 
-                    <section data-markdown>
-                        <script type="text/template">
-                            ### Subpart1.1
+---
 
-                            - list
-                            - list
-                            - list
-                        </script>
-                    </section>
+### Main UI
 
-                    <section data-markdown>
-                        <script type="text/template">
-                            ### Subpart1.2
+TODO: add image here
 
-                            With an image...
+---
 
-                            <img src="../../shared/images/GTNLogo1000.png" alt="GTNLogo1000" class="no-border" width=30%/>
-                        </script>
-                    </section>
-                </section>
+### Tools
 
-                <section>
-                    <section data-markdown>
-                        <script type="text/template">
-                            ## How it is working?
-                        </script>
-                    </section>
+- Each tool is just a text file describing:
+  - inputs + parameters => commands => outputs
+  - Help, tests, citations, requirements,...
+- Every software can be embedded
+- [Tool Shed](https://toolshed.g2.bx.psu.edu/): free tool store
+- New versions can be installed without removing old ones to ensure reproducibility
 
-                    <section data-markdown>
-                        <script type="text/template">
-                            ### Subpart2.1
+---
 
-                            Take inspiration from: [PDF](../tmp/Introduction_to_Galaxy_Uni.pdf)
-                        </script>
-                    </section>
-                </section>
+### Histories
 
+- At the heart of Galaxy’s reproducibility
+- For each dataset, the history tracks:
+  - Name, format, size, creation time, datatype-specific metadata
+  - Tool id and version, inputs, parameters
+  - Stdout, stderr
+  - State (<span style="color: grey">grey</span>: waiting; <span style="color: yellow">yellow</span>: running; <span style="color: green">green</span>: success; <span style="color: red">red</span>: failed)
+  - Hidden, deleted, purged
+- Each history should correspond to a different analysis
 
-                <section data-markdown>
-                    <script type="text/template">
-                        ### Tutorial
+???
 
-                        - [Tutorial 1](tutorial1.html)
-                        - [Tutorial 2](tutorial1.html)
-                    </script>
-                </section>
-			</div>
+Purged means permanently deleted
 
-		</div>
+---
 
-		<script type="text/javascript" src="../../shared/reveal.js/lib/js/head.min.js"></script>
-        <script type="text/javascript" src="../../shared/reveal.js/js/reveal.js"></script>
-        <script type="text/javascript">
-            Reveal.initialize({
-                slideNumber: !window.location.search.match(/print-pdf/gi),
-                history: true,
+### Workflows
 
-                theme: Reveal.getQueryHash().theme,
-                transition: Reveal.getQueryHash().transition || 'concave',
+- Graphical editing
+- Can be **extracted** from a history
+- Re-run the same analysis on different inputs
+- Parameters can be changed before running
+- Workflow **scheduling**
+  - A job is submitted as soon as its inputs are ready
+- **Sub**-workflows: a workflow inside another workflow
 
-                dependencies: [
-                    { src: '../../shared/reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
-                    { src: '../../shared/reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-                    { src: '../../shared/reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-                    { src: '../../shared/js/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
-                    { src: '../../shared/reveal.js/plugin/notes/notes.js', async: true },
-                ]
-            });
-        </script>
-
-	</body>
-</html>
