@@ -1,10 +1,10 @@
-# Galaxy - <topic name> training material
+# Galaxy - Assembly training material
 
-FROM <base-galaxy-flavor>
+FROM bgruening/galaxy-ngs-preprocessing
 
-MAINTAINER <maintainer-name>, <maintainer-email>
+MAINTAINER Simon-Gladman, simon.gladman@unimelb.edu.au
 
-ENV GALAXY_CONFIG_BRAND Topic Name
+ENV GALAXY_CONFIG_BRAND Assembly
 ENV ENABLE_TTS_INSTALL True
 
 # Enable Conda dependency resolution
