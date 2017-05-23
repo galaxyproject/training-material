@@ -145,7 +145,7 @@ To quantify small RNA abundance and identify their putative targets, we need to 
 >
 > 1. **HISAT2** :wrench:: Run `HISAT2` to align one collection of trimmed reads to reference rRNA sequences with the following parameters:
 >    - **Single end or paired reads?**: Individual unpaired reads
->    - **Reads**: Select "Dataset collection" and choose one collection of trimmed FASTQ files
+>    - **Reads**: Select "Dataset collection" and choose control RNAi collection of trimmed FASTQ files
 >    - **Source for the reference genome to align against**: Use a genome from history
 >    - **Select the reference genome**: Dmel_rRNA_sequences.fa
 >    - **Spliced alignment parameters**: Specify spliced alignment parameters
@@ -153,23 +153,21 @@ To quantify small RNA abundance and identify their putative targets, we need to 
 >
 >       ![](../images/image.png)
 >
-> We now need to extract *unaligned* reads from the output BAM file for aligning to reference miRNA sequences. We can do this using the `Filter SAM or BAM, output SAM or BAM` to obtain reads with the bit flag 4 (meaning the read is unaligned) and then converting the filtered BAM file to FASTQ format with the `Convert from BAM to FastQ` tool.
+>    We now need to extract *unaligned* reads from the output BAM file for aligning to reference miRNA sequences. We can do this using the `Filter SAM or BAM, output SAM or BAM` to obtain reads with the bit flag 4 (meaning the read is unaligned) and then converting the filtered BAM file to FASTQ format with the `Convert from BAM to FastQ` tool.
 >
 > 1. **Filter SAM or BAM, output SAM or BAM** :wrench:: Run `Filter SAM or BAM, output SAM or BAM` on one collection of HISAT output BAM files with the following parameters:
->    - **SAM or BAM file to filter**: Select "Dataset collection" and choose one collection of aligned HISAT BAM files
+>    - **SAM or BAM file to filter**: Select "Dataset collection" and choose control RNAi collection of aligned HISAT BAM files
 >    - **Filter on bitwise flag**: Yes
 >    - **Only output alignments with all of these flag bits set**: Check the box next to "The read in unmapped"
 >
 > 1. **Convert from BAM to FastQ** :wrench:: Run `Convert from BAM to FastQM` on one collection of filtered HISAT output BAM files with the following parameters:
->    - **Convert the following BAM file to FASTQ**: Select "Dataset collection" and choose one collection of filtered HISAT BAM files
+>    - **Convert the following BAM file to FASTQ**: Select "Dataset collection" and choose control RNAi collection of filtered HISAT BAM files
 >
-> 1. Repeat previous 2 steps for second collection of HISAT output BAM files.
->
-> Next we will align the non-rRNA reads to a known set of miRNA sequences to remove them from the whole genome alignment step.
+>    Next we will align the non-rRNA reads to a known set of miRNA sequences to remove them from the whole genome alignment step.
 >
 > 1. **HISAT2** :wrench:: Run `HISAT2` to align one collection of non-rRNA reads to reference miRNA sequences using the following parameters:
 >    - **Single end or paired reads?**: Individual unpaired reads
->    - **Reads**: Select "Dataset collection" and choose one collection of non-rRNA FASTQ files
+>    - **Reads**: Select "Dataset collection" and choose control RNAi collection of non-rRNA FASTQ files
 >    - **Source for the reference genome to align against**: Use a genome from history
 >    - **Select the reference genome**: Dmel_miRNA_sequences.fa
 >    - **Spliced alignment parameters**: Specify spliced alignment parameters
@@ -177,18 +175,20 @@ To quantify small RNA abundance and identify their putative targets, we need to 
 >
 >       ![](../images/image.png)
 >
-> We now need to extract *unaligned* reads from the output BAM file for aligning to reference genome sequence. Repeat the `Filter SAM or BAM, output SAM or BAM` and `Convert from BAM to FastQ` steps to do this. Rename the converted FASTQ files something meaningful (*e.g.* "non-rRNA/miRNA control RNAi sRNA").
+>    We now need to extract *unaligned* reads from the output BAM file for aligning to reference genome sequence. Repeat the `Filter SAM or BAM, output SAM or BAM` and `Convert from BAM to FastQ` steps to do this. Rename the converted FASTQ files something meaningful (*e.g.* "non-rRNA/miRNA control RNAi sRNA").
 >
-> 1. **HISAT2** :wrench:: Run `HISAT` to align one collection of non-rRNA/non-miRNA reads to the reference genome using the following parameters.
+> 1. **HISAT2** :wrench:: Run `HISAT` to align a collection of non-rRNA/non-miRNA reads to the reference genome using the following parameters.
 >    - **Single end or paired reads?**: Individual unpaired reads
->    - **Reads**: Select "Dataset collection" and choose one collection of non-rRNA/non-miRNA FASTQ files
+>    - **Reads**: Select "Dataset collection" and choose control RNAi collection of non-rRNA/non-miRNA FASTQ files
 >    - **Source for the reference genome to align against**: Use a built-in genome
 >    - **Select a reference genome**: Fruit Fly (D. melanogaster): dm3
 >    - **Primary alignments**: 1000000
 >    - **Spliced alignment parameters**: Specify spliced alignment parameters
 >    - **Specify strand-specific information**: First Strand (R/RF)
 >
-> We use a ridiculously high value for "Primary alignments" (-k) here to ensure that we retain piRNAs. In flies, piRNA often align to transposable and repeat elements in the genome. If a piRNA read aligns to more than -k loci, it is removed from the output. We want to make sure we don't lose these reads, so we set this parameter to something extremely high. This slows down the alignment step, but is necessary.
+> 1. Repeat previous these steps for the *klp10A* RNAi dataset collection.
+>
+>    We use a ridiculously high value for "Primary alignments" (-k) here to ensure that we retain piRNAs. In flies, piRNA often align to transposable and repeat elements in the genome. If a piRNA read aligns to more than -k loci, it is removed from the output. We want to make sure we don't lose these reads, so we set this parameter to something extremely high. This slows down the alignment step, but is necessary.
 
 **UPDATES STOPPED HERE**
 
