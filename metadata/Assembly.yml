@@ -1,0 +1,94 @@
+name: "Assembly"
+type: "use"
+title: "Assembly"
+summary: "DNA sequence data has become an indispensable tool for Molecular Biology & Evolutionary Biology. Study in these fields now require a genome sequence to work from. We call this a 'Reference Sequence.' We need to build a reference for each species. We do this by Genome Assembly. De novo Genome Assembly is the process of reconstructing the original DNA sequence from the fragment reads alone."
+docker_image: ""
+
+requirements:
+-
+    title: "Galaxy introduction"
+    type: "internal"
+    link: "/Introduction/"
+    
+-
+    title: "Quality Control"
+    type: "internal"
+    link: "/NGS-QC/"
+
+material:
+-
+    title: "Introduction to Genome Assembly"
+    type: "tutorial"
+    name: "general-introduction"
+    zenodo_link: "https://doi.org/10.5281/zenodo.582600"
+    galaxy_tour: ""
+    hands_on: "yes"
+    slides: "yes"
+    
+    
+    questions:
+    - "How do we perform a very basic genome assembly from short read data?"
+    
+    objectives:
+    - "assemble some paired end reads using Velvet"
+    - "examine the output of the assembly."
+
+    time_estimation: "30 minutes"
+
+    key_points:
+    - "We assembled some Illumina fastq reads into contigs using a short read assembler called Velvet"
+    - "We showed what effect one of the key assembly parameters, the k-mer size, has on the assembly"
+    - "It looks as though there are some exploitable patterns in the metric data vs the k-mer size."
+
+#-
+    # title: "De Bruijn Graph Assembly"
+    # type: "tutorial"
+    # name: "debruijn-graph-assembly"
+    # zenodo_link: ""
+    # galaxy_tour: ""
+    # hands_on: "no"
+    # slides: "yes"
+    # 
+    # 
+    # questions:
+    # - "What are the factors that affect genome assembly?"
+    # 
+    # objectives:
+    # - ""
+    # - ""
+    # - ""
+    # 
+    # time_estimation: "1d/3h/6h"
+    # 
+    # key_points:
+    # - ""
+    # - ""
+   
+maintainers:
+-
+    name: "Simon Gladman"
+    github_username: "slugger70"
+    email: "simon.gladman@unimelb.edu.au"
+
+contributors:
+-
+    name: "Simon Gladman"
+    github_username: "slugger70"
+    email: "simon.gladman@unimelb.edu.au"
+
+references:
+-
+    authors: "D.R. Zerbino and E. Birney"
+    title: "Velvet: algorithms for de novo short read assembly using de Bruijn graphs."
+    link: "http://genome.cshlp.org/content/18/5/821.full"
+    summary: "Velvet: Sequence assembler for very short reads"
+-
+    authors: "Daniel R. Zerbino , Gayle K. McEwen, Elliott H. Margulies, Ewan Birney"
+    title: "Pebble and Rock Band: Heuristic Resolution of Repeats and Scaffolding in the Velvet Short-Read de Novo Assembler"
+    link: "https://doi.org/10.1371/journal.pone.0008407"
+    summary: "Heuristic Resolution of Repeats and Scaffolding in the Velvet Short-Read de Novo Assembler"
+-
+    authors: "Anton Bankevich, Sergey Nurk, Dmitry Antipov, Alexey A. Gurevich, Mikhail Dvorkin, Alexander S. Kulikov, Valery M. Lesin, Sergey I. Nikolenko, Son Pham, Andrey D. Prjibelski, Alexey V. Pyshkin, Alexander V. Sirotkin, Nikolay Vyahhi, Glenn Tesler, Max A. Alekseyev, and Pavel A. Pevzner"
+    title: "SPAdes: A New Genome Assembly Algorithm and Its Applications to Single-Cell Sequencing"
+    link: "https://doi.org/10.1089/cmb.2012.0021"
+    summary: "The paper describe SPAdes, a new assembler for both single-cell and standard (multicell) assembly, and demonstrate that it improves on the recently released E+V−SC assembler (specialized for single-cell data) and on popular assemblers Velvet and SoapDeNovo (for multicell data). SPAdes generates single-cell assemblies, providing information about genomes of uncultivatable bacteria that vastly exceeds what may be obtained via traditional metagenomics studies. SPAdes is available online (http://bioinf.spbau.ru/spades)."
