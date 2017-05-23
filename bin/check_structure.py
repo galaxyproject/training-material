@@ -14,11 +14,13 @@ for topic in os.listdir('./topics'):
 
         for file_name in ['metadata.yaml', 'README.md', 'docker/Dockerfile', 'slides/index.html']:
             print(os.path.join( topic_path, file_name))
-            assert os.path.exists( os.path.join( topic_path, file_name) )
+            p = os.path.join( topic_path, file_name)
+            assert os.path.exists( p ), '%s not found, but required.' % p
 
         for dir_name in ['docker', 'slides', 'tutorials']:
-            assert os.path.exists( os.path.join( topic_path, dir_name) )
-            assert os.path.isdir( os.path.join( topic_path, dir_name) )
+            p = os.path.join( topic_path, dir_name)
+            assert os.path.exists( p ), '%s not found, but required.' % p
+            assert os.path.isdir( p ), '%s not found, but required.' % p
 
 
         for tutorial in os.listdir( os.path.join( topic_path, 'tutorials') ):
@@ -33,9 +35,8 @@ for topic in os.listdir('./topics'):
                 # check for ./topics/<topic>/* files
                 for dir_name in ["tours", "workflows"]:
                     directory = os.path.join( tutorial_path, dir_name)
-                    assert os.path.exists( directory )
-                    assert os.path.isdir( directory )
-                    print(len(os.listdir( directory )))
+                    assert os.path.exists( directory ), '%s does not exists.' % directory
+                    assert os.path.isdir( directory ), '%s does not exists.' % directory
                     assert len(os.listdir( directory )) >= 1
 
 
