@@ -1,5 +1,4 @@
 ---
-layout: tutorial_hands_on
 topic_name: Metagenomics
 tutorial_name: mothur-miseq-sop
 ---
