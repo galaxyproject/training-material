@@ -47,17 +47,19 @@ Due to the large size of the original sRNA-seq datasets, we have downsampled the
 >    - Click *For all selected...* and choose *Build dataset list*
 >    - Ensure the three control samples are the only ones selected, and enter a name for the new collection (*e.g.* control sRNA-seq)
 >    - Click *Create list*
->    - Repeat for the *klp10A* RNAi samples.
+>    - Repeat for the *klp10A* RNAi samples
 >
 > {: .hands_on}
 
 ## Read quality checking
 
-Read quality scores (called phred scores) in FASTQ-formatted data can be encoded by one of a few different encoding schemes. Most Galaxy tools assume that input FASTQ files are using the Sanger/Illumina 1.9 encoding scheme, and if the files are using another scheme, the tools will not interpret the quality score appropriately. It is always good practice to check what quality encoding scheme your data are using and then convert to Sanger/Illumina 1.9 if necessary. We can do this using the [`FastQC`](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/) tool (further described in the [NGS-QC tutorial](../../NGS-QC/tutorials/dive_into_qc)).
+Read quality scores (called phred scores) in FASTQ-formatted data can be encoded by one of a few different encoding schemes. Most Galaxy tools assume that input FASTQ files are using the Sanger/Illumina 1.9 encoding scheme, and if the files are using another scheme, the tools will not interpret the quality score appropriately. It is always good practice to check what quality encoding scheme your data are using and then convert to Sanger/Illumina 1.9 if necessary. We can do this using the [FastQC](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/) tool (further described in the [NGS-QC tutorial](../../NGS-QC/tutorials/dive_into_qc)).
 
 > ### :pencil2: Hands-on: Quality checking
 >
-> 1. **FastQC** :wrench:: Run `FastQC` on the FASTQ read files to assess the quality of the reads. Select the `FASTQC` tool. Under the **Short read data from your current history** option select the *Dataset collections* tab and then choose one of the dataset collections to analyze. Repeat for the second dataset collection.
+> 1. **FastQC** :wrench:: Run `FastQC` on the FASTQ read files to assess the quality of the reads using the following parameters:
+>    - **Short read data from your current history**: Click the "Dataset collection" tab and then select the control sRNA-seq dataset
+>    - Repeat for the *klp10A* RNAi dataset collection
 >
 >    > ### :question: Questions
 >    >
@@ -69,7 +71,7 @@ Read quality scores (called phred scores) in FASTQ-formatted data can be encoded
 >    >    <details>
 >    >    <summary>Click to view answers</summary>
 >    >    <ol type="1">
->    >    <li>All samples are using the Illumina 1.5 quality encoding scheme. We will need to convert to Sanger/Illumina 1.9. </li>
+>    >    <li>All samples use the Illumina 1.5 quality encoding scheme. We will need to convert to Sanger/Illumina 1.9. </li>
 >    >    <li>All samples have a read length of 51 nt. </li>
 >    >    <li>The read quality across the entire length of the reads is good (phred score > 28 for the most part). </li>
 >    >    <li>Yes, "Illumina Small RNA 3' Adapters" are present. </li>
@@ -77,9 +79,10 @@ Read quality scores (called phred scores) in FASTQ-formatted data can be encoded
 >    >    </details>
 >    {: .question}
 >
-> 1. **FASTQ Groomer** :wrench:: Run `FASTQ Groomer` on the FASTQ read files to convert the quality scored from Illumina 1.5 encoding to Sanger/Illumina 1.9 encoding using the following parameters:
+> 1. **FASTQ Groomer** :wrench:: Run `FASTQ Groomer` on the FASTQ read files to convert the quality scores from Illumina 1.5 to Sanger/Illumina 1.9 encoding using the following parameters:
 >    - **File to groom**: Click the "Dataset collection" tab and then select the control sRNA-seq dataset
 >    - **Input FASTQ quality scores type**: Illumina 1.3-1.7
+>    - Repeat for the *klp10A* RNAi dataset collection
 >
 >    ![](../images/image.png)
 
