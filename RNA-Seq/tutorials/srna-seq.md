@@ -46,13 +46,13 @@ Due to the large size of the original sRNA-seq datasets, we have downsampled the
 >    - Click *For all selected...* and choose *Build dataset list*
 >    - Ensure the three control samples are the only ones selected, and enter a name for the new collection (*e.g.* control sRNA-seq)
 >    - Click *Create list*
->    - Repeat steps ii. through v. for the *klp10A* RNAi samples.
+>    - Repeat for the *klp10A* RNAi samples.
 >
 > {: .hands_on}
 
 ## Read quality checking
 
-Read quality scores (called phred scores) in FASTQ-formatted data can be encoded by one of a few different encoding schemes. Most Galaxy tools assume that input FASTQ files are using the Sanger/Illumina 1.8+ encoding scheme, and if the files are using another scheme, the tools will not interpret the quality score appropriately. It is always good practice to check what quality encoding scheme your data are using and then convert to Sanger/Illumina 1.8+ if necessary. We can do this using the `FASTQC` tool.
+Read quality scores (called phred scores) in FASTQ-formatted data can be encoded by one of a few different encoding schemes. Most Galaxy tools assume that input FASTQ files are using the Sanger/Illumina 1.9 encoding scheme, and if the files are using another scheme, the tools will not interpret the quality score appropriately. It is always good practice to check what quality encoding scheme your data are using and then convert to Sanger/Illumina 1.9 if necessary. We can do this using the [`FastQC`](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/) tool (further described in the [NGS-QC tutorial](../../NGS-QC/tutorials/dive_into_qc)).
 
 > ### :pencil2: Hands-on: Quality checking
 >
@@ -68,7 +68,7 @@ Read quality scores (called phred scores) in FASTQ-formatted data can be encoded
 >    >    <details>
 >    >    <summary>Click to view answers</summary>
 >    >    <ol type="1">
->    >    <li>All samples are using the Illumina 1.5 quality encoding scheme. We will need to convert to Sanger/Illumina 1.8+. </li>
+>    >    <li>All samples are using the Illumina 1.5 quality encoding scheme. We will need to convert to Sanger/Illumina 1.9. </li>
 >    >    <li>All samples have a read length of 51 nt. </li>
 >    >    <li>The read quality across the entire length of the reads is good (phred score > 28 for the most part). </li>
 >    >    <li>Yes, "Illumina Small RNA 3' Adapters" are present. </li>
@@ -76,40 +76,53 @@ Read quality scores (called phred scores) in FASTQ-formatted data can be encoded
 >    >    </details>
 >    {: .question}
 >
-> 1. **FASTQ Groomer** :wrench:: Run `FASTQ Groomer` on the FASTQ read files to convert the quality scored from Illumina 1.5 encoding to Sanger/Illumina 1.8+ encoding using the following parameters:
+> 1. **FASTQ Groomer** :wrench:: Run `FASTQ Groomer` on the FASTQ read files to convert the quality scored from Illumina 1.5 encoding to Sanger/Illumina 1.9 encoding using the following parameters:
 >    - **File to groom**: Click the "Dataset collection" tab and then select the control sRNA-seq dataset
 >    - **Input FASTQ quality scores type**: Illumina 1.3-1.7
 >
 >    ![](../images/image.png)
 
-If we scroll down to the "Adapter Content" section of the FASTQC output, we can see that Illumina Small RNA adapters are present in ~80% of our reads. The next step is to remove these artificial adaptors because they will not map to the reference genome.
+After the grooming step is complete, click on the FASTQ Groomer dataset collection of control sRNA datasets and then click on the name of one of the datasets. You should see now that the format is **fastqsanger** instead of **fastq**. This means we have successfully converted the quality score encoding scheme. 
+
+    ![](../images/image.png)
+
+If we go back to the FASTQC output and scroll down to the "Adapter Content" section, we can see that Illumina Small RNA adapters are present in ~80% of our reads. The next step is to remove these artificial adaptors because they will not map to the reference genome.
+
+    ![](../images/image.png)
 
 ## Adaptor trimming
 
-Small RNA sequencing library preparations involve adding an artificial adaptor sequence to both the 5' and 3' ends of the small RNAs. While the 5' adaptor anchors reads to the sequencing surface and thus are not sequenced, the 3' adaptor is typically sequence immediately follow the RNA sequence. These artificial sequences need to be removed before attemping to align the reads to a reference. We know that the datasets used here contain the Illumina universal small RNA-seq 3' adaptor, but let's confirm this using the [FastQC](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/) tool (further described in the [NGS-QC tutorial](../../NGS-QC/tutorials/dive_into_qc)).
+Small RNA sequencing library preparations involve adding an artificial adaptor sequence to both the 5' and 3' ends of the small RNAs. While the 5' adaptor anchors reads to the sequencing surface and thus are not sequenced, the 3' adaptor is typically sequence immediately follow the RNA sequence. In the example datasets here, the 3' adaptor sequence is `TGGAATTCTCGGGTG`, and needs to be removed from each read before attemping to align the reads to a reference. We will be using the Galaxy tool `Trim Galore!` which implements the tool [`cutadapt`](https://cutadapt.readthedocs.io/en/stable/).
 
 > ### :pencil2: Hands-on: Adaptor trimming
 >
 > 1. **Trim Galore!** :wrench:: Trim off Illumina adaptors from the 3' ends of the reads by running `Trim Galore!` on every FASTQ file with the following parameters:
 >    - **Is this library paired- or single-end?**: Single-end
 >    - **Reads in FASTQ format**: Select "Dataset collections" and then select the control sRNA-seq dataset
->    - **Trimming reads?**: Illumina small RNA adapters
+>    - **Trimming reads?**: User defined adapter trimming
+>    - **Adapter sequence to be trimmed off**: TGGAATTCTCGGGTG
 >    - **Trim Galore! advanced settings**: Full parameter list
+>    - **Trim low-quality ends from reads in addition to adapter removal**: 0
 >    - **Overlap with adapter sequence required to trim a sequence**: 6
 >    - **Discard reads that became shorter than length INT**: 12
+>    - **Generate a report file**: Yes
 >
 >    ![](../images/image.png)
+>
+>    We don't want to trim for quality because the trimmed sequences represent a full small RNA molecule, and we want to maintain the integrity of the entire molecule. We increase the minimum read length required to keep a read because small RNAs can potentially be shorter than the 20 nt default value. We can check out the report file for any sample and see the command for the tool, a summary of the total reads processed and number of reads with an adapter identified, and histogram data of the length of adaptor trimmed. We also see that a very small percentage of low-quality bases have been trimmed
 >
 > 1. **FastQC** :wrench:: Re-run `FastQC` on trimmed reads and inspect the differences.
 >
 >    > ### :question: Questions
 >    >
+>    > 1. What is the quality encoding scheme?
 >    > 1. What is the read length?
 >    > 1. Are there any adaptors present in these reads? Which one(s)?
 >    >
 >    >    <details>
 >    >    <summary>Click to view answers</summary>
 >    >    <ol type="1">
+>    >    <li>All samples are using the Sanger/Illumina 1.8+ quality encoding scheme.</li>
 >    >    <li>The read lengths range from 12 to 51 nt after trimming.</li>
 >    >    <li>No, Illumina Small RNA 3' Adaptors are no longer present. No other adaptoers are present.</li>
 >    >    </ol>
@@ -118,7 +131,7 @@ Small RNA sequencing library preparations involve adding an artificial adaptor s
 > ![](../images/image.png)
 > {: .hands_on}
 
-Now that we have trimmed our reads of the Illumina Small RNA 3' adaptors, we will align our trimmed reads to the reference *Drosophila* genome (dm3). For miRNA analyses, it is useful to align to the reference set of known miRNAs first, and then re-align any unaligned reads to the reference genome.
+Now that we have trimmed our reads of the Illumina Small RNA 3' adaptors and converted, we will align our trimmed reads to the reference *Drosophila* genome (dm3). For miRNA analyses, it is useful to align to the reference set of known miRNAs first, and then re-align any unaligned reads to the reference genome.
 
 ## Read alignment
 
@@ -130,7 +143,7 @@ To quantify small RNA abundance and identify their putative targets, we need to 
 >    - **Single end or paired reads?**: Individual unpaired reads
 >    - **Reads**: Select "Dataset collection" and choose one collection of trimmed FASTQ files
 >    - **Source for the reference genome to align against**: Use a built-in genome
->    - **Select a reference genome**: Fruit fly (Drosophila melanogaster): dm3
+>    - **Select a reference genome**: D. melanogaster Aug. 2014 (BDGP Release 6 + ISO 1 MIT/dm6) (dm6)
 >    - **Spliced alignment parameters**: Specify spliced alignment parameters
 >    - **Specify strand-specific information**: First Strand (R/RF)
 >
