@@ -45,21 +45,20 @@ Transparency: Users share and publish analyses via the web and create Pages, int
 
 ---
 
-### Main Galaxy Interface
+### Main Galaxy interface
 
-- Home page divided into 3 panels
+![Galaxy user interface](../images/galaxy_interface.png)
 
-[![](../images/galaxy_interface.png)](https://usegalaxy.org/)
-
+Home page divided into 3 panels
 
 ---
 
-### The menu
+### Top menu
 
-![](../images/galaxy_interface_menu.png)
+![Top menu](../images/galaxy_interface_menu.png)
 
-- *Analyze Data* - go back to the three panels home page to select a tool or see your history
-- *Workflow* - access existing workflows or create new one using the editable diagrammatic pipeline (more later)
+- *Analyze Data* - go back to the 3-panels homepage
+- *Workflow* - access existing workflows or create new one using the editable diagrammatic pipeline
 - *Shared data* - access data libraries, histories, workflows, visualizations and pages shared with you
 - *Visualization* - create new track browser and access your saved visualisations
 - *Help* - links to Galaxy Biostar (Q&A), Galaxy Community Hub (Wiki), and Interactive Tours
@@ -67,36 +66,45 @@ Transparency: Users share and publish analyses via the web and create Pages, int
 
 ---
 
-### Tools
+### Tool interface
 
-- Many tools available
-- Free tool store: [Galaxy Tool Shed](https://toolshed.g2.bx.psu.edu/)
-- Each tool is a text file describing:
-  - inputs parameters, commands, and outputs
-  - help, tests, citations, and dependency requirements
-- Every software can be embedded
-- New versions can be installed without removing old ones to ensure reproducibility
-
-
-- Need a tool that’s not in Galaxy? Ask a bioinformatician!
+![Tool interface](../images/101_13.png)
 
 ---
 
-### Histories
+### Tools
 
-- At the heart of Galaxy’s reproducibility
-- Location of all your analyses
-- For each dataset, the history tracks:
+- Each tool is a text file describing:
+  - input datasets, parameters, commands, and outputs
+  - help, tests, citations, dependency requirements
+- Free tool store: [Galaxy Tool Shed](https://toolshed.g2.bx.psu.edu/)
+  - Thousands of tools already available
+  - Every software can be embedded
+     - If a tool is not available, ask the Galaxy community for help!
+  - Only a Galaxy admin can install tools
+- New versions can be installed without removing old ones to ensure reproducibility
+
+???
+
+A tool describes:
+- the input datasets and their datatypes
+- the tool parameters (numerical, text, boolean, selections, colour)
+- how to generate a command to execute the tool with the specified inputs and parameters
+- the output datasets the tool should produce and their datatypes
+
+---
+
+### History
+
+- Location of all your analyses <img style="float: right;" alt="History" src="../images/history.png" />
+  - Collect all datasets (files) produced by tools you run
+- At the heart of Galaxy’s reproducibility<br />
+  For each dataset, the history tracks:
   - Name, format, size, creation time, datatype-specific metadata
   - Tool id and version, inputs, parameters
   - Standard output (`stdout`) and error (`stderr`)
   - State (<span style="color: grey">grey</span>: waiting; <span style="color: yellow">yellow</span>: running; <span style="color: green">green</span>: success; <span style="color: red">red</span>: failed)
   - Hidden, deleted, purged
-- Histories can be very large, you can have as many histories as you want
-  - Each history should correspond to a different analysis
-- History behavior is controlled by the *History options* at the top right corner of the History pane
-
-.image-25[![](../images/galaxy_interface_history_menu.png)]
 
 ???
 
@@ -104,18 +112,24 @@ Purged means permanently deleted
 
 ---
 
-.pull-left[
+### Multiple histories
 
-### History menu options
+- You can have as many histories as you want
+  - *Each history should correspond to a different analysis*
+  - *and should have a meaningful name*
+
+---
+
+### History options menu
+
+- History behavior is controlled by the *History options* (gear icon) <img style="float: right;" alt="History menu" src="../images/galaxy_interface_history_long_menu.png" />
+
+.image-25[![History options gear button](../images/galaxy_interface_history_menu.png)]
 
 - Most options are self explanatory
-  - If you create a new history, using *Create New*, your current history will not disappear
-  - If you would like to list all of your histories, choose *Saved Histories* to list all of them in the center main pane
-]
-
-.pull-right[
-![](../images/galaxy_interface_history_long_menu.png)
-]
+  - *Create New* history will **not** make your current history disappear
+  - To list all your histories, choose *Saved Histories*
+  - You can *Copy Datasets* from one history to another
 
 ---
 
@@ -135,15 +149,20 @@ Purged means permanently deleted
 
 ---
 
-### Data types
+### Datatypes
 
-- Data type can be automatically detected or assigned by user
-  - Edit Attributes
-  - Convert Formats
-- Tools only accept input datasets with the appropriate data types
-- Data type is assigned by tools when output is created
-- New data type can be added by the site galaxy admin
+- When uploading, datatype can be automatically detected or assigned by user
+- For datasets produced by a tool, the datatype is assigned by the tool
+- Tools only accept input datasets with the appropriate datatypes
+- You can change the datatype in 2 ways:
+  - Edit Attributes -> Datatype
+  - Edit Attributes -> Convert Formats
 
+???
+
+- Edit Attributes -> Datatype is used to fix a wrongly assigned datatype
+- Edit Attributes -> Convert Formats creates a new dataset using a tool that converts the original dataset in the new format
+- New datatypes can be added to the Galaxy code base, if missing
 
 ---
 
@@ -153,14 +172,19 @@ Purged means permanently deleted
   - e.g. mm10, hg19...
 - Genome build can be automatically detected or assigned by user
 - User can define their own custom genome build
-- New genome assembly can be added by the site galaxy admin
+- New genome assembly can be added by the site Galaxy admin
 
 ---
 
-# Why Galaxy?
+# Workflows
 
 ---
 
+### Workflow interface
+
+![Workflow interface](../images/RNA-Seq_workflow_editing.png)
+
+---
 
 ### Workflows
 
