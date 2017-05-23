@@ -5,9 +5,6 @@ import glob
 
 
 for topic in os.listdir('./topics'):
-    if topic == 'proteomics':
-        continue
-
     if os.path.isdir( os.path.join('./topics', topic) ):
         topic_path = os.path.join('./topics', topic)
         print(topic_path)
