@@ -73,7 +73,7 @@ Suppose you have **A** samples with a variant in a population. You are performin
 
 | Polymorphisms | Variant Calls | Polymorphisms and Variant Calls |
 |---------------|---------------|---------------------------------|
-|![](../images/pA.png)|![](../images/pB.png)|![](../images/pAB.png)|
+|![](../../images/pA.png)|![](../../images/pB.png)|![](../../images/pAB.png)|
 
 > ### :question: Questions
 >
@@ -127,7 +127,7 @@ Freebayes is a *haplotype-based* variant caller. This implies that instead of lo
 
 |Haplotype-based calling |
 |------------------------|
-|![](../images/freebayes.png)|
+|![](../../images/freebayes.png)|
 |<sub>Looking at a haplotype window makes misalignments tolerable. In this case a low complexity poly(A) stretch is misaligned. As a result looking at individual positions will result in calling multiple spurious varians. In the case of FreeBayes looking at a haplotype identifies two alleles (this is a diploid example) `A(7)` and `A(6)`, while `A(8)` is likely an error. Image by [Erik Garrison](https://github.com/ekg/freebayes)</sub>|
 
 # Let's try it
@@ -166,11 +166,11 @@ Yet for a quick tutorial these datasets are way too big, so we created a [downsa
 > 1. Select **FreeBayes** from **Phenotype Association** section of the tool menu (left pane of Galaxy's interface) :wrench:
 > 2. Make sure the top part of the interface looks like shown below. Here we selected `GIAB-Ashkenazim-Trio-hg19` as input and set **Using reference genome** to `hg19` and **Choose parameter selection level** to `5. Complete list of all options`:
 > 
->   ![](../images/FreeBayes_settings.png)
+>   ![](../../images/FreeBayes_settings.png)
 >
 > 3. Scrolling down to **Tweak algorithmic features?** click `Yes` and set **Calculate the marginal probability of genotypes and report as GQ in each sample field in the VCF output** to `Yes`. This would help us evaluating the quality of genotype calls:
 > 
->   ![](../images/freebayes_gq.png)
+>   ![](../../images/freebayes_gq.png)
 {: .hands_on}
 
 This produces a dataset in [VCF](http://www.1000genomes.org/wiki/Analysis/variant-call-format) format containing 35 putative variants. Before we can continue we need to post-process this dataset by breaking compound variants into multiple independent variants with **VcfAllelicPrimitives** tool found within **VCF Tools** section. This is necessary for ensuring the smooth sailing through downstream analyses:
@@ -180,7 +180,7 @@ This produces a dataset in [VCF](http://www.1000genomes.org/wiki/Analysis/varian
 > 1. Select FreeBayes output as the input for this tool :wrench:
 > 2. Make sure **Maintain site and allele-level annotations when decomposing** and **Maintain genotype-level annotations when decomposing** are set to `Yes`
 >
->   ![](../images/vcfallelicprimitives.png)
+>   ![](../../images/vcfallelicprimitives.png)
 >
 > **VCFAllelicPrimitives** generated a VCF files containing 37 records (the input VCF only contained 35). This is because a multiple nucleotide polymorphism (`TAGG|CAGA`) at position 618851 have been converted to two:
 > 
@@ -201,11 +201,11 @@ At this point we are ready to begin annotating variants using [**SnpEff**](http:
 
 SnpEff will generate two outputs: (1) an annotated VCF file and (2) an HTML report. The report contains a number of useful metrics such as distribution of variants across gene features
 
-  ![](../images/snpeff_chart.png)
+  ![](../../images/snpeff_chart.png)
 
 or changes to codons
 
-  ![](../images/snpeff_codons.png)
+  ![](../../images/snpeff_codons.png)
 
 ## Manipulating variation data with GEMINI
 
@@ -226,12 +226,12 @@ family1	   HG002_NA24385_son	HG003_NA24149_father HG004_NA24143_mother 1  2     
 >
 > So let's load data into GEMINI by setting VCF and PED inputs
 >
->   ![](../images/gemini_load.png)
+>   ![](../../images/gemini_load.png)
 > 
 > 
 > This creates a sqlite database. To see the content of the database use **GEMINI_db_info**:
 >
->   ![](../images/gemini_db_info.png)
+>   ![](../../images/gemini_db_info.png)
 >
 {: .hands_on}
 
@@ -250,7 +250,7 @@ GEMINI database is queried using the versatile SQL language (more on SQL [here](
 >
 > Type `SELECT count(*) FROM variants WHERE in_dbsnp == 0` into **The query to be issued to the database**
 > 
->     ![](../images/gemini_query1.png)
+>     ![](../../images/gemini_query1.png)
 >  
 > As we can see from [output](https://usegalaxy.org/datasets/bbd44e69cb8906b51bb37b9032761321/display/?preview=True) there are 21 variants that are not annotated in dbSNP
 >
@@ -283,7 +283,7 @@ GEMINI database is queried using the versatile SQL language (more on SQL [here](
 >    <details>
 >    <summary>Click to view answers</summary>
 >    <ol type="1">
->    <li><p>To answer this question we will use two fields of GEMINI_query interface:</p><p>Type `SELECT * from variants` into <b>The query to be issued to the database</b></p><p>Type `gt_types.HG002_NA24385_son <> HOM_REF` into <b>Restrictions to apply to genotype values</b></p>Here is an <a href="../images/gemini_query2.png">example</a>. It will generate <a href="https://usegalaxy.org/datasets/bbd44e69cb8906b560921700703d0255/display/?preview=True">this output</a></li>.
+>    <li><p>To answer this question we will use two fields of GEMINI_query interface:</p><p>Type `SELECT * from variants` into <b>The query to be issued to the database</b></p><p>Type `gt_types.HG002_NA24385_son <> HOM_REF` into <b>Restrictions to apply to genotype values</b></p>Here is an <a href="../../images/gemini_query2.png">example</a>. It will generate <a href="https://usegalaxy.org/datasets/bbd44e69cb8906b560921700703d0255/display/?preview=True">this output</a></li>.
 >    <li>Typing the same expression `SELECT * from variants` into <b>The query to be issued to the database</b> and `(gt_types.HG002_NA24385_son <> HOM_REF AND gt_types.HG003_NA24149_father <> HOM_REF)` into <b>Restrictions to apply to genotype values</b> will generate <a href="https://usegalaxy.org/datasets/bbd44e69cb8906b5aab445b3cd632ba7/display/?preview=True">this output</a></li>.
 >    <li>Typing `SELECT gts.HG002_NA24385_son, gts.HG003_NA24149_father from variants` into <b>The query to be issued to the database</b> and `(gt_types.HG002_NA24385_son <> HOM_REF AND gt_types.HG003_NA24149_father <> HOM_REF)` into <b>Restrictions to apply to genotype values</b>
 will generate<a href="https://usegalaxy.org/datasets/bbd44e69cb8906b543c67f80be21ed02/display/?preview=True">this output</a></li>.
@@ -322,19 +322,19 @@ This short tutorial should give you an overall idea on how generate variant data
 * Right click on :arrow_forward: symbol and open Galaxy history in another new browser tab;
 * When Galaxy history interface opens you will need to click **Import history** link highlighted with a red border in the following figure:
 
-  ![](../images/import_history.png)
+  ![](../../images/import_history.png)
 
 * If you have a wide screen arrange browsers tabs side by side:
 
-  ![](../images/side-by-side.png)
+  ![](../../images/side-by-side.png)
 
 * Proceed with tutorial. For example, to repeat the following command from GEMINI tutorial:
 
-  ![](../images/gemini_command.png)
+  ![](../../images/gemini_command.png)
 
 * Use Galaxy's **GEMINI_load** tool:
  
-  ![](../images/galaxy_command.png)
+  ![](../../images/galaxy_command.png)
  
 * and so on....
 

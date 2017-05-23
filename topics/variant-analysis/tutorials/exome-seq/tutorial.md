@@ -77,7 +77,7 @@ change the sequence, but can increase disease risk.
 
 We will follow the pipeline:
 
-![Exome sequencing pipeline in Galaxy](../images/genVAST.png)
+![Exome sequencing pipeline in Galaxy](../../images/genVAST.png)
 
 > ### :bulb: Tip:
 >
