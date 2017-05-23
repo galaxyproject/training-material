@@ -49,7 +49,7 @@ tutorial_name: methylation-seq
 >
 > 3. Go to the web page result page and have a closer look at 'Per base sequence content'
 >
->    ![](../images/fastqc.png)
+>    ![](../../images/fastqc.png)
 >
 >    > ### :question: Questions
 >    >
@@ -107,7 +107,7 @@ tutorial_name: methylation-seq
 > 5. **MethylDackel** :wrench:: Set the parameters ```keepSingleton``` and ```keepDiscordant``` to ```Yes```.
 > 6. **MethylDackel** :wrench:: Click ```Execute```.
 >
->    ![](../images/methylation_bias_example_data.png)
+>    ![](../../images/methylation_bias_example_data.png)
 >
 >    > ### :question: Questions
 >    >
@@ -179,7 +179,7 @@ tutorial_name: methylation-seq
 > 
 > The output should look something like this:
 > 
-> ![](../images/methylation_output.png)
+> ![](../../images/methylation_output.png)
 >
 > Lets see how the methylation looks for a view provided files:
 > 1. **Galaxy** :wrench:: Import from the data library the files ```NB1_CpG.meth.bedGraph```
