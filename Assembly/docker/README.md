@@ -13,7 +13,7 @@ Galaxy Docker repository for NGS-mapping training material :whale: :eyes:
 To launch:
 
 ```
-docker run -d -p 8080:80 bgruening/galaxy-ngs-mapping-training
+docker run -d -p 8080:80 bgruening/galaxy-assembly-training
 ```
 
 For more details about this command line or specific usage, please consult the
