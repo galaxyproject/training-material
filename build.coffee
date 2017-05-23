@@ -45,6 +45,8 @@ timer = require( "metalsmith-timer" )
 
 ms = metalsmith(__dirname)
     .source('topics')
+    .use require('metalsmith-metadata')
+        site: "_config.yaml"
     .use timer 'metalsmith-metadata'
     .use require('metalsmith-collections')
         topics:
