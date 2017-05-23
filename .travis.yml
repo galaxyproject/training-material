@@ -27,5 +27,7 @@ script:
   #- find .  \( -name "*.md" -o -name "*.html" \) -not -path "./assets/reveal.js/*" | xargs -L 1 -I '{}' sh -c "echo {}; vl -t 5 -s 1000 --allow-codes 401,403,405,500 --whitelist http://localhost:8080 {}"
   # Check structure
   - ./bin/check_structure.py
+  # Check docker
+  - ./bin/prepare_docker_checks.py
   - while read -r DIR; do cd "$DIR" && docker build . ; done < DOCKER_BUILDS.list
 
