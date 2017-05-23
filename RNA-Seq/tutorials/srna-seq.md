@@ -90,7 +90,7 @@ After the grooming step is complete, click on the FASTQ Groomer dataset collecti
 
     ![](../images/image.png)
 
-If we go back to the FASTQC output and scroll down to the "Adapter Content" section, we can see that Illumina Small RNA adapters are present in ~80% of our reads. The next step is to remove these artificial adaptors because they will not map to the reference genome.
+If we go back to the FASTQC output and scroll down to the "Adapter Content" section, we can see that Illumina Small RNA adapters are present in ~80% of our reads. The next step is to remove these artificial adaptors because they will not map to the reference genome. If your reads contain a different adapter, update the **Adapter sequence to be trimmed off** in the next section (`Trim Galore!`).
 
     ![](../images/image.png)
 
