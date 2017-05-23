@@ -1,8 +1,10 @@
 extends base.pug
 
-a( href="https://github.com/galaxyproject/training-material" ) img( style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/652c5b9acfaddf3a9c326fa6bde407b87f7be0f4/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6f72616e67655f6666373630302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_orange_ff7600.png")
+block content
+  a( href="https://github.com/galaxyproject/training-material" )
+    img( style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/652c5b9acfaddf3a9c326fa6bde407b87f7be0f4/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6f72616e67655f6666373630302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_orange_ff7600.png")
 
-section.
+  section
 
     h1 Tutorials:
 
@@ -11,70 +13,77 @@ section.
     table( class="table table-striped" )
         tr( class="row" )
               td( class="bold" class="col-md-10" ) Topic
-              td( class="bold" class="col-md-2" )Tutorials
+              td( class="bold" class="col-md-2" ) Tutorials
 
-        each topic in site.data
+        each topic in topics
             if topic[1].type == "use"
-            tr( class="row" )
+              tr( class="row" )
                   - var tutorial_number = 0
                   - var introduction = 0
                   each tuto in topic[1].material
                       if tuto.type == "tutorial"
-                        - var tutorial_number = tutorial_number + 1
+                        tutorial_number = tutorial_number + 1
                       else if tuto.type == "introduction"
-                        - var introduction=introduction + 1
+                        introduction=introduction + 1
 
 
-                  td( class="col-md-10") a( href="!{ site.url }/!{ topic[1].name }" ) !{ topic[1].title }
-                  td( class="col-md-2">!{ tutorial_number }
+                  td( class="col-md-10") 
+                    a( href= site.url  + "/" + topic[1].name ) topic[1].title
+                  td( class="col-md-2" ) tutorial_number
 
     h2 Galaxy for Developers and Admins
 
     table( class="table table-striped" )
-        tr( class="row">
+        tr( class="row")
             td( class="bold" class="col-md-10" ) Topic
             td( class="bold" class="col-md-2" ) Tutorials
 
-        each topic in site.data
+        each topic in topics
             if topic[1].type == "admin-dev"
-            tr( class="row" )
+              tr( class="row" )
                   - var tutorial_number = 0
                   - var introduction = 0
                   each tuto in topic[1].material
                       if tuto.type == "tutorial"
-                        - var tutorial_number = tutorial_number + 1
+                        tutorial_number = tutorial_number + 1
                       if tuto.type == "introduction"
-                        - var introduction = introduction + 1
+                        introduction = introduction + 1
 
-                  td( class="col-md-10" ) a( href="!{ site.url }/!{ topic[1].name }" ) !{ topic[1].title }
-                  td( class="col-md-2" ) !{ tutorial_number }
-
+                  td( class="col-md-10" ) a( href= site.url + "/" + topic[1].name ) topic[1].title
+                  td( class="col-md-2" ) tutorial_number
     h1 License
 
     p
-      This work is licensed under the
-      a ( rel="license" href="https://creativecommons.org/licenses/by/4.0/" ) Creative Commons Attribution 4.0 International License
-      .
+      This work is licensed under the 
+      a( rel="license" href="https://creativecommons.org/licenses/by/4.0/" )
+        Creative Commons Attribution 4.0 International License
+      | .
 
     h1 Acknowledgment and Funding
 
     p
-      We would like to thank all contributors to our Galaxy courses, especially those mentioned in the
+      We would like to thank all contributors to our Galaxy courses, especially those mentioned in the 
       a( href="CONTRIBUTORS.md" ) Contributors list
-      , the Galaxy community for their constant support and our funding partners.
+      | , the Galaxy community for their constant support and our funding partners.
 
     p
-      a( href="https://www.denbi.de/" ) img( src="https://raw.githubusercontent.com/bgruening/rbc_docs/master/logo/deNBI_Logo_rgb.png" width="15%" style="max-width:100%;")
-      a( href="http://www.sfb992.uni-freiburg.de/" ) img( src="https://raw.githubusercontent.com/bgruening/presentations/bce348bb606c312d531c479e63a66efc2bc38d44/shared/resources/img/MEDEP.jpg" width="15%" style="max-width:100%;")
-      a( href="https://www.ie-freiburg.mpg.de" ) img( src="https://raw.githubusercontent.com/bgruening/presentations/master/shared/resources/img/14_MPI_IE_logo_mit_180.gif" width="15%" style="max-width:100%;")
-      a( href="https://www.uni-freiburg.de/" ) img( src="https://raw.githubusercontent.com/bgruening/presentations/a2e38e4b007994af798320db3a0131c4bb891c0e/shared/resources/img/logo_freiburg.jpg" width="15%" style="max-width:100%;")
+      a( href="https://www.denbi.de/" ) 
+        img( src="https://raw.githubusercontent.com/bgruening/rbc_docs/master/logo/deNBI_Logo_rgb.png" width="15%" style="max-width:100%;")
+      a( href="http://www.sfb992.uni-freiburg.de/" ) 
+        img( src="https://raw.githubusercontent.com/bgruening/presentations/bce348bb606c312d531c479e63a66efc2bc38d44/shared/resources/img/MEDEP.jpg" width="15%" style="max-width:100%;")
+      a( href="https://www.ie-freiburg.mpg.de" ) 
+        img( src="https://raw.githubusercontent.com/bgruening/presentations/master/shared/resources/img/14_MPI_IE_logo_mit_180.gif" width="15%" style="max-width:100%;")
+      a( href="https://www.uni-freiburg.de/" ) 
+        img( src="https://raw.githubusercontent.com/bgruening/presentations/a2e38e4b007994af798320db3a0131c4bb891c0e/shared/resources/img/logo_freiburg.jpg" width="15%" style="max-width:100%;")
       br
-      a( href="https://wiki.galaxyproject.org/Teach/GTN" ) img( src="./shared/images/GTNLogo1000.png" width="15%" style="max-width:100%;")
-      a( href="https://www.france-bioinformatique.fr/" ) img( src="https://www.france-bioinformatique.fr/sites/default/files/ifb-logo_1.png" width="15%" style="max-width:100%;")
+      a( href="https://wiki.galaxyproject.org/Teach/GTN" ) 
+        img( src="images/GTNLogo1000.png" width="15%" style="max-width:100%;")
+      a( href="https://www.france-bioinformatique.fr/" ) 
+        img( src="https://www.france-bioinformatique.fr/sites/default/files/ifb-logo_1.png" width="15%" style="max-width:100%;")
 
     p
-      Do you want to help with this project? Please see the
-      a( href="https://github.com/galaxyproject/training-material/blob/master/CONTRIBUTING.md" ) CONTRIBUTING
+      Do you want to help with this project? Please see the 
+      a( href="https://github.com/galaxyproject/training-material/blob/master/CONTRIBUTING.md" ) CONTRIBUTING 
       file to get you started.
 
     div( class="embed-responsive embed-responsive-4by3" )

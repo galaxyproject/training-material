@@ -7,13 +7,13 @@ set_metadata_defaults = (files, metalsmith, done) ->
         # Autotoc defaults to true
         # Set domain templates
         if 'topic' in v.collection
-            files[k].layout = 'topic.pug' if files[k].layout == undefined
+            files[k].layout = 'home.pug' if files[k].layout == undefined
             files[k].autotoc = false if files[k].autotoc == undefined
         else if 'tutorials' in v.collection
-            files[k].layout = 'tutorial.pug' if files[k].layout == undefined
+            files[k].layout = 'default.pug' if files[k].layout == undefined
             files[k].autotoc = false if files[k].autotoc == undefined
         else if 'slides' in v.collection
-            files[k].layout = 'slides.pug' if files[k].layout == undefined
+            files[k].layout = 'default.pug' if files[k].layout == undefined
             files[k].autotoc = false if files[k].autotoc == undefined
         else
             files[k].autotoc = true if files[k].autotoc == undefined
@@ -50,7 +50,7 @@ ms = metalsmith(__dirname)
     .use timer 'metalsmith-metadata'
     .use require('metalsmith-collections')
         topics:
-            pattern: "*/metadata.yml"
+            pattern: "*/metadata.yaml"
         tutorials:
             pattern: "*/tutorials/*/tutorial.md"
         tutorials:
