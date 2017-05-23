@@ -27,8 +27,11 @@ The Galaxy Team is composed by bioinformaticians and software engineers
 ### Core values
 
 - Accessibility
+  - Users without programming experience can easily specify parameters, run tools, workflows and parse/filter data
 - Reproducibility
+  - Galaxy captures information so that any user can repeat and understand a complete computational analysis
 - Transparency
+  - Users share and publish analyses via the web and create Pages and workflows - interactive, web-based documents that describe a complete analysis
 
 ???
 
@@ -42,33 +45,58 @@ Transparency: Users share and publish analyses via the web and create Pages, int
 
 ---
 
-### Main UI
+### Main Galaxy Interface
 
-TODO: add image here
+- Home page divided into 3 panels
+
+[![](../images/galaxy_interface.png)](https://usegalaxy.org/)
+
+
+---
+
+### The menu
+
+![](../images/galaxy_interface_menu.png)
+
+- *Analyze Data* - go back to the three panels home page to select a tool or see your history
+- *Workflow* - access existing workflows or create new one using the editable diagrammatic pipeline (more later)
+- *Shared data* - access data libraries, histories, workflows, visualizations and pages shared with you
+- *Visualization* - create new track browser and access your saved visualisations
+- *Help* - links to Galaxy Biostar (Q&A), Galaxy Community Hub (Wiki), and Interactive Tours
+- *User* – your preferences and saved histories, datasets, and pages
 
 ---
 
 ### Tools
 
-- Each tool is just a text file describing:
-  - inputs + parameters => commands => outputs
-  - Help, tests, citations, requirements,...
+- Many tools available
+- Free tool store: [Galaxy Tool Shed](https://toolshed.g2.bx.psu.edu/)
+- Each tool is a text file describing:
+  - inputs parameters, commands, and outputs
+  - help, tests, citations, and dependency requirements
 - Every software can be embedded
-- [Tool Shed](https://toolshed.g2.bx.psu.edu/): free tool store
 - New versions can be installed without removing old ones to ensure reproducibility
+
+
+- Need a tool that’s not in Galaxy? Ask a bioinformatician!
 
 ---
 
 ### Histories
 
 - At the heart of Galaxy’s reproducibility
+- Location of all your analyses
 - For each dataset, the history tracks:
   - Name, format, size, creation time, datatype-specific metadata
   - Tool id and version, inputs, parameters
-  - Stdout, stderr
+  - Standard output (`stdout`) and error (`stderr`)
   - State (<span style="color: grey">grey</span>: waiting; <span style="color: yellow">yellow</span>: running; <span style="color: green">green</span>: success; <span style="color: red">red</span>: failed)
   - Hidden, deleted, purged
-- Each history should correspond to a different analysis
+- Histories can be very large, you can have as many histories as you want
+  - Each history should correspond to a different analysis
+- History behavior is controlled by the *History options* at the top right corner of the History pane
+
+.image-25[![](../images/galaxy_interface_history_menu.png)]
 
 ???
 
@@ -76,13 +104,100 @@ Purged means permanently deleted
 
 ---
 
+### History menu options
+
+- Most options are self explanatory .image-25[![](../images/galaxy_interface_history_long_menu.png)]
+  - If you create a new history, using *Create New*, your current history will not disappear
+  - If you would like to list all of your histories, choose *Saved Histories* to list all of them in the center main pane
+
+---
+
+# Loading data
+
+---
+
+### Importing data
+
+- Copy/paste from a file
+- Upload data from a local computer
+- Upload data from internet
+- Upload data from database queries
+  - UCSC, BioMart, ENCODE, modENCODE, Flymine etc.
+- Download shared data from public libraries or shared Data libraries, Histories, Workflows, Visualizations, and Pages on https://usegalaxy.org/
+- Upload data from FTP (>2GB)
+
+---
+
+### Data types
+
+- Data type can be automatically detected or assigned by user
+  - Edit Attributes
+  - Convert Formats
+- Tools only accept input datasets with the appropriate data types
+- Data type is assigned by tools when output is created
+- New data type can be added by the site galaxy admin
+
+
+---
+
+### Reference genomes
+
+- Genome build specifies which genome assembly a dataset is associated with
+  - e.g. mm10, hg19...
+- Genome build can be automatically detected or assigned by user
+- User can define their own custom genome build
+- New genome assembly can be added by the site galaxy admin
+
+---
+
+# Why Galaxy?
+
+---
+
+
 ### Workflows
 
-- Graphical editing
 - Can be **extracted** from a history
-- Re-run the same analysis on different inputs
-- Parameters can be changed before running
-- Workflow **scheduling**
-  - A job is submitted as soon as its inputs are ready
-- **Sub**-workflows: a workflow inside another workflow
+  - Allow to easily convert an existing history into an analysis workflow
+- Can be **built manualy** by adding and configuring tools using the workflow canvas
+- Can be **imported** using an existing shared workflow
 
+---
+
+### Why would you want to create workflows?
+
+- **Re-run** the same analysis on different input data sets
+- Change parameters before re-running a similar analysis
+- Make use of the workflow job **scheduling**
+  - job is submitted as soon as its inputs are ready
+- Create **sub**-workflows: a workflow inside another workflow
+- Share workflows for publication and with the community
+
+---
+
+### Data sharing
+
+- You can share your Galaxy items - histories, workflows, visualizations, and pages - with other people in three different ways:
+  - Directly using a Galaxy account's email addresses on the same instance
+  - Using a web link, with anyone who knows the link
+  - Using a web link and publishing it to make it accessible to everyone from the *Shared Data* menu
+
+
+- Tools are shared using the free tool store: [Galaxy Tool Shed](https://toolshed.g2.bx.psu.edu/)
+
+---
+
+### Data visualization
+
+- Track browser called Trackster
+  - To visualize genomic data in a tightly integrated way
+
+
+---
+
+### Community
+
+- Be part of an active and friendly community
+- Get support and your questions answered on [Galaxy Biostars](https://biostar.usegalaxy.org/)
+- Access community curated documentation on [Galaxy Community Hub](https://www.galaxyproject.org/)
+- Learn more about Galaxy for scientists and for developers and admins on [Galaxy Training Community](http://galaxyproject.github.io/training-material/)
