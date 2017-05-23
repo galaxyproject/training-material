@@ -17,7 +17,8 @@ The goal of this exercise is to identify what small RNAs, specifically piRNAs, a
 > In this tutorial, we will address:
 >
 > 1. Data upload and organization
-> 1. Read quality checking and trimming
+> 1. Read quality checking
+> 1. Adaptor trimming
 > 1. Read alignment
 > 1. Small RNA annotation
 > 1. Small RNA abundance estimation
@@ -34,7 +35,7 @@ Due to the large size of the original sRNA-seq datasets, we have downsampled the
 > 1. Create a new history and name it something meaningful (*e.g.* sRNA-seq tutorial)
 > 1. Open the data upload manager by selecting *Get Data* from the Tool Panel and clicking *Upload File*
 > 1. Select *Paste/Fetch Data*
-> 1. Copy and paste each link for the 6 read (.fq) and 1 annotation (.gtf) files into a separate text field
+> 1. Copy each link for the 6 read (.fq) and 1 annotation (.gtf) files, and paste each link into a separate text field
 >    - Set the datatype of the read (.fq) files to **fastqsanger**
 >    - Set the datatype of the annotation (.gtf) file to **gtf** and assign the Genome as **dm3**
 > 1. Click *Start*
@@ -49,29 +50,45 @@ Due to the large size of the original sRNA-seq datasets, we have downsampled the
 >
 > {: .hands_on}
 
-## Read quality checking and trimming
+## Read quality checking
 
-Small RNA sequencing library preparations involve adding an artificial adaptor sequence to both the 5' and 3' ends of the small RNAs. While the 5' adaptor anchors reads to the sequencing surface and thus are not sequenced, the 3' adaptor is typically sequence immediately follow the RNA sequence. These artificial sequences need to be removed before attemping to align the reads to a reference. We know that the datasets used here contain the Illumina universal small RNA-seq 3' adaptor, but let's confirm this using the [FastQC](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/) tool (further described in the [NGS-QC tutorial](../../NGS-QC/tutorials/dive_into_qc)).
+Read quality scores (called phred scores) in FASTQ-formatted data can be encoded by one of a few different encoding schemes. Most Galaxy tools assume that input FASTQ files are using the Sanger/Illumina 1.8+ encoding scheme, and if the files are using another scheme, the tools will not interpret the quality score appropriately. It is always good practice to check what quality encoding scheme your data are using and then convert to Sanger/Illumina 1.8+ if necessary. We can do this using the `FASTQC` tool.
 
-> ### :pencil2: Hands-on: Quality control
+> ### :pencil2: Hands-on: Quality checking
 >
-> 1. **FastQC** :wrench:: Run `FastQC` on the FASTQ read files to identify adaptors and assess the quality of the reads. Select the `FASTQC` tool. Under the **Short read data from your current history** option select the *Dataset collections* tab and then choose one of the dataset collections to analyze. Repeat for the second dataset collection.
+> 1. **FastQC** :wrench:: Run `FastQC` on the FASTQ read files to assess the quality of the reads. Select the `FASTQC` tool. Under the **Short read data from your current history** option select the *Dataset collections* tab and then choose one of the dataset collections to analyze. Repeat for the second dataset collection.
 >
 >    > ### :question: Questions
 >    >
+>    > 1. What quality score encoding scheme is being used for each sample?
 >    > 1. What is the read length for each sample?
->    > 1. What does the base/read quality look like?
+>    > 1. What does the base/read quality look like for each sample?
 >    > 1. Are there any adaptors present in these reads? Which one(s)?
 >    >
 >    >    <details>
 >    >    <summary>Click to view answers</summary>
 >    >    <ol type="1">
+>    >    <li>All samples are using the Illumina 1.5 quality encoding scheme. We will need to convert to Sanger/Illumina 1.8+. </li>
 >    >    <li>All samples have a read length of 51 nt. </li>
 >    >    <li>The read quality across the entire length of the reads is good (phred score > 28 for the most part). </li>
 >    >    <li>Yes, "Illumina Small RNA 3' Adapters" are present. </li>
 >    >    </ol>
 >    >    </details>
 >    {: .question}
+>
+> 1. **FASTQ Groomer** :wrench:: Run `FASTQ Groomer` on the FASTQ read files to convert the quality scored from Illumina 1.5 encoding to Sanger/Illumina 1.8+ encoding using the following parameters:
+>    - **File to groom**: Click the "Dataset collection" tab and then select the control sRNA-seq dataset
+>    - **Input FASTQ quality scores type**: Illumina 1.3-1.7
+>
+>    ![](../images/image.png)
+
+If we scroll down to the "Adapter Content" section of the FASTQC output, we can see that Illumina Small RNA adapters are present in ~80% of our reads. The next step is to remove these artificial adaptors because they will not map to the reference genome.
+
+## Adaptor trimming
+
+Small RNA sequencing library preparations involve adding an artificial adaptor sequence to both the 5' and 3' ends of the small RNAs. While the 5' adaptor anchors reads to the sequencing surface and thus are not sequenced, the 3' adaptor is typically sequence immediately follow the RNA sequence. These artificial sequences need to be removed before attemping to align the reads to a reference. We know that the datasets used here contain the Illumina universal small RNA-seq 3' adaptor, but let's confirm this using the [FastQC](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/) tool (further described in the [NGS-QC tutorial](../../NGS-QC/tutorials/dive_into_qc)).
+
+> ### :pencil2: Hands-on: Adaptor trimming
 >
 > 1. **Trim Galore!** :wrench:: Trim off Illumina adaptors from the 3' ends of the reads by running `Trim Galore!` on every FASTQ file with the following parameters:
 >    - **Is this library paired- or single-end?**: Single-end
