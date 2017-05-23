@@ -35,9 +35,10 @@ Due to the large size of the original sRNA-seq datasets, we have downsampled the
 > 1. Create a new history and name it something meaningful (*e.g.* sRNA-seq tutorial)
 > 1. Open the data upload manager by selecting *Get Data* from the Tool Panel and clicking *Upload File*
 > 1. Select *Paste/Fetch Data*
-> 1. Copy each link for the 6 read (.fq) and 1 annotation (.gtf) files, and paste each link into a separate text field
->    - Set the datatype of the read (.fq) files to **fastqsanger**
+> 1. Copy each link for the 6 read (.fq), 1 annotation (.gtf), and 2 reference sequence (.fa) files, and paste each link into a separate text field
+>    - Set the datatype of the read (.fq) files to **fastq**
 >    - Set the datatype of the annotation (.gtf) file to **gtf** and assign the Genome as **dm3**
+>    - Set the datatype of the reference (.fa) files to **fasta** and assign the Genome as **dm3**
 > 1. Click *Start*
 > 1. Rename the files in your history to something meaningful (*e.g.* control_sRNA_rep1.fq)
 > 1. Build a *Dataset list* for each set of replicates
