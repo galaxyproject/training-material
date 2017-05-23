@@ -161,18 +161,30 @@ To quantify small RNA abundance and identify their putative targets, we need to 
 >
 > 1. Repeat previous 2 steps for second collection of HISAT output BAM files.
 >
-> 1. **HISAT2** :wrench:: Run `HISAT2` on one collection of trimmed reads with the following parameters:
+> Next we will align the non-rRNA reads to a known set of miRNA sequences to remove them from the whole genome alignment step.
+>
+> 1. **HISAT2** :wrench:: Run `HISAT2` to align one collection of non-rRNA reads to reference miRNA sequences using the following parameters:
 >    - **Single end or paired reads?**: Individual unpaired reads
->    - **Reads**: Select "Dataset collection" and choose one collection of trimmed FASTQ files
->    - **Source for the reference genome to align against**: Use a built-in genome
->    - **Select a reference genome**: D. melanogaster Aug. 2014 (BDGP Release 6 + ISO 1 MIT/dm6) (dm6)
+>    - **Reads**: Select "Dataset collection" and choose one collection of non-rRNA FASTQ files
+>    - **Source for the reference genome to align against**: Use a genome from history
+>    - **Select the reference genome**: Dmel_miRNA_sequences.fa
 >    - **Spliced alignment parameters**: Specify spliced alignment parameters
 >    - **Specify strand-specific information**: First Strand (R/RF)
 >
 >       ![](../images/image.png)
 >
-> 1. **HISAT2** :wrench:: Run `HISAT` on the second collection of trimmed reads with the same parameters.
+> We now need to extract *unaligned* reads from the output BAM file for aligning to reference genome sequence. Repeat the `Filter SAM or BAM, output SAM or BAM` and `Convert from BAM to FastQ` steps to do this. Rename the converted FASTQ files something meaningful (*e.g.* "non-rRNA/miRNA control RNAi sRNA").
 >
+> 1. **HISAT2** :wrench:: Run `HISAT` to align one collection of non-rRNA/non-miRNA reads to the reference genome using the following parameters.
+>    - **Single end or paired reads?**: Individual unpaired reads
+>    - **Reads**: Select "Dataset collection" and choose one collection of non-rRNA/non-miRNA FASTQ files
+>    - **Source for the reference genome to align against**: Use a built-in genome
+>    - **Select a reference genome**: Fruit Fly (D. melanogaster): dm3
+>    - **Primary alignments**: 1000000
+>    - **Spliced alignment parameters**: Specify spliced alignment parameters
+>    - **Specify strand-specific information**: First Strand (R/RF)
+>
+> We use a ridiculously high value for "Primary alignments" (-k) here to ensure that we retain piRNAs. In flies, piRNA often align to transposable and repeat elements in the genome. If a piRNA read aligns to more than -k loci, it is removed from the output. We want to make sure we don't lose these reads, so we set this parameter to something extremely high. This slows down the alignment step, but is necessary.
 
 **UPDATES STOPPED HERE**
 
