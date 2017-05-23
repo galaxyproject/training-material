@@ -164,17 +164,18 @@ Now that we have mapped our reads to the mouse genome with `HISAT`, we want to d
 
 # Transcriptome assembly
 
-We just generated four transcriptomes with `Stringtie` representing each of the four RNA-seq libraries we are analyzing. Since these were generated in the absence of a reference transcriptome, and we ultimately would like to know what transcript structure corresponds to which annotated transcript (if any), we have to make a **transcriptome database**. We will use the tool `Cuffmerge` to combine redundant transcript structures across the four samples, provide non-redundant identifiers, and with the help of a reference annotation file annotate the nature/origin of each transcript (reference, novel isoform, intergenic transcript, antisense, etc.)
+We just generated four transcriptomes with `Stringtie` representing each of the four RNA-seq libraries we are analyzing. Since these were generated in the absence of a reference transcriptome, and we ultimately would like to know what transcript structure corresponds to which annotated transcript (if any), we have to make a **transcriptome database**. We will use the tool `Stringtie - Merge` to combine redundant transcript structures across the four samples and the RefSeq reference. Once we have merged our transcript structures, we will use `GFFcompare` to annotate the transcripts of our newly created transcriptome so we know the relationship of each transcript to the RefSeq reference.
 
 > ### :pencil2: Hands-on: Transcriptome assembly
 >
-> 1. **Cuffmerge** :wrench:: Run `Cuffmerge` on the `Stringtie` assembled transcripts along with the RefSeq annotation file we imported earlier.
->    - Use batch mode to inlcude all four `Stringtie` assemblies.
->    - **Use Reference Annotation**: Yes, then select the "RefSeq GTF mm10" file.
-> ![](../images/Cuffmerge.png)
+> 1. **Stringtie-merge** :wrench:: Run `Stringtie-merge` on the `Stringtie` assembled transcripts along with the RefSeq annotation file we imported earlier.
+>    - Use batch mode to inlcude all four `Stringtie` assemblies as "input_gtf".
+>    - Select the "RefSeq GTF mm10" file as the "guide_gff". 
+> ![](../images/stringtiemergetf.png)
 >
->
->    > Transcript categorization used by `Cuffmerge`
+>> 1. **GFFCompare** :wrench:: Run `GFFCompare` on the `Stringtie-merge` generated transcriptome along with the RefSeq annotation file.
+> ![](../images/GFFcomparetf.png)
+>    > Transcript categorization used by `GFFcompare`
 >
 >    > |**Class code** | **Transcript category**|
 >    > |:---:|:---|
@@ -185,6 +186,10 @@ We just generated four transcriptomes with `Stringtie` representing each of the 
 >    > |r | Repetitive|
 >    > |c | Contained in exon of reference|
 >    > |s | Anti-sense spliced intronic|
+>    > |e | Single exon transfrag overlapping a reference exon and at least 10 bp of a reference intron, indicating a possible pre-mRNA fragment.|
+>    > |i | A transfrag falling entirely within a reference intron|
+>    > |o | Generic exonic overlap with a reference transcript|
+>    > |p | Possible polymerase run-on fragment (within 2Kbases of a reference transcript)|
 
 
 # Analysis of the differential gene expression
@@ -201,16 +206,17 @@ The recommended mode is "union", which counts overlaps even if a read only share
 
 > ### :pencil2: Hands-on: Counting the number of reads per transcript
 >
-> 1. **FeatureCounts** :wrench:: Run `FeatureCounts` on the aligned reads (`HISAT` output) using the `Cuffmerge` transcriptome database as the annotation file.
+> 1. **FeatureCounts** :wrench:: Run `FeatureCounts` on the aligned reads (`HISAT` output) using the `GFFCompare` transcriptome database as the annotation file.
 >
 >    - Using the batch mode for input selection, choose the four `HISAT` aligned read files
 >    - **Gene annotation file**:  in your history, then select the GTF file output by Cuffmerge (this specifies the "union" mode)
 >    - Expand **Options for paired end reads**
->    - **Orientation of the two read from the same pair**: Forward, Reverse (fr)
+>    - **Orientation of the two read from the same pair**: Reverse, Forward (rf)
 >    - Expand **Advanced options**
 >    - **GFF gene identifier**: enter "transcript_id"
->    - **Strand specificity of the protocol**: select "Stranded (forwards)"
-> ![](../images/FeatureCounts_tool_form.png)
+>    - **Strand specificity of the protocol**: select "Stranded (reverse)"
+> ![](../images/featurecountsA.png)
+> ![](../images/featurecountsB.png)
 >
 > {: .hands_on}
 
@@ -218,7 +224,7 @@ The recommended mode is "union", which counts overlaps even if a read only share
 
 Transcript expression is estimated from read counts, and attempts are made to correct for variability in measurements using replicates. This is absolutely essential to obtaining accurate results. We recommend having at least two biological replicates.
 
-[`DESeq2`](https://bioconductor.org/packages/release/bioc/html/DESeq2.html) is a great tool for differential gene expression analysis. It takes read counts produced by `FeatureCounts` and applies size factor normalization:
+[`DESeq2`](https://bioconductor.org/packages/release/bioc/html/DESeq2.html) is a great tool for differential gene expression analysis. It accepts read counts produced by `FeatureCounts` and applies size factor normalization:
 
 - Computation for each gene of the geometric mean of read counts across all samples
 - Division of every gene count by the geometric mean
@@ -236,7 +242,8 @@ Transcript expression is estimated from read counts, and attempts are made to co
 >       {: .comment}
 >    - **Visualising the analysis results**: Yes
 >    - **Output normalized counts table**: Yes
->
+>> ![](../images/deseq2tf.png)
+
 {: .hands_on}
 
 The first output of `DESeq2` is a tabular file. The columns are:
@@ -245,9 +252,9 @@ The first output of `DESeq2` is a tabular file. The columns are:
 2.	Mean normalized counts, averaged over all samples from both conditions
 3.	Logarithm (base 2) of the fold change (the values correspond to up- or downregulation relative to the condition listed as Factor level 1)
 4.	Standard error estimate for the log2 fold change estimate
-5.	[Wald](https://en.wikipedia.org/wiki/Wald_test) statistic
+5.	[Wald](https://data.princeton.edu/wws509/notes/c2s3.html) statistic
 6.	*p*-value for the statistical significance of this change
-7.	*p*-value adjusted for multiple testing with the Benjamini-Hochberg procedure which controls false discovery rate ([FDR](https://en.wikipedia.org/wiki/False_discovery_rate))
+7.	*p*-value adjusted for multiple testing with the Benjamini-Hochberg procedure which controls false discovery rate ([FDR](https://www.biostathandbook.com/multiplecomparisons.html))
 
 
 > ### :pencil2: Hands-on:
@@ -276,7 +283,7 @@ The first output of `DESeq2` is a tabular file. The columns are:
 >    >
 >    > <details>
 >    > <summary>Click to view answers</summary>
->    > To obtain the up-regulated genes in the G1E state, we filter the previously generated file (with the significant change in transcript expression) with the expression "c3>0" (the log2 fold changes must be greater than 0). We obtain 131  genes (47.1% of the genes with a significant change in gene expression). For the down-regulated genes in the G1E state, we did the inverse and we find 147 transcripts (52.9% of the genes with a significant change in transcript expression)
+>    > To obtain the up-regulated genes in the G1E state, we filter the previously generated file (with the significant change in transcript expression) with the expression "c3>0" (the log2 fold changes must be greater than 0). We obtain 102  genes (40.9% of the genes with a significant change in gene expression). For the down-regulated genes in the G1E state, we did the inverse and we find 149 transcripts (59% of the genes with a significant change in transcript expression).
 >    > </details>
 >    {: .question}
 {: .hands_on}
