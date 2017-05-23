@@ -1,6 +1,6 @@
 name: "Assembly"
 type: "use"
-title: "De novo Genome Assembly"
+title: "Assembly"
 summary: "DNA sequence data has become an indispensable tool for Molecular Biology & Evolutionary Biology. Study in these fields now require a genome sequence to work from. We call this a 'Reference Sequence.' We need to build a reference for each species. We do this by Genome Assembly. De novo Genome Assembly is the process of reconstructing the original DNA sequence from the fragment reads alone."
 docker_image: ""
 
@@ -12,15 +12,15 @@ requirements:
     
 -
     title: "Quality Control"
-    type: "external"
-    link: "https://sepsis-omics.github.io/tutorials/modules/fastqc/"
+    type: "internal"
+    link: "/NGS-QC/"
 
 material:
 -
     title: "Introduction to Genome Assembly"
     type: "tutorial"
     name: "general-introduction"
-    zenodo_link: ""
+    zenodo_link: "https://doi.org/10.5281/zenodo.582600"
     galaxy_tour: ""
     hands_on: "yes"
     slides: "yes"
@@ -36,33 +36,33 @@ material:
     time_estimation: "30 minutes"
 
     key_points:
-    - "de novo Assembly"
-    - "Velvet"
-    - "Galaxy"
+    - "We assembled some Illumina fastq reads into contigs using a short read assembler called Velvet"
+    - "We showed what effect one of the key assembly parameters, the k-mer size, has on the assembly"
+    - "It looks as though there are some exploitable patterns in the metric data vs the k-mer size."
 
--
-    title: "De Bruijn Graph Assembly"
-    type: "tutorial"
-    name: "debruijn-graph-assembly"
-    zenodo_link: ""
-    galaxy_tour: ""
-    hands_on: "no"
-    slides: "yes"
-    
-    
-    questions:
-    - "What are the factors that affect genome assembly?"
-    
-    objectives:
-    - ""
-    - ""
-    - ""
-
-    time_estimation: "1d/3h/6h"
-
-    key_points:
-    - ""
-    - ""
+#-
+    # title: "De Bruijn Graph Assembly"
+    # type: "tutorial"
+    # name: "debruijn-graph-assembly"
+    # zenodo_link: ""
+    # galaxy_tour: ""
+    # hands_on: "no"
+    # slides: "yes"
+    # 
+    # 
+    # questions:
+    # - "What are the factors that affect genome assembly?"
+    # 
+    # objectives:
+    # - ""
+    # - ""
+    # - ""
+    # 
+    # time_estimation: "1d/3h/6h"
+    # 
+    # key_points:
+    # - ""
+    # - ""
    
 maintainers:
 -
@@ -78,22 +78,17 @@ contributors:
 
 references:
 -
-    authors: "Dean Laslett and Bjorn Canback"
-    title: "ARAGORN, a program to detect tRNA genes and tmRNA genes in nucleotide sequences"
-    link: "https://www.ncbi.nlm.nih.gov/pubmed/14704338"
-    summary: "A computer program, ARAGORN, identifies tRNA and tmRNA genes."
+    authors: "D.R. Zerbino and E. Birney"
+    title: "Velvet: algorithms for de novo short read assembly using de Bruijn graphs."
+    link: "http://genome.cshlp.org/content/18/5/821.full"
+    summary: "Velvet: Sequence assembler for very short reads"
 -
-    authors: "Peter J. A. Cock, John M. Chilton, Björn Grüning, James E. Johnson, Nicola Soranzo"
-    title: "NCBI BLAST+ integrated into Galaxy"
-    link: "https://academic.oup.com/gigascience/article-lookup/doi/10.1186/s13742-015-0080-7"
-    summary: "The NCBI BLAST suite has become ubiquitous in modern molecular biology and is used for small tasks such as checking capillary sequencing results of single PCR products, genome annotation or even larger scale pan-genome analyses. For early adopters of the Galaxy web-based biomedical data analysis platform, integrating BLAST into Galaxy was a natural step for sequence comparison workflows."
+    authors: "Daniel R. Zerbino , Gayle K. McEwen, Elliott H. Margulies, Ewan Birney"
+    title: "Pebble and Rock Band: Heuristic Resolution of Repeats and Scaffolding in the Velvet Short-Read de Novo Assembler"
+    link: "https://doi.org/10.1371/journal.pone.0008407"
+    summary: "Heuristic Resolution of Repeats and Scaffolding in the Velvet Short-Read de Novo Assembler"
 -
-    authors: "Peter J.A. Cock​, Björn A. Grüning, Konrad Paszkiewicz, Leighton Pritchard"
-    title: "Galaxy tools and workflows for sequence analysis with applications in molecular plant pathology"
-    link: "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3792188/"
-    summary: "The Galaxy Project offers the popular web browser-based platform Galaxy for running bioinformatics tools and constructing simple workflows. The article describes Galaxy tools and workflows which are also open source. The Galaxy framework enables the user to combine these and other tools to automate organism scale analyses as workflows, without demanding familiarity with command line tools and scripting."
--
-    authors: "Benjamin Buchfink, Chao Xie & Daniel H. Huson"
-    title: "Fast and sensitive protein alignment using DIAMOND"
-    link: "http://www.nature.com/nmeth/journal/v12/n1/abs/nmeth.3176.html"
-    summary: "The alignment of sequencing reads against a protein reference database is a major computational bottleneck in metagenomics and data-intensive evolutionary projects. DIAMOND is an open-source algorithm based on double indexing that is 20,000 times faster than BLASTX on short reads and has a similar degree of sensitivity."
+    authors: "Anton Bankevich, Sergey Nurk, Dmitry Antipov, Alexey A. Gurevich, Mikhail Dvorkin, Alexander S. Kulikov, Valery M. Lesin, Sergey I. Nikolenko, Son Pham, Andrey D. Prjibelski, Alexey V. Pyshkin, Alexander V. Sirotkin, Nikolay Vyahhi, Glenn Tesler, Max A. Alekseyev, and Pavel A. Pevzner"
+    title: "SPAdes: A New Genome Assembly Algorithm and Its Applications to Single-Cell Sequencing"
+    link: "https://doi.org/10.1089/cmb.2012.0021"
+    summary: "The paper describe SPAdes, a new assembler for both single-cell and standard (multicell) assembly, and demonstrate that it improves on the recently released E+V−SC assembler (specialized for single-cell data) and on popular assemblers Velvet and SoapDeNovo (for multicell data). SPAdes generates single-cell assemblies, providing information about genomes of uncultivatable bacteria that vastly exceeds what may be obtained via traditional metagenomics studies. SPAdes is available online (http://bioinf.spbau.ru/spades)."

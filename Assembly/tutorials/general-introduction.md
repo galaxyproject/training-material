@@ -4,15 +4,24 @@ topic_name: Assembly
 tutorial_name: general-introduction
 ---
 
-# Assembly using Velvet
-
-## Background
+# Genome assembly with Velvet: Background
 Velvet is one of a number of *de novo* assemblers that use short read sets as input (e.g. Illumina Reads), and the assembly method is based on de Bruijn graphs. For information about Velvet see this [link](https://en.wikipedia.org/wiki/Velvet_assembler).
 
 
 In this activity, we will perform a *de novo* assembly of a short read set using the Velvet assembler.
 
-## Step 1: Get the data
+> ### Agenda
+>
+> In this tutorial, we will deal with:
+>
+> 1. [Get the data](#get-the-data)
+> 2. [Evaluate the input reads](#evaluate-the-input-reads)
+> 3. [Assemble reads with Velvet](#assemble-reads-with-velvet)
+> 4. [Collect some statistics on the contigs](#collect-some-statistics-on-the-contigs)
+> 5. [Discussion](#discussion)
+> {: .agenda}
+
+# Get the data
 
 We will now import the data that we will use for the tutorial.
 
@@ -65,7 +74,7 @@ The files we need for assembly are the ***mutant_R1.fastq*** and ***mutant_R2.fa
 
 
 
-## Step 2: Evaluate the input reads
+# Evaluate the input reads
 
 Questions you might ask about your input reads include:
 
@@ -117,7 +126,7 @@ For a fuller discussion of FastQC outputs and warnings, see the [FastQC website 
 We won’t be doing anything to these data to clean it up as there isn’t much need. Therefore we will get on with the assembly!
 
 
-## Step 3: Assemble reads with Velvet
+# Assemble reads with Velvet
 
 We will perform a *de novo* assembly of the mutant FASTQ reads into long contiguous sequences (in FASTA format) using the Velvet short read assembler.
 
@@ -163,7 +172,7 @@ Velvet requires the user to input a value of *k* (k-mer size) for the assembly p
 >
 {: .hands_on}
 
-## Step 4: Collect some statistics on the contigs.
+# Collect some statistics on the contigs
 
 We will now collect some basic statistics on our assembly.
 
@@ -184,7 +193,7 @@ We will now collect some basic statistics on our assembly.
 >
 {: .hands_on}
 
-## Discussion
+# Discussion
 
 We have completed an assembly on this data set for a number of k values ranging from 29 to 101. The results a few of the assembly metrics appear below. 
 
