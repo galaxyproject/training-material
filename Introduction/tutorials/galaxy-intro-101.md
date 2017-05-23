@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 topic_name: Introduction
-tutorial_name: galaxy-introduction
+tutorial_name: galaxy-intro-101
 ---
 
 # Introduction
@@ -15,7 +15,7 @@ This practical aims to familiarize you with the Galaxy user interface. It will t
 > 1. [Obtain data from external sources](#data-upload)
 > 2. [Analyze the data](#analysis)
 > 3. [Manage histories and workflows](#galaxy-management)
-> 4. [Share the work](#share-your-work)
+> 4. [Share your work](#share-your-work)
 {: .agenda}
 
 # Pretreatments
@@ -26,9 +26,9 @@ Suppose you get the following question:
 > *Mom (or Dad) ... Which coding exon has the highest number of single nucleotide polymorphisms (SNPs) on human chromosome 22?*
 {: .question}
 
-You think to yourself "Wow! This is a simple question... I know where the data are available at the [UCSC Genome Browser](https://genome.ucsc.edu/), but how do I actually compute this?" The truth is, there is really no straightforward way of answering this question in a time frame comparable to the attention span of a 7-year-old. Well, actually there is and it is called **Galaxy**. So let's try it...
+You are thinking "Wow! This is a simple question... I know where to find the data, at the [UCSC Genome Browser](https://genome.ucsc.edu/), but how do I actually compute this?" There is really a straightforward way of answering this question and it is called **Galaxy**. So let's try it...
 
-Browse to your Galaxy instance and log in or register. The Galaxy interface consists of three main parts. The available tools are listed on the left, your analysis history is recorded on the right, and the middle pane will show the tools and datasets.
+Browse to your Galaxy instance and log in or register. The Galaxy interface consists of three main parts. The available tools are listed on the left, your analysis history is recorded on the right, and the middle pane will show the home page, the selected tool or the dataset.
 
 ![](../images/galaxy_interface.png)
 
@@ -42,7 +42,7 @@ Browse to your Galaxy instance and log in or register. The Galaxy interface cons
 >    > * Select the option **Create New** from the menu
 >    {: .tip}
 >
-> 2. **Rename your history** to make it easy to recognize. You can do this by clicking on the title of the history (by default the title is *Unnamed history*) and typing **Galaxy 101** as the name.
+> 2. **Rename your history** to be meaningful and easy to find. You can do this by clicking on the title of the history (by default the title is *Unnamed history*) and typing **Galaxy 101** as the name. Do  not forget to hit `enter` on your keyboard to save it.
 >   ![](../../shared/images/rename_history.png)
 {: .hands_on}
 
@@ -94,7 +94,7 @@ Now we are ready to do some analysis, but first we will need to get some data in
 >    - Click on the **pencil icon** to edit a file's attributes.
 >    - In the next screen change the name of the dataset to `Exons`.
 >    - Click the **Save** button at the bottom of the screen.
-> 
+>
 >    Your history should now look something like this:
 >
 >    ![](../images/101_rename.png)
@@ -186,7 +186,7 @@ This file contains only two columns. The first contains the exon IDs, and the se
 
 > ### :question: Question
 > How many exons are there in total in your file?
-> 
+>
 > *Hint: Each line now represents a different exon, so you can see the answer to this when you expand the history item, as in the image above*.
 {: .question}
 
@@ -212,7 +212,7 @@ Now we have a list of all exons and the number of SNPs they contain, but we woul
 
 > ### :question: Question
 > Which exon has the highest number of SNPs in your file?
-> 
+>
 > Keep in mind this may depend on your settings when getting the data from UCSC.
 {: .question}
 
@@ -356,7 +356,7 @@ We can examine the workflow in Galaxy's workflow editor. Here you can view/chang
 >    ![](../images/101_33.png)
 >
 > 5. **Repeat** this process for the other input dataset. Name it `Features`. We used it to calculate highest number of SNPs, but this workflow would also work with other features, so we give it a bit more generic name.
-> 
+>
 > 6. Let's also **rename the outputs**. Click on the `Select first` tool and in the menu on the right click on `Configure Output` and enter a descriptive name for the output dataset in the `Rename dataset` box.
 >
 >    ![](../images/101_34.png)
@@ -371,6 +371,10 @@ We can examine the workflow in Galaxy's workflow editor. Here you can view/chang
 >
 {: .hands_on}
 
+> ### :nut_and_bolt: Comments
+> We could **validate** our newly built workflow by running it on the same input datasets than the ones in the `Galaxy 101` history used to extract the workflow in order to make sure we do obtain the same results.
+{: .comment}
+
 ## Run workflow on different data
 
 Now that we have built our workflow, let's use it on some different data. For example, let's find out which exons have the highest number of repeat elements.
@@ -382,7 +386,7 @@ Now that we have built our workflow, let's use it on some different data. For ex
 > 2. We will need the list of exons again. We don't have to get this from UCSC again, we can just **copy** it from our previous history. The easiest way to do this is to go to the history overview (window icon at top of history pane). Here you can just drag and drop datasets from one history to another.
 >
 >    ![](../images/101_copydataset.png)
-> 
+>
 > 3. We wanted to know something about the repetitive elements per exon. We get this data from UCSC.
 >    - **assembly** should be set to `Feb. 2009 (GRCh37/hg19)`
 >    - **group** parameter should be `Repeats`
@@ -433,4 +437,4 @@ To share a history, click on the gear symbol in the history pane and select `Sha
 
 # Conclusion
 
-Well done! You have just performed your first analysis in Galaxy. You also created a workflow from your analysis so you can easily repeat the exact same analysis on other datasets. Additionally you shared your results and methods with others.
+:tada: Well done! :clap: You have just performed your first analysis in Galaxy. You also created a workflow from your analysis so you can easily repeat the exact same analysis on other datasets. Additionally you shared your results and methods with others.
