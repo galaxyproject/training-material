@@ -137,7 +137,29 @@ Now that we have trimmed our reads of the Illumina Small RNA 3' adaptors and con
 
 To quantify small RNA abundance and identify their putative targets, we need to know where the sequenced reads align to a reference genome. In the case of a eukaryotes, some small RNAs are transcribed from mRNA templates, which means that some small RNAs can originate from an exon-exon (spliced) boundary. Therefore, a splice-aware aligner must be used to account for this possibility. [`HISAT2`](https://ccb.jhu.edu/software/hisat2/index.shtml) is an accurate and fast tool for aligning spliced reads to a genome, and we will be using `HISAT2` in this tutorial.
 
-> ### :pencil2: Hands-on: Splice-aware alignment
+> ### :pencil2: Hands-on: Heirarchical alignment to rRNA, miRNA, and genome reference sequences
+>
+> 1. **HISAT2** :wrench:: Run `HISAT2` to align one collection of trimmed reads to reference rRNA sequences with the following parameters:
+>    - **Single end or paired reads?**: Individual unpaired reads
+>    - **Reads**: Select "Dataset collection" and choose one collection of trimmed FASTQ files
+>    - **Source for the reference genome to align against**: Use a genome from history
+>    - **Select the reference genome**: Dmel_rRNA_sequences.fa
+>    - **Spliced alignment parameters**: Specify spliced alignment parameters
+>    - **Specify strand-specific information**: First Strand (R/RF)
+>
+>       ![](../images/image.png)
+>
+> We now need to extract *unaligned* reads from the output BAM file for aligning to reference miRNA sequences. We can do this using the `Filter SAM or BAM, output SAM or BAM` to obtain reads with the bit flag 4 (meaning the read is unaligned) and then converting the filtered BAM file to FASTQ format with the `Convert from BAM to FastQ` tool.
+>
+> 1. **Filter SAM or BAM, output SAM or BAM** :wrench:: Run `Filter SAM or BAM, output SAM or BAM` on one collection of HISAT output BAM files with the following parameters:
+>    - **SAM or BAM file to filter**: Select "Dataset collection" and choose one collection of aligned HISAT BAM files
+>    - **Filter on bitwise flag**: Yes
+>    - **Only output alignments with all of these flag bits set**: Check the box next to "The read in unmapped"
+>
+> 1. **Convert from BAM to FastQ** :wrench:: Run `Convert from BAM to FastQM` on one collection of filtered HISAT output BAM files with the following parameters:
+>    - **Convert the following BAM file to FASTQ**: Select "Dataset collection" and choose one collection of filtered HISAT BAM files
+>
+> 1. Repeat previous 2 steps for second collection of HISAT output BAM files.
 >
 > 1. **HISAT2** :wrench:: Run `HISAT2` on one collection of trimmed reads with the following parameters:
 >    - **Single end or paired reads?**: Individual unpaired reads
