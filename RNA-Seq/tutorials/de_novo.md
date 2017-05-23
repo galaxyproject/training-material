@@ -174,7 +174,7 @@ We just generated four transcriptomes with `Stringtie` representing each of the 
 > ![](../images/stringtiemergetf.png)
 >
 >> 1. **GFFCompare** :wrench:: Run `GFFCompare` on the `Stringtie-merge` generated transcriptome along with the RefSeq annotation file.
-> ![](../images/GFFcomparetf.png)
+> ![](../images/GFFComparetf.png)
 >    > Transcript categorization used by `GFFcompare`
 >
 >    > |**Class code** | **Transcript category**|
