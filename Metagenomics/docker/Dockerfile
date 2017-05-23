@@ -5,7 +5,6 @@ FROM bgruening/galaxy-ngs-preprocessing
 MAINTAINER Björn A. Grüning, bjoern.gruening@gmail.com
 
 ENV GALAXY_CONFIG_BRAND "Galaxy 16S Mothur SOP"
-ENV ENABLE_TTS_INSTALL True
 
 # Install tools
 ADD tools.yaml $GALAXY_ROOT/tools.yaml
