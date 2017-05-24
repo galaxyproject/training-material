@@ -26,7 +26,7 @@ The goal of this exercise is to identify what transcripts are present in the G1E
 
 ## Data upload
 
-Due to the large size of this dataset, we have downsampled it to only inlcude reads mapping to chromosome 19 and certain loci with relevance to hematopoeisis. This data is avaialble at [`Zenodo`](https://zenodo.org/record/254485), where you can find the forward and reverse reads corresponding to replicate RNA-seq libraries from G1E and megakaryocyte cells and an annotation file of RefSeq transcripts we will use to generate our transcriptome database.
+Due to the large size of this dataset, we have downsampled it to only inlcude reads mapping to chromosome 19 and certain loci with relevance to hematopoeisis. This data is avaialble at [`Zenodo`](https://zenodo.org/record/583140#.WSW3NhPyub8), where you can find the forward and reverse reads corresponding to replicate RNA-seq libraries from G1E and megakaryocyte cells and an annotation file of RefSeq transcripts we will use to generate our transcriptome database.
 
 > ### :pencil2: Hands-on: Data upload
 >
@@ -44,14 +44,15 @@ Due to the large size of this dataset, we have downsampled it to only inlcude re
 >    > <summary>:bulb: Tip: Importing data via links</summary>
 >    > <ol type="2">
 >    > <li>Below are the links to the read files that can be copied and pasted in the upload manager.</li>
->    > <li>https://<i></i>zenodo.org/record/254485/files/G1E_R1_forward_downsampled_SRR549355.fastqsanger.gz
->    > https://<i></i>zenodo.org/record/254485/files/G1E_R1_reverse_downsampled_SRR549355.fastqsanger.gz
->    > https://<i></i>zenodo.org/record/254485/files/G1E_R2_forward_downsampled_SRR549356.fastqsanger.gz
->    > https://<i></i>zenodo.org/record/254485/files/G1E_R2_reverse_downsampled_SRR549356.fastqsanger.gz
->    > https://<i></i>zenodo.org/record/254485/files/Megakaryocyte_R1_forward_downsampled_SRR549357.fastqsanger.gz
->    > https://<i></i>zenodo.org/record/254485/files/Megakaryocyte_R1_reverse_downsampled_SRR549357.fastqsanger.gz
->    > https://<i></i>zenodo.org/record/254485/files/Megakaryocyte_R2_forward_downsampled_SRR549358.fastqsanger.gz
->    > https://<i></i>zenodo.org/record/254485/files/Megakaryocyte_R2_reverse_downsampled_SRR549358.fastqsanger.gz</li>
+>    > <li>https://<i></i>zenodo.org/record/583140/files/G1E_rep1_forward_read_%28SRR549355_1%29
+>    > https://<i></i>zenodo.org/record/583140/files/G1E_rep1_reverse_read_%28SRR549355_2%29
+>    > https://<i></i>zenodo.org/record/583140/files/G1E_rep2_forward_read_%28SRR549356_1%29
+>    > https://<i></i>zenodo.org/record/583140/files/G1E_rep2_reverse_read_%28SRR549356_2%29
+>    > https://<i></i>zenodo.org/record/583140/files/Megakaryocyte_rep1_forward_read_%28SRR549357_1%29
+>    > https://<i></i>zenodo.org/record/583140/files/Megakaryocyte_rep1_reverse_read_%28SRR549357_2%29
+>    > https://<i></i>zenodo.org/record/583140/files/Megakaryocyte_rep2_forward_read_%28SRR549358_1%29
+>    > https://<i></i>zenodo.org/record/583140/files/Megakaryocyte_rep2_reverse_read_%28SRR549358_2%29
+>    > https://<i></i>zenodo.org/record/583140/files/RefSeq_reference_GTF_%28DSv2%29</li>
 >    > <li>You will need to fetch the link to the annotation file yourself ;)</li>
 >    > </ol>
 >    > </details>
@@ -173,7 +174,9 @@ We just generated four transcriptomes with `Stringtie` representing each of the 
 >    - Select the "RefSeq GTF mm10" file as the "guide_gff". 
 > ![](../images/stringtiemergetf.png)
 >
->> 1. **GFFCompare** :wrench:: Run `GFFCompare` on the `Stringtie-merge` generated transcriptome along with the RefSeq annotation file.
+> 2. **GFFCompare** :wrench:: Run `GFFCompare` on the `Stringtie-merge` generated transcriptome along with the RefSeq annotation file.
+>    - Select the output of `Stringtie-merge` as the GTF input.
+>    - Select "Yes" under `Use Reference Annotation" and select the "RefSeq GTF mm10" file as the "Reference Annotation". 
 > ![](../images/GFFComparetf.png)
 >    > Transcript categorization used by `GFFcompare`
 >
@@ -200,7 +203,7 @@ We now want to identify which transcripts are differentially expressed between t
 
 ## Count the number of reads per transcript
 
-To compare the abundance of transcripts between different cellular states, the first essential step is to quantify the number of reads per transcript. [`FeatureCounts`](http://bioinf.wehi.edu.au/featureCounts/) is one of the most popular tools for counting reads in genomic features. In our case, we'll be using `FeatureCounts` to count reads aligning in exons of our `Cuffmerge` generated transcriptome database.
+To compare the abundance of transcripts between different cellular states, the first essential step is to quantify the number of reads per transcript. [`FeatureCounts`](http://bioinf.wehi.edu.au/featureCounts/) is one of the most popular tools for counting reads in genomic features. In our case, we'll be using `FeatureCounts` to count reads aligning in exons of our `GFFCompare` generated transcriptome database.
 
 The recommended mode is "union", which counts overlaps even if a read only shares parts of its sequence with a genomic feature and disregards reads that overlap more than one feature.
 
@@ -209,7 +212,7 @@ The recommended mode is "union", which counts overlaps even if a read only share
 > 1. **FeatureCounts** :wrench:: Run `FeatureCounts` on the aligned reads (`HISAT` output) using the `GFFCompare` transcriptome database as the annotation file.
 >
 >    - Using the batch mode for input selection, choose the four `HISAT` aligned read files
->    - **Gene annotation file**:  in your history, then select the GTF file output by Cuffmerge (this specifies the "union" mode)
+>    - **Gene annotation file**:  in your history, then select the `annotated transcripts` GTF file output by `GFFCompare` (this specifies the "union" mode)
 >    - Expand **Options for paired end reads**
 >    - **Orientation of the two read from the same pair**: Reverse, Forward (rf)
 >    - Expand **Advanced options**
@@ -292,25 +295,25 @@ In addition to the list of genes, `DESeq2` outputs a graphical summary of the re
 
 1. Histogram of *p*-values for all tests
 
-    ![](../images/DESeq2_pval.png)
+    ![](../images/Deseq2_histogram2.png)
 
 2. [MA plot](https://en.wikipedia.org/wiki/MA_plot): global view of the relationship between the expression change of conditions (log ratios, M), the average expression strength of the genes (average mean, A), and the ability of the algorithm to detect differential gene expression. The genes that passed the significance threshold (adjusted p-value < 0.1) are colored in red.
 
-    ![](../images/DESeq2_MAplot.png)
+    ![](../images/Deseq2_MAplot2.png)
 
 3. Principal Component Analysis ([PCA](https://en.wikipedia.org/wiki/Principal_component_analysis)) and the first two axes
 
-    ![](../images/DESeq2_PCAplot.png)
+    ![](../images/Deseq2_PCA2.png)
 
     Each replicate is plotted as an individual data point. This type of plot is useful for visualizing the overall effect of experimental covariates and batch effects.
 
 4. Heatmap of sample-to-sample distance matrix: overview over similarities and dissimilarities between samples
 
-    ![](../images/DESeq2_heatmap_G1E_mega.png)
+    ![](../images/Deseq2_heatmap2.png)
 
 5. Dispersion estimates: gene-wise estimates (black), the fitted values (red), and the final maximum a posteriori estimates used in testing (blue)
 
-    ![](../images/DESeq2_dispersion1.png)
+    ![](../images/Deseq2_dispersion2.png)
 
     This dispersion plot is typical, with the final estimates shrunk from the gene-wise estimates towards the fitted estimates. Some gene-wise estimates are flagged as outliers and not shrunk towards the fitted value. The amount of shrinkage can be more or less than seen here, depending on the sample size, the number of coefficients, the row mean and the variability of the gene-wise estimates.
 
@@ -329,12 +332,12 @@ In this last section, we will convert our aligned read data from BAM format to b
 >    - **Effective genome size**: mm9 (2150570000)
 >    - Expand the **Advanced options**
 >    - **Only include reads originating from fragments from the forward or reverse strand**: forward
-> 2. **Rename** :wrench:: Rename the outputs to reflect the origin of the reads and that they represent the reads mapping to the PLUS strand
+> 2. **Rename** :wrench:: Rename the outputs to reflect the origin of the reads and that they represent the reads mapping to the PLUS strand.
 >![](../images/bamCoverage_forward.png)
 >
 > 3. **bamCoverage** :wrench:: Repeat Step 1 except changing the following parameter:
 >    - **Only include reads originating from fragments from the forward or reverse strand**: reverse
-> 4. **Rename** :wrench:: Rename the outputs to reflect the origin of the reads and that they represent the reads mapping to the MINUS strand
+> 4. **Rename** :wrench:: Rename the outputs to reflect the origin of the reads and that they represent the reads mapping to the MINUS strand.
 > ![](../images/bamCoverage_reverse.png)
 
 > ### :pencil2: Hands-on: Trackster based visualization
@@ -348,35 +351,35 @@ In this last section, we will convert our aligned read data from BAM format to b
 > 2. **Viz** :wrench:: Click "Add datasets to visualization"
 >    - Select the "RefSeq GTF mm10" file
 >    - Select the output files from `Stringtie`
->    - Select the output file from `Cuffmerge`
+>    - Select the output file from `GFFCompare`
 >    - Select the output files from `bamCoverage`
 >
-> 3. :wrench:: Using the grey labels on the left side of each track, drag and arrange the track order to your preference
+> 3. :wrench:: Using the grey labels on the left side of each track, drag and arrange the track order to your preference.
 >
 > 4. :wrench:: Hover over the grey label on the left side of the "RefSeq GTF mm10" track and click the "Edit settings" icon.
 >    - Adjust the block color to blue (#0000ff) and antisense strand color to red (#ff0000)
 >
-> 5. :wrench:: Repeat the previous step on the output files from `StringTie` and `Cuffmerge`
+> 5. :wrench:: Repeat the previous step on the output files from `StringTie` and `GFFCompare`.
 >
 > 6. :wrench:: Hover over the grey label on the left side of the "G1E R1 plus" track and click the "Edit settings" icon.
 >    - Adjust the color to blue (#0000ff)
 >
-> 7. :wrench:: Repeat the previous step on the other three bigWig files representing the plus strand
+> 7. :wrench:: Repeat the previous step on the other three bigWig files representing the plus strand.
 >
 > 8. :wrench:: Hover over the grey label on the left side of the "G1E R1 minus" track and click the "Edit settings" icon.
 >    - Adjust the color to red (#ff0000)
 >
-> 9. :wrench:: Repeat the previous step on the other three bigWig files representing the minus strand
+> 9. :wrench:: Repeat the previous step on the other three bigWig files representing the minus strand.
 >
-> 10. :wrench:: Adjust the track height of the bigWig files to be consistant for each set of plus strand and minus strand tracks
-> ![](../images/Trackster_viz_hoxb13_locus.png)
-> 11. :wrench:: Direct Trackster to the coordinates: chr11:96193539-96206376, what do you see?
+> 10. :wrench:: Adjust the track height of the bigWig files to be consistant for each set of plus strand and minus strand tracks.
+> ![](../images/Hoxb13_locus_screenshot.png)
+> 11. :wrench:: Direct Trackster to the coordinates: chr11:96191452-96206029, what do you see?
 >    >    <details>
 >    >    <summary>Click to view answers</summary>
 >    >    <ol type="1">
 >    >    <li>There are two clusters of transcripts that are exclusively expressed in the G1E background</li>
 >    >    <li>The left-most transcript is the Hoxb13 transcript</li>
->    >    <li>The center cluster of transcripts are not present in the RefSeq annotation and are determined by `Cuffmerge` to be "u" and "x"</li>
+>    >    <li>The center cluster of transcripts are not present in the RefSeq annotation and are determined by `GFFCompare` to be "u" and "x"</li>
 >    >    </ol>
 >    >    </details>
 >    {: .question}
