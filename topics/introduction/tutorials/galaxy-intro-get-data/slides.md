@@ -1,9 +1,3 @@
----
-layout: introduction_slides
-topic_name: Introduction
-logo: "GTN"
----
-
 # Getting data into Galaxy
 
 ???
@@ -33,13 +27,13 @@ logo: "GTN"
 
 # The Get Data toolbox section
 
-.pull-right[![Click on Get Data to expand it](../images/get_data_boxed.png)]
+.pull-right[![Click on Get Data to expand it](../../../images/get_data_boxed.png)]
 
 - *Click* on the **Get Data** toolbox in the toolbox (the left panel)
 
 ---
 
-.pull-right[![A typical list of data sources](../images/get_data_expanded.png)]
+.pull-right[![A typical list of data sources](../../images/get_data_expanded.png)]
 
 # The Get Data toolbox section
 
@@ -55,11 +49,11 @@ This shows the list of data sources that were available on usegalaxy.org in mid 
 
 ### **Upload File** data source
 
-![Click on Upload File to show the import data form](../images/upload_file_toolbox_entry.png)
+![Click on Upload File to show the import data form](../../images/upload_file_toolbox_entry.png)
 
 or
 
-.image-25[![click on upload button](../images/upload_button.png)]
+.image-25[![click on upload button](../../images/upload_button.png)]
 
 ???
 
@@ -68,7 +62,7 @@ Two ways to launch the upload file form.
 
 # Upload files from your computer
 
-![Upload file form](../images/upload_file_form_empty.png)
+![Upload file form](../../images/upload_file_form_empty.png)
 
 ???
 
@@ -84,7 +78,7 @@ This is probably the most commonly used tool for bringing data into Galaxy, and 
 
 # Upload files from your computer
 
-![Options for importing files from your laptop](../images/upload_file_form_empty_local_choices.png)
+![Options for importing files from your laptop](../../images/upload_file_form_empty_local_choices.png)
 
 ???
 
@@ -95,7 +89,7 @@ This is probably the most commonly used tool for bringing data into Galaxy, and 
 
 After dragging and dropping / choosing* local files:
 
-![](../images/upload_file_file_list.png)
+![](../../images/upload_file_file_list.png)
 
 ( * but before importing )
 
@@ -115,13 +109,13 @@ Could rely on Galaxy to set datatypes for imported datasets, but sometimes it gu
 
 Galaxy can't guess the build (genome assembly), so this needs to be manually set
 
-![Set datatype for all imported datasets](../images/upload_file_set_all_datatype.png)
+![Set datatype for all imported datasets](../../images/upload_file_set_all_datatype.png)
 
 ---
 
 But now we need to fix the datatype of the first imported dataset, because it has a different datatype:
 
-![Manually set datatype for one dataset](../images/upload_file_set_individual_file_type.png)
+![Manually set datatype for one dataset](../../images/upload_file_set_individual_file_type.png)
 
 Can also set the build (genome assembly) for individual files.
 
@@ -133,7 +127,7 @@ Can also set the build (genome assembly) for individual files.
 
 Once you have set everything, start the upload process:
 
-![Ready to upload files. Click on start](../images/upload_file_ready.png)
+![Ready to upload files. Click on start](../../images/upload_file_ready.png)
 
 ???
 
@@ -142,7 +136,7 @@ Once you have set everything, start the upload process:
 ---
 You can then close the form
 
-![Ready to upload files. Click on start](../images/upload_file_in_progress.png)
+![Ready to upload files. Click on start](../../images/upload_file_in_progress.png)
 
 ???
 
@@ -150,7 +144,7 @@ You can then close the form
 
 All the items will appear in your history
 
-![Files are loaded into your current history.](../images/files_uploaded_into_history.png)
+![Files are loaded into your current history.](../../images/files_uploaded_into_history.png)
 
 and are ready to use when green.
 
@@ -160,7 +154,7 @@ and are ready to use when green.
 
 Sometimes it's useful to enter values directly.  This only works if your dataset is tiny.
 
-![Select Paste/Fetch data](../images/upload_file_form_empty_paste.png)
+![Select Paste/Fetch data](../../images/upload_file_form_empty_paste.png)
 
 ---
 
@@ -168,7 +162,7 @@ Sometimes it's useful to enter values directly.  This only works if your dataset
 
 Enter the data by typing (or pasting) it in the input box:
 
-![Select Paste/Fetch data](../images/upload_paste_direct.png)
+![Select Paste/Fetch data](../../images/upload_paste_direct.png)
 
 You can also set the datatype and build.
 *Click* **Start**, and then **Close**, and the new item shows up as **Pasted Entry** in your history.
@@ -205,7 +199,7 @@ See https://galaxyproject.org/ftp-upload/
 
 ## Step 2: Make sure you have FTP software: FileZilla
 
-.pull-right[.image-25[![FileZilla](../images/FileZilla_logo.png)]]
+.pull-right[.image-25[![FileZilla](../../images/FileZilla_logo.png)]]
 
 - [FileZilla](https://filezilla-project.org/) is a free FTP client that is available on [Windows](https://filezilla-project.org/download.php?platform=win64), [MacOS](https://filezilla-project.org/download.php?platform=osx), and [Linux](https://filezilla-project.org/download.php?platform=linux)
 - There are many other options
@@ -220,29 +214,29 @@ See https://galaxyproject.org/ftp-upload/
   - the instance's FTP server name (e.g. usegalaxy.org)
   - your full username (usually an email address) and password
 
-![FTP Connection Params](../images/ftp_client_connect.png)
+![FTP Connection Params](../../images/ftp_client_connect.png)
 
 ---
 
-![Successfully connect](../images/ftp_client_connected.png)
+![Successfully connect](../../images/ftp_client_connected.png)
 
 Successfully connected
 
 ---
 
-![Navigate to the files you want to transfer](../images/ftp_client_upload.png)
+![Navigate to the files you want to transfer](../../images/ftp_client_upload.png)
 
 Right click on the files and upload them.
 
 ---
 
-![FTP transfer in progress](../images/ftp_client_transferring.png)
+![FTP transfer in progress](../../images/ftp_client_transferring.png)
 
 FTP Transfer in progress...
 
 ---
 
-![FTP transfer complete](../images/ftp_client_transferred.png)
+![FTP transfer complete](../../images/ftp_client_transferred.png)
 
 ... and transfer complete.
 
