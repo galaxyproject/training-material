@@ -207,6 +207,8 @@ To quantify small RNA abundance and identify their putative targets, we need to 
 >    - Use batch mode to run all four samples from one tool form.
 >
 > ![](../images/image.png)
+>
+> {: .hands_on}
 
 ## Small RNA abundance estimation
 
@@ -219,129 +221,63 @@ To quantify small RNA abundance and identify their putative targets, we need to 
 >    - **Use Reference Annotation**: Yes, then select the "RefSeq GTF mm10" file.
 > ![](../images/image.png)
 >
+> {: .hands_on}
+>
 
 ## Small RNA differential expression testing
 
 ### Analysis of the differential gene expression
 
-We just generated a transriptome database that represents the transcripts present in the G1E and megakaryocytes samples. This database provides the location of our transcripts with non-redundant identifiers, as well as information regarding the origin of the transcript.
+We want to identify which small RNAs are differentially expressed between the control and *klp10A* RNAi conditions. To do this we will implement a counting approach using `FeatureCounts` to count small RNAs per genome feature. Then we will provide this information to `DESeq2` to generate normalized counts and significance testing for differential expression.
 
-We now want to identify which transcripts are differentially expressed between the G1E and megakaryocyte cellular states. To do this we will implement a counting approach using `FeatureCounts` to count reads per transcript. Then we will provide this information to `DESeq2` to generate normalized transcript counts (abundance estimates) and significance testing for differential expression.
+### Count the number of reads per genome feature
 
-### Count the number of reads per transcript
-
-To compare the abundance of transcripts between different cellular states, the first essential step is to quantify the number of reads per transcript. [`FeatureCounts`](http://bioinf.wehi.edu.au/featureCounts/) is one of the most popular tools for counting reads in genomic features. In our case, we'll be using `FeatureCounts` to count reads aligning in exons of our `Cuffmerge` generated transcriptome database.
+To compare the abundance of small RNAs mapping to genomic features between different RNAi conditions, the first essential step is to quantify the number of small RNAs per feature. [`FeatureCounts`](http://bioinf.wehi.edu.au/featureCounts/) is one of the most popular tools for counting reads in genomic features. In our case, we'll be using `FeatureCounts` to count small RNA reads aligning to dm3 genomic features in a custom GTF file that contains transposon and repeat elements, which are common targets of the piRNA subclass of small RNAs.
 
 The recommended mode is "union", which counts overlaps even if a read only shares parts of its sequence with a genomic feature and disregards reads that overlap more than one feature.
 
-> ### :pencil2: Hands-on: Counting the number of reads per transcript
+> ### :pencil2: Hands-on: Counting the number of small RNA reads per feature
 >
-> 1. **FeatureCounts** :wrench:: Run `FeatureCounts` on the aligned reads (`HISAT` output) using the `Cuffmerge` transcriptome database as the annotation file.
+> 1. **FeatureCounts** :wrench:: Run `FeatureCounts` on the aligned reads (`HISAT` output) using the gene+transposon+repBase GTF as the annotation file.
 >
->    - Using the batch mode for input selection, choose the four `HISAT` aligned read files
->    - **Gene annotation file**:  in your history, then select the GTF file output by Cuffmerge (this specifies the "union" mode)
->    - Expand **Options for paired end reads**
->    - **Orientation of the two read from the same pair**: Forward, Reverse (fr)
->    - Expand **Advanced options**
->    - **GFF gene identifier**: enter "transcript_id"
->    - **Strand specificity of the protocol**: select "Stranded (forwards)"
+>    - **TODO**
+>
 > ![](../images/image.png)
 >
 > {: .hands_on}
+>
 
-### Perform differential gene expression testing
+### Perform differential "expression" testing
 
-Transcript expression is estimated from read counts, and attempts are made to correct for variability in measurements using replicates. This is absolutely essential to obtaining accurate results. We recommend having at least two biological replicates.
+TODO
 
-[`DESeq2`](https://bioconductor.org/packages/release/bioc/html/DESeq2.html) is a great tool for differential gene expression analysis. It takes read counts produced by `FeatureCounts` and applies size factor normalization:
+[`DESeq2`](https://bioconductor.org/packages/release/bioc/html/DESeq2.html) is a great tool for differential expression analysis. It takes read counts produced by `FeatureCounts` and applies size factor normalization.
 
-- Computation for each gene of the geometric mean of read counts across all samples
-- Division of every gene count by the geometric mean
-- Use of the median of these ratios as sample's size factor for normalization
-
-> ### :pencil2: Hands-on:
+> ### :pencil2: Hands-on: Differential expression testing
 >
 > 1. **DESeq2** :wrench:: Run `DESeq2` with the following parameters:
->    - Specify "G1E" as the first factor level (condition) and select the count files corresponding to the two replicates
->    - Specify "Mega" as the second factor level (condition) and select the count files corresponding to the two replicates
 >
->       > ### :nut_and_bolt: Comment
->       >
->       > You can select several files by holding down the CTRL (or COMMAND) key and clicking on the desired files
->       {: .comment}
->    - **Visualising the analysis results**: Yes
->    - **Output normalized counts table**: Yes
+>    - **TODO**
 >
-{: .hands_on}
-
-The first output of `DESeq2` is a tabular file. The columns are:
-
-1.	Gene identifiers
-2.	Mean normalized counts, averaged over all samples from both conditions
-3.	Logarithm (base 2) of the fold change (the values correspond to up- or downregulation relative to the condition listed as Factor level 1)
-4.	Standard error estimate for the log2 fold change estimate
-5.	[Wald](https://en.wikipedia.org/wiki/Wald_test) statistic
-6.	*p*-value for the statistical significance of this change
-7.	*p*-value adjusted for multiple testing with the Benjamini-Hochberg procedure which controls false discovery rate ([FDR](https://en.wikipedia.org/wiki/False_discovery_rate))
-
-
-> ### :pencil2: Hands-on:
+> 1. **Filter** :wrench:: Run `Filter` to extract feature with a significant differences in small RNA mappings (adjusted *p*-value less than 0.05) between control and *klp10A* RNAi conditions.
 >
->1. **Filter** :wrench:: Run `Filter` to extract genes with a significant change in gene expression (adjusted *p*-value less than 0.05) between treated and untreated samples
+>    - **TODO**
 >
 >    > ### :question: Question
 >    >
->    > How many transcripts have a significant change in expression between these conditions?
+>    > How many features have a significant change in mapped small RNAs between these conditions?
 >    >
 >    > <details>
 >    > <summary>Click to view answers</summary>
->    > To filter, use "c7 lessthan 0.05". And we get 278 transcripts with a significant change in gene expression between the G1E and megakaryocyte cellular states.
+>    > To filter, use "c7 lessthan 0.05". And we get ## features with a significant change in mapped small RNAs.
 >    > </details>
 >    {: .question}
 >
-> 2. **Filter** :wrench:: Determine how many transcripts are up or down regulated in the G1E state.
+> 1. **Filter** :wrench:: Determine how many features have increased or decreased mapped small RNA counts.
 >
->    > ### :nut_and_bolt: Comments
->    > Rename your datasets for the downstream analyses
->    {: .comment}
+>    - **TODO**
 >
->    > ### :question: Question
->    >
->    > Are there more upregulated or downregulated genes in the treated samples?
->    >
->    > <details>
->    > <summary>Click to view answers</summary>
->    > To obtain the up-regulated genes in the G1E state, we filter the previously generated file (with the significant change in transcript expression) with the expression "c3>0" (the log2 fold changes must be greater than 0). We obtain 131  genes (47.1% of the genes with a significant change in gene expression). For the down-regulated genes in the G1E state, we did the inverse and we find 147 transcripts (52.9% of the genes with a significant change in transcript expression)
->    > </details>
->    {: .question}
-{: .hands_on}
-
-In addition to the list of genes, `DESeq2` outputs a graphical summary of the results, useful to evaluate the quality of the experiment:
-
-1. Histogram of *p*-values for all tests
-
-    ![](../images/image.png)
-
-2. [MA plot](https://en.wikipedia.org/wiki/MA_plot): global view of the relationship between the expression change of conditions (log ratios, M), the average expression strength of the genes (average mean, A), and the ability of the algorithm to detect differential gene expression. The genes that passed the significance threshold (adjusted p-value < 0.1) are colored in red.
-
-    ![](../images/image.png)
-
-3. Principal Component Analysis ([PCA](https://en.wikipedia.org/wiki/Principal_component_analysis)) and the first two axes
-
-    ![](../images/image.png)
-
-    Each replicate is plotted as an individual data point. This type of plot is useful for visualizing the overall effect of experimental covariates and batch effects.
-
-4. Heatmap of sample-to-sample distance matrix: overview over similarities and dissimilarities between samples
-
-    ![](../images/image.png)
-
-5. Dispersion estimates: gene-wise estimates (black), the fitted values (red), and the final maximum a posteriori estimates used in testing (blue)
-
-    ![](../images/image.png)
-
-    This dispersion plot is typical, with the final estimates shrunk from the gene-wise estimates towards the fitted estimates. Some gene-wise estimates are flagged as outliers and not shrunk towards the fitted value. The amount of shrinkage can be more or less than seen here, depending on the sample size, the number of coefficients, the row mean and the variability of the gene-wise estimates.
-
+> {: .hands_on}
 
 For more information about `DESeq2` and its outputs, you can have a look at [`DESeq2` documentation](https://www.bioconductor.org/packages/release/bioc/manuals/DESeq2/man/DESeq2.pdf).
 
@@ -350,73 +286,25 @@ For more information about `DESeq2` and its outputs, you can have a look at [`DE
 **TODO**
 
 ## Visualization
+
 Now that we have a list of transcript expression levels and their differential expression levels, it is time to visually inspect our transcript structures and the reads they were predicted from. It is a good practice to visually inspect (and present) loci with transcripts of interest. Fortuantely, there is a built-in genome browser in Galaxy, **Trackster**, that make this task simple (and even fun!).
 
 In this last section, we will convert our aligned read data from BAM format to bigWig format to simplify observing where our stranded RNA-seq data aligned to. We will then initiate a session on Trackster, load it with our data, and visually inspect our interesting loci.
 
-> ### :pencil2: Hands-on: Converting aligned read files to bigWig format
+> ### :pencil2: Hands-on: Visualizing data on genome browser
 >
 > 1. **bamCoverage** :wrench:: Run `bamCoverage` on all four aligned read files (`HISAT` output) with the following parameters:
->    - **Bin size in bases**: 1
->    - **Effective genome size**: mm9 (2150570000)
->    - Expand the **Advanced options**
->    - **Only include reads originating from fragments from the forward or reverse strand**: forward
-> 2. **Rename** :wrench:: Rename the outputs to reflect the origin of the reads and that they represent the reads mapping to the PLUS strand
->![](../images/image.png)
 >
-> 3. **bamCoverage** :wrench:: Repeat Step 1 except changing the following parameter:
->    - **Only include reads originating from fragments from the forward or reverse strand**: reverse
-> 4. **Rename** :wrench:: Rename the outputs to reflect the origin of the reads and that they represent the reads mapping to the MINUS strand
-> ![](../images/image.png)
-
-> ### :pencil2: Hands-on: Trackster based visualization
+>    - **TODO**
 >
 > 1. **Viz** :wrench:: On the center console at the top of the Galaxy interface, choose " Visualization" -> "New track browser"
->    - Name your visualization someting descriptive under "Browser name:"
->    - Choose "Mouse Dec. 2011 (GRCm38/mm10) (mm10)" as the "Reference genome build (dbkey)
->    - Click "Create" to initiate your Trackster session
-> ![](../images/image.png)
 >
-> 2. **Viz** :wrench:: Click "Add datasets to visualization"
->    - Select the "RefSeq GTF mm10" file
->    - Select the output files from `Stringtie`
->    - Select the output file from `Cuffmerge`
->    - Select the output files from `bamCoverage`
+>    - **TODO**
 >
-> 3. :wrench:: Using the grey labels on the left side of each track, drag and arrange the track order to your preference
->
-> 4. :wrench:: Hover over the grey label on the left side of the "RefSeq GTF mm10" track and click the "Edit settings" icon.
->    - Adjust the block color to blue (#0000ff) and antisense strand color to red (#ff0000)
->
-> 5. :wrench:: Repeat the previous step on the output files from `StringTie` and `Cuffmerge`
->
-> 6. :wrench:: Hover over the grey label on the left side of the "G1E R1 plus" track and click the "Edit settings" icon.
->    - Adjust the color to blue (#0000ff)
->
-> 7. :wrench:: Repeat the previous step on the other three bigWig files representing the plus strand
->
-> 8. :wrench:: Hover over the grey label on the left side of the "G1E R1 minus" track and click the "Edit settings" icon.
->    - Adjust the color to red (#ff0000)
->
-> 9. :wrench:: Repeat the previous step on the other three bigWig files representing the minus strand
->
-> 10. :wrench:: Adjust the track height of the bigWig files to be consistant for each set of plus strand and minus strand tracks
-> ![](../images/image.png)
-> 11. :wrench:: Direct Trackster to the coordinates: chr11:96193539-96206376, what do you see?
->    >    <details>
->    >    <summary>Click to view answers</summary>
->    >    <ol type="1">
->    >    <li>There are two clusters of transcripts that are exclusively expressed in the G1E background</li>
->    >    <li>The left-most transcript is the Hoxb13 transcript</li>
->    >    <li>The center cluster of transcripts are not present in the RefSeq annotation and are determined by `Cuffmerge` to be "u" and "x"</li>
->    >    </ol>
->    >    </details>
->    {: .question}
->
+> {: .hands_on}
 
 ## Conclusion
 
-In this tutorial, we have analyzed real RNA sequencing data to extract useful information, such as which genes are up- or down-regulated by depletion of the Pasilla gene and which genes are regulated by the Pasilla gene. To answer these questions, we analyzed RNA sequence datasets using a reference-based RNA-seq data analysis approach. This approach can be sum up with the following scheme:
-
+**TODO**
 
 ![](../images/schematic_for_sRNAseq_tutorial.png)
