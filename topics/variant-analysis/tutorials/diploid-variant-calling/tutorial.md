@@ -67,7 +67,7 @@ Suppose you have **A** samples with a variant in a population. You are performin
 
 | Polymorphisms | Variant Calls | Polymorphisms and Variant Calls |
 |---------------|---------------|---------------------------------|
-|![](../../images/pA.png)|![](../../images/pB.png)|![](../../images/pAB.png)|
+|![](../../../images/pA.png)|![](../../images/pB.png)|![](../../images/pAB.png)|
 
 > ### :question: Questions
 >

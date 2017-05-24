@@ -55,7 +55,7 @@ As for any NGS data analysis, ChIP-seq data must be quality controlled before be
 >    > * Press **Start**    
 >    {: .tip}
 >
->    ![upload](../../images/upload_data_page.png)
+>    ![upload](../../../images/upload_data_page.png)
 >    <figcaption><b>Figure 1:</b> Data can be imported directly with links.</figcaption>
 >    
 >    ![data](../../images/data_uploaded.png)

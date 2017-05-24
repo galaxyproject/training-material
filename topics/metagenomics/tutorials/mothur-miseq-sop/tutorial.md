@@ -41,7 +41,7 @@ creators of the Mothur software package, the [Schloss lab](http://www.schlosslab
 In this tutorial we use 16S rRNA data, but similar pipelines can be used for WGS data.
 
 > ### :book: Background: The 16S ribosomal RNA gene
-> ![](../images/16S_gene.png) <br><br>
+> ![](../../images/16S_gene.png) <br><br>
 >
 > The 16S rRNA gene has several properties that make it ideally suited for our purposes
 >
@@ -50,7 +50,7 @@ In this tutorial we use 16S rRNA data, but similar pipelines can be used for WGS
 > 3. Highly conserved + highly variable regions
 > 4. Huge reference databases
 >
-> ![](../images/16S_variableregions.jpg)
+> ![](../../images/16S_variableregions.jpg)
 >
 > The highly conserved regions make it easy to target the gene across different organisms,
 > while the highly variable regions allow us to distinguish between different species.
@@ -66,7 +66,7 @@ the rapid change in weight observed during the first 10 dpw affected the stabili
 observed between days 140 and 150. We will address this question in this tutorial using a combination of OTU, phylotype,
 and phylogenetic methods.
 
-![](../images/experiment_setup.png)
+![](../../images/experiment_setup.png)
 
 To make this tutorial easier to execute, we are providing only part of the data - you are given the flow files for one
 animal at 10 time points (5 early and 5 late). In order to assess the error rate of our analysis pipeline and experimental
@@ -145,11 +145,11 @@ create a collection now:
 >   of files that differ only by a `_1` and `_2` part in their names. In our case however, these
 >   should be `_R1` and `_R2`. Please change these values accordingly. You should now see a list of
 >   pairs suggested by Galaxy,
->   ![](../images/create_collection.png) <br><br>
+>   ![](../../images/create_collection.png) <br><br>
 >
 > 4. Examine the pairings, if it looks good, you can click on **auto-pair** to create the suggested
 >   pairs.
->   ![](../images/create_collection2.png) <br><br>
+>   ![](../../images/create_collection2.png) <br><br>
 >   The middle segment is the name for each pair. You can change these names by clicking on them. These
 >   names will be used as sample names in the downstream analysis so always make sure they are
 >   informative.
@@ -186,7 +186,7 @@ remembering which reads came from which samples using a *group* file.
 In this experiment we used paired-end sequencing, this means sequencing was done from from both ends of each
 fragment, resulting in an overlap in the middle. We will now combine these pairs of reads into *contigs*.
 
-![](../images/16S_merge_contigs.png)
+![](../../images/16S_merge_contigs.png)
 
 
 > ### :pencil2: Hands-on: Combine forward and reverse reads into contigs
@@ -510,7 +510,7 @@ At this point we have removed as much sequencing error as we can, and it is time
 removing sequencing artefacts known as chimeras.
 
 > ### :book: Background: Chimeras
-> ![](../images/chimeras.jpg)
+> ![](../../images/chimeras.jpg)
 > (slide credit: [http://slideplayer.com/slide/4559004/ ](http://slideplayer.com/slide/4559004/ ))
 {: .tip}
 
@@ -683,7 +683,7 @@ We can now cluster the mock sequences into OTUs to see how many spurious OTUs we
 > threshold of the 16S gene sequence variants at genus level. 98% or 99% identity is suggested for species
 > separation.
 >
-> ![](../images/OTU_graph.png)
+> ![](../../images/OTU_graph.png)
 >
 > (Image credit: Danzeisen et al. 2013, 10.7717/peerj.237)
 {: .tip}
@@ -742,7 +742,7 @@ This is not a perfect world. But this is pretty darn good!
 > the gentler the slope, the less contribution of the sampling to the total number of operational taxonomic
 > units or OTUs.
 >
-> ![](../images/rarefaction.png)
+> ![](../../images/rarefaction.png)
 >
 > Green, most or all species have been sampled; blue, this habitat has not been exhaustively sampled; red,
 > species rich habitat, only a small fraction has been sampled.
@@ -935,7 +935,7 @@ Let's plot the rarefaction curve for a couple of our sequences:
 From the resulting image we can see that the rarefaction curves for all samples have started to level
 off so we are confident we cover a large part of our sample diversity.
 
-![](../images/rarefaction_curves.png)
+![](../../images/rarefaction_curves.png)
 
 Alas, rarefaction is not a measure of richness, but a measure of diversity. If you consider two communities
 with the same richness, but different evenness then after sampling a large number of individuals their
@@ -1015,11 +1015,11 @@ heatmaps the red colors indicate communities that are more similar than those wi
 
 For example this is the heatmap for the `thetayc` calculator (output `thetayc.0.03.lt.ave`):
 
-![](../images/heatmap.sim_thetayc.png)
+![](../../images/heatmap.sim_thetayc.png)
 
 and the jclass calulator (output `jclass.0.03.lt.ave`):
 
-![](../images/heatmap.sim_jclass.png)
+![](../../images/heatmap.sim_jclass.png)
 
 When generating Venn diagrams we are limited by the number of samples that we can analyze simultaneously.
 Let's take a look at the Venn diagrams for the first 4 time points of female 3 using the `venn` command:
@@ -1042,7 +1042,7 @@ Let's take a look at the Venn diagrams for the first 4 time points of female 3 u
 
 This generates a 4-way Venn diagram and a table listing the shared OTUs.
 
-![](../images/venn.png)
+![](../../images/venn.png)
 
 This shows that there were a total of 180 OTUs observed between the 4 time points. Only 76 of those OTUs were
 shared by all four time points. We could look deeper at the shared file to see whether those OTUs were
@@ -1066,11 +1066,11 @@ of the others.
 
 `thetayc.0.03.lt.ave`:
 
-![](../images/tree.thetayc.png)
+![](../../images/tree.thetayc.png)
 
 `jclass.0.03.lt.ave`:
 
-![](../images/tree.jclass.png)
+![](../../images/tree.jclass.png)
 
 ### Determine statistical significance of clusterings
 
@@ -1554,7 +1554,7 @@ A second tool we can use to visualize our data, is [Krona]()
 The resulting file is an HTML file containing an interactive visualization. For instance try double-clicking the
 innermost ring labeled "Bacteria"
 
-![](../images/krona.png)
+![](../../images/krona.png)
 
 > ### :question: Question
 >
@@ -1566,7 +1566,7 @@ innermost ring labeled "Bacteria"
 >   clearly (16% in our case), click on this segment and the right-hand side will show you the percentages at
 >   any point in the hierarchy (here 5% of all)
 >
->  ![](../images/krona_lacto.png)
+>  ![](../../images/krona_lacto.png)
 > </details>
 {: .question}
 
@@ -1575,4 +1575,4 @@ innermost ring labeled "Bacteria"
 You have now seen how to perform the Schloss lab's Standard Operating Procedure (SOP) for MiSeq data.
 You have worked your way through the following pipeline:
 
-![](../images/mothur_sop_pipeline.jpg)
+![](../../images/mothur_sop_pipeline.jpg)

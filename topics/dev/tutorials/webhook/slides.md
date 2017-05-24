@@ -8,14 +8,14 @@ In short: A plugin infrastructure for the Galaxy UI
 
 ### Entry point:<br>masthead
 
-![](../images/webhook_masthead.png)
+![](../../images/webhook_masthead.png)
 
 At the header menu: Enabling the overlay search, link to communities ...
 ---
 
 ### Entry point:<br>tool/workflow
 <br><br>
-![](../images/webhook_tool.png)
+![](../../images/webhook_tool.png)
 
 Shown after tool or workflow execution. Comics, citations, support ...
 
@@ -23,7 +23,7 @@ Shown after tool or workflow execution. Comics, citations, support ...
 
 ### Entry point:<br>history-menu
 
-![](../images/webhook_history.png)
+![](../../images/webhook_history.png)
 
 Adds an entry to the history menu - no functionality as of now
 
@@ -125,5 +125,5 @@ The return value can be read with a call to `/api/webhooks/WEBHOOK_NAME/get_data
 
 ### <i class="fa fa-pencil" aria-hidden="true"></i> Hands-on
 
-![](../images/exercise.png)
+![](../../images/exercise.png)
 

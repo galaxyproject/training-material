@@ -4,13 +4,13 @@
 
 ### A tool in Galaxy
 
-![](../images/galaxy_instance_detailed_screenshot.png)
+![](../../images/galaxy_instance_detailed_screenshot.png)
 
 ---
 
 ### Galaxy tool / wrapper
 
-![](../images/graphlan_screenshot.png)
+![](../../images/graphlan_screenshot.png)
 
 ```bash
 graphlan.py --format "png" --size 7 input_tree.txt png_image.png
@@ -30,7 +30,7 @@ graphlan.py --format "png" --size 7 input_tree.txt png_image.png
 
 ### Wrapper
 
-![](../images/wrapper_layers.png)
+![](../../images/wrapper_layers.png)
 
 ???
 
@@ -41,7 +41,7 @@ graphlan.py --format "png" --size 7 input_tree.txt png_image.png
 
 ---
 
-![](../images/planemo-logo.png)
+![](../../images/planemo-logo.png)
 
 > Command-line utilities to assist in building and publishing Galaxy tools.
 
@@ -52,7 +52,7 @@ graphlan.py --format "png" --size 7 input_tree.txt png_image.png
 
 ### <i class="fa fa-pencil" aria-hidden="true"></i> Hands-on
 
-![](../images/exercise.png)
+![](../../images/exercise.png)
 
 ---
 
@@ -72,7 +72,7 @@ graphlan.py --format "png" --size 7 input_tree.txt png_image.png
 
 ### Wrapper
 
-![](../images/wrapper_big_picture_1.png)
+![](../../images/wrapper_big_picture_1.png)
 
 ???
 
@@ -83,19 +83,19 @@ graphlan.py --format "png" --size 7 input_tree.txt png_image.png
 
 ### Wrapper
 
-![](../images/wrapper_big_picture_2.png)
+![](../../images/wrapper_big_picture_2.png)
 
 ---
 
 ### Wrapper
 
-![](../images/wrapper_big_picture_3.png)
+![](../../images/wrapper_big_picture_3.png)
 
 ---
 
 ### Wrapper
 
-.image-10[![](../images/exercise.png)]
+.image-10[![](../../images/exercise.png)]
 
 <small>Galaxy tool XML is formally defined in a XML Schema Definition (XSD), used to generate the [online documentation](https://docs.galaxyproject.org/en/latest/dev/schema.html)</small>
 
@@ -134,7 +134,7 @@ python '$__tool_directory__/graphlan.py'
 ### `command`
 #### How to pass the parameters?
 
-![](../images/graphlan_screenshot.png)
+![](../../images/graphlan_screenshot.png)
 
 ---
 
@@ -167,7 +167,7 @@ graphlan.py
 
 ### `inputs` > `param` > `data`
 
-![](../images/input_data.png)
+![](../../images/input_data.png)
 
 ```xml
 <param name="..." type="data" format="txt" label="..." help="..." />
@@ -179,13 +179,13 @@ graphlan.py
 
 ### `inputs` > `param` > `integer` | `float`
 
-![](../images/input_integer.png)
+![](../../images/input_integer.png)
 
 ```xml
 <param name="..." type="integer" value="7" label="..." help="..."/>
 ```
 
-![](../images/input_integer_range.png)
+![](../../images/input_integer_range.png)
 
 ```xml
 <param name="..." type="float" min="0" max="10" value="1" label="..."
@@ -201,7 +201,7 @@ help="..."/>
 
 ### `inputs` > `param` > `text`
 
-![](../images/input_text.png)
+![](../../images/input_text.png)
 
 ```xml
 <param name="..." type="text" value="" label="..." help="..."/>
@@ -211,7 +211,7 @@ help="..."/>
 
 ### `inputs` > `param` > `select`
 
-![](../images/input_select.png)
+![](../../images/input_select.png)
 
 ```xml
 <param name="..." type="select" label="..." help="...">
@@ -227,7 +227,7 @@ help="..."/>
 
 ### `inputs` > `param` > `select`
 
-![](../images/input_select_checkboxes.png)
+![](../../images/input_select_checkboxes.png)
 
 ```xml
 <param name="..." type="select" display="radio" label="..." help="...">
@@ -242,7 +242,7 @@ help="..."/>
 
 ### `inputs` > `param` > `select`
 
-![](../images/input_select_multiple.png)
+![](../../images/input_select_multiple.png)
 
 ```xml
 <param name="..." type="select" multiple="true" label="..." help="...">
@@ -268,7 +268,7 @@ class: packed
 
 ### `inputs` > `param` > `conditional`
 
-![](../images/input_conditional.png)
+![](../../images/input_conditional.png)
 
 ```xml
 <command><![CDATA[
@@ -300,7 +300,7 @@ class: packed
 
 ### `inputs` > `param` > `repeat`
 
-![](../images/input_repeat.png)
+![](../../images/input_repeat.png)
 
 ```xml
 <command><![CDATA[
@@ -326,7 +326,7 @@ class: packed
 ### `outputs`
 #### Which files the tool will produce as output?
 
-![](../images/output.png)
+![](../../images/output.png)
 
 ---
 
@@ -393,7 +393,7 @@ If you need more precision:
 
 ### `help`
 
-![](../images/help.png)
+![](../../images/help.png)
 
 ```xml
 <help><![CDATA[
@@ -417,7 +417,7 @@ For more information, check the `user manual
 
 ### `citations`
 
-![](../images/citations.png)
+![](../../images/citations.png)
 
 ```xml
 <citations>
@@ -496,7 +496,7 @@ Use sections to group related parameters
 
 ---
 
-###.image-25[![](../images/planemo-logo.png)]
+###.image-25[![](../../images/planemo-logo.png)]
 
 #### `planemo tool_init`
 
@@ -526,7 +526,7 @@ $ planemo tool_init  --id "samtools_sort" --name "Samtools sort" \
 
 class: packed
 
-###.image-25[![](../images/planemo-logo.png)]
+###.image-25[![](../../images/planemo-logo.png)]
 
 #### `planemo lint`
 
@@ -559,7 +559,7 @@ Applying linter citations... CHECK
 
 ---
 
-###.image-25[![](../images/planemo-logo.png)]
+###.image-25[![](../../images/planemo-logo.png)]
 
 #### `planemo serve`
 
@@ -573,17 +573,17 @@ Open http://127.0.0.1:9090/ in your web browser to view your new tool
 
 ---
 
-###.image-25[![](../images/planemo-logo.png)]
+###.image-25[![](../../images/planemo-logo.png)]
 
 #### Building Galaxy Tools
 
-![](../images/planemo_tool_building_lint.png)
+![](../../images/planemo_tool_building_lint.png)
 
 ---
 
 ### <i class="fa fa-pencil" aria-hidden="true"></i> Hands-on
 
-![](../images/exercise.png)
+![](../../images/exercise.png)
 
 ---
 
@@ -830,7 +830,7 @@ graphlan/
 
 ---
 
-###.image-25[![](../images/planemo-logo.png)]
+###.image-25[![](../../images/planemo-logo.png)]
 
 #### `planemo test`
 
@@ -844,17 +844,17 @@ An HTML report is automatically created with logs in case of failing test
 
 ---
 
-###.image-25[![](../images/planemo-logo.png)]
+###.image-25[![](../../images/planemo-logo.png)]
 
 #### Test Galaxy Tools
 
-![](../images/planemo_tool_building_test.png)
+![](../../images/planemo_tool_building_test.png)
 
 ---
 
 ### <i class="fa fa-pencil" aria-hidden="true"></i> Hands-on
 
-![](../images/exercise.png)
+![](../../images/exercise.png)
 
 ---
 
@@ -889,7 +889,7 @@ planemo test # seqtk_seq_step3.xml
 ### Dependencies
 #### How Galaxy will deal with dependencies?
 
-![](../images/galaxy_instance.png)
+![](../../images/galaxy_instance.png)
 
 ---
 
@@ -964,7 +964,7 @@ Package, dependency and environment management
 
 
 ```
-![](../images/miniconda_vs_anaconda.png)
+![](../../images/miniconda_vs_anaconda.png)
 
 ---
 
@@ -1019,16 +1019,16 @@ function conda3deactivate () {
 
 ---
 
-.image-25[![](../images/planemo-logo.png)]
+.image-25[![](../../images/planemo-logo.png)]
 #### Test Galaxy Tools using Conda packages
 
-![](../images/planemo_tool_building.png)
+![](../../images/planemo_tool_building.png)
 
 ---
 
 ### <i class="fa fa-pencil" aria-hidden="true"></i> Hands-on
 
-![](../images/exercise.png)
+![](../../images/exercise.png)
 
 ---
 
@@ -1237,7 +1237,7 @@ See [Contributing with GitHub](github_contribution.html)
 
 ### <i class="fa fa-pencil" aria-hidden="true"></i> Hands-on
 
-![](../images/exercise.png)
+![](../../images/exercise.png)
 
 ---
 
@@ -1265,19 +1265,19 @@ Build a conda package for the suite seqtk
 
 ---
 
-![](../images/planemo-logo.png)
+![](../../images/planemo-logo.png)
 
 > Command-line utilities to assist in building and publishing Galaxy tools.
 
 ---
 
-###.image-25[![](../images/planemo-logo.png)]
+###.image-25[![](../../images/planemo-logo.png)]
 
-![](../images/big_picture.png)
+![](../../images/big_picture.png)
 
 ---
 
-###.image-25[![](../images/planemo-logo.png)]
+###.image-25[![](../../images/planemo-logo.png)]
 #### Checklist (1/3)
 
 - Create a dedicated repository
@@ -1297,7 +1297,7 @@ planemo lint
 
 ---
 
-###.image-25[![](../images/planemo-logo.png)]
+###.image-25[![](../../images/planemo-logo.png)]
 #### Checklist (2/3)
 
 - Check if the dependencies are available on Conda
@@ -1359,7 +1359,7 @@ quit
 
 ### `macros`
 
-![](../images/macro.png)
+![](../../images/macro.png)
 
 .footnote[[Planemo documents about macros ](http://planemo.readthedocs.io/en/latest/writing_advanced.html?highlight=macros#macros-reusable-elements)]
 
@@ -1475,11 +1475,11 @@ echo $__app__.tool_data_tables[ 'pfam_databases' ].get_fields() )[0][-1]
 <param name="..." type="data" format="txt" label="..." help="..." />
 ```
 
-![](../images/input_data.png)
+![](../../images/input_data.png)
 
 Possible to select multiple dataset:
 
-![](../images/input_data_multiple.png)
+![](../../images/input_data_multiple.png)
 
 - Useful to launch the same tool on multiple datasets independently
 - One job per dataset
@@ -1492,7 +1492,7 @@ Possible to select multiple dataset:
 <param name="..." type="data" format="txt" multiple="true" label="..." help="..." />
 ```
 
-![](../images/input_data_multiple2.png)
+![](../../images/input_data_multiple2.png)
 
 In the command:
 
@@ -1558,11 +1558,11 @@ Usage
 .center[Creation from history]
 
 .pull-left[
-![](../images/historyWithCheckboxes.png)
+![](../../images/historyWithCheckboxes.png)
 ]
 
 .pull-right[
-![](../images/buildPairs.png)
+![](../../images/buildPairs.png)
 ]
 
 ---
@@ -1571,7 +1571,7 @@ Usage
 
 Creation when uploading (>=17.05)
 
-![](../images/upload_collection.png)
+![](../../images/upload_collection.png)
 
 ---
 
@@ -1582,7 +1582,7 @@ Creation when uploading (>=17.05)
   format="bam" />
 ```
 
-![](../images/input_data_collection.png)
+![](../../images/input_data_collection.png)
 
 Accept only collections:
 
@@ -1634,7 +1634,7 @@ Unknown number of files:
 
 ### `job_conf.xml`
 
-![](../images/job_conf.xml_1.png)
+![](../../images/job_conf.xml_1.png)
 
 8 is the default value if not set in destination
 
@@ -1646,7 +1646,7 @@ blastn -query foo_bar -num_threads 8
 
 ### `job_conf.xml`
 
-![](../images/job_conf.xml_2.png)
+![](../../images/job_conf.xml_2.png)
 
 ```bash
 blastn -query foo_bar -num_threads 4
@@ -1666,7 +1666,7 @@ blastn -query foo_bar -num_threads 4
 
 ### Using a data table in a tool
 
-![](../images/tool_data_table_conf.xml.png)
+![](../../images/tool_data_table_conf.xml.png)
 
 ---
 
@@ -1680,11 +1680,11 @@ blastn -query foo_bar -num_threads 4
 
 ---
 
-.image-50[![](../images/github_logo.png)]
+.image-50[![](../../images/github_logo.png)]
 
-.image-50[![](../images/travis_ci_logo.png)]
+.image-50[![](../../images/travis_ci_logo.png)]
 
-.image-50[![](../images/planemo-logo.png)]
+.image-50[![](../../images/planemo-logo.png)]
 
 .image-50[![](../../shared/images/conda_logo.png)]
 
@@ -1692,13 +1692,13 @@ blastn -query foo_bar -num_threads 4
 
 ### GitHub side
 
-![](../images/github_travis_github.png)
+![](../../images/github_travis_github.png)
 
 ---
 
 ### Travis CI side
 
-![](../images/github_travis_travis.png)
+![](../../images/github_travis_travis.png)
 
 ---
 
@@ -1712,7 +1712,7 @@ blastn -query foo_bar -num_threads 4
 
 ### Docker Galaxy Flavors
 
-![](../images/galaxydocker_logo.png)
+![](../../images/galaxydocker_logo.png)
 
 .footnote[[Docker Galaxy Stable](https://github.com/bgruening/docker-galaxy-stable)]
 

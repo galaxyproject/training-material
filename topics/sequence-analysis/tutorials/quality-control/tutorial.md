@@ -207,5 +207,5 @@ Now, we would like to see the impact to quality control and treatment on a bad d
 
 In this tutorial, we have controlled the quality of two datasets to ensure that the raw data looks good before analysing them with tools to extract RNA-Seq, ChIP-Seq or any other type of information. The approach of quality control is similar for any type of sequencing data:
 
-![](../images/dive_into_qc_workflow.png)
+![](../../images/dive_into_qc_workflow.png)
 

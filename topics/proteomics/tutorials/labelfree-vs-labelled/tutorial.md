@@ -4,7 +4,7 @@ Finally, we will give a guideline what points may be vital for the decision in o
 
 A basic overview of different quantitation techniques is shown below ([original artwork](https://www.ncbi.nlm.nih.gov/pubmed/24678044) by Marc Vaudel):
 
-![Overview quantitation techniques](../images/Vaudel_label_vs_labelfree.png)
+![Overview quantitation techniques](../../images/Vaudel_label_vs_labelfree.png)
 
 > ### Agenda
 >

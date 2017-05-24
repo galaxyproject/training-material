@@ -138,7 +138,7 @@ Spliced mappers have been developed to efficiently map transcript-derived reads 
 2. Generation of possible splices between neighboring exons
 3. Comparison of reads that did not initially map to the genome against these *in silico* created junctions
 
-![](../images/tophat2.png)
+![](../../images/tophat2.png)
 
 *[Kim et al., Genome Biology, 2013](https://genomebiology.biomedcentral.com/articles/10.1186/gb-2013-14-4-r36)*
 
@@ -158,7 +158,7 @@ In a preliminary mapping, we will estimate the library type to run HISAT2 effici
 
 The library type corresponds to a protocol used to generate the data: which strand the RNA fragment is synthesized from.
 
-![](../images/strand_library_type.png)
+![](../../images/strand_library_type.png)
 
 *[Credit: Zhao Zhang](http://onetipperday.sterding.com/2012/07/how-to-tell-which-library-type-to-use.html)*
 
@@ -172,7 +172,7 @@ Ligation, Standard SOLiD | Same as above except we enforce the rule that the lef
 
 If you do not know the library type, you can find it by yourself by mapping the reads on the reference genome and infer the library type from the mapping results by comparing reads mapping information to the annotation of the reference genome.
 
-![](../images/library_type_mapping.png)
+![](../../images/library_type_mapping.png)
 
 The sequencer always read from 5' to 3'. So, in First Strand case, all reads from the left-most end of RNA fragment (always from 5' to 3') are mapped to transcript-strand, and (for pair-end sequencing) reads from the right-most end are always mapped to the opposite strand.
 
@@ -327,7 +327,7 @@ There is
 >    > 1. Which information does appear on the top in grey?
 >    > 2. What does the horizontal bar in the following screenshot represent?
 >    >
->    >    ![](../images/junction_igv_screenshot.png)
+>    >    ![](../../images/junction_igv_screenshot.png)
 >    > 
 >    >    <details>
 >    >    <summary>Click to view answers</summary>
@@ -348,7 +348,7 @@ There is
 >
 >    > ### :question: Question
 >    >
->    > ![](../images/hisat_igv_sashimi.png)
+>    > ![](../../images/hisat_igv_sashimi.png)
 >    >
 >    > 1. What does the vertical bar graph represent? And the numbered arcs?
 >    > 2. What does the number means?
@@ -395,7 +395,7 @@ To quantify the number of reads mapped to a gene, an annotation of the gene posi
 
 In principle, the counting of reads overlapping with genomic features is a fairly simple task. But there are some details that need to be decided, such how to handle multi-mapping reads. **HTSeq-count** offers 3 choices ("union", "intersection_strict" and "intersection_nonempty") to handle read mapping to multiple locations, reads overlapping introns, or reads that overlap more than one genomic feature:
 
-![](../images/htseq_count.png)
+![](../../images/htseq_count.png)
 
 *[HTSeq documentation](http://www-huber.embl.de/users/anders/HTSeq/doc/count.html)*
 
@@ -739,4 +739,4 @@ Unfortunately, in the process of counting, we loose all the information of the g
 In this tutorial, we have analyzed real RNA sequencing data to extract useful information, such as which genes are up- or downregulated by depletion of the Pasilla gene and which genes are regulated by the Pasilla gene. To answer these questions, we analyzed RNA sequence datasets using a reference-based RNA-seq data analysis approach. This approach can be sum up with the following scheme:
 
 
-![](../images/rna_quantification.png)
+![](../../images/rna_quantification.png)

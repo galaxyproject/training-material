@@ -104,7 +104,7 @@ A general description of the user interface of the IGV browser can be read here:
 >       >available via "More...". Is this is not the case you can add it manually via the menu 
 >       >"Genomes -> Load Genome from..."
 >       >
->       > ![alt text](../images/igv_select_genome.png "Select genome") 
+>       > ![alt text](../../images/igv_select_genome.png "Select genome") 
 >       {: .tip}
 > 5. **IGV** :wrench:: The interesting part is at chromosome 4, position 86,761 to 87,907. Navigate to it.
 > 6. **IGV** :wrench:: There are two views:

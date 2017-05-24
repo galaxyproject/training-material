@@ -19,14 +19,14 @@
 
 ### Welcome on your fork repository
 
-![](../images/PR_fork_repo.png)
+![](../../images/PR_fork_repo.png)
 
 
 ---
 
 ### Welcome on your fork repository
 
-![](../images/PR_schema_01.png)
+![](../../images/PR_schema_01.png)
 
 
 ---
@@ -38,7 +38,7 @@
 
 ### Get your GitHub URL
 
-![](../images/PR_github_url.png)
+![](../../images/PR_github_url.png)
 
 
 ---
@@ -52,7 +52,7 @@ On your terminal:
 ```bash
 $ git clone your_fork_github_url
 ```
-![](../images/PR_url.png)
+![](../../images/PR_url.png)
 
 - go into your repository
 
@@ -65,7 +65,7 @@ $ cd training-material
 
 ### Clone your GitHub repository
 
-![](../images/PR_schema_02.png)
+![](../../images/PR_schema_02.png)
 
 
 ---
@@ -84,7 +84,7 @@ $ git branch
 
   * master
 ```
-![](../images/PR_branch_master.png)
+![](../../images/PR_branch_master.png)
 
 Create a new branch
 
@@ -108,7 +108,7 @@ $ git branch
 	* my_new_branch
 ```
 
-![](../images/PR_branches_01.png)
+![](../../images/PR_branches_01.png)
 
 Make changes and commits
 
@@ -117,14 +117,14 @@ $ git add newfile1 newfile2 ...
 $ git commit -m "my contribution"
 ```
 
-![](../images/PR_branches_02.png)
+![](../../images/PR_branches_02.png)
 
 
 ---
 
 ### Make changes and commits
 
-![](../images/PR_schema_03.png)
+![](../../images/PR_schema_03.png)
 
 
 ---
@@ -135,7 +135,7 @@ $ git commit -m "my contribution"
 $ git push origin my_new_branch
 ```
 
-![](../images/PR_schema_04.png)
+![](../../images/PR_schema_04.png)
 
 
 ---
@@ -147,20 +147,20 @@ $ git push origin my_new_branch
 
 ### Can't push on the *original* GitHub repository
 
-![](../images/PR_schema_05.png)
+![](../../images/PR_schema_05.png)
 
 
 ---
 
 ### Create your pull request
 
-![](../images/PR_button.png)
+![](../../images/PR_button.png)
 
 ---
 
 ### Select the branches and write a description
 
-![](../images/PR_form.png)
+![](../../images/PR_form.png)
 
 
 ---
@@ -171,7 +171,7 @@ Automated tests can be executed by travis
  - Green cross= OK
  - Red cross = not OK
 
-![](../images/PR_list.png)
+![](../../images/PR_list.png)
 
 
 ---
@@ -182,14 +182,14 @@ Automated tests can be executed by travis
 - Authors have accepted your feature
 - Branches are merged
 
-![](../images/PR_merged_branche.png)
+![](../../images/PR_merged_branche.png)
 
 
 ---
 
 ### Your feature is now in the original code
 
-![](../images/PR_schema_06.png)
+![](../../images/PR_schema_06.png)
 
 
 ---
@@ -206,7 +206,7 @@ You have to make modifications on your branch and push it
 
 ### Summary
 
-![](../images/PR_global_schema.png)
+![](../../images/PR_global_schema.png)
 
 
 ---

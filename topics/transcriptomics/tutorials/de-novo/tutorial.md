@@ -77,7 +77,7 @@ For quality control, we use similar tools as described in [NGS-QC tutorial](../.
 >
 > 2. **Trimmomatic** :wrench:: Trim off the low quality bases from the ends of the reads to increase mapping efficiency. Run `Trimmomatic` on each pair of forward and reverse reads.
 >
->    ![](../images/trimmomatic.png)
+>    ![](../../images/trimmomatic.png)
 >
 > 3. **FastQC** :wrench:: Re-run `FastQC` on trimmed reads and inspect the differences.
 >
@@ -94,7 +94,7 @@ For quality control, we use similar tools as described in [NGS-QC tutorial](../.
 >    >    </ol>
 >    >    </details>
 >    {: .question}
-> ![](../images/BeforeAndAfterTrimming.png)
+> ![](../../images/BeforeAndAfterTrimming.png)
 > {: .hands_on}
 
 Now that we have trimmed our reads and are fortuante that there is a reference genome assembly for mouse, we will align our trimmed reads to the genome.
@@ -142,7 +142,7 @@ Spliced mappers have been developed to efficiently map transcript-derived reads 
 >    - **Specify strand-specific information**: First Strand (R/RF)
 >    - **Transcriptome assembly reporting**: Report alignments tailored for transcript assemblers including StringTie.
 >
->       ![](../images/hisat_tool_form.png)
+>       ![](../../images/hisat_tool_form.png)
 >
 > 2. **HISAT** :wrench:: Run `HISAT` on the remaining forward/reverse read pairs with the same parameters.
 >
@@ -154,7 +154,7 @@ Now that we have mapped our reads to the mouse genome with `HISAT`, we want to d
 >
 > 1. **Stringtie** :wrench:: Run `Stringtie` on the `HISAT` alignments using the default parameters.
 >    - Use batch mode to run all four samples from one tool form.
-> ![](../images/Stringtie.png)
+> ![](../../images/Stringtie.png)
 
 # Transcriptome assembly
 
@@ -165,7 +165,7 @@ We just generated four transcriptomes with `Stringtie` representing each of the 
 > 1. **Cuffmerge** :wrench:: Run `Cuffmerge` on the `Stringtie` assembled transcripts along with the RefSeq annotation file we imported earlier.
 >    - Use batch mode to inlcude all four `Stringtie` assemblies.
 >    - **Use Reference Annotation**: Yes, then select the "RefSeq GTF mm10" file.
-> ![](../images/Cuffmerge.png)
+> ![](../../images/Cuffmerge.png)
 >
 >
 >    > Transcript categorization used by `Cuffmerge`
@@ -204,7 +204,7 @@ The recommended mode is "union", which counts overlaps even if a read only share
 >    - Expand **Advanced options**
 >    - **GFF gene identifier**: enter "transcript_id"
 >    - **Strand specificity of the protocol**: select "Stranded (forwards)"
-> ![](../images/FeatureCounts_tool_form.png)
+> ![](../../images/FeatureCounts_tool_form.png)
 >
 > {: .hands_on}
 
@@ -279,25 +279,25 @@ In addition to the list of genes, `DESeq2` outputs a graphical summary of the re
 
 1. Histogram of *p*-values for all tests
 
-    ![](../images/DESeq2_pval.png)
+    ![](../../images/DESeq2_pval.png)
 
 2. [MA plot](https://en.wikipedia.org/wiki/MA_plot): global view of the relationship between the expression change of conditions (log ratios, M), the average expression strength of the genes (average mean, A), and the ability of the algorithm to detect differential gene expression. The genes that passed the significance threshold (adjusted p-value < 0.1) are colored in red.
 
-    ![](../images/DESeq2_MAplot.png)
+    ![](../../images/DESeq2_MAplot.png)
 
 3. Principal Component Analysis ([PCA](https://en.wikipedia.org/wiki/Principal_component_analysis)) and the first two axes
 
-    ![](../images/DESeq2_PCAplot.png)
+    ![](../../images/DESeq2_PCAplot.png)
 
     Each replicate is plotted as an individual data point. This type of plot is useful for visualizing the overall effect of experimental covariates and batch effects.
 
 4. Heatmap of sample-to-sample distance matrix: overview over similarities and dissimilarities between samples
 
-    ![](../images/DESeq2_heatmap_G1E_mega.png)
+    ![](../../images/DESeq2_heatmap_G1E_mega.png)
 
 5. Dispersion estimates: gene-wise estimates (black), the fitted values (red), and the final maximum a posteriori estimates used in testing (blue)
 
-    ![](../images/DESeq2_dispersion1.png)
+    ![](../../images/DESeq2_dispersion1.png)
 
     This dispersion plot is typical, with the final estimates shrunk from the gene-wise estimates towards the fitted estimates. Some gene-wise estimates are flagged as outliers and not shrunk towards the fitted value. The amount of shrinkage can be more or less than seen here, depending on the sample size, the number of coefficients, the row mean and the variability of the gene-wise estimates.
 
@@ -317,12 +317,12 @@ In this last section, we will convert our aligned read data from BAM format to b
 >    - Expand the **Advanced options**
 >    - **Only include reads originating from fragments from the forward or reverse strand**: forward
 > 2. **Rename** :wrench:: Rename the outputs to reflect the origin of the reads and that they represent the reads mapping to the PLUS strand
->![](../images/bamCoverage_forward.png)
+>![](../../images/bamCoverage_forward.png)
 >
 > 3. **bamCoverage** :wrench:: Repeat Step 1 except changing the following parameter:
 >    - **Only include reads originating from fragments from the forward or reverse strand**: reverse
 > 4. **Rename** :wrench:: Rename the outputs to reflect the origin of the reads and that they represent the reads mapping to the MINUS strand
-> ![](../images/bamCoverage_reverse.png)
+> ![](../../images/bamCoverage_reverse.png)
 
 > ### :pencil2: Hands-on: Trackster based visualization
 >
@@ -330,7 +330,7 @@ In this last section, we will convert our aligned read data from BAM format to b
 >    - Name your visualization someting descriptive under "Browser name:"
 >    - Choose "Mouse Dec. 2011 (GRCm38/mm10) (mm10)" as the "Reference genome build (dbkey)
 >    - Click "Create" to initiate your Trackster session
-> ![](../images/Trackster_opening_window.png)
+> ![](../../images/Trackster_opening_window.png)
 >
 > 2. **Viz** :wrench:: Click "Add datasets to visualization"
 >    - Select the "RefSeq GTF mm10" file
@@ -356,7 +356,7 @@ In this last section, we will convert our aligned read data from BAM format to b
 > 9. :wrench:: Repeat the previous step on the other three bigWig files representing the minus strand
 >
 > 10. :wrench:: Adjust the track height of the bigWig files to be consistant for each set of plus strand and minus strand tracks
-> ![](../images/Trackster_viz_hoxb13_locus.png)
+> ![](../../images/Trackster_viz_hoxb13_locus.png)
 > 11. :wrench:: Direct Trackster to the coordinates: chr11:96193539-96206376, what do you see?
 >    >    <details>
 >    >    <summary>Click to view answers</summary>
@@ -374,4 +374,4 @@ In this last section, we will convert our aligned read data from BAM format to b
 In this tutorial, we have analyzed real RNA sequencing data to extract useful information, such as which genes are up- or down-regulated by depletion of the Pasilla gene and which genes are regulated by the Pasilla gene. To answer these questions, we analyzed RNA sequence datasets using a reference-based RNA-seq data analysis approach. This approach can be sum up with the following scheme:
 
 
-![](../images/schematic_for_RNAseq_de_novo_tutorial.png)
+![](../../images/schematic_for_RNAseq_de_novo_tutorial.png)

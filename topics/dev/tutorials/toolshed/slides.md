@@ -1,14 +1,14 @@
 ## 1. What is a Tool Shed?
 
-![](../images/toolShed.jpg)
+![](../../images/toolShed.jpg)
 
 ---
 
-### ![](../images/toolShed.jpg) = Galaxy App Store
+### ![](../../images/toolShed.jpg) = Galaxy App Store
 
 ---
 
-### ![](../images/toolShed.jpg) = Galaxy App Store
+### ![](../../images/toolShed.jpg) = Galaxy App Store
 
 - Galaxy tools
 - ~~Recipes for installing and compilling tools~~,
@@ -18,7 +18,7 @@
 
 ---
 
-### ![](../images/toolShed.jpg) = Galaxy App Store
+### ![](../../images/toolShed.jpg) = Galaxy App Store
 
 - For Galaxy administrators, facilitates:
   - **installing/updating** tools
@@ -39,13 +39,13 @@
 
 ### Tool Shed interface
 
-![](../images/main_toolShed_ss.png)
+![](../../images/main_toolShed_ss.png)
 
 ---
 
 ### Example of tool
 
-![](../images/exampletool_ss.png)
+![](../../images/exampletool_ss.png)
 
 ---
 
@@ -69,17 +69,17 @@
 ### Install a tool from the Tool Shed
 
 - Go to the admin interface and click on "Search Tool Shed"
-![](../images/admin_searchtoolshed_ss.png)
+![](../../images/admin_searchtoolshed_ss.png)
 - Select a Tool Shed
 
-![](../images/goToToolshed_ss.png)
+![](../../images/goToToolshed_ss.png)
 
 ---
 
 ### Install a tool from the Tool Shed
 
 - Search your tool
-![](../images/searchTool_ss.png)
+![](../../images/searchTool_ss.png)
 
 ---
 
@@ -89,22 +89,22 @@
   - <span style="color:orange"> Tools (`$name`)</span>
   - <span style="color:blue"> Tool suites (`suite_$name`)</span>
   - <span style="color:red"> Tool dependencies (`package_$name_$version`)</span> (gradually removed, replaced by Conda dependencies)
-![](../images/typeOfRep_ss.png)
+![](../../images/typeOfRep_ss.png)
 
 ---
 
 ### Install a tool from the Tool Shed
 
-![](../images/goToToolInstall_ss.png)
+![](../../images/goToToolInstall_ss.png)
 - Install the tool
-![](../images/launchInstallTool_ss.png)
+![](../../images/launchInstallTool_ss.png)
 
 ---
 
 ### Install a tool from the Tool Shed
 
 - Install the tool
-![](../images/installTool_ss.png)
+![](../../images/installTool_ss.png)
 - <span style="font-size:70%"> Selecting Tool Shed AND conda will make Galaxy to install both</span>
 - <span style="font-size:70%"> Recommended: use conda </span>
 
@@ -113,15 +113,15 @@
 ### Install a tool from the Tool Shed
 
 - Check
-![](../images/monitor_installing_toolshed_rep.png)
+![](../../images/monitor_installing_toolshed_rep.png)
 
 ---
 
 ### Manage installed tools
 
 - Admin > Manage installed tools
-![](../images/manage_installed_tools.png)
-![](../images/repStatus_ss.png)
+![](../../images/manage_installed_tools.png)
+![](../../images/repStatus_ss.png)
 
 ---
 
@@ -129,7 +129,7 @@
 
 - Click on the name of a tool
 - Manage and browse the repository
-![](../images/managed_an_installed_tool.png)
+![](../../images/managed_an_installed_tool.png)
 
 ---
 
@@ -141,29 +141,29 @@
 
 - Admin > Search Tool Shed
 - Search the workflow
-  1. ![](../images/toolshedWorkflow_ss.png)
-  2. ![](../images/schemaWorkflow_ss.png)
+  1. ![](../../images/toolshedWorkflow_ss.png)
+  2. ![](../../images/schemaWorkflow_ss.png)
 - <span style="font-size:70%"> Tools can come with the workflow if they are not yet installed </span>
 
 ---
 
 ### How to install a workflow?
 
-![](../images/workflowNotInstalled_ss.png)
+![](../../images/workflowNotInstalled_ss.png)
 - No workflow?
 
 ---
 
 ###  How to install a workflow?
 
-![](../images/workflowInstalled_ss.png)
+![](../../images/workflowInstalled_ss.png)
 - Click on the imported workflow
 
 ---
 
 ###  How to install a workflow?
 
-![](../images/makeAvailableWorkflow_ss.png)
+![](../../images/makeAvailableWorkflow_ss.png)
 - Click on the workflow at the bottom of the “Contents of this repository” section
 
 ---
@@ -172,13 +172,13 @@
 
 - Repository Actions > Import workflow to Galaxy
 
-![](../images/exportWorkflow_ss.png)
+![](../../images/exportWorkflow_ss.png)
 
 ---
 
 ###  How to install a workflow?
 
-![](../images/workflowOK_ss.png)
+![](../../images/workflowOK_ss.png)
 - Done!
 
 ---
@@ -193,7 +193,7 @@
 
 ###  Tool with dependencies
 
-![](../images/toolshedPackage.png)
+![](../../images/toolshedPackage.png)
 
 ---
 
@@ -205,7 +205,7 @@
 
 ###  Tool suite
 
-![](../images/toolSuite.png)
+![](../../images/toolSuite.png)
 
 - Works but no way to install a single tool
 
@@ -213,7 +213,7 @@
 
 ###  Tool suite
 
-![](../images/toolsuite2.png)
+![](../../images/toolsuite2.png)
 
 - One repository per individual tool
 - A special 'Tool suite' repository listing the individual repositories
@@ -240,7 +240,7 @@ No need to write it yourself, Planemo does it for you
 
 ###  Tool suite
 
-![](../images/toolsuite3.png)
+![](../../images/toolsuite3.png)
 
 ---
 
@@ -250,7 +250,7 @@ No need to write it yourself, Planemo does it for you
 
 
 ###  Workflow
-![](../images/workflow.png)
+![](../../images/workflow.png)
 - A succession of tools to perform a complete analysis
 
 ---
@@ -259,13 +259,13 @@ No need to write it yourself, Planemo does it for you
 
 - In galaxy
 
-![](../images/galaxyWorkflowEx.png)
+![](../../images/galaxyWorkflowEx.png)
 
 ---
 
 ###  Workflow
 
-![](../images/shareWorkflow.png)
+![](../../images/shareWorkflow.png)
 
 - You get a file: Galaxy-Workflow-NAME.ga
 
@@ -287,13 +287,13 @@ No need to write it yourself, Planemo does it for you
 
 ###  Workflow
 
-![](../images/workflowRepDep.png)
+![](../../images/workflowRepDep.png)
 
 ---
 
 ###  Workflow
 
-![](../images/workflowRepDep2.png)
+![](../../images/workflowRepDep2.png)
 
 - **Everything must be on the same toolshed**
 
@@ -317,7 +317,7 @@ Their content or the file themselves are put to the right location on tool set u
 
 ### Tools with *.loc files or new datatypes
 
-![](../images/repWithLoc_ss.png)
+![](../../images/repWithLoc_ss.png)
 
 <span style="font-size:60%">`tool_data_table_conf.xml.sample`</span>
 ```xml
@@ -495,7 +495,7 @@ Repository created
 cd '[…]/tandem_repeats_finder' && git rev-parse HEAD
 Repository tandem_repeats_finder_2 updated successfully.
 ```
-![](../images/shedCreate.png)
+![](../../images/shedCreate.png)
 
 ---
 
@@ -542,32 +542,32 @@ Repository metadata updated.
 planemo shed_update --check_diff --shed_target testtoolshed
 
 ```
-![](../images/checkToolUpdate.png)
+![](../../images/checkToolUpdate.png)
 
 - The repository has been updated
 
 ---
 
-![](../images/planemo-logo.png)
+![](../../images/planemo-logo.png)
 #### Publishing to the Tool Shed
 
-![](../images/planemo_toolshed_publishing.png)
+![](../../images/planemo_toolshed_publishing.png)
 
 ---
 
-![](../images/planemo-logo.png)
+![](../../images/planemo-logo.png)
 
 > Command-line utilities to assist in building and publishing Galaxy tools.
 
 ---
 
-![](../images/planemo-logo.png)
+![](../../images/planemo-logo.png)
 
-![](../images/big_picture.png)
+![](../../images/big_picture.png)
 
 ---
 
-![](../images/planemo-logo.png)
+![](../../images/planemo-logo.png)
 
 #### Checklist (3/3)
 
@@ -648,7 +648,7 @@ Using planemo by hand
 
 ### <i class="fa fa-pencil" aria-hidden="true"></i> Hands-on
                             
-![](../images/exercise.png)
+![](../../images/exercise.png)
 
 ---
 

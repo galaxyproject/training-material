@@ -28,19 +28,19 @@ It consists of three main steps:
 
 > DNA and protein sequences are written in FASTA format where you have in the first line a ">" followed by the description. In the second line the sequence starts.
 
-![FASTA file](../images/fasta_format.png)
+![FASTA file](../../images/fasta_format.png)
 
 **GFF3**
 
 > The general feature format (gene-finding format, generic feature format, GFF) is a file format used for describing genes and other features of DNA, RNA and protein sequences.
 
-<img src="../images/gff3_format.png" width="70%">
+<img src="../../images/gff3_format.png" width="70%">
 
 **GENBANK**
 
 >The genbank sequence format is a rich format for storing sequences and associated annotations.
 
-![genbank file](../images/gb_full.png)
+![genbank file](../../images/gb_full.png)
 
 # Structural Annotation
 
@@ -56,7 +56,7 @@ First we want to get some general information about our sequence.
 > 2. Check for sequence composition and GC content (**geecee**).
 > 3. Plot the sequence composition as bar chart. 
 >
-> <img src="../images/barchart_sequencecomposition.png" width="30%">
+> <img src="../../images/barchart_sequencecomposition.png" width="30%">
 >
 {: .hands_on}
 
@@ -71,7 +71,7 @@ At first you need to identify those structures of the genome which code for prot
 > 2. Choose the right *model organism*, *gff* format output.
 > 3. Select all possible output options.
 > 
-> ![augustus](../images/augustus.png)
+> ![augustus](../../images/augustus.png)
 > 
 > Augustus will provide three output files: *gff3*, *coding sequences* (CDS) and *protein sequences*.
 >
@@ -81,7 +81,7 @@ At first you need to identify those structures of the genome which code for prot
 >    >
 >    > <details>
 >    > <summary>Click to view answer</summary>
->    > Check the output: <a href="../images/augustus_out.png">augustus_output</a>
+>    > Check the output: <a href="../../images/augustus_out.png">augustus_output</a>
 >    > </details>
 > {: .question}
 >
@@ -128,7 +128,7 @@ For similarity searches we use *NCBI BLAST+ blastp* to find similar proteins in 
 > 1. :wrench: As input file, select the protein sequences from Augustus.
 > 2. Choose the protein BLAST database *SwissProt* and the output format *xml*. 
 >
-> <img src="../images/blastP.png" width="70%">
+> <img src="../../images/blastP.png" width="70%">
 > 
 > 3. Parsing the xml output (**Parse blast XML output**) results in changing the format style into tabular.
 >
@@ -156,7 +156,7 @@ For similarity searches we use *NCBI BLAST+ blastp* to find similar proteins in 
 >
 > 5. :wrench: Choose the tool **Select lines that match an expression** and enter the following information: *Select lines from* [select the BLAST top hit descriptions result file]; *that* [not matching]; *the pattern* [gi]. 
 > 
-> <img src="../images/selectlines.png" width="50%">
+> <img src="../../images/selectlines.png" width="50%">
 >
 >    > :bulb: The result file will contain all proteins which do not have an entry in the second column and therefore have no similar protein in the SwissProt database.
 >    >
@@ -176,9 +176,9 @@ This file will be the input for more detailed analysis:
 
 ### BLAST Programs
 
-![BLAST programs](../images/blastprograms.png)
+![BLAST programs](../../images/blastprograms.png)
 
-![BLAST databases](../images/blast%20database.png)
+![BLAST databases](../../images/blast%20database.png)
 
 > ### :bulb: Tip: 
 >
@@ -232,8 +232,8 @@ For identification of gene clusters, **antiSMASH** is used. The tool uses genban
 
 When you have a whole genome **antiSMASH** analysis, your result may look like this:
 
-<img src="../images/antismash_full.png" width="80%">
+<img src="../../images/antismash_full.png" width="80%">
 
 At the end, you can extract a reproducible workflow out of your history. The workflow should look like this:
 
-![GenomeAnnotation Workflow](../images/work%20flow_Screenshot%20from%202015-06-23%2009-33-23.png)
+![GenomeAnnotation Workflow](../../images/work%20flow_Screenshot%20from%202015-06-23%2009-33-23.png)

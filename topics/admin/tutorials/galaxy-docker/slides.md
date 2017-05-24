@@ -19,7 +19,7 @@ variety of different tools and visualisations
 
 ## Why Docker? <br>What is it?
 
-![](../images/docker_whale.png)
+![](../../images/docker_whale.png)
 
 ---
 
@@ -36,7 +36,7 @@ variety of different tools and visualisations
 
 ### Deployment issue
 
-![](../images/deployment_issue.svg)
+![](../../images/deployment_issue.svg)
 
 ---
 
@@ -44,13 +44,13 @@ variety of different tools and visualisations
 
 Matrix from Hell
 
-![](../images/deployment_issue_matrix.svg)
+![](../../images/deployment_issue_matrix.svg)
 
 ---
 
 ### Transport Pre 1960
 
-![](../images/cargo_transport_issue.svg)
+![](../../images/cargo_transport_issue.svg)
 
 ---
 
@@ -58,13 +58,13 @@ Matrix from Hell
 
 Matrix from Hell
 
-![](../images/cargo_transport_matrix.svg)
+![](../../images/cargo_transport_matrix.svg)
 
 ---
 
 ### Intermodal shipping container
 
-![](../images/cargo_transport_solution.svg)
+![](../../images/cargo_transport_solution.svg)
 
 ???
 
@@ -81,7 +81,7 @@ A standard container
 
 ### Docker
 
-![](../images/deployment_solution.svg)
+![](../../images/deployment_solution.svg)
 
 
 ???
@@ -97,7 +97,7 @@ Docker = An engine that encapsulated any tools as a
 
 ### A Docker container?
 
-![](../images/WhatIsDocker_1_kernal-2_1.png)
+![](../../images/WhatIsDocker_1_kernal-2_1.png)
 
 Lightweight and Open
 
@@ -110,7 +110,7 @@ Lightweight and Open
 
 ### Virtual machines vs Containers
 
-![](../images/container_vs_vm.svg)
+![](../../images/container_vs_vm.svg)
 
 Containers more portable and efficient
 
@@ -130,13 +130,13 @@ Similar resource isolation and allocation benefits
 
 ## How to use Docker?
 
-![](../images/docker-usage.jpg)
+![](../../images/docker-usage.jpg)
 
 ---
 
 ### The client
 
-![](../images/docker_command.png)
+![](../../images/docker_command.png)
 
 ???
 
@@ -150,7 +150,7 @@ Client: to talk with Docker
 
 ### Containers? Images?
 
-![](../images/docker_concept_image_container.png)
+![](../../images/docker_concept_image_container.png)
 
 ???
 
@@ -167,7 +167,7 @@ Container
 
 ### How to get images?
 
-![](../images/docker_concept_pull.png)
+![](../../images/docker_concept_pull.png)
 
 ???
 
@@ -197,7 +197,7 @@ Status: Downloaded newer image for hello-world:latest
 
 ### Creation of containers
 
-![](../images/docker_concept_run.png)
+![](../../images/docker_concept_run.png)
 
 ---
 
@@ -380,7 +380,7 @@ Can we access the `cowsay` file inside the container? <br>And the `cowsay2` file
 
 ### Management of data
 
-![](../images/docker_volume_closed.png)
+![](../../images/docker_volume_closed.png)
 
 ???
 
@@ -390,7 +390,7 @@ A container is closed
 
 ### Management of data
 
-![](../images/docker_volume_open.png)
+![](../../images/docker_volume_open.png)
 
 ???
 
@@ -400,7 +400,7 @@ A container is closed
 
 ### Data volume
 
-![](../images/docker_volume.png)
+![](../../images/docker_volume.png)
 
 ???
 
@@ -419,7 +419,7 @@ Data volumes designed to persist data, independent of the container’s life cyc
 
 ### Data volume
 
-![](../images/docker_run_volume.png)
+![](../../images/docker_run_volume.png)
 
 ???
 
@@ -447,7 +447,7 @@ cowsay_Galaxy   cowsay_Galaxy2
 
 ### Execution of commands <br>inside a running container
 
-![](../images/docker_concept_exec.png)
+![](../../images/docker_concept_exec.png)
 
 ???
 
@@ -483,7 +483,7 @@ cowsay Galaxy
 
 ### Stop/Start containers
 
-![](../images/docker_concept_start_stop.png)
+![](../../images/docker_concept_start_stop.png)
 
 Note: Sending SIGTERM and then SIGKILL after a grace period
 
@@ -525,7 +525,7 @@ cowsay Galaxy
 
 ### View all containers
 
-![](../images/docker_concept_ps.png)
+![](../../images/docker_concept_ps.png)
 
 ---
 
@@ -563,7 +563,7 @@ Note: Name of containers and id
 
 ### Creation of a new image
 
-![](../images/docker_concept_build.png)
+![](../../images/docker_concept_build.png)
 
 ???
 
@@ -573,13 +573,13 @@ Need a Dockerfile. I will describe it later. Here it is just to give you a broad
 
 ### View all images
 
-![](../images/docker_concept_image.png)
+![](../../images/docker_concept_image.png)
 
 ---
 
 ### Push your image on a registry
 
-![](../images/docker_concept_push.png)
+![](../../images/docker_concept_push.png)
 
 ---
 
@@ -616,7 +616,7 @@ data volume is the way to make your tool connecting
 
 ## How to containerize your tools?
 
-![](../images/docker-container.jpg)
+![](../../images/docker-container.jpg)
 
 ???
 
@@ -626,7 +626,7 @@ Now I am sure all of you want to containerize his tool :)
 
 ### How to create your image?
 
-![](../images/docker_build.svg)
+![](../../images/docker_build.svg)
 
 ---
 
@@ -651,7 +651,7 @@ Review of the commands
 
 ### Dockerfile & Layers
 
-![](../images/dockerfile_layers.svg)
+![](../../images/dockerfile_layers.svg)
 
 ---
 
@@ -702,7 +702,7 @@ https://github.com/bgruening/docker-galaxy-stable/tree/dev/docs/Running_jobs_out
 
 ### Docker flavours
 
-![](../images/rna-workbench-chart.png)
+![](../../images/rna-workbench-chart.png)
 
 ---
 
@@ -770,6 +770,6 @@ Create a Galaxy Flavour
 
 ### Galaxy Flavor Generator
 
-![](../images/galaxy_flavour_generator.png)
+![](../../images/galaxy_flavour_generator.png)
 
 https://github.com/galaxyFlavorsGenerators/galaxyFlavorGenerator

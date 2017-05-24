@@ -1,6 +1,6 @@
 ### What are Galaxy Interactive Tours?
 
-![](../images/galaxy_tour_demo.gif)
+![](../../images/galaxy_tour_demo.gif)
 
 An awesome way to learn how to use Galaxy or a specific tool, isn't it?
 
@@ -8,7 +8,7 @@ An awesome way to learn how to use Galaxy or a specific tool, isn't it?
 
 ### How does it work?
 
-![](../images/galaxy_tour_yml.png)
+![](../../images/galaxy_tour_yml.png)
 
 A single YAML file: [core.galaxy_ui.yaml](https://raw.githubusercontent.com/galaxyproject/galaxy/097300ea6219e14b66b23a0e05f2808b16f10015/config/plugins/tours/core.galaxy_ui.yaml)
 
@@ -65,7 +65,7 @@ Argument | Description
 
 ### How to obtain the JQuery Selector of the element?
 
-![](../images/interactive_tour_element_grabbing.gif)
+![](../../images/interactive_tour_element_grabbing.gif)
 
 ---
 
@@ -106,5 +106,5 @@ Argument | Description
 
 ### <i class="fa fa-pencil" aria-hidden="true"></i> Hands-on
 
-![](../images/exercise.png)
+![](../../images/exercise.png)
 

@@ -418,7 +418,7 @@ help(gi.tools.run_tool)
 * To run a tool, its 'id' is needed:
 
 .left-column5[
-<img src="../images/clue.png" width="30"/>
+<img src="../../images/clue.png" width="30"/>
 ]
 .right-column95[
 ```python
@@ -428,7 +428,7 @@ help(gi.tools.run_tool)
 
 * Get the samtools sort tool id
 
-.left-column5[<img src="../images/clue.png" width="30"/>].right-column95[its name is "sort"]
+.left-column5[<img src="../../images/clue.png" width="30"/>].right-column95[its name is "sort"]
 
 
 ```python
@@ -451,7 +451,7 @@ from bioblend.galaxy.tools.inputs import inputs
 * The *inputs* method instanciates a class called *InputsBuilder*:
 
 .left-column5[
-<img src="../images/clue.png" width="30"/>
+<img src="../../images/clue.png" width="30"/>
 ]
 .right-column95[
 ```python
@@ -477,7 +477,7 @@ myinputs = inputs().set_param("param1",'value')
 
 * Get the details on the "samtool sort" tool
 .center[
-<img src="../images/yourturn.jpg" width="100"/>
+<img src="../../images/yourturn.jpg" width="100"/>
 ]
 
 
@@ -536,7 +536,7 @@ detail_tool = gi.tools.show_tool(list_tool[0]['id'],io_details=True)
 
 * Inputs information can be displayed with *detail_tool['inputs']*, use this to instantiate the inputs object
 .center[
-<img src="../images/yourturn.jpg" width="100"/>
+<img src="../../images/yourturn.jpg" width="100"/>
 ]
 
 
@@ -577,7 +577,7 @@ myinputs = inputs().set_dataset_param("input1", data_history['id'], src='hda')
 
 * Now you can launch `samtool sort`
 .center[
-<img src="../images/yourturn.jpg" width="100"/>
+<img src="../../images/yourturn.jpg" width="100"/>
 ]
 
 
@@ -615,7 +615,7 @@ name: workflow
 * To know what are the elements needed:
 
 .left-column5[
-<img src="../images/clue.png" width="30"/>
+<img src="../../images/clue.png" width="30"/>
 ]
 .right-column95[
 ```python
@@ -630,7 +630,7 @@ help(gi.workflows.run_workflow)
 * To know what are the elements needed:
 
 .left-column5[
-<img src="../images/clue.png" width="30"/>
+<img src="../../images/clue.png" width="30"/>
 ]
 .right-column95[
 ```python
@@ -656,7 +656,7 @@ run_workflow(self, workflow_id, dataset_map=None, params=None, history_id=None,
 * To know what are the elements needed:
 
 .left-column5[
-<img src="../images/clue.png" width="30"/>
+<img src="../../images/clue.png" width="30"/>
 ]
 .right-column95[
 ```python
@@ -679,7 +679,7 @@ run_workflow(self, workflow_id, dataset_map=None, params=None, history_id=None,
 * Get the workflows list using the *get_workflows* method from the class Workflow
 * Get the worflow details using the *show_workflow*
 
-.center[<img src="../images/yourturn.jpg" width="60"/>]
+.center[<img src="../../images/yourturn.jpg" width="60"/>]
 
 ---
 ## Workflows Object (1/2)
@@ -688,7 +688,7 @@ run_workflow(self, workflow_id, dataset_map=None, params=None, history_id=None,
 * To know what are the elements needed:
 
 .left-column5[
-<img src="../images/clue.png" width="30"/>
+<img src="../../images/clue.png" width="30"/>
 ]
 .right-column95[
 ```python
@@ -721,7 +721,7 @@ detailworkflow = gi.workflows.show_workflow(my_workflow[0]['id'])
 * Build the *dataset_map* (*key = "input workflow id key" value = {id : 'dataset id', src : 'location of the data'}*)
 
 .left-column5[
-<img src="../images/clue.png" width="30"/>
+<img src="../../images/clue.png" width="30"/>
 ]
 ```python
 dataset_map = {}
@@ -730,7 +730,7 @@ dataset_map[detailworkflow['inputs'].keys()[0]] = {'id' : data_history['id'],
 ```
 
 * Launch the workflow
-.center[<img src="../images/yourturn.jpg" width="100"/>]
+.center[<img src="../../images/yourturn.jpg" width="100"/>]
 
 ---
 ## Workflows Object (2/2)
@@ -738,7 +738,7 @@ dataset_map[detailworkflow['inputs'].keys()[0]] = {'id' : data_history['id'],
 * Build the *dataset_map* (*key = "input workflow id key" value = {id : 'dataset id', src : 'location of the data'}*)
 
 .left-column5[
-<img src="../images/clue.png" width="30"/>
+<img src="../../images/clue.png" width="30"/>
 ]
 ```python
 dataset_map = {}
@@ -758,7 +758,7 @@ gi.workflows.run_workflow(detailworkflow['id'], dataset_map=dataset_map,
 * Build the *dataset_map* (*key = "input workflow id key" value = {id : 'dataset id', src : 'location of the data'}*)
 
 .left-column5[
-<img src="../images/clue.png" width="30"/>
+<img src="../../images/clue.png" width="30"/>
 ]
 ```python
 dataset_map = {}

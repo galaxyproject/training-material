@@ -9,12 +9,12 @@
 
 ---
 
-![](../images/genome_organization.jpeg)
+![](../../images/genome_organization.jpeg)
 
 
 ---
 
-.image-75[![](../images/modification_methylation.jpeg)]
+.image-75[![](../../images/modification_methylation.jpeg)]
 
 ---
 
@@ -32,15 +32,15 @@
 
 #Heritable methylation
 
-.image-50[![](../images/heritable_methylation.png)]
-.image-25[![](../images/mouse.jpg)]
+.image-50[![](../../images/heritable_methylation.png)]
+.image-25[![](../../images/mouse.jpg)]
 
 <small>Weaver et al. Nature Neurosci 2004; 7: 847-854</small>
 
 ---
 
 #More than 5-mC
-.image-75[![](../images/more_than_5-mC.png)]
+.image-75[![](../../images/more_than_5-mC.png)]
 
 <small>Mariani et al. (2013) Cancers</small>
 
@@ -52,12 +52,12 @@
 ---
 
 # Bisulfite sequencing
-.image-75[![](../images/bisulfite_sequencing.png)]
+.image-75[![](../../images/bisulfite_sequencing.png)]
 
 ---
 
 # Mapping a bisulfite sequence read
-.image-75[![](../images/Mapping_a_bisulfite_seq_read.jpeg)]
+.image-75[![](../../images/Mapping_a_bisulfite_seq_read.jpeg)]
 
 <small>Krueger et al.</small>
 
@@ -78,14 +78,14 @@
 ---
 
 #Methylation bias
-.image-75[![](../images/methylation_bias.png)]
+.image-75[![](../../../images/methylation_bias.png)]
 
 ---
 
 #Methylation extraction
-![](../images/methylation_extraction_0.png)
+![](../../images/methylation_extraction_0.png)
 
-![](../images/methylation_extraction_1.png)
+![](../../images/methylation_extraction_1.png)
 
 ---
 

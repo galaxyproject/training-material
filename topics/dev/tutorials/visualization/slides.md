@@ -13,13 +13,13 @@ var y: ~-4.125, corr 0.816, lr: y=0.5x + 3
 
 ### Why visualizations?
 
-![](../images/vis_alignment_plaintext.png)
+![](../../images/vis_alignment_plaintext.png)
 
 ---
 
 ### Why visualizations?
 
-![](../images/vis_alignment.png)
+![](../../images/vis_alignment.png)
 
 ---
 
@@ -53,7 +53,7 @@ var y: ~-4.125, corr 0.816, lr: y=0.5x + 3
 - **Example** (in mainline)
     * Charts
 
-![](../images/vis_plugin_menu.png)
+![](../../images/vis_plugin_menu.png)
 
 ---
 
@@ -61,25 +61,25 @@ var y: ~-4.125, corr 0.816, lr: y=0.5x + 3
 
 - Builtin visualization in particular for numerical tabular data
 
-![](../images/vis_charts_01.png)
+![](../../images/vis_charts_01.png)
 
 ---
 
 ### Plugins: Charts
 
-![](../images/vis_charts_02.png)
+![](../../images/vis_charts_02.png)
 
 ---
 
 ### Plugins: Charts
 
-![](../images/vis_charts_03.png)
+![](../../images/vis_charts_03.png)
 
 ---
 
 ### Plugins: Charts
 
-![](../images/vis_charts_04.png)
+![](../../images/vis_charts_04.png)
 
 ---
 
@@ -87,7 +87,7 @@ var y: ~-4.125, corr 0.816, lr: y=0.5x + 3
 
  - Allows exporting to flat and vector based graphics
 
-![](../images/vis_charts_05.png)
+![](../../images/vis_charts_05.png)
 
 ---
 
@@ -130,7 +130,7 @@ $ touch $GALAXY_ROOT/config/plugins/$PLUGIN_NAME/config/$PLUGIN_NAME.xml
 
 - Hooks visualizations into Galaxy
 
-![](../images/vis_plugin_conf_xml.png)
+![](../../images/vis_plugin_conf_xml.png)
 
 * Data types must match with class names in `$GALAXY_ROOT/lib/galaxy/datatypes/`
 
@@ -145,7 +145,7 @@ $ touch $GALAXY_ROOT/config/plugins/$PLUGIN_NAME/templates/$PLUGIN_NAME.mako
 - Link to data types and HTML template file
     * Every invocation of visualization: template compiled
 
-![](../images/vis_mako_hello_world_dual.png)
+![](../../images/vis_mako_hello_world_dual.png)
 
 ---
 
@@ -162,7 +162,7 @@ $ touch $GALAXY_ROOT/config/plugins/$PLUGIN_NAME/templates/$PLUGIN_NAME.mako
     * Resolving history uid to hash
     * Correction for extended root URLs:
 
-![](../images/vis_nested_url.png)
+![](../../images/vis_nested_url.png)
 
 ---
 
@@ -172,7 +172,7 @@ $ touch $GALAXY_ROOT/config/plugins/$PLUGIN_NAME/templates/$PLUGIN_NAME.mako
     * Obtain *hdadict['id']*
     - Essential Python variables:
 
-![](../images/vis_important_variables.png)
+![](../../images/vis_important_variables.png)
 
 ---
 
@@ -189,7 +189,7 @@ $ touch $GALAXY_ROOT/config/plugins/$PLUGIN_NAME/templates/$PLUGIN_NAME.mako
 
 ### Plugins: Generic template
 
-![](../images/vis_generic_template.png)
+![](../../images/vis_generic_template.png)
 
 ---
 
@@ -197,8 +197,8 @@ $ touch $GALAXY_ROOT/config/plugins/$PLUGIN_NAME/templates/$PLUGIN_NAME.mako
 
 - External libraries and static files go in `./static` dir:
 
-![](../images/vis_generic_template_static.png)
-![](../images/vis_static_dir.png)
+![](../../images/vis_generic_template_static.png)
+![](../../images/vis_static_dir.png)
 
 ---
 

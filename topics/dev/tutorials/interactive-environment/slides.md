@@ -3,7 +3,7 @@
 - Embedded access to third-party application inside of Galaxy
 - Interactively analyze data, access analysis products within Galaxy
 
-![](../images/vis_IE_ipython0.png)
+![](../../images/vis_IE_ipython0.png)
 
 - Bring external analysis platform to the data instead of vice-versa
   - no need to download/re-upload your data
@@ -27,12 +27,12 @@
 - Can be bound to specific datatypes
   - Available under the visualizations button on the dataset
 
-.image-25[![](../images/vis_IE_button.png)]
+.image-25[![](../../images/vis_IE_button.png)]
 
 - Or more general-purpose applications (Jupyter/Rstudio)
 - IE launcher
 
-.image-25[![](../images/vis_IE_launcher_menu.png)]
+.image-25[![](../../images/vis_IE_launcher_menu.png)]
 ---
 
 ### IE Launcher
@@ -40,7 +40,7 @@
 - Choose between different available docker images
 - Attach one or more datasets from history
 
-.image-75[![](../images/vis_IE_launcher.png)]
+.image-75[![](../../images/vis_IE_launcher.png)]
 
 ---
 
@@ -49,7 +49,7 @@
 - Docker Containers are launched on-demand by users..
 - ..and killed automatically when users stop using them
 
-![](../images/vis_IE_infra.png)
+![](../../images/vis_IE_infra.png)
 
 .footnote[ Admin Docs: https://docs.galaxyproject.org/en/master/admin/interactive_environments.html ]
 
@@ -62,19 +62,19 @@
   - Ability to save and load notebooks
   - [Video demo](https://www.youtube.com/watch?v=UOFFkDuJxgk)
 
-.image-75[![](../images/vis_IE_ipython1.png)]
+.image-75[![](../../images/vis_IE_ipython1.png)]
 
 ---
 
 ### Jupyter
 
-![](../images/vis_IE_ipython2.png)
+![](../../images/vis_IE_ipython2.png)
 
 ---
 
 ### Jupyter
 
-![](../images/vis_IE_ipython3.png)
+![](../../images/vis_IE_ipython3.png)
 
 ---
 
@@ -84,7 +84,7 @@
 - Provides special functions to interact with the Galaxy history
 - Ability to save and load workbook and R history object
 
-![](../images/vis_IE_rstudio.png)
+![](../../images/vis_IE_rstudio.png)
 
 ---
 
@@ -93,19 +93,19 @@
 - Visualizes single dataset
 - Only available for datasets of specific formats
 
-![](../images/vis_IE_iobio.png)
+![](../../images/vis_IE_iobio.png)
 
 ---
 
 ### IOBIO
 
-![](../images/vis_IE_iobio2.png)
+![](../../images/vis_IE_iobio2.png)
 
 ---
 
 ### Phinch
 
-![](../images/vis_IE_phinch.png)
+![](../../images/vis_IE_phinch.png)
 
 ---
 
@@ -443,6 +443,6 @@ $ cd hello-ie
 $ docker build -t hello-ie .
 ```
 
-![](../images/vis_IE_helloworld.png)
+![](../../images/vis_IE_helloworld.png)
 
 .footnote[Try it yourself: https://github.com/erasche/hello-world-interactive-environment]
