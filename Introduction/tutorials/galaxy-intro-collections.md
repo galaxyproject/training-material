@@ -1,5 +1,10 @@
-Getting to know workflows
-=========================
+---
+layout: tutorial_hands_on
+topic_name: Introduction
+tutorial_name: galaxy-intro-collections
+---
+
+# Processing many samples at once
 
 :grey_question: ***Questions***
 
@@ -28,7 +33,7 @@ Getting to know workflows
 
 General introduction about the topic and then an introduction of the tutorial (the questions and the objectives). It is nice also to have a scheme to sum up the pipeline used during the tutorial. The idea is to give to trainees insight into the content of the tutorial and the (theoretical and technical) key concepts they will learn.
 
-It could be nice to use: [Galaxy 101-2: Getting to know workflows](../tmp/Galaxy101-2.md)
+It could be nice to use: [Processing many samples at once](Processing-many-samples-at-once.md)
 
 # Part 1
 
@@ -101,4 +106,4 @@ Conclusion about the technical key points. And then relation between the technic
 - *Third key point*
 - *...*
 
-# :clap: Thank you
+:tada: Well done! :clap: Thank you

@@ -1,5 +1,10 @@
-Processing many samples at once
-=============
+---
+layout: tutorial_hands_on
+topic_name: Introduction
+tutorial_name: galaxy-intro-get-data
+---
+
+# Getting data into Galaxy
 
 :grey_question: ***Questions***
 
@@ -27,8 +32,6 @@ Processing many samples at once
 # Introduction
 
 General introduction about the topic and then an introduction of the tutorial (the questions and the objectives). It is nice also to have a scheme to sum up the pipeline used during the tutorial. The idea is to give to trainees insight into the content of the tutorial and the (theoretical and technical) key concepts they will learn.
-
-It could be nice to use: [Processing many samples at once](../tmp/Processing-many-samples-at-once.md)
 
 # Part 1
 
@@ -101,4 +104,4 @@ Conclusion about the technical key points. And then relation between the technic
 - *Third key point*
 - *...*
 
-# :clap: Thank you
+:tada: Well done! :clap: Thank you.

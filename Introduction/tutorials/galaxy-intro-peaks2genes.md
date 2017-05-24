@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 topic_name: Introduction
-tutorial_name: Introduction
+tutorial_name: galaxy-intro-peaks2genes
 ---
 
 # From peaks to genes
@@ -76,14 +76,14 @@ computer and upload it to Galaxy.
 >    > * Select `interval` in this case
 >    > * Press **Save**
 >    {: .tip}
-> 
+>
 >    As default, Galaxy takes the link as name. It also doesn't link the dataset to a database or a reference genome.
-> 
+>
 >    > ### :nut_and_bolt: Comments
 >    > - Edit the "Database/Build" to select "mm9", the database build for mice used in the paper
 >    > - Rename the datasets according to the samples
 >    {: .comment}
-> 
+>
 {: .hands_on}
 
 In order to find the related genes to these peak regions,
@@ -131,11 +131,11 @@ we also need a list of genes in mice, which we can obtain from UCSC.
 >    >      - start position (0-based)
 >    >      - end position (end-exclusive)
 >    >
->    > There can be up to and nine additional optional fields, but the number of fields per line must be consistent throughout any single set of data. 
+>    > There can be up to and nine additional optional fields, but the number of fields per line must be consistent throughout any single set of data.
 >    >
 >    > You can find more information about it at [UCSC](https://genome.ucsc.edu/FAQ/FAQformat#format1) including a description of the optional fields.
 >    {: .comment}
-> 
+>
 {: .hands_on}
 
 Now we collected all the data we need to start our analysis.
@@ -264,7 +264,7 @@ It's time to find the overlapping intervals (finally!):
 >     - **of**: the UCSC file with promoter regions
 >     - **that intersect**: our converted peak region file
 >     - **for at least**: `1`
-> 
+>
 >    > ### :nut_and_bolt: Comments
 >    > The order of the inputs is important! We want to end up with a list of genes, so the corresponding dataset needs to be the first input.
 >    {: .comment}
@@ -293,7 +293,7 @@ To get a better overview of the genes we obtained, we want to look at their dist
 >    >    </ol>
 >    >    </details>
 >    {: .question}
-> 
+>
 {: .hands_on}
 
 ## Visualization
@@ -337,7 +337,7 @@ Galaxy makes this very easy with the `Extract workflow` option. This means any t
 >
 >    You will get a message that the workflow was created. But where did it go?
 >
-> 6. Click on **Workflow** in the top menu of Galaxy. Here you have a list of all your workflows. 
+> 6. Click on **Workflow** in the top menu of Galaxy. Here you have a list of all your workflows.
 > 7. Select the newly generated workflow and click on **Edit**. You should see something similar to this:
 >   ![](../images/intro_06.png)
 >
@@ -362,7 +362,7 @@ Now it's time to reuse our workflow for a more sophisticated approach.
 
 # Part 2: More sophisticated approach
 
-In part 1 we used an overlap definition of 1 bp (default setting). In order to get a more meaningful definition, we now want to use the information of the position of the peak summit and check for overlap of the summits with genes. 
+In part 1 we used an overlap definition of 1 bp (default setting). In order to get a more meaningful definition, we now want to use the information of the position of the peak summit and check for overlap of the summits with genes.
 
 ## Preperation
 
@@ -476,4 +476,4 @@ To share a history, click on the gear symbol in the history pane and select `Sha
 
 # Conclusion
 
-Well done! You have just performed your first analysis in Galaxy. You also created a workflow from your analysis so you can easily repeat the exact same analysis on other datasets. Additionally you shared your results and methods with others.
+:tada: Well done! :clap: You have just performed your first analysis in Galaxy. You also created a workflow from your analysis so you can easily repeat the exact same analysis on other datasets. Additionally you shared your results and methods with others.

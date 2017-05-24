@@ -1,6 +1,6 @@
-gi# Processing many samples at once
+# Processing many samples at once
 
-Here we will show Galaxy features designed to help with the analysis of large numbers of samples. When you have just a few samples - clicking through them is easy. But once you've got hundreds - it becomes very annoying. In Galaxy we have introduced **Dataset collections** that allow you to combine numerous datasets in a single entity that can be easily manipulated. 
+Here we will show Galaxy features designed to help with the analysis of large numbers of samples. When you have just a few samples - clicking through them is easy. But once you've got hundreds - it becomes very annoying. In Galaxy we have introduced **Dataset collections** that allow you to combine numerous datasets in a single entity that can be easily manipulated.
 
 #### In this tutorial we assume the following:
 
@@ -22,7 +22,7 @@ Here we will show Galaxy features designed to help with the analysis of large nu
 - `M117C1-ch_1`- family 117, child, 1-st (**F**) read from **cheek**
 - `M117C1-ch_2`- family 117, child, 2-nd (**R**) read from **cheek**
 
-These datasets represent genomic DNA (enriched for mitochondria via a long range PCR) isolated from blood and cheek (buccal swab) of mother (`M117`) and her child (`M117C1`) that was sequenced on an Illumina miSeq machine as paired-read library (250-bp reads; see our [2014](http://www.pnas.org/content/111/43/15474.abstract) manuscript for **Methods**). 
+These datasets represent genomic DNA (enriched for mitochondria via a long range PCR) isolated from blood and cheek (buccal swab) of mother (`M117`) and her child (`M117C1`) that was sequenced on an Illumina miSeq machine as paired-read library (250-bp reads; see our [2014](http://www.pnas.org/content/111/43/15474.abstract) manuscript for **Methods**).
 
 ## 1. Creating a paired dataset collection
 
@@ -88,7 +88,7 @@ Once these jobs are finished they will disappear from the history and all result
 
 ![bwa_memCollectionDone](https://galaxyproject.org/galaxy101/bwa_memCollectionDone.png)
 
-Let's look at this collection by clicking on it (panel **A** in the figure below). You can see that now this collection is no longer paired (compared to the collection we created in the beginning of this tutorial). This is because `bwa-mem` takes forward and reverse data as input, but produces only a single BAM dataset as the output. So what we have in the result is a *list* of four dataset (BAM files; panels **B** and **C**). 
+Let's look at this collection by clicking on it (panel **A** in the figure below). You can see that now this collection is no longer paired (compared to the collection we created in the beginning of this tutorial). This is because `bwa-mem` takes forward and reverse data as input, but produces only a single BAM dataset as the output. So what we have in the result is a *list* of four dataset (BAM files; panels **B** and **C**).
 
 ![bwa_memCollection_ABC](https://galaxyproject.org/galaxy101/bwa_memCollection_ABC.png)
 
@@ -154,9 +154,9 @@ The two histories and the workflow described in this page are accessible directl
 * History [**Collections**]( https://test.galaxyproject.org/u/anton/h/collections-1)
 * History [**Collections (full analysis)**](  https://test.galaxyproject.org/u/anton/h/collections-full-analysis)
 
-From there you can import histories to make them your own. 
+From there you can import histories to make them your own.
 
 ## 6. If things don't work...
-...you need to complain. Use [Galaxy's BioStar Channel](https://usegalaxy.org/biostar/biostar_redirect) to do this. 
+...you need to complain. Use [Galaxy's BioStar Channel](https://usegalaxy.org/biostar/biostar_redirect) to do this.
 
 ## :clap: The End
