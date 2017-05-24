@@ -345,7 +345,7 @@ To reduce file sizes further and streamline analysis, we can now summarize the d
 > - **Count.seqs** :wrench: with the following parameters
 >   - "name" to the `names` output from Unique.seqs
 >   - "Use a Group file" to `yes`
->   - "group" to the group file we created using the Make.group tool
+>   - "group" to the group file we created using the Screen.seqs tool
 {: .hands_on}
 
 The *count_table* output will look something like this:
@@ -790,7 +790,7 @@ of *Order*. This is the approach that we  generally use in the Schloss lab.
 > ### :pencil2: Hands-on: Cluster our data into OTUs
 >
 > - **Cluster.split** :wrench: with the following parameters
->   - "Split by" to `Classification`
+>   - "Split by" to `Classification using fasta`
 >   - "fasta" to the fasta output from Remove.groups
 >   - "taxonomy" to the taxonomy output from Remove.groups
 >   - "taxlevel" to `4`
@@ -1045,7 +1045,7 @@ This generates a 4-way Venn diagram and a table listing the shared OTUs.
 ![](../images/venn.png)
 
 This shows that there were a total of 180 OTUs observed between the 4 time points. Only 76 of those OTUs were
-hared by all four time points. We could look deeper at the shared file to see whether those OTUs were
+shared by all four time points. We could look deeper at the shared file to see whether those OTUs were
 umerically rare or just had a low incidence.
 
 Next, let's generate a dendrogram to describe the similarity of the samples to each other. We will generate a
