@@ -18,10 +18,8 @@ SPAdes is a de novo genome assembler written by Pavel Pevzner's group in St. Pet
 > In this tutorial, we will deal with:
 >
 > 1. [Get the data](#get-the-data)
-> 2. [Evaluate the input reads](#evaluate-the-input-reads)
-> 3. [Assemble reads with Velvet](#assemble-reads-with-velvet)
-> 4. [Collect some statistics on the contigs](#collect-some-statistics-on-the-contigs)
-> 5. [Discussion](#discussion)
+> 2. [Assemble with the Velvet Optimiser](#assemble-with-the-velvet-optimiser)
+> 3. [Assemble with SPAdes](#assemble-with-spades)
 > {: .agenda}
 
 # Get the data
@@ -54,5 +52,109 @@ We will be using the same data that we used in the introductory tutorial, so if 
 >    > 2. What is the main difference between a FASTQ and a FASTA file?
 >    {: .question}
 >
+>
+{: .hands_on}
+
+# Assembly with the Velvet Optimiser
+
+We will perform an assembly with the Velvet Optimiser. It will automatically choose a suitable value for the k-mer size (**k**). It will then go on to optimise the coverage cutoff (**cov_cutoff**) which corrects for read errors. It will use the "*n50*" metric for optimising the k-mer size and the "*total number of bases in contigs*" for optimising the coverage cutoff.
+
+> ### :pencil2: Hands-on: Assemble with the Velvet Optimiser
+>
+> #### Use the **Velvet Optimiser** :wrench: tool.
+>
+> - Set the following parameters (leave other settings as they are):
+>
+>    - **Start k-mer size**: 45
+>    - **End k-mer size**: 73
+>    - **Input file type**: Fastq
+>    - **Single or paired end reads**: Paired
+>    - **Select first set of reads**: *mutant_R1.fastq*  
+>    - **Select second set of reads**: *mutant_R2.fastq*
+>
+{: .hands_on}
+
+Your history will now contain a number of new files:
+
+* Velvet optimiser contigs
+  * A fasta file of the final assembled contigs
+  
+
+* Velvet optimiser contig stats
+  * A table of the lengths (in k-mer length) and coverages (k-mer coverages) for the final contigs.
+  
+Have a look at each file.
+
+
+> ### :pencil2: Hands-on: Get contig statistics for Velvet Optimiser contigs  
+>
+> #### Use the **Fasta Statistics** :wrench: tool to produce a summary of the velvet optimiser contigs
+>
+> Look at the output file.
+>
+>    > ### :question: Questions
+>    >
+>    > Compare the output we got here with the output of the simple assemblies obtained in the introductory tutorial.
+>    > 1. What are the main differences between them?
+>    > 2. Which has a higher "n50"? What does this mean?
+>    {: .question}
+>
+{: .hands_on}
+
+Tables of results from **(a)** Simple assembly and **(b)** optimised assembly.
+
+**(a)** ![](../images/image12.png)
+
+**(b)** ![](../images/optstats.png)
+
+# Assemble with SPAdes
+
+We will now perform an assembly with the much more modern SPAdes assembler. It goes through a similar process to Velvet in the fact that it uses and simplifies de Bruijn graphs but it uses multiple values for k-mer size and combines the resultant graphs. This combination produces very good assemblies. When using SPAdes it is typical to choose at least 3 k-mer sizes. One lowm one medium and one high. We will use 33, 55 and 91.
+
+> ### :pencil2: Hands-on: Assemble with SPAdes
+>
+> #### Use the **SPAdes** :wrench: tool.
+>
+> - Set the following parameters (leave other settings as they are):
+>
+>    - **Run only assembly**: yes
+>    - **K-mers to use separated by commas**: 33,55,91 *[note: no spaces!]*
+>    - **Coverage cutoff**: auto
+>    - **Files -> forward reads**: *mutant_R1.fastq*  
+>    - **Files -> reverse reads**: *mutant_R2.fastq*
+>
+{: .hands_on}
+
+You will now have 5 new files in your history:
+
+* two Fasta files, one for contigs and one for scaffolds
+* two statistics files, one for contigs and one for scaffolds
+* the SPAdes log file.
+
+Examine each file, especially the stats files.
+
+![](../images/contig_stats.png)
+
+> ### :question: Questions
+>
+> 1. Why would one of the contigs have much higher coverage than the others?
+> 2. What could this represent?
+>
+{: .question}
+
+
+> ### :pencil2: Hands-on: Get contig statistics for SPAdes contigs    
+>
+>
+> #### Use the **Fasta Statistics** :wrench: tool to produce a summary of the SPAdes contigs
+>
+> Look at the output file.
+>
+>    > ### :question: Questions
+>    >
+>    > Compare the output we got here with the output of the simple assemblies obtained in the introductory tutorial.
+>    > 1. What are the main differences between them?
+>    > 2. Did SPAdes produce a better assembly than the Velvet Optimiser?
+>    {: .question}
 >
 {: .hands_on}
