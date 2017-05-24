@@ -295,11 +295,11 @@ In addition to the list of genes, `DESeq2` outputs a graphical summary of the re
 
 1. Histogram of *p*-values for all tests
 
-    ![](../images/Deseq2_histogram2.png)
+    ![](../images/Deseq2_histogram3.png)
 
 2. [MA plot](https://en.wikipedia.org/wiki/MA_plot): global view of the relationship between the expression change of conditions (log ratios, M), the average expression strength of the genes (average mean, A), and the ability of the algorithm to detect differential gene expression. The genes that passed the significance threshold (adjusted p-value < 0.1) are colored in red.
 
-    ![](../images/Deseq2_MAplot2.png)
+    ![](../images/Deseq2_MAplot3.png)
 
 3. Principal Component Analysis ([PCA](https://en.wikipedia.org/wiki/Principal_component_analysis)) and the first two axes
 
@@ -309,11 +309,11 @@ In addition to the list of genes, `DESeq2` outputs a graphical summary of the re
 
 4. Heatmap of sample-to-sample distance matrix: overview over similarities and dissimilarities between samples
 
-    ![](../images/Deseq2_heatmap2.png)
+    ![](../images/Deseq2_heatmap3.png)
 
 5. Dispersion estimates: gene-wise estimates (black), the fitted values (red), and the final maximum a posteriori estimates used in testing (blue)
 
-    ![](../images/Deseq2_dispersion2.png)
+    ![](../images/Deseq2_dispersion3.png)
 
     This dispersion plot is typical, with the final estimates shrunk from the gene-wise estimates towards the fitted estimates. Some gene-wise estimates are flagged as outliers and not shrunk towards the fitted value. The amount of shrinkage can be more or less than seen here, depending on the sample size, the number of coefficients, the row mean and the variability of the gene-wise estimates.
 
