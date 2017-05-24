@@ -1,16 +1,24 @@
-# Galaxy - RNA-Seq training material
+# Galaxy - metagenomics training material
+#
+# to build the docker image, go to root of training repo and
+#    docker build -t <your_tag> -f topics/<your_topic>/docker/Dockerfile .
+#
+# to run image:
+#    docker run -p "8080:80" -t <your_tag>
 
-FROM bgruening/galaxy-rna-seq:dev
+FROM bgruening/galaxy-stable
 
-MAINTAINER Björn A. Grüning, bjoern.gruening@gmail.com
+MAINTAINER Galaxy Training Material
 
-ENV GALAXY_CONFIG_BRAND RNA-Seq training
+ENV GALAXY_CONFIG_BRAND "GTN: Transcriptomics"
 
-ADD data_manager_rna_seq.yaml data_manager_rna_seq.yaml
+# prerequisites
+RUN pip install ephemeris -U
+ADD bin/galaxy-sleep.py /galaxy-sleep.py
 
-RUN startup_lite && \
-    sleep 60 && \
-    run-data-managers -u admin@galaxy.org -p admin --config data_manager_rna_seq.yaml -g http://localhost:8080
+# copy the tutorials directory for your topic
+ADD topics/transcriptomics/tutorials/ /tutorials/
 
-# Add a Galaxy tour
-# ADD <URL to dedicated tour in https://github.com/galaxyproject/galaxy-tours> $GALAXY_ROOT/config/plugins/tours/rna-seq.yaml
+# install everything for tutorials
+ADD bin/docker-install-tutorials.sh /setup-tutorials.sh
+RUN /setup-tutorials.sh

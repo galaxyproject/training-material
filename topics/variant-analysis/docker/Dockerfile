@@ -1,25 +1,24 @@
-# Galaxy - Exome sequencing training material
+# Galaxy - metagenomics training material
+#
+# to build the docker image, go to root of training repo and
+#    docker build -t <your_tag> -f topics/<your_topic>/docker/Dockerfile .
+#
+# to run image:
+#    docker run -p "8080:80" -t <your_tag>
 
-FROM bgruening/galaxy-exome-seq
+FROM bgruening/galaxy-stable
 
-MAINTAINER Björn A. Grüning, bjoern.gruening@gmail.com
+MAINTAINER Galaxy Training Material
 
-ENV GALAXY_CONFIG_BRAND Exome sequencing
-ENV ENABLE_TTS_INSTALL True
+ENV GALAXY_CONFIG_BRAND "GTN: Variant Analysis"
 
-# Enable Conda dependency resolution
-ENV GALAXY_CONFIG_CONDA_AUTO_INSTALL=True \
-    GALAXY_CONFIG_CONDA_AUTO_INIT=True
+# prerequisites
+RUN pip install ephemeris -U
+ADD bin/galaxy-sleep.py /galaxy-sleep.py
 
-# Data libraries
-ADD setup_data_libraries.py $GALAXY_ROOT/setup_data_libraries.py
-ADD library_data.yaml $GALAXY_ROOT/library_data.yaml
+# copy the tutorials directory for your topic
+ADD topics/variant-analysis/tutorials/ /tutorials/
 
-# Download training data and populate the data library
-RUN startup_lite && \
-    sleep 50 && \
-    . $GALAXY_VIRTUAL_ENV/bin/activate && \
-    python $GALAXY_ROOT/setup_data_libraries.py -i $GALAXY_ROOT/library_data.yaml
-
-ADD https://raw.githubusercontent.com/galaxyproject/galaxy-tours/8bbd07bd906bf8182f1aa3bc6a573a98bd888667/exom-seq/exom-seq.yaml \
-  $GALAXY_ROOT/config/plugins/tours/exom-seq.yaml
+# install everything for tutorials
+ADD bin/docker-install-tutorials.sh /setup-tutorials.sh
+RUN /setup-tutorials.sh
