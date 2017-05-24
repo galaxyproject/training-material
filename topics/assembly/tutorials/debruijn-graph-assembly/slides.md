@@ -1,7 +1,4 @@
 ---
-layout: introduction_slides
-topic_name: Assembly
-logo: "GTN"
 class: enlarge120
 ---
 .enlarge120[

@@ -1,9 +1,3 @@
----
-layout: tutorial_hands_on
-topic_name: Assembly
-tutorial_name: general-introduction
----
-
 # Genome assembly with Velvet: Background
 Velvet is one of a number of *de novo* assemblers that use short read sets as input (e.g. Illumina Reads), and the assembly method is based on de Bruijn graphs. For information about Velvet see this [link](https://en.wikipedia.org/wiki/Velvet_assembler).
 

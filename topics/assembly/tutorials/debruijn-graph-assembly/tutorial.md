@@ -1,9 +1,3 @@
----
-layout: tutorial_hands_on
-topic_name: Assembly
-tutorial_name: debruijn-graph-assembly
----
-
 # Optimised de Bruijn Graph assemblies using the Velvet Optimiser and SPAdes
 In this activity, we will perform *de novo* assemblies of a short read set using the Velvet Optimiser and the SPAdes assemblers. We are using the Velvet Optimiser for illustrative purposes. For real assembly work, a more suitable assembler should be chosen - such as SPAdes.
 
