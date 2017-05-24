@@ -1,8 +1,3 @@
----
-topic_name: Metagenomics
-tutorial_name: mothur-miseq-sop
----
-
 # Overview
 In this tutorial we will perform the
 [Standard Operating Procedure (SOP) for MiSeq data](https://www.mothur.org/wiki/MiSeq_SOP), developed by the

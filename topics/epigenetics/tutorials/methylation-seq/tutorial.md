@@ -1,11 +1,3 @@
----
-layout: tutorial_hands_on
-topic_name: MethylC-Seq
-tutorial_name: methylation-seq
----
-
-# Galaxy workshop on DNA Methylation data analysis
-
 > ### Agenda
 >
 > In this tutorial we will:

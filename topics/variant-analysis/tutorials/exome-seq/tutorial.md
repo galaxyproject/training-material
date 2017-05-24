@@ -1,9 +1,3 @@
----
-layout: tutorial_hands_on
-topic_name: Exome-Seq
-tutorial_name: Exome-Seq
----
-
 # Introduction
 
 Exome sequencing means that all protein-coding genes in a genome are sequenced.

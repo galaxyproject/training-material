@@ -1,9 +1,3 @@
----
-layout: tutorial_hands_on
-topic_name: Exome-Seq
-tutorial_name: Diploid-variant-calling
----
-
 > Much of Galaxy-related features described in this section have been developed by Björn Grüning (@bgruening) and configured by Dave Bouvier (@davebx).
 
 # Introduction

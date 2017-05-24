@@ -1,29 +1,3 @@
-Data Source Integration
-=======================
-
-:grey_question: ***Questions***
-
-- *Major question that would be addressed in this tutorial (mostly general biological questions)*
-- *Second question*
-- *Third question*
-- *...*
-
-:dart: ***Objectives***
-
-- *First objective of this tutorial (It is a single sentence describing what a learner will be able to do once they have sat through the lesson. The objectives must be technical, but also theoretical, objectives. You can check [SWC lessons](http://swcarpentry.github.io/instructor-training/19-lessons/) to help you writing learning objectives.)*
-- *Second objective*
-- *Third objective*
-- *...*
-
-:heavy_check_mark: ***Requirements***
-
-- *Galaxy introduction*
-- *Second requirement*
-- *Third requirement*
-- *...*
-
-:hourglass: ***Time estimation*** *1d/3h/6h*
-
 # Data Source Integration
 
 An important goal of Galaxy is scalability. A major bottleneck when it comes to analysis of big data sets is the time and space it takes of copying these data sets.

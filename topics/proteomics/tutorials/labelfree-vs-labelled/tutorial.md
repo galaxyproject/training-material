@@ -1,10 +1,3 @@
----
-layout: tutorial_hands_on
-topic_name: Proteomics
-tutorial_name: labelfree_vs_labelled
----
-
-
 # Purpose
 A basic question when planning any quantitative proteomic experiment is the choice between label-free versus labelled quantitation. Here, we want to explain and discuss benefits and drawbacks of each method. 
 Finally, we will give a guideline what points may be vital for the decision in our opinion. We will not discuss different labelling methods here in detail, but focus on our basic question.

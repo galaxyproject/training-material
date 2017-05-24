@@ -1,9 +1,3 @@
----
-layout: tutorial_hands_on
-topic_name: Proteomics
-tutorial_name: database-handling
----
-
 # Introduction
 
 Identifying peptides in proteomic datasets is commonly done by using search engines that compare the MS2 spectra of peptides to theoretical spectra. These theoretical spectra are generated from a FASTA database containing proteins that are expected in the measured sample. Typically, those FASTA databases will contain all proteins of the organism the sample derived from.

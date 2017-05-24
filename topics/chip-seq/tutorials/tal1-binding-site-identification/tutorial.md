@@ -1,9 +1,3 @@
----
-layout: tutorial_hands_on
-topic_name: ChIP-Seq
-tutorial_name: TAL1_binding_site_identification
----
-  
 # Introduction
  
 This tutorial uses ChIP-seq datasets from a study published by [Wu *et al.* (2014)](http://genome.cshlp.org/content/24/12/1945.full.pdf+html). The goal of this study was to investigate "the dynamics of occupancy and the role in gene regulation of the transcription factor Tal1, a critical regulator of hematopoiesis, at multiple stages of hematopoietic differentiation."

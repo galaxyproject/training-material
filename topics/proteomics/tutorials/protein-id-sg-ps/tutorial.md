@@ -1,9 +1,3 @@
----
-layout: tutorial_hands_on
-topic_name: Proteomics
-tutorial_name: proteinID_SG_PS
----
-
 # Introduction
 
 Identifying the proteins contained in a sample is an important step in any proteomic experiment. However, in most settings, proteins are digested to peptides before the LC-MS/MS analysis. In this so-called "bottom-up" procedure, only peptide masses are measured. Therefore, protein identification cannot be performed directly from raw data, but is a multi-step process: 
