@@ -15,7 +15,7 @@ for topic in os.listdir('./topics'):
             assert os.path.exists( p ), '%s not found, but required.' % p
             assert os.path.isdir( p ), '%s not found, but required.' % p
 
-        for file_name in ['metadata.yaml', 'README.md', 'docker/Dockerfile', 'slides/index.html']:
+        for file_name in ['metadata.yaml', 'README.md', 'docker/Dockerfile', 'slides/index.md']:
             print(os.path.join( topic_path, file_name))
             p = os.path.join( topic_path, file_name)
             assert os.path.exists( p ), '%s not found, but required.' % p
