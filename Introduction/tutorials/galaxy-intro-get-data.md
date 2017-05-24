@@ -1,10 +1,10 @@
 ---
 layout: tutorial_hands_on
 topic_name: Introduction
-tutorial_name: galaxy-intro-vis
+tutorial_name: galaxy-intro-get-data
 ---
 
-# Using the Integrative Genomics Viewer
+# Getting data into Galaxy
 
 :grey_question: ***Questions***
 
@@ -32,8 +32,6 @@ tutorial_name: galaxy-intro-vis
 # Introduction
 
 General introduction about the topic and then an introduction of the tutorial (the questions and the objectives). It is nice also to have a scheme to sum up the pipeline used during the tutorial. The idea is to give to trainees insight into the content of the tutorial and the (theoretical and technical) key concepts they will learn.
-
-It could be nice to use: [Using the Integrative Genomics Viewer](IGV_Introduction.md)
 
 # Part 1
 

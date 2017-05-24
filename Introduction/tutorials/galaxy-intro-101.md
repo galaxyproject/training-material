@@ -4,7 +4,7 @@ topic_name: Introduction
 tutorial_name: galaxy-intro-101
 ---
 
-# Introduction
+# 101 Introduction
 
 This practical aims to familiarize you with the Galaxy user interface. It will teach you how to perform basic tasks such as importing data, running tools, working with histories, creating workflows, and sharing your work.
 
