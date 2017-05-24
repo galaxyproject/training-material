@@ -2,6 +2,7 @@
 
 import os
 import glob
+import yaml
 
 
 for topic in os.listdir('./topics'):
@@ -19,19 +20,29 @@ for topic in os.listdir('./topics'):
             p = os.path.join( topic_path, file_name)
             assert os.path.exists( p ), '%s not found, but required.' % p
 
+        with open(os.path.join( topic_path, 'metadata.yaml'), 'r') as stream:
+            metadata = yaml.load(stream)
+
         for tutorial in os.listdir( os.path.join( topic_path, 'tutorials') ):
             tutorial_path = os.path.join(topic_path, 'tutorials', tutorial)
             print(tutorial)
             if os.path.isdir(tutorial):
                 # check for ./topics/<topic>/* files
-                for file_name in ["tutorial.md", "metadata.yaml", "tools.yaml", "data-library.yaml"]:
+                files_to_check = ["metadata.yaml"]
+                if metadata["type"] == "use":
+                    files_to_check.append("tutorial.md")
+                    files_to_check.append("tools.yaml")
+                    files_to_check.append("data-library.yaml")
+
+                for file_name in files_to_check:
                     p = os.path.join( tutorial_path, file_name)
                     assert os.path.exists( p ), '%s not found, but required.' % p
 
                 # check for ./topics/<topic>/* files
-                for dir_name in ["tours", "workflows"]:
-                    directory = os.path.join( tutorial_path, dir_name)
-                    assert os.path.exists( directory ), '%s does not exists.' % directory
-                    assert os.path.isdir( directory ), '%s does not exists.' % directory
-                    assert len(os.listdir( directory )) >= 1
+                if metadata["type"] == "use":
+                    for dir_name in ["tours", "workflows"]:
+                        directory = os.path.join( tutorial_path, dir_name)
+                        assert os.path.exists( directory ), '%s does not exists.' % directory
+                        assert os.path.isdir( directory ), '%s does not exists.' % directory
+                        assert len(os.listdir( directory )) >= 1
 
