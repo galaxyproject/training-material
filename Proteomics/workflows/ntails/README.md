@@ -12,16 +12,18 @@ The N-Tails technique was originally designed to research protease biology and h
 
 > ### :nut_and_bolt: Comment: Interpretation of N-Tails results
 >
-> Be careful not to overinterprete the results of N-Tails experiments. While the technique **is** fit to identify direct protease substrates, it does not discriminate direct from indirect ("downstream") effects. Thus, most of the identified N-termini will **not** be direct protease substrates, even if their change in protein abundance is statistically significant. To identify direct protease substrates, you have to compare the prime and non-prime amino acids of each identified N-terminus with the protease cleavage motif.
+> Be careful when interpreting the results of N-Tails experiments. While the technique **is** fit to identify direct protease substrates, it does not discriminate direct from indirect ("downstream") effects. Thus, most of the identified N-termini will **not** be direct protease substrates, even if their change in protein abundance is statistically significant. To identify direct protease substrates, you have to further validate substrate candidates by comparing the prime and non-prime amino acids of each identified N-terminus with the protease cleavage motif. This information can be extracted from the peptide IDs, but this step is so far not included in the workflow.
 >
-> This is not specific for the N-Tails technique, but applies as well to other proteomic N-terminal screening techniques (e.g. COFRADIC).
-> {: .comment}
+> Lacking discrimination between direct and indirect effects is a general restriction also in other N-terminal screening techniques (e.g. COFRADIC), and is not specific for the N-Tails technique.
+{: .comment}
 
 This workflow was originally built in the OpenMS framework "TOPPAS" and published in [Lai, Weisser et al., MCP, 2016](https://www.ncbi.nlm.nih.gov/pubmed/27087653). It was converted to OpenMS v2.1, rebuild for the Galaxy framework and tested on the original dataset by Melanie Föll. It was designed for data analysis of a three samples combined in one MS run, a technique based on dimethyl stable isotope labeling (SIL). For more information on SIL, consult [this tutorial](../../tutorials/proteinQuant_SIL.md). The original data were generated using pre-fractionation. Thus, peptides of one biological experiment are measured in multiple consecutive MS runs (one run per fraction). 
 
 The figure below gives an overview of the used Galaxy nodes. For further description of the workflow, please consider the [original publication](https://www.ncbi.nlm.nih.gov/pubmed/27087653).
 
 ![N-Tails Galaxy Workflow](../../images/wf_ntails_tripleDimethylLabel.png)
+
+Notice that the given digestion enzyme is "ArgC", even if the proteins were digested using trypsin. Due to the used labelling method prior to digestion, lysine ("K") residues are dimethylated. Therefore, trypsin will not cut c-terminal of lysine, but only c-terminal of arginine in a N-TAILS experiment. This resembles the ArgC specificity and generally results in longer peptides [Rogers and Overall, MCP, 2013](http://www.mcponline.org/content/12/12/3532.full).
 
 ## Input
 
@@ -33,7 +35,7 @@ The workflow needs two input files:
 ## Customizing the Workflow
 
 - *Running the workflow on a non-prefractionated sample:* Simply use only one file as an input.
-- *Running the workflow on a double dimethyl labeling (only light and heavy labeling):* remove the third `MSGFPlusAdapter` :wrench: and the following `PeptideIndexer` :wrench: . Make sure that the mass changes are correctly given in the `MSGFPlusAdapter` :wrench: .
+- *Running the workflow on a double dimethyl labeling (only light and heavy labeling):* remove the third `MSGFPlusAdapter` :wrench: and the following `PeptideIndexer` :wrench: . Make sure that the mass changes are correctly given in the `MSGFPlusAdapter` :wrench: and in the `FeatureFinderMultiplex` :wrench: .
 
 ## Citation
 
