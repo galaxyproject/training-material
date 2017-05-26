@@ -22,10 +22,6 @@ In the following we will process a dataset with a mapper, 'Bowtie2', and we will
 > We will process data inside Galaxy with Bowtie2 and have a look at the results.
 >
 > 1. Load the ['GSM461178_untreat_paired_subset_1.fastq'](https://zenodo.org/record/61771/files/GSM461178_untreat_paired_subset_1.fastq) dataset from [Zenodo](https://zenodo.org/record/61771) into Galaxy. 
->
->    > ### :nut_and_bolt: Comments
->    > If you are using the [Freiburg Galaxy instance](http://galaxy.uni-freiburg.de), you can load the dataset using 'Shared Data' -> 'Data Libraries' -> 'Galaxy Courses' -> 'RNA-Seq' -> 'fastq'
->    {: .comment}
 >    
 >    > ### :bulb: Tip: Importing data via links
 >    >

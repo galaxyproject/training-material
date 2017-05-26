@@ -602,7 +602,7 @@ Open http://127.0.0.1:9090/ in your web browser to view your new tool
 ```bash
 $ . ~/.venv_planemo/bin/activate  # not mandatory
 $ planemo conda_init
-$ export PATH=~/miniconda2/bin:$PATH
+$ export PATH=~/miniconda3/bin:$PATH
 $ conda config --add channels conda-forge
 $ conda config --add channels defaults
 $ conda config --add channels r
@@ -1002,8 +1002,8 @@ conda install pyyaml
 ```bash
 $ conda create -n yaml pyyaml
 $ conda env list
-yaml        *  ~/miniconda2/envs/yaml
-root             ~/miniconda2
+yaml        *  ~/miniconda3/envs/yaml
+root             ~/miniconda3
 $ source activate yaml
 (yaml) $
 ```
@@ -1018,10 +1018,10 @@ $ source activate yaml
 $ vi ~/.bashrc
 ```
 ```bash
-function conda2activate () {
-  export PATH=~/miniconda2/bin:$PATH; }
-function conda2deactivate () {
-  export PATH=$(echo $PATH | sed "s|$HOME/miniconda2/bin:||g"); }
+function conda3activate () {
+  export PATH=~/miniconda3/bin:$PATH; }
+function conda3deactivate () {
+  export PATH=$(echo $PATH | sed "s|$HOME/miniconda3/bin:||g"); }
 ```
 
 ---
@@ -1058,7 +1058,7 @@ function conda2deactivate () {
 #### Steps
 1. Fill a `<requirement>` tag to target a `seqtk` conda package
 2. Use `planemo conda_install .` to install tools and set an environment
-3. Use `planemo test --conda_dependency_resolution`
+3. Use `planemo test`
 
 ???
 
@@ -1067,7 +1067,7 @@ function conda2deactivate () {
 # 2.
 planemo conda_install .
 # 3.
-planemo test --conda_dependency_resolution # seqtk_seq_step4.xml
+planemo test # seqtk_seq_step4.xml
 ```
 
 ---
@@ -1163,9 +1163,9 @@ mkdir -p $PREFIX/bin
 cp *.py $PREFIX/bin
 ```
 <small>
-- $PREFIX is a variable defined by conda when building the package
-- $PREFIX usually contains `bin/` `lib/` `include/` that are filled with the package files
-- $PREFIX will be loaded in the user environment at runtime: PATH, LD_LIBRARY_PATH, PYTHONPATH, ...
+- `$PREFIX` is a variable defined by conda when building the package
+- `$PREFIX` usually contains `bin/` `lib/` `include/` that are filled with the package files
+- `$PREFIX` will be loaded in the user environment at runtime: `PATH`, `LD_LIBRARY_PATH`, `PYTHONPATH`, ...
 </small>
 
 ---
@@ -1193,6 +1193,9 @@ $ conda install conda-build
 $ conda build .
 
 ```
+
+(`planemo conda_init` now includes `conda-build` so that first command may not be needed.)
+
 1. BUILD START: Builds/Compiles the package
 2. BUILD START: Provides a .tar.bz2
 3. TEST START: Installs the .tar.bz2 previously generated
@@ -1209,7 +1212,7 @@ To continue your `planemo test`, you may want to use your new package before it'
 
 Get the path of your new package .tar.bz2
 ```bash
-conda install ~/miniconda2/conda-bld/linux-64/bwa-0.7.15-0.tar.bz2
+conda install ~/miniconda3/conda-bld/linux-64/bwa-0.7.15-0.tar.bz2
 ```
 
 ---
@@ -1234,6 +1237,8 @@ conda install ~/miniconda2/conda-bld/linux-64/bwa-0.7.15-0.tar.bz2
 7. Create a Pull Request on `bioconda/bioconda-recipes.git`
 8. Wait for the functional tests to pass on the master branch
 9. Enjoy your new Conda package installed from https://anaconda.org/bioconda
+
+See [Contributing with GitHub](github_contribution.html)
 
 ---
 
@@ -1363,7 +1368,7 @@ quit
 
 ![](../images/macro.png)
 
-.footnote[[Planemo documents about macros ](http://planemo.readthedocs.io/en/latest/_writing_suites.html#macros)]
+.footnote[[Planemo documents about macros ](http://planemo.readthedocs.io/en/latest/writing_advanced.html?highlight=macros#macros-reusable-elements)]
 
 ---
 
@@ -1450,39 +1455,141 @@ trinity.xml
 
 ```xml
 <command><![CDATA[
-${input_foobar.ext}
+# Email’s numeric ID (id column of galaxy_user table in the database)
+echo $__user_id__
 
---search_pfam "${ filter( lambda x: str( x[0] ) == str( $search.pfam_db ),
-  $__app__.tool_data_tables[ 'pfam_databases' ].get_fields() )[0][-1] }"
+# User’s email address
+echo $__user_email__
 
-library $__app__.config.user_library_import_dir/$__user_email__/$inputs.library
+# The galaxy.app.UniverseApplication instance, gives access to all other configuration file variables.
+# Should be used as a last resort, may go away in future releases.
+echo $__app__.config.user_library_import_dir
+echo $__app__.tool_data_tables[ 'pfam_databases' ].get_fields() )[0][-1]
 
-#if isinstance( $input1.datatype,
-  $__app__.datatypes_registry.get_datatype_by_extension('gff').__class__):
+# Check a dataset type
+#if $input1.is_of_type('gff'):
+    echo "input1 type is ${input1.datatype}"
+#end if
 ]]></command>
 ```
-.footnote[[Reserved Variables List](https://docs.galaxyproject.org/en/latest/dev/schema.html#tool-command)]
+.footnote[[Reserved Variables List](https://docs.galaxyproject.org/en/latest/dev/schema.html#reserved-variables)]
+
+---
+
+### Multiple input
+
+```xml
+<param name="..." type="data" format="txt" label="..." help="..." />
+```
+
+![](../images/input_data.png)
+
+Possible to select multiple dataset:
+
+![](../images/input_data_multiple.png)
+
+- Useful to launch the same tool on multiple datasets independently
+- One job per dataset
+
+---
+
+### Multiple input
+
+```xml
+<param name="..." type="data" format="txt" multiple="true" label="..." help="..." />
+```
+
+![](../images/input_data_multiple2.png)
+
+In the command:
+
+```xml
+<command><![CDATA[
+...
+#for $input in $inputs
+    --input "$input"
+#end for
+]]></command>
+```
+
+One job for all selected dataset
+
+---
+
+### Multiple output
+
+```xml
+<outputs>
+    <data format="txt" name="output">
+        <discover_datasets pattern="__designation_and_ext__"
+            directory="output_dir" visible="true" />
+    </data>
+</outputs>
+```
+
+- `__designation_and_ext__`: a predefined regexp,
+
+- catches the dataset identifier + the datatype
+
+If the output file extension is not present/usable:
+
+```xml
+<outputs>
+    <data format="txt" name="output">
+        <discover_datasets pattern="__designation__" format="txt"
+            directory="output_dir" visible="true" />
+    </data>
+</outputs>
+```
 
 ---
 
 ### Dataset collection
 
-To group related datasets, and treat them as a single unit
+To group related datasets, and treat them as a single entity
 
-- `list`: a simple list of files
-- `paired`: a pair of files, `forward` and `reverse` for NGS
+- `list`: a simple list of datasets
+- `paired`: a pair of datasets, `forward` and `reverse` for NGS
 - composite: e.g. `list:paired` for a list of dataset pairs
+
+Usage
+
+- Useful to launch a workflow on many samples
+- Sample names are kept along the workflow: `element_identifier`
+- Galaxy tools are available to manipulate collections
+
+---
+
+.center[### Dataset collection]
+
+.center[Creation from history]
+
+.pull-left[
+![](../images/historyWithCheckboxes.png)
+]
+
+.pull-right[
+![](../images/buildPairs.png)
+]
+
+---
+
+### Dataset collection
+
+Creation when uploading (>=17.05)
+
+![](../images/upload_collection.png)
 
 ---
 
 ### Dataset collection > input
 
-Accept both datasets and collections:
-
 ```xml
 <param type="data" multiple="true" name="inputs" label="Input BAM(s)"
   format="bam" />
 ```
+
+![](../images/input_data_collection.png)
 
 Accept only collections:
 
@@ -1490,8 +1597,6 @@ Accept only collections:
 <param type="data_collection" collection_type="list|paired|list:paired|..."
   name="inputs" label="Input BAM(s)" format="bam" />
 ```
-
-In the command:
 
 ```xml
 <command><![CDATA[
@@ -1525,9 +1630,8 @@ Unknown number of files:
 ```
 
 
-`__name_and_ext__`: a predefined regexp,
-
-catches the dataset identifier + the format
+- `__name_and_ext__`: a predefined regexp,
+- catches the dataset identifier + the datatype
 
 ---
 
@@ -1579,7 +1683,7 @@ blastn -query foo_bar -num_threads 4
 - Datatype can be detected or user specified
 - Gain of usability
 
-.footnote[[Documentation: Adding Datatypes](https://wiki.galaxyproject.org/Admin/Datatypes/Adding%20Datatypes)]
+.footnote[[Documentation: Adding Datatypes](https://galaxyproject.org/admin/datatypes/adding-datatypes/)]
 
 ---
 
