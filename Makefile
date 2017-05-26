@@ -30,6 +30,7 @@ clean :
 	@find . -name .DS_Store -exec rm {} \;
 	@find . -name '*~' -exec rm {} \;
 
+## install          : install dependencies
 install:
 	gem install jekyll
 	gem install jemoji

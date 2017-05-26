@@ -61,7 +61,9 @@ layout: base
 
                 {% elsif material.type == "tutorial" %}
                     <td>
-                        {% if material.hands_on == "yes" %}
+                        {% if material.hands_on == "external" %}
+                        <a href="{{ material.hands_on_url }}">:link:</a>
+                        {% elsif material.hands_on == "yes" %}
                         <a href="{{ site.url }}{{ page.url }}tutorials/{{ material.name }}">:book:</a>
                         {% elsif material.hands_on == "github" %}
                         <a href="{{ site.github_repository }}/tree/master/{{ topic.name }}/tutorials/{{ material.name }}.md">:book:</a>
