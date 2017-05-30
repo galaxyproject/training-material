@@ -82,7 +82,7 @@
 ### See the tutorial:
 
 #### ["Move from dev instance to production instance"](dev_to_production.html)
-![](../images/you.jpg
+![](../images/you.jpg)
 
 ---
 
