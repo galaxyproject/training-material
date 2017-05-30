@@ -232,6 +232,97 @@ material:
     key_points:
     - "A Galaxy Webhook provides an easy way to customize the Galaxy UI with plugins"
     - "Right now there are 4 entry points: tool, workflow, masthead, history-menu"
+-
+    title: "Tool Dependencies and Conda"
+    type: "tutorial"
+    name: "conda"
+    zenodo_link: ""
+    galaxy_tour: ""
+    hands_on: "external"
+    hands_on_url: "http://planemo.readthedocs.io/en/latest/writing_standalone.html"
+    slides: "yes"
+
+    questions:
+    - "How can I connect tools to applications and libraries?"
+    - "What are the advantages of declaring dependencies for my tool?"
+    - "What are Conda and Bioconda?"
+    - "What are Conda recipes and environments?"
+    - "How do I find and use existing Conda recipes?"
+    - "How do I develop Conda recipes for use within Galaxy tools?"
+
+    objectives:
+    - "Learn to use existing Conda recipes to enable best practice tool dependency management in Galaxy."
+    - "Learn the basics of building Conda recipes and contributing to Bioconda."
+    - "Learn to use Planemo to assist in developing Galaxy tools from existing and new Conda recipes."
+
+    time_estimation: "1.25h"
+
+    requirements:
+    -
+        title: "Tool development and integration into Galaxy"
+        type: "internal"
+        link: "/Dev-Corner/"  # TODO: More percise link?
+
+    key_points:
+    - "Conda and Bioconda are Galaxy best practices for connecting Galaxy tools to underlying applications and libraries."
+    - "Leveraging Conda allows easy installation of your tool's dependencies by Galaxy deployers."
+    - "The Planemo commands `conda_search`, `conda_init`, `conda_install`, `lint`, `test`, and `serve` make it easy to search and use existing Conda recipes when developing tools."
+    - "Conda recipe skeletons, `conda build`, and with `planemo conda_install --conda_use_local` allow easy development of new Conda recipes at the same time as Galaxy tools that wrap them."
+    - "Bioconda is a Galaxy best practice Conda channel for recipe publication."
+    - "Bioconda has easy to follow contribution guidelines and is very welcoming to new contributors."
+
+-
+    title: "Tool Dependencies and Containers"
+    type: "tutorial"
+    name: "containers"
+    zenodo_link: ""
+    galaxy_tour: ""
+    hands_on: "external"
+    hands_on_url: "http://planemo.readthedocs.io/en/latest/writing_standalone.html"
+    slides: "yes"
+
+    questions:
+    - "What are the advantages of running my Galaxy tool inside of a container?"
+    - "How does Galaxy find a container to run my tool in?"
+    - "What are BioContainers and how are they related to Galaxy?"
+
+    objectives:
+    - "Explore the differences between containerizing Galaxy and tool execution."
+    - "Discuss the advantages of containerizing tools."
+    - "Learn to build best practice tools ready to be containerized."
+
+    time_estimation: "45m"
+
+    requirements:
+    -
+        title: "Tool development and integration into Galaxy"
+        type: "internal"
+        link: "/Dev-Corner/"  # TODO: More percise link?
+
+    key_points:
+    - "It is becoming easier, more advantageous, and more common for Galaxy admins to run all tools within their own container."
+    - "You can explicitly define a container for your tool - but it is easier and more reproducible to let Galaxy find or build one using your tool's best practice requriements."
+    - "The Galaxy community will infrastructure to automatically build and/or publish containers for your tool as long as it defines best practice Conda dependencies."
+    - "Planemo makes it easy to test your tool inside of containers."
+
+-
+    title: "Galaxy Code Architecture"
+    type: "tutorial"
+    name: "architecture"
+    zenodo_link: ""
+    galaxy_tour: ""
+    slides: "yes"
+
+    questions:
+    - "How is the Galaxy code structured?"
+
+    objectives:
+    - "Explore various aspects of the Galaxy codebase."
+
+    time_estimation: "2.5h"
+
+    requirements: []
+    key_points: []
 
 maintainers:
 -
@@ -252,6 +343,10 @@ contributors:
     name: "Bérénice Batut"
     github_username: "bebatut"
     email: ""
+-
+    name: "John Chilton"
+    github_username: "jmchilton"
+    email: "jmchilton@gmail.com"
 -
     name: "Gildas Le Corguillé"
     github_username: "lecorguille"
