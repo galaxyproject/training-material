@@ -137,7 +137,7 @@ create a collection now:
 > convention, so that our tools will know which files belong together.
 >
 > 1. Click on the **checkmark icon** at top of your history.
->   ![](../../shared/images/history_menu_buttons2.png)
+>   ![](../../../../shared/images/history_menu_buttons2.png)
 >
 > 2. Select all the fastq files (40 in total), then click on **for all selected..** and select
 >   **Build List of Dataset Pairs** from the dropdown menu.
@@ -198,7 +198,7 @@ fragment, resulting in an overlap in the middle. We will now combine these pairs
 >    > ### :bulb: Collections as input
 >    > To provide a collection as input for a tool, click on the `Dataset collection` button in front
 >    > of the parameter. The drop-down menu will now list collections as possible inputs.
->    > ![](../../shared/images/tools_collection_input.png)
+>    > ![](../../../../shared/images/tools_collection_input.png)
 >    {: .tip}
 {: .hands_on}
 
@@ -1532,12 +1532,12 @@ instance we can convert our shared file to the more widely used `biom` format an
 > The Galaxy project runs an instance of Phinch, and if you look at the output biom file, you will see a link
 > to view the file at Phinch:
 >
-> ![](../../shared/images/viewatphinch.png)
+> ![](../../../../shared/images/viewatphinch.png)
 >
 > Clicking on this link will lead you to the Phinch website, which will automatically load in your file, and
 > where you can several interactive visualisations:
 >
-> ![](../../shared/images/phinch_overviewpage.png)
+> ![](../../../../shared/images/phinch_overviewpage.png)
 {: .hands_on}
 
 ## Krona

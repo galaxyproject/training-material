@@ -97,9 +97,9 @@ Have a look at each file.
 
 Tables of results from **(a)** Simple assembly and **(b)** optimised assembly.
 
-**(a)** ![](../images/image12.png)
+**(a)** ![](../../images/image12.png)
 
-**(b)** ![](../images/optstats.png)
+**(b)** ![](../../images/optstats.png)
 
 # Assemble with SPAdes
 
@@ -127,7 +127,7 @@ You will now have 5 new files in your history:
 
 Examine each file, especially the stats files.
 
-![](../images/contig_stats.png)
+![](../../images/contig_stats.png)
 
 > ### :question: Questions
 >

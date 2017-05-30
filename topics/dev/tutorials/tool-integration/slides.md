@@ -255,7 +255,7 @@ help="..."/>
 
 ### `inputs` > `param` > `boolean`
 
-![](../images/input_boolean.png)
+![](../../images/input_boolean.png)
 
 ```xml
 <param name="..." type="boolean" checked="false" truevalue="--log" falsevalue=""
@@ -944,13 +944,13 @@ Local installation using `conda` package
 
 ---
 
-![](../../shared/images/conda_logo.png)
+![](../../../../shared/images/conda_logo.png)
 
 Package, dependency and environment management
 
 ---
 
-.image-50[![](../../shared/images/conda_logo.png)]
+.image-50[![](../../../../shared/images/conda_logo.png)]
 
 - Based on recipes describing how to install the software which are then built for their distribution
 - No compilation at installation: binaries with their dependencies, libraries...
@@ -958,7 +958,7 @@ Package, dependency and environment management
 
 ---
 
-###.image-25[![](../../shared/images/conda_logo.png)] <br/> Conda distributions
+###.image-25[![](../../../../shared/images/conda_logo.png)] <br/> Conda distributions
 
 ```
 
@@ -968,7 +968,7 @@ Package, dependency and environment management
 
 ---
 
-###.image-25[![](../../shared/images/conda_logo.png)] <br/> Channels
+###.image-25[![](../../../../shared/images/conda_logo.png)] <br/> Channels
 
 - Packages through channels within Continuum.Anaconda
 - Conda channel searched by Galaxy for packages:
@@ -980,7 +980,7 @@ Package, dependency and environment management
 
 ---
 
-###.image-25[![](../../shared/images/conda_logo.png)] <br/> Quickstart
+###.image-25[![](../../../../shared/images/conda_logo.png)] <br/> Quickstart
 #### Use Conda outside Planemo
 
 - Install a package
@@ -1003,7 +1003,7 @@ $ source activate yaml
 
 ---
 
-###.image-25[![](../../shared/images/conda_logo.png)] <br/> Tips and tricks
+###.image-25[![](../../../../shared/images/conda_logo.png)] <br/> Tips and tricks
 #### Because you don't want Conda binaries all the time in your $PATH
 <small>Conda masks some of your binaries like python (with all corresponding python modules) with its own versions</small>
 
@@ -1065,7 +1065,7 @@ planemo test # seqtk_seq_step4.xml
 
 ---
 
-###.image-25[![](../../shared/images/conda_logo.png)] <br/> Writing a Conda recipe
+###.image-25[![](../../../../shared/images/conda_logo.png)] <br/> Writing a Conda recipe
 
 You can create a new Conda package. This will be necessary if a specific tool or version is not available.
 
@@ -1073,7 +1073,7 @@ You can create a new Conda package. This will be necessary if a specific tool or
 
 ---
 
-###.image-25[![](../../shared/images/conda_logo.png)] <br/> Writing a Conda recipe
+###.image-25[![](../../../../shared/images/conda_logo.png)] <br/> Writing a Conda recipe
 #### Files
 
 - `meta.yaml`: contains all the metadata of the recipe
@@ -1081,7 +1081,7 @@ You can create a new Conda package. This will be necessary if a specific tool or
 
 ---
 
-###.image-25[![](../../shared/images/conda_logo.png)] <br/> Writing a Conda recipe
+###.image-25[![](../../../../shared/images/conda_logo.png)] <br/> Writing a Conda recipe
 #### `meta.yaml` basic information
 
 ```yaml
@@ -1103,7 +1103,7 @@ source:
 
 ---
 
-###.image-25[![](../../shared/images/conda_logo.png)] <br/> Writing a Conda recipe
+###.image-25[![](../../../../shared/images/conda_logo.png)] <br/> Writing a Conda recipe
 #### `meta.yaml` requirements
 
 ```yaml
@@ -1124,7 +1124,7 @@ requirements:
 
 ---
 
-###.image-25[![](../../shared/images/conda_logo.png)] <br/> Writing a Conda recipe
+###.image-25[![](../../../../shared/images/conda_logo.png)] <br/> Writing a Conda recipe
 #### `meta.yaml` test
 
 ```yaml
@@ -1141,7 +1141,7 @@ They need to return 0 on success.
 
 ---
 
-###.image-25[![](../../shared/images/conda_logo.png)] <br/> Writing a Conda recipe
+###.image-25[![](../../../../shared/images/conda_logo.png)] <br/> Writing a Conda recipe
 #### `build.sh`
 
 ```bash
@@ -1163,7 +1163,7 @@ cp *.py $PREFIX/bin
 
 ---
 
-###.image-25[![](../../shared/images/conda_logo.png)] <br/> Writing a Conda recipe
+###.image-25[![](../../../../shared/images/conda_logo.png)] <br/> Writing a Conda recipe
 #### Building recipe skeletons
 
 - `conda skeleton pypi <packagename>`
@@ -1177,7 +1177,7 @@ Generates pre-filled recipes <small>(not guaranteed to work out of the box)</sma
 
 ---
 
-###.image-25[![](../../shared/images/conda_logo.png)] <br/> Writing a Conda recipe
+###.image-25[![](../../../../shared/images/conda_logo.png)] <br/> Writing a Conda recipe
 #### `conda build` and test the package
 
 ```bash
@@ -1197,7 +1197,7 @@ $ conda build .
 
 ---
 
-###.image-25[![](../../shared/images/conda_logo.png)] <br/>  Install a Conda package for test
+###.image-25[![](../../../../shared/images/conda_logo.png)] <br/>  Install a Conda package for test
 #### `conda install`
 
 To continue your `planemo test`, you may want to use your new package before it's available through an official channel.
@@ -1210,7 +1210,7 @@ conda install ~/miniconda3/conda-bld/linux-64/bwa-0.7.15-0.tar.bz2
 
 ---
 
-.image-75[![](../../shared/images/bioconda_logo.png)]
+.image-75[![](../../../../shared/images/bioconda_logo.png)]
 
 
 - A channel dedicated to bioinformatics packages https://anaconda.org/bioconda
@@ -1219,7 +1219,7 @@ conda install ~/miniconda3/conda-bld/linux-64/bwa-0.7.15-0.tar.bz2
 
 ---
 
-###.image-25[![](../../shared/images/bioconda_logo.png)]
+###.image-25[![](../../../../shared/images/bioconda_logo.png)]
 
 1. Clone `bioconda/bioconda-recipes.git` or a fork
 2. Create a new branch "package_new_login"
@@ -1686,7 +1686,7 @@ blastn -query foo_bar -num_threads 4
 
 .image-50[![](../../images/planemo-logo.png)]
 
-.image-50[![](../../shared/images/conda_logo.png)]
+.image-50[![](../../../../shared/images/conda_logo.png)]
 
 ---
 
@@ -1702,11 +1702,11 @@ blastn -query foo_bar -num_threads 4
 
 ---
 
-.image-50[![](../../shared/images/ansible_logo.png)]
+.image-50[![](../../../../shared/images/ansible_logo.png)]
 
-.image-50[![](../../shared/images/conda_logo.png)]
+.image-50[![](../../../../shared/images/conda_logo.png)]
 
-.image-50[![](../../shared/images/docker_logo.png)]
+.image-50[![](../../../../shared/images/docker_logo.png)]
 
 ---
 

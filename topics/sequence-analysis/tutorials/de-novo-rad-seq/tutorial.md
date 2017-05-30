@@ -206,4 +206,4 @@ Run `Stacks: De novo map` Galaxy tool. This program will run ustacks, cstacks, a
 In this tutorial, we have analyzed real RAD sequencing data to extract useful information, such as which loci are candidate regarding the genetic differentiation between freshwater and oceanic Stickelback populations. To answer these questions, we analyzed RAD sequence datasets using a de novo RAD-seq data analysis approach. This approach can be sum up with the following scheme:
 
 
-![](../images/denovo_based_workflow.PNG)
+![](../../images/denovo_based_workflow.PNG)

@@ -59,7 +59,7 @@ parents and a child exome data
 
 ### Similar data analysis approach
 
-![](../../images/genVAST.png)
+![](../images/genVAST.png)
 
 ---
 

@@ -18,7 +18,7 @@ RNA sequencing
 
 ### Where does my data come from?
 
-![](../../images/RNA_seq_zang2016.png)
+![](../images/RNA_seq_zang2016.png)
 
 <small>[*Zang and Mortazavi, Nature, 2012*](http://www.nature.com/ni/journal/v13/n9/full/ni.2407.html)</small>
 
@@ -26,7 +26,7 @@ RNA sequencing
 
 ### Principle of RNA sequencing
 
-![](../../images/korf_2013.jpg)
+![](../images/korf_2013.jpg)
 
 <small>[*Korf, Nat Met, 2013*](http://www.nature.com/nmeth/journal/v10/n12/full/nmeth.2735.html)</small>
 
@@ -42,7 +42,7 @@ RNA sequencing
 
 ### Benefits of RNA sequencing
 
-![](../../images/wordcloud.png)
+![](../images/wordcloud.png)
 
 ---
 
@@ -89,7 +89,7 @@ IIIHIIIIIIIIIIIIIIIIIIIIIIIIIH!CBCBBBB@=B@A?1@==<@=
 
 ### RNA quantification
 
-![](../../images/pepke_2009.jpg)
+![](../images/pepke_2009.jpg)
 
 <small>[*Pepke et al, Nat Met, 2009*](http://www.nature.com/nmeth/journal/v6/n11s/full/nmeth.1371.html)</small>
 
@@ -97,7 +97,7 @@ IIIHIIIIIIIIIIIIIIIIIIIIIIIIIH!CBCBBBB@=B@A?1@==<@=
 
 ### Overview of the Data Processing
 
-![](../../images/rna_quantification.png)
+![](../images/rna_quantification.png)
 
 - No available standardized workflow 
 - Multiple possible best practices for every dataset
@@ -106,7 +106,7 @@ IIIHIIIIIIIIIIIIIIIIIIIIIIIIIH!CBCBBBB@=B@A?1@==<@=
 
 ## Data Pre-processing
 
-.image-50[![](../../images/rna_quantification_preprocessing.png)]
+.image-50[![](../images/rna_quantification_preprocessing.png)]
 
 1. Adapter clipping to trim the sequencing adapters 
 2. Quality trimming to remove wrongly called and low quality bases

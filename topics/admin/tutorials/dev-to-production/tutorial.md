@@ -25,7 +25,7 @@ The basic installation instructions are suitable for developpement only.
 For setting up a Galaxy for a multi-user production environment additonal steps are necessary.
 After a basic installation, this tutorial present the main steps for moving from a basic installation to a production environment. 
 
-<img src="../../../../images/scheme-dev_to_production.png" style="width: 600px;"/>
+<img src="../../images/scheme-dev_to_production.png" style="width: 600px;"/>
 
 
 # Basic Installation

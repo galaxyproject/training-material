@@ -96,13 +96,13 @@ Complete list: [bit.ly/gxysemipublic](http://bit.ly/gxysemipublic)
 ]
 
 .pull-right[
-[.image-75[![](../../shared/images/cloudman_based_server_landing_page.png)]](http://wiki.galaxyproject.org/CloudMan)
+[.image-75[![](../../../../shared/images/cloudman_based_server_landing_page.png)]](http://wiki.galaxyproject.org/CloudMan)
 ]
 ---
 
 ### CloudMan
 
-[.image-25[![](../../shared/images/cloudman_management_console_showing_autoscaled_w_1_worker.png)]](http://wiki.galaxyproject.org/CloudMan)
+[.image-25[![](../../../../shared/images/cloudman_management_console_showing_autoscaled_w_1_worker.png)]](http://wiki.galaxyproject.org/CloudMan)
 
 CloudMan enables you to statically or dynamically scale compute power
 
