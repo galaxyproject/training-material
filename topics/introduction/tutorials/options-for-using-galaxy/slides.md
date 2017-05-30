@@ -34,7 +34,7 @@ This deck lists options for using Galaaxy outside of a training context.
 ![](../../images/GTNLogo1000.png)
 
 [.image-25[![](../../images/public_server_galaxeast.png)]](https://galaxyproject.org/public-galaxy-servers/#galaxeast)
-[.image-25[![](../images/public_servers_odometer_count.png)]](https://galaxyproject.org/public-galaxy-servers/)
+[.image-25[![](../../images/public_servers_odometer_count.png)]](https://galaxyproject.org/public-galaxy-servers/)
 [.image-25[![](../../images/public_server_gigagalaxy.png)]](https://galaxyproject.org/public-galaxy-servers/#gigagalaxy)
 [.image-25[![](../../images/public_server_genomichyperbrowser.png)]](https://hyperbrowser.uio.no/hb/)
 [.image-25[![](../../images/public_server_lappsgrid.png)]](https://galaxy.lappsgrid.org/)

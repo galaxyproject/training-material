@@ -135,7 +135,7 @@ Run `Stacks: De novo map` Galaxy tool. This program will run `ustacks`, `cstacks
 >
 >    Here are `sample1.snps` (left) and `sample2.snps` (right)
 >
->    ![](../../images/RAD2_Genetic_Map/denovo_map_matches1.png)
+>    ![](../../images/RAD2_Genetic_Map/denovo_map_matches1.PNG)
 >
 >    Catalog_ID (= catalog Stacks_ID) is composed by the `Stack_ID` from the "reference" individual, here sample1, but number is different from sample2 `Stack_ID`. Thus, in the `catalog.alleles.tsv`, the `Stack_ID` numbered 3 correspond to the `Stack_ID` number 16 from sample2!
 >
