@@ -31,7 +31,6 @@ This deck lists options for using Galaaxy outside of a training context.
 ---
 
 ### Public Galaxy Servers
-![](../../images/GTNLogo1000.png)
 
 [.image-25[![](../../images/public_server_galaxeast.png)]](https://galaxyproject.org/public-galaxy-servers/#galaxeast)
 [.image-25[![](../../images/public_servers_odometer_count.png)]](https://galaxyproject.org/public-galaxy-servers/)
