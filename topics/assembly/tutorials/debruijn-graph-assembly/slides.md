@@ -20,7 +20,7 @@ class: enlarge120
 * Sequences can be reconstructed by moving between nodes in graph
 ]
 .pull-right[
-.image-50[![](../images/debruijn.png)]
+.image-50[![](../../images/debruijn.png)]
 ]
 ---
 .enlarge120[# **de Bruijn Graphs**
@@ -30,17 +30,17 @@ class: enlarge120
 * Edges represent consecutive k-mers (which overlap by k-1 symbols)
 ]
 Consider the 2 symbol alphabet (0 & 1) de Bruijn Graph for k =3
-![](../images/debruijn01.png)
+![](../../images/debruijn01.png)
 ---
 .enlarge120[# **Producing sequences**
 
 * Sequences of symbols are produced by moving through the graph
 ]
-![](../images/debruijn02.png)
+![](../../images/debruijn02.png)
 
 ---
 .enlarge120[
-# **K-mers?**       .pull-right[.image-25[![](../images/specialk.png)]]
+# **K-mers?**       .pull-right[.image-25[![](../../images/specialk.png)]]
 
 
 <hr>
@@ -54,62 +54,62 @@ Consider the 2 symbol alphabet (0 & 1) de Bruijn Graph for k =3
 ]
 ---
 .enlarge120[
-# **What are K-mers?**       .pull-right[.image-25[![](../images/specialk.png)]]]
-![](../images/kmers01.png)
+# **What are K-mers?**       .pull-right[.image-25[![](../../images/specialk.png)]]]
+![](../../images/kmers01.png)
 
 ---
 .enlarge120[
-# **K-mers de Bruijn graph**       .pull-right[.image-25[![](../images/abc.png)]]]
-![](../images/ex1-1.png)
+# **K-mers de Bruijn graph**       .pull-right[.image-25[![](../../images/abc.png)]]]
+![](../../images/ex1-1.png)
 ---
 .enlarge120[
-# **K-mers de Bruijn graph**       .pull-right[.image-25[![](../images/abc.png)]]]
-![](../images/ex1-2.png)
+# **K-mers de Bruijn graph**       .pull-right[.image-25[![](../../images/abc.png)]]]
+![](../../images/ex1-2.png)
 ---
 .enlarge120[
-# **K-mers de Bruijn graph**       .pull-right[.image-25[![](../images/abc.png)]]]
-![](../images/ex1-3.png)
+# **K-mers de Bruijn graph**       .pull-right[.image-25[![](../../images/abc.png)]]]
+![](../../images/ex1-3.png)
 ---
 .enlarge120[
-# **K-mers de Bruijn graph**       .pull-right[.image-25[![](../images/abc.png)]]]
-![](../images/ex1-4.png)
+# **K-mers de Bruijn graph**       .pull-right[.image-25[![](../../images/abc.png)]]]
+![](../../images/ex1-4.png)
 
 ---
 .enlarge120[
-# **The problem of repeats**       .pull-right[.image-25[![](../images/repeatlogo.png)]]]
-![](../images/ex2-1.png)
+# **The problem of repeats**       .pull-right[.image-25[![](../../images/repeatlogo.png)]]]
+![](../../images/ex2-1.png)
 ---
 .enlarge120[
-# **The problem of repeats**       .pull-right[.image-25[![](../images/repeatlogo.png)]]]
-![](../images/ex2-2.png)
+# **The problem of repeats**       .pull-right[.image-25[![](../../images/repeatlogo.png)]]]
+![](../../images/ex2-2.png)
 ---
 .enlarge120[
-# **The problem of repeats**       .pull-right[.image-25[![](../images/repeatlogo.png)]]]
-![](../images/ex2-3.png)
+# **The problem of repeats**       .pull-right[.image-25[![](../../images/repeatlogo.png)]]]
+![](../../images/ex2-3.png)
 ---
 .enlarge120[
-# **The problem of repeats**       .pull-right[.image-25[![](../images/repeatlogo.png)]]]
-![](../images/ex2-4.png)
+# **The problem of repeats**       .pull-right[.image-25[![](../../images/repeatlogo.png)]]]
+![](../../images/ex2-4.png)
 ---
 .enlarge120[
-# **Different k**       .pull-right[.image-25[![](../images/bigk.png)]]]
-![](../images/ex2a-1.png)
+# **Different k**       .pull-right[.image-25[![](../../images/bigk.png)]]]
+![](../../images/ex2a-1.png)
 ---
 .enlarge120[
-# **Different k**       .pull-right[.image-25[![](../images/bigk.png)]]]
-![](../images/ex2a-2.png)
+# **Different k**       .pull-right[.image-25[![](../../images/bigk.png)]]]
+![](../../images/ex2a-2.png)
 ---
 .enlarge120[
-# **Different k**       .pull-right[.image-25[![](../images/bigk.png)]]]
-![](../images/ex2a-3.png)
+# **Different k**       .pull-right[.image-25[![](../../images/bigk.png)]]]
+![](../../images/ex2a-3.png)
 ---
 .enlarge120[
-# **Different k**       .pull-right[.image-25[![](../images/bigk.png)]]]
-![](../images/ex2a-4.png)
+# **Different k**       .pull-right[.image-25[![](../../images/bigk.png)]]]
+![](../../images/ex2a-4.png)
 
 ---
 .enlarge120[
-# **Choose k wisely**       .pull-right[.image-25[![](../images/wisely.png)]]]
+# **Choose k wisely**       .pull-right[.image-25[![](../../images/wisely.png)]]]
 
 .enlarge120[
 * Lower k
@@ -127,28 +127,28 @@ Consider the 2 symbol alphabet (0 & 1) de Bruijn Graph for k =3
 ]
 ---
 .enlarge120[
-# **Read errors**       .pull-right[.image-25[![](../images/hazardsymbol.png)]]]
-.image-75[![](../images/ex3-head.png)]
-![](../images/blank.png)
+# **Read errors**       .pull-right[.image-25[![](../../images/hazardsymbol.png)]]]
+.image-75[![](../../images/ex3-head.png)]
+![](../../images/blank.png)
 ---
 .enlarge120[
-# **Read errors**       .pull-right[.image-25[![](../images/hazardsymbol.png)]]]
-.image-75[![](../images/ex3-head.png)]
-![](../images/ex3-2.png)
+# **Read errors**       .pull-right[.image-25[![](../../images/hazardsymbol.png)]]]
+.image-75[![](../../images/ex3-head.png)]
+![](../../images/ex3-2.png)
 ---
 .enlarge120[
-# **Read errors**       .pull-right[.image-25[![](../images/hazardsymbol.png)]]]
-.image-75[![](../images/ex3-head.png)]
-![](../images/ex3-3.png)
+# **Read errors**       .pull-right[.image-25[![](../../images/hazardsymbol.png)]]]
+.image-75[![](../../images/ex3-head.png)]
+![](../../images/ex3-3.png)
 ---
 .enlarge120[
-# **Read errors**       .pull-right[.image-25[![](../images/hazardsymbol.png)]]]
-.image-75[![](../images/ex3-head.png)]
-![](../images/ex3-4.png)
+# **Read errors**       .pull-right[.image-25[![](../../images/hazardsymbol.png)]]]
+.image-75[![](../../images/ex3-head.png)]
+![](../../images/ex3-4.png)
 
 ---
 .enlarge120[
-# **More coverage**       .pull-right[.image-50[![](../images/depthlogo.png)]]]
+# **More coverage**       .pull-right[.image-50[![](../../images/depthlogo.png)]]]
 
 .enlarge120[
 * Errors won't be duplicated in every read
@@ -162,8 +162,8 @@ Consider the 2 symbol alphabet (0 & 1) de Bruijn Graph for k =3
 ]
 ---
 .enlarge120[
-# **Read errors revisited**       .pull-right[.image-50[![](../images/hazardsymbol.png)]]]
-![](../images/ex3a.png)
+# **Read errors revisited**       .pull-right[.image-50[![](../../images/hazardsymbol.png)]]]
+![](../../images/ex3a.png)
 
 ---
 .enlarge120[
@@ -197,7 +197,7 @@ Consider the 2 symbol alphabet (0 & 1) de Bruijn Graph for k =3
 
 ## Step 1: Chain merging
 
-![](../images/tipclipping.png)
+![](../../images/tipclipping.png)
 
 ---
 .enlarge120[
@@ -205,7 +205,7 @@ Consider the 2 symbol alphabet (0 & 1) de Bruijn Graph for k =3
 
 ## Step 2: Tip clipping
 
-![](../images/shortnodes.png)
+![](../../images/shortnodes.png)
 
 ---
 .enlarge120[
@@ -213,7 +213,7 @@ Consider the 2 symbol alphabet (0 & 1) de Bruijn Graph for k =3
 
 
 .pull-left[
-![](../images/bubblemerging.png)
+![](../../images/bubblemerging.png)
 ]
 .pull-right[
 ## Step 3: Bubble collapsing
@@ -275,7 +275,7 @@ But: You need to choose **k** and **c** wisely!
 * Breadcrumb algorithm
 ]
 
-![](../images/breadcrumb.png)
+![](../../images/breadcrumb.png)
 
 ---
 .enlarge120[
@@ -291,7 +291,7 @@ But: You need to choose **k** and **c** wisely!
 ]
 ---
 .enlarge120[
-# **SPAdes**     .pull-right[.image-50[![](../images/spades.png)]]]
+# **SPAdes**     .pull-right[.image-50[![](../../images/spades.png)]]]
 
 .enlarge120[
 * de Bruijn graph assembler by Pavel Pevzner's group out of St. Petersburg
@@ -331,7 +331,7 @@ But: You need to choose **k** and **c** wisely!
 ]
 
 .pull-right[
-![](../images/minionpacbio.png)
+![](../../images/minionpacbio.png)
 ]
 ---
 .enlarge120[# **Bandage**
@@ -339,7 +339,7 @@ But: You need to choose **k** and **c** wisely!
 * Assembly graph viewer and manipulator
 * Written by Ryan Wick of Centre for Systems Genomics - Uni. Melbourne, Australia
 ]
-![](../images/bandage.png)
+![](../../images/bandage.png)
 
 ---
 .enlarge120[# **Assembly Exercise #3**

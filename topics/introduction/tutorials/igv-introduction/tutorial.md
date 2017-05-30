@@ -13,31 +13,31 @@ To start IGV, go to the IGV downloads page: http://www.broadinstitute.org/softwa
 ![MainWindowIGV](http://www.broadinstitute.org/software/igv/sites/cancerinformatics.org.igv/files/images/igv_desktop_callouts.jpg)
 
 
-**Tool bar** ![callout_1.jpg](images/callout_1.jpg)
+**Tool bar** ![callout_1.jpg](../../images/callout_1.jpg)
 
 - The [tool bar](http://www.broadinstitute.org/software/igv/?q=ToolBar) provides access to commonly used functions. The [menu bar](http://www.broadinstitute.org/software/igv/?q=MenuBar) and [pop-up menus](http://www.broadinstitute.org/software/igv/?q=PopupMenus) (not shown) provide access to all other functions.
 
-**Chromosome** ![callout_2.jpg](images/callout_2.jpg)
+**Chromosome** ![callout_2.jpg](../../images/callout_2.jpg)
 
 - The red box on the chromosome ideogram indicates which portion of the chromosome is displayed. When zoomed out to display the full chromosome, the red box disappears from the ideogram.
 
-**Ruler** ![callout_3.jpg](images/callout_3.jpg)
+**Ruler** ![callout_3.jpg](../../images/callout_3.jpg)
 
 - The ruler reflects the visible portion of the chromosome. The tick marks indicate chromosome locations. The span lists the number of bases currently displayed.
 
-**Tracks** ![callout_4.jpg](images/callout_4.jpg)
+**Tracks** ![callout_4.jpg](../../images/callout_4.jpg)
 
 - IGV displays data in horizontal rows called tracks. Typically, each track represents one sample or experiment. This example shows methylation, gene expression, copy number and mutation data.
 
-**Features** ![callout_5.jpg](images/callout_5.jpg)
+**Features** ![callout_5.jpg](../../images/callout_5.jpg)
 
 - IGV also displays features, such as genes, in tracks. By default, IGV displays data in one panel and features in another, as shown here. Drag-and-drop a track name to move a track from one panel to another. Combine data and feature panels by selecting that option on the General tab of the [Preferences window](http://www.broadinstitute.org/software/igv/?q=Preferences).
 
-**Track names** ![callout_6.jpg](images/callout_6.jpg)
+**Track names** ![callout_6.jpg](../../images/callout_6.jpg)
 
 - Track names are listed in the far left panel. Legibility of the names depends on the height of the tracks; i.e., the smaller the track the less legible the name.
 
-**Attributes** ![callout_7.jpg](images/callout_7.jpg)
+**Attributes** ![callout_7.jpg](../../images/callout_7.jpg)
 
 - Attribute names are listed at the top of the attribute panel. Colored blocks represent attribute values, where each unique value is assigned a unique color. Hover over a colored block to see the attribute value. Click an attribute name to sort tracks based on that attribute value.
 
@@ -161,44 +161,44 @@ To start IGV, go to the IGV downloads page: http://www.broadinstitute.org/softwa
 ## Tool Bar
 
 
-**Genome drop-down box** ![icon_genome_dropdown](images/icon_genome_dropdown.jpg)
+**Genome drop-down box** ![icon_genome_dropdown](../../images/icon_genome_dropdown.jpg)
 
 - Loads a genome.
 
-**Chromosome drop-down box** ![igv_chromdrop](images/igv_chromdrop.jpg)
+**Chromosome drop-down box** ![igv_chromdrop](../../images/igv_chromdrop.jpg)
 
 - Zooms to a chromosome.
 
-**Search box** ![searchbox](images/searchbox.jpg)
+**Search box** ![searchbox](../../images/searchbox.jpg)
 
 - Displays the chromosome location being shown.
 To scroll to a different location, enter the gene name, locus, or track name and click Go.
 
-**Whole genome view** ![icon_genome](images/icon_genome.jpg)
+**Whole genome view** ![icon_genome](../../images/icon_genome.jpg)
 
 - Zooms to whole genome view.
 
-![icon_backforward](images/icon_backforward.jpg)
+![icon_backforward](../../images/icon_backforward.jpg)
 
 - Moves backward and forward through views of the genome like the back and forward buttons in a web browser.
 
-**Refresh** ![icon_refresh](images/icon_refresh.jpg)
+**Refresh** ![icon_refresh](../../images/icon_refresh.jpg)
 
 - Refreshes the display.
 
-**Define a region** ![icon_region_of_interest](images/icon_region_of_interest.jpg)
+**Define a region** ![icon_region_of_interest](../../images/icon_region_of_interest.jpg)
 
 - Defines a region of interest on the chromosome.
 
-![icon_squish](images/icon_squish.jpg)
+![icon_squish](../../images/icon_squish.jpg)
 
 - Reduces the row height on all tracks to fit all data for the region in view into the window; will also expand tracks (to their maximum preferred size) to fill the view, if needed.
 
-![icon_popuponoff](images/icon_popuponoff.jpg)
+![icon_popuponoff](../../images/icon_popuponoff.jpg)
 
 - Toggles the pop-up information windows in IGV on or off.
 
-**Zoom slider** ![icon_zoom](images/icon_zoom.jpg)
+**Zoom slider** ![icon_zoom](../../images/icon_zoom.jpg)
 
 - Zooms in and out on a chromosome.
 
@@ -225,18 +225,18 @@ Commands in the track pop-up menu change the display options for the selected tr
 
 - Load the encode RNA-Seq BAM files: Go to File > Load from ENCODE > Select C2C12 RNA-Seq BAM files (See image in the Pdf)
 
-![load_encode_RNA-seq_BAM](images/load_encode_RNA-seq_BAM.png)
+![load_encode_RNA-seq_BAM](../../images/load_encode_RNA-seq_BAM.png)
 
 
 - Go to your favorite location in the genome by entering the location in the Search box, zoom in to the reads by using Zoom button.
 
 - You can change the track properties by right-click on the track. Select View as pairs to see the left and right pairs of paired-end reads.
 
-![view_pairs](images/view_pairs.png)
+![view_pairs](../../images/view_pairs.png)
 
 - You can make a sashimi plot to see reads aligning to each junction. Right-click > Sashimi plot.
 
-![sashimi_plot](images/sashimi_plot.png)
+![sashimi_plot](../../images/sashimi_plot.png)
 
 - Save what you see by going to File > Save Image.
 
@@ -247,11 +247,11 @@ Commands in the track pop-up menu change the display options for the selected tr
 
 - Go to File > Load from ENCODE > Select C2C12 ChIP-Seq bigwig files
 
-![ChIP-Seq_bigwig](images/ChIP-Seq_bigwig.png)
+![ChIP-Seq_bigwig](../../images/ChIP-Seq_bigwig.png)
 
 - Reset the track heights to make them comparable. Right click on the track > Set data range. Then change the scale.
 
-![data_range](images/data_range.png)
+![data_range](../../images/data_range.png)
 
 - You can also change the track colors, name and chart type (line,bar,heatmap).
 

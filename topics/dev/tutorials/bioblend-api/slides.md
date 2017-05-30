@@ -1,9 +1,9 @@
-.left.top[<img src="../images/LogoIP-CNRS-C3BI-NBV4small-e1460524231316.png" width="200"/>]
+.left.top[<img src="../../images/LogoIP-CNRS-C3BI-NBV4small-e1460524231316.png" width="200"/>]
 
 .center[#BioBlend module, a python library to use Galaxy API  
 ####Olivia Doppelt-Azeroual, Fabien Mareuil]
 
-.left.bottom[<img src="../../shared/images/GTNLogo1000.png" width="200"/>]
+.left.bottom[<img src="../../../../shared/images/GTNLogo1000.png" width="200"/>]
 ---
 layout: false
 name: plan
@@ -155,13 +155,13 @@ name: history
 * Create a new history (*It will be our work history for this tutorial*)
       
 .left-column5[
-<img src="../images/clue.png" width="30"/>
+<img src="../../images/clue.png" width="30"/>
 ]
 .right-column95[
 [http://bioblend.readthedocs.org ](http://bioblend.readthedocs.org )
 ]
 
-.center[<img src="../images/yourturn.jpg" width="100"/>] 
+.center[<img src="../../images/yourturn.jpg" width="100"/>] 
       
 ---
 .right-column5[.reduce70[*history_id*]]
@@ -171,7 +171,7 @@ name: history
 * Create a new history (*It will be our work history for this tutorial*)
       
 .left-column5[
-<img src="../images/clue.png" width="30"/>
+<img src="../../images/clue.png" width="30"/>
 ]
 .right-column95[
 [http://bioblend.readthedocs.org ](http://bioblend.readthedocs.org )
@@ -186,7 +186,7 @@ new_history = gi.histories.create_history(name='my_history')
       
 * Now that your history is created, you will need to upload some data in it.
 
-.center[<img src="../images/yourturn.jpg" width="100"/>] 
+.center[<img src="../../images/yourturn.jpg" width="100"/>] 
 
 ---
 .right-column5[.reduce70[*history_id*]]
@@ -196,7 +196,7 @@ new_history = gi.histories.create_history(name='my_history')
 * Create a new history (*It will be our work history for this tutorial*)
       
 .left-column5[
-<img src="../images/clue.png" width="30"/>
+<img src="../../images/clue.png" width="30"/>
 ]
 .right-column95[
 [http://bioblend.readthedocs.org ](http://bioblend.readthedocs.org )
@@ -227,7 +227,7 @@ name: library
 .reduce90[* Check if there is a method to upload a data from your filesystem
 
 .left-column5[
-<img src="../images/clue.png" width="30"/>
+<img src="../../images/clue.png" width="30"/>
 ]
 .right-column95[
 ```python
@@ -242,7 +242,7 @@ help(gi.libraries.upload_file_from_local_path)
 .reduce90[* Check if there is a method to upload a data from your filesystem
 
 .left-column5[
-<img src="../images/clue.png" width="30"/>
+<img src="../../images/clue.png" width="30"/>
 ]
 .right-column95[
 ```python
@@ -253,12 +253,12 @@ help(gi.libraries.upload_file_from_local_path)
 * Create a library and set the rights to this library
 
 .left-column5[
-<img src="../images/clue.png" width="30"/>
+<img src="../../images/clue.png" width="30"/>
 ]
 .right-column95[
 you will need your role *id*, look for the methods of the Class *gi.roles*
 ]
-.center[<img src="../images/yourturn.jpg" width="100"/>]
+.center[<img src="../../images/yourturn.jpg" width="100"/>]
 ]
 ---
 .right-column5[.reduce70[*history_id*]]
@@ -267,7 +267,7 @@ you will need your role *id*, look for the methods of the Class *gi.roles*
 .reduce90[* Check if there is a method to upload a data from your filesystem
       
 .left-column5[
-<img src="../images/clue.png" width="30"/>
+<img src="../../images/clue.png" width="30"/>
 ]
 .right-column95[
 ```python 
@@ -278,7 +278,7 @@ help(gi.libraries.upload_file_from_local_path)
 * Create a library and set the rights to this library
 
 .left-column5[
-<img src="../images/clue.png" width="30"/>
+<img src="../../images/clue.png" width="30"/>
 ]
 .right-column95[
 you will need your role *id*, look for the methods of the Class *gi.roles*
@@ -293,7 +293,7 @@ gi.libraries.set_library_permissions(new_lib['id'], access_in=role_id,
       
 * Import a BAM file in your library
     
-.center[<img src="../images/yourturn.jpg" width="100"/>]
+.center[<img src="../../images/yourturn.jpg" width="100"/>]
 ]
 ---
 .right-column5[.reduce70[*history_id*]]
@@ -302,7 +302,7 @@ gi.libraries.set_library_permissions(new_lib['id'], access_in=role_id,
 .reduce90[* Check if there is a method to upload a data from your filesystem
       
 .left-column5[
-<img src="../images/clue.png" width="30"/>
+<img src="../../images/clue.png" width="30"/>
 ]
 .right-column95[
 ```python 
@@ -313,7 +313,7 @@ help(gi.libraries.upload_file_from_local_path)
 * Create a library and set the rights to this library
 
 .left-column5[
-<img src="../images/clue.png" width="30"/>
+<img src="../../images/clue.png" width="30"/>
 ]
 .right-column95[
 you will need your role *id*, look for the methods of the Class *gi.roles*
@@ -334,7 +334,7 @@ list_data = gi.libraries.upload_file_from_local_path(new_lib['id'], local_path)
 
 * Transfer the BAM file from your library in your new history
 .center[
-<img src="../images/yourturn.jpg" width="50"/>
+<img src="../../images/yourturn.jpg" width="50"/>
 ]
 ]
       
@@ -345,7 +345,7 @@ list_data = gi.libraries.upload_file_from_local_path(new_lib['id'], local_path)
 .reduce90[* Check if there is a method to upload a data from your filesystem
       
 .left-column5[
-<img src="../images/clue.png" width="30"/>
+<img src="../../images/clue.png" width="30"/>
 ]
 .right-column95[
 ```python 
@@ -356,7 +356,7 @@ help(gi.libraries.upload_file_from_local_path)
 * Create a library and set the rights to this library
 
 .left-column5[
-<img src="../images/clue.png" width="30"/>
+<img src="../../images/clue.png" width="30"/>
 ]
 .right-column95[
 you will need your role *id*, look for the methods of the Class *gi.roles*
@@ -392,7 +392,7 @@ name: tool
 * To run a tool, its 'id' is needed:
 
 .left-column5[
-<img src="../images/clue.png" width="30"/>
+<img src="../../images/clue.png" width="30"/>
 ]
 .right-column95[
 ```python
@@ -403,11 +403,11 @@ help(gi.tools.run_tool)
 * Get the samtools sort tool id
 
 
-.left-column5[<img src="../images/clue.png" width="30"/>].right-column95[its name is "sort"]
+.left-column5[<img src="../../images/clue.png" width="30"/>].right-column95[its name is "sort"]
 
 
 .center[
-<img src="../images/yourturn.jpg" width="100"/>
+<img src="../../images/yourturn.jpg" width="100"/>
 ]
 
 

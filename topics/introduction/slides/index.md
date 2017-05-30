@@ -2,7 +2,7 @@
 
 ---
 
-[![Galaxy](../../shared/images/galaxy_logo_25percent_transparent.png)](https://galaxyproject.org/)
+[![Galaxy](../../../shared/images/galaxy_logo_25percent_transparent.png)](https://galaxyproject.org/)
 
 - **Web-based** platform for computational biomedical research
   - Developed at Penn State, Johns Hopkins and G. Washington universities with substantial outside contributions
@@ -41,7 +41,7 @@ Transparency: Users share and publish analyses via the web and create Pages, int
 
 ### Main Galaxy interface
 
-![Galaxy user interface](../../images/galaxy_interface.png)
+![Galaxy user interface](../images/galaxy_interface.png)
 
 Home page divided into 3 panels
 
@@ -49,7 +49,7 @@ Home page divided into 3 panels
 
 ### Top menu
 
-![Top menu](../../images/galaxy_interface_menu.png)
+![Top menu](../images/galaxy_interface_menu.png)
 
 - *Analyze Data* - go back to the 3-panels homepage
 - *Workflow* - access existing workflows or create new one using the editable diagrammatic pipeline

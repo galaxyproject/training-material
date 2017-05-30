@@ -30,7 +30,7 @@ class: enlarge120
 
 ]
 
-.pull-right[ ![](../images/humpty.jpg) ]
+.pull-right[ ![](../images/Humpty.jpg) ]
 
 ---
 

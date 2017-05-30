@@ -24,9 +24,7 @@ Blabla
 
 ### Second slide
 
-![](../images/RNA_seq_zang2016.png)
 
-<small>[*Zang and Mortazavi, Nature, 2012*](http://www.nature.com/ni/journal/v13/n9/full/ni.2407.html)</small>
 
 ---
 
@@ -48,6 +46,3 @@ Slide notes
 
 ### An other slide
 
-With text and a resized image
-
-.image-25[![](../images/ecker_2012.jpg)]

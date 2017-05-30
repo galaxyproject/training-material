@@ -31,10 +31,9 @@ This deck lists options for using Galaaxy outside of a training context.
 ---
 
 ### Public Galaxy Servers
-![](../../images/GTNLogo1000.png)
 
 [.image-25[![](../../images/public_server_galaxeast.png)]](https://galaxyproject.org/public-galaxy-servers/#galaxeast)
-[.image-25[![](../images/public_servers_odometer_count.png)]](https://galaxyproject.org/public-galaxy-servers/)
+[.image-25[![](../../images/public_servers_odometer_count.png)]](https://galaxyproject.org/public-galaxy-servers/)
 [.image-25[![](../../images/public_server_gigagalaxy.png)]](https://galaxyproject.org/public-galaxy-servers/#gigagalaxy)
 [.image-25[![](../../images/public_server_genomichyperbrowser.png)]](https://hyperbrowser.uio.no/hb/)
 [.image-25[![](../../images/public_server_lappsgrid.png)]](https://galaxy.lappsgrid.org/)
@@ -96,13 +95,13 @@ Complete list: [bit.ly/gxysemipublic](http://bit.ly/gxysemipublic)
 ]
 
 .pull-right[
-[.image-75[![](../../shared/images/cloudman_based_server_landing_page.png)]](http://wiki.galaxyproject.org/CloudMan)
+[.image-75[![](../../../../shared/images/cloudman_based_server_landing_page.png)]](http://wiki.galaxyproject.org/CloudMan)
 ]
 ---
 
 ### CloudMan
 
-[.image-25[![](../../shared/images/cloudman_management_console_showing_autoscaled_w_1_worker.png)]](http://wiki.galaxyproject.org/CloudMan)
+[.image-25[![](../../../../shared/images/cloudman_management_console_showing_autoscaled_w_1_worker.png)]](http://wiki.galaxyproject.org/CloudMan)
 
 CloudMan enables you to statically or dynamically scale compute power
 

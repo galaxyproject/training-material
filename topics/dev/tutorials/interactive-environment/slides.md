@@ -146,7 +146,7 @@
 
 ### Development
 
-![](../images/vis_IE_ipython_components.png)
+![](../../images/vis_IE_ipython_components.png)
 
 ---
 

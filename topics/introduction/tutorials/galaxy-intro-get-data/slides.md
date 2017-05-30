@@ -27,7 +27,7 @@
 
 # The Get Data toolbox section
 
-.pull-right[![Click on Get Data to expand it](../../../images/get_data_boxed.png)]
+.pull-right[![Click on Get Data to expand it](../../images/get_data_boxed.png)]
 
 - *Click* on the **Get Data** toolbox in the toolbox (the left panel)
 
