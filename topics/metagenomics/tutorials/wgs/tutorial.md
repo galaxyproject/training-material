@@ -24,6 +24,7 @@ with numerous bioinformatics steps and tools to use. These steps can be get toge
 > 4. [Combination of taxonomic and functional results](#taxonomic_functional_analyses)
 > {: .agenda}
 
+
 In this tutorial, we will work on a sample from Arctic Ocean (at 451 m), sequenced with Illumina MiSeq. This sample has already been analyzed with the [EBI Metagenomics' pipeline](https://www.ebi.ac.uk/metagenomics/pipelines/3.0), which uses slightly different tools than the ones we will use here. But, we could compare our results with the ones obtained with EBI Metagenomics.
 
 # Pretreatments
