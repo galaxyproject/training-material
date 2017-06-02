@@ -1,4 +1,4 @@
-# Genome assembly with Velvet: Background
+﻿# Genome assembly with Velvet: Background
 Velvet is one of a number of *de novo* assemblers that use short read sets as input (e.g. Illumina Reads), and the assembly method is based on de Bruijn graphs. For information about Velvet see this [link](https://en.wikipedia.org/wiki/Velvet_assembler).
 
 
@@ -39,7 +39,7 @@ We will now import the data that we will use for the tutorial.
 >
 >
 >
-> 3. Once the files have been uploaded, change their names to Mutant_R1.fastq and Mutant_R2.fastq respectively by clicking on the ![](../images/edit_file.png) icon next to the relevant history entry.
+> 3. Once the files have been uploaded, change their names to Mutant_R1.fastq and Mutant_R2.fastq respectively by clicking on the ![](../../images/edit_file.png) icon next to the relevant history entry.
 >
 >    
 >    ![data](../../images/starting_history.png)
