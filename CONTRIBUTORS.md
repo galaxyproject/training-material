@@ -20,7 +20,9 @@ The following individuals have contributed to this training material:
 * Jennifer Del Giudice (@jennydg)
 * Yvan Le Bras (@yvanlebras)
 * Simon Gladman (@simongladman1)
-
+* Nicola Soranzo (@nsoranzo)
+* Dave Clements (@tnabtaf)
+* Anne Pajon (@pajanne)
 
 # Institutional sponsors
 
