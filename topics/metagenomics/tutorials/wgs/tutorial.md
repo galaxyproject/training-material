@@ -1,17 +1,22 @@
 # Introduction
 
-Extraction of useful information from raw microbiota sequences is a complex process
-with numerous steps:
+In metagenomics, information about micro-organisms in an environment can be extracted with two main techniques:
 
-.. _data_processing:
+- Amplicon sequencing, which sequence only on the rRNA/rDNA of organisms
+- Whole-genome sequencing (WGS), which sequence full genomes of the micro-organisms in the environment
 
-.. figure:: /assets/images/framework/workflows/asaim_workflow.png
+Data generated from these two techniques must be treated differently. In this tutorial, we will focus on the analysis of whole-genome sequencing. 
 
-These steps can be get together in 4 main steps (corresponding to the 4 colors), with numerous sub-steps.
+> ### :nut_and_bolt: Comments
+> If you want to learn how to analyze amplicon data, please check our dedicated tutorials
+{: .comment}
+
+From both amplicon and WGS metagenomics raw data, we can extract information about which micro-organisms are present in the studied environment. But, contrary to amplicon, WGS metagenomics data contain also full genome information about the micro-organisms. It is then possible to identify genes associated to functions, to reconstruct metabolic pathways and then determine which functions are done by the micro-organisms in the studied environment. It is even possible to go further and determine which micro-organisms are involved in a given function or pathways.
 
 > ### Agenda
 >
-> In this tutorial, we will deal with:
+> However, extraction of useful information from raw WGS metagenomics sequences is a complex process
+with numerous bioinformatics steps and tools to use. These steps can be get together in 4 main steps we will deal with in the following tutorial:
 >
 > 1. [Pretreatments](#pretreatments)
 > 2. [Taxonomic analyses](#taxonomic_analyses)
@@ -19,148 +24,167 @@ These steps can be get together in 4 main steps (corresponding to the 4 colors),
 > 4. [Combination of taxonomic and functional results](#taxonomic_functional_analyses)
 > {: .agenda}
 
+In this tutorial, we will work on a sample from ..., sequenced with ... This sample has already been analyzed with the [EBI Metagenomics' pipeline](), which use slightly different tools than the ones we will use here. But, we could compare our results with the ones obtained with EBI Metagenomics.
+
 # Pretreatments
 
-Before any analyses (taxonomic or functional), raw sequences have to be pre-processed 
-with quality control and sequence sorting. 
+Before any extraction of information about the community, raw sequences have to be pre-processed with quality control of the raw sequences and sequence sorting. But, first, we need in get our data in Galaxy.
 
-In this tutorial, we will only focus on steps for single-end input sequences. But 
-several notes will teach how to do with paired-end sequences.
+## Data upload
 
-Four main files are created during pretreatments:
+The original data are available at EBI Metagenomics under run number [...](...).
 
-- Non rRNA sequences
-- 16S rRNA sequences
-- 18S rRNA sequences
-- Other rRNA sequences
+> ### :pencil2: Hands-on: Data upload
+>
+> 1. Create a new history for this WGS metagenomics exercise
+> 2. Import the FASTQ file pair from [Zenodo]()
+>
+>    > ### :bulb: Tip: Importing data via links
+>    >
+>    > * Copy the link location
+>    > * Open the Galaxy Upload Manager
+>    > * Select **Paste/Fetch Data**
+>    > * Paste the link into the text field
+>    > * Press **Start**
+>    {: .tip}
+>
+>    As default, Galaxy takes the link as name. It also do not link the dataset to a database or a reference genome.
+>
+{: .hands_on}
 
 ## Quality control and treatment
 
-As described in :ref:`description of quality estimation <framework-tools-available-pretreatments-control-quality-estimation>`, several sequence parameters must be checked to ensure that raw data looks good and then reduce bias in data analysis.
+For quality control, we use similar tools as described in [the Quality Control tutorial](../../NGS-QC/tutorials/dive_into_qc): [FastQC](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/) and [Trim Galore](http://www.bioinformatics.babraham.ac.uk/projects/trim_galore/).
 
-In this tutorial, quality control and treatments are made using PRINSEQ, as described in :ref:`quality treatments <framework-tools-available-pretreatments-control-quality-treatment>`:
+> ### :pencil2: Hands-on: Quality control
+>
+> 1. **FastQC** :wrench:: Run FastQC on both FastQ files to control the quality of the reads
+>
+>    > ### :question: Questions
+>    >
+>    > 1. What is the read length?
+>    > 2. Is there anything what you find striking when you compare both reports?
+>    >
+>    >    <details>
+>    >    <summary>Click to view answers</summary>
+>    >    <ol type="1">
+>    >    <li>The read length is 37 bp</li>
+>    >    <li>Both reports for GSM461177_untreat_paired_chr4_R1 and for GSM461177_untreat_paired_chr4_R2 are quite ok. For GSM461177_untreat_paired_chr4_R1, there is several warnings and an issue on the Kmer content. For GSM461177_untreat_paired_chr4_R2, the quality in the 2nd tile is bad (maybe because of some event during sequencing). We need to be careful for the quality treatment and to do it with paired-end information</li>
+>    >    </ol>
+>    >    </details>
+>    {: .question}
+>
+> 2. **Trim Galore** :wrench:: Treat for the quality of sequences by running Trim Galore on the paired-end datasets to eliminate sequences smaller than 60 bp, with a mean quality score inferior to 15 or with more than 2% of N bases and to trim sequences on right end when the mean quality score over a window of 5 bp is inferior to 20
+>
+>    > ### :question: Questions
+>    >
+>    > Why is Trim Galore run once on the paired-end dataset and not twice on each dataset?
+>    >
+>    > <details>
+>    > <summary>Click to view answers</summary>
+>    > Trim Galore can remove sequences if they become too short during the trimming process. For paired-end files Trim Galore! removes entire sequence pairs if one (or both) of the two reads became shorter than the set length cutoff. Reads of a read-pair that are longer than a given threshold but for which the partner read has become too short can optionally be written out to single-end files. This ensures that the information of a read pair is not lost entirely if only one read is of good quality.
+>    > </details>
+>    {: .question}
+>
+> 3. **FastQC** :wrench:: Re-run FastQC on Trim Galore's outputs and inspect the differences
+>
+>    > ### :question: Questions
+>    >
+>    > 1. How are the changes in the read length?
+>    > 2. Is there any characteristics impacted by Trim Galore?
+>    >
+>    >    <details>
+>    >    <summary>Click to view answers</summary>
+>    >    <ol type="1">
+>    >    <li>The read length is then now from 20 to 37 bp</li>
+>    >    <li>For GSM461177_untreat_paired_chr4_R1, the per base sequence content is now red. For GSM461177_untreat_paired_chr4_R2, the per tile sequence quality is still bad but now also the per base sequence content and the Kmer Content</li>
+>    >    </ol>
+>    >    </details>
+>    {: .question}
+>
+{: .hands_on}
 
-- Elimination of sequences:
-    - with length inferior to 60 bp (to eliminate sequences with too few information)
-    - with a mean quality score inferior to 15 (to eliminate bad sequences)
-    - with more than 2% of N bases (to eliminate sequences with too few usefull information)
-- Trimming of sequences on right end when the mean quality score over a window of 5 bp is inferior to 20 (to improve conserved part of sequences)
-
-To apply quality treatment with PRINSEQ on raw sequences, you click on `Control quality` on `Pretreatment` section on left pannel. Two tools will be proposed and you choose `PRINSEQ`. The central panel will be then filled with possible options to execute PRINSEQ
-
-- The type of library (single-end, here)
-- The FastQ file (input sequence file, it will be automatically proposed the downloaded file) 
-- Parameters
-    - Filtering
-        - Filtering of sequences based on their length
-            - Filtering of too smal sequences with a minimum length of 60 bp
-            - No filtering of too big sequences
-        - Filtering of sequences based on quality score
-            - No filtering of sequences based on their minimum score
-            - No filtering of sequences based on their maximum score
-            - Filtering of sequences based on their mean score
-                - Filtering of sequences with too small mean score with a minimum mean score of 15
-                - No filtering of sequences with too high mean score
-        - Filtering of sequences based on their base content
-            - No filtering of sequences based on their GC percentage
-            - No filtering of sequences based on their number of N bases
-            - Filtering of sequences based on their percentage of N bases with a maximal N percentage of 2%
-            - No filtering of sequences with characters other than A, T, C, G and N
-        - Filtering of sequences based on their complexity with a maximum DUST score of 7
-    - Trimming
-        - No trimming from 3'-end
-        - No trimming from the ends
-        - No tail trimming
-        - Trimming by quality score
-            - No trimming by quality score from the 5'-end
-            - Trimming by quality score from the 3'-end with a minimum mean quality threshold of 20, computed on a sliding window of 5bp moving by 5bp
-
-
-For paired-end sequences, both sequence files are quality treated together to limit issue during paired-end assembly. This is done by selected `paired-end` in library type
-
-Once the boxes are green, quality treatments are done. With chosen parameters on our datasets (217,386 input sequences with a mean length of bp), we expect conservation of 215,444 (99.09%) sequences with a mean length of 239.29 bp. Sequences are filtered mainly because of length.
-
-In quality control of EBI metagenomic workflow, 88.43% of sequences (192,248) are conserved. 
+> ### :question: Questions
+>
+> 1. How many sequences have been conserved here? 
+> 2. And with EBI Metagenomics' pipeline?
+>
+> <details>
+> <summary>Click to view answers</summary>
+> <ol type="1">
+> <li></li>
+> <li></li>
+> </ol>
+> </details>
+> {: .question}
 
 > ### :nut_and_bolt: Comments
-> For downstream tools such as SortMeRNA, one sequence file is expected. Paired-end sequences have then to be assembled. You can use FastQJoin with default parameters:
->
->    - Minimum of 6 bp overlap is required to join pairs
->    - Maximum 8% differences within region of overlap
+> 
+> One sequence file is expected for the next steps. In case of paired-end sequence data, the paired sequences must be assembled, with FastQJoin for example
 {: .comment}
-
 
 # Dereplication
 
-Dereplication corresponds to identification of unique sequences in a dataset to conserve only one copy of each sequence in the dataset and then reduce the dataset size without loosing information.
+During sequencing, one sequence must have been added to the dataset in multiple exact copy. Removing such duplicates reduce the size of the dataset without loosing information, with the dereplication (identification of unique sequences in a dataset).
 
-In ASaiM, this task can be done with `VSearch dereplication` of `VSEARCH` suite :cite:`rognes_vsearch:_2015`. 
+> ### :pencil2: Hands-on: Dereplication
+>
+> 1. **VSearch dereplication** :wrench:: Run VSearch dereplication on the quality controlled sequences (output of Trim Galore!)
+>
+>    > ### :question: Questions
+>    >
+>    > 1. How many sequences are removed with the dereplication?
+>    > 2. And with EBI Metagenomics' pipeline?
+>    >
+>    >    <details>
+>    >    <summary>Click to view answers</summary>
+>    >    <ol type="1">
+>    >    <li></li>
+>    >    <li></li>
+>    >    </ol>
+>    >    </details>
+>    {: .question}
+>
+{: .hands_on}
 
-Sequence file with good quality sequences (PRINSEQ) are in FASTQ format. `VSearch` tools require FASTA file. So, the file has to be formatted using `Extract` in  `Manipulate sequence files` section (`Common tools`):
+# Sequence sorting
 
-3 files are generated:
+With WGS metagenomics data, full genome information can be accessed: information corresponding to CDS of the micro-organisms, sequences corresponding to ribosomal sequences (rDNA or rRNA) of the micro-organisms, ... Useful functional information are present in sequences corresponding to CDS, and some taxonomic information in sequences corresponding to ribosomomal sequences (like the amplicon). To reduce the dataset size for the extraction of functional information, we can remove rRNA/rDNA sequences from the original dataset. 
 
-- A file with sequences in FASTA format
-- A file with quality sequences
-- A file with a report
+This task is also useful to inspect the rRNA/rDNA sequences. And as in EBI Metagenomics' pipeline, these sequences can be used for taxonomic analyses as any amplicon data
 
-To dereplicate, you execute `Vsearch dereplication` on the sequence file:
+> ### :nut_and_bolt: Comments
+> If you want to learn how to analyze amplicon data, please check our dedicated tutorials
+{: .comment}
 
-In the dataset, 3 sequences (<1%) are removed using dereplication. In EBI metagenomic workflow, ~ 4.74% of sequences are removed during this step of dereplication.
+For this task, we use SortMeRNA (kopylova_sortmerna:_2012). This tool filter RNA sequences based on local sequence alignment (BLAST) against 8 rRNA databases (2 Rfam databases for 5.8S and 5S eukarya sequences and 6 SILVA datasets for 16S (archea and bacteria), 18S (eukarya), 23S (archea and bacteria) and 28S (eukarya) sequences.
 
-# rRNA (rDNA) sorting
-
-Metagenomic and metatranscriptomic data are constitued of different types of sequences: sequences corresponding to CDS, sequences corresponding to ribosomal sequences (rDNA or rRNA), ... 
-
-Useful functional information are present in sequences corresponding to CDS, and taxonomic information in sequences corresponding to ribosomomal sequences. To enhance downstream analysis such as extraction of functional or taxonomic information, it is important to :ref:`sort sequences into rRNA and non rRNA <framework-tools-available-pretreatments-manipulate-rna>`.
-
-For this task, we use SortMeRNA :cite:`kopylova_sortmerna:_2012`. This tool filter RNA sequences based on local sequence alignment (BLAST) against rRNA databases. With SortMeRNA, 8 rRNA databases are proposed:
-
-- A Rfam database for 5.8S eukarya sequences
-- A Rfam database for 5S archea/bacteria sequences
-- A SILVA database for 16S archea sequences
-- A SILVA database for 16S bacteria sequences
-- A SILVA database for 18S eukarya sequences
-- A SILVA database for 23S archea sequences
-- A SILVA database for 23S bacteria sequences
-- A SILVA database for 28S eukarya sequences
-
-16S and 18S sequences are mainly used in taxonomic analyses. So to limitate bias due to numerous sequences, it is interesting to extract these sequences from the other rRNA sequences.
-
-So, the step of sequence sorting is split into 3 sub-step:
-
-![](../../images/sequence_sorting.png)
-
-SortMeRNA has to be executed 3 times, with different databases. 
-
-For this sequence sorting, you click on `Manipulate RNA` in `Pretreatment` section on left pannel. You click then on `Filter with SortMeRNA`. Such as for PRINSEQ, parameters for SortMeRNA can be chosed in central panel:
-
-2 output files are generated:
-
-- A sequence file with `aligned reads` (sequences similar to rRNA databases)
-- A sequence file with `rejected reads` (sequences non similar to rRNA databases)
+> ### :pencil2: Hands-on: Sequence sorting
+>
+> 1. **SortMeRNA** :wrench:: Run SortMeRNA on the dereplicated sequences with the selection of all rRNA databases (to extract all the rRNA sequences)
+>
+>    > ### :question: Questions
+>    >
+>    > 1. Which percentage of the original data are assigned to rRNA/rDNA sequences?
+>    > 2. How can you explain with low percentage?
+>    > 3. How many sequences are identified as 16S sequences? And 18S sequences?
+>    > 4. What are the values for EBI Metagenomics?
+>    >
+>    >    <details>
+>    >    <summary>Click to view answers</summary>
+>    >    <ol type="1">
+>    >    <li></li>
+>    >    <li></li>
+>    >    </ol>
+>    >    </details>
+>    {: .question}
+>
+> 2. (Optional) **SortMeRNA** :wrench:: Run SortMeRNA on the selected rRNA sequences with the selection of 16S rRNA databases
+> 3. (Optional) **SortMeRNA** :wrench:: Run SortMeRNA on the selected rRNA sequences with the selection of 18S rRNA databases
+{: .hands_on}
 
 
-In this tutorial, SortMeRNA has to be executed 3 times:
-
-1. First execution of SortMeRNA to split sequences between rRNA and non rRNA sequences
-    - Query sequences: output of dereplication
-    - rRNA databases: All
-2. Second execution of SortMeRNA to split rRNA sequences between 16S rRNA and non 16S rRNA sequences
-    - Query sequences: `Aligned reads` of first SortMeRNA execution (rRNA sequences)
-    - rRNA databases: SILVA 16S archea and SILVA 16S bacteria
-3. Third execution of SortMeRNA to split non 16S rRNA sequences between 18S rRNA and other rRNA sequences
-    - Query sequences: `Rejected reads` of second SortMeRNA execution (non 16S rRNA sequences)
-    - rRNA databases: SILVA 18S eukarya
-
-For the dataset, we obtain 1,550 sequences (0.72%) predicted as rRNA sequences. In EBI metagenomics, the percentage is similar with 0.50%.
-
-With these sequences sorted as rRNA and non rRNA, we can run:
-
-- Taxonomic analyses
-- Functional analyses 
-
-# Taxonomic analyses
+# Extraction of taxonomic information
 
 To identify micro-organisms populating a sample and their proportion, we use :ref:`taxonomic and phylogenetic approaches <framework-tools-available-taxonomic-assignation>`. Indeed, in these approaches, each reads or sequences are assigned to the most plausible microbial lineage.
 
