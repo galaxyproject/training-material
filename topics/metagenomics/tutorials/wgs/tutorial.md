@@ -363,9 +363,29 @@ To get global categories from HUMAnN2 outputs, we decide to use the [Gene Ontolo
 
 # Combination of taxonomic and functional results
 
-.. _framework-tutorial-taxonomic-functional-analysis:
+With the previous analyses, we can now give some answers to the questions "Which micro-organims are present in my sample?" and "What function are done by the micro-organisms in my sample?". One remaining question stays unanswered: "Which micro-organisms are implied in the realization of a given function?".
 
-# Combination of taxonomic and functional analyses
+To answer this question, we need to relate generated taxonomic and functional results. 
+
+> ### :pencil2: Hands-on: Combination of taxonomic and functional results
+>
+> 1. **Combine... ** :wrench:: Run **Combine** on the gene family abundance generated with HUMAnN2 and the MetaPhlAn2 output
+> 
+>    > ### :question: Questions
+>    >
+>    > 1. 
+>    >
+>    >    <details>
+>    >    <summary>Click to view answers</summary>
+>    >    <ol type="1">
+>    >    <li></li>
+>    >    <li></li>
+>    >    </ol>
+>    >    </details>
+>    {: .question}
+>
+> 2. 
+{: .hands_on}
 
 # Conclusion
 
