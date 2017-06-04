@@ -183,102 +183,131 @@ For this task, we use SortMeRNA (kopylova_sortmerna:_2012). This tool filter RNA
 > 3. (Optional) **SortMeRNA** :wrench:: Run SortMeRNA on the selected rRNA sequences with the selection of 18S rRNA databases
 {: .hands_on}
 
-
 # Extraction of taxonomic information
 
-To identify micro-organisms populating a sample and their proportion, we use :ref:`taxonomic and phylogenetic approaches <framework-tools-available-taxonomic-assignation>`. Indeed, in these approaches, each reads or sequences are assigned to the most plausible microbial lineage.
+The first important information to extract from any metagenomics sample is which micro-organisms are present in the sequenced sample and in which proportion are they present. So we want to extract information about the structure of the community of micro-organisms in the environment.
 
-Most tools used to estimate sample composition use 16S rRNA genes as marker for bacteria and archea and 18S rRNA genes for eukaryota. Other tools, such as MetaPhlAn :cite:`segata_metagenomic_2012,truong_metaphlan2_2015`, propose alternatives based on more general clade-specific marker genes.
+To identify the community structure, several approaches can be used. With amplicon or rRNA data, the sequences are clustered into Operational Taxonomic Units (OTU) and one representative sequence of each OTU is assigned to the most plausible microbial lineage. This approach is possible because of rRNA data: data that evolved quite slowly compared to other part of genomes, rRNA sequences data (particularly 16S and 18S) are then well conserved and good taxonomic markers.
 
-We use such approaches to analyze taxonomy of sequences with MetaPhlAn2 :cite:`truong_metaphlan2_2015` on all rRNA sequences. This tool infer the presence and read coverage of clade-specific markers to detect taxonomic clades and their relative abundance.
+However, for WGS data, applying such approaches implies using a really small proportion of sequences for the taxonomic assignation, which can induce statistical bias. Other approaches have been developed to cope with WGS data. For example, MetaPhlAn2 (segata_metagenomic_2012,truong_metaphlan2_2015) uses a database of ~1M unique clade-specific marker genes (not only the rRNA genes) identified from ~17,000 reference (bacterial, archeal, viral and eukaryotic) genomes.
 
-## Taxonomic assignation
+> ### :pencil2: Hands-on: Taxonomic assignation
+>
+> 1. **MetaPhlAN2** :wrench:: Run **MetaPhlAN2** on the dereplicated sequences
+>
+>    > ### :question: Questions
+>    >
+>    > 1. What does the main output file contain?
+>    >
+>    >    <details>
+>    >    <summary>Click to view answers</summary>
+>    >    <ol type="1">
+>    >    <li></li>
+>    >    <li></li>
+>    >    </ol>
+>    >    </details>
+>    {: .question}
+>
+> 2. **Format MetaPhlAn2 output** :wrench:: Run **Format MetaPhlAn2 output** on the MetaPhlAn2 output to extract information about each taxonomic level
+>
+>    > ### :question: Questions
+>    >
+>    > 1. Which species is the most represented?
+>    > 2. Can you compare to the results of EBI Metagenomics?
+>    >
+>    >    <details>
+>    >    <summary>Click to view answers</summary>
+>    >    <ol type="1">
+>    >    <li></li>
+>    >    <li></li>
+>    >    </ol>
+>    >    </details>
+>    {: .question}
+>
+{: .hands_on}
 
-This tool is available on left panel in `Assign taxonomy on non rRNA sequences` (`STRUCTURAL AND FUNCTIONAL ANALYSIS TOOLS`). In this tutorial, you execute it on all sequences before :ref:`SortMeRNA execution <framework-tutorial-pretreatments-rna-sorting>`.
+The generated information remains difficult to inspect. Krona (ondov_interactive_2011) is a visualization tool for intuitive exploration of relative abundances of taxonomic classifications. It produces an interactive HTML file
 
-In the dataset, we obtain a text file with 59 lines, each line corresponding to a taxonomic assignation (represented at different taxonomic level) with its relative abundance.
+> ### :pencil2: Hands-on: Interactive visualization with KRONA
+>
+> 1. **Format MetaPhlAn2 output for Krona** :wrench:: Run **Format MetaPhlAn2 output for Krona** to format MetaPhlAn2 output for KRONA
+> 2. **KRONA** :wrench:: Run **KRONA** on the formatted MetaPhlAn2 output
+>
+>    > ### :question: Questions
+>    >
+>    > 1. What are the main species found for the bacteria?
+>    > 2. Is the proportion of ... similar to the one found with EBI Metagenomics?
+>    >
+>    >    <details>
+>    >    <summary>Click to view answers</summary>
+>    >    <ol type="1">
+>    >    <li></li>
+>    >    <li></li>
+>    >    </ol>
+>    >    </details>
+>    {: .question}
+>
+{: .hands_on}
 
-.. _metaphlan_2_output:
+Alternatively, [GraPhlAn](https://bitbucket.org/nsegata/graphlan/wiki/Home>) is a tool for producing circular static representation of taxonomic analyses, easily exportable.
 
-.. figure:: /assets/images/framework/tutorial/metaphlan_2_output.png
+> ### :pencil2: Hands-on: Static visualization with GraPhlAn
+>
+> 1. **export2graphlan** :wrench:: Run **export2graphlan** on MetaPhlAn2 output to extract a tree with parameter
+> 
+>    - Levels to annotate in the tree: 5
+>    - Levels to annotate in the external legend: 6,7
+>    - Title font size: 15
+>    - Default size for clades not found as biomarkers: 10
+>    - Minimum value of biomarker clades: 0
+>    - Maximum value of biomarker clades: 250
+>    - Font size: 10
+>    - Minimum font size: 8
+>    - Maximum font size: 12
+>    - Font size for the annotation legend: 11
+>    - Minimum abundance value for a clade to be annotated: 0
 
-## Formatting
-
-The output in plain text is not easy to interpret: all taxonomic levels are mixed together.
-
-
-## Visualization
-
-To extract information, we can also use visualization tools to get graphical representations of MetaPhlAn 2 output. Two solutions can be used: GraPhlAn or KRONA.
-
-### Interactive visualization
-
-Krona :cite:`ondov_interactive_2011` is a visualization tool for intuitive exploration of relative abundances of taxonomic classifications. Krona requires a formatted input file.
-
-MetaPhlAn2 output has then to be formatted using `Format MetaPhlAn2 output for Krona` (in `Assign taxonomy on non rRNA sequences`, `Taxonomic assignation`):
-
-.. _format_metaphlan2:
-
-.. figure:: /assets/images/framework/tutorial/format_metaphlan2.png
-
-Krona can then be called (`Krona pie chart from taxonomic profile`, in `Visualize data`, in `Post-treatments`)
-
-.. _krona_call:
-
-.. figure:: /assets/images/framework/tutorial/krona_call.png
-
-Krona produces an interactive HTML file. The content can be visualized inside Galaxy environment by clicking on `View data` on top right of Krona output in right panel.
-
-.. _krona_output:
-
-.. figure:: /assets/images/framework/tutorial/krona_output.png
-
-This visualization is similar to the one on EBI metagenomic.
-
-## Static, easy to export visualization
-
-Alternatively, `GraPhlAn <https://bitbucket.org/nsegata/graphlan/wiki/Home>`_ is a tool for producing circular representation of taxonomic analyses, easily exportable. This tool requires 2 files: a tree and an annotation file.
-
-However, MetaPhlAn produces only a :ref:`text file <metaphlan_2_output>`. We need to use a tool to extract tree and annotations from MetaPhlAn output. We use `export2graphlan <https://bitbucket.org/CibioCM/export2graphlan>`_, available in section `Visualize data` (in `Post-treatments`). Numerous parameters modulates informations in annotation file. For our dataset, we fix :
-
-- Levels to annotate in the tree: 5
-- Levels to annotate in the external legend: 6,7
-- Title font size: 15
-- Default size for clades not found as biomarkers: 10
-- Minimum value of biomarker clades: 0
-- Maximum value of biomarker clades: 250
-- Font size: 10
-- Minimum font size: 8
-- Maximum font size: 12
-- Font size for the annotation legend: 11
-- Minimum abundance value for a clade to be annotated: 0
-- Number of clades to highlight: 100
-- Row number contaning the names of the features: 0
-- Row number containing the names of the samples: 0
-
-We decide to display the maximum of clade (100, here). If you want more or less, you can modulate the number of clades to highlight. And if you want to change displayed annotations, you can change levels to annotate.
-
-This tool will generate two outputs (a tree and an annotation files). These two outputs have to be combined in first GraPhlAn script (`Modify an input tree for GraPhlAn`, in `Visualize data`):
-
-.. _graphlan_annotate_parameters:
-
-.. figure:: /assets/images/framework/tutorial/graphlan_annotate_parameters.png
-
-This tool generates a PhyloXML file, input file for GraPhlAn.
-
-GraPhlAn is available in `Visualize data` section (`Post-treatments`). It generates an output file (an image) corresponding to circular representation of MetaPhlAn outputs. Available parameters have impact on output file format, size, ...
-
-.. _graphlan_parameters:
-
-.. figure:: /assets/images/framework/tutorial/graphlan_parameters.png
+>    > ### :nut_and_bolt: Comments
+>    > We decide to display the maximum of clade (100, here). If you want more or less, you can modulate the number of clades to highlight. And if you want to change displayed annotations, you can change levels to annotate.
+>    {: .comment}
+>
+>    - Number of clades to highlight: 100
+>    - Row number contaning the names of the features: 0
+>    - Row number containing the names of the samples: 0
+>
+> 2. **Modify an input tree for GraPhlAn** :wrench:: Run **Modify an input tree for GraPhlAn** on the export2graphlan's outputs to combine them into a PhyloXML file
+> 3. **GraPhlAn** :wrench:: Run **GraPhlAn** on the previous step's outputs
+>
+>    > ### :question: Questions
+>    >
+>    > 1. What are the main species found for the bacteria?
+>    > 2. Is the proportion of ... similar to the one found with EBI Metagenomics?
+>    >
+>    >    <details>
+>    >    <summary>Click to view answers</summary>
+>    >    <ol type="1">
+>    >    <li></li>
+>    >    <li></li>
+>    >    </ol>
+>    >    </details>
+>    {: .question}
+>
+{: .hands_on}
 
 With our dataset, we obtain a nice graphical representation of taxonomic diversity inside our sample, with circle radius being proportional to relative abundance of the corresponding clade.
 
-.. _graphlan_metaphlan_output:
-
-.. figure:: /assets/images/framework/tutorial/graphlan_metaphlan_output.svg
-
-After these taxonomic analyses, we can then run :ref:`functional analyses <framework-tutorial-functional-analysis>`.
+> ### :question: Questions
+>
+> 1. Is the main species the same as the one observed with KRONA? 
+>
+> <details>
+> <summary>Click to view answers</summary>
+> <ol type="1">
+> <li></li>
+> <li></li>
+> </ol>
+> </details>
+> {: .question}
 
 # Functional analyses
 
