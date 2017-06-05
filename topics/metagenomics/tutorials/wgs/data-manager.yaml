@@ -1,18 +1,25 @@
-# configuration for fetch and index genomes
-
 data_managers:
-    # Data manager ID
-    - id: url to data manager on ToolShed
-      # tool parameters, nested parameters should be specified using a pipe (|)
+    - id: toolshed.g2.bx.psu.edu/repos/iuc/data_manager_metaphlan2_database_downloader/data_manager_metaphlan2_download/2.6.0
+      # MetaPhlAn2 database
       params:
-        - 'param1': '{{ item }}'
-        - 'param2': 'value'
-      # Items refere to a list of variables you want to run this data manager. You can use them inside the param field with {{ item }}
-      # In case of genome for example you can run this DM with multiple genomes, or you could give multiple URLs.
-      items:
-        - item1
-        - item2
-      # Name of the data-tables you want to reload after your DM are finished. This can be important for subsequent data managers
+        - 'database': 'db_v20'
       data_table_reload:
-        - all_fasta
-        - __dbkeys__
+        - metaphlan2_database
+    - id: toolshed.g2.bx.psu.edu/repos/devteam/data_manager_humann2_database_downloader/data_manager_humann2_download/0.9.9
+      # HUMAnN2 database: Nucleotide database: full chocophlan
+      params:
+        - 'database': 'chocophlan'
+        - 'build': 'full'
+      data_table_reload:
+        - humann2_nucleotide_database
+    - id: toolshed.g2.bx.psu.edu/repos/devteam/data_manager_humann2_database_downloader/data_manager_humann2_download/0.9.9
+      # HUMAnN2 database: Protein database: full uniref50
+      params:
+        - 'database': 'uniref'
+        - 'build': 'uniref50_diamond'
+      data_table_reload:
+        - humann2_protein_database
+    - id: toolshed.g2.bx.psu.edu/repos/devteam/data_manager_sortmerna_database_downloader/data_manager_sortmerna_download/2.1b.0
+      params:
+      data_table_reload:
+        - rRNA_databases
