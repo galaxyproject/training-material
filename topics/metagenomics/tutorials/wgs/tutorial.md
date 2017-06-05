@@ -24,7 +24,7 @@ with numerous bioinformatics steps and tools to use. These steps can be get toge
 > 4. [Combination of taxonomic and functional results](#taxonomic_functional_analyses)
 > {: .agenda}
 
-In this tutorial, we will work on a sample from ..., sequenced with ... This sample has already been analyzed with the [EBI Metagenomics' pipeline](), which use slightly different tools than the ones we will use here. But, we could compare our results with the ones obtained with EBI Metagenomics.
+In this tutorial, we will work on a sample from Arctic Ocean (at 451 m), sequenced with Illumina MiSeq. This sample has already been analyzed with the [EBI Metagenomics' pipeline](https://www.ebi.ac.uk/metagenomics/pipelines/3.0), which uses slightly different tools than the ones we will use here. But, we could compare our results with the ones obtained with EBI Metagenomics.
 
 # Pretreatments
 
@@ -32,12 +32,11 @@ Before any extraction of information about the community, raw sequences have to 
 
 ## Data upload
 
-The original data are available at EBI Metagenomics under run number [...](...).
+The original data are available at EBI Metagenomics under run number [ERR1855251](https://www.ebi.ac.uk/metagenomics/projects/ERP015773/samples/ERS1569001/runs/ERR1855251/results/versions/3.0).
 
 > ### :pencil2: Hands-on: Data upload
 >
-> 1. Create a new history for this WGS metagenomics exercise
-> 2. Import the FASTQ file pair from [Zenodo]()
+> 1. Import the FASTQ file pair from [Zenodo]() or from the data library ()
 >
 >    > ### :bulb: Tip: Importing data via links
 >    >
@@ -48,7 +47,16 @@ The original data are available at EBI Metagenomics under run number [...](...).
 >    > * Press **Start**
 >    {: .tip}
 >
->    As default, Galaxy takes the link as name. It also do not link the dataset to a database or a reference genome.
+>    > ### :bulb: Tip: Importing data from a data library
+>    >
+>    > * Go into "Shared data" (top panel) then "Data libraries"
+>    > * Click on "Training data" and then "WGS input data"
+>    > * Select both files
+>    > * Click on "Import selected datasets into history"
+>    > * Import in a new history
+>    {: .tip}
+>
+>    As default, Galaxy takes the link as name, so rename them.
 >
 {: .hands_on}
 
