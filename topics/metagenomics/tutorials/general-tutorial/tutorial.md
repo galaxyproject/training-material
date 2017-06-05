@@ -1,10 +1,13 @@
 # Introduction
 
-2 main types of metagenomics analyses
-- Amplicon or 16S rRNA/rDNA
-- Whole-genome sequencing
+In metagenomics, information about micro-organisms in an environment can be extracted with two main techniques:
 
-In this tutorial, we will introduce the two types of analyses with the general principles behind and the differences 
+- Amplicon sequencing (or 16S rRNA/rDNA), which sequence only on the rRNA/rDNA of organisms
+- Whole-genome sequencing (WGS), which sequence full genomes of the micro-organisms in the environment
+
+In this tutorial, we will introduce the two types of analyses with the general principles behind and the differences. To go deeper in such analyses, we recommend to check our detailed tutorials on each analysis.
+
+For that, we will use two datasets (one amplicon and one WGS) from the same environment: the Argentina Anguil Bulk Soil, studied in a [project on the Argentinean agricultural pampean soils](https://www.ebi.ac.uk/metagenomics/projects/SRP016633). In this project, three different types of land uses and two soil types (bulk and rhizospheric) were analyzed using WGS and amplicon sequencing. We will focus on the Argentina Anguil Bulk Soil.
 
 > ### Agenda
 >
