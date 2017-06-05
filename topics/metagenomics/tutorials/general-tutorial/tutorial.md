@@ -139,70 +139,99 @@ Once we have information about the community structure (OTUs with taxonomic stru
 
 # Whole-genome sequencing data
 
-Difference with amplicon: whole genomes (not only 16S or 18S), more information
+In the previous section, we see how to analyze amplicon data to extract the community structure. Such information can also be extracted from whole-genome sequencing (WGS) metagenomic data. 
 
-Why amplicon is still used?
+In WGS data, full genomes of the micro-organisms in the environment are sequenced (not only the 16S or 18S). We can then have access to the rRNA (only a small part of the genomes), but also to the genes of the micro-organisms. Using this information, we can try to answer to questions "What are the micro-organisms doing?" in addition to the question "What micro-organisms are present?".
 
 ## Extraction of taxonomic information
 
-Same question as for the amplicon data
+As for amplicon data, we can extract taxonomic and community structure information from WGS data. Different approaches can be used:
 
-### Sequence sorting
+- Same approaches as for amplicon data with identification and classification of OTUs
 
-After we can use similar approaches as for amplicon data
+    Such approaches imply a first step of sequence sorting to extract only the 16S and 18S sequences on which the same tools as for amplicon data. However, rRNA sequences represent a low proportion (< 1%) of the WGS sequences so such approache is not the most statistically supported
 
-To show the few number of rRNA sequences in a WGS datasets, impact on the results
+- Assignation of taxonomy on the whole sequences using databases with marker genes
 
-### Taxonomic analysis
+In this tutorial, we use the second approach with MetaPhlAn2
 
-Difference with OTUs?
-
-> ### :pencil2: Hands-on: Data upload
+> ### :pencil2: Hands-on: Taxonomic assignation with MetaPhlAn2
 >
-> 1. Step1
-> 2. Step2
->
->    > ### :question: Question
->    >
->    > Question?
->    >
->    > <details>
->    > <summary>Click to view answers</summary>
->    > Answer to question
->    > </details>
->    {: .question}
-{: .hands_on}
-
-And visualization?
-
-## Extraction of functional information 
-
-Question: Which functions are done by the micro-organisms in the environment?
-
-> ### :pencil2: Hands-on: Data upload
->
-> 1. Step1
-> 2. Step2
+> 1. **MetaPhlAN2** :wrench:: Run **MetaPhlAN2** on the dereplicated sequences
 >
 >    > ### :question: Questions
 >    >
->    > 1. Question1?
->    > 2. Question2?
+>    > 1. What does the main output file contain?
 >    >
 >    >    <details>
 >    >    <summary>Click to view answers</summary>
 >    >    <ol type="1">
->    >    <li>Answer for question1</li>
->    >    <li>Answer for question2</li>
+>    >    <li></li>
+>    >    <li></li>
 >    >    </ol>
 >    >    </details>
 >    {: .question}
 >
-> 3. Step3
 {: .hands_on}
 
-To go further on these analyses, you can follow our tutorials on whole-genome sequencing data analyses.
+Even if the output of MetaPhlAn2 is bit easier to parse than the BIOM file, we want to visualize and explore the community structure. We use an interactive tool called KRONA
+
+> ### :pencil2: Hands-on: Interactive visualization with KRONA
+>
+> 1. **Format MetaPhlAn2 output for Krona** :wrench:: Run **Format MetaPhlAn2 output for Krona** to format MetaPhlAn2 output for KRONA
+> 2. **KRONA** :wrench:: Run **KRONA** on the formatted MetaPhlAn2 output
+>
+>    > ### :question: Questions
+>    >
+>    > 1. What are the main species found for the bacteria?
+>    > 2. Is the proportion of ... similar to the one found with EBI Metagenomics?
+>    >
+>    >    <details>
+>    >    <summary>Click to view answers</summary>
+>    >    <ol type="1">
+>    >    <li></li>
+>    >    <li></li>
+>    >    </ol>
+>    >    </details>
+>    {: .question}
+>
+{: .hands_on} 
+
+*One sentence to conclude the taxonomic analysis*
+
+## Extraction of functional information 
+
+We would like now to answer the question "What are the micro-organisms doing?" or "Which functions are done by the micro-organisms in the environment?". 
+
+In the WGS data, we have access to the gene sequences. We use that to identify the genes, associate them to a function, build pathways, etc to investigate the functional part of the community.
+
+> ### :pencil2: Hands-on: Metabolism function identification
+>
+> 1. **HUMAnN2** :wrench:: Run **HUMAnN2** on non rRNA sequences (SortMeRNA output) to extract the gene families and pathways in the sample
+> 
+>    > ### :question: Questions
+>    >
+>    > 1. Which gene families is the most found one?
+>    > 2. Which pathway is the most found one?
+>    >
+>    >    <details>
+>    >    <summary>Click to view answers</summary>
+>    >    <ol type="1">
+>    >    <li></li>
+>    >    <li></li>
+>    >    </ol>
+>    >    </details>
+>    {: .question}
+>
+> 2. Inspection of HUMAnN2 results?? Extraction of interesting info?
+{: .hands_on}
+
+*One sentence to conclude the functional analysis*
+
+With the previous analyses, we investigate "Which micro-organims are present in my sample?" and "What function are done by the micro-organisms in my sample?". We can go further in these analyses (for example with combination of functional and taxonomic results). We did not detail that in this tutorial but you can found more analyses in our tutorials on whole-genome sequencing data analyses.
 
 # Conclusion
 
-Conclusion about the technical key points. And then relation between the technics and the biological question to end with a global view.
+*scheme to sum up the analyses*
+
+*Conclusion about the technical key points. And then relation between the technics and the biological question to end with a global view.*
