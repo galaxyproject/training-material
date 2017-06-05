@@ -19,16 +19,69 @@ For that, we will use two datasets (one amplicon and one WGS) from the same envi
 
 # Amplicon data
 
-Introduction about what is amplicon data (see images on Mothur tutorial)
-What can be extracted from this type of data (only taxonomy)
+Amplicon sequencing is a highly targeted approach for analyzing genetic variation in specific genomic regions. In the metagenomics fields, amplicon sequencing refers to capture and sequence of rRNA data in a sample. It can be 16S for bacteria or archea or 18S for eukaryotes. 
 
-## Extraction of taxonomic information 
+> ### :book: Background: The 16S ribosomal RNA gene
+> ![](../../images/16S_gene.png) <br><br>
+>
+> The 16S rRNA gene has several properties that make it ideally suited for our purposes
+>
+> 1. Present in all living organisms
+> 2. Single copy (no recombination)
+> 3. Highly conserved + highly variable regions
+> 4. Huge reference databases
+>
+> ![](../../images/16S_variableregions.jpg)
+>
+> The highly conserved regions make it easy to target the gene across different organisms,
+> while the highly variable regions allow us to distinguish between different species.
+>
+> (slide credit [http://www.slideshare.net/beiko/ccbc-tutorial-beiko ](http://www.slideshare.net/beiko/ccbc-tutorial-beiko ))
+{: .tip}
 
-Question: Which micro-organisms are present in an environmental samples? And in which proportion? What is the structure of the community of micro-organisms?
+With amplicon data, we can extract from which micro-organisms the sequences in our sample are coming from. This is called taxonomic assignation. We try to assign sequences to taxons and then classify or extract the taxonomy in our sample.
 
-Explaining the principle of OTU
+Our dataset comes from a sample of Anguil soil with capture and sequencing of the 16S rDNA V4 region using 454 GS FLX Titanium. The original data are available at EBI Metagenomics under run number [SRR651839](https://www.ebi.ac.uk/metagenomics/projects/SRP016633/samples/SRS386929/runs/SRR651839/results/versions/2.0).
 
-> ### :pencil2: Hands-on: Mothur or QIIME
+In this analysis, we will use [Mothur tool suite](http://mothur.org), but only a small portion of its tools and possibilities. To learn more in detail how to use, we recommend to check our [Mothur tutorial](). 
+
+## Importing the data
+
+> ### :pencil2: Hands-on: Data upload
+>
+> 1. Import the FASTQ file from [Zenodo]() or from the data library (in "Analyses of metagenomics data" the "..." file)
+>
+>    > ### :bulb: Tip: Importing data via links
+>    >
+>    > * Copy the link location
+>    > * Open the Galaxy Upload Manager
+>    > * Select **Paste/Fetch Data**
+>    > * Paste the link into the text field
+>    > * Press **Start**
+>    {: .tip}
+>
+>    > ### :bulb: Tip: Importing data from a data library
+>    >
+>    > * Go into "Shared data" (top panel) then "Data libraries"
+>    > * Click on "Training data" and then "Analyses of metagenomics data"
+>    > * Select interesting file
+>    > * Click on "Import selected datasets into history"
+>    > * Import in a new history
+>    {: .tip}
+>
+>    As default, Galaxy takes the link as name, so rename them.
+>
+{: .hands_on}
+
+## Extraction of taxonomic information
+
+The main questions when analyzing amplicon data are: Which micro-organisms are present in an environmental samples? And in which proportion? What is the structure of the community of the micro-organisms?
+
+The idea is to take the sequences and assign them to a taxon. To do that, we group (or cluster) sequences based on their similarity to define Operational Taxonomic Units, groups of similar sequences that can be treated as a single "genus" or "species" (depending on the clustering threshold)
+
+![](../../images/otu.png)
+
+> ### :pencil2: Hands-on: Extraction of OTUs with Mothur
 >
 > 1. Step1
 > 2. Step2
@@ -44,9 +97,9 @@ Explaining the principle of OTU
 >    {: .tip}
 {: .hands_on}
 
-## Visualization of the community structure
+Once the sequences are clustered into OTUs, one sequence of each OTU is selected as a representative sequence for the OTU. The taxonomic assignation (genus, species, ...) for this sequence is searched and then assigned to all sequences of the OTU. 
 
-> ### :pencil2: Hands-on: Phinch
+> ### :pencil2: Hands-on: Taxonomic assignation of the OTUs
 >
 > 1. Step1
 > 2. Step2
@@ -62,7 +115,27 @@ Explaining the principle of OTU
 >    {: .tip}
 {: .hands_on}
 
-To go further on these analyses, you can follow our tutorials on amplicon data analyses.
+With the taxonomic assignation for each OTU, we can now extract for each genus (or other taxonomic level) how many OTUs (with how many sequences) are assigned to this genus (or other taxonomic level): extracting the community structure (taxon and their abundance) for the sample. 
+
+To explore the community structure, we can visualize it with dedicated tools such as Phinch:
+
+> ### :pencil2: Hands-on: Visualization of the community structure with Phinch
+>
+> 1. Step1
+> 2. Step2
+>
+>    > ### :nut_and_bolt: Comments
+>    > A comment
+>    {: .comment}
+>
+>    > ### :bulb: Tip: A tip
+>    >
+>    > * Step1
+>    > * Step2
+>    {: .tip}
+{: .hands_on}
+
+Once we have information about the community structure (OTUs with taxonomic structure), we can do more analysis on it: estimation of the diversity of micro-organism, comparison fo diversity between samples, analysis of populations, ... We will not detail such analyses here but you follow our tutorials on amplicon data analyses to learn about them.
 
 # Whole-genome sequencing data
 
