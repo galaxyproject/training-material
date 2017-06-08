@@ -18,8 +18,13 @@ do
     shed-install -t $dir/tools.yaml -g $galaxy_instance -u $GALAXY_DEFAULT_ADMIN_USER -p $GALAXY_DEFAULT_ADMIN_PASSWORD
 
     # install workflows (TODO: make them shared instead of just under admin user account?)
-    echo " - Installing workflows"
-    workflow-install --workflow_path $dir/workflows/ -g $galaxy_instance -u $GALAXY_DEFAULT_ADMIN_USER -p $GALAXY_DEFAULT_ADMIN_PASSWORD
+    if [ -d $dir/workflows/ ];
+    then
+        echo " - Installing workflows"
+        workflow-install --workflow_path $dir/workflows/ -g $galaxy_instance -u $GALAXY_DEFAULT_ADMIN_USER -p $GALAXY_DEFAULT_ADMIN_PASSWORD
+    else
+        echo "No workflow to install"
+    fi
 
     # install data libraries
     echo " - Installing data libraries"
