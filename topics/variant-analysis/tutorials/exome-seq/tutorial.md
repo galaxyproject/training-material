@@ -1,3 +1,9 @@
+---
+layout: tutorial_hands_on
+topic_name: variant-analysis
+tutorial_name: exome-seq
+---
+
 # Introduction
 
 Exome sequencing means that all protein-coding genes in a genome are sequenced.
@@ -225,7 +231,7 @@ Now that we have an annotated VCF file it is time to peek inside our variation d
 > ### :pencil2: Hands-on: Post-processing
 >
 > 1. Create a pedigree file (PED) like this
-> 
+>
 > ```
 > #family_id	sample_id	paternal_id	maternal_id	sex	phenotype	ethnicity
 > family1	RS024M-MOTHER	-9	-9	2	1	CEU
