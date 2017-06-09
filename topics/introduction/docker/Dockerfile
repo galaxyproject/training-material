@@ -10,14 +10,10 @@ FROM bgruening/galaxy-stable
 
 MAINTAINER Galaxy Training Material
 
-ENV GALAXY_CONFIG_BRAND "GTN: <your_topic>"
-
-# prerequisites
-RUN pip install ephemeris -U
-ADD bin/galaxy-sleep.py /galaxy-sleep.py
+ENV GALAXY_CONFIG_BRAND "GTN: Introduction"
 
 # copy the tutorials directory for your topic
-ADD topics/<your_topic>/tutorials/ /tutorials/
+ADD topics/introduction/tutorials/ /tutorials/
 
 # install everything for tutorials
 ADD bin/docker-install-tutorials.sh /setup-tutorials.sh
