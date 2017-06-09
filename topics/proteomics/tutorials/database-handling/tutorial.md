@@ -1,3 +1,9 @@
+---
+layout: tutorial_hands_on
+topic_name: proteomics
+tutorial_name: database-handling
+---
+
 # Introduction
 
 Identifying peptides in proteomic datasets is commonly done by using search engines that compare the MS2 spectra of peptides to theoretical spectra. These theoretical spectra are generated from a FASTA database containing proteins that are expected in the measured sample. Typically, those FASTA databases will contain all proteins of the organism the sample derived from.
@@ -8,7 +14,7 @@ Identifying peptides in proteomic datasets is commonly done by using search engi
 >
 > 1. [Loading a Search Database](#loading-a-search-database)
 > 2. [Contaminant Databases](#contaminant-databases)
-> 3. [Merging Databases](#merging-databases) 
+> 3. [Merging Databases](#merging-databases)
 > 4. [Creating Decoy Databases](#creating-decoy-databases)
 > {: .agenda}
 
@@ -21,12 +27,12 @@ There are a many ways how you can upload your search database (FASTA file with p
 *   Using a direct weblink to the database.
 *   Uploading a database from the data library.
 
-In this tutorial, we will explore **Protein Database Downloader** :wrench: for generating a searchable protein database. First we download the proteome of the organism of interest. In this tutorial, we will use a database of the human proteome. 
+In this tutorial, we will explore **Protein Database Downloader** :wrench: for generating a searchable protein database. First we download the proteome of the organism of interest. In this tutorial, we will use a database of the human proteome.
 
 > ### :pencil2: Hands-on: Loading a Search Database
 >
 > 1. Create a new history for this Database Handling exercise.
-> 2. Open **Protein Database Downloader** :wrench: 
+> 2. Open **Protein Database Downloader** :wrench:
 > 3. Select in the drop-down menues `Taxonomy`: "Homo sapiens (Human)" and `reviewed`: "UniprotKB/Swiss-Prot (reviewed only)".
 > 4. Click on `Execute`. There will be a new dataset named `Protein database` in your history, now.
 > 5. Rename the `Protein database` to `Main database`.
@@ -52,17 +58,17 @@ In this tutorial, we will explore **Protein Database Downloader** :wrench: for g
 
 # Contaminant databases
 
-In proteomic samples, some protein contaminants are very common, stemming from the experimenter or contaminated cell culture. Common contaminants are therefore added to the database. This has two benefits: 
+In proteomic samples, some protein contaminants are very common, stemming from the experimenter or contaminated cell culture. Common contaminants are therefore added to the database. This has two benefits:
 1. Contamination can be observed, heavily contaminated samples can be excluded from analysis.
 2. Contaminant peptides cannot be misassigned to similar peptides in the database reducing the risk of identifying false positives.
 
 A widely used database for common contaminants is the **c**ommon **R**epository of **A**dventitious **P**roteins (cRAP). When using samples generated in cell cultures, it is furthermore recommended to include Mycoplasma proteomes in the search database. Mycoplasma infections are very common in cell culture and often go unnoticed ([Drexler and Uphoff, Cytotechnology, 2002](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3463982/)).
 
 > ### :pencil2: Hands-on: Contaminant databases
-> 1. Open **Protein Database Downloader** :wrench:. 
+> 1. Open **Protein Database Downloader** :wrench:.
 > 2. Select `Download from`: "cRAP (contaminants)" and execute.
 > 3. Rename the new database to "crap database".
-> 
+>
 > To be able to distinguish contaminants from proteins of interest, you should add a tag to each contaminant protein.
 >
 > 1. Run **FASTA-to-Tabular** :wrench: on your crap database.
@@ -72,7 +78,7 @@ A widely used database for common contaminants is the **c**ommon **R**epository 
 >
 >
 >  > ### :question: Question
->  > 1. The cRAP database contains some human proteins. What does it mean if you identify those typical contaminants in a human sample? 
+>  > 1. The cRAP database contains some human proteins. What does it mean if you identify those typical contaminants in a human sample?
 >  > 2. What does it mean in a non-human sample?
 >  >
 >  >  <details>
@@ -93,7 +99,7 @@ A widely used database for common contaminants is the **c**ommon **R**epository 
 > 2. Run **FASTA Merge Files and Filter Unique Sequences** :wrench: to combine all mycoplasma databases into a single one.
 > 3. Tag each entry in the combined database with the string "MYCOPLASMA_CONTAMINANT" by using **FASTA-to-Tabular** :wrench:, **Add column** :wrench: and **Tabular-to-FASTA** :wrench:, as explained [above](#HO-Contaminant-Databases).
 > 4. Rename the **Tabular-to-FASTA** :wrench: output to "Tagged Mycoplasma database".
-> 
+>
 >  > ### :nut_and_bolt: Comment
 >  > The reviewed mycoplasma databases do not contain all known proteins. It is better to include also the TREMBL database. Mycoplasma proteomes are relatively small, so even downloading TREMBL will not bloat your main database unneccessarily.
 >  > {: .comment}
