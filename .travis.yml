@@ -26,16 +26,16 @@ script:
   - ./bin/check_structure.py
   # Check docker
   - ./bin/prepare_docker_checks.py
-  - export ROOT=$PWD
-  - |
-    while read -r DIR
-    do
-      echo "$DIR"
-      cd "$DIR"
-      docker build -f Dockerfile.old .
-      cd $ROOT
-      echo ""
-    done < DOCKER_BUILDS.list
+  #- |
+  #  export ROOT=$PWD
+  #  while read -r DIR
+  #  do
+  #    echo "$DIR"
+  #    cd "$DIR"
+  #    docker build -f Dockerfile.old .
+  #    cd $ROOT
+  #    echo ""
+  #  done < DOCKER_BUILDS.list
   # Once all tutorials use new docker bootstrap script use this
   - |
     while read -r DIR
@@ -44,3 +44,4 @@ script:
       docker build -f "$DIR/Dockerfile" .
       echo ""
     done < DOCKER_BUILDS.list
+
