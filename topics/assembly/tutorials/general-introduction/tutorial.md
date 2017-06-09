@@ -1,4 +1,10 @@
-﻿# Genome assembly with Velvet: Background
+---
+layout: tutorial_hands_on
+topic_name: assembly
+tutorial_name: general-introduction
+---
+
+# Genome assembly with Velvet: Background
 Velvet is one of a number of *de novo* assemblers that use short read sets as input (e.g. Illumina Reads), and the assembly method is based on de Bruijn graphs. For information about Velvet see this [link](https://en.wikipedia.org/wiki/Velvet_assembler).
 
 
@@ -85,7 +91,7 @@ The FastQC tool:
 
 > ### :pencil2: Hands-on: Run FastQC on a fastq file
 >
->We will now run the FastQC tool on one of our fastq files. Normally we would run it on all of them but we will do 1 as an example here. 
+>We will now run the FastQC tool on one of our fastq files. Normally we would run it on all of them but we will do 1 as an example here.
 >
 > #### 1. Run **FastQC** :wrench: on **mutant_R1.fastq** to assess the quality of the input data.
 >
@@ -116,7 +122,7 @@ The FastQC tool:
 Although we have warnings for two outputs (per base sequence content; Kmer content), we can ignore these for now.
 
 For a fuller discussion of FastQC outputs and warnings, see the [FastQC website link](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/), including the section on each of the output [reports](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/Help/3%20Analysis%20Modules/), and examples of ["good"](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/good_sequence_short_fastqc.html) and ["bad"](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/bad_sequence_fastqc.html) Illumina data.
- 
+
 We won’t be doing anything to these data to clean it up as there isn’t much need. Therefore we will get on with the assembly!
 
 
@@ -189,7 +195,7 @@ We will now collect some basic statistics on our assembly.
 
 # Discussion
 
-We have completed an assembly on this data set for a number of k values ranging from 29 to 101. The results a few of the assembly metrics appear below. 
+We have completed an assembly on this data set for a number of k values ranging from 29 to 101. The results a few of the assembly metrics appear below.
 
 ![contigs](../../images/number_of_contigs.png)
 
@@ -211,7 +217,7 @@ This chart shows the n50 metric for each of the assemblies by k-mer size.
 >
 > 1. Are there any distinct features in the charts?
 > 2. Does it look like one assembly might be better than some of the others?
-> 3. 
+> 3.
 {: .question}
 
 The reasons for these patterns will be discussed in detail in the De Bruijn graph assembly slides and tutorial.

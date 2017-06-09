@@ -1,6 +1,6 @@
 ---
 layout: introduction_slides
-topic_name: Assembly
+topic_name: assembly
 logo: "GTN"
 class: enlarge120
 ---
@@ -18,12 +18,12 @@ class: enlarge120
 
 ]
 
-.pull-left[ 
+.pull-left[
 
 **The process of reconstructing the original DNA sequence from the fragment reads alone.**
 
 * Instinctively like a jigsaw puzzle
- 
+
   * Find reads which "fit together" (overlap)
   * Could be missing pieces (sequencing bias)
   * Some pieces will be dirty (sequencing errors)
@@ -109,7 +109,7 @@ class: enlarge120
   * Sequencing errors will mess it up a lot
 * Traverse the graph
   * Trace a sensible path to produce a consensus
-  
+
 ---
 
 ![](../images/olc_pic.png)
@@ -122,18 +122,18 @@ class: enlarge120
 
 ---
 
-# .image-15[![](../images/nofun.png)] **What ruins the graph?** 
+# .image-15[![](../images/nofun.png)] **What ruins the graph?**
 
 * Read errors
   * Introduces false edges and nodes
-  
+
 * Non haploid organisms
   * Heterozygosity causes lots of detours
-  
+
 * Repeats
   * If they are longer than the read length
   * Causes nodes to be shared, locality confusion.
-  
+
 ---
 
 # **Repeats**
@@ -191,7 +191,7 @@ Contig sizes are limited by:
 * the length of the repeats in your genome
   * Can't change this
 
-  
+
 * the length (or "span") of the reads
   * Use long read technology
   * Use tricks with other technology
@@ -230,7 +230,7 @@ sequence both ends of the same fragment
 * **Paired end reads**
   * Known sequences at each end of fragment
   * Roughly known fragment length
-  
+
 * **Most ends will occur in same contig**
 
 * **Some will occur in different contigs**
@@ -249,11 +249,11 @@ sequence both ends of the same fragment
   * Total length similar to genome size
   * Fewer, larger contigs
   * Correct contigs
-  
+
 * Metrics
   * No generally useful measure. (No real prior information)
   * Longest contigs, total base pairs in contigs, **N50**, ...
-  
+
 ---
 
 .enlarge120[# **The "N50"**]
@@ -262,13 +262,13 @@ sequence both ends of the same fragment
 
 * Imagine we have 7 contigs with lengths:
   * 1, 1, 3, 5, 8, 12, 20
-  
+
 * Total
   * 1+1+3+5+8+12+20 = 50
-  
+
 * N50 is the "halfway sum" = 25
   * 1+1+3+5+8+**12** = 30 (>25) so **N50 is 12**
-  
+
 ---
 
 .enlarge120[# **2 levels of assembly**]
@@ -276,13 +276,13 @@ sequence both ends of the same fragment
 * Draft assembly
   * Will contain a number of non-linked scaffolds with gaps of unknown sequence
   * Fairly easy to get to
-  
+
 * Closed (finished) assembly
   * One sequence for each chromosome
   * Takes a **lot** more work
   * Small genomes are becoming easier with long read tech
   * Large genomes are the province of big consortia (e.g. Human Genome Consortium)
-  
+
 ---
 .enlarge120[# **How do I do it?**]
 ---
@@ -302,8 +302,8 @@ sequence both ends of the same fragment
 * Get back 2 files
   * .remark-code[MRSA_R1.fastq.gz]
   * .remark-code[MRSA_R2.fastq.gz]
-  
-  
+
+
 * ***Now what?***
 ]
 
@@ -320,7 +320,7 @@ sequence both ends of the same fragment
 
 * Transcriptome
   * Trinity, Oases, Trans-abyss
-  
+
 ***And many, many others...***
 
 ]
