@@ -1,15 +1,21 @@
+---
+layout: introduction_slides
+topic_name: transcriptomics
+logo: "GTN"
+---
+
 # What is RNA sequencing?
 
 ---
 
 ### RNA sequencing
 
-RNA 
+RNA
 
-- Transcribed form of the DNA 
+- Transcribed form of the DNA
 - Active state of the DNA
 
-RNA sequencing 
+RNA sequencing
 
 - RNA quantification at single base resolution
 - Cost efficient analysis of the whole transcriptome in a high-throughput manner
@@ -33,7 +39,7 @@ RNA sequencing
 ---
 
 ### Challenges of RNA sequencing
-                            
+
 - Different origin for the sample RNA and the reference genome
 - Presence of incompletely processed RNAs or transcriptional background noise
 - Sequencing biases (*e.g.* PCR library preparation)
@@ -49,12 +55,12 @@ RNA sequencing
 ### FASTQ-files
 
 ```bash
-@4:1:4888:1039:Y 
+@4:1:4888:1039:Y
 TGAACGCTGTTTCCAAGAAATGCTGGAAGAGGTCGATGGGTGTTATCTCTG
-+ 
++
 IIIHIIIIIIIIIIIIIIIIIIIIIIIIIH!CBCBBBB@=B@A?1@==<@=
 ```
-                            
+
 - 50+ million reads per data set (~15 GB data for one human fastq-file)
 - Unique identifier per read
 - Nucleotide sequence with single base resolution
@@ -68,7 +74,7 @@ IIIHIIIIIIIIIIIIIIIIIIIIIIIIIH!CBCBBBB@=B@A?1@==<@=
 
     > *Which RNA molecules are in my sample?*
 
-    - Novel isoforms and alternative splicing 
+    - Novel isoforms and alternative splicing
     - Non-coding RNAs
     - Single nucleotide variations
     - Fusion genes
@@ -99,7 +105,7 @@ IIIHIIIIIIIIIIIIIIIIIIIIIIIIIH!CBCBBBB@=B@A?1@==<@=
 
 ![](../images/rna_quantification.png)
 
-- No available standardized workflow 
+- No available standardized workflow
 - Multiple possible best practices for every dataset
 
 ---
@@ -108,7 +114,7 @@ IIIHIIIIIIIIIIIIIIIIIIIIIIIIIH!CBCBBBB@=B@A?1@==<@=
 
 .image-50[![](../images/rna_quantification_preprocessing.png)]
 
-1. Adapter clipping to trim the sequencing adapters 
+1. Adapter clipping to trim the sequencing adapters
 2. Quality trimming to remove wrongly called and low quality bases
 
 .footnote[See [NGS Quality control](../../NGS-QC/slides/index.html)]
@@ -203,7 +209,7 @@ But some challenges
 ### Differential Expression Analysis
 
 .image-75[![](../images/RNA_seq_DEscheme.png)]
- 
+
 Account for variability of expression across biological replicates<br>with the help of counts
 
 ---
@@ -222,7 +228,7 @@ Make the expression levels comparable across
 - [*FPKM/RPKM*](http://www.nature.com/nmeth/journal/v5/n7/abs/nmeth.1226.html) (Cufflinks/Cuffdiff)
 - [*TMM*](https://genomebiology.biomedcentral.com/articles/10.1186/gb-2010-11-3-r25) (edgeR)
 - [*DESeq2*](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-014-0550-8) (DESeq2)
-    
+
     Normalize counts *k<sub>ij</sub>* for gene *i* in library *j* by size factor *s<sub>j</sub>*
 
 .footnote[*"Only the DESeq and TMM normalization methods are robust to the presence of different library sizes and widely different library compositions..."* - Dillies et al., Brief Bioinf, 2013]
@@ -266,12 +272,12 @@ Idea
 
 ### Visualization
 
-- Integrative Genomics Viewer ([*IGV*](http://bib.oxfordjournals.org/content/14/2/178.full?keytype=ref&%2520ijkey=qTgjFwbRBAzRZWC)) 
+- Integrative Genomics Viewer ([*IGV*](http://bib.oxfordjournals.org/content/14/2/178.full?keytype=ref&%2520ijkey=qTgjFwbRBAzRZWC))
 
     Visualization of the aligned BAM files
 
 - [*Sashimi plots*](http://bioinformatics.oxfordjournals.org/content/early/2015/01/21/bioinformatics.btv034)
-    
+
     Quantitative visualization of read coverage along exons and splice junctions
 
 - [*CummeRbund*](http://compbio.mit.edu/cummeRbund/manual_2_0.html)
@@ -288,5 +294,3 @@ Idea
 - Ensembl - [*e!*](http://www.ensembl.org/info/website/tutorials/sequence.html)
 - The Cancer Genome Atlas - [*TCGA*](https://tcga-data.nci.nih.gov/docs/publications/tcga/?)
 - ... our tutorial
-
-
