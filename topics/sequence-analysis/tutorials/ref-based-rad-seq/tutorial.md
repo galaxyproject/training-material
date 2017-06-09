@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
-topic_name: RAD-Seq
-tutorial_name: ref_based_rad
+topic_name: sequence-analysis
+tutorial_name: ref-based-rad-seq
 ---
 
 # Introduction
@@ -26,7 +26,7 @@ We here proposed to re-analyze these data at least until the population genomics
 
 ## Data upload
 
-The original data is available at NCBI SRA ENA under accession number [SRR034310](https://trace.ncbi.nlm.nih.gov/Traces/sra/?run=SRR034310) as part of the NCBI SRA ENA study accession number [SRP001747](https://trace.ncbi.nlm.nih.gov/Traces/sra/?study=SRP001747). 
+The original data is available at NCBI SRA ENA under accession number [SRR034310](https://trace.ncbi.nlm.nih.gov/Traces/sra/?run=SRR034310) as part of the NCBI SRA ENA study accession number [SRP001747](https://trace.ncbi.nlm.nih.gov/Traces/sra/?study=SRP001747).
 
 We will look at the first run SRR034316 out of 7:
 
@@ -45,7 +45,7 @@ To download all training datasets (i.e reads, reference genome, population map f
 
 >
 >    > ### :nut_and_bolt: Comments
->    > If you are using the [GenOuest Galaxy instance](http://galaxy.genouest.org), you can load the dataset using 'Shared Data' <i class="fa fa-long-arrow-right"></i> 'Data Libraries' <i class="fa fa-long-arrow-right"></i> '1 Galaxy teaching folder' <i class="fa fa-long-arrow-right"></i> 'EnginesOn' <i class="fa fa-long-arrow-right"></i> 'RADseq' <i class="fa fa-long-arrow-right"></i> 'Stickelback population genomics' <i class="fa fa-long-arrow-right"></i> 'SRR034310' 
+>    > If you are using the [GenOuest Galaxy instance](http://galaxy.genouest.org), you can load the dataset using 'Shared Data' <i class="fa fa-long-arrow-right"></i> 'Data Libraries' <i class="fa fa-long-arrow-right"></i> '1 Galaxy teaching folder' <i class="fa fa-long-arrow-right"></i> 'EnginesOn' <i class="fa fa-long-arrow-right"></i> 'RADseq' <i class="fa fa-long-arrow-right"></i> 'Stickelback population genomics' <i class="fa fa-long-arrow-right"></i> 'SRR034310'
 >
 >    > ### :bulb: Tip: Importing data via links
 >    >
@@ -58,27 +58,27 @@ To download all training datasets (i.e reads, reference genome, population map f
 >    >     * https://cesgo.genouest.org/resources/374/download/Barcodes_SRR034310.tabular
 >    > * Press **Start**    
 >
->    > ### :bulb: Tip: Changing the file type `fastq` to `fastqsanger` once the data file is in your history. 
+>    > ### :bulb: Tip: Changing the file type `fastq` to `fastqsanger` once the data file is in your history.
 >    > As we know here that the datatype is fastqsanger, we can directly change it through the upcoming method. Normally, you need to execute FastQGroomer to be sure to have a correct fastqsanger file format. And if you don't know how your quality score is encoded on raw fastQ files, please, use the FastQC tool to determine it!
 >    >
 >    > * Click on the pencil button displayed in your dataset in the history
 >    > * Choose **Datatype** on the top
 >    > * Select `fastqsanger`
 >    > * Press **Save**
-> 
+>
 >    As default, Galaxy takes the link as name. It also do not link the dataset to a database or a reference genome.
-> 
+>
 >    > ### :nut_and_bolt: Comments
 >    > - Add the "stickleback" custom build from the Fasta reference genome file
 >    > - Edit the "Database/Build" to select "stickleback"
 >    > - Rename the datasets according to the samples
-> 
+>
 
 The sequences are raw sequences from the sequencing machine, without any pretreatments. They need to be demultiplexed. To do so, we can use the Process Radtags tool from STACKS.
 
 ## Demultiplexing reads
 
-For demultiplexing, we use the Process Radtags tool from [STACKS](http://www.g3journal.org/content/1/3/171.full) . 
+For demultiplexing, we use the Process Radtags tool from [STACKS](http://www.g3journal.org/content/1/3/171.full) .
 
 > ### :pencil2: Hands-on: Demultiplexing reads
 >
@@ -105,7 +105,7 @@ For demultiplexing, we use the Process Radtags tool from [STACKS](http://www.g3j
 >    >    </details>
 > ![](../../images/RAD4_Population_Genomics/Process_radtags_out_log.png)
 >
-> 2. **Process Radtags** :wrench:: Re-Run `Stacks: process radtags` on FastQ file playing with parameters 
+> 2. **Process Radtags** :wrench:: Re-Run `Stacks: process radtags` on FastQ file playing with parameters
 >
 > In `advanced options`, activate the `Discard reads with low quality scores` option and play with the score limit (default vs 20 for example) and examine the change in reads retained. Note that you can play also with the sliding window score threshold, by default 15% of the length of the read. This sliding window parameter allows notably the user to deal with the declining quality at the 3' end of reads.
 >
@@ -119,7 +119,7 @@ For demultiplexing, we use the Process Radtags tool from [STACKS](http://www.g3j
 >
 > ![](../../images/RAD4_Population_Genomics/Process_radtags_in_advancedparameter_compare_paste.PNG)
 >
-> You can use the `Charts` functionality through the Visualize button reachable on the `Radtags logs` file you just generated. 
+> You can use the `Charts` functionality through the Visualize button reachable on the `Radtags logs` file you just generated.
 >
 > ![](../../images/RAD4_Population_Genomics/Process_radtags_charts.PNG)
 >

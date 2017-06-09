@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
-topic_name: sRNA-Seq
-tutorial_name: small RNA sequencing analysis
+topic_name: sequence-analysis
+tutorial_name: srna
 ---
 
 # Introduction
@@ -88,7 +88,7 @@ Read quality scores (phred scores) in FASTQ-formatted data can be encoded by one
 >
 > {: .hands_on}
 
-After `FASTQ Groomer` finishes, click on the groomed control sRNA-seq dataset collection and then click on the name of one of the datasets. You should see that the format is **fastqsanger** instead of **fastq**, meaning we have successfully converted the quality score encoding scheme. 
+After `FASTQ Groomer` finishes, click on the groomed control sRNA-seq dataset collection and then click on the name of one of the datasets. You should see that the format is **fastqsanger** instead of **fastq**, meaning we have successfully converted the quality score encoding scheme.
 
     ![](../images/image.png)
 

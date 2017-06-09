@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
-topic_name: RAD-Seq
-tutorial_name: de_novo_based_rad
+topic_name: sequence-analysis
+tutorial_name: de-novo-rad-seq
 ---
 
 # Introduction
@@ -25,7 +25,7 @@ We here proposed to re-analyze these data at least until the population genomics
 
 ## Data upload
 
-The original data is available at NCBI SRA ENA under accession number [SRR034310](https://trace.ncbi.nlm.nih.gov/Traces/sra/?run=SRR034310) as part of the NCBI SRA ENA study accession number [SRP001747](https://trace.ncbi.nlm.nih.gov/Traces/sra/?study=SRP001747). 
+The original data is available at NCBI SRA ENA under accession number [SRR034310](https://trace.ncbi.nlm.nih.gov/Traces/sra/?run=SRR034310) as part of the NCBI SRA ENA study accession number [SRP001747](https://trace.ncbi.nlm.nih.gov/Traces/sra/?study=SRP001747).
 
 We will look at the first run SRR034316 out of 7:
 
@@ -43,7 +43,7 @@ To download all training datasets (i.e reads, population map file and barcodes f
 > 2. Import FASTQ files (*e.g.*  [`SRR034310`](ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR034/SRR034310/SRR034310.fastq.gz) as population map information file [`Population_map.txt`](https://cesgo.genouest.org/resources/373/download/Population_map.txt) and barcodes file [`Barcodes_SRR034310`](https://cesgo.genouest.org/resources/374/download/Barcodes_SRR034310.tabular)) from SRA and [CeSGO](https://cesgo.genouest.org/)
 >
 >    > ### :nut_and_bolt: Comments
->    >    If you are using the [GenOuest Galaxy instance](http://galaxy.genouest.org), you can load the dataset using 'Shared Data' -> 'Data Libraries' -> '1 Galaxy teaching folder' -> 'EnginesOn' -> 'RADseq' -> 'Stickelback population genomics' -> 'SRR034310' 
+>    >    If you are using the [GenOuest Galaxy instance](http://galaxy.genouest.org), you can load the dataset using 'Shared Data' -> 'Data Libraries' -> '1 Galaxy teaching folder' -> 'EnginesOn' -> 'RADseq' -> 'Stickelback population genomics' -> 'SRR034310'
 >
 >    > ### :bulb: Tip: Importing data via links
 >    >
@@ -62,14 +62,14 @@ To download all training datasets (i.e reads, population map file and barcodes f
 >    >    * Choose **Datatype** on the top
 >    >    * Select `fastqsanger`
 >    >    * Press **Save**
-> 
-> 
+>
+>
 
 The sequences are raw sequences from the sequencing machine, without any pretreatments. They need to be demultiplexed. To do so, we can use the Process Radtags tool from STACKS.
 
 ## Demultiplexing reads
 
-For demultiplexing, we use the Process Radtags tool from [STACKS](http://www.g3journal.org/content/1/3/171.full) . 
+For demultiplexing, we use the Process Radtags tool from [STACKS](http://www.g3journal.org/content/1/3/171.full) .
 
 > ### :pencil2: Hands-on: Demultiplexing reads
 >
@@ -97,7 +97,7 @@ For demultiplexing, we use the Process Radtags tool from [STACKS](http://www.g3j
 >    >    </details>
 > ![](../../images/RAD4_Population_Genomics/Process_radtags_out_log.png)
 >
-> 2. **Process Radtags** :wrench:: Re-Run `Stacks: process radtags` on FastQ file playing with parameters 
+> 2. **Process Radtags** :wrench:: Re-Run `Stacks: process radtags` on FastQ file playing with parameters
 >
 > In `advanced options`, after activation of the `Discard reads with low quality scores` option, play with the score limit (default vs 20 for example) and examine the change in reads retained. Note that you can play also with the sliding window score threshold, by default 15% of the length of the read. This sliding window parameter allows notably the user to deal with the declining quality at the 3' end of reads.
 >
@@ -111,7 +111,7 @@ For demultiplexing, we use the Process Radtags tool from [STACKS](http://www.g3j
 >
 > ![](../../images/RAD4_Population_Genomics/Process_radtags_in_advancedparameter_compare_paste.PNG)
 >
-> You can use the `Charts` functionality through the Visualize button reachable on the `Radtags logs` file you just generated. 
+> You can use the `Charts` functionality through the Visualize button reachable on the `Radtags logs` file you just generated.
 >
 > ![](../../images/RAD4_Population_Genomics/Process_radtags_charts.PNG)
 >

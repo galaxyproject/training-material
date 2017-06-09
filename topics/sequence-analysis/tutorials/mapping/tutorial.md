@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
-topic_name: NGS-mapping
-tutorial_name: dive_into_mapping
+topic_name: sequence-analysis
+tutorial_name: mapping
 ---
 
 # Introduction to next generation sequencing data mapping
@@ -21,7 +21,7 @@ In the following we will process a dataset with a mapper, 'Bowtie2', and we will
 >
 > We will process data inside Galaxy with Bowtie2 and have a look at the results.
 >
-> 1. Load the ['GSM461178_untreat_paired_subset_1.fastq'](https://zenodo.org/record/61771/files/GSM461178_untreat_paired_subset_1.fastq) dataset from [Zenodo](https://zenodo.org/record/61771) into Galaxy. 
+> 1. Load the ['GSM461178_untreat_paired_subset_1.fastq'](https://zenodo.org/record/61771/files/GSM461178_untreat_paired_subset_1.fastq) dataset from [Zenodo](https://zenodo.org/record/61771) into Galaxy.
 >    
 >    > ### :bulb: Tip: Importing data via links
 >    >
@@ -53,13 +53,13 @@ In the following we will process a dataset with a mapper, 'Bowtie2', and we will
 >
 > 3. Click on the right history panel on the Bowtie2 output. Look careful at the information which is given here:
 >    
->           100000 reads; of these: 100000 (100.00%) were unpaired; 
->           of these: 99407 (99.41%) aligned 0 times 
->           149 (0.15%) aligned exactly 1 time 
->           444 (0.44%) aligned >1 times 
+>           100000 reads; of these: 100000 (100.00%) were unpaired;
+>           of these: 99407 (99.41%) aligned 0 times
+>           149 (0.15%) aligned exactly 1 time
+>           444 (0.44%) aligned >1 times
 >           0.59% overall alignment rate
-> 
-> 
+>
+>
 >    > ### :question: Questions
 >    >
 >    > - What information is provided here?
@@ -93,18 +93,18 @@ A general description of the user interface of the IGV browser can be read here:
 >
 >The Integrative Genomics Viewer (IGV) is a high-performance visualization tool for interactive exploration of large, integrated genomic datasets. It supports a wide variety of data types, including array-based and next-generation sequence data, and genomic annotations. In the following we will use it to visualize the computed mapping.
 >
-> 1. **IGV** :wrench:: To display the result in IGV open the IGV browser local on your computer. 
-> 2. **Galaxy** :wrench:: Click on the right history panel on the Bowtie2 item. 
+> 1. **IGV** :wrench:: To display the result in IGV open the IGV browser local on your computer.
+> 2. **Galaxy** :wrench:: Click on the right history panel on the Bowtie2 item.
 > 3. **Galaxy** :wrench:: Choose in the history on the computed Bowtie2 results and click on 'local' at 'display with IGV'.
 > 4. **IGV** :wrench:: The BAM file should be opened in the IGV browser and the genome should be loaded automatically.
 >
 >       > ### :bulb: Tip: Get access to more genomes
 >       >
->       >If the genome of your interest is not there check if its 
->       >available via "More...". Is this is not the case you can add it manually via the menu 
+>       >If the genome of your interest is not there check if its
+>       >available via "More...". Is this is not the case you can add it manually via the menu
 >       >"Genomes -> Load Genome from..."
 >       >
->       > ![alt text](../../images/igv_select_genome.png "Select genome") 
+>       > ![alt text](../../images/igv_select_genome.png "Select genome")
 >       {: .tip}
 > 5. **IGV** :wrench:: The interesting part is at chromosome 4, position 86,761 to 87,907. Navigate to it.
 > 6. **IGV** :wrench:: There are two views:
@@ -132,7 +132,7 @@ A general description of the user interface of the IGV browser can be read here:
 
 > ### :pencil2: Hands-on: Differences between a good and a bad mapping
 >
-> 1. **Galaxy** :wrench:: To show you the difference between a good and a bad dataset we provided an additional dataset which will give you a bad mapping. Load the ['GSM461182_untreat_single_subset.fastq'](https://zenodo.org/record/61771/files/GSM461178_untreat_paired_subset_1.fastq) dataset from [Zenodo](https://zenodo.org/record/61771) into Galaxy. 
+> 1. **Galaxy** :wrench:: To show you the difference between a good and a bad dataset we provided an additional dataset which will give you a bad mapping. Load the ['GSM461182_untreat_single_subset.fastq'](https://zenodo.org/record/61771/files/GSM461178_untreat_paired_subset_1.fastq) dataset from [Zenodo](https://zenodo.org/record/61771) into Galaxy.
 >
 >    > ### :nut_and_bolt: Comments
 >    > If you are using the [Freiburg Galaxy instance](http://galaxy.uni-freiburg.de), you can load the dataset using 'Shared Data' -> 'Data Libraries' -> 'Galaxy Courses' -> 'RNA-Seq' -> 'fastq'
