@@ -1,3 +1,10 @@
+---
+layout: base_slides
+topic_name: "dev"
+tutorial_name: bioblend_api
+logo: "GTN"
+---
+
 .left.top[<img src="../../images/LogoIP-CNRS-C3BI-NBV4small-e1460524231316.png" width="200"/>]
 
 .center[#BioBlend module, a python library to use Galaxy API  
@@ -17,9 +24,9 @@ name: plan
 * [Hands on basics](bioblend_api#goal)
 
 * [It's your turn...](bioblend_api#start)
-        
+
   * [To get familiar with BioBlend](bioblend_api#familiar)
-      
+
   * [To launch a Galaxy job](bioblend_api#launch)
 
   * [To launch a Galaxy workflow](bioblend_api#workflow)
@@ -53,7 +60,7 @@ name: application
       * In ReGaTE, we use BioBlend to retrieve a list of installed tools on a Galaxy instance (article in review in GigaScience)
 
       * In MetaGenSense (in press), BioBlend is used to mime all Galaxy steps from the upload of big data to the workflow launching and the data results and transfer
-      
+
 [return](index#plan)
 
 ---
@@ -126,9 +133,9 @@ name: launch
         ```python
         help(gi.tools.run_tool)
         ```
-    
+
 ```asciicode
-run_tool(self, history_id, tool_id, tool_inputs) 
+run_tool(self, history_id, tool_id, tool_inputs)
    Runs tool specified by tool_id in history indicated
    by history_id with inputs from dict tool_inputs
    :param history_id: encoded ID of the history in which to run the tool	  
@@ -151,9 +158,9 @@ name: history
 .right-column5[.reduce70[*history_id*]]
 .left-column95[## Histories Object]
 
-* Try to get your histories list with BioBlend 
+* Try to get your histories list with BioBlend
 * Create a new history (*It will be our work history for this tutorial*)
-      
+
 .left-column5[
 <img src="../../images/clue.png" width="30"/>
 ]
@@ -161,15 +168,15 @@ name: history
 [http://bioblend.readthedocs.org ](http://bioblend.readthedocs.org )
 ]
 
-.center[<img src="../../images/yourturn.jpg" width="100"/>] 
-      
+.center[<img src="../../images/yourturn.jpg" width="100"/>]
+
 ---
 .right-column5[.reduce70[*history_id*]]
 .left-column95[## Histories Object]
 
-* Try to get your histories list with BioBlend 
+* Try to get your histories list with BioBlend
 * Create a new history (*It will be our work history for this tutorial*)
-      
+
 .left-column5[
 <img src="../../images/clue.png" width="30"/>
 ]
@@ -183,18 +190,18 @@ list_histories = gi.histories.get_histories()
 
 new_history = gi.histories.create_history(name='my_history')
 ```   
-      
+
 * Now that your history is created, you will need to upload some data in it.
 
-.center[<img src="../../images/yourturn.jpg" width="100"/>] 
+.center[<img src="../../images/yourturn.jpg" width="100"/>]
 
 ---
 .right-column5[.reduce70[*history_id*]]
 .left-column95[## Histories Object]
 
-* Try to get your histories list with BioBlend 
+* Try to get your histories list with BioBlend
 * Create a new history (*It will be our work history for this tutorial*)
-      
+
 .left-column5[
 <img src="../../images/clue.png" width="30"/>
 ]
@@ -207,10 +214,10 @@ list_histories = gi.histories.get_histories()
 
 new_history = gi.histories.create_history(name='my_history')
 ```   
-      
+
 * Now that your history is created, you will need to upload some data in it.
 
-      
+
 * No BioBlend method to directly upload data from your file system to a history exists, a data can be uploaded in a history from a Galaxy library
 
 
@@ -249,7 +256,7 @@ help(gi.libraries.upload_file_from_local_path)
 help(gi.libraries.upload_file_from_local_path)
 ```
 ]
-      
+
 * Create a library and set the rights to this library
 
 .left-column5[
@@ -265,12 +272,12 @@ you will need your role *id*, look for the methods of the Class *gi.roles*
 .left-column95[## Libraries Object]
 
 .reduce90[* Check if there is a method to upload a data from your filesystem
-      
+
 .left-column5[
 <img src="../../images/clue.png" width="30"/>
 ]
 .right-column95[
-```python 
+```python
 help(gi.libraries.upload_file_from_local_path)
 ```
 ]
@@ -283,16 +290,16 @@ help(gi.libraries.upload_file_from_local_path)
 .right-column95[
 you will need your role *id*, look for the methods of the Class *gi.roles*
 ]
-          
+
 ```python
 role_id = gi.roles.get_roles()[0]['id']
 new_lib = gi.libraries.create_library('my_library')
 gi.libraries.set_library_permissions(new_lib['id'], access_in=role_id,
       modify_in=role_id, add_in=role_id, manage_in=role_id)
 ```
-      
+
 * Import a BAM file in your library
-    
+
 .center[<img src="../../images/yourturn.jpg" width="100"/>]
 ]
 ---
@@ -300,12 +307,12 @@ gi.libraries.set_library_permissions(new_lib['id'], access_in=role_id,
 .left-column95[## Libraries Object]
 
 .reduce90[* Check if there is a method to upload a data from your filesystem
-      
+
 .left-column5[
 <img src="../../images/clue.png" width="30"/>
 ]
 .right-column95[
-```python 
+```python
 help(gi.libraries.upload_file_from_local_path)
 ```
 ]
@@ -325,7 +332,7 @@ new_lib = gi.libraries.create_library('my_library')
 gi.libraries.set_library_permissions(new_lib['id'], access_in=['role_id'],
       modify_in=['role_id'], add_in=['role_id'], manage_in=['role_id'])
 ```
-      
+
 * Import a BAM file in your library
 
 ```python
@@ -337,18 +344,18 @@ list_data = gi.libraries.upload_file_from_local_path(new_lib['id'], local_path)
 <img src="../../images/yourturn.jpg" width="50"/>
 ]
 ]
-      
+
 ---
 .right-column5[.reduce70[*history_id*]]
 .left-column95[## Libraries Object]
 
 .reduce90[* Check if there is a method to upload a data from your filesystem
-      
+
 .left-column5[
 <img src="../../images/clue.png" width="30"/>
 ]
 .right-column95[
-```python 
+```python
 help(gi.libraries.upload_file_from_local_path)
 ```
 ]
@@ -368,7 +375,7 @@ new_lib = gi.libraries.create_library('my_library')
 gi.libraries.set_library_permissions(new_lib['id'], access_in=['role_id'],
       modify_in=['role_id'], add_in=['role_id'], manage_in=['role_id'])
 ```
-      
+
 * Import a BAM file in your library
 
 ```python
@@ -462,14 +469,14 @@ help(inputs)
 ==> If the input format is "data", the method to use is *set_dataset_param*
 
 * Here is an example:
-       
+
 ```python
 myinputs = inputs().set_param("param1",'value')
       .set_dataset_param("data1",'dataset_id',src="hda")
 ```
-      
+
 .center[**To run the tool samtools sort, we need more information on the tool itself**]       
-      
+
 ]
 ---
 .right-column5[.reduce70[*history_id tool_id tool_inputs*]]
@@ -512,7 +519,7 @@ detail_tool['inputs']
    u'multiple': False,
    u'name': u'input1', <---------------------------------------|
    u'optional': False,                                         |
-   u'options': {u'hda': [], u'hdca': []},                      | 
+   u'options': {u'hda': [], u'hdca': []},                      |
    u'type': u'data'},                                          | Critical
   {...                                                         | information
    u'name': u'sort_mode', <------------------------------------|
@@ -712,7 +719,7 @@ run_workflow(self, workflow_id, dataset_map=None, params=None, history_id=None,
 
 
 ```python
-my_workflow = gi.workflows.get_workflows(name="wf_formation (imported from uploaded file)") 
+my_workflow = gi.workflows.get_workflows(name="wf_formation (imported from uploaded file)")
 detailworkflow = gi.workflows.show_workflow(my_workflow[0]['id'])
 ```
 ---
@@ -725,7 +732,7 @@ detailworkflow = gi.workflows.show_workflow(my_workflow[0]['id'])
 ]
 ```python
 dataset_map = {}
-dataset_map[detailworkflow['inputs'].keys()[0]] = {'id' : data_history['id'], 
+dataset_map[detailworkflow['inputs'].keys()[0]] = {'id' : data_history['id'],
                                                 'src' : 'hda'}
 ```
 
@@ -742,7 +749,7 @@ dataset_map[detailworkflow['inputs'].keys()[0]] = {'id' : data_history['id'],
 ]
 ```python
 dataset_map = {}
-dataset_map[detailworkflow['inputs'].keys()[0]] = {'id' : data_history['id'], 
+dataset_map[detailworkflow['inputs'].keys()[0]] = {'id' : data_history['id'],
                                                 'src' : 'hda'}
 ```
 
@@ -762,7 +769,7 @@ gi.workflows.run_workflow(detailworkflow['id'], dataset_map=dataset_map,
 ]
 ```python
 dataset_map = {}
-dataset_map[detailworkflow['inputs'].keys()[0]] = {'id' : data_history['id'], 
+dataset_map[detailworkflow['inputs'].keys()[0]] = {'id' : data_history['id'],
                                                 'src' : 'hda'}
 ```
 
