@@ -1,3 +1,9 @@
+---
+layout: tutorial_hands_on
+topic_name: chip-seq
+tutorial_name: chip-seq
+---
+
 #ChIP-seq Galaxy Workshop
 
 ## Content
