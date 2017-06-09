@@ -841,7 +841,7 @@ animal) followed by a D and a three digit number (number of days post weaning).
 > `Count.groups` command:
 >
 > - **Count.groups** :wrench: with the following parameters
->   - "shared" to the shared file from sub.sample (Note: this is a collection)
+>   - "shared" to the shared file from Make.shared
 >
 > Take a look at the output. We see that our smallest sample had 2440 sequences in it. That is a reasonable
 > number. Despite what some say, subsampling and rarefying your data is an important thing to do.
@@ -850,7 +850,7 @@ animal) followed by a D and a three digit number (number of days post weaning).
 >
 > - **Sub.sample** :wrench: with the following parameters
 >   - "Select type of data to subsample" to `OTU Shared`
->   - "shared" to output from Make.shared from the OTU section above
+>   - "shared" to output from Make.shared
 >   - "size" to `2440`
 >
 > > ### :question: Question
@@ -1273,7 +1273,7 @@ We do this with the `corr.axes` tool:
 > ### :pencil2: Hands-on: Correlation
 >
 > - **Corr.axes** :wrench: with the following parameters
->   - "axes" to axes output from Nmds in 3 dimension
+>   - "axes" to axes output from Nmds in 3 dimension (collection)
 >   - "shared" to shared output from collapse collection on Sub.sample
 >   - "method" to `Spearman`
 >   - "numaxes" to `3`
