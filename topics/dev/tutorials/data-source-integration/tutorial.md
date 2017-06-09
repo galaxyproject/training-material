@@ -1,3 +1,9 @@
+---
+layout: tutorial_hands_on
+topic_name: dev
+tutorial_name: data-source-integration
+---
+
 # Data Source Integration
 
 An important goal of Galaxy is scalability. A major bottleneck when it comes to analysis of big data sets is the time and space it takes of copying these data sets.

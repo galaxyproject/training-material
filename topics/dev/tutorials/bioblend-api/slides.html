@@ -7,10 +7,10 @@ logo: "GTN"
 
 .left.top[<img src="../../images/LogoIP-CNRS-C3BI-NBV4small-e1460524231316.png" width="200"/>]
 
-.center[#BioBlend module, a python library to use Galaxy API  
+.center[#BioBlend module, a python library to use Galaxy API
 ####Olivia Doppelt-Azeroual, Fabien Mareuil]
 
-.left.bottom[<img src="../../../../shared/images/GTNLogo1000.png" width="200"/>]
+.left.bottom[<img src="../../../../../shared/images/GTNLogo1000.png" width="200"/>]
 ---
 layout: false
 name: plan
@@ -87,7 +87,7 @@ name: goal
 	2. The workflow:
 		* Get the workflow file (.ga) from
       https://github.com/fmareuil/formationbioblend
-		* Import the workflow in galaxy:  
+		* Import the workflow in galaxy:
 		Click on Workflow tab and "Upload or import workflow" button
 	3. Launch ipython on a terminal
 
@@ -98,7 +98,7 @@ name: start
 
 ##Let's start ...
 ---
-name: familiar	  
+name: familiar
 ## Connect with Galaxy using ipython:
 
 * Get your API key and your Galaxy URL
@@ -113,7 +113,7 @@ from bioblend.galaxy import GalaxyInstance
 gi = GalaxyInstance(url="http://localhost:8080", key="your key")
 ```
 #### Why ipython:
-* Automatic completion  
+* Automatic completion
 ==> type *gi.* and the tab puis appuyez sur la touche tab key
 
 * To better understand BioBlend methods and classes, you can use
@@ -138,7 +138,7 @@ name: launch
 run_tool(self, history_id, tool_id, tool_inputs)
    Runs tool specified by tool_id in history indicated
    by history_id with inputs from dict tool_inputs
-   :param history_id: encoded ID of the history in which to run the tool	  
+   :param history_id: encoded ID of the history in which to run the tool
    :param tool_id: ID of the tool to be run
    :param tool_inputs: dictionary of input datasets and parameters
       for the tool (see below)
@@ -189,7 +189,7 @@ name: history
 list_histories = gi.histories.get_histories()
 
 new_history = gi.histories.create_history(name='my_history')
-```   
+```
 
 * Now that your history is created, you will need to upload some data in it.
 
@@ -213,7 +213,7 @@ new_history = gi.histories.create_history(name='my_history')
 list_histories = gi.histories.get_histories()
 
 new_history = gi.histories.create_history(name='my_history')
-```   
+```
 
 * Now that your history is created, you will need to upload some data in it.
 
@@ -475,7 +475,7 @@ myinputs = inputs().set_param("param1",'value')
       .set_dataset_param("data1",'dataset_id',src="hda")
 ```
 
-.center[**To run the tool samtools sort, we need more information on the tool itself**]       
+.center[**To run the tool samtools sort, we need more information on the tool itself**]
 
 ]
 ---
