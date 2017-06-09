@@ -1,10 +1,10 @@
 ---
 layout: tutorial_hands_on
-topic_name: Usegalaxy
+topic_name: usegalaxy
 tutorial_name: ngs
 ---
 
-In this section we will look at practical aspects of manipulation of next-generation sequencing data. We will start with Fastq format produced by most sequencing machines and will finish with SAM/BAM format representing mapped reads. The cover image above shows a screen dump of a SAM dataset. 
+In this section we will look at practical aspects of manipulation of next-generation sequencing data. We will start with Fastq format produced by most sequencing machines and will finish with SAM/BAM format representing mapped reads. The cover image above shows a screen dump of a SAM dataset.
 
 # Getting NGS data in
 
@@ -18,7 +18,7 @@ This works well for small files because web browser do not like lengthy file tra
 
 ## Using FTP
 
-FTP ([file transfer protocol](https://en.wikipedia.org/wiki/File_Transfer_Protocol)) allows transferring large collection of files: 
+FTP ([file transfer protocol](https://en.wikipedia.org/wiki/File_Transfer_Protocol)) allows transferring large collection of files:
 
 <div class="embed-responsive embed-responsive-16by9"><iframe src="https://player.vimeo.com/video/120972739?portrait=0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>
 
@@ -47,13 +47,13 @@ Finally, datasets can be uploaded directly from NCBI's short read archive:
   - [A set of Forward reads](http://www.bx.psu.edu/~anton/share/ng_test_data/var/raw_mother-ds-1.fq.gz)
   - [A set of Reverse reads](http://www.bx.psu.edu/~anton/share/ng_test_data/var/raw_mother-ds-2.fq.gz)
 
-These are paired end data (see below for explanation of what paired-end is) for a single Illumina run. Keep Galaxy history for later. We will need it again in a few minutes. 
+These are paired end data (see below for explanation of what paired-end is) for a single Illumina run. Keep Galaxy history for later. We will need it again in a few minutes.
 
 # Fastq manipulation and quality control
 
 ## What is Fastq?
 
-[FastQ](http://en.wikipedia.org/wiki/FASTQ_format) is not a very well defined format. In the beginning various manufacturers of sequencing instruments were free to interpret fastq as they saw fit, resulting in a multitude of fastq flavors. This variation stemmed primarily from different ways of encoding quality values as described [here](http://en.wikipedia.org/wiki/FASTQ_format) (below you will explanation of quality scores and their meaning). Today, [fastq Sanger](http://www.ncbi.nlm.nih.gov/pubmed/20015970) version of the format is considered to be the standard form of fastq. Galaxy is using fastq sanger as the only legitimate input for downstream processing tools and provides [a number of utilities for converting fastq files](http://www.ncbi.nlm.nih.gov/pubmed/20562416) into this form (see **NGS: QC and manipulation** section of Galaxy tools). 
+[FastQ](http://en.wikipedia.org/wiki/FASTQ_format) is not a very well defined format. In the beginning various manufacturers of sequencing instruments were free to interpret fastq as they saw fit, resulting in a multitude of fastq flavors. This variation stemmed primarily from different ways of encoding quality values as described [here](http://en.wikipedia.org/wiki/FASTQ_format) (below you will explanation of quality scores and their meaning). Today, [fastq Sanger](http://www.ncbi.nlm.nih.gov/pubmed/20015970) version of the format is considered to be the standard form of fastq. Galaxy is using fastq sanger as the only legitimate input for downstream processing tools and provides [a number of utilities for converting fastq files](http://www.ncbi.nlm.nih.gov/pubmed/20562416) into this form (see **NGS: QC and manipulation** section of Galaxy tools).
 
 Fastq format looks like this:
 
@@ -84,7 +84,7 @@ Each sequencing read is represented by four lines:
 
 ## Paired end data
 
-It is common to prepare pair-end and mate-pair sequencing libraries. This is highly beneficial for a number of applications discussed in subsequent topics. For now let's just briefly discuss what these are and how they manifest themselves in fastq form. 
+It is common to prepare pair-end and mate-pair sequencing libraries. This is highly beneficial for a number of applications discussed in subsequent topics. For now let's just briefly discuss what these are and how they manifest themselves in fastq form.
 
 |   |
 |----|
@@ -124,7 +124,7 @@ CACTACCGGGGTATCTAATCCTGTTCGCTCCCCACGCTTTCGTCCATC
 
 <div class="alert alert-info" role="alert">
 
-**Note** that read IDs are **identical** in two files and they are listed in **the same** order. In some cases read IDs in the first and second file may be appended with `/1` and `/2` tags, respectively. 
+**Note** that read IDs are **identical** in two files and they are listed in **the same** order. In some cases read IDs in the first and second file may be appended with `/1` and `/2` tags, respectively.
 
 </div>
 
@@ -159,10 +159,10 @@ Here the first and the second reads are identified with `/1` and `/2` tags.
 
 ## What are base qualities?
 
-As we've seen above, fastq datasets contain two types of information: 
+As we've seen above, fastq datasets contain two types of information:
 
 - *sequence of the read*
-- *base qualities* for each nucleotide in the read. 
+- *base qualities* for each nucleotide in the read.
 
 The base qualities allow us to judge how trustworthy each base in a sequencing read is. The following excerpt from an excellent [tutorial](http://chagall.med.cornell.edu/RNASEQcourse/Intro2RNAseq.pdf) by Friederike D&uuml;ndar, Luce Skrabanek, Paul Zumbo explains what base qualities are:
 
@@ -185,14 +185,14 @@ Sanger/Phred format that is also used by other sequencing platforms and the sequ
 
 ## Assessing data quality
 
-One of the first steps in the analysis of NGS data is seeing how good the data actually is. [FastqQC](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/) is a fantastic tool allowing you to gauge the quality of fastq datasets (and deciding whether to blame or not to blame whoever has done sequencing for you). 
+One of the first steps in the analysis of NGS data is seeing how good the data actually is. [FastqQC](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/) is a fantastic tool allowing you to gauge the quality of fastq datasets (and deciding whether to blame or not to blame whoever has done sequencing for you).
 
 |                                        |                                    |
 |:---------------------------------------|:-----------------------------------|
 | ![](../images/good_fq.png)    | ![](../images/bad_fq.png) |    
 |<small>**A.** Excellent quality</small> | <small>**B.** Hmmm...OK</small>    |
 
-Here you can see FastQC base quality reports (the tools gives you many other types of data) for two datasets: **A** and **B**. The **A** dataset has long reads (250 bp) and very good quality profile with no qualities dropping below [phred score](http://www.phrap.com/phred/) of 30. The **B** dataset is significantly worse with ends of the reads dipping below phred score of 20. The **B** reads may need to be trimmed for further processing. 
+Here you can see FastQC base quality reports (the tools gives you many other types of data) for two datasets: **A** and **B**. The **A** dataset has long reads (250 bp) and very good quality profile with no qualities dropping below [phred score](http://www.phrap.com/phred/) of 30. The **B** dataset is significantly worse with ends of the reads dipping below phred score of 20. The **B** reads may need to be trimmed for further processing.
 
 <div class="embed-responsive embed-responsive-16by9"><iframe src="https://player.vimeo.com/video/123453134?portrait=0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>
 
@@ -212,15 +212,15 @@ Mapping of NGS reads against reference sequences is one of the key steps of the 
 
 ## Mapping against a pre-computed genome index
 
-Mappers usually compare reads against a reference sequence that has been transformed into a highly accessible data structure called genome index. Such indexes should be generated before mapping begins. Galaxy instances typically store indexes for a number of publicly available genome builds. 
+Mappers usually compare reads against a reference sequence that has been transformed into a highly accessible data structure called genome index. Such indexes should be generated before mapping begins. Galaxy instances typically store indexes for a number of publicly available genome builds.
 
 |                                                              |
 |--------------------------------------------------------------|
 | ![](../images/cached_genome.png)                    |
 |<small>Mapping against a pre-computed index in Galaxy.</small>|
 
-For example, the image above shows indexes for `hg38` version of the human genome. You can see that there are actually three choices: (1) `hg38`, (2) `hg38 canonical` and (3) `hg38 canonical female`. The `hg38` contains all chromosomes as well as all unplaced contigs. The `hg38 canonical` does not contain unplaced sequences and only consists of chromosomes 1 through 22, X, Y, and mitochondria. The 
-`hg38 canonical female` contains everything from the canonical set with the exception of chromosome Y. 
+For example, the image above shows indexes for `hg38` version of the human genome. You can see that there are actually three choices: (1) `hg38`, (2) `hg38 canonical` and (3) `hg38 canonical female`. The `hg38` contains all chromosomes as well as all unplaced contigs. The `hg38 canonical` does not contain unplaced sequences and only consists of chromosomes 1 through 22, X, Y, and mitochondria. The
+`hg38 canonical female` contains everything from the canonical set with the exception of chromosome Y.
 
 The following video show mapping using BWA:
 
@@ -228,11 +228,11 @@ The following video show mapping using BWA:
 
 ### Try it yourself
 
-Map datasets uploaded before using BWA against `hg38` version of the human genome. 
+Map datasets uploaded before using BWA against `hg38` version of the human genome.
 
 ## What if pre-computed index does not exist?
 
-If Galaxy does not have a genome you need to map against, you can upload your genome sequence as a FASTA file and use it in the mapper directly as shown below (**Load reference genome** is set to `History`). 
+If Galaxy does not have a genome you need to map against, you can upload your genome sequence as a FASTA file and use it in the mapper directly as shown below (**Load reference genome** is set to `History`).
 
 |                                                              |
 |--------------------------------------------------------------|
@@ -367,7 +367,7 @@ Thus, for example, we can use the NM:i:0 tag to select only those reads which ma
 
 ## Read Groups
 
-One of the key features of SAM/BAM format is the ability to label individual reads with readgroup tags. This allows pooling results of multiple experiments into a single BAM dataset. This significantly simplifies downstream logistics: instead of dealing with multiple datasets one can handle just one. Many downstream analysis tools such as variant callers are designed to recognize readgroup data and output results on per-readgroup basis. 
+One of the key features of SAM/BAM format is the ability to label individual reads with readgroup tags. This allows pooling results of multiple experiments into a single BAM dataset. This significantly simplifies downstream logistics: instead of dealing with multiple datasets one can handle just one. Many downstream analysis tools such as variant callers are designed to recognize readgroup data and output results on per-readgroup basis.
 
 One of the best descriptions of BAM readgroups is on [GATK support site](http://gatkforums.broadinstitute.org/discussion/1317/collected-faqs-about-bam-files). We have gratefully stolen two tables describing the most important readgroup tags - `ID`, `SM`, `LB`, and `PL` - from GATK forum and provide them here:
 
@@ -396,13 +396,13 @@ We support four major toolsets for processing of SAM/BAM datasets:
 
 ### Try it yourself
 
-Perform a similar analyses with your own data. 
+Perform a similar analyses with your own data.
 
 # The challenge of read duplicates
 
 ## PCR duplicates
 
-Preparation of sequencing libraries (at least at the time of writing) for technologies such as Illumina (used in this examples) involves PCR amplification. It is required to generate sufficient number of sequencing templates so that a reliable detection can be performed by base callers. Yet PCR has it's biases, which are especially profound in cases of multitemplate PCR used for construction of sequencing libraries (Kanagawa et al. [2003](http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Abstract&list_uids=16233530)). 
+Preparation of sequencing libraries (at least at the time of writing) for technologies such as Illumina (used in this examples) involves PCR amplification. It is required to generate sufficient number of sequencing templates so that a reliable detection can be performed by base callers. Yet PCR has it's biases, which are especially profound in cases of multitemplate PCR used for construction of sequencing libraries (Kanagawa et al. [2003](http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Abstract&list_uids=16233530)).
 
 |                                              |
 |----------------------------------------------|

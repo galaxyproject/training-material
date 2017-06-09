@@ -1,10 +1,10 @@
 ---
 layout: tutorial_hands_on
-topic_name: Usegalaxy
+topic_name: usegalaxy
 tutorial_name: dunovo
 ---
 
-This page explains how to perform discovery of low frequency variants from duplex sequencing data. As an example we use the _ABL1_ dataset published by [Schmitt and colleagues](http://www.nature.com/nmeth/journal/v12/n5/full/nmeth.3351.html) (SRA accession [SRR1799908](http://www.ncbi.nlm.nih.gov/sra/?term=SRR1799908)). 
+This page explains how to perform discovery of low frequency variants from duplex sequencing data. As an example we use the _ABL1_ dataset published by [Schmitt and colleagues](http://www.nature.com/nmeth/journal/v12/n5/full/nmeth.3351.html) (SRA accession [SRR1799908](http://www.ncbi.nlm.nih.gov/sra/?term=SRR1799908)).
 
 # Background
 
@@ -44,7 +44,7 @@ This analysis (and consequently the Galaxy's history) can be divided into three 
 
 >![steps](../images/steps.png)
 >
->Analysis outline 
+>Analysis outline
 
 # Start: Generating consensus sequences
 
@@ -54,17 +54,17 @@ The starting point of the analyses are sequencing reads (usually in [fastq](http
 
 We uploaded [Schmitt:2015](http://www.nature.com/nmeth/journal/v12/n5/full/nmeth.3351.html)) data directly from SRA as shown in [this screencast](https://vimeo.com/121187220). This created two datasets in our galaxy history: one for forward reads and one for reverse. We then evaluated the quality of the data by running FastQC on both datasets (forward and reverse) to obtain the following plots:
 
-   | 
+   |
 :--|:---
 ![](../images/abl1-f-qc.png) | ![](../images/abl1-r-qc.png)
 **A**. Forward  | **B**. Reverse
 
-One can see that these data are of excellent quality and no additional processing is required before we can start the actual analysis. 
+One can see that these data are of excellent quality and no additional processing is required before we can start the actual analysis.
 
 ## Generating Duplex Consensus Sequences (DCS)
 
 From tool section **NGS: Du Novo** we ran:
- 
+
 1. **Make families** (`Tag length = 12`; `Invariant sequence length = 5`)
 2. **Align families** (This is **the most** time consuming step of the workflow. It may take multiple days to run. The _ABL1_ example took 34 hours and 7 minutes to finish. )
 3. **Make consensus reads** (`Minimum reads per family = 3`; `Minimum base quality = 20`; `FASTQ format = Sanger` ; `Output single-strand consensus sequences = Yes` :point_left: This is particularly important as explained below; also see the following image)
@@ -87,7 +87,7 @@ The _Du Novo_ algorithm occasionally inserts`N`and/or [IUPAC notations](https://
 
 ## Generating fastq
 
-[The previous step](#filtering-consensuses) filters forward and reverse DCSs and reports them in [FASTA](https://en.wikipedia.org/wiki/FASTA_format) format. Yet the downstream tools require [fastq](https://en.wikipedia.org/wiki/FASTQ_format) format. To address this we convert FASTA into fastq using **Combine FASTA and QUAL** from tool section **NGS: QC and manipulation**. In this case the quality values are filled in with the maximum allowed value of 93 (essentially we fake them here), which is fine as we will not rely on quality scores in the rest of the analysis. 
+[The previous step](#filtering-consensuses) filters forward and reverse DCSs and reports them in [FASTA](https://en.wikipedia.org/wiki/FASTA_format) format. Yet the downstream tools require [fastq](https://en.wikipedia.org/wiki/FASTQ_format) format. To address this we convert FASTA into fastq using **Combine FASTA and QUAL** from tool section **NGS: QC and manipulation**. In this case the quality values are filled in with the maximum allowed value of 93 (essentially we fake them here), which is fine as we will not rely on quality scores in the rest of the analysis.
 
 >![ContentTrimmer](../images/combineFandQ.png)
 >
@@ -148,7 +148,7 @@ The **NVC** generates a [VCF](https://en.wikipedia.org/wiki/Variant_Call_Format)
 >Annotating variable sites. Here `Coverage threshold = 10` (To reduce noise) and `Output stranded base counts = Yes` (to see strand bias)
 
 
-There are 3,264 lines in the output, which is clearly too much. Using **Filter** tool (tool section **Filter and Sort**) with expression `c16 >= 0.01`(because column 16 contains minor allele frequency - MAF - and we are interested in those sites where MAF >= 1%): 
+There are 3,264 lines in the output, which is clearly too much. Using **Filter** tool (tool section **Filter and Sort**) with expression `c16 >= 0.01`(because column 16 contains minor allele frequency - MAF - and we are interested in those sites where MAF >= 1%):
 
 >![](../images/filter.png)
 >
@@ -163,9 +163,9 @@ bwa-mem | 130,872,141 |  G     |  A    | 0.013 |
 bwa     | 130,880,141 |  A     |  G    | 0.479 |
 bwa-mem | 130,880,141 |  A     |  G    | 0.479 |
 
-We can see that results of both mappers agree very well. The reason we see these numbers grouped by mappers is because we have set the readgroups while [mapping](#align-against-genome-with-bwa-and-bwa-mem). 
+We can see that results of both mappers agree very well. The reason we see these numbers grouped by mappers is because we have set the readgroups while [mapping](#align-against-genome-with-bwa-and-bwa-mem).
 
-The polymorphism we are interested in (and the one reported by [Schmitt:2015] (http://www.nature.com/nmeth/journal/v12/n5/full/nmeth.3351.html)) is at the position 130,872,141 and has a frequency of 1.3%. The other site (position 130,880,141) is a known common variant [rs2227985](http://www.ncbi.nlm.nih.gov/SNP/snp_ref.cgi?type=rs&rs=rs2227985), which is heterozygous in this sample. 
+The polymorphism we are interested in (and the one reported by [Schmitt:2015] (http://www.nature.com/nmeth/journal/v12/n5/full/nmeth.3351.html)) is at the position 130,872,141 and has a frequency of 1.3%. The other site (position 130,880,141) is a known common variant [rs2227985](http://www.ncbi.nlm.nih.gov/SNP/snp_ref.cgi?type=rs&rs=rs2227985), which is heterozygous in this sample.
 
 # Analysis of single strand consensus data
 
@@ -183,12 +183,12 @@ SSCSs are generated when the **Output single-strand consensus sequences** option
 
 The analysis described above can be rerun using a workflow. Workflow combined all steps into a single entity that only needs to be executed once. We provide two workflows:
 
-* _Du Novo_ analysis from reads (import from [here](https://usegalaxy.org/u/aun1/w/duplex-analysis-from-reads)). This workflow uses fastq reads as input. It should be used if you analyze data for first time. 
-* _Du Novo_ analysis from aligned families (import from [here](https://usegalaxy.org/u/aun1/w/copy-of-duplex-analysis-from-reads)). This workflow starts with aligned families. It should be used for re-analysis of already generated DCS and SSCS data. 
+* _Du Novo_ analysis from reads (import from [here](https://usegalaxy.org/u/aun1/w/duplex-analysis-from-reads)). This workflow uses fastq reads as input. It should be used if you analyze data for first time.
+* _Du Novo_ analysis from aligned families (import from [here](https://usegalaxy.org/u/aun1/w/copy-of-duplex-analysis-from-reads)). This workflow starts with aligned families. It should be used for re-analysis of already generated DCS and SSCS data.
 
 >[![](../images/fromReads.png)](https://galaxyproject.org/duplex/fromReads.png)
 >
->Starting from Reads 
+>Starting from Reads
 
 
 >[![](../images/fromDCS.png)](https://galaxyproject.org/duplex/fromDCS.png)
@@ -196,5 +196,4 @@ The analysis described above can be rerun using a workflow. Workflow combined al
 >Starting from DCS/SSCS data
 
 ## If things don't work...
-...you need to complain. Use [Galaxy's BioStar Channel](https://usegalaxy.org/biostar/biostar_redirect) to do this. 
-
+...you need to complain. Use [Galaxy's BioStar Channel](https://usegalaxy.org/biostar/biostar_redirect) to do this.

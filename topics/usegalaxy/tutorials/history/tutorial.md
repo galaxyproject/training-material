@@ -1,6 +1,6 @@
 ---
 layout: tutorial_hands_on
-topic_name: Usegalaxy
+topic_name: usegalaxy
 tutorial_name: history
 ---
 

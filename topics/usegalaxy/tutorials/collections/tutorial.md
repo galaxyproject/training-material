@@ -1,10 +1,10 @@
 ---
 layout: tutorial_hands_on
-topic_name: Usegalaxy
+topic_name: usegalaxy
 tutorial_name: collections
 ---
 
-Here we will show Galaxy features designed to help with the analysis of large numbers of samples. When you have just a few samples - clicking through them is easy. But once you've got hundreds - it becomes very annoying. In Galaxy we have introduced **Dataset collections** that allow you to combine numerous datasets in a single entity that can be easily manipulated. 
+Here we will show Galaxy features designed to help with the analysis of large numbers of samples. When you have just a few samples - clicking through them is easy. But once you've got hundreds - it becomes very annoying. In Galaxy we have introduced **Dataset collections** that allow you to combine numerous datasets in a single entity that can be easily manipulated.
 
 # Getting data
 [Here](https://usegalaxy.org/library/list#folders/Fab5f788f07073c11) is a history containing a few datasets we will be practicing with (as always with Galaxy tutorial you can upload your own data and play with it instead of the provided datasets):
@@ -18,7 +18,7 @@ Here we will show Galaxy features designed to help with the analysis of large nu
 - `M117C1-ch_1`- family 117, child, 1-st (**F**) read from **cheek**
 - `M117C1-ch_2`- family 117, child, 2-nd (**R**) read from **cheek**
 
-These datasets represent genomic DNA (enriched for mitochondria via a long range PCR) isolated from blood (`bl`) and cheek (buccal swab, `ch`) of mother (`M117`) and her child (`M117C1`) that was sequenced on an Illumina miSeq machine as paired-read library (250-bp reads; see our [2014](http://www.pnas.org/content/111/43/15474.abstract) manuscript for **Methods**). 
+These datasets represent genomic DNA (enriched for mitochondria via a long range PCR) isolated from blood (`bl`) and cheek (buccal swab, `ch`) of mother (`M117`) and her child (`M117C1`) that was sequenced on an Illumina miSeq machine as paired-read library (250-bp reads; see our [2014](http://www.pnas.org/content/111/43/15474.abstract) manuscript for **Methods**).
 
 ## Load data from Galaxy library
 
@@ -103,7 +103,7 @@ Once these jobs are finished they will disappear from the history and all result
 ![bwa_memCollectionDone](../images/bwa_memCollectionDone.png)
 {: .img-responsive}
 
-Let's look at this collection by clicking on it (panel **A** in the figure below). You can see that now this collection is no longer paired (compared to the collection we created in the beginning of this tutorial). This is because `bwa-mem` takes forward and reverse data as input, but produces only a single BAM dataset as the output. So what we have in the result is a *list* of four dataset (BAM files; panels **B** and **C**). 
+Let's look at this collection by clicking on it (panel **A** in the figure below). You can see that now this collection is no longer paired (compared to the collection we created in the beginning of this tutorial). This is because `bwa-mem` takes forward and reverse data as input, but produces only a single BAM dataset as the output. So what we have in the result is a *list* of four dataset (BAM files; panels **B** and **C**).
 
 ![bwa_memCollection_ABC](../images/bwa_memCollection_ABC.png)
 {: .img-responsive}
@@ -178,7 +178,7 @@ The history described in this page is accessible directly from here:
 
 * History [**Collections (full analysis)**](https://usegalaxy.org/u/aun1/h/collections-full-analysis)
 
-From there you can import histories to make them your own. 
+From there you can import histories to make them your own.
 
 ## If things don't work...
-...you need to complain. Use [Galaxy's BioStar Channel](https://usegalaxy.org/biostar/biostar_redirect) to do this. 
+...you need to complain. Use [Galaxy's BioStar Channel](https://usegalaxy.org/biostar/biostar_redirect) to do this.

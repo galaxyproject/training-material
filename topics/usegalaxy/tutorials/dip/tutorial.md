@@ -1,6 +1,6 @@
 ---
 layout: tutorial_hands_on
-topic_name: Usegalaxy
+topic_name: usegalaxy
 tutorial_name: dip
 ---
 
@@ -308,7 +308,7 @@ The examples below are taken from "[Intro to Gemini](https://s3.amazonaws.com/ge
 >SELECT * FROM variants WHERE filter is NULL and gene = 'POLRMT'
 >```
 >
->The above query will produce [output](https://usegalaxy.org/datasets/bbd44e69cb8906b5a0bb5b2cc0695697/display/?preview=True) with very large number of columns. To restrict the number of columns to a manageable set let's use this command (you may need to scroll sideways): 
+>The above query will produce [output](https://usegalaxy.org/datasets/bbd44e69cb8906b5a0bb5b2cc0695697/display/?preview=True) with very large number of columns. To restrict the number of columns to a manageable set let's use this command (you may need to scroll sideways):
 >
 >```
 >SELECT rs_ids, aaf_esp_ea, impact, clinvar_disease_name, clinvar_sig FROM variants WHERE filter is NULL and gene = 'POLRMT'
@@ -354,13 +354,13 @@ GEMINI provides access to genotype, sequencing depth, genotype quality, and geno
 
 >### At how many sites both father and son have non reference alleles?
 >
->To answer this we will type the same expression 
+>To answer this we will type the same expression
 >
 >```
 >SELECT * from variants
 >```
 >
->into **The query to be issued to the database** field and 
+>into **The query to be issued to the database** field and
 >
 >```
 >(gt_types.HG002_NA24385_son <> HOM_REF AND gt_types.HG003_NA24149_father <> HOM_REF)
@@ -381,7 +381,7 @@ GEMINI provides access to genotype, sequencing depth, genotype quality, and geno
 >SELECT gts.HG002_NA24385_son, gts.HG003_NA24149_father from variants
 >```
 >
->into **The query to be issued to the database** and 
+>into **The query to be issued to the database** and
 >
 >```
 >(gt_types.HG002_NA24385_son <> HOM_REF AND gt_types.HG003_NA24149_father <> HOM_REF)
@@ -409,13 +409,13 @@ Let's try a few examples.
 >SELECT chrom, start, end, ref, alt, gene, impact, (gts).(*) FROM variants
 >```
 >
->into **The query to be issued to the database** and 
+>into **The query to be issued to the database** and
 >
 >```
 >(gt_types).(*).(==HET).(all)
->``` 
+>```
 >
->into **Restrictions to apply to genotype values**. Here we use wildcards for the query 
+>into **Restrictions to apply to genotype values**. Here we use wildcards for the query
 >
 > * `(gts.*)` = get genotypes for **all** samples
 >
@@ -459,4 +459,3 @@ This short tutorial should give you an overall idea on how generate variant data
 ![](../images/galaxy_command.png)
 
 * and so on....
-

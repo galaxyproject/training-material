@@ -1,4 +1,4 @@
 ---
 layout: topic
-topic_name: Usegalaxy
+topic_name: usegalaxy
 ---
