@@ -125,10 +125,27 @@ For the take-home messages, it is easier to define them once the tutorial is wri
 > Temporarly, we need a duplication of the metadata (because of our temporary templating system) in the topic `metadata.yaml` in the section `material`. So you need to copy that.
 > {: .comment}
 
-# Filling the tutorial
+Once the metadata are filled, we can test if the metadata were correctly defined to serve the online website. Currently, the website is generated from the metadata and the tutorials using Jekyll, a templating system. We can run locally a Jekyll server to check if the tutorial is correctly added and rendered
 
-# Setting up the technical support
-
+> ### :pencil2: Hands-on: Checking the website generation
+>
+> 1. Install Jekyll using [RubyGems](https://rubygems.org/pages/download): `make install`
+>
+>       If you are installing it on Mac OSX, you need to install it this way as `/usr/bin/` is not writable:
+>
+>       ```
+>       sudo gem update —system
+>       sudo gem install -n /usr/local/bin/ gem name
+>       sudo gem install -n /usr/local/bin/ jemoji
+>       sudo gem install -n /usr/local/bin/ jekyll
+>       sudo gem install -n /usr/local/bin/ jekyll-feed
+>       sudo gem install -n /usr/local/bin/ bundler
+>       ```
+>
+> 2. Run a local Jekyll server: `make serve`
+> 3. Visualize at [http://localhost:4000/](http://localhost:4000/)
+> 4. Check if the tutorial was correctly added
+{: .hands_on}
 
 # Filling the tutorial
 
