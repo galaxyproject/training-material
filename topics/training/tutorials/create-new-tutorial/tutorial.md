@@ -194,12 +194,6 @@ Some blabla
 > 3. Step3
 {: .hands_on}
 
-## Testing the tutorial
-
-## Extracting the workflow
-
-## Creating a tour
-
 # Adding slides
 
 (If needed)
@@ -261,6 +255,8 @@ with:
 - `files`: list of the files to download
     - `url`: URL to the input file
     - `file-type`: type of the input file
+
+The URL must refer to the URL of the files in Zenodo.
 
 > ### :pencil2: Hands-on: Fill the `data-library.yaml`
 >
