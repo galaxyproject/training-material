@@ -1,3 +1,9 @@
+---
+layout: tutorial_hands_on
+topic_name: introduction
+tutorial_name: galaxy-intro-peaks2genes
+---
+
 # From peaks to genes
 
 # Introduction

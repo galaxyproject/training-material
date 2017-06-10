@@ -1,3 +1,9 @@
+---
+layout: tutorial_hands_on
+topic_name: variant-analysis
+tutorial_name: diploid-variant-calling
+---
+
 > Much of Galaxy-related features described in this section have been developed by Björn Grüning (@bgruening) and configured by Dave Bouvier (@davebx).
 
 # Introduction
@@ -36,7 +42,7 @@ Before going forward with an actual genotype calling in Galaxy let's take a look
 ### SNP calling and genotyping examples:
 
 Consider a set of sequencing reads derived from a diploid individual:
- 
+
 ```
 REFERENCE: atcatgacggcaGtagcatat
 --------------------------------
@@ -48,14 +54,14 @@ READ5:     atcatgacggcaGtagc
 ```
 
 The capitalized position contains a G->A [transition](https://en.wikipedia.org/wiki/Transition_(genetics)). So, in principle this can be a heterozygous site with two alleles **G** and **A**. A commonly used naïve procedure would define a site as *heterozygous* if there is a non-reference allele with frequency between 20% and 80%. In this case **A** is present in 1/5 or 20% of the cases, so we can say that this is a heterozygous site. Yet it is only represented by a single read and is hardly reliable. Here are some of the possibilities that would explain this *variant*. It can be:
- 
+
 * A true variant;
 * A library preparation artifact (e.g., a PCR error);
 * A base call error;
 * A misalignment (though unlikely in the above example).
- 
+
 The modern variant callers attempt to assign a reliability estimate for each genotype call. This is done using Bayes reasoning.
-> ### :bulb: Tip: Further reading on 
+> ### :bulb: Tip: Further reading on
 >
 > For a great visual explanation see [blog](https://oscarbonilla.com/2009/05/visualizing-bayes-theorem/) by Oscar Bonilla). Here we present a >SNP-relevant "translation" on this explanation (with inspiration from [Erik Garrison](https://github.com/ekg)).
 {: .tip}
@@ -105,7 +111,7 @@ Genotype calling reliability can be significantly improved when analyzing multip
 | AA (*p<sup>2</sup>*)   |   AT (2*pq*) |   TT (*q<sup>2</sup>*)|
 |---------|---------|--------|
 | 0.0001 | 0.0198 | 0.9801 |
- 
+
 This makes it highly unlikely that **AA** is a true genotype of this individual.
 
 # Calling with FreeBayes
@@ -137,7 +143,7 @@ In this example we will perform variant calling and annotation using [genome in 
 Yet for a quick tutorial these datasets are way too big, so we created a [downsampled dataset](http://dx.doi.org/10.5281/zenodo.60520). This dataset was produced by mapping the trio reads against `hg19` version of the human genome, merging the resulting bam files together (we use readgroups to label individual reads so they can be traced to each of the original individuals), and restricting alignments to a small portion of chromosome 19 containing the [*POLRMT*](http://www.ncbi.nlm.nih.gov/gene?cmd=Retrieve&dopt=Graphics&list_uids=5442) gene.
 
 > ### :pencil2: Hands-on: Variant calling
-> 
+>
 > 1. Import [the data](https://zenodo.org/record/60520/files/GIAB-Ashkenazim-Trio.txt) into your history :wrench:
 > 2. Specify the used genome for mapping :wrench:
 >     1. Click on **Edit attributes** (pencil icon on right panel)
@@ -159,11 +165,11 @@ Yet for a quick tutorial these datasets are way too big, so we created a [downsa
 >
 > 1. Select **FreeBayes** from **Phenotype Association** section of the tool menu (left pane of Galaxy's interface) :wrench:
 > 2. Make sure the top part of the interface looks like shown below. Here we selected `GIAB-Ashkenazim-Trio-hg19` as input and set **Using reference genome** to `hg19` and **Choose parameter selection level** to `5. Complete list of all options`:
-> 
+>
 >   ![](../../images/FreeBayes_settings.png)
 >
 > 3. Scrolling down to **Tweak algorithmic features?** click `Yes` and set **Calculate the marginal probability of genotypes and report as GQ in each sample field in the VCF output** to `Yes`. This would help us evaluating the quality of genotype calls:
-> 
+>
 >   ![](../../images/freebayes_gq.png)
 {: .hands_on}
 
@@ -177,7 +183,7 @@ This produces a dataset in [VCF](http://www.1000genomes.org/wiki/Analysis/varian
 >   ![](../../images/vcfallelicprimitives.png)
 >
 > **VCFAllelicPrimitives** generated a VCF files containing 37 records (the input VCF only contained 35). This is because a multiple nucleotide polymorphism (`TAGG|CAGA`) at position 618851 have been converted to two:
-> 
+>
 > | Before | After |
 > |--------|---------|
 > |`chr19 618851 . TAGG CAGA 81.7546`<br> | `chr19 618851 . T C 81.7546`<br>`chr19 618854 . G A 81.7546`|
@@ -221,8 +227,8 @@ family1	   HG002_NA24385_son	HG003_NA24149_father HG004_NA24143_mother 1  2     
 > So let's load data into GEMINI by setting VCF and PED inputs
 >
 >   ![](../../images/gemini_load.png)
-> 
-> 
+>
+>
 > This creates a sqlite database. To see the content of the database use **GEMINI_db_info**:
 >
 >   ![](../../images/gemini_db_info.png)
@@ -243,7 +249,7 @@ GEMINI database is queried using the versatile SQL language (more on SQL [here](
 > ### :pencil2: Hands-on: Selecting "novel" variants that are not annotated in dbSNP database
 >
 > Type `SELECT count(*) FROM variants WHERE in_dbsnp == 0` into **The query to be issued to the database**
-> 
+>
 >     ![](../../images/gemini_query1.png)
 >  
 > As we can see from [output](https://usegalaxy.org/datasets/bbd44e69cb8906b51bb37b9032761321/display/?preview=True) there are 21 variants that are not annotated in dbSNP
@@ -255,7 +261,7 @@ GEMINI database is queried using the versatile SQL language (more on SQL [here](
 > The query `SELECT * FROM variants WHERE filter is NULL and gene = 'POLRMT'` will produce [output](https://usegalaxy.org/datasets/bbd44e69cb8906b5a0bb5b2cc0695697/display/?preview=True) with very large number of columns. To restrict the number of columns to a manageable set let's use this command: `SELECT rs_ids, aaf_esp_ea, impact, clinvar_disease_name, clinvar_sig FROM variants WHERE filter is NULL and gene = 'POLRMT'` (column definitions can be found [here](http://gemini.readthedocs.org/en/latest/content/database_schema.html))
 
 [Output](https://usegalaxy.org/datasets/bbd44e69cb8906b540d65297cd1d26bb/display/?preview=True) shows variants found within the *POLRMT* gene.
- 
+
 ### Querying genotypes
 
 **GEMINI** provides access to genotype, sequencing depth, genotype quality, and genotype likelihoods for each individual (`subjectID`):
@@ -299,7 +305,7 @@ Wildcards simply writing SQL expressions when searching across multiple terms. T
 >    </details>
 {: .question}
 
-# Going further 
+# Going further
 
 This short tutorial should give you an overall idea on how generate variant data in Galaxy and process it with GEMINI. Yet there is much more to learn. Below we list GEMINI tutorials and links to Galaxy libraries with relevant data.
 
@@ -327,9 +333,9 @@ This short tutorial should give you an overall idea on how generate variant data
   ![](../../images/gemini_command.png)
 
 * Use Galaxy's **GEMINI_load** tool:
- 
+
   ![](../../images/galaxy_command.png)
- 
+
 * and so on....
 
 
@@ -337,4 +343,3 @@ This short tutorial should give you an overall idea on how generate variant data
 >
 > ...you need to complain. Use [Galaxy's BioStar Channel](https://usegalaxy.org/biostar/biostar_redirect) to do this.
 {: .tip}
-

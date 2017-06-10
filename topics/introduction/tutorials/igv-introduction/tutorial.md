@@ -1,3 +1,9 @@
+---
+layout: tutorial_hands_on
+topic_name: introduction
+tutorial_name: igv-introduction
+---
+
 # Using the Integrative Genomics Viewer
 
 **Bioinformatics Galaxy Course**

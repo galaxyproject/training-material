@@ -1,6 +1,6 @@
 name: "transcriptomics"
 type: "use"
-title: "Transcriptomics data analysis"
+title: "Transcriptomics"
 summary: "Training material for all kinds of transcriptomics analysis."
 docker_image: ""
 status: ""
@@ -9,12 +9,59 @@ requirements:
 -
     title: "Galaxy introduction"
     type: "internal"
-    link: "/Introduction/"
+    link: "/introduction/"
 -
     title: "Quality control"
     type: "internal"
-    link: "/NGS-QC"
-    
+    link: "/sequence-analysis/"
+
+material:
+-
+    title: "Introduction"
+    type: "introduction"
+    slides: "yes"
+-
+    title: "De novo transcriptome reconstruction with RNA-seq"
+    type: "tutorial"
+    name: "de-novo"
+    zenodo_link: "https://zenodo.org/record/254485#.WKODmRIrKRu"
+    galaxy_tour: "..."
+    hands_on: "yes"
+    slides: "no"
+    questions:
+    - "What genes are differentially expressed between G1E cells and megakaryocytes?"
+    - "How can we generate a transcriptome de novo from RNA sequencing data?"
+    objectives:
+    - "Analysis of RNA sequencing data using a reference genome"
+    - "Reconstruction of transcripts without reference transcriptome (de novo)"
+    - "Analysis of differentially expressed genes"
+    time_estimation: "6h"
+    key_points:
+    - "Simple sentence to sum up the first key point of the tutorial (Take home message)"
+    - "Second key point"
+    - "Third key point"
+    - "..."
+-
+    title: "Reference-based RNA-seq data analysis"
+    type: "tutorial"
+    name: "ref-based"
+    zenodo_link: "https://zenodo.org/record/290221"
+    galaxy_tour: "ref_based_rna_seq"
+    hands_on: "yes"
+    slides: "no"
+    questions:
+    - "What are the effects of Pasilla (PS) gene depletion on splicing events?"
+    - "How to analyze RNA sequencing data using a reference genome?"
+    objectives:
+    - "Analysis of RNA sequencing data using a reference genome"
+    - "Analysis of differentially expressed genes"
+    - "Identification of functional enrichment among differentially expressed genes"
+    time_estimation: "1d"
+    key_points:
+    - "Using a spliced mapping tool for eukaryotic RNA seq data"
+    - "Running a differential gene expression with taking care of the factors to study"
+    - "Running a differential exon usage with taking care of the factors to study"
+
 maintainers:
 -
     name: "Bérénice Batut"
@@ -80,4 +127,3 @@ references:
     title: "Computational methods for transcriptome annotation and quantification using RNA-seq"
     link: "http://www.nature.com/nmeth/journal/v8/n6/abs/nmeth.1613.html"
     summary: "Classical paper about the computational aspects of RNA-seq data analysis"
-

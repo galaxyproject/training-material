@@ -1,9 +1,15 @@
+---
+layout: tutorial_hands_on
+topic_name: admin
+tutorial_name: dev-to-production
+---
+
 Move from dev instance to production instance
 =============================================
 
 :grey_question: ***Questions***
 
-- *Why do I need to configure Galaxy for production ?* 
+- *Why do I need to configure Galaxy for production ?*
 - *How to run a galaxy in a production environment ?*
 
 :dart: ***Objectives***
@@ -20,10 +26,10 @@ Move from dev instance to production instance
 
 # Introduction
 
-In this tutorial you will learn to install and configure a galaxy instance. 
+In this tutorial you will learn to install and configure a galaxy instance.
 The basic installation instructions are suitable for developpement only.
 For setting up a Galaxy for a multi-user production environment additonal steps are necessary.
-After a basic installation, this tutorial present the main steps for moving from a basic installation to a production environment. 
+After a basic installation, this tutorial present the main steps for moving from a basic installation to a production environment.
 
 <img src="../../images/scheme-dev_to_production.png" style="width: 600px;"/>
 
@@ -44,9 +50,9 @@ To start the galaxy go to the galaxy directory and run:
 
 	sh run.sh
 
-This will start up the server on localhost and port 8080, so Galaxy can be accessed from your web browser at http://localhost:8080 . 
+This will start up the server on localhost and port 8080, so Galaxy can be accessed from your web browser at http://localhost:8080 .
 
-Galaxy's server will start printing its output to your terminal. To stop the Galaxy server, just hit Ctrl-c in the terminal from which Galaxy is running. 
+Galaxy's server will start printing its output to your terminal. To stop the Galaxy server, just hit Ctrl-c in the terminal from which Galaxy is running.
 
 ## Access Galaxy over the network
 In the basic installation Galaxy is bind to the loopback interface.
@@ -60,23 +66,23 @@ The galaxy you have just installed is configured with the following:
 - [SQLite](http://www.sqlite.org/): a servless database.
 - A built-in HTTP server, written in Python.
 
-The tools are run locally and the galaxy server itself run in a single process. 
+The tools are run locally and the galaxy server itself run in a single process.
 
 ## Usefull things to know ...
 
 - The command: git clone -b release_16.07 https://github.com/galaxyproject/galaxy.git
 
-*We use the "-b" option to clone a specific branch of the repository. 
+*We use the "-b" option to clone a specific branch of the repository.
 In the example above we clone the branch release_16.07 because the lastest release is 16.07.
 A new version of Galaxy is released every 3 months.
-It is strongly encouraged to run this tutorial with the latest release. 
+It is strongly encouraged to run this tutorial with the latest release.
 See the [GitHub](https://github.com/galaxyproject/galaxy) repository to get the latest one.*
 
 - Galaxy configuration filenames
 
 *In the config/ directory all the files are suffixed with ".sample".
 Sample files are default files provided by Galaxy.
-When you change a configuration it is strongly encouraged to work directly on a filename without the 'sample' suffix. 
+When you change a configuration it is strongly encouraged to work directly on a filename without the 'sample' suffix.
 So, go ahead save the 'galaxy.ini.sample' and create a 'galaxy.ini'*
 
 ## What's next ?
@@ -91,17 +97,17 @@ A set of option are usefull for development but become irrelevant for production
 
 	debug = False
 
-Setting debug to False disable middleware that loads the entire response in memory for displaying debugging information in the page. 
-If left enabled, the proxy server may timeout waiting for a response or your Galaxy process may run out of memory if it's serving large files. 
+Setting debug to False disable middleware that loads the entire response in memory for displaying debugging information in the page.
+If left enabled, the proxy server may timeout waiting for a response or your Galaxy process may run out of memory if it's serving large files.
 
 - use_interactive:
 
 	use_interactive = False
 
-Setting use_interactive to false disable displaying and live debugging of tracebacks via the web. 
-Leaving it enabled will expose your configuration (database password, id_secret, etc.). 
+Setting use_interactive to false disable displaying and live debugging of tracebacks via the web.
+Leaving it enabled will expose your configuration (database password, id_secret, etc.).
 
-- filter-with: 
+- filter-with:
 
 ## Subpart 1
 

@@ -1,12 +1,12 @@
 ---
 layout: tutorial_hands_on
-topic_name: NGS-QC
-tutorial_name: dive_into_qc
+topic_name: sequence-analysis
+tutorial_name: quality-control
 ---
 
 # Introduction
 
-During the sequencing process, some errors may be introduced like incorporation of ambiguous nucleotides. Analyzing poor data wastes CPU and people time. 
+During the sequencing process, some errors may be introduced like incorporation of ambiguous nucleotides. Analyzing poor data wastes CPU and people time.
 
 The quality control of the sequences right after sequencing is then an essential step to ensure that the raw data looks good before processing them. It reduces the biases in data that may compromised the downstream analyses with low-quality sequences, sequence artifacts, ... The process is the same for any type of sequencing data.
 
@@ -44,7 +44,7 @@ The quality control of the sequences right after sequencing is then an essential
 >    {: .tip}
 >
 >    > ### :nut_and_bolt: Comments
->    > 
+>    >
 >    > Rename the dataset to "First dataset"
 >    {: .comment}
 > As default, Galaxy takes the link as name.
@@ -58,13 +58,13 @@ To estimate sequence quality and treatments to do on the data, many indicators c
     - Per base sequence quality
     - Per sequence quality scores
     - Per tile sequence quality
-- Sequence content with 
+- Sequence content with
     - Per base sequence content
     - Per sequence GC content
     - Per base N content
 - Sequence length with the sequence length distribution
 - Duplicated sequences
-- Tag sequences with 
+- Tag sequences with
     - Adapter contamination
     - Kmer Content
 
@@ -78,7 +78,7 @@ To estimate sequence quality and treatments to do on the data, many indicators c
 >    > ### :bulb: Tip: Inspecting the content of a file in Galaxy
 >    >
 >    > * Click on the eye ("View data") on the right of the file name in the history
->    > * Inspect the content of the file on the middle 
+>    > * Inspect the content of the file on the middle
 >    {: .tip}
 >
 >    > ### :question: Questions
@@ -86,7 +86,7 @@ To estimate sequence quality and treatments to do on the data, many indicators c
 >    > 1. How good are the quality scores?
 >    > 2. Why is there warning for the per base sequence content and the per sequence GC content graphs?
 >    > 3. What must be done to improve the sequences?
->    > 
+>    >
 >    >    <details>
 >    >    <summary>Click to view answers</summary>
 >    >    <ol type="1">
@@ -115,7 +115,7 @@ In general, quality treatments are:
     - tails
     - ...
 
-To improve the quality of the sequences, we use [Trim Galore!](http://www.bioinformatics.babraham.ac.uk/projects/trim_galore/) tool. It automates quality and adapter trimming as well as quality control. 
+To improve the quality of the sequences, we use [Trim Galore!](http://www.bioinformatics.babraham.ac.uk/projects/trim_galore/) tool. It automates quality and adapter trimming as well as quality control.
 
 > ### :pencil2: Hands-on: Quality treatment and re-checking
 >
@@ -124,7 +124,7 @@ To improve the quality of the sequences, we use [Trim Galore!](http://www.bioinf
 >    > ### :question: Questions
 >    >
 >    > Which parameters must be applied to follow the previous recommendations?
->    > 
+>    >
 >    > <details>
 >    > <summary>Click to view answers</summary>
 >    > We use the default ones:
@@ -141,11 +141,11 @@ If you already know the which adapter sequences were used during the library pre
 > 2. **FastQC** :wrench:: Re-run FastQC on the quality controlled data file and inspect the new FastQC report
 >
 >    > ### :question: Questions
->    > 
+>    >
 >    > 1. How many sequences have been removed?
 >    > 2. Has the quality of the sequences been improved?
 >    > 3. Can you explain why the per base sequence content is not good now?
->    > 
+>    >
 >    >    <details>
 >    >    <summary>Click to view answers</summary>
 >    >    <ol type="1">
@@ -173,7 +173,7 @@ Now, we would like to see the impact to quality control and treatment on a bad d
 >    >
 >    > 1. How good is this dataset?
 >    > 2. What must be done to improve the sequences?
->    > 
+>    >
 >    >    <details>
 >    >    <summary>Click to view answers</summary>
 >    >    <ol type="1">
@@ -192,7 +192,7 @@ Now, we would like to see the impact to quality control and treatment on a bad d
 >    > 1. How many sequences have been removed?
 >    > 2. Has the quality of the sequences been improved?
 >    > 3. Can you explain why the per base sequence content is not good now?
->    > 
+>    >
 >    >    <details>
 >    >    <summary>Click to view answers</summary>
 >    >    <ol type="1">
@@ -208,4 +208,3 @@ Now, we would like to see the impact to quality control and treatment on a bad d
 In this tutorial, we have controlled the quality of two datasets to ensure that the raw data looks good before analysing them with tools to extract RNA-Seq, ChIP-Seq or any other type of information. The approach of quality control is similar for any type of sequencing data:
 
 ![](../../images/dive_into_qc_workflow.png)
-
