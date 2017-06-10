@@ -18,7 +18,7 @@ In this tutorial, you will understand how to design and develop a new tutorial f
 > In this tutorial, we will deal with:
 >
 > 1. [Setting up a new tutorial](#setting-up-a-new-tutorial)
-> 2. [Mapping](#mapping)
+> 2. [Filling the metadata](#filling-the-metadata)
 > 3. [Analysis of the differential expression](#analysis-of-the-differential-expression)
 > {: .agenda}
 
@@ -45,10 +45,17 @@ When we structured the repository, we decided here to use as topic the names of 
 >    {: .question}
 {: .hands_on}
 
+Once the topic is chosen, serious things can start: creating the tutorial. It is meaning the tutorial content, the metadata related to the tutorial but also the technical support for the tutorial with the description of the needed tool and dataset, a workflow of the tutorial and also a Galaxy Interactive Tour.
 
-# Copy the template
+To help you, we created a template for a tutorial with the different required files.
 
-Introduction about this part
+> ### :pencil2: Hands-on: Copy the needed file
+>
+> 1. Copy the `tutorial1` folder (you can find it in `templates/tutorials/`) in `topics/sequence-analysis/topics`
+> 2. Rename the folder into `blast`
+{: .hands_on}
+
+We will now start to fill the different files together.
 
 # Filling the metadata 
 
