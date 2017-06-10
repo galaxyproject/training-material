@@ -52,34 +52,77 @@ To help you, we created a template for a tutorial with the different required fi
 > ### :pencil2: Hands-on: Copy the needed file
 >
 > 1. Copy the `tutorial1` folder (you can find it in `templates/tutorials/`) in `topics/sequence-analysis/topics`
-> 2. Rename the folder into `blast`
+> 2. Rename the folder into `similarity-search`
 {: .hands_on}
 
 We will now start to fill the different files together.
 
-# Filling the metadata 
+# Filling the metadata
 
-## Defining the learning objectives, the questions, the take-home messages
+The first file we will fill is the `metadata.yaml` file. 
 
-Link to Software Carpentry?
+This file define the metadata related to a tutorial: 
 
-> ### :pencil2: Hands-on: Data upload
+- `title`: title of the tutorial
+- `type: "tutorial"`
+- `name`: name of the tutorial (name of the subdirectory where the files related to the tutorial will be stored)
+- `zenodo_link`: link on Zenodo to the input data for the tutorial (not ideal but it can be empty)
+- `galaxy_tour`: name of the galaxy tour
+- `hands_on`(`"yes"` or `"no"`): tell if an hands on is available for this material
+- `slides` (`"yes"` or `"no"`): tell if slides are available for this materialits title, its type, ...
+- `requirements`: list of requirements specific to this tutorial (in addition to the one of the topic), with:
+    - `title`
+    - `link`: relative for internal (inside training material) requirement or full for external requirement)
+    - `type`: the type of link (`internal` or `external`)
+
+This information is used to automatically make the tutorial available on the online website: [http://galaxyproject.github.io/training-material/](http://galaxyproject.github.io/training-material/)
+
+> ### :pencil2: Hands-on: Fill the basic metadata
 >
-> 1. Step1
-> 2. Step2
->
->    > ### :nut_and_bolt: Comments
->    > A comment
->    {: .comment}
->
->    > ### :bulb: Tip: A tip
->    >
->    > * Step1
->    > * Step2
->    {: .tip}
+> 1. Fill the basic metadata for our tutorial
+>   - `title: Similarity search with BLAST`
+>   - `type: "tutorial"`
+>   - `name: "similarity-search"`
+>   - `zenodo_link: ""` (we do not have data currently)
+>   - `galaxy_tour: ""` (we do not have Galaxy Interactive Tour currently)
+>   - `hands_on: "yes"`
+>   - `slides: "no"`
+>   - `requirements`: a requirement to "Galaxy introduction" with internal link to `introduction`
 {: .hands_on}
 
-## Decide the time for the tutorial
+In the second part of the metadata, we define metadata related to the content of the tutorial, which will appear in the top and bottom of the online tutorial:
+
+- `time_estimation`: an estimation of the time needed to complete the hands-on
+- `questions`: list of questions that will be addressed in the tutorial
+- `objectives`: list of learning objectives of the tutorial
+
+    A learning objective is a single sentence describing what a learner will be able to do once they have deone the tutorial
+
+- `key_points`: list of take-home messages
+
+    This information will appear at the end of the tutorial 
+
+For this metadata, we take inspiration from what Software Carpentry is doing and particularly what they describe in their [Instructor training](http://swcarpentry.github.io/instructor-training/) and the section ["Lessons and Objectives"](http://swcarpentry.github.io/instructor-training/19-lessons/). 
+
+> ### :pencil2: Hands-on: Fill the basic metadata
+>
+> 1. Define 2 questions that will be addressed during the tutorial and add them to the metadata
+> 2. Define 2 learning objectives for the tutorial and add them to the metadata
+{: .hands_on}
+
+We recommend you to fill the questions and the learning objectives before starting writing the tutorial content. You can still refine them afterwards, but it will help to design your tutorial and think beforehands what is worth training.
+
+For the take-home messages, it is easier to define them once the tutorial is written and you identified the issues.
+
+> ### :nut_and_bolt: Comment
+>
+> Temporarly, we need a duplication of the metadata (because of our temporary templating system) in the topic `metadata.yaml` in the section `material`. So you need to copy that.
+> {: .comment}
+
+# Filling the tutorial
+
+# Setting up the technical support
+
 
 # Filling the tutorial
 
