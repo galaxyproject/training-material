@@ -131,17 +131,18 @@ Once the metadata are filled, we can test if the metadata were correctly defined
 >
 > 1. Install Jekyll using [RubyGems](https://rubygems.org/pages/download): `make install`
 >
->       If you are installing it on Mac OSX, you need to install it this way as `/usr/bin/` is not writable:
->
->       ```
->       sudo gem update —system
->       sudo gem install -n /usr/local/bin/ gem name
->       sudo gem install -n /usr/local/bin/ jemoji
->       sudo gem install -n /usr/local/bin/ jekyll
->       sudo gem install -n /usr/local/bin/ jekyll-feed
->       sudo gem install -n /usr/local/bin/ bundler
->       ```
->
+>    > ### :bulb: Tip: Installation on MacOS
+>    >
+>    > If you are installing it on Mac OSX, you need to install it this way as `/usr/bin/` is not writable. You need then to run:
+>    >
+>    > - `$ sudo gem update —system`
+>    > - `$ sudo gem install -n /usr/local/bin/ gem name`
+>    > - `$ sudo gem install -n /usr/local/bin/ jemoji`
+>    > - `$ sudo gem install -n /usr/local/bin/ jekyll`
+>    > - `$ sudo gem install -n /usr/local/bin/ jekyll-feed`
+>    > - `$ sudo gem install -n /usr/local/bin/ bundler`
+>    {: .tip}
+>   
 > 2. Run a local Jekyll server: `make serve`
 > 3. Visualize at [http://localhost:4000/](http://localhost:4000/)
 > 4. Check if the tutorial was correctly added
