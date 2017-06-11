@@ -25,7 +25,11 @@ In this tutorial, you will understand how to design and develop a new tutorial f
 >
 > 1. [Setting up a new tutorial](#setting-up-a-new-tutorial)
 > 2. [Filling the metadata](#filling-the-metadata)
-> 3. [Analysis of the differential expression](#analysis-of-the-differential-expression)
+> 3. [Checking the tutorial generation](#checking-the-tutorial-generation)
+> 5. [Filling the tutorial content](#filling-the-tutorial-content)
+> 6. [Adding slides](#adding-slides)
+> 7. [Setting up the technical support](#setting-up-the-technical-support)
+> 8. [Submitting the new tutorial to the GitHub repository](#submitting-the-new-tutorial-to-the-github-repository)
 > {: .agenda}
 
 # Setting up a new tutorial
@@ -161,11 +165,11 @@ For the take-home messages, it is easier to define them once the tutorial is wri
 > Temporarly, we need a duplication of the metadata (because of our temporary templating system) in the topic `metadata.yaml` in the section `material`. So you need to copy that.
 > {: .comment}
 
-# Checking the website
+# Checking the tutorial generation
 
 Once the metadata are filled, we can test if the metadata were correctly defined to serve the online website. Currently, the website is generated from the metadata and the tutorials using Jekyll, a templating system. We can run locally a Jekyll server to check if the tutorial is correctly added and rendered
 
-> ### :pencil2: Hands-on: Checking the website generation
+> ### :pencil2: Hands-on: Checking the website generation locally
 >
 > 1. Install Jekyll using [RubyGems](https://rubygems.org/pages/download): `make install`
 >
@@ -183,10 +187,10 @@ Once the metadata are filled, we can test if the metadata were correctly defined
 >   
 > 2. Run a local Jekyll server: `make serve`
 > 3. Visualize at [http://localhost:4000/](http://localhost:4000/)
-> 4. Check if the tutorial was correctly added
+> 4. Check if the tutorial was correctly added at [http://localhost:4000/topics/sequence-analysis/similarity-search](http://localhost:4000/topics/sequence-analysis/similarity-search)
 {: .hands_on}
 
-# Filling the tutorial
+# Filling the tutorial content
 
 ## Finding a good toy dataset
 
