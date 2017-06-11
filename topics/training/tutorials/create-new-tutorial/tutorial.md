@@ -177,12 +177,12 @@ Once the metadata are filled, we can test if the metadata were correctly defined
 >    >
 >    > If you are installing it on Mac OSX, you need to install it this way as `/usr/bin/` is not writable. You need then to run:
 >    >
->    > - `$ sudo gem update —system`
->    > - `$ sudo gem install -n /usr/local/bin/ gem name`
->    > - `$ sudo gem install -n /usr/local/bin/ jemoji`
->    > - `$ sudo gem install -n /usr/local/bin/ jekyll`
->    > - `$ sudo gem install -n /usr/local/bin/ jekyll-feed`
->    > - `$ sudo gem install -n /usr/local/bin/ bundler`
+>    >      $ sudo gem update —system
+>    >      $ sudo gem install -n /usr/local/bin/ gem name
+>    >      $ sudo gem install -n /usr/local/bin/ jemoji
+>    >      $ sudo gem install -n /usr/local/bin/ jekyll
+>    >      $ sudo gem install -n /usr/local/bin/ jekyll-feed
+>    >      $ sudo gem install -n /usr/local/bin/ bundler
 >    {: .tip}
 >   
 > 2. Run a local Jekyll server: `make serve`
