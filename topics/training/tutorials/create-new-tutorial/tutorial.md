@@ -382,8 +382,6 @@ This structure needs to be respected otherwise it would not be interpreted corre
 
 - Tips
 
-    
-
         > ### :bulb: Tip: Importing data via links
         >
         > * Copy the link location
@@ -430,9 +428,47 @@ To render the boxes correctly, the previous syntaxes have to be followed. The bo
 {: .hands_on}
 ```
 
-# Adding slides
+# Adding slides (Optional)
 
-(If needed)
+Sometimes we also need slides to support the tutorial. With the current infrastructure, we also give this possibility to serve on the website slides related to a tutorial. But adding slides is just an option.
+
+The slides are written in Markdown (even if the extension is html), as the tutorial and are rendered as a webpage thanks to [`Remark`](https://remarkjs.com/). However this is not done automatically: we first need to tell to the templating system to search for the slides by changing `slides` in the metadata from `no` to `yes`.
+
+Once it is done, the slides for our tutorial will be accessible at [http://localhost:4000/topics/sequence-analysis/tutorials/similarity-search/slides.html](http://localhost:4000/topics/sequence-analysis/tutorials/similarity-search/slides.html)
+
+We can now fill the `slides.html` file:
+
+
+```
+---
+layout: tutorial_slides
+topic_name: "sequence-analysis"
+tutorial_name: search-similarity
+logo: "GTN"
+---
+
+# What is similarity search?
+
+---
+
+### What is blast?
+
+![](../../images/ecker_2012.jpg)
+
+---
+
+### Next slide
+```
+
+On the top, as for the `tutorial.md`, we need to define some metadata to link the slides to the correct tutorial. The metadata of the tutorial can then be used also to automatically fill the first slides (with the title, the requirements,...)  and the last slide (take-home message).
+
+After, each new slide is introduced by `---`, and the content of each slide is written in Markdown.
+
+> ### :pencil2: Hands-on: Add some slides for the tutorial
+>
+> 1. Add a few slides to explain the similarity search
+> 2. Make sure they are accessible and correctly generated
+{: .hands_on}
 
 # Setting up the technical support
 
