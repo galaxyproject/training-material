@@ -205,45 +205,228 @@ Once the metadata are filled, we can test if the metadata were correctly defined
 
 ## Filling the tutorial content
 
-Short introduction about this subpart.
+The content of the tutorial will go in the `tutorial.md`. The syntax of this file is really simple., as well as its structure:
 
-> ### :pencil2: Hands-on: Data upload
+```
+---
+layout: tutorial_hands_on
+topic_name: training
+tutorial_name: create-new-tutorial
+---
+# Introduction
+
+blabla
+
+# Section 1
+
+blabla
+
+## Subsection 1
+
+blabla
+
+# Section 2
+
+blabla
+
+## Subsection 2
+
+blabla
+
+# Conclusion
+
+blabla
+```
+
+### Some metadata on the top
+
+On the top, there is some metadata:
+
+- `layout: tutorial_hands_on` (to let as it is)
+- `topic_name: training` with the name of the topic
+- `tutorial_name: create-new-tutorial` with the name of tutorial
+
+These metadata are there to help the templating system to make the connection between the file and the metadata we defined before. If they are not correctly defined the tutorial can not be found on the website, as for our current tutorial.
+
+> ### :pencil2: Hands-on: Fix the top metadata
 >
-> 1. Step1
-> 2. Step2
->
->    > ### :question: Question
->    >
->    > Question?
->    >
->    > <details>
->    > <summary>Click to view answers</summary>
->    > Answer to question
->    > </details>
->    {: .question}
+> 1. Change the `tutorial-name` and the `topic_name` to fit to the ones defined in the metadata
+> 2. Check if the tutorial has been correctly added at [http://localhost:4000/topics/sequence-analysis/similarity-search](http://localhost:4000/topics/sequence-analysis/similarity-search)
 {: .hands_on}
 
-Some blabla
-> ### :pencil2: Hands-on: Data upload
+### Content of the tutorial
+
+After the metadata comes the content of the tutorial written in Markdow, a simple markup langage. 
+
+> ### :bulb: Tip: Markdown
 >
-> 1. Step1
-> 2. Step2
+> Check [this cheatsheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet) to learn more how to use Markdown.
+{: .tip}
+
+The content in Markdown is transformed by our templating system into the nice webpage which add the metadata. Indeed in the `tutorial.md` file, no need to add the name of the tutorial: it is automatically added based on the title defined in the metadata.
+
+We recommend to structure the tutorials like this
+
+- An introdcution to introduce the tutorial with the use case, the data, the methods
+- Several sections with the content of the tutorial and some hands-on parts (because we think that doing is an important part of the learning process)
+- A conclusion to summarize what has been done in the tutorial (with a scheme)
+
+> ### :pencil2: Hands-on: Structuring the tutorial
+>
+> 1. Add a small introduction about the dataset
+> 2. Add one or two sections with ideas for the tutorial
+> 3. Add a small conclusion
+{: .hands_on}
+
+### Improving the learning experience
+
+To improve the learning experience in our tutorial, we defined some boxes to highlight.
+
+They are defined always with the same structure:
+
+```
+> ### <an emoji> Type of boxe: Name of the box
+> list
+{: .type_of_box}
+```
+
+This structure needs to be respected otherwise it would not be interpreted correctly by the templating system. The different defined boxes are:
+
+- Overview
+
+    This box at the top of each tutorial is automatically generated using the metadata we defined
+
+    > ### :pencil2: Hands-on: Checking the metadata
+    >
+    > 1. Check that the metadata added previously are correctly filling the overview box
+    >
+    >    > ### :question: Questions
+    >    >
+    >    > Which pedogical metadata are not added to this box?
+    >    >
+    >    >    <details>
+    >    >    <summary>Click to view answers</summary>
+    >    >    The take-home messages are not added to this box but into the last box of the tutorial
+    >    >    </details>
+    >    {: .question}
+    {: .hands_on}
+
+- Agenda
+
+    The second box in most of the tutorial is the agenda box at the end of the introduction. It indicates the plan of the tutorial
+
+        > ### Agenda
+        >
+        > In this tutorial, we will analyze the data with:
+        >
+        > 1. [Pretreatments](#pretreatments)
+        > 2. [Mapping](#mapping)
+        > 3. [Analysis of the differential expression](#analysis-of-the-differential-expression)
+        > {: .agenda}
+
+    ![](../../../../shared/images/tutorial_agenda_box.png)
+
+    > ### :pencil2: Hands-on: Add an agenda box to the tutorial
+    >
+    > 1. Add an agenda box to the tutorial that fit the structure we defined previously
+    {: .hands_on}
+
+- Hands-on
+
+    We think that doing is important in the learning process. So we emphasize it by adding regularly some hands-on sections where the trainees can do by themselves some analyses. We designed some special boxes to make these sections easy to find.
+
+        > ### :pencil2: Hands-on: Sorting BAM dataset
+        >
+        > 1. **Sort BAM dataset** :wrench:: Sort the paired-end BAM file by "Read names" with **Sort BAM
+        {: .hands_on}
+
+    ![](../../../../shared/images/tutorial_hand_on_box.png)
+
+    with the
+
+    - `:pencil2:` emoji to define that is an hands-on
+    - Short imperative sentence to make easy to identify the tasks
+    - Name of the tool in bold to make it easy to identify and with `:wrench:` to insist
+    - Parameters for the tool as a sublist<br/>
+
+    > ### :pencil2: Hands-on: Add an hands-on box
+    >
+    > 1. Add an hands-on box to run a BLAST of the small sequence dataset against the chosen database 
+    {: .hands_on}
+
+-  Questions 
+    
+    The questions are then to force the trainees to think about what they are currently doing and to put things in perspective. They are also a way to help the instructors to expose and rectify in direct the misconceptions.
+
+        > ### :question: Questions
+        >
+        > 1. Why are some tests filtered?
+        > 2. Does it improve the *p*-value distribution?
+        >
+        >    <details>
+        >    <summary>Click to view answers</summary>
+        >    Content goes here.
+        >    </details>
+        {: .question}
+
+    ![](../../../../shared/images/tutorial_question_box.png)
+
+    They has to be quick to administer and evaluate. They can be small questions or also multiple choice questions (MCQs). If well designed with righlty chosen wrong asnwer, the latter solution can do much more than just measure how much someone knows by giving valuable insight.
+
+    In the box, we add also the answer so the self-trainees can check the solution and its explanation. 
+
+    > ### :pencil2: Hands-on: Add a question box
+    >
+    > 1. Add an hands-on box to construct the BLAST database
+    {: .hands_on}
+
+- Tips
+
+    
+
+        > ### :bulb: Tip: Importing data via links
+        >
+        > * Copy the link location
+        > * Open the Galaxy Upload Manager
+        > * Select **Paste/Fetch Data**
+        > * Paste the link into the text field
+        > * Press **Start**
+        {: .tip}
+
+    ![](../../../../shared/images/tutorial_tip_box.png)
+
+- Comments
+
+        > ### :nut_and_bolt: Comments
+        > - Edit the "Database/Build" to select "dm3"
+        > - Rename the datasets according to the samples
+        {: .comment}
+
+    ![](../../../../shared/images/tutorial_comment_box.png)
+
+- Key points
+    
+    This last box of the tutorial is automatically filled with the take-home messages defined in the metadata
+
+
+To render the boxes correctly, the previous syntaxes have to be followed. The boxes can be nested, *e.g.*for having tips inside hands-on. For example:
+
+```
+> ### :pencil2: Hands-on: Defining the topic for the tutorial
+>
+> 1. Search for NCBI Blast+ on the [ToolShed](https://toolshed.g2.bx.psu.edu/)
+> 2. Check in which category it is
 >
 >    > ### :question: Questions
 >    >
->    > 1. Question1?
->    > 2. Question2?
+>    > In which topic will you put the tutorial?
 >    >
 >    >    <details>
 >    >    <summary>Click to view answers</summary>
->    >    <ol type="1">
->    >    <li>Answer for question1</li>
->    >    <li>Answer for question2</li>
->    >    </ol>
+>    >    If we search for [NCBI Blast+ in the ToolShed](https://toolshed.g2.bx.psu.edu/view/devteam/ncbi_blast_plus/7538e2bfcd41), it is attributed to 2 categories (bottom): "Next Gen Mappers" and "Sequence Analysis".
+>    >    We decided to put it in "Sequence analysis" because this is the most general one for this tutorial.
 >    >    </details>
 >    {: .question}
->
-> 3. Step3
 {: .hands_on}
 
 # Adding slides
