@@ -314,9 +314,32 @@ A Galaxy Interactive Tour is a way to go through an entire analysis, step by ste
 > ### :pencil2: Hands-on: Create a Galaxy Interactive Tour
 >
 > 1. Create a Galaxy Interactive Tour for the tutorial
+> 2. Add it to the `tours` directory
 {: .hands_on}
 
-# Submitting the new tutorial
+## Testing the technical infrastructure
+
+Once we defined all the requirements for running the tutorial, we can test these requirements. 
+
+Every topic will come with a Docker image containing the tools, data, workflows and Galaxy Interactive Tours required by each tutorial of this topic. The Docker image is described in the Dockerfile found in the `docker` directory of each topic. This file uses scripts to automatically add the files for each tutorial. The only thing to change is the name of the topic in the Dockerfile copied from the templates.
+
+> ### :pencil2: Hands-on: Testing the Docker
+>
+> 1. Check that the Dockerfile uses 'sequence-analysis' as topic name
+> 2. Move to the root of the training material repository
+> 3. Build the Docker image for the topic with: `docker build -f topic/sequence-analysis/docker/Dockerfile -t training-sequence-analysis .`
+>     
+>    This command needs to be launched a the root of training material repository because the Dockerfile uses some scripts available there to install the tools, import the data and the workflows
+>
+> 4. Launch the Docker container: `docker run -d -p 8080:80 training-sequence-analysis`
+> 5. Check the Galaxy instance on [http://localhost:8080/](http://localhost:8080/):
+>     1. Check the installed tools
+>     2. Check the data libraries in "Shared data"
+>     3. Check the workflows
+>     4. Check the Galaxy Interactive Tours in "Help"
+{: .hands_on}
+
+# Submitting the new tutorial to the GitHub repository
 
 # Conclusion
 
