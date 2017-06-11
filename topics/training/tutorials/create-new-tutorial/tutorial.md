@@ -630,4 +630,4 @@ Once we are happy with your tutorial, we want to submit it to the GitHub reposit
 
 # Conclusion
 
-Conclusion about the technical key points. And then relation between the technics and the biological question to end with a global view.
+**TODO: add a scheme to sum up the steps and the files**
