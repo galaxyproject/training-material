@@ -30,7 +30,11 @@ In this tutorial, you will understand how to design and develop a new tutorial f
 
 # Setting up a new tutorial
 
-Here, we want to develop a small tutorial to explain how to use BLAST. The first step we need to define is in which topic putting our tutorial. This first step can be tricky. 
+Here, we want to develop a small tutorial to explain how to use BLAST. 
+
+## Defining the topic
+
+The first step we need to define is in which topic putting our tutorial. This first step can be tricky. 
 
 When we structured the repository, we decided here to use as topic the names of the categories in the [ToolShed](https://toolshed.g2.bx.psu.edu/). So when decided where to put your tutorial, you can look in which ToolShed's category are the main tools used in the tutorial and use this category as topic. For example, this tutorial will rely on the NCBI Blast+ tool.
 
@@ -50,6 +54,9 @@ When we structured the repository, we decided here to use as topic the names of 
 >    >    </details>
 >    {: .question}
 {: .hands_on}
+
+
+## Creating the directory for the tutorial
 
 Once the topic is chosen, serious things can start: creating the tutorial. It is meaning the tutorial content, the metadata related to the tutorial but also the technical support for the tutorial with the description of the needed tool and dataset, a workflow of the tutorial and also a Galaxy Interactive Tour.
 
@@ -110,7 +117,7 @@ In the second part of the metadata, we define metadata related to the content of
 
 For this metadata, we take inspiration from what Software Carpentry is doing and particularly what they describe in their [Instructor training](http://swcarpentry.github.io/instructor-training/) and the section ["Lessons and Objectives"](http://swcarpentry.github.io/instructor-training/19-lessons/). 
 
-> ### :pencil2: Hands-on: Fill the basic metadata
+> ### :pencil2: Hands-on: Fill the pedagogical metadata
 >
 > 1. Define 2 questions that will be addressed during the tutorial and add them to the metadata
 > 2. Define 2 learning objectives for the tutorial and add them to the metadata
@@ -124,6 +131,8 @@ For the take-home messages, it is easier to define them once the tutorial is wri
 >
 > Temporarly, we need a duplication of the metadata (because of our temporary templating system) in the topic `metadata.yaml` in the section `material`. So you need to copy that.
 > {: .comment}
+
+# Checking the website
 
 Once the metadata are filled, we can test if the metadata were correctly defined to serve the online website. Currently, the website is generated from the metadata and the tutorials using Jekyll, a templating system. We can run locally a Jekyll server to check if the tutorial is correctly added and rendered
 
