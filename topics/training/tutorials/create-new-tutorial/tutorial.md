@@ -187,7 +187,16 @@ Once the metadata are filled, we can test if the metadata were correctly defined
 >   
 > 2. Run a local Jekyll server: `make serve`
 > 3. Visualize at [http://localhost:4000/](http://localhost:4000/)
-> 4. Check if the tutorial was correctly added at [http://localhost:4000/topics/sequence-analysis/similarity-search](http://localhost:4000/topics/sequence-analysis/similarity-search)
+>
+>    > ### :question: Questions
+>    >
+>    > Was the tutorial correctly added?
+>    >
+>    >    <details>
+>    >    <summary>Click to view answers</summary>
+>    >    If you check at [http://localhost:4000/topics/sequence-analysis/similarity-search](http://localhost:4000/topics/sequence-analysis/similarity-search) (the expected URL to the tutorial), we can not found the tutorial. The metadata at the top of the tutorial are not correctly defined. We will discuss about that latter.
+>    >    </details>
+>    {: .question}
 {: .hands_on}
 
 # Filling the tutorial content
