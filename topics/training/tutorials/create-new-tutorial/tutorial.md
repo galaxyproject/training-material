@@ -30,7 +30,17 @@ In this tutorial, you will understand how to design and develop a new tutorial f
 
 # Setting up a new tutorial
 
-Here, we want to develop a small tutorial to explain how to use BLAST. 
+Here, we want to develop a small tutorial to explain how to use BLAST.
+
+## Clone the Galaxy Training material repository
+
+Before anything, we need to get a local copy of the content of the GitHub repository by cloning it
+
+> ### :pencil2: Hands-on: Clone the GitHub repository
+>
+> 1. Clone the repository locally with: `git clone https://github.com/galaxyproject/training-material.git`
+> 2. Check that you have the same structure as the one in [GitHub](https://github.com/galaxyproject/training-material)
+{: .hands_on}
 
 ## Defining the topic
 
@@ -55,7 +65,6 @@ When we structured the repository, we decided here to use as topic the names of 
 >    {: .question}
 {: .hands_on}
 
-
 ## Creating the directory for the tutorial
 
 Once the topic is chosen, serious things can start: creating the tutorial. It is meaning the tutorial content, the metadata related to the tutorial but also the technical support for the tutorial with the description of the needed tool and dataset, a workflow of the tutorial and also a Galaxy Interactive Tour.
@@ -68,7 +77,27 @@ To help you, we created a template for a tutorial with the different required fi
 > 2. Rename the folder into `similarity-search`
 {: .hands_on}
 
-We will now start to fill the different files together.
+## Keeping track of the changes
+
+Once you started to change something, we need to keep track of these changes with a version control system (CVS). We are using Git as CVS and GitHub as hosting service.
+
+This repository is developed collaboratively with more than 40 contributors. For the collaboration, we are using the [GitHub flow](https://guides.github.com/introduction/flow/) based on fork, branches and Pull Requests. We will explain the latter concept latter but now we will show how to start keeping track of the changes:
+
+> ### :pencil2: Hands-on: Start keeping track of the changes
+>
+> 1. [Create a fork](https://help.github.com/articles/fork-a-repo/) of this repository on GitHub
+> 2. Add your fork to the current local copy: `git remote add fork https://github.com/galaxyproject/training-material`
+> 3. Create a new branch called "similarity-search" in your local copy: `git checkout -b similarity-search`
+> 4. Commit the changes in that branch with
+>     - `git add topics/sequence-analysis/tutorials/similarity-search`
+>     - `git commit -m "Set up the similarity search tutorial"`
+> 5. Push that branch to your fork on GitHub: `git push fork similarity-search`
+{: .hands_on}
+
+The GitHub interface can also help you in the process of editing a file. It will automatically create a fork of this repository where you can safely work.
+
+
+We will now start to fill the different files together. We recommend you to commit regurlarly your changes. It help to follow them but also revert them if needed.
 
 # Filling the metadata
 
@@ -340,6 +369,16 @@ Every topic will come with a Docker image containing the tools, data, workflows 
 {: .hands_on}
 
 # Submitting the new tutorial to the GitHub repository
+
+Once we are happy with your tutorial, we want to submit it to the GitHub repository. So we will open a Pull Request to propose our changes to the original GitHub repository
+
+> ### :pencil2: Hands-on: Submitting a Pull Request with the new tutorial
+>
+> 1. Go on [GitHub](https://github.com/galaxyproject/training-material)
+> 2. Create a new Pull Request and detail the proposed changes
+> 3. If you receive feedback, make changes in your local clone and push them to your branch of your fork
+>    The pull request will update automatically
+{: .hands_on}
 
 # Conclusion
 
