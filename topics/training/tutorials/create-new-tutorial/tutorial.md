@@ -428,6 +428,7 @@ To render the boxes correctly, the previous syntaxes have to be followed. The bo
 >    >    </details>
 >    {: .question}
 {: .hands_on}
+```
 
 # Adding slides
 
@@ -459,6 +460,7 @@ tools:
 ```
 
 with:
+
 - `name`: the name of the wrapper of the tool in the ToolShed
 - `owner`: the owner of the wrapper of the tool in the ToolShed
 - `tool_panel_section_label`: section where to put the tool (in the left panel in the Galaxy instance)
