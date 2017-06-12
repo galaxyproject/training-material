@@ -143,8 +143,9 @@ Each visualization has a configuration file named `config.js`. This file has con
 
 This configures the plugin's name and a description which will appear on the *Charts* selection interface. It also links the plugin to the `PDB`-file format, which means that for any history item of these file type the plugin will automatically become available. Keywords are optional and can help to improve the annotation.
 
-## 1.4 Add a wrapper to connect *Galaxy* with the *PV-Viewer* plugin
+## 1.4 Wrap up the plugin
 
+Add a wrapper to connect *Galaxy* with the *PV-Viewer* plugin
 http://pv.readthedocs.io/en/v1.8.1/viewer.html#pv.Viewer
 http://pv.readthedocs.io/en/v1.8.1/viewer.html#pv.Viewer.renderAs
 
@@ -176,7 +177,7 @@ define( [ 'visualizations/myviz/pdb/plugin' ], function( pv ) {
 
 ```
 
-## 1.5 Use *webpack* to build the *Charts* package
+## 1.5 Build the package
 
 Now that we have completed the *Charts* plugin definition, it is time to bundle the scripts and libraries into a single module file using [*webpack*](https://webpack.github.io). Once packed the plugin will be accessible through *Galaxy*'s user interface. Packing modules does not require restarting your *Galaxy* instance, just make sure to properly refresh your browser.
 
@@ -200,7 +201,7 @@ Now that we have completed the *Charts* plugin definition, it is time to bundle 
 
 Lets go and test it.
 
-## 1.6 Visualization of protein structures in *Galaxy*
+## 1.6 Test the visualization
 
 http://www.rcsb.org/pdb/explore/explore.do?structureId=1acb
 https://files.rcsb.org/view/1ACB.pdb
