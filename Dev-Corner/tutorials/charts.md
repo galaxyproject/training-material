@@ -47,9 +47,9 @@ In this tutorial we are going to demonstrate how to add a 3rd-party visualizatio
 > ```
 >
 > More resources on this file format:
-
+>
 >   https://en.wikipedia.org/wiki/Protein_Data_Bank_(file_format)
-
+>
 >   http://www.wwpdb.org/documentation/file-format
 
 Let's start by visiting the viewers developer site at https://biasmv.github.io/pv/ to get familiar with this plugin.
