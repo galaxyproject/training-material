@@ -140,8 +140,7 @@ https://files.rcsb.org/view/1ACB.pdb
 
 # Part 2
 
-Lets build a form.
-
+Lets build a form. TODO: Links https://docs.galaxyproject.org/en/latest/dev/schema.html. Explain how XML-parameters map to this json format.
 
 ## Creating the visualization
 
