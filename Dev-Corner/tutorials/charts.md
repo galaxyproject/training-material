@@ -95,7 +95,7 @@ In this section we will download the viewer and add it to a local *Galaxy* insta
 >    curl https://raw.githubusercontent.com/biasmv/pv/master/bio-pv.min.js -o plugin.js
 >    ```
 
-Now that the directory structure is in place and the 3rd-party code has been made available, we will continue with building our *Chart* plugin. Each *Charts* visualization contains three files:
+Now that the directory structure is in place and the 3rd-party code has been made available, we will continue with building our *Chart* plugin. Each *Charts* visualization contains <b>three</b> files:
 
 - Logo (`logo.png`) which will appear in *Chart*'s plugin selection interface.
 - Configuration file (`config.js`) describing input parameters and options.
