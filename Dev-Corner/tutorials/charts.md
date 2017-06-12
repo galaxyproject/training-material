@@ -9,24 +9,25 @@ tutorial_name: visualizations
 
 # Part 1
 
-In this tutorial we are going to add a 3rd-party visualization to the *Charts* framework.
+In this tutorial we are going to demonstrate how to add a 3rd-party visualization to *Charts* and what the benefits are. The plugin of our choice is the *PV-Javascript Protein Viewer*. It is an open source, protein structure viewer for `PDB`-files. Let's start by visiting the viewers developer site at https://biasmv.github.io/pv/ to get familiar with this plugin.
 
-We will use the *PV-Javascript Protein Viewer* for this purpose. It is an open source, protein structure viewer for the PDB-file format.
-See: https://biasmv.github.io/pv/.
+In the following sections we will download this viewer and add it to a local Galaxy instance. This development takes place within the Galaxy codebase. The first thing we are going to do is to clone a Galaxy instance and prepare the directory structure for the new visualization.
 
-The development of a Galaxy visualization takes place within the Galaxy codebase.
-
-> ### :pencil2: Hands-on: Directory and plugin preparations
+> ### Directory and plugin preparations
 >
 > 1. Clone an instance of Galaxy in a path, further referred to as `$GALAXY_ROOT`
+>    ```bash
+>    git clone https://github.com/galaxyproject/galaxy 
+>    ```
+>
 > 2. Explore the plugin directory as follows:
 >
 >    ```bash
 >    $ cd $GALAXY_ROOT/config/plugins/visualizations/charts
->    $ cd static/repository/visualizations/
+>    $ cd static/repository
 >    ```
 >
-> 3. Add the visualization to `registry.json`:
+> 3. Register your visualization by adding a line to the `registry.json`:
 >
 >    ```bash
 >    "myviz" : [ "pdb" ]
@@ -35,9 +36,8 @@ The development of a Galaxy visualization takes place within the Galaxy codebase
 > 4. Create a new directory for our new plugin project
 >
 >    ```bash
->    $ mkdir myviz
->    $ mkdir myviz/pdb
->    $ cd myviz/pdb
+>    $ mkdir -p visualizations/myviz/pdb
+>    $ cd visualizations/myviz/pdb
 >    ```
 >
 > 5. Download the 3rd-party code:
@@ -55,11 +55,9 @@ Each visualization is represented by a logo in the *Charts* interface. This make
 
 ![Specific region](/Dev-Corner/images/exercise.png)
 
-## Visualization annotation
+## Annotate your visualization
 
-Each visualization requires a configuration file named `config.js`. 
-
-Create the file  `config.js` with the following contents:
+Each visualization has a configuration file named `config.js`. This file has conceptual similarities with a Tool's XML-file. It allows developers to specify a variety attributes and input parameters for their visualization. In the following sections we are going to gradually augment this file. For now, we keep it simple. Create a `config.js` file with the following contents:
 
 ```js
 define( [], function() {
@@ -73,7 +71,6 @@ define( [], function() {
 });
 ```
 
-TODO: Explain available options.
 This configures the plugin's name and a description which will appear on the Charts selection interface. It also links the plugin to the PDB-file format, which means that for any history item of these file type the plugin will automatically become available. Keywords are optional and can help to improve the annotation.
 
 http://pv.readthedocs.io/en/v1.8.1/viewer.html#pv.Viewer
