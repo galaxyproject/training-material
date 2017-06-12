@@ -120,19 +120,25 @@ Each visualization is represented by a logo in the *Charts* interface. This make
 
 ## Annotate the visualization
 
-Each visualization has a configuration file named `config.js`. This file has conceptual similarities with a Tool's XML-file. It allows developers to specify a variety attributes and input parameters for their visualization. In the following sections we are going to gradually augment this file. For now, we keep it simple. Create a `config.js` file with the following contents:
+Each visualization has a configuration file named `config.js`. This file has conceptual similarities with a Tool's XML-file. It allows developers to specify a variety of attributes and input parameters for their visualization. In the following sections we are going to gradually augment this file but for now we keep it simple. Create a `config.js` file with the following contents:
 
-```js
-define( [], function() {
-    return {
-        title       : 'A PDB viewer',
-        library     : 'My Visualization',
-        description : 'Displays Protein Structures.',
-        datatypes   : [ 'pdb' ],
-        keywords    : []
-    }
-});
-```
+> ### Tasks
+> 
+> 1. Create a file with the following content:
+> 
+> ```js
+> define( [], function() {
+>     return {
+>         title       : 'A PDB viewer',
+>         library     : 'My Visualization',
+>         description : 'Displays Protein Structures.',
+>         datatypes   : [ 'pdb' ],
+>         keywords    : []
+>     }
+> });
+> ```
+>
+> 2. Name it `config.js` and copy it to `myviz/pdb`.
 
 This configures the plugin's name and a description which will appear on the Charts selection interface. It also links the plugin to the PDB-file format, which means that for any history item of these file type the plugin will automatically become available. Keywords are optional and can help to improve the annotation.
 
