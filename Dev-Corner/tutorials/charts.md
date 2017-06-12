@@ -62,7 +62,7 @@ As mentioned above we will be focusing on the *PV-Javascript Protein Viewer* in 
 > 3. Can you find the minified plugin code file we will need to download?
 >
 
-## Part 1
+## Section 1
 ## 1.1 Directory and plugin preparations
 
 In this section we will download the viewer and add it to a local Galaxy instance. All development takes place within the Galaxy codebase. The first thing we are going to do is to clone a Galaxy instance and prepare the directory structure for the new visualization plugin.
