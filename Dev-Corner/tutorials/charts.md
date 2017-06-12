@@ -101,11 +101,11 @@ In the following sections we will download this viewer and add it to a local Gal
 
 Each visualization requires three files. A logo (`logo.png`), a configuration file (`config.js`) and a wrapper (`wrapper.js`). We are about to create and discuss these files now.
 
-## Your visualization needs a logo
+> ### Your visualization needs a logo
+> 
+> Each visualization is represented by a logo in the *Charts* interface. This makes it easier for users to find and configure their visualization. The logo file should be in `png` format. Find and download a png-file, name it `logo.png` and copy it into the the `myviz/pdb` directory.
 
-Each visualization is represented by a logo in the *Charts* interface. This makes it easier for users to find and configure their visualization. The logo file should be in `png` format. Find and download a png-file, name it `logo.png` and copy it into the the `myviz/pdb` directory.
-
-![Specific region](/Dev-Corner/images/exercise.png)
+> ![Specific region](/Dev-Corner/images/exercise.png)
 
 ## Annotate the visualization
 
