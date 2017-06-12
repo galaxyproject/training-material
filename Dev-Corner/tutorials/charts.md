@@ -111,7 +111,7 @@ Each visualization is represented by a logo in the *Charts* interface. This make
 
 > ### Tasks
 > 
-> 1. Find an arbitrary image in `PNG`-file format.
+> 1. Find an arbitrary image in `PNG`-file format. Possibly using *Google*'s [image search](https://images.google.com).
 >
 > 2. Copy it to the `myviz/pdb` directory and name it `logo.png`.
 
