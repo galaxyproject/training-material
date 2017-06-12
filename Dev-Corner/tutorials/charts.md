@@ -62,15 +62,15 @@ configuration in XML format.
 > Create the file  `config.js` with the following contents:
 >
 > ```js
-    define( [], function() {
-        return {
-            title       : 'A PDB viewer',
-            library     : 'My Visualization',
-            datatypes   : [ 'pdb' ],
-            keywords    : 'pdb protein structure',
-            description : 'Galaxy tutorial.'
-        }
-    });
+define( [], function() {
+    return {
+        title       : 'A PDB viewer',
+        library     : 'My Visualization',
+        datatypes   : [ 'pdb' ],
+        keywords    : 'pdb protein structure',
+        description : 'Galaxy tutorial.'
+    }
+});
 > ```
 
 This configures the plugin's name, which shall appear on pressing the visualization button in
@@ -88,29 +88,29 @@ http://pv.readthedocs.io/en/v1.8.1/viewer.html#pv.Viewer.renderAs
 ## Creating the visualization
 
 ```js
-    define( [ 'visualizations/myviz/pdb/plugin' ], function( pv ) {
-        return Backbone.Model.extend({
-            initialize: function( options ) {
-                var viewer = pv.Viewer( document.getElementById( options.targets[ 0 ] ), {
-                    width       : 'auto',
-                    height      : 'auto',
-                    antialias   : true,
-                    outline     : true
-                });
-                $.ajax( {
-                    url     : options.dataset.download_url,
-                    success : function( response ) {
-                        var structure = pv.io.pdb( response );
-                        viewer.clear();
-                        viewer.renderAs( 'protein', structure, 'cartoon', {} );
-                        viewer.centerOn( structure );
-                        viewer.autoZoom();
-                        options.process.resolve();
-                    }
-                });
-            }
-        });
+define( [ 'visualizations/myviz/pdb/plugin' ], function( pv ) {
+    return Backbone.Model.extend({
+        initialize: function( options ) {
+            var viewer = pv.Viewer( document.getElementById( options.targets[ 0 ] ), {
+                width       : 'auto',
+                height      : 'auto',
+                antialias   : true,
+                outline     : true
+            });
+            $.ajax( {
+                url     : options.dataset.download_url,
+                success : function( response ) {
+                    var structure = pv.io.pdb( response );
+                    viewer.clear();
+                    viewer.renderAs( 'protein', structure, 'cartoon', {} );
+                    viewer.centerOn( structure );
+                    viewer.autoZoom();
+                    options.process.resolve();
+                }
+            });
+        }
     });
+});
 
 ```
 
@@ -118,9 +118,9 @@ http://pv.readthedocs.io/en/v1.8.1/viewer.html#pv.Viewer.renderAs
 Lets pack the visualization:
 
 ```python
-    $ cd $GALAXY_ROOT/config/plugins/visualizations/charts
-    $ npm install
-    $ webpack
+$ cd $GALAXY_ROOT/config/plugins/visualizations/charts
+$ npm install
+$ webpack
 ```
 
 Lets go and test it.
@@ -206,8 +206,8 @@ define( [ 'visualizations/myviz/pdb/plugin' ], function( pv ) {
 ```
 
 ```bash
-    $ rm static/repository/build/myviz_pdb.js
-    $ webpack
+$ rm static/repository/build/myviz_pdb.js
+$ webpack
 ```
 
 # Part 3
