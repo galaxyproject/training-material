@@ -186,7 +186,7 @@ Now that we have completed the *Charts* plugin definition, it is time to bundle 
 >    $ cd $GALAXY_ROOT/config/plugins/visualizations/charts
 >    ```
 >
-> 2. Install `node-modules`:
+> 2. Install the necessary `node-modules`, unless already available:
 >    ```bash
 >    $ npm install
 >    ```
