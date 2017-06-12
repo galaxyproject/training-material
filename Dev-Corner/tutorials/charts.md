@@ -272,6 +272,6 @@ define( [], function() {
 ```
 
 ```bash
-    $ rm static/repository/build/myviz_pdb.js
-    $ webpack
+$ rm static/repository/build/myviz_pdb.js
+$ webpack
 ```
