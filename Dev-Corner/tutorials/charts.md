@@ -119,9 +119,9 @@ Each visualization is represented by a logo in the *Charts* interface. This make
 >
 > 2. Copy it to the `myviz/pdb` directory and name it `logo.png`.
 
-## 1.3 Annotate the visualization
+## 1.3 Configure the visualization
 
-Each visualization has a configuration file named `config.js`. This file has conceptual similarities with a Tool's XML-file. It allows developers to specify a variety of attributes and input parameters for their visualization. In the following sections we are going to gradually augment this file but for now we keep it simple.
+Each visualization has a configuration file named `config.js`. This file has conceptual similarities with a Tool's XML-file. It allows developers to specify a variety of attributes and input parameters for their visualization. Throughout this tutorial we are going to gradually augment this file but for now we keep it simple.
 
 > ### Tasks
 > 
