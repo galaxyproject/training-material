@@ -173,6 +173,7 @@ As for amplicon data, we can extract taxonomic and community structure informati
 
 - Assignation of taxonomy on the whole sequences using databases with marker genes
 
+<<<<<<< 
 In this tutorial, we use the second approach with MetaPhlAn2. [MetaPhlAn2](https://bitbucket.org/biobakery/metaphlan2) uses a database of ~1M unique clade-specific marker genes (not only the rRNA genes) identified from ~17,000 reference (bacterial, archeal, viral and eukaryotic) genomes.
 
 > ### :pencil2: Hands-on: Taxonomic assignation with MetaPhlAn2
