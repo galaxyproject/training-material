@@ -66,6 +66,8 @@ As mentioned above we will be focusing on the *PV-Javascript Protein Viewer* in 
 
 In the following sections we will download this viewer and add it to a local Galaxy instance. All development takes place within the Galaxy codebase. The first thing we are going to do is to clone a Galaxy instance and prepare the directory structure for the new visualization plugin.
 
+> Tasks
+>
 > 1. Clone an instance of Galaxy in a path, further referred to as `$GALAXY_ROOT`:
 >    ```bash
 >    $ git clone https://github.com/galaxyproject/galaxy 
