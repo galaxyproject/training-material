@@ -6,10 +6,9 @@ tutorial_name: visualizations
 
 # Introduction
 
+In this tutorial we are going to demonstrate how to add a 3rd-party visualization to *Charts* and what the benefits are. The plugin of our choice is the *PV-Javascript Protein Viewer*. It is an open source, protein structure viewer for `PDB`-files. Let's start by visiting the viewers developer site at https://biasmv.github.io/pv/ to get familiar with this plugin.
 
 # Part 1
-
-In this tutorial we are going to demonstrate how to add a 3rd-party visualization to *Charts* and what the benefits are. The plugin of our choice is the *PV-Javascript Protein Viewer*. It is an open source, protein structure viewer for `PDB`-files. Let's start by visiting the viewers developer site at https://biasmv.github.io/pv/ to get familiar with this plugin.
 
 In the following sections we will download this viewer and add it to a local Galaxy instance. This development takes place within the Galaxy codebase. The first thing we are going to do is to clone a Galaxy instance and prepare the directory structure for the new visualization.
 
