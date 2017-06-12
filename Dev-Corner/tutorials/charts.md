@@ -184,10 +184,10 @@ $ webpack
 
 # Part 3
 
-Lets build a form.
+Add more options to configure.
 
 
-## Creating the visualization
+## Add 'pointSize', 'lineWidth' and 'radius' to `config.js`
 
 ```js
 define( [], function() {
