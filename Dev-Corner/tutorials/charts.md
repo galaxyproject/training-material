@@ -178,11 +178,11 @@ define( [ 'visualizations/myviz/pdb/plugin' ], function( pv ) {
 
 ## 1.5 Use *webpack* to build the *Charts* package
 
-Lets pack the visualization:
+Now that we have completed the *Charts* plugin definition, it is time to bundle the scripts and libraries into a single module file. Once packed the plugin will be accessible through Galaxy's user interface. Packing modules does not require restarting your Galaxy instance, just make sure to properly refresh your browser.
 
 > ### Tasks
 >
-> 1. Navigate to the *Chart*'s root directory:
+> 1. Navigate to *Chart*'s root directory:
 > ```bash
 > $ cd $GALAXY_ROOT/config/plugins/visualizations/charts
 > ```
