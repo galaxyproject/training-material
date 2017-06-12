@@ -62,7 +62,7 @@ As mentioned above we will be focusing on the *PV-Javascript Protein Viewer* in 
 > 3. Can you find the minified plugin code file we will need to download?
 >
 
-## Directory and plugin preparations
+## 1.1 Directory and plugin preparations
 
 In this section we will download the viewer and add it to a local Galaxy instance. All development takes place within the Galaxy codebase. The first thing we are going to do is to clone a Galaxy instance and prepare the directory structure for the new visualization plugin.
 
@@ -106,7 +106,7 @@ Now that the directory structure is in place and the 3rd-party code has been mad
 
 In the following sections we are going to discuss these files in more detail, create and place them into our plugin directory at `myviz/pdb`. Let's start with the logo for our visualization.
 
-## Your visualization needs a logo
+## 1.2 Your visualization needs a logo
 
 Each visualization is represented by a logo in the *Charts* interface. This makes it easier for users to find and configure their visualization. The logo should be in the `png`-file format. It will appear in dimensions of 120 (width) to 100 (height) pixels. Here's an example [logo](https://github.com/guerler/training-material/blob/master/Dev-Corner/tutorials/files/hands_on-charts/logo.png):
 
@@ -118,13 +118,13 @@ Each visualization is represented by a logo in the *Charts* interface. This make
 >
 > 2. Copy it to the `myviz/pdb` directory and name it `logo.png`.
 
-## Annotate the visualization
+## 1.3 Annotate the visualization
 
 Each visualization has a configuration file named `config.js`. This file has conceptual similarities with a Tool's XML-file. It allows developers to specify a variety of attributes and input parameters for their visualization. In the following sections we are going to gradually augment this file but for now we keep it simple.
 
 > ### Tasks
 > 
-> 1. Create a file `config.js` with the following content:
+> 1. Create a file named `config.js` with the following content:
 > 
 > ```js
 > define( [], function() {
@@ -140,9 +140,9 @@ Each visualization has a configuration file named `config.js`. This file has con
 >
 > 2. Place it into your plugins directory at `myviz/pdb`.
 
-This configures the plugin's name and a description which will appear on the Charts selection interface. It also links the plugin to the PDB-file format, which means that for any history item of these file type the plugin will automatically become available. Keywords are optional and can help to improve the annotation.
+This configures the plugin's name and a description which will appear on the *Charts* selection interface. It also links the plugin to the `PDB`-file format, which means that for any history item of these file type the plugin will automatically become available. Keywords are optional and can help to improve the annotation.
 
-## Add a wrapper to connect Galaxy with the PV-Viewer plugin
+## 1.4 Add a wrapper to connect Galaxy with the PV-Viewer plugin
 
 http://pv.readthedocs.io/en/v1.8.1/viewer.html#pv.Viewer
 http://pv.readthedocs.io/en/v1.8.1/viewer.html#pv.Viewer.renderAs
