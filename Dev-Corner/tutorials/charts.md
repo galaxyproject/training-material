@@ -65,11 +65,11 @@ As mentioned above we will be focusing on the *PV-Javascript Protein Viewer* in 
 ## Section 1 - Basic plugin setup
 ## 1.1 Directory and plugin preparations
 
-In this section we will download the viewer and add it to a local Galaxy instance. All development takes place within the Galaxy codebase. The first thing we are going to do is to clone a Galaxy instance and prepare the directory structure for the new visualization plugin.
+In this section we will download the viewer and add it to a local *Galaxy* instance. All development takes place within the *Galaxy* codebase. The first thing we are going to do is to clone a *Galaxy* instance and prepare the directory structure for the new visualization plugin.
 
 > ### Tasks
 >
-> 1. Clone an instance of Galaxy in a path, further referred to as `$GALAXY_ROOT`:
+> 1. Clone an instance of *Galaxy* in a path, further referred to as `$GALAXY_ROOT`:
 >    ```bash
 >    $ git clone https://github.com/galaxyproject/galaxy 
 >    ```
@@ -103,7 +103,7 @@ Now that the directory structure is in place and the 3rd-party code has been mad
 
 - A logo (`logo.png`) which will appear in *Chart*'s plugin selection interface
 - A configuration file (`config.js`) describing input parameters and options
-- And a wrapper (`wrapper.js`) which serves as a bridge between Galaxy and our 3rd-party plugin 
+- And a wrapper (`wrapper.js`) which serves as a bridge between *Galaxy* and our 3rd-party plugin 
 
 In the following sections we are going to discuss these files in more detail, create and place them into our plugin directory at `myviz/pdb`. Let's start with the logo for our visualization.
 
@@ -143,7 +143,7 @@ Each visualization has a configuration file named `config.js`. This file has con
 
 This configures the plugin's name and a description which will appear on the *Charts* selection interface. It also links the plugin to the `PDB`-file format, which means that for any history item of these file type the plugin will automatically become available. Keywords are optional and can help to improve the annotation.
 
-## 1.4 Add a wrapper to connect Galaxy with the PV-Viewer plugin
+## 1.4 Add a wrapper to connect *Galaxy* with the *PV-Viewer* plugin
 
 http://pv.readthedocs.io/en/v1.8.1/viewer.html#pv.Viewer
 http://pv.readthedocs.io/en/v1.8.1/viewer.html#pv.Viewer.renderAs
@@ -178,7 +178,7 @@ define( [ 'visualizations/myviz/pdb/plugin' ], function( pv ) {
 
 ## 1.5 Use *webpack* to build the *Charts* package
 
-Now that we have completed the *Charts* plugin definition, it is time to bundle the scripts and libraries into a single module file using [*webpack*](https://webpack.github.io). Once packed the plugin will be accessible through Galaxy's user interface. Packing modules does not require restarting your Galaxy instance, just make sure to properly refresh your browser.
+Now that we have completed the *Charts* plugin definition, it is time to bundle the scripts and libraries into a single module file using [*webpack*](https://webpack.github.io). Once packed the plugin will be accessible through *Galaxy*'s user interface. Packing modules does not require restarting your *Galaxy* instance, just make sure to properly refresh your browser.
 
 > ### Tasks
 >
@@ -200,7 +200,7 @@ Now that we have completed the *Charts* plugin definition, it is time to bundle 
 
 Lets go and test it.
 
-## 1.6 Visualizate `PDB`s in Galaxy
+## 1.6 Visualization of protein structures in *Galaxy*
 
 http://www.rcsb.org/pdb/explore/explore.do?structureId=1acb
 https://files.rcsb.org/view/1ACB.pdb
@@ -210,7 +210,7 @@ https://files.rcsb.org/view/1ACB.pdb
 > 1. Run your Galaxy instance
 > 2. Open a new tab and go to the http://www.rcsb.org
 > 3. Download a PDB-file or copy the link to it
-> 4. Run you Galaxy instance
+> 4. Run you *Galaxy* instance
 > 5. Upload the PDB file to your instance
 > 6. Select the file in the history
 > 7. Start Charts 
