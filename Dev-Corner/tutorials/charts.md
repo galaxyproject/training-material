@@ -62,8 +62,8 @@ As mentioned above we will be focusing on the *PV-Javascript Protein Viewer* in 
 > 3. Can you find the minified plugin code file we will need to download?
 >
 
-## Section A
-## A.1 Directory and plugin preparations
+## Section 1
+## 1.1 Directory and plugin preparations
 
 In this section we will download the viewer and add it to a local Galaxy instance. All development takes place within the Galaxy codebase. The first thing we are going to do is to clone a Galaxy instance and prepare the directory structure for the new visualization plugin.
 
@@ -107,7 +107,7 @@ Now that the directory structure is in place and the 3rd-party code has been mad
 
 In the following sections we are going to discuss these files in more detail, create and place them into our plugin directory at `myviz/pdb`. Let's start with the logo for our visualization.
 
-## A.2 Your visualization needs a logo
+## 1.2 Your visualization needs a logo
 
 Each visualization is represented by a logo in the *Charts* interface. This makes it easier for users to find and configure their visualization. The logo should be in the `png`-file format. It will appear in dimensions of 120 (width) to 100 (height) pixels. Here's an example [logo](https://github.com/guerler/training-material/blob/master/Dev-Corner/tutorials/files/hands_on-charts/logo.png):
 
@@ -119,7 +119,7 @@ Each visualization is represented by a logo in the *Charts* interface. This make
 >
 > 2. Copy it to the `myviz/pdb` directory and name it `logo.png`.
 
-## A.3 Annotate the visualization
+## 1.3 Annotate the visualization
 
 Each visualization has a configuration file named `config.js`. This file has conceptual similarities with a Tool's XML-file. It allows developers to specify a variety of attributes and input parameters for their visualization. In the following sections we are going to gradually augment this file but for now we keep it simple.
 
