@@ -131,7 +131,7 @@ https://files.rcsb.org/view/1ACB.pdb
 
 Lets build a form. TODO: Links https://docs.galaxyproject.org/en/latest/dev/schema.html. Explain how XML-parameters map to this json format.
 
-## Creating the visualization
+## Add input parameters
 
 ```js
 define( [], function() {
@@ -174,6 +174,8 @@ to
     var settings = options.chart.settings;
     viewer.renderAs( 'protein', structure, settings.get( 'mode' ), settings.attributes );
 ```
+
+## Rebuild the plugin
 
 ```bash
 $ rm static/repository/build/myviz_pdb.js
