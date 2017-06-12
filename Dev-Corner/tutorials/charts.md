@@ -10,7 +10,7 @@ In this tutorial we are going to demonstrate how to add a 3rd-party visualizatio
 
 > ### What is the PDB-file format
 > 
-> ```
+> ```bash
 HEADER    EXTRACELLULAR MATRIX                    22-JAN-98   1A3I
 TITLE     X-RAY CRYSTALLOGRAPHIC DETERMINATION OF A COLLAGEN-LIKE
 TITLE    2 PEPTIDE WITH THE REPEATING SEQUENCE (PRO-PRO-GLY)
