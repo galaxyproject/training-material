@@ -59,7 +59,7 @@ As mentioned above we will be focusing on the *PV-Javascript Protein Viewer* in 
 >
 > 2. Under which license is this plugin distributed?
 >
-> 3. Can you find the minified plugin code file we will need to download?
+> 3. Can you find the minified code file of this plugin?
 >
 
 ## Section 1 - Basic plugin setup
