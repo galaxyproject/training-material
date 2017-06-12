@@ -16,7 +16,7 @@ See: https://biasmv.github.io/pv/.
 
 The development of a Galaxy visualization takes place within the Galaxy codebase.
 
-> ### :pencil2: Hands-on: Data upload
+> ### :pencil2: Hands-on: Directory and plugin preparations
 >
 > 1. Clone an instance of Galaxy in a path, further referred to as `$GALAXY_ROOT`
 > 2. Explore the plugin directory as follows:
@@ -37,7 +37,6 @@ The development of a Galaxy visualization takes place within the Galaxy codebase
 >    ```bash
 >    $ mkdir myviz
 >    $ mkdir myviz/pdb
->
 >    $ cd myviz/pdb
 >    ```
 >
@@ -48,14 +47,19 @@ The development of a Galaxy visualization takes place within the Galaxy codebase
 >    ```
 >
 
-## Find a logo
+Each visualization requires three files. A logo (`logo.png`), a configuration file (`config.js`) and a wrapper (`wrapper.js`). We are about to create and discuss these files now.
 
-Find a png-file, name it `logo.png` and copy it into the the `myviz/pdb` directory.
+## Your visualization needs a logo
 
-## Linking the plugin with Galaxy
+Each visualization is represented by a logo in the *Charts* interface. This makes it easier for users to find and configure their visualization. The logo file should be in `png` format.
 
-To create a bridge between our not-yet-written plugin and Galaxy, we need to write a
-configuration in XML format.
+![Specific region](/Dev-Corner/tutorials/files/hands_on-charts/charts_main.png)
+
+Find and download a png-file, name it `logo.png` and copy it into the the `myviz/pdb` directory.
+
+## Visualization annotation
+
+Each visualization requires a configuration file named `config.js`. 
 
 > ### :pencil2: Hands-on: Data upload
 >
@@ -66,21 +70,15 @@ define( [], function() {
     return {
         title       : 'A PDB viewer',
         library     : 'My Visualization',
+        description : 'Displays Protein Structures.',
         datatypes   : [ 'pdb' ],
-        keywords    : 'pdb protein structure',
-        description : 'Galaxy tutorial.'
+        keywords    : []
     }
 });
 > ```
 
-This configures the plugin's name, which shall appear on pressing the visualization button in
-the history menu. It also links the plugin to two file formats: BAM and SAM, which means that
-for any history item of these file formats the plugin will automatically become available.
-
-It also includes a reference to a mako template file (HTML + Python syntax), to be found in the
-`templates` directory (we will create this file in the next section). The `var_name_in_template`
-parameter is set to the value `hda`, which will be the name of the variable in the mako template
-corresponding to the dataset to be visualized.
+TODO: Explain available options.
+This configures the plugin's name and a description which will appear on the Charts selection interface. It also links the plugin to the PDB-file format, which means that for any history item of these file type the plugin will automatically become available. Keywords are optional and can help to improve the annotation.
 
 http://pv.readthedocs.io/en/v1.8.1/viewer.html#pv.Viewer
 http://pv.readthedocs.io/en/v1.8.1/viewer.html#pv.Viewer.renderAs
