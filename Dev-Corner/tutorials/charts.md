@@ -171,7 +171,8 @@ Change the following line in `wrapper.js`
 ```
 to
 ```js
-    viewer.renderAs( 'protein', structure, options.chart.settings.get( 'mode' ), options.chart.settings.attributes );
+    var settings = options.chart.settings;
+    viewer.renderAs( 'protein', structure, settings.get( 'mode' ), settings.attributes );
 ```
 
 ```bash
