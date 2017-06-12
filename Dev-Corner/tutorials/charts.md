@@ -98,12 +98,21 @@ In the following sections we will download this viewer and add it to a local Gal
 >    curl https://raw.githubusercontent.com/biasmv/pv/master/bio-pv.min.js -o plugin.js
 >    ```
 
+Each *Charts* visualization contains three files:
+
+- A logo (`logo.png`) which will appear in *Chart*'s plugin selection interface
+- A configuration file (`config.js`) describing input parameters and options
+- And a wrapper (`wrapper.js`) which serves as a bridge between Galaxy and our 3rd-party plugin 
+
+In the following sections we are going to discuss these files in more detail, create and place them into our plugin directory at `myviz/pdb`. Let's start with the logo for our visualization.
+
 ## Your visualization needs a logo
-Each visualization is consists of at least three files. A logo (`logo.png`), a configuration file (`config.js`) and a wrapper (`wrapper.js`). In the following sections we are going to create this files and place them into our plugin directory. Let's start with the logo for our visualization.
+
+Each visualization is represented by a logo in the *Charts* interface. This makes it easier for users to find and configure their visualization. The logo should be in the `png`-file format. It will appear in dimensions of 120 (width) to 100 (height) pixels. Here's an example: .
 
 > ### Tasks
 > 
-> 1. Find a logo in `PNG`-file format online.
+> 1. Find an arbitrary image in `PNG`-file format.
 >
 > 2. Copy it to the `myviz/pdb` directory and name it `logo.png`.
 
