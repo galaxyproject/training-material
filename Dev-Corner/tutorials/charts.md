@@ -176,15 +176,31 @@ define( [ 'visualizations/myviz/pdb/plugin' ], function( pv ) {
 
 ```
 
+## 1.5 Use *webpack* to build the *Charts* package
+
 Lets pack the visualization:
 
-```bash
-$ cd $GALAXY_ROOT/config/plugins/visualizations/charts
-$ npm install
-$ webpack
-```
+> ### Tasks
+>
+> 1. Navigate to the *Chart*'s root directory:
+> ```bash
+> $ cd $GALAXY_ROOT/config/plugins/visualizations/charts
+> ```
+>
+> 2. Install `node-modules`:
+> ```bash
+> $ npm install
+> ```
+>
+> 2. Run `webpack` to build the plugin:
+> ```bash
+> $ webpack
+> ```
+>
 
 Lets go and test it.
+
+## 1.6 Visualizate `PDB`s in Galaxy
 
 http://www.rcsb.org/pdb/explore/explore.do?structureId=1acb
 https://files.rcsb.org/view/1ACB.pdb
