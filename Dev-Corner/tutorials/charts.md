@@ -98,13 +98,14 @@ In the following sections we will download this viewer and add it to a local Gal
 >    curl https://raw.githubusercontent.com/biasmv/pv/master/bio-pv.min.js -o plugin.js
 >    ```
 
-Each visualization requires three files. A logo (`logo.png`), a configuration file (`config.js`) and a wrapper (`wrapper.js`). We are about to create and discuss these files now.
+## Your visualization needs a logo
+Each visualization is consists of at least three files. A logo (`logo.png`), a configuration file (`config.js`) and a wrapper (`wrapper.js`). In the following sections we are going to create this files and place them into our plugin directory. Let's start with the logo for our visualization.
 
-> ### Your visualization needs a logo
+> ### Tasks
 > 
-> Each visualization is represented by a logo in the *Charts* interface. This makes it easier for users to find and configure their visualization. The logo file should be in `png` format. Find and download a png-file, name it `logo.png` and copy it into the the `myviz/pdb` directory.
-
-> ![Specific region](/Dev-Corner/images/exercise.png)
+> 1. Find a logo in `PNG`-file format online.
+>
+> 2. Copy it to the `myviz/pdb` directory and name it `logo.png`.
 
 ## Annotate the visualization
 
