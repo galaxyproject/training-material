@@ -51,7 +51,14 @@ In this tutorial we are going to demonstrate how to add a 3rd-party visualizatio
 >   - https://en.wikipedia.org/wiki/Protein_Data_Bank_(file_format)
 >   - http://www.wwpdb.org/documentation/file-format
 
-As mentioned above we will be focusing on the *PV-Javascript Protein Viewer* in this tutorial. Now that we have learned about the underlying file format, let us continue by visiting the viewers developer site at https://biasmv.github.io/pv/ and get familiar with the plugin.
+As mentioned above we will be focusing on the *PV-Javascript Protein Viewer* in this tutorial. Now that we have learned about the underlying file format, let us continue by visiting the viewers developer site at https://biasmv.github.io/pv/ to get familiar with the plugin.
+
+> ### Tasks
+>
+> 1. View the plugin demonstration in action? Rotate the molecule and change its style?
+>
+> 2. Can you find the minified plugin code file we will need to download?
+>
 
 # Part 1
 
@@ -70,7 +77,7 @@ In the following sections we will download this viewer and add it to a local Gal
 >    $ cd $GALAXY_ROOT/config/plugins/visualizations/charts/static/repository
 >    ```
 >
-> 3. Register your visualization by adding a line to the `registry.json`:
+> 3. Register your visualization by adding a new item to `registry.json`:
 >
 >    ```bash
 >    "myviz" : [ "pdb" ]
@@ -83,7 +90,7 @@ In the following sections we will download this viewer and add it to a local Gal
 >    $ cd visualizations/myviz/pdb
 >    ```
 >
-> 5. Download the PV-Viewer from Github:
+> 5. Download the minified plugin code for *PV-Viewer* from [Github](https://github.com/biasmv/pv):
 >
 >    ```bash
 >    curl https://raw.githubusercontent.com/biasmv/pv/master/bio-pv.min.js -o plugin.js
