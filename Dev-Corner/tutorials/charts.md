@@ -124,7 +124,7 @@ Each visualization has a configuration file named `config.js`. This file has con
 
 > ### Tasks
 > 
-> 1. Create a file with the following content:
+> Create a file `config.js` with the following content and copy it to `myviz/pdb`:
 > 
 > ```js
 > define( [], function() {
@@ -137,8 +137,6 @@ Each visualization has a configuration file named `config.js`. This file has con
 >     }
 > });
 > ```
->
-> 2. Name it `config.js` and copy it to `myviz/pdb`.
 
 This configures the plugin's name and a description which will appear on the Charts selection interface. It also links the plugin to the PDB-file format, which means that for any history item of these file type the plugin will automatically become available. Keywords are optional and can help to improve the annotation.
 
