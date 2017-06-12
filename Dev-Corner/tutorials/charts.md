@@ -143,7 +143,7 @@ Each visualization has a configuration file named `config.js`. This file has con
 
 This configures the plugin's name and a description which will appear on the *Charts* selection interface. It also links the plugin to the `PDB`-file format, which means that for any history item of these file type the plugin will automatically become available. Keywords are optional and can help to improve the annotation.
 
-## 1.4 Wrap the viewer
+## 1.4 Wrap the 3rd-party code
 
 Add a wrapper to connect *Galaxy* with the *PV-Viewer* plugin
 http://pv.readthedocs.io/en/v1.8.1/viewer.html#pv.Viewer
