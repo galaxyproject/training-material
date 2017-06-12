@@ -75,26 +75,22 @@ In this section we will download the viewer and add it to a local *Galaxy* insta
 >    ```
 >
 > 2. Navigate to the *Charts* repository root:
->
 >    ```bash
 >    $ cd $GALAXY_ROOT/config/plugins/visualizations/charts/static/repository
 >    ```
 >
 > 3. Register your visualization by adding a new item to `registry.json`:
->
 >    ```bash
 >    "myviz" : [ "pdb" ]
 >    ```
 >
 > 4. Create a new directory:
->
 >    ```bash
 >    $ mkdir -p visualizations/myviz/pdb
 >    $ cd visualizations/myviz/pdb
 >    ```
 >
 > 5. Download the minified plugin code for *PV-Viewer* from [Github](https://github.com/biasmv/pv):
->
 >    ```bash
 >    curl https://raw.githubusercontent.com/biasmv/pv/master/bio-pv.min.js -o plugin.js
 >    ```
@@ -184,19 +180,19 @@ Now that we have completed the *Charts* plugin definition, it is time to bundle 
 > ### Tasks
 >
 > 1. Navigate to *Chart*'s root directory:
->   ```bash
->   $ cd $GALAXY_ROOT/config/plugins/visualizations/charts
->   ```
+>    ```bash
+>    $ cd $GALAXY_ROOT/config/plugins/visualizations/charts
+>    ```
 >
 > 2. Install `node-modules`:
->   ```bash
->   $ npm install
->   ```
+>    ```bash
+>    $ npm install
+>    ```
 >
-> 2. Run `webpack` to build the plugin:
->   ```bash
->   $ webpack
->   ```
+> 3. Run `webpack` to build the plugin:
+>    ```bash
+>    $ webpack
+>    ```
 
 Lets go and test it.
 
