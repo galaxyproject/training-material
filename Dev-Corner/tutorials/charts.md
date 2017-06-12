@@ -227,11 +227,11 @@ In this section we will select a `PDB`-file from the Protein Databank and visual
 > 7. Find your visualization and double-click on its logo.
 >
 
-# Part 2
+## Section 2
 
 Lets build a form. TODO: Links https://docs.galaxyproject.org/en/latest/dev/schema.html. Explain how XML-parameters map to this json format.
 
-## Add input parameters
+## 2.1 Add input parameters
 
 ```js
 define( [], function() {
@@ -263,7 +263,7 @@ define( [], function() {
 
 ```
 
-## Update the wrapper
+## 2.2 Update the wrapper
 
 Change the following line in `wrapper.js`
 ```js
@@ -275,19 +275,18 @@ to
     viewer.renderAs( 'protein', structure, settings.get( 'mode' ), settings.attributes );
 ```
 
-## Rebuild the plugin
+## 2.3 Rebuild the plugin
 
 ```bash
 $ rm static/repository/build/myviz_pdb.js
 $ webpack
 ```
 
-# Part 3
+## Part 3
 
 Add more options to configure.
 
-
-## Add 'pointSize', 'lineWidth' and 'radius' to `config.js`
+## 3.1 Add 'pointSize', 'lineWidth' and 'radius' to `config.js`
 
 ```js
 define( [], function() {
