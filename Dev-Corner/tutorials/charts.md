@@ -10,7 +10,7 @@ In this tutorial we are going to demonstrate how to add a 3rd-party visualizatio
 
 > ### What is the PDB (Protein Data Bank) file format?
 >
-> The `PDB`-file format contains atomic coordinates of biomolecules derived through a range of experimental and computational methods. Most commonly the file contains a spatial cyrstallographic snapshot of a protein. There are hundred thousands of protein structures publicly available at the Protein Databank (http://www.rcsb.org). Proteins are usually labeled by a four-letter code.
+> The `PDB`-file format contains atomic coordinates of biomolecules derived through a range of experimental and computational methods. Most commonly the file contains a spatial cyrstallographic snapshot of a protein. There are 100s of thousands of protein structures publicly available at the Protein Databank (http://www.rcsb.org). Proteins are usually labeled by a four-letter code.
 > Here is an example of a `PDB`-file for a hydrolase bond to its inhibitor (PDB: [1ACB](http://www.rcsb.org/pdb/explore/explore.do?structureId=1acb)):
 >
 > ```bash
