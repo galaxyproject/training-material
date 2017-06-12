@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
-topic_name: RNA-Seq
-tutorial_name: de_novo transcriptome reconstruction
+topic_name: transcriptomics
+tutorial_name: de-novo
 ---
 
 # Introduction
@@ -148,7 +148,7 @@ Spliced mappers have been developed to efficiently map transcript-derived reads 
 >    - **Specify strand-specific information**: First Strand (R/RF)
 >    - **Transcriptome assembly reporting**: Report alignments tailored for transcript assemblers including StringTie.
 >
->       ![](../images/hisat_tool_form.png)
+>       ![](../../images/hisat_tool_form.png)
 >
 > 2. **HISAT** :wrench:: Run `HISAT` on the remaining forward/reverse read pairs with the same parameters.
 >
