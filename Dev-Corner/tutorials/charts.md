@@ -14,16 +14,15 @@ In the following sections we will download this viewer and add it to a local Gal
 
 > ### Directory and plugin preparations
 >
-> 1. Clone an instance of Galaxy in a path, further referred to as `$GALAXY_ROOT`
+> 1. Clone an instance of Galaxy in a path, further referred to as `$GALAXY_ROOT`:
 >    ```bash
->    git clone https://github.com/galaxyproject/galaxy 
+>    $ git clone https://github.com/galaxyproject/galaxy 
 >    ```
 >
-> 2. Explore the plugin directory as follows:
+> 2. Navigate to the *Charts* repository root:
 >
 >    ```bash
->    $ cd $GALAXY_ROOT/config/plugins/visualizations/charts
->    $ cd static/repository
+>    $ cd $GALAXY_ROOT/config/plugins/visualizations/charts/static/repository
 >    ```
 >
 > 3. Register your visualization by adding a line to the `registry.json`:
@@ -32,14 +31,14 @@ In the following sections we will download this viewer and add it to a local Gal
 >    "myviz" : [ "pdb" ]
 >    ```
 >
-> 4. Create a new directory for our new plugin project
+> 4. Create a new directory:
 >
 >    ```bash
 >    $ mkdir -p visualizations/myviz/pdb
 >    $ cd visualizations/myviz/pdb
 >    ```
 >
-> 5. Download the 3rd-party code:
+> 5. Download the PV-Viewer from Github:
 >
 >    ```bash
 >    curl https://raw.githubusercontent.com/biasmv/pv/master/bio-pv.min.js -o plugin.js
@@ -54,7 +53,7 @@ Each visualization is represented by a logo in the *Charts* interface. This make
 
 ![Specific region](/Dev-Corner/images/exercise.png)
 
-## Annotate your visualization
+## Annotate the visualization
 
 Each visualization has a configuration file named `config.js`. This file has conceptual similarities with a Tool's XML-file. It allows developers to specify a variety attributes and input parameters for their visualization. In the following sections we are going to gradually augment this file. For now, we keep it simple. Create a `config.js` file with the following contents:
 
@@ -75,7 +74,7 @@ This configures the plugin's name and a description which will appear on the Cha
 http://pv.readthedocs.io/en/v1.8.1/viewer.html#pv.Viewer
 http://pv.readthedocs.io/en/v1.8.1/viewer.html#pv.Viewer.renderAs
 
-## Creating the visualization
+## Add a wrapper to connect Galaxy with the PV-Viewer plugin
 
 ```js
 define( [ 'visualizations/myviz/pdb/plugin' ], function( pv ) {
@@ -107,7 +106,7 @@ define( [ 'visualizations/myviz/pdb/plugin' ], function( pv ) {
 
 Lets pack the visualization:
 
-```python
+```bash
 $ cd $GALAXY_ROOT/config/plugins/visualizations/charts
 $ npm install
 $ webpack
