@@ -198,18 +198,36 @@ Lets go and test it.
 
 ## 1.6 Test the visualization
 
-http://www.rcsb.org/pdb/explore/explore.do?structureId=1acb
-https://files.rcsb.org/view/1ACB.pdb
+In this section we will select a `PDB`-file from the Protein Databank and visualize it with our new plugin.
 
-> ### :pencil2: Hands-on: Data upload
+> ### Tasks
 >
-> 1. Run your Galaxy instance
-> 2. Open a new tab and go to the http://www.rcsb.org
-> 3. Download a PDB-file or copy the link to it
-> 4. Run you *Galaxy* instance
-> 5. Upload the PDB file to your instance
-> 6. Select the file in the history
-> 7. Start Charts 
+> 1. Visit http://www.rcsb.org and select a protein structure e.g. 1ACB
+>
+>    ```bash
+>    http://www.rcsb.org/pdb/explore/explore.do?structureId=1acb
+>    ```
+>
+> 2. Copy the link to its PDB-file
+>
+>    ```bash
+>    https://files.rcsb.org/view/1ACB.pdb
+>    ```
+>
+> 3. Start your Galaxy instance
+>    ```bash
+>    $ cd $GALAXY_ROOT
+>    $ run.sh
+>    ```
+>
+> 4. Upload the PDB file to your instance by pasting it the above link. 
+>
+> 5. Select the file in the history
+>
+> 6. Click on the *diagram*-icon and select *Charts* 
+>
+> 7. Find your visualization and double-click on its logo.
+>
 
 # Part 2
 
