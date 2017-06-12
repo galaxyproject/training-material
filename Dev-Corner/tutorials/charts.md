@@ -53,7 +53,7 @@ Each visualization requires three files. A logo (`logo.png`), a configuration fi
 
 Each visualization is represented by a logo in the *Charts* interface. This makes it easier for users to find and configure their visualization. The logo file should be in `png` format. Find and download a png-file, name it `logo.png` and copy it into the the `myviz/pdb` directory.
 
-![Specific region](/Dev-Corner/tutorials/images/exercise.png)
+![Specific region](/Dev-Corner/images/exercise.png)
 
 ## Visualization annotation
 
