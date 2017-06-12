@@ -57,9 +57,9 @@ As mentioned above we will be focusing on the *PV-Javascript Protein Viewer* in 
 >
 > 1. View the plugin in action, rotate the molecule and change its style.
 >
-> 2. Can you find the minified plugin code file we will need to download?
+> 2. Under which license is this plugin distributed?
 >
-> 3. Under which license is this plugin distributed?
+> 3. Can you find the minified plugin code file we will need to download?
 >
 
 # Part 1
