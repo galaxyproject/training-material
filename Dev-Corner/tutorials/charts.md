@@ -142,10 +142,11 @@ Each visualization has a configuration file named `config.js`. This file has con
 
 This configures the plugin's name and a description which will appear on the Charts selection interface. It also links the plugin to the PDB-file format, which means that for any history item of these file type the plugin will automatically become available. Keywords are optional and can help to improve the annotation.
 
+## Add a wrapper to connect Galaxy with the PV-Viewer plugin
+
 http://pv.readthedocs.io/en/v1.8.1/viewer.html#pv.Viewer
 http://pv.readthedocs.io/en/v1.8.1/viewer.html#pv.Viewer.renderAs
 
-## Add a wrapper to connect Galaxy with the PV-Viewer plugin
 
 ```js
 define( [ 'visualizations/myviz/pdb/plugin' ], function( pv ) {
@@ -173,7 +174,6 @@ define( [ 'visualizations/myviz/pdb/plugin' ], function( pv ) {
 });
 
 ```
-
 
 Lets pack the visualization:
 
