@@ -51,8 +51,7 @@ In this tutorial we are going to demonstrate how to add a 3rd-party visualizatio
 >   - https://en.wikipedia.org/wiki/Protein_Data_Bank_(file_format)
 >   - http://www.wwpdb.org/documentation/file-format
 
-
-Let's start by visiting the viewers developer site at https://biasmv.github.io/pv/ to get familiar with this plugin.
+As mentioned above we will be focusing on the *PV-Javascript Protein Viewer* in this tutorial. Let's continue by visiting the viewers developer site at https://biasmv.github.io/pv/ and get familiar with this plugin.
 
 # Part 1
 
