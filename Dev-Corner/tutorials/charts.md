@@ -64,7 +64,7 @@ As mentioned above we will be focusing on the *PV-Javascript Protein Viewer* in 
 
 ## Directory and plugin preparations
 
-In the following sections we will download this viewer and add it to a local Galaxy instance. All development takes place within the Galaxy codebase. The first thing we are going to do is to clone a Galaxy instance and prepare the directory structure for the new visualization plugin.
+In this section we will download the viewer and add it to a local Galaxy instance. All development takes place within the Galaxy codebase. The first thing we are going to do is to clone a Galaxy instance and prepare the directory structure for the new visualization plugin.
 
 > ### Tasks
 >
@@ -98,7 +98,7 @@ In the following sections we will download this viewer and add it to a local Gal
 >    curl https://raw.githubusercontent.com/biasmv/pv/master/bio-pv.min.js -o plugin.js
 >    ```
 
-Each *Charts* visualization contains three files:
+Now that the directory structure is in place and the plugin has been made available, we will continue with building our *Chart* plugin. Each *Charts* visualization contains three files:
 
 - A logo (`logo.png`) which will appear in *Chart*'s plugin selection interface
 - A configuration file (`config.js`) describing input parameters and options
