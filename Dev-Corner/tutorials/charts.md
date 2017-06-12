@@ -97,9 +97,9 @@ In this section we will download the viewer and add it to a local *Galaxy* insta
 
 Now that the directory structure is in place and the 3rd-party code has been made available, we will continue with building our *Chart* plugin. Each *Charts* visualization contains three files:
 
-- 1. Logo (`logo.png`) which will appear in *Chart*'s plugin selection interface.
-- 2. Configuration file (`config.js`) describing input parameters and options.
-- 3. Wrapper (`wrapper.js`) which serves as a bridge between *Galaxy* and our 3rd-party plugin.
+- Logo (`logo.png`) which will appear in *Chart*'s plugin selection interface.
+- Configuration file (`config.js`) describing input parameters and options.
+- Wrapper (`wrapper.js`) which serves as a bridge between *Galaxy* and our 3rd-party plugin.
 
 In the following sections we are going to discuss these files in more detail, create and place them into our plugin directory at `myviz/pdb`. Let's start with the logo for our visualization.
 
