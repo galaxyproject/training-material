@@ -9,9 +9,10 @@ tutorial_name: visualizations
 In this tutorial we are going to demonstrate how to add a 3rd-party visualization to *Charts* and what the benefits are. The plugin we select for this purpose is the *PV-Javascript Protein Viewer* (https://biasmv.github.io/pv/). It is an open source, protein structure viewer for `PDB`-files.
 
 > ### What is the PDB-file format (Protein Database)
-> 
-> The *PDB*-File format contains atomic coordinates of biomolecules derived through a range of experimental and computational methods. Most commonly the file contains a spatial cyrstallographic snapshot of a protein. There are 100s of thousands of protein structures publicly available at the Protein Databank (http://www.rcsb.org). Proteins are usually labeled by a four-letter code. Here is an example of a `PDB`-file for a hydrolase bond to its inhibitor (PDB: [1ACB](http://www.rcsb.org/pdb/explore/explore.do?structureId=1acb)).
-> 
+>
+> The `PDB`-file format contains atomic coordinates of biomolecules derived through a range of experimental and computational methods. Most commonly the file contains a spatial cyrstallographic snapshot of a protein. There are hundred thousands of protein structures publicly available at the Protein Databank (http://www.rcsb.org). Proteins are usually labeled by a four-letter code.
+> Here is an example of a `PDB`-file for a hydrolase bond to its inhibitor (PDB: [1ACB](http://www.rcsb.org/pdb/explore/explore.do?structureId=1acb)):
+>
 > ```bash
 > HEADER    HYDROLASE/HYDROLASE INHIBITOR           08-NOV-91   1ACB              
 > TITLE     CRYSTAL AND MOLECULAR STRUCTURE OF THE BOVINE ALPHA-CHYMOTRYPSIN-EGLIN
@@ -44,8 +45,10 @@ In this tutorial we are going to demonstrate how to add a 3rd-party visualizatio
 > HETATM 2294  O   HOH E 408      11.489  -6.278  18.740  0.96 20.00           O  
 > ...
 > ```
-
-[More resources on PDB] (https://en.wikipedia.org/wiki/Protein_Data_Bank_(file_format))
+>
+> More resources on this file format:
+>   https://en.wikipedia.org/wiki/Protein_Data_Bank_(file_format)
+>   http://www.wwpdb.org/documentation/file-format
 
 Let's start by visiting the viewers developer site at https://biasmv.github.io/pv/ to get familiar with this plugin.
 
