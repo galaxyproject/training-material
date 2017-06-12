@@ -123,17 +123,17 @@ Each visualization has a configuration file named `config.js`. This file has con
 > 
 > 1. Create a file named `config.js` with the following content:
 > 
-> ```js
-> define( [], function() {
->     return {
->         title       : 'A PDB viewer',
->         library     : 'My Visualization',
->         description : 'Displays Protein Structures.',
->         datatypes   : [ 'pdb' ],
->         keywords    : []
->     }
-> });
-> ```
+>    ```js
+>    define( [], function() {
+>        return {
+>            title       : 'A PDB viewer',
+>            library     : 'My Visualization',
+>            description : 'Displays Protein Structures.',
+>            datatypes   : [ 'pdb' ],
+>            keywords    : []
+>        }
+>    });
+>    ```
 >
 > 2. Place it into your plugins directory at `myviz/pdb`.
 
