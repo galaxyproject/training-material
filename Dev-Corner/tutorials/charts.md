@@ -120,7 +120,7 @@ Each visualization is represented by a logo in the *Charts* interface. This make
 
 ## Annotate the visualization
 
-Each visualization has a configuration file named `config.js`. This file has conceptual similarities with a Tool's XML-file. It allows developers to specify a variety of attributes and input parameters for their visualization. In the following sections we are going to gradually augment this file but for now we keep it simple. Create a `config.js` file with the following contents:
+Each visualization has a configuration file named `config.js`. This file has conceptual similarities with a Tool's XML-file. It allows developers to specify a variety of attributes and input parameters for their visualization. In the following sections we are going to gradually augment this file but for now we keep it simple.
 
 > ### Tasks
 > 
