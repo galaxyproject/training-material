@@ -149,33 +149,33 @@ Add a wrapper to connect *Galaxy* with the *PV-Viewer* plugin
 http://pv.readthedocs.io/en/v1.8.1/viewer.html#pv.Viewer
 http://pv.readthedocs.io/en/v1.8.1/viewer.html#pv.Viewer.renderAs
 
-
-```js
-define( [ 'visualizations/myviz/pdb/plugin' ], function( pv ) {
-    return Backbone.Model.extend({
-        initialize: function( options ) {
-            var viewer = pv.Viewer( document.getElementById( options.targets[ 0 ] ), {
-                width       : 'auto',
-                height      : 'auto',
-                antialias   : true,
-                outline     : true
-            });
-            $.ajax( {
-                url     : options.dataset.download_url,
-                success : function( response ) {
-                    var structure = pv.io.pdb( response );
-                    viewer.clear();
-                    viewer.renderAs( 'protein', structure, 'cartoon', {} );
-                    viewer.centerOn( structure );
-                    viewer.autoZoom();
-                    options.process.resolve();
-                }
-            });
-        }
-    });
-});
-
-```
+> ### Tasks
+>
+> ```js
+> define( [ 'visualizations/myviz/pdb/plugin' ], function( pv ) {
+>     return Backbone.Model.extend({
+>         initialize: function( options ) {
+>             var viewer = pv.Viewer( document.getElementById( options.targets[ 0 ] ), {
+>                 width       : 'auto',
+>                 height      : 'auto',
+>                 antialias   : true,
+>                 outline     : true
+>             });
+>             $.ajax( {
+>                 url     : options.dataset.download_url,
+>                 success : function( response ) {
+>                     var structure = pv.io.pdb( response );
+>                     viewer.clear();
+>                     viewer.renderAs( 'protein', structure, 'cartoon', {} );
+>                     viewer.centerOn( structure );
+>                     viewer.autoZoom();
+>                     options.process.resolve();
+>                 }
+>             });
+>         }
+>     });
+> });
+> ```
 
 ## 1.5 Build the package
 
