@@ -55,7 +55,7 @@ As mentioned above we will be focusing on the *PV-Javascript Protein Viewer* in 
 
 # Part 1
 
-In the following sections we will download this viewer and add it to a local Galaxy instance. This development takes place within the Galaxy codebase. The first thing we are going to do is to clone a Galaxy instance and prepare the directory structure for the new visualization.
+In the following sections we will download this viewer and add it to a local Galaxy instance. All development takes place within the Galaxy codebase. The first thing we are going to do is to clone a Galaxy instance and prepare the directory structure for the new visualization plugin.
 
 > ### Directory and plugin preparations
 >
