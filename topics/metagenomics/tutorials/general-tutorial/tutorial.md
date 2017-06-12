@@ -149,6 +149,20 @@ In the previous section, we see how to analyze amplicon data to extract the comm
 
 In WGS data, full genomes of the micro-organisms in the environment are sequenced (not only the 16S or 18S). We can then have access to the rRNA (only a small part of the genomes), but also to the genes of the micro-organisms. Using this information, we can try to answer to questions "What are the micro-organisms doing?" in addition to the question "What micro-organisms are present?".
 
+## Importing the data
+
+The dataset is different from the previous one because we have now WGS dataset. 
+
+This dataset comes from a sample of Anguil soil, as previously. But here the total DNA was obtained from all bulk samples and sequenced with 454 GS FLX Titanium. The original data are available at EBI Metagenomics under run number [SRR606833](https://www.ebi.ac.uk/metagenomics/projects/SRP016633/samples/SRS372421/runs/SRR606833/results/versions/2.0). We prepare the data for you (as described in the full tutorial about WGS metagenomics data). 
+
+> ### :pencil2: Hands-on: Data upload
+>
+> 1. Import the FASTQ file from [Zenodo]() or from the data library (in "Analyses of metagenomics data" the "..." file)
+>
+>    As default, Galaxy takes the link as name, so rename them.
+>
+{: .hands_on}
+
 ## Extraction of taxonomic information
 
 As for amplicon data, we can extract taxonomic and community structure information from WGS data. Different approaches can be used:
@@ -159,11 +173,16 @@ As for amplicon data, we can extract taxonomic and community structure informati
 
 - Assignation of taxonomy on the whole sequences using databases with marker genes
 
-In this tutorial, we use the second approach with MetaPhlAn2
+In this tutorial, we use the second approach with MetaPhlAn2. [MetaPhlAn2](https://bitbucket.org/biobakery/metaphlan2) uses a database of ~1M unique clade-specific marker genes (not only the rRNA genes) identified from ~17,000 reference (bacterial, archeal, viral and eukaryotic) genomes.
 
 > ### :pencil2: Hands-on: Taxonomic assignation with MetaPhlAn2
 >
-> 1. **MetaPhlAN2** :wrench:: Run **MetaPhlAN2** on the dereplicated sequences
+> 1. **MetaPhlAN2** :wrench:: Run **MetaPhlAN2** on the dereplicated sequences with
+>      - "MetaPhlAn2 clade-specific marker genes" as the clade-specific marker gene database
+>      - Relative abundance profiling of the metagenome
+>      - Profiling of all taxonomic levels
+>      - 200 for the minimum total nucleotide length for the markers in a clade for estimating the abundance without considering sub-clade abundances
+>      - Profiling of the viral, eukaryotic, bacteria and archea organisms
 >
 >    > ### :question: Questions
 >    >
@@ -184,13 +203,16 @@ Even if the output of MetaPhlAn2 is bit easier to parse than the BIOM file, we w
 
 > ### :pencil2: Hands-on: Interactive visualization with KRONA
 >
-> 1. **Format MetaPhlAn2 output for Krona** :wrench:: Run **Format MetaPhlAn2 output for Krona** to format MetaPhlAn2 output for KRONA
-> 2. **KRONA** :wrench:: Run **KRONA** on the formatted MetaPhlAn2 output
+> 1. **Format MetaPhlAn2 output for Krona** :wrench:: Run **Format MetaPhlAn2 output for Krona** to format the MetaPhlAn2 text output
+> 2. **KRONA** :wrench:: Run **KRONA** on the formatted MetaPhlAn2 output with
+>    - "MetaPhlAn" as the type of input data
+>    - "Root" as the name for the basal rank
+> 3. Visualize the KRONA chart by clicking on the eye
 >
 >    > ### :question: Questions
 >    >
 >    > 1. What are the main species found for the bacteria?
->    > 2. Is the proportion of ... similar to the one found with EBI Metagenomics?
+>    > 2. Are they similar to the ones found with Mothur on the amplicon dataset?
 >    >
 >    >    <details>
 >    >    <summary>Click to view answers</summary>
@@ -209,11 +231,19 @@ Even if the output of MetaPhlAn2 is bit easier to parse than the BIOM file, we w
 
 We would like now to answer the question "What are the micro-organisms doing?" or "Which functions are done by the micro-organisms in the environment?". 
 
-In the WGS data, we have access to the gene sequences. We use that to identify the genes, associate them to a function, build pathways, etc to investigate the functional part of the community.
+In the WGS data, we have access to the gene sequences. We use that to identify the genes, associate them to a function, build pathways, etc., to investigate the functional part of the community.
+
+Here, we are using [HUMAnN2](http://huttenhower.sph.harvard.edu/humann2), a tool to profile the presence/absence and abundance of gene families and microbial pathways in a community from metagenomic or metatranscriptomic sequencing data.
 
 > ### :pencil2: Hands-on: Metabolism function identification
 >
-> 1. **HUMAnN2** :wrench:: Run **HUMAnN2** on non rRNA sequences (SortMeRNA output) to extract the gene families and pathways in the sample
+> 1. **HUMAnN2** :wrench:: Run **HUMAnN2** on the input sequences with
+>    - The MetaPhlAn2 output as taxomic profile
+>    - The "Full" locally cached database as nucleotide database
+>    - Diamond for the translated alignment
+>    - "Full UniRef50" as the locally cached protein database
+>    - Search of UniRef50
+>    - MetaCyc as database to use for pathway computation<br/>
 > 
 >    > ### :question: Questions
 >    >
