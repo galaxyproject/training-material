@@ -59,11 +59,9 @@ Each visualization is represented by a logo in the *Charts* interface. This make
 
 Each visualization requires a configuration file named `config.js`. 
 
-> ### :pencil2: Hands-on: Data upload
->
-> Create the file  `config.js` with the following contents:
->
-> ```js
+Create the file  `config.js` with the following contents:
+
+```js
 define( [], function() {
     return {
         title       : 'A PDB viewer',
@@ -73,7 +71,7 @@ define( [], function() {
         keywords    : []
     }
 });
-> ```
+```
 
 TODO: Explain available options.
 This configures the plugin's name and a description which will appear on the Charts selection interface. It also links the plugin to the PDB-file format, which means that for any history item of these file type the plugin will automatically become available. Keywords are optional and can help to improve the annotation.
