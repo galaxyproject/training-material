@@ -4,7 +4,7 @@ topic_name: Dev-Corner
 tutorial_name: visualizations
 ---
 
-# Introduction
+## Introduction
 
 In this tutorial we are going to demonstrate how to add a 3rd-party visualization to *Charts* and what the benefits are. The plugin we select for this purpose is the *PV-Javascript Protein Viewer* (https://biasmv.github.io/pv/). It is an open source, protein structure viewer for `PDB`-files. There are many other popular protein structure viewers available for the visualization of `PDB`-files such as e.g. [NGL](http://arose.github.io/ngl/) (also available in *Charts*) and [JSMol](https://chemapps.stolaf.edu/jmol/jsmol/jsmol.htm).
 
@@ -62,12 +62,10 @@ As mentioned above we will be focusing on the *PV-Javascript Protein Viewer* in 
 > 3. Can you find the minified plugin code file we will need to download?
 >
 
-# Part 1
+## Directory and plugin preparations
 
 In the following sections we will download this viewer and add it to a local Galaxy instance. All development takes place within the Galaxy codebase. The first thing we are going to do is to clone a Galaxy instance and prepare the directory structure for the new visualization plugin.
 
-> ### Directory and plugin preparations
->
 > 1. Clone an instance of Galaxy in a path, further referred to as `$GALAXY_ROOT`:
 >    ```bash
 >    $ git clone https://github.com/galaxyproject/galaxy 
@@ -97,7 +95,6 @@ In the following sections we will download this viewer and add it to a local Gal
 >    ```bash
 >    curl https://raw.githubusercontent.com/biasmv/pv/master/bio-pv.min.js -o plugin.js
 >    ```
->
 
 Each visualization requires three files. A logo (`logo.png`), a configuration file (`config.js`) and a wrapper (`wrapper.js`). We are about to create and discuss these files now.
 
