@@ -1,3 +1,9 @@
+---
+layout: tutorial_hands_on
+topic_name: metagenomics
+tutorial_name: mothur-miseq-sop
+---
+
 # Overview
 In this tutorial we will perform the
 [Standard Operating Procedure (SOP) for MiSeq data](https://www.mothur.org/wiki/MiSeq_SOP), developed by the
@@ -137,7 +143,7 @@ create a collection now:
 > convention, so that our tools will know which files belong together.
 >
 > 1. Click on the **checkmark icon** at top of your history.
->   ![](../../shared/images/history_menu_buttons2.png)
+>   ![](../../../../shared/images/history_menu_buttons2.png)
 >
 > 2. Select all the fastq files (40 in total), then click on **for all selected..** and select
 >   **Build List of Dataset Pairs** from the dropdown menu.
@@ -165,7 +171,7 @@ create a collection now:
 ## Reducing sequencing and PCR errors
 
 The first thing we want to do is combine our forward and reverse reads for each sample. This is done
-using the make.contigs command, which requires the paired collection as input. This command will extract
+using the `make.contigs` command, which requires the paired collection as input. This command will extract
 the sequence and quality score data from your fastq files, create the reverse complement of the reverse
 read and then join the reads into contigs. Then we will combine all samples into a single fasta file,
 remembering which reads came from which samples using a *group* file.
@@ -192,48 +198,25 @@ fragment, resulting in an overlap in the middle. We will now combine these pairs
 > ### :pencil2: Hands-on: Combine forward and reverse reads into contigs
 >
 > - **Make.contigs** :wrench: with the following parameters
->   - "Fastq pair" to the *collection* you created in the previous step
+>   - "Way to provide files" to the *Multiple pairs - Combo mode*
+>   - "Fastq pairs" to the collection you just created
 >   - Leave all other parameters to the default settings <br><br>
 >
->    > ### :bulb: Collections as input
->    > To provide a collection as input for a tool, click on the `Dataset collection` button in front
->    > of the parameter. The drop-down menu will now list collections as possible inputs.
->    > ![](../../shared/images/tools_collection_input.png)
->    {: .tip}
 {: .hands_on}
 
-By supplying a collection as input, the tool was run multiple times; once for every dataset in the collection.
-The output from this tool will be 6 new collections, one for each type of output the tool generates (e.g. one
-collection with the `trim.contig.fasta` output files for each pair, another for all the `scrap.contig.fasta`
-files).
-
-#### Combine samples into a single dataset
-
-Before we continue with the analysis, we would like to combine all the data from each sample into a single fasta
-file. To retain knowledge of which reads belong to which samples, we will also create a *group file*
-
-> ### :pencil2: Hands-on: Merge sample data
->
-> 1. **Merge.files** :wrench: with the following parameters
->   - "merge" to *fasta files*
->   - "inputs" to the `trim.contigs.fasta` *collection* output of the previous step <br><br>
->
-> 2. **Make.group** :wrench: with the following parameters
->   - "Method" to *Automatically from collection*
->   - "fasta collection" to the `trim.contigs.fasta` output of the make.contigs step
->
-{: .hands_on}
-
-Examine the output. The *group file* consists of two columns, the first is the sequence read name, and
-the second is the group (sample) it belongs to. The sample names were generated from the dataset names
-of the pairs in our collection.
+This step merges the forward and reverse reads into contigs for each pair, and
+then combines the results into a single fasta file. To retain information about
+which reads originated from which samples, it also made a group file. View that
+file now, it should look something like this:
 
 ```
-read_name1  sample1
-read_name2  sample1
-read_name3  sample2
-..
+M00967_43_000000000-A3JHG_1_1101_10011_3881     F3D0
+M00967_43_000000000-A3JHG_1_1101_10050_15564    F3D0
+M00967_43_000000000-A3JHG_1_1101_10051_26098    F3D0
 ```
+
+Here the first column contains the read name, and the second column contains the sample name.
+
 
 ### Data Cleaning
 
@@ -245,7 +228,7 @@ Next we want to improve the quality of our data. But first, let's get a feel of 
 > ### :pencil2: Hands-on: Summarize data
 >
 > - **Summary.seqs** :wrench: with the following parameters
->   - "fasta" parameter to the merged fasta file
+>   - "fasta" parameter to the `trim.contigs.fasta` file created by the make.contigs tool
 >   - We do not need to supply a names or count file
 >
 {: .hands_on}
@@ -277,8 +260,8 @@ The following tool will remove any sequences with ambiguous bases and anything l
 > ### :pencil2: Hands-on: Filter reads based on quality and length
 >
 > - **Screen.seqs** :wrench: with the following parameters
->   - "fasta" to the merged fasta file from merge.files
->   - "group" the group file we created in with make.group
+>   - "fasta" to the `trim.contigs.fasta` file created by the make.contigs tool
+>   - "group" the group file created in the make.contigs step
 >   - "maxlength" parameter to `275`
 >   - "maxambig" parameter to `0`
 >
@@ -471,7 +454,7 @@ columns. Because we've perhaps created some redundancy across our sequences by t
 > >  How many duplicate sequences did our filter step produce?
 > > <details>
 > >   <summary> Click to view answer</summary>
-> >   3. <br
+> >   3. <br>
 > >   This can be seen in the log file, which tells us the number of sequences was reduced from 16298 to
 > >   16295
 > > </details>
@@ -536,6 +519,7 @@ when they're the most abundant sequence in another sample. This is how we do it:
 > - **Remove.seqs** :wrench: with the following parameters
 >   - "accnos" to the uchime.accnos file from Chimera.uchime
 >   - "fasta" to the fasta output from Pre.cluster
+>   - "count" to the count table from Chimera.uchime
 >
 > > ### :question: Question
 > >
@@ -570,7 +554,7 @@ Let's go ahead and classify those sequences using the Bayesian classifier with t
 >   - "fasta" to the fasta output from Remove.seqs
 >   - "reference" to `trainset9032012.pds.fasta` from your history
 >   - "taxonomy" to `trainset9032012.pds.tax` from your history
->   - "count" to the count table file from Chimera.uchime
+>   - "count" to the count table file from Remove.seqs
 >   - "cutoff" to 80
 >
 > Have a look at the taxonomy output. You will see that every read now has a classification.
@@ -580,10 +564,10 @@ Let's go ahead and classify those sequences using the Bayesian classifier with t
 >
 > - **Remove.lineage** :wrench: with the following parameters
 >   - "taxonomy" to the taxonomy output from Classify.seqs
->   - "taxon" to `Chloroplast-Mitochondria-unknown-Archaea-Eukaryota` in the textbox under *Manually
+>   - "taxon" to `Chloroplast-Mitochondria-unknown-Archaea-Eukaryota` in the text box under *Manually
 > select taxons for filtering*
 >   - "fasta" to the fasta output from Remove.seqs
->   - "count" to count table from Chimera.uchime
+>   - "count" to the count table from Remove.seqs
 >
 > > ### :question: Questions
 > >
@@ -613,9 +597,9 @@ At this point we have curated our data as far as possible and we're ready to see
 ## Assessing error rates based on our mock community
 
 Measuring the error rate of your sequences is something you can only do if you have co-sequenced a mock
-community. This is something we include for every 95 samples we sequence. You should too because it will
-help you gauge your error rates and allow you to see how well your curation is going, and whether something
-is wrong with your sequencing setup.
+community, that is, a sample of which you know the exact composition. This is something we include for
+every 95 samples we sequence. You should too because it will help you gauge your error rates and allow
+you to see how well your curation is going, and whether something is wrong with your sequencing setup.
 
 > ### :nut_and_bolt: Definition
 >
@@ -623,6 +607,9 @@ is wrong with your sequencing setup.
 > *in vitro* to simulate the composition of a microbiome sample or the nucleic acid isolated therefrom.
 >
 {: .note}
+
+Our mock community is composed of genomic DNA from 21 bacterial strains. So in a perfect world, this is
+exactly what we would expect the analysis to produce as a result.   
 
 First, let's extract the sequences belonging to our mock samples from our data:
 
@@ -645,7 +632,8 @@ Selected 4060 sequences from your count file
 ```
 
 This tells us that we had 67 unique sequences and a total of 4,060 total sequences in our Mock sample. We
-can now use the `seq.error` command to measure the error rates based on our mock reference.
+can now use the `seq.error` command to measure the error rates based on our mock reference. Here we align
+the reads from our mock sample back to their known sequences, to see how many fail to match.
 
 > ### :pencil2: Hands-on: Assess error rates based on a mock community
 > - **Seq.error** :wrench: with the following parameters
@@ -678,7 +666,7 @@ We can now cluster the mock sequences into OTUs to see how many spurious OTUs we
 > ### :book: Background: Operational Taxonomic Units (OTUs)
 >
 > In 16S metagenomics approaches, OTUs are clusters of similar sequence variants of the 16S rDNA marker gene
-> sequence. Each of these cluster is intended to represent a taxonomic unit of a bacteria species or genus
+> sequence. Each of these clusters is intended to represent a taxonomic unit of a bacteria species or genus
 > depending on the sequence similarity threshold. Typically, OTU cluster are defined by a 97% identity
 > threshold of the 16S gene sequence variants at genus level. 98% or 99% identity is suggested for species
 > separation.
@@ -708,7 +696,7 @@ We can now cluster the mock sequences into OTUs to see how many spurious OTUs we
 > - **Make.shared** :wrench: with the following parameters
 >     - "list" to the OTU list from Cluster
 >     - "count" to the count table from Get.groups
->     - "label" to `0.03`
+>     - "label" to `0.03` (this indicates we are interested in the clustering at a 97% identity threshold)
 >
 > And now we generate intra-sample rarefaction curves
 >
@@ -731,7 +719,7 @@ We can now cluster the mock sequences into OTUs to see how many spurious OTUs we
 Open the rarefaction output (dataset named `sobs` inside the `rarefaction curves` output collection).
 You'll see that for 4060 sequences, we'd have 34 OTUs from the Mock community. This number of course
 includes some stealthy chimeras that escaped our detection methods. If we used 3000 sequences, we would
-have about 31 OTUs. In a perfect world with no chimeras and no sequencing errors, we'd have 20 OTUs.
+have about 31 OTUs. In a perfect world with no chimeras and no sequencing errors, we'd have 21 OTUs.
 This is not a perfect world. But this is pretty darn good!
 
 > ### :book: Background: Rarefaction
@@ -861,11 +849,21 @@ animal) followed by a D and a three digit number (number of days post weaning).
 >
 > - **Sub.sample** :wrench: with the following parameters
 >   - "Select type of data to subsample" to `OTU Shared`
->   - "shared" to output from Make.shared from the OTU section above
+>   - "shared" to output from Make.shared
 >   - "size" to `2440`
 >
+> > ### :question: Question
+> >
+> >  What would you exect the result of `count.groups` on this new shared file output to be? Check if you are correct.
+> > <details>
+> >   <summary> Click to view answer</summary>
+> >   all groups (samples) should now have 2440 sequences. Run count.groups again on the shared file output by the sub.sample
+> >   tool to confirm that this is indeed what happened.
+> >  </details>
+> {: .question}
+>
 > **Note:** since subsampling is a stochastic process, your results from any tools using this subsampled data
-> will vary from the ones presented here.
+> will deviate from the ones presented here.
 {: .hands_on}
 
 ## Calculate Species Diversity
@@ -945,7 +943,7 @@ allowing a researcher to compare samples based on richness, but their diversity.
 
 Finally, let's get a table containing the number of sequences, the sample coverage, the number of observed
 OTUs, and the Inverse Simpson diversity estimate using the `Summary.single` command. To standardize everything,
-let's randomly select 2441 sequences from each sample 1000 times and calculate the average:
+let's randomly select 2440 sequences from each sample 1000 times and calculate the average:
 
 > ### :pencil2: Hands-on: Summary.single
 >
@@ -1274,7 +1272,7 @@ We do this with the `corr.axes` tool:
 > ### :pencil2: Hands-on: Correlation
 >
 > - **Corr.axes** :wrench: with the following parameters
->   - "axes" to axes output from Nmds in 3 dimension
+>   - "axes" to axes output from Nmds in 3 dimension (collection)
 >   - "shared" to shared output from collapse collection on Sub.sample
 >   - "method" to `Spearman`
 >   - "numaxes" to `3`
@@ -1532,12 +1530,12 @@ instance we can convert our shared file to the more widely used `biom` format an
 > The Galaxy project runs an instance of Phinch, and if you look at the output biom file, you will see a link
 > to view the file at Phinch:
 >
-> ![](../../shared/images/viewatphinch.png)
+> ![](../../../../shared/images/viewatphinch.png)
 >
 > Clicking on this link will lead you to the Phinch website, which will automatically load in your file, and
 > where you can several interactive visualisations:
 >
-> ![](../../shared/images/phinch_overviewpage.png)
+> ![](../../../../shared/images/phinch_overviewpage.png)
 {: .hands_on}
 
 ## Krona

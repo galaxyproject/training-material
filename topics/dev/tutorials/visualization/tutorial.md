@@ -1,3 +1,9 @@
+---
+layout: tutorial_hands_on
+topic_name: dev
+tutorial_name: visualization
+---
+
 # Introduction
 
 Visualizations may be very helpful in understanding data better. There is a whole

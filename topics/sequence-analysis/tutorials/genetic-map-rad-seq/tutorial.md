@@ -1,12 +1,12 @@
 ---
 layout: tutorial_hands_on
-topic_name: RAD-Seq
-tutorial_name: genetic_map
+topic_name: sequence-analysis
+tutorial_name: genetic-map-rad-seq
 ---
 
 # Introduction
 
-Original description is reachable on a [dedicated page of the official STACKS website](http://catchenlab.life.illinois.edu/stacks/tut_gar.php). Writers describe that they developed a genetic map in the spotted gar and present here data from a single linkage group. The gar genetic map is an F1 pseudotest cross between two parents and 94 of their F1 progeny. They took the markers that appeared in one of the linkage groups and worked backwards to provide the raw reads from all of the stacks contributing to that linkage group. 
+Original description is reachable on a [dedicated page of the official STACKS website](http://catchenlab.life.illinois.edu/stacks/tut_gar.php). Writers describe that they developed a genetic map in the spotted gar and present here data from a single linkage group. The gar genetic map is an F1 pseudotest cross between two parents and 94 of their F1 progeny. They took the markers that appeared in one of the linkage groups and worked backwards to provide the raw reads from all of the stacks contributing to that linkage group.
 
 We here proposed to re-analyze these data at least until genotypes determination. Data are already clean so you don't have to demultiplex it using barcode information through `Process Radtags tool`.
 
@@ -31,7 +31,7 @@ The original data is available at [STACKS website](http://creskolab.uoregon.edu/
 > 2. Import Fasta files from parents and 20 progenies.
 >
 >    > ### :nut_and_bolt: Comments
->    > If you are using the [GenOuest Galaxy instance](http://galaxy.genouest.org), you can load the dataset using 'Shared Data' -> 'Data Libraries' -> '1 Galaxy teaching folder' -> 'EnginesOn' -> 'RADseq' -> 'Genetic map' 
+>    > If you are using the [GenOuest Galaxy instance](http://galaxy.genouest.org), you can load the dataset using 'Shared Data' -> 'Data Libraries' -> '1 Galaxy teaching folder' -> 'EnginesOn' -> 'RADseq' -> 'Genetic map'
 >
 >    > ### :bulb: Tip: Importing data via links
 >    >
@@ -64,7 +64,7 @@ The original data is available at [STACKS website](http://creskolab.uoregon.edu/
 >    > * Press **Start**  
 >
 >    As default, Galaxy takes the link as name. It also do not link the dataset to a database or a reference genome.
-> 
+>
 
 # Building loci using STACKS
 
@@ -135,7 +135,7 @@ Run `Stacks: De novo map` Galaxy tool. This program will run `ustacks`, `cstacks
 >
 >    Here are `sample1.snps` (left) and `sample2.snps` (right)
 >
->    ![](../../images/RAD2_Genetic_Map/denovo_map_matches1.png)
+>    ![](../../images/RAD2_Genetic_Map/denovo_map_matches1.PNG)
 >
 >    Catalog_ID (= catalog Stacks_ID) is composed by the `Stack_ID` from the "reference" individual, here sample1, but number is different from sample2 `Stack_ID`. Thus, in the `catalog.alleles.tsv`, the `Stack_ID` numbered 3 correspond to the `Stack_ID` number 16 from sample2!
 >
@@ -162,7 +162,7 @@ Run `Stacks: De novo map` Galaxy tool. This program will run `ustacks`, `cstacks
 >
 
 # Genotypes determination
-> **Stacks: genotypes** :wrench:: Re-Run the last step of `Stacks: De novo map` pipeline specifying more options as: 
+> **Stacks: genotypes** :wrench:: Re-Run the last step of `Stacks: De novo map` pipeline specifying more options as:
 >    > 1. The genetic map type (ie F1, F2 (left figure, F1xF1), Double Haploid, Back Cross (F1xF0), Cross Pollination (right figure, F1 or F2 but resulting from the croos of pure homozygous parents))
 >    >
 >    >    ![](../../images/RAD2_Genetic_Map/Genetic_map_F2.png)    ![](../../images/RAD2_Genetic_Map/Genetic_map_CrossPollination.png)

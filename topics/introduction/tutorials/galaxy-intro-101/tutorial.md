@@ -1,3 +1,9 @@
+---
+layout: tutorial_hands_on
+topic_name: introduction
+tutorial_name: galaxy-intro-101
+---
+
 # 101 Introduction
 
 This practical aims to familiarize you with the Galaxy user interface. It will teach you how to perform basic tasks such as importing data, running tools, working with histories, creating workflows, and sharing your work.
@@ -37,7 +43,7 @@ Browse to your Galaxy instance and log in or register. The Galaxy interface cons
 >    {: .tip}
 >
 > 2. **Rename your history** to be meaningful and easy to find. You can do this by clicking on the title of the history (by default the title is *Unnamed history*) and typing **Galaxy 101** as the name. Do  not forget to hit `enter` on your keyboard to save it.
->   ![](../../shared/images/rename_history.png)
+>   ![](../../../../shared/images/rename_history.png)
 {: .hands_on}
 
 ## Upload exon locations
@@ -328,7 +334,7 @@ We can examine the workflow in Galaxy's workflow editor. Here you can view/chang
 >
 >    > ### :bulb: Tip: Hiding intermediate steps
 >    > When a workflow is executed, the user is usually primarily interested in the final product and not in all intermediate steps. By default all the outputs of a workflow will be shown, but we can explicitly tell Galaxy which output to show and which to hide for a given workflow. This behaviour is controlled by the little asterisk next to every output dataset:
->    > ![](../../shared/images/workflow_editor_mark_output.png)
+>    > ![](../../../../shared/images/workflow_editor_mark_output.png)
 >    >
 >    > If you click on this asterisk for any of the output datasets, then *only* files with an asterisk will be shown, and all outputs without an asterisk will be hidden. (Note that clicking *all* outputs has the same effect as clicking *none* of the outputs, in both cases all the datasets will be shown.)
 >    {: .tip}

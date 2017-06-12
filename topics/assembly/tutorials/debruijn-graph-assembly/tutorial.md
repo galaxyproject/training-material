@@ -1,3 +1,9 @@
+---
+layout: tutorial_hands_on
+topic_name: assembly
+tutorial_name: debruijn-graph-assembly
+---
+
 # Optimised de Bruijn Graph assemblies using the Velvet Optimiser and SPAdes
 In this activity, we will perform *de novo* assemblies of a short read set using the Velvet Optimiser and the SPAdes assemblers. We are using the Velvet Optimiser for illustrative purposes. For real assembly work, a more suitable assembler should be chosen - such as SPAdes.
 
@@ -36,9 +42,9 @@ We will be using the same data that we used in the introductory tutorial, so if 
 >    {: .tip}
 >
 >
-> 3. Once the files have been uploaded, change their names to Mutant_R1.fastq and Mutant_R2.fastq respectively by clicking on the ![](../images/edit_file.png) icon next to the relevant history entry.
+> 3. Once the files have been uploaded, change their names to Mutant_R1.fastq and Mutant_R2.fastq respectively by clicking on the ![](../../images/edit_file.png) icon next to the relevant history entry.
 >
-> Click on the View Data button (the ![Eye icon](../images/eye.png)) next to one of the FASTQ sequence files.
+> Click on the View Data button (the ![Eye icon](../../images/eye.png)) next to one of the FASTQ sequence files.
 >
 >    > ### :question: Questions
 >    >
@@ -72,11 +78,11 @@ Your history will now contain a number of new files:
 
 * Velvet optimiser contigs
   * A fasta file of the final assembled contigs
-  
+
 
 * Velvet optimiser contig stats
   * A table of the lengths (in k-mer length) and coverages (k-mer coverages) for the final contigs.
-  
+
 Have a look at each file.
 
 
@@ -97,9 +103,9 @@ Have a look at each file.
 
 Tables of results from **(a)** Simple assembly and **(b)** optimised assembly.
 
-**(a)** ![](../images/image12.png)
+**(a)** ![](../../images/image12.png)
 
-**(b)** ![](../images/optstats.png)
+**(b)** ![](../../images/optstats.png)
 
 # Assemble with SPAdes
 
@@ -127,7 +133,7 @@ You will now have 5 new files in your history:
 
 Examine each file, especially the stats files.
 
-![](../images/contig_stats.png)
+![](../../images/contig_stats.png)
 
 > ### :question: Questions
 >

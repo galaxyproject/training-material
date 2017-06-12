@@ -1,23 +1,20 @@
-# Galaxy - Assembly training material
+# Galaxy - metagenomics training material
+#
+# to build the docker image, go to root of training repo and
+#    docker build -t <your_tag> -f topics/<your_topic>/docker/Dockerfile .
+#
+# to run image:
+#    docker run -p "8080:80" -t <your_tag>
 
 FROM bgruening/galaxy-stable
 
-MAINTAINER Simon-Gladman, simon.gladman@unimelb.edu.au
+MAINTAINER Galaxy Training Material
 
-ENV GALAXY_CONFIG_BRAND Assembly
+ENV GALAXY_CONFIG_BRAND "GTN: Assembly"
 
-# Install tools (normally not needed, all needed tools must be in the base image)
-ADD tools.yml $GALAXY_ROOT/tools.yaml
-RUN install-tools $GALAXY_ROOT/tools.yaml
+# copy the tutorials directory for your topic
+ADD topics/assembly/tutorials/ /tutorials/
 
-# Data libraries (this is only needed to add data libraries like reference genomes)
-ADD library_data.yaml $GALAXY_ROOT/library_data.yaml
-
-# Download training data and populate the data library
-RUN startup_lite && \
-    sleep 50 && \
-    . $GALAXY_VIRTUAL_ENV/bin/activate && \
-    python $GALAXY_ROOT/setup_data_libraries.py -i $GALAXY_ROOT/library_data.yaml
-
-# Galaxy tour
-#ADD <link to galaxy tour on  https://github.com/galaxyproject/galaxy-tours/> $GALAXY_ROOT/config/plugins/tours/<tour-name>.yaml
+# install everything for tutorials
+ADD bin/docker-install-tutorials.sh /setup-tutorials.sh
+RUN /setup-tutorials.sh

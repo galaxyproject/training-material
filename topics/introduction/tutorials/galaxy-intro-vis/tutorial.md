@@ -1,3 +1,9 @@
+---
+layout: tutorial_hands_on
+topic_name: introduction
+tutorial_name: galaxy-intro-vis
+---
+
 # Using the Integrative Genomics Viewer
 
 :grey_question: ***Questions***

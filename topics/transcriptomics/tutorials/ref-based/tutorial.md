@@ -1,8 +1,14 @@
-﻿# Introduction
+---
+layout: tutorial_hands_on
+topic_name: transcriptomics
+tutorial_name: ref-based
+---
+
+# Introduction
 
 In the study of [Brooks *et al.* 2011](http://genome.cshlp.org/content/21/2/193.long), the Pasilla (PS) gene, *Drosophila* homologue of the Human splicing regulators Nova-1 and Nova-2 Proteins, was depleted in *Drosophila melanogaster* by RNAi. The authors wanted to identify exons that are regulated by Pasilla gene using RNA sequencing data.
 
-Total RNA was isolated and used for preparing either single-end or paired-end RNA-seq libraries for treated (PS depleted) samples and untreated samples. These libraries were sequenced to obtain a collection of RNA sequencing reads for each sample. The effects of Pasilla gene depletion on splicing events can then be analyzed by comparison of RNA sequencing data of the treated (PS depleted) and the untreated samples. 
+Total RNA was isolated and used for preparing either single-end or paired-end RNA-seq libraries for treated (PS depleted) samples and untreated samples. These libraries were sequenced to obtain a collection of RNA sequencing reads for each sample. The effects of Pasilla gene depletion on splicing events can then be analyzed by comparison of RNA sequencing data of the treated (PS depleted) and the untreated samples.
 
 The genome of *Drosophila melanogaster* is known and assembled. It can be used as reference genome to ease this analysis.  In a reference based RNA-seq data analysis, the reads are aligned (or mapped) against a reference genome, *Drosophila melanogaster* here, to significantly improve the ability to reconstruct transcripts and then identify differences of expression between several conditions.
 
@@ -20,7 +26,7 @@ The genome of *Drosophila melanogaster* is known and assembled. It can be used a
 
 ## Data upload
 
-The original data is available at NCBI Gene Expression Omnibus (GEO) under accession number [GSE18508](http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE18508). 
+The original data is available at NCBI Gene Expression Omnibus (GEO) under accession number [GSE18508](http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE18508).
 
 We will look at the 7 first samples:
 
@@ -52,14 +58,14 @@ We have extracted sequences from the Sequence Read Archive (SRA) files to build 
 >    > * Select `fastqsanger`
 >    > * Press **Save**
 >    {: .tip}
-> 
+>
 >    As default, Galaxy takes the link as name. It also do not link the dataset to a database or a reference genome.
-> 
+>
 >    > ### :nut_and_bolt: Comments
 >    > - Edit the "Database/Build" to select "dm3"
 >    > - Rename the datasets according to the samples
 >    {: .comment}
-> 
+>
 {: .hands_on}
 
 Both files contain the reads that belong to chromosome 4 of a paired-end sample. The sequences are raw sequences from the sequencing machine, without any pretreatments. They need to be controlled for their quality.
@@ -210,7 +216,7 @@ We can now try to determine the library type of our data.
 >    
 >    > ### :nut_and_bolt: Comment
 >    > As it is sometimes quite difficult to find out which settings correspond to those of other programs, the following table might be helpful to identify the library type:
->    > 
+>    >
 >    > Sequencing type | **Infer Experiment** | **TopHat** | **HISAT2** | **htseq-count** | **featureCounts**
 >    > --- | --- | --- | --- | --- | ---
 >    > Paired-End (PE) | "1++,1--,2+-,2-+" | "FR Second Strand" | "Second Strand F/FR" | "yes" | "1"
@@ -218,11 +224,11 @@ We can now try to determine the library type of our data.
 >    > Single-End (SE) | "++,--" | "FR Second Strand" | "Second Strand F/FR" | "yes" | "1"
 >    > SE | "+-,-+" | "FR First Strand" | "First Strand R/RF" | "reverse" | "2"
 >    > SE,PE | undecided | "FR Unstranded" | default | "no" | "0"
->    > 
+>    >
 >    {: .comment}
 >    
 >    > ### :question: Question
->    > 
+>    >
 >    > 1. Which fraction of the different type of library type?
 >    > 2. Which library type do you chose? What is the correspondance in **HISAT2**?
 >    >
@@ -261,7 +267,7 @@ We can now map all the RNA sequences on the *Drosophila melanogaster* genome usi
 >    > 1. How many paired reads were mapped 1 time? And how many paired reads were mapped more than 1 time?
 >    > 2. How many reads were mapped but without their mate pair?
 >    > 3. What is the overall alignment rate?
->    > 
+>    >
 >    >    <details>
 >    >    <summary>Click to view answer</summary>
 >    >    <ol type="1">
@@ -279,7 +285,7 @@ We can now map all the RNA sequences on the *Drosophila melanogaster* genome usi
 >
 > 1. What is a BAM file?
 > 2. What does such file contain?
-> 
+>
 >    <details>
 >    <summary>Click to view answer</summary>
 >    <ol type="1">
@@ -294,7 +300,7 @@ The mapping exercise worked for you? Great! :tada:
 > ### :pencil2: (Optional) Hands-on: Map other datasets
 >
 > You can do the same process on the other sequence files available on [Zenodo](http://dx.doi.org/10.5281/zenodo.290221)
-> 
+>
 > - Paired-end data
 >     - `GSM461178_untreat_paired_chr4_R1` and `GSM461178_untreat_paired_chr4_R2`
 >     - `GSM461180_treat_paired_chr4_R1` and `GSM461180_treat_paired_chr4_R2`
@@ -311,7 +317,7 @@ The mapping exercise worked for you? Great! :tada:
 
 The BAM file contains information about where the reads are mapped on the reference genome. But it is binary file and with the information for more than 3 millions of reads, it makes it difficult to visualize it, to inspect how the reads are mapped on the reference genome.
 
-There is 
+There is
 
 > ### :pencil2: Hands-on: Inspection of HISAT2 results
 >
@@ -328,7 +334,7 @@ There is
 >    > 2. What does the horizontal bar in the following screenshot represent?
 >    >
 >    >    ![](../../images/junction_igv_screenshot.png)
->    > 
+>    >
 >    >    <details>
 >    >    <summary>Click to view answers</summary>
 >    >    <ol type="1">
@@ -352,8 +358,8 @@ There is
 >    >
 >    > 1. What does the vertical bar graph represent? And the numbered arcs?
 >    > 2. What does the number means?
->    > 3. Why do we observe 4 different blue group of linked boxes on the bottom? 
->    > 
+>    > 3. Why do we observe 4 different blue group of linked boxes on the bottom?
+>    >
 >    >    <details>
 >    >    <summary>Click to view answers</summary>
 >    >    <ol type="1">
@@ -371,12 +377,12 @@ There is
 >
 {: .hands_on}
 
-After the mapping, we have in the generated mapping file the information about where the reads are mapped on the reference genome. So for each mapped read, we know where it is mapped and how good it was mapped. 
+After the mapping, we have in the generated mapping file the information about where the reads are mapped on the reference genome. So for each mapped read, we know where it is mapped and how good it was mapped.
 
 The next step in the RNA-Seq data analysis is quantification of expression level of the genomic features (gene, transcript, exons, ...) to be able then to compare several samples for the different expression analysis. The quantification consist into taking each known genomic feature (*e.g.* gene) of the reference genome and then counting how many reads are mapped on this genomic feature. So, in this step, we start with an information per mapped reads to end with an information per genomic feature.
 
 > ### :nut_and_bolt: Comment
-> 
+>
 > The quantification depends on the definition of the genomic features of the reference genome, and then on the annotations. We strongly recommend you to use an annotation corresponding to the same version of the reference genome you used for the mapping.
 {: .comment}
 
@@ -413,9 +419,9 @@ The recommended mode is "union", which counts overlaps even if a read only share
 >
 >    > ### :question: Question
 >    >
->    > 1. Which information does the result file contain? 
+>    > 1. Which information does the result file contain?
 >    > 2. Which feature has the most reads mapped on it?
->    > 
+>    >
 >    >    <details>
 >    >    <summary>Click to view answers</summary>
 >    >    <ol type="1">
@@ -452,7 +458,7 @@ This expression analysis is estimated from read counts and attempts are made to 
 - Division of every gene count by the geometric mean
 - Use of the median of these ratios as sample's size factor for normalization
 
-Multiple factors with several levels can then be incorporated in the analysis. With the normalization, we can then compare with statistical liability the gene expression of different levels of a factor. 
+Multiple factors with several levels can then be incorporated in the analysis. With the normalization, we can then compare with statistical liability the gene expression of different levels of a factor.
 
 In our example, we have samples with two varying factors that can explain differences in gene expression:
 
@@ -462,7 +468,7 @@ In our example, we have samples with two varying factors that can explain differ
 Here treatment is the primary factor which we are interested in. The sequencing type is some further information that we know about the data that might effect the analysis. This particular multi-factor analysis allows us to assess the effect of the treatment taking also the sequencing type into account.
 
 > ### :nut_and_bolt: Comment
-> 
+>
 > We recommend you to add as many factors as you think that may affect the gene expression. It can be the sequencing type like here, but it can also be the manipulation (if different persons are involved in the library preparation), ...
 {: .comment}
 
@@ -483,7 +489,7 @@ Here treatment is the primary factor which we are interested in. The sequencing 
 >
 >       > ### :bulb: Tip
 >       >
->       > You can select several files by keeping the CTRL (or COMMAND) key pressed and clicking on the interesting files 
+>       > You can select several files by keeping the CTRL (or COMMAND) key pressed and clicking on the interesting files
 >       {: .tip}
 >
 >    - "Sequencing" as second factor with "PE" and "SE" as levels and selection of count files corresponding to both levels
@@ -515,7 +521,7 @@ The first output of **DESeq2** is a tabular file. The columns are:
 >    > ### :question: Question
 >    >
 >    > How many genes have a significant change in gene expression between these conditions?
->    > 
+>    >
 >    > <details>
 >    > <summary>Click to view answers</summary>
 >    > To filter, you need to add the expression "c7&lt;0.05". And we get 751 genes (5.05%) with a significant change in gene expression between treated and untreated samples.
@@ -536,7 +542,7 @@ The first output of **DESeq2** is a tabular file. The columns are:
 >    > ### :question: Question
 >    >
 >    > Are there more upregulated or downregulated genes in the treated samples?
->    > 
+>    >
 >    > <details>
 >    > <summary>Click to view answers</summary>
 >    > To obtain the up-regulated genes, we filter the previously generated file (with the significant change in gene expression) with the expression "c3>0" (the log2 fold changes must be greater than 0). We obtain 331 genes (44.07% of the genes with a significant change in gene expression). For the down-regulated genes, we did the inverse and we 420 genes (55.93% of the genes with a significant change in gene expression)
@@ -556,7 +562,7 @@ In addition to the list of genes, **DESeq2** outputs a graphical summary of the 
     >
     > 1. What is the first axis separating?
     > 2. And the second axis?    
-    > 
+    >
     >    <details>
     >    <summary>Click to view answers</summary>
     >    <ol type="1">
@@ -572,7 +578,7 @@ In addition to the list of genes, **DESeq2** outputs a graphical summary of the 
     > ### :question: Questions
     >
     > How are the samples grouped?
-    > 
+    >
     >    <details>
     >    <summary>Click to view answers</summary>
     >    <ol type="1">    
@@ -610,7 +616,7 @@ The query to DAVID can be done only on 100 genes. So, we will need to select the
 >
 >    > ### :question: Questions
 >    >
->    > What functional categories are the most represented? 
+>    > What functional categories are the most represented?
 >    >  
 >    > <details>
 >    > <summary>Click to view answers</summary>
@@ -635,19 +641,19 @@ The query to DAVID can be done only on 100 genes. So, we will need to select the
 
 Now, we would like to know the differential exon usage between treated (PS depleted) and untreated samples using RNA-seq exon counts. We will rework on the mapping results we generated previously.
 
-We will use [DEXSeq](http://www.bioconductor.org/packages/release/bioc/html/DEXSeq.html). DEXSeq detects high sensitivity genes, and in many cases exons, that are subject to differential exon usage. But first, as for the differential gene expression, we need to count the number of reads mapping the exons. 
+We will use [DEXSeq](http://www.bioconductor.org/packages/release/bioc/html/DEXSeq.html). DEXSeq detects high sensitivity genes, and in many cases exons, that are subject to differential exon usage. But first, as for the differential gene expression, we need to count the number of reads mapping the exons.
 
 ## Count the number of reads per exon
 
-This step is similar to the step of [counting the number of reads per annotated gene](#count-the-number-of-reads-per-annotated-gene). Here instead of HTSeq-count, we are using DEXSeq-Count. 
+This step is similar to the step of [counting the number of reads per annotated gene](#count-the-number-of-reads-per-annotated-gene). Here instead of HTSeq-count, we are using DEXSeq-Count.
 
 > ### :pencil2: Hands-on: Counting the number of reads per exon
 >
 > 1. **DEXSeq-Count** :wrench:: Use the **DEXSeq-Count** to prepare the *Drosophila* annotations (`Drosophila_melanogaster.BDGP5.78.gtf`) to extract only exons with corresponding gene ids
->     - "Prepare annotation" of "Mode of operation" 
+>     - "Prepare annotation" of "Mode of operation"
 >
 >    The output is again a GTF file that is ready to be used for counting
-> 
+>
 > 4. **DEXSeq-Count** :wrench:: Count reads using **DEXSeq-Count** with
 >     - HISAT2 output as "Input bam file"
 >     - The formatted GTF file
@@ -656,7 +662,7 @@ This step is similar to the step of [counting the number of reads per annotated 
 >    > ### :question: Question
 >    >
 >    > Which exon has the most read mapped on it? From which gene has this exon beed extracted? Is it similar to the previous result with HTSeq-count?
->    > 
+>    >
 >    > <details>
 >    > <summary>Click to view answers</summary>
 >    > FBgn0017545:004 is the exon with the most read mapped on it. It is part of FBgn0017545, the feature with the most reads mapped with HTSeq-count
@@ -666,7 +672,7 @@ This step is similar to the step of [counting the number of reads per annotated 
 
 ## Differential exon usage
 
-DEXSeq usage is similar to DESeq2. It uses similar statistics to find differentially used exons. 
+DEXSeq usage is similar to DESeq2. It uses similar statistics to find differentially used exons.
 
 As for DESeq2, in the previous step, we counted only reads that mapped to exons on chromosome 4 and for only one sample. To be able to identify differential exon usage induced by PS depletion, all datasets (3 treated and 4 untreated) must be analyzed with the similar procedure. For time saving, we did that for you. The results are available on [Zenodo](http://dx.doi.org/10.5281/zenodo.290221):
 
@@ -717,7 +723,7 @@ Similarly to DESeq2, DEXSeq generates a table with:
 >    > ### :question: Question
 >    >
 >    > How many exons have a significant change in usage between these conditions?
->    > 
+>    >
 >    > <details>
 >    > <summary>Click to view answers</summary>
 >    > We get 38 exons (12.38%) with a significant usage change between treated and untreated samples

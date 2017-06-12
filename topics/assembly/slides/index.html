@@ -1,0 +1,335 @@
+---
+layout: introduction_slides
+topic_name: assembly
+logo: "GTN"
+class: enlarge120
+---
+.enlarge120[
+
+# ***De novo* Genome Assembly**
+
+]
+
+#### With thanks to T Seemann, D Bulach, I Cooke and Simon Gladman
+---
+.enlarge120[
+
+# ***De novo* assembly**
+
+]
+
+.pull-left[
+
+**The process of reconstructing the original DNA sequence from the fragment reads alone.**
+
+* Instinctively like a jigsaw puzzle
+
+  * Find reads which "fit together" (overlap)
+  * Could be missing pieces (sequencing bias)
+  * Some pieces will be dirty (sequencing errors)
+
+]
+
+.pull-right[ ![](../images/Humpty.jpg) ]
+
+---
+
+# **Another View**
+
+![](../images/newspaper.png)
+
+---
+
+# **Assembly: An Example**
+
+---
+
+# **A small "genome"**
+
+![](../images/shakespear1.png)
+
+---
+
+# **Shakespearomics**
+
+![](../images/shakespear2.png)
+
+---
+
+# **Shakespearomics**
+
+![](../images/shakespear3.png)
+
+---
+
+# **Shakespearomics**
+
+![](../images/shakespear4.png)
+
+---
+
+# **So far, so good!**
+
+---
+
+# **The Awful Truth**
+
+![](../images/notsimply.png)
+
+## "Genome assembly is impossible." - A/Prof. Mihai Pop
+
+---
+.enlarge120[
+
+# **Why is it so hard?**
+
+]
+
+.pull-left[
+* Millions of pieces
+  * Much, much shorter than the genome
+  * Lots of them look similar
+* Missing pieces
+  * Some parts can't be sequenced easily
+* Dirty Pieces
+  * Lots of errors in reads
+]
+
+.pull-right[ ![](../images/worlds_hardest.png) ]
+
+---
+
+# **Assembly recipe**
+
+* Find all overlaps between reads
+  * Hmm, sounds like a lot of work..
+* Build a graph
+  * A picture of the read connections
+* Simplify the graph
+  * Sequencing errors will mess it up a lot
+* Traverse the graph
+  * Trace a sensible path to produce a consensus
+
+---
+
+![](../images/olc_pic.png)
+
+---
+
+# **A more realistic graph**
+
+![](../images/real_graph.png)
+
+---
+
+# .image-15[![](../images/nofun.png)] **What ruins the graph?**
+
+* Read errors
+  * Introduces false edges and nodes
+
+* Non haploid organisms
+  * Heterozygosity causes lots of detours
+
+* Repeats
+  * If they are longer than the read length
+  * Causes nodes to be shared, locality confusion.
+
+---
+
+# **Repeats**
+
+---
+.enlarge120[
+# **What is a repeat?**
+]
+
+.pull-left[
+
+#### ***A segment of DNA which occurs more than once in the genome sequence***
+
+* Very common
+  * Transposons (self replicating genes)
+  * Satellites (repetitive adjacent patterns)
+  * Gene duplications (paralogs)
+
+]
+
+.pull-right[
+
+![](../images/triplets.png)
+
+]
+
+---
+
+# **Effect on Assembly**
+
+![](../images/repeat_effect.png)
+
+---
+.enlarge120[
+# **The law of repeats** .image-15[![](../images/repeatafterme.png)]
+]
+
+## **It is impossible to resolve repeats of length S unless you have reads longer than S**
+
+## **It is impossible to resolve repeats of length S unless you have reads longer than S**
+
+---
+
+# **Scaffolding**
+
+---
+.enlarge120[
+# **Beyond contigs**
+]
+
+.pull-left[
+
+Contig sizes are limited by:
+
+* the length of the repeats in your genome
+  * Can't change this
+
+
+* the length (or "span") of the reads
+  * Use long read technology
+  * Use tricks with other technology
+
+]
+
+---
+.enlarge120[
+# **Types of reads**
+]
+
+.pull-left[.enlarge120[**Example fragment**]]
+
+
+.remark-code[.enlarge120[atcgtatgatcttgagattctctcttcccttatagctgctata]]
+
+.pull-left[.enlarge120[**"Single-end" read**]]
+
+
+.remark-code[.enlarge120[**atcgtatg**atcttgagattctctcttcccttatagctgctata]]
+
+sequence *one* end of the fragment
+
+.pull-left[.enlarge120[**"Paired-end" read**]]
+
+
+.remark-code[.enlarge120[**atcgtatg**atcttgagattctctcttcccttatag**ctgctata**]]
+
+sequence both ends of the same fragment
+
+**We can exploit this information!**
+---
+
+.enlarge120[# **Scaffolding**]
+
+* **Paired end reads**
+  * Known sequences at each end of fragment
+  * Roughly known fragment length
+
+* **Most ends will occur in same contig**
+
+* **Some will occur in different contigs**
+  * ***evidence that these contigs are linked***
+---
+
+.enlarge120[# **Contigs to Scaffolds**]
+
+![](../images/scaffolding.png)
+
+---
+
+.enlarge120[# **Assessing assemblies**]
+
+* We desire
+  * Total length similar to genome size
+  * Fewer, larger contigs
+  * Correct contigs
+
+* Metrics
+  * No generally useful measure. (No real prior information)
+  * Longest contigs, total base pairs in contigs, **N50**, ...
+
+---
+
+.enlarge120[# **The "N50"**]
+
+.enlarge120[***The length of that contig from which 50% of the bases are in it and shorter contigs***]
+
+* Imagine we have 7 contigs with lengths:
+  * 1, 1, 3, 5, 8, 12, 20
+
+* Total
+  * 1+1+3+5+8+12+20 = 50
+
+* N50 is the "halfway sum" = 25
+  * 1+1+3+5+8+**12** = 30 (>25) so **N50 is 12**
+
+---
+
+.enlarge120[# **2 levels of assembly**]
+
+* Draft assembly
+  * Will contain a number of non-linked scaffolds with gaps of unknown sequence
+  * Fairly easy to get to
+
+* Closed (finished) assembly
+  * One sequence for each chromosome
+  * Takes a **lot** more work
+  * Small genomes are becoming easier with long read tech
+  * Large genomes are the province of big consortia (e.g. Human Genome Consortium)
+
+---
+.enlarge120[# **How do I do it?**]
+---
+.enlarge120[
+# **Example**
+
+* Culture your bacterium
+
+
+* Extract your genomic DNA
+
+
+* Send it to your sequencing centre for Illumina sequencing
+  * 250bp paired end
+
+
+* Get back 2 files
+  * .remark-code[MRSA_R1.fastq.gz]
+  * .remark-code[MRSA_R2.fastq.gz]
+
+
+* ***Now what?***
+]
+
+---
+.enlarge120[# **Assembly tools**
+
+* **Genome**
+  * **Velvet, Velvet Optimizer, Spades,** Abyss, MIRA, Newbler, SGA, AllPaths, Ray, SOAPdenovo, ...
+
+
+* Meta-genome
+  * Meta Velvet, SGA, custom scripts + above
+
+
+* Transcriptome
+  * Trinity, Oases, Trans-abyss
+
+***And many, many others...***
+
+]
+
+---
+.enlarge120[
+# **Assembly Exercise #1**
+
+* We will do a simple assembly using **Velvet** in **Galaxy**
+* We can do a number of different assemblies and compare some assembly metrics.
+
+]

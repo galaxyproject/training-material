@@ -1,10 +1,16 @@
+---
+layout: tutorial_hands_on
+topic_name: proteomics
+tutorial_name: secretome-prediction
+---
+
 # Secretome Prediction using GO annotations and localization prediction
 
 ## Introduction
 
-The cellular secretome contains both proteins that are secreted by cells and proteins that are shed from the cellular surface. Here, we describe an approach to predict those proteins in an input list that would be expected in the cellular secretome. This approach combines Gene Ontology (GO) annotation and the [WoLF PSORT](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC1933216/) algorithm for localization prediction. 
+The cellular secretome contains both proteins that are secreted by cells and proteins that are shed from the cellular surface. Here, we describe an approach to predict those proteins in an input list that would be expected in the cellular secretome. This approach combines Gene Ontology (GO) annotation and the [WoLF PSORT](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC1933216/) algorithm for localization prediction.
 
-We chose to include all proteins that are annotated as, or predicted to be, lysosomal proteins. Lysosomal proteins are routinely secreted by malignant and non-malignant cells in high amounts, due to "leakiness" of the mannose-6-phosphate receptor pathway [1,2]. 
+We chose to include all proteins that are annotated as, or predicted to be, lysosomal proteins. Lysosomal proteins are routinely secreted by malignant and non-malignant cells in high amounts, due to "leakiness" of the mannose-6-phosphate receptor pathway [1,2].
 Furthermore, we chose to exclude proteins annotated as being part of extracellular organelles, e.g. exosomes. While exosomes are secreted by malignant and non-malignant cells, exosomal proteins are expected in the secretome at very low amounts, if not especially enriched for.
 
 For secretome prediction, we combine localization data from the Gene Ontology database with a classical protein localization prediction algorithm (WoLF-PSORT). The workflow was designed for sensitivity, i.e. a protein predicted by *at least one of the used tools* will be included in the output. To change this, follow the instructions [below](#nut_and_bolt-comment-customizing-the-workflow).
