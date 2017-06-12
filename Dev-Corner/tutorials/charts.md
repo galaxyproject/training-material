@@ -227,11 +227,11 @@ In this section we will select a `PDB`-file from the Protein Databank and visual
 > 7. Find your visualization and double-click on its logo.
 >
 
-## Section 2
+## Section 2 - Add a select field
 
 Lets build a form. TODO: Links https://docs.galaxyproject.org/en/latest/dev/schema.html. Explain how XML-parameters map to this json format.
 
-## 2.1 Add input parameters
+## 2.1 Add a select field
 
 ```js
 define( [], function() {
@@ -282,7 +282,7 @@ $ rm static/repository/build/myviz_pdb.js
 $ webpack
 ```
 
-## Part 3
+## Section 3 - Adding numeric sliders
 
 Add more options to configure.
 
