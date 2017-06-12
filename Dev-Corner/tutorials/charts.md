@@ -184,20 +184,19 @@ Now that we have completed the *Charts* plugin definition, it is time to bundle 
 > ### Tasks
 >
 > 1. Navigate to *Chart*'s root directory:
-> ```bash
-> $ cd $GALAXY_ROOT/config/plugins/visualizations/charts
-> ```
+>   ```bash
+>   $ cd $GALAXY_ROOT/config/plugins/visualizations/charts
+>   ```
 >
 > 2. Install `node-modules`:
-> ```bash
-> $ npm install
-> ```
+>   ```bash
+>   $ npm install
+>   ```
 >
 > 2. Run `webpack` to build the plugin:
-> ```bash
-> $ webpack
-> ```
->
+>   ```bash
+>   $ webpack
+>   ```
 
 Lets go and test it.
 
