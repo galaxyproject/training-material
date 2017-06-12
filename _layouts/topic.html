@@ -19,7 +19,7 @@ layout: base
             {% for requirement in topic.requirements %}
                 <li>
                     {% if requirement.type == "internal" %}
-                    <a href="{{ site.url }}{{ requirement.link }}">{{ requirement.title }}</a>
+                    <a href="{{ site.url }}/topics{{ requirement.link }}">{{ requirement.title }}</a>
                     {% elsif material.type == "external" %}
                     <a href="{{ requirement.link }}">{{ requirement.title }}</a>
                     {% endif %}
@@ -64,15 +64,15 @@ layout: base
                         {% if material.hands_on == "external" %}
                         <a href="{{ material.hands_on_url }}">:link:</a>
                         {% elsif material.hands_on == "yes" %}
-                        <a href="{{ site.url }}{{ page.url }}tutorials/{{ material.name }}">:book:</a>
+                        <a href="{{ site.url }}{{ page.url }}tutorials/{{ material.name }}/tutorial.html">:book:</a>
                         {% elsif material.hands_on == "github" %}
-                        <a href="{{ site.github_repository }}/tree/master/{{ topic.name }}/tutorials/{{ material.name }}.md">:book:</a>
+                        <a href="{{ site.github_repository }}/tree/master/topics/{{ topic.name }}/tutorials/{{ material.name }}/tutorial.md">:book:</a>
                         {% endif %}
                     </td>
 
                     <td>
                         {% if material.slides == "yes" %}
-                        <a href="{{ site.url }}{{ page.url }}slides/{{ material.name }}">:mortar_board:</a>
+                        <a href="{{ site.url }}{{ page.url }}/tutorials/{{ material.name }}/slides.html">:mortar_board:</a>
                         {% endif %}
                     </td>
 
@@ -141,7 +141,7 @@ layout: base
         {% for contributor in topic.contributors %}
             <li>
             {% if contributor.github_username != "" %}
-                <a href="https://github.com/{{ contributor.github_username }}">{{ contributor.name }}</a> 
+                <a href="https://github.com/{{ contributor.github_username }}">{{ contributor.name }}</a>
             {% else %}
                 {{ contributor.name }}
             {% endif %}

@@ -1,0 +1,284 @@
+name: "dev"
+type: "admin-dev"
+title: "Development in Galaxy"
+summary: "Galaxy is an open-source project. Everyone can contribute to its development with core Galaxy development, integration of softwares in Galaxy environment, ..."
+docker_image: ""
+
+requirements:
+-
+    title: "Galaxy introduction"
+    type: "internal"
+    link: "/introduction/"
+
+material:
+-
+    title: "Introduction"
+    type: "introduction"
+    slides: "yes"
+-
+    title: "Contributing with GitHub"
+    type: "tutorial"
+    name: "github-contribution"
+    zenodo_link: ""
+    galaxy_tour: ""
+    hands_on: "no"
+    slides: "yes"
+
+    questions:
+    - ""
+    - ""
+
+    objectives:
+    - ""
+    - ""
+    - ""
+
+    time_estimation: "1d/3h/6h"
+
+    key_points:
+    - ""
+    - ""
+    - ""
+    - "..."
+-
+    title: "Tool development and integration into Galaxy"
+    type: "tutorial"
+    name: "tool-integration"
+    zenodo_link: ""
+    galaxy_tour: ""
+    hands_on: "external"
+    hands_on_url: "http://planemo.readthedocs.io/en/latest/writing_standalone.html"
+    slides: "yes"
+
+    questions:
+    - "What is a tool for Galaxy?"
+    - "How to build a tool/wrapper with the good practices?"
+    - "How to deal with the tool environment?"
+
+    objectives:
+    - "Discover what is a wrapper and its structure"
+    - "Use the Planemo utilities to develop a good wrapper"
+    - "Deal with the dependencies"
+    - "Write functional tests"
+    - "Make a tool ready for publishing in a ToolShed"
+
+    time_estimation: "6h"
+
+    key_points:
+    - "Galaxy Tool Syntax"
+    - "Use Planemo"
+    - "Use Conda"
+    - "Use GitHub"
+    - "Use Travis"
+    - "No more excuse to develop crappy Galaxy tools"
+-
+    title: "Tool Shed: sharing Galaxy tools"
+    type: "tutorial"
+    name: "toolshed"
+    zenodo_link: ""
+    galaxy_tour: ""
+    hands_on: "no"
+    slides: "yes"
+
+    questions:
+    - "What is a Tool Shed?"
+    - "How to install tools and workflows from a Tool Shed into a Galaxy instance?"
+    - "What are the Tool Shed repository types?"
+    - "How to publish with Planemo?"
+
+    objectives:
+    - "Discover what is a Tool Shed"
+    - "Be able to install tools and workflows from a Tool Shed into a Galaxy instance"
+    - "Be able to publish tools with Planemo"
+
+    time_estimation: "3h"
+
+    key_points:
+    - "Use Planemo"
+    - "Contribute to the Main Tool Shed"
+-
+    title: "Galaxy Interactive Tours"
+    type: "tutorial"
+    name: "interactive-tours"
+    zenodo_link: ""
+    galaxy_tour: ""
+    hands_on: "no"
+    slides: "yes"
+
+    questions:
+    - "What is a Galaxy Interactive Tour?"
+    - "How to create a Galaxy Interactive Tour?"
+
+    objectives:
+    - "Discover what is a Galaxy Interactive Tour"
+    - "Be able to create a Galaxy Interactive Tour"
+    - "Be able to add a Galaxy Interactive Tour in a Galaxy instance"
+
+    time_estimation: "3h"
+
+    key_points:
+    - "An Interactive Tour is easy to create: just a yaml file to fill"
+    - "Use the Developper Tools of find the JQuery Selector"
+    - "Help yourself by using the available web plugins and record an interactive tour"
+
+-
+    title: "Galaxy Interactive Environments"
+    type: "tutorial"
+    name: "interactive-environments"
+    zenodo_link: ""
+    galaxy_tour: ""
+    hands_on: "no"
+    slides: "yes"
+
+    questions:
+    - "What are Galaxy Interactive Environments (GIEs)?"
+    - "How to enable GIEs in Galaxy?"
+    - "How to develop your own GIE?"
+
+    objectives:
+    - "Implement a Hello-World Galaxy Interactive Environment"
+
+    requirements:
+    -
+        title: "Docker basics"
+        type: "external"
+        link: ""
+
+    time_estimation: "1.5h"
+
+    key_points:
+    - "Interactive Environments offer acces to third-party applications within Galaxy"
+    - "Interactive Environments run in a docker images for sandboxing and easy dependency management"
+
+-
+    title: "Visualizations in Galaxy"
+    type: "tutorial"
+    name: "visualization"
+    zenodo_link: ""
+    galaxy_tour: ""
+    hands_on: "yes"
+    slides: "yes"
+
+    questions:
+    - "How can visualization plugins benefit science?"
+
+    objectives:
+    - "Implement a first Galaxy visualization"
+    - "Understand the client side vs. server side principle"
+
+    requirements:
+    -
+        title: "Javascript knowledge"
+        type: "external"
+        link: ""
+
+    time_estimation: "1.5h"
+
+    key_points:
+    - "Visualizations require a different way of thinking: server and client side; downloading files rather than system level access"
+    - "Interactivity is what makes visualizations different from static tools"
+    - "Requires understanding of both the Galaxy ecosystem as well as HTML5/JS"
+    - "Performance is more important than for static Galaxy tools"
+
+
+-
+    title: "BioBlend module, a Python library to use Galaxy API"
+    type: "tutorial"
+    name: "bioblend-api"
+    zenodo_link: ""
+    galaxy_tour: ""
+    hands_on: "no"
+    slides: "yes"
+
+    questions:
+    - "What is the use of BioBlend?"
+    - "How to use Galaxy through command line?"
+
+    objectives:
+    - "Get familiar with BioBlend using IPython"
+    - "Launch a Galaxy job / Visualize your actions with Galaxy"
+    - "Launch a Galaxy workflow / Visualize your actions with Galaxy"
+
+    requirements:
+    -
+        title: "IPython"
+        type: "external"
+        link: "https://ipython.org"
+
+    time_estimation: "2h"
+
+    key_points:
+    - "Play with IPython"
+    - "Understand the job launching in Galaxy with BioBlend"
+    - "Understand the workflow launching in Galaxy with BioBlend"
+    - "Be able to adapt this knowledge to personal workflows"
+
+-
+    title: "Galaxy Webhooks"
+    type: "tutorial"
+    name: "webhooks"
+    zenodo_link: ""
+    galaxy_tour: ""
+    hands_on: "no"
+    slides: "yes"
+    questions:
+    - "What are Galaxy Webhooks?"
+    - "How to create them?"
+    objectives:
+    - "Discover what Galaxy Webhooks are"
+    - "Be able to create Webhooks"
+    - "Be able to add a Galaxy Webhook in a Galaxy instance"
+    time_estimation: "1h"
+    key_points:
+    - "A Galaxy Webhook provides an easy way to customize the Galaxy UI with plugins"
+    - "Right now there are 4 entry points: tool, workflow, masthead, history-menu"
+
+maintainers:
+-
+    name: "Gildas Le Corguillé"
+    github_username: "lecorguille"
+    email: ""
+-
+    name: "Bérénice Batut"
+    github_username: "bebatut"
+    email: ""
+
+contributors:
+-
+    name: "Anthony Bretaudeau"
+    github_username: "abretaud"
+    email: ""
+-
+    name: "Bérénice Batut"
+    github_username: "bebatut"
+    email: ""
+-
+    name: "Gildas Le Corguillé"
+    github_username: "lecorguille"
+    email: ""
+-
+    name: "Loraine Brillet-Guéguen"
+    github_username: "loraine-gueguen"
+    email: ""
+-
+    name: "Stéphanie Le Gras"
+    github_username: "slegras"
+    email: ""
+-
+    name: "Saskia Hiltemann"
+    github_username: "@shiltemann"
+    email: ""
+-
+    name: "Youri Hoogstrate"
+    github_username: "@yhoogstrate"
+    email: ""
+-
+    name: "Olivia Doppelt-Azeroual"
+    github_username: "odoppelt"
+    email: ""
+-
+    name: "Fabien Mareuil"
+    github_username: "fmareuil"
+    email: ""
+
+references:

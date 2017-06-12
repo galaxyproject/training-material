@@ -67,17 +67,25 @@ For beginners, the GitHub interface will help you in the process of editing a fi
 
 # How is the training material structured?
 
-Each training material is related to a topic. All training materials (slides, tutorials, ...) related to a topic are found in a dedicated directory (e.g. `Exome-seq` directory contains the material related to exome sequencing analysis). These repositories have to have the following structures (as in `Exome-seq` directory):
+Each training material is related to a topic. All training materials (slides, tutorials, ...) related to a topic are found in a dedicated directory (e.g. `Exome-seq` directory contains the material related to exome sequencing analysis). Each topic have the following structure:
 
 ```
+├── README.md
+├── metadata.yaml
+├── images
 ├── docker
 │   ├── Dockerfile
-│   ├── README.md
-│   ├── tools.yaml
-├── images
-├── README.md
 ├── slides
+│   ├── index.html
 ├── tutorials
+│   ├── tutorial1
+│   │   ├── tutorial.md
+│   │   ├── slides.html
+│   │   ├── metadata.yaml
+│   │   ├── tools.yaml
+│   │   ├── data-library.yaml
+│   │   ├── workflow.ga
+│   │   ├── tour.yaml
 ```
 
 > Want to add a new topic? Check out [how to add a new topic](#how-do-i-add-a-new-topic).
@@ -90,9 +98,15 @@ Images shared between several topics are in the `shared/images` directory at the
 
 All images for the slides must be in `images` directory. The images must be in good quality. The sources (`svg` or other) of the images must also be added to the `images` directory. We encourage you to use [yEd](http://www.yworks.com/products/yed) to easily generate diagrams and [Inkscape](https://inkscape.org/en/) for any other images.
 
+## `slides` directory
+
+A slide deck is expected for every topic: the one with a general introduction of the topic. The slides are rendered using `remark.js` but written in Markdown to facilitate collaboration. 
+
+> [Check out how to fill introduction slides](#how-do-i-fill-introduction-slides).
+
 ## `tutorials` directory
 
-This directory collects the tutorials related to the topic. The tutorials are hands-on built for workshop and self-training.
+This directory collects the tutorials related to the topic, one per subdirectory. The tutorials are hands-on built for workshop and self-training, with description of the whole infrastructure needed to run the tutorial on any Galaxy instance (tools, data library, etc).
 
 The templates for the tutorials are different from the other pages to help users to focus on the content of the tutorial. To improve the output of the tutorial, several metadata are mandatory for every tutorials, such as the requirements or the objectives of the tutorials. Boxes are also used to highlight some key points as the hands-on or the tips.
 
@@ -103,10 +117,6 @@ The content of each tutorial is generated with [Jekyll](http://jekyllrb.com/) fr
 > - [Check out how to fill a new tutorial?](#how-do-i-fill-a-tutorial-hands-on)
 
 Sometimes, an hands-on tutorial is not the most appropriate format for a tutorial and slides are better. The content must be then added in the `slides` directory.
-
-## `slides` directory
-
-A slide deck is expected for every topic: the one with a general introduction of the topic. The slides are rendered using `remark.js` but written in Markdown to facilitate collaboration. [Check out how to fill introduction slides](#how-do-i-fill-introduction-slides) or [how to fill tutorial slides](#how-do-i-fill-tutorial-slides).
 
 ## `docker` directory
 
@@ -149,45 +159,32 @@ You can then visualize locally ([http://localhost:4000/](http://localhost:4000/)
 
 ## How do I add a new topic?
 
-1. Add a `yml` file into the `metadata` directory similar to the one for [`RNA-Seq`](metadata/RNA-Seq.yml) and fill it with meta information on the topic
+1. Copy the [`template`](template) directory, rename it and move it to the [`topic`](topic)
+2. Fill the meta information about the topic in the `metadata.yaml` file 
     - `name`: name of the topic (same name as the `yml` file and the directory)
     - `title`: title of the topic
     - `type`: targeted users (`"use"` or `""`)
     - `summary`: summary of the content of the topic
     - `docker_image`: name of the [Docker image](#docker-directory) with the tools for this topic
     - `requirements`: list of requirements general for this topic, with a `title`, a `link` (relative for internal (inside training material) requirement or full for external requirement) and the type of link (`internal` or `external`)
-    - `material`: list of material available for this topic
-
-        For each material, you need to fill at least:
-
-        - `title`
-        - `type`: two possible types `introduction` or `tutorial`
-
-            > For introduction material, [how to fill introduction slides](#how-do-i-fill-introduction-slides)
-
-            > For tutorial material, check out [how to add a new tutorial](#how-do-i-add-a-new-tutorial)
-        - `slides` (`"yes"` or `"no"`): tell if slides are available for this material
-
-
     - `maintainers`: the two maintainers of the topic with their `name`, `github_username`, `email`
     - `contributors`: list of people who contributed to the topic with `name`, `github_username`, `email`
-    - `references`: list of references for this topic with `authors`, `title`, `link`, `summary`
 
     This information is used with [Jekyll](http://jekyllrb.com/) to generate the webpage related to the topic
 
-2. Copy the template directory, rename it (with the same name as the `yml` file one) and fill it
-    1. Change the `topic_name` in the `index.md` to fit the name of the directory and the name in `yml` file
-    2. Add introduction slides
+3. Fill the introduction slides
 
-        > Check out [how to fill introduction slides](#how-do-i-fill-introduction-slides)
+    > Check out [how to fill introduction slides](#how-do-i-fill-introduction-slides)
 
-    3. Add tutorials
+4. Fill tutorials
 
-        > Check out [how to add a new tutorial](#how-do-i-add-a-new-tutorial)
+    > Check out [how to add a new tutorial](#how-do-i-add-a-new-tutorial)  
+
 
 ## How do I add a new tutorial?
 
-1. Add the metadata about the tutorial in `material` section in the `yml` file of the related topic that is in `metadata` directory
+1. Add a new directory in the `tutorials` directory of the topic
+2. Add a `metadata.yaml` file and fill it
     - `title`: title of the tutorial
     - `type: "tutorial"`
     - `name`: name of the tutorial (name of the subdirectory where the files related to the tutorial will be stored)
@@ -205,19 +202,24 @@ You can then visualize locally ([http://localhost:4000/](http://localhost:4000/)
 
     ![](shared/images/tutorial_header.png)
 
-2. Fill the hands-on file
+2. Add and fill the `tutorial.md` hands-on
 
     > Check out [how to fill it](#how-do-i-fill-a-tutorial-hands-on)
 
-3. Add yourself as contributor for the topic in the `yml` file of the related topic that is in `metadata` directory
+3. (Not mandatory) Add and fill the `slides.html`
+4. Add and fill the `tools.yaml` file with the neeed tools (from the ToolShed) to run the tutorial 
+5. Add and fill the `data-library.yaml` file with the input data linked to Zenodo 
+6. Add and fill the `workflow.ga` file with the workflow generated from the tutorial
+7. Add and fill the `tour.yaml` file with the Galaxy Interactive Tour running the tutorial 
+8. (Not mandatory) Add and fill the `data-manager.yaml`
 
 ## How do I fill a tutorial hands-on?
 
-1. Check that the metadata about the tutorial in the `yml` file in `metadata` directory are filled and correct
+1. Check that the metadata about the tutorial in the `metadata.yaml` file are filled and correct
 
     They are used to automatically generate the header and the footer of the tutorials.
 
-2. Fill the Markdown file with the tutorial (after changing the `topic_name` and `tutorial_name`)
+2. Fill the `tutorial.md` with the tutorial
 
 The content of a tutorial hands-on is written in Markdown. They are rendered by [Jekyll](http://jekyllrb.com/) into the webpage for the tutorial.
 
@@ -375,7 +377,7 @@ Filling tutorial slides are similar a combination of filling introduction slides
 
 ## Maintainers
 
-Each training topic has one or two maintainers who act as editors. They are responsible for making sure issues and change requests are looked at. They have the final say over what is included in the training material related to the topic. But they are not responsible for writing training material content or deciding what lessons ought to exist, both will be coming from the community.
+Each training topic and tutorial has one or two maintainers who act as editors. They are responsible for making sure issues and change requests are looked at. They have the final say over what is included in the training material. But they are not responsible for writing training material content or deciding what lessons ought to exist, both will be coming from the community.
 
 ## Labels
 
