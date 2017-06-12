@@ -105,7 +105,8 @@ In the following sections we are going to discuss these files in more detail, cr
 
 ## 1.2 Your visualization needs a logo
 
-Each visualization is represented by a logo in the *Charts* interface. This makes it easier for users to find and configure their visualization. The logo should be in the `png`-file format. It will appear with a width of 120 pixels. Here's an example [logo](https://github.com/guerler/training-material/blob/master/Dev-Corner/tutorials/files/hands_on-charts/logo.png):
+Each visualization is represented by a logo in the *Charts* interface. This makes it easier for users to find and configure their visualization. The logo should be in the `png`-file format. It will appear with a width of 120 pixels.
+Here's an example [logo](https://github.com/guerler/training-material/blob/master/Dev-Corner/tutorials/files/hands_on-charts/logo.png):
 
 ![Specific region](/Dev-Corner/tutorials/files/hands_on-charts/logo.png)
 
