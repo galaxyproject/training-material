@@ -216,11 +216,11 @@ In this section we will select a `PDB`-file from the Protein Databank and visual
 >    $ run.sh
 >    ```
 >
-> 4. Upload the PDB file to your instance by pasting it the above link. 
+> 4. Open the uploader dialog, paste the above link and click on *Start*. 
 >
-> 5. Select the file in the history
+> 5. Close the upload dialog, and select the file from the history-panel on the right.
 >
-> 6. Click on the *diagram*-icon and select *Charts* 
+> 6. Click on the *diagram*-icon and select *Charts*.
 >
 > 7. Find your visualization and double-click on its logo.
 >
