@@ -172,7 +172,7 @@ The above wrapper does not do much yet, except requesting the minified plugin co
 > 
 > 1. Identify the parameter which is needed to initialize the plugin when calling [*pv.Viewer()*](http://pv.readthedocs.io/en/v1.8.1/viewer.html#pv.Viewer).
 >
-> 2. Which of the above wrapper components represents this parameter?
+> 2. Which of the wrapper option components represents this parameter?
 >
 > 3. Can you identify which `mode` settings are valid to render the structure with [*pv.Viewer.renderAs()*](http://pv.readthedocs.io/en/v1.8.1/viewer.html#pv.Viewer.renderAs)?
 
