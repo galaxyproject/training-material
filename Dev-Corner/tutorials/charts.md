@@ -233,7 +233,7 @@ In this section we will select a `PDB`-file from the Protein Databank and visual
 >
 > 1. Visit http://www.rcsb.org and select a protein structure e.g. [1ACB](http://www.rcsb.org/pdb/explore/explore.do?structureId=1acb)
 >
-> 2. Copy the link to its PDB-file
+> 2. Copy the link to the raw `PDB`-file e.g.
 >
 >    ```bash
 >    https://files.rcsb.org/view/1ACB.pdb
