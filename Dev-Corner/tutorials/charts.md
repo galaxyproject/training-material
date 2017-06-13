@@ -141,39 +141,65 @@ Each visualization has a configuration file named `config.js`. This file has con
 
 This configures the plugin's name and a description which will appear on the *Charts* selection interface. It also links the plugin to the `PDB`-file format, which means that for any history item of these file type the plugin will automatically become available. Keywords are optional and can help to improve the annotation.
 
-## 1.4 Wrap the 3rd-party code
+## 1.4 Adding a wrapper
 
-Add a wrapper to connect *Galaxy* with the *PV-Viewer* plugin
-http://pv.readthedocs.io/en/v1.8.1/viewer.html#pv.Viewer
-http://pv.readthedocs.io/en/v1.8.1/viewer.html#pv.Viewer.renderAs
+Now we will add a wrapper to connect *Charts* with the *PV-Viewer* plugin. The wrapper consists of a [*Backbone*](http://backbonejs.org) module written in *JavaScript*:
+ The wrapper receives an `options` dictionary with <b>four</b> items:
+ - *charts*  : The model of the current visualization with attributes, settings etc. 
+ - *process* : A [jQuery.Deferred()](https://api.jquery.com/jquery.deferred/) object to allow asynchronous data requests within the wrapper
+ - *dataset* : Details on the selected datasets such as url, ids etc. which can be used to access the dataset
+ - *targets* : The DOM ids of the container elements to draw into
 
 > ### Tasks
 >
-> ```js
-> define( [ 'visualizations/myviz/pdb/plugin' ], function( pv ) {
->     return Backbone.Model.extend({
->         initialize: function( options ) {
->             var viewer = pv.Viewer( document.getElementById( options.targets[ 0 ] ), {
->                 width       : 'auto',
->                 height      : 'auto',
->                 antialias   : true,
->                 outline     : true
->             });
->             $.ajax( {
->                 url     : options.dataset.download_url,
->                 success : function( response ) {
->                     var structure = pv.io.pdb( response );
->                     viewer.clear();
->                     viewer.renderAs( 'protein', structure, 'cartoon', {} );
->                     viewer.centerOn( structure );
->                     viewer.autoZoom();
->                     options.process.resolve();
->                 }
->             });
->         }
->     });
-> });
-> ```
+> 1. Create a file named `wrapper.js` which returns a *Backbone* model:
+>
+>    ```js
+>    define( [ 'visualizations/myviz/pdb/plugin' ], function( pv ) {
+>        return Backbone.Model.extend({
+>            <b>initialize: function( options ) {</b>
+>                // Add code to configure and execute the plugin here.
+>            }
+>        });
+>    });
+>
+> 2. Place it into your plugins directory at `myviz/pdb`.
+
+## 1.5 Loading the 3rd-party plugin
+
+The above wrapper does not do anything yet, except requesting the minified plugin code which we downloaded earlier. In the following section we will configure and activate the plugin. In order to do that we need to understand our 3rd-party plugin better. Usually this requires finding a working example and/or reading some documentation. Fortunately the PV-Viewer** comes with both. Let's take a look at http://pv.readthedocs.io/.
+
+> ### Tasks
+> 
+> What is the only required parameter in order to initialize the plugin by calling [*pv.Viewer()*](http://pv.readthedocs.io/en/v1.8.1/viewer.html#pv.Viewer)?
+>
+> Can you identify what valid `mode` settings the [*pv.Viewer.renderAs*](http://pv.readthedocs.io/en/v1.8.1/viewer.html#pv.Viewer.renderAs) function has?
+
+Now that we have learned the basics on how the viewer plugin works, we can initialize and load it in `wrapper.js`.
+
+> ### Tasks
+>
+> 1. Modify `wrapper.js` by adding the following code into the `initialize` function:
+> 
+>    ```js
+>       var viewer = pv.Viewer( document.getElementById( options.targets[ 0 ] ), {
+>            width       : 'auto',
+>            height      : 'auto',
+>            antialias   : true,
+>            outline     : true
+>       });
+>       $.ajax( {
+>            url     : options.dataset.download_url,
+>            success : function( response ) {
+>                var structure = pv.io.pdb( response );
+>                viewer.clear();
+>                viewer.renderAs( 'protein', structure, 'cartoon', {} );
+>                viewer.centerOn( structure );
+>                viewer.autoZoom();
+>                options.process.resolve();
+>            }
+>        });
+>    ```
 
 ## 1.5 Build the package
 
@@ -196,7 +222,7 @@ Now that we have completed the *Charts* plugin definition, it is time to bundle 
 >    $ webpack
 >    ```
 
-Lets go and test it.
+Lets test this.
 
 ## 1.6 Test the visualization
 
