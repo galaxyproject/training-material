@@ -166,7 +166,7 @@ Now we will add a wrapper to connect *Charts* with the *PV-Viewer* plugin. The w
 >
 > 2. Place it into your plugins directory at `myviz/pdb`.
 
-Our wrapper does not do much yet, except requesting the minified plugin code which we downloaded earlier. In this following section we will configure and activate the plugin. In order to do that we need to understand our 3rd-party plugin better. Usually this requires finding a working example and/or reading some documentation. Fortunately the PV-Viewer** comes with both. Let's take a look at http://pv.readthedocs.io/.
+Our wrapper does not do much yet, except requesting the minified plugin code which we downloaded earlier. In order to execute a 3rd-party plugin we need to understand our it better. Usually this requires finding a working example and/or reading some documentation. Fortunately the PV-Viewer** comes with both. Let's take a look at http://pv.readthedocs.io/.
 
 > ### Tasks
 > 
