@@ -251,7 +251,8 @@ In this section we will select a `PDB`-file from the Protein Databank and visual
 >
 > 7. Find your visualization and double-click on its logo.
 >
-<img src="/Dev-Corner/tutorials/files/hands_on-charts/pv_1.png" width="300" style="text-align: center;" >
+
+![First view](/Dev-Corner/tutorials/files/hands_on-charts/pv_1.png)
 
 ## Section 2 - Add a select field
 
