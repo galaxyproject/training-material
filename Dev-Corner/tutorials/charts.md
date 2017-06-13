@@ -170,9 +170,11 @@ The above wrapper does not do much yet, except requesting the minified plugin co
 
 > ### Tasks
 > 
-> 1. Identify the parameter which is needed to initialize the plugin by calling [*pv.Viewer()*](http://pv.readthedocs.io/en/v1.8.1/viewer.html#pv.Viewer). Which of the above wrapper components is this?
+> 1. Identify the parameter which is needed to initialize the plugin by calling [*pv.Viewer()*](http://pv.readthedocs.io/en/v1.8.1/viewer.html#pv.Viewer).
 >
-> 2. Can you identify what valid `mode` settings the [*pv.Viewer.renderAs*](http://pv.readthedocs.io/en/v1.8.1/viewer.html#pv.Viewer.renderAs) function has?
+> 2. Which of the above wrapper components represents this parameter?
+>
+> 3. Can you identify what valid `mode` settings the [*pv.Viewer.renderAs*](http://pv.readthedocs.io/en/v1.8.1/viewer.html#pv.Viewer.renderAs) function has?
 
 Now that we have learned the basics on how the viewer plugin works, we can initialize and load it in `wrapper.js`.
 
