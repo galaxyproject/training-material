@@ -166,21 +166,19 @@ Now we will add a wrapper to connect *Charts* with the *PV-Viewer* plugin. The w
 >
 > 2. Place it into your plugins directory at `myviz/pdb`.
 
-## 1.5 Loading the 3rd-party plugin
-
-The above wrapper does not do anything yet, except requesting the minified plugin code which we downloaded earlier. In the following section we will configure and activate the plugin. In order to do that we need to understand our 3rd-party plugin better. Usually this requires finding a working example and/or reading some documentation. Fortunately the PV-Viewer** comes with both. Let's take a look at http://pv.readthedocs.io/.
+Our wrapper does not do much yet, except requesting the minified plugin code which we downloaded earlier. In this following section we will configure and activate the plugin. In order to do that we need to understand our 3rd-party plugin better. Usually this requires finding a working example and/or reading some documentation. Fortunately the PV-Viewer** comes with both. Let's take a look at http://pv.readthedocs.io/.
 
 > ### Tasks
 > 
-> What is the only required parameter in order to initialize the plugin by calling [*pv.Viewer()*](http://pv.readthedocs.io/en/v1.8.1/viewer.html#pv.Viewer)?
+> 1. What is the only required parameter in order to initialize the plugin by calling [*pv.Viewer()*](http://pv.readthedocs.io/en/v1.8.1/viewer.html#pv.Viewer)?
 >
-> Can you identify what valid `mode` settings the [*pv.Viewer.renderAs*](http://pv.readthedocs.io/en/v1.8.1/viewer.html#pv.Viewer.renderAs) function has?
+> 2. Can you identify what valid `mode` settings the [*pv.Viewer.renderAs*](http://pv.readthedocs.io/en/v1.8.1/viewer.html#pv.Viewer.renderAs) function has?
 
 Now that we have learned the basics on how the viewer plugin works, we can initialize and load it in `wrapper.js`.
 
 > ### Tasks
 >
-> 1. Modify `wrapper.js` by adding the following code into the `initialize` function:
+> 1. Modify `wrapper.js` by adding the following code into the `initialize` call:
 > 
 >    ```js
 >    var viewer = pv.Viewer( document.getElementById( options.targets[ 0 ] ), {
