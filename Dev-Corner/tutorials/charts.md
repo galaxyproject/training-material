@@ -183,23 +183,23 @@ Now that we have learned the basics on how the viewer plugin works, we can initi
 > 1. Modify `wrapper.js` by adding the following code into the `initialize` function:
 > 
 >    ```js
->       var viewer = pv.Viewer( document.getElementById( options.targets[ 0 ] ), {
->            width       : 'auto',
->            height      : 'auto',
->            antialias   : true,
->            outline     : true
->       });
->       $.ajax( {
->            url     : options.dataset.download_url,
->            success : function( response ) {
->                var structure = pv.io.pdb( response );
->                viewer.clear();
->                viewer.renderAs( 'protein', structure, 'cartoon', {} );
->                viewer.centerOn( structure );
->                viewer.autoZoom();
->                options.process.resolve();
->            }
->        });
+>    var viewer = pv.Viewer( document.getElementById( options.targets[ 0 ] ), {
+>        width       : 'auto',
+>        height      : 'auto',
+>        antialias   : true,
+>        outline     : true
+>    });
+>    $.ajax( {
+>        url     : options.dataset.download_url,
+>        success : function( response ) {
+>            var structure = pv.io.pdb( response );
+>            viewer.clear();
+>            viewer.renderAs( 'protein', structure, 'cartoon', {} );
+>            viewer.centerOn( structure );
+>            viewer.autoZoom();
+>            options.process.resolve();
+>        }
+>    });
 >    ```
 
 ## 1.5 Build the package
