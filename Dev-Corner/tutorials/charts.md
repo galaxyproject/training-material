@@ -154,15 +154,17 @@ Now we will add a wrapper to connect *Charts* with the *PV-Viewer* plugin. The w
 >
 > 1. Create a file named `wrapper.js` which returns a *Backbone* model:
 >
->    ```js
+>    ``js
 >    define( [ 'visualizations/myviz/pdb/plugin' ], function( pv ) {
 >        return Backbone.Model.extend({
->    ``` ```bash
+>    ``
+>    ``bash
 >      initialize: function( options ) {
 >                // Add code to configure and execute the plugin here.
 >            }
 >        });
 >    });
+>    ``
 >
 > 2. Place it into your plugins directory at `myviz/pdb`.
 
