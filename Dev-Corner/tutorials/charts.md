@@ -288,7 +288,7 @@ More information on parameters can be found in the [wiki](https://docs.galaxypro
 >    ```js
 >    viewer.renderAs( 'protein', structure, 'cartoon', {} );
 >    ```
-> to
+>    to
 >
 >    ```js
 >    var settings = options.chart.settings;
