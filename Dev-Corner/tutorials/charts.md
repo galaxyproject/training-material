@@ -286,7 +286,7 @@ More information on parameters can be found in the [wiki](https://docs.galaxypro
 >
 > 2. Change the following line in `wrapper.js`:
 >    ```js
->        viewer.renderAs( 'protein', structure, 'cartoon', {} );
+>    viewer.renderAs( 'protein', structure, 'cartoon', {} );
 >    ```
 > to
 >    ```js
