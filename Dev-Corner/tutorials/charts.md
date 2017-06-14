@@ -249,129 +249,107 @@ In this section we will select a `PDB`-file from the Protein Databank and visual
 >
 > 5. Close the upload dialog, and select the file from the history-panel on the right.
 >
-> 6. Click on the *diagram*-icon and select *Charts*.
+> 6. Click on the *diagram*-icon.
 >
 > 7. Find your visualization and double-click on its logo.
 >
 
 ![First view](/Dev-Corner/tutorials/files/hands_on-charts/pv_1.png)
 
-## Section 2 - Add a select field
+## Section 2 - Allow different rendering modes 
 
-Lets build a form. TODO: Links https://docs.galaxyproject.org/en/latest/dev/schema.html. Explain how XML-parameters map to this json format.
+In this section we are going to augment the visualization such that users may select different rendering modes. This is one of the major advantages of using the *Charts* framework. Similar to a Tool's XML file, developers may specify input parameters which then will be presented to the user. The definition of Tool and Visualization input parameters are similar, however the latter is provided in *JavaScript* and not as XML.
+More information on parameters can be found in the [wiki](https://docs.galaxyproject.org/en/latest/dev/schema.html).
 
-## 2.1 Add a select field
+> ### Tasks
+>
+> 1. Add the following block into the `config.js` file:
+>    ```js
+>    settings : {
+>        mode : {
+>            label   : 'Render as:',
+>            help    : 'Select the rendering mode.',
+>            type    : 'select',
+>            display : 'radio',
+>            value   : 'cartoon',
+>            data    : [ { label : 'Cartoon',        value : 'cartoon' },
+>                        { label : 'Lines',          value : 'lines' },
+>                        { label : 'Points',         value : 'points' },
+>                        { label : 'Spheres',        value : 'spheres' },
+>                        { label : 'Trace',          value : 'trace' },
+>                        { label : 'Trace (line)',   value : 'lineTrace' },
+>                        { label : 'Trace (smooth)', value : 'sline' },
+>                        { label : 'Tube',           value : 'tube' } ]
+>        }
+>    }
+>    ```
+>
+> 2. Change the following line in `wrapper.js`:
+>    ```js
+>        viewer.renderAs( 'protein', structure, 'cartoon', {} );
+>    ```
+> to
+>    ```js
+>    var settings = options.chart.settings;
+>    viewer.renderAs( 'protein', structure, settings.get( 'mode' ), settings.attributes );
+>    ```
+>
+> 3. Rebuild the plugin
+>
+>    ```bash
+>    $ rm static/repository/build/myviz_pdb.js
+>    $ webpack
+>    ```
+>
+> 4. Refresh your browser.
+>
+> 5. Load *Charts* and test different rendering modes in the *Customization* tab of your visualization.
 
-```js
-define( [], function() {
-    return {
-        title       : 'A PDB viewer',
-        library     : 'My Visualization',
-        datatypes   : [ 'pdb' ],
-        keywords    : 'pdb protein structure',
-        description : 'Galaxy tutorial.',
-        settings    : {
-            mode : {
-                label   : 'Render as:',
-                help    : 'Select the rendering mode.',
-                type    : 'select',
-                display : 'radio',
-                value   : 'cartoon',
-                data    : [ { label : 'Cartoon',        value : 'cartoon' },
-                            { label : 'Lines',          value : 'lines' },
-                            { label : 'Points',         value : 'points' },
-                            { label : 'Spheres',        value : 'spheres' },
-                            { label : 'Trace',          value : 'trace' },
-                            { label : 'Trace (line)',   value : 'lineTrace' },
-                            { label : 'Trace (smooth)', value : 'sline' },
-                            { label : 'Tube',           value : 'tube' } ]
-            }
-        }
-    }
-});
+## Section 3 - Adding more options
 
-```
+From the *PV-Viewer* documentation we can see that there are more settings available such as e.g. 'pointSize', 'lineWidth' and 'radius'. In this section we are going to further enhance the visualizations user interface to incorporate these input parameters
 
-## 2.2 Update the wrapper
+> ### Tasks
+>
+> 1. Add the following block into the `settings` of your `config.js` file:
+>    ```js
+>    pointSize: {
+>        label : 'Point size',
+>        help  : 'Specify the point size.',
+>        type  : 'float',
+>        min   : 0.1,
+>        max   : 10,
+>        value : 1
+>    },
+>    lineWidth : {
+>        label : 'Line width',
+>        help  : 'Specify the line width.',
+>        type  : 'float',
+>        min   : 0.1,
+>        max   : 10,
+>        value : 4
+>    },
+>    radius : {
+>        label : 'Radius',
+>        help  : 'Radius of tube profile. Also influences the profile thickness for helix and strand profiles.',
+>        type  : 'float',
+>        min   : 0.1,
+>        max   : 3,
+>        value : 0.3
+>    }
+>    ```
+>
+> 2. Rebuild the plugin
+>
+>    ```bash
+>    $ rm static/repository/build/myviz_pdb.js
+>    $ webpack
+>    ```
+>
+> 3. Refresh your browser.
+>
+> 4. Load *Charts* and test new options in the *Customization* tab of your visualization.
 
-Change the following line in `wrapper.js`
-```js
-    viewer.renderAs( 'protein', structure, 'cartoon', {} );
-```
-to
-```js
-    var settings = options.chart.settings;
-    viewer.renderAs( 'protein', structure, settings.get( 'mode' ), settings.attributes );
-```
+## Conclusion
 
-## 2.3 Rebuild the plugin
-
-```bash
-$ rm static/repository/build/myviz_pdb.js
-$ webpack
-```
-
-## Section 3 - Adding numeric sliders
-
-Add more options to configure.
-
-## 3.1 Add 'pointSize', 'lineWidth' and 'radius' to `config.js`
-
-```js
-define( [], function() {
-    return {
-        title       : 'A PDB viewer',
-        library     : 'My Visualization',
-        datatypes   : [ 'pdb' ],
-        keywords    : 'pdb protein structure',
-        description : 'Galaxy tutorial.',
-        settings    : {
-            mode : {
-                label   : 'Render as:',
-                help    : 'Select the rendering mode.',
-                type    : 'select',
-                display : 'radio',
-                value   : 'cartoon',
-                data    : [ { label : 'Cartoon',        value : 'cartoon' },
-                            { label : 'Lines',          value : 'lines' },
-                            { label : 'Points',         value : 'points' },
-                            { label : 'Spheres',        value : 'spheres' },
-                            { label : 'Trace',          value : 'trace' },
-                            { label : 'Trace (line)',   value : 'lineTrace' },
-                            { label : 'Trace (smooth)', value : 'sline' },
-                            { label : 'Tube',           value : 'tube' } ]
-            },
-            pointSize: {
-                label : 'Point size',
-                help  : 'Specify the point size.',
-                type  : 'float',
-                min   : 0.1,
-                max   : 10,
-                value : 1
-            },
-            lineWidth : {
-                label : 'Line width',
-                help  : 'Specify the line width.',
-                type  : 'float',
-                min   : 0.1,
-                max   : 10,
-                value : 4
-            },
-            radius : {
-                label : 'Radius',
-                help  : 'Radius of tube profile. Also influences the profile thickness for helix and strand profiles.',
-                type  : 'float',
-                min   : 0.1,
-                max   : 3,
-                value : 0.3
-            }
-        }
-    }
-});
-
-```
-
-```bash
-$ rm static/repository/build/myviz_pdb.js
-$ webpack
-```
+First of all, thank you for completing this tutorial. We have learned how to add visualizations to the *Charts* framework and how to build a custom visualization form.
