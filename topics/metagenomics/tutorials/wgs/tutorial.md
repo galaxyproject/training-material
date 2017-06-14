@@ -1,3 +1,9 @@
+---
+layout: tutorial_hands_on
+topic_name: metagenomics
+tutorial_name: wgs
+---
+
 # Introduction
 
 In metagenomics, information about micro-organisms in an environment can be extracted with two main techniques:
@@ -63,7 +69,7 @@ The original data are available at EBI Metagenomics under run number [ERR1855251
 
 ## Quality control and treatment
 
-For quality control, we use similar tools as described in [the Quality Control tutorial](../../NGS-QC/tutorials/dive_into_qc): [FastQC](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/) and [Trim Galore](http://www.bioinformatics.babraham.ac.uk/projects/trim_galore/).
+For quality control, we use similar tools as described in [the Quality Control tutorial](../../NGS-QC/tutorials/dive_into_qc): [FastQC](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/) and [Trim Galore!](http://www.bioinformatics.babraham.ac.uk/projects/trim_galore/).
 
 > ### :pencil2: Hands-on: Quality control
 >
