@@ -307,7 +307,7 @@ In addition to the list of genes, `DESeq2` outputs a graphical summary of the re
 
 3. Principal Component Analysis ([PCA](https://en.wikipedia.org/wiki/Principal_component_analysis)) and the first two axes
 
-    ![](../../images/Deseq2_PCA2.png)
+    ![](../../images/Deseq2_PCA3.png)
 
     Each replicate is plotted as an individual data point. This type of plot is useful for visualizing the overall effect of experimental covariates and batch effects.
 
