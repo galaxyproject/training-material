@@ -6,14 +6,14 @@
 # to run image:
 #    docker run -p "8080:80" -t <your_tag>
 
-FROM bgruening/galaxy-stable
+FROM workflow4metabolomics/galaxy-workflow4metabolomics
 
-MAINTAINER Galaxy Training Material
+MAINTAINER Galaxy Training Material and Workflow4Metabolomics
 
-ENV GALAXY_CONFIG_BRAND "GTN: <your_topic>"
+ENV GALAXY_CONFIG_BRAND "GTN: Metabolomics"
 
 # copy the tutorials directory for your topic
-ADD topics/<your_topic>/tutorials/ /tutorials/
+ADD topics/metabolomics/tutorials/ /tutorials/
 
 # install everything for tutorials
 ADD bin/docker-install-tutorials.sh /setup-tutorials.sh
