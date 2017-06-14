@@ -10,7 +10,7 @@ The data provided here are part of a Galaxy tutorial that analyzes RNA-seq data 
 
 # Analysis strategy
 
-The goal of this exercise is to identify what transcripts are present in the G1E and megakaryocyte cellualr states and which transcripts are differentially expressed between the two states. We will use a *de novo* transcript reconstruction stratgey to infer transcript structures from the mapped reads in the absence of the actual annotated transcript structures. This will allow us to identify novel transcripts and novel isoforms of known transcripts, as well as identify differentially expressed transcripts.
+The goal of this exercise is to identify what transcripts are present in the G1E and megakaryocyte cellualr states and which transcripts are differentially expressed between the two states. We will use a *de novo* transcript reconstruction stratgy to infer transcript structures from the mapped reads in the absence of the actual annotated transcript structures. This will allow us to identify novel transcripts and novel isoforms of known transcripts, as well as identify differentially expressed transcripts.
 
 > ### Agenda
 >
@@ -19,7 +19,7 @@ The goal of this exercise is to identify what transcripts are present in the G1E
 > 1. Data upload
 > 2. Read trimming
 > 3. Read mapping
-> 4. *De novo* transcript reconstriction
+> 4. *De novo* transcript reconstruction
 > 5. Transcriptome assembly
 > 6. Read counting and differential expression analysis
 > 7. Visualization
@@ -27,7 +27,7 @@ The goal of this exercise is to identify what transcripts are present in the G1E
 
 ## Data upload
 
-Due to the large size of this dataset, we have downsampled it to only inlcude reads mapping to chromosome 19 and certain loci with relevance to hematopoeisis. This data is avaialble at [`Zenodo`](https://zenodo.org/record/583140#.WSW3NhPyub8), where you can find the forward and reverse reads corresponding to replicate RNA-seq libraries from G1E and megakaryocyte cells and an annotation file of RefSeq transcripts we will use to generate our transcriptome database.
+Due to the large size of this dataset, we have downsampled it to only include reads mapping to chromosome 19 and certain loci with relevance to hematopoeisis. This data is available at [`Zenodo`](https://zenodo.org/record/583140#.WSW3NhPyub8), where you can find the forward and reverse reads corresponding to replicate RNA-seq libraries from G1E and megakaryocyte cells and an annotation file of RefSeq transcripts we will use to generate our transcriptome database.
 
 > ### :pencil2: Hands-on: Data upload
 >
@@ -103,7 +103,7 @@ For quality control, we use similar tools as described in [NGS-QC tutorial](../.
 > ![](../../images/BeforeAndAfterTrimming.png)
 {: .hands_on}
 
-Now that we have trimmed our reads and are fortuante that there is a reference genome assembly for mouse, we will align our trimmed reads to the genome.
+Now that we have trimmed our reads and are fortunate that there is a reference genome assembly for mouse, we will align our trimmed reads to the genome.
 
 > ### :nut_and_bolt: Comment
 >
@@ -325,7 +325,7 @@ In addition to the list of genes, `DESeq2` outputs a graphical summary of the re
 For more information about `DESeq2` and its outputs, you can have a look at [`DESeq2` documentation](https://www.bioconductor.org/packages/release/bioc/manuals/DESeq2/man/DESeq2.pdf).
 
 # Visualization
-Now that we have a list of transcript expression levels and their differential expression levels, it is time to visually inspect our transcript structures and the reads they were predicted from. It is a good practice to visually inspect (and present) loci with transcripts of interest. Fortuantely, there is a built-in genome browser in Galaxy, **Trackster**, that make this task simple (and even fun!).
+Now that we have a list of transcript expression levels and their differential expression levels, it is time to visually inspect our transcript structures and the reads they were predicted from. It is a good practice to visually inspect (and present) loci with transcripts of interest. Fortunately, there is a built-in genome browser in Galaxy, **Trackster**, that make this task simple (and even fun!).
 
 In this last section, we will convert our aligned read data from BAM format to bigWig format to simplify observing where our stranded RNA-seq data aligned to. We'll then initiate a session on Trackster, load it with our data, and visually inspect our interesting loci.
 
@@ -376,7 +376,7 @@ In this last section, we will convert our aligned read data from BAM format to b
 >
 > 9. :wrench:: Repeat the previous step on the other three bigWig files representing the minus strand.
 >
-> 10. :wrench:: Adjust the track height of the bigWig files to be consistant for each set of plus strand and minus strand tracks.
+> 10. :wrench:: Adjust the track height of the bigWig files to be consistent for each set of plus strand and minus strand tracks.
 > ![](../../images/Hoxb13_locus_screenshot.png)
 > 11. :wrench:: Direct Trackster to the coordinates: chr11:96191452-96206029, what do you see?
 >
