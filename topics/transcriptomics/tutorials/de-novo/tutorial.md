@@ -10,7 +10,7 @@ The data provided here are part of a Galaxy tutorial that analyzes RNA-seq data 
 
 # Analysis strategy
 
-The goal of this exercise is to identify what transcripts are present in the G1E and megakaryocyte cellualr states and which transcripts are differentially expressed between the two states. We will use a *de novo* transcript reconstruction stratgy to infer transcript structures from the mapped reads in the absence of the actual annotated transcript structures. This will allow us to identify novel transcripts and novel isoforms of known transcripts, as well as identify differentially expressed transcripts.
+The goal of this exercise is to identify what transcripts are present in the G1E and megakaryocyte cellualr states and which transcripts are differentially expressed between the two states. We will use a *de novo* transcript reconstruction strategy to infer transcript structures from the mapped reads in the absence of the actual annotated transcript structures. This will allow us to identify novel transcripts and novel isoforms of known transcripts, as well as identify differentially expressed transcripts.
 
 > ### Agenda
 >
