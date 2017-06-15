@@ -134,7 +134,7 @@ times, we'll unique our sequences using the `unique.seqs` command:
 > ### :pencil2: Hands-on: Remove duplicate sequences
 >
 > - **Unique.seqs** :wrench: with the following parameters
->   - "fasta" to the `good.fasta` output from Screen.seqs
+>   - "fasta" to the merged fasta file
 >
 >
 > > ### :question: Question
@@ -143,17 +143,20 @@ times, we'll unique our sequences using the `unique.seqs` command:
 > >
 > >    <details>
 > >    <summary>Click to view answer</summary>
-> >    16,426 unique sequences and 112,446 duplicates. <br>
+> >    9,502 unique sequences and 498 duplicates. <br>
 > >    This can be determined from the number of lines in the fasta (or names) output, compared to the
-> >    number of lines in the fasta file before this step. The log file also contains a line showing the
-> >    total number of sequences before and the command: <br><br>
-> >    mothur > unique.seqs(fasta=fasta.dat) <br>
-> >    128872	16426
+> >    number of lines in the fasta file before this step.
 > >    </details>
 > {: .question}
+>
+> - **count.seqs** :wrench: with the following parameters
+>   - "name" to the name file from unique.seqs
+>   - "Use a group file" to `yes`
+>   - "group" to the group file from Make.group
+>
 {: .hands_on}
 
-This tool outputs two files, one is a fasta file containing only the unique sequences, and a *names files*.
+This `unique.seqs` tool outputs two files, one is a fasta file containing only the unique sequences, and a *names files*.
 The names file consists of two columns, the first contains the sequence names for each of the unique
 sequences, and the second column contains all other sequence names that are identical to the representative
 sequence in the first column.
@@ -166,6 +169,9 @@ read_name7    read_name8
 ...
 ```
 
+The `count.seqs` file keeps track of the number of sequences represented by each unique representative
+across multiple samples. We will pass this file to many of the following tools to be used or updated as
+needed.
 
 ## Quality Control
 
@@ -178,8 +184,8 @@ First, let's get a feel of our data:
 > ### :pencil2: Hands-on: Summarize data
 >
 > - **Summary.seqs** :wrench: with the following parameters
->   - "fasta" parameter to the fasta file you just imported.
->   - We do not need to supply a names or count file
+>   - "fasta" parameter to the fasta from `unique.seqs`.
+>   - "count" to count table from `count.seqs`
 >
 {: .hands_on}
 
@@ -187,25 +193,26 @@ The `summary` output files give information per read. The `logfile` outputs also
 statistics:
 
 ```
-            Start  End      NBases    Ambigs   Polymer  NumSeqs
-Minimum:    1      80       80        0        3        1
-2.5%-tile:  1      104      104       0        3        501
-25%-tile:   1      242      242       0        4        5001
-Median:     1      245      245       0        4        10001
-75%-tile:   1      245      245       0        4        15001
-97.5%-tile: 1      247      247       0        6        19501
-Maximum:    1      275      275       2        31        20000
-Mean:       1      237.519  237.519   0.00495  4.24965
-# of Seqs:      20000
+              Start    End        NBases     Ambigs   Polymer  NumSeqs
+Minimum:      1        80         80         0        3        1
+2.5%-tile:    1        104        104        0        3        501
+25%-tile:     1        242        242        0        4        5001
+Median:       1        245        245        0        4        10001
+75%-tile:     1        245        245        0        4        15001
+97.5%-tile:   1        247        247        0        6        19501
+Maximum:      1        275        275        2        31       20000
+Mean:         1        237.519    237.519    0.00495  4.24965
+# of unique seqs:   19502
+total # of seqs:    20000
 ```
 
-This tells us that we have a total of 20,000 sequences that vary in length between 80 and 275 bases.
-Also, note that at least some of our sequences had some ambiguous base calls. Furthermore, at least one
-read had a homopolymer stretch of 31 bases, this is likely an error so we would like to filter such reads
-out as well.
+This tells us that we have a total of 19,502 unique sequences, representing 20,000 total sequences that vary
+in length between 80 and 275 bases. Also, note that at least some of our sequences had some ambiguous base calls.
+Furthermore, at least one read had a homopolymer stretch of 31 bases, this is likely an error so we would like to
+filter such reads out as well.
 
 If you are thinking that 20,000 is an oddly round number, you are correct, we downsampled the original
-datasets to 10,000 reads each for this tutorial to reduce the amount of time the analysis steps will take.
+datasets to 10,000 reads per sample for this tutorial to reduce the amount of time the analysis steps will take.
 
 We can filter our dataset on length, base quality, and maximum homopolymer length using the `screen.seqs` tool
 
@@ -214,13 +221,13 @@ The following tool will remove any sequences with ambiguous bases and anything l
 > ### :pencil2: Hands-on: Filter reads based on quality and length
 >
 > - **Screen.seqs** :wrench: with the following parameters
->   - "fasta" to the merged fasta file
+>   - "fasta" to the fasta file from `unique.seqs`
 >   - "group" the group file created in the make.contigs step
 >   - "minlength" parameter to `225`
 >   - "maxlength" parameter to `275`
 >   - "maxambig" parameter to `0`
 >   - "maxhomop" parameter to `8`
->   - "group" to the group file we created
+>   - "count" to the count file from `count.seqs`
 >
 > > ### :question: Question
 > >
@@ -228,7 +235,7 @@ The following tool will remove any sequences with ambiguous bases and anything l
 > >
 > >    <details>
 > >    <summary>Click to view answer</summary>
-> >    1,822. <br>
+> >    1,804. <br>
 > >    This can be determined by looking at the number of lines in bad.accnos output of screen.seqs step
 > >    or by comparing the total number of seqs between of the summary.seqs log before and after this screening
 > >    step
@@ -253,66 +260,47 @@ so we will now align our sequences to the Silva reference database.
 > This step may take a few minutes, please be patient.
 >
 > - **Summary.seqs** :wrench: with the following parameters
->   - "fasta" parameter to the aligned output from previous step
->   - "count" parameter to `count_table` output from Count.seqs
+>   - "fasta" parameter to the aligned output from `align.seqs`
+>   - "count" parameter to count_table output from `screen.seqs`
 >
 {: .hands_on}
 
 View the log output from the summary step.
 
 ```
-              Start      End        NBases   Ambigs   Polymer  NumSeqs
-Minimum:      1044       1065       10       0        2        1
-2.5%-tile:    14974      23965      234      0        4        455
-25%-tile:     14974      25318      244      0        4        4545
-Median:       14974      25318      245      0        4        9090
-75%-tile:     14974      25318      245      0        4        13634
-97.5%-tile:   14976      25318      247      0        6        17724
-Maximum:      15630      26169      274      0        7        18178
-Mean:         14973.3    25277.7    244.314  0        4.2799
-# of Seqs:      18178
-
-
-		Start	End	NBases	Ambigs	Polymer	NumSeqs
-Minimum:	138	152	10	0	2	1
-2.5%-tile:	2308	4062	234	0	4	455
-25%-tile:	2308	4090	244	0	4	4545
-Median: 	2308	4090	245	0	4	9090
-75%-tile:	2308	4090	245	0	4	13634
-97.5%-tile:	2310	4090	247	0	6	17724
-Maximum:	2323	4152	274	0	7	18178
-Mean:	2307.95	4087.47	244.314	0	4.2799
-# of Seqs:	18178
+              Start     End       NBases     Ambigs   Polymer  NumSeqs
+Minimum:      2391      10674     9          0        2        1
+2.5%-tile:    3080      12071     234        0        4        455
+25%-tile:     3080      13424     244        0        4        4545
+Median:       3080      13424     245        0        4        9090
+75%-tile:     3080      13424     245        0        4        13634
+97.5%-tile:   3082      13424     246        0        6        17724
+Maximum:      13396     13425     267        0        7        18178
+Mean:         3080.6    13380     244.212    0        4.27946
+# of unique seqs:   17698
+total # of seqs:    18178
 ```
 
-2308 4090
-
-From this we can see that most of our reads align nicely to positions `14974-25318` on this reference.
-This corresponds exactly to the V4 target region of the 16S gene. If our data was not so nice, we could
-now remove any sequences not mapped to our target region using `screen.seqs`
-
+From this we can see that most of our reads align nicely to positions `3080-13424` on this reference.
+This corresponds exactly to the V4 target region of the 16S gene.
 
 To make sure that everything overlaps the same region we'll re-run screen.seqs to get sequences that
-start at or before position 1968 and end at or after position 11550. We'll also set the maximum
-homopolymer length to 8 since there's nothing in the database with a stretch of 9 or more of the same
-base in a row (this also could have been done in the first execution of screen.seqs above).
+start at or before position 3080 and end at or after position 13424.
 
 > ### :pencil2: Hands-on: Remove poorly aligned sequences
 >
 > - **Screen.seqs** :wrench: with the following parameters
 >   - "fasta" to the aligned fasta file
->   - "start" to 2308
->   - "end" to 4090
->   - "group" to the group file created by the previous screen.seqs step
->
-> **Note:** we supply the count table so that it can be updated for the sequences we're removing.
+>   - "start" to `3080`
+>   - "end" to `13424`
+>   - "count" to the group file created by the previous run of `screen.seqs`
 >
 > > ### :question: Question
 > >
 > >  How many sequences were removed in this step?
 > > <details>
 > >   <summary> Click to view answer</summary>
-> >   128 sequences were removed. This is the number of lines in the bad.accnos output.
+> >   4,579 sequences were removed. This is the number of lines in the bad.accnos output.
 > > </details>
 > {: .question}
 {: .hands_on}
@@ -332,8 +320,13 @@ losing any information. We'll do all this with filter.seqs:
 {: .hands_on}
 
 
+## Extraction of taxonomic information
 
-## Cluster sequences
+The main questions when analyzing amplicon data are: Which micro-organisms are present in an environmental samples? And in which proportion? What is the structure of the community of the micro-organisms?
+
+The idea is to take the sequences and assign them to a taxon. To do that, we group (or cluster) sequences based on their similarity to define Operational Taxonomic Units, groups of similar sequences that can be treated as a single "genus" or "species" (depending on the clustering threshold)
+
+![](../../images/otu.png)
 
 The next thing we want to do to further de-noise our sequences, is to pre-cluster the sequences using the
 `pre.cluster` command, allowing for up to 2 differences between sequences. This command will split the
@@ -345,7 +338,7 @@ merged. We generally recommend allowing 1 difference for every 100 basepairs of 
 >
 > - **Pre.cluster** :wrench: with the following parameters
 >   - "fasta" to the fasta output from the last Unique.seqs run
->   - "name file or count table" to the count table from the last Unique.seqs
+>   - "name file or count table" to the count table from the last `screen.seqs` step
 >   - "diffs" to 2
 >
 > > ### :question: Question
@@ -353,7 +346,7 @@ merged. We generally recommend allowing 1 difference for every 100 basepairs of 
 > >  How many unique sequences are we left with after this clustering of highly similar sequences?
 > > <details>
 > >   <summary> Click to view answer</summary>
-> >   5672. <br>
+> >   110,369. <br>
 > >   This is the number of lines in the fasta output
 > > </details>
 > {: .question}
@@ -370,19 +363,22 @@ merged. We generally recommend allowing 1 difference for every 100 basepairs of 
 >   - "reference" to `trainset16_022016.pds.fasta` from your history
 >   - "taxonomy" to `trainset16_022016.pds.tax` from your history
 >   - "cutoff" to 80
+>   - "count" to the count table from `pre.cluster`
 >
-> Have a look at the taxonomy output. You will see that every read now has a classification.
+> This step may take a couple of minutes, now may be a good time to grab a cup of tea.
 >
 {: .hands_on}
+
+Have a look at the taxonomy output. You will see that every read now has a classification.
 
 > ### :pencil2: Hands-on: Cluster our data into OTUs
 >
 > - **Cluster.split** :wrench: with the following parameters
 >   - "Split by" to `Classification using fasta`
->   - "fasta" to the fasta output from Remove.groups
->   - "taxonomy" to the taxonomy output from Remove.groups
+>   - "fasta" to the fasta output from `pre.cluster`
+>   - "taxonomy" to the taxonomy output from `classify.seqs`
 >   - "taxlevel" to `4`
->   - "count" to the count table output from Remove.groups
+>   - "count" to the count table output from `pre.cluster`
 >   - "cutoff" to `0.15`
 >
 > Next we want to know how many sequences are in each OTU from each group and we can do this using the
@@ -390,83 +386,62 @@ merged. We generally recommend allowing 1 difference for every 100 basepairs of 
 >
 > - **Make.shared** :wrench: with the following parameters
 >   - "Select input type" to `OTU list`
->   - "list" to list output from Cluster.split
->   - "count" to the count table from Remove.groups
+>   - "list" to list output from `cluster.split`
+>   - "count" to the count table from `pre.cluster`
 >   - "label" to `0.03`
 >
 > We probably also want to know the taxonomy for each of our OTUs. We can get the consensus taxonomy for each
 > OTU using the `Classify.otu` command:
 >
 > - **Classify.otu** :wrench: with the following parameters
->   - "list" to output from Cluster.split
->   - "count" to the count table from Remove.groups
->   - "taxonomy" to the taxonomy output from Remove.groups
+>   - "list" to output from `cluster.split`
+>   - "count" to the count table from `pre.cluster`
+>   - "taxonomy" to the taxonomy output from
 >   - "label" to `0.03`
 >
 {: .hands_on}
 
+Have a look at the output TODO
 
 
-## Extraction of taxonomic information
+## Visualization
 
-The main questions when analyzing amplicon data are: Which micro-organisms are present in an environmental samples? And in which proportion? What is the structure of the community of the micro-organisms?
+We have now determined our OTUs and classified them, but looking at a long text file is not very informative.
+Let's visualize our data using Krona:
 
-The idea is to take the sequences and assign them to a taxon. To do that, we group (or cluster) sequences based on their similarity to define Operational Taxonomic Units, groups of similar sequences that can be treated as a single "genus" or "species" (depending on the clustering threshold)
-
-![](../../images/otu.png)
-
-> ### :pencil2: Hands-on: Extraction of OTUs with Mothur
+> ### :pencil2: Hands-on: Krona
 >
-> 1. Step1
-> 2. Step2
->
->    > ### :nut_and_bolt: Comments
->    > A comment
->    {: .comment}
->
->    > ### :bulb: Tip: A tip
->    >
->    > * Step1
->    > * Step2
->    {: .tip}
+> - **Visualize with Krona** :wrench: with the following parameters
+>   - "input file" to taxonomy output from `classify.otu` (collection)
+>   - Set **Is this output from mothur?** to yes
 {: .hands_on}
 
-Once the sequences are clustered into OTUs, one sequence of each OTU is selected as a representative sequence for the OTU. The taxonomic assignation (genus, species, ...) for this sequence is searched and then assigned to all sequences of the OTU.
+<!-- TODO: different tax level? lot of unclassifieds -->
 
-> ### :pencil2: Hands-on: Taxonomic assignation of the OTUs
->
-> 1. Step1
-> 2. Step2
->
->    > ### :nut_and_bolt: Comments
->    > A comment
->    {: .comment}
->
->    > ### :bulb: Tip: A tip
->    >
->    > * Step1
->    > * Step2
->    {: .tip}
-{: .hands_on}
+The result is an HTML file with an interactive visualization, for instance try clicking
+on one of the rings in the image or playing around with some of the settings.
 
-With the taxonomic assignation for each OTU, we can now extract for each genus (or other taxonomic level) how many OTUs (with how many sequences) are assigned to this genus (or other taxonomic level): extracting the community structure (taxon and their abundance) for the sample.
+![](../../images/krona.png)
 
-To explore the community structure, we can visualize it with dedicated tools such as Phinch:
+<!-- TODO: per-sample plots? -->
+
+To further explore the community structure, we can visualize it with dedicated tools such as Phinch:
 
 > ### :pencil2: Hands-on: Visualization of the community structure with Phinch
 >
-> 1. Step1
-> 2. Step2
+> - **Make.biom** :wrench: with the following parameters
+>   - "shared" to Subsample.shared
+>   - "constaxonomy" to taxonomy output from `classify.otu` (collection)
 >
->    > ### :nut_and_bolt: Comments
->    > A comment
->    {: .comment}
+> The Galaxy project runs an instance of Phinch, and if you look at the output biom file, you will see a link
+> to view the file at Phinch:
 >
->    > ### :bulb: Tip: A tip
->    >
->    > * Step1
->    > * Step2
->    {: .tip}
+> ![](../../../../shared/images/viewatphinch.png)
+>
+> Clicking on this link will lead you to the Phinch website, which will automatically load in your file, and
+> where you can several interactive visualisations:
+>
+> ![](../../../../shared/images/phinch_overviewpage.png)
 {: .hands_on}
 
 Once we have information about the community structure (OTUs with taxonomic structure), we can do more analysis on it: estimation of the diversity of micro-organism, comparison fo diversity between samples, analysis of populations, ... We will not detail such analyses here but you follow our tutorials on amplicon data analyses to learn about them.
