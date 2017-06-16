@@ -50,16 +50,17 @@ It can be 16S for bacteria or archea or 18S for eukaryotes.
 With amplicon data, we can extract from which micro-organisms the sequences in our sample are coming from. This is called taxonomic assignation.
 We try to assign sequences to taxons and then classify or extract the taxonomy in our sample.
 
+In this analysis, we will use [Mothur tool suite](http://mothur.org), but only a small portion of its tools and possibilities.
+To learn more in detail how to use, check out the full [Mothur tutorial](../mothur-miseq-sop/tutorial.html).
+
+## Importing the data
+
 Our datasets comes from a soil samples in two different Argentinian locations, with capture and sequencing of the 16S rDNA V4 region
 using 454 GS FLX Titanium. The original data are available at EBI Metagenomics under the following run numbers:
 
 Pampa soil: [SRR531818](https://www.ebi.ac.uk/metagenomics/projects/SRP016633/samples/SRS353016/runs/SRR531818/results/versions/2.0) and
 Anguil soil: [SRR651839](https://www.ebi.ac.uk/metagenomics/projects/SRP016633/samples/SRS386929/runs/SRR651839/results/versions/2.0)
 
-In this analysis, we will use [Mothur tool suite](http://mothur.org), but only a small portion of its tools and possibilities.
-To learn more in detail how to use, check out the full [Mothur tutorial](../mothur-miseq-sop/tutorial.html).
-
-## Importing the data
 
 > ### :pencil2: Hands-on: Data upload
 >
@@ -322,13 +323,31 @@ losing any information. We'll do all this with filter.seqs:
 
 ## Extraction of taxonomic information
 
-The main questions when analyzing amplicon data are: Which micro-organisms are present in an environmental samples? And in which proportion? What is the structure of the community of the micro-organisms?
+The main questions when analyzing amplicon data are: Which micro-organisms are present in an environmental samples?
+And in which proportion? What is the structure of the community of the micro-organisms?
 
-The idea is to take the sequences and assign them to a taxon. To do that, we group (or cluster) sequences based on their similarity to define Operational Taxonomic Units, groups of similar sequences that can be treated as a single "genus" or "species" (depending on the clustering threshold)
+The idea is to take the sequences and assign them to a taxon. To do that, we group (or cluster) sequences based on
+their similarity to define Operational Taxonomic Units (OTUs); groups of similar sequences that can be treated as
+a single "genus" or "species" (depending on the clustering threshold)
 
-![](../../images/otu.png)
+> ### :book: Background: Operational Taxonomic Units (OTUs)
+>
+> In 16S metagenomics approaches, OTUs are clusters of similar sequence variants of the 16S rDNA marker gene
+> sequence. Each of these clusters is intended to represent a taxonomic unit of a bacteria species or genus
+> depending on the sequence similarity threshold. Typically, OTU cluster are defined by a 97% identity
+> threshold of the 16S gene sequence variants at genus level. 98% or 99% identity is suggested for species
+> separation.
+>
+> ![](../../images/otu.png)
+>
+> ![](../../images/OTU_graph.png)
+>
+> (Image credit: Danzeisen et al. 2013, 10.7717/peerj.237)
+{: .tip}
 
-The next thing we want to do to further de-noise our sequences, is to pre-cluster the sequences using the
+
+
+The first thing we want to do is to further de-noise our sequences, by pre-clustering the sequences using the
 `pre.cluster` command, allowing for up to 2 differences between sequences. This command will split the
 sequences by group and then sort them by abundance and go from most abundant to least and identify
 sequences that differ no more than 2 nucleotides from on another. If this is the case, then they get
@@ -346,7 +365,7 @@ merged. We generally recommend allowing 1 difference for every 100 basepairs of 
 > >  How many unique sequences are we left with after this clustering of highly similar sequences?
 > > <details>
 > >   <summary> Click to view answer</summary>
-> >   110,369. <br>
+> >   10,369. <br>
 > >   This is the number of lines in the fasta output
 > > </details>
 > {: .question}
@@ -365,7 +384,7 @@ merged. We generally recommend allowing 1 difference for every 100 basepairs of 
 >   - "cutoff" to 80
 >   - "count" to the count table from `pre.cluster`
 >
-> This step may take a couple of minutes, now may be a good time to grab a cup of tea.
+> This step may take a couple of minutes, now may be a good time to grab a cup of tea :coffee:
 >
 {: .hands_on}
 
@@ -377,7 +396,6 @@ Have a look at the taxonomy output. You will see that every read now has a class
 >   - "Split by" to `Classification using fasta`
 >   - "fasta" to the fasta output from `pre.cluster`
 >   - "taxonomy" to the taxonomy output from `classify.seqs`
->   - "taxlevel" to `4`
 >   - "count" to the count table output from `pre.cluster`
 >   - "cutoff" to `0.15`
 >
