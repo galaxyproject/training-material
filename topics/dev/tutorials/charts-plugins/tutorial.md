@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
-topic_name: Dev-Corner
-tutorial_name: visualizations
+topic_name: dev
+tutorial_name: charts-plugins
 ---
 
 ## Introduction
@@ -23,7 +23,7 @@ In this tutorial we are going to demonstrate how to add a 3rd-party visualizatio
 > AUTHOR   2 B.BRODSKY,A.ZAGARI,H.M.BERMAN
 > ...
 > REMARK   1 REFERENCE 1                                                          
-> REMARK   1  AUTH   M.BOLOGNESI,L.PUGLIESE,G.GATTI,F.FRIGERIO,A.CODA,L.ANTOLINI, 
+> REMARK   1  AUTH   M.BOLOGNESI,L.PUGLIESE,G.GATTI,F.FRIGERIO,A.CODA,L.ANTOLINI,
 > REMARK   1  AUTH 2 H.P.SCHNEBLI,E.MENEGATTI,G.AMICONI,P.ASCENZI                 
 > REMARK   1  TITL   X-RAY CRYSTAL STRUCTURE OF THE BOVINE                        
 > REMARK   1  TITL 2 ALPHA-CHYMOTRYPSIN(SLASH)EGLIN C COMPLEX AT 2.6 ANGSTROMS    
@@ -71,7 +71,7 @@ In this section we will download the viewer and add it to a local *Galaxy* insta
 >
 > 1. Clone an instance of *Galaxy* in a path, further referred to as `$GALAXY_ROOT`:
 >    ```bash
->    $ git clone https://github.com/galaxyproject/galaxy 
+>    $ git clone https://github.com/galaxyproject/galaxy
 >    ```
 >
 > 2. Navigate to the *Charts* repository root:
@@ -107,12 +107,12 @@ In the following sections we are going to discuss these files in more detail, cr
 
 Each visualization is represented by a logo in the *Charts* interface. This makes it easier for users to find and configure their visualization. The logo should be in the `png`-file format. It will appear with a width of 120 pixels.
 
-Here's an example [logo](https://github.com/guerler/training-material/blob/master/Dev-Corner/tutorials/files/hands_on-charts/logo.png):
+Here's an example [logo](../../files/charts-plugins/pdb/logo.png):
 
-![Logo](/Dev-Corner/tutorials/files/hands_on-charts/logo.png)
+![Logo](../../files/charts-plugins/pdb/logo.png)
 
 > ### Tasks
-> 
+>
 > 1. Find an arbitrary image in `PNG`-file format. Possibly using *Google*'s [image search](https://images.google.com).
 >
 > 2. Copy it to the `myviz/pdb` directory and name it `logo.png`.
@@ -122,9 +122,9 @@ Here's an example [logo](https://github.com/guerler/training-material/blob/maste
 Each visualization has a configuration file named `config.js`. This file has conceptual similarities with a Tool's XML-file. It allows developers to specify a variety of attributes and input parameters for their visualization. Throughout this tutorial we are going to gradually augment this file but for now we keep it simple.
 
 > ### Tasks
-> 
+>
 > 1. Create a file named `config.js` with the following content:
-> 
+>
 >    ```js
 >    define( [], function() {
 >        return {
@@ -145,7 +145,7 @@ This configures the plugin's name and a description which will appear on the *Ch
 
 Now we will add a wrapper to connect *Charts* with the *PV-Viewer* plugin. The wrapper consists of a [*Backbone*](http://backbonejs.org) module written in *JavaScript*:
  The wrapper receives an `options` dictionary with the following <b>four</b> components:
- - *charts*: The model of the current visualization with attributes, settings etc. 
+ - *charts*: The model of the current visualization with attributes, settings etc.
  - *process*: A [jQuery.Deferred()](https://api.jquery.com/jquery.deferred/) object to allow asynchronous data requests within the wrapper
  - *dataset*: Details on the selected datasets such as url, ids etc. which can be used to access the dataset
  - *targets*: The DOM ids of the container elements to draw into
@@ -169,7 +169,7 @@ Now we will add a wrapper to connect *Charts* with the *PV-Viewer* plugin. The w
 The above wrapper does not do much yet, except requesting the minified plugin code which we downloaded earlier. In order to execute a 3rd-party plugin we need to figure out how it works. This can be done by finding a working example or documentation. Fortunately the PV-Viewer** comes with both. Let's take a look at http://pv.readthedocs.io/.
 
 > ### Tasks
-> 
+>
 > 1. Identify the parameter which is needed to initialize the plugin when calling [*pv.Viewer()*](http://pv.readthedocs.io/en/v1.8.1/viewer.html#pv.Viewer).
 >
 > 2. Which of the wrapper option components represents this parameter?
@@ -181,7 +181,7 @@ Now that we have learned the basics on how the viewer plugin works, we can initi
 > ### Tasks
 >
 > 1. Modify `wrapper.js` by adding the following code into the `initialize` call:
-> 
+>
 >    ```js
 >    var viewer = pv.Viewer( document.getElementById( options.targets[ 0 ] ), {
 >        width       : 'auto',
@@ -245,7 +245,7 @@ In this section we will select a `PDB`-file from the Protein Databank and visual
 >    $ run.sh
 >    ```
 >
-> 4. Open the uploader dialog, paste the above link and click on *Start*. 
+> 4. Open the uploader dialog, paste the above link and click on *Start*.
 >
 > 5. Close the upload dialog, and select the file from the history-panel on the right.
 >
@@ -254,9 +254,9 @@ In this section we will select a `PDB`-file from the Protein Databank and visual
 > 7. Find your visualization and double-click on its logo.
 >
 
-![First view](/Dev-Corner/tutorials/files/hands_on-charts/pv_1.png)
+![First view](../../images/pv_1.png)
 
-## Section 2 - Allow different rendering modes 
+## Section 2 - Allow different rendering modes
 
 In this section we are going to augment the visualization such that users may select different rendering modes. This is one of the major advantages of using the *Charts* framework. Similar to a Tool's XML file, developers may specify input parameters which then will be presented to the user. The definition of Tool and Visualization input parameters are similar, however the latter is provided in *JavaScript* and not as XML.
 More information on parameters can be found in the [wiki](https://docs.galaxyproject.org/en/latest/dev/schema.html).
