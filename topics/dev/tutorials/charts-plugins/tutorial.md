@@ -8,7 +8,7 @@ tutorial_name: charts-plugins
 
 In this tutorial we are going to demonstrate how to add a 3rd-party visualization to *Charts* and what the benefits are. The plugin we select for this purpose is the *PV-Javascript Protein Viewer* (https://biasmv.github.io/pv/). It is an open source, protein structure viewer for `PDB`-files. There are many other popular protein structure viewers available for the visualization of `PDB`-files such as e.g. [NGL](http://arose.github.io/ngl/) (also available in *Charts*) and [JSMol](https://chemapps.stolaf.edu/jmol/jsmol/jsmol.htm).
 
-> ### What is the PDB (Protein Data Bank) file format?
+> ### :book: Background: What is the PDB (Protein Data Bank) file format?
 >
 > The `PDB`-file format contains atomic coordinates of biomolecules derived through a range of experimental and computational methods. Most commonly the file contains a spatial cyrstallographic snapshot of a protein. There are 100s of thousands of protein structures publicly available at the Protein Databank (http://www.rcsb.org). Proteins are usually labeled by a four-letter code.
 > Here is an example of a `PDB`-file for a hydrolase bond to its inhibitor (PDB: [1ACB](http://www.rcsb.org/pdb/explore/explore.do?structureId=1acb)):
@@ -50,10 +50,11 @@ In this tutorial we are going to demonstrate how to add a 3rd-party visualizatio
 >
 >   - https://en.wikipedia.org/wiki/Protein_Data_Bank_(file_format)
 >   - http://www.wwpdb.org/documentation/file-format
+{: .tip}
 
 As mentioned above we will be focusing on the *PV-Javascript Protein Viewer* in this tutorial. Now that we have learned about the underlying file format, let us continue by visiting the viewers developer site at https://biasmv.github.io/pv/ to get familiar with the plugin.
 
-> ### Tasks
+> ### :pencil2: Hands-on
 >
 > 1. View the plugin in action, rotate the molecule and change its style.
 >
@@ -61,13 +62,14 @@ As mentioned above we will be focusing on the *PV-Javascript Protein Viewer* in 
 >
 > 3. Can you find the minified code file of this plugin?
 >
+{: .hands_on}
 
 ## Section 1 - Basic plugin setup
 ## 1.1 Directory and plugin preparations
 
 In this section we will download the viewer and add it to a local *Galaxy* instance. All development takes place within the *Galaxy* codebase. The first thing we are going to do is to clone a *Galaxy* instance and prepare the directory structure for the new visualization plugin.
 
-> ### Tasks
+> ### :pencil2: Hands-on
 >
 > 1. Clone an instance of *Galaxy* in a path, further referred to as `$GALAXY_ROOT`:
 >    ```bash
@@ -94,6 +96,7 @@ In this section we will download the viewer and add it to a local *Galaxy* insta
 >    ```bash
 >    curl https://raw.githubusercontent.com/biasmv/pv/master/bio-pv.min.js -o plugin.js
 >    ```
+{: .hands_on}
 
 Now that the directory structure is in place and the 3rd-party code has been made available, we will continue with building our *Chart* plugin. Each *Charts* visualization contains <b>3</b> files:
 
@@ -111,17 +114,18 @@ Here's an example [logo](../../files/charts-plugins/pdb/logo.png):
 
 ![Logo](../../files/charts-plugins/pdb/logo.png)
 
-> ### Tasks
+> ### :pencil2: Hands-on
 >
 > 1. Find an arbitrary image in `PNG`-file format. Possibly using *Google*'s [image search](https://images.google.com).
 >
 > 2. Copy it to the `myviz/pdb` directory and name it `logo.png`.
+{: .hands_on}
 
 ## 1.3 Configure the visualization
 
 Each visualization has a configuration file named `config.js`. This file has conceptual similarities with a Tool's XML-file. It allows developers to specify a variety of attributes and input parameters for their visualization. Throughout this tutorial we are going to gradually augment this file but for now we keep it simple.
 
-> ### Tasks
+> ### :pencil2: Hands-on
 >
 > 1. Create a file named `config.js` with the following content:
 >
@@ -138,6 +142,8 @@ Each visualization has a configuration file named `config.js`. This file has con
 >    ```
 >
 > 2. Place it into your plugins directory at `myviz/pdb`.
+>
+{: .hands_on}
 
 This configures the plugin's name and a description which will appear on the *Charts* selection interface. It also links the plugin to the `PDB`-file format, which means that for any history item of these file type the plugin will automatically become available. Keywords are optional and can help to improve the annotation.
 
@@ -150,11 +156,10 @@ Now we will add a wrapper to connect *Charts* with the *PV-Viewer* plugin. The w
  - *dataset*: Details on the selected datasets such as url, ids etc. which can be used to access the dataset
  - *targets*: The DOM ids of the container elements to draw into
 
-> ### Tasks
+> ### :pencil2: Hands-on
 >
 > 1. Create a file named `wrapper.js` which returns a *Backbone* model:
->
->    ```js
+>  ```js
 >    define( [ 'visualizations/myviz/pdb/plugin' ], function( pv ) {
 >        return Backbone.Model.extend({
 >            initialize: function( options ) {
@@ -162,23 +167,26 @@ Now we will add a wrapper to connect *Charts* with the *PV-Viewer* plugin. The w
 >            }
 >        });
 >    });
->    ```
->
+>  ```
 > 2. Place it into your plugins directory at `myviz/pdb`.
+>
+{: .hands_on}
 
 The above wrapper does not do much yet, except requesting the minified plugin code which we downloaded earlier. In order to execute a 3rd-party plugin we need to figure out how it works. This can be done by finding a working example or documentation. Fortunately the PV-Viewer** comes with both. Let's take a look at http://pv.readthedocs.io/.
 
-> ### Tasks
+> ### :pencil2: Hands-on
 >
 > 1. Identify the parameter which is needed to initialize the plugin when calling [*pv.Viewer()*](http://pv.readthedocs.io/en/v1.8.1/viewer.html#pv.Viewer).
 >
 > 2. Which of the wrapper option components represents this parameter?
 >
 > 3. Can you identify which `mode` settings are valid to render the structure with [*pv.Viewer.renderAs()*](http://pv.readthedocs.io/en/v1.8.1/viewer.html#pv.Viewer.renderAs)?
+>
+{: .hands_on}
 
 Now that we have learned the basics on how the viewer plugin works, we can initialize and load it in `wrapper.js`.
 
-> ### Tasks
+> ### :pencil2: Hands-on
 >
 > 1. Modify `wrapper.js` by adding the following code into the `initialize` call:
 >
@@ -201,12 +209,13 @@ Now that we have learned the basics on how the viewer plugin works, we can initi
 >        }
 >    });
 >    ```
+{: .hands_on}
 
 ## 1.5 Build the package
 
 Now that we have completed the *Charts* plugin definition, it is time to bundle the scripts and libraries into a single module file using [*webpack*](https://webpack.github.io). Once packed the plugin will be accessible through *Galaxy*'s user interface. Packing modules does not require restarting your *Galaxy* instance, just make sure to properly refresh your browser.
 
-> ### Tasks
+> ### :pencil2: Hands-on
 >
 > 1. Navigate to *Chart*'s root directory:
 >    ```bash
@@ -222,6 +231,7 @@ Now that we have completed the *Charts* plugin definition, it is time to bundle 
 >    ```bash
 >    $ webpack
 >    ```
+{: .hands_on}
 
 Lets test this.
 
@@ -229,7 +239,7 @@ Lets test this.
 
 In this section we will select a `PDB`-file from the Protein Databank and visualize it with our new plugin.
 
-> ### Tasks
+> ### :pencil2: Hands-on
 >
 > 1. Visit http://www.rcsb.org and select a protein structure e.g. [1ACB](http://www.rcsb.org/pdb/explore/explore.do?structureId=1acb)
 >
@@ -253,6 +263,7 @@ In this section we will select a `PDB`-file from the Protein Databank and visual
 >
 > 7. Find your visualization and double-click on its logo.
 >
+{: .hands_on}
 
 ![First view](../../images/pv_1.png)
 
@@ -261,7 +272,7 @@ In this section we will select a `PDB`-file from the Protein Databank and visual
 In this section we are going to augment the visualization such that users may select different rendering modes. This is one of the major advantages of using the *Charts* framework. Similar to a Tool's XML file, developers may specify input parameters which then will be presented to the user. The definition of Tool and Visualization input parameters are similar, however the latter is provided in *JavaScript* and not as XML.
 More information on parameters can be found in the [wiki](https://docs.galaxyproject.org/en/latest/dev/schema.html).
 
-> ### Tasks
+> ### :pencil2: Hands-on
 >
 > 1. Add the following block into the `config.js` file:
 >    ```js
@@ -305,12 +316,14 @@ More information on parameters can be found in the [wiki](https://docs.galaxypro
 > 4. Refresh your browser.
 >
 > 5. Load *Charts* and test different rendering modes in the *Customization* tab of your visualization.
+>
+{: .hands_on}
 
 ## Section 3 - Adding more options
 
 From the *PV-Viewer* documentation we can see that there are more settings available such as e.g. 'pointSize', 'lineWidth' and 'radius'. In this section we are going to further enhance the visualizations user interface to incorporate these input parameters
 
-> ### Tasks
+> ### :pencil2: Hands-on
 >
 > 1. Add the following block into the `settings` of your `config.js` file:
 >    ```js
@@ -350,6 +363,8 @@ From the *PV-Viewer* documentation we can see that there are more settings avail
 > 3. Refresh your browser.
 >
 > 4. Load *Charts* and test new options in the *Customization* tab of your visualization.
+>
+{: .hands_on}
 
 ## Conclusion
 
