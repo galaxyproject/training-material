@@ -23,6 +23,7 @@ The goal of this exercise is to identify what transcripts are present in the G1E
 > 5. Transcriptome assembly
 > 6. Read counting and differential expression analysis
 > 7. Visualization
+{: .agenda}
 
 ## Data upload
 
@@ -40,8 +41,9 @@ Due to the large size of this dataset, we have downsampled it to only inlcude re
 > 8. Press **Start**
 > 9. Rename the files in your history to retain just the necessary information (*e.g.* "G1E R1 forward reads")
 >
+>    > ### :bulb: Tip: Importing data via links
 >    > <details>
->    > <summary>:bulb: Tip: Importing data via links</summary>
+>    > <summary>Click to view instructions</summary>
 >    > <ol type="2">
 >    > <li>Below are the links to the read files that can be copied and pasted in the upload manager.</li>
 >    > <li>https://<i></i>zenodo.org/record/254485/files/G1E_R1_forward_downsampled_SRR549355.fastqsanger.gz
@@ -55,9 +57,9 @@ Due to the large size of this dataset, we have downsampled it to only inlcude re
 >    > <li>You will need to fetch the link to the annotation file yourself ;)</li>
 >    > </ol>
 >    > </details>
+>    {: .tip}
 >
->
-> {: .hands_on}
+{: .hands_on}
 
 ## Quality control
 
@@ -101,14 +103,14 @@ For quality control, we use similar tools as described in [NGS-QC tutorial](../.
 >    >    </details>
 >    {: .question}
 > ![](../../images/BeforeAndAfterTrimming.png)
-> {: .hands_on}
+{: .hands_on}
 
 Now that we have trimmed our reads and are fortuante that there is a reference genome assembly for mouse, we will align our trimmed reads to the genome.
 
 > ### :nut_and_bolt: Comment
 >
 > Instead of running a single tool multiple times on all your data, would you rather run a single tool on multiple datasets at once? Check out the [dataset collections](https://galaxyproject.org/tutorials/collections/) feature of Galaxy!
-> {: .comment}
+{: .comment}
 
 # Mapping
 
@@ -117,7 +119,7 @@ To make sense of the reads, their positions within mouse genome must be determin
 > ### :nut_and_bolt: Comment
 >
 > Do you want to learn more about the principles behind mapping? Follow our [training](../../NGS-mapping)
-> {: .comment}
+{: .comment}
 
 In the case of a eukaryotic transcriptome, most reads originate from processed mRNAs lacking introns. Therefore, they cannot be simply mapped back to the genome as we normally do for reads derived from DNA sequences. Instead, the reads must be separated into two categories:
 
@@ -126,19 +128,19 @@ In the case of a eukaryotic transcriptome, most reads originate from processed m
 
 Spliced mappers have been developed to efficiently map transcript-derived reads against genomes. [`HISAT`](https://ccb.jhu.edu/software/hisat2/index.shtml) is an accurate and fast tool for mapping spliced reads to a genome. Another popular spliced aligner is [`TopHat`](https://ccb.jhu.edu/software/tophat/index.shtml), but we will be using `HISAT` in this tutorial.
 
->    > ### :nut_and_bolt: Comment
->    > As it is sometimes quite difficult to determine which settings correspond to those of other programs, the following table might be helpful to identify the library type:
->    >
->    > Library type | **Infer Experiment** | **TopHat** | **HISAT** | **htseq-count** | **featureCounts**
->    > --- | --- | --- | --- | --- | ---
->    > PE | 1++,1--,2+-,2-+ | FR Second Strand | FR | yes | 1
->    > PE | 1+-,1-+,2++,2-- | FR First Strand | RF | reverse | 2
->    > SE | ++,-- | FR Second Strand | F | yes | 1
->    > SE | +-,-+ | FR First Strand | R | reverse | 2
->    > SE,PE | undecided | FR Unstranded | default | no | 0
->    >
->    {: .comment}
->    
+> ### :nut_and_bolt: Comment
+> As it is sometimes quite difficult to determine which settings correspond to those of other programs, the following table might be helpful to identify the library type:
+>
+> Library type | **Infer Experiment** | **TopHat** | **HISAT** | **htseq-count** | **featureCounts**
+> --- | --- | --- | --- | --- | ---
+> PE | 1++,1--,2+-,2-+ | FR Second Strand | FR | yes | 1
+> PE | 1+-,1-+,2++,2-- | FR First Strand | RF | reverse | 2
+> SE | ++,-- | FR Second Strand | F | yes | 1
+> SE | +-,-+ | FR First Strand | R | reverse | 2
+> SE,PE | undecided | FR Unstranded | default | no | 0
+>
+{: .comment}
+
 > ### :pencil2: Hands-on: Spliced mapping
 >
 > 1. **HISAT** :wrench:: Run `HISAT` on one forward/reverse read pair and modify the following settings:
@@ -152,6 +154,7 @@ Spliced mappers have been developed to efficiently map transcript-derived reads 
 >
 > 2. **HISAT** :wrench:: Run `HISAT` on the remaining forward/reverse read pairs with the same parameters.
 >
+{: .hands_on}
 
 # De novo transcript reconstruction
 Now that we have mapped our reads to the mouse genome with `HISAT`, we want to determine transcript structures that are represented by the aligned reads. This is called *de novo* transcriptome reconstruction. This unbiased approach permits the comprehensive identification of all transcripts present in a sample, including annotated genes, novel isoforms of annotated genes, and novel genes. While common gene/transcript databases are quite large, they are not comprehensive, and the *de novo* transcriptome reconstruction approach ensures complete transcriptome(s) identification from the experimental samples. The leading tool for transcript reconstruction is `Stringtie`. Here, we will use `Stringtie` to predict transcript structures based on the reads aligned by `HISAT`.
@@ -161,6 +164,8 @@ Now that we have mapped our reads to the mouse genome with `HISAT`, we want to d
 > 1. **Stringtie** :wrench:: Run `Stringtie` on the `HISAT` alignments using the default parameters.
 >    - Use batch mode to run all four samples from one tool form.
 > ![](../../images/Stringtie.png)
+>
+{: .hands_on}
 
 # Transcriptome assembly
 
@@ -185,6 +190,8 @@ We just generated four transcriptomes with `Stringtie` representing each of the 
 >    > |r | Repetitive|
 >    > |c | Contained in exon of reference|
 >    > |s | Anti-sense spliced intronic|
+>
+{: .hands_on}
 
 
 # Analysis of the differential gene expression
@@ -212,7 +219,7 @@ The recommended mode is "union", which counts overlaps even if a read only share
 >    - **Strand specificity of the protocol**: select "Stranded (forwards)"
 > ![](../../images/FeatureCounts_tool_form.png)
 >
-> {: .hands_on}
+{: .hands_on}
 
 ## Perform differential gene expression testing
 
@@ -329,6 +336,8 @@ In this last section, we will convert our aligned read data from BAM format to b
 >    - **Only include reads originating from fragments from the forward or reverse strand**: reverse
 > 4. **Rename** :wrench:: Rename the outputs to reflect the origin of the reads and that they represent the reads mapping to the MINUS strand
 > ![](../../images/bamCoverage_reverse.png)
+>
+{: .hands_on}
 
 > ### :pencil2: Hands-on: Trackster based visualization
 >
@@ -374,6 +383,7 @@ In this last section, we will convert our aligned read data from BAM format to b
 >    >    </details>
 >    {: .question}
 >
+{: .hands_on}
 
 # Conclusion
 
