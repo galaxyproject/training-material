@@ -20,7 +20,7 @@ The genome of *Drosophila melanogaster* is known and assembled. It can be used a
 > 2. [Mapping](#mapping)
 > 3. [Analysis of the differential expression](#analysis-of-the-differential-expression)
 > 4. [Inference of the differential exon usage](#inference-of-the-differential-exon-usage)
-> {: .agenda}
+{: .agenda}
 
 # Pretreatments
 
