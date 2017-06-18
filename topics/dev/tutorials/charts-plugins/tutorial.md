@@ -6,7 +6,7 @@ tutorial_name: charts-plugins
 
 ## Introduction
 
-In this tutorial we are going to demonstrate how to add a 3rd-party visualization to *Charts* and what the benefits are. The plugin we select for this purpose is the *PV-Javascript Protein Viewer* (https://biasmv.github.io/pv/). It is an open source, protein structure viewer for `PDB`-files. There are many other popular protein structure viewers available for the visualization of `PDB`-files such as e.g. [NGL](http://arose.github.io/ngl/) (also available in *Charts*) and [JSMol](https://chemapps.stolaf.edu/jmol/jsmol/jsmol.htm).
+In this tutorial we are going to demonstrate how to add a 3rd-party visualization to *Charts* and what the benefits are. The plugin we select for this purpose is the [*PV-Javascript Protein Viewer*](https://biasmv.github.io/pv/). It is an open source, protein structure viewer for `PDB`-files. There are many other popular protein structure viewers available for the visualization of `PDB`-files such as e.g. [NGL](http://arose.github.io/ngl/) (also available in *Charts*) and [JSMol](https://chemapps.stolaf.edu/jmol/jsmol/jsmol.htm).
 
 > ### :book: Background: What is the PDB (Protein Data Bank) file format?
 >
@@ -48,11 +48,11 @@ In this tutorial we are going to demonstrate how to add a 3rd-party visualizatio
 >
 > More resources on this file format:
 >
->   - https://en.wikipedia.org/wiki/Protein_Data_Bank_(file_format)
->   - http://www.wwpdb.org/documentation/file-format
+>   - [https://en.wikipedia.org/wiki/Protein_Data_Bank_(file_format)](https://en.wikipedia.org/wiki/Protein_Data_Bank_(file_format))
+>   - [http://www.wwpdb.org/documentation/file-format](http://www.wwpdb.org/documentation/file-format)
 {: .tip}
 
-As mentioned above we will be focusing on the *PV-Javascript Protein Viewer* in this tutorial. Now that we have learned about the underlying file format, let us continue by visiting the viewers developer site at https://biasmv.github.io/pv/ to get familiar with the plugin.
+As mentioned above we will be focusing on the *PV-Javascript Protein Viewer* in this tutorial. Now that we have learned about the underlying file format, let us continue by visiting the viewers developer site at [https://biasmv.github.io/pv/](https://biasmv.github.io/pv/) to get familiar with the plugin.
 
 > ### :pencil2: Hands-on
 >
@@ -65,7 +65,7 @@ As mentioned above we will be focusing on the *PV-Javascript Protein Viewer* in 
 {: .hands_on}
 
 ## Section 1 - Basic plugin setup
-## 1.1 Directory and plugin preparations
+### 1.1 Directory and plugin preparations
 
 In this section we will download the viewer and add it to a local *Galaxy* instance. All development takes place within the *Galaxy* codebase. The first thing we are going to do is to clone a *Galaxy* instance and prepare the directory structure for the new visualization plugin.
 
@@ -106,7 +106,7 @@ Now that the directory structure is in place and the 3rd-party code has been mad
 
 In the following sections we are going to discuss these files in more detail, create and place them into our plugin directory at `myviz/pdb`. Let's start with the logo for our visualization.
 
-## 1.2 Your visualization needs a logo
+### 1.2 Your visualization needs a logo
 
 Each visualization is represented by a logo in the *Charts* interface. This makes it easier for users to find and configure their visualization. The logo should be in the `png`-file format. It will appear with a width of 120 pixels.
 
@@ -121,7 +121,7 @@ Here's an example [logo](../../files/charts-plugins/pdb/logo.png):
 > 2. Copy it to the `myviz/pdb` directory and name it `logo.png`.
 {: .hands_on}
 
-## 1.3 Configure the visualization
+### 1.3 Configure the visualization
 
 Each visualization has a configuration file named `config.js`. This file has conceptual similarities with a Tool's XML-file. It allows developers to specify a variety of attributes and input parameters for their visualization. Throughout this tutorial we are going to gradually augment this file but for now we keep it simple.
 
@@ -147,7 +147,7 @@ Each visualization has a configuration file named `config.js`. This file has con
 
 This configures the plugin's name and a description which will appear on the *Charts* selection interface. It also links the plugin to the `PDB`-file format, which means that for any history item of these file type the plugin will automatically become available. Keywords are optional and can help to improve the annotation.
 
-## 1.4 Adding a wrapper
+### 1.4 Adding a wrapper
 
 Now we will add a wrapper to connect *Charts* with the *PV-Viewer* plugin. The wrapper consists of a [*Backbone*](http://backbonejs.org) module written in *JavaScript*:
  The wrapper receives an `options` dictionary with the following <b>four</b> components:
@@ -172,7 +172,7 @@ Now we will add a wrapper to connect *Charts* with the *PV-Viewer* plugin. The w
 >
 {: .hands_on}
 
-The above wrapper does not do much yet, except requesting the minified plugin code which we downloaded earlier. In order to execute a 3rd-party plugin we need to figure out how it works. This can be done by finding a working example or documentation. Fortunately the PV-Viewer** comes with both. Let's take a look at http://pv.readthedocs.io/.
+The above wrapper does not do much yet, except requesting the minified plugin code which we downloaded earlier. In order to execute a 3rd-party plugin we need to figure out how it works. This can be done by finding a working example or documentation. Fortunately the *PV-Viewer* comes with both. Let's take a look at the [documentation](http://pv.readthedocs.io/).
 
 > ### :pencil2: Hands-on
 >
@@ -211,7 +211,7 @@ Now that we have learned the basics on how the viewer plugin works, we can initi
 >    ```
 {: .hands_on}
 
-## 1.5 Build the package
+### 1.5 Build the package
 
 Now that we have completed the *Charts* plugin definition, it is time to bundle the scripts and libraries into a single module file using [*webpack*](https://webpack.github.io). Once packed the plugin will be accessible through *Galaxy*'s user interface. Packing modules does not require restarting your *Galaxy* instance, just make sure to properly refresh your browser.
 
@@ -230,18 +230,22 @@ Now that we have completed the *Charts* plugin definition, it is time to bundle 
 > 3. Run `webpack` to build the plugin:
 >    ```bash
 >    $ webpack
+>
+>    # If webpack is not available on your PATH, use the following command:
+>    $ node_modules/webpack/bin/webpack.js
 >    ```
+>
 {: .hands_on}
 
 Lets test this.
 
-## 1.6 Test the visualization
+### 1.6 Test the visualization
 
 In this section we will select a `PDB`-file from the Protein Databank and visualize it with our new plugin.
 
 > ### :pencil2: Hands-on
 >
-> 1. Visit http://www.rcsb.org and select a protein structure e.g. [1ACB](http://www.rcsb.org/pdb/explore/explore.do?structureId=1acb)
+> 1. Visit [http://www.rcsb.org](http://www.rcsb.org) and select a protein structure e.g. [1ACB](http://www.rcsb.org/pdb/explore/explore.do?structureId=1acb)
 >
 > 2. Copy the link to the raw `PDB`-file e.g.
 >
@@ -250,6 +254,7 @@ In this section we will select a `PDB`-file from the Protein Databank and visual
 >    ```
 >
 > 3. Start your Galaxy instance
+>
 >    ```bash
 >    $ cd $GALAXY_ROOT
 >    $ run.sh
@@ -257,9 +262,9 @@ In this section we will select a `PDB`-file from the Protein Databank and visual
 >
 > 4. Open the uploader dialog, paste the above link and click on *Start*.
 >
-> 5. Close the upload dialog, and select the file from the history-panel on the right.
+> 5. Close the upload dialog, and select the file from the history panel on the right.
 >
-> 6. Click on the *diagram*-icon.
+> 6. Click on the *diagram* icon. (You must be logged in)
 >
 > 7. Find your visualization and double-click on its logo.
 >
