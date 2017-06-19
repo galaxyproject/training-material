@@ -555,6 +555,12 @@ In the WGS data, we have access to the sequences from the full genome, with gene
 > ### :pencil2: Hands-on: Metabolism function identification
 >
 > 1. **HUMAnN2** :wrench:: Run **HUMAnN2** on the input sequences with
+>    - Use of a custom taxonomic profile and MetaPhlAn2 table output as Taxonomic profile file
+>    - "Locally cached" "Full" nucleotide database
+>    - "Diamond" as software for translated alignment
+>    - "Locally cached" "Full UniRef50" protein database
+>    - "uniref50" for the search for gene families
+>    - "MetaCyc" for pathway computation
 >    - "Remove stratification from output" in Advanced Options
 {: .hands_on}
 
@@ -594,7 +600,7 @@ The RPK for the gene families are quite difficult to intepret in term of relativ
 >  >
 >  > 1. Which percentage of sequences has not be assigned to a gene family?
 >  > 2. What is the most abundant gene family?
->  
+>  >
 >  >    <details>
 >  >    <summary>Click to view answers</summary>
 >  >    <ol type="1">
@@ -603,9 +609,36 @@ The RPK for the gene families are quite difficult to intepret in term of relativ
 >  >    </ol>
 >  >    </details>
 >  {: .question}
->
 {: .hands_on}
 
+With the HUMAnN2 output, we have access to UniRef50 gene families. However, the names can remains cryptic and sometimes we would like a more general view about the functions. HUMAnN proposes a tool to regroup the gene families into different meta-groups: GO (Gene Ontology), EC, etc.
+
+> ### :pencil2: Hands-on: Regroup the gene families into GO terms
+>
+> 1. **Regroup a HUMAnN2 generated table by features** :wrench:: Run **Regroup** on the gene family table with
+>    - "Sum" to combine the grouped features
+>    - Built-in grouping option
+>    - "UniRef50" as gene family type
+>    - "UniRef50 gene families into GO"
+>
+> 2. **Renormalize a HUMAnN2 generated table** :wrench:: Run **Renormalize** on the generated table 
+>    - "Relative abundance" as normalization scheme
+>    - "Normalization of all levels by community total" as normalization level
+>
+>  > ### :question: Questions
+>  >
+>  > 1. What is the most abundant GO term?
+>  > 2. What is related to in [Gene Ontology](http://www.geneontology.org/)?
+>  >
+>  >    <details>
+>  >    <summary>Click to view answers</summary>
+>  >    <ol type="1">
+>  >    <li>GO:0007275 (found after sorting) with 2.68%</li>
+>  >    <li>It seems to correspond to "multicellular organism development"(?)</li>
+>  >    </ol>
+>  >    </details>
+>  {: .question}
+{: .hands_on}
 
 With the previous analyses, we investigate "Which micro-organims are present in my sample?" and "What function are done by the micro-organisms in my sample?". We can go further in these analyses (for example with combination of functional and taxonomic results). We did not detail that in this tutorial but you can found more analyses in our tutorials on whole-genome sequencing data analyses.
 
