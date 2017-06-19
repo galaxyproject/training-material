@@ -58,8 +58,8 @@ To learn more in detail how to use, check out the full [Mothur tutorial](../moth
 Our datasets comes from a soil samples in two different Argentinian locations, with capture and sequencing of the 16S rDNA V4 region
 using 454 GS FLX Titanium. The original data are available at EBI Metagenomics under the following run numbers:
 
-Pampa soil: [SRR531818](https://www.ebi.ac.uk/metagenomics/projects/SRP016633/samples/SRS353016/runs/SRR531818/results/versions/2.0) and
-Anguil soil: [SRR651839](https://www.ebi.ac.uk/metagenomics/projects/SRP016633/samples/SRS386929/runs/SRR651839/results/versions/2.0)
+- Pampa soil: [SRR531818](https://www.ebi.ac.uk/metagenomics/projects/SRP016633/samples/SRS353016/runs/SRR531818/results/versions/2.0) and
+- Anguil soil: [SRR651839](https://www.ebi.ac.uk/metagenomics/projects/SRP016633/samples/SRS386929/runs/SRR651839/results/versions/2.0)
 
 
 > ### :pencil2: Hands-on: Data upload
@@ -140,7 +140,7 @@ times, we'll unique our sequences using the `unique.seqs` command:
 >
 > > ### :question: Question
 > >
-> > How many sequences were unique? how many duplicates were removed?
+> > How many sequences were unique? How many duplicates were removed?
 > >
 > >    <details>
 > >    <summary>Click to view answer</summary>
