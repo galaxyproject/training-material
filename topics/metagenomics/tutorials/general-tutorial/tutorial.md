@@ -470,6 +470,15 @@ In the previous section, we see how to analyze amplicon data to extract the comm
 
 In WGS data, full genomes of the micro-organisms in the environment are sequenced (not only the 16S or 18S). We can then have access to the rRNA (only a small part of the genomes), but also to the genes of the micro-organisms. Using this information, we can try to answer to questions "What are the micro-organisms doing?" in addition to the question "What micro-organisms are present?".
 
+In this second part, we will use a metagenomic sample of the Pampas Soil ([SRR606451](https://www.ebi.ac.uk/metagenomics/projects/SRP016633/samples/SRS372043/runs/SRR606451/results/versions/2.0)).
+
+## Data upload
+
+> ### :pencil2: Hands-on: Data upload
+>
+> 1. Import the Fasta file from [Zenodo]() or from the data library (in "Analyses of metagenomics data" the "..." file)
+{: .hands_on}
+
 ## Extraction of taxonomic information
 
 As for amplicon data, we can extract taxonomic and community structure information from WGS data. Different approaches can be used:
@@ -480,80 +489,123 @@ As for amplicon data, we can extract taxonomic and community structure informati
 
 - Assignation of taxonomy on the whole sequences using databases with marker genes
 
-In this tutorial, we use the second approach with MetaPhlAn2
+In this tutorial, we use the second approach with MetaPhlAn2. This tools is using a database of ~1M unique clade-specific marker genes (not only the rRNA genes) identified from ~17,000 reference (bacterial, archeal, viral and eukaryotic) genomes.
 
 > ### :pencil2: Hands-on: Taxonomic assignation with MetaPhlAn2
 >
-> 1. **MetaPhlAN2** :wrench:: Run **MetaPhlAN2** on the dereplicated sequences
->
->    > ### :question: Questions
->    >
->    > 1. What does the main output file contain?
->    >
->    >    <details>
->    >    <summary>Click to view answers</summary>
->    >    <ol type="1">
->    >    <li></li>
->    >    <li></li>
->    >    </ol>
->    >    </details>
->    {: .question}
+> 1. **MetaPhlAN2** :wrench:: Run **MetaPhlAN2** on the dereplicated sequences with
+>    - The "locally cached" database of "MetaPhlAn2 clade-specific marker genes"
 >
 {: .hands_on}
+
+3 files are generated:
+
+- A tabular file with the community structure
+
+    ```
+    #SampleID   Metaphlan2_Analysis
+    k__Bacteria 100.0
+    k__Bacteria|p__Proteobacteria   86.20712
+    k__Bacteria|p__Actinobacteria   13.79288
+    k__Bacteria|p__Proteobacteria|c__Gammaproteobacteria    86.20712
+    k__Bacteria|p__Actinobacteria|c__Actinobacteria 13.79288
+    ```
+
+    Each line contains a taxa and its relative abundance found for our sample. The file starts with high level taxa (kingdom: `k__`) and go to more precise taxa.
+
+
+- A BIOM file with the same information as the previous file but in BIOM format
+
+    It can be used then by Mothur and other tools requiring community structure information in BIOM format
+
+- A SAM file with the results of the mapping of the sequences on the reference database
+
+> ### :question: Questions
+>
+> 1. What is the most precise level we have access to with MetaPhlAn2?
+> 2. What are the two orders found in our sample?
+> 3. What is the most abundant family in our sample?
+>
+>    <details>
+>    <summary>Click to view answers</summary>
+>    <ol type="1">
+>    <li>We have access to species level</li>
+>    <li>Pseudomonadales and Solirubrobacterales are found in our sample</li>
+>    <li>The most abundant family is Pseudomonadaceae with 86.21 % of the assigned sequences</li>
+>    </ol>
+>    </details>
+{: .question}
 
 Even if the output of MetaPhlAn2 is bit easier to parse than the BIOM file, we want to visualize and explore the community structure. We use an interactive tool called KRONA
 
 > ### :pencil2: Hands-on: Interactive visualization with KRONA
 >
-> 1. **Format MetaPhlAn2 output for Krona** :wrench:: Run **Format MetaPhlAn2 output for Krona** to format MetaPhlAn2 output for KRONA
-> 2. **KRONA** :wrench:: Run **KRONA** on the formatted MetaPhlAn2 output
->
->    > ### :question: Questions
->    >
->    > 1. What are the main species found for the bacteria?
->    > 2. Is the proportion of ... similar to the one found with EBI Metagenomics?
->    >
->    >    <details>
->    >    <summary>Click to view answers</summary>
->    >    <ol type="1">
->    >    <li></li>
->    >    <li></li>
->    >    </ol>
->    >    </details>
->    {: .question}
+> 1. **Format MetaPhlAn2 output for Krona** :wrench:: Run **Format MetaPhlAn2 output for Krona** on the tabular output of MetaPhlAn2
+> 2. **KRONA** :wrench:: Run **KRONA** on the formatted MetaPhlAn2 output with
+>    - "MetaPhlan" of type of input data
 >
 {: .hands_on}
-
-*One sentence to conclude the taxonomic analysis*
 
 ## Extraction of functional information
 
 We would like now to answer the question "What are the micro-organisms doing?" or "Which functions are done by the micro-organisms in the environment?".
 
-In the WGS data, we have access to the gene sequences. We use that to identify the genes, associate them to a function, build pathways, etc to investigate the functional part of the community.
+In the WGS data, we have access to the sequences from the full genome, with gene sequences then. We use that to identify the genes, associate them to a function, build pathways, etc to investigate the functional part of the community.
 
 > ### :pencil2: Hands-on: Metabolism function identification
 >
-> 1. **HUMAnN2** :wrench:: Run **HUMAnN2** on non rRNA sequences (SortMeRNA output) to extract the gene families and pathways in the sample
->
->    > ### :question: Questions
->    >
->    > 1. Which gene families is the most found one?
->    > 2. Which pathway is the most found one?
->    >
->    >    <details>
->    >    <summary>Click to view answers</summary>
->    >    <ol type="1">
->    >    <li></li>
->    >    <li></li>
->    >    </ol>
->    >    </details>
->    {: .question}
->
-> 2. Inspection of HUMAnN2 results?? Extraction of interesting info?
+> 1. **HUMAnN2** :wrench:: Run **HUMAnN2** on the input sequences with
+>    - "Remove stratification from output" in Advanced Options
 {: .hands_on}
 
-*One sentence to conclude the functional analysis*
+HUMAnN2 generates 3 files
+
+- A file with the abundance of gene families
+    
+    Gene family abundance is reported in RPK (reads per kilobase) units to normalize for gene length. It reflects the relative gene (or transcript) copy number in the community.
+
+    "UNMAPPED" value is the total number of reads which remain unmapped after both alignment steps (nucleotide and translated search). Since other gene features in the table are quantified in RPK units, "UNMAPPED" can be interpreted as a single unknown gene of length 1 kilobase recruiting all reads that failed to map to known sequences."
+
+- A file with the coverage of pathways
+    
+    Pathway coverage provides an alternative description of the presence (1) and absence (0) of pathways in a community, independent of their quantitative abundance.
+
+- A file with the abundance of pathways
+
+> ### :question: Questions
+>
+> How many gene families and pathways have been identified?
+>
+>    <details>
+>    <summary>Click to view answers</summary>
+>    44 gene families but no pathways are identified
+>    </details>
+{: .question}
+
+The RPK for the gene families are quite difficult to intepret in term of relative abundance. We decide then to normalize the values
+
+> ### :pencil2: Hands-on: Normalize the gene family abundances
+>
+> 1. **Renormalize a HUMAnN2 generated table** :wrench:: Run **Renormalize** on the gene family table with
+>    - "Relative abundance" as normalization scheme
+>    - "Normalization of all levels by community total" as normalization level
+>
+>  > ### :question: Questions
+>  >
+>  > 1. Which percentage of sequences has not be assigned to a gene family?
+>  > 2. What is the most abundant gene family?
+>  
+>  >    <details>
+>  >    <summary>Click to view answers</summary>
+>  >    <ol type="1">
+>  >    <li>55% of the sequences has not be assigned to a gene family</li>
+>  >    <li>The most abundant gene family with 25% of sequences is a putative secreted protein</li>
+>  >    </ol>
+>  >    </details>
+>  {: .question}
+>
+{: .hands_on}
+
 
 With the previous analyses, we investigate "Which micro-organims are present in my sample?" and "What function are done by the micro-organisms in my sample?". We can go further in these analyses (for example with combination of functional and taxonomic results). We did not detail that in this tutorial but you can found more analyses in our tutorials on whole-genome sequencing data analyses.
 
