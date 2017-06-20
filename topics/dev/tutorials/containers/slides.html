@@ -49,7 +49,7 @@ We are going to discuss containerizing tool execution instead - executing just j
 
 Containers for the particular job's tool.
 
-However you deploy Galaxy, including in a container, you can still containerize tools.
+However you deploy Galaxy, including in a container, tool execution can still be containerized.
 
 ???
 
@@ -161,9 +161,15 @@ class: left
 ## The Problems with Making Docker Explicit
 
 * Setting up a `Dockerfile` and publishing a Docker image more process for the tool even though the dependencies have already been completely defined.
-* An arbitrary Docker image is a blackbox that we can't be sure will execute the same binaries as the Conda requirements.
+* An arbitrary Docker image is a blackbox and there is no guarantee Galaxy will execute the same binaries as the Conda requirements.
 
-In other words, this:
+---
+
+class: left
+
+## To Put it Another Way
+
+This:
 
 ```
 <requirements>
@@ -171,17 +177,19 @@ In other words, this:
 </requirements>
 ```
 
-should have been sufficient! And the good news is that now it is (mostly).
+should have been sufficient!
+
+And the good news is that now it is (mostly)!
 
 ---
 
 class: left
 
-## BioContainers
+### .image-10[![](../../images/biocontainers.png)] BioContainers - The Magic
 
-Galaxy can now automatically find containers for best practice tools.
+Galaxy can now automatically find or build containers for best practice tools.
 
-Planemo can tell you if your tool is ready by linting with the `--biocontainers` flag.
+Planemo will check if such a container has been published with the `--biocontainers` flag to `planemo lint`.
 
 ```
 $ planemo lint --biocontainers seqtk_seq.xml
@@ -208,19 +216,19 @@ I swear Planemo did not just create that with `tool_init` or `lint`, maybe we sh
 
 class: left
 
-## Using the BioContainer
+### .image-05[![](../../images/biocontainers.png)] BioContainers - Using the Container
 
 Run Planemo `test` or `serve` with `--biocontainers` to try mystery container.
 
 .reduce70[```
-$ planemo test --mulled_containers seqtk_seq.xml
+$ planemo test --biocontainers seqtk_seq.xml
 ...
 [galaxy.tools.actions] Setup for job Job[unflushed,tool_id=seqtk_seq] complete, ready to flush (20.380 ms)
 [galaxy.tools.actions] Flushed transaction for job Job[id=2,tool_id=seqtk_seq] (15.191 ms)
 ...
-[galaxy.tools.deps.containers] Checking with container resolver [ExplicitContainerResolver[]] found description [None]
-[galaxy.tools.deps.containers] Checking with container resolver [CachedMulledContainerResolver[namespace=None]] found description [None]
-[galaxy.tools.deps.containers] Checking with container resolver [MulledContainerResolver[namespace=biocontainers]] found description [ContainerDescription[identifier=quay.io/biocontainers/seqtk:1.2--0,type=docker]]
+[galaxy.tools.deps.containers] Checking with container resolver [ExplicitDockerContainerResolver[]] found description [None]
+[galaxy.tools.deps.containers] Checking with container resolver [CachedMulledDockerContainerResolver[namespace=None]] found description [None]
+[galaxy.tools.deps.containers] Checking with container resolver [MulledDockerContainerResolver[namespace=biocontainers]] found description [ContainerDescription[identifier=quay.io/biocontainers/seqtk:1.2--0,type=docker]]
 [galaxy.jobs.command_factory] Built script [/tmp/tmpw8_UQm/job_working_directory/000/2/tool_script.sh] for tool command [seqtk seq -a '/tmp/tmpw8_UQm/files/000/dataset_1.dat' > '/tmp/tmpw8_UQm/files/000/dataset_2.dat']
 ...
 ok
@@ -232,17 +240,47 @@ Ran 1 test in 11.926s
 OK
 ```]
 
-The important line here is - `Checking with container resolver [MulledContainerResolver[namespace=biocontainers]] found description [ContainerDescription[identifier=quay.io/biocontainers/seqtk:1.2--0,type=docker]]`.
+The important line here is - `Checking with container resolver [MulledDockerContainerResolver[namespace=biocontainers]] found description [ContainerDescription[identifier=quay.io/biocontainers/seqtk:1.2--0,type=docker]]`.
 
 ---
 
-### BioContainers
+### .image-05[![](../../images/biocontainers.png)] BioContainers - The Community
 
 ![](../../images/biocontainers_org.png)
 
+???
+
+BioContainers is a big community of informatics minded individuals trying to work
+together on building container and Docker based solutions for problems like ours.
+Previously the project was called BioDocker.
+
+We are exploiting and contributing to one aspect of BioContainers, in particular
+BioConda for Containers.
+
 ---
 
-## Build on Demand
+### .image-10[![](../../images/biocontainers.png)] BioContainers - Bioconda for Containers
+
+All Bioconda packages are built into minimal containers.
+
+This setup allows the same binaries to be used within the container or on traditional/HPC resources.
+Without any extra work by tool authors, Galaxy can automatically find or build “the correct” container for a best-practice tool.
+
+Over 2,300 containers already published.
+
+---
+
+### .image-05[![](../../images/biocontainers.png)] BioContainers - Lots of Containers
+
+![](../../images/quay_list.png)
+
+???
+
+TODO: Zoom in on the image a bit more ideally.
+
+---
+
+### .image-05[![](../../images/biocontainers.png)] BioContainers - On Demand Creation
 
 Galaxy can be configured to attempt to build containers on demand for containers that haven't
 been published to the BioContainers namespace on quay.io.
@@ -300,22 +338,65 @@ Galaxy finds containers based on the names and versions of requirements, so far 
 the hash for single requirements is just the name and the version.
 
 If multiple requirements are present, the hash looks more like a hash. For bwa @ 0.7.15 and samtools @ 1.3.1,
-Galaxy will look for a container called: `quay.io/biocontainers/mulled-v1-01afc412d1f216348d85970ce5f88c984aa443f3`.
-
-???
-
-TODO: mulled-v2...
+Galaxy will look for a container called: `quay.io/biocontainers/mulled-v2-fe8faa35dbf6dc65a0f7f5d4ea12e31a79f73e40:03dc1d2818d9de56938078b8b78b82d967c1f820-0`.
 
 ---
 
-## The Planemo `mull` command (1 / 2)
+class: left
 
-While Galaxy can be configured to auto-build BioContainers as they are needed, the `mull` command
-can be used to manually build them for your local Docker host.
+## Galaxy Terminology - Mulled
+
+To *mull* is to create an environment (either in the Conda sense or globally 
+inside a container) for one or more Conda packages. The result of this is a
+*mulled* environment.
+
+Fixed naming schemes for the resulting environments ensure that different tools
+with the same set of requirements can reuse a previously created environment or
+container.
+
+If more than one package is included in the resulting environment, a complicated
+hash is used as this name.
+
+---
+
+class: left
+
+## Mulled Hashing
+
+Back to the example of bwa at version 0.7.15 and samtools at version 1.3.1,
+we said the resulting container will be
+
+.reduce50[
+`quay.io/biocontainers/mulled-v2-fe8faa35dbf6dc65a0f7f5d4ea12e31a79f73e40:03dc1d2818d9de56938078b8b78b82d967c1f820-0
+`
+]
+
+This can be broken into these parts:
+
+```
+quay.io/<namespace>/mulled-v2-<package_hash>:<version_hash>-<build>
+```
 
 ???
 
-TODO: mulled-v2...
+Explain the different parts.
+
+---
+
+## Exploring Mulled Hashes - by Evgeny Anatskiy
+
+![](../../images/multi-package-containers.png)
+
+???
+
+---
+
+class: left
+
+## The Planemo `mull` command (1 / 2)
+
+While Galaxy can be configured to auto-build BioContainers as they are needed, the Planemo `mull` command
+can be used to manually build them for your local Docker host.
 
 ---
 
@@ -325,36 +406,42 @@ class: reduce70
 
 ```
 $ planemo mull bwa_and_samtools.xml
-/home/planemo/.planemo/involucro -v=3 -f /home/planemo/workspace/planemo/.venv/lib/python2.7/site-packages/galaxy_lib-17.5.6.dev0-py2.7.egg/galaxy/tools/deps/mulled/invfile.lua -set CHANNELS='iuc,bioconda,r,defaults,conda-forge' -set TEST='true' -set TARGETS='samtools=1.3.1,bwa=0.7.15' -set REPO='quay.io/biocontainers/mulled-v1-01afc412d1f216348d85970ce5f88c984aa443f3' -set BINDS='build/dist:/usr/local/' -set PREINSTALL='conda install --quiet --yes conda=4.3' build
-/home/planemo/.planemo/involucro -v=3 -f /home/planemo/workspace/planemo/.venv/lib/python2.7/site-packages/galaxy_lib-17.5.6.dev0-py2.7.egg/galaxy/tools/deps/mulled/invfile.lua -set CHANNELS='iuc,bioconda,r,defaults,conda-forge' -set TEST='true' -set TARGETS='samtools=1.3.1,bwa=0.7.15' -set REPO='quay.io/biocontainers/mulled-v1-01afc412d1f216348d85970ce5f88c984aa443f3' -set BINDS='build/dist:/usr/local/' -set PREINSTALL='conda install --quiet --yes conda=4.3' build
-[Mar  1 10:35:52] DEBU Run file [/home/planemo/workspace/planemo/.venv/lib/python2.7/site-packages/galaxy_lib-17.5.6.dev0-py2.7.egg/galaxy/tools/deps/mulled/invfile.lua]
-[Mar  1 10:35:52] STEP Run image [continuumio/miniconda:latest] with command [[rm -rf /data/dist]]
-[Mar  1 10:35:52] DEBU Creating container [step-dc0ca6a011]
-[Mar  1 10:35:52] DEBU Created container [fc1f03ba6d5c step-dc0ca6a011], starting it
-[Mar  1 10:35:52] DEBU Container [fc1f03ba6d5c step-dc0ca6a011] started, waiting for completion
-[Mar  1 10:35:55] DEBU Container [fc1f03ba6d5c step-dc0ca6a011] completed with exit code [0] as expected
-[Mar  1 10:35:55] DEBU Container [fc1f03ba6d5c step-dc0ca6a011] removed
-[Mar  1 10:35:55] STEP Run image [continuumio/miniconda:latest] with command [[/bin/sh -c conda install --quiet --yes conda=4.3 && conda install  -c iuc -c bioconda -c r -c defaults -c conda-forge  samtools=1.3.1 bwa=0.7.15 -p /usr/local --copy --yes --quiet]]
-[Mar  1 10:35:55] DEBU Creating container [step-15585c5e5f]
-[Mar  1 10:35:55] DEBU Created container [fd60643cbd2e step-15585c5e5f], starting it
-[Mar  1 10:35:57] DEBU Container [fd60643cbd2e step-15585c5e5f] started, waiting for completion
-[Mar  1 10:35:58] SOUT Fetching package metadata .......
-[Mar  1 10:35:59] SOUT Solving package specifications: ..........
+/Users/john/.planemo/involucro -v=3 -f /Users/john/workspace/planemo/.venv/lib/python2.7/site-packages/galaxy_lib-17.9.0-py2.7.egg/galaxy/tools/deps/mulled/invfile.lua -set CHANNELS='iuc,bioconda,r,defaults,conda-forge' -set TEST='true' -set TARGETS='samtools=1.3.1,bwa=0.7.15' -set REPO='quay.io/biocontainers/mulled-v2-fe8faa35dbf6dc65a0f7f5d4ea12e31a79f73e40:03dc1d2818d9de56938078b8b78b82d967c1f820' -set BINDS='build/dist:/usr/local/' -set PREINSTALL='conda install --quiet --yes conda=4.3' build
+/Users/john/.planemo/involucro -v=3 -f /Users/john/workspace/planemo/.venv/lib/python2.7/site-packages/galaxy_lib-17.9.0-py2.7.egg/galaxy/tools/deps/mulled/invfile.lua -set CHANNELS='iuc,bioconda,r,defaults,conda-forge' -set TEST='true' -set TARGETS='samtools=1.3.1,bwa=0.7.15' -set REPO='quay.io/biocontainers/mulled-v2-fe8faa35dbf6dc65a0f7f5d4ea12e31a79f73e40:03dc1d2818d9de56938078b8b78b82d967c1f820' -set BINDS='build/dist:/usr/local/' -set PREINSTALL='conda install --quiet --yes conda=4.3' build
+DEBU Run file [/Users/john/workspace/planemo/.venv/lib/python2.7/site-packages/galaxy_lib-17.9.0-py2.7.egg/galaxy/tools/deps/mulled/invfile.lua]
+STEP Run image [continuumio/miniconda:latest] with command [[rm -rf /data/dist]]
+DEBU Creating container [step-730a02d79e]
+DEBU Created container [5e4b5f83c455 step-730a02d79e], starting it
+DEBU Container [5e4b5f83c455 step-730a02d79e] started, waiting for completion
+DEBU Container [5e4b5f83c455 step-730a02d79e] completed with exit code [0] as expected
+DEBU Container [5e4b5f83c455 step-730a02d79e] removed
+STEP Run image [continuumio/miniconda:latest] with command [[/bin/sh -c conda install --quiet --yes conda=4.3 && conda install  -c iuc -c bioconda -c r -c defaults -c conda-forge  samtools=1.3.1 bwa=0.7.15 -p /usr/local --copy --yes --quiet]]
+DEBU Creating container [step-e95bf001c8]
+DEBU Created container [72b9ca0e56f8 step-e95bf001c8], starting it
+DEBU Container [72b9ca0e56f8 step-e95bf001c8] started, waiting for completion
+SOUT Fetching package metadata .........
+SOUT Solving package specifications: .
+SOUT
+SOUT Package plan for installation in environment /opt/conda:
+SOUT
+SOUT The following packages will be UPDATED:
+SOUT
+SOUT conda: 4.3.11-py27_0 --> 4.3.22-py27_0
+SOUT
+SOUT Fetching package metadata .................
+SOUT Solving package specifications: .
 ...
-[Mar  1 10:36:56] SOUT
-[Mar  1 10:36:57] DEBU Container [fd60643cbd2e step-15585c5e5f] completed with exit code [0] as expected
-[Mar  1 10:36:58] DEBU Container [fd60643cbd2e step-15585c5e5f] removed
-[Mar  1 10:36:58] STEP Wrap [build/dist] as [quay.io/biocontainers/mulled-v1-01afc412d1f216348d85970ce5f88c984aa443f3]
-[Mar  1 10:36:58] DEBU Creating container [step-dfbadd3a91]
-[Mar  1 10:36:59] DEBU Packing succeeded
+SOUT
+DEBU Container [72b9ca0e56f8 step-e95bf001c8] completed with exit code [0] as expected
+DEBU Container [72b9ca0e56f8 step-e95bf001c8] removed
+STEP Wrap [build/dist] as [quay.io/biocontainers/mulled-v2-fe8faa35dbf6dc65a0f7f5d4ea12e31a79f73e40:03dc1d2818d9de56938078b8b78b82d967c1f820-0]
+DEBU Creating container [step-6f1c176372]
+DEBU Packing succeeded
 ```
 
-This built `quay.io/biocontainers/mulled-v1-01afc412d1f216348d85970ce5f88c984aa443f3`!
+This built `quay.io/biocontainers/mulled-v2-fe8faa35dbf6dc65a0f7f5d4ea12e31a79f73e40:03dc1d2818d9de56938078b8b78b82d967c1f820-0`!
 
 ???
-
-TODO: mulled-v2...
-
 
 ---
 
@@ -426,5 +513,29 @@ class: left
 ```
 $ planemo project_init --project_template=conda_testing conda_testing
 $ cd conda_testing/
+$ planemo mull bwa_and_samtools.xml
+$ docker images # verify the container was built
+$ # use docker run to verify the container has samtools and bwa.
 $ planemo test --biocontainers bwa_and_samtools.xml
 ```
+
+???
+
+TODO: This requires dev branch.
+
+---
+
+### Publishing Multi-Package Containers
+
+![](../../images/multi-package-repo.png)
+
+???
+
+We are currently monitoring tools-iuc, tools-devteam, and a half a dozen other repositories
+daily for package combinations to publish.
+
+---
+
+### Publishing **Your** Multi-Package Containers
+
+![](../../images/planemo-monitor.png)
