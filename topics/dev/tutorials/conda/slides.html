@@ -1,0 +1,666 @@
+---
+layout: tutorial_slides
+topic_name: "Dev-Corner"
+tutorial_name: conda
+logo: "GTN"
+---
+
+## Planemo
+
+These slides mirror the section on "Dependencies and Conda" in the [Planemo Documentation](http://planemo.readthedocs.io/en/latest/writing_advanced.html#dependencies-and-conda).
+
+---
+
+## Galaxy Dependencies
+
+---
+
+class: left
+
+### Example Tool (1 / 2)
+
+From Planemo docs - the following example builds a tool for the `seqtk seq` command.
+
+```
+$ planemo tool_init --force \
+                    --id 'seqtk_seq' \
+                    --name 'Convert to FASTA (seqtk)' \
+                    --requirement seqtk@1.2 \
+                    --example_command 'seqtk seq -a 2.fastq > 2.fasta' \
+                    --example_input 2.fastq \
+                    --example_output 2.fasta \
+                    --test_case \
+                    --cite_url 'https://github.com/lh3/seqtk' \
+                    --help_from_command 'seqtk seq'
+```
+
+Notice the `--requirement seqtk@1.2`. 
+
+---
+
+class: left
+
+### Example Tool (2 / 2)
+
+The `--requirement seqtk@1.2` gets translated into the follow tool XML:
+
+```
+<requirements>
+    <requirement type="package" version="1.2">seqtk</requirement>
+</requirements>
+```
+
+---
+
+### Dependency Resolution
+
+![](../../images/galaxy_instance.png)
+
+???
+
+- Notice that multiple tools may be mapped to the same requirements and 
+  any tools may use multiple Conda recipes.
+- There are few different ways to populate Applications and Libraries
+  on the right - we will talk about Conda which is what we consider the
+  "community best practice".
+
+---
+
+![](../../../../../shared/images/conda_logo.png)
+
+Package, dependency and environment management
+
+---
+
+###.image-25[![](../../../../../shared/images/conda_logo.png)] <br/> Conda Terminology
+
+
+Conda **recipes** build **packages** that are published to **channels**.
+
+---
+
+### .image-25[![](../../../../../shared/images/conda_logo.png)] <br /> Conda Key Features for Galaxy
+
+- No compilation at install time - *binaries* with their dependencies, libraries...
+- Modern YAML based recipes.
+- Support for all operating systems Galaxy targets.
+- Easy to manage *multiple versions* of the same recipe.
+- **Community** - not *restricted* to Galaxy.
+
+???
+
+---
+
+###.image-25[![](../../../../../shared/images/conda_logo.png)] <br/> Conda Distributions
+
+```
+
+
+```
+![](../../images/miniconda_vs_anaconda.png)
+
+---
+
+###.image-25[![](../../../../../shared/images/conda_logo.png)] <br/> Best Practice Channels
+
+- Packages through channels within Continuum.
+- Conda channels searched by Galaxy for packages:
+    - iuc
+    - bioconda
+    - defaults
+    - conda-forge
+
+???
+
+If you are interested in Natural Language Processing or Cheminformatics you may be asking if
+these channels can still work for your tools. Despite the name Bioconda - it is really more
+about community and a set of best practices than about bioinformatics purity - many diverse
+packages have been integrated.
+
+---
+
+###.image-25[![](../../../../../shared/images/conda_logo.png)] <br/> Install and Configure
+
+```bash
+$ planemo conda_init
+$ export PATH=$PATH:~/miniconda3/bin
+$ which conda
+/Users/john/miniconda3/bin/conda
+```
+
+Planemo installs Conda using miniconda and configured defaults designed to easy development.
+
+This has already been done on Planemo machine.
+
+---
+
+###.image-25[![](../../../../../shared/images/conda_logo.png)] <br/> Quickstart
+#### Using Conda outside Planemo
+
+- Install a package
+
+
+```bash
+conda install pyyaml
+```
+
+- Install some packages within an isolated environment
+
+```bash
+$ conda create -n yaml pyyaml
+$ conda env list
+yaml        *  ~/miniconda3/envs/yaml
+root             ~/miniconda3
+$ source activate yaml
+(yaml) $
+```
+
+---
+
+### Conda and Galaxy
+
+Galaxy now automatically installs Conda when first launched and will use Bioconda and other channels
+for package resolution. 
+
+---
+
+### Installing Tools with Conda
+
+![](../../images/tool_install.png)
+
+---
+
+### Managing Tool Dependencies
+
+![](../../images/dependency_manage.png)
+
+---
+
+### Conda and Planemo
+
+Using Conda directly is generally package-centric, Planemo provides abstractions that are tool-centric.
+
+---
+
+class: left
+
+The next few slides will use the seqtk example from Planemo's documentation - this can downloaded to
+follow along using the following command:
+
+```
+$ planemo project_init --template=seqtk_complete seqtk_example
+$ cd seqtk_example
+```
+
+---
+
+class: left
+
+### Linting Conda Dependencies
+
+Planemo can check if the requirements of a tool are available in best practice Conda channels using the `--conda_requirements` flag of `planemo lint`.
+
+```
+$ planemo lint --conda_requirements seqtk_seq.xml
+Linting tool /Users/john/workspace/planemo/docs/writing/seqtk_seq_v6.xml
+  ...
+Applying linter requirements_in_conda... CHECK
+.. INFO: Requirement [seqtk@1.2] matches target in best practice Conda channel [bioconda].
+```
+
+Notice Planemo indicates this tool is available and shows the channel it is available in.
+
+---
+
+### The Planemo `conda_install` command
+
+```
+$ planemo conda_install seqtk_seq.xml
+Install conda target CondaTarget[seqtk,version=1.2]
+/home/john/miniconda3/bin/conda create -y --name __seqtk@1.2 seqtk=1.2
+Fetching package metadata ...............
+Solving package specifications: ..........
+Package plan for installation in environment /home/john/miniconda3/envs/__seqtk@1.2:
+The following packages will be downloaded:
+    package                    |            build
+    ---------------------------|-----------------
+    seqtk-1.2                  |                0          29 KB  bioconda
+The following NEW packages will be INSTALLED:
+    seqtk: 1.2-0   bioconda
+    zlib:  1.2.8-3
+Fetching packages ...
+....
+#
+# To deactivate this environment, use:
+# > source deactivate __seqtk@1.2
+#
+$ which seqtk
+seqtk not found
+```
+
+Notice seqtk hasn't been placed on the `PATH`, an environment has been setup that Galaxy (when
+used through Planemo) can leverage.
+
+---
+
+### The Planemo `conda_env` command
+
+```
+$ . <(planemo conda_env seqtk_seq.xml)
+Deactivate environment with conda_env_deactivate
+(seqtk_seq) $ which seqtk
+/home/planemo/miniconda2/envs/jobdepsiJClEUfecc6d406196737781ff4456ec60975c137e04884e4f4b05dc68192f7cec4656/bin/seqtk
+(seqtk_seq) $ seqtk seq
+
+Usage:   seqtk seq [options] <in.fq>|<in.fa>
+
+Options: -q INT    mask bases with quality lower than INT [0]
+         -X INT    mask bases with quality higher than INT [255]
+         -n CHAR   masked bases converted to CHAR; 0 for lowercase [0]
+         -l INT    number of residues per line; 0 for 2^32-1 [0]
+...
+         -V        shift quality by '(-Q) - 33'
+         -U        convert all bases to uppercases
+         -S        strip of white spaces in sequences
+(seqtk_seq) $ conda_env_deactivate
+$
+```
+
+---
+
+### Using our Tool with the Conda Environment
+
+Now that we have verified the Conda environment setup with `conda_install` works properly on the 
+command-line, we can use our tool!
+
+`planemo test` and `planemo serve` will use this environment by default now for this tool.
+
+---
+
+### Planemo `test`
+
+```
+$ planemo test seqtk_seq.xml
+...
+INFO  [galaxy.tools.actions] Handled output named output1 for tool seqtk_seq (20.136 ms)
+INFO  [galaxy.tools.actions] Added output datasets to history (12.782 ms)
+INFO  [galaxy.tools.actions] Verified access to datasets for Job[unflushed,tool_id=seqtk_seq] (10.954 ms)
+INFO  [galaxy.tools.actions] Setup for job Job[unflushed,tool_id=seqtk_seq] complete, ready to flush (21.053 ms)
+INFO  [galaxy.tools.actions] Flushed transaction for job Job[id=2,tool_id=seqtk_seq] (26.510 ms)
+INFO  [galaxy.jobs.handler] (2) Job dispatched
+DEBUG [galaxy.tools.deps] Using dependency seqtk version 1.2 of type conda
+DEBUG [galaxy.tools.deps] Using dependency seqtk version 1.2 of type conda
+INFO  [galaxy.jobs.command_factory] Built script [/tmp/tmpLvKwta/job_working_directory/000/2/tool_script.sh] for tool command [[ "$CONDA_DEFAULT_ENV" = "/Users/john/miniconda2/envs/__seqtk@1.2" ] || . /Users/john/miniconda2/bin/activate '/Users/john/miniconda2/envs/__seqtk@1.2' >conda_activate.log 2>&1 ; seqtk seq -a '/tmp/tmpLvKwta/files/000/dataset_1.dat' > '/tmp/tmpLvKwta/files/000/dataset_2.dat']
+DEBUG [galaxy.tools.deps] Using dependency samtools version None of type conda
+DEBUG [galaxy.tools.deps] Using dependency samtools version None of type conda
+ok
+
+----------------------------------------------------------------------
+XML: /private/tmp/tmpLvKwta/xunit.xml
+----------------------------------------------------------------------
+Ran 1 test in 15.936s
+
+OK
+```
+
+The following line indicates the seqtk package was found:
+
+```
+[galaxy.tools.deps] Using dependency seqtk version 1.2 of type conda
+```
+
+---
+
+### <i class="fa fa-pencil" aria-hidden="true"></i> Hands-on
+
+![](../../images/exercise.png)
+
+---
+
+### <i class="fa fa-pencil" aria-hidden="true"></i> Hands-on
+
+#### The Goal
+- Use the Planemo commands `conda_install`, `conda_env`, and `test` to learn the Galaxy tool dependency development lifecycle.
+
+---
+
+### <i class="fa fa-pencil" aria-hidden="true"></i> Hands-on
+
+#### Steps
+
+Run the following commands to practice working with Galaxy tools, Planemo, and Conda.
+
+1. `planemo project_init --template=seqtk_complete seqtk_example`
+2. `cd seqtk_example`
+3. `planemo conda_install seqtk_seq.xml`
+4. `planemo conda_env seqtk_seq.xml`
+5. `planemo test seqtk_seq.xml`
+
+---
+
+### Finding the Correct Requirements & Packages
+
+The above example worked because a published Bioconda recipe named `seqtk` at version `1.2`
+was previously published, but how can these be found?
+
+Two easy approaches are using `planemo conda_search` and using the Anaconda web search.
+
+---
+
+class: left
+
+### Using the Planemo `conda_search` Command
+
+The Planemo `conda_search` command is a shortcut around `conda search` that searches best
+practice channels that Galaxy is configured to work with:
+
+```
+$ planemo conda_search seqt
+Fetching package metadata ...............
+seqtk                        r75                           0  bioconda
+                             r82                           0  bioconda
+                             r93                           0  bioconda
+                             1.2                           0  bioconda
+```
+
+Alternatively, `conda` can be used directly:
+
+```
+$ $HOME/miniconda3/bin/conda -c iuc -c bioconda -c conda-forge seqt
+```
+
+---
+
+### Using Anaconda Search - https://anaconda.org/ 
+
+![](../../images/anaconda_landing.png)
+
+
+???
+
+---
+
+### Using Anaconda Search - https://anaconda.org/
+
+![](../../images/anaconda_result.png)
+
+???
+
+Notice that only one of these results is a best practice channel and so that is the
+only one that will be used by Galaxy by default.
+
+---
+
+### <i class="fa fa-pencil" aria-hidden="true"></i> Hands-on
+
+![](../../images/exercise.png)
+
+---
+
+### <i class="fa fa-pencil" aria-hidden="true"></i> Hands-on
+
+#### The Goal
+- Find the correct package and version for a tool in a best practice channel.
+- Add a requirement to a tool to allow Galaxy to find, install, and use a Conda package.
+
+---
+
+### <i class="fa fa-pencil" aria-hidden="true"></i> Hands-on
+
+#### Steps
+
+1. Run the following commands to download an example tool to modify.
+```
+$ planemo project_init --template conda_exercises conda_exercises
+$ cd conda_exercises/exercise1
+$ ls
+pear.xml              test-data
+```
+2. Run `planemo test pear.xml` to verify the tool does not function without dependencies defined.
+3. Use `--conda_requirements` flag with `planemo lint` to verify it does indeed lack requirements.
+4. Use `planemo conda_search` or the [Anaconda](https://anaconda.org/) website to search for the correct package and version in a best practice channel.
+5. Update pear.xml with the correct requirement tags.
+6. Re-run the `lint` command from above to verify the tool now has the correct dependency definition.
+7. Re-run the `test` command from above to verify the tool test now works properly.
+
+
+---
+
+###.image-25[![](../../../../../shared/images/conda_logo.png)] <br/> Writing a Conda Recipe
+
+If searching best practice channels fails, you may need to build a Conda recipe.
+
+.footnote[[Documentation about how to write conda recipes from scratch](http://conda.pydata.org/docs/build_tutorials/pkgs2.html) <br/> [Bioconda guidelines](https://bioconda.github.io/guidelines.html)]
+
+---
+
+class: left
+
+###.image-25[![](../../../../../shared/images/conda_logo.png)] <br/> Writing a Conda Recipe - The Files
+
+A Conda recipe is defined by a directory, the two most important files in this directory are:
+
+- `meta.yaml`: contains all the metadata of the recipe
+- `build.sh`: the Unix script that installs the files
+
+---
+
+class: left
+
+###.image-25[![](../../../../../shared/images/conda_logo.png)] <br/> Writing a Conda Recipe - `meta.yaml`
+
+`meta.yaml` contains basic metadata about the recipe.
+
+```yaml
+package:
+  name: bwa
+  version: "0.7.15"
+about:
+  home: http://bio-bwa.sourceforge.net
+  license: MIT
+  summary: The BWA read mapper.
+build:
+  number: 0
+  skip: True # [osx]
+source:
+  fn: v0.7.15.tar.gz
+  url: https://github.com/lh3/bwa/archive/v0.7.15.tar.gz
+  md5: 54fdee953c5c256d36885a1c5c6b118c
+```
+
+---
+
+###.image-25[![](../../../../../shared/images/conda_logo.png)] <br/> Writing a Conda Recipe - `requirements`
+
+```yaml
+requirements:
+  build:
+    - gcc   # [not osx]
+    - llvm  # [osx]
+    - zlib
+  run:
+    - zlib
+    - bowtie2
+```
+<small>
+- `build`: requirements needed during the build step (here compilation)
+- `run`: requirements needed at runtime
+
+</small>
+
+---
+
+class: left
+
+###.image-25[![](../../../../../shared/images/conda_logo.png)] <br/> Writing a Conda Recipe - Tests
+
+`meta.yaml` should contain simple tests. These are commands executed at the end of `conda build` and expected to return `0` on success.
+
+
+```yaml
+test:
+  commands:
+    - bowtie2 --version
+```
+
+```yaml
+test:
+  commands:
+    - bwa 2>&1 | grep 'index sequences in the'
+```
+
+```yaml
+test:
+  commands:
+    - '$R -e "library(''xcms'')"'
+```
+
+---
+
+###.image-25[![](../../../../../shared/images/conda_logo.png)] <br/> Writing a Conda Recipe - `build.sh`
+
+```bash
+#!/bin/bash
+./configure --prefix=$PREFIX
+make
+make install
+```
+```bash
+#!/bin/bash
+mkdir -p $PREFIX/bin
+cp *.py $PREFIX/bin
+```
+<small>
+- `$PREFIX` is a variable defined by conda when building the package.
+- `$PREFIX` usually contains `bin/`, `lib/`, and `include/` that are filled with the package files.
+- `$PREFIX` will be loaded in the user environment at runtime: `PATH`, `LD_LIBRARY_PATH`, `PYTHONPATH`, ...
+</small>
+
+---
+
+###.image-25[![](../../../../../shared/images/conda_logo.png)] <br/> Writing a Conda Recipe - Skeletons
+
+- `conda skeleton pypi <packagename>`
+- `conda skeleton cran <packagename>`
+- `bioconductor_skeleton.py <packagename>`
+- `conda skeleton cpan <packagename>`
+
+These generate pre-filled recipes <small>(not guaranteed to work out of the box)</small> for specific programming environments.
+
+.footnote[[Building conda packages with conda skeleton](http://conda.pydata.org/docs/build_tutorials/pkgs.html)]
+
+---
+
+class: left
+
+###.image-25[![](../../../../../shared/images/conda_logo.png)] <br/> Writing a Conda Recipe - Building
+
+Once the recipe is ready to go, the `conda build` command can be used to build it.
+
+```bash
+$ $HOME/miniconda3/conda build .
+```
+
+1. BUILD START: Builds/Compiles the package
+2. BUILD START: Provides a .tar.bz2
+3. TEST START: Installs the .tar.bz2 previously generated
+4. TEST START: Launches the functional tests
+5. (Provides the .tar.bz2 path)
+
+.footnote[If miniconda wasn't configured with `planemo conda_init`, you may have to run `conda install conda-build` before using the above command.]
+
+???
+
+TODO: Formatting on this footnote is pretty bad.
+
+---
+
+.image-75[![](../../../../../shared/images/bioconda_logo.png)]
+
+
+- A channel dedicated to bioinformatics (and other informatics) packages
+- https://bioconda.github.io/
+- https://anaconda.org/bioconda
+- Open to [contribution](https://bioconda.github.io/contributing.html)
+- GitHub repository: https://github.com/bioconda/bioconda-recipes
+
+---
+
+###.image-25[![](../../../../../shared/images/bioconda_logo.png)] <br /> Contributing
+
+1. Fork [Bioconda](https://github.com/bioconda/bioconda-recipes/fork).
+1. Clone your fork:
+
+   `git clone https://github.com/myuser/bioconda-recipes`
+1. Create a new branch `package`
+
+   `git checkout -b package`
+1. Fill two files `meta.yaml` and `build.sh` in a new recipe directory.
+1. Build your new package and test it using `conda build`
+1. Commit and push to GitHub
+
+   `git add recipe; git commit -m 'my recipe description'; git push origin package`
+1. Create a [Pull Request](https://github.com/bioconda/bioconda-recipes)
+1. After the PR is merged, wait for the functional tests to pass on the master branch
+1. Enjoy your new Conda package installed at https://anaconda.org/bioconda
+
+See [Contributing with GitHub](github_contribution.html)
+
+---
+
+### Planemo and `--conda_use_local`
+
+By default, Galaxy and Planemo will ignore locally built packages.
+
+Simply pass `--conda_use_local` to various Planemo commands (e.g. `test`, `conda_install`, or `serve`) to use the local package
+cache.
+
+*Enables developing Galaxy tools and Conda recipes in parallel.*
+
+---
+
+### <i class="fa fa-pencil" aria-hidden="true"></i> Hands-on
+
+![](../../images/exercise.png)
+
+---
+
+### <i class="fa fa-pencil" aria-hidden="true"></i> Hands-on
+
+#### The Goal
+- Implement and test a local Conda recipe.
+- Use Planemo and Galaxy with a locally built package.
+
+---
+
+class: left
+
+### <i class="fa fa-pencil" aria-hidden="true"></i> Hands-on
+
+#### Before
+
+If you have completed `exercise1`, open `exercise2`.
+
+```
+$ cd ../exercise2
+$ ls
+fleeqtk_seq.xml              test-data
+```
+
+This directory contains the outline of a tool for [fleeqtk](https://github.com/jmchilton/fleeqtk). fleeqtk is a fork of the project seqtk that many Planemo tutorials are built around and the example tool `fleeqtk_seq.xml` should be fairly familiar.
+
+---
+
+class: left
+
+### <i class="fa fa-pencil" aria-hidden="true"></i> Hands-on
+
+#### Steps
+
+1. Clone and branch Bioconda (https://github.com/bioconda/bioconda-recipes)
+2. Build a recipe for fleeqtk version 1.3. You may wish to use conda skeleton, start from scratch, or copy the recipe of seqtk and work from there - any of these strategies should work.
+  * fleeqtk 1.3 can be downloaded using the URL https://github.com/jmchilton/fleeqtk/archive/v1.3.tar.gz.
+  * fleeqtk can be built using `make` and installed with `make install`.
+3. Use `conda build` to build the recipe.
+4. Run `planemo conda_install --conda_use_local fleeqtk_seq.xml` to install the package for Galaxy.
+5. Run `planemo test fleeqtk_seq.xml` to verify the tool and package work together.
