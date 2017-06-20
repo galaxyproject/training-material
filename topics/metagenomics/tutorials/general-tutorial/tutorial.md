@@ -416,7 +416,6 @@ Have a look at the taxonomy output. You will see that every read now has a class
 >   - "count" to the count table from `pre.cluster`
 >   - "taxonomy" to the taxonomy output from
 >   - "label" to `0.03`
->
 {: .hands_on}
 
 Have a look at the output TODO
@@ -432,24 +431,36 @@ Let's visualize our data using Krona:
 > - **Visualize with Krona** :wrench: with the following parameters
 >   - "input file" to taxonomy output from `classify.otu` (collection)
 >   - Set **Is this output from mothur?** to yes
+>
 {: .hands_on}
-
-<!-- TODO: different tax level? lot of unclassifieds -->
 
 The result is an HTML file with an interactive visualization, for instance try clicking
 on one of the rings in the image or playing around with some of the settings.
 
 ![](../../images/krona.png)
 
-<!-- TODO: per-sample plots? -->
+This produced a single plot for both your samples, but what if you want to compare
+the two samples?
+
+> ### :pencil2: Hands-on: Per-sample Krona plots
+>
+> - **Classify.otu** :wrench:
+>   - Hit the rerun button on the classify.otu job in your history and see if you can find settings
+>     that will give you per-sample taxonomy data
+>
+> - **Visualize with Krona** :wrench:
+>    - Now use this new output collection to create per-sample Krona plots
+>
+{: .hands_on}
+
 
 To further explore the community structure, we can visualize it with dedicated tools such as Phinch:
 
 > ### :pencil2: Hands-on: Visualization of the community structure with Phinch
 >
 > - **Make.biom** :wrench: with the following parameters
->   - "shared" to Subsample.shared
->   - "constaxonomy" to taxonomy output from `classify.otu` (collection)
+>   - "shared" to Make.shared
+>   - "constaxonomy" to taxonomy output from the first run of `classify.otu` (collection)
 >
 > The Galaxy project runs an instance of Phinch, and if you look at the output biom file, you will see a link
 > to view the file at Phinch:
@@ -567,13 +578,13 @@ In the WGS data, we have access to the sequences from the full genome, with gene
 HUMAnN2 generates 3 files
 
 - A file with the abundance of gene families
-    
+
     Gene family abundance is reported in RPK (reads per kilobase) units to normalize for gene length. It reflects the relative gene (or transcript) copy number in the community.
 
     "UNMAPPED" value is the total number of reads which remain unmapped after both alignment steps (nucleotide and translated search). Since other gene features in the table are quantified in RPK units, "UNMAPPED" can be interpreted as a single unknown gene of length 1 kilobase recruiting all reads that failed to map to known sequences."
 
 - A file with the coverage of pathways
-    
+
     Pathway coverage provides an alternative description of the presence (1) and absence (0) of pathways in a community, independent of their quantitative abundance.
 
 - A file with the abundance of pathways
@@ -621,7 +632,7 @@ With the HUMAnN2 output, we have access to UniRef50 gene families. However, the 
 >    - "UniRef50" as gene family type
 >    - "UniRef50 gene families into GO"
 >
-> 2. **Renormalize a HUMAnN2 generated table** :wrench:: Run **Renormalize** on the generated table 
+> 2. **Renormalize a HUMAnN2 generated table** :wrench:: Run **Renormalize** on the generated table
 >    - "Relative abundance" as normalization scheme
 >    - "Normalization of all levels by community total" as normalization level
 >
