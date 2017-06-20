@@ -161,7 +161,7 @@ You can then visualize locally ([http://localhost:4000/](http://localhost:4000/)
 
 ## How do I add a new topic?
 
-1. Copy the [`template`](template) directory, rename it and move it to the [`topic`](topic)
+1. Copy the [`template`](templates) directory, rename it and move it to the [`topic`](topics)
 2. Fill the meta information about the topic in the `metadata.yaml` file
     - `name`: name of the topic (same name as the `yml` file and the directory)
     - `title`: title of the topic
