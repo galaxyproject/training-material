@@ -407,12 +407,19 @@ The next step is then to use this information to know the abundance of the diffe
 > 3. **Classify.otu** :wrench: with the following parameters
 >   - "list" to output from `Cluster.split`
 >   - "count" to the count table from `Pre.cluster`
->   - "taxonomy" to the taxonomy output from `Pre.cluster`
+>   - "taxonomy" to the taxonomy output from `Classify.seqs`
 >   - "label" to `0.03`
 {: .hands_on}
 
-Have a look at the output TODO
-
+> ### :question: Questions
+>
+> How many OTUs with taxonomic assignation are found for the Anguil sample? And for the Pampa sample?
+>
+>    <details>
+>    <summary>Click to view answers</summary>
+>    2,212 for Anguil and 2,490 for Pampa ("tax.summary" output of `Classify.otus`)
+>    </details>
+{: .question}
 
 ## Visualization
 
@@ -421,9 +428,9 @@ Let's visualize our data using Krona:
 
 > ### :pencil2: Hands-on: Krona
 >
-> - **Visualize with Krona** :wrench: with the following parameters
->   - "input file" to taxonomy output from `classify.otu` (collection)
->   - Set **Is this output from mothur?** to yes
+> 1. **Visualize with Krona** :wrench: with the following parameters
+>   - "Input file" to taxonomy output from `Classify.otu` (collection)
+>   - Set **Is this output from mothur?** to `Yes`
 >
 {: .hands_on}
 
@@ -437,12 +444,13 @@ the two samples?
 
 > ### :pencil2: Hands-on: Per-sample Krona plots
 >
-> - **Classify.otu** :wrench:
->   - Hit the rerun button on the classify.otu job in your history and see if you can find settings
->     that will give you per-sample taxonomy data
+> 1. **Classify.otu** :wrench:
+>   
+>    Hit the rerun button on the `Classify.otu` job in your history and see if you can find settings that will give you per-sample taxonomy data
 >
-> - **Visualize with Krona** :wrench:
->    - Now use this new output collection to create per-sample Krona plots
+> 2. **Visualize with Krona** :wrench:
+>    
+>    Now use this new output collection to create per-sample Krona plots
 >
 {: .hands_on}
 
@@ -451,19 +459,19 @@ To further explore the community structure, we can visualize it with dedicated t
 
 > ### :pencil2: Hands-on: Visualization of the community structure with Phinch
 >
-> - **Make.biom** :wrench: with the following parameters
+> 1. **Make.biom** :wrench: with the following parameters
 >   - "shared" to Make.shared
 >   - "constaxonomy" to taxonomy output from the first run of `classify.otu` (collection)
 >
-> The Galaxy project runs an instance of Phinch, and if you look at the output biom file, you will see a link
-> to view the file at Phinch:
+>    The Galaxy project runs an instance of Phinch, and if you look at the output BIOM file, you will see a link to view the file at Phinch:
 >
-> ![](../../../../shared/images/viewatphinch.png)
+>    ![](../../../../shared/images/viewatphinch.png)
 >
-> Clicking on this link will lead you to the Phinch website, which will automatically load in your file, and
-> where you can several interactive visualisations:
+> 2. Click on the icon
+> 
+>    It will lead you to the Phinch website, which will automatically load in your file, and where you can several interactive visualisations:
 >
-> ![](../../../../shared/images/phinch_overviewpage.png)
+>     ![](../../../../shared/images/phinch_overviewpage.png)
 {: .hands_on}
 
 Once we have information about the community structure (OTUs with taxonomic structure), we can do more analysis on it: estimation of the diversity of micro-organism, comparison fo diversity between samples, analysis of populations, ... We will not detail such analyses here but you follow our tutorials on amplicon data analyses to learn about them.
