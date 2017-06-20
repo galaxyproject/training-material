@@ -1,0 +1,218 @@
+---
+layout: base_slides
+topic_name: "admin"
+tutorial_name: advanced-galaxy-customisation
+logo: "GTN"
+---
+
+### Slide deck
+
+This slide deck is available at http://bit.ly/gcc17custom (TODO create)
+
+---
+
+### Setup
+
+We are going to use a preset virtual machine image.
+
+From the given USB stick:
+
+* Copy and install VirtualBox (or [download](https://www.virtualbox.org/wiki/Downloads))
+* Copy the Planemo machine image - file `latest.ova`.
+
+---
+
+## Galaxy's frontend
+
+JS sources and LESS sources are in `/client` folder in Galaxy's root.
+All changes should be made there and then built with  the `$ make client` command (requires Node).
+
+---
+
+### How to modify the menu
+
+Open the [client/galaxy/scripts/layout/menu.js](https://github.com/galaxyproject/galaxy/blob/dev/client/galaxy/scripts/layout/menu.js)
+
+```
+var helpTab = {
+          id              : 'help',
+          title           : _l('Help'),
+          tooltip         : _l('Support, contact, and community'),
+          menu            : [{
+                  title   : _l('Support'),
+                  url     : options.support_url,
+                  target  : '_blank'
+              },{
+                  title   : _l('Search'),
+                  url     : options.search_url,
+                  target  : '_blank'
+```
+
+---
+
+### Translation and localisation 1/2
+
+* The language for labels used in the JS source code is English, but can be wrapped in `l()` which makes it translatable.
+
+`_l( 'This will permanently remove the data. Are you sure?' )`
+
+--
+
+* There is a script [client/galaxy/scripts/nls/locale.js](https://github.com/galaxyproject/galaxy/blob/dev/client/galaxy/scripts/nls/locale.js) that defines all translatable labels. By default without a translation.
+
+```
+"This will permanently remove the data in your datasets. Are you sure?" :
+    false,
+```
+
+--
+
+* There is a folder [client/galaxy/scripts/nls/](https://github.com/galaxyproject/galaxy/tree/dev/client/galaxy/scripts/nls) that contains all available localisations.
+```
+"This will permanently remove the data in your datasets. Are you sure?" :
+    "Cela supprimera de manière permanente les données de votre historique. Êtes-vous certain?",
+```
+
+---
+
+### Translation and localisation 2/2
+
+When user's browser locale or language is set to a known translation, it will be used instead of the default. Untranslated labels remain in English.
+
+---
+
+## Configuration tweaks
+
+Plenty of customisation can be achieved by proper settings in the main configuration file [galaxy.ini](https://github.com/galaxyproject/galaxy/blob/dev/config/galaxy.ini.sample)
+
+---
+
+### Toolpanel configuration
+
+* How the toolpanel looks like is decided in a file called `integrated_tool_panel.xml`.
+* By default it resides in Galaxy's root folder.
+* If missing it is generated from all other tool config files during startup.
+* Modify it if you want to reorder tools or move sections.
+
+---
+
+### Tool panel labels
+
+You can add `<tool labels="updated" />` to achieve:
+
+![tool panel labels](../../images/toolpanel_labels.png)
+
+---
+
+### Toolpanel search configuration 1/2
+
+Tool panel search is done on pre-built index. However you can tweak toolpanel
+searching by configuring the boosts in `galaxy.ini`.
+
+```
+tool_name_boost = 9
+tool_section_boost = 3
+tool_description_boost = 2
+tool_label_boost = 1
+tool_stub_boost = 5
+tool_help_boost = 0.5
+```
+
+You can also manipulate the searchlimit with `tool_search_limit = 20` which will
+display more/less results of the search.
+
+---
+
+### Toolpanel search configuration 2/2
+
+```
+# Enable/ disable Ngram-search for tools. It makes tool
+# search results tolerant for spelling mistakes in the query
+# by dividing the query into multiple ngrams and search for
+# each ngram
+#tool_enable_ngram_search = False
+
+# Set minimum and maximum sizes of ngrams
+#tool_ngram_minsize = 3
+#tool_ngram_maxsize = 4
+```
+
+---
+
+### Log level configuration
+
+```
+# Verbosity of console log messages.  Acceptable values can be found here:
+# https://docs.python.org/2/library/logging.html#logging-levels
+#log_level = DEBUG
+```
+
+![log levels](../../images/log_levels.png)
+
+---
+
+### Help menu
+
+```
+# The URL linked by the "Wiki" link in the "Help" menu.
+#wiki_url = https://galaxyproject.org/
+
+# The URL linked by the "Support" link in the "Help" menu.
+#support_url = https://galaxyproject.org/support
+
+# The URL linked by the "How to Cite Galaxy" link in the "Help" menu.
+#citation_url = https://galaxyproject.org/citing-galaxy
+
+# The URL linked by the "Search" link in the "Help" menu.
+#search_url = https://galaxyproject.org/search/
+
+# The URL linked by the "Mailing Lists" link in the "Help" menu.
+#mailing_lists_url = https://galaxyproject.org/mailing-lists
+
+# The URL linked by the "Videos" link in the "Help" menu.
+#screencasts_url = https://vimeo.com/galaxyproject
+
+# The URL linked by the "Terms and Conditions" link in the "Help" menu, as well
+# as on the user registration and login forms and in the activation emails.
+#terms_url = None
+```
+
+---
+
+### Brand and welcome
+
+```
+# Append "/{brand}" to the "Galaxy" text in the masthead.
+#brand = None
+```
+![brand](../../images/brand.png)
+
+```
+# The URL linked by the "Galaxy/brand" text.
+#logo_url = /
+
+# The URL of the page to display in Galaxy's middle pane when loaded.  This can
+# be an absolute or relative URL.
+#welcome_url = /static/welcome.html
+```
+
+---
+
+### Galaxy Tours
+
+Have their own [tutorial](https://galaxyproject.github.io/training-material//topics/dev//tutorials/interactive-tours/slides.html#1).
+
+---
+
+# other topics
+
+* prepare a custom tour
+* adjust the graphical interface
+* set up a built-in user/group chat
+* write and activate interface webhooks (with tool describing tours - even if PR unmerged)
+* splash page landing overlay with Galaxy's basics - that we have datasets, tools and jobs and how they interact (this does not exist yet, but is on a roadmap so we can prepare some proof of concept)
+* dynamic welcome.html + blog + twitter feed
+* hook up your own biostar
+* ToolBox filtering
+* quotas setup (parsec?)
+* dynamic job destinations (I am not sure about this one, feels like jobs are quite far from the original description of this session)
