@@ -50,21 +50,23 @@ It can be 16S for bacteria or archea or 18S for eukaryotes.
 With amplicon data, we can extract from which micro-organisms the sequences in our sample are coming from. This is called taxonomic assignation.
 We try to assign sequences to taxons and then classify or extract the taxonomy in our sample.
 
-In this analysis, we will use [Mothur tool suite](http://mothur.org), but only a small portion of its tools and possibilities.
-To learn more in detail how to use, check out the full [Mothur tutorial](../mothur-miseq-sop/tutorial.html).
+In this analysis, we will use [mothur tool suite](http://mothur.org), but only a small portion of its tools and possibilities.
+To learn more in detail how to use, check out the full [mothur tutorial](../mothur-miseq-sop/tutorial.html).
 
 ## Importing the data
 
 Our datasets comes from a soil samples in two different Argentinian locations, with capture and sequencing of the 16S rDNA V4 region
 using 454 GS FLX Titanium. The original data are available at EBI Metagenomics under the following run numbers:
 
-- Pampa soil: [SRR531818](https://www.ebi.ac.uk/metagenomics/projects/SRP016633/samples/SRS353016/runs/SRR531818/results/versions/2.0) and
+- Pampa soil: [SRR531818](https://www.ebi.ac.uk/metagenomics/projects/SRP016633/samples/SRS353016/runs/SRR531818/results/versions/2.0)
 - Anguil soil: [SRR651839](https://www.ebi.ac.uk/metagenomics/projects/SRP016633/samples/SRS386929/runs/SRR651839/results/versions/2.0)
 
 
 > ### :pencil2: Hands-on: Data upload
 >
-> 1. Import the FASTQ file from [Zenodo]() or from the data library (in "Analyses of metagenomics data" the "..." file)
+> 1. Import from [Zenodo]() or from the data library (in "Analyses of metagenomics data") the files
+>    - `SRR531818_pampa.fasta`
+>    - `SRR651839_anguil.fasta`
 >
 >    > ### :bulb: Tip: Importing data via links
 >    >
@@ -99,18 +101,19 @@ Project's QC results: https://www.ebi.ac.uk/metagenomics/projects/SRP016633/samp
 -->
 
 ### Preparing datasets
+
 We will perform a multisample analysis with mothur, in order to do so, we will merge all reads into a single file,
 and create a *group file*, indicating which reads belong to which samples.
 
-> ### :pencil2: Hands-on: prepare multisample analysis
+> ### :pencil2: Hands-on: Prepare multisample analysis
 >
-> - **merge.files** :wrench: with the following parameters
+> 1. **Merge.files** :wrench: with the following parameters
 >   - "Merge" to `fasta files`
 >   - "Inputs" to the two sample fasta files
 >
-> - **make.group** :wrench: with the following parameters
->   - "Method" to Manually
->   - "Additional" Add two elements to this repeat
+> 2. **Make.group** :wrench: with the following parameters
+>   - "Method" to `Manually specify fasta files and group names`
+>   - "Additional": Add two elements to this repeat
 >     - Pampa sample fasta file, with group name `pampa`
 >     - Anguil sample fasta file, with group name `anguil`
 >
@@ -118,49 +121,39 @@ and create a *group file*, indicating which reads belong to which samples.
 
 > ### :bulb: Tip
 >
-> Because we only have a small number of samples, we used the manual specification. If you have hundreds of samples
-> this would quickly become bothersome. The solution? use a collection! To read more about collections in Galaxy
-> please see [this]() tutorial
+> Because we only have a small number of samples, we used the manual specification. If you have hundreds of samples this would quickly become bothersome. The solution? use a collection! To read more about collections in Galaxy, please see [this]() tutorial
 {: .tip}
 
-Have a look at the group file. It is a very simple file, it contains two columns, first contains the read names,
-second the group (sample) name, in our case `pampa` or `anguil`.
+Have a look at the group file. It is a very simple file, it contains two columns, first contains the read names, second the group (sample) name, in our case `pampa` or `anguil`.
 
 
-### Optimize files for computation
+### Optimization of files for computation
+
 Because we are sequencing many of the same organisms, we anticipate that many of our sequences are
 duplicates of each other. Because it's computationally wasteful to align the same thing a bazillion
-times, we'll unique our sequences using the `unique.seqs` command:
+times, we'll unique our sequences using the `Unique.seqs` command:
 
 > ### :pencil2: Hands-on: Remove duplicate sequences
 >
-> - **Unique.seqs** :wrench: with the following parameters
+> 1. **Unique.seqs** :wrench: with the following parameters
 >   - "fasta" to the merged fasta file
 >
->
-> > ### :question: Question
-> >
-> > How many sequences were unique? How many duplicates were removed?
-> >
-> >    <details>
-> >    <summary>Click to view answer</summary>
-> >    9,502 unique sequences and 498 duplicates. <br>
-> >    This can be determined from the number of lines in the fasta (or names) output, compared to the
-> >    number of lines in the fasta file before this step.
-> >    </details>
-> {: .question}
->
-> - **count.seqs** :wrench: with the following parameters
->   - "name" to the name file from unique.seqs
->   - "Use a group file" to `yes`
->   - "group" to the group file from Make.group
+>    > ### :question: Question
+>    >
+>    > How many sequences were unique? How many duplicates were removed?
+>    >
+>    >    <details>
+>    >    <summary>Click to view answer</summary>
+>    >    9,502 unique sequences and 498 duplicates. <br>
+>    >    This can be determined from the number of lines in the fasta (or names) output, compared to the
+>    >    number of lines in the fasta file before this step.
+>    >    </details>
+>    {: .question}
 >
 {: .hands_on}
 
-This `unique.seqs` tool outputs two files, one is a fasta file containing only the unique sequences, and a *names files*.
-The names file consists of two columns, the first contains the sequence names for each of the unique
-sequences, and the second column contains all other sequence names that are identical to the representative
-sequence in the first column.
+This `Unique.seqs` tool outputs two files, one is a fasta file containing only the unique sequences, and a *names files*.
+The names file consists of two columns, the first contains the sequence names for each of the unique sequences, and the second column contains all other sequence names that are identical to the representative sequence in the first column.
 
 ```
 name          representatives
@@ -170,23 +163,34 @@ read_name7    read_name8
 ...
 ```
 
-The `count.seqs` file keeps track of the number of sequences represented by each unique representative
-across multiple samples. We will pass this file to many of the following tools to be used or updated as
-needed.
+> ### :pencil2: Hands-on: Count sequences
+>
+> 1. **Count.seqs** :wrench: with the following parameters
+>   - "name" to the name file from `Unique.seqs`
+>   - "Use a group file" to `yes`
+>   - "group" to the group file from `Make.group`
+{: .hands_on}
+
+The `Count.seqs` file keeps track of the number of sequences represented by each unique representative across multiple samples. We will pass this file to many of the following tools to be used or updated as needed.
 
 ## Quality Control
 
 The first step in any analysis should be to check and improve the quality of our data.
-For more information on the topic of quality control, please see our training materials
-[here](https://galaxyproject.github.io/training-material/NGS-QC/)
+
+
+> ### :nut_and_bolt: Comment
+>
+> For more information on the topic of quality control, please see our training materials [here](https://galaxyproject.github.io/training-material/NGS-QC/).
+{: .comment}
+
 
 First, let's get a feel of our data:
 
 > ### :pencil2: Hands-on: Summarize data
 >
-> - **Summary.seqs** :wrench: with the following parameters
->   - "fasta" parameter to the fasta from `unique.seqs`.
->   - "count" to count table from `count.seqs`
+> 1. **Summary.seqs** :wrench: with the following parameters
+>   - "fasta" parameter to the fasta from `Unique.seqs`
+>   - "count" to count table from `Count.seqs`
 >
 {: .hands_on}
 
@@ -207,94 +211,97 @@ Mean:         1        237.519    237.519    0.00495  4.24965
 total # of seqs:    20000
 ```
 
-This tells us that we have a total of 19,502 unique sequences, representing 20,000 total sequences that vary
-in length between 80 and 275 bases. Also, note that at least some of our sequences had some ambiguous base calls.
-Furthermore, at least one read had a homopolymer stretch of 31 bases, this is likely an error so we would like to
-filter such reads out as well.
+This tells us that we have a total of 19,502 unique sequences, representing 20,000 total sequences that vary in length between 80 and 275 bases. Also, note that at least some of our sequences had some ambiguous base calls.
+Furthermore, at least one read had a homopolymer stretch of 31 bases, this is likely an error so we would like to filter such reads out as well.
 
-If you are thinking that 20,000 is an oddly round number, you are correct, we downsampled the original
-datasets to 10,000 reads per sample for this tutorial to reduce the amount of time the analysis steps will take.
+If you are thinking that 20,000 is an oddly round number, you are correct, we downsampled the original datasets to 10,000 reads per sample for this tutorial to reduce the amount of time the analysis steps will take.
 
-We can filter our dataset on length, base quality, and maximum homopolymer length using the `screen.seqs` tool
+We can filter our dataset on length, base quality, and maximum homopolymer length using the `Screen.seqs` tool
 
 The following tool will remove any sequences with ambiguous bases and anything longer than 275 bp.
 
 > ### :pencil2: Hands-on: Filter reads based on quality and length
 >
-> - **Screen.seqs** :wrench: with the following parameters
->   - "fasta" to the fasta file from `unique.seqs`
->   - "group" the group file created in the make.contigs step
+> 1. **Screen.seqs** :wrench: with the following parameters
+>   - "fasta" to the fasta file from `Unique.seqs`
 >   - "minlength" parameter to `225`
 >   - "maxlength" parameter to `275`
 >   - "maxambig" parameter to `0`
 >   - "maxhomop" parameter to `8`
->   - "count" to the count file from `count.seqs`
+>   - "count" to the count file from `Count.seqs`
 >
 > > ### :question: Question
 > >
-> > How many reads were removed in this screening step? (Hint: run the summary.seqs tool again)
+> > How many reads were removed in this screening step? (Hint: run the `Summary.seqs` tool again)
 > >
 > >    <details>
 > >    <summary>Click to view answer</summary>
 > >    1,804. <br>
-> >    This can be determined by looking at the number of lines in bad.accnos output of screen.seqs step
-> >    or by comparing the total number of seqs between of the summary.seqs log before and after this screening
-> >    step
+> >    This can be determined by looking at the number of lines in bad.accnos output of screen.seqs step or by comparing the total number of seqs between of the summary.seqs log before and after this screening step
 > >    </details>
 > {: .question}
 {: .hands_on}
 
-
-
 ## Sequence Alignment
 
-Aligning our sequences to a reference helps improve OTU assignment [[Schloss et. al.](https://www.ncbi.nlm.nih.gov/pubmed/23018771)],
-so we will now align our sequences to the Silva reference database.
+Aligning our sequences to a reference helps improve OTU assignment [[Schloss et. al.](https://www.ncbi.nlm.nih.gov/pubmed/23018771)], so we will now align our sequences to the Silva reference database.
 
 > ### :pencil2: Hands-on: Align sequences
 >
-> - **Align.seqs** :wrench: with the following parameters
->   - "fasta" to the `good.fasta` output from screen.seqs
->   - "reference" to the `silva.v4.fasta` reference file from your history
+> 1. Import the `silva.v4.fasta` file in your history
+> 2. **Align.seqs** :wrench: with the following parameters
+>   - "fasta" to the `good.fasta` output from `Screen.seqs`
+>   - "reference" to the `silva.v4.fasta` reference file
 >   - "flip" to `Yes`
 >
-> This step may take a few minutes, please be patient.
+>   This step may take a few minutes, please be patient.
 >
-> - **Summary.seqs** :wrench: with the following parameters
->   - "fasta" parameter to the aligned output from `align.seqs`
->   - "count" parameter to count_table output from `screen.seqs`
+> 3. **Summary.seqs** :wrench: with the following parameters
+>   - "fasta" parameter to the aligned output from `Align.seqs`
+>   - "count" parameter to count_table output from `Screen.seqs`
 >
 {: .hands_on}
 
-View the log output from the summary step.
+To get an idea of the quality of the alignment, we can view the log output from the summary step:
 
 ```
-              Start     End       NBases     Ambigs   Polymer  NumSeqs
-Minimum:      2391      10674     9          0        2        1
-2.5%-tile:    3080      12071     234        0        4        455
-25%-tile:     3080      13424     244        0        4        4545
-Median:       3080      13424     245        0        4        9090
-75%-tile:     3080      13424     245        0        4        13634
-97.5%-tile:   3082      13424     246        0        6        17724
-Maximum:      13396     13425     267        0        7        18178
-Mean:         3080.6    13380     244.212    0        4.27946
+        Start   End NBases  Ambigs  Polymer NumSeqs
+Minimum:    2391    10674   9   0   2   1
+2.5%-tile:  3080    13383   235 0   4   501
+25%-tile:   3080    13424   245 0   4   5001
+Median:     3080    13424   245 0   4   10001
+75%-tile:   3080    13424   245 0   5   15001
+97.5%-tile: 13396   13425   267 0   7   19501
+Maximum:    13396   13425   267 0   7   20000
+Mean:   2799.95 12161.1 221.964 0   3.8896
 # of unique seqs:   17698
-total # of seqs:    18178
+total # of seqs:    20000
 ```
 
-From this we can see that most of our reads align nicely to positions `3080-13424` on this reference.
-This corresponds exactly to the V4 target region of the 16S gene.
+> ### :question: Questions
+>
+> 1. How many sequences has been aligned?
+> 2. Between which positions most of the reads are aligned to this references?
+>
+>    <details>
+>    <summary>Click to view answers</summary>
+>    <ol type="1">
+>    <li>17,698 are aligned</li>
+>    <li>From this we can see that most of our reads align nicely to positions `3080-13424` on this reference.
+This corresponds exactly to the V4 target region of the 16S gene.</li>
+>    </ol>
+>    </details>
+{: .question}
 
-To make sure that everything overlaps the same region we'll re-run screen.seqs to get sequences that
-start at or before position 3080 and end at or after position 13424.
+To make sure that everything overlaps the same region we'll re-run `Screen.seqs` to get sequences that start at or before position 3,080 and end at or after position 13,424.
 
 > ### :pencil2: Hands-on: Remove poorly aligned sequences
 >
-> - **Screen.seqs** :wrench: with the following parameters
+> 1. **Screen.seqs** :wrench: with the following parameters
 >   - "fasta" to the aligned fasta file
 >   - "start" to `3080`
 >   - "end" to `13424`
->   - "count" to the group file created by the previous run of `screen.seqs`
+>   - "count" to the group file created by the previous run of `Screen.seqs`
 >
 > > ### :question: Question
 > >
@@ -306,16 +313,12 @@ start at or before position 3080 and end at or after position 13424.
 > {: .question}
 {: .hands_on}
 
-
-Now we know our sequences overlap the same alignment coordinates, we want to make sure they *only* overlap
-that region. So we'll filter the sequences to remove the overhangs at both ends. In addition, there are many
-columns in the alignment that only contain gap characters (i.e. "."). These can be pulled out without
-losing any information. We'll do all this with filter.seqs:
+Now we know our sequences overlap the same alignment coordinates, we want to make sure they *only* overlap that region. So we'll filter the sequences to remove the overhangs at both ends. In addition, there are many columns in the alignment that only contain gap characters (*i.e.* "."). These can be pulled out without losing any information. We'll do all this with `Filter.seqs`:
 
 > ### :pencil2: Hands-on: Filter sequences
 >
-> - **Filter.seqs** :wrench: with the following parameters
->   - "fasta"" to good.fasta output from Sreen.seqs
+> 1. **Filter.seqs** :wrench: with the following parameters
+>   - "fasta"" to `good.fasta` output from `Screen.seqs`
 >   - "vertical" to Yes
 >   - "trump" to `.`
 {: .hands_on}
@@ -323,20 +326,13 @@ losing any information. We'll do all this with filter.seqs:
 
 ## Extraction of taxonomic information
 
-The main questions when analyzing amplicon data are: Which micro-organisms are present in an environmental samples?
-And in which proportion? What is the structure of the community of the micro-organisms?
+The main questions when analyzing amplicon data are: Which micro-organisms are present in an environmental samples? And in which proportion? What is the structure of the community of the micro-organisms?
 
-The idea is to take the sequences and assign them to a taxon. To do that, we group (or cluster) sequences based on
-their similarity to define Operational Taxonomic Units (OTUs); groups of similar sequences that can be treated as
-a single "genus" or "species" (depending on the clustering threshold)
+The idea is to take the sequences and assign them to a taxon. To do that, we group (or cluster) sequences based on their similarity to define Operational Taxonomic Units (OTUs); groups of similar sequences that can be treated as a single "genus" or "species" (depending on the clustering threshold)
 
 > ### :book: Background: Operational Taxonomic Units (OTUs)
 >
-> In 16S metagenomics approaches, OTUs are clusters of similar sequence variants of the 16S rDNA marker gene
-> sequence. Each of these clusters is intended to represent a taxonomic unit of a bacteria species or genus
-> depending on the sequence similarity threshold. Typically, OTU cluster are defined by a 97% identity
-> threshold of the 16S gene sequence variants at genus level. 98% or 99% identity is suggested for species
-> separation.
+> In 16S metagenomics approaches, OTUs are clusters of similar sequence variants of the 16S rDNA marker gene sequence. Each of these clusters is intended to represent a taxonomic unit of a bacteria species or genus depending on the sequence similarity threshold. Typically, OTU cluster are defined by a 97% identity threshold of the 16S gene sequence variants at genus level. 98% or 99% identity is suggested for species separation.
 >
 > ![](../../images/otu.png)
 >
@@ -347,42 +343,39 @@ a single "genus" or "species" (depending on the clustering threshold)
 
 
 
-The first thing we want to do is to further de-noise our sequences, by pre-clustering the sequences using the
-`pre.cluster` command, allowing for up to 2 differences between sequences. This command will split the
-sequences by group and then sort them by abundance and go from most abundant to least and identify
-sequences that differ no more than 2 nucleotides from on another. If this is the case, then they get
-merged. We generally recommend allowing 1 difference for every 100 basepairs of sequence:
+The first thing we want to do is to further de-noise our sequences, by pre-clustering the sequences using the `Pre.cluster` command, allowing for up to 2 differences between sequences. This command will split the sequences by group and then sort them by abundance and go from most abundant to least and identify sequences that differ no more than 2 nucleotides from on another. If this is the case, then they get merged. We generally recommend allowing 1 difference for every 100 basepairs of sequence:
 
-> ### :pencil2: Hands-on: Perform preliminary clustering of sequences
+> ### :pencil2: Hands-on: Perform preliminary clustering of sequences and remove undesired sequences
 >
-> - **Pre.cluster** :wrench: with the following parameters
->   - "fasta" to the fasta output from the last Unique.seqs run
->   - "name file or count table" to the count table from the last `screen.seqs` step
+> 1. **Pre.cluster** :wrench: with the following parameters
+>   - "fasta" to the fasta output from the last `Filter.seqs` run
+>   - "name file or count table" to the count table from the last `Screen.seqs` step
 >   - "diffs" to 2
 >
-> > ### :question: Question
-> >
-> >  How many unique sequences are we left with after this clustering of highly similar sequences?
-> > <details>
-> >   <summary> Click to view answer</summary>
-> >   10,369. <br>
-> >   This is the number of lines in the fasta output
-> > </details>
-> {: .question}
+>   > ### :question: Question
+>   >
+>   >  How many unique sequences are we left with after this clustering of highly similar sequences?
+>   > <details>
+>   >   <summary> Click to view answer</summary>
+>   >   10,386 <br>
+>   >   This is the number of lines in the fasta output
+>   > </details>
+>   {: .question}
+>
 {: .hands_on}
 
-
 <!-- optional additional QC: chimera.uchime -->
+We would like to classify the sequences using a training set.
 
-
-> ### :pencil2: Hands-on: Remove undesired sequences
+> ### :pencil2: Hands-on: Classify the sequences
 >
-> - **Classify.seqs** :wrench: with the following parameters
->   - "fasta" to the fasta output from Pre.cluster
+> 1. Import the `trainset16_022016.pds.fasta` and `trainset16_022016.pds.tax` in your history
+> 2. **Classify.seqs** :wrench: with the following parameters
+>   - "fasta" to the fasta output from `Pre.cluster`
 >   - "reference" to `trainset16_022016.pds.fasta` from your history
 >   - "taxonomy" to `trainset16_022016.pds.tax` from your history
 >   - "cutoff" to 80
->   - "count" to the count table from `pre.cluster`
+>   - "count" to the count table from `Pre.cluster`
 >
 > This step may take a couple of minutes, now may be a good time to grab a cup of tea :coffee:
 >
@@ -390,31 +383,31 @@ merged. We generally recommend allowing 1 difference for every 100 basepairs of 
 
 Have a look at the taxonomy output. You will see that every read now has a classification.
 
+The next step is then to use this information to know the abundance of the different found taxons.
+
 > ### :pencil2: Hands-on: Cluster our data into OTUs
 >
-> - **Cluster.split** :wrench: with the following parameters
+> 1. **Cluster.split** :wrench: with the following parameters
 >   - "Split by" to `Classification using fasta`
->   - "fasta" to the fasta output from `pre.cluster`
->   - "taxonomy" to the taxonomy output from `classify.seqs`
->   - "count" to the count table output from `pre.cluster`
+>   - "fasta" to the fasta output from `Pre.cluster`
+>   - "taxonomy" to the taxonomy output from `Classify.seqs`
+>   - "count" to the count table output from `Pre.cluster`
 >   - "cutoff" to `0.15`
 >
-> Next we want to know how many sequences are in each OTU from each group and we can do this using the
-> `Make.shared` command. Here we tell Mothur that we're really only interested in the 0.03 cutoff level:
+>     Next we want to know how many sequences are in each OTU from each group and we can do this using the `Make.shared` command. Here we tell mothur that we're really only interested in the 0.03 cutoff level:
 >
-> - **Make.shared** :wrench: with the following parameters
+> 2. **Make.shared** :wrench: with the following parameters
 >   - "Select input type" to `OTU list`
->   - "list" to list output from `cluster.split`
->   - "count" to the count table from `pre.cluster`
+>   - "list" to list output from `Cluster.split`
+>   - "count" to the count table from `Pre.cluster`
 >   - "label" to `0.03`
 >
-> We probably also want to know the taxonomy for each of our OTUs. We can get the consensus taxonomy for each
-> OTU using the `Classify.otu` command:
+>     We probably also want to know the taxonomy for each of our OTUs. We can get the consensus taxonomy for each OTU using the `Classify.otu` command:
 >
-> - **Classify.otu** :wrench: with the following parameters
->   - "list" to output from `cluster.split`
->   - "count" to the count table from `pre.cluster`
->   - "taxonomy" to the taxonomy output from
+> 3. **Classify.otu** :wrench: with the following parameters
+>   - "list" to output from `Cluster.split`
+>   - "count" to the count table from `Pre.cluster`
+>   - "taxonomy" to the taxonomy output from `Pre.cluster`
 >   - "label" to `0.03`
 >
 {: .hands_on}
@@ -516,7 +509,7 @@ In this tutorial, we use the second approach with MetaPhlAn2. This tools is usin
 
 - A BIOM file with the same information as the previous file but in BIOM format
 
-    It can be used then by Mothur and other tools requiring community structure information in BIOM format
+    It can be used then by mothur and other tools requiring community structure information in BIOM format
 
 - A SAM file with the results of the mapping of the sequences on the reference database
 
