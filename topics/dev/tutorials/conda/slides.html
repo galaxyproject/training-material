@@ -1,6 +1,6 @@
 ---
 layout: tutorial_slides
-topic_name: "Dev-Corner"
+topic_name: dev
 tutorial_name: conda
 logo: "GTN"
 ---
@@ -103,19 +103,19 @@ Conda **recipes** build **packages** that are published to **channels**.
 
 ###.image-25[![](../../../../../shared/images/conda_logo.png)] <br/> Best Practice Channels
 
+
 - Packages through channels within Continuum.
-- Conda channels searched by Galaxy for packages:
+- Conda channels searched by Galaxy for packages
     - iuc
     - bioconda
     - defaults
     - conda-forge
 
-???
+<br/>
+<br/>
+<br/>
 
-If you are interested in Natural Language Processing or Cheminformatics you may be asking if
-these channels can still work for your tools. Despite the name Bioconda - it is really more
-about community and a set of best practices than about bioinformatics purity - many diverse
-packages have been integrated.
+.footnote[If you are interested in Natural Language Processing or Cheminformatics you may be asking if these channels can still work for your tools. Despite the name [Bioconda] (https://bioconda.github.io/) - it is really more about community and a set of best practices than about bioinformatics purity - many diverse packages have been integrated.]
 
 ---
 
@@ -130,7 +130,7 @@ $ which conda
 
 Planemo installs Conda using miniconda and configured defaults designed to easy development.
 
-This has already been done on Planemo machine.
+This has already been done on [Planemo machine](https://github.com/galaxyproject/planemo-machine).
 
 ---
 
@@ -159,7 +159,7 @@ $ source activate yaml
 
 ### Conda and Galaxy
 
-Galaxy now automatically installs Conda when first launched and will use Bioconda and other channels
+Galaxy now automatically installs Conda when first launched and will use [Bioconda](https://bioconda.github.io/) and other channels
 for package resolution. 
 
 ---
@@ -184,7 +184,7 @@ Using Conda directly is generally package-centric, Planemo provides abstractions
 
 class: left
 
-The next few slides will use the seqtk example from Planemo's documentation - this can downloaded to
+The next few slides will use the seqtk example from Planemo's documentation - this can be downloaded to
 follow along using the following command:
 
 ```
@@ -371,7 +371,7 @@ $ $HOME/miniconda3/bin/conda -c iuc -c bioconda -c conda-forge seqt
 
 ---
 
-### Using Anaconda Search - https://anaconda.org/ 
+### Using Anaconda Search - https://anaconda.org
 
 ![](../../images/anaconda_landing.png)
 
@@ -380,7 +380,7 @@ $ $HOME/miniconda3/bin/conda -c iuc -c bioconda -c conda-forge seqt
 
 ---
 
-### Using Anaconda Search - https://anaconda.org/
+### Using Anaconda Search - https://anaconda.org
 
 ![](../../images/anaconda_result.png)
 
@@ -494,6 +494,9 @@ class: left
 
 ###.image-25[![](../../../../../shared/images/conda_logo.png)] <br/> Writing a Conda Recipe - Tests
 
+<br/>
+<br/>
+
 `meta.yaml` should contain simple tests. These are commands executed at the end of `conda build` and expected to return `0` on success.
 
 
@@ -514,6 +517,8 @@ test:
   commands:
     - '$R -e "library(''xcms'')"'
 ```
+
+Please note that the Conda tests run inside the runtime environment and not in the build environment.
 
 ---
 
@@ -551,14 +556,12 @@ These generate pre-filled recipes <small>(not guaranteed to work out of the box)
 
 ---
 
-class: left
-
 ###.image-25[![](../../../../../shared/images/conda_logo.png)] <br/> Writing a Conda Recipe - Building
 
 Once the recipe is ready to go, the `conda build` command can be used to build it.
 
 ```bash
-$ $HOME/miniconda3/conda build .
+$ $HOME/miniconda3/bin/conda build .
 ```
 
 1. BUILD START: Builds/Compiles the package
@@ -567,11 +570,9 @@ $ $HOME/miniconda3/conda build .
 4. TEST START: Launches the functional tests
 5. (Provides the .tar.bz2 path)
 
-.footnote[If miniconda wasn't configured with `planemo conda_init`, you may have to run `conda install conda-build` before using the above command.]
 
-???
+.footnote[If miniconda wasn't configured with `planemo conda_init`, you may have <br/> to run `conda install conda-build` before using the above command.]
 
-TODO: Formatting on this footnote is pretty bad.
 
 ---
 
@@ -579,7 +580,7 @@ TODO: Formatting on this footnote is pretty bad.
 
 
 - A channel dedicated to bioinformatics (and other informatics) packages
-- https://bioconda.github.io/
+- https://bioconda.github.io
 - https://anaconda.org/bioconda
 - Open to [contribution](https://bioconda.github.io/contributing.html)
 - GitHub repository: https://github.com/bioconda/bioconda-recipes
@@ -595,14 +596,14 @@ TODO: Formatting on this footnote is pretty bad.
 1. Create a new branch `package`
 
    `git checkout -b package`
-1. Fill two files `meta.yaml` and `build.sh` in a new recipe directory.
+1. Fill two files `meta.yaml` and `build.sh` in a new recipe directory
 1. Build your new package and test it using `conda build`
 1. Commit and push to GitHub
 
    `git add recipe; git commit -m 'my recipe description'; git push origin package`
 1. Create a [Pull Request](https://github.com/bioconda/bioconda-recipes)
 1. After the PR is merged, wait for the functional tests to pass on the master branch
-1. Enjoy your new Conda package installed at https://anaconda.org/bioconda
+1. Enjoy your new Conda package at https://anaconda.org/bioconda
 
 See [Contributing with GitHub](github_contribution.html)
 
@@ -658,9 +659,9 @@ class: left
 #### Steps
 
 1. Clone and branch Bioconda (https://github.com/bioconda/bioconda-recipes)
-2. Build a recipe for fleeqtk version 1.3. You may wish to use conda skeleton, start from scratch, or copy the recipe of seqtk and work from there - any of these strategies should work.
-  * fleeqtk 1.3 can be downloaded using the URL https://github.com/jmchilton/fleeqtk/archive/v1.3.tar.gz.
-  * fleeqtk can be built using `make` and installed with `make install`.
-3. Use `conda build` to build the recipe.
-4. Run `planemo conda_install --conda_use_local fleeqtk_seq.xml` to install the package for Galaxy.
-5. Run `planemo test fleeqtk_seq.xml` to verify the tool and package work together.
+2. Build a recipe for fleeqtk version 1.3. You may wish to use conda skeleton, start from scratch, or copy the recipe of seqtk and work from there - any of these strategies should work
+  * fleeqtk 1.3 can be downloaded using the URL https://github.com/jmchilton/fleeqtk/archive/v1.3.tar.gz
+  * fleeqtk can be built using `make` and installed with `make install`
+3. Use `conda build` to build the recipe
+4. Run `planemo conda_install --conda_use_local fleeqtk_seq.xml` to install the package for Galaxy
+5. Run `planemo test fleeqtk_seq.xml` to verify the tool and package work together
