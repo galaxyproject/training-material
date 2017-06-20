@@ -29,9 +29,9 @@ graphlan.py --format "png" --size 7 input_tree.txt png_image.png
 ### Wrapper
 
 - Description of the user interface
-- Link between the tool and the Galaxy instance
+- Link between the underlying tool and the Galaxy instance
 - How to invoke the tool
-- Which options to pass
+- Which files and options to pass
 - Which files the tool will produce as output
 
 ---
@@ -46,35 +46,6 @@ graphlan.py --format "png" --size 7 input_tree.txt png_image.png
 2. When the user fills the form and click the `Execute` button, Galaxy fills the `<command>` template in the XML with the inputs entered by the user and execute the Cheetah code, producing a script as output
 3. Galaxy creates a job for the generated script and executes it somewhere (bowtie is run in this case)
 4. Some (not necessarily all) output files become new history datasets, as specified in the `<outputs>` XML tag set
-
----
-
-![](../../images/planemo-logo.png)
-
-> Command-line utilities to assist in building and publishing Galaxy tools.
-
-- [Documentation](https://planemo.readthedocs.io/en/latest/)
-- [Tutorial](https://planemo.readthedocs.io/en/latest/writing_standalone.html)
-
----
-
-### <i class="fa fa-pencil" aria-hidden="true"></i> Hands-on
-
-![](../../images/exercise.png)
-
----
-
-### <i class="fa fa-pencil" aria-hidden="true"></i> Hands-on
-
-#### The Goal
-
-- Developing a wrapper for Seqtk
-
-    A tool for processing sequence data in FASTA and FASTQ files
-
----
-
-## Wrapper
 
 ---
 
@@ -103,9 +74,7 @@ graphlan.py --format "png" --size 7 input_tree.txt png_image.png
 
 ### Wrapper
 
-.image-10[![](../../images/exercise.png)]
-
-<small>Galaxy tool XML is formally defined in a XML Schema Definition (XSD), used to generate the [online documentation](https://docs.galaxyproject.org/en/latest/dev/schema.html)</small>
+Galaxy tool XML format is formally defined in a XML Schema Definition (XSD), used to generate the relative [online documentation](https://docs.galaxyproject.org/en/latest/dev/schema.html)
 
 ---
 
@@ -117,7 +86,7 @@ graphlan.py --format "png" --size 7 input_tree.txt png_image.png
 graphlan.py
 --format $format
 #if $dpi
-  --dpi $dpi
+    --dpi $dpi
 #end if
 --size $size
 "$input_tree"
@@ -136,6 +105,7 @@ python '$__tool_directory__/graphlan.py'
 
 - In the first case, `graphlan.py` is expected to be on the PATH when the job executes
 - In the second case, `$__tool_directory__` is a special variable which is substituted by Galaxy with the directory where the tool XML is
+- The `#if ... #end if` syntax comes from the [Cheetah](http://cheetahtemplate.org/) template language, which has a Python-like syntax
 
 ---
 
@@ -151,9 +121,9 @@ python '$__tool_directory__/graphlan.py'
 
 ```xml
 <inputs>
-  <param name="dpi" type="..." label="..." optional="True"/>
+    <param name="dpi" type="..." label="..." optional="True"/>
 
-  <param argument="--size" type="..." value="7" label="..." help="..."/>
+    <param argument="--size" type="..." value="7" label="..." help="..."/>
 </inputs>
 ```
 
@@ -164,7 +134,7 @@ python '$__tool_directory__/graphlan.py'
 graphlan.py
 ...
 #if $dpi
-  --dpi $dpi
+    --dpi $dpi
 #end if
 --size $size
 ...
@@ -197,7 +167,7 @@ graphlan.py
 
 ```xml
 <param name="..." type="float" min="0" max="10" value="1" label="..."
-help="..."/>
+    help="..."/>
 ```
 
 ???
@@ -223,13 +193,15 @@ help="..."/>
 
 ```xml
 <param name="..." type="select" label="..." help="...">
-  <option value="png" selected="true">PNG</option>
-  <option value="pdf">PDF</option>
-  <option value="ps">PS</option>
-  <option value="eps">EPS</option>
-  <option value="svg">SVG</option>
+    <option value="png" selected="true">PNG</option>
+    <option value="pdf">PDF</option>
+    <option value="ps">PS</option>
+    <option value="eps">EPS</option>
+    <option value="svg">SVG</option>
 </param>
 ```
+
+If no `option` has `selected="true"`, the first one is selected by default.
 
 ---
 
@@ -239,10 +211,10 @@ help="..."/>
 
 ```xml
 <param name="..." type="select" display="radio" label="..." help="...">
-  <option value="min" selected="true">Minimum</option>
-  <option value="mean">Mean</option>
-  <option value="max">Max</option>
-  <option value="sum">Sum</option>
+    <option value="min" selected="true">Minimum</option>
+    <option value="mean">Mean</option>
+    <option value="max">Max</option>
+    <option value="sum">Sum</option>
 </param>
 ```
 
@@ -254,8 +226,8 @@ help="..."/>
 
 ```xml
 <param name="..." type="select" multiple="true" label="..." help="...">
-  <option value="ld" selected="true">Length distribution</option>
-  <option value="gc" selected="true">GC content distribution</option>
+    <option value="ld" selected="true">Length distribution</option>
+    <option value="gc" selected="true">GC content distribution</option>
 </param>
 ```
 
@@ -267,7 +239,7 @@ help="..."/>
 
 ```xml
 <param name="..." type="boolean" checked="false" truevalue="--log" falsevalue=""
-  label="..."  help="..." />
+    label="..." help="..." />
 ```
 
 ---
@@ -280,25 +252,27 @@ class: packed
 
 ```xml
 <command><![CDATA[
-#if $input_format.format == "fasta":
-  phyml_fasta_id_encode_wrapper.sh $input_format.input $output_tree
-#else if $input_format.format == "phylip":
-  phyml.sh
+bwa mem ...
+#if $fastq_input.selector == 'paired':
+    '$fastq_input.input1' '$fastq_input.input2'
+#else:
+    '$fastq_input.input'
 #end if
 ]]></command>
 <inputs>
-  <conditional name="input_format">
-    <param type="select" name="format" label="Input format">
-      <option value="phylip">Phylip</option>
-      <option value="fasta">Fasta</option>
-    </param>
-    <when value="phylip">
-      <param format="phylip" name="input" type="data"  />
-    </when>
-    <when value="fasta">
-      <param format="fasta" name="input" type="data"  />
-    </when>
-  </conditional>
+    <conditional name="fastq_input">
+        <param name="selector" type="select" label="Single or paired-end reads?">
+            <option value="paired">Paired-end</option>
+            <option value="single">Single-end</option>
+        </param>
+        <when value="paired">
+            <param name="input1" type="data" format="fastq" label="Forward reads" />
+            <param name="input2" type="data" format="fastq" label="Reverse reads" />
+        </when>
+        <when value="single">
+            <param name="input" type="data" format="fastq" label="Single reads" />
+        </when>
+    </conditional>
 </inputs>
 ```
 
@@ -313,19 +287,19 @@ class: packed
 ```xml
 <command><![CDATA[
 #for $i, $s in enumerate( $series )
-  rank_of_series=$i
-  input_path=${s.input}
-  x_colom=${s.xcol}
-  y_colom=${s.ycol}
+    rank_of_series=$i
+    input_path=${s.input}
+    x_column=${s.xcol}
+    y_column=${s.ycol}
 #end for
 ]]></command>
 
 <inputs>
-  <repeat name="series" title="Series">
-    <param name="input" type="data" format="tabular" label="Dataset"/>
-    <param name="xcol" type="data_column" data_ref="input" label="Column for x axis"/>
-    <param name="ycol" type="data_column" data_ref="input" label="Column for y axis"/>
-  </repeat>
+    <repeat name="series" title="Series">
+        <param name="input" type="data" format="tabular" label="Dataset"/>
+        <param name="xcol" type="data_column" data_ref="input" label="Column for x axis"/>
+        <param name="ycol" type="data_column" data_ref="input" label="Column for y axis"/>
+    </repeat>
 </inputs>
 ```
 
@@ -342,9 +316,9 @@ class: packed
 
 ```xml
 <outputs>
-  <data format="txt" name="tree" label="${tool.name} on ${on_string}: Tree" />
-  <data format="txt" name="annotation" label="${tool.name} on ${on_string}:
-    Annotation" />
+    <data name="tree" format="txt" label="${tool.name} on ${on_string}: Tree" />
+    <data name="annotation" format="txt"
+        label="${tool.name} on ${on_string}: Annotation" />
 </outputs>
 ```
 
@@ -359,18 +333,18 @@ class: packed
 
 ```xml
 <inputs>
-  <param type="select" name="format" label="Output format">
-    <option value="png">PNG</option>
-    <option value="pdf">PDF</option>
-  </param>
+    <param type="select" name="format" label="Output format">
+        <option value="png">PNG</option>
+        <option value="pdf">PDF</option>
+    </param>
 </inputs>
 <outputs>
-  <data format="png" name="png_output" label="${tool.name} on ${on_string}: PNG">
-    <filter>format=="png"</filter>
-  </data>
-  <data format="pdf" name="pdf_output" label="${tool.name} on ${on_string}: PDF">
-    <filter>format=="pdf"</filter>
-  </data>
+    <data name="png_output" format="png" label="${tool.name} on ${on_string}: PNG">
+        <filter>format=="png"</filter>
+    </data>
+    <data name="pdf_output" format="pdf" label="${tool.name} on ${on_string}: PDF">
+        <filter>format=="pdf"</filter>
+    </data>
 </outputs>
 ```
 
@@ -389,13 +363,14 @@ Error if tool exit code is not 0 or either "Exception:" or "Error:" appears in s
 If you need more precision:
 ```xml
 <stdio>
-  <exit_code range=":-2" level="warning" description="Low disk space" />
-  <exit_code range="1:" level="fatal"  />
-  <regex match="Error:"  level="fatal" />
+    <exit_code range=":-2" level="warning" description="Low disk space" />
+    <exit_code range="1:" level="fatal"  />
+    <regex match="Error:"  level="fatal" />
 </stdio>
+<command> ... </command>
 ```
 
-<small>"Warning" level allow to add information to stderr without marking the dataset as failed</small>
+<small>"Warning" level allows to add information to `stderr` without marking the dataset as failed</small>
 
 ---
 
@@ -429,11 +404,11 @@ For more information, check the `user manual
 
 ```xml
 <citations>
-  <citation type="doi">10.1093/bioinformatics/bts611</citation>
-  <citation type="doi">10.1093/nar/gks1219</citation>
-  <citation type="doi">10.1093/nar/gks1005</citation>
-  <citation type="doi">10.1093/bioinformatics/btq461</citation>
-  <citation type="doi">10.1038/nbt.2198</citation>
+    <citation type="doi">10.1093/bioinformatics/bts611</citation>
+    <citation type="doi">10.1093/nar/gks1219</citation>
+    <citation type="doi">10.1093/nar/gks1005</citation>
+    <citation type="doi">10.1093/bioinformatics/btq461</citation>
+    <citation type="doi">10.1038/nbt.2198</citation>
 </citations>
 ```
 
@@ -450,14 +425,15 @@ Always quote text/data parameters
 graphlan.py
 --format '$format'
 #if $dpi
-  --dpi $dpi
+    --dpi $dpi
 #end if
 --size $size
 '$input_tree'
 ]]></command>
 ```
 
-- For security reason
+- For security reasons
+- Paths may contain spaces
 - Prefer single quotes over double quotes
 
 ---
@@ -504,6 +480,21 @@ Use sections to group related parameters
 
 ---
 
+![](../../images/planemo-logo.png)
+
+> Command-line utilities to assist in building and publishing Galaxy tools.
+
+- [Documentation](https://planemo.readthedocs.io/en/latest/)
+- [Tutorial](https://planemo.readthedocs.io/en/latest/writing_standalone.html)
+
+---
+
+###.image-25[![](../../images/planemo-logo.png)]
+
+![](../../images/big_picture.png)
+
+---
+
 ###.image-25[![](../../images/planemo-logo.png)]
 
 #### `planemo tool_init`
@@ -519,15 +510,16 @@ $ planemo tool_init --id 'some_short_id' --name 'My super tool'
 Complicated version:
 
 ```bash
-$ planemo tool_init  --id "samtools_sort" --name "Samtools sort" \
-                     --description "Sort alignments by leftmost coordinates, or by read nam" \
-                     --requirement samtools \
-                     --example_command "samtools sort -o 1.bam null > 1_sorted.bam" \
-                     --example_input 1.bam \
-                     --example_output 1_sorted.bam \
-                     --test_case --version_command "samtools --version | head -1" \
-                     --help_from_command "samtools sort" \
-                     --doi 10.1093/bioinformatics/btp352'
+$ planemo tool_init --id 'samtools_sort' --name 'Samtools sort' \
+          --description 'order of storing aligned sequences' \
+          --requirement 'samtools@1.3.1' \
+          --example_command "samtools sort -o '1_sorted.bam' '1.bam'" \
+          --example_input 1.bam \
+          --example_output 1_sorted.bam \
+          --test_case \
+          --version_command 'samtools --version | head -1' \
+          --help_from_command 'samtools sort' \
+          --doi '10.1093/bioinformatics/btp352'
 ```
 
 ---
@@ -597,6 +589,16 @@ Open http://127.0.0.1:9090/ in your web browser to view your new tool
 
 ### <i class="fa fa-pencil" aria-hidden="true"></i> Hands-on
 
+#### The Goal
+
+- Developing a wrapper for Seqtk
+
+    A tool for processing sequence data in FASTA and FASTQ files
+
+---
+
+### <i class="fa fa-pencil" aria-hidden="true"></i> Hands-on
+
 #### Before: install Seqtk
 *No brain needed*
 
@@ -647,13 +649,13 @@ $ cat 2.fasta
 ???
 
 ```bash
-# 1.
+# 2.
 planemo tool_init
 # -> hands_on-tool_integration/seqtk/seqtk_seq_step1.xml
-# 2. -> hands_on-tool_integration/seqtk/seqtk_seq_step2.xml
-# 3.
-planemo lint # seqtk_seq_step2.xml
+# 3. -> hands_on-tool_integration/seqtk/seqtk_seq_step2.xml
 # 4.
+planemo lint # seqtk_seq_step2.xml
+# 5.
 planemo serve # seqtk_seq_step2.xml
 ```
 
@@ -667,7 +669,7 @@ planemo serve # seqtk_seq_step2.xml
 
 - Functional testing is a quality assurance (QA) process.
 - The tests confort developers and users that the tools can run across different servers/architectures. And that the latest modifications don't break older features.
-- Tools are tested by feeding them input(s) and parameter(s) and examining the output(s) (typically a diff)
+- Tools are tested by feeding them inputs and parameters and verifying the outputs (typically a diff)
 
 ---
 
@@ -677,7 +679,7 @@ planemo serve # seqtk_seq_step2.xml
 1. Build tests using inputs/parameters/outputs
 2. Run the tests --> Failed --> Coffee
 3. Develop
-4. Run the tests --> Failed  --> Coffee
+4. Run the tests --> Failed --> Coffee
 5. Develop
 6. Run the tests --> Succeed --> Beer
 
@@ -687,18 +689,18 @@ planemo serve # seqtk_seq_step2.xml
 
 ```xml
 <tests>
-  <test>
-    <param name="input_tree" value="input_tree.txt"/>
-    <param name="format" value="png"/>
-    <param name="dpi" value="100"/>
-    <param name="size" value="7"/>
-    <param name="pad" value="2"/>
-    <output name="png_output_image" file="png_image.png" />
-  </test>
+    <test>
+        <param name="input_tree" value="input_tree.txt"/>
+        <param name="format" value="png"/>
+        <param name="dpi" value="100"/>
+        <param name="size" value="7"/>
+        <param name="pad" value="2"/>
+        <output name="png_output_image" file="png_image.png" />
+    </test>
 </tests>
 ```
 
-<small>`input_tree.txt` and `png_image.png` must be in the `test-data` directory</small>
+<small>`input_tree.txt` and `png_image.png` must be in the `test-data/` directory</small>
 
 ---
 
@@ -720,7 +722,7 @@ graphlan/
 #### Comparison Methods: comparing to an expected result
 
 ```xml
-<output name="out_file1" file="cf_maf2fasta_concat.dat" ftype="fasta"/>
+<output name="out_file1" file="cf_maf2fasta_concat.dat" ftype="fasta" />
 ```
 
 .footnote[[Complete documentation](https://docs.galaxyproject.org/en/latest/dev/schema.html#tool-tests-test)]
@@ -731,11 +733,7 @@ graphlan/
 #### Comparison Methods: comparing to an expected result
 
 ```xml
-<test>
-  <output ...
-    compare="diff|re_match|sim_size|contains|re_match_multiline"
-    ... />
-
+<output ... compare="diff|re_match|sim_size|contains|re_match_multiline" ... />
 ```
 
 .footnote[[Complete documentation](https://docs.galaxyproject.org/en/latest/dev/schema.html#tool-tests-test-output)]
@@ -746,12 +744,7 @@ graphlan/
 #### Comparison Methods: comparing to an expected result
 
 ```xml
-<test>
-  <output ...
-    compare="diff"
-    lines_diff="4"
-    ... />
-
+<output ... compare="diff" lines_diff="4" />
 ```
 
 .footnote[[Complete documentation](https://docs.galaxyproject.org/en/latest/dev/schema.html#tool-tests-test-output)]
@@ -762,12 +755,7 @@ graphlan/
 #### Comparison Methods: comparing to an expected result
 
 ```xml
-<test>
-  <output ...
-    compare="sim_size"
-    delta="1000"
-    ... />
-
+<output ... compare="sim_size" delta="1000" />
 ```
 
 .footnote[[Complete documentation](https://docs.galaxyproject.org/en/latest/dev/schema.html#tool-tests-test-output)]
@@ -778,11 +766,7 @@ graphlan/
 #### Comparison Methods: comparing to an expected result
 
 ```xml
-<test>
-  <output ...
-    md5="68b329da9893e34099c7d8ad5cb9c940"
-    ... />
-
+<output ... md5="68b329da9893e34099c7d8ad5cb9c940" />
 ```
 
 .footnote[[Complete documentation](https://docs.galaxyproject.org/en/latest/dev/schema.html#tool-tests-test-output)]
@@ -793,20 +777,19 @@ graphlan/
 #### Comparison Methods: checking the content
 
 ```xml
-<test>
-  <output name="out_file1">
+<output name="out_file1">
     <assert_contents>
-      <has_text text="chr7" />
-      <not_has_text text="chr8" />
-      <has_text_matching expression="1274\d+53" />
-      <has_line_matching expression=".*\s+127489808\s+127494553" />
-      <!-- &#009; is XML escape code for tab -->
-      <has_line line="chr7&#009;127471195&#009;127489808" />
-      <has_n_columns n="3" />
+        <has_text text="chr7" />
+        <not_has_text text="chr8" />
+        <has_text_matching expression="1274\d+53" />
+        <has_line_matching expression=".*\s+127489808\s+127494553" />
+        <!-- &#009; is XML escape code for tab -->
+        <has_line line="chr7&#009;127471195&#009;127489808" />
+        <has_n_columns n="3" />
     </assert_contents>
-  </output>
-</test>
+</output>
 ```
+
 .footnote[[Complete documentation](https://docs.galaxyproject.org/en/latest/dev/schema.html#tool-tests-test-output-assert-contents)]
 
 ---
@@ -816,23 +799,23 @@ graphlan/
 
 ```xml
 <tests>
-  <test>
-    <section name="advanced">
-        <repeat name="names">
-            <param name="first" value="Abraham"/>
-            <param name="last" value="Lincoln"/>
-        </repeat>
-        <repeat name="names">
-            <param name="first" value="Donald"/>
-            <param name="last" value="Trump"/>
-        </repeat>
-        <conditional name="image">
-          <param name="output_image" value="yes"/>
-          <param name="format" value="png"/>
-        </conditional>
-    </section>
-    (...)
-  </test>
+    <test>
+        <section name="advanced">
+            <repeat name="names">
+                <param name="first" value="Abraham"/>
+                <param name="last" value="Lincoln"/>
+            </repeat>
+            <repeat name="names">
+                <param name="first" value="Donald"/>
+                <param name="last" value="Trump"/>
+            </repeat>
+            <conditional name="image">
+                <param name="output_image" value="yes"/>
+                <param name="format" value="png"/>
+            </conditional>
+        </section>
+        ...
+    </test>
 </tests>
 ```
 
@@ -927,28 +910,12 @@ Definition of requirements in `.xml` file
 
 ```xml
 <requirements>
-  <requirement type="package" version="1.66">biopython</requirement>
-  <requirement type="package" version="1.0.0">graphlan</requirement>
+    <requirement type="package" version="1.66">biopython</requirement>
+    <requirement type="package" version="1.0.0">graphlan</requirement>
 </requirements>
 ```
 
-Local installation using ~~tool_dependencies.xml~~
-
----
-
-### Dependencies
-#### External tool
-
-Definition of requirements in `.xml` file
-
-```xml
-<requirements>
-  <requirement type="package" version="1.66">biopython</requirement>
-  <requirement type="package" version="1.0.0">graphlan</requirement>
-</requirements>
-```
-
-Local installation using `conda` package
+Local installation using Conda packages
 
 ---
 
@@ -964,312 +931,7 @@ Package, dependency and environment management
 - No compilation at installation: binaries with their dependencies, libraries...
 - Not restricted to Galaxy
 
----
-
-###.image-25[![](../../../../shared/images/conda_logo.png)] <br/> Conda distributions
-
-```
-
-
-```
-![](../../images/miniconda_vs_anaconda.png)
-
----
-
-###.image-25[![](../../../../shared/images/conda_logo.png)] <br/> Channels
-
-- Packages through channels within Continuum.Anaconda
-- Conda channel searched by Galaxy for packages:
-    - iuc
-    - bioconda
-    - defaults
-    - r
-    - conda-forge
-
----
-
-###.image-25[![](../../../../shared/images/conda_logo.png)] <br/> Quickstart
-#### Use Conda outside Planemo
-
-- Install a package
-
-
-```bash
-conda install pyyaml
-```
-
-- Install some packages within an isolate environment
-
-```bash
-$ conda create -n yaml pyyaml
-$ conda env list
-yaml        *  ~/miniconda3/envs/yaml
-root             ~/miniconda3
-$ source activate yaml
-(yaml) $
-```
-
----
-
-###.image-25[![](../../../../shared/images/conda_logo.png)] <br/> Tips and tricks
-#### Because you don't want Conda binaries all the time in your $PATH
-<small>Conda masks some of your binaries like python (with all corresponding python modules) with its own versions</small>
-
-```bash
-$ vi ~/.bashrc
-```
-```bash
-function conda3activate () {
-  export PATH=~/miniconda3/bin:$PATH; }
-function conda3deactivate () {
-  export PATH=$(echo $PATH | sed "s|$HOME/miniconda3/bin:||g"); }
-```
-
----
-
-.image-25[![](../../images/planemo-logo.png)]
-#### Test Galaxy Tools using Conda packages
-
-![](../../images/planemo_tool_building.png)
-
----
-
-### <i class="fa fa-pencil" aria-hidden="true"></i> Hands-on
-
-![](../../images/exercise.png)
-
----
-
-### <i class="fa fa-pencil" aria-hidden="true"></i> Hands-on
-
-#### The Goal
-- Use Conda package installation during the functional tests of the wrapper for Seqtk
-
----
-
-### <i class="fa fa-pencil" aria-hidden="true"></i> Hands-on
-
-#### Before
-1. `conda uninstall seqtk`
-
----
-
-### <i class="fa fa-pencil" aria-hidden="true"></i> Hands-on
-
-#### Steps
-1. Fill a `<requirement>` tag to target a `seqtk` conda package
-2. Use `planemo conda_install .` to install tools and set an environment
-3. Use `planemo test`
-
-???
-
-```bash
-# 1. -> hands_on-tool_integration/seqtk/seqtk_seq_step4.xml
-# 2.
-planemo conda_install .
-# 3.
-planemo test # seqtk_seq_step4.xml
-```
-
----
-
-###.image-25[![](../../../../shared/images/conda_logo.png)] <br/> Writing a Conda recipe
-
-You can create a new Conda package. This will be necessary if a specific tool or version is not available.
-
-.footnote[[Documentation about how to write conda recipes from scratch](http://conda.pydata.org/docs/build_tutorials/pkgs2.html) <br/> [Bioconda guidelines](https://bioconda.github.io/guidelines.html)]
-
----
-
-###.image-25[![](../../../../shared/images/conda_logo.png)] <br/> Writing a Conda recipe
-#### Files
-
-- `meta.yaml`: contains all the metadata of the recipe
-- `build.sh`: the Unix script that installs the files
-
----
-
-###.image-25[![](../../../../shared/images/conda_logo.png)] <br/> Writing a Conda recipe
-#### `meta.yaml` basic information
-
-```yaml
-package:
-  name: bwa
-  version: "0.7.15"
-about:
-  home: http://bio-bwa.sourceforge.net
-  license: MIT
-  summary: The BWA read mapper.
-build:
-  number: 0
-  skip: True # [osx]
-source:
-  fn: v0.7.15.tar.gz
-  url: https://github.com/lh3/bwa/archive/v0.7.15.tar.gz
-  md5: 54fdee953c5c256d36885a1c5c6b118c
-```
-
----
-
-###.image-25[![](../../../../shared/images/conda_logo.png)] <br/> Writing a Conda recipe
-#### `meta.yaml` requirements
-
-```yaml
-requirements:
-  build:
-    - gcc   # [not osx]
-    - llvm  # [osx]
-    - zlib
-  run:
-    - zlib
-    - bowtie2
-```
-<small>
-- `build`: requirements needed during the build step (here compilation)
-- `run`: requirements needed at runtime
-
-</small>
-
----
-
-###.image-25[![](../../../../shared/images/conda_logo.png)] <br/> Writing a Conda recipe
-#### `meta.yaml` test
-
-```yaml
-test:
-  commands:
-    - bowtie2 --version
-    - bwa 2>&1 | grep 'index sequences in the'
-    - '$R -e "library(''xcms'')"'
-```
-<small>
-Those tests are launched at the end of `conda build`. <br>
-They need to return 0 on success.
-</small>
-
----
-
-###.image-25[![](../../../../shared/images/conda_logo.png)] <br/> Writing a Conda recipe
-#### `build.sh`
-
-```bash
-#!/bin/bash
-./configure --prefix=$PREFIX
-make
-make install
-```
-```bash
-#!/bin/bash
-mkdir -p $PREFIX/bin
-cp *.py $PREFIX/bin
-```
-<small>
-- `$PREFIX` is a variable defined by conda when building the package
-- `$PREFIX` usually contains `bin/` `lib/` `include/` that are filled with the package files
-- `$PREFIX` will be loaded in the user environment at runtime: `PATH`, `LD_LIBRARY_PATH`, `PYTHONPATH`, ...
-</small>
-
----
-
-###.image-25[![](../../../../shared/images/conda_logo.png)] <br/> Writing a Conda recipe
-#### Building recipe skeletons
-
-- `conda skeleton pypi <packagename>`
-- `conda skeleton cran <packagename>`
-- `bioconductor_skeleton.py <packagename>`
-- `conda skeleton cpan <packagename>`
-
-Generates pre-filled recipes <small>(not guaranteed to work out of the box)</small>
-
-.footnote[[Building conda packages with conda skeleton](http://conda.pydata.org/docs/build_tutorials/pkgs.html)]
-
----
-
-###.image-25[![](../../../../shared/images/conda_logo.png)] <br/> Writing a Conda recipe
-#### `conda build` and test the package
-
-```bash
-$ conda install conda-build
-
-$ conda build .
-
-```
-
-(`planemo conda_init` now includes `conda-build` so that first command may not be needed.)
-
-1. BUILD START: Builds/Compiles the package
-2. BUILD START: Provides a .tar.bz2
-3. TEST START: Installs the .tar.bz2 previously generated
-4. TEST START: Launches the functional tests
-5. (Provides the .tar.bz2 path)
-
----
-
-###.image-25[![](../../../../shared/images/conda_logo.png)] <br/>  Install a Conda package for test
-#### `conda install`
-
-To continue your `planemo test`, you may want to use your new package before it's available through an official channel.
-
-
-Get the path of your new package .tar.bz2
-```bash
-conda install ~/miniconda3/conda-bld/linux-64/bwa-0.7.15-0.tar.bz2
-```
-
----
-
-.image-75[![](../../../../shared/images/bioconda_logo.png)]
-
-
-- A channel dedicated to bioinformatics packages https://anaconda.org/bioconda
-- Open to [contribution](https://github.com/bioconda/bioconda-recipes/blob/master/CONTRIBUTING.md)
-- GitHub repository: https://github.com/bioconda/bioconda-recipes
-
----
-
-###.image-25[![](../../../../shared/images/bioconda_logo.png)]
-
-1. Clone `bioconda/bioconda-recipes.git` or a fork
-2. Create a new branch "package_new_login"
-3. Fill two files `meta.yaml` and `build.sh`
-4. Build your new package and test it using `conda build`
-5. Push on GitHub
-6. Wait for the functional tests to pass on your branch
-7. Create a Pull Request on `bioconda/bioconda-recipes.git`
-8. Wait for the functional tests to pass on the master branch
-9. Enjoy your new Conda package installed from https://anaconda.org/bioconda
-
-See [Contributing with GitHub](github_contribution.html)
-
----
-
-### <i class="fa fa-pencil" aria-hidden="true"></i> Hands-on
-
-![](../../images/exercise.png)
-
----
-
-### <i class="fa fa-pencil" aria-hidden="true"></i> Hands-on
-
-#### The Goal
-Build a conda package for the suite seqtk
-
----
-
-### <i class="fa fa-pencil" aria-hidden="true"></i> Hands-on
-
-#### Steps
-1. Read the [guidelines for bioconda recipes](https://bioconda.github.io/guidelines.html)
-2. Follow seqtk [installation instructions](https://github.com/lh3/seqtk/)
-3. Write a `meta.yaml` and a `build.sh`
-4. Test the recipe with `conda build`
-
-???
-
-```bash
-# hands_on-conda/seqtk/meta.yaml
-# hands_on-conda/seqtk/build.sh
-```
+See [Tool Dependencies and Conda](../conda/slides.html)
 
 ---
 
@@ -1279,52 +941,13 @@ Build a conda package for the suite seqtk
 
 ---
 
-###.image-25[![](../../images/planemo-logo.png)]
-
-![](../../images/big_picture.png)
-
----
-
-###.image-25[![](../../images/planemo-logo.png)]
-#### Checklist (1/3)
-
-- Create a dedicated repository
-```bash
-mkdir my_tool
-cd my_tool
-```
-- Create the main `.xml` file with
-```bash
-planemo tool_init
-```
-- Fill the `.xml` file
-- Test the wrapper structure with
-```bash
-planemo lint
-```
-
----
-
-###.image-25[![](../../images/planemo-logo.png)]
-#### Checklist (2/3)
-
-- Check if the dependencies are available on Conda
-- If not, create the missing Conda packages
-- Add functional tests
-- Run functional tests
-```bash
-planemo test
-```
-
----
-
 ## Advanced features
 
 ---
 
 ### Other tags: `configfiles`
 
-Like `command`, uses cheetah code to write:
+Like `command`, uses Cheetah code to write:
 
 - A config file
 - A whole script or a module
@@ -1337,21 +960,20 @@ class: packed
 ### `configfiles`
 
 ```xml
-<command><![CDATA[ mb $script_nexus  ]]></command>
+<command><![CDATA[ mb $script_nexus ]]></command>
 
 <configfiles>
-  <configfile name="script_nexus"><![CDATA[
+    <configfile name="script_nexus"><![CDATA[
 set autoclose = yes;
 execute $input_data;
 #if str( $data_type.type ) == "nuc“
-  lset nst=$data_type.lset_params.lset_Nst;
+    lset nst=$data_type.lset_params.lset_Nst;
 #end if
 mcmcp ngen=$mcmcp_ngen;
 mcmc;
 quit
-  ]]></configfile>
+    ]]></configfile>
 </configfiles>
-
 ```
 
 ```bash
@@ -1369,7 +991,7 @@ quit
 
 ![](../../images/macro.png)
 
-.footnote[[Planemo documents about macros ](http://planemo.readthedocs.io/en/latest/writing_advanced.html?highlight=macros#macros-reusable-elements)]
+.footnote[[Planemo documents about macros](https://planemo.readthedocs.io/en/latest/writing_advanced.html#macros-reusable-elements)]
 
 ---
 
@@ -1381,16 +1003,16 @@ macros.xml
 
 ```xml
 <macros>
-  <xml name="requirements">
-    <requirements>
-      <requirement type="package" version="2.5.0">blast</requirement>
-    </requirements>
-  </xml>
-  <xml name="stdio">
-    <stdio>
-      <exit_code range="1" level="fatal" />
-    </stdio>
-  </xml>
+    <xml name="requirements">
+        <requirements>
+            <requirement type="package" version="2.5.0">blast</requirement>
+        </requirements>
+    </xml>
+    <xml name="stdio">
+        <stdio>
+            <exit_code range="1" level="fatal" />
+        </stdio>
+    </xml>
 </macros>
 ```
 
@@ -1398,7 +1020,7 @@ ncbi_blastn_wrapper.xml
 
 ```xml
 <macros>
-  <import>macros.xml</import>
+    <import>macros.xml</import>
 </macros>
 <expand macro="requirements"/>
 <expand macro="stdio"/>
@@ -1412,7 +1034,7 @@ macros.xml
 
 ```xml
 <macros>
-  <token name="@THREADS@">-num_threads "\${GALAXY_SLOTS:-8}"</token>
+    <token name="@THREADS@">-num_threads "\${GALAXY_SLOTS:-8}"</token>
 </macros>
 ```
 
@@ -1420,7 +1042,7 @@ ncbi_blastn_wrapper.xml
 
 ```xml
 <command>
-  blastn -query "$query" @THREADS@ [...]
+blastn -query '$query' @THREADS@ [...]
 </command>
 ```
 
@@ -1432,12 +1054,12 @@ macros.xml
 
 ```xml
 <macros>
-  <xml name="requirements">
-    <requirements>
-      <requirement type="package" version="2.2.0">trinity</requirement>
-      <yield/>
-    </requirements>
-  </xml>
+    <xml name="requirements">
+        <requirements>
+            <requirement type="package" version="2.2.0">trinity</requirement>
+            <yield/>
+        </requirements>
+    </xml>
 </macros>
 ```
 
@@ -1445,8 +1067,8 @@ trinity.xml
 
 ```xml
 <expand macro="requirements">
-  <requirement type="package" version="1.1.2">bowtie</requirement>
-  <requirement type="set_environment">TRINITY_MEM_OPTIONS</requirement>
+    <requirement type="package" version="1.1.2">bowtie</requirement>
+    <requirement type="set_environment">TRINITY_MEM_OPTIONS</requirement>
 </expand>
 ```
 
@@ -1465,7 +1087,6 @@ echo $__user_email__
 # The galaxy.app.UniverseApplication instance, gives access to all other configuration file variables.
 # Should be used as a last resort, may go away in future releases.
 echo $__app__.config.user_library_import_dir
-echo $__app__.tool_data_tables[ 'pfam_databases' ].get_fields() )[0][-1]
 
 # Check a dataset type
 #if $input1.is_of_type('gff'):
@@ -1521,7 +1142,7 @@ One job for all selected dataset
 
 ```xml
 <outputs>
-    <data format="txt" name="output">
+    <data name="output" format="txt">
         <discover_datasets pattern="__designation_and_ext__"
             directory="output_dir" visible="true" />
     </data>
@@ -1536,7 +1157,7 @@ If the output file extension is not present/usable:
 
 ```xml
 <outputs>
-    <data format="txt" name="output">
+    <data name="output" format="txt">
         <discover_datasets pattern="__designation__" format="txt"
             directory="output_dir" visible="true" />
     </data>
@@ -1586,8 +1207,7 @@ Creation when uploading (>=17.05)
 ### Dataset collection > input
 
 ```xml
-<param type="data" multiple="true" name="inputs" label="Input BAM(s)"
-  format="bam" />
+<param name="inputs" type="data" format="bam" multiple="true" label="Input BAM(s)" />
 ```
 
 ![](../../images/input_data_collection.png)
@@ -1595,16 +1215,16 @@ Creation when uploading (>=17.05)
 Accept only collections:
 
 ```xml
-<param type="data_collection" collection_type="list|paired|list:paired|..."
-  name="inputs" label="Input BAM(s)" format="bam" />
+<param name="inputs" type="data_collection" collection_type="list|paired|list:paired|..."
+    format="bam" label="Input BAM(s)" />
 ```
 
 ```xml
 <command><![CDATA[
 ...
 #for $input in $inputs
---input "$input"
---sample_name "$input.element_identifier"
+    --input '$input'
+    --sample_name '$input.element_identifier'
 #end for
 ]]></command>
 ```
@@ -1617,8 +1237,8 @@ A single paired collection:
 
 ```xml
 <collection name="paired_output" type="paired" label="Split Pair">
-  <data name="forward" format="txt" />
-  <data name="reverse" format_source="input1" from_work_dir="reverse.txt" />
+    <data name="forward" format="txt" />
+    <data name="reverse" format_source="input1" from_work_dir="reverse.txt" />
 </collection>
 ```
 
@@ -1626,7 +1246,7 @@ Unknown number of files:
 
 ```xml
 <collection name="output" type="list" label="Unknown number of files">
-  <discover_datasets pattern="__name_and_ext__" directory="outputs" />
+    <discover_datasets pattern="__name_and_ext__" directory="outputs" />
 </collection>
 ```
 
@@ -1789,4 +1409,4 @@ docker run -d -p 8080:80 galaxy-deeptools
 
 - Lobbyist :)
 - Host orphan tools: [GitHub](https://github.com/galaxyproject/tools-iuc)
-- [IUC-standards](http://galaxy-iuc-standards.readthedocs.io/)
+- [IUC-standards](https://galaxy-iuc-standards.readthedocs.io/)
