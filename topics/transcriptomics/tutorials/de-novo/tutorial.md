@@ -404,6 +404,3 @@ In this tutorial, we have analyzed real RNA sequencing data to extract useful in
 
 > # Workflow
 > This analysis pipeline can be recreated using the workflow here: [https://tinyurl.com/GTNdenovoRNAseqWorkflow](https://tinyurl.com/GTNdenovoRNAseqWorkflow)
-
-> # Feedback
-> Please take a moment and provide your feedback on this tutorial. Your feedback will help guide and improve future revisions to this tutorial: [https://tinyurl.com/GTNfeedback](https://tinyurl.com/GTNfeedback)
