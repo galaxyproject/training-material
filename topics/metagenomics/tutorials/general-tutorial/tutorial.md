@@ -9,7 +9,7 @@ tutorial_name: general-tutorial
 In metagenomics, information about micro-organisms in an environment can be extracted with two main techniques:
 
 - Amplicon sequencing (or 16S rRNA/rDNA), which sequence only on the rRNA/rDNA of organisms
-- Whole-genome sequencing (WGS), which sequence full genomes of the micro-organisms in the environment
+- Whole-genome shotgun (WGS), which sequence full genomes of the micro-organisms in the environment
 
 In this tutorial, we will introduce the two types of analyses with the general principles behind and the differences. To go deeper in such analyses, we recommend to check our detailed tutorials on each analysis.
 
@@ -20,7 +20,7 @@ For that, we will use two datasets (one amplicon and one WGS) from the same envi
 > In this tutorial, we will deal with:
 >
 > 1. [Amplicon data](#amplicon-data)
-> 2. [Whole-genome sequencing data](#whole-genome-sequencing-data)
+> 2. [Whole-genome shotgun data](#whole-genome-shotgun-data)
 {: .agenda}
 
 # Amplicon data
@@ -265,15 +265,15 @@ To get an idea of the quality of the alignment, we can view the log output from 
 ```
         Start   End NBases  Ambigs  Polymer NumSeqs
 Minimum:    2391    10674   9   0   2   1
-2.5%-tile:  3080    13383   235 0   4   501
-25%-tile:   3080    13424   245 0   4   5001
-Median:     3080    13424   245 0   4   10001
-75%-tile:   3080    13424   245 0   5   15001
-97.5%-tile: 13396   13425   267 0   7   19501
-Maximum:    13396   13425   267 0   7   20000
-Mean:   2799.95 12161.1 221.964 0   3.8896
+2.5%-tile:  3080    12071   234 0   4   455
+25%-tile:   3080    13424   244 0   4   4545
+Median:     3080    13424   245 0   4   9090
+75%-tile:   3080    13424   245 0   4   13634
+97.5%-tile: 3082    13424   246 0   6   17724
+Maximum:    13396   13425   267 0   7   18178
+Mean:   3080.6  13380   244.212 0   4.27946
 # of unique seqs:   17698
-total # of seqs:    20000
+total # of seqs:    18178
 ```
 
 > ### :question: Questions
@@ -474,9 +474,9 @@ To further explore the community structure, we can visualize it with dedicated t
 
 Once we have information about the community structure (OTUs with taxonomic structure), we can do more analysis on it: estimation of the diversity of micro-organism, comparison fo diversity between samples, analysis of populations, ... We will not detail such analyses here but you follow our tutorials on amplicon data analyses to learn about them.
 
-# Whole-genome sequencing data
+# Whole-genome shotgun data
 
-In the previous section, we see how to analyze amplicon data to extract the community structure. Such information can also be extracted from whole-genome sequencing (WGS) metagenomic data.
+In the previous section, we see how to analyze amplicon data to extract the community structure. Such information can also be extracted from whole-genome shotgun (WGS) metagenomic data.
 
 In WGS data, full genomes of the micro-organisms in the environment are sequenced (not only the 16S or 18S). We can then have access to the rRNA (only a small part of the genomes), but also to the genes of the micro-organisms. Using this information, we can try to answer to questions "What are the micro-organisms doing?" in addition to the question "What micro-organisms are present?".
 
@@ -504,7 +504,7 @@ In this tutorial, we use the second approach with MetaPhlAn2. This tools is usin
 
 > ### :pencil2: Hands-on: Taxonomic assignation with MetaPhlAn2
 >
-> 1. **MetaPhlAN2** :wrench:: with
+> 1. **MetaPhlAN2** :wrench: with
 >    - "Input file" to the imported file`
 >    - "MetaPhlAn2 clade-specific marker genes" to `locally cached`
 >    - "Cached database with clade-specific marker genes" to `MetaPhlAn2 clade-specific marker genes`
@@ -554,7 +554,7 @@ Even if the output of MetaPhlAn2 is bit easier to parse than the BIOM file, we w
 
 > ### :pencil2: Hands-on: Interactive visualization with KRONA
 >
-> 1. **Format MetaPhlAn2 output for Krona** :wrench:: with
+> 1. **Format MetaPhlAn2 output for Krona** :wrench: with
 >    - "Input file" to `Community profile` output of `MetaPhlAn2
 >
 > 2. **KRONA pie chard** :wrench:: with
@@ -571,7 +571,7 @@ In the WGS data, we have access to the sequences from the full genome, with gene
 
 > ### :pencil2: Hands-on: Metabolism function identification
 >
-> 1. **HUMAnN2** :wrench:: with
+> 1. **HUMAnN2** :wrench: with
 >    - "Input sequence file" to the imported sequence file
 >    - "Use of a custom taxonomic profile" to `Yes`
 >    - "Taxonomic profile file" to `Community profile` output of `MetaPhlAn2`
@@ -617,9 +617,10 @@ The RPK for the gene families are quite difficult to intepret in term of relativ
 
 > ### :pencil2: Hands-on: Normalize the gene family abundances
 >
-> 1. **Renormalize a HUMAnN2 generated table** :wrench:: Run **Renormalize** on the gene family table with
->    - "Relative abundance" as normalization scheme
->    - "Normalization of all levels by community total" as normalization level
+> 1. **Renormalize a HUMAnN2 generated table** :wrench: with
+>    - "Gene/pathway table" to the gene family table generated with `HUMAnN2`
+>    - "Normalization scheme" to `Relative abundance`
+>    - "Normalization level" to `Normalization of all levels by community total`
 >
 >  > ### :question: Questions
 >  >
@@ -640,15 +641,17 @@ With the HUMAnN2 output, we have access to UniRef50 gene families. However, the 
 
 > ### :pencil2: Hands-on: Regroup the gene families into GO terms
 >
-> 1. **Regroup a HUMAnN2 generated table by features** :wrench:: Run **Regroup** on the gene family table with
->    - "Sum" to combine the grouped features
->    - Built-in grouping option
->    - "UniRef50" as gene family type
->    - "UniRef50 gene families into GO"
+> 1. **Regroup a HUMAnN2 generated table by features** :wrench: with
+>    - "Gene/pathway table" to the gene family table generated with `HUMAnN2`
+>    - "How to combine grouped features?" to `Sum`
+>    - "Use built-in grouping options?" to `Yes`
+>    - "Gene family type" to `UniRef50 gene families`
+>    - "Grouping options" to `UniRef50 gene families into GO`
 >
-> 2. **Renormalize a HUMAnN2 generated table** :wrench:: Run **Renormalize** on the generated table
->    - "Relative abundance" as normalization scheme
->    - "Normalization of all levels by community total" as normalization level
+> 2. **Renormalize a HUMAnN2 generated table** :wrench: with
+>    - "Gene/pathway table" to the gene family table generated with `Regroup`
+>    - "Normalization scheme" to `Relative abundance`
+>    - "Normalization level" to `Normalization of all levels by community total`
 >
 >  > ### :question: Questions
 >  >
@@ -665,10 +668,14 @@ With the HUMAnN2 output, we have access to UniRef50 gene families. However, the 
 >  {: .question}
 {: .hands_on}
 
-With the previous analyses, we investigate "Which micro-organims are present in my sample?" and "What function are done by the micro-organisms in my sample?". We can go further in these analyses (for example with combination of functional and taxonomic results). We did not detail that in this tutorial but you can found more analyses in our tutorials on whole-genome sequencing data analyses.
+With the previous analyses, we investigate "Which micro-organims are present in my sample?" and "What function are done by the micro-organisms in my sample?". We can go further in these analyses (for example with combination of functional and taxonomic results). We did not detail that in this tutorial but you can found more analyses in our tutorials on whole-genome shotgun data analyses.
 
 # Conclusion
 
-*scheme to sum up the analyses*
+We can summarize the analyses with amplicon and whole-genome shotgun data:
 
-*Conclusion about the technical key points. And then relation between the technics and the biological question to end with a global view.*
+![Scheme to sum up the analysis](../../images/general-tutorial-scheme.png)
+
+Both analyses are quite complex! However, in this tutorial, we only showed simple cases of metagenomics data analysis with subset of real data.
+
+Check our other tutorials to learn more in details how to analyze metagenomics data.
