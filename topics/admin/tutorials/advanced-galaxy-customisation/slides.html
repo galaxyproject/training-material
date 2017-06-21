@@ -24,29 +24,9 @@ From the given USB stick:
 
 ## Galaxy's frontend
 
-JS sources and LESS sources are in `/client` folder in Galaxy's root.
-All changes should be made there and then built with  the `$ make client` command (requires Node).
+JavaScript sources and CSS sources are in `/client` folder in Galaxy's root.
 
----
-
-### How to modify the menu
-
-Open the [client/galaxy/scripts/layout/menu.js](https://github.com/galaxyproject/galaxy/blob/dev/client/galaxy/scripts/layout/menu.js)
-
-```
-var helpTab = {
-          id              : 'help',
-          title           : _l('Help'),
-          tooltip         : _l('Support, contact, and community'),
-          menu            : [{
-                  title   : _l('Support'),
-                  url     : options.support_url,
-                  target  : '_blank'
-              },{
-                  title   : _l('Search'),
-                  url     : options.search_url,
-                  target  : '_blank'
-```
+All changes should be made there and then built with the `$ make client` command (requires [Node](https://nodejs.org/)).
 
 ---
 
@@ -81,9 +61,30 @@ When user's browser locale or language is set to a known translation, it will be
 
 ---
 
+### How to modify the menu
+
+Open the [client/galaxy/scripts/layout/menu.js](https://github.com/galaxyproject/galaxy/blob/dev/client/galaxy/scripts/layout/menu.js)
+
+```
+var helpTab = {
+          id              : 'help',
+          title           : _l('Help'),
+          tooltip         : _l('Support, contact, and community'),
+          menu            : [{
+                  title   : _l('Support'),
+                  url     : options.support_url,
+                  target  : '_blank'
+              },{
+                  title   : _l('Search'),
+                  url     : options.search_url,
+                  target  : '_blank'
+```
+
+---
+
 ## Configuration tweaks
 
-Plenty of customisation can be achieved by proper settings in the main configuration file [galaxy.ini](https://github.com/galaxyproject/galaxy/blob/dev/config/galaxy.ini.sample)
+Plenty of customisation can be achieved using settings in the main configuration file [galaxy.ini](https://github.com/galaxyproject/galaxy/blob/dev/config/galaxy.ini.sample)
 
 ---
 
@@ -198,7 +199,7 @@ display more/less results of the search.
 
 ---
 
-### Email config
+### Email configuration
 
 ```
 error_email_to = marten+error@bx.psu.edu
@@ -231,17 +232,31 @@ And also a [documentation](https://docs.galaxyproject.org/en/master/admin/specia
 
 Good fit for deployments where:
 
-* the admins and the tool developers are the same groups
-* there is a dedicated support person/group
+* the admins and the tool developers are the same group
+* there is a dedicated support person or team
 
 [Documentation](https://docs.galaxyproject.org/en/master/admin/special_topics/chat.html)
 
 ---
 
+### Adjusting styles
+
+We use LESS to build our CSS. Amongst other features it allows defining [variables](https://github.com/galaxyproject/galaxy/blob/dev/client/galaxy/style/less/galaxy_bootstrap/variables.less).
+
+```
+--- a/client/galaxy/style/less/galaxy_bootstrap/variables.less
++++ b/client/galaxy/style/less/galaxy_bootstrap/variables.less
+@@ -2,7 +2,7 @@
+-@base-color-1: #2C3143;
++@base-color-1: blue;
+ ```
+
+![blue base color](../../images/blue_base.png)
+
+---
+
 # other topics
 
-* adjust the graphical interface
-* set up a built-in user/group chat
 * dynamic welcome.html + blog + twitter feed
 * ToolBox filtering
 * quotas setup (parsec?)
