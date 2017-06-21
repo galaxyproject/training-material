@@ -12,7 +12,7 @@ The data used in this tutorial are from polyphosphatase-treated sRNA sequencing 
 
 # Analysis strategy
 
-In this exercise we will identify what small RNAs, specifically piRNAs, are present in flies treated with *klp10A* or control RNAi. In this study, biological triplicate sRNA- and mRNA-seq libraries were sequenced for both RNAi conditions. After removing contaminant ribosomal RNA (rRNA) and miRNA reads, we will quantify piRNA abundances from sequenced reads and test for differentially expressed piRNAs. We will follow a popular piRNA analysis pipeline developed by the Phillip Zamore Lab and ZLab (Zhiping Weng) at UMass Med School called [PiPipes](https://github.com/bowhan/piPipes). Although PiPipes was developed for analysis of piRNAs, many of the basical principles can be applied to other classes of small RNAs. 
+In this exercise we will identify what small RNAs, specifically piRNAs, are present in flies treated with *klp10A* or control RNAi. In this study, biological triplicate sRNA- and mRNA-seq libraries were sequenced for both RNAi conditions. After removing contaminant ribosomal RNA (rRNA) and miRNA reads, we will quantify piRNA abundances from sequenced reads and test for differentially expressed piRNAs. We will follow a popular piRNA analysis pipeline developed by the Phillip Zamore Lab and the ZLab (Zhiping Weng) at UMass Med School called [PiPipes](https://github.com/bowhan/piPipes). Although PiPipes was developed for analysis of piRNAs, many of the basical principles can be applied to other classes of small RNAs. 
 
 It is of note that this tutorial uses datasets that have been de-multiplexed so that the input data files are a single FASTQ formatted file for each sample. Because sRNAs are typically much smaller than fragments generated for RNA-seq or other types of deep sequencing experiments, single-end sequencing strategies are almost always used to sequence sRNAs. This tutorial uses the *Collections* feature of Galaxy to orgainze each set of replicates into a single group, making tool form submission easier.
 
@@ -23,7 +23,8 @@ It is of note that this tutorial uses datasets that have been de-multiplexed so 
 > 1. Data upload and organization
 > 1. Read quality checking
 > 1. Adaptor trimming
-> 1. Hierarchical read alignment
+> 1. Hierarchical read alignment to remove rRNA/miRNA reads
+> 1. Small RNA subclass distinction
 > 1. Small RNA abundance estimation
 > 1. Small RNA differential expression testing
 > 1. Small RNA and mRNA integration
@@ -48,25 +49,26 @@ Due to the large size of the original sRNA-seq datasets, we have downsampled the
 >    - Click the *Operations on multiple datasets* check box at the top of the history panel
 >    - Check the three boxes next to the control RNAi (control) sRNA-seq samples
 >    - Click *For all selected...* and choose *Build dataset list*
->    ![](../../images/sRNA/Fig1_build_dataset_list.png)
+>    - ![](../../images/sRNA/Fig1_build_dataset_list.png)
 >    - Ensure that only the three control samples are selected, and enter a name for the new collection (*e.g.* control RNAi sRNA-seq)
->    ![](../../images/sRNA/Fig2_create_list.png)
+>    - ![](../../images/sRNA/Fig2_create_list.png)
 >    - Click *Create list*
 >    - Repeat for the three *klp10A* RNAi samples
->    ![](../../images/sRNA/Fig3_dataset_lists_made.png)
+>    - ![](../../images/sRNA/Fig3_dataset_lists_made.png)
 >
-
 > {: .hands_on}
 
 ## Read quality checking
 
-Read quality scores (phred scores) in FASTQ-formatted data can be encoded by one of a few different encoding schemes. Most Galaxy tools assume that input FASTQ files are using the Sanger/Illumina 1.9 encoding scheme, and if the files are using another scheme, the tools will not interpret the quality score correctly. It is good practice to confirm the quality encoding scheme of your data and then convert to Sanger/Illumina 1.9 if necessary. We can check the quality encoding scheme using the [FastQC](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/) tool (further described in the [NGS-QC tutorial](../../NGS-QC/tutorials/dive_into_qc)).
+Read quality scores (phred scores) in FASTQ-formatted data can be encoded by one of a few different encoding schemes. Most Galaxy tools assume that input FASTQ files are using the Sanger/Illumina 1.9 encoding scheme. If the input FASTQ files are using an alternate encoding scheme, then some tools will not interpret the quality score encodings correctly. It is good practice to confirm the quality encoding scheme of your data and then convert to Sanger/Illumina 1.9, if necessary. We can check the quality encoding scheme using the [FastQC](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/) tool (further described in the [NGS-QC tutorial](../../NGS-QC/tutorials/dive_into_qc)).
 
 > ### :pencil2: Hands-on: Quality checking
 >
-> 1. **FastQC** :wrench:: Run `FastQC` on the FASTQ read files to assess the quality of the reads using the following parameters:
->    - **Short read data from your current history**: Click the "Dataset collection" tab and then select the control sRNA-seq dataset collection
->    - Repeat for the *klp10A* RNAi dataset collection
+> 1. **FastQC** :wrench:: Run `FastQC` on each collection of FASTQ read files to assess the overall read/base quality and quality score encoding scheme using the following parameters:
+>    - **Short read data from your current history**: Click the "Dataset collection" tab and then select the control RNAi sRNA-seq dataset collection
+> 1. Click "Execute"
+>    ![](../../images/sRNA/Fig4_fastqc_tool_form.png)
+> 1. Repeat for the *klp10A* RNAi dataset collection
 >
 >    > ### :question: Questions
 >    >
@@ -86,32 +88,35 @@ Read quality scores (phred scores) in FASTQ-formatted data can be encoded by one
 >    >    </details>
 >    {: .question}
 >
-> 1. **FASTQ Groomer** :wrench:: Run `FASTQ Groomer` on the FASTQ read files to convert the quality scores from Illumina 1.5 to Sanger/Illumina 1.9 encoding using the following parameters:
->    - **File to groom**: Click the "Dataset collection" tab and then select the control sRNA-seq dataset collection
->    - **Input FASTQ quality scores type**: Illumina 1.3-1.7
->    - Repeat for the *klp10A* RNAi dataset collection
+>    ![](../../images/sRNA/Fig5_fastqc_result_stats_boxplot.png)
 >
->    ![](../images/image.png)
+> 1. **FASTQ Groomer** :wrench:: Run `FASTQ Groomer` on each collection of FASTQ read files to convert the quality scores from Illumina 1.5 to Sanger/Illumina 1.9 encoding using the following parameters:
+>    - **File to groom**: Click the "Dataset collection" tab and then select the control RNAi sRNA-seq dataset collection
+>    - **Input FASTQ quality scores type**: Illumina 1.3-1.7
+> 1. Click "Execute"
+> 1. Repeat for the *klp10A* RNAi dataset collection
+>
+>    ![](../../images/sRNA/Fig6_fastq_groomer_tool_form.png)
 >
 > {: .hands_on}
 
-After `FASTQ Groomer` finishes, click on the groomed control sRNA-seq dataset collection and then click on the name of one of the datasets. You should see that the format is **fastqsanger** instead of **fastq**, meaning we have successfully converted the quality score encoding scheme.
+After `FASTQ Groomer` finishes, click on the groomed control RNAi sRNA-seq dataset collection and then click on the name of one of the datasets. You should see that the format is **fastqsanger** instead of **fastq**, meaning we have successfully converted the quality score encoding scheme.
 
-    ![](../images/image.png)
+![](../../images/sRNA/Fig7_fastq_groomer_result_format.png)
 
-If we go back to the FASTQC output and scroll down to the "Adapter Content" section, we can see that Illumina Small RNA adapters are present in ~80% of our reads. The next step is to remove these artificial adaptors because they will not map to the reference genome. If your reads contain a different adapter, update the **Adapter sequence to be trimmed off** in the `Trim Galore!` step.
+If we go back to the `FASTQC` output and scroll down to the "Adapter Content" section, we can see that Illumina Small RNA adapters are present in **~80%** of our reads. The next step is to remove these artificial adaptors because they are not part of the biological sRNAs. If a different adapter is present, you can update the **Adapter sequence to be trimmed off** in the `Trim Galore!` step.
 
-    ![](../images/image.png)
+![](../../images/sRNA/Fig8_fastqc_result_adapter.png)
 
 ## Adaptor trimming
 
-Small RNA sequencing library preparations involve adding an artificial adaptor sequence to both the 5' and 3' ends of the small RNAs. While the 5' adaptor anchors reads to the sequencing surface and thus are not sequenced, the 3' adaptor is typically sequenced immediately following the small RNA sequence. In the example datasets here, the 3' adaptor sequence is `TGGAATTCTCGGGTG`, and needs to be removed from each read before aligning to a reference. We will be using the Galaxy tool `Trim Galore!` which implements the [`cutadapt`](https://cutadapt.readthedocs.io/en/stable/) tool for adapter trimming.
+sRNA-seq library preparation involves adding an artificial adaptor sequence to both the 5' and 3' ends of the small RNAs. While the 5' adaptor anchors reads to the sequencing surface and thus are not sequenced, the 3' adaptor is typically sequenced immediately following the sRNA sequence. In the example datasets here, the 3' adaptor sequence is `TGGAATTCTCGGGTG`, and needs to be removed from each read before aligning to a reference. We will be using the Galaxy tool `Trim Galore!` which implements the [`cutadapt`](https://cutadapt.readthedocs.io/en/stable/) tool for adapter trimming.
 
 > ### :pencil2: Hands-on: Adaptor trimming
 >
-> 1. **Trim Galore!** :wrench:: Remove Illumina adapters from the 3' ends of reads by running `Trim Galore!` with the following parameters:
+> 1. **Trim Galore!** :wrench:: Run `Trim Galore!` on each collection of FASTQ read files to remove Illumina adapters from the 3' ends of reads with the following parameters:
 >    - **Is this library paired- or single-end?**: Single-end
->    - **Reads in FASTQ format**: Click the "Dataset collection" tab and then select the control sRNA-seq dataset
+>    - **Reads in FASTQ format**: Click the "Dataset collection" tab and then select the control RNAi sRNA-seq dataset
 >    - **Trimming reads?**: User defined adapter trimming
 >    - **Adapter sequence to be trimmed off**: TGGAATTCTCGGGTG
 >    - **Trim Galore! advanced settings**: Full parameter list
@@ -120,11 +125,14 @@ Small RNA sequencing library preparations involve adding an artificial adaptor s
 >    - **Discard reads that became shorter than length INT**: 12
 >    - **Generate a report file**: Yes
 >
->    ![](../images/image.png)
+>    ![](../../images/sRNA/Fig9_trimgalore_tool_form.png)
+>
+> 1. Click "Execute"
+> 1. Repeat for the *klp10A* RNAi dataset collection
 >
 >    We don't want to trim for quality because the adapter-trimmed sequences represent a full small RNA molecule, and we want to maintain the integrity of the entire molecule. We increase the minimum read length required to keep a read because small RNAs can potentially be shorter than 20 nt (the default value). We can check out the report file for any sample and see the command for the tool, a summary of the total reads processed and number of reads with an adapter identified, and histogram data of the length of adaptor trimmed. We also see that a very small percentage of low-quality bases have been trimmed
 >
-> 1. **FastQC** :wrench:: Re-run `FastQC` on trimmed reads and inspect the differences.
+> 1. **FastQC** :wrench:: Run `FastQC` on each collection of trimmed FASTQ read files to assess whether adapters were successfully removed.
 >
 >    > ### :question: Questions
 >    >
@@ -142,53 +150,101 @@ Small RNA sequencing library preparations involve adding an artificial adaptor s
 >    >    </details>
 >    {: .question}
 >
-> ![](../images/image.png)
+> ![](../../images/sRNA/Fig10_fastqc_post_trimming_result.png)
 >
 > {: .hands_on}
 
-Now that we have trimmed our reads of the Illumina Small RNA 3' adaptors and converted, we will align our trimmed reads to the reference *Drosophila* genome (dm3). For miRNA analyses, it is useful to align to the reference set of known miRNAs first, and then re-align any unaligned reads to the reference genome.
+Now that we have converted to *fastqsanger* format and trimmed our reads of the Illumina Small RNA 3' adaptors, we will align our trimmed reads to reference *Drosophila* rRNA and miRNA sequences (dm3) to remove these artifacts. Interestingly, *Drosophila* have a short 2S rRNA sequence that is 30nt long and typically co-migrates with sRNA populations during gel electrophoresis. rRNAs make up a very large proportion of all non-coding RNAs, and thus need to be removed. We also want to remove any miRNA sequences, as these are not relevant to our analysis. After removing rRNA and miRNA reads, we will analyze the remaining reads as siRNA and piRNA sequences.
 
-## Read alignment
+## Hierarchical read alignment to remove rRNA/miRNA reads
 
-To quantify small RNA abundance and identify their putative targets, we need to know where the sequenced reads align to a reference genome. In the case of a eukaryotes, some small RNAs are transcribed from mRNA templates, which means that some small RNAs can originate from an exon-exon (spliced) boundary. Therefore, a splice-aware aligner must be used to account for this possibility. [`HISAT2`](https://ccb.jhu.edu/software/hisat2/index.shtml) is an accurate and fast tool for aligning spliced reads to a genome, and we will be using `HISAT2` in this tutorial.
+To quantify small RNA abundance and identify their putative targets, we need to know where the sequenced reads align to a reference genome. In the case of a eukaryotes, some small RNAs are transcribed from mRNA templates, which means that some small RNAs can originate from an exon-exon (spliced) boundary. Therefore, a splice-aware aligner must be used to account for this possibility. [`HISAT2`](https://ccb.jhu.edu/software/hisat2/index.shtml) is an accurate and fast tool for aligning spliced reads to a genome, and we will be using `HISAT2` for aligning to rRNA and miRNA references sequences.
 
 > ### :pencil2: Hands-on: Heirarchical alignment to rRNA, miRNA, and genome reference sequences
 >
-> 1. **HISAT2** :wrench:: Run `HISAT2` to align one collection of trimmed reads to reference rRNA sequences with the following parameters:
+> 1. **HISAT2** :wrench:: Run `HISAT2` on each collection of trimmed reads to align to reference rRNA sequences with the following parameters:
 >    - **Single end or paired reads?**: Individual unpaired reads
->    - **Reads**: Click the "Dataset collection" tab and then select the control sRNA-seq dataset of trimmed FASTQ files
+>    - **Reads**: Click the "Dataset collection" tab and then select the control RNAi sRNA-seq dataset of trimmed FASTQ files
 >    - **Source for the reference genome to align against**: Use a genome from history
 >    - **Select the reference genome**: Dmel_rRNA_sequences.fa
 >    - **Spliced alignment parameters**: Specify spliced alignment parameters
 >    - **Specify strand-specific information**: First Strand (R/RF)
 >
->       ![](../images/image.png)
+>       ![](../../images/sRNA/Fig11_HISAT_rRNA_tool_form.png)
 >
->    We now need to extract the *unaligned* reads from the output BAM file for aligning to reference miRNA sequences. We can do this by using the `Filter SAM or BAM, output SAM or BAM` tool to obtain reads with the bit flag 4 (meaning the read is unaligned) and then converting the filtered BAM file to FASTQ format with the `Convert from BAM to FastQ` tool.
+> 1. Click "Execute"
+> 1. Repeat for the *klp10A* RNAi dataset collection
 >
-> 1. **Filter SAM or BAM, output SAM or BAM** :wrench:: Run `Filter SAM or BAM, output SAM or BAM` on one collection of HISAT output BAM files with the following parameters:
->    - **SAM or BAM file to filter**: Click the "Dataset collection" tab and then select the control sRNA-seq dataset of aligned HISAT BAM files
+>    We now need to extract the *unaligned* reads from the output BAM file for aligning to reference miRNA sequences. We can do this by using the `Filter SAM or BAM, output SAM or BAM` tool to obtain reads with a bit flag = 4 (meaning the read is unaligned) and then converting the filtered BAM file to FASTQ format with the `Convert from BAM to FastQ` tool.
+>
+> 1. **Filter SAM or BAM, output SAM or BAM** :wrench:: Run `Filter SAM or BAM, output SAM or BAM` on each collection of HISAT2 output BAM files with the following parameters:
+>    - **SAM or BAM file to filter**: Click the "Dataset collection" tab and then select the control RNAi sRNA-seq dataset of aligned HISAT2 BAM files
 >    - **Filter on bitwise flag**: Yes
 >    - **Only output alignments with all of these flag bits set**: Check the box next to "The read in unmapped"
 >
-> 1. **Convert from BAM to FastQ** :wrench:: Run `Convert from BAM to FastQM` on one collection of filtered HISAT output BAM files with the following parameters:
->    - **Convert the following BAM file to FASTQ**: Click the "Dataset collection" tab and then select the control sRNA-seq dataset of filtered HISAT BAM files
+> 1. Click "Execute"
+> 1. Repeat for the *klp10A* RNAi dataset collection
 >
->    Next we will align the non-rRNA reads to a known set of miRNA sequences to remove miRNAs from the whole genome alignment step.
+> 1. **Convert from BAM to FastQ** :wrench:: Run `Convert from BAM to FastQ` on each collection of filtered HISAT2 output BAM files with the following parameters:
+>    - **Convert the following BAM file to FASTQ**: Click the "Dataset collection" tab and then select the control RNAi sRNA-seq dataset of filtered HISAT2 BAM files
 >
-> 1. **HISAT2** :wrench:: Run `HISAT2` to align one collection of non-rRNA reads to reference miRNA sequences using the following parameters:
+> 1. Click "Execute"
+> 1. Repeat for the *klp10A* RNAi dataset collection
+>
+>    Next we will align the non-rRNA reads to a known set of miRNA hairpin sequences to remove miRNA reads.
+>
+> 1. **HISAT2** :wrench:: Run `HISAT2` on each collection of filtered HISAT2 output FASTQ files to align non-rRNA reads to reference miRNA hairpin sequences using the following parameters:
 >    - **Single end or paired reads?**: Individual unpaired reads
 >    - **Reads**: Click the "Dataset collection" tab and then select the control sRNA-seq dataset of non-rRNA FASTQ files
 >    - **Source for the reference genome to align against**: Use a genome from history
 >    - **Select the reference genome**: Dmel_miRNA_sequences.fa
 >    - **Spliced alignment parameters**: Specify spliced alignment parameters
 >    - **Specify strand-specific information**: First Strand (R/RF)
+> 1. Click "Execute"
+> 1. Repeat for the *klp10A* RNAi dataset collection
 >
->       ![](../images/image.png)
+>       ![](../../images/sRNA/Fig12_HISAT_miRNA_tool_form.png)
 >
->    We now need to extract *unaligned* reads from the output BAM file for aligning to reference genome sequence. Repeat the `Filter SAM or BAM, output SAM or BAM` and `Convert from BAM to FastQ` steps to do this. Rename the converted FASTQ files something meaningful (*e.g.* "non-rRNA/miRNA control RNAi sRNA").
+>    Again, we need to extract *unaligned* reads from the output BAM files. To do this, repeat the `Filter SAM or BAM, output SAM or BAM` and `Convert from BAM to FastQ` steps for each dataset collection. Finally, rename the converted FASTQ files something meaningful (*e.g.* "non-r/miRNA control RNAi sRNA-seq").
 >
-> 1. **HISAT2** :wrench:: Run `HISAT` to align a collection of non-rRNA/non-miRNA reads to the reference genome using the following parameters.
+> {: .hands_on}
+
+## Small RNA subclass distinction
+
+In *Drosophila*, siRNAs are typically 20-22nt long while piRNAs are typically 23-29nt long. We want to analyze these sRNA subclasses independently, so next we are going to filter the non-r/miRNA reads based on length using the `Manipulate FASTQ` tool.
+
+> 1. **Manipulate FASTQ** :wrench:: Run `Manipulate FASTQ` on each collection of non-r/miRNA reads to identify siRNAs (20-22nt) using the following parameters.
+>    - **FASTQ File**: Click the "Dataset collection" tab and then select the control RNAi sRNA-seq dataset of non-r/miRNA FASTQ files
+>    - **Match Reads**: Click "Insert Match Reads"
+>    - **Match Reads by**: Set to "Sequence Content"
+>    - **Match by**: Enter: ^.{12,19}$|^.{23,51}$
+>    - **Manipulate Reads**: Click "Insert Manipulate Reads"
+>    - **Manipulate Reads on**: Set to "Miscellaneous actions"
+>    - **Miscellaneous Manipulation Type**: Set to "Remove Read"
+> 1. Click "Execute"
+> 1. Repeat for the *klp10A* RNAi dataset collection
+> 1. Rename each resulting dataset collection something meaningful (*i.e.* "control RNAi - siRNA reads (202-2nt)")
+>
+>    The regular expression in the **Match by** parameter tells the tool to identify sequences that are length 12-19 or 23-51 (inclusive), and the **Miscellaneous Manipulation Type** parameter tells the tool to remove these sequences. What remains are sequences of length 20-22nt. We will now repeat these steps to identify 23-29nt piRNA sequences.
+>
+> 1. **Manipulate FASTQ** :wrench:: Run `Manipulate FASTQ` on each collection of non-r/miRNA reads to identify piRNAs (23-29nt) using the following parameters.
+>    - **FASTQ File**: Click the "Dataset collection" tab and then select the control RNAi sRNA-seq dataset of non-r/miRNA FASTQ files
+>    - **Match Reads**: Click "Insert Match Reads"
+>    - **Match Reads by**: Set to "Sequence Content"
+>    - **Match by**: Enter: ^.{12,22}$|^.{30,51}$
+>    - **Manipulate Reads**: Click "Insert Manipulate Reads"
+>    - **Manipulate Reads on**: Set to "Miscellaneous actions"
+>    - **Miscellaneous Manipulation Type**: Set to "Remove Read"
+> 1. Click "Execute"
+> 1. Repeat for the *klp10A* RNAi dataset collection
+> 1. Rename each resulting dataset collection something meaningful (*i.e.* "control RNAi - piRNA reads (23-29nt)")
+>
+
+**UPDATES STOPPED HERE**
+
+## Small RNA annotation
+
+> 1. **HISAT2** :wrench:: Run `HISAT2` to align a collection of non-rRNA/non-miRNA reads to the reference genome using the following parameters.
 >    - **Single end or paired reads?**: Individual unpaired reads
 >    - **Reads**: Click the "Dataset collection" tab and then select the control sRNA-seq dataset of non-rRNA/non-miRNA FASTQ files
 >    - **Source for the reference genome to align against**: Use a built-in genome
@@ -201,21 +257,6 @@ To quantify small RNA abundance and identify their putative targets, we need to 
 >
 > 1. Repeat the alignment steps for the *klp10A* RNAi sRNA-seq dataset.
 >
-> {: .hands_on}
-
-**UPDATES STOPPED HERE**
-
-## Small RNA annotation
-**TODO Describe what is meant by small RNA annotation. Describe sense v. antisense meaning. Describe that different classes of small RNAs are in a small RNA-seq library. Talk about size distribution and nt composition biases in fly piRNAs and in other classes of small RNAs.**
-
-> ### :pencil2: Hands-on: Small RNA annotation
->
-> 1. **Tool** :wrench:: Run `Tool` on one collection of `HISAT` alignments using the default parameters.
->    - Use batch mode to run all four samples from one tool form.
->
-> ![](../images/image.png)
->
-> {: .hands_on}
 
 ## Small RNA abundance estimation
 
