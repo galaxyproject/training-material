@@ -25,8 +25,8 @@ It is of note that this tutorial uses datasets that have been de-multiplexed so 
 > 1. Adaptor trimming
 > 1. Hierarchical read alignment to remove rRNA/miRNA reads
 > 1. Small RNA subclass distinction
-> 1. Small RNA abundance estimation
-> 1. Small RNA differential expression testing
+> 1. piRNA abundance estimation
+> 1. piRNA differential abundance testing
 > 1. Small RNA and mRNA integration
 > 1. Visualization
 
@@ -160,7 +160,7 @@ Now that we have converted to *fastqsanger* format and trimmed our reads of the 
 
 To quantify small RNA abundance and identify their putative targets, we need to know where the sequenced reads align to a reference genome. In the case of a eukaryotes, some small RNAs are transcribed from mRNA templates, which means that some small RNAs can originate from an exon-exon (spliced) boundary. Therefore, a splice-aware aligner must be used to account for this possibility. [`HISAT2`](https://ccb.jhu.edu/software/hisat2/index.shtml) is an accurate and fast tool for aligning spliced reads to a genome, and we will be using `HISAT2` for aligning to rRNA and miRNA references sequences.
 
-> ### :pencil2: Hands-on: Heirarchical alignment to rRNA, miRNA, and genome reference sequences
+> ### :pencil2: Hands-on: Heirarchical alignment to rRNA and miRNA reference sequences
 >
 > 1. **HISAT2** :wrench:: Run `HISAT2` on each collection of trimmed reads to align to reference rRNA sequences with the following parameters:
 >    - **Single end or paired reads?**: Individual unpaired reads
@@ -239,91 +239,54 @@ In *Drosophila*, siRNAs are typically 20-22nt long while piRNAs are typically 23
 > 1. Repeat for the *klp10A* RNAi dataset collection
 > 1. Rename each resulting dataset collection something meaningful (*i.e.* "control RNAi - piRNA reads (23-29nt)")
 >
+> 1. **FastQC** :wrench:: Run `FastQC` on each collection of siRNA and piRNA read files to confirm the correct read lengths.
+>
+> {: .hands_on}
+
+Interestingly, for the piRNA sequences (23-29nt), the "Per base sequence content" output of `FastQC` indicates a high prevalence for the T nucleotide (really U in RNA) at the first position of the reads (~70% of reads). This agrees with a known bias for 5' Us in the piRNAs that are bound by their major protein cofactor, PIWI [cite]. Additionally, we observe a less pronounced prevalence for the A nucleotide at position 10 of the reads (~35% of reads), which agrees with a known bias for 10A in secondary piRNAs [cite].
+
+The next step in our analysis pipeline is to identify which RNA features the siRNAs and piRNAs align to. Most fly piRNAs originate from and thus align to transposable elements (TEs) but some also originate from genome piRNA clusters or protein-coding genes. Ultimately, we want to know whether a feature (TE, cluster, pcRNA, etc.) has fewer or more piRNAs targeting it. To determine this, we will use `salmon` to simultaneously align and quantify piRNA reads against known target sequences to estimate piRNA abundance per target. For the remainder of the tutorial we will be focusing on piRNAs, but similar approaches can be done for siRNAs.
 
 **UPDATES STOPPED HERE**
 
-## Small RNA annotation
+## piRNA abundance estimation
 
-> 1. **HISAT2** :wrench:: Run `HISAT2` to align a collection of non-rRNA/non-miRNA reads to the reference genome using the following parameters.
->    - **Single end or paired reads?**: Individual unpaired reads
->    - **Reads**: Click the "Dataset collection" tab and then select the control sRNA-seq dataset of non-rRNA/non-miRNA FASTQ files
->    - **Source for the reference genome to align against**: Use a built-in genome
->    - **Select a reference genome**: Fruit Fly (D. melanogaster): dm3
->    - **Primary alignments**: 1000000
->    - **Spliced alignment parameters**: Specify spliced alignment parameters
->    - **Specify strand-specific information**: First Strand (R/RF)
->
->    We use a ridiculously high value for "Primary alignments" (-k) here to ensure that we retain piRNAs. In flies, piRNA often align to transposable and repeat elements in the genome. If a piRNA read aligns to more than -k loci, it is removed from the output. We want to make sure we don't lose these reads, so we set this parameter to something extremely high. This slows down the alignment step, but is necessary.
->
-> 1. Repeat the alignment steps for the *klp10A* RNAi sRNA-seq dataset.
->
+We want to identify which piRNAs are differentially abundance between the control and *klp10A* RNAi conditions. To do this we will implement a counting approach using `Salmon` to quantify piRNAs per genome feature (TEs in this case). Then we will provide this information to `DESeq2` to generate normalized counts and significance testing for differential expression.
 
-## Small RNA abundance estimation
-
-**TODO RPM for small RNA counts.**
-
-> ### :pencil2: Hands-on: Small RNA abundance estimation
+> ### :pencil2: Hands-on: piRNA abundance estimation
 >
-> 1. **Tool** :wrench:: Run `Tool` on the `Tool`-annotated small RNAs.
->    - Use batch mode to inlcude all four `Stringtie` assemblies.
->    - **Use Reference Annotation**: Yes, then select the "RefSeq GTF mm10" file.
-> ![](../images/image.png)
+> 1. **Salmon** :wrench:: Run `Salmon` on each collection of piRNA reads (23-29nt) to quantify the abundance of piRNAs at relevant targets. We will focus on abundance of piRNAs on transposable elements
+>    - **Select a reference transcriptome from your history or use a built-in index?**: Use one from the history
+>    - **Select the reference transcriptome**: Select the reference TE fasta file
+>    - **The size should be odd number**: 21
+>    - **FASTQ/FASTA file**: Click the "Dataset collection" tab and then select the control RNAi piRNA (23-29nt) reads
+>    - **Specify the strandedness of the reads**: read 1 (or single-end read) comes from the reverse strand (SR)
+> 1. Click "Execute"
+> 1. Repeat for the *klp10A* RNAi piRNA (23-29nt) reads dataset collection
 >
 > {: .hands_on}
+
+## piRNA differential abundance testing
+
+[`DESeq2`](https://bioconductor.org/packages/release/bioc/html/DESeq2.html) is a great tool for differential expression analysis. It takes unnormalized estimated read counts produced by `Salmon` and applies size factor normalization. Salmon provides estimate read counts which sometimes are reported as fractions. `DESeq2` expectes rounded integers as input, so we need to do two text manipulation steps to prepare our `Salmon` output for use with `DESeq2`.
+
+> ### :pencil2: Hands-on: piRNA abundance estimation
 >
-
-## Small RNA differential expression testing
-
-### Analysis of the differential gene expression
-
-We want to identify which small RNAs are differentially expressed between the control and *klp10A* RNAi conditions. To do this we will implement a counting approach using `FeatureCounts` to count small RNAs per genome feature. Then we will provide this information to `DESeq2` to generate normalized counts and significance testing for differential expression.
-
-### Count the number of reads per genome feature
-
-To compare the abundance of small RNAs mapping to genomic features between different RNAi conditions, the first essential step is to quantify the number of small RNAs per feature. [`FeatureCounts`](http://bioinf.wehi.edu.au/featureCounts/) is one of the most popular tools for counting reads in genomic features. In our case, we'll be using `FeatureCounts` to count small RNA reads aligning to dm3 genomic features in a custom GTF file that contains transposon and repeat elements, which are common targets of the piRNA subclass of small RNAs.
-
-The recommended mode is "union", which counts overlaps even if a read only shares parts of its sequence with a genomic feature and disregards reads that overlap more than one feature.
-
-> ### :pencil2: Hands-on: Counting the number of small RNA reads per feature
->
-> 1. **FeatureCounts** :wrench:: Run `FeatureCounts` on the aligned reads (`HISAT` output) using the gene+transposon+repBase GTF as the annotation file.
->
->    - **TODO**
->
-> ![](../images/image.png)
->
-> {: .hands_on}
->
-
-### Perform differential "expression" testing
-
-TODO
-
-[`DESeq2`](https://bioconductor.org/packages/release/bioc/html/DESeq2.html) is a great tool for differential expression analysis. It takes read counts produced by `FeatureCounts` and applies size factor normalization.
-
-> ### :pencil2: Hands-on: Differential expression testing
->
-> 1. **DESeq2** :wrench:: Run `DESeq2` with the following parameters:
->
->    - **TODO**
->
-> 1. **Filter** :wrench:: Run `Filter` to extract feature with a significant differences in small RNA mappings (adjusted *p*-value less than 0.05) between control and *klp10A* RNAi conditions.
->
->    - **TODO**
+> 1. **Compute** :wrench:: Run `Compute` to add column of rounded estimate Counts
+> 1. **Cut** :wrench:: Run `cut` to select just the first (feature_id) and last (rounded_counts) columns
+> 1. **DESeq2** :wrench:: Run `DESeq2` to test for differential abundance of piRNAs at the TE features
+> 1. **Filter** :wrench:: Run `Filter` to extract feature with a significantly higher piRNA abundance (adjusted *p*-value less than 0.05, log2FC greater than 0) in the *klp10A* RNAi condition.
+> 1. **Filter** :wrench:: Run `Filter` to extract feature with a significantly lower piRNA abundance (adjusted *p*-value less than 0.05, log2FC less than 0) in the *klp10A* RNAi condition.
 >
 >    > ### :question: Question
 >    >
->    > How many features have a significant change in mapped small RNAs between these conditions?
+>    > How many features have a significant increase and decrease in piRNA abundance in the *klp10A* RNAi condition?
 >    >
 >    > <details>
 >    > <summary>Click to view answers</summary>
 >    > To filter, use "c7 lessthan 0.05". And we get ## features with a significant change in mapped small RNAs.
 >    > </details>
 >    {: .question}
->
-> 1. **Filter** :wrench:: Determine how many features have increased or decreased mapped small RNA counts.
->
->    - **TODO**
 >
 > {: .hands_on}
 
