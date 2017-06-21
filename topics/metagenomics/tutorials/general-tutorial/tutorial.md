@@ -113,9 +113,7 @@ and create a *group file*, indicating which reads belong to which samples.
 >
 > 2. **Make.group** :wrench: with the following parameters
 >   - "Method" to `Manually specify fasta files and group names`
->   - "Additional": Add two elements to this repeat
->     - Pampa sample fasta file, with group name `pampa`
->     - Anguil sample fasta file, with group name `anguil`
+>   - "Additional": Add two elements to this repeat: Pampa sample fasta file, with group name `pampa` and Anguil sample fasta file, with group name `anguil`
 >
 {: .hands_on}
 
