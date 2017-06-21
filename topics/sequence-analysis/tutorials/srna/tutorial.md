@@ -29,6 +29,7 @@ It is of note that this tutorial uses datasets that have been de-multiplexed so 
 > 1. piRNA differential abundance testing
 > 1. Small RNA and mRNA integration
 > 1. Visualization
+> 1. Conclusion
 
 ## Data upload and organization
 
@@ -247,13 +248,13 @@ Interestingly, for the piRNA sequences (23-29nt), the "Per base sequence content
 
 The next step in our analysis pipeline is to identify which RNA features the siRNAs and piRNAs align to. Most fly piRNAs originate from and thus align to transposable elements (TEs) but some also originate from genome piRNA clusters or protein-coding genes. Ultimately, we want to know whether a feature (TE, cluster, pcRNA, etc.) has fewer or more piRNAs targeting it. To determine this, we will use `salmon` to simultaneously align and quantify piRNA reads against known target sequences to estimate piRNA abundance per target. For the remainder of the tutorial we will be focusing on piRNAs, but similar approaches can be done for siRNAs.
 
-**UPDATES STOPPED HERE**
-
 ## piRNA abundance estimation
 
 We want to identify which piRNAs are differentially abundance between the control and *klp10A* RNAi conditions. To do this we will implement a counting approach using `Salmon` to quantify piRNAs per genome feature (TEs in this case). Then we will provide this information to `DESeq2` to generate normalized counts and significance testing for differential expression.
 
 > ### :pencil2: Hands-on: piRNA abundance estimation
+>
+> **TODO**
 >
 > 1. **Salmon** :wrench:: Run `Salmon` on each collection of piRNA reads (23-29nt) to quantify the abundance of piRNAs at relevant targets. We will focus on abundance of piRNAs on transposable elements
 >    - **Select a reference transcriptome from your history or use a built-in index?**: Use one from the history
@@ -304,7 +305,7 @@ In this last section, we will convert our aligned read data from BAM format to b
 
 > ### :pencil2: Hands-on: Visualizing data on genome browser
 >
-> 1. **bamCoverage** :wrench:: Run `bamCoverage` on all four aligned read files (`HISAT` output) with the following parameters:
+> 1. **bamCoverage** :wrench:: Run `bamCoverage` on each dataset collection `HISAT` output with the following parameters:
 >
 >    - **TODO**
 >
