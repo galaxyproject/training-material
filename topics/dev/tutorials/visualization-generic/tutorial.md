@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 topic_name: dev
-tutorial_name: visualization
+tutorial_name: visualization-generic
 ---
 
 # Introduction
