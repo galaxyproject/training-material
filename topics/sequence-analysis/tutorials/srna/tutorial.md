@@ -6,11 +6,15 @@ tutorial_name: srna
 
 # Introduction
 
-**Give a short introduction to small RNAs and why we care about them.** The data used in this Galaxy tutorial are from polyphosphatase-treated small RNA sequencing experiments in *Drosophila*. The goal of this study was to determine how piRNA and piRNA target expression changes in flies mutant for Kinesin-like protein at 10A (*klp10A*). To that end, mRNA-seq experiments were performed in parallel to determine whether targets of differentially expressed piRNAs were also differentially expressed and can be analyzed by following the *de novo* transcriptome reconstruction tutorial **(add link)**. Because of the long processing time for the large original files - which contained 7-22 million reads - we have downsampled the fastq reads to include only those that align to **something interesting (flamenco, gypsy (retro-elements), diminutive (*dm/Myc*), ZAM element (LTR-retrotransposon), cluster 20A, maybe just all of the X-chromosome)**.
+Small, noncoding RNA (sRNA) molecules, typically 21-31nt in length, are key features of post-transcriptional regulatory mechanisms governing gene expression. Through interactions with protein cofactors, these tiny sRNAs typically function by perfectly or imperfectly basepairing with substrate RNA molecules, and then eliciting downstream effects such as translation inhibition or RNA degradation. Different subclasses of sRNAs - e.g. microRNAs (miRNAs), Piwi-interaction RNAs (piRNAs), and endogenous short interferring RNAs (siRNAs) - exhibit unique characteristics, and their relative abundances in biological contexts can indicate whether they are active or not. In this tutorial, we will examine expression of the piRNA subclass of sRNAs and their targets in *Drosophila melanogaster*.
+
+The data used in this tutorial are from polyphosphatase-treated sRNA sequencing (sRNA-seq) experiments in *Drosophila*. The goal of this study was to determine how piRNA and piRNA target expression changes in flies mutant for Kinesin-like protein at 10A (*klp10A*). To that end, in addition to sRNA-seq, mRNA-seq experiments were performed to determine whether targets of differentially expressed piRNAs were also differentially expressed. Because of the long processing time for the large original files - which contained 7-22 million reads each - we have downsampled the original input data to include only reads that align to the X-chromosome.
 
 # Analysis strategy
 
-The goal of this exercise is to identify what small RNAs, specifically piRNAs, are present in wild-type (WT) flies and flies treated with *klp10A* RNAi (*klp10A* KD). In this study, biological triplicate small RNA- and mRNA-seq samples for both WT and *klp10A* KD flies. We will quantify piRNA expressed from aligned reads as well as identify differentially expressed piRNAs. We will generally follow a popular piRNA analysis pipeline developed by the Zamore Lab and ZLab at UMass Med School called [PiPipes](https://github.com/bowhan/piPipes). Although PiPipes was developed for analysis of piRNAs, many of the basical principles can be applied to other classes of small RNAs. It is of note that this tutorial uses datasets that have been de-multiplexed so that the input data files are a single FASTQ formatted file for each sample. This tutorial also uses datasets for which the quality scores are encoded using the Sanger/Illumina 1.9 encoding scheme (**Check with FASTQC tool, and if not, use the FASTQ Groomer tool to convert FASTQ files to Sanger/Illumina 1.9+ encoding)**. Because small RNAs are, well, small, single-end sequencing is almost always used for sRNA-seq libraries. This tutorial uses the *Collections* feature of Galaxy to orgainze each set of replicates into a single group, making tool form submission easier.
+In this exercise we will identify what small RNAs, specifically piRNAs, are present in flies treated with *klp10A* or control RNAi. In this study, biological triplicate sRNA- and mRNA-seq libraries were sequenced for both RNAi conditions. After removing contaminant ribosomal RNA (rRNA) and miRNA reads, we will quantify piRNA abundances from sequenced reads and test for differentially expressed piRNAs. We will follow a popular piRNA analysis pipeline developed by the Phillip Zamore Lab and ZLab (Zhiping Weng) at UMass Med School called [PiPipes](https://github.com/bowhan/piPipes). Although PiPipes was developed for analysis of piRNAs, many of the basical principles can be applied to other classes of small RNAs. 
+
+It is of note that this tutorial uses datasets that have been de-multiplexed so that the input data files are a single FASTQ formatted file for each sample. Because sRNAs are typically much smaller than fragments generated for RNA-seq or other types of deep sequencing experiments, single-end sequencing strategies are almost always used to sequence sRNAs. This tutorial uses the *Collections* feature of Galaxy to orgainze each set of replicates into a single group, making tool form submission easier.
 
 > ### Agenda
 >
@@ -19,8 +23,7 @@ The goal of this exercise is to identify what small RNAs, specifically piRNAs, a
 > 1. Data upload and organization
 > 1. Read quality checking
 > 1. Adaptor trimming
-> 1. Read alignment
-> 1. Small RNA annotation
+> 1. Hierarchical read alignment
 > 1. Small RNA abundance estimation
 > 1. Small RNA differential expression testing
 > 1. Small RNA and mRNA integration
@@ -28,7 +31,7 @@ The goal of this exercise is to identify what small RNAs, specifically piRNAs, a
 
 ## Data upload and organization
 
-Due to the large size of the original sRNA-seq datasets, we have downsampled them to only inlcude reads mapping to **something interesting, probably chromosome X**. These datasets are avaialble at [`Zenodo`](https://zenodo.org/record/####), where you can find the FASTQ files corresponding to replicate sRNA-seq and mRNA-seq libraries and an annotation file of known RefSeq transcripts for the *Drosophila melanogaster* genome version dm3.
+Due to the large size of the original sRNA-seq datasets, we have downsampled them to only inlcude reads mapping to the *Drosophila* X-chromsome. These datasets are avaialble at [`Zenodo`](https://zenodo.org/record/####), where you can find the FASTQ files corresponding to replicate sRNA-seq and mRNA-seq libraries and additiona annotation files for the *Drosophila melanogaster* genome version dm3.
 
 > ### :pencil2: Hands-on: Data upload and organization
 >
@@ -45,10 +48,14 @@ Due to the large size of the original sRNA-seq datasets, we have downsampled the
 >    - Click the *Operations on multiple datasets* check box at the top of the history panel
 >    - Check the three boxes next to the control RNAi (control) sRNA-seq samples
 >    - Click *For all selected...* and choose *Build dataset list*
->    - Ensure the three control samples are the only ones selected, and enter a name for the new collection (*e.g.* control sRNA-seq)
+>    ![](../../images/sRNA/Fig1_build_dataset_list.png)
+>    - Ensure that only the three control samples are selected, and enter a name for the new collection (*e.g.* control RNAi sRNA-seq)
+>    ![](../../images/sRNA/Fig2_create_list.png)
 >    - Click *Create list*
 >    - Repeat for the three *klp10A* RNAi samples
+>    ![](../../images/sRNA/Fig3_dataset_lists_made.png)
 >
+
 > {: .hands_on}
 
 ## Read quality checking
