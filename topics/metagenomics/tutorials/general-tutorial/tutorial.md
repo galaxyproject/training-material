@@ -254,7 +254,7 @@ Aligning our sequences to a reference helps improve OTU assignment [[Schloss et.
 >   - "reference" to the `silva.v4.fasta` reference file
 >   - "flip" to `Yes`
 >
->   This step may take a few minutes, please be patient.
+>    This step may take a few minutes, please be patient.
 >
 > 3. **Summary.seqs** :wrench: with the following parameters
 >   - "fasta" parameter to the aligned output from `Align.seqs`
@@ -488,7 +488,8 @@ In this second part, we will use a metagenomic sample of the Pampas Soil ([SRR60
 
 > ### :pencil2: Hands-on: Data upload
 >
-> 1. Import the Fasta file from [Zenodo]() or from the data library (in "Analyses of metagenomics data" the "..." file)
+> 1. Create a new history
+> 2. Import the "SRR606451_pampa" Fasta file from [Zenodo]() or from the data library (in "Analyses of metagenomics data")
 {: .hands_on}
 
 ## Extraction of taxonomic information
@@ -505,9 +506,12 @@ In this tutorial, we use the second approach with MetaPhlAn2. This tools is usin
 
 > ### :pencil2: Hands-on: Taxonomic assignation with MetaPhlAn2
 >
-> 1. **MetaPhlAN2** :wrench:: Run **MetaPhlAN2** on the dereplicated sequences with
->    - The "locally cached" database of "MetaPhlAn2 clade-specific marker genes"
+> 1. **MetaPhlAN2** :wrench:: with
+>    - "Input file" to the imported file`
+>    - "MetaPhlAn2 clade-specific marker genes" to `locally cached`
+>    - "Cached database with clade-specific marker genes" to `MetaPhlAn2 clade-specific marker genes`
 >
+> This step may take a couple of minutes :coffee:
 {: .hands_on}
 
 3 files are generated:
@@ -548,13 +552,16 @@ In this tutorial, we use the second approach with MetaPhlAn2. This tools is usin
 >    </details>
 {: .question}
 
-Even if the output of MetaPhlAn2 is bit easier to parse than the BIOM file, we want to visualize and explore the community structure. We use an interactive tool called KRONA
+Even if the output of MetaPhlAn2 is bit easier to parse than the BIOM file, we want to visualize and explore the community structure with KRONA
 
 > ### :pencil2: Hands-on: Interactive visualization with KRONA
 >
-> 1. **Format MetaPhlAn2 output for Krona** :wrench:: Run **Format MetaPhlAn2 output for Krona** on the tabular output of MetaPhlAn2
-> 2. **KRONA** :wrench:: Run **KRONA** on the formatted MetaPhlAn2 output with
->    - "MetaPhlan" of type of input data
+> 1. **Format MetaPhlAn2 output for Krona** :wrench:: with
+>    - "Input file" to `Community profile` output of `MetaPhlAn2
+>
+> 2. **KRONA pie chard** :wrench:: with
+>    - "What is the type of your input data" as `MetaPhlan`
+>    - "Input file" to the output of `Format MetaPhlAn2`
 >
 {: .hands_on}
 
@@ -566,14 +573,22 @@ In the WGS data, we have access to the sequences from the full genome, with gene
 
 > ### :pencil2: Hands-on: Metabolism function identification
 >
-> 1. **HUMAnN2** :wrench:: Run **HUMAnN2** on the input sequences with
->    - Use of a custom taxonomic profile and MetaPhlAn2 table output as Taxonomic profile file
->    - "Locally cached" "Full" nucleotide database
->    - "Diamond" as software for translated alignment
->    - "Locally cached" "Full UniRef50" protein database
->    - "uniref50" for the search for gene families
->    - "MetaCyc" for pathway computation
->    - "Remove stratification from output" in Advanced Options
+> 1. **HUMAnN2** :wrench:: with
+>    - "Input sequence file" to the imported sequence file
+>    - "Use of a custom taxonomic profile" to `Yes`
+>    - "Taxonomic profile file" to `Community profile` output of `MetaPhlAn2`
+>    - "Nucleotide database" to `Locally cached`
+>    - "Nucleotide database" to `Full`
+>    - "Protein database" to `Locally cached`
+>    - "Protein database" to `Full UniRef50`
+>    - "Search for uniref50 or uniref90 gene families?" to `uniref50`
+>    - "Database to use for pathway computations" to `MetaCyc`
+>    - "Advanced Options"
+>    - "Remove stratification from output" to `Yes`
+>
+>    This step is long so we generated the output for you!
+>
+> 2. Import the 3 files whose the name is starting with "humann2"
 {: .hands_on}
 
 HUMAnN2 generates 3 files
