@@ -70,7 +70,7 @@ V1, V2 etc are the variable regions
 
 ## WGS
 
-- Aims to sequence the “whole” metagenome
+- Aims to sequence the "whole" metagenome
 
 - Pros:
   - Not biased by amplicon primer set
@@ -90,7 +90,7 @@ V1, V2 etc are the variable regions
 
 ![](../images/16S_end-to-end.png)
 
-- Every step in this process can have serious impact on the results
+Every step in this process can have serious impact on the results
 
 ---
 
@@ -106,9 +106,9 @@ WGS:             ~ ? reads
 
 ---
 
-## Analysis
+## Analysis pipelines
 
-![](../images/analysis_pipeline.png)
+![](../images/metagenomics_pipeline.png)
 
 ---
 
@@ -128,29 +128,48 @@ WGS:             ~ ? reads
 
 ![](../images/chimeras.png)
 
-
 ---
 
 ## OTU Clustering
 
-- Cluster on 97% sequence similarity for genus-level differntiation
+Cluster on 97% sequence similarity for genus-level differentiation
 
-.image-50[ ![](../images/clustering.png) ]
+.pull-left[ .image-100[ ![](../images/clustering.png) ]]
 
-.image-50[ ![](../images/otu.png) ]
-
+.pull-right[.image-100[ ![](../images/otu.png) ]]
 
 ---
 
-## Assign Taxonomy
+## Search marker database and taxonomy assignment
 
-- Homology with refernce databases
+- Homology with reference databases
+  - Amplicon
 
-![](../images/silva-greengenes.png)
+    ![](../images/silva-greengenes.png)
+
+  - WGS: MetaPhlAn2 database
+      - ~1M unique clade-specific marker genes
+      - ~17,000 reference genomes (bacterial and archaeal, viral and eukaryotic)
 
 - Accuracy depends on quality and completeness of database used
 - Databases are inevitable incomplete
 
+---
+
+## Search functional database
+
+- Databases to identify gene families
+    - UniRef50
+    - UniRef90
+- Grouping in other functional categories
+    - MetaCyc Reactions
+    - KEGG Orthogroups (KOs)
+    - Pfam domains
+    - Level-4 enzyme commission (EC) categories
+    - EggNOG (including COGs)
+    - Gene Ontology (GO)
+    - Informative GO
+- Pathway reconstruction
 
 ---
 
@@ -173,8 +192,10 @@ WGS:             ~ ? reads
 ## Results: Visualizations
 
 - **Phinch**
-  - biom file input
+  - BIOM file input
   - various visualizations
   - multi-sample data
 
 ![](../../../shared/images/phinch_overviewpage.png)
+
+
