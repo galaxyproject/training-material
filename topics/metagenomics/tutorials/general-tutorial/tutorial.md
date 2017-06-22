@@ -9,18 +9,18 @@ tutorial_name: general-tutorial
 In metagenomics, information about micro-organisms in an environment can be extracted with two main techniques:
 
 - Amplicon sequencing (or 16S rRNA/rDNA), which sequence only on the rRNA/rDNA of organisms
-- Whole-genome shotgun (WGS), which sequence full genomes of the micro-organisms in the environment
+- Shotgun sequencing, which sequence full genomes of the micro-organisms in the environment
 
 In this tutorial, we will introduce the two types of analyses with the general principles behind and the differences. To go deeper in such analyses, we recommend to check our detailed tutorials on each analysis.
 
-For that, we will use two datasets (one amplicon and one WGS) from the same environment: the Argentina Anguil Bulk Soil, studied in a [project on the Argentinean agricultural pampean soils](https://www.ebi.ac.uk/metagenomics/projects/SRP016633). In this project, three different types of land uses and two soil types (bulk and rhizospheric) were analyzed using WGS and amplicon sequencing. We will focus on the Argentina Anguil Bulk Soil.
+For that, we will use two datasets (one amplicon and one shotgun) from the same environment: the Argentina Anguil Bulk Soil, studied in a [project on the Argentinean agricultural pampean soils](https://www.ebi.ac.uk/metagenomics/projects/SRP016633). In this project, three different types of land uses and two soil types (bulk and rhizospheric) were analyzed using shotgun and amplicon sequencing. We will focus on the Argentina Anguil Bulk Soil.
 
 > ### Agenda
 >
 > In this tutorial, we will deal with:
 >
 > 1. [Amplicon data](#amplicon-data)
-> 2. [Whole-genome shotgun data](#whole-genome-shotgun-data)
+> 2. [Shotgun data](#shotgun-data)
 {: .agenda}
 
 # Amplicon data
@@ -474,11 +474,11 @@ To further explore the community structure, we can visualize it with dedicated t
 
 Once we have information about the community structure (OTUs with taxonomic structure), we can do more analysis on it: estimation of the diversity of micro-organism, comparison fo diversity between samples, analysis of populations, ... We will not detail such analyses here but you follow our tutorials on amplicon data analyses to learn about them.
 
-# Whole-genome shotgun data
+# Shotgun metagenomics data
 
-In the previous section, we see how to analyze amplicon data to extract the community structure. Such information can also be extracted from whole-genome shotgun (WGS) metagenomic data.
+In the previous section, we see how to analyze amplicon data to extract the community structure. Such information can also be extracted from shotgun metagenomic data.
 
-In WGS data, full genomes of the micro-organisms in the environment are sequenced (not only the 16S or 18S). We can then have access to the rRNA (only a small part of the genomes), but also to the genes of the micro-organisms. Using this information, we can try to answer to questions "What are the micro-organisms doing?" in addition to the question "What micro-organisms are present?".
+In shotgun data, full genomes of the micro-organisms in the environment are sequenced (not only the 16S or 18S). We can then have access to the rRNA (only a small part of the genomes), but also to the genes of the micro-organisms. Using this information, we can try to answer to questions "What are the micro-organisms doing?" in addition to the question "What micro-organisms are present?".
 
 In this second part, we will use a metagenomic sample of the Pampas Soil ([SRR606451](https://www.ebi.ac.uk/metagenomics/projects/SRP016633/samples/SRS372043/runs/SRR606451/results/versions/2.0)).
 
@@ -492,11 +492,11 @@ In this second part, we will use a metagenomic sample of the Pampas Soil ([SRR60
 
 ## Extraction of taxonomic information
 
-As for amplicon data, we can extract taxonomic and community structure information from WGS data. Different approaches can be used:
+As for amplicon data, we can extract taxonomic and community structure information from shotgun data. Different approaches can be used:
 
 - Same approaches as for amplicon data with identification and classification of OTUs
 
-    Such approaches imply a first step of sequence sorting to extract only the 16S and 18S sequences on which the same tools as for amplicon data. However, rRNA sequences represent a low proportion (< 1%) of the WGS sequences so such approache is not the most statistically supported
+    Such approaches imply a first step of sequence sorting to extract only the 16S and 18S sequences on which the same tools as for amplicon data. However, rRNA sequences represent a low proportion (< 1%) of the shotgun sequences so such approache is not the most statistically supported
 
 - Assignation of taxonomy on the whole sequences using databases with marker genes
 
@@ -567,7 +567,7 @@ Even if the output of MetaPhlAn2 is bit easier to parse than the BIOM file, we w
 
 We would like now to answer the question "What are the micro-organisms doing?" or "Which functions are done by the micro-organisms in the environment?".
 
-In the WGS data, we have access to the sequences from the full genome, with gene sequences then. We use that to identify the genes, associate them to a function, build pathways, etc to investigate the functional part of the community.
+In the shotgun data, we have access to the sequences from the full genome, with gene sequences then. We use that to identify the genes, associate them to a function, build pathways, etc to investigate the functional part of the community.
 
 > ### :pencil2: Hands-on: Metabolism function identification
 >
@@ -668,11 +668,11 @@ With the HUMAnN2 output, we have access to UniRef50 gene families. However, the 
 >  {: .question}
 {: .hands_on}
 
-With the previous analyses, we investigate "Which micro-organims are present in my sample?" and "What function are done by the micro-organisms in my sample?". We can go further in these analyses (for example with combination of functional and taxonomic results). We did not detail that in this tutorial but you can found more analyses in our tutorials on whole-genome shotgun data analyses.
+With the previous analyses, we investigate "Which micro-organims are present in my sample?" and "What function are done by the micro-organisms in my sample?". We can go further in these analyses (for example with combination of functional and taxonomic results). We did not detail that in this tutorial but you can found more analyses in our tutorials on shotgun metagenomic data analyses.
 
 # Conclusion
 
-We can summarize the analyses with amplicon and whole-genome shotgun data:
+We can summarize the analyses with amplicon and shotgun metagenomic data:
 
 ![Scheme to sum up the analysis](../../images/general-tutorial-scheme.png)
 
