@@ -317,7 +317,7 @@ Many tools have multiple requirements, these need containers also!
 The BWA tool is an example of one such tool that has multiple requirements - because samtools is used to sort BAMs after mapping. The Planemo `conda_testing` project is distributed with a simple tool to simulate this containing both `bwa` and `samtools` requirements.
 
 .reduce90[```
-$ planemo project_init --project_template=conda_testing conda_testing
+$ planemo project_init --template=conda_testing conda_testing
 $ cd conda_testing/
 $ grep -r require bwa_and_samtools.xml
 bwa_and_samtools.xml:    <requirements>
@@ -383,6 +383,16 @@ Explain the different parts.
 
 ---
 
+## Warning - New Stuff
+
+Only Galaxy's development branch uses this newer mulled v2 hashing, 17.01 and 17.05 used
+an older v1 hash.
+
+When using Planemo commands that setup Galaxy, please be sure to add
+`--galaxy_branch dev` to the Planemo argument list.
+
+---
+
 class: left
 
 ## The Planemo `mull` command (1 / 2)
@@ -442,7 +452,7 @@ class: reduce70
 ## Testing locally `mull`ed containers
 
 ```
-$ planemo test --biocontainers bwa_and_samtools.xml
+$ planemo test --galaxy_branch dev --biocontainers bwa_and_samtools.xml
 ...
 [galaxy.tools.actions] Handled output named output_2 for tool bwa_and_samtools (17.443 ms)
 [galaxy.tools.actions] Added output datasets to history (12.935 ms)
