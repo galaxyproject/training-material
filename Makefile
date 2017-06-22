@@ -32,7 +32,19 @@ clean :
 
 ## install          : install dependencies
 install:
-	gem install jekyll
-	gem install jemoji
-	gem install jekyll-feed
-	gem install bundler
+	OS := $(shell uname)
+	ifeq $(OS) Darwin
+		sudo gem update —system
+		sudo gem install -n /usr/local/bin/ jemoji
+		sudo gem install -n /usr/local/bin/ jekyll
+		sudo gem install -n /usr/local/bin/ jekyll-feed
+		sudo gem install -n /usr/local/bin/ bundler
+	else
+		gem install jekyll
+		gem install jemoji
+		gem install jekyll-feed
+		gem install bundler
+	endif
+
+
+
