@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 topic_name: training
-tutorial_name: create-new-tutorial
+tutorial_name: create-new-tutorial-jekyll
 ---
 
 # Introduction
@@ -34,7 +34,7 @@ In this tutorial, you will learn how to run a local instance of the GTN webiste 
 > 8. [Submitting the new tutorial to the GitHub repository](#submitting-the-new-tutorial-to-the-github-repository)
 > {: .agenda}
 
-# Checking the tutorial generation
+# Checking the website generation
 
 If you want to run the entire GTN website locally or test your new training material we can do this! Currently, the website is generated from the metadata and the tutorials using Jekyll, a simple static site builder.
 We can use Jekyll to run a server to check if the tutorial is correctly added and rendered.
@@ -56,7 +56,3 @@ We can use Jekyll to run a server to check if the tutorial is correctly added an
 >    >    </details>
 >    {: .question}
 {: .hands_on}
-
-# Conclusion
-
-**TODO: add a scheme to sum up the steps and the files**
