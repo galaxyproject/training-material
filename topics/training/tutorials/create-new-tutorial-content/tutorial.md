@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 topic_name: training
-tutorial_name: create-new-tutorial
+tutorial_name: create-new-tutorial-content
 ---
 
 # Introduction
