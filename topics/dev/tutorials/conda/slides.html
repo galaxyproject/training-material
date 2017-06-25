@@ -494,6 +494,28 @@ requirements:
 
 ---
 
+###.image-25[![](../../../../../shared/images/conda_logo.png)] <br/> Writing a Conda Recipe - Preprocessing Selectors
+
+- Evaluated as Python expressions - feel free to use `and`, `or`, etc.
+- Other common selectors include `py2k`, `py3k`.
+
+```yaml
+requirements:
+  build:
+    - gcc   # [not osx]
+    - llvm  # [osx]
+    - zlib
+```
+
+```yaml
+build:
+  skip: True  # [not py27]
+```
+
+.footer[.center[https://conda.io/docs/building/meta-yaml.html#preprocessing-selectors]]
+
+---
+
 class: left
 
 ###.image-25[![](../../../../../shared/images/conda_logo.png)] <br/> Writing a Conda Recipe - Tests
@@ -523,6 +545,16 @@ test:
 ```
 
 Please note that the Conda tests run inside the runtime environment and not in the build environment.
+
+.footnote[.center[https://conda.io/docs/building/meta-yaml.html#test-section]]
+
+---
+
+From Bioconda Guidelines:
+
+> An adequate test must be included in the recipe. An "adequate" test depends on the recipe, but must be able to detect a successful installation. While many packages may ship their own test suite (unit tests or otherwise), including these in the recipe is not recommended since it may timeout the build system on Travis-CI. We especially want to avoid including any kind of test data in the repository.
+
+https://bioconda.github.io/guidelines.html
 
 ---
 
@@ -670,3 +702,400 @@ class: left
 4. Add a `requirement` for this new package in the example tool.
 5. Run `planemo conda_install --conda_use_local fleeqtk_seq.xml` to install the package for Galaxy
 6. Run `planemo test fleeqtk_seq.xml` to verify the tool and package work together
+
+---
+
+# Advanced Topics in Conda Development
+
+---
+
+## Jinja Templating
+
+```yaml
+
+{% raw %}
+{% set name = "seqtk" %}
+{% set version = "1.15.1" %}
+
+package:
+  name: {{ name }}
+  version: {{ version }}
+
+source:
+    fn: {{ name }}-{{ version }}.zip
+    url: http://coolsoftware.com/{{ name }}/{{ version }}/{{ name }}-{{ version }}.zip
+  
+{% endraw %}
+```
+
+https://conda.io/docs/building/meta-yaml.html#templating-with-jinja
+
+---
+
+## Bioconda Variables
+
+```
+CONDA_PY:
+  - 27
+  - 35
+  - 36
+CONDA_HTSLIB: "1.4"
+CONDA_BOOST: "1.61"
+CONDA_R: "3.3.2"
+CONDA_PERL: "5.22.0"
+CONDA_NPY: "112"
+CONDA_NCURSES: "5.9"
+CONDA_GSL: "1.16"
+CONDA_GMP: "5.1"
+CONDA_HDF5: "1.8.17"
+MACOSX_DEPLOYMENT_TARGET: "10.9"
+```
+
+.footnote[.center[https://github.com/bioconda/bioconda-recipes/blob/master/scripts/env_matrix.yml]]
+
+---
+
+class: left
+
+## Pinning Libraries - Use jinja
+
+> If your package links dynamically against a particular library, it is **often necessary to pin the version against which it was compiled, in order to avoid ABI incompatibilities**. Instead of hardcoding a particular version in the recipe, we use jinja templates to achieve this. This **helps ensure that all bioconda packages are binary-compatible with each other**. For example, bioconda provides an environnmnet variable `CONDA_BOOST` that contains the current major version of Boost.
+
+https://bioconda.github.io/guidelines.html#c-c
+
+---
+
+class: left
+
+## Stable URLs
+
+```yaml
+source:
+  fn: v0.7.15.tar.gz
+  url: https://github.com/lh3/bwa/archive/v0.7.15.tar.gz
+  md5: 54fdee953c5c256d36885a1c5c6b118c
+```
+
+> While supported by Conda, `git_url` and `git_rev` are not as stable as a git tarball. Ideally a github repo should have tagged releases that are accessible as tarballs from the “releases” section of the github repo.
+
+https://conda.io/docs/building/meta-yaml.html#preprocessing-selectors
+
+---
+
+class: left
+
+## Python
+
+For PyPI packages
+
+```sh
+conda skeleton pypi <package_name>
+```
+
+- Builds likely correct `build.sh` and `meta.yaml`.
+- The test automatically added is probably sufficient for library, may need to write extra tests for command-line tools.
+- Recipes requiring `python` should build on Python 2.7, 3.4, and 3.5 by default, preprocessing selectors can be used with `build: skip` to skip targets.
+
+---
+
+## Python - pysam's `build.sh`
+
+```
+#!/bin/bash
+# Remove gcc statements that do not work on older compilers for CentOS5
+# support, from https://github.com/chapmanb/bcbio-conda/blob/master/pysam/build.sh
+sed -i'' -e 's/"-Wno-error=declaration-after-statement",//g' setup.py
+sed -i'' -e 's/"-Wno-error=declaration-after-statement"//g' setup.py
+# linking htslib, see:
+# http://pysam.readthedocs.org/en/latest/installation.html#external
+# https://github.com/pysam-developers/pysam/blob/v0.9.0/setup.py#L79
+export CFLAGS="-I$PREFIX/include"
+export CPPFLAGS="-I$PREFIX/include"
+export LDFLAGS="-L$PREFIX/lib"
+
+export HTSLIB_LIBRARY_DIR=$PREFIX/lib
+export HTSLIB_INCLUDE_DIR=$PREFIX/include
+$PYTHON setup.py install
+```
+
+---
+
+```yaml
+package:
+    name: pysam
+    version: 0.11.2.2
+
+source:
+    fn: pysam-0.11.2.2.tar.gz
+    url: https://pypi.python.org/packages/a4/1b/b6dfd92aea876647d20d9a8bd8618e4f2af6300539426be83c8bb0912d6f/pysam-0.11.2.2.tar.gz
+    md5: 56230cd5f55b503845915b76c22d620a
+    patches:  # [osx]
+      - osx_rpath.patch [osx]
+
+build:
+    number: 0
+    skip: False
+
+requirements:
+    build:
+        - gcc  # [linux]
+        - llvm # [osx]
+        - htslib >=1.4.1,<1.5
+        - samtools >=1.4.1,<1.5
+        - bcftools >=1.4.1,<1.5
+        - cython
+        - python
+        - setuptools
+        - zlib
+        - curl
+
+    run:
+        - libgcc # [linux]
+        - htslib >=1.4.1,<1.5
+        - samtools >=1.4.1,<1.5
+        - bcftools >=1.4.1,<1.5
+        - python
+        - zlib
+        - curl
+
+test:
+
+    imports:
+        - pysam
+```
+
+---
+
+## R (CRAN)
+
+For PyPI packages
+
+```sh
+conda skeleton cran <packagename>
+```
+
+- Builds likely correct `build.sh` and `meta.yaml`.
+- The recipe name will have an `r-` prefix and will be converted to lowercase.
+- Typically can be used without modification, though dependencies may also need recipes.
+
+https://bioconda.github.io/guidelines.html#r-cran
+
+---
+
+## R - locfit's `build.sh`
+
+```sh
+#!/bin/bash
+
+# R refuses to build packages that mark themselves as Priority: Recommended
+mv DESCRIPTION DESCRIPTION.old
+grep -v '^Priority: ' DESCRIPTION.old > DESCRIPTION
+
+$R CMD INSTALL --build .
+```
+
+---
+
+class: reduce70
+
+## R - locfit's `meta.yaml`
+
+```yaml
+package:
+  name: r-locfit
+  # Note that conda versions cannot contain -, so any -'s in the version have been replaced with _'s.
+  version: "1.5_9.1"
+
+source:
+  url: https://cran.r-project.org/src/contrib/locfit_1.5-9.1.tar.gz
+  md5: 38af7791c9cda78e2804020e65ac7fb4
+
+build:
+  number: 0
+  rpaths:
+    - lib/R/lib/
+    - lib/
+
+requirements:
+  build:
+    - gcc
+    - r-base
+    - r-lattice
+  run:
+    - libgcc
+    - r-base
+    - r-lattice
+
+test:
+  commands:
+    - $R -e "library('locfit')"
+
+about:
+  home: https://cran.rstudio.com/web/packages/locfit/index.html
+  license: GPL (>= 2)
+  summary: 'Local regression, likelihood and density estimation.'
+```
+
+---
+
+## Java
+
+- New recipes should use the `openjdk` package from [conda-forge](https://github.com/conda-forge/openjdk-feedstock).
+- Add a wrapper script if the software is typically called via `java -jar`.
+- JAR files should go in `$PREFIX/share/$PKG_NAME-$PKG_VERSION-$PKG_BUILDNUM`
+- A wrapper script should be placed here as well, and symlinked to $PREFIX/bin.
+
+https://bioconda.github.io/guidelines.html#java
+
+---
+
+## Java - PeptideShaker's `build.sh`
+
+```sh
+#!/bin/bash
+set -eu -o pipefail
+
+outdir=$PREFIX/share/$PKG_NAME-$PKG_VERSION-$PKG_BUILDNUM
+mkdir -p $outdir
+mkdir -p $PREFIX/bin
+cp -R * $outdir/
+cp $RECIPE_DIR/peptide-shaker.py $outdir/peptide-shaker
+ls -l $outdir
+ln -s $outdir/peptide-shaker $PREFIX/bin
+chmod 0755 "${PREFIX}/bin/peptide-shaker"
+```
+
+---
+
+class: reduce70
+
+## Java - PeptideShaker's `meta.yaml`
+
+```yaml
+...
+
+source:
+    fn: {{ name }}-{{ version }}.zip
+    url: http://genesis.ugent.be/maven2/eu/isas/peptideshaker/{{ name }}/{{ version }}/{{ name }}-{{ version }}.zip
+    md5: 14a48413e28a25614f5fda2b381d7197
+
+requirements:
+  build:
+  run:
+    - openjdk >=6
+    - python
+
+test:
+    commands:
+      - peptide-shaker eu.isas.peptideshaker.cmd.PeptideShakerCLI
+      - peptide-shaker eu.isas.peptideshaker.cmd.PeptideShakerCLI -Xms512m -Xmx1g
+```
+
+---
+
+## Perl
+
+For PyPI packages
+
+```sh
+conda skeleton cpan <packagename>
+```
+
+- Builds likely correct `build.sh` and `meta.yaml`.
+- The recipe will have the `perl-` prefix.
+
+---
+
+class: reduce70
+
+## Perl - Module-Build
+
+```yaml
+package:
+  name: perl-module-build
+  version: "0.4214"
+
+source:
+  fn: Module-Build-0.4214.tar.gz
+  url: https://cpan.metacpan.org/authors/id/L/LE/LEONT/Module-Build-0.4214.tar.gz
+  md5: 7b7ca5a47bef48c50c8b5906ca3ac7fb
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - gcc
+    - perl
+
+  run:
+    - libgcc
+    - perl
+
+test:
+  # Perl 'use' tests
+  imports:
+    - Module::Build
+    - Module::Build::Base
+    - Module::Build::Compat
+    - Module::Build::Config
+    - Module::Build::Cookbook
+    - Module::Build::Dumper
+    - Module::Build::Notes
+    - Module::Build::PPMMaker
+
+about:
+  home: http://metacpan.org/pod/Module-Build
+  license: perl_5
+  summary: 'Build and install Perl modules
+```
+
+---
+
+class: left
+
+## Metapackages
+
+> Metapackages tie together other packages. All they do is define dependencies. For example, the hubward-all metapackage specifies the various other conda packages needed to get full hubward installation running just by installing one package. Other metapackages might tie together conda packages with a theme. For example, all UCSC utilities related to bigBed files, or a set of packages useful for variant calling.
+
+https://bioconda.github.io/guidelines.html#metapackages
+
+---
+
+class: left
+
+## TravisCI Continuous Building
+
+.image-50[![](../../images/travis_ci_logo.png)]
+
+- Lint recipes.
+- Build and run tests.
+- Build and publish Docker container.
+- Publish to anaconda.org.
+
+---
+
+## simulate-travis
+
+- The extended building and testing done by Travis can be executed locally using the script `simulate-travis.py` in the root directory of Bioconda
+- It is mandatory to build any recipe before using simulate-travis.py for the first time.
+- It should be run from the top-level dir of the repo.
+
+---
+
+class: left
+
+## simulate-travis
+
+Some example commands:
+
+<dl>
+  <dt><b><code>./simulate-travis.py</code></b></dt>
+  <dd><i>Tests everything, using the installed <code>conda-build</code>. Checks all recipes to see what needs to be built and is most comprehensive.</i></dd>
+  <dt><b><code>./simulate-travis.py --docker</code></b></dt>
+  <dd><i>If you’re on OSX and have docker installed, you can use this to test the recipe under Linux.</i></dd>
+  <dt><b><code>./simulate-travis.py --docker --quick</code></b></dt>
+  <dd><i>The `–quick` option which will just check recipes that have changed since the last commit to master branch.</i></dd>
+  <dt><b><code>./simulate-travis.py --docker --package r-* bioconductor-*</code></b></dt>
+  <dd><i>Specific recipes can be tested using the <code>–packages</code> argument. package names can be globs such as all R and Bioconductor packages above.</i></dd>
+</dl>
