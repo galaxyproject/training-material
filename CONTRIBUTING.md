@@ -84,8 +84,10 @@ Each training material is related to a topic. All training materials (slides, tu
 │   │   ├── metadata.yaml
 │   │   ├── tools.yaml
 │   │   ├── data-library.yaml
-│   │   ├── workflow.ga
-│   │   ├── tour.yaml
+│   │   ├── workflows
+│   │   │   ├── workflow.ga
+│   │   ├── tours
+│   │   │   ├── tour.yaml
 ```
 
 > Want to add a new topic? Check out [how to add a new topic](#how-do-i-add-a-new-topic).
@@ -100,7 +102,7 @@ All images for the slides must be in `images` directory. The images must be in g
 
 ## `slides` directory
 
-A slide deck is expected for every topic: the one with a general introduction of the topic. The slides are rendered using `remark.js` but written in Markdown to facilitate collaboration. 
+A slide deck is expected for every topic: the one with a general introduction of the topic. The slides are rendered using `remark.js` but written in Markdown to facilitate collaboration.
 
 > [Check out how to fill introduction slides](#how-do-i-fill-introduction-slides).
 
@@ -207,10 +209,10 @@ You can then visualize locally ([http://localhost:4000/](http://localhost:4000/)
     > Check out [how to fill it](#how-do-i-fill-a-tutorial-hands-on)
 
 3. (Not mandatory) Add and fill the `slides.html`
-4. Add and fill the `tools.yaml` file with the neeed tools (from the ToolShed) to run the tutorial 
-5. Add and fill the `data-library.yaml` file with the input data linked to Zenodo 
-6. Add and fill the `workflow.ga` file with the workflow generated from the tutorial
-7. Add and fill the `tour.yaml` file with the Galaxy Interactive Tour running the tutorial 
+4. Add and fill the `tools.yaml` file with the neeed tools (from the ToolShed) to run the tutorial
+5. Add and fill the `data-library.yaml` file with the input data linked to Zenodo
+6. Generate and export a `workflow.ga` file with a workflow generated from the tutorial in the `workflows` directory
+7. Add and fill the `tour.yaml` file with a Galaxy Interactive Tour running the tutorial in the `tours` directory
 8. (Not mandatory) Add and fill the `data-manager.yaml`
 
 ## How do I fill a tutorial hands-on?
@@ -222,6 +224,17 @@ You can then visualize locally ([http://localhost:4000/](http://localhost:4000/)
 2. Fill the `tutorial.md` with the tutorial
 
 The content of a tutorial hands-on is written in Markdown. They are rendered by [Jekyll](http://jekyllrb.com/) into the webpage for the tutorial.
+
+    The header of the file must be something like:
+
+    ```
+    ---
+    layout: tutorial_slides
+    topic_name: "Dev-Corner"
+    tutorial_name: tool_integration
+    logo: "GTN"
+    ---
+    ```
 
 To improve the learning experience, we strongly recommend you to:
 - Add boxes to highlight:
