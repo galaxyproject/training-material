@@ -7,6 +7,7 @@ JEKYLL=bundle exec jekyll
 PARSER=bin/markdown_ast.rb
 DST=_site
 
+
 # Controls
 .PHONY : commands clean files
 all : commands
@@ -32,7 +33,18 @@ clean :
 
 ## install          : install dependencies
 install:
-	gem install jekyll
-	gem install jemoji
-	gem install jekyll-feed
-	gem install bundler
+	$(if $(shell uname -s) == "Darwin", \
+		sudo gem update —-system; \
+		sudo gem install -n /usr/local/bin/ jekyll; \
+		sudo gem install -n /usr/local/bin/ jemoji; \
+		sudo gem install -n /usr/local/bin/ jekyll-feed; \
+		sudo gem install -n /usr/local/bin/ bundler; \
+		sudo gem install -n /usr/local/bin/ nokogiri -v '1.6.8.1'; \
+		bundle install,  \
+		gem install jekyll; \
+		gem install jemoji; \
+		gem install jekyll-feed; \
+		gem install bundler \)
+
+
+

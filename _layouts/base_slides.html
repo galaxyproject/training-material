@@ -47,28 +47,30 @@ This material is the result of a collaborative work. <br/>Thanks to [all the con
 
 # {{ title }}
 
----
+{% if topic.requirements %}
+  ---
 
-## Requirements
+  ## Requirements
 
-Before diving into this slide deck, we recommend you to have a look at:
+  Before diving into this slide deck, we recommend you to have a look at:
 
-{% for requirement in topic.requirements %}
-  {% if requirement.type == "internal" %}
-- [{{ requirement.title }}]({{ site.url }}{{ requirement.link }})
-  {% elsif material.type == "external" %}
-- [{{ requirement.title }}]({{ requirement.link }})
-  {% endif %}
-{% endfor %}
-
-{% if page.tutorial_name %}
-  {% for requirement in tutorial.requirements %}
+  {% for requirement in topic.requirements %}
     {% if requirement.type == "internal" %}
-- [{{ requirement.title }}]({{ site.url }}{{ requirement.link }})
+  - [{{ requirement.title }}]({{ site.url }}{{ requirement.link }})
     {% elsif material.type == "external" %}
-- [{{ requirement.title }}]({{ requirement.link }})
+  - [{{ requirement.title }}]({{ requirement.link }})
     {% endif %}
   {% endfor %}
+
+  {% if page.tutorial_name %}
+    {% for requirement in tutorial.requirements %}
+      {% if requirement.type == "internal" %}
+  - [{{ requirement.title }}]({{ site.url }}{{ requirement.link }})
+      {% elsif material.type == "external" %}
+  - [{{ requirement.title }}]({{ requirement.link }})
+      {% endif %}
+    {% endfor %}
+  {% endif %}
 {% endif %}
 
 ---
