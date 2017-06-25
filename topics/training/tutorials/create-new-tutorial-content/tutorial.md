@@ -178,7 +178,7 @@ If they are not correctly defined the tutorial can not be found on the website.
 
 ### Content of the tutorial
 
-Directly after the short metadata section on top the content of your tutorial start. It is writen in Markdow - a simple markup langage.
+Directly after the short metadata section on top the content of your tutorial starts. It is writen in Markdow - a simple markup langage.
 
 > ### :bulb: Tip: Markdown
 >
@@ -191,7 +191,7 @@ no need to add the name of the tutorial: it is automatically added based on the 
 We recommend to structure the tutorials like this
 
 - An introdcution to introduce the tutorial with the use case, the data, the methods
-- Several sections with the content of the tutorial and some hands-on parts (because we think that doing is an important part of the learning process)
+- Several sections with the content of the tutorial and some hands-on parts (practicing is an important part of the learning process)
 - A conclusion to summarize what has been done in the tutorial (with a scheme)
 
 > ### :pencil2: Hands-on: Structuring the tutorial
@@ -208,7 +208,7 @@ To improve the learning experience in our tutorial, we defined some boxes to hig
 They are defined always with the same structure:
 
 ```
-> ### <an emoji> Type of boxe: Name of the box
+> ### <an emoji> Type of box: Name of the box
 > list
 {: .type_of_box}
 ```
@@ -268,9 +268,10 @@ This structure needs to be respected otherwise it would not be interpreted corre
     with the
 
     - `:pencil2:` emoji to define that is an hands-on
-    - Short imperative sentence to make easy to identify the tasks
-    - Name of the tool in bold to make it easy to identify and with `:wrench:` to insist
+    - Short imperative sentence to make it easy to identify the tasks
+    - Name of the tool in bold with the `:wrench:` emoji to make it easy to identify a Galaxy tool
     - Parameters for the tool as a sublist<br/>
+    <br/>
 
     > ### :pencil2: Hands-on: Add an hands-on box
     >
@@ -279,7 +280,8 @@ This structure needs to be respected otherwise it would not be interpreted corre
 
 -  Questions 
     
-    The questions are then to force the trainees to think about what they are currently doing and to put things in perspective. They are also a way to help the instructors to expose and rectify in direct the misconceptions.
+    The questions are then to force the trainees to think about what they are currently doing and to put things in perspective.
+    They are also a way to help the instructors to expose and clearify misunderstanding earily on.
 
         > ### :question: Questions
         >
@@ -294,9 +296,10 @@ This structure needs to be respected otherwise it would not be interpreted corre
 
     ![](../../../../shared/images/tutorial_question_box.png)
 
-    They has to be quick to administer and evaluate. They can be small questions or also multiple choice questions (MCQs). If well designed with righlty chosen wrong asnwer, the latter solution can do much more than just measure how much someone knows by giving valuable insight.
+    The questions has to be quick to answer. They can be small or also multiple choice (MCQs).
+    With well choosen wrong answers MCQs can do much more than just measure how much someone knows.
 
-    In the box, we add also the answer so the self-trainees can check the solution and its explanation. 
+    In the box below and hiffen we add also the correct answer, so that self-trainees can check the solution and its explanation.
 
     > ### :pencil2: Hands-on: Add a question box
     >
@@ -330,7 +333,8 @@ This structure needs to be respected otherwise it would not be interpreted corre
     This last box of the tutorial is automatically filled with the take-home messages defined in the metadata
 
 
-To render the boxes correctly, the previous syntaxes have to be followed. The boxes can be nested, *e.g.*for having tips inside hands-on. For example:
+To render the boxes correctly, the syntax needs to be correct. If it does not work have a look at similar tutorials and get inspiration.
+The boxes can be nested, *e.g.* for having tips inside a hands-on:
 
 ```
 > ### :pencil2: Hands-on: Defining the topic for the tutorial
@@ -351,11 +355,12 @@ To render the boxes correctly, the previous syntaxes have to be followed. The bo
 {: .hands_on}
 ```
 
-# Adding slides (Optional)
+# Adding slides (optional)
 
-Sometimes we also need slides to support the tutorial. With the current infrastructure, we also give this possibility to serve on the website slides related to a tutorial. But adding slides is just an option.
+Sometimes we also need slides to support the tutorial. With the current infrastructure, we also provide this possibility
+to serve on the website slides related to the tutorial.
 
-The slides are written in Markdown (even if the extension is html), as the tutorial and are rendered as a webpage thanks to [`Remark`](https://remarkjs.com/). However this is not done automatically: we first need to tell to the templating system to search for the slides by changing `slides` in the metadata from `no` to `yes`.
+The slides are written in Markdown (only the file extension is .html), as the tutorial and are rendered as a webpage thanks to [`Remark`](https://remarkjs.com). However this is not done automatically. We first need to tell the templating system to search for the slides by changing `slides` in the metadata from `no` to `yes`.
 
 Once it is done, the slides for our tutorial will be accessible at [http://localhost:4000/topics/sequence-analysis/tutorials/similarity-search/slides.html](http://localhost:4000/topics/sequence-analysis/tutorials/similarity-search/slides.html)
 
