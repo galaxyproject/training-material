@@ -21,17 +21,16 @@ We decided on a structure based on tutorials with hands-on, fitting both for onl
 In this tutorial, you will learn how to run a local instance of the GTN webiste with all materials to test and develop new training sessions.
 
 
-> ### Agenda
+> ### Devloping GTN training material
 >
-> In this tutorial, we will deal with:
+> This tutorial is part of a series to develop GTN training material, feel free to also look at:
 >
-> 1. [Setting up a new tutorial](#setting-up-a-new-tutorial)
-> 2. [Filling the metadata](#filling-the-metadata)
-> 3. [Checking the tutorial generation](#checking-the-tutorial-generation)
-> 5. [Filling the tutorial content](#filling-the-tutorial-content)
-> 6. [Adding slides](#adding-slides)
-> 7. [Setting up the technical support](#setting-up-the-technical-support)
-> 8. [Submitting the new tutorial to the GitHub repository](#submitting-the-new-tutorial-to-the-github-repository)
+> 1. [Writing content in markdown](../create-new-tutorial-content/tutorial.html)
+> 1. [Defining metadata](../create-new-tutorial-metadata/tutorial.html)
+> 1. [Setting up the infrastructure](../create-new-tutorial-jekyll/tutorial.html)
+> 1. [Creating Interactive Galaxy Tours](../create-new-tutorial-tours/tutorial.html)
+> 1. [Building a Docker flavor](../create-new-tutorial-docker/tutorial.html)
+> 1. [Submitting the new tutorial to the GitHub repository](#submitting-the-new-tutorial-to-the-github-repository)
 > {: .agenda}
 
 # Checking the website generation
