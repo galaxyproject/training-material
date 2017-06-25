@@ -21,7 +21,7 @@ class: left
 
 From Planemo docs - the following example builds a tool for the `seqtk seq` command.
 
-```
+```sh
 $ planemo tool_init --force \
                     --id 'seqtk_seq' \
                     --name 'Convert to FASTA (seqtk)' \
@@ -44,7 +44,7 @@ class: left
 
 The `--requirement seqtk@1.2` gets translated into the follow tool XML:
 
-```
+```xml
 <requirements>
     <requirement type="package" version="1.2">seqtk</requirement>
 </requirements>
@@ -283,7 +283,7 @@ command-line, we can use our tool!
 
 ### Planemo `test`
 
-```
+```sh
 $ planemo test seqtk_seq.xml
 ...
 INFO  [galaxy.tools.actions] Handled output named output1 for tool seqtk_seq (20.136 ms)
@@ -358,7 +358,7 @@ class: left
 The Planemo `conda_search` command is a shortcut around `conda search` that searches best
 practice channels that Galaxy is configured to work with:
 
-```
+```sh
 $ planemo conda_search seqt
 Fetching package metadata ...............
 seqtk                        r75                           0  bioconda
@@ -369,7 +369,7 @@ seqtk                        r75                           0  bioconda
 
 Alternatively, `conda` can be used directly:
 
-```
+```sh
 $ $HOME/miniconda3/bin/conda -c iuc -c bioconda -c conda-forge seqt
 ```
 
@@ -414,7 +414,7 @@ only one that will be used by Galaxy by default.
 #### Steps
 
 1. Run the following commands to download an example tool to modify.
-```
+```sh
 $ planemo project_init --template conda_exercises conda_exercises
 $ cd conda_exercises/exercise1
 $ ls
@@ -565,7 +565,7 @@ https://bioconda.github.io/guidelines.html
 ./configure --prefix=$PREFIX
 make
 make install
-```
+```sh
 ```bash
 #!/bin/bash
 mkdir -p $PREFIX/bin
@@ -678,7 +678,7 @@ class: left
 
 If you have completed `exercise1`, open `exercise2`.
 
-```
+```sh
 $ cd ../exercise2
 $ ls
 fleeqtk_seq.xml              test-data
@@ -734,7 +734,7 @@ https://conda.io/docs/building/meta-yaml.html#templating-with-jinja
 
 ## Bioconda Variables
 
-```
+```yaml
 CONDA_PY:
   - 27
   - 35
@@ -759,9 +759,9 @@ class: left
 
 ## Pinning Libraries - Use jinja
 
-> If your package links dynamically against a particular library, it is **often necessary to pin the version against which it was compiled, in order to avoid ABI incompatibilities**. Instead of hardcoding a particular version in the recipe, we use jinja templates to achieve this. This **helps ensure that all bioconda packages are binary-compatible with each other**. For example, bioconda provides an environnmnet variable `CONDA_BOOST` that contains the current major version of Boost.
+> If your package links dynamically against a particular library, it is **often necessary to pin the version against which it was compiled, in order to avoid ABI incompatibilities**. Instead of hardcoding a particular version in the recipe, we use jinja templates to achieve this. This **helps ensure that all bioconda packages are binary-compatible with each other**. For example, bioconda provides an environment variable `CONDA_BOOST` that contains the current major version of Boost.
 
-https://bioconda.github.io/guidelines.html#c-c
+.footnote[.center[https://bioconda.github.io/guidelines.html#c-c]]
 
 ---
 
@@ -776,9 +776,7 @@ source:
   md5: 54fdee953c5c256d36885a1c5c6b118c
 ```
 
-> While supported by Conda, `git_url` and `git_rev` are not as stable as a git tarball. Ideally a github repo should have tagged releases that are accessible as tarballs from the “releases” section of the github repo.
-
-https://conda.io/docs/building/meta-yaml.html#preprocessing-selectors
+> While supported by Conda, `git_url` and `git_rev` are not as stable as a git tarball. Ideally a github repo should have tagged releases that are accessible as tarballs from the “releases” section of the github repo. In addition tarballs can be easily mirrored and Bioconda is saving a copy of every tarball so the recipe can be rebuild at any time.
 
 ---
 
@@ -794,13 +792,13 @@ conda skeleton pypi <package_name>
 
 - Builds likely correct `build.sh` and `meta.yaml`.
 - The test automatically added is probably sufficient for library, may need to write extra tests for command-line tools.
-- Recipes requiring `python` should build on Python 2.7, 3.4, and 3.5 by default, preprocessing selectors can be used with `build: skip` to skip targets.
+- Recipes requiring `python` should build on Python 2.7, 3.5, and 3.6 by default, preprocessing selectors can be used with `build: skip` to skip targets.
 
 ---
 
 ## Python - pysam's `build.sh`
 
-```
+```sh
 #!/bin/bash
 # Remove gcc statements that do not work on older compilers for CentOS5
 # support, from https://github.com/chapmanb/bcbio-conda/blob/master/pysam/build.sh
@@ -1090,6 +1088,8 @@ class: left
 Some example commands:
 
 <dl>
+  <dt><b><code>./simulate-travis.py --install-requirements</code></b></dt>
+  <dd><i>Installs all requirements that are needed for the Bioconda build system.</i></dd>
   <dt><b><code>./simulate-travis.py</code></b></dt>
   <dd><i>Tests everything, using the installed <code>conda-build</code>. Checks all recipes to see what needs to be built and is most comprehensive.</i></dd>
   <dt><b><code>./simulate-travis.py --docker</code></b></dt>
