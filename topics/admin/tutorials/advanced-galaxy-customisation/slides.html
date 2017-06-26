@@ -295,10 +295,52 @@ We use LESS to build our CSS. Amongst other features it allows defining [variabl
 
 ---
 
+## Toolbox filtering
+
+```
+# -- ToolBox filtering
+
+# Modules from lib/galaxy/tools/toolbox/filters/ can be specified in
+# the following lines.  tool_* filters will be applied for all users
+# and can not be changed by them.  user_tool_* filters will be shown
+# under user preferences and can be toggled on and off at
+# runtime.  Example shown below are not real defaults (no custom
+# filters are applied by default), but can be enabled by renaming the
+# examples.py.sample in the filters directory to examples.py.
+
+#tool_filters =
+#tool_label_filters =
+#tool_section_filters =
+#user_tool_filters = examples:restrict_upload_to_admins, examples:restrict_encode
+#user_tool_section_filters = examples:restrict_text
+#user_tool_label_filters = examples:restrict_upload_to_admins, examples:restrict_encode
+
+# The base modules that are searched for modules as described above
+# can be modified and modules external to Galaxy can be searched by
+# modifying the following option.
+#toolbox_filter_base_modules = galaxy.tools.toolbox.filters,galaxy.tools.filters
+```
+
+---
+
+## Biostar integration
+
+It is possible to plug in Galaxy to an own [Biostar](https://github.com/ialbert/biostar-central) instance.
+
+```
+biostar_key: <safe_key>
+biostar_url: "https://biostar.usegalaxy.org"
+biostar_key_name: biostar-login
+biostar_enable_bug_reports: "False"
+```
+
+![biostar menu](../../images/biostar_menu.png)
+![biostar search](../../images/biostar_search.png)
+
+---
+
+
 # other topics
 
-* ToolBox filtering
 * quotas setup (parsec?)
-* hook up your own biostar
-* dynamic job destinations (I am not sure about this one, feels like jobs are quite far from the original description of this session)
 * splash page landing overlay with Galaxy's basics - that we have datasets, tools and jobs and how they interact (this does not exist yet, but is on a roadmap so we can prepare some proof of concept)
