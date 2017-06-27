@@ -30,7 +30,7 @@ In this tutorial, you will learn how to write your first tutorial in markdown an
 > 1. [Setting up the infrastructure](../create-new-tutorial-jekyll/tutorial.html)
 > 1. [Creating Interactive Galaxy Tours](../create-new-tutorial-tours/tutorial.html)
 > 1. [Building a Docker flavor](../create-new-tutorial-docker/tutorial.html)
-> 1. [Submitting the new tutorial to the GitHub repository](#submitting-the-new-tutorial-to-the-github-repository)
+> 1. [Submitting the new tutorial to the GitHub repository](../../../dev/tutorials/github-contribution/slides.html)
 > {: .agenda}
 
 # Setting up a new tutorial
