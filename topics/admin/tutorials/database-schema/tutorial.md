@@ -296,13 +296,13 @@ The following example is from the development server at the FMI
 >   Close the PostgreSQL client
 >
 >   ```sql
->       ` \q`
+>       \q
 >   ```
 >
 >   Quit the interactive docker
 >
 >   ```sql
->       `exit
+>       exit
 >   ```
 
 ## Other Topics
