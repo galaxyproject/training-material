@@ -26,25 +26,34 @@ Docker Toolbox on Mac and Windows). Quit by: docker kill NAME (you get the name 
 # Introduction
 
 ## Database versus Object Model
-The session description is database centric and we’ll be focusing on the relational database that backs Galaxy servers.  But that’s only half the picture of the this data.  The other is the object model which is the object-oriented view of this same data.  The object model is used by the code to manipulate and access the database.  The translation between the two worlds is handled by an object-relational mapping implemented with SQLAlchemy (http://www.sqlalchemy.org/).
+
+The session description is database centric and we’ll be focusing on the relational
+database that backs Galaxy servers.  But that’s only half the picture of the this data.
+The other is the object model which is the object-oriented view of this same data.
+The object model is used by the code to manipulate and access the database.
+The translation between the two worlds is handled by an object-relational mapping implemented with SQLAlchemy (http://www.sqlalchemy.org).
 
 Today we are covering the database and how to access it with SQL.  We aren’t going to cover the corresponding object model or object relational mapping.
 
 ## Database Platform
-The default out-of-the-box Galaxy installation uses SQLite (https://www.sqlite.org/).  SQLite is a lightweight database management system (DBMS) that can be packaged inside Galaxy and does not require any additional steps at initial setup time.
 
-However, SQLite is not the recommended DBMS for running a Galaxy server. The recommended production DMBS for Galaxy is PostgreSQL (https://www.postgresql.org/). PostgreSQL offers a full set of DBMS features and robust support for multiple simultaneous users.
+The default out-of-the-box Galaxy installation uses SQLite (https://www.sqlite.org).
+SQLite is a lightweight database management system (DBMS) that can be packaged inside Galaxy and does not require any additional steps at initial setup time.
+
+However, SQLite is not the recommended DBMS for running a Galaxy server. The recommended production DMBS for
+Galaxy is PostgreSQL (https://www.postgresql.org). PostgreSQL offers a full set of DBMS features and robust support for multiple simultaneous users.
 
 This workshop will be entirely based in PostgreSQL (also referred to as Postgres).
 
 ## What is in (and not in) the Galaxy database?
+
 The Galaxy database contains management information about your server.  The database tracks users, groups, jobs, histories, datasets, workflows and so on.  
 
 What’s not in the database is the data. Datasets are stored outside the database. The database does keep metadata – information about the datasets such as data type. The tools themselves are not stored in the database either.
 
 ## Understanding the Database Schema
 
-ER diagrams and SchemaSpy
+#### ER diagrams and SchemaSpy
 
 Entity-relationship diagrams are a way to understand tables and the relationships between them inside a relational database.  SchemaSpy (http://schemaspy.sourceforge.net/) is a free (and remarkable tool) for generating ER diagrams.  We’be used it generate a description of the database backing the server in this container.  See
 
@@ -56,19 +65,19 @@ Each SchemaSpy table’s page shows the attributes in that table, as well as any
 
 Also see the “Run SchemaSpy in this container” section below for how to install and then run SchemaSpy yourself.
 
-Database conventions
+#### Database conventions
 The Galaxy database uses a number of naming and design conventions.  Understanding these can make navigating the database much easier.
 
-id attributes
+#### id attributes
 Every table has an id column that uniquely identifies each row.  (The id column is the primary key in database terminology.) Beyond uniquely identifying a row in the table, ID values have no meaning.  ID values are unique within a table, but not across the database.
 
-Relationships between tables, and `_id` columns
+#### Relationships between tables, and `_id` columns
 Relationships between tables are implemented by exporting id columns from one table into another.  Imported ids are called foreign keys in database nomenclature, and are uniformly named
    table_the_id_came_from_id
 
 There are a few notable exceptions to this rule.  If the ID is from a table that is prefixed with galaxy_, for example, galaxy_user or galaxy_session, the  galaxy_ will be dropped from the column name.  For example, galaxy_user.id becomes user_id in the over 50 tables it is imported into
 
-Relationship tables
+#### Relationship tables
 
 As mentioned previously, some tables, such as history_dataset_association represent relationships between things, rather than things themselves.  In this case history_dataset_association describes relationships between datasets and histories.
 
@@ -256,8 +265,8 @@ The following example is from the development server at the FMI
 >
 >   ```sql
 >        select j.user_id from job j
->        where j.tool_id = 'qAlign'
->        and j.tool_version = '1.0.4quasr';
+>           where j.tool_id = 'qAlign'
+>           and j.tool_version = '1.0.4quasr';
 >   ```
 >
 >   ```sql
@@ -272,16 +281,16 @@ The following example is from the development server at the FMI
 
 >   ```sql
 >       select jp.name, jp.value  from job_parameter jp
->       where name = 'iterate' \x\g\x`
+>           where name = 'iterate'`
 >   ```
 >
 >   ```sql
 >       select u.email, jp.name, jp.value
->       from job_parameter jp, job j, galaxy_user u
->       where jp.name = 'iterate'
->       and j.tool_id = 'addValue'
->       and jp.job_id = j.id
-        and j.user_id = u.id;
+>           from job_parameter jp, job j, galaxy_user u
+>           where jp.name = 'iterate'
+>           and j.tool_id = 'addValue'
+>           and jp.job_id = j.id
+            and j.user_id = u.id;
 >   ```
 >
 >   Close the PostgreSQL client
