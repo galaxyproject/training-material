@@ -82,7 +82,7 @@ PostgreSQL supports comments to table definitions, but there are none shown in t
 
 There is nothing in the database that results from direct manipulation of the table definitions through DDL.  Everything comes in through SQLAlchemy.
 
-# Start Docker and Galaxy
+## Start Docker and Galaxy
 
 > ### :pencil2: ***Hands on!***
 >
@@ -105,7 +105,7 @@ There is nothing in the database that results from direct manipulation of the ta
 >    ```
 
 
-# Important tables
+## Important tables
 
 > ### :pencil2: ***Hands on!***
 >
@@ -137,7 +137,7 @@ As described in Björn’s introduction, an Admin user is already pre-set (email
 > ### :pencil2: Hands-on
 >
 >    ```sql
->        select * from galaxy_user\x\g\x;
+>        select * from galaxy_user;;
 >    ```
 
 ### Table “job”
@@ -156,7 +156,7 @@ Run a few jobs on the galaxy website (e.g upload file a simple table and add col
 >        select * from job\x\g\x;
 >    ```
 
-## Table “job_parameter”
+### Table “job_parameter”
 
 > ### :pencil2: Hands-on
 >
@@ -165,7 +165,7 @@ Run a few jobs on the galaxy website (e.g upload file a simple table and add col
 >   ```
 
 
-## Table “history”
+### Table “history”
 
 > ### :pencil2: Hands-on
 >
@@ -176,7 +176,7 @@ Run a few jobs on the galaxy website (e.g upload file a simple table and add col
 Give your current history a name and check the database again.
 
 
-## Table “dataset”
+### Table “dataset”
 
 > ### :pencil2: Hands-on
 >
@@ -184,16 +184,16 @@ Give your current history a name and check the database again.
 >       select * from dataset`
 >   ```
 
-## Table “history_dataset_association”
+### Table “history_dataset_association”
 
 > ### :pencil2: Hands-on
 >
 >   ```sql
->       select * from history_dataset_association\x\g\x`
+>       select * from history_dataset_association;`
 >   ```
 
 
-# More (hands-on) Examples, not covered by the reports app
+## More (hands-on) Examples, not covered by the reports app
 
 Have a look at the reports up (which is also provided in the Docker Image):
 
@@ -244,13 +244,15 @@ You can add the numbers per month from the reports, or:
 
 ### Jobs per tool of a certain version
 
-Imagine the current version of a tool is working fine, however a previous version had a bug: now you wanna warn all the users who have used the broken version, without alerting users who never used the broken one.
+Imagine the current version of a tool is working fine, however a previous version had a bug: now you wanna warn
+all the users who have used the broken version, without alerting users who never used the broken one.
 
 The following example is from the development server at the FMI
 
 >   ```sql
 >       select distinct(j.tool_version) from job j
 >           where j.tool_id = 'qAlign';`
+>   ```
 >
 >   ```sql
 >        select j.user_id from job j
@@ -268,26 +270,30 @@ The following example is from the development server at the FMI
 
 ## All users running a job using a certain parameter
 
+>   ```sql
+>       select jp.name, jp.value  from job_parameter jp
+>       where name = 'iterate' \x\g\x`
+>   ```
+>
+>   ```sql
+>       select u.email, jp.name, jp.value
+>       from job_parameter jp, job j, galaxy_user u
+>       where jp.name = 'iterate'
+>       and j.tool_id = 'addValue'
+>       and jp.job_id = j.id
+        and j.user_id = u.id;`
+>   ```
+>
+>   Close the PostgreSQL client
+>
+>       ` \q`
+>
+>   Quit the interactive docker
+>
+>       `exit`
 
-`select jp.name, jp.value  from job_parameter jp
-    where name = 'iterate' \x\g\x`
 
-`select u.email, jp.name, jp.value
-    from job_parameter jp, job j, galaxy_user u
-    where jp.name = 'iterate'
-    and j.tool_id = 'addValue'
-    and jp.job_id = j.id
-    and j.user_id = u.id;`
-
-Close the PostgreSQL client
-
-` \q`
-
-Quit the interactive docker
-
-`exit`
-
-# Other Topics
+## Other Topics
 
 #### How to move from MySQL to PostgreSQL
 
@@ -304,17 +310,18 @@ https://docs.google.com/presentation/d/1l4DD0IaJjuvk1zAT1Sjv26bLyrSOg3VUm7rD-TQl
 
 To run SchemaSpy in your container you’ll need to get it, and also install some required software packages.
 
-`wget http://downloads.sourceforge.net/project/schemaspy/schemaspy/SchemaSpy%205.0.0/schemaSpy_5.0.0.jar`
-
-`apt-get update`
-
-`apt-get install libpostgresql-jdbc-java`
-
-`apt-get install graphviz`
-
-To run SchemaSpy:
-
-`java -jar schemaSpy_5.0.0.jar -t pgsql -db galaxy -u galaxy -host localhost -s public -dp /usr/share/java/postgresql-jdbc4-9.2.jar -o SpyOut`
+>   ```sh
+>        wget http://downloads.sourceforge.net/project/schemaspy/schemaspy/SchemaSpy%205.0.0/schemaSpy_5.0.0.jar
+>        apt-get update
+>        apt-get install libpostgresql-jdbc-java
+>        apt-get install graphviz
+>   ```
+>
+>    To run SchemaSpy:
+>   ```
+>       java -jar schemaSpy_5.0.0.jar -t pgsql -db galaxy -u galaxy -host localhost -s public -dp /usr/share/java/postgresql-jdbc4-9.2.jar -o SpyOut
+>   ```
+>
 
 The SpyOut directory will contain the generated reports and diagrams, anchored at index.html.
 
@@ -323,11 +330,6 @@ The SpyOut directory will contain the generated reports and diagrams, anchored a
 # Conclusion
 
 There is a lot of information stored in the Galaxy database. Use this information for trouble shooting when necessary and use it as a source for extendend user statistics.
-
-:grey_exclamation: ***Key Points***
-
-- *Be carefull, when you interact with the Galaxy database. And make sure you always have a backup*
-
 
 
 # :clap: Thank you
