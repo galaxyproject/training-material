@@ -1,31 +1,15 @@
+---
+layout: tutorial_hands_on
+topic_name: admin
+tutorial_name: database-schema
+---
+
 Galaxy Database Schema
 ======================
 
-:grey_question: ***Questions***
-
-- *Running a production Galaxy server, you some times end up in with a situation, where you manually need to interact with the Galaxy database: how do you do that*
-- *How to extract usage information, which can not be gathered using the given report tools*
-- *How to move from MySQL to PostgreSQL*
-- *Is there ever a need to manually change the contents of a table*
-
-:dart: ***Objectives***
-
-- *Learn some of the design concepts of the Galaxy database*
-- *Extract information from the Galaxy database*
-- *Get to know SchemaSpy*
-
-:heavy_check_mark: ***Requirements***
-
-- [*Galaxy introduction*](../../Introduction)
-- [*Deploy a Galaxy Docker Image*](./galaxy_docker.md)
-- *or Access to a Galaxy server and its PostgreSQL database*
-
-
-:hourglass: ***Time estimation*** *2h*
-
-
 
 # Requirements
+
 For the hands-on examples you need access to a Galaxy server and access to its PostgreSQL database. You can set-up this yourself, or use the Galaxy Docker Image provided by Björn Grüning (https://github.com/bgruening/docker-galaxy-stable). During this tutorial, we will work with the Galaxy Docker Image.
 
 Setting up Docker and using the Galaxy Docker Image:
@@ -100,81 +84,113 @@ There is nothing in the database that results from direct manipulation of the ta
 
 # Start Docker and Galaxy
 
-:pencil2: ***Hands on!***
-
-1. Start the Galaxy Docker Image -  this time as an interactive session
-
-    ```
-    docker run -i -t -p 8080:80 bgruening/galaxy-stable /bin/bash
-    ```
-
-2. Start Galaxy and its PostgreSQL server
-
-    ```
-    startup > log 2>&1 &
-    ```
-
-3. Follow the startup process
-
-    ```
-    tail -f log
-    ```
+> ### :pencil2: ***Hands on!***
+>
+>   1. Start the Galaxy Docker Image -  this time as an interactive session
+>
+>    ```sh
+>       docker run -i -t -p 8080:80 bgruening/galaxy-stable /bin/bash
+>    ```
+>
+>   2. Start Galaxy and its PostgreSQL server
+>
+>    ```sh
+>       startup > log 2>&1 &
+>    ```
+>
+>   3. Follow the startup process
+>
+>    ```sh
+>       tail -f log
+>    ```
 
 
 # Important tables
 
-:pencil2: ***Hands on!***
+> ### :pencil2: ***Hands on!***
+>
+>   1. Connect to the PostgreSQL database
+>
+>    ```sh
+>        psql -d galaxy -U galaxy
+>    ```
+>
+>   2. List all tables
+>
+>    ```sql
+>       \dt
+>    ```
 
-1. Connect to the PostgreSQL database
-
-    ```
-    psql -d galaxy -U galaxy
-    ```
-
-2. List all tables
-
-    ```
-    \dt
-    ```
 
 Enter `q` to exit the view results page, and space to see the next results page.
 
-## Table “galaxy_user”
+### Table “galaxy_user”
 
-`select * from galaxy_user;`
+> ### :pencil2: Hands-on
+>
+>    ```sql
+>        select * from galaxy_user;
+>    ```
 
 As described in Björn’s introduction, an Admin user is already pre-set (email: ‘admin@galaxy.org’, password: ‘admin’). Now let’s add (i.e. register) a new user via the Galaxy website. And check the database:
 
-`select * from galaxy_user\x\g\x`
+> ### :pencil2: Hands-on
+>
+>    ```sql
+>        select * from galaxy_user\x\g\x;
+>    ```
 
-## Table “job”
+### Table “job”
 
-`select * from job;`
+> ### :pencil2: Hands-on
+>
+>    ```sql
+>        select * from job;
+>    ```
 
 Run a few jobs on the galaxy website (e.g upload file a simple table and add column with ‘Iterate’ no and yes) and check the database again:
 
-`select * from job\x\g\x`
+> ### :pencil2: Hands-on
+>
+>    ```sql
+>        select * from job\x\g\x;
+>    ```
 
 ## Table “job_parameter”
 
-`select * from job_parameter;`
+> ### :pencil2: Hands-on
+>
+>   ```sql
+>       select * from job_parameter;`
+>   ```
 
 
 ## Table “history”
 
-`select * from history;`
+> ### :pencil2: Hands-on
+>
+>   ```sql
+>       select * from history;`
+>   ```
 
 Give your current history a name and check the database again.
 
 
 ## Table “dataset”
 
-`select * from dataset`
-
+> ### :pencil2: Hands-on
+>
+>   ```
+>       select * from dataset`
+>   ```
 
 ## Table “history_dataset_association”
 
-`select * from history_dataset_association\x\g\x`
+> ### :pencil2: Hands-on
+>
+>   ```sql
+>       select * from history_dataset_association\x\g\x`
+>   ```
 
 
 # More (hands-on) Examples, not covered by the reports app
@@ -189,49 +205,66 @@ Depending on your local needs, some queries are missing, like:
 
 You can add the numbers per month from the reports, or:
 
-`select j.id, j.create_time from job j limit 5;`
 
-`select j.id, j.create_time from job j
-    where j.create_time >= '2015-12-31'
-    and j.create_time < '2016-12-31';`
+> ### :pencil2: Hands-on
+>
+>   ```sql
+>       select j.id, j.create_time from job j limit 5;`
+>   ```
+>
+>   ```sql
+>        select j.id, j.create_time from job j
+>            where j.create_time >= '2015-12-31'
+>            and j.create_time < '2016-12-31';`
+>    ```
+>
+>   ```sql
+>        select j.id,j.create_time from job j
+>           where EXTRACT(year FROM j.create_time) = 2016
+>           and j.tool_id='upload1';`
+>   ```
+>
+>...and now include the user
+>
+>   ```sql
+>        select count(j.id) from job j, galaxy_user u
+>           where j.user_id = u.id
+>           and u.email = 'hansrudolf.hotz@fmi.ch'
+>           and EXTRACT(year FROM j.create_time) = 2016
+>           and j.tool_id='upload1';`    
+>   ```
+>
+>   ```sql
+>        select u.email, count(*) from job j, galaxy_user u
+>           where j.user_id = u.id
+>           and EXTRACT(year FROM j.create_time) = 2016
+>           and j.tool_id='upload1'
+>           GROUP BY u.email;`
+>   ```
 
-`select j.id,j.create_time from job j
-    where EXTRACT(year FROM j.create_time) = 2016
-    and j.tool_id='upload1';`
-
-...and now include the user
-
-`select count(j.id) from job j, galaxy_user u
-    where j.user_id = u.id
-    and u.email = 'hansrudolf.hotz@fmi.ch'
-    and EXTRACT(year FROM j.create_time) = 2016
-    and j.tool_id='upload1';`    
-
-`select u.email, count(*) from job j, galaxy_user u
-    where j.user_id = u.id
-    and EXTRACT(year FROM j.create_time) = 2016
-    and j.tool_id='upload1'
-    GROUP BY u.email;`
-
-## Jobs per tool of a certain version
+### Jobs per tool of a certain version
 
 Imagine the current version of a tool is working fine, however a previous version had a bug: now you wanna warn all the users who have used the broken version, without alerting users who never used the broken one.
 
 The following example is from the development server at the FMI
 
-`select distinct(j.tool_version) from job j
-    where j.tool_id = 'qAlign';`
+>   ```sql
+>       select distinct(j.tool_version) from job j
+>           where j.tool_id = 'qAlign';`
+>
+>   ```sql
+>        select j.user_id from job j
+>        where j.tool_id = 'qAlign'
+>        and j.tool_version = '1.0.4quasr';`
+>   ```
+>
+>   ```sql
+>       select u.email, j.create_time from job j, galaxy_user u
+>           where j.user_id = u.id
+>           and j.tool_id = 'qAlign'
+>           and j.tool_version = '1.0.4quasr';`
+>   ```
 
-
-`select j.user_id from job j
-    where j.tool_id = 'qAlign'
-    and j.tool_version = '1.0.4quasr';`
-
-
-`select u.email, j.create_time from job j, galaxy_user u
-    where j.user_id = u.id
-    and j.tool_id = 'qAlign'
-    and j.tool_version = '1.0.4quasr';`
 
 ## All users running a job using a certain parameter
 
