@@ -11,6 +11,11 @@ after you have executed a tool. As a more useful example we are going to ask [ph
 display to entertain our users.
 
 
+At first let's create a config file that defines the name and the type of your webhook. The `name` is `phdcomics` and with the type we define the entry-points
+at which we modify the Galaxy user-interface. In our case we want to display an image at the `tool` and `workflow` entry-point.
+The key `activate` gives you control per-webhook to activate or deactivate it.
+
+
 > ### :pencil2: Hands-on
 >
 > 1. Create a file named `config/phdcomics.yaml` with the following content:
@@ -24,62 +29,12 @@ display to entertain our users.
 >    ```
 
 
-> ### :pencil2: Hands-on
->
-> 1. Create a file named `helpers/__init__.yp` with the following content:
->
->    ```python
->    import urllib
->    import re
->    import random
->    import logging
->
->    log = logging.getLogger(__name__)
->
->
->    def main(trans, webhook, params):
->        error = ''
->        comic_src = ''
->
->        try:
->            # Third-party dependencies
->            try:
->                from bs4 import BeautifulSoup
->            except ImportError as e:
->                log.exception(e)
->                return {'success': False, 'error': str(e)}
->
->            # Get latest id
->            if 'latest_id' not in webhook.config.keys():
->                url = 'http://phdcomics.com/gradfeed.php'
->                content = urllib.urlopen(url).read()
->                soap = BeautifulSoup(content, 'html.parser')
->                pattern = '(?:http://www\.phdcomics\.com/comics\.php\?f=)(\d+)'
->                webhook.config['latest_id'] = max([
->                    int(re.search(pattern, link.text).group(1))
->                    for link in soap.find_all('link', text=re.compile(pattern))
->                ])
->
->            random_id = random.randint(1, webhook.config['latest_id'])
->            url = 'http://www.phdcomics.com/comics/archive.php?comicid=%d' % \
->                random_id
->            content = urllib.urlopen(url).read()
->            soup = BeautifulSoup(content, 'html.parser')
->            comic_img = soup.find_all('img', id='comic2')
->
->            try:
->                comic_src = comic_img[0].attrs.get('src')
->            except IndexError:
->                pattern = '<img id=comic2 name=comic2 src=([\w:\/\.]+)'
->                comic_src = re.search(pattern, content).group(1)
->
->        except Exception as e:
->            error = str(e)
->
->        return {'success': not error, 'error': error, 'src': comic_src}
->   ```
-
-
+The next step is to define HTML/JS part which will control the part of the Galaxy UI. We create a new PHDComicsAppView view extended from Backbone.
+Inside this view we define a simple `div`-container with a button and a placeholder for our image called `phdcomics-img`. You can add additional
+functionality to your view, for example getting a new image on button click. The essential functionality however is stored getRandomComic.
+The big problem with phdcomics is that there is no nice API to retrive the comics, so we need to fallback to parse the HTML pages. We decided to do this
+in Python to demonstrate webhooks abilitity to call self-defined python functions. Please note the `url = galaxyRoot + 'api/webhooks/phdcomics/get_data';`, which
+calls an REST endpoint defined by use in the next step. The return value of this endpoint is retrived in JS and can be displayed or modified.
 
 > ### :pencil2: Hands-on
 >
@@ -144,6 +99,70 @@ display to entertain our users.
 >        });
 >    ```
 
+
+The following hands-on will define an API endpoint that is called from the JS code of your webhook.
+Make sure you name the python function `main` and that all third-party requirements are installed in your Galaxy virtual environment.
+Please note that the `main()` can consume `params` from your client but also the Galaxy `trans` object, which will give you access to the
+entire user-object, including histories and datasets.
+
+
+> ### :pencil2: Hands-on
+>
+> 1. Create a file named `helpers/__init__.yp` with the following content:
+>
+>    ```python
+>    import urllib
+>    import re
+>    import random
+>    import logging
+>
+>    log = logging.getLogger(__name__)
+>
+>
+>    def main(trans, webhook, params):
+>        error = ''
+>        comic_src = ''
+>
+>        try:
+>            # Third-party dependencies
+>            try:
+>                from bs4 import BeautifulSoup
+>            except ImportError as e:
+>                log.exception(e)
+>                return {'success': False, 'error': str(e)}
+>
+>            # Get latest id
+>            if 'latest_id' not in webhook.config.keys():
+>                url = 'http://phdcomics.com/gradfeed.php'
+>                content = urllib.urlopen(url).read()
+>                soap = BeautifulSoup(content, 'html.parser')
+>                pattern = '(?:http://www\.phdcomics\.com/comics\.php\?f=)(\d+)'
+>                webhook.config['latest_id'] = max([
+>                    int(re.search(pattern, link.text).group(1))
+>                    for link in soap.find_all('link', text=re.compile(pattern))
+>                ])
+>
+>            random_id = random.randint(1, webhook.config['latest_id'])
+>            url = 'http://www.phdcomics.com/comics/archive.php?comicid=%d' % \
+>                random_id
+>            content = urllib.urlopen(url).read()
+>            soup = BeautifulSoup(content, 'html.parser')
+>            comic_img = soup.find_all('img', id='comic2')
+>
+>            try:
+>                comic_src = comic_img[0].attrs.get('src')
+>            except IndexError:
+>                pattern = '<img id=comic2 name=comic2 src=([\w:\/\.]+)'
+>                comic_src = re.search(pattern, content).group(1)
+>
+>        except Exception as e:
+>            error = str(e)
+>
+>        return {'success': not error, 'error': error, 'src': comic_src}
+>   ```
+
+
+To make your webhook appealing you can also add custom CSS which you can use in your HTML/JS code.
 
 
 > ### :pencil2: Hands-on
@@ -219,6 +238,16 @@ display to entertain our users.
 >        }
 >    ```
 
+
+Please make sure you have activated webhooks in your `config/galaxy.ini` file by setting the `webhooks_dir` to the path in which your `phdcomics` folder is located.
+
+> ### :pencil2: Hands-on
+>
+> 1. Submit one tool and see if your webhook is working on the tool-submit page.
+>
+
+
+If successful it should look like this:
 
 ![First view](../../images/phdcomics.png)
 
