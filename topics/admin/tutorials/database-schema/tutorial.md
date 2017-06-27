@@ -137,7 +137,7 @@ As described in Björn’s introduction, an Admin user is already pre-set (email
 > ### :pencil2: Hands-on
 >
 >    ```sql
->        select * from galaxy_user;;
+>        select * from galaxy_user;
 >    ```
 
 ### Table “job”
@@ -153,7 +153,7 @@ Run a few jobs on the galaxy website (e.g upload file a simple table and add col
 > ### :pencil2: Hands-on
 >
 >    ```sql
->        select * from job\x\g\x;
+>        select * from job;
 >    ```
 
 ### Table “job_parameter”
@@ -161,7 +161,7 @@ Run a few jobs on the galaxy website (e.g upload file a simple table and add col
 > ### :pencil2: Hands-on
 >
 >   ```sql
->       select * from job_parameter;`
+>       select * from job_parameter;
 >   ```
 
 
@@ -181,7 +181,7 @@ Give your current history a name and check the database again.
 > ### :pencil2: Hands-on
 >
 >   ```
->       select * from dataset`
+>       select * from dataset;
 >   ```
 
 ### Table “history_dataset_association”
@@ -189,7 +189,7 @@ Give your current history a name and check the database again.
 > ### :pencil2: Hands-on
 >
 >   ```sql
->       select * from history_dataset_association;`
+>       select * from history_dataset_association;
 >   ```
 
 
@@ -209,13 +209,13 @@ You can add the numbers per month from the reports, or:
 > ### :pencil2: Hands-on
 >
 >   ```sql
->       select j.id, j.create_time from job j limit 5;`
+>       select j.id, j.create_time from job j limit 5;
 >   ```
 >
 >   ```sql
 >        select j.id, j.create_time from job j
 >            where j.create_time >= '2015-12-31'
->            and j.create_time < '2016-12-31';`
+>            and j.create_time < '2016-12-31';
 >    ```
 >
 >   ```sql
@@ -231,7 +231,7 @@ You can add the numbers per month from the reports, or:
 >           where j.user_id = u.id
 >           and u.email = 'hansrudolf.hotz@fmi.ch'
 >           and EXTRACT(year FROM j.create_time) = 2016
->           and j.tool_id='upload1';`    
+>           and j.tool_id='upload1';
 >   ```
 >
 >   ```sql
@@ -239,7 +239,7 @@ You can add the numbers per month from the reports, or:
 >           where j.user_id = u.id
 >           and EXTRACT(year FROM j.create_time) = 2016
 >           and j.tool_id='upload1'
->           GROUP BY u.email;`
+>           GROUP BY u.email;
 >   ```
 
 ### Jobs per tool of a certain version
@@ -251,20 +251,20 @@ The following example is from the development server at the FMI
 
 >   ```sql
 >       select distinct(j.tool_version) from job j
->           where j.tool_id = 'qAlign';`
+>           where j.tool_id = 'qAlign';
 >   ```
 >
 >   ```sql
 >        select j.user_id from job j
 >        where j.tool_id = 'qAlign'
->        and j.tool_version = '1.0.4quasr';`
+>        and j.tool_version = '1.0.4quasr';
 >   ```
 >
 >   ```sql
 >       select u.email, j.create_time from job j, galaxy_user u
 >           where j.user_id = u.id
 >           and j.tool_id = 'qAlign'
->           and j.tool_version = '1.0.4quasr';`
+>           and j.tool_version = '1.0.4quasr';
 >   ```
 
 
@@ -281,17 +281,20 @@ The following example is from the development server at the FMI
 >       where jp.name = 'iterate'
 >       and j.tool_id = 'addValue'
 >       and jp.job_id = j.id
-        and j.user_id = u.id;`
+        and j.user_id = u.id;
 >   ```
 >
 >   Close the PostgreSQL client
 >
+>   ```sql
 >       ` \q`
+>   ```
 >
 >   Quit the interactive docker
 >
->       `exit`
-
+>   ```sql
+>       `exit
+>   ```
 
 ## Other Topics
 
@@ -311,15 +314,15 @@ https://docs.google.com/presentation/d/1l4DD0IaJjuvk1zAT1Sjv26bLyrSOg3VUm7rD-TQl
 To run SchemaSpy in your container you’ll need to get it, and also install some required software packages.
 
 >   ```sh
->        wget http://downloads.sourceforge.net/project/schemaspy/schemaspy/SchemaSpy%205.0.0/schemaSpy_5.0.0.jar
->        apt-get update
->        apt-get install libpostgresql-jdbc-java
->        apt-get install graphviz
+>   wget http://downloads.sourceforge.net/project/schemaspy/schemaspy/SchemaSpy%205.0.0/schemaSpy_5.0.0.jar
+>   apt-get update
+>   apt-get install libpostgresql-jdbc-java
+>   apt-get install graphviz
 >   ```
 >
 >    To run SchemaSpy:
 >   ```
->       java -jar schemaSpy_5.0.0.jar -t pgsql -db galaxy -u galaxy -host localhost -s public -dp /usr/share/java/postgresql-jdbc4-9.2.jar -o SpyOut
+>   java -jar schemaSpy_5.0.0.jar -t pgsql -db galaxy -u galaxy -host localhost -s public -dp /usr/share/java/postgresql-jdbc4-9.2.jar -o SpyOut
 >   ```
 >
 
