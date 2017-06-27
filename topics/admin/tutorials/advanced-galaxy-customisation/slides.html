@@ -5,12 +5,6 @@ tutorial_name: advanced-galaxy-customisation
 logo: "GTN"
 ---
 
-### Slide deck
-
-This slide deck is available at http://bit.ly/gcc17custom (TODO create)
-
----
-
 ### Setup
 
 We are going to use a prebuilt virtual machine image for this session.
@@ -18,7 +12,7 @@ We are going to use a prebuilt virtual machine image for this session.
 From the given USB stick, please:
 
 * Copy and install VirtualBox (or [download](https://www.virtualbox.org/wiki/Downloads)) if you do not have it already.
-* Copy the Planemo machine image - file `latest.ova`.
+* Copy the Planemo machine image - file `latest.ova` or [download](https://images.galaxyproject.org/planemo/latest.ova).
 
 ---
 
@@ -234,20 +228,10 @@ Have their own [tutorial](https://galaxyproject.github.io/training-material//top
 
 ### Galaxy Webhooks
 
-Have their own [tutorial](https://galaxyproject.github.io/training-material//topics/dev//tutorials/webhooks/slides.html#1).
+Have their own [slides](https://galaxyproject.github.io/training-material//topics/dev//tutorials/webhooks/slides.html#1) and [tutorial](https://galaxyproject.github.io/training-material//topics/dev//tutorials/webhooks/tutorial.md).
 
 And also a [documentation](https://docs.galaxyproject.org/en/master/admin/special_topics/webhooks.html)
 
----
-
-### Galaxy Chat
-
-Good fit for deployments where:
-
-* the admins and the tool developers are the same group
-* there is a dedicated support person or team
-
-[Documentation](https://docs.galaxyproject.org/en/master/admin/special_topics/chat.html)
 
 ---
 
@@ -337,10 +321,35 @@ biostar_enable_bug_reports: "False"
 ![biostar menu](../../images/biostar_menu.png)
 ![biostar search](../../images/biostar_search.png)
 
+
 ---
 
+## Quotas
 
-# other topics
+Used to control user disk usage.
 
-* quotas setup (parsec?)
-* splash page landing overlay with Galaxy's basics - that we have datasets, tools and jobs and how they interact (this does not exist yet, but is on a roadmap so we can prepare some proof of concept)
+To turn on the use of quotas: In `galaxy.ini`:
+* `enable_quotas` Enable enforcement of quotas.  Quotas can be set from the Admin interface (under Data).
+* must create quotas in admin interface before any quota will be enforced, otherwise 'unlimited'
+
+Amounts:
+ - Examples: "10000MB", "99 gb", "0.2T", "unlimited"
+ - = / + / -
+
+Default for user class:
+ - None (No)
+ - Unregistered Users
+ - Registered Users
+
+or associated with Groups or Users
+
+---
+
+## Exercise: Creating Quotas
+
+* Create quotas for Unregistered (1b) and Registered Users (1mb)
+* Create a quota that adds 1GB
+* Create a quota that decreases by 1GB
+* Create a quota that grants unlimited
+
+
