@@ -89,7 +89,7 @@ graphlan.py
     --dpi $dpi
 #end if
 --size $size
-"$input_tree"
+'$input_tree'
 ]]></command>
 ```
 
@@ -121,11 +121,21 @@ python '$__tool_directory__/graphlan.py'
 
 ```xml
 <inputs>
-    <param name="dpi" type="..." label="..." optional="True"/>
+    <param name="input_tree" type="data" label="..."/>
 
-    <param argument="--size" type="..." value="7" label="..." help="..."/>
+    <param argument="--dpi" type="integer" optional="true" label="..."
+        help="For non vectorial formats" />
 </inputs>
 ```
+
+???
+
+- `name` identifies a parameter
+- Parameters can have different types (`data`, `data_collection`, `integer`, `float`, `text`, `select`, `boolean`, `color`, `data_column`,...)
+- The content `argument` is automatically added at the end of the displayed help
+- When `argument` is specified and `name` is not, `name` is derived from `argument` by removing the initial dashes
+
+---
 
 #### Directly linked to `<command>`
 
@@ -136,7 +146,7 @@ graphlan.py
 #if $dpi
     --dpi $dpi
 #end if
---size $size
+'$input_tree'
 ...
 ]]></command>
 ```
@@ -303,6 +313,10 @@ class: packed
 </inputs>
 ```
 
+???
+
+It makes sense to use a `<repeat>` block only if it contains multiple related parameters, otherwise adding `multiple="true"` is preferrable.
+
 ---
 
 ### `outputs`
@@ -340,13 +354,17 @@ class: packed
 </inputs>
 <outputs>
     <data name="png_output" format="png" label="${tool.name} on ${on_string}: PNG">
-        <filter>format=="png"</filter>
+        <filter>format == "png"</filter>
     </data>
     <data name="pdf_output" format="pdf" label="${tool.name} on ${on_string}: PDF">
-        <filter>format=="pdf"</filter>
+        <filter>format == "pdf"</filter>
     </data>
 </outputs>
 ```
+
+???
+
+N.B. If the filter expression raises an Exception, the dataset will NOT be filtered out
 
 ---
 
@@ -416,19 +434,16 @@ For more information, check the `user manual
 
 ---
 
-### Other tips
+### Tips and best practices
 
-Always quote text/data parameters
+Always quote `text` and `data` parameters and output `data`
 
 ```xml
 <command><![CDATA[
 graphlan.py
---format '$format'
-#if $dpi
-    --dpi $dpi
-#end if
---size $size
+...
 '$input_tree'
+'$png_output_image'
 ]]></command>
 ```
 
@@ -438,9 +453,9 @@ graphlan.py
 
 ---
 
-### Other tips
+### Tips and best practices
 
-Use &amp;&amp; to run multiple commands
+Use `&&` to concatenate multiple commands
 
 ```xml
 <command><![CDATA[
@@ -455,7 +470,7 @@ echo "Yeah it worked!"
 
 ---
 
-### Other tips
+### Tips and best practices
 
 Use the `argument` tag when a param name reflects the command line argument
 
@@ -468,13 +483,14 @@ Use the `argument` tag when a param name reflects the command line argument
 
 ---
 
-### Other tips
+### Tips and best practices
 
 Use sections to group related parameters
 
 ```xml
 <section name="advanced" title="Advanced options" expanded="False">
     <param argument="--size" type="integer" value="7" label="..." help="..."/>
+    ...
 </section>
 ```
 
