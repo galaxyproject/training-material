@@ -35,9 +35,7 @@ In this tutorial, you will learn how to annotate your training material with a l
 
 # Filling the metadata
 
-The first file we will fill is the `metadata.yaml` file. 
-
-This file define the metadata related to a tutorial: 
+The first file we will fill is the `metadata.yaml` file describing the metadata related to a topic. We will add our tutorial and its metadata as a new `material` with:
 
 - `title`: title of the tutorial
 - `type: "tutorial"`
@@ -89,9 +87,3 @@ For this metadata, we take inspiration from what Software Carpentry is doing and
 We recommend you to fill the questions and the learning objectives before starting writing the tutorial content. You can still refine them afterwards, but it will help to design your tutorial and think beforehands what is worth training.
 
 For the take-home messages, it is easier to define them once the tutorial is written and you identified the issues.
-
-> ### :nut_and_bolt: Comment
->
-> Temporarly, we need a duplication of the metadata (because of our temporary templating system) in the topic `metadata.yaml` in the section `material`. So you need to copy that.
-> {: .comment}
-
