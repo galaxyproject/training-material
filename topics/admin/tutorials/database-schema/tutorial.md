@@ -293,6 +293,9 @@ The following example is from the development server at the FMI
 >           and j.user_id = u.id;
 >   ```
 >
+
+## Close PostgreSQL client and quit docker
+
 >   Close the PostgreSQL client
 >
 >   ```sql
@@ -301,7 +304,7 @@ The following example is from the development server at the FMI
 >
 >   Quit the interactive docker
 >
->   ```sql
+>   ```sh
 >       exit
 >   ```
 
