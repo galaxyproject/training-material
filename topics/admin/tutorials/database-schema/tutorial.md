@@ -157,12 +157,12 @@ As described in Björn’s introduction, an Admin user is already pre-set (email
 >        select * from job;
 >    ```
 
-Run a few jobs on the galaxy website (e.g upload file a simple table and add column with ‘Iterate’ no and yes) and check the database again:
+Run a few jobs on the galaxy website (e.g _upload file_ a simple table and _add column_ with ‘Iterate’ no and yes) and check the database again:
 
 > ### :pencil2: Hands-on
 >
 >    ```sql
->        select * from job;
+>        select * from job \x\g\x
 >    ```
 
 ### Table “job_parameter”
@@ -179,7 +179,7 @@ Run a few jobs on the galaxy website (e.g upload file a simple table and add col
 > ### :pencil2: Hands-on
 >
 >   ```sql
->       select * from history;`
+>       select * from history;
 >   ```
 
 Give your current history a name and check the database again.
@@ -189,7 +189,7 @@ Give your current history a name and check the database again.
 
 > ### :pencil2: Hands-on
 >
->   ```
+>   ```sql
 >       select * from dataset;
 >   ```
 
@@ -215,8 +215,6 @@ Depending on your local needs, some queries are missing, like:
 You can add the numbers per month from the reports, or:
 
 
-> ### :pencil2: Hands-on
->
 >   ```sql
 >       select j.id, j.create_time from job j limit 5;
 >   ```
@@ -279,6 +277,8 @@ The following example is from the development server at the FMI
 
 ## All users running a job using a certain parameter
 
+> ### :pencil2: ***Hands on!***
+>
 >   ```sql
 >       select jp.name, jp.value  from job_parameter jp
 >           where name = 'iterate'`
@@ -290,7 +290,7 @@ The following example is from the development server at the FMI
 >           where jp.name = 'iterate'
 >           and j.tool_id = 'addValue'
 >           and jp.job_id = j.id
-            and j.user_id = u.id;
+>           and j.user_id = u.id;
 >   ```
 >
 >   Close the PostgreSQL client
