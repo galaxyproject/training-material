@@ -108,7 +108,7 @@ entire user-object, including histories and datasets.
 
 > ### :pencil2: Hands-on
 >
-> 1. Create a file named `helpers/__init__.yp` with the following content:
+> 1. Create a file named `helper/__init__.py` with the following content:
 >
 >    ```python
 >    import urllib
