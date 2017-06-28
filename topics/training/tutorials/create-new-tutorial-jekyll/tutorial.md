@@ -55,3 +55,5 @@ We can use Jekyll to run a server to check if the tutorial is correctly added an
 >    >    </details>
 >    {: .question}
 {: .hands_on}
+
+# Conclusion

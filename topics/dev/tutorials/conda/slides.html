@@ -15,7 +15,7 @@ These slides mirror the section on "Dependencies and Conda" in the [Planemo Docu
 
 ---
 
-class: left
+class: left, enlarge120
 
 ### Example Tool (1 / 2)
 
@@ -38,7 +38,7 @@ Notice the `--requirement seqtk@1.2`.
 
 ---
 
-class: left
+class: left, enlarge120
 
 ### Example Tool (2 / 2)
 
@@ -52,7 +52,7 @@ The `--requirement seqtk@1.2` gets translated into the follow tool XML:
 
 ---
 
-### Dependency Resolution
+## Dependency Resolution
 
 ![](../../images/galaxy_instance.png)
 
@@ -66,18 +66,23 @@ The `--requirement seqtk@1.2` gets translated into the follow tool XML:
 
 ---
 
+class: enlarge120
+
 ![](../../../../../shared/images/conda_logo.png)
 
 Package, dependency and environment management
 
 ---
 
-###.image-25[![](../../../../../shared/images/conda_logo.png)] <br/> Conda Terminology
+class: enlarge120
 
+###.image-25[![](../../../../../shared/images/conda_logo.png)] <br/> Conda Terminology
 
 Conda **recipes** build **packages** that are published to **channels**.
 
 ---
+
+class: enlarge120
 
 ### .image-25[![](../../../../../shared/images/conda_logo.png)] <br /> Conda Key Features for Galaxy
 
@@ -93,6 +98,12 @@ Conda **recipes** build **packages** that are published to **channels**.
 - Recipes: independent of the progamming language in which software is written
 - Support for multiple versions at the same time is needed for reproducibility
 
+Compared with the Tool Shed dependency management (`tool_dependencies.xml`), BioConda is:
+
+- More popular!
+- Easier to develop.
+- Easier to install and test.
+
 ---
 
 ###.image-25[![](../../../../../shared/images/conda_logo.png)] <br/> Conda Distributions
@@ -105,8 +116,9 @@ Conda **recipes** build **packages** that are published to **channels**.
 
 ---
 
-###.image-25[![](../../../../../shared/images/conda_logo.png)] <br/> Best Practice Channels
+class: enlarge120
 
+###.image-25[![](../../../../../shared/images/conda_logo.png)] <br/> Best Practice Channels
 
 - Packages through channels within Continuum.
 - Conda channels searched by Galaxy for packages
@@ -123,6 +135,8 @@ Conda **recipes** build **packages** that are published to **channels**.
 
 ---
 
+class: left, enlarge120
+
 ###.image-25[![](../../../../../shared/images/conda_logo.png)] <br/> Install and Configure
 
 ```bash
@@ -138,14 +152,15 @@ This has already been done on [Planemo machine](https://github.com/galaxyproject
 
 ---
 
+class: enlarge120
+
 ###.image-25[![](../../../../../shared/images/conda_logo.png)] <br/> Quickstart
 #### Using Conda outside Planemo
 
 - Install a package
 
-
 ```bash
-conda install pyyaml
+$ conda install pyyaml
 ```
 
 - Install some packages within an isolated environment
@@ -161,7 +176,9 @@ $ source activate yaml
 
 ---
 
-### Conda and Galaxy
+class: enlarge150
+
+## Conda and Galaxy
 
 Galaxy now automatically installs Conda when first launched and will use [Bioconda](https://bioconda.github.io/) and other channels
 for package resolution. 
@@ -180,13 +197,15 @@ for package resolution.
 
 ---
 
-### Conda and Planemo
+class: enlarge150
+
+## Conda and Planemo
 
 Using Conda directly is generally package-centric, Planemo provides abstractions that are tool-centric.
 
 ---
 
-class: left
+class: left, enlarge120
 
 The next few slides will use the seqtk example from Planemo's documentation - this can be downloaded to
 follow along using the following command:
@@ -202,7 +221,9 @@ class: left
 
 ### Linting Conda Dependencies
 
-Planemo can check if the requirements of a tool are available in best practice Conda channels using the `--conda_requirements` flag of `planemo lint`.
+.enlarge120[Planemo can check if the requirements of a tool are available in best practice Conda channels using the `--conda_requirements` flag of `planemo lint`.]
+
+<br>
 
 ```
 $ planemo lint --conda_requirements seqtk_seq.xml
@@ -212,13 +233,17 @@ Applying linter requirements_in_conda... CHECK
 .. INFO: Requirement [seqtk@1.2] matches target in best practice Conda channel [bioconda].
 ```
 
-Notice Planemo indicates this tool is available and shows the channel it is available in.
+<br>
+
+.enlarge120[*Notice Planemo indicates this tool is available and shows the channel it is available in.*]
 
 ---
 
+class: left
+
 ### The Planemo `conda_install` command
 
-```
+```sh
 $ planemo conda_install seqtk_seq.xml
 Install conda target CondaTarget[seqtk,version=1.2]
 /home/john/miniconda3/bin/conda create -y --name __seqtk@1.2 seqtk=1.2
@@ -247,9 +272,11 @@ used through Planemo) can leverage.
 
 ---
 
+class: enlarge120
+
 ### The Planemo `conda_env` command
 
-```
+```sh
 $ . <(planemo conda_env seqtk_seq.xml)
 Deactivate environment with conda_env_deactivate
 (seqtk_seq) $ which seqtk
@@ -272,7 +299,7 @@ $
 
 ---
 
-### Using our Tool with the Conda Environment
+## Using the Tool Environment
 
 Now that we have verified the Conda environment setup with `conda_install` works properly on the 
 command-line, we can use our tool!
@@ -281,9 +308,11 @@ command-line, we can use our tool!
 
 ---
 
+class: left
+
 ### Planemo `test`
 
-```sh
+.reduce90[```sh
 $ planemo test seqtk_seq.xml
 ...
 INFO  [galaxy.tools.actions] Handled output named output1 for tool seqtk_seq (20.136 ms)
@@ -305,14 +334,15 @@ XML: /private/tmp/tmpLvKwta/xunit.xml
 Ran 1 test in 15.936s
 
 OK
-```
+```]
 
+.enlarge120[
 The following line indicates the seqtk package was found:
 
 ```
 [galaxy.tools.deps] Using dependency seqtk version 1.2 of type conda
 ```
-
+]
 ---
 
 ### <i class="fa fa-pencil" aria-hidden="true"></i> Hands-on
@@ -324,7 +354,7 @@ The following line indicates the seqtk package was found:
 ### <i class="fa fa-pencil" aria-hidden="true"></i> Hands-on
 
 #### The Goal
-- Use the Planemo commands `conda_install`, `conda_env`, and `test` to learn the Galaxy tool dependency development lifecycle.
+- Use the Planemo commands `conda_install`, `conda_env`, and `test` to practice the Galaxy tool dependency development lifecycle.
 
 ---
 
@@ -342,9 +372,11 @@ Run the following commands to practice working with Galaxy tools, Planemo, and C
 
 ---
 
-### Finding the Correct Requirements & Packages
+class: enlarge120
 
-The above example worked because a published Bioconda recipe named `seqtk` at version `1.2`
+## Finding the Correct Requirements & Packages
+
+The previous example worked because a published Bioconda recipe named `seqtk` at version `1.2`
 was previously published, but how can these be found?
 
 Two easy approaches are using `planemo conda_search` and using the Anaconda web search.

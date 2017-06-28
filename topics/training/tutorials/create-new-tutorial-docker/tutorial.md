@@ -138,11 +138,6 @@ Once the tutorial is ready, we need to extract workflows with the different step
 A Galaxy Interactive Tour is a way to go through an entire analysis, step by step inside Galaxy in an interactive and explorative way.
 It is a great way to run the tutorial directly inside Galaxy. To learn more about creating a Galaxy tour please have a look at our [dedicated tour training](topics/training/tutorials/create-new-tutorial-tours/tutorial.html).
 
-> ### :pencil2: Hands-on: Add a Galaxy Interactive Tour to your Docker image
->
-> 1. Add it to the `tours` directory
-{: .hands_on}
-
 ## Testing the technical infrastructure
 
 Once we defined all the requirements for running the tutorial, we can test these requirements. 
@@ -164,3 +159,5 @@ Every topic will come with a Docker image containing the tools, data, workflows 
 >     3. Check the workflows
 >     4. Check the Galaxy Interactive Tours in "Help"
 {: .hands_on}
+
+# Conclusion

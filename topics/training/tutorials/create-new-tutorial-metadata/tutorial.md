@@ -87,3 +87,5 @@ For this metadata, we take inspiration from what Software Carpentry is doing and
 We recommend you to fill the questions and the learning objectives before starting writing the tutorial content. You can still refine them afterwards, but it will help to design your tutorial and think beforehands what is worth training.
 
 For the take-home messages, it is easier to define them once the tutorial is written and you identified the issues.
+
+# Conclusion
