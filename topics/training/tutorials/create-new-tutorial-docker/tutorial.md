@@ -159,3 +159,5 @@ Every topic will come with a Docker image containing the tools, data, workflows 
 >     3. Check the workflows
 >     4. Check the Galaxy Interactive Tours in "Help"
 {: .hands_on}
+
+# Conclusion

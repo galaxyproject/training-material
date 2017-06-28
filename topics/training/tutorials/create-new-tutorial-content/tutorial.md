@@ -398,3 +398,4 @@ After, each new slide is introduced by `---`, and the content of each slide is w
 > 2. Make sure they are accessible and correctly generated
 {: .hands_on}
 
+# Conclusion

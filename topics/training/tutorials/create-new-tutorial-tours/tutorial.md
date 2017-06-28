@@ -118,3 +118,5 @@ We can now create easily a Galaxy Interactive Tour and test it on the fly.
 > 2. Add the file to the `tours` directory of the tutorial
 > 3. Test it on a local Galaxy instance
 {: .hands_on}
+
+# Conclusion
