@@ -6,42 +6,44 @@ tutorial_name: metaproteomics
 
 # Introduction
 
-In this tutorial MS/MS data will be matched to peptide sequences provided through a FASTA file.
+In this metaproteomics tutorial we will identify expressed proteins from a complex bacterial community sample.
+For this MS/MS data will be matched to peptide sequences provided through a FASTA file.
+
+Metaproteomics is the large-scale characterization of the entire protein complement of environmental microbiota
+at a given point in time. It has the potential to unravel the mechanistic details of microbial interactions with
+the host / environment by analyzing the functional dynamics of the microbiome.
 
 > ### Agenda
 >
-> In this tutorial, we will deal with:
->
-> 1. [Placeholder](#pretreatments)
-> 2. [Mapping](#mapping)
-> 3. [Analysis of the differential expression](#analysis-of-the-differential-expression)
-> 4. [Inference of the differential exon usage](#inference-of-the-differential-exon-usage)
-> 5. [testpint]
+> 1. [Pretreatments](#pretreatments)
+> 2. [Match peptide sequences](#match-peptide-sequences)
+> 3. [Unipept metaproteomic analysis](#unipept-metaproteomic-analysis)
+> 4. [Summarizing the results](#genus-taxonomy-level-summary)
 {: .agenda}
 
-# Analysis
+# Pretreatments
 
 ## Data upload
 
 There are a many ways how you can upload your data. Three among these are:
 
-*   Upload the files from your computer.
-*   Using a direct weblink.
-*   Import from the data library if your instance provides the files.
+*   Upload the files from your computer
+*   Using a direct weblink
+*   Import from the data library if your instance provides the files
 
-In this tutorial, we will get the data from Zenodo. 
+In this tutorial, we will get the data from Zenodo: [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.820308.svg)](https://doi.org/10.5281/zenodo.820308). 
 
 > ### :pencil2: Hands-on: Data upload and organization
 >
 > 1. Create a new history and name it something meaningful (e.g. *Metaproteomics tutorial*)
-> 2. Import the three MGF MS/MS files and the FASTA sequence file from Zenodo
+> 2. Import the three MGF MS/MS files and the FASTA sequence file from Zenodo.
 >
 >    > ### :bulb: Tip: Importing data via links
 >    >
 >    > * Copy the link location
 >    > * Open the Galaxy Upload Manager
 >    > * Select **Paste/Fetch Data**
->    > * Paste the link into the text field
+>    > * Paste the link into the text field. You can add multiple links, each on a seperate line.
 >    > * Press **Start**    
 >    {: .tip}
 >
@@ -61,7 +63,9 @@ In this tutorial, we will get the data from Zenodo.
 >
 {: .hands_on}
 
-## Match MS/MS to peptide sequences
+# Analysis
+
+## Match peptide sequences
 
 The search database labelled `FASTA_Bering_Strait_Trimmed_metapeptides_cRAP.FASTA` is the input database that
 will be used to match MS/MS to peptide sequences via a sequence database search.
@@ -314,5 +318,132 @@ As a tabular file is being read, line filters may be applied and an SQL query ca
 > 2. Click **Execute** and inspect the query results file after it turned green. If everything went well, it should look similiar:
 >
 >     ![](../../images/query_tabular_1.png)
+>
+{: .hands_on}
+
+While we can proceed with this list of peptides, let's practice using the created SQLite database for further queries.
+We might not only be interested in all the distinct peptides, but also on how many PSMs a single peptide had.
+Therefore we can search the database for the peptides and count the occurrence without configuring the tables and columns again:
+
+> ### :pencil2: Hands-on: SQLite to tabular
+>
+> 1. **SQLite to tabular** :wrench:: Run **SQLite to tabular** with:
+>
+>    - **SQL Query**:
+>         
+>          SELECT sequence as "peptide", count(id) as "PSMs" 
+>         
+>          FROM psm
+>
+>          WHERE validation IS NOT 'Confident' AND confidence >= 95
+>          
+>          GROUP BY sequence
+>
+>          ORDER BY sequence
+>
+> 2. Click **Execute**. The resulting file should have two columns, one with the distinct peptides, the other with the count number of PSMs.
+>
+{: .hands_on}
+
+
+#### Retrieve taxonomy for peptides: Unipept
+
+The generated list of peptides can now be used to search via *Unipept*.
+We do a taxonomy analysis using the UniPept pept2lca function to return the taxonomic lowest common ancestor for each peptide:
+
+> ### :pencil2: Hands-on: Unipept
+>
+> 1. **Unipept** :wrench:: Run **Unipept** with:
+>
+>    - **Unipept application**: `pept2lca: lowest common ancestor`
+>    - **Peptides input format**: `tabular`
+>    - **Tabular Input Containing Peptide column**: The query results file.
+>    - **Select column with peptides**: `Column 1`
+>    - **Choose outputs**: Select `tabular` and `JSON taxonomy tree`
+>
+> 2. Click **Execute**. The history should grow by two files. View each to see the difference.
+>
+>       > ### :nut_and_bolt: Comment
+>       > 
+>       > The JSON (JavaScript Object Notation) file contains the same information as the tabular file but is not comfortably human readable. 
+>       > Instead, we can use it to use JavaScript libraries to visualize this data.
+>       {: .comment}
+>
+> 3. Visualize the data:
+>
+>    - Click on the JSON output file from the *Unipept* tool to expand it. Click on the **Visualize** button and select **Unipept Tree viewer**:
+>
+>       ![](../../images/visualize_button.png)
+>
+>    - A new window should appear with a visualization of the taxonomy tree of your data. Use the mouse wheel to scroll in and out and click on nodes to expand or collapse them:
+>
+>       ![](../../images/unipept_tree_viewer.png)
+>
+{: .hands_on}
+
+## Genus taxonomy level summary
+
+The tabular *Unipept* output lists the taxonomy assignments for each peptide. To create a meaningful summary, the **Query Tabular** tool is
+once again used, aggregating the number of peptides and PSMs for each genus level taxonomy assignment:
+
+> ### :pencil2: Hands-on: Query Tabular
+>
+> 1. **Query Tabular** :wrench:: Run **Query Tabular** with:
+>
+>    - **Database Table**: Click on `+ Insert Database Table`
+>    - **Tabular Dataset for Table**: The PSM report
+>
+>    Section **Filter Dataset Input**:
+>   
+>    - **Filter Tabular Input Lines**: Click on `+ Insert Filter Tabular Input Lines`:
+>    - **Filter By**: Select `by regex expression matching`
+>        - **regex pattern**: `^\d`
+>        - **action for regex match**: `include line on pattern match`
+>    
+>    Section **Table Options**:
+>
+>    - **Specify Name for Table**: `psm`
+>    - **Specify Column Names (comma-separated list)**: `,,sequence,,,,,,,,,,,,,,,,,,,,confidence,validation`
+>
+>    - **Only load the columns you have named into database**: `Yes`
+>
+> 2. Repeat this step to have a second **Database Table**:
+>
+>    - **Database Table**: Click on `+ Insert Database Table`
+>    - **Tabular Dataset for Table**: The *Unipept* tabular/tsv output
+>
+>    Section **Filter Dataset Input**:
+>   
+>    - **Filter Tabular Input Lines**: Click on `+ Insert Filter Tabular Input Lines`:
+>    - **Filter By**: Select `by regex expression matching`
+>        - **regex pattern**: `#peptide`
+>        - **action for regex match**: `exclude line on pattern match`
+>    
+>    Section **Table Options**:
+>
+>    - **Specify Name for Table**: `lca`
+>    - **Specify Column Names (comma-separated list)**: `peptide,,,,,,,,,,,,,,,,,,,,,genus`
+>
+>    - **Only load the columns you have named into database**: `Yes`
+>
+>    - **Save the sqlite database in your history**: `No`
+>
+>    - **SQL Query to generate tabular output**:
+>         
+>          SELECT lca.genus,count(psm.sequence) as "PSMs",count(distinct psm.sequence) as "DISTINCT PEPTIDES" 
+>         
+>          FROM psm LEFT JOIN lca ON psm.sequence = lca.peptide 
+>
+>          WHERE validation IS NOT 'Confident' AND confidence >= 95
+>          
+>          GROUP BY lca.genus
+>
+>          ORDER BY PSMs desc, 'DISTINCT PEPTIDES' desc
+>
+>    - **Omit column headers from tabular output**: `No`
+>
+> 2. Click **Execute** and inspect the query results file after it turned green:
+>
+>     ![](../../images/metaproteomics_summary.png)
 >
 {: .hands_on}
