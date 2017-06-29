@@ -67,7 +67,6 @@ Read quality scores (phred scores) in FASTQ-formatted data can be encoded by one
 >
 > 1. **FastQC** :wrench:: Run `FastQC` on each collection of FASTQ read files to assess the overall read/base quality and quality score encoding scheme using the following parameters:
 >    - **Short read data from your current history**: Click the "Dataset collection" tab and then select the blank RNAi sRNA-seq dataset collection
-> 1. Click "Execute"
 >    ![](../../images/sRNA/Fig4_fastqc_tool_form.png)
 > 1. Repeat for the *Symplekin* RNAi dataset collection
 >
@@ -97,7 +96,6 @@ Read quality scores (phred scores) in FASTQ-formatted data can be encoded by one
 > 1. **FASTQ Groomer** :wrench:: Run `FASTQ Groomer` on each collection of FASTQ read files to convert the quality scores from Illumina 1.5 to Sanger/Illumina 1.9 encoding using the following parameters:
 >    - **File to groom**: Click the "Dataset collection" tab and then select the control RNAi sRNA-seq dataset collection
 >    - **Input FASTQ quality scores type**: Illumina 1.3-1.7
-> 1. Click "Execute"
 >
 > {: .hands_on}
 
@@ -127,7 +125,6 @@ sRNA-seq library preparation involves adding an artificial adaptor sequence to b
 >
 >    ![](../../images/sRNA/Fig7_trimgalore_tool_form.png)
 >
-> 1. Click "Execute"
 > 1. Repeat for the *Symplekin* RNAi dataset collection
 >
 >    We don't want to trim for quality because the adapter-trimmed sequences represent a full small RNA molecule, and we want to maintain the integrity of the entire molecule. We increase the minimum read length required to keep a read because small RNAs can potentially be shorter than 20 nt (the default value). We can check out the generated report file for any sample and see the command for the tool, a summary of the total reads processed and number of reads with an adapter identified, and histogram data of the length of adaptor trimmed. We also see that a very small percentage of low-quality bases have been trimmed
@@ -173,7 +170,6 @@ To first identify rRNA-originating reads (which we are not interested in in this
 >
 >       ![](../../images/sRNA/Fig9_HISAT_rRNA_tool_form.png)
 >
-> 1. Click "Execute"
 > 1. Repeat for the *Symplekin* RNAi dataset collection
 >
 >    We now need to extract the *unaligned* reads from the output BAM file for aligning to reference miRNA sequences. We can do this by using the `Filter SAM or BAM, output SAM or BAM` tool to obtain reads with a bit flag = 4 (meaning the read is unaligned) and then converting the filtered BAM file to FASTQ format with the `Convert from BAM to FastQ` tool.
@@ -183,7 +179,6 @@ To first identify rRNA-originating reads (which we are not interested in in this
 >    - **Filter on bitwise flag**: Yes
 >    - **Only output alignments with all of these flag bits set**: Check the box next to "The read in unmapped"
 >
-> 1. Click "Execute"
 > 1. Repeat for the *Symplekin* RNAi dataset collection
 >
 >       ![](../../images/sRNA/Fig10_Filter_rRNA_tool_form.png)
@@ -205,7 +200,6 @@ To first identify rRNA-originating reads (which we are not interested in in this
 >    - **Select the reference genome**: Dmel_miRNA_sequences.fa
 >    - **Spliced alignment parameters**: Specify spliced alignment parameters
 >    - **Specify strand-specific information**: Second Strand (F/FR)
-> 1. Click "Execute"
 > 1. Repeat for the *Symplekin* RNAi dataset collection
 >
 >    For this tutorial we are not interested in miRNA reads, so we need to extract *unaligned* reads from the output BAM files. To do this, repeat the `Filter SAM or BAM, output SAM or BAM` and `Convert from BAM to FastQ` steps for each dataset collection. Finally, rename the converted FASTQ files something meaningful (*e.g.* "non-r/miRNA control RNAi sRNA-seq").
@@ -226,8 +220,7 @@ In *Drosophila*, non-miRNA small RNAs are typically divided into two major group
 >    - **Manipulate Reads**: Click "Insert Manipulate Reads"
 >    - **Manipulate Reads on**: Set to "Miscellaneous actions"
 >    - **Miscellaneous Manipulation Type**: Set to "Remove Read"
-> 1. Click "Execute"
-> 1. Repeat for the *Symplekin* RNAi dataset collection
+> 1. Repeat `Manipulate FASTQ` for the *Symplekin* RNAi dataset collection
 > 1. Rename each resulting dataset collection something meaningful (*i.e.* "blank RNAi - siRNA reads (20-22nt)")
 >
 >       ![](../../images/sRNA/Fig12a_Manipulate_Fastq_siRNA_tool_form.png)
@@ -242,8 +235,7 @@ In *Drosophila*, non-miRNA small RNAs are typically divided into two major group
 >    - **Manipulate Reads**: Click "Insert Manipulate Reads"
 >    - **Manipulate Reads on**: Set to "Miscellaneous actions"
 >    - **Miscellaneous Manipulation Type**: Set to "Remove Read"
-> 1. Click "Execute"
-> 1. Repeat for the *Symplekin* RNAi dataset collection
+> 1. Repeat `Manipulate FASTQ` for the *Symplekin* RNAi dataset collection
 > 1. Rename each resulting dataset collection something meaningful (*i.e.* "blank RNAi - piRNA reads (23-29nt)")
 >
 >       ![](../../images/sRNA/Fig12b_Manipulate_Fastq_piRNA_tool_form.png)
@@ -272,15 +264,13 @@ We want to identify which siRNAs are differentially abundance between the blank 
 >    - **Specify the strandedness of the reads**: read 1 (or single-end read) comes from the reverse strand (SR)
 >    - **Additional Options**: Click to expand options
 >    - **Incompatible Prior**: 0
-> 1. Click "Execute"
 >
 >       ![](../../images/sRNA/Fig14_salmon_siRNA_Blank_tool_form.png)
 >
-> 1. Repeat for the *Symplekin* RNAi siRNAs (20-22nt) reads dataset collection
+> 1. Repeat `Salmon` for the *Symplekin* RNAi siRNAs (20-22nt) reads dataset collection
 > 1. **Salmon** :wrench:: Repeat step 1 on each collection of siRNA reads (20-22nt) to quantify the abundance of *sense* siRNAs at relevant targets by changing the following parameters:
 >    - **Specify the strandedness of the reads**: read 1 (or single-end read) comes from the forward strand (SF)
-> 1. Click "Execute"
-> 1. Repeat for the *Symplekin* RNAi siRNAs (20-22nt) reads dataset collection
+> 1. Repeat `Salmon` for the *Symplekin* RNAi siRNAs (20-22nt) reads dataset collection
 >
 > {: .hands_on}
 
@@ -332,21 +322,7 @@ For more information about `DESeq2` and its outputs, have a look at [`DESeq2` do
 
 ## Visualization
 
-Now that we have a list of transcript expression levels and their differential expression levels, it is time to visually inspect our transcript structures and the reads they were predicted from. It is a good practice to visually inspect (and present) loci with transcripts of interest. Fortuantely, there is a built-in genome browser in Galaxy, **Trackster**, that make this task simple (and even fun!).
-
-In this last section, we will convert our aligned read data from BAM format to bigWig format to simplify observing where our stranded RNA-seq data aligned to. We will then initiate a session on Trackster, load it with our data, and visually inspect our interesting loci.
-
-> ### :pencil2: Hands-on: Visualizing data on genome browser
->
-> 1. **bamCoverage** :wrench:: Run `bamCoverage` on each dataset collection `HISAT` output with the following parameters:
->
->    - **TODO**
->
-> 1. **Viz** :wrench:: On the center console at the top of the Galaxy interface, choose " Visualization" -> "New track browser"
->
->    - **TODO**
->
-> {: .hands_on}
+Coming soon!
 
 ## Conclusion
 
