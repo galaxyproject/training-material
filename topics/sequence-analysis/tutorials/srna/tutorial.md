@@ -40,7 +40,7 @@ Due to the large size of the original sRNA-seq datasets, we have downsampled the
 > 1. Create a new history and name it something meaningful (*e.g.* sRNA-seq tutorial)
 > 1. Open the Data Upload Manager by selecting *Get Data* from the Tool Panel and clicking *Upload File*
 > 1. Select *Paste/Fetch Data*
-> 1. Copy each link for the 6 read (.fq), 1 annotation (.gtf), and 2 reference sequence (.fa) files, and paste each link into a separate text field
+> 1. Copy each link for the read (.fq), annotation (.gtf), and reference sequence (.fa) files, and paste each link into a separate text field
 >    - Set the datatype of the read (.fq) files to **fastq**
 >    - Set the datatype of the annotation (.gtf) file to **gtf** and assign the Genome as **dm3**
 >    - Set the datatype of the reference (.fa) files to **fasta** and assign the Genome as **dm3**
@@ -326,6 +326,8 @@ Coming soon!
 
 ## Conclusion
 
-**TODO**
+Analysis of small RNAs is a complicated and intricate process due to the diversity in characteristics, functionality, and nuances of small RNA subclasses. The goal of this tutorial is to introduce you to a common small RNA workflow that specifically identifies changes in endogenous siRNA abundances that target protein-coding mRNAs and transposable elements. The steps presented here can be rearranged and modified based on small RNA features of specific systems and the needs of the user.
 
-![](../images/schematic_for_sRNAseq_tutorial.png)
+## Small RNA analysis (general) pipeline
+
+![](../../images/sRNA/schematic_for_sRNAseq_tutorial.png)
