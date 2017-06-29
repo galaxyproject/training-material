@@ -196,7 +196,7 @@ To first identify rRNA-originating reads (which we are not interested in in this
 >
 >       ![](../../images/sRNA/Fig11_Convert_to_fastq_tool_form.png)
 >
->    Next we will align the non-rRNA reads to a known set of miRNA hairpin sequences to remove miRNA reads.
+>    Next we will align the non-rRNA reads to a known set of miRNA hairpin sequences to identify miRNA reads.
 >
 > 1. **HISAT2** :wrench:: Run `HISAT2` on each collection of filtered HISAT2 output FASTQ files to align non-rRNA reads to reference miRNA hairpin sequences using the following parameters:
 >    - **Single end or paired reads?**: Individual unpaired reads
@@ -208,13 +208,15 @@ To first identify rRNA-originating reads (which we are not interested in in this
 > 1. Click "Execute"
 > 1. Repeat for the *Symplekin* RNAi dataset collection
 >
->    Again, we need to extract *unaligned* reads from the output BAM files. To do this, repeat the `Filter SAM or BAM, output SAM or BAM` and `Convert from BAM to FastQ` steps for each dataset collection. Finally, rename the converted FASTQ files something meaningful (*e.g.* "non-r/miRNA control RNAi sRNA-seq").
+>    For this tutorial we are not interested in miRNA reads, so we need to extract *unaligned* reads from the output BAM files. To do this, repeat the `Filter SAM or BAM, output SAM or BAM` and `Convert from BAM to FastQ` steps for each dataset collection. Finally, rename the converted FASTQ files something meaningful (*e.g.* "non-r/miRNA control RNAi sRNA-seq").
+>
+> In some instances, miRNA-aligned reads are the desired output for downstream analyses, for example, if we are investigating how loss of key miRNA pathway components affect levels of pre-miRNA and mature miRNAs. In this case, the BAM output of HISAT2 can directly be used in subsequent tools as it contains the subset of reads aligned to miRNA sequences.
 >
 > {: .hands_on}
 
 ## Small RNA subclass distinction
 
-In *Drosophila*, siRNAs are typically 20-22nt long while piRNAs are typically 23-29nt long. We want to analyze these sRNA subclasses independently, so next we are going to filter the non-r/miRNA reads based on length using the `Manipulate FASTQ` tool.
+In *Drosophila*, non-miRNA small RNAs are typically divided into two major groups: endogenous siRNAs which are 20-22nt long and piRNAs which are 23-29nt long. We want to analyze these sRNA subclasses independently, so next we are going to filter the non-r/miRNA reads based on length using the `Manipulate FASTQ` tool.
 
 > 1. **Manipulate FASTQ** :wrench:: Run `Manipulate FASTQ` on each collection of non-r/miRNA reads to identify siRNAs (20-22nt) using the following parameters.
 >    - **FASTQ File**: Click the "Dataset collection" tab and then select the blank RNAi sRNA-seq dataset of non-r/miRNA FASTQ files
@@ -248,60 +250,85 @@ In *Drosophila*, siRNAs are typically 20-22nt long while piRNAs are typically 23
 >
 > 1. **FastQC** :wrench:: Run `FastQC` on each collection of siRNA and piRNA read files to confirm the correct read lengths.
 >
+>       ![](../../images/sRNA/Fig13_FastQC_piRNA_siRNA_result_Blank_rep1.png)
+>
+> We see in the above image (for Blank RNAi, replicate 3) that we have ~32k reads that are 20-22nt long in our Reads_20-22_nt_length_siRNAs file and ~16k reads that are 23-29nt long in our Reads_23-29_nt_length_piRNAs file, as expected. Given that we had ~268k trimmed reads in the Blank RNAi replicate 3 file, siRNAs represent ~12.1% of the reads and piRNAs represent ~6.2% of the reads in this experiment.
+>
 > {: .hands_on}
 
-Interestingly, for the piRNA sequences (23-29nt), the "Per base sequence content" output of `FastQC` indicates a high prevalence for the T nucleotide (really U in RNA) at the first position of the reads (~70% of reads). This agrees with a known bias for 5' Us in the piRNAs that are bound by their major protein cofactor, PIWI [cite]. Additionally, we observe a less pronounced prevalence for the A nucleotide at position 10 of the reads (~35% of reads), which agrees with a known bias for 10A in secondary piRNAs [cite].
+The next step in our analysis pipeline is to identify which RNA features - e.g. protein-coding mRNAs, transposable elements - the siRNAs and piRNAs align to. Most fly piRNAs originate from and thus align to transposable elements (TEs) but some also originate from genome piRNA clusters or protein-coding genes. siRNAs are thought to inhibit TE mobility and potentially target mRNAs for degradation via an RNA-interference (RNAi) mechanism. Ultimately, we want to know whether an RNA feature (TE, piRNA cluster, mRNA, etc.) has significantly different numbers of siRNAs or piRNAs targeting it. To determine this, we will use `Salmon` to simultaneously align and quantify siRNA reads against known target sequences to estimate siRNA abundance per target. For the remainder of the tutorial we will be focusing on siRNAs, but similar approaches can be done for piRNAs, miRNAs, or any other subclass of small, non-coding RNAs.
 
-The next step in our analysis pipeline is to identify which RNA features the siRNAs and piRNAs align to. Most fly piRNAs originate from and thus align to transposable elements (TEs) but some also originate from genome piRNA clusters or protein-coding genes. Ultimately, we want to know whether a feature (TE, cluster, pcRNA, etc.) has fewer or more piRNAs targeting it. To determine this, we will use `salmon` to simultaneously align and quantify piRNA reads against known target sequences to estimate piRNA abundance per target. For the remainder of the tutorial we will be focusing on piRNAs, but similar approaches can be done for siRNAs.
+## siRNA abundance estimation
 
-## piRNA abundance estimation
+We want to identify which siRNAs are differentially abundance between the blank and *Symplekin* RNAi conditions. To do this we will implement a counting approach using `Salmon` to quantify siRNAs per RNA feature. Specifically, we will analyzing mRNA and TE elements by counting siRNAs against a FASTA file of transcript sequences, not the reference genome. This approach is especially useful in this case because we are interested in TEs, which occur at many copies (100s - 1000s) in the genome, and thus will result in multiple alignments if we align to the genome with a tool like `HISAT2`. Further, we will be counting abundance of siRNAs that align *sense* or *antisense* to an RNA feature independently, as opposite sense alignments are correlated with unique downstream silencing effects. Then, we will provide this information to `DESeq2` to generate normalized counts and significance testing for differential abundance of siRNAs per feature.
 
-We want to identify which piRNAs are differentially abundance between the control and *klp10A* RNAi conditions. To do this we will implement a counting approach using `Salmon` to quantify piRNAs per genome feature (TEs in this case). Then we will provide this information to `DESeq2` to generate normalized counts and significance testing for differential expression.
-
-> ### :pencil2: Hands-on: piRNA abundance estimation
+> ### :pencil2: Hands-on: siRNA abundance estimation
 >
-> **TODO**
->
-> 1. **Salmon** :wrench:: Run `Salmon` on each collection of piRNA reads (23-29nt) to quantify the abundance of piRNAs at relevant targets. We will focus on abundance of piRNAs on transposable elements
+> 1. **Salmon** :wrench:: Run `Salmon` on each collection of siRNA reads (20-22nt) to quantify the abundance of *antisense* siRNAs at relevant targets. We will focus on abundance of siRNAs on mRNAs and transposable elements using the following parameters:
 >    - **Select a reference transcriptome from your history or use a built-in index?**: Use one from the history
->    - **Select the reference transcriptome**: Select the reference TE fasta file
->    - **The size should be odd number**: 21
->    - **FASTQ/FASTA file**: Click the "Dataset collection" tab and then select the control RNAi piRNA (23-29nt) reads
+>    - **Select the reference transcriptome**: Select the reference mRNA and TE fasta file
+>    - **The size should be odd number**: 19
+>    - **FASTQ/FASTA file**: Click the "Dataset collection" tab and then select the Blank RNAi siRNA (20-22nt) reads
 >    - **Specify the strandedness of the reads**: read 1 (or single-end read) comes from the reverse strand (SR)
+>    - **Additional Options**: Click to expand options
+>    - **Incompatible Prior**: 0
 > 1. Click "Execute"
-> 1. Repeat for the *klp10A* RNAi piRNA (23-29nt) reads dataset collection
+>
+>       ![](../../images/sRNA/Fig14_salmon_siRNA_Blank_tool_form.png)
+>
+> 1. Repeat for the *Symplekin* RNAi siRNAs (20-22nt) reads dataset collection
+> 1. **Salmon** :wrench:: Repeat step 1 on each collection of siRNA reads (20-22nt) to quantify the abundance of *sense* siRNAs at relevant targets by changing the following parameters:
+>    - **Specify the strandedness of the reads**: read 1 (or single-end read) comes from the forward strand (SF)
+> 1. Click "Execute"
+> 1. Repeat for the *Symplekin* RNAi siRNAs (20-22nt) reads dataset collection
 >
 > {: .hands_on}
 
-## piRNA differential abundance testing
+The output of `Salmon` includes a table of RNA features, estimated counts, transcripts per million, and feature length. We will be using the TPM quantification column as input to `DESeq2` in the next section.
 
-[`DESeq2`](https://bioconductor.org/packages/release/bioc/html/DESeq2.html) is a great tool for differential expression analysis. It takes unnormalized estimated read counts produced by `Salmon` and applies size factor normalization. Salmon provides estimate read counts which sometimes are reported as fractions. `DESeq2` expectes rounded integers as input, so we need to do two text manipulation steps to prepare our `Salmon` output for use with `DESeq2`.
+## siRNA differential abundance testing
 
-> ### :pencil2: Hands-on: piRNA abundance estimation
+[`DESeq2`](https://bioconductor.org/packages/release/bioc/html/DESeq2.html) is a great tool for differential expression analysis, but we also employ it here for estimation of abundance of reads targeting each of our RNA features. As input, `DESeq2` can take *t*ranscripts *p*er *m*illion (TPM) counts produced by `Salmon` for each feature. TPMs are estimates of the relative abundance of a given transcript in units, and analogously can be used here to quantify siRNAs that align either sense or antisense to transcripts.
+
+> ### :pencil2: Hands-on: siRNA differential abundance testing
 >
-> 1. **Compute** :wrench:: Run `Compute` to add column of rounded estimate Counts
-> 1. **Cut** :wrench:: Run `cut` to select just the first (feature_id) and last (rounded_counts) columns
-> 1. **DESeq2** :wrench:: Run `DESeq2` to test for differential abundance of piRNAs at the TE features
-> 1. **Filter** :wrench:: Run `Filter` to extract feature with a significantly higher piRNA abundance (adjusted *p*-value less than 0.05, log2FC greater than 0) in the *klp10A* RNAi condition.
-> 1. **Filter** :wrench:: Run `Filter` to extract feature with a significantly lower piRNA abundance (adjusted *p*-value less than 0.05, log2FC less than 0) in the *klp10A* RNAi condition.
+> 1. **DESeq2** :wrench:: Run `DESeq2` to test for differential abundance of *antisense* siRNAs at mRNA and TE features using the following parameters:
+>    - **Specify a factor name**: Enter: RNAi
+>    - Under "1: Factor level": **Specify a factor level**: Enter: Symplekin
+>    - Under "1: Factor level": **Counts file(s)**: Click the "Dataset collection" tab and then select the Symplekin RNAi siRNA counts from reverse strand (SR)
+>    - Under "2: Factor level": **Specify a factor level**: Enter: RNAi
+>    - Under "2: Factor level": **Counts file(s)**: Click the "Dataset collection" tab and then select the Symplekin RNAi siRNA counts from reverse strand (SR)
+>    - **Choice of Input data**: Select "TPM values (e.g. from sailfish and salmon)
+>    - **Tabular file with Transcript - Gene mapping**: Select reference tx2g (transcript to gene) file (available through zenodo link)
+>    - **Output normalized counts table**: Yes
+>
+>       ![](../../images/sRNA/Fig15_deseq2_sr_tool_form.png)
+>
+> 1. Repeat `DESeq2` for the *sense* siRNAs at mRNA and TE features changing the following parameters:
+>    - Under "1: Factor level": **Counts file(s)**: Click the "Dataset collection" tab and then select the Symplekin RNAi siRNA counts from forward strand (SF)
+>    - Under "2: Factor level": **Counts file(s)**: Click the "Dataset collection" tab and then select the Symplekin RNAi siRNA counts from forward strand (SF)
+> 1. **Filter** :wrench:: Run `Filter` to extract features with a significantly different *antisense* siRNA abundance (adjusted *p*-value less than 0.05).
+>    - **Filter**: Select the `DESeq2` result file from testing *antisense* (SR) siRNA abundances
+>    - **With following condition**: Enter: c7<0.05
+>
+>       ![](../../images/sRNA/Fig16_filter_tool_form.png)
+>
+> 1. Repeat `Filter` for the *sense* siRNAs at mRNA and TE features changing the following parameters:
+>    - **Filter**: Select the `DESeq2` result file from testing *sense* (SF) siRNA abundances
 >
 >    > ### :question: Question
 >    >
->    > How many features have a significant increase and decrease in piRNA abundance in the *klp10A* RNAi condition?
+>    > How many features have a significant difference in *antisense* and *sense* siRNA abundance in the *Symplekin* RNAi condition?
 >    >
 >    > <details>
 >    > <summary>Click to view answers</summary>
->    > To filter, use "c7 lessthan 0.05". And we get ## features with a significant change in mapped small RNAs.
+>    > There are 87 *antisense* and 15 *sense* features that have significanlty different siRNA abundances.
 >    > </details>
 >    {: .question}
 >
 > {: .hands_on}
 
-For more information about `DESeq2` and its outputs, you can have a look at [`DESeq2` documentation](https://www.bioconductor.org/packages/release/bioc/manuals/DESeq2/man/DESeq2.pdf).
-
-## Small RNA and mRNA integration
-
-**TODO**
+For more information about `DESeq2` and its outputs, have a look at [`DESeq2` documentation](https://www.bioconductor.org/packages/release/bioc/manuals/DESeq2/man/DESeq2.pdf).
 
 ## Visualization
 
