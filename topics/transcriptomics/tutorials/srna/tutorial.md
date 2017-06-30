@@ -12,7 +12,7 @@ The data used in this tutorial are from polyphosphatase-treated sRNA sequencing 
 
 # Analysis strategy
 
-In this exercise we will identify what small RNAs are present in *Drosophila* Dmel-2 tissue culture cells treated with either RNAi against  core cleavage complex component Symplekin or blank (control) RNAi (published data available in GEO at [GSE82128](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE82128)). In this study, biological triplicate sRNA- and mRNA-seq libraries were sequenced for both RNAi conditions. After removing contaminant ribosomal RNA (rRNA) and miRNA reads, we will identify and quantify endogenous siRNAs from sequenced reads and test for differential abundance. We will follow a popular small RNA analysis pipeline developed for piRNAs by the Phillip Zamore Lab and the ZLab (Zhiping Weng) at UMass Med School called [PiPipes](https://github.com/bowhan/piPipes). Although PiPipes was developed for analysis of piRNAs, many of the basical principles can be applied to other classes of small RNAs. 
+In this exercise we will identify what small RNAs are present in *Drosophila* Dmel-2 tissue culture cells treated with either RNAi against  core cleavage complex component Symplekin or blank (control) RNAi (published data available in GEO at [GSE82128](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE82128)). In this study, biological triplicate sRNA- and mRNA-seq libraries were sequenced for both RNAi conditions. After removing contaminant ribosomal RNA (rRNA) and miRNA reads, we will identify and quantify endogenous siRNAs from sequenced reads and test for differential abundance. We will follow a popular small RNA analysis pipeline developed for piRNAs by the Phillip Zamore Lab and the ZLab (Zhiping Weng) at UMass Med School called [PiPipes](https://github.com/bowhan/piPipes). Although PiPipes was developed for analysis of piRNAs, many of the basical principles can be applied to other classes of small RNAs.
 
 It is of note that this tutorial uses datasets that have been de-multiplexed so that the input data files are a single FASTQ formatted file for each sample. Because sRNAs are typically much smaller than fragments generated for RNA-seq or other types of deep sequencing experiments, single-end sequencing strategies are almost always used to sequence sRNAs. This tutorial uses the *Collections* feature of Galaxy to orgainze each set of replicates into a single group, making tool form submission easier and ensuring reproducibility.
 
@@ -30,6 +30,7 @@ It is of note that this tutorial uses datasets that have been de-multiplexed so 
 > 1. Small RNA and mRNA integration
 > 1. Visualization
 > 1. Conclusion
+{: .agenda}
 
 ## Data upload and organization
 
@@ -57,7 +58,7 @@ Due to the large size of the original sRNA-seq datasets, we have downsampled the
 >    - Repeat for the three *Symplekin* RNAi samples
 >    - ![](../../images/sRNA/Fig3_dataset_lists_made.png)
 >
-> {: .hands_on}
+{: .hands_on}
 
 ## Read quality checking
 
@@ -97,7 +98,7 @@ Read quality scores (phred scores) in FASTQ-formatted data can be encoded by one
 >    - **File to groom**: Click the "Dataset collection" tab and then select the control RNAi sRNA-seq dataset collection
 >    - **Input FASTQ quality scores type**: Illumina 1.3-1.7
 >
-> {: .hands_on}
+{: .hands_on}
 
 *If you are following this tutorial OR your data were already in Sanger / Illumina 1.9 format*: Changes the datatype of each input file to 'fastqsanger'.
 
@@ -148,7 +149,7 @@ sRNA-seq library preparation involves adding an artificial adaptor sequence to b
 > ![](../../images/sRNA/Fig8a_fastqc_post_trimming_result.png)
 > ![](../../images/sRNA/Fig8b_fastqc_post_trimming_lengths.png)
 >
-> {: .hands_on}
+{: .hands_on}
 
 An interesting thing to note from our `FastQC` results is the *Sequence Length Distribution* results. While many RNA-seq experiments have normal distribution of read lengths, an unusual spike at 22nt is observed in our data. This spike represents the large set of endogenous siRNAs that occur in the cell line used in this study, and is actually confirmation that our dataset captures the biological molecule we are interested in.
 
@@ -206,12 +207,14 @@ To first identify rRNA-originating reads (which we are not interested in in this
 >
 > In some instances, miRNA-aligned reads are the desired output for downstream analyses, for example, if we are investigating how loss of key miRNA pathway components affect levels of pre-miRNA and mature miRNAs. In this case, the BAM output of HISAT2 can directly be used in subsequent tools as it contains the subset of reads aligned to miRNA sequences.
 >
-> {: .hands_on}
+{: .hands_on}
 
 ## Small RNA subclass distinction
 
 In *Drosophila*, non-miRNA small RNAs are typically divided into two major groups: endogenous siRNAs which are 20-22nt long and piRNAs which are 23-29nt long. We want to analyze these sRNA subclasses independently, so next we are going to filter the non-r/miRNA reads based on length using the `Manipulate FASTQ` tool.
 
+> ### :pencil2: Hands-on: Extract subclasses
+>
 > 1. **Manipulate FASTQ** :wrench:: Run `Manipulate FASTQ` on each collection of non-r/miRNA reads to identify siRNAs (20-22nt) using the following parameters.
 >    - **FASTQ File**: Click the "Dataset collection" tab and then select the blank RNAi sRNA-seq dataset of non-r/miRNA FASTQ files
 >    - **Match Reads**: Click "Insert Match Reads"
@@ -246,7 +249,7 @@ In *Drosophila*, non-miRNA small RNAs are typically divided into two major group
 >
 > We see in the above image (for Blank RNAi, replicate 3) that we have ~32k reads that are 20-22nt long in our Reads_20-22_nt_length_siRNAs file and ~16k reads that are 23-29nt long in our Reads_23-29_nt_length_piRNAs file, as expected. Given that we had ~268k trimmed reads in the Blank RNAi replicate 3 file, siRNAs represent ~12.1% of the reads and piRNAs represent ~6.2% of the reads in this experiment.
 >
-> {: .hands_on}
+{: .hands_on}
 
 The next step in our analysis pipeline is to identify which RNA features - e.g. protein-coding mRNAs, transposable elements - the siRNAs and piRNAs align to. Most fly piRNAs originate from and thus align to transposable elements (TEs) but some also originate from genome piRNA clusters or protein-coding genes. siRNAs are thought to inhibit TE mobility and potentially target mRNAs for degradation via an RNA-interference (RNAi) mechanism. Ultimately, we want to know whether an RNA feature (TE, piRNA cluster, mRNA, etc.) has significantly different numbers of siRNAs or piRNAs targeting it. To determine this, we will use `Salmon` to simultaneously align and quantify siRNA reads against known target sequences to estimate siRNA abundance per target. For the remainder of the tutorial we will be focusing on siRNAs, but similar approaches can be done for piRNAs, miRNAs, or any other subclass of small, non-coding RNAs.
 
@@ -272,7 +275,7 @@ We want to identify which siRNAs are differentially abundance between the blank 
 >    - **Specify the strandedness of the reads**: read 1 (or single-end read) comes from the forward strand (SF)
 > 1. Repeat `Salmon` for the *Symplekin* RNAi siRNAs (20-22nt) reads dataset collection
 >
-> {: .hands_on}
+{: .hands_on}
 
 The output of `Salmon` includes a table of RNA features, estimated counts, transcripts per million, and feature length. We will be using the TPM quantification column as input to `DESeq2` in the next section.
 
@@ -316,7 +319,7 @@ The output of `Salmon` includes a table of RNA features, estimated counts, trans
 >    > </details>
 >    {: .question}
 >
-> {: .hands_on}
+{: .hands_on}
 
 For more information about `DESeq2` and its outputs, have a look at [`DESeq2` documentation](https://www.bioconductor.org/packages/release/bioc/manuals/DESeq2/man/DESeq2.pdf).
 
