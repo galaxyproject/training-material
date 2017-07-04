@@ -42,7 +42,7 @@ Due to the large size of this dataset, we have downsampled it to only include re
 > 9. Rename the files in your history to retain just the necessary information (*e.g.* "G1E R1 forward reads")
 >
 >    > ### :bulb: Tip: Importing data via links
->    > Data available from zenodo: [![DOI](https://zenodo.org/badge/DOI/10.123/GTNdenovoRNAseq.svg)](https://doi.org/10.123/GTNdenovoRNAseq)
+>    > Data available from zenodo: [![DOI](https://zenodo.org/badge/DOI/10.123/GTNdenovoRNAseq.svg)](https://zenodo.org/record/583140)
 >    >
 >    > Below are the links to the read files that can be copied and pasted in the upload manager.
 >    > - https://zenodo.org/record/583140/files/G1E_rep1_forward_read_%28SRR549355_1%29
@@ -208,7 +208,7 @@ We now want to identify which transcripts are differentially expressed between t
 
 ## Count the number of reads per transcript
 
-To compare the abundance of transcripts between different cellular states, the first essential step is to quantify the number of reads per transcript. [`FeatureCounts`](http://bioinf.wehi.edu.au/featureCounts/) is one of the most popular tools for counting reads in genomic features. In our case, we'll be using `FeatureCounts` to count reads aligning in exons of our `GFFCompare` generated transcriptome database.
+To compare the abundance of transcripts between different cellular states, the first essential step is to quantify the number of reads per transcript. [`FeatureCounts`](http://bioinf.wehi.edu.au/featureCounts/ ) is one of the most popular tools for counting reads in genomic features. In our case, we'll be using `FeatureCounts` to count reads aligning in exons of our `GFFCompare` generated transcriptome database.
 
 The recommended mode is "union", which counts overlaps even if a read only shares parts of its sequence with a genomic feature and disregards reads that overlap more than one feature.
 
@@ -261,7 +261,7 @@ The first output of `DESeq2` is a tabular file. The columns are:
 4.	Standard error estimate for the log2 fold change estimate
 5.	[Wald](https://data.princeton.edu/wws509/notes/c2s3.html) statistic
 6.	*p*-value for the statistical significance of this change
-7.	*p*-value adjusted for multiple testing with the Benjamini-Hochberg procedure which controls false discovery rate ([FDR](https://www.biostathandbook.com/multiplecomparisons.html))
+7.	*p*-value adjusted for multiple testing with the Benjamini-Hochberg procedure which controls false discovery rate ([FDR](http://www.biostathandbook.com/multiplecomparisons.html))
 
 
 > ### :pencil2: Hands-on:
@@ -403,4 +403,4 @@ In this tutorial, we have analyzed real RNA sequencing data to extract useful in
 
 
 > # Workflow
-> This analysis pipeline can be recreated using the workflow here: [https://tinyurl.com/GTNdenovoRNAseqWorkflow](https://tinyurl.com/GTNdenovoRNAseqWorkflow)
+> This analysis pipeline can be recreated using the workflow here: [https://tinyurl.com/GTNdenovoRNAseqWorkflow ](https://tinyurl.com/GTNdenovoRNAseqWorkflow)
