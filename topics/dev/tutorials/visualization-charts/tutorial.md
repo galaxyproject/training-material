@@ -48,11 +48,11 @@ In this tutorial we are going to demonstrate how to add a 3rd-party visualizatio
 >
 > More resources on this file format:
 >
->   - [https://en.wikipedia.org/wiki/Protein_Data_Bank_(file_format)](https://en.wikipedia.org/wiki/Protein_Data_Bank_(file_format))
->   - [http://www.wwpdb.org/documentation/file-format](http://www.wwpdb.org/documentation/file-format)
+>   - [https://en.wikipedia.org/wiki/Protein_Data_Bank_(file_format) ](https://en.wikipedia.org/wiki/Protein_Data_Bank_(file_format))
+>   - [http://www.wwpdb.org/documentation/file-format ](http://www.wwpdb.org/documentation/file-format)
 {: .tip}
 
-As mentioned above we will be focusing on the *PV-Javascript Protein Viewer* in this tutorial. Now that we have learned about the underlying file format, let us continue by visiting the viewers developer site at [https://biasmv.github.io/pv/](https://biasmv.github.io/pv/) to get familiar with the plugin.
+As mentioned above we will be focusing on the *PV-Javascript Protein Viewer* in this tutorial. Now that we have learned about the underlying file format, let us continue by visiting the viewers developer site at [https://biasmv.github.io/pv/ ](https://biasmv.github.io/pv/) to get familiar with the plugin.
 
 > ### :pencil2: Hands-on
 >
@@ -245,7 +245,7 @@ In this section we will select a `PDB`-file from the Protein Databank and visual
 
 > ### :pencil2: Hands-on
 >
-> 1. Visit [http://www.rcsb.org](http://www.rcsb.org) and select a protein structure e.g. [1ACB](http://www.rcsb.org/pdb/explore/explore.do?structureId=1acb)
+> 1. Visit [http://www.rcsb.org ](http://www.rcsb.org) and select a protein structure e.g. [1ACB](http://www.rcsb.org/pdb/explore/explore.do?structureId=1acb)
 >
 > 2. Copy the link to the raw `PDB`-file e.g.
 >
