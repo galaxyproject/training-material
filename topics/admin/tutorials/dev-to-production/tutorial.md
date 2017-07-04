@@ -20,7 +20,7 @@ Move from dev instance to production instance
 
 :heavy_check_mark: ***Requirements***
 
-- *[Galaxy Server Administration](http://galaxyproject.github.io/training-material/Admin-Corner/slides/index.html)*
+- *[Galaxy Server Administration](http://galaxyproject.github.io/training-material/topics/admin/slides/)*
 
 :hourglass: ***Time estimation*** *TODO*
 
