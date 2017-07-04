@@ -19,7 +19,7 @@ tutorial_name: methylation-seq
 >
 > The data we use in this tutorial is available at [Zenodo](https://zenodo.org/record/557099).
 >
-> {: .agenda}
+{: .agenda}
 
 
 # Load data and quality control
