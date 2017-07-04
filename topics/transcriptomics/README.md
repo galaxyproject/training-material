@@ -39,7 +39,7 @@ It will launch a flavored Galaxy instance available on
 **Shirley Pepke et al:** [Computation for ChIP-seq and RNA-seq studies](http://www.nature.com/nmeth/journal/v6/n11s/full/nmeth.1371.html)
 
 
-**Paul L. Auer & R. W. Doerge:** [Statistical Design and Analysis of RNA Sequencing Data](http://www.genetics.org/content/185/2/405)
+**Paul L. Auer & R. W. Doerge:** [Statistical Design and Analysis of RNA Sequencing Data](http://www.stat.purdue.edu/~doerge/BIOINFORM.D/SPRING10/auer_doerge_genetics_2010.pdf) DOI: 10.1534/genetics.110.114983
 
 > Insights into proper planning of your RNA-seq run! To read before any RNA-seq experiment!
 
