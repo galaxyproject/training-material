@@ -178,7 +178,7 @@ The first step in any analysis should be to check and improve the quality of our
 
 > ### :nut_and_bolt: Comment
 >
-> For more information on the topic of quality control, please see our training materials [here](https://galaxyproject.github.io/training-material/NGS-QC/).
+> For more information on the topic of quality control, please see our training materials [here](https://galaxyproject.github.io/training-material/topics/sequence-analysis/).
 {: .comment}
 
 
@@ -466,7 +466,7 @@ To further explore the community structure, we can visualize it with dedicated t
 >    ![](../../../../shared/images/viewatphinch.png)
 >
 > 2. Click on the icon
-> 
+>
 >    It will lead you to the Phinch website, which will automatically load in your file, and where you can several interactive visualisations:
 >
 >     ![](../../../../shared/images/phinch_overviewpage.png)
