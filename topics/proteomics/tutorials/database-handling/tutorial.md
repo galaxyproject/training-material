@@ -62,7 +62,7 @@ In proteomic samples, some protein contaminants are very common, stemming from t
 1. Contamination can be observed, heavily contaminated samples can be excluded from analysis.
 2. Contaminant peptides cannot be misassigned to similar peptides in the database reducing the risk of identifying false positives.
 
-A widely used database for common contaminants is the **c**ommon **R**epository of **A**dventitious **P**roteins (cRAP). When using samples generated in cell cultures, it is furthermore recommended to include Mycoplasma proteomes in the search database. Mycoplasma infections are very common in cell culture and often go unnoticed ([Drexler and Uphoff, Cytotechnology, 2002](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3463982/)).
+A widely used database for common contaminants is the **c**ommon **R**epository of **A**dventitious **P**roteins (cRAP). When using samples generated in cell cultures, it is furthermore recommended to include Mycoplasma proteomes in the search database. Mycoplasma infections are very common in cell culture and often go unnoticed ([Drexler and Uphoff, Cytotechnology, 2002](https://dx.doi.org/10.1023%2FA%3A1022913015916)).
 
 > ### :pencil2: Hands-on: Contaminant databases
 > 1. Open **Protein Database Downloader** :wrench:.
@@ -93,7 +93,7 @@ A widely used database for common contaminants is the **c**ommon **R**epository 
 
 
 > ### :pencil2: Optional Hands-On: Mycoplasma databases
-> 90 - 95 % of mycoplasma infection in cell culture stem from the following species: M. orale, M. hyorhinis, M. arginini, M. fermentans, M. hominis and A. laidlawii ([Drexler and Uphoff, Cytotechnology, 2002](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3463982/)).
+> 90 - 95 % of mycoplasma infection in cell culture stem from the following species: M. orale, M. hyorhinis, M. arginini, M. fermentans, M. hominis and A. laidlawii ([Drexler and Uphoff, Cytotechnology, 2002](https://dx.doi.org/10.1023%2FA%3A1022913015916)).
 >
 > 1. Use **Protein Database Downloader** :wrench: to download the six mycoplasma databases. We will merge them to the main database in the next part of the tutorial.
 > 2. Run **FASTA Merge Files and Filter Unique Sequences** :wrench: to combine all mycoplasma databases into a single one.
