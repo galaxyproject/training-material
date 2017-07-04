@@ -212,7 +212,7 @@ Use the regions provided by the gene annotation file downloaded from UCSC and yo
 
 **Leleu et al. (2010):** [Processing and analyzing ChIP-seq data](http://www.ncbi.nlm.nih.gov/pubmed/20861161), (doi: 10.1093/bfgp/elq022) - Fairly detailed review of key concepts of ChIP-seq data processing (less detailed on analysis)
 
-**Peter Park (2009):** [ChIP-seq: Advantages and challenges of a maturing technology](http://www.nature.com/nrg/journal/v10/n10/full/nrg2641.html), (doi:10.1038/nrg2641)
+**Peter Park (2009):** [ChIP-seq: Advantages and challenges of a maturing technology](https://www.ncbi.nlm.nih.gov/pubmed/19736561), (doi:10.1038/nrg2641)
 
 **Kharchenko et al. (2008):** [Design and analysis of ChIP-seq experiments for DNA-binding proteins](http://www.ncbi.nlm.nih.gov/pubmed/19029915), (doi:10.1038/nbt.1508)
 
