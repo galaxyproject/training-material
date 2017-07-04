@@ -22,7 +22,8 @@ before_script:
 script:
   - set -e
   # Check links
-  #- find .  \( -name "*.md" -o -name "*.html" \) -not -path "./assets/reveal.js/*" | xargs -L 1 -I '{}' sh -c "echo {}; vl -t 5 -s 1000 --allow-codes 401,403,405,500 --whitelist http://localhost:8080 {}"
+  - find .  \( -name "*.md" -o -name "*.html" \) -not -path "./assets/reveal.js/*" | xargs -L 1 -I '{}' sh -c "echo {}; vl -t 5 -s 1000 --allow-codes 401,403,405,500 --whitelist http://localhost:8080 {}"
+  #
   # Check structure
   #- ./bin/check_structure.py
   # Check docker
@@ -38,11 +39,10 @@ script:
   #    echo ""
   #  done < DOCKER_BUILDS.list
   # Once all tutorials use new docker bootstrap script use this
-  - |
-    while read -r DIR
-    do
-      echo "$DIR"
-      docker build -f "$DIR/Dockerfile" .
-      echo ""
-    done < DOCKER_BUILDS.list
-
+  #- |
+  #  while read -r DIR
+  #  do
+  #    echo "$DIR"
+  #    docker build -f "$DIR/Dockerfile" .
+  #    echo ""
+  #  done < DOCKER_BUILDS.list
