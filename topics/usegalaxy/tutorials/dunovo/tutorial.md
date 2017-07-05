@@ -34,7 +34,7 @@ The entire analysis described here is accessible as a [Galaxy history](https://u
 
 >![History Item](http://galaxyproject.org/duplex/histItem.png)
 >
->Each history item has a Rerun ![refresh](http://galaxyproject.org/galaxy101/fa-refresh.png) button. Clicking this button will show you how this tool was run with all parameters filled in exactly.
+>Each history item has a Rerun ![refresh](https://galaxyproject.org/tutorials/g101/fa-refresh.png) button. Clicking this button will show you how this tool was run with all parameters filled in exactly.
 
 This analysis (and consequently the Galaxy's history) can be divided into three parts
  1. Consensus generation from initial sequencing reads;
