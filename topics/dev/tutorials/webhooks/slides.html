@@ -8,41 +8,48 @@ logo: "GTN"
 
 ### What are Galaxy Webhooks?
 
-A system which can be used to write small JS and/or Python functions to change predefined locations in the Galaxy client
-<br><br>
-In short: A plugin infrastructure for the Galaxy UI
+A system which can be used to attach new functionalities to predefined entry points in the Galaxy interface.
+
+An accessible way to make isolated customisations to a Galaxy instance.
 
 ---
 
-### Entry point:<br>masthead
+### Entry point: masthead
 
 ![](../../images/webhook_masthead.png)
 
-At the header menu: Enabling the overlay search, link to communities ...
+Adds item to the top menu.
+
 ---
 
-### Entry point:<br>tool/workflow
-<br><br>
+### Entry point: tool/workflow submission
+
 ![](../../images/webhook_tool.png)
 
-Shown after tool or workflow execution. Comics, citations, support ...
+Shown after tool or workflow execution.
 
 ---
 
-### Entry point:<br>history-menu
+### Entry point: tool-menu
+
+Adds an entry to the tool form menu.
+
+---
+
+### Entry point: history-menu
 
 ![](../../images/webhook_history.png)
 
-Adds an entry to the history menu - no functionality as of now
+Adds an entry to the history menu.
 
 ---
 
-### Content of a Webhook:<br>What is it made of?
+### What is a webhook made of?
 
-- a config file in YAML format: `config/NAME.yml`
+- a config file in YAML format: `config/<NAME>.yml`
 - optional: A Python helper file with access to the Galaxy `trans` object
   - `helper/__init__.py`
-  - provides an API call at `/api/webhooks/WEBHOOK_NAME/get_data`
+  - provides an API call at `/api/webhooks/<WEBHOOK_NAME>/get_data`
 - optional: Additional `JS` and `CSS` code
   - `static/script.js`
   - `static/styles.css`
@@ -51,7 +58,7 @@ Adds an entry to the history menu - no functionality as of now
 
 ### Example configuration YAML
 
-```
+```yaml
 name: trans_object
 type:
   - masthead
@@ -83,7 +90,7 @@ Argument | Description
 
 ### Example `__init__.py`
 
-```
+```python
 def main(trans, webhook):
     if trans.user:
         user = trans.user.username
