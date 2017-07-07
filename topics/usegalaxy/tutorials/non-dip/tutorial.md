@@ -137,7 +137,7 @@ In other words the two datasets had ~6% and ~9% duplicates, respectively.
 
 # Left-aligning indels
 
-Left aligning of indels (a variant of re-aligning) is extremely important for obtaining accurate variant calls. This concept, while not difficult, requires some explanation. For illustrating how left-aligning works we expanded on an example provided by [Tan:2015](https://bioinformatics.oxfordjournals.org/content/31/13/2202.abstract). Suppose you have a reference sequence and a sequencing read:
+Left aligning of indels (a variant of re-aligning) is extremely important for obtaining accurate variant calls. This concept, while not difficult, requires some explanation. For illustrating how left-aligning works we expanded on an example provided by [Tan:2015](https://academic.oup.com/bioinformatics/article/31/13/2202/196142/Unified-representation-of-genetic-variants). Suppose you have a reference sequence and a sequencing read:
 
 
 ```

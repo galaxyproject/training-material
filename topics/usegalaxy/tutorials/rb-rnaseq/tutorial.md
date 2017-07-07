@@ -144,7 +144,7 @@ To further optimize and speed up spliced read alignment Kim at al. [2015](https:
 
 ### STAR mapper
 
-[STAR aligner](https://github.com/alexdobin/STAR) is a fast alternative for mapping RNAseq reads against genome utilizing uncompressed [suffix array](https://en.wikipedia.org/wiki/Suffix_array). It operates in [two stages](https://bioinformatics.oxfordjournals.org/content/early/2012/10/25/bioinformatics.bts635.abstract). In the first stage it performs seed search:
+[STAR aligner](https://github.com/alexdobin/STAR) is a fast alternative for mapping RNAseq reads against genome utilizing uncompressed [suffix array](https://en.wikipedia.org/wiki/Suffix_array). It operates in [two stages](https://academic.oup.com/bioinformatics/article/29/1/15/272537/STAR-ultrafast-universal-RNA-seq-aligner). In the first stage it performs seed search:
 
 >![](../../images/star.png)
 >
