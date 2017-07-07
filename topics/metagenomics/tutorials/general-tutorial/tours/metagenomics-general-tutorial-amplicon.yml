@@ -1,0 +1,233 @@
+﻿id: metagenomics-general-tutorial-amplicon
+name: Analyses of metagenomics data - Amplicon data analyses
+description: >-
+  In this tour, we will use mothur tool suite to analyze amplicon datasets from
+  soil samples.
+title_default: metagenomics-general-tutorial-amplicon
+steps:
+  - title: Analyses of metagenomics data - Amplicon data analyses
+    content: >-
+      In this tour, we will use mothur tool suite to analyze amplicon datasets
+      from soil samples.
+    backdrop: true
+  - title: Create a new history
+    element: '#history-options-button'
+    content: >-
+      We will start the analyses by creating a new history. Click on this button
+      and then "Create New"
+    placement: left
+  - title: Upload the input data
+    element: '#tool-panel-upload-button .fa.fa-upload'
+    content: 'We need now to upload the input data. So, open the upload box'
+    placement: right
+    postclick:
+      - '#tool-panel-upload-button .fa.fa-upload'
+      - '#btn-reset'
+  - title: Upload the input data
+    element: '#btn-new'
+    content: >-
+      Our input datasets are available online on <a
+      href="https://zenodo.org/record/815875">Zenodo</a>. To import them, click
+      on "Paste/Fetch data"
+    placement: right
+    postclick:
+      - '#btn-new'
+  - title: Upload the input data
+    element: .upload-text-column .upload-text .upload-text-content.form-control
+    content: >-
+      Insert the links to the two input files: SRR531818_pampa.fasta and
+      SRR651839_anguil.fasta.<br><br> You can extract this information from <a
+      href="https://zenodo.org/record/815875">Zenodo</a> with right click on the
+      interesting dataset and then "Copy Link Address"
+    placement: right
+    textinsert: |
+      https://zenodo.org/record/815875/files/SRR531818_pampa.fasta
+      https://zenodo.org/record/815875/files/SRR651839_anguil.fasta
+  - title: Upload the input data
+    element: '#btn-start'
+    content: Click on "Start" to upload the data into your Galaxy history.
+    placement: right
+    postclick:
+      - '#btn-start'
+  - title: Upload the input data
+    element: '#btn-close'
+    content: >-
+      The upload may take a while.<br> Hit the close button to close this
+      window.
+    placement: right
+    postclick:
+      - '#btn-close'
+  - title: Rename the input data
+    element: '.history-right-panel .list-items > *:first'
+    content: >-
+      The uploaded datasets are in the history, but their names correspond to
+      the link. We want to rename them<br><br> For each dataset: <ol>
+        <li>Click on the pencil icon beside the file to "Edit Attributes"</li>
+        <li>Change the name in "Name" to get only the name of the sample</li>
+      </ol> 
+    position: left
+  - title: Preparing the datasets
+    content: >-
+      Our datasets are now in our history. We want to perform a multisample
+      analysis with mothur. In order to do so, we will merge all reads into a
+      single file, and create a group file, indicating which reads belong to
+      which samples.
+    backdrop: true
+  - title: Prepare multisample analysis
+    element: '#tool-search-query'
+    content: Search for the "Merge.files" tool and
+    placement: right
+  - title: Prepare multisample analysis
+    element: '#tool-search'
+    content: Click on the "Merge.files" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmothur_merge_files%2Fmothur_merge_files%2F1.36.1.0"]
+  - title: Prepare multisample analysis
+    element: '#center-panel'
+    content: |-
+      Execute the tool with  <ul>
+        <li>"Merge" to fasta files</li>
+        <li>"Inputs" to the two sample fasta files</li>
+      </ul> 
+    position: left
+  - title: Prepare multisample analysis
+    element: '#tool-search-query'
+    content: Search for the "make.group" tool and click on the "Make.group" tool
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmothur_make_group%2Fmothur_make_group%2F1.36.1.0"]
+  - title: Prepare multisample analysis
+    element: '#center-panel'
+    content: |-
+      Execute the tool with <ul>
+        <li>"Method" to "Manually specify fasta files and group names"</li>
+        <li>"Additional": Add two elements to this repeat: Pampa sample fasta file, with group name "pampa" and Anguil sample fasta file, with group name "anguil"</li>
+      </ul> 
+    position: left
+  - title: Prepare multisample analysis
+    element: '.history-right-panel .list-items > *:first'
+    content: >-
+      Have a look at the group file by clicking on the eye icon.<br> It is a
+      very simple file, it contains two columns, first contains the read names,
+      second the group (sample) name, in our case "pampa" or "anguil".
+    position: left
+  - title: Optimization of files for computation
+    content: >-
+      Because we are sequencing many of the same organisms, we anticipate that
+      many of our sequences are duplicates of each other. Because it's
+      computationally wasteful to align the same thing a bazillion times, we'll
+      unique our sequences using the "Unique.seqs" command
+    backdrop: true
+  - title: Remove duplicate sequences
+    element: '#tool-search-query'
+    content: Search for the "unique.group" tool and click on the "Unique.seqs" tool
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmothur_unique_seqs%2Fmothur_unique_seqs%2F1.36.1.0"]
+  - title: Remove duplicate sequences
+    element: '#center-panel'
+    content: |-
+      Execute the tool with <ul>
+        <li>"fasta" to the merged fasta file</li>
+      </ul> 
+    position: left
+  - title: Remove duplicate sequences
+    element: '.history-right-panel .list-items > *:first'
+    content: >-
+      Have a look at the group file. <br><br> How many sequences were unique?
+      How many duplicates were removed? <br><br> This "Unique.seqs" tool outputs
+      two files, one is a fasta file containing only the unique sequences, and a
+      names files. The names file consists of two columns, the first contains
+      the sequence names for each of the unique sequences, and the second column
+      contains all other sequence names that are identical to the representative
+      sequence in the first column.
+    position: left
+  - title: Count sequences
+    element: '#tool-search-query'
+    content: Search for the "count.seqs" tool and click on the "Count.seqs" tool
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmothur_count_seqs%2Fmothur_count_seqs%2F1.36.1.0"]
+  - title: Count sequences
+    element: '#center-panel'
+    content: |-
+      Execute the tool with <ul>
+        <li>"name" to the name file from "Unique.seqs"</li>
+        <li>"Use a group file" to "yes"</li>
+        <li>"group" to the group file from "Make.group"</li>
+        <li>selection of the two groups</li>
+      </ul> 
+    position: left
+  - title: Count sequences
+    element: '.history-right-panel .list-items > *:first'
+    content: >-
+      The "Count.seqs" file keeps track of the number of sequences represented
+      by each unique representative across multiple samples. We will pass this
+      file to many of the following tools to be used or updated as needed.
+    position: left
+  - title: Quality Control
+    content: >-
+      The first step in any analysis should be to check and improve the quality
+      of our data.<br><br> For more information on the topic of quality control,
+      please see our training materials <a
+      href="https://galaxyproject.github.io/training-material/NGS-QC/">here</a>.
+    backdrop: true
+  - title: Summarize data
+    element: '#tool-search-query'
+    content: 'First, let’s get a feel of our data. Search "Summary.seqs" and open it'
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmothur_summary_seqs%2Fmothur_summary_seqs%2F1.36.1.0"]
+  - title: Summarize data
+    element: '#center-panel'
+    content: |-
+      Execute the tool with <ul>
+        <li>"fasta" parameter to the fasta from "Unique.seqs"</li>
+        <li>"count" to count table from "Count.seqs"</li>
+      </ul> 
+    position: left
+  - title: Summarize data
+    element: '.history-right-panel .list-items > *:first'
+    content: >-
+      The "summary" output files give information per read. The "logfile"
+      outputs also contain some summary statistics<br><br> This tells us that we
+      have a total of 19,502 unique sequences, representing 20,000 total
+      sequences that vary in length between 80 and 275 bases. Also, note that at
+      least some of our sequences had some ambiguous base calls. Furthermore, at
+      least one read had a homopolymer stretch of 31 bases, this is likely an
+      error so we would like to filter such reads out as well.<br> If you are
+      thinking that 20,000 is an oddly round number, you are correct, we
+      downsampled the original datasets to 10,000 reads per sample for this
+      tutorial to reduce the amount of time the analysis steps will take.
+    position: left
+  - title: Filter reads based on quality and length
+    element: '#tool-search-query'
+    content: >-
+      We can now filter our dataset on length, base quality, and maximum
+      homopolymer length using the "Screen.seqs" tool.<br> Search and open the
+      "Screen.seqs" tool
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmothur_screen_seqs%2Fmothur_screen_seqs%2F1.36.1.0"]
+  - title: Filter reads based on quality and length
+    element: '#center-panel'
+    content: >-
+      Execute the tool with <ul> <li>"fasta" to the fasta file from
+      "Unique.seqs"</li> <li>"minlength" parameter to 225</li> <li>"maxlength"
+      parameter to 275</li> <li>"maxambig" parameter to 0</li> <li>"maxhomop"
+      parameter to 8</li> <li>"count" to the count file from "Count.seqs"</li>
+      </ul>
+    placement: left
+  - title: Summarize data
+    element: '.history-right-panel .list-items > *:first'
+    content: |-
+      How many reads were removed in this screening step?
+      <br>Hint: run the "Summary.seqs" tool again
+    position: left
