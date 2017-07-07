@@ -31,7 +31,7 @@ If you have any questions, you can reach us using the [Gitter chat](https://gitt
 
 # What should I know before I get started?
 
-This repository is a project of unification of the Galaxy training material. You can find more information about this project in this [small presentation](http://galaxyproject.github.io/training-material/shared/slides/project_presentation#/)
+This repository is a project of unification of the Galaxy training material. You can find more information about this project in this [small presentation](https://galaxyproject.github.io/training-material/shared/slides/project_presentation#/)
 
 By contributing, you agree that we may redistribute your work under [this repository's license](LICENSE.md).
 
@@ -162,7 +162,7 @@ You can then visualize locally ([http://localhost:4000/](http://localhost:4000/)
 ## How do I add a new topic?
 
 1. Copy the [`templates`](templates) directory, rename it and move it to the [`topics`](topics)
-2. Fill the meta information about the topic in the `metadata.yaml` file 
+2. Fill the meta information about the topic in the `metadata.yaml` file
     - `name`: name of the topic (same name as the `yml` file and the directory)
     - `title`: title of the topic
     - `type`: targeted users (`"use"` or `""`)
@@ -359,7 +359,7 @@ Slide notes
 The first slides (with the title, the requirements,...) are automatically generated using the metadata of the topic. Then the content to fill starts with the introduction.
 
 They are then rendered with [`Remark`](https://remarkjs.com/). Template for the `html` files can be found in
-[`templates/slides/`](templates/slides/). Once the slides are on the `master` branch, they will be available at `http://galaxyproject.github.io/training-material/<topic>/slides/<slide_name>.html`
+[`templates/slides/`](templates/slides/). Once the slides are on the `master` branch, they will be available at `https://galaxyproject.github.io/training-material/<topic>/slides/<slide_name>.html`
 
 You can also add yourself as contributor for the topic in the `yml` file of the related topic that is in `metadata` directory
 
