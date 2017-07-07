@@ -44,53 +44,55 @@ layout: base
         </tr>
 
         {% for material in topic.material %}
-            <tr>
-                <td>{{ material.title }}</td>
+            {% if material.enable == "true" %}
+                <tr>
+                    <td>{{ material.title }}</td>
 
-                {% if material.type == "introduction" %}
-                    <td></td>
-                    <td>
-                        {% if material.slides == "yes" %}
-                        <a href="{{ site.url }}/{{ page.url }}slides">:mortar_board:</a>
-                        {% endif %}
-                    </td>
-                    {% if topic.type != "admin-dev" %}
+                    {% if material.type == "introduction" %}
                         <td></td>
-                        <td></td>
-                    {% endif %}
-
-                {% elsif material.type == "tutorial" %}
-                    <td>
-                        {% if material.hands_on == "external" %}
-                        <a href="{{ material.hands_on_url }}">:link:</a>
-                        {% elsif material.hands_on == "yes" %}
-                        <a href="{{ site.url }}{{ page.url }}tutorials/{{ material.name }}/tutorial.html">:book:</a>
-                        {% elsif material.hands_on == "github" %}
-                        <a href="{{ site.github_repository }}/tree/master/topics/{{ topic.name }}/tutorials/{{ material.name }}/tutorial.md">:book:</a>
-                        {% endif %}
-                    </td>
-
-                    <td>
-                        {% if material.slides == "yes" %}
-                        <a href="{{ site.url }}{{ page.url }}tutorials/{{ material.name }}/slides.html">:mortar_board:</a>
-                        {% endif %}
-                    </td>
-
-                    {% if topic.type != "admin-dev" %}
                         <td>
-                            {% if material.zenodo_link != "" %}
-                            <a href="{{ material.zenodo_link }}">:open_file_folder:</a>
+                            {% if material.slides == "yes" %}
+                            <a href="{{ site.url }}/{{ page.url }}slides">:mortar_board:</a>
+                            {% endif %}
+                        </td>
+                        {% if topic.type != "admin-dev" %}
+                            <td></td>
+                            <td></td>
+                        {% endif %}
+
+                    {% elsif material.type == "tutorial" %}
+                        <td>
+                            {% if material.hands_on == "external" %}
+                            <a href="{{ material.hands_on_url }}">:link:</a>
+                            {% elsif material.hands_on == "yes" %}
+                            <a href="{{ site.url }}{{ page.url }}tutorials/{{ material.name }}/tutorial.html">:book:</a>
+                            {% elsif material.hands_on == "github" %}
+                            <a href="{{ site.github_repository }}/tree/master/topics/{{ topic.name }}/tutorials/{{ material.name }}/tutorial.md">:book:</a>
                             {% endif %}
                         </td>
 
                         <td>
-                            {% if material.galaxy_tour != "" %}
-                            <a href="https://github.com/galaxyproject/galaxy-tours">:eyes:</a>
+                            {% if material.slides == "yes" %}
+                            <a href="{{ site.url }}{{ page.url }}tutorials/{{ material.name }}/slides.html">:mortar_board:</a>
                             {% endif %}
                         </td>
+
+                        {% if topic.type != "admin-dev" %}
+                            <td>
+                                {% if material.zenodo_link != "" %}
+                                <a href="{{ material.zenodo_link }}">:open_file_folder:</a>
+                                {% endif %}
+                            </td>
+
+                            <td>
+                                {% if material.galaxy_tour != "" %}
+                                <a href="https://github.com/galaxyproject/galaxy-tours">:eyes:</a>
+                                {% endif %}
+                            </td>
+                        {% endif %}
                     {% endif %}
-                {% endif %}
-            </tr>
+                </tr>
+            {% endif %}
         {% endfor %}
     </table>
 
