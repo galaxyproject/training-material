@@ -190,7 +190,7 @@ To associate reads with transcripts they (the reads) need to be aligned to the t
 >![](../images/sailfish.png)
 >
 >**Assigning reads to transcripts: Sailfish**<br>
->Sailfish indexes input transcriptome for a fixed *k*-mer length and compares *k*-mers derived from RNAseq reads against this index. Image from [Patro:2014](http://www.nature.com/nbt/journal/v32/n5/full/nbt.2862.html)
+>Sailfish indexes input transcriptome for a fixed *k*-mer length and compares *k*-mers derived from RNAseq reads against this index. Image from [Patro:2014](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4077321/)
 
 The current version of Sailfish uses [quasi-alignment](http://biorxiv.org/content/biorxiv/early/2015/10/22/029652.full.pdf) to extend exact matches found with *k*-mers:
 
