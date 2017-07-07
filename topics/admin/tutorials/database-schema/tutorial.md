@@ -31,7 +31,7 @@ The session description is database centric and we’ll be focusing on the relat
 database that backs Galaxy servers.  But that’s only half the picture of the this data.
 The other is the object model which is the object-oriented view of this same data.
 The object model is used by the code to manipulate and access the database.
-The translation between the two worlds is handled by an object-relational mapping implemented with SQLAlchemy (http://www.sqlalchemy.org).
+The translation between the two worlds is handled by an object-relational mapping implemented with SQLAlchemy (https://www.sqlalchemy.org).
 
 Today we are covering the database and how to access it with SQL.  We aren’t going to cover the corresponding object model or object relational mapping.
 
@@ -55,7 +55,7 @@ What’s not in the database is the data. Datasets are stored outside the databa
 
 #### ER diagrams and SchemaSpy
 
-Entity-relationship diagrams are a way to understand tables and the relationships between them inside a relational database.  SchemaSpy (http://schemaspy.sourceforge.net/) is a free (and remarkable tool) for generating ER diagrams.  We’be used it generate a description of the database backing the server in this container.  See
+Entity-relationship diagrams are a way to understand tables and the relationships between them inside a relational database.  SchemaSpy (https://schemaspy.sourceforge.net/) is a free (and remarkable tool) for generating ER diagrams.  We’be used it generate a description of the database backing the server in this container.  See
 
     <!-- TODO: following link is broken, update with new link once fixed on Hub -->
     https://galaxyproject.org/schema/SchemaSpy/index.html
@@ -327,7 +327,7 @@ https://docs.google.com/presentation/d/1l4DD0IaJjuvk1zAT1Sjv26bLyrSOg3VUm7rD-TQl
 To run SchemaSpy in your container you’ll need to get it, and also install some required software packages.
 
 >   ```sh
->   wget http://downloads.sourceforge.net/project/schemaspy/schemaspy/SchemaSpy%205.0.0/schemaSpy_5.0.0.jar
+>   wget https://downloads.sourceforge.net/project/schemaspy/schemaspy/SchemaSpy%205.0.0/schemaSpy_5.0.0.jar
 >   apt-get update
 >   apt-get install libpostgresql-jdbc-java
 >   apt-get install graphviz

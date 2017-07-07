@@ -179,7 +179,7 @@ to simplify the variant representation.
 
 ## Annotate your variants
 
-To annotate the variants, we use the [dbSNP](http://www.ncbi.nlm.nih.gov/SNP/),
+To annotate the variants, we use the [dbSNP](https://www.ncbi.nlm.nih.gov/SNP/),
 the NCBI database of genetic variation and then `hg19` database with **SnpEff**.
 
 > ### :pencil2: Hands-on: Annotating variants
@@ -262,7 +262,7 @@ relations, additional annotations and most importantly its fast to search.
 # Variant analysis
 
 **GEMINI query** is the most versatile of all the GEMINI tools. You can use it to
-ask 'interesting' questions in simple SQL (see the GEMINI [handbook](http://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1003153) on its usage).
+ask 'interesting' questions in simple SQL (see the GEMINI [handbook](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1003153) on its usage).
 
 ### **GEMINI query** examples:
 - `select chrom, start, end from variants` will show you some information on all

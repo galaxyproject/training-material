@@ -63,7 +63,7 @@ To bind Galaxy to any avalaible network interface edit the config/galaxy.ini fil
 ## What did you just installed ?
 The galaxy you have just installed is configured with the following:
 
-- [SQLite](http://www.sqlite.org/): a servless database.
+- [SQLite](https://www.sqlite.org/): a servless database.
 - A built-in HTTP server, written in Python.
 
 The tools are run locally and the galaxy server itself run in a single process.

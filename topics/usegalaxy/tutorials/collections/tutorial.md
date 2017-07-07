@@ -18,7 +18,7 @@ Here we will show Galaxy features designed to help with the analysis of large nu
 - `M117C1-ch_1`- family 117, child, 1-st (**F**) read from **cheek**
 - `M117C1-ch_2`- family 117, child, 2-nd (**R**) read from **cheek**
 
-These datasets represent genomic DNA (enriched for mitochondria via a long range PCR) isolated from blood (`bl`) and cheek (buccal swab, `ch`) of mother (`M117`) and her child (`M117C1`) that was sequenced on an Illumina miSeq machine as paired-read library (250-bp reads; see our [2014](http://www.pnas.org/content/111/43/15474.abstract) manuscript for **Methods**).
+These datasets represent genomic DNA (enriched for mitochondria via a long range PCR) isolated from blood (`bl`) and cheek (buccal swab, `ch`) of mother (`M117`) and her child (`M117C1`) that was sequenced on an Illumina miSeq machine as paired-read library (250-bp reads; see our [2014](https://www.pnas.org/content/111/43/15474.abstract) manuscript for **Methods**).
 
 ## Load data from Galaxy library
 

@@ -74,13 +74,13 @@ steps:
     ---  | ---
     `title`  | Header of each step-container
     `content` | Text that is shown to the user
-    `element` | [JQuery Selector](http://api.jquery.com/category/selectors/) of the element you want to describe / click
+    `element` | [JQuery Selector](https://api.jquery.com/category/selectors/) of the element you want to describe / click
     `placement` | Placement of the text box relative to the selected element
     `preclick` or `postclick` | Elements that recieve a click() event before (`preclick`) or after (`postclick`) the step is shown
     `textinsert` | Text to insert if element is a text box (e.g. tool search or upload)
     `backdrop` | `true/false`:  Show a dark backdrop behind the popover and its element, highlighting the current step
 
-    [Full reference of the properties](http://bootstraptour.com/api/)
+    [Full reference of the properties](https://bootstraptour.com/api/)
 
 The YAML file of a tour can be integrated in a Galaxy instance by placing the YAML file in the `config/plugins/tours` directory of the Galaxy code and restarting the Galaxy instance
 

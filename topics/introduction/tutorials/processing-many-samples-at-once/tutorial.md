@@ -10,11 +10,11 @@ Here we will show Galaxy features designed to help with the analysis of large nu
 
 #### In this tutorial we assume the following:
 
-- you already have basic understanding of how Galaxy works (if you don't see [Galaxy 101](http://usegalaxy.org/galaxy101) tutorial;
+- you already have basic understanding of how Galaxy works (if you don't see [Galaxy 101](https://usegalaxy.org/galaxy101) tutorial;
 - you have an account in Galaxy ([see this](https://github.com/nekrut/galaxy/wiki/Galaxy101-1#01-setting-up-galaxy-account) if you don't);
 - you have your browser configured as described [here](https://github.com/nekrut/galaxy/wiki/Galaxy101-1#00-getting-your-display-sorted-out).
 
-:warning: *At this time this tutorial is using Galaxy's test server at http://test.galaxyproject.org. Once the main site is updated this tutorial will be edited.*
+:warning: *At this time this tutorial is using Galaxy's test server at https://test.galaxyproject.org. Once the main site is updated this tutorial will be edited.*
 
 ## 0. Getting data
 [Here](https://test.galaxyproject.org/u/anton/h/collections-1) is a history containing a few datasets we will be practicing with (as always with Galaxy tutorial you can upload your own data and play with it instead of the provided datasets):
@@ -28,7 +28,7 @@ Here we will show Galaxy features designed to help with the analysis of large nu
 - `M117C1-ch_1`- family 117, child, 1-st (**F**) read from **cheek**
 - `M117C1-ch_2`- family 117, child, 2-nd (**R**) read from **cheek**
 
-These datasets represent genomic DNA (enriched for mitochondria via a long range PCR) isolated from blood and cheek (buccal swab) of mother (`M117`) and her child (`M117C1`) that was sequenced on an Illumina miSeq machine as paired-read library (250-bp reads; see our [2014](http://www.pnas.org/content/111/43/15474.abstract) manuscript for **Methods**).
+These datasets represent genomic DNA (enriched for mitochondria via a long range PCR) isolated from blood and cheek (buccal swab) of mother (`M117`) and her child (`M117C1`) that was sequenced on an Illumina miSeq machine as paired-read library (250-bp reads; see our [2014](https://www.pnas.org/content/111/43/15474.abstract) manuscript for **Methods**).
 
 ## 1. Creating a paired dataset collection
 

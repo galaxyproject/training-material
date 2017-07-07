@@ -49,7 +49,7 @@ Once you are feeling more comfortable, you can propose changes to this training 
 
 In [issues](https://github.com/galaxyproject/training-material/issues) and [project management system](https://github.com/galaxyproject/training-material/projects), you will find lists of issues to fix and features to change (with the "newcomer-friendly" label for example). Feel free to solve them.
 
-We strongly recommend you read and follow Software Carpentry's recommendations on [lesson design](https://swcarpentry.github.io/lesson-example/01-design/) and [lesson writing](http://swcarpentry.github.io/instructor-training/19-lessons/) if you plan to add or change some training materials, and also to check the [structure of the training material](#how-the-training-material-is-structured).
+We strongly recommend you read and follow Software Carpentry's recommendations on [lesson design](https://swcarpentry.github.io/lesson-example/01-design/) and [lesson writing](https://swcarpentry.github.io/instructor-training/19-lessons/) if you plan to add or change some training materials, and also to check the [structure of the training material](#how-the-training-material-is-structured).
 
 ## Pull Requests
 
@@ -98,7 +98,7 @@ The `images` directory collects all images/pictures needed for the training mate
 
 Images shared between several topics are in the `shared/images` directory at the root.
 
-All images for the slides must be in `images` directory. The images must be in good quality. The sources (`svg` or other) of the images must also be added to the `images` directory. We encourage you to use [yEd](http://www.yworks.com/products/yed) to easily generate diagrams and [Inkscape](https://inkscape.org/en/) for any other images.
+All images for the slides must be in `images` directory. The images must be in good quality. The sources (`svg` or other) of the images must also be added to the `images` directory. We encourage you to use [yEd](https://www.yworks.com/products/yed) to easily generate diagrams and [Inkscape](https://inkscape.org/en/) for any other images.
 
 ## `slides` directory
 
@@ -112,7 +112,7 @@ This directory collects the tutorials related to the topic, one per subdirectory
 
 The templates for the tutorials are different from the other pages to help users to focus on the content of the tutorial. To improve the output of the tutorial, several metadata are mandatory for every tutorials, such as the requirements or the objectives of the tutorials. Boxes are also used to highlight some key points as the hands-on or the tips.
 
-The content of each tutorial is generated with [Jekyll](http://jekyllrb.com/) from a Markdown file and some metadata (e.g. the requirements, the Zenodo link, the questions) defined inside the metadata of the related topic.
+The content of each tutorial is generated with [Jekyll](https://jekyllrb.com/) from a Markdown file and some metadata (e.g. the requirements, the Zenodo link, the questions) defined inside the metadata of the related topic.
 
 > Want to contribute to a tutorial?
 > - [Check out how to add a new tutorial?](#how-do-i-add-a-new-tutorial)
@@ -130,7 +130,7 @@ The `docker` image must also integrate a Galaxy tour from the [`galaxy-tours` re
 
 # How do I add new content?
 
-Most of the content is written in Markdown with some metadata (or variables) stored in YAML. To generate the website, we are using [Jekyll](http://jekyllrb.com/) and its templating system.
+Most of the content is written in Markdown with some metadata (or variables) stored in YAML. To generate the website, we are using [Jekyll](https://jekyllrb.com/) and its templating system.
 
 So if you want to visualise locally how the website will look like, you need to run a local Jekyll server. So, Jekyll must be installed using [RubyGems](https://rubygems.org/pages/download):
 
@@ -172,7 +172,7 @@ You can then visualize locally ([http://localhost:4000/](http://localhost:4000/)
     - `maintainers`: the two maintainers of the topic with their `name`, `github_username`, `email`
     - `contributors`: list of people who contributed to the topic with `name`, `github_username`, `email`
 
-    This information is used with [Jekyll](http://jekyllrb.com/) to generate the webpage related to the topic
+    This information is used with [Jekyll](https://jekyllrb.com/) to generate the webpage related to the topic
 
 3. Fill the introduction slides
 
@@ -200,7 +200,7 @@ You can then visualize locally ([http://localhost:4000/](http://localhost:4000/)
     - `time_estimation`: estimation of the time needed to complete the hands-on
     - `key_points`: take home messages
 
-    This information will appear in the top and bottom of the online hands-on generated using [Jekyll](http://jekyllrb.com/)
+    This information will appear in the top and bottom of the online hands-on generated using [Jekyll](https://jekyllrb.com/)
 
     ![](shared/images/tutorial_header.png)
 
@@ -223,7 +223,7 @@ You can then visualize locally ([http://localhost:4000/](http://localhost:4000/)
 
 2. Fill the `tutorial.md` with the tutorial
 
-The content of a tutorial hands-on is written in Markdown. They are rendered by [Jekyll](http://jekyllrb.com/) into the webpage for the tutorial.
+The content of a tutorial hands-on is written in Markdown. They are rendered by [Jekyll](https://jekyllrb.com/) into the webpage for the tutorial.
 
     The header of the file must be something like:
 

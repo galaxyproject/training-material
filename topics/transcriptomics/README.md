@@ -19,7 +19,7 @@ A tutorial with hands-on is available for this topic:
 
 For de novo tutorial, data is avaialble at [`Zenodo`](https://zenodo.org/record/254485).
 
-For ref-based tutorial, the original data is available at NCBI Gene Expression Omnibus (GEO) under accession number [GSE18508](http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE18508). We will look at the 7 first samples (3 treated samples with Pasilla (PS) gene depletion: [GSM461179](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM461179), [GSM461180](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM461180), [GSM461181](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM4611810) and 4 untreated samples: [GSM461176](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM461176), [GSM461177](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM461177), [GSM461178](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM461178), [GSM461182](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM461182)).
+For ref-based tutorial, the original data is available at NCBI Gene Expression Omnibus (GEO) under accession number [GSE18508](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE18508). We will look at the 7 first samples (3 treated samples with Pasilla (PS) gene depletion: [GSM461179](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM461179), [GSM461180](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM461180), [GSM461181](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM4611810) and 4 untreated samples: [GSM461176](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM461176), [GSM461177](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM461177), [GSM461178](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM461178), [GSM461182](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM461182)).
 
 ## Galaxy instance
 
@@ -39,7 +39,7 @@ It will launch a flavored Galaxy instance available on
 **Shirley Pepke et al:** [Computation for ChIP-seq and RNA-seq studies](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4121056/)
 
 
-**Paul L. Auer & R. W. Doerge:** [Statistical Design and Analysis of RNA Sequencing Data](http://www.stat.purdue.edu/~doerge/BIOINFORM.D/SPRING10/auer_doerge_genetics_2010.pdf) DOI: 10.1534/genetics.110.114983
+**Paul L. Auer & R. W. Doerge:** [Statistical Design and Analysis of RNA Sequencing Data](https://www.stat.purdue.edu/~doerge/BIOINFORM.D/SPRING10/auer_doerge_genetics_2010.pdf) DOI: 10.1534/genetics.110.114983
 
 > Insights into proper planning of your RNA-seq run! To read before any RNA-seq experiment!
 
@@ -47,7 +47,7 @@ It will launch a flavored Galaxy instance available on
 
 > A refreshingly honest view on the non-trivial aspects of RNA-seq analysis
 
-**Marie-Agnès Dillies et al:** [A comprehensive evaluation of normalization methods for Illumina high-throughput RNA sequencing data analysis](http://bib.oxfordjournals.org/content/14/6/671)
+**Marie-Agnès Dillies et al:** [A comprehensive evaluation of normalization methods for Illumina high-throughput RNA sequencing data analysis](https://bib.oxfordjournals.org/content/14/6/671)
 
 > Systematic comparison of seven representative normalization methods for the differential analysis of RNA-seq data (Total Count, Upper Quartile, Median (Med), DESeq, edgeR, Quantile and Reads Per Kilobase per Million mapped reads (RPKM) normalization)
 
@@ -55,11 +55,11 @@ It will launch a flavored Galaxy instance available on
 
 > Evaluation of methods for differential gene expression analysis
 
-**Charlotte Soneson & Mauro Delorenzi:** [A comparison of methods for differential expression analysis of RNA-seq data](http://bmcbioinformatics.biomedcentral.com/articles/10.1186/1471-2105-14-91)
+**Charlotte Soneson & Mauro Delorenzi:** [A comparison of methods for differential expression analysis of RNA-seq data](https://bmcbioinformatics.biomedcentral.com/articles/10.1186/1471-2105-14-91)
 
 **Adam Roberts et al:** [Improving RNA-Seq expression estimates by correcting for fragment bias](https://genomebiology.biomedcentral.com/articles/10.1186/gb-2011-12-3-r22)
 
-**Manuel Garber et al:** [Computational methods for transcriptome annotation and quantification using RNA-seq](http://www.nature.com/nmeth/journal/v8/n6/abs/nmeth.1613.html)
+**Manuel Garber et al:** [Computational methods for transcriptome annotation and quantification using RNA-seq](https://www.nature.com/nmeth/journal/v8/n6/abs/nmeth.1613.html)
 
 > Classical paper about the computational aspects of RNA-seq data analysis
 

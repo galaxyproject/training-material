@@ -79,7 +79,7 @@ Such data are described in the `data-library.yaml`:
 libraries:
     - name: Name of the tutorial
       files:
-        - url: "http://raw.githubusercontent.com/bgruening/galaxytools/master/tools/rna_tools/sortmerna/test-data/read_small.fasta"
+        - url: "https://raw.githubusercontent.com/bgruening/galaxytools/master/tools/rna_tools/sortmerna/test-data/read_small.fasta"
           file_type: fasta
         - url: ""
           file_type: ""

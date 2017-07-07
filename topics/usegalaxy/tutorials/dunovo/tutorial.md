@@ -4,16 +4,16 @@ topic_name: usegalaxy
 tutorial_name: dunovo
 ---
 
-This page explains how to perform discovery of low frequency variants from duplex sequencing data. As an example we use the _ABL1_ dataset published by [Schmitt and colleagues](https://www.ncbi.nlm.nih.gov/pubmed/25849638) (SRA accession [SRR1799908](http://www.ncbi.nlm.nih.gov/sra/?term=SRR1799908)).
+This page explains how to perform discovery of low frequency variants from duplex sequencing data. As an example we use the _ABL1_ dataset published by [Schmitt and colleagues](https://www.ncbi.nlm.nih.gov/pubmed/25849638) (SRA accession [SRR1799908](https://www.ncbi.nlm.nih.gov/sra/?term=SRR1799908)).
 
 # Background
 
-Calling low frequency variants from next generation sequencing (NGS) data is challenging due to significant amount of noise characteristic of these technologies. [Duplex sequencing](http://www.pnas.org/content/109/36/14508.short) (DS) was designed to address this problem by increasing sequencing accuracy by over four orders of magnitude. DS uses randomly generated barcodes to uniquely tag each molecule in a sample. The tagged fragments are then PCR amplified prior to the preparation of a sequencing library, creating fragment families characterized by unique combination of barcodes at both 5’ and 3’ ends:
+Calling low frequency variants from next generation sequencing (NGS) data is challenging due to significant amount of noise characteristic of these technologies. [Duplex sequencing](https://www.pnas.org/content/109/36/14508.short) (DS) was designed to address this problem by increasing sequencing accuracy by over four orders of magnitude. DS uses randomly generated barcodes to uniquely tag each molecule in a sample. The tagged fragments are then PCR amplified prior to the preparation of a sequencing library, creating fragment families characterized by unique combination of barcodes at both 5’ and 3’ ends:
 
 
->[![duplex](../../images/ds.png)](http://www.pnas.org/content/109/36/14508/F1.expansion.html)
+>[![duplex](../../images/ds.png)](https://www.pnas.org/content/109/36/14508/F1.expansion.html)
 >
->The logic of duplex sequencing. From [Schmitt:2012](http://www.pnas.org/content/109/36/14508.short).
+>The logic of duplex sequencing. From [Schmitt:2012](https://www.pnas.org/content/109/36/14508.short).
 
 The computational analysis of DS data (Part `C` in the figure above) produces two kinds of output:
 
@@ -32,7 +32,7 @@ In the image above there are two alleles: green (A) and red (G). After PCR a fra
 
 The entire analysis described here is accessible as a [Galaxy history](https://usegalaxy.org/u/aun1/h/duplex-analysis-abl1) (by clicking on this link you can create your own copy and play with it).
 
->![History Item](http://galaxyproject.org/duplex/histItem.png)
+>![History Item](https://galaxyproject.org/duplex/histItem.png)
 >
 >Each history item has a Rerun ![refresh](https://galaxyproject.org/tutorials/g101/fa-refresh.png) button. Clicking this button will show you how this tool was run with all parameters filled in exactly.
 
@@ -165,7 +165,7 @@ bwa-mem | 130,880,141 |  A     |  G    | 0.479 |
 
 We can see that results of both mappers agree very well. The reason we see these numbers grouped by mappers is because we have set the readgroups while [mapping](#align-against-genome-with-bwa-and-bwa-mem).
 
-The polymorphism we are interested in (and the one reported by [Schmitt:2015] (https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4414912/)) is at the position 130,872,141 and has a frequency of 1.3%. The other site (position 130,880,141) is a known common variant [rs2227985](http://www.ncbi.nlm.nih.gov/SNP/snp_ref.cgi?type=rs&rs=rs2227985), which is heterozygous in this sample.
+The polymorphism we are interested in (and the one reported by [Schmitt:2015] (https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4414912/)) is at the position 130,872,141 and has a frequency of 1.3%. The other site (position 130,880,141) is a known common variant [rs2227985](https://www.ncbi.nlm.nih.gov/SNP/snp_ref.cgi?type=rs&rs=rs2227985), which is heterozygous in this sample.
 
 # Analysis of single strand consensus data
 

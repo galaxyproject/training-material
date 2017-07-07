@@ -7,7 +7,7 @@ tutorial_name: mothur-miseq-sop
 # Overview
 In this tutorial we will perform the
 [Standard Operating Procedure (SOP) for MiSeq data](https://www.mothur.org/wiki/MiSeq_SOP), developed by the
-creators of the Mothur software package, the [Schloss lab](http://www.schlosslab.org/), within Galaxy.
+creators of the Mothur software package, the [Schloss lab](https://www.schlosslab.org/), within Galaxy.
 
 > ### Agenda
 >
@@ -61,7 +61,7 @@ In this tutorial we use 16S rRNA data, but similar pipelines can be used for WGS
 > The highly conserved regions make it easy to target the gene across different organisms,
 > while the highly variable regions allow us to distinguish between different species.
 >
-> (slide credit [http://www.slideshare.net/beiko/ccbc-tutorial-beiko ](http://www.slideshare.net/beiko/ccbc-tutorial-beiko ))
+> (slide credit [https://www.slideshare.net/beiko/ccbc-tutorial-beiko ](http://www.slideshare.net/beiko/ccbc-tutorial-beiko ))
 {: .tip}
 
 ## Understanding our input data
@@ -494,7 +494,7 @@ removing sequencing artefacts known as chimeras.
 
 > ### :book: Background: Chimeras
 > ![](../../images/chimeras.jpg)
-> (slide credit: [http://slideplayer.com/slide/4559004/ ](http://slideplayer.com/slide/4559004/ ))
+> (slide credit: [https://slideplayer.com/slide/4559004/ ](http://slideplayer.com/slide/4559004/ ))
 {: .tip}
 
 We'll do this chimera removal using the `UCHIME` algorithm that is called within Mothur, using the
@@ -735,7 +735,7 @@ This is not a perfect world. But this is pretty darn good!
 > Green, most or all species have been sampled; blue, this habitat has not been exhaustively sampled; red,
 > species rich habitat, only a small fraction has been sampled.
 >
-> (*A Primer on Metagenomics*, Wooley et al. 2010, http://dx.doi.org/10.1371/journal.pcbi.1000667)
+> (*A Primer on Metagenomics*, Wooley et al. 2010, https://dx.doi.org/10.1371/journal.pcbi.1000667)
 {: .tip}
 
 Now that we have assessed our error rates we are ready for some real analysis.
@@ -823,7 +823,7 @@ This file tells you that Otu008 was observed 5377 times in your samples and that
 sequences (100%) were classified as being members of the Alistipes.
 
 In this tutorial we will continue with this otu-based approach, for the phylotype and phylogenic
-approaches, please refer to the [Mothur wiki page](http://www.mothur.org/wiki/MiSeq_SOP).
+approaches, please refer to the [Mothur wiki page](https://www.mothur.org/wiki/MiSeq_SOP).
 
 # OTU-based Analysis
 
@@ -987,7 +987,7 @@ repeated-measures ANOVA and find that there was no significant difference based 
 
 Beta diversity is a measure of the similarity of the membership and structure found between *different* samples.
 The default calculator in the following section is *thetaYC*, which is the [Yue & Clayton theta similarity
-coefficient](http://csyue.nccu.edu.tw/ch/2005communicationindex.pdf)
+coefficient](https://csyue.nccu.edu.tw/ch/2005communicationindex.pdf)
 
 > ### :pencil2: Hands-on: Beta diversity
 >
@@ -1516,7 +1516,7 @@ Otu0042    0.07
 
 Mothur does not have a lot of visualization tools built in, but external tools may be used for this. For
 instance we can convert our shared file to the more widely used `biom` format and view it in a platform like
-[Phinch](http://www.phinch.org/).
+[Phinch](https://www.phinch.org/).
 
 ## Phinch
 
