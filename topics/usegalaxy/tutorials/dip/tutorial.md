@@ -92,7 +92,7 @@ Now, the probability of having a variant and it being observed in our sequencing
 
 |                                    |                                    |                                     |
 |:----------------------------------:|:----------------------------------:|:-----------------------------------:|
-| ![](../images/pA.png) | ![](../images/pB.png) | ![](../images/pAB.png) |
+| ![](../../images/pA.png) | ![](../../images/pB.png) | ![](../../images/pAB.png) |
 | $P(A)$ <br> Polymorphisms          | $P(B)$ <br> Variant calls          | $P(AB)$ <br> Polymorphisms + Varinat calls |
 
 Now we can ask the following question: *What is the probability of a having a real polymorphism* $A$ *given our observation of variants in reads* $B$? In other words *what is the probability of* $A$ *given* $B$? Or, as stated in the original [blog](https://oscarbonilla.com/2009/05/visualizing-bayes-theorem/): "*given that we are in region $B$ what is the probability that we are in the region $AB$*?":
@@ -154,7 +154,7 @@ Freebayes is a *haplotype-based* variant caller. This implies that instead of lo
 
 |                                           |
 |-------------------------------------------|
-| ![](../images/freebayes.png) |
+| ![](../../images/freebayes.png) |
 |<small>Looking at a haplotype window makes misalignments tolerable. In this case a low complexity poly(A) stretch is misaligned. As a result looking at individual positions will result in calling multiple spurious varians. In the case of FreeBayes looking at a haplotype identifies two alleles (this is a diploid example) `A(7)` and `A(6)`, while `A(8)` is likely an error. Image by [Erik Garrison](https://github.com/ekg/freebayes)</small>|
 
 # Let's try it
@@ -175,15 +175,15 @@ Here is what to do to load the data:
 >
 >Go to the [data library](https://usegalaxy.org/library/list#folders/F9ff2d127cd7ed6bc) and select both BAM and PED datasets. Then Click **to History** button:
 >
->![](../images/library_import.png)
+>![](../../images/library_import.png)
 >
 >Galaxy will ask you if you want to import these data into a new history, which you might want (in the case below I called this history `genotyping try`):
 >
->![](../images/history_import.png)
+>![](../../images/history_import.png)
 >
 >The datasets will appear in your history:
 >
->![](../images/library_import_complete.png)
+>![](../../images/library_import_complete.png)
 >
 {: .hands_on}
 
@@ -194,11 +194,11 @@ Here is what to do to load the data:
 >Select **FreeBayes** from **NGS: Variant Analysis** section of the tool menu (left pane of Galaxy's interface).
 >Make sure the top part of the interface looks like shown below. Here we selected `GIAB-Ashkenazim-Trio-hg19` as input and set **Using reference genome** to `hg19` and **Choose parameter selection level** to `5`. The interface should look like this:
 >
->![](../images/FreeBayes_settings.png)
+>![](../../images/FreeBayes_settings.png)
 >
 >Scrolling down to **Tweak algorithmic features?** click `Yes` and set **Calculate the marginal probability of genotypes and report as GQ in each sample field in the VCF output** to `Yes`. This would help us evaluating the quality of genotype calls.
 >
->![](../images/freebayes_gq.png)
+>![](../../images/freebayes_gq.png)
 >
 >Depending on how busy Galaxy is this may take a little bit of time (coffee break?). Eventially this will produce a dataset in [VCF](http://www.1000genomes.org/wiki/Analysis/variant-call-format) format containing 35 putative variants. Before we can continue we need to post-process this dataset by breaking compound variants into multiple independent variants with **VcfAllelicPrimitives** tool found within **NGS: VCF Manipulation** section. This is necessary for ensuring the smooth sailing through downstream analyses:
 >
@@ -208,7 +208,7 @@ Here is what to do to load the data:
 >
 >Select FreeBayes output as the input for this tool and make sure **Maintain site and allele-level annotations when decomposing** and **Maintain genotype-level annotations when decomposing** are set to `Yes`:
 >
->![](../images/vcfallelicprimitives.png)
+>![](../../images/vcfallelicprimitives.png)
 >
 {: .hands_on}
 
@@ -235,15 +235,15 @@ At this point we are ready to begin annotating variants using [SnpEff](http://sn
 >
 >Select **NGS: Variant Analysis** &#8594; **SnpEff**. Select the latest version of annotation database matching genome version against which reads were mapped and VCF produced. In this case it is `GRCh37.75: hg19`:
 >
->![](../images/snpeff.png)
+>![](../../images/snpeff.png)
 >
 >SnpEff will generate two outputs: (1) an annotated VCF file and (2) an HTML report. The report contains a number of useful metrics such as distribution of variants across gene features:
 >
->![](../images/snpeff_chart.png)
+>![](../../images/snpeff_chart.png)
 >
 >or changes to codons:
 >
->![](../images/snpeff_codons.png)
+>![](../../images/snpeff_codons.png)
 >
 {: .hands_on}
 
@@ -267,11 +267,11 @@ The first step is to convert a VCF file we would like to analyze into a GEMINI d
 >
 >So let's load data into GEMINI. Set VCF and PED inputs:
 >
->![](../images/gemini_load.png)
+>![](../../images/gemini_load.png)
 >
 >This creates a sqlite database. To see the content of the database use **GEMINI_db_info**:
 >
->![](../images/gemini_db_info.png)
+>![](../../images/gemini_db_info.png)
 >
 >This produce a list of [all tables and fields](https://github.com/nekrut/galaxy/wiki/datasets/gemini_tables.txt) in the database.
 >
@@ -294,7 +294,7 @@ The examples below are taken from "[Intro to Gemini](https://s3.amazonaws.com/ge
 >
 >into **The query to be issued to the database** field of the interface:
 >
->![](../images/gemini_query1.png)
+>![](../../images/gemini_query1.png)
 >
 >As we can see from [output (Click this link to see it)](https://usegalaxy.org/datasets/bbd44e69cb8906b51bb37b9032761321/display/?preview=True) there are 21 variants that are not annotated in dbSNP.
 >
@@ -345,7 +345,7 @@ GEMINI provides access to genotype, sequencing depth, genotype quality, and geno
 >gt_types.HG002_NA24385_son <> HOM_REF
 >```
 >
->![](../images/gemini_query2.png)
+>![](../../images/gemini_query2.png)
 >
 >This produce [a list of sites](https://usegalaxy.org/datasets/bbd44e69cb8906b560921700703d0255/display/?preview=True)
 >
@@ -444,18 +444,18 @@ This short tutorial should give you an overall idea on how generate variant data
 * Right click on **Galaxy history** link and open Galaxy history in another new browser tab
 * When Galaxy history interface opens you will need to click **Import history** link highlighted within a red outline in the following figure:
 
-![](../images/import_history.png)
+![](../../images/import_history.png)
 
 * If you have a wide screen arrange browsers tabs side by side:
 
-![](../images/side-by-side.png)
+![](../../images/side-by-side.png)
 
 * Proceed with tutorial. For example, to repeat the following command from GEMINI tutorial:
 
-![](../images/gemini_command.png)
+![](../../images/gemini_command.png)
 
 * Use Galaxy's **GEMINI_load** tool:
 
-![](../images/galaxy_command.png)
+![](../../images/galaxy_command.png)
 
 * and so on....
