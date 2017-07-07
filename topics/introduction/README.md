@@ -15,10 +15,9 @@ A deck of slides is available for this topic:
 
 Several tutorials with hands-on are available for this topic:
 
-- [Galaxy Introduction Exercise: From Peaks to Genes](tutorial/introduction.md)
-- [Getting to know workflows](tutorial/workflows.md)
-- [Processing many samples at once](tutorial/processing_many_samples.md)
-- [Using the Integrative Genomics Viewer](./tutorials/igv.md)
+- [Galaxy Introduction Exercise: From Peaks to Genes](tutorials/galaxy-intro-peaks2genes/tutorial.md)
+- [Processing many samples at once](tutorials/processing-many-samples-at-once/tutorial.md)
+- [Using the Integrative Genomics Viewer](/tutorials/igv-introduction/tutorial.md)
 
 ## Input datasets
 

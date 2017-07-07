@@ -23,7 +23,7 @@ For ref-based tutorial, the original data is available at NCBI Gene Expression O
 
 ## Galaxy instance
 
-For these tutorials, you can use the [dedicated Docker image](docker/README.md):
+For these tutorials, you can use the [dedicated Docker image](docker/Dockerfile):
 
 ```
 docker run -d -p 8080:80 bgruening/galaxy-rna-seq-training
