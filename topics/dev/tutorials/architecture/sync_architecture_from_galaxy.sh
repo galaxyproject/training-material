@@ -10,7 +10,7 @@ SLIDES_DIR="."
 cat > "$SLIDES_DIR/architecture.html" <<EOF
 ---
 layout: tutorial_slides
-topic_name: "Dev-Corner"
+topic_name: "dev"
 tutorial_name: architecture
 logo: "GTN"
 ---

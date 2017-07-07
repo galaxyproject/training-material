@@ -230,7 +230,7 @@ The content of a tutorial hands-on is written in Markdown. They are rendered by 
     ```
     ---
     layout: tutorial_slides
-    topic_name: "Dev-Corner"
+    topic_name: "dev"
     tutorial_name: tool_integration
     logo: "GTN"
     ---
@@ -346,7 +346,7 @@ logo: "GTN"
 <!-- add a resized image in percentage: 10%, 25%, 50%, or 75% -->
 .image-25[![](../images/ecker_2012.jpg)]
 
-<small>[*Ecker et al, Nature, 2012*](http://www.nature.com/nature/journal/v489/n7414/full/489052a.html)</small>
+<small>[*Ecker et al, Nature, 2012*](https://www.ncbi.nlm.nih.gov/pubmed/22955614)</small>
 
 ???
 
@@ -377,7 +377,7 @@ Filling tutorial slides are similar a combination of filling introduction slides
     ```
     ---
     layout: tutorial_slides
-    topic_name: "Dev-Corner"
+    topic_name: "dev"
     tutorial_name: tool_integration
     logo: "GTN"
     ---

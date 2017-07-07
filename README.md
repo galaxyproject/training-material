@@ -7,14 +7,14 @@ Training material
 
 | topic | features |
 | :-- | :--: |
+| [Galaxy Introduction](topics/introduction) | [:whale:](topics/introduction/docker/)[:book:](topics/introduction/tutorials/) |
 | [Genome Annotation](Genome-Annotation/) | [:book:](Genome-Annotation/tutorials/general-introduction.md) |
-| [RNA-seq](RNA-Seq/) | [:whale:](RNA-Seq/docker/) [:movie_camera:](https://vimeo.com/128268401) [:page_facing_up:](https://usegalaxy.org/u/jeremy/p/galaxy-rna-seq-analysis-exercise) [:book:](RNA-Seq/tutorials/ref_based.md) [:mortar_board:](RNA-Seq/slides/index.html) |
-| [ChIP-seq](ChIP-Seq/) | [:whale:](ChIP-Seq/docker/) [:book:](ChIP-Seq/) [:mortar_board:](ChIP-Seq/slides/index.html) |
-| [Exome-seq](Exome-Seq/) | [:whale:](Exome-Seq/docker) [:book:](Exome-Seq/tutorials) [:mortar_board:](Exome-Seq/slides/index.html/) |
-| [MethylC-seq](MethylC-Seq) | [:book:](MethylC-Seq/tutorials/Methylation-Seq.md) |
-| [Galaxy Introduction](Introduction) | [:whale:](Introduction/docker/)[:book:](Introduction/tutorials/) |
-| [Data Sources](Dev-Corner/tutorials/data_source_integration.md) | :book: |
-| [Galaxy Tool Dev Corner](Dev-Corner) | [:book:](Dev-Corner/readme.md) |
+| [Transcriptomics](topics/transcriptomics/) | [:whale:](topics/transcriptomics/docker/) [:movie_camera:](https://vimeo.com/128268401) [:page_facing_up:](https://usegalaxy.org/u/jeremy/p/galaxy-rna-seq-analysis-exercise) [:book:](RNA-Seq/tutorials/ref_based.md) [:mortar_board:](RNA-Seq/slides/index.html) |
+| [ChIP-seq](topics/chip-seq/) | [:whale:](topics/chip-seq/docker/) [:book:](topis/chip-seq/) [:mortar_board:](topics/chip-seq/slides/index.html) |
+| [Variant Analysis](topics/variant-analysis/) | [:whale:](topics/variant-analysis/docker) [:book:](topics/variant-analysis/tutorials) [:mortar_board:](topics/variant-analysis/slides/index.html/) |
+| [Epigenetics](topics/epigenetics/) | [:book:](topics/epigenetics//tutorials/methylation-seq.md) |
+| [Data Sources](topics/dev/tutorials/data_source_integration.md) | :book: |
+| [Galaxy Tool Dev Corner](topics/dev/) | [:book:](topics/dev/readme.md) |
 | [Galaxy Docker Project](https://slides.com/bgruening/the-galaxy-docker-project/) | [:book:](https://slides.com/bgruening/the-galaxy-docker-project/) |
 
 

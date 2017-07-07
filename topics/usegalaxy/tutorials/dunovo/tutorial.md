@@ -4,7 +4,7 @@ topic_name: usegalaxy
 tutorial_name: dunovo
 ---
 
-This page explains how to perform discovery of low frequency variants from duplex sequencing data. As an example we use the _ABL1_ dataset published by [Schmitt and colleagues](http://www.nature.com/nmeth/journal/v12/n5/full/nmeth.3351.html) (SRA accession [SRR1799908](http://www.ncbi.nlm.nih.gov/sra/?term=SRR1799908)).
+This page explains how to perform discovery of low frequency variants from duplex sequencing data. As an example we use the _ABL1_ dataset published by [Schmitt and colleagues](https://www.ncbi.nlm.nih.gov/pubmed/25849638) (SRA accession [SRR1799908](http://www.ncbi.nlm.nih.gov/sra/?term=SRR1799908)).
 
 # Background
 
@@ -20,7 +20,7 @@ The computational analysis of DS data (Part `C` in the figure above) produces tw
 * Single Strand Consensus Sequences (SSCS; panel `iv` in the figure above);
 * Duplex Consensus Sequences (DCS; panel `v` in the figure above).
 
-The DCSs have the ultimate accuracy, yet the SSCSs can also be very useful when ampliconic DNA is used as an input to a DS experiment. Let us illustrate the utility of SSCSs with the following example. Suppose one is interested in quantifying variants in a virus that has a very low titer in body fluids. Since DS procedure requires a substantial amount of starting DNA (between [between 0.2 and 3 micrograms](http://nature.com/nprot/journal/v9/n11/full/nprot.2014.170.html)) the virus needs to be enriched. This can be done, for example, with a PCR designed to amplify the entire genome of the virus. Yet the problem is that during the amplification heterologous strands will almost certainly realign to some extent forming hetoroduplex molecules:
+The DCSs have the ultimate accuracy, yet the SSCSs can also be very useful when ampliconic DNA is used as an input to a DS experiment. Let us illustrate the utility of SSCSs with the following example. Suppose one is interested in quantifying variants in a virus that has a very low titer in body fluids. Since DS procedure requires a substantial amount of starting DNA (between [between 0.2 and 3 micrograms](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4271547/)) the virus needs to be enriched. This can be done, for example, with a PCR designed to amplify the entire genome of the virus. Yet the problem is that during the amplification heterologous strands will almost certainly realign to some extent forming hetoroduplex molecules:
 
 >![hd](../images/het.png)
 >

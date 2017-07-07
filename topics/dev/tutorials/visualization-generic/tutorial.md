@@ -398,7 +398,7 @@ chromosome.
 
 ![](../../images/vis_plugins_example.png)
 
-The full contents of this plugin are provided in the [GitHub repository related to this material in `tree/master/Dev-Corner/tutorials/files/hands_on-visualizations/alignment_rname_boxplot`]({{ site.github_repo }}/tree/master/Dev-Corner/tutorials/files/hands_on-visualizations/alignment_rname_boxplot).
+The full contents of this plugin are provided in the [GitHub repository related to this material in `tree/master/topics/dev/files/hands_on-visualizations/alignment_rname_boxplot`]({{ site.github_repo }}/tree/master/topics/dev/files/hands_on-visualizations/alignment_rname_boxplot).
 To try out this example, simply copy this folder to the `$GALAXY_ROOT/config/plugins/visualizations/` folder
 on your (local) Galaxy and restart Galaxy.
 

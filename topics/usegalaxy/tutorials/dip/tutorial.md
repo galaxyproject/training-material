@@ -45,7 +45,7 @@ Variant calling is a complex field that was significantly propelled by advances 
  * **Variant calling** - identification of positions where the sequenced sample is different from the reference sequence (or [reference genome graph](https://github.com/vgteam/vg));
  * **Genotype calling** - identifying individual's genotype at variable sites.
 
-A typical workflow for variation discovery involves the following steps (e.g., see Nielsen et al. [2011](http://www.nature.com/nrg/journal/v12/n6/full/nrg2986.html)):
+A typical workflow for variation discovery involves the following steps (e.g., see Nielsen et al. [2011](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3593722/)):
 
  1. Mapping reads against the reference genome
  2. Thresholding BAM datasets by, for example, retaining paired, properly mapped reads
