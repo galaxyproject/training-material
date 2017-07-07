@@ -39,6 +39,7 @@ The first file we will fill is the `metadata.yaml` file describing the metadata 
 
 - `title`: title of the tutorial
 - `type: "tutorial"`
+- `enable`: `"true"` to make your tutorial accessible via the topic page or `"false"` otherwise
 - `name`: name of the tutorial (name of the subdirectory where the files related to the tutorial will be stored)
 - `zenodo_link`: link on Zenodo to the input data for the tutorial (not ideal but it can be empty)
 - `galaxy_tour`: name of the galaxy tour
@@ -56,6 +57,7 @@ This information is used to automatically make the tutorial available on the onl
 > 1. Fill the basic metadata for our tutorial
 >   - `title: Similarity search with BLAST`
 >   - `type: "tutorial"`
+>   - `enable: "true"`
 >   - `name: "similarity-search"`
 >   - `zenodo_link: ""` (we do not have data currently)
 >   - `galaxy_tour: ""` (we do not have Galaxy Interactive Tour currently)
