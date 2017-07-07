@@ -58,7 +58,7 @@ What’s not in the database is the data. Datasets are stored outside the databa
 Entity-relationship diagrams are a way to understand tables and the relationships between them inside a relational database.  SchemaSpy (http://schemaspy.sourceforge.net/) is a free (and remarkable tool) for generating ER diagrams.  We’be used it generate a description of the database backing the server in this container.  See
 
     <!-- TODO: following link is broken, update with new link once fixed on Hub -->
-    https://galaxyproject.org /schema/SchemaSpy/index.html
+    https://galaxyproject.org/schema/SchemaSpy/index.html
 
 The “Tables” tab is a good place to start learning the structure of the database.  Each table represents a different type of thing, and often that thing is itself a relationship. For example, each record in the dataset table has information about a specific dataset, while records in the history_dataset_association table have information about what histories that dataset is in.
 

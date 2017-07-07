@@ -49,7 +49,7 @@ The first file we will fill is the `metadata.yaml` file describing the metadata 
     - `link`: relative for internal (inside training material) requirement or full for external requirement)
     - `type`: the type of link (`internal` or `external`)
 
-This information is used to automatically make the tutorial available on the online website: [http://galaxyproject.github.io/training-material/ ](http://galaxyproject.github.io/training-material/)
+This information is used to automatically make the tutorial available on the online website: [https://galaxyproject.github.io/training-material/ ](https://galaxyproject.github.io/training-material/)
 
 > ### :pencil2: Hands-on: Fill the basic metadata
 >
@@ -76,7 +76,7 @@ In the second part of the metadata, we define metadata related to the content of
 
     This information will appear at the end of the tutorial
 
-For this metadata, we take inspiration from what Software Carpentry is doing and particularly what they describe in their [Instructor training](http://swcarpentry.github.io/instructor-training/) and the section ["Lessons and Objectives"](http://swcarpentry.github.io/instructor-training/19-lessons/).
+For this metadata, we take inspiration from what Software Carpentry is doing and particularly what they describe in their [Instructor training](https://swcarpentry.github.io/instructor-training/) and the section ["Lessons and Objectives"](https://swcarpentry.github.io/instructor-training/19-lessons/).
 
 > ### :pencil2: Hands-on: Fill the pedagogical metadata
 >
