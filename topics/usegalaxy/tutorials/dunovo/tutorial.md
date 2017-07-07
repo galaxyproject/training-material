@@ -52,7 +52,7 @@ The starting point of the analyses are sequencing reads (usually in [fastq](http
 
 ## Getting data in and assessing quality
 
-We uploaded [Schmitt:2015](http://www.nature.com/nmeth/journal/v12/n5/full/nmeth.3351.html)) data directly from SRA as shown in [this screencast](https://vimeo.com/121187220). This created two datasets in our galaxy history: one for forward reads and one for reverse. We then evaluated the quality of the data by running FastQC on both datasets (forward and reverse) to obtain the following plots:
+We uploaded [Schmitt:2015](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4414912/)) data directly from SRA as shown in [this screencast](https://vimeo.com/121187220). This created two datasets in our galaxy history: one for forward reads and one for reverse. We then evaluated the quality of the data by running FastQC on both datasets (forward and reverse) to obtain the following plots:
 
    |
 :--|:---
@@ -165,7 +165,7 @@ bwa-mem | 130,880,141 |  A     |  G    | 0.479 |
 
 We can see that results of both mappers agree very well. The reason we see these numbers grouped by mappers is because we have set the readgroups while [mapping](#align-against-genome-with-bwa-and-bwa-mem).
 
-The polymorphism we are interested in (and the one reported by [Schmitt:2015] (http://www.nature.com/nmeth/journal/v12/n5/full/nmeth.3351.html)) is at the position 130,872,141 and has a frequency of 1.3%. The other site (position 130,880,141) is a known common variant [rs2227985](http://www.ncbi.nlm.nih.gov/SNP/snp_ref.cgi?type=rs&rs=rs2227985), which is heterozygous in this sample.
+The polymorphism we are interested in (and the one reported by [Schmitt:2015] (https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4414912/)) is at the position 130,872,141 and has a frequency of 1.3%. The other site (position 130,880,141) is a known common variant [rs2227985](http://www.ncbi.nlm.nih.gov/SNP/snp_ref.cgi?type=rs&rs=rs2227985), which is heterozygous in this sample.
 
 # Analysis of single strand consensus data
 

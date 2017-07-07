@@ -28,7 +28,7 @@ There is a variety of ways in which RNA is treated during its conversion to cDNA
  * Second strand synthesis using DNA polymerase;
  * Library preparation for sequencing.
 
-In listing these basic steps we are ignoring a vast amount of details such as, for example, normalization strategies and procedures needed to deal with rare RNAs or degraded samples (see [Adiconis:2013](http://nature.com/nmeth/journal/v10/n7/full/nmeth.2483.html)). Yet, there are two important experimental considerations that would effect the ways in which one analyses data and interprets the results. These are:
+In listing these basic steps we are ignoring a vast amount of details such as, for example, normalization strategies and procedures needed to deal with rare RNAs or degraded samples (see [Adiconis:2013](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3821180/)). Yet, there are two important experimental considerations that would effect the ways in which one analyses data and interprets the results. These are:
 
  * Priming for the first cDNA strand synthesis;
  * Stranded versus Non-stranded libraries.
@@ -53,13 +53,13 @@ RNAs that are typically targeted in RNAseq experiments are single stranded (e.g.
 >
 >**Relationship between DNA and RNA orientation**
 
-During a typical RNAseq experiment the information about strandedness is lost after both strands of cDNA are synthesized, size selected, and converted into sequencing library. However, this information can be quite useful for various aspects of RNAseq analysis such as transcript reconstruction and quantification. There is a number of methods for creating so called *stranded* RNAseq libraries that preserve the strand information (for an excellent overview see Levin et al. [2010](http://www.nature.com/nmeth/journal/v7/n9/full/nmeth.1491.html)):
+During a typical RNAseq experiment the information about strandedness is lost after both strands of cDNA are synthesized, size selected, and converted into sequencing library. However, this information can be quite useful for various aspects of RNAseq analysis such as transcript reconstruction and quantification. There is a number of methods for creating so called *stranded* RNAseq libraries that preserve the strand information (for an excellent overview see Levin et al. [2010](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3005310/)):
 
 
->[![](../images/stranded_protocols.png)](http://www.nature.com/nmeth/journal/v7/n9/fig_tab/nmeth.1491_F1.html)
+>![](../images/stranded_protocols.png)
 >
 >**Generation of stranded RNAseq libraries**<br>
->Different types of stranded library generation protocols from [Levin:2010](http://www.nature.com/nmeth/journal/v7/n9/full/nmeth.1491.html)
+>Different types of stranded library generation protocols from [Levin:2010](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3005310/)
 
 Depending on the approach and whether one performs single- or paired-end sequencing there are multiple possibilities on how to interpret the results of mapping of these reads onto genome/transcriptome:
 
@@ -134,13 +134,13 @@ After sequencing is performed you have a collection of sequencing reads for each
 >**TopHat has been subsequently improved with the development of TopHat2**<br>
 >Image from [Kim:2012](https://genomebiology.biomedcentral.com/articles/10.1186/gb-2013-14-4-r36) summarizes steps involved in aligning of RNAseq reads with TopHat2
 
-To further optimize and speed up spliced read alignment Kim at al. [2015](http://www.nature.com/nmeth/journal/v12/n4/full/nmeth.3317.html) developed [HISAT](http://ccb.jhu.edu/software/hisat2/index.shtml). It uses a set of [FM-indices](https://en.wikipedia.org/wiki/FM-index) consisting one global genome-wide index and a collection of ~48,000 local overlapping 42 kb indices (~55,000 56 kb indices in HiSat2). This allows to find initial seed locations for potential read alignments in the genome using global index and to rapidly refine these alignments using a corresponding local index:
+To further optimize and speed up spliced read alignment Kim at al. [2015](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4655817/) developed [HISAT](http://ccb.jhu.edu/software/hisat2/index.shtml). It uses a set of [FM-indices](https://en.wikipedia.org/wiki/FM-index) consisting one global genome-wide index and a collection of ~48,000 local overlapping 42 kb indices (~55,000 56 kb indices in HiSat2). This allows to find initial seed locations for potential read alignments in the genome using global index and to rapidly refine these alignments using a corresponding local index:
 
 
 >![](../images/hisat.png)
 >
 >**Hierarchical Graph FM index in HiSat/HiSat2**<br>
->A part of the read (blue arrow) is first mapped to the genome using the global FM index. The HiSat then tries to extend the alignment directly utilizing the genome sequence (violet arrow). In (**a**) it succeeds and this read aligned as it completely resides within an exon. In (**b**) the extension hits a mismatch. Now HiSat takes advantage of the local FM index overlapping this location to find the appropriate matting for the remainder of this read (green arrow). The (**c**) shows a combination these two strategies: the beginning of the read is mapped using global FM index (blue arrow), extended until it reaches the end of the exon (violet arrow), mapped using local FM index (green arrow) and extended again (violet arrow). Image from [Kim:2015](http://www.nature.com/nmeth/journal/v12/n4/full/nmeth.3317.html)
+>A part of the read (blue arrow) is first mapped to the genome using the global FM index. The HiSat then tries to extend the alignment directly utilizing the genome sequence (violet arrow). In (**a**) it succeeds and this read aligned as it completely resides within an exon. In (**b**) the extension hits a mismatch. Now HiSat takes advantage of the local FM index overlapping this location to find the appropriate matting for the remainder of this read (green arrow). The (**c**) shows a combination these two strategies: the beginning of the read is mapped using global FM index (blue arrow), extended until it reaches the end of the exon (violet arrow), mapped using local FM index (green arrow) and extended again (violet arrow). Image from [Kim:2015](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4655817/)
 
 ### STAR mapper
 
@@ -171,7 +171,7 @@ Based on these results [Cufflinks](http://cole-trapnell-lab.github.io/cufflinks/
 >![](../images/stringtie1.png)
 >
 >**StringTie workflow**<br>
->Image from [Pertea:2015](http://www.nature.com/nbt/journal/v33/n3/full/nbt.3122.html)
+>Image from [Pertea:2015](StringTie enables improved reconstruction of a transcriptome from RNA-seq reads)
 
 In essence StringTie builds an alternative splice graph from overlapping reads in a given locus. In such a graph nodes correspond to exons (or, rather, contiguous regions of genome covered by reads; colored regions on the figure above), while edges are represented by reads connecting these exons. Next, it identifies a path within the splice graph that has the highest weight (largest number of reads on edges). Such path would correspond to an assembled transcript at this iteration of the algorithm. Because the edge weight is equal to the number of the reads StringTie estimates the coverage level for this transcript (see below) which can be used to estimate the transcript's abundance. Reads that are associated with the transcript that was just assembled are then removed and the graph is updated to perform the next iteration of the algorithm.
 
@@ -225,7 +225,7 @@ StringTie, which performs assembly and quantification simultaneously converts sp
 >![](../images/stringtie2.png)
 >
 >**StringTie flow network**<br>
->Here each exon node from the splice graph is split into *in* and *out* nodes connected with an edge weighted by the number of reads corresponding to that exon. For example, the first exon is covered by seven reads and so the edge between 1-in and 1-out has a weight of 7. Expression level would correspond to the maximum flow through a path representing a given transcript. Image from [Pertea:2015](http://www.nature.com/nbt/journal/v33/n3/full/nbt.3122.html)
+>Here each exon node from the splice graph is split into *in* and *out* nodes connected with an edge weighted by the number of reads corresponding to that exon. For example, the first exon is covered by seven reads and so the edge between 1-in and 1-out has a weight of 7. Expression level would correspond to the maximum flow through a path representing a given transcript. Image from [Pertea:2015](StringTie enables improved reconstruction of a transcriptome from RNA-seq reads)
 
 #### Expectation Maximization
 
@@ -303,7 +303,7 @@ to test for differential gene expression.
 
 ### The data
 
-In this example we will use a downsampled version of simulated *Drosophila melanogaster* RNA-seq data used by Trapnell et al. [2012](http://www.nature.com/nprot/journal/v7/n3/full/nprot.2012.016.html). These include two conditions (**C1** and **C2**), each containing three replicates (**R1**, **R2**, and **R3**) sequenced as a paired end library. Thus in total there are 12 fastq datasets.  
+In this example we will use a downsampled version of simulated *Drosophila melanogaster* RNA-seq data used by Trapnell et al. [2012](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3334321/). These include two conditions (**C1** and **C2**), each containing three replicates (**R1**, **R2**, and **R3**) sequenced as a paired end library. Thus in total there are 12 fastq datasets.  
 
 Here is what to do to load the data:
 
