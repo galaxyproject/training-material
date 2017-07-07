@@ -16,7 +16,7 @@ Identifying peptides in proteomic datasets is commonly done by using search engi
 > 2. [Contaminant Databases](#contaminant-databases)
 > 3. [Merging Databases](#merging-databases)
 > 4. [Creating Decoy Databases](#creating-decoy-databases)
-> {: .agenda}
+{: .agenda}
 
 
 # Loading a Search Database

@@ -35,7 +35,7 @@ you can use the constructed database before the **DecoyDatabase** :wrench: step.
 > 2. [Peptide and Protein Identification](#peptide-and-protein-identification)
 > 4. [Analysis of Contaminants](#analysis-of-contaminants)
 > 5. [Peptide and Protein Evaluation](#evaluation-of-peptide-and-protein-ids)
-> {: .agenda}
+{: .agenda}
 
 
 # Preparing raw data

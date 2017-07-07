@@ -30,7 +30,7 @@ In this tutorial, you will learn how to annotate your training material with a l
 > 1. [Creating Interactive Galaxy Tours](../create-new-tutorial-tours/tutorial.html)
 > 1. [Building a Docker flavor](../create-new-tutorial-docker/tutorial.html)
 > 1. [Submitting the new tutorial to the GitHub repository](../../../dev/tutorials/github-contribution/slides.html)
-> {: .agenda}
+{: .agenda}
 
 
 # Filling the metadata

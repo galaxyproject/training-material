@@ -17,7 +17,7 @@ The quality control of the sequences right after sequencing is then an essential
 > 1. [Sequence dataset importing](#sequence-dataset-importing)
 > 2. [Quality checking of the sequences](#quality-checking-of-the-sequences)
 > 3. [Improvement of the quality of the sequences](#improvement-of-the-quality-of-the-sequences)
-> {: .agenda}
+{: .agenda}
 
 # Sequence dataset importing
 

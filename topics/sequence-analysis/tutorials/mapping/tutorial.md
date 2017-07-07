@@ -14,7 +14,7 @@ In the following we will process a dataset with a mapper, 'Bowtie2', and we will
 >
 > 1. [Map the data](#mapping)
 > 3. [Visualize the mapped data](#visualization)
-> {: .agenda}
+{: .agenda}
 
 # Mapping
 > ### :pencil2: Hands-on: Mapping with Bowtie2

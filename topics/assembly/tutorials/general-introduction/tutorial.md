@@ -19,7 +19,7 @@ In this activity, we will perform a *de novo* assembly of a short read set using
 > 3. [Assemble reads with Velvet](#assemble-reads-with-velvet)
 > 4. [Collect some statistics on the contigs](#collect-some-statistics-on-the-contigs)
 > 5. [Discussion](#discussion)
-> {: .agenda}
+{: .agenda}
 
 # Get the data
 

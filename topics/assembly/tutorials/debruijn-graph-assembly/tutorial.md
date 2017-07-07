@@ -20,7 +20,7 @@ SPAdes is a de novo genome assembler written by Pavel Pevzner's group in St. Pet
 > 1. [Get the data](#get-the-data)
 > 2. [Assemble with the Velvet Optimiser](#assemble-with-the-velvet-optimiser)
 > 3. [Assemble with SPAdes](#assemble-with-spades)
-> {: .agenda}
+{: .agenda}
 
 # Get the data
 

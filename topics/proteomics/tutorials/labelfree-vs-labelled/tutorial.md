@@ -18,7 +18,7 @@ A basic overview of different quantitation techniques is shown below ([original 
 >
 > 1. [Drawbacks and Benefits of Labelled Quantitation](#drawbacks-and-benefits-of-labelled-quantitation)
 > 2. [Guideline: How to Choose Your Technique](#guideline-how-to-choose-your-technique)
-> {: .agenda}
+{: .agenda}
 
 
 # Drawbacks and Benefits of Labelled Quantitation

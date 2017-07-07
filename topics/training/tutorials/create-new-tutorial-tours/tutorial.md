@@ -29,7 +29,7 @@ In this tutorial, you will understand how to design and develop a new tutorial f
 > 1. [Creating Interactive Galaxy Tours](../create-new-tutorial-tours/tutorial.html)
 > 1. [Building a Docker flavor](../create-new-tutorial-docker/tutorial.html)
 > 1. [Submitting the new tutorial to the GitHub repository](../../../dev/tutorials/github-contribution/slides.html)
-> {: .agenda}
+{: .agenda}
 
 # A Galaxy Interactive Tour
 

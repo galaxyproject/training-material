@@ -31,7 +31,7 @@ In this tutorial, you will learn how to run a local instance of the GTN webiste 
 > 1. [Creating Interactive Galaxy Tours](../create-new-tutorial-tours/tutorial.html)
 > 1. [Building a Docker flavor](../create-new-tutorial-docker/tutorial.html)
 > 1. [Submitting the new tutorial to the GitHub repository](../../../dev/tutorials/github-contribution/slides.html)
-> {: .agenda}
+{: .agenda}
 
 # Checking the website generation
 

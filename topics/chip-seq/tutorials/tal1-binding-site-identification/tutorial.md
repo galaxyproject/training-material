@@ -41,7 +41,7 @@ Because of the long processing time for the large original files, we have downsa
 > 7. [Step 7: Inspection of Tal1 peaks](#step-7-inspection-of-peaks-and-aligned-data)
 > 8. [Step 8: Identifying unique/common Tal1 peaks](#step-8-identifying-unique-and-common-tal1-peaks-between-states)
 > 9. [Additional optional analyses](#additional-optional-analyses)
-> {: .agenda}
+{: .agenda}
 
 # Step 1: Quality control
 

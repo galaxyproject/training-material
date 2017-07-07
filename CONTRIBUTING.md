@@ -304,7 +304,7 @@ To improve the learning experience, we strongly recommend you to:
     > 1. [Pretreatments](#pretreatments)
     > 2. [Mapping](#mapping)
     > 3. [Analysis of the differential expression](#analysis-of-the-differential-expression)
-    > {: .agenda}
+    {: .agenda}
     ```
 
     ![](shared/images/tutorial_agenda_box.png)
