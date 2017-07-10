@@ -2,7 +2,7 @@ GalaxyP Training material
 =================
 
 topic | features
-:-- | :--: 
+:-- | :--:
 [Database Handling](tutorials/database-handling.md) | [:book:](tutorials/database-handling.md)
 [Peptide and Protein ID](tutorials/proteinID_SG_PS.md) | [:book:](tutorials/proteinID_SG_PS.md)
 [Protein Quantitation by Stable Isotope Labelling (SIL)](tutorials/proteinQuant_SIL.md) | [:book:](tutorials/proteinQuant_SIL.md)
@@ -24,8 +24,8 @@ You are free to use and modify all workflows for your scientific question.
 
 topic | features
 :-- | :--:
-[N-Tails](workflows/ntails/) | [:page_facing_up:](https://galaxyproject.github.io/training-material/Proteomics/workflows/ntails/) [:book:](./workflows/ntails/)
-[Secretome Prediction](workflows/secretome_prediction/) | [:page_facing_up:](https://galaxyproject.github.io/training-material/Proteomics/workflows/secretome_prediction/) [:book:](./workflows/secretome_prediction/)
+[N-Tails](./tutorials/ntails/workflows/) | [:page_facing_up:](https://github.com/galaxyproject/training-material/tree/master/topics/proteomics/tutorials/ntails/workflows) [:book:](https://github.com/galaxyproject/training-material/tree/master/topics/proteomics/tutorials/ntails/workflows)
+[Secretome Prediction](https://github.com/galaxyproject/training-material/tree/master/topics/proteomics/tutorials/secretome-prediction/workflows) | [:page_facing_up:](https://github.com/galaxyproject/training-material/tree/master/topics/proteomics/tutorials/secretome-prediction/workflows) [:book:](https://github.com/galaxyproject/training-material/tree/master/topics/proteomics/tutorials/secretome-prediction/workflows)
 
 ### Disclaimer
 Thanks for your interest in the GTN GalaxyP training material project. We only recently started working on this repository. We try to integrate more and more topics over time. Keep an eye out for new material from time to time.

@@ -44,13 +44,13 @@ It can be 16S for bacteria or archea or 18S for eukaryotes.
 > The highly conserved regions make it easy to target the gene across different organisms,
 > while the highly variable regions allow us to distinguish between different species.
 >
-> (slide credit [http://www.slideshare.net/beiko/ccbc-tutorial-beiko ](http://www.slideshare.net/beiko/ccbc-tutorial-beiko ))
+> (slide credit [https://www.slideshare.net/beiko/ccbc-tutorial-beiko ](http://www.slideshare.net/beiko/ccbc-tutorial-beiko ))
 {: .tip}
 
 With amplicon data, we can extract from which micro-organisms the sequences in our sample are coming from. This is called taxonomic assignation.
 We try to assign sequences to taxons and then classify or extract the taxonomy in our sample.
 
-In this analysis, we will use [mothur tool suite](http://mothur.org), but only a small portion of its tools and possibilities.
+In this analysis, we will use [mothur tool suite](https://mothur.org), but only a small portion of its tools and possibilities.
 To learn more in detail how to use, check out the full [mothur tutorial](../mothur-miseq-sop/tutorial.html).
 
 ## Importing the data
@@ -178,7 +178,7 @@ The first step in any analysis should be to check and improve the quality of our
 
 > ### :nut_and_bolt: Comment
 >
-> For more information on the topic of quality control, please see our training materials [here](https://galaxyproject.github.io/training-material/NGS-QC/).
+> For more information on the topic of quality control, please see our training materials [here](https://galaxyproject.github.io/training-material/topics/sequence-analysis/).
 {: .comment}
 
 
@@ -466,7 +466,7 @@ To further explore the community structure, we can visualize it with dedicated t
 >    ![](../../../../shared/images/viewatphinch.png)
 >
 > 2. Click on the icon
-> 
+>
 >    It will lead you to the Phinch website, which will automatically load in your file, and where you can several interactive visualisations:
 >
 >     ![](../../../../shared/images/phinch_overviewpage.png)
@@ -656,7 +656,7 @@ With the HUMAnN2 output, we have access to UniRef50 gene families. However, the 
 >  > ### :question: Questions
 >  >
 >  > 1. What is the most abundant GO term?
->  > 2. What is related to in [Gene Ontology](http://www.geneontology.org/)?
+>  > 2. What is related to in [Gene Ontology](https://www.geneontology.org/)?
 >  >
 >  >    <details>
 >  >    <summary>Click to view answers</summary>

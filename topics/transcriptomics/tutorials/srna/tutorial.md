@@ -34,7 +34,9 @@ It is of note that this tutorial uses datasets that have been de-multiplexed so 
 
 ## Data upload and organization
 
-Due to the large size of the original sRNA-seq datasets, we have downsampled them to only inlcude a subset of usable reads. These datasets are avaialble at [`Zenodo`](https://zenodo.org/record/####), where you can find the FASTQ files corresponding to replicate sRNA-seq and mRNA-seq libraries and additiona annotation files for the *Drosophila melanogaster* genome version dm3.
+<!-- TODO: add data to zenodo and add link -->
+
+Due to the large size of the original sRNA-seq datasets, we have downsampled them to only inlcude a subset of usable reads. These datasets are avaialble at [`Zenodo`](zenodo.org /record/####), where you can find the FASTQ files corresponding to replicate sRNA-seq and mRNA-seq libraries and additiona annotation files for the *Drosophila melanogaster* genome version dm3.
 
 > ### :pencil2: Hands-on: Data upload and organization
 >
@@ -62,7 +64,7 @@ Due to the large size of the original sRNA-seq datasets, we have downsampled the
 
 ## Read quality checking
 
-Read quality scores (phred scores) in FASTQ-formatted data can be encoded by one of a few different encoding schemes. Most Galaxy tools assume that input FASTQ files are using the Sanger/Illumina 1.9 encoding scheme. If the input FASTQ files are using an alternate encoding scheme, then some tools will not interpret the quality score encodings correctly. It is good practice to confirm the quality encoding scheme of your data and then convert to Sanger/Illumina 1.9, if necessary. We can check the quality encoding scheme using the [FastQC](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/) tool (further described in the [NGS-QC tutorial](../../NGS-QC/tutorials/dive_into_qc)).
+Read quality scores (phred scores) in FASTQ-formatted data can be encoded by one of a few different encoding schemes. Most Galaxy tools assume that input FASTQ files are using the Sanger/Illumina 1.9 encoding scheme. If the input FASTQ files are using an alternate encoding scheme, then some tools will not interpret the quality score encodings correctly. It is good practice to confirm the quality encoding scheme of your data and then convert to Sanger/Illumina 1.9, if necessary. We can check the quality encoding scheme using the [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/) tool (further described in the [NGS-QC tutorial](../../NGS-QC/tutorials/dive_into_qc)).
 
 > ### :pencil2: Hands-on: Quality checking
 >

@@ -7,7 +7,7 @@ services:
 
 before_script:
   # dump the changed files into a file
-  - git diff --name-only "${TRAVIS_COMMIT_RANGE/.../..}" > ./CHANGES.list
+  #- git diff --name-only "${TRAVIS_COMMIT_RANGE/.../..}" > ./CHANGES.list
   # Spell checking?
   #- apt-get install -y hunspell pandoc
   #- wget https://cgit.freedesktop.org/libreoffice/dictionaries/tree/en/en_GB.aff
@@ -19,30 +19,23 @@ before_script:
   - pip install vl pyyaml
   - vl --version
 
+  # patch vl to send user-agent header (some links give error if not set)
+  - |
+    sed  -i 's|requests = (grequests.head(u, timeout=timeout, verify=False)|requests = (grequests.head(u, timeout=timeout, verify=False, headers={\x27User-Agent\x27: \x27Mozilla\x27})|' /home/travis/virtualenv/python*/lib/python*/site-packages/vl/cli.py
+
 script:
   - set -e
   # Check links
-  #- find .  \( -name "*.md" -o -name "*.html" \) -not -path "./assets/reveal.js/*" | xargs -L 1 -I '{}' sh -c "echo {}; vl -t 5 -s 1000 --allow-codes 401,403,405,500 --whitelist http://localhost:8080 {}"
+  - find .  \( -name "*.md" -o -name "*.html" \) -not -path "./assets/reveal.js/*" | xargs -L 1 -I '{}' sh -c "echo {}; vl -t 5 -s 1000 --allow-codes 405 --whitelist localhost,publish.twitter.com,linkedin.com,vimeo.com {}"
+  #
   # Check structure
   #- ./bin/check_structure.py
-  # Check docker
+  # Check docker (this will take way too long for travis, just set up quay.io triggers and monitor status somewhere?)
   #- ./bin/prepare_docker_checks.py
   #- |
-  #  export ROOT=$PWD
   #  while read -r DIR
   #  do
   #    echo "$DIR"
-  #    cd "$DIR"
-  #    docker build -f Dockerfile.old .
-  #    cd $ROOT
+  #    docker build -f "$DIR/Dockerfile" .
   #    echo ""
   #  done < DOCKER_BUILDS.list
-  # Once all tutorials use new docker bootstrap script use this
-  - |
-    while read -r DIR
-    do
-      echo "$DIR"
-      docker build -f "$DIR/Dockerfile" .
-      echo ""
-    done < DOCKER_BUILDS.list
-

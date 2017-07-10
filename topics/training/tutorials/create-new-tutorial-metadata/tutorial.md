@@ -13,9 +13,9 @@ Galaxy is a great solution to train the bioinformatics concepts:
 - it trains to use technology, outlining available resources and efforts that have made them accessible to researchers
 - it is scalable
 
-In 2016, the Galaxy Training Network decide to set up a new infrastructure for delivering easily Galaxy related training material. The idea was to develop something open and online based on a community effort, as always in Galaxy. 
+In 2016, the Galaxy Training Network decide to set up a new infrastructure for delivering easily Galaxy related training material. The idea was to develop something open and online based on a community effort, as always in Galaxy.
 
-We took inspiration from [Software Carpentry](https://software-carpentry.org) and collected everything on a GitHub repository: [https://github.com/galaxyproject/training-material](https://github.com/galaxyproject/training-material).
+We took inspiration from [Software Carpentry](https://software-carpentry.org) and collected everything on a GitHub repository: [https://github.com/galaxyproject/training-material ](https://github.com/galaxyproject/training-material).
 We decided on a structure based on tutorials with hands-on, fitting both for online self-training but also for workshops, grouped in topics. Each tutorial follows the same structure and comes with a virtualised isntance to run the training everywhere.
 
 In this tutorial, you will learn how to annotate your training material with a lot of metadata, so that it can be reused and empower other services.
@@ -30,7 +30,7 @@ In this tutorial, you will learn how to annotate your training material with a l
 > 1. [Creating Interactive Galaxy Tours](../create-new-tutorial-tours/tutorial.html)
 > 1. [Building a Docker flavor](../create-new-tutorial-docker/tutorial.html)
 > 1. [Submitting the new tutorial to the GitHub repository](../../../dev/tutorials/github-contribution/slides.html)
-> {: .agenda}
+{: .agenda}
 
 
 # Filling the metadata
@@ -50,7 +50,7 @@ The first file we will fill is the `metadata.yaml` file describing the metadata 
     - `link`: relative for internal (inside training material) requirement or full for external requirement)
     - `type`: the type of link (`internal` or `external`)
 
-This information is used to automatically make the tutorial available on the online website: [http://galaxyproject.github.io/training-material/](http://galaxyproject.github.io/training-material/)
+This information is used to automatically make the tutorial available on the online website: [https://galaxyproject.github.io/training-material/ ](https://galaxyproject.github.io/training-material/)
 
 > ### :pencil2: Hands-on: Fill the basic metadata
 >
@@ -75,9 +75,9 @@ In the second part of the metadata, we define metadata related to the content of
 
 - `key_points`: list of take-home messages
 
-    This information will appear at the end of the tutorial 
+    This information will appear at the end of the tutorial
 
-For this metadata, we take inspiration from what Software Carpentry is doing and particularly what they describe in their [Instructor training](http://swcarpentry.github.io/instructor-training/) and the section ["Lessons and Objectives"](http://swcarpentry.github.io/instructor-training/19-lessons/). 
+For this metadata, we take inspiration from what Software Carpentry is doing and particularly what they describe in their [Instructor training](https://swcarpentry.github.io/instructor-training/) and the section ["Lessons and Objectives"](https://swcarpentry.github.io/instructor-training/19-lessons/).
 
 > ### :pencil2: Hands-on: Fill the pedagogical metadata
 >

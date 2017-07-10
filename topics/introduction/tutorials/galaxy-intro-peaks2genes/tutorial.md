@@ -7,7 +7,7 @@ tutorial_name: galaxy-intro-peaks2genes
 # From peaks to genes
 
 # Introduction
-We stumbled upon a paper [Li et al., Cell Stem Cell 2012](https://www.ncbi.nlm.nih.gov/pubmed/22862943) that contains the analysis of possible target genes of an interesting protein in mice. The targets were obtained by ChIP-seq and the raw data is available through [GEO](http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE37268).
+We stumbled upon a paper [Li et al., Cell Stem Cell 2012](https://www.ncbi.nlm.nih.gov/pubmed/22862943) that contains the analysis of possible target genes of an interesting protein in mice. The targets were obtained by ChIP-seq and the raw data is available through [GEO](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE37268).
 The list of genes however is neither in the supplement of the paper nor part of the GEO submission.
 The closest thing we can find is a list of the regions where the signal is
 significantly enriched (so called *peaks*).
@@ -38,7 +38,7 @@ Let's start with a fresh history.
 ## Data upload
 
 Download the list of peak regions (the file `GSE37268_mof3.out.hpeak.txt.gz`) from
-[GEO](http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE37268) to your
+[GEO](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE37268) to your
 computer and upload it to Galaxy.
 
 > ### :pencil2: Hands-on: Data upload

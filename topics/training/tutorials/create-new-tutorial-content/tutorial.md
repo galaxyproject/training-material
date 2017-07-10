@@ -13,9 +13,9 @@ Galaxy is a great solution to train the bioinformatics concepts:
 - it trains to use technology, outlining available resources and efforts that have made them accessible to researchers
 - it is scalable
 
-In 2016, the Galaxy Training Network decide to set up a new infrastructure for delivering easily Galaxy related training material. The idea was to develop something open and online based on a community effort, as always in Galaxy. 
+In 2016, the Galaxy Training Network decide to set up a new infrastructure for delivering easily Galaxy related training material. The idea was to develop something open and online based on a community effort, as always in Galaxy.
 
-We took inspiration from [Software Carpentry](https://software-carpentry.org) and collected everything on a GitHub repository: [https://github.com/galaxyproject/training-material](https://github.com/galaxyproject/training-material).
+We took inspiration from [Software Carpentry](https://software-carpentry.org) and collected everything on a GitHub repository: [https://github.com/galaxyproject/training-material ](https://github.com/galaxyproject/training-material).
 We decided on a structure based on tutorials with hands-on, fitting both for online self-training but also for workshops, grouped in topics. Each tutorial follows the same structure and comes with a virtualised isntance to run the training everywhere.
 
 In this tutorial, you will learn how to write your first tutorial in markdown and contribute it to the Galaxy Training Network.
@@ -31,7 +31,7 @@ In this tutorial, you will learn how to write your first tutorial in markdown an
 > 1. [Creating Interactive Galaxy Tours](../create-new-tutorial-tours/tutorial.html)
 > 1. [Building a Docker flavor](../create-new-tutorial-docker/tutorial.html)
 > 1. [Submitting the new tutorial to the GitHub repository](../../../dev/tutorials/github-contribution/slides.html)
-> {: .agenda}
+{: .agenda}
 
 # Setting up a new tutorial
 
@@ -49,7 +49,7 @@ Before anything, we need to get a local copy of the content of the GitHub reposi
 
 ## Defining the topic
 
-The first step we need to define is in which topic putting our tutorial. This first step can be tricky. 
+The first step we need to define is in which topic putting our tutorial. This first step can be tricky.
 
 When we structured the repository, we decided here to use as topic the names of the categories in the [ToolShed](https://toolshed.g2.bx.psu.edu/). So when decided where to put your tutorial, you can look in which ToolShed's category are the main tools used in the tutorial and use this category as topic. For example, this tutorial will rely on the NCBI Blast+ tool.
 
@@ -173,12 +173,12 @@ If they are not correctly defined the tutorial can not be found on the website.
 > ### :pencil2: Hands-on: Fix the top metadata
 >
 > 1. Change the `tutorial-name` and the `topic_name` to fit to the ones defined in the metadata
-> 2. Check if the tutorial has been correctly added at [http://localhost:4000/topics/sequence-analysis/similarity-search](http://localhost:4000/topics/sequence-analysis/similarity-search)
+> 2. Check if the tutorial has been correctly added at [http://localhost:4000/topics/sequence-analysis/similarity-search ](http://localhost:4000/topics/sequence-analysis/similarity-search)
 {: .hands_on}
 
 ### Content of the tutorial
 
-Directly after the short metadata section on top the content of your tutorial starts. It is writen in Markdow - a simple markup langage.
+Directly after the short metadata section on top the content of your tutorial starts. It is written in Markdow - a simple markup langage.
 
 > ### :bulb: Tip: Markdown
 >
@@ -190,7 +190,7 @@ no need to add the name of the tutorial: it is automatically added based on the 
 
 We recommend to structure the tutorials like this
 
-- An introdcution to introduce the tutorial with the use case, the data, the methods
+- An introduction to introduce the tutorial with the use case, the data, the methods
 - Several sections with the content of the tutorial and some hands-on parts (practicing is an important part of the learning process)
 - A conclusion to summarize what has been done in the tutorial (with a scheme)
 
@@ -245,7 +245,7 @@ This structure needs to be respected otherwise it would not be interpreted corre
         > 1. [Pretreatments](#pretreatments)
         > 2. [Mapping](#mapping)
         > 3. [Analysis of the differential expression](#analysis-of-the-differential-expression)
-        > {: .agenda}
+        {: .agenda}
 
     ![](../../../../shared/images/tutorial_agenda_box.png)
 
@@ -275,11 +275,11 @@ This structure needs to be respected otherwise it would not be interpreted corre
 
     > ### :pencil2: Hands-on: Add an hands-on box
     >
-    > 1. Add an hands-on box to run a BLAST of the small sequence dataset against the chosen database 
+    > 1. Add an hands-on box to run a BLAST of the small sequence dataset against the chosen database
     {: .hands_on}
 
--  Questions 
-    
+-  Questions
+
     The questions are then to force the trainees to think about what they are currently doing and to put things in perspective.
     They are also a way to help the instructors to expose and clearify misunderstanding earily on.
 
@@ -329,7 +329,7 @@ This structure needs to be respected otherwise it would not be interpreted corre
     ![](../../../../shared/images/tutorial_comment_box.png)
 
 - Key points
-    
+
     This last box of the tutorial is automatically filled with the take-home messages defined in the metadata
 
 
@@ -362,7 +362,7 @@ to serve on the website slides related to the tutorial.
 
 The slides are written in Markdown (only the file extension is .html), as the tutorial and are rendered as a webpage thanks to [`Remark`](https://remarkjs.com). However this is not done automatically. We first need to tell the templating system to search for the slides by changing `slides` in the metadata from `no` to `yes`.
 
-Once it is done, the slides for our tutorial will be accessible at [http://localhost:4000/topics/sequence-analysis/tutorials/similarity-search/slides.html](http://localhost:4000/topics/sequence-analysis/tutorials/similarity-search/slides.html)
+Once it is done, the slides for our tutorial will be accessible at [http://localhost:4000/topics/sequence-analysis/tutorials/similarity-search/slides.html ](http://localhost:4000/topics/sequence-analysis/tutorials/similarity-search/slides.html)
 
 We can now fill the `slides.html` file:
 

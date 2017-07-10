@@ -9,16 +9,15 @@ Here, you will find some material to learn how to use Galaxy.
 
 A deck of slides is available for this topic:
 
-- [General introduction about Galaxy](http://galaxyproject.github.io/training-material/Introduction/slides/)
+- [General introduction about Galaxy](https://galaxyproject.github.io/training-material/topics/introduction/slides/)
 
 # Tutorials
 
 Several tutorials with hands-on are available for this topic:
 
-- [Galaxy Introduction Exercise: From Peaks to Genes](tutorial/introduction.md)
-- [Getting to know workflows](tutorial/workflows.md)
-- [Processing many samples at once](tutorial/processing_many_samples.md)
-- [Using the Integrative Genomics Viewer](./tutorials/igv.md)
+- [Galaxy Introduction Exercise: From Peaks to Genes](tutorials/galaxy-intro-peaks2genes/tutorial.md)
+- [Processing many samples at once](tutorials/processing-many-samples-at-once/tutorial.md)
+- [Using the Integrative Genomics Viewer](/tutorials/igv-introduction/tutorial.md)
 
 ## Input datasets
 

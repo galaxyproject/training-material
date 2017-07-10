@@ -14,7 +14,7 @@ In the following we will process a dataset with a mapper, 'Bowtie2', and we will
 >
 > 1. [Map the data](#mapping)
 > 3. [Visualize the mapped data](#visualization)
-> {: .agenda}
+{: .agenda}
 
 # Mapping
 > ### :pencil2: Hands-on: Mapping with Bowtie2
@@ -135,7 +135,7 @@ A general description of the user interface of the IGV browser can be read here:
 > 1. **Galaxy** :wrench:: To show you the difference between a good and a bad dataset we provided an additional dataset which will give you a bad mapping. Load the ['GSM461182_untreat_single_subset.fastq'](https://zenodo.org/record/61771/files/GSM461178_untreat_paired_subset_1.fastq) dataset from [Zenodo](https://zenodo.org/record/61771) into Galaxy.
 >
 >    > ### :nut_and_bolt: Comments
->    > If you are using the [Freiburg Galaxy instance](http://galaxy.uni-freiburg.de), you can load the dataset using 'Shared Data' -> 'Data Libraries' -> 'Galaxy Courses' -> 'RNA-Seq' -> 'fastq'
+>    > If you are using the [Freiburg Galaxy instance](https://galaxy.uni-freiburg.de), you can load the dataset using 'Shared Data' -> 'Data Libraries' -> 'Galaxy Courses' -> 'RNA-Seq' -> 'fastq'
 >    {: .comment}
 >
 > 2. **IGV** :wrench:: Load the two mappings into IGV and compare them!

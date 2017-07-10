@@ -7,7 +7,7 @@ tutorial_name: webhooks
 ## Introduction
 
 In this tutorial we are going to demonstrate how to add a webhook to the tool-execution endpoint. This is the web-page that appears
-after you have executed a tool. As a more useful example we are going to ask [phdcomics](http://phdcomics.com) for a random comic that we can
+after you have executed a tool. As a more useful example we are going to ask [phdcomics](https://phdcomics.com) for a random comic that we can
 display to entertain our users.
 
 
@@ -133,17 +133,17 @@ entire user-object, including histories and datasets.
 >
 >            # Get latest id
 >            if 'latest_id' not in webhook.config.keys():
->                url = 'http://phdcomics.com/gradfeed.php'
+>                url = 'https://phdcomics.com/gradfeed.php'
 >                content = urllib.urlopen(url).read()
 >                soap = BeautifulSoup(content, 'html.parser')
->                pattern = '(?:http://www\.phdcomics\.com/comics\.php\?f=)(\d+)'
+>                pattern = '(?:https://www\.phdcomics\.com/comics\.php\?f=)(\d+)'
 >                webhook.config['latest_id'] = max([
 >                    int(re.search(pattern, link.text).group(1))
 >                    for link in soap.find_all('link', text=re.compile(pattern))
 >                ])
 >
 >            random_id = random.randint(1, webhook.config['latest_id'])
->            url = 'http://www.phdcomics.com/comics/archive.php?comicid=%d' % \
+>            url = 'https://www.phdcomics.com/comics/archive.php?comicid=%d' % \
 >                random_id
 >            content = urllib.urlopen(url).read()
 >            soup = BeautifulSoup(content, 'html.parser')

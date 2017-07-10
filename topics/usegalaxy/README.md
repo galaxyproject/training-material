@@ -7,9 +7,9 @@ Topic name
 
 Several deck of slides are available for this topic:
 
-- [General introduction about <topic name>](http://galaxyproject.github.io/training-material/templates/slides/)
+- [General introduction about <topic name>](https://galaxyproject.github.io/training-material/templates/slides/)
 - Slide deck related to the tutorials:
-    - [Tutorial name](http://galaxyproject.github.io/training-material/templates/slides/tutorial.html)
+    - [Tutorial name](https://github.con/galaxyproject/training-material/templates/tutorials)
 
 # Tutorials
 
@@ -19,10 +19,10 @@ Several tutorial with hands-on are available for this topic:
 
 ## Input datasets
 
-*Zenodo DOI badge, e.g. [![DOI](https://zenodo.org/badge/doi/10.5281/zenodo.60520.svg)](http://dx.doi.org/10.5281/zenodo.60520)*
+*Zenodo DOI badge, e.g. [![DOI](https://zenodo.org/badge/doi/10.5281/zenodo.60520.svg)](https://dx.doi.org/10.5281/zenodo.60520)*
 
 The input datasets for the tutorials are available on
-[Zenodo with a dedicated DOI](http://dx.doi.org/10.5281/zenodo.60520).
+[Zenodo with a dedicated DOI](https://dx.doi.org/10.5281/zenodo.60520).
 
 ## Galaxy instance
 

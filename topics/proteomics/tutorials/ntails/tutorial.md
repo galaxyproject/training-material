@@ -8,11 +8,11 @@ N-Tails is a special Proteomics technique to analyze peptide abundancy changes o
 This is best explained by an example: directly after translation, a protein has exactly one N-terminus. When a protease is cutting the protein in half, each half has its own N-terminus. While the N-terminus of the first half protein is exactly the same as the one of the full protein precursor ("native N-terminus"), the N-terminus of the second half is different ("neo-N-terminus") and depends on the amino acid sequence where the protein was cut. 
 The N-Tails technique includes the use of heavy isotope dimethyl labelling.
 
-The figure below illustrates the mechanism of N-Tails. It was originally published by Stefan Tholen (doctoral thesis, not available online). Further reading on N-Tails and other N-terminal techniques, see [Tholen et al., Springer Vienna, 2013](http://dx.doi.org/10.1007/978-3-7091-0885-7_5).
+The figure below illustrates the mechanism of N-Tails. It was originally published by Stefan Tholen (doctoral thesis, not available online). Further reading on N-Tails and other N-terminal techniques, see [Tholen et al., Springer Vienna, 2013](https://dx.doi.org/10.1007/978-3-7091-0885-7_5).
 
 ![N-Tails technique](../../images/wf_ntails_technique.png)
 
-The N-Tails technique was originally designed to research protease biology and has most often been used in this field. It was originally published in [Kleifeld et al., Nat. Biotechnol., 2010](http://www.ncbi.nlm.nih.gov/pubmed/20208520).
+The N-Tails technique was originally designed to research protease biology and has most often been used in this field. It was originally published in [Kleifeld et al., Nat. Biotechnol., 2010](https://www.ncbi.nlm.nih.gov/pubmed/20208520).
 
 > ### :nut_and_bolt: Comment: Interpretation of N-Tails results
 >

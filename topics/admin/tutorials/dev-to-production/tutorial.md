@@ -20,7 +20,7 @@ Move from dev instance to production instance
 
 :heavy_check_mark: ***Requirements***
 
-- *[Galaxy Server Administration](http://galaxyproject.github.io/training-material/Admin-Corner/slides/index.html)*
+- *[Galaxy Server Administration](https://galaxyproject.github.io/training-material/topics/admin/slides/)*
 
 :hourglass: ***Time estimation*** *TODO*
 
@@ -63,7 +63,7 @@ To bind Galaxy to any avalaible network interface edit the config/galaxy.ini fil
 ## What did you just installed ?
 The galaxy you have just installed is configured with the following:
 
-- [SQLite](http://www.sqlite.org/): a servless database.
+- [SQLite](https://www.sqlite.org/): a servless database.
 - A built-in HTTP server, written in Python.
 
 The tools are run locally and the galaxy server itself run in a single process.

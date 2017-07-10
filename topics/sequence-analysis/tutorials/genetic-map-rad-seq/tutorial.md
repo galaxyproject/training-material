@@ -6,7 +6,7 @@ tutorial_name: genetic-map-rad-seq
 
 # Introduction
 
-Original description is reachable on a [dedicated page of the official STACKS website](http://catchenlab.life.illinois.edu/stacks/tut_gar.php). Writers describe that they developed a genetic map in the spotted gar and present here data from a single linkage group. The gar genetic map is an F1 pseudotest cross between two parents and 94 of their F1 progeny. They took the markers that appeared in one of the linkage groups and worked backwards to provide the raw reads from all of the stacks contributing to that linkage group.
+Original description is reachable on a [dedicated page of the official STACKS website](https://catchenlab.life.illinois.edu/stacks/tut_gar.php). Writers describe that they developed a genetic map in the spotted gar and present here data from a single linkage group. The gar genetic map is an F1 pseudotest cross between two parents and 94 of their F1 progeny. They took the markers that appeared in one of the linkage groups and worked backwards to provide the raw reads from all of the stacks contributing to that linkage group.
 
 We here proposed to re-analyze these data at least until genotypes determination. Data are already clean so you don't have to demultiplex it using barcode information through `Process Radtags tool`.
 
@@ -23,7 +23,7 @@ We here proposed to re-analyze these data at least until genotypes determination
 
 ## Data upload
 
-The original data is available at [STACKS website](http://creskolab.uoregon.edu/stacks/tutorial/stacks_samples.tar.gz) and the subset used here is findable on [CeSGO hub](https://cesgo.genouest.org/resources/370/supportingdocs).
+The original data is available at [STACKS website](https://creskolab.uoregon.edu/stacks/tutorial/stacks_samples.tar.gz) and the subset used here is findable on [CeSGO hub](https://cesgo.genouest.org/resources/370/supportingdocs).
 
 > ### :pencil2: Hands-on: Data upload
 >
@@ -31,7 +31,7 @@ The original data is available at [STACKS website](http://creskolab.uoregon.edu/
 > 2. Import Fasta files from parents and 20 progenies.
 >
 >    > ### :nut_and_bolt: Comments
->    > If you are using the [GenOuest Galaxy instance](http://galaxy.genouest.org), you can load the dataset using 'Shared Data' -> 'Data Libraries' -> '1 Galaxy teaching folder' -> 'EnginesOn' -> 'RADseq' -> 'Genetic map'
+>    > If you are using the [GenOuest Galaxy instance](https://galaxy.genouest.org), you can load the dataset using 'Shared Data' -> 'Data Libraries' -> '1 Galaxy teaching folder' -> 'EnginesOn' -> 'RADseq' -> 'Genetic map'
 >
 >    > ### :bulb: Tip: Importing data via links
 >    >
@@ -72,7 +72,7 @@ Run `Stacks: De novo map` Galaxy tool. This program will run `ustacks`, `cstacks
 
 > ### :nut_and_bolt: Comment
 >
-> Information on `denovo_map.pl` and its parameters can be found online: http://creskolab.uoregon.edu/stacks/comp/denovo_map.php.
+> Information on `denovo_map.pl` and its parameters can be found online: https://creskolab.uoregon.edu/stacks/comp/denovo_map.php.
 
 
 > **Stacks: De novo map** :wrench:: Run Stacks selecting the Genetic map usage. Specify each parent as a sample in the appropriate box, then each of the 20 progenies and specify a CP Cross type, 3 for the Minimum number of identical raw reads required to create a stack, 3 for minimum number of identical raw reads required to create a stack in 'progeny' individuals, 3 for the number of mismatches allowed between loci when building the catalog and activate the option "remove, or break up, highly repetitive RAD-Tags in the ustacks program".

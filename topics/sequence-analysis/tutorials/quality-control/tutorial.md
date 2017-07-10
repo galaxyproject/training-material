@@ -17,7 +17,7 @@ The quality control of the sequences right after sequencing is then an essential
 > 1. [Sequence dataset importing](#sequence-dataset-importing)
 > 2. [Quality checking of the sequences](#quality-checking-of-the-sequences)
 > 3. [Improvement of the quality of the sequences](#improvement-of-the-quality-of-the-sequences)
-> {: .agenda}
+{: .agenda}
 
 # Sequence dataset importing
 
@@ -68,7 +68,7 @@ To estimate sequence quality and treatments to do on the data, many indicators c
     - Adapter contamination
     - Kmer Content
 
-[FastQC](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/) is an open-source tool provide a simple way to do some quality control checks on raw sequence data coming from high throughput sequencing pipelines. It generates quality graphics and estimates numerous quality informations and threshold. For each studied indicators, FastQC providing a quick overview to tell in which areas there may be problems.
+[FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/) is an open-source tool provide a simple way to do some quality control checks on raw sequence data coming from high throughput sequencing pipelines. It generates quality graphics and estimates numerous quality informations and threshold. For each studied indicators, FastQC providing a quick overview to tell in which areas there may be problems.
 
 > ### :pencil2: Hands-on: Quality checking
 >
@@ -115,7 +115,7 @@ In general, quality treatments are:
     - tails
     - ...
 
-To improve the quality of the sequences, we use [Trim Galore!](http://www.bioinformatics.babraham.ac.uk/projects/trim_galore/) tool. It automates quality and adapter trimming as well as quality control.
+To improve the quality of the sequences, we use [Trim Galore!](https://www.bioinformatics.babraham.ac.uk/projects/trim_galore/) tool. It automates quality and adapter trimming as well as quality control.
 
 > ### :pencil2: Hands-on: Quality treatment and re-checking
 >

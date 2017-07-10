@@ -15,7 +15,7 @@ General introduction about the topic and then an introduction of the tutorial (t
 > 1. [Pretreatments](#pretreatments)
 > 2. [Mapping](#mapping)
 > 3. [Analysis of the differential expression](#analysis-of-the-differential-expression)
-> {: .agenda}
+{: .agenda}
 
 # Part 1
 

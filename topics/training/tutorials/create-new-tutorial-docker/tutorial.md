@@ -13,9 +13,9 @@ Galaxy is a great solution to train the bioinformatics concepts:
 - it trains to use technology, outlining available resources and efforts that have made them accessible to researchers
 - it is scalable
 
-In 2016, the Galaxy Training Network decide to set up a new infrastructure for delivering easily Galaxy related training material. The idea was to develop something open and online based on a community effort, as always in Galaxy. 
+In 2016, the Galaxy Training Network decide to set up a new infrastructure for delivering easily Galaxy related training material. The idea was to develop something open and online based on a community effort, as always in Galaxy.
 
-We took inspiration from [Software Carpentry](https://software-carpentry.org) and collected everything on a GitHub repository: [https://github.com/galaxyproject/training-material](https://github.com/galaxyproject/training-material).
+We took inspiration from [Software Carpentry](https://software-carpentry.org) and collected everything on a GitHub repository: [https://github.com/galaxyproject/training-material ](https://github.com/galaxyproject/training-material).
 We decided on a structure based on tutorials with hands-on, fitting both for online self-training but also for workshops, grouped in topics. Each tutorial follows the same structure and comes with a virtualised isntance to run the training everywhere.
 
 In this tutorial, you will learn how to create a virtualised Galaxy instance, based on Docker, to run your training - either on normal computers or cloud environments.
@@ -30,12 +30,12 @@ In this tutorial, you will learn how to create a virtualised Galaxy instance, ba
 > 1. [Creating Interactive Galaxy Tours](../create-new-tutorial-tours/tutorial.html)
 > 1. [Building a Docker flavor](../create-new-tutorial-docker/tutorial.html)
 > 1. [Submitting the new tutorial to the GitHub repository](../../../dev/tutorials/github-contribution/slides.html)
-> {: .agenda}
+{: .agenda}
 
 
 # Building a Galaxy instance specifically for your training
 
-To able to run the tutorial, we need a Galaxy instance where the needed tools are installed and the data. We need then to describe the needed technical infrastructure. 
+To able to run the tutorial, we need a Galaxy instance where the needed tools are installed and the data. We need then to describe the needed technical infrastructure.
 
 This description will be used to automatically set up a Docker Galaxy flavour and also to test if a public Galaxy instance is able to run the tool.
 
@@ -79,7 +79,7 @@ Such data are described in the `data-library.yaml`:
 libraries:
     - name: Name of the tutorial
       files:
-        - url: "http://raw.githubusercontent.com/bgruening/galaxytools/master/tools/rna_tools/sortmerna/test-data/read_small.fasta"
+        - url: "https://raw.githubusercontent.com/bgruening/galaxytools/master/tools/rna_tools/sortmerna/test-data/read_small.fasta"
           file_type: fasta
         - url: ""
           file_type: ""
@@ -104,7 +104,7 @@ The URL must refer to the URL of the files in Zenodo.
 
 Some of the tools require specific databases, specifically prepared for the tool. Then some Galaxy tools come with data managers to manage these databases.
 
-If you need such data managers for your tool, you can describe their running with the `data-manager.yaml` file: 
+If you need such data managers for your tool, you can describe their running with the `data-manager.yaml` file:
 
 ```
 data_managers:
@@ -127,7 +127,7 @@ data_managers:
 
 Once the tutorial is ready, we need to extract workflows with the different steps of the tutorial and add them to the `workflows` directory in the tutorial with some explanation about the tutorial in a `README.md` file
 
-> ### :pencil2: Hands-on: Extract the workflow 
+> ### :pencil2: Hands-on: Extract the workflow
 >
 > 1. Extract the workflow for the tutorial
 > 2. Add some description about the tutorial in a `README.md` file with the workflow file
@@ -140,7 +140,7 @@ It is a great way to run the tutorial directly inside Galaxy. To learn more abou
 
 ## Testing the technical infrastructure
 
-Once we defined all the requirements for running the tutorial, we can test these requirements. 
+Once we defined all the requirements for running the tutorial, we can test these requirements.
 
 Every topic will come with a Docker image containing the tools, data, workflows and Galaxy Interactive Tours required by each tutorial of this topic. The Docker image is described in the Dockerfile found in the `docker` directory of each topic. This file uses scripts to automatically add the files for each tutorial. The only thing to change is the name of the topic in the Dockerfile copied from the templates.
 

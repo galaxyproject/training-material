@@ -8,12 +8,12 @@ tutorial_name: diploid-variant-calling
 
 # Introduction
 
-Variant calling is a complex field that was significantly propelled by advances in DNA sequencing and efforts of large scientific consortia such as the [1000 Genomes](http://www.1000genomes.org). Here we summarize basic ideas central to Genotype and Variant calling. First, let's contrast the two things although they often go together:
+Variant calling is a complex field that was significantly propelled by advances in DNA sequencing and efforts of large scientific consortia such as the [1000 Genomes](https://www.1000genomes.org). Here we summarize basic ideas central to Genotype and Variant calling. First, let's contrast the two things although they often go together:
 
 * **Variant calling** - identification of positions where the sequenced sample is different from the reference sequence (or [reference genome graph](https://github.com/vgteam/vg));
 * **Genotype calling** - identifying individual's genotype at variable sites.
 
-A typical workflow for variation discovery involves the following steps (e.g., see Nielsen et al. [2011](http://www.nature.com/nrg/journal/v12/n6/full/nrg2986.html)):
+A typical workflow for variation discovery involves the following steps (e.g., see Nielsen et al. [2011](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3593722/)):
 
 1. Mapping reads against the reference genome;
 2. Thresholding BAM datasets by, for example, retaining paired, properly mapped reads;
@@ -23,7 +23,7 @@ A typical workflow for variation discovery involves the following steps (e.g., s
 6. Performing filtering and genotype quality score recalibration;
 7. Annotating variants and performing downstream analyses.
 
-However, continuing evolution of variant detection methods has made some of these steps obsolete. For instance, omitting quality score recalibration and re-alignment (steps 3 and 4 above) when using haplotype-aware variant callers such as [FreeBayes](https://github.com/ekg/freebayes) does not have an effect on the resulting calls (see Brad Chapman's methodological comparisons at [bcbio](http://bit.ly/1S9kFJN)
+However, continuing evolution of variant detection methods has made some of these steps obsolete. For instance, omitting quality score recalibration and re-alignment (steps 3 and 4 above) when using haplotype-aware variant callers such as [FreeBayes](https://github.com/ekg/freebayes) does not have an effect on the resulting calls (see Brad Chapman's methodological comparisons at [bcbio](https://bit.ly/1S9kFJN)
 
 > ### Agenda
 >
@@ -102,11 +102,11 @@ Suppose *R<sub>i</sub>* is a base in read *i* corresponding to a genome position
 
 #### *P(G)* - a single sample case
 
-One can assign an equal probability to all possible genotypes, or to source this information based on previously obtained knowledge containing in a database, such as [dbSNP](http://www.ncbi.nlm.nih.gov/SNP/). In this case (as exemplified in [Nielsen et al.](http://www.nature.com/nrg/journal/v12/n6/full/nrg2986.html) we may, for instance, have a site with a **G/T** polymorphism and genotypes **GG**, **TT**, and **GT** having frequencies of 0.45, 0.45, 0.09, respectively. We will use these values as priors.
+One can assign an equal probability to all possible genotypes, or to source this information based on previously obtained knowledge containing in a database, such as [dbSNP](https://www.ncbi.nlm.nih.gov/SNP/). In this case (as exemplified in [Nielsen et al.](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3593722/) we may, for instance, have a site with a **G/T** polymorphism and genotypes **GG**, **TT**, and **GT** having frequencies of 0.45, 0.45, 0.09, respectively. We will use these values as priors.
 
 #### *P(G)* - a multi-sample case
 
-Genotype calling reliability can be significantly improved when analyzing multiple samples jointly. In this case genotype frequencies can be inferred from allele frequencies using Hardy-Weinberg equilibrium ([HWE](https://en.wikipedia.org/wiki/Hardy%E2%80%93Weinberg_principle)). The following example (again from [Nielsen et al.](http://www.nature.com/nrg/journal/v12/n6/full/nrg2986.html)) illustrates this idea: suppose you are calling genotypes for a single individual using a combination of multiple samples. There are two genotypes, **AT** and **AA**, with equally large genotype likelihoods. If, however, in our collection of multiple samples the frequency of **A** is 1% (*p* = 0.01; *q* = 1 - *p* = 0.99), then from the HWE we have:
+Genotype calling reliability can be significantly improved when analyzing multiple samples jointly. In this case genotype frequencies can be inferred from allele frequencies using Hardy-Weinberg equilibrium ([HWE](https://en.wikipedia.org/wiki/Hardy%E2%80%93Weinberg_principle)). The following example (again from [Nielsen et al.](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3593722/)) illustrates this idea: suppose you are calling genotypes for a single individual using a combination of multiple samples. There are two genotypes, **AT** and **AA**, with equally large genotype likelihoods. If, however, in our collection of multiple samples the frequency of **A** is 1% (*p* = 0.01; *q* = 1 - *p* = 0.99), then from the HWE we have:
 
 | AA (*p<sup>2</sup>*)   |   AT (2*pq*) |   TT (*q<sup>2</sup>*)|
 |---------|---------|--------|
@@ -123,7 +123,7 @@ This makes it highly unlikely that **AA** is a true genotype of this individual.
 > * **Variant quality recalibration is avoided** by incorporating a number of metrics, such as read placement bias and allele balance, directly into the Bayesian model;
 > * **Ability to incorporate non-diploid cases** such as pooled datasets or data from polyploid samples.
 
-Freebayes is a *haplotype-based* variant caller. This implies that instead of looking at an individual positions within an alignment of reads to the reference genome, it looks at a haplotype window, length of which is dynamically determined (see section 3.2. in [FreeBayes manuscript](http://arxiv.org/pdf/1207.3907v2.pdf)):
+Freebayes is a *haplotype-based* variant caller. This implies that instead of looking at an individual positions within an alignment of reads to the reference genome, it looks at a haplotype window, length of which is dynamically determined (see section 3.2. in [FreeBayes manuscript](https://arxiv.org/pdf/1207.3907v2.pdf)):
 
 |Haplotype-based calling |
 |------------------------|
@@ -140,7 +140,7 @@ In this example we will perform variant calling and annotation using [genome in 
 * HG003- NA24149 - hu6E4515 (father)
 * HG004- NA24143 - hu8E87A9 (mother)
 
-Yet for a quick tutorial these datasets are way too big, so we created a [downsampled dataset](http://dx.doi.org/10.5281/zenodo.60520). This dataset was produced by mapping the trio reads against `hg19` version of the human genome, merging the resulting bam files together (we use readgroups to label individual reads so they can be traced to each of the original individuals), and restricting alignments to a small portion of chromosome 19 containing the [*POLRMT*](http://www.ncbi.nlm.nih.gov/gene?cmd=Retrieve&dopt=Graphics&list_uids=5442) gene.
+Yet for a quick tutorial these datasets are way too big, so we created a [downsampled dataset](https://dx.doi.org/10.5281/zenodo.60520). This dataset was produced by mapping the trio reads against `hg19` version of the human genome, merging the resulting bam files together (we use readgroups to label individual reads so they can be traced to each of the original individuals), and restricting alignments to a small portion of chromosome 19 containing the [*POLRMT*](http://www.ncbi.nlm.nih.gov/gene?cmd=Retrieve&dopt=Graphics&list_uids=5442) gene.
 
 > ### :pencil2: Hands-on: Variant calling
 >
@@ -173,7 +173,7 @@ Yet for a quick tutorial these datasets are way too big, so we created a [downsa
 >   ![](../../images/freebayes_gq.png)
 {: .hands_on}
 
-This produces a dataset in [VCF](http://www.1000genomes.org/wiki/Analysis/variant-call-format) format containing 35 putative variants. Before we can continue we need to post-process this dataset by breaking compound variants into multiple independent variants with **VcfAllelicPrimitives** tool found within **VCF Tools** section. This is necessary for ensuring the smooth sailing through downstream analyses:
+This produces a dataset in [VCF](https://www.1000genomes.org/wiki/Analysis/variant-call-format) format containing 35 putative variants. Before we can continue we need to post-process this dataset by breaking compound variants into multiple independent variants with **VcfAllelicPrimitives** tool found within **VCF Tools** section. This is necessary for ensuring the smooth sailing through downstream analyses:
 
 > ### :pencil2: Hands-on: Post-processing
 >
@@ -192,7 +192,7 @@ This produces a dataset in [VCF](http://www.1000genomes.org/wiki/Analysis/varian
 
 ## Annotating variants with SnpEff
 
-At this point we are ready to begin annotating variants using [**SnpEff**](http://snpeff.sourceforge.net/SnpEff.html). **SnpEff**, a project maintained by [Pablo Cingolani](https://www.linkedin.com/in/pablocingolani) "*...annotates and predicts the effects of variants on genes (such as amino acid changes)...*" and so is critical for functional interpretation of variation data.
+At this point we are ready to begin annotating variants using [**SnpEff**](https://snpeff.sourceforge.net/SnpEff.html). **SnpEff**, a project maintained by [Pablo Cingolani](https://www.linkedin.com/in/pablocingolani) "*...annotates and predicts the effects of variants on genes (such as amino acid changes)...*" and so is critical for functional interpretation of variation data.
 
 ### :pencil2: Annotating variants
 
@@ -209,7 +209,7 @@ or changes to codons
 
 ## Manipulating variation data with GEMINI
 
-Now that we have an annotated VCF file it is time to peek inside our variation data. [Aaron Quinlan](http://quinlanlab.org/), creator of [GEMINI](http://gemini.readthedocs.org/en/latest/index.html), calls it *Detective work*.
+Now that we have an annotated VCF file it is time to peek inside our variation data. [Aaron Quinlan](https://quinlanlab.org/), creator of [GEMINI](http://gemini.readthedocs.org/en/latest/index.html), calls it *Detective work*.
 
 ### Loading data into GEMINI
 
@@ -239,11 +239,11 @@ This produce a list of all tables and fields in the database.
 
 ### Querying GEMINI database
 
-GEMINI database is queried using the versatile SQL language (more on SQL [here](http://swcarpentry.github.io/sql-novice-survey)). In Galaxy's version of GEMINI this is done using **GEMINI_query** tool. Within this tool SQL commands are typed directly into the **The query to be issued to the database** text box. Let's begin getting information from some of the tables we discovered with **GEMINI_db_info** tool above.
+GEMINI database is queried using the versatile SQL language (more on SQL [here](https://swcarpentry.github.io/sql-novice-survey)). In Galaxy's version of GEMINI this is done using **GEMINI_query** tool. Within this tool SQL commands are typed directly into the **The query to be issued to the database** text box. Let's begin getting information from some of the tables we discovered with **GEMINI_db_info** tool above.
 
 > ### :bulb: Tip: Gemini tutorials
 >
-> The examples below are taken from "[Intro to Gemini](https://s3.amazonaws.com/gemini-tutorials/Intro-To-Gemini.pdf)" tutorial. For extensive documentation see "[Querying GEMINI](http://gemini.readthedocs.org/en/latest/content/querying.html)".
+> The examples below are taken from "[Intro to Gemini](https://s3.amazonaws.com/gemini-tutorials/Intro-To-Gemini.pdf)" tutorial. For extensive documentation see "[Querying GEMINI](https://gemini.readthedocs.org/en/latest/content/querying.html)".
 {: .tip}
 
 > ### :pencil2: Hands-on: Selecting "novel" variants that are not annotated in dbSNP database
@@ -258,7 +258,7 @@ GEMINI database is queried using the versatile SQL language (more on SQL [here](
 
 > ### :pencil2: Find variants in POLRMT gene
 >
-> The query `SELECT * FROM variants WHERE filter is NULL and gene = 'POLRMT'` will produce [output](https://usegalaxy.org/datasets/bbd44e69cb8906b5a0bb5b2cc0695697/display/?preview=True) with very large number of columns. To restrict the number of columns to a manageable set let's use this command: `SELECT rs_ids, aaf_esp_ea, impact, clinvar_disease_name, clinvar_sig FROM variants WHERE filter is NULL and gene = 'POLRMT'` (column definitions can be found [here](http://gemini.readthedocs.org/en/latest/content/database_schema.html))
+> The query `SELECT * FROM variants WHERE filter is NULL and gene = 'POLRMT'` will produce [output](https://usegalaxy.org/datasets/bbd44e69cb8906b5a0bb5b2cc0695697/display/?preview=True) with very large number of columns. To restrict the number of columns to a manageable set let's use this command: `SELECT rs_ids, aaf_esp_ea, impact, clinvar_disease_name, clinvar_sig FROM variants WHERE filter is NULL and gene = 'POLRMT'` (column definitions can be found [here](https://gemini.readthedocs.org/en/latest/content/database_schema.html))
 
 [Output](https://usegalaxy.org/datasets/bbd44e69cb8906b540d65297cd1d26bb/display/?preview=True) shows variants found within the *POLRMT* gene.
 
@@ -301,7 +301,7 @@ Wildcards simply writing SQL expressions when searching across multiple terms. T
 >
 >    <details>
 >    <summary>Click to view answer</summary>
->    Type `SELECT chrom, start, end, ref, alt, gene, impact, (gts).(*) FROM variants` into <b>The query to be issued to the database</b> and `(gt_types).(*).(==HET).(all)` into <b>Restrictions to apply to genotype values</b>. Here we use wildcards for the query (`(gts.*)` = get genotypes for <b>all</b> samples) and genotype filtering (`(gt_types).(*).(==HET).(all)`, the <a href="http://gemini.readthedocs.org/en/latest/content/querying.html#the-all-operator">all operator</a> implies that want results for <b>all</b> afftected individuals). It will generate <a href="https://usegalaxy.org/datasets/bbd44e69cb8906b5819e1404b5e127d1/display/?preview=True">this output</a>.
+>    Type `SELECT chrom, start, end, ref, alt, gene, impact, (gts).(*) FROM variants` into <b>The query to be issued to the database</b> and `(gt_types).(*).(==HET).(all)` into <b>Restrictions to apply to genotype values</b>. Here we use wildcards for the query (`(gts.*)` = get genotypes for <b>all</b> samples) and genotype filtering (`(gt_types).(*).(==HET).(all)`, the <a href="https://gemini.readthedocs.org/en/latest/content/querying.html#the-all-operator">all operator</a> implies that want results for <b>all</b> afftected individuals). It will generate <a href="https://usegalaxy.org/datasets/bbd44e69cb8906b5819e1404b5e127d1/display/?preview=True">this output</a>.
 >    </details>
 {: .question}
 

@@ -15,11 +15,11 @@ tutorial_name: methylation-seq
 > 5. [Metilene](#metilene)
 >
 >
-> This tutorial is based on [I-Hsuan Lin et al.: 'Hierarchical Clustering of Breast Cancer Methylomes Revealed Differentially Methylated and Expressed Breast Cancer Genes'](http://dx.doi.org/10.1371/journal.pone.0118453).
+> This tutorial is based on [I-Hsuan Lin et al.: 'Hierarchical Clustering of Breast Cancer Methylomes Revealed Differentially Methylated and Expressed Breast Cancer Genes'](https://dx.doi.org/10.1371/journal.pone.0118453).
 >
 > The data we use in this tutorial is available at [Zenodo](https://zenodo.org/record/557099).
 >
-> {: .agenda}
+{: .agenda}
 
 
 # Load data and quality control
@@ -213,7 +213,7 @@ tutorial_name: methylation-seq
 > 2. **Galaxy** :wrench:: Search for the tool ```Metilene```
 > 3. **Metilene** :wrench:: Choose for the first option ```Input group 1``` the imported files starting with ``NB`` and for ```Input group 2``` the imported files ```Input group 2```.
 > 4. **Metilene** :wrench:: Select for the option ```BED file containing regions of interest``` the imported BAM file CpGIslands.bed.
-> 5. More information about metilene can be found here: http://www.bioinf.uni-leipzig.de/Software/metilene/
+> 5. More information about metilene can be found here: https://www.bioinf.uni-leipzig.de/Software/metilene/
 >
 >    > ### :question: Questions
 >    >

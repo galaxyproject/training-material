@@ -10,18 +10,18 @@ tutorial_name: igv-introduction
 
 **MPI-IE & University of Freiburg**
 
-To start IGV, go to the IGV downloads page: http://www.broadinstitute.org/software/igv/download.
+To start IGV, go to the IGV downloads page: https://www.broadinstitute.org/software/igv/download.
 
 ## User Interface
 
 ## Main Window
 
-![MainWindowIGV](http://www.broadinstitute.org/software/igv/sites/cancerinformatics.org.igv/files/images/igv_desktop_callouts.jpg)
+![MainWindowIGV](https://www.broadinstitute.org/software/igv/sites/cancerinformatics.org.igv/files/images/igv_desktop_callouts.jpg)
 
 
 **Tool bar** ![callout_1.jpg](../../images/callout_1.jpg)
 
-- The [tool bar](http://www.broadinstitute.org/software/igv/?q=ToolBar) provides access to commonly used functions. The [menu bar](http://www.broadinstitute.org/software/igv/?q=MenuBar) and [pop-up menus](http://www.broadinstitute.org/software/igv/?q=PopupMenus) (not shown) provide access to all other functions.
+- The [tool bar](https://www.broadinstitute.org/software/igv/?q=ToolBar) provides access to commonly used functions. The [menu bar](http://www.broadinstitute.org/software/igv/?q=MenuBar) and [pop-up menus](http://www.broadinstitute.org/software/igv/?q=PopupMenus) (not shown) provide access to all other functions.
 
 **Chromosome** ![callout_2.jpg](../../images/callout_2.jpg)
 
@@ -37,7 +37,7 @@ To start IGV, go to the IGV downloads page: http://www.broadinstitute.org/softwa
 
 **Features** ![callout_5.jpg](../../images/callout_5.jpg)
 
-- IGV also displays features, such as genes, in tracks. By default, IGV displays data in one panel and features in another, as shown here. Drag-and-drop a track name to move a track from one panel to another. Combine data and feature panels by selecting that option on the General tab of the [Preferences window](http://www.broadinstitute.org/software/igv/?q=Preferences).
+- IGV also displays features, such as genes, in tracks. By default, IGV displays data in one panel and features in another, as shown here. Drag-and-drop a track name to move a track from one panel to another. Combine data and feature panels by selecting that option on the General tab of the [Preferences window](https://www.broadinstitute.org/software/igv/?q=Preferences).
 
 **Track names** ![callout_6.jpg](../../images/callout_6.jpg)
 
@@ -126,15 +126,15 @@ To start IGV, go to the IGV downloads page: http://www.broadinstitute.org/softwa
 
 **Tools**
 
-- Run Batch Script - Executes a series of sequential tasks.  Users can load at .txt file that contains a list of commands, one per line, that will be run by IGV.  The accepted commands are the same as the [IGV Port Commands](http://www.broadinstitute.org/software/igv/batch).
+- Run Batch Script - Executes a series of sequential tasks.  Users can load at .txt file that contains a list of commands, one per line, that will be run by IGV.  The accepted commands are the same as the [IGV Port Commands](https://www.broadinstitute.org/software/igv/batch).
 
 - Run igvtools - Launches the igvtools interface window.
 
 - Find Motif - Search for a particular nucleotide sequence in the reference genome.
 
-- Gitools Heatmaps - Data and results are represented as browsable heatmaps. Data can be exported from IGV in gitools format, or loaded directly into a running gitools session. See http://www.gitools.org for details.
+- Gitools Heatmaps - Data and results are represented as browsable heatmaps. Data can be exported from IGV in gitools format, or loaded directly into a running gitools session. See https://www.gitools.org for details.
 
-- BEDTools - A fast, flexible suite of tools used to compare sets of genomic features. IGV uses BEDTools to compare features in loaded tracks, and view the results as a new track. See more details under [Third Party Tools Integration](http://www.broadinstitute.org/software/igv/third_party_tools#_blank).
+- BEDTools - A fast, flexible suite of tools used to compare sets of genomic features. IGV uses BEDTools to compare features in loaded tracks, and view the results as a new track. See more details under [Third Party Tools Integration](https://www.broadinstitute.org/software/igv/third_party_tools#_blank).
 
 **GenomeSpace**
 
@@ -148,15 +148,15 @@ To start IGV, go to the IGV downloads page: http://www.broadinstitute.org/softwa
 
 - Logout - Log out of GenomeSpace
 
-- Register - Register a new account at [GenomeSpace](http://www.genomespace.org/)
+- Register - Register a new account at [GenomeSpace](https://www.genomespace.org/)
 
 **Help**
 
-- User Guide... - Displays the IGV [User Guide](http://www.broadinstitute.org/software/igv/UserGuide).
+- User Guide... - Displays the IGV [User Guide](https://www.broadinstitute.org/software/igv/UserGuide).
 
 
 
-- Help Forum... - In your default web browser, opens the home page for the [igv-help forum](http://groups.google.com/forum/#!forum/igv-help).
+- Help Forum... - In your default web browser, opens the home page for the [igv-help forum](https://groups.google.com/forum/#!forum/igv-help).
 
 
 
@@ -218,7 +218,7 @@ To select tracks and display the pop-up menu, do one of the following:
 
 - Control-click track names (Mac: Command-click) to select the tracks, then right-click one of the selections to display the pop-up menu.
 
-Commands in the track pop-up menu change the display options for the selected tracks. Most changes made via the pop-up menu are lost when you exit IGV unless you [save the session](http://www.broadinstitute.org/software/igv/Sessions). In a few cases, changing the pop-up menu also changes an option in the Preferences window; these changes are persistent.
+Commands in the track pop-up menu change the display options for the selected tracks. Most changes made via the pop-up menu are lost when you exit IGV unless you [save the session](https://www.broadinstitute.org/software/igv/Sessions). In a few cases, changing the pop-up menu also changes an option in the Preferences window; these changes are persistent.
 
 ## Using IGV: Examples
 
@@ -307,4 +307,4 @@ Commands in the track pop-up menu change the display options for the selected tr
 
 ## FOR IGV HELP AND DOCUMENTATION
 
-**GOTO: http://www.broadinstitute.org/igv/ or Click on Help in IGV menu.**
+**GOTO: https://www.broadinstitute.org/igv/ or Click on Help in IGV menu.**

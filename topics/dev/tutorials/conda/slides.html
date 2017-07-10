@@ -7,7 +7,7 @@ logo: "GTN"
 
 ## Planemo
 
-These slides mirror the section on "Dependencies and Conda" in the [Planemo Documentation](http://planemo.readthedocs.io/en/latest/writing_advanced.html#dependencies-and-conda).
+These slides mirror the section on "Dependencies and Conda" in the [Planemo Documentation](https://planemo.readthedocs.io/en/latest/writing_advanced.html#dependencies-and-conda).
 
 ---
 
@@ -34,7 +34,7 @@ $ planemo tool_init --force \
                     --help_from_command 'seqtk seq'
 ```
 
-Notice the `--requirement seqtk@1.2`. 
+Notice the `--requirement seqtk@1.2`.
 
 ---
 
@@ -58,7 +58,7 @@ The `--requirement seqtk@1.2` gets translated into the follow tool XML:
 
 ???
 
-- Notice that multiple tools may be mapped to the same requirements and 
+- Notice that multiple tools may be mapped to the same requirements and
   any tools may use multiple Conda recipes.
 - There are few different ways to populate Applications and Libraries
   on the right - we will talk about Conda which is what we consider the
@@ -181,7 +181,7 @@ class: enlarge150
 ## Conda and Galaxy
 
 Galaxy now automatically installs Conda when first launched and will use [Bioconda](https://bioconda.github.io/) and other channels
-for package resolution. 
+for package resolution.
 
 ---
 
@@ -301,7 +301,7 @@ $
 
 ## Using the Tool Environment
 
-Now that we have verified the Conda environment setup with `conda_install` works properly on the 
+Now that we have verified the Conda environment setup with `conda_install` works properly on the
 command-line, we can use our tool!
 
 `planemo test` and `planemo serve` will use this environment by default now for this tool.
@@ -466,7 +466,7 @@ pear.xml              test-data
 
 If searching best practice channels fails, you may need to build a Conda recipe.
 
-.footnote[[Documentation about how to write conda recipes from scratch](http://conda.pydata.org/docs/build_tutorials/pkgs2.html) <br/> [Bioconda guidelines](https://bioconda.github.io/guidelines.html)]
+.footnote[[Documentation about how to write conda recipes from scratch](https://conda.pydata.org/docs/build_tutorials/pkgs2.html) <br/> [Bioconda guidelines](https://bioconda.github.io/guidelines.html)]
 
 ---
 
@@ -492,7 +492,7 @@ package:
   name: bwa
   version: "0.7.15"
 about:
-  home: http://bio-bwa.sourceforge.net
+  home: https://bio-bwa.sourceforge.net
   license: MIT
   summary: The BWA read mapper.
 build:
@@ -620,7 +620,7 @@ cp *.py $PREFIX/bin
 
 These generate pre-filled recipes <small>(not guaranteed to work out of the box)</small> for specific programming environments.
 
-.footnote[[Building conda packages with conda skeleton](http://conda.pydata.org/docs/build_tutorials/pkgs.html)]
+.footnote[[Building conda packages with conda skeleton](https://conda.pydata.org/docs/build_tutorials/pkgs.html)]
 
 ---
 
@@ -660,7 +660,7 @@ $ $HOME/miniconda3/bin/conda build .
 1. Fork [Bioconda](https://github.com/bioconda/bioconda-recipes/fork).
 1. Clone your fork:
 
-   `git clone https://github.com/myuser/bioconda-recipes`
+   `git clone https://github.com/<myuser>/bioconda-recipes`
 1. Create a new branch `package`
 
    `git checkout -b package`
@@ -755,8 +755,8 @@ package:
 
 source:
     fn: {{ name }}-{{ version }}.zip
-    url: http://coolsoftware.com/{{ name }}/{{ version }}/{{ name }}-{{ version }}.zip
-  
+    url: https://coolsoftware.com/{{ name }}/{{ version }}/{{ name }}-{{ version }}.zip
+
 {% endraw %}
 ```
 
@@ -833,11 +833,11 @@ conda skeleton pypi <package_name>
 ```sh
 #!/bin/bash
 # Remove gcc statements that do not work on older compilers for CentOS5
-# support, from https://github.com/chapmanb/bcbio-conda/blob/master/pysam/build.sh
+# support
 sed -i'' -e 's/"-Wno-error=declaration-after-statement",//g' setup.py
 sed -i'' -e 's/"-Wno-error=declaration-after-statement"//g' setup.py
 # linking htslib, see:
-# http://pysam.readthedocs.org/en/latest/installation.html#external
+# https://pysam.readthedocs.org/en/latest/installation.html#external
 # https://github.com/pysam-developers/pysam/blob/v0.9.0/setup.py#L79
 export CFLAGS="-I$PREFIX/include"
 export CPPFLAGS="-I$PREFIX/include"
@@ -1006,7 +1006,7 @@ class: reduce70
 
 source:
     fn: {{ name }}-{{ version }}.zip
-    url: http://genesis.ugent.be/maven2/eu/isas/peptideshaker/{{ name }}/{{ version }}/{{ name }}-{{ version }}.zip
+    url: https://genesis.ugent.be/maven2/eu/isas/peptideshaker/{{ name }}/{{ version }}/{{ name }}-{{ version }}.zip
     md5: 14a48413e28a25614f5fda2b381d7197
 
 requirements:
@@ -1075,7 +1075,7 @@ test:
     - Module::Build::PPMMaker
 
 about:
-  home: http://metacpan.org/pod/Module-Build
+  home: https://metacpan.org/pod/Module::Build
   license: perl_5
   summary: 'Build and install Perl modules
 ```

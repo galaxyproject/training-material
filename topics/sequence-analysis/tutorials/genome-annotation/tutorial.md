@@ -106,7 +106,7 @@ At first you need to identify those structures of the genome which code for prot
 
 > ### :bulb: Tip:
 >
-> read more about **Aragorn** [here](http://nar.oxfordjournals.org/content/32/1/11.full.pdf+html).
+> read more about **Aragorn** [here](https://nar.oxfordjournals.org/content/32/1/11.full.pdf+html).
 {: .tip}  
 
 # Functional Annotation
@@ -189,7 +189,7 @@ This file will be the input for more detailed analysis:
 
 > ### :bulb: Tip: Further Reading about BLAST Tools in Galaxy
 >
-> Cock et al. (2015): [NCBI BLAST+ integrated into Galaxy](http://biorxiv.org/content/early/2015/05/04/014043.full-text.pdf+html)
+> Cock et al. (2015): [NCBI BLAST+ integrated into Galaxy](https://biorxiv.org/content/early/2015/05/04/014043.full-text.pdf+html)
 >
 > Cock et al. (2013): [Galaxy tools and workflows for sequence analysis with applications in molecular plant pathology](https://peerj.com/articles/167/)
 {: .tip}
@@ -207,7 +207,7 @@ This file will be the input for more detailed analysis:
 
 > ### :bulb: Tip:
 >
-> [Buchfink et al. (2015): Fast and sensitive protein alignment using Diamond.](http://www.nature.com/nmeth/journal/v12/n1/abs/nmeth.3176.html)
+> [Buchfink et al. (2015): Fast and sensitive protein alignment using Diamond.](https://www.nature.com/nmeth/journal/v12/n1/abs/nmeth.3176.html)
 {: .tip}
 
 * **Kraken**: Kraken BLAST is a highly scalable, extremely fast, commercial, parallelized implementation of the NCBI BLAST application.

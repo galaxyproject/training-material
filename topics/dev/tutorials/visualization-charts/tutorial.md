@@ -6,12 +6,12 @@ tutorial_name: visualization-charts
 
 ## Introduction
 
-In this tutorial we are going to demonstrate how to add a 3rd-party visualization to *Charts* and what the benefits are. The plugin we select for this purpose is the [*PV-Javascript Protein Viewer*](https://biasmv.github.io/pv/). It is an open source, protein structure viewer for `PDB`-files. There are many other popular protein structure viewers available for the visualization of `PDB`-files such as e.g. [NGL](http://arose.github.io/ngl/) (also available in *Charts*) and [JSMol](https://chemapps.stolaf.edu/jmol/jsmol/jsmol.htm).
+In this tutorial we are going to demonstrate how to add a 3rd-party visualization to *Charts* and what the benefits are. The plugin we select for this purpose is the [*PV-Javascript Protein Viewer*](https://biasmv.github.io/pv/). It is an open source, protein structure viewer for `PDB`-files. There are many other popular protein structure viewers available for the visualization of `PDB`-files such as e.g. [NGL](https://arose.github.io/ngl/) (also available in *Charts*) and [JSMol](https://chemapps.stolaf.edu/jmol/jsmol/jsmol.htm).
 
 > ### :book: Background: What is the PDB (Protein Data Bank) file format?
 >
-> The `PDB`-file format contains atomic coordinates of biomolecules derived through a range of experimental and computational methods. Most commonly the file contains a spatial cyrstallographic snapshot of a protein. There are 100s of thousands of protein structures publicly available at the Protein Databank (http://www.rcsb.org). Proteins are usually labeled by a four-letter code.
-> Here is an example of a `PDB`-file for a hydrolase bond to its inhibitor (PDB: [1ACB](http://www.rcsb.org/pdb/explore/explore.do?structureId=1acb)):
+> The `PDB`-file format contains atomic coordinates of biomolecules derived through a range of experimental and computational methods. Most commonly the file contains a spatial cyrstallographic snapshot of a protein. There are 100s of thousands of protein structures publicly available at the Protein Databank (https://www.rcsb.org). Proteins are usually labeled by a four-letter code.
+> Here is an example of a `PDB`-file for a hydrolase bond to its inhibitor (PDB: [1ACB](https://www.rcsb.org/pdb/explore/explore.do?structureId=1acb)):
 >
 > ```bash
 > HEADER    HYDROLASE/HYDROLASE INHIBITOR           08-NOV-91   1ACB              
@@ -48,11 +48,11 @@ In this tutorial we are going to demonstrate how to add a 3rd-party visualizatio
 >
 > More resources on this file format:
 >
->   - [https://en.wikipedia.org/wiki/Protein_Data_Bank_(file_format)](https://en.wikipedia.org/wiki/Protein_Data_Bank_(file_format))
->   - [http://www.wwpdb.org/documentation/file-format](http://www.wwpdb.org/documentation/file-format)
+>   - [https://en.wikipedia.org/wiki/Protein_Data_Bank_(file_format) ](https://en.wikipedia.org/wiki/Protein_Data_Bank_(file_format))
+>   - [https://www.wwpdb.org/documentation/file-format ](http://www.wwpdb.org/documentation/file-format)
 {: .tip}
 
-As mentioned above we will be focusing on the *PV-Javascript Protein Viewer* in this tutorial. Now that we have learned about the underlying file format, let us continue by visiting the viewers developer site at [https://biasmv.github.io/pv/](https://biasmv.github.io/pv/) to get familiar with the plugin.
+As mentioned above we will be focusing on the *PV-Javascript Protein Viewer* in this tutorial. Now that we have learned about the underlying file format, let us continue by visiting the viewers developer site at [https://biasmv.github.io/pv/ ](https://biasmv.github.io/pv/) to get familiar with the plugin.
 
 > ### :pencil2: Hands-on
 >
@@ -149,7 +149,7 @@ This configures the plugin's name and a description which will appear on the *Ch
 
 ### 1.4 Adding a wrapper
 
-Now we will add a wrapper to connect *Charts* with the *PV-Viewer* plugin. The wrapper consists of a [*Backbone*](http://backbonejs.org) module written in *JavaScript*:
+Now we will add a wrapper to connect *Charts* with the *PV-Viewer* plugin. The wrapper consists of a [*Backbone*](https://backbonejs.org) module written in *JavaScript*:
  The wrapper receives an `options` dictionary with the following <b>four</b> components:
  - *charts*: The model of the current visualization with attributes, settings etc.
  - *process*: A [jQuery.Deferred()](https://api.jquery.com/jquery.deferred/) object to allow asynchronous data requests within the wrapper
@@ -172,15 +172,15 @@ Now we will add a wrapper to connect *Charts* with the *PV-Viewer* plugin. The w
 >
 {: .hands_on}
 
-The above wrapper does not do much yet, except requesting the minified plugin code which we downloaded earlier. In order to execute a 3rd-party plugin we need to figure out how it works. This can be done by finding a working example or documentation. Fortunately the *PV-Viewer* comes with both. Let's take a look at the [documentation](http://pv.readthedocs.io/).
+The above wrapper does not do much yet, except requesting the minified plugin code which we downloaded earlier. In order to execute a 3rd-party plugin we need to figure out how it works. This can be done by finding a working example or documentation. Fortunately the *PV-Viewer* comes with both. Let's take a look at the [documentation](https://pv.readthedocs.io/).
 
 > ### :pencil2: Hands-on
 >
-> 1. Identify the parameter which is needed to initialize the plugin when calling [*pv.Viewer()*](http://pv.readthedocs.io/en/v1.8.1/viewer.html#pv.Viewer).
+> 1. Identify the parameter which is needed to initialize the plugin when calling [*pv.Viewer()*](https://pv.readthedocs.io/en/v1.8.1/viewer.html#pv.Viewer).
 >
 > 2. Which of the wrapper option components represents this parameter?
 >
-> 3. Can you identify which `mode` settings are valid to render the structure with [*pv.Viewer.renderAs()*](http://pv.readthedocs.io/en/v1.8.1/viewer.html#pv.Viewer.renderAs)?
+> 3. Can you identify which `mode` settings are valid to render the structure with [*pv.Viewer.renderAs()*](https://pv.readthedocs.io/en/v1.8.1/viewer.html#pv.Viewer.renderAs)?
 >
 {: .hands_on}
 
@@ -245,7 +245,7 @@ In this section we will select a `PDB`-file from the Protein Databank and visual
 
 > ### :pencil2: Hands-on
 >
-> 1. Visit [http://www.rcsb.org](http://www.rcsb.org) and select a protein structure e.g. [1ACB](http://www.rcsb.org/pdb/explore/explore.do?structureId=1acb)
+> 1. Visit [https://www.rcsb.org ](http://www.rcsb.org) and select a protein structure e.g. [1ACB](http://www.rcsb.org/pdb/explore/explore.do?structureId=1acb)
 >
 > 2. Copy the link to the raw `PDB`-file e.g.
 >

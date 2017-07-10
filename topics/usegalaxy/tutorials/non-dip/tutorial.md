@@ -9,8 +9,8 @@ tutorial_name: non-dip
 
 The majority of life on Earth is non-diploid and represented by prokaryotes, viruses and their derivatives such as our own mitochondria or plant's chloroplasts. In non-diploid systems allele frequencies can range anywhere between 0 and 100% and there could be multiple (not just two) alleles per locus. The main challenge associated with non-diploid variant calling is the difficulty in distinguishing between sequencing noise (abundant in all NGS platforms) and true low frequency variants. Some of the early attempts to do this well have been accomplished on human mitochondrial DNA although the same approaches will work equally good on viral and bacterial genomes:
 
-* 2014 - [Maternal age effect and severe germ-line bottleneck in the inheritance of human mitochondrial DNA](http://www.pnas.org/content/111/43/15474.abstract)
-* 2015 - [Extensive tissue-related and allele-related mtDNA heteroplasmy suggests positive selection for somatic mutations](http://www.pnas.org/content/112/8/2491.abstract).
+* 2014 - [Maternal age effect and severe germ-line bottleneck in the inheritance of human mitochondrial DNA](https://www.pnas.org/content/111/43/15474.abstract)
+* 2015 - [Extensive tissue-related and allele-related mtDNA heteroplasmy suggests positive selection for somatic mutations](https://www.pnas.org/content/112/8/2491.abstract).
 
 As an example of non-diploid system we will be using human mitochondrial genome as an example. However, this approach will also work for most bacterial and viral genomes as well.
 
@@ -21,22 +21,22 @@ There are two ways one can call variants:
 
 |                          |
 |--------------------------|
-| ![](../images/ref_vs_assembly.jpg) |
+| ![](../../images/ref_vs_assembly.jpg) |
 | <small>This figure from a manuscript by [Olson:2015](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4493402/) contrasts the two approaches.</small> |
 
 In this tutorials we will take the *first* path is which we map reads against an existing assembly. Later in the course (after we learn about assembly approaches) we will try the second approach as well.
 
-The goal of this example is to detect heteroplasmies (variants within mitochondrial DNA). Mitochondria is transmitted maternally and heteroplasmy frequencies may change dramatically and unpredictably during the transmission, due to a germ-line bottleneck [Cree:2008](http://www.nature.com/ng/journal/v40/n2/abs/ng.2007.63.html). As we mentioned above the procedure for finding variants in bacterial or viral genomes will be essentially the same.
+The goal of this example is to detect heteroplasmies (variants within mitochondrial DNA). Mitochondria is transmitted maternally and heteroplasmy frequencies may change dramatically and unpredictably during the transmission, due to a germ-line bottleneck [Cree:2008](https://www.nature.com/ng/journal/v40/n2/abs/ng.2007.63.html). As we mentioned above the procedure for finding variants in bacterial or viral genomes will be essentially the same.
 
 [A Galaxy Library](https://usegalaxy.org/library/list#folders/Fe4842bd0c37b03a7) contains datasets representing a child and a mother. These datasets are obtained by paired-end Illumina sequencing of human genomic DNA enriched for mitochondria. The enrichment was performed using long-range PCR with two primer pairs that amplify the entire mitochondrial genome. This means that these samples still contain a lot of DNA from the nuclear genome, which, in this case, is a contaminant.
 
 # Importing example datasets
 
-For this tutorial we have prepared a subset of data previously [published](http://www.pnas.org/content/111/43/15474.abstract) by our group. Let's import these data into Galaxy.
+For this tutorial we have prepared a subset of data previously [published](https://www.pnas.org/content/111/43/15474.abstract) by our group. Let's import these data into Galaxy.
 
 > ### Data upload from a Galaxy Library
 >
-> ![](../images/mt_lib.png)
+> ![](../../images/mt_lib.png)
 >
 >  * Go to this [this Galaxy library](https://usegalaxy.org/library/list#folders/Fe4842bd0c37b03a7)
 >  * You will see screen like the one shown above
@@ -46,7 +46,7 @@ For this tutorial we have prepared a subset of data previously [published](http:
 >  * click **Import**
 >  * A green message will appear once the import is done. Click on it and will see the history you have just created. It will be populated with the four datasets as shown below:
 >
-> ![](../images/mt_imported_data.png)
+> ![](../../images/mt_imported_data.png)
 >
 {: .hands_on}
 
@@ -57,13 +57,13 @@ Before proceeding with the analysis, we need to find out how good the data actua
 > ### Quality Control of the data
 >
 >
-> ![](../images/mt_qc.png)
+> ![](../../images/mt_qc.png)
 >
->QC'ing reads using [FastQC](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/). Note that we selected all four datasets at once by pressing the middle button ![](../images/mt_middle_button.png) adjacent to the **Short read data from your current history** widget. Once `FastQC` job runs, you will be able to look at the HTML reports generated by this tool.
+>QC'ing reads using [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/). Note that we selected all four datasets at once by pressing the middle button ![](../../images/mt_middle_button.png) adjacent to the **Short read data from your current history** widget. Once `FastQC` job runs, you will be able to look at the HTML reports generated by this tool.
 >
 >The data have generally high quality in this example:
 >
->![](../images/mt_qc_plot.png)
+>![](../../images/mt_qc_plot.png)
 >
 >FastQC plot for one of the mitochondrial datasets shows that qualities are acceptable for 250 bp reads (mostly in the green, which is at or above [phred score](https://en.wikipedia.org/wiki/Phred_quality_score) of 30).
 {: .hands_on}
@@ -75,12 +75,12 @@ Our reads are long (250 bp) and as a result we will be using [bwa mem](https://a
 
 > ### Mapping with `bwa mem`
 >
->![](../images/mt_bwa_mem.png)
+>![](../../images/mt_bwa_mem.png)
 >
 >Running `bwa mem` on our datasets. Look **carefully** at parameter settings:
 >
 > * We select `hg38` version of the human genome as the reference
-> * By using the middle button again ![](../images/mt_middle_button.png) we select datasets 1 and 3 as **Select the first set of reads** and datasets 2 and 4 as **Select the second set of reads**. Galaxy will automatically launch two bwa-mem jobs using datasets 1,2 and 3,4 generating two resulting BAM files.
+> * By using the middle button again ![](../../images/mt_middle_button.png) we select datasets 1 and 3 as **Select the first set of reads** and datasets 2 and 4 as **Select the second set of reads**. Galaxy will automatically launch two bwa-mem jobs using datasets 1,2 and 3,4 generating two resulting BAM files.
 > * By setting **Set read groups information** to `Set read groups (SAM/BAM specifications)` and clicking **Auto-assign** we will ensure that the reads in the resulting BAM dataset are properly set.
 {: .hands_on}
 
@@ -92,14 +92,14 @@ We can BAM dataset using **NGS: Picard** &#8594; **MergeSAMFiles** tool:
 
 > ### Merging multiple datasets into one
 >
->![](../images/mt_bam_merging.png)
+>![](../../images/mt_bam_merging.png)
 >
 >Merging two BAM datasets into one. Note that two inputs are highlighted.
 {: .hands_on}
 
 ## Removing duplicates
 
-Preparation of sequencing libraries (at least at the time of writing) for technologies such as Illumina (used in this example) involves PCR amplification. It is required to generate sufficient number of sequencing templates so that a reliable detection can be performed by base callers. Yet PCR has it's biases, which are especially profound in cases of multitemplate PCR used for construction of sequencing libraries (Kanagawa et al. [2003](http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Abstract&list_uids=16233530)).
+Preparation of sequencing libraries (at least at the time of writing) for technologies such as Illumina (used in this example) involves PCR amplification. It is required to generate sufficient number of sequencing templates so that a reliable detection can be performed by base callers. Yet PCR has it's biases, which are especially profound in cases of multitemplate PCR used for construction of sequencing libraries (Kanagawa et al. [2003](https://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Abstract&list_uids=16233530)).
 
 Duplicates can be identified based on their outer alignment coordinates or using sequence-based clustering. One of the common ways for identification of duplicate reads is the `MarkDuplicates` utility from [Picard](https://broadinstitute.github.io/picard/command-line-overview.html) package. It is designed to identify both PCR and optical duplicates (the following is an excerpt from Picard documentation):
 
@@ -109,7 +109,7 @@ Let's use **NGS: Picard** &#8594; **MarkDuplicates** tool:
 
 > ### De-duplicating mapped data
 >
->![](../images/mt_dedup.png)
+>![](../../images/mt_dedup.png)
 >
 >De-duplicating the merged BAM dataset
 {: .hands_on}
@@ -137,7 +137,7 @@ In other words the two datasets had ~6% and ~9% duplicates, respectively.
 
 # Left-aligning indels
 
-Left aligning of indels (a variant of re-aligning) is extremely important for obtaining accurate variant calls. This concept, while not difficult, requires some explanation. For illustrating how left-aligning works we expanded on an example provided by [Tan:2015](http://bioinformatics.oxfordjournals.org/content/31/13/2202.abstract). Suppose you have a reference sequence and a sequencing read:
+Left aligning of indels (a variant of re-aligning) is extremely important for obtaining accurate variant calls. This concept, while not difficult, requires some explanation. For illustrating how left-aligning works we expanded on an example provided by [Tan:2015](https://academic.oup.com/bioinformatics/article/31/13/2202/196142/Unified-representation-of-genetic-variants). Suppose you have a reference sequence and a sequencing read:
 
 
 ```
@@ -160,13 +160,13 @@ GGGCACACACAGGG            Ref: GCA
 GGG--CACACAGGG            Alt: G
 ```
 
-The last of these is *left-aligned*. In this case gaps (dashes) as moved as far left as possible (for a formal definition of left-alignment and variant normalization see [Tan:2015](http://bioinformatics.oxfordjournals.org/content/31/13/2202.abstract)).
+The last of these is *left-aligned*. In this case gaps (dashes) as moved as far left as possible (for a formal definition of left-alignment and variant normalization see [Tan:2015](https://bioinformatics.oxfordjournals.org/content/31/13/2202.abstract)).
 
 Let's perform left alignment using **NGS: Variant Analysis** &#8594; **BamLeftAlign**:
 
 > ### Left-aligning indels
 >
->![](../images/mt_left_align.png)
+>![](../../images/mt_left_align.png)
 >
 >Left-aligning a de-duplicated BAM dataset
 {: .hands_on}
@@ -177,7 +177,7 @@ Remember that we are trying to call variants in mitochondrial genome. Let focus 
 
 > ### Filtering BAM data
 >
->![](../images/mt_filtering.png)
+>![](../../images/mt_filtering.png)
 >
 >Filtering reads. There are several important point to note here:
 >
@@ -193,19 +193,19 @@ FreeBayes is widely used for calling variants in diploid systems. However, it ca
 
 > ### Running `FreeBayes`
 >
->![](../images/mt_freebayes_genome.png)
+>![](../../images/mt_freebayes_genome.png)
 >
 >Set genome to `hg38` (the latest version)
 >
->![](../images/mt_freebayes_regions.png)
+>![](../../images/mt_freebayes_regions.png)
 >
 >Set regions to `chrM` from `1` to `16000`. This will simply save us time since we are only interested in mitochondrial variants anyway
 >
->![](../images/mt_freebayes_alloptions.png)
+>![](../../images/mt_freebayes_alloptions.png)
 >
 >Choose `Complete list of all samples` from **Choose parameter selection level** drop down.
 >
->![](../images/mt_freebayes_popmodel.png)
+>![](../../images/mt_freebayes_popmodel.png)
 >
 >This is one of the most important parameter choices one needs to make when calling variants in non-diploid systems. Here set **Set population model** to `Yes` and then:
 >
@@ -213,7 +213,7 @@ FreeBayes is widely used for calling variants in diploid systems. However, it ca
 >* Set **Assume that samples result from pooled sequencing** to `Yes`
 >* Set **Output all alleles which pass input filters, regardless of genotyping outcome or model** to `Yes`
 >
->![](../images/mt_freebayes_allelic_scope.png)
+>![](../../images/mt_freebayes_allelic_scope.png)
 >
 >We will also set **Allelic scope** to `Yes` and restrict variant types to single nucleotide polymorphisms only by:
 >
@@ -222,7 +222,7 @@ FreeBayes is widely used for calling variants in diploid systems. However, it ca
 >
 >Mitochondria has a number of low complexity regions (mononucleotide repeats). Setting these parameters as described above will decrease noise from these regions.
 >
->![](../images/mt_freebayes_inputfilters.png)
+>![](../../images/mt_freebayes_inputfilters.png)
 >
 >Finally, let's set **Input filters** to `Yes` and set:
 >
@@ -330,8 +330,8 @@ Even though we selected somewhat stringent input parameters (restricting base qu
 
 |                            |
 |----------------------------|
-|![](../images/mt_biases.png)|
-|<small>Here you can see that in an ideal case (indicated with a green star) a variant is evenly represent by different areas of sequencing reads (cycle and placement biases) and is balanced across the two strands (strand bias). Allele imbalance is not applicable in our case as it reflects significant deviation from the diploid (50/50) expectation (see [here](../images/freebayes.pdf) for more details).</small>|
+|![](../../images/mt_biases.png)|
+|<small>Here you can see that in an ideal case (indicated with a green star) a variant is evenly represent by different areas of sequencing reads (cycle and placement biases) and is balanced across the two strands (strand bias). Allele imbalance is not applicable in our case as it reflects significant deviation from the diploid (50/50) expectation (see [here](../../images/freebayes.pdf) for more details).</small>|
 
 A robust tool set for processing VCF data is provided by [vcflib](https://github.com/vcflib/vcflib) developed by Erik Garrison, the author of FreeBayes. One way to filter VCF is using `INFO` fields of the VCF dataset. If you look at the VCF dataset shown above you will see all comment lines beginning with `##INFO`.  These are `INFO` fields. Each VCF record contains a list of `INFO` tags describing a wide range of properties for each VCF record. You will see that FreeBayes and NVC differ significantly in the number and types of `INFO` fields each of these caller generates. This why the two require different filtering strategies.
 
@@ -346,7 +346,7 @@ Among numerous types of data generated by FreeBayes let's consider the following
 To perform filtering we will use **NGS: VCF Manipulation** &#8594; **VCFfilter**):
 > ### Filtering VCF data
 >
->![](../images/mt_vcffilter.png)
+>![](../../images/mt_vcffilter.png)
 >
 >Filtering FreeBayes VCF for strand bias (`SPR` and `SAP`), placement bias (`EPP`), variant quality (`QUAL`), and depth of coverage (`DP`).
 {: .hands_on}
@@ -363,7 +363,7 @@ chrM	8557	.	G	C	2590.97	.	AB=0.267066;ABP=790.051;AC=2;AF=0.5;AN=4;AO=446;CIGAR=
 ```
 # Looking at the data
 
-For visalizaning VCFs Galaxy relies on the two external tools.  The first is called [VCF.IOBIO](http://vcf.iobio.io/) and is developed by [Gabor Marth's group](http://marthlab.org/) at the University of Utah. The second is called [IGV](http://software.broadinstitute.org/software/igv/) developed by Broad Institute.  
+For visalizaning VCFs Galaxy relies on the two external tools.  The first is called [VCF.IOBIO](https://vcf.iobio.io/) and is developed by [Gabor Marth's group](http://marthlab.org/) at the University of Utah. The second is called [IGV](http://software.broadinstitute.org/software/igv/) developed by Broad Institute.  
 
 ## VCF.IOBIO
 
@@ -371,16 +371,16 @@ VCF.IOBIO can be invoked by expanding a VCF dataset in Galaxy's history by click
 
 > ### Displaying data in VCF.IOBIO
 >
->![](../images/mt_vcf_dataset_collapsed.png)
+>![](../../images/mt_vcf_dataset_collapsed.png)
 >
 >Clicking on the dataset above will expand it as shown below:
 >
->![](../images/mt_vcf_dataset_expanded.png)
+>![](../../images/mt_vcf_dataset_expanded.png)
 >
 >At the bottom there is a link "display at vcf.iobio"
 >Clicking on this link will start indexing of VCF datasets, which is required to display them. After indexing VCF.IOBIO will open:
 >
->![](../images/mt_vcfiobio.png)
+>![](../../images/mt_vcfiobio.png)
 >
 >Of course there are not that many variants to look at in this example. Nevertheless there are helpful statistics such as Transition/Transversion (Ts/Tn) ratio.
 {: .hands_on}
@@ -391,7 +391,7 @@ Similarly to VCF.BIOIO expanding a history item representing a VCF dataset will 
 
 > ### Displaying data in IGV
 >
->![](../images/mt_vcf_dataset_expanded.png)
+>![](../../images/mt_vcf_dataset_expanded.png)
 >
 >At the bottom there is a link "display at IGV: local Human hg38"
 >The difference between "local" and "Human hg38" links is explained in the following video:
@@ -400,7 +400,7 @@ Similarly to VCF.BIOIO expanding a history item representing a VCF dataset will 
 >
 >Visualizing our FreeBayes dataset will produce this:
 >
->![](../images/mt_igv.png)
+>![](../../images/mt_igv.png)
 >
 >Here we focus on one particular variant at position 3,243 for reasons that will become apparent in the next section.
 {: .hands_on}
@@ -413,13 +413,13 @@ Using **NGS: VCF Manipulation** &#8594; **VCFtoTab-delimited** on the filtered V
 
 > ### From VCF to Tab-delimited data
 >
->![](../images/mt_vcfToTab.png)
+>![](../../images/mt_vcfToTab.png)
 >
 >Make sure **Report data per sample** is set to `Yes`
 >
 >This will produce a dataset with *very* many columns:
 >
->![](../images/mt_tab.png)
+>![](../../images/mt_tab.png)
 >
 >There are 53 columns in this dataset (not all are shown here).
 {: .hands_on}
@@ -437,7 +437,7 @@ To cut these columns out we will use **Text Manipulation** &#8594; **Cut**
 
 > ### Cutting columns from a file
 >
->![](../images/mt_cut.png)
+>![](../../images/mt_cut.png)
 >
 >Note that column names are pre-ceded with `c`
 >
@@ -486,14 +486,14 @@ Time to really do it yourself. Please, complete the following exercise:
 >
 >Suppose you obtained a virus from some source and you would like to see how it is different from its published reference sequence. You have sequenced the virus and obtained two Illumina files (these files are large, so don't open them. Rather copy their addresses (right click) and use them to upload into Galaxy as explained in *Hints* section below):
 >
->- [Forward reads](http://www.bx.psu.edu/~anton/share/ng_test_data/bmmb554/hw4/f.fq.gz)
->- [Reverse reads](http://www.bx.psu.edu/~anton/share/ng_test_data/bmmb554/hw4/r.fq.gz)
+>- [Forward reads](https://www.bx.psu.edu/~anton/share/ng_test_data/bmmb554/hw4/f.fq.gz)
+>- [Reverse reads](https://www.bx.psu.edu/~anton/share/ng_test_data/bmmb554/hw4/r.fq.gz)
 >
->Analyze these files using Galaxy as was explained in this lesson by mapping them against [this reference genome](http://www.bx.psu.edu/~anton/share/ng_test_data/bmmb554/hw4/phix.fa) (again right click to copy the address); see *Tips*).
+>Analyze these files using Galaxy as was explained in this lesson by mapping them against [this reference genome](https://www.bx.psu.edu/~anton/share/ng_test_data/bmmb554/hw4/phix.fa) (again right click to copy the address); see *Tips*).
 >
 >    > ### :bulb: Tips
 >    >
->    > - You need to upload reads and the reference genome into Galaxy (http://usegalaxy.org) as shown in [this video](https://vimeo.com/120973708)
+>    > - You need to upload reads and the reference genome into Galaxy (https://usegalaxy.org) as shown in [this video](https://vimeo.com/120973708)
 >    > - You will be mapping reads against an uploaded reference genome as shown in [this video](https://vimeo.com/123108417).
 >    {: .tip}
 {: .comment}
