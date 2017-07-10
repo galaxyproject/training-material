@@ -278,7 +278,7 @@ total # of seqs:    18178
 
 > ### :question: Questions
 >
-> 1. How many sequences has been aligned?
+> 1. How many sequences have been aligned?
 > 2. Between which positions most of the reads are aligned to this references?
 >
 >    <details>
