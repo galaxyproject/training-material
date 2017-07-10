@@ -496,7 +496,7 @@ As for amplicon data, we can extract taxonomic and community structure informati
 
 - Same approaches as for amplicon data with identification and classification of OTUs
 
-    Such approaches imply a first step of sequence sorting to extract only the 16S and 18S sequences on which the same tools as for amplicon data. However, rRNA sequences represent a low proportion (< 1%) of the shotgun sequences so such approache is not the most statistically supported
+    Such approaches imply a first step of sequence sorting to extract only the 16S and 18S sequences on which the same tools as for amplicon data. However, rRNA sequences represent a low proportion (< 1%) of the shotgun sequences so such an approach is not the most statistically supported
 
 - Assignation of taxonomy on the whole sequences using databases with marker genes
 
