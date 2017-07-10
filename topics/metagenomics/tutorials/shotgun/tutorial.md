@@ -43,7 +43,7 @@ The original data are available at EBI Metagenomics under run number [ERR1855251
 
 > ### :pencil2: Hands-on: Data upload
 >
-> 1. Import the FASTQ file pair from [Zenodo]() or from the data library ()
+> 1. Import the FASTQ file pair from [Zenodo]() or from the data library
 >
 >    > ### :bulb: Tip: Importing data via links
 >    >
@@ -73,70 +73,61 @@ For quality control, we use similar tools as described in [the Quality Control t
 
 > ### :pencil2: Hands-on: Quality control
 >
-> 1. **FastQC** :wrench:: Run FastQC on both FastQ files to control the quality of the reads
+> 1. **FastQC** :wrench:: on both FastQ files to control the quality of the reads
+> 2. **MulitQC** :wrench:: with
+>    - "Software name" to `FastQC`
+>    - "Result file" to the raw data generated with FastQC
 >
 >    > ### :question: Questions
 >    >
->    > 1. What is the read length?
->    > 2. Is there anything what you find striking when you compare both reports?
+>    > 1. What can we say about the quality of the sequences in both sequence files?
 >    >
 >    >    <details>
 >    >    <summary>Click to view answers</summary>
 >    >    <ol type="1">
->    >    <li>The read length is 37 bp</li>
->    >    <li>Both reports for GSM461177_untreat_paired_chr4_R1 and for GSM461177_untreat_paired_chr4_R2 are quite ok. For GSM461177_untreat_paired_chr4_R1, there is several warnings and an issue on the Kmer content. For GSM461177_untreat_paired_chr4_R2, the quality in the 2nd tile is bad (maybe because of some event during sequencing). We need to be careful for the quality treatment and to do it with paired-end information</li>
+>    >    <li>The quality of the sequence decrease a lot at the end of sequences for both datasets. We will need to trim them</li>
 >    >    </ol>
 >    >    </details>
 >    {: .question}
 >
-> 2. **Trim Galore** :wrench:: Treat for the quality of sequences by running Trim Galore on the paired-end datasets to eliminate sequences smaller than 60 bp, with a mean quality score inferior to 15 or with more than 2% of N bases and to trim sequences on right end when the mean quality score over a window of 5 bp is inferior to 20
+> 2. **Trim Galore** :wrench:: with
+>    - "Is this library paired- or single-end?" to `Paired-end`
+>    - "Reads in FASTQ format" to the input datasets with first the forward (ending with `_1`) and then the reverse (ending with `_2`)
+>    - "Trim Galore! advanced settings" to `Full parameter list`
+>    - "Trim low-quality ends from reads in addition to adapter removal" to `20`
+>    - "Discard reads that became shorter than length N" to `60`
+>    - "Generate a report file" to `Yes`
+>
+> 3. **MulitQC** :wrench:: with
+>    - "Software name" to `Cutadapt`
+>    - "Result file" to the report file generated with Trim Galore!
 >
 >    > ### :question: Questions
 >    >
->    > Why is Trim Galore run once on the paired-end dataset and not twice on each dataset?
->    >
->    > <details>
->    > <summary>Click to view answers</summary>
->    > Trim Galore can remove sequences if they become too short during the trimming process. For paired-end files Trim Galore! removes entire sequence pairs if one (or both) of the two reads became shorter than the set length cutoff. Reads of a read-pair that are longer than a given threshold but for which the partner read has become too short can optionally be written out to single-end files. This ensures that the information of a read pair is not lost entirely if only one read is of good quality.
->    > </details>
->    {: .question}
->
-> 3. **FastQC** :wrench:: Re-run FastQC on Trim Galore's outputs and inspect the differences
->
->    > ### :question: Questions
->    >
->    > 1. How are the changes in the read length?
->    > 2. Is there any characteristics impacted by Trim Galore?
+>    > 1. How much of the sequences have been trimmed?
 >    >
 >    >    <details>
 >    >    <summary>Click to view answers</summary>
 >    >    <ol type="1">
->    >    <li>The read length is then now from 20 to 37 bp</li>
->    >    <li>For GSM461177_untreat_paired_chr4_R1, the per base sequence content is now red. For GSM461177_untreat_paired_chr4_R2, the per tile sequence quality is still bad but now also the per base sequence content and the Kmer Content</li>
+>    >    <li>6.7% and 18.3% of the bases for the forward reads and reverse reads (respectively)</li>
 >    >    </ol>
 >    >    </details>
 >    {: .question}
->
 {: .hands_on}
 
-> ### :question: Questions
->
-> 1. How many sequences have been conserved here? 
-> 2. And with EBI Metagenomics' pipeline?
->
-> <details>
-> <summary>Click to view answers</summary>
-> <ol type="1">
-> <li></li>
-> <li></li>
-> </ol>
-> </details>
-{: .question}
+One sequence file in Fasta is expected for the next steps. We need then to assemble the paired sequences and convert them to Fasta.
 
-> ### :nut_and_bolt: Comments
-> 
-> One sequence file is expected for the next steps. In case of paired-end sequence data, the paired sequences must be assembled, with FastQJoin for example
-{: .comment}
+> ### :pencil2: Hands-on: Dereplication
+>
+> 1. **fastq-join** :wrench:: with
+>    - "Dataset type" to `Paired-end`
+>    - "Read 1 Fastq" to the forward trimmed reads 
+>    - "Read 2 Fastq" to the reverse trimmed reads
+> 2. **FASTQ to FASTA** :wrench:: with
+>    - "FASTQ Library to convert" to the joined FastQ file
+>    - "Discard sequences with unknown (N) bases" to `no`
+>    - "Rename sequence names in output file" to `no`
+{: .hands_on}
 
 # Dereplication
 
@@ -144,17 +135,18 @@ During sequencing, one sequence must have been added to the dataset in multiple 
 
 > ### :pencil2: Hands-on: Dereplication
 >
-> 1. **VSearch dereplication** :wrench:: Run VSearch dereplication on the quality controlled sequences (output of Trim Galore!)
+> 1. **VSearch dereplication** :wrench:: with
+>    - "Select your FASTA file" to the Fasta file generated previously
+>    - "Strand specific clustering" to `Both strand`
 >
 >    > ### :question: Questions
 >    >
 >    > 1. How many sequences are removed with the dereplication?
->    > 2. And with EBI Metagenomics' pipeline?
 >    >
 >    >    <details>
 >    >    <summary>Click to view answers</summary>
 >    >    <ol type="1">
->    >    <li></li>
+>    >    <li>42,363 on 43,145</li>
 >    >    <li></li>
 >    >    </ol>
 >    >    </details>
@@ -176,26 +168,33 @@ For this task, we use SortMeRNA (kopylova_sortmerna:_2012). This tool filter RNA
 
 > ### :pencil2: Hands-on: Sequence sorting
 >
-> 1. **SortMeRNA** :wrench:: Run SortMeRNA on the dereplicated sequences with the selection of all rRNA databases (to extract all the rRNA sequences)
+> 1. **SortMeRNA** :wrench:: with
+>    - "Querying sequences" to the dereplicated dataset
+>    - "Sequencing type" to `Reads are not paired`
+>    - "Which strands to search" to `Search both strands`
+>    - "Databases to query" to `Public pre-indexed ribosomal databases`
+>    - "rRNA databases" to select all
+>    - "Include aligned reads in FASTA/FASTQ format?" to `Yes`
+>    - "Include rejected reads file?" to `Yes`
+>    - "Include alignments in SAM format?" to `No`
+>    - "Include alignments in BLAST-like format?" to `No`
 >
 >    > ### :question: Questions
 >    >
 >    > 1. Which percentage of the original data are assigned to rRNA/rDNA sequences?
 >    > 2. How can you explain with low percentage?
->    > 3. How many sequences are identified as 16S sequences? And 18S sequences?
->    > 4. What are the values for EBI Metagenomics?
 >    >
 >    >    <details>
 >    >    <summary>Click to view answers</summary>
 >    >    <ol type="1">
->    >    <li></li>
->    >    <li></li>
+>    >    <li>1,988 over 42,363 are aligned on rRNA databases so 4.7%</li>
+>    >    <li>Shotgun metagenomics data with few rRNA genes</li>
 >    >    </ol>
 >    >    </details>
 >    {: .question}
 >
-> 2. (Optional) **SortMeRNA** :wrench:: Run SortMeRNA on the selected rRNA sequences with the selection of 16S rRNA databases
-> 3. (Optional) **SortMeRNA** :wrench:: Run SortMeRNA on the selected rRNA sequences with the selection of 18S rRNA databases
+> 2. (Optional) **SortMeRNA** :wrench:: Run SortMeRNA on the assigned rRNA sequences with the selection of 16S rRNA databases
+> 3. (Optional) **SortMeRNA** :wrench:: Run SortMeRNA on the assigned rRNA sequences with the selection of 18S rRNA databases
 {: .hands_on}
 
 # Extraction of taxonomic information
@@ -208,7 +207,12 @@ However, for WGS data, applying such approaches implies using a really small pro
 
 > ### :pencil2: Hands-on: Taxonomic assignation
 >
-> 1. **MetaPhlAN2** :wrench:: Run **MetaPhlAN2** on the dereplicated sequences
+> 1. **MetaPhlAN2** :wrench:: with
+>    - "Input file" to the dereplicated sequences
+>    - "Database with clade-specific marker genes" to `Locally cached`
+>    - "Cached database with clade-specific marker genes" to `MetaPhlAn2 clade-specific marker genes`
+>    - "Type of analysis to perform" to `Profiling a metagenomes in terms of relative abundances`
+>    - "Taxonomic level for the relative abundance output" to `All taxonomic levels`
 >
 >    > ### :question: Questions
 >    >
