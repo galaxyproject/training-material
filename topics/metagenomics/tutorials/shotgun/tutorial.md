@@ -131,7 +131,7 @@ For quality control, we use similar tools as described in [the Quality Control t
 > <li></li>
 > </ol>
 > </details>
-> {: .question}
+{: .question}
 
 > ### :nut_and_bolt: Comments
 > 
