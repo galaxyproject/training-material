@@ -472,7 +472,7 @@ To further explore the community structure, we can visualize it with dedicated t
 >     ![](../../../../shared/images/phinch_overviewpage.png)
 {: .hands_on}
 
-Once we have information about the community structure (OTUs with taxonomic structure), we can do more analysis on it: estimation of the diversity of micro-organism, comparison fo diversity between samples, analysis of populations, ... We will not detail such analyses here but you follow our tutorials on amplicon data analyses to learn about them.
+Once we have information about the community structure (OTUs with taxonomic structure), we can do more analysis on it: estimation of the diversity of micro-organism, comparison fo diversity between samples, analysis of populations, ... We will not go into detail of such analyses here but you follow our tutorials on amplicon data analyses to learn about them.
 
 # Shotgun metagenomics data
 
@@ -487,7 +487,7 @@ In this second part, we will use a metagenomic sample of the Pampas Soil ([SRR60
 > ### :pencil2: Hands-on: Data upload
 >
 > 1. Create a new history
-> 2. Import the "SRR606451_pampa" Fasta file from [Zenodo]() or from the data library (in "Analyses of metagenomics data")
+> 2. Import the "SRR606451_pampa" Fasta file from [Zenodo](http://zenodo.org/record/815875) or from the data library (in "Analyses of metagenomics data")
 {: .hands_on}
 
 ## Extraction of taxonomic information
@@ -555,9 +555,9 @@ Even if the output of MetaPhlAn2 is bit easier to parse than the BIOM file, we w
 > ### :pencil2: Hands-on: Interactive visualization with KRONA
 >
 > 1. **Format MetaPhlAn2 output for Krona** :wrench: with
->    - "Input file" to `Community profile` output of `MetaPhlAn2
+>    - "Input file" to `Community profile` output of `MetaPhlAn2`
 >
-> 2. **KRONA pie chard** :wrench:: with
+> 2. **KRONA pie chart** :wrench:: with
 >    - "What is the type of your input data" as `MetaPhlan`
 >    - "Input file" to the output of `Format MetaPhlAn2`
 >
@@ -595,7 +595,7 @@ HUMAnN2 generates 3 files
 
     Gene family abundance is reported in RPK (reads per kilobase) units to normalize for gene length. It reflects the relative gene (or transcript) copy number in the community.
 
-    "UNMAPPED" value is the total number of reads which remain unmapped after both alignment steps (nucleotide and translated search). Since other gene features in the table are quantified in RPK units, "UNMAPPED" can be interpreted as a single unknown gene of length 1 kilobase recruiting all reads that failed to map to known sequences."
+    "UNMAPPED" value is the total number of reads which remain unmapped after both alignment steps (nucleotide and translated search). Since other gene features in the table are quantified in RPK units, "UNMAPPED" can be interpreted as a single unknown gene of length 1 kilobase recruiting all reads that failed to map to known sequences.
 
 - A file with the coverage of pathways
 
@@ -613,7 +613,7 @@ HUMAnN2 generates 3 files
 >    </details>
 {: .question}
 
-The RPK for the gene families are quite difficult to intepret in term of relative abundance. We decide then to normalize the values
+The RPK for the gene families are quite difficult to interpret in term of relative abundance. We decide then to normalize the values
 
 > ### :pencil2: Hands-on: Normalize the gene family abundances
 >
