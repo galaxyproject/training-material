@@ -5,6 +5,7 @@ tutorial_name: shotgun
 ---
 
 # Introduction
+{:.no_toc}
 
 In metagenomics, information about micro-organisms in an environment can be extracted with two main techniques:
 
@@ -24,11 +25,10 @@ From both amplicon and WGS metagenomics raw data, we can extract information abo
 > However, extraction of useful information from raw WGS metagenomics sequences is a complex process
 with numerous bioinformatics steps and tools to use. These steps can be get together in 4 main steps we will deal with in the following tutorial:
 >
-> 1. [Pretreatments](#pretreatments)
-> 2. [Taxonomic analyses](#taxonomic_analyses)
-> 3. [Functional analyses](#functional_analyses)
-> 4. [Combination of taxonomic and functional results](#taxonomic_functional_analyses)
-> {: .agenda}
+> 1. TOC
+> {:toc}
+>
+{: .agenda}
 
 
 In this tutorial, we will work on a sample from Arctic Ocean (at 451 m), sequenced with Illumina MiSeq. This sample has already been analyzed with the [EBI Metagenomics' pipeline](https://www.ebi.ac.uk/metagenomics/pipelines/3.0), which uses slightly different tools than the ones we will use here. But, we could compare our results with the ones obtained with EBI Metagenomics.
@@ -407,5 +407,6 @@ To answer this question, we need to relate generated taxonomic and functional re
 {: .hands_on}
 
 # Conclusion
+{:.no_toc}
 
 Conclusion about the technical key points. And then relation between the technics and the biological question to end with a global view.
