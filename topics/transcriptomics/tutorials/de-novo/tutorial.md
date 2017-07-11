@@ -208,7 +208,7 @@ We now want to identify which transcripts are differentially expressed between t
 
 ## Count the number of reads per transcript
 
-To compare the abundance of transcripts between different cellular states, the first essential step is to quantify the number of reads per transcript. [`FeatureCounts`](https://bioinf.wehi.edu.au/featureCounts/ ) is one of the most popular tools for counting reads in genomic features. In our case, we'll be using `FeatureCounts` to count reads aligning in exons of our `GFFCompare` generated transcriptome database.
+To compare the abundance of transcripts between different cellular states, the first essential step is to quantify the number of reads per transcript. [`FeatureCounts`](http://bioinf.wehi.edu.au/featureCounts/ ) is one of the most popular tools for counting reads in genomic features. In our case, we'll be using `FeatureCounts` to count reads aligning in exons of our `GFFCompare` generated transcriptome database.
 
 The recommended mode is "union", which counts overlaps even if a read only shares parts of its sequence with a genomic feature and disregards reads that overlap more than one feature.
 
@@ -259,7 +259,7 @@ The first output of `DESeq2` is a tabular file. The columns are:
 2.	Mean normalized counts, averaged over all samples from both conditions
 3.	Logarithm (base 2) of the fold change (the values correspond to up- or downregulation relative to the condition listed as Factor level 1)
 4.	Standard error estimate for the log2 fold change estimate
-5.	[Wald](https://data.princeton.edu/wws509/notes/c2s3.html) statistic
+5.	[Wald](http://data.princeton.edu/wws509/notes/c2s3.html) statistic
 6.	*p*-value for the statistical significance of this change
 7.	*p*-value adjusted for multiple testing with the Benjamini-Hochberg procedure which controls false discovery rate ([FDR](http://www.biostathandbook.com/multiplecomparisons.html))
 

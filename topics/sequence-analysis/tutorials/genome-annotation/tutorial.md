@@ -189,7 +189,7 @@ This file will be the input for more detailed analysis:
 
 > ### :bulb: Tip: Further Reading about BLAST Tools in Galaxy
 >
-> Cock et al. (2015): [NCBI BLAST+ integrated into Galaxy](https://biorxiv.org/content/early/2015/05/04/014043.full-text.pdf+html)
+> Cock et al. (2015): [NCBI BLAST+ integrated into Galaxy](http://biorxiv.org/content/early/2015/05/04/014043.full-text.pdf+html)
 >
 > Cock et al. (2013): [Galaxy tools and workflows for sequence analysis with applications in molecular plant pathology](https://peerj.com/articles/167/)
 {: .tip}

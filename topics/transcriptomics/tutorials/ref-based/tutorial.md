@@ -72,7 +72,7 @@ Both files contain the reads that belong to chromosome 4 of a paired-end sample.
 
 ## Quality control
 
-For quality control, we use similar tools as described in [NGS-QC tutorial](../../NGS-QC/tutorials/dive_into_qc): [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/) and [Trim Galore](http://www.bioinformatics.babraham.ac.uk/projects/trim_galore/).
+For quality control, we use similar tools as described in [NGS-QC tutorial](../../NGS-QC/tutorials/dive_into_qc): [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/) and [Trim Galore](https://www.bioinformatics.babraham.ac.uk/projects/trim_galore/).
 
 > ### :pencil2: Hands-on: Quality control
 >
@@ -166,7 +166,7 @@ The library type corresponds to a protocol used to generate the data: which stra
 
 ![](../../images/strand_library_type.png)
 
-*[Credit: Zhao Zhang](https://onetipperday.sterding.com/2012/07/how-to-tell-which-library-type-to-use.html)*
+*[Credit: Zhao Zhang](http://onetipperday.sterding.com/2012/07/how-to-tell-which-library-type-to-use.html)*
 
 In the previous illustration, you could see that for example dUTP method is to only sequence the strand from the first strand synthesis (the original RNA strand is degradated due to the dUTP incorporated).
 

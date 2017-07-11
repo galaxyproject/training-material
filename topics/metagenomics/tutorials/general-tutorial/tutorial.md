@@ -656,7 +656,7 @@ With the HUMAnN2 output, we have access to UniRef50 gene families. However, the 
 >  > ### :question: Questions
 >  >
 >  > 1. What is the most abundant GO term?
->  > 2. What is related to in [Gene Ontology](https://www.geneontology.org/)?
+>  > 2. What is related to in [Gene Ontology](http://www.geneontology.org/)?
 >  >
 >  >    <details>
 >  >    <summary>Click to view answers</summary>

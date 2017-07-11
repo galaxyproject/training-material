@@ -61,7 +61,7 @@ In this tutorial we use 16S rRNA data, but similar pipelines can be used for WGS
 > The highly conserved regions make it easy to target the gene across different organisms,
 > while the highly variable regions allow us to distinguish between different species.
 >
-> (slide credit [https://www.slideshare.net/beiko/ccbc-tutorial-beiko ](http://www.slideshare.net/beiko/ccbc-tutorial-beiko ))
+> (slide credit [https://www.slideshare.net/beiko/ccbc-tutorial-beiko ](https://www.slideshare.net/beiko/ccbc-tutorial-beiko ))
 {: .tip}
 
 ## Understanding our input data
@@ -494,7 +494,7 @@ removing sequencing artefacts known as chimeras.
 
 > ### :book: Background: Chimeras
 > ![](../../images/chimeras.jpg)
-> (slide credit: [https://slideplayer.com/slide/4559004/ ](http://slideplayer.com/slide/4559004/ ))
+> (slide credit: [http://slideplayer.com/slide/4559004/ ](http://slideplayer.com/slide/4559004/ ))
 {: .tip}
 
 We'll do this chimera removal using the `UCHIME` algorithm that is called within Mothur, using the
@@ -987,7 +987,7 @@ repeated-measures ANOVA and find that there was no significant difference based 
 
 Beta diversity is a measure of the similarity of the membership and structure found between *different* samples.
 The default calculator in the following section is *thetaYC*, which is the [Yue & Clayton theta similarity
-coefficient](https://csyue.nccu.edu.tw/ch/2005communicationindex.pdf)
+coefficient](http://csyue.nccu.edu.tw/ch/2005communicationindex.pdf)
 
 > ### :pencil2: Hands-on: Beta diversity
 >

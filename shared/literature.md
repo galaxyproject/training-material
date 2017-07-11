@@ -20,7 +20,7 @@
 ##Bioinformatic Tools (Linux, R, BEDTools etc.) - Manuals, courses, original papers
 
 - Why and how is bioinformatics software special? **Altschul et a. (2013)** [The anatomy of successful computational biology software](https://www.ncbi.nlm.nih.gov/pubmed/24104757), (doi:10.1038/nbt.2721) **(Highly recommended to read!)**
-- **Bild et al. (2014)** [A Field Guide to Genomics Research](https://journals.plos.org/plosbiology/article?id=10.1371/journal.pbio.1001744), (doi:10.1371/journal.pbio.1001744) - Very readable introduction about the different caveats of genomics research (with cute cartoons!)
+- **Bild et al. (2014)** [A Field Guide to Genomics Research](http://journals.plos.org/plosbiology/article?id=10.1371/journal.pbio.1001744), (doi:10.1371/journal.pbio.1001744) - Very readable introduction about the different caveats of genomics research (with cute cartoons!)
 
 **Linux Command Line**
 
