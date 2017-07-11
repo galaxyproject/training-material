@@ -4,14 +4,23 @@ topic_name: introduction
 tutorial_name: galaxy-intro-peaks2genes
 ---
 
-# From peaks to genes
-
 # Introduction
+{:.no_toc}
+
 We stumbled upon a paper [Li et al., Cell Stem Cell 2012](https://www.ncbi.nlm.nih.gov/pubmed/22862943) that contains the analysis of possible target genes of an interesting protein in mice. The targets were obtained by ChIP-seq and the raw data is available through [GEO](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE37268).
 The list of genes however is neither in the supplement of the paper nor part of the GEO submission.
 The closest thing we can find is a list of the regions where the signal is
 significantly enriched (so called *peaks*).
 The goal of this exercise is to **turn this list of genomic regions into a list of possible target genes**.
+
+> ### Agenda
+>
+> In this tutorial, we will deal with:
+>
+> 1. TOC
+> {:toc}
+>
+{: .agenda}
 
 # Pretreatments
 
@@ -475,5 +484,6 @@ To share a history, click on the gear symbol in the history pane and select `Sha
 {: .hands_on}
 
 # Conclusion
+{:.no_toc}
 
 :tada: Well done! :clap: You have just performed your first analysis in Galaxy. You also created a workflow from your analysis so you can easily repeat the exact same analysis on other datasets. Additionally you shared your results and methods with others.

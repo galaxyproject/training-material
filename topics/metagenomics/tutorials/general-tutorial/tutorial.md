@@ -5,6 +5,7 @@ tutorial_name: general-tutorial
 ---
 
 # Introduction
+{:.no_toc}
 
 In metagenomics, information about micro-organisms in an environment can be extracted with two main techniques:
 
@@ -19,8 +20,9 @@ For that, we will use two datasets (one amplicon and one shotgun) from the same 
 >
 > In this tutorial, we will deal with:
 >
-> 1. [Amplicon data](#amplicon-data)
-> 2. [Shotgun data](#shotgun-data)
+> 1. TOC
+> {:toc}
+>
 {: .agenda}
 
 # Amplicon data
@@ -671,6 +673,7 @@ With the HUMAnN2 output, we have access to UniRef50 gene families. However, the 
 With the previous analyses, we investigate "Which micro-organims are present in my sample?" and "What function are done by the micro-organisms in my sample?". We can go further in these analyses (for example with combination of functional and taxonomic results). We did not detail that in this tutorial but you can found more analyses in our tutorials on shotgun metagenomic data analyses.
 
 # Conclusion
+{:.no_toc}
 
 We can summarize the analyses with amplicon and shotgun metagenomic data:
 

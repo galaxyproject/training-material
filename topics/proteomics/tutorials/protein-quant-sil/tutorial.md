@@ -5,6 +5,8 @@ tutorial_name: protein-quant-sil
 ---
 
 # Introduction
+{:.no_toc}
+
 To compare protein amounts in different samples from MS/MS data, two different experiment setups exist. Firstly, unmodified proteins can be measured in separate runs at one sample per MS-run. Secondly, proteins of samples to compare can be labelled with small chemical tags, mixed, and measured side-by-side in a single MS-run.
 There are two types of chemical tags: isobaric tags display the same mass on first hand, but fragment during the generation of the MS/MS spectra to yield reporter ions of different mass. The intensity of those reporter ions can be compared in MS/MS spectra. There are two types of isobaric tags commercially available: tandem mass tags (TMT) and isobaric tags for relative and absolute quantitation (iTRAQ).
 The second type of chemical tags are isotopic. They are chemically identical, but differ in their mass due to incorporated stable isotopes. Examples of different isotopic tags for stable isotope labelling (SIL) are ICAT, SILAC, dimethylation, or heavy oxygen (<sup>18</sup>O).
@@ -26,10 +28,9 @@ If you still are in the planning phase of your quantitative proteomics experimen
 >
 > In this tutorial, we will deal with:
 >
-> 1. [MS1 Feature Detection](#ms1-feature-detection)
-> 2. [Importing and Converting Peptide and Protein IDs](#importing-and-converting-peptide-and-protein-ids)
-> 3. [Quant to ID matching](#quant-to-id-matching)
-> 4. [Expert level: Evaluation and Optimization of Quantitation Results](#expert-level-evaluation-and-optimization-of-quantitation-results)
+> 1. TOC
+> {:toc}
+>
 {: .agenda}
 
 # MS1 Feature Detection

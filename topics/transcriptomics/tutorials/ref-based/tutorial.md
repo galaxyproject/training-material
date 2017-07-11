@@ -5,6 +5,7 @@ tutorial_name: ref-based
 ---
 
 # Introduction
+{:.no_toc}
 
 In the study of [Brooks *et al.* 2011](https://genome.cshlp.org/content/21/2/193.long), the Pasilla (PS) gene, *Drosophila* homologue of the Human splicing regulators Nova-1 and Nova-2 Proteins, was depleted in *Drosophila melanogaster* by RNAi. The authors wanted to identify exons that are regulated by Pasilla gene using RNA sequencing data.
 
@@ -16,10 +17,9 @@ The genome of *Drosophila melanogaster* is known and assembled. It can be used a
 >
 > In this tutorial, we will deal with:
 >
-> 1. [Pretreatments](#pretreatments)
-> 2. [Mapping](#mapping)
-> 3. [Analysis of the differential expression](#analysis-of-the-differential-expression)
-> 4. [Inference of the differential exon usage](#inference-of-the-differential-exon-usage)
+> 1. TOC
+> {:toc}
+>
 {: .agenda}
 
 # Pretreatments
@@ -741,6 +741,7 @@ Unfortunately, in the process of counting, we loose all the information of the g
 {: .hands_on}
 
 # Conclusion
+{:.no_toc}
 
 In this tutorial, we have analyzed real RNA sequencing data to extract useful information, such as which genes are up- or downregulated by depletion of the Pasilla gene and which genes are regulated by the Pasilla gene. To answer these questions, we analyzed RNA sequence datasets using a reference-based RNA-seq data analysis approach. This approach can be sum up with the following scheme:
 

@@ -5,6 +5,7 @@ tutorial_name: galaxy-intro-101
 ---
 
 # 101 Introduction
+{:.no_toc}
 
 This practical aims to familiarize you with the Galaxy user interface. It will teach you how to perform basic tasks such as importing data, running tools, working with histories, creating workflows, and sharing your work.
 
@@ -12,10 +13,9 @@ This practical aims to familiarize you with the Galaxy user interface. It will t
 >
 > In this tutorial, we will:
 >
-> 1. [Obtain data from external sources](#data-upload)
-> 2. [Analyze the data](#analysis)
-> 3. [Manage histories and workflows](#galaxy-management)
-> 4. [Share your work](#share-your-work)
+> 1. TOC
+> {:toc}
+>
 {: .agenda}
 
 # Pretreatments
@@ -436,5 +436,6 @@ To share a history, click on the gear symbol in the history pane and select `Sha
 {: .hands_on}
 
 # Conclusion
+{:.no_toc}
 
 :tada: Well done! :clap: You have just performed your first analysis in Galaxy. You also created a workflow from your analysis so you can easily repeat the exact same analysis on other datasets. Additionally you shared your results and methods with others.

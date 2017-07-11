@@ -5,6 +5,7 @@ tutorial_name: protein-id-sg-ps
 ---
 
 # Introduction
+{:.no_toc}
 
 Identifying the proteins contained in a sample is an important step in any proteomic experiment. However, in most settings, proteins are digested to peptides before the LC-MS/MS analysis. In this so-called "bottom-up" procedure, only peptide masses are measured. Therefore, protein identification cannot be performed directly from raw data, but is a multi-step process:
 
@@ -31,10 +32,9 @@ you can use the constructed database before the **DecoyDatabase** :wrench: step.
 >
 > In this tutorial, we will deal with:
 >
-> 1. [Preparing raw data](#preparing-raw-data)
-> 2. [Peptide and Protein Identification](#peptide-and-protein-identification)
-> 4. [Analysis of Contaminants](#analysis-of-contaminants)
-> 5. [Peptide and Protein Evaluation](#evaluation-of-peptide-and-protein-ids)
+> 1. TOC
+> {:toc}
+>
 {: .agenda}
 
 

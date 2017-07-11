@@ -5,6 +5,8 @@ tutorial_name: general-introduction
 ---
 
 # Genome assembly with Velvet: Background
+{:.no_toc}
+
 Velvet is one of a number of *de novo* assemblers that use short read sets as input (e.g. Illumina Reads), and the assembly method is based on de Bruijn graphs. For information about Velvet see this [link](https://en.wikipedia.org/wiki/Velvet_assembler).
 
 
@@ -14,11 +16,9 @@ In this activity, we will perform a *de novo* assembly of a short read set using
 >
 > In this tutorial, we will deal with:
 >
-> 1. [Get the data](#get-the-data)
-> 2. [Evaluate the input reads](#evaluate-the-input-reads)
-> 3. [Assemble reads with Velvet](#assemble-reads-with-velvet)
-> 4. [Collect some statistics on the contigs](#collect-some-statistics-on-the-contigs)
-> 5. [Discussion](#discussion)
+> 1. TOC
+> {:toc}
+>
 {: .agenda}
 
 # Get the data
