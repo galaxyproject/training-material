@@ -1,4 +1,4 @@
-topics/proteomics/tutorials/database-handling/tutorial.md---
+---
 layout: tutorial_hands_on
 topic_name: metagenomics
 tutorial_name: mothur-miseq-sop
