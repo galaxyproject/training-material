@@ -284,8 +284,6 @@ Krona ([Ondov et al, 2011](https://bmcbioinformatics.biomedcentral.com/articles/
 >    </details>
 {: .question}
 
-
-
 [GraPhlAn](https://bitbucket.org/nsegata/graphlan/wiki/Home>) is a tool for producing circular static representation of taxonomic analyses, easily exportable.
 
 > ### :pencil2: Hands-on: Static visualization with GraPhlAn
