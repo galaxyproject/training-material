@@ -9,7 +9,7 @@ tutorial_name: shotgun
 In metagenomics, information about micro-organisms in an environment can be extracted with two main techniques:
 
 - Amplicon sequencing, which sequence only on the rRNA/rDNA of organisms
-- Whole-genome sequencing (WGS), which sequence full genomes of the micro-organisms in the environment
+- Shotgun sequencing, which sequence full genomes of the micro-organisms in the environment
 
 Data generated from these two techniques must be treated differently. In this tutorial, we will focus on the analysis of whole-genome sequencing. 
 
@@ -129,7 +129,7 @@ One sequence file in Fasta is expected for the next steps. We need then to assem
 >    - "Rename sequence names in output file" to `no`
 {: .hands_on}
 
-# Dereplication
+## Dereplication
 
 During sequencing, one sequence must have been added to the dataset in multiple exact copy. Removing such duplicates reduce the size of the dataset without loosing information, with the dereplication (identification of unique sequences in a dataset).
 
@@ -154,9 +154,9 @@ During sequencing, one sequence must have been added to the dataset in multiple 
 >
 {: .hands_on}
 
-# Sequence sorting
+## Sequence sorting
 
-With WGS metagenomics data, full genome information can be accessed: information corresponding to CDS of the micro-organisms, sequences corresponding to ribosomal sequences (rDNA or rRNA) of the micro-organisms, ... Useful functional information are present in sequences corresponding to CDS, and some taxonomic information in sequences corresponding to ribosomomal sequences (like the amplicon). To reduce the dataset size for the extraction of functional information, we can remove rRNA/rDNA sequences from the original dataset. 
+With shotgun metagenomics data, full genome information can be accessed: information corresponding to CDS of the micro-organisms, sequences corresponding to ribosomal sequences (rDNA or rRNA) of the micro-organisms, ... Useful functional information are present in sequences corresponding to CDS, and some taxonomic information in sequences corresponding to ribosomomal sequences (like the amplicon). To reduce the dataset size for the extraction of functional information, we can remove rRNA/rDNA sequences from the original dataset. 
 
 This task is also useful to inspect the rRNA/rDNA sequences. And as in EBI Metagenomics' pipeline, these sequences can be used for taxonomic analyses as any amplicon data
 
@@ -164,7 +164,7 @@ This task is also useful to inspect the rRNA/rDNA sequences. And as in EBI Metag
 > If you want to learn how to analyze amplicon data, please check our dedicated tutorials
 {: .comment}
 
-For this task, we use SortMeRNA (kopylova_sortmerna:_2012). This tool filter RNA sequences based on local sequence alignment (BLAST) against 8 rRNA databases (2 Rfam databases for 5.8S and 5S eukarya sequences and 6 SILVA datasets for 16S (archea and bacteria), 18S (eukarya), 23S (archea and bacteria) and 28S (eukarya) sequences.
+For this task, we use SortMeRNA ([Kopylova et al, 2012](https://academic.oup.com/bioinformatics/article-abstract/28/24/3211/246053)). This tool filter RNA sequences based on local sequence alignment (BLAST) against 8 rRNA databases (2 Rfam databases for 5.8S and 5S eukarya sequences and 6 SILVA datasets for 16S (archea and bacteria), 18S (eukarya), 23S (archea and bacteria) and 28S (eukarya) sequences.
 
 > ### :pencil2: Hands-on: Sequence sorting
 >
@@ -203,7 +203,7 @@ The first important information to extract from any metagenomics sample is which
 
 To identify the community structure, several approaches can be used. With amplicon or rRNA data, the sequences are clustered into Operational Taxonomic Units (OTU) and one representative sequence of each OTU is assigned to the most plausible microbial lineage. This approach is possible because of rRNA data: data that evolved quite slowly compared to other part of genomes, rRNA sequences data (particularly 16S and 18S) are then well conserved and good taxonomic markers.
 
-However, for WGS data, applying such approaches implies using a really small proportion of sequences for the taxonomic assignation, which can induce statistical bias. Other approaches have been developed to cope with WGS data. For example, MetaPhlAn2 (segata_metagenomic_2012,truong_metaphlan2_2015) uses a database of ~1M unique clade-specific marker genes (not only the rRNA genes) identified from ~17,000 reference (bacterial, archeal, viral and eukaryotic) genomes.
+However, for shotgun data, applying such approaches implies using a really small proportion of sequences for the taxonomic assignation, which can induce statistical bias. Other approaches have been developed to cope with shotgun data. For example, MetaPhlAn2 ([Truong et al, 2015](https://www.nature.com/nmeth/journal/v12/n10/full/nmeth.3589.html)) uses a database of ~1M unique clade-specific marker genes (not only the rRNA genes) identified from ~17,000 reference (bacterial, archeal, viral and eukaryotic) genomes.
 
 > ### :pencil2: Hands-on: Taxonomic assignation
 >
@@ -245,7 +245,7 @@ However, for WGS data, applying such approaches implies using a really small pro
 >
 {: .hands_on}
 
-The generated information remains difficult to inspect. Krona (ondov_interactive_2011) is a visualization tool for intuitive exploration of relative abundances of taxonomic classifications. It produces an interactive HTML file
+The generated information remains difficult to inspect. Krona ([Ondov et al, 2011](https://bmcbioinformatics.biomedcentral.com/articles/10.1186/1471-2105-12-385)) is a visualization tool for intuitive exploration of relative abundances of taxonomic classifications. It produces an interactive HTML file
 
 > ### :pencil2: Hands-on: Interactive visualization with KRONA
 >
@@ -330,7 +330,7 @@ With our dataset, we obtain a nice graphical representation of taxonomic diversi
 
 # Functional analyses
 
-Investigation of the structure composition gives an insight on "What organisms are present in our sample". We now want to know "What are they doing in that environment?". With WGS data, we have full genome information with sequence of genes. To determine which functions are done by the micro-organisms in the studied environment, we need then to identify genes, associate them to functions, combine such information to reconstruct metabolic pathways, ...
+Investigation of the structure composition gives an insight on "What organisms are present in our sample". We now want to know "What are they doing in that environment?". With shotgun data, we have full genome information with sequence of genes. To determine which functions are done by the micro-organisms in the studied environment, we need then to identify genes, associate them to functions, combine such information to reconstruct metabolic pathways, ...
 
 The first step is then to identify sequences and affiliate them to a known genes, using available database. [HUMAnN2](http://huttenhower.sph.harvard.edu/humann2) is a tool to profile the presence/absence and abundance of gene families and microbial pathways in a community from metagenomic or metatranscriptomic sequencing data.
 
