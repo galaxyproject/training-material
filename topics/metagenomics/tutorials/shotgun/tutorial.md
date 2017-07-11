@@ -18,11 +18,11 @@ Data generated from these two techniques must be treated differently. In this tu
 > If you want to learn how to analyze amplicon data, please check our dedicated tutorials
 {: .comment}
 
-From both amplicon and WGS metagenomics raw data, we can extract information about which micro-organisms are present in the studied environment. But, contrary to amplicon, WGS metagenomics data contain also full genome information about the micro-organisms. It is then possible to identify genes associated to functions, to reconstruct metabolic pathways and then determine which functions are done by the micro-organisms in the studied environment. It is even possible to go further and determine which micro-organisms are involved in a given function or pathways.
+From both amplicon and shotgun metagenomics raw data, we can extract information about which micro-organisms are present in the studied environment. But, contrary to amplicon, shotgun metagenomics data contain also full genome information about the micro-organisms. It is then possible to identify genes associated to functions, to reconstruct metabolic pathways and then determine which functions are done by the micro-organisms in the studied environment. It is even possible to go further and determine which micro-organisms are involved in a given function or pathways.
 
 > ### Agenda
 >
-> However, extraction of useful information from raw WGS metagenomics sequences is a complex process
+> However, extraction of useful information from raw shotgun metagenomics sequences is a complex process
 with numerous bioinformatics steps and tools to use. These steps can be get together in 4 main steps we will deal with in the following tutorial:
 >
 > 1. TOC
