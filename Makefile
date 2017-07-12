@@ -33,13 +33,9 @@ clean :
 
 ## install          : install dependencies
 install:
-	$(if $(shell uname -s) == "Darwin", \
-		sudo gem update —-system; \
-		sudo gem install -n /usr/local/bin/ bundler; \
-		sudo gem install -n /usr/local/bin/ nokogiri,  \
-		gem install bundler; \
-		gem install nokogiri);
-	bundle install;
-	bundle update;
+	gem install bundler
+	gem install nokogiri
+	bundle install
+	bundle update
 
 
