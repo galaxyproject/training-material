@@ -1,4 +1,5 @@
 source 'https://rubygems.org' do
-  gem 'jemoji'
-  gem 'jekyll-feed'
+    gem 'jekyll'
+    gem 'jemoji'
+    gem 'jekyll-feed'
 end

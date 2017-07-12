@@ -19,40 +19,42 @@ In 2016, the Galaxy Training Network decide to set up a new infrastructure for d
 We took inspiration from [Software Carpentry](https://software-carpentry.org) and collected everything on a GitHub repository: [https://github.com/galaxyproject/training-material ](https://github.com/galaxyproject/training-material).
 We decided on a structure based on tutorials with hands-on, fitting both for online self-training but also for workshops, grouped in topics. Each tutorial follows the same structure and comes with a virtualised isntance to run the training everywhere.
 
-In this tutorial, you will learn how to run a local instance of the GTN webiste with all materials to test and develop new training sessions.
+If you want to run the entire GTN website locally or test your new training material you can do this! 
+
+Currently, the website is generated from the metadata and the tutorials using Jekyll, a simple static site builder.
+We can use Jekyll to run a server to check if the tutorial is correctly added and rendered.
+
 
 > ### Agenda
 >
-> In this tutorial, we will deal with:
+> In this tutorial, you will learn how to run a local instance of the GTN website:
 >
 > 1. TOC
 > {:toc}
 >
 {: .agenda}
 
-> ### Devloping GTN training material
+# Installation of the requirements
+
+The first step is to install the requirements inside a conda environment. This step has to be done once.
+
+> ### :pencil2: Hands-on: Install the requirements
 >
-> This tutorial is part of a series to develop GTN training material, feel free to also look at:
->
-> 1. [Writing content in markdown](../create-new-tutorial-content/tutorial.html)
-> 1. [Defining metadata](../create-new-tutorial-metadata/tutorial.html)
-> 1. [Setting up the infrastructure](../create-new-tutorial-jekyll/tutorial.html)
-> 1. [Creating Interactive Galaxy Tours](../create-new-tutorial-tours/tutorial.html)
-> 1. [Building a Docker flavor](../create-new-tutorial-docker/tutorial.html)
-> 1. [Submitting the new tutorial to the GitHub repository](../../../dev/tutorials/github-contribution/slides.html)
-{: .agenda}
+> 1. Install [conda](https://conda.io/miniconda.html)
+> 2. Create the conda environment: `conda env create -f environment.yml`
+> 3. Activate the conda environment: `source activate galaxy_training_material`
+> 4. Install Jekyll and related modules using [RubyGems](https://rubygems.org/pages/download): `make install`
+{: .hands_on}
 
 # Checking the website generation
 
-If you want to run the entire GTN website locally or test your new training material we can do this! Currently, the website is generated from the metadata and the tutorials using Jekyll, a simple static site builder.
-We can use Jekyll to run a server to check if the tutorial is correctly added and rendered.
+Once Jekyll and its modules are installed in our conda environment, we can check the generation of the website locally:
 
 > ### :pencil2: Hands-on: Checking the website generation locally
->
-> 1. Install Jekyll using [RubyGems](https://rubygems.org/pages/download): `make install`
->
-> 2. Run a local Jekyll server: `make serve`
-> 3. Visualize at [http://localhost:4000/ ](http://localhost:4000/)
+> 
+> 1. (If not done) Activate the conda environment: `source activate galaxy_training_material`
+> 1. Run a local Jekyll server with `make serve`
+> 2. Visualize at [http://localhost:4000/ ](http://localhost:4000/)
 >
 >    > ### :question: Questions
 >    >
@@ -64,6 +66,10 @@ We can use Jekyll to run a server to check if the tutorial is correctly added an
 >    >    </details>
 >    {: .question}
 {: .hands_on}
+
+With `make serve`, a local Jekyll server will run in background. It will check the changes and regenerate the website accordingly. You may need to reload the page to see the changes (and sometimes to wait 1-2 minutes)
+
+Once you are done, you can stop the server with `ctrl-c` and deactivate your conda environment with `source deactivate`.
 
 # Conclusion
 {:.no_toc}
