@@ -5,6 +5,7 @@ tutorial_name: database-handling
 ---
 
 # Introduction
+{:.no_toc}
 
 Identifying peptides in proteomic datasets is commonly done by using search engines that compare the MS2 spectra of peptides to theoretical spectra. These theoretical spectra are generated from a FASTA database containing proteins that are expected in the measured sample. Typically, those FASTA databases will contain all proteins of the organism the sample derived from.
 
@@ -12,10 +13,9 @@ Identifying peptides in proteomic datasets is commonly done by using search engi
 >
 > In this tutorial, we will deal with:
 >
-> 1. [Loading a Search Database](#loading-a-search-database)
-> 2. [Contaminant Databases](#contaminant-databases)
-> 3. [Merging Databases](#merging-databases)
-> 4. [Creating Decoy Databases](#creating-decoy-databases)
+> 1. TOC
+> {:toc}
+>
 {: .agenda}
 
 
@@ -138,6 +138,8 @@ The most common method of peptide and protein FDR calculation is by adding known
 
 
 # Concluding remarks
+{:.no_toc}
+
 To keep your databases up-to-date, or if you need several databases for different organisms, it would make sense to create a workflow out of the Hands-On sections (to learn about workflows see [this tutorial](../../Introduction/tutorials/workflows.md)). You might also want to combine the mycoplasma databases to a single file, which you then easily can add to each of your main databases.
 
 Often you may not want to use the most recent database for reasons of reproducibility. If so, you can transfer the final database of this tutorial into other histories to work with it.

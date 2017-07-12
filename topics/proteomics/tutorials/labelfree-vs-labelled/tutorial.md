@@ -5,6 +5,8 @@ tutorial_name: labelfree-vs-labelled
 ---
 
 # Purpose
+{:.no_toc}
+
 A basic question when planning any quantitative proteomic experiment is the choice between label-free versus labelled quantitation. Here, we want to explain and discuss benefits and drawbacks of each method.
 Finally, we will give a guideline what points may be vital for the decision in our opinion. We will not discuss different labelling methods here in detail, but focus on our basic question.
 
@@ -16,8 +18,9 @@ A basic overview of different quantitation techniques is shown below ([original 
 >
 > In this tutorial, we will deal with:
 >
-> 1. [Drawbacks and Benefits of Labelled Quantitation](#drawbacks-and-benefits-of-labelled-quantitation)
-> 2. [Guideline: How to Choose Your Technique](#guideline-how-to-choose-your-technique)
+> 1. TOC
+> {:toc}
+>
 {: .agenda}
 
 

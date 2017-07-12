@@ -5,6 +5,7 @@ tutorial_name: visualization-charts
 ---
 
 ## Introduction
+{:.no_toc}
 
 In this tutorial we are going to demonstrate how to add a 3rd-party visualization to *Charts* and what the benefits are. The plugin we select for this purpose is the [*PV-Javascript Protein Viewer*](https://biasmv.github.io/pv/). It is an open source, protein structure viewer for `PDB`-files. There are many other popular protein structure viewers available for the visualization of `PDB`-files such as e.g. [NGL](https://arose.github.io/ngl/) (also available in *Charts*) and [JSMol](https://chemapps.stolaf.edu/jmol/jsmol/jsmol.htm).
 
@@ -63,6 +64,16 @@ As mentioned above we will be focusing on the *PV-Javascript Protein Viewer* in 
 > 3. Can you find the minified code file of this plugin?
 >
 {: .hands_on}
+
+> ### Agenda
+>
+> In this tutorial, we will deal with:
+>
+> 1. TOC
+> {:toc}
+>
+{: .agenda}
+
 
 ## Section 1 - Basic plugin setup
 ### 1.1 Directory and plugin preparations
@@ -372,5 +383,6 @@ From the *PV-Viewer* documentation we can see that there are more settings avail
 {: .hands_on}
 
 ## Conclusion
+{:.no_toc}
 
 First of all, thank you for completing this tutorial. We have learned how to add visualizations to the *Charts* framework and how to build a custom visualization form.

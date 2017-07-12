@@ -5,6 +5,7 @@ tutorial_name: your_tutorial_name
 ---
 
 # Introduction
+{:.no_toc}
 
 General introduction about the topic and then an introduction of the tutorial (the questions and the objectives). It is nice also to have a scheme to sum up the pipeline used during the tutorial. The idea is to give to trainees insight into the content of the tutorial and the (theoretical and technical) key concepts they will learn.
 
@@ -12,9 +13,9 @@ General introduction about the topic and then an introduction of the tutorial (t
 >
 > In this tutorial, we will deal with:
 >
-> 1. [Pretreatments](#pretreatments)
-> 2. [Mapping](#mapping)
-> 3. [Analysis of the differential expression](#analysis-of-the-differential-expression)
+> 1. TOC
+> {:toc}
+>
 {: .agenda}
 
 # Part 1
@@ -94,5 +95,6 @@ Short introduction about this subpart.
 > {: .comment}
 
 # Conclusion
+{:.no_toc}
 
 Conclusion about the technical key points. And then relation between the technics and the biological question to end with a global view.

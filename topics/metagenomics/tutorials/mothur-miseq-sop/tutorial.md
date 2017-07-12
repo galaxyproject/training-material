@@ -5,6 +5,8 @@ tutorial_name: mothur-miseq-sop
 ---
 
 # Overview
+{:.no_toc}
+
 In this tutorial we will perform the
 [Standard Operating Procedure (SOP) for MiSeq data](https://www.mothur.org/wiki/MiSeq_SOP), developed by the
 creators of the Mothur software package, the [Schloss lab](https://www.schlosslab.org/), within Galaxy.
@@ -13,23 +15,9 @@ creators of the Mothur software package, the [Schloss lab](https://www.schlossla
 >
 > In this tutorial, we will:
 >
-> 1. [Obtain and prepare our input data](#obtaining-and-preparing-data)
->   - [Understand our experimental setup](#understanding-our-input-data)
->   - [Import the data into Galaxy](#importing-the-data-into-galaxy)
-> 2. [Perform Quality Control](#quality-control)
->   - [Reduce sequencing and PCR errors](#reducing-sequencing-and-pcr-errors)
->   - [Align sequence to a reference](#sequence-alignment)
->   - [Chimera Removal](#chimera-removal)
->   - [Remove contamination](#removal-of-non-bacterial-sequences)
->   - [Assess error rate by sequencing a mock community](#assessing-error-rates-based-n-our-mock-community)
->   - [Prepare for analysis](#preparing-for-analysis)  
-> 3. [Perform OTU-based analysis](#otu-based-analysis)
->   - [Alpha diversity](#alpha-diversity)
->   - [Beta diversity](#beta-diversity)
->   - [Population-level analysis](#population-level-analysis)
-> 4. [Visualizing our data](#visualizations)
->   - [Phinch](#phinch)
->   - [Krona](#krona)
+> 1. TOC
+> {:toc}
+>
 {: .agenda}
 
 
@@ -1569,6 +1557,7 @@ innermost ring labeled "Bacteria"
 {: .question}
 
 # Conclusion
+{:.no_toc}
 
 You have now seen how to perform the Schloss lab's Standard Operating Procedure (SOP) for MiSeq data.
 You have worked your way through the following pipeline:

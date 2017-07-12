@@ -5,6 +5,7 @@ tutorial_name: create-new-tutorial-docker
 ---
 
 # Introduction
+{:.no_toc}
 
 Galaxy is a great solution to train the bioinformatics concepts:
 
@@ -19,6 +20,15 @@ We took inspiration from [Software Carpentry](https://software-carpentry.org) an
 We decided on a structure based on tutorials with hands-on, fitting both for online self-training but also for workshops, grouped in topics. Each tutorial follows the same structure and comes with a virtualised isntance to run the training everywhere.
 
 In this tutorial, you will learn how to create a virtualised Galaxy instance, based on Docker, to run your training - either on normal computers or cloud environments.
+
+> ### Agenda
+>
+> In this tutorial, we will deal with:
+>
+> 1. TOC
+> {:toc}
+>
+{: .agenda}
 
 > ### Devloping GTN training material
 >
@@ -161,3 +171,16 @@ Every topic will come with a Docker image containing the tools, data, workflows 
 {: .hands_on}
 
 # Conclusion
+{:.no_toc}
+
+> ### Developing GTN training material
+>
+> This tutorial is part of a series to develop GTN training material, feel free to also look at:
+>
+> 1. [Writing content in markdown](../create-new-tutorial-content/tutorial.html)
+> 1. [Defining metadata](../create-new-tutorial-metadata/tutorial.html)
+> 1. [Setting up the infrastructure](../create-new-tutorial-jekyll/tutorial.html)
+> 1. [Creating Interactive Galaxy Tours](../create-new-tutorial-tours/tutorial.html)
+> 1. [Building a Docker flavor](../create-new-tutorial-docker/tutorial.html)
+> 1. [Submitting the new tutorial to the GitHub repository](../../../dev/tutorials/github-contribution/slides.html)
+{: .agenda}

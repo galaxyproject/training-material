@@ -6,20 +6,16 @@ tutorial_name: methylation-seq
 
 > ### Agenda
 >
-> In this tutorial we will:
+> In this tutorial, we will deal with:
 >
-> 1. [Load data and quality control](#load-data-and-quality-control)
-> 2. [Align the data](#alignment)
-> 3. [Methylation bias and metric extraction](#methylation-bias-and-metric-extraction)
-> 4. [Visualize the mapped data](#visualization)
-> 5. [Metilene](#metilene)
->
->
-> This tutorial is based on [I-Hsuan Lin et al.: 'Hierarchical Clustering of Breast Cancer Methylomes Revealed Differentially Methylated and Expressed Breast Cancer Genes'](https://dx.doi.org/10.1371/journal.pone.0118453).
->
-> The data we use in this tutorial is available at [Zenodo](https://zenodo.org/record/557099).
+> 1. TOC
+> {:toc}
 >
 {: .agenda}
+
+This tutorial is based on [I-Hsuan Lin et al.: 'Hierarchical Clustering of Breast Cancer Methylomes Revealed Differentially Methylated and Expressed Breast Cancer Genes'](https://dx.doi.org/10.1371/journal.pone.0118453).
+
+The data we use in this tutorial is available at [Zenodo](https://zenodo.org/record/557099).
 
 
 # Load data and quality control

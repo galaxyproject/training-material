@@ -5,15 +5,18 @@ tutorial_name: mapping
 ---
 
 # Introduction to next generation sequencing data mapping
+{:.no_toc}
+
 To map DNA/RNA reads of an experiment to a reference genome is a key step in modern genomic data analysis. With the mapping the reads are assigned to a specific location in the genome and insights like the expression level of genes can be gained.
 In the following we will process a dataset with a mapper, 'Bowtie2', and we will visualize the data with the software 'IGV'.
 
 > ### Agenda
 >
-> In this tutorial we will:
+> In this tutorial, we will deal with:
 >
-> 1. [Map the data](#mapping)
-> 3. [Visualize the mapped data](#visualization)
+> 1. TOC
+> {:toc}
+>
 {: .agenda}
 
 # Mapping

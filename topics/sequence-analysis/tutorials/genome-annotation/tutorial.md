@@ -5,6 +5,7 @@ tutorial_name: genome-anotation
 ---
 
 # Introduction
+{:.no_toc}
 
 Genome annotation is the process of attaching biological information to sequences.
 It consists of three main steps:
@@ -17,9 +18,9 @@ It consists of three main steps:
 >
 > In this tutorial, we will deal with:
 >
-> 1. [Introduction into File Formats](#introduction-into-file-formats)
-> 2. [Structural Annotation](#structural-annotation)
-> 3. [Functional Annotation](#functional-annotation)
+> 1. TOC
+> {:toc}
+>
 {: .agenda}
 
 # Introduction into File Formats

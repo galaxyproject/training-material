@@ -5,6 +5,7 @@ tutorial_name: srna
 ---
 
 # Introduction
+{:.no_toc}
 
 Small, noncoding RNA (sRNA) molecules, typically 18-40nt in length, are key features of post-transcriptional regulatory mechanisms governing gene expression. Through interactions with protein cofactors, these tiny sRNAs typically function by perfectly or imperfectly basepairing with substrate RNA molecules, and then eliciting downstream effects such as translation inhibition or RNA degradation. Different subclasses of sRNAs - *e.g.* microRNAs (miRNAs), Piwi-interaction RNAs (piRNAs), and endogenous short interferring RNAs (siRNAs) - exhibit unique characteristics, and their relative abundances in biological contexts can indicate whether they are active or not. In this tutorial, we will examine expression of the piRNA subclass of sRNAs and their targets in *Drosophila melanogaster*.
 
@@ -18,18 +19,11 @@ It is of note that this tutorial uses datasets that have been de-multiplexed so 
 
 > ### Agenda
 >
-> In this tutorial, we will address:
+> In this tutorial, we will deal with:
 >
-> 1. Data upload and organization
-> 1. Read quality checking
-> 1. Adaptor trimming
-> 1. Hierarchical read alignment to remove rRNA/miRNA reads
-> 1. Small RNA subclass distinction
-> 1. piRNA abundance estimation
-> 1. piRNA differential abundance testing
-> 1. Small RNA and mRNA integration
-> 1. Visualization
-> 1. Conclusion
+> 1. TOC
+> {:toc}
+>
 {: .agenda}
 
 ## Data upload and organization
@@ -330,6 +324,7 @@ For more information about `DESeq2` and its outputs, have a look at [`DESeq2` do
 Coming soon!
 
 ## Conclusion
+{:.no_toc}
 
 Analysis of small RNAs is a complicated and intricate process due to the diversity in characteristics, functionality, and nuances of small RNA subclasses. The goal of this tutorial is to introduce you to a common small RNA workflow that specifically identifies changes in endogenous siRNA abundances that target protein-coding mRNAs and transposable elements. The steps presented here can be rearranged and modified based on small RNA features of specific systems and the needs of the user.
 

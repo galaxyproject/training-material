@@ -5,6 +5,7 @@ tutorial_name: tal1-binding-site-identification
 ---
 
 # Introduction
+{:.no_toc}
 
 This tutorial uses ChIP-seq datasets from a study published by [Wu *et al.* (2014)](https://genome.cshlp.org/content/24/12/1945.full.pdf+html). The goal of this study was to investigate "the dynamics of occupancy and the role in gene regulation of the transcription factor Tal1, a critical regulator of hematopoiesis, at multiple stages of hematopoietic differentiation."
 
@@ -32,15 +33,9 @@ Because of the long processing time for the large original files, we have downsa
 >
 > In this tutorial, we will deal with:
 >
-> 1. [Step 1: Quality control](#step-1-quality-control)
-> 2. [Step 2: Trimming/clipping reads](#step-2-trimming-and-clipping-reads)
-> 3. [Step 3: Aligning reads to a genome](#step-3-aligning-reads-to-a-reference-genome)
-> 4. [Step 4: Assessing correlation between samples](#step-4-assessing-correlation-between-samples)
-> 5. [Step 5: Assessing IP strength](#step-5-assessing-ip-strength)
-> 6. [Step 6: Determining Tal1 binding sites](#step-6-determining-tal1-binding-sites)
-> 7. [Step 7: Inspection of Tal1 peaks](#step-7-inspection-of-peaks-and-aligned-data)
-> 8. [Step 8: Identifying unique/common Tal1 peaks](#step-8-identifying-unique-and-common-tal1-peaks-between-states)
-> 9. [Additional optional analyses](#additional-optional-analyses)
+> 1. TOC
+> {:toc}
+>
 {: .agenda}
 
 # Step 1: Quality control
@@ -442,5 +437,6 @@ For additional informaton on how to interpret **computeGCbias** plots, read the 
 
 
 # Conclusion
+{:.no_toc}
 
 In this exercise you imported raw Illumina sequencing data, evaluated the quality before and after you trimmed reads with low confidence scores, algined the trimmed reads, identified Tal1 peaks relative to the negative control (background), and visualized the aligned reads and Tal1 peaks relative to gene structures and positions. Additional, you assessed the "goodness" of the experiments by looking at metrics such as GC bias and IP enrichment.

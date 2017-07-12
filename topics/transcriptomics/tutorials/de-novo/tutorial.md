@@ -5,6 +5,7 @@ tutorial_name: de-novo
 ---
 
 # Introduction
+{:.no_toc}
 
 The data provided here are part of a Galaxy tutorial that analyzes RNA-seq data from a study published by *Wu et al.* in 2014 [DOI:10.1101/gr.164830.113](https://genome.cshlp.org/content/early/2014/10/12/gr.164830.113.abstract). The goal of this study was to investigate "the dynamics of occupancy and the role in gene regulation of the transcription factor Tal1, a critical regulator of hematopoiesis, at multiple stages of hematopoietic differentiation." To this end, RNA-seq libraries were constructed from multiple mouse cell types including G1E - a GATA-null immortalized cell line derived from targeted disruption of GATA-1 in mouse embryonic stem cells - and megakaryocytes. This RNA-seq data was used to determine differential gene expression between G1E and megakaryocytes and later correlated with Tal1 occupancy. This dataset (GEO Accession: GSE51338) consists of biological replicate, paired-end, poly(A) selected RNA-seq libraries. Because of the long processing time for the large original files, we have downsampled the original raw data files to include only reads that align to chromosome 19 and a subset of interesting genomic loci identified by Wu *et al*.
 
@@ -14,15 +15,11 @@ The goal of this exercise is to identify what transcripts are present in the G1E
 
 > ### Agenda
 >
-> In this tutorial, we will address:
+> In this tutorial, we will deal with:
 >
-> 1. Data upload
-> 2. Read trimming
-> 3. Read mapping
-> 4. *De novo* transcript reconstruction
-> 5. Transcriptome assembly
-> 6. Read counting and differential expression analysis
-> 7. Visualization
+> 1. TOC
+> {:toc}
+>
 {: .agenda}
 
 ## Data upload
@@ -395,6 +392,7 @@ In this last section, we will convert our aligned read data from BAM format to b
 {: .hands_on}
 
 # Conclusion
+{:.no_toc}
 
 In this tutorial, we have analyzed real RNA sequencing data to extract useful information, such as which genes are up- or down-regulated by depletion of the Pasilla gene and which genes are regulated by the Pasilla gene. To answer these questions, we analyzed RNA sequence datasets using a reference-based RNA-seq data analysis approach. This approach can be sum up with the following scheme:
 

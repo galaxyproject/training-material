@@ -7,6 +7,7 @@ tutorial_name: diploid-variant-calling
 > Much of Galaxy-related features described in this section have been developed by Björn Grüning (@bgruening) and configured by Dave Bouvier (@davebx).
 
 # Introduction
+{:.no_toc}
 
 Variant calling is a complex field that was significantly propelled by advances in DNA sequencing and efforts of large scientific consortia such as the [1000 Genomes](https://www.1000genomes.org). Here we summarize basic ideas central to Genotype and Variant calling. First, let's contrast the two things although they often go together:
 
@@ -29,10 +30,9 @@ However, continuing evolution of variant detection methods has made some of thes
 >
 > In this tutorial, we will deal with:
 >
-> 1. [How does SNP calling and genotyping work?](#how-does-SNP-calling-and-genotyping-work)
-> 2. [Calling with FreeBayes](#calling-with-freebayes)
-> 3. [Let's try it](#lets-try-it)
-> 4. [Going further](#going-further)
+> 1. TOC
+> {:toc}
+>
 {: .agenda}
 
 # How does SNP calling and genotyping work?
@@ -306,6 +306,7 @@ Wildcards simply writing SQL expressions when searching across multiple terms. T
 {: .question}
 
 # Going further
+{:.no_toc}
 
 This short tutorial should give you an overall idea on how generate variant data in Galaxy and process it with GEMINI. Yet there is much more to learn. Below we list GEMINI tutorials and links to Galaxy libraries with relevant data.
 

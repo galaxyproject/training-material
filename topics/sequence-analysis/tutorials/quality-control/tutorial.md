@@ -5,6 +5,7 @@ tutorial_name: quality-control
 ---
 
 # Introduction
+{:.no_toc}
 
 During the sequencing process, some errors may be introduced like incorporation of ambiguous nucleotides. Analyzing poor data wastes CPU and people time.
 
@@ -14,9 +15,9 @@ The quality control of the sequences right after sequencing is then an essential
 >
 > In this tutorial, we will deal with:
 >
-> 1. [Sequence dataset importing](#sequence-dataset-importing)
-> 2. [Quality checking of the sequences](#quality-checking-of-the-sequences)
-> 3. [Improvement of the quality of the sequences](#improvement-of-the-quality-of-the-sequences)
+> 1. TOC
+> {:toc}
+>
 {: .agenda}
 
 # Sequence dataset importing
@@ -204,6 +205,7 @@ Now, we would like to see the impact to quality control and treatment on a bad d
 {: .hands_on}
 
 # Conclusion
+{:.no_toc}
 
 In this tutorial, we have controlled the quality of two datasets to ensure that the raw data looks good before analysing them with tools to extract RNA-Seq, ChIP-Seq or any other type of information. The approach of quality control is similar for any type of sequencing data:
 

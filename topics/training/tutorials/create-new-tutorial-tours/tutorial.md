@@ -5,6 +5,7 @@ tutorial_name: create-new-tutorial-tours
 ---
 
 # Introduction
+{:.no_toc}
 
 Galaxy is a great solution to train the bioinformatics concepts:
 
@@ -19,16 +20,13 @@ We take inspiration from [Software Carpentry](https://software-carpentry.org). W
 
 In this tutorial, you will understand how to design and develop a new tutorial fitting in this training material repository. As doing helps to understand, we will develop a small tutorial to explain BLAST with the full infrastructure to be able to run this tutorial anywhere.
 
-> ### Devloping GTN training material
+> ### Agenda
 >
-> This tutorial is part of a series to develop GTN training material, feel free to also look at:
+> In this tutorial, we will deal with:
 >
-> 1. [Writing content in markdown](../create-new-tutorial-content/tutorial.html)
-> 1. [Defining metadata](../create-new-tutorial-metadata/tutorial.html)
-> 1. [Setting up the infrastructure](../create-new-tutorial-jekyll/tutorial.html)
-> 1. [Creating Interactive Galaxy Tours](../create-new-tutorial-tours/tutorial.html)
-> 1. [Building a Docker flavor](../create-new-tutorial-docker/tutorial.html)
-> 1. [Submitting the new tutorial to the GitHub repository](../../../dev/tutorials/github-contribution/slides.html)
+> 1. TOC
+> {:toc}
+>
 {: .agenda}
 
 # A Galaxy Interactive Tour
@@ -120,3 +118,16 @@ We can now create easily a Galaxy Interactive Tour and test it on the fly.
 {: .hands_on}
 
 # Conclusion
+{:.no_toc}
+
+> ### Developing GTN training material
+>
+> This tutorial is part of a series to develop GTN training material, feel free to also look at:
+>
+> 1. [Writing content in markdown](../create-new-tutorial-content/tutorial.html)
+> 1. [Defining metadata](../create-new-tutorial-metadata/tutorial.html)
+> 1. [Setting up the infrastructure](../create-new-tutorial-jekyll/tutorial.html)
+> 1. [Creating Interactive Galaxy Tours](../create-new-tutorial-tours/tutorial.html)
+> 1. [Building a Docker flavor](../create-new-tutorial-docker/tutorial.html)
+> 1. [Submitting the new tutorial to the GitHub repository](../../../dev/tutorials/github-contribution/slides.html)
+{: .agenda}

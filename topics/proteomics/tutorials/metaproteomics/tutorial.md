@@ -5,6 +5,7 @@ tutorial_name: metaproteomics
 ---
 
 # Introduction
+{:.no_toc}
 
 In this metaproteomics tutorial we will identify expressed proteins from a complex bacterial community sample.
 For this MS/MS data will be matched to peptide sequences provided through a FASTA file.
@@ -15,10 +16,11 @@ the host / environment by analyzing the functional dynamics of the microbiome.
 
 > ### Agenda
 >
-> 1. [Pretreatments](#pretreatments)
-> 2. [Match peptide sequences](#match-peptide-sequences)
-> 3. [Unipept metaproteomic analysis](#unipept-metaproteomic-analysis)
-> 4. [Summarizing the results](#genus-taxonomy-level-summary)
+> In this tutorial, we will deal with:
+>
+> 1. TOC
+> {:toc}
+>
 {: .agenda}
 
 # Pretreatments
