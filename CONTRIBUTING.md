@@ -118,7 +118,7 @@ images. We recommend to use the content of [`templates/docker`](templates/docker
 
 The `docker` image must also integrate a Galaxy tour from the [`tours` repository](https://github.com/galaxyproject/galaxy-tours)
 
-> Want to learn more to a tutorial? [Check out our tutorial to build a Docker flavor for a tutorial](https://galaxyproject.github.io/training-material//topics/training/tutorials/create-new-tutorial-docker/tutorial.html)
+> Want to learn more? [Check out our tutorial to build a Docker flavor for a tutorial](https://galaxyproject.github.io/training-material//topics/training/tutorials/create-new-tutorial-docker/tutorial.html)
 
 # How do I add new content?
 
