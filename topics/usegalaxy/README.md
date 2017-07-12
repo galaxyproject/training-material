@@ -9,7 +9,7 @@ Several deck of slides are available for this topic:
 
 - [General introduction about <topic name>](https://galaxyproject.github.io/training-material/templates/slides/)
 - Slide deck related to the tutorials:
-    - [Tutorial name](https://github.con/galaxyproject/training-material/templates/tutorials)
+    - [Tutorial name](https://github.com/galaxyproject/training-material/tree/master/templates/tutorials/)
 
 # Tutorials
 

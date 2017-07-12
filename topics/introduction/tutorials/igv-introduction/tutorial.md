@@ -21,7 +21,7 @@ To start IGV, go to the IGV downloads page: https://www.broadinstitute.org/softw
 
 **Tool bar** ![callout_1.jpg](../../images/callout_1.jpg)
 
-- The [tool bar](https://www.broadinstitute.org/software/igv/?q=ToolBar) provides access to commonly used functions. The [menu bar](http://www.broadinstitute.org/software/igv/?q=MenuBar) and [pop-up menus](http://www.broadinstitute.org/software/igv/?q=PopupMenus) (not shown) provide access to all other functions.
+- The [tool bar](https://www.broadinstitute.org/software/igv/?q=ToolBar) provides access to commonly used functions. The [menu bar](https://www.broadinstitute.org/software/igv/?q=MenuBar) and [pop-up menus](http://www.broadinstitute.org/software/igv/?q=PopupMenus) (not shown) provide access to all other functions.
 
 **Chromosome** ![callout_2.jpg](../../images/callout_2.jpg)
 
@@ -132,7 +132,7 @@ To start IGV, go to the IGV downloads page: https://www.broadinstitute.org/softw
 
 - Find Motif - Search for a particular nucleotide sequence in the reference genome.
 
-- Gitools Heatmaps - Data and results are represented as browsable heatmaps. Data can be exported from IGV in gitools format, or loaded directly into a running gitools session. See https://www.gitools.org for details.
+- Gitools Heatmaps - Data and results are represented as browsable heatmaps. Data can be exported from IGV in gitools format, or loaded directly into a running gitools session. See http://www.gitools.org for details.
 
 - BEDTools - A fast, flexible suite of tools used to compare sets of genomic features. IGV uses BEDTools to compare features in loaded tracks, and view the results as a new track. See more details under [Third Party Tools Integration](https://www.broadinstitute.org/software/igv/third_party_tools#_blank).
 
@@ -148,7 +148,7 @@ To start IGV, go to the IGV downloads page: https://www.broadinstitute.org/softw
 
 - Logout - Log out of GenomeSpace
 
-- Register - Register a new account at [GenomeSpace](https://www.genomespace.org/)
+- Register - Register a new account at [GenomeSpace](http://www.genomespace.org/)
 
 **Help**
 

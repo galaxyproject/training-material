@@ -218,7 +218,7 @@ Use the regions provided by the gene annotation file downloaded from UCSC and yo
 
 **Liu et al. (2010):** [Q&A: ChIP-seq technologies and the study of gene regulation](https://bmcbiol.biomedcentral.com/articles/10.1186/1741-7007-8-56), (doi:10.1186/1741-7007-8-56) - Short overview of several (typical) issues of ChIP-seq analysis
 
-**Carroll et al. (2014):**  [Impact of artifact removal on ChIP quality metrics in ChIP-seq and ChIP-exo data](https://journal.frontiersin.org/article/10.3389/fgene.2014.00075/full),(doi:10.3389/fgene.2014.00075)  
+**Carroll et al. (2014):**  [Impact of artifact removal on ChIP quality metrics in ChIP-seq and ChIP-exo data](http://journal.frontiersin.org/article/10.3389/fgene.2014.00075/full),(doi:10.3389/fgene.2014.00075)  
 
 <a name="peakcalling"/></a>
 ###Peak Calling Methods (ChIP-seq)
@@ -246,7 +246,7 @@ Use the regions provided by the gene annotation file downloaded from UCSC and yo
 
 **Bailey and Machanick (2012):** [Inferring direct DNA binding from ChIP-seq](https://www.ncbi.nlm.nih.gov/pubmed/22610855), (doi:10.1093/nar/gks433) - Centrimo: position-specific motif analysis, especially useful for ChIP-seq data
 
-[TomTom](https://meme-suite.org/tools/tomtom) - Meme Suite Motif comparison tool: tool for the comparison of motifs from databases (not in Galaxy yet): [Manual](http://meme-suite.org/doc/tomtom.html?man_type=web)
+[TomTom](http://meme-suite.org/tools/tomtom) - Meme Suite Motif comparison tool: tool for the comparison of motifs from databases (not in Galaxy yet): [Manual](http://meme-suite.org/doc/tomtom.html?man_type=web)
 
 #### TRAP
 

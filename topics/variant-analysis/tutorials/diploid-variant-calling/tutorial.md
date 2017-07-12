@@ -192,7 +192,7 @@ This produces a dataset in [VCF](https://www.1000genomes.org/wiki/Analysis/varia
 
 ## Annotating variants with SnpEff
 
-At this point we are ready to begin annotating variants using [**SnpEff**](https://snpeff.sourceforge.net/SnpEff.html). **SnpEff**, a project maintained by [Pablo Cingolani](https://www.linkedin.com/in/pablocingolani) "*...annotates and predicts the effects of variants on genes (such as amino acid changes)...*" and so is critical for functional interpretation of variation data.
+At this point we are ready to begin annotating variants using [**SnpEff**](http://snpeff.sourceforge.net/SnpEff.html). **SnpEff**, a project maintained by [Pablo Cingolani](https://www.linkedin.com/in/pablocingolani) "*...annotates and predicts the effects of variants on genes (such as amino acid changes)...*" and so is critical for functional interpretation of variation data.
 
 ### :pencil2: Annotating variants
 

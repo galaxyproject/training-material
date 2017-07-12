@@ -24,4 +24,4 @@ For more details about this command line or specific usage, please consult the
 
 # Support & Bug Reports
 
-You can file an [GitHub issue](https://github.com/bgruening/training-material/issues) or ask us on the [Galaxy development list](https://lists.bx.psu.edu/listinfo/galaxy-dev).
+You can file an [GitHub issue](https://github.com/bgruening/training-material/issues) or ask us on the [Galaxy development list](https://lists.galaxyproject.org/listinfo/galaxy-dev).

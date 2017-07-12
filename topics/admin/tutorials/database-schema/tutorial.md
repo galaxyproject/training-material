@@ -327,7 +327,7 @@ https://docs.google.com/presentation/d/1l4DD0IaJjuvk1zAT1Sjv26bLyrSOg3VUm7rD-TQl
 To run SchemaSpy in your container you’ll need to get it, and also install some required software packages.
 
 >   ```sh
->   wget https://downloads.sourceforge.net/project/schemaspy/schemaspy/SchemaSpy%205.0.0/schemaSpy_5.0.0.jar
+>   wget http://downloads.sourceforge.net/project/schemaspy/schemaspy/SchemaSpy%205.0.0/schemaSpy_5.0.0.jar
 >   apt-get update
 >   apt-get install libpostgresql-jdbc-java
 >   apt-get install graphviz

@@ -121,7 +121,7 @@ The FastQC tool:
 
 Although we have warnings for two outputs (per base sequence content; Kmer content), we can ignore these for now.
 
-For a fuller discussion of FastQC outputs and warnings, see the [FastQC website link](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/), including the section on each of the output [reports](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/Help/3%20Analysis%20Modules/), and examples of ["good"](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/good_sequence_short_fastqc.html) and ["bad"](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/bad_sequence_fastqc.html) Illumina data.
+For a fuller discussion of FastQC outputs and warnings, see the [FastQC website link](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/), including the section on each of the output [reports](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/Help/3%20Analysis%20Modules/), and examples of ["good"](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/good_sequence_short_fastqc.html) and ["bad"](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/bad_sequence_fastqc.html) Illumina data.
 
 We won’t be doing anything to these data to clean it up as there isn’t much need. Therefore we will get on with the assembly!
 

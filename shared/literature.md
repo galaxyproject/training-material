@@ -20,13 +20,13 @@
 ##Bioinformatic Tools (Linux, R, BEDTools etc.) - Manuals, courses, original papers
 
 - Why and how is bioinformatics software special? **Altschul et a. (2013)** [The anatomy of successful computational biology software](https://www.ncbi.nlm.nih.gov/pubmed/24104757), (doi:10.1038/nbt.2721) **(Highly recommended to read!)**
-- **Bild et al. (2014)** [A Field Guide to Genomics Research](https://journals.plos.org/plosbiology/article?id=10.1371/journal.pbio.1001744), (doi:10.1371/journal.pbio.1001744) - Very readable introduction about the different caveats of genomics research (with cute cartoons!)
+- **Bild et al. (2014)** [A Field Guide to Genomics Research](http://journals.plos.org/plosbiology/article?id=10.1371/journal.pbio.1001744), (doi:10.1371/journal.pbio.1001744) - Very readable introduction about the different caveats of genomics research (with cute cartoons!)
 
 **Linux Command Line**
 
-- [Linux & Perl Primer for Biologists](https://korflab.ucdavis.edu/Unix_and_Perl/unix_and_perl_v3.1.1.html) - Very entertaining introduction to command line commands and perl scripts with a focus on bioinformatic application, i.e. handling of DNA sequences
+- [Linux & Perl Primer for Biologists](http://korflab.ucdavis.edu/Unix_and_Perl/unix_and_perl_v3.1.1.html) - Very entertaining introduction to command line commands and perl scripts with a focus on bioinformatic application, i.e. handling of DNA sequences
 - [Linux Tutorial for Beginners](http://www.ee.surrey.ac.uk/Teaching/Unix/) - Thorough, but concise online tutorial introducing the very basics of handling the Linux command line
-- [Writing Linux shell scripts](https://www.freeos.com/guides/lsst/index.html) - Useful for slightly more advanced Linux command line users
+- [Writing Linux shell scripts](http://www.freeos.com/guides/lsst/index.html) - Useful for slightly more advanced Linux command line users
 
 **R**
 

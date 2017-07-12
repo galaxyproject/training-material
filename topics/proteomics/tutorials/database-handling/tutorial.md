@@ -49,7 +49,7 @@ In this tutorial, we will explore **Protein Database Downloader** :wrench: for g
 >  >  <details>
 >  >  <summary>Click to view answer!</summary>
 >  >  <ol type="1">
->  >  <li> A UniProt complete proteome consists of the set of proteins thought to be expressed by an organism whose genome has been completely sequenced. A reference proteome is the complete proteome of a representative, well-studied model organism or an organism of interest for biomedical research. Reference proteomes constitute a representative cross-section of the taxonomic diversity to be found within UniProtKB. They include the proteomes of well-studied model organisms and other proteomes of interest for biomedical and biotechnological research. Species of particular importance may be represented by numerous reference proteomes for specific ecotypes or strains of interest. [Link to source](https://www.uniprot.org/help/reference_proteome)</li>
+>  >  <li> A UniProt complete proteome consists of the set of proteins thought to be expressed by an organism whose genome has been completely sequenced. A reference proteome is the complete proteome of a representative, well-studied model organism or an organism of interest for biomedical research. Reference proteomes constitute a representative cross-section of the taxonomic diversity to be found within UniProtKB. They include the proteomes of well-studied model organisms and other proteomes of interest for biomedical and biotechnological research. Species of particular importance may be represented by numerous reference proteomes for specific ecotypes or strains of interest. [Link to source](http://www.uniprot.org/help/reference_proteome)</li>
 >  >  </ol>
 >  >  </details>
 >  > {: .question}
