@@ -204,7 +204,15 @@ We recommend to structure the tutorials like this
 >
 > Mathematical expressions can be written in LaTeX: they will be rendered with [MathJax](https://www.mathjax.org/).
 >
-> It is easy: surround your math content with two `$` signs, like with a math block. If you don't want to start an inline math statement, just escape the dollar signs and they will be treated as simple dollar signs.
+> It is easy: surround your math content with two `$` signs, like with a math block:
+>
+> - inline, *e.g.* `$$ 5 + 5 $$` will be rendered as $$ 5 + 5 $$
+> - not inline, *e.g.* `$$ 5 + 5 $$` alone in new line will be rendered as
+>
+>   $$ 5 + 5 $$
+>
+>
+> If you don't want to start an inline math statement, just escape the dollar signs and they will be treated as simple dollar signs.
 >
 >    > ### :nut_and_bolt: Comments
 >    > LaTeX code that uses the pipe symbol `|` in inline math statements may lead to a line being recognized as a table line.
