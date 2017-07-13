@@ -28,18 +28,16 @@ It is of note that this tutorial uses datasets that have been de-multiplexed so 
 
 ## Data upload and organization
 
-<!-- TODO: add data to zenodo and add link -->
-
-Due to the large size of the original sRNA-seq datasets, we have downsampled them to only inlcude a subset of usable reads. These datasets are avaialble at [`Zenodo`](zenodo.org /record/####), where you can find the FASTQ files corresponding to replicate sRNA-seq and mRNA-seq libraries and additiona annotation files for the *Drosophila melanogaster* genome version dm3.
+Due to the large size of the original sRNA-seq datasets, we have downsampled them to only inlcude a subset of reads. These datasets are avaialble at [`Zenodo`](https://doi.org/10.5281/zenodo.826906) where you can find the FASTQ files corresponding to replicate sRNA-seq experiments and additional annotation files for the *Drosophila melanogaster* genome version dm3.
 
 > ### :pencil2: Hands-on: Data upload and organization
 >
 > 1. Create a new history and name it something meaningful (*e.g.* sRNA-seq tutorial)
 > 1. Open the Data Upload Manager by selecting *Get Data* from the Tool Panel and clicking *Upload File*
 > 1. Select *Paste/Fetch Data*
-> 1. Copy each link for the read (.fq), annotation (.gtf), and reference sequence (.fa) files, and paste each link into a separate text field
->    - Set the datatype of the read (.fq) files to **fastq**
->    - Set the datatype of the annotation (.gtf) file to **gtf** and assign the Genome as **dm3**
+> 1. Copy each link for the read (.fastqsanger), annotation (.tab), and reference sequence (.fa) files, and paste each link into a separate text field
+>    - Set the datatype of the read (.fastqsanger) files to **fastq**
+>    - Set the datatype of the annotation (.tab) file to **tab** and assign the Genome as **dm3**
 >    - Set the datatype of the reference (.fa) files to **fasta** and assign the Genome as **dm3**
 > 1. Click *Start*
 > 1. Rename the files in your history to something meaningful (*e.g.* Blank_RNAi_sRNA_rep1.fastq)
