@@ -34,7 +34,6 @@ clean :
 ## install          : install dependencies
 install:
 	gem install bundler
-	gem install nokogiri
 	bundle install
 	bundle update
 
