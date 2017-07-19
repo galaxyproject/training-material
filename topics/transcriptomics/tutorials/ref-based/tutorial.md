@@ -144,7 +144,7 @@ Spliced mappers have been developed to efficiently map transcript-derived reads 
 2. Generation of possible splices between neighboring exons
 3. Comparison of reads that did not initially map to the genome against these *in silico* created junctions
 
-![](../../images/tophat2.png)
+![Kim et al.](../../images/tophat2.png "Kim et al., Genome Biology, 2013")
 
 *[Kim et al., Genome Biology, 2013](https://genomebiology.biomedcentral.com/articles/10.1186/gb-2013-14-4-r36)*
 
