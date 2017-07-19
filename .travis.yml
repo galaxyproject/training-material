@@ -42,13 +42,13 @@ before_script:
   - vl --version
 
   # patch vl to send user-agent header (some links give error if not set)
-  - |
-    sed  -i 's|requests = (grequests.head(u, timeout=timeout, verify=False)|requests = (grequests.head(u, timeout=timeout, verify=False, headers={\x27User-Agent\x27: \x27Mozilla\x27})|' /home/travis/virtualenv/python*/lib/python*/site-packages/vl/cli.py
+  #- |
+  #  sed  -i 's|requests = (grequests.head(u, timeout=timeout, verify=False)|requests = (grequests.head(u, timeout=timeout, verify=False, headers={\x27User-Agent\x27: \x27Mozilla\x27})|' /home/travis/virtualenv/python*/lib/python*/site-packages/vl/cli.py
 
 script:
   - set -e
   # Check links
-  - find .  \( -name "*.md" -o -name "*.html" \) -not -path "./assets/reveal.js/*" | xargs -L 1 -I '{}' sh -c "echo {}; vl -d -t 15 -s 1000 --allow-codes 405 --whitelist localhost,127.0.0.1,fqdn,publish.twitter.com,linkedin.com,vimeo.com {}"
+  #- find .  \( -name "*.md" -o -name "*.html" \) -not -path "./assets/reveal.js/*" | xargs -L 1 -I '{}' sh -c "echo {}; vl -d -t 15 -s 1000 --allow-codes 405 --whitelist localhost,127.0.0.1,fqdn,publish.twitter.com,linkedin.com,vimeo.com {}"
   #
   # Check structure
   #- ./bin/check_structure.py
