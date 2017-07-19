@@ -61,3 +61,22 @@ script:
   #    docker build -f "$DIR/Dockerfile" .
   #    echo ""
   #  done < DOCKER_BUILDS.list
+  - make site
+  #- make check
+
+after_success:
+  - |
+    if [ "$TRAVIS_PULL_REQUEST" == "false" -a "$TRAVIS_BRANCH" == "master" ]
+    then
+      git config user.name "Travis-CI"
+      git config user.email "noreply@travis-ci.org"
+      git remote rm origin && git remote add origin https://bebatut:${GH_TOKEN}@github.com/bebatut/training-material
+      git fetch origin
+      git checkout gh-pages
+      cd _site
+      git add .
+      git commit -m "[ci skip] Update site on `date "+%Y-%m-%d %H:%M:%S"`"
+      git push origin gh-pages
+      cd ../
+    fi
+
