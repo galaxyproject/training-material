@@ -1,47 +1,382 @@
-# What is the topic?
+---
+layout: introduction_slides
+topic_name: metabolomics
+tutorial_name: lcms-preprocessing
+logo: "GTN"
+---
+
+## Objectives
 
 ---
 
-### Topic
-
-Blabla 
-
-- Blabla
-- Blabla
-
-Blabla
-
-- Blabla
-- Blabla
-
----
-
-### Second slide
-
-![](../images/RNA_seq_zang2016.png)
-
-<small>[*Zang and Mortazavi, Nature, 2012*](http://www.nature.com/ni/journal/v13/n9/full/ni.2407.html)</small>
-
----
-
-### A Third slide
-
-Some text
+#### From: Spectres
+![](../../images/ms/spectres.png)
+#### To: Numeric tabular data
+![](../../images/preprocessing_output_tabular_merged.png)
 
 ???
 
-Slide notes
--> Pressing **P** will toggle presenter mode.
+The main purpose of extraction sofwares is to read the aquisition files informations: (mass, retention time, intensity)
+
+And give a peaklist with informations for each peak and an intensity for each peak in each sample.
+
+---
+
+### Input data
+
+#### Raw data
+
+Allow formats: NetCDF, mzXML, mzML, mzData
+
+#### sampleMetadata
+
+| sampleMetadata | class  | polarity |
+| ---------------| -------| -------- |
+| Blanc04        | blanc  | negative |
+| Blanc06        | blanc  | negative |
+| Blanc09        | blanc  | negative |
+| HU_neg_017     | sample | negative |
+| HU_neg_028     | sample | negative |
+| HU_neg_034     | sample | negative |
+| QC1_001        | pool   | negative |
+| QC1_002        | pool   | negative |
+| QC1_003        | pool   | negative |
+
+The **class** column will be used for the *group* step
+
+---
+
+### Input data
+
+#### Raw data
+
+Allow formats: NetCDF, mzXML, mzML, mzData
+
+#### sampleMetadata
+
+<!--![](../../images/sampleMetadata_input.png)-->
+
+| sampleMetadata | class  | polarity | injectionOrder | batch | sex |
+| ---------------| -------| -------- | -------------- | ----- | --- |
+| Blanc04        | blanc  | negative | 44             | ne1   | NA  |
+| Blanc06        | blanc  | negative | 57             | ne2   | NA  |
+| Blanc09        | blanc  | negative | 16             | ne3   | NA  |
+| HU_neg_017     | sample | negative | 29             | ne1   | F   |
+| HU_neg_028     | sample | negative | 50             | ne2   | M   |
+| HU_neg_034     | sample | negative | 20             | ne3   | F   |
+| QC1_001        | pool   | negative | 33             | ne1   | NA  |
+| QC1_002        | pool   | negative | 47             | ne2   | NA  |
+| QC1_003        | pool   | negative | 26             | ne3   | NA  |
+
+You can add more informations for the *nomalization* or *statistical* steps
+
+---
+
+# Extraction with XCMS
+
+---
+
+### The XCMS package
+
+![](../../images/ms/lcms/xcms_logo.jpg)
+
+- R based software
+- Free
+- A lot of parameters to tune
+- No graphical interface natively
+
+.footnote[[Package webpage](https://bioconductor.org/packages/release/bioc/html/xcms.html) - [Google group](https://groups.google.com/forum/#!forum/xcms) - [Metabolomics forum](http://metabolomics-forum.com) ]
+
+???
+
+As mass spectro constructor didn’t provide efficient softwares for data extraction, xcms appears to be the best solution.
+
+---
+
+### The XCMS worlflow
+
+![](../../images/ms/lcms/xcms_workflow2.png)
+
+.footnote[ [Smith C., Analalytical Chemistry, 2006](http://pubs.acs.org/doi/full/10.1021/ac051437y) ]
+
+
+???
+
+XCMS worflow is composed of 5 main steps
+- xcmsSet: Sequential Extraction of all ions in all samples
+- group: Grouping step merge all extraction tables in one peaklist
+- retcor: [optional] Retention time correction (need another grouping step as retention time have been normally improved at this step)
+- fillPeaks: define a value for ion not detected in all samples
+- camera/annotate/diffreport: [optional] Creation of the final peaklist with statistics, some graphical outputs and annotation of adducts neutral loss and isotopes can be performed.
 
 
 ---
 
-# Part 2
+## xcmsSet: Filter and Identify Peaks
 
 ---
 
-### An other slide
+### xcmsSet: raw file information
 
-With text and a resized image
+![](../../images/ms/lcms/raw_data_1.png)
 
-.image-25[![](../images/ecker_2012.jpg)]
+???
+
+If you open a raw mzXML file and look at the data inside (using Insilicos Viewer).
+
+You have a succession of scans along all the acquisition time: a spectrometer at each scan all the masses.
+
+And at each scan, you get all ions in the mass range you have set in your analysis.
+
+So the informations we get are number of scan, retention time, the value of mz and the intensity.
+
+---
+
+### xcmsSet: raw file information
+
+![](../../images/ms/lcms/raw_data_2.png)
+
+The **mass** changes between scans for a given metabolotite.
+
+So you can compute a mz deviation from scan to scan.
+
+???
+
+If you continue to look at the different scans where you can detect this mass 187, you can collect all these informations (mass, retention time and intensity)
+
+You can see that mass is not exactly the same. So you can compute a mz deviation from scan to scan.
+
+---
+
+### xcmsSet: raw file information
+
+![](../../images/ms/lcms/raw_data_3.png)
+
+The **intensity** increases and decreases along the retention time.
+
+This define a « peak » with a retention time range for this peak.
+
+???
+
+If you consider the intensity, you can observe an increase and then a decrease of intensity along retention time (or scan).
+
+This  define a « peak » with a retention time range for this peak.
+
+And actually to define a peak, we have to define an acceptable fluctuation of mass from scan to scan and an acceptable width.
+
+We took all the scans of course but you could define a threshold of intensity in order to eliminate noise.
+
+This is also a parameter to take into account.
+
+Finally, you have to model the peak in order to integrate the chromatographic peak and get an relative intensity value.
+
+---
+
+### xcmsSet: Extraction algorithms
+
+![](../../images/ms/lcms/profile_vs_centroid.gif)
+
+- **matchedFilter** is dedicated to centroid or profile low resolution MS data
+- **centWave** is dedicated to centroid high resolution MS data
+
+---
+
+### xcmsSet: Extraction **centWave** algorithm
+
+.pull-left[ The algorithm aims detecting « Mass traces » or « region of interest » (ROI) which are defined as regions with less than a defined deviation of m/z in consecutive scans.<br/><br/> This deviation must be lower than the value of the parameter <span style="color:red">`ppm`</span><br/><br/> The value (unit ppm) has to be set according to mass spectrometer accuracy. ]
+
+.pull-right[ ![](../../images/ms/lcms/xcmsset_centwave_1.jpg) ]
+
+.footnote[[Tautenhahn R. BMC Bioinformtics 2008](https://bmcbioinformatics.biomedcentral.com/articles/10.1186/1471-2105-9-504)]
+
+???
+
+The algo is able to find area where m/z are nearly the same in consecutive scans
+
+Actually, with a difference of m/z among consecutive scans lower or equal the value of the parameter "ppm"
+
+---
+
+### xcmsSet: Extraction **centWave** algorithm
+
+.image-75[![](../../images/ms/lcms/xcmsset_centwave_3.jpg)]
+
+The algorithm is able to detect correctly the borders of the peaks.
+
+<span style="color:red">`mzdiff`</span>: minimum difference in m/z for peaks with overlapping retention times, can be negative to allow overlap
+
+.footnote[[Tautenhahn R. BMC Bioinformtics 2008](https://bmcbioinformatics.biomedcentral.com/articles/10.1186/1471-2105-9-504)]
+
+---
+
+### xcmsSet: Extraction **centWave** algorithm
+
+.image-75[![](../../images/ms/lcms/xcmsset_centwave_2.jpg)]
+
+The algorithm is able to detect peak with different shape and width
+
+<span style="color:red">`peakwidth`</span> (min, max) has to be set for this step to allow narrow or large peaks. *As an example: *`20,50`* for HPLC and *`05,12`* for UPLC*
+
+.footnote[[Tautenhahn R. BMC Bioinformtics 2008](https://bmcbioinformatics.biomedcentral.com/articles/10.1186/1471-2105-9-504)]
+
+---
+
+### xcmsSet: Extraction **centWave** algorithm
+
+.pull-left[ **<span style="color:red">`peakwidth`</span>** <br/> <br/> `peakwidth = c(20,60)`<br/><br/> the peak will be split in three peaks, each detected as a ~10s wide separate peak (since they are separated by a local minimum) <br/><br/><br/> `peakwidth = c(20,120)` <br/><br/> the peak will keep the peak intact  ]
+
+.pull-right[ ![](../../images/ms/lcms/xcmsset_centwave_peakwidth_1.png) ]
+
+---
+
+### xcmsSet: Extraction **matchedFilter** algorithm
+
+![](../../images/ms/lcms/xcmsset_matchedfilter_1.png)
+
+.footnote[ [Smith C., Analalytical Chemistry, 2006](http://pubs.acs.org/doi/full/10.1021/ac051437y) ]
+
+---
+
+### xcmsSet: Extraction **matchedFilter** algorithm
+
+![](../../images/ms/lcms/xcmsset_matchedfilter_2.png)
+
+.footnote[ [Smith C., Analalytical Chemistry, 2006](http://pubs.acs.org/doi/full/10.1021/ac051437y) ]
+
+---
+
+### xcmsSet: Extraction **matchedFilter** algorithm
+
+![](../../images/ms/lcms/xcmsset_matchedfilter_3.png)
+
+.footnote[ [Smith C., Analalytical Chemistry, 2006](http://pubs.acs.org/doi/full/10.1021/ac051437y) ]
+
+---
+
+### xcmsSet: Extraction **matchedFilter** algorithm
+
+![](../../images/ms/lcms/xcmsset_matchedfilter_fwhm_1.jpg)
+
+Influence of the paramater <span style="color:red">`fwhm`</span> on extract ion chromatogram (EIC)
+
+.footnote[[Tautenhahn R. BMC Bioinformtics 2008](https://bmcbioinformatics.biomedcentral.com/articles/10.1186/1471-2105-9-504)]
+
+---
+
+### xcmsSet: Extraction **matchedFilter** algorithm
+
+![](../../images/ms/lcms/xcmsset_matchedfilter_fwhm_2.jpg)
+
+Influence of the paramater <span style="color:red">`fwhm`</span> on extract ion chromatogram (EIC)
+
+.footnote[[Tautenhahn R. BMC Bioinformtics 2008](https://bmcbioinformatics.biomedcentral.com/articles/10.1186/1471-2105-9-504)]
+
+---
+
+### xcmsSet: Outputs
+
+#### The log file
+
+```
+An "xcmsSet" object with 35 samples
+Time range: 0.9-1139.5 seconds (0-19 minutes)
+Mass range: 52.5778-990.3454 m/z
+Peaks: 89064 (about 2545 per sample)
+Peak Groups: 0
+Sample classes: pool, sample, blanc
+```
+
+Informations on the execution of this step: retention time and mass range and the number of Peaks detected.
+
+---
+
+### xcmsSet: Outputs
+
+#### Individual TIC (Total Ion Current) chromatogram
+
+.image-75[![](../../images/ms/lcms/xcmsset_output_tic.png)]
+
+Sum of intensity (Y) of **all** ions detected at each retention time(X)
+
+.footnote[[Wikipedia: Mass chromatogram](https://en.wikipedia.org/wiki/Mass_chromatogram)]
+
+---
+
+### xcmsSet: Outputs
+
+#### Individual BPC (Base Peak) Chromatogram
+
+.image-75[![](../../images/ms/lcms/xcmsset_output_bpc.png)]
+
+Sum of intensity (Y) of the **most** intense peaks at each retention time(X)
+
+.footnote[[Wikipedia: Mass chromatogram](https://en.wikipedia.org/wiki/Mass_chromatogram)]
+
+---
+
+### xcmsSet: Outputs
+
+#### xset.RData(s)
+
+.left[ XCMS xset objects contains all the informations about the extraction and will be appended along the workflow.]
+
+.left[The individual xset.RData must be merged before go further to the `xcms.group` step using:]
+- Galaxy: `xcms.xmsSet Merger`
+- R: `c(xset1, xset2, xset2, ...)`
+
+---
+
+## group: Match Peaks Across Samples
+
+---
+
+### group
+#### mzwid
+
+---
+
+### group
+#### bw
+
+---
+
+### group
+#### minfrac
+
+---
+
+### group: Outputs
+
+---
+
+## retcor: Retention Time Correction
+
+---
+
+### retcor: Peakgroup method
+
+---
+
+### retcor: Peakgroup method
+#### Missing / Extra
+
+---
+
+### retcor: Obiwrap method
+
+---
+
+### retcor: Outputs
+
+---
+
+## group: Match Peaks Across Samples
+### Pass 2
+
+---
+
+## fillPeaks: Fill in missing peak data
+
+---
+
+### fillPeaks: Methods
