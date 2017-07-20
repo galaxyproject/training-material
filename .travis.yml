@@ -1,73 +1,33 @@
 sudo: required
 language: python
 python: 3.6
-
 services:
-  - docker
-
+- docker
 env:
   global:
-    - secure: "ZDt244xmlSM9zprZvZJmhpWpwPpM3zSB65qdaAFa7p7pGXpB/rIpZl2/1UoyXEZ6KUa0CwWzaTxPY7OR44S63KBIGfpzuJ5RYxD607/c+mkSd4YNsshfEAiheB0/VzItyDwUwIaUUWtl5oStZ9SkeYFf9ZEFKq2idXN/SHvmJE0t8tIq134htI0bK4WzJvsEnx5i8tNlBxDfyY+ULXoecytLP/OlM82kD7bBkvVguA3cwvjxLWsvic+Q5G+Qatue5arbtfVq0c4vayulfYazy0YdDSLpbNJrTNE8or1+1vw2eb6KNlq2iMGIdYk7zAIZUjQpb/57X6WqCPg1jJgGhgrxyi0wDyZwTwIuxsu+0ME8gP33vUXqDfAqUOpNSAcPypqWWdhdHyNXwgW+tNfVK+t+mrVK0bWGE+KFo0EITBustKG5iZBeOtbCYqvP4+ARuk+rNcbX8y8XBtjUPG+cgGIra/RqTOeHoJHN23S7ra8fCkbV9Z+GnWyLB3EWRX5VwG19dKUGCJJ9lSzdqUBtr3+6yJgwIl86HZs5VQ2F0jGP5U3BFSUjpFnthiDfPzNNQNDrhFz9PbjJ3csc5wWIfxg4xZUi8J5gpYI1cmWQIj7S0Zo3HNx3pX7Weu3y7cHASR3P4+pU0mEQU/YsSLgbe9f2pfXvd3ySlVXWh4QMiMw="
-
+    secure: IST0QlHj3cnfN+TCdGgWR1Nio7pbZUP2vyy639qbkZiCe1Lfq6S9YONTXia0LY5SCnqb3PloBfgomWNJw3fIKast5d2YuuRMiZShUji0W8OUSFQnUeFtr9RcCQ7/e1gLODhc5z7tegHk60G25Vi3p282SP9fYY+5q6XwV/VZh6nmyvsrLcQspwCM/OHOKSL8DCHFLSFZKGFGLOr6vVyFElPQzj3IUC7uaofzmiKx5yXJtnEaQgqX5aSNBlUfajUlU/SfzcwX8Q2ypmISe1GEAaDiwqRK0K61Euq/xCV1pzv1CjYs4WIjBHsN6eSK5IErAHK3PKCIoLpcXav6nwFqith1a3hmAmxwwqTzXvkNz2HcvFtI9xDRfy2o6JIwfqverA6sk4p0G09NuCEmJn2yhG+JPRAzYLYwvu91LxvB+621n7YkrtGWkLDRFhvD6TlGnOcCWAPiwigf9b48MZIpnpiy+MebEpDIZ0nik8oosVbYEYewSJuQYb5gt4Fk46n9HR+EfPrRw1SJ7JceBnZhN4jGBxIbuRXMZI6mICQ1bXT04swrrPAl+udy7KaRuZ2GtTNbDQluXQByrofnVEdqBdUUwevDR8UO9XY5OA2STH/GL1HpIcgSlvBsbBbirFhYFA9dWAHtSLzQh9PwdjpG6OoCukFViYJv/4VsU2d7Tq4=
 install:
-  # Install and config conda
-  - sudo apt-get update
-  - wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh
-  - bash miniconda.sh -b -p $HOME/miniconda
-  - export PATH="$HOME/miniconda/bin:$PATH"
-  - hash -r
-  - conda config --set always_yes yes --set changeps1 no
-  - conda config --add channels conda-forge
-  - conda update -q conda
-  # Useful for debugging any issues with conda
-  - conda info -a
-  # Create the conda environment
-  - conda env create -f environment.yml
-  - source activate galaxy_training_material
-  # Install the requirements
-  - make install
-
+- sudo apt-get update
+- wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh
+- bash miniconda.sh -b -p $HOME/miniconda
+- export PATH="$HOME/miniconda/bin:$PATH"
+- hash -r
+- conda config --set always_yes yes --set changeps1 no
+- conda config --add channels conda-forge
+- conda update -q conda
+- conda info -a
+- conda env create -f environment.yml
+- source activate galaxy_training_material
+- make install
 before_script:
-  # dump the changed files into a file
-  #- git diff --name-only "${TRAVIS_COMMIT_RANGE/.../..}" > ./CHANGES.list
-  # Spell checking?
-  #- apt-get install -y hunspell pandoc
-  #- wget https://cgit.freedesktop.org/libreoffice/dictionaries/tree/en/en_GB.aff
-  #- |
-  #  cat <<EOF >custom.dict
-  #  seq
-  #  MethylC
-  #  EOF
-  - pip install vl pyyaml
-  - vl --version
-
-  # patch vl to send user-agent header (some links give error if not set)
-  #- |
-  #  sed  -i 's|requests = (grequests.head(u, timeout=timeout, verify=False)|requests = (grequests.head(u, timeout=timeout, verify=False, headers={\x27User-Agent\x27: \x27Mozilla\x27})|' /home/travis/virtualenv/python*/lib/python*/site-packages/vl/cli.py
-
+- pip install vl pyyaml
+- vl --version
 script:
-  - set -e
-  # Check links
-  #- find .  \( -name "*.md" -o -name "*.html" \) -not -path "./assets/reveal.js/*" | xargs -L 1 -I '{}' sh -c "echo {}; vl -d -t 15 -s 1000 --allow-codes 405 --whitelist localhost,127.0.0.1,fqdn,publish.twitter.com,linkedin.com,vimeo.com {}"
-  #
-  # Check structure
-  #- ./bin/check_structure.py
-  # Check docker (this will take way too long for travis, just set up quay.io triggers and monitor status somewhere?)
-  #- ./bin/prepare_docker_checks.py
-  #- |
-  #  while read -r DIR
-  #  do
-  #    echo "$DIR"
-  #    docker build -f "$DIR/Dockerfile" .
-  #    echo ""
-  #  done < DOCKER_BUILDS.list
-  - make site
-  #- make check
-
+- set -e
+- make site
 after_success:
-  - |
-    if [ "$TRAVIS_PULL_REQUEST" == "false" -a "$TRAVIS_BRANCH" == "master" ]
-    then
-      bin/publish
-    fi
-
+- |
+  if [ "$TRAVIS_PULL_REQUEST" == "false" -a "$TRAVIS_BRANCH" == "master" ]
+  then
+    bin/publish
+  fi
