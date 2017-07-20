@@ -164,7 +164,7 @@ In a preliminary mapping, we will estimate the library type to run HISAT2 effici
 
 The library type corresponds to a protocol used to generate the data: which strand the RNA fragment is synthesized from.
 
-![](../../images/strand_library_type.png)
+![Credit: Zhao Zhang](../../images/strand_library_type.png)
 
 *[Credit: Zhao Zhang](http://onetipperday.sterding.com/2012/07/how-to-tell-which-library-type-to-use.html)*
 
