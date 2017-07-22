@@ -284,6 +284,10 @@ Mass range: 52.5778-990.3454 m/z
 Peaks: 89064 (about 2545 per sample)
 Peak Groups: 0
 Sample classes: pool, sample, blanc
+
+Peak picking was performed on MS1.
+Profile settings: method = bin
+                  step = 0.1
 ```
 
 Informations on the execution of this step: retention time and mass range and the number of Peaks detected.
@@ -330,22 +334,123 @@ Sum of intensity (Y) of the **most** intense peaks at each retention time(X)
 
 ---
 
-### group
-#### mzwid
+### group: Match Peaks Across Samples
+
+.image[![](../../images/ms/lcms/group_by_hand.png)]
+
+???
+
+After extraction, we obtain as many independant peaklist as we’ve got samples.
+
+m/z and RT are for the same metabolite are slightly differents among samples.
+
+Note that some metabolites might be non detected in some samples.
+
+The goal is to obtain a single matrix with 1 line for each ions and as many colums of intensities as the number of samples.
+
+This process is easy to do visually but impossible to do with thousand of features and hundred of samples.
 
 ---
 
-### group
-#### bw
+### group: **density** method
+
+.image[![](../../images/ms/lcms/group_density_param_1.png)]
+
+.left[ 1) A binning of mass domain is performed. The size of the bin is defined by <span style="color:red">`mzwid`</span> parameter.<br/>2) Then for each mz bin, all ions of all samples are taken into account for all retention times.<br/>3) Kernel density estimator method is used to detect region of retention time with high density of ions]
+
+???
+
+Red dots correspond to ions (in the mz bin) in the different samples along all retention time.
+
+Height of the lines correspond to the intensity.
 
 ---
 
-### group
-#### minfrac
+### group: **density** method
+
+.image[![](../../images/ms/lcms/group_density_param_2.png)]
+
+.left[ 4) A gaussian model group together peaks with similar retention time.<br/><br/>5) The inclusiveness of ions in a group is defined by the the standard deviation of the gaussian model: <span style="color:red">`bw`</span> (bandwith) parameter.<br/><br/>The <span style="color:red">`bw`</span> parameter can be interpreted as a retention time window. ]
+
+
+---
+
+### group: **density** method
+
+.image[![](../../images/ms/lcms/group_density_param_2.png)]
+
+.left[ _ Vertical dash lines indicates that the feature is valid and will be retain in the data Matrix<br/><br/>_To be valid, the number of peaks in a group must be greater than the a percentage of the total number of samples. This threshold is defined by the <span style="color:red">`minfrac`</span> parameter. ]
+
+
+---
+
+### group: **density** method
+
+.image[![](../../images/ms/lcms/group_density_param_3.png)]
+
+If <span style="color:red">`bw`</span> is too high, different molecules may be grouped together
+
+These peak ARE NOT chromatographic peak
+<br/><br/><br/><br/>
+
+
+---
+
+### group: **density** method
+
+.image[![](../../images/ms/lcms/group_density_param_4.png)]
+
+- Decreasing <span style="color:red">`bw`</span> allows to separate these 2 groups.
+
+- The resulting m/z and retention time of the feature correspond to the median of m/z and RT of all ions grouped together as a single feature.
+
+
+---
+
+### group: **density** method
+
+.image-75[![](../../images/ms/lcms/group_density_param_5.png)]
+
+<span style="color:red">`minfrac`</span> = minimum fraction of samples necessary in at least one of the sample groups for it to be a valid group
+
+<span style="color:red">`minsamp`</span> = minimum number of samples necessary in at least one of the sample groups for it to be a valid group
 
 ---
 
 ### group: Outputs
+
+#### The log file
+
+```
+An "xcmsSet" object with 35 samples
+Time range: 0.9-1139.5 seconds (0-19 minutes)
+Mass range: 52.5778-990.3454 m/z
+Peaks: 89064 (about 2545 per sample)
+Peak Groups: 2420
+Sample classes: pool, sample, b
+
+Peak picking was performed on MS1.
+Profile settings: method = bin
+                  step = 0.1
+```
+
+---
+
+### group: Outputs
+
+#### Graphics
+
+.image[![](../../images/ms/lcms/group_output_1.png)]
+
+---
+
+### group: Outputs
+
+#### Graphics
+
+.image-75[![](../../images/ms/lcms/group_output_2.png)]
+
+Check your graphics to refine your parameters
 
 ---
 
