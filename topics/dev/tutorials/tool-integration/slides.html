@@ -258,11 +258,10 @@ class: packed
 
 ### `inputs` > `param` > `conditional`
 
-![](../../images/input_conditional.png)
+.image-75[ ![](../../images/input_conditional.png) ]
 
 ```xml
 <command><![CDATA[
-bwa mem ...
 #if $fastq_input.selector == 'paired':
     '$fastq_input.input1' '$fastq_input.input2'
 #else:
@@ -486,6 +485,8 @@ Use the `argument` tag when a param name reflects the command line argument
 ### Tips and best practices
 
 Use sections to group related parameters
+
+![](../../images/input_section.png)
 
 ```xml
 <section name="advanced" title="Advanced options" expanded="False">
@@ -804,6 +805,20 @@ graphlan/
         <has_n_columns n="3" />
     </assert_contents>
 </output>
+```
+
+.footnote[[Complete documentation](https://docs.galaxyproject.org/en/latest/dev/schema.html#tool-tests-test-output-assert-contents)]
+
+---
+
+### `tests`
+#### Comparison Methods: checking the stdout/stderr
+
+```xml
+<assert_stdout>
+    <has_text text="Step 1... determine cutoff point" />
+    <has_text text="Step 2... estimate parameters of null distribution" />
+</assert_stdout>
 ```
 
 .footnote[[Complete documentation](https://docs.galaxyproject.org/en/latest/dev/schema.html#tool-tests-test-output-assert-contents)]
