@@ -1,17 +1,17 @@
 ---
 layout: tutorial_hands_on
 topic_name: chip-seq
-tutorial_name: tal1-binding-site-identification
+tutorial_name: TAL1-binding-site-identification
 ---
 
 # Introduction
 {:.no_toc}
 
-This tutorial uses ChIP-seq datasets from a study published by [Wu *et al.* (2014)](https://genome.cshlp.org/content/24/12/1945.full.pdf+html). The goal of this study was to investigate "the dynamics of occupancy and the role in gene regulation of the transcription factor Tal1, a critical regulator of hematopoiesis, at multiple stages of hematopoietic differentiation."
+This tutorial uses ChIP-seq datasets from a study published by [Wu *et al.* (2014)](https://genome.cshlp.org/content/24/12/1945.full.pdf+html). The goal of this study was to investigate "the dynamics of occupancy and the role in gene regulation of the transcription factor TAL1, a critical regulator of hematopoiesis, at multiple stages of hematopoietic differentiation."
 
 To this end, ChIP-seq experiments were performed in multiple mouse cell types including G1E - a GATA-null immortalized cell line derived from targeted disruption of GATA-1 in mouse embryonic stem cells - and megakaryocytes.
 
-This dataset (GEO Accession: [GSE51338](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE51338)) consists of biological replicate Tal1 ChIP-seq and input control experiments.
+This dataset (GEO Accession: [GSE51338](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE51338)) consists of biological replicate TAL1 ChIP-seq and input control experiments.
 Input control experiments are used to identify and remove sampling bias, for example open/accessible chromatin or GC bias.
 
 Because of the long processing time for the large original files, we have downsampled the original raw data files to include only reads that align to chromosome 19 and a subset of interesting genomic loci identified by Wu *et al.* (2014).
@@ -22,12 +22,12 @@ Because of the long processing time for the large original files, we have downsa
 |---|---|:-:|:-:|---|:-:|:-:|:-:|---|
 | G1E | ChIP-seq | input | 1 | SRR507859 | SE | 36 | No | 35.8 |
 | G1E | ChIP-seq | input | 2 | SRR507860 | SE | 55 | No | 427.1 |
-| G1E | ChIP-seq | Tal1 | 1 | SRR492444 | SE | 36 | No | 32.3 |
-| G1E | ChIP-seq | Tal1 | 2 | SRR492445 | SE | 41 | No | 62.7 |
+| G1E | ChIP-seq | TAL1 | 1 | SRR492444 | SE | 36 | No | 32.3 |
+| G1E | ChIP-seq | TAL1 | 2 | SRR492445 | SE | 41 | No | 62.7 |
 | Megakaryocyte | ChIP-seq | input | 1	| SRR492453 | SE | 41 | No | 57.2 |
 | Megakaryocyte | ChIP-seq | input | 2 | SRR492454 | SE | 55 | No | 403.8 |
-| Megakaryocyte | ChIP-seq | Tal1 | 1 | SRR549006 | SE | 55 | No | 340.3 |
-| Megakaryocyte | ChIP-seq | Tal1 | 2 | SRR549007 | SE | 48 | No | 356.9 |
+| Megakaryocyte | ChIP-seq | TAL1 | 1 | SRR549006 | SE | 55 | No | 340.3 |
+| Megakaryocyte | ChIP-seq | TAL1 | 2 | SRR549007 | SE | 48 | No | 356.9 |
 
 > ### Agenda
 >
@@ -112,7 +112,7 @@ It is often necessary to trim a sequenced read to remove bases sequenced with hi
 >    > ### :question: Questions
 >    >
 >    > 1. How did the range of read lengths change after trimming/clipping?
->    > 2. What do you think could account for the enriched k-mers (**Kmer Content** heading in **FASTQC** output) observed in the Megakaryocytes Tal1 R2 ChIP-seq experiment?
+>    > 2. What do you think could account for the enriched k-mers (**Kmer Content** heading in **FASTQC** output) observed in the Megakaryocytes TAL1 R2 ChIP-seq experiment?
 >    {: .question}
 >    
 >    ![fastqafter](../../images/fastqc_after.png)
@@ -245,20 +245,20 @@ We will generate Input normalized coverage (bigwig) files for the ChIP samples, 
 > ![](../../images/bamcom.png)
 {: .hands_on}
 
-# Step 7: Determining Tal1 binding sites
+# Step 7: Determining TAL1 binding sites
 
-Now that **BWA** has aligned the reads to the genome, we will use the tool **MACS2** to identify regions of Tal1 occupancy, which are called "peaks". Peaks are determined from pileups of sequenced reads across the genome that correspond to where Tal1 binds.
+Now that **BWA** has aligned the reads to the genome, we will use the tool **MACS2** to identify regions of TAL1 occupancy, which are called "peaks". Peaks are determined from pileups of sequenced reads across the genome that correspond to where TAL1 binds.
 
 **MACS2** will perform two tasks:
 
-1. Identify regions of Tal1 occupancy (peaks)
+1. Identify regions of TAL1 occupancy (peaks)
 2. Generate bedgraph files for visual inspection of the data on a genome browser.
 
 More information about **MACS2** can be found [here](https://genomebiology.biomedcentral.com/articles/10.1186/gb-2008-9-9-r137).
 
-> ### :pencil2: Hands-on: Determining Tal1 binding sites
+> ### :pencil2: Hands-on: Determining TAL1 binding sites
 >
-> 1. **MACS2 callpeak** :wrench:: Run the tool **MACS2 callpeak** with the aligned read files from the previous step as Treatment (Tal1) and Control (input).
+> 1. **MACS2 callpeak** :wrench:: Run the tool **MACS2 callpeak** with the aligned read files from the previous step as Treatment (TAL1) and Control (input).
 >
 >    - Select replicate **ChIP-Seq Treatment Files** for one cell type
 >    - Select replicate **ChIP-Seq Control Files** for the same cell type
@@ -273,9 +273,9 @@ More information about **MACS2** can be found [here](https://genomebiology.biome
 
 It is critical to visualize NGS data on a genome browser after alignment to evaluate the "goodness" of the analysis. Evaluation criteria will differ for various NGS experiment types, but for ChIP-seq data we want to ensure reads from a Treatment/IP sample are enriched at peaks and do not localize non-specifically (like the Control/input condition).
 
-**MACS2** generates BEDgraph and BED files that we will use to visualize read abundance and peaks, respectively, at regions **MACS2** determines to be Tal1 peaks using Galaxy's in-house genome browser, Trackster.
+**MACS2** generates BEDgraph and BED files that we will use to visualize read abundance and peaks, respectively, at regions **MACS2** determines to be TAL1 peaks using Galaxy's in-house genome browser, Trackster.
 
-First, we will reformat the peak file before we send it to Trackster, and then we will import a gene annotation file so we can visualize aligned reads and Tal1 peaks relative to gene features and positions.
+First, we will reformat the peak file before we send it to Trackster, and then we will import a gene annotation file so we can visualize aligned reads and TAL1 peaks relative to gene features and positions.
 
 > ### :pencil2: Hands-on: Inspection of peaks and aligned data
 >
@@ -301,45 +301,45 @@ First, we will reformat the peak file before we send it to Trackster, and then w
 >    ![tracksterselect](../../images/Trackster_selecting_datasets.png)
 >    <figcaption><b>Figure 15:</b> Select data from your histories to view in Trackster. </figcaption>
 >
-> 6. Navigate to the Runx1 locus (chr16:92501466-92926074) to inspect the aligned reads and Tal1 peaks.
+> 6. Navigate to the Runx1 locus (chr16:92501466-92926074) to inspect the aligned reads and TAL1 peaks.
 >
 >    > ### :question: Questions
 >    >
 >    > 1. What do you see at the Runx1 locus in Trackster?
->    > 2. What gene(s) other than Runx1 could be regulated by Tal1?
+>    > 2. What gene(s) other than Runx1 could be regulated by TAL1?
 >    {: .question}
 >
 >    ![runx1](../../images/Trackster_Runx1_locus.png)
 >    <figcaption><b>Figure 16:</b> The Runx1 locus.</figcaption>
 {: .hands_on}
 
-# Step 9: Identifying unique and common Tal1 peaks between states
+# Step 9: Identifying unique and common TAL1 peaks between states
 
-We have processed ChIP-seq data from two stages of hematopoiesis and have lists of Tal1 occupied sites (peaks) in both cellular states. The next analysis step is to identify Tal1 peaks that are *shared* between the two cellular states and peaks that are *specific* to either cellular state.
+We have processed ChIP-seq data from two stages of hematopoiesis and have lists of TAL1 occupied sites (peaks) in both cellular states. The next analysis step is to identify TAL1 peaks that are *shared* between the two cellular states and peaks that are *specific* to either cellular state.
 
-> ### :pencil2: Hands-on: Identifying unique and common Tal1 peaks between states
+> ### :pencil2: Hands-on: Identifying unique and common TAL1 peaks between states
 >
 > 1. **Intersect intervals** :wrench:: Run the tool **Intersect intervals** to find peaks that exist both in G1E and megakaryocytes.
 >
->    Select the "Tal1 G1E peaks" and "Tal1 Mega peaks" files as the inputs.
+>    Select the "TAL1 G1E peaks" and "TAL1 Mega peaks" files as the inputs.
 >
 >    Running this tool with the default settings will return overlapping peaks of both files.
 >  
 > 2. **Intersect intervals** :wrench:: Run the tool **Intersect intervals** to find peaks that exist only in G1E.
 >
->    - Select "Tal1 G1E peaks" as the first input and "Tal1 Mega peaks" as the second input file.
+>    - Select "TAL1 G1E peaks" as the first input and "TAL1 Mega peaks" as the second input file.
 >    - **Report only those alignments that \*\*do not\*\* overlap the BED file**: Yes
 >  
 > 3. **Intersect intervals** :wrench:: Run the tool **Intersect intervals** to find peaks that exist only in megakaryocytes.
 >
->    - Select "Tal1 Mega peaks" as the first input and "Tal1 G1E peaks" as the second input file.
+>    - Select "TAL1 Mega peaks" as the first input and "TAL1 G1E peaks" as the second input file.
 >    - **Report only those alignments that \*\*do not\*\* overlap the BED file**: Yes  
 >  
 > 4. Re-name the three files we generated to reflect their contents.
 >
 >    > ### :question: Questions
 >    >
->    > 1. How many Tal1 binding sites are common to both G1E cells and megakaryocytes?
+>    > 1. How many TAL1 binding sites are common to both G1E cells and megakaryocytes?
 >    > 2. How many are unique to G1E cells?
 >    > 3. How many are unique to megakaryocytes?
 >    {: .question}
@@ -360,7 +360,7 @@ optionally, you can also use `plotProfile`to create a profile plot using to comp
 > ### :pencil2: Hands-on: calculate signal matrix on the MACS2 output
 >
 > 1. Search for "computeMatrix" under galaxy toolshed.
-> 2. Under "Regions to plot", select the MACS2 output (narrowpeaks) for G1E cells (Tal1 over Input).
+> 2. Under "Regions to plot", select the MACS2 output (narrowpeaks) for G1E cells (TAL1 over Input).
 > 3. Under "Reference point for plotting", select "Center of region".
 > 4. Under "Score file", select the bigWigs (log2 ratios from bamCompare).
 > 5. From the output options, select "reference point".
@@ -439,4 +439,4 @@ For additional informaton on how to interpret **computeGCbias** plots, read the 
 # Conclusion
 {:.no_toc}
 
-In this exercise you imported raw Illumina sequencing data, evaluated the quality before and after you trimmed reads with low confidence scores, algined the trimmed reads, identified Tal1 peaks relative to the negative control (background), and visualized the aligned reads and Tal1 peaks relative to gene structures and positions. Additional, you assessed the "goodness" of the experiments by looking at metrics such as GC bias and IP enrichment.
+In this exercise you imported raw Illumina sequencing data, evaluated the quality before and after you trimmed reads with low confidence scores, algined the trimmed reads, identified TAL1 peaks relative to the negative control (background), and visualized the aligned reads and TAL1 peaks relative to gene structures and positions. Additional, you assessed the "goodness" of the experiments by looking at metrics such as GC bias and IP enrichment.
