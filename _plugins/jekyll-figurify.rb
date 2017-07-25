@@ -19,13 +19,13 @@ module Jekyll
 
     def figurify(page)
       num = 0
-      page.content = page.content.gsub(/!\[([^\]]*)]\((.+?)\s*(?:"([^"]*)")?\)/) {
+      page.content = page.content.gsub(/!\[([^\]]*)\]\((.+?)\s*(?:"([^"]*)")?\)/) {
         alt = $1
         url = $2
         title = $3
         num += 1
 
-        "<figure>" +
+        "<figure id=\"figure-#{num}\">" +
           "<img src=\"#{url}\" alt=\"#{alt}\" title=\"#{title}\">" +
           "<figcaption><span class=\"figcaption-prefix\">#{figcaption_prefix}#{num}:</span> #{title || alt}</figcaption>" +
         "</figure>"
