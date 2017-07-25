@@ -11,8 +11,12 @@ module Jekyll
 
     def generate(site)
       puts "\n      Applying figurify plugin ✨"
-      site.posts.docs.each { |page| figurify page }
-      site.pages.each { |page| figurify page }
+      site.pages
+        .select { |page| not skip_layout? page.data['layout'] }
+        .each { |page| figurify page }
+      site.posts.docs
+        .select { |post| not skip_layout? post.data['layout'] }
+        .each { |post| figurify post }
     end
 
     private
@@ -22,18 +26,37 @@ module Jekyll
       page.content = page.content.gsub(/!\[([^\]]*)\]\((.+?)\s*(?:"([^"]*)")?\)/) {
         alt = $1
         url = $2
-        title = $3
-        num += 1
+        title = $3 || alt
 
-        "<figure id=\"figure-#{num}\">" +
-          "<img src=\"#{url}\" alt=\"#{alt}\" title=\"#{title}\">" +
-          "<figcaption><span class=\"figcaption-prefix\">#{figcaption_prefix}#{num}:</span> #{title || alt}</figcaption>" +
-        "</figure>"
+        if title.to_s.empty? and skip_empty?
+          Regexp.last_match
+        else
+          num += 1
+
+          "<figure id=\"figure-#{num}\">" +
+            "<img src=\"#{url}\" alt=\"#{alt}\" title=\"#{title}\">" +
+            "<figcaption><span class=\"figcaption-prefix\">#{figcaption_prefix}#{num}:</span> #{title}</figcaption>" +
+          "</figure>"
+        end
       }
     end
 
     def figcaption_prefix
       @config['prefix'] || 'Figure '
+    end
+
+    def skip_empty?
+      @config['skip_empty'] || false
+    end
+
+    def skip_layout?(layout)
+      to_skip = @config['skip_layouts'] || []
+
+      if to_skip.empty?
+        true
+      end
+
+      to_skip.include?(layout)
     end
   end
 end
