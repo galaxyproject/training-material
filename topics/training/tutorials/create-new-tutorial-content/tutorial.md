@@ -200,6 +200,23 @@ We recommend to structure the tutorials like this
 > 3. Add a small conclusion
 {: .hands_on}
 
+> ### :bulb: Tip: Adding images, with caption
+>
+> To add an image in markdown file, we need to use `![](../../images/image.png)`. 
+>
+> On the top of that, we added a small plugin to add a caption for each image:
+>
+> ![Example of a figure with a caption](../../images/image_caption_screenshot.png "Example of a figure with a caption")
+>
+> "Figure" and the number are automatically added and the caption is added by adding the information in the markdown call of the image: 
+>
+>   ```
+>   ![This is my super alt text](../images/image.png "This is my super caption")
+>   ```
+>
+> We can also cross-reference the figure inside our markdown with an anchor. For example, we can link to [the previous figure](#figure-1) using `[the display text](#figure-nb)` (with changing `nb` to the figure number).
+{: .tip}
+
 > ### :bulb: Tip: Writting mathematical expressions
 >
 > Mathematical expressions can be written in LaTeX: they will be rendered with [MathJax](https://www.mathjax.org/).
