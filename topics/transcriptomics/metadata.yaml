@@ -1,0 +1,148 @@
+name: "transcriptomics"
+type: "use"
+title: "Transcriptomics"
+summary: "Training material for all kinds of transcriptomics analysis."
+docker_image: ""
+status: ""
+
+requirements:
+-
+    title: "Galaxy introduction"
+    type: "internal"
+    link: "/topics/introduction/"
+-
+    title: "Quality control"
+    type: "internal"
+    link: "/topics/sequence-analysis/"
+
+material:
+-
+    title: "Introduction"
+    type: "introduction"
+    slides: "yes"
+-
+    title: "De novo transcriptome reconstruction with RNA-seq"
+    type: "tutorial"
+    name: "de-novo"
+    zenodo_link: "https://zenodo.org/record/254485#.WKODmRIrKRu"
+    galaxy_tour: ""
+    hands_on: "yes"
+    slides: "no"
+    questions:
+    - "What genes are differentially expressed between G1E cells and megakaryocytes?"
+    - "How can we generate a transcriptome de novo from RNA sequencing data?"
+    objectives:
+    - "Analysis of RNA sequencing data using a reference genome"
+    - "Reconstruction of transcripts without reference transcriptome (de novo)"
+    - "Analysis of differentially expressed genes"
+    time_estimation: "6h"
+    key_points:
+    - "De novo transcriptome reconstruction is the ideal approach for identifying differentially expressed known and novel transcripts."
+    - "Differential gene expression testing is improved with the use of replicate experiments and deep sequence coverage."
+    - "Visualizing data on a genome browser is a great way to display interesting patterns of differential expression."
+-
+    title: "Reference-based RNA-seq data analysis"
+    type: "tutorial"
+    name: "ref-based"
+    zenodo_link: "https://zenodo.org/record/290221"
+    galaxy_tour: "ref_based_rna_seq"
+    hands_on: "yes"
+    slides: "no"
+    questions:
+    - "What are the effects of Pasilla (PS) gene depletion on splicing events?"
+    - "How to analyze RNA sequencing data using a reference genome?"
+    objectives:
+    - "Analysis of RNA sequencing data using a reference genome"
+    - "Analysis of differentially expressed genes"
+    - "Identification of functional enrichment among differentially expressed genes"
+    time_estimation: "1d"
+    key_points:
+    - "Using a spliced mapping tool for eukaryotic RNA seq data"
+    - "Running a differential gene expression with taking care of the factors to study"
+    - "Running a differential exon usage with taking care of the factors to study"
+-
+    title: "Differential abundance testing of small RNAs"
+    type: "tutorial"
+    name: "srna"
+    zenodo_link: "https://zenodo.org/record/826906"
+    galaxy_tour: ""
+    hands_on: "yes"
+    slides: "no"
+    questions:
+    - "What small RNAs are expressed?"
+    - "What RNA features have significantly different numbers of small RNAs targeting them between two conditions?"
+    objectives:
+    - "Process small RNA-seq datasets to determine quality and reproducibility."
+    - "Filter out contaminants (e.g. rRNA reads) in small RNA-seq datasets."
+    - "Differentiate between subclasses of small RNAs based on their characteristics."
+    - "Identify differently abundant small RNAs and their targets."
+    time_estimation: "3h"
+    key_points:
+    - "Analysis of small RNAs is complex due to the diversity of small RNA subclasses."
+    - "Both alignment to references and transcript quantification approaches are useful for small RNA-seq analyses."
+
+maintainers:
+-
+    name: "Bérénice Batut"
+    github_username: "bebatut"
+    email: "berenice.batut@gmail.com"
+-
+    name: "Mallory Freeberg"
+    github_username: "malloryfreeberg"
+    email: "mallory.freeberg@gmail.com"
+
+contributors:
+-
+    name: "Bérénice Batut"
+    github_username: "bebatut"
+    email: "berenice.batut@gmail.com"
+-
+    name: "Mallory Freeberg"
+    github_username: "malloryfreeberg"
+    email: "mallory.freeberg@gmail.com"
+-
+    name: "Mo Heydarian"
+    github_username: "MoHeydarian"
+    email: "mheydarian@gmail.com"
+
+references:
+-
+    authors: "Shirley Pepke et al"
+    title: "Computation for ChIP-seq and RNA-seq studies"
+    link: "http://www.nature.com/nmeth/journal/v6/n11s/full/nmeth.1371.html"
+    summary: ""
+-
+    authors: "Paul L. Auer & R. W. Doerge"
+    title: "Statistical Design and Analysis of RNA Sequencing Data"
+    link: "http://www.genetics.org/content/185/2/405"
+    summary: "Insights into proper planning of your RNA-seq run! To read before any RNA-seq experiment!"
+-
+    authors: "Ian Korf"
+    title: "Genomics: the state of the art in RNA-seq analysis"
+    link: "http://www.nature.com/nmeth/journal/v10/n12/full/nmeth.2735.html"
+    summary: "A refreshingly honest view on the non-trivial aspects of RNA-seq analysis"
+-
+    authors: "Marie-Agnès Dillies et al"
+    title: "A comprehensive evaluation of normalization methods for Illumina high-throughput RNA sequencing data analysis"
+    link: "http://bib.oxfordjournals.org/content/14/6/671"
+    summary: "Systematic comparison of seven representative normalization methods for the differential analysis of RNA-seq data (Total Count, Upper Quartile, Median (Med), DESeq, edgeR, Quantile and Reads Per Kilobase per Million mapped reads (RPKM) normalization)"
+-
+    authors: "Franck  Rapaport et al"
+    title: "Comprehensive evaluation of differential gene expression analysis methods for RNA-seq data"
+    link: "https://genomebiology.biomedcentral.com/articles/10.1186/gb-2013-14-9-r95"
+    summary: "Evaluation of methods for differential gene expression analysis"
+-
+    authors: "Charlotte Soneson & Mauro Delorenzi"
+    title: "A comparison of methods for differential expression analysis of RNA-seq data"
+    link: "http://bmcbioinformatics.biomedcentral.com/articles/10.1186/1471-2105-14-91"
+    summary: ""
+-
+    authors: "Adam Roberts et al"
+    title: "Improving RNA-Seq expression estimates by correcting for fragment bias"
+    link: "https://genomebiology.biomedcentral.com/articles/10.1186/gb-2011-12-3-r2"
+    summary: ""
+-
+    authors: "Manuel Garber et al"
+    title: "Computational methods for transcriptome annotation and quantification using RNA-seq"
+    link: "http://www.nature.com/nmeth/journal/v8/n6/abs/nmeth.1613.html"
+    summary: "Classical paper about the computational aspects of RNA-seq data analysis"

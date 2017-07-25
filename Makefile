@@ -7,6 +7,7 @@ JEKYLL=bundle exec jekyll
 PARSER=bin/markdown_ast.rb
 DST=_site
 
+
 # Controls
 .PHONY : commands clean files
 all : commands
@@ -30,7 +31,11 @@ clean :
 	@find . -name .DS_Store -exec rm {} \;
 	@find . -name '*~' -exec rm {} \;
 
+## install          : install dependencies
 install:
-	gem install jekyll
-	gem install jemoji
-	gem install jekyll-feed
+	gem install bundler
+	gem install nokogiri
+	bundle install
+	bundle update
+
+
