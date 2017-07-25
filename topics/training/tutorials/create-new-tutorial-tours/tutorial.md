@@ -33,7 +33,7 @@ In this tutorial, you will understand how to design and develop a new tutorial f
 
 A Galaxy Interactive Tour is a way to go through an entire analysis, step by step inside Galaxy in an interactive and explorative way. It is a great pedogogic way to run the tutorial directly inside Galaxy.
 
-![](../../../dev/images/galaxy_tour_demo.gif)
+![Demonstration of an Interactive Tour](../../../dev/images/galaxy_tour_demo.gif "Demonstration of an Interactive Tour")
 
 A tour is a YAML file like:
 

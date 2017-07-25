@@ -83,8 +83,7 @@ To help you, we created a template for a tutorial with the different required fi
 
 Once you started to change something, we need to keep track of these changes with a version control system (VCS). We are using Git as VCS and GitHub as hosting service.
 
-This repository is developed collaboratively with more than 40 contributors. For the collaboration, we are using
-the [GitHub flow](https://guides.github.com/introduction/flow/), which is based on forks, branches and pull requests.
+This repository is developed collaboratively with more than 40 contributors. For the collaboration, we are using the [GitHub flow](https://guides.github.com/introduction/flow/), which is based on forks, branches and pull requests.
 We will explain GitHub flow later and show you now how to start keeping track of the changes:
 
 > ### :pencil2: Hands-on: Start keeping track of the changes
@@ -287,7 +286,7 @@ This structure needs to be respected otherwise it would not be interpreted corre
 
     To avoid to add the "Introduction" and "Conclusion", we add `{:.no_toc}` below the section name.
 
-    ![](../../../../shared/images/tutorial_agenda_box.png)
+    ![Example of agenda box](../../../../shared/images/tutorial_agenda_box.png "Example of agenda box")
 
     > ### :pencil2: Hands-on: Add an agenda box to the tutorial
     >
@@ -303,7 +302,7 @@ This structure needs to be respected otherwise it would not be interpreted corre
         > 1. **Sort BAM dataset** :wrench:: Sort the paired-end BAM file by "Read names" with **Sort BAM
         {: .hands_on}
 
-    ![](../../../../shared/images/tutorial_hand_on_box.png)
+    ![Example of hands-on box](../../../../shared/images/tutorial_hand_on_box.png "Example of hands-on box")
 
     with the
 
@@ -334,7 +333,7 @@ This structure needs to be respected otherwise it would not be interpreted corre
         >    </details>
         {: .question}
 
-    ![](../../../../shared/images/tutorial_question_box.png)
+    ![Example of question box](../../../../shared/images/tutorial_question_box.png "Example of question box")
 
     The questions has to be quick to answer. They can be small or also multiple choice (MCQs).
     With well choosen wrong answers MCQs can do much more than just measure how much someone knows.
@@ -357,7 +356,7 @@ This structure needs to be respected otherwise it would not be interpreted corre
         > * Press **Start**
         {: .tip}
 
-    ![](../../../../shared/images/tutorial_tip_box.png)
+    ![Example of tip box](../../../../shared/images/tutorial_tip_box.png "Example of tip box")
 
 - Comments
 
@@ -366,7 +365,7 @@ This structure needs to be respected otherwise it would not be interpreted corre
         > - Rename the datasets according to the samples
         {: .comment}
 
-    ![](../../../../shared/images/tutorial_comment_box.png)
+    ![Example of comment box](../../../../shared/images/tutorial_comment_box.png "Example of comment box")
 
 - Key points
 
