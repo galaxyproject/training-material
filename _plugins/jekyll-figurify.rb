@@ -28,7 +28,7 @@ module Jekyll
         url = $2
         title = $3 || alt
 
-        if title.to_s.empty? and skip_empty?
+        if skip_titles?(title) or (title.to_s.empty? and skip_empty?)
           Regexp.last_match
         else
           num += 1
@@ -57,6 +57,11 @@ module Jekyll
       end
 
       to_skip.include?(layout)
+    end
+
+    def skip_titles?(title)
+      to_skip = @config['skip_titles'] || []
+      to_skip.include?(title)
     end
   end
 end
