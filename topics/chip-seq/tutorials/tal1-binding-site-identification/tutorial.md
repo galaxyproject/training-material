@@ -68,6 +68,14 @@ As for any NGS data analysis, ChIP-seq data must be quality controlled before be
 >    >
 >    > 1. What are four key features of a FASTQ file?
 >    > 2. What is the main difference between a FASTQ and a FASTA file?
+>    >
+>    >    <details>
+>    >    <summary>Click to view answers</summary>
+>    >    <ol type="1">
+>    >    <li>Sequence identifier and additonal information, the raw sequence, information about the sequence again with optional information, and quality information about the sequence</li>
+>    >    <li>A fasta file contains only the description of the sequence and the sequence itself. A fasta file does not contain any quality information.</li>
+>    >    </ol>
+>    >    </details>
 >    {: .question}
 >   
 > 4. **FastQC** :wrench:: Run the tool **FastQC** on each FASTQ file to assess the quality of the raw data. An explanation of the results can be found on the [FastQC web page](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/).
@@ -85,6 +93,14 @@ As for any NGS data analysis, ChIP-seq data must be quality controlled before be
 >    >
 >    > 1. What does the y-axis represent in Figure 3?
 >    > 2. Why is the quality score decreasing across the length of the reads?
+>    >
+>    >    <details>
+>    >    <summary>Click to view answers</summary>
+>    >    <ol type="1">
+>    >    <li>The phred-score. This score gives the probability of an incorrect base e.g. a score of 20 means that it is likely by 1% that one base is incorrect. See <a href="https://en.wikipedia.org/wiki/Phred_quality_score"> here </a>for more information. </li>
+>    >    <li>This is an unsolved technical issue of the sequencing machines. The longer the sequences are the more likely are errors. More <a href="https://www.ecseq.com/support/ngs/why-does-the-sequence-quality-decrease-over-the-read-in-illumina">information.</a></li>
+>    >    </ol>
+>    >    </details>
 >    {: .question}
 {: .hands_on}
 
@@ -113,6 +129,14 @@ It is often necessary to trim a sequenced read to remove bases sequenced with hi
 >    >
 >    > 1. How did the range of read lengths change after trimming/clipping?
 >    > 2. What do you think could account for the enriched k-mers (**Kmer Content** heading in **FASTQC** output) observed in the Megakaryocytes TAL1 R2 ChIP-seq experiment?
+>    >
+>    >    <details>
+>    >    <summary>Click to view answers</summary>
+>    >    <ol type="1">
+>    >    <li></li>
+>    >    <li></li>
+>    >    </ol>
+>    >    </details>
 >    {: .question}
 >    
 >    ![fastqafter](../../images/fastqc_after.png)
@@ -141,15 +165,39 @@ Nowadays, there are many read alignment programs for sequenced DNA, `BWA` being 
 >    >
 >    > 1. What datatype is the `BWA` output file?
 >    > 2. How many reads were mapped from each file?
+>    >
+>    >    <details>
+>    >    <summary>Click to view answers</summary>
+>    >    <ol type="1">
+>    >    <li> The output is a sam file.</li>
+>    >    <li>Check the number of lines for each file in your history. This gives you a rough estimate.</li>
+>    >    </ol>
+>    >    </details>
 >    {: .question}
 >
-> 3. **IdxStats** :wrench:: Run the tool **IdxStats** and look at the output (poke it in the eye!).
+> 3. **IdxStats** :wrench:: Run the tool **IdxStats** on all mapped files and look at the output (poke it in the eye!).
 >
 >    > ### :question: Questions
 >    >
 >    > 1. What does each column in the output represent (**Tip**: look at the Tool Form)?
 >    > 2. How many reads were mapped to chromosome 19 in each experiment?
 >    > 3. If the mouse genome has 21 pairs of chromosomes, what are the other reference chromosomes (*e.g.* chr1_GL456210_random)?
+>    >
+>    >    <details>
+>    >    <summary>Click to view answers</summary>
+>    >    <ol type="1">
+>    >    <li>
+>    >      Column &emsp; Description</br>
+>    >      ------------ &emsp;------------------</br>
+>    >         1 &emsp; &emsp; &emsp;     Reference sequence identifier</br>
+>    >         2 &emsp; &emsp; &emsp;     Reference sequence length</br>
+>    >         3 &emsp; &emsp; &emsp;     Number of mapped reads</br>
+>    >         4 &emsp; &emsp; &emsp;     Number of placed but unmapped reads  (typically unmapped partners of mapped reads)</li>
+>    >    <li>This information can be seen in column 3, e.g. for Megakaryocyte_Tal1_R1 2143352 reads are mapped.</li>
+>    >    <li>These are parts of chromosomes that e.g. for chr1_GL456210_random do belong to chr1 but it is unclear where exactly. There entires like chrUn that are not associated with a chromosome but it is believed that they are part of the genome. </li>
+
+>    >    </ol>
+>    >    </details>
 >    {: .question}
 {: .hands_on}
 
@@ -191,6 +239,15 @@ We expect that the replicates of the ChIP-seq experiments should be clustered mo
 >     > 1. Why do we want to skip zeros in **plotCorrelation**?
 >     > 2. What happens if the Spearman correlation method is used instead of the Pearson method?
 >     > 3. What does the output of making a Scatterplot instead of a Heatmap look like?
+>    >
+>    >    <details>
+>    >    <summary>Click to view answers</summary>
+>    >    <ol type="1">
+>    >    <li>Large areas of zeros would lead to a correlation of these areas. The information we would get out of this computation would be meaningless. </li>
+>    >    <li>The clusters are different, e.g. Megakaryocyte_input_R2 and G1E_input_R2 are clustred together. <a href="http://support.minitab.com/en-us/minitab-express/1/help-and-how-to/modeling-statistics/regression/supporting-topics/basics/a-comparison-of-the-pearson-and-spearman-correlation-methods/" > More information about Pearson and Spearman correlation. </a> </li>
+>    >    <li>No solution for you, just compare the different outputs. </li>
+>    >    </ol>
+>    >    </details>
 >     {: .question}
 >     
 >     ![heatmap](../../images/plotCorrelation_heatmap_pearson_1kb.png)
@@ -227,25 +284,24 @@ We will now evaluate the quality of the immuno-precipitation step in the ChIP-se
 >    > 2. How do (or should) input datasets differ from IP datasets?
 >    > 3. What do you think about the quality of the IP for this experiment?
 >    > 4. How does the quality of the IP for megakaryocytes compare to G1E cells?
+>    >
+>    >    <details>
+>    >    <summary>Click to view answers</summary>
+>    >    <ol type="1">
+>    >    <li>It shows us how good the ChIP Signal compared to the control signal is. An ideal control [input] with perfect uniform distribution of reads along the genome (i.e. without enrichments in open chromatin etc.) and infinite sequencing coverage should generate a straight diagonal line. A very specific and strong ChIP enrichment will be indicated by a prominent and steep rise of the cumulative sum towards the highest rank. </li>
+>    >    <li>We expect that the control (input) signal is more or less uniforme distributed over the genome (e.g. like the green line in the image above.) The IP dataset should look more like the red line but it would be better if the values for IP start to increase at around 0.8 on the x-axis. </li>
+>    >    <li>The enrichment did not work as it should. Compare the blue line with the red one! For your future experiments: You can never have enough replicates! </li>
+>    >    <li>The quality is better.</li>
+>    >    </ol>
+>    >    </details>
 >    {: .question}
 {: .hands_on}
 
 For additional informaton on how to interpret **plotFingerprint** plots, read the information [here](https://deeptools.readthedocs.io/en/latest/content/tools/plotFingerprint.html#background)
 
-# Step 6: Generating Input normalized coverage files
 
-We will generate Input normalized coverage (bigwig) files for the ChIP samples, using **bamCompare** tool from **deepTools2 **. bamCompare provides multiple options to compare the two files (eg. log2ratio, subtraction etc..). We will use log2 ratio of the ChIP samples over Input.
 
-> ### :pencil2: Hands-on: Generate Input-normalized bigwigs
->
-> 1. Search for **bamCompare** under galaxy toolshed.
-> 2. Select the treatment sample, for example "Megakaryocyte_Tal1_R2.bam", as first sample, and the input sample "Megakaryocyte_Input_R2.bam" as second file.
-> 3. Check that you are using log2 ratio to compare the file, and click "Execute".
->
-> ![](../../images/bamcom.png)
-{: .hands_on}
-
-# Step 7: Determining TAL1 binding sites
+# Step 6: Determining TAL1 binding sites
 
 Now that **BWA** has aligned the reads to the genome, we will use the tool **MACS2** to identify regions of TAL1 occupancy, which are called "peaks". Peaks are determined from pileups of sequenced reads across the genome that correspond to where TAL1 binds.
 
@@ -269,7 +325,7 @@ More information about **MACS2** can be found [here](https://genomebiology.biome
 > 2. Rename your files after **MACS2 callpeak** finishes to reflect the origin and contents.
 {: .hands_on}
 
-# Step 8: Inspection of peaks and aligned data
+# Step 7: Inspection of peaks and aligned data
 
 It is critical to visualize NGS data on a genome browser after alignment to evaluate the "goodness" of the analysis. Evaluation criteria will differ for various NGS experiment types, but for ChIP-seq data we want to ensure reads from a Treatment/IP sample are enriched at peaks and do not localize non-specifically (like the Control/input condition).
 
@@ -307,13 +363,30 @@ First, we will reformat the peak file before we send it to Trackster, and then w
 >    >
 >    > 1. What do you see at the Runx1 locus in Trackster?
 >    > 2. What gene(s) other than Runx1 could be regulated by TAL1?
+>    >
+>    >    <details>
+>    >    <summary>Click to view answers</summary>
+>    >    <ol type="1">
+>    >    <li></li>
+>    >    <li></li>
+>    >    </ol>
+>    >    </details>
 >    {: .question}
 >
 >    ![runx1](../../images/Trackster_Runx1_locus.png)
 >    <figcaption><b>Figure 16:</b> The Runx1 locus.</figcaption>
 {: .hands_on}
 
-# Step 9: Identifying unique and common TAL1 peaks between states
+# Step 7.1: Inspection of peaks and aligned data with IGV
+We show here an alternative to trackster, [IGV](http://software.broadinstitute.org/software/igv/). 
+
+> ### :pencil2: Hands-on: IGV
+>
+> 1. Open IGV on your local computer.
+> 2. Click on each 'narrow peaks' result file from the MACS2 computations on 'display with IGV' --> 'local Mouse mm10'
+> 3. For more information about IGV see [here](https://galaxyproject.github.io/training-material//topics/introduction/tutorials/igv-introduction/tutorial.html)
+
+# Step 8: Identifying unique and common TAL1 peaks between states
 
 We have processed ChIP-seq data from two stages of hematopoiesis and have lists of TAL1 occupied sites (peaks) in both cellular states. The next analysis step is to identify TAL1 peaks that are *shared* between the two cellular states and peaks that are *specific* to either cellular state.
 
@@ -342,7 +415,31 @@ We have processed ChIP-seq data from two stages of hematopoiesis and have lists 
 >    > 1. How many TAL1 binding sites are common to both G1E cells and megakaryocytes?
 >    > 2. How many are unique to G1E cells?
 >    > 3. How many are unique to megakaryocytes?
+>    >
+>    >    <details>
+>    >    <summary>Click to view answers</summary>
+>    >    <ol type="1">
+>    >    <li>1 region</li>
+>    >    <li>407 regions</li>
+>    >    <li>139 regions / 2XX regions</li>
+
+>    >    </ol>
+>    >    </details>
 >    {: .question}
+{: .hands_on}
+
+# Step 9: Generating Input normalized coverage files
+
+We will generate Input normalized coverage (bigwig) files for the ChIP samples, using **bamCompare** tool from **deepTools2 **. bamCompare provides multiple options to compare the two files (eg. log2ratio, subtraction etc..). We will use log2 ratio of the ChIP samples over Input.
+
+> ### :pencil2: Hands-on: Generate Input-normalized bigwigs
+>
+> 1. Search for **bamCompare** under galaxy toolshed.
+> 2. Select the treatment sample, for example "Megakaryocyte_Tal1_R2.bam", as first sample, and the input sample "Megakaryocyte_Input_R2.bam" as second file.
+> 3. Check that you are using log2 ratio to compare the file, and click "Execute".
+> 4. Repeat this step for all treatment and input samples: Megakaryocyte_Tal1_R1.bam and Megakaryocyte_Input_R1.bam; G1E_Tal1_R2.bam and G1E_Input_R2.bam; G1E_Tal1_R1.bam and G1E_Input_R1.bam.
+>
+> ![](../../images/bamcom.png)
 {: .hands_on}
 
 # Step 10: Plot the signal on the peaks between samples
@@ -361,10 +458,10 @@ optionally, you can also use `plotProfile`to create a profile plot using to comp
 >
 > 1. Search for "computeMatrix" under galaxy toolshed.
 > 2. Under "Regions to plot", select the MACS2 output (narrowpeaks) for G1E cells (TAL1 over Input).
-> 3. Under "Reference point for plotting", select "Center of region".
-> 4. Under "Score file", select the bigWigs (log2 ratios from bamCompare).
-> 5. From the output options, select "reference point".
-> 6. For region upstream and downstream of region file : Enter 5000
+> 3. Under "Score file", select the bigWigs (log2 ratios from bamCompare).
+> 4. From "computeMatrix has two main output options", select "reference point".
+> 5. Under "The Reference point for plotting", select "Center of region".
+> 6. For the two fields region upstream and downstream choose both times the value '5000'
 >
 > ![compMatrix](../../images/compM.png)
 >
@@ -421,6 +518,14 @@ We will now check whether the samples have more reads from regions of the genome
 >    >
 >    > 1. Why would we worry more about checking for GC bias in an input file?
 >    > 2. Does this dataset have a GC bias?
+>    >
+>    >    <details>
+>    >    <summary>Click to view answers</summary>
+>    >    <ol type="1">
+>    >    <li></li>
+>    >    <li></li>
+>    >    </ol>
+>    >    </details>
 >    {: .question}
 >
 > 2. **correctGCbias** :wrench:: Explore the tool **correctGCbias** from the **deepTools** package.
@@ -430,6 +535,14 @@ We will now check whether the samples have more reads from regions of the genome
 >    > 1. What does the tool **correctGCbias** do?
 >    > 2. What is the output of this tool?
 >    > 3. What are some caveats to be aware of if using the output of this tool in downstream analyses?
+>    >
+>    >    <details>
+>    >    <summary>Click to view answers</summary>
+>    >    <ol type="1">
+>    >    <li></li>
+>    >    <li></li>
+>    >    </ol>
+>    >    </details>
 >    {: .question}
 {: .hands_on}
 
