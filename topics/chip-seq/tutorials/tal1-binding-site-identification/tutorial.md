@@ -133,8 +133,8 @@ It is often necessary to trim a sequenced read to remove bases sequenced with hi
 >    >    <details>
 >    >    <summary>Click to view answers</summary>
 >    >    <ol type="1">
->    >    <li></li>
->    >    <li></li>
+>    >    <li>Before trimming, all the reads were the same length, which reflected the number of rounds of nucleotide incorporation in the sequencing experiment. After trimming, read lengths span a range of values reflecting different lengths of the actual DNA fragments captured during the ChIP experiement.</li>
+>    >    <li>Many transcription factors recognize and bind to specific sequence motifs. Since a ChIP-seq experiment enriches for DNA fragments bound by the protein being immunopurified, we might expect that protein's recognition motif to be slightly enriched in the resulting sequenced reads.</li>
 >    >    </ol>
 >    >    </details>
 >    {: .question}
@@ -291,7 +291,7 @@ We will now evaluate the quality of the immuno-precipitation step in the ChIP-se
 >    >    <li>It shows us how good the ChIP Signal compared to the control signal is. An ideal control [input] with perfect uniform distribution of reads along the genome (i.e. without enrichments in open chromatin etc.) and infinite sequencing coverage should generate a straight diagonal line. A very specific and strong ChIP enrichment will be indicated by a prominent and steep rise of the cumulative sum towards the highest rank. </li>
 >    >    <li>We expect that the control (input) signal is more or less uniforme distributed over the genome (e.g. like the green line in the image above.) The IP dataset should look more like the red line but it would be better if the values for IP start to increase at around 0.8 on the x-axis. </li>
 >    >    <li>The enrichment did not work as it should. Compare the blue line with the red one! For your future experiments: You can never have enough replicates! </li>
->    >    <li>The quality is better.</li>
+>    >    <li>The quality of megakaryocytes is better then G1E.</li>
 >    >    </ol>
 >    >    </details>
 >    {: .question}
@@ -333,7 +333,7 @@ It is critical to visualize NGS data on a genome browser after alignment to eval
 
 First, we will reformat the peak file before we send it to Trackster, and then we will import a gene annotation file so we can visualize aligned reads and TAL1 peaks relative to gene features and positions.
 
-> ### :pencil2: Hands-on: Inspection of peaks and aligned data
+> ### :pencil2: Hands-on: Inspection of peaks and aligned data with Trackster
 >
 > 1. **Cut** :wrench:: Run the tool **Cut** on the peak file choosing columns "c1,c2,c3,c4" and rename this file to reflect the origin and contents.
 >
@@ -367,7 +367,7 @@ First, we will reformat the peak file before we send it to Trackster, and then w
 >    >    <details>
 >    >    <summary>Click to view answers</summary>
 >    >    <ol type="1">
->    >    <li></li>
+>    >    <li>Directly upstream of the shorter Runx1 gene models is a cluster of 3 TAL1 peaks that only appear in the G1E cell type, but not in Megakaryocytes. Further upstream, there are some shared TAL1 peaks in both cell types.</li>
 >    >    <li></li>
 >    >    </ol>
 >    >    </details>
@@ -378,7 +378,7 @@ First, we will reformat the peak file before we send it to Trackster, and then w
 {: .hands_on}
 
 # Step 7.1: Inspection of peaks and aligned data with IGV
-We show here an alternative to trackster, [IGV](http://software.broadinstitute.org/software/igv/). 
+We show here an alternative to Trackster, [IGV](http://software.broadinstitute.org/software/igv/). 
 
 > ### :pencil2: Hands-on: IGV
 >
@@ -422,7 +422,6 @@ We have processed ChIP-seq data from two stages of hematopoiesis and have lists 
 >    >    <li>1 region</li>
 >    >    <li>407 regions</li>
 >    >    <li>139 regions / 2XX regions</li>
-
 >    >    </ol>
 >    >    </details>
 >    {: .question}
@@ -430,13 +429,13 @@ We have processed ChIP-seq data from two stages of hematopoiesis and have lists 
 
 # Step 9: Generating Input normalized coverage files
 
-We will generate Input normalized coverage (bigwig) files for the ChIP samples, using **bamCompare** tool from **deepTools2 **. bamCompare provides multiple options to compare the two files (eg. log2ratio, subtraction etc..). We will use log2 ratio of the ChIP samples over Input.
+We will generate Input normalized coverage (bigwig) files for the ChIP samples, using **bamCompare** tool from **deepTools2**. **bamCompare** provides multiple options to compare the two files (e.g. log2ratio, subtraction). We will use log2 ratio of the ChIP samples over Input.
 
 > ### :pencil2: Hands-on: Generate Input-normalized bigwigs
 >
-> 1. Search for **bamCompare** under galaxy toolshed.
-> 2. Select the treatment sample, for example "Megakaryocyte_Tal1_R2.bam", as first sample, and the input sample "Megakaryocyte_Input_R2.bam" as second file.
-> 3. Check that you are using log2 ratio to compare the file, and click "Execute".
+> 1. Search for **bamCompare** in the Galaxy tool panel.
+> 2. Select the treatment sample, for example "Megakaryocyte_Tal1_R2.bam", as the first sample, and the input sample "Megakaryocyte_Input_R2.bam" as the second sample.
+> 3. Check that you are using log2 ratio to compare the samples, and click "Execute".
 > 4. Repeat this step for all treatment and input samples: Megakaryocyte_Tal1_R1.bam and Megakaryocyte_Input_R1.bam; G1E_Tal1_R2.bam and G1E_Input_R2.bam; G1E_Tal1_R1.bam and G1E_Input_R1.bam.
 >
 > ![](../../images/bamcom.png)
@@ -450,13 +449,11 @@ Plotting your region of interest will involve using two tools from the **deepToo
 
 optionally, you can also use `plotProfile`to create a profile plot using to computeMatrix output.
 
-
-
 ### computeMatrix
 
 > ### :pencil2: Hands-on: calculate signal matrix on the MACS2 output
 >
-> 1. Search for "computeMatrix" under galaxy toolshed.
+> 1. Search for **computeMatrix** in the Galaxy tool panel.
 > 2. Under "Regions to plot", select the MACS2 output (narrowpeaks) for G1E cells (TAL1 over Input).
 > 3. Under "Score file", select the bigWigs (log2 ratios from bamCompare).
 > 4. From "computeMatrix has two main output options", select "reference point".
@@ -475,8 +472,7 @@ optionally, you can also use `plotProfile`to create a profile plot using to comp
 
 > ### :pencil2: Hands-on: plot a Heatmap using computeMarix output
 >
->
-> 1. Select "plotHeatmap" from the galaxy toolshed.
+> 1. Select "plotHeatmap" from the Galaxy tool panel.
 > 2. Select the computeMatrix output as an input.
 > 3. Under advanced options, go to "Labels for the samples ", and enter sample labels (in the order you added them in compueMatrix ), seperated by space.
 > 4. Click "Execute"
@@ -487,10 +483,6 @@ optionally, you can also use `plotProfile`to create a profile plot using to comp
 >
 > ![hm](../../images/hm.png)
 {: .hands_on}
-
-
-
-
 
 # Additional optional analyses
 
@@ -522,8 +514,8 @@ We will now check whether the samples have more reads from regions of the genome
 >    >    <details>
 >    >    <summary>Click to view answers</summary>
 >    >    <ol type="1">
->    >    <li></li>
->    >    <li></li>
+>    >    <li>In an input ChIP-seq file, the expectation is that DNA fragments are uniformly sampled from the genome. This is in contrast to an IP ChIP-seq file where it is *expected* that certain genomic regions contain more reads  (i.e. regions that are bound by the protein that is immunopurified). Therefore, non-uniformity of reads in the input sample could be a result of GC-bias, whereby more GC-rich fragments are preferentially amplified during PCR.</li>
+>    >    <li>To answer this question, run the **computeGCbias** tool as described above and check out the results. What do YOU think? For more examples and information on how to interpret the results, check out the tool usage documentation [here](https://deeptools.readthedocs.io/en/latest/content/tools/computeGCBias.html#background).</li>
 >    >    </ol>
 >    >    </details>
 >    {: .question}
@@ -539,14 +531,15 @@ We will now check whether the samples have more reads from regions of the genome
 >    >    <details>
 >    >    <summary>Click to view answers</summary>
 >    >    <ol type="1">
->    >    <li></li>
->    >    <li></li>
+>    >    <li>The **corectGCbias** tool removes reads from regions with higher coverage than expected (typically corresponding to GC-rich regions) and adds reads to regions with lower coverage than expected (typically corresponding to AT-rich regions).</li>
+>    >    <li>The output of this tool is a GC-corrected file in BAM, bigWig, or bedGraph format.</li>
+>    >    <li>The GC-corrected output file likely contains duplicated reads in low-coverage regions where reads were added to match the expected read density. Therefore, it is necessary to *avoid* filtering or removing duplicate reads in any downstream analyses.</li>
 >    >    </ol>
 >    >    </details>
 >    {: .question}
 {: .hands_on}
 
-For additional informaton on how to interpret **computeGCbias** plots, read the information [here](https://deeptools.readthedocs.io/en/latest/content/tools/computeGCBias.html#background)
+For additional informaton on how to interpret **computeGCbias** plots, read the information [here](https://deeptools.readthedocs.io/en/latest/content/tools/computeGCBias.html)
 
 
 # Conclusion
