@@ -8,7 +8,7 @@ This repository collect tutorials and slides developed and maintained by the wor
 
 # Usage
 
-The content of the material is developed in Markdown and a templating system ([Jekyll](http://jekyllrb.com/)) is used to format the tutorials and generate a website ([http://training.galaxyproject.org](http://training.galaxyproject.org)).
+The content of the material is developed in Markdown and a templating system ([Jekyll](http://jekyllrb.com/)) is used to format the tutorials and generate a website ([http://training.galaxyproject.org ](http://training.galaxyproject.org)).
 
 If you want to generate website locally, please have a look at our [dedicated tutorial](https://galaxyproject.github.io/training-material//topics/training/tutorials/create-new-tutorial-jekyll/tutorial.html).
 
