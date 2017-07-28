@@ -137,6 +137,7 @@ python '$__tool_directory__/graphlan.py'
 
 ---
 
+### `inputs` > `param` to `command`
 #### Directly linked to `<command>`
 
 ```xml
@@ -258,11 +259,10 @@ class: packed
 
 ### `inputs` > `param` > `conditional`
 
-![](../../images/input_conditional.png)
+.image-75[ ![](../../images/input_conditional.png) ]
 
 ```xml
 <command><![CDATA[
-bwa mem ...
 #if $fastq_input.selector == 'paired':
     '$fastq_input.input1' '$fastq_input.input2'
 #else:
@@ -487,6 +487,8 @@ Use the `argument` tag when a param name reflects the command line argument
 
 Use sections to group related parameters
 
+![](../../images/input_section.png)
+
 ```xml
 <section name="advanced" title="Advanced options" expanded="False">
     <param argument="--size" type="integer" value="7" label="..." help="..."/>
@@ -594,86 +596,6 @@ Open http://127.0.0.1:9090/ in your web browser to view your new tool
 #### Building Galaxy Tools
 
 ![](../../images/planemo_tool_building_lint.png)
-
----
-
-### <i class="fa fa-pencil" aria-hidden="true"></i> Hands-on
-
-![](../../images/exercise.png)
-
----
-
-### <i class="fa fa-pencil" aria-hidden="true"></i> Hands-on
-
-#### The Goal
-
-- Developing a wrapper for Seqtk
-
-    A tool for processing sequence data in FASTA and FASTQ files
-
----
-
-### <i class="fa fa-pencil" aria-hidden="true"></i> Hands-on
-
-#### Before: install Seqtk
-*No brain needed*
-
-```bash
-$ . ~/.venv_planemo/bin/activate  # not mandatory
-$ planemo conda_init
-$ export PATH=~/miniconda3/bin:$PATH
-$ conda config --add channels conda-forge
-$ conda config --add channels defaults
-$ conda config --add channels r
-$ conda config --add channels bioconda
-$ conda install seqtk
-```
-
----
-
-### <i class="fa fa-pencil" aria-hidden="true"></i> Hands-on
-
-#### Before: observe and test Seqtk
-
-```bash
-$ seqtk
-
-$ seqtk seq
-
-$ wget https://raw.githubusercontent.com/galaxyproject/galaxy-test-data/master/2.fastq
-
-$ cat 2.fastq
-
-$ seqtk seq -A 2.fastq > 2.fasta
-
-$ cat 2.fasta
-```
-
----
-
-### <i class="fa fa-pencil" aria-hidden="true"></i> Hands-on
-
-#### Steps
-1. Create a new directory for your tool, `cd` into it
-2. Init the wrapper with `planemo tool_init`
-3. Fill the template
-4. Test the template with `planemo lint`
-<small>(Don't worry about "No tests found" for now)</small>
-5. Display the tool with `planemo serve`
-6. and try it with a file
-
-???
-
-```bash
-# 2.
-planemo tool_init
-# -> hands_on-tool_integration/seqtk/seqtk_seq_step1.xml
-# 3. -> hands_on-tool_integration/seqtk/seqtk_seq_step2.xml
-# 4.
-planemo lint # seqtk_seq_step2.xml
-# 5.
-planemo serve # seqtk_seq_step2.xml
-```
 
 ---
 
@@ -811,6 +733,20 @@ graphlan/
 ---
 
 ### `tests`
+#### Comparison Methods: checking the stdout/stderr
+
+```xml
+<assert_stdout>
+    <has_text text="Step 1... determine cutoff point" />
+    <has_text text="Step 2... estimate parameters of null distribution" />
+</assert_stdout>
+```
+
+.footnote[[Complete documentation](https://docs.galaxyproject.org/en/latest/dev/schema.html#tool-tests-test-output-assert-contents)]
+
+---
+
+### `tests`
 #### Tests with conditionals, repeats, sections
 
 ```xml
@@ -856,36 +792,6 @@ An HTML report is automatically created with logs in case of failing test
 #### Test Galaxy Tools
 
 ![](../../images/planemo_tool_building_test.png)
-
----
-
-### <i class="fa fa-pencil" aria-hidden="true"></i> Hands-on
-
-![](../../images/exercise.png)
-
----
-
-### <i class="fa fa-pencil" aria-hidden="true"></i> Hands-on
-
-#### The Goal
-
-- Add functional test to the Seqtk wrapper for Seqtk
-
----
-
-### <i class="fa fa-pencil" aria-hidden="true"></i> Hands-on
-
-#### Steps
-1. Fill a `<test>` tag using the file you generated previously with `seqtk`
-2. Use `planemo test` ... until everything is green
-
-???
-
-```bash
-# 1. -> hands_on-tool_integration/seqtk/seqtk_seq_step3.xml
-# 2.
-planemo test # seqtk_seq_step3.xml
-```
 
 ---
 
@@ -954,6 +860,34 @@ See [Tool Dependencies and Conda](../conda/slides.html)
 ![](../../images/planemo-logo.png)
 
 > Command-line utilities to assist in building and publishing Galaxy tools.
+
+---
+
+### <i class="fa fa-pencil" aria-hidden="true"></i> Hands-on
+
+![](../../images/exercise.png)
+
+---
+
+### <i class="fa fa-pencil" aria-hidden="true"></i> Hands-on
+
+#### The Goal
+
+.left[ Developing a wrapper for Seqtk: ]
+
+.left[ A tool for processing sequence data in FASTA and FASTQ files ]
+
+---
+
+### <i class="fa fa-pencil" aria-hidden="true"></i> Hands-on
+
+#### Steps
+
+#### [http://planemo.readthedocs.io/en/latest/writing_standalone.html](http://planemo.readthedocs.io/en/latest/writing_standalone.html)
+1. [Launching the Appliance](http://planemo.readthedocs.io/en/latest/appliance.html#launching-the-appliance)
+2. [The Basics](http://planemo.readthedocs.io/en/latest/writing_standalone.html#the-basics)
+3. [Simple Parameters](http://planemo.readthedocs.io/en/latest/writing_standalone.html#simple-parameters)
+4. [Conditional Parameters](http://planemo.readthedocs.io/en/latest/writing_standalone.html#conditional-parameters)
 
 ---
 
@@ -1272,7 +1206,7 @@ Unknown number of files:
 
 ---
 
-### Some Config
+## Some Config
 
 ---
 
