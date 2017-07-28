@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html>
+    <head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="chrome=1">
+        <title>Galaxy Training!</title>
+        <link media="all" href="https://netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://galaxyproject.github.io/training-material//assets/css/landing_page.css">
+        <link rel="stylesheet" href="https://galaxyproject.github.io/training-material//assets/css/tutorial.css">
+        <link rel="stylesheet" href="https://galaxyproject.github.io/training-material//assets/css/font-awesome.css">
+        <link rel="stylesheet" href="https://galaxyproject.github.io/training-material//assets/css/syntax_highlighting.css">
+        <meta name="viewport" content="width=device-width">
+    </head>
+    <body>
+        <div class="wrapper">
+            
+
+
+<header>
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a id="site-title" class="navbar-brand" href="https://wiki.galaxyproject.org/Teach/GTN">
+              <img class="pull-left img-responsive" src="https://galaxyproject.github.io/training-material///assets/images/GTN.png">
+            </a>
+            <a id="site-title" class="navbar-brand name-holder" href="https://galaxyproject.github.io/training-material//topics/assembly/tutorials/general-introduction">
+              Introduction to Genome Assembly
+            </a>
+          </div>
+
+          <div class="collapse navbar-collapse" id="navbar">
+
+            <ul id="main-menu" class="nav navbar-nav navbar-right">
+              <li><a href="https://galaxyproject.github.io/training-material/" title="Back to front page"><i class="fa fa-home"></i> Home</a></li>
+              <li><a href="https://galaxyproject.github.io/training-material//topics/assembly" title="Go back to list of tutorials"><i class="fa fa-file-text-o"></i> assembly</a></li>
+
+              
+                <li><a href="https://galaxyproject.github.io/training-material//topics/assembly/slides" title="Slides for this tutorial"><i class="fa fa-graduation-cap"></i> Introduction slides</a></li>
+              
+              <!--<li><a href="https://galaxyproject.github.io/training-material//assembly/slides/general-introduction/"><i class="fa fa-file-powerpoint-o"></i> Associated slides</a></li>-->
+
+              
+                <li><a href="https://github.com/galaxyproject/training-material/tree/master/topics/assembly/docker" title="Docker image for this tutorial"><i class="fa fa-ship"></i> Docker image</a></li>
+              
+
+              
+
+              
+                <li><a href="https://doi.org/10.5281/zenodo.582600" title="Links to data"><i class="fa fa-folder-open"></i> Input Dataset</a></li>
+              
+
+              
+                <li><a href="https://galaxyproject.github.io/training-material//topics/assembly#references" title="References"><i class="fa fa-book"></i> Literature</a></li>
+              
+
+            </ul>
+          </div>
+        </div>
+    </nav>
+</header>
+
+<section class="tutorial">
+    <h1>Introduction to Genome Assembly</h1>
+
+    <blockquote class="overview">
+        <h3>Overview</h3>
+
+        <p class="bold"> <img class="emoji" title=":grey_question:" alt=":grey_question:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2754.png" height="20" width="20" align="absmiddle"> Questions</p>
+        <ul>
+        
+          <li>How do we perform a very basic genome assembly from short read data?</li>
+        
+        </ul>
+
+        <p class="bold"> <img class="emoji" title=":dart:" alt=":dart:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f3af.png" height="20" width="20" align="absmiddle"> Objectives</p>
+        <ul>
+        
+          <li>assemble some paired end reads using Velvet</li>
+        
+          <li>examine the output of the assembly.</li>
+        
+        </ul>
+
+        
+        <p class="bold"> <img class="emoji" title=":heavy_check_mark:" alt=":heavy_check_mark:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2714.png" height="20" width="20" align="absmiddle"> Requirements</p>
+        <ul>
+          
+            <li>
+                
+                <a href="https://galaxyproject.github.io/training-material//topics//introduction/">Galaxy introduction</a>
+                
+            </li>
+          
+            <li>
+                
+                <a href="https://galaxyproject.github.io/training-material//topics//sequence-analysis/">Quality Control</a>
+                
+            </li>
+          
+          
+        </ul>
+        
+
+        <p><span class="bold"> <img class="emoji" title=":hourglass:" alt=":hourglass:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/231b.png" height="20" width="20" align="absmiddle"> Time estimation:</span> 30 minutes</p>
+
+    </blockquote>
+
+<h1 class="no_toc" id="genome-assembly-with-velvet-background">Genome assembly with Velvet: Background</h1>
+
+<p>Velvet is one of a number of <em>de novo</em> assemblers that use short read sets as input (e.g. Illumina Reads), and the assembly method is based on de Bruijn graphs. For information about Velvet see this <a href="https://en.wikipedia.org/wiki/Velvet_assembler">link</a>.</p>
+
+<p>In this activity, we will perform a <em>de novo</em> assembly of a short read set using the Velvet assembler.</p>
+
+<blockquote class="agenda">
+  <h3 id="agenda">Agenda</h3>
+
+  <p>In this tutorial, we will deal with:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#get-the-data" id="markdown-toc-get-the-data">Get the data</a></li>
+  <li><a href="#evaluate-the-input-reads" id="markdown-toc-evaluate-the-input-reads">Evaluate the input reads</a></li>
+  <li><a href="#assemble-reads-with-velvet" id="markdown-toc-assemble-reads-with-velvet">Assemble reads with Velvet</a></li>
+  <li><a href="#collect-some-statistics-on-the-contigs" id="markdown-toc-collect-some-statistics-on-the-contigs">Collect some statistics on the contigs</a></li>
+  <li><a href="#discussion" id="markdown-toc-discussion">Discussion</a></li>
+</ol>
+
+</blockquote>
+
+<h1 id="get-the-data">Get the data</h1>
+
+<p>We will now import the data that we will use for the tutorial.</p>
+
+<blockquote class="hands_on">
+  <h3 id="pencil2-hands-on-getting-the-data">
+<img class="emoji" title=":pencil2:" alt=":pencil2:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/270f.png" height="20" width="20" align="absmiddle"> Hands-on: Getting the data</h3>
+
+  <ol>
+    <li>Create and name a new history for this tutorial.</li>
+    <li>
+      <p>Import the sequence read raw data (*.fastq) from <a href="https://doi.org/10.5281/zenodo.582600">Zenodo</a></p>
+
+      <blockquote class="tip">
+        <h3 id="bulb-tip-importing-data-via-links">
+<img class="emoji" title=":bulb:" alt=":bulb:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f4a1.png" height="20" width="20" align="absmiddle"> Tip: Importing data via links</h3>
+
+        <ul>
+          <li>Copy the link location (Right-click on the filename <i class="fa fa-long-arrow-right"></i> Copy Link Address)</li>
+          <li>Open the Galaxy Upload Manager</li>
+          <li>Select <strong>Paste/Fetch Data</strong>
+</li>
+          <li>Paste the link into the text field</li>
+          <li>Change the data-type to <strong>fastqsanger</strong>
+</li>
+          <li>Press <strong>Start</strong>
+</li>
+        </ul>
+      </blockquote>
+
+      <p><img src="../../images/upload_data_page.png" alt="upload"></p>
+      <figcaption><b>Figure 1:</b> Data can be imported directly with links.</figcaption>
+    </li>
+    <li>
+      <p>Once the files have been uploaded, change their names to Mutant_R1.fastq and Mutant_R2.fastq respectively by clicking on the <img src="../../images/edit_file.png" alt=""> icon next to the relevant history entry.</p>
+
+      <p><img src="../../images/starting_history.png" alt="data"></p>
+      <figcaption><b>Figure 2:</b> Imported datasets will appear in the history panel.</figcaption>
+    </li>
+  </ol>
+
+  <p>Click on the View Data button (the <img src="../../images/eye.png" alt="Eye icon">) next to one of the FASTQ sequence files.</p>
+
+  <blockquote class="question">
+    <h3 id="question-questions">
+<img class="emoji" title=":question:" alt=":question:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2753.png" height="20" width="20" align="absmiddle"> Questions</h3>
+
+    <ol>
+      <li>What are four key features of a FASTQ file?</li>
+      <li>What is the main difference between a FASTQ and a FASTA file?</li>
+    </ol>
+  </blockquote>
+
+</blockquote>
+
+<p>The history will now appear in your Current History pane, and the files are ready to use in Galaxy analyses.</p>
+
+<p>The read set for today is from an imaginary <em>Staphylococcus aureus</em> bacterium with a miniature genome. The whole genome shotgun method used to sequence our mutant strain read set. It was produced on an Illumina DNA sequencing instrument.</p>
+
+<p>The files we need for assembly are the <strong><em>mutant_R1.fastq</em></strong> and <strong><em>mutant_R2.fastq</em></strong>.</p>
+
+<ul>
+  <li>The reads are paired-end.</li>
+  <li>Each read is 150 bases long. <!--(before trimming)-->
+</li>
+  <li>The number of bases sequenced is equivalent to 19x the genome sequence of the wildtype strain. (Read coverage 19x - rather low!).</li>
+</ul>
+
+<h1 id="evaluate-the-input-reads">Evaluate the input reads</h1>
+
+<p>Questions you might ask about your input reads include:</p>
+
+<ul>
+  <li>How good is my read set?</li>
+  <li>Do I need to ask for a new sequencing run?</li>
+  <li>Is it suitable for the analysis I need to do?</li>
+</ul>
+
+<p>We will evaluate the input reads using the FastQC tool.</p>
+
+<p>The FastQC tool:</p>
+
+<ul>
+  <li>Runs a standard series of tests on your read set and returns a relatively easy-to-interpret report.</li>
+  <li>We will use the FastQC tool in Galaxy to evaluate the quality of one of our FASTQ files.</li>
+</ul>
+
+<blockquote class="hands_on">
+  <h3 id="pencil2-hands-on-run-fastqc-on-a-fastq-file">
+<img class="emoji" title=":pencil2:" alt=":pencil2:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/270f.png" height="20" width="20" align="absmiddle"> Hands-on: Run FastQC on a fastq file</h3>
+
+  <p>We will now run the FastQC tool on one of our fastq files. Normally we would run it on all of them but we will do 1 as an example here.</p>
+
+  <h4 id="1-run-fastqc-wrench-on-mutant_r1fastq-to-assess-the-quality-of-the-input-data">1. Run <strong>FastQC</strong> <img class="emoji" title=":wrench:" alt=":wrench:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f527.png" height="20" width="20" align="absmiddle"> on <strong>mutant_R1.fastq</strong> to assess the quality of the input data.</h4>
+
+  <ul>
+    <li>Once finished, examine the output called <strong><em>FastQC on data1:webpage</em></strong> (Hint:<img src="../../images/eye.png" alt="Eye icon">). It has a summary at the top of the page and a number of graphs.</li>
+  </ul>
+
+  <p>Some of the important outputs of FastQC for our purposes are:</p>
+
+  <ul>
+    <li>
+<strong>Basic Statistics: Sequence length</strong>: will be important in setting maximum k-mer size value for assembly</li>
+    <li>
+<strong>Basic Statistics: Encoding</strong>: Quality encoding type: important for quality trimming software</li>
+    <li>
+<strong>Basic Statistics: % GC</strong>: high GC organisms don’t tend to assemble well and may have an uneven read coverage distribution.</li>
+    <li>
+<strong>Basic Statistics: Total sequences</strong>: Total number of reads: gives you an idea of coverage.</li>
+    <li>
+<strong>Per base sequence quality</strong>: Dips in quality near the beginning, middle or end of the reads: determines possible trimming/cleanup methods and parameters and may indicate technical problems with the sequencing process/machine run.</li>
+    <li>
+<strong>Per base N content</strong>: Presence of large numbers of Ns in reads: may point to poor quality sequencing run. You would need to trim these reads to remove Ns.</li>
+    <li>
+      <p><strong>Kmer content</strong>: Presence of highly recurring k-mers: may point to contamination of reads with barcodes or adapter sequences.</p>
+
+      <p><img src="../../images/quality_screen.png" alt="fastqc"></p>
+      <figcaption><b>Figure 3:</b> Sequence quality per base generated by FastQC.</figcaption>
+
+      <blockquote class="question">
+        <h3 id="question-questions-1">
+<img class="emoji" title=":question:" alt=":question:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2753.png" height="20" width="20" align="absmiddle"> Questions</h3>
+
+        <ol>
+          <li>What does the y-axis represent in Figure 3?</li>
+          <li>Why is the quality score decreasing across the length of the reads?</li>
+        </ol>
+      </blockquote>
+    </li>
+  </ul>
+
+</blockquote>
+
+<p>Although we have warnings for two outputs (per base sequence content; Kmer content), we can ignore these for now.</p>
+
+<p>For a fuller discussion of FastQC outputs and warnings, see the <a href="https://www.bioinformatics.babraham.ac.uk/projects/fastqc/">FastQC website link</a>, including the section on each of the output <a href="https://www.bioinformatics.babraham.ac.uk/projects/fastqc/Help/3%20Analysis%20Modules/">reports</a>, and examples of <a href="https://www.bioinformatics.babraham.ac.uk/projects/fastqc/good_sequence_short_fastqc.html">“good”</a> and <a href="https://www.bioinformatics.babraham.ac.uk/projects/fastqc/bad_sequence_fastqc.html">“bad”</a> Illumina data.</p>
+
+<p>We won’t be doing anything to these data to clean it up as there isn’t much need. Therefore we will get on with the assembly!</p>
+
+<h1 id="assemble-reads-with-velvet">Assemble reads with Velvet</h1>
+
+<p>We will perform a <em>de novo</em> assembly of the mutant FASTQ reads into long contiguous sequences (in FASTA format) using the Velvet short read assembler.</p>
+
+<p>Velvet requires the user to input a value of <em>k</em> (k-mer size) for the assembly process. K-mers are fragments of sequence reads. Small k-mers will give greater connectivity, but large k-mers will give better specificity. We will discuss this more later.</p>
+
+<blockquote class="hands_on">
+  <h3 id="pencil2-hands-on-run-velvet-on-the-input-reads">
+<img class="emoji" title=":pencil2:" alt=":pencil2:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/270f.png" height="20" width="20" align="absmiddle"> Hands-on: Run Velvet on the input reads</h3>
+
+  <h4 id="1-run-velvet-wrench-run-velvet-on-both-the-input-read-files-mutant_r1fastq-and-mutant_r2fastq">1. Run <strong>Velvet</strong> <img class="emoji" title=":wrench:" alt=":wrench:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f527.png" height="20" width="20" align="absmiddle"> Run <strong>velvet</strong> on both the input read files <strong>mutant_R1.fastq</strong> and <strong>mutant_R2.fastq</strong>
+</h4>
+
+  <ul>
+    <li>Set the following parameters (leave other settings as they are):
+      <ul>
+        <li>
+<strong>K-mer</strong>: 29</li>
+        <li>
+<strong>Input file type</strong>: Fastq</li>
+        <li>
+<strong>Single or paired end reads</strong>: Paired</li>
+        <li>
+<strong>Select first set of reads</strong>: <em>mutant_R1.fastq</em>
+</li>
+        <li>
+<strong>Select second set of reads</strong>: <em>mutant_R2.fastq</em>
+</li>
+      </ul>
+    </li>
+  </ul>
+
+  <p>Your tool interface should look something like this (you will most likely have a different value for k):</p>
+
+  <p><img src="../../images/velvet_interface.png" alt="velvet interface"></p>
+
+  <ul>
+    <li>Galaxy is now running velvet on the reads for you.</li>
+    <li>Press the refresh button in the history pane to see if it has finished.</li>
+    <li>When it is finished, you will have some new files in your history.
+      <ul>
+        <li>a <em>Contigs</em> file</li>
+        <li>a <em>Contigs stats</em> file</li>
+        <li>a <em>Last Graph</em> file</li>
+        <li>the velvet <em>log</em> file</li>
+      </ul>
+    </li>
+  </ul>
+
+  <h4 id="2-examine-the-output">2. Examine the output</h4>
+
+  <ul>
+    <li>Click on the View Data button <img src="../../images/eye.png" alt="Eye icon"> on each of the files.</li>
+    <li>The <em>Contigs</em> file will show each contig with the <em>k-mer length</em> and <em>k-mer coverage</em> listed as part of the header (however, these are just called <em>length</em> and <em>coverage</em>).
+      <ul>
+        <li>
+<em>K-mer length</em>: For the value of k chosen in the assembly, a measure of how many k-mers overlap (by 1 bp each overlap) to give this length.</li>
+        <li>
+<em>K-mer coverage</em>: For the value of k chosen in the assembly, a measure of how many k-mers overlap each base position (in the assembly).</li>
+      </ul>
+    </li>
+  </ul>
+
+  <p><img src="../../images/image10.png" alt="Contigs output"></p>
+
+  <ul>
+    <li>The <em>Contigs stats</em> file will show a list of these k-mer lengths and k-mer coverages.</li>
+  </ul>
+
+  <p><img src="../../images/image11.png" alt="Contigs stats output"></p>
+
+</blockquote>
+
+<h1 id="collect-some-statistics-on-the-contigs">Collect some statistics on the contigs</h1>
+
+<p>We will now collect some basic statistics on our assembly.</p>
+
+<blockquote class="hands_on">
+  <h3 id="pencil2-hands-on-collect-fasta-statistics-on-our-contigs">
+<img class="emoji" title=":pencil2:" alt=":pencil2:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/270f.png" height="20" width="20" align="absmiddle"> Hands-on: Collect fasta statistics on our contigs</h3>
+
+  <h4 id="run-fasta-statistics-wrench-on-our-contigs-file">Run <strong>Fasta statistics</strong> <img class="emoji" title=":wrench:" alt=":wrench:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f527.png" height="20" width="20" align="absmiddle"> on our contigs file</h4>
+
+  <ul>
+    <li>A new file will appear called <em>Fasta summary stats</em>
+</li>
+    <li>Click the eye icon to look at this file. (It will look something like - but not exactly like - this.)</li>
+  </ul>
+
+  <p><img src="../../images/image12.png" alt="Fasta stats"></p>
+
+  <ul>
+    <li>Look at:
+      <ul>
+        <li>
+<em>num_seq</em>: the number of contigs in the FASTA file.</li>
+        <li>
+<em>num_bp</em>: the number of assembled bases. Roughly proportional to genome size.</li>
+        <li>
+<em>len_max</em>: the biggest contig.</li>
+        <li>
+<em>len_N50</em>: N50 is a contig size. If contigs were ordered from small to large, half of all the nucleotides will be in contigs this size or larger.</li>
+      </ul>
+    </li>
+  </ul>
+
+</blockquote>
+
+<h1 id="discussion">Discussion</h1>
+
+<p>We have completed an assembly on this data set for a number of k values ranging from 29 to 101. The results a few of the assembly metrics appear below.</p>
+
+<p><img src="../../images/number_of_contigs.png" alt="contigs"></p>
+
+<p>This chart shows the number of contigs in the assembly for various k-mer sizes.</p>
+
+<p><img src="../../images/largest_contig.png" alt="largest_contig"></p>
+
+<p>This chart shows the largest contig in each of the assemblies by k-mer size.</p>
+
+<p><img src="../../images/total_bp.png" alt="total_bp"></p>
+
+<p>This chart shows the total number of base pairs in all the contigs for each assembly by k-mer size.</p>
+
+<p><img src="../../images/n50.png" alt="n50"></p>
+
+<p>This chart shows the n50 metric for each of the assemblies by k-mer size.</p>
+
+<blockquote class="question">
+  <h3 id="question-questions-2">
+<img class="emoji" title=":question:" alt=":question:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2753.png" height="20" width="20" align="absmiddle"> Questions</h3>
+
+  <ol>
+    <li>Are there any distinct features in the charts?</li>
+    <li>Does it look like one assembly might be better than some of the others?
+3.</li>
+  </ol>
+</blockquote>
+
+<p>The reasons for these patterns will be discussed in detail in the De Bruijn graph assembly slides and tutorial.</p>
+
+
+    
+    <blockquote class="key_points">
+        <h3> <img class="emoji" title=":grey_exclamation:" alt=":grey_exclamation:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2755.png" height="20" width="20" align="absmiddle"> Key points</h3>
+
+        <ul>
+        
+           <li>We assembled some Illumina fastq reads into contigs using a short read assembler called Velvet</li>
+        
+           <li>We showed what effect one of the key assembly parameters, the k-mer size, has on the assembly</li>
+        
+           <li>It looks as though there are some exploitable patterns in the metric data vs the k-mer size.</li>
+        
+        </ul>
+    </blockquote>
+    
+
+    
+      <h1>Useful literature</h1>
+      <p>Useful information regarding this type of analysis with descriptions and paper references for the tools used in this tutorial, and literature for this analysis techniques and interpretations can be found <a href="https://galaxyproject.github.io/training-material//assembly#references">here</a>.</p>
+    
+
+    <h3>
+<img class="emoji" title=":clap:" alt=":clap:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f44f.png" height="20" width="20" align="absmiddle"> Congratulations on successfully completing this tutorial!</h3>
+
+
+    <hr>
+    <blockquote class="overview">
+        <h3> <img class="emoji" title=":speech_balloon:" alt=":speech_balloon:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f4ac.png" height="20" width="20" align="absmiddle"> Feedback</h3>
+        Please take a moment and provide your feedback on this tutorial. Your feedback will help guide and improve future revisions to this tutorial. <a href="https://tinyurl.com/GTNfeedback" target="_blank">Feedback Form</a>
+    </blockquote>
+
+    <i>This material is the result of a collaborative work. Thanks to <a href="https://galaxyproject.github.io/training-material//assembly#contributors">all the contributors</a> and the <a href="https://wiki.galaxyproject.org/Teach/GTN">Galaxy Training Network</a>!<br>
+    Found a typo? Something is wrong in this tutorial? Edit it on <a href="https://github.com/galaxyproject/training-material/tree/master/assembly/tutorials/general-introduction.md">GitHub</a>.</i>
+</section>
+
+        </div>
+    </body>
+    <script src="https://galaxyproject.github.io/training-material//assets/js/landing_page.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</html>

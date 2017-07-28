@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html>
+    <head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="chrome=1">
+        <title>Galaxy Training!</title>
+        <link media="all" href="https://netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://galaxyproject.github.io/training-material//assets/css/landing_page.css">
+        <link rel="stylesheet" href="https://galaxyproject.github.io/training-material//assets/css/tutorial.css">
+        <link rel="stylesheet" href="https://galaxyproject.github.io/training-material//assets/css/font-awesome.css">
+        <link rel="stylesheet" href="https://galaxyproject.github.io/training-material//assets/css/syntax_highlighting.css">
+        <meta name="viewport" content="width=device-width">
+    </head>
+    <body>
+        <div class="wrapper">
+            
+
+
+<header>
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a id="site-title" class="navbar-brand" href="https://wiki.galaxyproject.org/Teach/GTN">
+              <img class="pull-left img-responsive" src="https://galaxyproject.github.io/training-material///assets/images/GTN.png">
+            </a>
+            <a id="site-title" class="navbar-brand name-holder" href="https://galaxyproject.github.io/training-material//topics/sequence-analysis/tutorials/mapping">
+              Mapping
+            </a>
+          </div>
+
+          <div class="collapse navbar-collapse" id="navbar">
+
+            <ul id="main-menu" class="nav navbar-nav navbar-right">
+              <li><a href="https://galaxyproject.github.io/training-material/" title="Back to front page"><i class="fa fa-home"></i> Home</a></li>
+              <li><a href="https://galaxyproject.github.io/training-material//topics/sequence-analysis" title="Go back to list of tutorials"><i class="fa fa-file-text-o"></i> sequence-analysis</a></li>
+
+              
+                <li><a href="https://galaxyproject.github.io/training-material//topics/sequence-analysis/slides" title="Slides for this tutorial"><i class="fa fa-graduation-cap"></i> Introduction slides</a></li>
+              
+              <!--<li><a href="https://galaxyproject.github.io/training-material//sequence-analysis/slides/mapping/"><i class="fa fa-file-powerpoint-o"></i> Associated slides</a></li>-->
+
+              
+
+              
+
+              
+
+              
+                <li><a href="https://galaxyproject.github.io/training-material//topics/sequence-analysis#references" title="References"><i class="fa fa-book"></i> Literature</a></li>
+              
+
+            </ul>
+          </div>
+        </div>
+    </nav>
+</header>
+
+<section class="tutorial">
+    <h1>Mapping</h1>
+
+    <blockquote class="overview">
+        <h3>Overview</h3>
+
+        <p class="bold"> <img class="emoji" title=":grey_question:" alt=":grey_question:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2754.png" height="20" width="20" align="absmiddle"> Questions</p>
+        <ul>
+        
+          <li>What two things are crucial for a correct mapping?</li>
+        
+          <li>What is BAM?</li>
+        
+        </ul>
+
+        <p class="bold"> <img class="emoji" title=":dart:" alt=":dart:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f3af.png" height="20" width="20" align="absmiddle"> Objectives</p>
+        <ul>
+        
+          <li>You will learn what mapping is</li>
+        
+          <li>A genome browser is shown that helps you to understand your data</li>
+        
+        </ul>
+
+        
+        <p class="bold"> <img class="emoji" title=":heavy_check_mark:" alt=":heavy_check_mark:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2714.png" height="20" width="20" align="absmiddle"> Requirements</p>
+        <ul>
+          
+            <li>
+                
+                <a href="https://galaxyproject.github.io/training-material//topics//introduction/">Galaxy introduction</a>
+                
+            </li>
+          
+          
+        </ul>
+        
+
+        <p><span class="bold"> <img class="emoji" title=":hourglass:" alt=":hourglass:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/231b.png" height="20" width="20" align="absmiddle"> Time estimation:</span> 1h</p>
+
+    </blockquote>
+
+<h1 class="no_toc" id="introduction-to-next-generation-sequencing-data-mapping">Introduction to next generation sequencing data mapping</h1>
+
+<p>To map DNA/RNA reads of an experiment to a reference genome is a key step in modern genomic data analysis. With the mapping the reads are assigned to a specific location in the genome and insights like the expression level of genes can be gained.
+In the following we will process a dataset with a mapper, ‘Bowtie2’, and we will visualize the data with the software ‘IGV’.</p>
+
+<blockquote class="agenda">
+  <h3 id="agenda">Agenda</h3>
+
+  <p>In this tutorial, we will deal with:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#mapping" id="markdown-toc-mapping">Mapping</a></li>
+  <li><a href="#visualization" id="markdown-toc-visualization">Visualization</a></li>
+</ol>
+
+</blockquote>
+
+<h1 id="mapping">Mapping</h1>
+<blockquote class="hands_on">
+  <h3 id="pencil2-hands-on-mapping-with-bowtie2">
+<img class="emoji" title=":pencil2:" alt=":pencil2:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/270f.png" height="20" width="20" align="absmiddle"> Hands-on: Mapping with Bowtie2</h3>
+
+  <p>We will process data inside Galaxy with Bowtie2 and have a look at the results.</p>
+
+  <ol>
+    <li>
+      <p>Load the <a href="https://zenodo.org/record/61771/files/GSM461178_untreat_paired_subset_1.fastq">‘GSM461178_untreat_paired_subset_1.fastq’</a> dataset from <a href="https://zenodo.org/record/61771">Zenodo</a> into Galaxy.</p>
+
+      <blockquote class="tip">
+        <h3 id="bulb-tip-importing-data-via-links">
+<img class="emoji" title=":bulb:" alt=":bulb:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f4a1.png" height="20" width="20" align="absmiddle"> Tip: Importing data via links</h3>
+
+        <ul>
+          <li>Copy the link location [right click on Zenodo -&gt; Copy link location]</li>
+          <li>Open the Galaxy Upload Manager</li>
+          <li>Select <strong>Paste/Fetch Data</strong>
+</li>
+          <li>Paste the link into the text field</li>
+          <li>Press <strong>Start</strong>
+</li>
+        </ul>
+      </blockquote>
+
+      <blockquote class="tip">
+        <h3 id="bulb-tip-changing-the-file-type-fastq-to-fastqsanger-once-the-data-file-is-in-your-history">
+<img class="emoji" title=":bulb:" alt=":bulb:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f4a1.png" height="20" width="20" align="absmiddle"> Tip: Changing the file type <code class="highlighter-rouge">fastq</code> to <code class="highlighter-rouge">fastqsanger</code> once the data file is in your history</h3>
+
+        <ul>
+          <li>Click on the pencil button displayed in your dataset in the history</li>
+          <li>Choose <strong>Datatype</strong> on the top</li>
+          <li>Select <code class="highlighter-rouge">fastqsanger</code>
+</li>
+          <li>Press <strong>save</strong>
+</li>
+        </ul>
+      </blockquote>
+    </li>
+    <li>
+      <p><strong>Bowtie2</strong> <img class="emoji" title=":wrench:" alt=":wrench:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f527.png" height="20" width="20" align="absmiddle">: Search in the tool bar on the left the mapper ‘bowtie2’ and run the mapper with the dataset.</p>
+
+      <blockquote class="tip">
+        <h3 id="bulb-tip-search-for-tools">
+<img class="emoji" title=":bulb:" alt=":bulb:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f4a1.png" height="20" width="20" align="absmiddle"> Tip: Search for tools</h3>
+
+        <ul>
+          <li>Clink into the search field on the left</li>
+          <li>Type <strong>bowtie2</strong>
+</li>
+          <li>Select <strong>bowtie2</strong>
+</li>
+          <li>Select the uploaded dataset as the fastq file</li>
+          <li>Choose as a reference genome human hg19</li>
+        </ul>
+      </blockquote>
+    </li>
+    <li>
+      <p>Click on the right history panel on the Bowtie2 output. Look careful at the information which is given here:</p>
+
+      <div class="highlighter-rouge">
+<pre class="highlight"><code>   100000 reads; of these: 100000 (100.00%) were unpaired;
+   of these: 99407 (99.41%) aligned 0 times
+   149 (0.15%) aligned exactly 1 time
+   444 (0.44%) aligned &gt;1 times
+   0.59% overall alignment rate
+</code></pre>
+      </div>
+
+      <blockquote class="question">
+        <h3 id="question-questions">
+<img class="emoji" title=":question:" alt=":question:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2753.png" height="20" width="20" align="absmiddle"> Questions</h3>
+
+        <ul>
+          <li>What information is provided here?</li>
+          <li>Is everything as expected?</li>
+          <li>
+            <p>Why is the mapping so bad?</p>
+
+            <details>
+ <summary>Click to view answers</summary>
+ <ol type="1">
+ <li>The information given here is a quantity one. We can see how many sequences are aligned. It does not tell us something about the quality.</li>
+ <li>No, only 0.59% of all reads could be mapped.</li>
+ <li>We mapped against the wrong reference genome! </li>
+ </ol>
+ </details>
+          </li>
+        </ul>
+      </blockquote>
+    </li>
+    <li>
+      <p><strong>Bowtie2</strong> <img class="emoji" title=":wrench:" alt=":wrench:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f527.png" height="20" width="20" align="absmiddle">: Rerun Bowtie2 with the correct reference genome ‘Drosophila melanogaster’ or short ‘dm3’.</p>
+
+      <blockquote class="comment">
+        <h3 id="nut_and_bolt-comments">
+<img class="emoji" title=":nut_and_bolt:" alt=":nut_and_bolt:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f529.png" height="20" width="20" align="absmiddle"> Comments</h3>
+        <ul>
+          <li>It is a good practice to give the datasets names that are easy to understand.</li>
+        </ul>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h1 id="visualization">Visualization</h1>
+
+<p>A general description of the user interface of the IGV browser can be read here: <a href="https://github.com/bebatut/training-material/tree/master/Introduction/tutorials/IGV_Introduction.md">IGV Browser description</a></p>
+
+<blockquote class="hands_on">
+  <h3 id="pencil2-hands-on-visualization-with-the-igv-browser">
+<img class="emoji" title=":pencil2:" alt=":pencil2:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/270f.png" height="20" width="20" align="absmiddle"> Hands-on: Visualization with the IGV browser</h3>
+
+  <p>The Integrative Genomics Viewer (IGV) is a high-performance visualization tool for interactive exploration of large, integrated genomic datasets. It supports a wide variety of data types, including array-based and next-generation sequence data, and genomic annotations. In the following we will use it to visualize the computed mapping.</p>
+
+  <ol>
+    <li>
+<strong>IGV</strong> <img class="emoji" title=":wrench:" alt=":wrench:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f527.png" height="20" width="20" align="absmiddle">: To display the result in IGV open the IGV browser local on your computer.</li>
+    <li>
+<strong>Galaxy</strong> <img class="emoji" title=":wrench:" alt=":wrench:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f527.png" height="20" width="20" align="absmiddle">: Click on the right history panel on the Bowtie2 item.</li>
+    <li>
+<strong>Galaxy</strong> <img class="emoji" title=":wrench:" alt=":wrench:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f527.png" height="20" width="20" align="absmiddle">: Choose in the history on the computed Bowtie2 results and click on ‘local’ at ‘display with IGV’.</li>
+    <li>
+      <p><strong>IGV</strong> <img class="emoji" title=":wrench:" alt=":wrench:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f527.png" height="20" width="20" align="absmiddle">: The BAM file should be opened in the IGV browser and the genome should be loaded automatically.</p>
+
+      <blockquote class="tip">
+        <h3 id="bulb-tip-get-access-to-more-genomes">
+<img class="emoji" title=":bulb:" alt=":bulb:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f4a1.png" height="20" width="20" align="absmiddle"> Tip: Get access to more genomes</h3>
+
+        <p>If the genome of your interest is not there check if its
+available via “More…”. Is this is not the case you can add it manually via the menu
+“Genomes -&gt; Load Genome from…”</p>
+
+        <p><img src="../../images/igv_select_genome.png" alt="alt text" title="Select genome"></p>
+      </blockquote>
+    </li>
+    <li>
+<strong>IGV</strong> <img class="emoji" title=":wrench:" alt=":wrench:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f527.png" height="20" width="20" align="absmiddle">: The interesting part is at chromosome 4, position 86,761 to 87,907. Navigate to it.</li>
+    <li>
+<strong>IGV</strong> <img class="emoji" title=":wrench:" alt=":wrench:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f527.png" height="20" width="20" align="absmiddle">: There are two views:
+      <ul>
+        <li>the aligned reads view</li>
+        <li>the coverage view</li>
+      </ul>
+
+      <blockquote class="question">
+        <h3 id="question-questions-1">
+<img class="emoji" title=":question:" alt=":question:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2753.png" height="20" width="20" align="absmiddle"> Questions</h3>
+
+        <ul>
+          <li>What could it mean if a bar in the coverage view is colored?</li>
+          <li>What could be the reason that a read is white instead of grey?</li>
+          <li>
+            <p>How many reads are mapped at position chr4:87482?</p>
+
+            <details>
+ <summary>Click to view answers</summary>
+ <ol type="1">
+ <li>If a nucleotide differs from the reference sequence in greater than 20% of quality weighted reads, IGV colors the bar in proportion to the read count of each base.</li>
+ <li>They have a mapping quality equal to zero. Interpretation of this mapping quality depends on the mapping aligner as some commonly used aligners use this convention to mark a read with multiple alignments. In such a case, the read also maps to another location with equally good placement. It is also possible the read could not be uniquely placed but the other placements do not necessarily give equally good quality hits.</li>
+ <li>There are seven reads. Six have the correct 'T', one read a 'G'.</li>
+ </ol>
+ </details>
+          </li>
+        </ul>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="hands_on">
+  <h3 id="pencil2-hands-on-differences-between-a-good-and-a-bad-mapping">
+<img class="emoji" title=":pencil2:" alt=":pencil2:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/270f.png" height="20" width="20" align="absmiddle"> Hands-on: Differences between a good and a bad mapping</h3>
+
+  <ol>
+    <li>
+      <p><strong>Galaxy</strong> <img class="emoji" title=":wrench:" alt=":wrench:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f527.png" height="20" width="20" align="absmiddle">: To show you the difference between a good and a bad dataset we provided an additional dataset which will give you a bad mapping. Load the <a href="https://zenodo.org/record/61771/files/GSM461178_untreat_paired_subset_1.fastq">‘GSM461182_untreat_single_subset.fastq’</a> dataset from <a href="https://zenodo.org/record/61771">Zenodo</a> into Galaxy.</p>
+
+      <blockquote class="comment">
+        <h3 id="nut_and_bolt-comments-1">
+<img class="emoji" title=":nut_and_bolt:" alt=":nut_and_bolt:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f529.png" height="20" width="20" align="absmiddle"> Comments</h3>
+        <p>If you are using the <a href="http://galaxy.uni-freiburg.de">Freiburg Galaxy instance</a>, you can load the dataset using ‘Shared Data’ -&gt; ‘Data Libraries’ -&gt; ‘Galaxy Courses’ -&gt; ‘RNA-Seq’ -&gt; ‘fastq’</p>
+      </blockquote>
+    </li>
+    <li>
+      <p><strong>IGV</strong> <img class="emoji" title=":wrench:" alt=":wrench:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f527.png" height="20" width="20" align="absmiddle">: Load the two mappings into IGV and compare them!</p>
+
+      <blockquote class="question">
+        <h3 id="question-questions-2">
+<img class="emoji" title=":question:" alt=":question:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2753.png" height="20" width="20" align="absmiddle"> Questions</h3>
+
+        <ul>
+          <li>
+            <p>How IGV helps you to see that the second dataset is bad?</p>
+
+            <details>
+ <summary>Click to view answers</summary>
+ <ol type="1">
+ <li>White/transparent reads indicate bad mapping quality. Second, IGV shows you the nucleotides in color if they are different in the reference genome.</li>
+ </ol>
+ </details>
+          </li>
+        </ul>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+
+    
+    <blockquote class="key_points">
+        <h3> <img class="emoji" title=":grey_exclamation:" alt=":grey_exclamation:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2755.png" height="20" width="20" align="absmiddle"> Key points</h3>
+
+        <ul>
+        
+           <li>Know your data!</li>
+        
+           <li>Mapping is not trivial</li>
+        
+           <li>There are many mapping algorithms, it depends on your data which one to choose</li>
+        
+        </ul>
+    </blockquote>
+    
+
+    
+
+    <h3>
+<img class="emoji" title=":clap:" alt=":clap:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f44f.png" height="20" width="20" align="absmiddle"> Congratulations on successfully completing this tutorial!</h3>
+
+
+    <hr>
+    <blockquote class="overview">
+        <h3> <img class="emoji" title=":speech_balloon:" alt=":speech_balloon:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f4ac.png" height="20" width="20" align="absmiddle"> Feedback</h3>
+        Please take a moment and provide your feedback on this tutorial. Your feedback will help guide and improve future revisions to this tutorial. <a href="https://tinyurl.com/GTNfeedback" target="_blank">Feedback Form</a>
+    </blockquote>
+
+    <i>This material is the result of a collaborative work. Thanks to <a href="https://galaxyproject.github.io/training-material//sequence-analysis#contributors">all the contributors</a> and the <a href="https://wiki.galaxyproject.org/Teach/GTN">Galaxy Training Network</a>!<br>
+    Found a typo? Something is wrong in this tutorial? Edit it on <a href="https://github.com/galaxyproject/training-material/tree/master/sequence-analysis/tutorials/mapping.md">GitHub</a>.</i>
+</section>
+
+        </div>
+    </body>
+    <script src="https://galaxyproject.github.io/training-material//assets/js/landing_page.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</html>

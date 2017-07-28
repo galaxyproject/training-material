@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html>
+    <head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="chrome=1">
+        <title>Galaxy Training!</title>
+        <link media="all" href="https://netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://galaxyproject.github.io/training-material//assets/css/landing_page.css">
+        <link rel="stylesheet" href="https://galaxyproject.github.io/training-material//assets/css/tutorial.css">
+        <link rel="stylesheet" href="https://galaxyproject.github.io/training-material//assets/css/font-awesome.css">
+        <link rel="stylesheet" href="https://galaxyproject.github.io/training-material//assets/css/syntax_highlighting.css">
+        <meta name="viewport" content="width=device-width">
+    </head>
+    <body>
+        <div class="wrapper">
+            
+
+
+<header>
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a id="site-title" class="navbar-brand" href="https://wiki.galaxyproject.org/Teach/GTN">
+              <img class="pull-left img-responsive" src="https://galaxyproject.github.io/training-material///assets/images/GTN.png">
+            </a>
+            <a id="site-title" class="navbar-brand name-holder" href="https://galaxyproject.github.io/training-material//topics/introduction/tutorials/galaxy-intro-101">
+              Galaxy 101
+            </a>
+          </div>
+
+          <div class="collapse navbar-collapse" id="navbar">
+
+            <ul id="main-menu" class="nav navbar-nav navbar-right">
+              <li><a href="https://galaxyproject.github.io/training-material/" title="Back to front page"><i class="fa fa-home"></i> Home</a></li>
+              <li><a href="https://galaxyproject.github.io/training-material//topics/introduction" title="Go back to list of tutorials"><i class="fa fa-file-text-o"></i> introduction</a></li>
+
+              
+                <li><a href="https://galaxyproject.github.io/training-material//topics/introduction/slides" title="Slides for this tutorial"><i class="fa fa-graduation-cap"></i> Introduction slides</a></li>
+              
+              <!--<li><a href="https://galaxyproject.github.io/training-material//introduction/slides/galaxy-intro-101/"><i class="fa fa-file-powerpoint-o"></i> Associated slides</a></li>-->
+
+              
+                <li><a href="https://github.com/galaxyproject/training-material/tree/master/topics/introduction/docker" title="Docker image for this tutorial"><i class="fa fa-ship"></i> Docker image</a></li>
+              
+
+              
+
+              
+
+              
+                <li><a href="https://galaxyproject.github.io/training-material//topics/introduction#references" title="References"><i class="fa fa-book"></i> Literature</a></li>
+              
+
+            </ul>
+          </div>
+        </div>
+    </nav>
+</header>
+
+<section class="tutorial">
+    <h1>Galaxy 101</h1>
+
+    <blockquote class="overview">
+        <h3>Overview</h3>
+
+        <p class="bold"> <img class="emoji" title=":grey_question:" alt=":grey_question:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2754.png" height="20" width="20" align="absmiddle"> Questions</p>
+        <ul>
+        
+          <li>Which coding exon has the highest number of single nucleotide polymorphisms (SNPs) on human chromosome 22?</li>
+        
+        </ul>
+
+        <p class="bold"> <img class="emoji" title=":dart:" alt=":dart:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f3af.png" height="20" width="20" align="absmiddle"> Objectives</p>
+        <ul>
+        
+          <li>Familiarize yourself with the basics of Galaxy</li>
+        
+          <li>Learn how to obtain data from external sources</li>
+        
+          <li>Learn how to run tools</li>
+        
+          <li>Learn how histories work</li>
+        
+          <li>Learn how to create a workflow</li>
+        
+          <li>Learn how to share your work</li>
+        
+        </ul>
+
+        
+
+        <p><span class="bold"> <img class="emoji" title=":hourglass:" alt=":hourglass:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/231b.png" height="20" width="20" align="absmiddle"> Time estimation:</span> 1-1.5h</p>
+
+    </blockquote>
+
+<h1 class="no_toc" id="101-introduction">101 Introduction</h1>
+
+<p>This practical aims to familiarize you with the Galaxy user interface. It will teach you how to perform basic tasks such as importing data, running tools, working with histories, creating workflows, and sharing your work.</p>
+
+<blockquote class="agenda">
+  <h3 id="agenda">Agenda</h3>
+
+  <p>In this tutorial, we will:</p>
+
+<ol id="markdown-toc">
+  <li>
+<a href="#pretreatments" id="markdown-toc-pretreatments">Pretreatments</a>    <ol>
+      <li><a href="#upload-exon-locations" id="markdown-toc-upload-exon-locations">Upload exon locations</a></li>
+      <li><a href="#upload-snp-information" id="markdown-toc-upload-snp-information">Upload SNP information</a></li>
+    </ol>
+  </li>
+  <li>
+<a href="#analysis" id="markdown-toc-analysis">Analysis</a>    <ol>
+      <li><a href="#find-exons-with-the-highest-number-of-snps" id="markdown-toc-find-exons-with-the-highest-number-of-snps">Find exons with the highest number of SNPs</a></li>
+      <li><a href="#count-the-number-of-snps-per-exon" id="markdown-toc-count-the-number-of-snps-per-exon">Count the number of SNPs per exon</a></li>
+      <li><a href="#sort-the-exons-by-snps-count" id="markdown-toc-sort-the-exons-by-snps-count">Sort the exons by SNPs count</a></li>
+      <li><a href="#select-the-top-five-exons" id="markdown-toc-select-the-top-five-exons">Select the top five exons</a></li>
+      <li><a href="#recovering-exon-info-and-displaying-data-in-genome-browsers" id="markdown-toc-recovering-exon-info-and-displaying-data-in-genome-browsers">Recovering exon info and displaying data in genome browsers</a></li>
+      <li><a href="#ucsc-genome-browser" id="markdown-toc-ucsc-genome-browser">UCSC genome browser</a></li>
+    </ol>
+  </li>
+  <li>
+<a href="#galaxy-management" id="markdown-toc-galaxy-management">Galaxy management</a>    <ol>
+      <li><a href="#convert-your-analysis-history-into-a-workflow" id="markdown-toc-convert-your-analysis-history-into-a-workflow">Convert your analysis history into a workflow</a></li>
+      <li><a href="#the-workflow-editor" id="markdown-toc-the-workflow-editor">The workflow editor</a></li>
+      <li><a href="#run-workflow-on-different-data" id="markdown-toc-run-workflow-on-different-data">Run workflow on different data</a></li>
+      <li><a href="#share-your-work" id="markdown-toc-share-your-work">Share your work</a></li>
+    </ol>
+  </li>
+</ol>
+
+</blockquote>
+
+<h1 id="pretreatments">Pretreatments</h1>
+
+<p>Suppose you get the following question:</p>
+
+<blockquote class="question">
+  <h3 id="question-question">
+<img class="emoji" title=":question:" alt=":question:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2753.png" height="20" width="20" align="absmiddle"> Question</h3>
+  <p><em>Mom (or Dad) … Which coding exon has the highest number of single nucleotide polymorphisms (SNPs) on human chromosome 22?</em></p>
+</blockquote>
+
+<p>You are thinking “Wow! This is a simple question… I know where to find the data, at the <a href="https://genome.ucsc.edu/">UCSC Genome Browser</a>, but how do I actually compute this?” There is really a straightforward way of answering this question and it is called <strong>Galaxy</strong>. So let’s try it…</p>
+
+<p>Browse to your Galaxy instance and log in or register. The Galaxy interface consists of three main parts. The available tools are listed on the left, your analysis history is recorded on the right, and the middle pane will show the home page, the selected tool or the dataset.</p>
+
+<p><img src="../../images/galaxy_interface.png" alt=""></p>
+
+<blockquote class="hands_on">
+  <h3 id="pencil2-hands-on-create-history">
+<img class="emoji" title=":pencil2:" alt=":pencil2:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/270f.png" height="20" width="20" align="absmiddle"> Hands-on: Create history</h3>
+
+  <ol>
+    <li>
+      <p>Make sure you have an empty analysis history.</p>
+
+      <blockquote class="tip">
+        <h3 id="bulb-starting-a-new-history">
+<img class="emoji" title=":bulb:" alt=":bulb:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f4a1.png" height="20" width="20" align="absmiddle"> Starting a new history</h3>
+
+        <ul>
+          <li>Click the <strong>gear icon</strong> at the top of the history panel</li>
+          <li>Select the option <strong>Create New</strong> from the menu</li>
+        </ul>
+      </blockquote>
+    </li>
+    <li>
+      <p><strong>Rename your history</strong> to be meaningful and easy to find. You can do this by clicking on the title of the history (by default the title is <em>Unnamed history</em>) and typing <strong>Galaxy 101</strong> as the name. Do  not forget to hit <code class="highlighter-rouge">enter</code> on your keyboard to save it.
+  <img src="../../../../shared/images/rename_history.png" alt=""></p>
+    </li>
+  </ol>
+</blockquote>
+
+<h2 id="upload-exon-locations">Upload exon locations</h2>
+
+<p>Now we are ready to do some analysis, but first we will need to get some data into our history. You can upload files from your computer, but Galaxy can also fetch data directly from external sources. We will now import a list of all the exon locations on chromosome 22 directly from the UCSC table browser.</p>
+
+<blockquote class="hands_on">
+  <h3 id="pencil2-hands-on-data-upload-from-ucsc">
+<img class="emoji" title=":pencil2:" alt=":pencil2:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/270f.png" height="20" width="20" align="absmiddle"> Hands-on: Data upload from UCSC</h3>
+
+  <ol>
+    <li>
+      <p>In the tool menu, navigate to <code class="highlighter-rouge">Get Data -&gt; UCSC Main - table browser</code></p>
+
+      <p><img src="../../images/101_01.png" alt=""></p>
+
+      <p>You will be taken to the <strong>UCSC table browser</strong>, which looks something like this:</p>
+
+      <p><img src="../../images/101_02.png" alt=""></p>
+
+      <blockquote class="comment">
+        <h3 id="nut_and_bolt-settings">
+<img class="emoji" title=":nut_and_bolt:" alt=":nut_and_bolt:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f529.png" height="20" width="20" align="absmiddle"> Settings</h3>
+
+        <ul>
+          <li>
+<strong>clade</strong> should be set to <code class="highlighter-rouge">Mammal</code>
+</li>
+          <li>
+<strong>genome</strong> should be set to <code class="highlighter-rouge">Human</code>
+</li>
+          <li>
+<strong>assembly</strong> should be set to <code class="highlighter-rouge">Feb. 2009 (GRCh37/hg19)</code>
+</li>
+          <li>
+<strong>group</strong> should be set to <code class="highlighter-rouge">Genes and Gene Predictions</code>
+</li>
+          <li>
+<strong>region</strong> should be changed to <code class="highlighter-rouge">position</code> with value <code class="highlighter-rouge">chr22</code>
+</li>
+          <li>
+<strong>output format</strong> should be set to <code class="highlighter-rouge">BED - browser extensible data</code>
+</li>
+          <li>
+<strong>Send output to</strong> should have the option <code class="highlighter-rouge">Galaxy</code> checked</li>
+        </ul>
+      </blockquote>
+    </li>
+    <li>
+      <p>Click on the <strong>get output</strong> button and you will see the next screen:</p>
+
+      <p><img src="../../images/101_03.png" alt=""></p>
+
+      <p>Change <strong>Create one BED record per</strong> to <code class="highlighter-rouge">Coding Exons</code> and then click on the <strong>Send Query to Galaxy</strong> button.</p>
+
+      <blockquote class="comment">
+        <h3 id="nut_and_bolt-comment">
+<img class="emoji" title=":nut_and_bolt:" alt=":nut_and_bolt:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f529.png" height="20" width="20" align="absmiddle"> Comment</h3>
+        <p>After this you will see your first history item in Galaxy’s right pane. It will go through
+the gray (preparing/queued) and yellow (running) states to become green (success):</p>
+
+        <p><img src="../../images/101_04.png" alt=""></p>
+      </blockquote>
+    </li>
+    <li>
+      <p>When the dataset is green, click on the <strong>eye icon</strong> to <strong>view the contents</strong> of the file. It should look something like this:</p>
+
+      <p><img src="../../images/101_exons.png" alt=""></p>
+
+      <p>Each line represents an exon, the first three columns are the genomic location, and the fourth column contains the ID (name) of the exon.</p>
+    </li>
+    <li>
+      <p>Let’s rename our dataset to something more recognizable.</p>
+      <ul>
+        <li>Click on the <strong>pencil icon</strong> to edit a file’s attributes.</li>
+        <li>In the next screen change the name of the dataset to <code class="highlighter-rouge">Exons</code>.</li>
+        <li>Click the <strong>Save</strong> button at the bottom of the screen.</li>
+      </ul>
+
+      <p>Your history should now look something like this:</p>
+
+      <p><img src="../../images/101_rename.png" alt=""></p>
+    </li>
+  </ol>
+</blockquote>
+
+<h2 id="upload-snp-information">Upload SNP information</h2>
+
+<p>Now we have information about the exon locations, but our question was which exon contains the largest number of SNPs, so let’s get some information about SNP locations from UCSC as well:</p>
+
+<blockquote class="hands_on">
+  <h3 id="pencil2-hands-on-snp-information">
+<img class="emoji" title=":pencil2:" alt=":pencil2:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/270f.png" height="20" width="20" align="absmiddle"> Hands-on: SNP information</h3>
+  <ol>
+    <li>
+      <p><strong>UCSC Main</strong> <img class="emoji" title=":wrench:" alt=":wrench:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f527.png" height="20" width="20" align="absmiddle">: Return to the UCSC tool <code class="highlighter-rouge">UCSC Main - table browser</code></p>
+    </li>
+    <li>
+      <p>Change the setting in <strong>group</strong> to <code class="highlighter-rouge">Variation</code> and again <strong>region</strong> to <code class="highlighter-rouge">position</code> with value <code class="highlighter-rouge">chr22</code></p>
+
+      <p><img src="../../images/101_06.png" alt=""></p>
+
+      <p>The <strong>track</strong> setting shows the version of the SNP database to get. In this example it is version 142, but you may select the latest one. Your results may vary slightly from the ones in this tutorial when you select a different version, but in general it is a good idea to select the latest version, as this will contain the most up-to-date SNP information.</p>
+    </li>
+    <li>
+      <p>Click on the <code class="highlighter-rouge">get output</code> button to find a menu similar to this:</p>
+
+      <p><img src="../../images/101_07.png" alt=""></p>
+
+      <p>Make sure that <strong>Create one BED per</strong> is set to <code class="highlighter-rouge">Whole Gene</code> (Whole Gene here really means Whole Feature), and click on <strong>Send Query to Galaxy</strong>. You will get your second item in your analysis history.</p>
+    </li>
+    <li>
+      <p>Now <strong>rename</strong> your new dataset to <code class="highlighter-rouge">SNPs</code> so we can easily remember what the file contains.</p>
+    </li>
+  </ol>
+</blockquote>
+
+<h1 id="analysis">Analysis</h1>
+
+<h2 id="find-exons-with-the-highest-number-of-snps">Find exons with the highest number of SNPs</h2>
+
+<p>Let’s remind ourselves that our objective was to find which exon contains the most SNPs. Therefore we have to join the file with the exon locations with the file containing the SNP locations (here “join” is just a fancy word for printing the SNPs and exons that overlap side-by-side).</p>
+
+<blockquote class="tip">
+  <h3 id="bulb-search-bar">
+<img class="emoji" title=":bulb:" alt=":bulb:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f4a1.png" height="20" width="20" align="absmiddle"> Search bar</h3>
+
+  <p>Different Galaxy servers may have tools available under different sections, therefore it is often useful to use the <strong>search bar</strong> at the top of the tool panel to find your tool.</p>
+</blockquote>
+
+<blockquote class="hands_on">
+  <h3 id="pencil2-hands-on-finding-exons">
+<img class="emoji" title=":pencil2:" alt=":pencil2:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/270f.png" height="20" width="20" align="absmiddle"> Hands-on: Finding Exons</h3>
+
+  <ol>
+    <li>
+      <p><strong>Join</strong> <img class="emoji" title=":wrench:" alt=":wrench:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f527.png" height="20" width="20" align="absmiddle">: Enter the word <code class="highlighter-rouge">join</code> in the search bar of the tool panel, and select the tool named <code class="highlighter-rouge">Join - the intervals of two datasets side-by-side</code></p>
+    </li>
+    <li>
+      <p>Select your file with exons as the first file, and the file with SNPs as the second file, and make sure <strong>return</strong> is set to <code class="highlighter-rouge">INNER JOIN</code> so that only matches are included in the output (i.e. only exons with SNPs in it and only SNPs that fall in exons)</p>
+
+      <p><img src="../../images/101_11.png" alt=""></p>
+
+      <blockquote class="comment">
+        <h3 id="nut_and_bolt-comments">
+<img class="emoji" title=":nut_and_bolt:" alt=":nut_and_bolt:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f529.png" height="20" width="20" align="absmiddle"> Comments</h3>
+        <p><strong>Note:</strong> if you scroll down on this page, you will find the help of the tool.</p>
+      </blockquote>
+    </li>
+    <li>
+      <p>Click the <strong>Execute</strong> button and view the resulting file (with the eye icon). If everything went okay, you should see a file that looks similar to this:</p>
+
+      <p><img src="../../images/101_joined.png" alt=""></p>
+
+      <p>Remember that variations are possible due to using different versions of UCSC databases, as long as you have similar looking columns you did everything right :)</p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>Let’s take a look at this dataset. The first six columns correspond to the exons, and the last six columns correspond to the SNPs. Column 4 contains the exon IDs, and column 10 contains the SNP IDs. In our screenshot you see that the first 5 lines in the file all have the same exon ID (<code class="highlighter-rouge">uc010gqp.2_cds_10_0_chr22_16287254_r</code>) but different SNP IDs, meaning these lines represent 5 different SNPs that all overlap the same exon. Therefore we can find the total number of SNPs in an exon simply by counting the number of lines that have the same exon ID in the fourth column.</p>
+
+<blockquote class="question">
+  <h3 id="question-question-1">
+<img class="emoji" title=":question:" alt=":question:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2753.png" height="20" width="20" align="absmiddle"> Question</h3>
+  <p>For the first 3 exons in your file, what is the number of SNPs that fall into that exon?</p>
+</blockquote>
+
+<h2 id="count-the-number-of-snps-per-exon">Count the number of SNPs per exon</h2>
+<p>We’ve just seen how to count the number of SNPs in each exon, so let’s do this for all the exons in our file.</p>
+
+<blockquote class="hands_on">
+  <h3 id="pencil2-hands-on-counting-snps">
+<img class="emoji" title=":pencil2:" alt=":pencil2:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/270f.png" height="20" width="20" align="absmiddle"> Hands-on: Counting SNPs</h3>
+
+  <ol>
+    <li>
+      <p><strong>Group</strong> <img class="emoji" title=":wrench:" alt=":wrench:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f527.png" height="20" width="20" align="absmiddle">: Open the tool <code class="highlighter-rouge">Group - data by a column and perform aggregate operation on other columns</code></p>
+
+      <p><img src="../../images/101_13.png" alt=""></p>
+
+      <blockquote class="comment">
+        <h3 id="nut_and_bolt-settings-1">
+<img class="emoji" title=":nut_and_bolt:" alt=":nut_and_bolt:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f529.png" height="20" width="20" align="absmiddle"> Settings</h3>
+
+        <ul>
+          <li>
+<strong>Select data</strong>: select dataset 3 (the output from the join tool)</li>
+          <li>
+<strong>Group by column</strong>: <code class="highlighter-rouge">4</code> (the column with the exon IDs)</li>
+          <li>
+<strong>Insert operation</strong>: click on this button, then set <strong>Type</strong> to <code class="highlighter-rouge">Count</code> and set <strong>On column</strong> to <code class="highlighter-rouge">Column: 4</code>
+</li>
+        </ul>
+      </blockquote>
+    </li>
+    <li>
+      <p>Make sure your screen looks like the image above and click <strong>Execute</strong> to perform the grouping. Your output dataset will look something like this:</p>
+
+      <p><img src="../../images/101_14.png" alt=""></p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>This file contains only two columns. The first contains the exon IDs, and the second the number of times that exon ID appeared in the file - in other words, how many SNPs were present in that exon.</p>
+
+<blockquote class="question">
+  <h3 id="question-question-2">
+<img class="emoji" title=":question:" alt=":question:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2753.png" height="20" width="20" align="absmiddle"> Question</h3>
+  <p>How many exons are there in total in your file?</p>
+
+  <p><em>Hint: Each line now represents a different exon, so you can see the answer to this when you expand the history item, as in the image above</em>.</p>
+</blockquote>
+
+<h2 id="sort-the-exons-by-snps-count">Sort the exons by SNPs count</h2>
+
+<p>Now we have a list of all exons and the number of SNPs they contain, but we would like to know which exons has the <em>highest number</em> of SNPs. We can do this by sorting the file on the second column.</p>
+
+<blockquote class="hands_on">
+  <h3 id="pencil2-hands-on-sorting">
+<img class="emoji" title=":pencil2:" alt=":pencil2:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/270f.png" height="20" width="20" align="absmiddle"> Hands-on: Sorting</h3>
+
+  <ol>
+    <li>
+      <p><strong>Sort</strong> <img class="emoji" title=":wrench:" alt=":wrench:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f527.png" height="20" width="20" align="absmiddle">: Navigate to the tool <code class="highlighter-rouge">Sort - data in ascending or descending order</code></p>
+    </li>
+    <li>
+      <p>Set the <strong>on column</strong> parameter to <code class="highlighter-rouge">Column: 2</code>, by default it will select a numerical sort in descending order, which is exactly what we want in this case.</p>
+
+      <p><img src="../../images/101_15.png" alt=""></p>
+    </li>
+    <li>
+      <p>Click <strong>Execute</strong> and examine the output file.</p>
+
+      <p><img src="../../images/101_16.png" alt=""></p>
+
+      <p>You should now see the same file as we had before, but the exons with the highest number of SNPs are now on top.</p>
+    </li>
+  </ol>
+</blockquote>
+
+<blockquote class="question">
+  <h3 id="question-question-3">
+<img class="emoji" title=":question:" alt=":question:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2753.png" height="20" width="20" align="absmiddle"> Question</h3>
+  <p>Which exon has the highest number of SNPs in your file?</p>
+
+  <p>Keep in mind this may depend on your settings when getting the data from UCSC.</p>
+</blockquote>
+
+<h2 id="select-the-top-five-exons">Select the top five exons</h2>
+
+<p>Let’s say we want a list with just the top-5 exons with highest number of SNPs.</p>
+
+<blockquote class="hands_on">
+  <h3 id="pencil2-hands-on-select-first">
+<img class="emoji" title=":pencil2:" alt=":pencil2:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/270f.png" height="20" width="20" align="absmiddle"> Hands-on: Select first</h3>
+
+  <ol>
+    <li>
+      <p><strong>Select first</strong> <img class="emoji" title=":wrench:" alt=":wrench:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f527.png" height="20" width="20" align="absmiddle">: Open the tool <code class="highlighter-rouge">Select first - lines from a dataset</code></p>
+    </li>
+    <li>
+      <p>Set <strong>select first</strong> to <code class="highlighter-rouge">5</code> and choose the sorted dataset from the previous step as the input.</p>
+
+      <p><img src="../../images/101_17.png" alt=""></p>
+    </li>
+    <li>
+      <p>Click <strong>Execute</strong> and examine the output file, this should contain only the first 5 lines of the previous dataset.</p>
+    </li>
+  </ol>
+</blockquote>
+
+<h2 id="recovering-exon-info-and-displaying-data-in-genome-browsers">Recovering exon info and displaying data in genome browsers</h2>
+
+<p>Congratulations! you have now determined which exons on chromosome 22 have the highest number of SNPs, but what else can we learn about them? One way to learn more about a genetic location is to view it in a genome browser. However, in the process of getting our answer, we have lost information about the location of these exons on the chromosome. But fear not, Galaxy saves all of your data, so we can recover this information quite easily.</p>
+
+<blockquote class="hands_on">
+  <h3 id="pencil2-hands-on-compare-two-datasets">
+<img class="emoji" title=":pencil2:" alt=":pencil2:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/270f.png" height="20" width="20" align="absmiddle"> Hands-on: Compare two Datasets</h3>
+
+  <ol>
+    <li>
+      <p><strong>Compare two Datasets</strong> <img class="emoji" title=":wrench:" alt=":wrench:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f527.png" height="20" width="20" align="absmiddle">: Open the tool <code class="highlighter-rouge">Compare two Datasets - to find common or distinct rows</code></p>
+    </li>
+    <li>
+      <p>Set the parameters to compare the column 4 of the exon file with column 1 of the top-5 exons file to find matching rows.</p>
+
+      <p><img src="../../images/101_18.png" alt=""></p>
+    </li>
+    <li>
+      <p>Click <strong>Execute</strong> and examine your output file. It should contain the locations of your top 5 exons:</p>
+
+      <p><img src="../../images/101_19.png" alt=""></p>
+    </li>
+  </ol>
+</blockquote>
+
+<h2 id="ucsc-genome-browser">UCSC genome browser</h2>
+
+<p>A good way to learn about these exons is to look at their genomic surrounding. This can be done by using genome browsers. Galaxy can launch a genome browser such as IGV on your local machine, and it can connect to online genome browsers as well. An example of such an online genome browser is the UCSC genome browser.</p>
+
+<blockquote class="hands_on">
+  <h3 id="pencil2-hands-on-ucsc-genome-browser">
+<img class="emoji" title=":pencil2:" alt=":pencil2:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/270f.png" height="20" width="20" align="absmiddle"> Hands-on: UCSC genome browser</h3>
+
+  <ol>
+    <li>
+      <p>First, we have to tell Galaxy which <strong>Genome build</strong> this data uses (hg19), we can do this as follows:</p>
+
+      <p><img src="../../images/101_20.png" alt=""></p>
+    </li>
+    <li>
+      <p>To <strong>visualize the data in UCSC genome browser</strong>, click on <code class="highlighter-rouge">display at UCSC main</code> option visible when you expand the history item.</p>
+
+      <p><img src="../../images/101_displayucsc.png" alt=""></p>
+
+      <p>This will upload the data to UCSC as custom track. To see your data look at the <code class="highlighter-rouge">User Track</code> near the top. You can enter the coordinates of one of your exons at the top to jump to that location.</p>
+
+      <p><img src="../../images/101_21.png" alt=""></p>
+    </li>
+  </ol>
+</blockquote>
+
+<p>UCSC provides a large number of tracks that can help you get a sense of your genomic area, it contains common SNPs, repeats, genes, and much more (scroll down to find all possible tracks).</p>
+
+<h1 id="galaxy-management">Galaxy management</h1>
+
+<p>In Galaxy your analyses live in histories such as your current one. Histories can be very large, and you can have as many histories as you want. You can control your histories (switching, copying, sharing, creating a fresh history, etc.) in the <strong>Options</strong> menu on the top of the history pane (gear symbol):</p>
+
+<p><img src="../../images/history_options_menu.png" alt=""></p>
+
+<p>If you create a new history, your current history does not disappear. If you would like to list all of your histories just choose <code class="highlighter-rouge">Saved Histories</code> from the history menu and you will see a list of all your histories in the center pane:</p>
+
+<p><img src="../../images/101_23.png" alt=""></p>
+
+<p>An alternative overview of your histories can be accessed by clicking on the <strong>View all histories</strong> button at top of your history pane (window icon).</p>
+
+<p><img src="../../images/101_history-overview.png" alt=""></p>
+
+<p>Here you see a more detailed view of each history, and can perform the same operations, such as switching to a different history, deleting a history, purging it (permanently deleting it, this action cannot be reversed), or copying datasets and even entire histories.</p>
+
+<p>You can always return to your analysis view by clicking on <strong>Analyze Data</strong> in the top menu bar.</p>
+
+<h2 id="convert-your-analysis-history-into-a-workflow">Convert your analysis history into a workflow</h2>
+
+<p>When you look carefully at your history, you can see that it contains all steps of our analysis, from the beginning to the end. By building this history we have actually built a complete record of our analysis with Galaxy preserving all parameter settings applied at every step. Wouldn’t it be nice to just convert this history into a workflow that we’ll be able to execute again and again?</p>
+
+<p>Galaxy makes this very easy with the <code class="highlighter-rouge">Extract workflow</code> option. This means any time you want to build a workflow, you can just perform it manually once, and then convert it to a workflow, so that next time it will be a lot less work to do the same analysis.</p>
+
+<blockquote class="hands_on">
+  <h3 id="pencil2-hands-on-extract-workflow">
+<img class="emoji" title=":pencil2:" alt=":pencil2:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/270f.png" height="20" width="20" align="absmiddle"> Hands-on: Extract workflow</h3>
+
+  <ol>
+    <li>
+      <p><strong>Clean up</strong> your history. If you had any failed jobs (red), please remove those datasets from your history by clicking on the <code class="highlighter-rouge">x</code> button. This will make the creation of a workflow easier.</p>
+    </li>
+    <li>
+      <p>Go to the history <strong>Options menu</strong> (gear symbol) and select the <code class="highlighter-rouge">Extract Workflow</code> option.</p>
+
+      <p><img src="../../images/history_menu_extract_workflow.png" alt=""></p>
+
+      <p>The center pane will change as shown below and you will be able to choose which steps to include/exclude and how to name the newly created workflow.</p>
+
+      <p><img src="../../images/101_25.png" alt=""></p>
+    </li>
+    <li>
+      <p><strong>Uncheck</strong> any steps that shouldn’t be included in the workflow (if any), and <strong>rename</strong> the workflow to something descriptive, for example <code class="highlighter-rouge">Find exons with the highest number of SNPs</code>.</p>
+    </li>
+    <li>
+      <p>Click on the <strong>Create Workflow</strong> button near the top.</p>
+
+      <p>You will get a message that the workflow was created. But where did it go?</p>
+    </li>
+    <li>
+      <p>Click on <strong>Workflow</strong> in the top menu of Galaxy. Here you have a list of all your workflows. Your newly created workflow should be listed at the top:</p>
+
+      <p><img src="../../images/101_26.png" alt=""></p>
+    </li>
+  </ol>
+</blockquote>
+
+<h2 id="the-workflow-editor">The workflow editor</h2>
+
+<p>We can examine the workflow in Galaxy’s workflow editor. Here you can view/change the parameter settings of each step, add and remove tools, and connect an output from one tool to the input of another, all in an easy and graphical manner. You can also use this editor to build workflows from scratch.</p>
+
+<blockquote class="hands_on">
+  <h3 id="pencil2-hands-on-extract-workflow-1">
+<img class="emoji" title=":pencil2:" alt=":pencil2:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/270f.png" height="20" width="20" align="absmiddle"> Hands-on: Extract workflow</h3>
+
+  <ol>
+    <li>
+      <p>Click on the triangle to the right of your workflow name.</p>
+
+      <p><img src="../../images/101_27.png" alt=""></p>
+    </li>
+    <li>
+      <p>Select <strong>Edit</strong> to launch the workflow editor. You should see something like this:</p>
+
+      <p><img src="../../images/101_28.png" alt=""></p>
+
+      <p>When you click on a component, you will get a view of all the parameter settings for that tool on the right-hand side of your screen.</p>
+
+      <blockquote class="tip">
+        <h3 id="bulb-tip-hiding-intermediate-steps">
+<img class="emoji" title=":bulb:" alt=":bulb:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f4a1.png" height="20" width="20" align="absmiddle"> Tip: Hiding intermediate steps</h3>
+        <p>When a workflow is executed, the user is usually primarily interested in the final product and not in all intermediate steps. By default all the outputs of a workflow will be shown, but we can explicitly tell Galaxy which output to show and which to hide for a given workflow. This behaviour is controlled by the little asterisk next to every output dataset:
+<img src="../../../../shared/images/workflow_editor_mark_output.png" alt=""></p>
+
+        <p>If you click on this asterisk for any of the output datasets, then <em>only</em> files with an asterisk will be shown, and all outputs without an asterisk will be hidden. (Note that clicking <em>all</em> outputs has the same effect as clicking <em>none</em> of the outputs, in both cases all the datasets will be shown.)</p>
+      </blockquote>
+    </li>
+    <li>
+      <p><strong>Click the asterisk</strong> next to <code class="highlighter-rouge">out_file1</code> in the <code class="highlighter-rouge">Select First</code> and <code class="highlighter-rouge">Compare two Datasets</code> tools.</p>
+
+      <p>Now, when we run the workflow, we will only see the final two outputs, our list with the top-5 exons and their SNP counts, and the file with exons ready for viewing in a genome browser. Once you have done this, you will notice that the <strong>minimap</strong> at the bottom-right corner of your screen will have a colour-coded view of your workflow, with orange boxes representing a tool with an output that will be shown.</p>
+
+      <p><img src="../../images/101_31.png" alt=""></p>
+
+      <p>If you didn’t specify a name for the input files at the beginning they will be labeled <code class="highlighter-rouge">Input Dataset</code>. In this case you can rename them now to avoid confusion when using the workflow later on.</p>
+
+      <p><img src="../../images/101_32.png" alt=""></p>
+
+      <p>In the image above, you see that the top input dataset (with the blue border), connects to the first input of the join tool, so this corresponds to the exon data.</p>
+    </li>
+    <li>
+      <p><strong>Click</strong> on the box corresponding to the exon input dataset, and <strong>rename</strong> it to <code class="highlighter-rouge">Exons</code> on the right-hand side of your screen.</p>
+
+      <p><img src="../../images/101_33.png" alt=""></p>
+    </li>
+    <li>
+      <p><strong>Repeat</strong> this process for the other input dataset. Name it <code class="highlighter-rouge">Features</code>. We used it to calculate highest number of SNPs, but this workflow would also work with other features, so we give it a bit more generic name.</p>
+    </li>
+    <li>
+      <p>Let’s also <strong>rename the outputs</strong>. Click on the <code class="highlighter-rouge">Select first</code> tool and in the menu on the right click on <code class="highlighter-rouge">Configure Output</code> and enter a descriptive name for the output dataset in the <code class="highlighter-rouge">Rename dataset</code> box.</p>
+
+      <p><img src="../../images/101_34.png" alt=""></p>
+    </li>
+    <li>
+      <p><strong>Repeat</strong> this for the output of the <code class="highlighter-rouge">Compare two Datasets</code> tool.</p>
+    </li>
+    <li>
+      <p><strong>Save your workflow</strong> (important!) by clicking on the gear icon at the top right of the screen, and selecting <code class="highlighter-rouge">Save</code>.</p>
+
+      <p><img src="../../images/workflow_editor_save.png" alt=""></p>
+    </li>
+    <li>
+      <p><strong>Return</strong> to the analysis view by clicking on <code class="highlighter-rouge">Analyze Data</code> at the top menu bar.</p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="comment">
+  <h3 id="nut_and_bolt-comments-1">
+<img class="emoji" title=":nut_and_bolt:" alt=":nut_and_bolt:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f529.png" height="20" width="20" align="absmiddle"> Comments</h3>
+  <p>We could <strong>validate</strong> our newly built workflow by running it on the same input datasets than the ones in the <code class="highlighter-rouge">Galaxy 101</code> history used to extract the workflow in order to make sure we do obtain the same results.</p>
+</blockquote>
+
+<h2 id="run-workflow-on-different-data">Run workflow on different data</h2>
+
+<p>Now that we have built our workflow, let’s use it on some different data. For example, let’s find out which exons have the highest number of repeat elements.</p>
+
+<blockquote class="hands_on">
+  <h3 id="pencil2-hands-on-run-workflow">
+<img class="emoji" title=":pencil2:" alt=":pencil2:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/270f.png" height="20" width="20" align="absmiddle"> Hands-on: Run workflow</h3>
+
+  <ol>
+    <li>
+      <p>Create a <strong>new history</strong> (gear icon) and give it a name.</p>
+    </li>
+    <li>
+      <p>We will need the list of exons again. We don’t have to get this from UCSC again, we can just <strong>copy</strong> it from our previous history. The easiest way to do this is to go to the history overview (window icon at top of history pane). Here you can just drag and drop datasets from one history to another.</p>
+
+      <p><img src="../../images/101_copydataset.png" alt=""></p>
+    </li>
+    <li>We wanted to know something about the repetitive elements per exon. We get this data from UCSC.
+      <ul>
+        <li>
+<strong>assembly</strong> should be set to <code class="highlighter-rouge">Feb. 2009 (GRCh37/hg19)</code>
+</li>
+        <li>
+<strong>group</strong> parameter should be <code class="highlighter-rouge">Repeats</code>
+</li>
+        <li>
+<strong>position</strong> should be <code class="highlighter-rouge">chr22</code>
+</li>
+        <li>leave the rest of the settings to the defaults</li>
+      </ul>
+
+      <p>Click on <code class="highlighter-rouge">Get output</code> and then <code class="highlighter-rouge">send query to Galaxy</code> on the next screen.</p>
+    </li>
+    <li>
+      <p>Open the <strong>workflow menu</strong> (top menu bar). Find the workflow you made in the previous section, and select the option <code class="highlighter-rouge">Run</code>.</p>
+
+      <p><img src="../../images/101_37.png" alt=""></p>
+
+      <p>The center pane will change to allow you to configure and launch the workflow.</p>
+    </li>
+    <li>
+      <p>Select appropriate datasets for the inputs as shown below, then scroll down and click <code class="highlighter-rouge">Run workflow</code>.</p>
+
+      <p><img src="../../images/101_38.png" alt=""></p>
+
+      <p>Once the workflow has started you will initially be able to see all its steps:</p>
+
+      <p><img src="../../images/101_39.png" alt=""></p>
+    </li>
+  </ol>
+</blockquote>
+
+<blockquote class="Comment">
+  <h3 id="nut_and_bolt-comment-1">
+<img class="emoji" title=":nut_and_bolt:" alt=":nut_and_bolt:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f529.png" height="20" width="20" align="absmiddle"> Comment</h3>
+  <p>Because most intermediate steps of the workflow were hidden, once it is finished you will only see the final two datasets. If we want to view the intermediate files after all, we can unhide all hidden datasets by selecting <code class="highlighter-rouge">Include Hidden datasets</code> from the history options menu.</p>
+</blockquote>
+
+<blockquote class="question">
+  <h3 id="question-questions">
+<img class="emoji" title=":question:" alt=":question:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2753.png" height="20" width="20" align="absmiddle"> Questions</h3>
+  <p>Which exon had the highest number of repeats? How many repeats were there?</p>
+</blockquote>
+
+<h2 id="share-your-work">Share your work</h2>
+
+<p>One of the most important features of Galaxy comes at the end of an analysis. When you have published striking findings, it is important that other researchers are able to reproduce your in-silico experiment. Galaxy enables users to easily share their workflows and histories with others.</p>
+
+<p>To share a history, click on the gear symbol in the history pane and select <code class="highlighter-rouge">Share or Publish</code>. On this page you can do 3 things:</p>
+
+<ol>
+  <li>
+<strong>Make accessible via Link</strong>. This generates a link that you can give out to others. Anybody with this link will be able to view your history.</li>
+  <li>
+<strong>Publish History</strong>. This will not only create a link, but will also publish your history. This means your history will be listed under <code class="highlighter-rouge">Shared Data → Published Histories</code> in the top menu.</li>
+  <li>
+<strong>Share with Individual Users</strong>. This will share the history only with specific users on the Galaxy instance.</li>
+</ol>
+
+<blockquote class="hands_on">
+  <h3 id="pencil2-hands-on-share-history-and-workflow">
+<img class="emoji" title=":pencil2:" alt=":pencil2:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/270f.png" height="20" width="20" align="absmiddle"> Hands-on: Share history and workflow</h3>
+
+  <ol>
+    <li>Share one of your histories with your neighbour.</li>
+    <li>See if you can do the same with your workflow!</li>
+    <li>Find the history and/or workflow shared by your neighbour. Histories shared with specific users can be accessed by those users in their history menu (gear icon) under <code class="highlighter-rouge">Histories shared with me</code>.</li>
+  </ol>
+</blockquote>
+
+<h1 class="no_toc" id="conclusion">Conclusion</h1>
+
+<p><img class="emoji" title=":tada:" alt=":tada:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f389.png" height="20" width="20" align="absmiddle"> Well done! <img class="emoji" title=":clap:" alt=":clap:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f44f.png" height="20" width="20" align="absmiddle"> You have just performed your first analysis in Galaxy. You also created a workflow from your analysis so you can easily repeat the exact same analysis on other datasets. Additionally you shared your results and methods with others.</p>
+
+
+    
+    <blockquote class="key_points">
+        <h3> <img class="emoji" title=":grey_exclamation:" alt=":grey_exclamation:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2755.png" height="20" width="20" align="absmiddle"> Key points</h3>
+
+        <ul>
+        
+           <li>Galaxy provides an easy-to-use graphical user interface for often complex commandline tools</li>
+        
+           <li>Galaxy keeps a full record of your analysis in a history</li>
+        
+           <li>Workflows enable you to repeat your analysis on different data</li>
+        
+           <li>Galaxy can connect to external sources for data import and visualization purposes</li>
+        
+           <li>Galaxy provides ways to share your results and methods with others</li>
+        
+        </ul>
+    </blockquote>
+    
+
+    
+
+    <h3>
+<img class="emoji" title=":clap:" alt=":clap:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f44f.png" height="20" width="20" align="absmiddle"> Congratulations on successfully completing this tutorial!</h3>
+
+
+    <hr>
+    <blockquote class="overview">
+        <h3> <img class="emoji" title=":speech_balloon:" alt=":speech_balloon:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f4ac.png" height="20" width="20" align="absmiddle"> Feedback</h3>
+        Please take a moment and provide your feedback on this tutorial. Your feedback will help guide and improve future revisions to this tutorial. <a href="https://tinyurl.com/GTNfeedback" target="_blank">Feedback Form</a>
+    </blockquote>
+
+    <i>This material is the result of a collaborative work. Thanks to <a href="https://galaxyproject.github.io/training-material//introduction#contributors">all the contributors</a> and the <a href="https://wiki.galaxyproject.org/Teach/GTN">Galaxy Training Network</a>!<br>
+    Found a typo? Something is wrong in this tutorial? Edit it on <a href="https://github.com/galaxyproject/training-material/tree/master/introduction/tutorials/galaxy-intro-101.md">GitHub</a>.</i>
+</section>
+
+        </div>
+    </body>
+    <script src="https://galaxyproject.github.io/training-material//assets/js/landing_page.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</html>

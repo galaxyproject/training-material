@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html>
+    <head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="chrome=1">
+        <title>Galaxy Training!</title>
+        <link media="all" href="https://netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://galaxyproject.github.io/training-material//assets/css/landing_page.css">
+        <link rel="stylesheet" href="https://galaxyproject.github.io/training-material//assets/css/tutorial.css">
+        <link rel="stylesheet" href="https://galaxyproject.github.io/training-material//assets/css/font-awesome.css">
+        <link rel="stylesheet" href="https://galaxyproject.github.io/training-material//assets/css/syntax_highlighting.css">
+        <meta name="viewport" content="width=device-width">
+    </head>
+    <body>
+        <div class="wrapper">
+            
+
+
+<header>
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a id="site-title" class="navbar-brand" href="https://wiki.galaxyproject.org/Teach/GTN">
+              <img class="pull-left img-responsive" src="https://galaxyproject.github.io/training-material///assets/images/GTN.png">
+            </a>
+            <a id="site-title" class="navbar-brand name-holder" href="https://galaxyproject.github.io/training-material//topics/assembly/tutorials/debruijn-graph-assembly">
+              De Bruijn Graph Assembly
+            </a>
+          </div>
+
+          <div class="collapse navbar-collapse" id="navbar">
+
+            <ul id="main-menu" class="nav navbar-nav navbar-right">
+              <li><a href="https://galaxyproject.github.io/training-material/" title="Back to front page"><i class="fa fa-home"></i> Home</a></li>
+              <li><a href="https://galaxyproject.github.io/training-material//topics/assembly" title="Go back to list of tutorials"><i class="fa fa-file-text-o"></i> assembly</a></li>
+
+              
+                <li><a href="https://galaxyproject.github.io/training-material//topics/assembly/slides" title="Slides for this tutorial"><i class="fa fa-graduation-cap"></i> Introduction slides</a></li>
+              
+              <!--<li><a href="https://galaxyproject.github.io/training-material//assembly/slides/debruijn-graph-assembly/"><i class="fa fa-file-powerpoint-o"></i> Associated slides</a></li>-->
+
+              
+                <li><a href="https://github.com/galaxyproject/training-material/tree/master/topics/assembly/docker" title="Docker image for this tutorial"><i class="fa fa-ship"></i> Docker image</a></li>
+              
+
+              
+
+              
+                <li><a href="https://doi.org/10.5281/zenodo.582600" title="Links to data"><i class="fa fa-folder-open"></i> Input Dataset</a></li>
+              
+
+              
+                <li><a href="https://galaxyproject.github.io/training-material//topics/assembly#references" title="References"><i class="fa fa-book"></i> Literature</a></li>
+              
+
+            </ul>
+          </div>
+        </div>
+    </nav>
+</header>
+
+<section class="tutorial">
+    <h1>De Bruijn Graph Assembly</h1>
+
+    <blockquote class="overview">
+        <h3>Overview</h3>
+
+        <p class="bold"> <img class="emoji" title=":grey_question:" alt=":grey_question:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2754.png" height="20" width="20" align="absmiddle"> Questions</p>
+        <ul>
+        
+          <li>What are the factors that affect genome assembly?</li>
+        
+          <li>How does Genome assembly work?</li>
+        
+        </ul>
+
+        <p class="bold"> <img class="emoji" title=":dart:" alt=":dart:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f3af.png" height="20" width="20" align="absmiddle"> Objectives</p>
+        <ul>
+        
+          <li>Perform an optimised Velvet assembly with the Velvet Optimiser</li>
+        
+          <li>Compare this assembly with those we did in the basic tutorial</li>
+        
+          <li>Perform an assembly using the SPAdes assembler.</li>
+        
+        </ul>
+
+        
+        <p class="bold"> <img class="emoji" title=":heavy_check_mark:" alt=":heavy_check_mark:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2714.png" height="20" width="20" align="absmiddle"> Requirements</p>
+        <ul>
+          
+            <li>
+                
+                <a href="https://galaxyproject.github.io/training-material//topics//introduction/">Galaxy introduction</a>
+                
+            </li>
+          
+            <li>
+                
+                <a href="https://galaxyproject.github.io/training-material//topics//sequence-analysis/">Quality Control</a>
+                
+            </li>
+          
+          
+        </ul>
+        
+
+        <p><span class="bold"> <img class="emoji" title=":hourglass:" alt=":hourglass:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/231b.png" height="20" width="20" align="absmiddle"> Time estimation:</span> 1d/3h/6h</p>
+
+    </blockquote>
+
+<h1 id="optimised-de-bruijn-graph-assemblies-using-the-velvet-optimiser-and-spades">Optimised de Bruijn Graph assemblies using the Velvet Optimiser and SPAdes</h1>
+<p>In this activity, we will perform <em>de novo</em> assemblies of a short read set using the Velvet Optimiser and the SPAdes assemblers. We are using the Velvet Optimiser for illustrative purposes. For real assembly work, a more suitable assembler should be chosen - such as SPAdes.</p>
+
+<p>The Velvet Optimiser is a script written by Simon Gladman to optimise the k-mer size and coverage cutoff parameters for Velvet. More information can be found <a href="https://github.com/slugger70/VelvetOptimiser">here</a></p>
+
+<p>SPAdes is a de novo genome assembler written by Pavel Pevzner’s group in St. Petersburg. More details on it can be found <a href="http://cab.spbu.ru/software/spades/">here</a></p>
+
+<blockquote class="agenda">
+  <h3 id="agenda">Agenda</h3>
+
+  <p>In this tutorial, we will deal with:</p>
+
+  <ol>
+    <li><a href="#get-the-data">Get the data</a></li>
+    <li><a href="#assemble-with-the-velvet-optimiser">Assemble with the Velvet Optimiser</a></li>
+    <li><a href="#assemble-with-spades">Assemble with SPAdes</a></li>
+  </ol>
+</blockquote>
+
+<h1 id="get-the-data">Get the data</h1>
+
+<p>We will be using the same data that we used in the introductory tutorial, so if you have already completed that and have the data, skip this section.</p>
+
+<blockquote class="hands_on">
+  <h3 id="pencil2-hands-on-getting-the-data">
+<img class="emoji" title=":pencil2:" alt=":pencil2:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/270f.png" height="20" width="20" align="absmiddle"> Hands-on: Getting the data</h3>
+
+  <ol>
+    <li>Create and name a new history for this tutorial.</li>
+    <li>
+      <p>Import the sequence read raw data (*.fastq) from <a href="https://doi.org/10.5281/zenodo.582600">Zenodo</a></p>
+
+      <blockquote class="tip">
+        <h3 id="bulb-tip-importing-data-via-links">
+<img class="emoji" title=":bulb:" alt=":bulb:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f4a1.png" height="20" width="20" align="absmiddle"> Tip: Importing data via links</h3>
+
+        <ul>
+          <li>Copy the link location (Right-click on the filename <i class="fa fa-long-arrow-right"></i> Copy Link Address)</li>
+          <li>Open the Galaxy Upload Manager</li>
+          <li>Select <strong>Paste/Fetch Data</strong>
+</li>
+          <li>Paste the link into the text field</li>
+          <li>Change the data-type to <strong>fastqsanger</strong>
+</li>
+          <li>Press <strong>Start</strong>
+</li>
+        </ul>
+      </blockquote>
+    </li>
+    <li>Once the files have been uploaded, change their names to Mutant_R1.fastq and Mutant_R2.fastq respectively by clicking on the <img src="../../images/edit_file.png" alt=""> icon next to the relevant history entry.</li>
+  </ol>
+
+  <p>Click on the View Data button (the <img src="../../images/eye.png" alt="Eye icon">) next to one of the FASTQ sequence files.</p>
+
+  <blockquote class="question">
+    <h3 id="question-questions">
+<img class="emoji" title=":question:" alt=":question:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2753.png" height="20" width="20" align="absmiddle"> Questions</h3>
+
+    <ol>
+      <li>What are four key features of a FASTQ file?</li>
+      <li>What is the main difference between a FASTQ and a FASTA file?</li>
+    </ol>
+  </blockquote>
+
+</blockquote>
+
+<h1 id="assembly-with-the-velvet-optimiser">Assembly with the Velvet Optimiser</h1>
+
+<p>We will perform an assembly with the Velvet Optimiser. It will automatically choose a suitable value for the k-mer size (<strong>k</strong>). It will then go on to optimise the coverage cutoff (<strong>cov_cutoff</strong>) which corrects for read errors. It will use the “<em>n50</em>” metric for optimising the k-mer size and the “<em>total number of bases in contigs</em>” for optimising the coverage cutoff.</p>
+
+<blockquote class="hands_on">
+  <h3 id="pencil2-hands-on-assemble-with-the-velvet-optimiser">
+<img class="emoji" title=":pencil2:" alt=":pencil2:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/270f.png" height="20" width="20" align="absmiddle"> Hands-on: Assemble with the Velvet Optimiser</h3>
+
+  <h4 id="use-the-velvet-optimiser-wrench-tool">Use the <strong>Velvet Optimiser</strong> <img class="emoji" title=":wrench:" alt=":wrench:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f527.png" height="20" width="20" align="absmiddle"> tool.</h4>
+
+  <ul>
+    <li>
+      <p>Set the following parameters (leave other settings as they are):</p>
+
+      <ul>
+        <li>
+<strong>Start k-mer size</strong>: 45</li>
+        <li>
+<strong>End k-mer size</strong>: 73</li>
+        <li>
+<strong>Input file type</strong>: Fastq</li>
+        <li>
+<strong>Single or paired end reads</strong>: Paired</li>
+        <li>
+<strong>Select first set of reads</strong>: <em>mutant_R1.fastq</em>
+</li>
+        <li>
+<strong>Select second set of reads</strong>: <em>mutant_R2.fastq</em>
+</li>
+      </ul>
+    </li>
+  </ul>
+
+</blockquote>
+
+<p>Your history will now contain a number of new files:</p>
+
+<ul>
+  <li>Velvet optimiser contigs
+    <ul>
+      <li>A fasta file of the final assembled contigs</li>
+    </ul>
+  </li>
+  <li>Velvet optimiser contig stats
+    <ul>
+      <li>A table of the lengths (in k-mer length) and coverages (k-mer coverages) for the final contigs.</li>
+    </ul>
+  </li>
+</ul>
+
+<p>Have a look at each file.</p>
+
+<blockquote class="hands_on">
+  <h3 id="pencil2-hands-on-get-contig-statistics-for-velvet-optimiser-contigs">
+<img class="emoji" title=":pencil2:" alt=":pencil2:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/270f.png" height="20" width="20" align="absmiddle"> Hands-on: Get contig statistics for Velvet Optimiser contigs</h3>
+
+  <h4 id="use-the-fasta-statistics-wrench-tool-to-produce-a-summary-of-the-velvet-optimiser-contigs">Use the <strong>Fasta Statistics</strong> <img class="emoji" title=":wrench:" alt=":wrench:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f527.png" height="20" width="20" align="absmiddle"> tool to produce a summary of the velvet optimiser contigs</h4>
+
+  <p>Look at the output file.</p>
+
+  <blockquote class="question">
+    <h3 id="question-questions-1">
+<img class="emoji" title=":question:" alt=":question:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2753.png" height="20" width="20" align="absmiddle"> Questions</h3>
+
+    <p>Compare the output we got here with the output of the simple assemblies obtained in the introductory tutorial.</p>
+    <ol>
+      <li>What are the main differences between them?</li>
+      <li>Which has a higher “n50”? What does this mean?</li>
+    </ol>
+  </blockquote>
+
+</blockquote>
+
+<p>Tables of results from <strong>(a)</strong> Simple assembly and <strong>(b)</strong> optimised assembly.</p>
+
+<p><strong>(a)</strong> <img src="../../images/image12.png" alt=""></p>
+
+<p><strong>(b)</strong> <img src="../../images/optstats.png" alt=""></p>
+
+<h1 id="assemble-with-spades">Assemble with SPAdes</h1>
+
+<p>We will now perform an assembly with the much more modern SPAdes assembler. It goes through a similar process to Velvet in the fact that it uses and simplifies de Bruijn graphs but it uses multiple values for k-mer size and combines the resultant graphs. This combination produces very good assemblies. When using SPAdes it is typical to choose at least 3 k-mer sizes. One lowm one medium and one high. We will use 33, 55 and 91.</p>
+
+<blockquote class="hands_on">
+  <h3 id="pencil2-hands-on-assemble-with-spades">
+<img class="emoji" title=":pencil2:" alt=":pencil2:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/270f.png" height="20" width="20" align="absmiddle"> Hands-on: Assemble with SPAdes</h3>
+
+  <h4 id="use-the-spades-wrench-tool">Use the <strong>SPAdes</strong> <img class="emoji" title=":wrench:" alt=":wrench:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f527.png" height="20" width="20" align="absmiddle"> tool.</h4>
+
+  <ul>
+    <li>
+      <p>Set the following parameters (leave other settings as they are):</p>
+
+      <ul>
+        <li>
+<strong>Run only assembly</strong>: yes</li>
+        <li>
+<strong>K-mers to use separated by commas</strong>: 33,55,91 <em>[note: no spaces!]</em>
+</li>
+        <li>
+<strong>Coverage cutoff</strong>: auto</li>
+        <li>
+<strong>Files -&gt; forward reads</strong>: <em>mutant_R1.fastq</em>
+</li>
+        <li>
+<strong>Files -&gt; reverse reads</strong>: <em>mutant_R2.fastq</em>
+</li>
+      </ul>
+    </li>
+  </ul>
+
+</blockquote>
+
+<p>You will now have 5 new files in your history:</p>
+
+<ul>
+  <li>two Fasta files, one for contigs and one for scaffolds</li>
+  <li>two statistics files, one for contigs and one for scaffolds</li>
+  <li>the SPAdes log file.</li>
+</ul>
+
+<p>Examine each file, especially the stats files.</p>
+
+<p><img src="../../images/contig_stats.png" alt=""></p>
+
+<blockquote class="question">
+  <h3 id="question-questions-2">
+<img class="emoji" title=":question:" alt=":question:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2753.png" height="20" width="20" align="absmiddle"> Questions</h3>
+
+  <ol>
+    <li>Why would one of the contigs have much higher coverage than the others?</li>
+    <li>What could this represent?</li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="hands_on">
+  <h3 id="pencil2-hands-on-get-contig-statistics-for-spades-contigs">
+<img class="emoji" title=":pencil2:" alt=":pencil2:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/270f.png" height="20" width="20" align="absmiddle"> Hands-on: Get contig statistics for SPAdes contigs</h3>
+
+  <h4 id="use-the-fasta-statistics-wrench-tool-to-produce-a-summary-of-the-spades-contigs">Use the <strong>Fasta Statistics</strong> <img class="emoji" title=":wrench:" alt=":wrench:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f527.png" height="20" width="20" align="absmiddle"> tool to produce a summary of the SPAdes contigs</h4>
+
+  <p>Look at the output file.</p>
+
+  <blockquote class="question">
+    <h3 id="question-questions-3">
+<img class="emoji" title=":question:" alt=":question:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2753.png" height="20" width="20" align="absmiddle"> Questions</h3>
+
+    <p>Compare the output we got here with the output of the simple assemblies obtained in the introductory tutorial.</p>
+    <ol>
+      <li>What are the main differences between them?</li>
+      <li>Did SPAdes produce a better assembly than the Velvet Optimiser?</li>
+    </ol>
+  </blockquote>
+
+</blockquote>
+
+
+    
+    <blockquote class="key_points">
+        <h3> <img class="emoji" title=":grey_exclamation:" alt=":grey_exclamation:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2755.png" height="20" width="20" align="absmiddle"> Key points</h3>
+
+        <ul>
+        
+           <li>We learned about how the choice of k-mer size will affect assembly outcomes</li>
+        
+           <li>We learned about the strategies that assemblers use to make reference genomes</li>
+        
+           <li>We performed a number of assemblies with Velvet and SPAdes.</li>
+        
+           <li>You should use SPAdes or another more modern assembler than Velvet for actual assemblies now.</li>
+        
+        </ul>
+    </blockquote>
+    
+
+    
+      <h1>Useful literature</h1>
+      <p>Useful information regarding this type of analysis with descriptions and paper references for the tools used in this tutorial, and literature for this analysis techniques and interpretations can be found <a href="https://galaxyproject.github.io/training-material//assembly#references">here</a>.</p>
+    
+
+    <h3>
+<img class="emoji" title=":clap:" alt=":clap:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f44f.png" height="20" width="20" align="absmiddle"> Congratulations on successfully completing this tutorial!</h3>
+
+
+    <hr>
+    <blockquote class="overview">
+        <h3> <img class="emoji" title=":speech_balloon:" alt=":speech_balloon:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f4ac.png" height="20" width="20" align="absmiddle"> Feedback</h3>
+        Please take a moment and provide your feedback on this tutorial. Your feedback will help guide and improve future revisions to this tutorial. <a href="https://tinyurl.com/GTNfeedback" target="_blank">Feedback Form</a>
+    </blockquote>
+
+    <i>This material is the result of a collaborative work. Thanks to <a href="https://galaxyproject.github.io/training-material//assembly#contributors">all the contributors</a> and the <a href="https://wiki.galaxyproject.org/Teach/GTN">Galaxy Training Network</a>!<br>
+    Found a typo? Something is wrong in this tutorial? Edit it on <a href="https://github.com/galaxyproject/training-material/tree/master/assembly/tutorials/debruijn-graph-assembly.md">GitHub</a>.</i>
+</section>
+
+        </div>
+    </body>
+    <script src="https://galaxyproject.github.io/training-material//assets/js/landing_page.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</html>

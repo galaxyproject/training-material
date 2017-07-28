@@ -1,0 +1,1291 @@
+<!DOCTYPE html>
+<html>
+    <head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="chrome=1">
+        <title>Galaxy Training!</title>
+        <link media="all" href="https://netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://galaxyproject.github.io/training-material//assets/css/landing_page.css">
+        <link rel="stylesheet" href="https://galaxyproject.github.io/training-material//assets/css/tutorial.css">
+        <link rel="stylesheet" href="https://galaxyproject.github.io/training-material//assets/css/font-awesome.css">
+        <link rel="stylesheet" href="https://galaxyproject.github.io/training-material//assets/css/syntax_highlighting.css">
+        <meta name="viewport" content="width=device-width">
+    </head>
+    <body>
+        <div class="wrapper">
+            
+
+
+<header>
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a id="site-title" class="navbar-brand" href="https://wiki.galaxyproject.org/Teach/GTN">
+              <img class="pull-left img-responsive" src="https://galaxyproject.github.io/training-material///assets/images/GTN.png">
+            </a>
+            <a id="site-title" class="navbar-brand name-holder" href="https://galaxyproject.github.io/training-material//topics/transcriptomics/tutorials/ref-based">
+              Reference-based RNA-seq data analysis
+            </a>
+          </div>
+
+          <div class="collapse navbar-collapse" id="navbar">
+
+            <ul id="main-menu" class="nav navbar-nav navbar-right">
+              <li><a href="https://galaxyproject.github.io/training-material/" title="Back to front page"><i class="fa fa-home"></i> Home</a></li>
+              <li><a href="https://galaxyproject.github.io/training-material//topics/transcriptomics" title="Go back to list of tutorials"><i class="fa fa-file-text-o"></i> transcriptomics</a></li>
+
+              
+                <li><a href="https://galaxyproject.github.io/training-material//topics/transcriptomics/slides" title="Slides for this tutorial"><i class="fa fa-graduation-cap"></i> Introduction slides</a></li>
+              
+              <!--<li><a href="https://galaxyproject.github.io/training-material//transcriptomics/slides/ref-based/"><i class="fa fa-file-powerpoint-o"></i> Associated slides</a></li>-->
+
+              
+                <li><a href="https://github.com/galaxyproject/training-material/tree/master/topics/transcriptomics/docker" title="Docker image for this tutorial"><i class="fa fa-ship"></i> Docker image</a></li>
+              
+
+              
+
+              
+                <li><a href="https://zenodo.org/record/290221" title="Links to data"><i class="fa fa-folder-open"></i> Input Dataset</a></li>
+              
+
+              
+                <li><a href="https://galaxyproject.github.io/training-material//topics/transcriptomics#references" title="References"><i class="fa fa-book"></i> Literature</a></li>
+              
+
+            </ul>
+          </div>
+        </div>
+    </nav>
+</header>
+
+<section class="tutorial">
+    <h1>Reference-based RNA-seq data analysis</h1>
+
+    <blockquote class="overview">
+        <h3>Overview</h3>
+
+        <p class="bold"> <img class="emoji" title=":grey_question:" alt=":grey_question:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2754.png" height="20" width="20" align="absmiddle"> Questions</p>
+        <ul>
+        
+          <li>What are the effects of Pasilla (PS) gene depletion on splicing events?</li>
+        
+          <li>How to analyze RNA sequencing data using a reference genome?</li>
+        
+        </ul>
+
+        <p class="bold"> <img class="emoji" title=":dart:" alt=":dart:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f3af.png" height="20" width="20" align="absmiddle"> Objectives</p>
+        <ul>
+        
+          <li>Analysis of RNA sequencing data using a reference genome</li>
+        
+          <li>Analysis of differentially expressed genes</li>
+        
+          <li>Identification of functional enrichment among differentially expressed genes</li>
+        
+        </ul>
+
+        
+        <p class="bold"> <img class="emoji" title=":heavy_check_mark:" alt=":heavy_check_mark:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2714.png" height="20" width="20" align="absmiddle"> Requirements</p>
+        <ul>
+          
+            <li>
+                
+                <a href="https://galaxyproject.github.io/training-material//topics//topics/introduction/">Galaxy introduction</a>
+                
+            </li>
+          
+            <li>
+                
+                <a href="https://galaxyproject.github.io/training-material//topics//topics/sequence-analysis/">Quality control</a>
+                
+            </li>
+          
+          
+        </ul>
+        
+
+        <p><span class="bold"> <img class="emoji" title=":hourglass:" alt=":hourglass:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/231b.png" height="20" width="20" align="absmiddle"> Time estimation:</span> 1d</p>
+
+    </blockquote>
+
+<h1 class="no_toc" id="introduction">Introduction</h1>
+
+<p>In the study of <a href="https://genome.cshlp.org/content/21/2/193.long">Brooks <em>et al.</em> 2011</a>, the Pasilla (PS) gene, <em>Drosophila</em> homologue of the Human splicing regulators Nova-1 and Nova-2 Proteins, was depleted in <em>Drosophila melanogaster</em> by RNAi. The authors wanted to identify exons that are regulated by Pasilla gene using RNA sequencing data.</p>
+
+<p>Total RNA was isolated and used for preparing either single-end or paired-end RNA-seq libraries for treated (PS depleted) samples and untreated samples. These libraries were sequenced to obtain a collection of RNA sequencing reads for each sample. The effects of Pasilla gene depletion on splicing events can then be analyzed by comparison of RNA sequencing data of the treated (PS depleted) and the untreated samples.</p>
+
+<p>The genome of <em>Drosophila melanogaster</em> is known and assembled. It can be used as reference genome to ease this analysis.  In a reference based RNA-seq data analysis, the reads are aligned (or mapped) against a reference genome, <em>Drosophila melanogaster</em> here, to significantly improve the ability to reconstruct transcripts and then identify differences of expression between several conditions.</p>
+
+<blockquote class="agenda">
+  <h3 id="agenda">Agenda</h3>
+
+  <p>In this tutorial, we will deal with:</p>
+
+<ol id="markdown-toc">
+  <li>
+<a href="#pretreatments" id="markdown-toc-pretreatments">Pretreatments</a>    <ol>
+      <li><a href="#data-upload" id="markdown-toc-data-upload">Data upload</a></li>
+      <li><a href="#quality-control" id="markdown-toc-quality-control">Quality control</a></li>
+    </ol>
+  </li>
+  <li>
+<a href="#mapping" id="markdown-toc-mapping">Mapping</a>    <ol>
+      <li><a href="#preliminary-mapping" id="markdown-toc-preliminary-mapping">Preliminary mapping</a></li>
+      <li><a href="#actual-mapping" id="markdown-toc-actual-mapping">Actual mapping</a></li>
+      <li><a href="#inspection-of-hisat2-results" id="markdown-toc-inspection-of-hisat2-results">Inspection of HISAT2 results</a></li>
+    </ol>
+  </li>
+  <li>
+<a href="#analysis-of-the-differential-gene-expression" id="markdown-toc-analysis-of-the-differential-gene-expression">Analysis of the differential gene expression</a>    <ol>
+      <li><a href="#count-the-number-of-reads-per-annotated-gene" id="markdown-toc-count-the-number-of-reads-per-annotated-gene">Count the number of reads per annotated gene</a></li>
+      <li><a href="#analysis-of-the-differential-gene-expression-1" id="markdown-toc-analysis-of-the-differential-gene-expression-1">Analysis of the differential gene expression</a></li>
+      <li><a href="#analysis-of-the-functional-enrichment-among-differentially-expressed-genes" id="markdown-toc-analysis-of-the-functional-enrichment-among-differentially-expressed-genes">Analysis of the functional enrichment among differentially expressed genes</a></li>
+    </ol>
+  </li>
+  <li>
+<a href="#inference-of-the-differential-exon-usage" id="markdown-toc-inference-of-the-differential-exon-usage">Inference of the differential exon usage</a>    <ol>
+      <li><a href="#count-the-number-of-reads-per-exon" id="markdown-toc-count-the-number-of-reads-per-exon">Count the number of reads per exon</a></li>
+      <li><a href="#differential-exon-usage" id="markdown-toc-differential-exon-usage">Differential exon usage</a></li>
+    </ol>
+  </li>
+  <li><a href="#annotation-of-the-result-tables-with-gene-information" id="markdown-toc-annotation-of-the-result-tables-with-gene-information">Annotation of the result tables with gene information</a></li>
+</ol>
+
+</blockquote>
+
+<h1 id="pretreatments">Pretreatments</h1>
+
+<h2 id="data-upload">Data upload</h2>
+
+<p>The original data is available at NCBI Gene Expression Omnibus (GEO) under accession number <a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE18508">GSE18508</a>.</p>
+
+<p>We will look at the 7 first samples:</p>
+
+<ul>
+  <li>3 treated samples with Pasilla (PS) gene depletion: <a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM461179">GSM461179</a>, <a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM461180">GSM461180</a>, <a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM4611810">GSM461181</a>
+</li>
+  <li>4 untreated samples: <a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM461176">GSM461176</a>, <a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM461177">GSM461177</a>, <a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM461178">GSM461178</a>, <a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM461182">GSM461182</a>
+</li>
+</ul>
+
+<p>Each sample constitutes a separate biological replicate of the corresponding condition (treated or untreated). Moreover, two of the treated and two of the untreated samples are from a paired-end sequencing assay, while the remaining samples are from a single-end sequencing experiment.</p>
+
+<p>We have extracted sequences from the Sequence Read Archive (SRA) files to build FASTQ files.</p>
+
+<blockquote class="hands_on">
+  <h3 id="pencil2-hands-on-data-upload">
+<img class="emoji" title=":pencil2:" alt=":pencil2:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/270f.png" height="20" width="20" align="absmiddle"> Hands-on: Data upload</h3>
+
+  <ol>
+    <li>Create a new history for this RNA-seq exercise</li>
+    <li>
+      <p>Import a FASTQ file pair (<em>e.g.</em>  <code class="highlighter-rouge">GSM461177_untreat_paired_chr4_R1.fastq</code> and <code class="highlighter-rouge">GSM461177_untreat_paired_chr4_R2.fastq</code>) from <a href="https://dx.doi.org/10.5281/zenodo.290221">Zenodo</a></p>
+
+      <blockquote class="tip">
+        <h3 id="bulb-tip-importing-data-via-links">
+<img class="emoji" title=":bulb:" alt=":bulb:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f4a1.png" height="20" width="20" align="absmiddle"> Tip: Importing data via links</h3>
+
+        <ul>
+          <li>Copy the link location</li>
+          <li>Open the Galaxy Upload Manager</li>
+          <li>Select <strong>Paste/Fetch Data</strong>
+</li>
+          <li>Paste the link into the text field</li>
+          <li>Press <strong>Start</strong>
+</li>
+        </ul>
+      </blockquote>
+
+      <blockquote class="tip">
+        <h3 id="bulb-tip-changing-the-file-type-fastq-to-fastqsanger-once-the-data-file-is-in-your-history">
+<img class="emoji" title=":bulb:" alt=":bulb:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f4a1.png" height="20" width="20" align="absmiddle"> Tip: Changing the file type <code class="highlighter-rouge">fastq</code> to <code class="highlighter-rouge">fastqsanger</code> once the data file is in your history</h3>
+
+        <ul>
+          <li>Click on the pencil button displayed in your dataset in the history</li>
+          <li>Choose <strong>Datatype</strong> on the top</li>
+          <li>Select <code class="highlighter-rouge">fastqsanger</code>
+</li>
+          <li>Press <strong>Save</strong>
+</li>
+        </ul>
+      </blockquote>
+
+      <p>As default, Galaxy takes the link as name. It also do not link the dataset to a database or a reference genome.</p>
+
+      <blockquote class="comment">
+        <h3 id="nut_and_bolt-comments">
+<img class="emoji" title=":nut_and_bolt:" alt=":nut_and_bolt:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f529.png" height="20" width="20" align="absmiddle"> Comments</h3>
+        <ul>
+          <li>Edit the “Database/Build” to select “dm3”</li>
+          <li>Rename the datasets according to the samples</li>
+        </ul>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>Both files contain the reads that belong to chromosome 4 of a paired-end sample. The sequences are raw sequences from the sequencing machine, without any pretreatments. They need to be controlled for their quality.</p>
+
+<h2 id="quality-control">Quality control</h2>
+
+<p>For quality control, we use similar tools as described in <a href="../../NGS-QC/tutorials/dive_into_qc">NGS-QC tutorial</a>: <a href="https://www.bioinformatics.babraham.ac.uk/projects/fastqc/">FastQC</a> and <a href="https://www.bioinformatics.babraham.ac.uk/projects/trim_galore/">Trim Galore</a>.</p>
+
+<blockquote class="hands_on">
+  <h3 id="pencil2-hands-on-quality-control">
+<img class="emoji" title=":pencil2:" alt=":pencil2:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/270f.png" height="20" width="20" align="absmiddle"> Hands-on: Quality control</h3>
+
+  <ol>
+    <li>
+      <p><strong>FastQC</strong> <img class="emoji" title=":wrench:" alt=":wrench:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f527.png" height="20" width="20" align="absmiddle">: Run FastQC on both FastQ files to control the quality of the reads</p>
+
+      <blockquote class="question">
+        <h3 id="question-questions">
+<img class="emoji" title=":question:" alt=":question:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2753.png" height="20" width="20" align="absmiddle"> Questions</h3>
+
+        <ol>
+          <li>What is the read length?</li>
+          <li>
+            <p>Is there anything what you find striking when you compare both reports?</p>
+
+            <details>
+<summary>Click to view answers</summary>
+<ol type="1">
+<li>The read length is 37 bp</li>
+<li>Both reports for GSM461177_untreat_paired_chr4_R1 and for GSM461177_untreat_paired_chr4_R2 are quite ok. For GSM461177_untreat_paired_chr4_R1, there is several warnings and an issue on the Kmer content. For GSM461177_untreat_paired_chr4_R2, the quality in the 2nd tile is bad (maybe because of some event during sequencing). We need to be careful for the quality treatment and to do it with paired-end information</li>
+</ol>
+</details>
+          </li>
+        </ol>
+      </blockquote>
+    </li>
+    <li>
+      <p><strong>Trim Galore</strong> <img class="emoji" title=":wrench:" alt=":wrench:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f527.png" height="20" width="20" align="absmiddle">: Treat for the quality of sequences by running Trim Galore on the paired-end datasets</p>
+
+      <blockquote class="question">
+        <h3 id="question-questions-1">
+<img class="emoji" title=":question:" alt=":question:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2753.png" height="20" width="20" align="absmiddle"> Questions</h3>
+
+        <p>Why is Trim Galore run once on the paired-end dataset and not twice on each dataset?</p>
+
+        <details>
+<summary>Click to view answers</summary>
+Trim Galore can remove sequences if they become too short during the trimming process. For paired-end files Trim Galore! removes entire sequence pairs if one (or both) of the two reads became shorter than the set length cutoff. Reads of a read-pair that are longer than a given threshold but for which the partner read has become too short can optionally be written out to single-end files. This ensures that the information of a read pair is not lost entirely if only one read is of good quality.
+</details>
+      </blockquote>
+    </li>
+    <li>
+      <p><strong>FastQC</strong> <img class="emoji" title=":wrench:" alt=":wrench:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f527.png" height="20" width="20" align="absmiddle">: Re-run FastQC on Trim Galore’s outputs and inspect the differences</p>
+
+      <blockquote class="question">
+        <h3 id="question-questions-2">
+<img class="emoji" title=":question:" alt=":question:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2753.png" height="20" width="20" align="absmiddle"> Questions</h3>
+
+        <ol>
+          <li>How are the changes in the read length?</li>
+          <li>
+            <p>Is there any characteristics impacted by Trim Galore?</p>
+
+            <details>
+<summary>Click to view answers</summary>
+<ol type="1">
+<li>The read length is then now from 20 to 37 bp</li>
+<li>For GSM461177_untreat_paired_chr4_R1, the per base sequence content is now red. For GSM461177_untreat_paired_chr4_R2, the per tile sequence quality is still bad but now also the per base sequence content and the Kmer Content</li>
+</ol>
+</details>
+          </li>
+        </ol>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>As the genome of <em>Drosophila melanogaster</em> is known and assembled, we can use this information and map the sequences on this genome to identify the effects of Pasilla gene depletion on splicing events.</p>
+
+<h1 id="mapping">Mapping</h1>
+
+<p>To make sense of the reads, their positions within <em>Drosophila melanogaster</em> genome must be determined. This process is known as aligning or ‘mapping’ the reads to the reference genome.</p>
+
+<blockquote>
+  <h3 id="nut_and_bolt-comment">
+<img class="emoji" title=":nut_and_bolt:" alt=":nut_and_bolt:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f529.png" height="20" width="20" align="absmiddle"> Comment</h3>
+
+  <p class="comment">Do you want to learn more about the principles behind mapping? Follow our <a href="../../NGS-mapping">training</a></p>
+</blockquote>
+
+<p>Because in the case of a eukaryotic transcriptome, most reads originate from processed mRNAs lacking exons, they cannot be simply mapped back to the genome as we normally do for DNA data. Instead the reads must be separated into two categories:</p>
+
+<ul>
+  <li>Reads that map entirely within exons</li>
+  <li>Reads that cannot be mapped within an exon across their entire length because they span two or more exons</li>
+</ul>
+
+<p>Spliced mappers have been developed to efficiently map transcript-derived reads against genomes. <a href="https://ccb.jhu.edu/software/tophat/index.shtml">TopHat</a> was one of the first tools designed specifically to address this problem:</p>
+
+<ol>
+  <li>Identification of potential exons using reads that do map to the genome</li>
+  <li>Generation of possible splices between neighboring exons</li>
+  <li>Comparison of reads that did not initially map to the genome against these <em>in silico</em> created junctions</li>
+</ol>
+
+<p><img src="../../images/tophat2.png" alt=""></p>
+
+<p><em><a href="https://genomebiology.biomedcentral.com/articles/10.1186/gb-2013-14-4-r36">Kim et al., Genome Biology, 2013</a></em></p>
+
+<p>Here, we will use HISAT2, a successor to TopHat2 that is faster with low memory requirements.</p>
+
+<p>To run efficiently the mapping, HISAT2 needs to know on important parameters about the sequencing library: the library type.</p>
+
+<p>This information should usually come with your FASTQ files, ask your sequencing facility! If not, try to find them on the site where you downloaded the data or in the corresponding publication. Another option is to estimate these parameters with a <em>preliminary mapping</em> of a <em>downsampled</em> file and some analysis programs. Afterward, the actual mapping can be redone on the original files with the optimized parameters.</p>
+
+<h2 id="preliminary-mapping">Preliminary mapping</h2>
+
+<p>In a preliminary mapping, we will estimate the library type to run HISAT2 efficiently afterwards.</p>
+
+<blockquote class="comment">
+  <h3 id="nut_and_bolt-comment-1">
+<img class="emoji" title=":nut_and_bolt:" alt=":nut_and_bolt:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f529.png" height="20" width="20" align="absmiddle"> Comment</h3>
+  <p>This step is not necessary if you don’t need to estimate the library type of your data.</p>
+</blockquote>
+
+<p>The library type corresponds to a protocol used to generate the data: which strand the RNA fragment is synthesized from.</p>
+
+<p><img src="../../images/strand_library_type.png" alt=""></p>
+
+<p><em><a href="http://onetipperday.sterding.com/2012/07/how-to-tell-which-library-type-to-use.html">Credit: Zhao Zhang</a></em></p>
+
+<p>In the previous illustration, you could see that for example dUTP method is to only sequence the strand from the first strand synthesis (the original RNA strand is degradated due to the dUTP incorporated).</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Examples of protocol</th>
+      <th>Description</th>
+      <th>Library Type (HISAT2)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Standard Illumina</td>
+      <td>Reads from the left-most end of the fragment (in transcript coordinates) map to the transcript strand, and the right-most end maps to the opposite strand</td>
+      <td>Unstranded (default)</td>
+    </tr>
+    <tr>
+      <td>dUTP, NSR, NNSR</td>
+      <td>Same as above except we enforce the rule that the right-most end of the fragment (in transcript coordinates) is the first sequenced (or only sequenced for single-end reads). Equivalently, it is assumed that only the strand generated during first strand synthesis is sequenced.</td>
+      <td>First strand (FR/F)</td>
+    </tr>
+    <tr>
+      <td>Ligation, Standard SOLiD</td>
+      <td>Same as above except we enforce the rule that the left-most end of the fragment (in transcript coordinates) is the first sequenced (or only sequenced for single-end reads). Equivalently, it is assumed that only the strand generated during second strand synthesis is sequenced.</td>
+      <td>Second strand (RF/R)</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>If you do not know the library type, you can find it by yourself by mapping the reads on the reference genome and infer the library type from the mapping results by comparing reads mapping information to the annotation of the reference genome.</p>
+
+<p><img src="../../images/library_type_mapping.png" alt=""></p>
+
+<p>The sequencer always read from 5’ to 3’. So, in First Strand case, all reads from the left-most end of RNA fragment (always from 5’ to 3’) are mapped to transcript-strand, and (for pair-end sequencing) reads from the right-most end are always mapped to the opposite strand.</p>
+
+<p>We can now try to determine the library type of our data.</p>
+
+<blockquote class="hands_on">
+  <h3 id="pencil2-hands-on-determining-the-library-type">
+<img class="emoji" title=":pencil2:" alt=":pencil2:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/270f.png" height="20" width="20" align="absmiddle"> Hands-on: Determining the library type</h3>
+
+  <ol>
+    <li>
+      <p>Load the Ensembl gene annotation for <em>Drosophila melanogaster</em> (<a href="https://zenodo.org/record/290221/files/Drosophila_melanogaster.BDGP5.78.gtf"><code class="highlighter-rouge">Drosophila_melanogaster.BDGP5.78.gtf</code></a>) from <a href="https://dx.doi.org/10.5281/zenodo.290221">Zenodo</a> into your current Galaxy history and rename it</p>
+    </li>
+    <li>
+      <p><strong>Select first</strong> <img class="emoji" title=":wrench:" alt=":wrench:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f527.png" height="20" width="20" align="absmiddle">: Downsample the both FastQ files generated by Trim Galore to 200k or 1M reads</p>
+
+      <blockquote class="question">
+        <h3 id="question-questions-3">
+<img class="emoji" title=":question:" alt=":question:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2753.png" height="20" width="20" align="absmiddle"> Questions</h3>
+
+        <p>How many rows must be selected to conserve 200k reads?</p>
+
+        <details>
+<summary>Click to view answers</summary>
+In a FastQ file, a read corresponds to 4 lines. So to conserve 200,000 reads, 800,000 must be selected.
+</details>
+      </blockquote>
+    </li>
+    <li>
+<strong>HISAT2</strong> <img class="emoji" title=":wrench:" alt=":wrench:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f527.png" height="20" width="20" align="absmiddle">: Run <strong>HISAT2</strong> with:
+      <ul>
+        <li>“FASTQ” as “Input data format”</li>
+        <li>“Individual paired reads”</li>
+        <li>Downsampled “Trimmed reads pair 1” (Trim Galore output) as “Forward reads”</li>
+        <li>Downsampled “Trimmed reads pair 2” (Trim Galore output) as “Reverse reads”</li>
+        <li>“dm3” as reference genome</li>
+        <li>Default values for other parameters</li>
+      </ul>
+    </li>
+    <li>
+<strong>Infer Experiment</strong> <img class="emoji" title=":wrench:" alt=":wrench:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f527.png" height="20" width="20" align="absmiddle">: Run <strong>Infer Experiment</strong> to determine the library type:
+      <ul>
+        <li>HISAT2 output as “Input BAM/SAM file”</li>
+        <li>Drosophila annotation as “Reference gene model”</li>
+      </ul>
+    </li>
+    <li>
+      <p>Check the results and search the tool’s documentation for help on the meaning</p>
+
+      <blockquote class="comment">
+        <h3 id="nut_and_bolt-comment-2">
+<img class="emoji" title=":nut_and_bolt:" alt=":nut_and_bolt:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f529.png" height="20" width="20" align="absmiddle"> Comment</h3>
+        <p>As it is sometimes quite difficult to find out which settings correspond to those of other programs, the following table might be helpful to identify the library type:</p>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Sequencing type</th>
+              <th><strong>Infer Experiment</strong></th>
+              <th><strong>TopHat</strong></th>
+              <th><strong>HISAT2</strong></th>
+              <th><strong>htseq-count</strong></th>
+              <th><strong>featureCounts</strong></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Paired-End (PE)</td>
+              <td>“1++,1–,2+-,2-+”</td>
+              <td>“FR Second Strand”</td>
+              <td>“Second Strand F/FR”</td>
+              <td>“yes”</td>
+              <td>“1”</td>
+            </tr>
+            <tr>
+              <td>PE</td>
+              <td>“1+-,1-+,2++,2–”</td>
+              <td>“FR First Strand”</td>
+              <td>“First Strand R/RF”</td>
+              <td>“reverse”</td>
+              <td>“2”</td>
+            </tr>
+            <tr>
+              <td>Single-End (SE)</td>
+              <td>”++,–”</td>
+              <td>“FR Second Strand”</td>
+              <td>“Second Strand F/FR”</td>
+              <td>“yes”</td>
+              <td>“1”</td>
+            </tr>
+            <tr>
+              <td>SE</td>
+              <td>”+-,-+”</td>
+              <td>“FR First Strand”</td>
+              <td>“First Strand R/RF”</td>
+              <td>“reverse”</td>
+              <td>“2”</td>
+            </tr>
+            <tr>
+              <td>SE,PE</td>
+              <td>undecided</td>
+              <td>“FR Unstranded”</td>
+              <td>default</td>
+              <td>“no”</td>
+              <td>“0”</td>
+            </tr>
+          </tbody>
+        </table>
+
+      </blockquote>
+
+      <blockquote class="question">
+        <h3 id="question-question">
+<img class="emoji" title=":question:" alt=":question:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2753.png" height="20" width="20" align="absmiddle"> Question</h3>
+
+        <ol>
+          <li>Which fraction of the different type of library type?</li>
+          <li>
+            <p>Which library type do you chose? What is the correspondance in <strong>HISAT2</strong>?</p>
+
+            <details>
+<summary>Click to view answer</summary>
+<ol type="1">
+<li>Fraction of reads explained by "1++,1--,2+-,2-+": 0.0151 and Fraction of reads explained by "1+-,1-+,2++,2--": 0.9843</li>
+<li>The library type seems then to be First Strand.</li>
+</ol>
+</details>
+          </li>
+        </ol>
+      </blockquote>
+    </li>
+  </ol>
+</blockquote>
+
+<h2 id="actual-mapping">Actual mapping</h2>
+
+<p>We can now map all the RNA sequences on the <em>Drosophila melanogaster</em> genome using HISAT2.</p>
+
+<blockquote class="hands_on">
+  <h3 id="pencil2-hands-on-spliced-mapping">
+<img class="emoji" title=":pencil2:" alt=":pencil2:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/270f.png" height="20" width="20" align="absmiddle"> Hands-on: Spliced mapping</h3>
+
+  <ol>
+    <li>
+<strong>HISAT2</strong> <img class="emoji" title=":wrench:" alt=":wrench:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f527.png" height="20" width="20" align="absmiddle">: Run <strong>HISAT2</strong> with:
+      <ul>
+        <li>“FASTQ” as “Input data format”</li>
+        <li>“Individual paired reads”</li>
+        <li>“Trimmed reads pair 1” (Trim Galore output) as “Forward reads”</li>
+        <li>“Trimmed reads pair 2” (Trim Galore output) as “Reverse reads”</li>
+        <li>“dm3” as reference genome</li>
+        <li>Default values for other parameters except “Spliced alignment parameters”</li>
+        <li>“Specify strand-specific information” to the previously determined value</li>
+        <li>
+<code class="highlighter-rouge">Drosophila_melanogaster.BDGP5.78.gtf</code> as “GTF file with known splice sites”</li>
+      </ul>
+    </li>
+    <li>Inspect the mapping statistics
+      <ul>
+        <li>Click on “View details” (Warning icon)</li>
+        <li>Click on “stderr” (Tool Standard Error)</li>
+      </ul>
+
+      <blockquote class="question">
+        <h3 id="question-question-1">
+<img class="emoji" title=":question:" alt=":question:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2753.png" height="20" width="20" align="absmiddle"> Question</h3>
+
+        <ol>
+          <li>How many paired reads were mapped 1 time? And how many paired reads were mapped more than 1 time?</li>
+          <li>How many reads were mapped but without their mate pair?</li>
+          <li>
+            <p>What is the overall alignment rate?</p>
+
+            <details>
+<summary>Click to view answer</summary>
+<ol type="1">
+<li>29.06% and 6.10%</li>
+<li>11,963 reads (the reads aligned discordantly 1 time)</li>
+<li>The overall alignment rate is 75.77%. It counts proportion of mapped reads: (12017+2486+11963+7390/2+1413/2)/40736</li>
+</ol>
+</details>
+          </li>
+        </ol>
+      </blockquote>
+    </li>
+  </ol>
+</blockquote>
+
+<p><strong>HISAT2</strong> generates a BAM file with the mapped reads.</p>
+
+<blockquote class="question">
+  <h3 id="question-question-2">
+<img class="emoji" title=":question:" alt=":question:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2753.png" height="20" width="20" align="absmiddle"> Question</h3>
+
+  <ol>
+    <li>What is a BAM file?</li>
+    <li>
+      <p>What does such file contain?</p>
+
+      <details>
+<summary>Click to view answer</summary>
+<ol type="1">
+<li>BAM file is the binary version of SAM file</li>
+<li>It contains information about the mapping: for each mapped read, the position on the reference genome, the mapping quality, ...</li>
+</ol>
+</details>
+    </li>
+  </ol>
+</blockquote>
+
+<p>The mapping exercise worked for you? Great! <img class="emoji" title=":tada:" alt=":tada:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f389.png" height="20" width="20" align="absmiddle"></p>
+
+<blockquote class="hands_on">
+  <h3 id="pencil2-optional-hands-on-map-other-datasets">
+<img class="emoji" title=":pencil2:" alt=":pencil2:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/270f.png" height="20" width="20" align="absmiddle"> (Optional) Hands-on: Map other datasets</h3>
+
+  <p>You can do the same process on the other sequence files available on <a href="https://dx.doi.org/10.5281/zenodo.290221">Zenodo</a></p>
+
+  <ul>
+    <li>Paired-end data
+      <ul>
+        <li>
+<code class="highlighter-rouge">GSM461178_untreat_paired_chr4_R1</code> and <code class="highlighter-rouge">GSM461178_untreat_paired_chr4_R2</code>
+</li>
+        <li>
+<code class="highlighter-rouge">GSM461180_treat_paired_chr4_R1</code> and <code class="highlighter-rouge">GSM461180_treat_paired_chr4_R2</code>
+</li>
+        <li>
+<code class="highlighter-rouge">GSM461181_treat_paired_chr4_R1</code> and <code class="highlighter-rouge">GSM461181_treat_paired_chr4_R2</code>
+</li>
+      </ul>
+    </li>
+    <li>Single-end data
+      <ul>
+        <li><code class="highlighter-rouge">GSM461176_untreat_single_chr4</code></li>
+        <li><code class="highlighter-rouge">GSM461179_treat_single_chr4</code></li>
+        <li><code class="highlighter-rouge">GSM461182_untreat_single_chr4</code></li>
+      </ul>
+    </li>
+  </ul>
+
+  <p>This is really interesting to redo on the other datasets, specially to check how the parameters are inferred given the different type of data.</p>
+</blockquote>
+
+<h2 id="inspection-of-hisat2-results">Inspection of HISAT2 results</h2>
+
+<p>The BAM file contains information about where the reads are mapped on the reference genome. But it is binary file and with the information for more than 3 millions of reads, it makes it difficult to visualize it, to inspect how the reads are mapped on the reference genome.</p>
+
+<p>There is</p>
+
+<blockquote class="hands_on">
+  <h3 id="pencil2-hands-on-inspection-of-hisat2-results">
+<img class="emoji" title=":pencil2:" alt=":pencil2:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/270f.png" height="20" width="20" align="absmiddle"> Hands-on: Inspection of HISAT2 results</h3>
+
+  <ol>
+    <li>
+      <p><strong>IGV</strong> <img class="emoji" title=":wrench:" alt=":wrench:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f527.png" height="20" width="20" align="absmiddle">: Visualize the HISAT2 output BAM file, particularly the region on chromosome 4 between 560 kb to 600 kb (<code class="highlighter-rouge">chr4:560,000-600,000</code>)</p>
+
+      <blockquote class="comment">
+        <h3 id="nut_and_bolt-comment-3">
+<img class="emoji" title=":nut_and_bolt:" alt=":nut_and_bolt:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f529.png" height="20" width="20" align="absmiddle"> Comment</h3>
+
+        <p>Check <a href="https://software.broadinstitute.org/software/igv/AlignmentData">IGV documentation</a></p>
+      </blockquote>
+
+      <blockquote class="question">
+        <h3 id="question-question-3">
+<img class="emoji" title=":question:" alt=":question:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2753.png" height="20" width="20" align="absmiddle"> Question</h3>
+
+        <ol>
+          <li>Which information does appear on the top in grey?</li>
+          <li>
+            <p>What does the horizontal bar in the following screenshot represent?</p>
+
+            <p><img src="../../images/junction_igv_screenshot.png" alt=""></p>
+
+            <details>
+<summary>Click to view answers</summary>
+<ol type="1">
+<li>The coverage plot: the sum of mapped reads at each position</li>
+<li>They represent the junctions events (or splice sites): when reads are mapped over an intron</li>
+</ol>
+</details>
+          </li>
+        </ol>
+      </blockquote>
+    </li>
+    <li>
+      <p><strong>IGV</strong> <img class="emoji" title=":wrench:" alt=":wrench:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f527.png" height="20" width="20" align="absmiddle">: Unzoom to <code class="highlighter-rouge">chr4:560,000-600,000</code> and inspect the splice junctions using a <strong>Sashimi plot</strong></p>
+
+      <blockquote class="tip">
+        <h3 id="bulb-tip-creation-of-a-sashimi-plot">
+<img class="emoji" title=":bulb:" alt=":bulb:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f4a1.png" height="20" width="20" align="absmiddle"> Tip: Creation of a Sashimi plot</h3>
+
+        <ul>
+          <li>Right click on the BAM file</li>
+          <li>Select <strong>Sashimi Plot</strong> from the context menu</li>
+        </ul>
+      </blockquote>
+
+      <blockquote class="question">
+        <h3 id="question-question-4">
+<img class="emoji" title=":question:" alt=":question:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2753.png" height="20" width="20" align="absmiddle"> Question</h3>
+
+        <p><img src="../../images/hisat_igv_sashimi.png" alt=""></p>
+
+        <ol>
+          <li>What does the vertical bar graph represent? And the numbered arcs?</li>
+          <li>What does the number means?</li>
+          <li>
+            <p>Why do we observe 4 different blue group of linked boxes on the bottom?</p>
+
+            <details>
+<summary>Click to view answers</summary>
+<ol type="1">
+<li>The coverage for each alignment track is plotted as a bar graph. Arcs representing splice junctions connecting exons</li>
+<li>Arcs display the number of reads split across the junction (junction depth). </li>
+<li>The 4 group of linked boxes on the bottom represent the 4 possible RNAs, changing because of different splicing events of the first intron.</li>
+</ol>
+</details>
+          </li>
+        </ol>
+      </blockquote>
+
+      <blockquote class="comment">
+        <h3 id="nut_and_bolt-comment-4">
+<img class="emoji" title=":nut_and_bolt:" alt=":nut_and_bolt:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f529.png" height="20" width="20" align="absmiddle"> Comment</h3>
+
+        <p>Check <a href="https://software.broadinstitute.org/software/igv/Sashimi">IGV documentation on Sashimi plots</a> to find some clues</p>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>After the mapping, we have in the generated mapping file the information about where the reads are mapped on the reference genome. So for each mapped read, we know where it is mapped and how good it was mapped.</p>
+
+<p>The next step in the RNA-Seq data analysis is quantification of expression level of the genomic features (gene, transcript, exons, …) to be able then to compare several samples for the different expression analysis. The quantification consist into taking each known genomic feature (<em>e.g.</em> gene) of the reference genome and then counting how many reads are mapped on this genomic feature. So, in this step, we start with an information per mapped reads to end with an information per genomic feature.</p>
+
+<blockquote class="comment">
+  <h3 id="nut_and_bolt-comment-5">
+<img class="emoji" title=":nut_and_bolt:" alt=":nut_and_bolt:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f529.png" height="20" width="20" align="absmiddle"> Comment</h3>
+
+  <p>The quantification depends on the definition of the genomic features of the reference genome, and then on the annotations. We strongly recommend you to use an annotation corresponding to the same version of the reference genome you used for the mapping.</p>
+</blockquote>
+
+<p>To identify exons that are regulated by the Pasilla gene, we need to identify genes and exons which are differentially expressed between samples with PS gene depletion and control samples.
+In this tutorial, we will then analyze the differential gene expression, but also the differential exon usage.</p>
+
+<h1 id="analysis-of-the-differential-gene-expression">Analysis of the differential gene expression</h1>
+
+<p>We will first investigate the differential gene expression to identify which genes are impacted by the Pasilla gene depletion</p>
+
+<h2 id="count-the-number-of-reads-per-annotated-gene">Count the number of reads per annotated gene</h2>
+
+<p>To compare the expression of single genes between different conditions (<em>e.g.</em> with or without PS depletion), an first essential step is to quantify the number of reads per gene. <a href="https://www-huber.embl.de/users/anders/HTSeq/doc/count.html"><strong>HTSeq-count</strong></a> is one of the most popular tool for gene quantification.</p>
+
+<p>To quantify the number of reads mapped to a gene, an annotation of the gene position is needed. We already upload on Galaxy the <code class="highlighter-rouge">Drosophila_melanogaster.BDGP5.78.gtf</code> with the Ensembl gene annotation for <em>Drosophila melanogaster</em>.</p>
+
+<p>In principle, the counting of reads overlapping with genomic features is a fairly simple task. But there are some details that need to be decided, such how to handle multi-mapping reads. <strong>HTSeq-count</strong> offers 3 choices (“union”, “intersection_strict” and “intersection_nonempty”) to handle read mapping to multiple locations, reads overlapping introns, or reads that overlap more than one genomic feature:</p>
+
+<p><img src="../../images/htseq_count.png" alt=""></p>
+
+<p><em><a href="https://www-huber.embl.de/users/anders/HTSeq/doc/count.html">HTSeq documentation</a></em></p>
+
+<p>The recommended mode is “union”, which counts overlaps even if a read only shares parts of its sequence with a genomic feature and disregards reads that overlap more than one feature.</p>
+
+<blockquote class="hands_on">
+  <h3 id="pencil2-hands-on-counting-the-number-of-reads-per-annotated-gene">
+<img class="emoji" title=":pencil2:" alt=":pencil2:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/270f.png" height="20" width="20" align="absmiddle"> Hands-on: Counting the number of reads per annotated gene</h3>
+
+  <ol>
+    <li>
+<strong>HTSeq-count</strong> <img class="emoji" title=":wrench:" alt=":wrench:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f527.png" height="20" width="20" align="absmiddle">: Run <strong>HTSeq-count</strong> on the BAM file with
+      <ul>
+        <li>
+<code class="highlighter-rouge">Drosophila_melanogaster.BDGP5.78.gtf</code> as “GFF file”</li>
+        <li>The “Union” mode</li>
+        <li>A “Minimum alignment quality” of 10</li>
+        <li>Appropriate value for “Stranded” option</li>
+      </ul>
+    </li>
+    <li>
+      <p>Inspect the result files</p>
+
+      <blockquote class="question">
+        <h3 id="question-question-5">
+<img class="emoji" title=":question:" alt=":question:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2753.png" height="20" width="20" align="absmiddle"> Question</h3>
+
+        <ol>
+          <li>Which information does the result file contain?</li>
+          <li>
+            <p>Which feature has the most reads mapped on it?</p>
+
+            <details>
+<summary>Click to view answers</summary>
+<ol type="1">
+<li>The useful result file is a tabular file with two columns: the gene id and the number of reads mapped on the corresponding gene</li>
+<li>To display the most found feature, we need first to sort the output file with the feature and the number of reads found for these feature. We do that using Sort tool, on the second column and in descending order. And we found that FBgn0017545 is the feature with the most reads mapped on it with 4,030 reads.</li>
+</ol>
+</details>
+          </li>
+        </ol>
+      </blockquote>
+    </li>
+  </ol>
+</blockquote>
+
+<h2 id="analysis-of-the-differential-gene-expression-1">Analysis of the differential gene expression</h2>
+
+<p>In the previous section, we counted only reads that mapped to genes of chromosome 4 and for only one sample. To be able to identify differential gene expression induced by PS depletion, all datasets (3 treated and 4 untreated) must be analyzed with the similar procedure and for whole genome.</p>
+
+<p>For time and computer saving, we run the previous steps for you and obtain 7 count files, available on <a href="https://dx.doi.org/10.5281/zenodo.290221">Zenodo</a>.</p>
+
+<p>These files contain for each gene of Drosophila the number of reads mapped to it. We could compare directly the files and then having the differential gene expression. But the number of sequenced reads mapped to a gene depends on:</p>
+
+<ul>
+  <li>Its own expression level</li>
+  <li>Its length</li>
+  <li>The sequencing depth of the sample</li>
+  <li>The expression of all other genes within the sample</li>
+</ul>
+
+<p>Either for within or for inter-sample comparison, the gene counts need to be normalized. We can then use the Differential Gene Expression (DGE) analysis, whose two basic tasks are:</p>
+
+<ul>
+  <li>Estimate the biological variance using the replicates for each condition</li>
+  <li>Estimate the significance of expression differences between any two conditions</li>
+</ul>
+
+<p>This expression analysis is estimated from read counts and attempts are made to correct for variability in measurements using replicates that are absolutely essential accurate results. For your own analysis, we advice you to use at least 3, better 5 biological replicates per condition. You can have different number of replicates per condition.</p>
+
+<p><a href="https://bioconductor.org/packages/release/bioc/html/DESeq2.html"><strong>DESeq2</strong></a> is a great tool for DGE analysis. It takes read counts produced by <strong>HTseq-count</strong>, combine them into a big table (with gene in the rows and samples in the columns) and applies size factor normalization:</p>
+
+<ul>
+  <li>Computation for each gene of the geometric mean of read counts across all samples</li>
+  <li>Division of every gene count by the geometric mean</li>
+  <li>Use of the median of these ratios as sample’s size factor for normalization</li>
+</ul>
+
+<p>Multiple factors with several levels can then be incorporated in the analysis. With the normalization, we can then compare with statistical liability the gene expression of different levels of a factor.</p>
+
+<p>In our example, we have samples with two varying factors that can explain differences in gene expression:</p>
+
+<ul>
+  <li>Treatment (either treated or untreated)</li>
+  <li>Sequencing type (paired-end or single-end)</li>
+</ul>
+
+<p>Here treatment is the primary factor which we are interested in. The sequencing type is some further information that we know about the data that might effect the analysis. This particular multi-factor analysis allows us to assess the effect of the treatment taking also the sequencing type into account.</p>
+
+<blockquote class="comment">
+  <h3 id="nut_and_bolt-comment-6">
+<img class="emoji" title=":nut_and_bolt:" alt=":nut_and_bolt:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f529.png" height="20" width="20" align="absmiddle"> Comment</h3>
+
+  <p>We recommend you to add as many factors as you think that may affect the gene expression. It can be the sequencing type like here, but it can also be the manipulation (if different persons are involved in the library preparation), …</p>
+</blockquote>
+
+<blockquote class="hands_on">
+  <h3 id="pencil2-hands-on-analysis-of-the-differential-gene-expression-1">
+<img class="emoji" title=":pencil2:" alt=":pencil2:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/270f.png" height="20" width="20" align="absmiddle"> Hands-on: Analysis of the differential gene expression (1)</h3>
+
+  <ol>
+    <li>Create a new history</li>
+    <li>Import the seven count files from <a href="https://dx.doi.org/10.5281/zenodo.290221">Zenodo</a>
+      <ul>
+        <li>
+<code class="highlighter-rouge">GSM461176_untreat_single.deseq.counts</code>
+   - <code class="highlighter-rouge">GSM461177_untreat_paired.deseq.counts</code>
+</li>
+        <li><code class="highlighter-rouge">GSM461178_untreat_paired.deseq.counts</code></li>
+        <li><code class="highlighter-rouge">GSM461179_treat_single.deseq.counts</code></li>
+        <li><code class="highlighter-rouge">GSM461180_treat_paired.deseq.counts</code></li>
+        <li><code class="highlighter-rouge">GSM461181_treat_paired.deseq.counts</code></li>
+        <li><code class="highlighter-rouge">GSM461182_untreat_single.deseq.counts</code></li>
+      </ul>
+    </li>
+    <li>
+<strong>DESeq2</strong> <img class="emoji" title=":wrench:" alt=":wrench:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f527.png" height="20" width="20" align="absmiddle">: Run <strong>DESeq2</strong> with:
+      <ul>
+        <li>
+          <p>“Treatment” as first factor with “treated” and “untreated” as levels and selection of count files corresponding to both levels</p>
+
+          <blockquote class="tip">
+            <h3 id="bulb-tip">
+<img class="emoji" title=":bulb:" alt=":bulb:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f4a1.png" height="20" width="20" align="absmiddle"> Tip</h3>
+
+            <p>You can select several files by keeping the CTRL (or COMMAND) key pressed and clicking on the interesting files</p>
+          </blockquote>
+        </li>
+        <li>
+          <p>“Sequencing” as second factor with “PE” and “SE” as levels and selection of count files corresponding to both levels</p>
+        </li>
+      </ul>
+
+      <blockquote class="comment">
+        <h3 id="nut_and_bolt-comment-7">
+<img class="emoji" title=":nut_and_bolt:" alt=":nut_and_bolt:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f529.png" height="20" width="20" align="absmiddle"> Comment</h3>
+
+        <p>File names have all information needed</p>
+      </blockquote>
+    </li>
+  </ol>
+</blockquote>
+
+<p>The first output of <strong>DESeq2</strong> is a tabular file. The columns are:</p>
+
+<ol>
+  <li>Gene identifiers</li>
+  <li>Mean normalized counts, averaged over all samples from both conditions</li>
+  <li>
+    <p>Logarithm (to basis 2) of the fold change</p>
+
+    <p>The log2 fold changes are based on primary factor level 1 vs. factor level 2. The order of factor levels is then important. For example, for the factor ‘Treatment’, DESeq2 computes fold changes of ‘treated’ samples against ‘untreated’, <em>i.e.</em> the values correspond to up- or downregulations of genes in treated samples.</p>
+  </li>
+  <li>Standard error estimate for the log2 fold change estimate</li>
+  <li>
+<a href="https://en.wikipedia.org/wiki/Wald_test">Wald</a> statistic</li>
+  <li>
+<em>p</em>-value for the statistical significance of this change</li>
+  <li>
+<em>p</em>-value adjusted for multiple testing with the Benjamini-Hochberg procedure which controls false discovery rate (<a href="https://en.wikipedia.org/wiki/False_discovery_rate">FDR</a>)</li>
+</ol>
+
+<blockquote class="hands_on">
+  <h3 id="pencil2-hands-on-analysis-of-the-differential-gene-expression-2">
+<img class="emoji" title=":pencil2:" alt=":pencil2:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/270f.png" height="20" width="20" align="absmiddle"> Hands-on: Analysis of the differential gene expression (2)</h3>
+
+  <ol>
+    <li>
+      <p><strong>Filter</strong> <img class="emoji" title=":wrench:" alt=":wrench:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f527.png" height="20" width="20" align="absmiddle">: Run <strong>Filter</strong> to extract genes with a significant change in gene expression (adjusted <em>p</em>-value equal or below 0.05) between treated and untreated samples</p>
+
+      <blockquote class="question">
+        <h3 id="question-question-6">
+<img class="emoji" title=":question:" alt=":question:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2753.png" height="20" width="20" align="absmiddle"> Question</h3>
+
+        <p>How many genes have a significant change in gene expression between these conditions?</p>
+
+        <details>
+<summary>Click to view answers</summary>
+To filter, you need to add the expression "c7&lt;0.05". And we get 751 genes (5.05%) with a significant change in gene expression between treated and untreated samples.
+</details>
+      </blockquote>
+
+      <blockquote class="comment">
+        <h3 id="nut_and_bolt-comment-8">
+<img class="emoji" title=":nut_and_bolt:" alt=":nut_and_bolt:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f529.png" height="20" width="20" align="absmiddle"> Comment</h3>
+
+        <p>The file with the independent filtered results can be used for further downstream analysis as it excludes genes with only few read counts as these genes will not be considered as significantly differentially expressed.</p>
+      </blockquote>
+    </li>
+    <li>
+      <p><strong>Filter</strong> <img class="emoji" title=":wrench:" alt=":wrench:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f527.png" height="20" width="20" align="absmiddle">: Extract genes that are significantly up and downregulated in treated samples</p>
+
+      <blockquote class="comment">
+        <h3 id="nut_and_bolt-comments-1">
+<img class="emoji" title=":nut_and_bolt:" alt=":nut_and_bolt:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f529.png" height="20" width="20" align="absmiddle"> Comments</h3>
+        <p>Rename your datasets for the downstream analyses</p>
+      </blockquote>
+
+      <blockquote class="question">
+        <h3 id="question-question-7">
+<img class="emoji" title=":question:" alt=":question:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2753.png" height="20" width="20" align="absmiddle"> Question</h3>
+
+        <p>Are there more upregulated or downregulated genes in the treated samples?</p>
+
+        <details>
+<summary>Click to view answers</summary>
+To obtain the up-regulated genes, we filter the previously generated file (with the significant change in gene expression) with the expression "c3&gt;0" (the log2 fold changes must be greater than 0). We obtain 331 genes (44.07% of the genes with a significant change in gene expression). For the down-regulated genes, we did the inverse and we 420 genes (55.93% of the genes with a significant change in gene expression)
+</details>
+      </blockquote>
+    </li>
+  </ol>
+</blockquote>
+
+<p>In addition to the list of genes, <strong>DESeq2</strong> outputs a graphical summary of the results, useful to evaluate the quality of the experiment:</p>
+
+<ol>
+  <li>Histogram of <em>p</em>-values for all tests</li>
+  <li>
+<a href="https://en.wikipedia.org/wiki/MA_plot">MA plot</a>: global view of the relationship between the expression change of conditions (log ratios, M), the average expression strength of the genes (average mean, A), and the ability of the algorithm to detect differential gene expression. The genes that passed the significance threshold (adjusted p-value &lt; 0.1) are colored in red.</li>
+  <li>
+    <p>Principal Component Analysis (<a href="https://en.wikipedia.org/wiki/Principal_component_analysis">PCA</a>) and the first two axes</p>
+
+    <p>Each replicate is plotted as an individual data point. This type of plot is useful for visualizing the overall effect of experimental covariates and batch effects.</p>
+
+    <blockquote class="question">
+      <h3 id="question-questions-4">
+<img class="emoji" title=":question:" alt=":question:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2753.png" height="20" width="20" align="absmiddle"> Questions</h3>
+
+      <ol>
+        <li>What is the first axis separating?</li>
+        <li>
+          <p>And the second axis?</p>
+
+          <details>
+<summary>Click to view answers</summary>
+<ol type="1">
+<li>The first axis is seperating the treated samples from the untreated samples, as defined when DESeq2 was launched</li>
+<li>The second axis is separating the single-end datasets from the paired-end datasets</li>
+</ol>
+</details>
+        </li>
+      </ol>
+    </blockquote>
+  </li>
+  <li>
+    <p>Heatmap of sample-to-sample distance matrix: overview over similarities and dissimilarities between samples</p>
+
+    <blockquote class="question">
+      <h3 id="question-questions-5">
+<img class="emoji" title=":question:" alt=":question:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2753.png" height="20" width="20" align="absmiddle"> Questions</h3>
+
+      <p>How are the samples grouped?</p>
+
+      <details>
+   <summary>Click to view answers</summary>
+   <ol type="1">    
+   <li>They are first grouped depending on the treatment (the first factor) and after on the library type (the second factor), as defined when DESeq2 was launched</li>
+   </ol>
+   </details>
+    </blockquote>
+  </li>
+  <li>
+    <p>Dispersion estimates: gene-wise estimates (black), the fitted values (red), and the final maximum a posteriori estimates used in testing (blue)</p>
+
+    <p>This dispersion plot is typical, with the final estimates shrunk from the gene-wise estimates towards the fitted estimates. Some gene-wise estimates are flagged as outliers and not shrunk towards the fitted value. The amount of shrinkage can be more or less than seen here, depending on the sample size, the number of coefficients, the row mean and the variability of the gene-wise estimates.</p>
+  </li>
+</ol>
+
+<p>For more information about <strong>DESeq2</strong> and its outputs, you can have a look at <a href="https://www.bioconductor.org/packages/release/bioc/manuals/DESeq2/man/DESeq2.pdf"><strong>DESeq2</strong> documentation</a>.</p>
+
+<h2 id="analysis-of-the-functional-enrichment-among-differentially-expressed-genes">Analysis of the functional enrichment among differentially expressed genes</h2>
+
+<p>We have extracted genes that are differentially expressed in treated (with PS gene depletion) samples compared to untreated samples. We would like to know the functional enrichment among the differentially expressed genes.</p>
+
+<p>The Database for Annotation, Visualization and Integrated Discovery (<a href="https://david.ncifcrf.gov/">DAVID</a>) provides a comprehensive set of functional annotation tools for investigators to understand the biological meaning behind large lists of genes.</p>
+
+<p>The query to DAVID can be done only on 100 genes. So, we will need to select the ones where the most interested in.</p>
+
+<blockquote class="hands_on">
+  <h3 id="pencil2-hands-on">
+<img class="emoji" title=":pencil2:" alt=":pencil2:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/270f.png" height="20" width="20" align="absmiddle"> Hands-on:</h3>
+
+  <ol>
+    <li>
+<strong>Sort</strong> <img class="emoji" title=":wrench:" alt=":wrench:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f527.png" height="20" width="20" align="absmiddle">: Sort the 2 datasets generated previously (upregulated genes and downregulated genes) given the log2 fold change, in descending or ascending order (to obtain the higher absolute log2 fold changes on the top)</li>
+    <li>
+<strong>Select first lines from a dataset</strong> <img class="emoji" title=":wrench:" alt=":wrench:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f527.png" height="20" width="20" align="absmiddle">: Extract the first 100 lines of sorted files</li>
+    <li>
+<strong>DAVID</strong> <img class="emoji" title=":wrench:" alt=":wrench:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f527.png" height="20" width="20" align="absmiddle">: Run <strong>DAVID</strong> on these files with
+      <ul>
+        <li>First column as “Column with identifiers”</li>
+        <li>“ENSEMBL_GENE_ID” as “Identifier type”</li>
+      </ul>
+
+      <p>The output of the <strong>DAVID</strong> tool is a HTML file with a link to the DAVID website.</p>
+    </li>
+    <li>
+      <p>Inspect the Functional Annotation Chart</p>
+
+      <blockquote class="question">
+        <h3 id="question-questions-6">
+<img class="emoji" title=":question:" alt=":question:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2753.png" height="20" width="20" align="absmiddle"> Questions</h3>
+
+        <p>What functional categories are the most represented?</p>
+
+        <details>
+<summary>Click to view answers</summary>
+The up-regulated genes are mostly related to membrane (in the number of genes). The most represented functional categories are linked to signal and pathways for the down-regulated genes.
+</details>
+      </blockquote>
+    </li>
+    <li>
+      <p>Inspect the Functional Annotation Clusterings</p>
+
+      <blockquote class="question">
+        <h3 id="question-questions-7">
+<img class="emoji" title=":question:" alt=":question:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2753.png" height="20" width="20" align="absmiddle"> Questions</h3>
+
+        <p>What functional annotations are the first clusters related to?</p>
+
+        <details>
+<summary>Click to view answers</summary>
+For the up-regulated genes, the first cluster is more composed of functions related to chaperone and stress response. The down-regulated genes are more linked to ligase activity.
+</details>
+      </blockquote>
+    </li>
+  </ol>
+</blockquote>
+
+<h1 id="inference-of-the-differential-exon-usage">Inference of the differential exon usage</h1>
+
+<p>Now, we would like to know the differential exon usage between treated (PS depleted) and untreated samples using RNA-seq exon counts. We will rework on the mapping results we generated previously.</p>
+
+<p>We will use <a href="https://www.bioconductor.org/packages/release/bioc/html/DEXSeq.html">DEXSeq</a>. DEXSeq detects high sensitivity genes, and in many cases exons, that are subject to differential exon usage. But first, as for the differential gene expression, we need to count the number of reads mapping the exons.</p>
+
+<h2 id="count-the-number-of-reads-per-exon">Count the number of reads per exon</h2>
+
+<p>This step is similar to the step of <a href="#count-the-number-of-reads-per-annotated-gene">counting the number of reads per annotated gene</a>. Here instead of HTSeq-count, we are using DEXSeq-Count.</p>
+
+<blockquote class="hands_on">
+  <h3 id="pencil2-hands-on-counting-the-number-of-reads-per-exon">
+<img class="emoji" title=":pencil2:" alt=":pencil2:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/270f.png" height="20" width="20" align="absmiddle"> Hands-on: Counting the number of reads per exon</h3>
+
+  <ol>
+    <li>
+<strong>DEXSeq-Count</strong> <img class="emoji" title=":wrench:" alt=":wrench:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f527.png" height="20" width="20" align="absmiddle">: Use the <strong>DEXSeq-Count</strong> to prepare the <em>Drosophila</em> annotations (<code class="highlighter-rouge">Drosophila_melanogaster.BDGP5.78.gtf</code>) to extract only exons with corresponding gene ids
+      <ul>
+        <li>“Prepare annotation” of “Mode of operation”</li>
+      </ul>
+
+      <p>The output is again a GTF file that is ready to be used for counting</p>
+    </li>
+    <li>
+<strong>DEXSeq-Count</strong> <img class="emoji" title=":wrench:" alt=":wrench:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f527.png" height="20" width="20" align="absmiddle">: Count reads using <strong>DEXSeq-Count</strong> with
+      <ul>
+        <li>HISAT2 output as “Input bam file”</li>
+        <li>The formatted GTF file</li>
+      </ul>
+    </li>
+    <li>
+      <p>Inspect the result files</p>
+
+      <blockquote class="question">
+        <h3 id="question-question-8">
+<img class="emoji" title=":question:" alt=":question:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2753.png" height="20" width="20" align="absmiddle"> Question</h3>
+
+        <p>Which exon has the most read mapped on it? From which gene has this exon beed extracted? Is it similar to the previous result with HTSeq-count?</p>
+
+        <details>
+<summary>Click to view answers</summary>
+FBgn0017545:004 is the exon with the most read mapped on it. It is part of FBgn0017545, the feature with the most reads mapped with HTSeq-count
+</details>
+      </blockquote>
+    </li>
+  </ol>
+</blockquote>
+
+<h2 id="differential-exon-usage">Differential exon usage</h2>
+
+<p>DEXSeq usage is similar to DESeq2. It uses similar statistics to find differentially used exons.</p>
+
+<p>As for DESeq2, in the previous step, we counted only reads that mapped to exons on chromosome 4 and for only one sample. To be able to identify differential exon usage induced by PS depletion, all datasets (3 treated and 4 untreated) must be analyzed with the similar procedure. For time saving, we did that for you. The results are available on <a href="https://dx.doi.org/10.5281/zenodo.290221">Zenodo</a>:</p>
+
+<ul>
+  <li>
+<a href="https://zenodo.org/record/290221/files/dexseq.gtf">dexseq.gtf</a>: the results of the running DEXSeq-count in ‘Prepare annotation’ mode</li>
+  <li>Seven files, counts files generated in ‘Count reads’ mode</li>
+</ul>
+
+<blockquote class="hands_on">
+  <h3 id="pencil2-hands-on-1">
+<img class="emoji" title=":pencil2:" alt=":pencil2:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/270f.png" height="20" width="20" align="absmiddle"> Hands-on:</h3>
+
+  <ol>
+    <li>Create a new history</li>
+    <li>Import the seven count files and the dexseq.gtf from <a href="https://dx.doi.org/10.5281/zenodo.290221">Zenodo</a>
+      <ul>
+        <li>
+<code class="highlighter-rouge">dexseq.gtf</code>
+   - <code class="highlighter-rouge">GSM461176_untreat_single.dexseq.counts</code>
+</li>
+        <li><code class="highlighter-rouge">GSM461177_untreat_paired.dexseq.counts</code></li>
+        <li><code class="highlighter-rouge">GSM461178_untreat_paired.dexseq.counts</code></li>
+        <li><code class="highlighter-rouge">GSM461179_treat_single.dexseq.counts</code></li>
+        <li><code class="highlighter-rouge">GSM461180_treat_paired.dexseq.counts</code></li>
+        <li><code class="highlighter-rouge">GSM461181_treat_paired.dexseq.counts</code></li>
+        <li><code class="highlighter-rouge">GSM461182_untreat_single.dexseq.counts</code></li>
+      </ul>
+    </li>
+    <li>
+<strong>DEXSeq</strong> <img class="emoji" title=":wrench:" alt=":wrench:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f527.png" height="20" width="20" align="absmiddle">: Run <strong>DEXSeq</strong> with
+      <ul>
+        <li>“Condition” as first factor with “treated” and “untreated” as levels and selection of count files corresponding to both levels</li>
+        <li>“Sequencing” as second factor with “PE” and “SE” as levels and selection of count files corresponding to both levels</li>
+      </ul>
+
+      <blockquote class="comment">
+        <h3 id="nut_and_bolt-comment-9">
+<img class="emoji" title=":nut_and_bolt:" alt=":nut_and_bolt:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f529.png" height="20" width="20" align="absmiddle"> Comment</h3>
+
+        <p>Unlike DESeq2, DEXSeq does not allow flexible primary factor names. Always use your primary factor name as “condition”</p>
+      </blockquote>
+    </li>
+  </ol>
+</blockquote>
+
+<p>Similarly to DESeq2, DEXSeq generates a table with:</p>
+
+<ol>
+  <li>Exon identifiers</li>
+  <li>Gene identifiers</li>
+  <li>Exon identifiers in the Gene</li>
+  <li>Mean normalized counts, averaged over all samples from both conditions</li>
+  <li>
+    <p>Logarithm (to basis 2) of the fold change</p>
+
+    <p>The log2 fold changes are based on primary factor level 1 vs. factor level 2. The order of factor levels is then important. For example, for the factor ‘Condition’, DESeq2 computes fold changes of ‘treated’ samples against ‘untreated’, <em>i.e.</em> the values correspond to up- or downregulations of genes in treated samples.</p>
+  </li>
+  <li>Standard error estimate for the log2 fold change estimate</li>
+  <li>
+<em>p</em>-value for the statistical significance of this change</li>
+  <li>
+<em>p</em>-value adjusted for multiple testing with the Benjamini-Hochberg procedure which controls false discovery rate (<a href="https://en.wikipedia.org/wiki/False_discovery_rate">FDR</a>)</li>
+</ol>
+
+<blockquote class="hands_on">
+  <h3 id="pencil2-hands-on-2">
+<img class="emoji" title=":pencil2:" alt=":pencil2:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/270f.png" height="20" width="20" align="absmiddle"> Hands-on:</h3>
+
+  <ol>
+    <li>
+      <p><strong>Filter</strong> <img class="emoji" title=":wrench:" alt=":wrench:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f527.png" height="20" width="20" align="absmiddle">: Run <strong>Filter</strong> to extract exons with a significant usage (adjusted <em>p</em>-value equal or below 0.05) between treated and untreated samples</p>
+
+      <blockquote class="question">
+        <h3 id="question-question-9">
+<img class="emoji" title=":question:" alt=":question:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2753.png" height="20" width="20" align="absmiddle"> Question</h3>
+
+        <p>How many exons have a significant change in usage between these conditions?</p>
+
+        <details>
+<summary>Click to view answers</summary>
+We get 38 exons (12.38%) with a significant usage change between treated and untreated samples
+</details>
+      </blockquote>
+    </li>
+  </ol>
+</blockquote>
+
+<h1 id="annotation-of-the-result-tables-with-gene-information">Annotation of the result tables with gene information</h1>
+
+<p>Unfortunately, in the process of counting, we loose all the information of the gene except its identifiant. In order to get the information back to our final counting tables, we can use a tool to make the correspondance between identifiant and annotation.</p>
+
+<blockquote class="hands_on">
+  <h3 id="pencil2-hands-on-3">
+<img class="emoji" title=":pencil2:" alt=":pencil2:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/270f.png" height="20" width="20" align="absmiddle"> Hands-on:</h3>
+
+  <ol>
+    <li>
+<strong>Annotate DE(X)Seq result</strong> <img class="emoji" title=":wrench:" alt=":wrench:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f527.png" height="20" width="20" align="absmiddle">: Run <strong>Annotate DE(X)Seq result</strong> on a counting table (from DESeq or DEXSeq) using the <code class="highlighter-rouge">Drosophila_melanogaster.BDGP5.78.gtf</code> as annotation file</li>
+  </ol>
+</blockquote>
+
+<h1 class="no_toc" id="conclusion">Conclusion</h1>
+
+<p>In this tutorial, we have analyzed real RNA sequencing data to extract useful information, such as which genes are up- or downregulated by depletion of the Pasilla gene and which genes are regulated by the Pasilla gene. To answer these questions, we analyzed RNA sequence datasets using a reference-based RNA-seq data analysis approach. This approach can be sum up with the following scheme:</p>
+
+<p><img src="../../images/rna_quantification.png" alt=""></p>
+
+
+    
+    <blockquote class="key_points">
+        <h3> <img class="emoji" title=":grey_exclamation:" alt=":grey_exclamation:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2755.png" height="20" width="20" align="absmiddle"> Key points</h3>
+
+        <ul>
+        
+           <li>Using a spliced mapping tool for eukaryotic RNA seq data</li>
+        
+           <li>Running a differential gene expression with taking care of the factors to study</li>
+        
+           <li>Running a differential exon usage with taking care of the factors to study</li>
+        
+        </ul>
+    </blockquote>
+    
+
+    
+      <h1>Useful literature</h1>
+      <p>Useful information regarding this type of analysis with descriptions and paper references for the tools used in this tutorial, and literature for this analysis techniques and interpretations can be found <a href="https://galaxyproject.github.io/training-material//transcriptomics#references">here</a>.</p>
+    
+
+    <h3>
+<img class="emoji" title=":clap:" alt=":clap:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f44f.png" height="20" width="20" align="absmiddle"> Congratulations on successfully completing this tutorial!</h3>
+
+
+    <hr>
+    <blockquote class="overview">
+        <h3> <img class="emoji" title=":speech_balloon:" alt=":speech_balloon:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f4ac.png" height="20" width="20" align="absmiddle"> Feedback</h3>
+        Please take a moment and provide your feedback on this tutorial. Your feedback will help guide and improve future revisions to this tutorial. <a href="https://tinyurl.com/GTNfeedback" target="_blank">Feedback Form</a>
+    </blockquote>
+
+    <i>This material is the result of a collaborative work. Thanks to <a href="https://galaxyproject.github.io/training-material//transcriptomics#contributors">all the contributors</a> and the <a href="https://wiki.galaxyproject.org/Teach/GTN">Galaxy Training Network</a>!<br>
+    Found a typo? Something is wrong in this tutorial? Edit it on <a href="https://github.com/galaxyproject/training-material/tree/master/transcriptomics/tutorials/ref-based.md">GitHub</a>.</i>
+</section>
+
+        </div>
+    </body>
+    <script src="https://galaxyproject.github.io/training-material//assets/js/landing_page.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</html>

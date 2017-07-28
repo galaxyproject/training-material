@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html>
+    <head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="chrome=1">
+        <title>Galaxy Training!</title>
+        <link media="all" href="https://netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://galaxyproject.github.io/training-material//assets/css/landing_page.css">
+        <link rel="stylesheet" href="https://galaxyproject.github.io/training-material//assets/css/tutorial.css">
+        <link rel="stylesheet" href="https://galaxyproject.github.io/training-material//assets/css/font-awesome.css">
+        <link rel="stylesheet" href="https://galaxyproject.github.io/training-material//assets/css/syntax_highlighting.css">
+        <meta name="viewport" content="width=device-width">
+    </head>
+    <body>
+        <div class="wrapper">
+            
+
+
+<header>
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a id="site-title" class="navbar-brand" href="https://wiki.galaxyproject.org/Teach/GTN">
+              <img class="pull-left img-responsive" src="https://galaxyproject.github.io/training-material///assets/images/GTN.png">
+            </a>
+            <a id="site-title" class="navbar-brand name-holder" href="https://galaxyproject.github.io/training-material//topics/training/tutorials/create-new-tutorial-tours">
+              Creating a new tutorial - Creating Interactive Galaxy Tours
+            </a>
+          </div>
+
+          <div class="collapse navbar-collapse" id="navbar">
+
+            <ul id="main-menu" class="nav navbar-nav navbar-right">
+              <li><a href="https://galaxyproject.github.io/training-material/" title="Back to front page"><i class="fa fa-home"></i> Home</a></li>
+              <li><a href="https://galaxyproject.github.io/training-material//topics/training" title="Go back to list of tutorials"><i class="fa fa-file-text-o"></i> training</a></li>
+
+              
+                <li><a href="https://galaxyproject.github.io/training-material//topics/training/slides" title="Slides for this tutorial"><i class="fa fa-graduation-cap"></i> Introduction slides</a></li>
+              
+              <!--<li><a href="https://galaxyproject.github.io/training-material//training/slides/create-new-tutorial-tours/"><i class="fa fa-file-powerpoint-o"></i> Associated slides</a></li>-->
+
+              
+
+              
+
+              
+
+              
+                <li><a href="https://galaxyproject.github.io/training-material//topics/training#references" title="References"><i class="fa fa-book"></i> Literature</a></li>
+              
+
+            </ul>
+          </div>
+        </div>
+    </nav>
+</header>
+
+<section class="tutorial">
+    <h1>Creating a new tutorial - Creating Interactive Galaxy Tours</h1>
+
+    <blockquote class="overview">
+        <h3>Overview</h3>
+
+        <p class="bold"> <img class="emoji" title=":grey_question:" alt=":grey_question:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2754.png" height="20" width="20" align="absmiddle"> Questions</p>
+        <ul>
+        
+          <li>What is a Interactive Galaxy Tour?</li>
+        
+          <li>How can we create an Interactive Tour?</li>
+        
+        </ul>
+
+        <p class="bold"> <img class="emoji" title=":dart:" alt=":dart:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f3af.png" height="20" width="20" align="absmiddle"> Objectives</p>
+        <ul>
+        
+          <li>Creating a Galaxy tour from scratch</li>
+        
+          <li>Deploying and running a tour</li>
+        
+        </ul>
+
+        
+
+        <p><span class="bold"> <img class="emoji" title=":hourglass:" alt=":hourglass:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/231b.png" height="20" width="20" align="absmiddle"> Time estimation:</span> 15min</p>
+
+    </blockquote>
+
+<h1 class="no_toc" id="introduction">Introduction</h1>
+
+<p>Galaxy is a great solution to train the bioinformatics concepts:</p>
+
+<ul>
+  <li>numerous bioinformatics tools are available (almost 5,000 in the ToolShed)</li>
+  <li>it can be used by people without amy computer science skills</li>
+  <li>it trains to use technology, outlining available resources and efforts that have made them accessible to researchers</li>
+  <li>it is scalable</li>
+</ul>
+
+<p>In 2016, the Galaxy Training Network decide to set up a new infrastructure for delivering easily Galaxy related training material. The idea was to develop something open and online based on a community effort, as most of the time in Galaxy.</p>
+
+<p>We take inspiration from <a href="https://software-carpentry.org">Software Carpentry</a>. We collected everything on a GitHub repository: <a href="https://github.com/galaxyproject/training-material">https://github.com/galaxyproject/training-material </a>. We decided a structure based on tutorials with hands-on, fitting both for online self-training but also for workshops, grouped in topics. Each tutorial follows the same structure and comes with a technical support to be able to run.</p>
+
+<p>In this tutorial, you will understand how to design and develop a new tutorial fitting in this training material repository. As doing helps to understand, we will develop a small tutorial to explain BLAST with the full infrastructure to be able to run this tutorial anywhere.</p>
+
+<blockquote class="agenda">
+  <h3 id="agenda">Agenda</h3>
+
+  <p>In this tutorial, we will deal with:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#a-galaxy-interactive-tour" id="markdown-toc-a-galaxy-interactive-tour">A Galaxy Interactive Tour</a></li>
+  <li><a href="#creating-a-galaxy-interactive-tour" id="markdown-toc-creating-a-galaxy-interactive-tour">Creating a Galaxy Interactive Tour</a></li>
+</ol>
+
+</blockquote>
+
+<h1 id="a-galaxy-interactive-tour">A Galaxy Interactive Tour</h1>
+
+<p>A Galaxy Interactive Tour is a way to go through an entire analysis, step by step inside Galaxy in an interactive and explorative way. It is a great pedogogic way to run the tutorial directly inside Galaxy.</p>
+
+<p><img src="../../../dev/images/galaxy_tour_demo.gif" alt=""></p>
+
+<p>A tour is a YAML file like:</p>
+
+<div class="highlighter-rouge">
+<pre class="highlight"><code>id: galaxy_ui
+name: Galaxy UI
+description: A gentle introduction to the Galaxy User Interface
+title_default: "Welcome to Galaxy"
+
+steps:
+    - title: "Welcome to Galaxy"
+      content: "This short tour will guide you through Galaxy's user interface.&lt;br&gt;
+                You can navigate with your arrow keys and leave the tour at any time point
+                with 'Escape' or the 'End tour' button."
+      backdrop: true
+
+    - title: "Upload your data"
+      element: ".upload-button"
+      intro: "Galaxy supports many ways to get in your data.&lt;br&gt;
+              Use this button to upload your data."
+      position: "right"
+      postclick:
+        - ".upload-button"
+</code></pre>
+</div>
+
+<ul>
+  <li>at the top some etadata related to the Tour:
+    <ul>
+      <li>
+<code class="highlighter-rouge">id</code>: ID of the tour</li>
+      <li>
+<code class="highlighter-rouge">name</code>: name of the tour</li>
+      <li>
+<code class="highlighter-rouge">description</code>: a short description of the tour</li>
+      <li>
+<code class="highlighter-rouge">title_default</code>: a title</li>
+    </ul>
+  </li>
+  <li>
+    <p>several steps corresponding to the different boxes</p>
+
+    <p>Each step is beginning with a dash <code class="highlighter-rouge">-</code> and with possible arguments</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Argument</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code class="highlighter-rouge">title</code></td>
+          <td>Header of each step-container</td>
+        </tr>
+        <tr>
+          <td><code class="highlighter-rouge">content</code></td>
+          <td>Text that is shown to the user</td>
+        </tr>
+        <tr>
+          <td><code class="highlighter-rouge">element</code></td>
+          <td>
+<a href="https://api.jquery.com/category/selectors/">JQuery Selector</a> of the element you want to describe / click</td>
+        </tr>
+        <tr>
+          <td><code class="highlighter-rouge">placement</code></td>
+          <td>Placement of the text box relative to the selected element</td>
+        </tr>
+        <tr>
+          <td>
+<code class="highlighter-rouge">preclick</code> or <code class="highlighter-rouge">postclick</code>
+</td>
+          <td>Elements that recieve a click() event before (<code class="highlighter-rouge">preclick</code>) or after (<code class="highlighter-rouge">postclick</code>) the step is shown</td>
+        </tr>
+        <tr>
+          <td><code class="highlighter-rouge">textinsert</code></td>
+          <td>Text to insert if element is a text box (e.g. tool search or upload)</td>
+        </tr>
+        <tr>
+          <td><code class="highlighter-rouge">backdrop</code></td>
+          <td>
+<code class="highlighter-rouge">true/false</code>:  Show a dark backdrop behind the popover and its element, highlighting the current step</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p><a href="https://bootstraptour.com/api/">Full reference of the properties</a></p>
+  </li>
+</ul>
+
+<p>The YAML file of a tour can be integrated in a Galaxy instance by placing the YAML file in the <code class="highlighter-rouge">config/plugins/tours</code> directory of the Galaxy code and restarting the Galaxy instance</p>
+
+<h1 id="creating-a-galaxy-interactive-tour">Creating a Galaxy Interactive Tour</h1>
+
+<p><a href="https://github.com/TailorDev/galaxy-tourbuilder">A Web browser plugin</a> is available to help the creation and the test (on the fly) of an interactive tour.</p>
+
+<blockquote class="imgur-embed-pub" lang="en" data-id="a/0YVvz"><a href="//imgur.com/a/0YVvz">Galaxy Tour Builder by TailorDev</a></blockquote>
+<script async="" src="//s.imgur.com/min/embed.js" charset="utf-8"></script>
+
+<blockquote class="hands_on">
+  <h3 id="pencil2-hands-on-install-and-start-the-plugin">
+<img class="emoji" title=":pencil2:" alt=":pencil2:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/270f.png" height="20" width="20" align="absmiddle"> Hands-on: Install and start the plugin</h3>
+
+  <ol>
+    <li>Install <a href="https://nodejs.org/en/">node.js</a>
+</li>
+    <li>Clone the <a href="https://github.com/TailorDev/galaxy-tourbuilder">plugin GitHub repository</a>
+</li>
+    <li>Run <code class="highlighter-rouge">npm install</code>
+</li>
+    <li>Run <code class="highlighter-rouge">npm run build</code>
+</li>
+    <li>Load the extension in your Web browser
+      <ul>
+        <li>Load the extension in Chrome &amp; Opera
+          <ul>
+            <li>Open Chrome/Opera browser and navigate to chrome://extensions</li>
+            <li>Select “Developer Mode” and then click “Load unpacked extension…”</li>
+            <li>From the file browser, choose to <code class="highlighter-rouge">galaxy-tourbuilder/build/chrome</code> or (<code class="highlighter-rouge">galaxy-tourbuilder/build/opera</code>)</li>
+          </ul>
+        </li>
+        <li>Load the extension in Firefox
+          <ul>
+            <li>Open Firefox browser and navigate to about:debugging</li>
+            <li>Click “Load Temporary Add-on” and from the file browser, choose <code class="highlighter-rouge">galaxy-tourbuilder/build/firefox</code>
+</li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>Load the webpage of any Galaxy instance</li>
+    <li>Start the plugin by clicking on the icon on the right</li>
+  </ol>
+</blockquote>
+
+<p>We can now create easily a Galaxy Interactive Tour and test it on the fly.</p>
+
+<blockquote class="hands_on">
+  <h3 id="pencil2-hands-on-create-a-galaxy-interactive-tour">
+<img class="emoji" title=":pencil2:" alt=":pencil2:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/270f.png" height="20" width="20" align="absmiddle"> Hands-on: Create a Galaxy Interactive Tour</h3>
+
+  <ol>
+    <li>Create a Galaxy Interactive Tour for “BLAST” tutorial</li>
+    <li>Test it with the plugin</li>
+    <li>Copy the YAML content and add it to a file</li>
+    <li>Add the file to the <code class="highlighter-rouge">tours</code> directory of the tutorial</li>
+    <li>Test it on a local Galaxy instance</li>
+  </ol>
+</blockquote>
+
+<h1 class="no_toc" id="conclusion">Conclusion</h1>
+
+<blockquote class="agenda">
+  <h3 id="developing-gtn-training-material">Developing GTN training material</h3>
+
+  <p>This tutorial is part of a series to develop GTN training material, feel free to also look at:</p>
+
+  <ol>
+    <li><a href="../create-new-tutorial-content/tutorial.html">Writing content in markdown</a></li>
+    <li><a href="../create-new-tutorial-metadata/tutorial.html">Defining metadata</a></li>
+    <li><a href="../create-new-tutorial-jekyll/tutorial.html">Setting up the infrastructure</a></li>
+    <li><a href="../create-new-tutorial-tours/tutorial.html">Creating Interactive Galaxy Tours</a></li>
+    <li><a href="../create-new-tutorial-docker/tutorial.html">Building a Docker flavor</a></li>
+    <li><a href="../../../dev/tutorials/github-contribution/slides.html">Submitting the new tutorial to the GitHub repository</a></li>
+  </ol>
+</blockquote>
+
+
+    
+    <blockquote class="key_points">
+        <h3> <img class="emoji" title=":grey_exclamation:" alt=":grey_exclamation:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2755.png" height="20" width="20" align="absmiddle"> Key points</h3>
+
+        <ul>
+        
+           <li>The Interactive Tours are a good training object for self-learning at its own speed</li>
+        
+           <li>It is now easy to create an Interactive Tour and test it</li>
+        
+        </ul>
+    </blockquote>
+    
+
+    
+
+    <h3>
+<img class="emoji" title=":clap:" alt=":clap:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f44f.png" height="20" width="20" align="absmiddle"> Congratulations on successfully completing this tutorial!</h3>
+
+
+    <hr>
+    <blockquote class="overview">
+        <h3> <img class="emoji" title=":speech_balloon:" alt=":speech_balloon:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f4ac.png" height="20" width="20" align="absmiddle"> Feedback</h3>
+        Please take a moment and provide your feedback on this tutorial. Your feedback will help guide and improve future revisions to this tutorial. <a href="https://tinyurl.com/GTNfeedback" target="_blank">Feedback Form</a>
+    </blockquote>
+
+    <i>This material is the result of a collaborative work. Thanks to <a href="https://galaxyproject.github.io/training-material//training#contributors">all the contributors</a> and the <a href="https://wiki.galaxyproject.org/Teach/GTN">Galaxy Training Network</a>!<br>
+    Found a typo? Something is wrong in this tutorial? Edit it on <a href="https://github.com/galaxyproject/training-material/tree/master/training/tutorials/create-new-tutorial-tours.md">GitHub</a>.</i>
+</section>
+
+        </div>
+    </body>
+    <script src="https://galaxyproject.github.io/training-material//assets/js/landing_page.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</html>

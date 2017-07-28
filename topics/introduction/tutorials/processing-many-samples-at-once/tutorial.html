@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html>
+    <head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="chrome=1">
+        <title>Galaxy Training!</title>
+        <link media="all" href="https://netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://galaxyproject.github.io/training-material//assets/css/landing_page.css">
+        <link rel="stylesheet" href="https://galaxyproject.github.io/training-material//assets/css/tutorial.css">
+        <link rel="stylesheet" href="https://galaxyproject.github.io/training-material//assets/css/font-awesome.css">
+        <link rel="stylesheet" href="https://galaxyproject.github.io/training-material//assets/css/syntax_highlighting.css">
+        <meta name="viewport" content="width=device-width">
+    </head>
+    <body>
+        <div class="wrapper">
+            
+
+
+<header>
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a id="site-title" class="navbar-brand" href="https://wiki.galaxyproject.org/Teach/GTN">
+              <img class="pull-left img-responsive" src="https://galaxyproject.github.io/training-material///assets/images/GTN.png">
+            </a>
+            <a id="site-title" class="navbar-brand name-holder" href="https://galaxyproject.github.io/training-material//topics/introduction/tutorials/">
+              
+            </a>
+          </div>
+
+          <div class="collapse navbar-collapse" id="navbar">
+
+            <ul id="main-menu" class="nav navbar-nav navbar-right">
+              <li><a href="https://galaxyproject.github.io/training-material/" title="Back to front page"><i class="fa fa-home"></i> Home</a></li>
+              <li><a href="https://galaxyproject.github.io/training-material//topics/introduction" title="Go back to list of tutorials"><i class="fa fa-file-text-o"></i> introduction</a></li>
+
+              
+                <li><a href="https://galaxyproject.github.io/training-material//topics/introduction/slides" title="Slides for this tutorial"><i class="fa fa-graduation-cap"></i> Introduction slides</a></li>
+              
+              <!--<li><a href="https://galaxyproject.github.io/training-material//introduction/slides//"><i class="fa fa-file-powerpoint-o"></i> Associated slides</a></li>-->
+
+              
+                <li><a href="https://github.com/galaxyproject/training-material/tree/master/topics/introduction/docker" title="Docker image for this tutorial"><i class="fa fa-ship"></i> Docker image</a></li>
+              
+
+              
+
+              
+                <li><a href="" title="Links to data"><i class="fa fa-folder-open"></i> Input Dataset</a></li>
+              
+
+              
+                <li><a href="https://galaxyproject.github.io/training-material//topics/introduction#references" title="References"><i class="fa fa-book"></i> Literature</a></li>
+              
+
+            </ul>
+          </div>
+        </div>
+    </nav>
+</header>
+
+<section class="tutorial">
+    <h1></h1>
+
+    <blockquote class="overview">
+        <h3>Overview</h3>
+
+        <p class="bold"> <img class="emoji" title=":grey_question:" alt=":grey_question:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2754.png" height="20" width="20" align="absmiddle"> Questions</p>
+        <ul>
+        
+        </ul>
+
+        <p class="bold"> <img class="emoji" title=":dart:" alt=":dart:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f3af.png" height="20" width="20" align="absmiddle"> Objectives</p>
+        <ul>
+        
+        </ul>
+
+        
+
+        <p><span class="bold"> <img class="emoji" title=":hourglass:" alt=":hourglass:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/231b.png" height="20" width="20" align="absmiddle"> Time estimation:</span> </p>
+
+    </blockquote>
+
+<blockquote class="agenda">
+  <h3 id="agenda">Agenda</h3>
+
+  <p>In this tutorial, we will deal with:</p>
+
+<ol id="markdown-toc">
+  <li>
+<a href="#processing-many-samples-at-once" id="markdown-toc-processing-many-samples-at-once">Processing many samples at once</a>    <ol>
+      <li><a href="#0-getting-data" id="markdown-toc-0-getting-data">0. Getting data</a></li>
+      <li><a href="#1-creating-a-paired-dataset-collection" id="markdown-toc-1-creating-a-paired-dataset-collection">1. Creating a paired dataset collection</a></li>
+      <li><a href="#20-using-collections" id="markdown-toc-20-using-collections">2.0. Using collections</a></li>
+      <li><a href="#3-processing-collection-as-a-single-entity" id="markdown-toc-3-processing-collection-as-a-single-entity">3. Processing collection as a single entity</a></li>
+      <li><a href="#4-lets-look-at-what-weve-got" id="markdown-toc-4-lets-look-at-what-weve-got">4. Let’s look at what we’ve got!</a></li>
+      <li><a href="#5-we-did-not-fake-this" id="markdown-toc-5-we-did-not-fake-this">5. We did not fake this:</a></li>
+      <li><a href="#6-if-things-dont-work" id="markdown-toc-6-if-things-dont-work">6. If things don’t work…</a></li>
+      <li><a href="#clap-the-end" id="markdown-toc-clap-the-end"><img class="emoji" title=":clap:" alt=":clap:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f44f.png" height="20" width="20" align="absmiddle"> The End</a></li>
+    </ol>
+  </li>
+</ol>
+
+</blockquote>
+
+<h1 id="processing-many-samples-at-once">Processing many samples at once</h1>
+
+<p>Here we will show Galaxy features designed to help with the analysis of large numbers of samples. When you have just a few samples - clicking through them is easy. But once you’ve got hundreds - it becomes very annoying. In Galaxy we have introduced <strong>Dataset collections</strong> that allow you to combine numerous datasets in a single entity that can be easily manipulated.</p>
+
+<h4 id="in-this-tutorial-we-assume-the-following">In this tutorial we assume the following:</h4>
+
+<ul>
+  <li>you already have basic understanding of how Galaxy works (if you don’t see <a href="https://usegalaxy.org/galaxy101">Galaxy 101</a> tutorial;</li>
+  <li>you have an account in Galaxy (<a href="https://github.com/nekrut/galaxy/wiki/Galaxy101-1#01-setting-up-galaxy-account">see this</a> if you don’t);</li>
+  <li>you have your browser configured as described <a href="https://github.com/nekrut/galaxy/wiki/Galaxy101-1#00-getting-your-display-sorted-out">here</a>.</li>
+</ul>
+
+<p><img class="emoji" title=":warning:" alt=":warning:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/26a0.png" height="20" width="20" align="absmiddle"> <em>At this time this tutorial is using Galaxy’s test server at https://test.galaxyproject.org. Once the main site is updated this tutorial will be edited.</em></p>
+
+<h2 id="0-getting-data">0. Getting data</h2>
+<p><a href="https://test.galaxyproject.org/u/anton/h/collections-1">Here</a> is a history containing a few datasets we will be practicing with (as always with Galaxy tutorial you can upload your own data and play with it instead of the provided datasets):</p>
+
+<ul>
+  <li>
+<code class="highlighter-rouge">M117-bl_1</code> - family 117, mother, 1-st (<strong>F</strong>) read from <strong>blood</strong>
+</li>
+  <li>
+<code class="highlighter-rouge">M117-bl_2</code> - family 117, mother, 2-nd (<strong>R</strong>) read from <strong>blood</strong>
+</li>
+  <li>
+<code class="highlighter-rouge">M117-ch_1</code> - family 117, mother, 1-st (<strong>F</strong>) read from <strong>cheek</strong>
+</li>
+  <li>
+<code class="highlighter-rouge">M117-ch_1</code> - family 117, mother, 2-nd (<strong>R</strong>) read from <strong>cheek</strong>
+</li>
+  <li>
+<code class="highlighter-rouge">M117C1-bl_1</code>- family 117, child, 1-st (<strong>F</strong>) read from <strong>blood</strong>
+</li>
+  <li>
+<code class="highlighter-rouge">M117C1-bl_2</code>- family 117, child, 2-nd (<strong>R</strong>) read from <strong>blood</strong>
+</li>
+  <li>
+<code class="highlighter-rouge">M117C1-ch_1</code>- family 117, child, 1-st (<strong>F</strong>) read from <strong>cheek</strong>
+</li>
+  <li>
+<code class="highlighter-rouge">M117C1-ch_2</code>- family 117, child, 2-nd (<strong>R</strong>) read from <strong>cheek</strong>
+</li>
+</ul>
+
+<p>These datasets represent genomic DNA (enriched for mitochondria via a long range PCR) isolated from blood and cheek (buccal swab) of mother (<code class="highlighter-rouge">M117</code>) and her child (<code class="highlighter-rouge">M117C1</code>) that was sequenced on an Illumina miSeq machine as paired-read library (250-bp reads; see our <a href="https://www.pnas.org/content/111/43/15474.abstract">2014</a> manuscript for <strong>Methods</strong>).</p>
+
+<h2 id="1-creating-a-paired-dataset-collection">1. Creating a paired dataset collection</h2>
+
+<p>If you imported <a href="https://test.galaxyproject.org/u/anton/h/collections-1">history</a> as described <a href="https://github.com/nekrut/galaxy/wiki/Processing-many-samples-at-once#0-getting-data">above</a>, your screen will look something like this:</p>
+
+<p><img src="https://galaxyproject.org/tutorials/collections/manyDatasets.png" alt="manyDatasets"></p>
+
+<p>Now click the checkbox in <img src="https://galaxyproject.org/tutorials/collections/historyItemControls.png" alt="HistioryItemControls"> and you will see your history changing like this:</p>
+
+<p><img src="https://galaxyproject.org/tutorials/collections/historyWithCheckboxes.png" alt="historyWithCheckboxes"></p>
+
+<p>Let’s click <code class="highlighter-rouge">All</code>, which will select all datasets in the history, then click <img src="https://galaxyproject.org/tutorials/collections/forAllSelected.png" alt="allSelected"> and finally select <strong>Build List of Dataset Pairs</strong> from the following menu:</p>
+
+<p><img src="https://galaxyproject.org/tutorials/collections/buildPairs.png" alt="buildPairs"></p>
+
+<p>The following wizard will appear:</p>
+
+<p><img src="https://galaxyproject.org/tutorials/collections/collectionCreation.png" alt="collectionCreation"></p>
+
+<p>In this case Galaxy automatically assigned pairs using the <code class="highlighter-rouge">_1</code> and <code class="highlighter-rouge">_2</code> endings of dataset names. Let’s however pretend that this did not happen. Click on <strong>Unpair all</strong> (highlighted in red in the figure above) link and then on <strong>Clear</strong> link (highlighted in blue in the figure above). The interface will change into its virgin state:</p>
+
+<p><img src="https://galaxyproject.org/tutorials/collections/collectionCreationClean.png" alt="collectionCreationClean"></p>
+
+<p>Hopefully you remember that we have paired-end data in this scenario. Datasets containing the first (forward) and the second (reverse) read are differentiated by having <code class="highlighter-rouge">_1</code> and <code class="highlighter-rouge">_2</code> in the filename. We can use this feature in dataset collection wizard to pair our datasets.  Type <code class="highlighter-rouge">_1</code> in the left <strong>Filter this list</strong> text box and <code class="highlighter-rouge">_2</code> in the right:</p>
+
+<p><img src="https://galaxyproject.org/tutorials/collections/1and2.png" alt="1and2"></p>
+
+<p>You will see that the dataset collection wizard will automatically filter lists on each side of the interface:</p>
+
+<p><img src="https://galaxyproject.org/tutorials/collections/collectionPrefiltered.png" alt="collectionPrefiltered"></p>
+
+<p>Now you can either click <strong>Auto pair</strong> if pairs look good to you (proper combinations of datasets are listed in each line) or pair each forward/reverse group individually by pressing <strong>Pair these datasets</strong> button separating each pair:</p>
+
+<p><img src="https://galaxyproject.org/tutorials/collections/collectionCreation.png" alt="collectionCreation"></p>
+
+<p>Now it is time to name the collection:</p>
+
+<p><img src="https://galaxyproject.org/tutorials/collections/collectionNaming.png" alt="collectionNaming"></p>
+
+<p>and create the collection by clicking <strong>Create list</strong>. A new item will appear in the history as you can see on the panel <strong>A</strong> below. Clicking on collection will expand it to show four pairs it contains (panel <strong>B</strong>). Clicking individual pairs will expand them further to reveal <strong>forward</strong> and <strong>reverse</strong> datasets (panel <strong>C</strong>). Expanding these further will enable one to see individual datasets (panel <strong>D</strong>).</p>
+
+<p><img src="https://galaxyproject.org/tutorials/collections/collection_ABCD.png" alt="collection_ABCD"></p>
+
+<h2 id="20-using-collections">2.0. Using collections</h2>
+
+<p>By now we see that a collection can be used to bundle a large number of items into a single history item. This means that many Galaxy tools will be able to process all datasets in a collection transparently to you. Let’s try to map these datasets to human genome using <code class="highlighter-rouge">bwa-mem</code> mapper:</p>
+
+<p><img src="https://galaxyproject.org/tutorials/collections/bwa_mem_collection_readGroups.png" alt="bwa_mem_collection_readGroups"></p>
+
+<p>Here is what you need to do:</p>
+
+<ul>
+  <li>set <strong>Using reference genome</strong> to <code class="highlighter-rouge">hg38</code> (red outline);</li>
+  <li>set <strong>Single or Paired-end reads</strong> to <code class="highlighter-rouge">Paired collection</code> (blue outline);</li>
+  <li>select <code class="highlighter-rouge">M177-collection</code> from <strong>Select a paired collection</strong> dropdown (magenta outline);</li>
+  <li>In <strong>Set read groups information</strong> select <code class="highlighter-rouge">Automatically assign ID</code> (green outline);</li>
+  <li>scroll down and click <strong>Execute</strong>.</li>
+</ul>
+
+<p>You will see jobs being submitted and new datasets appearing in the history. IN particular below you can see that Galaxy has started four jobs (two yellow and two gray). This is because we have eight paired datasets with each pair being processed separately by <code class="highlighter-rouge">bwa-mem</code>. As a result we have four <code class="highlighter-rouge">bwa-mem</code> runs:</p>
+
+<p><img src="https://galaxyproject.org/tutorials/collections/bwa_memCollectionRunning.png" alt="bwa_memCollectionRunning"></p>
+
+<p>Once these jobs are finished they will disappear from the history and all results will be represented as a new collection:</p>
+
+<p><img src="https://galaxyproject.org/tutorials/collections/bwa_memCollectionDone.png" alt="bwa_memCollectionDone"></p>
+
+<p>Let’s look at this collection by clicking on it (panel <strong>A</strong> in the figure below). You can see that now this collection is no longer paired (compared to the collection we created in the beginning of this tutorial). This is because <code class="highlighter-rouge">bwa-mem</code> takes forward and reverse data as input, but produces only a single BAM dataset as the output. So what we have in the result is a <em>list</em> of four dataset (BAM files; panels <strong>B</strong> and <strong>C</strong>).</p>
+
+<p><img src="https://galaxyproject.org/tutorials/collections/bwa_memCollection_ABC.png" alt="bwa_memCollection_ABC"></p>
+
+<h2 id="3-processing-collection-as-a-single-entity">3. Processing collection as a single entity</h2>
+
+<p>Now that <code class="highlighter-rouge">bwa-mem</code> has finished and generated a collection of BAM datasets we can continue to analyze the entire collection as a single Galaxy ‘<em>item</em>’.</p>
+
+<h3 id="30-ensuring-consistency-of-bam-dataset">3.0. Ensuring consistency of BAM dataset</h3>
+
+<p>Let’s perform cleanup of our BAM files with <code class="highlighter-rouge">cleanSam</code> utility from the <strong>Picard</strong> package:</p>
+
+<p><img src="https://galaxyproject.org/tutorials/collections/cleanSam.png" alt="cleanSam"></p>
+
+<p>If you look at the picture above carefully, you will see that the <strong>Select SAM/BAM dataset or dataset collection</strong> parameter is empty (it says <code class="highlighter-rouge">No sam or bam datasets available.</code>). This is because we do not have single SAM or BAM datasets in the history. Instead we have a collection. So all you need to do is to click on the <strong>folder</strong> (<img src="https://galaxyproject.org/tutorials/collections/folder.png" alt="folder">) button and you will our BAM collection selected:</p>
+
+<p><img src="https://galaxyproject.org/tutorials/collections/cleanSam_closeup.png" alt="cleanSam_closeup"></p>
+
+<p>Click <strong>Execute</strong>. As an output this tool will produce a collection contained cleaned data.</p>
+
+<h3 id="31-retaining-proper-pairs">3.1. Retaining ‘proper pairs’</h3>
+
+<p>Now let’s clean the dataset further by only preserving truly paired reads (reads satisfying two requirements: (1) read is paired, and (2) it is mapped as a proper pair). For this we will use <code class="highlighter-rouge">Filter SAM or BAM</code> tools from <strong>SAMTools</strong> collection:</p>
+
+<p><img src="https://galaxyproject.org/tutorials/collections/filter.png" alt="filter"></p>
+
+<p>parameters should be set as shown below. By setting mapping quality to <code class="highlighter-rouge">20</code> we avoid reads mapping to multiple locations and by using <strong>Filter on bitwise flag</strong> option we ensure that the resulting dataset will contain only properly paired reads. This operation will produce yet another collection containing now filtered datasets.</p>
+
+<p><img src="https://galaxyproject.org/tutorials/collections/filter_closeup.png" alt="filter_closeup"></p>
+
+<h3 id="32-merging-collection-into-a-single-dataset">3.2. Merging collection into a single dataset</h3>
+
+<p>The beauty of BAM datasets is that they can be combined in a single entity using so called <em>Read group</em> (<a href="https://wiki.galaxyproject.org/Learn/GalaxyNGS101#Understanding_and_manipulating_SAM.2FBAM_datasets">learn more</a> about Read Groups on old wiki, which will be migrated here shortly). This allows to bundle reads from multiple experiments into a single dataset where read identity is maintained by labelling every sequence with <em>read group</em> tags. So let’s finally reduce this collection to a single BAM dataset. For this we will use <code class="highlighter-rouge">MergeSamFiles</code> tool for the <code class="highlighter-rouge">Picard</code> suite:</p>
+
+<p><img src="https://galaxyproject.org/tutorials/collections/merge.png" alt="merge"></p>
+
+<p>Here we select the collection generated by the filtering tool described above in <a href="https://github.com/nekrut/galaxy/wiki/Processing-many-samples-at-once#31-retaining-proper-pairs">3.1</a>:</p>
+
+<p><img src="https://galaxyproject.org/tutorials/collections/merge_closeup.png" alt="merge_closeup"></p>
+
+<p>This operation will <strong>not</strong> generate a collection. Instead, it will generate a single BAM dataset containing mapped reads from our four samples (<code class="highlighter-rouge">M117-bl</code>, <code class="highlighter-rouge">M117-ch</code>, <code class="highlighter-rouge">M117C1-bl</code>, and <code class="highlighter-rouge">M117C1-ch</code>).</p>
+
+<h2 id="4-lets-look-at-what-weve-got">4. Let’s look at what we’ve got!</h2>
+
+<p>So we have one BAM dataset combining everything we’ve done so far. Let’s look at the contents of this dataset using a genome browser. First, we will need to downsample the dataset to avoiding overwhelming the browser. For this we will use <code class="highlighter-rouge">Downsample SAM/BAM</code> tool:</p>
+
+<p><img src="https://galaxyproject.org/tutorials/collections/downsample.png" alt="downsample"></p>
+
+<p>Set <strong>Probability (between 0 and 1) that any given read will be kept</strong> to roughly <code class="highlighter-rouge">5%</code> (or <code class="highlighter-rouge">0.05</code>) using the slider control:</p>
+
+<p><img src="https://galaxyproject.org/tutorials/collections/downsample_closeup.png" alt="downsample_closeup"></p>
+
+<p>This will generate another BAM dataset containing only 5% of the original reads and much smaller as a result. Click on this dataset and you will see links to various genome browsers:</p>
+
+<p><img src="https://galaxyproject.org/tutorials/collections/browserLinks.png" alt="browserLinks"></p>
+
+<p>Click the <strong>Human hg38</strong> link in the <strong>display with IGV</strong> line as highlighted above (<a href="https://wiki.galaxyproject.org/Learn/GalaxyNGS101#Visualizing_multiple_datasets_in_Integrated_Genome_Viewer_.28IGV.29">learn</a> more about displaying Galaxy data in IGV with this <a href="https://vimeo.com/123442619#t=4m16s">movie</a>). Below is an example generated with IGV on these data. In this screenshot reads are colored by read group (four distinct colors). A yellow inset displays additional information about a single read. One can see that this read corresponds to read group <code class="highlighter-rouge">M117-bl</code>.</p>
+
+<p><img src="https://galaxyproject.org/tutorials/collections/igv.png" alt="igv"></p>
+
+<h2 id="5-we-did-not-fake-this">5. We did not fake this:</h2>
+<p>The two histories and the workflow described in this page are accessible directly from this page below:</p>
+
+<ul>
+  <li>History <a href="https://test.galaxyproject.org/u/anton/h/collections-1"><strong>Collections</strong></a>
+</li>
+  <li>History <a href="https://test.galaxyproject.org/u/anton/h/collections-full-analysis"><strong>Collections (full analysis)</strong></a>
+</li>
+</ul>
+
+<p>From there you can import histories to make them your own.</p>
+
+<h2 id="6-if-things-dont-work">6. If things don’t work…</h2>
+<p>…you need to complain. Use <a href="https://usegalaxy.org/biostar/biostar_redirect">Galaxy’s BioStar Channel</a> to do this.</p>
+
+<h2 id="clap-the-end">
+<img class="emoji" title=":clap:" alt=":clap:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f44f.png" height="20" width="20" align="absmiddle"> The End</h2>
+
+
+    
+
+    
+
+    <h3>
+<img class="emoji" title=":clap:" alt=":clap:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f44f.png" height="20" width="20" align="absmiddle"> Congratulations on successfully completing this tutorial!</h3>
+
+
+    <hr>
+    <blockquote class="overview">
+        <h3> <img class="emoji" title=":speech_balloon:" alt=":speech_balloon:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f4ac.png" height="20" width="20" align="absmiddle"> Feedback</h3>
+        Please take a moment and provide your feedback on this tutorial. Your feedback will help guide and improve future revisions to this tutorial. <a href="https://tinyurl.com/GTNfeedback" target="_blank">Feedback Form</a>
+    </blockquote>
+
+    <i>This material is the result of a collaborative work. Thanks to <a href="https://galaxyproject.github.io/training-material//introduction#contributors">all the contributors</a> and the <a href="https://wiki.galaxyproject.org/Teach/GTN">Galaxy Training Network</a>!<br>
+    Found a typo? Something is wrong in this tutorial? Edit it on <a href="https://github.com/galaxyproject/training-material/tree/master/introduction/tutorials/.md">GitHub</a>.</i>
+</section>
+
+        </div>
+    </body>
+    <script src="https://galaxyproject.github.io/training-material//assets/js/landing_page.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</html>

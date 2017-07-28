@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html>
+    <head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="chrome=1">
+        <title>Galaxy Training!</title>
+        <link media="all" href="https://netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://galaxyproject.github.io/training-material//assets/css/landing_page.css">
+        <link rel="stylesheet" href="https://galaxyproject.github.io/training-material//assets/css/tutorial.css">
+        <link rel="stylesheet" href="https://galaxyproject.github.io/training-material//assets/css/font-awesome.css">
+        <link rel="stylesheet" href="https://galaxyproject.github.io/training-material//assets/css/syntax_highlighting.css">
+        <meta name="viewport" content="width=device-width">
+    </head>
+    <body>
+        <div class="wrapper">
+            
+
+
+<header>
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a id="site-title" class="navbar-brand" href="https://wiki.galaxyproject.org/Teach/GTN">
+              <img class="pull-left img-responsive" src="https://galaxyproject.github.io/training-material///assets/images/GTN.png">
+            </a>
+            <a id="site-title" class="navbar-brand name-holder" href="https://galaxyproject.github.io/training-material//topics/variant-analysis/tutorials/diploid-variant-calling">
+              Variant calling: Diploid case
+            </a>
+          </div>
+
+          <div class="collapse navbar-collapse" id="navbar">
+
+            <ul id="main-menu" class="nav navbar-nav navbar-right">
+              <li><a href="https://galaxyproject.github.io/training-material/" title="Back to front page"><i class="fa fa-home"></i> Home</a></li>
+              <li><a href="https://galaxyproject.github.io/training-material//topics/variant-analysis" title="Go back to list of tutorials"><i class="fa fa-file-text-o"></i> variant-analysis</a></li>
+
+              
+                <li><a href="https://galaxyproject.github.io/training-material//topics/variant-analysis/slides" title="Slides for this tutorial"><i class="fa fa-graduation-cap"></i> Introduction slides</a></li>
+              
+              <!--<li><a href="https://galaxyproject.github.io/training-material//variant-analysis/slides/diploid-variant-calling/"><i class="fa fa-file-powerpoint-o"></i> Associated slides</a></li>-->
+
+              
+                <li><a href="https://github.com/galaxyproject/training-material/tree/master/topics/variant-analysis/docker" title="Docker image for this tutorial"><i class="fa fa-ship"></i> Docker image</a></li>
+              
+
+              
+
+              
+
+              
+                <li><a href="https://galaxyproject.github.io/training-material//topics/variant-analysis#references" title="References"><i class="fa fa-book"></i> Literature</a></li>
+              
+
+            </ul>
+          </div>
+        </div>
+    </nav>
+</header>
+
+<section class="tutorial">
+    <h1>Variant calling: Diploid case</h1>
+
+    <blockquote class="overview">
+        <h3>Overview</h3>
+
+        <p class="bold"> <img class="emoji" title=":grey_question:" alt=":grey_question:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2754.png" height="20" width="20" align="absmiddle"> Questions</p>
+        <ul>
+        
+          <li>What is the pipeline of the processes for variant calling and processing it?</li>
+        
+        </ul>
+
+        <p class="bold"> <img class="emoji" title=":dart:" alt=":dart:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f3af.png" height="20" width="20" align="absmiddle"> Objectives</p>
+        <ul>
+        
+          <li>Identification of the genetic variation using the variant calling</li>
+        
+          <li>Using FreeBayes calls for variants generating</li>
+        
+          <li>Quering with GEMINI</li>
+        
+        </ul>
+
+        
+        <p class="bold"> <img class="emoji" title=":heavy_check_mark:" alt=":heavy_check_mark:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2714.png" height="20" width="20" align="absmiddle"> Requirements</p>
+        <ul>
+          
+            <li>
+                
+                <a href="https://galaxyproject.github.io/training-material//topics//introduction/">Galaxy introduction</a>
+                
+            </li>
+          
+            <li>
+                
+                <a href="https://galaxyproject.github.io/training-material//topics//sequence-analysis/">Quality control</a>
+                
+            </li>
+          
+            <li>
+                
+                <a href="https://galaxyproject.github.io/training-material//topics//sequence-analysis/">Mapping</a>
+                
+            </li>
+          
+          
+        </ul>
+        
+
+        <p><span class="bold"> <img class="emoji" title=":hourglass:" alt=":hourglass:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/231b.png" height="20" width="20" align="absmiddle"> Time estimation:</span> 1d/3h/6h</p>
+
+    </blockquote>
+
+<blockquote>
+  <p>Much of Galaxy-related features described in this section have been developed by Björn Grüning (@bgruening) and configured by Dave Bouvier (@davebx).</p>
+</blockquote>
+
+<h1 class="no_toc" id="introduction">Introduction</h1>
+
+<p>Variant calling is a complex field that was significantly propelled by advances in DNA sequencing and efforts of large scientific consortia such as the <a href="https://www.1000genomes.org">1000 Genomes</a>. Here we summarize basic ideas central to Genotype and Variant calling. First, let’s contrast the two things although they often go together:</p>
+
+<ul>
+  <li>
+<strong>Variant calling</strong> - identification of positions where the sequenced sample is different from the reference sequence (or <a href="https://github.com/vgteam/vg">reference genome graph</a>);</li>
+  <li>
+<strong>Genotype calling</strong> - identifying individual’s genotype at variable sites.</li>
+</ul>
+
+<p>A typical workflow for variation discovery involves the following steps (e.g., see Nielsen et al. <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3593722/">2011</a>):</p>
+
+<ol>
+  <li>Mapping reads against the reference genome;</li>
+  <li>Thresholding BAM datasets by, for example, retaining paired, properly mapped reads;</li>
+  <li>Performing quality score recalibration;</li>
+  <li>Performing realignment;</li>
+  <li>Performing variant calling/genotype assignment;</li>
+  <li>Performing filtering and genotype quality score recalibration;</li>
+  <li>Annotating variants and performing downstream analyses.</li>
+</ol>
+
+<p>However, continuing evolution of variant detection methods has made some of these steps obsolete. For instance, omitting quality score recalibration and re-alignment (steps 3 and 4 above) when using haplotype-aware variant callers such as <a href="https://github.com/ekg/freebayes">FreeBayes</a> does not have an effect on the resulting calls (see Brad Chapman’s methodological comparisons at <a href="https://bit.ly/1S9kFJN">bcbio</a></p>
+
+<blockquote class="agenda">
+  <h3 id="agenda">Agenda</h3>
+
+  <p>In this tutorial, we will deal with:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#how-does-snp-calling-and-genotyping-work" id="markdown-toc-how-does-snp-calling-and-genotyping-work">How does SNP calling and genotyping work?</a></li>
+  <li><a href="#calling-with-freebayes" id="markdown-toc-calling-with-freebayes">Calling with FreeBayes</a></li>
+  <li>
+<a href="#lets-try-it" id="markdown-toc-lets-try-it">Let’s try it</a>    <ol>
+      <li><a href="#the-data" id="markdown-toc-the-data">The data</a></li>
+      <li><a href="#generating-and-post-processing-freebayes-calls" id="markdown-toc-generating-and-post-processing-freebayes-calls">Generating and post-processing FreeBayes calls</a></li>
+      <li><a href="#annotating-variants-with-snpeff" id="markdown-toc-annotating-variants-with-snpeff">Annotating variants with SnpEff</a></li>
+      <li><a href="#manipulating-variation-data-with-gemini" id="markdown-toc-manipulating-variation-data-with-gemini">Manipulating variation data with GEMINI</a></li>
+      <li><a href="#how-to-use-these-tutorials" id="markdown-toc-how-to-use-these-tutorials">How to use these tutorials?</a></li>
+    </ol>
+  </li>
+</ol>
+
+</blockquote>
+
+<h1 id="how-does-snp-calling-and-genotyping-work">How does SNP calling and genotyping work?</h1>
+
+<p>Before going forward with an actual genotype calling in Galaxy let’s take a look as some basic ideas behind modern variant callers.</p>
+
+<h3 id="snp-calling-and-genotyping-examples">SNP calling and genotyping examples:</h3>
+
+<p>Consider a set of sequencing reads derived from a diploid individual:</p>
+
+<div class="highlighter-rouge">
+<pre class="highlight"><code>REFERENCE: atcatgacggcaGtagcatat
+--------------------------------
+READ1:     atcatgacggcaGtagcatat
+READ2:         tgacggcaGtagcatat
+READ3:     atcatgacggcaAtagca
+READ4:            cggcaGtagcatat
+READ5:     atcatgacggcaGtagc
+</code></pre>
+</div>
+
+<p>The capitalized position contains a G-&gt;A <a href="https://en.wikipedia.org/wiki/Transition_(genetics)">transition</a>. So, in principle this can be a heterozygous site with two alleles <strong>G</strong> and <strong>A</strong>. A commonly used naïve procedure would define a site as <em>heterozygous</em> if there is a non-reference allele with frequency between 20% and 80%. In this case <strong>A</strong> is present in 1/5 or 20% of the cases, so we can say that this is a heterozygous site. Yet it is only represented by a single read and is hardly reliable. Here are some of the possibilities that would explain this <em>variant</em>. It can be:</p>
+
+<ul>
+  <li>A true variant;</li>
+  <li>A library preparation artifact (e.g., a PCR error);</li>
+  <li>A base call error;</li>
+  <li>A misalignment (though unlikely in the above example).</li>
+</ul>
+
+<p>The modern variant callers attempt to assign a reliability estimate for each genotype call. This is done using Bayes reasoning.</p>
+<blockquote class="tip">
+  <h3 id="bulb-tip-further-reading-on">
+<img class="emoji" title=":bulb:" alt=":bulb:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f4a1.png" height="20" width="20" align="absmiddle"> Tip: Further reading on</h3>
+
+  <p>For a great visual explanation see <a href="https://oscarbonilla.com/2009/05/visualizing-bayes-theorem/">blog</a> by Oscar Bonilla). Here we present a &gt;SNP-relevant “translation” on this explanation (with inspiration from <a href="https://github.com/ekg">Erik Garrison</a>).</p>
+</blockquote>
+
+<p>Suppose you have <strong>A</strong> samples with a variant in a population. You are performing re-sequencing and observe a variant in <strong>B</strong> of your sequencing reads. We want to estimate the probability of having the real polymorphism <strong>A</strong> given our observations in <strong>B</strong>. The logic is as follows:</p>
+<ul>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>The probability of having polymorphism <strong>A</strong> in the population is *P(A) =</td>
+          <td>A</td>
+          <td>/</td>
+          <td>U</td>
+          <td>*;</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>The probability of seeing a variant given our identification approach (i.e., sequencing) is *P(B) =</td>
+          <td>B</td>
+          <td>/</td>
+          <td>U</td>
+          <td>*;</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>Now, the probability of having a variant and it being observed in our sequencing data is the overlap between <strong>A</strong> and <strong>B</strong> sets *P(AB) =</td>
+          <td>AB</td>
+          <td>/</td>
+          <td>U</td>
+          <td>*.</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+</ul>
+
+<table>
+  <thead>
+    <tr>
+      <th>Polymorphisms</th>
+      <th>Variant Calls</th>
+      <th>Polymorphisms and Variant Calls</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><img src="../../images/pA.png" alt=""></td>
+      <td><img src="../../images/pB.png" alt=""></td>
+      <td><img src="../../images/pAB.png" alt=""></td>
+    </tr>
+  </tbody>
+</table>
+
+<blockquote class="question">
+  <h3 id="question-questions">
+<img class="emoji" title=":question:" alt=":question:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2753.png" height="20" width="20" align="absmiddle"> Questions</h3>
+
+  <ol>
+    <li>What is the probability of a having a real polymorphism <strong>A</strong> given our observation of variants in reads <strong>B</strong>? In other words what is the probability of A given <strong>B</strong>? Or, as stated in the original <a href="https://oscarbonilla.com/2009/05/visualizing-bayes-theorem/">blog</a>: “given that we are in region <strong>B</strong> what is the probability that we are in the region <strong>AB</strong>?”</li>
+    <li>
+      <p>Now, let’s ask an opposite question. Given a true polymorphism <strong>A</strong> what are the chances that we do detect it (i.e., find ourselves in <strong>AB</strong>)?</p>
+
+      <details>
+<summary>Click to view answer</summary>
+<ol type="1">
+<li>
+<p>P(A|B) = |AB|/|B|.</p>
+<p>Dividing by |U|: P(A|B) = (|AB|/|U|)/(|B|/|U|).</p>
+<p>Because we know that P(AB) = |AB|/|U| and P(B) = |B|/|U|, we can rewrite the equation in the previous bullet point as P(A|B) = P(AB)/P(B)</p>
+</li>
+<li>
+<p>It will be P(B|A) = P(AB)/P(A).</p>
+<p>So, because we know that P(A|B) = P(AB)/P(B) and we just reasoned that P(B|A) = P(AB)/P(A), we can say that P(A|B)P(B) = P(B|A)P(A) leading us to the Bayes formula P(A|B) = P(B|A)P(A)/P(B).</p>
+<p>Translating this into "genomics terms" the probability of having a genotype G given reads R is:  P(G|R) = P(R|G)P(G)/P(R). Because in a given calculation of P(G|R) reads are fixed we can re-write the Bayes formula in the following way P(G|R) ~ P(R|G)P(G) with P(R) becoming a constant.</p>
+</li>
+</ol>
+</details>
+    </li>
+  </ol>
+</blockquote>
+
+<p><img class="emoji" title=":exclamation:" alt=":exclamation:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2757.png" height="20" width="20" align="absmiddle"> This leaves us with the need to estimate two things:</p>
+
+<ol>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>*P(R</td>
+          <td>G)*, the data likelihood;</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+<em>P(G)</em>, the prior probability for the variant.</li>
+</ol>
+
+<p>In the simplest case we can estimate these as follows:</p>
+
+<h4 id="prg"><em>P(R|G)</em></h4>
+
+<table>
+  <tbody>
+    <tr>
+      <td>Suppose <em>R<sub>i</sub></em> is a base in read <em>i</em> corresponding to a genome position with genotype <em>G</em>. The probability of seeing <em>R<sub>i</sub></em> given <em>G</em>, *P(R<sub>i</sub>
+</td>
+      <td>G)<em>, is given by the quality score of *R<sub>i</sub></em> (the quality scores are given by base calling software and reported as <a href="https://en.wikipedia.org/wiki/Phred_quality_score">phred scores</a>). Thus the genotype likelihood *P(R</td>
+      <td>G)* is the product of *P(R<sub>i</sub>
+</td>
+      <td>G)* over all <em>i</em>. In reality however there are many other sources of uncertainty (in addition to base qualities) that are incorporated in the calculation of data likelihoods including NGS technology-related issues, dependency of error rates on substitution type (e.g., transitions versus transversions), sequencing context etc…</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="pg---a-single-sample-case">
+<em>P(G)</em> - a single sample case</h4>
+
+<p>One can assign an equal probability to all possible genotypes, or to source this information based on previously obtained knowledge containing in a database, such as <a href="https://www.ncbi.nlm.nih.gov/SNP/">dbSNP</a>. In this case (as exemplified in <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3593722/">Nielsen et al.</a> we may, for instance, have a site with a <strong>G/T</strong> polymorphism and genotypes <strong>GG</strong>, <strong>TT</strong>, and <strong>GT</strong> having frequencies of 0.45, 0.45, 0.09, respectively. We will use these values as priors.</p>
+
+<h4 id="pg---a-multi-sample-case">
+<em>P(G)</em> - a multi-sample case</h4>
+
+<p>Genotype calling reliability can be significantly improved when analyzing multiple samples jointly. In this case genotype frequencies can be inferred from allele frequencies using Hardy-Weinberg equilibrium (<a href="https://en.wikipedia.org/wiki/Hardy%E2%80%93Weinberg_principle">HWE</a>). The following example (again from <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3593722/">Nielsen et al.</a>) illustrates this idea: suppose you are calling genotypes for a single individual using a combination of multiple samples. There are two genotypes, <strong>AT</strong> and <strong>AA</strong>, with equally large genotype likelihoods. If, however, in our collection of multiple samples the frequency of <strong>A</strong> is 1% (<em>p</em> = 0.01; <em>q</em> = 1 - <em>p</em> = 0.99), then from the HWE we have:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>AA (<em>p<sup>2</sup></em>)</th>
+      <th>AT (2<em>pq</em>)</th>
+      <th>TT (<em>q<sup>2</sup></em>)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0.0001</td>
+      <td>0.0198</td>
+      <td>0.9801</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>This makes it highly unlikely that <strong>AA</strong> is a true genotype of this individual.</p>
+
+<h1 id="calling-with-freebayes">Calling with FreeBayes</h1>
+
+<p><a href="https://github.com/ekg/freebayes">FreeBayes</a> is an open source variant caller that has been battle tested by the 1000 Genomes community and is extensively used today (also see <a href="https://bcbio.wordpress.com/">bcbio</a>). It has a number of features that simply variant discovery workflows. These include (from FreeBayes github page):</p>
+
+<blockquote>
+  <ul>
+    <li>
+<strong>Indel realignment is accomplished internally</strong> using a read-independent method, and issues resulting from discordant alignments are dramatically reducedy through the direct detection of haplotypes;</li>
+    <li>
+<strong>The need for base quality recalibration is avoided</strong> through the direct detection of haplotypes. Sequencing platform errors tend to cluster (e.g. at the ends of reads), and generate unique, non-repeating haplotypes at a given locus;</li>
+    <li>
+<strong>Variant quality recalibration is avoided</strong> by incorporating a number of metrics, such as read placement bias and allele balance, directly into the Bayesian model;</li>
+    <li>
+<strong>Ability to incorporate non-diploid cases</strong> such as pooled datasets or data from polyploid samples.</li>
+  </ul>
+</blockquote>
+
+<p>Freebayes is a <em>haplotype-based</em> variant caller. This implies that instead of looking at an individual positions within an alignment of reads to the reference genome, it looks at a haplotype window, length of which is dynamically determined (see section 3.2. in <a href="https://arxiv.org/pdf/1207.3907v2.pdf">FreeBayes manuscript</a>):</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Haplotype-based calling</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><img src="../../images/freebayes.png" alt=""></td>
+    </tr>
+    <tr>
+      <td><sub>Looking at a haplotype window makes misalignments tolerable. In this case a low complexity poly(A) stretch is misaligned. As a result looking at individual positions will result in calling multiple spurious varians. In the case of FreeBayes looking at a haplotype identifies two alleles (this is a diploid example) <code class="highlighter-rouge">A(7)</code> and <code class="highlighter-rouge">A(6)</code>, while <code class="highlighter-rouge">A(8)</code> is likely an error. Image by <a href="https://github.com/ekg/freebayes">Erik Garrison</a></sub></td>
+    </tr>
+  </tbody>
+</table>
+
+<h1 id="lets-try-it">Let’s try it</h1>
+
+<h2 id="the-data">The data</h2>
+
+<p>In this example we will perform variant calling and annotation using <a href="https://sites.stanford.edu/abms/content/giab-reference-materials-and-data">genome in the bottle data</a>. Specifically, we will use Ashkenazim Father-Mother-Son trio data from the Personal Genome Project:</p>
+
+<ul>
+  <li>HG002- NA24385 - huAA53E0 (son)</li>
+  <li>HG003- NA24149 - hu6E4515 (father)</li>
+  <li>HG004- NA24143 - hu8E87A9 (mother)</li>
+</ul>
+
+<p>Yet for a quick tutorial these datasets are way too big, so we created a <a href="https://dx.doi.org/10.5281/zenodo.60520">downsampled dataset</a>. This dataset was produced by mapping the trio reads against <code class="highlighter-rouge">hg19</code> version of the human genome, merging the resulting bam files together (we use readgroups to label individual reads so they can be traced to each of the original individuals), and restricting alignments to a small portion of chromosome 19 containing the <a href="http://www.ncbi.nlm.nih.gov/gene?cmd=Retrieve&amp;dopt=Graphics&amp;list_uids=5442"><em>POLRMT</em></a> gene.</p>
+
+<blockquote class="hands_on">
+  <h3 id="pencil2-hands-on-variant-calling">
+<img class="emoji" title=":pencil2:" alt=":pencil2:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/270f.png" height="20" width="20" align="absmiddle"> Hands-on: Variant calling</h3>
+
+  <ol>
+    <li>Import <a href="https://zenodo.org/record/60520/files/GIAB-Ashkenazim-Trio.txt">the data</a> into your history <img class="emoji" title=":wrench:" alt=":wrench:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f527.png" height="20" width="20" align="absmiddle">
+</li>
+    <li>Specify the used genome for mapping <img class="emoji" title=":wrench:" alt=":wrench:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f527.png" height="20" width="20" align="absmiddle">
+      <ol>
+        <li>Click on <strong>Edit attributes</strong> (pencil icon on right panel)</li>
+        <li>Select <code class="highlighter-rouge">Human Feb 2009</code> on <strong>Database/Build</strong>
+</li>
+        <li>Save it</li>
+      </ol>
+    </li>
+    <li>Import the reference genome <img class="emoji" title=":wrench:" alt=":wrench:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f527.png" height="20" width="20" align="absmiddle">
+      <ol>
+        <li>Go on <strong>Data Libraries</strong> in <strong>Shared data</strong> (top panel on Galaxy’s interface)</li>
+        <li>Click on <strong>Training Data</strong>
+</li>
+        <li>Select <code class="highlighter-rouge">hg19</code>
+</li>
+        <li>Click on <strong>Import selected datasets into history</strong> (just below the top panel)</li>
+        <li>Import it</li>
+        <li>Convert it from 2bit to fasta with <strong>twoBitToFa</strong> from <strong>Convert Formats</strong>
+</li>
+      </ol>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h2 id="generating-and-post-processing-freebayes-calls">Generating and post-processing FreeBayes calls</h2>
+
+<blockquote class="hands_on">
+  <h3 id="pencil2-hands-on-generating-freebayes-calls">
+<img class="emoji" title=":pencil2:" alt=":pencil2:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/270f.png" height="20" width="20" align="absmiddle"> Hands-on: Generating FreeBayes calls</h3>
+
+  <ol>
+    <li>Select <strong>FreeBayes</strong> from <strong>Phenotype Association</strong> section of the tool menu (left pane of Galaxy’s interface) <img class="emoji" title=":wrench:" alt=":wrench:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f527.png" height="20" width="20" align="absmiddle">
+</li>
+    <li>Make sure the top part of the interface looks like shown below. Here we selected <code class="highlighter-rouge">GIAB-Ashkenazim-Trio-hg19</code> as input and set <strong>Using reference genome</strong> to <code class="highlighter-rouge">hg19</code> and <strong>Choose parameter selection level</strong> to <code class="highlighter-rouge">5. Complete list of all options</code>:</li>
+  </ol>
+
+  <p><img src="../../images/FreeBayes_settings.png" alt=""></p>
+
+  <ol>
+    <li>Scrolling down to <strong>Tweak algorithmic features?</strong> click <code class="highlighter-rouge">Yes</code> and set <strong>Calculate the marginal probability of genotypes and report as GQ in each sample field in the VCF output</strong> to <code class="highlighter-rouge">Yes</code>. This would help us evaluating the quality of genotype calls:</li>
+  </ol>
+
+  <p><img src="../../images/freebayes_gq.png" alt=""></p>
+</blockquote>
+
+<p>This produces a dataset in <a href="https://www.1000genomes.org/wiki/Analysis/variant-call-format">VCF</a> format containing 35 putative variants. Before we can continue we need to post-process this dataset by breaking compound variants into multiple independent variants with <strong>VcfAllelicPrimitives</strong> tool found within <strong>VCF Tools</strong> section. This is necessary for ensuring the smooth sailing through downstream analyses:</p>
+
+<blockquote class="hands_on">
+  <h3 id="pencil2-hands-on-post-processing">
+<img class="emoji" title=":pencil2:" alt=":pencil2:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/270f.png" height="20" width="20" align="absmiddle"> Hands-on: Post-processing</h3>
+
+  <ol>
+    <li>Select FreeBayes output as the input for this tool <img class="emoji" title=":wrench:" alt=":wrench:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f527.png" height="20" width="20" align="absmiddle">
+</li>
+    <li>Make sure <strong>Maintain site and allele-level annotations when decomposing</strong> and <strong>Maintain genotype-level annotations when decomposing</strong> are set to <code class="highlighter-rouge">Yes</code>
+</li>
+  </ol>
+
+  <p><img src="../../images/vcfallelicprimitives.png" alt=""></p>
+
+  <p><strong>VCFAllelicPrimitives</strong> generated a VCF files containing 37 records (the input VCF only contained 35). This is because a multiple nucleotide polymorphism (<code class="highlighter-rouge">TAGG|CAGA</code>) at position 618851 have been converted to two:</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Before</th>
+        <th>After</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+<code class="highlighter-rouge">chr19 618851 . TAGG CAGA 81.7546</code><br>
+</td>
+        <td>
+<code class="highlighter-rouge">chr19 618851 . T C 81.7546</code><br><code class="highlighter-rouge">chr19 618854 . G A 81.7546</code>
+</td>
+      </tr>
+    </tbody>
+  </table>
+
+</blockquote>
+
+<h2 id="annotating-variants-with-snpeff">Annotating variants with SnpEff</h2>
+
+<p>At this point we are ready to begin annotating variants using <a href="http://snpeff.sourceforge.net/SnpEff.html"><strong>SnpEff</strong></a>. <strong>SnpEff</strong>, a project maintained by <a href="https://www.linkedin.com/in/pablocingolani">Pablo Cingolani</a> “<em>…annotates and predicts the effects of variants on genes (such as amino acid changes)…</em>” and so is critical for functional interpretation of variation data.</p>
+
+<h3 id="pencil2-annotating-variants">
+<img class="emoji" title=":pencil2:" alt=":pencil2:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/270f.png" height="20" width="20" align="absmiddle"> Annotating variants</h3>
+
+<ol>
+  <li>Download <code class="highlighter-rouge">hg19</code> database with <strong>SnpEff Download</strong> <img class="emoji" title=":wrench:" alt=":wrench:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f527.png" height="20" width="20" align="absmiddle">
+</li>
+  <li>Launch annotation of your variants with <strong>SnpEff</strong> from <strong>Annotation</strong>, using the downloaded database (reference genome from your history)</li>
+</ol>
+
+<p>SnpEff will generate two outputs: (1) an annotated VCF file and (2) an HTML report. The report contains a number of useful metrics such as distribution of variants across gene features</p>
+
+<p><img src="../../images/snpeff_chart.png" alt=""></p>
+
+<p>or changes to codons</p>
+
+<p><img src="../../images/snpeff_codons.png" alt=""></p>
+
+<h2 id="manipulating-variation-data-with-gemini">Manipulating variation data with GEMINI</h2>
+
+<p>Now that we have an annotated VCF file it is time to peek inside our variation data. <a href="https://quinlanlab.org/">Aaron Quinlan</a>, creator of <a href="http://gemini.readthedocs.org/en/latest/index.html">GEMINI</a>, calls it <em>Detective work</em>.</p>
+
+<h3 id="loading-data-into-gemini">Loading data into GEMINI</h3>
+
+<p>The first step is to convert a VCF file we would like to analyze into a GEMINI database. For this we will use <strong>GEMINI Load</strong> tool from <strong>Gemini</strong> section. GEMINI takes as input a VCF file and a <a href="https://www.cog-genomics.org/plink2/formats#ped">PED</a> file describing the relationship between samples. In the case of our dataset the PED file looks like this (second imported file):</p>
+
+<div class="highlighter-rouge">
+<pre class="highlight"><code>#family_id sample_id            paternal_id          maternal_id         sex phenotype ethnicity
+family1    HG004_NA24143_mother -9                   -9                   2  1         CEU
+family1	   HG003_NA24149_father -9                   -9                   1  1         CEU
+family1	   HG002_NA24385_son	HG003_NA24149_father HG004_NA24143_mother 1  2         CEU
+</code></pre>
+</div>
+
+<blockquote class="hands_on">
+  <h3 id="pencil2-hands-on-loading-data-wrench">
+<img class="emoji" title=":pencil2:" alt=":pencil2:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/270f.png" height="20" width="20" align="absmiddle"> Hands-on: Loading data <img class="emoji" title=":wrench:" alt=":wrench:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f527.png" height="20" width="20" align="absmiddle">
+</h3>
+
+  <p>So let’s load data into GEMINI by setting VCF and PED inputs</p>
+
+  <p><img src="../../images/gemini_load.png" alt=""></p>
+
+  <p>This creates a sqlite database. To see the content of the database use <strong>GEMINI_db_info</strong>:</p>
+
+  <p><img src="../../images/gemini_db_info.png" alt=""></p>
+
+</blockquote>
+
+<p>This produce a list of all tables and fields in the database.</p>
+
+<h3 id="querying-gemini-database">Querying GEMINI database</h3>
+
+<p>GEMINI database is queried using the versatile SQL language (more on SQL <a href="https://swcarpentry.github.io/sql-novice-survey">here</a>). In Galaxy’s version of GEMINI this is done using <strong>GEMINI_query</strong> tool. Within this tool SQL commands are typed directly into the <strong>The query to be issued to the database</strong> text box. Let’s begin getting information from some of the tables we discovered with <strong>GEMINI_db_info</strong> tool above.</p>
+
+<blockquote class="tip">
+  <h3 id="bulb-tip-gemini-tutorials">
+<img class="emoji" title=":bulb:" alt=":bulb:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f4a1.png" height="20" width="20" align="absmiddle"> Tip: Gemini tutorials</h3>
+
+  <p>The examples below are taken from “<a href="https://s3.amazonaws.com/gemini-tutorials/Intro-To-Gemini.pdf">Intro to Gemini</a>” tutorial. For extensive documentation see “<a href="https://gemini.readthedocs.org/en/latest/content/querying.html">Querying GEMINI</a>”.</p>
+</blockquote>
+
+<blockquote class="hands_on">
+  <h3 id="pencil2-hands-on-selecting-novel-variants-that-are-not-annotated-in-dbsnp-database">
+<img class="emoji" title=":pencil2:" alt=":pencil2:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/270f.png" height="20" width="20" align="absmiddle"> Hands-on: Selecting “novel” variants that are not annotated in dbSNP database</h3>
+
+  <p>Type <code class="highlighter-rouge">SELECT count(*) FROM variants WHERE in_dbsnp == 0</code> into <strong>The query to be issued to the database</strong></p>
+
+  <div class="highlighter-rouge">
+<pre class="highlight"><code>![](../../images/gemini_query1.png)
+</code></pre>
+  </div>
+
+  <p>As we can see from <a href="https://usegalaxy.org/datasets/bbd44e69cb8906b51bb37b9032761321/display/?preview=True">output</a> there are 21 variants that are not annotated in dbSNP</p>
+
+</blockquote>
+
+<blockquote>
+  <h3 id="pencil2-find-variants-in-polrmt-gene">
+<img class="emoji" title=":pencil2:" alt=":pencil2:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/270f.png" height="20" width="20" align="absmiddle"> Find variants in POLRMT gene</h3>
+
+  <p>The query <code class="highlighter-rouge">SELECT * FROM variants WHERE filter is NULL and gene = 'POLRMT'</code> will produce <a href="https://usegalaxy.org/datasets/bbd44e69cb8906b5a0bb5b2cc0695697/display/?preview=True">output</a> with very large number of columns. To restrict the number of columns to a manageable set let’s use this command: <code class="highlighter-rouge">SELECT rs_ids, aaf_esp_ea, impact, clinvar_disease_name, clinvar_sig FROM variants WHERE filter is NULL and gene = 'POLRMT'</code> (column definitions can be found <a href="https://gemini.readthedocs.org/en/latest/content/database_schema.html">here</a>)</p>
+</blockquote>
+
+<p><a href="https://usegalaxy.org/datasets/bbd44e69cb8906b540d65297cd1d26bb/display/?preview=True">Output</a> shows variants found within the <em>POLRMT</em> gene.</p>
+
+<h3 id="querying-genotypes">Querying genotypes</h3>
+
+<p><strong>GEMINI</strong> provides access to genotype, sequencing depth, genotype quality, and genotype likelihoods for each individual (<code class="highlighter-rouge">subjectID</code>):</p>
+
+<h4 id="querying">Querying</h4>
+
+<ul>
+  <li>
+<code class="highlighter-rouge">gt_types.subjectID</code> - three types of genotype types: <code class="highlighter-rouge">HOM_REF</code>, <code class="highlighter-rouge">HET</code>, <code class="highlighter-rouge">HOM_ALT</code>;</li>
+  <li>
+<code class="highlighter-rouge">gt_quals.subjectID</code> - genotype quality</li>
+  <li>
+<code class="highlighter-rouge">gt_depths.subjectID</code> - total number of reads in this subject at position</li>
+  <li>
+<code class="highlighter-rouge">gt_ref_depths.subjectID</code> -  number of reference allele reads in this subject at position</li>
+  <li>
+<code class="highlighter-rouge">gt_alt_depths.subjectID</code> - number of alternate allele reads in this subject at position</li>
+</ul>
+
+<blockquote class="question">
+  <h3 id="question-questions-1">
+<img class="emoji" title=":question:" alt=":question:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2753.png" height="20" width="20" align="absmiddle"> Questions</h3>
+
+  <ol>
+    <li>At how many sites does child have a non-reference allele?</li>
+    <li>At how many sites both father and son have non reference alleles?</li>
+    <li>
+      <p>List genotypes for father and son where they have non-reference alleles.</p>
+
+      <details>
+<summary>Click to view answers</summary>
+<ol type="1">
+<li>
+<p>To answer this question we will use two fields of GEMINI_query interface:</p>
+<p>Type `SELECT * from variants` into <b>The query to be issued to the database</b></p>
+<p>Type `gt_types.HG002_NA24385_son &lt;&gt; HOM_REF` into <b>Restrictions to apply to genotype values</b></p>Here is an <a href="../../images/gemini_query2.png">example</a>. It will generate <a href="https://usegalaxy.org/datasets/bbd44e69cb8906b560921700703d0255/display/?preview=True">this output</a>
+</li>.
+<li>Typing the same expression `SELECT * from variants` into <b>The query to be issued to the database</b> and `(gt_types.HG002_NA24385_son &lt;&gt; HOM_REF AND gt_types.HG003_NA24149_father &lt;&gt; HOM_REF)` into <b>Restrictions to apply to genotype values</b> will generate <a href="https://usegalaxy.org/datasets/bbd44e69cb8906b5aab445b3cd632ba7/display/?preview=True">this output</a>
+</li>.
+<li>Typing `SELECT gts.HG002_NA24385_son, gts.HG003_NA24149_father from variants` into <b>The query to be issued to the database</b> and `(gt_types.HG002_NA24385_son &lt;&gt; HOM_REF AND gt_types.HG003_NA24149_father &lt;&gt; HOM_REF)` into <b>Restrictions to apply to genotype values</b>
+will generate<a href="https://usegalaxy.org/datasets/bbd44e69cb8906b543c67f80be21ed02/display/?preview=True">this output</a>
+</li>.
+</ol>
+</details>
+    </li>
+  </ol>
+</blockquote>
+
+<h3 id="using-wildcards">Using wildcards</h3>
+
+<p>Wildcards simply writing SQL expressions when searching across multiple terms. The syntax for genotype filter wilcards is <code class="highlighter-rouge">COLUMN).(SAMPLE_WILDCARD).(SAMPLE_WILDCARD_RULE).(RULE_ENFORCEMENT).</code>. Let’s look at few examples.</p>
+
+<blockquote class="question">
+  <h3 id="question-question">
+<img class="emoji" title=":question:" alt=":question:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2753.png" height="20" width="20" align="absmiddle"> Question</h3>
+
+  <p>At which variants are every sample heterozygous?</p>
+
+  <details>
+   <summary>Click to view answer</summary>
+   Type `SELECT chrom, start, end, ref, alt, gene, impact, (gts).(*) FROM variants` into <b>The query to be issued to the database</b> and `(gt_types).(*).(==HET).(all)` into <b>Restrictions to apply to genotype values</b>. Here we use wildcards for the query (`(gts.*)` = get genotypes for <b>all</b> samples) and genotype filtering (`(gt_types).(*).(==HET).(all)`, the <a href="https://gemini.readthedocs.org/en/latest/content/querying.html#the-all-operator">all operator</a> implies that want results for <b>all</b> afftected individuals). It will generate <a href="https://usegalaxy.org/datasets/bbd44e69cb8906b5819e1404b5e127d1/display/?preview=True">this output</a>.
+   </details>
+</blockquote>
+
+<h1 class="no_toc" id="going-further">Going further</h1>
+
+<p>This short tutorial should give you an overall idea on how generate variant data in Galaxy and process it with GEMINI. Yet there is much more to learn. Below we list GEMINI tutorials and links to Galaxy libraries with relevant data.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Tutorial</th>
+      <th style="text-align: center">PDF</th>
+      <th style="text-align: center">Data</th>
+      <th style="text-align: center">Galaxy History</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">Introduction</td>
+      <td style="text-align: center"><a href="https://s3.amazonaws.com/gemini-tutorials/Intro-To-Gemini.pdf"> <img class="emoji" title=":notebook:" alt=":notebook:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f4d3.png" height="20" width="20" align="absmiddle"> </a></td>
+      <td style="text-align: center"><a href="https://usegalaxy.org/library/list#folders/F0283ca691a41c352"><img class="emoji" title=":open_file_folder:" alt=":open_file_folder:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f4c2.png" height="20" width="20" align="absmiddle"></a></td>
+      <td style="text-align: center"><a href="https://usegalaxy.org/u/aun1/h/gemini-introduction"><img class="emoji" title=":arrow_forward:" alt=":arrow_forward:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/25b6.png" height="20" width="20" align="absmiddle"></a></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Identifying <em>de novo</em> mutations underlying Mendelian disease</td>
+      <td style="text-align: center"><a href="https://s3.amazonaws.com/gemini-tutorials/Gemini-DeNovo-Tutorial.pdf"> <img class="emoji" title=":notebook:" alt=":notebook:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f4d3.png" height="20" width="20" align="absmiddle"> </a></td>
+      <td style="text-align: center"><a href="https://usegalaxy.org/library/list#folders/F775008f45cbbf010"><img class="emoji" title=":open_file_folder:" alt=":open_file_folder:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f4c2.png" height="20" width="20" align="absmiddle"></a></td>
+      <td style="text-align: center"><a href="https://usegalaxy.org/u/aun1/h/gemini-de-novo-mutations"><img class="emoji" title=":arrow_forward:" alt=":arrow_forward:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/25b6.png" height="20" width="20" align="absmiddle"></a></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Identifying autosomal recessive variants underlying Mendelian disease</td>
+      <td style="text-align: center"><a href="https://s3.amazonaws.com/gemini-tutorials/Gemini-Recessive-Tutorial.pdf"> <img class="emoji" title=":notebook:" alt=":notebook:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f4d3.png" height="20" width="20" align="absmiddle"> </a></td>
+      <td style="text-align: center"><a href="https://usegalaxy.org/library/list#folders/F35b262f5ac8aa63a"><img class="emoji" title=":open_file_folder:" alt=":open_file_folder:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f4c2.png" height="20" width="20" align="absmiddle"></a></td>
+      <td style="text-align: center"><a href="https://usegalaxy.org/u/aun1/h/gemini-autosomal-recessive"><img class="emoji" title=":arrow_forward:" alt=":arrow_forward:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/25b6.png" height="20" width="20" align="absmiddle"></a></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Identifying autosomal dominant variants underlying Mendelian disease</td>
+      <td style="text-align: center"><a href="https://s3.amazonaws.com/gemini-tutorials/Gemini-Dominant-Tutorial.pdf"> <img class="emoji" title=":notebook:" alt=":notebook:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f4d3.png" height="20" width="20" align="absmiddle"> </a></td>
+      <td style="text-align: center"><a href="https://usegalaxy.org/library/list#folders/F1c4722ad56892a31"><img class="emoji" title=":open_file_folder:" alt=":open_file_folder:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f4c2.png" height="20" width="20" align="absmiddle"></a></td>
+      <td style="text-align: center"><a href="https://usegalaxy.org/u/aun1/h/gemini-autosomal-dominant"><img class="emoji" title=":arrow_forward:" alt=":arrow_forward:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/25b6.png" height="20" width="20" align="absmiddle"></a></td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="how-to-use-these-tutorials">How to use these tutorials?</h2>
+
+<ul>
+  <li>Right click on the <img class="emoji" title=":notebook:" alt=":notebook:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f4d3.png" height="20" width="20" align="absmiddle"> symbol and open tutorial in a new browser tab;</li>
+  <li>Right click on <img class="emoji" title=":arrow_forward:" alt=":arrow_forward:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/25b6.png" height="20" width="20" align="absmiddle"> symbol and open Galaxy history in another new browser tab;</li>
+  <li>
+    <p>When Galaxy history interface opens you will need to click <strong>Import history</strong> link highlighted with a red border in the following figure:</p>
+
+    <p><img src="../../images/import_history.png" alt=""></p>
+  </li>
+  <li>
+    <p>If you have a wide screen arrange browsers tabs side by side:</p>
+
+    <p><img src="../../images/side-by-side.png" alt=""></p>
+  </li>
+  <li>
+    <p>Proceed with tutorial. For example, to repeat the following command from GEMINI tutorial:</p>
+
+    <p><img src="../../images/gemini_command.png" alt=""></p>
+  </li>
+  <li>
+    <p>Use Galaxy’s <strong>GEMINI_load</strong> tool:</p>
+
+    <p><img src="../../images/galaxy_command.png" alt=""></p>
+  </li>
+  <li>and so on….</li>
+</ul>
+
+<blockquote class="tip">
+  <h3 id="bulb-tip-if-things-dont-work">
+<img class="emoji" title=":bulb:" alt=":bulb:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f4a1.png" height="20" width="20" align="absmiddle"> Tip: If things don’t work…</h3>
+
+  <p>…you need to complain. Use <a href="https://usegalaxy.org/biostar/biostar_redirect">Galaxy’s BioStar Channel</a> to do this.</p>
+</blockquote>
+
+
+    
+    <blockquote class="key_points">
+        <h3> <img class="emoji" title=":grey_exclamation:" alt=":grey_exclamation:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2755.png" height="20" width="20" align="absmiddle"> Key points</h3>
+
+        <ul>
+        
+           <li>The modern variant callers attempt to assign a reliability estimate for each genotype call. This is done using Bayes reasoning.</li>
+        
+           <li>FreeBayes variant caller looks at a haplotype window</li>
+        
+           <li>After variants have been annotated and post-processed one can manipulate the data with GEMINI queries</li>
+        
+        </ul>
+    </blockquote>
+    
+
+    
+      <h1>Useful literature</h1>
+      <p>Useful information regarding this type of analysis with descriptions and paper references for the tools used in this tutorial, and literature for this analysis techniques and interpretations can be found <a href="https://galaxyproject.github.io/training-material//variant-analysis#references">here</a>.</p>
+    
+
+    <h3>
+<img class="emoji" title=":clap:" alt=":clap:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f44f.png" height="20" width="20" align="absmiddle"> Congratulations on successfully completing this tutorial!</h3>
+
+
+    <hr>
+    <blockquote class="overview">
+        <h3> <img class="emoji" title=":speech_balloon:" alt=":speech_balloon:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f4ac.png" height="20" width="20" align="absmiddle"> Feedback</h3>
+        Please take a moment and provide your feedback on this tutorial. Your feedback will help guide and improve future revisions to this tutorial. <a href="https://tinyurl.com/GTNfeedback" target="_blank">Feedback Form</a>
+    </blockquote>
+
+    <i>This material is the result of a collaborative work. Thanks to <a href="https://galaxyproject.github.io/training-material//variant-analysis#contributors">all the contributors</a> and the <a href="https://wiki.galaxyproject.org/Teach/GTN">Galaxy Training Network</a>!<br>
+    Found a typo? Something is wrong in this tutorial? Edit it on <a href="https://github.com/galaxyproject/training-material/tree/master/variant-analysis/tutorials/diploid-variant-calling.md">GitHub</a>.</i>
+</section>
+
+        </div>
+    </body>
+    <script src="https://galaxyproject.github.io/training-material//assets/js/landing_page.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</html>

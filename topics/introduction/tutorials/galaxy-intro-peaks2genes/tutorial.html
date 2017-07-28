@@ -1,0 +1,940 @@
+<!DOCTYPE html>
+<html>
+    <head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="chrome=1">
+        <title>Galaxy Training!</title>
+        <link media="all" href="https://netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://galaxyproject.github.io/training-material//assets/css/landing_page.css">
+        <link rel="stylesheet" href="https://galaxyproject.github.io/training-material//assets/css/tutorial.css">
+        <link rel="stylesheet" href="https://galaxyproject.github.io/training-material//assets/css/font-awesome.css">
+        <link rel="stylesheet" href="https://galaxyproject.github.io/training-material//assets/css/syntax_highlighting.css">
+        <meta name="viewport" content="width=device-width">
+    </head>
+    <body>
+        <div class="wrapper">
+            
+
+
+<header>
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a id="site-title" class="navbar-brand" href="https://wiki.galaxyproject.org/Teach/GTN">
+              <img class="pull-left img-responsive" src="https://galaxyproject.github.io/training-material///assets/images/GTN.png">
+            </a>
+            <a id="site-title" class="navbar-brand name-holder" href="https://galaxyproject.github.io/training-material//topics/introduction/tutorials/galaxy-intro-peaks2genes">
+              From peaks to genes
+            </a>
+          </div>
+
+          <div class="collapse navbar-collapse" id="navbar">
+
+            <ul id="main-menu" class="nav navbar-nav navbar-right">
+              <li><a href="https://galaxyproject.github.io/training-material/" title="Back to front page"><i class="fa fa-home"></i> Home</a></li>
+              <li><a href="https://galaxyproject.github.io/training-material//topics/introduction" title="Go back to list of tutorials"><i class="fa fa-file-text-o"></i> introduction</a></li>
+
+              
+                <li><a href="https://galaxyproject.github.io/training-material//topics/introduction/slides" title="Slides for this tutorial"><i class="fa fa-graduation-cap"></i> Introduction slides</a></li>
+              
+              <!--<li><a href="https://galaxyproject.github.io/training-material//introduction/slides/galaxy-intro-peaks2genes/"><i class="fa fa-file-powerpoint-o"></i> Associated slides</a></li>-->
+
+              
+                <li><a href="https://github.com/galaxyproject/training-material/tree/master/topics/introduction/docker" title="Docker image for this tutorial"><i class="fa fa-ship"></i> Docker image</a></li>
+              
+
+              
+
+              
+
+              
+                <li><a href="https://galaxyproject.github.io/training-material//topics/introduction#references" title="References"><i class="fa fa-book"></i> Literature</a></li>
+              
+
+            </ul>
+          </div>
+        </div>
+    </nav>
+</header>
+
+<section class="tutorial">
+    <h1>From peaks to genes</h1>
+
+    <blockquote class="overview">
+        <h3>Overview</h3>
+
+        <p class="bold"> <img class="emoji" title=":grey_question:" alt=":grey_question:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2754.png" height="20" width="20" align="absmiddle"> Questions</p>
+        <ul>
+        
+          <li>How to use Galaxy?</li>
+        
+          <li>How to get from peak regions to a list of gene names?</li>
+        
+        </ul>
+
+        <p class="bold"> <img class="emoji" title=":dart:" alt=":dart:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f3af.png" height="20" width="20" align="absmiddle"> Objectives</p>
+        <ul>
+        
+          <li>Familiarize yourself with the basics of Galaxy</li>
+        
+          <li>Learn how to obtain data from external sources</li>
+        
+          <li>Learn how to run tools</li>
+        
+          <li>Learn how histories work</li>
+        
+          <li>Learn how to create a workflow</li>
+        
+          <li>Learn how to share your work</li>
+        
+        </ul>
+
+        
+
+        <p><span class="bold"> <img class="emoji" title=":hourglass:" alt=":hourglass:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/231b.png" height="20" width="20" align="absmiddle"> Time estimation:</span> 3h</p>
+
+    </blockquote>
+
+<h1 class="no_toc" id="introduction">Introduction</h1>
+
+<p>We stumbled upon a paper <a href="https://www.ncbi.nlm.nih.gov/pubmed/22862943">Li et al., Cell Stem Cell 2012</a> that contains the analysis of possible target genes of an interesting protein in mice. The targets were obtained by ChIP-seq and the raw data is available through <a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE37268">GEO</a>.
+The list of genes however is neither in the supplement of the paper nor part of the GEO submission.
+The closest thing we can find is a list of the regions where the signal is
+significantly enriched (so called <em>peaks</em>).
+The goal of this exercise is to <strong>turn this list of genomic regions into a list of possible target genes</strong>.</p>
+
+<blockquote class="agenda">
+  <h3 id="agenda">Agenda</h3>
+
+  <p>In this tutorial, we will deal with:</p>
+
+<ol id="markdown-toc">
+  <li>
+<a href="#pretreatments" id="markdown-toc-pretreatments">Pretreatments</a>    <ol>
+      <li><a href="#data-upload" id="markdown-toc-data-upload">Data upload</a></li>
+    </ol>
+  </li>
+  <li>
+<a href="#part-1-naive-approach" id="markdown-toc-part-1-naive-approach">Part 1: Naive approach</a>    <ol>
+      <li><a href="#file-preperation" id="markdown-toc-file-preperation">File preperation</a></li>
+      <li><a href="#analysis" id="markdown-toc-analysis">Analysis</a></li>
+      <li><a href="#visualization" id="markdown-toc-visualization">Visualization</a></li>
+      <li><a href="#extracting-workflow" id="markdown-toc-extracting-workflow">Extracting workflow</a></li>
+    </ol>
+  </li>
+  <li>
+<a href="#part-2-more-sophisticated-approach" id="markdown-toc-part-2-more-sophisticated-approach">Part 2: More sophisticated approach</a>    <ol>
+      <li><a href="#preperation" id="markdown-toc-preperation">Preperation</a></li>
+      <li><a href="#create-peak-summit-file" id="markdown-toc-create-peak-summit-file">Create peak summit file</a></li>
+      <li><a href="#get-gene-names" id="markdown-toc-get-gene-names">Get gene names</a></li>
+      <li><a href="#repeat-workflow" id="markdown-toc-repeat-workflow">Repeat workflow</a></li>
+    </ol>
+  </li>
+  <li><a href="#share-your-work" id="markdown-toc-share-your-work">Share your work</a></li>
+</ol>
+
+</blockquote>
+
+<h1 id="pretreatments">Pretreatments</h1>
+
+<p>Browse to your Galaxy instance and log in or register. The Galaxy interface consist of three main parts. The available tools are listed on the left, your analysis history is recorded on the right, and the middle pane will show the tools and datasets.</p>
+
+<p><img src="../../images/galaxy_interface.png" alt=""></p>
+
+<p>Let’s start with a fresh history.</p>
+
+<blockquote class="hands_on">
+  <h3 id="pencil2-hands-on-create-history">
+<img class="emoji" title=":pencil2:" alt=":pencil2:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/270f.png" height="20" width="20" align="absmiddle"> Hands-on: Create history</h3>
+
+  <ol>
+    <li>
+      <p>Make sure you have an empty analysis history.</p>
+
+      <blockquote class="tip">
+        <h3 id="bulb-starting-a-new-history">
+<img class="emoji" title=":bulb:" alt=":bulb:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f4a1.png" height="20" width="20" align="absmiddle"> Starting a new history</h3>
+
+        <ul>
+          <li>Click the <strong>Gear</strong> icon at the top of the history panel</li>
+          <li>Select the option <strong>Create New</strong> from the menu</li>
+        </ul>
+      </blockquote>
+    </li>
+    <li>
+      <p><strong>Rename your history</strong> to make it easy to recognize. You can do this by clicking on the title of the history (by default the title is <em>Unnamed history</em>) and typing <strong>Galaxy Introduction</strong> as the name.
+  <img src="../../../../shared/images/rename_history.png" alt=""></p>
+    </li>
+  </ol>
+</blockquote>
+
+<h2 id="data-upload">Data upload</h2>
+
+<p>Download the list of peak regions (the file <code class="highlighter-rouge">GSE37268_mof3.out.hpeak.txt.gz</code>) from
+<a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE37268">GEO</a> to your
+computer and upload it to Galaxy.</p>
+
+<blockquote class="hands_on">
+  <h3 id="pencil2-hands-on-data-upload">
+<img class="emoji" title=":pencil2:" alt=":pencil2:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/270f.png" height="20" width="20" align="absmiddle"> Hands-on: Data upload</h3>
+
+  <ol>
+    <li>
+      <p>Click on the upload button in the upper left ot the interface.</p>
+
+      <p><img src="../../images/upload_button.png" alt=""></p>
+    </li>
+    <li>
+      <p>Press <strong>Choose local file</strong> and search for your file.</p>
+    </li>
+    <li>
+      <p>As <strong>Type</strong> select <code class="highlighter-rouge">interval</code>.</p>
+    </li>
+    <li>
+      <p>Press <strong>Start</strong> and wait for the upload to finish. Galaxy will automatically unpack the file.</p>
+
+      <blockquote class="comment">
+        <h3 id="nut_and_bolt-comment">
+<img class="emoji" title=":nut_and_bolt:" alt=":nut_and_bolt:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f529.png" height="20" width="20" align="absmiddle"> Comment</h3>
+        <p>After this you will see your first history item in Galaxy’s right pane. It will go through
+the gray (preparing/queued) and yellow (running) states to become green (success):</p>
+
+        <p><img src="../../images/intro_01.png" alt=""></p>
+      </blockquote>
+
+      <blockquote class="tip">
+        <h3 id="bulb-tip-importing-data-via-links">
+<img class="emoji" title=":bulb:" alt=":bulb:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f4a1.png" height="20" width="20" align="absmiddle"> Tip: Importing data via links</h3>
+
+        <ul>
+          <li>Copy the link location</li>
+          <li>Open the Galaxy Upload Manager</li>
+          <li>Select <strong>Paste/Fetch Data</strong>
+</li>
+          <li>Paste the link into the text field</li>
+          <li>Press <strong>Start</strong>
+</li>
+        </ul>
+      </blockquote>
+
+      <blockquote class="tip">
+        <h3 id="bulb-tip-changing-the-file-type-once-the-data-file-is-in-your-history">
+<img class="emoji" title=":bulb:" alt=":bulb:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f4a1.png" height="20" width="20" align="absmiddle"> Tip: Changing the file type once the data file is in your history</h3>
+
+        <ul>
+          <li>Click on the pencil button displayed in your dataset in the history</li>
+          <li>Choose <strong>Datatype</strong> on the top</li>
+          <li>Select <code class="highlighter-rouge">interval</code> in this case</li>
+          <li>Press <strong>Save</strong>
+</li>
+        </ul>
+      </blockquote>
+
+      <p>As default, Galaxy takes the link as name. It also doesn’t link the dataset to a database or a reference genome.</p>
+
+      <blockquote class="comment">
+        <h3 id="nut_and_bolt-comments">
+<img class="emoji" title=":nut_and_bolt:" alt=":nut_and_bolt:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f529.png" height="20" width="20" align="absmiddle"> Comments</h3>
+        <ul>
+          <li>Edit the “Database/Build” to select “mm9”, the database build for mice used in the paper</li>
+          <li>Rename the datasets according to the samples</li>
+        </ul>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>In order to find the related genes to these peak regions,
+we also need a list of genes in mice, which we can obtain from UCSC.</p>
+
+<blockquote class="hands_on">
+  <h3 id="pencil2-hands-on-data-upload-from-ucsc">
+<img class="emoji" title=":pencil2:" alt=":pencil2:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/270f.png" height="20" width="20" align="absmiddle"> Hands-on: Data upload from UCSC</h3>
+
+  <ol>
+    <li>
+      <p>In the tool menu, navigate to <code class="highlighter-rouge">Get Data -&gt; UCSC Main - table browser</code></p>
+
+      <p><img src="../../images/101_01.png" alt=""></p>
+
+      <p>You will be taken to the <strong>UCSC table browser</strong>, which looks something like this:</p>
+
+      <p><img src="../../images/intro_02.png" alt=""></p>
+
+      <blockquote class="comment">
+        <h3 id="nut_and_bolt-settings">
+<img class="emoji" title=":nut_and_bolt:" alt=":nut_and_bolt:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f529.png" height="20" width="20" align="absmiddle"> Settings</h3>
+
+        <ul>
+          <li>
+<strong>clade</strong> should be set to <code class="highlighter-rouge">Mammal</code>
+</li>
+          <li>
+<strong>genome</strong> should be set to <code class="highlighter-rouge">Mouse</code>
+</li>
+          <li>
+<strong>assembly</strong> should be set to <code class="highlighter-rouge">July 2007 (NCBI37/mm9)</code>
+</li>
+          <li>
+<strong>group</strong> should be set to <code class="highlighter-rouge">Genes and Gene Predictions</code>
+</li>
+          <li>
+<strong>track</strong> should be set to <code class="highlighter-rouge">RefSeq Genes</code>
+</li>
+          <li>
+<strong>table</strong> should be <code class="highlighter-rouge">refGene</code>
+</li>
+          <li>
+<strong>region</strong> should be <code class="highlighter-rouge">genome</code>
+</li>
+          <li>
+<strong>output format</strong> should be set to <code class="highlighter-rouge">BED - browser extensible data</code>
+</li>
+          <li>
+<strong>Send output to</strong> should have the option <code class="highlighter-rouge">Galaxy</code> checked</li>
+        </ul>
+      </blockquote>
+    </li>
+    <li>
+      <p>Click on the <strong>get output</strong> button and you will see the next screen:</p>
+
+      <p><img src="../../images/intro_03.png" alt=""></p>
+
+      <p>Make sure that <strong>Create one BED record per</strong> is set to <code class="highlighter-rouge">Whole Gene</code> and click on the <strong>Send Query to Galaxy</strong> button.</p>
+    </li>
+    <li>
+      <p>Let’s rename our dataset to something more recognizable.</p>
+      <ul>
+        <li>Click on the <strong>pencil icon</strong> to edit a file’s attributes.
+<img src="../../images/edit_icon.png" alt="">
+</li>
+        <li>In the next screen change the name of the dataset to <code class="highlighter-rouge">Genes</code>.</li>
+        <li>Click the <strong>Save</strong> button at the bottom of the screen.</li>
+      </ul>
+
+      <blockquote class="comment">
+        <h3 id="nut_and_bolt-bed-file-format">
+<img class="emoji" title=":nut_and_bolt:" alt=":nut_and_bolt:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f529.png" height="20" width="20" align="absmiddle"> BED file format</h3>
+        <p>The <strong>BED - Browser Extensible Data</strong> format provides a flexible way to encode gene regions. BED lines have three required fields:</p>
+
+        <div class="highlighter-rouge">
+<pre class="highlight"><code> - chromosome ID
+ - start position (0-based)
+ - end position (end-exclusive)
+</code></pre>
+        </div>
+
+        <p>There can be up to and nine additional optional fields, but the number of fields per line must be consistent throughout any single set of data.</p>
+
+        <p>You can find more information about it at <a href="https://genome.ucsc.edu/FAQ/FAQformat#format1">UCSC</a> including a description of the optional fields.</p>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>Now we collected all the data we need to start our analysis.</p>
+
+<h1 id="part-1-naive-approach">Part 1: Naive approach</h1>
+
+<h2 id="file-preperation">File preperation</h2>
+
+<p>Let’s have a look at our files to see what we actually have here.</p>
+
+<blockquote class="hands_on">
+  <h3 id="pencil2-hands-on-view-file-content">
+<img class="emoji" title=":pencil2:" alt=":pencil2:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/270f.png" height="20" width="20" align="absmiddle"> Hands-on: View file content</h3>
+
+  <p>To <strong>view the contents</strong> of the file, click on the <strong>eye icon</strong>. For our peak file, it should look something like this:</p>
+
+  <p><img src="../../images/intro_04.png" alt=""></p>
+
+  <p>While the regions of the genes from UCSC look slightly different:</p>
+
+  <p><img src="../../images/intro_05.png" alt=""></p>
+
+  <blockquote class="question">
+    <h3 id="question-questions">
+<img class="emoji" title=":question:" alt=":question:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2753.png" height="20" width="20" align="absmiddle"> Questions</h3>
+
+    <p>While the file from UCSC has labels for the columns, the peak file does not. Can you guess what the columns stand for?</p>
+
+  </blockquote>
+
+</blockquote>
+
+<p>This peak file is not in any standard format and just by looking at it, we cannot find out what the numbers in the different columns mean. In the paper the authors mention that they used the peak caller <a href="https://www.ncbi.nlm.nih.gov/pubmed/20598134">HPeak</a>. By looking at the HPeak manual we can find out that the columns contain the following information:</p>
+
+<ul>
+  <li>chromosome name by number</li>
+  <li>start coordinate</li>
+  <li>end coordinate</li>
+  <li>length</li>
+  <li>location within the peak that has the highest hypothetical DNA fragment coverage (summit)</li>
+  <li>not relevant</li>
+  <li>not relevant</li>
+</ul>
+
+<p>In order to compare the the two files, we have to make sure that the chromosome names follow the same format.
+As we directly see, the peak file lacks <code class="highlighter-rouge">chr</code> before any chromosome number. But what happens with chromosome 20 and 21? Will it be X and Y instead? Let’s check:</p>
+
+<blockquote class="hands_on">
+  <h3 id="pencil2-hands-on-view-end-of-file">
+<img class="emoji" title=":pencil2:" alt=":pencil2:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/270f.png" height="20" width="20" align="absmiddle"> Hands-on: View end of file</h3>
+
+  <ol>
+    <li>
+<strong>Select last</strong> <img class="emoji" title=":wrench:" alt=":wrench:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f527.png" height="20" width="20" align="absmiddle">: Search for the <strong>Select last</strong> tool in the tool panel to the left and select the following settings:
+      <ul>
+        <li>As <strong>Text file</strong> our peak file <code class="highlighter-rouge">GSE37268_mof3.out.hpeak.txt</code>
+</li>
+        <li>
+<strong>Operation</strong>: <code class="highlighter-rouge">Keep last lines</code>
+</li>
+        <li>
+<strong>Number of lines</strong>: Choose a value, e.g. <code class="highlighter-rouge">100</code>
+</li>
+      </ul>
+    </li>
+    <li>Click <strong>Execute</strong>
+</li>
+    <li>
+      <p>Wait for the job to finish and inspect the file through the <strong>eye icon</strong>.</p>
+
+      <blockquote class="question">
+        <h3 id="question-questions-1">
+<img class="emoji" title=":question:" alt=":question:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2753.png" height="20" width="20" align="absmiddle"> Questions</h3>
+
+        <ol>
+          <li>
+            <p>Are the chromosomes 20 and 21 named X and Y?</p>
+
+            <details>
+<summary>Click to view answers</summary>
+<ol type="1">
+<li>Not at all. One more thing to fix.</li>
+</ol>
+</details>
+          </li>
+        </ol>
+      </blockquote>
+    </li>
+  </ol>
+</blockquote>
+
+<p>In order to convert the chromosome names we have therefore two things to do:</p>
+
+<ul>
+  <li>add <code class="highlighter-rouge">chr</code>
+</li>
+  <li>change 20 and 21 to X and Y</li>
+</ul>
+
+<blockquote class="hands_on">
+  <h3 id="pencil2-hands-on-adjust-chromosome-names">
+<img class="emoji" title=":pencil2:" alt=":pencil2:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/270f.png" height="20" width="20" align="absmiddle"> Hands-on: Adjust chromosome names</h3>
+
+  <ol>
+    <li>
+<strong>Replace Text</strong> <img class="emoji" title=":wrench:" alt=":wrench:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f527.png" height="20" width="20" align="absmiddle">: Run <strong>Replace Text in a specific column</strong>  with the following settings:
+      <ul>
+        <li>As <strong>File to process</strong> our peak file <code class="highlighter-rouge">GSE37268_mof3.out.hpeak.txt</code>
+</li>
+        <li>
+<strong>in column</strong>: <code class="highlighter-rouge">1</code>
+</li>
+        <li>
+<strong>Find pattern</strong>: <code class="highlighter-rouge">[0-9]+</code> (this will look for numerical digits)</li>
+        <li>
+<strong>Replace with</strong>: <code class="highlighter-rouge">chr&amp;</code> (<code class="highlighter-rouge">&amp;</code> is a placeholder for the find result)</li>
+      </ul>
+    </li>
+    <li>Click <strong>Execute</strong>
+</li>
+    <li>Let’s rerun the tool for the final changes two times. You can shortcut this by pressing the <strong>rerun icon</strong> in the history, but don’t forget to adjust the settings:
+      <ul>
+        <li>As <strong>File to process</strong> use the output from the last run, e.g. something like <code class="highlighter-rouge">Replace Text on data ...</code>
+</li>
+        <li>
+<strong>in column</strong>: <code class="highlighter-rouge">1</code>
+</li>
+        <li>
+<strong>Find pattern</strong>: <code class="highlighter-rouge">chr20</code>
+</li>
+        <li>
+<strong>Replace with</strong>: <code class="highlighter-rouge">chrX</code>
+</li>
+      </ul>
+    </li>
+    <li>Rerun this tool accordingly for chromosome Y.</li>
+    <li>Wait for the jobs to finish and inspect the latest file through the <strong>eye icon</strong>. Have we been successful?</li>
+  </ol>
+
+</blockquote>
+
+<p>We have quite some files now and should take care that we don’t loose track. Let’s rename our latest result to something more handy, e.g. <code class="highlighter-rouge">Peak regions</code>.</p>
+
+<h2 id="analysis">Analysis</h2>
+
+<p>Before we compare both region files we will add the promoter region to the gene records.</p>
+
+<blockquote class="hands_on">
+  <h3 id="pencil2-hands-on-add-promoter-region-to-gene-records">
+<img class="emoji" title=":pencil2:" alt=":pencil2:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/270f.png" height="20" width="20" align="absmiddle"> Hands-on: Add promoter region to gene records</h3>
+
+  <ol>
+    <li>
+<strong>Get Flanks</strong> <img class="emoji" title=":wrench:" alt=":wrench:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f527.png" height="20" width="20" align="absmiddle">: Run <strong>Get Flanks</strong>, which returns flanking regions for every gene with the following settings:
+      <ul>
+        <li>As <strong>Select data</strong> use the file from UCSC</li>
+        <li>
+<strong>Region</strong>: <code class="highlighter-rouge">Around Start</code>
+</li>
+        <li>
+<strong>Location</strong>: <code class="highlighter-rouge">Upstream</code>
+</li>
+        <li>
+<strong>Offset</strong>: <code class="highlighter-rouge">10000</code>
+</li>
+        <li>
+<strong>Length</strong>: <code class="highlighter-rouge">12000</code>
+</li>
+      </ul>
+    </li>
+  </ol>
+</blockquote>
+
+<p>Compare the resulting BED file with the input.
+Look at the contents and compare the rows in the input to the rows in the output to find out how the start and end positions changed.
+Rename the dataset (by clicking on the pencil icon) to reflect your findings.</p>
+
+<p>You might have noticed that the UCSC file is in <code class="highlighter-rouge">BED</code> format and has a database associated to it. That’s what we want for our peak file as well:</p>
+
+<blockquote class="hands_on">
+  <h3 id="pencil2-hands-on-change-format-and-database">
+<img class="emoji" title=":pencil2:" alt=":pencil2:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/270f.png" height="20" width="20" align="absmiddle"> Hands-on: Change format and database</h3>
+
+  <ol>
+    <li>Click on the <strong>pencil icon</strong> in the history entry of our peak region file:
+  <img src="../../images/edit_icon.png" alt="">
+</li>
+    <li>In the next screen select as <strong>Database/Build</strong>: <code class="highlighter-rouge">Mouse July 2007 (NCBI37/mm9) (mm9)</code>
+</li>
+    <li>Click <strong>Save</strong>
+</li>
+    <li>Click on the <strong>pencil icon</strong> again and switch to the <code class="highlighter-rouge">Convert Format</code> tab</li>
+    <li>Select <code class="highlighter-rouge">Convert Genomic Intervals To BED</code> and press <strong>Convert</strong>
+</li>
+  </ol>
+</blockquote>
+
+<p>It’s time to find the overlapping intervals (finally!):</p>
+
+<blockquote class="hands_on">
+  <h3 id="pencil2-hands-on-find-overlaps">
+<img class="emoji" title=":pencil2:" alt=":pencil2:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/270f.png" height="20" width="20" align="absmiddle"> Hands-on: Find Overlaps</h3>
+
+  <ol>
+    <li>
+<strong>Intersect</strong> <img class="emoji" title=":wrench:" alt=":wrench:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f527.png" height="20" width="20" align="absmiddle">: Run <strong>Intersect</strong> with the following settings:
+      <ul>
+        <li>
+<strong>Return</strong>: <code class="highlighter-rouge">Overlapping Intervals</code>
+</li>
+        <li>
+<strong>of</strong>: the UCSC file with promoter regions</li>
+        <li>
+<strong>that intersect</strong>: our converted peak region file</li>
+        <li>
+<strong>for at least</strong>: <code class="highlighter-rouge">1</code>
+</li>
+      </ul>
+
+      <blockquote class="comment">
+        <h3 id="nut_and_bolt-comments-1">
+<img class="emoji" title=":nut_and_bolt:" alt=":nut_and_bolt:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f529.png" height="20" width="20" align="absmiddle"> Comments</h3>
+        <p>The order of the inputs is important! We want to end up with a list of genes, so the corresponding dataset needs to be the first input.</p>
+      </blockquote>
+    </li>
+  </ol>
+</blockquote>
+
+<p>We do have a the list of genes (column 4 ) which correspond to the peak regions.
+To get a better overview of the genes we obtained, we want to look at their distribution across the different chromosomes.</p>
+
+<blockquote class="hands_on">
+  <h3 id="pencil2-hands-on-count-genes-on-different-chromosomes">
+<img class="emoji" title=":pencil2:" alt=":pencil2:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/270f.png" height="20" width="20" align="absmiddle"> Hands-on: Count genes on different chromosomes</h3>
+
+  <ol>
+    <li>
+<strong>Group</strong> <img class="emoji" title=":wrench:" alt=":wrench:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f527.png" height="20" width="20" align="absmiddle">: Run <strong>Group</strong> with the following settings:
+      <ul>
+        <li>
+<strong>Select data</strong>: The result of the intersection</li>
+        <li>
+<strong>Group by column</strong>: <code class="highlighter-rouge">Column 1</code>
+</li>
+        <li>Press <strong>Insert Operation</strong> and choose:</li>
+        <li>
+<strong>Type</strong>: <code class="highlighter-rouge">Count</code>
+</li>
+        <li>
+<strong>On column</strong>: <code class="highlighter-rouge">Column 1</code>
+</li>
+      </ul>
+
+      <blockquote class="question">
+        <h3 id="question-questions-2">
+<img class="emoji" title=":question:" alt=":question:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2753.png" height="20" width="20" align="absmiddle"> Questions</h3>
+
+        <p>Which chromosome contained the highest number of target genes?</p>
+
+        <details>
+   <summary>Click to view answers</summary>
+   <ol type="1">
+   <li>The result varies with different settings. If you followed step by step it should be chromosome 7 with 1671 genes.</li>
+   </ol>
+   </details>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h2 id="visualization">Visualization</h2>
+
+<p>Since we have some nice data, let’s draw a barchart out of it!</p>
+
+<blockquote class="hands_on">
+  <h3 id="pencil2-hands-on-draw-barchart">
+<img class="emoji" title=":pencil2:" alt=":pencil2:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/270f.png" height="20" width="20" align="absmiddle"> Hands-on: Draw barchart</h3>
+
+  <ol>
+    <li>
+<strong>Charts</strong> : Select the <strong>Visualize icon</strong> at the latest history item and select <code class="highlighter-rouge">Charts</code>
+</li>
+    <li>Choose a title at <strong>Provide a title</strong>, e.g. <code class="highlighter-rouge">Gene counts per chromosome</code>
+</li>
+    <li>Switch to the <strong>Select data</strong> tab and play around with the settings</li>
+    <li>Press <strong>Visualize</strong> and the top right to inspect your result</li>
+    <li>Click on <strong>Editor</strong> and repeat with different settings</li>
+  </ol>
+
+</blockquote>
+
+<h2 id="extracting-workflow">Extracting workflow</h2>
+
+<p>When you look carefully at your history, you can see that it contains all steps of our analysis, from the beginning to the end. By building this history we have actually built a complete record of our analysis with Galaxy preserving all parameter settings applied at every step.
+Wouldn’t it be nice to just convert this history into a workflow that we’ll be able to execute again and again?</p>
+
+<p>Galaxy makes this very easy with the <code class="highlighter-rouge">Extract workflow</code> option. This means any time you want to build a workflow, you can just perform it manually once, and then convert it to a workflow, so that next time it will be a lot less work to do the same analysis. It also allows you to share or publish your analysis with ease.</p>
+
+<blockquote class="hands_on">
+  <h3 id="pencil2-hands-on-extract-workflow">
+<img class="emoji" title=":pencil2:" alt=":pencil2:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/270f.png" height="20" width="20" align="absmiddle"> Hands-on: Extract workflow</h3>
+
+  <ol>
+    <li>
+      <p><strong>Clean up</strong> your history. If you had any failed jobs (red), please remove those datasets from your history by clicking on the <code class="highlighter-rouge">x</code> button. This will make the creation of a workflow easier.</p>
+    </li>
+    <li>
+      <p>Go to the history <strong>Options menu</strong> (gear symbol) and select the <code class="highlighter-rouge">Extract Workflow</code> option.</p>
+
+      <p><img src="../../images/history_menu_extract_workflow.png" alt=""></p>
+
+      <p>The center pane will change and you will be able to choose which steps to include/exclude and how to name the newly created workflow.</p>
+    </li>
+    <li>
+<strong>Uncheck</strong> any steps that shouldn’t be included in the workflow. Since we did some steps which where specific to our custom peak file, we might to exclude:
+      <ul>
+        <li>all <strong>Replace Text</strong> steps</li>
+        <li><strong>Convert Genomic Intervals to strict BED</strong></li>
+        <li><strong>Get flanks</strong></li>
+      </ul>
+    </li>
+    <li>
+      <p>Rename the workflow to something descriptive, for example <code class="highlighter-rouge">From peaks to genes</code></p>
+    </li>
+    <li>
+      <p>Click on the <strong>Create Workflow</strong> button near the top.</p>
+
+      <p>You will get a message that the workflow was created. But where did it go?</p>
+    </li>
+    <li>Click on <strong>Workflow</strong> in the top menu of Galaxy. Here you have a list of all your workflows.</li>
+    <li>
+      <p>Select the newly generated workflow and click on <strong>Edit</strong>. You should see something similar to this:
+  <img src="../../images/intro_06.png" alt=""></p>
+
+      <blockquote class="comment">
+        <h3 id="nut_and_bolt-the-workflow-editor">
+<img class="emoji" title=":nut_and_bolt:" alt=":nut_and_bolt:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f529.png" height="20" width="20" align="absmiddle"> The workflow editor</h3>
+        <p>We can examine the workflow in Galaxy’s workflow editor. Here you can view/change the parameter settings of each step, add and remove tools, and connect an output from one tool to the input of another, all in an easy and graphical manner. You can also use this editor to build workflows from scratch.</p>
+      </blockquote>
+    </li>
+    <li>Although we have our two inputs in the workflow they are missing their connection to the first tool (Intersect), because we didn’t carry over some of the intermediate steps. Connect each input dataset to the Intersect tool by dragging the arrow pointing outwards on the right of its box (which denotes an output) to an arrow on the left of the Intersect box pointing inwards (which denotes an input). Connect each input dataset with a different input of Intersect.</li>
+    <li>Rename the Input datasets: The upper one should be the <code class="highlighter-rouge">Reference regions</code> and the lower the <code class="highlighter-rouge">Peak regions</code>
+</li>
+    <li>Click on the <strong>gear icon</strong> at the top right and press <strong>Auto Re-layout</strong> to clean up our view:
+   <img src="../../images/intro_07.png" alt="">
+</li>
+    <li>Click on the <strong>gear icon</strong> at the top right and press <strong>Save</strong> to save your changes:</li>
+  </ol>
+
+  <blockquote class="tip">
+    <h3 id="bulb-tip-hiding-intermediate-steps">
+<img class="emoji" title=":bulb:" alt=":bulb:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f4a1.png" height="20" width="20" align="absmiddle"> Tip: Hiding intermediate steps</h3>
+    <p>When a workflow is executed, the user is usually primarily interested in the final product and not in all intermediate steps. By default all the outputs of a workflow will be shown, but we can explicitly tell Galaxy which output to show and which to hide for a given workflow. This behaviour is controlled by the little asterisk next to every output dataset:
+<img src="../../../../shared/images/workflow_editor_mark_output.png" alt=""></p>
+
+    <p>If you click on this asterisk for any of the output datasets, then <em>only</em> files with an asterisk will be shown, and all outputs without an asterisk will be hidden (Note that clicking <em>all</em> outputs has the same effect as clicking <em>none</em> of the outputs, in both cases all the datasets will be shown).</p>
+  </blockquote>
+</blockquote>
+
+<p>Now it’s time to reuse our workflow for a more sophisticated approach.</p>
+
+<h1 id="part-2-more-sophisticated-approach">Part 2: More sophisticated approach</h1>
+
+<p>In part 1 we used an overlap definition of 1 bp (default setting). In order to get a more meaningful definition, we now want to use the information of the position of the peak summit and check for overlap of the summits with genes.</p>
+
+<h2 id="preperation">Preperation</h2>
+
+<p>Create a new history and name it. If you forgot how to do that, you can have a look at the beginning of this tutorial.
+The history is now empty, but we need our peak file again. Before we upload it twice we can copy it from our former history:</p>
+
+<blockquote class="hands_on">
+  <h3 id="pencil2-hands-on-copy-history-items">
+<img class="emoji" title=":pencil2:" alt=":pencil2:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/270f.png" height="20" width="20" align="absmiddle"> Hands-on: Copy history items</h3>
+
+  <ol>
+    <li>Click on the <strong>View all histories icon</strong> at the top right of your history</li>
+    <li>You should see both of your histories side-by-side now. Use drag-and-drop with your mouse to copy the edited peak file (after the replace steps) but still in interval format, which contains the summit information, to your new history.</li>
+    <li>Press <strong>Done</strong> in the top left to go back to your analysis window</li>
+  </ol>
+
+</blockquote>
+
+<h2 id="create-peak-summit-file">Create peak summit file</h2>
+
+<p>We need to generate a new BED file from the original peak file that contains the positions of the peak summits. The start of the summit is the start of the peak (column 2) plus the location within the peak that has the highest hypothetical DNA fragment coverage (column 5). As the end we simply define <code class="highlighter-rouge">start + 1</code>.</p>
+
+<blockquote class="hands_on">
+  <h3 id="pencil2-hands-on-create-peak-summit-file">
+<img class="emoji" title=":pencil2:" alt=":pencil2:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/270f.png" height="20" width="20" align="absmiddle"> Hands-on: Create peak summit file</h3>
+
+  <ol>
+    <li>
+<strong>Compute</strong> <img class="emoji" title=":wrench:" alt=":wrench:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f527.png" height="20" width="20" align="absmiddle">: Run <strong>Compute an expression on every row</strong> with the following settings:
+      <ul>
+        <li>
+<strong>Add expression</strong>: <code class="highlighter-rouge">c2+c5</code>
+</li>
+        <li>
+<strong>as a new column to</strong>: our peak file</li>
+        <li>
+<strong>Round result?</strong>: <code class="highlighter-rouge">YES</code>
+</li>
+      </ul>
+    </li>
+    <li>Rerun this tool on the last result with:
+      <ul>
+        <li>
+<strong>Add expression</strong>: <code class="highlighter-rouge">c8+1</code>
+</li>
+        <li>
+<strong>as a new column to</strong>: the result from step 1</li>
+        <li>
+<strong>Round result?</strong>: <code class="highlighter-rouge">YES</code>
+</li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>Now we cut out just the chromosome plus the start and end of the summit:</p>
+
+<blockquote class="hands_on">
+  <h3 id="pencil2-hands-on-cut-out-columns">
+<img class="emoji" title=":pencil2:" alt=":pencil2:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/270f.png" height="20" width="20" align="absmiddle"> Hands-on: Cut out columns</h3>
+  <ol>
+    <li>
+<strong>Cut</strong> <img class="emoji" title=":wrench:" alt=":wrench:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f527.png" height="20" width="20" align="absmiddle">: Run <strong>Cut columns from a table</strong> with the following settings:
+      <ul>
+        <li>
+<strong>Cut columns</strong>: <code class="highlighter-rouge">c1,c8,c9</code>
+</li>
+        <li>
+<strong>From</strong>: our latest history item</li>
+      </ul>
+    </li>
+    <li>The output from <strong>Cut</strong> will have the format <code class="highlighter-rouge">tabular</code>. Change it to <code class="highlighter-rouge">interval</code> since that’s what the tool <strong>Intersect</strong> expects.</li>
+  </ol>
+
+</blockquote>
+
+<h2 id="get-gene-names">Get gene names</h2>
+
+<p>The RefSeq genes we downloaded from UCSC did only contain the RefSeq identifiers, but not the gene names. To get a list of gene names in the end, we use another BED file from the Data Libraries.</p>
+
+<blockquote class="comment">
+  <h3 id="nut_and_bolt-comments-2">
+<img class="emoji" title=":nut_and_bolt:" alt=":nut_and_bolt:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f529.png" height="20" width="20" align="absmiddle"> Comments</h3>
+  <p>There are several ways to get the gene names in, if you need to do it yourself. On way is to retrieve a mapping through Biomart and then join the two files (Tool: <strong>Join, Substract and Group</strong> - <strong>Join two Datasets side by side on a specified field</strong>). Another is to get the full RefSeq table from UCSC and manually convert it to BED format.</p>
+</blockquote>
+
+<blockquote class="hands_on">
+  <h3 id="pencil2-hands-on-get-new-gene-file-from-data-library">
+<img class="emoji" title=":pencil2:" alt=":pencil2:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/270f.png" height="20" width="20" align="absmiddle"> Hands-on: Get new gene file from Data Library</h3>
+  <ol>
+    <li>Click in the top menu on <strong>Shared Data</strong>
+</li>
+    <li>Navigate to <code class="highlighter-rouge">Genomes + Annotations -&gt; Annotations</code>
+</li>
+    <li>Check the dataset <code class="highlighter-rouge">mm9.RefSeq_genes_from_UCSC</code>
+</li>
+    <li>Click <strong>to History</strong>, select it and press <strong>Import</strong>
+</li>
+    <li>Click in the top menu on <strong>Analyze Data</strong> to get back to your main page. You should see a new item in your history.</li>
+    <li>Inspect the file content to check if it contains gene names.</li>
+  </ol>
+</blockquote>
+
+<h2 id="repeat-workflow">Repeat workflow</h2>
+
+<p>It’s time to reuse the workflow we created earlier.</p>
+
+<blockquote class="hands_on">
+  <h3 id="pencil2-hands-on-run-a-workflow">
+<img class="emoji" title=":pencil2:" alt=":pencil2:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/270f.png" height="20" width="20" align="absmiddle"> Hands-on: Run a workflow</h3>
+  <ol>
+    <li>Open the workflow menu (top menu bar). Find the workflow you made in the previous section, and select the option <strong>Run</strong>
+</li>
+    <li>Choose as inputs our imported gene BED file and the result of the <strong>Cut</strong> tool</li>
+    <li>Click <strong>Run workflow</strong>. The outputs should appear in the history but it might take some time until they are finished.</li>
+  </ol>
+</blockquote>
+
+<p>We used our workflow to rerun our analysis with the peak summits. The <strong>Group</strong> tool again produced a list containing the amount of genes found in each chromosome.
+But woudln’t it be more interesting to know about the amount of peaks in each unique gene? Let’s rerun the workflow with different settings:</p>
+
+<blockquote class="hands_on">
+  <h3 id="pencil2-hands-on-run-a-workflow-with-changed-settings">
+<img class="emoji" title=":pencil2:" alt=":pencil2:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/270f.png" height="20" width="20" align="absmiddle"> Hands-on: Run a workflow with changed settings</h3>
+  <ol>
+    <li>Open the workflow menu (top menu bar). Find the workflow you made in the previous section, and select the option <strong>Run</strong>
+</li>
+    <li>Choose as inputs our imported gene BED file and the result of the <strong>Cut</strong> tool</li>
+    <li>Click on the title of the Group tool to expand the options.</li>
+    <li>Change the following settings by clicking at the <strong>edit icon</strong> on the left:
+      <ul>
+        <li>
+<strong>Group by column</strong>: <code class="highlighter-rouge">7</code>
+</li>
+        <li>
+<strong>Operation -&gt; On column</strong>: <code class="highlighter-rouge">7</code>
+</li>
+      </ul>
+    </li>
+    <li>Click <strong>Run workflow</strong>
+</li>
+  </ol>
+</blockquote>
+
+<p>Congratulations! You should have a file with all the unique gene names and a count on how many peaks they contained.</p>
+
+<blockquote class="question">
+  <h3 id="question-questions-3">
+<img class="emoji" title=":question:" alt=":question:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2753.png" height="20" width="20" align="absmiddle"> Questions</h3>
+
+  <p>The list of unique genes is not sorted. Try to sort it on your own!</p>
+
+  <details>
+   <summary>Click to view answers</summary>
+   You can use the tool "Sort data in ascending or descending order" on column 2 and a numerical sort.
+   </details>
+</blockquote>
+
+<h1 id="share-your-work">Share your work</h1>
+
+<p>One of the most important features of Galaxy comes at the end of an analysis. When you have published striking findings, it is important that other researchers are able to reproduce your in-silico experiment. Galaxy enables users to easily share their workflows and histories with others.</p>
+
+<p>To share a history, click on the gear symbol in the history pane and select <code class="highlighter-rouge">Share or Publish</code>. On this page you can do 3 things:</p>
+
+<ol>
+  <li>
+<strong>Make accessible via Link</strong>. This generates a link that you can give out to others. Anybody with this link will be able to view your history.</li>
+  <li>
+<strong>Publish History</strong>. This will not only create a link, but will also publish your history. This means your history will be listed under <code class="highlighter-rouge">Shared Data → Published Histories</code> in the top menu.</li>
+  <li>
+<strong>Share with Individual Users</strong>. This will share the history only with specific users on the Galaxy instance.</li>
+</ol>
+
+<blockquote class="hands_on">
+  <h3 id="pencil2-hands-on-share-history-and-workflow">
+<img class="emoji" title=":pencil2:" alt=":pencil2:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/270f.png" height="20" width="20" align="absmiddle"> Hands-on: Share history and workflow</h3>
+
+  <ol>
+    <li>Share one of your histories with your neighbour.</li>
+    <li>See if you can do the same with your workflow!</li>
+    <li>Find the history and/or workflow shared by your neighbour. Histories shared with specific users can be accessed by those users in their history menu (gear icon) under <code class="highlighter-rouge">Histories shared with me</code>.</li>
+  </ol>
+</blockquote>
+
+<h1 class="no_toc" id="conclusion">Conclusion</h1>
+
+<p><img class="emoji" title=":tada:" alt=":tada:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f389.png" height="20" width="20" align="absmiddle"> Well done! <img class="emoji" title=":clap:" alt=":clap:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f44f.png" height="20" width="20" align="absmiddle"> You have just performed your first analysis in Galaxy. You also created a workflow from your analysis so you can easily repeat the exact same analysis on other datasets. Additionally you shared your results and methods with others.</p>
+
+
+    
+    <blockquote class="key_points">
+        <h3> <img class="emoji" title=":grey_exclamation:" alt=":grey_exclamation:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2755.png" height="20" width="20" align="absmiddle"> Key points</h3>
+
+        <ul>
+        
+           <li>Galaxy provides an easy-to-use graphical user interface for often complex commandline tools</li>
+        
+           <li>Galaxy keeps a full record of your analysis in a history</li>
+        
+           <li>Workflows enable you to repeat your analysis on different data</li>
+        
+           <li>Galaxy can connect to external sources for data import and visualization purposes</li>
+        
+           <li>Galaxy provides ways to share your results and methods with others</li>
+        
+        </ul>
+    </blockquote>
+    
+
+    
+
+    <h3>
+<img class="emoji" title=":clap:" alt=":clap:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f44f.png" height="20" width="20" align="absmiddle"> Congratulations on successfully completing this tutorial!</h3>
+
+
+    <hr>
+    <blockquote class="overview">
+        <h3> <img class="emoji" title=":speech_balloon:" alt=":speech_balloon:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f4ac.png" height="20" width="20" align="absmiddle"> Feedback</h3>
+        Please take a moment and provide your feedback on this tutorial. Your feedback will help guide and improve future revisions to this tutorial. <a href="https://tinyurl.com/GTNfeedback" target="_blank">Feedback Form</a>
+    </blockquote>
+
+    <i>This material is the result of a collaborative work. Thanks to <a href="https://galaxyproject.github.io/training-material//introduction#contributors">all the contributors</a> and the <a href="https://wiki.galaxyproject.org/Teach/GTN">Galaxy Training Network</a>!<br>
+    Found a typo? Something is wrong in this tutorial? Edit it on <a href="https://github.com/galaxyproject/training-material/tree/master/introduction/tutorials/galaxy-intro-peaks2genes.md">GitHub</a>.</i>
+</section>
+
+        </div>
+    </body>
+    <script src="https://galaxyproject.github.io/training-material//assets/js/landing_page.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</html>

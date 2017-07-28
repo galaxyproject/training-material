@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+    <head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="chrome=1">
+        <title>Galaxy Training!</title>
+        <link media="all" href="https://netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://galaxyproject.github.io/training-material//assets/css/landing_page.css">
+        <link rel="stylesheet" href="https://galaxyproject.github.io/training-material//assets/css/tutorial.css">
+        <link rel="stylesheet" href="https://galaxyproject.github.io/training-material//assets/css/font-awesome.css">
+        <link rel="stylesheet" href="https://galaxyproject.github.io/training-material//assets/css/syntax_highlighting.css">
+        <meta name="viewport" content="width=device-width">
+    </head>
+    <body>
+        <div class="wrapper">
+            
+
+
+<header>
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a id="site-title" class="navbar-brand" href="https://wiki.galaxyproject.org/Teach/GTN">
+              <img class="pull-left img-responsive" src="https://galaxyproject.github.io/training-material///assets/images/GTN.png">
+            </a>
+            <a id="site-title" class="navbar-brand name-holder" href="https://galaxyproject.github.io/training-material//topics/training/tutorials/create-new-tutorial-jekyll">
+              Creating a new tutorial - Setting up the infrastructure
+            </a>
+          </div>
+
+          <div class="collapse navbar-collapse" id="navbar">
+
+            <ul id="main-menu" class="nav navbar-nav navbar-right">
+              <li><a href="https://galaxyproject.github.io/training-material/" title="Back to front page"><i class="fa fa-home"></i> Home</a></li>
+              <li><a href="https://galaxyproject.github.io/training-material//topics/training" title="Go back to list of tutorials"><i class="fa fa-file-text-o"></i> training</a></li>
+
+              
+                <li><a href="https://galaxyproject.github.io/training-material//topics/training/slides" title="Slides for this tutorial"><i class="fa fa-graduation-cap"></i> Introduction slides</a></li>
+              
+              <!--<li><a href="https://galaxyproject.github.io/training-material//training/slides/create-new-tutorial-jekyll/"><i class="fa fa-file-powerpoint-o"></i> Associated slides</a></li>-->
+
+              
+
+              
+
+              
+                <li><a href="" title="Links to data"><i class="fa fa-folder-open"></i> Input Dataset</a></li>
+              
+
+              
+                <li><a href="https://galaxyproject.github.io/training-material//topics/training#references" title="References"><i class="fa fa-book"></i> Literature</a></li>
+              
+
+            </ul>
+          </div>
+        </div>
+    </nav>
+</header>
+
+<section class="tutorial">
+    <h1>Creating a new tutorial - Setting up the infrastructure</h1>
+
+    <blockquote class="overview">
+        <h3>Overview</h3>
+
+        <p class="bold"> <img class="emoji" title=":grey_question:" alt=":grey_question:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2754.png" height="20" width="20" align="absmiddle"> Questions</p>
+        <ul>
+        
+          <li>How to setup the infrastructure to build training webpages?</li>
+        
+        </ul>
+
+        <p class="bold"> <img class="emoji" title=":dart:" alt=":dart:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f3af.png" height="20" width="20" align="absmiddle"> Objectives</p>
+        <ul>
+        
+          <li>Installing packages needed for rendering the webpage</li>
+        
+          <li>Running the GTN website locally</li>
+        
+          <li>Tracking changes to the content live in the webbrowser</li>
+        
+        </ul>
+
+        
+
+        <p><span class="bold"> <img class="emoji" title=":hourglass:" alt=":hourglass:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/231b.png" height="20" width="20" align="absmiddle"> Time estimation:</span> 15min</p>
+
+    </blockquote>
+
+<h1 class="no_toc" id="introduction">Introduction</h1>
+
+<p>Galaxy is a great solution to train the bioinformatics concepts:</p>
+
+<ul>
+  <li>numerous bioinformatics tools are available (almost 5,000 in the ToolShed)</li>
+  <li>it can be used by people without amy computer science skills</li>
+  <li>it trains to use technology, outlining available resources and efforts that have made them accessible to researchers</li>
+  <li>it is scalable</li>
+</ul>
+
+<p>In 2016, the Galaxy Training Network decide to set up a new infrastructure for delivering easily Galaxy related training material. The idea was to develop something open and online based on a community effort, as always in Galaxy.</p>
+
+<p>We took inspiration from <a href="https://software-carpentry.org">Software Carpentry</a> and collected everything on a GitHub repository: <a href="https://github.com/galaxyproject/training-material">https://github.com/galaxyproject/training-material </a>.
+We decided on a structure based on tutorials with hands-on, fitting both for online self-training but also for workshops, grouped in topics. Each tutorial follows the same structure and comes with a virtualised isntance to run the training everywhere.</p>
+
+<p>If you want to run the entire GTN website locally or test your new training material you can do this!</p>
+
+<p>Currently, the website is generated from the metadata and the tutorials using Jekyll, a simple static site builder.
+We can use Jekyll to run a server to check if the tutorial is correctly added and rendered.</p>
+
+<blockquote class="agenda">
+  <h3 id="agenda">Agenda</h3>
+
+  <p>In this tutorial, you will learn how to run a local instance of the GTN website:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#installation-of-the-requirements" id="markdown-toc-installation-of-the-requirements">Installation of the requirements</a></li>
+  <li><a href="#checking-the-website-generation" id="markdown-toc-checking-the-website-generation">Checking the website generation</a></li>
+</ol>
+
+</blockquote>
+
+<h1 id="installation-of-the-requirements">Installation of the requirements</h1>
+
+<p>The first step is to install the requirements inside a conda environment. This step has to be done once.</p>
+
+<blockquote class="hands_on">
+  <h3 id="pencil2-hands-on-install-the-requirements">
+<img class="emoji" title=":pencil2:" alt=":pencil2:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/270f.png" height="20" width="20" align="absmiddle"> Hands-on: Install the requirements</h3>
+
+  <ol>
+    <li>Install <a href="https://conda.io/miniconda.html">conda</a>
+</li>
+    <li>Create the conda environment: <code class="highlighter-rouge">conda env create -f environment.yml</code>
+</li>
+    <li>Activate the conda environment: <code class="highlighter-rouge">source activate galaxy_training_material</code>
+</li>
+    <li>Install Jekyll and related modules using <a href="https://rubygems.org/pages/download">RubyGems</a>: <code class="highlighter-rouge">make install</code>
+</li>
+  </ol>
+</blockquote>
+
+<h1 id="checking-the-website-generation">Checking the website generation</h1>
+
+<p>Once Jekyll and its modules are installed in our conda environment, we can check the generation of the website locally:</p>
+
+<blockquote class="hands_on">
+  <h3 id="pencil2-hands-on-checking-the-website-generation-locally">
+<img class="emoji" title=":pencil2:" alt=":pencil2:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/270f.png" height="20" width="20" align="absmiddle"> Hands-on: Checking the website generation locally</h3>
+
+  <ol>
+    <li>(If not done) Activate the conda environment: <code class="highlighter-rouge">source activate galaxy_training_material</code>
+</li>
+    <li>Run a local Jekyll server with <code class="highlighter-rouge">make serve</code>
+</li>
+    <li>
+      <p>Visualize at <a href="http://localhost:4000/">http://localhost:4000/ </a></p>
+
+      <blockquote class="question">
+        <h3 id="question-questions">
+<img class="emoji" title=":question:" alt=":question:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2753.png" height="20" width="20" align="absmiddle"> Questions</h3>
+
+        <p>How to check if the server was started and if all topics are included?</p>
+
+        <details>
+   <summary>Click to view answers</summary>
+   Please check [http://localhost:4000/topics/ ](http://localhost:4000/topics/) to get a list of topics.
+   </details>
+      </blockquote>
+    </li>
+  </ol>
+</blockquote>
+
+<p>With <code class="highlighter-rouge">make serve</code>, a local Jekyll server will run in background. It will check the changes and regenerate the website accordingly. You may need to reload the page to see the changes (and sometimes to wait 1-2 minutes)</p>
+
+<p>Once you are done, you can stop the server with <code class="highlighter-rouge">ctrl-c</code> and deactivate your conda environment with <code class="highlighter-rouge">source deactivate</code>.</p>
+
+<h1 class="no_toc" id="conclusion">Conclusion</h1>
+
+<blockquote class="agenda">
+  <h3 id="developing-gtn-training-material">Developing GTN training material</h3>
+
+  <p>This tutorial is part of a series to develop GTN training material, feel free to also look at:</p>
+
+  <ol>
+    <li><a href="../create-new-tutorial-content/tutorial.html">Writing content in markdown</a></li>
+    <li><a href="../create-new-tutorial-metadata/tutorial.html">Defining metadata</a></li>
+    <li><a href="../create-new-tutorial-jekyll/tutorial.html">Setting up the infrastructure</a></li>
+    <li><a href="../create-new-tutorial-tours/tutorial.html">Creating Interactive Galaxy Tours</a></li>
+    <li><a href="../create-new-tutorial-docker/tutorial.html">Building a Docker flavor</a></li>
+    <li><a href="../../../dev/tutorials/github-contribution/slides.html">Submitting the new tutorial to the GitHub repository</a></li>
+  </ol>
+</blockquote>
+
+
+    
+    <blockquote class="key_points">
+        <h3> <img class="emoji" title=":grey_exclamation:" alt=":grey_exclamation:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2755.png" height="20" width="20" align="absmiddle"> Key points</h3>
+
+        <ul>
+        
+           <li>Checking the generated website can be done locally</li>
+        
+        </ul>
+    </blockquote>
+    
+
+    
+
+    <h3>
+<img class="emoji" title=":clap:" alt=":clap:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f44f.png" height="20" width="20" align="absmiddle"> Congratulations on successfully completing this tutorial!</h3>
+
+
+    <hr>
+    <blockquote class="overview">
+        <h3> <img class="emoji" title=":speech_balloon:" alt=":speech_balloon:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f4ac.png" height="20" width="20" align="absmiddle"> Feedback</h3>
+        Please take a moment and provide your feedback on this tutorial. Your feedback will help guide and improve future revisions to this tutorial. <a href="https://tinyurl.com/GTNfeedback" target="_blank">Feedback Form</a>
+    </blockquote>
+
+    <i>This material is the result of a collaborative work. Thanks to <a href="https://galaxyproject.github.io/training-material//training#contributors">all the contributors</a> and the <a href="https://wiki.galaxyproject.org/Teach/GTN">Galaxy Training Network</a>!<br>
+    Found a typo? Something is wrong in this tutorial? Edit it on <a href="https://github.com/galaxyproject/training-material/tree/master/training/tutorials/create-new-tutorial-jekyll.md">GitHub</a>.</i>
+</section>
+
+        </div>
+    </body>
+    <script src="https://galaxyproject.github.io/training-material//assets/js/landing_page.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</html>

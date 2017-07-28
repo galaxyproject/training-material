@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html>
+    <head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="chrome=1">
+        <title>Galaxy Training!</title>
+        <link media="all" href="https://netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://galaxyproject.github.io/training-material//assets/css/landing_page.css">
+        <link rel="stylesheet" href="https://galaxyproject.github.io/training-material//assets/css/tutorial.css">
+        <link rel="stylesheet" href="https://galaxyproject.github.io/training-material//assets/css/font-awesome.css">
+        <link rel="stylesheet" href="https://galaxyproject.github.io/training-material//assets/css/syntax_highlighting.css">
+        <meta name="viewport" content="width=device-width">
+    </head>
+    <body>
+        <div class="wrapper">
+            
+
+
+<header>
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a id="site-title" class="navbar-brand" href="https://wiki.galaxyproject.org/Teach/GTN">
+              <img class="pull-left img-responsive" src="https://galaxyproject.github.io/training-material///assets/images/GTN.png">
+            </a>
+            <a id="site-title" class="navbar-brand name-holder" href="https://galaxyproject.github.io/training-material//topics/variant-analysis/tutorials/exome-seq">
+              Exome sequencing data analysis
+            </a>
+          </div>
+
+          <div class="collapse navbar-collapse" id="navbar">
+
+            <ul id="main-menu" class="nav navbar-nav navbar-right">
+              <li><a href="https://galaxyproject.github.io/training-material/" title="Back to front page"><i class="fa fa-home"></i> Home</a></li>
+              <li><a href="https://galaxyproject.github.io/training-material//topics/variant-analysis" title="Go back to list of tutorials"><i class="fa fa-file-text-o"></i> variant-analysis</a></li>
+
+              
+                <li><a href="https://galaxyproject.github.io/training-material//topics/variant-analysis/slides" title="Slides for this tutorial"><i class="fa fa-graduation-cap"></i> Introduction slides</a></li>
+              
+              <!--<li><a href="https://galaxyproject.github.io/training-material//variant-analysis/slides/exome-seq/"><i class="fa fa-file-powerpoint-o"></i> Associated slides</a></li>-->
+
+              
+                <li><a href="https://github.com/galaxyproject/training-material/tree/master/topics/variant-analysis/docker" title="Docker image for this tutorial"><i class="fa fa-ship"></i> Docker image</a></li>
+              
+
+              
+
+              
+                <li><a href="http://dx.doi.org/10.5281/zenodo.60520" title="Links to data"><i class="fa fa-folder-open"></i> Input Dataset</a></li>
+              
+
+              
+                <li><a href="https://galaxyproject.github.io/training-material//topics/variant-analysis#references" title="References"><i class="fa fa-book"></i> Literature</a></li>
+              
+
+            </ul>
+          </div>
+        </div>
+    </nav>
+</header>
+
+<section class="tutorial">
+    <h1>Exome sequencing data analysis</h1>
+
+    <blockquote class="overview">
+        <h3>Overview</h3>
+
+        <p class="bold"> <img class="emoji" title=":grey_question:" alt=":grey_question:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2754.png" height="20" width="20" align="absmiddle"> Questions</p>
+        <ul>
+        
+          <li>How to identify the genetic variation with the use of exome sequencing?</li>
+        
+          <li>What is the pipeline of the process of finding genetic variation which caused the disease?</li>
+        
+        </ul>
+
+        <p class="bold"> <img class="emoji" title=":dart:" alt=":dart:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f3af.png" height="20" width="20" align="absmiddle"> Objectives</p>
+        <ul>
+        
+          <li>Identification of the genetic variation using the exome sequencing</li>
+        
+          <li>Using FreeBayes calls for variants generating</li>
+        
+          <li>Variant analysis and GEMINI queries</li>
+        
+        </ul>
+
+        
+        <p class="bold"> <img class="emoji" title=":heavy_check_mark:" alt=":heavy_check_mark:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2714.png" height="20" width="20" align="absmiddle"> Requirements</p>
+        <ul>
+          
+            <li>
+                
+                <a href="https://galaxyproject.github.io/training-material//topics//introduction/">Galaxy introduction</a>
+                
+            </li>
+          
+            <li>
+                
+                <a href="https://galaxyproject.github.io/training-material//topics//sequence-analysis/">Quality control</a>
+                
+            </li>
+          
+            <li>
+                
+                <a href="https://galaxyproject.github.io/training-material//topics//sequence-analysis/">Mapping</a>
+                
+            </li>
+          
+          
+        </ul>
+        
+
+        <p><span class="bold"> <img class="emoji" title=":hourglass:" alt=":hourglass:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/231b.png" height="20" width="20" align="absmiddle"> Time estimation:</span> 1d/3h/6h</p>
+
+    </blockquote>
+
+<h1 id="introduction">Introduction</h1>
+
+<p>Exome sequencing means that all protein-coding genes in a genome are sequenced.</p>
+
+<p>In Humans, there are ~180,000 exons that makes up 1% of the human genome which
+contain ~30 million base pairs. Mutations in the exome have usually a higher
+impact and more severe consequences, than in the remaining 99% of the genome.</p>
+
+<p>With exome sequencing, one can identify genetic variation that is responsible
+for both Mendelian and common diseases without the high costs associated with
+whole-genome sequencing. Indeed, exome sequencing is the most efficient way to
+identify the genetic variants in all of an individual’s genes. Exome sequencing
+is cheaper also than whole-genome sequencing. With a high coverage rate of
+100+ DP, 98% of all exons are covered.</p>
+
+<p>Items where exome sequencing can’t identify genetic variation in:</p>
+
+<ul>
+  <li><em>All genes</em></li>
+</ul>
+
+<blockquote>
+  <p>Not all genes are in your exon data, especially those buried in stretches of
+ repeats out towards the chromosome tips, aren’t part of exome sequencing chips</p>
+</blockquote>
+
+<ul>
+  <li>The handful of <em>genes that reside in mitochondria</em>, rather than in the nucleus</li>
+  <li>
+<em>“Structural variants”</em> such as translocations and inversions, that move or
+flip DNA but don’t alter the base sequence.</li>
+  <li>
+<em>Triplet repeat disorders</em>, such as Huntington’s disease and fragile X syndrome
+can’t be detected.</li>
+  <li>Other <em>copy number variants</em> will remain beneath the radar, for they too don’t
+change the sequence, but can increase disease risk.</li>
+  <li><em>Introns</em></li>
+</ul>
+
+<blockquote>
+  <p>A mutation that jettisons a base in an intron can have dire consequences:
+ inserting intron sequences into the protein, or obliterating the careful
+ stitching together of exons, dropping gene sections. For example, a mutation
+ in the apoE4 gene, associated with Alzheimer’s disease risk, puts part of an
+ intron into the protein.</p>
+</blockquote>
+
+<ul>
+  <li><em>“Uniparental disomy”</em></li>
+</ul>
+
+<blockquote>
+  <p>Two mutations from one parent, rather than one from each, appear the same in
+ an exome screen: the kid has two mutations. But whether mutations come from
+ only mom, only dad, or one from each has different consequences for risk to
+ future siblings. In fact, a case of UPD reported in 1988 led to discovery of
+ the cystic fibrosis gene.</p>
+</blockquote>
+
+<ul>
+  <li><em>Control sequences</em></li>
+</ul>
+
+<blockquote>
+  <p>Much of the human genome tells the exome what to do, like a gigantic
+ instruction manual for a tiny but vital device. For example, mutations in
+ microRNAs cause cancer by silencing various genes, but the DNA that encodes
+ about half of the 1,000 or so microRNAs is intronic – and therefore not on
+ exome chips.</p>
+</blockquote>
+
+<ul>
+  <li><em>Epigenetic changes</em></li>
+</ul>
+
+<blockquote>
+  <p>Environmental factors can place shielding methyl groups directly onto DNA,
+ blocking expression of certain genes. Starvation during the “Dutch Hunger
+ Winter” of 1945, for example, is associated with schizophrenia in those who
+ were fetuses at the time, due to methylation of certain genes. Exome
+ sequencing picks up DNA sequences – not gene expression</p>
+</blockquote>
+
+<ul>
+  <li><em>Gene-gene (epistatic) interactions</em></li>
+</ul>
+
+<blockquote>
+  <p>One gene affecting the expression of another can explain why siblings with the
+ same single-gene disease suffer to a different extent. For example, a child
+ with severe spinal muscular atrophy, in which an abnormal protein shortens
+ axons of motor neurons, may have a brother who also inherits SMA but has a
+ milder case thanks to a variant of a second gene that extends axons.
+ Computational tools will need to sort out networks of interacting genes
+ revealed in exome sequencing.</p>
+</blockquote>
+
+<p>We will follow the pipeline:</p>
+
+<p><img src="../../images/genVAST.png" alt="Exome sequencing pipeline in Galaxy"></p>
+
+<blockquote class="tip">
+  <h3 id="bulb-tip">
+<img class="emoji" title=":bulb:" alt=":bulb:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f4a1.png" height="20" width="20" align="absmiddle"> Tip:</h3>
+
+  <p>For a more detailed tutorial, have a look at the <a href="https://github.com/nekrut/galaxy/wiki/Diploid-variant-calling">tutorial on diploid variant calling</a>. It
+follows a similar pipeline using genome in the bottle data, but with more details
+particularly on the theory behind.</p>
+</blockquote>
+
+<blockquote class="agenda">
+  <h3 id="agenda">Agenda</h3>
+
+  <p>In Exome-Seq tutorial, we will deal with:</p>
+
+  <ol>
+    <li><a href="#data-preprocessing">Data-preprocessing</a></li>
+    <li><a href="#variant-calling">Variant calling</a></li>
+    <li><a href="#post-processing">Post-processing</a></li>
+    <li><a href="#variant-analysis">Variant analysis</a></li>
+  </ol>
+</blockquote>
+
+<h1 id="data-preprocessing">Data-preprocessing</h1>
+
+<p>In this tutorial, a child has a yet unknown disease. His parents are healthy.
+We will try to identify the genetic variation that is responsible for the disease
+using the exome sequencing data from both parents and the child.</p>
+
+<p>Most of the data pre-processing have already be done on the raw exome sequencing.
+The raw exome sequences were mapped on <code class="highlighter-rouge">hg19</code> version of the human genome. So,
+for each family member, we will start with one BAM file with mapping results.</p>
+
+<blockquote class="hands_on">
+  <h3 id="pencil2-hands-on-data-pre-processing">
+<img class="emoji" title=":pencil2:" alt=":pencil2:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/270f.png" height="20" width="20" align="absmiddle"> Hands-on: Data pre-processing</h3>
+
+  <ol>
+    <li>Import all 3 BAM’s into a new history:
+      <ul>
+        <li><a href="https://zenodo.org/record/60520/files/father.bam">Father</a></li>
+        <li><a href="https://zenodo.org/record/60520/files/mother.bam">Mother</a></li>
+        <li><a href="https://zenodo.org/record/60520/files/patient.bam">Child = Patient</a></li>
+      </ul>
+    </li>
+    <li>Specify the used genome for mapping (for each dataset)
+      <ol>
+        <li>Click on <strong>Edit attributes</strong> (pencil icon on right panel)</li>
+        <li>Select <code class="highlighter-rouge">Human Feb 2009</code> on <strong>Database/Build</strong>
+</li>
+        <li>Save it</li>
+      </ol>
+    </li>
+    <li>Import the reference genome <img class="emoji" title=":wrench:" alt=":wrench:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f527.png" height="20" width="20" align="absmiddle">:
+      <ol>
+        <li>Go on <strong>Data Libraries</strong> in <strong>Shared data</strong> (top panel on Galaxy’s interface)</li>
+        <li>Click on <strong>Training Data</strong>
+</li>
+        <li>Select <code class="highlighter-rouge">hg19</code>
+</li>
+        <li>Click on <strong>Import selected datasets into history</strong> (just below the top panel)</li>
+        <li>Import it</li>
+        <li>Convert it from 2bit to fasta with <strong>twoBitToFa</strong> from <strong>Convert Formats</strong>
+</li>
+      </ol>
+    </li>
+    <li>Follow the next steps for father data and then apply the generated workflow on other datasets</li>
+  </ol>
+
+</blockquote>
+
+<h1 id="variant-calling">Variant calling</h1>
+
+<h2 id="generating-freebayes-calls">Generating FreeBayes calls</h2>
+
+<p>To call our variants, we will use <strong>FreeBayes</strong>. <strong>FreeBayes</strong> is a Bayesian genetic
+variant detector designed to find small polymorphisms, specifically SNPs
+(single-nucleotide polymorphisms), indels (insertions and deletions), MNPs
+(multi-nucleotide polymorphisms), and complex events (composite insertion and
+substitution events) smaller than the length of a short-read sequencing alignment.</p>
+
+<blockquote class="hands_on">
+  <h3 id="pencil2-hands-on-generating-freebayes-calls">
+<img class="emoji" title=":pencil2:" alt=":pencil2:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/270f.png" height="20" width="20" align="absmiddle"> Hands-on: Generating FreeBayes calls</h3>
+
+  <ol>
+    <li>Select <strong>FreeBayes</strong> from <strong>Phenotype Association</strong> section of the tool menu (left
+panel of Galaxy’s interface)</li>
+    <li>Run it<img class="emoji" title=":wrench:" alt=":wrench:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f527.png" height="20" width="20" align="absmiddle">:
+      <ol>
+        <li>Load reference genome from local cache</li>
+        <li>Use <code class="highlighter-rouge">Human (Homo sapiens): hg19</code> as reference genome</li>
+        <li>Choose other default settings</li>
+        <li>Execute</li>
+      </ol>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p><img class="emoji" title=":+1:" alt=":+1:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f44d.png" height="20" width="20" align="absmiddle"><img class="emoji" title=":tada:" alt=":tada:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f389.png" height="20" width="20" align="absmiddle"> <strong>Congratulations!</strong> <img class="emoji" title=":tada:" alt=":tada:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f389.png" height="20" width="20" align="absmiddle"><img class="emoji" title=":+1:" alt=":+1:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f44d.png" height="20" width="20" align="absmiddle">
+You have created you first VCF file, one of most complicated
+file formats in bioinformatics. In such a file your called variants are stored
+with one variant per line (+header lines).</p>
+
+<h2 id="post-processing-freebayes-calls">Post-processing FreeBayes calls</h2>
+
+<p>Before we can continue, we need to post-process this dataset by breaking
+compound variants into multiple independent variants and filter the VCF file
+to simplify the variant representation.</p>
+
+<blockquote class="hands_on">
+  <h3 id="pencil2-hands-on-post-processing-freebayes-calls">
+<img class="emoji" title=":pencil2:" alt=":pencil2:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/270f.png" height="20" width="20" align="absmiddle"> Hands-on: Post-processing FreeBayes calls</h3>
+
+  <ol>
+    <li>Split your allelic primitives (gaps or mismatches) into multiple VCF lines
+with <strong>VcfAllelicPrimitives</strong> from <strong>VCF Tools</strong> <img class="emoji" title=":wrench:" alt=":wrench:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f527.png" height="20" width="20" align="absmiddle">:
+      <ol>
+        <li>Select the FreeBayes output file as VCF dataset</li>
+        <li>Make sure <strong>Maintain site and allele-level annotations when decomposing</strong> and
+<strong>Maintain genotype-level annotations when decomposing</strong> are set to <code class="highlighter-rouge">Yes</code>
+</li>
+      </ol>
+    </li>
+    <li>Filter your VCF file with <strong>SnpSift Filter</strong> from <strong>Annotation</strong> to
+only conserve SNPs with a quality &gt;= 30 and a coverage &gt;= 10</li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="tip">
+  <h3 id="bulb-tip-1">
+<img class="emoji" title=":bulb:" alt=":bulb:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f4a1.png" height="20" width="20" align="absmiddle"> Tip:</h3>
+
+  <p>Have a look at the examples which help you constructing the correct expression.</p>
+</blockquote>
+
+<h2 id="annotate-your-variants">Annotate your variants</h2>
+
+<p>To annotate the variants, we use the <a href="https://www.ncbi.nlm.nih.gov/SNP/">dbSNP</a>,
+the NCBI database of genetic variation and then <code class="highlighter-rouge">hg19</code> database with <strong>SnpEff</strong>.</p>
+
+<blockquote class="hands_on">
+  <h3 id="pencil2-hands-on-annotating-variants">
+<img class="emoji" title=":pencil2:" alt=":pencil2:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/270f.png" height="20" width="20" align="absmiddle"> Hands-on: Annotating variants</h3>
+
+  <ol>
+    <li>Import the <a href="https://zenodo.org/record/60520/files/dbSNP_138.hg19.vcf">dbSNP_138.hg19.vcf</a>
+in your history (Build 138 data, available on the human assembly (GRCh37/hg19))</li>
+    <li>Assign the known variant ID from dbSNP to your variants, using
+<strong>SnpSift Annotate</strong> from <strong>Annotation</strong>
+</li>
+    <li>Annotate your variants with some functional information
+      <ol>
+        <li>Download <code class="highlighter-rouge">hg19</code> database with <strong>SnpEff Download</strong> from <strong>Annotation</strong>
+</li>
+        <li>Launch annotation of your variants with <strong>SnpEff</strong> from
+<strong>Annotation</strong>, using the downloaded database (reference genome from your
+history)</li>
+      </ol>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>Look at your <strong>“INFO”</strong> column again in the generated VCF file. You will get some gene names for your variants, but also a predicted impact and if your variant is located inside of a known gene.</p>
+
+<blockquote class="tip">
+  <h3 id="bulb-tip-2">
+<img class="emoji" title=":bulb:" alt=":bulb:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f4a1.png" height="20" width="20" align="absmiddle"> Tip:</h3>
+
+  <p>You can also have a look at the HTML report. It contains a number of useful
+metrics such as distribution of variants across gene features.</p>
+</blockquote>
+
+<h2 id="getting-the-final-vcf">Getting the final VCF</h2>
+
+<p>At this stage, you have your first annotated variants and in theory everything
+you need for your further studies is included in your VCF file.</p>
+
+<blockquote class="hands_on">
+  <h3 id="pencil2-hands-on-getting-vcf-file">
+<img class="emoji" title=":pencil2:" alt=":pencil2:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/270f.png" height="20" width="20" align="absmiddle"> Hands-on: Getting VCF file</h3>
+
+  <ol>
+    <li>Extract your history to a workflow <img class="emoji" title=":wrench:" alt=":wrench:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f527.png" height="20" width="20" align="absmiddle">
+</li>
+    <li>
+      <p>Apply this workflow to the other BAM files <img class="emoji" title=":wrench:" alt=":wrench:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f527.png" height="20" width="20" align="absmiddle"></p>
+
+      <blockquote class="comment">
+        <h3 id="nut_and_bolt-comments">
+<img class="emoji" title=":nut_and_bolt:" alt=":nut_and_bolt:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f529.png" height="20" width="20" align="absmiddle"> Comments</h3>
+        <p>You should now have 3 annotated variant files, from mother, father and the
+patient. It might be a good idea to rename them accordingly.</p>
+      </blockquote>
+    </li>
+    <li>Combine all 3 files into one with the tool <strong>VCFcombine</strong> from
+<strong>VCF Tools</strong> <img class="emoji" title=":wrench:" alt=":wrench:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f527.png" height="20" width="20" align="absmiddle">
+</li>
+  </ol>
+
+</blockquote>
+
+<p>Now that we have an annotated VCF file it is time to peek inside our variation data</p>
+
+<h1 id="post-processing">Post-processing</h1>
+
+<blockquote class="hands_on">
+  <h3 id="pencil2-hands-on-post-processing">
+<img class="emoji" title=":pencil2:" alt=":pencil2:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/270f.png" height="20" width="20" align="absmiddle"> Hands-on: Post-processing</h3>
+
+  <ol>
+    <li>Create a pedigree file (PED) like this</li>
+  </ol>
+
+  <div class="highlighter-rouge">
+<pre class="highlight"><code>#family_id	sample_id	paternal_id	maternal_id	sex	phenotype	ethnicity
+family1	RS024M-MOTHER	-9	-9	2	1	CEU
+family1	RS024V-FATHER	-9	-9	1	1	CEU
+family1	RS024P-PATIENT	RS024V-FATHER	RS024M-MOTHER	1	2	CEU
+</code></pre>
+  </div>
+
+  <ol class="comment">
+    <li>
+      <p>Use the tool <strong>GEMINI load</strong> in <strong>Gemini</strong> to create a database out of your
+combined VCF file and the PED file.</p>
+
+      <blockquote>
+        <h3 id="nut_and_bolt-comments-1">
+<img class="emoji" title=":nut_and_bolt:" alt=":nut_and_bolt:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f529.png" height="20" width="20" align="absmiddle"> Comments</h3>
+
+        <p>This creates a sqlite database. To see the content of the database use
+<strong>GEMINI_db_info</strong></p>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>Either way you have now a database with all your variants, with pedigree
+relations, additional annotations and most importantly its fast to search.</p>
+<blockquote class="tip">
+  <h3 id="bulb-tip-3">
+<img class="emoji" title=":bulb:" alt=":bulb:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f4a1.png" height="20" width="20" align="absmiddle"> Tip:</h3>
+
+  <p>Have a look at all different <strong>Gemini</strong> tools and run as many tools as possible on
+your GEMINI databases. Try to get a feeling of what is possible with a variant
+database in GEMINI.</p>
+</blockquote>
+
+<h1 id="variant-analysis">Variant analysis</h1>
+
+<p><strong>GEMINI query</strong> is the most versatile of all the GEMINI tools. You can use it to
+ask ‘interesting’ questions in simple SQL (see the GEMINI <a href="http://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1003153">handbook</a> on its usage).</p>
+
+<h3 id="gemini-query-examples">
+<strong>GEMINI query</strong> examples:</h3>
+<ul>
+  <li>
+<code class="highlighter-rouge">select chrom, start, end from variants</code> will show you some information on all
+variants that were found in any of the three samples</li>
+  <li>
+<code class="highlighter-rouge">select chrom, start, end, (gts).(*) from variants</code> will also show you the
+genotype of each sample also with the help wildcards</li>
+  <li>
+<code class="highlighter-rouge">select chrom, start, end, gene, impact, (gts).(*) from variants v where v.impact_severity='HIGH'</code>
+will show you some more information and filter out only those variants that
+have a high impact</li>
+  <li>
+<code class="highlighter-rouge">select chrom, vcf_if, start, end, ref, alt, gene, impact, (gts).(*) from variants v where v.impact_severity='HIGH'</code>
+also shows you the reference allele and the alternative allele and the RSID for
+the SNP if it exists</li>
+</ul>
+
+<blockquote class="tip">
+  <h3 id="bulb-tip-4">
+<img class="emoji" title=":bulb:" alt=":bulb:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f4a1.png" height="20" width="20" align="absmiddle"> Tip:</h3>
+
+  <p>Switch on the <code class="highlighter-rouge">--header</code> parameter**</p>
+
+  <blockquote class="tip">
+    <h3 id="bulb-tip-5">
+<img class="emoji" title=":bulb:" alt=":bulb:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f4a1.png" height="20" width="20" align="absmiddle"> Tip:</h3>
+
+    <p>To go further on <strong>Gemini</strong>, you can have a look at the following tutorials:</p>
+
+    <ul>
+      <li><a href="https://s3.amazonaws.com/gemini-tutorials/Intro-To-Gemini.pdf">Introduction</a></li>
+      <li><a href="https://s3.amazonaws.com/gemini-tutorials/Gemini-DeNovo-Tutorial.pdf">Identifying <em>de novo</em> mutations underlying Mendelian disease</a></li>
+      <li><a href="https://s3.amazonaws.com/gemini-tutorials/Gemini-Recessive-Tutorial.pdf">Identifying autosomal recessive variants underlying Mendelian disease</a></li>
+      <li><a href="https://s3.amazonaws.com/gemini-tutorials/Gemini-Dominant-Tutorial.pdf">Identifying autosomal dominant variants underlying Mendelian disease</a></li>
+    </ul>
+  </blockquote>
+  <p>And for a more detailed tutorial on variant data generation in Galaxy, have a
+look at the <a href="https://github.com/nekrut/galaxy/wiki/Diploid-variant-calling">tutorial on diploid variant calling</a>.</p>
+</blockquote>
+
+
+    
+    <blockquote class="key_points">
+        <h3> <img class="emoji" title=":grey_exclamation:" alt=":grey_exclamation:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2755.png" height="20" width="20" align="absmiddle"> Key points</h3>
+
+        <ul>
+        
+           <li>With exome sequencing, one can identify genetic variation that is responsible for some diseases</li>
+        
+           <li>Exome sequencing is the most efficient way to identify the genetic variants in all of an individual's genes</li>
+        
+           <li>One can use GEMINI queries to access database with all the genetic variants</li>
+        
+           <li>In order to generate such database one can use FreeBayes</li>
+        
+        </ul>
+    </blockquote>
+    
+
+    
+      <h1>Useful literature</h1>
+      <p>Useful information regarding this type of analysis with descriptions and paper references for the tools used in this tutorial, and literature for this analysis techniques and interpretations can be found <a href="https://galaxyproject.github.io/training-material//variant-analysis#references">here</a>.</p>
+    
+
+    <h3>
+<img class="emoji" title=":clap:" alt=":clap:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f44f.png" height="20" width="20" align="absmiddle"> Congratulations on successfully completing this tutorial!</h3>
+
+
+    <hr>
+    <blockquote class="overview">
+        <h3> <img class="emoji" title=":speech_balloon:" alt=":speech_balloon:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f4ac.png" height="20" width="20" align="absmiddle"> Feedback</h3>
+        Please take a moment and provide your feedback on this tutorial. Your feedback will help guide and improve future revisions to this tutorial. <a href="https://tinyurl.com/GTNfeedback" target="_blank">Feedback Form</a>
+    </blockquote>
+
+    <i>This material is the result of a collaborative work. Thanks to <a href="https://galaxyproject.github.io/training-material//variant-analysis#contributors">all the contributors</a> and the <a href="https://wiki.galaxyproject.org/Teach/GTN">Galaxy Training Network</a>!<br>
+    Found a typo? Something is wrong in this tutorial? Edit it on <a href="https://github.com/galaxyproject/training-material/tree/master/variant-analysis/tutorials/exome-seq.md">GitHub</a>.</i>
+</section>
+
+        </div>
+    </body>
+    <script src="https://galaxyproject.github.io/training-material//assets/js/landing_page.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</html>

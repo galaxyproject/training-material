@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html>
+    <head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="chrome=1">
+        <title>Galaxy Training!</title>
+        <link media="all" href="https://netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://galaxyproject.github.io/training-material//assets/css/landing_page.css">
+        <link rel="stylesheet" href="https://galaxyproject.github.io/training-material//assets/css/tutorial.css">
+        <link rel="stylesheet" href="https://galaxyproject.github.io/training-material//assets/css/font-awesome.css">
+        <link rel="stylesheet" href="https://galaxyproject.github.io/training-material//assets/css/syntax_highlighting.css">
+        <meta name="viewport" content="width=device-width">
+    </head>
+    <body>
+        <div class="wrapper">
+            
+
+
+<header>
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a id="site-title" class="navbar-brand" href="https://wiki.galaxyproject.org/Teach/GTN">
+              <img class="pull-left img-responsive" src="https://galaxyproject.github.io/training-material///assets/images/GTN.png">
+            </a>
+            <a id="site-title" class="navbar-brand name-holder" href="https://galaxyproject.github.io/training-material//topics/usegalaxy/tutorials/dunovo">
+              Calling very rare variants
+            </a>
+          </div>
+
+          <div class="collapse navbar-collapse" id="navbar">
+
+            <ul id="main-menu" class="nav navbar-nav navbar-right">
+              <li><a href="https://galaxyproject.github.io/training-material/" title="Back to front page"><i class="fa fa-home"></i> Home</a></li>
+              <li><a href="https://galaxyproject.github.io/training-material//topics/usegalaxy" title="Go back to list of tutorials"><i class="fa fa-file-text-o"></i> usegalaxy</a></li>
+
+              
+                <li><a href="https://galaxyproject.github.io/training-material//topics/usegalaxy/slides" title="Slides for this tutorial"><i class="fa fa-graduation-cap"></i> Introduction slides</a></li>
+              
+              <!--<li><a href="https://galaxyproject.github.io/training-material//usegalaxy/slides/dunovo/"><i class="fa fa-file-powerpoint-o"></i> Associated slides</a></li>-->
+
+              
+                <li><a href="https://github.com/galaxyproject/training-material/tree/master/topics/usegalaxy/docker" title="Docker image for this tutorial"><i class="fa fa-ship"></i> Docker image</a></li>
+              
+
+              
+                <li><a href="https://usegalaxy.org" title="Galaxy instance for this tutorial"><i class="fa fa-external-link"></i> Galaxy instance</a></li>
+              
+
+              
+
+              
+
+            </ul>
+          </div>
+        </div>
+    </nav>
+</header>
+
+<section class="tutorial">
+    <h1>Calling very rare variants</h1>
+
+    <blockquote class="overview">
+        <h3>Overview</h3>
+
+        <p class="bold"> <img class="emoji" title=":grey_question:" alt=":grey_question:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2754.png" height="20" width="20" align="absmiddle"> Questions</p>
+        <ul>
+        
+          <li>What is frequency of variants is so low that it is obscured by sequencing error rate?</li>
+        
+        </ul>
+
+        <p class="bold"> <img class="emoji" title=":dart:" alt=":dart:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f3af.png" height="20" width="20" align="absmiddle"> Objectives</p>
+        <ul>
+        
+          <li>Learn about duplex sequencing and analysis of duplex reads</li>
+        
+        </ul>
+
+        
+        <p class="bold"> <img class="emoji" title=":heavy_check_mark:" alt=":heavy_check_mark:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2714.png" height="20" width="20" align="absmiddle"> Requirements</p>
+        <ul>
+          
+            <li>
+                
+                <a href="https://galaxyproject.github.io/training-material//topics//introduction/">Galaxy introduction</a>
+                
+            </li>
+          
+          
+        </ul>
+        
+
+        <p><span class="bold"> <img class="emoji" title=":hourglass:" alt=":hourglass:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/231b.png" height="20" width="20" align="absmiddle"> Time estimation:</span> 1 hr</p>
+
+    </blockquote>
+
+<p>This page explains how to perform discovery of low frequency variants from duplex sequencing data. As an example we use the <em>ABL1</em> dataset published by <a href="https://www.ncbi.nlm.nih.gov/pubmed/25849638">Schmitt and colleagues</a> (SRA accession <a href="https://www.ncbi.nlm.nih.gov/sra/?term=SRR1799908">SRR1799908</a>).</p>
+
+<h1 id="background">Background</h1>
+
+<p>Calling low frequency variants from next generation sequencing (NGS) data is challenging due to significant amount of noise characteristic of these technologies. <a href="https://www.pnas.org/content/109/36/14508.short">Duplex sequencing</a> (DS) was designed to address this problem by increasing sequencing accuracy by over four orders of magnitude. DS uses randomly generated barcodes to uniquely tag each molecule in a sample. The tagged fragments are then PCR amplified prior to the preparation of a sequencing library, creating fragment families characterized by unique combination of barcodes at both 5’ and 3’ ends:</p>
+
+<blockquote>
+  <p><a href="https://www.pnas.org/content/109/36/14508/F1.expansion.html"><img src="../../images/ds.png" alt="duplex"></a></p>
+
+  <p>The logic of duplex sequencing. From <a href="https://www.pnas.org/content/109/36/14508.short">Schmitt:2012</a>.</p>
+</blockquote>
+
+<p>The computational analysis of DS data (Part <code class="highlighter-rouge">C</code> in the figure above) produces two kinds of output:</p>
+
+<ul>
+  <li>Single Strand Consensus Sequences (SSCS; panel <code class="highlighter-rouge">iv</code> in the figure above);</li>
+  <li>Duplex Consensus Sequences (DCS; panel <code class="highlighter-rouge">v</code> in the figure above).</li>
+</ul>
+
+<p>The DCSs have the ultimate accuracy, yet the SSCSs can also be very useful when ampliconic DNA is used as an input to a DS experiment. Let us illustrate the utility of SSCSs with the following example. Suppose one is interested in quantifying variants in a virus that has a very low titer in body fluids. Since DS procedure requires a substantial amount of starting DNA (between <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4271547/">between 0.2 and 3 micrograms</a>) the virus needs to be enriched. This can be done, for example, with a PCR designed to amplify the entire genome of the virus. Yet the problem is that during the amplification heterologous strands will almost certainly realign to some extent forming hetoroduplex molecules:</p>
+
+<blockquote>
+  <p><img src="../../images/het.png" alt="hd"></p>
+
+  <p>Heteroduplex formation in ampliconic templates. Image by Barbara Arbeithuber from <a href="https://genomebiology.biomedcentral.com/articles/10.1186/s13059-016-1039-4">Stoler:2016</a>. Here there are two distinct types of viral genomes: carrying <code class="highlighter-rouge">A</code> and <code class="highlighter-rouge">G</code>. Because the population of genomes is enriched via PCR, heteroduplex formation takes place, skewing frequency estimates performed using DCSs.</p>
+</blockquote>
+
+<p>In the image above there are two alleles: green (A) and red (G). After PCR a fraction of molecules are in heteroduplex state. If this PCR-derived DNA is now used as the starting material for a DS experiment, the heteroduplex molecules will manifest themselves as having an <code class="highlighter-rouge">N</code> base at this site (because <em>Du Novo</em> interprets disagreements as <code class="highlighter-rouge">N</code>s during consensus generation). So, DSCs produced from this dataset will have <code class="highlighter-rouge">A</code>, <code class="highlighter-rouge">G</code>, and <code class="highlighter-rouge">N</code> at the polymorphic site. Yet, SSCSs will only have <code class="highlighter-rouge">A</code> and <code class="highlighter-rouge">G</code>. Thus SSCS will give a more accurate estimate of the allele frequency at this site in this particular case. In <em>Du Novo</em> SSCSs are generated when the <strong>Output single-strand consensus sequences</strong> option of <strong>Du Novo: Make consensus reads</strong> tool is set to <code class="highlighter-rouge">Yes</code> (see <a href="#generating-duplex-consensus-sequences-dcs">here</a>).</p>
+
+<h2 id="how-to-use-this-tutorial">How to use this tutorial</h2>
+
+<p>The entire analysis described here is accessible as a <a href="https://usegalaxy.org/u/aun1/h/duplex-analysis-abl1">Galaxy history</a> (by clicking on this link you can create your own copy and play with it).</p>
+
+<blockquote>
+  <p><img src="https://galaxyproject.org/duplex/histItem.png" alt="History Item"></p>
+
+  <p>Each history item has a Rerun <img src="https://galaxyproject.org/tutorials/g101/fa-refresh.png" alt="refresh"> button. Clicking this button will show you how this tool was run with all parameters filled in exactly.</p>
+</blockquote>
+
+<p>This analysis (and consequently the Galaxy’s history) can be divided into three parts</p>
+<ol>
+  <li>Consensus generation from initial sequencing reads;</li>
+  <li>Analysis of Duplex Consensus Sequences (DCS);</li>
+  <li>Analysis of Single Strand Consensus Sequences (SSCS):</li>
+</ol>
+
+<blockquote>
+  <p><img src="../../images/steps.png" alt="steps"></p>
+
+  <p>Analysis outline</p>
+</blockquote>
+
+<h1 id="start-generating-consensus-sequences">Start: Generating consensus sequences</h1>
+
+<p>The starting point of the analyses are sequencing reads (usually in <a href="https://en.wikipedia.org/wiki/FASTQ_format">fastq</a> format) produced from a duplex sequencing library.</p>
+
+<h2 id="getting-data-in-and-assessing-quality">Getting data in and assessing quality</h2>
+
+<p>We uploaded <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4414912/">Schmitt:2015</a>) data directly from SRA as shown in <a href="https://vimeo.com/121187220">this screencast</a>. This created two datasets in our galaxy history: one for forward reads and one for reverse. We then evaluated the quality of the data by running FastQC on both datasets (forward and reverse) to obtain the following plots:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left"> </th>
+      <th style="text-align: left"> </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><img src="../../images/abl1-f-qc.png" alt=""></td>
+      <td style="text-align: left"><img src="../../images/abl1-r-qc.png" alt=""></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">
+<strong>A</strong>. Forward</td>
+      <td style="text-align: left">
+<strong>B</strong>. Reverse</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>One can see that these data are of excellent quality and no additional processing is required before we can start the actual analysis.</p>
+
+<h2 id="generating-duplex-consensus-sequences-dcs">Generating Duplex Consensus Sequences (DCS)</h2>
+
+<p>From tool section <strong>NGS: Du Novo</strong> we ran:</p>
+
+<ol>
+  <li>
+<strong>Make families</strong> (<code class="highlighter-rouge">Tag length = 12</code>; <code class="highlighter-rouge">Invariant sequence length = 5</code>)</li>
+  <li>
+<strong>Align families</strong> (This is <strong>the most</strong> time consuming step of the workflow. It may take multiple days to run. The <em>ABL1</em> example took 34 hours and 7 minutes to finish. )</li>
+  <li>
+<strong>Make consensus reads</strong> (<code class="highlighter-rouge">Minimum reads per family = 3</code>; <code class="highlighter-rouge">Minimum base quality = 20</code>; <code class="highlighter-rouge">FASTQ format = Sanger</code> ; <code class="highlighter-rouge">Output single-strand consensus sequences = Yes</code> <img class="emoji" title=":point_left:" alt=":point_left:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f448.png" height="20" width="20" align="absmiddle"> This is particularly important as explained below; also see the following image)</li>
+</ol>
+
+<p>This is the exact image of the <strong>Make consensus reads</strong> interface:</p>
+
+<blockquote>
+  <p><img src="../../images/makeCons.png" alt="Make consesni"></p>
+
+  <p>Making DCS and SSCS. <strong>Note</strong> that <strong>Output single-strand consensus sequences</strong> is set to <code class="highlighter-rouge">Yes</code>. <a href="#background">Above</a> we explained why single-strand consensus sequences (SSCS) may be important in some applications. <a href="#analysis-of-single-strand-consensus-data">Below</a> we show how they can be used.</p>
+</blockquote>
+
+<h2 id="filtering-consensuses">Filtering consensuses</h2>
+
+<p>The <em>Du Novo</em> algorithm occasionally inserts<code class="highlighter-rouge">N</code>and/or <a href="https://en.wikipedia.org/wiki/Nucleic_acid_notation">IUPAC notations</a> at sites where a definive base cannot be identified according to the major rule consensus. We however do not want such bases when we call variants. The tool <strong>Sequence Content Trimmer</strong> will help with filtering these out. Here are the parameters we used:</p>
+
+<blockquote>
+  <p><img src="../../images/contentTrimmer.png" alt="ContentTrimmer"></p>
+
+  <p>Sequence Content Trimmer settings . Where:<br>- <code class="highlighter-rouge">Paired reads = Paired</code> (because DCSs are reported as forward and reverse)<br>- <code class="highlighter-rouge">Bases to filter on = NRYSWKMBDHV</code> (all ambiguous nucleotides)<br>- <code class="highlighter-rouge">Frequency threshold = 0.2</code> (A window /see the next parameter below/ cannot have more than 20% of ambiguous bases)<br>- <code class="highlighter-rouge">Size of the window = 10</code> (Size of the window)<br>- <code class="highlighter-rouge">Invert filter bases = No</code><br>- <code class="highlighter-rouge">Set a minimum read length = 50</code> (We do not want <em>very</em> short reads)</p>
+</blockquote>
+
+<h2 id="generating-fastq">Generating fastq</h2>
+
+<p><a href="#filtering-consensuses">The previous step</a> filters forward and reverse DCSs and reports them in <a href="https://en.wikipedia.org/wiki/FASTA_format">FASTA</a> format. Yet the downstream tools require <a href="https://en.wikipedia.org/wiki/FASTQ_format">fastq</a> format. To address this we convert FASTA into fastq using <strong>Combine FASTA and QUAL</strong> from tool section <strong>NGS: QC and manipulation</strong>. In this case the quality values are filled in with the maximum allowed value of 93 (essentially we fake them here), which is fine as we will not rely on quality scores in the rest of the analysis.</p>
+
+<blockquote>
+  <p><img src="../../images/combineFandQ.png" alt="ContentTrimmer"></p>
+
+  <p>Combine FASTA and QUAL. <strong>Note</strong> that here two datasets (#8 and #9) are selected simultaneously because we clicked the multiple datasets button the left of the <strong>FASTA File</strong> dropdown:<br> <img src="../../images/multiDataset.png" alt=""></p>
+</blockquote>
+
+<h2 id="calling-variants">Calling variants</h2>
+
+<p>At this point we have trimmed DCSs in fastq format. We can now proceed to calling variants. This involves the following steps:</p>
+
+<ol>
+  <li><a href="#align-against-genome-with-bwa-and-bwa-mem">Align against reference genome</a></li>
+  <li>
+<a href="#merging">Merge results of multiple mappers</a> <img class="emoji" title=":point_left:" alt=":point_left:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f448.png" height="20" width="20" align="absmiddle"> This step is only useful if one uses multiple mappers (which we do here to show concordance. But this is not strictly necessary.)</li>
+  <li><a href="#left-aligning-indels">Left aligning indels</a></li>
+  <li><a href="#tabulating-the-differences">Tabulate the differences</a></li>
+</ol>
+
+<h3 id="align-against-genome-with-bwa-and-bwa-mem">Align against genome with <strong>BWA</strong> and <strong>BWA-MEM</strong>
+</h3>
+
+<p>Here we use two mappers for added reliability (this is not necessary in most situations as long as you use the right mapper for input data). To differentiate between results produced by each mapper we assign readgroups (this is done by clicking on <strong>Set read groups information</strong> dropdown). For example, for <strong>BWA-MEM</strong> you would set parameters like this:</p>
+
+<blockquote>
+  <p><img src="../../images/bwa-mem.png" alt=""></p>
+
+  <p>Running BWA-MEM. <strong>Note</strong> that we are comparing DCSs against human genome version <code class="highlighter-rouge">hg38</code>, use forward and reverse DCSs are the <code class="highlighter-rouge">first</code> and <code class="highlighter-rouge">second</code> set of reads. Readgroup <strong>SM</strong> and <strong>ID</strong> tags are set <code class="highlighter-rouge">bwa-mem</code>.</p>
+</blockquote>
+
+<p>We then repeat essentially the same with <strong>BWA</strong>:</p>
+
+<blockquote>
+  <p><img src="../../images/bwa.png" alt=""></p>
+
+  <p>Running BWA. <strong>Note</strong> here we use <code class="highlighter-rouge">bwa</code> as the readgroup <strong>ID</strong> and <strong>SM</strong> tags.</p>
+</blockquote>
+
+<h3 id="merging">Merging</h3>
+
+<p>Since we have used two mappers - we have two BAM datasets. Yet because we have set readgroups we can now merge them into a single BAM dataset. This is because the individual reads will be labelled with readgroups (you will see how it will help later). To merge we use <strong>MergeSamFiles</strong> from tool section <strong>NGS: Picard</strong>:</p>
+
+<blockquote>
+  <p><img src="../../images/mergeSamFiles.png" alt=""></p>
+
+  <p>Merging BAM datasets.</p>
+</blockquote>
+
+<h3 id="left-aligning-indels">Left Aligning indels</h3>
+
+<p>To normalize the positional distribution of indels we use <strong>Left Align</strong> utility (<strong>NGS: Variant Analysis</strong>) from <a href="https://github.com/ekg/freebayes#indels">FreeBayes</a> package. This is necessary to avoid erroneous polymorphisms flanking regions with indels (e.g., in low complexity loci):</p>
+
+<blockquote>
+  <p><img src="../../images/leftAlign.png" alt=""></p>
+
+  <p>Left aligning indels. <strong>Note</strong> here we use <code class="highlighter-rouge">hg38</code> as well. Obviously, one must use the same genome built you have aligned against with <strong>BWA-MEM</strong> and <strong>BWA</strong>.</p>
+</blockquote>
+
+<h3 id="tabulating-the-differences">Tabulating the differences</h3>
+
+<p>To identify sites containing variants we use <strong>Naive Variant Caller (NVC)</strong> (tool section <strong>NGS: Variant Analysis</strong>) which produces a simple count of differences given coverage and base quality per site (remember that our qualities were “faked” during the conversion from FASTA to fastq and cannot be used here). So in the case of <em>ABL1</em> we set parameters as follow:</p>
+
+<blockquote>
+  <p><img src="../../images/nvc.png" alt=""></p>
+
+  <p>Finding variants with NVC. Here:<br>- <code class="highlighter-rouge">Using reference genome = hg38</code> (As mentioned above, needs to be set to the same genome one have mapped against.)<br>- <code class="highlighter-rouge">Restrict to regions: Chromosome = chr9</code> (<em>ABL1</em> is on chromosome 9. We set this to prevent <strong>NVC</strong> from wandering across the genome to save time.)<br>- <code class="highlighter-rouge">Minimum number of reads needed to consider a REF/ALT = 0</code> (Trying to maximize the number of sites. We can filter later.)<br>- <code class="highlighter-rouge">Minimum base quality = 20</code> (This default and is irrelevant because of “faking” quality scores during the conversion from FASTA to fastq).<br>- <code class="highlighter-rouge">Minimum mapping quality = 20</code> (This is helpful because it prevents reads mapping to multiple locations from being included in the tabulation. Such reads will have mapping quality of 0.)<br>- <code class="highlighter-rouge">Ploidy = 1</code> (Ploidy is irrelevant here as it is a mixture of multiple genomes)<br>- <code class="highlighter-rouge">Only write out positions with possible alternate alleles = No</code> (We can filter later)<br>- <code class="highlighter-rouge">Report counts by strand = Yes</code> (This will be helpful to gauge the strand bias).</p>
+</blockquote>
+
+<p>The <strong>NVC</strong> generates a <a href="https://en.wikipedia.org/wiki/Variant_Call_Format">VCF</a> file that can be viewed at genome browsers such as <a href="https://www.broadinstitute.org/igv/">IGV</a>. Yet one rarely finds variants by looking at genome browsers. The next step is to generate a tab-delimited dataset of nucleotide counts using <strong>Variant Annotator</strong> from tool section <strong>NGS: Variant Analysis</strong>. We ran it with the following parameters:</p>
+
+<blockquote>
+  <p><img src="../../images/va.png" alt=""></p>
+
+  <p>Annotating variable sites. Here <code class="highlighter-rouge">Coverage threshold = 10</code> (To reduce noise) and <code class="highlighter-rouge">Output stranded base counts = Yes</code> (to see strand bias)</p>
+</blockquote>
+
+<p>There are 3,264 lines in the output, which is clearly too much. Using <strong>Filter</strong> tool (tool section <strong>Filter and Sort</strong>) with expression <code class="highlighter-rouge">c16 &gt;= 0.01</code>(because column 16 contains minor allele frequency - MAF - and we are interested in those sites where MAF &gt;= 1%):</p>
+
+<blockquote>
+  <p><img src="../../images/filter.png" alt=""></p>
+
+  <p>Filtering variable sites.</p>
+</blockquote>
+
+<p>will get that number to only 4 (showing just some of the columns):</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Mapper</th>
+      <th style="text-align: right">Position (chr9)</th>
+      <th style="text-align: center">Major allele</th>
+      <th style="text-align: center">Minor allele</th>
+      <th style="text-align: right">MAF</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">bwa</td>
+      <td style="text-align: right">130,872,141</td>
+      <td style="text-align: center">G</td>
+      <td style="text-align: center">A</td>
+      <td style="text-align: right">0.013</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">bwa-mem</td>
+      <td style="text-align: right">130,872,141</td>
+      <td style="text-align: center">G</td>
+      <td style="text-align: center">A</td>
+      <td style="text-align: right">0.013</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">bwa</td>
+      <td style="text-align: right">130,880,141</td>
+      <td style="text-align: center">A</td>
+      <td style="text-align: center">G</td>
+      <td style="text-align: right">0.479</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">bwa-mem</td>
+      <td style="text-align: right">130,880,141</td>
+      <td style="text-align: center">A</td>
+      <td style="text-align: center">G</td>
+      <td style="text-align: right">0.479</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>We can see that results of both mappers agree very well. The reason we see these numbers grouped by mappers is because we have set the readgroups while <a href="#align-against-genome-with-bwa-and-bwa-mem">mapping</a>.</p>
+
+<p>The polymorphism we are interested in (and the one reported by [Schmitt:2015] (https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4414912/)) is at the position 130,872,141 and has a frequency of 1.3%. The other site (position 130,880,141) is a known common variant <a href="https://www.ncbi.nlm.nih.gov/SNP/snp_ref.cgi?type=rs&amp;rs=rs2227985">rs2227985</a>, which is heterozygous in this sample.</p>
+
+<h1 id="analysis-of-single-strand-consensus-data">Analysis of single strand consensus data</h1>
+
+<p>SSCSs are generated when the <strong>Output single-strand consensus sequences</strong> option of <strong>Du Novo: Make consensus reads</strong> tool is set to <code class="highlighter-rouge">Yes</code> (see <a href="#generating-duplex-consensus-sequences-dcs">here</a>). Analysis of SSCS data follows almost exactly the same trajectory. The only difference is that these <strong>do not</strong> come as forward and reverse. Instead <em>Du Novo</em> generates a single dataset. With this dataset we go through all the same steps:</p>
+
+<ul>
+  <li><a href="#filtering-consensi">Filtering consensi</a></li>
+  <li><a href="#generating-fastq">Generating fastq</a></li>
+  <li>
+<a href="#calling-variants">Calling variants</a>
+ 	- <a href="#align-against-genome-with-bwa-and-bwa-mem">Aligning against genome</a> (here the difference is that one needs to choose a single end option and use a single dataset as input)
+ 	- <a href="#merging">Merging</a>
+ 	- <a href="#left-aligning-indels">Left aligning indels</a>
+ 	- <a href="#tabulating-the-differences">Tabulating the differences</a>
+</li>
+</ul>
+
+<h2 id="repeating-this-analysis-using-workflows">Repeating this analysis using workflows</h2>
+
+<p>The analysis described above can be rerun using a workflow. Workflow combined all steps into a single entity that only needs to be executed once. We provide two workflows:</p>
+
+<ul>
+  <li>
+<em>Du Novo</em> analysis from reads (import from <a href="https://usegalaxy.org/u/aun1/w/duplex-analysis-from-reads">here</a>). This workflow uses fastq reads as input. It should be used if you analyze data for first time.</li>
+  <li>
+<em>Du Novo</em> analysis from aligned families (import from <a href="https://usegalaxy.org/u/aun1/w/copy-of-duplex-analysis-from-reads">here</a>). This workflow starts with aligned families. It should be used for re-analysis of already generated DCS and SSCS data.</li>
+</ul>
+
+<blockquote>
+  <p><a href="https://galaxyproject.org/duplex/fromReads.png"><img src="../../images/fromReads.png" alt=""></a></p>
+
+  <p>Starting from Reads</p>
+</blockquote>
+
+<blockquote>
+  <p><a href="https://galaxyproject.org/duplex/fromDCS.png"><img src="../../images/fromDCS.png" alt=""></a></p>
+
+  <p>Starting from DCS/SSCS data</p>
+</blockquote>
+
+<h2 id="if-things-dont-work">If things don’t work…</h2>
+<p>…you need to complain. Use <a href="https://usegalaxy.org/biostar/biostar_redirect">Galaxy’s BioStar Channel</a> to do this.</p>
+
+
+    
+
+    
+
+    <h3>
+<img class="emoji" title=":clap:" alt=":clap:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f44f.png" height="20" width="20" align="absmiddle"> Congratulations on successfully completing this tutorial!</h3>
+
+
+    <hr>
+    <blockquote class="overview">
+        <h3> <img class="emoji" title=":speech_balloon:" alt=":speech_balloon:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f4ac.png" height="20" width="20" align="absmiddle"> Feedback</h3>
+        Please take a moment and provide your feedback on this tutorial. Your feedback will help guide and improve future revisions to this tutorial. <a href="https://tinyurl.com/GTNfeedback" target="_blank">Feedback Form</a>
+    </blockquote>
+
+    <i>This material is the result of a collaborative work. Thanks to <a href="https://galaxyproject.github.io/training-material//usegalaxy#contributors">all the contributors</a> and the <a href="https://wiki.galaxyproject.org/Teach/GTN">Galaxy Training Network</a>!<br>
+    Found a typo? Something is wrong in this tutorial? Edit it on <a href="https://github.com/galaxyproject/training-material/tree/master/usegalaxy/tutorials/dunovo.md">GitHub</a>.</i>
+</section>
+
+        </div>
+    </body>
+    <script src="https://galaxyproject.github.io/training-material//assets/js/landing_page.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</html>

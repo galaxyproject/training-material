@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html>
+    <head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="chrome=1">
+        <title>Galaxy Training!</title>
+        <link media="all" href="https://netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://galaxyproject.github.io/training-material//assets/css/landing_page.css">
+        <link rel="stylesheet" href="https://galaxyproject.github.io/training-material//assets/css/tutorial.css">
+        <link rel="stylesheet" href="https://galaxyproject.github.io/training-material//assets/css/font-awesome.css">
+        <link rel="stylesheet" href="https://galaxyproject.github.io/training-material//assets/css/syntax_highlighting.css">
+        <meta name="viewport" content="width=device-width">
+    </head>
+    <body>
+        <div class="wrapper">
+            
+
+
+<header>
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a id="site-title" class="navbar-brand" href="https://wiki.galaxyproject.org/Teach/GTN">
+              <img class="pull-left img-responsive" src="https://galaxyproject.github.io/training-material///assets/images/GTN.png">
+            </a>
+            <a id="site-title" class="navbar-brand name-holder" href="https://galaxyproject.github.io/training-material//topics/introduction/tutorials/igv-introduction">
+              IGV Introduction
+            </a>
+          </div>
+
+          <div class="collapse navbar-collapse" id="navbar">
+
+            <ul id="main-menu" class="nav navbar-nav navbar-right">
+              <li><a href="https://galaxyproject.github.io/training-material/" title="Back to front page"><i class="fa fa-home"></i> Home</a></li>
+              <li><a href="https://galaxyproject.github.io/training-material//topics/introduction" title="Go back to list of tutorials"><i class="fa fa-file-text-o"></i> introduction</a></li>
+
+              
+                <li><a href="https://galaxyproject.github.io/training-material//topics/introduction/slides" title="Slides for this tutorial"><i class="fa fa-graduation-cap"></i> Introduction slides</a></li>
+              
+              <!--<li><a href="https://galaxyproject.github.io/training-material//introduction/slides/igv-introduction/"><i class="fa fa-file-powerpoint-o"></i> Associated slides</a></li>-->
+
+              
+                <li><a href="https://github.com/galaxyproject/training-material/tree/master/topics/introduction/docker" title="Docker image for this tutorial"><i class="fa fa-ship"></i> Docker image</a></li>
+              
+
+              
+
+              
+                <li><a href="url%20to%20Zenodo%20with%20input%20data" title="Links to data"><i class="fa fa-folder-open"></i> Input Dataset</a></li>
+              
+
+              
+                <li><a href="https://galaxyproject.github.io/training-material//topics/introduction#references" title="References"><i class="fa fa-book"></i> Literature</a></li>
+              
+
+            </ul>
+          </div>
+        </div>
+    </nav>
+</header>
+
+<section class="tutorial">
+    <h1>IGV Introduction</h1>
+
+    <blockquote class="overview">
+        <h3>Overview</h3>
+
+        <p class="bold"> <img class="emoji" title=":grey_question:" alt=":grey_question:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2754.png" height="20" width="20" align="absmiddle"> Questions</p>
+        <ul>
+        
+          <li>First question addressed during the tutorial</li>
+        
+          <li>Second question addressed during the tutorial</li>
+        
+        </ul>
+
+        <p class="bold"> <img class="emoji" title=":dart:" alt=":dart:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f3af.png" height="20" width="20" align="absmiddle"> Objectives</p>
+        <ul>
+        
+          <li>First learning objectives of the tutorial</li>
+        
+          <li>Second learning objectives of the tutorial</li>
+        
+        </ul>
+
+        
+
+        <p><span class="bold"> <img class="emoji" title=":hourglass:" alt=":hourglass:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/231b.png" height="20" width="20" align="absmiddle"> Time estimation:</span> 1h/1d</p>
+
+    </blockquote>
+
+<h1 id="using-the-integrative-genomics-viewer">Using the Integrative Genomics Viewer</h1>
+
+<p><strong>Bioinformatics Galaxy Course</strong></p>
+
+<p><strong>MPI-IE &amp; University of Freiburg</strong></p>
+
+<p>To start IGV, go to the IGV downloads page: https://www.broadinstitute.org/software/igv/download.</p>
+
+<h2 id="user-interface">User Interface</h2>
+
+<h2 id="main-window">Main Window</h2>
+
+<p><img src="https://www.broadinstitute.org/software/igv/sites/cancerinformatics.org.igv/files/images/igv_desktop_callouts.jpg" alt="MainWindowIGV"></p>
+
+<p><strong>Tool bar</strong> <img src="../../images/callout_1.jpg" alt="callout_1.jpg"></p>
+
+<ul>
+  <li>The <a href="https://www.broadinstitute.org/software/igv/?q=ToolBar">tool bar</a> provides access to commonly used functions. The <a href="https://www.broadinstitute.org/software/igv/?q=MenuBar">menu bar</a> and <a href="http://www.broadinstitute.org/software/igv/?q=PopupMenus">pop-up menus</a> (not shown) provide access to all other functions.</li>
+</ul>
+
+<p><strong>Chromosome</strong> <img src="../../images/callout_2.jpg" alt="callout_2.jpg"></p>
+
+<ul>
+  <li>The red box on the chromosome ideogram indicates which portion of the chromosome is displayed. When zoomed out to display the full chromosome, the red box disappears from the ideogram.</li>
+</ul>
+
+<p><strong>Ruler</strong> <img src="../../images/callout_3.jpg" alt="callout_3.jpg"></p>
+
+<ul>
+  <li>The ruler reflects the visible portion of the chromosome. The tick marks indicate chromosome locations. The span lists the number of bases currently displayed.</li>
+</ul>
+
+<p><strong>Tracks</strong> <img src="../../images/callout_4.jpg" alt="callout_4.jpg"></p>
+
+<ul>
+  <li>IGV displays data in horizontal rows called tracks. Typically, each track represents one sample or experiment. This example shows methylation, gene expression, copy number and mutation data.</li>
+</ul>
+
+<p><strong>Features</strong> <img src="../../images/callout_5.jpg" alt="callout_5.jpg"></p>
+
+<ul>
+  <li>IGV also displays features, such as genes, in tracks. By default, IGV displays data in one panel and features in another, as shown here. Drag-and-drop a track name to move a track from one panel to another. Combine data and feature panels by selecting that option on the General tab of the <a href="https://www.broadinstitute.org/software/igv/?q=Preferences">Preferences window</a>.</li>
+</ul>
+
+<p><strong>Track names</strong> <img src="../../images/callout_6.jpg" alt="callout_6.jpg"></p>
+
+<ul>
+  <li>Track names are listed in the far left panel. Legibility of the names depends on the height of the tracks; i.e., the smaller the track the less legible the name.</li>
+</ul>
+
+<p><strong>Attributes</strong> <img src="../../images/callout_7.jpg" alt="callout_7.jpg"></p>
+
+<ul>
+  <li>Attribute names are listed at the top of the attribute panel. Colored blocks represent attribute values, where each unique value is assigned a unique color. Hover over a colored block to see the attribute value. Click an attribute name to sort tracks based on that attribute value.</li>
+</ul>
+
+<h2 id="menu-bar">Menu Bar</h2>
+
+<p><strong>File</strong></p>
+
+<ul>
+  <li>
+    <p>Load from File - Displays genomic data from one or more files.</p>
+  </li>
+  <li>
+    <p>Load from URL - Displays genomic data from a file identified by URL.</p>
+  </li>
+  <li>
+    <p>Load from Server - Displays genomic data from the IGV data server.</p>
+  </li>
+  <li>
+    <p>Load from DAS - Displays genomic data from a Distributed Annotation Server (DAS)</p>
+  </li>
+  <li>
+    <p>New Session - Unloads all currently loaded data, as if you exited and restarted IGV</p>
+  </li>
+  <li>
+    <p>Open Session - Opens a previously saved session file.</p>
+  </li>
+  <li>
+    <p>Save Session - Saves your current settings to a named session file</p>
+  </li>
+  <li>
+    <p>Save Image - Saves a snapshot of the IGV window to a graphics file, omitting the menu bar and tool bar.  Can save in .png, .jpg, or .svg format.</p>
+  </li>
+  <li>
+    <p>Exit - Closes IGV.</p>
+  </li>
+</ul>
+
+<p><strong>Genomes</strong></p>
+
+<ul>
+  <li>
+    <p>Load Genome from File - Loads a genome into IGV from your file system.</p>
+  </li>
+  <li>
+    <p>Load Genome from URL - Loads a genome into IGV from a web URL.</p>
+  </li>
+  <li>
+    <p>Load Genome from Server - Loads a genome into IGV from the IGV data server.</p>
+  </li>
+  <li>
+    <p>Create .genome File - Save your genome file in .genome format.</p>
+  </li>
+  <li>
+    <p>Manage Genome List - Choose which genomes to display in the genome drop-down menu in the tool bar.</p>
+  </li>
+</ul>
+
+<p><strong>View</strong></p>
+
+<ul>
+  <li>
+    <p>Preferences - Opens a tabbed menu of data display preferences.</p>
+  </li>
+  <li>
+    <p>Color Legends - Displays color legends for track data, which may be modified.</p>
+  </li>
+  <li>
+    <p>Show Name Panel - Shows/hides the track name panel.</p>
+  </li>
+  <li>
+    <p>Set Name Panel Width - Resets the track name panel width.</p>
+  </li>
+  <li>
+    <p>Show Attribute Display - Shows/hides attributes and attribute values.</p>
+  </li>
+  <li>
+    <p>Select Attributes to Show - Shows/hides selected attributes and attribute values.</p>
+  </li>
+  <li>
+    <p>Show Header Panel - Shows/hides the chromosome location header panel.</p>
+  </li>
+  <li>
+    <p>Reorder Panels - Allows the user to reorder the display panels.</p>
+  </li>
+  <li>
+    <p>Go to - View and select loci visited in your navigation history.</p>
+  </li>
+</ul>
+
+<p><strong>Tracks</strong></p>
+
+<ul>
+  <li>
+    <p>Sort Tracks - Sorts track data.</p>
+  </li>
+  <li>
+    <p>Group Tracks - Groups track data.</p>
+  </li>
+  <li>
+    <p>Filter Tracks - Filters track data.</p>
+  </li>
+  <li>
+    <p>Fit Data to Window - Sets the track height to display all of the data, or as much data as possible.</p>
+  </li>
+  <li>
+    <p>Set Track Height - Sets the track height to a specified value.</p>
+  </li>
+</ul>
+
+<p><strong>Regions</strong></p>
+
+<ul>
+  <li>
+    <p>Region Navigator - Opens the region navigator.</p>
+  </li>
+  <li>
+    <p>Gene Lists - Opens the gene lists window.</p>
+  </li>
+  <li>
+    <p>Export Regions - Saves currently defined regions of interest to a BED file. If no regions of interest are defined, no BED file is created.</p>
+  </li>
+  <li>
+    <p>Import Regions - Imports regions of interest from a BED file.</p>
+  </li>
+</ul>
+
+<p><strong>Tools</strong></p>
+
+<ul>
+  <li>
+    <p>Run Batch Script - Executes a series of sequential tasks.  Users can load at .txt file that contains a list of commands, one per line, that will be run by IGV.  The accepted commands are the same as the <a href="https://www.broadinstitute.org/software/igv/batch">IGV Port Commands</a>.</p>
+  </li>
+  <li>
+    <p>Run igvtools - Launches the igvtools interface window.</p>
+  </li>
+  <li>
+    <p>Find Motif - Search for a particular nucleotide sequence in the reference genome.</p>
+  </li>
+  <li>
+    <p>Gitools Heatmaps - Data and results are represented as browsable heatmaps. Data can be exported from IGV in gitools format, or loaded directly into a running gitools session. See http://www.gitools.org for details.</p>
+  </li>
+  <li>
+    <p>BEDTools - A fast, flexible suite of tools used to compare sets of genomic features. IGV uses BEDTools to compare features in loaded tracks, and view the results as a new track. See more details under <a href="https://www.broadinstitute.org/software/igv/third_party_tools#_blank">Third Party Tools Integration</a>.</p>
+  </li>
+</ul>
+
+<p><strong>GenomeSpace</strong></p>
+
+<ul>
+  <li>
+    <p>Load File from GenomeSpace - Load a file into IGV from your GenomeSpace directory.</p>
+  </li>
+  <li>
+    <p>Load Genome from GenomeSpace - Load a genome into IGV from your GenomeSpace directory.</p>
+  </li>
+  <li>
+    <p>Save Session to GenomeSpace - Save current IGV session to your GenomeSpace directory.</p>
+  </li>
+  <li>
+    <p>Load Session from GenomeSpace - Load a previous session from your GenomeSpace directory.</p>
+  </li>
+  <li>
+    <p>Logout - Log out of GenomeSpace</p>
+  </li>
+  <li>
+    <p>Register - Register a new account at <a href="http://www.genomespace.org/">GenomeSpace</a></p>
+  </li>
+</ul>
+
+<p><strong>Help</strong></p>
+
+<ul>
+  <li>
+    <p>User Guide… - Displays the IGV <a href="https://www.broadinstitute.org/software/igv/UserGuide">User Guide</a>.</p>
+  </li>
+  <li>
+    <p>Help Forum… - In your default web browser, opens the home page for the <a href="https://groups.google.com/forum/#!forum/igv-help">igv-help forum</a>.</p>
+  </li>
+  <li>
+    <p>About IGV - Displays IGV version and build number.</p>
+  </li>
+</ul>
+
+<h2 id="tool-bar">Tool Bar</h2>
+
+<p><strong>Genome drop-down box</strong> <img src="../../images/icon_genome_dropdown.jpg" alt="icon_genome_dropdown"></p>
+
+<ul>
+  <li>Loads a genome.</li>
+</ul>
+
+<p><strong>Chromosome drop-down box</strong> <img src="../../images/igv_chromdrop.jpg" alt="igv_chromdrop"></p>
+
+<ul>
+  <li>Zooms to a chromosome.</li>
+</ul>
+
+<p><strong>Search box</strong> <img src="../../images/searchbox.jpg" alt="searchbox"></p>
+
+<ul>
+  <li>Displays the chromosome location being shown.
+To scroll to a different location, enter the gene name, locus, or track name and click Go.</li>
+</ul>
+
+<p><strong>Whole genome view</strong> <img src="../../images/icon_genome.jpg" alt="icon_genome"></p>
+
+<ul>
+  <li>Zooms to whole genome view.</li>
+</ul>
+
+<p><img src="../../images/icon_backforward.jpg" alt="icon_backforward"></p>
+
+<ul>
+  <li>Moves backward and forward through views of the genome like the back and forward buttons in a web browser.</li>
+</ul>
+
+<p><strong>Refresh</strong> <img src="../../images/icon_refresh.jpg" alt="icon_refresh"></p>
+
+<ul>
+  <li>Refreshes the display.</li>
+</ul>
+
+<p><strong>Define a region</strong> <img src="../../images/icon_region_of_interest.jpg" alt="icon_region_of_interest"></p>
+
+<ul>
+  <li>Defines a region of interest on the chromosome.</li>
+</ul>
+
+<p><img src="../../images/icon_squish.jpg" alt="icon_squish"></p>
+
+<ul>
+  <li>Reduces the row height on all tracks to fit all data for the region in view into the window; will also expand tracks (to their maximum preferred size) to fill the view, if needed.</li>
+</ul>
+
+<p><img src="../../images/icon_popuponoff.jpg" alt="icon_popuponoff"></p>
+
+<ul>
+  <li>Toggles the pop-up information windows in IGV on or off.</li>
+</ul>
+
+<p><strong>Zoom slider</strong> <img src="../../images/icon_zoom.jpg" alt="icon_zoom"></p>
+
+<ul>
+  <li>Zooms in and out on a chromosome.</li>
+</ul>
+
+<h2 id="pop-up-menus">Pop-up Menus</h2>
+
+<p>To select tracks and display the pop-up menu, do one of the following:</p>
+
+<ul>
+  <li>
+    <p>Right-click a track to select it and display the pop-up menu.</p>
+  </li>
+  <li>
+    <p>Right-click an attribute value to select all tracks with that attribute value and display the pop-up menu. Tip: Keep in mind that right-clicking an attribute may select tracks that are not visible in the data panel. Scroll down the data panel to view all the selected tracks.</p>
+  </li>
+  <li>
+    <p>Control-click track names (Mac: Command-click) to select the tracks, then right-click one of the selections to display the pop-up menu.</p>
+  </li>
+</ul>
+
+<p>Commands in the track pop-up menu change the display options for the selected tracks. Most changes made via the pop-up menu are lost when you exit IGV unless you <a href="https://www.broadinstitute.org/software/igv/Sessions">save the session</a>. In a few cases, changing the pop-up menu also changes an option in the Preferences window; these changes are persistent.</p>
+
+<h2 id="using-igv-examples">Using IGV: Examples</h2>
+
+<h3 id="looking-at-encode-rna-seq-data">LOOKING AT ENCODE RNA-SEQ DATA</h3>
+
+<ul>
+  <li>
+    <p>Open IGV (.igv.sh from command line)</p>
+  </li>
+  <li>
+    <p>Load the human genome :  In the toolbar, Click Genome &gt; Load Genome from Server &gt; Search and select Human (hg19)</p>
+  </li>
+  <li>
+    <p>Load the encode RNA-Seq BAM files: Go to File &gt; Load from ENCODE &gt; Select C2C12 RNA-Seq BAM files (See image in the Pdf)</p>
+  </li>
+</ul>
+
+<p><img src="../../images/load_encode_RNA-seq_BAM.png" alt="load_encode_RNA-seq_BAM"></p>
+
+<ul>
+  <li>
+    <p>Go to your favorite location in the genome by entering the location in the Search box, zoom in to the reads by using Zoom button.</p>
+  </li>
+  <li>
+    <p>You can change the track properties by right-click on the track. Select View as pairs to see the left and right pairs of paired-end reads.</p>
+  </li>
+</ul>
+
+<p><img src="../../images/view_pairs.png" alt="view_pairs"></p>
+
+<ul>
+  <li>You can make a sashimi plot to see reads aligning to each junction. Right-click &gt; Sashimi plot.</li>
+</ul>
+
+<p><img src="../../images/sashimi_plot.png" alt="sashimi_plot"></p>
+
+<ul>
+  <li>Save what you see by going to File &gt; Save Image.</li>
+</ul>
+
+<h3 id="looking-at-encode-chip-seq-data">LOOKING AT ENCODE ChIP-Seq DATA</h3>
+
+<ul>
+  <li>Go to File &gt; Load from ENCODE &gt; Select C2C12 ChIP-Seq bigwig files</li>
+</ul>
+
+<p><img src="../../images/ChIP-Seq_bigwig.png" alt="ChIP-Seq_bigwig"></p>
+
+<ul>
+  <li>Reset the track heights to make them comparable. Right click on the track &gt; Set data range. Then change the scale.</li>
+</ul>
+
+<p><img src="../../images/data_range.png" alt="data_range"></p>
+
+<ul>
+  <li>
+    <p>You can also change the track colors, name and chart type (line,bar,heatmap).</p>
+  </li>
+  <li>
+    <p>Save the image (File &gt; Save Image)</p>
+  </li>
+</ul>
+
+<h2 id="popular-file-formats-that-you-can-load-in-to-igv">POPULAR FILE FORMATS THAT YOU CAN LOAD IN TO IGV</h2>
+
+<ul>
+  <li>
+    <p>BAM</p>
+  </li>
+  <li>
+    <p>BED</p>
+  </li>
+  <li>
+    <p>BedGraph</p>
+  </li>
+  <li>
+    <p>bigBed</p>
+  </li>
+  <li>
+    <p>bigwig</p>
+  </li>
+  <li>
+    <p>FASTA</p>
+  </li>
+  <li>
+    <p>GFF/GTF</p>
+  </li>
+  <li>
+    <p>MAF</p>
+  </li>
+  <li>
+    <p>SAM/BAM</p>
+  </li>
+  <li>
+    <p>VCF</p>
+  </li>
+  <li>
+    <p>PSL</p>
+  </li>
+  <li>
+    <p>Narrowpeak</p>
+  </li>
+  <li>
+    <p>Many more</p>
+  </li>
+</ul>
+
+<h2 id="some-other-things-you-can-do">SOME OTHER THINGS YOU CAN DO</h2>
+<ul>
+  <li>
+    <p>Take multiple images from regions in a bed file. First make a batch file from the bed file using bedtools (bedtoIgv). Then load the script in Tools &gt; Run Batch Script.</p>
+  </li>
+  <li>
+    <p>Find a given motif. Tools &gt; Find Motif.</p>
+  </li>
+  <li>
+    <p>Set startup preferences. View &gt; preferences.</p>
+  </li>
+  <li>
+    <p>For more, have a look at the IGV documentation.</p>
+  </li>
+</ul>
+
+<h2 id="for-igv-help-and-documentation">FOR IGV HELP AND DOCUMENTATION</h2>
+
+<p><strong>GOTO: https://www.broadinstitute.org/igv/ or Click on Help in IGV menu.</strong></p>
+
+
+    
+    <blockquote class="key_points">
+        <h3> <img class="emoji" title=":grey_exclamation:" alt=":grey_exclamation:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2755.png" height="20" width="20" align="absmiddle"> Key points</h3>
+
+        <ul>
+        
+           <li>First take home message</li>
+        
+           <li>Second take home message</li>
+        
+           <li>Third take home message</li>
+        
+        </ul>
+    </blockquote>
+    
+
+    
+
+    <h3>
+<img class="emoji" title=":clap:" alt=":clap:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f44f.png" height="20" width="20" align="absmiddle"> Congratulations on successfully completing this tutorial!</h3>
+
+
+    <hr>
+    <blockquote class="overview">
+        <h3> <img class="emoji" title=":speech_balloon:" alt=":speech_balloon:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f4ac.png" height="20" width="20" align="absmiddle"> Feedback</h3>
+        Please take a moment and provide your feedback on this tutorial. Your feedback will help guide and improve future revisions to this tutorial. <a href="https://tinyurl.com/GTNfeedback" target="_blank">Feedback Form</a>
+    </blockquote>
+
+    <i>This material is the result of a collaborative work. Thanks to <a href="https://galaxyproject.github.io/training-material//introduction#contributors">all the contributors</a> and the <a href="https://wiki.galaxyproject.org/Teach/GTN">Galaxy Training Network</a>!<br>
+    Found a typo? Something is wrong in this tutorial? Edit it on <a href="https://github.com/galaxyproject/training-material/tree/master/introduction/tutorials/igv-introduction.md">GitHub</a>.</i>
+</section>
+
+        </div>
+    </body>
+    <script src="https://galaxyproject.github.io/training-material//assets/js/landing_page.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</html>
