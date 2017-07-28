@@ -25,7 +25,7 @@ before_script:
 - which vl
 # patch vl to send user-agent header (some links give error if not set)
 - |
-  sed  -i 's|requests = (grequests.head(u, timeout=timeout, verify=False)|requests = (grequests.head(u, timeout=timeout, verify=False, headers={\x27User-Agent\x27: \x27Mozilla\x27})|' /home/travis/miniconda/envs/galaxy_training_material/lib/python*/site-packages/vl/cli.py
+  sed  -i 's|requests = (grequests.head(u, timeout=timeout, verify=False)|requests = (grequests.head(u, timeout=timeout, verify=False, headers={\x27User-Agent\x27: \x27Mozilla\x27})|' /home/travis/miniconda/lib/python*/site-packages/vl/cli.py
 script:
 - set -e
 # Check links
