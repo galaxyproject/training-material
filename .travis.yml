@@ -29,7 +29,7 @@ before_script:
 script:
 - set -e
 # Check links
-- find .  \( -name "*.md" -o -name "*.html" \) -not -path "./assets/reveal.js/*" | xargs -L 1 -I '{}' sh -c "echo {}; vl -d -t 15 -s 1000 --allow-codes 405 --whitelist localhost,127.0.0.1,fqdn,publish.twitter.com,linkedin.com,vimeo.com {}"
+- find .  \( -name "*.md" -o -name "*.html" \) -not -path "./assets/reveal.js/*" | xargs -L 1 -I '{}' sh -c "echo {}; vl -d -t 15 -s 1000 --allow-codes 405 --whitelist localhost,127.0.0.1,fqdn,publish.twitter.com,linkedin.com,vimeo.com {}" || return 0
 - make site
 after_success:
 - |
