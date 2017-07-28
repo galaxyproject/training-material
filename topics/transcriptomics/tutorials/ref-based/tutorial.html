@@ -340,9 +340,7 @@ Trim Galore can remove sequences if they become too short during the trimming pr
   <li>Comparison of reads that did not initially map to the genome against these <em>in silico</em> created junctions</li>
 </ol>
 
-<p><img src="../../images/tophat2.png" alt=""></p>
-
-<p><em><a href="https://genomebiology.biomedcentral.com/articles/10.1186/gb-2013-14-4-r36">Kim et al., Genome Biology, 2013</a></em></p>
+<figure id="figure-1"><img src="../../images/tophat2.png" alt="Kim et al." title="Kim et al., Genome Biology, 2013"><figcaption><span class="figcaption-prefix">Figure 1:</span> Kim et al., Genome Biology, 2013</figcaption></figure>
 
 <p>Here, we will use HISAT2, a successor to TopHat2 that is faster with low memory requirements.</p>
 
@@ -362,9 +360,7 @@ Trim Galore can remove sequences if they become too short during the trimming pr
 
 <p>The library type corresponds to a protocol used to generate the data: which strand the RNA fragment is synthesized from.</p>
 
-<p><img src="../../images/strand_library_type.png" alt=""></p>
-
-<p><em><a href="http://onetipperday.sterding.com/2012/07/how-to-tell-which-library-type-to-use.html">Credit: Zhao Zhang</a></em></p>
+<figure id="figure-2"><img src="../../images/strand_library_type.png" alt="Credit: Zhao Zhang" title="Credit: Zhao Zhang(http://onetipperday.sterding.com/2012/07/how-to-tell-which-library-type-to-use.html)"><figcaption><span class="figcaption-prefix">Figure 2:</span> Credit: Zhao Zhang(http://onetipperday.sterding.com/2012/07/how-to-tell-which-library-type-to-use.html)</figcaption></figure>
 
 <p>In the previous illustration, you could see that for example dUTP method is to only sequence the strand from the first strand synthesis (the original RNA strand is degradated due to the dUTP incorporated).</p>
 
@@ -397,7 +393,7 @@ Trim Galore can remove sequences if they become too short during the trimming pr
 
 <p>If you do not know the library type, you can find it by yourself by mapping the reads on the reference genome and infer the library type from the mapping results by comparing reads mapping information to the annotation of the reference genome.</p>
 
-<p><img src="../../images/library_type_mapping.png" alt=""></p>
+<figure id="figure-3"><img src="../../images/library_type_mapping.png" alt="Type of library, depending also of the type of sequencing" title="Type of library, depending also of the type of sequencing"><figcaption><span class="figcaption-prefix">Figure 3:</span> Type of library, depending also of the type of sequencing</figcaption></figure>
 
 <p>The sequencer always read from 5’ to 3’. So, in First Strand case, all reads from the left-most end of RNA fragment (always from 5’ to 3’) are mapped to transcript-strand, and (for pair-end sequencing) reads from the right-most end are always mapped to the opposite strand.</p>
 
@@ -672,7 +668,7 @@ In a FastQ file, a read corresponds to 4 lines. So to conserve 200,000 reads, 80
           <li>
             <p>What does the horizontal bar in the following screenshot represent?</p>
 
-            <p><img src="../../images/junction_igv_screenshot.png" alt=""></p>
+            <figure id="figure-4"><img src="../../images/junction_igv_screenshot.png" alt="Screenshot of IGV on Chromosome 4" title="Screenshot of IGV on Chromosome 4"><figcaption><span class="figcaption-prefix">Figure 4:</span> Screenshot of IGV on Chromosome 4</figcaption></figure>
 
             <details>
 <summary>Click to view answers</summary>
@@ -702,7 +698,7 @@ In a FastQ file, a read corresponds to 4 lines. So to conserve 200,000 reads, 80
         <h3 id="question-question-4">
 <img class="emoji" title=":question:" alt=":question:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2753.png" height="20" width="20" align="absmiddle"> Question</h3>
 
-        <p><img src="../../images/hisat_igv_sashimi.png" alt=""></p>
+        <figure id="figure-5"><img src="../../images/hisat_igv_sashimi.png" alt="Screenshot of a Sashimi plot of Chromosome 4" title="Screenshot of a Sashimi plot of Chromosome 4"><figcaption><span class="figcaption-prefix">Figure 5:</span> Screenshot of a Sashimi plot of Chromosome 4</figcaption></figure>
 
         <ol>
           <li>What does the vertical bar graph represent? And the numbered arcs?</li>
@@ -759,9 +755,7 @@ In this tutorial, we will then analyze the differential gene expression, but als
 
 <p>In principle, the counting of reads overlapping with genomic features is a fairly simple task. But there are some details that need to be decided, such how to handle multi-mapping reads. <strong>HTSeq-count</strong> offers 3 choices (“union”, “intersection_strict” and “intersection_nonempty”) to handle read mapping to multiple locations, reads overlapping introns, or reads that overlap more than one genomic feature:</p>
 
-<p><img src="../../images/htseq_count.png" alt=""></p>
-
-<p><em><a href="https://www-huber.embl.de/users/anders/HTSeq/doc/count.html">HTSeq documentation</a></em></p>
+<figure id="figure-6"><img src="../../images/htseq_count.png" alt="HT-Seq methods to handle overlapping reads" title="HT-Seq methods to handle overlapping reads (HTSeq documentation: https://www-huber.embl.de/users/anders/HTSeq/doc/count.html)"><figcaption><span class="figcaption-prefix">Figure 6:</span> HT-Seq methods to handle overlapping reads (HTSeq documentation: https://www-huber.embl.de/users/anders/HTSeq/doc/count.html)</figcaption></figure>
 
 <p>The recommended mode is “union”, which counts overlaps even if a read only shares parts of its sequence with a genomic feature and disregards reads that overlap more than one feature.</p>
 
@@ -1246,7 +1240,8 @@ We get 38 exons (12.38%) with a significant usage change between treated and unt
 
 <p>In this tutorial, we have analyzed real RNA sequencing data to extract useful information, such as which genes are up- or downregulated by depletion of the Pasilla gene and which genes are regulated by the Pasilla gene. To answer these questions, we analyzed RNA sequence datasets using a reference-based RNA-seq data analysis approach. This approach can be sum up with the following scheme:</p>
 
-<p><img src="../../images/rna_quantification.png" alt=""></p>
+<figure id="figure-7"><img src="../../images/rna_quantification.png" alt="Summary of the used pipeline" title="Summary of the used pipeline"><figcaption><span class="figcaption-prefix">Figure 7:</span> Summary of the used pipeline</figcaption></figure>
+
 
 
     
