@@ -10,7 +10,6 @@ module Jekyll
     end
 
     def generate(site)
-      puts "\n      Applying figurify plugin ✨"
       site.pages
         .select { |page| not skip_layout? page.data['layout'] }
         .each { |page| figurify page }
