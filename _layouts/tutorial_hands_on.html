@@ -24,7 +24,7 @@ layout: base
             <a id="site-title" class="navbar-brand" href="https://wiki.galaxyproject.org/Teach/GTN">
               <img class="pull-left img-responsive" src="{{ site.url }}/{{ site.logo }}">
             </a>
-            <a id="site-title" class="navbar-brand name-holder" href="{{ site.url }}/topics/{{ topic.name }}/tutorials/{{ tutorial.name }}">
+            <a id="site-title" class="navbar-brand name-holder" href="{{ site.url }}/topics/{{ topic.name }}/tutorials/{{ tutorial.name }}/tutorial.html">
               {{ tutorial.title }}
             </a>
           </div>
@@ -33,7 +33,7 @@ layout: base
 
             <ul id="main-menu" class="nav navbar-nav navbar-right">
               <li><a href="{{ site.url }}" title="Back to front page"><i class="fa fa-home"></i> Home</a></li>
-              <li><a href="{{ site.url }}/topics/{{ topic.name }}" title="Go back to list of tutorials"><i class="fa fa-file-text-o"></i> {{ topic.name }}</a></li>
+              <li><a href="{{ site.url }}/topics/{{ topic.name }}" title="Go back to list of tutorials"><i class="fa fa-file-text-o"></i> {{ topic.title }}</a></li>
 
               {% if tutorial.slides != "" %}
                 <li><a href="{{ site.url }}/topics/{{ topic.name }}/slides" title="Slides for this tutorial"><i class="fa fa-graduation-cap"></i> Introduction slides</a></li>
@@ -126,7 +126,7 @@ layout: base
 
     {% if topic.references %}
       <h1>Useful literature</h1>
-      <p>Useful information regarding this type of analysis with descriptions and paper references for the tools used in this tutorial, and literature for this analysis techniques and interpretations can be found <a href="{{ site.url }}/{{ topic.name }}#references">here</a>.</p>
+      <p>Useful information regarding this type of analysis with descriptions and paper references for the tools used in this tutorial, and literature for this analysis techniques and interpretations can be found <a href="{{ site.url }}/topics/{{ topic.name }}#references">here</a>.</p>
     {% endif %}
 
     <h3>:clap: Congratulations on successfully completing this tutorial!</h3>
@@ -138,6 +138,11 @@ layout: base
         Please take a moment and provide your feedback on this tutorial. Your feedback will help guide and improve future revisions to this tutorial. <a href="https://tinyurl.com/GTNfeedback" target="_blank">Feedback Form</a>
     </blockquote>
 
-    <i>This material is the result of a collaborative work. Thanks to <a href="{{ site.url }}/{{ topic.name }}#contributors">all the contributors</a> and the <a href="https://wiki.galaxyproject.org/Teach/GTN">Galaxy Training Network</a>!<br/>
-    Found a typo? Something is wrong in this tutorial? Edit it on <a href="{{ site.github_repository }}/tree/master/{{ topic.name }}/tutorials/{{ tutorial.name }}.md">GitHub</a>.</i>
+    <i>This material is the result of a collaborative work. Thanks the <a href="https://wiki.galaxyproject.org/Teach/GTN">Galaxy Training Network</a> and all the contributors
+    {% if tutorial.contributors %}
+       ({{ tutorial.contributors|map: 'name'|join: ', '}})
+    {% endif %}
+    !<br/>
+    <br/>
+    Found a typo? Something is wrong in this tutorial? Edit it on <a href="{{ site.github_repository }}/tree/master/topics/{{ topic.name }}/tutorials/{{ tutorial.name }}/tutorial.md">GitHub</a>.</i>
 </section>
