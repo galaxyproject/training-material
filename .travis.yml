@@ -25,7 +25,6 @@ install:
 - conda env create -f environment.yml
 - source activate galaxy_training_material
 - make install
-- pip install vl pyyaml
 
 script:
 - set -e
@@ -33,7 +32,6 @@ script:
 - |
   if [ "$TRAVIS_BRANCH" == "gh-pages" ]
   then
-    make install
     htmlproofer --http-status-ignore 405,999 --url-ignore "/.*localhost.*/"
   else
     make site
