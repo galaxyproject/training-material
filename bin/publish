@@ -16,6 +16,9 @@ git checkout gh-pages
 git clean -fdx
 git rm -r .
 
+# keep the travis file
+git checkout master .travis.yml
+
 cp -R /tmp/site/* .
 
 find * -type f -exec chmod 644 "{}" ";"
