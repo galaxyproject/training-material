@@ -3,8 +3,7 @@
 git config user.name "Travis-CI"
 git config user.email "noreply@travis-ci.org"
 git remote rm origin
-#git remote add origin "https://bebatut:$GH_TOKEN@github.com/galaxyproject/training-material"
-git remote add origin "https://shiltemann:$GH_TOKEN@github.com/shiltemann/training-material"
+git remote add origin "https://bebatut:$GH_TOKEN@github.com/galaxyproject/training-material"
 
 rm -rf /tmp/site
 mv _site /tmp/site
@@ -16,8 +15,8 @@ git checkout gh-pages
 git clean -fdx
 git rm -r .
 
-# keep the travis file
-git checkout origin/site-proofing .travis.yml Makefile Gemfile
+# keep files needed for travis testing
+git checkout origin/master .travis.yml Makefile Gemfile
 
 cp -R /tmp/site/* .
 
