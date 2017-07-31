@@ -25,7 +25,7 @@ module Jekyll
       page.content = page.content.gsub(/!\[([^\]]*)\]\((.+?)\s*(?:"([^"]*)")?\)/) {
         alt = $1
         url = $2
-        title = $3 || alt
+        title = $3
 
         if skip_titles?(title) or (title.to_s.empty? and skip_empty?)
           Regexp.last_match
