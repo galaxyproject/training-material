@@ -29,8 +29,13 @@ before_script:
 script:
 - set -e
 # Check links
-- find .  \( -name "*.md" -o -name "*.html" \) -not -path "./assets/reveal.js/*" | xargs -L 1 -I '{}' sh -c "echo {}; vl -d -t 15 -s 1000 --allow-codes 405 --whitelist localhost,127.0.0.1,fqdn,publish.twitter.com,linkedin.com,vimeo.com {}" || return 0
+- |
+  if [ "$TRAVIS_PULL_REQUEST" == "true" ]
+  then
+    find .  \( -name "*.md" -o -name "*.html" \) -not -path "./assets/reveal.js/*" | xargs -L 1 -I '{}' sh -c "echo {}; vl -d -t 15 -s 1000 --allow-codes 405 --whitelist localhost,127.0.0.1,fqdn,publish.twitter.com,linkedin.com,vimeo.com {}" || return 0
+  fi
 - make site
+- htmlproofer --http-status-ignore 405,999 --url-ignore "/.*localhost.*/"
 after_success:
 - |
   if [ "$TRAVIS_PULL_REQUEST" == "false" -a "$TRAVIS_BRANCH" == "site-proofing" ]
