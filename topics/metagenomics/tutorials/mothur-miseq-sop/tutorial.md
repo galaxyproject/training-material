@@ -1504,7 +1504,7 @@ Otu0042    0.07
 
 Mothur does not have a lot of visualization tools built in, but external tools may be used for this. For
 instance we can convert our shared file to the more widely used `biom` format and view it in a platform like
-[Phinch](https://www.phinch.org/).
+[Phinch](http://www.phinch.org/).
 
 ## Phinch
 

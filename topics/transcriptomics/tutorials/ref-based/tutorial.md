@@ -7,7 +7,7 @@ tutorial_name: ref-based
 # Introduction
 {:.no_toc}
 
-In the study of [Brooks *et al.* 2011](https://genome.cshlp.org/content/21/2/193.long), the Pasilla (PS) gene, *Drosophila* homologue of the Human splicing regulators Nova-1 and Nova-2 Proteins, was depleted in *Drosophila melanogaster* by RNAi. The authors wanted to identify exons that are regulated by Pasilla gene using RNA sequencing data.
+In the study of [Brooks *et al.* 2011](http://genome.cshlp.org/content/21/2/193.long), the Pasilla (PS) gene, *Drosophila* homologue of the Human splicing regulators Nova-1 and Nova-2 Proteins, was depleted in *Drosophila melanogaster* by RNAi. The authors wanted to identify exons that are regulated by Pasilla gene using RNA sequencing data.
 
 Total RNA was isolated and used for preparing either single-end or paired-end RNA-seq libraries for treated (PS depleted) samples and untreated samples. These libraries were sequenced to obtain a collection of RNA sequencing reads for each sample. The effects of Pasilla gene depletion on splicing events can then be analyzed by comparison of RNA sequencing data of the treated (PS depleted) and the untreated samples.
 
@@ -72,7 +72,7 @@ Both files contain the reads that belong to chromosome 4 of a paired-end sample.
 
 ## Quality control
 
-For quality control, we use similar tools as described in [NGS-QC tutorial](../../NGS-QC/tutorials/dive_into_qc): [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/) and [Trim Galore](https://www.bioinformatics.babraham.ac.uk/projects/trim_galore/).
+For quality control, we use similar tools as described in [NGS-QC tutorial](https://galaxyproject.github.io/training-material/topics/sequence-analysis): [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/) and [Trim Galore](https://www.bioinformatics.babraham.ac.uk/projects/trim_galore/).
 
 > ### :pencil2: Hands-on: Quality control
 >
@@ -130,7 +130,7 @@ To make sense of the reads, their positions within *Drosophila melanogaster* gen
 
 > ### :nut_and_bolt: Comment
 >
-> Do you want to learn more about the principles behind mapping? Follow our [training](../../NGS-mapping)
+> Do you want to learn more about the principles behind mapping? Follow our [training](https://galaxyproject.github.io/training-material/topics/sequence-analysis/)
 > {: .comment}
 
 Because in the case of a eukaryotic transcriptome, most reads originate from processed mRNAs lacking exons, they cannot be simply mapped back to the genome as we normally do for DNA data. Instead the reads must be separated into two categories:
@@ -740,4 +740,3 @@ Unfortunately, in the process of counting, we loose all the information of the g
 In this tutorial, we have analyzed real RNA sequencing data to extract useful information, such as which genes are up- or downregulated by depletion of the Pasilla gene and which genes are regulated by the Pasilla gene. To answer these questions, we analyzed RNA sequence datasets using a reference-based RNA-seq data analysis approach. This approach can be sum up with the following scheme:
 
 ![Summary of the used pipeline](../../images/rna_quantification.png "Summary of the used pipeline")
-

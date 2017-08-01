@@ -31,7 +31,7 @@ build: ## build files but do not run a server
 .PHONY: site
 
 check: ## validate HTML
-	bundle exec htmlproofer ./_site
+	bundle exec htmlproofer --http-status-ignore 405,999 --url-ignore "/.*localhost.*/" ./_site
 .PHONY: check
 
 clean: ## clean up junk files

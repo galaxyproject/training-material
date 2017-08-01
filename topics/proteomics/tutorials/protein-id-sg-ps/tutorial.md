@@ -24,7 +24,7 @@ As an example dataset, we will use an LC-MS/MS analysis of HeLa cell lysate publ
 in [Vaudel et al., 2014, Proteomics](https://www.ncbi.nlm.nih.gov/pubmed/24678044). Detailed information
 about the dataset can be found on [PRIDE](https://www.ebi.ac.uk/pride/archive/projects/PXD000674).
 For step 2 we will use a validated human Uniprot FASTA database without appended decoys.
-If you already completed the tutorial on [Database Handling](./database-handling.md)
+If you already completed the tutorial on [Database Handling](https://galaxyproject.github.io/training-material/topics/proteomics/tutorials/database-handling/tutorial.html)
 you can use the constructed database before the **DecoyDatabase** :wrench: step. You can find a prepared database, as well as the input proteomics data in different file formats on [Zenodo](https://zenodo.org/record/546301).
 
 
@@ -53,18 +53,18 @@ Raw data conversion is the first step of any proteomic data analysis. The most c
 >
 >   > ### :nut_and_bolt: Comment: Local Use of MSConvert
 >   > The vendor libraries used by MSConvert need a Windows system and is therefore rarely implemented in Galaxy instances. If ***msconvert*** :wrench: is not available in your Galaxy instance, please install the software on a Windows computer and run the conversion locally. You can find a detailed description of the necessary steps [here](http://genesis.ugent.be/files/costore/practicals/bioinformatics-for-proteomics/1-Peptide-and-Protein-Identification/1.2-Peak-List-Generation/1.2-Peak-List-Generation.pdf). Afterwards, upload the resulting mzML file to your Galaxy history.
-> > {: .comment}
+>  {: .comment}
 >
 > 5. Run ***PeakPickerHiRes*** :wrench: on the resulting mzML file.
 >
 >   > ### :nut_and_bolt: Comment: Peak Picking
 >   > Depending on your machine settings, raw data will be generated either in profile mode or centroid mode. For most peptide search engines, the data have to be converted to centroid mode, a process called "peak picking". Machine vendors offer algorithms to extract peaks from profile raw data. This is implemented in ***msconvert*** :wrench: and can be run in parallel to the mzML conversion. However, the OpenMS tool ***PeakPickerHiRes*** :wrench: is reported to generate better results ([Lange et al., 2006, Pac Symp Biocomput](https://www.ncbi.nlm.nih.gov/pubmed/17094243)) and is therefore recommended for quantitative studies ([Vaudel et al., 2010, Proteomics](https://www.ncbi.nlm.nih.gov/pubmed/19953549)).
 >   > If your data were generated on a low resolution mass spectrometer, use ***PeakPickerWavelet*** :wrench: instead.
-> > {: .comment}
+>   {: .comment}
 >
 > 6. Run ***FileConverter*** :wrench: on the picked mzML to convert to mgf format.
 > 7. Change the ***Datatype*** of the ***FileConverter*** :wrench: output to mgf by clicking the pencil :pencil: icon.
-> {: .hands_on}
+{: .hands_on}
 
 
 # Peptide and Protein Identification
@@ -78,7 +78,7 @@ In bottom-up proteomics, it is necessary to combine the identified peptides to p
 >
 > 1. Copy the prepared protein database from the tutorial "Database handling" into your current history by using the multiple history view or upload the ready-made database from this [link]().
 > 2. Open ***Search GUI*** :wrench: to search the mgf file against the protein database. Select the `DB-Search Engines`: `X!Tandem` and `MS-GF+`. Add the `Fixed Modifications`: `Carbamidomethylation of C` and the `Variable Modifications`: `Oxidation of M`, then click `Execute`.
-> 3. Run ***Peptide Shaker*** :wrench: on the Search GUI output. Enable the following outputs: `Zip File for import to Desktop App`, `mzidentML File`, `PSM Report`, `Peptide Report`, `Protein Report`. You can find a detailed description of possible Peptide Shaker outputs [below](:nut_and_bolt:-comment:-search-gui-and-peptide-shaker-parameters).
+> 3. Run ***Peptide Shaker*** :wrench: on the Search GUI output. Enable the following outputs: `Zip File for import to Desktop App`, `mzidentML File`, `PSM Report`, `Peptide Report`, `Protein Report`. You can find a detailed description of possible Peptide Shaker outputs in the comment below.
 >
 >   > ### :question: Questions:
 >   > 1. How many peptides were identified? How many proteins?
@@ -91,8 +91,8 @@ In bottom-up proteomics, it is necessary to combine the identified peptides to p
 >   >     <li> 328 peptides contain an oxidized methionine (MeO). To get to this number, you can use ***Select*** :wrench: on the Peptide Report and search for either "Oxidation of M" or "M\<ox\>".</li>
 >   >   </ol>
 >   >  </details>
-> > {: .question}
-> {: .hands_on}
+>   {: .question}
+{: .hands_on}
 
 > ### :nut_and_bolt: Comment: Important Search GUI and Peptide Shaker Parameters
 > In this tutorial, we ran both ***Search GUI*** :wrench: and ***Peptide Shaker*** :wrench: with standard settings. When you are processing files of a different experiment, you may need to adjust some of the parameters.
@@ -135,7 +135,7 @@ The FASTA database used for the peptide to spectrum matching contained some entr
 >
 >   > ### :question: Questions:
 >   > 1. Which contaminants did you identify? Where do these contaminations come from?
-> > 2. What other sources of contaminants exist?
+>   > 2. What other sources of contaminants exist?
 >   > 2. How many mycoplasma proteins did you identify? Does this mean that the analyzed HeLa cells were infected with mycoplasma?
 >   >
 >   >  <details>
@@ -146,8 +146,8 @@ The FASTA database used for the peptide to spectrum matching contained some entr
 > >   <li> There should be five mycoplasma proteins in your protein list. However, all of them stem from different mycoplasma species. Also, every protein was identified by one peptide only. You can see this in column 17-19 of your output. These observations make it very likely that we are facing false positives here. As we were allowing for a false discovery rate of 1 %, we would expect 12 false positive proteins in our list. False positives are distributed to random peptides in the FASTA database. Our database consists of about 20,000 human proteins and 4,000 mycoplasma proteins. Therefore, we would expect 20 % of all false positives to match to mycoplasma proteins.</li>
 >   >   </ol>
 >   >  </details>
-> > {: .question}
-> {: .hands_on}
+>   {: .question}
+{: .hands_on}
 
 # Evaluation of Peptide and Protein IDs
 ***Peptide Shaker*** :wrench: provides you with validation results for the identified PSM, peptides and proteins. It classifies all these IDs in the categories "Confident" or "Doubtful". On each level, the meaning of these terms differs to some extent:
@@ -162,21 +162,21 @@ The FASTA database used for the peptide to spectrum matching contained some entr
 >
 >   > ### :question: Questions:
 >   > 1. How to exclude mycoplasma proteins?
-> > 2. How many "Confident" non-contaminant proteins were identified?
+>   > 2. How many "Confident" non-contaminant proteins were identified?
 >   >
 >   >  <details>
 >   >  <summary>Click to view answers</summary>
 >   >   <ol type="1">
 >   >       <li> Add another ***Select*** :wrench: matching the pattern "HUMAN".</li>
-> >   <li> You should have identified 582 human non-contaminant proteins that were validated to be "Confident".<\li>
+>   >   <li> You should have identified 582 human non-contaminant proteins that were validated to be "Confident".<\li>
 >   >   </ol>
 >   >  </details>
-> > {: .question}
-> {: .hands_on}
+>   {: .question}
+{: .hands_on}
 
 # Premade Workflow
 
-A premade workflow for this tutorial can be found at ../workflows/proteinID_SG_PS
+A premade workflow for this tutorial can be found [here](workflows/wf_proteinID_SG_PS.ga)
 
 # Further Reading
 

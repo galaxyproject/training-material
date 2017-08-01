@@ -97,7 +97,7 @@ A widely used database for common contaminants is the **c**ommon **R**epository 
 >
 > 1. Use **Protein Database Downloader** :wrench: to download the six mycoplasma databases. We will merge them to the main database in the next part of the tutorial.
 > 2. Run **FASTA Merge Files and Filter Unique Sequences** :wrench: to combine all mycoplasma databases into a single one.
-> 3. Tag each entry in the combined database with the string "MYCOPLASMA_CONTAMINANT" by using **FASTA-to-Tabular** :wrench:, **Add column** :wrench: and **Tabular-to-FASTA** :wrench:, as explained [above](#HO-Contaminant-Databases).
+> 3. Tag each entry in the combined database with the string "MYCOPLASMA_CONTAMINANT" by using **FASTA-to-Tabular** :wrench:, **Add column** :wrench: and **Tabular-to-FASTA** :wrench:, as explained [above](#contaminant-databases).
 > 4. Rename the **Tabular-to-FASTA** :wrench: output to "Tagged Mycoplasma database".
 >
 >  > ### :nut_and_bolt: Comment

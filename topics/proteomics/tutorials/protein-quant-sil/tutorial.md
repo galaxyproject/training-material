@@ -13,16 +13,16 @@ The second type of chemical tags are isotopic. They are chemically identical, bu
 Incorporation of stable isotopes results in different peptide masses on MS1 level, which give rise to coeluting ion traces in the TIC with a mass difference typical for each different chemical tag.
 
 This tutorial deals with protein quantitation via stable isotope labelling (SIL). We will use tools of the OpenMS suite.  
-Because we solely cover *quantitation*, you need to perform peptide and protein ID in beforehand. To learn about protein ID in Galaxy, please consider [this tutorial](./proteinID_SG_PS.md).
+Because we solely cover *quantitation*, you need to perform peptide and protein ID in beforehand. To learn about protein ID in Galaxy, please consider [this tutorial](https://galaxyproject.github.io/training-material/topics/proteomics/tutorials/protein-id-sg-ps/tutorial.html).
 
 This tutorial covers *relative* quantitation only (i.e. comparison of abundances in different samples, no *absolute* quantitation of peptides / proteins).
 
-If you still are in the planning phase of your quantitative proteomics experiment, you may want to consider our tutorial on different [quantitation methods](./labelfree-vs-labelled.md) first.
+If you still are in the planning phase of your quantitative proteomics experiment, you may want to consider our tutorial on different [quantitation methods](https://galaxyproject.github.io/training-material/topics/proteomics/tutorials/labelfree-vs-labelled/tutorial.html) first.
 
 > ### :pencil2: Hands-on: Introduction
 > In the Hands-on section of this tutorial, we will use a quantitative comparison of **HEK _OR_ E.coli** cell lysate as a test dataset. In this experiment, the very same cell lysate was once labelled with light, once with heavy **dimethyl _OR_ SILAC** and both samples were subsequently mixed in a certain ratio. For a detailed description of the dataset, please refer to the description in the [PRIDE archive]().
 > Your objective in this hands-on-tutorial is to find out the correct mixing ratio of the test sample.
-> {: .hands_on}
+{: .hands_on}
 
 > ### Agenda
 >
@@ -36,7 +36,7 @@ If you still are in the planning phase of your quantitative proteomics experimen
 # MS1 Feature Detection
 Quantitation on MS1 level may in principle be carried out without prior knowledge of peptide / protein IDs. However, some quantitation algorithms take the IDs as an input to make sure that every PSM that was identified is also quantified. This is not the case in our example here.
 In the OpenMS suite, most of the provided tools for MS1 feature detection quantify solely based on mzML files. The advantage of this approach is that quantitations can be made on strict criteria to reduce misquantitations. The drawback is that not all IDs can be matched to a quantitation later on in the workflow.
-The tool settings need to be carefully tested and evaluated manually to obtain optimal results. We will explain this in the section [Evaluation and Optimization of Quantitation Results](#evaluation-and-optimization-of-quantitation-results).
+The tool settings need to be carefully tested and evaluated manually to obtain optimal results. We will explain this in the section [Evaluation and Optimization of Quantitation Results](#expert-level-evaluation-and-optimization-of-quantitation-results).
 
 > ### :pencil2: Hands-on: MS1 Feature Detection
 >
@@ -49,25 +49,25 @@ The tool settings need to be carefully tested and evaluated manually to obtain o
 >   >
 >   > However, there is a built-in option in `FeatureFinderMultiplex` that enables finding of "knockout features". If you expect one or more proteins to be completely missing in at least one of your conditions, select the advanced option **`knockouts present` **.
 >   > Switching on this option is not recommended as a default setting, as it increases the possibility of false positives. When using this option, be advised to check for false positives carefully, as described [below](#expert-level-evaluation-and-optimization-of-quantitation-results).
-> {: .hands_on}
-
+>   {: .tip}
+{: .hands_on}
 # Peptide and Protein Identification and Conversion
 
 > ### :pencil2: Hands-on: Peptide and Protein Identification and Conversion
 > 1. Run the workflow "ProteinID_SG_PS" on the test dataset.
 > 2. Use **`IDConverter`** to convert the mzid output of `Peptide Shaker` :wrench: to mzidentML.
+{: .hands_on}
 
 # Quant to ID matching
 
-> ### Hands-on: Quant to ID matching
+> ### :pencil2: Hands-on: Quant to ID matching
 >
 > 1. Run `ProteinQuantifier` :wrench: on
 > 2.
 >
 >   > ### :question: Questions
-
->   > {: .questions}
-> {: .hands_on}
+>   {: .question}
+{: .hands_on}
 
 # Expert level: Evaluation and Optimization of Quantitation Results
 `FeatureFinderMultiplex` searches for multiple similar features that elute at the same time, but diverge by a mass shift fitting to the label used. `FeatureFinderMultiplex` uses several parameters that may be used to optimize your search results. Two important parameters are **`Average elution time` and `Averagine similarity`**.
@@ -84,7 +84,7 @@ The tool settings need to be carefully tested and evaluated manually to obtain o
 >         - **Caution** Manual evaluation is prone to biases, as you can look solely at small parts of your data. To avoid this, try to look at the *very same* areas / the same features of all different result files.
 >     3. If you were using the option **`knockouts present` **, check, if the detected "knockout features" fit to your expectations.
 
-> ### Hands-on: Evaluation and Optimization of Quantitation Results
+> ### :pencil2: Hands-on: Evaluation and Optimization of Quantitation Results
 >
 > 1. Run the whole WF again, change ** a single setting (averagine?)** in `FeatureFinderMultiplex`.
 > 2. Run `FileInfo` :wrench: on the results -> number of ID-Feature-matches
@@ -94,5 +94,5 @@ The tool settings need to be carefully tested and evaluated manually to obtain o
 >   > ### :question: Questions
 >   > 1. Which setting led to more ID-Feature-matches?
 >   > 2. Using the default settings, how many features were not mapped to IDs? How many IDs were not mapped to features?
->   > {: .questions}
-> {: .hands_on}
+>   {: .question}
+{: .hands_on}
