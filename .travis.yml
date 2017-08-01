@@ -5,6 +5,8 @@ branches:
   only:
   - gh-pages
   - /.*/
+addons:
+  chrome: stable
 services:
 - docker
 
@@ -34,7 +36,7 @@ script:
   then
     htmlproofer --http-status-ignore 405,999 --url-ignore "/.*localhost.*/"
   else
-    make site
+    make build
     htmlproofer --http-status-ignore 405,999 --url-ignore "/.*localhost.*/" ./_site || return 0
   fi
 
