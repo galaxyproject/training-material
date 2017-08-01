@@ -15,11 +15,14 @@ git checkout gh-pages
 git clean -fdx
 git rm -r .
 
+# keep files needed for travis testing
+git checkout origin/master .travis.yml Makefile Gemfile
+
 cp -R /tmp/site/* .
 
 find * -type f -exec chmod 644 "{}" ";"
 find * -type d -exec chmod 755 "{}" ";"
 
 git add -A .
-git commit -m "[ci skip] Update on: `date`"
+git commit -m "Update on: `date`"
 git push origin gh-pages
