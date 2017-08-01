@@ -136,7 +136,9 @@ If you want to add a new topic, please contact us before: open an issue on this 
 
 ## Maintainers
 
-Each training topic and tutorial has one or two maintainers who act as editors. They are responsible for making sure issues and change requests are looked at. They have the final say over what is included in the training material. But they are not responsible for writing training material content or deciding what lessons ought to exist, both will be coming from the community.
+Each training topic and tutorial has one or two maintainers who act as editors.
+
+They are responsible for making sure issues and change requests are looked at. They have the final say over what is included in the training material. But they are not responsible for writing/keeping up-to-date training material content or deciding what lessons ought to exist, both will be coming from the community.
 
 ## Labels
 
