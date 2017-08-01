@@ -1,0 +1,46 @@
+sudo: required
+language: python
+python: 3.6
+branches:
+  only:
+  - gh-pages
+  - /.*/
+services:
+- docker
+
+env:
+  global:
+  - secure: AVbwBaVtCtTQCR4KC4gqnVeYSuE+gKFy5KgVWfKmog/eSJ60nQGLgCSJEwzzA5Q80vZkh9WFn5TmVHiSnSikMCQkUXPrux7vnwxSPkeLV23Vy3gOXDqyJQKHzVzuSsw2X7ikX9EAOaD8cn4McL1TwQqQK440gS1gudwFHZDCfdnqjMAVRW9eNVxq2kOfFMm7iUOd0uHl94fPxGQzAK7H8mGLwpphoWPgwsWO/JuIKWXE0gp6yTTZ1OuK2SrB9ZC2rURWeDHN5Q7NMHIeLjfD42NuAFAN5igZ+2CtzQKRCsO9C5vnuuvfby/yMmxrBKEkbWw0GWPanyNcKZ6j8kICIWwhSUt0Hc25gBE6BOn7aijqBCeJlwMKvVgUBASdg2P23Q2jOqy2o4n9iNAHmRKZtvrpBRhzdCu7lDVn4s7VVBfUwBj/e0+E9x1g0jbwofHo8j/BTjK0iDiHnC4O/IBneATeEcFx4bG6xg5+3uBt8/mLqG1BRUAZMz6SpBGi1PlL527t2Z3w5DNyKBzLDC3rborADdaxgjYH989vHakItq3RhiT8ZRGGfpULTnVO2gmFLCHGoVxKQX2RbTm5xiQ2aj5pnnhtYwKqPGSutdyUfJyxz/Av03NnEN65mv9TioA+sWLMKUL6KeJTT1+HcO5D01ZC7cpYc/M/S+gmff6O5eg=
+
+install:
+- sudo apt-get update
+- wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh
+- bash miniconda.sh -b -p $HOME/miniconda
+- export PATH="$HOME/miniconda/bin:$PATH"
+- hash -r
+- conda config --set always_yes yes --set changeps1 no
+- conda config --add channels conda-forge
+- conda update -q conda
+- conda info -a
+- conda env create -f environment.yml
+- source activate galaxy_training_material
+- make install
+
+script:
+- set -e
+# Check website
+- |
+  if [ "$TRAVIS_BRANCH" == "gh-pages" ]
+  then
+    htmlproofer --http-status-ignore 405,999 --url-ignore "/.*localhost.*/"
+  else
+    make site
+    htmlproofer --http-status-ignore 405,999 --url-ignore "/.*localhost.*/" ./_site || return 0
+  fi
+
+after_success:
+- |
+  if [ "$TRAVIS_PULL_REQUEST" == "false" -a "$TRAVIS_BRANCH" == "master" ]
+  then
+    bin/publish
+  fi

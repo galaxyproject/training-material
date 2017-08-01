@@ -111,7 +111,7 @@
 <p>Calling low frequency variants from next generation sequencing (NGS) data is challenging due to significant amount of noise characteristic of these technologies. <a href="https://www.pnas.org/content/109/36/14508.short">Duplex sequencing</a> (DS) was designed to address this problem by increasing sequencing accuracy by over four orders of magnitude. DS uses randomly generated barcodes to uniquely tag each molecule in a sample. The tagged fragments are then PCR amplified prior to the preparation of a sequencing library, creating fragment families characterized by unique combination of barcodes at both 5’ and 3’ ends:</p>
 
 <blockquote>
-  <p><a href="https://www.pnas.org/content/109/36/14508/F1.expansion.html"><figure id="figure-1"><img src="../../images/ds.png" alt="duplex" title="duplex">&lt;figcaption&gt;<span class="figcaption-prefix">Figure 1:</span> duplex&lt;/figcaption&gt;</figure></a></p>
+  <p><a href="https://www.pnas.org/content/109/36/14508/F1.expansion.html"><img src="../../images/ds.png" alt="duplex"></a></p>
 
   <p>The logic of duplex sequencing. From <a href="https://www.pnas.org/content/109/36/14508.short">Schmitt:2012</a>.</p>
 </blockquote>
@@ -126,7 +126,7 @@
 <p>The DCSs have the ultimate accuracy, yet the SSCSs can also be very useful when ampliconic DNA is used as an input to a DS experiment. Let us illustrate the utility of SSCSs with the following example. Suppose one is interested in quantifying variants in a virus that has a very low titer in body fluids. Since DS procedure requires a substantial amount of starting DNA (between <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4271547/">between 0.2 and 3 micrograms</a>) the virus needs to be enriched. This can be done, for example, with a PCR designed to amplify the entire genome of the virus. Yet the problem is that during the amplification heterologous strands will almost certainly realign to some extent forming hetoroduplex molecules:</p>
 
 <blockquote>
-  <figure id="figure-2"><img src="../../images/het.png" alt="hd" title="hd"><figcaption><span class="figcaption-prefix">Figure 2:</span> hd</figcaption></figure>
+  <p><img src="../../images/het.png" alt="hd"></p>
 
   <p>Heteroduplex formation in ampliconic templates. Image by Barbara Arbeithuber from <a href="https://genomebiology.biomedcentral.com/articles/10.1186/s13059-016-1039-4">Stoler:2016</a>. Here there are two distinct types of viral genomes: carrying <code class="highlighter-rouge">A</code> and <code class="highlighter-rouge">G</code>. Because the population of genomes is enriched via PCR, heteroduplex formation takes place, skewing frequency estimates performed using DCSs.</p>
 </blockquote>
@@ -138,9 +138,9 @@
 <p>The entire analysis described here is accessible as a <a href="https://usegalaxy.org/u/aun1/h/duplex-analysis-abl1">Galaxy history</a> (by clicking on this link you can create your own copy and play with it).</p>
 
 <blockquote>
-  <figure id="figure-3"><img src="https://galaxyproject.org/duplex/histItem.png" alt="History Item" title="History Item"><figcaption><span class="figcaption-prefix">Figure 3:</span> History Item</figcaption></figure>
+  <p><img src="https://galaxyproject.org/duplex/histItem.png" alt="History Item"></p>
 
-  <p>Each history item has a Rerun <figure id="figure-4"><img src="https://galaxyproject.org/tutorials/g101/fa-refresh.png" alt="refresh" title="refresh">&lt;figcaption&gt;<span class="figcaption-prefix">Figure 4:</span> refresh&lt;/figcaption&gt;</figure> button. Clicking this button will show you how this tool was run with all parameters filled in exactly.</p>
+  <p>Each history item has a Rerun <img src="https://galaxyproject.org/tutorials/g101/fa-refresh.png" alt="refresh"> button. Clicking this button will show you how this tool was run with all parameters filled in exactly.</p>
 </blockquote>
 
 <p>This analysis (and consequently the Galaxy’s history) can be divided into three parts</p>
@@ -151,7 +151,7 @@
 </ol>
 
 <blockquote>
-  <figure id="figure-5"><img src="../../images/steps.png" alt="steps" title="steps"><figcaption><span class="figcaption-prefix">Figure 5:</span> steps</figcaption></figure>
+  <p><img src="../../images/steps.png" alt="steps"></p>
 
   <p>Analysis outline</p>
 </blockquote>
@@ -203,7 +203,7 @@
 <p>This is the exact image of the <strong>Make consensus reads</strong> interface:</p>
 
 <blockquote>
-  <figure id="figure-6"><img src="../../images/makeCons.png" alt="Make consesni" title="Make consesni"><figcaption><span class="figcaption-prefix">Figure 6:</span> Make consesni</figcaption></figure>
+  <p><img src="../../images/makeCons.png" alt="Make consesni"></p>
 
   <p>Making DCS and SSCS. <strong>Note</strong> that <strong>Output single-strand consensus sequences</strong> is set to <code class="highlighter-rouge">Yes</code>. <a href="#background">Above</a> we explained why single-strand consensus sequences (SSCS) may be important in some applications. <a href="#analysis-of-single-strand-consensus-data">Below</a> we show how they can be used.</p>
 </blockquote>
@@ -213,7 +213,7 @@
 <p>The <em>Du Novo</em> algorithm occasionally inserts<code class="highlighter-rouge">N</code>and/or <a href="https://en.wikipedia.org/wiki/Nucleic_acid_notation">IUPAC notations</a> at sites where a definive base cannot be identified according to the major rule consensus. We however do not want such bases when we call variants. The tool <strong>Sequence Content Trimmer</strong> will help with filtering these out. Here are the parameters we used:</p>
 
 <blockquote>
-  <figure id="figure-7"><img src="../../images/contentTrimmer.png" alt="ContentTrimmer" title="ContentTrimmer"><figcaption><span class="figcaption-prefix">Figure 7:</span> ContentTrimmer</figcaption></figure>
+  <p><img src="../../images/contentTrimmer.png" alt="ContentTrimmer"></p>
 
   <p>Sequence Content Trimmer settings . Where:<br>- <code class="highlighter-rouge">Paired reads = Paired</code> (because DCSs are reported as forward and reverse)<br>- <code class="highlighter-rouge">Bases to filter on = NRYSWKMBDHV</code> (all ambiguous nucleotides)<br>- <code class="highlighter-rouge">Frequency threshold = 0.2</code> (A window /see the next parameter below/ cannot have more than 20% of ambiguous bases)<br>- <code class="highlighter-rouge">Size of the window = 10</code> (Size of the window)<br>- <code class="highlighter-rouge">Invert filter bases = No</code><br>- <code class="highlighter-rouge">Set a minimum read length = 50</code> (We do not want <em>very</em> short reads)</p>
 </blockquote>
@@ -223,7 +223,7 @@
 <p><a href="#filtering-consensuses">The previous step</a> filters forward and reverse DCSs and reports them in <a href="https://en.wikipedia.org/wiki/FASTA_format">FASTA</a> format. Yet the downstream tools require <a href="https://en.wikipedia.org/wiki/FASTQ_format">fastq</a> format. To address this we convert FASTA into fastq using <strong>Combine FASTA and QUAL</strong> from tool section <strong>NGS: QC and manipulation</strong>. In this case the quality values are filled in with the maximum allowed value of 93 (essentially we fake them here), which is fine as we will not rely on quality scores in the rest of the analysis.</p>
 
 <blockquote>
-  <figure id="figure-8"><img src="../../images/combineFandQ.png" alt="ContentTrimmer" title="ContentTrimmer"><figcaption><span class="figcaption-prefix">Figure 8:</span> ContentTrimmer</figcaption></figure>
+  <p><img src="../../images/combineFandQ.png" alt="ContentTrimmer"></p>
 
   <p>Combine FASTA and QUAL. <strong>Note</strong> that here two datasets (#8 and #9) are selected simultaneously because we clicked the multiple datasets button the left of the <strong>FASTA File</strong> dropdown:<br> <img src="../../images/multiDataset.png" alt=""></p>
 </blockquote>
