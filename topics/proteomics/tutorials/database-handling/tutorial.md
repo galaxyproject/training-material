@@ -37,13 +37,13 @@ In this tutorial, we will explore **Protein Database Downloader** :wrench: for g
 > 4. Click on `Execute`. There will be a new dataset named `Protein database` in your history, now.
 > 5. Rename the `Protein database` to `Main database`.
 >
->	 > ### :bulb: Tip: Types of uniprot databases
->	 > Uniprot offers several types of databases. You may choose to download only reviewed (UniProtKB/Swissprot) databases, only unreviewed (UniProtKB/TREMBL) or both (UniProtKB). In well researched organisms, e.g. Homo sapiens or D. melanogaster, reviewed (Swissprot) databases are always kept up-to-date and may lead to cleaner search results. In other organisms, it might be wiser to include the unreviewed (TREMBL) database not to miss important proteins.
+>  > ### :bulb: Tip: Types of uniprot databases
+>  > Uniprot offers several types of databases. You may choose to download only reviewed (UniProtKB/Swissprot) databases, only unreviewed (UniProtKB/TREMBL) or both (UniProtKB). In well researched organisms, e.g. Homo sapiens or D. melanogaster, reviewed (Swissprot) databases are always kept up-to-date and may lead to cleaner search results. In other organisms, it might be wiser to include the unreviewed (TREMBL) database not to miss important proteins.
 >  >
->	 > You may also include protein isoforms by setting the tick box `Include isoform data` to `Yes`.
->  > {: .tip}
+>  > You may also include protein isoforms by setting the tick box `Include isoform data` to `Yes`.
+>  {: .tip}
 >
->	 > ### :question: Question
+>  > ### :question: Question
 >  > What is the difference between a "reference proteome set" and a "complete proteome set"?
 >  >
 >  >  <details>
@@ -52,8 +52,8 @@ In this tutorial, we will explore **Protein Database Downloader** :wrench: for g
 >  >  <li> A UniProt complete proteome consists of the set of proteins thought to be expressed by an organism whose genome has been completely sequenced. A reference proteome is the complete proteome of a representative, well-studied model organism or an organism of interest for biomedical research. Reference proteomes constitute a representative cross-section of the taxonomic diversity to be found within UniProtKB. They include the proteomes of well-studied model organisms and other proteomes of interest for biomedical and biotechnological research. Species of particular importance may be represented by numerous reference proteomes for specific ecotypes or strains of interest. [Link to source](http://www.uniprot.org/help/reference_proteome)</li>
 >  >  </ol>
 >  >  </details>
->  > {: .question}
-> {: .hands_on}
+>  {: .question}
+{: .hands_on}
 
 
 # Contaminant databases
@@ -88,8 +88,8 @@ A widely used database for common contaminants is the **c**ommon **R**epository 
 >  >  <li> In samples from non-human sources, identified human contaminants do mean contamination by the experimenter. </li>
 >  >  </ol>
 >  >  </details>
->  > {: .question}
-> {: .hands_on}
+>  {: .question}
+{: .hands_on}
 
 
 > ### :pencil2: Optional Hands-On: Mycoplasma databases
@@ -102,8 +102,8 @@ A widely used database for common contaminants is the **c**ommon **R**epository 
 >
 >  > ### :nut_and_bolt: Comment
 >  > The reviewed mycoplasma databases do not contain all known proteins. It is better to include also the TREMBL database. Mycoplasma proteomes are relatively small, so even downloading TREMBL will not bloat your main database unneccessarily.
->  > {: .comment}
-> {: .hands_on}
+>  {: .comment}
+{: .hands_on}
 
 
 # Merging databases
@@ -116,7 +116,7 @@ Depending on the search engine you are using you might need to merge all fasta e
 >
 >	> ### Optional: Merging mycoplasma databases
 >	> At this step you may also merge the mycoplasma protein databases that you downloaded earlier on. Simply enter them as additional inputs in **FASTA Merge Files and Filter Unique Sequences** :wrench:. You can enter any number of databases when you click on `Insert Input FASTA file(s)`.
-> {: .hands_on}
+{: .hands_on}
 
 
 # Creating a Decoy Database
@@ -127,20 +127,20 @@ The most common method of peptide and protein FDR calculation is by adding known
 > 1. Run **DecoyDatabase**  :wrench: on the merged database.
 > 2. Set the flag (-append) to `Yes` and execute.
 >
->	> ### :bulb: Tip: Decoy tags
->	> The string you enter as a decoy tag will be added as a prefix or suffix (your choice) to the description of each decoy protein entry. Thus you can see from which entry in the real database the decoy was computed.
-> > {: .tip}
+>  > ### :bulb: Tip: Decoy tags
+>  > The string you enter as a decoy tag will be added as a prefix or suffix (your choice) to the description of each decoy protein entry. Thus you can see from which entry in the real database the decoy was computed.
+>  {: .tip}
 >
->	> ### :nut_and_bolt: Comment
->	> **DecoyDatabase**  :wrench: may also take several databases as input which are then automatically merged into one database.
-> > {: .comment}
-> {: .hands_on}
+>  > ### :nut_and_bolt: Comment
+>  > **DecoyDatabase**  :wrench: may also take several databases as input which are then automatically merged into one database.
+>  {: .comment}
+{: .hands_on}
 
 
 # Concluding remarks
 {:.no_toc}
 
-To keep your databases up-to-date, or if you need several databases for different organisms, it would make sense to create a workflow out of the Hands-On sections (to learn about workflows see [this tutorial](../../Introduction/tutorials/workflows.md)). You might also want to combine the mycoplasma databases to a single file, which you then easily can add to each of your main databases.
+To keep your databases up-to-date, or if you need several databases for different organisms, it would make sense to create a workflow out of the Hands-On sections (to learn about workflows see [this tutorial](https://galaxyproject.github.io/training-material/topics/introduction/tutorials/galaxy-intro-101/tutorial.html)). You might also want to combine the mycoplasma databases to a single file, which you then easily can add to each of your main databases.
 
 Often you may not want to use the most recent database for reasons of reproducibility. If so, you can transfer the final database of this tutorial into other histories to work with it.
 

@@ -9,7 +9,7 @@ tutorial_name: mothur-miseq-sop
 
 In this tutorial we will perform the
 [Standard Operating Procedure (SOP) for MiSeq data](https://www.mothur.org/wiki/MiSeq_SOP), developed by the
-creators of the Mothur software package, the [Schloss lab](https://www.schlosslab.org/), within Galaxy.
+creators of the Mothur software package, the [Schloss lab](http://www.schlosslab.org/), within Galaxy.
 
 > ### Agenda
 >
