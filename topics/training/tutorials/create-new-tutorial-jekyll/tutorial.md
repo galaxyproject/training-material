@@ -71,6 +71,20 @@ With `make serve`, a local Jekyll server will run in background. It will check t
 
 Once you are done, you can stop the server with `ctrl-c` and deactivate your conda environment with `source deactivate`.
 
+# Generating PDF of the tutorials and slides
+
+A PDF file of every tutorials and slide decks can be generated, using Chrome on command line and [Decktape](https://github.com/astefanutti/decktape).
+
+> ### :pencil2: Hands-on: Checking the website generation locally
+>
+> 1. (If not done) Activate the conda environment: `source activate galaxy_training_material`
+> 1. Install Chrome
+>    - For OSX, install the [Chrome browser](https://www.google.com/chrome/browser/desktop/index.html)
+>    - For Ubuntu, follow [these instructions](https://askubuntu.com/questions/510056/how-to-install-google-chrome#510186)
+> 2. Run `make pdf`
+> 3. Check the PDF in `_pdf` folder
+{: .hands_on}
+
 # Conclusion
 {:.no_toc}
 
