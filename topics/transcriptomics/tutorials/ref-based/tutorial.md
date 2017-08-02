@@ -511,7 +511,7 @@ The first output of **DESeq2** is a tabular file. The columns are:
 
 > ### :pencil2: Hands-on: Analysis of the differential gene expression (2)
 >
-> 1. **Filter** :wrench:: Run **Filter** to extract genes with a significant change in gene expression (adjusted *p*-value equal or below 0.05) between treated and untreated samples
+> 1. **Filter** :wrench:: Run **Filter** to extract genes with a significant change in gene expression (adjusted *p*-value below 0.05) between treated and untreated samples
 >
 >    > ### :question: Question
 >    >
