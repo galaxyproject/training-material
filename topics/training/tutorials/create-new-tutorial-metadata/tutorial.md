@@ -60,7 +60,7 @@ The first file we will fill is the `metadata.yaml` file describing the metadata 
     - `link`: relative for internal (inside training material) requirement or full for external requirement)
     - `type`: the type of link (`internal` or `external`)
 
-This information is used to automatically make the tutorial available on the online website: [https://galaxyproject.github.io/training-material/ ](https://galaxyproject.github.io/training-material/)
+This information is used to automatically make the tutorial available on the online website: [{{site.url}} ]({{site.url}})
 
 > ### :pencil2: Hands-on: Fill the basic metadata
 >

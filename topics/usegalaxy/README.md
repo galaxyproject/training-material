@@ -7,7 +7,7 @@ Topic name
 
 Several deck of slides are available for this topic:
 
-- [General introduction about <topic name>](https://galaxyproject.github.io/training-material/templates/slides/)
+- [General introduction about <topic name>]({{site.url}}templates/slides/)
 - Slide deck related to the tutorials:
     - [Tutorial name](https://github.com/galaxyproject/training-material/tree/master/templates/tutorials/)
 

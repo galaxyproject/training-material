@@ -58,7 +58,7 @@ Due to the large size of this dataset, we have downsampled it to only include re
 
 ## Quality control
 
-For quality control, we use similar tools as described in [NGS-QC tutorial](https://galaxyproject.github.io/training-material/topics/sequence-analysis/): [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/) and [Trimmomatic](http://www.usadellab.org/cms/?page=trimmomatic).
+For quality control, we use similar tools as described in [NGS-QC tutorial]({{site.url}}topics/sequence-analysis/): [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/) and [Trimmomatic](http://www.usadellab.org/cms/?page=trimmomatic).
 
 > ### :pencil2: Hands-on: Quality control
 >
@@ -113,7 +113,7 @@ To make sense of the reads, their positions within mouse genome must be determin
 
 > ### :nut_and_bolt: Comment
 >
-> Do you want to learn more about the principles behind mapping? Follow our [training](https://galaxyproject.github.io/training-material/topics/sequence-analysis/)
+> Do you want to learn more about the principles behind mapping? Follow our [training]({{site.url}}topics/sequence-analysis/)
 {: .comment}
 
 In the case of a eukaryotic transcriptome, most reads originate from processed mRNAs lacking introns. Therefore, they cannot be simply mapped back to the genome as we normally do for reads derived from DNA sequences. Instead, the reads must be separated into two categories:

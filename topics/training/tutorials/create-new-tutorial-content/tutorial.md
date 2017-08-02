@@ -165,7 +165,7 @@ On the top, there is some metadata:
 - `topic_name: training` with the name of the topic
 - `tutorial_name: create-new-tutorial` with the name of tutorial
 
-These metadata are there to help the templating system to make the connection between the file and the global [metadata](topics/training/tutorials/create-new-tutorial-metadata/tutorial.html).
+These metadata are there to help the templating system to make the connection between the file and the global [metadata]({{site.url}}topics/training/tutorials/create-new-tutorial-metadata/tutorial.html).
 If they are not correctly defined the tutorial can not be found on the website.
 
 > ### :pencil2: Hands-on: Fix the top metadata
@@ -201,13 +201,13 @@ We recommend to structure the tutorials like this
 
 > ### :bulb: Tip: Adding images, with caption
 >
-> To add an image in markdown file, we need to use `![](../../images/image.png)`. 
+> To add an image in markdown file, we need to use `![](../../images/image.png)`.
 >
 > On the top of that, we added a small plugin to add a caption for each image:
 >
 > ![This figure shows an example of a figure with a caption](../../images/image_caption_screenshot.png "Example of a figure with a caption")
 >
-> "Figure" and the number are automatically added and the caption is added by adding the information in the markdown call of the image: 
+> "Figure" and the number are automatically added and the caption is added by adding the information in the markdown call of the image:
 >
 >   ```
 >   ![A textual description of the image](../images/image.png "This is my super caption")
