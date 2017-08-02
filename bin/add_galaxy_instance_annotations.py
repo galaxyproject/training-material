@@ -4,13 +4,34 @@ import os
 import argparse
 import yaml
 from bioblend import galaxy
-import pprint
+import requests
+import io
+import pandas as pd
 
 log_dir = "logs"
 
-def check_instance(galaxy_url, tool_filepath, log_file):
-    """ Check if a given tutorial can be run on a given Galaxy instance """
+
+def extract_public_galaxy_servers():
+    """ Extract a pandas Data frame with the public Galaxy servers """
+    r = requests.get('https://raw.githubusercontent.com/martenson/public-galaxy-servers/master/servers.csv')
+    f = io.StringIO(r.text)
+    public_galaxy_servers = pd.read_csv(f, sep=",")
+    return public_galaxy_servers
+
+
+def test_server_connection(galaxy_url):
+    """ Test if the server is accessible and return the GalaxyInstance object """
     gi = galaxy.GalaxyInstance(url=galaxy_url)
+    try:
+        gi.config.get_config()
+    except:
+        print("Can not connect to %s" % galaxy_url)
+        return None
+    return gi
+
+
+def check_instance(gi, tool_filepath, log_file):
+    """ Check if a given tutorial can be run on a given Galaxy instance """
     # find tools needed for the tutorial
     with open(tool_filepath) as f:
         tool_yaml = yaml.safe_load(f)
@@ -48,12 +69,28 @@ def check_instance(galaxy_url, tool_filepath, log_file):
 
 def check_tutorial(tool_file, public_galaxy_servers):
     """ Check which public Galaxy servers can run the tool in a tutorial """
-    working_galaxy_servers = []
-    for server in public_galaxy_servers:
+    to_conserve = []
+    to_drop = []
+    working_galaxy_servers = None
+    # parse the public servers
+    for index, server in public_galaxy_servers.iterrows():
+        # test if server is accessible and remove from the list if not
+        gi = test_server_connection(server['url'])
+        if gi is None:
+            to_drop.append(index)
+            continue
+        # check if the tools are accessible on the serve
         log_file = os.path.join(log_dir, server['name'])
-        can_run = check_instance(server['url'], tool_file, log_file)
+        can_run = check_instance(gi, tool_file, log_file)
         if can_run:
-            working_galaxy_servers.append(server)
+            to_conserve.append(index)
+    # extract the info of public server that can be used for the tutorial
+    if len(to_conserve) > 0:
+        print(to_conserve)
+        working_galaxy_servers = public_galaxy_servers.iloc[to_conserve]
+    # remove the non accessible servers
+    public_galaxy_servers = public_galaxy_servers.drop(to_drop)
+    return working_galaxy_servers, public_galaxy_servers
 
 
 def check_tutorials(public_galaxy_servers):
@@ -72,19 +109,20 @@ def check_tutorials(public_galaxy_servers):
         metadata_file = os.path.join(topic_path, "metadata.yaml")
         with open(metadata_file, 'r') as f:
             topic_metadata = yaml.safe_load(f)
-        print(topic_metadata)
+        #print(topic_metadata)
         # parse the tutorials of a topic
         for tutorial in os.listdir(tutorials_path):
+            print(tutorial)
             tutorial_path = os.path.join(tutorials_path, tutorial)
             # pass if the tools.yaml file does not exist
             tool_file = os.path.join(tutorial_path, 'tools.yaml')
             if not os.path.exists(tool_file):
                 continue
             # find the Galaxy servers with the needed tools
-            #working_galaxy_servers = check_tutorial(tool_file, public_galaxy_servers)
+            working_galaxy_servers, public_galaxy_servers = check_tutorial(tool_file, public_galaxy_servers)
+            print(working_galaxy_servers)
             # add the information to the metadata of the tutorial
         # write the metadata
-        pp = pprint.PrettyPrinter(indent=4)
         with open(metadata_file, 'w') as f:
             yaml.safe_dump(topic_metadata, f)
         #pp.pprint(topic_metadata)
@@ -93,14 +131,7 @@ def check_tutorials(public_galaxy_servers):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Extract which public Galaxy servers can run which tutorial and add the information in the metadata')
-    parser.add_argument(
-        '-p',
-        '--public_galaxy_servers',
-        default="galaxy_instances.yaml",
-        help="Path to the YAML file with the list of public Galaxy servers")
     args = parser.parse_args()
 
-    with open(args.public_galaxy_servers) as f:
-        public_galaxy_servers = yaml.safe_load(f)
-
+    public_galaxy_servers = extract_public_galaxy_servers()
     check_tutorials(public_galaxy_servers)
