@@ -115,7 +115,7 @@ For quality control, we use similar tools as described in [NGS-QC tutorial](../.
 >    >    <summary>Click to view answers</summary>
 >    >    <ol type="1">
 >    >    <li>The read length is then now from 20 to 37 bp</li>
->    >    <li>For GSM461177_untreat_paired_chr4_R1, the per base sequence content is now red. For GSM461177_untreat_paired_chr4_R2, the per tile sequence quality is still bad but now also the per base sequence content and the Kmer Content</li>
+>    >    <li>For GSM461177_untreat_paired_chr4_R1, the per base sequence content is now red. For GSM461177_untreat_paired_chr4_R2, the per tile sequence quality is still bad but now also the per base sequence content and the Kmer Content.</li>
 >    >    </ol>
 >    >    </details>
 >    {: .question}
