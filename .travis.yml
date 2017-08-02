@@ -34,10 +34,10 @@ script:
 - |
   if [ "$TRAVIS_BRANCH" == "gh-pages" ]
   then
-    htmlproofer --http-status-ignore 405,999 --url-ignore "/.*localhost.*/"
+    htmlproofer --http-status-ignore 405,999 --url-ignore "/.*localhost.*/" --file-ignore "/.*\/files\/.*/"
   else
     make build
-    htmlproofer --http-status-ignore 405,999 --url-ignore "/.*localhost.*/" ./_site || return 0
+    htmlproofer --http-status-ignore 405,999 --url-ignore "/.*localhost.*/" --file-ignore "/.*\/files\/.*/" ./_site || return 0
   fi
 
 after_success:
