@@ -225,7 +225,7 @@ StringTie, which performs assembly and quantification simultaneously converts sp
 >![](../../images/stringtie2.png)
 >
 >**StringTie flow network**<br>
->Here each exon node from the splice graph is split into *in* and *out* nodes connected with an edge weighted by the number of reads corresponding to that exon. For example, the first exon is covered by seven reads and so the edge between 1-in and 1-out has a weight of 7. Expression level would correspond to the maximum flow through a path representing a given transcript. Image from [Pertea:2015](StringTie enables improved reconstruction of a transcriptome from RNA-seq reads)
+>Here each exon node from the splice graph is split into *in* and *out* nodes connected with an edge weighted by the number of reads corresponding to that exon. For example, the first exon is covered by seven reads and so the edge between 1-in and 1-out has a weight of 7. Expression level would correspond to the maximum flow through a path representing a given transcript. Image from [Pertea:2015](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4643835/)
 
 #### Expectation Maximization
 
