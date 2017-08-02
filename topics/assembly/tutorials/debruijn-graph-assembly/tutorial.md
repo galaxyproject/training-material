@@ -29,7 +29,7 @@ We will be using the same data that we used in the introductory tutorial, so if 
 > ### :pencil2: Hands-on: Getting the data
 >
 > 1. Create and name a new history for this tutorial.
-> 2. Import the sequence read raw data (\*.fastq) from [Zenodo](https://doi.org/10.5281/zenodo.582600)
+> 2. Import the sequence read raw data (\*.fastq) from [Zenodo](https://zenodo.org/record/582600)
 >
 >    > ### :bulb: Tip: Importing data via links
 >    >
