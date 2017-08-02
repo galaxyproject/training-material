@@ -251,6 +251,7 @@ We can now map all the RNA sequences on the *Drosophila melanogaster* genome usi
 >    - "Trimmed reads pair 2" (Trim Galore output) as "Reverse reads"
 >    - "dm3" as reference genome
 >    - Default values for other parameters except "Spliced alignment parameters"
+>    - "Disable spliced alignment" to "False"
 >    - "Specify strand-specific information" to the previously determined value
 >    - `Drosophila_melanogaster.BDGP5.78.gtf` as "GTF file with known splice sites"
 >
