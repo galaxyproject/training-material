@@ -144,7 +144,7 @@ Spliced mappers have been developed to efficiently map transcript-derived reads 
 2. Generation of possible splices between neighboring exons
 3. Comparison of reads that did not initially map to the genome against these *in silico* created junctions
 
-![Kim et al.](../../images/tophat2.png "Kim et al., Genome Biology, 2013")
+![Kim et al.](../../images/13059_2012_Article_3053_Fig6_HTML.jpg "Kim et al., Genome Biology, 2013")
 
 Here, we will use HISAT2, a successor to TopHat2 that is faster with low memory requirements.
 
