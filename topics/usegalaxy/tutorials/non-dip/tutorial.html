@@ -7,9 +7,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Galaxy Training!</title>
         <link media="all" href="https://netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
-        <link rel="stylesheet" href="https://galaxyproject.github.io/training-material//assets/css/main.css">
-        <link rel="stylesheet" href="https://galaxyproject.github.io/training-material//assets/css/font-awesome.css">
-        <link rel="stylesheet" href="https://galaxyproject.github.io/training-material//assets/css/syntax_highlighting.css">
+        <link rel="stylesheet" href="https://galaxyproject.github.io/training-material/assets/css/main.css">
+        <link rel="stylesheet" href="https://galaxyproject.github.io/training-material/assets/css/font-awesome.css">
+        <link rel="stylesheet" href="https://galaxyproject.github.io/training-material/assets/css/syntax_highlighting.css">
     </head>
     <body>
         <div class="wrapper">
@@ -30,9 +30,9 @@
               <span class="icon-bar"></span>
             </button>
             <a id="site-title" class="navbar-brand" href="https://wiki.galaxyproject.org/Teach/GTN">
-              <img class="pull-left img-responsive" src="https://galaxyproject.github.io/training-material///assets/images/GTN.png">
+              <img class="pull-left img-responsive" alt="Galaxy Training Network" src="https://galaxyproject.github.io/training-material//assets/images/GTN.png">
             </a>
-            <a id="site-title" class="navbar-brand name-holder" href="https://galaxyproject.github.io/training-material//topics/usegalaxy/tutorials/non-dip/tutorial.html">
+            <a id="site-title" class="navbar-brand name-holder" href="https://galaxyproject.github.io/training-material/topics/usegalaxy/tutorials/non-dip/tutorial.html">
               Calling variants in non-diploid systems
             </a>
           </div>
@@ -40,13 +40,11 @@
           <div class="collapse navbar-collapse" id="navbar">
 
             <ul id="main-menu" class="nav navbar-nav navbar-right">
-              <li><a href="https://galaxyproject.github.io/training-material/" title="Back to front page"><i class="fa fa-home"></i> Home</a></li>
-              <li><a href="https://galaxyproject.github.io/training-material//topics/usegalaxy" title="Go back to list of tutorials"><i class="fa fa-file-text-o"></i> Tutorials using public Galaxy at usegalaxy.org</a></li>
+              <li><a href="https://galaxyproject.github.io/training-material" title="Back to front page"><i class="fa fa-home"></i> Home</a></li>
+              <li><a href="https://galaxyproject.github.io/training-material/topics/usegalaxy" title="Go back to list of tutorials"><i class="fa fa-file-text-o"></i> Tutorials using public Galaxy at usegalaxy.org</a></li>
 
               
-                <li><a href="https://galaxyproject.github.io/training-material//topics/usegalaxy/slides" title="Slides for this tutorial"><i class="fa fa-graduation-cap"></i> Introduction slides</a></li>
-              
-              <!--<li><a href="https://galaxyproject.github.io/training-material//usegalaxy/slides/non-dip/"><i class="fa fa-file-powerpoint-o"></i> Associated slides</a></li>-->
+              <!--<li><a href="https://galaxyproject.github.io/training-material/usegalaxy/slides/non-dip/"><i class="fa fa-file-powerpoint-o"></i> Associated slides</a></li>-->
 
               
                 <li><a href="https://github.com/galaxyproject/training-material/tree/master/topics/usegalaxy/docker" title="Docker image for this tutorial"><i class="fa fa-ship"></i> Docker image</a></li>
@@ -92,7 +90,7 @@
           
             <li>
                 
-                <a href="https://galaxyproject.github.io/training-material//topics//introduction/">Galaxy introduction</a>
+                <a href="https://galaxyproject.github.io/training-material/topics/introduction">Galaxy introduction</a>
                 
             </li>
           
@@ -109,9 +107,9 @@
 <p>The majority of life on Earth is non-diploid and represented by prokaryotes, viruses and their derivatives such as our own mitochondria or plant’s chloroplasts. In non-diploid systems allele frequencies can range anywhere between 0 and 100% and there could be multiple (not just two) alleles per locus. The main challenge associated with non-diploid variant calling is the difficulty in distinguishing between sequencing noise (abundant in all NGS platforms) and true low frequency variants. Some of the early attempts to do this well have been accomplished on human mitochondrial DNA although the same approaches will work equally good on viral and bacterial genomes:</p>
 
 <ul>
-  <li>2014 - <a href="https://www.pnas.org/content/111/43/15474.abstract">Maternal age effect and severe germ-line bottleneck in the inheritance of human mitochondrial DNA</a>
+  <li>2014 - <a href="http://www.pnas.org/content/111/43/15474.abstract">Maternal age effect and severe germ-line bottleneck in the inheritance of human mitochondrial DNA</a>
 </li>
-  <li>2015 - <a href="https://www.pnas.org/content/112/8/2491.abstract">Extensive tissue-related and allele-related mtDNA heteroplasmy suggests positive selection for somatic mutations</a>.</li>
+  <li>2015 - <a href="http://www.pnas.org/content/112/8/2491.abstract">Extensive tissue-related and allele-related mtDNA heteroplasmy suggests positive selection for somatic mutations</a>.</li>
 </ul>
 
 <p>As an example of non-diploid system we will be using human mitochondrial genome as an example. However, this approach will also work for most bacterial and viral genomes as well.</p>
@@ -147,7 +145,7 @@
 
 <h1 id="importing-example-datasets">Importing example datasets</h1>
 
-<p>For this tutorial we have prepared a subset of data previously <a href="https://www.pnas.org/content/111/43/15474.abstract">published</a> by our group. Let’s import these data into Galaxy.</p>
+<p>For this tutorial we have prepared a subset of data previously <a href="http://www.pnas.org/content/111/43/15474.abstract">published</a> by our group. Let’s import these data into Galaxy.</p>
 
 <blockquote class="hands_on">
   <h3 id="data-upload-from-a-galaxy-library">Data upload from a Galaxy Library</h3>
@@ -537,7 +535,7 @@ chrM	8557	.	G	C	2590.97	.	AB=0.267066;ABP=790.051;AC=2;AF=0.5;AN=4;AO=446;CIGAR=
 </div>
 <h1 id="looking-at-the-data">Looking at the data</h1>
 
-<p>For visalizaning VCFs Galaxy relies on the two external tools.  The first is called <a href="https://vcf.iobio.io/">VCF.IOBIO</a> and is developed by <a href="http://marthlab.org/">Gabor Marth’s group</a> at the University of Utah. The second is called <a href="http://software.broadinstitute.org/software/igv/">IGV</a> developed by Broad Institute.</p>
+<p>For visalizaning VCFs Galaxy relies on the two external tools.  The first is called <a href="http://vcf.iobio.io/">VCF.IOBIO</a> and is developed by <a href="http://marthlab.org/">Gabor Marth’s group</a> at the University of Utah. The second is called <a href="http://software.broadinstitute.org/software/igv/">IGV</a> developed by Broad Institute.</p>
 
 <h2 id="vcfiobio">VCF.IOBIO</h2>
 
@@ -727,6 +725,6 @@ Child    791   767
 
         </div>
     </body>
-    <script type="text/javascript" src="https://galaxyproject.github.io/training-material//assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://galaxyproject.github.io/training-material/assets/js/details-element-polyfill.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 </html>

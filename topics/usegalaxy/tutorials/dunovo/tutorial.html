@@ -7,9 +7,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Galaxy Training!</title>
         <link media="all" href="https://netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
-        <link rel="stylesheet" href="https://galaxyproject.github.io/training-material//assets/css/main.css">
-        <link rel="stylesheet" href="https://galaxyproject.github.io/training-material//assets/css/font-awesome.css">
-        <link rel="stylesheet" href="https://galaxyproject.github.io/training-material//assets/css/syntax_highlighting.css">
+        <link rel="stylesheet" href="https://galaxyproject.github.io/training-material/assets/css/main.css">
+        <link rel="stylesheet" href="https://galaxyproject.github.io/training-material/assets/css/font-awesome.css">
+        <link rel="stylesheet" href="https://galaxyproject.github.io/training-material/assets/css/syntax_highlighting.css">
     </head>
     <body>
         <div class="wrapper">
@@ -30,9 +30,9 @@
               <span class="icon-bar"></span>
             </button>
             <a id="site-title" class="navbar-brand" href="https://wiki.galaxyproject.org/Teach/GTN">
-              <img class="pull-left img-responsive" src="https://galaxyproject.github.io/training-material///assets/images/GTN.png">
+              <img class="pull-left img-responsive" alt="Galaxy Training Network" src="https://galaxyproject.github.io/training-material//assets/images/GTN.png">
             </a>
-            <a id="site-title" class="navbar-brand name-holder" href="https://galaxyproject.github.io/training-material//topics/usegalaxy/tutorials/dunovo/tutorial.html">
+            <a id="site-title" class="navbar-brand name-holder" href="https://galaxyproject.github.io/training-material/topics/usegalaxy/tutorials/dunovo/tutorial.html">
               Calling very rare variants
             </a>
           </div>
@@ -40,13 +40,11 @@
           <div class="collapse navbar-collapse" id="navbar">
 
             <ul id="main-menu" class="nav navbar-nav navbar-right">
-              <li><a href="https://galaxyproject.github.io/training-material/" title="Back to front page"><i class="fa fa-home"></i> Home</a></li>
-              <li><a href="https://galaxyproject.github.io/training-material//topics/usegalaxy" title="Go back to list of tutorials"><i class="fa fa-file-text-o"></i> Tutorials using public Galaxy at usegalaxy.org</a></li>
+              <li><a href="https://galaxyproject.github.io/training-material" title="Back to front page"><i class="fa fa-home"></i> Home</a></li>
+              <li><a href="https://galaxyproject.github.io/training-material/topics/usegalaxy" title="Go back to list of tutorials"><i class="fa fa-file-text-o"></i> Tutorials using public Galaxy at usegalaxy.org</a></li>
 
               
-                <li><a href="https://galaxyproject.github.io/training-material//topics/usegalaxy/slides" title="Slides for this tutorial"><i class="fa fa-graduation-cap"></i> Introduction slides</a></li>
-              
-              <!--<li><a href="https://galaxyproject.github.io/training-material//usegalaxy/slides/dunovo/"><i class="fa fa-file-powerpoint-o"></i> Associated slides</a></li>-->
+              <!--<li><a href="https://galaxyproject.github.io/training-material/usegalaxy/slides/dunovo/"><i class="fa fa-file-powerpoint-o"></i> Associated slides</a></li>-->
 
               
                 <li><a href="https://github.com/galaxyproject/training-material/tree/master/topics/usegalaxy/docker" title="Docker image for this tutorial"><i class="fa fa-ship"></i> Docker image</a></li>
@@ -92,7 +90,7 @@
           
             <li>
                 
-                <a href="https://galaxyproject.github.io/training-material//topics//introduction/">Galaxy introduction</a>
+                <a href="https://galaxyproject.github.io/training-material/topics/introduction">Galaxy introduction</a>
                 
             </li>
           
@@ -108,12 +106,12 @@
 
 <h1 id="background">Background</h1>
 
-<p>Calling low frequency variants from next generation sequencing (NGS) data is challenging due to significant amount of noise characteristic of these technologies. <a href="https://www.pnas.org/content/109/36/14508.short">Duplex sequencing</a> (DS) was designed to address this problem by increasing sequencing accuracy by over four orders of magnitude. DS uses randomly generated barcodes to uniquely tag each molecule in a sample. The tagged fragments are then PCR amplified prior to the preparation of a sequencing library, creating fragment families characterized by unique combination of barcodes at both 5’ and 3’ ends:</p>
+<p>Calling low frequency variants from next generation sequencing (NGS) data is challenging due to significant amount of noise characteristic of these technologies. <a href="http://www.pnas.org/content/109/36/14508.short">Duplex sequencing</a> (DS) was designed to address this problem by increasing sequencing accuracy by over four orders of magnitude. DS uses randomly generated barcodes to uniquely tag each molecule in a sample. The tagged fragments are then PCR amplified prior to the preparation of a sequencing library, creating fragment families characterized by unique combination of barcodes at both 5’ and 3’ ends:</p>
 
 <blockquote>
-  <p><a href="https://www.pnas.org/content/109/36/14508/F1.expansion.html"><img src="../../images/ds.png" alt="duplex"></a></p>
+  <p><a href="http://www.pnas.org/content/109/36/14508/F1.expansion.html"><img src="../../images/ds.png" alt="duplex"></a></p>
 
-  <p>The logic of duplex sequencing. From <a href="https://www.pnas.org/content/109/36/14508.short">Schmitt:2012</a>.</p>
+  <p>The logic of duplex sequencing. From <a href="http://www.pnas.org/content/109/36/14508.short">Schmitt:2012</a>.</p>
 </blockquote>
 
 <p>The computational analysis of DS data (Part <code class="highlighter-rouge">C</code> in the figure above) produces two kinds of output:</p>
@@ -358,7 +356,7 @@
 <p>SSCSs are generated when the <strong>Output single-strand consensus sequences</strong> option of <strong>Du Novo: Make consensus reads</strong> tool is set to <code class="highlighter-rouge">Yes</code> (see <a href="#generating-duplex-consensus-sequences-dcs">here</a>). Analysis of SSCS data follows almost exactly the same trajectory. The only difference is that these <strong>do not</strong> come as forward and reverse. Instead <em>Du Novo</em> generates a single dataset. With this dataset we go through all the same steps:</p>
 
 <ul>
-  <li><a href="#filtering-consensi">Filtering consensi</a></li>
+  <li><a href="#filtering-consensuses">Filtering consensuses</a></li>
   <li><a href="#generating-fastq">Generating fastq</a></li>
   <li>
 <a href="#calling-variants">Calling variants</a>
@@ -419,6 +417,6 @@
 
         </div>
     </body>
-    <script type="text/javascript" src="https://galaxyproject.github.io/training-material//assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://galaxyproject.github.io/training-material/assets/js/details-element-polyfill.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 </html>
