@@ -41,9 +41,10 @@ The first step is to install the requirements inside a conda environment. This s
 > ### :pencil2: Hands-on: Install the requirements
 >
 > 1. Install [conda](https://conda.io/miniconda.html)
-> 2. Create the conda environment: `conda env create -f environment.yml`
-> 3. Activate the conda environment: `source activate galaxy_training_material`
-> 4. Install Jekyll and related modules using [RubyGems](https://rubygems.org/pages/download): `make install`
+> 2. Navigate to `training-material/` folder
+> 3. Create the conda environment: `conda env create -f environment.yml`
+> 4. Activate the conda environment: `source activate galaxy_training_material`
+> 5. Install Jekyll and related modules using [RubyGems](https://rubygems.org/pages/download): `make install`
 {: .hands_on}
 
 # Checking the website generation
