@@ -39,7 +39,7 @@ script:
 - |
   if [ "$TRAVIS_BRANCH" == "gh-pages" ]
   then
-    htmlproofer --http-status-ignore 405,999 --url-ignore "/.*localhost.*/" --file-ignore "/.*\/files\/.*/"
+    htmlproofer --http-status-ignore 405,999 --url-ignore "/.*localhost.*/","/.*vimeo\.com.*/" --file-ignore "/.*\/files\/.*/"
   else
     make check || return 0
   fi

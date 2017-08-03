@@ -31,7 +31,7 @@ build: ## build files but do not run a server
 .PHONY: site
 
 check: build ## validate HTML
-	bundle exec htmlproofer --http-status-ignore 405,999 --url-ignore "/.*localhost.*/" --file-ignore "/.*\/files\/.*/" ./_site
+	bundle exec htmlproofer --http-status-ignore 405,999 --url-ignore "/.*localhost.*/","/.*vimeo\.com.*/" --file-ignore "/.*\/files\/.*/" ./_site
 .PHONY: check
 
 clean: ## clean up junk files
