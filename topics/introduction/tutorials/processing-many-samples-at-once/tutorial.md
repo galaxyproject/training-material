@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 topic_name: introduction
-tutorial_name: Processing-many-samples-at-once
+tutorial_name: processing-many-samples-at-once
 ---
 
 > ### Agenda

@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 topic_name: chip-seq
-tutorial_name: TAL1-binding-site-identification
+tutorial_name: tal1-binding-site-identification
 ---
 
 # Introduction
