@@ -40,9 +40,7 @@ interface needs to be updated or isn't updating properly.
 
 The history options button opens the history options menu which allows you to perform history-related tasks.
 
-
-The 'view all histories' button sends you to the interface for
-[managing multiple histories](../../images/index.md#managing_multiple_histories).
+The 'view all histories' button sends you to the interface for managing multiple histories
 
 ## History Information
 

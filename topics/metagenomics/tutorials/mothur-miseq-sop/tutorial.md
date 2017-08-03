@@ -9,7 +9,7 @@ tutorial_name: mothur-miseq-sop
 
 In this tutorial we will perform the
 [Standard Operating Procedure (SOP) for MiSeq data](https://www.mothur.org/wiki/MiSeq_SOP), developed by the
-creators of the Mothur software package, the [Schloss lab](https://www.schlosslab.org/), within Galaxy.
+creators of the Mothur software package, the [Schloss lab](http://www.schlosslab.org/), within Galaxy.
 
 > ### Agenda
 >
@@ -209,7 +209,7 @@ Here the first column contains the read name, and the second column contains the
 ### Data Cleaning
 
 For more information on the topic of quality control, please see our training materials
-[here](https://galaxyproject.github.io/training-material/topics/sequence-analysis/)
+[here]({{site.url}}/topics/sequence-analysis/)
 
 Next we want to improve the quality of our data. But first, let's get a feel of our data
 
@@ -335,7 +335,7 @@ the number of duplicates of this sequence observed in each sample.
 ### Sequence Alignment
 
 For more information on the topic of alignment, please see our training materials
-[here](https://galaxyproject.github.io/training-material/topics/sequence-analysis/)
+[here]({{site.url}}/topics/sequence-analysis/)
 
 We are now ready to align our sequences to the reference. This step is an important
 step to perform to improve the clustering of your OTUs [[Schloss 2013]](https://doi.org/10.1038/ismej.2012.102)
@@ -975,7 +975,7 @@ repeated-measures ANOVA and find that there was no significant difference based 
 
 Beta diversity is a measure of the similarity of the membership and structure found between *different* samples.
 The default calculator in the following section is *thetaYC*, which is the [Yue & Clayton theta similarity
-coefficient](http://csyue.nccu.edu.tw/ch/2005communicationindex.pdf)
+coefficient](http://www.tandfonline.com/doi/abs/10.1080/STA-200066418)
 
 > ### :pencil2: Hands-on: Beta diversity
 >
@@ -1504,7 +1504,7 @@ Otu0042    0.07
 
 Mothur does not have a lot of visualization tools built in, but external tools may be used for this. For
 instance we can convert our shared file to the more widely used `biom` format and view it in a platform like
-[Phinch](https://www.phinch.org/).
+[Phinch](http://www.phinch.org/).
 
 ## Phinch
 

@@ -8,12 +8,12 @@ This page explains how to perform discovery of low frequency variants from duple
 
 # Background
 
-Calling low frequency variants from next generation sequencing (NGS) data is challenging due to significant amount of noise characteristic of these technologies. [Duplex sequencing](https://www.pnas.org/content/109/36/14508.short) (DS) was designed to address this problem by increasing sequencing accuracy by over four orders of magnitude. DS uses randomly generated barcodes to uniquely tag each molecule in a sample. The tagged fragments are then PCR amplified prior to the preparation of a sequencing library, creating fragment families characterized by unique combination of barcodes at both 5’ and 3’ ends:
+Calling low frequency variants from next generation sequencing (NGS) data is challenging due to significant amount of noise characteristic of these technologies. [Duplex sequencing](http://www.pnas.org/content/109/36/14508.short) (DS) was designed to address this problem by increasing sequencing accuracy by over four orders of magnitude. DS uses randomly generated barcodes to uniquely tag each molecule in a sample. The tagged fragments are then PCR amplified prior to the preparation of a sequencing library, creating fragment families characterized by unique combination of barcodes at both 5’ and 3’ ends:
 
 
->[![duplex](../../images/ds.png)](https://www.pnas.org/content/109/36/14508/F1.expansion.html)
+>[![duplex](../../images/ds.png)](http://www.pnas.org/content/109/36/14508/F1.expansion.html)
 >
->The logic of duplex sequencing. From [Schmitt:2012](https://www.pnas.org/content/109/36/14508.short).
+>The logic of duplex sequencing. From [Schmitt:2012](http://www.pnas.org/content/109/36/14508.short).
 
 The computational analysis of DS data (Part `C` in the figure above) produces two kinds of output:
 
@@ -171,7 +171,7 @@ The polymorphism we are interested in (and the one reported by [Schmitt:2015] (h
 
 SSCSs are generated when the **Output single-strand consensus sequences** option of **Du Novo: Make consensus reads** tool is set to `Yes` (see [here](#generating-duplex-consensus-sequences-dcs)). Analysis of SSCS data follows almost exactly the same trajectory. The only difference is that these **do not** come as forward and reverse. Instead _Du Novo_ generates a single dataset. With this dataset we go through all the same steps:
 
-* [Filtering consensi](#filtering-consensi)
+* [Filtering consensuses](#filtering-consensuses)
 * [Generating fastq](#generating-fastq)
 * [Calling variants](#calling-variants)
  	- [Aligning against genome](#align-against-genome-with-bwa-and-bwa-mem) (here the difference is that one needs to choose a single end option and use a single dataset as input)

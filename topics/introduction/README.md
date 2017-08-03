@@ -9,7 +9,7 @@ Here, you will find some material to learn how to use Galaxy.
 
 A deck of slides is available for this topic:
 
-- [General introduction about Galaxy](https://galaxyproject.github.io/training-material/topics/introduction/slides/)
+- [General introduction about Galaxy]({{site.url}}/topics/introduction/slides/)
 
 # Tutorials
 

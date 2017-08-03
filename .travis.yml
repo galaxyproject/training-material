@@ -7,6 +7,10 @@ branches:
   - /.*/
 addons:
   chrome: stable
+  apt:
+    packages:
+      - libcurl4-openssl-dev
+
 services:
 - docker
 
@@ -16,6 +20,7 @@ env:
 
 install:
 - sudo apt-get update
+- sudo update-ca-certificates
 - wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh
 - bash miniconda.sh -b -p $HOME/miniconda
 - export PATH="$HOME/miniconda/bin:$PATH"
@@ -34,10 +39,9 @@ script:
 - |
   if [ "$TRAVIS_BRANCH" == "gh-pages" ]
   then
-    htmlproofer --http-status-ignore 405,999 --url-ignore "/.*localhost.*/"
+    htmlproofer --http-status-ignore 405,999 --url-ignore "/.*localhost.*/","/.*vimeo\.com.*/" --file-ignore "/.*\/files\/.*/"
   else
-    make build
-    htmlproofer --http-status-ignore 405,999 --url-ignore "/.*localhost.*/" ./_site || return 0
+    make check || return 0
   fi
 
 after_success:

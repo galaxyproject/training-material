@@ -49,7 +49,7 @@ The first file we will fill is the `metadata.yaml` file describing the metadata 
 
 - `title`: title of the tutorial
 - `type: "tutorial"`
-- `enable`: `"true"` to make your tutorial accessible via the topic page or `"false"` otherwise 
+- `enable`: `"true"` to make your tutorial accessible via the topic page or `"false"` otherwise
 - `name`: name of the tutorial (name of the subdirectory where the files related to the tutorial will be stored)
 - `zenodo_link`: link on Zenodo to the input data for the tutorial (not ideal but it can be empty)
 - `galaxy_tour`: name of the galaxy tour
@@ -60,7 +60,7 @@ The first file we will fill is the `metadata.yaml` file describing the metadata 
     - `link`: relative for internal (inside training material) requirement or full for external requirement)
     - `type`: the type of link (`internal` or `external`)
 
-This information is used to automatically make the tutorial available on the online website: [https://galaxyproject.github.io/training-material/ ](https://galaxyproject.github.io/training-material/)
+This information is used to automatically make the tutorial available on the online website: [{{site.url}} ]({{site.url}})
 
 > ### :pencil2: Hands-on: Fill the basic metadata
 >

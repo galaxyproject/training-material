@@ -30,8 +30,8 @@ build: ## build files but do not run a server
 	${JEKYLL} build
 .PHONY: site
 
-check: ## validate HTML
-	bundle exec htmlproofer ./_site
+check: build ## validate HTML
+	bundle exec htmlproofer --http-status-ignore 405,999 --url-ignore "/.*localhost.*/","/.*vimeo\.com.*/" --file-ignore "/.*\/files\/.*/" ./_site
 .PHONY: check
 
 clean: ## clean up junk files

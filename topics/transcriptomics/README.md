@@ -7,13 +7,13 @@ RNA-sequencing is a method used to reveal the presence and quantity of RNA in a 
 
 A deck of slides is available for this topic:
 
-- [General introduction about RNA seq data analysis](https://galaxyproject.github.io/training-material/topics/transcriptomics/slides/)
+- [General introduction about RNA seq data analysis]({{site.url}}/topics/transcriptomics/slides/)
 
 # Tutorials
 
 A tutorial with hands-on is available for this topic:
 
-- [Reference-based RNA-seq data analysis](https://galaxyproject.github.io/training-material/topics/transcriptomics/tutorials/ref-based/tutorial.html)
+- [Reference-based RNA-seq data analysis]({{site.url}}/topics/transcriptomics/tutorials/ref-based/tutorial.html)
 
 ## Input datasets
 

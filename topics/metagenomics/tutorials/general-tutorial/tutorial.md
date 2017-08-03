@@ -180,7 +180,7 @@ The first step in any analysis should be to check and improve the quality of our
 
 > ### :nut_and_bolt: Comment
 >
-> For more information on the topic of quality control, please see our training materials [here](https://galaxyproject.github.io/training-material/topics/sequence-analysis/).
+> For more information on the topic of quality control, please see our training materials [here]({{site.url}}/topics/sequence-analysis/).
 {: .comment}
 
 

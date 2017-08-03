@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 topic_name: sequence-analysis
-tutorial_name: genome-anotation
+tutorial_name: genome-annotation
 ---
 
 # Introduction
@@ -45,7 +45,7 @@ It consists of three main steps:
 
 # Structural Annotation
 
-For the genome annotation we use a piece of the *Aspergillus fumigatus* [genome sequence](../input_data/Aspergillus_sequence.fasta) as input file.
+For the genome annotation we use a piece of the *Aspergillus fumigatus* [genome sequence](../../input_data/Aspergillus_sequence.fasta) as input file.
 
 ## Sequence Features
 
@@ -219,7 +219,7 @@ For identification of gene clusters, **antiSMASH** is used. The tool uses genban
 
 > ### antiSMASH analysis
 >
-> :wrench: Import this [dataset](../input-data/Streptomyces_coelicolor_part.genbank) into your Galaxy history and run **antiSMASH** to detect gene clusters. The genbank file contains a part of the *Streptomyces coelicolor* genome sequence.
+> :wrench: Import this [dataset](../../input_data/Streptomyces_coelicolor_part.genbank) into your Galaxy history and run **antiSMASH** to detect gene clusters. The genbank file contains a part of the *Streptomyces coelicolor* genome sequence.
 >
 
 > ### :question: Questions

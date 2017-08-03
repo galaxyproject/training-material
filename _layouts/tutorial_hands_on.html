@@ -22,7 +22,7 @@ layout: base
               <span class="icon-bar"></span>
             </button>
             <a id="site-title" class="navbar-brand" href="https://wiki.galaxyproject.org/Teach/GTN">
-              <img class="pull-left img-responsive" src="{{ site.url }}/{{ site.logo }}">
+              <img class="pull-left img-responsive" alt="Galaxy Training Network" src="{{ site.url }}/{{ site.logo }}">
             </a>
             <a id="site-title" class="navbar-brand name-holder" href="{{ site.url }}/topics/{{ topic.name }}/tutorials/{{ tutorial.name }}/tutorial.html">
               {{ tutorial.title }}
@@ -35,8 +35,8 @@ layout: base
               <li><a href="{{ site.url }}" title="Back to front page"><i class="fa fa-home"></i> Home</a></li>
               <li><a href="{{ site.url }}/topics/{{ topic.name }}" title="Go back to list of tutorials"><i class="fa fa-file-text-o"></i> {{ topic.title }}</a></li>
 
-              {% if tutorial.slides != "" %}
-                <li><a href="{{ site.url }}/topics/{{ topic.name }}/slides" title="Slides for this tutorial"><i class="fa fa-graduation-cap"></i> Introduction slides</a></li>
+              {% if tutorial.slides == "yes" %}
+                <li><a href="{{ site.url }}/topics/{{ topic.name }}/tutorials/{{ tutorial.name }}/slides" title="Slides for this tutorial"><i class="fa fa-graduation-cap"></i> Introduction slides</a></li>
               {% endif %}
               <!--<li><a href="{{ site.url }}/{{ topic.name }}/slides/{{ tutorial.name }}/"><i class="fa fa-file-powerpoint-o"></i> Associated slides</a></li>-->
 
@@ -97,7 +97,7 @@ layout: base
           {% for requirement in tutorial.requirements %}
             <li>
                 {% if requirement.type == "internal" %}
-                <a href="{{ site.url }}{{ requirement.link }}">{{ requirement.title }}</a>
+                <a href="{{ site.url }}/topics/{{ requirement.link }}">{{ requirement.title }}</a>
                 {% elsif requirement.type == "external" %}
                 <a href="{{ requirement.link }}">{{ requirement.title }}</a>
                 {% endif %}
