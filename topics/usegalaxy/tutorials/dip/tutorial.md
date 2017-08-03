@@ -40,7 +40,7 @@ Today we hear a lot about personalized medicine. Yet the *personalization* is de
 
 # Calling variants
 
-Variant calling is a complex field that was significantly propelled by advances in DNA sequencing and efforts of large scientific consortia such as the [1000 Genomes](https://www.1000genomes.org). Here we summarize basic ideas central to Genotype and Variant calling. First, let's contrast the two things although they often go together:
+Variant calling is a complex field that was significantly propelled by advances in DNA sequencing and efforts of large scientific consortia such as the [1000 Genomes](http://www.1000genomes.org). Here we summarize basic ideas central to Genotype and Variant calling. First, let's contrast the two things although they often go together:
 
  * **Variant calling** - identification of positions where the sequenced sample is different from the reference sequence (or [reference genome graph](https://github.com/vgteam/vg));
  * **Genotype calling** - identifying individual's genotype at variable sites.
@@ -200,7 +200,7 @@ Here is what to do to load the data:
 >
 >![](../../images/freebayes_gq.png)
 >
->Depending on how busy Galaxy is this may take a little bit of time (coffee break?). Eventially this will produce a dataset in [VCF](https://www.1000genomes.org/wiki/Analysis/variant-call-format) format containing 35 putative variants. Before we can continue we need to post-process this dataset by breaking compound variants into multiple independent variants with **VcfAllelicPrimitives** tool found within **NGS: VCF Manipulation** section. This is necessary for ensuring the smooth sailing through downstream analyses:
+>Depending on how busy Galaxy is this may take a little bit of time (coffee break?). Eventially this will produce a dataset in [VCF](http://www.1000genomes.org/wiki/Analysis/variant-call-format) format containing 35 putative variants. Before we can continue we need to post-process this dataset by breaking compound variants into multiple independent variants with **VcfAllelicPrimitives** tool found within **NGS: VCF Manipulation** section. This is necessary for ensuring the smooth sailing through downstream analyses:
 >
 {: .hands_on}
 
@@ -249,7 +249,7 @@ At this point we are ready to begin annotating variants using [SnpEff](http://sn
 
 ## Manipulating variation data with GEMINI
 
-Now that we have an annotated VCF file it is time to peek inside our variation data. [Aaron Quinlan](https://quinlanlab.org/), creator of [GEMINI](http://gemini.readthedocs.org/en/latest/index.html), calls it *Detective work*.
+Now that we have an annotated VCF file it is time to peek inside our variation data. [Aaron Quinlan](http://quinlanlab.org/), creator of [GEMINI](http://gemini.readthedocs.org/en/latest/index.html), calls it *Detective work*.
 
 ### Loading data into GEMINI
 

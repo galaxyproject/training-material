@@ -1,13 +1,13 @@
 ---
 layout: tutorial_hands_on
 topic_name: chip-seq
-tutorial_name: TAL1-binding-site-identification
+tutorial_name: tal1-binding-site-identification
 ---
 
 # Introduction
 {:.no_toc}
 
-This tutorial uses ChIP-seq datasets from a study published by [Wu *et al.* (2014)](https://genome.cshlp.org/content/24/12/1945.full.pdf+html). The goal of this study was to investigate "the dynamics of occupancy and the role in gene regulation of the transcription factor TAL1, a critical regulator of hematopoiesis, at multiple stages of hematopoietic differentiation."
+This tutorial uses ChIP-seq datasets from a study published by [Wu *et al.* (2014)](http://genome.cshlp.org/content/24/12/1945.full.pdf+html). The goal of this study was to investigate "the dynamics of occupancy and the role in gene regulation of the transcription factor TAL1, a critical regulator of hematopoiesis, at multiple stages of hematopoietic differentiation."
 
 To this end, ChIP-seq experiments were performed in multiple mouse cell types including G1E - a GATA-null immortalized cell line derived from targeted disruption of GATA-1 in mouse embryonic stem cells - and megakaryocytes.
 
@@ -40,7 +40,7 @@ Because of the long processing time for the large original files, we have downsa
 
 # Step 1: Quality control
 
-As for any NGS data analysis, ChIP-seq data must be quality controlled before being aligned to a reference genome. For more detailed information on NGS quality control, check out the tutorial [here](../../NGS-QC/tutorials/dive_into_qc.md).
+As for any NGS data analysis, ChIP-seq data must be quality controlled before being aligned to a reference genome. For more detailed information on NGS quality control, check out the tutorial [here]({{site.url}}/topics/sequence-analysis).
 
 > ### :pencil2: Hands-on: Quality control
 >
@@ -74,7 +74,7 @@ As for any NGS data analysis, ChIP-seq data must be quality controlled before be
 >    >    <li>A fasta file contains only the description of the sequence and the sequence itself. A fasta file does not contain any quality information.</li>
 >    >    </ol>
 >    >    </details>
->    {: .question} 
+>    {: .question}
 >   
 > 4. **FastQC** :wrench:: Run the tool **FastQC** on each FASTQ file to assess the quality of the raw data. An explanation of the results can be found on the [FastQC web page](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/).
 >
@@ -362,13 +362,13 @@ First, we will reformat the peak file before we send it to Trackster, and then w
 {: .hands_on}
 
 # Step 7.1: Inspection of peaks and aligned data with IGV
-We show here an alternative to Trackster, [IGV](http://software.broadinstitute.org/software/igv/). 
+We show here an alternative to Trackster, [IGV](http://software.broadinstitute.org/software/igv/).
 
 > ### :pencil2: Hands-on: IGV
 >
 > 1. Open IGV on your local computer.
 > 2. Click on each 'narrow peaks' result file from the MACS2 computations on 'display with IGV' --> 'local Mouse mm10'
-> 3. For more information about IGV see [here](https://galaxyproject.github.io/training-material//topics/introduction/tutorials/igv-introduction/tutorial.html)
+> 3. For more information about IGV see [here]({{site.url}}/topics/introduction/tutorials/igv-introduction/tutorial.html)
 
 # Step 8: Identifying unique and common TAL1 peaks between states
 

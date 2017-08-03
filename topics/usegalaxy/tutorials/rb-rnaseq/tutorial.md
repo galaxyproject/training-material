@@ -171,7 +171,7 @@ Based on these results [Cufflinks](https://cole-trapnell-lab.github.io/cufflinks
 >![](../../images/stringtie1.png)
 >
 >**StringTie workflow**<br>
->Image from [Pertea:2015](StringTie enables improved reconstruction of a transcriptome from RNA-seq reads)
+>Image from [Pertea:2015](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4643835/)
 
 In essence StringTie builds an alternative splice graph from overlapping reads in a given locus. In such a graph nodes correspond to exons (or, rather, contiguous regions of genome covered by reads; colored regions on the figure above), while edges are represented by reads connecting these exons. Next, it identifies a path within the splice graph that has the highest weight (largest number of reads on edges). Such path would correspond to an assembled transcript at this iteration of the algorithm. Because the edge weight is equal to the number of the reads StringTie estimates the coverage level for this transcript (see below) which can be used to estimate the transcript's abundance. Reads that are associated with the transcript that was just assembled are then removed and the graph is updated to perform the next iteration of the algorithm.
 
@@ -225,7 +225,7 @@ StringTie, which performs assembly and quantification simultaneously converts sp
 >![](../../images/stringtie2.png)
 >
 >**StringTie flow network**<br>
->Here each exon node from the splice graph is split into *in* and *out* nodes connected with an edge weighted by the number of reads corresponding to that exon. For example, the first exon is covered by seven reads and so the edge between 1-in and 1-out has a weight of 7. Expression level would correspond to the maximum flow through a path representing a given transcript. Image from [Pertea:2015](StringTie enables improved reconstruction of a transcriptome from RNA-seq reads)
+>Here each exon node from the splice graph is split into *in* and *out* nodes connected with an edge weighted by the number of reads corresponding to that exon. For example, the first exon is covered by seven reads and so the edge between 1-in and 1-out has a weight of 7. Expression level would correspond to the maximum flow through a path representing a given transcript. Image from [Pertea:2015](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4643835/)
 
 #### Expectation Maximization
 
@@ -317,7 +317,7 @@ Here is what to do to load the data:
 >
 >![](../../images/rnaseq_data_in_history.png)
 >
->Twelve datasets make a lot of clicking necessary. To avoid this annoyance we will combine them into two collections - **c1** and **c2** as shown in the video below. Also, see this [tutorial](collections.html) for yet another explanation of dataset collections.
+>Twelve datasets make a lot of clicking necessary. To avoid this annoyance we will combine them into two collections - **c1** and **c2** as shown in the video below. Also, see this [tutorial]({{site.url}}/topics/introduction/tutorials/processing-many-samples-at-once/tutorial.html) for yet another explanation of dataset collections.
 > <div class="embed-responsive embed-responsive-16by9"><iframe src="https://player.vimeo.com/video/163625221" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>
 >
 

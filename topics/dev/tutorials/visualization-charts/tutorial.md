@@ -160,7 +160,7 @@ This configures the plugin's name and a description which will appear on the *Ch
 
 ### 1.4 Adding a wrapper
 
-Now we will add a wrapper to connect *Charts* with the *PV-Viewer* plugin. The wrapper consists of a [*Backbone*](https://backbonejs.org) module written in *JavaScript*:
+Now we will add a wrapper to connect *Charts* with the *PV-Viewer* plugin. The wrapper consists of a [*Backbone*](http://backbonejs.org) module written in *JavaScript*:
  The wrapper receives an `options` dictionary with the following <b>four</b> components:
  - *charts*: The model of the current visualization with attributes, settings etc.
  - *process*: A [jQuery.Deferred()](https://api.jquery.com/jquery.deferred/) object to allow asynchronous data requests within the wrapper

@@ -9,8 +9,8 @@ tutorial_name: non-dip
 
 The majority of life on Earth is non-diploid and represented by prokaryotes, viruses and their derivatives such as our own mitochondria or plant's chloroplasts. In non-diploid systems allele frequencies can range anywhere between 0 and 100% and there could be multiple (not just two) alleles per locus. The main challenge associated with non-diploid variant calling is the difficulty in distinguishing between sequencing noise (abundant in all NGS platforms) and true low frequency variants. Some of the early attempts to do this well have been accomplished on human mitochondrial DNA although the same approaches will work equally good on viral and bacterial genomes:
 
-* 2014 - [Maternal age effect and severe germ-line bottleneck in the inheritance of human mitochondrial DNA](https://www.pnas.org/content/111/43/15474.abstract)
-* 2015 - [Extensive tissue-related and allele-related mtDNA heteroplasmy suggests positive selection for somatic mutations](https://www.pnas.org/content/112/8/2491.abstract).
+* 2014 - [Maternal age effect and severe germ-line bottleneck in the inheritance of human mitochondrial DNA](http://www.pnas.org/content/111/43/15474.abstract)
+* 2015 - [Extensive tissue-related and allele-related mtDNA heteroplasmy suggests positive selection for somatic mutations](http://www.pnas.org/content/112/8/2491.abstract).
 
 As an example of non-diploid system we will be using human mitochondrial genome as an example. However, this approach will also work for most bacterial and viral genomes as well.
 
@@ -32,7 +32,7 @@ The goal of this example is to detect heteroplasmies (variants within mitochondr
 
 # Importing example datasets
 
-For this tutorial we have prepared a subset of data previously [published](https://www.pnas.org/content/111/43/15474.abstract) by our group. Let's import these data into Galaxy.
+For this tutorial we have prepared a subset of data previously [published](http://www.pnas.org/content/111/43/15474.abstract) by our group. Let's import these data into Galaxy.
 
 > ### Data upload from a Galaxy Library
 >
@@ -363,7 +363,7 @@ chrM	8557	.	G	C	2590.97	.	AB=0.267066;ABP=790.051;AC=2;AF=0.5;AN=4;AO=446;CIGAR=
 ```
 # Looking at the data
 
-For visalizaning VCFs Galaxy relies on the two external tools.  The first is called [VCF.IOBIO](https://vcf.iobio.io/) and is developed by [Gabor Marth's group](http://marthlab.org/) at the University of Utah. The second is called [IGV](http://software.broadinstitute.org/software/igv/) developed by Broad Institute.  
+For visalizaning VCFs Galaxy relies on the two external tools.  The first is called [VCF.IOBIO](http://vcf.iobio.io/) and is developed by [Gabor Marth's group](http://marthlab.org/) at the University of Utah. The second is called [IGV](http://software.broadinstitute.org/software/igv/) developed by Broad Institute.  
 
 ## VCF.IOBIO
 
