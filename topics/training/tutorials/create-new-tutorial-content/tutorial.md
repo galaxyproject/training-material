@@ -165,7 +165,7 @@ On the top, there is some metadata:
 - `topic_name: training` with the name of the topic
 - `tutorial_name: create-new-tutorial` with the name of tutorial
 
-These metadata are there to help the templating system to make the connection between the file and the global [metadata]({{site.url}}topics/training/tutorials/create-new-tutorial-metadata/tutorial.html).
+These metadata are there to help the templating system to make the connection between the file and the global [metadata]({{site.url}}/topics/training/tutorials/create-new-tutorial-metadata/tutorial.html).
 If they are not correctly defined the tutorial can not be found on the website.
 
 > ### :pencil2: Hands-on: Fix the top metadata

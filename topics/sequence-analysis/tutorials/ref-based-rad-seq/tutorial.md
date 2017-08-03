@@ -11,7 +11,7 @@ In the study of [Hohenlohe *et al.* 2010](http://journals.plos.org/plosgenetics/
 
 ![](../../images/RAD4_Population_Genomics/Hohenlohe_et_al_2010.png)
 
-We here proposed to re-analyze these data at least until the population genomics statistics calculation step using STACKS pipeline. *Gasterosteus aculeatus* draft genome will be used here as reference genome. In a reference-based RAD-seq data analysis, the reads are aligned (or mapped) against a reference genome to constrain our analysis to focus on already discovered loci. A de-novo approach can also be conducted (see [de_novo tutorial]({{site.url}}topics/sequence-analysis/tutorials/de-novo-rad-seq/tutorial.html), enhancing discoverability of new loci of interest but also of false positive one).
+We here proposed to re-analyze these data at least until the population genomics statistics calculation step using STACKS pipeline. *Gasterosteus aculeatus* draft genome will be used here as reference genome. In a reference-based RAD-seq data analysis, the reads are aligned (or mapped) against a reference genome to constrain our analysis to focus on already discovered loci. A de-novo approach can also be conducted (see [de_novo tutorial]({{site.url}}/topics/sequence-analysis/tutorials/de-novo-rad-seq/tutorial.html), enhancing discoverability of new loci of interest but also of false positive one).
 
 
 > ### Agenda
@@ -143,7 +143,7 @@ The demultiplexed sequences are raw sequences from the sequencing machine, witho
 
 ## Quality control
 
-For quality control, we use similar tools as described in [NGS-QC tutorial]({{site.url}}topics/sequence-analysis/): [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/).
+For quality control, we use similar tools as described in [NGS-QC tutorial]({{site.url}}/topics/sequence-analysis/): [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/).
 
 > ### :pencil2: Hands-on: Quality control
 >
@@ -169,7 +169,7 @@ To make sense of the reads, their positions within *Gasterosteus aculeatus* geno
 
 > ### :nut_and_bolt: Comment
 >
-> Do you want to learn more about the principles behind mapping? Follow our [training]({{site.url}}topics/sequence-analysis/)
+> Do you want to learn more about the principles behind mapping? Follow our [training]({{site.url}}/topics/sequence-analysis/)
 
 Here we will use BWA. BWA is a fast light-weighted tool that aligns relatively short sequences (queries) to a sequence database (large), such as the human reference genome. It is developed by Heng Li at the Sanger Insitute.
 
