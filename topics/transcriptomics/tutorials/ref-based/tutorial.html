@@ -189,7 +189,7 @@
   <ol>
     <li>Create a new history for this RNA-seq exercise</li>
     <li>
-      <p>Import a FASTQ file pair (<em>e.g.</em>  <code class="highlighter-rouge">GSM461177_untreat_paired_chr4_R1.fastq</code> and <code class="highlighter-rouge">GSM461177_untreat_paired_chr4_R2.fastq</code>) from <a href="https://dx.doi.org/10.5281/zenodo.290221">Zenodo</a></p>
+      <p>Import a FASTQ file pair (<em>e.g.</em>  <code class="highlighter-rouge">GSM461177_untreat_paired_chr4_R1.fastq</code> and <code class="highlighter-rouge">GSM461177_untreat_paired_chr4_R2.fastq</code>) from <a href="https://dx.doi.org/10.5281/zenodo.290221">Zenodo</a></p>
 
       <blockquote class="tip">
         <h3 id="bulb-tip-importing-data-via-links">
@@ -207,8 +207,8 @@
       </blockquote>
 
       <blockquote class="tip">
-        <h3 id="bulb-tip-changing-the-file-type-fastq-to-fastqsanger-once-the-data-file-is-in-your-history">
-<img class="emoji" title=":bulb:" alt=":bulb:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f4a1.png" height="20" width="20" align="absmiddle"> Tip: Changing the file type <code class="highlighter-rouge">fastq</code> to <code class="highlighter-rouge">fastqsanger</code> once the data file is in your history</h3>
+        <h3 id="bulb-tip-changing-the-file-type-from-fastq-to-fastqsanger-once-the-data-file-is-in-your-history">
+<img class="emoji" title=":bulb:" alt=":bulb:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f4a1.png" height="20" width="20" align="absmiddle"> Tip: Changing the file type from <code class="highlighter-rouge">fastq</code> to <code class="highlighter-rouge">fastqsanger</code> once the data file is in your history</h3>
 
         <ul>
           <li>Click on the pencil button displayed in your dataset in the history</li>
@@ -220,7 +220,7 @@
         </ul>
       </blockquote>
 
-      <p>As default, Galaxy takes the link as name. It also do not link the dataset to a database or a reference genome.</p>
+      <p>As default, Galaxy uses the link as the name of the new dataset. It also does not link the dataset to a database or a reference genome.</p>
 
       <blockquote class="comment">
         <h3 id="nut_and_bolt-comments">
@@ -256,13 +256,13 @@
         <ol>
           <li>What is the read length?</li>
           <li>
-            <p>Is there anything what you find striking when you compare both reports?</p>
+            <p>Is there anything that you find striking when you compare the two reports?</p>
 
             <details>
 <summary>Click to view answers</summary>
 <ol type="1">
 <li>The read length is 37 bp</li>
-<li>Both reports for GSM461177_untreat_paired_chr4_R1 and for GSM461177_untreat_paired_chr4_R2 are quite ok. For GSM461177_untreat_paired_chr4_R1, there is several warnings and an issue on the Kmer content. For GSM461177_untreat_paired_chr4_R2, the quality in the 2nd tile is bad (maybe because of some event during sequencing). We need to be careful for the quality treatment and to do it with paired-end information</li>
+<li>Both reports for GSM461177_untreat_paired_chr4_R1 and for GSM461177_untreat_paired_chr4_R2 are quite ok. For GSM461177_untreat_paired_chr4_R1, there are several warnings and an issue with the Kmer content. For GSM461177_untreat_paired_chr4_R2, the quality in the 2nd tile is bad (maybe because of an issue during sequencing). We need to be careful for the quality treatment and to do it with paired-end information</li>
 </ol>
 </details>
           </li>
@@ -292,15 +292,15 @@ Trim Galore can remove sequences if they become too short during the trimming pr
 <img class="emoji" title=":question:" alt=":question:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2753.png" height="20" width="20" align="absmiddle"> Questions</h3>
 
         <ol>
-          <li>How are the changes in the read length?</li>
+          <li>How did trimming affect the read lengths?</li>
           <li>
-            <p>Is there any characteristics impacted by Trim Galore?</p>
+            <p>Are there other reported characteristics impacted by Trim Galore?</p>
 
             <details>
 <summary>Click to view answers</summary>
 <ol type="1">
-<li>The read length is then now from 20 to 37 bp</li>
-<li>For GSM461177_untreat_paired_chr4_R1, the per base sequence content is now red. For GSM461177_untreat_paired_chr4_R2, the per tile sequence quality is still bad but now also the per base sequence content and the Kmer Content.</li>
+<li>The read lengths are no longer uniform, but range now from 20 to 37 bp, *i.e.*, reads were trimmed to different extent.</li>
+<li>For GSM461177_untreat_paired_chr4_R1, the per base sequence content is now red. For GSM461177_untreat_paired_chr4_R2, the per tile sequence quality is still bad but in addition now the per base sequence content and the Kmer Content are deemed problematic.</li>
 </ol>
 </details>
           </li>
@@ -315,7 +315,7 @@ Trim Galore can remove sequences if they become too short during the trimming pr
 
 <h1 id="mapping">Mapping</h1>
 
-<p>To make sense of the reads, their positions within <em>Drosophila melanogaster</em> genome must be determined. This process is known as aligning or ‘mapping’ the reads to the reference genome.</p>
+<p>To make sense of the reads, their positions within the <em>Drosophila melanogaster</em> genome must be determined. This process is known as aligning or ‘mapping’ the reads to the reference genome.</p>
 
 <blockquote>
   <h3 id="nut_and_bolt-comment">
@@ -331,7 +331,7 @@ Trim Galore can remove sequences if they become too short during the trimming pr
   <li>Reads that cannot be mapped within an exon across their entire length because they span two or more exons</li>
 </ul>
 
-<p>Spliced mappers have been developed to efficiently map transcript-derived reads against genomes. <a href="https://ccb.jhu.edu/software/tophat/index.shtml">TopHat</a> was one of the first tools designed specifically to address this problem:</p>
+<p>Spliced mappers have been developed to efficiently map transcript-derived reads against genomes. <a href="https://ccb.jhu.edu/software/tophat/index.shtml">TopHat</a> was one of the first tools designed specifically to address these problems:</p>
 
 <ol>
   <li>Identification of potential exons using reads that do map to the genome</li>
@@ -343,7 +343,7 @@ Trim Galore can remove sequences if they become too short during the trimming pr
 
 <p>Here, we will use HISAT2, a successor to TopHat2 that is faster with low memory requirements.</p>
 
-<p>To run efficiently the mapping, HISAT2 needs to know on important parameters about the sequencing library: the library type.</p>
+<p>To conduct the mapping efficiently, HISAT2 needs to know one important parameter about the sequencing library: the library type.</p>
 
 <p>This information should usually come with your FASTQ files, ask your sequencing facility! If not, try to find them on the site where you downloaded the data or in the corresponding publication. Another option is to estimate these parameters with a <em>preliminary mapping</em> of a <em>downsampled</em> file and some analysis programs. Afterward, the actual mapping can be redone on the original files with the optimized parameters.</p>
 
@@ -357,11 +357,11 @@ Trim Galore can remove sequences if they become too short during the trimming pr
   <p>This step is not necessary if you don’t need to estimate the library type of your data.</p>
 </blockquote>
 
-<p>The library type corresponds to a protocol used to generate the data: which strand the RNA fragment is synthesized from.</p>
+<p>The library type is determined by the library preparation protocol which, in turn, determines which of the two strands of cDNA obtained from the input RNA through reverse transcription ultimately get sequenced.</p>
 
 <figure id="figure-2"><img src="../../images/strand_library_type.png" alt="Credit: Zhao Zhang" title="Credit: Zhao Zhang(http://onetipperday.sterding.com/2012/07/how-to-tell-which-library-type-to-use.html)"><figcaption><span class="figcaption-prefix">Figure 2:</span> Credit: Zhao Zhang(http://onetipperday.sterding.com/2012/07/how-to-tell-which-library-type-to-use.html)</figcaption></figure>
 
-<p>In the previous illustration, you could see that for example dUTP method is to only sequence the strand from the first strand synthesis (the original RNA strand is degradated due to the dUTP incorporated).</p>
+<p>In the previous illustration, you can see that in the dUTP method, for example, only the first cDNA strand, synthesized through reverse transcription of the original RNA, gets sequenced, while the second cDNA strand corresponding to the original RNA strand is degraded because of the dUTP incorporated into it.</p>
 
 <table>
   <thead>
@@ -394,7 +394,7 @@ Trim Galore can remove sequences if they become too short during the trimming pr
 
 <figure id="figure-3"><img src="../../images/library_type_mapping.png" alt="Type of library, depending also of the type of sequencing" title="Type of library, depending also of the type of sequencing"><figcaption><span class="figcaption-prefix">Figure 3:</span> Type of library, depending also of the type of sequencing</figcaption></figure>
 
-<p>The sequencer always read from 5’ to 3’. So, in First Strand case, all reads from the left-most end of RNA fragment (always from 5’ to 3’) are mapped to transcript-strand, and (for pair-end sequencing) reads from the right-most end are always mapped to the opposite strand.</p>
+<p>Sequencing proceeds from 5’ to 3’. So, in the First Strand case, all reads from the left-most end of an RNA fragment (always from 5’ to 3’) are mapped to the transcript-strand, and (for pair-end sequencing) reads from the right-most end are always mapped to the opposite strand.</p>
 
 <p>We can now try to determine the library type of our data.</p>
 
@@ -509,15 +509,15 @@ In a FastQ file, a read corresponds to 4 lines. So to conserve 200,000 reads, 80
 <img class="emoji" title=":question:" alt=":question:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2753.png" height="20" width="20" align="absmiddle"> Question</h3>
 
         <ol>
-          <li>Which fraction of the different type of library type?</li>
+          <li>Which fraction of the reads in the BAM file can be explained assuming which library type?</li>
           <li>
-            <p>Which library type do you chose? What is the correspondance in <strong>HISAT2</strong>?</p>
+            <p>Which library type do you choose? What is the corresponding term for this library type in <strong>HISAT2</strong>?</p>
 
             <details>
 <summary>Click to view answer</summary>
 <ol type="1">
 <li>Fraction of reads explained by "1++,1--,2+-,2-+": 0.0151 and Fraction of reads explained by "1+-,1-+,2++,2--": 0.9843</li>
-<li>The library type seems then to be First Strand.</li>
+<li>The library seems to be of the type "1+-,1-+,2++,2--", which is called First Strand (R/RF) type in HISAT2.</li>
 </ol>
 </details>
           </li>
@@ -545,7 +545,7 @@ In a FastQ file, a read corresponds to 4 lines. So to conserve 200,000 reads, 80
         <li>“Trimmed reads pair 2” (Trim Galore output) as “Reverse reads”</li>
         <li>“dm3” as reference genome</li>
         <li>Default values for other parameters except “Spliced alignment parameters”</li>
-        <li>“Specify strand-specific information” to the previously determined value</li>
+        <li>“Specify strand-specific information” set to the previously determined value</li>
         <li>
 <code class="highlighter-rouge">Drosophila_melanogaster.BDGP5.78.gtf</code> as “GTF file with known splice sites”</li>
       </ul>
@@ -562,7 +562,7 @@ In a FastQ file, a read corresponds to 4 lines. So to conserve 200,000 reads, 80
 
         <ol>
           <li>How many paired reads were mapped 1 time? And how many paired reads were mapped more than 1 time?</li>
-          <li>How many reads were mapped but without their mate pair?</li>
+          <li>How many reads were mapped but without their mate?</li>
           <li>
             <p>What is the overall alignment rate?</p>
 
@@ -590,12 +590,12 @@ In a FastQ file, a read corresponds to 4 lines. So to conserve 200,000 reads, 80
   <ol>
     <li>What is a BAM file?</li>
     <li>
-      <p>What does such file contain?</p>
+      <p>What does such a file contain?</p>
 
       <details>
 <summary>Click to view answer</summary>
 <ol type="1">
-<li>BAM file is the binary version of SAM file</li>
+<li>a BAM file is the binary version of a SAM file</li>
 <li>It contains information about the mapping: for each mapped read, the position on the reference genome, the mapping quality, ...</li>
 </ol>
 </details>
@@ -639,9 +639,9 @@ In a FastQ file, a read corresponds to 4 lines. So to conserve 200,000 reads, 80
 
 <h2 id="inspection-of-hisat2-results">Inspection of HISAT2 results</h2>
 
-<p>The BAM file contains information about where the reads are mapped on the reference genome. But it is binary file and with the information for more than 3 millions of reads, it makes it difficult to visualize it, to inspect how the reads are mapped on the reference genome.</p>
+<p>The BAM file contains information about where the reads are mapped on the reference genome. But it is a binary file and with the information for more than 3 million reads encoded in it, it is difficult to inspect and explore the file.</p>
 
-<p>There is</p>
+<p>A powerful tool to visualize the content of BAM files is the Integrative Genomics Viewer IGV.</p>
 
 <blockquote class="hands_on">
   <h3 id="pencil2-hands-on-inspection-of-hisat2-results">
@@ -655,25 +655,26 @@ In a FastQ file, a read corresponds to 4 lines. So to conserve 200,000 reads, 80
         <h3 id="nut_and_bolt-comment-3">
 <img class="emoji" title=":nut_and_bolt:" alt=":nut_and_bolt:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f529.png" height="20" width="20" align="absmiddle"> Comment</h3>
 
-        <p>Check <a href="https://software.broadinstitute.org/software/igv/AlignmentData">IGV documentation</a></p>
+        <p>Check the <a href="https://software.broadinstitute.org/software/igv/AlignmentData">IGV documentation</a></p>
       </blockquote>
 
       <blockquote class="question">
         <h3 id="question-question-3">
 <img class="emoji" title=":question:" alt=":question:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2753.png" height="20" width="20" align="absmiddle"> Question</h3>
 
+        <p>In the following screenshot,</p>
         <ol>
           <li>Which information does appear on the top in grey?</li>
           <li>
-            <p>What does the horizontal bar in the following screenshot represent?</p>
+            <p>What do the connecting lines between some of the aligned reads indicate?</p>
 
-            <figure id="figure-4"><img src="../../images/junction_igv_screenshot.png" alt="Screenshot of IGV on Chromosome 4" title="Screenshot of IGV on Chromosome 4"><figcaption><span class="figcaption-prefix">Figure 4:</span> Screenshot of IGV on Chromosome 4</figcaption></figure>
+            <figure id="figure-4"><img src="../../images/junction_igv_screenshot.png" alt="Screenshot of the IGV view on Chromosome 4" title="Screenshot of IGV on Chromosome 4"><figcaption><span class="figcaption-prefix">Figure 4:</span> Screenshot of IGV on Chromosome 4</figcaption></figure>
 
             <details>
 <summary>Click to view answers</summary>
 <ol type="1">
 <li>The coverage plot: the sum of mapped reads at each position</li>
-<li>They represent the junctions events (or splice sites): when reads are mapped over an intron</li>
+<li>They indicate junction events (or splice sites), *i.e.*, reads that are mapped across an intron</li>
 </ol>
 </details>
           </li>
@@ -681,7 +682,7 @@ In a FastQ file, a read corresponds to 4 lines. So to conserve 200,000 reads, 80
       </blockquote>
     </li>
     <li>
-      <p><strong>IGV</strong> <img class="emoji" title=":wrench:" alt=":wrench:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f527.png" height="20" width="20" align="absmiddle">: Unzoom to <code class="highlighter-rouge">chr4:560,000-600,000</code> and inspect the splice junctions using a <strong>Sashimi plot</strong></p>
+      <p><strong>IGV</strong> <img class="emoji" title=":wrench:" alt=":wrench:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f527.png" height="20" width="20" align="absmiddle">: Zoom to <code class="highlighter-rouge">chr4:560,000-600,000</code> and inspect the splice junctions using a <strong>Sashimi plot</strong></p>
 
       <blockquote class="tip">
         <h3 id="bulb-tip-creation-of-a-sashimi-plot">
@@ -701,16 +702,16 @@ In a FastQ file, a read corresponds to 4 lines. So to conserve 200,000 reads, 80
 
         <ol>
           <li>What does the vertical bar graph represent? And the numbered arcs?</li>
-          <li>What does the number means?</li>
+          <li>What do the numbers on the arcs mean?</li>
           <li>
-            <p>Why do we observe 4 different blue group of linked boxes on the bottom?</p>
+            <p>Why do we observe 4 different stacked groups of blue linked boxes at the bottom right?</p>
 
             <details>
 <summary>Click to view answers</summary>
 <ol type="1">
-<li>The coverage for each alignment track is plotted as a bar graph. Arcs representing splice junctions connecting exons</li>
-<li>Arcs display the number of reads split across the junction (junction depth). </li>
-<li>The 4 group of linked boxes on the bottom represent the 4 possible RNAs, changing because of different splicing events of the first intron.</li>
+<li>The coverage for each alignment track is plotted as a bar graph. Arcs represent observed splice junctions, *i.e.*, reads spanning introns</li>
+<li>The numbers refer to the number of these observed junction reads. </li>
+<li>The 4 groups of linked boxes on the bottom represent 4 transcripts from a single gene differing in the first exon.</li>
 </ol>
 </details>
           </li>
@@ -721,7 +722,7 @@ In a FastQ file, a read corresponds to 4 lines. So to conserve 200,000 reads, 80
         <h3 id="nut_and_bolt-comment-4">
 <img class="emoji" title=":nut_and_bolt:" alt=":nut_and_bolt:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f529.png" height="20" width="20" align="absmiddle"> Comment</h3>
 
-        <p>Check <a href="https://software.broadinstitute.org/software/igv/Sashimi">IGV documentation on Sashimi plots</a> to find some clues</p>
+        <p>Check the <a href="https://software.broadinstitute.org/software/igv/Sashimi">IGV documentation on Sashimi plots</a> to find some clues</p>
       </blockquote>
     </li>
   </ol>
@@ -750,7 +751,7 @@ In this tutorial, we will then analyze the differential gene expression, but als
 
 <p>To compare the expression of single genes between different conditions (<em>e.g.</em> with or without PS depletion), an first essential step is to quantify the number of reads per gene. <a href="https://www-huber.embl.de/users/anders/HTSeq/doc/count.html"><strong>HTSeq-count</strong></a> is one of the most popular tool for gene quantification.</p>
 
-<p>To quantify the number of reads mapped to a gene, an annotation of the gene position is needed. We already upload on Galaxy the <code class="highlighter-rouge">Drosophila_melanogaster.BDGP5.78.gtf</code> with the Ensembl gene annotation for <em>Drosophila melanogaster</em>.</p>
+<p>To quantify the number of reads mapped to a gene, an annotation of the gene position is needed. In a previous step, we have already uploaded the <code class="highlighter-rouge">Drosophila_melanogaster.BDGP5.78.gtf</code> with the Ensembl gene annotation for <em>Drosophila melanogaster</em> to Galaxy, which we can now make use of for this purpose.</p>
 
 <p>In principle, the counting of reads overlapping with genomic features is a fairly simple task. But there are some details that need to be decided, such how to handle multi-mapping reads. <strong>HTSeq-count</strong> offers 3 choices (“union”, “intersection_strict” and “intersection_nonempty”) to handle read mapping to multiple locations, reads overlapping introns, or reads that overlap more than one genomic feature:</p>
 
@@ -770,7 +771,7 @@ In this tutorial, we will then analyze the differential gene expression, but als
 <code class="highlighter-rouge">Drosophila_melanogaster.BDGP5.78.gtf</code> as “GFF file”</li>
         <li>The “Union” mode</li>
         <li>A “Minimum alignment quality” of 10</li>
-        <li>Appropriate value for “Stranded” option</li>
+        <li>Appropriate value for the “Stranded” option</li>
       </ul>
     </li>
     <li>
@@ -789,7 +790,7 @@ In this tutorial, we will then analyze the differential gene expression, but als
 <summary>Click to view answers</summary>
 <ol type="1">
 <li>The useful result file is a tabular file with two columns: the gene id and the number of reads mapped on the corresponding gene</li>
-<li>To display the most found feature, we need first to sort the output file with the feature and the number of reads found for these feature. We do that using Sort tool, on the second column and in descending order. And we found that FBgn0017545 is the feature with the most reads mapped on it with 4,030 reads.</li>
+<li>To display the most abundantly detected feature, we need to sort the output file with the features and the number of reads mapped to them. This can be done using the Sort tool on the second column and in descending order, which reveals that FBgn0017545 is the feature with the most reads (4,030) mapped on it.</li>
 </ol>
 </details>
           </li>
@@ -801,11 +802,11 @@ In this tutorial, we will then analyze the differential gene expression, but als
 
 <h2 id="analysis-of-the-differential-gene-expression-1">Analysis of the differential gene expression</h2>
 
-<p>In the previous section, we counted only reads that mapped to genes of chromosome 4 and for only one sample. To be able to identify differential gene expression induced by PS depletion, all datasets (3 treated and 4 untreated) must be analyzed with the similar procedure and for whole genome.</p>
+<p>In the previous section, we counted only reads that mapped to genes of chromosome 4 and for only one sample. To be able to identify differential gene expression induced by PS depletion, all datasets (3 treated and 4 untreated) must be analyzed following the same procedure and for the whole genome.</p>
 
-<p>For time and computer saving, we run the previous steps for you and obtain 7 count files, available on <a href="https://dx.doi.org/10.5281/zenodo.290221">Zenodo</a>.</p>
+<p>To save time, we have run the necessary steps for you and obtained 7 count files, available on <a href="https://dx.doi.org/10.5281/zenodo.290221">Zenodo</a>.</p>
 
-<p>These files contain for each gene of Drosophila the number of reads mapped to it. We could compare directly the files and then having the differential gene expression. But the number of sequenced reads mapped to a gene depends on:</p>
+<p>These files contain for each gene of Drosophila the number of reads mapped to it. We could compare the files directly and calculate the extent of differential gene expression, but the number of sequenced reads mapped to a gene depends on:</p>
 
 <ul>
   <li>Its own expression level</li>
@@ -814,24 +815,24 @@ In this tutorial, we will then analyze the differential gene expression, but als
   <li>The expression of all other genes within the sample</li>
 </ul>
 
-<p>Either for within or for inter-sample comparison, the gene counts need to be normalized. We can then use the Differential Gene Expression (DGE) analysis, whose two basic tasks are:</p>
+<p>Either for within- or for between-sample comparison, the gene counts need to be normalized. We can then use the Differential Gene Expression (DGE) analysis, whose two basic tasks are:</p>
 
 <ul>
   <li>Estimate the biological variance using the replicates for each condition</li>
   <li>Estimate the significance of expression differences between any two conditions</li>
 </ul>
 
-<p>This expression analysis is estimated from read counts and attempts are made to correct for variability in measurements using replicates that are absolutely essential accurate results. For your own analysis, we advice you to use at least 3, better 5 biological replicates per condition. You can have different number of replicates per condition.</p>
+<p>This expression analysis is estimated from read counts and attempts are made to correct for variability in measurements using replicates that are absolutely essential for accurate results. For your own analysis, we advice you to use at least 3, but preferably 5 biological replicates per condition. You can have different number of replicates per condition.</p>
 
-<p><a href="https://bioconductor.org/packages/release/bioc/html/DESeq2.html"><strong>DESeq2</strong></a> is a great tool for DGE analysis. It takes read counts produced by <strong>HTseq-count</strong>, combine them into a big table (with gene in the rows and samples in the columns) and applies size factor normalization:</p>
+<p><a href="https://bioconductor.org/packages/release/bioc/html/DESeq2.html"><strong>DESeq2</strong></a> is a great tool for DGE analysis. It takes read counts produced by <strong>HTseq-count</strong>, combines them into a big table (with genes in the rows and samples in the columns) and applies size factor normalization:</p>
 
 <ul>
   <li>Computation for each gene of the geometric mean of read counts across all samples</li>
   <li>Division of every gene count by the geometric mean</li>
-  <li>Use of the median of these ratios as sample’s size factor for normalization</li>
+  <li>Use of the median of these ratios as a sample’s size factor for normalization</li>
 </ul>
 
-<p>Multiple factors with several levels can then be incorporated in the analysis. With the normalization, we can then compare with statistical liability the gene expression of different levels of a factor.</p>
+<p>Multiple factors with several levels can then be incorporated in the analysis. After normalization we can compare, in a statistically reliable way, the response of the expression of any gene to the presence of different levels of a factor.</p>
 
 <p>In our example, we have samples with two varying factors that can explain differences in gene expression:</p>
 
@@ -840,13 +841,13 @@ In this tutorial, we will then analyze the differential gene expression, but als
   <li>Sequencing type (paired-end or single-end)</li>
 </ul>
 
-<p>Here treatment is the primary factor which we are interested in. The sequencing type is some further information that we know about the data that might effect the analysis. This particular multi-factor analysis allows us to assess the effect of the treatment taking also the sequencing type into account.</p>
+<p>Here treatment is the primary factor which we are interested in. The sequencing type is some further information that we know about the data that might affect the analysis. This particular multi-factor analysis allows us to assess the effect of the treatment, while taking the sequencing type into account, too.</p>
 
 <blockquote class="comment">
   <h3 id="nut_and_bolt-comment-6">
 <img class="emoji" title=":nut_and_bolt:" alt=":nut_and_bolt:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f529.png" height="20" width="20" align="absmiddle"> Comment</h3>
 
-  <p>We recommend you to add as many factors as you think that may affect the gene expression. It can be the sequencing type like here, but it can also be the manipulation (if different persons are involved in the library preparation), …</p>
+  <p>We recommend you to add as many factors as you think may affect gene expression in your experiment. It can be the sequencing type like here, but it can also be the manipulation (if different persons are involved in the library preparation), …</p>
 </blockquote>
 
 <blockquote class="hands_on">
@@ -857,10 +858,8 @@ In this tutorial, we will then analyze the differential gene expression, but als
     <li>Create a new history</li>
     <li>Import the seven count files from <a href="https://dx.doi.org/10.5281/zenodo.290221">Zenodo</a>
       <ul>
-        <li>
-<code class="highlighter-rouge">GSM461176_untreat_single.deseq.counts</code>
-   - <code class="highlighter-rouge">GSM461177_untreat_paired.deseq.counts</code>
-</li>
+        <li><code class="highlighter-rouge">GSM461176_untreat_single.deseq.counts</code></li>
+        <li><code class="highlighter-rouge">GSM461177_untreat_paired.deseq.counts</code></li>
         <li><code class="highlighter-rouge">GSM461178_untreat_paired.deseq.counts</code></li>
         <li><code class="highlighter-rouge">GSM461179_treat_single.deseq.counts</code></li>
         <li><code class="highlighter-rouge">GSM461180_treat_paired.deseq.counts</code></li>
@@ -904,7 +903,7 @@ In this tutorial, we will then analyze the differential gene expression, but als
   <li>
     <p>Logarithm (to basis 2) of the fold change</p>
 
-    <p>The log2 fold changes are based on primary factor level 1 vs. factor level 2. The order of factor levels is then important. For example, for the factor ‘Treatment’, DESeq2 computes fold changes of ‘treated’ samples against ‘untreated’, <em>i.e.</em> the values correspond to up- or downregulations of genes in treated samples.</p>
+    <p>The log2 fold changes are based on primary factor level 1 vs. factor level 2, hence the order of factor levels is important. For example, for the factor ‘Treatment’, DESeq2 computes fold changes of ‘treated’ samples against ‘untreated’, <em>i.e.</em> the values correspond to up- or downregulation of genes in treated samples.</p>
   </li>
   <li>Standard error estimate for the log2 fold change estimate</li>
   <li>
@@ -1084,13 +1083,13 @@ For the up-regulated genes, the first cluster is more composed of functions rela
 
 <h1 id="inference-of-the-differential-exon-usage">Inference of the differential exon usage</h1>
 
-<p>Now, we would like to know the differential exon usage between treated (PS depleted) and untreated samples using RNA-seq exon counts. We will rework on the mapping results we generated previously.</p>
+<p>Next, we would like to know the differential exon usage between treated (PS depleted) and untreated samples using RNA-seq exon counts. We will rework on the mapping results we generated previously.</p>
 
-<p>We will use <a href="https://www.bioconductor.org/packages/release/bioc/html/DEXSeq.html">DEXSeq</a>. DEXSeq detects high sensitivity genes, and in many cases exons, that are subject to differential exon usage. But first, as for the differential gene expression, we need to count the number of reads mapping the exons.</p>
+<p>We will use <a href="https://www.bioconductor.org/packages/release/bioc/html/DEXSeq.html">DEXSeq</a>. DEXSeq detects high sensitivity genes, and in many cases exons, that are subject to differential exon usage. But first, as for the differential gene expression, we need to count the number of reads mapping to the exons.</p>
 
 <h2 id="count-the-number-of-reads-per-exon">Count the number of reads per exon</h2>
 
-<p>This step is similar to the step of <a href="#count-the-number-of-reads-per-annotated-gene">counting the number of reads per annotated gene</a>. Here instead of HTSeq-count, we are using DEXSeq-Count.</p>
+<p>This step is similar to the step of <a href="#count-the-number-of-reads-per-annotated-gene">counting the number of reads per annotated gene</a> except that, instead of HTSeq-count, we are using DEXSeq-Count.</p>
 
 <blockquote class="hands_on">
   <h3 id="pencil2-hands-on-counting-the-number-of-reads-per-exon">
@@ -1119,11 +1118,11 @@ For the up-regulated genes, the first cluster is more composed of functions rela
         <h3 id="question-question-8">
 <img class="emoji" title=":question:" alt=":question:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2753.png" height="20" width="20" align="absmiddle"> Question</h3>
 
-        <p>Which exon has the most read mapped on it? From which gene has this exon beed extracted? Is it similar to the previous result with HTSeq-count?</p>
+        <p>Which exon has the most reads mapped to it? From which gene has this exon been extracted? Is there a connection to the previous result obtained with HTSeq-count?</p>
 
         <details>
 <summary>Click to view answers</summary>
-FBgn0017545:004 is the exon with the most read mapped on it. It is part of FBgn0017545, the feature with the most reads mapped with HTSeq-count
+FBgn0017545:004 is the exon with the most reads mapped to it. It is part of FBgn0017545, the feature with the most reads mapped with HTSeq-count
 </details>
       </blockquote>
     </li>
@@ -1134,12 +1133,12 @@ FBgn0017545:004 is the exon with the most read mapped on it. It is part of FBgn0
 
 <p>DEXSeq usage is similar to DESeq2. It uses similar statistics to find differentially used exons.</p>
 
-<p>As for DESeq2, in the previous step, we counted only reads that mapped to exons on chromosome 4 and for only one sample. To be able to identify differential exon usage induced by PS depletion, all datasets (3 treated and 4 untreated) must be analyzed with the similar procedure. For time saving, we did that for you. The results are available on <a href="https://dx.doi.org/10.5281/zenodo.290221">Zenodo</a>:</p>
+<p>As for DESeq2, in the previous step, we counted only reads that mapped to exons on chromosome 4 and for only one sample. To be able to identify differential exon usage induced by PS depletion, all datasets (3 treated and 4 untreated) must be analyzed following the same procedure. To save time, we did that for you. The results are available on <a href="https://dx.doi.org/10.5281/zenodo.290221">Zenodo</a>:</p>
 
 <ul>
   <li>
-<a href="https://zenodo.org/record/290221/files/dexseq.gtf">dexseq.gtf</a>: the results of the running DEXSeq-count in ‘Prepare annotation’ mode</li>
-  <li>Seven files, counts files generated in ‘Count reads’ mode</li>
+<a href="https://zenodo.org/record/290221/files/dexseq.gtf">dexseq.gtf</a>: the results of running DEXSeq-count in ‘Prepare annotation’ mode</li>
+  <li>Seven count files generated in ‘Count reads’ mode</li>
 </ul>
 
 <blockquote class="hands_on">
@@ -1150,10 +1149,8 @@ FBgn0017545:004 is the exon with the most read mapped on it. It is part of FBgn0
     <li>Create a new history</li>
     <li>Import the seven count files and the dexseq.gtf from <a href="https://dx.doi.org/10.5281/zenodo.290221">Zenodo</a>
       <ul>
-        <li>
-<code class="highlighter-rouge">dexseq.gtf</code>
-   - <code class="highlighter-rouge">GSM461176_untreat_single.dexseq.counts</code>
-</li>
+        <li><code class="highlighter-rouge">dexseq.gtf</code></li>
+        <li><code class="highlighter-rouge">GSM461176_untreat_single.dexseq.counts</code></li>
         <li><code class="highlighter-rouge">GSM461177_untreat_paired.dexseq.counts</code></li>
         <li><code class="highlighter-rouge">GSM461178_untreat_paired.dexseq.counts</code></li>
         <li><code class="highlighter-rouge">GSM461179_treat_single.dexseq.counts</code></li>
@@ -1204,13 +1201,13 @@ FBgn0017545:004 is the exon with the most read mapped on it. It is part of FBgn0
 
   <ol>
     <li>
-      <p><strong>Filter</strong> <img class="emoji" title=":wrench:" alt=":wrench:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f527.png" height="20" width="20" align="absmiddle">: Run <strong>Filter</strong> to extract exons with a significant usage (adjusted <em>p</em>-value equal or below 0.05) between treated and untreated samples</p>
+      <p><strong>Filter</strong> <img class="emoji" title=":wrench:" alt=":wrench:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f527.png" height="20" width="20" align="absmiddle">: Run <strong>Filter</strong> to extract exons with a significant differential usage (adjusted <em>p</em>-value equal or below 0.05) between treated and untreated samples</p>
 
       <blockquote class="question">
         <h3 id="question-question-9">
 <img class="emoji" title=":question:" alt=":question:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2753.png" height="20" width="20" align="absmiddle"> Question</h3>
 
-        <p>How many exons have a significant change in usage between these conditions?</p>
+        <p>How many exons show a significant change in usage between these conditions?</p>
 
         <details>
 <summary>Click to view answers</summary>
@@ -1237,9 +1234,9 @@ We get 38 exons (12.38%) with a significant usage change between treated and unt
 
 <h1 class="no_toc" id="conclusion">Conclusion</h1>
 
-<p>In this tutorial, we have analyzed real RNA sequencing data to extract useful information, such as which genes are up- or downregulated by depletion of the Pasilla gene and which genes are regulated by the Pasilla gene. To answer these questions, we analyzed RNA sequence datasets using a reference-based RNA-seq data analysis approach. This approach can be sum up with the following scheme:</p>
+<p>In this tutorial, we have analyzed real RNA sequencing data to extract useful information, such as which genes are up- or downregulated by depletion of the Pasilla gene and which genes are regulated by the Pasilla gene. To answer these questions, we analyzed RNA sequence datasets using a reference-based RNA-seq data analysis approach. This approach can be summarized with the following scheme:</p>
 
-<figure id="figure-7"><img src="../../images/rna_quantification.png" alt="Summary of the used pipeline" title="Summary of the used pipeline"><figcaption><span class="figcaption-prefix">Figure 7:</span> Summary of the used pipeline</figcaption></figure>
+<figure id="figure-7"><img src="../../images/rna_quantification.png" alt="Summary of the analysis pipeline used" title="Summary of the analysis pipeline used"><figcaption><span class="figcaption-prefix">Figure 7:</span> Summary of the analysis pipeline used</figcaption></figure>
 
 
 
