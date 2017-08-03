@@ -148,7 +148,7 @@ Spliced mappers have been developed to efficiently map transcript-derived reads 
 
 Here, we will use HISAT2, a successor to TopHat2 that is faster with low memory requirements.
 
-To conduct the mapping efficiently, HISAT2 needs to know on important parameter about the sequencing library: the library type.
+To conduct the mapping efficiently, HISAT2 needs to know one important parameter about the sequencing library: the library type.
 
 This information should usually come with your FASTQ files, ask your sequencing facility! If not, try to find them on the site where you downloaded the data or in the corresponding publication. Another option is to estimate these parameters with a *preliminary mapping* of a *downsampled* file and some analysis programs. Afterward, the actual mapping can be redone on the original files with the optimized parameters.
 
@@ -421,7 +421,7 @@ The recommended mode is "union", which counts overlaps even if a read only share
 >    >    <summary>Click to view answers</summary>
 >    >    <ol type="1">
 >    >    <li>The useful result file is a tabular file with two columns: the gene id and the number of reads mapped on the corresponding gene</li>
->    >    <li>To display the most abundantly detected feature, we need to sort the output file with the features and the number of reads mapped to them. When do this using the Sort tool on the second column and in descending order, we find that FBgn0017545 is the feature with the most reads (4,030) mapped on it.</li>
+>    >    <li>To display the most abundantly detected feature, we need to sort the output file with the features and the number of reads mapped to them. This can be done using the Sort tool on the second column and in descending order, which reveals that FBgn0017545 is the feature with the most reads (4,030) mapped on it.</li>
 >    >    </ol>
 >    >    </details>
 >    {: .question}
