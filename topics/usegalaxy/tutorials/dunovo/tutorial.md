@@ -32,15 +32,10 @@ In the image above there are two alleles: green (A) and red (G). After PCR a fra
 
 The entire analysis described here is accessible as a [Galaxy history](https://usegalaxy.org/u/aun1/h/duplex-analysis-abl1) (by clicking on this link you can create your own copy and play with it).
 
->![History Item](https://galaxyproject.org/duplex/histItem.png)
->
->Each history item has a Rerun ![refresh](https://galaxyproject.org/tutorials/g101/fa-refresh.png) button. Clicking this button will show you how this tool was run with all parameters filled in exactly.
-
 This analysis (and consequently the Galaxy's history) can be divided into three parts
  1. Consensus generation from initial sequencing reads;
  2. Analysis of Duplex Consensus Sequences (DCS);
  3. Analysis of Single Strand Consensus Sequences (SSCS):
-
 
 >![steps](../../images/steps.png)
 >
@@ -186,12 +181,12 @@ The analysis described above can be rerun using a workflow. Workflow combined al
 * _Du Novo_ analysis from reads (import from [here](https://usegalaxy.org/u/aun1/w/duplex-analysis-from-reads)). This workflow uses fastq reads as input. It should be used if you analyze data for first time.
 * _Du Novo_ analysis from aligned families (import from [here](https://usegalaxy.org/u/aun1/w/copy-of-duplex-analysis-from-reads)). This workflow starts with aligned families. It should be used for re-analysis of already generated DCS and SSCS data.
 
->[![](../../images/fromReads.png)](https://galaxyproject.org/duplex/fromReads.png)
+>[![](../../images/fromReads.png)](https://usegalaxy.org/u/aun1/w/duplex-analysis-from-reads)
 >
 >Starting from Reads
 
 
->[![](../../images/fromDCS.png)](https://galaxyproject.org/duplex/fromDCS.png)
+>[![](../../images/fromDCS.png)](https://usegalaxy.org/u/aun1/w/copy-of-duplex-analysis-from-reads)
 >
 >Starting from DCS/SSCS data
 
