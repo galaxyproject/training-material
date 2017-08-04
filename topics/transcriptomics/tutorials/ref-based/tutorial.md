@@ -251,6 +251,7 @@ We can now map all the RNA sequences on the *Drosophila melanogaster* genome usi
 >    - "Trimmed reads pair 2" (Trim Galore output) as "Reverse reads"
 >    - "dm3" as reference genome
 >    - Default values for other parameters except "Spliced alignment parameters"
+>    - "Disable spliced alignment" to "False"
 >    - "Specify strand-specific information" set to the previously determined value
 >    - `Drosophila_melanogaster.BDGP5.78.gtf` as "GTF file with known splice sites"
 >
@@ -511,7 +512,7 @@ The first output of **DESeq2** is a tabular file. The columns are:
 
 > ### :pencil2: Hands-on: Analysis of the differential gene expression (2)
 >
-> 1. **Filter** :wrench:: Run **Filter** to extract genes with a significant change in gene expression (adjusted *p*-value equal or below 0.05) between treated and untreated samples
+> 1. **Filter** :wrench:: Run **Filter** to extract genes with a significant change in gene expression (adjusted *p*-value below 0.05) between treated and untreated samples
 >
 >    > ### :question: Question
 >    >
