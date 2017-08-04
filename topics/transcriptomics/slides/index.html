@@ -62,17 +62,25 @@ This material is the result of a collaborative work. Thanks the [Galaxy Training
 
 ---
 
-### RNA sequencing
+### RNA
 
-RNA
+![The structure of a eukaryotic protein-coding gene](../images/Gene_structure_eukaryote_2_annotated.png)
 
 - Transcribed form of the DNA
 - Active state of the DNA
 
-RNA sequencing
+.footnote[[Credit: Thomas Shafee](https://en.wikipedia.org/wiki/File:Gene_structure_eukaryote_2_annotated.svg)]
+
+---
+
+## RNA sequencing
+
+![Summary of RNA-Seq principle](../images/Summary_of_RNA-Seq.png)
 
 - RNA quantification at single base resolution
 - Cost efficient analysis of the whole transcriptome in a high-throughput manner
+
+.footnote[[Credit: Thomas Shafee (adapted)](https://commons.wikimedia.org/wiki/File:Summary_of_RNA-Seq.svg)]
 
 ---
 
@@ -80,7 +88,7 @@ RNA sequencing
 
 ![](../images/RNA_seq_zang2016.png)
 
-&lt;small&gt;[*Zang and Mortazavi, Nature, 2012*](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4138050/)&lt;/small&gt;
+.footnote[[*Zang and Mortazavi, Nature, 2012*](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4138050/)]
 
 ---
 
@@ -88,7 +96,7 @@ RNA sequencing
 
 ![](../images/korf_2013.jpg)
 
-&lt;small&gt;[*Korf, Nat Met, 2013*](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4461013/)&lt;/small&gt;
+.footnote[[*Korf, Nat Met, 2013*](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4461013/)]
 
 ---
 
@@ -106,40 +114,19 @@ RNA sequencing
 
 ---
 
-### FASTQ-files
-
-```bash
-@4:1:4888:1039:Y
-TGAACGCTGTTTCCAAGAAATGCTGGAAGAGGTCGATGGGTGTTATCTCTG
-+
-IIIHIIIIIIIIIIIIIIIIIIIIIIIIIH!CBCBBBB@=B@A?1@==&lt;@=
-```
-
-- 50+ million reads per data set (~15 GB data for one human fastq-file)
-- Unique identifier per read
-- Nucleotide sequence with single base resolution
-- Quality score for each base
-
----
-
 ### 2 main research applications for RNA-Seq
 
 - Transcript discovery
 
     &gt; *Which RNA molecules are in my sample?*
 
-    - Novel isoforms and alternative splicing
-    - Non-coding RNAs
-    - Single nucleotide variations
-    - Fusion genes
+    &gt; Novel isoforms and alternative splicing, Non-coding RNAs, Single nucleotide variations, Fusion genes
 
 - RNA quantification
 
     &gt; *What is the concentration of RNAs?*
 
-    - Absolute gene expression (within sample)
-    - Differential gene expression (between biological samples)
-    - Isoform expression / differential exon usage / alternative splicing
+    &gt; Absolute gene expression (within sample), Differential expression (between biological samples)
 
 ---
 
@@ -151,22 +138,20 @@ IIIHIIIIIIIIIIIIIIIIIIIIIIIIIH!CBCBBBB@=B@A?1@==&lt;@=
 
 ![](../images/pepke_2009.jpg)
 
-&lt;small&gt;[*Pepke et al, Nat Met, 2009*](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4077321/)&lt;/small&gt;
+.footnote[[*Pepke et al, Nat Met, 2009*](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4077321/)]
 
 ---
 
 ### Overview of the Data Processing
 
-![](../images/rna_quantification.png)
+![](../images/rna_seq_workflow.png)
 
 - No available standardized workflow
 - Multiple possible best practices for every dataset
 
 ---
 
-## Data Pre-processing
-
-.image-50[![](../images/rna_quantification_preprocessing.png)]
+### Data Pre-processing
 
 1. Adapter clipping to trim the sequencing adapters
 2. Quality trimming to remove wrongly called and low quality bases
@@ -175,32 +160,27 @@ IIIHIIIIIIIIIIIIIIIIIIIIIIIIIH!CBCBBBB@=B@A?1@==&lt;@=
 
 ---
 
-## Annotation of RNA-Seq reads
+### Annotation of RNA-Seq reads
 
-.image-75[![](../images/rna_quantification_annotation.png)]
+Simple mapping on a reference genome? More challenging
 
-How do I identify my reads?
+![](../images/RNA-Seq-alignment.png)
 
----
-
-### 3 main strategies for annotations
-
-![](../images/RNA_seq_conesa2016.png)
-
-&lt;small&gt;
-[*Conesa et al, Genome Biol, 2016*](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-016-0881-8)
-&lt;/small&gt;
+.footnote[[Credit: Rgocs](https://en.wikipedia.org/wiki/File:RNA-Seq-alignment.png)]
 
 ---
 
-### Sources of reference annotations
+### Annotation of RNA-Seq reads
 
-- Joint projects to produce and maintain annotations on selected organisms: EMBL-EBI, UCSC, RefSeq, Ensembl, ...
-- Annotations of known genes, repeats, ... in GTF file format
+3 main strategies for annotations
+
+- Transcriptome mapping
+- Genome mapping
+- *De novo* transcriptome assembly and annotation
 
 ---
 
-### Transcriptome alignment
+### Transcriptome mapping
 
 ![](../images/transcriptome_alignment.png)
 
@@ -213,7 +193,7 @@ How do I identify my reads?
 
 ---
 
-### Genome alignment
+### Genome mapping
 
 Splice-aware read alignment
 
@@ -225,38 +205,39 @@ Detection of novel genes and isoforms
 
 ---
 
+### Transcriptome and Genome mapping
+
+Needed
+
+- Reference genome/transcriptome in FASTA
+- Annotations of known genes, ... in GTF
+
+Where to find? 
+
+- Joint projects to produce and maintain annotations on selected organisms: EMBL-EBI, UCSC, RefSeq, Ensembl, ...
+
+---
+
 ### *De novo* transcriptome assembly
 
 No need for a reference genome ...
 
----
-
-## Quantification of transcript level
-
-![](../images/rna_quantification_quantification.png)
-
-What is the expression level of the genomic features?
+1. Assembly into transcripts
+2. Map reads back
 
 ---
 
-### Counting the number of reads per features
+### Quantification 
 
-Easy!!
+*What is the expression level of the genomic features?*
 
-But some challenges
-
-- How to handle multi-mapped reads (*i.e.* reads with multiple alignments)?
-- How to distinguish between different isoforms?
-    - At gene level?
-    - At transcript level?
-    - At exon level?
-
----
-
-
-## Differential Expression Analysis
-
-![](../images/rna_quantification.png)
+- Counting the number of reads per features: Easy!!
+- Challenges
+    - How to handle multi-mapped reads (*i.e.* reads with multiple alignments)?
+    - How to distinguish between different isoforms?
+        - At gene level?
+        - At transcript level?
+        - At exon level?
 
 ---
 
@@ -268,33 +249,20 @@ Account for variability of expression across biological replicates&lt;br&gt;with
 
 ---
 
-### Normalization
+### Differential Expression Analysis: Normalization
 
-Make the expression levels comparable across
+*Make the expression levels comparable across*
 
-- Features: genes, isoforms
-- Libraries: samples
+- By Features: genes, isoforms
+- By Samples
+- Methods
+    - [*FPKM/RPKM*](https://www.nature.com/nmeth/journal/v5/n7/abs/nmeth.1226.html) (Cufflinks/Cuffdiff)
+    - [*TMM*](https://genomebiology.biomedcentral.com/articles/10.1186/gb-2010-11-3-r25) (edgeR)
+    - [*DESeq2*](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-014-0550-8) (DESeq2)
 
----
-
-### Normalization methods
-
-- [*FPKM/RPKM*](https://www.nature.com/nmeth/journal/v5/n7/abs/nmeth.1226.html) (Cufflinks/Cuffdiff)
-- [*TMM*](https://genomebiology.biomedcentral.com/articles/10.1186/gb-2010-11-3-r25) (edgeR)
-- [*DESeq2*](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-014-0550-8) (DESeq2)
-
-    Normalize counts *k&lt;sub&gt;ij&lt;/sub&gt;* for gene *i* in library *j* by size factor *s&lt;sub&gt;j&lt;/sub&gt;*
+        Normalize counts *k&lt;sub&gt;ij&lt;/sub&gt;* for gene *i* in library *j* by size factor *s&lt;sub&gt;j&lt;/sub&gt;*
 
 .footnote[*&quot;Only the DESeq and TMM normalization methods are robust to the presence of different library sizes and widely different library compositions...&quot;* - Dillies et al., Brief Bioinf, 2013]
-
----
-
-### Analysis of Differential Gene Expression (DGE)
-
-Idea
-
-- Model the gene counts by negative binomial distribution
-- Account for variability of gene expression across biological replicates
 
 ---
 
@@ -302,7 +270,7 @@ Idea
 
 .image-50[![](../images/RNA_seq_numreplicates.png)]
 
-&lt;small&gt; [*Conesa et al, Genome Biol, 2016*](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-016-0881-8)&lt;/small&gt;
+.footnote[[*Conesa et al, Genome Biol, 2016*](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-016-0881-8)]
 
 **Recommendation: At least 3 biological replicates**
 
@@ -314,19 +282,9 @@ Idea
 
 ---
 
-### Detection of Alternative Splicing
-
-![](../images/RNA_seq_splicescheme.png)
-
-&lt;small&gt;
-[*Hooper, Hum. Genomics, 2014*](https://humgenomics.biomedcentral.com/articles/10.1186/1479-7364-8-3)
-&lt;/small&gt;
-
----
-
 ### Visualization
 
-- Integrative Genomics Viewer ([*IGV*](https://bib.oxfordjournals.org/content/14/2/178.full?keytype=ref&amp;%2520ijkey=qTgjFwbRBAzRZWC))
+- Integrative Genomics Viewer ([*IGV*](https://bib.oxfordjournals.org/content/14/2/178.full?keytype=ref&amp;%2520ijkey=qTgjFwbRBAzRZWC)) or Trackster
 
     Visualization of the aligned BAM files
 
@@ -337,17 +295,6 @@ Idea
 - [*CummeRbund*](http://compbio.mit.edu/cummeRbund/manual_2_0.html)
 
     Visualization package for Cufflinks high-throughput sequencing data
-
----
-
-### Where do I find data?
-
-- Sequencing data which you have prepared by yourself or you have obtained from your colleagues
-- Sequence Read Archive - [*SRA*](https://www.ncbi.nlm.nih.gov/sra)
-- Gene Expression Omnibus - [*GEO*](https://www.ncbi.nlm.nih.gov/geo/)
-- Ensembl - [*e!*](https://www.ensembl.org/info/website/tutorials/sequence.html)
-- The Cancer Genome Atlas - [*TCGA*](https://tcga-data.nci.nih.gov/docs/publications/tcga/?)
-- ... our tutorial
 
 
 ---
