@@ -139,9 +139,8 @@ substitution events) smaller than the length of a short-read sequencing alignmen
 
 > ### :pencil2: Hands-on: Generating FreeBayes calls
 >
-> 1. Select **FreeBayes** from **Phenotype Association** section of the tool menu (left
-> panel of Galaxy's interface)
-> 2. Run it:wrench::
+> 1. Select **FreeBayes** in the tool menu (left panel of Galaxy's interface)
+> 2. Run **FreeBayes**:wrench::
 >    1. Load reference genome from local cache
 >    2. Use `Human (Homo sapiens): hg19` as reference genome
 >    3. Choose other default settings
