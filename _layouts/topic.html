@@ -51,7 +51,7 @@ layout: base
                             <td>
                                 {% if material.slides == "yes" %}
                                 <a href="{{ site.url }}/{{ page.url }}/slides">
-                                    <i class="fa fa-slideshare" aria-hidden="true"></i>
+                                  {% icon slides %}
                                 </a>
                                 {% endif %}
                             </td>
@@ -63,15 +63,15 @@ layout: base
                             <td>
                                 {% if material.hands_on == "external" %}
                                 <a href="{{ material.hands_on_url }}">
-                                    <i class="fa fa-graduation-cap" aria-hidden="true"></i>
+                                  {% icon hands_on %}
                                 </a>
                                 {% elsif material.hands_on == "yes" %}
                                 <a href="{{ site.url }}{{ page.url }}tutorials/{{ material.name }}/tutorial.html">
-                                    <i class="fa fa-graduation-cap" aria-hidden="true"></i>
+                                  {% icon hands_on %}
                                 </a>
                                 {% elsif material.hands_on == "github" %}
                                 <a href="{{ site.github_repository }}/tree/master/topics/{{ topic.name }}/tutorials/{{ material.name }}/tutorial.md">
-                                    <i class="fa fa-graduation-cap" aria-hidden="true"></i>
+                                  {% icon hands_on %}
                                 </a>
                                 {% endif %}
                             </td>
@@ -79,7 +79,7 @@ layout: base
                             <td>
                                 {% if material.slides == "yes" %}
                                 <a href="{{ site.url }}{{ page.url }}tutorials/{{ material.name }}/slides.html">
-                                    <i class="fa fa-slideshare" aria-hidden="true"></i>
+                                  {% icon slides %}
                                 </a>
                                 {% endif %}
                             </td>
@@ -88,14 +88,14 @@ layout: base
                                 <td>
                                     {% if material.zenodo_link != "" %}
                                     <a href="{{ material.zenodo_link }}">
-                                        <i class="fa fa-files-o" aria-hidden="true"></i>
+                                      {% icon zenodo_link %}
                                     </a>
                                     {% endif %}
                                 </td>
                                 <td>
                                     {% if material.galaxy_tour != "" %}
                                     <a href="https://github.com/galaxyproject/galaxy-tours">
-                                        <i class="fa fa-magic" aria-hidden="true"></i>
+                                        {% icon interactive_tour %}
                                     </a>
                                     {% endif %}
                                 </td>

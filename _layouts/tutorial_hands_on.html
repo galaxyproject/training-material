@@ -24,14 +24,14 @@ layout: base
                 <ul class="navbar-nav">
                     <li class="nav-item">
                         <a class="nav-link" href="{{ site.url }}/topics/{{ topic.name }}" title="Go back to list of tutorials">
-                            <i class="fa fa-folder-o"></i> {{ topic.title }}
+                            {% icon topic %} {{ topic.title }}
                         </a>
                     </li>
 
                     {% if tutorial.slides != "" %}
                     <li class="nav-item">
                         <a class="nav-link" href="{{ site.url }}/topics/{{ topic.name }}/slides" title="Slides for this tutorial">
-                            <i class="fa fa-slideshare"></i> Introduction slides
+                            {% icon slides %} Introduction slides
                         </a>
                     </li>
                     {% endif %}
@@ -39,7 +39,7 @@ layout: base
                     {% if topic.docker_image %}
                     <li class="nav-item">
                         <a class="nav-link" href="{{ site.github_repository }}/tree/master/topics/{{ topic.name }}/docker" title="Docker image for this tutorial">
-                            <i class="fa fa-ship"></i> Docker image
+                            {% icon docker_image %} Docker image
                         </a>
                     </li>
                     {% endif %}
@@ -47,7 +47,7 @@ layout: base
                     {% if tutorial.tutorial_galaxy_instance %}
                     <li class="nav-item">
                         <a class="nav-link" href="{{ tutorial.tutorial_galaxy_instance }}" title="Galaxy instance for this tutorial">
-                            <i class="fa fa-external-link"></i> Galaxy instance
+                            {% icon galaxy_instance %} Galaxy instance
                         </a>
                     </li>
                     {% endif %}
@@ -55,7 +55,7 @@ layout: base
                     {% if tutorial.zenodo_link != "" %}
                     <li class="nav-item">
                         <a class="nav-link" href="{{ tutorial.zenodo_link }}" title="Links to data">
-                            <i class="fa fa-files-o"></i> Input Dataset
+                            {% icon zenodo_link %} Input Dataset
                         </a>
                     </li>
                     {% endif %}
@@ -63,20 +63,20 @@ layout: base
                     {% if tutorial.references != "" %}
                     <li class="nav-item">
                         <a class="nav-link" href="{{ site.url }}/topics/{{ topic.name }}#references" title="References">
-                            <i class="fa fa-book"></i> Literature
+                            {% icon references %} Literature
                         </a>
                     </li>
                     {% endif %}
 
                     <li class="nav-item">
                         <a class="nav-link" href="{{ site.gitter_url }}" title="Chat on gitter">
-                            <i class="fa fa-life-ring" aria-hidden="true"></i> Help
+                            {% icon gitter %} Help
                         </a>
                     </li>
 
                     <li class="nav-item">
                         <a class="nav-link" href="{{ site.github_repository }}/tree/master/topics/{{ topic.name }}/tutorials/{{ tutorial.name }}/tutorial.md">
-                            <i class="fa fa-github"></i> Edit
+                            {% icon github %} Edit
                         </a>
                     </li>
                 </ul>
