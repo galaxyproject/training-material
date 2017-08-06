@@ -15,7 +15,7 @@ Galaxy provides an interface such that it can communicate with other servers to 
 but the main point about this short section is:
 if you have a data source which you think is very important for your research with Galaxy let us know!
 
-:pencil2: ***Hands on!***
+{% icon hands_on %} ***Hands on!***
 
 1. Create a new history called "doRiNA"
 2. Go to Get Data::doRiNA search

@@ -53,7 +53,7 @@ to which we align are named `RNAME` in the BAM/SAM specification.
 
 The development of a Galaxy visualization takes place within the Galaxy codebase.
 
-> ### :pencil2: Hands-on: Data upload
+> ### {% icon hands_on %} Hands-on: Data upload
 >
 > 1. Clone an instance of Galaxy in a path, further referred to as `$GALAXY_ROOT`
 > 2. Explore the plugin directory as follows:
@@ -83,7 +83,7 @@ The development of a Galaxy visualization takes place within the Galaxy codebase
 To create a bridge between our not-yet-written plugin and Galaxy, we need to write a
 configuration in XML format.
 
-> ### :pencil2: Hands-on: Data upload
+> ### {% icon hands_on %} Hands-on: Data upload
 >
 > Create the file  `config/alignment_rname_boxplot.xml` with the following contents:
 >
@@ -222,7 +222,7 @@ the HTML page and also does HTML escaping by providing the ` | h`-flag (for secu
 
 Let's put this all together.
 
-> ### :pencil2: Hands-on: Data upload
+> ### {% icon hands_on %} Hands-on: Data upload
 >
 > 1. Create the mako file `templates/alignment_rname_boxplot.mako`
 > 2. Fill it with the following code:
@@ -278,7 +278,7 @@ Let's put this all together.
 >    
 >    If everything went well, our plugin has appeared as a visualization option for the dataset
 >
->    > ### :nut_and_bolt: Comments
+>    > ### {% icon comment %} Comments
 >    > You must be logged in to be able to use visualizations
 >    {: .comment}
 >
@@ -337,7 +337,7 @@ Converting the data is not the scope of the tutorial, so here we provide such a 
 The great thing about the mako system is that it does not require to restart galaxy in order to make
 functional changes to the mako files.
 
-> ### :pencil2: Hands-on: Data upload
+> ### {% icon hands_on %} Hands-on: Data upload
 >
 > 1. Change the mako file to the following:
 >    
@@ -542,7 +542,7 @@ All of those additional settings can be implemented for interactive behaviour,
 contributing to quicker understanding of the data which is generally not so convenient
 using static Galaxy tools.
 
-> ### :bulb: Tip: Static files
+> ### {% icon tip %} Tip: Static files
 >
 > In the example we included Javascript and CSS into the HTML website.
 > Remember that for every new invocation of the visualization the entire CSS en JS are copied

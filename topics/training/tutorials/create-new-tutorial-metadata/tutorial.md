@@ -62,7 +62,7 @@ The first file we will fill is the `metadata.yaml` file describing the metadata 
 
 This information is used to automatically make the tutorial available on the online website: [{{site.url}} ]({{site.url}})
 
-> ### :pencil2: Hands-on: Fill the basic metadata
+> ### {% icon hands_on %} Hands-on: Fill the basic metadata
 >
 > 1. Fill the basic metadata for our tutorial
 >   - `title: Similarity search with BLAST`
@@ -89,7 +89,7 @@ In the second part of the metadata, we define metadata related to the content of
 
 For this metadata, we take inspiration from what Software Carpentry is doing and particularly what they describe in their [Instructor training](https://swcarpentry.github.io/instructor-training/) and the section ["Lessons and Objectives"](https://swcarpentry.github.io/instructor-training/19-lessons/).
 
-> ### :pencil2: Hands-on: Fill the pedagogical metadata
+> ### {% icon hands_on %} Hands-on: Fill the pedagogical metadata
 >
 > 1. Define 2 questions that will be addressed during the tutorial and add them to the metadata
 > 2. Define 2 learning objectives for the tutorial and add them to the metadata

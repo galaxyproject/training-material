@@ -491,7 +491,7 @@ Time to really do it yourself. Please, complete the following exercise:
 >
 >Analyze these files using Galaxy as was explained in this lesson by mapping them against [this reference genome](https://www.bx.psu.edu/~anton/share/ng_test_data/bmmb554/hw4/phix.fa) (again right click to copy the address); see *Tips*).
 >
->    > ### :bulb: Tips
+>    > ### {% icon tip %} Tips
 >    >
 >    > - You need to upload reads and the reference genome into Galaxy (https://usegalaxy.org) as shown in [this video](https://vimeo.com/120973708)
 >    > - You will be mapping reads against an uploaded reference genome as shown in [this video](https://vimeo.com/123108417).

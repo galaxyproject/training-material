@@ -14,7 +14,7 @@ The figure below illustrates the mechanism of N-Tails. It was originally publish
 
 The N-Tails technique was originally designed to research protease biology and has most often been used in this field. It was originally published in [Kleifeld et al., Nat. Biotechnol., 2010](https://www.ncbi.nlm.nih.gov/pubmed/20208520).
 
-> ### :nut_and_bolt: Comment: Interpretation of N-Tails results
+> ### {% icon comment %} Comment: Interpretation of N-Tails results
 >
 > Be careful not to overinterprete the results of N-Tails experiments. While the technique **is** fit to identify direct protease substrates, it does not discriminate direct from indirect ("downstream") effects. Thus, most of the identified N-termini will **not** be direct protease substrates, even if their change in protein abundance is statistically significant.
 > This warning is not specific for the N-Tails technique, but applies as well to other proteomic N-terminal screening techniques (e.g. COFRADIC).
@@ -36,7 +36,7 @@ The workflow needs three input files:
 ## Customizing the Workflow
 
 - *Running the workflow on a non-prefractionated sample:* Simply use only one file as an input.
-- *Running the workflow on a double dimethyl labeling (only light and heavy labeling):* remove the third `MSGFPlusAdapter` :wrench: and the following `PeptideIndexer` :wrench: . Make sure that the mass changes are correctly given in the `MSGFPlusAdapter` :wrench: .
+- *Running the workflow on a double dimethyl labeling (only light and heavy labeling):* remove the third `MSGFPlusAdapter` {% icon tool %} and the following `PeptideIndexer` :wrench: . Make sure that the mass changes are correctly given in the `MSGFPlusAdapter` :wrench: .
 
 ## Citation
 

@@ -51,7 +51,7 @@ For the genome annotation we use a piece of the *Aspergillus fumigatus* [genome 
 
 First we want to get some general information about our sequence.
 
-> ### :pencil2: Hands-on: Sequence composition
+> ### {% icon hands_on %} Hands-on: Sequence composition
 >
 > 1. Count the number of bases in your sequence (**compute sequence length**)
 > 2. Check for sequence composition and GC content (**geecee**).
@@ -65,7 +65,7 @@ First we want to get some general information about our sequence.
 
 At first you need to identify those structures of the genome which code for proteins. This step of annotation is called “structural annotation”. It contains the identification and location of open reading frames (ORFs), identification of gene structures and coding regions, and the location of regulatory motifs. Galaxy contains several tools for the structural annotation. Tools for gene prediction are **Augustus** (for eukaryotes and prokaryotes) and **glimmer3** (only for prokaryotes).
 
-> ### :pencil2: Hands-on: Gene prediction
+> ### {% icon hands_on %} Hands-on: Gene prediction
 >
 > We use **Augustus** for gene prediction.
 > 1. Use the genome sequence (FASTA file) as input.
@@ -76,7 +76,7 @@ At first you need to identify those structures of the genome which code for prot
 >
 > Augustus will provide three output files: *gff3*, *coding sequences* (CDS) and *protein sequences*.
 >
->    > ### :question: Question
+>    > ### {% icon question %} Question
 >    >
 >    > How many genes are predicted?
 >    >
@@ -88,13 +88,13 @@ At first you need to identify those structures of the genome which code for prot
 >
 {: .hands_on}
 
-> ### :pencil2: Hands-on: tRNA and tmRNA Prediction
+> ### {% icon hands_on %} Hands-on: tRNA and tmRNA Prediction
 >
 > Use **Aragorn** for tRNA and tmRNA prediction.
 > 1. As input file use the *Aspergillus* genome sequence. You can choose the genetic code (e.g. bacteria).
 > 2. Select the topology of your genome (circular or linear).
 >
->    > ### :question: Question
+>    > ### {% icon question %} Question
 >    >
 >    > Are there tRNAs or tmRNAs in the sequence?
 >    >
@@ -105,7 +105,7 @@ At first you need to identify those structures of the genome which code for prot
 >
 {: .hands_on}
 
-> ### :bulb: Tip:
+> ### {% icon tip %} Tip:
 >
 > read more about **Aragorn** [here](https://nar.oxfordjournals.org/content/32/1/11.full.pdf+html).
 {: .tip}  
@@ -124,16 +124,16 @@ Functional gene annotation means the description of the biochemical and biologic
 
 For similarity searches we use *NCBI BLAST+ blastp* to find similar proteins in a protein database.
 
-> ### :pencil2: Hands-on:  Similarity search
+> ### {% icon hands_on %} Hands-on:  Similarity search
 >
-> 1. :wrench: As input file, select the protein sequences from Augustus.
+> 1. {% icon tool %} As input file, select the protein sequences from Augustus.
 > 2. Choose the protein BLAST database *SwissProt* and the output format *xml*.
 >
 > <img src="../../images/blastP.png" width="70%">
 >
 > 3. Parsing the xml output (**Parse blast XML output**) results in changing the format style into tabular.
 >
->    > ### :question: Questions
+>    > ### {% icon question %} Questions
 >    >
 >    > What information do you see in the BLAST output?
 >    >
@@ -144,9 +144,9 @@ For similarity searches we use *NCBI BLAST+ blastp* to find similar proteins in 
 >
 >
 > From BLAST search results we want to get only the best hit for each protein.
-> 4. :wrench: Therefore apply the tool **BLAST top hit descriptions** with *number of descriptions =1* on the xml output file.
+> 4. {% icon tool %} Therefore apply the tool **BLAST top hit descriptions** with *number of descriptions =1* on the xml output file.
 >
->    > ### :question: Question
+>    > ### {% icon question %} Question
 >    >
 >    > For how many proteins we do not get a BLAST hit?
 >    >
@@ -155,13 +155,13 @@ For similarity searches we use *NCBI BLAST+ blastp* to find similar proteins in 
 >    > </details>
 > {: .question}
 >
-> 5. :wrench: Choose the tool **Select lines that match an expression** and enter the following information: *Select lines from* [select the BLAST top hit descriptions result file]; *that* [not matching]; *the pattern* [gi].
+> 5. {% icon tool %} Choose the tool **Select lines that match an expression** and enter the following information: *Select lines from* [select the BLAST top hit descriptions result file]; *that* [not matching]; *the pattern* [gi].
 >
 > <img src="../../images/selectlines.png" width="50%">
 >
->    > :bulb: The result file will contain all proteins which do not have an entry in the second column and therefore have no similar protein in the SwissProt database.
+>    > {% icon tip %} The result file will contain all proteins which do not have an entry in the second column and therefore have no similar protein in the SwissProt database.
 >    >
->    > :bulb: For functional description of those proteins we want to search for motifs or domains which may classify them more. To get a protein sequence FASTA file with only the not annotated proteins, use the tool **Filter sequences by ID from a tabular file** and select for *Sequence file to filter on the identifiers* [Augustus protein sequences] and for *Tabular file containing sequence identifiers* the protein file with not annotated sequences. The output file is a FASTA file with only those sequences without description.
+>    > {% icon tip %} For functional description of those proteins we want to search for motifs or domains which may classify them more. To get a protein sequence FASTA file with only the not annotated proteins, use the tool **Filter sequences by ID from a tabular file** and select for *Sequence file to filter on the identifiers* [Augustus protein sequences] and for *Tabular file containing sequence identifiers* the protein file with not annotated sequences. The output file is a FASTA file with only those sequences without description.
 >
 {: .hands_on}
 
@@ -181,14 +181,14 @@ This file will be the input for more detailed analysis:
 
 ![BLAST databases](../../images/blast%20database.png)
 
-> ### :bulb: Tip:
+> ### {% icon tip %} Tip:
 >
 > If you have an organism which is not available in a BLAST database, you can use its genome sequence in FASTA file for BLAST searches "sequence file against sequence file". If you need to search in these sequences on a regularly basis, you can create a own BLAST database from the sequences of the organism. The advantage of having a own database for your organism is the duration of the BLAST search which speeds up a lot.
 {: .tip}
 
 **NCBI BLAST+ makeblastdb** creates a BLAST database from your own FASTA sequence file. Molecule type of input is protein or nucleotide.
 
-> ### :bulb: Tip: Further Reading about BLAST Tools in Galaxy
+> ### {% icon tip %} Tip: Further Reading about BLAST Tools in Galaxy
 >
 > Cock et al. (2015): [NCBI BLAST+ integrated into Galaxy](http://biorxiv.org/content/early/2015/05/04/014043.full-text.pdf+html)
 >
@@ -199,14 +199,14 @@ This file will be the input for more detailed analysis:
 
 * **VSEARCH**: For processing metagenomic sequences, including searching, clustering, chimera detection, dereplication, sorting, masking and shuffling. VSEARCH stands for vectorized search, as the tool takes advantage of parallelism in the form of SIMD vectorization as well as multiple threads to perform accurate alignments at high speed. VSEARCH uses an optimal global aligner (full dynamic programming Needleman-Wunsch), in contrast to USEARCH which by default uses a heuristic seed and extend aligner. This results in more accurate alignments and overall improved sensitivity (recall) with VSEARCH, especially for alignments with gaps.
 
-> ### :bulb: Tip:
+> ### {% icon tip %} Tip:
 >
 > Documentation for vsearch see [here](https://github.com/torognes/vsearch).
 {: .tip}
 
 * **Diamond**: Diamond is a high-throughput program for aligning a file of short reads against a protein reference database such as NR, at 20,000 times the speed of Blastx, with high sensitivity.
 
-> ### :bulb: Tip:
+> ### {% icon tip %} Tip:
 >
 > [Buchfink et al. (2015): Fast and sensitive protein alignment using Diamond.](https://www.nature.com/nmeth/journal/v12/n1/abs/nmeth.3176.html)
 {: .tip}
@@ -219,10 +219,10 @@ For identification of gene clusters, **antiSMASH** is used. The tool uses genban
 
 > ### antiSMASH analysis
 >
-> :wrench: Import this [dataset](../../input_data/Streptomyces_coelicolor_part.genbank) into your Galaxy history and run **antiSMASH** to detect gene clusters. The genbank file contains a part of the *Streptomyces coelicolor* genome sequence.
+> {% icon tool %} Import this [dataset](../../input_data/Streptomyces_coelicolor_part.genbank) into your Galaxy history and run **antiSMASH** to detect gene clusters. The genbank file contains a part of the *Streptomyces coelicolor* genome sequence.
 >
 
-> ### :question: Questions
+> ### {% icon question %} Questions
 >
 > Which gene clusters are identified?
 >

@@ -64,13 +64,13 @@ using 454 GS FLX Titanium. The original data are available at EBI Metagenomics u
 - Anguil soil: [SRR651839](https://www.ebi.ac.uk/metagenomics/projects/SRP016633/samples/SRS386929/runs/SRR651839/results/versions/2.0)
 
 
-> ### :pencil2: Hands-on: Data upload
+> ### {% icon hands_on %} Hands-on: Data upload
 >
 > 1. Import from [Zenodo]() or from the data library (in "Analyses of metagenomics data") the files
 >    - `SRR531818_pampa.fasta`
 >    - `SRR651839_anguil.fasta`
 >
->    > ### :bulb: Tip: Importing data via links
+>    > ### {% icon tip %} Tip: Importing data via links
 >    >
 >    > * Copy the link location
 >    > * Open the Galaxy Upload Manager
@@ -79,7 +79,7 @@ using 454 GS FLX Titanium. The original data are available at EBI Metagenomics u
 >    > * Press **Start**
 >    {: .tip}
 >
->    > ### :bulb: Tip: Importing data from a data library
+>    > ### {% icon tip %} Tip: Importing data from a data library
 >    >
 >    > * Go into "Shared data" (top panel) then "Data libraries"
 >    > * Click on "Training data" and then "Analyses of metagenomics data"
@@ -107,19 +107,19 @@ Project's QC results: https://www.ebi.ac.uk/metagenomics/projects/SRP016633/samp
 We will perform a multisample analysis with mothur, in order to do so, we will merge all reads into a single file,
 and create a *group file*, indicating which reads belong to which samples.
 
-> ### :pencil2: Hands-on: Prepare multisample analysis
+> ### {% icon hands_on %} Hands-on: Prepare multisample analysis
 >
-> 1. **Merge.files** :wrench: with the following parameters
+> 1. **Merge.files** {% icon tool %} with the following parameters
 >   - "Merge" to `fasta files`
 >   - "Inputs" to the two sample fasta files
 >
-> 2. **Make.group** :wrench: with the following parameters
+> 2. **Make.group** {% icon tool %} with the following parameters
 >   - "Method" to `Manually specify fasta files and group names`
 >   - "Additional": Add two elements to this repeat: Pampa sample fasta file, with group name `pampa` and Anguil sample fasta file, with group name `anguil`
 >
 {: .hands_on}
 
-> ### :bulb: Tip
+> ### {% icon tip %} Tip
 >
 > Because we only have a small number of samples, we used the manual specification. If you have hundreds of samples this would quickly become bothersome. The solution? use a collection! To read more about collections in Galaxy, please see [this]() tutorial
 {: .tip}
@@ -133,12 +133,12 @@ Because we are sequencing many of the same organisms, we anticipate that many of
 duplicates of each other. Because it's computationally wasteful to align the same thing a bazillion
 times, we'll unique our sequences using the `Unique.seqs` command:
 
-> ### :pencil2: Hands-on: Remove duplicate sequences
+> ### {% icon hands_on %} Hands-on: Remove duplicate sequences
 >
-> 1. **Unique.seqs** :wrench: with the following parameters
+> 1. **Unique.seqs** {% icon tool %} with the following parameters
 >   - "fasta" to the merged fasta file
 >
->    > ### :question: Question
+>    > ### {% icon question %} Question
 >    >
 >    > How many sequences were unique? How many duplicates were removed?
 >    >
@@ -163,9 +163,9 @@ read_name7    read_name8
 ...
 ```
 
-> ### :pencil2: Hands-on: Count sequences
+> ### {% icon hands_on %} Hands-on: Count sequences
 >
-> 1. **Count.seqs** :wrench: with the following parameters
+> 1. **Count.seqs** {% icon tool %} with the following parameters
 >   - "name" to the name file from `Unique.seqs`
 >   - "Use a group file" to `yes`
 >   - "group" to the group file from `Make.group`
@@ -178,7 +178,7 @@ The `Count.seqs` file keeps track of the number of sequences represented by each
 The first step in any analysis should be to check and improve the quality of our data.
 
 
-> ### :nut_and_bolt: Comment
+> ### {% icon comment %} Comment
 >
 > For more information on the topic of quality control, please see our training materials [here]({{site.url}}/topics/sequence-analysis/).
 {: .comment}
@@ -186,9 +186,9 @@ The first step in any analysis should be to check and improve the quality of our
 
 First, let's get a feel of our data:
 
-> ### :pencil2: Hands-on: Summarize data
+> ### {% icon hands_on %} Hands-on: Summarize data
 >
-> 1. **Summary.seqs** :wrench: with the following parameters
+> 1. **Summary.seqs** {% icon tool %} with the following parameters
 >   - "fasta" parameter to the fasta from `Unique.seqs`
 >   - "count" to count table from `Count.seqs`
 >
@@ -220,9 +220,9 @@ We can filter our dataset on length, base quality, and maximum homopolymer lengt
 
 The following tool will remove any sequences with ambiguous bases and anything longer than 275 bp.
 
-> ### :pencil2: Hands-on: Filter reads based on quality and length
+> ### {% icon hands_on %} Hands-on: Filter reads based on quality and length
 >
-> 1. **Screen.seqs** :wrench: with the following parameters
+> 1. **Screen.seqs** {% icon tool %} with the following parameters
 >   - "fasta" to the fasta file from `Unique.seqs`
 >   - "minlength" parameter to `225`
 >   - "maxlength" parameter to `275`
@@ -230,7 +230,7 @@ The following tool will remove any sequences with ambiguous bases and anything l
 >   - "maxhomop" parameter to `8`
 >   - "count" to the count file from `Count.seqs`
 >
-> > ### :question: Question
+> > ### {% icon question %} Question
 > >
 > > How many reads were removed in this screening step? (Hint: run the `Summary.seqs` tool again)
 > >
@@ -246,17 +246,17 @@ The following tool will remove any sequences with ambiguous bases and anything l
 
 Aligning our sequences to a reference helps improve OTU assignment [[Schloss et. al.](https://www.ncbi.nlm.nih.gov/pubmed/23018771)], so we will now align our sequences to the Silva reference database.
 
-> ### :pencil2: Hands-on: Align sequences
+> ### {% icon hands_on %} Hands-on: Align sequences
 >
 > 1. Import the `silva.v4.fasta` file in your history
-> 2. **Align.seqs** :wrench: with the following parameters
+> 2. **Align.seqs** {% icon tool %} with the following parameters
 >   - "fasta" to the `good.fasta` output from `Screen.seqs`
 >   - "reference" to the `silva.v4.fasta` reference file
 >   - "flip" to `Yes`
 >
 >    This step may take a few minutes, please be patient.
 >
-> 3. **Summary.seqs** :wrench: with the following parameters
+> 3. **Summary.seqs** {% icon tool %} with the following parameters
 >   - "fasta" parameter to the aligned output from `Align.seqs`
 >   - "count" parameter to count_table output from `Screen.seqs`
 >
@@ -278,7 +278,7 @@ Mean:   3080.6  13380   244.212 0   4.27946
 total # of seqs:    18178
 ```
 
-> ### :question: Questions
+> ### {% icon question %} Questions
 >
 > 1. How many sequences have been aligned?
 > 2. Between which positions most of the reads are aligned to this references?
@@ -295,15 +295,15 @@ This corresponds exactly to the V4 target region of the 16S gene.</li>
 
 To make sure that everything overlaps the same region we'll re-run `Screen.seqs` to get sequences that start at or before position 3,080 and end at or after position 13,424.
 
-> ### :pencil2: Hands-on: Remove poorly aligned sequences
+> ### {% icon hands_on %} Hands-on: Remove poorly aligned sequences
 >
-> 1. **Screen.seqs** :wrench: with the following parameters
+> 1. **Screen.seqs** {% icon tool %} with the following parameters
 >   - "fasta" to the aligned fasta file
 >   - "start" to `3080`
 >   - "end" to `13424`
 >   - "count" to the group file created by the previous run of `Screen.seqs`
 >
-> > ### :question: Question
+> > ### {% icon question %} Question
 > >
 > >  How many sequences were removed in this step?
 > > <details>
@@ -315,9 +315,9 @@ To make sure that everything overlaps the same region we'll re-run `Screen.seqs`
 
 Now we know our sequences overlap the same alignment coordinates, we want to make sure they *only* overlap that region. So we'll filter the sequences to remove the overhangs at both ends. In addition, there are many columns in the alignment that only contain gap characters (*i.e.* "."). These can be pulled out without losing any information. We'll do all this with `Filter.seqs`:
 
-> ### :pencil2: Hands-on: Filter sequences
+> ### {% icon hands_on %} Hands-on: Filter sequences
 >
-> 1. **Filter.seqs** :wrench: with the following parameters
+> 1. **Filter.seqs** {% icon tool %} with the following parameters
 >   - "fasta"" to `good.fasta` output from `Screen.seqs`
 >   - "vertical" to Yes
 >   - "trump" to `.`
@@ -345,14 +345,14 @@ The idea is to take the sequences and assign them to a taxon. To do that, we gro
 
 The first thing we want to do is to further de-noise our sequences, by pre-clustering the sequences using the `Pre.cluster` command, allowing for up to 2 differences between sequences. This command will split the sequences by group and then sort them by abundance and go from most abundant to least and identify sequences that differ no more than 2 nucleotides from on another. If this is the case, then they get merged. We generally recommend allowing 1 difference for every 100 basepairs of sequence:
 
-> ### :pencil2: Hands-on: Perform preliminary clustering of sequences and remove undesired sequences
+> ### {% icon hands_on %} Hands-on: Perform preliminary clustering of sequences and remove undesired sequences
 >
-> 1. **Pre.cluster** :wrench: with the following parameters
+> 1. **Pre.cluster** {% icon tool %} with the following parameters
 >   - "fasta" to the fasta output from the last `Filter.seqs` run
 >   - "name file or count table" to the count table from the last `Screen.seqs` step
 >   - "diffs" to 2
 >
->   > ### :question: Question
+>   > ### {% icon question %} Question
 >   >
 >   >  How many unique sequences are we left with after this clustering of highly similar sequences?
 >   > <details>
@@ -367,10 +367,10 @@ The first thing we want to do is to further de-noise our sequences, by pre-clust
 <!-- optional additional QC: chimera.uchime -->
 We would like to classify the sequences using a training set.
 
-> ### :pencil2: Hands-on: Classify the sequences
+> ### {% icon hands_on %} Hands-on: Classify the sequences
 >
 > 1. Import the `trainset16_022016.pds.fasta` and `trainset16_022016.pds.tax` in your history
-> 2. **Classify.seqs** :wrench: with the following parameters
+> 2. **Classify.seqs** {% icon tool %} with the following parameters
 >   - "fasta" to the fasta output from `Pre.cluster`
 >   - "reference" to `trainset16_022016.pds.fasta` from your history
 >   - "taxonomy" to `trainset16_022016.pds.tax` from your history
@@ -385,9 +385,9 @@ Have a look at the taxonomy output. You will see that every read now has a class
 
 The next step is then to use this information to know the abundance of the different found taxons.
 
-> ### :pencil2: Hands-on: Cluster our data into OTUs
+> ### {% icon hands_on %} Hands-on: Cluster our data into OTUs
 >
-> 1. **Cluster.split** :wrench: with the following parameters
+> 1. **Cluster.split** {% icon tool %} with the following parameters
 >   - "Split by" to `Classification using fasta`
 >   - "fasta" to the fasta output from `Pre.cluster`
 >   - "taxonomy" to the taxonomy output from `Classify.seqs`
@@ -396,7 +396,7 @@ The next step is then to use this information to know the abundance of the diffe
 >
 >     Next we want to know how many sequences are in each OTU from each group and we can do this using the `Make.shared` command. Here we tell mothur that we're really only interested in the 0.03 cutoff level:
 >
-> 2. **Make.shared** :wrench: with the following parameters
+> 2. **Make.shared** {% icon tool %} with the following parameters
 >   - "Select input type" to `OTU list`
 >   - "list" to list output from `Cluster.split`
 >   - "count" to the count table from `Pre.cluster`
@@ -404,14 +404,14 @@ The next step is then to use this information to know the abundance of the diffe
 >
 >     We probably also want to know the taxonomy for each of our OTUs. We can get the consensus taxonomy for each OTU using the `Classify.otu` command:
 >
-> 3. **Classify.otu** :wrench: with the following parameters
+> 3. **Classify.otu** {% icon tool %} with the following parameters
 >   - "list" to output from `Cluster.split`
 >   - "count" to the count table from `Pre.cluster`
 >   - "taxonomy" to the taxonomy output from `Classify.seqs`
 >   - "label" to `0.03`
 {: .hands_on}
 
-> ### :question: Questions
+> ### {% icon question %} Questions
 >
 > How many OTUs with taxonomic assignation are found for the Anguil sample? And for the Pampa sample?
 >
@@ -426,9 +426,9 @@ The next step is then to use this information to know the abundance of the diffe
 We have now determined our OTUs and classified them, but looking at a long text file is not very informative.
 Let's visualize our data using Krona:
 
-> ### :pencil2: Hands-on: Krona
+> ### {% icon hands_on %} Hands-on: Krona
 >
-> 1. **Visualize with Krona** :wrench: with the following parameters
+> 1. **Visualize with Krona** {% icon tool %} with the following parameters
 >   - "Input file" to taxonomy output from `Classify.otu` (collection)
 >   - Set **Is this output from mothur?** to `Yes`
 >
@@ -442,14 +442,14 @@ on one of the rings in the image or playing around with some of the settings.
 This produced a single plot for both your samples, but what if you want to compare
 the two samples?
 
-> ### :pencil2: Hands-on: Per-sample Krona plots
+> ### {% icon hands_on %} Hands-on: Per-sample Krona plots
 >
-> 1. **Classify.otu** :wrench:
->   
+> 1. **Classify.otu** {% icon tool %}
+>
 >    Hit the rerun button on the `Classify.otu` job in your history and see if you can find settings that will give you per-sample taxonomy data
 >
-> 2. **Visualize with Krona** :wrench:
->    
+> 2. **Visualize with Krona** {% icon tool %}
+>
 >    Now use this new output collection to create per-sample Krona plots
 >
 {: .hands_on}
@@ -457,9 +457,9 @@ the two samples?
 
 To further explore the community structure, we can visualize it with dedicated tools such as Phinch:
 
-> ### :pencil2: Hands-on: Visualization of the community structure with Phinch
+> ### {% icon hands_on %} Hands-on: Visualization of the community structure with Phinch
 >
-> 1. **Make.biom** :wrench: with the following parameters
+> 1. **Make.biom** {% icon tool %} with the following parameters
 >   - "shared" to Make.shared
 >   - "constaxonomy" to taxonomy output from the first run of `classify.otu` (collection)
 >
@@ -486,7 +486,7 @@ In this second part, we will use a metagenomic sample of the Pampas Soil ([SRR60
 
 ## Data upload
 
-> ### :pencil2: Hands-on: Data upload
+> ### {% icon hands_on %} Hands-on: Data upload
 >
 > 1. Create a new history
 > 2. Import the "SRR606451_pampa" Fasta file from [Zenodo](http://zenodo.org/record/815875) or from the data library (in "Analyses of metagenomics data")
@@ -504,9 +504,9 @@ As for amplicon data, we can extract taxonomic and community structure informati
 
 In this tutorial, we use the second approach with MetaPhlAn2. This tools is using a database of ~1M unique clade-specific marker genes (not only the rRNA genes) identified from ~17,000 reference (bacterial, archeal, viral and eukaryotic) genomes.
 
-> ### :pencil2: Hands-on: Taxonomic assignation with MetaPhlAn2
+> ### {% icon hands_on %} Hands-on: Taxonomic assignation with MetaPhlAn2
 >
-> 1. **MetaPhlAN2** :wrench: with
+> 1. **MetaPhlAN2** {% icon tool %} with
 >    - "Input file" to the imported file`
 >    - "MetaPhlAn2 clade-specific marker genes" to `locally cached`
 >    - "Cached database with clade-specific marker genes" to `MetaPhlAn2 clade-specific marker genes`
@@ -536,7 +536,7 @@ In this tutorial, we use the second approach with MetaPhlAn2. This tools is usin
 
 - A SAM file with the results of the mapping of the sequences on the reference database
 
-> ### :question: Questions
+> ### {% icon question %} Questions
 >
 > 1. What is the most precise level we have access to with MetaPhlAn2?
 > 2. What are the two orders found in our sample?
@@ -554,12 +554,12 @@ In this tutorial, we use the second approach with MetaPhlAn2. This tools is usin
 
 Even if the output of MetaPhlAn2 is bit easier to parse than the BIOM file, we want to visualize and explore the community structure with KRONA
 
-> ### :pencil2: Hands-on: Interactive visualization with KRONA
+> ### {% icon hands_on %} Hands-on: Interactive visualization with KRONA
 >
-> 1. **Format MetaPhlAn2 output for Krona** :wrench: with
+> 1. **Format MetaPhlAn2 output for Krona** {% icon tool %} with
 >    - "Input file" to `Community profile` output of `MetaPhlAn2`
 >
-> 2. **KRONA pie chart** :wrench:: with
+> 2. **KRONA pie chart** {% icon tool %}: with
 >    - "What is the type of your input data" as `MetaPhlan`
 >    - "Input file" to the output of `Format MetaPhlAn2`
 >
@@ -571,9 +571,9 @@ We would like now to answer the question "What are the micro-organisms doing?" o
 
 In the shotgun data, we have access to the sequences from the full genome, with gene sequences then. We use that to identify the genes, associate them to a function, build pathways, etc to investigate the functional part of the community.
 
-> ### :pencil2: Hands-on: Metabolism function identification
+> ### {% icon hands_on %} Hands-on: Metabolism function identification
 >
-> 1. **HUMAnN2** :wrench: with
+> 1. **HUMAnN2** {% icon tool %} with
 >    - "Input sequence file" to the imported sequence file
 >    - "Use of a custom taxonomic profile" to `Yes`
 >    - "Taxonomic profile file" to `Community profile` output of `MetaPhlAn2`
@@ -605,7 +605,7 @@ HUMAnN2 generates 3 files
 
 - A file with the abundance of pathways
 
-> ### :question: Questions
+> ### {% icon question %} Questions
 >
 > How many gene families and pathways have been identified?
 >
@@ -617,14 +617,14 @@ HUMAnN2 generates 3 files
 
 The RPK for the gene families are quite difficult to interpret in term of relative abundance. We decide then to normalize the values
 
-> ### :pencil2: Hands-on: Normalize the gene family abundances
+> ### {% icon hands_on %} Hands-on: Normalize the gene family abundances
 >
-> 1. **Renormalize a HUMAnN2 generated table** :wrench: with
+> 1. **Renormalize a HUMAnN2 generated table** {% icon tool %} with
 >    - "Gene/pathway table" to the gene family table generated with `HUMAnN2`
 >    - "Normalization scheme" to `Relative abundance`
 >    - "Normalization level" to `Normalization of all levels by community total`
 >
->  > ### :question: Questions
+>  > ### {% icon question %} Questions
 >  >
 >  > 1. Which percentage of sequences has not be assigned to a gene family?
 >  > 2. What is the most abundant gene family?
@@ -641,21 +641,21 @@ The RPK for the gene families are quite difficult to interpret in term of relati
 
 With the HUMAnN2 output, we have access to UniRef50 gene families. However, the names can remains cryptic and sometimes we would like a more general view about the functions. HUMAnN proposes a tool to regroup the gene families into different meta-groups: GO (Gene Ontology), EC, etc.
 
-> ### :pencil2: Hands-on: Regroup the gene families into GO terms
+> ### {% icon hands_on %} Hands-on: Regroup the gene families into GO terms
 >
-> 1. **Regroup a HUMAnN2 generated table by features** :wrench: with
+> 1. **Regroup a HUMAnN2 generated table by features** {% icon tool %} with
 >    - "Gene/pathway table" to the gene family table generated with `HUMAnN2`
 >    - "How to combine grouped features?" to `Sum`
 >    - "Use built-in grouping options?" to `Yes`
 >    - "Gene family type" to `UniRef50 gene families`
 >    - "Grouping options" to `UniRef50 gene families into GO`
 >
-> 2. **Renormalize a HUMAnN2 generated table** :wrench: with
+> 2. **Renormalize a HUMAnN2 generated table** {% icon tool %} with
 >    - "Gene/pathway table" to the gene family table generated with `Regroup`
 >    - "Normalization scheme" to `Relative abundance`
 >    - "Normalization level" to `Normalization of all levels by community total`
 >
->  > ### :question: Questions
+>  > ### {% icon question %} Questions
 >  >
 >  > 1. What is the most abundant GO term?
 >  > 2. What is related to in [Gene Ontology](http://www.geneontology.org/)?
