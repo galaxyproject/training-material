@@ -32,6 +32,12 @@ def test_server_connection(galaxy_url):
 
 def check_instance(gi, tool_filepath, log_file):
     """ Check if a given tutorial can be run on a given Galaxy instance """
+    # get tools in the instance
+    try:
+        tools_list = gi.tools.get_tools()
+    except:
+        print("Can not geet tools from %s" % galaxy_url)
+        return None
     # find tools needed for the tutorial
     with open(tool_filepath) as f:
         tool_yaml = yaml.safe_load(f)
@@ -44,7 +50,6 @@ def check_instance(gi, tool_filepath, log_file):
             for revision in tool['revisions']:
                 tools_required[tool['name']]['revisions'].setdefault(revision, False)
     # check if all tools are installed
-    tools_list = gi.tools.get_tools()
     for t in tools_list:
         if 'tool_shed_repository' not in t:
             continue
@@ -82,12 +87,13 @@ def check_tutorial(tool_file, public_galaxy_servers):
         # check if the tools are accessible on the serve
         log_file = os.path.join(log_dir, server['name'])
         can_run = check_instance(gi, tool_file, log_file)
-        if can_run:
+        if can_run is None:
+            to_drop.append(index)
+        elif can_run:
             to_conserve.append(index)
     # extract the info of public server that can be used for the tutorial
     if len(to_conserve) > 0:
-        print(to_conserve)
-        working_galaxy_servers = public_galaxy_servers.iloc[to_conserve]
+        working_galaxy_servers = public_galaxy_servers.ix[to_conserve]
     # remove the non accessible servers
     public_galaxy_servers = public_galaxy_servers.drop(to_drop)
     return working_galaxy_servers, public_galaxy_servers
