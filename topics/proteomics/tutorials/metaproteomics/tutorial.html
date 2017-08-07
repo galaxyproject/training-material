@@ -53,7 +53,7 @@
               
 
               
-                <li><a href="https://doi.org/10.5281/zenodo.820308" title="Links to data"><i class="fa fa-folder-open"></i> Input Dataset</a></li>
+                <li><a href="https://doi.org/10.5281/zenodo.839701" title="Links to data"><i class="fa fa-folder-open"></i> Input Dataset</a></li>
               
 
               
@@ -79,12 +79,14 @@
         
           <li>How can I perform taxonomy analysis and visualize metaproteomics data?</li>
         
+          <li>How can I perform functional analysis on this metaproteomics data?</li>
+        
         </ul>
 
         <p class="bold"> <img class="emoji" title=":dart:" alt=":dart:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f3af.png" height="20" width="20" align="absmiddle"> Objectives</p>
         <ul>
         
-          <li>A taxonomy of metaproteomic mass spectrometry data.</li>
+          <li>A taxonomy and functional analysis of metaproteomic mass spectrometry data.</li>
         
         </ul>
 
@@ -102,7 +104,7 @@
         </ul>
         
 
-        <p><span class="bold"> <img class="emoji" title=":hourglass:" alt=":hourglass:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/231b.png" height="20" width="20" align="absmiddle"> Time estimation:</span> 1h</p>
+        <p><span class="bold"> <img class="emoji" title=":hourglass:" alt=":hourglass:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/231b.png" height="20" width="20" align="absmiddle"> Time estimation:</span> 2h</p>
 
     </blockquote>
 
@@ -129,8 +131,9 @@ the host / environment by analyzing the functional dynamics of the microbiome.</
   <li>
 <a href="#analysis" id="markdown-toc-analysis">Analysis</a>    <ol>
       <li><a href="#match-peptide-sequences" id="markdown-toc-match-peptide-sequences">Match peptide sequences</a></li>
-      <li><a href="#unipept-metaproteomic-analysis" id="markdown-toc-unipept-metaproteomic-analysis">Unipept metaproteomic analysis</a></li>
+      <li><a href="#taxonomy-analysis" id="markdown-toc-taxonomy-analysis">Taxonomy analysis</a></li>
       <li><a href="#genus-taxonomy-level-summary" id="markdown-toc-genus-taxonomy-level-summary">Genus taxonomy level summary</a></li>
+      <li><a href="#functional-analysis" id="markdown-toc-functional-analysis">Functional Analysis</a></li>
     </ol>
   </li>
 </ol>
@@ -145,11 +148,11 @@ the host / environment by analyzing the functional dynamics of the microbiome.</
 
 <ul>
   <li>Upload the files from your computer</li>
-  <li>Using a direct weblink</li>
+  <li>Using a direct link</li>
   <li>Import from the data library if your instance provides the files</li>
 </ul>
 
-<p>In this tutorial, we will get the data from Zenodo: <a href="https://doi.org/10.5281/zenodo.820308"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.820308.svg" alt="DOI"></a>.</p>
+<p>In this tutorial, we will get the data from Zenodo: <a href="https://doi.org/10.5281/zenodo.839701"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.839701.svg" alt="DOI"></a>.</p>
 
 <blockquote class="hands_on">
   <h3 id="pencil2-hands-on-data-upload-and-organization">
@@ -169,7 +172,7 @@ the host / environment by analyzing the functional dynamics of the microbiome.</
           <li>Open the Galaxy Upload Manager</li>
           <li>Select <strong>Paste/Fetch Data</strong>
 </li>
-          <li>Paste the link into the text field. You can add multiple links, each on a seperate line.</li>
+          <li>Paste the link into the text field. You can add multiple links, each on a separate line.</li>
           <li>Press <strong>Start</strong>
 </li>
         </ul>
@@ -188,7 +191,7 @@ the host / environment by analyzing the functional dynamics of the microbiome.</
     <li>Build a <strong>Dataset list</strong> for the three MGF files
       <ul>
         <li>Click the <strong>Operations on multiple datasets</strong> check box at the top of the history panel
- <img src="../../images/operations_icon.png" alt="">
+ <img src="../../images/operations_icon.png" alt="Operations on multiple datasets button">
 </li>
         <li>Check the three boxes next to the MGF files</li>
         <li>Click <strong>For all selected…</strong> and choose <strong>Build dataset list</strong>
@@ -234,7 +237,7 @@ The created dataset collection of the three <em>MGF files</em> in the history is
           <li>
             <p>Click the <strong>Dataset collection</strong> icon on the left of the input field:</p>
 
-            <p><img src="../../images/dataset_button.png" alt=""></p>
+            <p><img src="../../images/dataset_button.png" alt="Dataset collection button"></p>
           </li>
           <li>
             <p>Select the appropriate dataset collection from the list</p>
@@ -452,7 +455,7 @@ Galaxy instance to your local computer in a text file if desired.</p>
       </blockquote>
     </li>
     <li>Click <strong>Execute</strong> and inspect the resulting files after they turned green with the <strong>View data</strong> icon:
- <img src="../../images/view_data_icon.png" alt="">
+ <img src="../../images/view_data_icon.png" alt="View data button">
 </li>
   </ol>
 
@@ -461,7 +464,7 @@ Galaxy instance to your local computer in a text file if desired.</p>
 <p>A number of new items will appear in your history, each corresponding to the outputs selected
 in the PeptideShaker parameters. Most relevant for this tutorial is the PSM report:</p>
 
-<p><img src="../../images/psm_report.png" alt=""></p>
+<figure id="figure-1"><img src="../../images/psm_report.png" alt="Display of the PSM report tabular file" title="The PSM report"><figcaption><span class="figcaption-prefix">Figure 1:</span> The PSM report</figcaption></figure>
 
 <p>Scrolling at the bottom to the left will show the sequence for the PSM that matched to these
 metapeptide entries. Column 3 is the sequence matched for each PSM entry. Every PSM is a
@@ -471,7 +474,7 @@ new row in the tabular output.</p>
 analysis of the taxonomic make-up of the sample as well as the biochemical functions
 represented by the proteins identified.</p>
 
-<h2 id="unipept-metaproteomic-analysis">Unipept metaproteomic analysis</h2>
+<h2 id="taxonomy-analysis">Taxonomy analysis</h2>
 
 <p>In the previous section, the genome sequencing and mass spectrometry data from
 processing of biological samples was used to identify peptides present in those samples.
@@ -619,7 +622,7 @@ ORDER BY sequence
     <li>
       <p>Click <strong>Execute</strong> and inspect the query results file after it turned green. If everything went well, it should look similiar:</p>
 
-      <p><img src="../../images/query_tabular_1.png" alt=""></p>
+      <figure id="figure-2"><img src="../../images/query_tabular_1.png" alt="Query Tabular output showing the peptides" title="Query Tabular output"><figcaption><span class="figcaption-prefix">Figure 2:</span> Query Tabular output</figcaption></figure>
     </li>
   </ol>
 
@@ -711,12 +714,12 @@ Instead, we can use it to use JavaScript libraries to visualize this data.</p>
         <li>
           <p>Click on the JSON output file from the <em>Unipept</em> tool to expand it. Click on the <strong>Visualize</strong> button and select <strong>Unipept Tree viewer</strong>:</p>
 
-          <p><img src="../../images/visualize_button.png" alt=""></p>
+          <p><img src="../../images/visualize_button.png" alt="Visualize button"></p>
         </li>
         <li>
           <p>A new window should appear with a visualization of the taxonomy tree of your data. Use the mouse wheel to scroll in and out and click on nodes to expand or collapse them:</p>
 
-          <p><img src="../../images/unipept_tree_viewer.png" alt=""></p>
+          <figure id="figure-3"><img src="../../images/unipept_tree_viewer.png" alt="Unipept Tree viewer visual output" title="Interactive visualization from the Unipept Tree viever plugin"><figcaption><span class="figcaption-prefix">Figure 3:</span> Interactive visualization from the Unipept Tree viever plugin</figcaption></figure>
         </li>
       </ul>
     </li>
@@ -785,7 +788,7 @@ once again used, aggregating the number of peptides and PSMs for each genus leve
 <strong>Database Table</strong>: Click on <code class="highlighter-rouge">+ Insert Database Table</code>
 </li>
         <li>
-<strong>Tabular Dataset for Table</strong>: The <em>Unipept</em> tabular/tsv output</li>
+<strong>Tabular Dataset for Table</strong>: The <strong>Unipept</strong> <code class="highlighter-rouge">tabular</code>/<code class="highlighter-rouge">tsv</code> output</li>
       </ul>
 
       <p>Section <strong>Filter Dataset Input</strong>:</p>
@@ -845,9 +848,378 @@ ORDER BY PSMs desc, 'DISTINCT PEPTIDES' desc
     <li>
       <p>Click <strong>Execute</strong> and inspect the query results file after it turned green:</p>
 
-      <p><img src="../../images/metaproteomics_summary.png" alt=""></p>
+      <figure id="figure-4"><img src="../../images/metaproteomics_summary.png" alt="Query Tabular output showing gene, PSMs and distinct peptides" title="Query Tabular output"><figcaption><span class="figcaption-prefix">Figure 4:</span> Query Tabular output</figcaption></figure>
     </li>
   </ol>
+
+</blockquote>
+
+<h2 id="functional-analysis">Functional Analysis</h2>
+
+<p>In the following chapter, a functional analysis will be performed in order to match the list of peptides with the correlated Gene Ontology terms.
+This allows to get an insight of the <strong>biological process</strong>, the <strong>molecular function</strong> and the <strong>cellular component</strong> related to the sample data.</p>
+
+<blockquote class="comment">
+  <h3 id="nut_and_bolt-gene-ontology-consortium">
+<img class="emoji" title=":nut_and_bolt:" alt=":nut_and_bolt:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f529.png" height="20" width="20" align="absmiddle"> Gene Ontology Consortium</h3>
+
+  <p>The <a href="http://www.geneontology.org/">Gene Ontology Consortium</a> provides with its Ontology a framework for the model of biology.
+The GO defines concepts/classes used to describe gene function, and relationships between these concepts. It classifies functions along three aspects:</p>
+
+  <ul>
+    <li>
+      <p><strong>molecular function</strong></p>
+
+      <ul>
+        <li>molecular activities of gene products</li>
+      </ul>
+    </li>
+    <li>
+      <p><strong>cellular component</strong></p>
+
+      <ul>
+        <li>where gene products are active</li>
+      </ul>
+    </li>
+    <li>
+      <p><strong>biological process</strong></p>
+
+      <ul>
+        <li>pathways and larger processes made up of the activities of multiple gene products.</li>
+      </ul>
+    </li>
+  </ul>
+
+  <p><a href="http://geneontology.org/page/ontology-documentation">more information</a></p>
+
+</blockquote>
+
+<h4 id="data-upload-1">Data upload</h4>
+
+<p>For this tutorial, a tabular file containing the relevant GO terms has been created. It contains the GO aspect, the ID and the name.
+It is available at Zenodo: <a href="https://doi.org/10.5281/zenodo.839701"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.839701.svg" alt="DOI"></a>.</p>
+
+<blockquote class="hands_on">
+  <h3 id="pencil2-hands-on-data-upload">
+<img class="emoji" title=":pencil2:" alt=":pencil2:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/270f.png" height="20" width="20" align="absmiddle"> Hands-on: Data upload</h3>
+
+  <ol>
+    <li>
+      <p>Import the three <code class="highlighter-rouge">Gene_Ontology_Terms.tabular</code> file from Zenodo.</p>
+
+      <blockquote class="tip">
+        <h3 id="bulb-tip-setting-file-metadata-on-upload">
+<img class="emoji" title=":bulb:" alt=":bulb:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f4a1.png" height="20" width="20" align="absmiddle"> Tip: Setting file metadata on upload</h3>
+
+        <p>In the upload window of Galaxy you can set the filetype and related genome of the file you’re uploading in the corresponding columns beforehand.
+This might be handy if the automatic detection of the filetype didn’t work out perfectly or if you want to avoid setting the genome later on, especially for multiple files.</p>
+
+      </blockquote>
+
+      <p>As default, Galaxy takes the link as name.</p>
+
+      <blockquote class="comment">
+        <h3 id="nut_and_bolt-comments-1">
+<img class="emoji" title=":nut_and_bolt:" alt=":nut_and_bolt:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f529.png" height="20" width="20" align="absmiddle"> Comments</h3>
+        <ul>
+          <li>Rename the datasets to a more descriptive name, e.g. <code class="highlighter-rouge">Gene Ontology Terms</code>
+</li>
+        </ul>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="tip">
+  <h3 id="bulb-tip-creating-your-own-gene-ontology-list">
+<img class="emoji" title=":bulb:" alt=":bulb:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f4a1.png" height="20" width="20" align="absmiddle"> Tip: Creating your own Gene Ontology list</h3>
+
+  <p>The latest Gene Ontology can be downloaded <a href="http://geneontology.org/page/download-ontology">here</a> as a text file in the <code class="highlighter-rouge">OBO</code> format.
+<code class="highlighter-rouge">OBO</code> files are human-readable (in addition to machine-readable) and can be opened in any text editor. They contain more information than just the name and aspect.</p>
+
+  <p>In order to receive a file like we use in the tutorial for your own analysis, different tools are available to extract information from <code class="highlighter-rouge">OBO</code> files,
+one of them being <a href="https://www.ncbi.nlm.nih.gov/labs/articles/18245124/">ONTO-PERL</a>.
+An example file with all GO terms from 08.07.2017 named <code class="highlighter-rouge">Gene_Ontology_Terms_full_07.08.2017.tabular</code> can be found on the <a href="https://doi.org/10.5281/zenodo.839701">Zenodo repository</a> of this tutorial as well.</p>
+
+</blockquote>
+
+<h4 id="retrieve-go-ids-for-peptides-unipept">Retrieve GO IDs for peptides: Unipept</h4>
+
+<p>The <strong>UniPept</strong> application <code class="highlighter-rouge">pept2prot</code> can be used to receive the GO identifiers connected to the list of peptides that was generated from the Peptide Shaker result:</p>
+
+<blockquote class="hands_on">
+  <h3 id="pencil2-hands-on-unipept-1">
+<img class="emoji" title=":pencil2:" alt=":pencil2:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/270f.png" height="20" width="20" align="absmiddle"> Hands-on: Unipept</h3>
+
+  <ol>
+    <li>
+      <p><strong>Unipept</strong> <img class="emoji" title=":wrench:" alt=":wrench:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f527.png" height="20" width="20" align="absmiddle">: Run <strong>Unipept</strong> with:</p>
+
+      <ul>
+        <li>
+<strong>Unipept application</strong>: <code class="highlighter-rouge">pept2prot: UniProt entries containing a given tryptic peptide</code>
+</li>
+        <li>
+<strong>retrieve extra information</strong>: <code class="highlighter-rouge">Yes</code>
+</li>
+        <li>
+<strong>Peptides input format</strong>: <code class="highlighter-rouge">tabular</code>
+</li>
+        <li>
+<strong>Tabular Input Containing Peptide column</strong>: The first query results file.</li>
+        <li>
+<strong>Select column with peptides</strong>: <code class="highlighter-rouge">Column 1</code>
+</li>
+        <li>
+<strong>Choose outputs</strong>: Select <code class="highlighter-rouge">tabular</code>
+</li>
+      </ul>
+    </li>
+    <li>
+      <p>Click <strong>Execute</strong>.</p>
+    </li>
+    <li>
+      <p>inspect the result:</p>
+
+      <ul>
+        <li>The output should be a tabular file containing a column labeled <code class="highlighter-rouge">go_references</code>. This is what we’re looking for.</li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h4 id="normalizing-a-table-split-tabular-columns">Normalizing a table: Split Tabular Columns</h4>
+
+<p>The UniPept result file can contain multiple GO IDs in a single row. In order to create a normalized table of this data, these rows will be split so each record contains only one GO ID using the <strong>Split Tabular Columns</strong> tool:</p>
+
+<blockquote class="hands_on">
+  <h3 id="pencil2-hands-on-split-tabular-columns">
+<img class="emoji" title=":pencil2:" alt=":pencil2:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/270f.png" height="20" width="20" align="absmiddle"> Hands-on: Split Tabular Columns</h3>
+
+  <ol>
+    <li>
+      <p><strong>Split Tabular Columns</strong> <img class="emoji" title=":wrench:" alt=":wrench:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f527.png" height="20" width="20" align="absmiddle">: Run <strong>Split Tabular Columns</strong> with:</p>
+
+      <ul>
+        <li>
+<strong>Tabular Dataset to normalize</strong>: The latest UniPept <code class="highlighter-rouge">tabluar</code>/<code class="highlighter-rouge">tsv</code> output</li>
+        <li>
+<strong>Columns to split</strong>: Select <code class="highlighter-rouge">Column: 6</code>, the one containing the GO IDs</li>
+      </ul>
+    </li>
+    <li>
+      <p>Click <strong>Execute</strong>.</p>
+    </li>
+    <li>
+      <p>inspect the result:</p>
+
+      <ul>
+        <li>The column labeled <code class="highlighter-rouge">go_references</code> should now contain only no or one entry.</li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h4 id="combine-all-information-to-quantify-the-go-results">Combine all information to quantify the GO results</h4>
+
+<p>As a final step we will use <strong>Query Tabular</strong> in a more sophisticated way to combine all information to quantify the GO analysis. The three used file and the extracted information are:</p>
+
+<ul>
+  <li>
+<strong>Gene Ontology Terms</strong>:
+    <ul>
+      <li>
+<code class="highlighter-rouge">go_id</code> to match with <strong>Normalized UniPept output</strong>
+</li>
+      <li>The GO <code class="highlighter-rouge">aspect</code> to group the results in three separate files</li>
+      <li>The GO <code class="highlighter-rouge">description</code> to annotate the results</li>
+    </ul>
+  </li>
+  <li>
+<strong>Normalized UniPept output</strong>:
+    <ul>
+      <li>
+<code class="highlighter-rouge">peptide</code> to match with <strong>PSM Report</strong> and to count distinct peptides per GO term</li>
+      <li>
+<code class="highlighter-rouge">go_reference</code> to match with <strong>Gene Ontology Terms</strong>
+</li>
+    </ul>
+  </li>
+  <li>
+<strong>PSM Report</strong>:
+    <ul>
+      <li>
+<code class="highlighter-rouge">sequence</code> to match with <strong>Normalized UniPept output</strong>
+</li>
+      <li>
+<code class="highlighter-rouge">id</code> to count distinct PSM’s per GO term</li>
+    </ul>
+  </li>
+</ul>
+
+<blockquote class="hands_on">
+  <h3 id="pencil2-hands-on-query-tabular-2">
+<img class="emoji" title=":pencil2:" alt=":pencil2:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/270f.png" height="20" width="20" align="absmiddle"> Hands-on: Query Tabular</h3>
+
+  <ol>
+    <li>
+      <p><strong>Query Tabular</strong> <img class="emoji" title=":wrench:" alt=":wrench:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f527.png" height="20" width="20" align="absmiddle">: Run <strong>Query Tabular</strong> with:</p>
+
+      <ul>
+        <li>
+<strong>Database Table</strong>: Click on <code class="highlighter-rouge">+ Insert Database Table</code>
+</li>
+        <li>
+<strong>Tabular Dataset for Table</strong>: The <code class="highlighter-rouge">Gene Ontology Terms</code> file</li>
+      </ul>
+
+      <p>Section <strong>Table Options</strong>:</p>
+
+      <ul>
+        <li>
+<strong>Specify Name for Table</strong>: <code class="highlighter-rouge">go</code>
+</li>
+        <li>
+<strong>Specify Column Names (comma-separated list)</strong>: <code class="highlighter-rouge">aspect,go_id,description</code>
+</li>
+      </ul>
+    </li>
+    <li>
+      <p>Repeat this step to have a second <strong>Database Table</strong>:</p>
+
+      <ul>
+        <li>
+<strong>Database Table</strong>: Click on <code class="highlighter-rouge">+ Insert Database Table</code>
+</li>
+        <li>
+<strong>Tabular Dataset for Table</strong>: The <strong>Unipept</strong> normalized <code class="highlighter-rouge">tabluar</code>/<code class="highlighter-rouge">tsv</code> output</li>
+      </ul>
+
+      <p>Section <strong>Filter Dataset Input</strong>:</p>
+
+      <ul>
+        <li>
+<strong>Filter Tabular Input Lines</strong>: Click on <code class="highlighter-rouge">+ Insert Filter Tabular Input Lines</code>:</li>
+        <li>
+<strong>Filter By</strong>: Select <code class="highlighter-rouge">comment char</code>
+          <ul>
+            <li>
+<strong>Ignore lines beginning with these characters</strong>: Select <code class="highlighter-rouge">#</code>
+</li>
+          </ul>
+        </li>
+      </ul>
+
+      <p>Section <strong>Table Options</strong>:</p>
+
+      <ul>
+        <li>
+<strong>Specify Name for Table</strong>: <code class="highlighter-rouge">bering</code>
+</li>
+        <li>
+<strong>Specify Column Names (comma-separated list)</strong>: <code class="highlighter-rouge">peptide,uniprot_id,taxon_id,taxon_name, ec_references,go_reference,refseq_ids,refseq_protein_ids,insdc_ids,insdc_protein_ids</code>
+</li>
+      </ul>
+    </li>
+    <li>
+      <p>Repeat this step to have a third <strong>Database Table</strong>:</p>
+
+      <ul>
+        <li>
+<strong>Database Table</strong>: Click on <code class="highlighter-rouge">+ Insert Database Table</code>
+</li>
+        <li>
+<strong>Tabular Dataset for Table</strong>: The <code class="highlighter-rouge">PSM Report</code>
+</li>
+      </ul>
+
+      <p>Section <strong>Filter Dataset Input</strong>:</p>
+
+      <ul>
+        <li>
+<strong>Filter Tabular Input Lines</strong>: Click on <code class="highlighter-rouge">+ Insert Filter Tabular Input Lines</code>:</li>
+        <li>
+<strong>Filter By</strong>: Select <code class="highlighter-rouge">by regex expression matching</code>
+          <ul>
+            <li>
+<strong>regex pattern</strong>: <code class="highlighter-rouge">^\d</code>
+</li>
+            <li>
+<strong>action for regex match</strong>: <code class="highlighter-rouge">include line on pattern match</code>
+</li>
+          </ul>
+        </li>
+      </ul>
+
+      <p>Section <strong>Table Options</strong>:</p>
+
+      <ul>
+        <li>
+<strong>Specify Name for Table</strong>: <code class="highlighter-rouge">bering_psms</code>
+</li>
+        <li>
+          <p><strong>Specify Column Names (comma-separated list)</strong>: <code class="highlighter-rouge">id,,sequence,,,,,,,,,,,,,,,,,,,,confidence,validation</code></p>
+        </li>
+        <li>
+          <p><strong>Save the sqlite database in your history</strong>: <code class="highlighter-rouge">Yes</code></p>
+        </li>
+        <li>
+          <p><strong>SQL Query to generate tabular output</strong>:</p>
+
+          <div class="highlighter-rouge">
+<pre class="highlight"><code>SELECT g.description, count(distinct b.peptide) as "bering_peptides", count(distinct b.id) as "bering_psms"
+    
+FROM go as g JOIN
+
+( SELECT go.description, bering.peptide, bering_psms.id
+     
+FROM go LEFT OUTER JOIN bering ON go.go_id = bering.go_reference JOIN bering_psms ON bering.peptide = bering_psms.sequence
+
+GROUP BY go.description, bering.peptide, bering_psms.id
+
+) as b ON g.description = b.description
+
+WHERE g.aspect = 'biological_process'
+
+GROUP BY g.description
+
+ORDER BY  bering_peptides desc,bering_psms desc
+</code></pre>
+          </div>
+        </li>
+        <li>
+<strong>Omit column headers from tabular output</strong>: <code class="highlighter-rouge">No</code>
+</li>
+      </ul>
+    </li>
+    <li>
+      <p>Click <strong>Execute</strong> and inspect the three query result files.</p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>With these three resulting files the functional analysis of this tutorial is finished. Each record contains the name of a GO term, the amount of peptides
+related to it and the amount of PSMs for these peptides.</p>
+
+<blockquote class="comment">
+  <h3 id="nut_and_bolt-references">
+<img class="emoji" title=":nut_and_bolt:" alt=":nut_and_bolt:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f529.png" height="20" width="20" align="absmiddle"> References</h3>
+
+  <ul>
+    <li>
+      <p><a href="https://www.ncbi.nlm.nih.gov/pubmed/27824341">Dataset</a> and <a href="https://www.ncbi.nlm.nih.gov/pubmed/27396978">SixGill software</a></p>
+    </li>
+    <li>
+      <p><a href="https://www.ncbi.nlm.nih.gov/pubmed/26058579">Galaxy workflows for metaproteomics</a></p>
+    </li>
+    <li>
+      <p><a href="https://z.umn.edu/gcc2017mporal">Metaproteomics community effort</a></p>
+    </li>
+  </ul>
 
 </blockquote>
 
