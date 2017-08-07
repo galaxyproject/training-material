@@ -30,10 +30,10 @@ the host / environment by analyzing the functional dynamics of the microbiome.
 There are a many ways how you can upload your data. Three among these are:
 
 *   Upload the files from your computer
-*   Using a direct weblink
+*   Using a direct link
 *   Import from the data library if your instance provides the files
 
-In this tutorial, we will get the data from Zenodo: [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.820308.svg)](https://doi.org/10.5281/zenodo.820308). 
+In this tutorial, we will get the data from Zenodo: [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.839701.svg)](https://doi.org/10.5281/zenodo.839701). 
 
 > ### :pencil2: Hands-on: Data upload and organization
 >
@@ -45,7 +45,7 @@ In this tutorial, we will get the data from Zenodo: [![DOI](https://zenodo.org/b
 >    > * Copy the link location
 >    > * Open the Galaxy Upload Manager
 >    > * Select **Paste/Fetch Data**
->    > * Paste the link into the text field. You can add multiple links, each on a seperate line.
+>    > * Paste the link into the text field. You can add multiple links, each on a separate line.
 >    > * Press **Start**    
 >    {: .tip}
 >
@@ -57,7 +57,7 @@ In this tutorial, we will get the data from Zenodo: [![DOI](https://zenodo.org/b
 >
 > 3. Build a **Dataset list** for the three MGF files
 >    - Click the **Operations on multiple datasets** check box at the top of the history panel
->       ![](../../images/operations_icon.png)
+>       ![Operations on multiple datasets button](../../images/operations_icon.png)
 >    - Check the three boxes next to the MGF files
 >    - Click **For all selected...** and choose **Build dataset list**
 >    - Ensure the three control samples are the only ones selected, and enter a name for the new collection (e.g. *MGF files*)
@@ -86,7 +86,7 @@ The created dataset collection of the three *MGF files* in the history is used a
 >    >
 >    > * Click the **Dataset collection** icon on the left of the input field:
 >    >  
->    >      ![](../../images/dataset_button.png)
+>    >      ![Dataset collection button](../../images/dataset_button.png)
 >    > * Select the appropriate dataset collection from the list
 >    {: .tip}    
 >    
@@ -204,7 +204,7 @@ outputs.
 >       {: .comment}
 >
 > 2. Click **Execute** and inspect the resulting files after they turned green with the **View data** icon:
->     ![](../../images/view_data_icon.png)
+>     ![View data button](../../images/view_data_icon.png)
 >
 {: .hands_on}
 
@@ -212,7 +212,7 @@ outputs.
 A number of new items will appear in your history, each corresponding to the outputs selected
 in the PeptideShaker parameters. Most relevant for this tutorial is the PSM report:
 
-![](../../images/psm_report.png)
+![Display of the PSM report tabular file](../../images/psm_report.png "The PSM report")
 
 Scrolling at the bottom to the left will show the sequence for the PSM that matched to these
 metapeptide entries. Column 3 is the sequence matched for each PSM entry. Every PSM is a
@@ -222,7 +222,7 @@ In the following steps of this tutorial, selected portions of this output will b
 analysis of the taxonomic make-up of the sample as well as the biochemical functions
 represented by the proteins identified.
 
-## Unipept metaproteomic analysis
+## Taxonomy analysis
 
 In the previous section, the genome sequencing and mass spectrometry data from
 processing of biological samples was used to identify peptides present in those samples.
@@ -319,7 +319,7 @@ As a tabular file is being read, line filters may be applied and an SQL query ca
 >
 > 2. Click **Execute** and inspect the query results file after it turned green. If everything went well, it should look similiar:
 >
->     ![](../../images/query_tabular_1.png)
+>     ![Query Tabular output showing the peptides](../../images/query_tabular_1.png "Query Tabular output")
 >
 {: .hands_on}
 
@@ -375,11 +375,11 @@ We do a taxonomy analysis using the UniPept pept2lca function to return the taxo
 >
 >    - Click on the JSON output file from the *Unipept* tool to expand it. Click on the **Visualize** button and select **Unipept Tree viewer**:
 >
->       ![](../../images/visualize_button.png)
+>       ![Visualize button](../../images/visualize_button.png)
 >
 >    - A new window should appear with a visualization of the taxonomy tree of your data. Use the mouse wheel to scroll in and out and click on nodes to expand or collapse them:
 >
->       ![](../../images/unipept_tree_viewer.png)
+>       ![Unipept Tree viewer visual output](../../images/unipept_tree_viewer.png "Interactive visualization from the Unipept Tree viever plugin")
 >
 {: .hands_on}
 
@@ -412,7 +412,7 @@ once again used, aggregating the number of peptides and PSMs for each genus leve
 > 2. Repeat this step to have a second **Database Table**:
 >
 >    - **Database Table**: Click on `+ Insert Database Table`
->    - **Tabular Dataset for Table**: The *Unipept* tabular/tsv output
+>    - **Tabular Dataset for Table**: The **Unipept** `tabular`/`tsv` output
 >
 >    Section **Filter Dataset Input**:
 >   
@@ -446,6 +446,215 @@ once again used, aggregating the number of peptides and PSMs for each genus leve
 >
 > 2. Click **Execute** and inspect the query results file after it turned green:
 >
->     ![](../../images/metaproteomics_summary.png)
+>     ![Query Tabular output showing gene, PSMs and distinct peptides](../../images/metaproteomics_summary.png "Query Tabular output")
 >
 {: .hands_on}
+
+
+## Functional Analysis
+
+In the following chapter, a functional analysis will be performed in order to match the list of peptides with the correlated Gene Ontology terms.
+This allows to get an insight of the **biological process**, the **molecular function** and the **cellular component** related to the sample data.
+
+> ### :nut_and_bolt: Gene Ontology Consortium
+>
+> The [Gene Ontology Consortium](http://www.geneontology.org/) provides with its Ontology a framework for the model of biology.
+> The GO defines concepts/classes used to describe gene function, and relationships between these concepts. It classifies functions along three aspects:
+>
+>
+> - **molecular function**
+>
+>   - molecular activities of gene products
+>
+> - **cellular component**
+>
+>   - where gene products are active
+>
+> - **biological process**
+>
+>   - pathways and larger processes made up of the activities of multiple gene products.
+>
+> [more information](http://geneontology.org/page/ontology-documentation)
+> 
+{: .comment}
+
+#### Data upload
+
+For this tutorial, a tabular file containing the relevant GO terms has been created. It contains the GO aspect, the ID and the name.
+It is available at Zenodo: [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.839701.svg)](https://doi.org/10.5281/zenodo.839701). 
+
+> ### :pencil2: Hands-on: Data upload 
+>
+> 1. Import the three `Gene_Ontology_Terms.tabular` file from Zenodo.
+>
+>    > ### :bulb: Tip: Setting file metadata on upload
+>    >
+>    > In the upload window of Galaxy you can set the filetype and related genome of the file you're uploading in the corresponding columns beforehand.
+>    > This might be handy if the automatic detection of the filetype didn't work out perfectly or if you want to avoid setting the genome later on, especially for multiple files.
+>    >
+>    {: .tip}
+>
+>    As default, Galaxy takes the link as name.
+>
+>    > ### :nut_and_bolt: Comments
+>    > - Rename the datasets to a more descriptive name, e.g. `Gene Ontology Terms`
+>    {: .comment}
+>
+>
+{: .hands_on}
+
+> ### :bulb: Tip: Creating your own Gene Ontology list
+>
+> The latest Gene Ontology can be downloaded [here](http://geneontology.org/page/download-ontology) as a text file in the `OBO` format.
+> `OBO` files are human-readable (in addition to machine-readable) and can be opened in any text editor. They contain more information than just the name and aspect.
+>
+> In order to receive a file like we use in the tutorial for your own analysis, different tools are available to extract information from `OBO` files,
+> one of them being [ONTO-PERL](https://www.ncbi.nlm.nih.gov/labs/articles/18245124/).
+> An example file with all GO terms from 08.07.2017 named `Gene_Ontology_Terms_full_07.08.2017.tabular` can be found on the [Zenodo repository](https://doi.org/10.5281/zenodo.839701) of this tutorial as well.
+>
+{: .tip}
+
+#### Retrieve GO IDs for peptides: Unipept
+
+The **UniPept** application `pept2prot` can be used to receive the GO identifiers connected to the list of peptides that was generated from the Peptide Shaker result:
+
+> ### :pencil2: Hands-on: Unipept
+>
+> 1. **Unipept** :wrench:: Run **Unipept** with:
+>
+>    - **Unipept application**: `pept2prot: UniProt entries containing a given tryptic peptide`
+>    - **retrieve extra information**: `Yes`
+>    - **Peptides input format**: `tabular`
+>    - **Tabular Input Containing Peptide column**: The first query results file.
+>    - **Select column with peptides**: `Column 1`
+>    - **Choose outputs**: Select `tabular`
+>
+> 2. Click **Execute**. 
+>
+> 3. inspect the result:
+>
+>    - The output should be a tabular file containing a column labeled `go_references`. This is what we're looking for.
+>
+{: .hands_on}
+
+#### Normalizing a table: Split Tabular Columns
+
+The UniPept result file can contain multiple GO IDs in a single row. In order to create a normalized table of this data, these rows will be split so each record contains only one GO ID using the **Split Tabular Columns** tool:
+
+> ### :pencil2: Hands-on: Split Tabular Columns
+>
+> 1. **Split Tabular Columns** :wrench:: Run **Split Tabular Columns** with:
+>
+>    - **Tabular Dataset to normalize**: The latest UniPept `tabluar`/`tsv` output
+>    - **Columns to split**: Select `Column: 6`, the one containing the GO IDs
+>
+> 2. Click **Execute**. 
+>
+> 3. inspect the result:
+>
+>    - The column labeled `go_references` should now contain only no or one entry.
+>
+{: .hands_on}
+
+#### Combine all information to quantify the GO results
+
+As a final step we will use **Query Tabular** in a more sophisticated way to combine all information to quantify the GO analysis. The three used file and the extracted information are:
+
+- **Gene Ontology Terms**:
+    - `go_id` to match with **Normalized UniPept output**
+    - The GO `aspect` to group the results in three separate files
+    - The GO `description` to annotate the results
+- **Normalized UniPept output**:
+    - `peptide` to match with **PSM Report** and to count distinct peptides per GO term
+    - `go_reference` to match with **Gene Ontology Terms**
+- **PSM Report**:
+    - `sequence` to match with **Normalized UniPept output**
+    - `id` to count distinct PSM's per GO term
+
+> ### :pencil2: Hands-on: Query Tabular
+>
+> 1. **Query Tabular** :wrench:: Run **Query Tabular** with:
+>
+>    - **Database Table**: Click on `+ Insert Database Table`
+>    - **Tabular Dataset for Table**: The `Gene Ontology Terms` file
+>    
+>    Section **Table Options**:
+>
+>    - **Specify Name for Table**: `go`
+>    - **Specify Column Names (comma-separated list)**: `aspect,go_id,description`
+>
+>
+> 2. Repeat this step to have a second **Database Table**:
+>
+>    - **Database Table**: Click on `+ Insert Database Table`
+>    - **Tabular Dataset for Table**: The **Unipept** normalized `tabluar`/`tsv` output
+>
+>    Section **Filter Dataset Input**:
+>   
+>    - **Filter Tabular Input Lines**: Click on `+ Insert Filter Tabular Input Lines`:
+>    - **Filter By**: Select `comment char`
+>        - **Ignore lines beginning with these characters**: Select `#`
+>    
+>    Section **Table Options**:
+>
+>    - **Specify Name for Table**: `bering`
+>    - **Specify Column Names (comma-separated list)**: `peptide,uniprot_id,taxon_id,taxon_name, ec_references,go_reference,refseq_ids,refseq_protein_ids,insdc_ids,insdc_protein_ids`
+>
+> 3. Repeat this step to have a third **Database Table**:
+>
+>    - **Database Table**: Click on `+ Insert Database Table`
+>    - **Tabular Dataset for Table**: The `PSM Report`
+>
+>    Section **Filter Dataset Input**:
+>   
+>    - **Filter Tabular Input Lines**: Click on `+ Insert Filter Tabular Input Lines`:
+>    - **Filter By**: Select `by regex expression matching`
+>        - **regex pattern**: `^\d`
+>        - **action for regex match**: `include line on pattern match`
+>    
+>    Section **Table Options**:
+>
+>    - **Specify Name for Table**: `bering_psms`
+>    - **Specify Column Names (comma-separated list)**: `id,,sequence,,,,,,,,,,,,,,,,,,,,confidence,validation`
+>
+>
+>    - **Save the sqlite database in your history**: `Yes`
+>
+>    - **SQL Query to generate tabular output**:
+>         
+>          SELECT g.description, count(distinct b.peptide) as "bering_peptides", count(distinct b.id) as "bering_psms"
+>         
+>          FROM go as g JOIN
+>
+>          ( SELECT go.description, bering.peptide, bering_psms.id
+>          
+>          FROM go LEFT OUTER JOIN bering ON go.go_id = bering.go_reference JOIN bering_psms ON bering.peptide = bering_psms.sequence
+>
+>          GROUP BY go.description, bering.peptide, bering_psms.id
+>
+>          ) as b ON g.description = b.description
+>
+>          WHERE g.aspect = 'biological_process'
+>
+>          GROUP BY g.description
+>
+>          ORDER BY  bering_peptides desc,bering_psms desc
+>
+>    - **Omit column headers from tabular output**: `No`
+>
+> 4. Click **Execute** and inspect the three query result files.
+>
+{: .hands_on}
+
+With these three resulting files the functional analysis of this tutorial is finished. Each record contains the name of a GO term, the amount of peptides
+related to it and the amount of PSMs for these peptides.
+
+> ### :nut_and_bolt: References
+>
+> - [Dataset](https://www.ncbi.nlm.nih.gov/pubmed/27824341) and [SixGill software](https://www.ncbi.nlm.nih.gov/pubmed/27396978)
+> 
+> - [Galaxy workflows for metaproteomics](https://www.ncbi.nlm.nih.gov/pubmed/26058579)
+>
+> - [Metaproteomics community effort](https://z.umn.edu/gcc2017mporal)
+> 
+{: .comment}
