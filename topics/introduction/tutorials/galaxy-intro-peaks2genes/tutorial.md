@@ -183,7 +183,7 @@ This peak file is not in any standard format and just by looking at it, we canno
  - not relevant
  - not relevant
 
-In order to compare the the two files, we have to make sure that the chromosome names follow the same format.
+In order to compare the two files, we have to make sure that the chromosome names follow the same format.
 As we directly see, the peak file lacks `chr` before any chromosome number. But what happens with chromosome 20 and 21? Will it be X and Y instead? Let's check:
 
 > ### :pencil2: Hands-on: View end of file
@@ -215,9 +215,9 @@ In order to convert the chromosome names we have therefore two things to do:
 
 > ### :pencil2: Hands-on: Adjust chromosome names
 >
-> 1. **Replace Text** :wrench:: Run **Replace Text in a specific column**  with the following settings:
+> 1. **Replace Text** :wrench:: Run **Column Regex Find And Replace**  with the following settings:
 >     - As **File to process** our peak file `GSE37268_mof3.out.hpeak.txt`
->     - **in column**: `1`
+>     - **using column**: `1`
 >     - **Find pattern**: `[0-9]+` (this will look for numerical digits)
 >     - **Replace with**: `chr&` (`&` is a placeholder for the find result)
 > 2. Click **Execute**
