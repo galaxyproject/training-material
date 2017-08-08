@@ -217,6 +217,22 @@ Prokka outputs 10 datasets. One of the is the Prokka log, another is the error r
 
 You can visualize the result of this analysis in IGV.
 First, download and install [IGV](http://software.broadinstitute.org/software/igv/)
+Open an instance of IGV on you computer, and then import the genome file from galaxy by clicking on the "display with IGV local" 
+
+![Unicycler result Visualisation](../../images/unicycler_result.png  "Unicycler output can be sent to a local instance of IGV")
+
+You can then send the gff file resulting from the annotation with Prokka.
+
+![Prokka result Visualisation](../../images/prokka_result.png  "Prokka output can then be sent to a local instance of IGV")
+
+You can then visualise the result of your analysis in IGV 
+
+![IGV whole assembly visualization](../../images/IGV.png  "IGV Whole assembly visualization ")
+<small> You can visualize the whole assembly and gene density by selecting the "all" view.</small>
+
+![IGV zoomed visualization](../../images/zoomed_igv.png  "IGV zoomed visualization ")
+<small> For more detail view, select a contig and zoom on a region. You can see more information about a feature by passing over it with you cursor. </small>
+
 
 
 
