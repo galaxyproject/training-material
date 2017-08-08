@@ -80,14 +80,16 @@ Prokka uses Blast+ or HMMer on databases derived from UniProtKB to assign functi
 > In this tutorial, we will deal with:
 >
 > 1. [Get the data](#get-the-data)
-> 2. [Assess the reads quality](#assess-read-quality)
+> 2. [Assess reads quality](#assess-read-quality)
 > 3. [Assembly with Unicycler](#assemble-with-unicycler)
-> 4. [Annotate with Prokka](#annotate-with-prokka)
+> 4. [Assess Assembly quality with Quast](#quast)
+> 5. [Annotate with Prokka](#annotate-with-prokka)
+> 6. [Visualize the results](#visualize-the-result)
 {: .agenda}
 
 
 
-### Get the data
+### <a name="get-the-data">Get the data
 
 In this example we will use a downsampled version of Ecoli_C Illumina and Oxford Nanopore Sequencing. These include 3 files : forward and reverse reads for Illumina, and Long read file .
 
@@ -118,7 +120,7 @@ The datasets will appear in your history:
 
 ![Datasets in History](../../images/starting_data.png  "The datasets appear in your history ")
 
-#### Assess Read Quality
+### <a name="assess-read-quality">Assess Read Quality
 
 You can assess the quality of your reads by using FastQc on your short read file.
 
@@ -145,7 +147,7 @@ The Quality read per tile represent the flowcell tiles from wich the reads came.
 
 The metrics on Illumina read shows a library of high quality reads, we can now perform the assembly with Unicycler.
 
-#### Assembly with Unicycler 
+#### <a name="assemble-with-unicycler"></a>Assembly with Unicycler 
 
 The unicyler tool take as input fastqsanger files. If your files are identified as generic fastq files you will need to change the type of your files.
 
@@ -170,7 +172,7 @@ You can now run Unicycler to perform the assembly with the following parameters 
 Unicycler returns two output files : a fasta file containing the result of the assembly, and a graph file. 
 You can then evaluate the quality of the resulting alignement by using the Quast tool on the fasta file.
 
-#### Assess Assembly quality with Quast
+### <a name="quast">Assess Assembly quality with Quast
 
 Quast is a tool providing quality metrics on assemblies, and can also be used to compare several assemblies. The tool can also take an optional reference file as input, and will provide complementary metrics.
 For this tutorial we will simply use quast on the fasta file resulting from the Unicycler assembly.
@@ -184,7 +186,7 @@ The Quast tool ouput the metrics in several format, and an html file with metric
 Quast provides different statistics such as the number of contigs or scaffolds, the N50 and N75, and the total length of the assembly. You can also access 3 plots, the cumulative length of the contigs, the Nx, or the GC content. 
 Once you are satisfied with the quality of your assembly, you can use Prokka to annotate your genome.
 
-#### Annotation with Prokka
+### <a name="annotate-with-prokka">Annotation with Prokka
 
 Run Prokka with the following paramters:
 * **Contigs to annotate** : Specify the fasta file resulting from your assembly with Unicycler.
@@ -210,4 +212,12 @@ Prokka outputs 10 datasets. One of the is the Prokka log, another is the error r
 * **fna file** : Nucleotide fasta file of the input contig sequence.
 * **gbk file** : GenBank file.
 * **gff file** : gff3 file.
+
+### <a name="visualize-the-result">Visualization
+
+You can visualize the result of this analysis in IGV.
+First, download and install [IGV](http://software.broadinstitute.org/software/igv/)
+
+
+
 
