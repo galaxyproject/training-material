@@ -59,6 +59,23 @@ material:
       - "We learned about the strategies that assemblers use to make reference genomes"
       - "We performed a number of assemblies with Velvet and SPAdes."
       - "You should use SPAdes or another more modern assembler than Velvet for actual assemblies now."
+-
+    title: "Unicycler Assembly"
+    type: "tutorial"
+    name: "unicycler-assembly"
+    zenodo_link: ""
+    galaxy_tour: ""
+    hands_on: "yes"
+    slides: "yes"
+    questions:
+      - "How to perform an hybrid bacterial assembly with Unicycler"
+    objectives:
+      - "Evaluatate Illumina read quality"
+      - "Perform a Small genome Assembly with Unicycler"
+      - "Evaluate the Quality of the Assembly with Quast"
+      - "Annotate the assembly with Prokka"
+    time_estimation: "4h"
+    key_points:
 
 maintainers:
 -
@@ -88,3 +105,25 @@ references:
     title: "SPAdes: A New Genome Assembly Algorithm and Its Applications to Single-Cell Sequencing"
     link: "https://doi.org/10.1089/cmb.2012.0021"
     summary: "The paper describe SPAdes, a new assembler for both single-cell and standard (multicell) assembly, and demonstrate that it improves on the recently released E+V−SC assembler (specialized for single-cell data) and on popular assemblers Velvet and SoapDeNovo (for multicell data). SPAdes generates single-cell assemblies, providing information about genomes of uncultivatable bacteria that vastly exceeds what may be obtained via traditional metagenomics studies. SPAdes is available online (http://bioinf.spbau.ru/spades)."
+-
+    authors: "Andrews, Simon"
+    title: "FastQC: a quality control tool for high throughput sequence data."
+    link: ""
+    summary: ""
+-
+    authors: "Ryan R. Wick, Louise M. Judd, Claire L. Gorrie, Kathryn E. Holt"
+    title: "Unicycler: Resolving bacterial genome assemblies from short and long sequencing reads"
+    link: "https://doi.org/10.1371/journal.pcbi.1005595"
+    summary: "The Illumina DNA sequencing platform generates accurate but short reads, which can be used to produce accurate but fragmented genome assemblies. Pacific Biosciences and Oxford Nanopore Technologies DNA sequencing platforms generate long reads that can produce complete genome assemblies, but the sequencing is more expensive and error-prone. There is significant interest in combining data from these complementary sequencing technologies to generate more accurate “hybrid” assemblies. However, few tools exist that truly leverage the benefits of both types of data, namely the accuracy of short reads and the structural resolving power of long reads. Here we present Unicycler, a new tool for assembling bacterial genomes from a combination of short and long reads, which produces assemblies that are accurate, complete and cost-effective. Unicycler builds an initial assembly graph from short reads using the de novo assembler SPAdes and then simplifies the graph using information from short and long reads. Unicycler uses a novel semi-global aligner to align long reads to the assembly graph. Tests on both synthetic and real reads show Unicycler can assemble larger contigs with fewer misassemblies than other hybrid assemblers, even when long-read depth and accuracy are low. Unicycler is open source (GPLv3) and available at github.com/rrwick/Unicycler."
+-
+    authors: "Alexey Gurevich, Vladislav Saveliev, Nikolay Vyahhi, Glenn Tesler"
+    title: "QUAST: quality assessment tool for genome assemblies"
+    link: "https://doi.org/10.1093/bioinformatics/btt086"
+    summary: "Limitations of genome sequencing techniques have led to dozens of assembly algorithms, none of which is perfect. A number of methods for comparing assemblers have been developed, but none is yet a recognized benchmark. Further, most existing methods for comparing assemblies are only applicable to new assemblies of finished genomes; the problem of evaluating assemblies of previously unsequenced species has not been adequately considered. Here, we present QUAST—a quality assessment tool for evaluating and comparing genome assemblies. This tool improves on leading assembly comparison software with new ideas and quality metrics. QUAST can evaluate assemblies both with a reference genome, as well as without a reference. QUAST produces many reports, summary tables and plots to help scientists in their research and in their publications. In this study, we used QUAST to compare several genome assemblers on three datasets. QUAST tables and plots for all of them are available in the Supplementary Material, and interactive versions of these reports are on the QUAST website.
+Availability:http://bioinf.spbau.ru/quast ."
+-
+    authors: "Torsten Seemann"
+    title: "Prokka: rapid prokaryotic genome annotation"
+    link: "https://academic.oup.com/bioinformatics/article-lookup/doi/10.1093/bioinformatics/btu153"
+    summary: "The multiplex capability and high yield of current day DNA-sequencing instruments has made bacterial whole genome sequencing a routine affair. The subsequent de novo assembly of reads into contigs has been well addressed. The final step of annotating all relevant genomic features on those contigs can be achieved slowly using existing web- and email-based systems, but these are not applicable for sensitive data or integrating into computational pipelines. Here we introduce Prokka, a command line software tool to fully annotate a draft bacterial genome in about 10 min on a typical desktop computer. It produces standards-compliant output files for further analysis or viewing in genome browsers. Prokka is implemented in Perl and is freely available under an open source GPLv2 license from http://vicbioinformatics.com/ ."
+    
