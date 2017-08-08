@@ -485,7 +485,7 @@ It is available at Zenodo: [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.8
 
 > ### :pencil2: Hands-on: Data upload 
 >
-> 1. Import the three `Gene_Ontology_Terms.tabular` file from Zenodo.
+> 1. Import the file `Gene_Ontology_Terms.tabular` from Zenodo.
 >
 >    > ### :bulb: Tip: Setting file metadata on upload
 >    >
