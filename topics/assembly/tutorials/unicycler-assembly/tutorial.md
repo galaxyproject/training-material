@@ -31,7 +31,9 @@ De novo genome assembly is performed by aligning and merging these fragments wit
 ![Concept of de novo genome assembly](../../images/concept.png  "De novo Genome Assembly ")
 <small> Figure from [Baker:2012](http://www.nature.com/nmeth/journal/v9/n4/full/nmeth.1935.html) </small> 
 
-
+To understand how genome assembly works, read our previous trainings : 
+* [Introduction to Genome Assembly](https://galaxyproject.github.io/training-material/topics/assembly/tutorials/general-introduction/slides.html#1)
+* [De Bruijn Graph Assembly](https://galaxyproject.github.io/training-material/topics/assembly/tutorials/debruijn-graph-assembly/slides.html#46)
 
 Two currently available technologies are most attractive for small genome sequencing. Illumina’s reversible terminator process offers high coverage and accuracy at low cost (~$2K for a paired-end 2 x 300bp run) but can at most generate reads 300 bp in length. On the other hand, Oxford Nanopore’s molecular ratcheting through nanopore technology generates reads with mean length in thousands of bases and outliers over 100,000 kb in length. 
 
