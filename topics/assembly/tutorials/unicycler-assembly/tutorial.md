@@ -209,7 +209,3 @@ Prokka outputs 10 datasets. One of the is the Prokka log, another is the error r
 * **gbk file** : GenBank file.
 * **gff file** : gff3 file.
 
-# Conclusion
-{:.no_toc}
-
-Conclusion about the technical key points. And then relation between the technics and the biological question to end with a global view.
