@@ -89,7 +89,7 @@ Prokka uses Blast+ or HMMer on databases derived from UniProtKB to assign functi
 
 ### Get the data
 
-In this example we will use a downsampled version of Ecoli_C Illumina and Oxford Nanopore Sequancing. These include 3 files : forward and reverse reads for Illumina, and Long read file .
+In this example we will use a downsampled version of Ecoli_C Illumina and Oxford Nanopore Sequencing. These include 3 files : forward and reverse reads for Illumina, and Long read file .
 
 Here is what to do to load the data:
 
