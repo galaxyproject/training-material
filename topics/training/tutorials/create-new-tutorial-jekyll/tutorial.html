@@ -1,7 +1,6 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
     <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -30,14 +29,14 @@
                 <ul class="navbar-nav">
                     <li class="nav-item">
                         <a class="nav-link" href="https://galaxyproject.github.io/training-material/topics/training" title="Go back to list of tutorials">
-                            <i class="fa fa-folder-o"></i> Train the trainers
+                            <i class="fa fa-folder-o" aria-hidden="true"></i> Train the trainers
                         </a>
                     </li>
 
                     
                     <li class="nav-item">
                         <a class="nav-link" href="https://galaxyproject.github.io/training-material/topics/training/slides" title="Slides for this tutorial">
-                            <i class="fa fa-slideshare"></i> Introduction slides
+                            <i class="fa fa-slideshare" aria-hidden="true"></i> Introduction slides
                         </a>
                     </li>
                     
@@ -49,7 +48,7 @@
                     
                     <li class="nav-item">
                         <a class="nav-link" href="" title="Links to data">
-                            <i class="fa fa-files-o"></i> Input Dataset
+                            <i class="fa fa-files-o" aria-hidden="true"></i> Input Dataset
                         </a>
                     </li>
                     
@@ -57,7 +56,7 @@
                     
                     <li class="nav-item">
                         <a class="nav-link" href="https://galaxyproject.github.io/training-material/topics/training#references" title="References">
-                            <i class="fa fa-book"></i> Literature
+                            <i class="fa fa-book" aria-hidden="true"></i> Literature
                         </a>
                     </li>
                     
@@ -70,7 +69,7 @@
 
                     <li class="nav-item">
                         <a class="nav-link" href="https://github.com/galaxyproject/training-material/tree/master/topics/training/tutorials/create-new-tutorial-jekyll/tutorial.md">
-                            <i class="fa fa-github"></i> Edit
+                            <i class="fa fa-github" aria-hidden="true"></i> Edit
                         </a>
                     </li>
                 </ul>
@@ -86,14 +85,14 @@
         <blockquote class="overview">
             <h3>Overview</h3>
 
-            <p class="bold"> <img class="emoji" title=":grey_question:" alt=":grey_question:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2754.png" height="20" width="20" align="absmiddle"> Questions</p>
+            <strong><i class="fa fa-question-circle" aria-hidden="true"></i> Questions</strong>
             <ul>
             
             <li>How to setup the infrastructure to build training webpages?</li>
             
             </ul>
 
-            <p class="bold"> <img class="emoji" title=":dart:" alt=":dart:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f3af.png" height="20" width="20" align="absmiddle"> Objectives</p>
+            <strong><i class="fa fa-bullseye" aria-hidden="true"></i> Objectives</strong>
             <ul>
             
             <li>Installing packages needed for rendering the webpage</li>
@@ -106,7 +105,7 @@
 
             
 
-            <p><span class="bold"> <img class="emoji" title=":hourglass:" alt=":hourglass:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/231b.png" height="20" width="20" align="absmiddle"> Time estimation:</span> 15min</p>
+            <p><strong><i class="fa fa-hourglass-end" aria-hidden="true"></i> Time estimation:</strong> 15min</p>
         </blockquote>
 
         <h1 class="no_toc" id="introduction">Introduction</h1>
@@ -148,19 +147,14 @@ We can use Jekyll to run a server to check if the tutorial is correctly added an
 <p>The first step is to install the requirements inside a conda environment. This step has to be done once.</p>
 
 <blockquote class="hands_on">
-  <h3 id="pencil2-hands-on-install-the-requirements">
-<img class="emoji" title=":pencil2:" alt=":pencil2:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/270f.png" height="20" width="20" align="absmiddle"> Hands-on: Install the requirements</h3>
+  <h3 id="-hands-on-install-the-requirements"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Install the requirements</h3>
 
   <ol>
-    <li>Install <a href="https://conda.io/miniconda.html">conda</a>
-</li>
+    <li>Install <a href="https://conda.io/miniconda.html">conda</a></li>
     <li>Navigate to <code class="highlighter-rouge">training-material/</code> folder</li>
-    <li>Create the conda environment: <code class="highlighter-rouge">conda env create -f environment.yml</code>
-</li>
-    <li>Activate the conda environment: <code class="highlighter-rouge">source activate galaxy_training_material</code>
-</li>
-    <li>Install Jekyll and related modules using <a href="https://rubygems.org/pages/download">RubyGems</a>: <code class="highlighter-rouge">make install</code>
-</li>
+    <li>Create the conda environment: <code class="highlighter-rouge">conda env create -f environment.yml</code></li>
+    <li>Activate the conda environment: <code class="highlighter-rouge">source activate galaxy_training_material</code></li>
+    <li>Install Jekyll and related modules using <a href="https://rubygems.org/pages/download">RubyGems</a>: <code class="highlighter-rouge">make install</code></li>
   </ol>
 </blockquote>
 
@@ -169,20 +163,16 @@ We can use Jekyll to run a server to check if the tutorial is correctly added an
 <p>Once Jekyll and its modules are installed in our conda environment, we can check the generation of the website locally:</p>
 
 <blockquote class="hands_on">
-  <h3 id="pencil2-hands-on-checking-the-website-generation-locally">
-<img class="emoji" title=":pencil2:" alt=":pencil2:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/270f.png" height="20" width="20" align="absmiddle"> Hands-on: Checking the website generation locally</h3>
+  <h3 id="-hands-on-checking-the-website-generation-locally"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Checking the website generation locally</h3>
 
   <ol>
-    <li>(If not done) Activate the conda environment: <code class="highlighter-rouge">source activate galaxy_training_material</code>
-</li>
-    <li>Run a local Jekyll server with <code class="highlighter-rouge">make serve</code>
-</li>
+    <li>(If not done) Activate the conda environment: <code class="highlighter-rouge">source activate galaxy_training_material</code></li>
+    <li>Run a local Jekyll server with <code class="highlighter-rouge">make serve</code></li>
     <li>
       <p>Visualize at <a href="http://localhost:4000/">http://localhost:4000/ </a></p>
 
       <blockquote class="question">
-        <h3 id="question-questions">
-<img class="emoji" title=":question:" alt=":question:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2753.png" height="20" width="20" align="absmiddle"> Questions</h3>
+        <h3 id="-questions"><i class="fa fa-question-circle" aria-hidden="true"></i> Questions</h3>
 
         <p>How to check if the server was started and if all topics are included?</p>
 
@@ -204,22 +194,17 @@ We can use Jekyll to run a server to check if the tutorial is correctly added an
 <p>A PDF file of every tutorials and slide decks can be generated, using Chrome on command line and <a href="https://github.com/astefanutti/decktape">Decktape</a>.</p>
 
 <blockquote class="hands_on">
-  <h3 id="pencil2-hands-on-checking-the-website-generation-locally-1">
-<img class="emoji" title=":pencil2:" alt=":pencil2:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/270f.png" height="20" width="20" align="absmiddle"> Hands-on: Checking the website generation locally</h3>
+  <h3 id="-hands-on-checking-the-website-generation-locally-1"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Checking the website generation locally</h3>
 
   <ol>
-    <li>(If not done) Activate the conda environment: <code class="highlighter-rouge">source activate galaxy_training_material</code>
-</li>
+    <li>(If not done) Activate the conda environment: <code class="highlighter-rouge">source activate galaxy_training_material</code></li>
     <li>Install Chrome
       <ul>
-        <li>For OSX, install the <a href="https://www.google.com/chrome/browser/desktop/index.html">Chrome browser</a>
-</li>
-        <li>For Ubuntu, follow <a href="https://askubuntu.com/questions/510056/how-to-install-google-chrome#510186">these instructions</a>
-</li>
+        <li>For OSX, install the <a href="https://www.google.com/chrome/browser/desktop/index.html">Chrome browser</a></li>
+        <li>For Ubuntu, follow <a href="https://askubuntu.com/questions/510056/how-to-install-google-chrome#510186">these instructions</a></li>
       </ul>
     </li>
-    <li>Run <code class="highlighter-rouge">make pdf</code>
-</li>
+    <li>Run <code class="highlighter-rouge">make pdf</code></li>
     <li>Check the PDF in <code class="highlighter-rouge">_pdf</code> folder</li>
   </ol>
 </blockquote>
@@ -244,29 +229,28 @@ We can use Jekyll to run a server to check if the tutorial is correctly added an
 
         
         <blockquote class="key_points">
-            <h3> <img class="emoji" title=":grey_exclamation:" alt=":grey_exclamation:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2755.png" height="20" width="20" align="absmiddle"> Key points</h3>
+            <h3><i class="fa fa-key" aria-hidden="true"></i> Key points</h3>
 
             <ul>
-            
-            <li>Checking the generated website can be done locally</li>
-            
+                
+                <li>Checking the generated website can be done locally</li>
+                
             </ul>
         </blockquote>
         
 
         
 
-        <h3>
-<img class="emoji" title=":clap:" alt=":clap:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f44f.png" height="20" width="20" align="absmiddle"> Congratulations on successfully completing this tutorial!</h3>
-
+        <h3><i class="fa fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!</h3>
 
         <hr>
-        <blockquote class="overview">
-            <h3> <img class="emoji" title=":speech_balloon:" alt=":speech_balloon:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f4ac.png" height="20" width="20" align="absmiddle"> Feedback</h3>
-            Please take a moment and provide your feedback on this tutorial. Your feedback will help guide and improve future revisions to this tutorial. <a href="https://tinyurl.com/GTNfeedback" target="_blank">Feedback Form</a>
-        </blockquote>
 
-            </section>
+        <blockquote class="overview">
+            <h3><i class="fa fa-comments-o" aria-hidden="true"></i> Feedback</h3>
+            Please take a moment and provide your feedback on this tutorial. Your feedback will help guide and improve future revisions to this tutorial.
+            <a href="https://tinyurl.com/GTNfeedback">Feedback Form</a>
+        </blockquote>
+    </section>
 </div>
 
 <footer>

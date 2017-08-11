@@ -1,7 +1,6 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
     <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -30,14 +29,14 @@
                 <ul class="navbar-nav">
                     <li class="nav-item">
                         <a class="nav-link" href="https://galaxyproject.github.io/training-material/topics/proteomics" title="Go back to list of tutorials">
-                            <i class="fa fa-folder-o"></i> Proteomics
+                            <i class="fa fa-folder-o" aria-hidden="true"></i> Proteomics
                         </a>
                     </li>
 
                     
                     <li class="nav-item">
                         <a class="nav-link" href="https://galaxyproject.github.io/training-material/topics/proteomics/slides" title="Slides for this tutorial">
-                            <i class="fa fa-slideshare"></i> Introduction slides
+                            <i class="fa fa-slideshare" aria-hidden="true"></i> Introduction slides
                         </a>
                     </li>
                     
@@ -45,7 +44,7 @@
                     
                     <li class="nav-item">
                         <a class="nav-link" href="https://github.com/galaxyproject/training-material/tree/master/topics/proteomics/docker" title="Docker image for this tutorial">
-                            <i class="fa fa-ship"></i> Docker image
+                            <i class="fa fa-ship" aria-hidden="true"></i> Docker image
                         </a>
                     </li>
                     
@@ -57,7 +56,7 @@
                     
                     <li class="nav-item">
                         <a class="nav-link" href="https://galaxyproject.github.io/training-material/topics/proteomics#references" title="References">
-                            <i class="fa fa-book"></i> Literature
+                            <i class="fa fa-book" aria-hidden="true"></i> Literature
                         </a>
                     </li>
                     
@@ -70,7 +69,7 @@
 
                     <li class="nav-item">
                         <a class="nav-link" href="https://github.com/galaxyproject/training-material/tree/master/topics/proteomics/tutorials/protein-quant-sil/tutorial.md">
-                            <i class="fa fa-github"></i> Edit
+                            <i class="fa fa-github" aria-hidden="true"></i> Edit
                         </a>
                     </li>
                 </ul>
@@ -86,7 +85,7 @@
         <blockquote class="overview">
             <h3>Overview</h3>
 
-            <p class="bold"> <img class="emoji" title=":grey_question:" alt=":grey_question:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2754.png" height="20" width="20" align="absmiddle"> Questions</p>
+            <strong><i class="fa fa-question-circle" aria-hidden="true"></i> Questions</strong>
             <ul>
             
             <li>What are MS1 features?</li>
@@ -101,7 +100,7 @@
             
             </ul>
 
-            <p class="bold"> <img class="emoji" title=":dart:" alt=":dart:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f3af.png" height="20" width="20" align="absmiddle"> Objectives</p>
+            <strong><i class="fa fa-bullseye" aria-hidden="true"></i> Objectives</strong>
             <ul>
             
             <li>MS1 feature quantitation and mapping of quantitations to protein IDs.</li>
@@ -109,7 +108,7 @@
             </ul>
 
             
-            <p class="bold"> <img class="emoji" title=":heavy_check_mark:" alt=":heavy_check_mark:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2714.png" height="20" width="20" align="absmiddle"> Requirements</p>
+            <strong><i class="fa fa-check-circle" aria-hidden="true"></i> Requirements</strong>
             <ul>
             
                 <li>
@@ -122,7 +121,7 @@
             </ul>
             
 
-            <p><span class="bold"> <img class="emoji" title=":hourglass:" alt=":hourglass:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/231b.png" height="20" width="20" align="absmiddle"> Time estimation:</span> 1h/1d</p>
+            <p><strong><i class="fa fa-hourglass-end" aria-hidden="true"></i> Time estimation:</strong> 1h/1d</p>
         </blockquote>
 
         <h1 class="no_toc" id="introduction">Introduction</h1>
@@ -132,7 +131,7 @@ There are two types of chemical tags: isobaric tags display the same mass on fir
 The second type of chemical tags are isotopic. They are chemically identical, but differ in their mass due to incorporated stable isotopes. Examples of different isotopic tags for stable isotope labelling (SIL) are ICAT, SILAC, dimethylation, or heavy oxygen (<sup>18</sup>O).
 Incorporation of stable isotopes results in different peptide masses on MS1 level, which give rise to coeluting ion traces in the TIC with a mass difference typical for each different chemical tag.</p>
 
-<p>This tutorial deals with protein quantitation via stable isotope labelling (SIL). We will use tools of the OpenMS suite.<br>
+<p>This tutorial deals with protein quantitation via stable isotope labelling (SIL). We will use tools of the OpenMS suite.<br />
 Because we solely cover <em>quantitation</em>, you need to perform peptide and protein ID in beforehand. To learn about protein ID in Galaxy, please consider <a href="https://galaxyproject.github.io/training-material/topics/proteomics/tutorials/protein-id-sg-ps/tutorial.html">this tutorial</a>.</p>
 
 <p>This tutorial covers <em>relative</em> quantitation only (i.e. comparison of abundances in different samples, no <em>absolute</em> quantitation of peptides / proteins).</p>
@@ -140,8 +139,7 @@ Because we solely cover <em>quantitation</em>, you need to perform peptide and p
 <p>If you still are in the planning phase of your quantitative proteomics experiment, you may want to consider our tutorial on different <a href="https://galaxyproject.github.io/training-material/topics/proteomics/tutorials/labelfree-vs-labelled/tutorial.html">quantitation methods</a> first.</p>
 
 <blockquote class="hands_on">
-  <h3 id="pencil2-hands-on-introduction">
-<img class="emoji" title=":pencil2:" alt=":pencil2:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/270f.png" height="20" width="20" align="absmiddle"> Hands-on: Introduction</h3>
+  <h3 id="-hands-on-introduction"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Introduction</h3>
   <p>In the Hands-on section of this tutorial, we will use a quantitative comparison of <strong>HEK <em>OR</em> E.coli</strong> cell lysate as a test dataset. In this experiment, the very same cell lysate was once labelled with light, once with heavy <strong>dimethyl <em>OR</em> SILAC</strong> and both samples were subsequently mixed in a certain ratio. For a detailed description of the dataset, please refer to the description in the <a href="">PRIDE archive</a>.
 Your objective in this hands-on-tutorial is to find out the correct mixing ratio of the test sample.</p>
 </blockquote>
@@ -166,17 +164,15 @@ In the OpenMS suite, most of the provided tools for MS1 feature detection quanti
 The tool settings need to be carefully tested and evaluated manually to obtain optimal results. We will explain this in the section <a href="#expert-level-evaluation-and-optimization-of-quantitation-results">Evaluation and Optimization of Quantitation Results</a>.</p>
 
 <blockquote class="hands_on">
-  <h3 id="pencil2-hands-on-ms1-feature-detection">
-<img class="emoji" title=":pencil2:" alt=":pencil2:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/270f.png" height="20" width="20" align="absmiddle"> Hands-on: MS1 Feature Detection</h3>
+  <h3 id="-hands-on-ms1-feature-detection"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: MS1 Feature Detection</h3>
 
   <ol>
     <li>Import the test data from <a href="">zenodo</a>. The file type of the data is mzML. The data have not been modified during the conversion from the machine raw file, neither background removal, nor peak picking (centroiding) has been performed.</li>
-    <li>Run <code class="highlighter-rouge">FeatureFinderMultiplex</code><img class="emoji" title=":wrench:" alt=":wrench:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f527.png" height="20" width="20" align="absmiddle"> on the mzML file. Change <strong><code class="highlighter-rouge">Labelling</code></strong> to <code class="highlighter-rouge">\[ \] \[Arg6,Lys6\]</code>.</li>
+    <li>Run <code class="highlighter-rouge">FeatureFinderMultiplex</code><i class="fa fa-wrench" aria-hidden="true"></i> on the mzML file. Change <strong><code class="highlighter-rouge">Labelling</code></strong> to <code class="highlighter-rouge">\[ \] \[Arg6,Lys6\]</code>.</li>
   </ol>
 
   <blockquote class="tip">
-    <h3 id="bulb-tip-expert-level-detecting-features-of-knockouts">
-<img class="emoji" title=":bulb:" alt=":bulb:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f4a1.png" height="20" width="20" align="absmiddle"> Tip (Expert level): Detecting features of knockouts</h3>
+    <h3 id="-tip-expert-level-detecting-features-of-knockouts"><i class="fa fa-lightbulb-o" aria-hidden="true"></i> Tip (Expert level): Detecting features of knockouts</h3>
     <p>In biology, there are rarely cases in which a gene product is completely shut off between two conditions. Rather, most changes are <strong>word missing</strong>. However, in some situations, you will have the situation that a protein is present in only one of the tested conditions and completely lacking in another. A classical example would be comparing a “knockout” mouse with its “wild-type” counterpart.
 Due to the feature detection algorithm of <code class="highlighter-rouge">FeatureFinderMultiplex</code>, those features would normally be disregarded, as they do not look like typical features in labelled samples.</p>
 
@@ -187,28 +183,25 @@ Switching on this option is not recommended as a default setting, as it increase
 <h1 id="peptide-and-protein-identification-and-conversion">Peptide and Protein Identification and Conversion</h1>
 
 <blockquote class="hands_on">
-  <h3 id="pencil2-hands-on-peptide-and-protein-identification-and-conversion">
-<img class="emoji" title=":pencil2:" alt=":pencil2:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/270f.png" height="20" width="20" align="absmiddle"> Hands-on: Peptide and Protein Identification and Conversion</h3>
+  <h3 id="-hands-on-peptide-and-protein-identification-and-conversion"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Peptide and Protein Identification and Conversion</h3>
   <ol>
     <li>Run the workflow “ProteinID_SG_PS” on the test dataset.</li>
-    <li>Use <strong><code class="highlighter-rouge">IDConverter</code></strong> to convert the mzid output of <code class="highlighter-rouge">Peptide Shaker</code> <img class="emoji" title=":wrench:" alt=":wrench:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f527.png" height="20" width="20" align="absmiddle"> to mzidentML.</li>
+    <li>Use <strong><code class="highlighter-rouge">IDConverter</code></strong> to convert the mzid output of <code class="highlighter-rouge">Peptide Shaker</code> <i class="fa fa-wrench" aria-hidden="true"></i> to mzidentML.</li>
   </ol>
 </blockquote>
 
 <h1 id="quant-to-id-matching">Quant to ID matching</h1>
 
 <blockquote class="hands_on">
-  <h3 id="pencil2-hands-on-quant-to-id-matching">
-<img class="emoji" title=":pencil2:" alt=":pencil2:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/270f.png" height="20" width="20" align="absmiddle"> Hands-on: Quant to ID matching</h3>
+  <h3 id="-hands-on-quant-to-id-matching"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Quant to ID matching</h3>
 
   <ol>
-    <li>Run <code class="highlighter-rouge">ProteinQuantifier</code> <img class="emoji" title=":wrench:" alt=":wrench:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f527.png" height="20" width="20" align="absmiddle"> on
+    <li>Run <code class="highlighter-rouge">ProteinQuantifier</code> <i class="fa fa-wrench" aria-hidden="true"></i> on
 2.</li>
   </ol>
 
   <blockquote class="question">
-    <h3 id="question-questions">
-<img class="emoji" title=":question:" alt=":question:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2753.png" height="20" width="20" align="absmiddle"> Questions</h3>
+    <h3 id="-questions"><i class="fa fa-question-circle" aria-hidden="true"></i> Questions</h3>
   </blockquote>
 </blockquote>
 
@@ -230,19 +223,17 @@ Switching on this option is not recommended as a default setting, as it increase
 </blockquote>
 
 <blockquote class="hands_on">
-  <h3 id="pencil2-hands-on-evaluation-and-optimization-of-quantitation-results">
-<img class="emoji" title=":pencil2:" alt=":pencil2:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/270f.png" height="20" width="20" align="absmiddle"> Hands-on: Evaluation and Optimization of Quantitation Results</h3>
+  <h3 id="-hands-on-evaluation-and-optimization-of-quantitation-results"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Evaluation and Optimization of Quantitation Results</h3>
 
   <ol>
     <li>Run the whole WF again, change ** a single setting (averagine?)** in <code class="highlighter-rouge">FeatureFinderMultiplex</code>.</li>
-    <li>Run <code class="highlighter-rouge">FileInfo</code> <img class="emoji" title=":wrench:" alt=":wrench:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f527.png" height="20" width="20" align="absmiddle"> on the results -&gt; number of ID-Feature-matches</li>
-    <li>Run <code class="highlighter-rouge">dongs</code> <img class="emoji" title=":wrench:" alt=":wrench:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f527.png" height="20" width="20" align="absmiddle"> on the results -&gt; restrict to a small areas</li>
+    <li>Run <code class="highlighter-rouge">FileInfo</code> <i class="fa fa-wrench" aria-hidden="true"></i> on the results -&gt; number of ID-Feature-matches</li>
+    <li>Run <code class="highlighter-rouge">dongs</code> <i class="fa fa-wrench" aria-hidden="true"></i> on the results -&gt; restrict to a small areas</li>
     <li>Open results in TOPPView.</li>
   </ol>
 
   <blockquote class="question">
-    <h3 id="question-questions-1">
-<img class="emoji" title=":question:" alt=":question:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2753.png" height="20" width="20" align="absmiddle"> Questions</h3>
+    <h3 id="-questions-1"><i class="fa fa-question-circle" aria-hidden="true"></i> Questions</h3>
     <ol>
       <li>Which setting led to more ID-Feature-matches?</li>
       <li>Using the default settings, how many features were not mapped to IDs? How many IDs were not mapped to features?</li>
@@ -253,20 +244,20 @@ Switching on this option is not recommended as a default setting, as it increase
 
         
         <blockquote class="key_points">
-            <h3> <img class="emoji" title=":grey_exclamation:" alt=":grey_exclamation:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2755.png" height="20" width="20" align="absmiddle"> Key points</h3>
+            <h3><i class="fa fa-key" aria-hidden="true"></i> Key points</h3>
 
             <ul>
-            
-            <li>Stable isotopes result in multiple parallel MS1 ion traces.</li>
-            
-            <li>MS1 ion traces can be used to relatively quantify proteins of different samples in a sing</li>
-            
-            <li>Quantitations have to be mapped to PSMs.</li>
-            
-            <li>PSM quantitations can be used to calculate protein quantitations.</li>
-            
-            <li>Proper quantitation and mapping needs careful evaluation and optimization.</li>
-            
+                
+                <li>Stable isotopes result in multiple parallel MS1 ion traces.</li>
+                
+                <li>MS1 ion traces can be used to relatively quantify proteins of different samples in a sing</li>
+                
+                <li>Quantitations have to be mapped to PSMs.</li>
+                
+                <li>PSM quantitations can be used to calculate protein quantitations.</li>
+                
+                <li>Proper quantitation and mapping needs careful evaluation and optimization.</li>
+                
             </ul>
         </blockquote>
         
@@ -276,17 +267,16 @@ Switching on this option is not recommended as a default setting, as it increase
         <p>Useful information regarding this type of analysis with descriptions and paper references for the tools used in this tutorial, and literature for this analysis techniques and interpretations can be found <a href="https://galaxyproject.github.io/training-material/topics/proteomics#references">here</a>.</p>
         
 
-        <h3>
-<img class="emoji" title=":clap:" alt=":clap:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f44f.png" height="20" width="20" align="absmiddle"> Congratulations on successfully completing this tutorial!</h3>
-
+        <h3><i class="fa fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!</h3>
 
         <hr>
-        <blockquote class="overview">
-            <h3> <img class="emoji" title=":speech_balloon:" alt=":speech_balloon:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f4ac.png" height="20" width="20" align="absmiddle"> Feedback</h3>
-            Please take a moment and provide your feedback on this tutorial. Your feedback will help guide and improve future revisions to this tutorial. <a href="https://tinyurl.com/GTNfeedback" target="_blank">Feedback Form</a>
-        </blockquote>
 
-            </section>
+        <blockquote class="overview">
+            <h3><i class="fa fa-comments-o" aria-hidden="true"></i> Feedback</h3>
+            Please take a moment and provide your feedback on this tutorial. Your feedback will help guide and improve future revisions to this tutorial.
+            <a href="https://tinyurl.com/GTNfeedback">Feedback Form</a>
+        </blockquote>
+    </section>
 </div>
 
 <footer>

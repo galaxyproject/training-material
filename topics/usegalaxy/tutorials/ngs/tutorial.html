@@ -1,7 +1,6 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
     <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -30,14 +29,14 @@
                 <ul class="navbar-nav">
                     <li class="nav-item">
                         <a class="nav-link" href="https://galaxyproject.github.io/training-material/topics/usegalaxy" title="Go back to list of tutorials">
-                            <i class="fa fa-folder-o"></i> Tutorials using public Galaxy at usegalaxy.org
+                            <i class="fa fa-folder-o" aria-hidden="true"></i> Tutorials using public Galaxy at usegalaxy.org
                         </a>
                     </li>
 
                     
                     <li class="nav-item">
                         <a class="nav-link" href="https://galaxyproject.github.io/training-material/topics/usegalaxy/slides" title="Slides for this tutorial">
-                            <i class="fa fa-slideshare"></i> Introduction slides
+                            <i class="fa fa-slideshare" aria-hidden="true"></i> Introduction slides
                         </a>
                     </li>
                     
@@ -45,7 +44,7 @@
                     
                     <li class="nav-item">
                         <a class="nav-link" href="https://github.com/galaxyproject/training-material/tree/master/topics/usegalaxy/docker" title="Docker image for this tutorial">
-                            <i class="fa fa-ship"></i> Docker image
+                            <i class="fa fa-ship" aria-hidden="true"></i> Docker image
                         </a>
                     </li>
                     
@@ -53,7 +52,7 @@
                     
                     <li class="nav-item">
                         <a class="nav-link" href="https://usegalaxy.org" title="Galaxy instance for this tutorial">
-                            <i class="fa fa-external-link"></i> Galaxy instance
+                            <i class="fa fa-external-link" aria-hidden="true"></i> Galaxy instance
                         </a>
                     </li>
                     
@@ -70,7 +69,7 @@
 
                     <li class="nav-item">
                         <a class="nav-link" href="https://github.com/galaxyproject/training-material/tree/master/topics/usegalaxy/tutorials/ngs/tutorial.md">
-                            <i class="fa fa-github"></i> Edit
+                            <i class="fa fa-github" aria-hidden="true"></i> Edit
                         </a>
                     </li>
                 </ul>
@@ -86,14 +85,14 @@
         <blockquote class="overview">
             <h3>Overview</h3>
 
-            <p class="bold"> <img class="emoji" title=":grey_question:" alt=":grey_question:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2754.png" height="20" width="20" align="absmiddle"> Questions</p>
+            <strong><i class="fa fa-question-circle" aria-hidden="true"></i> Questions</strong>
             <ul>
             
             <li>How to manipulate and process NGS data</li>
             
             </ul>
 
-            <p class="bold"> <img class="emoji" title=":dart:" alt=":dart:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f3af.png" height="20" width="20" align="absmiddle"> Objectives</p>
+            <strong><i class="fa fa-bullseye" aria-hidden="true"></i> Objectives</strong>
             <ul>
             
             <li>Learn about Fastq, SAM, and BAM.</li>
@@ -101,7 +100,7 @@
             </ul>
 
             
-            <p class="bold"> <img class="emoji" title=":heavy_check_mark:" alt=":heavy_check_mark:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2714.png" height="20" width="20" align="absmiddle"> Requirements</p>
+            <strong><i class="fa fa-check-circle" aria-hidden="true"></i> Requirements</strong>
             <ul>
             
                 <li>
@@ -114,7 +113,7 @@
             </ul>
             
 
-            <p><span class="bold"> <img class="emoji" title=":hourglass:" alt=":hourglass:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/231b.png" height="20" width="20" align="absmiddle"> Time estimation:</span> 30 min</p>
+            <p><strong><i class="fa fa-hourglass-end" aria-hidden="true"></i> Time estimation:</strong> 30 min</p>
         </blockquote>
 
         <p>In this section we will look at practical aspects of manipulation of next-generation sequencing data. We will start with Fastq format produced by most sequencing machines and will finish with SAM/BAM format representing mapped reads. The cover image above shows a screen dump of a SAM dataset.</p>
@@ -175,8 +174,7 @@
 
 <p>Fastq format looks like this:</p>
 
-<div class="highlighter-rouge">
-<pre class="highlight"><code>
+<div class="highlighter-rouge"><pre class="highlight"><code>
 @M02286:19:000000000-AA549:1:1101:12677:1273 1:N:0:23
 CCTACGGGTGGCAGCAGTGAGGAATATTGGTCAATGGACGGAAGTCTGAACCAGCCAAGTAGCGTGCAG
 +
@@ -196,13 +194,10 @@ AAC&lt;CCF+@@&gt;CC,C9,F9C9@9-CFFFE@7@:+CC8-C@:7,@EFE,6CF:+8F7EFEEF@EGGGEEE
 <p>Each sequencing read is represented by four lines:</p>
 
 <ol>
-  <li>
-<code class="highlighter-rouge">@</code> followed by read ID and optional information about sequencing run</li>
+  <li><code class="highlighter-rouge">@</code> followed by read ID and optional information about sequencing run</li>
   <li>sequenced bases</li>
-  <li>
-<code class="highlighter-rouge">+</code> (optionally followed by the read ID and some additional info)</li>
-  <li>quality scores for each base of the sequence encoded as <a href="https://en.wikipedia.org/wiki/ASCII">ASCII symbols</a>
-</li>
+  <li><code class="highlighter-rouge">+</code> (optionally followed by the read ID and some additional info)</li>
+  <li>quality scores for each base of the sequence encoded as <a href="https://en.wikipedia.org/wiki/ASCII">ASCII symbols</a></li>
 </ol>
 
 <h2 id="paired-end-data">Paired end data</h2>
@@ -217,7 +212,7 @@ AAC&lt;CCF+@@&gt;CC,C9,F9C9@9-CFFFE@7@:+CC8-C@:7,@EFE,6CF:+8F7EFEEF@EGGGEEE
   </thead>
   <tbody>
     <tr>
-      <td><img src="../../images/pe_mp.png" alt=""></td>
+      <td><img src="../../images/pe_mp.png" alt="" /></td>
     </tr>
     <tr>
       <td><small><strong>Paired-end and mate-pair reads</strong>. In paired end sequencing (left) the actual ends of rather short DNA molecules (less than 1kb) are determined, while for mate pair sequencing (right) the ends of long molecules are joined and prepared in special sequencing libraries. In these mate pair protocols, the ends of long, size-selected molecules are connected with an internal adapter sequence (i.e. linker, yellow) in a circularization reaction. The circular molecule is then processed using restriction enzymes or fragmentation. Fragments are enriched for the linker and outer library adapters are added around the two combined molecule ends. The internal adapter can then be used as a second priming site for an additional sequencing reaction in the same orientation or sequencing can be performed from the second adapter, from the reverse strand. (From Ph.D. dissertation by <a href="https://core.ac.uk/download/pdf/35186947.pdf">Martin Kircher</a>)</small></td>
@@ -231,8 +226,7 @@ AAC&lt;CCF+@@&gt;CC,C9,F9C9@9-CFFFE@7@:+CC8-C@:7,@EFE,6CF:+8F7EFEEF@EGGGEEE
 
 <p><strong>File 1</strong></p>
 
-<div class="highlighter-rouge">
-<pre class="highlight"><code> @M02286:19:000000000-AA549:1:1101:12677:1273 1:N:0:23
+<div class="highlighter-rouge"><pre class="highlight"><code> @M02286:19:000000000-AA549:1:1101:12677:1273 1:N:0:23
  CCTACGGGTGGCAGCAGTGAGGAATATTGGTCAATGGACGGAAGTCT
  +
  ABC8C,:@F:CE8,B-,C,-6-9-C,CE9-CC--C-&lt;-C++,,+;CE
@@ -245,8 +239,7 @@ AAC&lt;CCF+@@&gt;CC,C9,F9C9@9-CFFFE@7@:+CC8-C@:7,@EFE,6CF:+8F7EFEEF@EGGGEEE
 
 <p><strong>File 2</strong></p>
 
-<div class="highlighter-rouge">
-<pre class="highlight"><code>@M02286:19:000000000-AA549:1:1101:12677:1273 2:N:0:23
+<div class="highlighter-rouge"><pre class="highlight"><code>@M02286:19:000000000-AA549:1:1101:12677:1273 2:N:0:23
 CACTACCCGTGTATCTAATCCTGTTTGATACCCGCACCTTCGAGCTTA
 +
 --8A,CCE+,,;,&lt;CC,,&lt;CE@,CFD,,C,CFF+@+@CCEF,,,B+C,
@@ -265,8 +258,7 @@ CACTACCGGGGTATCTAATCCTGTTCGCTCCCCACGCTTTCGTCCATC
 
 <h4 id="interleaved-file">Interleaved file</h4>
 
-<div class="highlighter-rouge">
-<pre class="highlight"><code>@1/1
+<div class="highlighter-rouge"><pre class="highlight"><code>@1/1
 AGGGATGTGTTAGGGTTAGGGTTAGGGTTAGGGTTAGGGTTAGGGTTA
 +
 EGGEGGGDFGEEEAEECGDEGGFEEGEFGBEEDDECFEFDD@CDD&lt;ED
@@ -299,8 +291,7 @@ HHHHHHHHHHHHHGHHHHHHGHHHHHHHHHHHFHHHFHHHHHHHHHHH
 
 <ul>
   <li><em>sequence of the read</em></li>
-  <li>
-<em>base qualities</em> for each nucleotide in the read.</li>
+  <li><em>base qualities</em> for each nucleotide in the read.</li>
 </ul>
 
 <p>The base qualities allow us to judge how trustworthy each base in a sequencing read is. The following excerpt from an excellent <a href="http://chagall.med.cornell.edu/RNASEQcourse/Intro2RNAseq.pdf">tutorial</a> by Friederike Dündar, Luce Skrabanek, Paul Zumbo explains what base qualities are:</p>
@@ -325,7 +316,7 @@ Sanger/Phred format that is also used by other sequencing platforms and the sequ
   </thead>
   <tbody>
     <tr>
-      <td><img src="../../images/fastq_qs.png" alt=""></td>
+      <td><img src="../../images/fastq_qs.png" alt="" /></td>
     </tr>
     <tr>
       <td><small>The ASCII interpretation and ranges of the different Phred score notations used by Illumina and the original Sanger interpretation. Although the Sanger format allows a theoretical score of 93, raw sequencing reads typically do not exceed a Phred score of 60. In fact, most Illumina-based sequencing will result in maximum scores of 41 to 45 (image from <a href="https://en.wikipedia.org/wiki/FASTQ_format">Wikipedia</a></small></td>
@@ -346,8 +337,8 @@ Sanger/Phred format that is also used by other sequencing platforms and the sequ
   </thead>
   <tbody>
     <tr>
-      <td style="text-align: left"><img src="../../images/good_fq.png" alt=""></td>
-      <td style="text-align: left"><img src="../../images/bad_fq.png" alt=""></td>
+      <td style="text-align: left"><img src="../../images/good_fq.png" alt="" /></td>
+      <td style="text-align: left"><img src="../../images/bad_fq.png" alt="" /></td>
     </tr>
     <tr>
       <td style="text-align: left"><small><strong>A.</strong> Excellent quality</small></td>
@@ -369,16 +360,11 @@ Sanger/Phred format that is also used by other sequencing platforms and the sequ
 <p>Mapping of NGS reads against reference sequences is one of the key steps of the analysis. Now it is time to see how this is done in practice. Below is a list of key publications highlighting mainstream mapping tools:</p>
 
 <ul>
-  <li>2009 Bowtie 1 - <a href="http://genomebiology.com/content/10/3/R25">Langmead et al.</a>
-</li>
-  <li>2012 Bowtie 2 - <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3322381/">Langmead and Salzberg</a>
-</li>
-  <li>2009 BWA - <a href="https://academic.oup.com/bioinformatics/article/25/14/1754/225615/Fast-and-accurate-short-read-alignment-with">Li and Durbin</a>
-</li>
-  <li>2010 BWA - <a href="https://academic.oup.com/bioinformatics/article/26/5/589/211735/Fast-and-accurate-long-read-alignment-with-Burrows">Li and Durbin</a>
-</li>
-  <li>2013 BWA-MEM - <a href="https://arxiv.org/abs/1303.3997">Li</a>
-</li>
+  <li>2009 Bowtie 1 - <a href="http://genomebiology.com/content/10/3/R25">Langmead et al.</a></li>
+  <li>2012 Bowtie 2 - <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3322381/">Langmead and Salzberg</a></li>
+  <li>2009 BWA - <a href="https://academic.oup.com/bioinformatics/article/25/14/1754/225615/Fast-and-accurate-short-read-alignment-with">Li and Durbin</a></li>
+  <li>2010 BWA - <a href="https://academic.oup.com/bioinformatics/article/26/5/589/211735/Fast-and-accurate-long-read-alignment-with-Burrows">Li and Durbin</a></li>
+  <li>2013 BWA-MEM - <a href="https://arxiv.org/abs/1303.3997">Li</a></li>
 </ul>
 
 <h2 id="mapping-against-a-pre-computed-genome-index">Mapping against a pre-computed genome index</h2>
@@ -393,7 +379,7 @@ Sanger/Phred format that is also used by other sequencing platforms and the sequ
   </thead>
   <tbody>
     <tr>
-      <td><img src="../../images/cached_genome.png" alt=""></td>
+      <td><img src="../../images/cached_genome.png" alt="" /></td>
     </tr>
     <tr>
       <td><small>Mapping against a pre-computed index in Galaxy.</small></td>
@@ -424,7 +410,7 @@ Sanger/Phred format that is also used by other sequencing platforms and the sequ
   </thead>
   <tbody>
     <tr>
-      <td><img src="../../images/uploaded_genome.png" alt=""></td>
+      <td><img src="../../images/uploaded_genome.png" alt="" /></td>
     </tr>
     <tr>
       <td><small>Mapping against a pre-computed index in Galaxy </small></td>
@@ -452,7 +438,7 @@ Sanger/Phred format that is also used by other sequencing platforms and the sequ
   </thead>
   <tbody>
     <tr>
-      <td><img src="../../images/bam_structure.png" alt=""></td>
+      <td><img src="../../images/bam_structure.png" alt="" /></td>
     </tr>
     <tr>
       <td><small><strong>Schematic representation of a SAM file</strong>. Each line of the optional header section starts with “@”, followed by the appropriate abbreviation (e.g., SQ for sequence dictionary which lists all chromosomes names (SN) and their lengths (LN)). The vast majority of lines within a SAM file typically correspond to read alignments where each read is described by the 11 mandatory entries (black font) and a variable number of optional fields (grey font). From <a href="http://chagall.med.cornell.edu/RNASEQcourse/Intro2RNAseq.pdf">tutorial</a> by Friederike Dündar, Luce Skrabanek, and Paul Zumbo.</small></td>
@@ -464,8 +450,7 @@ Sanger/Phred format that is also used by other sequencing platforms and the sequ
 
 <p>The header section includes information about how the alignment was generated and stored. All lines in the header section are tab-delimited and begin with the “@” character, followed by tag:value pairs, where tag is a two-letter string that defines the content and the format of value. For example, the “@SQ” line in the header section contains the information about the names and lengths of the *reference sequences to which the reads were aligned. For a hypothetical organism with three chromosomes of length 1,000 bp, the SAM header should contain the following three lines:</p>
 
-<div class="highlighter-rouge">
-<pre class="highlight"><code>@SQ SN:chr1 LN:1000
+<div class="highlighter-rouge"><pre class="highlight"><code>@SQ SN:chr1 LN:1000
 @SQ SN:chr2 LN:1000
 @SQ SN:chr3 LN:1000
 </code></pre>
@@ -475,24 +460,21 @@ Sanger/Phred format that is also used by other sequencing platforms and the sequ
 
 <p>The optional header section is followed by the alignment section where each line corresponds to one sequenced read. For each read, there are 11 mandatory fields that always appear in the same order:</p>
 
-<div class="highlighter-rouge">
-<pre class="highlight"><code>&lt;QNAME&gt; &lt;FLAG&gt; &lt;RNAME&gt; &lt;POS&gt; &lt;MAPQ&gt; &lt;CIGAR&gt; &lt;MRNM&gt; &lt;MPOS&gt; &lt;ISIZE&gt; &lt;SEQ&gt; &lt;QUAL&gt;
+<div class="highlighter-rouge"><pre class="highlight"><code>&lt;QNAME&gt; &lt;FLAG&gt; &lt;RNAME&gt; &lt;POS&gt; &lt;MAPQ&gt; &lt;CIGAR&gt; &lt;MRNM&gt; &lt;MPOS&gt; &lt;ISIZE&gt; &lt;SEQ&gt; &lt;QUAL&gt;
 </code></pre>
 </div>
 
 <p>If the corresponding information is unavailable or irrelevant, field values can be ‘0’ or ‘*’ (depending on the field, see below), but they cannot be missing! After the 11 mandatory fields, a variable number of optional fields can be present. Here’s an example of one single line of a real-life SAM file (you may need to scroll sideways):</p>
 
-<div class="highlighter-rouge">
-<pre class="highlight"><code>ERR458493 .552967 16 chrI 140 255 12 M61232N37M2S * 0 0 CCACTCGTTCACCAGGGCCGGCGGGCTGATCACTTTATCGTGCATCTTGGC BB?HHJJIGHHJIGIIJJIJGIJIJJIIIGHBJJJJJJHHHHFFDDDA1+B NH:i:1 HI:i:1 AS:i:41 nM:i:2
+<div class="highlighter-rouge"><pre class="highlight"><code>ERR458493 .552967 16 chrI 140 255 12 M61232N37M2S * 0 0 CCACTCGTTCACCAGGGCCGGCGGGCTGATCACTTTATCGTGCATCTTGGC BB?HHJJIGHHJIGIIJJIJGIJIJJIIIGHBJJJJJJHHHHFFDDDA1+B NH:i:1 HI:i:1 AS:i:41 nM:i:2
 </code></pre>
 </div>
 
 <p>The following table explains the format and content of each field. The <code class="highlighter-rouge">FLAG</code>, <code class="highlighter-rouge">CIGAR</code>, and the optional fields (marked in blue) are explained in more detail below. The number of optional fields can vary widely between different SAM files and even between reads within in the same file. The field types marked in blue are explained in more detail in the main text below.</p>
 
-<p><img src="../../images/sam_fields.png" alt=""></p>
+<p><img src="../../images/sam_fields.png" alt="" /></p>
 
-<h3 id="flag-field">
-<code class="highlighter-rouge">FLAG</code> field</h3>
+<h3 id="flag-field"><code class="highlighter-rouge">FLAG</code> field</h3>
 
 <p>The FLAG field encodes various pieces of information about the individual read, which is particularly important for PE reads. It contains an integer that is generated from a sequence of Boolean bits (0, 1). This way, answers to multiple binary (Yes/No) questions can be compactly stored as a series of bits, where each of the single bits can be addressed and assigned separately.</p>
 
@@ -506,7 +488,7 @@ Sanger/Phred format that is also used by other sequencing platforms and the sequ
   </thead>
   <tbody>
     <tr>
-      <td><img src="../../images/sam_flag.png" alt=""></td>
+      <td><img src="../../images/sam_flag.png" alt="" /></td>
     </tr>
     <tr>
       <td><small>The <code class="highlighter-rouge">FLAG</code> field of SAM files stores information about the respective read alignment in one single decimal number. The decimal number is the sum of all the answers to the Yes/No questions associated with each binary bit. The hexadecimal representation is used to refer to the individual bits (questions). A bit is set if the corresponding state is true. For example, if a read is paired, <code class="highlighter-rouge">0x1</code> will be set, returning the decimal value of 1. Therefore, all <code class="highlighter-rouge">FLAG</code> values associated with paired reads must be uneven decimal numbers. Conversely, if the <code class="highlighter-rouge">0x1</code> bit is unset (= read is not paired), no assumptions can be made about <code class="highlighter-rouge">0x2</code>, <code class="highlighter-rouge">0x8</code>, <code class="highlighter-rouge">0x20</code>, <code class="highlighter-rouge">0x40</code> and <code class="highlighter-rouge">0x80</code> because they refer to paired reads. From <a href="http://chagall.med.cornell.edu/RNASEQcourse/Intro2RNAseq.pdf">tutorial</a> by Friederike Dündar, Luce Skrabanek, and Paul Zumbo</small></td>
@@ -533,48 +515,39 @@ Sanger/Phred format that is also used by other sequencing platforms and the sequ
   </thead>
   <tbody>
     <tr>
-      <td>
-<strong>69</strong> (= 1 + 4 + 64)</td>
+      <td><strong>69</strong> (= 1 + 4 + 64)</td>
       <td>The read is paired, is the first read in the pair, and is unmapped.</td>
     </tr>
     <tr>
-      <td>
-<strong>77</strong> (= 1 + 4 + 8 + 64)</td>
+      <td><strong>77</strong> (= 1 + 4 + 8 + 64)</td>
       <td>The read is paired, is the first read in the pair, both are unmapped.</td>
     </tr>
     <tr>
-      <td>
-<strong>83</strong> (= 1 + 2 + 16 + 64)</td>
+      <td><strong>83</strong> (= 1 + 2 + 16 + 64)</td>
       <td>The read is paired, mapped in a proper pair, is the first read in the pair, and it is mapped to the reverse strand.</td>
     </tr>
     <tr>
-      <td>
-<strong>99</strong> (= 1 + 2 + 32 + 64)</td>
+      <td><strong>99</strong> (= 1 + 2 + 32 + 64)</td>
       <td>The read is paired, mapped in a proper pair, is the first read in the pair, and its mate is mapped to the reverse strand.</td>
     </tr>
     <tr>
-      <td>
-<strong>133</strong> (= 1 + 4 + 128)</td>
+      <td><strong>133</strong> (= 1 + 4 + 128)</td>
       <td>The read is paired, is the second read in the pair, and it is unmapped.</td>
     </tr>
     <tr>
-      <td>
-<strong>137</strong> (= 1 + 8 + 128)</td>
+      <td><strong>137</strong> (= 1 + 8 + 128)</td>
       <td>The read is paired, is the second read in the pair, and it is mapped while its mate is not.</td>
     </tr>
     <tr>
-      <td>
-<strong>141</strong> (= 1 + 4 + 8 + 128)</td>
+      <td><strong>141</strong> (= 1 + 4 + 8 + 128)</td>
       <td>The read is paired, is the second read in the pair, but both are unmapped.</td>
     </tr>
     <tr>
-      <td>
-<strong>147</strong> (= 1 + 2 + 16 + 128)</td>
+      <td><strong>147</strong> (= 1 + 2 + 16 + 128)</td>
       <td>The read is paired, mapped in a proper pair, is the second read in the pair, and mapped to the reverse strand.</td>
     </tr>
     <tr>
-      <td>
-<strong>163</strong> (= 1 + 2 + 32 + 128)</td>
+      <td><strong>163</strong> (= 1 + 2 + 32 + 128)</td>
       <td>The read is paired, mapped in a proper pair, is the second read in the pair, and its mate is mapped to the reverse strand.</td>
     </tr>
   </tbody>
@@ -582,8 +555,7 @@ Sanger/Phred format that is also used by other sequencing platforms and the sequ
 
 <p>A useful website for quickly translating the FLAG integers into plain English explanations like the ones shown above is: https://broadinstitute.github.io/picard/explain-flags.html</p>
 
-<h3 id="cigar-string">
-<code class="highlighter-rouge">CIGAR</code> string</h3>
+<h3 id="cigar-string"><code class="highlighter-rouge">CIGAR</code> string</h3>
 
 <p><code class="highlighter-rouge">CIGAR</code> stands for <em>Concise Idiosyncratic Gapped Alignment Report</em>. This sixth field of a SAM file
 contains a so-called CIGAR string indicating which operations were necessary to map the read to the reference sequence at that particular locus.</p>
@@ -591,24 +563,15 @@ contains a so-called CIGAR string indicating which operations were necessary to 
 <p>The following operations are defined in CIGAR format (also see figure below):</p>
 
 <ul>
-  <li>
-<strong>M</strong> - Alignment (can be a sequence match or mismatch!)</li>
-  <li>
-<strong>I</strong> - Insertion in the read compared to the reference</li>
-  <li>
-<strong>D</strong> - Deletion in the read compared to the reference</li>
-  <li>
-<strong>N</strong> - Skipped region from the reference. For mRNA-to-genome alignments, an N operation represents an intron. For other types of alignments, the interpretation of N is not defined.</li>
-  <li>
-<strong>S</strong> - Soft clipping (clipped sequences are present in read); S may only have H operations between them and the ends of the string</li>
-  <li>
-<strong>H</strong> - Hard clipping (clipped sequences are NOT present in the alignment record); can only be present as the first and/or last operation</li>
-  <li>
-<strong>P</strong> - Padding (silent deletion from padded reference)</li>
-  <li>
-<strong>=</strong> - Sequence match (not widely used)</li>
-  <li>
-<strong>X</strong> - Sequence mismatch (not widely used)</li>
+  <li><strong>M</strong> - Alignment (can be a sequence match or mismatch!)</li>
+  <li><strong>I</strong> - Insertion in the read compared to the reference</li>
+  <li><strong>D</strong> - Deletion in the read compared to the reference</li>
+  <li><strong>N</strong> - Skipped region from the reference. For mRNA-to-genome alignments, an N operation represents an intron. For other types of alignments, the interpretation of N is not defined.</li>
+  <li><strong>S</strong> - Soft clipping (clipped sequences are present in read); S may only have H operations between them and the ends of the string</li>
+  <li><strong>H</strong> - Hard clipping (clipped sequences are NOT present in the alignment record); can only be present as the first and/or last operation</li>
+  <li><strong>P</strong> - Padding (silent deletion from padded reference)</li>
+  <li><strong>=</strong> - Sequence match (not widely used)</li>
+  <li><strong>X</strong> - Sequence mismatch (not widely used)</li>
 </ul>
 
 <p>The sum of lengths of the <strong>M</strong>, <strong>I</strong>, <strong>S</strong>, <strong>=</strong>, <strong>X</strong> operations must equal the length of the read. Here are some examples:</p>
@@ -621,7 +584,7 @@ contains a so-called CIGAR string indicating which operations were necessary to 
   </thead>
   <tbody>
     <tr>
-      <td><img src="../../images/cigar.png" alt=""></td>
+      <td><img src="../../images/cigar.png" alt="" /></td>
     </tr>
     <tr>
       <td><small>From <a href="http://chagall.med.cornell.edu/RNASEQcourse/Intro2RNAseq.pdf">tutorial</a> by Friederike Dündar, Luce Skrabanek, and Paul Zumbo.</small></td>
@@ -635,35 +598,23 @@ contains a so-called CIGAR string indicating which operations were necessary to 
 pairs in the format of <code class="highlighter-rouge">&lt;TAG&gt;:&lt;TYPE&gt;:&lt;VALUE&gt;</code>, where <code class="highlighter-rouge">TYPE</code> is one of:</p>
 
 <ul>
-  <li>
-<code class="highlighter-rouge">A</code> - Character</li>
-  <li>
-<code class="highlighter-rouge">i</code> - Integer</li>
-  <li>
-<code class="highlighter-rouge">f</code> - Float number</li>
-  <li>
-<code class="highlighter-rouge">Z</code> - String</li>
-  <li>
-<code class="highlighter-rouge">H</code> - Hex string</li>
+  <li><code class="highlighter-rouge">A</code> - Character</li>
+  <li><code class="highlighter-rouge">i</code> - Integer</li>
+  <li><code class="highlighter-rouge">f</code> - Float number</li>
+  <li><code class="highlighter-rouge">Z</code> - String</li>
+  <li><code class="highlighter-rouge">H</code> - Hex string</li>
 </ul>
 
 <p>The information stored in these optional fields will vary widely depending on the mapper and new tags can be added freely. In addition, reads within the same SAM file may have different numbers of optional fields, depending on the program that generated the SAM file. Commonly used optional tags include:</p>
 
 <ul>
-  <li>
-<code class="highlighter-rouge">AS:i</code> - Alignment score</li>
-  <li>
-<code class="highlighter-rouge">BC:Z</code> - Barcode sequence</li>
-  <li>
-<code class="highlighter-rouge">HI:i</code> - Match is i-th hit to the read</li>
-  <li>
-<code class="highlighter-rouge">NH:i</code> - Number of reported alignments for the query sequence</li>
-  <li>
-<code class="highlighter-rouge">NM:i</code> - Edit distance of the query to the reference</li>
-  <li>
-<code class="highlighter-rouge">MD:Z</code> - String that contains the exact positions of mismatches (should complement the CIGAR string)</li>
-  <li>
-<code class="highlighter-rouge">RG:Z</code> - Read group (should match the entry after ID if @RG is present in the header.</li>
+  <li><code class="highlighter-rouge">AS:i</code> - Alignment score</li>
+  <li><code class="highlighter-rouge">BC:Z</code> - Barcode sequence</li>
+  <li><code class="highlighter-rouge">HI:i</code> - Match is i-th hit to the read</li>
+  <li><code class="highlighter-rouge">NH:i</code> - Number of reported alignments for the query sequence</li>
+  <li><code class="highlighter-rouge">NM:i</code> - Edit distance of the query to the reference</li>
+  <li><code class="highlighter-rouge">MD:Z</code> - String that contains the exact positions of mismatches (should complement the CIGAR string)</li>
+  <li><code class="highlighter-rouge">RG:Z</code> - Read group (should match the entry after ID if @RG is present in the header.</li>
 </ul>
 
 <p>Thus, for example, we can use the NM:i:0 tag to select only those reads which map perfectly to the reference(i.e., have no mismatches). While the optional fields listed above are fairly standardized, tags that begin with <code class="highlighter-rouge">X</code>, <code class="highlighter-rouge">Y</code>, and <code class="highlighter-rouge">Z</code> are reserved for particularly free usage and will never be part of the official SAM file format specifications. <code class="highlighter-rouge">XS</code>, for example, is used by TopHat (an RNA-seq analysis tool we will discuss later) to encode the strand information (e.g., <code class="highlighter-rouge">XS:A:+</code>) while Bowtie2 and BWA use <code class="highlighter-rouge">XS:i:</code> for reads with multiple alignments to store the alignment score for the next-best-scoring alignment (e.g., <code class="highlighter-rouge">XS:i:30</code>).</p>
@@ -674,11 +625,11 @@ pairs in the format of <code class="highlighter-rouge">&lt;TAG&gt;:&lt;TYPE&gt;:
 
 <p>One of the best descriptions of BAM readgroups is on <a href="https://gatkforums.broadinstitute.org/discussion/1317/collected-faqs-about-bam-files">GATK support site</a>. We have gratefully stolen two tables describing the most important readgroup tags - <code class="highlighter-rouge">ID</code>, <code class="highlighter-rouge">SM</code>, <code class="highlighter-rouge">LB</code>, and <code class="highlighter-rouge">PL</code> - from GATK forum and provide them here:</p>
 
-<p><img src="../../images/rg.png" alt=""></p>
+<p><img src="../../images/rg.png" alt="" /></p>
 
 <p>GATK forum also provides the following example:</p>
 
-<p><img src="../../images/rg_example.png" alt=""></p>
+<p><img src="../../images/rg_example.png" alt="" /></p>
 
 <p>To see an example of read group manipulation in Galaxy see the following video:</p>
 
@@ -689,14 +640,10 @@ pairs in the format of <code class="highlighter-rouge">&lt;TAG&gt;:&lt;TYPE&gt;:
 <p>We support four major toolsets for processing of SAM/BAM datasets:</p>
 
 <ul>
-  <li>
-<a href="https://deeptools.github.io/">DeepTools</a> - a suite of user-friendly tools for the visualization, quality control and normalization of data from deep-sequencing DNA sequencing experiments.</li>
-  <li>
-<a href="http://www.htslib.org/">SAMtools</a> - various utilities for manipulating alignments in the SAM/BAM format, including sorting, merging, indexing and generating alignments in a per-position format.</li>
-  <li>
-<a href="https://github.com/pezmaster31/bamtools/wiki/Tutorial_Toolkit_BamTools-1.0.pdf">BAMtools</a> - a toolkit for reading, writing, and manipulating BAM (genome alignment) files.</li>
-  <li>
-<a href="https://broadinstitute.github.io/picard/">Picard</a> - a set of Java tools for manipulating high-throughput sequencing data (HTS) data and formats.</li>
+  <li><a href="https://deeptools.github.io/">DeepTools</a> - a suite of user-friendly tools for the visualization, quality control and normalization of data from deep-sequencing DNA sequencing experiments.</li>
+  <li><a href="http://www.htslib.org/">SAMtools</a> - various utilities for manipulating alignments in the SAM/BAM format, including sorting, merging, indexing and generating alignments in a per-position format.</li>
+  <li><a href="https://github.com/pezmaster31/bamtools/wiki/Tutorial_Toolkit_BamTools-1.0.pdf">BAMtools</a> - a toolkit for reading, writing, and manipulating BAM (genome alignment) files.</li>
+  <li><a href="https://broadinstitute.github.io/picard/">Picard</a> - a set of Java tools for manipulating high-throughput sequencing data (HTS) data and formats.</li>
 </ul>
 
 <p>The following video highlights de-duplication, filtering, and cleaning of a BAM dataset using BAMtools and Picard tools:</p>
@@ -721,7 +668,7 @@ pairs in the format of <code class="highlighter-rouge">&lt;TAG&gt;:&lt;TYPE&gt;:
   </thead>
   <tbody>
     <tr>
-      <td><img src="../../images/pcr-duplicates.png" alt=""></td>
+      <td><img src="../../images/pcr-duplicates.png" alt="" /></td>
     </tr>
     <tr>
       <td><small>Analyzing molecules aligning with the same outer coordinates, a mapping quality of at least 30 and a length of at least 30nt, resulted in an average coverage of 12.9 per PCR duplicate and an empirical coverage distribution similar to an exponential/power law distribution (left upper panel). This indicates that many molecules are only observed for deeper sequencing while other molecules are available at higher frequencies. Analyzing length (left middle panel) and GC content (left lower panel) patterns as well as the combination (right panel) shows higher PCR duplicate counts for a GC content between 30% to 70% as well as for shorter molecules compared to longer molecules. This effect may be due to an amplification bias from the polymerase or the cluster generation process necessary for Illumina sequencing. From Ph.D. dissertation of <a href="https://www.qucosa.de/fileadmin/data/qucosa/documents/7110/pflichtexemplar_final.pdf">Martin Kircher</a>).</small></td>
@@ -749,7 +696,7 @@ Duplicates are identified as read pairs having identical 5' positions (coordinat
   </thead>
   <tbody>
     <tr>
-      <td><img src="../../images/sampling-bias.png" alt=""></td>
+      <td><img src="../../images/sampling-bias.png" alt="" /></td>
     </tr>
     <tr>
       <td><small>The Variant Allele Frequency (VAF) bias determined by coverage and insert size variance. Reads are paired-end and read length is 76. The insert size distribution is modeled as a Gaussian distribution with mean at 200 and standard deviation shown on the x-axis. The true VAF is 0.05. The darkness at each position indicates the magnitude of the bias in the VAF. (From Zhou et al. <a href="https://bioinformatics.oxfordjournals.org/content/30/8/1073">2013</a>).</small></td>
@@ -762,17 +709,16 @@ Duplicates are identified as read pairs having identical 5' positions (coordinat
 
         
 
-        <h3>
-<img class="emoji" title=":clap:" alt=":clap:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f44f.png" height="20" width="20" align="absmiddle"> Congratulations on successfully completing this tutorial!</h3>
-
+        <h3><i class="fa fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!</h3>
 
         <hr>
-        <blockquote class="overview">
-            <h3> <img class="emoji" title=":speech_balloon:" alt=":speech_balloon:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f4ac.png" height="20" width="20" align="absmiddle"> Feedback</h3>
-            Please take a moment and provide your feedback on this tutorial. Your feedback will help guide and improve future revisions to this tutorial. <a href="https://tinyurl.com/GTNfeedback" target="_blank">Feedback Form</a>
-        </blockquote>
 
-            </section>
+        <blockquote class="overview">
+            <h3><i class="fa fa-comments-o" aria-hidden="true"></i> Feedback</h3>
+            Please take a moment and provide your feedback on this tutorial. Your feedback will help guide and improve future revisions to this tutorial.
+            <a href="https://tinyurl.com/GTNfeedback">Feedback Form</a>
+        </blockquote>
+    </section>
 </div>
 
 <footer>

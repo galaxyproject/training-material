@@ -1,7 +1,6 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
     <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -30,14 +29,14 @@
                 <ul class="navbar-nav">
                     <li class="nav-item">
                         <a class="nav-link" href="https://galaxyproject.github.io/training-material/topics/training" title="Go back to list of tutorials">
-                            <i class="fa fa-folder-o"></i> Train the trainers
+                            <i class="fa fa-folder-o" aria-hidden="true"></i> Train the trainers
                         </a>
                     </li>
 
                     
                     <li class="nav-item">
                         <a class="nav-link" href="https://galaxyproject.github.io/training-material/topics/training/slides" title="Slides for this tutorial">
-                            <i class="fa fa-slideshare"></i> Introduction slides
+                            <i class="fa fa-slideshare" aria-hidden="true"></i> Introduction slides
                         </a>
                     </li>
                     
@@ -51,7 +50,7 @@
                     
                     <li class="nav-item">
                         <a class="nav-link" href="https://galaxyproject.github.io/training-material/topics/training#references" title="References">
-                            <i class="fa fa-book"></i> Literature
+                            <i class="fa fa-book" aria-hidden="true"></i> Literature
                         </a>
                     </li>
                     
@@ -64,7 +63,7 @@
 
                     <li class="nav-item">
                         <a class="nav-link" href="https://github.com/galaxyproject/training-material/tree/master/topics/training/tutorials/create-new-tutorial-docker/tutorial.md">
-                            <i class="fa fa-github"></i> Edit
+                            <i class="fa fa-github" aria-hidden="true"></i> Edit
                         </a>
                     </li>
                 </ul>
@@ -80,7 +79,7 @@
         <blockquote class="overview">
             <h3>Overview</h3>
 
-            <p class="bold"> <img class="emoji" title=":grey_question:" alt=":grey_question:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2754.png" height="20" width="20" align="absmiddle"> Questions</p>
+            <strong><i class="fa fa-question-circle" aria-hidden="true"></i> Questions</strong>
             <ul>
             
             <li>How can we define the technical infrastructure for a tutorial?</li>
@@ -95,7 +94,7 @@
             
             </ul>
 
-            <p class="bold"> <img class="emoji" title=":dart:" alt=":dart:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f3af.png" height="20" width="20" align="absmiddle"> Objectives</p>
+            <strong><i class="fa fa-bullseye" aria-hidden="true"></i> Objectives</strong>
             <ul>
             
             <li>Creating a Galaxy Docker flavor with the needed tools, data and workflows for a tutorial</li>
@@ -106,7 +105,7 @@
 
             
 
-            <p><span class="bold"> <img class="emoji" title=":hourglass:" alt=":hourglass:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/231b.png" height="20" width="20" align="absmiddle"> Time estimation:</span> 30min</p>
+            <p><strong><i class="fa fa-hourglass-end" aria-hidden="true"></i> Time estimation:</strong> 30min</p>
         </blockquote>
 
         <h1 class="no_toc" id="introduction">Introduction</h1>
@@ -133,8 +132,7 @@ We decided on a structure based on tutorials with hands-on, fitting both for onl
   <p>In this tutorial, we will deal with:</p>
 
 <ol id="markdown-toc">
-  <li>
-<a href="#building-a-galaxy-instance-specifically-for-your-training" id="markdown-toc-building-a-galaxy-instance-specifically-for-your-training">Building a Galaxy instance specifically for your training</a>    <ol>
+  <li><a href="#building-a-galaxy-instance-specifically-for-your-training" id="markdown-toc-building-a-galaxy-instance-specifically-for-your-training">Building a Galaxy instance specifically for your training</a>    <ol>
       <li><a href="#filling-the-toolsyaml" id="markdown-toc-filling-the-toolsyaml">Filling the <code class="highlighter-rouge">tools.yaml</code></a></li>
       <li><a href="#filling-the-data-libraryyaml" id="markdown-toc-filling-the-data-libraryyaml">Filling the <code class="highlighter-rouge">data-library.yaml</code></a></li>
       <li><a href="#filling-the-data-manageryaml" id="markdown-toc-filling-the-data-manageryaml">Filling the <code class="highlighter-rouge">data-manager.yaml</code></a></li>
@@ -168,15 +166,13 @@ We decided on a structure based on tutorials with hands-on, fitting both for onl
 
 <p>This description will be used to automatically set up a Docker Galaxy flavour and also to test if a public Galaxy instance is able to run the tool.</p>
 
-<h2 id="filling-the-toolsyaml">Filling the <code class="highlighter-rouge">tools.yaml</code>
-</h2>
+<h2 id="filling-the-toolsyaml">Filling the <code class="highlighter-rouge">tools.yaml</code></h2>
 
 <p>The first file to fill is the <code class="highlighter-rouge">tools.yaml</code> file, containing the description of the required tools that could be installed from the ToolShed.</p>
 
 <p>This file looks like:</p>
 
-<div class="highlighter-rouge">
-<pre class="highlight"><code>---
+<div class="highlighter-rouge"><pre class="highlight"><code>---
 api_key: admin
 galaxy_instance: http://localhost:8080
 tools:
@@ -192,33 +188,26 @@ tools:
 <p>with:</p>
 
 <ul>
-  <li>
-<code class="highlighter-rouge">name</code>: the name of the wrapper of the tool in the ToolShed</li>
-  <li>
-<code class="highlighter-rouge">owner</code>: the owner of the wrapper of the tool in the ToolShed</li>
-  <li>
-<code class="highlighter-rouge">tool_panel_section_label</code>: section where to put the tool (in the left panel in the Galaxy instance)</li>
+  <li><code class="highlighter-rouge">name</code>: the name of the wrapper of the tool in the ToolShed</li>
+  <li><code class="highlighter-rouge">owner</code>: the owner of the wrapper of the tool in the ToolShed</li>
+  <li><code class="highlighter-rouge">tool_panel_section_label</code>: section where to put the tool (in the left panel in the Galaxy instance)</li>
 </ul>
 
 <blockquote class="hands_on">
-  <h3 id="pencil2-hands-on-fill-the-toolsyaml">
-<img class="emoji" title=":pencil2:" alt=":pencil2:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/270f.png" height="20" width="20" align="absmiddle"> Hands-on: Fill the <code class="highlighter-rouge">tools.yaml</code>
-</h3>
+  <h3 id="-hands-on-fill-the-toolsyaml"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Fill the <code class="highlighter-rouge">tools.yaml</code></h3>
 
   <ol>
     <li>Add the BLAST tool into the <code class="highlighter-rouge">tools.yaml</code> file</li>
   </ol>
 </blockquote>
 
-<h2 id="filling-the-data-libraryyaml">Filling the <code class="highlighter-rouge">data-library.yaml</code>
-</h2>
+<h2 id="filling-the-data-libraryyaml">Filling the <code class="highlighter-rouge">data-library.yaml</code></h2>
 
 <p>The data can also be integrated in the Galaxy instance inside a data libraries and then make the data shared between the users. It lets then avoid every trainees to redownload the input data.</p>
 
 <p>Such data are described in the <code class="highlighter-rouge">data-library.yaml</code>:</p>
 
-<div class="highlighter-rouge">
-<pre class="highlight"><code>libraries:
+<div class="highlighter-rouge"><pre class="highlight"><code>libraries:
     - name: Name of the tutorial
       files:
         - url: "https://raw.githubusercontent.com/bgruening/galaxytools/master/tools/rna_tools/sortmerna/test-data/read_small.fasta"
@@ -231,15 +220,11 @@ tools:
 <p>with:</p>
 
 <ul>
-  <li>
-<code class="highlighter-rouge">name</code>: name of the tutorial, where to put the data in the data libraries</li>
-  <li>
-<code class="highlighter-rouge">files</code>: list of the files to download
+  <li><code class="highlighter-rouge">name</code>: name of the tutorial, where to put the data in the data libraries</li>
+  <li><code class="highlighter-rouge">files</code>: list of the files to download
     <ul>
-      <li>
-<code class="highlighter-rouge">url</code>: URL to the input file</li>
-      <li>
-<code class="highlighter-rouge">file-type</code>: type of the input file</li>
+      <li><code class="highlighter-rouge">url</code>: URL to the input file</li>
+      <li><code class="highlighter-rouge">file-type</code>: type of the input file</li>
     </ul>
   </li>
 </ul>
@@ -247,9 +232,7 @@ tools:
 <p>The URL must refer to the URL of the files in Zenodo.</p>
 
 <blockquote class="hands_on">
-  <h3 id="pencil2-hands-on-fill-the-data-libraryyaml">
-<img class="emoji" title=":pencil2:" alt=":pencil2:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/270f.png" height="20" width="20" align="absmiddle"> Hands-on: Fill the <code class="highlighter-rouge">data-library.yaml</code>
-</h3>
+  <h3 id="-hands-on-fill-the-data-libraryyaml"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Fill the <code class="highlighter-rouge">data-library.yaml</code></h3>
 
   <ol>
     <li>Add the input files into the <code class="highlighter-rouge">data-library.yaml</code> file</li>
@@ -257,15 +240,13 @@ tools:
   </ol>
 </blockquote>
 
-<h2 id="filling-the-data-manageryaml">Filling the <code class="highlighter-rouge">data-manager.yaml</code>
-</h2>
+<h2 id="filling-the-data-manageryaml">Filling the <code class="highlighter-rouge">data-manager.yaml</code></h2>
 
 <p>Some of the tools require specific databases, specifically prepared for the tool. Then some Galaxy tools come with data managers to manage these databases.</p>
 
 <p>If you need such data managers for your tool, you can describe their running with the <code class="highlighter-rouge">data-manager.yaml</code> file:</p>
 
-<div class="highlighter-rouge">
-<pre class="highlight"><code>data_managers:
+<div class="highlighter-rouge"><pre class="highlight"><code>data_managers:
     - id: url to data manager on ToolShed
       params:
         - 'param1': ''
@@ -287,8 +268,7 @@ tools:
 <p>Once the tutorial is ready, we need to extract workflows with the different steps of the tutorial and add them to the <code class="highlighter-rouge">workflows</code> directory in the tutorial with some explanation about the tutorial in a <code class="highlighter-rouge">README.md</code> file</p>
 
 <blockquote class="hands_on">
-  <h3 id="pencil2-hands-on-extract-the-workflow">
-<img class="emoji" title=":pencil2:" alt=":pencil2:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/270f.png" height="20" width="20" align="absmiddle"> Hands-on: Extract the workflow</h3>
+  <h3 id="-hands-on-extract-the-workflow"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Extract the workflow</h3>
 
   <ol>
     <li>Extract the workflow for the tutorial</li>
@@ -308,8 +288,7 @@ It is a great way to run the tutorial directly inside Galaxy. To learn more abou
 <p>Every topic will come with a Docker image containing the tools, data, workflows and Galaxy Interactive Tours required by each tutorial of this topic. The Docker image is described in the Dockerfile found in the <code class="highlighter-rouge">docker</code> directory of each topic. This file uses scripts to automatically add the files for each tutorial. The only thing to change is the name of the topic in the Dockerfile copied from the templates.</p>
 
 <blockquote class="hands_on">
-  <h3 id="pencil2-hands-on-testing-the-docker">
-<img class="emoji" title=":pencil2:" alt=":pencil2:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/270f.png" height="20" width="20" align="absmiddle"> Hands-on: Testing the Docker</h3>
+  <h3 id="-hands-on-testing-the-docker"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Testing the Docker</h3>
 
   <ol>
     <li>Check that the Dockerfile uses ‘sequence-analysis’ as topic name</li>
@@ -319,8 +298,7 @@ It is a great way to run the tutorial directly inside Galaxy. To learn more abou
 
       <p>This command needs to be launched a the root of training material repository because the Dockerfile uses some scripts available there to install the tools, import the data and the workflows</p>
     </li>
-    <li>Launch the Docker container: <code class="highlighter-rouge">docker run -d -p 8080:80 training-sequence-analysis</code>
-</li>
+    <li>Launch the Docker container: <code class="highlighter-rouge">docker run -d -p 8080:80 training-sequence-analysis</code></li>
     <li>Check the Galaxy instance on <a href="http://localhost:8080/">http://localhost:8080/</a>:
       <ol>
         <li>Check the installed tools</li>
@@ -352,33 +330,32 @@ It is a great way to run the tutorial directly inside Galaxy. To learn more abou
 
         
         <blockquote class="key_points">
-            <h3> <img class="emoji" title=":grey_exclamation:" alt=":grey_exclamation:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2755.png" height="20" width="20" align="absmiddle"> Key points</h3>
+            <h3><i class="fa fa-key" aria-hidden="true"></i> Key points</h3>
 
             <ul>
-            
-            <li>Tools, data and workflows can be easily integrated in a Docker flavor to have a useful technical support for a tutorial</li>
-            
-            <li>A Galaxy Docker flavor is a great support for training</li>
-            
-            <li>A Galaxy Docker flavor can be deployed 'anywhere' and is scalable</li>
-            
+                
+                <li>Tools, data and workflows can be easily integrated in a Docker flavor to have a useful technical support for a tutorial</li>
+                
+                <li>A Galaxy Docker flavor is a great support for training</li>
+                
+                <li>A Galaxy Docker flavor can be deployed 'anywhere' and is scalable</li>
+                
             </ul>
         </blockquote>
         
 
         
 
-        <h3>
-<img class="emoji" title=":clap:" alt=":clap:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f44f.png" height="20" width="20" align="absmiddle"> Congratulations on successfully completing this tutorial!</h3>
-
+        <h3><i class="fa fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!</h3>
 
         <hr>
-        <blockquote class="overview">
-            <h3> <img class="emoji" title=":speech_balloon:" alt=":speech_balloon:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f4ac.png" height="20" width="20" align="absmiddle"> Feedback</h3>
-            Please take a moment and provide your feedback on this tutorial. Your feedback will help guide and improve future revisions to this tutorial. <a href="https://tinyurl.com/GTNfeedback" target="_blank">Feedback Form</a>
-        </blockquote>
 
-            </section>
+        <blockquote class="overview">
+            <h3><i class="fa fa-comments-o" aria-hidden="true"></i> Feedback</h3>
+            Please take a moment and provide your feedback on this tutorial. Your feedback will help guide and improve future revisions to this tutorial.
+            <a href="https://tinyurl.com/GTNfeedback">Feedback Form</a>
+        </blockquote>
+    </section>
 </div>
 
 <footer>

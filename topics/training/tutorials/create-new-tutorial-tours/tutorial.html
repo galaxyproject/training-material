@@ -1,7 +1,6 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
     <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -30,14 +29,14 @@
                 <ul class="navbar-nav">
                     <li class="nav-item">
                         <a class="nav-link" href="https://galaxyproject.github.io/training-material/topics/training" title="Go back to list of tutorials">
-                            <i class="fa fa-folder-o"></i> Train the trainers
+                            <i class="fa fa-folder-o" aria-hidden="true"></i> Train the trainers
                         </a>
                     </li>
 
                     
                     <li class="nav-item">
                         <a class="nav-link" href="https://galaxyproject.github.io/training-material/topics/training/slides" title="Slides for this tutorial">
-                            <i class="fa fa-slideshare"></i> Introduction slides
+                            <i class="fa fa-slideshare" aria-hidden="true"></i> Introduction slides
                         </a>
                     </li>
                     
@@ -51,7 +50,7 @@
                     
                     <li class="nav-item">
                         <a class="nav-link" href="https://galaxyproject.github.io/training-material/topics/training#references" title="References">
-                            <i class="fa fa-book"></i> Literature
+                            <i class="fa fa-book" aria-hidden="true"></i> Literature
                         </a>
                     </li>
                     
@@ -64,7 +63,7 @@
 
                     <li class="nav-item">
                         <a class="nav-link" href="https://github.com/galaxyproject/training-material/tree/master/topics/training/tutorials/create-new-tutorial-tours/tutorial.md">
-                            <i class="fa fa-github"></i> Edit
+                            <i class="fa fa-github" aria-hidden="true"></i> Edit
                         </a>
                     </li>
                 </ul>
@@ -80,7 +79,7 @@
         <blockquote class="overview">
             <h3>Overview</h3>
 
-            <p class="bold"> <img class="emoji" title=":grey_question:" alt=":grey_question:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2754.png" height="20" width="20" align="absmiddle"> Questions</p>
+            <strong><i class="fa fa-question-circle" aria-hidden="true"></i> Questions</strong>
             <ul>
             
             <li>What is a Interactive Galaxy Tour?</li>
@@ -89,7 +88,7 @@
             
             </ul>
 
-            <p class="bold"> <img class="emoji" title=":dart:" alt=":dart:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f3af.png" height="20" width="20" align="absmiddle"> Objectives</p>
+            <strong><i class="fa fa-bullseye" aria-hidden="true"></i> Objectives</strong>
             <ul>
             
             <li>Creating a Galaxy tour from scratch</li>
@@ -100,7 +99,7 @@
 
             
 
-            <p><span class="bold"> <img class="emoji" title=":hourglass:" alt=":hourglass:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/231b.png" height="20" width="20" align="absmiddle"> Time estimation:</span> 15min</p>
+            <p><strong><i class="fa fa-hourglass-end" aria-hidden="true"></i> Time estimation:</strong> 15min</p>
         </blockquote>
 
         <h1 class="no_toc" id="introduction">Introduction</h1>
@@ -136,12 +135,11 @@
 
 <p>A Galaxy Interactive Tour is a way to go through an entire analysis, step by step inside Galaxy in an interactive and explorative way. It is a great pedogogic way to run the tutorial directly inside Galaxy.</p>
 
-<figure id="figure-1"><img src="../../../dev/images/galaxy_tour_demo.gif" alt="Demonstration of an Interactive Tour" title="Demonstration of an Interactive Tour"><figcaption><span class="figcaption-prefix">Figure 1:</span> Demonstration of an Interactive Tour</figcaption></figure>
+<figure id="figure-1"><img src="../../../dev/images/galaxy_tour_demo.gif" alt="Demonstration of an Interactive Tour" title="Demonstration of an Interactive Tour" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Demonstration of an Interactive Tour</figcaption></figure>
 
 <p>A tour is a YAML file like:</p>
 
-<div class="highlighter-rouge">
-<pre class="highlight"><code>id: galaxy_ui
+<div class="highlighter-rouge"><pre class="highlight"><code>id: galaxy_ui
 name: Galaxy UI
 description: A gentle introduction to the Galaxy User Interface
 title_default: "Welcome to Galaxy"
@@ -166,14 +164,10 @@ steps:
 <ul>
   <li>at the top some etadata related to the Tour:
     <ul>
-      <li>
-<code class="highlighter-rouge">id</code>: ID of the tour</li>
-      <li>
-<code class="highlighter-rouge">name</code>: name of the tour</li>
-      <li>
-<code class="highlighter-rouge">description</code>: a short description of the tour</li>
-      <li>
-<code class="highlighter-rouge">title_default</code>: a title</li>
+      <li><code class="highlighter-rouge">id</code>: ID of the tour</li>
+      <li><code class="highlighter-rouge">name</code>: name of the tour</li>
+      <li><code class="highlighter-rouge">description</code>: a short description of the tour</li>
+      <li><code class="highlighter-rouge">title_default</code>: a title</li>
     </ul>
   </li>
   <li>
@@ -199,17 +193,14 @@ steps:
         </tr>
         <tr>
           <td><code class="highlighter-rouge">element</code></td>
-          <td>
-<a href="https://api.jquery.com/category/selectors/">JQuery Selector</a> of the element you want to describe / click</td>
+          <td><a href="https://api.jquery.com/category/selectors/">JQuery Selector</a> of the element you want to describe / click</td>
         </tr>
         <tr>
           <td><code class="highlighter-rouge">placement</code></td>
           <td>Placement of the text box relative to the selected element</td>
         </tr>
         <tr>
-          <td>
-<code class="highlighter-rouge">preclick</code> or <code class="highlighter-rouge">postclick</code>
-</td>
+          <td><code class="highlighter-rouge">preclick</code> or <code class="highlighter-rouge">postclick</code></td>
           <td>Elements that recieve a click() event before (<code class="highlighter-rouge">preclick</code>) or after (<code class="highlighter-rouge">postclick</code>) the step is shown</td>
         </tr>
         <tr>
@@ -218,8 +209,7 @@ steps:
         </tr>
         <tr>
           <td><code class="highlighter-rouge">backdrop</code></td>
-          <td>
-<code class="highlighter-rouge">true/false</code>:  Show a dark backdrop behind the popover and its element, highlighting the current step</td>
+          <td><code class="highlighter-rouge">true/false</code>:  Show a dark backdrop behind the popover and its element, highlighting the current step</td>
         </tr>
       </tbody>
     </table>
@@ -238,18 +228,13 @@ steps:
 <script async="" src="//s.imgur.com/min/embed.js" charset="utf-8"></script>
 
 <blockquote class="hands_on">
-  <h3 id="pencil2-hands-on-install-and-start-the-plugin">
-<img class="emoji" title=":pencil2:" alt=":pencil2:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/270f.png" height="20" width="20" align="absmiddle"> Hands-on: Install and start the plugin</h3>
+  <h3 id="-hands-on-install-and-start-the-plugin"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Install and start the plugin</h3>
 
   <ol>
-    <li>Install <a href="https://nodejs.org/en/">node.js</a>
-</li>
-    <li>Clone the <a href="https://github.com/TailorDev/galaxy-tourbuilder">plugin GitHub repository</a>
-</li>
-    <li>Run <code class="highlighter-rouge">npm install</code>
-</li>
-    <li>Run <code class="highlighter-rouge">npm run build</code>
-</li>
+    <li>Install <a href="https://nodejs.org/en/">node.js</a></li>
+    <li>Clone the <a href="https://github.com/TailorDev/galaxy-tourbuilder">plugin GitHub repository</a></li>
+    <li>Run <code class="highlighter-rouge">npm install</code></li>
+    <li>Run <code class="highlighter-rouge">npm run build</code></li>
     <li>Load the extension in your Web browser
       <ul>
         <li>Load the extension in Chrome &amp; Opera
@@ -262,8 +247,7 @@ steps:
         <li>Load the extension in Firefox
           <ul>
             <li>Open Firefox browser and navigate to about:debugging</li>
-            <li>Click “Load Temporary Add-on” and from the file browser, choose <code class="highlighter-rouge">galaxy-tourbuilder/build/firefox</code>
-</li>
+            <li>Click “Load Temporary Add-on” and from the file browser, choose <code class="highlighter-rouge">galaxy-tourbuilder/build/firefox</code></li>
           </ul>
         </li>
       </ul>
@@ -276,8 +260,7 @@ steps:
 <p>We can now create easily a Galaxy Interactive Tour and test it on the fly.</p>
 
 <blockquote class="hands_on">
-  <h3 id="pencil2-hands-on-create-a-galaxy-interactive-tour">
-<img class="emoji" title=":pencil2:" alt=":pencil2:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/270f.png" height="20" width="20" align="absmiddle"> Hands-on: Create a Galaxy Interactive Tour</h3>
+  <h3 id="-hands-on-create-a-galaxy-interactive-tour"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Create a Galaxy Interactive Tour</h3>
 
   <ol>
     <li>Create a Galaxy Interactive Tour for “BLAST” tutorial</li>
@@ -308,31 +291,30 @@ steps:
 
         
         <blockquote class="key_points">
-            <h3> <img class="emoji" title=":grey_exclamation:" alt=":grey_exclamation:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2755.png" height="20" width="20" align="absmiddle"> Key points</h3>
+            <h3><i class="fa fa-key" aria-hidden="true"></i> Key points</h3>
 
             <ul>
-            
-            <li>The Interactive Tours are a good training object for self-learning at its own speed</li>
-            
-            <li>It is now easy to create an Interactive Tour and test it</li>
-            
+                
+                <li>The Interactive Tours are a good training object for self-learning at its own speed</li>
+                
+                <li>It is now easy to create an Interactive Tour and test it</li>
+                
             </ul>
         </blockquote>
         
 
         
 
-        <h3>
-<img class="emoji" title=":clap:" alt=":clap:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f44f.png" height="20" width="20" align="absmiddle"> Congratulations on successfully completing this tutorial!</h3>
-
+        <h3><i class="fa fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!</h3>
 
         <hr>
-        <blockquote class="overview">
-            <h3> <img class="emoji" title=":speech_balloon:" alt=":speech_balloon:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f4ac.png" height="20" width="20" align="absmiddle"> Feedback</h3>
-            Please take a moment and provide your feedback on this tutorial. Your feedback will help guide and improve future revisions to this tutorial. <a href="https://tinyurl.com/GTNfeedback" target="_blank">Feedback Form</a>
-        </blockquote>
 
-            </section>
+        <blockquote class="overview">
+            <h3><i class="fa fa-comments-o" aria-hidden="true"></i> Feedback</h3>
+            Please take a moment and provide your feedback on this tutorial. Your feedback will help guide and improve future revisions to this tutorial.
+            <a href="https://tinyurl.com/GTNfeedback">Feedback Form</a>
+        </blockquote>
+    </section>
 </div>
 
 <footer>

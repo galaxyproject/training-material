@@ -1,7 +1,6 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
     <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -30,14 +29,14 @@
                 <ul class="navbar-nav">
                     <li class="nav-item">
                         <a class="nav-link" href="https://galaxyproject.github.io/training-material/topics/dev" title="Go back to list of tutorials">
-                            <i class="fa fa-folder-o"></i> Development in Galaxy
+                            <i class="fa fa-folder-o" aria-hidden="true"></i> Development in Galaxy
                         </a>
                     </li>
 
                     
                     <li class="nav-item">
                         <a class="nav-link" href="https://galaxyproject.github.io/training-material/topics/dev/slides" title="Slides for this tutorial">
-                            <i class="fa fa-slideshare"></i> Introduction slides
+                            <i class="fa fa-slideshare" aria-hidden="true"></i> Introduction slides
                         </a>
                     </li>
                     
@@ -45,7 +44,7 @@
                     
                     <li class="nav-item">
                         <a class="nav-link" href="https://github.com/galaxyproject/training-material/tree/master/topics/dev/docker" title="Docker image for this tutorial">
-                            <i class="fa fa-ship"></i> Docker image
+                            <i class="fa fa-ship" aria-hidden="true"></i> Docker image
                         </a>
                     </li>
                     
@@ -57,7 +56,7 @@
                     
                     <li class="nav-item">
                         <a class="nav-link" href="https://galaxyproject.github.io/training-material/topics/dev#references" title="References">
-                            <i class="fa fa-book"></i> Literature
+                            <i class="fa fa-book" aria-hidden="true"></i> Literature
                         </a>
                     </li>
                     
@@ -70,7 +69,7 @@
 
                     <li class="nav-item">
                         <a class="nav-link" href="https://github.com/galaxyproject/training-material/tree/master/topics/dev/tutorials/visualization-generic/tutorial.md">
-                            <i class="fa fa-github"></i> Edit
+                            <i class="fa fa-github" aria-hidden="true"></i> Edit
                         </a>
                     </li>
                 </ul>
@@ -86,14 +85,14 @@
         <blockquote class="overview">
             <h3>Overview</h3>
 
-            <p class="bold"> <img class="emoji" title=":grey_question:" alt=":grey_question:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2754.png" height="20" width="20" align="absmiddle"> Questions</p>
+            <strong><i class="fa fa-question-circle" aria-hidden="true"></i> Questions</strong>
             <ul>
             
             <li>How can visualization plugins benefit science?</li>
             
             </ul>
 
-            <p class="bold"> <img class="emoji" title=":dart:" alt=":dart:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f3af.png" height="20" width="20" align="absmiddle"> Objectives</p>
+            <strong><i class="fa fa-bullseye" aria-hidden="true"></i> Objectives</strong>
             <ul>
             
             <li>Implement a first Galaxy visualization</li>
@@ -103,7 +102,7 @@
             </ul>
 
             
-            <p class="bold"> <img class="emoji" title=":heavy_check_mark:" alt=":heavy_check_mark:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2714.png" height="20" width="20" align="absmiddle"> Requirements</p>
+            <strong><i class="fa fa-check-circle" aria-hidden="true"></i> Requirements</strong>
             <ul>
             
             
@@ -116,7 +115,7 @@
             </ul>
             
 
-            <p><span class="bold"> <img class="emoji" title=":hourglass:" alt=":hourglass:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/231b.png" height="20" width="20" align="absmiddle"> Time estimation:</span> 1.5h</p>
+            <p><strong><i class="fa fa-hourglass-end" aria-hidden="true"></i> Time estimation:</strong> 1.5h</p>
         </blockquote>
 
         <h1 class="no_toc" id="introduction">Introduction</h1>
@@ -157,8 +156,7 @@ However, for this tutorial we will keep it basic.</p>
   <p>In this tutorial, we will deal with:</p>
 
 <ol id="markdown-toc">
-  <li>
-<a href="#part-1" id="markdown-toc-part-1">Part 1</a>    <ol>
+  <li><a href="#part-1" id="markdown-toc-part-1">Part 1</a>    <ol>
       <li><a href="#linking-the-plugin-with-galaxy" id="markdown-toc-linking-the-plugin-with-galaxy">Linking the plugin with Galaxy</a></li>
       <li><a href="#creating-the-visualization" id="markdown-toc-creating-the-visualization">Creating the visualization</a></li>
     </ol>
@@ -177,25 +175,21 @@ to which we align are named <code class="highlighter-rouge">RNAME</code> in the 
 <p>The development of a Galaxy visualization takes place within the Galaxy codebase.</p>
 
 <blockquote class="hands_on">
-  <h3 id="pencil2-hands-on-data-upload">
-<img class="emoji" title=":pencil2:" alt=":pencil2:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/270f.png" height="20" width="20" align="absmiddle"> Hands-on: Data upload</h3>
+  <h3 id="-hands-on-data-upload"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Data upload</h3>
 
   <ol>
-    <li>Clone an instance of Galaxy in a path, further referred to as <code class="highlighter-rouge">$GALAXY_ROOT</code>
-</li>
+    <li>Clone an instance of Galaxy in a path, further referred to as <code class="highlighter-rouge">$GALAXY_ROOT</code></li>
     <li>
       <p>Explore the plugin directory as follows:</p>
 
-      <div class="language-bash highlighter-rouge">
-<pre class="highlight"><code><span class="gp">$ </span><span class="nb">cd</span> <span class="nv">$GALAXY_ROOT</span>/config/plugins/visualizations
+      <div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span><span class="nb">cd</span> <span class="nv">$GALAXY_ROOT</span>/config/plugins/visualizations
 </code></pre>
       </div>
     </li>
     <li>
       <p>Create a new directory for our new plugin project</p>
 
-      <div class="language-bash highlighter-rouge">
-<pre class="highlight"><code><span class="gp">$ </span>mkdir alignment_rname_boxplot
+      <div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>mkdir alignment_rname_boxplot
 <span class="gp">$ </span><span class="nb">cd </span>alignment_rname_boxplot
 </code></pre>
       </div>
@@ -203,8 +197,7 @@ to which we align are named <code class="highlighter-rouge">RNAME</code> in the 
     <li>
       <p>Make three (sub-)directories to complete the structure of the project:</p>
 
-      <div class="language-bash highlighter-rouge">
-<pre class="highlight"><code><span class="gp">$ </span>mkdir config
+      <div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>mkdir config
 <span class="gp">$ </span>mkdir static
 <span class="gp">$ </span>mkdir templates
 </code></pre>
@@ -219,13 +212,11 @@ to which we align are named <code class="highlighter-rouge">RNAME</code> in the 
 configuration in XML format.</p>
 
 <blockquote class="hands_on">
-  <h3 id="pencil2-hands-on-data-upload-1">
-<img class="emoji" title=":pencil2:" alt=":pencil2:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/270f.png" height="20" width="20" align="absmiddle"> Hands-on: Data upload</h3>
+  <h3 id="-hands-on-data-upload-1"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Data upload</h3>
 
   <p>Create the file  <code class="highlighter-rouge">config/alignment_rname_boxplot.xml</code> with the following contents:</p>
 
-  <div class="language-xml highlighter-rouge">
-<pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
+  <div class="language-xml highlighter-rouge"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
 <span class="cp">&lt;!DOCTYPE visualization SYSTEM "../../visualization.dtd"&gt;</span>
 <span class="nt">&lt;visualization</span> <span class="na">name=</span><span class="s">"alignment_rname_boxplot"</span><span class="nt">&gt;</span>
     <span class="nt">&lt;data_sources&gt;</span>
@@ -273,8 +264,7 @@ exposed Galaxy URL prior to client-side rendering.</p>
 <p>The most basic part of the mako file are the variables used for further web development, given
 below.</p>
 
-<div class="language-html highlighter-rouge">
-<pre class="highlight"><code><span class="cp">&lt;!DOCTYPE HTML&gt;</span>
+<div class="language-html highlighter-rouge"><pre class="highlight"><code><span class="cp">&lt;!DOCTYPE HTML&gt;</span>
 <span class="err">&lt;</span>%
     import os
 
@@ -294,15 +284,11 @@ below.</p>
 </div>
 
 <ul>
-  <li>
-<code class="highlighter-rouge">hdadict</code> is a variable that contains a file identifier that has been encoded to it’s
+  <li><code class="highlighter-rouge">hdadict</code> is a variable that contains a file identifier that has been encoded to it’s
  exposed uid.</li>
-  <li>
-<code class="highlighter-rouge">root</code> indicates location of Galaxy on the webserver (e.g. <code class="highlighter-rouge">/</code>, <code class="highlighter-rouge">/galaxy/</code>, <code class="highlighter-rouge">/galaxy-pub/</code>, etc).</li>
-  <li>
-<code class="highlighter-rouge">app_root</code> contains the exposed url of the static files for this visualization.</li>
-  <li>
-<code class="highlighter-rouge">file_url</code> contains the exposed url of the dataset selected (by user) for visualization.</li>
+  <li><code class="highlighter-rouge">root</code> indicates location of Galaxy on the webserver (e.g. <code class="highlighter-rouge">/</code>, <code class="highlighter-rouge">/galaxy/</code>, <code class="highlighter-rouge">/galaxy-pub/</code>, etc).</li>
+  <li><code class="highlighter-rouge">app_root</code> contains the exposed url of the static files for this visualization.</li>
+  <li><code class="highlighter-rouge">file_url</code> contains the exposed url of the dataset selected (by user) for visualization.</li>
 </ul>
 
 <p>We could obtain the BAM file client-side by downloading the BAM/SAM file in its entirety via
@@ -329,8 +315,7 @@ bam file and its index share the same prefix, as expected by samtools and pysam.
 
 <p>We can create this symlink as follows in our mako template:</p>
 
-<div class="language-python highlighter-rouge">
-<pre class="highlight"><code><span class="c">## Ensure BAI index is symlinked</span>
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="c">## Ensure BAI index is symlinked</span>
 <span class="n">bai_target</span> <span class="o">=</span> <span class="n">hda</span><span class="o">.</span><span class="n">file_name</span><span class="o">+</span><span class="s">'.bai'</span>
 <span class="kn">import</span> <span class="nn">os</span>
 
@@ -342,8 +327,7 @@ bam file and its index share the same prefix, as expected by samtools and pysam.
 <p>Now the BAM file has a <code class="highlighter-rouge">.bai</code> file with the same prefix, and we can run the <code class="highlighter-rouge">idxstats</code>
 as follows:</p>
 
-<div class="language-python highlighter-rouge">
-<pre class="highlight"><code><span class="c">## Extract idxstats</span>
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="c">## Extract idxstats</span>
 <span class="kn">import</span> <span class="nn">pysam</span>
 <span class="n">bam_idxstats_data</span> <span class="o">=</span> <span class="n">pysam</span><span class="o">.</span><span class="n">idxstats</span><span class="p">(</span><span class="n">hda</span><span class="o">.</span><span class="n">file_name</span><span class="p">)</span>
 </code></pre>
@@ -353,8 +337,7 @@ as follows:</p>
 during compilation on the server, but is not yet exported into the HTML page nor parsed by JS.
 To do that, we add an HTML section to the end of the mako file.</p>
 
-<div class="language-html highlighter-rouge">
-<pre class="highlight"><code><span class="nt">&lt;html&gt;</span>
+<div class="language-html highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;html&gt;</span>
     <span class="nt">&lt;head&gt;</span>
         <span class="nt">&lt;title&gt;</span>${hda.name | h} | ${visualization_name | h}<span class="nt">&lt;/title&gt;</span>
     <span class="nt">&lt;/head&gt;</span>
@@ -371,17 +354,14 @@ the HTML page and also does HTML escaping by providing the ` | h`-flag (for secu
 <p>Let’s put this all together.</p>
 
 <blockquote class="hands_on">
-  <h3 id="pencil2-hands-on-data-upload-2">
-<img class="emoji" title=":pencil2:" alt=":pencil2:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/270f.png" height="20" width="20" align="absmiddle"> Hands-on: Data upload</h3>
+  <h3 id="-hands-on-data-upload-2"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Data upload</h3>
 
   <ol>
-    <li>Create the mako file <code class="highlighter-rouge">templates/alignment_rname_boxplot.mako</code>
-</li>
+    <li>Create the mako file <code class="highlighter-rouge">templates/alignment_rname_boxplot.mako</code></li>
     <li>
       <p>Fill it with the following code:</p>
 
-      <div class="language-html highlighter-rouge">
-<pre class="highlight"><code><span class="cp">&lt;!DOCTYPE HTML&gt;</span>
+      <div class="language-html highlighter-rouge"><pre class="highlight"><code><span class="cp">&lt;!DOCTYPE HTML&gt;</span>
 <span class="err">&lt;</span>%
     import os
    
@@ -420,13 +400,11 @@ the HTML page and also does HTML escaping by providing the ` | h`-flag (for secu
 
       <p>We are now ready to test this very basic visualization, we just need a (small) BAM file for it.</p>
     </li>
-    <li>Download <a href="https://zenodo.org/record/248730/files/tutorial.bam">the example BAM file</a>
-</li>
+    <li>Download <a href="https://zenodo.org/record/248730/files/tutorial.bam">the example BAM file</a></li>
     <li>
       <p>Go the galaxy root directory and start Galaxy:</p>
 
-      <div class="language-bash highlighter-rouge">
-<pre class="highlight"><code><span class="gp">$ </span><span class="nb">cd</span> <span class="nv">$GALAXY_ROOT</span>
+      <div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span><span class="nb">cd</span> <span class="nv">$GALAXY_ROOT</span>
 <span class="gp">$ </span>./run.sh
 </code></pre>
       </div>
@@ -437,8 +415,7 @@ the HTML page and also does HTML escaping by providing the ` | h`-flag (for secu
       <p>If everything went well, our plugin has appeared as a visualization option for the dataset</p>
 
       <blockquote class="comment">
-        <h3 id="nut_and_bolt-comments">
-<img class="emoji" title=":nut_and_bolt:" alt=":nut_and_bolt:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f529.png" height="20" width="20" align="absmiddle"> Comments</h3>
+        <h3 id="-comments"><i class="fa fa-commenting-o" aria-hidden="true"></i> Comments</h3>
         <p>You must be logged in to be able to use visualizations</p>
       </blockquote>
     </li>
@@ -448,8 +425,7 @@ the HTML page and also does HTML escaping by providing the ` | h`-flag (for secu
 
 <p>All the visualization does at the moment, is show the contents of idxstats, compiled to HTML:</p>
 
-<div class="highlighter-rouge">
-<pre class="highlight"><code>['chrA\t5386\t2\t0\n', 'chrB\t5386\t4\t0\n', 'chrC\t5386\t1\t0\n', 'chrD\t5386\t6\t1\n',
+<div class="highlighter-rouge"><pre class="highlight"><code>['chrA\t5386\t2\t0\n', 'chrB\t5386\t4\t0\n', 'chrC\t5386\t1\t0\n', 'chrD\t5386\t6\t1\n',
 'chrE\t5386\t3\t0\n', 'chrF\t5386\t2\t0\n', 'chrG\t5386\t1\t0\n', '*\t0\t0\t0\n']
 </code></pre>
 </div>
@@ -461,8 +437,7 @@ length of the RNAME (chromosome) is 5386 bases and 2 reads are aligned to it.</p
 <p>To make the data a bit more usable for Javascript , we convert it into a simple dictionary
 of the following syntax:</p>
 
-<div class="language-python highlighter-rouge">
-<pre class="highlight"><code><span class="p">{</span><span class="s">'chrA'</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span> <span class="s">'chrB'</span><span class="p">:</span><span class="mi">4</span><span class="p">,</span> <span class="s">'chrC'</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span> <span class="s">'chrD'</span><span class="p">:</span><span class="mi">6</span><span class="p">,</span> <span class="s">'chrE'</span><span class="p">:</span><span class="mi">3</span><span class="p">,</span> <span class="s">'chrF'</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span> <span class="s">'chrG'</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span> <span class="s">'*'</span><span class="p">:</span> <span class="mi">0</span><span class="p">}</span>
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="s">'chrA'</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span> <span class="s">'chrB'</span><span class="p">:</span><span class="mi">4</span><span class="p">,</span> <span class="s">'chrC'</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span> <span class="s">'chrD'</span><span class="p">:</span><span class="mi">6</span><span class="p">,</span> <span class="s">'chrE'</span><span class="p">:</span><span class="mi">3</span><span class="p">,</span> <span class="s">'chrF'</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span> <span class="s">'chrG'</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span> <span class="s">'*'</span><span class="p">:</span> <span class="mi">0</span><span class="p">}</span>
 </code></pre>
 </div>
 
@@ -470,8 +445,7 @@ of the following syntax:</p>
 The var dump provided by python/pysam is actually a valid syntax for Javascript too,
 so getting the raw data into Javascript is rather easy:</p>
 
-<div class="language-html highlighter-rouge">
-<pre class="highlight"><code><span class="nt">&lt;script&gt;</span>
+<div class="language-html highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;script&gt;</span>
     <span class="nx">bam_idxstats_data</span> <span class="o">=</span> <span class="nx">$</span><span class="p">{</span><span class="nx">bam_idxstats_data</span><span class="p">};</span>
 <span class="nt">&lt;/script&gt;</span>
 </code></pre>
@@ -479,8 +453,7 @@ so getting the raw data into Javascript is rather easy:</p>
 
 <p>Converting the data is not the scope of the tutorial, so here we provide such a function:</p>
 
-<div class="language-html highlighter-rouge">
-<pre class="highlight"><code><span class="nt">&lt;script&gt;</span>
+<div class="language-html highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;script&gt;</span>
   <span class="nx">bam_idxstats_data</span> <span class="o">=</span> <span class="nx">$</span><span class="p">{</span><span class="nx">bam_idxstats_data</span><span class="p">};</span>
   <span class="kd">function</span> <span class="nx">parse_data</span><span class="p">(</span><span class="nx">bam_idxstats_data</span><span class="p">)</span> <span class="p">{</span>
     <span class="kd">var</span> <span class="nx">output</span> <span class="o">=</span> <span class="p">{};</span>
@@ -504,15 +477,13 @@ so getting the raw data into Javascript is rather easy:</p>
 functional changes to the mako files.</p>
 
 <blockquote class="hands_on">
-  <h3 id="pencil2-hands-on-data-upload-3">
-<img class="emoji" title=":pencil2:" alt=":pencil2:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/270f.png" height="20" width="20" align="absmiddle"> Hands-on: Data upload</h3>
+  <h3 id="-hands-on-data-upload-3"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Data upload</h3>
 
   <ol>
     <li>
       <p>Change the mako file to the following:</p>
 
-      <div class="language-html highlighter-rouge">
-<pre class="highlight"><code><span class="cp">&lt;!DOCTYPE HTML&gt;</span>
+      <div class="language-html highlighter-rouge"><pre class="highlight"><code><span class="cp">&lt;!DOCTYPE HTML&gt;</span>
 <span class="err">&lt;</span>%
     import os
    
@@ -580,7 +551,7 @@ solutions :).</p>
 <p>Below is an example visualization, which creates a bar plot showing the number of reads per
 chromosome.</p>
 
-<p><img src="../../images/vis_plugins_example.png" alt=""></p>
+<p><img src="../../images/vis_plugins_example.png" alt="" /></p>
 
 <p>The full contents of this plugin are provided in the <a href="https://github.com/galaxyproject/training-material/tree/master/topics/dev/files/hands_on-visualizations/alignment_rname_boxplot">GitHub repository related to this material in <code class="highlighter-rouge">tree/master/topics/dev/files/hands_on-visualizations/alignment_rname_boxplot</code></a>.
 To try out this example, simply copy this folder to the <code class="highlighter-rouge">$GALAXY_ROOT/config/plugins/visualizations/</code> folder
@@ -588,8 +559,7 @@ on your (local) Galaxy and restart Galaxy.</p>
 
 <p>The contents of the mako file for this example are given below.</p>
 
-<div class="language-html highlighter-rouge">
-<pre class="highlight"><code><span class="cp">&lt;!DOCTYPE HTML&gt;</span>
+<div class="language-html highlighter-rouge"><pre class="highlight"><code><span class="cp">&lt;!DOCTYPE HTML&gt;</span>
 <span class="err">&lt;</span>%
     import os
 
@@ -718,8 +688,7 @@ contributing to quicker understanding of the data which is generally not so conv
 using static Galaxy tools.</p>
 
 <blockquote class="tip">
-  <h3 id="bulb-tip-static-files">
-<img class="emoji" title=":bulb:" alt=":bulb:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f4a1.png" height="20" width="20" align="absmiddle"> Tip: Static files</h3>
+  <h3 id="-tip-static-files"><i class="fa fa-lightbulb-o" aria-hidden="true"></i> Tip: Static files</h3>
 
   <p>In the example we included Javascript and CSS into the HTML website.
 Remember that for every new invocation of the visualization the entire CSS en JS are copied
@@ -758,35 +727,34 @@ per <code class="highlighter-rouge">RNAME</code> (chromosome) in a BAM file.</p>
 
         
         <blockquote class="key_points">
-            <h3> <img class="emoji" title=":grey_exclamation:" alt=":grey_exclamation:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2755.png" height="20" width="20" align="absmiddle"> Key points</h3>
+            <h3><i class="fa fa-key" aria-hidden="true"></i> Key points</h3>
 
             <ul>
-            
-            <li>Visualizations require a different way of thinking: server and client side; downloading files rather than system level access</li>
-            
-            <li>Interactivity is what makes visualizations different from static tools</li>
-            
-            <li>Requires understanding of both the Galaxy ecosystem as well as HTML5/JS</li>
-            
-            <li>Performance is more important than for static Galaxy tools</li>
-            
+                
+                <li>Visualizations require a different way of thinking: server and client side; downloading files rather than system level access</li>
+                
+                <li>Interactivity is what makes visualizations different from static tools</li>
+                
+                <li>Requires understanding of both the Galaxy ecosystem as well as HTML5/JS</li>
+                
+                <li>Performance is more important than for static Galaxy tools</li>
+                
             </ul>
         </blockquote>
         
 
         
 
-        <h3>
-<img class="emoji" title=":clap:" alt=":clap:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f44f.png" height="20" width="20" align="absmiddle"> Congratulations on successfully completing this tutorial!</h3>
-
+        <h3><i class="fa fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!</h3>
 
         <hr>
-        <blockquote class="overview">
-            <h3> <img class="emoji" title=":speech_balloon:" alt=":speech_balloon:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f4ac.png" height="20" width="20" align="absmiddle"> Feedback</h3>
-            Please take a moment and provide your feedback on this tutorial. Your feedback will help guide and improve future revisions to this tutorial. <a href="https://tinyurl.com/GTNfeedback" target="_blank">Feedback Form</a>
-        </blockquote>
 
-            </section>
+        <blockquote class="overview">
+            <h3><i class="fa fa-comments-o" aria-hidden="true"></i> Feedback</h3>
+            Please take a moment and provide your feedback on this tutorial. Your feedback will help guide and improve future revisions to this tutorial.
+            <a href="https://tinyurl.com/GTNfeedback">Feedback Form</a>
+        </blockquote>
+    </section>
 </div>
 
 <footer>

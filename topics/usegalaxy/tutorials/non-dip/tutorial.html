@@ -1,7 +1,6 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
     <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -30,14 +29,14 @@
                 <ul class="navbar-nav">
                     <li class="nav-item">
                         <a class="nav-link" href="https://galaxyproject.github.io/training-material/topics/usegalaxy" title="Go back to list of tutorials">
-                            <i class="fa fa-folder-o"></i> Tutorials using public Galaxy at usegalaxy.org
+                            <i class="fa fa-folder-o" aria-hidden="true"></i> Tutorials using public Galaxy at usegalaxy.org
                         </a>
                     </li>
 
                     
                     <li class="nav-item">
                         <a class="nav-link" href="https://galaxyproject.github.io/training-material/topics/usegalaxy/slides" title="Slides for this tutorial">
-                            <i class="fa fa-slideshare"></i> Introduction slides
+                            <i class="fa fa-slideshare" aria-hidden="true"></i> Introduction slides
                         </a>
                     </li>
                     
@@ -45,7 +44,7 @@
                     
                     <li class="nav-item">
                         <a class="nav-link" href="https://github.com/galaxyproject/training-material/tree/master/topics/usegalaxy/docker" title="Docker image for this tutorial">
-                            <i class="fa fa-ship"></i> Docker image
+                            <i class="fa fa-ship" aria-hidden="true"></i> Docker image
                         </a>
                     </li>
                     
@@ -53,7 +52,7 @@
                     
                     <li class="nav-item">
                         <a class="nav-link" href="https://usegalaxy.org" title="Galaxy instance for this tutorial">
-                            <i class="fa fa-external-link"></i> Galaxy instance
+                            <i class="fa fa-external-link" aria-hidden="true"></i> Galaxy instance
                         </a>
                     </li>
                     
@@ -70,7 +69,7 @@
 
                     <li class="nav-item">
                         <a class="nav-link" href="https://github.com/galaxyproject/training-material/tree/master/topics/usegalaxy/tutorials/non-dip/tutorial.md">
-                            <i class="fa fa-github"></i> Edit
+                            <i class="fa fa-github" aria-hidden="true"></i> Edit
                         </a>
                     </li>
                 </ul>
@@ -86,14 +85,14 @@
         <blockquote class="overview">
             <h3>Overview</h3>
 
-            <p class="bold"> <img class="emoji" title=":grey_question:" alt=":grey_question:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2754.png" height="20" width="20" align="absmiddle"> Questions</p>
+            <strong><i class="fa fa-question-circle" aria-hidden="true"></i> Questions</strong>
             <ul>
             
             <li>How does frequency of mitochondrial polymorphisms change from mother to child?</li>
             
             </ul>
 
-            <p class="bold"> <img class="emoji" title=":dart:" alt=":dart:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f3af.png" height="20" width="20" align="absmiddle"> Objectives</p>
+            <strong><i class="fa fa-bullseye" aria-hidden="true"></i> Objectives</strong>
             <ul>
             
             <li>Using Galaxy's main site we will see how to call variants in bacteria, viruses, and organelles.</li>
@@ -101,7 +100,7 @@
             </ul>
 
             
-            <p class="bold"> <img class="emoji" title=":heavy_check_mark:" alt=":heavy_check_mark:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2714.png" height="20" width="20" align="absmiddle"> Requirements</p>
+            <strong><i class="fa fa-check-circle" aria-hidden="true"></i> Requirements</strong>
             <ul>
             
                 <li>
@@ -114,7 +113,7 @@
             </ul>
             
 
-            <p><span class="bold"> <img class="emoji" title=":hourglass:" alt=":hourglass:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/231b.png" height="20" width="20" align="absmiddle"> Time estimation:</span> 1-1.5h</p>
+            <p><strong><i class="fa fa-hourglass-end" aria-hidden="true"></i> Time estimation:</strong> 1-1.5h</p>
         </blockquote>
 
         <h1 id="introduction">Introduction</h1>
@@ -122,8 +121,7 @@
 <p>The majority of life on Earth is non-diploid and represented by prokaryotes, viruses and their derivatives such as our own mitochondria or plant’s chloroplasts. In non-diploid systems allele frequencies can range anywhere between 0 and 100% and there could be multiple (not just two) alleles per locus. The main challenge associated with non-diploid variant calling is the difficulty in distinguishing between sequencing noise (abundant in all NGS platforms) and true low frequency variants. Some of the early attempts to do this well have been accomplished on human mitochondrial DNA although the same approaches will work equally good on viral and bacterial genomes:</p>
 
 <ul>
-  <li>2014 - <a href="http://www.pnas.org/content/111/43/15474.abstract">Maternal age effect and severe germ-line bottleneck in the inheritance of human mitochondrial DNA</a>
-</li>
+  <li>2014 - <a href="http://www.pnas.org/content/111/43/15474.abstract">Maternal age effect and severe germ-line bottleneck in the inheritance of human mitochondrial DNA</a></li>
   <li>2015 - <a href="http://www.pnas.org/content/112/8/2491.abstract">Extensive tissue-related and allele-related mtDNA heteroplasmy suggests positive selection for somatic mutations</a>.</li>
 </ul>
 
@@ -144,7 +142,7 @@
   </thead>
   <tbody>
     <tr>
-      <td><img src="../../images/ref_vs_assembly.jpg" alt=""></td>
+      <td><img src="../../images/ref_vs_assembly.jpg" alt="" /></td>
     </tr>
     <tr>
       <td><small>This figure from a manuscript by <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4493402/">Olson:2015</a> contrasts the two approaches.</small></td>
@@ -165,21 +163,19 @@
 <blockquote class="hands_on">
   <h3 id="data-upload-from-a-galaxy-library">Data upload from a Galaxy Library</h3>
 
-  <p><img src="../../images/mt_lib.png" alt=""></p>
+  <p><img src="../../images/mt_lib.png" alt="" /></p>
 
   <ul>
-    <li>Go to this <a href="https://usegalaxy.org/library/list#folders/Fe4842bd0c37b03a7">this Galaxy library</a>
-</li>
+    <li>Go to this <a href="https://usegalaxy.org/library/list#folders/Fe4842bd0c37b03a7">this Galaxy library</a></li>
     <li>You will see screen like the one shown above</li>
     <li>Click <strong>to History</strong> button.</li>
     <li>Galaxy will prompt you to ask whether you want to import these data into already existing or new history.</li>
     <li>It is better to create a new history, so type some descriptive name within <code class="highlighter-rouge">or create new</code> text field</li>
-    <li>click <strong>Import</strong>
-</li>
+    <li>click <strong>Import</strong></li>
     <li>A green message will appear once the import is done. Click on it and will see the history you have just created. It will be populated with the four datasets as shown below:</li>
   </ul>
 
-  <p><img src="../../images/mt_imported_data.png" alt=""></p>
+  <p><img src="../../images/mt_imported_data.png" alt="" /></p>
 
 </blockquote>
 
@@ -190,13 +186,13 @@
 <blockquote class="hands_on">
   <h3 id="quality-control-of-the-data">Quality Control of the data</h3>
 
-  <p><img src="../../images/mt_qc.png" alt=""></p>
+  <p><img src="../../images/mt_qc.png" alt="" /></p>
 
-  <p>QC’ing reads using <a href="https://www.bioinformatics.babraham.ac.uk/projects/fastqc/">FastQC</a>. Note that we selected all four datasets at once by pressing the middle button <img src="../../images/mt_middle_button.png" alt=""> adjacent to the <strong>Short read data from your current history</strong> widget. Once <code class="highlighter-rouge">FastQC</code> job runs, you will be able to look at the HTML reports generated by this tool.</p>
+  <p>QC’ing reads using <a href="https://www.bioinformatics.babraham.ac.uk/projects/fastqc/">FastQC</a>. Note that we selected all four datasets at once by pressing the middle button <img src="../../images/mt_middle_button.png" alt="" /> adjacent to the <strong>Short read data from your current history</strong> widget. Once <code class="highlighter-rouge">FastQC</code> job runs, you will be able to look at the HTML reports generated by this tool.</p>
 
   <p>The data have generally high quality in this example:</p>
 
-  <p><img src="../../images/mt_qc_plot.png" alt=""></p>
+  <p><img src="../../images/mt_qc_plot.png" alt="" /></p>
 
   <p>FastQC plot for one of the mitochondrial datasets shows that qualities are acceptable for 250 bp reads (mostly in the green, which is at or above <a href="https://en.wikipedia.org/wiki/Phred_quality_score">phred score</a> of 30).</p>
 </blockquote>
@@ -206,16 +202,15 @@
 <p>Our reads are long (250 bp) and as a result we will be using <a href="https://arxiv.org/pdf/1303.3997v2.pdf">bwa mem</a> to align them against the reference genome as it has good mapping performance for longer reads (100bp and up).</p>
 
 <blockquote class="hands_on">
-  <h3 id="mapping-with-bwa-mem">Mapping with <code class="highlighter-rouge">bwa mem</code>
-</h3>
+  <h3 id="mapping-with-bwa-mem">Mapping with <code class="highlighter-rouge">bwa mem</code></h3>
 
-  <p><img src="../../images/mt_bwa_mem.png" alt=""></p>
+  <p><img src="../../images/mt_bwa_mem.png" alt="" /></p>
 
   <p>Running <code class="highlighter-rouge">bwa mem</code> on our datasets. Look <strong>carefully</strong> at parameter settings:</p>
 
   <ul>
     <li>We select <code class="highlighter-rouge">hg38</code> version of the human genome as the reference</li>
-    <li>By using the middle button again <img src="../../images/mt_middle_button.png" alt=""> we select datasets 1 and 3 as <strong>Select the first set of reads</strong> and datasets 2 and 4 as <strong>Select the second set of reads</strong>. Galaxy will automatically launch two bwa-mem jobs using datasets 1,2 and 3,4 generating two resulting BAM files.</li>
+    <li>By using the middle button again <img src="../../images/mt_middle_button.png" alt="" /> we select datasets 1 and 3 as <strong>Select the first set of reads</strong> and datasets 2 and 4 as <strong>Select the second set of reads</strong>. Galaxy will automatically launch two bwa-mem jobs using datasets 1,2 and 3,4 generating two resulting BAM files.</li>
     <li>By setting <strong>Set read groups information</strong> to <code class="highlighter-rouge">Set read groups (SAM/BAM specifications)</code> and clicking <strong>Auto-assign</strong> we will ensure that the reads in the resulting BAM dataset are properly set.</li>
   </ul>
 </blockquote>
@@ -229,7 +224,7 @@
 <blockquote class="hands_on">
   <h3 id="merging-multiple-datasets-into-one">Merging multiple datasets into one</h3>
 
-  <p><img src="../../images/mt_bam_merging.png" alt=""></p>
+  <p><img src="../../images/mt_bam_merging.png" alt="" /></p>
 
   <p>Merging two BAM datasets into one. Note that two inputs are highlighted.</p>
 </blockquote>
@@ -247,15 +242,14 @@
 <blockquote class="hands_on">
   <h3 id="de-duplicating-mapped-data">De-duplicating mapped data</h3>
 
-  <p><img src="../../images/mt_dedup.png" alt=""></p>
+  <p><img src="../../images/mt_dedup.png" alt="" /></p>
 
   <p>De-duplicating the merged BAM dataset</p>
 </blockquote>
 
 <p><strong>MarkDuplicates</strong> produces a BAM dataset with duplicates removed and also a metrics file. Let’s take a look at the metrics data:</p>
 
-<div class="highlighter-rouge">
-<pre class="highlight"><code>raw_child-ds-	55	27551	55	50	1658	0	0.061026	219628
+<div class="highlighter-rouge"><pre class="highlight"><code>raw_child-ds-	55	27551	55	50	1658	0	0.061026	219628
 raw_mother-ds-	96	54972	96	90	4712	0	0.086459	302063
 </code></pre>
 </div>
@@ -280,16 +274,14 @@ raw_mother-ds-	96	54972	96	90	4712	0	0.086459	302063
 
 <p>Left aligning of indels (a variant of re-aligning) is extremely important for obtaining accurate variant calls. This concept, while not difficult, requires some explanation. For illustrating how left-aligning works we expanded on an example provided by <a href="https://academic.oup.com/bioinformatics/article/31/13/2202/196142/Unified-representation-of-genetic-variants">Tan:2015</a>. Suppose you have a reference sequence and a sequencing read:</p>
 
-<div class="highlighter-rouge">
-<pre class="highlight"><code>Reference GGGCACACACAGGG
+<div class="highlighter-rouge"><pre class="highlight"><code>Reference GGGCACACACAGGG
 Read      GGGCACACAGGG
 </code></pre>
 </div>
 
 <p>If you look carefully you will see that the read is simply missing a <code class="highlighter-rouge">CA</code> repeat. But it is not apparent to a mapper, so some of possible alignments and corresponding variant calls include:</p>
 
-<div class="highlighter-rouge">
-<pre class="highlight"><code>Alignment                 Variant Call
+<div class="highlighter-rouge"><pre class="highlight"><code>Alignment                 Variant Call
 
 GGGCACACACAGGG            Ref: CAC
 GGGCAC--ACAGGG            Alt: C
@@ -309,7 +301,7 @@ GGG--CACACAGGG            Alt: G
 <blockquote class="hands_on">
   <h3 id="left-aligning-indels-1">Left-aligning indels</h3>
 
-  <p><img src="../../images/mt_left_align.png" alt=""></p>
+  <p><img src="../../images/mt_left_align.png" alt="" /></p>
 
   <p>Left-aligning a de-duplicated BAM dataset</p>
 </blockquote>
@@ -321,20 +313,15 @@ GGG--CACACAGGG            Alt: G
 <blockquote class="hands_on">
   <h3 id="filtering-bam-data">Filtering BAM data</h3>
 
-  <p><img src="../../images/mt_filtering.png" alt=""></p>
+  <p><img src="../../images/mt_filtering.png" alt="" /></p>
 
   <p>Filtering reads. There are several important point to note here:</p>
 
   <ul>
-    <li>
-<strong>mapQuality</strong> is set to ⋝ 20 Mapping quality reflects the probability that the read is placed <em>incorrectly</em>. It uses <a href="https://en.wikipedia.org/wiki/Phred_quality_score">phred scale</a>. Thus 20 is 1/100 or 1% chance that the read is incorrectly mapped. By setting this parameter to ⋝ 20 we will keep all reads that have 1% or less probability of being mapped incorrectly.</li>
-    <li>
-<em>isPaired</em> will eliminate singleton (unpaired) reads (make sure <strong>Yes</strong> is clicked on)</li>
-    <li>
-<em>isProperPair</em> will only keep reads that map to the same chromosome and are properly placed (again, make sure <strong>Yes</strong> is clicked)</li>
-    <li>
-<em>reference</em> is set to <em>chrM</em>
-</li>
+    <li><strong>mapQuality</strong> is set to ⋝ 20 Mapping quality reflects the probability that the read is placed <em>incorrectly</em>. It uses <a href="https://en.wikipedia.org/wiki/Phred_quality_score">phred scale</a>. Thus 20 is 1/100 or 1% chance that the read is incorrectly mapped. By setting this parameter to ⋝ 20 we will keep all reads that have 1% or less probability of being mapped incorrectly.</li>
+    <li><em>isPaired</em> will eliminate singleton (unpaired) reads (make sure <strong>Yes</strong> is clicked on)</li>
+    <li><em>isProperPair</em> will only keep reads that map to the same chromosome and are properly placed (again, make sure <strong>Yes</strong> is clicked)</li>
+    <li><em>reference</em> is set to <em>chrM</em></li>
   </ul>
 </blockquote>
 
@@ -343,63 +330,54 @@ GGG--CACACAGGG            Alt: G
 <p>FreeBayes is widely used for calling variants in diploid systems. However, it can also be used for calling variants in pooled samples where the number of samples is not known. This is the exact scenario we have here: in our sample we have multiple mitochondrial (or bacterial or viral) genomes but we do not know exactly how many. Thus we will use the <code class="highlighter-rouge">--pooled-continuous</code> option of FreeBayes to generate <em>frequency-based</em> variant calls as well as some other options highlighted below (the tool is in <strong>NGS: Variant Analysis</strong> → <strong>FreeBayes</strong>):</p>
 
 <blockquote class="hands_on">
-  <h3 id="running-freebayes">Running <code class="highlighter-rouge">FreeBayes</code>
-</h3>
+  <h3 id="running-freebayes">Running <code class="highlighter-rouge">FreeBayes</code></h3>
 
-  <p><img src="../../images/mt_freebayes_genome.png" alt=""></p>
+  <p><img src="../../images/mt_freebayes_genome.png" alt="" /></p>
 
   <p>Set genome to <code class="highlighter-rouge">hg38</code> (the latest version)</p>
 
-  <p><img src="../../images/mt_freebayes_regions.png" alt=""></p>
+  <p><img src="../../images/mt_freebayes_regions.png" alt="" /></p>
 
   <p>Set regions to <code class="highlighter-rouge">chrM</code> from <code class="highlighter-rouge">1</code> to <code class="highlighter-rouge">16000</code>. This will simply save us time since we are only interested in mitochondrial variants anyway</p>
 
-  <p><img src="../../images/mt_freebayes_alloptions.png" alt=""></p>
+  <p><img src="../../images/mt_freebayes_alloptions.png" alt="" /></p>
 
   <p>Choose <code class="highlighter-rouge">Complete list of all samples</code> from <strong>Choose parameter selection level</strong> drop down.</p>
 
-  <p><img src="../../images/mt_freebayes_popmodel.png" alt=""></p>
+  <p><img src="../../images/mt_freebayes_popmodel.png" alt="" /></p>
 
   <p>This is one of the most important parameter choices one needs to make when calling variants in non-diploid systems. Here set <strong>Set population model</strong> to <code class="highlighter-rouge">Yes</code> and then:</p>
 
   <ul>
-    <li>Set <strong>ploidy</strong> to <code class="highlighter-rouge">1</code>
-</li>
-    <li>Set <strong>Assume that samples result from pooled sequencing</strong> to <code class="highlighter-rouge">Yes</code>
-</li>
-    <li>Set <strong>Output all alleles which pass input filters, regardless of genotyping outcome or model</strong> to <code class="highlighter-rouge">Yes</code>
-</li>
+    <li>Set <strong>ploidy</strong> to <code class="highlighter-rouge">1</code></li>
+    <li>Set <strong>Assume that samples result from pooled sequencing</strong> to <code class="highlighter-rouge">Yes</code></li>
+    <li>Set <strong>Output all alleles which pass input filters, regardless of genotyping outcome or model</strong> to <code class="highlighter-rouge">Yes</code></li>
   </ul>
 
-  <p><img src="../../images/mt_freebayes_allelic_scope.png" alt=""></p>
+  <p><img src="../../images/mt_freebayes_allelic_scope.png" alt="" /></p>
 
   <p>We will also set <strong>Allelic scope</strong> to <code class="highlighter-rouge">Yes</code> and restrict variant types to single nucleotide polymorphisms only by:</p>
 
   <ul>
-    <li>Keeping <strong>Ignore SNP alleles</strong> and <strong>Ignore indels alleles</strong> set to <code class="highlighter-rouge">No</code>
-</li>
-    <li>Setting <strong>Ignore MNPs</strong> and <strong>Ignore complex events</strong> to <code class="highlighter-rouge">Yes</code>
-</li>
+    <li>Keeping <strong>Ignore SNP alleles</strong> and <strong>Ignore indels alleles</strong> set to <code class="highlighter-rouge">No</code></li>
+    <li>Setting <strong>Ignore MNPs</strong> and <strong>Ignore complex events</strong> to <code class="highlighter-rouge">Yes</code></li>
   </ul>
 
   <p>Mitochondria has a number of low complexity regions (mononucleotide repeats). Setting these parameters as described above will decrease noise from these regions.</p>
 
-  <p><img src="../../images/mt_freebayes_inputfilters.png" alt=""></p>
+  <p><img src="../../images/mt_freebayes_inputfilters.png" alt="" /></p>
 
   <p>Finally, let’s set <strong>Input filters</strong> to <code class="highlighter-rouge">Yes</code> and set:</p>
 
   <ul>
-    <li>
-<strong>Exclude alignments from analysis if they have a mapping quality less than</strong> to <code class="highlighter-rouge">20</code> (phred score of 20). This will make FreeBayes to only consider reliably aligned reads.</li>
-    <li>
-<strong>Exclude alleles from analysis if their supporting base quality less than</strong> to <code class="highlighter-rouge">30</code> (phred score of 30). This will make FreeBayes to only consider high quality bases.</li>
+    <li><strong>Exclude alignments from analysis if they have a mapping quality less than</strong> to <code class="highlighter-rouge">20</code> (phred score of 20). This will make FreeBayes to only consider reliably aligned reads.</li>
+    <li><strong>Exclude alleles from analysis if their supporting base quality less than</strong> to <code class="highlighter-rouge">30</code> (phred score of 30). This will make FreeBayes to only consider high quality bases.</li>
   </ul>
 </blockquote>
 
 <p>This will produce a <a href="https://samtools.github.io/hts-specs/VCFv4.2.pdf">VCF dataset</a> shows below (you may need to scroll sideways to see it in full). It lists 30 sites of interest (everything starting with a <code class="highlighter-rouge">#</code> is a comment):</p>
 
-<div class="highlighter-rouge">
-<pre class="highlight"><code>Chrom	Pos	ID	Ref	Alt	Qual	Filter	Info	Format	data
+<div class="highlighter-rouge"><pre class="highlight"><code>Chrom	Pos	ID	Ref	Alt	Qual	Filter	Info	Format	data
 ##fileformat=VCFv4.1
 ##fileDate=20161108
 ##source=freeBayes v0.9.20
@@ -503,7 +481,7 @@ chrM	15326	.	A	G	79542.1	.	AB=0;ABP=0;AC=4;AF=1;AN=4;AO=2574;CIGAR=1X;DP=2586;DP
   </thead>
   <tbody>
     <tr>
-      <td><img src="../../images/mt_biases.png" alt=""></td>
+      <td><img src="../../images/mt_biases.png" alt="" /></td>
     </tr>
     <tr>
       <td><small>Here you can see that in an ideal case (indicated with a green star) a variant is evenly represent by different areas of sequencing reads (cycle and placement biases) and is balanced across the two strands (strand bias). Allele imbalance is not applicable in our case as it reflects significant deviation from the diploid (50/50) expectation (see <a href="../../images/freebayes.pdf">here</a> for more details).</small></td>
@@ -516,31 +494,25 @@ chrM	15326	.	A	G	79542.1	.	AB=0;ABP=0;AC=4;AF=1;AN=4;AO=2574;CIGAR=1X;DP=2586;DP
 <p>Among numerous types of data generated by FreeBayes let’s consider the following variant properties:</p>
 
 <ul>
-  <li>
-<code class="highlighter-rouge">##INFO=&lt;ID=DP,Number=1,Type=Integer,Description="Total read depth at the locus"&gt;</code> This is simply the number of reads covering a given site.</li>
-  <li>
-<code class="highlighter-rouge">##INFO=&lt;ID=SRP,Number=1,Type=Float,Description="Strand balance probability for the reference allele: Phred-scaled upper-bounds estimate of the probability of observing the deviation between SRF and SRR given E(SRF/SRR) ~ 0.5, derived using Hoeffding's inequality"&gt;</code> The higher this quantity the better the site as it diminishes the chances of the sites having significant strand bias.</li>
-  <li>
-<code class="highlighter-rouge">##INFO=&lt;ID=SAP,Number=A,Type=Float,Description="Strand balance probability for the alternate allele: Phred-scaled upper-bounds estimate of the probability of observing the deviation between SAF and SAR given E(SAF/SAR) ~ 0.5, derived using Hoeffding's inequality"&gt;</code> The higher this quantity the better the site as it diminishes the chances of the sites having significant strand bias  (also see <a href="https://groups.google.com/forum/#!topic/freebayes/fX4TOAqXJrA">here</a>).</li>
-  <li>
-<code class="highlighter-rouge">##INFO=&lt;ID=EPP,Number=A,Type=Float,Description="End Placement Probability: Phred-scaled upper-bounds estimate of the probability of observing the deviation between EL and ER given E(EL/ER) ~ 0.5, derived using Hoeffding's inequality"&gt;</code> The higher this number the lower the chance of having significant placement bias.</li>
-  <li>
-<code class="highlighter-rouge">QUAL</code> - phred scaled variant quality.</li>
+  <li><code class="highlighter-rouge">##INFO=&lt;ID=DP,Number=1,Type=Integer,Description="Total read depth at the locus"&gt;</code> This is simply the number of reads covering a given site.</li>
+  <li><code class="highlighter-rouge">##INFO=&lt;ID=SRP,Number=1,Type=Float,Description="Strand balance probability for the reference allele: Phred-scaled upper-bounds estimate of the probability of observing the deviation between SRF and SRR given E(SRF/SRR) ~ 0.5, derived using Hoeffding's inequality"&gt;</code> The higher this quantity the better the site as it diminishes the chances of the sites having significant strand bias.</li>
+  <li><code class="highlighter-rouge">##INFO=&lt;ID=SAP,Number=A,Type=Float,Description="Strand balance probability for the alternate allele: Phred-scaled upper-bounds estimate of the probability of observing the deviation between SAF and SAR given E(SAF/SAR) ~ 0.5, derived using Hoeffding's inequality"&gt;</code> The higher this quantity the better the site as it diminishes the chances of the sites having significant strand bias  (also see <a href="https://groups.google.com/forum/#!topic/freebayes/fX4TOAqXJrA">here</a>).</li>
+  <li><code class="highlighter-rouge">##INFO=&lt;ID=EPP,Number=A,Type=Float,Description="End Placement Probability: Phred-scaled upper-bounds estimate of the probability of observing the deviation between EL and ER given E(EL/ER) ~ 0.5, derived using Hoeffding's inequality"&gt;</code> The higher this number the lower the chance of having significant placement bias.</li>
+  <li><code class="highlighter-rouge">QUAL</code> - phred scaled variant quality.</li>
 </ul>
 
 <p>To perform filtering we will use <strong>NGS: VCF Manipulation</strong> → <strong>VCFfilter</strong>):</p>
 <blockquote class="hands_on">
   <h3 id="filtering-vcf-data-1">Filtering VCF data</h3>
 
-  <p><img src="../../images/mt_vcffilter.png" alt=""></p>
+  <p><img src="../../images/mt_vcffilter.png" alt="" /></p>
 
   <p>Filtering FreeBayes VCF for strand bias (<code class="highlighter-rouge">SPR</code> and <code class="highlighter-rouge">SAP</code>), placement bias (<code class="highlighter-rouge">EPP</code>), variant quality (<code class="highlighter-rouge">QUAL</code>), and depth of coverage (<code class="highlighter-rouge">DP</code>).</p>
 </blockquote>
 
 <p>The resulting VCF only contains five variants (most comments fields are omitted here):</p>
 
-<div class="highlighter-rouge">
-<pre class="highlight"><code>#CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO	FORMAT	raw_child-ds-	raw_mother-ds-
+<div class="highlighter-rouge"><pre class="highlight"><code>#CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO	FORMAT	raw_child-ds-	raw_mother-ds-
 chrM	3243	.	A	G	46067	.	AB=0.612338;ABP=290.859;AC=2;AF=0.5;AN=4;AO=1608;CIGAR=1X;DP=2626;DPB=2626;DPRA=0;EPP=31.0126;EPPR=64.3549;GTI=0;LEN=1;MEANALT=2;MQM=59.9627;MQMR=59.815;NS=2;NUMALT=1;ODDS=1288.98;PAIRED=1;PAIREDR=1;PAO=0;PQA=0;PQR=0;PRO=0;QA=53165;QR=35336;RO=1011;RPL=974;RPP=159.119;RPPR=763.402;RPR=634;RUN=1;SAF=558;SAP=329.898;SAR=1050;SRF=383;SRP=131.935;SRR=628;TYPE=snp;technology.ILLUMINA=1	GT:DP:RO:QR:AO:QA:GL	0/1:1068:221:7574:841:27395:-2380.4,0,-596.524	0/1:1558:790:27762:767:25770:-2317.69,0,-2496.98
 chrM	3483	.	G	C	685.467	.	AB=0.254386;ABP=182.214;AC=1;AF=0.25;AN=4;AO=127;CIGAR=1X;DP=550;DPB=550;DPRA=0;EPP=37.6342;EPPR=22.2028;GTI=1;LEN=1;MEANALT=1.5;MQM=59.4646;MQMR=59.8504;NS=2;NUMALT=1;ODDS=25.0865;PAIRED=1;PAIREDR=1;PAO=0;PQA=0;PQR=0;PRO=0;QA=2032;QR=13200;RO=421;RPL=87;RPP=40.7802;RPPR=245.89;RPR=40;RUN=1;SAF=1;SAP=270.17;SAR=126;SRF=321;SRP=254.927;SRR=100;TYPE=snp;technology.ILLUMINA=1	GT:DP:RO:QR:AO:QA:GL	0/0:208:166:5264:40:608:-35.5966,0,-454.8	0/1:342:255:7936:87:1424:-108.297,0,-694.524
 chrM	3488	.	T	A	682.097	.	AB=0.264706;ABP=166.509;AC=1;AF=0.25;AN=4;AO=130;CIGAR=1X;DP=546;DPB=546;DPRA=0;EPP=44.7694;EPPR=34.7681;GTI=1;LEN=1;MEANALT=1;MQM=59.4231;MQMR=59.7139;NS=2;NUMALT=1;ODDS=17.5994;PAIRED=1;PAIREDR=1;PAO=0;PQA=0;PQR=0;PRO=0;QA=2069;QR=13578;RO=416;RPL=90;RPP=44.7694;RPPR=211.806;RPR=40;RUN=1;SAF=0;SAP=285.302;SAR=130;SRF=315;SRP=242.06;SRR=101;TYPE=snp;technology.ILLUMINA=1	GT:DP:RO:QR:AO:QA:GL	0/0:206:166:5535:40:650:-39.5324,0,-479.353	0/1:340:250:8043:90:1419:-109.544,0,-705.868
@@ -559,16 +531,16 @@ chrM	8557	.	G	C	2590.97	.	AB=0.267066;ABP=790.051;AC=2;AF=0.5;AN=4;AO=446;CIGAR=
 <blockquote class="hands_on">
   <h3 id="displaying-data-in-vcfiobio">Displaying data in VCF.IOBIO</h3>
 
-  <p><img src="../../images/mt_vcf_dataset_collapsed.png" alt=""></p>
+  <p><img src="../../images/mt_vcf_dataset_collapsed.png" alt="" /></p>
 
   <p>Clicking on the dataset above will expand it as shown below:</p>
 
-  <p><img src="../../images/mt_vcf_dataset_expanded.png" alt=""></p>
+  <p><img src="../../images/mt_vcf_dataset_expanded.png" alt="" /></p>
 
   <p>At the bottom there is a link “display at vcf.iobio”
 Clicking on this link will start indexing of VCF datasets, which is required to display them. After indexing VCF.IOBIO will open:</p>
 
-  <p><img src="../../images/mt_vcfiobio.png" alt=""></p>
+  <p><img src="../../images/mt_vcfiobio.png" alt="" /></p>
 
   <p>Of course there are not that many variants to look at in this example. Nevertheless there are helpful statistics such as Transition/Transversion (Ts/Tn) ratio.</p>
 </blockquote>
@@ -580,7 +552,7 @@ Clicking on this link will start indexing of VCF datasets, which is required to 
 <blockquote class="hands_on">
   <h3 id="displaying-data-in-igv">Displaying data in IGV</h3>
 
-  <p><img src="../../images/mt_vcf_dataset_expanded.png" alt=""></p>
+  <p><img src="../../images/mt_vcf_dataset_expanded.png" alt="" /></p>
 
   <p>At the bottom there is a link “display at IGV: local Human hg38”
 The difference between “local” and “Human hg38” links is explained in the following video:</p>
@@ -589,7 +561,7 @@ The difference between “local” and “Human hg38” links is explained in th
 
   <p>Visualizing our FreeBayes dataset will produce this:</p>
 
-  <p><img src="../../images/mt_igv.png" alt=""></p>
+  <p><img src="../../images/mt_igv.png" alt="" /></p>
 
   <p>Here we focus on one particular variant at position 3,243 for reasons that will become apparent in the next section.</p>
 </blockquote>
@@ -603,13 +575,13 @@ The difference between “local” and “Human hg38” links is explained in th
 <blockquote class="hands_on">
   <h3 id="from-vcf-to-tab-delimited-data">From VCF to Tab-delimited data</h3>
 
-  <p><img src="../../images/mt_vcfToTab.png" alt=""></p>
+  <p><img src="../../images/mt_vcfToTab.png" alt="" /></p>
 
   <p>Make sure <strong>Report data per sample</strong> is set to <code class="highlighter-rouge">Yes</code></p>
 
   <p>This will produce a dataset with <em>very</em> many columns:</p>
 
-  <p><img src="../../images/mt_tab.png" alt=""></p>
+  <p><img src="../../images/mt_tab.png" alt="" /></p>
 
   <p>There are 53 columns in this dataset (not all are shown here).</p>
 </blockquote>
@@ -630,14 +602,13 @@ The difference between “local” and “Human hg38” links is explained in th
 <blockquote>
   <h3 id="cutting-columns-from-a-file">Cutting columns from a file</h3>
 
-  <p><img src="../../images/mt_cut.png" alt=""></p>
+  <p><img src="../../images/mt_cut.png" alt="" /></p>
 
   <p>Note that column names are pre-ceded with <code class="highlighter-rouge">c</code></p>
 
   <p>This will generate the following dataset:</p>
 
-  <div class="highlighter-rouge">
-<pre class="highlight"><code>POS  REF ALT     SAMPLE       AO    DP
+  <div class="highlighter-rouge"><pre class="highlight"><code>POS  REF ALT     SAMPLE       AO    DP
 --------------------------------------
 3243  A   G   raw_child-ds-  841  1068
 3243  A   G   raw_mother-ds- 767  1558
@@ -656,8 +627,7 @@ The difference between “local” and “Human hg38” links is explained in th
 
 <p>Let’s look at site 4,243. At this site Mother has 841 <code class="highlighter-rouge">G</code>s (since <code class="highlighter-rouge">G</code> is an alternative allele) and 1,068-841=227 <code class="highlighter-rouge">A</code>s. This child has 767 <code class="highlighter-rouge">G</code>s and 1,558-767=791 <code class="highlighter-rouge">A</code>s:</p>
 
-<div class="highlighter-rouge">
-<pre class="highlight"><code>Allele     A     G
+<div class="highlighter-rouge"><pre class="highlight"><code>Allele     A     G
 -------------------
 Mother   227   841
 Child    791   767
@@ -689,12 +659,10 @@ Child    791   767
   <p>Analyze these files using Galaxy as was explained in this lesson by mapping them against <a href="https://www.bx.psu.edu/~anton/share/ng_test_data/bmmb554/hw4/phix.fa">this reference genome</a> (again right click to copy the address); see <em>Tips</em>).</p>
 
   <blockquote class="tip">
-    <h3 id="bulb-tips">
-<img class="emoji" title=":bulb:" alt=":bulb:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f4a1.png" height="20" width="20" align="absmiddle"> Tips</h3>
+    <h3 id="-tips"><i class="fa fa-lightbulb-o" aria-hidden="true"></i> Tips</h3>
 
     <ul>
-      <li>You need to upload reads and the reference genome into Galaxy (https://usegalaxy.org) as shown in <a href="https://vimeo.com/120973708">this video</a>
-</li>
+      <li>You need to upload reads and the reference genome into Galaxy (https://usegalaxy.org) as shown in <a href="https://vimeo.com/120973708">this video</a></li>
       <li>You will be mapping reads against an uploaded reference genome as shown in <a href="https://vimeo.com/123108417">this video</a>.</li>
     </ul>
   </blockquote>
@@ -703,35 +671,34 @@ Child    791   767
 
         
         <blockquote class="key_points">
-            <h3> <img class="emoji" title=":grey_exclamation:" alt=":grey_exclamation:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2755.png" height="20" width="20" align="absmiddle"> Key points</h3>
+            <h3><i class="fa fa-key" aria-hidden="true"></i> Key points</h3>
 
             <ul>
-            
-            <li>Variation in human mitochondria is a proxy for other haploid systems.</li>
-            
-            <li>Nucleotide variants in haploid systems may have any frequency between 0 and 1.</li>
-            
-            <li>Distinguishing true variants from noise is not easy and requires accounting <br> for strand bias and read placement bias.</li>
-            
-            <li>FreeBayes can be effectively used to call variants in haploid systems.</li>
-            
+                
+                <li>Variation in human mitochondria is a proxy for other haploid systems.</li>
+                
+                <li>Nucleotide variants in haploid systems may have any frequency between 0 and 1.</li>
+                
+                <li>Distinguishing true variants from noise is not easy and requires accounting <br> for strand bias and read placement bias.</li>
+                
+                <li>FreeBayes can be effectively used to call variants in haploid systems.</li>
+                
             </ul>
         </blockquote>
         
 
         
 
-        <h3>
-<img class="emoji" title=":clap:" alt=":clap:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f44f.png" height="20" width="20" align="absmiddle"> Congratulations on successfully completing this tutorial!</h3>
-
+        <h3><i class="fa fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!</h3>
 
         <hr>
-        <blockquote class="overview">
-            <h3> <img class="emoji" title=":speech_balloon:" alt=":speech_balloon:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f4ac.png" height="20" width="20" align="absmiddle"> Feedback</h3>
-            Please take a moment and provide your feedback on this tutorial. Your feedback will help guide and improve future revisions to this tutorial. <a href="https://tinyurl.com/GTNfeedback" target="_blank">Feedback Form</a>
-        </blockquote>
 
-            </section>
+        <blockquote class="overview">
+            <h3><i class="fa fa-comments-o" aria-hidden="true"></i> Feedback</h3>
+            Please take a moment and provide your feedback on this tutorial. Your feedback will help guide and improve future revisions to this tutorial.
+            <a href="https://tinyurl.com/GTNfeedback">Feedback Form</a>
+        </blockquote>
+    </section>
 </div>
 
 <footer>

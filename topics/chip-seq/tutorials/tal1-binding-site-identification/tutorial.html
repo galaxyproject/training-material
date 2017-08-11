@@ -1,7 +1,6 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
     <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -30,14 +29,14 @@
                 <ul class="navbar-nav">
                     <li class="nav-item">
                         <a class="nav-link" href="https://galaxyproject.github.io/training-material/topics/chip-seq" title="Go back to list of tutorials">
-                            <i class="fa fa-folder-o"></i> ChIP-Seq data analysis
+                            <i class="fa fa-folder-o" aria-hidden="true"></i> ChIP-Seq data analysis
                         </a>
                     </li>
 
                     
                     <li class="nav-item">
                         <a class="nav-link" href="https://galaxyproject.github.io/training-material/topics/chip-seq/slides" title="Slides for this tutorial">
-                            <i class="fa fa-slideshare"></i> Introduction slides
+                            <i class="fa fa-slideshare" aria-hidden="true"></i> Introduction slides
                         </a>
                     </li>
                     
@@ -45,7 +44,7 @@
                     
                     <li class="nav-item">
                         <a class="nav-link" href="https://github.com/galaxyproject/training-material/tree/master/topics/chip-seq/docker" title="Docker image for this tutorial">
-                            <i class="fa fa-ship"></i> Docker image
+                            <i class="fa fa-ship" aria-hidden="true"></i> Docker image
                         </a>
                     </li>
                     
@@ -55,7 +54,7 @@
                     
                     <li class="nav-item">
                         <a class="nav-link" href="https://doi.org/10.5281/zenodo.197100" title="Links to data">
-                            <i class="fa fa-files-o"></i> Input Dataset
+                            <i class="fa fa-files-o" aria-hidden="true"></i> Input Dataset
                         </a>
                     </li>
                     
@@ -63,7 +62,7 @@
                     
                     <li class="nav-item">
                         <a class="nav-link" href="https://galaxyproject.github.io/training-material/topics/chip-seq#references" title="References">
-                            <i class="fa fa-book"></i> Literature
+                            <i class="fa fa-book" aria-hidden="true"></i> Literature
                         </a>
                     </li>
                     
@@ -76,7 +75,7 @@
 
                     <li class="nav-item">
                         <a class="nav-link" href="https://github.com/galaxyproject/training-material/tree/master/topics/chip-seq/tutorials/tal1-binding-site-identification/tutorial.md">
-                            <i class="fa fa-github"></i> Edit
+                            <i class="fa fa-github" aria-hidden="true"></i> Edit
                         </a>
                     </li>
                 </ul>
@@ -92,7 +91,7 @@
         <blockquote class="overview">
             <h3>Overview</h3>
 
-            <p class="bold"> <img class="emoji" title=":grey_question:" alt=":grey_question:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2754.png" height="20" width="20" align="absmiddle"> Questions</p>
+            <strong><i class="fa fa-question-circle" aria-hidden="true"></i> Questions</strong>
             <ul>
             
             <li>How is raw ChIP-seq data processed and analyzed?</li>
@@ -103,7 +102,7 @@
             
             </ul>
 
-            <p class="bold"> <img class="emoji" title=":dart:" alt=":dart:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f3af.png" height="20" width="20" align="absmiddle"> Objectives</p>
+            <strong><i class="fa fa-bullseye" aria-hidden="true"></i> Objectives</strong>
             <ul>
             
             <li>Inspect read quality with FastQC</li>
@@ -125,7 +124,7 @@
             </ul>
 
             
-            <p class="bold"> <img class="emoji" title=":heavy_check_mark:" alt=":heavy_check_mark:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2714.png" height="20" width="20" align="absmiddle"> Requirements</p>
+            <strong><i class="fa fa-check-circle" aria-hidden="true"></i> Requirements</strong>
             <ul>
             
                 <li>
@@ -156,7 +155,7 @@
             </ul>
             
 
-            <p><span class="bold"> <img class="emoji" title=":hourglass:" alt=":hourglass:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/231b.png" height="20" width="20" align="absmiddle"> Time estimation:</span> 3h</p>
+            <p><strong><i class="fa fa-hourglass-end" aria-hidden="true"></i> Time estimation:</strong> 3h</p>
         </blockquote>
 
         <h1 class="no_toc" id="introduction">Introduction</h1>
@@ -295,8 +294,7 @@ Input control experiments are used to identify and remove sampling bias, for exa
   <li><a href="#step-8-identifying-unique-and-common-tal1-peaks-between-states" id="markdown-toc-step-8-identifying-unique-and-common-tal1-peaks-between-states">Step 8: Identifying unique and common TAL1 peaks between states</a></li>
   <li><a href="#step-9-generating-input-normalized-coverage-files" id="markdown-toc-step-9-generating-input-normalized-coverage-files">Step 9: Generating Input normalized coverage files</a></li>
   <li><a href="#step-10-plot-the-signal-on-the-peaks-between-samples" id="markdown-toc-step-10-plot-the-signal-on-the-peaks-between-samples">Step 10: Plot the signal on the peaks between samples</a></li>
-  <li>
-<a href="#additional-optional-analyses" id="markdown-toc-additional-optional-analyses">Additional optional analyses</a>    <ol>
+  <li><a href="#additional-optional-analyses" id="markdown-toc-additional-optional-analyses">Additional optional analyses</a>    <ol>
       <li><a href="#assessing-gc-bias" id="markdown-toc-assessing-gc-bias">Assessing GC bias</a></li>
     </ol>
   </li>
@@ -309,8 +307,7 @@ Input control experiments are used to identify and remove sampling bias, for exa
 <p>As for any NGS data analysis, ChIP-seq data must be quality controlled before being aligned to a reference genome. For more detailed information on NGS quality control, check out the tutorial <a href="https://galaxyproject.github.io/training-material/topics/sequence-analysis">here</a>.</p>
 
 <blockquote class="hands_on">
-  <h3 id="pencil2-hands-on-quality-control">
-<img class="emoji" title=":pencil2:" alt=":pencil2:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/270f.png" height="20" width="20" align="absmiddle"> Hands-on: Quality control</h3>
+  <h3 id="-hands-on-quality-control"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Quality control</h3>
 
   <ol>
     <li>Create and name a new history for this tutorial.</li>
@@ -318,30 +315,26 @@ Input control experiments are used to identify and remove sampling bias, for exa
       <p>Import the ChIP-seq raw data (*.fastqsanger) from <a href="https://doi.org/10.5281/zenodo.197100">Zenodo</a></p>
 
       <blockquote class="tip">
-        <h3 id="bulb-tip-importing-data-via-links">
-<img class="emoji" title=":bulb:" alt=":bulb:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f4a1.png" height="20" width="20" align="absmiddle"> Tip: Importing data via links</h3>
+        <h3 id="-tip-importing-data-via-links"><i class="fa fa-lightbulb-o" aria-hidden="true"></i> Tip: Importing data via links</h3>
 
         <ul>
           <li>Copy the link location (Right-click on the filename <i class="fa fa-long-arrow-right"></i> Copy Link Address)</li>
           <li>Open the Galaxy Upload Manager</li>
-          <li>Select <strong>Paste/Fetch Data</strong>
-</li>
+          <li>Select <strong>Paste/Fetch Data</strong></li>
           <li>Paste the link into the text field</li>
-          <li>Press <strong>Start</strong>
-</li>
+          <li>Press <strong>Start</strong></li>
         </ul>
       </blockquote>
 
-      <figure id="figure-1"><img src="../../images/upload_data_page.png" alt="upload" title="Data can be imported directly with links."><figcaption><span class="figcaption-prefix">Figure 1:</span> Data can be imported directly with links.</figcaption></figure>
+      <figure id="figure-1"><img src="../../images/upload_data_page.png" alt="upload" title="Data can be imported directly with links." /><figcaption><span class="figcaption-prefix">Figure 1:</span> Data can be imported directly with links.</figcaption></figure>
 
-      <figure id="figure-2"><img src="../../images/data_uploaded.png" alt="data" title="Imported datasets will appear in the history panel."><figcaption><span class="figcaption-prefix">Figure 2:</span> Imported datasets will appear in the history panel.</figcaption></figure>
+      <figure id="figure-2"><img src="../../images/data_uploaded.png" alt="data" title="Imported datasets will appear in the history panel." /><figcaption><span class="figcaption-prefix">Figure 2:</span> Imported datasets will appear in the history panel.</figcaption></figure>
     </li>
     <li>
       <p>Examine in Galaxy the data in a FASTQ file by clicking on the eye icon.</p>
 
       <blockquote class="question">
-        <h3 id="question-questions">
-<img class="emoji" title=":question:" alt=":question:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2753.png" height="20" width="20" align="absmiddle"> Questions</h3>
+        <h3 id="-questions"><i class="fa fa-question-circle" aria-hidden="true"></i> Questions</h3>
 
         <ol>
           <li>What are four key features of a FASTQ file?</li>
@@ -360,21 +353,19 @@ Input control experiments are used to identify and remove sampling bias, for exa
       </blockquote>
     </li>
     <li>
-      <p><strong>FastQC</strong> <img class="emoji" title=":wrench:" alt=":wrench:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f527.png" height="20" width="20" align="absmiddle">: Run the tool <strong>FastQC</strong> on each FASTQ file to assess the quality of the raw data. An explanation of the results can be found on the <a href="https://www.bioinformatics.babraham.ac.uk/projects/fastqc/">FastQC web page</a>.</p>
+      <p><strong>FastQC</strong> <i class="fa fa-wrench" aria-hidden="true"></i>: Run the tool <strong>FastQC</strong> on each FASTQ file to assess the quality of the raw data. An explanation of the results can be found on the <a href="https://www.bioinformatics.babraham.ac.uk/projects/fastqc/">FastQC web page</a>.</p>
 
       <blockquote class="tip">
-        <h3 id="bulb-tip-running-a-tool-on-multiple-data-files">
-<img class="emoji" title=":bulb:" alt=":bulb:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f4a1.png" height="20" width="20" align="absmiddle"> Tip: Running a tool on multiple data files</h3>
+        <h3 id="-tip-running-a-tool-on-multiple-data-files"><i class="fa fa-lightbulb-o" aria-hidden="true"></i> Tip: Running a tool on multiple data files</h3>
 
         <p>You can run this tool - and many other tools - on all the FASTQ files at once!
 To do this, first select the “Multiple datasets” icon (two stacked pages) under the “Input FASTQ file” heading in the <strong>FASTQC</strong> Tool Form, then shift+click to select multiple FASTQ files.</p>
       </blockquote>
 
-      <figure id="figure-3"><img src="../../images/fastqc_before.png" alt="fastqbefore" title="Sequence quality per base generated by FastQC &lt;b&gt;before&lt;/b&gt; end trimming."><figcaption><span class="figcaption-prefix">Figure 3:</span> Sequence quality per base generated by FastQC <b>before</b> end trimming.</figcaption></figure>
+      <figure id="figure-3"><img src="../../images/fastqc_before.png" alt="fastqbefore" title="Sequence quality per base generated by FastQC &lt;b&gt;before&lt;/b&gt; end trimming." /><figcaption><span class="figcaption-prefix">Figure 3:</span> Sequence quality per base generated by FastQC <b>before</b> end trimming.</figcaption></figure>
 
       <blockquote class="question">
-        <h3 id="question-questions-1">
-<img class="emoji" title=":question:" alt=":question:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2753.png" height="20" width="20" align="absmiddle"> Questions</h3>
+        <h3 id="-questions-1"><i class="fa fa-question-circle" aria-hidden="true"></i> Questions</h3>
 
         <ol>
           <li>What does the y-axis represent in Figure 3?</li>
@@ -385,8 +376,7 @@ To do this, first select the “Multiple datasets” icon (two stacked pages) un
 <summary>Click to view answers</summary>
 <ol type="1">
 <li>The phred-score. This score gives the probability of an incorrect base e.g. a score of 20 means that it is likely by 1% that one base is incorrect. See <a href="https://en.wikipedia.org/wiki/Phred_quality_score"> here </a>for more information. </li>
-<li>This is an unsolved technical issue of the sequencing machines. The longer the sequences are the more likely are errors. More <a href="https://www.ecseq.com/support/ngs/why-does-the-sequence-quality-decrease-over-the-read-in-illumina">information.</a>
-</li>
+<li>This is an unsolved technical issue of the sequencing machines. The longer the sequences are the more likely are errors. More <a href="https://www.ecseq.com/support/ngs/why-does-the-sequence-quality-decrease-over-the-read-in-illumina">information.</a></li>
 </ol>
 </details>
           </li>
@@ -401,39 +391,31 @@ To do this, first select the “Multiple datasets” icon (two stacked pages) un
 <p>It is often necessary to trim a sequenced read to remove bases sequenced with high uncertainty (<em>i.e.</em> low-quality bases). In addition, artificial adaptor sequences used in library preparation protocols need to be removed before attempting to align the reads to a reference genome.</p>
 
 <blockquote class="hands_on">
-  <h3 id="pencil2-hands-on-trimming-and-clipping-reads">
-<img class="emoji" title=":pencil2:" alt=":pencil2:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/270f.png" height="20" width="20" align="absmiddle"> Hands-on: Trimming and clipping reads</h3>
+  <h3 id="-hands-on-trimming-and-clipping-reads"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Trimming and clipping reads</h3>
 
   <ol>
     <li>
-      <p><strong>Trimmomatic</strong> <img class="emoji" title=":wrench:" alt=":wrench:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f527.png" height="20" width="20" align="absmiddle">: Run the tool <strong>Trimmomatic</strong> on each FASTQ file to trim low-quality bases (remember how to run tools on all files at once?). Explore the full parameter list for <code class="highlighter-rouge">Trimmomatic</code> in the Tool Form and set the following <code class="highlighter-rouge">Trimmomatic</code> parameters:</p>
+      <p><strong>Trimmomatic</strong> <i class="fa fa-wrench" aria-hidden="true"></i>: Run the tool <strong>Trimmomatic</strong> on each FASTQ file to trim low-quality bases (remember how to run tools on all files at once?). Explore the full parameter list for <code class="highlighter-rouge">Trimmomatic</code> in the Tool Form and set the following <code class="highlighter-rouge">Trimmomatic</code> parameters:</p>
 
       <ul>
-        <li>
-<strong>Paired end data?</strong>: No</li>
-        <li>
-<strong>Perform initial ILLUMINACLIP?</strong>: No</li>
-        <li>
-<strong>Select Trimmomatic operation to perform</strong>: Sliding window trimming (SLIDINGWINDOW)</li>
-        <li>
-<strong>Number of bases to average across</strong>: 4</li>
-        <li>
-<strong>Average quality required</strong>: 20</li>
+        <li><strong>Paired end data?</strong>: No</li>
+        <li><strong>Perform initial ILLUMINACLIP?</strong>: No</li>
+        <li><strong>Select Trimmomatic operation to perform</strong>: Sliding window trimming (SLIDINGWINDOW)</li>
+        <li><strong>Number of bases to average across</strong>: 4</li>
+        <li><strong>Average quality required</strong>: 20</li>
       </ul>
 
       <blockquote class="tip">
-        <h3 id="bulb-tip-changing-datatypes">
-<img class="emoji" title=":bulb:" alt=":bulb:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f4a1.png" height="20" width="20" align="absmiddle"> Tip: Changing datatypes</h3>
+        <h3 id="-tip-changing-datatypes"><i class="fa fa-lightbulb-o" aria-hidden="true"></i> Tip: Changing datatypes</h3>
 
         <p>If the FASTQ files cannot be selected, check whether their format is FASTQ with Sanger-scaled quality values (<em>fastqsanger</em>). If not, you can edit the data type by clicking on the pencil symbol next to a file in the history, clicking the “Datatype” tab, and choosing <em>fastqsanger</em> as the “New Type”.</p>
       </blockquote>
     </li>
     <li>
-      <p><strong>FastQC</strong> <img class="emoji" title=":wrench:" alt=":wrench:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f527.png" height="20" width="20" align="absmiddle">: Rerun the tool <strong>FastQC</strong> on each trimmed/clipped FASTQ file to determine whether low-quality and adaptor sequences were correctly removed.</p>
+      <p><strong>FastQC</strong> <i class="fa fa-wrench" aria-hidden="true"></i>: Rerun the tool <strong>FastQC</strong> on each trimmed/clipped FASTQ file to determine whether low-quality and adaptor sequences were correctly removed.</p>
 
       <blockquote class="question">
-        <h3 id="question-questions-2">
-<img class="emoji" title=":question:" alt=":question:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2753.png" height="20" width="20" align="absmiddle"> Questions</h3>
+        <h3 id="-questions-2"><i class="fa fa-question-circle" aria-hidden="true"></i> Questions</h3>
 
         <ol>
           <li>How did the range of read lengths change after trimming/clipping?</li>
@@ -451,7 +433,7 @@ To do this, first select the “Multiple datasets” icon (two stacked pages) un
         </ol>
       </blockquote>
 
-      <figure id="figure-4"><img src="../../images/fastqc_after.png" alt="fastqafter" title="Sequence quality per base generated by **FastQC** &lt;b&gt;after&lt;/b&gt; end trimming."><figcaption><span class="figcaption-prefix">Figure 4:</span> Sequence quality per base generated by **FastQC** <b>after</b> end trimming.</figcaption></figure>
+      <figure id="figure-4"><img src="../../images/fastqc_after.png" alt="fastqafter" title="Sequence quality per base generated by **FastQC** &lt;b&gt;after&lt;/b&gt; end trimming." /><figcaption><span class="figcaption-prefix">Figure 4:</span> Sequence quality per base generated by **FastQC** <b>after</b> end trimming.</figcaption></figure>
     </li>
   </ol>
 </blockquote>
@@ -462,29 +444,25 @@ To do this, first select the “Multiple datasets” icon (two stacked pages) un
 Nowadays, there are many read alignment programs for sequenced DNA, <code class="highlighter-rouge">BWA</code> being one of them. You can read more about the BWA algorithm and tool <a href="https://academic.oup.com/bioinformatics/article-lookup/doi/10.1093/bioinformatics/btp324">here</a>.</p>
 
 <blockquote class="hands_on">
-  <h3 id="pencil2-hands-on-aligning-reads-to-a-reference-genome">
-<img class="emoji" title=":pencil2:" alt=":pencil2:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/270f.png" height="20" width="20" align="absmiddle"> Hands-on: Aligning reads to a reference genome</h3>
+  <h3 id="-hands-on-aligning-reads-to-a-reference-genome"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Aligning reads to a reference genome</h3>
 
   <ol>
     <li>
-      <p><strong>Map with BWA</strong> <img class="emoji" title=":wrench:" alt=":wrench:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f527.png" height="20" width="20" align="absmiddle">: Run the tool <strong>Map with BWA</strong> to map the trimmed/clipped reads to the mouse genome. Set the following <strong>Map with BWA</strong> parameters:</p>
+      <p><strong>Map with BWA</strong> <i class="fa fa-wrench" aria-hidden="true"></i>: Run the tool <strong>Map with BWA</strong> to map the trimmed/clipped reads to the mouse genome. Set the following <strong>Map with BWA</strong> parameters:</p>
 
       <ul>
-        <li>
-<strong>Using reference genome</strong>: Mouse (mus musculus) mm10</li>
-        <li>
-<strong>Single or Paired-end reads</strong>: Single</li>
+        <li><strong>Using reference genome</strong>: Mouse (mus musculus) mm10</li>
+        <li><strong>Single or Paired-end reads</strong>: Single</li>
       </ul>
 
-      <figure id="figure-5"><img src="../../images/BWA_tool_form.png" alt="bwa" title="Select the trimmed read files to be aligned."><figcaption><span class="figcaption-prefix">Figure 5:</span> Select the trimmed read files to be aligned.</figcaption></figure>
+      <figure id="figure-5"><img src="../../images/BWA_tool_form.png" alt="bwa" title="Select the trimmed read files to be aligned." /><figcaption><span class="figcaption-prefix">Figure 5:</span> Select the trimmed read files to be aligned.</figcaption></figure>
     </li>
     <li>Rename your files after <strong>BWA</strong> finishes to reflect the origin and contents</li>
     <li>
       <p>Inspect a file produced by running <strong>BWA</strong></p>
 
       <blockquote class="question">
-        <h3 id="question-questions-3">
-<img class="emoji" title=":question:" alt=":question:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2753.png" height="20" width="20" align="absmiddle"> Questions</h3>
+        <h3 id="-questions-3"><i class="fa fa-question-circle" aria-hidden="true"></i> Questions</h3>
 
         <ol>
           <li>What datatype is the <code class="highlighter-rouge">BWA</code> output file?</li>
@@ -503,11 +481,10 @@ Nowadays, there are many read alignment programs for sequenced DNA, <code class=
       </blockquote>
     </li>
     <li>
-      <p><strong>IdxStats</strong> <img class="emoji" title=":wrench:" alt=":wrench:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f527.png" height="20" width="20" align="absmiddle">: Run the tool <strong>IdxStats</strong> on all mapped files and look at the output (poke it in the eye!).</p>
+      <p><strong>IdxStats</strong> <i class="fa fa-wrench" aria-hidden="true"></i>: Run the tool <strong>IdxStats</strong> on all mapped files and look at the output (poke it in the eye!).</p>
 
       <blockquote class="question">
-        <h3 id="question-questions-4">
-<img class="emoji" title=":question:" alt=":question:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2753.png" height="20" width="20" align="absmiddle"> Questions</h3>
+        <h3 id="-questions-4"><i class="fa fa-question-circle" aria-hidden="true"></i> Questions</h3>
 
         <ol>
           <li>What does each column in the output represent (<strong>Tip</strong>: look at the Tool Form)?</li>
@@ -519,12 +496,12 @@ Nowadays, there are many read alignment programs for sequenced DNA, <code class=
 <summary>Click to view answers</summary>
 <ol type="1">
 <li>
-  Column   Description&lt;/br&gt;
-  ------------  ------------------&lt;/br&gt;
-     1           Reference sequence identifier&lt;/br&gt;
-     2           Reference sequence length&lt;/br&gt;
-     3           Number of mapped reads&lt;/br&gt;
-     4           Number of placed but unmapped reads  (typically unmapped partners of mapped reads)</li>
+  Column &emsp; Description&lt;/br&gt;
+  ------------ &emsp;------------------&lt;/br&gt;
+     1 &emsp; &emsp; &emsp;     Reference sequence identifier&lt;/br&gt;
+     2 &emsp; &emsp; &emsp;     Reference sequence length&lt;/br&gt;
+     3 &emsp; &emsp; &emsp;     Number of mapped reads&lt;/br&gt;
+     4 &emsp; &emsp; &emsp;     Number of placed but unmapped reads  (typically unmapped partners of mapped reads)</li>
 <li>This information can be seen in column 3, e.g. for Megakaryocyte_Tal1_R1 2143352 reads are mapped.</li>
 <li>These are parts of chromosomes that e.g. for chr1_GL456210_random do belong to chr1 but it is unclear where exactly. There entires like chrUn that are not associated with a chromosome but it is believed that they are part of the genome. </li>
 
@@ -544,12 +521,11 @@ Nowadays, there are many read alignment programs for sequenced DNA, <code class=
 <p>We expect that the replicates of the ChIP-seq experiments should be clustered more closely to each other than the replicates of the input samples. We will be use tools from the package <strong>deepTools</strong> for the next few steps. More information on <strong>deepTools</strong> can be found <a href="https://deeptools.readthedocs.io/en/latest/content/list_of_tools.html">here</a>.</p>
 
 <blockquote class="hands_on">
-  <h3 id="pencil2-hands-on-assessing-correlation-between-samples">
-<img class="emoji" title=":pencil2:" alt=":pencil2:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/270f.png" height="20" width="20" align="absmiddle"> Hands-on: Assessing correlation between samples</h3>
+  <h3 id="-hands-on-assessing-correlation-between-samples"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Assessing correlation between samples</h3>
 
   <ol>
     <li>
-      <p><strong>multiBamSummary</strong> <img class="emoji" title=":wrench:" alt=":wrench:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f527.png" height="20" width="20" align="absmiddle">: Run the tool <strong>multiBamSummary</strong> from the <strong>multiBamSummary</strong> package</p>
+      <p><strong>multiBamSummary</strong> <i class="fa fa-wrench" aria-hidden="true"></i>: Run the tool <strong>multiBamSummary</strong> from the <strong>multiBamSummary</strong> package</p>
 
       <p>This tool splits the reference genome into bins of equal size and counts the number of reads in each bin from each sample. We set a small <strong>Bin size</strong> here because we are working with a subset of reads that align to only a fraction of the genome.</p>
 
@@ -557,35 +533,28 @@ Nowadays, there are many read alignment programs for sequenced DNA, <code class=
 
       <ul>
         <li>Select all of the aligned BAM files</li>
-        <li>
-<strong>Bin size in bp</strong>: 1000</li>
+        <li><strong>Bin size in bp</strong>: 1000</li>
       </ul>
 
-      <figure id="figure-6"><img src="../../images/multiBamSummary_1000bin.png" alt="multiBamSummary" title="Select all of the aligned BAM files and change Bin size."><figcaption><span class="figcaption-prefix">Figure 6:</span> Select all of the aligned BAM files and change Bin size.</figcaption></figure>
+      <figure id="figure-6"><img src="../../images/multiBamSummary_1000bin.png" alt="multiBamSummary" title="Select all of the aligned BAM files and change Bin size." /><figcaption><span class="figcaption-prefix">Figure 6:</span> Select all of the aligned BAM files and change Bin size.</figcaption></figure>
     </li>
     <li>
-      <p><strong>plotCorrelation</strong> <img class="emoji" title=":wrench:" alt=":wrench:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f527.png" height="20" width="20" align="absmiddle">: Run the tool <strong>plotCorrelation</strong> from the <strong>deepTools</strong> package to visualize the results from the previous step.</p>
+      <p><strong>plotCorrelation</strong> <i class="fa fa-wrench" aria-hidden="true"></i>: Run the tool <strong>plotCorrelation</strong> from the <strong>deepTools</strong> package to visualize the results from the previous step.</p>
 
       <p>Feel free to try different parameters. To start, set the following <strong>plotCorrelation</strong> parameters:</p>
 
       <ul>
-        <li>
-<strong>Correlation method</strong>: Pearson</li>
-        <li>
-<strong>Plotting type</strong>: Heatmap</li>
-        <li>
-<strong>Plot the correlation value</strong>: Yes</li>
-        <li>
-<strong>Skip zeros</strong>: Yes</li>
-        <li>
-<strong>Remove regions with very large counts</strong>: Yes</li>
+        <li><strong>Correlation method</strong>: Pearson</li>
+        <li><strong>Plotting type</strong>: Heatmap</li>
+        <li><strong>Plot the correlation value</strong>: Yes</li>
+        <li><strong>Skip zeros</strong>: Yes</li>
+        <li><strong>Remove regions with very large counts</strong>: Yes</li>
       </ul>
 
-      <figure id="figure-7"><img src="../../images/plotCorrelation.png" alt="corr" title="Select the newly generation correlation matrix file from the previous step."><figcaption><span class="figcaption-prefix">Figure 7:</span> Select the newly generation correlation matrix file from the previous step.</figcaption></figure>
+      <figure id="figure-7"><img src="../../images/plotCorrelation.png" alt="corr" title="Select the newly generation correlation matrix file from the previous step." /><figcaption><span class="figcaption-prefix">Figure 7:</span> Select the newly generation correlation matrix file from the previous step.</figcaption></figure>
 
       <blockquote class="question">
-        <h3 id="question-questions-5">
-<img class="emoji" title=":question:" alt=":question:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2753.png" height="20" width="20" align="absmiddle"> Questions</h3>
+        <h3 id="-questions-5"><i class="fa fa-question-circle" aria-hidden="true"></i> Questions</h3>
 
         <ol>
           <li>Why do we want to skip zeros in <strong>plotCorrelation</strong>?</li>
@@ -605,7 +574,7 @@ Nowadays, there are many read alignment programs for sequenced DNA, <code class=
         </ol>
       </blockquote>
 
-      <figure id="figure-8"><img src="../../images/plotCorrelation_heatmap_pearson_1kb.png" alt="heatmap" title="Heatmap of correlation matrix generated by **plotCorrelation**."><figcaption><span class="figcaption-prefix">Figure 8:</span> Heatmap of correlation matrix generated by **plotCorrelation**.</figcaption></figure>
+      <figure id="figure-8"><img src="../../images/plotCorrelation_heatmap_pearson_1kb.png" alt="heatmap" title="Heatmap of correlation matrix generated by **plotCorrelation**." /><figcaption><span class="figcaption-prefix">Figure 8:</span> Heatmap of correlation matrix generated by **plotCorrelation**.</figcaption></figure>
     </li>
   </ol>
 </blockquote>
@@ -617,34 +586,29 @@ Nowadays, there are many read alignment programs for sequenced DNA, <code class=
 <p>We will now evaluate the quality of the immuno-precipitation step in the ChIP-seq protocol.</p>
 
 <blockquote class="hands_on">
-  <h3 id="pencil2-hands-on-assessing-ip-strength">
-<img class="emoji" title=":pencil2:" alt=":pencil2:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/270f.png" height="20" width="20" align="absmiddle"> Hands-on: Assessing IP strength</h3>
+  <h3 id="-hands-on-assessing-ip-strength"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Assessing IP strength</h3>
 
   <ol>
     <li>
-      <p><strong>plotFingerprint</strong> <img class="emoji" title=":wrench:" alt=":wrench:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f527.png" height="20" width="20" align="absmiddle">: Run the tool <strong>plotFingerprint</strong> from the <strong>deepTools</strong> package.</p>
+      <p><strong>plotFingerprint</strong> <i class="fa fa-wrench" aria-hidden="true"></i>: Run the tool <strong>plotFingerprint</strong> from the <strong>deepTools</strong> package.</p>
 
       <ul>
         <li>Select all of the aligned BAM files for the G1E cell type</li>
-        <li>
-<strong>Show advanced options</strong>: yes</li>
-        <li>
-<strong>Bin size in bases</strong>: 100</li>
-        <li>
-<strong>Skip zeros</strong>: Yes</li>
+        <li><strong>Show advanced options</strong>: yes</li>
+        <li><strong>Bin size in bases</strong>: 100</li>
+        <li><strong>Skip zeros</strong>: Yes</li>
       </ul>
 
-      <p><img src="../../images/plotFingerprint1_v2.png" alt="fingerprint1"></p>
-      <figure id="figure-9"><img src="../../images/plotFingerprint2.png" alt="fingerprint2" title="Select all of the aligned BAM file to assess IP strength."><figcaption><span class="figcaption-prefix">Figure 9:</span> Select all of the aligned BAM file to assess IP strength.</figcaption></figure>
+      <p><img src="../../images/plotFingerprint1_v2.png" alt="fingerprint1" /></p>
+      <figure id="figure-9"><img src="../../images/plotFingerprint2.png" alt="fingerprint2" title="Select all of the aligned BAM file to assess IP strength." /><figcaption><span class="figcaption-prefix">Figure 9:</span> Select all of the aligned BAM file to assess IP strength.</figcaption></figure>
     </li>
     <li>
       <p>View the output image.</p>
 
-      <figure id="figure-10"><img src="../../images/plotFingerprint_graph_v2.png" alt="fingerprintimage" title="Graph of IP strength from **plotFingerprint**."><figcaption><span class="figcaption-prefix">Figure 10:</span> Graph of IP strength from **plotFingerprint**.</figcaption></figure>
+      <figure id="figure-10"><img src="../../images/plotFingerprint_graph_v2.png" alt="fingerprintimage" title="Graph of IP strength from **plotFingerprint**." /><figcaption><span class="figcaption-prefix">Figure 10:</span> Graph of IP strength from **plotFingerprint**.</figcaption></figure>
 
       <blockquote class="question">
-        <h3 id="question-questions-6">
-<img class="emoji" title=":question:" alt=":question:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2753.png" height="20" width="20" align="absmiddle"> Questions</h3>
+        <h3 id="-questions-6"><i class="fa fa-question-circle" aria-hidden="true"></i> Questions</h3>
 
         <ol>
           <li>What does this graph in Figure 10 represent?</li>
@@ -685,19 +649,18 @@ Nowadays, there are many read alignment programs for sequenced DNA, <code class=
 <p>More information about <strong>MACS2</strong> can be found <a href="https://genomebiology.biomedcentral.com/articles/10.1186/gb-2008-9-9-r137">here</a>.</p>
 
 <blockquote class="hands_on">
-  <h3 id="pencil2-hands-on-determining-tal1-binding-sites">
-<img class="emoji" title=":pencil2:" alt=":pencil2:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/270f.png" height="20" width="20" align="absmiddle"> Hands-on: Determining TAL1 binding sites</h3>
+  <h3 id="-hands-on-determining-tal1-binding-sites"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Determining TAL1 binding sites</h3>
 
   <ol>
     <li>
-      <p><strong>MACS2 callpeak</strong> <img class="emoji" title=":wrench:" alt=":wrench:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f527.png" height="20" width="20" align="absmiddle">: Run the tool <strong>MACS2 callpeak</strong> with the aligned read files from the previous step as Treatment (TAL1) and Control (input).</p>
+      <p><strong>MACS2 callpeak</strong> <i class="fa fa-wrench" aria-hidden="true"></i>: Run the tool <strong>MACS2 callpeak</strong> with the aligned read files from the previous step as Treatment (TAL1) and Control (input).</p>
 
       <ul>
         <li>Select replicate <strong>ChIP-Seq Treatment Files</strong> for one cell type</li>
         <li>Select replicate <strong>ChIP-Seq Control Files</strong> for the same cell type</li>
       </ul>
 
-      <figure id="figure-11"><img src="../../images/MACS2_tool_form.png" alt="macs2" title="Select the appropriate control and treatment files."><figcaption><span class="figcaption-prefix">Figure 11:</span> Select the appropriate control and treatment files.</figcaption></figure>
+      <figure id="figure-11"><img src="../../images/MACS2_tool_form.png" alt="macs2" title="Select the appropriate control and treatment files." /><figcaption><span class="figcaption-prefix">Figure 11:</span> Select the appropriate control and treatment files.</figcaption></figure>
     </li>
     <li>
       <p>Rename your files after <strong>MACS2 callpeak</strong> finishes to reflect the origin and contents.</p>
@@ -714,39 +677,37 @@ Nowadays, there are many read alignment programs for sequenced DNA, <code class=
 <p>First, we will reformat the peak file before we send it to Trackster, and then we will import a gene annotation file so we can visualize aligned reads and TAL1 peaks relative to gene features and positions.</p>
 
 <blockquote class="hands_on">
-  <h3 id="pencil2-hands-on-inspection-of-peaks-and-aligned-data-with-trackster">
-<img class="emoji" title=":pencil2:" alt=":pencil2:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/270f.png" height="20" width="20" align="absmiddle"> Hands-on: Inspection of peaks and aligned data with Trackster</h3>
+  <h3 id="-hands-on-inspection-of-peaks-and-aligned-data-with-trackster"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Inspection of peaks and aligned data with Trackster</h3>
 
   <ol>
     <li>
-      <p><strong>Cut</strong> <img class="emoji" title=":wrench:" alt=":wrench:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f527.png" height="20" width="20" align="absmiddle">: Run the tool <strong>Cut</strong> on the peak file choosing columns “c1,c2,c3,c4” and rename this file to reflect the origin and contents.</p>
+      <p><strong>Cut</strong> <i class="fa fa-wrench" aria-hidden="true"></i>: Run the tool <strong>Cut</strong> on the peak file choosing columns “c1,c2,c3,c4” and rename this file to reflect the origin and contents.</p>
     </li>
     <li>
-      <p>Import the gene annotations file from Zenodo <a href="https://doi.org/10.5281/zenodo.197100"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.197100.svg" alt="DOI"></a></p>
+      <p>Import the gene annotations file from Zenodo <a href="https://doi.org/10.5281/zenodo.197100"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.197100.svg" alt="DOI" /></a></p>
     </li>
     <li>
       <p>Click “Visualizations” on the page header and select “New Track Browser”.</p>
 
-      <figure id="figure-12"><img src="../../images/Highlighting_viz_button.png" alt="vizbutton" title="Trackster can be accessed from the Visualizations button at the top of the screen."><figcaption><span class="figcaption-prefix">Figure 12:</span> Trackster can be accessed from the Visualizations button at the top of the screen.</figcaption></figure>
+      <figure id="figure-12"><img src="../../images/Highlighting_viz_button.png" alt="vizbutton" title="Trackster can be accessed from the Visualizations button at the top of the screen." /><figcaption><span class="figcaption-prefix">Figure 12:</span> Trackster can be accessed from the Visualizations button at the top of the screen.</figcaption></figure>
     </li>
     <li>
       <p>Give this session a descriptive name and choose “mm10” as the “Reference genome build (dbkey)”.</p>
 
-      <figure id="figure-13"><img src="../../images/Trackster_session_and_db.png" alt="tracksterdb" title="Session name and assigning reference genome."><figcaption><span class="figcaption-prefix">Figure 13:</span> Session name and assigning reference genome.</figcaption></figure>
+      <figure id="figure-13"><img src="../../images/Trackster_session_and_db.png" alt="tracksterdb" title="Session name and assigning reference genome." /><figcaption><span class="figcaption-prefix">Figure 13:</span> Session name and assigning reference genome.</figcaption></figure>
     </li>
     <li>
       <p>Click “Add Datasets to visualization” and select the history containing the data from this analysis. Select the BEDgraph files and the peak files that you renamed.</p>
 
-      <figure id="figure-14"><img src="../../images/Trackster_add_datasets.png" alt="tracksteradd" title="Load your data into Trackster with the Add Datasets to visualization feature."><figcaption><span class="figcaption-prefix">Figure 14:</span> Load your data into Trackster with the Add Datasets to visualization feature.</figcaption></figure>
+      <figure id="figure-14"><img src="../../images/Trackster_add_datasets.png" alt="tracksteradd" title="Load your data into Trackster with the Add Datasets to visualization feature." /><figcaption><span class="figcaption-prefix">Figure 14:</span> Load your data into Trackster with the Add Datasets to visualization feature.</figcaption></figure>
 
-      <figure id="figure-15"><img src="../../images/Trackster_selecting_datasets.png" alt="tracksterselect" title="Select data from your histories to view in Trackster."><figcaption><span class="figcaption-prefix">Figure 15:</span> Select data from your histories to view in Trackster.</figcaption></figure>
+      <figure id="figure-15"><img src="../../images/Trackster_selecting_datasets.png" alt="tracksterselect" title="Select data from your histories to view in Trackster." /><figcaption><span class="figcaption-prefix">Figure 15:</span> Select data from your histories to view in Trackster.</figcaption></figure>
     </li>
     <li>
       <p>Navigate to the Runx1 locus (chr16:92501466-92926074) to inspect the aligned reads and TAL1 peaks.</p>
 
       <blockquote class="question">
-        <h3 id="question-questions-7">
-<img class="emoji" title=":question:" alt=":question:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2753.png" height="20" width="20" align="absmiddle"> Questions</h3>
+        <h3 id="-questions-7"><i class="fa fa-question-circle" aria-hidden="true"></i> Questions</h3>
 
         <ol>
           <li>What do you see at the Runx1 locus in Trackster?</li>
@@ -757,15 +718,14 @@ Nowadays, there are many read alignment programs for sequenced DNA, <code class=
 <summary>Click to view answers</summary>
 <ol type="1">
 <li>Directly upstream of the shorter Runx1 gene models is a cluster of 3 TAL1 peaks that only appear in the G1E cell type, but not in Megakaryocytes. Further upstream, there are some shared TAL1 peaks in both cell types.</li>
-<li>
-</li>
+<li></li>
 </ol>
 </details>
           </li>
         </ol>
       </blockquote>
 
-      <figure id="figure-16"><img src="../../images/Trackster_Runx1_locus.png" alt="runx1" title="The Runx1 locus."><figcaption><span class="figcaption-prefix">Figure 16:</span> The Runx1 locus.</figcaption></figure>
+      <figure id="figure-16"><img src="../../images/Trackster_Runx1_locus.png" alt="runx1" title="The Runx1 locus." /><figcaption><span class="figcaption-prefix">Figure 16:</span> The Runx1 locus.</figcaption></figure>
     </li>
   </ol>
 </blockquote>
@@ -774,14 +734,12 @@ Nowadays, there are many read alignment programs for sequenced DNA, <code class=
 <p>We show here an alternative to Trackster, <a href="http://software.broadinstitute.org/software/igv/">IGV</a>.</p>
 
 <blockquote>
-  <h3 id="pencil2-hands-on-igv">
-<img class="emoji" title=":pencil2:" alt=":pencil2:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/270f.png" height="20" width="20" align="absmiddle"> Hands-on: IGV</h3>
+  <h3 id="-hands-on-igv"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: IGV</h3>
 
   <ol>
     <li>Open IGV on your local computer.</li>
     <li>Click on each ‘narrow peaks’ result file from the MACS2 computations on ‘display with IGV’ –&gt; ‘local Mouse mm10’</li>
-    <li>For more information about IGV see <a href="https://galaxyproject.github.io/training-material/topics/introduction/tutorials/igv-introduction/tutorial.html">here</a>
-</li>
+    <li>For more information about IGV see <a href="https://galaxyproject.github.io/training-material/topics/introduction/tutorials/igv-introduction/tutorial.html">here</a></li>
   </ol>
 </blockquote>
 
@@ -790,41 +748,37 @@ Nowadays, there are many read alignment programs for sequenced DNA, <code class=
 <p>We have processed ChIP-seq data from two stages of hematopoiesis and have lists of TAL1 occupied sites (peaks) in both cellular states. The next analysis step is to identify TAL1 peaks that are <em>shared</em> between the two cellular states and peaks that are <em>specific</em> to either cellular state.</p>
 
 <blockquote class="hands_on">
-  <h3 id="pencil2-hands-on-identifying-unique-and-common-tal1-peaks-between-states">
-<img class="emoji" title=":pencil2:" alt=":pencil2:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/270f.png" height="20" width="20" align="absmiddle"> Hands-on: Identifying unique and common TAL1 peaks between states</h3>
+  <h3 id="-hands-on-identifying-unique-and-common-tal1-peaks-between-states"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Identifying unique and common TAL1 peaks between states</h3>
 
   <ol>
     <li>
-      <p><strong>Intersect intervals</strong> <img class="emoji" title=":wrench:" alt=":wrench:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f527.png" height="20" width="20" align="absmiddle">: Run the tool <strong>Intersect intervals</strong> to find peaks that exist both in G1E and megakaryocytes.</p>
+      <p><strong>Intersect intervals</strong> <i class="fa fa-wrench" aria-hidden="true"></i>: Run the tool <strong>Intersect intervals</strong> to find peaks that exist both in G1E and megakaryocytes.</p>
 
       <p>Select the “TAL1 G1E peaks” and “TAL1 Mega peaks” files as the inputs.</p>
 
       <p>Running this tool with the default settings will return overlapping peaks of both files.</p>
     </li>
     <li>
-      <p><strong>Intersect intervals</strong> <img class="emoji" title=":wrench:" alt=":wrench:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f527.png" height="20" width="20" align="absmiddle">: Run the tool <strong>Intersect intervals</strong> to find peaks that exist only in G1E.</p>
+      <p><strong>Intersect intervals</strong> <i class="fa fa-wrench" aria-hidden="true"></i>: Run the tool <strong>Intersect intervals</strong> to find peaks that exist only in G1E.</p>
 
       <ul>
         <li>Select “TAL1 G1E peaks” as the first input and “TAL1 Mega peaks” as the second input file.</li>
-        <li>
-<strong>Report only those alignments that **do not** overlap the BED file</strong>: Yes</li>
+        <li><strong>Report only those alignments that **do not** overlap the BED file</strong>: Yes</li>
       </ul>
     </li>
     <li>
-      <p><strong>Intersect intervals</strong> <img class="emoji" title=":wrench:" alt=":wrench:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f527.png" height="20" width="20" align="absmiddle">: Run the tool <strong>Intersect intervals</strong> to find peaks that exist only in megakaryocytes.</p>
+      <p><strong>Intersect intervals</strong> <i class="fa fa-wrench" aria-hidden="true"></i>: Run the tool <strong>Intersect intervals</strong> to find peaks that exist only in megakaryocytes.</p>
 
       <ul>
         <li>Select “TAL1 Mega peaks” as the first input and “TAL1 G1E peaks” as the second input file.</li>
-        <li>
-<strong>Report only those alignments that **do not** overlap the BED file</strong>: Yes</li>
+        <li><strong>Report only those alignments that **do not** overlap the BED file</strong>: Yes</li>
       </ul>
     </li>
     <li>
       <p>Re-name the three files we generated to reflect their contents.</p>
 
       <blockquote class="question">
-        <h3 id="question-questions-8">
-<img class="emoji" title=":question:" alt=":question:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2753.png" height="20" width="20" align="absmiddle"> Questions</h3>
+        <h3 id="-questions-8"><i class="fa fa-question-circle" aria-hidden="true"></i> Questions</h3>
 
         <ol>
           <li>How many TAL1 binding sites are common to both G1E cells and megakaryocytes?</li>
@@ -852,8 +806,7 @@ Nowadays, there are many read alignment programs for sequenced DNA, <code class=
 <p>We will generate Input normalized coverage (bigwig) files for the ChIP samples, using <strong>bamCompare</strong> tool from <strong>deepTools2</strong>. <strong>bamCompare</strong> provides multiple options to compare the two files (e.g. log2ratio, subtraction). We will use log2 ratio of the ChIP samples over Input.</p>
 
 <blockquote class="hands_on">
-  <h3 id="pencil2-hands-on-generate-input-normalized-bigwigs">
-<img class="emoji" title=":pencil2:" alt=":pencil2:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/270f.png" height="20" width="20" align="absmiddle"> Hands-on: Generate Input-normalized bigwigs</h3>
+  <h3 id="-hands-on-generate-input-normalized-bigwigs"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Generate Input-normalized bigwigs</h3>
 
   <ol>
     <li>Search for <strong>bamCompare</strong> in the Galaxy tool panel.</li>
@@ -862,7 +815,7 @@ Nowadays, there are many read alignment programs for sequenced DNA, <code class=
     <li>Repeat this step for all treatment and input samples: Megakaryocyte_Tal1_R1.bam and Megakaryocyte_Input_R1.bam; G1E_Tal1_R2.bam and G1E_Input_R2.bam; G1E_Tal1_R1.bam and G1E_Input_R1.bam.</li>
   </ol>
 
-  <p><img src="../../images/bamcom.png" alt=""></p>
+  <p><img src="../../images/bamcom.png" alt="" /></p>
 </blockquote>
 
 <h1 id="step-10-plot-the-signal-on-the-peaks-between-samples">Step 10: Plot the signal on the peaks between samples</h1>
@@ -878,8 +831,7 @@ Nowadays, there are many read alignment programs for sequenced DNA, <code class=
 <h3 id="computematrix">computeMatrix</h3>
 
 <blockquote class="hands_on">
-  <h3 id="pencil2-hands-on-calculate-signal-matrix-on-the-macs2-output">
-<img class="emoji" title=":pencil2:" alt=":pencil2:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/270f.png" height="20" width="20" align="absmiddle"> Hands-on: calculate signal matrix on the MACS2 output</h3>
+  <h3 id="-hands-on-calculate-signal-matrix-on-the-macs2-output"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: calculate signal matrix on the MACS2 output</h3>
 
   <ol>
     <li>Search for <strong>computeMatrix</strong> in the Galaxy tool panel.</li>
@@ -890,21 +842,20 @@ Nowadays, there are many read alignment programs for sequenced DNA, <code class=
     <li>For the two fields region upstream and downstream choose both times the value ‘5000’</li>
   </ol>
 
-  <p><img src="../../images/compM.png" alt="compMatrix"></p>
+  <p><img src="../../images/compM.png" alt="compMatrix" /></p>
 
   <ol>
     <li>Under advanced options , select “Yes” for “Convert missing values to zero” and “Skip zeros”.</li>
     <li>Select “Execute”</li>
   </ol>
 
-  <p><img src="../../images/compM2.png" alt="computeMatrix"></p>
+  <p><img src="../../images/compM2.png" alt="computeMatrix" /></p>
 </blockquote>
 
 <h3 id="plotheatmap">plotHeatmap</h3>
 
 <blockquote class="hands_on">
-  <h3 id="pencil2-hands-on-plot-a-heatmap-using-computemarix-output">
-<img class="emoji" title=":pencil2:" alt=":pencil2:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/270f.png" height="20" width="20" align="absmiddle"> Hands-on: plot a Heatmap using computeMarix output</h3>
+  <h3 id="-hands-on-plot-a-heatmap-using-computemarix-output"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: plot a Heatmap using computeMarix output</h3>
 
   <ol>
     <li>Select “plotHeatmap” from the Galaxy tool panel.</li>
@@ -913,11 +864,11 @@ Nowadays, there are many read alignment programs for sequenced DNA, <code class=
     <li>Click “Execute”</li>
   </ol>
 
-  <p><img src="../../images/plothm.png" alt="plotHM"></p>
+  <p><img src="../../images/plothm.png" alt="plotHM" /></p>
 
   <p>The output shall look like this :</p>
 
-  <p><img src="../../images/hm.png" alt="hm"></p>
+  <p><img src="../../images/hm.png" alt="hm" /></p>
 </blockquote>
 
 <h1 id="additional-optional-analyses">Additional optional analyses</h1>
@@ -929,32 +880,25 @@ Nowadays, there are many read alignment programs for sequenced DNA, <code class=
 <p>We will now check whether the samples have more reads from regions of the genome with high GC.</p>
 
 <blockquote class="hands_on">
-  <h3 id="pencil2-hands-on-assessing-gc-bias">
-<img class="emoji" title=":pencil2:" alt=":pencil2:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/270f.png" height="20" width="20" align="absmiddle"> Hands-on: Assessing GC bias</h3>
+  <h3 id="-hands-on-assessing-gc-bias"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Assessing GC bias</h3>
 
   <ol>
     <li>
-      <p><strong>computeGCbias</strong> <img class="emoji" title=":wrench:" alt=":wrench:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f527.png" height="20" width="20" align="absmiddle">: Run the tool <strong>computeGCbias</strong> from the <strong>deepTools</strong> package.</p>
+      <p><strong>computeGCbias</strong> <i class="fa fa-wrench" aria-hidden="true"></i>: Run the tool <strong>computeGCbias</strong> from the <strong>deepTools</strong> package.</p>
 
       <ul>
         <li>First, select an aligned BAM files for an input dataset</li>
-        <li>
-<strong>Reference genome</strong>: locally cached</li>
-        <li>
-<strong>Using reference genome</strong>: mm10</li>
-        <li>
-<strong>Effective genome size</strong>: user specified</li>
-        <li>
-<strong>Effective genome size</strong>: 10000000</li>
-        <li>
-<strong>Fragment length used for the sequencing</strong>: 50</li>
+        <li><strong>Reference genome</strong>: locally cached</li>
+        <li><strong>Using reference genome</strong>: mm10</li>
+        <li><strong>Effective genome size</strong>: user specified</li>
+        <li><strong>Effective genome size</strong>: 10000000</li>
+        <li><strong>Fragment length used for the sequencing</strong>: 50</li>
       </ul>
 
-      <figure id="figure-17"><img src="../../images/computeGCBias.png" alt="gcbias" title="Select a single aligned BAM file to check GC bias for that dataset."><figcaption><span class="figcaption-prefix">Figure 17:</span> Select a single aligned BAM file to check GC bias for that dataset.</figcaption></figure>
+      <figure id="figure-17"><img src="../../images/computeGCBias.png" alt="gcbias" title="Select a single aligned BAM file to check GC bias for that dataset." /><figcaption><span class="figcaption-prefix">Figure 17:</span> Select a single aligned BAM file to check GC bias for that dataset.</figcaption></figure>
 
       <blockquote class="question">
-        <h3 id="question-questions-9">
-<img class="emoji" title=":question:" alt=":question:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2753.png" height="20" width="20" align="absmiddle"> Questions</h3>
+        <h3 id="-questions-9"><i class="fa fa-question-circle" aria-hidden="true"></i> Questions</h3>
 
         <ol>
           <li>Why would we worry more about checking for GC bias in an input file?</li>
@@ -973,11 +917,10 @@ Nowadays, there are many read alignment programs for sequenced DNA, <code class=
       </blockquote>
     </li>
     <li>
-      <p><strong>correctGCbias</strong> <img class="emoji" title=":wrench:" alt=":wrench:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f527.png" height="20" width="20" align="absmiddle">: Explore the tool <strong>correctGCbias</strong> from the <strong>deepTools</strong> package.</p>
+      <p><strong>correctGCbias</strong> <i class="fa fa-wrench" aria-hidden="true"></i>: Explore the tool <strong>correctGCbias</strong> from the <strong>deepTools</strong> package.</p>
 
       <blockquote class="question">
-        <h3 id="question-questions-10">
-<img class="emoji" title=":question:" alt=":question:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2753.png" height="20" width="20" align="absmiddle"> Questions</h3>
+        <h3 id="-questions-10"><i class="fa fa-question-circle" aria-hidden="true"></i> Questions</h3>
 
         <ol>
           <li>What does the tool <strong>correctGCbias</strong> do?</li>
@@ -1009,16 +952,16 @@ Nowadays, there are many read alignment programs for sequenced DNA, <code class=
 
         
         <blockquote class="key_points">
-            <h3> <img class="emoji" title=":grey_exclamation:" alt=":grey_exclamation:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2755.png" height="20" width="20" align="absmiddle"> Key points</h3>
+            <h3><i class="fa fa-key" aria-hidden="true"></i> Key points</h3>
 
             <ul>
-            
-            <li>Sophisticated analysis of ChIP-seq data is possible using tools hosted by Galaxy</li>
-            
-            <li>Genomic dataset analyses require multiple methods of quality assessment to ensure that the data are appropriate for answering the biology question of interest.</li>
-            
-            <li>By using the sharable and transparent Galaxy platform, data analyses can easily be shared and reproduced</li>
-            
+                
+                <li>Sophisticated analysis of ChIP-seq data is possible using tools hosted by Galaxy</li>
+                
+                <li>Genomic dataset analyses require multiple methods of quality assessment to ensure that the data are appropriate for answering the biology question of interest.</li>
+                
+                <li>By using the sharable and transparent Galaxy platform, data analyses can easily be shared and reproduced</li>
+                
             </ul>
         </blockquote>
         
@@ -1028,17 +971,16 @@ Nowadays, there are many read alignment programs for sequenced DNA, <code class=
         <p>Useful information regarding this type of analysis with descriptions and paper references for the tools used in this tutorial, and literature for this analysis techniques and interpretations can be found <a href="https://galaxyproject.github.io/training-material/topics/chip-seq#references">here</a>.</p>
         
 
-        <h3>
-<img class="emoji" title=":clap:" alt=":clap:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f44f.png" height="20" width="20" align="absmiddle"> Congratulations on successfully completing this tutorial!</h3>
-
+        <h3><i class="fa fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!</h3>
 
         <hr>
-        <blockquote class="overview">
-            <h3> <img class="emoji" title=":speech_balloon:" alt=":speech_balloon:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f4ac.png" height="20" width="20" align="absmiddle"> Feedback</h3>
-            Please take a moment and provide your feedback on this tutorial. Your feedback will help guide and improve future revisions to this tutorial. <a href="https://tinyurl.com/GTNfeedback" target="_blank">Feedback Form</a>
-        </blockquote>
 
-            </section>
+        <blockquote class="overview">
+            <h3><i class="fa fa-comments-o" aria-hidden="true"></i> Feedback</h3>
+            Please take a moment and provide your feedback on this tutorial. Your feedback will help guide and improve future revisions to this tutorial.
+            <a href="https://tinyurl.com/GTNfeedback">Feedback Form</a>
+        </blockquote>
+    </section>
 </div>
 
 <footer>

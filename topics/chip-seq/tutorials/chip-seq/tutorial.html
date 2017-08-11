@@ -1,7 +1,6 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
     <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -30,14 +29,14 @@
                 <ul class="navbar-nav">
                     <li class="nav-item">
                         <a class="nav-link" href="https://galaxyproject.github.io/training-material/topics/chip-seq" title="Go back to list of tutorials">
-                            <i class="fa fa-folder-o"></i> ChIP-Seq data analysis
+                            <i class="fa fa-folder-o" aria-hidden="true"></i> ChIP-Seq data analysis
                         </a>
                     </li>
 
                     
                     <li class="nav-item">
                         <a class="nav-link" href="https://galaxyproject.github.io/training-material/topics/chip-seq/slides" title="Slides for this tutorial">
-                            <i class="fa fa-slideshare"></i> Introduction slides
+                            <i class="fa fa-slideshare" aria-hidden="true"></i> Introduction slides
                         </a>
                     </li>
                     
@@ -45,7 +44,7 @@
                     
                     <li class="nav-item">
                         <a class="nav-link" href="https://github.com/galaxyproject/training-material/tree/master/topics/chip-seq/docker" title="Docker image for this tutorial">
-                            <i class="fa fa-ship"></i> Docker image
+                            <i class="fa fa-ship" aria-hidden="true"></i> Docker image
                         </a>
                     </li>
                     
@@ -57,7 +56,7 @@
                     
                     <li class="nav-item">
                         <a class="nav-link" href="https://galaxyproject.github.io/training-material/topics/chip-seq#references" title="References">
-                            <i class="fa fa-book"></i> Literature
+                            <i class="fa fa-book" aria-hidden="true"></i> Literature
                         </a>
                     </li>
                     
@@ -70,7 +69,7 @@
 
                     <li class="nav-item">
                         <a class="nav-link" href="https://github.com/galaxyproject/training-material/tree/master/topics/chip-seq/tutorials/chip-seq/tutorial.md">
-                            <i class="fa fa-github"></i> Edit
+                            <i class="fa fa-github" aria-hidden="true"></i> Edit
                         </a>
                     </li>
                 </ul>
@@ -86,33 +85,28 @@
         <blockquote class="overview">
             <h3>Overview</h3>
 
-            <p class="bold"> <img class="emoji" title=":grey_question:" alt=":grey_question:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2754.png" height="20" width="20" align="absmiddle"> Questions</p>
+            <strong><i class="fa fa-question-circle" aria-hidden="true"></i> Questions</strong>
             <ul>
             
-            <li>
+            <li></li>
             
-            </li>
-<li>
+            <li></li>
             
-            </li>
-</ul>
+            </ul>
 
-            <p class="bold"> <img class="emoji" title=":dart:" alt=":dart:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f3af.png" height="20" width="20" align="absmiddle"> Objectives</p>
+            <strong><i class="fa fa-bullseye" aria-hidden="true"></i> Objectives</strong>
             <ul>
             
-            <li>
+            <li></li>
             
-            </li>
-<li>
+            <li></li>
             
-            </li>
-<li>
+            <li></li>
             
-            </li>
-</ul>
+            </ul>
 
             
-            <p class="bold"> <img class="emoji" title=":heavy_check_mark:" alt=":heavy_check_mark:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2714.png" height="20" width="20" align="absmiddle"> Requirements</p>
+            <strong><i class="fa fa-check-circle" aria-hidden="true"></i> Requirements</strong>
             <ul>
             
                 <li>
@@ -137,7 +131,7 @@
             </ul>
             
 
-            <p><span class="bold"> <img class="emoji" title=":hourglass:" alt=":hourglass:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/231b.png" height="20" width="20" align="absmiddle"> Time estimation:</span> </p>
+            <p><strong><i class="fa fa-hourglass-end" aria-hidden="true"></i> Time estimation:</strong> </p>
         </blockquote>
 
         <p>#ChIP-seq Galaxy Workshop</p>
@@ -146,8 +140,7 @@
 
 <ul>
   <li><a href="#example">Hands-on example</a></li>
-  <li>
-<a href="#literature">Useful literature</a>
+  <li><a href="#literature">Useful literature</a>
     <ul>
       <li><a href="#chipseq">ChIP-seq in general</a></li>
       <li><a href="#peakcalling">Peak calling</a></li>
@@ -198,10 +191,8 @@ The input files are used to identify sequencing bias like open chromatin or GC b
 <ul>
   <li>Apply the tool <code class="highlighter-rouge">TrimGalore</code> to your FASTQ file. Have a look at the full parameter list and then tell <code class="highlighter-rouge">TrimGalore</code> to:
     <ul>
-      <li>
-<strong>trim low quality bases</strong> with a cut-off of 15</li>
-      <li>
-<strong>clip a possibly trailing adapter sequence</strong> (The default sequence that appears is the generic part of Illumina adaptors and should be used.) Instruct <code class="highlighter-rouge">TrimGalore</code> to trim adapter sequences with an overlap of at least 3.</li>
+      <li><strong>trim low quality bases</strong> with a cut-off of 15</li>
+      <li><strong>clip a possibly trailing adapter sequence</strong> (The default sequence that appears is the generic part of Illumina adaptors and should be used.) Instruct <code class="highlighter-rouge">TrimGalore</code> to trim adapter sequences with an overlap of at least 3.</li>
     </ul>
   </li>
 </ul>
@@ -396,10 +387,8 @@ Nowadays, there are many read alignment programs for shot-gun sequenced DNA, <co
 <ul>
   <li>You can run <code class="highlighter-rouge">computeMatrix</code> in two alternative modes:
     <ul>
-      <li>
-<strong>scale-regions</strong>: stretches or shrinks all regions in the BED file (here: genes) to the same length (bp) as indicated by the user</li>
-      <li>
-<strong>reference-point</strong>: considers only those genomic positions before (downstream) and/or after (upstream) a reference point (e.g. TSS, which corresponds to the annotated gene start in our case).</li>
+      <li><strong>scale-regions</strong>: stretches or shrinks all regions in the BED file (here: genes) to the same length (bp) as indicated by the user</li>
+      <li><strong>reference-point</strong>: considers only those genomic positions before (downstream) and/or after (upstream) a reference point (e.g. TSS, which corresponds to the annotated gene start in our case).</li>
     </ul>
   </li>
   <li>Run the tool in either mode.
@@ -415,7 +404,7 @@ Nowadays, there are many read alignment programs for shot-gun sequenced DNA, <co
   <li>How can you increase the “resolution” of the data in the resulting heatmap?</li>
 </ul>
 
-<hr>
+<hr />
 
 <p><a name="literature"></a>&lt;/a&gt;
 ##Useful literature</p>
@@ -476,21 +465,18 @@ Nowadays, there are many read alignment programs for shot-gun sequenced DNA, <co
 
         
         <blockquote class="key_points">
-            <h3> <img class="emoji" title=":grey_exclamation:" alt=":grey_exclamation:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2755.png" height="20" width="20" align="absmiddle"> Key points</h3>
+            <h3><i class="fa fa-key" aria-hidden="true"></i> Key points</h3>
 
             <ul>
-            
-            <li>
-            
-            </li>
-<li>
-            
-            </li>
-<li>
-            
-            </li>
-<li>...</li>
-            
+                
+                <li></li>
+                
+                <li></li>
+                
+                <li></li>
+                
+                <li>...</li>
+                
             </ul>
         </blockquote>
         
@@ -500,17 +486,16 @@ Nowadays, there are many read alignment programs for shot-gun sequenced DNA, <co
         <p>Useful information regarding this type of analysis with descriptions and paper references for the tools used in this tutorial, and literature for this analysis techniques and interpretations can be found <a href="https://galaxyproject.github.io/training-material/topics/chip-seq#references">here</a>.</p>
         
 
-        <h3>
-<img class="emoji" title=":clap:" alt=":clap:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f44f.png" height="20" width="20" align="absmiddle"> Congratulations on successfully completing this tutorial!</h3>
-
+        <h3><i class="fa fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!</h3>
 
         <hr>
-        <blockquote class="overview">
-            <h3> <img class="emoji" title=":speech_balloon:" alt=":speech_balloon:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f4ac.png" height="20" width="20" align="absmiddle"> Feedback</h3>
-            Please take a moment and provide your feedback on this tutorial. Your feedback will help guide and improve future revisions to this tutorial. <a href="https://tinyurl.com/GTNfeedback" target="_blank">Feedback Form</a>
-        </blockquote>
 
-            </section>
+        <blockquote class="overview">
+            <h3><i class="fa fa-comments-o" aria-hidden="true"></i> Feedback</h3>
+            Please take a moment and provide your feedback on this tutorial. Your feedback will help guide and improve future revisions to this tutorial.
+            <a href="https://tinyurl.com/GTNfeedback">Feedback Form</a>
+        </blockquote>
+    </section>
 </div>
 
 <footer>

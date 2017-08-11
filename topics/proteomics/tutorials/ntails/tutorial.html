@@ -30,14 +30,14 @@
                 <ul class="navbar-nav">
                     <li class="nav-item">
                         <a class="nav-link" href="https://galaxyproject.github.io/training-material/topics/proteomics" title="Go back to list of tutorials">
-                            <i class="fa fa-folder-o"></i> Proteomics
+                            <i class="fa fa-folder-o" aria-hidden="true"></i> Proteomics
                         </a>
                     </li>
 
                     
                     <li class="nav-item">
                         <a class="nav-link" href="https://galaxyproject.github.io/training-material/topics/proteomics/slides" title="Slides for this tutorial">
-                            <i class="fa fa-slideshare"></i> Introduction slides
+                            <i class="fa fa-slideshare" aria-hidden="true"></i> Introduction slides
                         </a>
                     </li>
                     
@@ -45,7 +45,7 @@
                     
                     <li class="nav-item">
                         <a class="nav-link" href="https://github.com/galaxyproject/training-material/tree/master/topics/proteomics/docker" title="Docker image for this tutorial">
-                            <i class="fa fa-ship"></i> Docker image
+                            <i class="fa fa-ship" aria-hidden="true"></i> Docker image
                         </a>
                     </li>
                     
@@ -57,7 +57,7 @@
                     
                     <li class="nav-item">
                         <a class="nav-link" href="https://galaxyproject.github.io/training-material/topics/proteomics#references" title="References">
-                            <i class="fa fa-book"></i> Literature
+                            <i class="fa fa-book" aria-hidden="true"></i> Literature
                         </a>
                     </li>
                     
@@ -70,7 +70,7 @@
 
                     <li class="nav-item">
                         <a class="nav-link" href="https://github.com/galaxyproject/training-material/tree/master/topics/proteomics/tutorials/ntails/tutorial.md">
-                            <i class="fa fa-github"></i> Edit
+                            <i class="fa fa-github" aria-hidden="true"></i> Edit
                         </a>
                     </li>
                 </ul>
@@ -86,7 +86,7 @@
         <blockquote class="overview">
             <h3>Overview</h3>
 
-            <p class="bold"> <img class="emoji" title=":grey_question:" alt=":grey_question:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2754.png" height="20" width="20" align="absmiddle"> Questions</p>
+            <strong><i class="fa fa-question-circle" aria-hidden="true"></i> Questions</strong>
             <ul>
             
             <li>First question addressed during the tutorial</li>
@@ -95,7 +95,7 @@
             
             </ul>
 
-            <p class="bold"> <img class="emoji" title=":dart:" alt=":dart:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f3af.png" height="20" width="20" align="absmiddle"> Objectives</p>
+            <strong><i class="fa fa-bullseye" aria-hidden="true"></i> Objectives</strong>
             <ul>
             
             <li>First learning objectives of the tutorial</li>
@@ -105,7 +105,7 @@
             </ul>
 
             
-            <p class="bold"> <img class="emoji" title=":heavy_check_mark:" alt=":heavy_check_mark:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2714.png" height="20" width="20" align="absmiddle"> Requirements</p>
+            <strong><i class="fa fa-check-circle" aria-hidden="true"></i> Requirements</strong>
             <ul>
             
                 <li>
@@ -118,7 +118,7 @@
             </ul>
             
 
-            <p><span class="bold"> <img class="emoji" title=":hourglass:" alt=":hourglass:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/231b.png" height="20" width="20" align="absmiddle"> Time estimation:</span> 1h/1d</p>
+            <p><strong><i class="fa fa-hourglass-end" aria-hidden="true"></i> Time estimation:</strong> 1h/1d</p>
         </blockquote>
 
         <p>N-Tails is a special Proteomics technique to analyze peptide abundancy changes of protein N-termini. Prior to the MS measurement, N-Tails enriches unmodified, as well as acetylated N-termini. Both common and “unusual” N-termini are identified, where “unusual” means that the protein N-terminus was changes.
@@ -132,8 +132,8 @@ The N-Tails technique includes the use of heavy isotope dimethyl labelling.</p>
 <p>The N-Tails technique was originally designed to research protease biology and has most often been used in this field. It was originally published in <a href="https://www.ncbi.nlm.nih.gov/pubmed/20208520">Kleifeld et al., Nat. Biotechnol., 2010</a>.</p>
 
 <blockquote>
-  <h3 id="nut_and_bolt-comment-interpretation-of-n-tails-results">
-<img class="emoji" title=":nut_and_bolt:" alt=":nut_and_bolt:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f529.png" height="20" width="20" align="absmiddle"> Comment: Interpretation of N-Tails results</h3>
+  <h3 id="-comment-interpretation-of-n-tails-results">
+<i class="fa fa-commenting-o" aria-hidden="true"></i> Comment: Interpretation of N-Tails results</h3>
 
   <p class="comment">Be careful not to overinterprete the results of N-Tails experiments. While the technique <strong>is</strong> fit to identify direct protease substrates, it does not discriminate direct from indirect (“downstream”) effects. Thus, most of the identified N-termini will <strong>not</strong> be direct protease substrates, even if their change in protein abundance is statistically significant.
 This warning is not specific for the N-Tails technique, but applies as well to other proteomic N-terminal screening techniques (e.g. COFRADIC).</p>
@@ -158,7 +158,7 @@ This warning is not specific for the N-Tails technique, but applies as well to o
   <li>
 <em>Running the workflow on a non-prefractionated sample:</em> Simply use only one file as an input.</li>
   <li>
-<em>Running the workflow on a double dimethyl labeling (only light and heavy labeling):</em> remove the third <code class="highlighter-rouge">MSGFPlusAdapter</code> <img class="emoji" title=":wrench:" alt=":wrench:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f527.png" height="20" width="20" align="absmiddle"> and the following <code class="highlighter-rouge">PeptideIndexer</code> <img class="emoji" title=":wrench:" alt=":wrench:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f527.png" height="20" width="20" align="absmiddle"> . Make sure that the mass changes are correctly given in the <code class="highlighter-rouge">MSGFPlusAdapter</code> <img class="emoji" title=":wrench:" alt=":wrench:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f527.png" height="20" width="20" align="absmiddle"> .</li>
+<em>Running the workflow on a double dimethyl labeling (only light and heavy labeling):</em> remove the third <code class="highlighter-rouge">MSGFPlusAdapter</code> <i class="fa fa-wrench" aria-hidden="true"></i> and the following <code class="highlighter-rouge">PeptideIndexer</code> <img class="emoji" title=":wrench:" alt=":wrench:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f527.png" height="20" width="20" align="absmiddle"> . Make sure that the mass changes are correctly given in the <code class="highlighter-rouge">MSGFPlusAdapter</code> <img class="emoji" title=":wrench:" alt=":wrench:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f527.png" height="20" width="20" align="absmiddle"> .</li>
 </ul>
 
 <h2 id="citation">Citation</h2>
@@ -171,16 +171,17 @@ please cite:</p>
 
         
         <blockquote class="key_points">
-            <h3> <img class="emoji" title=":grey_exclamation:" alt=":grey_exclamation:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2755.png" height="20" width="20" align="absmiddle"> Key points</h3>
+            <h3>
+<i class="fa fa-key" aria-hidden="true"></i> Key points</h3>
 
             <ul>
-            
-            <li>First take home message</li>
-            
-            <li>Second take home message</li>
-            
-            <li>Third take home message</li>
-            
+                
+                <li>First take home message</li>
+                
+                <li>Second take home message</li>
+                
+                <li>Third take home message</li>
+                
             </ul>
         </blockquote>
         
@@ -191,16 +192,17 @@ please cite:</p>
         
 
         <h3>
-<img class="emoji" title=":clap:" alt=":clap:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f44f.png" height="20" width="20" align="absmiddle"> Congratulations on successfully completing this tutorial!</h3>
-
+<i class="fa fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!</h3>
 
         <hr>
-        <blockquote class="overview">
-            <h3> <img class="emoji" title=":speech_balloon:" alt=":speech_balloon:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f4ac.png" height="20" width="20" align="absmiddle"> Feedback</h3>
-            Please take a moment and provide your feedback on this tutorial. Your feedback will help guide and improve future revisions to this tutorial. <a href="https://tinyurl.com/GTNfeedback" target="_blank">Feedback Form</a>
-        </blockquote>
 
-            </section>
+        <blockquote class="overview">
+            <h3>
+<i class="fa fa-comments-o" aria-hidden="true"></i> Feedback</h3>
+            Please take a moment and provide your feedback on this tutorial. Your feedback will help guide and improve future revisions to this tutorial.
+            <a href="https://tinyurl.com/GTNfeedback">Feedback Form</a>
+        </blockquote>
+    </section>
 </div>
 
 <footer>
