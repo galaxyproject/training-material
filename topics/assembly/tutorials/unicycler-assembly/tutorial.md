@@ -6,9 +6,10 @@ tutorial_name: unicycler-assembly
 
 # Introduction
 {:.no_toc}
-# Small bacterial genome Assembly with Unicycler - an introduction 
+# Small genome assembly with Unicycler
 
-A few definitions to start : 
+A few definitions to start:
+
  * **Alignment** : Similarity-based arrangement of DNA, RNA or protein sequences. In this context, subject and query sequence should be orthologous and reflect evolutionary, not functional or structural relationships
  * **Assembly** : Computational reconstruction of a longer sequence from smaller sequence reads
  * **Contig** : A contiguous linear DNA or RNA consensus sequence. Constructed from the assembly of smaller, partially overlapping, sequence fragments (reads)
@@ -24,16 +25,14 @@ A few definitions to start :
  * **Read** : Short base-pair sequence inferred from the DNA/RNA template by sequencing
  * **Scaffold** : Two or more contigs joined together using read-pair information
  
-There is two types of genome assembly, de novo assembly or against reference assembly.
-Reference assembly is performed by mapping small DNA fragment issued from sequencing technologies against a reference genome from the same or a close species.
-De novo genome assembly is performed by aligning and merging these fragments without a reference genome. The fragments are then align against each other to form bigger fragments.
+There are two types of genome assembly: *de novo* (from scratch) are reference assisted. Reference-assisted assembly is performed by mapping sequencing reads against a reference genome from the same or a closely-related species.
+*De novo* genome assembly is performed by inferring all information from overlaps between sequencing reads only. These overlaps are extended to ultimately cover all chromsomes. 
 
-![Concept of de novo genome assembly](../../images/concept.png  "De novo Genome Assembly ")
-<small> Figure from [Baker:2012](http://www.nature.com/nmeth/journal/v9/n4/full/nmeth.1935.html) </small> 
+![Concept of de novo genome assembly](../../images/concept.png  "<em>De novo</em> Genome Assembly. (Figure from <a href='http://www.nature.com/nmeth/journal/v9/n4/full/nmeth.1935.html'>Baker:2012</a>)")
 
 To understand how genome assembly works, read our previous trainings : 
 * [Introduction to Genome Assembly](https://galaxyproject.github.io/training-material/topics/assembly/tutorials/general-introduction/slides.html#1)
-* [De Bruijn Graph Assembly](https://galaxyproject.github.io/training-material/topics/assembly/tutorials/debruijn-graph-assembly/slides.html#46)
+* [De Bruijn Graph Assembly](https://galaxyproject.github.io/training-material/topics/assembly/tutorials/debruijn-graph-assembly/slides.html#1)
 
 Two currently available technologies are most attractive for small genome sequencing. Illumina’s reversible terminator process offers high coverage and accuracy at low cost (~$2K for a paired-end 2 x 300bp run) but can at most generate reads 300 bp in length. On the other hand, Oxford Nanopore’s molecular ratcheting through nanopore technology generates reads with mean length in thousands of bases and outliers over 100,000 kb in length. 
 
