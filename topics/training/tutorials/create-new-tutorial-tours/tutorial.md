@@ -88,7 +88,7 @@ The YAML file of a tour can be integrated in a Galaxy instance by placing the YA
 
 <blockquote class="imgur-embed-pub" lang="en" data-id="a/0YVvz"><a href="//imgur.com/a/0YVvz">Galaxy Tour Builder by TailorDev</a></blockquote><script async src="//s.imgur.com/min/embed.js" charset="utf-8"></script>
 
-> ### :pencil2: Hands-on: Install and start the plugin
+> ### {% icon hands_on %} Hands-on: Install and start the plugin
 >
 > 1. Install [node.js](https://nodejs.org/en/)
 > 2. Clone the [plugin GitHub repository](https://github.com/TailorDev/galaxy-tourbuilder)
@@ -108,7 +108,7 @@ The YAML file of a tour can be integrated in a Galaxy instance by placing the YA
 
 We can now create easily a Galaxy Interactive Tour and test it on the fly.
 
-> ### :pencil2: Hands-on: Create a Galaxy Interactive Tour
+> ### {% icon hands_on %} Hands-on: Create a Galaxy Interactive Tour
 >
 > 1. Create a Galaxy Interactive Tour for "BLAST" tutorial
 > 2. Test it with the plugin

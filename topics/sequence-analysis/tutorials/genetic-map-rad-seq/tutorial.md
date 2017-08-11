@@ -26,15 +26,15 @@ We here proposed to re-analyze these data at least until genotypes determination
 
 The original data is available at [STACKS website](https://creskolab.uoregon.edu/stacks/tutorial/stacks_samples.tar.gz) and the subset used here is findable on [CeSGO hub](https://cesgo.genouest.org/resources/370/supportingdocs).
 
-> ### :pencil2: Hands-on: Data upload
+> ### {% icon hands_on %} Hands-on: Data upload
 >
 > 1. Create a new history for this RAD-seq exercise. If you are not inspired, you can name it "STACKS 1.42 RAD: genetic map" for example...
 > 2. Import Fasta files from parents and 20 progenies.
 >
->    > ### :nut_and_bolt: Comments
+>    > ### {% icon comment %} Comments
 >    > If you are using the [GenOuest Galaxy instance](https://galaxy.genouest.org), you can load the dataset using 'Shared Data' -> 'Data Libraries' -> '1 Galaxy teaching folder' -> 'EnginesOn' -> 'RADseq' -> 'Genetic map'
 >
->    > ### :bulb: Tip: Importing data via links
+>    > ### {% icon tip %} Tip: Importing data via links
 >    >
 >    > * Copy the link location
 >    > * Open the Galaxy Upload Manager
@@ -71,12 +71,12 @@ The original data is available at [STACKS website](https://creskolab.uoregon.edu
 
 Run `Stacks: De novo map` Galaxy tool. This program will run `ustacks`, `cstacks`, and `sstacks` on each individual, accounting for the alignments of each read.
 
-> ### :nut_and_bolt: Comment
+> ### {% icon comment %} Comment
 >
 > Information on `denovo_map.pl` and its parameters can be found online: https://creskolab.uoregon.edu/stacks/comp/denovo_map.php.
 
 
-> **Stacks: De novo map** :wrench:: Run Stacks selecting the Genetic map usage. Specify each parent as a sample in the appropriate box, then each of the 20 progenies and specify a CP Cross type, 3 for the Minimum number of identical raw reads required to create a stack, 3 for minimum number of identical raw reads required to create a stack in 'progeny' individuals, 3 for the number of mismatches allowed between loci when building the catalog and activate the option "remove, or break up, highly repetitive RAD-Tags in the ustacks program".
+> **Stacks: De novo map** {% icon tool %}: Run Stacks selecting the Genetic map usage. Specify each parent as a sample in the appropriate box, then each of the 20 progenies and specify a CP Cross type, 3 for the Minimum number of identical raw reads required to create a stack, 3 for minimum number of identical raw reads required to create a stack in 'progeny' individuals, 3 for the number of mismatches allowed between loci when building the catalog and activate the option "remove, or break up, highly repetitive RAD-Tags in the ustacks program".
 >
 >    ![](../../images/RAD2_Genetic_Map/denovomap_in.png)
 
@@ -101,7 +101,7 @@ Run `Stacks: De novo map` Galaxy tool. This program will run `ustacks`, `cstacks
 >    ![](../../images/RAD2_Genetic_Map/denovo_map_log_cstacks.png)
 >
 >
->    > ### :question: Question
+>    > ### {% icon question %} Question
 >    >
 >    > 1. Can you identify the meanning of the number 425?
 >    > 2. Looking at the catalog.tags file, identify specific and shared loci from each individual. Count nuber of catalog loci coming from the first individual, from the second and thus find on both parents.
@@ -163,7 +163,7 @@ Run `Stacks: De novo map` Galaxy tool. This program will run `ustacks`, `cstacks
 >
 
 # Genotypes determination
-> **Stacks: genotypes** :wrench:: Re-Run the last step of `Stacks: De novo map` pipeline specifying more options as:
+> **Stacks: genotypes** {% icon tool %}: Re-Run the last step of `Stacks: De novo map` pipeline specifying more options as:
 >    > 1. The genetic map type (ie F1, F2 (left figure, F1xF1), Double Haploid, Back Cross (F1xF0), Cross Pollination (right figure, F1 or F2 but resulting from the croos of pure homozygous parents))
 >    >
 >    >    ![](../../images/RAD2_Genetic_Map/Genetic_map_F2.png)    ![](../../images/RAD2_Genetic_Map/Genetic_map_CrossPollination.png)
@@ -179,7 +179,7 @@ Run `Stacks: De novo map` Galaxy tool. This program will run `ustacks`, `cstacks
 >
 >    ![](../../images/RAD2_Genetic_Map/genotypes_automatic_correction.png)
 >
->    You can re-run **Stacks: genotypes** :wrench:: program modifying the number of genotyped progeny to consider a marker and thus be more or less stringent. Compare results.
+>    You can re-run **Stacks: genotypes** {% icon tool %}: program modifying the number of genotyped progeny to consider a marker and thus be more or less stringent. Compare results.
 >
 ### Genotypes.tsv files
 >
@@ -201,7 +201,7 @@ Run `Stacks: De novo map` Galaxy tool. This program will run `ustacks`, `cstacks
 
 
 >
->    > ### :question: Question
+>    > ### {% icon question %} Question
 >    >
 >    > 1. The use of the deleverage algorithm allows to not consider loci obtained from merging more than 3 stacks. Why 3 if biologically, you are waiting something related to 2 for diploid organisms?
 >    > 2. Re-execute **Stacks: De novo map** pipeline modifying the p-value treshold for the SNP model. What is the difference regarding to unverified haplotypes ?

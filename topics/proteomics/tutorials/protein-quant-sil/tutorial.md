@@ -19,7 +19,7 @@ This tutorial covers *relative* quantitation only (i.e. comparison of abundances
 
 If you still are in the planning phase of your quantitative proteomics experiment, you may want to consider our tutorial on different [quantitation methods]({{site.url}}/topics/proteomics/tutorials/labelfree-vs-labelled/tutorial.html) first.
 
-> ### :pencil2: Hands-on: Introduction
+> ### {% icon hands_on %} Hands-on: Introduction
 > In the Hands-on section of this tutorial, we will use a quantitative comparison of **HEK _OR_ E.coli** cell lysate as a test dataset. In this experiment, the very same cell lysate was once labelled with light, once with heavy **dimethyl _OR_ SILAC** and both samples were subsequently mixed in a certain ratio. For a detailed description of the dataset, please refer to the description in the [PRIDE archive]().
 > Your objective in this hands-on-tutorial is to find out the correct mixing ratio of the test sample.
 {: .hands_on}
@@ -38,12 +38,12 @@ Quantitation on MS1 level may in principle be carried out without prior knowledg
 In the OpenMS suite, most of the provided tools for MS1 feature detection quantify solely based on mzML files. The advantage of this approach is that quantitations can be made on strict criteria to reduce misquantitations. The drawback is that not all IDs can be matched to a quantitation later on in the workflow.
 The tool settings need to be carefully tested and evaluated manually to obtain optimal results. We will explain this in the section [Evaluation and Optimization of Quantitation Results](#expert-level-evaluation-and-optimization-of-quantitation-results).
 
-> ### :pencil2: Hands-on: MS1 Feature Detection
+> ### {% icon hands_on %} Hands-on: MS1 Feature Detection
 >
 > 1. Import the test data from [zenodo](). The file type of the data is mzML. The data have not been modified during the conversion from the machine raw file, neither background removal, nor peak picking (centroiding) has been performed.
-> 2. Run `FeatureFinderMultiplex`:wrench: on the mzML file. Change **`Labelling`** to `\[ \] \[Arg6,Lys6\]`.
+> 2. Run `FeatureFinderMultiplex`{% icon tool %} on the mzML file. Change **`Labelling`** to `\[ \] \[Arg6,Lys6\]`.
 >
->   > ### :bulb: Tip (Expert level): Detecting features of knockouts
+>   > ### {% icon tip %} Tip (Expert level): Detecting features of knockouts
 >   > In biology, there are rarely cases in which a gene product is completely shut off between two conditions. Rather, most changes are **word missing**. However, in some situations, you will have the situation that a protein is present in only one of the tested conditions and completely lacking in another. A classical example would be comparing a "knockout" mouse with its "wild-type" counterpart.
 >   > Due to the feature detection algorithm of `FeatureFinderMultiplex`, those features would normally be disregarded, as they do not look like typical features in labelled samples.
 >   >
@@ -53,19 +53,19 @@ The tool settings need to be carefully tested and evaluated manually to obtain o
 {: .hands_on}
 # Peptide and Protein Identification and Conversion
 
-> ### :pencil2: Hands-on: Peptide and Protein Identification and Conversion
+> ### {% icon hands_on %} Hands-on: Peptide and Protein Identification and Conversion
 > 1. Run the workflow "ProteinID_SG_PS" on the test dataset.
-> 2. Use **`IDConverter`** to convert the mzid output of `Peptide Shaker` :wrench: to mzidentML.
+> 2. Use **`IDConverter`** to convert the mzid output of `Peptide Shaker` {% icon tool %} to mzidentML.
 {: .hands_on}
 
 # Quant to ID matching
 
-> ### :pencil2: Hands-on: Quant to ID matching
+> ### {% icon hands_on %} Hands-on: Quant to ID matching
 >
-> 1. Run `ProteinQuantifier` :wrench: on
+> 1. Run `ProteinQuantifier` {% icon tool %} on
 > 2.
 >
->   > ### :question: Questions
+>   > ### {% icon question %} Questions
 >   {: .question}
 {: .hands_on}
 
@@ -84,14 +84,14 @@ The tool settings need to be carefully tested and evaluated manually to obtain o
 >         - **Caution** Manual evaluation is prone to biases, as you can look solely at small parts of your data. To avoid this, try to look at the *very same* areas / the same features of all different result files.
 >     3. If you were using the option **`knockouts present` **, check, if the detected "knockout features" fit to your expectations.
 
-> ### :pencil2: Hands-on: Evaluation and Optimization of Quantitation Results
+> ### {% icon hands_on %} Hands-on: Evaluation and Optimization of Quantitation Results
 >
 > 1. Run the whole WF again, change ** a single setting (averagine?)** in `FeatureFinderMultiplex`.
-> 2. Run `FileInfo` :wrench: on the results -> number of ID-Feature-matches
-> 3. Run `dongs` :wrench: on the results -> restrict to a small areas
+> 2. Run `FileInfo` {% icon tool %} on the results -> number of ID-Feature-matches
+> 3. Run `dongs` {% icon tool %} on the results -> restrict to a small areas
 > 4. Open results in TOPPView.
 >
->   > ### :question: Questions
+>   > ### {% icon question %} Questions
 >   > 1. Which setting led to more ID-Feature-matches?
 >   > 2. Using the default settings, how many features were not mapped to IDs? How many IDs were not mapped to features?
 >   {: .question}

@@ -15,8 +15,8 @@ Identifying the proteins contained in a sample is an important step in any prote
 4. Protein inference
 
 A plethora of different software solutions exists for each step. In this tutorial, we will show how to
-use ***msconvert*** :wrench: and ***PeakPickerHiRes*** :wrench: for step 1,
-***Search GUI*** :wrench: and ***Peptide Shaker*** :wrench: for the steps 2-4.
+use ***msconvert*** {% icon tool %} and ***PeakPickerHiRes*** :wrench: for step 1,
+***Search GUI*** {% icon tool %} and ***Peptide Shaker*** :wrench: for the steps 2-4.
 
 # Input data
 
@@ -25,7 +25,7 @@ in [Vaudel et al., 2014, Proteomics](https://www.ncbi.nlm.nih.gov/pubmed/2467804
 about the dataset can be found on [PRIDE](https://www.ebi.ac.uk/pride/archive/projects/PXD000674).
 For step 2 we will use a validated human Uniprot FASTA database without appended decoys.
 If you already completed the tutorial on [Database Handling]({{site.url}}/topics/proteomics/tutorials/database-handling/tutorial.html)
-you can use the constructed database before the **DecoyDatabase** :wrench: step. You can find a prepared database, as well as the input proteomics data in different file formats on [Zenodo](https://zenodo.org/record/546301).
+you can use the constructed database before the **DecoyDatabase** {% icon tool %} step. You can find a prepared database, as well as the input proteomics data in different file formats on [Zenodo](https://zenodo.org/record/546301).
 
 
 > ### Agenda
@@ -42,45 +42,45 @@ you can use the constructed database before the **DecoyDatabase** :wrench: step.
 
 Raw data conversion is the first step of any proteomic data analysis. The most common converter is MSConvert, the format to convert to is mzML. Search GUI takes only mgf format as input, but as we need the mzML format for several other tasks, we will convert to mzML first.
 
-> ### :pencil2: Optional Hands-On: Preparing raw data
+> ### {% icon hands_on %} Optional Hands-On: Preparing raw data
 >
 > This part of the Hands-On section is optional, because it cannot be performed on most GalaxyP instances due to licensing reasons. Therefore, we provide the [input data](https://zenodo.org/record/546301) also already converted to `.mgf` and `.mzML` file formats. If you choose to omit this part of the Hands-On section, please download the file "qExactive01819_vendor-peakPicking.mzml" from [https://zenodo.org/record/546301/files/qExactive01819_vendor-peakPicking.mzml].
 >
 > 1. Create a new history for this Peptide and Protein ID exercise.
 > 2. Load the example dataset into your history from this [link](ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2014/01/PXD000674/qExactive01819.raw).
 > 3. Rename the dataset to "Test data".
-> 4. Run ***msconvert*** :wrench: on the test data to convert to the mzML format
+> 4. Run ***msconvert*** {% icon tool %} on the test data to convert to the mzML format
 >
->   > ### :nut_and_bolt: Comment: Local Use of MSConvert
->   > The vendor libraries used by MSConvert need a Windows system and is therefore rarely implemented in Galaxy instances. If ***msconvert*** :wrench: is not available in your Galaxy instance, please install the software on a Windows computer and run the conversion locally. You can find a detailed description of the necessary steps [here](http://genesis.ugent.be/files/costore/practicals/bioinformatics-for-proteomics/1-Peptide-and-Protein-Identification/1.2-Peak-List-Generation/1.2-Peak-List-Generation.pdf). Afterwards, upload the resulting mzML file to your Galaxy history.
+>   > ### {% icon comment %} Comment: Local Use of MSConvert
+>   > The vendor libraries used by MSConvert need a Windows system and is therefore rarely implemented in Galaxy instances. If ***msconvert*** {% icon tool %} is not available in your Galaxy instance, please install the software on a Windows computer and run the conversion locally. You can find a detailed description of the necessary steps [here](http://genesis.ugent.be/files/costore/practicals/bioinformatics-for-proteomics/1-Peptide-and-Protein-Identification/1.2-Peak-List-Generation/1.2-Peak-List-Generation.pdf). Afterwards, upload the resulting mzML file to your Galaxy history.
 >  {: .comment}
 >
-> 5. Run ***PeakPickerHiRes*** :wrench: on the resulting mzML file.
+> 5. Run ***PeakPickerHiRes*** {% icon tool %} on the resulting mzML file.
 >
->   > ### :nut_and_bolt: Comment: Peak Picking
->   > Depending on your machine settings, raw data will be generated either in profile mode or centroid mode. For most peptide search engines, the data have to be converted to centroid mode, a process called "peak picking". Machine vendors offer algorithms to extract peaks from profile raw data. This is implemented in ***msconvert*** :wrench: and can be run in parallel to the mzML conversion. However, the OpenMS tool ***PeakPickerHiRes*** :wrench: is reported to generate better results ([Lange et al., 2006, Pac Symp Biocomput](https://www.ncbi.nlm.nih.gov/pubmed/17094243)) and is therefore recommended for quantitative studies ([Vaudel et al., 2010, Proteomics](https://www.ncbi.nlm.nih.gov/pubmed/19953549)).
->   > If your data were generated on a low resolution mass spectrometer, use ***PeakPickerWavelet*** :wrench: instead.
+>   > ### {% icon comment %} Comment: Peak Picking
+>   > Depending on your machine settings, raw data will be generated either in profile mode or centroid mode. For most peptide search engines, the data have to be converted to centroid mode, a process called "peak picking". Machine vendors offer algorithms to extract peaks from profile raw data. This is implemented in ***msconvert*** {% icon tool %} and can be run in parallel to the mzML conversion. However, the OpenMS tool ***PeakPickerHiRes*** :wrench: is reported to generate better results ([Lange et al., 2006, Pac Symp Biocomput](https://www.ncbi.nlm.nih.gov/pubmed/17094243)) and is therefore recommended for quantitative studies ([Vaudel et al., 2010, Proteomics](https://www.ncbi.nlm.nih.gov/pubmed/19953549)).
+>   > If your data were generated on a low resolution mass spectrometer, use ***PeakPickerWavelet*** {% icon tool %} instead.
 >   {: .comment}
 >
-> 6. Run ***FileConverter*** :wrench: on the picked mzML to convert to mgf format.
-> 7. Change the ***Datatype*** of the ***FileConverter*** :wrench: output to mgf by clicking the pencil :pencil: icon.
+> 6. Run ***FileConverter*** {% icon tool %} on the picked mzML to convert to mgf format.
+> 7. Change the ***Datatype*** of the ***FileConverter*** {% icon tool %} output to mgf by clicking the pencil :pencil: icon.
 {: .hands_on}
 
 
 # Peptide and Protein Identification
 MS/MS experiments identify peptides by isolating them and subsequently colliding them with a gas for fragmentation. This method generates a spectrum of peptide fragment masses for each isolated peptide - an MS2 spectrum. To find out the peptide sequences, the MS2 spectrum is compared to a theoretical spectrum generated from a protein database. This step is called peptide-to-spectrum (also: spectrum-to-sequence) matching. Accordingly, a peptide that is successfully matched to a sequence is termed PSM (Peptide-Spectrum-Match). There can be multiple PSMs per peptide, if the peptide was fragmented several times. Different peptide search engines have been developed to fulfill the matching procedure.
 
-It is generally recommended to use more than one peptide search engine and use the combined results for the final peptide inference ([Shteynberg et al., 2013, Mol. Cell. Proteomics](https://www.ncbi.nlm.nih.gov/pubmed/23720762)). Again, there are several software solutions for this, e.g. iProphet (TPP) or ConsensusID (OpenMS). In this tutorial we will use ***Search GUI*** :wrench:, as it can automatically search the data using several search engines. Its partner tool ***Peptide Shaker*** :wrench: is then used to combine and evaluate the search engine results.
+It is generally recommended to use more than one peptide search engine and use the combined results for the final peptide inference ([Shteynberg et al., 2013, Mol. Cell. Proteomics](https://www.ncbi.nlm.nih.gov/pubmed/23720762)). Again, there are several software solutions for this, e.g. iProphet (TPP) or ConsensusID (OpenMS). In this tutorial we will use ***Search GUI*** {% icon tool %}, as it can automatically search the data using several search engines. Its partner tool ***Peptide Shaker*** :wrench: is then used to combine and evaluate the search engine results.
 
-In bottom-up proteomics, it is necessary to combine the identified peptides to proteins. This is not a trivial task, as proteins are redundant to some degree. Thus, not every peptide can be assigned to only one protein. Luckily, the ***Peptide Shaker*** :wrench: already takes care of protein inference and even gives us some information on validity of the protein IDs. We will discuss validation in a [later step](#evaluation-of-peptide-and-protein-ids) of this tutorial.
+In bottom-up proteomics, it is necessary to combine the identified peptides to proteins. This is not a trivial task, as proteins are redundant to some degree. Thus, not every peptide can be assigned to only one protein. Luckily, the ***Peptide Shaker*** {% icon tool %} already takes care of protein inference and even gives us some information on validity of the protein IDs. We will discuss validation in a [later step](#evaluation-of-peptide-and-protein-ids) of this tutorial.
 
-> ### :pencil2: Hands-On: Peptide and Protein Identification
+> ### {% icon hands_on %} Hands-On: Peptide and Protein Identification
 >
 > 1. Copy the prepared protein database from the tutorial "Database handling" into your current history by using the multiple history view or upload the ready-made database from this [link]().
-> 2. Open ***Search GUI*** :wrench: to search the mgf file against the protein database. Select the `DB-Search Engines`: `X!Tandem` and `MS-GF+`. Add the `Fixed Modifications`: `Carbamidomethylation of C` and the `Variable Modifications`: `Oxidation of M`, then click `Execute`.
-> 3. Run ***Peptide Shaker*** :wrench: on the Search GUI output. Enable the following outputs: `Zip File for import to Desktop App`, `mzidentML File`, `PSM Report`, `Peptide Report`, `Protein Report`. You can find a detailed description of possible Peptide Shaker outputs in the comment below.
+> 2. Open ***Search GUI*** {% icon tool %} to search the mgf file against the protein database. Select the `DB-Search Engines`: `X!Tandem` and `MS-GF+`. Add the `Fixed Modifications`: `Carbamidomethylation of C` and the `Variable Modifications`: `Oxidation of M`, then click `Execute`.
+> 3. Run ***Peptide Shaker*** {% icon tool %} on the Search GUI output. Enable the following outputs: `Zip File for import to Desktop App`, `mzidentML File`, `PSM Report`, `Peptide Report`, `Protein Report`. You can find a detailed description of possible Peptide Shaker outputs in the comment below.
 >
->   > ### :question: Questions:
+>   > ### {% icon question %} Questions:
 >   > 1. How many peptides were identified? How many proteins?
 >   > 2. How many peptides with oxidized methionine were identified?
 >   >
@@ -88,14 +88,14 @@ In bottom-up proteomics, it is necessary to combine the identified peptides to p
 >   >  <summary>Click to view answers</summary>
 >   >   <ol type="1">
 >   >     <li> You should have identified 3,325 peptides and 1,170 proteins.</li>
->   >     <li> 328 peptides contain an oxidized methionine (MeO). To get to this number, you can use ***Select*** :wrench: on the Peptide Report and search for either "Oxidation of M" or "M\<ox\>".</li>
+>   >     <li> 328 peptides contain an oxidized methionine (MeO). To get to this number, you can use ***Select*** {% icon tool %} on the Peptide Report and search for either "Oxidation of M" or "M\<ox\>".</li>
 >   >   </ol>
 >   >  </details>
 >   {: .question}
 {: .hands_on}
 
-> ### :nut_and_bolt: Comment: Important Search GUI and Peptide Shaker Parameters
-> In this tutorial, we ran both ***Search GUI*** :wrench: and ***Peptide Shaker*** :wrench: with standard settings. When you are processing files of a different experiment, you may need to adjust some of the parameters.
+> ### {% icon comment %} Comment: Important Search GUI and Peptide Shaker Parameters
+> In this tutorial, we ran both ***Search GUI*** {% icon tool %} and ***Peptide Shaker*** :wrench: with standard settings. When you are processing files of a different experiment, you may need to adjust some of the parameters.
 > 1. **Search GUI**
 >
 > Search GUI bundles numerous sequence database search software tools for matching MS/MS to peptide sequences within a database. Describing the parameters for all of these programs is beyond the scope of this tutorial, but some of the key parameters for this software are described below:
@@ -128,12 +128,12 @@ In bottom-up proteomics, it is necessary to combine the identified peptides to p
 # Analysis of Contaminants
 The FASTA database used for the peptide to spectrum matching contained some entries that were not expected to stem from the HeLa cell lysate, but are common contaminations in LC-MS/MS samples. The main reason to add those is to avoid false assignment of the spectra to other proteins. However, it also enables you to check for contaminations in your samples. **CAVE:** in human samples, many proteins that are common contaminants may also stem from the real sample. The real source can never be determined for sure.
 
-> ### :pencil2: Hands-On: Analysis of Contaminants
+> ### {% icon hands_on %} Hands-On: Analysis of Contaminants
 >
-> 1. Run ***Select*** :wrench: on the Peptide Shaker Protein Report to select all lines that match the pattern "CONTAMINANT".
-> 2. Remove all contaminants from your protein list by running ***Select*** :wrench: on the Peptide Shaker Protein Report. Select only those lines that **do not** match the pattern "CONTAMINANT".
+> 1. Run ***Select*** {% icon tool %} on the Peptide Shaker Protein Report to select all lines that match the pattern "CONTAMINANT".
+> 2. Remove all contaminants from your protein list by running ***Select*** {% icon tool %} on the Peptide Shaker Protein Report. Select only those lines that **do not** match the pattern "CONTAMINANT".
 >
->   > ### :question: Questions:
+>   > ### {% icon question %} Questions:
 >   > 1. Which contaminants did you identify? Where do these contaminations come from?
 >   > 2. What other sources of contaminants exist?
 >   > 2. How many mycoplasma proteins did you identify? Does this mean that the analyzed HeLa cells were infected with mycoplasma?
@@ -150,24 +150,24 @@ The FASTA database used for the peptide to spectrum matching contained some entr
 {: .hands_on}
 
 # Evaluation of Peptide and Protein IDs
-***Peptide Shaker*** :wrench: provides you with validation results for the identified PSM, peptides and proteins. It classifies all these IDs in the categories "Confident" or "Doubtful". On each level, the meaning of these terms differs to some extent:
+***Peptide Shaker*** {% icon tool %} provides you with validation results for the identified PSM, peptides and proteins. It classifies all these IDs in the categories "Confident" or "Doubtful". On each level, the meaning of these terms differs to some extent:
 
 - **PSMs** are marked as "Doubtful" when the measured MS2 spectrum did not fit well to the theoretical spectrum.
 - **Peptides** have a combined scoring of their PSMs. They are marked as "Doubtful", when the score is below a set threshold. The threshold is defined by the false discovery rate (FDR).
 - **Proteins** are marked as "Doubtful", when they were identified by only a single peptide or when they were identified solely by "Doubtful" peptides.
 
-> ### :pencil2: Hands-On: Evaluation of Peptide and Protein IDs
+> ### {% icon hands_on %} Hands-On: Evaluation of Peptide and Protein IDs
 >
-> 1. Remove all "Doubtful" proteins from your protein list by running ***Select*** :wrench: on the Peptide Shaker Protein Report. Select only those lines that **do not** match the pattern "Doubtful".
+> 1. Remove all "Doubtful" proteins from your protein list by running ***Select*** {% icon tool %} on the Peptide Shaker Protein Report. Select only those lines that **do not** match the pattern "Doubtful".
 >
->   > ### :question: Questions:
+>   > ### {% icon question %} Questions:
 >   > 1. How to exclude mycoplasma proteins?
 >   > 2. How many "Confident" non-contaminant proteins were identified?
 >   >
 >   >  <details>
 >   >  <summary>Click to view answers</summary>
 >   >   <ol type="1">
->   >       <li> Add another ***Select*** :wrench: matching the pattern "HUMAN".</li>
+>   >       <li> Add another ***Select*** {% icon tool %} matching the pattern "HUMAN".</li>
 >   >   <li> You should have identified 582 human non-contaminant proteins that were validated to be "Confident".<\li>
 >   >   </ol>
 >   >  </details>

@@ -37,12 +37,12 @@ Each sample constitutes a separate biological replicate of the corresponding con
 
 We have extracted sequences from the Sequence Read Archive (SRA) files to build FASTQ files.
 
-> ### :pencil2: Hands-on: Data upload
+> ### {% icon hands_on %} Hands-on: Data upload
 >
 > 1. Create a new history for this RNA-seq exercise
 > 2. Import a FASTQ file pair (*e.g.*  `GSM461177_untreat_paired_chr4_R1.fastq` and `GSM461177_untreat_paired_chr4_R2.fastq`) from [Zenodo](https://dx.doi.org/10.5281/zenodo.290221)
 >
->    > ### :bulb: Tip: Importing data via links
+>    > ### {% icon tip %} Tip: Importing data via links
 >    >
 >    > * Copy the link location
 >    > * Open the Galaxy Upload Manager
@@ -51,7 +51,7 @@ We have extracted sequences from the Sequence Read Archive (SRA) files to build 
 >    > * Press **Start**    
 >    {: .tip}
 >
->    > ### :bulb: Tip: Changing the file type from `fastq` to `fastqsanger` once the data file is in your history
+>    > ### {% icon tip %} Tip: Changing the file type from `fastq` to `fastqsanger` once the data file is in your history
 >    >
 >    > * Click on the pencil button displayed in your dataset in the history
 >    > * Choose **Datatype** on the top
@@ -61,7 +61,7 @@ We have extracted sequences from the Sequence Read Archive (SRA) files to build 
 >
 >    As default, Galaxy uses the link as the name of the new dataset. It also does not link the dataset to a database or a reference genome.
 >
->    > ### :nut_and_bolt: Comments
+>    > ### {% icon comment %} Comments
 >    > - Edit the "Database/Build" to select "dm3"
 >    > - Rename the datasets according to the samples
 >    {: .comment}
@@ -74,11 +74,11 @@ Both files contain the reads that belong to chromosome 4 of a paired-end sample.
 
 For quality control, we use similar tools as described in [NGS-QC tutorial]({{site.url}}/topics/sequence-analysis): [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/) and [Trim Galore](https://www.bioinformatics.babraham.ac.uk/projects/trim_galore/).
 
-> ### :pencil2: Hands-on: Quality control
+> ### {% icon hands_on %} Hands-on: Quality control
 >
-> 1. **FastQC** :wrench:: Run FastQC on both FastQ files to control the quality of the reads
+> 1. **FastQC** {% icon tool %}: Run FastQC on both FastQ files to control the quality of the reads
 >
->    > ### :question: Questions
+>    > ### {% icon question %} Questions
 >    >
 >    > 1. What is the read length?
 >    > 2. Is there anything that you find striking when you compare the two reports?
@@ -92,9 +92,9 @@ For quality control, we use similar tools as described in [NGS-QC tutorial]({{si
 >    >    </details>
 >    {: .question}
 >
-> 2. **Trim Galore** :wrench:: Treat for the quality of sequences by running Trim Galore on the paired-end datasets
+> 2. **Trim Galore** {% icon tool %}: Treat for the quality of sequences by running Trim Galore on the paired-end datasets
 >
->    > ### :question: Questions
+>    > ### {% icon question %} Questions
 >    >
 >    > Why is Trim Galore run once on the paired-end dataset and not twice on each dataset?
 >    >
@@ -104,9 +104,9 @@ For quality control, we use similar tools as described in [NGS-QC tutorial]({{si
 >    > </details>
 >    {: .question}
 >
-> 3. **FastQC** :wrench:: Re-run FastQC on Trim Galore's outputs and inspect the differences
+> 3. **FastQC** {% icon tool %}: Re-run FastQC on Trim Galore's outputs and inspect the differences
 >
->    > ### :question: Questions
+>    > ### {% icon question %} Questions
 >    >
 >    > 1. How did trimming affect the read lengths?
 >    > 2. Are there other reported characteristics impacted by Trim Galore?
@@ -128,7 +128,7 @@ As the genome of *Drosophila melanogaster* is known and assembled, we can use th
 
 To make sense of the reads, their positions within the *Drosophila melanogaster* genome must be determined. This process is known as aligning or 'mapping' the reads to the reference genome.
 
-> ### :nut_and_bolt: Comment
+> ### {% icon comment %} Comment
 >
 > Do you want to learn more about the principles behind mapping? Follow our [training]({{site.url}}/topics/sequence-analysis/)
 > {: .comment}
@@ -156,7 +156,7 @@ This information should usually come with your FASTQ files, ask your sequencing 
 
 In a preliminary mapping, we will estimate the library type to run HISAT2 efficiently afterwards.
 
-> ### :nut_and_bolt: Comment
+> ### {% icon comment %} Comment
 > This step is not necessary if you don't need to estimate the library type of your data.
 {: .comment}
 
@@ -180,13 +180,13 @@ Sequencing proceeds from 5' to 3'. So, in the First Strand case, all reads from 
 
 We can now try to determine the library type of our data.
 
-> ### :pencil2: Hands-on: Determining the library type
+> ### {% icon hands_on %} Hands-on: Determining the library type
 >
 > 1. Load the Ensembl gene annotation for *Drosophila melanogaster* ([`Drosophila_melanogaster.BDGP5.78.gtf`](https://zenodo.org/record/290221/files/Drosophila_melanogaster.BDGP5.78.gtf)) from [Zenodo](https://dx.doi.org/10.5281/zenodo.290221) into your current Galaxy history and rename it
 >
-> 2. **Select first** :wrench:: Downsample the both FastQ files generated by Trim Galore to 200k or 1M reads
+> 2. **Select first** {% icon tool %}: Downsample the both FastQ files generated by Trim Galore to 200k or 1M reads
 >
->    > ### :question: Questions
+>    > ### {% icon question %} Questions
 >    >
 >    > How many rows must be selected to conserve 200k reads?
 >    >
@@ -196,7 +196,7 @@ We can now try to determine the library type of our data.
 >    > </details>
 >    {: .question}
 >
-> 3. **HISAT2** :wrench:: Run **HISAT2** with:
+> 3. **HISAT2** {% icon tool %}: Run **HISAT2** with:
 >    - "FASTQ" as "Input data format"
 >    - "Individual paired reads"
 >    - Downsampled "Trimmed reads pair 1" (Trim Galore output) as "Forward reads"
@@ -204,13 +204,13 @@ We can now try to determine the library type of our data.
 >    - "dm3" as reference genome
 >    - Default values for other parameters
 >
-> 4. **Infer Experiment** :wrench:: Run **Infer Experiment** to determine the library type:
+> 4. **Infer Experiment** {% icon tool %}: Run **Infer Experiment** to determine the library type:
 >    - HISAT2 output as "Input BAM/SAM file"
 >    - Drosophila annotation as "Reference gene model"
 >
 > 5. Check the results and search the tool's documentation for help on the meaning
 >    
->    > ### :nut_and_bolt: Comment
+>    > ### {% icon comment %} Comment
 >    > As it is sometimes quite difficult to find out which settings correspond to those of other programs, the following table might be helpful to identify the library type:
 >    >
 >    > Sequencing type | **Infer Experiment** | **TopHat** | **HISAT2** | **htseq-count** | **featureCounts**
@@ -223,7 +223,7 @@ We can now try to determine the library type of our data.
 >    >
 >    {: .comment}
 >    
->    > ### :question: Question
+>    > ### {% icon question %} Question
 >    >
 >    > 1. Which fraction of the reads in the BAM file can be explained assuming which library type?
 >    > 2. Which library type do you choose? What is the corresponding term for this library type in **HISAT2**?
@@ -242,9 +242,9 @@ We can now try to determine the library type of our data.
 
 We can now map all the RNA sequences on the *Drosophila melanogaster* genome using HISAT2.
 
-> ### :pencil2: Hands-on: Spliced mapping
+> ### {% icon hands_on %} Hands-on: Spliced mapping
 >
-> 1. **HISAT2** :wrench:: Run **HISAT2** with:
+> 1. **HISAT2** {% icon tool %}: Run **HISAT2** with:
 >    - "FASTQ" as "Input data format"
 >    - "Individual paired reads"
 >    - "Trimmed reads pair 1" (Trim Galore output) as "Forward reads"
@@ -259,7 +259,7 @@ We can now map all the RNA sequences on the *Drosophila melanogaster* genome usi
 >    - Click on "View details" (Warning icon)
 >    - Click on "stderr" (Tool Standard Error)
 >
->    > ### :question: Question
+>    > ### {% icon question %} Question
 >    >
 >    > 1. How many paired reads were mapped 1 time? And how many paired reads were mapped more than 1 time?
 >    > 2. How many reads were mapped but without their mate?
@@ -278,7 +278,7 @@ We can now map all the RNA sequences on the *Drosophila melanogaster* genome usi
 
 **HISAT2** generates a BAM file with the mapped reads.
 
-> ### :question: Question
+> ### {% icon question %} Question
 >
 > 1. What is a BAM file?
 > 2. What does such a file contain?
@@ -294,7 +294,7 @@ We can now map all the RNA sequences on the *Drosophila melanogaster* genome usi
 
 The mapping exercise worked for you? Great! :tada:
 
-> ### :pencil2: (Optional) Hands-on: Map other datasets
+> ### {% icon hands_on %} (Optional) Hands-on: Map other datasets
 >
 > You can do the same process on the other sequence files available on [Zenodo](https://dx.doi.org/10.5281/zenodo.290221)
 >
@@ -316,16 +316,16 @@ The BAM file contains information about where the reads are mapped on the refere
 
 A powerful tool to visualize the content of BAM files is the Integrative Genomics Viewer IGV.
 
-> ### :pencil2: Hands-on: Inspection of HISAT2 results
+> ### {% icon hands_on %} Hands-on: Inspection of HISAT2 results
 >
-> 1. **IGV** :wrench:: Visualize the HISAT2 output BAM file, particularly the region on chromosome 4 between 560 kb to 600 kb (`chr4:560,000-600,000`)
+> 1. **IGV** {% icon tool %}: Visualize the HISAT2 output BAM file, particularly the region on chromosome 4 between 560 kb to 600 kb (`chr4:560,000-600,000`)
 >
->    > ### :nut_and_bolt: Comment
+>    > ### {% icon comment %} Comment
 >    >
 >    > Check the [IGV documentation](https://software.broadinstitute.org/software/igv/AlignmentData)
 >    {: .comment}
 >
->    > ### :question: Question
+>    > ### {% icon question %} Question
 >    >
 >    > In the following screenshot,
 >    > 1. Which information does appear on the top in grey?
@@ -342,15 +342,15 @@ A powerful tool to visualize the content of BAM files is the Integrative Genomic
 >    >    </details>
 >    {: .question}
 >
-> 3. **IGV** :wrench:: Zoom to `chr4:560,000-600,000` and inspect the splice junctions using a **Sashimi plot**
+> 3. **IGV** {% icon tool %}: Zoom to `chr4:560,000-600,000` and inspect the splice junctions using a **Sashimi plot**
 >
->    > ### :bulb: Tip: Creation of a Sashimi plot
+>    > ### {% icon tip %} Tip: Creation of a Sashimi plot
 >    >
 >    > * Right click on the BAM file
 >    > * Select **Sashimi Plot** from the context menu
 >    {: .tip}    
 >
->    > ### :question: Question
+>    > ### {% icon question %} Question
 >    >
 >    > ![Screenshot of a Sashimi plot of Chromosome 4](../../images/hisat_igv_sashimi.png "Screenshot of a Sashimi plot of Chromosome 4")
 >    >
@@ -368,7 +368,7 @@ A powerful tool to visualize the content of BAM files is the Integrative Genomic
 >    >    </details>
 >    {: .question}
 >
->    > ### :nut_and_bolt: Comment
+>    > ### {% icon comment %} Comment
 >    >
 >    > Check the [IGV documentation on Sashimi plots](https://software.broadinstitute.org/software/igv/Sashimi) to find some clues
 >    {: .comment}
@@ -379,7 +379,7 @@ After the mapping, we have in the generated mapping file the information about w
 
 The next step in the RNA-Seq data analysis is quantification of expression level of the genomic features (gene, transcript, exons, ...) to be able then to compare several samples for the different expression analysis. The quantification consist into taking each known genomic feature (*e.g.* gene) of the reference genome and then counting how many reads are mapped on this genomic feature. So, in this step, we start with an information per mapped reads to end with an information per genomic feature.
 
-> ### :nut_and_bolt: Comment
+> ### {% icon comment %} Comment
 >
 > The quantification depends on the definition of the genomic features of the reference genome, and then on the annotations. We strongly recommend you to use an annotation corresponding to the same version of the reference genome you used for the mapping.
 {: .comment}
@@ -403,9 +403,9 @@ In principle, the counting of reads overlapping with genomic features is a fairl
 
 The recommended mode is "union", which counts overlaps even if a read only shares parts of its sequence with a genomic feature and disregards reads that overlap more than one feature.
 
-> ### :pencil2: Hands-on: Counting the number of reads per annotated gene
+> ### {% icon hands_on %} Hands-on: Counting the number of reads per annotated gene
 >
-> 1. **HTSeq-count** :wrench:: Run **HTSeq-count** on the BAM file with
+> 1. **HTSeq-count** {% icon tool %}: Run **HTSeq-count** on the BAM file with
 >    - `Drosophila_melanogaster.BDGP5.78.gtf` as "GFF file"
 >    - The "Union" mode
 >    - A "Minimum alignment quality" of 10
@@ -413,7 +413,7 @@ The recommended mode is "union", which counts overlaps even if a read only share
 >       
 > 2. Inspect the result files
 >
->    > ### :question: Question
+>    > ### {% icon question %} Question
 >    >
 >    > 1. Which information does the result file contain?
 >    > 2. Which feature has the most reads mapped on it?
@@ -463,12 +463,12 @@ In our example, we have samples with two varying factors that can explain differ
 
 Here treatment is the primary factor which we are interested in. The sequencing type is some further information that we know about the data that might affect the analysis. This particular multi-factor analysis allows us to assess the effect of the treatment, while taking the sequencing type into account, too.
 
-> ### :nut_and_bolt: Comment
+> ### {% icon comment %} Comment
 >
 > We recommend you to add as many factors as you think may affect gene expression in your experiment. It can be the sequencing type like here, but it can also be the manipulation (if different persons are involved in the library preparation), ...
 {: .comment}
 
-> ### :pencil2: Hands-on: Analysis of the differential gene expression (1)
+> ### {% icon hands_on %} Hands-on: Analysis of the differential gene expression (1)
 >
 > 1. Create a new history
 > 2. Import the seven count files from [Zenodo](https://dx.doi.org/10.5281/zenodo.290221)
@@ -480,17 +480,17 @@ Here treatment is the primary factor which we are interested in. The sequencing 
 >    - `GSM461181_treat_paired.deseq.counts`
 >    - `GSM461182_untreat_single.deseq.counts`
 >
-> 3. **DESeq2** :wrench:: Run **DESeq2** with:
+> 3. **DESeq2** {% icon tool %}: Run **DESeq2** with:
 >    - "Treatment" as first factor with "treated" and "untreated" as levels and selection of count files corresponding to both levels
 >
->       > ### :bulb: Tip
+>       > ### {% icon tip %} Tip
 >       >
 >       > You can select several files by keeping the CTRL (or COMMAND) key pressed and clicking on the interesting files
 >       {: .tip}
 >
 >    - "Sequencing" as second factor with "PE" and "SE" as levels and selection of count files corresponding to both levels
 >
->    > ### :nut_and_bolt: Comment
+>    > ### {% icon comment %} Comment
 >    >
 >    > File names have all information needed
 >    {: .comment}
@@ -510,11 +510,11 @@ The first output of **DESeq2** is a tabular file. The columns are:
 6.	*p*-value for the statistical significance of this change
 7.	*p*-value adjusted for multiple testing with the Benjamini-Hochberg procedure which controls false discovery rate ([FDR](https://en.wikipedia.org/wiki/False_discovery_rate))
 
-> ### :pencil2: Hands-on: Analysis of the differential gene expression (2)
+> ### {% icon hands_on %} Hands-on: Analysis of the differential gene expression (2)
 >
-> 1. **Filter** :wrench:: Run **Filter** to extract genes with a significant change in gene expression (adjusted *p*-value below 0.05) between treated and untreated samples
+> 1. **Filter** {% icon tool %}: Run **Filter** to extract genes with a significant change in gene expression (adjusted *p*-value below 0.05) between treated and untreated samples
 >
->    > ### :question: Question
+>    > ### {% icon question %} Question
 >    >
 >    > How many genes have a significant change in gene expression between these conditions?
 >    >
@@ -524,18 +524,18 @@ The first output of **DESeq2** is a tabular file. The columns are:
 >    > </details>
 >    {: .question}
 >
->    > ### :nut_and_bolt: Comment
+>    > ### {% icon comment %} Comment
 >    >
 >    > The file with the independent filtered results can be used for further downstream analysis as it excludes genes with only few read counts as these genes will not be considered as significantly differentially expressed.
 >    {: .comment}
 >
-> 2. **Filter** :wrench:: Extract genes that are significantly up and downregulated in treated samples
+> 2. **Filter** {% icon tool %}: Extract genes that are significantly up and downregulated in treated samples
 >
->    > ### :nut_and_bolt: Comments
+>    > ### {% icon comment %} Comments
 >    > Rename your datasets for the downstream analyses
 >    {: .comment}
 >
->    > ### :question: Question
+>    > ### {% icon question %} Question
 >    >
 >    > Are there more upregulated or downregulated genes in the treated samples?
 >    >
@@ -554,7 +554,7 @@ In addition to the list of genes, **DESeq2** outputs a graphical summary of the 
 
     Each replicate is plotted as an individual data point. This type of plot is useful for visualizing the overall effect of experimental covariates and batch effects.
 
-    > ### :question: Questions
+    > ### {% icon question %} Questions
     >
     > 1. What is the first axis separating?
     > 2. And the second axis?    
@@ -571,7 +571,7 @@ In addition to the list of genes, **DESeq2** outputs a graphical summary of the 
 
 4. Heatmap of sample-to-sample distance matrix: overview over similarities and dissimilarities between samples
 
-    > ### :question: Questions
+    > ### {% icon question %} Questions
     >
     > How are the samples grouped?
     >
@@ -598,11 +598,11 @@ The Database for Annotation, Visualization and Integrated Discovery ([DAVID](htt
 
 The query to DAVID can be done only on 100 genes. So, we will need to select the ones where the most interested in.
 
-> ### :pencil2: Hands-on:
+> ### {% icon hands_on %} Hands-on:
 >
-> 1. **Sort** :wrench:: Sort the 2 datasets generated previously (upregulated genes and downregulated genes) given the log2 fold change, in descending or ascending order (to obtain the higher absolute log2 fold changes on the top)
-> 1. **Select first lines from a dataset** :wrench:: Extract the first 100 lines of sorted files
-> 2. **DAVID** :wrench:: Run **DAVID** on these files with
+> 1. **Sort** {% icon tool %}: Sort the 2 datasets generated previously (upregulated genes and downregulated genes) given the log2 fold change, in descending or ascending order (to obtain the higher absolute log2 fold changes on the top)
+> 1. **Select first lines from a dataset** {% icon tool %}: Extract the first 100 lines of sorted files
+> 2. **DAVID** {% icon tool %}: Run **DAVID** on these files with
 >     - First column as "Column with identifiers"
 >     - "ENSEMBL_GENE_ID" as "Identifier type"
 >
@@ -610,7 +610,7 @@ The query to DAVID can be done only on 100 genes. So, we will need to select the
 >
 > 2. Inspect the Functional Annotation Chart
 >
->    > ### :question: Questions
+>    > ### {% icon question %} Questions
 >    >
 >    > What functional categories are the most represented?
 >    >  
@@ -622,7 +622,7 @@ The query to DAVID can be done only on 100 genes. So, we will need to select the
 >
 > 3. Inspect the Functional Annotation Clusterings
 >
->    > ### :question: Questions
+>    > ### {% icon question %} Questions
 >    >
 >    > What functional annotations are the first clusters related to?
 >    >  
@@ -643,19 +643,19 @@ We will use [DEXSeq](https://www.bioconductor.org/packages/release/bioc/html/DEX
 
 This step is similar to the step of [counting the number of reads per annotated gene](#count-the-number-of-reads-per-annotated-gene) except that, instead of HTSeq-count, we are using DEXSeq-Count.
 
-> ### :pencil2: Hands-on: Counting the number of reads per exon
+> ### {% icon hands_on %} Hands-on: Counting the number of reads per exon
 >
-> 1. **DEXSeq-Count** :wrench:: Use the **DEXSeq-Count** to prepare the *Drosophila* annotations (`Drosophila_melanogaster.BDGP5.78.gtf`) to extract only exons with corresponding gene ids
+> 1. **DEXSeq-Count** {% icon tool %}: Use the **DEXSeq-Count** to prepare the *Drosophila* annotations (`Drosophila_melanogaster.BDGP5.78.gtf`) to extract only exons with corresponding gene ids
 >     - "Prepare annotation" of "Mode of operation"
 >
 >    The output is again a GTF file that is ready to be used for counting
 >
-> 4. **DEXSeq-Count** :wrench:: Count reads using **DEXSeq-Count** with
+> 4. **DEXSeq-Count** {% icon tool %}: Count reads using **DEXSeq-Count** with
 >     - HISAT2 output as "Input bam file"
 >     - The formatted GTF file
 > 5. Inspect the result files
 >
->    > ### :question: Question
+>    > ### {% icon question %} Question
 >    >
 >    > Which exon has the most reads mapped to it? From which gene has this exon been extracted? Is there a connection to the previous result obtained with HTSeq-count?
 >    >
@@ -675,7 +675,7 @@ As for DESeq2, in the previous step, we counted only reads that mapped to exons 
 - [dexseq.gtf](https://zenodo.org/record/290221/files/dexseq.gtf): the results of running DEXSeq-count in 'Prepare annotation' mode
 - Seven count files generated in 'Count reads' mode
 
-> ### :pencil2: Hands-on:
+> ### {% icon hands_on %} Hands-on:
 >
 > 1. Create a new history
 > 2. Import the seven count files and the dexseq.gtf from [Zenodo](https://dx.doi.org/10.5281/zenodo.290221)
@@ -688,11 +688,11 @@ As for DESeq2, in the previous step, we counted only reads that mapped to exons 
 >    - `GSM461181_treat_paired.dexseq.counts`
 >    - `GSM461182_untreat_single.dexseq.counts`
 >
-> 3. **DEXSeq** :wrench:: Run **DEXSeq** with
+> 3. **DEXSeq** {% icon tool %}: Run **DEXSeq** with
 >    - "Condition" as first factor with "treated" and "untreated" as levels and selection of count files corresponding to both levels
 >    - "Sequencing" as second factor with "PE" and "SE" as levels and selection of count files corresponding to both levels
 >
->    > ### :nut_and_bolt: Comment
+>    > ### {% icon comment %} Comment
 >    >
 >    > Unlike DESeq2, DEXSeq does not allow flexible primary factor names. Always use your primary factor name as "condition"
 >    {: .comment}
@@ -712,11 +712,11 @@ Similarly to DESeq2, DEXSeq generates a table with:
 7.  *p*-value for the statistical significance of this change
 8.  *p*-value adjusted for multiple testing with the Benjamini-Hochberg procedure which controls false discovery rate ([FDR](https://en.wikipedia.org/wiki/False_discovery_rate))
 
-> ### :pencil2: Hands-on:
+> ### {% icon hands_on %} Hands-on:
 >
-> 1. **Filter** :wrench:: Run **Filter** to extract exons with a significant differential usage (adjusted *p*-value equal or below 0.05) between treated and untreated samples
+> 1. **Filter** {% icon tool %}: Run **Filter** to extract exons with a significant differential usage (adjusted *p*-value equal or below 0.05) between treated and untreated samples
 >
->    > ### :question: Question
+>    > ### {% icon question %} Question
 >    >
 >    > How many exons show a significant change in usage between these conditions?
 >    >
@@ -731,9 +731,9 @@ Similarly to DESeq2, DEXSeq generates a table with:
 
 Unfortunately, in the process of counting, we loose all the information of the gene except its identifiant. In order to get the information back to our final counting tables, we can use a tool to make the correspondance between identifiant and annotation.
 
-> ### :pencil2: Hands-on:
+> ### {% icon hands_on %} Hands-on:
 >
-> 1. **Annotate DE(X)Seq result** :wrench:: Run **Annotate DE(X)Seq result** on a counting table (from DESeq or DEXSeq) using the `Drosophila_melanogaster.BDGP5.78.gtf` as annotation file
+> 1. **Annotate DE(X)Seq result** {% icon tool %}: Run **Annotate DE(X)Seq result** on a counting table (from DESeq or DEXSeq) using the `Drosophila_melanogaster.BDGP5.78.gtf` as annotation file
 {: .hands_on}
 
 # Conclusion
