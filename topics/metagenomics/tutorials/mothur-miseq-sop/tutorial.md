@@ -34,7 +34,7 @@ creators of the Mothur software package, the [Schloss lab](http://www.schlosslab
 
 In this tutorial we use 16S rRNA data, but similar pipelines can be used for WGS data.
 
-> ### :book: Background: The 16S ribosomal RNA gene
+> ### {% icon tip %} Background: The 16S ribosomal RNA gene
 > ![](../../images/16S_gene.png) <br><br>
 >
 > The 16S rRNA gene has several properties that make it ideally suited for our purposes
@@ -480,7 +480,7 @@ merged. We generally recommend allowing 1 difference for every 100 basepairs of 
 At this point we have removed as much sequencing error as we can, and it is time to turn our attention to
 removing sequencing artefacts known as chimeras.
 
-> ### :book: Background: Chimeras
+> ### {% icon tip %} Background: Chimeras
 > ![](../../images/chimeras.jpg)
 > (slide credit: [http://slideplayer.com/slide/4559004/ ](http://slideplayer.com/slide/4559004/ ))
 {: .tip}
@@ -651,7 +651,7 @@ That rocks, eh? Our error rate is 0.0065%!
 
 We can now cluster the mock sequences into OTUs to see how many spurious OTUs we have:
 
-> ### :book: Background: Operational Taxonomic Units (OTUs)
+> ### {% icon tip %} Background: Operational Taxonomic Units (OTUs)
 >
 > In 16S metagenomics approaches, OTUs are clusters of similar sequence variants of the 16S rDNA marker gene
 > sequence. Each of these clusters is intended to represent a taxonomic unit of a bacteria species or genus
@@ -710,7 +710,7 @@ includes some stealthy chimeras that escaped our detection methods. If we used 3
 have about 31 OTUs. In a perfect world with no chimeras and no sequencing errors, we'd have 21 OTUs.
 This is not a perfect world. But this is pretty darn good!
 
-> ### :book: Background: Rarefaction
+> ### {% icon tip %} Background: Rarefaction
 >
 > To estimate the fraction of species sequenced, rarefaction curves are typically used. A rarefaction curve
 > plots the number of species as a function of the number of individuals sampled. The curve usually begins
