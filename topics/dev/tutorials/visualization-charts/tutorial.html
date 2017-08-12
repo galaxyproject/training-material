@@ -1,7 +1,6 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
     <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -116,14 +115,12 @@
 <p>In this tutorial we are going to demonstrate how to add a 3rd-party visualization to <em>Charts</em> and what the benefits are. The plugin we select for this purpose is the <a href="https://biasmv.github.io/pv/"><em>PV-Javascript Protein Viewer</em></a>. It is an open source, protein structure viewer for <code class="highlighter-rouge">PDB</code>-files. There are many other popular protein structure viewers available for the visualization of <code class="highlighter-rouge">PDB</code>-files such as e.g. <a href="https://arose.github.io/ngl/">NGL</a> (also available in <em>Charts</em>) and <a href="https://chemapps.stolaf.edu/jmol/jsmol/jsmol.htm">JSMol</a>.</p>
 
 <blockquote class="tip">
-  <h3 id="book-background-what-is-the-pdb-protein-data-bank-file-format">
-<img class="emoji" title=":book:" alt=":book:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f4d6.png" height="20" width="20" align="absmiddle"> Background: What is the PDB (Protein Data Bank) file format?</h3>
+  <h3 id="-background-what-is-the-pdb-protein-data-bank-file-format"><i class="fa fa-lightbulb-o" aria-hidden="true"></i> Background: What is the PDB (Protein Data Bank) file format?</h3>
 
   <p>The <code class="highlighter-rouge">PDB</code>-file format contains atomic coordinates of biomolecules derived through a range of experimental and computational methods. Most commonly the file contains a spatial cyrstallographic snapshot of a protein. There are 100s of thousands of protein structures publicly available at the Protein Databank (https://www.rcsb.org). Proteins are usually labeled by a four-letter code.
 Here is an example of a <code class="highlighter-rouge">PDB</code>-file for a hydrolase bond to its inhibitor (PDB: <a href="https://www.rcsb.org/pdb/explore/explore.do?structureId=1acb">1ACB</a>):</p>
 
-  <div class="language-bash highlighter-rouge">
-<pre class="highlight"><code>HEADER    HYDROLASE/HYDROLASE INHIBITOR           08-NOV-91   1ACB              
+  <div class="language-bash highlighter-rouge"><pre class="highlight"><code>HEADER    HYDROLASE/HYDROLASE INHIBITOR           08-NOV-91   1ACB              
 TITLE     CRYSTAL AND MOLECULAR STRUCTURE OF THE BOVINE ALPHA-CHYMOTRYPSIN-EGLIN
 TITLE    2 C COMPLEX AT 2.0 ANGSTROMS RESOLUTION   
 ...
@@ -167,8 +164,7 @@ HETATM 2294  O   HOH E 408      11.489  -6.278  18.740  0.96 20.00           O
 <p>As mentioned above we will be focusing on the <em>PV-Javascript Protein Viewer</em> in this tutorial. Now that we have learned about the underlying file format, let us continue by visiting the viewers developer site at <a href="https://biasmv.github.io/pv/">https://biasmv.github.io/pv/ </a> to get familiar with the plugin.</p>
 
 <blockquote class="hands_on">
-  <h3 id="-hands-on">
-<i class="fa fa-pencil" aria-hidden="true"></i> Hands-on</h3>
+  <h3 id="-hands-on"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on</h3>
 
   <ol>
     <li>
@@ -203,38 +199,32 @@ HETATM 2294  O   HOH E 408      11.489  -6.278  18.740  0.96 20.00           O
 <p>In this section we will download the viewer and add it to a local <em>Galaxy</em> instance. All development takes place within the <em>Galaxy</em> codebase. The first thing we are going to do is to clone a <em>Galaxy</em> instance and prepare the directory structure for the new visualization plugin.</p>
 
 <blockquote class="hands_on">
-  <h3 id="-hands-on-1">
-<i class="fa fa-pencil" aria-hidden="true"></i> Hands-on</h3>
+  <h3 id="-hands-on-1"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on</h3>
 
   <ol>
     <li>Clone an instance of <em>Galaxy</em> in a path, further referred to as <code class="highlighter-rouge">$GALAXY_ROOT</code>:
-      <div class="language-bash highlighter-rouge">
-<pre class="highlight"><code><span class="gp">$ </span>git clone https://github.com/galaxyproject/galaxy
+      <div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>git clone https://github.com/galaxyproject/galaxy
 </code></pre>
       </div>
     </li>
     <li>Navigate to the <em>Charts</em> repository root:
-      <div class="language-bash highlighter-rouge">
-<pre class="highlight"><code><span class="gp">$ </span><span class="nb">cd</span> <span class="nv">$GALAXY_ROOT</span>/config/plugins/visualizations/charts/static/repository
+      <div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span><span class="nb">cd</span> <span class="nv">$GALAXY_ROOT</span>/config/plugins/visualizations/charts/static/repository
 </code></pre>
       </div>
     </li>
     <li>Register your visualization by adding a new item to <code class="highlighter-rouge">registry.json</code>:
-      <div class="language-bash highlighter-rouge">
-<pre class="highlight"><code><span class="s2">"myviz"</span> : <span class="o">[</span> <span class="s2">"pdb"</span> <span class="o">]</span>
+      <div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="s2">"myviz"</span> : <span class="o">[</span> <span class="s2">"pdb"</span> <span class="o">]</span>
 </code></pre>
       </div>
     </li>
     <li>Create a new directory:
-      <div class="language-bash highlighter-rouge">
-<pre class="highlight"><code><span class="gp">$ </span>mkdir -p visualizations/myviz/pdb
+      <div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>mkdir -p visualizations/myviz/pdb
 <span class="gp">$ </span><span class="nb">cd </span>visualizations/myviz/pdb
 </code></pre>
       </div>
     </li>
     <li>Download the minified plugin code for <em>PV-Viewer</em> from <a href="https://github.com/biasmv/pv">Github</a>:
-      <div class="language-bash highlighter-rouge">
-<pre class="highlight"><code>curl https://raw.githubusercontent.com/biasmv/pv/master/bio-pv.min.js -o plugin.js
+      <div class="language-bash highlighter-rouge"><pre class="highlight"><code>curl https://raw.githubusercontent.com/biasmv/pv/master/bio-pv.min.js -o plugin.js
 </code></pre>
       </div>
     </li>
@@ -257,11 +247,10 @@ HETATM 2294  O   HOH E 408      11.489  -6.278  18.740  0.96 20.00           O
 
 <p>Here’s an example <a href="../../files/charts-plugins/pdb/logo.png">logo</a>:</p>
 
-<p><img src="../../files/charts-plugins/pdb/logo.png" alt="Logo"></p>
+<p><img src="../../files/charts-plugins/pdb/logo.png" alt="Logo" /></p>
 
 <blockquote class="hands_on">
-  <h3 id="-hands-on-2">
-<i class="fa fa-pencil" aria-hidden="true"></i> Hands-on</h3>
+  <h3 id="-hands-on-2"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on</h3>
 
   <ol>
     <li>
@@ -278,15 +267,13 @@ HETATM 2294  O   HOH E 408      11.489  -6.278  18.740  0.96 20.00           O
 <p>Each visualization has a configuration file named <code class="highlighter-rouge">config.js</code>. This file has conceptual similarities with a Tool’s XML-file. It allows developers to specify a variety of attributes and input parameters for their visualization. Throughout this tutorial we are going to gradually augment this file but for now we keep it simple.</p>
 
 <blockquote class="hands_on">
-  <h3 id="-hands-on-3">
-<i class="fa fa-pencil" aria-hidden="true"></i> Hands-on</h3>
+  <h3 id="-hands-on-3"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on</h3>
 
   <ol>
     <li>
       <p>Create a file named <code class="highlighter-rouge">config.js</code> with the following content:</p>
 
-      <div class="language-js highlighter-rouge">
-<pre class="highlight"><code><span class="nx">define</span><span class="p">(</span> <span class="p">[],</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+      <div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="nx">define</span><span class="p">(</span> <span class="p">[],</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
     <span class="k">return</span> <span class="p">{</span>
         <span class="na">title</span>       <span class="p">:</span> <span class="s1">'A PDB viewer'</span><span class="p">,</span>
         <span class="na">library</span>     <span class="p">:</span> <span class="s1">'My Visualization'</span><span class="p">,</span>
@@ -312,24 +299,18 @@ HETATM 2294  O   HOH E 408      11.489  -6.278  18.740  0.96 20.00           O
 <p>Now we will add a wrapper to connect <em>Charts</em> with the <em>PV-Viewer</em> plugin. The wrapper consists of a <a href="http://backbonejs.org"><em>Backbone</em></a> module written in <em>JavaScript</em>:
  The wrapper receives an <code class="highlighter-rouge">options</code> dictionary with the following <b>four</b> components:</p>
 <ul>
-  <li>
-<em>charts</em>: The model of the current visualization with attributes, settings etc.</li>
-  <li>
-<em>process</em>: A <a href="https://api.jquery.com/jquery.deferred/">jQuery.Deferred()</a> object to allow asynchronous data requests within the wrapper</li>
-  <li>
-<em>dataset</em>: Details on the selected datasets such as url, ids etc. which can be used to access the dataset</li>
-  <li>
-<em>targets</em>: The DOM ids of the container elements to draw into</li>
+  <li><em>charts</em>: The model of the current visualization with attributes, settings etc.</li>
+  <li><em>process</em>: A <a href="https://api.jquery.com/jquery.deferred/">jQuery.Deferred()</a> object to allow asynchronous data requests within the wrapper</li>
+  <li><em>dataset</em>: Details on the selected datasets such as url, ids etc. which can be used to access the dataset</li>
+  <li><em>targets</em>: The DOM ids of the container elements to draw into</li>
 </ul>
 
 <blockquote class="hands_on">
-  <h3 id="-hands-on-4">
-<i class="fa fa-pencil" aria-hidden="true"></i> Hands-on</h3>
+  <h3 id="-hands-on-4"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on</h3>
 
   <ol>
     <li>Create a file named <code class="highlighter-rouge">wrapper.js</code> which returns a <em>Backbone</em> model:
-      <div class="language-js highlighter-rouge">
-<pre class="highlight"><code><span class="nx">define</span><span class="p">(</span> <span class="p">[</span> <span class="s1">'visualizations/myviz/pdb/plugin'</span> <span class="p">],</span> <span class="kd">function</span><span class="p">(</span> <span class="nx">pv</span> <span class="p">)</span> <span class="p">{</span>
+      <div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="nx">define</span><span class="p">(</span> <span class="p">[</span> <span class="s1">'visualizations/myviz/pdb/plugin'</span> <span class="p">],</span> <span class="kd">function</span><span class="p">(</span> <span class="nx">pv</span> <span class="p">)</span> <span class="p">{</span>
     <span class="k">return</span> <span class="nx">Backbone</span><span class="p">.</span><span class="nx">Model</span><span class="p">.</span><span class="nx">extend</span><span class="p">({</span>
         <span class="na">initialize</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span> <span class="nx">options</span> <span class="p">)</span> <span class="p">{</span>
             <span class="c1">// Add code to configure and execute the plugin here.</span>
@@ -347,8 +328,7 @@ HETATM 2294  O   HOH E 408      11.489  -6.278  18.740  0.96 20.00           O
 <p>The above wrapper does not do much yet, except requesting the minified plugin code which we downloaded earlier. In order to execute a 3rd-party plugin we need to figure out how it works. This can be done by finding a working example or documentation. Fortunately the <em>PV-Viewer</em> comes with both. Let’s take a look at the <a href="https://pv.readthedocs.io/">documentation</a>.</p>
 
 <blockquote class="hands_on">
-  <h3 id="-hands-on-5">
-<i class="fa fa-pencil" aria-hidden="true"></i> Hands-on</h3>
+  <h3 id="-hands-on-5"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on</h3>
 
   <ol>
     <li>
@@ -367,15 +347,13 @@ HETATM 2294  O   HOH E 408      11.489  -6.278  18.740  0.96 20.00           O
 <p>Now that we have learned the basics on how the viewer plugin works, we can initialize and load it in <code class="highlighter-rouge">wrapper.js</code>.</p>
 
 <blockquote class="hands_on">
-  <h3 id="-hands-on-6">
-<i class="fa fa-pencil" aria-hidden="true"></i> Hands-on</h3>
+  <h3 id="-hands-on-6"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on</h3>
 
   <ol>
     <li>
       <p>Modify <code class="highlighter-rouge">wrapper.js</code> by adding the following code into the <code class="highlighter-rouge">initialize</code> call:</p>
 
-      <div class="language-js highlighter-rouge">
-<pre class="highlight"><code><span class="kd">var</span> <span class="nx">viewer</span> <span class="o">=</span> <span class="nx">pv</span><span class="p">.</span><span class="nx">Viewer</span><span class="p">(</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span> <span class="nx">options</span><span class="p">.</span><span class="nx">targets</span><span class="p">[</span> <span class="mi">0</span> <span class="p">]</span> <span class="p">),</span> <span class="p">{</span>
+      <div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">viewer</span> <span class="o">=</span> <span class="nx">pv</span><span class="p">.</span><span class="nx">Viewer</span><span class="p">(</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span> <span class="nx">options</span><span class="p">.</span><span class="nx">targets</span><span class="p">[</span> <span class="mi">0</span> <span class="p">]</span> <span class="p">),</span> <span class="p">{</span>
     <span class="na">width</span>       <span class="p">:</span> <span class="s1">'auto'</span><span class="p">,</span>
     <span class="na">height</span>      <span class="p">:</span> <span class="s1">'auto'</span><span class="p">,</span>
     <span class="na">antialias</span>   <span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
@@ -403,25 +381,21 @@ HETATM 2294  O   HOH E 408      11.489  -6.278  18.740  0.96 20.00           O
 <p>Now that we have completed the <em>Charts</em> plugin definition, it is time to bundle the scripts and libraries into a single module file using <a href="https://webpack.github.io"><em>webpack</em></a>. Once packed the plugin will be accessible through <em>Galaxy</em>’s user interface. Packing modules does not require restarting your <em>Galaxy</em> instance, just make sure to properly refresh your browser.</p>
 
 <blockquote class="hands_on">
-  <h3 id="-hands-on-7">
-<i class="fa fa-pencil" aria-hidden="true"></i> Hands-on</h3>
+  <h3 id="-hands-on-7"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on</h3>
 
   <ol>
     <li>Navigate to <em>Chart</em>’s root directory:
-      <div class="language-bash highlighter-rouge">
-<pre class="highlight"><code><span class="gp">$ </span><span class="nb">cd</span> <span class="nv">$GALAXY_ROOT</span>/config/plugins/visualizations/charts
+      <div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span><span class="nb">cd</span> <span class="nv">$GALAXY_ROOT</span>/config/plugins/visualizations/charts
 </code></pre>
       </div>
     </li>
     <li>Install the necessary <code class="highlighter-rouge">node-modules</code>, unless already available:
-      <div class="language-bash highlighter-rouge">
-<pre class="highlight"><code><span class="gp">$ </span>npm install
+      <div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>npm install
 </code></pre>
       </div>
     </li>
     <li>Run <code class="highlighter-rouge">webpack</code> to build the plugin:
-      <div class="language-bash highlighter-rouge">
-<pre class="highlight"><code><span class="gp">$ </span>webpack
+      <div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>webpack
 
 <span class="c"># If webpack is not available on your PATH, use the following command:</span>
 <span class="gp">$ </span>node_modules/webpack/bin/webpack.js
@@ -439,8 +413,7 @@ HETATM 2294  O   HOH E 408      11.489  -6.278  18.740  0.96 20.00           O
 <p>In this section we will select a <code class="highlighter-rouge">PDB</code>-file from the Protein Databank and visualize it with our new plugin.</p>
 
 <blockquote class="hands_on">
-  <h3 id="-hands-on-8">
-<i class="fa fa-pencil" aria-hidden="true"></i> Hands-on</h3>
+  <h3 id="-hands-on-8"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on</h3>
 
   <ol>
     <li>
@@ -449,16 +422,14 @@ HETATM 2294  O   HOH E 408      11.489  -6.278  18.740  0.96 20.00           O
     <li>
       <p>Copy the link to the raw <code class="highlighter-rouge">PDB</code>-file e.g.</p>
 
-      <div class="language-bash highlighter-rouge">
-<pre class="highlight"><code>https://files.rcsb.org/view/1ACB.pdb
+      <div class="language-bash highlighter-rouge"><pre class="highlight"><code>https://files.rcsb.org/view/1ACB.pdb
 </code></pre>
       </div>
     </li>
     <li>
       <p>Start your Galaxy instance</p>
 
-      <div class="language-bash highlighter-rouge">
-<pre class="highlight"><code><span class="gp">$ </span><span class="nb">cd</span> <span class="nv">$GALAXY_ROOT</span>
+      <div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span><span class="nb">cd</span> <span class="nv">$GALAXY_ROOT</span>
 <span class="gp">$ </span>run.sh
 </code></pre>
       </div>
@@ -479,7 +450,7 @@ HETATM 2294  O   HOH E 408      11.489  -6.278  18.740  0.96 20.00           O
 
 </blockquote>
 
-<p><img src="../../images/pv_1.png" alt="First view"></p>
+<p><img src="../../images/pv_1.png" alt="First view" /></p>
 
 <h2 id="section-2---allow-different-rendering-modes">Section 2 - Allow different rendering modes</h2>
 
@@ -487,13 +458,11 @@ HETATM 2294  O   HOH E 408      11.489  -6.278  18.740  0.96 20.00           O
 More information on parameters can be found in the <a href="https://docs.galaxyproject.org/en/latest/dev/schema.html">wiki</a>.</p>
 
 <blockquote class="hands_on">
-  <h3 id="-hands-on-9">
-<i class="fa fa-pencil" aria-hidden="true"></i> Hands-on</h3>
+  <h3 id="-hands-on-9"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on</h3>
 
   <ol>
     <li>Add the following block into the <code class="highlighter-rouge">config.js</code> file:
-      <div class="language-js highlighter-rouge">
-<pre class="highlight"><code><span class="nx">settings</span> <span class="err">:</span> <span class="p">{</span>
+      <div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="nx">settings</span> <span class="err">:</span> <span class="p">{</span>
     <span class="nl">mode</span> <span class="p">:</span> <span class="p">{</span>
         <span class="nl">label</span>   <span class="p">:</span> <span class="s1">'Render as:'</span><span class="p">,</span>
         <span class="nx">help</span>    <span class="err">:</span> <span class="s1">'Select the rendering mode.'</span><span class="p">,</span>
@@ -514,14 +483,12 @@ More information on parameters can be found in the <a href="https://docs.galaxyp
       </div>
     </li>
     <li>Change the following line in <code class="highlighter-rouge">wrapper.js</code>:
-      <div class="language-js highlighter-rouge">
-<pre class="highlight"><code><span class="nx">viewer</span><span class="p">.</span><span class="nx">renderAs</span><span class="p">(</span> <span class="s1">'protein'</span><span class="p">,</span> <span class="nx">structure</span><span class="p">,</span> <span class="s1">'cartoon'</span><span class="p">,</span> <span class="p">{}</span> <span class="p">);</span>
+      <div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="nx">viewer</span><span class="p">.</span><span class="nx">renderAs</span><span class="p">(</span> <span class="s1">'protein'</span><span class="p">,</span> <span class="nx">structure</span><span class="p">,</span> <span class="s1">'cartoon'</span><span class="p">,</span> <span class="p">{}</span> <span class="p">);</span>
 </code></pre>
       </div>
       <p>to</p>
 
-      <div class="language-js highlighter-rouge">
-<pre class="highlight"><code><span class="kd">var</span> <span class="nx">settings</span> <span class="o">=</span> <span class="nx">options</span><span class="p">.</span><span class="nx">chart</span><span class="p">.</span><span class="nx">settings</span><span class="p">;</span>
+      <div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">settings</span> <span class="o">=</span> <span class="nx">options</span><span class="p">.</span><span class="nx">chart</span><span class="p">.</span><span class="nx">settings</span><span class="p">;</span>
 <span class="nx">viewer</span><span class="p">.</span><span class="nx">renderAs</span><span class="p">(</span> <span class="s1">'protein'</span><span class="p">,</span> <span class="nx">structure</span><span class="p">,</span> <span class="nx">settings</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span> <span class="s1">'mode'</span> <span class="p">),</span> <span class="nx">settings</span><span class="p">.</span><span class="nx">attributes</span> <span class="p">);</span>
 </code></pre>
       </div>
@@ -529,8 +496,7 @@ More information on parameters can be found in the <a href="https://docs.galaxyp
     <li>
       <p>Rebuild the plugin</p>
 
-      <div class="language-bash highlighter-rouge">
-<pre class="highlight"><code><span class="gp">$ </span>rm static/repository/build/myviz_pdb.js
+      <div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>rm static/repository/build/myviz_pdb.js
 <span class="gp">$ </span>webpack
 </code></pre>
       </div>
@@ -548,13 +514,11 @@ More information on parameters can be found in the <a href="https://docs.galaxyp
 <p>From the <em>PV-Viewer</em> documentation we can see that there are more settings available such as e.g. ‘pointSize’, ‘lineWidth’ and ‘radius’. In this section we are going to further enhance the visualizations user interface to incorporate these input parameters</p>
 
 <blockquote class="hands_on">
-  <h3 id="-hands-on-10">
-<i class="fa fa-pencil" aria-hidden="true"></i> Hands-on</h3>
+  <h3 id="-hands-on-10"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on</h3>
 
   <ol>
     <li>Add the following block into the <code class="highlighter-rouge">settings</code> of your <code class="highlighter-rouge">config.js</code> file:
-      <div class="language-js highlighter-rouge">
-<pre class="highlight"><code><span class="nx">pointSize</span><span class="err">:</span> <span class="p">{</span>
+      <div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="nx">pointSize</span><span class="err">:</span> <span class="p">{</span>
     <span class="nl">label</span> <span class="p">:</span> <span class="s1">'Point size'</span><span class="p">,</span>
     <span class="nx">help</span>  <span class="err">:</span> <span class="s1">'Specify the point size.'</span><span class="p">,</span>
     <span class="nx">type</span>  <span class="err">:</span> <span class="s1">'float'</span><span class="p">,</span>
@@ -584,8 +548,7 @@ More information on parameters can be found in the <a href="https://docs.galaxyp
     <li>
       <p>Rebuild the plugin</p>
 
-      <div class="language-bash highlighter-rouge">
-<pre class="highlight"><code><span class="gp">$ </span>rm static/repository/build/myviz_pdb.js
+      <div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>rm static/repository/build/myviz_pdb.js
 <span class="gp">$ </span>webpack
 </code></pre>
       </div>
@@ -605,8 +568,7 @@ More information on parameters can be found in the <a href="https://docs.galaxyp
 
         
         <blockquote class="key_points">
-            <h3>
-<i class="fa fa-key" aria-hidden="true"></i> Key points</h3>
+            <h3><i class="fa fa-key" aria-hidden="true"></i> Key points</h3>
 
             <ul>
                 
@@ -620,14 +582,12 @@ More information on parameters can be found in the <a href="https://docs.galaxyp
 
         
 
-        <h3>
-<i class="fa fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!</h3>
+        <h3><i class="fa fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!</h3>
 
         <hr>
 
         <blockquote class="overview">
-            <h3>
-<i class="fa fa-comments-o" aria-hidden="true"></i> Feedback</h3>
+            <h3><i class="fa fa-comments-o" aria-hidden="true"></i> Feedback</h3>
             Please take a moment and provide your feedback on this tutorial. Your feedback will help guide and improve future revisions to this tutorial.
             <a href="https://tinyurl.com/GTNfeedback">Feedback Form</a>
         </blockquote>
