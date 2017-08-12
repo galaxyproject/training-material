@@ -9,7 +9,7 @@ tutorial_name: visualization-charts
 
 In this tutorial we are going to demonstrate how to add a 3rd-party visualization to *Charts* and what the benefits are. The plugin we select for this purpose is the [*PV-Javascript Protein Viewer*](https://biasmv.github.io/pv/). It is an open source, protein structure viewer for `PDB`-files. There are many other popular protein structure viewers available for the visualization of `PDB`-files such as e.g. [NGL](https://arose.github.io/ngl/) (also available in *Charts*) and [JSMol](https://chemapps.stolaf.edu/jmol/jsmol/jsmol.htm).
 
-> ### :book: Background: What is the PDB (Protein Data Bank) file format?
+> ### {% icon tip %} Background: What is the PDB (Protein Data Bank) file format?
 >
 > The `PDB`-file format contains atomic coordinates of biomolecules derived through a range of experimental and computational methods. Most commonly the file contains a spatial cyrstallographic snapshot of a protein. There are 100s of thousands of protein structures publicly available at the Protein Databank (https://www.rcsb.org). Proteins are usually labeled by a four-letter code.
 > Here is an example of a `PDB`-file for a hydrolase bond to its inhibitor (PDB: [1ACB](https://www.rcsb.org/pdb/explore/explore.do?structureId=1acb)):

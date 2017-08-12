@@ -31,7 +31,7 @@ Amplicon sequencing is a highly targeted approach for analyzing genetic variatio
 In the metagenomics fields, amplicon sequencing refers to capture and sequence of rRNA data in a sample.
 It can be 16S for bacteria or archea or 18S for eukaryotes.
 
-> ### :book: Background: The 16S ribosomal RNA gene
+> ### {% icon tip %} Background: The 16S ribosomal RNA gene
 > ![](../../images/16S_gene.png) <br><br>
 >
 > The 16S rRNA gene has several properties that make it ideally suited for our purposes
@@ -330,7 +330,7 @@ The main questions when analyzing amplicon data are: Which micro-organisms are p
 
 The idea is to take the sequences and assign them to a taxon. To do that, we group (or cluster) sequences based on their similarity to define Operational Taxonomic Units (OTUs); groups of similar sequences that can be treated as a single "genus" or "species" (depending on the clustering threshold)
 
-> ### :book: Background: Operational Taxonomic Units (OTUs)
+> ### {% icon tip %} Background: Operational Taxonomic Units (OTUs)
 >
 > In 16S metagenomics approaches, OTUs are clusters of similar sequence variants of the 16S rDNA marker gene sequence. Each of these clusters is intended to represent a taxonomic unit of a bacteria species or genus depending on the sequence similarity threshold. Typically, OTU cluster are defined by a 97% identity threshold of the 16S gene sequence variants at genus level. 98% or 99% identity is suggested for species separation.
 >
