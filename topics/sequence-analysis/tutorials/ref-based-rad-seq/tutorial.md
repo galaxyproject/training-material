@@ -11,7 +11,7 @@ In the study of [Hohenlohe *et al.* 2010](http://journals.plos.org/plosgenetics/
 
 ![](../../images/RAD4_Population_Genomics/Hohenlohe_et_al_2010.png)
 
-We here proposed to re-analyze these data at least until the population genomics statistics calculation step using STACKS pipeline. *Gasterosteus aculeatus* draft genome will be used here as reference genome. In a reference-based RAD-seq data analysis, the reads are aligned (or mapped) against a reference genome to constrain our analysis to focus on already discovered loci. A de-novo approach can also be conducted (see [de_novo tutorial](de_novo_rad.md), enhancing discoverability of new loci of interest but also of false positive one).
+We here proposed to re-analyze these data at least until the population genomics statistics calculation step using STACKS pipeline. *Gasterosteus aculeatus* draft genome will be used here as reference genome. In a reference-based RAD-seq data analysis, the reads are aligned (or mapped) against a reference genome to constrain our analysis to focus on already discovered loci. A de-novo approach can also be conducted (see [de_novo tutorial]({{site.url}}/topics/sequence-analysis/tutorials/de-novo-rad-seq/tutorial.html), enhancing discoverability of new loci of interest but also of false positive one).
 
 
 > ### Agenda
@@ -39,16 +39,16 @@ You can directly used archive from the Sequence Read Archive (SRA) for raw reads
 
 To download all training datasets (i.e reads, reference genome, population map file and barcodes file), you need to use the corresponding [CeSGO hub](https://cesgo.genouest.org/resources/370/supportingdocs) repository.
 
-> ### :pencil2: Hands-on: Data upload
+> ### {% icon hands_on %} Hands-on: Data upload
 >
 > 1. Create a new history for this RAD-seq exercise. If you are not inspired, you can name it "STACKS 1.42 RAD: population genomics with reference genome" for example...
 > 2. Import FASTQ files (*e.g.*  [`SRR034310`](ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR034/SRR034310/SRR034310.fastq.gz) and corresponding reference genome FASTA file [`chromFa`](ftp://hgdownload.cse.ucsc.edu/goldenPath/gasAcu1/bigZips/chromFa.tar.gz) as population map information file [`Population_map.txt`](https://cesgo.genouest.org/resources/373/download/Population_map.txt) and barcodes file [`Barcodes_SRR034310`](https://cesgo.genouest.org/resources/374/download/Barcodes_SRR034310.tabular)) from SRA and [CeSGO](https://cesgo.genouest.org/)
 
 >
->    > ### :nut_and_bolt: Comments
+>    > ### {% icon comment %} Comments
 >    > If you are using the [GenOuest Galaxy instance](https://galaxy.genouest.org), you can load the dataset using 'Shared Data' <i class="fa fa-long-arrow-right"></i> 'Data Libraries' <i class="fa fa-long-arrow-right"></i> '1 Galaxy teaching folder' <i class="fa fa-long-arrow-right"></i> 'EnginesOn' <i class="fa fa-long-arrow-right"></i> 'RADseq' <i class="fa fa-long-arrow-right"></i> 'Stickelback population genomics' <i class="fa fa-long-arrow-right"></i> 'SRR034310'
 >
->    > ### :bulb: Tip: Importing data via links
+>    > ### {% icon tip %} Tip: Importing data via links
 >    >
 >    > * Open the Galaxy Upload Manager
 >    > * Select **Paste/Fetch Data**
@@ -59,7 +59,7 @@ To download all training datasets (i.e reads, reference genome, population map f
 >    >     * https://cesgo.genouest.org/resources/374/download/Barcodes_SRR034310.tabular
 >    > * Press **Start**    
 >
->    > ### :bulb: Tip: Changing the file type `fastq` to `fastqsanger` once the data file is in your history.
+>    > ### {% icon tip %} Tip: Changing the file type `fastq` to `fastqsanger` once the data file is in your history.
 >    > As we know here that the datatype is fastqsanger, we can directly change it through the upcoming method. Normally, you need to execute FastQGroomer to be sure to have a correct fastqsanger file format. And if you don't know how your quality score is encoded on raw fastQ files, please, use the FastQC tool to determine it!
 >    >
 >    > * Click on the pencil button displayed in your dataset in the history
@@ -69,7 +69,7 @@ To download all training datasets (i.e reads, reference genome, population map f
 >
 >    As default, Galaxy takes the link as name. It also do not link the dataset to a database or a reference genome.
 >
->    > ### :nut_and_bolt: Comments
+>    > ### {% icon comment %} Comments
 >    > - Add the "stickleback" custom build from the Fasta reference genome file
 >    > - Edit the "Database/Build" to select "stickleback"
 >    > - Rename the datasets according to the samples
@@ -81,14 +81,14 @@ The sequences are raw sequences from the sequencing machine, without any pretrea
 
 For demultiplexing, we use the Process Radtags tool from [STACKS](https://www.g3journal.org/content/1/3/171.full) .
 
-> ### :pencil2: Hands-on: Demultiplexing reads
+> ### {% icon hands_on %} Hands-on: Demultiplexing reads
 >
-> 1. **Process Radtags** :wrench:: Run `Stacks: process radtags` on FastQ file to demultiplex the reads
+> 1. **Process Radtags** {% icon tool %}: Run `Stacks: process radtags` on FastQ file to demultiplex the reads
 >
 > ![](../../images/RAD4_Population_Genomics/Process_radtags_in.png)
 >
 >
->    > ### :question: Questions
+>    > ### {% icon question %} Questions
 >    >
 >    > 1. How many reads were on the original dataset?
 >    > 2. How many are kept?
@@ -106,7 +106,7 @@ For demultiplexing, we use the Process Radtags tool from [STACKS](https://www.g3
 >    >    </details>
 > ![](../../images/RAD4_Population_Genomics/Process_radtags_out_log.png)
 >
-> 2. **Process Radtags** :wrench:: Re-Run `Stacks: process radtags` on FastQ file playing with parameters
+> 2. **Process Radtags** {% icon tool %}: Re-Run `Stacks: process radtags` on FastQ file playing with parameters
 >
 > In `advanced options`, activate the `Discard reads with low quality scores` option and play with the score limit (default vs 20 for example) and examine the change in reads retained. Note that you can play also with the sliding window score threshold, by default 15% of the length of the read. This sliding window parameter allows notably the user to deal with the declining quality at the 3' end of reads.
 >
@@ -143,13 +143,13 @@ The demultiplexed sequences are raw sequences from the sequencing machine, witho
 
 ## Quality control
 
-For quality control, we use similar tools as described in [NGS-QC tutorial](../../NGS-QC/tutorials/dive_into_qc): [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/).
+For quality control, we use similar tools as described in [NGS-QC tutorial]({{site.url}}/topics/sequence-analysis/): [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/).
 
-> ### :pencil2: Hands-on: Quality control
+> ### {% icon hands_on %} Hands-on: Quality control
 >
-> 1. **FastQC** :wrench:: Run FastQC on FastQ files to control the quality of the reads
+> 1. **FastQC** {% icon tool %}: Run FastQC on FastQ files to control the quality of the reads
 >
->    > ### :question: Questions
+>    > ### {% icon question %} Questions
 >    >
 >    > 1. What is the read length?
 >    >
@@ -167,16 +167,16 @@ As it exists a draft genome for *Gasterosteus aculeatus*, we can use this inform
 
 To make sense of the reads, their positions within *Gasterosteus aculeatus* genome must be determined. This process is known as aligning or 'mapping' the reads to the reference genome.
 
-> ### :nut_and_bolt: Comment
+> ### {% icon comment %} Comment
 >
-> Do you want to learn more about the principles behind mapping? Follow our [training](../../NGS-mapping)
+> Do you want to learn more about the principles behind mapping? Follow our [training]({{site.url}}/topics/sequence-analysis/)
 
 Here we will use BWA. BWA is a fast light-weighted tool that aligns relatively short sequences (queries) to a sequence database (large), such as the human reference genome. It is developed by Heng Li at the Sanger Insitute.
 
 *[Li et Durbin, Bioinformatics, 2009](https://www.ncbi.nlm.nih.gov/pubmed/19451168)*
 
 
-> 1. **BWA** :wrench:: Run **BWA** with the Commonly Used settings after specifying the fasta reference genome file from history, the fact that you are working with single-end libraries and finally the collection of demultiplexed FastQ files.
+> 1. **BWA** {% icon tool %}: Run **BWA** with the Commonly Used settings after specifying the fasta reference genome file from history, the fact that you are working with single-end libraries and finally the collection of demultiplexed FastQ files.
 >
 >    ![](../../images/RAD4_Population_Genomics/reference/Map_with_BWA.png)
 
@@ -188,16 +188,16 @@ We next want to run Stacks on the freshwater and oceanic populations.
 
 Run `Stacks: Reference map` Galaxy tool. This program will run pstacks, cstacks, and sstacks on the members of the population, accounting for the alignments of each read.
 
-> ### :nut_and_bolt: Comment
+> ### {% icon comment %} Comment
 >
 > Information on ref_map.pl and its parameters can be found online: https://creskolab.uoregon.edu/stacks/comp/ref_map.php.
 
 
-> **Stacks: Reference map** :wrench:: Run **Stacks** selecting the population usage. Specify each BWA-aligned individual as a sample, a population map and a minimum depth of coverage of 3.
+> **Stacks: Reference map** {% icon tool %}: Run **Stacks** selecting the population usage. Specify each BWA-aligned individual as a sample, a population map and a minimum depth of coverage of 3.
 >
 >    ![](../../images/RAD4_Population_Genomics/reference/reference_map_in.png)
 
->    > ### :nut_and_bolt: Comment
+>    > ### {% icon comment %} Comment
 >    >
 >    > If you are using a file presenting population information and individual name in a different manner than expected by STACKS, you can use Galaxy tools like `Regex Replace` or `Cut columns from a table` to generate it.
 
@@ -207,7 +207,7 @@ Run `Stacks: Reference map` Galaxy tool. This program will run pstacks, cstacks,
 >
 
 # Calculate population genomics statistics
-> **Stacks: populations** :wrench:: Run the last step of **Stacks: Reference map** pipeline specifying data filtering options (minimum percentage of individuals in a population required to process a locus for that population: 0.75 , output options (VCF and Structure) and enabling SNP and haplotype-based F statistics calculation.
+> **Stacks: populations** {% icon tool %}: Run the last step of **Stacks: Reference map** pipeline specifying data filtering options (minimum percentage of individuals in a population required to process a locus for that population: 0.75 , output options (VCF and Structure) and enabling SNP and haplotype-based F statistics calculation.
 >
 >    ![](../../images/RAD4_Population_Genomics/reference/populations_in.png)
 
@@ -216,7 +216,7 @@ Run `Stacks: Reference map` Galaxy tool. This program will run pstacks, cstacks,
 >	Now look at the output in the file `batch_1.sumstats` nammed `SNP and Haplotype-based F statistics with Stacks: populations ...` on your history. This file is also reachable on the data collection nammed `Full output from ref_map .....` with his original name `batch_1.sumstats`. There are a large number of statistics calculated at each SNP, so use Galaxy tools like filter, cut, and sort to focus on some.
 
 >
->    > ### :question: Question
+>    > ### {% icon question %} Question
 >    >
 >    > 1. What is the maximum value of FST at any SNP?
 >    > 2. How many SNPs reach this FST value?

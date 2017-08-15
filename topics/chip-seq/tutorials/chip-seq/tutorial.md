@@ -204,7 +204,7 @@ Use the regions provided by the gene annotation file downloaded from UCSC and yo
 <a name="chipseq"/></a>
 ###ChIP-seq in general:
 
-**Landt et al. (2012):** [ChIP-seq guidelines and practices of the ENCODE and modENCODE consortia](https://genome.cshlp.org/content/22/9/1813.long), (doi:10.1101/gr.136184.111) - This is a very useful "encyclopedic" paper with many details about the tools the (mod)ENCODE consortia use. It also contains a long section about antibody validation etc.. It does not explain much of the reasoning behind the bioinformatics tools, though.
+**Landt et al. (2012):** [ChIP-seq guidelines and practices of the ENCODE and modENCODE consortia](http://genome.cshlp.org/content/22/9/1813.long), (doi:10.1101/gr.136184.111) - This is a very useful "encyclopedic" paper with many details about the tools the (mod)ENCODE consortia use. It also contains a long section about antibody validation etc.. It does not explain much of the reasoning behind the bioinformatics tools, though.
 
 **Zentner and Henikoff (2012):** [Surveying the epigenomic landscape, one base at a time](https://genomebiology.biomedcentral.com/articles/10.1186/gb-2012-13-10-250), (doi:10.1186/gb-2012-13-10-250) - Overview of popular *-seq techniques; very nice description of DNase-seq, MNase-seq, FAIRE-seq etc.
 

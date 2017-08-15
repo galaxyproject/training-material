@@ -33,7 +33,7 @@ tutorial_name: galaxy-intro-vis
 
 General introduction about the topic and then an introduction of the tutorial (the questions and the objectives). It is nice also to have a scheme to sum up the pipeline used during the tutorial. The idea is to give to trainees insight into the content of the tutorial and the (theoretical and technical) key concepts they will learn.
 
-It could be nice to use: [Using the Integrative Genomics Viewer](IGV_Introduction.md)
+It could be nice to use: [Using the Integrative Genomics Viewer]({{site.url}}/topics/introduction/tutorials/igv-introduction/tutorial.html)
 
 # Part 1
 
@@ -43,7 +43,7 @@ Introduction about this part
 
 Short introduction about this subpart.
 
-:pencil2: ***Hands on!***
+{% icon hands_on %} ***Hands on!***
 
 1. First step
 2. Second step
@@ -53,7 +53,7 @@ Short introduction about this subpart.
 
 Short introduction about this subpart.
 
-:pencil2: ***Hands on!***
+{% icon hands_on %} ***Hands on!***
 
 1. First step
 2. Second step
@@ -61,7 +61,7 @@ Short introduction about this subpart.
 
 Some blabla
 
-:pencil2: ***Hands on!***
+{% icon hands_on %} ***Hands on!***
 
 1. First step
 2. Second step
@@ -71,7 +71,7 @@ Some blabla
 
 Short introduction about this subpart.
 
-:pencil2: ***Hands on!***
+{% icon hands_on %} ***Hands on!***
 
 1. First step
 2. Second step
@@ -81,7 +81,7 @@ Short introduction about this subpart.
 
 Short introduction about this subpart.
 
-:pencil2: ***Hands on!***
+{% icon hands_on %} ***Hands on!***
 
 1. First step
 2. Second step
@@ -89,7 +89,7 @@ Short introduction about this subpart.
 
 Some blabla
 
-:pencil2: ***Hands on!***
+{% icon hands_on %} ***Hands on!***
 
 1. First step
 2. Second step

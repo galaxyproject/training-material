@@ -38,7 +38,7 @@ Here, we want to develop a small tutorial to explain how to use BLAST.
 
 Before anything, we need to get a local copy of the content of the GitHub repository by cloning it
 
-> ### :pencil2: Hands-on: Clone the GitHub repository
+> ### {% icon hands_on %} Hands-on: Clone the GitHub repository
 >
 > 1. Clone the repository locally with: `git clone https://github.com/galaxyproject/training-material.git`
 > 2. Check that you have the same structure as the one in [GitHub](https://github.com/galaxyproject/training-material)
@@ -50,12 +50,12 @@ The first step we need to define is in which topic putting our tutorial. This fi
 
 When we structured the repository, we decided here to use as topic the names of the categories in the [ToolShed](https://toolshed.g2.bx.psu.edu/). So when decided where to put your tutorial, you can look in which ToolShed's category are the main tools used in the tutorial and use this category as topic. For example, this tutorial will rely on the NCBI Blast+ tool.
 
-> ### :pencil2: Hands-on: Defining the topic for the tutorial
+> ### {% icon hands_on %} Hands-on: Defining the topic for the tutorial
 >
 > 1. Search for NCBI Blast+ on the [ToolShed](https://toolshed.g2.bx.psu.edu/)
 > 2. Check in which category it is
 >
->    > ### :question: Questions
+>    > ### {% icon question %} Questions
 >    >
 >    > In which topic will you put the tutorial?
 >    >
@@ -73,7 +73,7 @@ Once the topic is chosen, serious things can start: creating the tutorial. It is
 
 To help you, we created a template for a tutorial with the different required files.
 
-> ### :pencil2: Hands-on: Copy the needed file
+> ### {% icon hands_on %} Hands-on: Copy the needed file
 >
 > 1. Copy the `tutorial1` folder (you can find it in `templates/tutorials/`) in `topics/sequence-analysis/topics`
 > 2. Rename the folder into `similarity-search`
@@ -86,7 +86,7 @@ Once you started to change something, we need to keep track of these changes wit
 This repository is developed collaboratively with more than 40 contributors. For the collaboration, we are using the [GitHub flow](https://guides.github.com/introduction/flow/), which is based on forks, branches and pull requests.
 We will explain GitHub flow later and show you now how to start keeping track of the changes:
 
-> ### :pencil2: Hands-on: Start keeping track of the changes
+> ### {% icon hands_on %} Hands-on: Start keeping track of the changes
 >
 > 1. [Create a fork](https://help.github.com/articles/fork-a-repo/) of this repository on GitHub
 > 2. Add your fork to the current local copy: `git remote add fork https://github.com/galaxyproject/training-material`
@@ -165,10 +165,10 @@ On the top, there is some metadata:
 - `topic_name: training` with the name of the topic
 - `tutorial_name: create-new-tutorial` with the name of tutorial
 
-These metadata are there to help the templating system to make the connection between the file and the global [metadata](topics/training/tutorials/create-new-tutorial-metadata/tutorial.html).
+These metadata are there to help the templating system to make the connection between the file and the global [metadata]({{site.url}}/topics/training/tutorials/create-new-tutorial-metadata/tutorial.html).
 If they are not correctly defined the tutorial can not be found on the website.
 
-> ### :pencil2: Hands-on: Fix the top metadata
+> ### {% icon hands_on %} Hands-on: Fix the top metadata
 >
 > 1. Change the `tutorial-name` and the `topic_name` to fit to the ones defined in the metadata
 > 2. Check if the tutorial has been correctly added at [http://localhost:4000/topics/sequence-analysis/similarity-search ](http://localhost:4000/topics/sequence-analysis/similarity-search)
@@ -178,7 +178,7 @@ If they are not correctly defined the tutorial can not be found on the website.
 
 Directly after the short metadata section on top the content of your tutorial starts. It is written in Markdow - a simple markup langage.
 
-> ### :bulb: Tip: Markdown
+> ### {% icon tip %} Tip: Markdown
 >
 > Check [this cheatsheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet) to learn more how to use Markdown.
 {: .tip}
@@ -192,22 +192,22 @@ We recommend to structure the tutorials like this
 - Several sections with the content of the tutorial and some hands-on parts (practicing is an important part of the learning process)
 - A conclusion to summarize what has been done in the tutorial (with a scheme)
 
-> ### :pencil2: Hands-on: Structuring the tutorial
+> ### {% icon hands_on %} Hands-on: Structuring the tutorial
 >
 > 1. Add a small introduction about the dataset
 > 2. Add one or two sections with ideas for the tutorial
 > 3. Add a small conclusion
 {: .hands_on}
 
-> ### :bulb: Tip: Adding images, with caption
+> ### {% icon tip %} Tip: Adding images, with caption
 >
-> To add an image in markdown file, we need to use `![](../../images/image.png)`. 
+> To add an image in markdown file, we need to use `![](../../images/image.png)`.
 >
 > On the top of that, we added a small plugin to add a caption for each image:
 >
 > ![This figure shows an example of a figure with a caption](../../images/image_caption_screenshot.png "Example of a figure with a caption")
 >
-> "Figure" and the number are automatically added and the caption is added by adding the information in the markdown call of the image: 
+> "Figure" and the number are automatically added and the caption is added by adding the information in the markdown call of the image:
 >
 >   ```
 >   ![A textual description of the image](../images/image.png "This is my super caption")
@@ -216,7 +216,7 @@ We recommend to structure the tutorials like this
 > We can also cross-reference the figure inside our markdown with an anchor. For example, we can link to [the previous figure](#figure-1) using `[the display text](#figure-nb)` (with changing `nb` to the figure number).
 {: .tip}
 
-> ### :bulb: Tip: Writting mathematical expressions
+> ### {% icon tip %} Tip: Writting mathematical expressions
 >
 > Mathematical expressions can be written in LaTeX: they will be rendered with [MathJax](https://www.mathjax.org/).
 >
@@ -230,7 +230,7 @@ We recommend to structure the tutorials like this
 >
 > If you don't want to start an inline math statement, just escape the dollar signs and they will be treated as simple dollar signs.
 >
->    > ### :nut_and_bolt: Comments
+>    > ### {% icon comment %} Comments
 >    > LaTeX code that uses the pipe symbol `|` in inline math statements may lead to a line being recognized as a table line.
 >    > This can be avoided by using the `\vert` command instead of `|`
 >    {: .comment}
@@ -254,11 +254,11 @@ This structure needs to be respected otherwise it would not be interpreted corre
 
     This box at the top of each tutorial is automatically generated using the metadata we defined
 
-    > ### :pencil2: Hands-on: Checking the metadata
+    > ### {% icon hands_on %} Hands-on: Checking the metadata
     >
     > 1. Check that the metadata added previously are correctly filling the overview box
     >
-    >    > ### :question: Questions
+    >    > ### {% icon question %} Questions
     >    >
     >    > Which pedogical metadata are not added to this box?
     >    >
@@ -288,7 +288,7 @@ This structure needs to be respected otherwise it would not be interpreted corre
 
     ![Example of agenda box](../../../../shared/images/tutorial_agenda_box.png "Example of agenda box")
 
-    > ### :pencil2: Hands-on: Add an agenda box to the tutorial
+    > ### {% icon hands_on %} Hands-on: Add an agenda box to the tutorial
     >
     > 1. Add an agenda box to the tutorial that fit the structure we defined previously
     {: .hands_on}
@@ -297,22 +297,22 @@ This structure needs to be respected otherwise it would not be interpreted corre
 
     We think that doing is important in the learning process. So we emphasize it by adding regularly some hands-on sections where the trainees can do by themselves some analyses. We designed some special boxes to make these sections easy to find.
 
-        > ### :pencil2: Hands-on: Sorting BAM dataset
+        > ### {% icon hands_on %} Hands-on: Sorting BAM dataset
         >
-        > 1. **Sort BAM dataset** :wrench:: Sort the paired-end BAM file by "Read names" with **Sort BAM
+        > 1. **Sort BAM dataset** {% icon tool %}: Sort the paired-end BAM file by "Read names" with **Sort BAM
         {: .hands_on}
 
     ![Example of hands-on box](../../../../shared/images/tutorial_hand_on_box.png "Example of hands-on box")
 
     with the
 
-    - `:pencil2:` emoji to define that is an hands-on
+    - `{% icon hands_on %}` emoji to define that is an hands-on
     - Short imperative sentence to make it easy to identify the tasks
-    - Name of the tool in bold with the `:wrench:` emoji to make it easy to identify a Galaxy tool
+    - Name of the tool in bold with the `{% icon tool %}` emoji to make it easy to identify a Galaxy tool
     - Parameters for the tool as a sublist<br/>
     <br/>
 
-    > ### :pencil2: Hands-on: Add an hands-on box
+    > ### {% icon hands_on %} Hands-on: Add an hands-on box
     >
     > 1. Add an hands-on box to run a BLAST of the small sequence dataset against the chosen database
     {: .hands_on}
@@ -322,7 +322,7 @@ This structure needs to be respected otherwise it would not be interpreted corre
     The questions are then to force the trainees to think about what they are currently doing and to put things in perspective.
     They are also a way to help the instructors to expose and clearify misunderstanding earily on.
 
-        > ### :question: Questions
+        > ### {% icon question %} Questions
         >
         > 1. Why are some tests filtered?
         > 2. Does it improve the *p*-value distribution?
@@ -340,14 +340,14 @@ This structure needs to be respected otherwise it would not be interpreted corre
 
     In the box below and hiffen we add also the correct answer, so that self-trainees can check the solution and its explanation.
 
-    > ### :pencil2: Hands-on: Add a question box
+    > ### {% icon hands_on %} Hands-on: Add a question box
     >
     > 1. Add an hands-on box to construct the BLAST database
     {: .hands_on}
 
 - Tips
 
-        > ### :bulb: Tip: Importing data via links
+        > ### {% icon tip %} Tip: Importing data via links
         >
         > * Copy the link location
         > * Open the Galaxy Upload Manager
@@ -360,7 +360,7 @@ This structure needs to be respected otherwise it would not be interpreted corre
 
 - Comments
 
-        > ### :nut_and_bolt: Comments
+        > ### {% icon comment %} Comments
         > - Edit the "Database/Build" to select "dm3"
         > - Rename the datasets according to the samples
         {: .comment}
@@ -376,12 +376,12 @@ To render the boxes correctly, the syntax needs to be correct. If it does not wo
 The boxes can be nested, *e.g.* for having tips inside a hands-on:
 
 ```
-> ### :pencil2: Hands-on: Defining the topic for the tutorial
+> ### {% icon hands_on %} Hands-on: Defining the topic for the tutorial
 >
 > 1. Search for NCBI Blast+ on the [ToolShed](https://toolshed.g2.bx.psu.edu/)
 > 2. Check in which category it is
 >
->    > ### :question: Questions
+>    > ### {% icon question %} Questions
 >    >
 >    > In which topic will you put the tutorial?
 >    >
@@ -431,7 +431,7 @@ On the top, as for the `tutorial.md`, we need to define some metadata to link th
 
 After, each new slide is introduced by `---`, and the content of each slide is written in Markdown.
 
-> ### :pencil2: Hands-on: Add some slides for the tutorial
+> ### {% icon hands_on %} Hands-on: Add some slides for the tutorial
 >
 > 1. Add a few slides to explain the similarity search
 > 2. Make sure they are accessible and correctly generated

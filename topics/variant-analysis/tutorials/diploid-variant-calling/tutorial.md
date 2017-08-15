@@ -9,7 +9,7 @@ tutorial_name: diploid-variant-calling
 # Introduction
 {:.no_toc}
 
-Variant calling is a complex field that was significantly propelled by advances in DNA sequencing and efforts of large scientific consortia such as the [1000 Genomes](https://www.1000genomes.org). Here we summarize basic ideas central to Genotype and Variant calling. First, let's contrast the two things although they often go together:
+Variant calling is a complex field that was significantly propelled by advances in DNA sequencing and efforts of large scientific consortia such as the [1000 Genomes](http://www.1000genomes.org). Here we summarize basic ideas central to Genotype and Variant calling. First, let's contrast the two things although they often go together:
 
 * **Variant calling** - identification of positions where the sequenced sample is different from the reference sequence (or [reference genome graph](https://github.com/vgteam/vg));
 * **Genotype calling** - identifying individual's genotype at variable sites.
@@ -61,7 +61,7 @@ The capitalized position contains a G->A [transition](https://en.wikipedia.org/w
 * A misalignment (though unlikely in the above example).
 
 The modern variant callers attempt to assign a reliability estimate for each genotype call. This is done using Bayes reasoning.
-> ### :bulb: Tip: Further reading on
+> ### {% icon tip %} Tip: Further reading on
 >
 > For a great visual explanation see [blog](https://oscarbonilla.com/2009/05/visualizing-bayes-theorem/) by Oscar Bonilla). Here we present a >SNP-relevant "translation" on this explanation (with inspiration from [Erik Garrison](https://github.com/ekg)).
 {: .tip}
@@ -75,7 +75,7 @@ Suppose you have **A** samples with a variant in a population. You are performin
 |---------------|---------------|---------------------------------|
 |![](../../images/pA.png)|![](../../images/pB.png)|![](../../images/pAB.png)|
 
-> ### :question: Questions
+> ### {% icon question %} Questions
 >
 > 1. What is the probability of a having a real polymorphism **A** given our observation of variants in reads **B**? In other words what is the probability of A given **B**? Or, as stated in the original [blog](https://oscarbonilla.com/2009/05/visualizing-bayes-theorem/): "given that we are in region **B** what is the probability that we are in the region **AB**?"
 > 2. Now, let's ask an opposite question. Given a true polymorphism **A** what are the chances that we do detect it (i.e., find ourselves in **AB**)?
@@ -142,14 +142,14 @@ In this example we will perform variant calling and annotation using [genome in 
 
 Yet for a quick tutorial these datasets are way too big, so we created a [downsampled dataset](https://dx.doi.org/10.5281/zenodo.60520). This dataset was produced by mapping the trio reads against `hg19` version of the human genome, merging the resulting bam files together (we use readgroups to label individual reads so they can be traced to each of the original individuals), and restricting alignments to a small portion of chromosome 19 containing the [*POLRMT*](http://www.ncbi.nlm.nih.gov/gene?cmd=Retrieve&dopt=Graphics&list_uids=5442) gene.
 
-> ### :pencil2: Hands-on: Variant calling
+> ### {% icon hands_on %} Hands-on: Variant calling
 >
-> 1. Import [the data](https://zenodo.org/record/60520/files/GIAB-Ashkenazim-Trio.txt) into your history :wrench:
-> 2. Specify the used genome for mapping :wrench:
+> 1. Import [the data](https://zenodo.org/record/60520/files/GIAB-Ashkenazim-Trio.txt) into your history {% icon tool %}
+> 2. Specify the used genome for mapping {% icon tool %}
 >     1. Click on **Edit attributes** (pencil icon on right panel)
 >     2. Select `Human Feb 2009` on **Database/Build**
 >     3. Save it
-> 3. Import the reference genome :wrench:
+> 3. Import the reference genome {% icon tool %}
 >     1. Go on **Data Libraries** in **Shared data** (top panel on Galaxy's interface)
 >     2. Click on **Training Data**
 >     3. Select `hg19`
@@ -161,9 +161,9 @@ Yet for a quick tutorial these datasets are way too big, so we created a [downsa
 
 ## Generating and post-processing FreeBayes calls
 
-> ### :pencil2: Hands-on: Generating FreeBayes calls
+> ### {% icon hands_on %} Hands-on: Generating FreeBayes calls
 >
-> 1. Select **FreeBayes** from **Phenotype Association** section of the tool menu (left pane of Galaxy's interface) :wrench:
+> 1. Select **FreeBayes** from **Phenotype Association** section of the tool menu (left pane of Galaxy's interface) {% icon tool %}
 > 2. Make sure the top part of the interface looks like shown below. Here we selected `GIAB-Ashkenazim-Trio-hg19` as input and set **Using reference genome** to `hg19` and **Choose parameter selection level** to `5. Complete list of all options`:
 >
 >   ![](../../images/FreeBayes_settings.png)
@@ -173,11 +173,11 @@ Yet for a quick tutorial these datasets are way too big, so we created a [downsa
 >   ![](../../images/freebayes_gq.png)
 {: .hands_on}
 
-This produces a dataset in [VCF](https://www.1000genomes.org/wiki/Analysis/variant-call-format) format containing 35 putative variants. Before we can continue we need to post-process this dataset by breaking compound variants into multiple independent variants with **VcfAllelicPrimitives** tool found within **VCF Tools** section. This is necessary for ensuring the smooth sailing through downstream analyses:
+This produces a dataset in [VCF](http://www.1000genomes.org/wiki/Analysis/variant-call-format) format containing 35 putative variants. Before we can continue we need to post-process this dataset by breaking compound variants into multiple independent variants with **VcfAllelicPrimitives** tool found within **VCF Tools** section. This is necessary for ensuring the smooth sailing through downstream analyses:
 
-> ### :pencil2: Hands-on: Post-processing
+> ### {% icon hands_on %} Hands-on: Post-processing
 >
-> 1. Select FreeBayes output as the input for this tool :wrench:
+> 1. Select FreeBayes output as the input for this tool {% icon tool %}
 > 2. Make sure **Maintain site and allele-level annotations when decomposing** and **Maintain genotype-level annotations when decomposing** are set to `Yes`
 >
 >   ![](../../images/vcfallelicprimitives.png)
@@ -194,9 +194,9 @@ This produces a dataset in [VCF](https://www.1000genomes.org/wiki/Analysis/varia
 
 At this point we are ready to begin annotating variants using [**SnpEff**](http://snpeff.sourceforge.net/SnpEff.html). **SnpEff**, a project maintained by [Pablo Cingolani](https://www.linkedin.com/in/pablocingolani) "*...annotates and predicts the effects of variants on genes (such as amino acid changes)...*" and so is critical for functional interpretation of variation data.
 
-### :pencil2: Annotating variants
+### {% icon hands_on %} Annotating variants
 
-1. Download `hg19` database with **SnpEff Download** :wrench:
+1. Download `hg19` database with **SnpEff Download** {% icon tool %}
 2. Launch annotation of your variants with **SnpEff** from **Annotation**, using the downloaded database (reference genome from your history)
 
 SnpEff will generate two outputs: (1) an annotated VCF file and (2) an HTML report. The report contains a number of useful metrics such as distribution of variants across gene features
@@ -209,7 +209,7 @@ or changes to codons
 
 ## Manipulating variation data with GEMINI
 
-Now that we have an annotated VCF file it is time to peek inside our variation data. [Aaron Quinlan](https://quinlanlab.org/), creator of [GEMINI](http://gemini.readthedocs.org/en/latest/index.html), calls it *Detective work*.
+Now that we have an annotated VCF file it is time to peek inside our variation data. [Aaron Quinlan](http://quinlanlab.org/), creator of [GEMINI](http://gemini.readthedocs.org/en/latest/index.html), calls it *Detective work*.
 
 ### Loading data into GEMINI
 
@@ -222,7 +222,7 @@ family1	   HG003_NA24149_father -9                   -9                   1  1  
 family1	   HG002_NA24385_son	HG003_NA24149_father HG004_NA24143_mother 1  2         CEU
 ```
 
-> ### :pencil2: Hands-on: Loading data :wrench:
+> ### {% icon hands_on %} Hands-on: Loading data {% icon tool %}
 >
 > So let's load data into GEMINI by setting VCF and PED inputs
 >
@@ -241,12 +241,12 @@ This produce a list of all tables and fields in the database.
 
 GEMINI database is queried using the versatile SQL language (more on SQL [here](https://swcarpentry.github.io/sql-novice-survey)). In Galaxy's version of GEMINI this is done using **GEMINI_query** tool. Within this tool SQL commands are typed directly into the **The query to be issued to the database** text box. Let's begin getting information from some of the tables we discovered with **GEMINI_db_info** tool above.
 
-> ### :bulb: Tip: Gemini tutorials
+> ### {% icon tip %} Tip: Gemini tutorials
 >
 > The examples below are taken from "[Intro to Gemini](https://s3.amazonaws.com/gemini-tutorials/Intro-To-Gemini.pdf)" tutorial. For extensive documentation see "[Querying GEMINI](https://gemini.readthedocs.org/en/latest/content/querying.html)".
 {: .tip}
 
-> ### :pencil2: Hands-on: Selecting "novel" variants that are not annotated in dbSNP database
+> ### {% icon hands_on %} Hands-on: Selecting "novel" variants that are not annotated in dbSNP database
 >
 > Type `SELECT count(*) FROM variants WHERE in_dbsnp == 0` into **The query to be issued to the database**
 >
@@ -256,7 +256,7 @@ GEMINI database is queried using the versatile SQL language (more on SQL [here](
 >
 {: .hands_on}
 
-> ### :pencil2: Find variants in POLRMT gene
+> ### {% icon hands_on %} Find variants in POLRMT gene
 >
 > The query `SELECT * FROM variants WHERE filter is NULL and gene = 'POLRMT'` will produce [output](https://usegalaxy.org/datasets/bbd44e69cb8906b5a0bb5b2cc0695697/display/?preview=True) with very large number of columns. To restrict the number of columns to a manageable set let's use this command: `SELECT rs_ids, aaf_esp_ea, impact, clinvar_disease_name, clinvar_sig FROM variants WHERE filter is NULL and gene = 'POLRMT'` (column definitions can be found [here](https://gemini.readthedocs.org/en/latest/content/database_schema.html))
 
@@ -274,7 +274,7 @@ GEMINI database is queried using the versatile SQL language (more on SQL [here](
 * `gt_ref_depths.subjectID` -  number of reference allele reads in this subject at position
 * `gt_alt_depths.subjectID` - number of alternate allele reads in this subject at position
 
-> ### :question: Questions
+> ### {% icon question %} Questions
 >  
 > 1. At how many sites does child have a non-reference allele?
 > 2. At how many sites both father and son have non reference alleles?
@@ -295,7 +295,7 @@ will generate<a href="https://usegalaxy.org/datasets/bbd44e69cb8906b543c67f80be2
 
 Wildcards simply writing SQL expressions when searching across multiple terms. The syntax for genotype filter wilcards is `COLUMN).(SAMPLE_WILDCARD).(SAMPLE_WILDCARD_RULE).(RULE_ENFORCEMENT).`. Let's look at few examples.
 
-> ### :question: Question
+> ### {% icon question %} Question
 >
 > At which variants are every sample heterozygous?
 >
@@ -340,7 +340,7 @@ This short tutorial should give you an overall idea on how generate variant data
 * and so on....
 
 
-> ### :bulb: Tip: If things don't work...
+> ### {% icon tip %} Tip: If things don't work...
 >
 > ...you need to complain. Use [Galaxy's BioStar Channel](https://usegalaxy.org/biostar/biostar_redirect) to do this.
 {: .tip}

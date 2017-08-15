@@ -7,7 +7,7 @@ tutorial_name: webhooks
 ## Introduction
 
 In this tutorial we are going to demonstrate how to add a webhook to the tool-execution endpoint. This is the web-page that appears
-after you have executed a tool. As a more useful example we are going to ask [phdcomics](https://phdcomics.com) for a random comic that we can
+after you have executed a tool. As a more useful example we are going to ask [phdcomics](http://phdcomics.com) for a random comic that we can
 display to entertain our users.
 
 
@@ -16,7 +16,7 @@ at which we modify the Galaxy user-interface. In our case we want to display an 
 The key `activate` gives you control per-webhook to activate or deactivate it.
 
 
-> ### :pencil2: Hands-on
+> ### {% icon hands_on %} Hands-on
 >
 > 1. Create a file named `config/phdcomics.yaml` with the following content:
 >
@@ -36,7 +36,7 @@ The big problem with phdcomics is that there is no nice API to retrive the comic
 in Python to demonstrate webhooks abilitity to call self-defined python functions. Please note the `url = galaxyRoot + 'api/webhooks/phdcomics/get_data';`, which
 calls an REST endpoint defined by use in the next step. The return value of this endpoint is retrived in JS and can be displayed or modified.
 
-> ### :pencil2: Hands-on
+> ### {% icon hands_on %} Hands-on
 >
 > 1. Create a file named `static/script.js` with the following content:
 >
@@ -106,7 +106,7 @@ Please note that the `main()` can consume `params` from your client but also the
 entire user-object, including histories and datasets.
 
 
-> ### :pencil2: Hands-on
+> ### {% icon hands_on %} Hands-on
 >
 > 1. Create a file named `helper/__init__.py` with the following content:
 >
@@ -165,7 +165,7 @@ entire user-object, including histories and datasets.
 To make your webhook appealing you can also add custom CSS which you can use in your HTML/JS code.
 
 
-> ### :pencil2: Hands-on
+> ### {% icon hands_on %} Hands-on
 >
 > 1. Create a file named `static/styles.css` with the following content:
 >
@@ -241,7 +241,7 @@ To make your webhook appealing you can also add custom CSS which you can use in 
 
 Please make sure you have activated webhooks in your `config/galaxy.ini` file by setting the `webhooks_dir` to the path in which your `phdcomics` folder is located.
 
-> ### :pencil2: Hands-on
+> ### {% icon hands_on %} Hands-on
 >
 > 1. Submit one tool and see if your webhook is working on the tool-submit page.
 >

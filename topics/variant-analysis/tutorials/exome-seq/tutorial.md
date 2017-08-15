@@ -79,7 +79,7 @@ We will follow the pipeline:
 
 ![Exome sequencing pipeline in Galaxy](../../images/genVAST.png)
 
-> ### :bulb: Tip:
+> ### {% icon tip %} Tip:
 >
 > For a more detailed tutorial, have a look at the [tutorial on diploid variant calling](https://github.com/nekrut/galaxy/wiki/Diploid-variant-calling). It
 > follows a similar pipeline using genome in the bottle data, but with more details
@@ -106,7 +106,7 @@ Most of the data pre-processing have already be done on the raw exome sequencing
 The raw exome sequences were mapped on `hg19` version of the human genome. So,
 for each family member, we will start with one BAM file with mapping results.
 
-> ### :pencil2: Hands-on: Data pre-processing
+> ### {% icon hands_on %} Hands-on: Data pre-processing
 >
 > 1.  Import all 3 BAM's into a new history:
 >     - [Father](https://zenodo.org/record/60520/files/father.bam)  
@@ -116,7 +116,7 @@ for each family member, we will start with one BAM file with mapping results.
 >     1. Click on **Edit attributes** (pencil icon on right panel)
 >     2. Select `Human Feb 2009` on **Database/Build**
 >     3. Save it
-> 2. Import the reference genome :wrench::
+> 2. Import the reference genome {% icon tool %}:
 >    1. Go on **Data Libraries** in **Shared data** (top panel on Galaxy's interface)
 >    2. Click on **Training Data**
 >    3. Select `hg19`
@@ -137,11 +137,10 @@ variant detector designed to find small polymorphisms, specifically SNPs
 (multi-nucleotide polymorphisms), and complex events (composite insertion and
 substitution events) smaller than the length of a short-read sequencing alignment.
 
-> ### :pencil2: Hands-on: Generating FreeBayes calls
+> ### {% icon hands_on %} Hands-on: Generating FreeBayes calls
 >
-> 1. Select **FreeBayes** from **Phenotype Association** section of the tool menu (left
-> panel of Galaxy's interface)
-> 2. Run it:wrench::
+> 1. Select **FreeBayes** in the tool menu (left panel of Galaxy's interface)
+> 2. Run **FreeBayes**{% icon tool %}:
 >    1. Load reference genome from local cache
 >    2. Use `Human (Homo sapiens): hg19` as reference genome
 >    3. Choose other default settings
@@ -160,10 +159,10 @@ Before we can continue, we need to post-process this dataset by breaking
 compound variants into multiple independent variants and filter the VCF file
 to simplify the variant representation.
 
-> ### :pencil2: Hands-on: Post-processing FreeBayes calls
+> ### {% icon hands_on %} Hands-on: Post-processing FreeBayes calls
 >
 > 1. Split your allelic primitives (gaps or mismatches) into multiple VCF lines
-> with **VcfAllelicPrimitives** from **VCF Tools** :wrench::
+> with **VcfAllelicPrimitives** from **VCF Tools** {% icon tool %}:
 >    1. Select the FreeBayes output file as VCF dataset
 >    2. Make sure **Maintain site and allele-level annotations when decomposing** and
 >    **Maintain genotype-level annotations when decomposing** are set to `Yes`
@@ -172,7 +171,7 @@ to simplify the variant representation.
 >
 {: .hands_on}
 
-> ### :bulb: Tip:
+> ### {% icon tip %} Tip:
 >
 > Have a look at the examples which help you constructing the correct expression.
 {: .tip}
@@ -182,7 +181,7 @@ to simplify the variant representation.
 To annotate the variants, we use the [dbSNP](https://www.ncbi.nlm.nih.gov/SNP/),
 the NCBI database of genetic variation and then `hg19` database with **SnpEff**.
 
-> ### :pencil2: Hands-on: Annotating variants
+> ### {% icon hands_on %} Hands-on: Annotating variants
 >
 > 1. Import the [dbSNP_138.hg19.vcf](https://zenodo.org/record/60520/files/dbSNP_138.hg19.vcf)
 >in your history (Build 138 data, available on the human assembly (GRCh37/hg19))
@@ -198,7 +197,7 @@ the NCBI database of genetic variation and then `hg19` database with **SnpEff**.
 
 Look at your **"INFO"** column again in the generated VCF file. You will get some gene names for your variants, but also a predicted impact and if your variant is located inside of a known gene.
 
-> ### :bulb: Tip:
+> ### {% icon tip %} Tip:
 >
 > You can also have a look at the HTML report. It contains a number of useful
 metrics such as distribution of variants across gene features.
@@ -209,18 +208,18 @@ metrics such as distribution of variants across gene features.
 At this stage, you have your first annotated variants and in theory everything
 you need for your further studies is included in your VCF file.
 
-> ### :pencil2: Hands-on: Getting VCF file
+> ### {% icon hands_on %} Hands-on: Getting VCF file
 >
-> 1. Extract your history to a workflow :wrench:
-> 2. Apply this workflow to the other BAM files :wrench:
+> 1. Extract your history to a workflow {% icon tool %}
+> 2. Apply this workflow to the other BAM files {% icon tool %}
 >
->    > ### :nut_and_bolt: Comments
+>    > ### {% icon comment %} Comments
 >    > You should now have 3 annotated variant files, from mother, father and the
 >    > patient. It might be a good idea to rename them accordingly.
 >    {: .comment}
 >
 > 3. Combine all 3 files into one with the tool **VCFcombine** from
-> **VCF Tools** :wrench:
+> **VCF Tools** {% icon tool %}
 >
 {: .hands_on}
 
@@ -228,7 +227,7 @@ Now that we have an annotated VCF file it is time to peek inside our variation d
 
 # Post-processing
 
-> ### :pencil2: Hands-on: Post-processing
+> ### {% icon hands_on %} Hands-on: Post-processing
 >
 > 1. Create a pedigree file (PED) like this
 >
@@ -242,7 +241,7 @@ Now that we have an annotated VCF file it is time to peek inside our variation d
 > 2. Use the tool **GEMINI load** in **Gemini** to create a database out of your
 > combined VCF file and the PED file.
 >
->    > ### :nut_and_bolt: Comments
+>    > ### {% icon comment %} Comments
 >    >
 >    > This creates a sqlite database. To see the content of the database use
 >    > **GEMINI_db_info**
@@ -252,7 +251,7 @@ Now that we have an annotated VCF file it is time to peek inside our variation d
 
 Either way you have now a database with all your variants, with pedigree
 relations, additional annotations and most importantly its fast to search.
-> ### :bulb: Tip:
+> ### {% icon tip %} Tip:
 >
 > Have a look at all different **Gemini** tools and run as many tools as possible on
 > your GEMINI databases. Try to get a feeling of what is possible with a variant
@@ -276,11 +275,11 @@ have a high impact
 also shows you the reference allele and the alternative allele and the RSID for
 the SNP if it exists
 
-> ### :bulb: Tip:
+> ### {% icon tip %} Tip:
 >
 > Switch on the `--header` parameter**
 >
-> > ### :bulb: Tip:
+> > ### {% icon tip %} Tip:
 > >
 > > To go further on **Gemini**, you can have a look at the following tutorials:
 > >

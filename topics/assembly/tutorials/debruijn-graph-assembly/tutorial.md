@@ -26,12 +26,12 @@ SPAdes is a de novo genome assembler written by Pavel Pevzner's group in St. Pet
 
 We will be using the same data that we used in the introductory tutorial, so if you have already completed that and have the data, skip this section.
 
-> ### :pencil2: Hands-on: Getting the data
+> ### {% icon hands_on %} Hands-on: Getting the data
 >
 > 1. Create and name a new history for this tutorial.
-> 2. Import the sequence read raw data (\*.fastq) from [Zenodo](https://doi.org/10.5281/zenodo.582600)
+> 2. Import the sequence read raw data (\*.fastq) from [Zenodo](https://zenodo.org/record/582600)
 >
->    > ### :bulb: Tip: Importing data via links
+>    > ### {% icon tip %} Tip: Importing data via links
 >    >
 >    > * Copy the link location (Right-click on the filename <i class="fa fa-long-arrow-right"></i> Copy Link Address)
 >    > * Open the Galaxy Upload Manager
@@ -46,7 +46,7 @@ We will be using the same data that we used in the introductory tutorial, so if 
 >
 > Click on the View Data button (the ![Eye icon](../../images/eye.png)) next to one of the FASTQ sequence files.
 >
->    > ### :question: Questions
+>    > ### {% icon question %} Questions
 >    >
 >    > 1. What are four key features of a FASTQ file?
 >    > 2. What is the main difference between a FASTQ and a FASTA file?
@@ -59,9 +59,9 @@ We will be using the same data that we used in the introductory tutorial, so if 
 
 We will perform an assembly with the Velvet Optimiser. It will automatically choose a suitable value for the k-mer size (**k**). It will then go on to optimise the coverage cutoff (**cov_cutoff**) which corrects for read errors. It will use the "*n50*" metric for optimising the k-mer size and the "*total number of bases in contigs*" for optimising the coverage cutoff.
 
-> ### :pencil2: Hands-on: Assemble with the Velvet Optimiser
+> ### {% icon hands_on %} Hands-on: Assemble with the Velvet Optimiser
 >
-> #### Use the **Velvet Optimiser** :wrench: tool.
+> #### Use the **Velvet Optimiser** {% icon tool %} tool.
 >
 > - Set the following parameters (leave other settings as they are):
 >
@@ -86,13 +86,13 @@ Your history will now contain a number of new files:
 Have a look at each file.
 
 
-> ### :pencil2: Hands-on: Get contig statistics for Velvet Optimiser contigs  
+> ### {% icon hands_on %} Hands-on: Get contig statistics for Velvet Optimiser contigs
 >
-> #### Use the **Fasta Statistics** :wrench: tool to produce a summary of the velvet optimiser contigs
+> #### Use the **Fasta Statistics** {% icon tool %} tool to produce a summary of the velvet optimiser contigs
 >
 > Look at the output file.
 >
->    > ### :question: Questions
+>    > ### {% icon question %} Questions
 >    >
 >    > Compare the output we got here with the output of the simple assemblies obtained in the introductory tutorial.
 >    > 1. What are the main differences between them?
@@ -111,9 +111,9 @@ Tables of results from **(a)** Simple assembly and **(b)** optimised assembly.
 
 We will now perform an assembly with the much more modern SPAdes assembler. It goes through a similar process to Velvet in the fact that it uses and simplifies de Bruijn graphs but it uses multiple values for k-mer size and combines the resultant graphs. This combination produces very good assemblies. When using SPAdes it is typical to choose at least 3 k-mer sizes. One lowm one medium and one high. We will use 33, 55 and 91.
 
-> ### :pencil2: Hands-on: Assemble with SPAdes
+> ### {% icon hands_on %} Hands-on: Assemble with SPAdes
 >
-> #### Use the **SPAdes** :wrench: tool.
+> #### Use the **SPAdes** {% icon tool %} tool.
 >
 > - Set the following parameters (leave other settings as they are):
 >
@@ -135,7 +135,7 @@ Examine each file, especially the stats files.
 
 ![](../../images/contig_stats.png)
 
-> ### :question: Questions
+> ### {% icon question %} Questions
 >
 > 1. Why would one of the contigs have much higher coverage than the others?
 > 2. What could this represent?
@@ -143,14 +143,14 @@ Examine each file, especially the stats files.
 {: .question}
 
 
-> ### :pencil2: Hands-on: Get contig statistics for SPAdes contigs    
+> ### {% icon hands_on %} Hands-on: Get contig statistics for SPAdes contigs
 >
 >
-> #### Use the **Fasta Statistics** :wrench: tool to produce a summary of the SPAdes contigs
+> #### Use the **Fasta Statistics** {% icon tool %} tool to produce a summary of the SPAdes contigs
 >
 > Look at the output file.
 >
->    > ### :question: Questions
+>    > ### {% icon question %} Questions
 >    >
 >    > Compare the output we got here with the output of the simple assemblies obtained in the introductory tutorial.
 >    > 1. What are the main differences between them?

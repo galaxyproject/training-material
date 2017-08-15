@@ -38,7 +38,7 @@ We can use Jekyll to run a server to check if the tutorial is correctly added an
 
 The first step is to install the requirements inside a conda environment. This step has to be done once.
 
-> ### :pencil2: Hands-on: Install the requirements
+> ### {% icon hands_on %} Hands-on: Install the requirements
 >
 > 1. Install [conda](https://conda.io/miniconda.html)
 > 2. Navigate to `training-material/` folder
@@ -51,13 +51,13 @@ The first step is to install the requirements inside a conda environment. This s
 
 Once Jekyll and its modules are installed in our conda environment, we can check the generation of the website locally:
 
-> ### :pencil2: Hands-on: Checking the website generation locally
+> ### {% icon hands_on %} Hands-on: Checking the website generation locally
 > 
 > 1. (If not done) Activate the conda environment: `source activate galaxy_training_material`
 > 1. Run a local Jekyll server with `make serve`
 > 2. Visualize at [http://localhost:4000/ ](http://localhost:4000/)
 >
->    > ### :question: Questions
+>    > ### {% icon question %} Questions
 >    >
 >    > How to check if the server was started and if all topics are included?
 >    >
@@ -76,7 +76,7 @@ Once you are done, you can stop the server with `ctrl-c` and deactivate your con
 
 A PDF file of every tutorials and slide decks can be generated, using Chrome on command line and [Decktape](https://github.com/astefanutti/decktape).
 
-> ### :pencil2: Hands-on: Checking the website generation locally
+> ### {% icon hands_on %} Hands-on: Checking the website generation locally
 >
 > 1. (If not done) Activate the conda environment: `source activate galaxy_training_material`
 > 1. Install Chrome

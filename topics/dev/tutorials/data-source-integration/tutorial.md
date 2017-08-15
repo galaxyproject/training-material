@@ -11,11 +11,11 @@ An important goal of Galaxy is scalability. A major bottleneck when it comes to 
 ![data_source_integration](../../images/data_source_integration.png)
 
 
-Galaxy provides an interface such that it can communicate with other servers to get data directly into the Galaxy environment of a user without the need of "downloading" the data. We (have used/will use) the UCSC table browser in this course, and in this hands on, we will use the resource from [DoRiNA Server](https://dorina.mdc-berlin.de/) [(Blin et al. 2014, Nucleic Acids Research.)](http://www.ncbi.nlm.nih.gov/pubmed/25416797),
+Galaxy provides an interface such that it can communicate with other servers to get data directly into the Galaxy environment of a user without the need of "downloading" the data. We (have used/will use) the UCSC table browser in this course, and in this hands on, we will use the resource from [DoRiNA Server](http://dorina.mdc-berlin.de/) [(Blin et al. 2014, Nucleic Acids Research.)](http://www.ncbi.nlm.nih.gov/pubmed/25416797),
 but the main point about this short section is:
 if you have a data source which you think is very important for your research with Galaxy let us know!
 
-:pencil2: ***Hands on!***
+{% icon hands_on %} ***Hands on!***
 
 1. Create a new history called "doRiNA"
 2. Go to Get Data::doRiNA search

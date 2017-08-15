@@ -74,7 +74,7 @@ with:
 - `owner`: the owner of the wrapper of the tool in the ToolShed
 - `tool_panel_section_label`: section where to put the tool (in the left panel in the Galaxy instance)
 
-> ### :pencil2: Hands-on: Fill the `tools.yaml`
+> ### {% icon hands_on %} Hands-on: Fill the `tools.yaml`
 >
 > 1. Add the BLAST tool into the `tools.yaml` file
 {: .hands_on}
@@ -104,7 +104,7 @@ with:
 
 The URL must refer to the URL of the files in Zenodo.
 
-> ### :pencil2: Hands-on: Fill the `data-library.yaml`
+> ### {% icon hands_on %} Hands-on: Fill the `data-library.yaml`
 >
 > 1. Add the input files into the `data-library.yaml` file
 > 2. Add the link to Zenodo in the `metadata.yaml` file
@@ -137,7 +137,7 @@ data_managers:
 
 Once the tutorial is ready, we need to extract workflows with the different steps of the tutorial and add them to the `workflows` directory in the tutorial with some explanation about the tutorial in a `README.md` file
 
-> ### :pencil2: Hands-on: Extract the workflow
+> ### {% icon hands_on %} Hands-on: Extract the workflow
 >
 > 1. Extract the workflow for the tutorial
 > 2. Add some description about the tutorial in a `README.md` file with the workflow file
@@ -146,7 +146,7 @@ Once the tutorial is ready, we need to extract workflows with the different step
 ## Adding a Galaxy Interactive Tour
 
 A Galaxy Interactive Tour is a way to go through an entire analysis, step by step inside Galaxy in an interactive and explorative way.
-It is a great way to run the tutorial directly inside Galaxy. To learn more about creating a Galaxy tour please have a look at our [dedicated tour training](topics/training/tutorials/create-new-tutorial-tours/tutorial.html).
+It is a great way to run the tutorial directly inside Galaxy. To learn more about creating a Galaxy tour please have a look at our [dedicated tour training]({{site.url}}/topics/training/tutorials/create-new-tutorial-tours/tutorial.html).
 
 ## Testing the technical infrastructure
 
@@ -154,7 +154,7 @@ Once we defined all the requirements for running the tutorial, we can test these
 
 Every topic will come with a Docker image containing the tools, data, workflows and Galaxy Interactive Tours required by each tutorial of this topic. The Docker image is described in the Dockerfile found in the `docker` directory of each topic. This file uses scripts to automatically add the files for each tutorial. The only thing to change is the name of the topic in the Dockerfile copied from the templates.
 
-> ### :pencil2: Hands-on: Testing the Docker
+> ### {% icon hands_on %} Hands-on: Testing the Docker
 >
 > 1. Check that the Dockerfile uses 'sequence-analysis' as topic name
 > 2. Move to the root of the training material repository

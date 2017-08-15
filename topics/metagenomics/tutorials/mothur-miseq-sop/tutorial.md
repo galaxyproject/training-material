@@ -9,7 +9,7 @@ tutorial_name: mothur-miseq-sop
 
 In this tutorial we will perform the
 [Standard Operating Procedure (SOP) for MiSeq data](https://www.mothur.org/wiki/MiSeq_SOP), developed by the
-creators of the Mothur software package, the [Schloss lab](https://www.schlosslab.org/), within Galaxy.
+creators of the Mothur software package, the [Schloss lab](http://www.schlosslab.org/), within Galaxy.
 
 > ### Agenda
 >
@@ -21,7 +21,7 @@ creators of the Mothur software package, the [Schloss lab](https://www.schlossla
 {: .agenda}
 
 
-> ### :nut_and_bolt: Note
+> ### {% icon comment %} Note
 > Each of the Mothur tools in Galaxy contains a link to the mothur wiki in the help section. Here you can find
 > more details about all the inputs, outputs and parameters for the tool.
 > <br><br>
@@ -34,7 +34,7 @@ creators of the Mothur software package, the [Schloss lab](https://www.schlossla
 
 In this tutorial we use 16S rRNA data, but similar pipelines can be used for WGS data.
 
-> ### :book: Background: The 16S ribosomal RNA gene
+> ### {% icon tip %} Background: The 16S ribosomal RNA gene
 > ![](../../images/16S_gene.png) <br><br>
 >
 > The 16S rRNA gene has several properties that make it ideally suited for our purposes
@@ -66,7 +66,7 @@ To make this tutorial easier to execute, we are providing only part of the data 
 animal at 10 time points (5 early and 5 late). In order to assess the error rate of our analysis pipeline and experimental
 setup, we additionally resequenced a mock community composed of genomic DNA from 21 bacterial strains.
 
-> ### :nut_and_bolt: Dataset details
+> ### {% icon comment %} Dataset details
 > Because of the large size of the original dataset (3.9 GB) you are given 20 of the 362 pairs of fastq
 > files. For example, you will see two files: `F3D0_S188_L001_R1_001.fastq`, and
 > `F3D0_S188_L001_R2_001.fastq`  
@@ -89,11 +89,11 @@ in this document differ slightly from the description on their website -->
 
 Now that we know what our input data is, let's get it into our Galaxy history:
 
-> ### :pencil2: Hands-on: Obtaining our data
+> ### {% icon hands_on %} Hands-on: Obtaining our data
 >
 > 1. Make sure you have an empty analysis history. Give it a name.
 >
->    > ### :bulb: Starting a new history
+>    > ### {% icon tip %} Starting a new history
 >    >
 >    > * Click the **gear icon** at the top of the history panel
 >    > * Select the option **Create New** from the menu
@@ -123,7 +123,7 @@ Now that's a lot of files to manage. Luckily Galaxy can make life a bit easier b
 *dataset collections*. This enables us to easily run tools on multiple datasets at once. Let's
 create a collection now:
 
-> ### :pencil2: Hands-on: Organizing our data into a collection
+> ### {% icon hands_on %} Hands-on: Organizing our data into a collection
 >
 > Since we have paired-end data, each sample consist of two separate fastq files, one containing the
 > forward reads, and one containing the reverse reads. We can recognize the pairing from the file names,
@@ -164,7 +164,7 @@ the sequence and quality score data from your fastq files, create the reverse co
 read and then join the reads into contigs. Then we will combine all samples into a single fasta file,
 remembering which reads came from which samples using a *group* file.
 
-> ### :nut_and_bolt: Algorithm details
+> ### {% icon comment %} Algorithm details
 > We have a very simple algorithm to do this. First, we align the pairs of sequences. Next, we look
 > across the alignment and identify any positions where the two reads disagree. If one sequence has a
 > base and the other has a gap, the quality score of the base must be over 25 to be considered real. If
@@ -183,9 +183,9 @@ fragment, resulting in an overlap in the middle. We will now combine these pairs
 ![](../../images/16S_merge_contigs.png)
 
 
-> ### :pencil2: Hands-on: Combine forward and reverse reads into contigs
+> ### {% icon hands_on %} Hands-on: Combine forward and reverse reads into contigs
 >
-> - **Make.contigs** :wrench: with the following parameters
+> - **Make.contigs** {% icon tool %} with the following parameters
 >   - "Way to provide files" to the *Multiple pairs - Combo mode*
 >   - "Fastq pairs" to the collection you just created
 >   - Leave all other parameters to the default settings <br><br>
@@ -209,13 +209,13 @@ Here the first column contains the read name, and the second column contains the
 ### Data Cleaning
 
 For more information on the topic of quality control, please see our training materials
-[here](https://galaxyproject.github.io/training-material/topics/sequence-analysis/)
+[here]({{site.url}}/topics/sequence-analysis/)
 
 Next we want to improve the quality of our data. But first, let's get a feel of our data
 
-> ### :pencil2: Hands-on: Summarize data
+> ### {% icon hands_on %} Hands-on: Summarize data
 >
-> - **Summary.seqs** :wrench: with the following parameters
+> - **Summary.seqs** {% icon tool %} with the following parameters
 >   - "fasta" parameter to the `trim.contigs.fasta` file created by the make.contigs tool
 >   - We do not need to supply a names or count file
 >
@@ -245,15 +245,15 @@ step when we run `screen.seqs`.
 
 The following tool will remove any sequences with ambiguous bases and anything longer than 275 bp.
 
-> ### :pencil2: Hands-on: Filter reads based on quality and length
+> ### {% icon hands_on %} Hands-on: Filter reads based on quality and length
 >
-> - **Screen.seqs** :wrench: with the following parameters
+> - **Screen.seqs** {% icon tool %} with the following parameters
 >   - "fasta" to the `trim.contigs.fasta` file created by the make.contigs tool
 >   - "group" the group file created in the make.contigs step
 >   - "maxlength" parameter to `275`
 >   - "maxambig" parameter to `0`
 >
-> > ### :question: Question
+> > ### {% icon question %} Question
 > >
 > > How many reads were removed in this screening step? (Hint: run the summary.seqs tool again)
 > >
@@ -274,13 +274,13 @@ Because we are sequencing many of the same organisms, we anticipate that many of
 duplicates of each other. Because it's computationally wasteful to align the same thing a bazillion
 times, we'll unique our sequences using the `unique.seqs` command:
 
-> ### :pencil2: Hands-on: Remove duplicate sequences
+> ### {% icon hands_on %} Hands-on: Remove duplicate sequences
 >
-> - **Unique.seqs** :wrench: with the following parameters
+> - **Unique.seqs** {% icon tool %} with the following parameters
 >   - "fasta" to the `good.fasta` output from Screen.seqs
 >
 >
-> > ### :question: Question
+> > ### {% icon question %} Question
 > >
 > > How many sequences were unique? how many duplicates were removed?
 > >
@@ -311,9 +311,9 @@ read_name7    read_name8
 
 To reduce file sizes further and streamline analysis, we can now summarize the data in a *count table*.
 
-> ### :pencil2: Hands-on: Generate count table
+> ### {% icon hands_on %} Hands-on: Generate count table
 >
-> - **Count.seqs** :wrench: with the following parameters
+> - **Count.seqs** {% icon tool %} with the following parameters
 >   - "name" to the `names` output from Unique.seqs
 >   - "Use a Group file" to `yes`
 >   - "group" to the group file we created using the Screen.seqs tool
@@ -335,18 +335,18 @@ the number of duplicates of this sequence observed in each sample.
 ### Sequence Alignment
 
 For more information on the topic of alignment, please see our training materials
-[here](https://galaxyproject.github.io/training-material/topics/sequence-analysis/)
+[here]({{site.url}}/topics/sequence-analysis/)
 
 We are now ready to align our sequences to the reference. This step is an important
 step to perform to improve the clustering of your OTUs [[Schloss 2013]](https://doi.org/10.1038/ismej.2012.102)
 
-> ### :pencil2: Hands-on: Align sequences
+> ### {% icon hands_on %} Hands-on: Align sequences
 >
-> 1. **Align.seqs** :wrench: with the following parameters
+> 1. **Align.seqs** {% icon tool %} with the following parameters
 >   - "fasta" to the fasta output from Unique.seqs
 >   - "reference" to the `silva.v4.fasta` reference file
 > <br><br>
-> 2. **Summary.seqs** :wrench: with the following parameters
+> 2. **Summary.seqs** {% icon tool %} with the following parameters
 >   - "fasta" parameter to the aligned output from previous step
 >   - "count" parameter to `count_table` output from Count.seqs
 >
@@ -381,9 +381,9 @@ start at or before position 1968 and end at or after position 11550. We'll also 
 homopolymer length to 8 since there's nothing in the database with a stretch of 9 or more of the same
 base in a row (this also could have been done in the first execution of screen.seqs above).
 
-> ### :pencil2: Hands-on: Remove poorly aligned sequences
+> ### {% icon hands_on %} Hands-on: Remove poorly aligned sequences
 >
-> - **Screen.seqs** :wrench: with the following parameters
+> - **Screen.seqs** {% icon tool %} with the following parameters
 >   - "fasta" to the aligned fasta file
 >   - "start" to 1968
 >   - "end" to 11550
@@ -392,7 +392,7 @@ base in a row (this also could have been done in the first execution of screen.s
 >
 > **Note:** we supply the count table so that it can be updated for the sequences we're removing.
 >
-> > ### :question: Question
+> > ### {% icon question %} Question
 > >
 > >  How many sequences were removed in this step?
 > > <details>
@@ -409,9 +409,9 @@ paired-end sequencing, this shouldn't be much of an issue. In addition, there ar
 columns in the alignment that only contain gap characters (i.e. "."). These can be pulled out without
 losing any information. We'll do all this with filter.seqs:
 
-> ### :pencil2: Hands-on: Filter sequences
+> ### {% icon hands_on %} Hands-on: Filter sequences
 >
-> - **Filter.seqs** :wrench: with the following parameters
+> - **Filter.seqs** {% icon tool %} with the following parameters
 >   - "fasta"" to good.fasta output from Sreen.seqs
 >   - "vertical" to Yes
 >   - "trump" to `.`
@@ -431,13 +431,13 @@ characters using `trump=.` and vertical gap characters using `vertical=yes`. The
 columns. Because we've perhaps created some redundancy across our sequences by trimming the ends, we can re-run
 `unique.seqs`:
 
-> ### :pencil2: Hands-on: Re-obtain unique sequences
+> ### {% icon hands_on %} Hands-on: Re-obtain unique sequences
 >
-> - **Unique.seqs** :wrench: with the following parameters
+> - **Unique.seqs** {% icon tool %} with the following parameters
 >   - "fasta" to the `filtered fasta` output from Filter.seqs
 >   - "name file or count table" to the count table from the last Screen.seqs
 >
-> > ### :question: Question
+> > ### {% icon question %} Question
 > >
 > >  How many duplicate sequences did our filter step produce?
 > > <details>
@@ -457,14 +457,14 @@ sequences by group and then sort them by abundance and go from most abundant to 
 sequences that differ no more than 2 nucleotides from on another. If this is the case, then they get
 merged. We generally recommend allowing 1 difference for every 100 basepairs of sequence:
 
-> ### :pencil2: Hands-on: Perform preliminary clustering of sequences
+> ### {% icon hands_on %} Hands-on: Perform preliminary clustering of sequences
 >
-> - **Pre.cluster** :wrench: with the following parameters
+> - **Pre.cluster** {% icon tool %} with the following parameters
 >   - "fasta" to the fasta output from the last Unique.seqs run
 >   - "name file or count table" to the count table from the last Unique.seqs
 >   - "diffs" to 2
 >
-> > ### :question: Question
+> > ### {% icon question %} Question
 > >
 > >  How many unique sequences are we left with after this clustering of highly similar sequences?
 > > <details>
@@ -480,7 +480,7 @@ merged. We generally recommend allowing 1 difference for every 100 basepairs of 
 At this point we have removed as much sequencing error as we can, and it is time to turn our attention to
 removing sequencing artefacts known as chimeras.
 
-> ### :book: Background: Chimeras
+> ### {% icon tip %} Background: Chimeras
 > ![](../../images/chimeras.jpg)
 > (slide credit: [http://slideplayer.com/slide/4559004/ ](http://slideplayer.com/slide/4559004/ ))
 {: .tip}
@@ -493,9 +493,9 @@ is flagged as chimeric in one sample, the default (`dereplicate=No`) is to remov
 experience suggests that this is a bit aggressive since we've seen rare sequences get flagged as chimeric
 when they're the most abundant sequence in another sample. This is how we do it:
 
-> ### :pencil2: Hands-on: Remove chimeric sequences
+> ### {% icon hands_on %} Hands-on: Remove chimeric sequences
 >
-> - **Chimera.uchime** :wrench: with the following parameters
+> - **Chimera.uchime** {% icon tool %} with the following parameters
 >   - "fasta" to the fasta output from Pre.cluster
 >   - "Select Reference Template from" to `Self`
 >   - "count" to the count table from the last Pre.cluster
@@ -504,12 +504,12 @@ when they're the most abundant sequence in another sample. This is how we do it:
 > Running chimera.uchime with the count file will remove the chimeric sequences from the count table, but we
 > still need to remove those sequences from the fasta file as well. We do this using remove.seqs:
 >
-> - **Remove.seqs** :wrench: with the following parameters
+> - **Remove.seqs** {% icon tool %} with the following parameters
 >   - "accnos" to the uchime.accnos file from Chimera.uchime
 >   - "fasta" to the fasta output from Pre.cluster
 >   - "count" to the count table from Chimera.uchime
 >
-> > ### :question: Question
+> > ### {% icon question %} Question
 > >
 > >  How many sequences were flagged as chimeric? what is the percentage? (Hint: summary.seqs)
 > > <details>
@@ -536,9 +536,9 @@ that chloroplasts and mitochondria have no functional role in a microbial commun
 
 Let's go ahead and classify those sequences using the Bayesian classifier with the `classify.seqs` command:
 
-> ### :pencil2: Hands-on: Remove undesired sequences
+> ### {% icon hands_on %} Hands-on: Remove undesired sequences
 >
-> - **Classify.seqs** :wrench: with the following parameters
+> - **Classify.seqs** {% icon tool %} with the following parameters
 >   - "fasta" to the fasta output from Remove.seqs
 >   - "reference" to `trainset9032012.pds.fasta` from your history
 >   - "taxonomy" to `trainset9032012.pds.tax` from your history
@@ -550,14 +550,14 @@ Let's go ahead and classify those sequences using the Bayesian classifier with t
 > Now that everything is classified we want to remove our undesirables. We do this with the remove.lineage
 > command:
 >
-> - **Remove.lineage** :wrench: with the following parameters
+> - **Remove.lineage** {% icon tool %} with the following parameters
 >   - "taxonomy" to the taxonomy output from Classify.seqs
 >   - "taxon" to `Chloroplast-Mitochondria-unknown-Archaea-Eukaryota` in the text box under *Manually
 > select taxons for filtering*
 >   - "fasta" to the fasta output from Remove.seqs
 >   - "count" to the count table from Remove.seqs
 >
-> > ### :question: Questions
+> > ### {% icon question %} Questions
 > >
 > > 1. How many unique (representative) sequences were removed in this step?
 > > 2. How many sequences in total?
@@ -589,7 +589,7 @@ community, that is, a sample of which you know the exact composition. This is so
 every 95 samples we sequence. You should too because it will help you gauge your error rates and allow
 you to see how well your curation is going, and whether something is wrong with your sequencing setup.
 
-> ### :nut_and_bolt: Definition
+> ### {% icon comment %} Definition
 >
 > **Mock community:** A defined mixture of microbial cells and/or viruses or nucleic acid molecules created
 > *in vitro* to simulate the composition of a microbiome sample or the nucleic acid isolated therefrom.
@@ -601,11 +601,11 @@ exactly what we would expect the analysis to produce as a result.
 
 First, let's extract the sequences belonging to our mock samples from our data:
 
-> ### :pencil2: Hands-on: extract mock sample from our dataset
+> ### {% icon hands_on %} Hands-on: extract mock sample from our dataset
 >
 >
 >
-> 1. **Get.groups** :wrench: with the following parameters
+> 1. **Get.groups** {% icon tool %} with the following parameters
 >   - "group file or count table" to the count table from Remove.lineage
 >   - "groups" to `Mock`
 >   - "fasta" to fasta output from Remove.lineage
@@ -623,8 +623,8 @@ This tells us that we had 67 unique sequences and a total of 4,060 total sequenc
 can now use the `seq.error` command to measure the error rates based on our mock reference. Here we align
 the reads from our mock sample back to their known sequences, to see how many fail to match.
 
-> ### :pencil2: Hands-on: Assess error rates based on a mock community
-> - **Seq.error** :wrench: with the following parameters
+> ### {% icon hands_on %} Hands-on: Assess error rates based on a mock community
+> - **Seq.error** {% icon tool %} with the following parameters
 >   - "fasta" to the fasta from Get.groups
 >   - "reference" to `HMP_MOCK.v35.fasta` file from your history
 >   - "count" to the count table from Get.groups
@@ -651,7 +651,7 @@ That rocks, eh? Our error rate is 0.0065%!
 
 We can now cluster the mock sequences into OTUs to see how many spurious OTUs we have:
 
-> ### :book: Background: Operational Taxonomic Units (OTUs)
+> ### {% icon tip %} Background: Operational Taxonomic Units (OTUs)
 >
 > In 16S metagenomics approaches, OTUs are clusters of similar sequence variants of the 16S rDNA marker gene
 > sequence. Each of these clusters is intended to represent a taxonomic unit of a bacteria species or genus
@@ -665,33 +665,33 @@ We can now cluster the mock sequences into OTUs to see how many spurious OTUs we
 {: .tip}
 
 
-> ### :pencil2: Hands-on: Cluster mock sequences into OTUs
+> ### {% icon hands_on %} Hands-on: Cluster mock sequences into OTUs
 >
 > First we calculate the pairwise distances between our sequences
 >
-> - **Dist.seqs** :wrench: with the following parameters
+> - **Dist.seqs** {% icon tool %} with the following parameters
 >   - "fasta" to the fasta from Get.groups
 >   - "cutoff" to `0.20`
 >  
 > Next we group sequences into OTUs
 >
-> - **Cluster** :wrench: with the following parameters
+> - **Cluster** {% icon tool %} with the following parameters
 >   - "column" to the dist output from Dist.seqs
 >   - "count" to the count table from Get.groups
 >
 > Now we make a *shared* file that summarizes all our data into one handy table
 >
-> - **Make.shared** :wrench: with the following parameters
+> - **Make.shared** {% icon tool %} with the following parameters
 >     - "list" to the OTU list from Cluster
 >     - "count" to the count table from Get.groups
 >     - "label" to `0.03` (this indicates we are interested in the clustering at a 97% identity threshold)
 >
 > And now we generate intra-sample rarefaction curves
 >
-> - **Rarefaction.single** :wrench: with the following parameters
+> - **Rarefaction.single** {% icon tool %} with the following parameters
 >   - "shared" to the shared file from Make.shared
 >
-> > ### :question: Question
+> > ### {% icon question %} Question
 > >
 > >  How many OTUs were identified in our mock community?
 > > <details>
@@ -710,7 +710,7 @@ includes some stealthy chimeras that escaped our detection methods. If we used 3
 have about 31 OTUs. In a perfect world with no chimeras and no sequencing errors, we'd have 21 OTUs.
 This is not a perfect world. But this is pretty darn good!
 
-> ### :book: Background: Rarefaction
+> ### {% icon tip %} Background: Rarefaction
 >
 > To estimate the fraction of species sequenced, rarefaction curves are typically used. A rarefaction curve
 > plots the number of species as a function of the number of individuals sampled. The curve usually begins
@@ -739,9 +739,9 @@ our real samples.
 using
 the `remove.groups` command:
 
-> ### :pencil2: Hands-on: Remove Mock community from our dataset
+> ### {% icon hands_on %} Hands-on: Remove Mock community from our dataset
 >
-> - **Remove.groups** :wrench: with the following parameters
+> - **Remove.groups** {% icon tool %} with the following parameters
 >   - "Select input type" to `fasta , name, taxonomy, or list with a group file or count table`
 >   - "count table", "fasta", and "taxonomy" to the respective outputs from Remove.lineage
 >   - "groups" to `Mock`
@@ -763,9 +763,9 @@ multiple processors. In an ideal world we would prefer the traditional route bec
 also think that kind of humor is funny.... In this command we use `taxlevel=4`, which corresponds to the level
 of *Order*. This is the approach that we  generally use in the Schloss lab.
 
-> ### :pencil2: Hands-on: Cluster our data into OTUs
+> ### {% icon hands_on %} Hands-on: Cluster our data into OTUs
 >
-> - **Cluster.split** :wrench: with the following parameters
+> - **Cluster.split** {% icon tool %} with the following parameters
 >   - "Split by" to `Classification using fasta`
 >   - "fasta" to the fasta output from Remove.groups
 >   - "taxonomy" to the taxonomy output from Remove.groups
@@ -776,7 +776,7 @@ of *Order*. This is the approach that we  generally use in the Schloss lab.
 > Next we want to know how many sequences are in each OTU from each group and we can do this using the
 > `Make.shared` command. Here we tell Mothur that we're really only interested in the 0.03 cutoff level:
 >
-> - **Make.shared** :wrench: with the following parameters
+> - **Make.shared** {% icon tool %} with the following parameters
 >   - "Select input type" to `OTU list`
 >   - "list" to list output from Cluster.split
 >   - "count" to the count table from Remove.groups
@@ -785,7 +785,7 @@ of *Order*. This is the approach that we  generally use in the Schloss lab.
 > We probably also want to know the taxonomy for each of our OTUs. We can get the consensus taxonomy for each
 > OTU using the `Classify.otu` command:
 >
-> - **Classify.otu** :wrench: with the following parameters
+> - **Classify.otu** {% icon tool %} with the following parameters
 >   - "list" to output from Cluster.split
 >   - "count" to the count table from Remove.groups
 >   - "taxonomy" to the taxonomy output from Remove.groups
@@ -822,12 +822,12 @@ stability and change in community structure in these samples when comparing earl
 Keep in mind that the group names have either a F or M (sex of animal) followed by a number (number of
 animal) followed by a D and a three digit number (number of days post weaning).
 
-> ### :pencil2: Hands-on: Subsampling
+> ### {% icon hands_on %} Hands-on: Subsampling
 >
 > What we now want to do is see how many sequences we have in each sample. We'll do this with the
 > `Count.groups` command:
 >
-> - **Count.groups** :wrench: with the following parameters
+> - **Count.groups** {% icon tool %} with the following parameters
 >   - "shared" to the shared file from Make.shared
 >
 > Take a look at the output. We see that our smallest sample had 2440 sequences in it. That is a reasonable
@@ -835,12 +835,12 @@ animal) followed by a D and a three digit number (number of days post weaning).
 >
 > We'll generate a subsampled file for our analyses with the `Sub.sample` command:
 >
-> - **Sub.sample** :wrench: with the following parameters
+> - **Sub.sample** {% icon tool %} with the following parameters
 >   - "Select type of data to subsample" to `OTU Shared`
 >   - "shared" to output from Make.shared
 >   - "size" to `2440`
 >
-> > ### :question: Question
+> > ### {% icon question %} Question
 > >
 > >  What would you exect the result of `count.groups` on this new shared file output to be? Check if you are correct.
 > > <details>
@@ -867,8 +867,8 @@ Let's start our analysis by analyzing the alpha diversity of the samples. First 
 curves describing the number of OTUs observed as a function of sampling effort. We'll do this with the
 `Rarefaction.single` command:
 
-> ### :pencil2: Hands-on: Calculate Rarefaction
-> - **Rarefaction.single** :wrench: with the following parameters
+> ### {% icon hands_on %} Hands-on: Calculate Rarefaction
+> - **Rarefaction.single** {% icon tool %} with the following parameters
 >   - "shared" to shared file from Make.shared
 {: .hands_on}
 
@@ -894,17 +894,17 @@ to see is the number of additional OTUs identified when adding more sequences re
 we have covered our full diversity. This information would be easier to interpret in the form of a graph.
 Let's plot the rarefaction curve for a couple of our sequences:
 
-> ### :pencil2: Hands-on: Plot Rarefaction
+> ### {% icon hands_on %} Hands-on: Plot Rarefaction
 > <!-- the following tool is because plotting tool will not detect columns in files inside collections yet -->
 > First let's make our life a little bit easier. As we only have one dataset in our collection anyways, we can
 > collapse it into a single file.
 >
-> - **Collapse Collection** :wrench: with the following parameters
+> - **Collapse Collection** {% icon tool %} with the following parameters
 >   - "Collection of files to collapse to a single dataset" to the rarefaction curve collection
 >
 > Now we are ready to plot our rarefaction curves:
 >
-> - **Plotting tool** :wrench: with the following parameters
+> - **Plotting tool** {% icon tool %} with the following parameters
 >   - "Plot Title" to `Rarefaction`
 >   - "Label for x axis" to `Number of Sequences`
 >   - "Label for y axis" to `Number of OTUs`
@@ -933,9 +933,9 @@ Finally, let's get a table containing the number of sequences, the sample covera
 OTUs, and the Inverse Simpson diversity estimate using the `Summary.single` command. To standardize everything,
 let's randomly select 2440 sequences from each sample 1000 times and calculate the average:
 
-> ### :pencil2: Hands-on: Summary.single
+> ### {% icon hands_on %} Hands-on: Summary.single
 >
-> - **Summary.single** :wrench: with the following parameters
+> - **Summary.single** {% icon tool %} with the following parameters
 >   - "share" to shared file from Make.shared
 >   - "calc" to `nseqs,coverage,sobs,invsimpson`
 >   - "size" to 2440
@@ -975,21 +975,21 @@ repeated-measures ANOVA and find that there was no significant difference based 
 
 Beta diversity is a measure of the similarity of the membership and structure found between *different* samples.
 The default calculator in the following section is *thetaYC*, which is the [Yue & Clayton theta similarity
-coefficient](http://csyue.nccu.edu.tw/ch/2005communicationindex.pdf)
+coefficient](http://www.tandfonline.com/doi/abs/10.1080/STA-200066418)
 
-> ### :pencil2: Hands-on: Beta diversity
+> ### {% icon hands_on %} Hands-on: Beta diversity
 >
 > Let's calculate . We'll do this
 > with the `Dist.shared` command that will allow us to rarefy our data to a common number of sequences.
 >
-> - **Dist.shared** :wrench: with the following parameters
+> - **Dist.shared** {% icon tool %} with the following parameters
 >   - "shared" to the shared file from Make.shared
 >   - "calc" to thetayc,jclass
 >   - "subsample" to 2440
 >
 > Let's visualize our data in a Heatmap
 >
-> - **Heatmap.sim** :wrench: with the following parameters
+> - **Heatmap.sim** {% icon tool %} with the following parameters
 >   - "Generate Heatmap for" to `phylip`
 >   - "phylip" to output by Dist.shared (this is a collection input)
 >  
@@ -1010,18 +1010,18 @@ and the jclass calulator (output `jclass.0.03.lt.ave`):
 When generating Venn diagrams we are limited by the number of samples that we can analyze simultaneously.
 Let's take a look at the Venn diagrams for the first 4 time points of female 3 using the `venn` command:
 
-> ### :pencil2: Hands-on: Venn diagram
+> ### {% icon hands_on %} Hands-on: Venn diagram
 >
 > <!-- need to collapse collection again for group select to work -->
 > First we collapse our collection again
 >
-> - **Collapse Collection** :wrench: with the following parameters
+> - **Collapse Collection** {% icon tool %} with the following parameters
 >   - "Collection" to Subsample.shared output collection from Sub.sample step
 >
 > After the tool has finished, rename the output to `Subsample.shared` to make it easier to recognize in
 > further analysis
 >
-> - **Venn** :wrench: with the following parameters
+> - **Venn** {% icon tool %} with the following parameters
 >   - Set `OTU Shared` to Subsample.shared file from previous step
 >   - Set `groups` to `F3D0,F3D1,F3D2,F3D3`
 {: .hands_on}
@@ -1037,13 +1037,13 @@ umerically rare or just had a low incidence.
 Next, let's generate a dendrogram to describe the similarity of the samples to each other. We will generate a
 dendrogram using the jclass and thetayc calculators within the `tree.shared` command:
 
-> ### :pencil2: Tree
+> ### {% icon hands_on %} Tree
 >
-> 1. **Tree.shared** :wrench: with the following parameters
+> 1. **Tree.shared** {% icon tool %} with the following parameters
 >   - "Select input format" to Phylip Distance Matrix
 >   - "phylip" to dist files from Dist.shared (collection)
 >
-> 2. **Newick display** :wrench: with the following parameters
+> 2. **Newick display** {% icon tool %} with the following parameters
 >  - "Newick file" to output from Tree.shared (collection)
 {: .hands_on}
 
@@ -1064,13 +1064,13 @@ We can perform a test to determine whether the clustering within the tree is sta
 using by choosing from the `parsimony`, `unifrac.unweighted`, or `unifrac.weighted` commands. To run these we
 will first need to create a design file that indicates which treatment each sample belongs to.
 
-> ### :pencil2: Hands-on: Obtain design file
+> ### {% icon hands_on %} Hands-on: Obtain design file
 >
 > - Import the file called `mouse.time.design` to your history
 >   - Go to the shared data library or the files you downloaded from Zenodo.
 > - Make sure the datatype is set to `mothur.design`.
 >
-> > ### :bulb: Changing datatype of a datasets
+> > ### {% icon tip %} Changing datatype of a datasets
 > >  - Click on the **pencil icon** of the dataset
 > >  - Click on the **Datatype** tab
 > >  - Select the new datatype from dropdown menu
@@ -1107,8 +1107,8 @@ F3D9     Early
 Using the `parsimony` command let's look at the pairwise comparisons. Specifically, let's focus on the
 early vs. late comparisons for each mouse:
 
-> ### :pencil2: Hands-on: Compare Early-vs-Late
-> - **Parsimony** :wrench: with the following parameters
+> ### {% icon hands_on %} Hands-on: Compare Early-vs-Late
+> - **Parsimony** {% icon tool %} with the following parameters
 >   - "tree" to the `tre` output from Tree.Shared (collection)
 >   - "group" to the design file described above
 {: .hands_on}
@@ -1129,9 +1129,9 @@ The two distance matrices that we generated earlier (i.e. `jclass.0.03.lt.ave.di
 Principal Coordinates (PCoA) uses an eigenvector-based approach to represent multidimensional
 data in as few dimensions as possible. Our data is highly dimensional (~9 dimensions).
 
-> ### :pencil2: Hands-on: PCoA
+> ### {% icon hands_on %} Hands-on: PCoA
 >
-> - **Pcoa** :wrench: with the following parameters
+> - **Pcoa** {% icon tool %} with the following parameters
 >   - "phylip" to dist files from Dist.shared (collection)
 {: .hands_on}
 
@@ -1166,9 +1166,9 @@ Alternatively, non-metric multidimensional scaling (NMDS) tries to preserve the 
 a user defined number of dimensions. We can run our data through NMDS with 2 dimensions with the following
 tool:
 
-> ### :pencil2: Hands-on: Nmds
+> ### {% icon hands_on %} Hands-on: Nmds
 >
-> - **Nmds** :wrench: with the following parameters
+> - **Nmds** {% icon tool %} with the following parameters
 >   - "phylip" to dist files from Dist.shared (collection)
 >
 > Opening the `stress` file for `thetayc.0.03.lt.ave` we can inspect the stress and R^2 values, which describe
@@ -1184,12 +1184,12 @@ tool:
 > We find that the lowest stress value was 0.11 with an R-squared value of 0.95; that stress level is
 > actually pretty good. You can test what happens with three dimensions in the following way:
 >
-> - **Nmds** :wrench: with the following parameters
+> - **Nmds** {% icon tool %} with the following parameters
 >   - "phylip" to dist files collection from Dist.shared
 >   - "mindim" to `3`
 >   - "maxdim" to `3`
 >
-> > ### :question: Question
+> > ### {% icon question %} Question
 > >
 > > What are stress and R-squared values when using 3 dimensions?
 > >
@@ -1213,9 +1213,9 @@ The first analysis of molecular variance (AMOVA), tests whether the centers of t
 are more separated than the variation among samples of the same treatment. This is done using the distance
 matrices we created earlier and does not actually use ordination.
 
-> ### :pencil2: Hands-on: Amova
+> ### {% icon hands_on %} Hands-on: Amova
 >
-> - **Amova** :wrench: with the following parameters
+> - **Amova** {% icon tool %} with the following parameters
 >   - "phylip" to dist files from Dist.shared (collection)
 >   - "design" to mouse.time.design file from your history
 {: .hands_on}
@@ -1237,9 +1237,9 @@ for this mouse. Thus, the observed separation in early and late samples is stati
 also see whether the variation in the early samples is significantly different from the variation in the late
 samples using the `Homova` command:
 
-> ### :pencil2: Hands-on: Homova
+> ### {% icon hands_on %} Hands-on: Homova
 >
-> - **Homova** :wrench: with the following parameters
+> - **Homova** {% icon tool %} with the following parameters
 >   - "phylip" to dist files from Dist.shared (collection)
 >   - "design" to mouse.time.design file from your history
 {: .hands_on}
@@ -1257,9 +1257,9 @@ Next, we might ask which OTUs are responsible for shifting the samples along the
 this by measuring the correlation of the relative abundance of each OTU with the two axes in the NMDS dataset.
 We do this with the `corr.axes` tool:
 
-> ### :pencil2: Hands-on: Correlation
+> ### {% icon hands_on %} Hands-on: Correlation
 >
-> - **Corr.axes** :wrench: with the following parameters
+> - **Corr.axes** {% icon tool %} with the following parameters
 >   - "axes" to axes output from Nmds in 3 dimension (collection)
 >   - "shared" to shared output from collapse collection on Sub.sample
 >   - "method" to `Spearman`
@@ -1327,9 +1327,9 @@ F3D8     8
 F3D9     9
 ```
 
-> ### :pencil2: Hands-on
+> ### {% icon hands_on %} Hands-on
 >
-> - **Corr.axes** :wrench: with the following parameters
+> - **Corr.axes** {% icon tool %} with the following parameters
 >   - "axes" to axes output from Nmds in 3 dimension
 >   - "Generate Collector Curvers for" to Metadata table
 >   - "metadata table" to `mouse.dpw.metadata`
@@ -1349,7 +1349,7 @@ F3D9     9
 > community types
 >
 > <!-- TODO: add this tool to mothur suite -->
-> - **Get.communitype** :wrench: with the following parameters
+> - **Get.communitype** {% icon tool %} with the following parameters
 >   - "shared" to Subsample.shared file
 >
 {: .hands_on}
@@ -1383,7 +1383,7 @@ Otu0019    2.07     3.48     2.90    4.18    0.94     0.63    1.40    2.54      
 Again we can cross reference these OTU labels with the consensus classifications in the taxonomy file to get
 the names of these organisms.
 
-> ### :question: Question
+> ### {% icon question %} Question
 >
 > What organisms were the top 5 contributing OTUs classified as?
 >
@@ -1404,9 +1404,9 @@ different groupings of samples. The first we'll demonstrate is `metastats`, whic
 that determines whether there are any OTUs that are differentially represented between the samples from men
 and women in this study.
 
-> ### :pencil2: Hands-on: T-test
+> ### {% icon hands_on %} Hands-on: T-test
 >
-> - **Metastats** :wrench: with the following parameters
+> - **Metastats** {% icon tool %} with the following parameters
 >   - "shared" to Subsample.shared
 >   - "design" to `mouse.time.design`
 {: .hands_on}
@@ -1424,7 +1424,7 @@ Otu0005    0.068139      0.000087          0.002957        0.070058      0.00016
 
 These data tell us that OTUs 1, 2, and 3 was significantly different between the early and late samples.
 
-> ### :question: Question
+> ### {% icon question %} Question
 >
 >  Which of the top 10 OTUs in your output were significantly different between early and late samples?
 >
@@ -1439,9 +1439,9 @@ These data tell us that OTUs 1, 2, and 3 was significantly different between the
 
 Another non-parametric tool we can use as an alternative to metastats is lefse:
 
-> ### :pencil2: Hands-on: Lefse
+> ### {% icon hands_on %} Hands-on: Lefse
 >
-> - **Lefse** :wrench: with the following parameters
+> - **Lefse** {% icon tool %} with the following parameters
 >   - "shared" to Subsample.shared
 >   - "design" to `mouse.time.design`
 {: .hands_on}
@@ -1463,9 +1463,9 @@ late samples
 Finally, Mothur has an implementation of the random forest algorithm build into her as classify.rf. This will tell
 us which features (i.e. OTUs) are useful in discriminating between the two groups of samples:
 
-> ### :pencil2: Hands-on: Classify.rf
+> ### {% icon hands_on %} Hands-on: Classify.rf
 >
-> - **Classify.rf** :wrench: with the following parameters
+> - **Classify.rf** {% icon tool %} with the following parameters
 >   - "shared" to Subsample.shared
 >   - "design" to `mouse.time.design`
 {: .hands_on}
@@ -1504,13 +1504,13 @@ Otu0042    0.07
 
 Mothur does not have a lot of visualization tools built in, but external tools may be used for this. For
 instance we can convert our shared file to the more widely used `biom` format and view it in a platform like
-[Phinch](https://www.phinch.org/).
+[Phinch](http://www.phinch.org/).
 
 ## Phinch
 
-> ### :pencil2: Hands-on: Phinch
+> ### {% icon hands_on %} Hands-on: Phinch
 >
-> - **Make.biom** :wrench: with the following parameters
+> - **Make.biom** {% icon tool %} with the following parameters
 >   - "shared" to Subsample.shared
 >   - "constaxonomy" to taxonomy output from Classify.otu (collection)
 >   - "metadata" to `mouse.dpw.metadata`
@@ -1530,9 +1530,9 @@ instance we can convert our shared file to the more widely used `biom` format an
 
 A second tool we can use to visualize our data, is [Krona]()
 
-> ### :pencil2: Hands-on: Krona
+> ### {% icon hands_on %} Hands-on: Krona
 >
-> - **Visualize with Krona** :wrench: with the following parameters
+> - **Visualize with Krona** {% icon tool %} with the following parameters
 >   - "input file" to taxonomy output from Classify.otu (collection)
 >   - Set **Is this output from mothur?** to yes
 {: .hands_on}
@@ -1542,7 +1542,7 @@ innermost ring labeled "Bacteria"
 
 ![](../../images/krona.png)
 
-> ### :question: Question
+> ### {% icon question %} Question
 >
 >  what percentage of your sample was labelled `Lactobacillus`?
 >

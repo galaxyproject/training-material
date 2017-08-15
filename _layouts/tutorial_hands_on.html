@@ -1,6 +1,7 @@
 ---
 layout: base
 ---
+
 {% assign topic = site.data[page.topic_name] %}
 {% for tuto in topic.material %}
     {% if tuto.name == page.tutorial_name %}
@@ -9,140 +10,173 @@ layout: base
 {% endfor %}
 
 <header>
-    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-        <div class="container-fluid">
-          <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
-              <span class="sr-only">Toggle navigation</span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
+    <nav class="navbar navbar-toggleable-md navbar-inverse">
+        <div class="container">
+            <a class="navbar-brand" href="{{ site.url }}/">
+                <img src="{{ site.url }}{{ site.small_logo }}" height="30" alt="Galaxy Training Network logo">
+                {{ site.title }}
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
             </button>
-            <a id="site-title" class="navbar-brand" href="https://wiki.galaxyproject.org/Teach/GTN">
-              <img class="pull-left img-responsive" src="{{ site.url }}/{{ site.logo }}">
-            </a>
-            <a id="site-title" class="navbar-brand name-holder" href="{{ site.url }}/topics/{{ topic.name }}/tutorials/{{ tutorial.name }}/tutorial.html">
-              {{ tutorial.title }}
-            </a>
-          </div>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ site.url }}/topics/{{ topic.name }}" title="Go back to list of tutorials">
+                            {% icon topic %} {{ topic.title }}
+                        </a>
+                    </li>
 
-          <div class="collapse navbar-collapse" id="navbar">
+                    {% if tutorial.slides != "" %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ site.url }}/topics/{{ topic.name }}/slides" title="Slides for this tutorial">
+                            {% icon slides %} Introduction slides
+                        </a>
+                    </li>
+                    {% endif %}
 
-            <ul id="main-menu" class="nav navbar-nav navbar-right">
-              <li><a href="{{ site.url }}" title="Back to front page"><i class="fa fa-home"></i> Home</a></li>
-              <li><a href="{{ site.url }}/topics/{{ topic.name }}" title="Go back to list of tutorials"><i class="fa fa-file-text-o"></i> {{ topic.title }}</a></li>
+                    {% if topic.docker_image %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ site.github_repository }}/tree/master/topics/{{ topic.name }}/docker" title="Docker image for this tutorial">
+                            {% icon docker_image %} Docker image
+                        </a>
+                    </li>
+                    {% endif %}
 
-              {% if tutorial.slides != "" %}
-                <li><a href="{{ site.url }}/topics/{{ topic.name }}/slides" title="Slides for this tutorial"><i class="fa fa-graduation-cap"></i> Introduction slides</a></li>
-              {% endif %}
-              <!--<li><a href="{{ site.url }}/{{ topic.name }}/slides/{{ tutorial.name }}/"><i class="fa fa-file-powerpoint-o"></i> Associated slides</a></li>-->
+                    {% if tutorial.tutorial_galaxy_instance %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ tutorial.tutorial_galaxy_instance }}" title="Galaxy instance for this tutorial">
+                            {% icon galaxy_instance %} Galaxy instance
+                        </a>
+                    </li>
+                    {% endif %}
 
-              {% if topic.docker_image %}
-                <li><a href="{{ site.github_repository }}/tree/master/topics/{{ topic.name }}/docker" title="Docker image for this tutorial"><i class="fa fa-ship"></i> Docker image</a></li>
-              {% endif %}
+                    {% if tutorial.zenodo_link != "" %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ tutorial.zenodo_link }}" title="Links to data">
+                            {% icon zenodo_link %} Input Dataset
+                        </a>
+                    </li>
+                    {% endif %}
 
-              {% if tutorial.tutorial_galaxy_instance %}
-                <li><a href="{{ tutorial.tutorial_galaxy_instance }}" title="Galaxy instance for this tutorial"><i class="fa fa-external-link"></i> Galaxy instance</a></li>
-              {% endif %}
+                    {% if tutorial.references != "" %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ site.url }}/topics/{{ topic.name }}#references" title="References">
+                            {% icon references %} Literature
+                        </a>
+                    </li>
+                    {% endif %}
 
-              {% if tutorial.zenodo_link != "" %}
-                <li><a href="{{ tutorial.zenodo_link }}" title="Links to data"><i class="fa fa-folder-open"></i> Input Dataset</a></li>
-              {% endif %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ site.gitter_url }}" title="Chat on gitter">
+                            {% icon gitter %} Help
+                        </a>
+                    </li>
 
-              {% if tutorial.references != "" %}
-                <li><a href="{{ site.url }}/topics/{{ topic.name }}#references" title="References"><i class="fa fa-book"></i> Literature</a></li>
-              {% endif %}
-
-            </ul>
-          </div>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ site.github_repository }}/tree/master/topics/{{ topic.name }}/tutorials/{{ tutorial.name }}/tutorial.md">
+                            {% icon github %} Edit
+                        </a>
+                    </li>
+                </ul>
+            </div>
         </div>
     </nav>
 </header>
 
-<section class="tutorial">
-    <h1>{{ tutorial.title }}</h1>
+<div class="container main-content">
+    <section class="tutorial">
+        <h1>{{ tutorial.title }}</h1>
 
-    <blockquote class="overview">
-        <h3>Overview</h3>
+        <blockquote class="overview">
+            <h3>Overview</h3>
 
-        <p class="bold"> :grey_question: Questions</p>
-        <ul>
-        {% for question in tutorial.questions %}
-          <li>{{ question }}</li>
-        {% endfor %}
-        </ul>
+            <strong>{% icon question %} Questions</strong>
+            <ul>
+            {% for question in tutorial.questions %}
+            <li>{{ question }}</li>
+            {% endfor %}
+            </ul>
 
-        <p class="bold"> :dart: Objectives</p>
-        <ul>
-        {% for objective in tutorial.objectives %}
-          <li>{{ objective }}</li>
-        {% endfor %}
-        </ul>
+            <strong>{% icon objectives %} Objectives</strong>
+            <ul>
+            {% for objective in tutorial.objectives %}
+            <li>{{ objective }}</li>
+            {% endfor %}
+            </ul>
 
-        {% if topic.requirements or tutorial.requirements %}
-        <p class="bold"> :heavy_check_mark: Requirements</p>
-        <ul>
-          {% for requirement in topic.requirements %}
-            <li>
-                {% if requirement.type == "internal" %}
-                <a href="{{ site.url }}/topics/{{ requirement.link }}">{{ requirement.title }}</a>
-                {% elsif requirement.type == "external" %}
-                <a href="{{ requirement.link }}">{{ requirement.title }}</a>
-                {% endif %}
-            </li>
-          {% endfor %}
-          {% for requirement in tutorial.requirements %}
-            <li>
-                {% if requirement.type == "internal" %}
-                <a href="{{ site.url }}{{ requirement.link }}">{{ requirement.title }}</a>
-                {% elsif requirement.type == "external" %}
-                <a href="{{ requirement.link }}">{{ requirement.title }}</a>
-                {% endif %}
-            </li>
-          {% endfor %}
-        </ul>
+            {% if topic.requirements or tutorial.requirements %}
+            <strong>{% icon requirements %} Requirements</strong>
+            <ul>
+            {% for requirement in topic.requirements %}
+                <li>
+                    {% if requirement.type == "internal" %}
+                    <a href="{{ site.url }}/topics{{ requirement.link }}">{{ requirement.title }}</a>
+                    {% elsif requirement.type == "external" %}
+                    <a href="{{ requirement.link }}">{{ requirement.title }}</a>
+                    {% endif %}
+                </li>
+            {% endfor %}
+            {% for requirement in tutorial.requirements %}
+                <li>
+                    {% if requirement.type == "internal" %}
+                    <a href="{{ site.url }}{{ requirement.link }}">{{ requirement.title }}</a>
+                    {% elsif requirement.type == "external" %}
+                    <a href="{{ requirement.link }}">{{ requirement.title }}</a>
+                    {% endif %}
+                </li>
+            {% endfor %}
+            </ul>
+            {% endif %}
+
+            <p><strong>{% icon time %} Time estimation:</strong> {{ tutorial.time_estimation }}</p>
+        </blockquote>
+
+        {{ content }}
+
+        {% if tutorial.key_points %}
+        <blockquote class="key_points">
+            <h3>{% icon keypoints %} Key points</h3>
+
+            <ul>
+                {% for key_point in tutorial.key_points %}
+                <li>{{ key_point }}</li>
+                {% endfor %}
+            </ul>
+        </blockquote>
         {% endif %}
 
-        <p><span class="bold"> :hourglass: Time estimation:</span> {{ tutorial.time_estimation }}</p>
+        {% if topic.references %}
+        <h1>Useful literature</h1>
+        <p>Useful information regarding this type of analysis with descriptions and paper references for the tools used in this tutorial, and literature for this analysis techniques and interpretations can be found <a href="{{ site.url }}/topics/{{ topic.name }}#references">here</a>.</p>
+        {% endif %}
 
-    </blockquote>
+        <h3>{% icon congratulations %} Congratulations on successfully completing this tutorial!</h3>
 
-{{ content }}
+        <hr>
 
-    {% if tutorial.key_points %}
-    <blockquote class="key_points">
-        <h3> :grey_exclamation: Key points</h3>
+        <blockquote class="overview">
+            <h3>{% icon feedback %} Feedback</h3>
+            Please take a moment and provide your feedback on this tutorial. Your feedback will help guide and improve future revisions to this tutorial.
+            <a href="https://tinyurl.com/GTNfeedback">Feedback Form</a>
+        </blockquote>
+    </section>
+</div>
 
-        <ul>
-        {% for key_point in tutorial.key_points %}
-           <li>{{ key_point }}</li>
-        {% endfor %}
-        </ul>
-    </blockquote>
-    {% endif %}
-
-    {% if topic.references %}
-      <h1>Useful literature</h1>
-      <p>Useful information regarding this type of analysis with descriptions and paper references for the tools used in this tutorial, and literature for this analysis techniques and interpretations can be found <a href="{{ site.url }}/topics/{{ topic.name }}#references">here</a>.</p>
-    {% endif %}
-
-    <h3>:clap: Congratulations on successfully completing this tutorial!</h3>
-
-
-    <hr>
-    <blockquote class="overview">
-        <h3> :speech_balloon: Feedback</h3>
-        Please take a moment and provide your feedback on this tutorial. Your feedback will help guide and improve future revisions to this tutorial. <a href="https://tinyurl.com/GTNfeedback" target="_blank">Feedback Form</a>
-    </blockquote>
-
-    <i>This material is the result of a collaborative work. Thanks the <a href="https://wiki.galaxyproject.org/Teach/GTN">Galaxy Training Network</a> and all the contributors
-    {% if tutorial.contributors %}
-       ({{ tutorial.contributors|map: 'name'|join: ', '}})
-    {% endif %}
-    !<br/>
-    <br/>
-    Found a typo? Something is wrong in this tutorial? Edit it on <a href="{{ site.github_repository }}/tree/master/topics/{{ topic.name }}/tutorials/{{ tutorial.name }}/tutorial.md">GitHub</a>.</i>
-</section>
+<footer>
+    <div class="container">
+        <p>
+            This material is the result of a collaborative work. Thanks the
+            <a href="https://wiki.galaxyproject.org/Teach/GTN">Galaxy Training Network</a>
+            and all the contributors
+            {% if tutorial.contributors %}
+            ({{ tutorial.contributors|map: 'name'|join: ', '}})
+            {% endif %}
+        </p>
+        <p>
+            Found a typo? Something is wrong in this tutorial? Edit it on
+            <a href="{{ site.github_repository }}/tree/master/topics/{{ topic.name }}/tutorials/{{ tutorial.name }}/tutorial.md">GitHub</a>.
+        </p>
+    </div>
+</footer>

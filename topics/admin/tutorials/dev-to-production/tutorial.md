@@ -20,7 +20,7 @@ Move from dev instance to production instance
 
 :heavy_check_mark: ***Requirements***
 
-- *[Galaxy Server Administration](https://galaxyproject.github.io/training-material/topics/admin/slides/)*
+- *[Galaxy Server Administration]({{site.url}}/topics/admin/slides/)*
 
 :hourglass: ***Time estimation*** *TODO*
 
@@ -38,7 +38,7 @@ After a basic installation, this tutorial present the main steps for moving from
 
 ## Clone it and run it  
 
-:pencil2: ***Hands on!***
+{% icon hands_on %} ***Hands on!***
 
 Galaxy's source code is hosted in a [GitHub](https://github.com/galaxyproject/galaxy) repository.
 
@@ -113,7 +113,7 @@ Leaving it enabled will expose your configuration (database password, id_secret,
 
 Short introduction about this subpart.
 
-:pencil2: ***Hands on!***
+{% icon hands_on %} ***Hands on!***
 
 1. First step
 2. Second step
@@ -123,7 +123,7 @@ Short introduction about this subpart.
 
 Short introduction about this subpart.
 
-:pencil2: ***Hands on!***
+{% icon hands_on %} ***Hands on!***
 
 1. First step
 2. Second step
@@ -131,7 +131,7 @@ Short introduction about this subpart.
 
 Some blabla
 
-:pencil2: ***Hands on!***
+{% icon hands_on %} ***Hands on!***
 
 1. First step
 2. Second step
@@ -141,7 +141,7 @@ Some blabla
 
 Short introduction about this subpart.
 
-:pencil2: ***Hands on!***
+{% icon hands_on %} ***Hands on!***
 
 1. First step
 2. Second step
@@ -151,7 +151,7 @@ Short introduction about this subpart.
 
 Short introduction about this subpart.
 
-:pencil2: ***Hands on!***
+{% icon hands_on %} ***Hands on!***
 
 1. First step
 2. Second step
@@ -159,7 +159,7 @@ Short introduction about this subpart.
 
 Some blabla
 
-:pencil2: ***Hands on!***
+{% icon hands_on %} ***Hands on!***
 
 1. First step
 2. Second step

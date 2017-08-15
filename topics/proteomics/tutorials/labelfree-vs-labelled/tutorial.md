@@ -50,7 +50,7 @@ Including a well-chosen standard in label-free experiments (e.g. a labelled cont
 - **Study design**: Label-free approaches have the advantage of being very adaptable, even after having started the study. New samples may be included at any time. In contrast, labelled approaches need the same number (n) of each condition. Thus, new samples cannot be measured, if they cannot be matched to a control.
 Labelled techniques like the ["Super-SILAC"](https://www.ncbi.nlm.nih.gov/pubmed/20364148) approach do reduce this problem, but also need to be carefully planned in beforehand.
 
-> ### :question: Questions
+> ### {% icon question %} Questions
 >
 > 1. What is the difference between metabolic and chemical labelling?
 > 2. What is the "Super-SILAC" approach?
