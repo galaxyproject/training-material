@@ -1,0 +1,98 @@
+
+name: Small Genome assembly
+description: Perform a small bacterial genome Assembly and Annotation with Unicycler and Prokka
+title_default: "Small genome assembly"
+steps:
+    - title: "A tutorial on Small Genome Assembly"
+      content: "This tour will walk you through the process of genome assembly and annotation.<br><br>
+                Read and Follow the instructions before clicking 'Next'<br>
+                Click 'Prev' in case you missed out on any step"
+      backdrop: true
+    - title: "Create a new history"
+      element: '#history-options-button'
+      intro: "Let's start by creating a new history:<br>
+              (History options :: Create New)"
+      position: "left"
+      preclick:
+        - '#center-panel'
+    - title: "Rename history"
+      element: "#current-history-panel > div.controls > div.title > div"
+      intro: "Change the name of the new history to 'Genome Assembly', then hit return key."
+      position: "bottom"
+
+    - title: "Data Acquisition"
+      element: ".upload-button"
+      intro: "We will import sequencing data into the history we just created.<br>
+              Click 'Next' and the tour will take you to the Upload screen"
+      position: "right"
+      postclick:
+        - ".upload-button"
+
+    - title: "Data Acquisition"
+      element: "#btn-new"
+      intro: "We will use a downsampled dataset (for quick tutorial purpose) from the Ecoli C sequencing. We are using two library of matte pair reads from Illumina sequencing, and a long read library from Oxford Nanopore sequencing .<br>
+              Simple click 'Next' and the links to the training data will be automatically inserted and ready for upload.<br>
+              Later on, when you want to upload other data, you can do so by clicking the 'Paste/Fetch Data' button"
+      position: "top"
+      postclick:
+        - "#btn-new"
+
+    - title: "Data Acquisition"
+      element: "#upload-row-3 > td:nth-child(1) > div > div.upload-text > textarea"
+      intro: "Links Acquired !"
+      position: "top"
+      textinsert: "https://zenodo.org/record/842795/files/Ecoli-2_S1_L001_R1_001_subset_50000.fastq.fastqsanger https://zenodo.org/record/842795/files/Ecoli-2_S1_L001_R2_001_subset_50000.fastq.fastqsanger https://zenodo.org/record/842795/files/minion_1.2d_pass.fastq.fastqsanger"
+    - title: "Data Acquisition"
+      element: "button#btn-start"
+      intro: "Click on 'Start' to upload the data into your Galaxy history."
+      position: "bottom"
+      postclick:
+        - "#btn-start"
+
+    - title: "Data Acquisition"
+      element: "button#btn-close"
+      intro: "The upload may take awhile.<br>
+              Hit the close button when you see that the files are uploaded into your history."
+      position: "bottom"
+      postclick:
+        - "#btn-close"
+    - title: "Edit Attributes"
+      element: '#current-history-panel'
+      intro: "You've acquired your data.<br>
+              Now let's 'Edit Attributes' of the uploaded files.<br>
+              We will learn to edit the name, Database/Build and Datatype of all these files.<br><br>
+              For each of the uploaded files:<br>
+               1. Click on the pencil icon beside the file to 'Edit Attributes'.<br>
+               2. In the 'Attributes' tab:<br>
+                  - Edit the name (Barcode / Lane1 as appropriate).<br>"
+      position: "left"
+    - title : "Change Datatype"
+      element : "#datatype"
+      intro : "In the 'Datatype' tab :<br>
+                - Specify the new datatype (here fastqsanger)"
+      position: "right"
+      
+    - title : "Save the attribute changes"
+      element : '#attributes > div.toolFormBody > form:nth-child(1) > div:nth-child(6) > input[type="submit"]'
+      intro : "Save your changes"
+
+       - title : "Start the Analysis !"
+      intro: "Let's start the analysis by assessing the quality of Illumina reads."
+      position: "center"
+      
+    - title : "Search a Tool"
+      intro: "Search for a tool to evaluate read quality : Type FastQC in the search field."
+      position: "right"
+      element : "#tool-search-query"
+
+    - title : "Run the tool on Multiple datasets"
+      intro : "To run the analysis on several datasets, here our two Illumina libraries, click on the 'Multiple Datasets icon.'"
+      element : "#uid-27 > div.ui-form-field > div.ui-select-content > div.ui-options > div.btn-group.ui-radiobutton > label.btn.btn-default.ui-option.active"
+  
+    - title : "Select the tool inputs"
+      intro : "Select the Illumina read datasets"
+      element : "#uid-30_select"
+      
+    - title : "Run"
+      intro : "Click here to run the tool"
+      element : "#execute"
