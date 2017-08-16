@@ -80,9 +80,18 @@ Here is what to do to load the data:
 > ### :pencil2: Hands-on: Getting the data
 >
 > 1. Create and name a new history for this tutorial.
-> 2. Go to the [data library](https://usegalaxy.org/library/list#folders/Ff4ce53393dae30ee) and select all fastq files. Then Click `to History` button:
-> ![Data Library](../../images/assembly_library.png  "Get data from data library - The *Ecoli C* sequencing data can be found in the Data libraries section in the Shared Data tab. Once in the Library, open the *Tutorials* folder, the *Small Genome Assembly* folder and export the fastq files in your history.") 
-> 3. Once the files have been uploaded, change their types to fastqsanger 
+> 2. From the left panel, click on the **Get data icon** :
+> ![Get Data](../../images/get_data.png  )
+> 3. From the **Get data** panel, select the local files (downloaded from zenodo) and click on **Start** to upload them
+> ![Upload file](../../images/upload_file.png  )
+>
+>    > ### :bulb: Tip: Uploading Files from Url
+>    >
+>    > * Instead of clicking on the **Choose Local File** button, click on **Paste/Fetch data**
+>    > * Copy the files Urls in the text area 
+>    > * Click on the **Start** button
+>    {: .tip}
+> 4. Once the files have been uploaded, change their types to fastqsanger 
 >
 >    > ### :bulb: Tip: Changing a dataset datatype
 >    >
