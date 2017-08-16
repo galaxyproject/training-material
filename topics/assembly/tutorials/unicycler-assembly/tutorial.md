@@ -36,7 +36,7 @@ To understand how genome assembly works, look at our previous trainings :
 
 Two currently available technologies are the most suitable for small genome sequencing. Illumina’s reversible terminator process offers high coverage and accuracy at relatively low cost but can at most generate reads 300 bp in length. On the other hand, Oxford Nanopore’s molecular ratcheting through nanopore generates multi-kilobase reads that often surpass 100,000 bp in length. 
 
-The two technologies produce different types of data. Illumina's reads are short and of higher quality, while much longer Oxford Nanopore have high error rate.  Combining both technologies amplifies their relative strengths and enables to produce complete, high qulaity assemblies. 
+The two technologies produce different types of data. Illumina's reads are short and of higher quality, while much longer Oxford Nanopore have high error rate.  Combining both technologies amplifies their relative strengths and enables to produce complete, high quality assemblies. 
 
 *De novo* assembly involves several steps described in the following image:
 
@@ -203,7 +203,9 @@ You can then send the gff file resulting from the annotation with Prokka.
 
 You can then visualize the result of your analysis in IGV 
 
-![IGV whole assembly visualization](../../images/IGV.png  "IGV Whole assembly visualization. You can visualize the whole assembly and gene density by selecting the "all" view.")
+
+![IGV whole assembly visualization](../../images/IGV.png  "IGV Whole assembly visualization. You can visualize the whole assembly and gene density by selecting the 'all' view.")
+
 
 ![IGV zoomed visualization](../../images/zoomed_igv.png  "IGV zoomed visualization. For more detail view, select a contig and zoom on a region. You can see more information about a feature by passing over it with you cursor")
 
