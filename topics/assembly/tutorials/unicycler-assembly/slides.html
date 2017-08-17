@@ -976,6 +976,8 @@ We will therefore use two Illumina datasets, for forward and reverse reads, and 
 * Problem of short Reads : Problems to resolve repeat regions
 * Problem of long reads : Low Accuracy
 
+Using the two types of data together allows to combine their strength for a better assembly.
+
 ---
 
 
@@ -1002,11 +1004,76 @@ We will therefore use two Illumina datasets, for forward and reverse reads, and 
 
 # 1. Library Preparation
 
+A library is a formatting of data dedicated to be used in a specific set of analysis. 
+The two type of data will be processed differently depending of the output file format : 
+*    **Illumina reads** : The ouput of Illumina sequencing are Fastq Files
+*    **Oxford Nanopore long reads** : The output of Oxford Nanopore are fast5 files
 
-Some text
+---
 
-???
+## Fastq Format
 
-Slide notes
--> Pressing **P** will toggle presenter mode.
+The fastq file format is a text file in a format similar to the fasta one but with additionnal information of quality. It contains 4 lines per sequence (reads) :
 
+1.    Sequence identifier and optional description
+2.    Sequence 
+3.    Optional repeat of first line
+4.    Quality score per site
+
+
+![](../../images/fastq_format.png) 
+
+
+---
+
+## Fastq Format : Quality Line 
+
+Most of the recently produced fastq files are using the Sanger format. In this format, the quality can have a quality score from 0 to 93 , encoded in ASCII code. The quality score *Q* is based on a logarithmic transformation of the probability *p* of the base call being wrong.
+
+![](../../images/sanger_quality.png)
+
+*Note* : Although most of recent file are encoded with Sanger format, be aware than older files can have different encoding. You may then need to convert your fastq files. [ [Cock:2010](https://doi.org/10.1093/nar/gkp1137) ]
+
+---
+
+## Fast5 Format
+
+The Fast5 formated files, produced by Oxford Nanopore Technology, are HDF5 files. HDF5 files are binary files organized in hierarchical structure.
+A typical sequencing experiment can produce several thousands of fast5 files.
+The data can be explored through several tools suites, such as the Poretool suite [[Loan:2014](https://doi.org/10.1093/bioinformatics/btu555)]. 
+
+This suite allows manipulating the fast5 files, calculating several quality metrics and converting the file to fastq format.
+
+*Note* : This tutorial is based on already converted long read libraries and therefore doesn't cover the production of the fastq file.
+
+
+---
+
+# 2. Quality Control
+
+This Step will allow you to check the quality of the reads and to spot any error that may need correcting. This step can be performed in Galaxy with the [FastQC](http://www.bioinformatics.babraham.ac.uk/projects/fastqc) tool. (For short reads libraries only) 
+
+---
+
+## FastQC Output Per Base read Quality
+
+
+![FastQC result](../../images/perbase_qual.png )
+
+The central red line is the median value and, the yellow box represent the inter-quartile range, the whiskers represent the extreme 10 percentiles, and the blue line represent the mean quality.
+
+---
+
+## FastQC Output Per Sequence read Quality
+
+![FastQC result](../../images/perseq_qual.png)
+
+We can see the average quality per read is high for our library. This metric can be useful to detect a problem if a significant portion of the reads are of lower quality.
+
+---
+
+## FastQC Output Per Tile read Quality
+
+![FastQC result](../../images/pertile_qual.png)
+
+The color scale goes from blue to red, the blue colors describing tiles with above average quality and the red color describing tiles with below average quality. We can see here our read have a above average quality, except for one green tile that describe an average quality of read.
