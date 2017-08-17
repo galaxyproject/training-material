@@ -145,7 +145,7 @@ You can now run Unicycler to perform the assembly with the following parameters:
 * **Select second set of reads** : Specify the dataset containing the forward reads, often specified by a "-2" in the file name, but specified here by the "R2".
 * **Select long reads** : Optional, here specify you Oxford Nanopore dataset.
 
-![FastQC result](../../images/Unicycler_interface.png  "Unicycler interface. Run Unicycler with your sequencing dataset in fastqsanger format.")
+![Unicyler Interface](../../images/Unicycler_interface.png  "Unicycler interface. Run Unicycler with your sequencing dataset in fastqsanger format.")
 
 Unicycler returns two output files: a fasta file containing the result of the assembly, and a graph file.  You can then evaluate the quality of the resulting alignments by using the Quast tool on the fasta file.
 
