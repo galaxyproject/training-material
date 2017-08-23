@@ -151,7 +151,7 @@ Now we collected all the data we need to start our analysis.
 
 # Part 1: Naive approach
 
-## File preperation
+## File preparation
 
 Let's have a look at our files to see what we actually have here.
 
@@ -215,9 +215,9 @@ In order to convert the chromosome names we have therefore two things to do:
 
 > ### {% icon hands_on %} Hands-on: Adjust chromosome names
 >
-> 1. **Replace Text** {% icon tool %}: Run **Column Regex Find And Replace**  with the following settings:
+> 1. **Replace Text** {% icon tool %}: Run **Replace Text in a specific column**  with the following settings:
 >     - As **File to process** our peak file `GSE37268_mof3.out.hpeak.txt`
->     - **using column**: `1`
+>     - **in column**: `1`
 >     - **Find pattern**: `[0-9]+` (this will look for numerical digits)
 >     - **Replace with**: `chr&` (`&` is a placeholder for the find result)
 > 2. Click **Execute**
@@ -236,7 +236,7 @@ We have quite some files now and should take care that we don't loose track. Let
 
 ## Analysis
 
-Before we compare both region files we will add the promoter region to the gene records.
+Before comparing the 2 region files, we will add the promoter region to the gene records.
 
 > ### {% icon hands_on %} Hands-on: Add promoter region to gene records
 >
@@ -248,7 +248,7 @@ Before we compare both region files we will add the promoter region to the gene 
 >     - **Length**: `12000`
 {: .hands_on}
 
-Compare the resulting BED file with the input.
+Now compare the resulting BED file with the input.
 Look at the contents and compare the rows in the input to the rows in the output to find out how the start and end positions changed.
 Rename the dataset (by clicking on the pencil icon) to reflect your findings.
 
@@ -258,10 +258,8 @@ You might have noticed that the UCSC file is in `BED` format and has a database 
 >
 > 1. Click on the **pencil icon** in the history entry of our peak region file:
 >      ![](../../images/edit_icon.png)
-> 2. In the next screen select as **Database/Build**: `Mouse July 2007 (NCBI37/mm9) (mm9)`
-> 3. Click **Save**
-> 4. Click on the **pencil icon** again and switch to the `Convert Format` tab
-> 5. Select `Convert Genomic Intervals To BED` and press **Convert**
+> 2. Switch to the `Convert Format` tab
+> 3. Select `Convert Genomic Intervals To BED` and press **Convert**
 {: .hands_on}
 
 It's time to find the overlapping intervals (finally!):
@@ -279,7 +277,7 @@ It's time to find the overlapping intervals (finally!):
 >    {: .comment}
 {: .hands_on}
 
-We do have a the list of genes (column 4 ) which correspond to the peak regions.
+We now have the list of genes (column 4) corresponding to the peak regions.
 To get a better overview of the genes we obtained, we want to look at their distribution across the different chromosomes.
 
 > ### {% icon hands_on %} Hands-on: Count genes on different chromosomes
@@ -298,7 +296,7 @@ To get a better overview of the genes we obtained, we want to look at their dist
 >    >    <details>
 >    >    <summary>Click to view answers</summary>
 >    >    <ol type="1">
->    >    <li>The result varies with different settings. If you followed step by step it should be chromosome 7 with 1671 genes.</li>
+>    >    <li>The result varies with different settings. If you followed step by step, it should be chromosome 7 with 1674 genes.</li>
 >    >    </ol>
 >    >    </details>
 >    {: .question}
@@ -324,7 +322,7 @@ Since we have some nice data, let's draw a barchart out of it!
 When you look carefully at your history, you can see that it contains all steps of our analysis, from the beginning to the end. By building this history we have actually built a complete record of our analysis with Galaxy preserving all parameter settings applied at every step.
 Wouldn't it be nice to just convert this history into a workflow that we’ll be able to execute again and again?
 
-Galaxy makes this very easy with the `Extract workflow` option. This means any time you want to build a workflow, you can just perform it manually once, and then convert it to a workflow, so that next time it will be a lot less work to do the same analysis. It also allows you to share or publish your analysis with ease.
+Galaxy makes this very simple with the `Extract workflow` option. This means that any time you want to build a workflow, you can just perform it manually once, and then convert it to a workflow, so that next time it will be a lot less work to do the same analysis. It also allows you to easily share or publish your analysis.
 
 > ### {% icon hands_on %} Hands-on: Extract workflow
 >
@@ -373,10 +371,10 @@ Now it's time to reuse our workflow for a more sophisticated approach.
 
 In part 1 we used an overlap definition of 1 bp (default setting). In order to get a more meaningful definition, we now want to use the information of the position of the peak summit and check for overlap of the summits with genes.
 
-## Preperation
+## Preparation
 
 Create a new history and name it. If you forgot how to do that, you can have a look at the beginning of this tutorial.
-The history is now empty, but we need our peak file again. Before we upload it twice we can copy it from our former history:
+The history is now empty, but we need our peak file again. Before we upload it twice, we can copy it from our former history:
 
 > ### {% icon hands_on %} Hands-on: Copy history items
 >
