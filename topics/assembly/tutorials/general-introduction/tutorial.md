@@ -45,7 +45,7 @@ We will now import the data that we will use for the tutorial.
 >
 >
 >
-> 3. Once the files have been uploaded, change their names to Mutant_R1.fastq and Mutant_R2.fastq respectively by clicking on the ![](../../images/edit_file.png) icon next to the relevant history entry.
+> 3. Once the files have been uploaded, change their names to Mutant_R1.fastq and Mutant_R2.fastq respectively by clicking on the ![Pencil icon](../../images/edit_file.png) icon next to the relevant history entry.
 >
 >    
 >    ![data](../../images/starting_history.png)

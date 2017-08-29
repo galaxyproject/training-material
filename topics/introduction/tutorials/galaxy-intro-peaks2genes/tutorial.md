@@ -26,7 +26,7 @@ The goal of this exercise is to **turn this list of genomic regions into a list 
 
 Browse to your Galaxy instance and log in or register. The Galaxy interface consist of three main parts. The available tools are listed on the left, your analysis history is recorded on the right, and the middle pane will show the tools and datasets.
 
-![](../../images/galaxy_interface.png)
+![Galaxy interface](../../images/galaxy_interface.png)
 
 Let's start with a fresh history.
 
@@ -41,7 +41,7 @@ Let's start with a fresh history.
 >    {: .tip}
 >
 > 2. **Rename your history** to make it easy to recognize. You can do this by clicking on the title of the history (by default the title is *Unnamed history*) and typing **Galaxy Introduction** as the name.
->   ![](../../../../shared/images/rename_history.png)
+>   ![Renaming history](../../../../shared/images/rename_history.png)
 {: .hands_on}
 
 ## Data upload
@@ -54,7 +54,7 @@ computer and upload it to Galaxy.
 >
 > 1. Click on the upload button in the upper left ot the interface.
 >
->    ![](../../images/upload_button.png)
+>    ![Upload icon](../../images/upload_button.png)
 >
 > 2. Press **Choose local file** and search for your file.
 >
@@ -66,7 +66,7 @@ computer and upload it to Galaxy.
 >     > After this you will see your first history item in Galaxy’s right pane. It will go through
 >     > the gray (preparing/queued) and yellow (running) states to become green (success):
 >     >
->     > ![](../../images/intro_01.png)
+>     > ![History section](../../images/intro_01.png)
 >     {: .comment}
 >
 >    > ### {% icon tip %} Tip: Importing data via links
@@ -102,11 +102,11 @@ we also need a list of genes in mice, which we can obtain from UCSC.
 >
 > 1. In the tool menu, navigate to `Get Data -> UCSC Main - table browser`
 >
->     ![](../../images/101_01.png)
+>     ![UCSC Main tool in tools section](../../images/101_01.png)
 >
 >     You will be taken to the **UCSC table browser**, which looks something like this:
 >
->     ![](../../images/intro_02.png)
+>     ![UCSC table browser interface](../../images/intro_02.png)
 >
 >     > ### {% icon comment %} Settings
 >     >
@@ -123,13 +123,13 @@ we also need a list of genes in mice, which we can obtain from UCSC.
 >
 > 2. Click on the **get output** button and you will see the next screen:
 >
->    ![](../../images/intro_03.png)
+>    ![Output settings](../../images/intro_03.png)
 >
 >    Make sure that **Create one BED record per** is set to `Whole Gene` and click on the **Send Query to Galaxy** button.
 >
 > 3. Let's rename our dataset to something more recognizable.
 >    - Click on the **pencil icon** to edit a file's attributes.
->      ![](../../images/edit_icon.png)
+>      ![Pencil icon](../../images/edit_icon.png)
 >    - In the next screen change the name of the dataset to `Genes`.
 >    - Click the **Save** button at the bottom of the screen.
 >
@@ -159,11 +159,11 @@ Let's have a look at our files to see what we actually have here.
 >
 > To **view the contents** of the file, click on the **eye icon**. For our peak file, it should look something like this:
 >
->    ![](../../images/intro_04.png)
+>    ![Contents of the peak file](../../images/intro_04.png)
 >
 > While the regions of the genes from UCSC look slightly different:
 >
->    ![](../../images/intro_05.png)
+>    ![Contents of UCSC file](../../images/intro_05.png)
 >
 >    > ### {% icon question %} Questions
 >    >
@@ -257,7 +257,7 @@ You might have noticed that the UCSC file is in `BED` format and has a database 
 > ### {% icon hands_on %} Hands-on: Change format and database
 >
 > 1. Click on the **pencil icon** in the history entry of our peak region file:
->      ![](../../images/edit_icon.png)
+>      ![Pencil icon](../../images/edit_icon.png)
 > 2. Switch to the `Convert Format` tab
 > 3. Select `Convert Genomic Intervals To BED` and press **Convert**
 {: .hands_on}
@@ -330,7 +330,7 @@ Galaxy makes this very simple with the `Extract workflow` option. This means tha
 >
 > 2. Go to the history **Options menu** (gear symbol) and select the `Extract Workflow` option.
 >
->    ![](../../images/history_menu_extract_workflow.png)
+>    ![Extracting workflow in history menu](../../images/history_menu_extract_workflow.png)
 >
 >    The center pane will change and you will be able to choose which steps to include/exclude and how to name the newly created workflow.
 >
@@ -346,7 +346,7 @@ Galaxy makes this very simple with the `Extract workflow` option. This means tha
 >
 > 6. Click on **Workflow** in the top menu of Galaxy. Here you have a list of all your workflows.
 > 7. Select the newly generated workflow and click on **Edit**. You should see something similar to this:
->   ![](../../images/intro_06.png)
+>   ![Editing workflow interface](../../images/intro_06.png)
 >
 >    > ### {% icon comment %} The workflow editor
 >    > We can examine the workflow in Galaxy's workflow editor. Here you can view/change the parameter settings of each step, add and remove tools, and connect an output from one tool to the input of another, all in an easy and graphical manner. You can also use this editor to build workflows from scratch.
@@ -354,12 +354,12 @@ Galaxy makes this very simple with the `Extract workflow` option. This means tha
 > 8. Although we have our two inputs in the workflow they are missing their connection to the first tool (Intersect), because we didn't carry over some of the intermediate steps. Connect each input dataset to the Intersect tool by dragging the arrow pointing outwards on the right of its box (which denotes an output) to an arrow on the left of the Intersect box pointing inwards (which denotes an input). Connect each input dataset with a different input of Intersect.
 > 9. Rename the Input datasets: The upper one should be the `Reference regions` and the lower the `Peak regions`
 > 10. Click on the **gear icon** at the top right and press **Auto Re-layout** to clean up our view:
->    ![](../../images/intro_07.png)
+>    ![Auto re-layouting](../../images/intro_07.png)
 > 11. Click on the **gear icon** at the top right and press **Save** to save your changes:
 >
 >    > ### {% icon tip %} Tip: Hiding intermediate steps
 >    > When a workflow is executed, the user is usually primarily interested in the final product and not in all intermediate steps. By default all the outputs of a workflow will be shown, but we can explicitly tell Galaxy which output to show and which to hide for a given workflow. This behaviour is controlled by the little asterisk next to every output dataset:
->    > ![](../../../../shared/images/workflow_editor_mark_output.png)
+>    > ![Workflow editor mark output](../../../../shared/images/workflow_editor_mark_output.png)
 >    >
 >    > If you click on this asterisk for any of the output datasets, then *only* files with an asterisk will be shown, and all outputs without an asterisk will be hidden (Note that clicking *all* outputs has the same effect as clicking *none* of the outputs, in both cases all the datasets will be shown).
 >    {: .tip}

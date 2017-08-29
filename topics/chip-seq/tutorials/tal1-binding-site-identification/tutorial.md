@@ -422,7 +422,7 @@ We will generate Input normalized coverage (bigwig) files for the ChIP samples, 
 > 3. Check that you are using log2 ratio to compare the samples, and click "Execute".
 > 4. Repeat this step for all treatment and input samples: Megakaryocyte_Tal1_R1.bam and Megakaryocyte_Input_R1.bam; G1E_Tal1_R2.bam and G1E_Input_R2.bam; G1E_Tal1_R1.bam and G1E_Input_R1.bam.
 >
-> ![](../../images/bamcom.png)
+> ![bamCompare tool settings](../../images/bamcom.png)
 {: .hands_on}
 
 # Step 10: Plot the signal on the peaks between samples

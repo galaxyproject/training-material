@@ -32,7 +32,7 @@ In the metagenomics fields, amplicon sequencing refers to capture and sequence o
 It can be 16S for bacteria or archea or 18S for eukaryotes.
 
 > ### {% icon tip %} Background: The 16S ribosomal RNA gene
-> ![](../../images/16S_gene.png) <br><br>
+> ![The 16S ribosomal RNA gene](../../images/16S_gene.png) <br><br>
 >
 > The 16S rRNA gene has several properties that make it ideally suited for our purposes
 >
@@ -41,7 +41,7 @@ It can be 16S for bacteria or archea or 18S for eukaryotes.
 > 3. Highly conserved + highly variable regions
 > 4. Huge reference databases
 >
-> ![](../../images/16S_variableregions.jpg)
+> ![Variable regions](../../images/16S_variableregions.jpg)
 >
 > The highly conserved regions make it easy to target the gene across different organisms,
 > while the highly variable regions allow us to distinguish between different species.
@@ -334,9 +334,9 @@ The idea is to take the sequences and assign them to a taxon. To do that, we gro
 >
 > In 16S metagenomics approaches, OTUs are clusters of similar sequence variants of the 16S rDNA marker gene sequence. Each of these clusters is intended to represent a taxonomic unit of a bacteria species or genus depending on the sequence similarity threshold. Typically, OTU cluster are defined by a 97% identity threshold of the 16S gene sequence variants at genus level. 98% or 99% identity is suggested for species separation.
 >
-> ![](../../images/otu.png)
+> ![OTU and cluster with 97% identity threshold](../../images/otu.png)
 >
-> ![](../../images/OTU_graph.png)
+> ![OTU graph](../../images/OTU_graph.png)
 >
 > (Image credit: Danzeisen et al. 2013, 10.7717/peerj.237)
 {: .tip}
@@ -437,7 +437,7 @@ Let's visualize our data using Krona:
 The result is an HTML file with an interactive visualization, for instance try clicking
 on one of the rings in the image or playing around with some of the settings.
 
-![](../../images/krona.png)
+![Krona output](../../images/krona.png)
 
 This produced a single plot for both your samples, but what if you want to compare
 the two samples?
@@ -465,13 +465,13 @@ To further explore the community structure, we can visualize it with dedicated t
 >
 >    The Galaxy project runs an instance of Phinch, and if you look at the output BIOM file, you will see a link to view the file at Phinch:
 >
->    ![](../../../../shared/images/viewatphinch.png)
+>    ![Link to Phinch](../../../../shared/images/viewatphinch.png)
 >
 > 2. Click on the icon
 >
 >    It will lead you to the Phinch website, which will automatically load in your file, and where you can several interactive visualisations:
 >
->     ![](../../../../shared/images/phinch_overviewpage.png)
+>     ![Phinch website interface](../../../../shared/images/phinch_overviewpage.png)
 {: .hands_on}
 
 Once we have information about the community structure (OTUs with taxonomic structure), we can do more analysis on it: estimation of the diversity of micro-organism, comparison fo diversity between samples, analysis of populations, ... We will not go into detail of such analyses here but you follow our tutorials on amplicon data analyses to learn about them.
