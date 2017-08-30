@@ -1,3 +1,4 @@
+---
 sudo: required
 language: python
 python: 3.6
@@ -30,11 +31,13 @@ install:
 - conda update -q conda
 - conda info -a
 - conda env create -f environment.yml
+- conda install yamllint
 - source activate galaxy_training_material
 - make install
 
 script:
 - set -e
+#- yamllint topics
 # Check website
 - |
   if [ "$TRAVIS_BRANCH" == "gh-pages" ]
