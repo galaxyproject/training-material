@@ -138,7 +138,7 @@ The goal of this exercise is to <strong>turn this list of genomic regions into a
   </li>
   <li>
 <a href="#part-1-naive-approach" id="markdown-toc-part-1-naive-approach">Part 1: Naive approach</a>    <ol>
-      <li><a href="#file-preperation" id="markdown-toc-file-preperation">File preperation</a></li>
+      <li><a href="#file-preparation" id="markdown-toc-file-preparation">File preparation</a></li>
       <li><a href="#analysis" id="markdown-toc-analysis">Analysis</a></li>
       <li><a href="#visualization" id="markdown-toc-visualization">Visualization</a></li>
       <li><a href="#extracting-workflow" id="markdown-toc-extracting-workflow">Extracting workflow</a></li>
@@ -146,7 +146,7 @@ The goal of this exercise is to <strong>turn this list of genomic regions into a
   </li>
   <li>
 <a href="#part-2-more-sophisticated-approach" id="markdown-toc-part-2-more-sophisticated-approach">Part 2: More sophisticated approach</a>    <ol>
-      <li><a href="#preperation" id="markdown-toc-preperation">Preperation</a></li>
+      <li><a href="#preparation" id="markdown-toc-preparation">Preparation</a></li>
       <li><a href="#create-peak-summit-file" id="markdown-toc-create-peak-summit-file">Create peak summit file</a></li>
       <li><a href="#get-gene-names" id="markdown-toc-get-gene-names">Get gene names</a></li>
       <li><a href="#repeat-workflow" id="markdown-toc-repeat-workflow">Repeat workflow</a></li>
@@ -360,7 +360,7 @@ we also need a list of genes in mice, which we can obtain from UCSC.</p>
 
 <h1 id="part-1-naive-approach">Part 1: Naive approach</h1>
 
-<h2 id="file-preperation">File preperation</h2>
+<h2 id="file-preparation">File preparation</h2>
 
 <p>Let’s have a look at our files to see what we actually have here.</p>
 
@@ -459,12 +459,12 @@ As we directly see, the peak file lacks <code class="highlighter-rouge">chr</cod
 
   <ol>
     <li>
-<strong>Replace Text</strong> <i class="fa fa-wrench" aria-hidden="true"></i>: Run <strong>Column Regex Find And Replace</strong>  with the following settings:
+<strong>Replace Text</strong> <i class="fa fa-wrench" aria-hidden="true"></i>: Run <strong>Replace Text in a specific column</strong>  with the following settings:
       <ul>
         <li>As <strong>File to process</strong> our peak file <code class="highlighter-rouge">GSE37268_mof3.out.hpeak.txt</code>
 </li>
         <li>
-<strong>using column</strong>: <code class="highlighter-rouge">1</code>
+<strong>in column</strong>: <code class="highlighter-rouge">1</code>
 </li>
         <li>
 <strong>Find pattern</strong>: <code class="highlighter-rouge">[0-9]+</code> (this will look for numerical digits)</li>
@@ -499,7 +499,7 @@ As we directly see, the peak file lacks <code class="highlighter-rouge">chr</cod
 
 <h2 id="analysis">Analysis</h2>
 
-<p>Before we compare both region files we will add the promoter region to the gene records.</p>
+<p>Before comparing the 2 region files, we will add the promoter region to the gene records.</p>
 
 <blockquote class="hands_on">
   <h3 id="-hands-on-add-promoter-region-to-gene-records">
@@ -527,7 +527,7 @@ As we directly see, the peak file lacks <code class="highlighter-rouge">chr</cod
   </ol>
 </blockquote>
 
-<p>Compare the resulting BED file with the input.
+<p>Now compare the resulting BED file with the input.
 Look at the contents and compare the rows in the input to the rows in the output to find out how the start and end positions changed.
 Rename the dataset (by clicking on the pencil icon) to reflect your findings.</p>
 
@@ -541,11 +541,7 @@ Rename the dataset (by clicking on the pencil icon) to reflect your findings.</p
     <li>Click on the <strong>pencil icon</strong> in the history entry of our peak region file:
   <img src="../../images/edit_icon.png" alt="">
 </li>
-    <li>In the next screen select as <strong>Database/Build</strong>: <code class="highlighter-rouge">Mouse July 2007 (NCBI37/mm9) (mm9)</code>
-</li>
-    <li>Click <strong>Save</strong>
-</li>
-    <li>Click on the <strong>pencil icon</strong> again and switch to the <code class="highlighter-rouge">Convert Format</code> tab</li>
+    <li>Switch to the <code class="highlighter-rouge">Convert Format</code> tab</li>
     <li>Select <code class="highlighter-rouge">Convert Genomic Intervals To BED</code> and press <strong>Convert</strong>
 </li>
   </ol>
@@ -582,7 +578,7 @@ Rename the dataset (by clicking on the pencil icon) to reflect your findings.</p
   </ol>
 </blockquote>
 
-<p>We do have a the list of genes (column 4 ) which correspond to the peak regions.
+<p>We now have the list of genes (column 4) corresponding to the peak regions.
 To get a better overview of the genes we obtained, we want to look at their distribution across the different chromosomes.</p>
 
 <blockquote class="hands_on">
@@ -616,7 +612,7 @@ To get a better overview of the genes we obtained, we want to look at their dist
         <details>
    <summary>Click to view answers</summary>
    <ol type="1">
-   <li>The result varies with different settings. If you followed step by step it should be chromosome 7 with 1671 genes.</li>
+   <li>The result varies with different settings. If you followed step by step, it should be chromosome 7 with 1674 genes.</li>
    </ol>
    </details>
       </blockquote>
@@ -651,7 +647,7 @@ To get a better overview of the genes we obtained, we want to look at their dist
 <p>When you look carefully at your history, you can see that it contains all steps of our analysis, from the beginning to the end. By building this history we have actually built a complete record of our analysis with Galaxy preserving all parameter settings applied at every step.
 Wouldn’t it be nice to just convert this history into a workflow that we’ll be able to execute again and again?</p>
 
-<p>Galaxy makes this very easy with the <code class="highlighter-rouge">Extract workflow</code> option. This means any time you want to build a workflow, you can just perform it manually once, and then convert it to a workflow, so that next time it will be a lot less work to do the same analysis. It also allows you to share or publish your analysis with ease.</p>
+<p>Galaxy makes this very simple with the <code class="highlighter-rouge">Extract workflow</code> option. This means that any time you want to build a workflow, you can just perform it manually once, and then convert it to a workflow, so that next time it will be a lot less work to do the same analysis. It also allows you to easily share or publish your analysis.</p>
 
 <blockquote class="hands_on">
   <h3 id="-hands-on-extract-workflow">
@@ -720,10 +716,10 @@ Wouldn’t it be nice to just convert this history into a workflow that we’ll 
 
 <p>In part 1 we used an overlap definition of 1 bp (default setting). In order to get a more meaningful definition, we now want to use the information of the position of the peak summit and check for overlap of the summits with genes.</p>
 
-<h2 id="preperation">Preperation</h2>
+<h2 id="preparation">Preparation</h2>
 
 <p>Create a new history and name it. If you forgot how to do that, you can have a look at the beginning of this tutorial.
-The history is now empty, but we need our peak file again. Before we upload it twice we can copy it from our former history:</p>
+The history is now empty, but we need our peak file again. Before we upload it twice, we can copy it from our former history:</p>
 
 <blockquote class="hands_on">
   <h3 id="-hands-on-copy-history-items">
