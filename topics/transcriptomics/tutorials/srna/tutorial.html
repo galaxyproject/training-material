@@ -195,12 +195,12 @@
         <li>Click the <em>Operations on multiple datasets</em> check box at the top of the history panel</li>
         <li>Check the three boxes next to the blank RNAi (control) sRNA-seq samples</li>
         <li>Click <em>For all selected…</em> and choose <em>Build dataset list</em></li>
-        <li><img src="../../images/sRNA/Fig1_build_dataset_list.png" alt="" /></li>
+        <li><img src="../../images/sRNA/Fig1_build_dataset_list.png" alt="Building dataset" /></li>
         <li>Ensure that only the three blank samples are selected, and enter a name for the new collection (<em>e.g.</em> Blank RNAi sRNA-seq)</li>
-        <li><img src="../../images/sRNA/Fig2_create_list.png" alt="" /></li>
+        <li><img src="../../images/sRNA/Fig2_create_list.png" alt="Creating a collection from a list of datasets" /></li>
         <li>Click <em>Create list</em></li>
         <li>Repeat for the three <em>Symplekin</em> RNAi samples</li>
-        <li><img src="../../images/sRNA/Fig3_dataset_lists_made.png" alt="" /></li>
+        <li><img src="../../images/sRNA/Fig3_dataset_lists_made.png" alt="History section with all the loaded datasets" /></li>
       </ul>
     </li>
   </ol>
@@ -218,7 +218,7 @@
     <li><strong>FastQC</strong> <i class="fa fa-wrench" aria-hidden="true"></i>: Run <code class="highlighter-rouge">FastQC</code> on each collection of FASTQ read files to assess the overall read/base quality and quality score encoding scheme using the following parameters:
       <ul>
         <li><strong>Short read data from your current history</strong>: Click the “Dataset collection” tab and then select the blank RNAi sRNA-seq dataset collection
-<img src="../../images/sRNA/Fig4_fastqc_tool_form.png" alt="" /></li>
+<img src="../../images/sRNA/Fig4_fastqc_tool_form.png" alt="FastQC tool and parameters" /></li>
       </ul>
     </li>
     <li>
@@ -247,8 +247,8 @@
         </ol>
       </blockquote>
 
-      <p><img src="../../images/sRNA/Fig5a_fastqc_result_stats_boxplot.png" alt="" />
-<img src="../../images/sRNA/Fig5b_fastqc_result_stats_adapter.png" alt="" /></p>
+      <p><img src="../../images/sRNA/Fig5a_fastqc_result_stats_boxplot.png" alt="The output of FastQC as a boxplot" />
+<img src="../../images/sRNA/Fig5b_fastqc_result_stats_adapter.png" alt="The output of FastQC stats adapted" /></p>
     </li>
   </ol>
 
@@ -267,7 +267,7 @@
 
 <p><em>If you are following this tutorial OR your data were already in Sanger / Illumina 1.9 format</em>: Changes the datatype of each input file to ‘fastqsanger’.</p>
 
-<p><img src="../../images/sRNA/Fig6_change_datatype.png" alt="" /></p>
+<p><img src="../../images/sRNA/Fig6_change_datatype.png" alt="Editing the datatype" /></p>
 
 <p><em>If your data were not in Sanger / Illumina 1.9 format</em>: After <code class="highlighter-rouge">FASTQ Groomer</code> finishes, click on the groomed dataset collection name and then click on the name of one of the datasets. You should see that the format is <strong>fastqsanger</strong> instead of <strong>fastq</strong>, meaning you have successfully converted the quality score encoding scheme.</p>
 
@@ -293,7 +293,7 @@
         <li><strong>Generate a report file</strong>: Yes</li>
       </ul>
 
-      <p><img src="../../images/sRNA/Fig7_trimgalore_tool_form.png" alt="" /></p>
+      <p><img src="../../images/sRNA/Fig7_trimgalore_tool_form.png" alt="Trim Galore tool and parameters" /></p>
     </li>
     <li>
       <p>Repeat for the <em>Symplekin</em> RNAi dataset collection</p>
@@ -324,8 +324,8 @@
     </li>
   </ol>
 
-  <p><img src="../../images/sRNA/Fig8a_fastqc_post_trimming_result.png" alt="" />
-<img src="../../images/sRNA/Fig8b_fastqc_post_trimming_lengths.png" alt="" /></p>
+  <p><img src="../../images/sRNA/Fig8a_fastqc_post_trimming_result.png" alt="FastQC output after trimming" />
+<img src="../../images/sRNA/Fig8b_fastqc_post_trimming_lengths.png" alt="FastQC output after trimming" /></p>
 
 </blockquote>
 
@@ -351,7 +351,7 @@
         <li>
           <p><strong>Specify strand-specific information</strong>: Second Strand (F/FR)</p>
 
-          <p><img src="../../images/sRNA/Fig9_HISAT_rRNA_tool_form.png" alt="" /></p>
+          <p><img src="../../images/sRNA/Fig9_HISAT_rRNA_tool_form.png" alt="HISAT input and parameters" /></p>
         </li>
       </ul>
     </li>
@@ -370,7 +370,7 @@
     <li>
       <p>Repeat for the <em>Symplekin</em> RNAi dataset collection</p>
 
-      <p><img src="../../images/sRNA/Fig10_Filter_rRNA_tool_form.png" alt="" /></p>
+      <p><img src="../../images/sRNA/Fig10_Filter_rRNA_tool_form.png" alt="Filter SAM or BAM, output SAM or BAM input and parameters" /></p>
     </li>
     <li><strong>Convert from BAM to FastQ</strong> <i class="fa fa-wrench" aria-hidden="true"></i>: Run <code class="highlighter-rouge">Convert from BAM to FastQ</code> on each collection of filtered HISAT2 output BAM files with the following parameters:
       <ul>
@@ -381,7 +381,7 @@
     <li>
       <p>Repeat for the <em>Symplekin</em> RNAi dataset collection</p>
 
-      <p><img src="../../images/sRNA/Fig11_Convert_to_fastq_tool_form.png" alt="" /></p>
+      <p><img src="../../images/sRNA/Fig11_Convert_to_fastq_tool_form.png" alt="Filter SAM or BAM, output SAM or BAM input and parameters" /></p>
 
       <p>Next we will align the non-rRNA reads to a known set of miRNA hairpin sequences to identify miRNA reads.</p>
     </li>
@@ -438,7 +438,7 @@
     <li>
       <p>Rename each resulting dataset collection something meaningful (<em>i.e.</em> “blank RNAi - siRNA reads (20-22nt)”)</p>
 
-      <p><img src="../../images/sRNA/Fig12a_Manipulate_Fastq_siRNA_tool_form.png" alt="" /></p>
+      <p><img src="../../images/sRNA/Fig12a_Manipulate_Fastq_siRNA_tool_form.png" alt="Manipulate FASTQ input and parameters" /></p>
 
       <p>The regular expression in the <strong>Match by</strong> parameter tells the tool to identify sequences that are length 12-19 or 23-50 (inclusive), and the <strong>Miscellaneous Manipulation Type</strong> parameter tells the tool to remove these sequences. What remains are sequences of length 20-22nt. We will now repeat these steps to identify 23-29nt piRNA sequences.</p>
     </li>
@@ -466,12 +466,12 @@
     <li>
       <p>Rename each resulting dataset collection something meaningful (<em>i.e.</em> “blank RNAi - piRNA reads (23-29nt)”)</p>
 
-      <p><img src="../../images/sRNA/Fig12b_Manipulate_Fastq_piRNA_tool_form.png" alt="" /></p>
+      <p><img src="../../images/sRNA/Fig12b_Manipulate_Fastq_piRNA_tool_form.png" alt="Manipulate FASTQ input and parameters on Symplekin dataset collection" /></p>
     </li>
     <li>
       <p><strong>FastQC</strong> <i class="fa fa-wrench" aria-hidden="true"></i>: Run <code class="highlighter-rouge">FastQC</code> on each collection of siRNA and piRNA read files to confirm the correct read lengths.</p>
 
-      <p><img src="../../images/sRNA/Fig13_FastQC_piRNA_siRNA_result_Blank_rep1.png" alt="" /></p>
+      <p><img src="../../images/sRNA/Fig13_FastQC_piRNA_siRNA_result_Blank_rep1.png" alt="FastQC result on both collections" /></p>
     </li>
   </ol>
 
@@ -500,7 +500,7 @@
         <li>
           <p><strong>Incompatible Prior</strong>: 0</p>
 
-          <p><img src="../../images/sRNA/Fig14_salmon_siRNA_Blank_tool_form.png" alt="" /></p>
+          <p><img src="../../images/sRNA/Fig14_salmon_siRNA_Blank_tool_form.png" alt="Salmon input sRNA and parameters" /></p>
         </li>
       </ul>
     </li>
@@ -537,7 +537,7 @@
         <li>
           <p><strong>Output normalized counts table</strong>: Yes</p>
 
-          <p><img src="../../images/sRNA/Fig15_deseq2_sr_tool_form.png" alt="" /></p>
+          <p><img src="../../images/sRNA/Fig15_deseq2_sr_tool_form.png" alt="DESeq2 input and parameters" /></p>
         </li>
       </ul>
     </li>
@@ -553,7 +553,7 @@
         <li>
           <p><strong>With following condition</strong>: Enter: c7&lt;0.05</p>
 
-          <p><img src="../../images/sRNA/Fig16_filter_tool_form.png" alt="" /></p>
+          <p><img src="../../images/sRNA/Fig16_filter_tool_form.png" alt="Filter tool input and parameters" /></p>
         </li>
       </ul>
     </li>
@@ -589,7 +589,7 @@ There are 87 *antisense* and 15 *sense* features that have significanlty differe
 
 <h2 id="small-rna-analysis-general-pipeline">Small RNA analysis (general) pipeline</h2>
 
-<p><img src="../../images/sRNA/schematic_for_sRNAseq_tutorial.png" alt="" /></p>
+<p><img src="../../images/sRNA/schematic_for_sRNAseq_tutorial.png" alt="sRNA tutorial workflow" /></p>
 
 
         

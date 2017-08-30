@@ -272,9 +272,9 @@ READ5:     atcatgacggcaGtagc
   </thead>
   <tbody>
     <tr>
-      <td><img src="../../images/pA.png" alt=""></td>
-      <td><img src="../../images/pB.png" alt=""></td>
-      <td><img src="../../images/pAB.png" alt=""></td>
+      <td><img src="../../images/pA.png" alt="P(A) polymorphisms"></td>
+      <td><img src="../../images/pB.png" alt="P(B) variant calls"></td>
+      <td><img src="../../images/pAB.png" alt="P(AB) polymorphisms and variant calls"></td>
     </tr>
   </tbody>
 </table>
@@ -397,7 +397,7 @@ READ5:     atcatgacggcaGtagc
   </thead>
   <tbody>
     <tr>
-      <td><img src="../../images/freebayes.png" alt=""></td>
+      <td><img src="../../images/freebayes.png" alt="Haplotype-based calling"></td>
     </tr>
     <tr>
       <td><sub>Looking at a haplotype window makes misalignments tolerable. In this case a low complexity poly(A) stretch is misaligned. As a result looking at individual positions will result in calling multiple spurious varians. In the case of FreeBayes looking at a haplotype identifies two alleles (this is a diploid example) <code class="highlighter-rouge">A(7)</code> and <code class="highlighter-rouge">A(6)</code>, while <code class="highlighter-rouge">A(8)</code> is likely an error. Image by <a href="https://github.com/ekg/freebayes">Erik Garrison</a></sub></td>
@@ -463,13 +463,13 @@ READ5:     atcatgacggcaGtagc
     <li>Make sure the top part of the interface looks like shown below. Here we selected <code class="highlighter-rouge">GIAB-Ashkenazim-Trio-hg19</code> as input and set <strong>Using reference genome</strong> to <code class="highlighter-rouge">hg19</code> and <strong>Choose parameter selection level</strong> to <code class="highlighter-rouge">5. Complete list of all options</code>:</li>
   </ol>
 
-  <p><img src="../../images/FreeBayes_settings.png" alt=""></p>
+  <p><img src="../../images/FreeBayes_settings.png" alt="FreeBayes input and parameters"></p>
 
   <ol>
     <li>Scrolling down to <strong>Tweak algorithmic features?</strong> click <code class="highlighter-rouge">Yes</code> and set <strong>Calculate the marginal probability of genotypes and report as GQ in each sample field in the VCF output</strong> to <code class="highlighter-rouge">Yes</code>. This would help us evaluating the quality of genotype calls:</li>
   </ol>
 
-  <p><img src="../../images/freebayes_gq.png" alt=""></p>
+  <p><img src="../../images/freebayes_gq.png" alt="FreeBayes additional features"></p>
 </blockquote>
 
 <p>This produces a dataset in <a href="http://www.1000genomes.org/wiki/Analysis/variant-call-format">VCF</a> format containing 35 putative variants. Before we can continue we need to post-process this dataset by breaking compound variants into multiple independent variants with <strong>VcfAllelicPrimitives</strong> tool found within <strong>VCF Tools</strong> section. This is necessary for ensuring the smooth sailing through downstream analyses:</p>
@@ -485,7 +485,7 @@ READ5:     atcatgacggcaGtagc
 </li>
   </ol>
 
-  <p><img src="../../images/vcfallelicprimitives.png" alt=""></p>
+  <p><img src="../../images/vcfallelicprimitives.png" alt="VcfAllelicPrimitives input and parameters"></p>
 
   <p><strong>VCFAllelicPrimitives</strong> generated a VCF files containing 37 records (the input VCF only contained 35). This is because a multiple nucleotide polymorphism (<code class="highlighter-rouge">TAGG|CAGA</code>) at position 618851 have been converted to two:</p>
 
@@ -525,11 +525,11 @@ READ5:     atcatgacggcaGtagc
 
 <p>SnpEff will generate two outputs: (1) an annotated VCF file and (2) an HTML report. The report contains a number of useful metrics such as distribution of variants across gene features</p>
 
-<p><img src="../../images/snpeff_chart.png" alt=""></p>
+<p><img src="../../images/snpeff_chart.png" alt="SnpEff output chart"></p>
 
 <p>or changes to codons</p>
 
-<p><img src="../../images/snpeff_codons.png" alt=""></p>
+<p><img src="../../images/snpeff_codons.png" alt="SnpEff output codons"></p>
 
 <h2 id="manipulating-variation-data-with-gemini">Manipulating variation data with GEMINI</h2>
 
@@ -554,11 +554,11 @@ family1	   HG002_NA24385_son	HG003_NA24149_father HG004_NA24143_mother 1  2     
 
   <p>So let’s load data into GEMINI by setting VCF and PED inputs</p>
 
-  <p><img src="../../images/gemini_load.png" alt=""></p>
+  <p><img src="../../images/gemini_load.png" alt="GEMINI load parameters"></p>
 
   <p>This creates a sqlite database. To see the content of the database use <strong>GEMINI_db_info</strong>:</p>
 
-  <p><img src="../../images/gemini_db_info.png" alt=""></p>
+  <p><img src="../../images/gemini_db_info.png" alt="GEMINI_db_info parameters"></p>
 
 </blockquote>
 
@@ -582,7 +582,7 @@ family1	   HG002_NA24385_son	HG003_NA24149_father HG004_NA24143_mother 1  2     
   <p>Type <code class="highlighter-rouge">SELECT count(*) FROM variants WHERE in_dbsnp == 0</code> into <strong>The query to be issued to the database</strong></p>
 
   <div class="highlighter-rouge">
-<pre class="highlight"><code>![](../../images/gemini_query1.png)
+<pre class="highlight"><code>![GEMINI query](../../images/gemini_query1.png)
 </code></pre>
   </div>
 
@@ -712,22 +712,22 @@ will generate<a href="https://usegalaxy.org/datasets/bbd44e69cb8906b543c67f80be2
   <li>
     <p>When Galaxy history interface opens you will need to click <strong>Import history</strong> link highlighted with a red border in the following figure:</p>
 
-    <p><img src="../../images/import_history.png" alt=""></p>
+    <p><img src="../../images/import_history.png" alt="Importing history"></p>
   </li>
   <li>
     <p>If you have a wide screen arrange browsers tabs side by side:</p>
 
-    <p><img src="../../images/side-by-side.png" alt=""></p>
+    <p><img src="../../images/side-by-side.png" alt="Arranging browsers side by side"></p>
   </li>
   <li>
     <p>Proceed with tutorial. For example, to repeat the following command from GEMINI tutorial:</p>
 
-    <p><img src="../../images/gemini_command.png" alt=""></p>
+    <p><img src="../../images/gemini_command.png" alt="GEMINI command"></p>
   </li>
   <li>
     <p>Use Galaxy’s <strong>GEMINI_load</strong> tool:</p>
 
-    <p><img src="../../images/galaxy_command.png" alt=""></p>
+    <p><img src="../../images/galaxy_command.png" alt="GEMINI load tool queries"></p>
   </li>
   <li>and so on….</li>
 </ul>

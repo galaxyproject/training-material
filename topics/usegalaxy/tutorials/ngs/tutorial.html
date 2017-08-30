@@ -212,7 +212,7 @@ AAC&lt;CCF+@@&gt;CC,C9,F9C9@9-CFFFE@7@:+CC8-C@:7,@EFE,6CF:+8F7EFEEF@EGGGEEE
   </thead>
   <tbody>
     <tr>
-      <td><img src="../../images/pe_mp.png" alt="" /></td>
+      <td><img src="../../images/pe_mp.png" alt="Paired-end and mate-pair reads" /></td>
     </tr>
     <tr>
       <td><small><strong>Paired-end and mate-pair reads</strong>. In paired end sequencing (left) the actual ends of rather short DNA molecules (less than 1kb) are determined, while for mate pair sequencing (right) the ends of long molecules are joined and prepared in special sequencing libraries. In these mate pair protocols, the ends of long, size-selected molecules are connected with an internal adapter sequence (i.e. linker, yellow) in a circularization reaction. The circular molecule is then processed using restriction enzymes or fragmentation. Fragments are enriched for the linker and outer library adapters are added around the two combined molecule ends. The internal adapter can then be used as a second priming site for an additional sequencing reaction in the same orientation or sequencing can be performed from the second adapter, from the reverse strand. (From Ph.D. dissertation by <a href="https://core.ac.uk/download/pdf/35186947.pdf">Martin Kircher</a>)</small></td>
@@ -300,7 +300,7 @@ HHHHHHHHHHHHHGHHHHHHGHHHHHHHHHHHFHHHFHHHHHHHHHHH
 
 Illumina sequencing is based on identifying the individual nucleotides by the fluorescence signal emitted upon their incorporation into the growing sequencing read. Once the fluorescence intensities are extracted and translated into the four letter code. The deduction of nucleotide sequences from the images acquired during sequencing is commonly referred to as base calling. Due to the imperfect nature of the sequencing process and limitations of the optical instruments, base calling will always have inherent uncertainty. This is the reason why FASTQ files store the DNA sequence of each read together with a position-specific quality score that represents the error probability, i.e., how likely it is that an individual base call may be incorrect. The score is called [Phred score](http://www.phrap.com/phred/), $Q$, which is proportional to the probability $p$ that a base call is incorrect, where $Q = −10lg(p)$. For example, a Phred score of 10 corresponds to one error in every ten base calls ($Q = −10lg(0.1)$), or 90% accuracy; a Phred score of 20 corresponds to one error in every 100 base calls, or 99% accuracy. A higher Phred score thus reflects higher confidence in the reported base. To assign each base a unique score identifier (instead of numbers of varying character length), Phred scores are typically represented as ASCII characters. At http://ascii-code.com/ you can see which characters are assigned to what number. For raw reads, the range of scores will depend on the sequencing technology and the base caller used (Illumina, for example, used a tool called Bustard, or, more recently, RTA). Unfortunately, Illumina has been anything but consistent in how they calculated and ASCII-encoded the Phred score (see below)! In addition, Illumina now allows Phred scores for base calls with as high as 45, while 41 used to be the maximum score until the HiSeq X. This may cause issues with downstream sapplications that expect an upper limit of 41.
 
-![](../../images/illumina_qs.png)
+![Illumina quality score](../../images/illumina_qs.png)
 
 </div>
 
@@ -316,7 +316,7 @@ Sanger/Phred format that is also used by other sequencing platforms and the sequ
   </thead>
   <tbody>
     <tr>
-      <td><img src="../../images/fastq_qs.png" alt="" /></td>
+      <td><img src="../../images/fastq_qs.png" alt="FastQ quality score" /></td>
     </tr>
     <tr>
       <td><small>The ASCII interpretation and ranges of the different Phred score notations used by Illumina and the original Sanger interpretation. Although the Sanger format allows a theoretical score of 93, raw sequencing reads typically do not exceed a Phred score of 60. In fact, most Illumina-based sequencing will result in maximum scores of 41 to 45 (image from <a href="https://en.wikipedia.org/wiki/FASTQ_format">Wikipedia</a></small></td>
@@ -337,8 +337,8 @@ Sanger/Phred format that is also used by other sequencing platforms and the sequ
   </thead>
   <tbody>
     <tr>
-      <td style="text-align: left"><img src="../../images/good_fq.png" alt="" /></td>
-      <td style="text-align: left"><img src="../../images/bad_fq.png" alt="" /></td>
+      <td style="text-align: left"><img src="../../images/good_fq.png" alt="Good quality in FastQC" /></td>
+      <td style="text-align: left"><img src="../../images/bad_fq.png" alt="Bad quality in FastQC" /></td>
     </tr>
     <tr>
       <td style="text-align: left"><small><strong>A.</strong> Excellent quality</small></td>
@@ -379,7 +379,7 @@ Sanger/Phred format that is also used by other sequencing platforms and the sequ
   </thead>
   <tbody>
     <tr>
-      <td><img src="../../images/cached_genome.png" alt="" /></td>
+      <td><img src="../../images/cached_genome.png" alt="Cached genome" /></td>
     </tr>
     <tr>
       <td><small>Mapping against a pre-computed index in Galaxy.</small></td>
@@ -410,7 +410,7 @@ Sanger/Phred format that is also used by other sequencing platforms and the sequ
   </thead>
   <tbody>
     <tr>
-      <td><img src="../../images/uploaded_genome.png" alt="" /></td>
+      <td><img src="../../images/uploaded_genome.png" alt="Uploaded genome" /></td>
     </tr>
     <tr>
       <td><small>Mapping against a pre-computed index in Galaxy </small></td>
@@ -438,7 +438,7 @@ Sanger/Phred format that is also used by other sequencing platforms and the sequ
   </thead>
   <tbody>
     <tr>
-      <td><img src="../../images/bam_structure.png" alt="" /></td>
+      <td><img src="../../images/bam_structure.png" alt="BAM structure" /></td>
     </tr>
     <tr>
       <td><small><strong>Schematic representation of a SAM file</strong>. Each line of the optional header section starts with “@”, followed by the appropriate abbreviation (e.g., SQ for sequence dictionary which lists all chromosomes names (SN) and their lengths (LN)). The vast majority of lines within a SAM file typically correspond to read alignments where each read is described by the 11 mandatory entries (black font) and a variable number of optional fields (grey font). From <a href="http://chagall.med.cornell.edu/RNASEQcourse/Intro2RNAseq.pdf">tutorial</a> by Friederike Dündar, Luce Skrabanek, and Paul Zumbo.</small></td>
@@ -472,7 +472,7 @@ Sanger/Phred format that is also used by other sequencing platforms and the sequ
 
 <p>The following table explains the format and content of each field. The <code class="highlighter-rouge">FLAG</code>, <code class="highlighter-rouge">CIGAR</code>, and the optional fields (marked in blue) are explained in more detail below. The number of optional fields can vary widely between different SAM files and even between reads within in the same file. The field types marked in blue are explained in more detail in the main text below.</p>
 
-<p><img src="../../images/sam_fields.png" alt="" /></p>
+<p><img src="../../images/sam_fields.png" alt="SAM fields" /></p>
 
 <h3 id="flag-field"><code class="highlighter-rouge">FLAG</code> field</h3>
 
@@ -488,7 +488,7 @@ Sanger/Phred format that is also used by other sequencing platforms and the sequ
   </thead>
   <tbody>
     <tr>
-      <td><img src="../../images/sam_flag.png" alt="" /></td>
+      <td><img src="../../images/sam_flag.png" alt="SAM flag" /></td>
     </tr>
     <tr>
       <td><small>The <code class="highlighter-rouge">FLAG</code> field of SAM files stores information about the respective read alignment in one single decimal number. The decimal number is the sum of all the answers to the Yes/No questions associated with each binary bit. The hexadecimal representation is used to refer to the individual bits (questions). A bit is set if the corresponding state is true. For example, if a read is paired, <code class="highlighter-rouge">0x1</code> will be set, returning the decimal value of 1. Therefore, all <code class="highlighter-rouge">FLAG</code> values associated with paired reads must be uneven decimal numbers. Conversely, if the <code class="highlighter-rouge">0x1</code> bit is unset (= read is not paired), no assumptions can be made about <code class="highlighter-rouge">0x2</code>, <code class="highlighter-rouge">0x8</code>, <code class="highlighter-rouge">0x20</code>, <code class="highlighter-rouge">0x40</code> and <code class="highlighter-rouge">0x80</code> because they refer to paired reads. From <a href="http://chagall.med.cornell.edu/RNASEQcourse/Intro2RNAseq.pdf">tutorial</a> by Friederike Dündar, Luce Skrabanek, and Paul Zumbo</small></td>
@@ -584,7 +584,7 @@ contains a so-called CIGAR string indicating which operations were necessary to 
   </thead>
   <tbody>
     <tr>
-      <td><img src="../../images/cigar.png" alt="" /></td>
+      <td><img src="../../images/cigar.png" alt="CIGAR" /></td>
     </tr>
     <tr>
       <td><small>From <a href="http://chagall.med.cornell.edu/RNASEQcourse/Intro2RNAseq.pdf">tutorial</a> by Friederike Dündar, Luce Skrabanek, and Paul Zumbo.</small></td>
@@ -625,11 +625,11 @@ pairs in the format of <code class="highlighter-rouge">&lt;TAG&gt;:&lt;TYPE&gt;:
 
 <p>One of the best descriptions of BAM readgroups is on <a href="https://gatkforums.broadinstitute.org/discussion/1317/collected-faqs-about-bam-files">GATK support site</a>. We have gratefully stolen two tables describing the most important readgroup tags - <code class="highlighter-rouge">ID</code>, <code class="highlighter-rouge">SM</code>, <code class="highlighter-rouge">LB</code>, and <code class="highlighter-rouge">PL</code> - from GATK forum and provide them here:</p>
 
-<p><img src="../../images/rg.png" alt="" /></p>
+<p><img src="../../images/rg.png" alt="Read groups" /></p>
 
 <p>GATK forum also provides the following example:</p>
 
-<p><img src="../../images/rg_example.png" alt="" /></p>
+<p><img src="../../images/rg_example.png" alt="Read group example" /></p>
 
 <p>To see an example of read group manipulation in Galaxy see the following video:</p>
 
@@ -668,7 +668,7 @@ pairs in the format of <code class="highlighter-rouge">&lt;TAG&gt;:&lt;TYPE&gt;:
   </thead>
   <tbody>
     <tr>
-      <td><img src="../../images/pcr-duplicates.png" alt="" /></td>
+      <td><img src="../../images/pcr-duplicates.png" alt="PCR duplicates" /></td>
     </tr>
     <tr>
       <td><small>Analyzing molecules aligning with the same outer coordinates, a mapping quality of at least 30 and a length of at least 30nt, resulted in an average coverage of 12.9 per PCR duplicate and an empirical coverage distribution similar to an exponential/power law distribution (left upper panel). This indicates that many molecules are only observed for deeper sequencing while other molecules are available at higher frequencies. Analyzing length (left middle panel) and GC content (left lower panel) patterns as well as the combination (right panel) shows higher PCR duplicate counts for a GC content between 30% to 70% as well as for shorter molecules compared to longer molecules. This effect may be due to an amplification bias from the polymerase or the cluster generation process necessary for Illumina sequencing. From Ph.D. dissertation of <a href="https://www.qucosa.de/fileadmin/data/qucosa/documents/7110/pflichtexemplar_final.pdf">Martin Kircher</a>).</small></td>
@@ -696,7 +696,7 @@ Duplicates are identified as read pairs having identical 5' positions (coordinat
   </thead>
   <tbody>
     <tr>
-      <td><img src="../../images/sampling-bias.png" alt="" /></td>
+      <td><img src="../../images/sampling-bias.png" alt="Sampling bias" /></td>
     </tr>
     <tr>
       <td><small>The Variant Allele Frequency (VAF) bias determined by coverage and insert size variance. Reads are paired-end and read length is 76. The insert size distribution is modeled as a Gaussian distribution with mean at 200 and standard deviation shown on the x-axis. The true VAF is 0.05. The darkness at each position indicates the magnitude of the bias in the VAF. (From Zhou et al. <a href="https://bioinformatics.oxfordjournals.org/content/30/8/1073">2013</a>).</small></td>
