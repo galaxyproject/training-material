@@ -35,7 +35,7 @@ It consists of three main steps:
 
 > The general feature format (gene-finding format, generic feature format, GFF) is a file format used for describing genes and other features of DNA, RNA and protein sequences.
 
-<img src="../../images/gff3_format.png" width="70%">
+<img src="../../images/gff3_format.png" alt="GFF3 overview" width="70%">
 
 **GENBANK**
 
@@ -57,7 +57,7 @@ First we want to get some general information about our sequence.
 > 2. Check for sequence composition and GC content (**geecee**).
 > 3. Plot the sequence composition as bar chart.
 >
-> <img src="../../images/barchart_sequencecomposition.png" width="30%">
+> <img src="../../images/barchart_sequencecomposition.png" alt="Bar chart output of the sequence" width="30%">
 >
 {: .hands_on}
 
@@ -129,7 +129,7 @@ For similarity searches we use *NCBI BLAST+ blastp* to find similar proteins in 
 > 1. {% icon tool %} As input file, select the protein sequences from Augustus.
 > 2. Choose the protein BLAST database *SwissProt* and the output format *xml*.
 >
-> <img src="../../images/blastP.png" width="70%">
+> <img src="../../images/blastP.png" alt="blastp tool interface and parameters" width="70%">
 >
 > 3. Parsing the xml output (**Parse blast XML output**) results in changing the format style into tabular.
 >
@@ -157,7 +157,7 @@ For similarity searches we use *NCBI BLAST+ blastp* to find similar proteins in 
 >
 > 5. {% icon tool %} Choose the tool **Select lines that match an expression** and enter the following information: *Select lines from* [select the BLAST top hit descriptions result file]; *that* [not matching]; *the pattern* [gi].
 >
-> <img src="../../images/selectlines.png" width="50%">
+> <img src="../../images/selectlines.png" alt="Select lines that match an expression tool interface and parameters" width="50%">
 >
 >    > {% icon tip %} The result file will contain all proteins which do not have an entry in the second column and therefore have no similar protein in the SwissProt database.
 >    >
@@ -233,7 +233,7 @@ For identification of gene clusters, **antiSMASH** is used. The tool uses genban
 
 When you have a whole genome **antiSMASH** analysis, your result may look like this:
 
-<img src="../../images/antismash_full.png" width="80%">
+<img src="../../images/antismash_full.png" alt="The result of antiSMASH" width="80%">
 
 At the end, you can extract a reproducible workflow out of your history. The workflow should look like this:
 

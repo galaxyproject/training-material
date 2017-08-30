@@ -9,7 +9,7 @@ tutorial_name: ref-based-rad-seq
 
 In the study of [Hohenlohe *et al.* 2010](http://journals.plos.org/plosgenetics/article?id=10.1371/journal.pgen.1000862), a genome scan of nucleotide diversity and differentiation in natural populations of threespine stickleback *Gasterosteus aculeatus* was conducted. Authors used Illumina-sequenced RAD tags to identify and type over 45,000 single nucleotide polymorphisms (SNPs) in each of 100 individuals from two oceanic and three freshwater populations.
 
-![](../../images/RAD4_Population_Genomics/Hohenlohe_et_al_2010.png)
+![The abstract of the paper on Population Genomics](../../images/RAD4_Population_Genomics/Hohenlohe_et_al_2010.png)
 
 We here proposed to re-analyze these data at least until the population genomics statistics calculation step using STACKS pipeline. *Gasterosteus aculeatus* draft genome will be used here as reference genome. In a reference-based RAD-seq data analysis, the reads are aligned (or mapped) against a reference genome to constrain our analysis to focus on already discovered loci. A de-novo approach can also be conducted (see [de_novo tutorial]({{site.url}}/topics/sequence-analysis/tutorials/de-novo-rad-seq/tutorial.html), enhancing discoverability of new loci of interest but also of false positive one).
 
@@ -35,7 +35,7 @@ We will look at the first run SRR034316 out of 7:
 
 You can directly used archive from the Sequence Read Archive (SRA) for raw reads.
 
-![](../../images/RAD4_Population_Genomics/Input_data_ENA.png)
+![Input data in ENA](../../images/RAD4_Population_Genomics/Input_data_ENA.png)
 
 To download all training datasets (i.e reads, reference genome, population map file and barcodes file), you need to use the corresponding [CeSGO hub](https://cesgo.genouest.org/resources/370/supportingdocs) repository.
 
@@ -85,7 +85,7 @@ For demultiplexing, we use the Process Radtags tool from [STACKS](https://www.g3
 >
 > 1. **Process Radtags** {% icon tool %}: Run `Stacks: process radtags` on FastQ file to demultiplex the reads
 >
-> ![](../../images/RAD4_Population_Genomics/Process_radtags_in.png)
+> ![Process radtags input parameters](../../images/RAD4_Population_Genomics/Process_radtags_in.png)
 >
 >
 >    > ### {% icon question %} Questions
@@ -104,39 +104,39 @@ For demultiplexing, we use the Process Radtags tool from [STACKS](https://www.g3
 >    >    <li>Sequencing quality is essential! Each time your sequencing quality decreases, you loose data and thus essential biological information!</li>
 >    >    </ol>
 >    >    </details>
-> ![](../../images/RAD4_Population_Genomics/Process_radtags_out_log.png)
+> ![Process radtags output log](../../images/RAD4_Population_Genomics/Process_radtags_out_log.png)
 >
 > 2. **Process Radtags** {% icon tool %}: Re-Run `Stacks: process radtags` on FastQ file playing with parameters
 >
 > In `advanced options`, activate the `Discard reads with low quality scores` option and play with the score limit (default vs 20 for example) and examine the change in reads retained. Note that you can play also with the sliding window score threshold, by default 15% of the length of the read. This sliding window parameter allows notably the user to deal with the declining quality at the 3' end of reads.
 >
-> ![](../../images/RAD4_Population_Genomics/Process_radtags_in_advancedparameter0.PNG)
+> ![Process radtags: advanced parameters](../../images/RAD4_Population_Genomics/Process_radtags_in_advancedparameter0.PNG)
 >
-> ![](../../images/RAD4_Population_Genomics/Process_radtags_in_advancedparameter1.PNG)
+> ![Process radtags: advanced parameters](../../images/RAD4_Population_Genomics/Process_radtags_in_advancedparameter1.PNG)
 >
 > To do that, you can use data handling Galaxy tools to cut the interesting lines of each `result.log with Stacks: process radtags` files OR, as I made, just copy/paste these lines on the Galaxy upload tool using Paste/fetch data section and modifying the File header by sample and filename by Score 10 / Score 20 and noscorelimit for example... Before Starting the upload, you can select the `Convert spaces to tabs` option through the `Upload configuration` wheel.
 >
-> ![](../../images/RAD4_Population_Genomics/Process_radtags_in_advancedparameter_compare_copy.PNG)
+> ![The output after using advanced parameters](../../images/RAD4_Population_Genomics/Process_radtags_in_advancedparameter_compare_copy.PNG)
 >
-> ![](../../images/RAD4_Population_Genomics/Process_radtags_in_advancedparameter_compare_paste.PNG)
+> ![Creating comparison file of the outputs](../../images/RAD4_Population_Genomics/Process_radtags_in_advancedparameter_compare_paste.PNG)
 >
 > You can use the `Charts` functionality through the Visualize button reachable on the `Radtags logs` file you just generated.
 >
-> ![](../../images/RAD4_Population_Genomics/Process_radtags_charts.PNG)
+> ![Process radtags: visualizing with a chart](../../images/RAD4_Population_Genomics/Process_radtags_charts.PNG)
 >
 > If like me you don't have payed attention to the organization of you file for the graphical representation you obtain a non optimal bars diagram with a not intelligent X-axis ordering. There is a lot of diffferent manner to fix this. You can use the copy/paste "bidouille" like seen previously, or you can use Galaxy tools to manipulate the `radtags logs` (did you change the filename from `pasted entry` to another label ?) file to generate a better graph. For example, you can use `Select lines that match an expression` tool to select rows then use the `Concatenate datasets tail-to-head` tool to reorganize these lines in a new file... OR, as I made, you can just sort the file using the first column.
 >
-> ![](../../images/RAD4_Population_Genomics/Process_radtags_charts_tablemodif.PNG)
+> ![Sort tool inputs](../../images/RAD4_Population_Genomics/Process_radtags_charts_tablemodif.PNG)
 >
 > And you obtain a file like this one, ready to generate a beautiful and smart bar diagram!
 >
-> ![](../../images/RAD4_Population_Genomics/Process_radtags_charts_tablemodif_view.PNG)
+> ![The output of the sorted comparison file](../../images/RAD4_Population_Genomics/Process_radtags_charts_tablemodif_view.PNG)
 >
-> ![](../../images/RAD4_Population_Genomics/Process_radtags_charts_end.PNG)
+> ![The bar diagram](../../images/RAD4_Population_Genomics/Process_radtags_charts_end.PNG)
 >
 >Using filter like `clean data, remove any read with an uncalled base` has here few impact:
 >
-> ![](../../images/RAD4_Population_Genomics/Process_radtags_out_parameter2.png)
+> ![The output of clean tool](../../images/RAD4_Population_Genomics/Process_radtags_out_parameter2.png)
 >
 
 The demultiplexed sequences are raw sequences from the sequencing machine, without any pretreatments. They need to be controlled for their quality.
@@ -178,7 +178,7 @@ Here we will use BWA. BWA is a fast light-weighted tool that aligns relatively s
 
 > 1. **BWA** {% icon tool %}: Run **BWA** with the Commonly Used settings after specifying the fasta reference genome file from history, the fact that you are working with single-end libraries and finally the collection of demultiplexed FastQ files.
 >
->    ![](../../images/RAD4_Population_Genomics/reference/Map_with_BWA.png)
+>    ![Stacks: Map with BWA tool parameters](../../images/RAD4_Population_Genomics/reference/Map_with_BWA.png)
 
 **BWA** generates BAM files with the mapped reads.
 
@@ -195,7 +195,7 @@ Run `Stacks: Reference map` Galaxy tool. This program will run pstacks, cstacks,
 
 > **Stacks: Reference map** {% icon tool %}: Run **Stacks** selecting the population usage. Specify each BWA-aligned individual as a sample, a population map and a minimum depth of coverage of 3.
 >
->    ![](../../images/RAD4_Population_Genomics/reference/reference_map_in.png)
+>    ![Stacks: Reference map input parameters](../../images/RAD4_Population_Genomics/reference/reference_map_in.png)
 
 >    > ### {% icon comment %} Comment
 >    >
@@ -203,13 +203,13 @@ Run `Stacks: Reference map` Galaxy tool. This program will run pstacks, cstacks,
 
 > Once Stacks has completed running, investigate the output files: `result.log` and `catalog.*` (snps, alleles and tags). Notice that each locus now has a chromosome/base pair specified in each of the *tags.tsv files and in the catalog files.
 >
->    ![](../../images/RAD4_Population_Genomics/reference/reference_map_out.png)
+>    ![Stackss: Reference map output](../../images/RAD4_Population_Genomics/reference/reference_map_out.png)
 >
 
 # Calculate population genomics statistics
 > **Stacks: populations** {% icon tool %}: Run the last step of **Stacks: Reference map** pipeline specifying data filtering options (minimum percentage of individuals in a population required to process a locus for that population: 0.75 , output options (VCF and Structure) and enabling SNP and haplotype-based F statistics calculation.
 >
->    ![](../../images/RAD4_Population_Genomics/reference/populations_in.png)
+>    ![Stacks: populations tool input](../../images/RAD4_Population_Genomics/reference/populations_in.png)
 
 
 
@@ -235,4 +235,4 @@ Run `Stacks: Reference map` Galaxy tool. This program will run pstacks, cstacks,
 In this tutorial, we have analyzed real RAD sequencing data to extract useful information, such as which loci are candidate regarding the genetic differentiation between freshwater and oceanic Stickelback populations. To answer these questions, we analyzed RAD sequence datasets using a reference-based RAD-seq data analysis approach. This approach can be sum up with the following scheme:
 
 
-![](../../images/ref_based_workflow.PNG)
+![Ref based tutorial workflow](../../images/ref_based_workflow.PNG)

@@ -24,7 +24,7 @@ These datasets represent genomic DNA (enriched for mitochondria via a long range
 
 Right click (or Ctrl-click) on [this link](https://usegalaxy.org/library/list#folders/Fab5f788f07073c11) to open a new browser window and position this window side-by-side with the window displaying this tutorial. You will see this:
 
-![](../../images/grab_data.png)
+![Data in Galaxy library](../../images/grab_data.png)
 {: .img-responsive}
 
 Select all datasets and click **to History** button. This will import all datasets into a history. Follow the direction and will see a screen like this:
@@ -34,7 +34,7 @@ Select all datasets and click **to History** button. This will import all datase
 
 ## Creating a paired dataset collection
 
-Now click the checkbox in ![](../../images/historyItemControls.png) and you will see your history changing like this:
+Now click the checkbox in ![historyItemControls](../../images/historyItemControls.png) and you will see your history changing like this:
 
 ![historyWithCheckboxes](../../images/historyWithCheckboxes.png)
 {: .img-responsive}

@@ -43,7 +43,7 @@ The data we use in this tutorial is available at [Zenodo](https://zenodo.org/rec
 >
 > 3. Go to the web page result page and have a closer look at 'Per base sequence content'
 >
->    ![](../../images/fastqc.png)
+>    ![FastQC webpage results](../../images/fastqc.png)
 >
 >    > ### {% icon question %} Questions
 >    >
@@ -101,7 +101,7 @@ The data we use in this tutorial is available at [Zenodo](https://zenodo.org/rec
 > 5. **MethylDackel** {% icon tool %}: Set the parameters ```keepSingleton``` and ```keepDiscordant``` to ```Yes```.
 > 6. **MethylDackel** {% icon tool %}: Click ```Execute```.
 >
->    ![](../../images/methylation_bias_example_data.png)
+>    ![Methylation bias example](../../images/methylation_bias_example_data.png)
 >
 >    > ### {% icon question %} Questions
 >    >
@@ -173,7 +173,7 @@ The data we use in this tutorial is available at [Zenodo](https://zenodo.org/rec
 >
 > The output should look something like this:
 >
-> ![](../../images/methylation_output.png)
+> ![Methylation output](../../images/methylation_output.png)
 >
 > Lets see how the methylation looks for a view provided files:
 > 1. **Galaxy** {% icon tool %}: Import from the data library the files ```NB1_CpG.meth.bedGraph```

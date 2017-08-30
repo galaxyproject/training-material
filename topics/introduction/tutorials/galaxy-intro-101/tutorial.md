@@ -321,6 +321,7 @@ Galaxy makes this very easy with the `Extract workflow` option. This means any t
 >
 > 5. Click on **Workflow** in the top menu of Galaxy. Here you have a list of all your workflows. Your newly created workflow should be listed at the top:
 >
+
 >    ![`Your workflows` list](../../images/101_26.png)
 {: .hands_on}
 
