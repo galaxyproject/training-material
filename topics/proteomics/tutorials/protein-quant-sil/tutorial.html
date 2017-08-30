@@ -1,0 +1,303 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Galaxy Training!</title>
+        <link rel="stylesheet" href="https://galaxyproject.github.io/training-material/assets/css/bootstrap.min.css?v=2">
+        <link rel="stylesheet" href="https://galaxyproject.github.io/training-material/assets/css/main.css?v=2">
+        <link rel="stylesheet" href="https://galaxyproject.github.io/training-material/assets/css/font-awesome.css">
+        <link rel="stylesheet" href="https://galaxyproject.github.io/training-material/assets/css/syntax_highlighting.css">
+    </head>
+    <body>
+        
+
+
+<header>
+    <nav class="navbar navbar-toggleable-md navbar-inverse">
+        <div class="container">
+            <a class="navbar-brand" href="https://galaxyproject.github.io/training-material/">
+                <img src="https://galaxyproject.github.io/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://galaxyproject.github.io/training-material/topics/proteomics" title="Go back to list of tutorials">
+                            <i class="fa fa-folder-o" aria-hidden="true"></i> Proteomics
+                        </a>
+                    </li>
+
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://galaxyproject.github.io/training-material/topics/proteomics/slides" title="Slides for this tutorial">
+                            <i class="fa fa-slideshare" aria-hidden="true"></i> Introduction slides
+                        </a>
+                    </li>
+                    
+
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/galaxyproject/training-material/tree/master/topics/proteomics/docker" title="Docker image for this tutorial">
+                            <i class="fa fa-ship" aria-hidden="true"></i> Docker image
+                        </a>
+                    </li>
+                    
+
+                    
+
+                    
+
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://galaxyproject.github.io/training-material/topics/proteomics#references" title="References">
+                            <i class="fa fa-book" aria-hidden="true"></i> Literature
+                        </a>
+                    </li>
+                    
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Chat on gitter">
+                            <i class="fa fa-life-ring" aria-hidden="true"></i> Help
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/galaxyproject/training-material/tree/master/topics/proteomics/tutorials/protein-quant-sil/tutorial.md">
+                            <i class="fa fa-github" aria-hidden="true"></i> Edit
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<div class="container main-content">
+    <section class="tutorial">
+        <h1>Peptide and Protein Quantification via Stable Isotope Labelling (SIL)</h1>
+
+        <blockquote class="overview">
+            <h3>Overview</h3>
+
+            <strong><i class="fa fa-question-circle" aria-hidden="true"></i> Questions</strong>
+            <ul>
+            
+            <li>What are MS1 features?</li>
+            
+            <li>How to quantify based on MS1 features?</li>
+            
+            <li>How to import peptide and protein IDs?</li>
+            
+            <li>How to match quantitations and IDs?</li>
+            
+            <li>How to evaluate and optimize the results?</li>
+            
+            </ul>
+
+            <strong><i class="fa fa-bullseye" aria-hidden="true"></i> Objectives</strong>
+            <ul>
+            
+            <li>MS1 feature quantitation and mapping of quantitations to protein IDs.</li>
+            
+            </ul>
+
+            
+            <strong><i class="fa fa-check-circle" aria-hidden="true"></i> Requirements</strong>
+            <ul>
+            
+                <li>
+                    
+                    <a href="https://galaxyproject.github.io/training-material/topics/introduction/">Galaxy introduction</a>
+                    
+                </li>
+            
+            
+            </ul>
+            
+
+            <p><strong><i class="fa fa-hourglass-end" aria-hidden="true"></i> Time estimation:</strong> 1h/1d</p>
+        </blockquote>
+
+        <h1 class="no_toc" id="introduction">Introduction</h1>
+
+<p>To compare protein amounts in different samples from MS/MS data, two different experiment setups exist. Firstly, unmodified proteins can be measured in separate runs at one sample per MS-run. Secondly, proteins of samples to compare can be labelled with small chemical tags, mixed, and measured side-by-side in a single MS-run.
+There are two types of chemical tags: isobaric tags display the same mass on first hand, but fragment during the generation of the MS/MS spectra to yield reporter ions of different mass. The intensity of those reporter ions can be compared in MS/MS spectra. There are two types of isobaric tags commercially available: tandem mass tags (TMT) and isobaric tags for relative and absolute quantitation (iTRAQ).
+The second type of chemical tags are isotopic. They are chemically identical, but differ in their mass due to incorporated stable isotopes. Examples of different isotopic tags for stable isotope labelling (SIL) are ICAT, SILAC, dimethylation, or heavy oxygen (<sup>18</sup>O).
+Incorporation of stable isotopes results in different peptide masses on MS1 level, which give rise to coeluting ion traces in the TIC with a mass difference typical for each different chemical tag.</p>
+
+<p>This tutorial deals with protein quantitation via stable isotope labelling (SIL). We will use tools of the OpenMS suite.<br />
+Because we solely cover <em>quantitation</em>, you need to perform peptide and protein ID in beforehand. To learn about protein ID in Galaxy, please consider <a href="https://galaxyproject.github.io/training-material/topics/proteomics/tutorials/protein-id-sg-ps/tutorial.html">this tutorial</a>.</p>
+
+<p>This tutorial covers <em>relative</em> quantitation only (i.e. comparison of abundances in different samples, no <em>absolute</em> quantitation of peptides / proteins).</p>
+
+<p>If you still are in the planning phase of your quantitative proteomics experiment, you may want to consider our tutorial on different <a href="https://galaxyproject.github.io/training-material/topics/proteomics/tutorials/labelfree-vs-labelled/tutorial.html">quantitation methods</a> first.</p>
+
+<blockquote class="hands_on">
+  <h3 id="-hands-on-introduction"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Introduction</h3>
+  <p>In the Hands-on section of this tutorial, we will use a quantitative comparison of <strong>HEK <em>OR</em> E.coli</strong> cell lysate as a test dataset. In this experiment, the very same cell lysate was once labelled with light, once with heavy <strong>dimethyl <em>OR</em> SILAC</strong> and both samples were subsequently mixed in a certain ratio. For a detailed description of the dataset, please refer to the description in the <a href="">PRIDE archive</a>.
+Your objective in this hands-on-tutorial is to find out the correct mixing ratio of the test sample.</p>
+</blockquote>
+
+<blockquote class="agenda">
+  <h3 id="agenda">Agenda</h3>
+
+  <p>In this tutorial, we will deal with:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#ms1-feature-detection" id="markdown-toc-ms1-feature-detection">MS1 Feature Detection</a></li>
+  <li><a href="#peptide-and-protein-identification-and-conversion" id="markdown-toc-peptide-and-protein-identification-and-conversion">Peptide and Protein Identification and Conversion</a></li>
+  <li><a href="#quant-to-id-matching" id="markdown-toc-quant-to-id-matching">Quant to ID matching</a></li>
+  <li><a href="#expert-level-evaluation-and-optimization-of-quantitation-results" id="markdown-toc-expert-level-evaluation-and-optimization-of-quantitation-results">Expert level: Evaluation and Optimization of Quantitation Results</a></li>
+</ol>
+
+</blockquote>
+
+<h1 id="ms1-feature-detection">MS1 Feature Detection</h1>
+<p>Quantitation on MS1 level may in principle be carried out without prior knowledge of peptide / protein IDs. However, some quantitation algorithms take the IDs as an input to make sure that every PSM that was identified is also quantified. This is not the case in our example here.
+In the OpenMS suite, most of the provided tools for MS1 feature detection quantify solely based on mzML files. The advantage of this approach is that quantitations can be made on strict criteria to reduce misquantitations. The drawback is that not all IDs can be matched to a quantitation later on in the workflow.
+The tool settings need to be carefully tested and evaluated manually to obtain optimal results. We will explain this in the section <a href="#expert-level-evaluation-and-optimization-of-quantitation-results">Evaluation and Optimization of Quantitation Results</a>.</p>
+
+<blockquote class="hands_on">
+  <h3 id="-hands-on-ms1-feature-detection"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: MS1 Feature Detection</h3>
+
+  <ol>
+    <li>Import the test data from <a href="">zenodo</a>. The file type of the data is mzML. The data have not been modified during the conversion from the machine raw file, neither background removal, nor peak picking (centroiding) has been performed.</li>
+    <li>Run <code class="highlighter-rouge">FeatureFinderMultiplex</code><i class="fa fa-wrench" aria-hidden="true"></i> on the mzML file. Change <strong><code class="highlighter-rouge">Labelling</code></strong> to <code class="highlighter-rouge">\[ \] \[Arg6,Lys6\]</code>.</li>
+  </ol>
+
+  <blockquote class="tip">
+    <h3 id="-tip-expert-level-detecting-features-of-knockouts"><i class="fa fa-lightbulb-o" aria-hidden="true"></i> Tip (Expert level): Detecting features of knockouts</h3>
+    <p>In biology, there are rarely cases in which a gene product is completely shut off between two conditions. Rather, most changes are <strong>word missing</strong>. However, in some situations, you will have the situation that a protein is present in only one of the tested conditions and completely lacking in another. A classical example would be comparing a “knockout” mouse with its “wild-type” counterpart.
+Due to the feature detection algorithm of <code class="highlighter-rouge">FeatureFinderMultiplex</code>, those features would normally be disregarded, as they do not look like typical features in labelled samples.</p>
+
+    <p>However, there is a built-in option in <code class="highlighter-rouge">FeatureFinderMultiplex</code> that enables finding of “knockout features”. If you expect one or more proteins to be completely missing in at least one of your conditions, select the advanced option **<code class="highlighter-rouge">knockouts present</code> **.
+Switching on this option is not recommended as a default setting, as it increases the possibility of false positives. When using this option, be advised to check for false positives carefully, as described <a href="#expert-level-evaluation-and-optimization-of-quantitation-results">below</a>.</p>
+  </blockquote>
+</blockquote>
+<h1 id="peptide-and-protein-identification-and-conversion">Peptide and Protein Identification and Conversion</h1>
+
+<blockquote class="hands_on">
+  <h3 id="-hands-on-peptide-and-protein-identification-and-conversion"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Peptide and Protein Identification and Conversion</h3>
+  <ol>
+    <li>Run the workflow “ProteinID_SG_PS” on the test dataset.</li>
+    <li>Use <strong><code class="highlighter-rouge">IDConverter</code></strong> to convert the mzid output of <code class="highlighter-rouge">Peptide Shaker</code> <i class="fa fa-wrench" aria-hidden="true"></i> to mzidentML.</li>
+  </ol>
+</blockquote>
+
+<h1 id="quant-to-id-matching">Quant to ID matching</h1>
+
+<blockquote class="hands_on">
+  <h3 id="-hands-on-quant-to-id-matching"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Quant to ID matching</h3>
+
+  <ol>
+    <li>Run <code class="highlighter-rouge">ProteinQuantifier</code> <i class="fa fa-wrench" aria-hidden="true"></i> on
+2.</li>
+  </ol>
+
+  <blockquote class="question">
+    <h3 id="-questions"><i class="fa fa-question-circle" aria-hidden="true"></i> Questions</h3>
+  </blockquote>
+</blockquote>
+
+<h1 id="expert-level-evaluation-and-optimization-of-quantitation-results">Expert level: Evaluation and Optimization of Quantitation Results</h1>
+<p><code class="highlighter-rouge">FeatureFinderMultiplex</code> searches for multiple similar features that elute at the same time, but diverge by a mass shift fitting to the label used. <code class="highlighter-rouge">FeatureFinderMultiplex</code> uses several parameters that may be used to optimize your search results. Two important parameters are <strong><code class="highlighter-rouge">Average elution time</code> and <code class="highlighter-rouge">Averagine similarity</code></strong>.
+    - <code class="highlighter-rouge">Average elution time</code>: To improve results, you may look at the mzML file first and find out the average elution time of peaks. <strong>How?</strong>
+    - <code class="highlighter-rouge">Averagine similarity</code>: describes the similarity of two features. Play around with this parameter to optimize the number of features detected. Be careful, reducing it may lead to false positives.</p>
+
+<blockquote>
+  <h3 id="comment-benchmarking-parameters-for-opimization---what-is-a-good-result">Comment: Benchmarking parameters for opimization - What is a good result?</h3>
+
+  <p>The quality of the results can be measured by so-called “benchmarking parameters”.</p>
+
+  <p>Benchmarking parameters for <code class="highlighter-rouge">FeatureFinderMultiplex</code>:
+    1. Number of features that can be linked to peptide IDs (and vice-versa).
+    2. Although the first parameter gives a good measure of quality, it does not rule out that false positive features or IDs were matched. To check for false positives, you will have to scan through your data manually. To do so, open both the <code class="highlighter-rouge">FeatureFinderMultiplex</code> consensusXML output and the mzidentML file into <a href="">TOPPView</a>.
+        - <strong>Caution</strong> Manual evaluation is prone to biases, as you can look solely at small parts of your data. To avoid this, try to look at the <em>very same</em> areas / the same features of all different result files.
+    3. If you were using the option **<code class="highlighter-rouge">knockouts present</code> **, check, if the detected “knockout features” fit to your expectations.</p>
+</blockquote>
+
+<blockquote class="hands_on">
+  <h3 id="-hands-on-evaluation-and-optimization-of-quantitation-results"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Evaluation and Optimization of Quantitation Results</h3>
+
+  <ol>
+    <li>Run the whole WF again, change ** a single setting (averagine?)** in <code class="highlighter-rouge">FeatureFinderMultiplex</code>.</li>
+    <li>Run <code class="highlighter-rouge">FileInfo</code> <i class="fa fa-wrench" aria-hidden="true"></i> on the results -&gt; number of ID-Feature-matches</li>
+    <li>Run <code class="highlighter-rouge">dongs</code> <i class="fa fa-wrench" aria-hidden="true"></i> on the results -&gt; restrict to a small areas</li>
+    <li>Open results in TOPPView.</li>
+  </ol>
+
+  <blockquote class="question">
+    <h3 id="-questions-1"><i class="fa fa-question-circle" aria-hidden="true"></i> Questions</h3>
+    <ol>
+      <li>Which setting led to more ID-Feature-matches?</li>
+      <li>Using the default settings, how many features were not mapped to IDs? How many IDs were not mapped to features?</li>
+    </ol>
+  </blockquote>
+</blockquote>
+
+
+        
+        <blockquote class="key_points">
+            <h3><i class="fa fa-key" aria-hidden="true"></i> Key points</h3>
+
+            <ul>
+                
+                <li>Stable isotopes result in multiple parallel MS1 ion traces.</li>
+                
+                <li>MS1 ion traces can be used to relatively quantify proteins of different samples in a sing</li>
+                
+                <li>Quantitations have to be mapped to PSMs.</li>
+                
+                <li>PSM quantitations can be used to calculate protein quantitations.</li>
+                
+                <li>Proper quantitation and mapping needs careful evaluation and optimization.</li>
+                
+            </ul>
+        </blockquote>
+        
+
+        
+        <h1>Useful literature</h1>
+        <p>Useful information regarding this type of analysis with descriptions and paper references for the tools used in this tutorial, and literature for this analysis techniques and interpretations can be found <a href="https://galaxyproject.github.io/training-material/topics/proteomics#references">here</a>.</p>
+        
+
+        <h3><i class="fa fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!</h3>
+
+        <hr>
+
+        <blockquote class="overview">
+            <h3><i class="fa fa-comments-o" aria-hidden="true"></i> Feedback</h3>
+            Please take a moment and provide your feedback on this tutorial. Your feedback will help guide and improve future revisions to this tutorial.
+            <a href="https://tinyurl.com/GTNfeedback">Feedback Form</a>
+        </blockquote>
+    </section>
+</div>
+
+<footer>
+    <div class="container">
+        <p>
+            This material is the result of a collaborative work. Thanks the
+            <a href="https://wiki.galaxyproject.org/Teach/GTN">Galaxy Training Network</a>
+            and all the contributors
+            
+        </p>
+        <p>
+            Found a typo? Something is wrong in this tutorial? Edit it on
+            <a href="https://github.com/galaxyproject/training-material/tree/master/topics/proteomics/tutorials/protein-quant-sil/tutorial.md">GitHub</a>.
+        </p>
+    </div>
+</footer>
+
+    </body>
+    <script type="text/javascript" src="https://galaxyproject.github.io/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="https://galaxyproject.github.io/training-material/assets/js/tether.min.js"></script>
+    <script type="text/javascript" src="https://galaxyproject.github.io/training-material/assets/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://galaxyproject.github.io/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</html>

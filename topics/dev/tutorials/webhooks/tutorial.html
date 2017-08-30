@@ -1,0 +1,435 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Galaxy Training!</title>
+        <link rel="stylesheet" href="https://galaxyproject.github.io/training-material/assets/css/bootstrap.min.css?v=2">
+        <link rel="stylesheet" href="https://galaxyproject.github.io/training-material/assets/css/main.css?v=2">
+        <link rel="stylesheet" href="https://galaxyproject.github.io/training-material/assets/css/font-awesome.css">
+        <link rel="stylesheet" href="https://galaxyproject.github.io/training-material/assets/css/syntax_highlighting.css">
+    </head>
+    <body>
+        
+
+
+<header>
+    <nav class="navbar navbar-toggleable-md navbar-inverse">
+        <div class="container">
+            <a class="navbar-brand" href="https://galaxyproject.github.io/training-material/">
+                <img src="https://galaxyproject.github.io/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://galaxyproject.github.io/training-material/topics/dev" title="Go back to list of tutorials">
+                            <i class="fa fa-folder-o" aria-hidden="true"></i> Development in Galaxy
+                        </a>
+                    </li>
+
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://galaxyproject.github.io/training-material/topics/dev/slides" title="Slides for this tutorial">
+                            <i class="fa fa-slideshare" aria-hidden="true"></i> Introduction slides
+                        </a>
+                    </li>
+                    
+
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/galaxyproject/training-material/tree/master/topics/dev/docker" title="Docker image for this tutorial">
+                            <i class="fa fa-ship" aria-hidden="true"></i> Docker image
+                        </a>
+                    </li>
+                    
+
+                    
+
+                    
+
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://galaxyproject.github.io/training-material/topics/dev#references" title="References">
+                            <i class="fa fa-book" aria-hidden="true"></i> Literature
+                        </a>
+                    </li>
+                    
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Chat on gitter">
+                            <i class="fa fa-life-ring" aria-hidden="true"></i> Help
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/galaxyproject/training-material/tree/master/topics/dev/tutorials/webhooks/tutorial.md">
+                            <i class="fa fa-github" aria-hidden="true"></i> Edit
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<div class="container main-content">
+    <section class="tutorial">
+        <h1>Galaxy Webhooks</h1>
+
+        <blockquote class="overview">
+            <h3>Overview</h3>
+
+            <strong><i class="fa fa-question-circle" aria-hidden="true"></i> Questions</strong>
+            <ul>
+            
+            <li>What are Galaxy Webhooks?</li>
+            
+            <li>How to create them?</li>
+            
+            </ul>
+
+            <strong><i class="fa fa-bullseye" aria-hidden="true"></i> Objectives</strong>
+            <ul>
+            
+            <li>Discover what Galaxy Webhooks are</li>
+            
+            <li>Be able to create Webhooks</li>
+            
+            <li>Be able to add a Galaxy Webhook in a Galaxy instance</li>
+            
+            </ul>
+
+            
+
+            <p><strong><i class="fa fa-hourglass-end" aria-hidden="true"></i> Time estimation:</strong> 1h</p>
+        </blockquote>
+
+        <h2 id="introduction">Introduction</h2>
+
+<p>In this tutorial we are going to demonstrate how to add a webhook to the tool-execution endpoint. This is the web-page that appears
+after you have executed a tool. As a more useful example we are going to ask <a href="http://phdcomics.com">phdcomics</a> for a random comic that we can
+display to entertain our users.</p>
+
+<p>At first let’s create a config file that defines the name and the type of your webhook. The <code class="highlighter-rouge">name</code> is <code class="highlighter-rouge">phdcomics</code> and with the type we define the entry-points
+at which we modify the Galaxy user-interface. In our case we want to display an image at the <code class="highlighter-rouge">tool</code> and <code class="highlighter-rouge">workflow</code> entry-point.
+The key <code class="highlighter-rouge">activate</code> gives you control per-webhook to activate or deactivate it.</p>
+
+<blockquote>
+  <h3 id="-hands-on"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on</h3>
+
+  <ol>
+    <li>
+      <p>Create a file named <code class="highlighter-rouge">config/phdcomics.yaml</code> with the following content:</p>
+
+      <div class="language-yaml highlighter-rouge"><pre class="highlight"><code>   <span class="s">name</span><span class="pi">:</span> <span class="s">phdcomics</span>
+   <span class="s">type</span><span class="pi">:</span>
+     <span class="pi">-</span> <span class="s">tool</span>
+     <span class="pi">-</span> <span class="s">workflow</span>
+   <span class="s">activate</span><span class="pi">:</span> <span class="s">true</span>
+</code></pre>
+      </div>
+    </li>
+  </ol>
+</blockquote>
+
+<p>The next step is to define HTML/JS part which will control the part of the Galaxy UI. We create a new PHDComicsAppView view extended from Backbone.
+Inside this view we define a simple <code class="highlighter-rouge">div</code>-container with a button and a placeholder for our image called <code class="highlighter-rouge">phdcomics-img</code>. You can add additional
+functionality to your view, for example getting a new image on button click. The essential functionality however is stored getRandomComic.
+The big problem with phdcomics is that there is no nice API to retrive the comics, so we need to fallback to parse the HTML pages. We decided to do this
+in Python to demonstrate webhooks abilitity to call self-defined python functions. Please note the <code class="highlighter-rouge">url = galaxyRoot + 'api/webhooks/phdcomics/get_data';</code>, which
+calls an REST endpoint defined by use in the next step. The return value of this endpoint is retrived in JS and can be displayed or modified.</p>
+
+<blockquote>
+  <h3 id="-hands-on-1"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on</h3>
+
+  <ol>
+    <li>
+      <p>Create a file named <code class="highlighter-rouge">static/script.js</code> with the following content:</p>
+
+      <div class="language-js highlighter-rouge"><pre class="highlight"><code>    <span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">ready</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+
+        <span class="kd">var</span> <span class="nx">galaxyRoot</span> <span class="o">=</span> <span class="k">typeof</span> <span class="nx">Galaxy</span> <span class="o">!=</span> <span class="s1">'undefined'</span> <span class="p">?</span> <span class="nx">Galaxy</span><span class="p">.</span><span class="nx">root</span> <span class="p">:</span> <span class="s1">'/'</span><span class="p">;</span>
+
+        <span class="kd">var</span> <span class="nx">PHDComicsAppView</span> <span class="o">=</span> <span class="nx">Backbone</span><span class="p">.</span><span class="nx">View</span><span class="p">.</span><span class="nx">extend</span><span class="p">({</span>
+            <span class="na">el</span><span class="p">:</span> <span class="s1">'#phdcomics'</span><span class="p">,</span>
+
+            <span class="na">appTemplate</span><span class="p">:</span> <span class="nx">_</span><span class="p">.</span><span class="nx">template</span><span class="p">(</span>
+                <span class="s1">'&lt;div id="phdcomics-header"&gt;'</span> <span class="o">+</span>
+                   <span class="s1">'&lt;div id="phdcomics-name"&gt;PHD Comics&lt;/div&gt;'</span> <span class="o">+</span>
+                    <span class="s1">'&lt;button id="phdcomics-random"&gt;Random&lt;/button&gt;'</span> <span class="o">+</span>
+                <span class="s1">'&lt;/div&gt;'</span> <span class="o">+</span>
+                <span class="s1">'&lt;div id="phdcomics-img"&gt;&lt;/div&gt;'</span>
+            <span class="p">),</span>
+
+            <span class="na">imgTemplate</span><span class="p">:</span> <span class="nx">_</span><span class="p">.</span><span class="nx">template</span><span class="p">(</span><span class="s1">'&lt;img src="&lt;%= src %&gt;""&gt;'</span><span class="p">),</span>
+
+            <span class="na">events</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s1">'click #phdcomics-random'</span><span class="p">:</span> <span class="s1">'getRandomComic'</span>
+            <span class="p">},</span>
+
+            <span class="na">initialize</span><span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+                <span class="k">this</span><span class="p">.</span><span class="nx">render</span><span class="p">();</span>
+            <span class="p">},</span>
+
+            <span class="na">render</span><span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+                <span class="k">this</span><span class="p">.</span><span class="nx">$el</span><span class="p">.</span><span class="nx">html</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">appTemplate</span><span class="p">());</span>
+                <span class="k">this</span><span class="p">.</span><span class="nx">$comicImg</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">$</span><span class="p">(</span><span class="s1">'#phdcomics-img'</span><span class="p">);</span>
+                <span class="k">this</span><span class="p">.</span><span class="nx">getRandomComic</span><span class="p">();</span>
+                <span class="k">return</span> <span class="k">this</span><span class="p">;</span>
+            <span class="p">},</span>
+
+            <span class="na">getRandomComic</span><span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+                <span class="kd">var</span> <span class="nx">me</span> <span class="o">=</span> <span class="k">this</span><span class="p">,</span>
+                    <span class="nx">url</span> <span class="o">=</span> <span class="nx">galaxyRoot</span> <span class="o">+</span> <span class="s1">'api/webhooks/phdcomics/get_data'</span><span class="p">;</span>
+
+                <span class="k">this</span><span class="p">.</span><span class="nx">$comicImg</span><span class="p">.</span><span class="nx">html</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="s1">'&lt;div/&gt;'</span><span class="p">,</span> <span class="p">{</span>
+                    <span class="na">id</span><span class="p">:</span> <span class="s1">'phdcomics-loader'</span>
+                <span class="p">}));</span>
+
+                <span class="nx">$</span><span class="p">.</span><span class="nx">getJSON</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="k">if</span> <span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">success</span><span class="p">)</span> <span class="p">{</span>
+                        <span class="nx">me</span><span class="p">.</span><span class="nx">renderImg</span><span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">src</span><span class="p">);</span>
+                    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                        <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="s1">'[ERROR] "'</span> <span class="o">+</span> <span class="nx">url</span> <span class="o">+</span> <span class="s1">'":\n'</span> <span class="o">+</span> <span class="nx">data</span><span class="p">.</span><span class="nx">error</span><span class="p">);</span>
+                    <span class="p">}</span>
+                <span class="p">});</span>
+            <span class="p">},</span>
+
+            <span class="na">renderImg</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">src</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">this</span><span class="p">.</span><span class="nx">$comicImg</span><span class="p">.</span><span class="nx">html</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">imgTemplate</span><span class="p">({</span><span class="na">src</span><span class="p">:</span> <span class="nx">src</span><span class="p">}));</span>
+            <span class="p">}</span>
+        <span class="p">});</span>
+
+        <span class="k">new</span> <span class="nx">PHDComicsAppView</span><span class="p">();</span>
+    <span class="p">});</span>
+</code></pre>
+      </div>
+    </li>
+  </ol>
+</blockquote>
+
+<p>The following hands-on will define an API endpoint that is called from the JS code of your webhook.
+Make sure you name the python function <code class="highlighter-rouge">main</code> and that all third-party requirements are installed in your Galaxy virtual environment.
+Please note that the <code class="highlighter-rouge">main()</code> can consume <code class="highlighter-rouge">params</code> from your client but also the Galaxy <code class="highlighter-rouge">trans</code> object, which will give you access to the
+entire user-object, including histories and datasets.</p>
+
+<blockquote>
+  <h3 id="-hands-on-2"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on</h3>
+
+  <ol>
+    <li>
+      <p>Create a file named <code class="highlighter-rouge">helper/__init__.py</code> with the following content:</p>
+
+      <div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">urllib</span>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+
+<span class="n">log</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="n">__name__</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">trans</span><span class="p">,</span> <span class="n">webhook</span><span class="p">,</span> <span class="n">params</span><span class="p">):</span>
+    <span class="n">error</span> <span class="o">=</span> <span class="s">''</span>
+    <span class="n">comic_src</span> <span class="o">=</span> <span class="s">''</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="c"># Third-party dependencies</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="kn">from</span> <span class="nn">bs4</span> <span class="kn">import</span> <span class="n">BeautifulSoup</span>
+        <span class="k">except</span> <span class="nb">ImportError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+            <span class="k">return</span> <span class="p">{</span><span class="s">'success'</span><span class="p">:</span> <span class="bp">False</span><span class="p">,</span> <span class="s">'error'</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)}</span>
+
+        <span class="c"># Get latest id</span>
+        <span class="k">if</span> <span class="s">'latest_id'</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">webhook</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="n">url</span> <span class="o">=</span> <span class="s">'https://phdcomics.com/gradfeed.php'</span>
+            <span class="n">content</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="n">url</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+            <span class="n">soap</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">content</span><span class="p">,</span> <span class="s">'html.parser'</span><span class="p">)</span>
+            <span class="n">pattern</span> <span class="o">=</span> <span class="s">'(?:https://www</span><span class="err">\</span><span class="s">.phdcomics</span><span class="err">\</span><span class="s">.com/comics</span><span class="err">\</span><span class="s">.php</span><span class="err">\</span><span class="s">?f=)(</span><span class="err">\</span><span class="s">d+)'</span>
+            <span class="n">webhook</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s">'latest_id'</span><span class="p">]</span> <span class="o">=</span> <span class="nb">max</span><span class="p">([</span>
+                <span class="nb">int</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">pattern</span><span class="p">,</span> <span class="n">link</span><span class="o">.</span><span class="n">text</span><span class="p">)</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+                <span class="k">for</span> <span class="n">link</span> <span class="ow">in</span> <span class="n">soap</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s">'link'</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="nb">compile</span><span class="p">(</span><span class="n">pattern</span><span class="p">))</span>
+            <span class="p">])</span>
+
+        <span class="n">random_id</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">webhook</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s">'latest_id'</span><span class="p">])</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="s">'https://www.phdcomics.com/comics/archive.php?comicid=</span><span class="si">%</span><span class="s">d'</span> <span class="o">%</span> \
+            <span class="n">random_id</span>
+        <span class="n">content</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="n">url</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+        <span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">content</span><span class="p">,</span> <span class="s">'html.parser'</span><span class="p">)</span>
+        <span class="n">comic_img</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s">'img'</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="s">'comic2'</span><span class="p">)</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">comic_src</span> <span class="o">=</span> <span class="n">comic_img</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">attrs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'src'</span><span class="p">)</span>
+        <span class="k">except</span> <span class="nb">IndexError</span><span class="p">:</span>
+            <span class="n">pattern</span> <span class="o">=</span> <span class="s">'&lt;img id=comic2 name=comic2 src=([</span><span class="err">\</span><span class="s">w:</span><span class="err">\</span><span class="s">/</span><span class="err">\</span><span class="s">.]+)'</span>
+            <span class="n">comic_src</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">pattern</span><span class="p">,</span> <span class="n">content</span><span class="p">)</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="k">except</span> <span class="nb">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="n">error</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="p">{</span><span class="s">'success'</span><span class="p">:</span> <span class="ow">not</span> <span class="n">error</span><span class="p">,</span> <span class="s">'error'</span><span class="p">:</span> <span class="n">error</span><span class="p">,</span> <span class="s">'src'</span><span class="p">:</span> <span class="n">comic_src</span><span class="p">}</span>
+</code></pre>
+      </div>
+    </li>
+  </ol>
+</blockquote>
+
+<p>To make your webhook appealing you can also add custom CSS which you can use in your HTML/JS code.</p>
+
+<blockquote>
+  <h3 id="-hands-on-3"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on</h3>
+
+  <ol>
+    <li>
+      <p>Create a file named <code class="highlighter-rouge">static/styles.css</code> with the following content:</p>
+
+      <div class="language-css highlighter-rouge"><pre class="highlight"><code>    <span class="nf">#phdcomics</span> <span class="p">{</span>
+        <span class="nl">border</span><span class="p">:</span> <span class="m">1px</span> <span class="nb">solid</span> <span class="m">#52697d</span><span class="p">;</span>
+        <span class="nl">text-align</span><span class="p">:</span> <span class="nb">center</span><span class="p">;</span>
+        <span class="nl">border-radius</span><span class="p">:</span> <span class="m">3px</span><span class="p">;</span>
+        <span class="nl">overflow</span><span class="p">:</span> <span class="nb">hidden</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="nf">#phdcomics-header</span> <span class="p">{</span>
+        <span class="nl">background</span><span class="p">:</span> <span class="m">#52697d</span><span class="p">;</span>
+        <span class="nl">border-bottom</span><span class="p">:</span> <span class="m">1px</span> <span class="nb">solid</span> <span class="m">#52697d</span><span class="p">;</span>
+        <span class="nl">padding</span><span class="p">:</span> <span class="m">15px</span> <span class="m">0</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="nf">#phdcomics-name</span> <span class="p">{</span>
+        <span class="nl">color</span><span class="p">:</span> <span class="m">#fff</span><span class="p">;</span>
+        <span class="nl">padding-bottom</span><span class="p">:</span> <span class="m">10px</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="nf">#phdcomics-header</span> <span class="nt">button</span> <span class="p">{</span>
+        <span class="nl">color</span><span class="p">:</span> <span class="m">#fff</span><span class="p">;</span>
+        <span class="nl">font-size</span><span class="p">:</span> <span class="m">14px</span><span class="p">;</span>
+        <span class="nl">background-color</span><span class="p">:</span> <span class="m">#768fa5</span><span class="p">;</span>
+        <span class="nl">border</span><span class="p">:</span> <span class="nb">none</span><span class="p">;</span>
+        <span class="nl">border-radius</span><span class="p">:</span> <span class="m">7px</span><span class="p">;</span>
+        <span class="nl">box-shadow</span><span class="p">:</span> <span class="m">0</span> <span class="m">5px</span> <span class="m">#5c768c</span><span class="p">;</span>
+        <span class="nl">padding</span><span class="p">:</span> <span class="m">5px</span> <span class="m">10px</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="nf">#phdcomics-header</span> <span class="nt">button</span><span class="nd">:focus</span> <span class="p">{</span>
+        <span class="nl">outline</span><span class="p">:</span> <span class="m">0</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="nf">#phdcomics-header</span> <span class="nt">button</span><span class="nd">:hover</span> <span class="p">{</span>
+        <span class="nl">background-color</span><span class="p">:</span> <span class="m">#67839b</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="nf">#phdcomics-header</span> <span class="nt">button</span><span class="nd">:active</span> <span class="p">{</span>
+        <span class="nl">background-color</span><span class="p">:</span> <span class="m">#67839b</span><span class="p">;</span>
+        <span class="nl">box-shadow</span><span class="p">:</span> <span class="m">0</span> <span class="m">0</span> <span class="m">#5c768c</span><span class="p">;</span>
+        <span class="nl">transform</span><span class="p">:</span> <span class="n">translateY</span><span class="p">(</span><span class="m">5px</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="nf">#phdcomics-img</span> <span class="p">{</span>
+        <span class="nl">background</span><span class="p">:</span> <span class="m">#fff</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="nf">#phdcomics-img</span> <span class="nt">img</span> <span class="p">{</span>
+        <span class="nl">padding</span><span class="p">:</span> <span class="m">10px</span><span class="p">;</span>
+        <span class="nl">max-width</span><span class="p">:</span> <span class="m">100%</span><span class="p">;</span>
+        <span class="nl">margin-bottom</span><span class="p">:</span> <span class="m">-4px</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="nf">#phdcomics-loader</span> <span class="p">{</span>
+        <span class="nl">border</span><span class="p">:</span> <span class="m">5px</span> <span class="nb">solid</span> <span class="m">#f3f3f3</span><span class="p">;</span>
+        <span class="nl">border-top</span><span class="p">:</span> <span class="m">5px</span> <span class="nb">solid</span> <span class="m">#52697d</span><span class="p">;</span>
+        <span class="nl">border-radius</span><span class="p">:</span> <span class="m">50%</span><span class="p">;</span>
+        <span class="nl">width</span><span class="p">:</span> <span class="m">25px</span><span class="p">;</span>
+        <span class="nl">height</span><span class="p">:</span> <span class="m">25px</span><span class="p">;</span>
+        <span class="nl">animation</span><span class="p">:</span> <span class="n">spin</span> <span class="m">1.5s</span> <span class="n">linear</span> <span class="n">infinite</span><span class="p">;</span>
+        <span class="nl">margin</span><span class="p">:</span> <span class="m">15px</span> <span class="nb">auto</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">@keyframes</span> <span class="n">spin</span> <span class="p">{</span>
+        <span class="nt">0</span><span class="o">%</span> <span class="p">{</span> <span class="nl">transform</span><span class="p">:</span> <span class="n">rotate</span><span class="p">(</span><span class="m">0deg</span><span class="p">);</span> <span class="p">}</span>
+        <span class="nt">100</span><span class="o">%</span> <span class="p">{</span> <span class="nl">transform</span><span class="p">:</span> <span class="n">rotate</span><span class="p">(</span><span class="m">360deg</span><span class="p">);</span> <span class="p">}</span>
+    <span class="p">}</span>
+</code></pre>
+      </div>
+    </li>
+  </ol>
+</blockquote>
+
+<p>Please make sure you have activated webhooks in your <code class="highlighter-rouge">config/galaxy.ini</code> file by setting the <code class="highlighter-rouge">webhooks_dir</code> to the path in which your <code class="highlighter-rouge">phdcomics</code> folder is located.</p>
+
+<blockquote>
+  <h3 id="-hands-on-4"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on</h3>
+
+  <ol>
+    <li>Submit one tool and see if your webhook is working on the tool-submit page.</li>
+  </ol>
+
+</blockquote>
+
+<p>If successful it should look like this:</p>
+
+<p><img src="../../images/phdcomics.png" alt="First view" /></p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>First of all, thank you for completing this tutorial. We have learned how to add webhooks to your Galaxy.</p>
+
+
+        
+        <blockquote class="key_points">
+            <h3><i class="fa fa-key" aria-hidden="true"></i> Key points</h3>
+
+            <ul>
+                
+                <li>A Galaxy Webhook provides an easy way to customize the Galaxy UI with plugins</li>
+                
+                <li>Right now there are 4 entry points: tool, workflow, masthead, history-menu</li>
+                
+                <li>With a minimal amount of code you can extend Galaxy's user-interace.</li>
+                
+            </ul>
+        </blockquote>
+        
+
+        
+
+        <h3><i class="fa fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!</h3>
+
+        <hr>
+
+        <blockquote class="overview">
+            <h3><i class="fa fa-comments-o" aria-hidden="true"></i> Feedback</h3>
+            Please take a moment and provide your feedback on this tutorial. Your feedback will help guide and improve future revisions to this tutorial.
+            <a href="https://tinyurl.com/GTNfeedback">Feedback Form</a>
+        </blockquote>
+    </section>
+</div>
+
+<footer>
+    <div class="container">
+        <p>
+            This material is the result of a collaborative work. Thanks the
+            <a href="https://wiki.galaxyproject.org/Teach/GTN">Galaxy Training Network</a>
+            and all the contributors
+            
+        </p>
+        <p>
+            Found a typo? Something is wrong in this tutorial? Edit it on
+            <a href="https://github.com/galaxyproject/training-material/tree/master/topics/dev/tutorials/webhooks/tutorial.md">GitHub</a>.
+        </p>
+    </div>
+</footer>
+
+    </body>
+    <script type="text/javascript" src="https://galaxyproject.github.io/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="https://galaxyproject.github.io/training-material/assets/js/tether.min.js"></script>
+    <script type="text/javascript" src="https://galaxyproject.github.io/training-material/assets/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://galaxyproject.github.io/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</html>

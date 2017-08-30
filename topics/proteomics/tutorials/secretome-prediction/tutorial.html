@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Galaxy Training!</title>
+        <link rel="stylesheet" href="https://galaxyproject.github.io/training-material/assets/css/bootstrap.min.css?v=2">
+        <link rel="stylesheet" href="https://galaxyproject.github.io/training-material/assets/css/main.css?v=2">
+        <link rel="stylesheet" href="https://galaxyproject.github.io/training-material/assets/css/font-awesome.css">
+        <link rel="stylesheet" href="https://galaxyproject.github.io/training-material/assets/css/syntax_highlighting.css">
+    </head>
+    <body>
+        
+
+
+<header>
+    <nav class="navbar navbar-toggleable-md navbar-inverse">
+        <div class="container">
+            <a class="navbar-brand" href="https://galaxyproject.github.io/training-material/">
+                <img src="https://galaxyproject.github.io/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://galaxyproject.github.io/training-material/topics/proteomics" title="Go back to list of tutorials">
+                            <i class="fa fa-folder-o" aria-hidden="true"></i> Proteomics
+                        </a>
+                    </li>
+
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://galaxyproject.github.io/training-material/topics/proteomics/slides" title="Slides for this tutorial">
+                            <i class="fa fa-slideshare" aria-hidden="true"></i> Introduction slides
+                        </a>
+                    </li>
+                    
+
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/galaxyproject/training-material/tree/master/topics/proteomics/docker" title="Docker image for this tutorial">
+                            <i class="fa fa-ship" aria-hidden="true"></i> Docker image
+                        </a>
+                    </li>
+                    
+
+                    
+
+                    
+
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://galaxyproject.github.io/training-material/topics/proteomics#references" title="References">
+                            <i class="fa fa-book" aria-hidden="true"></i> Literature
+                        </a>
+                    </li>
+                    
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Chat on gitter">
+                            <i class="fa fa-life-ring" aria-hidden="true"></i> Help
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/galaxyproject/training-material/tree/master/topics/proteomics/tutorials/secretome-prediction/tutorial.md">
+                            <i class="fa fa-github" aria-hidden="true"></i> Edit
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<div class="container main-content">
+    <section class="tutorial">
+        <h1>Secretome Prediction</h1>
+
+        <blockquote class="overview">
+            <h3>Overview</h3>
+
+            <strong><i class="fa fa-question-circle" aria-hidden="true"></i> Questions</strong>
+            <ul>
+            
+            <li>First question addressed during the tutorial</li>
+            
+            <li>Second question addressed during the tutorial</li>
+            
+            </ul>
+
+            <strong><i class="fa fa-bullseye" aria-hidden="true"></i> Objectives</strong>
+            <ul>
+            
+            <li>First learning objectives of the tutorial</li>
+            
+            <li>Second learning objectives of the tutorial</li>
+            
+            </ul>
+
+            
+            <strong><i class="fa fa-check-circle" aria-hidden="true"></i> Requirements</strong>
+            <ul>
+            
+                <li>
+                    
+                    <a href="https://galaxyproject.github.io/training-material/topics/introduction/">Galaxy introduction</a>
+                    
+                </li>
+            
+            
+            </ul>
+            
+
+            <p><strong><i class="fa fa-hourglass-end" aria-hidden="true"></i> Time estimation:</strong> 1h/1d</p>
+        </blockquote>
+
+        <h1 id="secretome-prediction-using-go-annotations-and-localization-prediction">Secretome Prediction using GO annotations and localization prediction</h1>
+
+<h2 id="introduction">Introduction</h2>
+
+<p>The cellular secretome contains both proteins that are secreted by cells and proteins that are shed from the cellular surface. Here, we describe an approach to predict those proteins in an input list that would be expected in the cellular secretome. This approach combines Gene Ontology (GO) annotation and the <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC1933216/">WoLF PSORT</a> algorithm for localization prediction.</p>
+
+<p>We chose to include all proteins that are annotated as, or predicted to be, lysosomal proteins. Lysosomal proteins are routinely secreted by malignant and non-malignant cells in high amounts, due to “leakiness” of the mannose-6-phosphate receptor pathway [1,2].
+Furthermore, we chose to exclude proteins annotated as being part of extracellular organelles, e.g. exosomes. While exosomes are secreted by malignant and non-malignant cells, exosomal proteins are expected in the secretome at very low amounts, if not especially enriched for.</p>
+
+<p>For secretome prediction, we combine localization data from the Gene Ontology database with a classical protein localization prediction algorithm (WoLF-PSORT). The workflow was designed for sensitivity, i.e. a protein predicted by <em>at least one of the used tools</em> will be included in the output. To change this, follow the instructions <a href="#nut_and_bolt-comment-customizing-the-workflow">below</a>.</p>
+
+<h2 id="overview">Overview</h2>
+
+<p>The figure below gives an overview of the Galaxy workflow:</p>
+
+<p><img src="../../images/wf_secretomePrediction_goWolfpsort.png" alt="Overview Secretome Prediction WF"></p>
+
+<h2 id="input">Input</h2>
+
+<p>The workflow needs three input files:</p>
+
+<p>1) A tabular file, the first column containing uniprot accession numbers of the proteins of interest. <a href="https://doi.org/10.5281/zenodo.519260">Test data</a>
+  2) The complete uniprot GO database for the organism of interest, available <a href="ftp://ftp.ebi.ac.uk/pub/databases/GO/goa/">via FTP</a>. To download the human GOA file needed for the test input, paste the following link to the Galaxy upload tool: ftp://ftp.ebi.ac.uk/pub/databases/GO/goa/HUMAN/goa_human.gaf.gz.
+  3) The complete GO Open Biomedical Ontology (OBO), i.e. “GO term tree”, accessible at http://purl.obolibrary.org/obo/go/go.obo.</p>
+
+<blockquote>
+  <h3 id="-comment-test-data">
+<i class="fa fa-commenting-o" aria-hidden="true"></i> Comment: Test data</h3>
+  <p class="comment">The provided test dataset for input 1 is a list of human proteins, identified by LC-MS/MS in the cellular supernatant of MDA-MB-231 cells. It can be accessed over <a href="https://doi.org/10.5281/zenodo.519260">Zenodo</a>. The dataset was originally published in <a href="https://www.ncbi.nlm.nih.gov/pubmed/27526672">(Sigloch et al., BBA, 2016)</a>.</p>
+</blockquote>
+
+<blockquote>
+  <h3 id="-comment-uniprot-gene-ontology-association-goa-files">
+<i class="fa fa-commenting-o" aria-hidden="true"></i> Comment: Uniprot Gene Ontology Association (GOA) files</h3>
+  <ul class="comment">
+    <li>Information about different GOA file types can be found <a href="https://www.ebi.ac.uk/GOA/downloads">here</a>.</li>
+    <li>Information about the structure of the files can be found <a href="ftp://ftp.ebi.ac.uk/pub/databases/GO/goa/HUMAN/README">here</a>.</li>
+  </ul>
+</blockquote>
+
+<blockquote>
+  <h3 id="-comment-customizing-the-workflow">
+<i class="fa fa-commenting-o" aria-hidden="true"></i> Comment: Customizing the Workflow</h3>
+  <p>This workflow was designed for sensitivity, not for specificity. If you need to increase the specificity, you have the following possibilities, with decreasing efficiency:</p>
+  <ol class="comment">
+    <li>Switch the setting <code class="highlighter-rouge">Output lines appearing in</code> of the last <strong>Join</strong> <i class="fa fa-wrench" aria-hidden="true"></i> (last tool before the final <strong>Unique</strong> <img class="emoji" title=":wrench:" alt=":wrench:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f527.png" height="20" width="20" align="absmiddle"> from <code class="highlighter-rouge">All lines [-a 1 -a 2]</code> to <code class="highlighter-rouge">Both 1st &amp; 2nd file</code>. Thus, your output will contain only those proteins that are equally predicted by both methods used.</li>
+    <li>(Only after doing 1.) Adding another way of localization prediction, i.e. another database or another prediction algorithm.</li>
+    <li>Replacing <strong>WoLF-PSORT</strong> <i class="fa fa-wrench" aria-hidden="true"></i> by a more precise localization prediction tool. If you choose this approach, remember that you will probably have to adjust the settings for all tools in the workflow that are processing the <strong>WoLF PSORT</strong> <img class="emoji" title=":wrench:" alt=":wrench:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f527.png" height="20" width="20" align="absmiddle"> output.</li>
+  </ol>
+</blockquote>
+
+<h2 id="citation">Citation</h2>
+
+<p>If you use this workflow directly, or any derivative of it, in work leading to a scientific publication,
+please cite:</p>
+
+<p>F.C. Sigloch, J.D. Knopf, J. Weißer, A. Gomez-Auli, M.L. Biniossek, A. Petrera, et al., Proteomic analysis of silenced cathepsin B expression suggests non-proteolytic cathepsin B functionality, Biochim. Biophys. Acta - Mol. Cell Res. 1863 (2016) 2700–2709. doi:10.1016/j.bbamcr.2016.08.005. https://www.ncbi.nlm.nih.gov/pubmed/27526672</p>
+
+<h2 id="literature">Literature</h2>
+
+<p>[1] B. Schröder, C. Wrocklage, A. Hasilik, P. Saftig, The proteome of lysosomes., Proteomics. 10 (2010) 4053–76. doi:10.1002/pmic.201000196.</p>
+
+<p>[2] J. Reiser, B. Adair, T. Reinheckel, Specialized roles for cysteine cathepsins in health and disease, J. Clin. Invest. 120 (2010) 3421–3431. doi:10.1172/JCI42918.</p>
+
+
+        
+        <blockquote class="key_points">
+            <h3>
+<i class="fa fa-key" aria-hidden="true"></i> Key points</h3>
+
+            <ul>
+                
+                <li>First take home message</li>
+                
+                <li>Second take home message</li>
+                
+                <li>Third take home message</li>
+                
+            </ul>
+        </blockquote>
+        
+
+        
+        <h1>Useful literature</h1>
+        <p>Useful information regarding this type of analysis with descriptions and paper references for the tools used in this tutorial, and literature for this analysis techniques and interpretations can be found <a href="https://galaxyproject.github.io/training-material/topics/proteomics#references">here</a>.</p>
+        
+
+        <h3>
+<i class="fa fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!</h3>
+
+        <hr>
+
+        <blockquote class="overview">
+            <h3>
+<i class="fa fa-comments-o" aria-hidden="true"></i> Feedback</h3>
+            Please take a moment and provide your feedback on this tutorial. Your feedback will help guide and improve future revisions to this tutorial.
+            <a href="https://tinyurl.com/GTNfeedback">Feedback Form</a>
+        </blockquote>
+    </section>
+</div>
+
+<footer>
+    <div class="container">
+        <p>
+            This material is the result of a collaborative work. Thanks the
+            <a href="https://wiki.galaxyproject.org/Teach/GTN">Galaxy Training Network</a>
+            and all the contributors
+            
+        </p>
+        <p>
+            Found a typo? Something is wrong in this tutorial? Edit it on
+            <a href="https://github.com/galaxyproject/training-material/tree/master/topics/proteomics/tutorials/secretome-prediction/tutorial.md">GitHub</a>.
+        </p>
+    </div>
+</footer>
+
+    </body>
+    <script type="text/javascript" src="https://galaxyproject.github.io/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="https://galaxyproject.github.io/training-material/assets/js/tether.min.js"></script>
+    <script type="text/javascript" src="https://galaxyproject.github.io/training-material/assets/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://galaxyproject.github.io/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</html>

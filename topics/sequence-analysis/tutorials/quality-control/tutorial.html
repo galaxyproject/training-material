@@ -1,0 +1,459 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Galaxy Training!</title>
+        <link rel="stylesheet" href="https://galaxyproject.github.io/training-material/assets/css/bootstrap.min.css?v=2">
+        <link rel="stylesheet" href="https://galaxyproject.github.io/training-material/assets/css/main.css?v=2">
+        <link rel="stylesheet" href="https://galaxyproject.github.io/training-material/assets/css/font-awesome.css">
+        <link rel="stylesheet" href="https://galaxyproject.github.io/training-material/assets/css/syntax_highlighting.css">
+    </head>
+    <body>
+        
+
+
+<header>
+    <nav class="navbar navbar-toggleable-md navbar-inverse">
+        <div class="container">
+            <a class="navbar-brand" href="https://galaxyproject.github.io/training-material/">
+                <img src="https://galaxyproject.github.io/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://galaxyproject.github.io/training-material/topics/sequence-analysis" title="Go back to list of tutorials">
+                            <i class="fa fa-folder-o" aria-hidden="true"></i> Analysis of sequences
+                        </a>
+                    </li>
+
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://galaxyproject.github.io/training-material/topics/sequence-analysis/slides" title="Slides for this tutorial">
+                            <i class="fa fa-slideshare" aria-hidden="true"></i> Introduction slides
+                        </a>
+                    </li>
+                    
+
+                    
+
+                    
+
+                    
+
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://galaxyproject.github.io/training-material/topics/sequence-analysis#references" title="References">
+                            <i class="fa fa-book" aria-hidden="true"></i> Literature
+                        </a>
+                    </li>
+                    
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Chat on gitter">
+                            <i class="fa fa-life-ring" aria-hidden="true"></i> Help
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/galaxyproject/training-material/tree/master/topics/sequence-analysis/tutorials/quality-control/tutorial.md">
+                            <i class="fa fa-github" aria-hidden="true"></i> Edit
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<div class="container main-content">
+    <section class="tutorial">
+        <h1>Quality Control</h1>
+
+        <blockquote class="overview">
+            <h3>Overview</h3>
+
+            <strong><i class="fa fa-question-circle" aria-hidden="true"></i> Questions</strong>
+            <ul>
+            
+            <li>How to control quality of NGS data?</li>
+            
+            <li>What are the quality parameters to check for each dataset?</li>
+            
+            <li>How to improve the quality of a sequence dataset?</li>
+            
+            </ul>
+
+            <strong><i class="fa fa-bullseye" aria-hidden="true"></i> Objectives</strong>
+            <ul>
+            
+            <li>Manipulate FastQ files</li>
+            
+            <li>Control quality from a FastQ file</li>
+            
+            <li>Use FastQC tool</li>
+            
+            <li>Understand FastQC output</li>
+            
+            <li>Use tools for quality correction</li>
+            
+            </ul>
+
+            
+            <strong><i class="fa fa-check-circle" aria-hidden="true"></i> Requirements</strong>
+            <ul>
+            
+                <li>
+                    
+                    <a href="https://galaxyproject.github.io/training-material/topics/introduction/">Galaxy introduction</a>
+                    
+                </li>
+            
+            
+            </ul>
+            
+
+            <p><strong><i class="fa fa-hourglass-end" aria-hidden="true"></i> Time estimation:</strong> 1d/3h/6h</p>
+        </blockquote>
+
+        <h1 class="no_toc" id="introduction">Introduction</h1>
+
+<p>During the sequencing process, some errors may be introduced like incorporation of ambiguous nucleotides. Analyzing poor data wastes CPU and people time.</p>
+
+<p>The quality control of the sequences right after sequencing is then an essential step to ensure that the raw data looks good before processing them. It reduces the biases in data that may compromised the downstream analyses with low-quality sequences, sequence artifacts, … The process is the same for any type of sequencing data.</p>
+
+<blockquote class="agenda">
+  <h3 id="agenda">Agenda</h3>
+
+  <p>In this tutorial, we will deal with:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#sequence-dataset-importing" id="markdown-toc-sequence-dataset-importing">Sequence dataset importing</a></li>
+  <li><a href="#quality-checking-of-the-sequences" id="markdown-toc-quality-checking-of-the-sequences">Quality checking of the sequences</a></li>
+  <li><a href="#improvement-of-the-quality-of-the-sequences" id="markdown-toc-improvement-of-the-quality-of-the-sequences">Improvement of the quality of the sequences</a></li>
+  <li><a href="#control-the-quality-of-a-second-dataset" id="markdown-toc-control-the-quality-of-a-second-dataset">Control the quality of a second dataset</a></li>
+</ol>
+
+</blockquote>
+
+<h1 id="sequence-dataset-importing">Sequence dataset importing</h1>
+
+<blockquote class="hands_on">
+  <h3 id="-hands-on-data-upload"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Data upload</h3>
+
+  <ol>
+    <li>Create a new history</li>
+    <li>
+      <p>Import the FASTQ file: <a href="https://zenodo.org/record/61771/files/GSM461178_untreat_paired_subset_1.fastq"><code class="highlighter-rouge">GSM461178_untreat_paired_subset_1</code></a></p>
+
+      <blockquote class="tip">
+        <h3 id="-tip-importing-data-via-links"><i class="fa fa-lightbulb-o" aria-hidden="true"></i> Tip: Importing data via links</h3>
+
+        <ul>
+          <li>Copy the link location</li>
+          <li>Open the Galaxy Upload Manager</li>
+          <li>Select <strong>Paste/Fetch Data</strong></li>
+          <li>Paste the link into the text field</li>
+          <li>Press <strong>Start</strong></li>
+        </ul>
+      </blockquote>
+
+      <blockquote class="tip">
+        <h3 id="-tip-changing-the-file-type-fastq-to-fastqsanger-once-the-data-file-is-in-your-history"><i class="fa fa-lightbulb-o" aria-hidden="true"></i> Tip: Changing the file type <code class="highlighter-rouge">fastq</code> to <code class="highlighter-rouge">fastqsanger</code> once the data file is in your history</h3>
+
+        <ul>
+          <li>Click on the pencil button displayed in your dataset in the history</li>
+          <li>Choose <strong>Datatype</strong> on the top</li>
+          <li>Select <code class="highlighter-rouge">fastqsanger</code></li>
+          <li>Press <strong>save</strong></li>
+        </ul>
+      </blockquote>
+
+      <blockquote class="comment">
+        <h3 id="-comments"><i class="fa fa-commenting-o" aria-hidden="true"></i> Comments</h3>
+
+        <p>Rename the dataset to “First dataset”</p>
+      </blockquote>
+      <p>As default, Galaxy takes the link as name.</p>
+    </li>
+  </ol>
+</blockquote>
+
+<h1 id="quality-checking-of-the-sequences">Quality checking of the sequences</h1>
+
+<p>To estimate sequence quality and treatments to do on the data, many indicators can be checked:</p>
+
+<ul>
+  <li>Quality score of the sequences with
+    <ul>
+      <li>Per base sequence quality</li>
+      <li>Per sequence quality scores</li>
+      <li>Per tile sequence quality</li>
+    </ul>
+  </li>
+  <li>Sequence content with
+    <ul>
+      <li>Per base sequence content</li>
+      <li>Per sequence GC content</li>
+      <li>Per base N content</li>
+    </ul>
+  </li>
+  <li>Sequence length with the sequence length distribution</li>
+  <li>Duplicated sequences</li>
+  <li>Tag sequences with
+    <ul>
+      <li>Adapter contamination</li>
+      <li>Kmer Content</li>
+    </ul>
+  </li>
+</ul>
+
+<p><a href="https://www.bioinformatics.babraham.ac.uk/projects/fastqc/">FastQC</a> is an open-source tool provide a simple way to do some quality control checks on raw sequence data coming from high throughput sequencing pipelines. It generates quality graphics and estimates numerous quality informations and threshold. For each studied indicators, FastQC providing a quick overview to tell in which areas there may be problems.</p>
+
+<blockquote class="hands_on">
+  <h3 id="-hands-on-quality-checking"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Quality checking</h3>
+
+  <ol>
+    <li><strong>FastQC</strong> <i class="fa fa-wrench" aria-hidden="true"></i>: Run FastQC on the imported FastQ file with default parameters</li>
+    <li>
+      <p>Inspect the FastQC report on the webpage</p>
+
+      <blockquote class="tip">
+        <h3 id="-tip-inspecting-the-content-of-a-file-in-galaxy"><i class="fa fa-lightbulb-o" aria-hidden="true"></i> Tip: Inspecting the content of a file in Galaxy</h3>
+
+        <ul>
+          <li>Click on the eye (“View data”) on the right of the file name in the history</li>
+          <li>Inspect the content of the file on the middle</li>
+        </ul>
+      </blockquote>
+
+      <blockquote class="question">
+        <h3 id="-questions"><i class="fa fa-question-circle" aria-hidden="true"></i> Questions</h3>
+
+        <ol>
+          <li>How good are the quality scores?</li>
+          <li>Why is there warning for the per base sequence content and the per sequence GC content graphs?</li>
+          <li>
+            <p>What must be done to improve the sequences?</p>
+
+            <details>
+<summary>Click to view answers</summary>
+<ol type="1">
+<li>The scores of the sequences are quite good: no warning from FastQC, even if we can see a slight decrease of the quality at the end of sequences </li>
+<li>In the beginning of sequences, the sequence content per base is not really good and the percentage are not equal. For the GC content, the distribution is bit shifted on the left and too high</li>
+<li>We can trim a bit the end of the sequences, but not too much as the sequences are already small</li>
+</ol>
+</details>
+          </li>
+        </ol>
+      </blockquote>
+    </li>
+  </ol>
+</blockquote>
+
+<h1 id="improvement-of-the-quality-of-the-sequences">Improvement of the quality of the sequences</h1>
+
+<p>Based on previous quality graphs, sequences must be treated to obtain good dataset and then the bias in downstream analysis.</p>
+
+<p>In general, quality treatments are:</p>
+
+<ul>
+  <li>Filtering of sequences
+    <ul>
+      <li>with small mean quality score</li>
+      <li>too small</li>
+      <li>with too many N bases</li>
+      <li>based on their GC content</li>
+      <li>…</li>
+    </ul>
+  </li>
+  <li>Cutting/Trimming sequences
+    <ul>
+      <li>from low quality score parts</li>
+      <li>tails</li>
+      <li>…</li>
+    </ul>
+  </li>
+</ul>
+
+<p>To improve the quality of the sequences, we use <a href="https://www.bioinformatics.babraham.ac.uk/projects/trim_galore/">Trim Galore!</a> tool. It automates quality and adapter trimming as well as quality control.</p>
+
+<blockquote class="hands_on">
+  <h3 id="-hands-on-quality-treatment-and-re-checking"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Quality treatment and re-checking</h3>
+
+  <ol>
+    <li>
+      <p><strong>Trim Galore</strong> <i class="fa fa-wrench" aria-hidden="true"></i>: Run Trim Galore on the imported data file</p>
+
+      <blockquote class="question">
+        <h3 id="-questions-1"><i class="fa fa-question-circle" aria-hidden="true"></i> Questions</h3>
+
+        <p>Which parameters must be applied to follow the previous recommendations?</p>
+
+        <details>
+<summary>Click to view answers</summary>
+We use the default ones:
+<ul>
+<li>​
+If you already know the which adapter sequences were used during the library preparation, please use them. Otherwise, use the option for automatic detection and trimming of adapter sequences</li>
+<li>Trimming low-quality ends (below 20) from reads in addition to adapter removal</li>
+<li>Option for required number bases overlap with adapter sequence can be tweaked. The default value "1" is too stringent that on average 25% of reads will be trimmed. In order to reduce these falsely trimmed bases, please set it to 5 bases.</li>
+<li>Removing reads shorter than 20 bp</li>
+</ul>
+</details>
+      </blockquote>
+    </li>
+    <li>
+      <p><strong>FastQC</strong> <i class="fa fa-wrench" aria-hidden="true"></i>: Re-run FastQC on the quality controlled data file and inspect the new FastQC report</p>
+
+      <blockquote class="question">
+        <h3 id="-questions-2"><i class="fa fa-question-circle" aria-hidden="true"></i> Questions</h3>
+
+        <ol>
+          <li>How many sequences have been removed?</li>
+          <li>Has the quality of the sequences been improved?</li>
+          <li>
+            <p>Can you explain why the per base sequence content is not good now?</p>
+
+            <details>
+<summary>Click to view answers</summary>
+<ol type="1">
+<li>Before Trim Galore, the dataset was made of 100,000 sequences. After Trim Galore, there is 99,653 sequences.</li>
+<li>The per base quality score is better but other indicators are bad now. The sequence length distribution is not clear as before because sequences have different size after the trimming</li>
+<li>The per base sequence content is red now. The trimming of the end of some sequences may have biased </li>
+</ol>
+</details>
+          </li>
+        </ol>
+      </blockquote>
+    </li>
+  </ol>
+</blockquote>
+
+<p>The quality of the previous dataset was pretty good from beginning. The quality treatment improved the quality score but to the cost of other parameters.</p>
+
+<h1 id="control-the-quality-of-a-second-dataset">Control the quality of a second dataset</h1>
+
+<p>Now, we would like to see the impact to quality control and treatment on a bad dataset.</p>
+
+<blockquote class="hands_on">
+  <h3 id="-hands-on-quality-control-and-treatment"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Quality control and treatment</h3>
+
+  <ol>
+    <li>Create a new history</li>
+    <li>Import the FASTQ file: <a href="https://zenodo.org/record/61771/files/GSM461182_untreat_single_subset.fastq"><code class="highlighter-rouge">GSM461182_untreat_single_subset</code></a></li>
+    <li>
+      <p><strong>FastQC</strong> <i class="fa fa-wrench" aria-hidden="true"></i>: Run FastQC on this new dataset</p>
+
+      <blockquote class="question">
+        <h3 id="-questions-3"><i class="fa fa-question-circle" aria-hidden="true"></i> Questions</h3>
+
+        <ol>
+          <li>How good is this dataset?</li>
+          <li>
+            <p>What must be done to improve the sequences?</p>
+
+            <details>
+<summary>Click to view answers</summary>
+<ol type="1">
+<li>There is red warning for the per base sequence quality (pretty bad along the sequence but worst at the end of sequences), the per base sequence content (bad at the beginning of the sequences), the per sequence GC content. </li>
+<li>The end of sequences must be cut.</li>
+<li>Generally, 5' ends of the reads are not of bad quality unless there is something went wrong. The problem with this particular data set is that it was sequenced using the old Illumina sequencing machine. The machine calibrates while reading fragments that are in the beginning of the flowcell. Unfortunately, the first 100k reads which we selected for the analysis are generated during the calibration. But with the latest sequencing machines, usually we do not see this problem. If you used latest sequencing machine and still see bad quality bases in the beginning of the reads, please investigate and not just trim them.</li>
+</ol>
+</details>
+          </li>
+        </ol>
+      </blockquote>
+    </li>
+    <li><strong>Trim Galore</strong> <i class="fa fa-wrench" aria-hidden="true"></i>: Run Trim Galore on the new dataset to fit the previous choices</li>
+    <li>
+      <p><strong>FastQC</strong> <i class="fa fa-wrench" aria-hidden="true"></i>: Re-run FastQC to check the impact of Trim Galore</p>
+
+      <blockquote class="question">
+        <h3 id="-questions-4"><i class="fa fa-question-circle" aria-hidden="true"></i> Questions</h3>
+
+        <ol>
+          <li>How many sequences have been removed?</li>
+          <li>Has the quality of the sequences been improved?</li>
+          <li>
+            <p>Can you explain why the per base sequence content is not good now?</p>
+
+            <details>
+<summary>Click to view answers</summary>
+<ol type="1">
+<li>Before Trim Galore, the dataset was made of 100,000 sequences. After Trim Galore, there is 97,644 sequences.</li>
+<li>The per base quality score is better (not red anymore). But the per base sequence content is still red even if it is a bit better.</li>
+</ol>
+</details>
+          </li>
+        </ol>
+      </blockquote>
+    </li>
+  </ol>
+</blockquote>
+
+<h1 class="no_toc" id="conclusion">Conclusion</h1>
+
+<p>In this tutorial, we have controlled the quality of two datasets to ensure that the raw data looks good before analysing them with tools to extract RNA-Seq, ChIP-Seq or any other type of information. The approach of quality control is similar for any type of sequencing data:</p>
+
+<p><img src="../../images/dive_into_qc_workflow.png" alt="The quality control tutorial workflow" /></p>
+
+
+        
+        <blockquote class="key_points">
+            <h3><i class="fa fa-key" aria-hidden="true"></i> Key points</h3>
+
+            <ul>
+                
+                <li>Run quality control on every dataset before running any other bioinformatics analysis</li>
+                
+                <li>Take care of the parameters used to improve the sequence quality</li>
+                
+                <li>Re-run FastQC to check the impact of the quality control</li>
+                
+            </ul>
+        </blockquote>
+        
+
+        
+
+        <h3><i class="fa fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!</h3>
+
+        <hr>
+
+        <blockquote class="overview">
+            <h3><i class="fa fa-comments-o" aria-hidden="true"></i> Feedback</h3>
+            Please take a moment and provide your feedback on this tutorial. Your feedback will help guide and improve future revisions to this tutorial.
+            <a href="https://tinyurl.com/GTNfeedback">Feedback Form</a>
+        </blockquote>
+    </section>
+</div>
+
+<footer>
+    <div class="container">
+        <p>
+            This material is the result of a collaborative work. Thanks the
+            <a href="https://wiki.galaxyproject.org/Teach/GTN">Galaxy Training Network</a>
+            and all the contributors
+            
+        </p>
+        <p>
+            Found a typo? Something is wrong in this tutorial? Edit it on
+            <a href="https://github.com/galaxyproject/training-material/tree/master/topics/sequence-analysis/tutorials/quality-control/tutorial.md">GitHub</a>.
+        </p>
+    </div>
+</footer>
+
+    </body>
+    <script type="text/javascript" src="https://galaxyproject.github.io/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="https://galaxyproject.github.io/training-material/assets/js/tether.min.js"></script>
+    <script type="text/javascript" src="https://galaxyproject.github.io/training-material/assets/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://galaxyproject.github.io/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</html>

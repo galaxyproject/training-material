@@ -1,0 +1,1007 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Galaxy Training!</title>
+        <link rel="stylesheet" href="https://galaxyproject.github.io/training-material/assets/css/bootstrap.min.css?v=2">
+        <link rel="stylesheet" href="https://galaxyproject.github.io/training-material/assets/css/main.css?v=2">
+        <link rel="stylesheet" href="https://galaxyproject.github.io/training-material/assets/css/font-awesome.css">
+        <link rel="stylesheet" href="https://galaxyproject.github.io/training-material/assets/css/syntax_highlighting.css">
+    </head>
+    <body>
+        
+
+
+<header>
+    <nav class="navbar navbar-toggleable-md navbar-inverse">
+        <div class="container">
+            <a class="navbar-brand" href="https://galaxyproject.github.io/training-material/">
+                <img src="https://galaxyproject.github.io/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://galaxyproject.github.io/training-material/topics/chip-seq" title="Go back to list of tutorials">
+                            <i class="fa fa-folder-o" aria-hidden="true"></i> ChIP-Seq data analysis
+                        </a>
+                    </li>
+
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://galaxyproject.github.io/training-material/topics/chip-seq/slides" title="Slides for this tutorial">
+                            <i class="fa fa-slideshare" aria-hidden="true"></i> Introduction slides
+                        </a>
+                    </li>
+                    
+
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/galaxyproject/training-material/tree/master/topics/chip-seq/docker" title="Docker image for this tutorial">
+                            <i class="fa fa-ship" aria-hidden="true"></i> Docker image
+                        </a>
+                    </li>
+                    
+
+                    
+
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://doi.org/10.5281/zenodo.197100" title="Links to data">
+                            <i class="fa fa-files-o" aria-hidden="true"></i> Input Dataset
+                        </a>
+                    </li>
+                    
+
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://galaxyproject.github.io/training-material/topics/chip-seq#references" title="References">
+                            <i class="fa fa-book" aria-hidden="true"></i> Literature
+                        </a>
+                    </li>
+                    
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Chat on gitter">
+                            <i class="fa fa-life-ring" aria-hidden="true"></i> Help
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/galaxyproject/training-material/tree/master/topics/chip-seq/tutorials/tal1-binding-site-identification/tutorial.md">
+                            <i class="fa fa-github" aria-hidden="true"></i> Edit
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<div class="container main-content">
+    <section class="tutorial">
+        <h1>Identification of the binding sites of the T-cell acute lymphocytic leukemia protein 1 (TAL1)</h1>
+
+        <blockquote class="overview">
+            <h3>Overview</h3>
+
+            <strong><i class="fa fa-question-circle" aria-hidden="true"></i> Questions</strong>
+            <ul>
+            
+            <li>How is raw ChIP-seq data processed and analyzed?</li>
+            
+            <li>What are the binding sites of Tal1?</li>
+            
+            <li>Which genes are regulated by Tal1?</li>
+            
+            </ul>
+
+            <strong><i class="fa fa-bullseye" aria-hidden="true"></i> Objectives</strong>
+            <ul>
+            
+            <li>Inspect read quality with FastQC</li>
+            
+            <li>Perform read trimming with Trimmomatic</li>
+            
+            <li>Align trimmed reads with BWA</li>
+            
+            <li>Assess quality and reproducibility of experiments</li>
+            
+            <li>Identify Tal1 binding sites with MACS2</li>
+            
+            <li>Determine unique/common Tal1 binding sites from G1E and Megakaryocytes</li>
+            
+            <li>Identify unique/common Tal1 peaks occupying gene promoters</li>
+            
+            <li>Visually inspect Tal1 peaks with Trackster</li>
+            
+            </ul>
+
+            
+            <strong><i class="fa fa-check-circle" aria-hidden="true"></i> Requirements</strong>
+            <ul>
+            
+                <li>
+                    
+                    <a href="https://galaxyproject.github.io/training-material/topics/introduction/">Galaxy introduction</a>
+                    
+                </li>
+            
+                <li>
+                    
+                    <a href="https://galaxyproject.github.io/training-material/topics/sequence-analysis/">Quality control</a>
+                    
+                </li>
+            
+                <li>
+                    
+                    <a href="https://galaxyproject.github.io/training-material/topics/sequence-analysis/">Mapping</a>
+                    
+                </li>
+            
+            
+                <li>
+                    
+                    <a href="https://wiki.galaxyproject.org/Learn/Visualization">Trackster</a>
+                    
+                </li>
+            
+            </ul>
+            
+
+            <p><strong><i class="fa fa-hourglass-end" aria-hidden="true"></i> Time estimation:</strong> 3h</p>
+        </blockquote>
+
+        <h1 class="no_toc" id="introduction">Introduction</h1>
+
+<p>This tutorial uses ChIP-seq datasets from a study published by <a href="http://genome.cshlp.org/content/24/12/1945.full.pdf+html">Wu <em>et al.</em> (2014)</a>. The goal of this study was to investigate “the dynamics of occupancy and the role in gene regulation of the transcription factor TAL1, a critical regulator of hematopoiesis, at multiple stages of hematopoietic differentiation.”</p>
+
+<p>To this end, ChIP-seq experiments were performed in multiple mouse cell types including G1E - a GATA-null immortalized cell line derived from targeted disruption of GATA-1 in mouse embryonic stem cells - and megakaryocytes.</p>
+
+<p>This dataset (GEO Accession: <a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE51338">GSE51338</a>) consists of biological replicate TAL1 ChIP-seq and input control experiments.
+Input control experiments are used to identify and remove sampling bias, for example open/accessible chromatin or GC bias.</p>
+
+<p>Because of the long processing time for the large original files, we have downsampled the original raw data files to include only reads that align to chromosome 19 and a subset of interesting genomic loci identified by Wu <em>et al.</em> (2014).</p>
+
+<p><strong>Table 1</strong>: Metadata for ChIP-seq experiments in this tutorial. SE: single-end.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Cellular state</th>
+      <th>Datatype</th>
+      <th style="text-align: center">ChIP Ab</th>
+      <th style="text-align: center">Replicate</th>
+      <th>SRA Accession</th>
+      <th style="text-align: center">Library type</th>
+      <th style="text-align: center">Read length</th>
+      <th style="text-align: center">Stranded?</th>
+      <th>Data size (MB)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>G1E</td>
+      <td>ChIP-seq</td>
+      <td style="text-align: center">input</td>
+      <td style="text-align: center">1</td>
+      <td>SRR507859</td>
+      <td style="text-align: center">SE</td>
+      <td style="text-align: center">36</td>
+      <td style="text-align: center">No</td>
+      <td>35.8</td>
+    </tr>
+    <tr>
+      <td>G1E</td>
+      <td>ChIP-seq</td>
+      <td style="text-align: center">input</td>
+      <td style="text-align: center">2</td>
+      <td>SRR507860</td>
+      <td style="text-align: center">SE</td>
+      <td style="text-align: center">55</td>
+      <td style="text-align: center">No</td>
+      <td>427.1</td>
+    </tr>
+    <tr>
+      <td>G1E</td>
+      <td>ChIP-seq</td>
+      <td style="text-align: center">TAL1</td>
+      <td style="text-align: center">1</td>
+      <td>SRR492444</td>
+      <td style="text-align: center">SE</td>
+      <td style="text-align: center">36</td>
+      <td style="text-align: center">No</td>
+      <td>32.3</td>
+    </tr>
+    <tr>
+      <td>G1E</td>
+      <td>ChIP-seq</td>
+      <td style="text-align: center">TAL1</td>
+      <td style="text-align: center">2</td>
+      <td>SRR492445</td>
+      <td style="text-align: center">SE</td>
+      <td style="text-align: center">41</td>
+      <td style="text-align: center">No</td>
+      <td>62.7</td>
+    </tr>
+    <tr>
+      <td>Megakaryocyte</td>
+      <td>ChIP-seq</td>
+      <td style="text-align: center">input</td>
+      <td style="text-align: center">1</td>
+      <td>SRR492453</td>
+      <td style="text-align: center">SE</td>
+      <td style="text-align: center">41</td>
+      <td style="text-align: center">No</td>
+      <td>57.2</td>
+    </tr>
+    <tr>
+      <td>Megakaryocyte</td>
+      <td>ChIP-seq</td>
+      <td style="text-align: center">input</td>
+      <td style="text-align: center">2</td>
+      <td>SRR492454</td>
+      <td style="text-align: center">SE</td>
+      <td style="text-align: center">55</td>
+      <td style="text-align: center">No</td>
+      <td>403.8</td>
+    </tr>
+    <tr>
+      <td>Megakaryocyte</td>
+      <td>ChIP-seq</td>
+      <td style="text-align: center">TAL1</td>
+      <td style="text-align: center">1</td>
+      <td>SRR549006</td>
+      <td style="text-align: center">SE</td>
+      <td style="text-align: center">55</td>
+      <td style="text-align: center">No</td>
+      <td>340.3</td>
+    </tr>
+    <tr>
+      <td>Megakaryocyte</td>
+      <td>ChIP-seq</td>
+      <td style="text-align: center">TAL1</td>
+      <td style="text-align: center">2</td>
+      <td>SRR549007</td>
+      <td style="text-align: center">SE</td>
+      <td style="text-align: center">48</td>
+      <td style="text-align: center">No</td>
+      <td>356.9</td>
+    </tr>
+  </tbody>
+</table>
+
+<blockquote class="agenda">
+  <h3 id="agenda">Agenda</h3>
+
+  <p>In this tutorial, we will deal with:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#step-1-quality-control" id="markdown-toc-step-1-quality-control">Step 1: Quality control</a></li>
+  <li><a href="#step-2-trimming-and-clipping-reads" id="markdown-toc-step-2-trimming-and-clipping-reads">Step 2: Trimming and clipping reads</a></li>
+  <li><a href="#step-3-aligning-reads-to-a-reference-genome" id="markdown-toc-step-3-aligning-reads-to-a-reference-genome">Step 3: Aligning reads to a reference genome</a></li>
+  <li><a href="#step-4-assessing-correlation-between-samples" id="markdown-toc-step-4-assessing-correlation-between-samples">Step 4: Assessing correlation between samples</a></li>
+  <li><a href="#step-5-assessing-ip-strength" id="markdown-toc-step-5-assessing-ip-strength">Step 5: Assessing IP strength</a></li>
+  <li><a href="#step-6-determining-tal1-binding-sites" id="markdown-toc-step-6-determining-tal1-binding-sites">Step 6: Determining TAL1 binding sites</a></li>
+  <li><a href="#step-7-inspection-of-peaks-and-aligned-data" id="markdown-toc-step-7-inspection-of-peaks-and-aligned-data">Step 7: Inspection of peaks and aligned data</a></li>
+  <li><a href="#step-71-inspection-of-peaks-and-aligned-data-with-igv" id="markdown-toc-step-71-inspection-of-peaks-and-aligned-data-with-igv">Step 7.1: Inspection of peaks and aligned data with IGV</a></li>
+  <li><a href="#step-8-identifying-unique-and-common-tal1-peaks-between-states" id="markdown-toc-step-8-identifying-unique-and-common-tal1-peaks-between-states">Step 8: Identifying unique and common TAL1 peaks between states</a></li>
+  <li><a href="#step-9-generating-input-normalized-coverage-files" id="markdown-toc-step-9-generating-input-normalized-coverage-files">Step 9: Generating Input normalized coverage files</a></li>
+  <li><a href="#step-10-plot-the-signal-on-the-peaks-between-samples" id="markdown-toc-step-10-plot-the-signal-on-the-peaks-between-samples">Step 10: Plot the signal on the peaks between samples</a></li>
+  <li><a href="#additional-optional-analyses" id="markdown-toc-additional-optional-analyses">Additional optional analyses</a>    <ol>
+      <li><a href="#assessing-gc-bias" id="markdown-toc-assessing-gc-bias">Assessing GC bias</a></li>
+    </ol>
+  </li>
+</ol>
+
+</blockquote>
+
+<h1 id="step-1-quality-control">Step 1: Quality control</h1>
+
+<p>As for any NGS data analysis, ChIP-seq data must be quality controlled before being aligned to a reference genome. For more detailed information on NGS quality control, check out the tutorial <a href="https://galaxyproject.github.io/training-material/topics/sequence-analysis">here</a>.</p>
+
+<blockquote class="hands_on">
+  <h3 id="-hands-on-quality-control"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Quality control</h3>
+
+  <ol>
+    <li>Create and name a new history for this tutorial.</li>
+    <li>
+      <p>Import the ChIP-seq raw data (*.fastqsanger) from <a href="https://doi.org/10.5281/zenodo.197100">Zenodo</a></p>
+
+      <blockquote class="tip">
+        <h3 id="-tip-importing-data-via-links"><i class="fa fa-lightbulb-o" aria-hidden="true"></i> Tip: Importing data via links</h3>
+
+        <ul>
+          <li>Copy the link location (Right-click on the filename <i class="fa fa-long-arrow-right"></i> Copy Link Address)</li>
+          <li>Open the Galaxy Upload Manager</li>
+          <li>Select <strong>Paste/Fetch Data</strong></li>
+          <li>Paste the link into the text field</li>
+          <li>Press <strong>Start</strong></li>
+        </ul>
+      </blockquote>
+
+      <figure id="figure-1"><img src="../../images/upload_data_page.png" alt="upload" title="Data can be imported directly with links." /><figcaption><span class="figcaption-prefix">Figure 1:</span> Data can be imported directly with links.</figcaption></figure>
+
+      <figure id="figure-2"><img src="../../images/data_uploaded.png" alt="data" title="Imported datasets will appear in the history panel." /><figcaption><span class="figcaption-prefix">Figure 2:</span> Imported datasets will appear in the history panel.</figcaption></figure>
+    </li>
+    <li>
+      <p>Examine in Galaxy the data in a FASTQ file by clicking on the eye icon.</p>
+
+      <blockquote class="question">
+        <h3 id="-questions"><i class="fa fa-question-circle" aria-hidden="true"></i> Questions</h3>
+
+        <ol>
+          <li>What are four key features of a FASTQ file?</li>
+          <li>
+            <p>What is the main difference between a FASTQ and a FASTA file?</p>
+
+            <details>
+<summary>Click to view answers</summary>
+<ol type="1">
+<li>Sequence identifier and additonal information, the raw sequence, information about the sequence again with optional information, and quality information about the sequence</li>
+<li>A fasta file contains only the description of the sequence and the sequence itself. A fasta file does not contain any quality information.</li>
+</ol>
+</details>
+          </li>
+        </ol>
+      </blockquote>
+    </li>
+    <li>
+      <p><strong>FastQC</strong> <i class="fa fa-wrench" aria-hidden="true"></i>: Run the tool <strong>FastQC</strong> on each FASTQ file to assess the quality of the raw data. An explanation of the results can be found on the <a href="https://www.bioinformatics.babraham.ac.uk/projects/fastqc/">FastQC web page</a>.</p>
+
+      <blockquote class="tip">
+        <h3 id="-tip-running-a-tool-on-multiple-data-files"><i class="fa fa-lightbulb-o" aria-hidden="true"></i> Tip: Running a tool on multiple data files</h3>
+
+        <p>You can run this tool - and many other tools - on all the FASTQ files at once!
+To do this, first select the “Multiple datasets” icon (two stacked pages) under the “Input FASTQ file” heading in the <strong>FASTQC</strong> Tool Form, then shift+click to select multiple FASTQ files.</p>
+      </blockquote>
+
+      <figure id="figure-3"><img src="../../images/fastqc_before.png" alt="fastqbefore" title="Sequence quality per base generated by FastQC &lt;b&gt;before&lt;/b&gt; end trimming." /><figcaption><span class="figcaption-prefix">Figure 3:</span> Sequence quality per base generated by FastQC <b>before</b> end trimming.</figcaption></figure>
+
+      <blockquote class="question">
+        <h3 id="-questions-1"><i class="fa fa-question-circle" aria-hidden="true"></i> Questions</h3>
+
+        <ol>
+          <li>What does the y-axis represent in Figure 3?</li>
+          <li>
+            <p>Why is the quality score decreasing across the length of the reads?</p>
+
+            <details>
+<summary>Click to view answers</summary>
+<ol type="1">
+<li>The phred-score. This score gives the probability of an incorrect base e.g. a score of 20 means that it is likely by 1% that one base is incorrect. See <a href="https://en.wikipedia.org/wiki/Phred_quality_score"> here </a>for more information. </li>
+<li>This is an unsolved technical issue of the sequencing machines. The longer the sequences are the more likely are errors. More <a href="https://www.ecseq.com/support/ngs/why-does-the-sequence-quality-decrease-over-the-read-in-illumina">information.</a></li>
+</ol>
+</details>
+          </li>
+        </ol>
+      </blockquote>
+    </li>
+  </ol>
+</blockquote>
+
+<h1 id="step-2-trimming-and-clipping-reads">Step 2: Trimming and clipping reads</h1>
+
+<p>It is often necessary to trim a sequenced read to remove bases sequenced with high uncertainty (<em>i.e.</em> low-quality bases). In addition, artificial adaptor sequences used in library preparation protocols need to be removed before attempting to align the reads to a reference genome.</p>
+
+<blockquote class="hands_on">
+  <h3 id="-hands-on-trimming-and-clipping-reads"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Trimming and clipping reads</h3>
+
+  <ol>
+    <li>
+      <p><strong>Trimmomatic</strong> <i class="fa fa-wrench" aria-hidden="true"></i>: Run the tool <strong>Trimmomatic</strong> on each FASTQ file to trim low-quality bases (remember how to run tools on all files at once?). Explore the full parameter list for <code class="highlighter-rouge">Trimmomatic</code> in the Tool Form and set the following <code class="highlighter-rouge">Trimmomatic</code> parameters:</p>
+
+      <ul>
+        <li><strong>Paired end data?</strong>: No</li>
+        <li><strong>Perform initial ILLUMINACLIP?</strong>: No</li>
+        <li><strong>Select Trimmomatic operation to perform</strong>: Sliding window trimming (SLIDINGWINDOW)</li>
+        <li><strong>Number of bases to average across</strong>: 4</li>
+        <li><strong>Average quality required</strong>: 20</li>
+      </ul>
+
+      <blockquote class="tip">
+        <h3 id="-tip-changing-datatypes"><i class="fa fa-lightbulb-o" aria-hidden="true"></i> Tip: Changing datatypes</h3>
+
+        <p>If the FASTQ files cannot be selected, check whether their format is FASTQ with Sanger-scaled quality values (<em>fastqsanger</em>). If not, you can edit the data type by clicking on the pencil symbol next to a file in the history, clicking the “Datatype” tab, and choosing <em>fastqsanger</em> as the “New Type”.</p>
+      </blockquote>
+    </li>
+    <li>
+      <p><strong>FastQC</strong> <i class="fa fa-wrench" aria-hidden="true"></i>: Rerun the tool <strong>FastQC</strong> on each trimmed/clipped FASTQ file to determine whether low-quality and adaptor sequences were correctly removed.</p>
+
+      <blockquote class="question">
+        <h3 id="-questions-2"><i class="fa fa-question-circle" aria-hidden="true"></i> Questions</h3>
+
+        <ol>
+          <li>How did the range of read lengths change after trimming/clipping?</li>
+          <li>
+            <p>What do you think could account for the enriched k-mers (<strong>Kmer Content</strong> heading in <strong>FASTQC</strong> output) observed in the Megakaryocytes TAL1 R2 ChIP-seq experiment?</p>
+
+            <details>
+<summary>Click to view answers</summary>
+<ol type="1">
+<li>Before trimming, all the reads were the same length, which reflected the number of rounds of nucleotide incorporation in the sequencing experiment. After trimming, read lengths span a range of values reflecting different lengths of the actual DNA fragments captured during the ChIP experiement.</li>
+<li>Many transcription factors recognize and bind to specific sequence motifs. Since a ChIP-seq experiment enriches for DNA fragments bound by the protein being immunopurified, we might expect that protein's recognition motif to be slightly enriched in the resulting sequenced reads.</li>
+</ol>
+</details>
+          </li>
+        </ol>
+      </blockquote>
+
+      <figure id="figure-4"><img src="../../images/fastqc_after.png" alt="fastqafter" title="Sequence quality per base generated by **FastQC** &lt;b&gt;after&lt;/b&gt; end trimming." /><figcaption><span class="figcaption-prefix">Figure 4:</span> Sequence quality per base generated by **FastQC** <b>after</b> end trimming.</figcaption></figure>
+    </li>
+  </ol>
+</blockquote>
+
+<h1 id="step-3-aligning-reads-to-a-reference-genome">Step 3: Aligning reads to a reference genome</h1>
+
+<p>To determine where DNA fragments originated from in the genome, the sequenced reads must be aligned to a reference genome. This is equivalent to solving a jigsaw puzzle, but unfortunately, not all pieces are unique. In principle, you could do a BLAST analysis to figure out where the sequenced pieces fit best in the known genome. Aligning millions of short sequences this way, however, can take a couple of weeks.
+Nowadays, there are many read alignment programs for sequenced DNA, <code class="highlighter-rouge">BWA</code> being one of them. You can read more about the BWA algorithm and tool <a href="https://academic.oup.com/bioinformatics/article-lookup/doi/10.1093/bioinformatics/btp324">here</a>.</p>
+
+<blockquote class="hands_on">
+  <h3 id="-hands-on-aligning-reads-to-a-reference-genome"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Aligning reads to a reference genome</h3>
+
+  <ol>
+    <li>
+      <p><strong>Map with BWA</strong> <i class="fa fa-wrench" aria-hidden="true"></i>: Run the tool <strong>Map with BWA</strong> to map the trimmed/clipped reads to the mouse genome. Set the following <strong>Map with BWA</strong> parameters:</p>
+
+      <ul>
+        <li><strong>Using reference genome</strong>: Mouse (mus musculus) mm10</li>
+        <li><strong>Single or Paired-end reads</strong>: Single</li>
+      </ul>
+
+      <figure id="figure-5"><img src="../../images/BWA_tool_form.png" alt="bwa" title="Select the trimmed read files to be aligned." /><figcaption><span class="figcaption-prefix">Figure 5:</span> Select the trimmed read files to be aligned.</figcaption></figure>
+    </li>
+    <li>Rename your files after <strong>BWA</strong> finishes to reflect the origin and contents</li>
+    <li>
+      <p>Inspect a file produced by running <strong>BWA</strong></p>
+
+      <blockquote class="question">
+        <h3 id="-questions-3"><i class="fa fa-question-circle" aria-hidden="true"></i> Questions</h3>
+
+        <ol>
+          <li>What datatype is the <code class="highlighter-rouge">BWA</code> output file?</li>
+          <li>
+            <p>How many reads were mapped from each file?</p>
+
+            <details>
+<summary>Click to view answers</summary>
+<ol type="1">
+<li> The output is a sam file.</li>
+<li>Check the number of lines for each file in your history. This gives you a rough estimate.</li>
+</ol>
+</details>
+          </li>
+        </ol>
+      </blockquote>
+    </li>
+    <li>
+      <p><strong>IdxStats</strong> <i class="fa fa-wrench" aria-hidden="true"></i>: Run the tool <strong>IdxStats</strong> on all mapped files and look at the output (poke it in the eye!).</p>
+
+      <blockquote class="question">
+        <h3 id="-questions-4"><i class="fa fa-question-circle" aria-hidden="true"></i> Questions</h3>
+
+        <ol>
+          <li>What does each column in the output represent (<strong>Tip</strong>: look at the Tool Form)?</li>
+          <li>How many reads were mapped to chromosome 19 in each experiment?</li>
+          <li>
+            <p>If the mouse genome has 21 pairs of chromosomes, what are the other reference chromosomes (<em>e.g.</em> chr1_GL456210_random)?</p>
+
+            <details>
+<summary>Click to view answers</summary>
+<ol type="1">
+<li>
+  Column &emsp; Description&lt;/br&gt;
+  ------------ &emsp;------------------&lt;/br&gt;
+     1 &emsp; &emsp; &emsp;     Reference sequence identifier&lt;/br&gt;
+     2 &emsp; &emsp; &emsp;     Reference sequence length&lt;/br&gt;
+     3 &emsp; &emsp; &emsp;     Number of mapped reads&lt;/br&gt;
+     4 &emsp; &emsp; &emsp;     Number of placed but unmapped reads  (typically unmapped partners of mapped reads)</li>
+<li>This information can be seen in column 3, e.g. for Megakaryocyte_Tal1_R1 2143352 reads are mapped.</li>
+<li>These are parts of chromosomes that e.g. for chr1_GL456210_random do belong to chr1 but it is unclear where exactly. There entires like chrUn that are not associated with a chromosome but it is believed that they are part of the genome. </li>
+
+</ol>
+</details>
+          </li>
+        </ol>
+      </blockquote>
+    </li>
+  </ol>
+</blockquote>
+
+<h1 id="step-4-assessing-correlation-between-samples">Step 4: Assessing correlation between samples</h1>
+
+<p>To assess the similarity between the replicates sequencing datasets, it is a common technique to calculate the correlation of read counts for the different samples.</p>
+
+<p>We expect that the replicates of the ChIP-seq experiments should be clustered more closely to each other than the replicates of the input samples. We will be use tools from the package <strong>deepTools</strong> for the next few steps. More information on <strong>deepTools</strong> can be found <a href="https://deeptools.readthedocs.io/en/latest/content/list_of_tools.html">here</a>.</p>
+
+<blockquote class="hands_on">
+  <h3 id="-hands-on-assessing-correlation-between-samples"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Assessing correlation between samples</h3>
+
+  <ol>
+    <li>
+      <p><strong>multiBamSummary</strong> <i class="fa fa-wrench" aria-hidden="true"></i>: Run the tool <strong>multiBamSummary</strong> from the <strong>multiBamSummary</strong> package</p>
+
+      <p>This tool splits the reference genome into bins of equal size and counts the number of reads in each bin from each sample. We set a small <strong>Bin size</strong> here because we are working with a subset of reads that align to only a fraction of the genome.</p>
+
+      <p>Set the following <strong>multiBamSummary</strong> parameters:</p>
+
+      <ul>
+        <li>Select all of the aligned BAM files</li>
+        <li><strong>Bin size in bp</strong>: 1000</li>
+      </ul>
+
+      <figure id="figure-6"><img src="../../images/multiBamSummary_1000bin.png" alt="multiBamSummary" title="Select all of the aligned BAM files and change Bin size." /><figcaption><span class="figcaption-prefix">Figure 6:</span> Select all of the aligned BAM files and change Bin size.</figcaption></figure>
+    </li>
+    <li>
+      <p><strong>plotCorrelation</strong> <i class="fa fa-wrench" aria-hidden="true"></i>: Run the tool <strong>plotCorrelation</strong> from the <strong>deepTools</strong> package to visualize the results from the previous step.</p>
+
+      <p>Feel free to try different parameters. To start, set the following <strong>plotCorrelation</strong> parameters:</p>
+
+      <ul>
+        <li><strong>Correlation method</strong>: Pearson</li>
+        <li><strong>Plotting type</strong>: Heatmap</li>
+        <li><strong>Plot the correlation value</strong>: Yes</li>
+        <li><strong>Skip zeros</strong>: Yes</li>
+        <li><strong>Remove regions with very large counts</strong>: Yes</li>
+      </ul>
+
+      <figure id="figure-7"><img src="../../images/plotCorrelation.png" alt="corr" title="Select the newly generation correlation matrix file from the previous step." /><figcaption><span class="figcaption-prefix">Figure 7:</span> Select the newly generation correlation matrix file from the previous step.</figcaption></figure>
+
+      <blockquote class="question">
+        <h3 id="-questions-5"><i class="fa fa-question-circle" aria-hidden="true"></i> Questions</h3>
+
+        <ol>
+          <li>Why do we want to skip zeros in <strong>plotCorrelation</strong>?</li>
+          <li>What happens if the Spearman correlation method is used instead of the Pearson method?</li>
+          <li>
+            <p>What does the output of making a Scatterplot instead of a Heatmap look like?</p>
+
+            <details>
+<summary>Click to view answers</summary>
+<ol type="1">
+<li>Large areas of zeros would lead to a correlation of these areas. The information we would get out of this computation would be meaningless. </li>
+<li>The clusters are different, e.g. Megakaryocyte_input_R2 and G1E_input_R2 are clustered together. <a href="http://support.minitab.com/en-us/minitab-express/1/help-and-how-to/modeling-statistics/regression/supporting-topics/basics/a-comparison-of-the-pearson-and-spearman-correlation-methods/"> More information about Pearson and Spearman correlation. </a> </li>
+<li>No solution for you, just compare the different outputs. </li>
+</ol>
+</details>
+          </li>
+        </ol>
+      </blockquote>
+
+      <figure id="figure-8"><img src="../../images/plotCorrelation_heatmap_pearson_1kb.png" alt="heatmap" title="Heatmap of correlation matrix generated by **plotCorrelation**." /><figcaption><span class="figcaption-prefix">Figure 8:</span> Heatmap of correlation matrix generated by **plotCorrelation**.</figcaption></figure>
+    </li>
+  </ol>
+</blockquote>
+
+<p>For additional informaton on how to interpret <strong>plotCorrelation</strong> plots, read the information <a href="https://deeptools.readthedocs.io/en/latest/content/tools/plotCorrelation.html#background">here</a></p>
+
+<h1 id="step-5-assessing-ip-strength">Step 5: Assessing IP strength</h1>
+
+<p>We will now evaluate the quality of the immuno-precipitation step in the ChIP-seq protocol.</p>
+
+<blockquote class="hands_on">
+  <h3 id="-hands-on-assessing-ip-strength"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Assessing IP strength</h3>
+
+  <ol>
+    <li>
+      <p><strong>plotFingerprint</strong> <i class="fa fa-wrench" aria-hidden="true"></i>: Run the tool <strong>plotFingerprint</strong> from the <strong>deepTools</strong> package.</p>
+
+      <ul>
+        <li>Select all of the aligned BAM files for the G1E cell type</li>
+        <li><strong>Show advanced options</strong>: yes</li>
+        <li><strong>Bin size in bases</strong>: 100</li>
+        <li><strong>Skip zeros</strong>: Yes</li>
+      </ul>
+
+      <p><img src="../../images/plotFingerprint1_v2.png" alt="fingerprint1" /></p>
+      <figure id="figure-9"><img src="../../images/plotFingerprint2.png" alt="fingerprint2" title="Select all of the aligned BAM file to assess IP strength." /><figcaption><span class="figcaption-prefix">Figure 9:</span> Select all of the aligned BAM file to assess IP strength.</figcaption></figure>
+    </li>
+    <li>
+      <p>View the output image.</p>
+
+      <figure id="figure-10"><img src="../../images/plotFingerprint_graph_v2.png" alt="fingerprintimage" title="Graph of IP strength from **plotFingerprint**." /><figcaption><span class="figcaption-prefix">Figure 10:</span> Graph of IP strength from **plotFingerprint**.</figcaption></figure>
+
+      <blockquote class="question">
+        <h3 id="-questions-6"><i class="fa fa-question-circle" aria-hidden="true"></i> Questions</h3>
+
+        <ol>
+          <li>What does this graph in Figure 10 represent?</li>
+          <li>How do (or should) input datasets differ from IP datasets?</li>
+          <li>What do you think about the quality of the IP for this experiment?</li>
+          <li>
+            <p>How does the quality of the IP for megakaryocytes compare to G1E cells?</p>
+
+            <details>
+<summary>Click to view answers</summary>
+<ol type="1">
+<li>It shows us how good the ChIP Signal compared to the control signal is. An ideal control [input] with perfect uniform distribution of reads along the genome (i.e. without enrichments in open chromatin etc.) and infinite sequencing coverage should generate a straight diagonal line. A very specific and strong ChIP enrichment will be indicated by a prominent and steep rise of the cumulative sum towards the highest rank. </li>
+<li>We expect that the control (input) signal is more or less uniform distributed over the genome (e.g. like the green line in the image above.) The IP dataset should look more like the red line but it would be better if the values for IP start to increase at around 0.8 on the x-axis. </li>
+<li>The enrichment did not work as it should. Compare the blue line with the red one! For your future experiments: You can never have enough replicates! </li>
+<li>The quality of megakaryocytes is better then G1E.</li>
+</ol>
+</details>
+          </li>
+        </ol>
+      </blockquote>
+    </li>
+  </ol>
+</blockquote>
+
+<p>For additional information on how to interpret <strong>plotFingerprint</strong> plots, read the information <a href="https://deeptools.readthedocs.io/en/latest/content/tools/plotFingerprint.html#background">here</a></p>
+
+<h1 id="step-6-determining-tal1-binding-sites">Step 6: Determining TAL1 binding sites</h1>
+
+<p>Now that <strong>BWA</strong> has aligned the reads to the genome, we will use the tool <strong>MACS2</strong> to identify regions of TAL1 occupancy, which are called “peaks”. Peaks are determined from pileups of sequenced reads across the genome that correspond to where TAL1 binds.</p>
+
+<p><strong>MACS2</strong> will perform two tasks:</p>
+
+<ol>
+  <li>Identify regions of TAL1 occupancy (peaks)</li>
+  <li>Generate bedgraph files for visual inspection of the data on a genome browser.</li>
+</ol>
+
+<p>More information about <strong>MACS2</strong> can be found <a href="https://genomebiology.biomedcentral.com/articles/10.1186/gb-2008-9-9-r137">here</a>.</p>
+
+<blockquote class="hands_on">
+  <h3 id="-hands-on-determining-tal1-binding-sites"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Determining TAL1 binding sites</h3>
+
+  <ol>
+    <li>
+      <p><strong>MACS2 callpeak</strong> <i class="fa fa-wrench" aria-hidden="true"></i>: Run the tool <strong>MACS2 callpeak</strong> with the aligned read files from the previous step as Treatment (TAL1) and Control (input).</p>
+
+      <ul>
+        <li>Select replicate <strong>ChIP-Seq Treatment Files</strong> for one cell type</li>
+        <li>Select replicate <strong>ChIP-Seq Control Files</strong> for the same cell type</li>
+      </ul>
+
+      <figure id="figure-11"><img src="../../images/MACS2_tool_form.png" alt="macs2" title="Select the appropriate control and treatment files." /><figcaption><span class="figcaption-prefix">Figure 11:</span> Select the appropriate control and treatment files.</figcaption></figure>
+    </li>
+    <li>
+      <p>Rename your files after <strong>MACS2 callpeak</strong> finishes to reflect the origin and contents.</p>
+    </li>
+  </ol>
+</blockquote>
+
+<h1 id="step-7-inspection-of-peaks-and-aligned-data">Step 7: Inspection of peaks and aligned data</h1>
+
+<p>It is critical to visualize NGS data on a genome browser after alignment to evaluate the “goodness” of the analysis. Evaluation criteria will differ for various NGS experiment types, but for ChIP-seq data we want to ensure reads from a Treatment/IP sample are enriched at peaks and do not localize non-specifically (like the Control/input condition).</p>
+
+<p><strong>MACS2</strong> generates BEDgraph and BED files that we will use to visualize read abundance and peaks, respectively, at regions <strong>MACS2</strong> determines to be TAL1 peaks using Galaxy’s in-house genome browser, Trackster.</p>
+
+<p>First, we will reformat the peak file before we send it to Trackster, and then we will import a gene annotation file so we can visualize aligned reads and TAL1 peaks relative to gene features and positions.</p>
+
+<blockquote class="hands_on">
+  <h3 id="-hands-on-inspection-of-peaks-and-aligned-data-with-trackster"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Inspection of peaks and aligned data with Trackster</h3>
+
+  <ol>
+    <li>
+      <p><strong>Cut</strong> <i class="fa fa-wrench" aria-hidden="true"></i>: Run the tool <strong>Cut</strong> on the peak file choosing columns “c1,c2,c3,c4” and rename this file to reflect the origin and contents.</p>
+    </li>
+    <li>
+      <p>Import the gene annotations file from Zenodo <a href="https://doi.org/10.5281/zenodo.197100"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.197100.svg" alt="DOI" /></a></p>
+    </li>
+    <li>
+      <p>Click “Visualizations” on the page header and select “New Track Browser”.</p>
+
+      <figure id="figure-12"><img src="../../images/Highlighting_viz_button.png" alt="vizbutton" title="Trackster can be accessed from the Visualizations button at the top of the screen." /><figcaption><span class="figcaption-prefix">Figure 12:</span> Trackster can be accessed from the Visualizations button at the top of the screen.</figcaption></figure>
+    </li>
+    <li>
+      <p>Give this session a descriptive name and choose “mm10” as the “Reference genome build (dbkey)”.</p>
+
+      <figure id="figure-13"><img src="../../images/Trackster_session_and_db.png" alt="tracksterdb" title="Session name and assigning reference genome." /><figcaption><span class="figcaption-prefix">Figure 13:</span> Session name and assigning reference genome.</figcaption></figure>
+    </li>
+    <li>
+      <p>Click “Add Datasets to visualization” and select the history containing the data from this analysis. Select the BEDgraph files and the peak files that you renamed.</p>
+
+      <figure id="figure-14"><img src="../../images/Trackster_add_datasets.png" alt="tracksteradd" title="Load your data into Trackster with the Add Datasets to visualization feature." /><figcaption><span class="figcaption-prefix">Figure 14:</span> Load your data into Trackster with the Add Datasets to visualization feature.</figcaption></figure>
+
+      <figure id="figure-15"><img src="../../images/Trackster_selecting_datasets.png" alt="tracksterselect" title="Select data from your histories to view in Trackster." /><figcaption><span class="figcaption-prefix">Figure 15:</span> Select data from your histories to view in Trackster.</figcaption></figure>
+    </li>
+    <li>
+      <p>Navigate to the Runx1 locus (chr16:92501466-92926074) to inspect the aligned reads and TAL1 peaks.</p>
+
+      <blockquote class="question">
+        <h3 id="-questions-7"><i class="fa fa-question-circle" aria-hidden="true"></i> Questions</h3>
+
+        <ol>
+          <li>What do you see at the Runx1 locus in Trackster?</li>
+          <li>
+            <p>What gene(s) other than Runx1 could be regulated by TAL1?</p>
+
+            <details>
+<summary>Click to view answers</summary>
+<ol type="1">
+<li>Directly upstream of the shorter Runx1 gene models is a cluster of 3 TAL1 peaks that only appear in the G1E cell type, but not in Megakaryocytes. Further upstream, there are some shared TAL1 peaks in both cell types.</li>
+<li></li>
+</ol>
+</details>
+          </li>
+        </ol>
+      </blockquote>
+
+      <figure id="figure-16"><img src="../../images/Trackster_Runx1_locus.png" alt="runx1" title="The Runx1 locus." /><figcaption><span class="figcaption-prefix">Figure 16:</span> The Runx1 locus.</figcaption></figure>
+    </li>
+  </ol>
+</blockquote>
+
+<h1 id="step-71-inspection-of-peaks-and-aligned-data-with-igv">Step 7.1: Inspection of peaks and aligned data with IGV</h1>
+<p>We show here an alternative to Trackster, <a href="http://software.broadinstitute.org/software/igv/">IGV</a>.</p>
+
+<blockquote>
+  <h3 id="-hands-on-igv"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: IGV</h3>
+
+  <ol>
+    <li>Open IGV on your local computer.</li>
+    <li>Click on each ‘narrow peaks’ result file from the MACS2 computations on ‘display with IGV’ –&gt; ‘local Mouse mm10’</li>
+    <li>For more information about IGV see <a href="https://galaxyproject.github.io/training-material/topics/introduction/tutorials/igv-introduction/tutorial.html">here</a></li>
+  </ol>
+</blockquote>
+
+<h1 id="step-8-identifying-unique-and-common-tal1-peaks-between-states">Step 8: Identifying unique and common TAL1 peaks between states</h1>
+
+<p>We have processed ChIP-seq data from two stages of hematopoiesis and have lists of TAL1 occupied sites (peaks) in both cellular states. The next analysis step is to identify TAL1 peaks that are <em>shared</em> between the two cellular states and peaks that are <em>specific</em> to either cellular state.</p>
+
+<blockquote class="hands_on">
+  <h3 id="-hands-on-identifying-unique-and-common-tal1-peaks-between-states"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Identifying unique and common TAL1 peaks between states</h3>
+
+  <ol>
+    <li>
+      <p><strong>Intersect intervals</strong> <i class="fa fa-wrench" aria-hidden="true"></i>: Run the tool <strong>Intersect intervals</strong> to find peaks that exist both in G1E and megakaryocytes.</p>
+
+      <p>Select the “TAL1 G1E peaks” and “TAL1 Mega peaks” files as the inputs.</p>
+
+      <p>Running this tool with the default settings will return overlapping peaks of both files.</p>
+    </li>
+    <li>
+      <p><strong>Intersect intervals</strong> <i class="fa fa-wrench" aria-hidden="true"></i>: Run the tool <strong>Intersect intervals</strong> to find peaks that exist only in G1E.</p>
+
+      <ul>
+        <li>Select “TAL1 G1E peaks” as the first input and “TAL1 Mega peaks” as the second input file.</li>
+        <li><strong>Report only those alignments that **do not** overlap the BED file</strong>: Yes</li>
+      </ul>
+    </li>
+    <li>
+      <p><strong>Intersect intervals</strong> <i class="fa fa-wrench" aria-hidden="true"></i>: Run the tool <strong>Intersect intervals</strong> to find peaks that exist only in megakaryocytes.</p>
+
+      <ul>
+        <li>Select “TAL1 Mega peaks” as the first input and “TAL1 G1E peaks” as the second input file.</li>
+        <li><strong>Report only those alignments that **do not** overlap the BED file</strong>: Yes</li>
+      </ul>
+    </li>
+    <li>
+      <p>Re-name the three files we generated to reflect their contents.</p>
+
+      <blockquote class="question">
+        <h3 id="-questions-8"><i class="fa fa-question-circle" aria-hidden="true"></i> Questions</h3>
+
+        <ol>
+          <li>How many TAL1 binding sites are common to both G1E cells and megakaryocytes?</li>
+          <li>How many are unique to G1E cells?</li>
+          <li>
+            <p>How many are unique to megakaryocytes?</p>
+
+            <details>
+<summary>Click to view answers</summary>
+<ol type="1">
+<li>1 region</li>
+<li>407 regions</li>
+<li>139 regions</li>
+</ol>
+</details>
+          </li>
+        </ol>
+      </blockquote>
+    </li>
+  </ol>
+</blockquote>
+
+<h1 id="step-9-generating-input-normalized-coverage-files">Step 9: Generating Input normalized coverage files</h1>
+
+<p>We will generate Input normalized coverage (bigwig) files for the ChIP samples, using <strong>bamCompare</strong> tool from <strong>deepTools2</strong>. <strong>bamCompare</strong> provides multiple options to compare the two files (e.g. log2ratio, subtraction). We will use log2 ratio of the ChIP samples over Input.</p>
+
+<blockquote class="hands_on">
+  <h3 id="-hands-on-generate-input-normalized-bigwigs"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Generate Input-normalized bigwigs</h3>
+
+  <ol>
+    <li>Search for <strong>bamCompare</strong> in the Galaxy tool panel.</li>
+    <li>Select the treatment sample, for example “Megakaryocyte_Tal1_R2.bam”, as the first sample, and the input sample “Megakaryocyte_Input_R2.bam” as the second sample.</li>
+    <li>Check that you are using log2 ratio to compare the samples, and click “Execute”.</li>
+    <li>Repeat this step for all treatment and input samples: Megakaryocyte_Tal1_R1.bam and Megakaryocyte_Input_R1.bam; G1E_Tal1_R2.bam and G1E_Input_R2.bam; G1E_Tal1_R1.bam and G1E_Input_R1.bam.</li>
+  </ol>
+
+  <p><img src="../../images/bamcom.png" alt="bamCompare tool settings" /></p>
+</blockquote>
+
+<h1 id="step-10-plot-the-signal-on-the-peaks-between-samples">Step 10: Plot the signal on the peaks between samples</h1>
+
+<p>Plotting your region of interest will involve using two tools from the <strong>deepTools</strong> suite.</p>
+<ul>
+  <li>computeMatrix : Computes the signal on given regions, using the bigwig coverage files from different samples.</li>
+  <li>plotHeatmap : Plots heatMap of the signals using the computeMatrix output.</li>
+</ul>
+
+<p>optionally, you can also use <code class="highlighter-rouge">plotProfile</code>to create a profile plot using to computeMatrix output.</p>
+
+<h3 id="computematrix">computeMatrix</h3>
+
+<blockquote class="hands_on">
+  <h3 id="-hands-on-calculate-signal-matrix-on-the-macs2-output"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: calculate signal matrix on the MACS2 output</h3>
+
+  <ol>
+    <li>Search for <strong>computeMatrix</strong> in the Galaxy tool panel.</li>
+    <li>Under “Regions to plot”, select the MACS2 output (narrowpeaks) for G1E cells (TAL1 over Input).</li>
+    <li>Under “Score file”, select the bigWigs (log2 ratios from bamCompare).</li>
+    <li>From “computeMatrix has two main output options”, select “reference point”.</li>
+    <li>Under “The Reference point for plotting”, select “Center of region”.</li>
+    <li>For the two fields region upstream and downstream choose both times the value ‘5000’</li>
+  </ol>
+
+  <p><img src="../../images/compM.png" alt="compMatrix" /></p>
+
+  <ol>
+    <li>Under advanced options , select “Yes” for “Convert missing values to zero” and “Skip zeros”.</li>
+    <li>Select “Execute”</li>
+  </ol>
+
+  <p><img src="../../images/compM2.png" alt="computeMatrix" /></p>
+</blockquote>
+
+<h3 id="plotheatmap">plotHeatmap</h3>
+
+<blockquote class="hands_on">
+  <h3 id="-hands-on-plot-a-heatmap-using-computemarix-output"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: plot a Heatmap using computeMarix output</h3>
+
+  <ol>
+    <li>Select “plotHeatmap” from the Galaxy tool panel.</li>
+    <li>Select the computeMatrix output as an input.</li>
+    <li>Under advanced options, go to “Labels for the samples “, and enter sample labels (in the order you added them in compueMatrix ), separated by space.</li>
+    <li>Click “Execute”</li>
+  </ol>
+
+  <p><img src="../../images/plothm.png" alt="plotHM" /></p>
+
+  <p>The output shall look like this :</p>
+
+  <p><img src="../../images/hm.png" alt="hm" /></p>
+</blockquote>
+
+<h1 id="additional-optional-analyses">Additional optional analyses</h1>
+
+<h2 id="assessing-gc-bias">Assessing GC bias</h2>
+
+<p>A common problem of PCR-based protocols is the observation that GC-rich regions tend to be amplified more readily than GC-poor regions.</p>
+
+<p>We will now check whether the samples have more reads from regions of the genome with high GC.</p>
+
+<blockquote class="hands_on">
+  <h3 id="-hands-on-assessing-gc-bias"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Assessing GC bias</h3>
+
+  <ol>
+    <li>
+      <p><strong>computeGCbias</strong> <i class="fa fa-wrench" aria-hidden="true"></i>: Run the tool <strong>computeGCbias</strong> from the <strong>deepTools</strong> package.</p>
+
+      <ul>
+        <li>First, select an aligned BAM files for an input dataset</li>
+        <li><strong>Reference genome</strong>: locally cached</li>
+        <li><strong>Using reference genome</strong>: mm10</li>
+        <li><strong>Effective genome size</strong>: user specified</li>
+        <li><strong>Effective genome size</strong>: 10000000</li>
+        <li><strong>Fragment length used for the sequencing</strong>: 50</li>
+      </ul>
+
+      <figure id="figure-17"><img src="../../images/computeGCBias.png" alt="gcbias" title="Select a single aligned BAM file to check GC bias for that dataset." /><figcaption><span class="figcaption-prefix">Figure 17:</span> Select a single aligned BAM file to check GC bias for that dataset.</figcaption></figure>
+
+      <blockquote class="question">
+        <h3 id="-questions-9"><i class="fa fa-question-circle" aria-hidden="true"></i> Questions</h3>
+
+        <ol>
+          <li>Why would we worry more about checking for GC bias in an input file?</li>
+          <li>
+            <p>Does this dataset have a GC bias?</p>
+
+            <details>
+<summary>Click to view answers</summary>
+<ol type="1">
+<li>In an input ChIP-seq file, the expectation is that DNA fragments are uniformly sampled from the genome. This is in contrast to an IP ChIP-seq file where it is *expected* that certain genomic regions contain more reads  (i.e. regions that are bound by the protein that is immunopurified). Therefore, non-uniformity of reads in the input sample could be a result of GC-bias, whereby more GC-rich fragments are preferentially amplified during PCR.</li>
+<li>To answer this question, run the **computeGCbias** tool as described above and check out the results. What do YOU think? For more examples and information on how to interpret the results, check out the tool usage documentation [here](https://deeptools.readthedocs.io/en/latest/content/tools/computeGCBias.html#background).</li>
+</ol>
+</details>
+          </li>
+        </ol>
+      </blockquote>
+    </li>
+    <li>
+      <p><strong>correctGCbias</strong> <i class="fa fa-wrench" aria-hidden="true"></i>: Explore the tool <strong>correctGCbias</strong> from the <strong>deepTools</strong> package.</p>
+
+      <blockquote class="question">
+        <h3 id="-questions-10"><i class="fa fa-question-circle" aria-hidden="true"></i> Questions</h3>
+
+        <ol>
+          <li>What does the tool <strong>correctGCbias</strong> do?</li>
+          <li>What is the output of this tool?</li>
+          <li>
+            <p>What are some caveats to be aware of if using the output of this tool in downstream analyses?</p>
+
+            <details>
+<summary>Click to view answers</summary>
+<ol type="1">
+<li>The **corectGCbias** tool removes reads from regions with higher coverage than expected (typically corresponding to GC-rich regions) and adds reads to regions with lower coverage than expected (typically corresponding to AT-rich regions).</li>
+<li>The output of this tool is a GC-corrected file in BAM, bigWig, or bedGraph format.</li>
+<li>The GC-corrected output file likely contains duplicated reads in low-coverage regions where reads were added to match the expected read density. Therefore, it is necessary to *avoid* filtering or removing duplicate reads in any downstream analyses.</li>
+</ol>
+</details>
+          </li>
+        </ol>
+      </blockquote>
+    </li>
+  </ol>
+</blockquote>
+
+<p>For additional information on how to interpret <strong>computeGCbias</strong> plots, read the information <a href="https://deeptools.readthedocs.io/en/latest/content/tools/computeGCBias.html">here</a></p>
+
+<h1 class="no_toc" id="conclusion">Conclusion</h1>
+
+<p>In this exercise you imported raw Illumina sequencing data, evaluated the quality before and after you trimmed reads with low confidence scores, aligned the trimmed reads, identified TAL1 peaks relative to the negative control (background), and visualized the aligned reads and TAL1 peaks relative to gene structures and positions. Additional, you assessed the “goodness” of the experiments by looking at metrics such as GC bias and IP enrichment.</p>
+
+
+        
+        <blockquote class="key_points">
+            <h3><i class="fa fa-key" aria-hidden="true"></i> Key points</h3>
+
+            <ul>
+                
+                <li>Sophisticated analysis of ChIP-seq data is possible using tools hosted by Galaxy</li>
+                
+                <li>Genomic dataset analyses require multiple methods of quality assessment to ensure that the data are appropriate for answering the biology question of interest.</li>
+                
+                <li>By using the sharable and transparent Galaxy platform, data analyses can easily be shared and reproduced</li>
+                
+            </ul>
+        </blockquote>
+        
+
+        
+        <h1>Useful literature</h1>
+        <p>Useful information regarding this type of analysis with descriptions and paper references for the tools used in this tutorial, and literature for this analysis techniques and interpretations can be found <a href="https://galaxyproject.github.io/training-material/topics/chip-seq#references">here</a>.</p>
+        
+
+        <h3><i class="fa fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!</h3>
+
+        <hr>
+
+        <blockquote class="overview">
+            <h3><i class="fa fa-comments-o" aria-hidden="true"></i> Feedback</h3>
+            Please take a moment and provide your feedback on this tutorial. Your feedback will help guide and improve future revisions to this tutorial.
+            <a href="https://tinyurl.com/GTNfeedback">Feedback Form</a>
+        </blockquote>
+    </section>
+</div>
+
+<footer>
+    <div class="container">
+        <p>
+            This material is the result of a collaborative work. Thanks the
+            <a href="https://wiki.galaxyproject.org/Teach/GTN">Galaxy Training Network</a>
+            and all the contributors
+            
+        </p>
+        <p>
+            Found a typo? Something is wrong in this tutorial? Edit it on
+            <a href="https://github.com/galaxyproject/training-material/tree/master/topics/chip-seq/tutorials/tal1-binding-site-identification/tutorial.md">GitHub</a>.
+        </p>
+    </div>
+</footer>
+
+    </body>
+    <script type="text/javascript" src="https://galaxyproject.github.io/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="https://galaxyproject.github.io/training-material/assets/js/tether.min.js"></script>
+    <script type="text/javascript" src="https://galaxyproject.github.io/training-material/assets/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://galaxyproject.github.io/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</html>

@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Galaxy Training!</title>
+        <link rel="stylesheet" href="https://galaxyproject.github.io/training-material/assets/css/bootstrap.min.css?v=2">
+        <link rel="stylesheet" href="https://galaxyproject.github.io/training-material/assets/css/main.css?v=2">
+        <link rel="stylesheet" href="https://galaxyproject.github.io/training-material/assets/css/font-awesome.css">
+        <link rel="stylesheet" href="https://galaxyproject.github.io/training-material/assets/css/syntax_highlighting.css">
+    </head>
+    <body>
+        
+
+
+<header>
+    <nav class="navbar navbar-toggleable-md navbar-inverse">
+        <div class="container">
+            <a class="navbar-brand" href="https://galaxyproject.github.io/training-material/">
+                <img src="https://galaxyproject.github.io/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://galaxyproject.github.io/training-material/topics/proteomics" title="Go back to list of tutorials">
+                            <i class="fa fa-folder-o" aria-hidden="true"></i> Proteomics
+                        </a>
+                    </li>
+
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://galaxyproject.github.io/training-material/topics/proteomics/slides" title="Slides for this tutorial">
+                            <i class="fa fa-slideshare" aria-hidden="true"></i> Introduction slides
+                        </a>
+                    </li>
+                    
+
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/galaxyproject/training-material/tree/master/topics/proteomics/docker" title="Docker image for this tutorial">
+                            <i class="fa fa-ship" aria-hidden="true"></i> Docker image
+                        </a>
+                    </li>
+                    
+
+                    
+
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="" title="Links to data">
+                            <i class="fa fa-files-o" aria-hidden="true"></i> Input Dataset
+                        </a>
+                    </li>
+                    
+
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://galaxyproject.github.io/training-material/topics/proteomics#references" title="References">
+                            <i class="fa fa-book" aria-hidden="true"></i> Literature
+                        </a>
+                    </li>
+                    
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Chat on gitter">
+                            <i class="fa fa-life-ring" aria-hidden="true"></i> Help
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/galaxyproject/training-material/tree/master/topics/proteomics/tutorials/database-handling/tutorial.md">
+                            <i class="fa fa-github" aria-hidden="true"></i> Edit
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<div class="container main-content">
+    <section class="tutorial">
+        <h1>Protein FASTA Database Handling</h1>
+
+        <blockquote class="overview">
+            <h3>Overview</h3>
+
+            <strong><i class="fa fa-question-circle" aria-hidden="true"></i> Questions</strong>
+            <ul>
+            
+            <li>How to download protein FASTA databases of a certain organism?</li>
+            
+            <li>How to download a contaminant database?</li>
+            
+            <li>How to create a decoy database?</li>
+            
+            <li>How to combine databases?</li>
+            
+            </ul>
+
+            <strong><i class="fa fa-bullseye" aria-hidden="true"></i> Objectives</strong>
+            <ul>
+            
+            <li>Creation of a protein FASTA database ready for use with database search algorithms.</li>
+            
+            </ul>
+
+            
+            <strong><i class="fa fa-check-circle" aria-hidden="true"></i> Requirements</strong>
+            <ul>
+            
+                <li>
+                    
+                    <a href="https://galaxyproject.github.io/training-material/topics/introduction/">Galaxy introduction</a>
+                    
+                </li>
+            
+            
+            </ul>
+            
+
+            <p><strong><i class="fa fa-hourglass-end" aria-hidden="true"></i> Time estimation:</strong> 30min</p>
+        </blockquote>
+
+        <h1 class="no_toc" id="introduction">Introduction</h1>
+
+<p>Identifying peptides in proteomic datasets is commonly done by using search engines that compare the MS2 spectra of peptides to theoretical spectra. These theoretical spectra are generated from a FASTA database containing proteins that are expected in the measured sample. Typically, those FASTA databases will contain all proteins of the organism the sample derived from.</p>
+
+<blockquote class="agenda">
+  <h3 id="agenda">Agenda</h3>
+
+  <p>In this tutorial, we will deal with:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#loading-a-search-database" id="markdown-toc-loading-a-search-database">Loading a Search Database</a></li>
+  <li><a href="#contaminant-databases" id="markdown-toc-contaminant-databases">Contaminant databases</a></li>
+  <li><a href="#merging-databases" id="markdown-toc-merging-databases">Merging databases</a></li>
+  <li><a href="#creating-a-decoy-database" id="markdown-toc-creating-a-decoy-database">Creating a Decoy Database</a></li>
+</ol>
+
+</blockquote>
+
+<h1 id="loading-a-search-database">Loading a Search Database</h1>
+
+<p>There are a many ways how you can upload your search database (FASTA file with protein sequences). Three among these are:</p>
+
+<ul>
+  <li>Using <strong>Protein Database Downloader</strong> <i class="fa fa-wrench" aria-hidden="true"></i> .</li>
+  <li>Using a direct weblink to the database.</li>
+  <li>Uploading a database from the data library.</li>
+</ul>
+
+<p>In this tutorial, we will explore <strong>Protein Database Downloader</strong> <i class="fa fa-wrench" aria-hidden="true"></i> for generating a searchable protein database. First we download the proteome of the organism of interest. In this tutorial, we will use a database of the human proteome.</p>
+
+<blockquote class="hands_on">
+  <h3 id="-hands-on-loading-a-search-database">
+<i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Loading a Search Database</h3>
+
+  <ol>
+    <li>Create a new history for this Database Handling exercise.</li>
+    <li>Open <strong>Protein Database Downloader</strong> <i class="fa fa-wrench" aria-hidden="true"></i>
+</li>
+    <li>Select in the drop-down menues <code class="highlighter-rouge">Taxonomy</code>: “Homo sapiens (Human)” and <code class="highlighter-rouge">reviewed</code>: “UniprotKB/Swiss-Prot (reviewed only)”.</li>
+    <li>Click on <code class="highlighter-rouge">Execute</code>. There will be a new dataset named <code class="highlighter-rouge">Protein database</code> in your history, now.</li>
+    <li>Rename the <code class="highlighter-rouge">Protein database</code> to <code class="highlighter-rouge">Main database</code>.</li>
+  </ol>
+
+  <blockquote class="tip">
+    <h3 id="-tip-types-of-uniprot-databases">
+<i class="fa fa-lightbulb-o" aria-hidden="true"></i> Tip: Types of uniprot databases</h3>
+    <p>Uniprot offers several types of databases. You may choose to download only reviewed (UniProtKB/Swissprot) databases, only unreviewed (UniProtKB/TREMBL) or both (UniProtKB). In well researched organisms, e.g. Homo sapiens or D. melanogaster, reviewed (Swissprot) databases are always kept up-to-date and may lead to cleaner search results. In other organisms, it might be wiser to include the unreviewed (TREMBL) database not to miss important proteins.</p>
+
+    <p>You may also include protein isoforms by setting the tick box <code class="highlighter-rouge">Include isoform data</code> to <code class="highlighter-rouge">Yes</code>.</p>
+  </blockquote>
+
+  <blockquote class="question">
+    <h3 id="-question">
+<i class="fa fa-question-circle" aria-hidden="true"></i> Question</h3>
+    <p>What is the difference between a “reference proteome set” and a “complete proteome set”?</p>
+
+    <details>
+ <summary>Click to view answer!</summary>
+ <ol type="1">
+ <li> A UniProt complete proteome consists of the set of proteins thought to be expressed by an organism whose genome has been completely sequenced. A reference proteome is the complete proteome of a representative, well-studied model organism or an organism of interest for biomedical research. Reference proteomes constitute a representative cross-section of the taxonomic diversity to be found within UniProtKB. They include the proteomes of well-studied model organisms and other proteomes of interest for biomedical and biotechnological research. Species of particular importance may be represented by numerous reference proteomes for specific ecotypes or strains of interest. [Link to source](http://www.uniprot.org/help/reference_proteome)</li>
+ </ol>
+ </details>
+  </blockquote>
+</blockquote>
+
+<h1 id="contaminant-databases">Contaminant databases</h1>
+
+<p>In proteomic samples, some protein contaminants are very common, stemming from the experimenter or contaminated cell culture. Common contaminants are therefore added to the database. This has two benefits:</p>
+<ol>
+  <li>Contamination can be observed, heavily contaminated samples can be excluded from analysis.</li>
+  <li>Contaminant peptides cannot be misassigned to similar peptides in the database reducing the risk of identifying false positives.</li>
+</ol>
+
+<p>A widely used database for common contaminants is the <strong>c</strong>ommon <strong>R</strong>epository of <strong>A</strong>dventitious <strong>P</strong>roteins (cRAP). When using samples generated in cell cultures, it is furthermore recommended to include Mycoplasma proteomes in the search database. Mycoplasma infections are very common in cell culture and often go unnoticed (<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3463982/">Drexler and Uphoff, Cytotechnology, 2002</a>).</p>
+
+<blockquote class="hands_on">
+  <h3 id="-hands-on-contaminant-databases">
+<i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Contaminant databases</h3>
+  <ol>
+    <li>Open <strong>Protein Database Downloader</strong> <i class="fa fa-wrench" aria-hidden="true"></i>.</li>
+    <li>Select <code class="highlighter-rouge">Download from</code>: “cRAP (contaminants)” and execute.</li>
+    <li>Rename the new database to “crap database”.</li>
+  </ol>
+
+  <p>To be able to distinguish contaminants from proteins of interest, you should add a tag to each contaminant protein.</p>
+
+  <ol>
+    <li>Run <strong>FASTA-to-Tabular</strong> <i class="fa fa-wrench" aria-hidden="true"></i> on your crap database.</li>
+    <li>Run <strong>Add column</strong> <i class="fa fa-wrench" aria-hidden="true"></i> on the new output. In the field <code class="highlighter-rouge">Add this value</code> enter “CONTAMINANT” and execute.</li>
+    <li>Run <strong>Tabular-to-FASTA</strong> <i class="fa fa-wrench" aria-hidden="true"></i>. Use column 1 and column 3 as Title columns and column 2 as sequence column.</li>
+    <li>Rename the <strong>Tabular-to-FASTA</strong> <i class="fa fa-wrench" aria-hidden="true"></i> output to “Tagged cRAP database”.</li>
+  </ol>
+
+  <blockquote class="question">
+    <h3 id="-question-1">
+<i class="fa fa-question-circle" aria-hidden="true"></i> Question</h3>
+    <ol>
+      <li>The cRAP database contains some human proteins. What does it mean if you identify those typical contaminants in a human sample?</li>
+      <li>What does it mean in a non-human sample?</li>
+    </ol>
+
+    <details>
+ <summary>Click to view answers!</summary>
+ <ol type="1">
+ <li> In samples stemming from a human source, identified human contaminants do not necessarily mean a contaminated sample. The proteins may as well stem from the original sample. Be careful with the interpretation. </li>
+ <li> In samples from non-human sources, identified human contaminants do mean contamination by the experimenter. </li>
+ </ol>
+ </details>
+  </blockquote>
+</blockquote>
+
+<blockquote class="hands_on">
+  <h3 id="-optional-hands-on-mycoplasma-databases">
+<i class="fa fa-pencil" aria-hidden="true"></i> Optional Hands-On: Mycoplasma databases</h3>
+  <p>90 - 95 % of mycoplasma infection in cell culture stem from the following species: M. orale, M. hyorhinis, M. arginini, M. fermentans, M. hominis and A. laidlawii (<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3463982/">Drexler and Uphoff, Cytotechnology, 2002</a>).</p>
+
+  <ol>
+    <li>Use <strong>Protein Database Downloader</strong> <i class="fa fa-wrench" aria-hidden="true"></i> to download the six mycoplasma databases. We will merge them to the main database in the next part of the tutorial.</li>
+    <li>Run <strong>FASTA Merge Files and Filter Unique Sequences</strong> <i class="fa fa-wrench" aria-hidden="true"></i> to combine all mycoplasma databases into a single one.</li>
+    <li>Tag each entry in the combined database with the string “MYCOPLASMA_CONTAMINANT” by using <strong>FASTA-to-Tabular</strong> <i class="fa fa-wrench" aria-hidden="true"></i>, <strong>Add column</strong> <img class="emoji" title=":wrench:" alt=":wrench:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f527.png" height="20" width="20" align="absmiddle"> and <strong>Tabular-to-FASTA</strong> <img class="emoji" title=":wrench:" alt=":wrench:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f527.png" height="20" width="20" align="absmiddle">, as explained <a href="#contaminant-databases">above</a>.</li>
+    <li>Rename the <strong>Tabular-to-FASTA</strong> <i class="fa fa-wrench" aria-hidden="true"></i> output to “Tagged Mycoplasma database”.</li>
+  </ol>
+
+  <blockquote class="comment">
+    <h3 id="-comment">
+<i class="fa fa-commenting-o" aria-hidden="true"></i> Comment</h3>
+    <p>The reviewed mycoplasma databases do not contain all known proteins. It is better to include also the TREMBL database. Mycoplasma proteomes are relatively small, so even downloading TREMBL will not bloat your main database unneccessarily.</p>
+  </blockquote>
+</blockquote>
+
+<h1 id="merging-databases">Merging databases</h1>
+
+<p>Depending on the search engine you are using you might need to merge all fasta entries (i.e. proteins of interest and contaminants) in a single database. Make sure to merge the tagged versions of your contaminant databases.</p>
+
+<blockquote class="hands_on">
+  <h3 id="-hands-on-merging-databases">
+<i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Merging databases</h3>
+
+  <ol>
+    <li>
+      <p>Run <strong>FASTA Merge Files and Filter Unique Sequences</strong> <i class="fa fa-wrench" aria-hidden="true"></i> on the main database and the tagged cRAP database.</p>
+
+      <blockquote>
+        <h3 id="optional-merging-mycoplasma-databases">Optional: Merging mycoplasma databases</h3>
+        <p>At this step you may also merge the mycoplasma protein databases that you downloaded earlier on. Simply enter them as additional inputs in <strong>FASTA Merge Files and Filter Unique Sequences</strong> <i class="fa fa-wrench" aria-hidden="true"></i>. You can enter any number of databases when you click on <code class="highlighter-rouge">Insert Input FASTA file(s)</code>.</p>
+      </blockquote>
+    </li>
+  </ol>
+</blockquote>
+
+<h1 id="creating-a-decoy-database">Creating a Decoy Database</h1>
+
+<p>The most common method of peptide and protein FDR calculation is by adding known non-existing proteins, so-called “decoys” to the database. This can be done by reverting or shuffling the real protein entries and adding those fake entries to the database. Some peptide search engines depend on premade decoy databases, others can perform this step automatically.</p>
+
+<blockquote class="hands_on">
+  <h3 id="-hands-on-creating-a-decoy-database">
+<i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Creating a Decoy Database</h3>
+  <ol>
+    <li>Run <strong>DecoyDatabase</strong>  <i class="fa fa-wrench" aria-hidden="true"></i> on the merged database.</li>
+    <li>Set the flag (-append) to <code class="highlighter-rouge">Yes</code> and execute.</li>
+  </ol>
+
+  <blockquote class="tip">
+    <h3 id="-tip-decoy-tags">
+<i class="fa fa-lightbulb-o" aria-hidden="true"></i> Tip: Decoy tags</h3>
+    <p>The string you enter as a decoy tag will be added as a prefix or suffix (your choice) to the description of each decoy protein entry. Thus you can see from which entry in the real database the decoy was computed.</p>
+  </blockquote>
+
+  <blockquote class="comment">
+    <h3 id="-comment-1">
+<i class="fa fa-commenting-o" aria-hidden="true"></i> Comment</h3>
+    <p><strong>DecoyDatabase</strong>  <i class="fa fa-wrench" aria-hidden="true"></i> may also take several databases as input which are then automatically merged into one database.</p>
+  </blockquote>
+</blockquote>
+
+<h1 class="no_toc" id="concluding-remarks">Concluding remarks</h1>
+
+<p>To keep your databases up-to-date, or if you need several databases for different organisms, it would make sense to create a workflow out of the Hands-On sections (to learn about workflows see <a href="https://galaxyproject.github.io/training-material/topics/introduction/tutorials/galaxy-intro-101/tutorial.html">this tutorial</a>). You might also want to combine the mycoplasma databases to a single file, which you then easily can add to each of your main databases.</p>
+
+<p>Often you may not want to use the most recent database for reasons of reproducibility. If so, you can transfer the final database of this tutorial into other histories to work with it.</p>
+
+<p>Further reading about construction of the optimal database: (<a href="https://www.ncbi.nlm.nih.gov/pubmed/27975281">Kumar et al., Methods in molecular biology, 2017</a>).</p>
+
+<p>This tutorial is based upon parts of the GalaxyP-101 tutorial (https://usegalaxyp.readthedocs.io/en/latest/sections/galaxyp_101.html).</p>
+
+
+        
+        <blockquote class="key_points">
+            <h3>
+<i class="fa fa-key" aria-hidden="true"></i> Key points</h3>
+
+            <ul>
+                
+                <li>There are several types of Uniprot databases.</li>
+                
+                <li>You should always include a contaminant database.</li>
+                
+                <li>It may be wise to include mycoplasma databases.</li>
+                
+                <li>Depening on your search engine, you need to include a decoy database.</li>
+                
+            </ul>
+        </blockquote>
+        
+
+        
+        <h1>Useful literature</h1>
+        <p>Useful information regarding this type of analysis with descriptions and paper references for the tools used in this tutorial, and literature for this analysis techniques and interpretations can be found <a href="https://galaxyproject.github.io/training-material/topics/proteomics#references">here</a>.</p>
+        
+
+        <h3>
+<i class="fa fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!</h3>
+
+        <hr>
+
+        <blockquote class="overview">
+            <h3>
+<i class="fa fa-comments-o" aria-hidden="true"></i> Feedback</h3>
+            Please take a moment and provide your feedback on this tutorial. Your feedback will help guide and improve future revisions to this tutorial.
+            <a href="https://tinyurl.com/GTNfeedback">Feedback Form</a>
+        </blockquote>
+    </section>
+</div>
+
+<footer>
+    <div class="container">
+        <p>
+            This material is the result of a collaborative work. Thanks the
+            <a href="https://wiki.galaxyproject.org/Teach/GTN">Galaxy Training Network</a>
+            and all the contributors
+            
+        </p>
+        <p>
+            Found a typo? Something is wrong in this tutorial? Edit it on
+            <a href="https://github.com/galaxyproject/training-material/tree/master/topics/proteomics/tutorials/database-handling/tutorial.md">GitHub</a>.
+        </p>
+    </div>
+</footer>
+
+    </body>
+    <script type="text/javascript" src="https://galaxyproject.github.io/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="https://galaxyproject.github.io/training-material/assets/js/tether.min.js"></script>
+    <script type="text/javascript" src="https://galaxyproject.github.io/training-material/assets/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://galaxyproject.github.io/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</html>
