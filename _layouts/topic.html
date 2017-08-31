@@ -119,7 +119,7 @@ layout: base
         <p>For these tutorials, use Galaxy instance at <a href="{{ topic.galaxy_instance }}">{{ topic.galaxy_instance }}</a>.</p>
         {% endif %}
 
-        <h2 id="contributors">Contributors</h2>
+        <h2 id="maintainers">Maintainers</h2>
         <p>This material is maintained by:</p>
         <ul>
         {% for maintainer in topic.maintainers %}
@@ -129,7 +129,7 @@ layout: base
             {% else %}
                 {{ maintainer.name }}
             {% endif %}
-            {% if maintainer.email != "" %}
+            {% if maintainer.email and maintainer.email != "" %}
                 (<a href="mailto:{{ maintainer.email }}">{{ maintainer.email }}</a>)
             {% endif %}
             </li>
@@ -139,22 +139,6 @@ layout: base
         <p>
             <em>For any question related to this topic and the content, you can contact them.</em>
         </p>
-
-        <p>The following persons have contributed to this training material:</p>
-        <ul>
-            {% for contributor in topic.contributors %}
-                <li>
-                {% if contributor.github_username != "" %}
-                    <a href="https://github.com/{{ contributor.github_username }}">{{ contributor.name }}</a>
-                {% else %}
-                    {{ contributor.name }}
-                {% endif %}
-                {% if contributor.email != "" %}
-                    (<a href="mailto:{{ contributor.email }}">{{ contributor.email }}</a>)
-                {% endif %}
-                </li>
-            {% endfor %}
-        </ul>
 
         {% if topic.references %}
         <h2 id="references">References</h2>

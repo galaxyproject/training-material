@@ -32,6 +32,7 @@ build: ## build files but do not run a server
 
 check: build ## validate HTML
 	bundle exec htmlproofer --http-status-ignore 405,999 --url-ignore "/.*localhost.*/","/.*vimeo\.com.*/" --file-ignore "/.*\/files\/.*/" ./_site
+	yamllint .
 .PHONY: check
 
 clean: ## clean up junk files
