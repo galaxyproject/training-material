@@ -20,6 +20,12 @@ git checkout origin/master .travis.yml Makefile Gemfile
 
 cp -R /tmp/site/* .
 
+# this file must be there, if it is not, it is likely a bug during build
+if [ ! -f "index.html" ]; then
+    echo "index.html file is missing, aborting"
+    exit 1
+fi
+
 find * -type f -exec chmod 644 "{}" ";"
 find * -type d -exec chmod 755 "{}" ";"
 

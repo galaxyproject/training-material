@@ -24,11 +24,11 @@ serve: ## run a local server
 
 detached-serve: ## run a local server in detached mode
 	${JEKYLL} serve --detach
-.PHONY: detached_serve
+.PHONY: detached-serve
 
 build: ## build files but do not run a server
 	${JEKYLL} build
-.PHONY: site
+.PHONY: build
 
 check: build ## validate HTML
 	bundle exec htmlproofer --http-status-ignore 405,999 --url-ignore "/.*localhost.*/","/.*vimeo\.com.*/" --file-ignore "/.*\/files\/.*/" ./_site

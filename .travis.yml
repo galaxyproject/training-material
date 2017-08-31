@@ -34,13 +34,15 @@ install:
 - make install
 
 script:
-- set -e
 # Check website
 - |
+  set -e
   if [ "$TRAVIS_BRANCH" == "gh-pages" ]
   then
     htmlproofer --http-status-ignore 405,999 --url-ignore "/.*localhost.*/","/.*vimeo\.com.*/" --file-ignore "/.*\/files\/.*/"
   else
+    make build
+    # TODO: remove `|| return 0` when htmlproofer passes for the first time
     make check || return 0
   fi
 
