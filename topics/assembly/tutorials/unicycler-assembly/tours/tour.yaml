@@ -31,7 +31,7 @@ steps:
     - title: "Data Acquisition"
       element: "#btn-new"
       intro: "We will use a downsampled dataset (for quick tutorial purpose) from the Ecoli C sequencing. We are using two library of matte pair reads from Illumina sequencing, and a long read library from Oxford Nanopore sequencing .<br>
-              Simple click 'Next' and the links to the training data will be automatically inserted and ready for upload.<br>
+              Simple click 'Next' and the Interface to enter the urls will appear.<br>
               Later on, when you want to upload other data, you can do so by clicking the 'Paste/Fetch Data' button"
       position: "top"
       postclick:
@@ -39,9 +39,13 @@ steps:
 
     - title: "Data Acquisition"
       element: "#upload-row-3 > td:nth-child(1) > div > div.upload-text > textarea"
-      intro: "Links Acquired !"
+      intro: "Copy and pate the following link to the text area : <br>
+      https://zenodo.org/record/842795/files/minion_1.2d_pass.fastq.fastqsanger <br>
+      https://zenodo.org/record/842795/files/Ecoli-2_S1_L001_R2_001_subset_50000.fastq.fastqsanger <br>
+      https://zenodo.org/record/842795/files/Ecoli-2_S1_L001_R1_001_subset_50000.fastq.fastqsanger <br>"
       position: "top"
-      textinsert: "https://zenodo.org/record/842795/files/Ecoli-2_S1_L001_R1_001_subset_50000.fastq.fastqsanger https://zenodo.org/record/842795/files/Ecoli-2_S1_L001_R2_001_subset_50000.fastq.fastqsanger https://zenodo.org/record/842795/files/minion_1.2d_pass.fastq.fastqsanger"
+
+      
     - title: "Data Acquisition"
       element: "button#btn-start"
       intro: "Click on 'Start' to upload the data into your Galaxy history."
@@ -76,7 +80,7 @@ steps:
       element : '#attributes > div.toolFormBody > form:nth-child(1) > div:nth-child(6) > input[type="submit"]'
       intro : "Save your changes"
 
-       - title : "Start the Analysis !"
+    - title : "Start the Analysis !"
       intro: "Let's start the analysis by assessing the quality of Illumina reads."
       position: "center"
       
@@ -96,3 +100,19 @@ steps:
     - title : "Run"
       intro : "Click here to run the tool"
       element : "#execute"
+
+    - title: "Read Quality"
+      intro: "You can now visualize the Quality control result by clicking on the eye icon of the Fastqc webpage output"
+      position: "center"
+
+    - title: "Let's run the assembly !"
+      intro: "Now search for the Unicycler tool, that will allow us to perform an hybrid assembly."
+      position: "center"
+      element: "#tool-search-query"
+      
+    - title : "Type of Data"
+      intro: "Select the type of data for your single reads. For this tour we are using Paired end reads."
+      position: "right"
+      element : "#select2-chosen-1"
+      
+      

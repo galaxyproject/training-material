@@ -8,6 +8,7 @@ tutorial_name: unicycler-assembly
 {:.no_toc}
 # Small genome assembly with Unicycler
 
+
 A few definitions to start:
 
  * **Alignment** : Similarity-based arrangement of DNA, RNA or protein sequences. In this context, subject and query sequence should be orthologous and reflect evolutionary, not functional or structural relationships
