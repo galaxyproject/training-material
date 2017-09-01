@@ -34,21 +34,21 @@ install:
   - make install
 
 script:
-# Check website
+  # Check website
   - |
-  set -e
-  if [ "$TRAVIS_BRANCH" == "gh-pages" ]
-  then
-    htmlproofer --http-status-ignore 405,999 --url-ignore "/.*localhost.*/","/.*vimeo\.com.*/" --file-ignore "/.*\/files\/.*/"
-  else
-    make build
-    # TODO: remove `|| return 0` when htmlproofer passes for the first time
-    make check || return 0
-  fi
+    set -e
+    if [ "$TRAVIS_BRANCH" == "gh-pages" ]
+    then
+      htmlproofer --http-status-ignore 405,999 --url-ignore "/.*localhost.*/","/.*vimeo\.com.*/" --file-ignore "/.*\/files\/.*/"
+    else
+      make build
+      # TODO: remove `|| return 0` when htmlproofer passes for the first time
+      make check || return 0
+    fi
 
 after_success:
-- |
-  if [ "$TRAVIS_PULL_REQUEST" == "false" -a "$TRAVIS_BRANCH" == "master" ]
-  then
-    bin/publish
-  fi
+  - |
+    if [ "$TRAVIS_PULL_REQUEST" == "false" -a "$TRAVIS_BRANCH" == "master" ]
+    then
+      bin/publish
+    fi
