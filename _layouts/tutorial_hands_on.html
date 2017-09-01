@@ -28,9 +28,15 @@ layout: base
                         </a>
                     </li>
 
-                    {% if tutorial.slides != "" %}
+                    {% if tutorial.slides == "yes" %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ site.url }}/topics/{{ topic.name }}/slides" title="Slides for this tutorial">
+                        <a class="nav-link" href="{{ site.url }}/topics/{{ topic.name }}/tutorials/{{ tutorial.name }}/slides" title="Slides for this tutorial">
+                            {% icon slides %} Associated slides
+                        </a>
+                    </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ site.url }}/topics/{{ topic.name }}/slides" title="Introduction slides">
                             {% icon slides %} Introduction slides
                         </a>
                     </li>
