@@ -164,7 +164,7 @@ Nowadays, there are many read alignment programs for sequenced DNA, `BWA` being 
 >    >    <details>
 >    >    <summary>Click to view answers</summary>
 >    >    <ol type="1">
->    >    <li> The output is a sam file.</li>
+>    >    <li> The output is a BAM file.</li>
 >    >    <li>Check the number of lines for each file in your history. This gives you a rough estimate.</li>
 >    >    </ol>
 >    >    </details>
