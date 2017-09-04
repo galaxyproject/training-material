@@ -124,14 +124,18 @@ layout: base
         <ul>
         {% for maintainer in topic.maintainers %}
             <li>
-            {% if maintainer.github_username != "" %}
-                <a href="https://github.com/{{ maintainer.github_username }}">{{ maintainer.name }}</a>
-            {% else %}
-                {{ maintainer.name }}
-            {% endif %}
-            {% if maintainer.email and maintainer.email != "" %}
-                (<a href="mailto:{{ maintainer.email }}">{{ maintainer.email }}</a>)
-            {% endif %}
+            {% for person in site.data['contributors'] %}
+                {% if person.id == maintainer %}
+                    {% if person.github_username and person.github_username != "" %}
+                        <a href="https://github.com/{{ person.github_username }}">{{ person.name }}</a>
+                    {% else %}
+                        {{ person.name }}
+                    {% endif %}
+                    {% if person.email and person.email != "" %}
+                        (<a href="mailto:{{ person.email }}">{{ person.email }}</a>)
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
             </li>
         {% endfor %}
         </ul>
