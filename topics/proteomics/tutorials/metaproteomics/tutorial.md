@@ -71,7 +71,7 @@ In this tutorial, we will get the data from Zenodo: [![DOI](https://zenodo.org/b
 
 The search database labelled `FASTA_Bering_Strait_Trimmed_metapeptides_cRAP.FASTA` is the input database that
 will be used to match MS/MS to peptide sequences via a sequence database search.
-For this, the sequence database-searching program called **SearchGUI** will be used.
+For this, the sequence database-searching program called [SearchGUI](https://compomics.github.io/projects/searchgui.html) will be used.
 The created dataset collection of the three *MGF files* in the history is used as the MS/MS input.
 
 #### SearchGUI
@@ -169,7 +169,7 @@ SearchGUI archive file) that will serve as an input for the next section, Peptid
 
 #### PeptideShaker
 
-**PeptideShaker** is a post-processing software tool that
+[PeptideShaker](https://compomics.github.io/projects/peptide-shaker.html) is a post-processing software tool that
 processes data from the SearchGUI software tool. It serves to organize the Peptide-Spectral
 Matches (PSMs) generated from SearchGUI processing and is contained in the SearchGUI archive.
 It provides an assessment of confidence of the data, inferring proteins identified from the
@@ -452,7 +452,11 @@ once again used, aggregating the number of peptides and PSMs for each genus leve
 
 ## Functional Analysis
 
-In the following chapter, a functional analysis will be performed in order to match the list of peptides with the correlated Gene Ontology terms.
+Recent advances in microbiome research indicate that functional characterization via metaproteomics analysis has the potential to accurately
+measure the microbial response to perturbations. In particular, metaproteomics enables the estimation of the function of the microbial
+community based on expressed microbial proteome.
+
+In the following chapter, a functional analysis will be performed using the **UniPept** application `pept2prot` in order to match the list of peptides with the correlated Gene Ontology terms.
 This allows to get an insight of the **biological process**, the **molecular function** and the **cellular component** related to the sample data.
 
 > ### {% icon comment %} Gene Ontology Consortium
@@ -515,7 +519,9 @@ It is available at Zenodo: [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.8
 
 #### Retrieve GO IDs for peptides: Unipept
 
-The **UniPept** application `pept2prot` can be used to receive the GO identifiers connected to the list of peptides that was generated from the Peptide Shaker result:
+The **UniPept** application `pept2prot` can be used to return the list of proteins containing each peptide.
+The option `retrieve extra information` option is set to `yes` so that we retrieve Gene Ontology assignments (`go_references`)
+for each protein.
 
 > ### {% icon hands_on %} Hands-on: Unipept
 >
@@ -655,5 +661,7 @@ related to it and the amount of PSMs for these peptides.
 > - [Galaxy workflows for metaproteomics](https://www.ncbi.nlm.nih.gov/pubmed/26058579)
 >
 > - [Metaproteomics community effort](https://z.umn.edu/gcc2017mporal)
+>
+> - [Unipept](https://www.ncbi.nlm.nih.gov/pubmed/28552653)
 >
 {: .comment}
