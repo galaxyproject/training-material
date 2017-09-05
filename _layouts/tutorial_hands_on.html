@@ -8,6 +8,7 @@ layout: base
         {% assign tutorial = tuto %}
     {% endif %}
 {% endfor %}
+{% assign people = site.data['contributors'] %}
 
 <header>
     <nav class="navbar navbar-expand-md navbar-dark">
@@ -177,7 +178,14 @@ layout: base
             <a href="https://wiki.galaxyproject.org/Teach/GTN">Galaxy Training Network</a>
             and all the contributors
             {% if tutorial.contributors %}
-            ({{ tutorial.contributors|map: 'name'|join: ', '}})
+                {% capture contributors %}
+                    {% for c in tutorial.contributors %}
+                        , {{ people[c].name }}
+                    {% endfor %}
+                {% endcapture %}
+
+                ( {{ contributors | remove_first: ',' }} )
+
             {% endif %}
         </p>
         <p>

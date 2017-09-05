@@ -11,6 +11,7 @@
     {% endif %}
   {% endfor %}
 {% endif %}
+{% assign people = site.data['contributors'] %}
 
   <head>
     <meta charset="utf-8">
@@ -35,7 +36,7 @@ class: center, middle, inverse
 
 ## Welcome!
 
-This material is the result of a collaborative work. Thanks the [Galaxy Training Network](https://wiki.galaxyproject.org/Teach/GTN) and all the contributors {% if tutorial.contributors %}({{ tutorial.contributors|map: 'name'|join: ', '}}){% endif %}!
+This material is the result of a collaborative work. Thanks the [Galaxy Training Network](https://wiki.galaxyproject.org/Teach/GTN) and all the contributors {% if tutorial.contributors %}{% capture contributors %}{% for c in tutorial.contributors %}, {{ people[c].name }}{% endfor %}{% endcapture %} ({{ contributors | remove_first: ', ' }}) {% endif %}!
 
 {% if page.logo == "GTN" %}
 <img src="{{ site.url }}{{ site.logo }}" alt="Galaxy Training Network" style="height: 100px;"/>
