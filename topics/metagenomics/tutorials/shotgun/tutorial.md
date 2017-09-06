@@ -1,4 +1,4 @@
-gi---
+---
 layout: tutorial_hands_on
 topic_name: metagenomics
 tutorial_name: shotgun
@@ -14,7 +14,7 @@ In metagenomics, information about micro-organisms in an environment can be extr
 
 Data generated from these two techniques must be treated differently. In this tutorial, we will focus on the analysis of whole-genome sequencing. 
 
-> ### :nut_and_bolt: Comments
+> ### {% icon comment %} Comments
 > If you want to learn how to analyze amplicon data, please check our dedicated tutorials
 {: .comment}
 
@@ -41,11 +41,11 @@ Before any extraction of information about the community, raw sequences have to 
 
 The original data are available at EBI Metagenomics under run number [ERR1855251](https://www.ebi.ac.uk/metagenomics/projects/ERP015773/samples/ERS1569001/runs/ERR1855251/results/versions/3.0).
 
-> ### :pencil2: Hands-on: Data upload
+> ### {% icon hands_on %} Hands-on: Data upload
 >
 > 1. Import the FASTQ file pair from [Zenodo]() or from the data library
 >
->    > ### :bulb: Tip: Importing data via links
+>    > ### {% icon tip %} Tip: Importing data via links
 >    >
 >    > * Copy the link location
 >    > * Open the Galaxy Upload Manager
@@ -54,7 +54,7 @@ The original data are available at EBI Metagenomics under run number [ERR1855251
 >    > * Press **Start**
 >    {: .tip}
 >
->    > ### :bulb: Tip: Importing data from a data library
+>    > ### {% icon tip %} Tip: Importing data from a data library
 >    >
 >    > * Go into "Shared data" (top panel) then "Data libraries"
 >    > * Click on "Training data" and then "WGS input data"
@@ -71,14 +71,14 @@ The original data are available at EBI Metagenomics under run number [ERR1855251
 
 For quality control, we use similar tools as described in [the Quality Control tutorial](../../NGS-QC/tutorials/dive_into_qc): [FastQC](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/) and [Trim Galore!](http://www.bioinformatics.babraham.ac.uk/projects/trim_galore/).
 
-> ### :pencil2: Hands-on: Quality control
+> ### {% icon hands_on %} Hands-on: Quality control
 >
-> 1. **FastQC** :wrench:: on both FastQ files to control the quality of the reads
-> 2. **MulitQC** :wrench:: with
+> 1. **FastQC** {% icon tool %} on both FastQ files to control the quality of the reads
+> 2. **MulitQC** {% icon tool %} with
 >    - "Software name" to `FastQC`
 >    - "Result file" to the raw data generated with FastQC
 >
->    > ### :question: Questions
+>    > ### {% icon question %} Questions
 >    >
 >    > 1. What can we say about the quality of the sequences in both sequence files?
 >    >
@@ -90,7 +90,7 @@ For quality control, we use similar tools as described in [the Quality Control t
 >    >    </details>
 >    {: .question}
 >
-> 2. **Trim Galore** :wrench:: with
+> 2. **Trim Galore** {% icon tool %} with
 >    - "Is this library paired- or single-end?" to `Paired-end`
 >    - "Reads in FASTQ format" to the input datasets with first the forward (ending with `_1`) and then the reverse (ending with `_2`)
 >    - "Trim Galore! advanced settings" to `Full parameter list`
@@ -98,11 +98,11 @@ For quality control, we use similar tools as described in [the Quality Control t
 >    - "Discard reads that became shorter than length N" to `60`
 >    - "Generate a report file" to `Yes`
 >
-> 3. **MulitQC** :wrench:: with
+> 3. **MulitQC** {% icon tool %} with
 >    - "Software name" to `Cutadapt`
 >    - "Result file" to the report file generated with Trim Galore!
 >
->    > ### :question: Questions
+>    > ### {% icon question %} Questions
 >    >
 >    > 1. How much of the sequences have been trimmed?
 >    >
@@ -117,13 +117,13 @@ For quality control, we use similar tools as described in [the Quality Control t
 
 One sequence file in Fasta is expected for the next steps. We need then to assemble the paired sequences and convert them to Fasta.
 
-> ### :pencil2: Hands-on: Dereplication
+> ### {% icon hands_on %} Hands-on: Paired-end join
 >
-> 1. **fastq-join** :wrench:: with
+> 1. **fastq-join** {% icon tool %} with
 >    - "Dataset type" to `Paired-end`
 >    - "Read 1 Fastq" to the forward trimmed reads 
 >    - "Read 2 Fastq" to the reverse trimmed reads
-> 2. **FASTQ to FASTA** :wrench:: with
+> 2. **FASTQ to FASTA** {% icon tool %} with
 >    - "FASTQ Library to convert" to the joined FastQ file
 >    - "Discard sequences with unknown (N) bases" to `no`
 >    - "Rename sequence names in output file" to `no`
@@ -133,13 +133,13 @@ One sequence file in Fasta is expected for the next steps. We need then to assem
 
 During sequencing, one sequence must have been added to the dataset in multiple exact copy. Removing such duplicates reduce the size of the dataset without loosing information, with the dereplication (identification of unique sequences in a dataset).
 
-> ### :pencil2: Hands-on: Dereplication
+> ### {% icon hands_on %} Hands-on: Dereplication
 >
-> 1. **VSearch dereplication** :wrench:: with
+> 1. **VSearch dereplication** {% icon tool %} with
 >    - "Select your FASTA file" to the Fasta file generated previously
 >    - "Strand specific clustering" to `Both strand`
 >
->    > ### :question: Questions
+>    > ### {% icon question %} Questions
 >    >
 >    > 1. How many sequences are removed with the dereplication?
 >    >
@@ -160,15 +160,15 @@ With shotgun metagenomics data, full genome information can be accessed: informa
 
 This task is also useful to inspect the rRNA/rDNA sequences. And as in EBI Metagenomics' pipeline, these sequences can be used for taxonomic analyses as any amplicon data
 
-> ### :nut_and_bolt: Comments
+> ### {% icon comment %} Comments
 > If you want to learn how to analyze amplicon data, please check our dedicated tutorials
 {: .comment}
 
 For this task, we use SortMeRNA ([Kopylova et al, 2012](https://academic.oup.com/bioinformatics/article-abstract/28/24/3211/246053)). This tool filter RNA sequences based on local sequence alignment (BLAST) against 8 rRNA databases (2 Rfam databases for 5.8S and 5S eukarya sequences and 6 SILVA datasets for 16S (archea and bacteria), 18S (eukarya), 23S (archea and bacteria) and 28S (eukarya) sequences.
 
-> ### :pencil2: Hands-on: Sequence sorting
+> ### {% icon hands_on %} Hands-on: Sequence sorting
 >
-> 1. **SortMeRNA** :wrench:: with
+> 1. **SortMeRNA** {% icon tool %} with
 >    - "Querying sequences" to the dereplicated dataset
 >    - "Sequencing type" to `Reads are not paired`
 >    - "Which strands to search" to `Search both strands`
@@ -179,11 +179,11 @@ For this task, we use SortMeRNA ([Kopylova et al, 2012](https://academic.oup.com
 >    - "Include alignments in SAM format?" to `No`
 >    - "Include alignments in BLAST-like format?" to `No`
 >
-> 2. (Optional) **SortMeRNA** :wrench:: Run SortMeRNA on the assigned rRNA sequences with the selection of 16S rRNA databases
-> 3. (Optional) **SortMeRNA** :wrench:: Run SortMeRNA on the assigned rRNA sequences with the selection of 18S rRNA databases
+> 2. (Optional) **SortMeRNA** {% icon tool %} Run SortMeRNA on the assigned rRNA sequences with the selection of 16S rRNA databases
+> 3. (Optional) **SortMeRNA** {% icon tool %} Run SortMeRNA on the assigned rRNA sequences with the selection of 18S rRNA databases
 {: .hands_on}
 
-> ### :question: Questions
+> ### {% icon question %} Questions
 >
 > 1. Which percentage of the original data are assigned to rRNA/rDNA sequences?
 > 2. How can you explain with low percentage?
@@ -209,9 +209,9 @@ However, for shotgun data, applying such approaches implies using a really small
 
 ## Taxonomic assignation
 
-> ### :pencil2: Hands-on: Taxonomic assignation
+> ### {% icon hands_on %} Hands-on: Taxonomic assignation
 >
-> 1. **MetaPhlAN2** :wrench:: with
+> 1. **MetaPhlAN2** {% icon tool %} with
 >    - "Input file" to the dereplicated sequences
 >    - "Database with clade-specific marker genes" to `Locally cached`
 >    - "Cached database with clade-specific marker genes" to `MetaPhlAn2 clade-specific marker genes`
@@ -242,7 +242,7 @@ However, for shotgun data, applying such approaches implies using a really small
 
 - A SAM file with the results of the mapping of the sequences on the reference database
 
-> ### :question: Questions
+> ### {% icon question %} Questions
 >
 > 1. What is the most precise level we have access to with MetaPhlAn2?
 > 2. What are the two orders found in our sample?
@@ -264,17 +264,17 @@ The generated files remains difficult to inspect. Visualization would help. Here
 
 Krona ([Ondov et al, 2011](https://bmcbioinformatics.biomedcentral.com/articles/10.1186/1471-2105-12-385)) is a visualization tool for intuitive exploration of relative abundances of taxonomic classifications. It produces an interactive HTML file
 
-> ### :pencil2: Hands-on: Interactive visualization with KRONA
+> ### {% icon hands_on %} Hands-on: Interactive visualization with KRONA
 >
-> 1. **Format MetaPhlAn2 output for Krona** :wrench:: with
+> 1. **Format MetaPhlAn2 output for Krona** {% icon tool %} with
 >    - "Input file" to `Community profile` output of `MetaPhlAn2`
 >
-> 2. **KRONA pie chart** :wrench:: with
+> 2. **KRONA pie chart** {% icon tool %} with
 >    - "What is the type of your input data" as `MetaPhlan`
 >    - "Input file" to the output of `Format MetaPhlAn2`
 {: .hands_on}
 
-> ### :question: Questions
+> ### {% icon question %} Questions
 >
 > 1. What are the main species found for the bacteria?
 >
@@ -288,9 +288,9 @@ Krona ([Ondov et al, 2011](https://bmcbioinformatics.biomedcentral.com/articles/
 
 [GraPhlAn](https://bitbucket.org/nsegata/graphlan/wiki/Home>) is a tool for producing circular static representation of taxonomic analyses, easily exportable.
 
-> ### :pencil2: Hands-on: Static visualization with GraPhlAn
+> ### {% icon hands_on %} Hands-on: Static visualization with GraPhlAn
 >
-> 1. **Export to GraPhlAn** :wrench:: with
+> 1. **Export to GraPhlAn** {% icon tool %} with
 >    - "Input file" to `Community profile` output of `MetaPhlAn2`
 >    - "Use a LEfSe output file as input?" to `No`
 >    - "List which levels should be annotated in the tree" to `5`
@@ -303,14 +303,14 @@ Krona ([Ondov et al, 2011](https://bmcbioinformatics.biomedcentral.com/articles/
 >    - "Minimun abundance value for a clade to be annotated" to `0`
 >    - "Number of clades to highlight" to `100`
 >
->    > ### :nut_and_bolt: Comments
+>    > ### {% icon comment %} Comments
 >    > We decide to display the maximum of clade (100, here). If you want more or less, you can modulate the number of clades to highlight. And if you want to change displayed annotations, you can change levels to annotate.
 >    {: .comment}
 >
-> 2. **Generation, personalization and annotation of tree for GraPhlAn** :wrench:: with
+> 2. **Generation, personalization and annotation of tree for GraPhlAn** {% icon tool %} with
 >    - "Input tree" to the tree generated by the previous tool
 >    - "Annotation file" to the annotation file generated by the previous tool
-> 3. **GraPhlAn** :wrench:: with
+> 3. **GraPhlAn** {% icon tool %} with
 >    - "Input tree" to the tree generated in the last step
 >    - "Output format" to `PNG`
 >
@@ -318,7 +318,7 @@ Krona ([Ondov et al, 2011](https://bmcbioinformatics.biomedcentral.com/articles/
 
 With our dataset, we obtain a nice graphical representation of taxonomic diversity inside our sample, with circle radius being proportional to relative abundance of the corresponding clade.
 
-> ### :question: Questions
+> ### {% icon question %} Questions
 >
 > 1. What are the main species found for the bacteria?
 > 2. Is the main species the same as the one observed with KRONA? 
@@ -336,7 +336,7 @@ With our dataset, we obtain a nice graphical representation of taxonomic diversi
 
 Galaxy runs an instance of Phinch which is directly accessible for any BIOM file.
 
-> ### :pencil2: Hands-on: Visualisation with Phinch
+> ### {% icon hands_on %} Hands-on: Visualisation with Phinch
 >
 > 1. Click on the BIOM file generated by MetaPhlAn2
 > 2. Click on the "Visualize" icon and then on "Phinch"
@@ -353,9 +353,9 @@ With shotgun data, we have full genome information and particularly the sequence
 
 The first step is then to identify sequences and affiliate them to a known genes, using available database. [HUMAnN2](http://huttenhower.sph.harvard.edu/humann2) is a tool to profile the presence/absence and abundance of gene families and microbial pathways in a community from metagenomic or metatranscriptomic sequencing data.
 
-> ### :pencil2: Hands-on: Metabolism function identification
+> ### {% icon hands_on %} Hands-on: Metabolism function identification
 >
-> 1. **HUMAnN2** :wrench:: with
+> 1. **HUMAnN2** {% icon tool %} with
 >    - "Input sequence file" to the dereplicated sequences
 >    - "Use a custom taxonomic profile?" to `Yes`
 >    - "Taxonomic profile file" to the community profile file generated by MetaPhlAn2
@@ -385,7 +385,7 @@ HUMAnN2 generates 3 files
 
 - A file with the abundance of pathways
 
-> ### :question: Questions
+> ### {% icon question %} Questions
 >
 > 1. How many gene families are found? And pathways?
 >
@@ -397,14 +397,14 @@ HUMAnN2 generates 3 files
 
 The RPK for the gene families are quite difficult to interpret in term of relative abundance. We decide then to normalize the values
 
-> ### :pencil2: Hands-on: Normalize the gene family abundances
+> ### {% icon hands_on %} Hands-on: Normalize the gene family abundances
 >
-> 1. **Renormalize a HUMAnN2 generated table** :wrench: with
+> 1. **Renormalize a HUMAnN2 generated table** {% icon tool %} with
 >    - "Gene/pathway table" to the gene family table generated with `HUMAnN2`
 >    - "Normalization scheme" to `Relative abundance`
 >    - "Normalization level" to `Normalization of all levels by community total`
 >
->  > ### :question: Questions
+>  > ### {% icon question %} Questions
 >  >
 >  > 1. Which percentage of sequences has not be assigned to a gene family?
 >  > 2. What is the most abundant gene family?
@@ -423,26 +423,26 @@ The RPK for the gene families are quite difficult to interpret in term of relati
 
 With the HUMAnN2 output, we have access to UniRef50 gene families. However, the names can remains cryptic and sometimes we would like a more general view about the functions. HUMAnN proposes a tool to regroup the gene families into different meta-groups: GO (Gene Ontology), EC, etc.
 
-> ### :pencil2: Hands-on: Regroup the gene families into GO terms
+> ### {% icon hands_on %} Hands-on: Regroup the gene families into GO terms
 >
-> 1. **Regroup a HUMAnN2 generated table by features** :wrench: with
+> 1. **Regroup a HUMAnN2 generated table by features** {% icon tool %} with
 >    - "Gene/pathway table" to the gene family table generated with `HUMAnN2`
 >    - "How to combine grouped features?" to `Sum`
 >    - "Use built-in grouping options?" to `Yes`
 >    - "Gene family type" to `UniRef50 gene families`
 >    - "Grouping options" to `UniRef50 gene families into GO`
 >
-> 2. **Renormalize a HUMAnN2 generated table** :wrench: with
+> 2. **Renormalize a HUMAnN2 generated table** {% icon tool %} with
 >    - "Gene/pathway table" to the gene family table generated with `Regroup`
 >    - "Normalization scheme" to `Relative abundance`
 >    - "Normalization level" to `Normalization of all levels by community total`
 >
-> 3. **Select lines that match an expression**  :wrench: with
+> 3. **Select lines that match an expression**  {% icon tool %} with
 >    - "Select lines from" to the renormalized regrouped table
 >    - "that" to `NOT Matching`
 >    - "the pattern" to `\|`
 >
->  > ### :question: Questions
+>  > ### {% icon question %} Questions
 >  >
 >  > 1. What is the abundance of the first GO term?
 >  > 2. What is related to in [Gene Ontology](http://www.geneontology.org/)?
@@ -468,11 +468,11 @@ With the previous analyses, we can now give some answers to the questions "Which
 
 To answer this question, we need to relate generated taxonomic and functional results. 
 
-> ### :pencil2: Hands-on: Combination of taxonomic and functional results
+> ### {% icon hands_on %} Hands-on: Combination of taxonomic and functional results
 >
-> 1. **Combine... ** :wrench:: Run **Combine** on the gene family abundance generated with HUMAnN2 and the MetaPhlAn2 output
+> 1. **Combine... ** {% icon tool %} Run **Combine** on the gene family abundance generated with HUMAnN2 and the MetaPhlAn2 output
 > 
->    > ### :question: Questions
+>    > ### {% icon question %} Questions
 >    >
 >    > 1. 
 >    >
