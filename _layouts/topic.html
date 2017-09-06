@@ -125,8 +125,8 @@ layout: base
         <ul>
         {% for maintainer in topic.maintainers %}
             <li>
-            {% if contributors[maintainer].github_username and contributors[maintainer].github_username != "" %}
-                <a href="https://github.com/{{ contributors[maintainer].github_username }}">{{ contributors[maintainer].name }}</a>
+            {% if contributors[maintainer].github != false %}
+                <a href="https://github.com/{{ maintainer }}">{{ contributors[maintainer].name }}</a>
             {% else %}
                 {{ contributors[maintainer].name }}
             {% endif %}
