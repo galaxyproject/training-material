@@ -117,7 +117,7 @@ For quality control, we use similar tools as described in [the Quality Control t
 
 One sequence file in Fasta is expected for the next steps. We need then to assemble the paired sequences and convert them to Fasta.
 
-> ### {% icon hands_on %} Hands-on: Paired-end join
+> ### {% icon hands_on %} Hands-on: Paired-end join and FASTA conversion
 >
 > 1. **fastq-join** {% icon tool %} with
 >    - "Dataset type" to `Paired-end`
@@ -146,8 +146,7 @@ During sequencing, one sequence must have been added to the dataset in multiple 
 >    >    <details>
 >    >    <summary>Click to view answers</summary>
 >    >    <ol type="1">
->    >    <li>42,363 on 43,145</li>
->    >    <li></li>
+>    >    <li>314,302 sequences are conserved on the 314,641</li>
 >    >    </ol>
 >    >    </details>
 >    {: .question}
@@ -156,7 +155,7 @@ During sequencing, one sequence must have been added to the dataset in multiple 
 
 ## Sequence sorting
 
-With shotgun metagenomics data, full genome information can be accessed: information corresponding to CDS of the micro-organisms, sequences corresponding to ribosomal sequences (rDNA or rRNA) of the micro-organisms, ... Useful functional information are present in sequences corresponding to CDS, and some taxonomic information in sequences corresponding to ribosomomal sequences (like the amplicon). To reduce the dataset size for the extraction of functional information, we can remove rRNA/rDNA sequences from the original dataset. 
+With shotgun metagenomics data, full genome information can be accessed: information corresponding to CDS of the micro-organisms, sequences corresponding to ribosomal sequences (rDNA or rRNA) of the micro-organisms, etc. Useful functional information are present in sequences corresponding to CDS, and some taxonomic information in sequences corresponding to ribosomomal sequences (like the amplicon). To reduce the dataset size for the extraction of functional information, we can remove rRNA/rDNA sequences from the original dataset. 
 
 This task is also useful to inspect the rRNA/rDNA sequences. And as in EBI Metagenomics' pipeline, these sequences can be used for taxonomic analyses as any amplicon data
 
@@ -191,7 +190,7 @@ For this task, we use SortMeRNA ([Kopylova et al, 2012](https://academic.oup.com
 >    <details>
 >    <summary>Click to view answers</summary>
 >    <ol type="1">
->    <li>1,988 over 42,363 are aligned on rRNA databases so 4.7%</li>
+>    <li>495 over 313,807 are aligned on rRNA databases so 0.16%</li>
 >    <li>Shotgun metagenomics data with few rRNA genes</li>
 >    </ol>
 >    </details>
@@ -226,11 +225,11 @@ However, for shotgun data, applying such approaches implies using a really small
 
     ```
     #SampleID   Metaphlan2_Analysis
-    k__Bacteria 100.0
-    k__Bacteria|p__Proteobacteria   86.20712
-    k__Bacteria|p__Actinobacteria   13.79288
-    k__Bacteria|p__Proteobacteria|c__Gammaproteobacteria    86.20712
-    k__Bacteria|p__Actinobacteria|c__Actinobacteria 13.79288
+    k__Bacteria 70.4264
+    k__Viruses  29.5736
+    k__Bacteria|p__Proteobacteria   64.0148
+    k__Viruses|p__Viruses_noname    29.5736
+    k__Bacteria|p__Firmicutes   4.18915
     ```
 
     Each line contains a taxa and its relative abundance found for our sample. The file starts with high level taxa (kingdom: `k__`) and go to more precise taxa.
@@ -245,15 +244,15 @@ However, for shotgun data, applying such approaches implies using a really small
 > ### {% icon question %} Questions
 >
 > 1. What is the most precise level we have access to with MetaPhlAn2?
-> 2. What are the two orders found in our sample?
+> 2. What is the most abundant order found in our sample?
 > 3. What is the most abundant family in our sample?
 >
 >    <details>
 >    <summary>Click to view answers</summary>
 >    <ol type="1">
->    <li>We have access to species level</li>
->    <li>Pseudomonadales and Solirubrobacterales are found in our sample</li>
->    <li>The most abundant family is Pseudomonadaceae with 86.21 % of the assigned sequences</li>
+>    <li>We have access to species level. Strains can be identified also but it is less reliable.</li>
+>    <li>Enterobacteriales and Solirubrobacterales are found in our sample</li>
+>    <li>The most abundant family is Enterobacteriaceae with 31.69 % of the assigned sequences</li>
 >    </ol>
 >    </details>
 {: .question}
@@ -276,12 +275,12 @@ Krona ([Ondov et al, 2011](https://bmcbioinformatics.biomedcentral.com/articles/
 
 > ### {% icon question %} Questions
 >
-> 1. What are the main species found for the bacteria?
+> 1. Which bacteria species are found?
 >
 >    <details>
 >    <summary>Click to view answers</summary>
 >    <ol type="1">
->    <li></li>
+>    <li>Escherichia coli, Salmonella enterica, Stenotrophomonas, etc</li>
 >    </ol>
 >    </details>
 {: .question}
@@ -317,20 +316,6 @@ Krona ([Ondov et al, 2011](https://bmcbioinformatics.biomedcentral.com/articles/
 {: .hands_on}
 
 With our dataset, we obtain a nice graphical representation of taxonomic diversity inside our sample, with circle radius being proportional to relative abundance of the corresponding clade.
-
-> ### {% icon question %} Questions
->
-> 1. What are the main species found for the bacteria?
-> 2. Is the main species the same as the one observed with KRONA? 
->
->    <details>
->    <summary>Click to view answers</summary>
->    <ol type="1">
->    <li></li>
->    </ol>
->    </details>
->
-{: .question}
 
 [Phinch](http://phinch.org/) is an open-source framework for visualizing biological data. 
 
