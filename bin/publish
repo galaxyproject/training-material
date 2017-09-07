@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+
+git config user.name "Travis-CI"
+git config user.email "noreply@travis-ci.org"
+git remote rm origin
+git remote add origin "https://bebatut:$GH_TOKEN@github.com/galaxyproject/training-material"
+
+rm -rf /tmp/site
+mv _site /tmp/site
+
+git checkout -- .
+
+git fetch origin
+git checkout gh-pages
+git clean -fdx
+git rm -r .
+
+# keep files needed for travis testing
+git checkout origin/master .travis.yml Makefile Gemfile
+
+cp -R /tmp/site/* .
+
+# this file must be there, if it is not, it is likely a bug during build
+if [ ! -f "index.html" ]; then
+    echo "index.html file is missing, aborting"
+    exit 1
+fi
+
+find * -type f -exec chmod 644 "{}" ";"
+find * -type d -exec chmod 755 "{}" ";"
+
+git add -A .
+git commit -m "Update on: `date`"
+git push origin gh-pages
