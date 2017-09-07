@@ -16,17 +16,19 @@
 title: "Galaxy Training!"
 email: your-email@domain.com
 description: A collection of tutorials generated and maintained by Galaxy Community Members across the world
-url: "https://galaxyproject.github.io/training-material/" # the base hostname & protocol for your site, e.g. http://example.com
+url: "https://galaxyproject.github.io/training-material" # the base hostname & protocol for your site, e.g. http://example.com
 github_repository: "https://github.com/galaxyproject/training-material"
 github_organization_name: "galaxyproject"
+gitter_url: "https://gitter.im/Galaxy-Training-Network/Lobby"
 logo: "/assets/images/GTN.png"
+small_logo: "/assets/images/GTN-60px.png"
 
 # Where things are
-source:       .
-destination:  ./_site
-plugins_dir:  _plugins
-layouts_dir:  _layouts
-data_dir:     metadata
+source: .
+destination: ./_site
+plugins_dir: _plugins
+layouts_dir: _layouts
+data_dir: metadata
 includes_dir: _includes
 
 # Conversion
@@ -35,13 +37,65 @@ highlighter: rouge
 kramdown:
   input: GFM
   syntax_highlighter: rouge
+  auto_ids: true
+  toc_levels: 1..2
 
-# Handling Reading
+# Figure plugin parameters
+figurify:
+  skip_empty: true # or false if you want to generate all figures, even those without any alt or title
+  skip_layouts:
+    - introduction_slides
+    - tutorial_slides
+    - base_slides
+  skip_titles:
+    - This is my super caption
+
+# Icon tag config
+icon-tag:
+  # in tutorials
+  question: fa-question-circle
+  hands_on: fa-pencil
+  comment: fa-commenting-o
+  tip: fa-lightbulb-o
+  objectives: fa-bullseye
+  requirements: fa-check-circle
+  time: fa-hourglass-end
+  keypoints: fa-key
+  tool: fa-wrench
+  feedback: fa-comments-o
+  congratulations: fa-thumbs-up
+  # menus, links
+  zenodo_link: fa-files-o
+  tutorial: fa-laptop
+  slides: fa-slideshare
+  interactive_tour: fa-magic
+  topic: fa-folder-o
+  docker_image: fa-ship
+  galaxy_instance: fa-external-link
+  references: fa-book
+  gitter: fa-life-ring
+  github: fa-github
+
+# To exclude in _site
 exclude:
+  - shared/font-awesome/src/
   - Gemfile
   - Gemfile.lock
+  - CONTRIBUTING.md
+  - CONTRIBUTORS.md
+  - LICENSE.md
+  - README.md
+  - Makefile
+  - miniconda.sh
+  - "**/README.md"
+  - "**/*.yaml"
+  - "**/*.yml"
+  - "**/*.sh"
+  - bin/
+  - metadata/
+  - templates/
 
 # Plugins
-gems:
+plugins:
   - jekyll-feed
   - jemoji
