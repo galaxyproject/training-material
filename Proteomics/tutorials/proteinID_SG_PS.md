@@ -13,9 +13,7 @@ Identifying the proteins contained in a sample is an important step in any prote
 3. Peptide inference
 4. Protein inference
 
-A plethora of different software solutions exists for each step. In this tutorial, we will show how to
-use ***msconvert*** :wrench: and ***PeakPickerHiRes*** :wrench: for step 1,
-***Search GUI*** :wrench: and ***Peptide Shaker*** :wrench: for the steps 2-4.
+A plethora of different software solutions exists for each step. In this tutorial, we will show how to use ***msconvert*** :wrench: and ***PeakPickerHiRes*** :wrench: for step 1, ***Search GUI*** :wrench: and ***Peptide Shaker*** :wrench: for the steps 2-4.
 
 # Input data
 
@@ -119,6 +117,7 @@ In bottom-up proteomics, it is necessary to combine the identified peptides to p
 > The default, validated values for processing and filtering are set in stored workflows, and follow community standards (e.g. 1% FDR levels, etc.).
 >
 > b) **Outputs.** Peptide Shaker offers a variety of outputs which a user can select. A compressed file (.zip) can be made containing all information needed to view the results in the standalone Peptide Shaker viewer; a peptide spectrum match (PSM) report file, which provides all relevant information on all peptide sequences matched to MS/MS spectra in the analysis; a mzidentML file can be created that contains all peptide sequence matching information and can be utilized by compatible downstream software. 
+
 > Other outputs are focused on the inferred proteins identified from the PSMs, as well as phosphorylation reports, relevant in a phosphoprotoemics experiment has been undertaken. The Certificate of Analysis provides details on all the parameters used by both Search GUI and Peptide Shaker in the analysis. All outputs can be downloaded from the Galaxy instance to the local computer if desired.
 >
 > ![parameters_PS](../images/parameters_PS.PNG)
