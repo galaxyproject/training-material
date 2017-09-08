@@ -15,7 +15,7 @@ tutorial_name: galaxy-intro-collections
 
 :dart: ***Objectives***
 
-- *First objective of this tutorial (It is a single sentence describing what a learner will be able to do once they have sat through the lesson. The objectives must be technical, but also theoretical, objectives. You can check [SWC lessons](https://swcarpentry.github.io/instructor-training/19-lessons/) to help you writing learning objectives.)*
+- *First objective of this tutorial (It is a single sentence describing what a learner will be able to do once they have sat through the lesson. The objectives must be technical, but also theoretical, objectives. You can check [SWC lessons](https://swcarpentry.github.io/instructor-training/) to help you writing learning objectives.)*
 - *Second objective*
 - *Third objective*
 - *...*
