@@ -533,6 +533,11 @@ To save time, we already generated the gene families for you: the output of HUMA
 {: .hands_on}
 
 # Conclusion
+
+The analyses can be summarized by:
+
+![Scheme to sum up the analysis](../../images/shotgun-tutorial-scheme.png "Workflow of the shotgun tutorial")
+
 {:.no_toc}
 
 
