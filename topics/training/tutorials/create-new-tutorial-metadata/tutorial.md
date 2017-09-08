@@ -87,7 +87,7 @@ In the second part of the metadata, we define metadata related to the content of
 
     This information will appear at the end of the tutorial
 
-For this metadata, we take inspiration from what Software Carpentry is doing and particularly what they describe in their [Instructor training](https://swcarpentry.github.io/instructor-training/) and the section ["Lessons and Objectives"](https://swcarpentry.github.io/instructor-training/19-lessons/).
+For this metadata, we take inspiration from what Software Carpentry is doing and particularly what they describe in their [Instructor training](https://swcarpentry.github.io/instructor-training/).
 
 > ### {% icon hands_on %} Hands-on: Fill the pedagogical metadata
 >
