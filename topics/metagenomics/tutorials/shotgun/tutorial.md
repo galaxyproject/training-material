@@ -488,7 +488,51 @@ To answer this question, we need to relate generated taxonomic and functional re
 >    {: .question}
 {: .hands_on}
 
+# Comparative analysis
+
+This dataset comes from a [project](https://www.ebi.ac.uk/metagenomics/projects/ERP021973) to compare methods for quantifying taxonomic composition of microbial communities with 3 types of mock communities:
+
+- The "C" type communities: same cell/phage particle number for all community members
+- The "P" type communities: same protein content for all community members
+- The "U" (uneven) type communities: large range of protein amounts and cell numbers
+
+With this project, we have access to 3 replicates for each type of mock communities:
+
+Type of mock community | Samples
+--- | ---
+Equal cell number mock community | ERR1877474, ERR1877475, ERR1877476
+Equal protein amount mock community | ERR1877477, ERR1877478, ERR1877479
+Uneven mock community | ERR1877480, ERR1877481, ERR1877482
+
+We can then do some comparative analyses. We will now look at the pathway abundance and try to compare them between the 9 samples.
+
+To save time, we already generated the gene families for you: the output of HUMAnN2 are avalaible on Zenodo
+
+> ### {% icon hands_on %} Hands-on: Comparative analysis of the pathway abundance
+>
+> 1. Upload the pathway abundance file from Zenodo
+> 2. **Join HUMAnN2 generated tables** {% icon tool %}
+> 3. Create an empty file with 
+> 4. Transform the space into tabular
+> 5. Concatenate the file with header and joined table
+> 6. **Associate HUMAnN2 functions with metadata** {% icon tool %}
+> 7. **Barplot stratified HUMAnN2 features** {% icon tool %}
+>
+>    > ### {% icon question %} Questions
+>    >
+>    > 1. 
+>    >
+>    >    <details>
+>    >    <summary>Click to view answers</summary>
+>    >    <ol type="1">
+>    >    <li></li>
+>    >    </ol>
+>    >    </details>
+>    {: .question}
+>
+{: .hands_on}
+
 # Conclusion
 {:.no_toc}
 
-Conclusion about the technical key points. And then relation between the technics and the biological question to end with a global view.
+
