@@ -26,7 +26,7 @@ Introduction about this part
 
 Short introduction about this subpart.
 
-> ### :pencil2: Hands-on: Data upload
+> ### {% icon hands_on %} Hands-on: Data upload
 >
 > 1. Step1
 > 2. Step2
@@ -46,7 +46,7 @@ Short introduction about this subpart.
 
 Short introduction about this subpart.
 
-> ### :pencil2: Hands-on: Data upload
+> ### {% icon hands_on %} Hands-on: Data upload
 >
 > 1. Step1
 > 2. Step2
@@ -63,12 +63,12 @@ Short introduction about this subpart.
 {: .hands_on}
 
 Some blabla
-> ### :pencil2: Hands-on: Data upload
+> ### {% icon hands_on %} Hands-on: Data upload
 >
 > 1. Step1
 > 2. Step2
 >
->    > ### :question: Questions
+>    > ### {% icon question %} Questions
 >    >
 >    > 1. Question1?
 >    > 2. Question2?
@@ -89,7 +89,7 @@ Some blabla
 
 Short introduction about this subpart.
 
-> ### :nut_and_bolt: Comment
+> ### {% icon comment %} Comment
 >
 > Do you want to learn more about the principles behind mapping? Follow our [training](../../NGS-mapping)
 > {: .comment}
