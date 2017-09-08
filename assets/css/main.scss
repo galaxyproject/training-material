@@ -1,0 +1,188 @@
+---
+---
+
+$white: #fff;
+$gray: #777;
+$bg-color: #2c3143;
+$menu-color: #9d9d9d;
+$text-color: #292b2c;
+$font-size: 15px;
+$overview-color: $bg-color;
+$agenda-color: $bg-color;
+$keypoints-color: #1D243D;
+$tip-color: #587177;
+$comment-color: #3E585E;
+$handson-color: #190F2F;
+$question-color: #474E67;
+$tutorial-box-spacing: 1rem;
+
+@mixin tutorial-box ($bg-color, $color: $white) {
+    margin-top: $tutorial-box-spacing;
+    padding: 0 $tutorial-box-spacing $tutorial-box-spacing;
+    border: 1px solid $bg-color;
+    border-top: none;
+
+    & > h3 {
+        font-size: $font-size + 3;
+        margin-top: 0;
+        margin-left: -$tutorial-box-spacing;
+        margin-right: -$tutorial-box-spacing;
+        padding: $tutorial-box-spacing / 2;
+        background-color: $bg-color;
+        color: $color;
+    }
+}
+
+body {
+    font-size: $font-size;
+    word-wrap: break-word;
+}
+
+h1,
+h2,
+h3,
+h4 {
+    margin-top: 2rem;
+}
+
+img {
+    max-width: 100%;
+}
+
+pre {
+    padding: 1rem;
+    background-color: lighten($gray, 40%);
+}
+
+figure {
+  text-align: center;
+  margin: 1rem 2rem;
+
+  & > img {
+      margin-bottom: 1rem;
+  }
+
+  .figcaption-prefix {
+      font-weight: 600;
+  }
+}
+
+footer {
+    margin-top: 3em;
+    text-align: center;
+    color: $gray;
+    font-size: $font-size - 2;
+}
+
+.navbar {
+    background-color: $bg-color!important;
+
+    .navbar-collapse {
+        justify-content: flex-end;
+        align-items: flex-end;
+    }
+}
+
+.main-content {
+    padding-top: 1rem;
+}
+
+.table .fa {
+    font-size: $font-size + 5;
+}
+
+.training-network-map {
+    width: 90%;
+    margin: 0 auto;
+}
+
+.tutorial {
+    & > h1:first-child {
+        margin-bottom: 3rem;
+    }
+
+    table {
+        display: block;
+        width: 100%;
+        overflow-x: auto;
+        max-width: 100%;
+        margin-bottom: 1rem;
+
+        th,
+        td {
+            padding: .75rem;
+            vertical-align: top;
+            border-top: 1px solid #eceeef;
+        }
+
+        thead th {
+            vertical-align: bottom;
+            border-bottom: 2px solid #eceeef;
+        }
+    }
+
+    // tutorial boxes
+    blockquote {
+        ul,
+        ol,
+        & > blockquote,
+        p {
+            margin-bottom: 0px;
+        }
+
+        &.agenda {
+            @include tutorial-box($agenda-color);
+        }
+
+        &.tip {
+            @include tutorial-box($tip-color);
+        }
+
+        &.question {
+            @include tutorial-box($question-color);
+        }
+
+        &.comment {
+            @include tutorial-box($comment-color);
+        }
+
+        &.hands_on {
+            @include tutorial-box($handson-color);
+        }
+
+        &.key_points {
+            @include tutorial-box($keypoints-color);
+        }
+
+        &.overview {
+            @include tutorial-box($overview-color);
+        }
+    }
+}
+
+// this is a fix to get the hamburger button (menu/navbar) correctly placed on
+// small screens.
+@media (max-width: 575px) {
+    .navbar > .container {
+        position: initial;
+        margin-left: initial;
+        margin-right: initial;
+    }
+}
+
+@media (min-width: 768px) {
+    .tutorial table,
+    .table-responsive {
+        display: table;
+    }
+
+    .citation {
+        text-align: justify;
+    }
+}
+
+@media (max-width: 1200px) {
+    .navbar-nav i {
+        display: none;
+    }
+}
