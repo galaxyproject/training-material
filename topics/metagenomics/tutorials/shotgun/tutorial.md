@@ -71,7 +71,7 @@ The original data are available at EBI Metagenomics under run number [ERR1877474
 
 ## Quality control and treatment
 
-For quality control, we use similar tools as described in [the Quality Control tutorial](../../NGS-QC/tutorials/dive_into_qc): [FastQC](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/) and [Trim Galore!](http://www.bioinformatics.babraham.ac.uk/projects/trim_galore/).
+For quality control, we use [FastQC](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/) and [Trim Galore!](http://www.bioinformatics.babraham.ac.uk/projects/trim_galore/).
 
 > ### {% icon hands_on %} Hands-on: Quality control
 >
@@ -289,7 +289,7 @@ Krona ([Ondov et al, 2011](https://bmcbioinformatics.biomedcentral.com/articles/
 >    </details>
 {: .question}
 
-[GraPhlAn](https://bitbucket.org/nsegata/graphlan/wiki/Home>) is a tool for producing circular static representation of taxonomic analyses, easily exportable.
+[GraPhlAn](https://bitbucket.org/nsegata/graphlan) is a tool for producing circular static representation of taxonomic analyses, easily exportable.
 
 > ### {% icon hands_on %} Hands-on: Static visualization with GraPhlAn
 >
