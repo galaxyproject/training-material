@@ -26,10 +26,14 @@ The slides for part 2 can be downloaded from here
 <a name="example"/></a>
 ## Hands on example  
 
-This exercise uses the dataset from the Nature publication by [Ross-Inness et al., 2012](https://www.ncbi.nlm.nih.gov/pubmed/22217937).
-The goal was to identify the binding sites of the Estrogen receptor, a transcription factor known to be associated with different types of breast cancer.
+This exercise uses the dataset from the Nature publication by
+[Ross-Inness et al., 2012](https://www.ncbi.nlm.nih.gov/pubmed/22217937).
+The goal was to identify the binding sites of the Estrogen receptor,
+a transcription factor known to be associated with different types of breast cancer.
 To this end, ChIP-seq was performed in breast cancer cells from 4 patients of different outcomes (good and poor).
-For each ChIP-seq experiment there is a matching technical control, i.e., there are 8 samples in total, half of which are the so-called 'input' samples for which the same treatment as the ChIP-seq samples was done except for the immunoprecipitation step.
+For each ChIP-seq experiment there is a matching technical control, i.e.,
+there are 8 samples in total, half of which are the so-called 'input' samples
+for which the same treatment as the ChIP-seq samples was done except for the immunoprecipitation step.
 The input files are used to identify sequencing bias like open chromatin or GC bias.
 
 Because of the long processing time for the large original files, we have selected small samples for practice and provide already processed data for subsequent steps.
