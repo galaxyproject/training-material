@@ -126,7 +126,7 @@ layout: base
         {% for maintainer in topic.maintainers %}
             <li>
             {% if contributors[maintainer].github != false %}
-                <a href="https://github.com/{{ maintainer }}">{{ contributors[maintainer].name }}</a>
+                <a href="/hall-of-fame#{{ maintainer }}">{{ contributors[maintainer].name }}</a>
             {% else %}
                 {{ contributors[maintainer].name }}
             {% endif %}
@@ -144,7 +144,7 @@ layout: base
         <h2 id="contributors">Contributors</h2>
         <p>This material was contributed to by:</p>
 
-        <!-- get list of unique contributors for all tutorials in the topic -->
+        <!-- get list of unique contributors for all materials in the topic -->
         {% assign contributors_list = "" | split: ',' %}
         {% for material in topic.material %}
             {% for c in material.contributors %}
