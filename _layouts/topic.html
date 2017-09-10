@@ -5,6 +5,7 @@ layout: base
 {% include default-header.html %}
 
 {% assign topic = site.data[page.topic_name] %}
+{% assign contributors = site.data['contributors'] %}
 
 <div class="container main-content">
     <section>
@@ -124,13 +125,13 @@ layout: base
         <ul>
         {% for maintainer in topic.maintainers %}
             <li>
-            {% if maintainer.github_username != "" %}
-                <a href="https://github.com/{{ maintainer.github_username }}">{{ maintainer.name }}</a>
+            {% if contributors[maintainer].github != false %}
+                <a href="https://github.com/{{ maintainer }}">{{ contributors[maintainer].name }}</a>
             {% else %}
-                {{ maintainer.name }}
+                {{ contributors[maintainer].name }}
             {% endif %}
-            {% if maintainer.email and maintainer.email != "" %}
-                (<a href="mailto:{{ maintainer.email }}">{{ maintainer.email }}</a>)
+            {% if contributors[maintainer].email and contributors[maintainer].email != "" %}
+                (<a href="mailto:{{ contributors[maintainer].email }}">{{ contributors[maintainer].email }}</a>)
             {% endif %}
             </li>
         {% endfor %}
