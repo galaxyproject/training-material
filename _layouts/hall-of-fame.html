@@ -17,7 +17,11 @@ layout: base
     {% for contributor in contributors %}
         {% assign username = contributor[0] %}
         <div class="col-2 hall-of-fame" id="{{ username }}">
-        <a href="https://github.com/{{ username }}" class="thumbnail">
+        {% if contributors[username].github != false %}
+        <a href="https://github.com/{{ username }}" class="thumbnail withlink">
+        {% else %}
+        <a class="thumbnail">
+        {% endif %}
             <img src="https://avatars.githubusercontent.com/{{ username }}"/>
         </a>
         <br/>
