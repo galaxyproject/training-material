@@ -141,6 +141,29 @@ layout: base
             <em>For any question related to this topic and the content, you can contact them.</em>
         </p>
 
+        <h2 id="contributors">Contributors</h2>
+        <p>This material was contributed to by:</p>
+
+        <!-- get list of unique contributors for all tutorials in the topic -->
+        {% assign contributors_list = "" | split: ',' %}
+        {% for material in topic.material %}
+            {% for c in material.contributors %}
+                {% if contributors_list contains c %}
+                {% else %}
+                    {% assign contributors_list = contributors_list | push: c %}
+                {% endif %}
+            {% endfor %}
+        {% endfor %}
+
+        <ul>
+        {% for username in contributors_list %}
+            {% assign contributor = contributors[username] %}
+            <li>
+                <a href="/hall-of-fame"> {{ contributor.name }}</a>
+            </li>
+        {% endfor %}
+        </ul>
+
         {% if topic.references %}
         <h2 id="references">References</h2>
         <ul>
