@@ -40,7 +40,7 @@ script:
     set -e
     if [ "$TRAVIS_BRANCH" == "gh-pages" ]
     then
-      timeout 120s htmlproofer --assume-extension --http-status-ignore 405,999 --url-ignore "/.*localhost.*/","/.*vimeo\.com.*/" --file-ignore "/.*\/files\/.*/"
+      timeout 120s htmlproofer --assume-extension --http-status-ignore 405,999 --url-ignore "/.*localhost.*/","/.*vimeo\.com.*/","/.*gitter\.im.*/" --file-ignore "/.*\/files\/.*/"
     else
       if [ "$TRAVIS_BRANCH" != "master" ]
       then
