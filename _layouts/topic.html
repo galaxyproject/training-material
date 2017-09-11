@@ -125,14 +125,10 @@ layout: base
         <ul>
         {% for maintainer in topic.maintainers %}
             <li>
-            {% if contributors[maintainer].github != false %}
                 <a href="/hall-of-fame#{{ maintainer }}">{{ contributors[maintainer].name }}</a>
-            {% else %}
-                {{ contributors[maintainer].name }}
-            {% endif %}
-            {% if contributors[maintainer].email and contributors[maintainer].email != "" %}
-                (<a href="mailto:{{ contributors[maintainer].email }}">{{ contributors[maintainer].email }}</a>)
-            {% endif %}
+                {% if contributors[maintainer].email and contributors[maintainer].email != "" %}
+                    (<a href="mailto:{{ contributors[maintainer].email }}">{{ contributors[maintainer].email }}</a>)
+                {% endif %}
             </li>
         {% endfor %}
         </ul>
