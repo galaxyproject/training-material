@@ -181,7 +181,15 @@ The data we use in this tutorial is available at [Zenodo](https://zenodo.org/rec
 >    >    </details>
 >    {: .question}
 >
-> 3. **Replace column** {% icon tool %} Every chromosome is named different, the list to transfer the ensembl notation to ucsc notation is having more than 500 entries. To convert it you can use the tool **Replace column**. Choose for ```File in which you want to replace some values``` the bedGraph file and for ```Replace information file``` [this](https://raw.githubusercontent.com/dpryan79/ChromosomeMappings/master/GRCh38_ensembl2UCSC.txt) conversion file. For ```Which column should be replaced?``` choose ```Column: 1```, for ```Skip this many starting lines``` a ```1``` and for ```Delimited by``` ```Tab```. In case this tool is not available in your galaxy instance, we precomputed the files for you: Please import ```NB1_CpG.meth_ucsc.bedGraph```, ```NB2_CpG.meth_ucsc.bedGraph```, ```BT089_CpG.meth_ucsc.bedGraph```, ```BT126_CpG.meth_ucsc.bedGraph``` and  ```BT198_CpG.meth_ucsc.bedGraph```.
+>    > ### {% icon tip %} Tip: UCSC - Ensembl convert
+>    >
+>    > * Download the ```Replace information file``` for hg38 chromosome: [Download](https://raw.githubusercontent.com/dpryan79/ChromosomeMappings/master/GRCh38_ensembl2UCSC.txt) and import it to Galaxy.
+>    > * **Galaxy** {% icon tool %}: Search the tool ```Replace column```.
+>    > * Choose for ```File in which you want to replace some values``` the previous used ```NB1_CpG.meth.bedGraph``` file and for ```Replace information file```  conversion file. For ```Which column should be replaced?``` choose ```Column: 1```, for ```Skip this many starting lines``` a ```1``` and for ```Delimited by``` ```Tab```.
+>    > * **Replace column** {% icon tool %}: Click ```Execute```.
+>    {: .tip}
+>
+> 3. To save compute time we prepared the converted files for you. Import the files: ```NB1_CpG.meth_ucsc.bedGraph```, ```NB2_CpG.meth_ucsc.bedGraph```, ```BT089_CpG.meth_ucsc.bedGraph```, ```BT126_CpG.meth_ucsc.bedGraph``` and  ```BT198_CpG.meth_ucsc.bedGraph```.
 > 4. Compute the matrix and plot the profile as described above.
 >
 > More information about deepTools can be found here: https://deeptools.github.io/
