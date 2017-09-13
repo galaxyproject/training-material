@@ -69,7 +69,7 @@ The data we use in this tutorial is available at [Zenodo](https://zenodo.org/rec
 > We will map now the imported dataset against a reference genome.
 >
 > 1. **Galaxy** {% icon tool %}: Search for the tool ```bwameth```
-> 2. **bwameth** {% icon tool %}: Select for the option ```Select a genome reference from your history or a built-in index?``` ```Use a built-in idex``` and here the human ```hg38``` genome.
+> 2. **bwameth** {% icon tool %}: Select for the option ```Select a genome reference from your history or a built-in index?``` ```Use a built-in index``` and here the human ```hg38``` genome.
 > 3. **bwameth** {% icon tool %}: Choose for the option ```Is this library mate-paired?``` ```Paired-end``` and use the two imported datasets as an input.
 > 4. **bwameth** {% icon tool %}: Compute now the alignment. Please notice that depending on your system this computation can take some time. If you want to skip this, we provide for you a precomputed alignment. Import ```aligned_subset.bam``` to your history.
 >
@@ -98,7 +98,7 @@ The data we use in this tutorial is available at [Zenodo](https://zenodo.org/rec
 > 2. **MethylDackel** {% icon tool %}: Choose at the first option ```Load reference genome from``` ```Local cache``` and for ```Using reference genome``` the value ```hg38```.
 > 3. **MethylDackel** {% icon tool %}: Select for the option ```sorted_alignments.bam``` the computed bam file of step 4 of the ```bwameth``` alignment.
 > 4. **MethylDackel** {% icon tool %}: Use for ```What do you want to do?``` the value ```Determine the position-dependent methylation bias in the dataset, producing diagnostic SVG images```.
-> 5. **MethylDackel** {% icon tool %}: Set the parameters ```keepSingleton``` and ```keepDiscordant``` to ```Yes```.
+> 5. **MethylDackel** {% icon tool %}: Set the parameters ```By default, if only one read in a pair aligns (a singleton) then it's ignored.``` and ```By default, paired-end alignments with the properly-paired bit unset in the FLAG field are ignored. Note that the definition of concordant and discordant is based on your aligner settings.``` to ```Yes```.
 > 6. **MethylDackel** {% icon tool %}: Click ```Execute```.
 >
 >    ![Methylation bias example](../../images/methylation_bias_example_data.png)
@@ -131,7 +131,7 @@ The data we use in this tutorial is available at [Zenodo](https://zenodo.org/rec
 > 3. **MethylDackel** {% icon tool %}: Select for the option ```sorted_alignments.bam``` the computed bam file of step 4 of the ```bwameth``` alignment.
 > 4. **MethylDackel** {% icon tool %}: Use for ```What do you want to do?``` the value ```Extract methylation metrics from an alignment file in BAM/CRAN format```.
 > 5. **MethylDackel** {% icon tool %}: Choose ```Yes``` for the option ```Merge per-Cytosine metrics from CpG and CHG contexts into per-CPG or per-CHG metrics```.
-> 6. **MethylDackel** {% icon tool %}: Set the parameter ```fraction``` to ```Yes```.
+> 6. **MethylDackel** {% icon tool %}: Set the parameter ```Extract fractional methylation (only) at each position. This is mutually exclusive with --counts, --logit, and --methylKit``` to ```Yes```.
 > 7. **MethylDackel** {% icon tool %}: All other options use the default value.
 >
 >
@@ -147,29 +147,18 @@ The data we use in this tutorial is available at [Zenodo](https://zenodo.org/rec
 >
 > 1. **Galaxy** {% icon tool %}: Search for the tool ```Wig/BedGraph-to-bigWig```
 > 2. **Wig/BedGraph-to-bigWig** {% icon tool %}: Use the result of MethylDackel to transform it to a bigWig file.
->
->    > ### {% icon question %} Questions
+>    > ### {% icon tip %} Tip: Database edit
 >    >
->    > - The execution fails. Do you have an idea why?
->    >
->    >
->    >    <details>
->    >    <summary>Click to view answers</summary>
->    >    <ol type="1">
->    >    <li>The output file is having one line too much in in the beginning and column five and six should not be there. We need to fix this.</li>
->    >    </ol>
->    >    </details>
->    {: .question}
->
-> 3. **Galaxy** {% icon tool %}: Search for ```tail```. use ```Select last lines from a dataset (tail)```
-> 4. **tail** {% icon tool %}: Use the mode ```Operation``` the value ```Keep everything from this line on``` and choose ```2``` as a value.
-> 5. **Galaxy** {% icon tool %}: Search for awk
-> 6. **awk** {% icon tool %}: Convert with awk the bedgraph file and use as ```AWK Program```: ```'BEGIN{OFS="\t"}{print $1, $2, $3, $4}'```
-> 7. **Galaxy** {% icon tool %}: Search for the tool ```computeMatrix```.
-> 8. **computeMatrix** {% icon tool %}: Use the file ```CpGIslands.bed```as ```Regions to plot``` and the in the previous step created bigwig file as the ```score file```.
-> 9. **computeMatrix** {% icon tool %}: Use for the option ```computeMatrix has two main output options``` the value ```reference-point```.
-> 10. **Galaxy** {% icon tool %}: Search for the tool ```plotProfile```.
-> 11. **plotProfile** {% icon tool %}: Choose for ```Matrix file from the computeMatrix tool``` the computed matrix from the tool ```computeMatrix```.
+>    > It can happen that you can not select the correct input file. In this case you have to add meta information about the used genome to the file.
+>    > * Click on the pencil of the correct history item. 
+>    > * Change ```Database/Build:``` to the genome you used.
+>    > * In our case the correct genome is ```Human Dec. 2013 (GRCh38/hg38) (hg38)```.
+>    {: .tip}
+> 3. **Galaxy** {% icon tool %}: Search for the tool ```computeMatrix```.
+> 4. **computeMatrix** {% icon tool %}: Use the file ```CpGIslands.bed```as ```Regions to plot``` and the in the previous step created bigwig file as the ```score file```.
+> 5. **computeMatrix** {% icon tool %}: Use for the option ```computeMatrix has two main output options``` the value ```reference-point```.
+> 6. **Galaxy** {% icon tool %}: Search for the tool ```plotProfile```.
+> 7. **plotProfile** {% icon tool %}: Choose for ```Matrix file from the computeMatrix tool``` the computed matrix from the tool ```computeMatrix```.
 >
 > The output should look something like this:
 >
