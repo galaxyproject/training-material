@@ -136,6 +136,9 @@ For this MS/MS data will be matched to peptide sequences provided through a FAST
 at a given point in time. It has the potential to unravel the mechanistic details of microbial interactions with
 the host / environment by analyzing the functional dynamics of the microbiome.</p>
 
+<p>In this tutorial, we will analyze a sample of sea water that was collected in August of 2013 from the Bering
+Strait chlorophyll maximum layer (7m depth, 65° 43.44″ N, 168° 57.42″ W). The data were originally published in <a href="https://www.ncbi.nlm.nih.gov/pubmed/27396978">May et al., 2016</a>.</p>
+
 <blockquote class="agenda">
   <h3 id="agenda">Agenda</h3>
 
@@ -219,8 +222,9 @@ the host / environment by analyzing the functional dynamics of the microbiome.</
 <h2 id="match-peptide-sequences">Match peptide sequences</h2>
 
 <p>The search database labelled <code class="highlighter-rouge">FASTA_Bering_Strait_Trimmed_metapeptides_cRAP.FASTA</code> is the input database that
-will be used to match MS/MS to peptide sequences via a sequence database search.
-For this, the sequence database-searching program called <strong>SearchGUI</strong> will be used.
+will be used to match MS/MS to peptide sequences via a sequence database search. It is a small excerpt of the original database, which was constructed based on a metagenomic screening of the sea water samples (see <a href="https://www.ncbi.nlm.nih.gov/pubmed/27396978">May et al. (2016)</a>). The full original database can be accessed from <a href="https://noble.gs.washington.edu/proj/metapeptide/data/metapeptides_BSt.fasta">here</a>. A contaminant database was added.</p>
+
+<p>For this, the sequence database-searching program called <a href="https://compomics.github.io/projects/searchgui.html">SearchGUI</a> will be used.
 The created dataset collection of the three <em>MGF files</em> in the history is used as the MS/MS input.</p>
 
 <h4 id="searchgui">SearchGUI</h4>
@@ -264,25 +268,10 @@ programs that are available in SearchGUI. Any combination of these programs can 
 generating PSMs from MS/MS data. For the purpose of this tutorial, <strong>X!Tandem</strong> we will be used.</p>
       </blockquote>
 
-      <p>Section <strong>Protein Digestion Options</strong>:</p>
-
-      <ul>
-        <li><strong>Digestion</strong>: <code class="highlighter-rouge">Trypsin</code></li>
-        <li><strong>Maximum Missed Cleavages</strong>: <code class="highlighter-rouge">2</code></li>
-      </ul>
-
       <p>Section <strong>Precursor Options</strong>:</p>
 
       <ul>
-        <li><strong>Precursor Ion Tolerance Units</strong>: <code class="highlighter-rouge">Parts per million (ppm)</code></li>
-        <li><strong>Precursor Ion Tolerance:</strong>: <code class="highlighter-rouge">10</code></li>
         <li><strong>Fragment Tolerance (Daltons)</strong>: <code class="highlighter-rouge">0.02</code>- this is high resolution MS/MS data</li>
-        <li><strong>Minimum charge</strong>: <code class="highlighter-rouge">2</code></li>
-        <li><strong>Maximum charge</strong>: <code class="highlighter-rouge">6</code></li>
-        <li><strong>Forward Ion</strong>: <code class="highlighter-rouge">b</code></li>
-        <li><strong>Reverse Ion</strong>: <code class="highlighter-rouge">y</code></li>
-        <li><strong>Minimum Precursor Isotope</strong>: <code class="highlighter-rouge">0</code></li>
-        <li><strong>Maximum Precursor Isotope</strong>: <code class="highlighter-rouge">1</code></li>
       </ul>
 
       <p>Section <strong>Protein Modification Options</strong>:</p>
@@ -303,20 +292,12 @@ generating PSMs from MS/MS data. For the purpose of this tutorial, <strong>X!Tan
       <p>Section <strong>Advanced Options</strong>:</p>
       <ul>
         <li><strong>X!Tandem Options</strong>: <code class="highlighter-rouge">Advanced</code></li>
-        <li><strong>X!Tandem: Total Peaks</strong>: <code class="highlighter-rouge">50</code></li>
-        <li><strong>X!Tandem: Min Peaks</strong>: <code class="highlighter-rouge">15</code></li>
-        <li><strong>X!Tandem: Min Frag m/z</strong>: <code class="highlighter-rouge">200</code></li>
-        <li><strong>X!Tandem: Min Precursor Mass</strong>: <code class="highlighter-rouge">200</code></li>
-        <li><strong>X!Tandem: Noise Suppression</strong>: <code class="highlighter-rouge">Yes</code></li>
-        <li><strong>X!Tandem: Dynamic Range</strong>: <code class="highlighter-rouge">100</code></li>
         <li><strong>X!Tandem: Quick Acetyl</strong>: <code class="highlighter-rouge">No</code></li>
         <li><strong>X!Tandem: Quick Pyrolidone</strong>: <code class="highlighter-rouge">No</code></li>
         <li><strong>X!Tandem: Protein stP Bias</strong>: <code class="highlighter-rouge">No</code></li>
-        <li><strong>X!Tandem: Maximum Valid Expectation Value</strong>: <code class="highlighter-rouge">100</code></li>
-        <li><strong>X!Tandem: Output Proteins</strong>: <code class="highlighter-rouge">No</code></li>
-        <li><strong>X!Tandem: Output Sequences</strong>: <code class="highlighter-rouge">No</code></li>
-        <li><strong>X!Tandem: Output Spectra</strong>: <code class="highlighter-rouge">Yes</code></li>
-        <li><strong>X!Tandem peptide model refinement</strong>: <code class="highlighter-rouge">Don't refine</code></li>
+        <li>
+          <p><strong>X!Tandem: Maximum Valid Expectation Value</strong>: <code class="highlighter-rouge">100</code></p>
+        </li>
         <li>leave everything else as default</li>
       </ul>
     </li>
@@ -330,22 +311,15 @@ SearchGUI archive file) that will serve as an input for the next section, Peptid
 
 <blockquote class="comment">
   <h3 id="-comment-1"><i class="fa fa-commenting-o" aria-hidden="true"></i> Comment</h3>
-  <p>In order to maintain accuracy and effectiveness in spectral / peptide / protein identification, a
-target-decoy search strategy can be used to discern how correct and incorrect a spectral or
-peptide or protein match is. The most popular approach for generating decoy databases is the
-<em>reverse database</em> approach. Essentially, protein sequences are reversed to generate a <em>decoy</em>
-database. Any matches and their associated scores against a target and decoy database are
-noted (with the premise that matches against decoy matches are incorrect). Later the matches
-are ranked according to descending scores and <em>decoy matches</em> are used to calculate false
-discovery rate (FDR) to set a threshold for valid identifications. The FDR approach allows for a
-fairer comparison of datasets across labs, machines and proteomic workflows. Please read
-the manuscript by Elias and Gygi (2010) for more information.</p>
+  <p>Note that sequence databases used for metaproteomics are usually much larger than the excerpt used in this tutorial. When using large databases, the peptide identification step can take much more time for computation. In metaproteomics, choosing the optimal database is a crucial step of your workflow, for further reading see <a href="https://www.ncbi.nlm.nih.gov/pubmed/27824341">Timmins-Schiffman et al (2017)</a>.</p>
+
+  <p>To learn more about database construction in general, like integrating contaminant databases or using a decoy strategy for FDR searching, please consult our tutorial on <a href="https://galaxyproject.github.io/training-material/topics/proteomics/tutorials/database-handling/tutorial.html">Database Handling</a>.</p>
 
 </blockquote>
 
 <h4 id="peptideshaker">PeptideShaker</h4>
 
-<p><strong>PeptideShaker</strong> is a post-processing software tool that
+<p><a href="https://compomics.github.io/projects/peptide-shaker.html">PeptideShaker</a> is a post-processing software tool that
 processes data from the SearchGUI software tool. It serves to organize the Peptide-Spectral
 Matches (PSMs) generated from SearchGUI processing and is contained in the SearchGUI archive.
 It provides an assessment of confidence of the data, inferring proteins identified from the
@@ -360,7 +334,8 @@ PeptideShaker. A compressed file can be made containing all information needed t
 results in the standalone PeptideShaker viewer. A <code class="highlighter-rouge">mzidentML</code> file can be created that contains
 all peptide sequence matching information and can be utilized by compatible downstream
 software. Other outputs are focused on the inferred proteins identified from the PSMs, as well
-as phosphorylation reports, relevant if a phosphoproteomics experiment has been undertaken.</p>
+as phosphorylation reports, relevant if a phosphoproteomics experiment has been undertaken. 
+More detailed information on peptide inference using SearchGUI and PeptideShaker can be found in our tutorial on <a href="https://galaxyproject.github.io/training-material/topics/proteomics/tutorials/protein-id-sg-ps/tutorial.html">Peptide and Protein ID</a>.</p>
 </blockquote>
 
 <blockquote class="hands_on">
@@ -726,7 +701,11 @@ ORDER BY PSMs desc, 'DISTINCT PEPTIDES' desc
 
 <h2 id="functional-analysis">Functional Analysis</h2>
 
-<p>In the following chapter, a functional analysis will be performed in order to match the list of peptides with the correlated Gene Ontology terms.
+<p>Recent advances in microbiome research indicate that functional characterization via metaproteomics analysis has the potential to accurately
+measure the microbial response to perturbations. In particular, metaproteomics enables the estimation of the function of the microbial
+community based on expressed microbial proteome.</p>
+
+<p>In the following chapter, a functional analysis will be performed using the <strong>UniPept</strong> application <code class="highlighter-rouge">pept2prot</code> in order to match the list of peptides with the correlated Gene Ontology terms.
 This allows to get an insight of the <strong>biological process</strong>, the <strong>molecular function</strong> and the <strong>cellular component</strong> related to the sample data.</p>
 
 <blockquote class="comment">
@@ -810,7 +789,9 @@ An example file with all GO terms from 08.07.2017 named <code class="highlighter
 
 <h4 id="retrieve-go-ids-for-peptides-unipept">Retrieve GO IDs for peptides: Unipept</h4>
 
-<p>The <strong>UniPept</strong> application <code class="highlighter-rouge">pept2prot</code> can be used to receive the GO identifiers connected to the list of peptides that was generated from the Peptide Shaker result:</p>
+<p>The <strong>UniPept</strong> application <code class="highlighter-rouge">pept2prot</code> can be used to return the list of proteins containing each peptide.
+The option <code class="highlighter-rouge">retrieve extra information</code> option is set to <code class="highlighter-rouge">yes</code> so that we retrieve Gene Ontology assignments (<code class="highlighter-rouge">go_references</code>)
+for each protein.</p>
 
 <blockquote class="hands_on">
   <h3 id="-hands-on-unipept-1"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Unipept</h3>
@@ -1022,9 +1003,13 @@ related to it and the amount of PSMs for these peptides.</p>
     <li>
       <p><a href="https://z.umn.edu/gcc2017mporal">Metaproteomics community effort</a></p>
     </li>
+    <li>
+      <p><a href="https://www.ncbi.nlm.nih.gov/pubmed/28552653">Unipept</a></p>
+    </li>
   </ul>
 
 </blockquote>
+
 
 
         
