@@ -200,7 +200,7 @@ Nowadays, there are many read alignment programs for sequenced DNA, `BWA` being 
 
 To assess the similarity between the replicates sequencing datasets, it is a common technique to calculate the correlation of read counts for the different samples.
 
-We expect that the replicates of the ChIP-seq experiments should be clustered more closely to each other than the replicates of the input samples. We will be use tools from the package **deepTools** for the next few steps. More information on **deepTools** can be found [here](https://deeptools.readthedocs.io/en/latest/content/list_of_tools.html).
+We expect that the replicate samples will cluster more closely to each other than to other samples. We will be use tools from the package **deepTools** for the next few steps. More information on **deepTools** can be found [here](https://deeptools.readthedocs.io/en/latest/content/list_of_tools.html).
 
 > ### {% icon hands_on %} Hands-on: Assessing correlation between samples
 >
