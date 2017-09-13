@@ -488,7 +488,7 @@ It is available at Zenodo: [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.8
 > `OBO` files are human-readable (in addition to machine-readable) and can be opened in any text editor. They contain more information than just the name and aspect.
 >
 > In order to receive a file like we use in the tutorial for your own analysis, different tools are available to extract information from `OBO` files,
-> one of them being [ONTO-PERL](https://www.ncbi.nlm.nih.gov/labs/articles/18245124/).
+> one of them being [ONTO-PERL](https://doi.org/10.1093/bioinformatics/btn042).
 > An example file with all GO terms from 08.07.2017 named `Gene_Ontology_Terms_full_07.08.2017.tabular` can be found on the [Zenodo repository](https://doi.org/10.5281/zenodo.839701) of this tutorial as well.
 >
 {: .tip}
