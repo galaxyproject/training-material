@@ -6,7 +6,8 @@ steps:
     - title: "A tutorial on Small Genome Assembly"
       content: "This tour will walk you through the process of genome assembly and annotation.<br><br>
                 Read and Follow the instructions before clicking 'Next'<br>
-                Click 'Prev' in case you missed out on any step"
+                Click 'Prev' in case you missed out on any step. 
+                You can also find the tutorial on Small genome assembly on our <a href=\"https://galaxyproject.github.io/training-material/\" > Galaxy Training Material."
       backdrop: true
     - title: "Create a new history"
       element: '#history-options-button'
@@ -39,7 +40,7 @@ steps:
 
     - title: "Data Acquisition"
       element: "#upload-row-3 > td:nth-child(1) > div > div.upload-text > textarea"
-      intro: "Copy and pate the following link to the text area : <br>
+      intro: "Copy and paste the following links to the text area : <br>
       https://zenodo.org/record/842795/files/minion_1.2d_pass.fastq.fastqsanger <br>
       https://zenodo.org/record/842795/files/Ecoli-2_S1_L001_R2_001_subset_50000.fastq.fastqsanger <br>
       https://zenodo.org/record/842795/files/Ecoli-2_S1_L001_R1_001_subset_50000.fastq.fastqsanger <br>"
@@ -95,10 +96,9 @@ steps:
   
     - title : "Select the tool inputs"
       intro : "Select the Illumina read datasets"
-      element : "#uid-30_select"
       
     - title : "Run"
-      intro : "Click here to run the tool"
+      intro : "Click Execute to run the tool"
       element : "#execute"
 
     - title: "Read Quality"
@@ -106,13 +106,94 @@ steps:
       position: "center"
 
     - title: "Let's run the assembly !"
-      intro: "Now search for the Unicycler tool, that will allow us to perform an hybrid assembly."
+      intro: "Now search for the Unicycler tool, which will allow us to perform an hybrid assembly."
       position: "center"
       element: "#tool-search-query"
       
     - title : "Type of Data"
       intro: "Select the type of data for your single reads. For this tour we are using Paired end reads."
       position: "right"
-      element : "#select2-chosen-1"
+      element : "#select2-drop"
+      
+    - title : "Select your short read datasets"
+      intro: "Select the datasets containing your short read data : R1 for the forward reads, R2 for the reverse reads"
+      position: "right"
+      element : "#select2-drop"
+      
+    - title : "Select your long read dataset"
+      intro: "Select the datasets containing your long read data"
+      position: "right"
+      element : "#select2-drop"
+      
+    - title : "Run"
+      intro : "Click Execute to run the tool"
+      position: "right"
+      element : "#execute"  
+    
+    - title : "Wait for the assembly to run"
+      intro : "The assembly may take a couple hours to run, in the meantime, you can visit our wonderful <a href=\"https://galaxyproject.github.io/training-material/\" > Galaxy Training Material and continue your tour when the analysis is finished. "
+      position: "center"
+      
+    - title: "Assess the quality of the assembly !"
+      intro: "Now search for the Quast tool, that will provide metrics about the assembly quality."
+      position: "center"
+      element: "#tool-search-query"
+      
+    - title : "Select the assembly datasets"
+      intro: "Select the fasta file output of Unicycler"
+      position: "right"
+      element : "#select2-drop"
+      
+    - title : "Run"
+      intro : "Click Execute to run the tool"
+      position: "right"
+      element : "#execute"  
+    
+    - title: "Assembly Quality"
+      intro: "You can now visualize Quast result by clicking on the eye icon of the html output"
+      position: "center"    
       
       
+    - title: "Annotate your genome with Prokka"
+      intro: "Now search for the Prokka tool, that will allow us to perform the annotation."
+      position: "center"
+      element: "#tool-search-query"
+  
+    - title : "Select the contigs datasets"
+      intro: "Select the fasta file output of Unicycler"
+      position: "right"
+  
+    - title : "Enter the Genus Name"
+      intro: "Enter the genus of your organisme, here Escherichia"
+      position: "right"
+      
+    - title : "Enter the species Name"
+      intro: "Enter the species of your organisme, here Coli"
+      position: "right"
+      
+    - title : "Enter the Strain Name"
+      intro: "Enter the species of your organisme, here C"
+      position: "right"
+      
+    - title : "Select the usegenus option"
+      intro: "Click on the yes button to activate the --usegenus option"
+      position: "right"
+      
+    - title : "Run"
+      intro : "Click Execute to run the tool"
+      position: "right"
+      element : "#execute"  
+      
+      
+    - title : "Visualise Your result in IGV"
+      intro : "To visualize the result of your genome assembly and annotation, you need to have IGV installed on you local machine and open. You can find IGV <a href=\"http://software.broadinstitute.org/software/igv/\">here."
+      position: "center" 
+    
+    - title : "Send your genome annotation to IGV"
+      intro : "You can now open the genome annotation. As you did previously, unfold the dataset and click on the \"display with IGV local\" link."
+      position: "center" 
+      
+    - title : "Thank you!"
+      intro : "Thank you for following us on this Genome Assembly tour! You can find more information on genome assembly on our <a href=\"https://galaxyproject.github.io/training-material/\" > Galaxy Training Material."
+      position: "center" 
+    
