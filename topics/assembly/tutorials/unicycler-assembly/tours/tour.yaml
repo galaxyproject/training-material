@@ -9,29 +9,30 @@ steps:
                 Click 'Prev' in case you missed out on any step. 
                 You can also find the tutorial on Small genome assembly on our <a href=\"https://galaxyproject.github.io/training-material/\" > Galaxy Training Material."
       backdrop: true
+      
     - title: "Create a new history"
       element: '#history-options-button'
-      intro: "Let's start by creating a new history:<br>
+      content: "Let's start by creating a new history:<br>
               (History options :: Create New)"
       position: "left"
       preclick:
         - '#center-panel'
     - title: "Rename history"
       element: "#current-history-panel > div.controls > div.title > div"
-      intro: "Change the name of the new history to 'Genome Assembly', then hit return key."
+      content: "Change the name of the new history to 'Genome Assembly', then hit return key."
       position: "bottom"
 
     - title: "Data Acquisition"
       element: ".upload-button"
-      intro: "We will import sequencing data into the history we just created.<br>
+      content: "We will import sequencing data into the history we just created.<br>
               Click 'Next' and the tour will take you to the Upload screen"
-      position: "right"
+      position: "auto right "
       postclick:
         - ".upload-button"
 
     - title: "Data Acquisition"
       element: "#btn-new"
-      intro: "We will use a downsampled dataset (for quick tutorial purpose) from the Ecoli C sequencing. We are using two library of matte pair reads from Illumina sequencing, and a long read library from Oxford Nanopore sequencing .<br>
+      content: "We will use a downsampled dataset (for quick tutorial purpose) from the Ecoli C sequencing. We are using two library of matte pair reads from Illumina sequencing, and a long read library from Oxford Nanopore sequencing .<br>
               Simple click 'Next' and the Interface to enter the urls will appear.<br>
               Later on, when you want to upload other data, you can do so by clicking the 'Paste/Fetch Data' button"
       position: "top"
@@ -39,31 +40,28 @@ steps:
         - "#btn-new"
 
     - title: "Data Acquisition"
-      element: "#upload-row-3 > td:nth-child(1) > div > div.upload-text > textarea"
-      intro: "Copy and paste the following links to the text area : <br>
-      https://zenodo.org/record/842795/files/minion_1.2d_pass.fastq.fastqsanger <br>
-      https://zenodo.org/record/842795/files/Ecoli-2_S1_L001_R2_001_subset_50000.fastq.fastqsanger <br>
-      https://zenodo.org/record/842795/files/Ecoli-2_S1_L001_R1_001_subset_50000.fastq.fastqsanger <br>"
+      element: ".upload-text-content:first"
+      content: "Insert the url of the files."
       position: "top"
-
+      textinsert: |
+        https://zenodo.org/record/842795/files/minion_1.2d_pass.fastq.fastqsanger
+        https://zenodo.org/record/842795/files/Ecoli-2_S1_L001_R2_001_subset_50000.fastq.fastqsanger
+        https://zenodo.org/record/842795/files/Ecoli-2_S1_L001_R1_001_subset_50000.fastq.fastqsanger
       
     - title: "Data Acquisition"
       element: "button#btn-start"
-      intro: "Click on 'Start' to upload the data into your Galaxy history."
+      content: "Click on 'Start' to upload the data into your Galaxy history."
       position: "bottom"
-      postclick:
-        - "#btn-start"
 
     - title: "Data Acquisition"
       element: "button#btn-close"
-      intro: "The upload may take awhile.<br>
+      content: "The upload may take awhile.<br>
               Hit the close button when you see that the files are uploaded into your history."
       position: "bottom"
-      postclick:
-        - "#btn-close"
+      
     - title: "Edit Attributes"
       element: '#current-history-panel'
-      intro: "You've acquired your data.<br>
+      content: "You've acquired your data.<br>
               Now let's 'Edit Attributes' of the uploaded files.<br>
               We will learn to edit the name, Database/Build and Datatype of all these files.<br><br>
               For each of the uploaded files:<br>
@@ -73,127 +71,128 @@ steps:
       position: "left"
     - title : "Change Datatype"
       element : "#datatype"
-      intro : "In the 'Datatype' tab :<br>
+      content : "In the 'Datatype' tab :<br>
                 - Specify the new datatype (here fastqsanger)"
-      position: "right"
+      position: "auto right "
       
     - title : "Save the attribute changes"
       element : '#attributes > div.toolFormBody > form:nth-child(1) > div:nth-child(6) > input[type="submit"]'
-      intro : "Save your changes"
+      content : "Save your changes"
 
     - title : "Start the Analysis !"
-      intro: "Let's start the analysis by assessing the quality of Illumina reads."
+      content: "Let's start the analysis by assessing the quality of Illumina reads."
       position: "center"
       
     - title : "Search a Tool"
-      intro: "Search for a tool to evaluate read quality : Type FastQC in the search field."
-      position: "right"
+      content: "Search for a tool to evaluate read quality : Type FastQC in the search field."
+      position: "auto right "
       element : "#tool-search-query"
 
     - title : "Run the tool on Multiple datasets"
-      intro : "To run the analysis on several datasets, here our two Illumina libraries, click on the 'Multiple Datasets icon.'"
+      content : "To run the analysis on several datasets, here our two Illumina libraries, click on the 'Multiple Datasets icon.'"
       element : "#uid-27 > div.ui-form-field > div.ui-select-content > div.ui-options > div.btn-group.ui-radiobutton > label.btn.btn-default.ui-option.active"
   
     - title : "Select the tool inputs"
-      intro : "Select the Illumina read datasets"
+      content : "Select the Illumina read datasets"
       
     - title : "Run"
-      intro : "Click Execute to run the tool"
+      content : "Click Execute to run the tool"
       element : "#execute"
 
     - title: "Read Quality"
-      intro: "You can now visualize the Quality control result by clicking on the eye icon of the Fastqc webpage output"
+      content: "You can now visualize the Quality control result by clicking on the eye icon of the Fastqc webpage output. For more information on the quality metrics of FastQC, see <a href=\"https://biof-edu.colorado.edu/videos/dowell-short-read-class/day-4/fastqc-manual\"> FastQC Manual."
       position: "center"
 
     - title: "Let's run the assembly !"
-      intro: "Now search for the Unicycler tool, which will allow us to perform an hybrid assembly."
+      content: "Now search for the Unicycler tool, which will allow us to perform an hybrid assembly."
       position: "center"
       element: "#tool-search-query"
       
     - title : "Type of Data"
-      intro: "Select the type of data for your single reads. For this tour we are using Paired end reads."
-      position: "right"
+      content: "Select the type of data for your single reads. For this tour we are using Paired end reads."
+      position: "auto right "
       element : "#select2-drop"
       
     - title : "Select your short read datasets"
-      intro: "Select the datasets containing your short read data : R1 for the forward reads, R2 for the reverse reads"
-      position: "right"
+      content: "Select the datasets containing your short read data : R1 for the forward reads, R2 for the reverse reads"
+      position: "auto right "
       element : "#select2-drop"
       
     - title : "Select your long read dataset"
-      intro: "Select the datasets containing your long read data"
-      position: "right"
+      content: "Select the datasets containing your long read data"
+      position: "auto right "
       element : "#select2-drop"
       
     - title : "Run"
-      intro : "Click Execute to run the tool"
-      position: "right"
+      content : "Click Execute to run the tool"
+      position: "auto right "
       element : "#execute"  
     
     - title : "Wait for the assembly to run"
-      intro : "The assembly may take a couple hours to run, in the meantime, you can visit our wonderful <a href=\"https://galaxyproject.github.io/training-material/\" > Galaxy Training Material and continue your tour when the analysis is finished. "
+      content : "The assembly may take a couple hours to run, in the meantime, you can visit our wonderful <a href=\"https://galaxyproject.github.io/training-material/\" > Galaxy Training Material and continue your tour when the analysis is finished. "
       position: "center"
       
     - title: "Assess the quality of the assembly !"
-      intro: "Now search for the Quast tool, that will provide metrics about the assembly quality."
+      content: "Now search for the Quast tool, that will provide metrics about the assembly quality."
       position: "center"
       element: "#tool-search-query"
       
     - title : "Select the assembly datasets"
-      intro: "Select the fasta file output of Unicycler"
-      position: "right"
+      content: "Select the fasta file output of Unicycler"
+      position: "auto right "
       element : "#select2-drop"
       
     - title : "Run"
-      intro : "Click Execute to run the tool"
-      position: "right"
+      content : "Click Execute to run the tool"
+      position: "auto right "
       element : "#execute"  
     
     - title: "Assembly Quality"
-      intro: "You can now visualize Quast result by clicking on the eye icon of the html output"
+      content: "You can now visualize Quast result by clicking on the eye icon of the html output. For more information on the Quast output, see <a href=\"http://quast.bioinf.spbau.ru/manual.html#sec3\"> Quast Manual. "
       position: "center"    
       
       
     - title: "Annotate your genome with Prokka"
-      intro: "Now search for the Prokka tool, that will allow us to perform the annotation."
+      content: "Now search for the Prokka tool, that will allow us to perform the annotation."
       position: "center"
       element: "#tool-search-query"
   
     - title : "Select the contigs datasets"
-      intro: "Select the fasta file output of Unicycler"
-      position: "right"
+      content: "Select the fasta file output of Unicycler"
+      position: "auto right "
   
     - title : "Enter the Genus Name"
-      intro: "Enter the genus of your organisme, here Escherichia"
-      position: "right"
+      content: "Enter the genus of your organisme, here Escherichia"
+      position: "auto right "
       
     - title : "Enter the species Name"
-      intro: "Enter the species of your organisme, here Coli"
-      position: "right"
+      content: "Enter the species of your organisme, here Coli"
+      position: "auto right "
       
     - title : "Enter the Strain Name"
-      intro: "Enter the species of your organisme, here C"
-      position: "right"
+      content: "Enter the species of your organisme, here C"
+      position: "auto right "
       
     - title : "Select the usegenus option"
-      intro: "Click on the yes button to activate the --usegenus option"
-      position: "right"
+      content: "Click on the yes button to activate the --usegenus option"
+      position: "auto right "
       
     - title : "Run"
-      intro : "Click Execute to run the tool"
-      position: "right"
+      content : "Click Execute to run the tool"
+      position: "auto right "
       element : "#execute"  
       
       
     - title : "Visualise Your result in IGV"
-      intro : "To visualize the result of your genome assembly and annotation, you need to have IGV installed on you local machine and open. You can find IGV <a href=\"http://software.broadinstitute.org/software/igv/\">here."
+      content : "To visualize the result of your genome assembly and annotation, you need to have IGV installed on you local machine and open. You can find IGV <a href=\"http://software.broadinstitute.org/software/igv/\">here."
       position: "center" 
     
     - title : "Send your genome annotation to IGV"
-      intro : "You can now open the genome annotation. As you did previously, unfold the dataset and click on the \"display with IGV local\" link."
+      content : "You can now open the genome annotation. As you did previously, unfold the dataset and click on the \"display with IGV local\" link."
       position: "center" 
       
     - title : "Thank you!"
-      intro : "Thank you for following us on this Genome Assembly tour! You can find more information on genome assembly on our <a href=\"https://galaxyproject.github.io/training-material/\" > Galaxy Training Material."
-      position: "center" 
+      content : "Thank you for following us on this Genome Assembly tour! You can find more information on genome assembly on our <a href=\"https://galaxyproject.github.io/training-material/\" > Galaxy Training Material."
+      position : "center" 
+      backdrop : true
     
