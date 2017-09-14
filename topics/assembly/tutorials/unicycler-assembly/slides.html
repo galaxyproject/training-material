@@ -1077,3 +1077,67 @@ We can see the average quality per read is high for our library. This metric can
 ![FastQC result](../../images/pertile_qual.png)
 
 The color scale goes from blue to red, the blue colors describing tiles with above average quality and the red color describing tiles with below average quality. We can see here our read have a above average quality, except for one green tile that describe an average quality of read.
+
+
+---
+
+# 3. Assembly with Unicycler
+
+Once you are satisfied with the quality of your reads, you can use [Unicycler](https://github.com/rrwick/Unicycler) to perform the assembly of your genome.
+Unicycler is a pipeline dedicated to the assembly of bacterial genome using Illumina only or Illumina and long reads. 
+Unicycler is pipeline based on [Spades](https://doi.org/10.1089/cmb.2012.0021), that add specific functions for bacterial genomes : like the circularization of replicons
+or th handling of plasmid rich genomes.
+
+Possible inputs :
+> *     Illumina short reads
+> *     Long reads (PacBio or Nanopore)
+> *     Illumina short reads and Long reads together
+
+Unicycler is based on [De Bruijn Graph Assembly](https://galaxyproject.github.io/training-material/topics/assembly/tutorials/debruijn-graph-assembly/slides.html#46) 
+
+---
+
+## 4. Assembly quality with Quast
+
+Once you have performed your assembly, you can generate quality statistics with the tool [Quast](https://doi.org/10.1093/bioinformatics/btt086).
+
+---
+
+.pull-left[
+
+Quast provides a set of metrics :
+> * Number of contigs 
+> * Largest of Contigs size
+> * Total Length of the assembly
+> * N50 : Length of the contig such as all the contigs of the same size or longer cover 50% of the genome
+> * N75 : Same thing than N50 for 75% of the genome
+> * L50 : Number of contigs whose sum length is N50
+> * L75 : Number of contigs whose sum length is N75
+> * GC % 
+> * Number of mismatches
+]
+
+.pull-right[ ![Quast output](../../images/quast_output.png)]
+
+
+---
+
+## 5. Annotation with Prokka
+
+[Prokka](https://doi.org/10.1093/bioinformatics/btu153) is a tool dedicated to prokaryotic genome annotation. It identifies the ORFs and RNA regions on contigs, translate them to protein sequences and then perform an homology searching for their identification. The identification and translation is done with [Prodigal](https://github.com/hyattpd/Prodigal) program and the homology search with BLAST and HMMER against custom databases and several public databases : 
+> * [CDD](https://www.ncbi.nlm.nih.gov/cdd/)
+> * [PFAM](http://pfam.xfam.org/)
+> * [TIGRFAM](http://www.jcvi.org/cgi-bin/tigrfams/index.cgi)
+
+
+---
+
+## 6. Visualization in IGV
+
+To visualize The result of you assembly and annotation, you can send your dataset from Galaxy to you local instance of IGV. In order to do that : 
+> * Install and/or launch [IGV](http://software.broadinstitute.org/software/igv/) on your computer
+> * Click on the "display with IGV" link on the fasta file output of Unicycler 
+> * Click on the "display with IGV" link on the gff3 file output of Prokka
+
+![IGV zoomed visualization](../../images/zoomed_igv.png)
+
