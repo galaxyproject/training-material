@@ -266,7 +266,10 @@ We have quite some files now and should take care that we don't loose track. Let
 
 ## Analysis
 
-Our goal is still to compare the 2 region file (the BED file and the peak file) to identify to which genes (in the BED file) the peaks are related to. But before comparing the 2 file, we need add to extend the genes in the BED file to add the promoter regions, where the peaks will be located.
+Our goal is still to compare the 2 region files (the genes file and the peak file from the publication)
+to know which peaks are related to which genes. If you really only want to know which peaks are located **inside** genes you 
+can skip the next step. Otherwise, it might be reasonable to include the promoter region into the comparison, *e.g.* because 
+you want to include Transcriptions factors in ChIP-seq experiments.
 
 > ### {% icon hands_on %} Hands-on: Add promoter region to gene records
 >
