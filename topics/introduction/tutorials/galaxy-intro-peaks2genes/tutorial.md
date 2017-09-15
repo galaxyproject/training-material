@@ -9,7 +9,7 @@ tutorial_name: galaxy-intro-peaks2genes
 
 We stumbled upon a paper [Li et al., Cell Stem Cell 2012](https://www.ncbi.nlm.nih.gov/pubmed/22862943) that contains the analysis of possible target genes of an interesting protein in mice. The targets were obtained by ChIP-seq and the raw data is available through [GEO](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE37268).
 The list of genes however is neither in the supplement of the paper nor part of the GEO submission.
-The closest thing we can find is a list of the regions where the signal is significantly enriched (so called *peaks*):
+The closest thing we could find is a list of the regions where the signal is significantly enriched (so called *peaks*):
 
 1 | 3660676 | 3661050 | 375 | 210 | 62.0876250438913 | -2.00329386666667
 1 | 3661326 | 3661500 | 175 | 102 | 28.2950833625942 | -0.695557142857143
@@ -52,7 +52,7 @@ Let's start with a fresh history.
 >
 > 2. **Rename your history** to make it easy to recognize
 >
->    > ### {% icon tip %} Rename an history
+>    > ### {% icon tip %} Rename a history
 >    >
 >    > * Click on the title of the history (by default the title is *Unnamed history*)
 >    > 
@@ -127,7 +127,7 @@ we also need a list of genes in mice, which we can obtain from UCSC.
 >
 >     ![UCSC table browser interface](../../images/intro_02.png)
 >
-> 2. Select
+> 2. Set the following options:
 >     - **clade** to `Mammal`
 >     - **genome** to `Mouse`
 >     - **assembly** to `July 2007 (NCBI37/mm9)`
@@ -209,7 +209,7 @@ As we directly see, the peak file lacks `chr` before any chromosome number. But 
 
 > ### {% icon hands_on %} Hands-on: View end of file
 >
-> 1. Search for the **Select last** {% icon tool %} tool in the tool panel to the left
+> 1. Search for the **Select last** {% icon tool %} tool in the tool panel on the left
 > 2. Select the following settings
 >     - **Text file** to our peak file `GSE37268_mof3.out.hpeak.txt`
 >     - **Operation**: `Keep last lines`
@@ -261,14 +261,14 @@ In order to convert the chromosome names we have therefore two things to do:
 >
 {: .hands_on}
 
-We have quite some files now and should take care that we don't loose track. Let's rename our latest result to something more handy, *e.g.* `Peak regions`.
+We have quite some files now and should take care that we don't loose track. Let's rename our latest result to something more handy, e.g. `Peak regions`.
 
 
 ## Analysis
 
 Our goal is still to compare the 2 region files (the genes file and the peak file from the publication)
 to know which peaks are related to which genes. If you really only want to know which peaks are located **inside** genes you 
-can skip the next step. Otherwise, it might be reasonable to include the promoter region into the comparison, *e.g.* because 
+can skip the next step. Otherwise, it might be reasonable to include the promoter region into the comparison, e.g. because 
 you want to include Transcriptions factors in ChIP-seq experiments.
 
 > ### {% icon hands_on %} Hands-on: Add promoter region to gene records
@@ -359,7 +359,7 @@ Since we have some nice data, let's draw a barchart out of it!
 > ### {% icon hands_on %} Hands-on: Draw barchart
 >
 > 1. Select the **Visualize icon** at the latest history item and select `Charts`
-> 2. Choose a title at **Provide a title**, *e.g.* `Gene counts per chromosome`
+> 2. Choose a title at **Provide a title**, e.g. `Gene counts per chromosome`
 > 3. Switch to the **Select data** tab and play around with the settings
 > 4. Press **Visualize** and the top right to inspect your result
 > 5. Click on **Editor** and repeat with different settings
@@ -387,13 +387,13 @@ Galaxy makes this very simple with the `Extract workflow` option. This means tha
 >
 > 3. **Uncheck** any steps that shouldn't be included in the workflow
 >
->    Since we did some steps which where specific to our custom peak file, we might to exclude:
+>    Since we did some steps which where specific to our custom peak file, we might want to exclude:
 >    - **Select last**
 >    - all **Replace Text** steps
 >    - **Convert Genomic Intervals to strict BED**
 >    - **Get flanks**
 >
-> 4. Rename the workflow to something descriptive, *e.g.* `From peaks to genes`
+> 4. Rename the workflow to something descriptive, e.g. `From peaks to genes`
 >
 > 5. Click on the **Create Workflow** button near the top.
 >
@@ -477,7 +477,7 @@ Now we cut out just the chromosome plus the start and end of the summit:
 >   - **Cut columns**: `c1,c8,c9`
 >   - **From**: our latest history item
 > 
->    The output from **Cut** will have the format `tabular`. 
+>    The output from **Cut** will be in `tabular` format. 
 >
 > 2. Change the format to `interval` since that's what the tool **Intersect** expects.
 {: .hands_on}
@@ -509,8 +509,8 @@ It's time to reuse the workflow we created earlier.
 > ### {% icon hands_on %} Hands-on: Run a workflow
 > 1. Open the workflow menu (top menu bar)
 > 2. Find the workflow you made in the previous section, and select the option **Run**
-> 2. Choose as inputs our imported gene BED file and the result of the **Cut** tool
-> 3. Click **Run workflow**
+> 3. Choose as inputs our imported gene BED file and the result of the **Cut** tool
+> 4. Click **Run workflow**
 >
 >    The outputs should appear in the history but it might take some time until they are finished.
 >
