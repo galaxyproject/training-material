@@ -138,15 +138,15 @@ we also need a list of genes in mice, which we can obtain from UCSC.
 >     - **output format** to `BED - browser extensible data`
 >     - **Send output to** to `Galaxy` checked
 >
-> 2. Click on the **get output** button
+> 3. Click on the **get output** button
 >
 >    You will see the next screen:
 >
 >    ![Output settings](../../images/intro_03.png)
 >
-> 3. Make sure that **Create one BED record per** is set to `Whole Gene` and click on the **Send Query to Galaxy** button.
+> 4. Make sure that **Create one BED record per** is set to `Whole Gene` and click on the **Send Query to Galaxy** button.
 >
-> 3. Rename our dataset to something more recognizable
+> 5. Rename our dataset to something more recognizable
 >    - Click on the **pencil icon** to edit a file's attributes.
 >      ![Pencil icon](../../images/edit_icon.png)
 >    - In the next screen change the name of the dataset to `Genes`.
