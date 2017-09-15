@@ -7,9 +7,10 @@ tutorial_name: estrogen-receptor-binding-site-identification
 # Introduction
 {:.no_toc}
 
-This exercise uses the dataset from the Nature publication by [Ross-Inness et al., 2012](https://www.ncbi.nlm.nih.gov/pubmed/22217937). The goal of this article was to identify the binding sites of the Estrogen receptor, a transcription factor known to be associated with different types of breast cancer.
+This exercise uses the dataset from the Nature publication by [Ross-Inness et al., 2012](https://www.ncbi.nlm.nih.gov/pubmed/22217937).
+The goal of this article was to identify the binding sites of the Estrogen receptor, a transcription factor known to be associated with different types of breast cancer.
 
-To this end, ChIP-seq was performed in breast cancer cells from 4 patients of different outcomes (good and poor). For each ChIP-seq experiment there is a matching technical control, *i.e.* there are 8 samples in total:
+To this end, ChIP-seq was performed in breast cancer cells from 4 patients of different outcomes (good and poor). For each ChIP-seq experiment there is a matching technical control, i.e. there are 8 samples in total:
 
 Patient | Outcome | Treatment
 --- | --- | ---
@@ -22,9 +23,10 @@ Patient 3 | Poor | input (no immunoprecipitation step)
 Patient 4 | Poor | ChIP ER
 Patient 4 | Poor | input (no immunoprecipitation step)
 
-Half of which are the so-called 'input' samples for which the same treatment as the ChIP-seq samples was done except for the immunoprecipitation step. The input files are used to identify sequencing bias like open chromatin or GC bias.
+Half of which are the so-called 'input' samples for which the same treatment as the ChIP-seq samples was done except for the immunoprecipitation step.
+The input files are used to identify potential sequencing bias, like open chromatin or GC bias.
 
-Because of the long processing time for the large original files, we have downsample the original data for practice and provide already processed data for subsequent steps.
+Because of the long processing time for the large original files, we have downsampled the original data and provide already processed data for subsequent steps.
 
 > ### Agenda
 >
@@ -35,11 +37,11 @@ Because of the long processing time for the large original files, we have downsa
 
 # Quality control and treatment of the sequences
 
-The first step of any ChIP-Seq data analysis is control of the data quality.
+The first step of any ChIP-Seq data analysis is quality control of the raw sequencing data.
 
 > ### {% icon hands_on %} Hands-on: Quality control
 >
-> 1. Create and name a new history for this tutorial
+> 1. Create a new history for this tutorial and give it a proper name
 > 2. Import `patient1_input_good_outcome` from [Zenodo]() or from the data library into the history
 >
 >    > ### {% icon tip %} Tip: Importing data via links
@@ -65,6 +67,7 @@ The first step of any ChIP-Seq data analysis is control of the data quality.
 >
 >    As default, Galaxy takes the link as name, so rename them. 
 >
+>
 > 3. Inspect the file by clicking on the `eye` icon
 > 
 >    > ### {% icon question %} Questions
@@ -75,23 +78,23 @@ The first step of any ChIP-Seq data analysis is control of the data quality.
 >    >    <details>
 >    >    <summary>Click to view answers</summary>
 >    >    <ol type="1">
->    >    <li>The DNA sequences are stored in the second line of every 4-line groups</li>
->    >    <li>This file is a FastQ file. This type of file stores sequence information. Each sequence is represented by a group of 4 lines with the 1st line being the sequence id, the second the sequence of nucleotides, the third a transition line and the last one a sequence of quality score for each nucleotide</li>
+>    >    <li>The DNA sequences are stored in the second line of every 4-line group</li>
+>    >    <li>This file is called a <a href="https://en.wikipedia.org/wiki/FASTQ_format">FastQ file</a>. It stores sequence information and quality information. Each sequence is represented by a group of 4 lines with the 1st line being the sequence id, the second the sequence of nucleotides, the third a transition line and the last one a sequence of quality score for each nucleotide.</li>
 >    >    </ol>
 >    >    </details>
 >    {: .question}
 >
-> 4. **FastQC** {% icon tool %} with
+> 4. Run **FastQC** {% icon tool %} with
 >    - "Short read data from your current history" to the imported file
 >
 >    Inspect the generated files
 {: .hands_on}
 
-It is often necessary to trim sequenced read, for example, to get rid of bases that were sequenced with high uncertainty (= 'low quality bases').
+It is often necessary to trim sequenced read, for example, to get rid of bases that were sequenced with high uncertainty (= low quality bases).
 
 > ### {% icon hands_on %} Hands-on: Quality control
 >
-> 1. **Trim Galore!** {% icon tool %} with
+> 1. Run **Trim Galore!** {% icon tool %} with
 >    - "Is this library paired- or single-end?" to `Single-end`
 >    - "Reads in FASTQ format" to the imported file
 >    - "Trim Galore! advanced settings" to `Full parameter list`
@@ -153,24 +156,24 @@ The reads have a direction: they are mapped to the forward or reverse strand, re
 
 > ### {% icon question %} Questions
 >
-> 1. Some reads have lines over them. Why?
+> 1. Some reads have colored lines included. What is this?
 >
 >    <details>
 >    <summary>Click to view answers</summary>
 >    <ol type="1">
->    <li>Try to zoom in in one of those lines to identify the reason for these</li>
+>    <li>Try to zoom in in one of those lines and you will see the answer!</li>
 >    </ol>
 >    </details>
 {: .question}
 
 > ### {% icon comment %} Comments
-> Because the number of reads over a region can be quite large, the IGV browser by default only allows to see the reads that fall into a small window. This behaviour can, in principle, be changed in the preferences panel.
+> Because the number of reads over a region can be quite large, the IGV browser by default only allows to see the reads that fall into a small window. This behaviour can be changed in the IGV preferences panel.
 {: .comment}
 
 
 ## Inspection of the SAM format
 
-As mentioned above, you can convert the binary BAM file into a simple (but large!) text file, which is called a SAM (Sequence Alignment Map) file.
+As mentioned above, you can convert the binary BAM file into a simple (but large!) text file, which is called a [SAM](https://en.wikipedia.org/wiki/SAM_(file_format)) (Sequence Alignment Map) file.
 
 > ### {% icon hands_on %} Hands-on: Conversion into a SAM file
 >
@@ -187,19 +190,34 @@ A SAM file is a file with
 - A header with the chromosome names and lengths
 - A file content as a tabular file with the location and other information of each read found in the FASTQ file and the mapping information
 
-**Add a question box??**
+> ### {% icon question %} Questions
+>
+> 1. Which information do you find in a SAM/BAM file? What is the additional information compared to a FASTQ file.
+>
+>    <details>
+>    <summary>Click to view answers</summary>
+>    <ol type="1">
+>       <li>Sequences and Quality information, like FASTQ</li>
+>       <li>Mapping information; Location of the read on the chromosome; Mapping quality ...</li>
+>       <li>For more information please see <a href="https://en.wikipedia.org/wiki/SAM_(file_format)">https://en.wikipedia.org/wiki/SAM_(file_format)</a></li>
+>    </ol>
+>    </details>
+{: .question}
 
-# Control of the quality of the ChIP-seq
+# ChIP-seq Quality Control
 
-We checked the quality of the sequencing in the first step. We know would like to test the quality of the ChIP-seq preparation of the samples.
+We already checked the quality of the raw sequencing reads in the first step.
+Now we would like to test the quality of the ChIP-seq preparation, to know if your ChIP-seq samples are more enriched than the control (input) samples.
 
 ## Correlation between samples
 
-To assess the similarity between the replicates of the ChIP-seq and the input, respectively, it is a common technique to calculate the correlation of read counts on different regions for the different samples. We expect that the replicates of the ChIP-seq experiments should be clustered more closely to each other than the replicates of the input sample.
+To assess the similarity between the replicates of the ChIP and the input, respectively, it is a common technique to calculate the correlation of
+read counts on different regions for all different samples.
+We expect that the replicates of the ChIP-seq experiments should be clustered more closely to each other than the replicates of the input sample.
+That is, because the input samples should not have enriched regions included - remember the immuno-precipitation step was skiped during the sample preparation.
 
-**Not really clear for me... Add a bit more details? why such step? how such step is done?**
-
-To do that, we need to run the previous steps (quality control and mapping) on each sample. To save time, we already did that and we can now work directly on the BAM files of the 8 samples
+To do that, we need at first to catch up for all our samples and re-run the previous steps (quality control and mapping) on each sample.
+To save time, we already did that and we can now work directly on the BAM files of the 8 samples
 
 > ### {% icon hands_on %} Hands-on: Correlation between samples
 >
@@ -221,19 +239,20 @@ To do that, we need to run the previous steps (quality control and mapping) on e
 > 4. **plotCorrelation** {% icon tool %} with
 >    - "Matrix file from the multiBamSummary tool" to the generated multiBamSummary output
 >    
->    Feel free to try different parameters
+>    Feel free to try different parameters.
 {: .hands_on}
 
 > ### {% icon question %} Questions
 > 
 > ![Output for plotCorrelation with the correlation scores between the 8 samples](../../images/estrogen-receptor-binding-site-identification/plotCorrelation_output.png "Correlation scores between the 8 samples")
 >
-> 1. How are clustered the samples? Does that correspond to the expectations?
+> 1. How are your samples clustered? Does that correspond to your expectations?
 >
 >    <details>
 >    <summary>Click to view answers</summary>
 >    <ol type="1">
->    <li></li>
+>       <li>Badly, this is due to the subsampling of our data. You should expect better results from your real data.</li>
+>       <li>Expected is that your inputs and your ChIP samples cluster together.</li>
 >    </ol>
 >    </details>
 {: .question}
@@ -244,18 +263,24 @@ To do that, we need to run the previous steps (quality control and mapping) on e
 
 ## GC bias assessment
 
-A common problem of PCR-based protocols is the observation that GC-rich regions tend to be amplified more readily than GC-poor regions. We need to check that our samples do not have more reads from regions of the genome with high GC. 
+A common problem of PCR-based protocols is the observation that GC-rich regions tend to be amplified more readily than GC-poor regions.
+We need to check that our samples do not have more reads from regions of the genome with high GC.
 
-For practical reasons, we will focus here only on one of the BAM files, an input file.
+> ### {% icon comment %} Comments
+> GC bias was for many years a big problem, but recent advances in sample preparation have solved this problem to a degree that you can skip this step more often.
+{: .comment}
+
+For practical reasons, we will focus here only on one of our BAM files. With real data you should repeat these steps for all your samples.
 
 > ### {% icon question %} Questions
 > 
-> 1. Can you guess why it makes more sense to check the input file?
+> 1. Can you guess why it makes more sense to check the input files for GC bias?
 >
 >    <details>
 >    <summary>Click to view answers</summary>
 >    <ol type="1">
->    <li>Only the bias induced by the PCR-based protocols, nothing added with the immunoprecipation step (because none in the input file) ????</li>
+>       <li>We only want to assess the bias induced by the PCR-based protocols. This is not possible with the ChIP samples, as the enriched regions
+>        (binding sites) can have a potential GC enrichment on their own.</li>
 >    </ol>
 >    </details>
 {: .question}
@@ -272,7 +297,7 @@ For practical reasons, we will focus here only on one of the BAM files, an input
 >
 >    > ### {% icon question %} Questions
 >    >
->    > ![Output for computeGCbias with the GC bias estimation](../../images/estrogen-receptor-binding-site-identification/computeGCbias_output.png "Estimation of the GC bias for the input sample for the Patient 1")
+>    > ![Output for computeGCbias with the GC bias estimation](../../images/estrogen-receptor-binding-site-identification/computeGCBias_output.png "Estimation of the GC bias for the input sample for the Patient 1")
 >    >
 >    > 1. Does this dataset have a GC bias?
 >    >
@@ -314,9 +339,8 @@ The plotFingerprint tool generates a fingerprint plot. You need to intepret it t
 >
 >    <details>
 >    <summary>Click to view answers</summary>
->    <ol type="1">
->    <li>The difference between input and ChIP signal is not totally clear. 20% of the entire chromosome do not have any read (curve rise start)</li>
->    </ol>
+>       The difference between input and ChIP signal is not totally clear. 20% of chromosome 1 are not sequenced
+>       at all and the ChIP signal is only slightly more enrichted then the input.
 >    </details>
 {: .question}
 
@@ -326,21 +350,21 @@ The plotFingerprint tool generates a fingerprint plot. You need to intepret it t
 {: .hands_on}
 
 
-# Information extraction (rename!!!)
+# Normalization and peak calling
 
-We would like to know where are the binding site of the estrogen. We need then to extract which parts of the genome have been enriched (more reads mapped on them) within the samples that underwent immunoprecipitation. 
+We would like to know where the binding sites of the estrogen receptor are located. For this we need 
+to extract which parts of the genome have been enriched (more reads mapped) within the samples that underwent immunoprecipitation. 
 
-To extract such information, there is 3 possible processes:
+For the normalization we have two options.
 
 1. Normalization by sequencing depth
-2. Normalization by the coverage file
-3. Enriched region calling
+2. Normalization by input file
 
-Here we will only do this extraction only on the data for the Patient 1. But the same steps can be done for all the patients.
 
 ## Generation of coverage files normalized by sequencing depth
 
-We first need to make the samples comparable. Indeed, the different samples have usually a different sequencing depth, *i.e.* a different number of reads. These differences can bias the interpretation of the number of reads mapped on a genome portion.
+We first need to make the samples comparable. Indeed, the different samples have usually a different sequencing depth, i.e. a different number of reads.
+These differences can bias the interpretation of the number of reads mapped to a specific genome region.
 
 > ### {% icon hands_on %} Hands-on: Coverage file normalization
 >
@@ -370,12 +394,12 @@ We first need to make the samples comparable. Indeed, the different samples have
 >
 >    > ### {% icon question %} Questions
 >    >
->    > 1. What are the different columns 
+>    > 1. What are the different columns of a `bedgraph` file?
 >    >
 >    >    <details>
 >    >    <summary>Click to view answers</summary>
 >    >    <ol type="1">
->    >    <li>...</li>
+>    >      <li>chrom, chromStart, chromEnd and a data value</li>
 >    >    </ol>
 >    >    </details>
 >    {: .question}
@@ -385,13 +409,12 @@ We first need to make the samples comparable. Indeed, the different samples have
 >
 >    > ### {% icon question %} Questions
 >    >
->    > 1. Add a question
+>    > 1. What is a bigWig file?
 >    >
 >    >    <details>
 >    >    <summary>Click to view answers</summary>
->    >    <ol type="1">
->    >    <li>And the answer</li>
->    >    </ol>
+>    >    A bigWig file is a compressed bedgraph file. Similar in relation as BAm to SAM, but this time just for coverage data. This means bigWig and bedgraph
+>    >    files are much smaller than BAM or SAM files.
 >    >    </details>
 >    {: .question}
 >
@@ -428,17 +451,6 @@ To extract only the information induced by the immunoprecipitation, we normalize
 >
 >    Remember that the bigWig file contains only the signal on chromosome 11!
 >
->    > ### {% icon question %} Questions
->    >
->    > 1. Add a question
->    >
->    >    <details>
->    >    <summary>Click to view answers</summary>
->    >    <ol type="1">
->    >    <li>And the answer</li>
->    >    </ol>
->    >    </details>
->    {: .question}
 {: .hands_on}
 
 We would like now to visualize our coverage as an heatmap.
@@ -474,20 +486,8 @@ We would like now to visualize our coverage as an heatmap.
 >    With this option, it considers only those genomic positions before (downstream) and/or after (upstream) a reference point (*e.g.* TSS, which corresponds to the annotated gene start in our case)
 {: .hands_on}
 
-> ### {% icon question %} Questions
-> 
-> 1. Add a question to help heatmap interpretation
-> 1. Add a question to relate the heatmap to the biological question...
->
->    <details>
->    <summary>Click to view answers</summary>
->    <ol type="1">
->    <li>Add the answer</li>
->    </ol>
->    </details>
-{: .question}
 
-## Enriched regions (peaks) calling
+## Call enriched regions (peaks)
 
 We can also call the enriched regions, or peaks, found in the ChIP-seq samples. 
 
@@ -509,32 +509,11 @@ We can also call the enriched regions, or peaks, found in the ChIP-seq samples.
 >
 > 2. **IGV** {% icon tool %} to inspect with the signal coverage and log2 ratio tracks
 >
->    > ### {% icon question %} Questions
->    >
->    > 1. Do the called peaks match your expectation based on the signal coverage and log2 ratio tracks?
->    >
->    >    <details>
->    >    <summary>Click to view answers</summary>
->    >    <ol type="1">
->    >    <li>And the answer</li>
->    >    </ol>
->    >    </details>
->    {: .question}
 {: .hands_on}
 
 The called peak regions can be filtered by, *e.g.* fold change, FDR and region length for further downstream analysis.
 
-> ### {% icon question %} Questions
-> 
-> 1. Add a question to relate to the biological question...
->
->    <details>
->    <summary>Click to view answers</summary>
->    <ol type="1">
->    <li>Add the answer</li>
->    </ol>
->    </details>
-{: .question}
+
 
 # Conclusion
 {:.no_toc}
