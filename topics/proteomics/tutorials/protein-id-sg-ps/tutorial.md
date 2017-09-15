@@ -15,10 +15,12 @@ Identifying the proteins contained in a sample is an important step in any prote
 4. Protein inference
 
 A plethora of different software solutions exists for each step. In this tutorial, we will show how to
-use ***msconvert*** {% icon tool %} and ***PeakPickerHiRes*** {% icon tool %} for step 1,
-***Search GUI*** {% icon tool %} and ***Peptide Shaker*** {% icon tool %} for the steps 2-4.
+use the [ProteoWizard](http://proteowizard.sourceforge.net/) tool MSconvert and the [OpenMS](https://openms.de) tool [PeakPickerHiRes](http://ftp.mi.fu-berlin.de/pub/OpenMS/release-documentation/html/TOPP_PeakPickerHiRes.html) for step 1, and the [Compomics](https://compomics.com/) tools [SearchGUI](https://compomics.github.io/projects/searchgui.html) and [PeptideShaker](https://compomics.github.io/projects/peptide-shaker.html), for the steps 2-4.
+
+For an alternative ID pipeline using only tools provided by the [OpenMS software suite](https://openms.de), please consult [this tutorial](../protein-id-oms/tutorial.md).
 
 # Input data
+{:.no_toc}
 
 As an example dataset, we will use an LC-MS/MS analysis of HeLa cell lysate published
 in [Vaudel et al., 2014, Proteomics](https://www.ncbi.nlm.nih.gov/pubmed/24678044). Detailed information
@@ -40,7 +42,7 @@ you can use the constructed database before the **DecoyDatabase** {% icon tool %
 
 # Preparing raw data
 
-Raw data conversion is the first step of any proteomic data analysis. The most common converter is MSConvert, the format to convert to is mzML. Search GUI takes only mgf format as input, but as we need the mzML format for several other tasks, we will convert to mzML first.
+Raw data conversion is the first step of any proteomic data analysis. The most common converter is MSConvert from the [ProteoWizard software suite](http://proteowizard.sourceforge.net/), the format to convert to is mzML. Search GUI takes only mgf format as input, but as we need the mzML format for several other tasks, we will convert to mzML first.
 
 > ### {% icon hands_on %} Optional Hands-On: Preparing raw data
 >
@@ -52,13 +54,15 @@ Raw data conversion is the first step of any proteomic data analysis. The most c
 > 4. Run ***msconvert*** {% icon tool %} on the test data to convert to the mzML format
 >
 >   > ### {% icon comment %} Comment: Local Use of MSConvert
->   > The vendor libraries used by MSConvert need a Windows system and is therefore rarely implemented in Galaxy instances. If ***msconvert*** {% icon tool %} is not available in your Galaxy instance, please install the software on a Windows computer and run the conversion locally. You can find a detailed description of the necessary steps [here](http://genesis.ugent.be/files/costore/practicals/bioinformatics-for-proteomics/1-Peptide-and-Protein-Identification/1.2-Peak-List-Generation/1.2-Peak-List-Generation.pdf). Afterwards, upload the resulting mzML file to your Galaxy history.
+>   > The vendor libraries used by MSConvert are only licensed for Windows systems and are therefore rarely implemented in Galaxy instances. If ***msconvert*** {% icon tool %} is not available in your Galaxy instance, please install the software on a Windows computer and run the conversion locally. You can find a detailed description of the necessary steps [here](http://genesis.ugent.be/files/costore/practicals/bioinformatics-for-proteomics/1-Peptide-and-Protein-Identification/1.2-Peak-List-Generation/1.2-Peak-List-Generation.pdf). Afterwards, upload the resulting mzML file to your Galaxy history.
 >  {: .comment}
 >
 > 5. Run ***PeakPickerHiRes*** {% icon tool %} on the resulting mzML file.
 >
 >   > ### {% icon comment %} Comment: Peak Picking
->   > Depending on your machine settings, raw data will be generated either in profile mode or centroid mode. For most peptide search engines, the data have to be converted to centroid mode, a process called "peak picking". Machine vendors offer algorithms to extract peaks from profile raw data. This is implemented in ***msconvert*** {% icon tool %} and can be run in parallel to the mzML conversion. However, the OpenMS tool ***PeakPickerHiRes*** {% icon tool %} is reported to generate better results ([Lange et al., 2006, Pac Symp Biocomput](https://www.ncbi.nlm.nih.gov/pubmed/17094243)) and is therefore recommended for quantitative studies ([Vaudel et al., 2010, Proteomics](https://www.ncbi.nlm.nih.gov/pubmed/19953549)).
+>   > Depending on your machine settings, raw data will be generated either in profile mode or centroid mode. For most peptide search engines, the MS2 data have to be converted to centroid mode, a process called "peak picking" or "centroiding". 
+>   > Machine vendors offer algorithms to extract peaks from profile raw data. This is implemented in ***msconvert*** {% icon tool %} and can be run in parallel to the mzML conversion. However, the OpenMS tool ***PeakPickerHiRes*** {% icon tool %} is reported to generate better results ([Lange et al., 2006, Pac Symp Biocomput](https://www.ncbi.nlm.nih.gov/pubmed/17094243)) and is therefore recommended for quantitative studies ([Vaudel et al., 2010, Proteomics](https://www.ncbi.nlm.nih.gov/pubmed/19953549)).
+>   >
 >   > If your data were generated on a low resolution mass spectrometer, use ***PeakPickerWavelet*** {% icon tool %} instead.
 >   {: .comment}
 >
@@ -76,7 +80,7 @@ In bottom-up proteomics, it is necessary to combine the identified peptides to p
 
 > ### {% icon hands_on %} Hands-On: Peptide and Protein Identification
 >
-> 1. Copy the prepared protein database from the tutorial "Database handling" into your current history by using the multiple history view or upload the ready-made database from this [link]().
+> 1. Copy the prepared protein database from the tutorial [Database Handling](../database-handling/tutorial.md) into your current history by using the multiple history view or upload the ready-made database from this [link](https://zenodo.org/record/892005/files/Human_database_%28cRAP_and_Mycoplasma_added%29.fasta).
 > 2. Open ***Search GUI*** {% icon tool %} to search the mgf file against the protein database. Select the `DB-Search Engines`: `X!Tandem` and `MS-GF+`. Add the `Fixed Modifications`: `Carbamidomethylation of C` and the `Variable Modifications`: `Oxidation of M`, then click `Execute`.
 > 3. Run ***Peptide Shaker*** {% icon tool %} on the Search GUI output. Enable the following outputs: `Zip File for import to Desktop App`, `mzidentML File`, `PSM Report`, `Peptide Report`, `Protein Report`. You can find a detailed description of possible Peptide Shaker outputs in the comment below.
 >
@@ -175,10 +179,12 @@ The FASTA database used for the peptide to spectrum matching contained some entr
 {: .hands_on}
 
 # Premade Workflow
+{:.no_toc}
 
 A premade workflow for this tutorial can be found [here](workflows/wf_proteinID_SG_PS.ga)
 
 # Further Reading
+{:.no_toc}
 
 - [Search GUI and Peptide Shaker tutorials at Compomics](https://compomics.com/bioinformatics-for-proteomics/)
 - [Using Search GUI and Peptide Shaker in Galaxy](https://drive.google.com/file/d/0B6bIeOvjBkbWVnhMLWxXdGVUY3M/view)
