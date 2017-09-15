@@ -175,9 +175,8 @@ Let's have a look at our files to see what we actually have here.
 
 > ### {% icon hands_on %} Hands-on: View file content
 >
-> 1. Click on the **eye icon** for our peak file to view the content 
->
->    You should have something like:
+> 1. To view the content of your peak file, click on the **eye icon**.
+>    It should look like this:
 >
 >    ![Contents of the peak file](../../images/intro_04.png)
 >
