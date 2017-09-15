@@ -1,0 +1,770 @@
+﻿id: proteomics-metaproteomics
+name: Galaxy Tour
+description: >-
+  In this metaproteomics tutorial we will identify expressed proteins from a
+  complex bacterial community sample. For this MS/MS data will be matched to
+  peptide sequences provided through a FASTA file.
+title_default: proteomics-metaproteomics
+steps:
+  - title: Introduction. Metaproteomics
+    content: >-
+      In this metaproteomics tutorial we will identify expressed proteins from a
+      complex bacterial community sample. For this MS/MS data will be matched to
+      peptide sequences provided through a FASTA file.
+
+      <br><br>Metaproteomics is the large-scale characterization of the entire
+      protein complement of environmental microbiota at a given point in time.
+      It has the potential to unravel the mechanistic details of microbial
+      interactions with the host / environment by analyzing the functional
+      dynamics of the microbiome.
+
+      <br><br>In this tutorial, we will analyze a sample of sea water that was
+      collected in August of 2013 from the Bering Strait chlorophyll maximum
+      layer (7m depth, 65° 43.44″ N, 168° 57.42″ W). The data were originally
+      published in <a href="https://www.ncbi.nlm.nih.gov/pubmed/27396978">May et
+      al., 2016</a>.
+    backdrop: true
+  - title: Data upload
+    content: >-
+      There are a many ways how you can upload your data. Three among these are:
+        <ul><li>Upload the files from your computer</li>
+            <li>Using a direct link</li>
+            <li>Import from the data library if your instance provides the files</li></ul>
+      In this tutorial, we will get the data from <a
+      href="https://zenodo.org/record/839701">Zenodo</a>.
+    backdrop: true
+  - title: History options
+    element: '#history-options-button'
+    content: >-
+      We will start the analyses by creating a new history. Click on this button
+      and then "Create New"
+    placement: left
+  - title: Step 1. Uploading the new data
+    element: '#tool-panel-upload-button .fa.fa-upload'
+    content: We need to upload new data first. Open the Galaxy Upload Manager
+    placement: right
+    postclick:
+      - '#tool-panel-upload-button .fa.fa-upload'
+      - '#btn-reset'
+  - title: Step 2. Uploading the input data
+    element: '#btn-new'
+    content: Click on Paste/Fetch Data
+    placement: right
+    postclick:
+      - '#btn-new'
+  - title: Step 3. Uploading the input data
+    element: .upload-text-column .upload-text .upload-text-content.form-control
+    content: >-
+      Insert the links here. Import the three MGF MS/MS files and the FASTA
+      sequence file from Zenodo.<br> The input is available on <a href="a
+      href="https://zenodo.org/record/839701">Zenodo</a>. Right click on the
+      file and then "Copy Link Address"
+    placement: right
+    textinsert: |-
+      https://zenodo.org/record/839701/files/2016_Jan_12_QE2_45.mgf
+      https://zenodo.org/record/839701/files/2016_Jan_12_QE2_46.mgf
+      https://zenodo.org/record/839701/files/2016_Jan_12_QE2_47.mgf
+  - title: Step 4. Uploading the input data
+    element: '#btn-start'
+    content: Click on "Start" to start loading the data to history
+    placement: right
+    postclick:
+      - '#btn-start'
+  - title: Step 5. Uploading the input data
+    element: '#btn-close'
+    content: >-
+      The upload may take a while.<br> Hit the close button to close this
+      window.
+    placement: right
+    postclick:
+      - '#btn-close'
+  - title: Step 6. Rename the input data and adjust the datatype
+    element: '.history-right-panel .list-items > *:first'
+    content: |-
+      The uploaded datasets are in the history, but their names correspond to
+      the link. We want to rename them.<br><br> For each dataset: <ol>
+        <li>Click on the pencil icon beside the file to "Edit Attributes"</li>
+        <li>Change the name in "Name" to get only the name of the sample</li>
+      </ol>
+    position: left
+  - title: Step 7. Organizing our data into a dataset list
+    element: >-
+      #current-history-panel .controls .actions a[href$="javascript:void(0);"]
+      .fa.fa-check-square-o
+    content: >-
+      Click on the <b>checkmark icon</b> at top of your history. Select the
+      three  MGF files, then click on for <b>all selected</b> and select
+      <b>Build dataset list</b> from the dropdown menu.
+    placement: left
+  - title: Step 8. Organizing our data into a dataset list
+    content: >-
+      Ensure the three control samples are the only ones selected, and enter a
+      name for the new collection (e.g. MGF files). <br>Click <b>Create list</b>
+      and exit by clicking again the dataset operations icon
+    backdrop: false
+  - title: Match peptide sequences
+    content: >-
+      The search database labelled
+      <i>FASTA_Bering_Strait_Trimmed_metapeptides_cRAP.FASTA</i> is the input
+      database that will be used to match MS/MS to peptide sequences via a
+      sequence database search. It is a small excerpt of the original database,
+      which was constructed based on a metagenomic screening of the sea water
+      samples (see <a href="https://www.ncbi.nlm.nih.gov/pubmed/27396978">May et
+      al. (2016)</a>). A contaminant database was added. <br>For this, the
+      sequence database-searching program called <b>SearchGUI</b> will be used.
+      The created dataset collection of the three MGF files in the history is
+      used as the MS/MS input.
+    backdrop: false
+  - title: Step 9. SearchGUI
+    element: '#tool-search-query'
+    content: Search for SearchGUI tool
+    placement: right
+    textinsert: SearchGUI
+  - title: Step 10. SearchGUI
+    element: '#tool-search'
+    content: Click on the "SearchGUI" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fgalaxyp%2Fpeptideshaker%2Fsearch_gui%2F3.2.13"]
+  - title: Step 11. SearchGUI 1/2
+    element: '#tool-search-query'
+    content: |-
+      Execute the tool with  <ul>
+        <li>"Protein Database" to the <b>FASTA_Bering_Strait_Trimmed_metapeptides_cRAP.FASTA</b> (or however you named the FASTA file)</li>
+        <li>"Input Peak lists (mgf)" to MGF files dataset collection by selecting the corresponding upload function next to the input field.</li>
+        <li>"B-Search Engines" to <b>X!Tandem</b></li>The section Search Engine Options contains a selection of sequence database searching programs that are available in SearchGUI. Any combination of these programs can be used for generating PSMs from MS/MS data. For the purpose of this tutorial, X!Tandem we will be used.
+        <li>"Fragment Tolerance (Daltons)" to <b>0.02</b></li>
+        <li>further parameters at the next step</li>
+      </ul>
+    placement: left
+  - title: Step 11. SearchGUI 2/2
+    element: '#tool-search-query'
+    content: |-
+      Execute the tool with  <ul>
+        <li>"Fragment Tolerance (Daltons)" to <b>0.02</b></li>
+        <li>"Fixed Modifications" to <b>Carbamidomethylation of C</b></li>
+        <li>"Variable modifications" to <b>Oxidation of M</b></li>
+        <li>"X!Tandem Options" to <b>Advanced</b></li>
+        <li>"X!Tandem: Quick Acetyl" to <b>No</b></li>
+        <li>"X!Tandem: Quick Pyrolidone" to <b>No</b></li>
+        <li>"X!Tandem: Protein stP Bias" to <b>No</b></li>
+        <li>"X!Tandem: Maximum Valid Expectation Value" to <b>100</b></li>
+        <lileave everything else as default</li>
+      </ul>
+    placement: left
+  - title: Step 12. SearchGUI
+    element: '.history-right-panel .list-items > *:first'
+    content: >-
+      Once the database search is completed, the SearchGUI tool will output a
+      file (called a SearchGUI archive file) that will serve as an input for the
+      next section, PeptideShaker.
+    position: left
+  - title: Sequence databases
+    content: >-
+      Note that sequence databases used for metaproteomics are usually much
+      larger than the excerpt used in this tutorial. When using large databases,
+      the peptide identification step can take much more time for computation.
+      In metaproteomics, choosing the optimal database is a crucial step of your
+      workflow, for further reading see <a
+      href="https://www.ncbi.nlm.nih.gov/pubmed/27824341">Timmins-Schiffman et
+      al (2017)</a>. <br>To learn more about database construction in general,
+      like integrating contaminant databases or using a decoy strategy for FDR
+      searching, please consult our tutorial on <a
+      href="https://galaxyproject.github.io/training-material/topics/proteomics/tutorials/database-handling/tutorial.html">Database
+      Handling</a>.
+    backdrop: true
+  - title: PeptideShaker
+    content: >-
+      PeptideShaker is a post-processing software tool that processes data from
+      the SearchGUI software tool. It serves to organize the Peptide-Spectral
+      Matches (PSMs) generated from SearchGUI processing and is contained in the
+      SearchGUI archive. It provides an assessment of confidence of the data,
+      inferring proteins identified from the matched peptide sequences and
+      generates outputs that can be visualized by users to interpret results.
+      PeptideShaker has been wrapped in Galaxy to work in combination with
+      SearchGUI outputs.
+    backdrop: true
+  - title: PeptideShaker. Output files
+    content: >-
+      There are a number of choices for different data files that can be
+      generated using PeptideShaker. A compressed file can be made containing
+      all information needed to view the results in the standalone PeptideShaker
+      viewer. A <b>mzidentML</b> file can be created that contains all peptide
+      sequence matching information and can be utilized by compatible downstream
+      software. Other outputs are focused on the inferred proteins identified
+      from the PSMs, as well as phosphorylation reports, relevant if a
+      phosphoproteomics experiment has been undertaken. More detailed
+      information on peptide inference using SearchGUI and PeptideShaker can be
+      found in our tutorial on <a
+      href="https://galaxyproject.github.io/training-material/topics/proteomics/tutorials/protein-id-sg-ps/tutorial.html">Peptide
+      and Protein ID</a>.
+    backdrop: true
+  - title: Step 13. PeptideShaker
+    element: '#tool-search-query'
+    content: Search for PeptideShaker tool
+    placement: right
+    textinsert: PeptideShaker
+  - title: Step 14. PeptideShaker
+    element: '#tool-search'
+    content: Click on the "PeptideShaker" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fgalaxyp%2Fpeptideshaker%2Fpeptide_shaker%2F1.16.4"]
+  - title: Step 15. PeptideShaker
+    element: '#tool-search'
+    content: |-
+      Execute the tool with  <ul>
+        <li><b>Compressed SearchGUI results:</b> The SearchGUI archive file</li>
+        <li><b>Specify Advanced PeptideShaker Processing Options:</b> Default Processing Options</li>
+        <li><b>Specify Advanced Filtering Options:</b> Default Filtering Options</li>
+        <li><b>Specify Contact Information for mzIdendML:</b> You can leave the default dummy options for now, but feel free to enter custom contact information.</li>
+        <li><b>Include the protein sequences in mzIdentML:</b> No</li>
+        <li><b>Output options:</b> Select the PSM Report (Peptide-Spectral Match) and the Certificate of Analysis</li>
+      </ul>
+    position: left
+  - title: Step 16. PeptideShaker
+    element: >-
+      #current-history-panel .controls .actions a[href$="javascript:void(0);"]
+      .fa.fa-check-square-o
+    content: >-
+      Inspect the output. The Certificate of Analysis provides details on all
+      the parameters used by both SearchGUI and PeptideShaker in the analysis.
+      This can be downloaded from the Galaxy instance to your local computer in
+      a text file if desired.
+
+      <br><br>Most relevant for this tutorial is the PSM report. Scrolling at
+      the bottom to the left will show the sequence for the PSM that matched to
+      these metapeptide entries. Column 3 is the sequence matched for each PSM
+      entry. Every PSM is a new row in the tabular output.
+
+      <br><br>In the following steps of this tutorial, selected portions of this
+      output will be extracted and used for analysis of the taxonomic make-up of
+      the sample as well as the biochemical functions represented by the
+      proteins identified.
+    placement: left
+  - title: Taxonomy analysis
+    content: >-
+      In the previous steps, the genome sequencing and mass spectrometry data
+      from processing of biological samples was used to identify peptides
+      present in those samples. Now those peptides are used as evidence to infer
+      which organisms are represented in the sample, and what biological
+      functions those peptides and associated proteins suggest are occurring.
+
+      <br><br>The UniProt organization collects and annotates all known proteins
+      for organisms. A UniProt entry includes the protein amino acid sequence,
+      the NCBI taxonomy, and any annotations about structure and function of the
+      protein. The UniPept web resource developed by Ghent University will be
+      used to match the sample peptides to proteins. UniPept indexes all Uniprot
+      proteins and provides a fast matching algorithm for peptides.
+    backdrop: true
+  - title: Recieving the list of peptides. Query Tabular
+    content: >-
+      In order to use Unipept, a list containing the peptide sequences has to be
+      generated. The tool <b>Query Tabular</b> can load tabular data (the PSM
+      report in this case) into a SQLite data base. As a tabular file is being
+      read, line filters may be applied and an SQL query can be performed.
+    backdrop: true
+  - title: Step 17. Query Tabular
+    element: '#tool-search-query'
+    content: Search for Query Tabular tool
+    placement: right
+    textinsert: Query Tabular
+  - title: Step 18. Query Tabular
+    element: '#tool-search'
+    content: Click on the "Query Tabular" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fjjohnson%2Fquery_tabular%2Fquery_tabular%2F3.0.0"]
+  - title: Step 19. Query Tabular 1/2
+    element: '#tool-search'
+    content: |-
+      Execute the tool with  <ul>
+        <li><b>Database Table:</b> Click on + <i>Insert Database Table</i></li>
+        <li><b>Tabular Dataset for Table:</b> the PSM report</li>
+        <li><b>Filter Tabular Input Lines:</b> Click on + <i>Insert Filter Tabular Input Lines</i></li>
+        <li><b>Filter By:</b> by regex expression matching
+          <li>regex pattern: ^\d</li>
+          <li>action for regex match: include line on pattern match</li></li>
+        <li><b>Specify Name for Table:</b> psm</li>
+        <li><b>Specify Column Names (comma-separated list):</b> id,,sequence,,,,,,,,,,,,,,,,,,,,confidence,validation</li>
+        By default, table columns will be named: c1,c2,c3,…,cn (column names for a table must be unique). You can override the default names by entering a comma separated list of names, e.g. ,name1,,,name2 would rename the second and fifth columns.
+        Check your input file to find the settings which best fits your needs.
+        <li>further parameter settings at the next step</li>
+      </ul>
+    position: left
+  - title: Step 19. Query Tabular 2/2
+    element: '#tool-search'
+    content: |-
+      Execute the tool with  <ul>
+        <li><b>Only load the columns you have named into database:</b> Yes</li>
+        <li><b>Save the sqlite database in your history:</b> Yes</li>
+        Query Tabular can also use an existing SQLite database. Activating Save the sqlite database in your history will store the created database in the history, allowing to reuse it directly.
+        <li><b>SQL Query to generate tabular output:</b>SELECT distinct sequence
+        FROM psm
+        WHERE validation IS NOT 'Confident' AND confidence >= 95
+        ORDER BY sequence</li>
+        <li><b>Omit column headers from tabular output:</b> Yes</li>
+      </ul>
+    position: left
+  - title: Questions. Query Tabular
+    content: >-
+      The SQL query might look confusing at first, but having a closer look
+      should clarify a lot.<ul>
+        <li>What does FROM psm mean?</li>
+        <li>What need to be changed if we only want peptides with a confidence higher then 98%?</li>
+      <ul>
+    backdrop: true
+  - title: Step 20. Query Tabular
+    element: >-
+      #current-history-panel .controls .actions a[href$="javascript:void(0);"]
+      .fa.fa-check-square-o
+    content: Inspect the output.
+    placement: left
+  - title: SQLite to tabular
+    content: >-
+      While we can proceed with this list of peptides, let’s practice using the
+      created SQLite database for further queries. We might not only be
+      interested in all the distinct peptides, but also on how many PSMs a
+      single peptide had. Therefore we can search the database for the peptides
+      and count the occurrence without configuring the tables and columns again.
+    backdrop: true
+  - title: Step 21. SQLite to tabular
+    element: '#tool-search-query'
+    content: Search for 'SQLite to tabular' tool
+    placement: right
+    textinsert: SQLite to tabular
+  - title: Step 22. SQLite to tabular
+    element: '#tool-search'
+    content: Click on the "SQLite to tabular" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fjjohnson%2Fsqlite_to_tabular%2Fsqlite_to_tabular%2F0.0.1"]
+  - title: Step 23. SQLite to tabular
+    element: '#tool-search'
+    content: |-
+      Execute the tool with  <ul>
+        <li><b>SQL Query:</b>SELECT sequence as "peptide", count(id) as "PSMs"
+                             FROM psm
+                             WHERE validation IS NOT 'Confident' AND confidence >= 95
+                             GROUP BY sequence
+                             ORDER BY sequence</li>
+      </ul>
+    position: left
+  - title: Step 24. SQLite to tabular
+    element: >-
+      #current-history-panel .controls .actions a[href$="javascript:void(0);"]
+      .fa.fa-check-square-o
+    content: >-
+      Inspect the output. The resulting file should have two columns, one with
+      the distinct peptides, the other with the count number of PSMs.
+    placement: left
+  - title: Retrieve taxonomy for peptides. Unipept
+    content: >-
+      The generated list of peptides can now be used to search via Unipept. We
+      do a taxonomy analysis using the UniPept pept2lca function to return the
+      taxonomic lowest common ancestor for each peptide
+    backdrop: true
+  - title: Step 25. Unipept
+    element: '#tool-search-query'
+    content: Search for 'Unipept' tool
+    placement: right
+    textinsert: Unipept
+  - title: Step 26. Unipept
+    element: '#tool-search'
+    content: Click on the "Unipept" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fgalaxyp%2Funipept%2Funipept%2F2.0.1"]
+  - title: Step 27. Unipept
+    element: '#tool-search'
+    content: |-
+      Execute the tool with  <ul>
+        <li><b>Unipept application:</b> pept2lca: lowest common ancestor</li>
+        <li><b>Peptides input format:</b> tabular</li>
+        <li><b>Tabular Input Containing Peptide column:</b> The query results file.</li>
+        <li><b>Select column with peptides:</b> Column 1</li>
+        <li><b>Choose outputs:</b> Select tabular and JSON taxonomy tree</li>
+      </ul>
+    position: left
+  - title: Query Tabular. JSON
+    content: >-
+      The JSON (JavaScript Object Notation) file contains the same information
+      as the tabular file but is not comfortably human readable. Instead, we can
+      use it to use JavaScript libraries to visualize this data.
+    backdrop: false
+  - title: Step 28. Query Tabular
+    element: >-
+      #current-history-panel .controls .actions a[href$="javascript:void(0);"]
+      .fa.fa-check-square-o
+    content: >-
+      Click on the JSON output file from the Unipept tool to expand it. Click on
+      the <b>Visualize</b> button and select <b>Unipept Tree viewer</b>
+
+      <br><br>A new window should appear with a visualization of the taxonomy
+      tree of your data. Use the mouse wheel to scroll in and out and click on
+      nodes to expand or collapse them
+    placement: left
+  - title: Genus taxonomy level summary
+    content: >-
+      The tabular Unipept output lists the taxonomy assignments for each
+      peptide. To create a meaningful summary, the <b>Query Tabular</b> tool is
+      once again used, aggregating the number of peptides and PSMs for each
+      genus level taxonomy assignment
+    backdrop: false
+  - title: Step 29. Query Tabular
+    element: '#tool-search-query'
+    content: Search for Query Tabular tool
+    placement: right
+    textinsert: Query Tabular
+  - title: Step 30. Query Tabular
+    element: '#tool-search'
+    content: Click on the "Query Tabular" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fjjohnson%2Fquery_tabular%2Fquery_tabular%2F3.0.0"]
+  - title: Step 31. Query Tabular
+    element: '#tool-search'
+    content: |-
+      Execute the tool with  <ul>
+        <li><b>Database Table:</b> Click on + <i>Insert Database Table</i></li>
+        <li><b>Tabular Dataset for Table:</b> the PSM report</li>
+        <li><b>Filter Tabular Input Lines:</b> Click on + <i>Insert Filter Tabular Input Lines</i></li>
+        <li><b>Filter By:</b> by regex expression matching
+          <li>regex pattern: ^\d</li>
+          <li>action for regex match: include line on pattern match</li></li>
+        <li><b>Specify Name for Table:</b> psm</li>
+        <li><b>Specify Column Names (comma-separated list):</b> ,,sequence,,,,,,,,,,,,,,,,,,,,confidence,validation</li>
+        <li><b>Only load the columns you have named into database:</b> Yes</li>
+      </ul>
+    position: left
+  - title: Query Tabular
+    content: Now we need to get a second database following the same steps.
+    backdrop: false
+  - title: Step 32. Query Tabular
+    element: '#tool-search'
+    content: Click on the "Query Tabular" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fjjohnson%2Fquery_tabular%2Fquery_tabular%2F3.0.0"]
+  - title: Step 33. Query Tabular 1/2
+    element: '#tool-search'
+    content: |-
+      Execute the tool with  <ul>
+        <li><b>Database Table:</b> Click on + <i>Insert Database Table</i></li>
+        <li><b>Tabular Dataset for Table:</b> The Unipept <b>tabular/tsv</b> output</li>
+        <li><b>Filter Tabular Input Lines:</b> Click on + <i>Insert Filter Tabular Input Lines</i></li>
+        <li><b>Filter By:</b> by regex expression matching
+          <li>regex pattern: #peptide</li>
+          <li>action for regex match: exclude line on pattern match</li></li>
+        <li><b>Specify Name for Table:</b> lca</li>
+        <li>firther parameter settings at the next step</li>
+      </ul>
+    position: left
+  - title: Step 33. Query Tabular 2/2
+    element: '#tool-search'
+    content: |-
+      Execute the tool with  <ul>
+        <li><b>Specify Column Names (comma-separated list):</b> peptide,,,,,,,,,,,,,,,,,,,,,genus</li>
+        <li><b>Only load the columns you have named into database:</b> Yes</li>
+        <li><b>Save the sqlite database in your history:</b> No</li>
+        <li><b>SQL Query to generate tabular output:</b>SELECT lca.genus,count(psm.sequence) as "PSMs",count(distinct psm.sequence) as "DISTINCT PEPTIDES"
+               FROM psm LEFT JOIN lca ON psm.sequence = lca.peptide
+               WHERE validation IS NOT 'Confident' AND confidence >= 95
+               GROUP BY lca.genus
+               ORDER BY PSMs desc, 'DISTINCT PEPTIDES' desc</li>
+        <li><b>Omit column headers from tabular output:</b> No</li>
+      </ul>
+    position: left
+  - title: Step 34. Query Tabular
+    element: >-
+      #current-history-panel .controls .actions a[href$="javascript:void(0);"]
+      .fa.fa-check-square-o
+    content: Inspect the output.
+    placement: left
+  - title: Functional Analysis
+    content: >-
+      Recent advances in microbiome research indicate that functional
+      characterization via metaproteomics analysis has the potential to
+      accurately measure the microbial response to perturbations. In particular,
+      metaproteomics enables the estimation of the function of the microbial
+      community based on expressed microbial proteome.
+
+      <br><br>In the following steps, a functional analysis will be performed
+      using the UniPept application <b>pept2prot</b> in order to match the list
+      of peptides with the correlated Gene Ontology terms. This allows to get an
+      insight of the biological process, the molecular function and the cellular
+      component related to the sample data.
+    backdrop: true
+  - title: Gene Ontology Consortium
+    content: >-
+      <a href="http://www.geneontology.org/">The Gene Ontology Consortium</a>
+      provides with its Ontology a framework for the model of biology. The GO
+      defines concepts/classes used to describe gene function, and relationships
+      between these concepts. It classifies functions along three aspects:<ul>
+        <li>molecular function - molecular activities of gene products</li>
+        <li>cellular component - where gene products are active</li>
+        <li>biological process - pathways and larger processes made up of the activities of multiple gene products</li></ul>
+    backdrop: true
+  - title: Data upload
+    content: >-
+      For this tutorial, a tabular file containing the relevant GO terms has
+      been created. It contains the GO aspect, the ID and the name. It is
+      available at <a href="https://zenodo.org/record/839701">Zenodo</a>
+    backdrop: true
+  - title: Step 35. Uploading the new data
+    element: '#tool-panel-upload-button .fa.fa-upload'
+    content: >-
+      We need to upload the file Gene_Ontology_Terms.tabular. Open the Galaxy
+      Upload Manager
+    placement: right
+    postclick:
+      - '#tool-panel-upload-button .fa.fa-upload'
+      - '#btn-reset'
+  - title: Step 36. Uploading the input data
+    element: '#btn-new'
+    content: Click on Paste/Fetch Data
+    placement: right
+    postclick:
+      - '#btn-new'
+  - title: Step 37. Uploading the input data
+    element: .upload-text-column .upload-text .upload-text-content.form-control
+    content: >-
+      Insert the link here. Import Gene_Ontology_Terms.tabular from Zenodo.<br>
+      The input is available on <a href="a
+      href="https://zenodo.org/record/839701">Zenodo</a>. Right click on the
+      file and then "Copy Link Address"
+    placement: right
+    textinsert: 'https://zenodo.org/record/839701/files/Gene_Ontology_Terms.tabular'
+  - title: Step 38. Setting file metadata on upload
+    content: >-
+      In the upload window of Galaxy you can set the filetype and related genome
+      of the file you’re uploading in the corresponding columns beforehand. This
+      might be handy if the automatic detection of the filetype didn’t work out
+      perfectly or if you want to avoid setting the genome later on, especially
+      for multiple files.
+    backdrop: true
+  - title: Step 39. Uploading the input data
+    element: '#btn-start'
+    content: Click on "Start" to start loading the data to history
+    placement: right
+    postclick:
+      - '#btn-start'
+  - title: Step 40. Uploading the input data
+    element: '#btn-close'
+    content: >-
+      The upload may take a while.<br> Hit the close button to close this
+      window.
+    placement: right
+    postclick:
+      - '#btn-close'
+  - title: Step 41. Rename the input data
+    element: '.history-right-panel .list-items > *:first'
+    content: |-
+      The uploaded file is in the history, but its name corresponsd to
+      the link. We want to rename it.<ol>
+        <li>Click on the pencil icon beside the file to "Edit Attributes"</li>
+        <li>Change the name in "Name" to get only the name of the sample</li>
+      </ol>
+    placement: left
+  - title: Creating your own Gene Ontology list
+    content: >-
+      The latest Gene Ontology can be downloaded <a
+      href="http://geneontology.org/page/download-ontology">here</a> as a text
+      file in the <b>OBO</b> format. OBO files are human-readable (in addition
+      to machine-readable) and can be opened in any text editor. They contain
+      more information than just the name and aspect.
+
+      In order to receive a file like we use in the tutorial for your own
+      analysis, different tools are available to extract information from OBO
+      files, one of them being <a
+      href="https://www.ncbi.nlm.nih.gov/labs/articles/18245124/">ONTO-PERL</a>.
+      An example file with all GO terms from 08.07.2017 named
+      Gene_Ontology_Terms_full_07.08.2017.tabular can be found on the <a
+      href="https://doi.org/10.5281/zenodo.839701"Zenodo repository</a> of this
+      tutorial as well.
+    backdrop: true
+  - title: Creating your own Gene Ontology list
+    content: >-
+      The UniPept application <b>pept2prot</b> can be used to return the list of
+      proteins containing each peptide. The option <i>retrieve extra
+      information</i> option is set to <i>yes</i> so that we retrieve Gene
+      Ontology assignments (go_references) for each protein.
+    backdrop: true
+  - title: Step 42. Unipept
+    element: '#tool-search-query'
+    content: Search for 'Unipept' tool
+    placement: right
+    textinsert: Unipept
+  - title: Step 43. Unipept
+    element: '#tool-search'
+    content: Click on the "Unipept" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fgalaxyp%2Funipept%2Funipept%2F2.0.1"]
+  - title: Step 44. Unipept
+    element: '#tool-search'
+    content: |-
+      Execute the tool with  <ul>
+        <li><b>Unipept application:</b> pept2prot: UniProt entries containing a given tryptic peptide</li>
+        <li><b>retrieve extra information:</b> Yes</li>
+        <li><b>Peptides input format:</b> tabular</li>
+        <li><b>Tabular Input Containing Peptide column:</b> The first query results file.</li>
+        <li><b>Select column with peptides:</b> Column 1</li>
+        <li><b>Choose outputs:</b> Select tabular</li>
+      </ul>
+    position: left
+  - title: Step 45. Unipept
+    element: '.history-right-panel .list-items > *:first'
+    content: >-
+      The output should be a tabular file containing a column labeled
+      go_references. This is what we’re looking for.
+    placement: left
+  - title: Normalizing a table. Split Tabular Columns
+    content: >-
+      The UniPept result file can contain multiple GO IDs in a single row. In
+      order to create a normalized table of this data, these rows will be split
+      so each record contains only one GO ID using the <b>Split Tabular
+      Columns</b> tool
+    backdrop: true
+  - title: Step 46. Split Tabular Columns
+    element: '#tool-search-query'
+    content: Search for 'Split Tabular Columns' tool
+    placement: right
+    textinsert: Split Tabular Columns
+  - title: Step 47. Split Tabular Columns
+    element: '#tool-search'
+    content: Click on the "Split Tabular Columns" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fjjohnson%2Fsplit_tabular_columns%2Ftp_split_tabular_columns%2F0.2"]
+  - title: Step 48. Split Tabular Columns
+    element: '#tool-search'
+    content: |-
+      Execute the tool with  <ul>
+        <li><b>Tabular Dataset to normalize:</b> The latest UniPept tabluar/tsv output</li>
+        <li><b>Columns to split:</b> Select <i>Column: 6</i>, the one containing the GO IDs</li>
+      </ul>
+    position: left
+  - title: Step 49. Split Tabular Columns
+    element: '.history-right-panel .list-items > *:first'
+    content: >-
+      The column labeled <i>go_references</i> should now contain only no or one
+      entry.
+    placement: left
+  - title: Normalizing a table. Split Tabular Columns
+    content: >-
+      As a final step we will use <b>Query Tabular</b> in a more sophisticated
+      way to combine all information to quantify the GO analysis. The three used
+      file and the extracted information are:<ul>
+        <li><b>Gene Ontology Terms:</b>
+          <ol><i>go_id</i> to match with <b>Normalized UniPept output</b></ol>
+          <ol>The GO <i>aspect</i> to group the results in three separate files</ol>
+          <ol>The GO <i>description</i> to annotate the results</ol></li>
+        <li><b>Normalized UniPept output:</b>
+          <ol><i>peptide</i> to match with <b>PSM Report</b> and to count distinct peptides per GO term</ol>
+          <ol><i>go_reference</i> to match with <b>Gene Ontology Terms</b></ol></li>
+        <li><b>PSM Report:</b>
+          <ol><i>sequence</i> to match with <b>Normalized UniPept output</b></ol>
+          <ol><i>id</i> to count distinct PSM’s per GO term</ol></li></ul>
+    backdrop: true
+  - title: Step 50. Query Tabular
+    element: '#tool-search-query'
+    content: Search for Query Tabular tool
+    placement: right
+    textinsert: Query Tabular
+  - title: Step 51. Query Tabular
+    element: '#tool-search'
+    content: Click on the "Query Tabular" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fjjohnson%2Fquery_tabular%2Fquery_tabular%2F3.0.0"]
+  - title: Step 52. Query Tabular
+    element: '#tool-search'
+    content: |-
+      Execute the tool with  <ul>
+        <li><b>Database Table:</b> Click on + <i>Insert Database Table</i></li>
+        <li><b>Tabular Dataset for Table:</b> The Gene Ontology Terms file</li>
+        <li><b>Specify Name for Table:</b> go</li>
+        <li><b>Specify Column Names (comma-separated list):</b> aspect,go_id,description</li>
+      </ul>
+    position: left
+  - title: Step 53. Query Tabular. Second table
+    element: '#tool-search'
+    content: Click on the "Query Tabular" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fjjohnson%2Fquery_tabular%2Fquery_tabular%2F3.0.0"]
+  - title: Step 54. Query Tabular. Second table
+    element: '#tool-search'
+    content: |-
+      Execute the tool with  <ul>
+        <li><b>Database Table:</b> Click on + <i>Insert Database Table</i></li>
+        <li><b>Tabular Dataset for Table:</b> The Unipept normalized tabluar/tsv output</li>
+        <li><b>Filter Tabular Input Lines:</b> Click on + Insert Filter Tabular Input Lines</li>
+        <li><b>Filter By:</b> Select comment char
+          <ol><b>Ignore lines beginning with these characters:</b> Select #<ol></li>
+        <li><b>Specify Name for Table:</b> bering</li>
+        <li><b>Specify Column Names (comma-separated list):</b> peptide,uniprot_id,taxon_id,taxon_name, ec_references,go_reference,refseq_ids,refseq_protein_ids,insdc_ids,insdc_protein_ids</li>
+      </ul>
+    position: left
+  - title: Step 55. Query Tabular. Third table
+    element: '#tool-search'
+    content: Click on the "Query Tabular" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fjjohnson%2Fquery_tabular%2Fquery_tabular%2F3.0.0"]
+  - title: Step 56. Query Tabular. Third table 1/2
+    content: |-
+      Execute the tool with  <ul>
+        <li><b>Database Table:</b> Click on + <i>Insert Database Table</i></li>
+        <li><b>Tabular Dataset for Table:</b> The PSM Report</li>
+        <li><b>Filter Tabular Input Lines:</b> Click on + Insert Filter Tabular Input Lines</li>
+        <li><b>Filter By:</b> Select by regex expression matching
+          <ol><b>regex pattern:</b> ^\d</ol>
+          <ol><b>action for regex match:</b> include line on pattern match</ol></li>
+        <li><b>Specify Name for Table:</b> bering_psms</li>
+        <li><b>Specify Column Names (comma-separated list):</b> id,,sequence,,,,,,,,,,,,,,,,,,,,confidence,validation</li>
+        <li><b>Save the sqlite database in your history:</b> Yes</li>
+        <li>further parameter settings at the next step</li>
+      </ul>
+    backdrop: true
+  - title: Step 56. Query Tabular. Third table 2/2
+    content: |-
+      Execute the tool with  <ul>
+        <li><b>SQL Query to generate tabular output:</b>
+          SELECT g.description, count(distinct b.peptide) as "bering_peptides", count(distinct b.id) as "bering_psms"
+          FROM go as g JOIN
+          ( SELECT go.description, bering.peptide, bering_psms.id
+          FROM go LEFT OUTER JOIN bering ON go.go_id = bering.go_reference JOIN bering_psms ON bering.peptide = bering_psms.sequence
+          GROUP BY go.description, bering.peptide, bering_psms.id
+          ) as b ON g.description = b.description
+          WHERE g.aspect = 'biological_process'
+          GROUP BY g.description
+          ORDER BY  bering_peptides desc,bering_psms desc
+        <li><b>Omit column headers from tabular output:</b> No</li>
+      </ul>
+    backdrop: true
+  - title: Conslusion
+    content: >-
+      With these three resulting files the functional analysis of this tutorial
+      is finished. Each record contains the name of a GO term, the amount of
+      peptides related to it and the amount of PSMs for these peptides.
+    backdrop: true
+  - title: Key points
+    content: |-
+      <ul><li>Use dataset collections</li>
+        <li>With SearchGUI and PeptideShaker you can gain access to multiple search engines</li>
+        <li>Learning the basics of SQL queries can pay off</li>
+    backdrop: true
