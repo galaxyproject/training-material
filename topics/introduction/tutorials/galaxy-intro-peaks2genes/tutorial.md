@@ -326,7 +326,8 @@ It's time to find the overlapping intervals (finally!). To do that, we want to e
 {: .hands_on}
 
 We now have the list of genes (column 4) overlapping with the peak regions.
-To get a better overview of the genes we obtained, we want to look at their distribution across the different chromosomes. We will then regroup the table by chromosome and count the number of genes with peaks on each chromosome
+To get a better overview of the genes we obtained, we want to look at their distribution across the different chromosomes.
+We will regroup the table by chromosome and count the number of genes with peaks on each chromosome
 
 > ### {% icon hands_on %} Hands-on: Count genes on different chromosomes
 >
