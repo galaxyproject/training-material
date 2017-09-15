@@ -296,7 +296,7 @@ you want to include Transcriptions factors in ChIP-seq experiments.
 >    >    ![Show/Hide Scratchbook](../../images/intro_scratchbook_show_hide.png)
 >    {: .tip}
 >
-> 3. Renamoe your dataset to reflect your findings
+> 3. Rename your dataset to reflect your findings
 {: .hands_on}
 
 You might have noticed that the UCSC file is in `BED` format and has a database associated to it. That's what we want for our peak file as well
