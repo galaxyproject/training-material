@@ -117,7 +117,7 @@ Let's start with a fresh history.
 >    As default, Galaxy takes the link as name. It also doesn't link the dataset to a database or a reference genome.
 >
 >    > ### {% icon comment %} Comments
->    > - Edit the "Database/Build" to select "mm9", the database build for mice used in the paper
+>    > - Check that the database of your uploaded dataset is mm9. If not, click on the pencil icon and modify the Database/Build: field to Mouse July 2007 (NCBI37/mm9) (mm9).
 >    > - Rename the datasets according to the samples
 >    {: .comment}
 >
