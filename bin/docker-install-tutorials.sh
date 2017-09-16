@@ -4,7 +4,7 @@ set -e
 galaxy_instance="http://localhost:8080"
 
 # launch the instance
-echo " - Launch a lite instance"
+echo " - Starting Galaxy.. \n"
 startup_lite
 
 # wait until galaxy has started
@@ -21,7 +21,7 @@ do
         echo " - Installing tools"
         shed-install -t $dir/tools.yaml -g $galaxy_instance -u $GALAXY_DEFAULT_ADMIN_USER -p $GALAXY_DEFAULT_ADMIN_PASSWORD
     else
-        echo " - No tools to install for this tutorial (no file named tools.yaml present)"
+        echo " - No tools to install (no file named tools.yaml present)"
     fi
 
     # install workflows (TODO: make them shared instead of just under admin user account?)
@@ -30,7 +30,7 @@ do
         echo " - Installing workflows"
         workflow-install --workflow_path $dir/workflows/ -g $galaxy_instance -u $GALAXY_DEFAULT_ADMIN_USER -p $GALAXY_DEFAULT_ADMIN_PASSWORD
     else
-        echo " - No workflows to install (no folder named workflows present)"
+        echo " - No workflows to install (no directory named workflows present)"
     fi
 
     # install data libraries
@@ -39,7 +39,7 @@ do
         echo " - Installing data libraries"
         setup-data-libraries -i $dir/data-library.yaml -g $galaxy_instance -u $GALAXY_DEFAULT_ADMIN_USER -p $GALAXY_DEFAULT_ADMIN_PASSWORD
     else
-        echo " - No data libraries to install (no data-library.yaml file present)"
+        echo " - No data libraries to install (no file named data-library.yaml present)"
     fi
 
     # install reference data? (discussion: do this at build or run time?)
@@ -48,7 +48,7 @@ do
         echo " - Installing reference data"
         run-data-managers --config $dir/data-manager.yaml -g $galaxy_instance -u $GALAXY_DEFAULT_ADMIN_USER -p $GALAXY_DEFAULT_ADMIN_PASSWORD
     else
-        echo " - No reference data to install (no data-manager.yaml file present)"
+        echo " - No reference data to install (no file named data-manager.yaml present)"
     fi
 
     # install tours
@@ -65,8 +65,8 @@ do
             cp $t $GALAXY_ROOT/config/plugins/tours/$fname
         done
     else
-        echo " - No tours to install for this tutorial (no directory named tours present)"
+        echo " - No tours to install (no directory named tours present)"
     fi
 
-    echo "Finished installation of tutorial \n"
+    echo "Finished installation of $dir tutorial \n"
 done
