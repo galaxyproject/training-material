@@ -12,39 +12,41 @@ layout: base
 <h1>Hall of Fame</h1>
 <p>A big <i>Thank You!</i> to the <strong>{{ contributors | size }}</strong> awesome contributors to the Galaxy training materials! </p>
 
-<div class="row">
+<div class="hall">
 
     {% for contributor in contributors %}
         {% assign username = contributor[0] %}
-        <div class="col-2 hall-of-fame" id="{{ username }}">
-        {% if contributors[username].github != false %}
-        <a href="https://github.com/{{ username }}" class="thumbnail withlink">
-        {% else %}
-        <a class="thumbnail">
-        {% endif %}
-            <img src="https://avatars.githubusercontent.com/{{ username }}" alt="{{ username }}"/>
-        </a>
-        <div class="name">  {{ contributors[username].name }} </div>
-        {% if contributors[username].github != false %}
-            <a title="GitHub" href="https://github.com/{{ username }}"> {% icon github %} </a>
-        {% endif %}
-        {% if contributors[username].email %}
-            <a title="E-mail" href="mailto:{{ contributors[username].email }}"> {% icon email %} </a>
-        {% endif %}
-        {% if contributors[username].gitter %}
-            <a title="Gitter" href="https://gitter.im/{{ contributors[username].gitter }}"> {% icon gitter %} </a>
-        {% endif %}
-        {% if contributors[username].twitter %}
-            <a title="Twitter" href="https://twitter.com/{{ contributors[username].twitter }}"> {% icon twitter %} </a>
-        {% endif %}
-        {% if contributors[username].linkedin %}
-            <a title="LinkedIn" href="https://www.linkedin.com/in/{{ contributors[username].linkedin }}"> {% icon linkedin %} </a>
-        {% endif %}
-        {% if contributors[username].orcid %}
-            <a title="ORCID" href="https://orcid.org/{{ contributors[username].orcid }}">
-                <img class="contact-icon" src="/shared/images/orcid-icon-mini.png" alt="ORCID"/>
+        <div class="hall-of-fame" id="{{ username }}">
+            {% if contributors[username].github != false %}
+            <a href="https://github.com/{{ username }}" class="thumbnail withlink">
+            {% else %}
+            <a class="thumbnail">
+            {% endif %}
+                <img src="https://avatars.githubusercontent.com/{{ username }}" alt="{{ username }}"/>
             </a>
-        {% endif %}
+            <div class="name">  {{ contributors[username].name }} </div>
+            <div class="contact-items">
+                {% if contributors[username].github != false %}
+                    <a title="GitHub" href="https://github.com/{{ username }}"> {% icon github %} </a>
+                {% endif %}
+                {% if contributors[username].email %}
+                    <a title="E-mail" href="mailto:{{ contributors[username].email }}"> {% icon email %} </a>
+                {% endif %}
+                {% if contributors[username].gitter %}
+                    <a title="Gitter" href="https://gitter.im/{{ contributors[username].gitter }}"> {% icon gitter %} </a>
+                {% endif %}
+                {% if contributors[username].twitter %}
+                    <a title="Twitter" href="https://twitter.com/{{ contributors[username].twitter }}"> {% icon twitter %} </a>
+                {% endif %}
+                {% if contributors[username].linkedin %}
+                    <a title="LinkedIn" href="https://www.linkedin.com/in/{{ contributors[username].linkedin }}"> {% icon linkedin %} </a>
+                {% endif %}
+                {% if contributors[username].orcid %}
+                    <a title="ORCID" href="https://orcid.org/{{ contributors[username].orcid }}">
+                        <img class="contact-icon" src="/shared/images/orcid-icon-mini.png" alt="ORCID"/>
+                    </a>
+                {% endif %}
+            </div>
         </div>
     {% endfor %}
 
