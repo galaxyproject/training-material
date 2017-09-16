@@ -61,7 +61,7 @@ do
         do
             # prefix tour file name with tutorial name to avoid clashes
             fname=$dir_name-$(basename $t)
-            echo " - Installing tour: $t as $fname"
+            echo "   - Installing tour: $t as $fname"
             cp $t $GALAXY_ROOT/config/plugins/tours/$fname
         done
     else
