@@ -41,28 +41,35 @@ The tool settings need to be carefully tested and evaluated manually to obtain o
 > ### {% icon hands_on %} Hands-on: MS1 Feature Detection
 >
 > 1. Import the test data from [zenodo](). The file type of the data is mzML. The data have not been modified during the conversion from the machine raw file, neither background removal, nor peak picking (centroiding) has been performed.
-> 2. Run `FeatureFinderMultiplex`{% icon tool %} on the mzML file. Change **`Labelling`** to `\[ \] \[Arg6,Lys6\]`.
+> 2. Run ***FeatureFinderMultiplex*** {% icon tool %} on the mzML file. Change **`Labelling`** to `\[ \] \[Arg6,Lys6\]`.
 >
 >   > ### {% icon tip %} Tip (Expert level): Detecting features of knockouts
->   > In biology, there are rarely cases in which a gene product is completely shut off between two conditions. Rather, most changes are **word missing**. However, in some situations, you will have the situation that a protein is present in only one of the tested conditions and completely lacking in another. A classical example would be comparing a "knockout" mouse with its "wild-type" counterpart.
->   > Due to the feature detection algorithm of `FeatureFinderMultiplex`, those features would normally be disregarded, as they do not look like typical features in labelled samples.
+>   > In biology, there are rarely cases in which a gene product is completely shut off between two conditions. Rather, most changes are gradual. However, in some situations, you will have the situation that a protein is present in only one of the tested conditions and completely lacking in another. A classical example would be comparing a "knockout" mouse with its "wild-type" counterpart.
+>   > Due to the feature detection algorithm of ***FeatureFinderMultiplex*** {% icon tool %}, those features would normally be disregarded, as they do not look like typical features in labelled samples.
 >   >
->   > However, there is a built-in option in `FeatureFinderMultiplex` that enables finding of "knockout features". If you expect one or more proteins to be completely missing in at least one of your conditions, select the advanced option **`knockouts present` **.
+>   > However, there is a built-in option in ***FeatureFinderMultiplex*** {% icon tool %} that enables finding of "knockout features". If you expect one or more proteins to be completely missing in at least one of your conditions, select the advanced option **`knockouts present`**.
 >   > Switching on this option is not recommended as a default setting, as it increases the possibility of false positives. When using this option, be advised to check for false positives carefully, as described [below](#expert-level-evaluation-and-optimization-of-quantitation-results).
 >   {: .tip}
 {: .hands_on}
+
 # Peptide and Protein Identification and Conversion
+
+In this tutorial, peptide identification will be performed using the workflow of the previous [Peptide ID Tutorial]({{site.url}}/topics/proteomics/tutorials/protein-id-sg-ps/tutorial.html). Here, peptide ID and protein inference were performed using [SearchGUI](https://compomics.github.io/projects/searchgui.html) and [PeptideShaker](https://compomics.github.io/projects/peptide-shaker.html). 
+To be able to further process the mzid output of ***PeptideShaker*** {% icon tool %}, we will have to modify the mzid slightly to make it compatible to the OpenMS tools used in this tutorial.
 
 > ### {% icon hands_on %} Hands-on: Peptide and Protein Identification and Conversion
 > 1. Run the workflow "ProteinID_SG_PS" on the test dataset.
-> 2. Use **`IDConverter`** to convert the mzid output of `Peptide Shaker` {% icon tool %} to mzidentML.
+> 2. For compatibility reasons, run ***Replace*** {% icon tool %} on the mzid output of ***PeptideShaker*** {% icon tool %}. Copy the following pattern in the field **`Find pattern`**: `.*name="PeptideShaker PSM confidence type".*`. Leave the field **`Replace with`** empty. Change the tick box **`Find-Pattern is a regular expression`** to `Yes` and execute.
+> 3. Use ***IDFileConverter*** {% icon tool %} to convert the modified mzid to idXML. Change the parameter **'Output file type'** to `idXML` and leave the other options at default.
 {: .hands_on}
 
 # Quant to ID matching
 
+We now have identified
+
 > ### {% icon hands_on %} Hands-on: Quant to ID matching
 >
-> 1. Run `ProteinQuantifier` {% icon tool %} on
+> 1. Run ***ProteinQuantifier*** {% icon tool %} on
 > 2.
 >
 >   > ### {% icon question %} Questions
@@ -70,24 +77,31 @@ The tool settings need to be carefully tested and evaluated manually to obtain o
 {: .hands_on}
 
 # Expert level: Evaluation and Optimization of Quantitation Results
-`FeatureFinderMultiplex` searches for multiple similar features that elute at the same time, but diverge by a mass shift fitting to the label used. `FeatureFinderMultiplex` uses several parameters that may be used to optimize your search results. Two important parameters are **`Average elution time` and `Averagine similarity`**.
-    - `Average elution time`: To improve results, you may look at the mzML file first and find out the average elution time of peaks. **How?**
-    - `Averagine similarity`: describes the similarity of two features. Play around with this parameter to optimize the number of features detected. Be careful, reducing it may lead to false positives.
 
-> ### Comment: Benchmarking parameters for opimization - What is a good result?
+***FeatureFinderMultiplex*** {% icon tool %} searches for multiple similar features that elute at the same time, but diverge by a mass shift fitting to the label used. ***FeatureFinderMultiplex*** {% icon tool %} uses several parameters that may be used to optimize your search results. Two important parameters are **`Average elution time`** and **`Averagine similarity`**.
+
+    - **`Average elution time`**: To improve results, you may look at the mzML file first and find out the average elution time of peaks. **How?**
+    
+    - **`Averagine similarity`**: describes the similarity of two features. Play around with this parameter to optimize the number of features detected. Be careful, reducing it may lead to false positives.
+ 
+> ### {% icon comment %} Comment: Benchmarking parameters for opimization - What is a good result?
 >
 > The quality of the results can be measured by so-called "benchmarking parameters".
 >  
-> Benchmarking parameters for `FeatureFinderMultiplex`:
->     1. Number of features that can be linked to peptide IDs (and vice-versa).
->     2. Although the first parameter gives a good measure of quality, it does not rule out that false positive features or IDs were matched. To check for false positives, you will have to scan through your data manually. To do so, open both the `FeatureFinderMultiplex` consensusXML output and the mzidentML file into [TOPPView]().
->         - **Caution** Manual evaluation is prone to biases, as you can look solely at small parts of your data. To avoid this, try to look at the *very same* areas / the same features of all different result files.
->     3. If you were using the option **`knockouts present` **, check, if the detected "knockout features" fit to your expectations.
+> Benchmarking parameters for ***FeatureFinderMultiplex*** {% icon tool %}:
+>
+> 1. Number of features that can be linked to peptide IDs (and vice-versa).
+> 2. Although the first parameter gives a good measure of quality, it does not rule out that false positive features or IDs were matched. To check for false positives, you will have to scan through your data manually. To do so, open both the ***FeatureFinderMultiplex*** {% icon tool %} consensusXML output and the mzidentML file into [TOPPView]().
+>
+> 	- **Caution**: Manual evaluation is prone to biases, as you can look solely at small parts of your data. To avoid this, try to look at the *very same* areas / the same features of all different result files.
+>
+> 3. If you were using the option **`knockouts present`**, check, if the detected "knockout features" fit to your expectations.
+{: .comment}
 
 > ### {% icon hands_on %} Hands-on: Evaluation and Optimization of Quantitation Results
 >
-> 1. Run the whole WF again, change ** a single setting (averagine?)** in `FeatureFinderMultiplex`.
-> 2. Run `FileInfo` {% icon tool %} on the results -> number of ID-Feature-matches
+> 1. Run the whole WF again, change **a single setting (averagine?)** in ***FeatureFinderMultiplex*** {% icon tool %}.
+> 2. Run ***FileInfo*** {% icon tool %} on the results -> number of ID-Feature-matches
 > 3. Run `dongs` {% icon tool %} on the results -> restrict to a small areas
 > 4. Open results in TOPPView.
 >
