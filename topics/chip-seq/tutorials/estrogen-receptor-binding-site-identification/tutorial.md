@@ -483,6 +483,12 @@ optionally, you can also use `plotProfile`to create a profile plot using to comp
 >    - "Did you compute the matrix with more than one groups of regions?" to the correct setting
 
 
+# Conclusion
+{:.no_toc}
+
+![Summary of the different steps of the tutorial and the generated files](../../images/estrogen-receptor-binding-site-identification/tutorial-scheme.png "Different steps of the tutorials with the generated files")
+
+
 ## Additional exercise (if you have finished all above)
 
 ### Additional Quality control : GC bias assessment
@@ -549,6 +555,7 @@ using macs2 parameters same as above.
 
 5. Run computeMatrix:
 
+> ### {% icon hands_on %} Hands-on: computeMatrix
 >  **computeMatrix** {% icon tool %} with the same parameters but:
 > Regions to plot : select the merged bed from above
 > Output option : `reference-point`
@@ -560,18 +567,13 @@ using macs2 parameters same as above.
 {: .hands_on}
 
 6. Run plotHeatmap:
+
+> ### {% icon hands_on %} Hands-on: plotHeatmap
 > **plotHeatmap** {% icon tool %} with
 >    - "Matrix file from the computeMatrix tool" to the generated matrix
 >    - "Show advanced options" to `yes`
->    - "Did you compute the matrix with more than one groups of regions?" to the correct setting
-
-> The output shall look like this :
+>    - "Did you compute the matrix with more than one groups of regions?" to "No, I used only one group"
+>    - "Clustering algorithm" to Kmeans clustering
+> Inspect the output
 >
-> ![hm](../../images/hm.png)
 {: .hands_on}
-
-
-# Conclusion
-{:.no_toc}
-
-![Summary of the different steps of the tutorial and the generated files](../../images/estrogen-receptor-binding-site-identification/tutorial-scheme.png "Different steps of the tutorials with the generated files")
