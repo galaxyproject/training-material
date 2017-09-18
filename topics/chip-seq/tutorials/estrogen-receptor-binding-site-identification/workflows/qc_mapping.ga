@@ -1,0 +1,243 @@
+{
+    "a_galaxy_workflow": "true", 
+    "annotation": "", 
+    "format-version": "0.1", 
+    "name": "Identification of the binding sites of the Estrogen receptor", 
+    "steps": {
+        "0": {
+            "annotation": "", 
+            "content_id": null, 
+            "errors": null, 
+            "id": 0, 
+            "input_connections": {}, 
+            "inputs": [
+                {
+                    "description": "", 
+                    "name": "patient1_input_good_outcome.fastq.txt"
+                }
+            ], 
+            "label": null, 
+            "name": "Input dataset", 
+            "outputs": [], 
+            "position": {
+                "left": 10, 
+                "top": 10
+            }, 
+            "tool_id": null, 
+            "tool_state": "{\"name\": \"patient1_input_good_outcome.fastq.txt\"}", 
+            "tool_version": null, 
+            "type": "data_input", 
+            "uuid": "8544a44d-a989-4c30-8b54-e18adabf9742", 
+            "workflow_outputs": []
+        }, 
+        "1": {
+            "annotation": "", 
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.69", 
+            "errors": null, 
+            "id": 1, 
+            "input_connections": {
+                "input_file": {
+                    "id": 0, 
+                    "output_name": "output"
+                }
+            }, 
+            "inputs": [], 
+            "label": null, 
+            "name": "FastQC", 
+            "outputs": [
+                {
+                    "name": "html_file", 
+                    "type": "html"
+                }, 
+                {
+                    "name": "text_file", 
+                    "type": "txt"
+                }
+            ], 
+            "position": {
+                "left": 230, 
+                "top": 10
+            }, 
+            "post_job_actions": {}, 
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.69", 
+            "tool_shed_repository": {
+                "changeset_revision": "9337dd1fbc66", 
+                "name": "fastqc", 
+                "owner": "devteam", 
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            }, 
+            "tool_state": "{\"__page__\": null, \"limits\": \"null\", \"input_file\": \"null\", \"__rerun_remap_job_id__\": null, \"contaminants\": \"null\", \"chromInfo\": \"\\\"/usr/local/galaxy/galaxy-dist/tool-data/shared/ucsc/chrom/?.len\\\"\"}", 
+            "tool_version": "0.69", 
+            "type": "tool", 
+            "uuid": "aa85e34a-4081-4443-a52f-df57dc3b7c40", 
+            "workflow_outputs": []
+        }, 
+        "2": {
+            "annotation": "", 
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/trim_galore/trim_galore/0.4.3.0", 
+            "errors": null, 
+            "id": 2, 
+            "input_connections": {
+                "singlePaired|input_singles": {
+                    "id": 0, 
+                    "output_name": "output"
+                }
+            }, 
+            "inputs": [], 
+            "label": null, 
+            "name": "Trim Galore!", 
+            "outputs": [
+                {
+                    "name": "trimmed_reads_paired_collection", 
+                    "type": "input"
+                }, 
+                {
+                    "name": "trimmed_reads_unpaired_collection", 
+                    "type": "input"
+                }, 
+                {
+                    "name": "trimmed_reads_single", 
+                    "type": "input"
+                }, 
+                {
+                    "name": "trimmed_reads_pair1", 
+                    "type": "input"
+                }, 
+                {
+                    "name": "trimmed_reads_pair2", 
+                    "type": "input"
+                }, 
+                {
+                    "name": "unpaired_reads_1", 
+                    "type": "input"
+                }, 
+                {
+                    "name": "unpaired_reads_2", 
+                    "type": "input"
+                }, 
+                {
+                    "name": "report_file", 
+                    "type": "txt"
+                }
+            ], 
+            "position": {
+                "left": 230, 
+                "top": 130
+            }, 
+            "post_job_actions": {}, 
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/trim_galore/trim_galore/0.4.3.0", 
+            "tool_shed_repository": {
+                "changeset_revision": "1bf4789584dc", 
+                "name": "trim_galore", 
+                "owner": "bgruening", 
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            }, 
+            "tool_state": "{\"__page__\": null, \"singlePaired\": \"{\\\"three_prime_clip_R1\\\": \\\"\\\", \\\"trimming\\\": {\\\"trimming_select\\\": \\\"\\\", \\\"__current_case__\\\": 0}, \\\"sPaired\\\": \\\"single\\\", \\\"__current_case__\\\": 0, \\\"input_singles\\\": null}\", \"__rerun_remap_job_id__\": null, \"params\": \"{\\\"min_length\\\": \\\"20\\\", \\\"stringency\\\": \\\"3\\\", \\\"error_rate\\\": \\\"0.1\\\", \\\"retain_unpaired\\\": {\\\"retain_unpaired_select\\\": \\\"no_output\\\", \\\"__current_case__\\\": 0}, \\\"__current_case__\\\": 1, \\\"report\\\": \\\"false\\\", \\\"settingsType\\\": \\\"custom\\\", \\\"quality\\\": \\\"15\\\", \\\"clip_R1\\\": \\\"\\\", \\\"clip_R2\\\": \\\"\\\"}\", \"chromInfo\": \"\\\"/usr/local/galaxy/galaxy-dist/tool-data/shared/ucsc/chrom/?.len\\\"\", \"rrbs\": \"{\\\"settingsType\\\": \\\"custom\\\", \\\"rrbs\\\": \\\"true\\\", \\\"__current_case__\\\": 1, \\\"non_directional\\\": \\\"false\\\"}\"}", 
+            "tool_version": "0.4.3.0", 
+            "type": "tool", 
+            "uuid": "b7723962-df2c-41a9-9bd2-efb5346c620e", 
+            "workflow_outputs": []
+        }, 
+        "3": {
+            "annotation": "", 
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/bowtie2/bowtie2/2.3.2.2", 
+            "errors": null, 
+            "id": 3, 
+            "input_connections": {
+                "library|input_1": {
+                    "id": 2, 
+                    "output_name": "trimmed_reads_single"
+                }
+            }, 
+            "inputs": [], 
+            "label": null, 
+            "name": "Bowtie2", 
+            "outputs": [
+                {
+                    "name": "output_unaligned_reads_l", 
+                    "type": "fastqsanger"
+                }, 
+                {
+                    "name": "output_aligned_reads_l", 
+                    "type": "fastqsanger"
+                }, 
+                {
+                    "name": "output_aligned_reads_r", 
+                    "type": "fastqsanger"
+                }, 
+                {
+                    "name": "output_unaligned_reads_r", 
+                    "type": "fastqsanger"
+                }, 
+                {
+                    "name": "output", 
+                    "type": "bam"
+                }, 
+                {
+                    "name": "output_sam", 
+                    "type": "sam"
+                }, 
+                {
+                    "name": "mapping_stats", 
+                    "type": "txt"
+                }
+            ], 
+            "position": {
+                "left": 450, 
+                "top": 10
+            }, 
+            "post_job_actions": {}, 
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/bowtie2/bowtie2/2.3.2.2", 
+            "tool_shed_repository": {
+                "changeset_revision": "8ccbdbe9a695", 
+                "name": "bowtie2", 
+                "owner": "devteam", 
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            }, 
+            "tool_state": "{\"__page__\": null, \"__rerun_remap_job_id__\": null, \"library\": \"{\\\"aligned_file\\\": \\\"false\\\", \\\"unaligned_file\\\": \\\"false\\\", \\\"type\\\": \\\"single\\\", \\\"__current_case__\\\": 0, \\\"input_1\\\": null}\", \"reference_genome\": \"{\\\"source\\\": \\\"indexed\\\", \\\"__current_case__\\\": 0, \\\"index\\\": \\\"hg18\\\"}\", \"rg\": \"{\\\"rg_selector\\\": \\\"do_not_set\\\", \\\"__current_case__\\\": 3}\", \"save_mapping_stats\": \"\\\"false\\\"\", \"analysis_type\": \"{\\\"analysis_type_selector\\\": \\\"simple\\\", \\\"presets\\\": \\\"no_presets\\\", \\\"__current_case__\\\": 0}\", \"chromInfo\": \"\\\"/usr/local/galaxy/galaxy-dist/tool-data/shared/ucsc/chrom/?.len\\\"\"}", 
+            "tool_version": "2.3.2.2", 
+            "type": "tool", 
+            "uuid": "fa269d09-cb5a-47da-9ba3-d9bee1590e90", 
+            "workflow_outputs": []
+        }, 
+        "4": {
+            "annotation": "", 
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/bam_to_sam/bam_to_sam/2.0.1", 
+            "errors": null, 
+            "id": 4, 
+            "input_connections": {
+                "input1": {
+                    "id": 3, 
+                    "output_name": "output"
+                }
+            }, 
+            "inputs": [], 
+            "label": null, 
+            "name": "BAM-to-SAM", 
+            "outputs": [
+                {
+                    "name": "output1", 
+                    "type": "sam"
+                }
+            ], 
+            "position": {
+                "left": 670, 
+                "top": 10
+            }, 
+            "post_job_actions": {}, 
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/bam_to_sam/bam_to_sam/2.0.1", 
+            "tool_shed_repository": {
+                "changeset_revision": "f57df915aa10", 
+                "name": "bam_to_sam", 
+                "owner": "devteam", 
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            }, 
+            "tool_state": "{\"header\": \"\\\"-h\\\"\", \"__rerun_remap_job_id__\": null, \"input1\": \"null\", \"chromInfo\": \"\\\"/usr/local/galaxy/galaxy-dist/tool-data/shared/ucsc/chrom/hg18.len\\\"\", \"__page__\": null}", 
+            "tool_version": "2.0.1", 
+            "type": "tool", 
+            "uuid": "ef116d56-dbdb-494c-b092-d875bcb75518", 
+            "workflow_outputs": []
+        }
+    }, 
+    "uuid": "04533d45-4a1f-404f-a98e-3165e5dabbc3"
+}
