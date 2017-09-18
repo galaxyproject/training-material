@@ -42,7 +42,7 @@ The first step of any ChIP-Seq data analysis is quality control of the raw seque
 > ### {% icon hands_on %} Hands-on: Quality control
 >
 > 1. Create a new history for this tutorial and give it a proper name
-> 2. Import `patient1_input_good_outcome` from [Zenodo]() or from the data library into the history
+> 2. Import `patient1_input_good_outcome` from [Zenodo](https://zenodo.org/record/892432/files/patient1_input_good_outcome.fastq) or from the data library into the history
 >
 >    > ### {% icon tip %} Tip: Importing data via links
 >    >
@@ -222,7 +222,16 @@ To save time, we already did that and we can now work directly on the BAM files 
 > ### {% icon hands_on %} Hands-on: Correlation between samples
 >
 > 1. Create a new history
-> 2. Import the 8 BAM files from [Zenodo]() or from the data library into the history
+> 2. Import the 8 BAM files from [Zenodo](https://doi.org/10.5281/zenodo.892432) or from the data library into the history
+>    - [`patient1_ChIP_ER_good_outcome.bam`](https://zenodo.org/record/892432/files/patient1_ChIP_ER_good_outcome.bam)
+>    - [`patient1_input_good_outcome.bam`](https://zenodo.org/record/892432/files/patient1_input_good_outcome.bam)
+>    - [`patient2_ChIP_ER_good_outcome.bam`](https://zenodo.org/record/892432/files/patient2_ChIP_ER_good_outcome.bam)
+>    - [`patient2_input_good_outcome.bam`](https://zenodo.org/record/892432/files/patient2_input_good_outcome.bam)
+>    - [`patient3_ChIP_ER_poor_outcome.bam`](https://zenodo.org/record/892432/files/patient3_ChIP_ER_poor_outcome.bam)
+>    - [`patient3_input_poor_outcome.bam`](https://zenodo.org/record/892432/files/patient3_input_poor_outcome.bam)
+>    - [`patient4_ChIP_ER_poor_outcome.bam`](https://zenodo.org/record/892432/files/patient4_ChIP_ER_poor_outcome.bam)
+>    - [`patient4_input_poor_outcome.bam`](url: https://zenodo.org/record/892432/files/patient4_input_poor_outcome.bam)
+>
 > 3. **multiBamSummary** {% icon tool %} with
 >    - "Sample order matters" to `No`
 >    - "Bam file" to the 8 imported BAM files
