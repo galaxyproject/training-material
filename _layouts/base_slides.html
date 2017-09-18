@@ -11,6 +11,7 @@
     {% endif %}
   {% endfor %}
 {% endif %}
+{% assign contributors = site.data['contributors'] %}
 
   <head>
     <meta charset="utf-8">
@@ -26,59 +27,65 @@ class: center, middle, inverse
 
 <div class="my-footer"><span>
 {% if page.logo == "GTN" %}
-<img src="{{ site.url }}{{ site.logo }}" style="height: 40px;"/>
+<img src="{{ site.url }}{{ site.small_logo }}" alt="Galaxy Training Network" style="height: 40px;"/>
 {% else %}
-<img src="{{ page.logo }}" style="height: 40px;"/>
+<img src="{{ page.logo }}" alt="page logo" style="height: 40px;"/>
 {% endif %}
 </span></div>
----
-
-## Welcome!
-
-This material is the result of a collaborative work. <br/>Thanks to [all the contributors]({{ site.url }}/{{ topic.name }}#contributors) and the [Galaxy Training Network](https://wiki.galaxyproject.org/Teach/GTN)!
-
-{% if page.logo == "GTN" %}
-<img src="{{ site.url }}{{ site.logo }}" style="height: 100px;"/>
-{% else %}
-<img src="{{ page.logo }}" style="height: 40px;"/>
-{% endif %}
 
 ---
 
 # {{ title }}
 
+{% if topic.requirements %}
 ---
 
-## Requirements
+  ## Requirements
 
-Before diving into this slide deck, we recommend you to have a look at:
+  Before diving into this slide deck, we recommend you to have a look at:
 
-{% for requirement in topic.requirements %}
-  {% if requirement.type == "internal" %}
-- [{{ requirement.title }}]({{ site.url }}{{ requirement.link }})
-  {% elsif material.type == "external" %}
-- [{{ requirement.title }}]({{ requirement.link }})
-  {% endif %}
-{% endfor %}
-
-{% if page.tutorial_name %}
-  {% for requirement in tutorial.requirements %}
+  {% for requirement in topic.requirements %}
     {% if requirement.type == "internal" %}
-- [{{ requirement.title }}]({{ site.url }}{{ requirement.link }})
+  - [{{ requirement.title }}]({{ site.url }}{{ requirement.link }})
     {% elsif material.type == "external" %}
-- [{{ requirement.title }}]({{ requirement.link }})
+  - [{{ requirement.title }}]({{ requirement.link }})
     {% endif %}
   {% endfor %}
+
+  {% if page.tutorial_name %}
+    {% for requirement in tutorial.requirements %}
+      {% if requirement.type == "internal" %}
+  - [{{ requirement.title }}]({{ site.url }}{{ requirement.link }})
+      {% elsif material.type == "external" %}
+  - [{{ requirement.title }}]({{ requirement.link }})
+      {% endif %}
+    {% endfor %}
+  {% endif %}
 {% endif %}
 
 ---
 
 {{ content | xml_escape }}
 
-.footnote[Found a typo? Something is wrong in this tutorial? <br/>Edit it on [GitHub]({{ site.github_repository }}/tree/master/{{ topic.name }}/slides/{{ page.name }})]
+---
 
+## Thank you!
+
+This material is the result of a collaborative work. Thanks the [Galaxy Training Network](https://wiki.galaxyproject.org/Teach/GTN) and all the contributors {% if tutorial.contributors %}{% capture contributors %}{% for c in tutorial.contributors %}, {{ contributors[c].name }}{% endfor %}{% endcapture %} ({{ contributors | remove_first: ', ' }}) {% endif %}!
+
+{% if page.logo == "GTN" %}
+<img src="{{ site.url }}{{ site.logo }}" alt="Galaxy Training Network" style="height: 100px;"/>
+{% else %}
+<img src="{{ page.logo }}" alt="page logo" style="height: 40px;"/>
+{% endif %}
+
+{% if page.layout == "tutorial_slides" %}
+.footnote[Found a typo? Something is wrong in this tutorial? <br/>Edit it on [GitHub]({{ site.github_repository }}/tree/master/topics/{{ topic.name }}/tutorials/{{ page.tutorial_name }}/slides.html)]
+{% elsif page.layout == "introduction_slides" %}
+.footnote[Found a typo? Something is wrong in this tutorial? <br/>Edit it on [GitHub]({{ site.github_repository }}/tree/master/topics/{{ topic.name }}/slides/index.html)]
+{% endif %}
     </textarea>
-    <script src="https://remarkjs.com/downloads/remark-latest.min.js" type="text/javascript">
+    <script src="{{ site.url }}/assets/js/remark-latest.min.js" type="text/javascript">
     </script>
     <script type="text/javascript">
       var slideshow = remark.create({navigation: {scroll: false,}});
