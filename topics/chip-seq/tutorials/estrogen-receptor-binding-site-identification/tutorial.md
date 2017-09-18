@@ -216,6 +216,8 @@ read counts on different regions for all different samples.
 We expect that the replicates of the ChIP-seq experiments should be clustered more closely to each other than the replicates of the input sample.
 That is, because the input samples should not have enriched regions included - remember the immuno-precipitation step was skiped during the sample preparation.
 
+To compute the correlation between the samples we are going to to use the QC modules of deepTools (http://deeptools.readthedocs.io/), a software package for the QC, processing and analysis of NGS data. Before computing the correlation a time consuming step is required, which is to compute the read coverage over a large number of regions from each BAM file. For this we will use the tool **multiBamSummary** {% icon tool %}.
+
 To do that, we need at first to catch up for all our samples and re-run the previous steps (quality control and mapping) on each sample.
 To save time, we already did that and we can now work directly on the BAM files of the 8 samples
 
@@ -243,12 +245,13 @@ To save time, we already did that and we can now work directly on the BAM files 
 >    - "Distance between bins" to `500000` (to reduce the computation time for the tutorial)
 >    - "Region of the genome to limit the operation to" to `chr1` (to reduce the computation time for the tutorial)
 >  
->    This tool splits the reference genome into bins of equal size (*e.g.* 10kb) and counts the number of overlapping reads from each sample.
+>    Using these parameters, the tool will take bins of 100 bp separated by 500,000. For each bin the overlapping reads in each sample will be computed
 >
 > 4. **plotCorrelation** {% icon tool %} with
 >    - "Matrix file from the multiBamSummary tool" to the generated multiBamSummary output
 >    
->    Feel free to try different parameters.
+>    To compute and visualize the sample correlation we use plotCorrelation from deepTools. This is a fast process that allows the user to quickly try different color combinations and outputs. Feel free to try different parameters.
+>    
 {: .hands_on}
 
 > ### {% icon question %} Questions
@@ -353,7 +356,7 @@ The plotFingerprint tool generates a fingerprint plot. You need to intepret it t
 >    </details>
 {: .question}
 
-> ### {% icon hands_on %} (Optional) Hands-on: GC bias assessment (other samples)
+> ### {% icon hands_on %} (Optional) Hands-on: IP strength estimation (other samples)
 >
 > 1. Run the same analysis on data of the 3 other patients
 {: .hands_on}
