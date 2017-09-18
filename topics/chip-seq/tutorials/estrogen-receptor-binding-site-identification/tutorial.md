@@ -35,7 +35,7 @@ Because of the long processing time for the large original files, we have downsa
 >
 {: .agenda}
 
-# Quality control and treatment of the sequences
+## Step 1: Quality control and treatment of the sequences
 
 The first step of any ChIP-Seq data analysis is quality control of the raw sequencing data.
 
@@ -65,11 +65,11 @@ The first step of any ChIP-Seq data analysis is quality control of the raw seque
 >    > * Import in the history
 >    {: .tip}
 >
->    As default, Galaxy takes the link as name, so rename them. 
+>    As default, Galaxy takes the link as name, so rename them.
 >
 >
 > 3. Inspect the file by clicking on the `eye` icon
-> 
+>
 >    > ### {% icon question %} Questions
 >    >
 >    > 1. How are the DNA sequences stored?
@@ -108,9 +108,11 @@ It is often necessary to trim sequenced read, for example, to get rid of bases t
 >
 {: .hands_on}
 
-# Mapping of the reads
+## Step 2: Mapping of the reads
 
 In order to figure where the sequenced DNA fragments originated from in the genome, the short reads must be aligned to the reference genome. This is equivalent to solving a jigsaw puzzles, but unfortunately, not all pieces are unique. In principle, you could do a BLAST analysis to figure out where the sequenced pieces fit best in the known genome. Aligning millions of short sequences this way may, however, take a couple of weeks.
+
+### 2.1: Running Bowtie2
 
 Nowadays, there are many read alignment programs for shotgun sequenced DNA, Bowtie2 being one of them.
 
@@ -136,7 +138,7 @@ Nowadays, there are many read alignment programs for shotgun sequenced DNA, Bowt
 >
 {: .hands_on}
 
-The read alignment step with bowtie2 resulted in a compressed, binary file (BAM) that is not human-readable. It's like the zipped version of a text file. 
+The read alignment step with bowtie2 resulted in a compressed, binary file (BAM) that is not human-readable. It's like the zipped version of a text file.
 
 We will show you two ways to inspect the file:
 
@@ -144,7 +146,7 @@ We will show you two ways to inspect the file:
 2. Converting the binary format into its text file equivalent
 
 
-## Visualization using a Genome Browser
+### 2.2 : Visualization using a Genome Browser
 
 > ### {% icon hands_on %} Hands-on: Visualization of the reads in IGV
 >
@@ -171,7 +173,7 @@ The reads have a direction: they are mapped to the forward or reverse strand, re
 {: .comment}
 
 
-## Inspection of the SAM format
+### 2.3 : Inspection of the SAM format
 
 As mentioned above, you can convert the binary BAM file into a simple (but large!) text file, which is called a [SAM](https://en.wikipedia.org/wiki/SAM_(file_format)) (Sequence Alignment Map) file.
 
@@ -204,12 +206,12 @@ A SAM file is a file with
 >    </details>
 {: .question}
 
-# ChIP-seq Quality Control
+## Step 3: ChIP-seq Quality Control
 
 We already checked the quality of the raw sequencing reads in the first step.
 Now we would like to test the quality of the ChIP-seq preparation, to know if your ChIP-seq samples are more enriched than the control (input) samples.
 
-## Correlation between samples
+### 3.1 : Correlation between samples
 
 To assess the similarity between the replicates of the ChIP and the input, respectively, it is a common technique to calculate the correlation of
 read counts on different regions for all different samples.
@@ -255,7 +257,7 @@ To save time, we already did that and we can now work directly on the BAM files 
 {: .hands_on}
 
 > ### {% icon question %} Questions
-> 
+>
 > ![Output for plotCorrelation with the correlation scores between the 8 samples](../../images/estrogen-receptor-binding-site-identification/plotCorrelation_output.png "Correlation scores between the 8 samples")
 >
 > 1. How are your samples clustered? Does that correspond to your expectations?
@@ -273,57 +275,7 @@ To save time, we already did that and we can now work directly on the BAM files 
 > More information on these two tools can be found at the [deepTools documentation page](https://deeptools.readthedocs.io/en/latest/content/list_of_tools.html).
 {: .comment}
 
-## GC bias assessment
-
-A common problem of PCR-based protocols is the observation that GC-rich regions tend to be amplified more readily than GC-poor regions.
-We need to check that our samples do not have more reads from regions of the genome with high GC.
-
-> ### {% icon comment %} Comments
-> GC bias was for many years a big problem, but recent advances in sample preparation have solved this problem to a degree that you can skip this step more often.
-{: .comment}
-
-For practical reasons, we will focus here only on one of our BAM files. With real data you should repeat these steps for all your samples.
-
-> ### {% icon question %} Questions
-> 
-> 1. Can you guess why it makes more sense to check the input files for GC bias?
->
->    <details>
->    <summary>Click to view answers</summary>
->    <ol type="1">
->       <li>We only want to assess the bias induced by the PCR-based protocols. This is not possible with the ChIP samples, as the enriched regions
->        (binding sites) can have a potential GC enrichment on their own.</li>
->    </ol>
->    </details>
-{: .question}
-
-> ### {% icon hands_on %} Hands-on: GC bias assessment
->
-> 1. **computeGCbias** {% icon tool %} with
->    - "BAM file" to `patient1_input_good_outcome`
->    - "Reference genome" to `locally cached`
->    - "Using reference genome" to `Human (Homo sapiens): hg18`
->    - "Effective genome size" to `hg19 (2451960000)`
->    - "Fragment length used for the sequencing" to `300`
->    - "Region of the genome to limit the operation to" to `chr1` (to reduce the computation time for the tutorial)
->
->    > ### {% icon question %} Questions
->    >
->    > ![Output for computeGCbias with the GC bias estimation](../../images/estrogen-receptor-binding-site-identification/computeGCBias_output.png "Estimation of the GC bias for the input sample for the Patient 1")
->    >
->    > 1. Does this dataset have a GC bias?
->    >
->    >    <details>
->    >    <summary>Click to view answers</summary>
->    >    <ol type="1">
->    >    <li>There is no significantly more reads in the GC-rich regions.</li>
->    >    </ol>
->    >    </details>
->    {: .question}
-{: .hands_on}
-
-
-## IP strength estimation
+### 3.2: IP strength estimation
 
 To evaluate the quality of the immuno-precipitation step, we can compute the IP strength. It determines how well the signal in the ChIP-seq sample can be differentiated from the background distribution of reads in the control sample. To do that we take the data for one Patient and compare the input sample and the ChIP-seq sample.
 
@@ -362,10 +314,10 @@ The plotFingerprint tool generates a fingerprint plot. You need to intepret it t
 {: .hands_on}
 
 
-# Normalization and peak calling
+## Step 4: Normalization
 
-We would like to know where the binding sites of the estrogen receptor are located. For this we need 
-to extract which parts of the genome have been enriched (more reads mapped) within the samples that underwent immunoprecipitation. 
+We would like to know where the binding sites of the estrogen receptor are located. For this we need
+to extract which parts of the genome have been enriched (more reads mapped) within the samples that underwent immunoprecipitation.
 
 For the normalization we have two options.
 
@@ -373,7 +325,7 @@ For the normalization we have two options.
 2. Normalization by input file
 
 
-## Generation of coverage files normalized by sequencing depth
+### 4.1 : Generation of coverage files normalized by sequencing depth
 
 We first need to make the samples comparable. Indeed, the different samples have usually a different sequencing depth, i.e. a different number of reads.
 These differences can bias the interpretation of the number of reads mapped to a specific genome region.
@@ -432,7 +384,7 @@ These differences can bias the interpretation of the number of reads mapped to a
 >
 {: .hands_on}
 
-## Generation of input-normalized coverage files and their visualization
+### 4.2: Generation of input-normalized coverage files and their visualization
 
 To extract only the information induced by the immunoprecipitation, we normalize for each patient the coverage file for the sample that underwent immunoprecipitation by the coverage file for the input sample. Here we use the tool bamCompare which compare 2 BAM files while caring for sequencing depth normalization.
 
@@ -465,43 +417,9 @@ To extract only the information induced by the immunoprecipitation, we normalize
 >
 {: .hands_on}
 
-We would like now to visualize our coverage as an heatmap.
+## Step 5: Detecting enriched regions (peak calling)
 
-> ### {% icon hands_on %} Hands-on: Visualization of the coverage
->
-> 1. **UCSC Main** {% icon tool %} with
->    - "assembly" to `hg18`
->    - "track" to `RefSeq genes`
->    - "region" to `position` with `chr11`
->    - "output format" to `BED`
->    - "Send output to" to `Galaxy`
->
-> 2. **computeMatrix** {% icon tool %} with
->    - "Regions to plot" to the imported UCSC file
->    - "Score file" to the bigwig file generated by bamCompare
->    - "computeMatrix has two main output options" to `scale-regions`
->
->       This option stretches or shrinks all regions in the BED file (here: genes) to the same length (bp) as indicated by the user
->
->    - "Show advanced options" to `yes`
->    - "Convert missing values to 0?" to `Yes`
->
->    This tool prepares a file with scores per genomic region, which is required as input for the next tool.
->
-> 3. **plotHeatmap** {% icon tool %} with
->    - "Matrix file from the computeMatrix tool" to the generated matrix
->    - "Show advanced options" to `yes`
->    - "Did you compute the matrix with more than one groups of regions?" to the correct setting
->
-> 4. **computeMatrix** {% icon tool %} with the same parameters but `reference-point` as output option
->
->    With this option, it considers only those genomic positions before (downstream) and/or after (upstream) a reference point (*e.g.* TSS, which corresponds to the annotated gene start in our case)
-{: .hands_on}
-
-
-## Call enriched regions (peaks)
-
-We can also call the enriched regions, or peaks, found in the ChIP-seq samples. 
+We can also call the enriched regions, or peaks, found in the ChIP-seq samples.
 
 **add more details on how it is done**
 
@@ -525,10 +443,135 @@ We can also call the enriched regions, or peaks, found in the ChIP-seq samples.
 
 The called peak regions can be filtered by, *e.g.* fold change, FDR and region length for further downstream analysis.
 
+## Step 6: Plot the signal on the peaks between samples
+
+Plotting your region of interest will involve using two tools from the **deepTools** suite.
++ computeMatrix : Computes the signal on given regions, using the bigwig coverage files from different samples.
++ plotHeatmap : Plots heatMap of the signals using the computeMatrix output.
+
+optionally, you can also use `plotProfile`to create a profile plot using to computeMatrix output.
+
+### 6.1: computeMatrix
+
+> ### {% icon hands_on %} Hands-on: Visualization of the coverage
+>
+> 1. **UCSC Main** {% icon tool %} with
+>    - "assembly" to `hg18`
+>    - "track" to `RefSeq genes`
+>    - "region" to `position` with `chr11`
+>    - "output format" to `BED`
+>    - "Send output to" to `Galaxy`
+>
+> 2. **computeMatrix** {% icon tool %} with
+>    - "Regions to plot" to the imported UCSC file
+>    - "Score file" to the bigwig file generated by bamCompare
+>    - "computeMatrix has two main output options" to `scale-regions`
+>
+>       This option stretches or shrinks all regions in the BED file (here: genes) to the same length (bp) as indicated by the user
+>
+>    - "Show advanced options" to `yes`
+>    - "Convert missing values to 0?" to `Yes`
+>
+>    This tool prepares a file with scores per genomic region, which is required as input for the next tool.
+
+
+### 6.2: plotHeatmap
+
+> 3. **plotHeatmap** {% icon tool %} with
+>    - "Matrix file from the computeMatrix tool" to the generated matrix
+>    - "Show advanced options" to `yes`
+>    - "Did you compute the matrix with more than one groups of regions?" to the correct setting
+
+
+## Additional exercise (if you have finished all above)
+
+### Additional Quality control : GC bias assessment
+
+A common problem of PCR-based protocols is the observation that GC-rich regions tend to be amplified more readily than GC-poor regions.
+We need to check that our samples do not have more reads from regions of the genome with high GC.
+
+> ### {% icon comment %} Comments
+> GC bias was for many years a big problem, but recent advances in sample preparation have solved this problem to a degree that you can skip this step more often.
+{: .comment}
+
+For practical reasons, we will focus here only on one of our BAM files. With real data you should repeat these steps for all your samples.
+
+> ### {% icon question %} Questions
+>
+> 1. Can you guess why it makes more sense to check the input files for GC bias?
+>
+>    <details>
+>    <summary>Click to view answers</summary>
+>    <ol type="1">
+>       <li>We only want to assess the bias induced by the PCR-based protocols. This is not possible with the ChIP samples, as the enriched regions
+>        (binding sites) can have a potential GC enrichment on their own.</li>
+>    </ol>
+>    </details>
+{: .question}
+
+> ### {% icon hands_on %} Hands-on: GC bias assessment
+>
+> 1. **computeGCbias** {% icon tool %} with
+>    - "BAM file" to `patient1_input_good_outcome`
+>    - "Reference genome" to `locally cached`
+>    - "Using reference genome" to `Human (Homo sapiens): hg18`
+>    - "Effective genome size" to `hg19 (2451960000)`
+>    - "Fragment length used for the sequencing" to `300`
+>    - "Region of the genome to limit the operation to" to `chr1` (to reduce the computation time for the tutorial)
+>
+>    > ### {% icon question %} Questions
+>    >
+>    > ![Output for computeGCbias with the GC bias estimation](../../images/estrogen-receptor-binding-site-identification/computeGCBias_output.png "Estimation of the GC bias for the input sample for the Patient 1")
+>    >
+>    > 1. Does this dataset have a GC bias?
+>    >
+>    >    <details>
+>    >    <summary>Click to view answers</summary>
+>    >    <ol type="1">
+>    >    <li>There is no significantly more reads in the GC-rich regions.</li>
+>    >    </ol>
+>    >    </details>
+>    {: .question}
+{: .hands_on}
+
+### Plotting heatmap from multiple samples with clustering
+
+1. Run **bamCompare** using same parameters as above:
+   - "First BAM file (e.g. treated sample)" to `patient2_ChIP_ER_good_outcome`
+   - "Second BAM file (e.g. control sample)" to `patient2_input_good_outcome`
+
+2. Perform peak calling again using treatment file : `patient2_ChIP_ER_good_outcome` and control `patient2_input_good_outcome`,
+using macs2 parameters same as above.
+
+3. Concatenate the outputs (summits in BED) from `patient1` and `patient2` using `Operate on Genomic Intervals` --> `Concatenate`
+
+4. Merge the overlapping intervals using `Operate on Genomic Intervals` --> `MergeBED`
+
+5. Run computeMatrix:
+
+>  **computeMatrix** {% icon tool %} with the same parameters but:
+> Regions to plot : select the merged bed from above
+> Output option : `reference-point`
+> The reference point for the plotting: `center of region`
+> Distance upstream of the start site of the regions defined in the region file : `3000`
+> Distance downstream of the end site of the given regions: `3000`
+>
+>    With this option, it considers only those genomic positions before (downstream) and/or after (upstream) a reference point (*e.g.* TSS, which corresponds to the annotated gene start in our case)
+{: .hands_on}
+
+6. Run plotHeatmap:
+> **plotHeatmap** {% icon tool %} with
+>    - "Matrix file from the computeMatrix tool" to the generated matrix
+>    - "Show advanced options" to `yes`
+>    - "Did you compute the matrix with more than one groups of regions?" to the correct setting
+
+> The output shall look like this :
+>
+> ![hm](../../images/hm.png)
+{: .hands_on}
 
 
 # Conclusion
 {:.no_toc}
 
 ![Summary of the different steps of the tutorial and the generated files](../../images/estrogen-receptor-binding-site-identification/tutorial-scheme.png "Different steps of the tutorials with the generated files")
-
