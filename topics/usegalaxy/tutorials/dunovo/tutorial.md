@@ -51,7 +51,7 @@ We uploaded [Schmitt:2015](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4414912/
 
    |
 :--|:---
-![](../../images/abl1-f-qc.png) | ![](../../images/abl1-r-qc.png)
+![Quality scores across all bases: foward](../../images/abl1-f-qc.png) | ![Quality scores across all bases: reverse](../../images/abl1-r-qc.png)
 **A**. Forward  | **B**. Reverse
 
 One can see that these data are of excellent quality and no additional processing is required before we can start the actual analysis.
@@ -86,7 +86,7 @@ The _Du Novo_ algorithm occasionally inserts`N`and/or [IUPAC notations](https://
 
 >![ContentTrimmer](../../images/combineFandQ.png)
 >
->Combine FASTA and QUAL. **Note** that here two datasets (#8 and #9) are selected simultaneously because we clicked the multiple datasets button the left of the **FASTA File** dropdown:<br> ![](../../images/multiDataset.png)
+>Combine FASTA and QUAL. **Note** that here two datasets (#8 and #9) are selected simultaneously because we clicked the multiple datasets button the left of the **FASTA File** dropdown:<br> ![MultipleDataset icon](../../images/multiDataset.png)
 
 ## Calling variants
 
@@ -101,13 +101,13 @@ At this point we have trimmed DCSs in fastq format. We can now proceed to callin
 
 Here we use two mappers for added reliability (this is not necessary in most situations as long as you use the right mapper for input data). To differentiate between results produced by each mapper we assign readgroups (this is done by clicking on **Set read groups information** dropdown). For example, for **BWA-MEM** you would set parameters like this:
 
->![](../../images/bwa-mem.png)
+>![BWA-MEM input and parameters](../../images/bwa-mem.png)
 >
 >Running BWA-MEM. **Note** that we are comparing DCSs against human genome version `hg38`, use forward and reverse DCSs are the `first` and `second` set of reads. Readgroup **SM** and **ID** tags are set `bwa-mem`.
 
 We then repeat essentially the same with **BWA**:
 
->![](../../images/bwa.png)
+>![BWA input and parameters](../../images/bwa.png)
 >
 >Running BWA. **Note** here we use `bwa` as the readgroup **ID** and **SM** tags.
 
@@ -115,7 +115,7 @@ We then repeat essentially the same with **BWA**:
 
 Since we have used two mappers - we have two BAM datasets. Yet because we have set readgroups we can now merge them into a single BAM dataset. This is because the individual reads will be labelled with readgroups (you will see how it will help later). To merge we use **MergeSamFiles** from tool section **NGS: Picard**:
 
->![](../../images/mergeSamFiles.png)
+>![MergeSamFiles input and parameters](../../images/mergeSamFiles.png)
 >
 >Merging BAM datasets.
 
@@ -123,7 +123,7 @@ Since we have used two mappers - we have two BAM datasets. Yet because we have s
 
 To normalize the positional distribution of indels we use **Left Align** utility (**NGS: Variant Analysis**) from [FreeBayes](https://github.com/ekg/freebayes#indels) package. This is necessary to avoid erroneous polymorphisms flanking regions with indels (e.g., in low complexity loci):
 
->![](../../images/leftAlign.png)
+>![Left Aligh input and parameters](../../images/leftAlign.png)
 >
 >Left aligning indels. **Note** here we use `hg38` as well. Obviously, one must use the same genome built you have aligned against with **BWA-MEM** and **BWA**.
 
@@ -131,21 +131,21 @@ To normalize the positional distribution of indels we use **Left Align** utility
 
 To identify sites containing variants we use **Naive Variant Caller (NVC)** (tool section **NGS: Variant Analysis**) which produces a simple count of differences given coverage and base quality per site (remember that our qualities were "faked" during the conversion from FASTA to fastq and cannot be used here). So in the case of _ABL1_ we set parameters as follow:
 
->![](../../images/nvc.png)
+>![Naive Variant Caller (NVC) input and parameters](../../images/nvc.png)
 >
 >Finding variants with NVC. Here:<br>- `Using reference genome = hg38` (As mentioned above, needs to be set to the same genome one have mapped against.)<br>- `Restrict to regions: Chromosome = chr9` (_ABL1_ is on chromosome 9. We set this to prevent **NVC** from wandering across the genome to save time.)<br>- `Minimum number of reads needed to consider a REF/ALT = 0` (Trying to maximize the number of sites. We can filter later.)<br>- `Minimum base quality = 20` (This default and is irrelevant because of "faking" quality scores during the conversion from FASTA to fastq).<br>- `Minimum mapping quality = 20` (This is helpful because it prevents reads mapping to multiple locations from being included in the tabulation. Such reads will have mapping quality of 0.)<br>- `Ploidy = 1` (Ploidy is irrelevant here as it is a mixture of multiple genomes)<br>- `Only write out positions with possible alternate alleles = No` (We can filter later)<br>- `Report counts by strand = Yes` (This will be helpful to gauge the strand bias).
 
 The **NVC** generates a [VCF](https://en.wikipedia.org/wiki/Variant_Call_Format) file that can be viewed at genome browsers such as [IGV](https://www.broadinstitute.org/igv/). Yet one rarely finds variants by looking at genome browsers. The next step is to generate a tab-delimited dataset of nucleotide counts using **Variant Annotator** from tool section **NGS: Variant Analysis**. We ran it with the following parameters:
 
 
->![](../../images/va.png)
+>![Variant Annotator input and parameters](../../images/va.png)
 >
 >Annotating variable sites. Here `Coverage threshold = 10` (To reduce noise) and `Output stranded base counts = Yes` (to see strand bias)
 
 
 There are 3,264 lines in the output, which is clearly too much. Using **Filter** tool (tool section **Filter and Sort**) with expression `c16 >= 0.01`(because column 16 contains minor allele frequency - MAF - and we are interested in those sites where MAF >= 1%):
 
->![](../../images/filter.png)
+>![Filter and Sort input and parameters](../../images/filter.png)
 >
 >Filtering variable sites.
 
@@ -181,12 +181,12 @@ The analysis described above can be rerun using a workflow. Workflow combined al
 * _Du Novo_ analysis from reads (import from [here](https://usegalaxy.org/u/aun1/w/duplex-analysis-from-reads)). This workflow uses fastq reads as input. It should be used if you analyze data for first time.
 * _Du Novo_ analysis from aligned families (import from [here](https://usegalaxy.org/u/aun1/w/copy-of-duplex-analysis-from-reads)). This workflow starts with aligned families. It should be used for re-analysis of already generated DCS and SSCS data.
 
->[![](../../images/fromReads.png)](https://usegalaxy.org/u/aun1/w/duplex-analysis-from-reads)
+>[![Workflow du Novo analysis from reads](../../images/fromReads.png)](https://usegalaxy.org/u/aun1/w/duplex-analysis-from-reads)
 >
 >Starting from Reads
 
 
->[![](../../images/fromDCS.png)](https://usegalaxy.org/u/aun1/w/copy-of-duplex-analysis-from-reads)
+>[![Workflow du Novo analysis from DCS/SSCS data](../../images/fromDCS.png)](https://usegalaxy.org/u/aun1/w/copy-of-duplex-analysis-from-reads)
 >
 >Starting from DCS/SSCS data
 

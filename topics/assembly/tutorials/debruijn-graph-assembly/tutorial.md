@@ -42,7 +42,7 @@ We will be using the same data that we used in the introductory tutorial, so if 
 >    {: .tip}
 >
 >
-> 3. Once the files have been uploaded, change their names to Mutant_R1.fastq and Mutant_R2.fastq respectively by clicking on the ![](../../images/edit_file.png) icon next to the relevant history entry.
+> 3. Once the files have been uploaded, change their names to Mutant_R1.fastq and Mutant_R2.fastq respectively by clicking on the ![Pencil icon](../../images/edit_file.png) icon next to the relevant history entry.
 >
 > Click on the View Data button (the ![Eye icon](../../images/eye.png)) next to one of the FASTQ sequence files.
 >
@@ -103,9 +103,9 @@ Have a look at each file.
 
 Tables of results from **(a)** Simple assembly and **(b)** optimised assembly.
 
-**(a)** ![](../../images/image12.png)
+**(a)** ![The results of the contigs from Simple assembly.](../../images/image12.png)
 
-**(b)** ![](../../images/optstats.png)
+**(b)** ![The results of the contigs from Optimised assembly. In contrast to simple assembly produced much higher n_50, while num_seq is lower.](../../images/optstats.png)
 
 # Assemble with SPAdes
 
@@ -133,7 +133,7 @@ You will now have 5 new files in your history:
 
 Examine each file, especially the stats files.
 
-![](../../images/contig_stats.png)
+![Contig stats file with NODE_5 being the shortest contig with the highest coverage and NODE_1 being the opposite.](../../images/contig_stats.png)
 
 > ### {% icon question %} Questions
 >

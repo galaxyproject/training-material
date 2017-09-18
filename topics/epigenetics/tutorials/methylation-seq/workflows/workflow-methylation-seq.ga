@@ -1,0 +1,969 @@
+{
+    "a_galaxy_workflow": "true", 
+    "annotation": "", 
+    "format-version": "0.1", 
+    "name": "workflow-methylation-seq", 
+    "steps": {
+        "0": {
+            "annotation": "", 
+            "content_id": null, 
+            "errors": null, 
+            "id": 0, 
+            "input_connections": {}, 
+            "inputs": [
+                {
+                    "description": "", 
+                    "name": "subset_1.fastq"
+                }
+            ], 
+            "label": null, 
+            "name": "Input dataset", 
+            "outputs": [], 
+            "position": {
+                "left": 10, 
+                "top": 10
+            }, 
+            "tool_id": null, 
+            "tool_state": "{\"name\": \"subset_1.fastq\"}", 
+            "tool_version": null, 
+            "type": "data_input", 
+            "uuid": "bacf4c2b-0aa3-4069-bd92-3fd6267505f3", 
+            "workflow_outputs": []
+        }, 
+        "1": {
+            "annotation": "", 
+            "content_id": null, 
+            "errors": null, 
+            "id": 1, 
+            "input_connections": {}, 
+            "inputs": [
+                {
+                    "description": "", 
+                    "name": "subset_2.fastq"
+                }
+            ], 
+            "label": null, 
+            "name": "Input dataset", 
+            "outputs": [], 
+            "position": {
+                "left": 10, 
+                "top": 130
+            }, 
+            "tool_id": null, 
+            "tool_state": "{\"name\": \"subset_2.fastq\"}", 
+            "tool_version": null, 
+            "type": "data_input", 
+            "uuid": "1251179d-078d-451f-8f61-75c272bc0c78", 
+            "workflow_outputs": []
+        }, 
+        "2": {
+            "annotation": "", 
+            "content_id": null, 
+            "errors": null, 
+            "id": 2, 
+            "input_connections": {}, 
+            "inputs": [
+                {
+                    "description": "", 
+                    "name": "CpGIslands.bed"
+                }
+            ], 
+            "label": null, 
+            "name": "Input dataset", 
+            "outputs": [], 
+            "position": {
+                "left": 10, 
+                "top": 250
+            }, 
+            "tool_id": null, 
+            "tool_state": "{\"name\": \"CpGIslands.bed\"}", 
+            "tool_version": null, 
+            "type": "data_input", 
+            "uuid": "e9c54940-b612-40cc-a58e-c14bc3945ed6", 
+            "workflow_outputs": []
+        }, 
+        "3": {
+            "annotation": "", 
+            "content_id": null, 
+            "errors": null, 
+            "id": 3, 
+            "input_connections": {}, 
+            "inputs": [
+                {
+                    "description": "", 
+                    "name": "NB1_CpG.meth.bedGraph"
+                }
+            ], 
+            "label": null, 
+            "name": "Input dataset", 
+            "outputs": [], 
+            "position": {
+                "left": 10, 
+                "top": 370
+            }, 
+            "tool_id": null, 
+            "tool_state": "{\"name\": \"NB1_CpG.meth.bedGraph\"}", 
+            "tool_version": null, 
+            "type": "data_input", 
+            "uuid": "6f1eb0a2-5719-4f24-9933-3b28034e70ab", 
+            "workflow_outputs": []
+        }, 
+        "4": {
+            "annotation": "", 
+            "content_id": null, 
+            "errors": null, 
+            "id": 4, 
+            "input_connections": {}, 
+            "inputs": [
+                {
+                    "description": "", 
+                    "name": "GRCh38_ensembl2UCSC.txt"
+                }
+            ], 
+            "label": null, 
+            "name": "Input dataset", 
+            "outputs": [], 
+            "position": {
+                "left": 10, 
+                "top": 490
+            }, 
+            "tool_id": null, 
+            "tool_state": "{\"name\": \"GRCh38_ensembl2UCSC.txt\"}", 
+            "tool_version": null, 
+            "type": "data_input", 
+            "uuid": "c7238557-c79b-41e5-aa38-68b27ca88d2e", 
+            "workflow_outputs": []
+        }, 
+        "5": {
+            "annotation": "", 
+            "content_id": null, 
+            "errors": null, 
+            "id": 5, 
+            "input_connections": {}, 
+            "inputs": [
+                {
+                    "description": "", 
+                    "name": "NB2_CpG.meth.bedGraph"
+                }
+            ], 
+            "label": null, 
+            "name": "Input dataset", 
+            "outputs": [], 
+            "position": {
+                "left": 10, 
+                "top": 610
+            }, 
+            "tool_id": null, 
+            "tool_state": "{\"name\": \"NB2_CpG.meth.bedGraph\"}", 
+            "tool_version": null, 
+            "type": "data_input", 
+            "uuid": "0cab2494-32bc-4732-86e4-a10cb0edfeff", 
+            "workflow_outputs": []
+        }, 
+        "6": {
+            "annotation": "", 
+            "content_id": null, 
+            "errors": null, 
+            "id": 6, 
+            "input_connections": {}, 
+            "inputs": [
+                {
+                    "description": "", 
+                    "name": "BT089_CpG.meth.bedGraph"
+                }
+            ], 
+            "label": null, 
+            "name": "Input dataset", 
+            "outputs": [], 
+            "position": {
+                "left": 10, 
+                "top": 730
+            }, 
+            "tool_id": null, 
+            "tool_state": "{\"name\": \"BT089_CpG.meth.bedGraph\"}", 
+            "tool_version": null, 
+            "type": "data_input", 
+            "uuid": "bbd85ab1-a5cb-4db6-b05f-78c90eb7b0d6", 
+            "workflow_outputs": []
+        }, 
+        "7": {
+            "annotation": "", 
+            "content_id": null, 
+            "errors": null, 
+            "id": 7, 
+            "input_connections": {}, 
+            "inputs": [
+                {
+                    "description": "", 
+                    "name": "BT126_CpG.meth.bedGraph"
+                }
+            ], 
+            "label": null, 
+            "name": "Input dataset", 
+            "outputs": [], 
+            "position": {
+                "left": 10, 
+                "top": 850
+            }, 
+            "tool_id": null, 
+            "tool_state": "{\"name\": \"BT126_CpG.meth.bedGraph\"}", 
+            "tool_version": null, 
+            "type": "data_input", 
+            "uuid": "ba585cf0-5d2c-4894-ad69-18e7f5a182d4", 
+            "workflow_outputs": []
+        }, 
+        "8": {
+            "annotation": "", 
+            "content_id": null, 
+            "errors": null, 
+            "id": 8, 
+            "input_connections": {}, 
+            "inputs": [
+                {
+                    "description": "", 
+                    "name": "BT198_CpG.meth.bedGraph"
+                }
+            ], 
+            "label": null, 
+            "name": "Input dataset", 
+            "outputs": [], 
+            "position": {
+                "left": 10, 
+                "top": 970
+            }, 
+            "tool_id": null, 
+            "tool_state": "{\"name\": \"BT198_CpG.meth.bedGraph\"}", 
+            "tool_version": null, 
+            "type": "data_input", 
+            "uuid": "da460b45-dc16-4806-975c-361ac13e2156", 
+            "workflow_outputs": []
+        }, 
+        "9": {
+            "annotation": "", 
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.68", 
+            "errors": null, 
+            "id": 9, 
+            "input_connections": {
+                "input_file": {
+                    "id": 0, 
+                    "output_name": "output"
+                }
+            }, 
+            "inputs": [], 
+            "label": null, 
+            "name": "FastQC", 
+            "outputs": [
+                {
+                    "name": "html_file", 
+                    "type": "html"
+                }, 
+                {
+                    "name": "text_file", 
+                    "type": "txt"
+                }
+            ], 
+            "position": {
+                "left": 230, 
+                "top": 10
+            }, 
+            "post_job_actions": {}, 
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.68", 
+            "tool_shed_repository": {
+                "changeset_revision": "484e86282f4b", 
+                "name": "fastqc", 
+                "owner": "devteam", 
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            }, 
+            "tool_state": "{\"__page__\": null, \"limits\": \"null\", \"input_file\": \"null\", \"__rerun_remap_job_id__\": null, \"contaminants\": \"null\", \"chromInfo\": \"\\\"/usr/local/galaxy/galaxy-dist/tool-data/shared/ucsc/chrom/?.len\\\"\"}", 
+            "tool_version": "0.68", 
+            "type": "tool", 
+            "uuid": "1001910e-70ca-4d29-909e-3e4e7ec912d9", 
+            "workflow_outputs": []
+        }, 
+        "10": {
+            "annotation": "", 
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.68", 
+            "errors": null, 
+            "id": 10, 
+            "input_connections": {
+                "input_file": {
+                    "id": 1, 
+                    "output_name": "output"
+                }
+            }, 
+            "inputs": [], 
+            "label": null, 
+            "name": "FastQC", 
+            "outputs": [
+                {
+                    "name": "html_file", 
+                    "type": "html"
+                }, 
+                {
+                    "name": "text_file", 
+                    "type": "txt"
+                }
+            ], 
+            "position": {
+                "left": 230, 
+                "top": 130
+            }, 
+            "post_job_actions": {}, 
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.68", 
+            "tool_shed_repository": {
+                "changeset_revision": "484e86282f4b", 
+                "name": "fastqc", 
+                "owner": "devteam", 
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            }, 
+            "tool_state": "{\"__page__\": null, \"limits\": \"null\", \"input_file\": \"null\", \"__rerun_remap_job_id__\": null, \"contaminants\": \"null\", \"chromInfo\": \"\\\"/usr/local/galaxy/galaxy-dist/tool-data/shared/ucsc/chrom/?.len\\\"\"}", 
+            "tool_version": "0.68", 
+            "type": "tool", 
+            "uuid": "d686fd32-637c-47f6-8b4a-3eb80b2205e0", 
+            "workflow_outputs": []
+        }, 
+        "11": {
+            "annotation": "", 
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/bwameth/bwameth/0.2.0.3", 
+            "errors": null, 
+            "id": 11, 
+            "input_connections": {
+                "single_or_paired|input_mate1": {
+                    "id": 0, 
+                    "output_name": "output"
+                }, 
+                "single_or_paired|input_mate2": {
+                    "id": 1, 
+                    "output_name": "output"
+                }
+            }, 
+            "inputs": [], 
+            "label": null, 
+            "name": "bwameth", 
+            "outputs": [
+                {
+                    "name": "output", 
+                    "type": "bam"
+                }
+            ], 
+            "position": {
+                "left": 230, 
+                "top": 250
+            }, 
+            "post_job_actions": {}, 
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/bwameth/bwameth/0.2.0.3", 
+            "tool_shed_repository": {
+                "changeset_revision": "a6ea26c1f225", 
+                "name": "bwameth", 
+                "owner": "iuc", 
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            }, 
+            "tool_state": "{\"__page__\": null, \"__rerun_remap_job_id__\": null, \"single_or_paired\": \"{\\\"single_or_paired_opts\\\": \\\"paired\\\", \\\"input_mate1\\\": null, \\\"__current_case__\\\": 1, \\\"input_mate2\\\": null}\", \"readGroup\": \"\\\"\\\"\", \"chromInfo\": \"\\\"/usr/local/galaxy/galaxy-dist/tool-data/shared/ucsc/chrom/?.len\\\"\", \"referenceSource\": \"{\\\"source\\\": \\\"indexed\\\", \\\"__current_case__\\\": 1, \\\"index\\\": \\\"hg38full\\\"}\"}", 
+            "tool_version": "0.2.0.3", 
+            "type": "tool", 
+            "uuid": "6d6fc8a3-6a48-421a-a75c-02f30a411359", 
+            "workflow_outputs": []
+        }, 
+        "12": {
+            "annotation": "", 
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/replace_column_by_key_value_file/replace_column_with_key_value_file/0.1", 
+            "errors": null, 
+            "id": 12, 
+            "input_connections": {
+                "original_file": {
+                    "id": 3, 
+                    "output_name": "output"
+                }, 
+                "replace_information": {
+                    "id": 4, 
+                    "output_name": "output"
+                }
+            }, 
+            "inputs": [], 
+            "label": null, 
+            "name": "Replace column", 
+            "outputs": [
+                {
+                    "name": "outfile_replace", 
+                    "type": "txt"
+                }
+            ], 
+            "position": {
+                "left": 230, 
+                "top": 370
+            }, 
+            "post_job_actions": {}, 
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/replace_column_by_key_value_file/replace_column_with_key_value_file/0.1", 
+            "tool_shed_repository": {
+                "changeset_revision": "cc18bac5afdb", 
+                "name": "replace_column_by_key_value_file", 
+                "owner": "bgruening", 
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            }, 
+            "tool_state": "{\"__page__\": null, \"replace_information\": \"null\", \"__rerun_remap_job_id__\": null, \"skip_lines\": \"\\\"1\\\"\", \"column_replace\": \"\\\"1\\\"\", \"delimiter\": \"\\\"\\\"\", \"chromInfo\": \"\\\"/usr/local/galaxy/galaxy-dist/tool-data/shared/ucsc/chrom/?.len\\\"\", \"original_file\": \"null\"}", 
+            "tool_version": "0.1", 
+            "type": "tool", 
+            "uuid": "a0083be8-691a-4d2f-9000-f97830d0880d", 
+            "workflow_outputs": []
+        }, 
+        "13": {
+            "annotation": "", 
+            "content_id": "toolshed.g2.bx.psu.edu/repos/rnateam/metilene/metilene/0.2.6.1", 
+            "errors": null, 
+            "id": 13, 
+            "input_connections": {
+                "B": {
+                    "id": 2, 
+                    "output_name": "output"
+                }, 
+                "opt_in1": [
+                    {
+                        "id": 5, 
+                        "output_name": "output"
+                    }, 
+                    {
+                        "id": 3, 
+                        "output_name": "output"
+                    }
+                ], 
+                "opt_in2": [
+                    {
+                        "id": 8, 
+                        "output_name": "output"
+                    }, 
+                    {
+                        "id": 7, 
+                        "output_name": "output"
+                    }, 
+                    {
+                        "id": 6, 
+                        "output_name": "output"
+                    }
+                ]
+            }, 
+            "inputs": [], 
+            "label": null, 
+            "name": "metilene", 
+            "outputs": [
+                {
+                    "name": "output_bedlike", 
+                    "type": "tabular"
+                }, 
+                {
+                    "name": "output_bedgraph", 
+                    "type": "bedgraph"
+                }, 
+                {
+                    "name": "output_qval_bedgraph", 
+                    "type": "bedgraph"
+                }, 
+                {
+                    "name": "output_qval_pdf", 
+                    "type": "pdf"
+                }, 
+                {
+                    "name": "output_qval_out", 
+                    "type": "bedgraph"
+                }
+            ], 
+            "position": {
+                "left": 230, 
+                "top": 490
+            }, 
+            "post_job_actions": {}, 
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/rnateam/metilene/metilene/0.2.6.1", 
+            "tool_shed_repository": {
+                "changeset_revision": "cd253831a014", 
+                "name": "metilene", 
+                "owner": "rnateam", 
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            }, 
+            "tool_state": "{\"__page__\": null, \"B\": \"null\", \"__rerun_remap_job_id__\": null, \"opt_in2\": \"null\", \"opt_in1\": \"null\", \"chromInfo\": \"\\\"/usr/local/galaxy/galaxy-dist/tool-data/shared/ucsc/chrom/?.len\\\"\", \"Options\": \"{\\\"opt_d\\\": \\\"0.1\\\", \\\"opt_M\\\": \\\"300\\\", \\\"opt_v\\\": \\\"0.7\\\", \\\"Y\\\": \\\"\\\", \\\"X\\\": \\\"\\\", \\\"opt_m\\\": \\\"10\\\"}\"}", 
+            "tool_version": "0.2.6.1", 
+            "type": "tool", 
+            "uuid": "25b1b8ba-7182-4989-a170-0f543f39f05b", 
+            "workflow_outputs": []
+        }, 
+        "14": {
+            "annotation": "", 
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/pileometh/pileometh/0.3.0", 
+            "errors": null, 
+            "id": 14, 
+            "input_connections": {
+                "input_sortedAlignBAM": {
+                    "id": 11, 
+                    "output_name": "output"
+                }
+            }, 
+            "inputs": [], 
+            "label": null, 
+            "name": "MethylDackel", 
+            "outputs": [
+                {
+                    "name": "outFileExtractCpG", 
+                    "type": "bedgraph"
+                }, 
+                {
+                    "name": "outFileExtractCpGLogit", 
+                    "type": "bedgraph"
+                }, 
+                {
+                    "name": "outFileExtractCpGMethylKit", 
+                    "type": "text"
+                }, 
+                {
+                    "name": "outFileExtractCpGCounts", 
+                    "type": "bedgraph"
+                }, 
+                {
+                    "name": "outFileExtractCpGFraction", 
+                    "type": "bedgraph"
+                }, 
+                {
+                    "name": "outFileExtractCHG", 
+                    "type": "bedgraph"
+                }, 
+                {
+                    "name": "outFileExtractCHGLogit", 
+                    "type": "bedgraph"
+                }, 
+                {
+                    "name": "outFileExtractCHGMethylKit", 
+                    "type": "text"
+                }, 
+                {
+                    "name": "outFileExtractCHGCounts", 
+                    "type": "bedgraph"
+                }, 
+                {
+                    "name": "outFileExtractCHGFraction", 
+                    "type": "bedgraph"
+                }, 
+                {
+                    "name": "outFileExtractCHH", 
+                    "type": "bedgraph"
+                }, 
+                {
+                    "name": "outFileExtractCHHLogit", 
+                    "type": "bedgraph"
+                }, 
+                {
+                    "name": "outFileExtractCHHMethylKit", 
+                    "type": "text"
+                }, 
+                {
+                    "name": "outFileExtractCHHCounts", 
+                    "type": "bedgraph"
+                }, 
+                {
+                    "name": "outFileExtractCHHFraction", 
+                    "type": "bedgraph"
+                }, 
+                {
+                    "name": "outFileMbiasCpGOT", 
+                    "type": "svg"
+                }, 
+                {
+                    "name": "outFileMbiasCpGOB", 
+                    "type": "svg"
+                }, 
+                {
+                    "name": "outFileMbiasCpGCTOT", 
+                    "type": "svg"
+                }, 
+                {
+                    "name": "outFileMbiasCpGCTOB", 
+                    "type": "svg"
+                }
+            ], 
+            "position": {
+                "left": 450, 
+                "top": 10
+            }, 
+            "post_job_actions": {}, 
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/pileometh/pileometh/0.3.0", 
+            "tool_shed_repository": {
+                "changeset_revision": "906db57d5d65", 
+                "name": "pileometh", 
+                "owner": "bgruening", 
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            }, 
+            "tool_state": "{\"main_task\": \"{\\\"task\\\": \\\"mbias\\\", \\\"__current_case__\\\": 1}\", \"__page__\": null, \"input_sortedAlignBAM\": \"null\", \"__rerun_remap_job_id__\": null, \"advanced_options\": \"{\\\"keepDupes\\\": \\\"false\\\", \\\"max_pbdepth\\\": \\\"2000\\\", \\\"nOB\\\": \\\"\\\", \\\"nOT\\\": \\\"\\\", \\\"counts\\\": \\\"false\\\", \\\"min_phred\\\": \\\"5\\\", \\\"min_pbdepth\\\": \\\"1\\\", \\\"mbias_regionString\\\": \\\"\\\", \\\"keepDiscordant\\\": \\\"true\\\", \\\"fraction\\\": \\\"false\\\", \\\"nCTOT\\\": \\\"\\\", \\\"CHG\\\": \\\"false\\\", \\\"CHH\\\": \\\"false\\\", \\\"methylKit\\\": \\\"false\\\", \\\"requireFlags\\\": \\\"0\\\", \\\"minOppositeDepth\\\": \\\"0\\\", \\\"logit\\\": \\\"false\\\", \\\"nCTOB\\\": \\\"\\\", \\\"maxVariantFrac\\\": \\\"1.0\\\", \\\"keepSingleton\\\": \\\"true\\\", \\\"min_mapq\\\": \\\"10\\\", \\\"ignoreFlags\\\": \\\"3840\\\", \\\"__current_case__\\\": 0, \\\"options\\\": \\\"yes\\\"}\", \"reference_source\": \"{\\\"ref_file\\\": \\\"hg38\\\", \\\"reference_source_selector\\\": \\\"cached\\\", \\\"__current_case__\\\": 0}\", \"chromInfo\": \"\\\"/usr/local/galaxy/galaxy-dist/tool-data/shared/ucsc/chrom/?.len\\\"\"}", 
+            "tool_version": "0.3.0", 
+            "type": "tool", 
+            "uuid": "9e965ac6-b454-4422-9278-039ca357e961", 
+            "workflow_outputs": []
+        }, 
+        "15": {
+            "annotation": "", 
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/pileometh/pileometh/0.3.0", 
+            "errors": null, 
+            "id": 15, 
+            "input_connections": {
+                "input_sortedAlignBAM": {
+                    "id": 11, 
+                    "output_name": "output"
+                }
+            }, 
+            "inputs": [], 
+            "label": null, 
+            "name": "MethylDackel", 
+            "outputs": [
+                {
+                    "name": "outFileExtractCpG", 
+                    "type": "bedgraph"
+                }, 
+                {
+                    "name": "outFileExtractCpGLogit", 
+                    "type": "bedgraph"
+                }, 
+                {
+                    "name": "outFileExtractCpGMethylKit", 
+                    "type": "text"
+                }, 
+                {
+                    "name": "outFileExtractCpGCounts", 
+                    "type": "bedgraph"
+                }, 
+                {
+                    "name": "outFileExtractCpGFraction", 
+                    "type": "bedgraph"
+                }, 
+                {
+                    "name": "outFileExtractCHG", 
+                    "type": "bedgraph"
+                }, 
+                {
+                    "name": "outFileExtractCHGLogit", 
+                    "type": "bedgraph"
+                }, 
+                {
+                    "name": "outFileExtractCHGMethylKit", 
+                    "type": "text"
+                }, 
+                {
+                    "name": "outFileExtractCHGCounts", 
+                    "type": "bedgraph"
+                }, 
+                {
+                    "name": "outFileExtractCHGFraction", 
+                    "type": "bedgraph"
+                }, 
+                {
+                    "name": "outFileExtractCHH", 
+                    "type": "bedgraph"
+                }, 
+                {
+                    "name": "outFileExtractCHHLogit", 
+                    "type": "bedgraph"
+                }, 
+                {
+                    "name": "outFileExtractCHHMethylKit", 
+                    "type": "text"
+                }, 
+                {
+                    "name": "outFileExtractCHHCounts", 
+                    "type": "bedgraph"
+                }, 
+                {
+                    "name": "outFileExtractCHHFraction", 
+                    "type": "bedgraph"
+                }, 
+                {
+                    "name": "outFileMbiasCpGOT", 
+                    "type": "svg"
+                }, 
+                {
+                    "name": "outFileMbiasCpGOB", 
+                    "type": "svg"
+                }, 
+                {
+                    "name": "outFileMbiasCpGCTOT", 
+                    "type": "svg"
+                }, 
+                {
+                    "name": "outFileMbiasCpGCTOB", 
+                    "type": "svg"
+                }
+            ], 
+            "position": {
+                "left": 450, 
+                "top": 130
+            }, 
+            "post_job_actions": {}, 
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/pileometh/pileometh/0.3.0", 
+            "tool_shed_repository": {
+                "changeset_revision": "906db57d5d65", 
+                "name": "pileometh", 
+                "owner": "bgruening", 
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            }, 
+            "tool_state": "{\"main_task\": \"{\\\"task\\\": \\\"extract\\\", \\\"OB\\\": \\\"\\\", \\\"CTOB\\\": \\\"\\\", \\\"__current_case__\\\": 0, \\\"CTOT\\\": \\\"\\\", \\\"mergeContext\\\": \\\"true\\\", \\\"OT\\\": \\\"\\\"}\", \"__page__\": null, \"input_sortedAlignBAM\": \"null\", \"__rerun_remap_job_id__\": null, \"advanced_options\": \"{\\\"keepDupes\\\": \\\"false\\\", \\\"max_pbdepth\\\": \\\"2000\\\", \\\"nOB\\\": \\\"\\\", \\\"nOT\\\": \\\"\\\", \\\"counts\\\": \\\"false\\\", \\\"min_phred\\\": \\\"5\\\", \\\"min_pbdepth\\\": \\\"1\\\", \\\"mbias_regionString\\\": \\\"\\\", \\\"keepDiscordant\\\": \\\"false\\\", \\\"fraction\\\": \\\"true\\\", \\\"nCTOT\\\": \\\"\\\", \\\"CHG\\\": \\\"false\\\", \\\"CHH\\\": \\\"false\\\", \\\"methylKit\\\": \\\"false\\\", \\\"requireFlags\\\": \\\"0\\\", \\\"minOppositeDepth\\\": \\\"0\\\", \\\"logit\\\": \\\"false\\\", \\\"nCTOB\\\": \\\"\\\", \\\"maxVariantFrac\\\": \\\"1.0\\\", \\\"keepSingleton\\\": \\\"false\\\", \\\"min_mapq\\\": \\\"10\\\", \\\"ignoreFlags\\\": \\\"3840\\\", \\\"__current_case__\\\": 0, \\\"options\\\": \\\"yes\\\"}\", \"reference_source\": \"{\\\"ref_file\\\": \\\"hg38\\\", \\\"reference_source_selector\\\": \\\"cached\\\", \\\"__current_case__\\\": 0}\", \"chromInfo\": \"\\\"/usr/local/galaxy/galaxy-dist/tool-data/shared/ucsc/chrom/?.len\\\"\"}", 
+            "tool_version": "0.3.0", 
+            "type": "tool", 
+            "uuid": "a71057cc-58ec-4fac-b03f-8c375ed4cd41", 
+            "workflow_outputs": []
+        }, 
+        "16": {
+            "annotation": "", 
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_tail_tool/1.1.0", 
+            "errors": null, 
+            "id": 16, 
+            "input_connections": {
+                "infile": {
+                    "id": 12, 
+                    "output_name": "outfile_replace"
+                }
+            }, 
+            "inputs": [], 
+            "label": null, 
+            "name": "Select last", 
+            "outputs": [
+                {
+                    "name": "outfile", 
+                    "type": "input"
+                }
+            ], 
+            "position": {
+                "left": 450, 
+                "top": 250
+            }, 
+            "post_job_actions": {}, 
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_tail_tool/1.1.0", 
+            "tool_shed_repository": {
+                "changeset_revision": "4c752559b236", 
+                "name": "text_processing", 
+                "owner": "bgruening", 
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            }, 
+            "tool_state": "{\"__page__\": null, \"num_lines\": \"\\\"2\\\"\", \"complement\": \"\\\"+\\\"\", \"infile\": \"null\", \"chromInfo\": \"\\\"/usr/local/galaxy/galaxy-dist/tool-data/shared/ucsc/chrom/?.len\\\"\", \"__rerun_remap_job_id__\": null}", 
+            "tool_version": "1.1.0", 
+            "type": "tool", 
+            "uuid": "68e1fe1d-c6ac-4ffd-b2d6-42c01c668b64", 
+            "workflow_outputs": []
+        }, 
+        "17": {
+            "annotation": "", 
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_tail_tool/1.1.0", 
+            "errors": null, 
+            "id": 17, 
+            "input_connections": {
+                "infile": {
+                    "id": 15, 
+                    "output_name": "outFileExtractCpGFraction"
+                }
+            }, 
+            "inputs": [], 
+            "label": null, 
+            "name": "Select last", 
+            "outputs": [
+                {
+                    "name": "outfile", 
+                    "type": "input"
+                }
+            ], 
+            "position": {
+                "left": 670, 
+                "top": 10
+            }, 
+            "post_job_actions": {}, 
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_tail_tool/1.1.0", 
+            "tool_shed_repository": {
+                "changeset_revision": "4c752559b236", 
+                "name": "text_processing", 
+                "owner": "bgruening", 
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            }, 
+            "tool_state": "{\"__page__\": null, \"num_lines\": \"\\\"2\\\"\", \"complement\": \"\\\"+\\\"\", \"infile\": \"null\", \"chromInfo\": \"\\\"/usr/local/galaxy/galaxy-dist/tool-data/shared/ucsc/chrom/?.len\\\"\", \"__rerun_remap_job_id__\": null}", 
+            "tool_version": "1.1.0", 
+            "type": "tool", 
+            "uuid": "aae0a945-a231-4371-85b9-3eeb9619581f", 
+            "workflow_outputs": []
+        }, 
+        "18": {
+            "annotation": "", 
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_compute_matrix/deeptools_compute_matrix/2.5.1.1.0", 
+            "errors": null, 
+            "id": 18, 
+            "input_connections": {
+                "multibigwig_conditional|bigwigfiles": {
+                    "id": 16, 
+                    "output_name": "outfile"
+                }, 
+                "regionsFiles_0|regionsFile": {
+                    "id": 2, 
+                    "output_name": "output"
+                }
+            }, 
+            "inputs": [], 
+            "label": null, 
+            "name": "computeMatrix", 
+            "outputs": [
+                {
+                    "name": "outFileName", 
+                    "type": "deeptools_compute_matrix_archive"
+                }, 
+                {
+                    "name": "outFileSortedRegions", 
+                    "type": "bed"
+                }, 
+                {
+                    "name": "outFileNameMatrix", 
+                    "type": "tabular"
+                }
+            ], 
+            "position": {
+                "left": 670, 
+                "top": 130
+            }, 
+            "post_job_actions": {}, 
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_compute_matrix/deeptools_compute_matrix/2.5.1.1.0", 
+            "tool_shed_repository": {
+                "changeset_revision": "fd1275e01605", 
+                "name": "deeptools_compute_matrix", 
+                "owner": "bgruening", 
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            }, 
+            "tool_state": "{\"__page__\": null, \"regionsFiles\": \"[{\\\"__index__\\\": 0, \\\"regionsFile\\\": null}]\", \"__rerun_remap_job_id__\": null, \"multibigwig_conditional\": \"{\\\"orderMatters\\\": \\\"No\\\", \\\"bigwigfiles\\\": null, \\\"__current_case__\\\": 0}\", \"mode\": \"{\\\"afterRegionStartLength\\\": \\\"1000\\\", \\\"beforeRegionStartLength\\\": \\\"1000\\\", \\\"nanAfterEnd\\\": \\\"false\\\", \\\"__current_case__\\\": 1, \\\"referencePoint\\\": \\\"TSS\\\", \\\"mode_select\\\": \\\"reference-point\\\"}\", \"output\": \"{\\\"showOutputSettings\\\": \\\"no\\\", \\\"__current_case__\\\": 0}\", \"advancedOpt\": \"{\\\"showAdvancedOpt\\\": \\\"no\\\", \\\"__current_case__\\\": 0}\", \"chromInfo\": \"\\\"/usr/local/galaxy/galaxy-dist/tool-data/shared/ucsc/chrom/hg38.len\\\"\"}", 
+            "tool_version": "2.5.1.1.0", 
+            "type": "tool", 
+            "uuid": "2535728f-e33b-41a9-8433-0bde988f4f13", 
+            "workflow_outputs": []
+        }, 
+        "19": {
+            "annotation": "", 
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/1.1.0", 
+            "errors": null, 
+            "id": 19, 
+            "input_connections": {
+                "infile": {
+                    "id": 17, 
+                    "output_name": "outfile"
+                }
+            }, 
+            "inputs": [], 
+            "label": null, 
+            "name": "Text reformatting", 
+            "outputs": [
+                {
+                    "name": "outfile", 
+                    "type": "input"
+                }
+            ], 
+            "position": {
+                "left": 890, 
+                "top": 10
+            }, 
+            "post_job_actions": {}, 
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/1.1.0", 
+            "tool_shed_repository": {
+                "changeset_revision": "4c752559b236", 
+                "name": "text_processing", 
+                "owner": "bgruening", 
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            }, 
+            "tool_state": "{\"__page__\": null, \"__rerun_remap_job_id__\": null, \"code\": \"\\\"BEGIN{OFS=\\\\\\\"\\\\\\\\t\\\\\\\"}{print $1, $2, $3, $4}\\\"\", \"chromInfo\": \"\\\"/usr/local/galaxy/galaxy-dist/tool-data/shared/ucsc/chrom/?.len\\\"\", \"infile\": \"null\"}", 
+            "tool_version": "1.1.0", 
+            "type": "tool", 
+            "uuid": "68bd7127-a25b-45b7-9c82-8572dc7c3c7f", 
+            "workflow_outputs": []
+        }, 
+        "20": {
+            "annotation": "", 
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_compute_matrix/deeptools_compute_matrix/2.5.1.1.0", 
+            "errors": null, 
+            "id": 20, 
+            "input_connections": {
+                "multibigwig_conditional|bigwigfiles": {
+                    "id": 19, 
+                    "output_name": "outfile"
+                }, 
+                "regionsFiles_0|regionsFile": {
+                    "id": 2, 
+                    "output_name": "output"
+                }
+            }, 
+            "inputs": [], 
+            "label": null, 
+            "name": "computeMatrix", 
+            "outputs": [
+                {
+                    "name": "outFileName", 
+                    "type": "deeptools_compute_matrix_archive"
+                }, 
+                {
+                    "name": "outFileSortedRegions", 
+                    "type": "bed"
+                }, 
+                {
+                    "name": "outFileNameMatrix", 
+                    "type": "tabular"
+                }
+            ], 
+            "position": {
+                "left": 1110, 
+                "top": 10
+            }, 
+            "post_job_actions": {}, 
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_compute_matrix/deeptools_compute_matrix/2.5.1.1.0", 
+            "tool_shed_repository": {
+                "changeset_revision": "fd1275e01605", 
+                "name": "deeptools_compute_matrix", 
+                "owner": "bgruening", 
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            }, 
+            "tool_state": "{\"__page__\": null, \"regionsFiles\": \"[{\\\"__index__\\\": 0, \\\"regionsFile\\\": null}]\", \"__rerun_remap_job_id__\": null, \"multibigwig_conditional\": \"{\\\"orderMatters\\\": \\\"No\\\", \\\"bigwigfiles\\\": null, \\\"__current_case__\\\": 0}\", \"mode\": \"{\\\"afterRegionStartLength\\\": \\\"1000\\\", \\\"beforeRegionStartLength\\\": \\\"1000\\\", \\\"nanAfterEnd\\\": \\\"false\\\", \\\"__current_case__\\\": 1, \\\"referencePoint\\\": \\\"TSS\\\", \\\"mode_select\\\": \\\"reference-point\\\"}\", \"output\": \"{\\\"showOutputSettings\\\": \\\"no\\\", \\\"__current_case__\\\": 0}\", \"advancedOpt\": \"{\\\"showAdvancedOpt\\\": \\\"no\\\", \\\"__current_case__\\\": 0}\", \"chromInfo\": \"\\\"/usr/local/galaxy/galaxy-dist/tool-data/shared/ucsc/chrom/hg38.len\\\"\"}", 
+            "tool_version": "2.5.1.1.0", 
+            "type": "tool", 
+            "uuid": "6ccebe6e-1d3d-4532-ba64-311090653c29", 
+            "workflow_outputs": []
+        }, 
+        "21": {
+            "annotation": "", 
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_plot_profile/deeptools_plot_profile/2.5.1.1.0", 
+            "errors": null, 
+            "id": 21, 
+            "input_connections": {
+                "matrixFile": {
+                    "id": 20, 
+                    "output_name": "outFileName"
+                }
+            }, 
+            "inputs": [], 
+            "label": null, 
+            "name": "plotProfile", 
+            "outputs": [
+                {
+                    "name": "outFileName", 
+                    "type": "png"
+                }, 
+                {
+                    "name": "outFileSortedRegions", 
+                    "type": "bed"
+                }, 
+                {
+                    "name": "output_outFileNameData", 
+                    "type": "tabular"
+                }
+            ], 
+            "position": {
+                "left": 1330, 
+                "top": 10
+            }, 
+            "post_job_actions": {}, 
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_plot_profile/deeptools_plot_profile/2.5.1.1.0", 
+            "tool_shed_repository": {
+                "changeset_revision": "aac8444d6681", 
+                "name": "deeptools_plot_profile", 
+                "owner": "bgruening", 
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            }, 
+            "tool_state": "{\"__page__\": null, \"__rerun_remap_job_id__\": null, \"matrixFile\": \"null\", \"scaleRegions\": \"{\\\"showScaleRegionsOpt\\\": \\\"no\\\", \\\"__current_case__\\\": 0}\", \"output\": \"{\\\"showOutputSettings\\\": \\\"no\\\", \\\"__current_case__\\\": 0}\", \"advancedOpt\": \"{\\\"showAdvancedOpt\\\": \\\"no\\\", \\\"__current_case__\\\": 0}\", \"chromInfo\": \"\\\"/usr/local/galaxy/galaxy-dist/tool-data/shared/ucsc/chrom/hg38.len\\\"\"}", 
+            "tool_version": "2.5.1.1.0", 
+            "type": "tool", 
+            "uuid": "0f49a7fe-0f63-4ab6-8e70-f9207b5098af", 
+            "workflow_outputs": []
+        }
+    }, 
+    "uuid": "64fc4256-846f-4cca-9540-9cbf86c9cbe8"
+}

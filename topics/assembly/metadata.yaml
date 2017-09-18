@@ -1,3 +1,4 @@
+---
 name: "assembly"
 type: "use"
 title: "Assembly"
@@ -5,23 +6,23 @@ summary: "DNA sequence data has become an indispensable tool for Molecular Biolo
 docker_image: ""
 
 requirements:
--
+  -
     title: "Galaxy introduction"
     type: "internal"
     link: "/introduction/"
--
+  -
     title: "Quality Control"
     type: "internal"
     link: "/sequence-analysis/"
 
 material:
 # Comment this section out for now until new template is ready. Old template still in use for GCC 2017. (@slugger70)
-#-
+# -
 #    title: "Introduction"
 #    type: "introduction"
 #    slides: "no"
 
--
+  -
     title: "Introduction to Genome Assembly"
     type: "tutorial"
     name: "general-introduction"
@@ -30,16 +31,18 @@ material:
     slides: "yes"
     hands_on: "yes"
     questions:
-    - "How do we perform a very basic genome assembly from short read data?"
+      - "How do we perform a very basic genome assembly from short read data?"
     objectives:
-    - "assemble some paired end reads using Velvet"
-    - "examine the output of the assembly."
+      - "assemble some paired end reads using Velvet"
+      - "examine the output of the assembly."
     time_estimation: "30 minutes"
     key_points:
-    - "We assembled some Illumina fastq reads into contigs using a short read assembler called Velvet"
-    - "We showed what effect one of the key assembly parameters, the k-mer size, has on the assembly"
-    - "It looks as though there are some exploitable patterns in the metric data vs the k-mer size."
--
+      - "We assembled some Illumina fastq reads into contigs using a short read assembler called Velvet"
+      - "We showed what effect one of the key assembly parameters, the k-mer size, has on the assembly"
+      - "It looks as though there are some exploitable patterns in the metric data vs the k-mer size."
+    contributors:
+      - slugger70
+  -
     title: "De Bruijn Graph Assembly"
     type: "tutorial"
     name: "debruijn-graph-assembly"
@@ -60,6 +63,7 @@ material:
       - "We learned about the strategies that assemblers use to make reference genomes"
       - "We performed a number of assemblies with Velvet and SPAdes."
       - "You should use SPAdes or another more modern assembler than Velvet for actual assemblies now."
+<<<<<<< HEAD
 -
     title: "Unicycler Assembly"
     type: "tutorial"
@@ -94,19 +98,26 @@ contributors:
     github_username: "Delphine-L"
     email: "delphinel@galaxyproject.org"
 
+=======
+    contributors:
+      - slugger70
+
+maintainers:
+  - slugger70
+>>>>>>> 362f67a401837991de1e4a5d1044ef939c25ef01
 
 references:
--
+  -
     authors: "D.R. Zerbino and E. Birney"
     title: "Velvet: algorithms for de novo short read assembly using de Bruijn graphs."
     link: "http://genome.cshlp.org/content/18/5/821.full"
     summary: "Velvet: Sequence assembler for very short reads"
--
+  -
     authors: "Daniel R. Zerbino , Gayle K. McEwen, Elliott H. Margulies, Ewan Birney"
     title: "Pebble and Rock Band: Heuristic Resolution of Repeats and Scaffolding in the Velvet Short-Read de Novo Assembler"
     link: "https://doi.org/10.1371/journal.pone.0008407"
     summary: "Heuristic Resolution of Repeats and Scaffolding in the Velvet Short-Read de Novo Assembler"
--
+  -
     authors: "Anton Bankevich, Sergey Nurk, Dmitry Antipov, Alexey A. Gurevich, Mikhail Dvorkin, Alexander S. Kulikov, Valery M. Lesin, Sergey I. Nikolenko, Son Pham, Andrey D. Prjibelski, Alexey V. Pyshkin, Alexander V. Sirotkin, Nikolay Vyahhi, Glenn Tesler, Max A. Alekseyev, and Pavel A. Pevzner"
     title: "SPAdes: A New Genome Assembly Algorithm and Its Applications to Single-Cell Sequencing"
     link: "https://doi.org/10.1089/cmb.2012.0021"

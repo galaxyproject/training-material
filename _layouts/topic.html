@@ -5,6 +5,7 @@ layout: base
 {% include default-header.html %}
 
 {% assign topic = site.data[page.topic_name] %}
+{% assign contributors = site.data['contributors'] %}
 
 <div class="container main-content">
     <section>
@@ -119,18 +120,18 @@ layout: base
         <p>For these tutorials, use Galaxy instance at <a href="{{ topic.galaxy_instance }}">{{ topic.galaxy_instance }}</a>.</p>
         {% endif %}
 
-        <h2 id="contributors">Contributors</h2>
+        <h2 id="maintainers">Maintainers</h2>
         <p>This material is maintained by:</p>
         <ul>
         {% for maintainer in topic.maintainers %}
             <li>
-            {% if maintainer.github_username != "" %}
-                <a href="https://github.com/{{ maintainer.github_username }}">{{ maintainer.name }}</a>
+            {% if contributors[maintainer].github != false %}
+                <a href="https://github.com/{{ maintainer }}">{{ contributors[maintainer].name }}</a>
             {% else %}
-                {{ maintainer.name }}
+                {{ contributors[maintainer].name }}
             {% endif %}
-            {% if maintainer.email != "" %}
-                (<a href="mailto:{{ maintainer.email }}">{{ maintainer.email }}</a>)
+            {% if contributors[maintainer].email and contributors[maintainer].email != "" %}
+                (<a href="mailto:{{ contributors[maintainer].email }}">{{ contributors[maintainer].email }}</a>)
             {% endif %}
             </li>
         {% endfor %}
@@ -139,22 +140,6 @@ layout: base
         <p>
             <em>For any question related to this topic and the content, you can contact them.</em>
         </p>
-
-        <p>The following persons have contributed to this training material:</p>
-        <ul>
-            {% for contributor in topic.contributors %}
-                <li>
-                {% if contributor.github_username != "" %}
-                    <a href="https://github.com/{{ contributor.github_username }}">{{ contributor.name }}</a>
-                {% else %}
-                    {{ contributor.name }}
-                {% endif %}
-                {% if contributor.email != "" %}
-                    (<a href="mailto:{{ contributor.email }}">{{ contributor.email }}</a>)
-                {% endif %}
-                </li>
-            {% endfor %}
-        </ul>
 
         {% if topic.references %}
         <h2 id="references">References</h2>

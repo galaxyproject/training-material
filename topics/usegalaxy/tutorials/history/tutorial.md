@@ -31,7 +31,7 @@ clear you sessions - that history will be lost!** We can not recover it for you 
 
 ### Current history controls
 
-![](../../images/current-history-buttons.png)
+![Current history buttons](../../images/current-history-buttons.png)
 
 Above the current history panel are three buttons: the refresh, history options, and 'view all histories' button.
 
@@ -56,7 +56,7 @@ All histories begin with the name 'Unnamed history'. Non-anonymous users can ren
 3. Press 'Enter' to save the new name. The input field will disappear and the new name display.
 4. To cancel renaming, press 'Esc' or click outside the input field.
 
-![](../../images/renaming.png)
+![Renaiming history](../../images/renaming.png)
 
 ### Tagging a history
 
@@ -74,7 +74,7 @@ To tag a history:
 3. Press enter or select one of the previous tags with your arrow keys or mouse.
 4. To remove an existing tag, click the small 'X' on the tag or use the backspace key while in the input field.
 
-![](../../images/tags.png)
+![Using tags](../../images/tags.png)
 
 ### Annotating a history
 
@@ -92,7 +92,7 @@ To annotate a history:
   entered since the 'Tab' button is used to switch between controls on the page - tabs can be pasted in however).
 4. To save the annotation, click the 'Done' button.
 
-![](../../images/annotations.png)
+![Annotations to history](../../images/annotations.png)
 
 ### History size
 
@@ -120,7 +120,7 @@ There are several different 'states' a dataset can be in:
 1. If a previously running or queued job has been paused by Galaxy, the dataset will be in the **paused** state.
   You can re-start/resume paused jobs using the options menu above the history panel and selecting 'Resume Paused Jobs'.
 
-![](../../images/states.png)
+![States in history](../../images/states.png)
 
 Datasets in the panel are initially shown in a 'summary' view, that only displays:
 
@@ -135,7 +135,7 @@ Datasets in the panel are initially shown in a 'summary' view, that only display
 action. For example, the 'edit' button is disabled for datasets that are still queued or running.
 {: .alert .alert-warning}
 
-![](../../images/summary.png)
+![Datasets as summary in history](../../images/summary.png)
 
 You can click the dataset name and the view will expand to show more details:
 
@@ -146,7 +146,7 @@ You can click the dataset name and the view will expand to show more details:
 1. a row of buttons that allow further actions on the dataset
 1. a **peek** of the data: a couple of rows of data with the column headers (if available)
 
-![](../../images/details.png)
+![Details](../../images/details.png)
 
 
 **Note:** many of these details are only displayed if the dataset has finished running, is in the 'ok' state, and
@@ -165,7 +165,7 @@ history has hidden datasets, the number will appear there (e.g. '3 hidden') as a
 the hidden datasets are shown. Each hidden dataset has a link in the top of the summary view that allows you to unhide
 it. You can click that link again (which will now be 'hide hidden') to make them not shown again.
 
-![](../../images/hide.png)
+![Hiding dataset](../../images/hide.png)
 
 ### Deleting and undeleting datasets
 
@@ -176,7 +176,7 @@ link. Clicking this link (e.g. '3 deleted') will make the deleted datasets visib
 link for manually undeleting it above its title. You can click that link again (which will now be 'hide deleted') to
 make them not shown again.
 
-![](../../images/delete.png)
+![Deleting dataset](../../images/delete.png)
 
 ### Purging datasets and removing them permanently from Galaxy
 
@@ -209,7 +209,7 @@ You can also hide, delete, and purge multiple datasets at once by **multi-select
   an action doesn't apply to a selected dataset - like deleting a deleted dataset - nothing will happen.)
 1. You can click the multiselect button again to hide the checkboxes again.
 
-![](../../images/multiselect.png)
+![Multiselecting datasets](../../images/multiselect.png)
 
 ### Searching for datasets
 
@@ -232,7 +232,7 @@ For example:
 **Note:** searches are case-insensitive. For example, `VCF` and `vcf` are equivalent.
 {: .alert .alert-warning}
 
-![](../../images/basic-search.png)
+![Searches for dataset](../../images/basic-search.png)
 
 ### Clearing a search
 
@@ -261,7 +261,7 @@ You can enclose text and include spaces using double quotes: `name="My Dataset" 
 If you find normal searching is showing too many datasets, and not what you're looking for, try the advanced keyword
 search.
 
-![](../../images/adv-search.png)
+![Advanced search](../../images/adv-search.png)
 
 ### Search and multiselect
 
@@ -291,22 +291,22 @@ history method is presented here:
 
 Click the multi-history icon at the top right of the 'Analyze Data' (home) page. Note: you must be logged in to
 see the icon and use the multi-history page. You should see all the (non-deleted) histories that you've created.
-![](../../images/undelete.multihistory-button.png)
+![Multi-history button](../../images/undelete.multihistory-button.png)
 
 Click the '...' icon button in the grey header at the top of the page. You should see a dialog that presents some options for viewing the histories. Click the 'include deleted histories' option.
-![](../../images/undelete.multihistory-options.png)
+![Multihistory options](../../images/undelete.multihistory-options.png)
 
 The page should reload and now both non-deleted and deleted histories will be displayed. Deleted histories will
 have a small message under their titles stating 'This history has been deleted'.
 
-![](../../images/undelete.thishasbeendeleted.png)
+![Deleted and non-deleted histories](../../images/undelete.thishasbeendeleted.png)
 Now click the small button with the down arrow just above the deleted history you want to undelete. Then click
 the 'Undelete' option there. Your history should now be undeleted.
-![](../../images/undelete.undelete-button.png)
+![Undelete button](../../images/undelete.undelete-button.png)
 
 Click the 'Switch to' button at the top of that history and then click 'done' at the very top left to return to
 the 'Analyze Data' page.
-![](../../images/undelete.switchto.png)
+![Switch to history](../../images/undelete.switchto.png)
 
 ## Dataset Collections
 
@@ -340,7 +340,7 @@ the forward reads and one file contains the reverse reads. Many bioinformatic to
 further simplify this by placing both files into on 'Dataset Pair' collection. Only two files will be added to the
 collection: forward and reverse.
 
-![](../../images/pair.png)
+![Dataset pairs](../../images/pair.png)
 
 ### Dataset list
 
@@ -348,7 +348,7 @@ Choose 'Dataset List' when you have a set of files that are of the same type and
 analysis. The datasets in a dataset list must have unique names (e.g. you cannot have two datasets in a dataset list
 with the name '1.bed').
 
-![](../../images/list.png)
+![Dataset lists](../../images/list.png)
 
 ### List of dataset pairs
 
@@ -357,4 +357,4 @@ to create this is currently the most flexible and potentially most complicated. 
 datasets sent to the interface based on the dataset names. You are free to select your own pairs, however, and change
 the order of the collection. Click the help text at the top of the interface to see more information.
 
-![](../../images/list-pairs.png)
+![List of dataset pairs](../../images/list-pairs.png)

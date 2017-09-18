@@ -1,6 +1,7 @@
 ---
 layout: introduction_slides
 topic_name: introduction
+tutorial_name: introduction
 logo: "GTN"
 ---
 
@@ -13,7 +14,7 @@ logo: "GTN"
 - **Web-based** platform for computational biomedical research
   - Developed at Penn State, Johns Hopkins and G. Washington universities with substantial outside contributions
   - **Open source** under [Academic Free License](https://opensource.org/licenses/AFL-3.0)
-- More than 4,400 [citations](https://www.citeulike.org/group/16008/)
+- More than 4,800 [citations](http://www.citeulike.org/group/16008/)
 - More than 80 [public Galaxy servers](https://galaxyproject.org/public-galaxy-servers/)
   - Many more non-public
   - Both general-purpose and domain-specific
@@ -27,17 +28,17 @@ The Galaxy Team is composed by bioinformaticians and software engineers
 ### Core values
 
 - **Accessibility**
-  - Users without programming experience can easily specify parameters, run tools, workflows and parse/filter data
+  - Users without programming experience can easily upload/retrieve data, run complex tools and workflows, and visualize data
 - **Reproducibility**
-  - Galaxy captures information so that any user can repeat and understand a complete computational analysis
+  - Galaxy captures information so that any user can understand and repeat a complete computational analysis
 - **Transparency**
-  - Users share and publish analyses via the web and create Pages and workflows - interactive, web-based documents that describe a complete analysis
+  - Users can share or publish their analyses (histories, workflows, visualizations)
+  - Pages: online Methods for your paper
 
 ???
 
-Accessibility: Users without programming experience can easily specify parameters and run tools and workflows.
-Reproducibility: Galaxy captures information so that any user can repeat and understand a complete computational analysis.
-Transparency: Users share and publish analyses via the web and create Pages, interactive, web-based documents that describe a complete analysis.
+- Information captured by Galaxy include: tool version, inputs and parameters.
+- Pages: interactive, web-based documents that describe a complete analysis.
 
 ---
 
@@ -68,7 +69,7 @@ Home page divided into 3 panels
 
 ### Tool interface
 
-![Tool interface](../images/101_13.png)
+![Tool interface](../images/101_11.png)
 
 ---
 
@@ -103,7 +104,7 @@ A tool describes:
   - Name, format, size, creation time, datatype-specific metadata
   - Tool id and version, inputs, parameters
   - Standard output (`stdout`) and error (`stderr`)
-  - State (<span style="color: grey">grey</span>: waiting; <span style="color: yellow">yellow</span>: running; <span style="color: green">green</span>: success; <span style="color: red">red</span>: failed)
+  - State (<span style="background-color: grey">waiting</span>, <span style="background-color: yellow">running</span>, <span style="background-color: green">success</span>, <span style="background-color: red">failed</span>)
   - Hidden, deleted, purged
 
 ???
@@ -115,8 +116,8 @@ Purged means permanently deleted
 ### Multiple histories
 
 - You can have as many histories as you want
-  - *Each history should correspond to a different analysis*
-  - *and should have a meaningful name*
+  - Each history should correspond to a **different analysis**
+  - and should have a meaningful **name**
 
 ---
 
@@ -126,10 +127,10 @@ Purged means permanently deleted
 
 .image-25[![History options gear button](../images/galaxy_interface_history_menu.png)]
 
-- Most options are self explanatory
-  - *Create New* history will **not** make your current history disappear
-  - To list all your histories, choose *Saved Histories*
-  - You can *Copy Datasets* from one history to another
+- *Create New* history will **not** make your current history disappear
+- To list all your histories, choose *Saved Histories*
+- You can *Copy Datasets* from one history to another
+  - saves disk space and your quota
 
 ---
 
@@ -142,10 +143,12 @@ Purged means permanently deleted
 - Copy/paste from a file
 - Upload data from a local computer
 - Upload data from internet
-- Upload data from database queries
+- Upload data from online databases
   - UCSC, BioMart, ENCODE, modENCODE, Flymine etc.
-- Download shared data from public libraries or shared Data libraries, Histories, Workflows, Visualizations, and Pages on https://usegalaxy.org/
+- Import from Shared Data (libraries, histories, pages)
 - Upload data from FTP (>2GB)
+
+See [Getting data into Galaxy](../tutorials/galaxy-intro-get-data/slides.html)
 
 ---
 
@@ -154,7 +157,7 @@ Purged means permanently deleted
 - When uploading, datatype can be automatically detected or assigned by user
 - For datasets produced by a tool, the datatype is assigned by the tool
 - Tools only accept input datasets with the appropriate datatypes
-- You can change the datatype in 2 ways:
+- You can change the datatype of a dataset in 2 ways:
   - Edit Attributes -> Datatype
   - Edit Attributes -> Convert Formats
 
@@ -169,10 +172,10 @@ Purged means permanently deleted
 ### Reference genomes
 
 - Genome build specifies which genome assembly a dataset is associated with
-  - e.g. mm10, hg19...
+  - e.g. mm10, hg38...
 - Genome build can be automatically detected or assigned by user
 - User can define their own custom genome build
-- New genome assembly can be added by the site Galaxy admin
+- New genome assemblies can be added by the site Galaxy admin
 
 ---
 
@@ -183,6 +186,14 @@ Purged means permanently deleted
 ### Workflow interface
 
 ![Workflow interface](../images/RNA-Seq_workflow_editing.png)
+
+???
+
+- Boxes are workflow steps
+  - 2 types: *input* and *tool* steps
+- Steps are connected by arrows representing the flow of datasets
+- Tool panel on the left with Inputs on top (to add input datasets and collections)
+- Small tool form on the right
 
 ---
 
@@ -198,11 +209,11 @@ Purged means permanently deleted
 ### Why would you want to create workflows?
 
 - **Re-run** the same analysis on different input data sets
-- Change parameters before re-running a similar analysis
+- **Change parameters** before re-running a similar analysis
 - Make use of the workflow job **scheduling**
-  - job is submitted as soon as its inputs are ready
+  - jobs are submitted as soon as their inputs are ready
 - Create **sub**-workflows: a workflow inside another workflow
-- Share workflows for publication and with the community
+- **Share** workflows for publication and with the community
 
 ---
 
@@ -220,9 +231,10 @@ Purged means permanently deleted
 
 ### Data visualization
 
+- Charts
+- Each datatype can have some visualizations associated
 - Track browser called Trackster
   - To visualize genomic data in a tightly integrated way
-
 
 ---
 

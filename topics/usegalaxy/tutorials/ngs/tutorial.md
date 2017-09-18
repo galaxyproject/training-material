@@ -88,7 +88,7 @@ It is common to prepare pair-end and mate-pair sequencing libraries. This is hig
 
 |   |
 |----|
-| ![](../../images/pe_mp.png) |
+| ![Paired-end and mate-pair reads](../../images/pe_mp.png) |
 |<small>**Paired-end and mate-pair reads**. In paired end sequencing (left) the actual ends of rather short DNA molecules (less than 1kb) are determined, while for mate pair sequencing (right) the ends of long molecules are joined and prepared in special sequencing libraries. In these mate pair protocols, the ends of long, size-selected molecules are connected with an internal adapter sequence (i.e. linker, yellow) in a circularization reaction. The circular molecule is then processed using restriction enzymes or fragmentation. Fragments are enriched for the linker and outer library adapters are added around the two combined molecule ends. The internal adapter can then be used as a second priming site for an additional sequencing reaction in the same orientation or sequencing can be performed from the second adapter, from the reverse strand. (From Ph.D. dissertation by [Martin Kircher](https://core.ac.uk/download/pdf/35186947.pdf))</small>|
 
 
@@ -170,7 +170,7 @@ The base qualities allow us to judge how trustworthy each base in a sequencing r
 
 Illumina sequencing is based on identifying the individual nucleotides by the fluorescence signal emitted upon their incorporation into the growing sequencing read. Once the fluorescence intensities are extracted and translated into the four letter code. The deduction of nucleotide sequences from the images acquired during sequencing is commonly referred to as base calling. Due to the imperfect nature of the sequencing process and limitations of the optical instruments, base calling will always have inherent uncertainty. This is the reason why FASTQ files store the DNA sequence of each read together with a position-specific quality score that represents the error probability, i.e., how likely it is that an individual base call may be incorrect. The score is called [Phred score](http://www.phrap.com/phred/), $Q$, which is proportional to the probability $p$ that a base call is incorrect, where $Q = −10lg(p)$. For example, a Phred score of 10 corresponds to one error in every ten base calls ($Q = −10lg(0.1)$), or 90% accuracy; a Phred score of 20 corresponds to one error in every 100 base calls, or 99% accuracy. A higher Phred score thus reflects higher confidence in the reported base. To assign each base a unique score identifier (instead of numbers of varying character length), Phred scores are typically represented as ASCII characters. At http://ascii-code.com/ you can see which characters are assigned to what number. For raw reads, the range of scores will depend on the sequencing technology and the base caller used (Illumina, for example, used a tool called Bustard, or, more recently, RTA). Unfortunately, Illumina has been anything but consistent in how they calculated and ASCII-encoded the Phred score (see below)! In addition, Illumina now allows Phred scores for base calls with as high as 45, while 41 used to be the maximum score until the HiSeq X. This may cause issues with downstream sapplications that expect an upper limit of 41.
 
-![](../../images/illumina_qs.png)
+![Illumina quality score](../../images/illumina_qs.png)
 
 </div>
 
@@ -180,7 +180,7 @@ Sanger/Phred format that is also used by other sequencing platforms and the sequ
 
 |                                                              |
 |--------------------------------------------------------------|
-| ![](../../images/fastq_qs.png) |
+| ![FastQ quality score](../../images/fastq_qs.png) |
 | <small>The ASCII interpretation and ranges of the different Phred score notations used by Illumina and the original Sanger interpretation. Although the Sanger format allows a theoretical score of 93, raw sequencing reads typically do not exceed a Phred score of 60. In fact, most Illumina-based sequencing will result in maximum scores of 41 to 45 (image from [Wikipedia](https://en.wikipedia.org/wiki/FASTQ_format)</small> |
 
 ## Assessing data quality
@@ -189,7 +189,7 @@ One of the first steps in the analysis of NGS data is seeing how good the data a
 
 |                                        |                                    |
 |:---------------------------------------|:-----------------------------------|
-| ![](../../images/good_fq.png)    | ![](../../images/bad_fq.png) |    
+| ![Good quality in FastQC](../../images/good_fq.png)    | ![Bad quality in FastQC](../../images/bad_fq.png) |    
 |<small>**A.** Excellent quality</small> | <small>**B.** Hmmm...OK</small>    |
 
 Here you can see FastQC base quality reports (the tools gives you many other types of data) for two datasets: **A** and **B**. The **A** dataset has long reads (250 bp) and very good quality profile with no qualities dropping below [phred score](http://www.phrap.com/phred/) of 30. The **B** dataset is significantly worse with ends of the reads dipping below phred score of 20. The **B** reads may need to be trimmed for further processing.
@@ -216,7 +216,7 @@ Mappers usually compare reads against a reference sequence that has been transfo
 
 |                                                              |
 |--------------------------------------------------------------|
-| ![](../../images/cached_genome.png)                    |
+| ![Cached genome](../../images/cached_genome.png)                    |
 |<small>Mapping against a pre-computed index in Galaxy.</small>|
 
 For example, the image above shows indexes for `hg38` version of the human genome. You can see that there are actually three choices: (1) `hg38`, (2) `hg38 canonical` and (3) `hg38 canonical female`. The `hg38` contains all chromosomes as well as all unplaced contigs. The `hg38 canonical` does not contain unplaced sequences and only consists of chromosomes 1 through 22, X, Y, and mitochondria. The
@@ -236,7 +236,7 @@ If Galaxy does not have a genome you need to map against, you can upload your ge
 
 |                                                              |
 |--------------------------------------------------------------|
-| ![](../../images/uploaded_genome.png) |
+| ![Uploaded genome](../../images/uploaded_genome.png) |
 |<small>Mapping against a pre-computed index in Galaxy </small>|
 
 In this case Galaxy will first create an index from this dataset and then run mapping analysis against it. The following video shows how this works in practice:
@@ -253,7 +253,7 @@ As shown below, SAM files typically contain a short header section and a very lo
 
 |                                                              |
 |--------------------------------------------------------------|
-| ![](../../images/bam_structure.png)   |
+| ![BAM structure](../../images/bam_structure.png)   |
 |<small>**Schematic representation of a SAM file**. Each line of the optional header section starts with “@”, followed by the appropriate abbreviation (e.g., SQ for sequence dictionary which lists all chromosomes names (SN) and their lengths (LN)). The vast majority of lines within a SAM file typically correspond to read alignments where each read is described by the 11 mandatory entries (black font) and a variable number of optional fields (grey font). From [tutorial](http://chagall.med.cornell.edu/RNASEQcourse/Intro2RNAseq.pdf) by Friederike D&uuml;ndar, Luce Skrabanek, and Paul Zumbo.</small>|
 
 ## SAM Header
@@ -282,7 +282,7 @@ ERR458493 .552967 16 chrI 140 255 12 M61232N37M2S * 0 0 CCACTCGTTCACCAGGGCCGGCGG
 
 The following table explains the format and content of each field. The `FLAG`, `CIGAR`, and the optional fields (marked in blue) are explained in more detail below. The number of optional fields can vary widely between different SAM files and even between reads within in the same file. The field types marked in blue are explained in more detail in the main text below.
 
-![](../../images/sam_fields.png)
+![SAM fields](../../images/sam_fields.png)
 
 ### `FLAG` field
 
@@ -292,7 +292,7 @@ The following table gives an overview of the different properties that can be en
 
 |                                                              |
 |--------------------------------------------------------------|
-| ![](../../images/sam_flag.png) |
+| ![SAM flag](../../images/sam_flag.png) |
 |<small>The `FLAG` field of SAM files stores information about the respective read alignment in one single decimal number. The decimal number is the sum of all the answers to the Yes/No questions associated with each binary bit. The hexadecimal representation is used to refer to the individual bits (questions). A bit is set if the corresponding state is true. For example, if a read is paired, `0x1` will be set, returning the decimal value of 1. Therefore, all `FLAG` values associated with paired reads must be uneven decimal numbers. Conversely, if the `0x1` bit is unset (= read is not paired), no assumptions can be made about `0x2`, `0x8`, `0x20`, `0x40` and `0x80` because they refer to paired reads. From [tutorial](http://chagall.med.cornell.edu/RNASEQcourse/Intro2RNAseq.pdf) by Friederike D&uuml;ndar, Luce Skrabanek, and Paul Zumbo</small>|
 
 In a run with single reads, the flags you most commonly see are:
@@ -339,7 +339,7 @@ The sum of lengths of the **M**, **I**, **S**, **=**, **X** operations must equa
 
 |                                 |
 |---------------------------------|
-|![](../../images/cigar.png)|
+|![CIGAR](../../images/cigar.png)|
 |<small>From [tutorial](http://chagall.med.cornell.edu/RNASEQcourse/Intro2RNAseq.pdf) by Friederike D&uuml;ndar, Luce Skrabanek, and Paul Zumbo.</small>|
 
 ### Optional fields
@@ -371,11 +371,11 @@ One of the key features of SAM/BAM format is the ability to label individual rea
 
 One of the best descriptions of BAM readgroups is on [GATK support site](https://gatkforums.broadinstitute.org/discussion/1317/collected-faqs-about-bam-files). We have gratefully stolen two tables describing the most important readgroup tags - `ID`, `SM`, `LB`, and `PL` - from GATK forum and provide them here:
 
-![](../../images/rg.png)
+![Read groups](../../images/rg.png)
 
 GATK forum also provides the following example:
 
-![](../../images/rg_example.png)
+![Read group example](../../images/rg_example.png)
 
 To see an example of read group manipulation in Galaxy see the following video:
 
@@ -406,7 +406,7 @@ Preparation of sequencing libraries (at least at the time of writing) for techno
 
 |                                              |
 |----------------------------------------------|
-| ![](../../images/pcr-duplicates.png) |
+| ![PCR duplicates](../../images/pcr-duplicates.png) |
 |<small>Analyzing molecules aligning with the same outer coordinates, a mapping quality of at least 30 and a length of at least 30nt, resulted in an average coverage of 12.9 per PCR duplicate and an empirical coverage distribution similar to an exponential/power law distribution (left upper panel). This indicates that many molecules are only observed for deeper sequencing while other molecules are available at higher frequencies. Analyzing length (left middle panel) and GC content (left lower panel) patterns as well as the combination (right panel) shows higher PCR duplicate counts for a GC content between 30% to 70% as well as for shorter molecules compared to longer molecules. This effect may be due to an amplification bias from the polymerase or the cluster generation process necessary for Illumina sequencing. From Ph.D. dissertation of [Martin Kircher](https://www.qucosa.de/fileadmin/data/qucosa/documents/7110/pflichtexemplar_final.pdf)).</small>|
 
 Duplicates can be identified based on their outer alignment coordinates or using sequence-based clustering. One of the common ways for identification of duplicate reads is the `MarkDuplicates` utility from [Picard](https://broadinstitute.github.io/picard/command-line-overview.html) package. It is designed to identify both PCR and optical duplicates:
@@ -423,5 +423,5 @@ However, one has to be careful when removing duplicates in cases when the sequen
 
 |                                              |
 |----------------------------------------------|
-| ![](../../images/sampling-bias.png) |
+| ![Sampling bias](../../images/sampling-bias.png) |
 | <small>The Variant Allele Frequency (VAF) bias determined by coverage and insert size variance. Reads are paired-end and read length is 76. The insert size distribution is modeled as a Gaussian distribution with mean at 200 and standard deviation shown on the x-axis. The true VAF is 0.05. The darkness at each position indicates the magnitude of the bias in the VAF. (From Zhou et al. [2013](https://bioinformatics.oxfordjournals.org/content/30/8/1073)).</small> |

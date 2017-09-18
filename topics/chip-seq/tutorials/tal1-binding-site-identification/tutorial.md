@@ -164,7 +164,7 @@ Nowadays, there are many read alignment programs for sequenced DNA, `BWA` being 
 >    >    <details>
 >    >    <summary>Click to view answers</summary>
 >    >    <ol type="1">
->    >    <li> The output is a sam file.</li>
+>    >    <li> The output is a BAM file.</li>
 >    >    <li>Check the number of lines for each file in your history. This gives you a rough estimate.</li>
 >    >    </ol>
 >    >    </details>
@@ -200,7 +200,7 @@ Nowadays, there are many read alignment programs for sequenced DNA, `BWA` being 
 
 To assess the similarity between the replicates sequencing datasets, it is a common technique to calculate the correlation of read counts for the different samples.
 
-We expect that the replicates of the ChIP-seq experiments should be clustered more closely to each other than the replicates of the input samples. We will be use tools from the package **deepTools** for the next few steps. More information on **deepTools** can be found [here](https://deeptools.readthedocs.io/en/latest/content/list_of_tools.html).
+We expect that the replicate samples will cluster more closely to each other than to other samples. We will be use tools from the package **deepTools** for the next few steps. More information on **deepTools** can be found [here](https://deeptools.readthedocs.io/en/latest/content/list_of_tools.html).
 
 > ### {% icon hands_on %} Hands-on: Assessing correlation between samples
 >
@@ -422,7 +422,7 @@ We will generate Input normalized coverage (bigwig) files for the ChIP samples, 
 > 3. Check that you are using log2 ratio to compare the samples, and click "Execute".
 > 4. Repeat this step for all treatment and input samples: Megakaryocyte_Tal1_R1.bam and Megakaryocyte_Input_R1.bam; G1E_Tal1_R2.bam and G1E_Input_R2.bam; G1E_Tal1_R1.bam and G1E_Input_R1.bam.
 >
-> ![](../../images/bamcom.png)
+> ![bamCompare tool settings](../../images/bamcom.png)
 {: .hands_on}
 
 # Step 10: Plot the signal on the peaks between samples
