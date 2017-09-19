@@ -31,7 +31,7 @@ build: ## build files but do not run a server
 .PHONY: build
 
 check: build ## validate HTML
-	bundle exec htmlproofer --http-status-ignore 405,999 --url-ignore "/.*localhost.*/","/.*vimeo\.com.*/" --file-ignore "/.*\/files\/.*/" ./_site
+	timeout 120s bundle exec htmlproofer --http-status-ignore 405,999 --url-ignore "/.*localhost.*/","/.*vimeo\.com.*/" --file-ignore "/.*\/files\/.*/" ./_site
 	yamllint .
 .PHONY: check
 
