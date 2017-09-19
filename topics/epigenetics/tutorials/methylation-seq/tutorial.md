@@ -201,7 +201,7 @@ The data we use in this tutorial is available at [Zenodo](https://zenodo.org/rec
 >
 > ![Methylation level around TSS](../../images/methyl_level.png)
 >
-> More information about deepTools can be found here: https://deeptools.github.io/
+> More information about deepTools can be found here: https://deeptools.readthedocs.io
 >
 {: .hands_on}
 
