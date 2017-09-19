@@ -199,6 +199,8 @@ The data we use in this tutorial is available at [Zenodo](https://zenodo.org/rec
 > 3. To save compute time we prepared the converted files for you. Import the files: `NB1_CpG.meth_ucsc.bedGraph`, `NB2_CpG.meth_ucsc.bedGraph`, `BT089_CpG.meth_ucsc.bedGraph`, `BT126_CpG.meth_ucsc.bedGraph`, `BT198_CpG.meth_ucsc.bedGraph` and `MCF7_CpG.meth_ucsc.bedgraph`.
 > 4. Compute the matrix and plot the profile as described above.
 >
+> ![Methylation level around TSS](../../images/methyl_level.png)
+>
 > More information about deepTools can be found here: https://deeptools.github.io/
 >
 {: .hands_on}
