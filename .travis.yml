@@ -41,7 +41,11 @@ script:
     then
       htmlproofer --http-status-ignore 405,999 --url-ignore "/.*localhost.*/","/.*vimeo\.com.*/" --file-ignore "/.*\/files\/.*/"
     else
-      make check
+      if [ "$TRAVIS_BRANCH" != "master" ]
+      then
+        make check
+      else
+        make build
     fi
 
 after_success:
