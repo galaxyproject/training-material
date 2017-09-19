@@ -161,14 +161,14 @@
 
         <h1 class="no_toc" id="introduction">Introduction</h1>
 
-<p>This tutorial uses ChIP-seq datasets from a study published by <a href="http://genome.cshlp.org/content/24/12/1945.full.pdf+html">Wu <em>et al.</em> (2014)</a>. The goal of this study was to investigate “the dynamics of occupancy and the role in gene regulation of the transcription factor TAL1, a critical regulator of hematopoiesis, at multiple stages of hematopoietic differentiation.”</p>
+<p>This tutorial uses ChIP-seq datasets from a study published by <a href="http://genome.cshlp.org/content/24/12/1945.full.pdf+html"><em>Wu et al.</em> (2014)</a>. The goal of this study was to investigate “the dynamics of occupancy and the role in gene regulation of the transcription factor TAL1, a critical regulator of hematopoiesis, at multiple stages of hematopoietic differentiation.”</p>
 
 <p>To this end, ChIP-seq experiments were performed in multiple mouse cell types including G1E - a GATA-null immortalized cell line derived from targeted disruption of GATA-1 in mouse embryonic stem cells - and megakaryocytes.</p>
 
 <p>This dataset (GEO Accession: <a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE51338">GSE51338</a>) consists of biological replicate TAL1 ChIP-seq and input control experiments.
 Input control experiments are used to identify and remove sampling bias, for example open/accessible chromatin or GC bias.</p>
 
-<p>Because of the long processing time for the large original files, we have downsampled the original raw data files to include only reads that align to chromosome 19 and a subset of interesting genomic loci identified by Wu <em>et al.</em> (2014).</p>
+<p>Because of the long processing time for the large original files, we have downsampled the original raw data files to include only reads that align to chromosome 19 and a subset of interesting genomic loci identified by <em>Wu et al.</em> (2014).</p>
 
 <p><strong>Table 1</strong>: Metadata for ChIP-seq experiments in this tutorial. SE: single-end.</p>
 
@@ -290,9 +290,12 @@ Input control experiments are used to identify and remove sampling bias, for exa
   <li><a href="#step-4-assessing-correlation-between-samples" id="markdown-toc-step-4-assessing-correlation-between-samples">Step 4: Assessing correlation between samples</a></li>
   <li><a href="#step-5-assessing-ip-strength" id="markdown-toc-step-5-assessing-ip-strength">Step 5: Assessing IP strength</a></li>
   <li><a href="#step-6-determining-tal1-binding-sites" id="markdown-toc-step-6-determining-tal1-binding-sites">Step 6: Determining TAL1 binding sites</a></li>
-  <li><a href="#step-7-inspection-of-peaks-and-aligned-data" id="markdown-toc-step-7-inspection-of-peaks-and-aligned-data">Step 7: Inspection of peaks and aligned data</a></li>
-  <li><a href="#step-71-inspection-of-peaks-and-aligned-data-with-igv" id="markdown-toc-step-71-inspection-of-peaks-and-aligned-data-with-igv">Step 7.1: Inspection of peaks and aligned data with IGV</a></li>
-  <li><a href="#step-8-identifying-unique-and-common-tal1-peaks-between-states" id="markdown-toc-step-8-identifying-unique-and-common-tal1-peaks-between-states">Step 8: Identifying unique and common TAL1 peaks between states</a></li>
+  <li><a href="#step-7-inspection-of-peaks-and-aligned-data" id="markdown-toc-step-7-inspection-of-peaks-and-aligned-data">Step 7: Inspection of peaks and aligned data</a>    <ol>
+      <li><a href="#step-71-inspection-of-peaks-and-aligned-data-with-trackster" id="markdown-toc-step-71-inspection-of-peaks-and-aligned-data-with-trackster">Step 7.1: Inspection of peaks and aligned data with Trackster</a></li>
+      <li><a href="#step-72-inspection-of-peaks-and-aligned-data-with-igv" id="markdown-toc-step-72-inspection-of-peaks-and-aligned-data-with-igv">Step 7.2: Inspection of peaks and aligned data with IGV</a></li>
+    </ol>
+  </li>
+  <li><a href="#step-8-identifying-unique-and-common-tal1-peaks-between-stages" id="markdown-toc-step-8-identifying-unique-and-common-tal1-peaks-between-stages">Step 8: Identifying unique and common TAL1 peaks between stages</a></li>
   <li><a href="#step-9-generating-input-normalized-coverage-files" id="markdown-toc-step-9-generating-input-normalized-coverage-files">Step 9: Generating Input normalized coverage files</a></li>
   <li><a href="#step-10-plot-the-signal-on-the-peaks-between-samples" id="markdown-toc-step-10-plot-the-signal-on-the-peaks-between-samples">Step 10: Plot the signal on the peaks between samples</a></li>
   <li><a href="#additional-optional-analyses" id="markdown-toc-additional-optional-analyses">Additional optional analyses</a>    <ol>
@@ -673,7 +676,9 @@ Nowadays, there are many read alignment programs for sequenced DNA, <code class=
 
 <p>It is critical to visualize NGS data on a genome browser after alignment to evaluate the “goodness” of the analysis. Evaluation criteria will differ for various NGS experiment types, but for ChIP-seq data we want to ensure reads from a Treatment/IP sample are enriched at peaks and do not localize non-specifically (like the Control/input condition).</p>
 
-<p><strong>MACS2</strong> generates BEDgraph and BED files that we will use to visualize read abundance and peaks, respectively, at regions <strong>MACS2</strong> determines to be TAL1 peaks using Galaxy’s in-house genome browser, Trackster.</p>
+<p><strong>MACS2</strong> generates BEDgraph and BED files that we will use to visualize read abundance and peaks, respectively, at regions <strong>MACS2</strong> determines to be TAL1 peaks using Galaxy’s in-house genome browser, <strong>Trackster</strong>.</p>
+
+<h2 id="step-71-inspection-of-peaks-and-aligned-data-with-trackster">Step 7.1: Inspection of peaks and aligned data with Trackster</h2>
 
 <p>First, we will reformat the peak file before we send it to Trackster, and then we will import a gene annotation file so we can visualize aligned reads and TAL1 peaks relative to gene features and positions.</p>
 
@@ -731,7 +736,7 @@ Nowadays, there are many read alignment programs for sequenced DNA, <code class=
   </ol>
 </blockquote>
 
-<h1 id="step-71-inspection-of-peaks-and-aligned-data-with-igv">Step 7.1: Inspection of peaks and aligned data with IGV</h1>
+<h2 id="step-72-inspection-of-peaks-and-aligned-data-with-igv">Step 7.2: Inspection of peaks and aligned data with IGV</h2>
 <p>We show here an alternative to Trackster, <a href="http://software.broadinstitute.org/software/igv/">IGV</a>.</p>
 
 <blockquote>
@@ -744,7 +749,7 @@ Nowadays, there are many read alignment programs for sequenced DNA, <code class=
   </ol>
 </blockquote>
 
-<h1 id="step-8-identifying-unique-and-common-tal1-peaks-between-states">Step 8: Identifying unique and common TAL1 peaks between states</h1>
+<h1 id="step-8-identifying-unique-and-common-tal1-peaks-between-stages">Step 8: Identifying unique and common TAL1 peaks between stages</h1>
 
 <p>We have processed ChIP-seq data from two stages of hematopoiesis and have lists of TAL1 occupied sites (peaks) in both cellular states. The next analysis step is to identify TAL1 peaks that are <em>shared</em> between the two cellular states and peaks that are <em>specific</em> to either cellular state.</p>
 
@@ -957,11 +962,11 @@ Nowadays, there are many read alignment programs for sequenced DNA, <code class=
 
             <ul>
                 
-                <li>Sophisticated analysis of ChIP-seq data is possible using tools hosted by Galaxy</li>
+                <li>Sophisticated analysis of ChIP-seq data is possible using tools hosted by Galaxy.</li>
                 
                 <li>Genomic dataset analyses require multiple methods of quality assessment to ensure that the data are appropriate for answering the biology question of interest.</li>
                 
-                <li>By using the sharable and transparent Galaxy platform, data analyses can easily be shared and reproduced</li>
+                <li>By using the sharable and transparent Galaxy platform, data analyses can easily be shared and reproduced.</li>
                 
             </ul>
         </blockquote>

@@ -1,0 +1,1019 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Galaxy Training!</title>
+        <link rel="stylesheet" href="https://galaxyproject.github.io/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="https://galaxyproject.github.io/training-material/assets/css/main.css?v=2">
+        <link rel="stylesheet" href="https://galaxyproject.github.io/training-material/assets/css/font-awesome.css">
+        <link rel="stylesheet" href="https://galaxyproject.github.io/training-material/assets/css/syntax_highlighting.css">
+    </head>
+    <body>
+        
+
+
+
+<header>
+    <nav class="navbar navbar-expand-md navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="https://galaxyproject.github.io/training-material/">
+                <img src="https://galaxyproject.github.io/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://galaxyproject.github.io/training-material/topics/chip-seq" title="Go back to list of tutorials">
+                            <i class="fa fa-folder-o" aria-hidden="true"></i> ChIP-Seq data analysis
+                        </a>
+                    </li>
+
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://galaxyproject.github.io/training-material/topics/chip-seq/slides" title="Introduction slides">
+                            <i class="fa fa-slideshare" aria-hidden="true"></i> Introduction slides
+                        </a>
+                    </li>
+                    
+
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/galaxyproject/training-material/tree/master/topics/chip-seq/docker" title="Docker image for this tutorial">
+                            <i class="fa fa-ship" aria-hidden="true"></i> Docker image
+                        </a>
+                    </li>
+                    
+
+                    
+
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://doi.org/10.5281/zenodo.892432" title="Links to data">
+                            <i class="fa fa-files-o" aria-hidden="true"></i> Input Dataset
+                        </a>
+                    </li>
+                    
+
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://galaxyproject.github.io/training-material/topics/chip-seq#references" title="References">
+                            <i class="fa fa-book" aria-hidden="true"></i> Literature
+                        </a>
+                    </li>
+                    
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Chat on gitter">
+                            <i class="fa fa-life-ring" aria-hidden="true"></i> Help
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/galaxyproject/training-material/tree/master/topics/chip-seq/tutorials/estrogen-receptor-binding-site-identification/tutorial.md">
+                            <i class="fa fa-github" aria-hidden="true"></i> Edit
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<div class="container main-content">
+    <section class="tutorial">
+        <h1>Identification of the binding sites of the Estrogen receptor</h1>
+
+        <blockquote class="overview">
+            <h3>Overview</h3>
+
+            <strong><i class="fa fa-question-circle" aria-hidden="true"></i> Questions</strong>
+            <ul>
+            
+            <li>How is raw ChIP-seq data processed and analyzed?</li>
+            
+            <li>What are the binding sites of the Estrogen receptor?</li>
+            
+            </ul>
+
+            <strong><i class="fa fa-bullseye" aria-hidden="true"></i> Objectives</strong>
+            <ul>
+            
+            <li>Inspect read quality with FastQC</li>
+            
+            <li>Map reads with Bowtie2</li>
+            
+            <li>Assess the quality of an ChIP-seq experiments</li>
+            
+            <li>Extract coverage files</li>
+            
+            <li>Call enriched regions or peaks</li>
+            
+            </ul>
+
+            
+            <strong><i class="fa fa-check-circle" aria-hidden="true"></i> Requirements</strong>
+            <ul>
+            
+                <li>
+                    
+                    <a href="https://galaxyproject.github.io/training-material/topics/introduction/">Galaxy introduction</a>
+                    
+                </li>
+            
+                <li>
+                    
+                    <a href="https://galaxyproject.github.io/training-material/topics/sequence-analysis/">Quality control</a>
+                    
+                </li>
+            
+                <li>
+                    
+                    <a href="https://galaxyproject.github.io/training-material/topics/sequence-analysis/">Mapping</a>
+                    
+                </li>
+            
+            
+            </ul>
+            
+
+            <p><strong><i class="fa fa-hourglass-end" aria-hidden="true"></i> Time estimation:</strong> 3h</p>
+        </blockquote>
+
+        <h1 class="no_toc" id="introduction">Introduction</h1>
+
+<p>This exercise uses the dataset from the Nature publication by <a href="https://www.ncbi.nlm.nih.gov/pubmed/22217937">Ross-Inness et al., 2012</a>.
+The goal of this article was to identify the binding sites of the Estrogen receptor, a transcription factor known to be associated with different types of breast cancer.</p>
+
+<p>To this end, ChIP-seq was performed in breast cancer cells from 4 patients of different outcomes (good and poor). For each ChIP-seq experiment there is a matching technical control, i.e. there are 8 samples in total:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Patient</th>
+      <th>Outcome</th>
+      <th>Treatment</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Patient 1</td>
+      <td>Good</td>
+      <td>ChIP ER</td>
+    </tr>
+    <tr>
+      <td>Patient 1</td>
+      <td>Good</td>
+      <td>input (no immunoprecipitation step)</td>
+    </tr>
+    <tr>
+      <td>Patient 2</td>
+      <td>Good</td>
+      <td>ChIP ER</td>
+    </tr>
+    <tr>
+      <td>Patient 2</td>
+      <td>Good</td>
+      <td>input (no immunoprecipitation step)</td>
+    </tr>
+    <tr>
+      <td>Patient 3</td>
+      <td>Poor</td>
+      <td>ChIP ER</td>
+    </tr>
+    <tr>
+      <td>Patient 3</td>
+      <td>Poor</td>
+      <td>input (no immunoprecipitation step)</td>
+    </tr>
+    <tr>
+      <td>Patient 4</td>
+      <td>Poor</td>
+      <td>ChIP ER</td>
+    </tr>
+    <tr>
+      <td>Patient 4</td>
+      <td>Poor</td>
+      <td>input (no immunoprecipitation step)</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Half of which are the so-called ‘input’ samples for which the same treatment as the ChIP-seq samples was done except for the immunoprecipitation step.
+The input files are used to identify potential sequencing bias, like open chromatin or GC bias.</p>
+
+<p>Because of the long processing time for the large original files, we have downsampled the original data and provide already processed data for subsequent steps.</p>
+
+<blockquote class="agenda">
+  <h3 id="agenda">Agenda</h3>
+
+<ol id="markdown-toc">
+  <li><a href="#step-1-quality-control-and-treatment-of-the-sequences" id="markdown-toc-step-1-quality-control-and-treatment-of-the-sequences">Step 1: Quality control and treatment of the sequences</a></li>
+  <li><a href="#step-2-mapping-of-the-reads" id="markdown-toc-step-2-mapping-of-the-reads">Step 2: Mapping of the reads</a>    <ol>
+      <li><a href="#visualization-using-a-genome-browser" id="markdown-toc-visualization-using-a-genome-browser">Visualization using a Genome Browser</a></li>
+      <li><a href="#inspection-of-the-sam-format" id="markdown-toc-inspection-of-the-sam-format">Inspection of the SAM format</a></li>
+    </ol>
+  </li>
+  <li><a href="#step-3-chip-seq-quality-control" id="markdown-toc-step-3-chip-seq-quality-control">Step 3: ChIP-seq Quality Control</a>    <ol>
+      <li><a href="#correlation-between-samples" id="markdown-toc-correlation-between-samples">Correlation between samples</a></li>
+      <li><a href="#ip-strength-estimation" id="markdown-toc-ip-strength-estimation">IP strength estimation</a></li>
+    </ol>
+  </li>
+  <li><a href="#step-4-normalization" id="markdown-toc-step-4-normalization">Step 4: Normalization</a>    <ol>
+      <li><a href="#generation-of-coverage-files-normalized-by-sequencing-depth" id="markdown-toc-generation-of-coverage-files-normalized-by-sequencing-depth">Generation of coverage files normalized by sequencing depth</a></li>
+      <li><a href="#generation-of-input-normalized-coverage-files-and-their-visualization" id="markdown-toc-generation-of-input-normalized-coverage-files-and-their-visualization">Generation of input-normalized coverage files and their visualization</a></li>
+    </ol>
+  </li>
+  <li><a href="#step-5-detecting-enriched-regions-peak-calling" id="markdown-toc-step-5-detecting-enriched-regions-peak-calling">Step 5: Detecting enriched regions (peak calling)</a></li>
+  <li><a href="#step-6-plot-the-signal-on-the-peaks-between-samples" id="markdown-toc-step-6-plot-the-signal-on-the-peaks-between-samples">Step 6: Plot the signal on the peaks between samples</a>    <ol>
+      <li><a href="#computematrix" id="markdown-toc-computematrix">computeMatrix</a></li>
+      <li><a href="#plotheatmap" id="markdown-toc-plotheatmap">plotHeatmap</a></li>
+    </ol>
+  </li>
+  <li><a href="#additional-exercise-if-you-have-finished-all-above" id="markdown-toc-additional-exercise-if-you-have-finished-all-above">Additional exercise (if you have finished all above)</a>    <ol>
+      <li><a href="#additional-quality-control--gc-bias-assessment" id="markdown-toc-additional-quality-control--gc-bias-assessment">Additional Quality control : GC bias assessment</a></li>
+      <li><a href="#plotting-heatmap-from-multiple-samples-with-clustering" id="markdown-toc-plotting-heatmap-from-multiple-samples-with-clustering">Plotting heatmap from multiple samples with clustering</a></li>
+    </ol>
+  </li>
+</ol>
+
+</blockquote>
+
+<h1 id="step-1-quality-control-and-treatment-of-the-sequences">Step 1: Quality control and treatment of the sequences</h1>
+
+<p>The first step of any ChIP-Seq data analysis is quality control of the raw sequencing data.</p>
+
+<blockquote class="hands_on">
+  <h3 id="-hands-on-quality-control"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Quality control</h3>
+
+  <ol>
+    <li>Create a new history for this tutorial and give it a proper name</li>
+    <li>
+      <p>Import <code class="highlighter-rouge">patient1_input_good_outcome</code> from <a href="https://zenodo.org/record/892432/files/patient1_input_good_outcome.fastq">Zenodo</a> or from the data library into the history</p>
+
+      <blockquote class="tip">
+        <h3 id="-tip-importing-data-via-links"><i class="fa fa-lightbulb-o" aria-hidden="true"></i> Tip: Importing data via links</h3>
+
+        <ul>
+          <li>Copy the link location</li>
+          <li>Open the Galaxy Upload Manager</li>
+          <li>Select <strong>Paste/Fetch Data</strong></li>
+          <li>Paste the link into the text field</li>
+          <li>Press <strong>Start</strong> and <strong>Close</strong> the window</li>
+          <li>Click on the <code class="highlighter-rouge">pencil</code> icon once the file is imported</li>
+          <li>Click on <strong>Datatype</strong> in the middle panel</li>
+          <li>Select <code class="highlighter-rouge">fastqsanger</code> as <strong>New Type</strong></li>
+        </ul>
+      </blockquote>
+
+      <blockquote class="tip">
+        <h3 id="-tip-importing-data-from-a-data-library"><i class="fa fa-lightbulb-o" aria-hidden="true"></i> Tip: Importing data from a data library</h3>
+
+        <ul>
+          <li>Go into “Shared data” (top panel) then “Data libraries”</li>
+          <li>Click on “Training data” and then “Analyses of ChIP-Seq data”</li>
+          <li>Select interesting file</li>
+          <li>Click on “Import selected datasets into history”</li>
+          <li>Import in the history</li>
+        </ul>
+      </blockquote>
+
+      <p>As default, Galaxy takes the link as name, so rename them.</p>
+    </li>
+    <li>
+      <p>Inspect the file by clicking on the <code class="highlighter-rouge">eye</code> icon</p>
+
+      <blockquote class="question">
+        <h3 id="-questions"><i class="fa fa-question-circle" aria-hidden="true"></i> Questions</h3>
+
+        <ol>
+          <li>How are the DNA sequences stored?</li>
+          <li>
+            <p>What are the other entries?</p>
+
+            <details>
+<summary>Click to view answers</summary>
+<ol type="1">
+<li>The DNA sequences are stored in the second line of every 4-line group</li>
+<li>This file is called a <a href="https://en.wikipedia.org/wiki/FASTQ_format">FastQ file</a>. It stores sequence information and quality information. Each sequence is represented by a group of 4 lines with the 1st line being the sequence id, the second the sequence of nucleotides, the third a transition line and the last one a sequence of quality score for each nucleotide.</li>
+</ol>
+</details>
+          </li>
+        </ol>
+      </blockquote>
+    </li>
+    <li>Run <strong>FastQC</strong> <i class="fa fa-wrench" aria-hidden="true"></i> with
+      <ul>
+        <li>“Short read data from your current history” to the imported file</li>
+      </ul>
+
+      <p>Inspect the generated files</p>
+    </li>
+  </ol>
+</blockquote>
+
+<p>It is often necessary to trim sequenced read, for example, to get rid of bases that were sequenced with high uncertainty (= low quality bases).</p>
+
+<blockquote class="hands_on">
+  <h3 id="-hands-on-quality-control-1"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Quality control</h3>
+
+  <ol>
+    <li>Run <strong>Trim Galore!</strong> <i class="fa fa-wrench" aria-hidden="true"></i> with
+      <ul>
+        <li>“Is this library paired- or single-end?” to <code class="highlighter-rouge">Single-end</code></li>
+        <li>“Reads in FASTQ format” to the imported file</li>
+        <li>“Trim Galore! advanced settings” to <code class="highlighter-rouge">Full parameter list</code></li>
+        <li>“Trim low-quality ends from reads” to <code class="highlighter-rouge">15</code></li>
+        <li>“Overlap with adapter sequence required to trim a sequence” to <code class="highlighter-rouge">3</code></li>
+      </ul>
+
+      <blockquote class="tip">
+        <h3 id="-tip-importing-data-from-a-data-library-1"><i class="fa fa-lightbulb-o" aria-hidden="true"></i> Tip: Importing data from a data library</h3>
+
+        <p>If your FASTQ files cannot be selected, you might check whether their format is FASTQ with Sanger-scaled quality values (<code class="highlighter-rouge">fastqsanger</code>). You can edit the data type by clicking on the <code class="highlighter-rouge">pencil</code> symbol.</p>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h1 id="step-2-mapping-of-the-reads">Step 2: Mapping of the reads</h1>
+
+<p>In order to figure where the sequenced DNA fragments originated from in the genome, the short reads must be aligned to the reference genome. This is equivalent to solving a jigsaw puzzles, but unfortunately, not all pieces are unique. In principle, you could do a BLAST analysis to figure out where the sequenced pieces fit best in the known genome. Aligning millions of short sequences this way may, however, take a couple of weeks.</p>
+
+<h3 id="running-bowtie2">Running Bowtie2</h3>
+
+<p>Nowadays, there are many read alignment programs for shotgun sequenced DNA, Bowtie2 being one of them.</p>
+
+<blockquote class="hands_on">
+  <h3 id="-hands-on-mapping"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Mapping</h3>
+
+  <ol>
+    <li><strong>Bowtie2</strong> <i class="fa fa-wrench" aria-hidden="true"></i> with
+      <ul>
+        <li>“Is this single or paired library” to <code class="highlighter-rouge">Single-end</code></li>
+        <li>“FASTA/Q file” to the Trim Galore! output with the trimmed reads</li>
+        <li>“Will you select a reference genome from your history or use a built-in index?” to <code class="highlighter-rouge">Use a built-in genome index</code></li>
+        <li>“Select reference genome” to <code class="highlighter-rouge">Human (Homo sapiens): hg18</code></li>
+      </ul>
+
+      <blockquote class="question">
+        <h3 id="-questions-1"><i class="fa fa-question-circle" aria-hidden="true"></i> Questions</h3>
+
+        <ol>
+          <li>
+            <p>How many reads where mapped?</p>
+
+            <details>
+<summary>Click to view answers</summary>
+<ol type="1">
+<li>This information can be accessed by clicking on the resulting history entry. You can see some basic mapping statistics once the alignment is completed. 16676 (66.96%) were mapped exactly 1 time and 7919 (31.80%) aligned &gt;1 times. The overall alignment rate is then 98.76%.</li>
+</ol>
+</details>
+          </li>
+        </ol>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>The read alignment step with bowtie2 resulted in a compressed, binary file (BAM) that is not human-readable. It’s like the zipped version of a text file.</p>
+
+<p>We will show you two ways to inspect the file:</p>
+
+<ol>
+  <li>Visualization using a Genome Browser</li>
+  <li>Converting the binary format into its text file equivalent</li>
+</ol>
+
+<h2 id="visualization-using-a-genome-browser">Visualization using a Genome Browser</h2>
+
+<blockquote class="hands_on">
+  <h3 id="-hands-on-visualization-of-the-reads-in-igv"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Visualization of the reads in IGV</h3>
+
+  <ol>
+    <li>Click on the <code class="highlighter-rouge">display with IGV local</code> to load the reads into the IGV browser</li>
+    <li>Zoom at the start of chromosome 11 (or <code class="highlighter-rouge">chr11:1,562,200-1,591,483</code>)</li>
+  </ol>
+</blockquote>
+
+<p>The reads have a direction: they are mapped to the forward or reverse strand, respectively. When hovering over a read, extra information is displayed</p>
+
+<blockquote class="question">
+  <h3 id="-questions-2"><i class="fa fa-question-circle" aria-hidden="true"></i> Questions</h3>
+
+  <ol>
+    <li>
+      <p>Some reads have colored lines included. What is this?</p>
+
+      <details>
+<summary>Click to view answers</summary>
+<ol type="1">
+<li>Try to zoom in in one of those lines and you will see the answer!</li>
+</ol>
+</details>
+    </li>
+  </ol>
+</blockquote>
+
+<blockquote class="comment">
+  <h3 id="-comments"><i class="fa fa-commenting-o" aria-hidden="true"></i> Comments</h3>
+  <p>Because the number of reads over a region can be quite large, the IGV browser by default only allows to see the reads that fall into a small window. This behaviour can be changed in the IGV preferences panel.</p>
+</blockquote>
+
+<h2 id="inspection-of-the-sam-format">Inspection of the SAM format</h2>
+
+<p>As mentioned above, you can convert the binary BAM file into a simple (but large!) text file, which is called a <a href="https://en.wikipedia.org/wiki/SAM_(file_format)">SAM</a> (Sequence Alignment Map) file.</p>
+
+<blockquote class="hands_on">
+  <h3 id="-hands-on-conversion-into-a-sam-file"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Conversion into a SAM file</h3>
+
+  <ol>
+    <li><strong>BAM-to-SAM</strong> <i class="fa fa-wrench" aria-hidden="true"></i> with
+      <ul>
+        <li>“BAM File to Convert” to the file generated by Bowtie2</li>
+        <li>“Header options” to <code class="highlighter-rouge">Include header in SAM output</code></li>
+      </ul>
+    </li>
+    <li>Inspect the file by clicking on <code class="highlighter-rouge">eye</code> icon</li>
+  </ol>
+
+</blockquote>
+
+<p>A SAM file is a file with</p>
+
+<ul>
+  <li>A header with the chromosome names and lengths</li>
+  <li>A file content as a tabular file with the location and other information of each read found in the FASTQ file and the mapping information</li>
+</ul>
+
+<blockquote class="question">
+  <h3 id="-questions-3"><i class="fa fa-question-circle" aria-hidden="true"></i> Questions</h3>
+
+  <ol>
+    <li>
+      <p>Which information do you find in a SAM/BAM file? What is the additional information compared to a FASTQ file.</p>
+
+      <details>
+<summary>Click to view answers</summary>
+<ol type="1">
+   <li>Sequences and Quality information, like FASTQ</li>
+   <li>Mapping information; Location of the read on the chromosome; Mapping quality ...</li>
+   <li>For more information please see <a href="https://en.wikipedia.org/wiki/SAM_(file_format)">https://en.wikipedia.org/wiki/SAM_(file_format)</a></li>
+</ol>
+</details>
+    </li>
+  </ol>
+</blockquote>
+
+<h1 id="step-3-chip-seq-quality-control">Step 3: ChIP-seq Quality Control</h1>
+
+<p>We already checked the quality of the raw sequencing reads in the first step.
+Now we would like to test the quality of the ChIP-seq preparation, to know if your ChIP-seq samples are more enriched than the control (input) samples.</p>
+
+<h2 id="correlation-between-samples">Correlation between samples</h2>
+
+<p>To assess the similarity between the replicates of the ChIP and the input, respectively, it is a common technique to calculate the correlation of
+read counts on different regions for all different samples.
+We expect that the replicates of the ChIP-seq experiments should be clustered more closely to each other than the replicates of the input sample.
+That is, because the input samples should not have enriched regions included - remember the immuno-precipitation step was skiped during the sample preparation.</p>
+
+<p>To compute the correlation between the samples we are going to to use the QC modules of deepTools (http://deeptools.readthedocs.io/), a software package for the QC, processing and analysis of NGS data. Before computing the correlation a time consuming step is required, which is to compute the read coverage over a large number of regions from each BAM file. For this we will use the tool <strong>multiBamSummary</strong> <i class="fa fa-wrench" aria-hidden="true"></i>.</p>
+
+<p>To do that, we need at first to catch up for all our samples and re-run the previous steps (quality control and mapping) on each sample.
+To save time, we already did that and we can now work directly on the BAM files of the 8 samples</p>
+
+<blockquote class="hands_on">
+  <h3 id="-hands-on-correlation-between-samples"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Correlation between samples</h3>
+
+  <ol>
+    <li>Create a new history</li>
+    <li>Import the 8 BAM files from <a href="https://doi.org/10.5281/zenodo.892432">Zenodo</a> or from the data library into the history
+      <ul>
+        <li><a href="https://zenodo.org/record/892432/files/patient1_ChIP_ER_good_outcome.bam"><code class="highlighter-rouge">patient1_ChIP_ER_good_outcome.bam</code></a></li>
+        <li><a href="https://zenodo.org/record/892432/files/patient1_input_good_outcome.bam"><code class="highlighter-rouge">patient1_input_good_outcome.bam</code></a></li>
+        <li><a href="https://zenodo.org/record/892432/files/patient2_ChIP_ER_good_outcome.bam"><code class="highlighter-rouge">patient2_ChIP_ER_good_outcome.bam</code></a></li>
+        <li><a href="https://zenodo.org/record/892432/files/patient2_input_good_outcome.bam"><code class="highlighter-rouge">patient2_input_good_outcome.bam</code></a></li>
+        <li><a href="https://zenodo.org/record/892432/files/patient3_ChIP_ER_poor_outcome.bam"><code class="highlighter-rouge">patient3_ChIP_ER_poor_outcome.bam</code></a></li>
+        <li><a href="https://zenodo.org/record/892432/files/patient3_input_poor_outcome.bam"><code class="highlighter-rouge">patient3_input_poor_outcome.bam</code></a></li>
+        <li><a href="https://zenodo.org/record/892432/files/patient4_ChIP_ER_poor_outcome.bam"><code class="highlighter-rouge">patient4_ChIP_ER_poor_outcome.bam</code></a></li>
+        <li><a href="url: https://zenodo.org/record/892432/files/patient4_input_poor_outcome.bam"><code class="highlighter-rouge">patient4_input_poor_outcome.bam</code></a></li>
+      </ul>
+    </li>
+    <li><strong>multiBamSummary</strong> <i class="fa fa-wrench" aria-hidden="true"></i> with
+      <ul>
+        <li>“Sample order matters” to <code class="highlighter-rouge">No</code></li>
+        <li>“Bam file” to the 8 imported BAM files</li>
+        <li>“Choose computation mode” to <code class="highlighter-rouge">Bins</code></li>
+        <li>
+          <p>“Bin size in bp” to <code class="highlighter-rouge">100</code></p>
+
+          <p>This corresponds to the length of the fragments that were sequenced; it is not the read length!</p>
+        </li>
+        <li>“Distance between bins” to <code class="highlighter-rouge">500000</code> (to reduce the computation time for the tutorial)</li>
+        <li>“Region of the genome to limit the operation to” to <code class="highlighter-rouge">chr1</code> (to reduce the computation time for the tutorial)</li>
+      </ul>
+
+      <p>Using these parameters, the tool will take bins of 100 bp separated by 500,000. For each bin the overlapping reads in each sample will be computed</p>
+    </li>
+    <li><strong>plotCorrelation</strong> <i class="fa fa-wrench" aria-hidden="true"></i> with
+      <ul>
+        <li>“Matrix file from the multiBamSummary tool” to the generated multiBamSummary output</li>
+      </ul>
+
+      <p>To compute and visualize the sample correlation we use plotCorrelation from deepTools. This is a fast process that allows the user to quickly try different color combinations and outputs. Feel free to try different parameters.</p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="question">
+  <h3 id="-questions-4"><i class="fa fa-question-circle" aria-hidden="true"></i> Questions</h3>
+
+  <figure id="figure-1"><img src="../../images/estrogen-receptor-binding-site-identification/plotCorrelation_output.png" alt="Output for plotCorrelation with the correlation scores between the 8 samples" title="Correlation scores between the 8 samples" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Correlation scores between the 8 samples</figcaption></figure>
+
+  <ol>
+    <li>
+      <p>How are your samples clustered? Does that correspond to your expectations?</p>
+
+      <details>
+<summary>Click to view answers</summary>
+<ol type="1">
+   <li>Badly, this is due to the subsampling of our data. You should expect better results from your real data.</li>
+   <li>Expected is that your inputs and your ChIP samples cluster together.</li>
+</ol>
+</details>
+    </li>
+  </ol>
+</blockquote>
+
+<blockquote class="comment">
+  <h3 id="-comments-1"><i class="fa fa-commenting-o" aria-hidden="true"></i> Comments</h3>
+  <p>More information on these two tools can be found at the <a href="https://deeptools.readthedocs.io/en/latest/content/list_of_tools.html">deepTools documentation page</a>.</p>
+</blockquote>
+
+<h2 id="ip-strength-estimation">IP strength estimation</h2>
+
+<p>To evaluate the quality of the immuno-precipitation step, we can compute the IP strength. It determines how well the signal in the ChIP-seq sample can be differentiated from the background distribution of reads in the control sample. To do that we take the data for one Patient and compare the input sample and the ChIP-seq sample.</p>
+
+<blockquote class="comment">
+  <h3 id="-comments-2"><i class="fa fa-commenting-o" aria-hidden="true"></i> Comments</h3>
+  <p>For more information on how the IP strength is estimated, you can check the <a href="https://deeptools.readthedocs.io/en/latest/content/list_of_tools.html">deepTools documentation page</a>.</p>
+</blockquote>
+
+<blockquote class="hands_on">
+  <h3 id="-hands-on-ip-strength-estimation"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: IP strength estimation</h3>
+
+  <ol>
+    <li><strong>plotFingerprint</strong> <i class="fa fa-wrench" aria-hidden="true"></i> with
+      <ul>
+        <li>“Sample order matters” to <code class="highlighter-rouge">No</code></li>
+        <li>“Bam file” to <code class="highlighter-rouge">patient1_input_good_outcome</code> and <code class="highlighter-rouge">patient1_ChIP_ER_good_outcome</code></li>
+        <li>“Region of the genome to limit the operation to” to <code class="highlighter-rouge">chr1</code></li>
+      </ul>
+    </li>
+  </ol>
+</blockquote>
+
+<p>The plotFingerprint tool generates a fingerprint plot. You need to intepret it to know the IP strength. The <a href="https://deeptools.readthedocs.io/en/latest/content/list_of_tools.html">deepTools documentation</a> explains it clearly:</p>
+
+<figure id="figure-2"><img src="../../images/estrogen-receptor-binding-site-identification/QC_fingerprint.png" alt="A guide to interpret a fingerprint plot" title="How to interpret a fingerprint plot? Image extracted from the deepTools documentation" /><figcaption><span class="figcaption-prefix">Figure 2:</span> How to interpret a fingerprint plot? Image extracted from the deepTools documentation</figcaption></figure>
+
+<blockquote class="question">
+  <h3 id="-questions-5"><i class="fa fa-question-circle" aria-hidden="true"></i> Questions</h3>
+
+  <figure id="figure-3"><img src="../../images/estrogen-receptor-binding-site-identification/plotFingerprint_output.png" alt="Output for plotFingerprint with the fingerprint plot to estimate the IP strength" title="Fingerprint plot for the Patient 1 to estimate the IP strength" /><figcaption><span class="figcaption-prefix">Figure 3:</span> Fingerprint plot for the Patient 1 to estimate the IP strength</figcaption></figure>
+
+  <ol>
+    <li>
+      <p>What do you think about the quality of the IP for this experiment?</p>
+
+      <details>
+<summary>Click to view answers</summary>
+   The difference between input and ChIP signal is not totally clear. 20% of chromosome 1 are not sequenced
+   at all and the ChIP signal is only slightly more enrichted then the input.
+</details>
+    </li>
+  </ol>
+</blockquote>
+
+<blockquote class="hands_on">
+  <h3 id="-optional-hands-on-ip-strength-estimation-other-samples"><i class="fa fa-pencil" aria-hidden="true"></i> (Optional) Hands-on: IP strength estimation (other samples)</h3>
+
+  <ol>
+    <li>Run the same analysis on data of the 3 other patients</li>
+  </ol>
+</blockquote>
+
+<h1 id="step-4-normalization">Step 4: Normalization</h1>
+
+<p>We would like to know where the binding sites of the estrogen receptor are located. For this we need
+to extract which parts of the genome have been enriched (more reads mapped) within the samples that underwent immunoprecipitation.</p>
+
+<p>For the normalization we have two options.</p>
+
+<ol>
+  <li>Normalization by sequencing depth</li>
+  <li>Normalization by input file</li>
+</ol>
+
+<h2 id="generation-of-coverage-files-normalized-by-sequencing-depth">Generation of coverage files normalized by sequencing depth</h2>
+
+<p>We first need to make the samples comparable. Indeed, the different samples have usually a different sequencing depth, i.e. a different number of reads.
+These differences can bias the interpretation of the number of reads mapped to a specific genome region.</p>
+
+<blockquote class="hands_on">
+  <h3 id="-hands-on-coverage-file-normalization"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Coverage file normalization</h3>
+
+  <ol>
+    <li><strong>IdxStats</strong> <i class="fa fa-wrench" aria-hidden="true"></i> with
+      <ul>
+        <li>“BAM file” to “Multiple datasets”: <code class="highlighter-rouge">patient1_input_good_outcome</code> and <code class="highlighter-rouge">patient1_ChIP_ER_good_outcome</code></li>
+      </ul>
+
+      <blockquote class="question">
+        <h3 id="-questions-6"><i class="fa fa-question-circle" aria-hidden="true"></i> Questions</h3>
+
+        <ol>
+          <li>What is the output of this tool?</li>
+          <li>
+            <p>How many reads has been mapped on chr2 for the input and for the ChIP-seq samples?</p>
+
+            <details>
+<summary>Click to view answers</summary>
+<ol type="1">
+<li>This tool estimates how many reads mapped to which chromosome. Furthermore, it tells the chromosome lengths and naming convention (with or without 'chr' in the beginning)</li>
+<li>1,089,370 for ChIP-seq samples and 1,467,480 for the input</li>
+</ol>
+</details>
+          </li>
+        </ol>
+      </blockquote>
+    </li>
+    <li><strong>bamCoverage</strong> <i class="fa fa-wrench" aria-hidden="true"></i> with
+      <ul>
+        <li>“BAM file” to “Multiple datasets”: <code class="highlighter-rouge">patient1_input_good_outcome</code> and <code class="highlighter-rouge">patient1_ChIP_ER_good_outcome</code></li>
+        <li>“Bin size in bases” to <code class="highlighter-rouge">25</code></li>
+        <li>“Scaling/Normalization method” to <code class="highlighter-rouge">Normalize coverage to 1x</code></li>
+        <li>“Effective genome size” to <code class="highlighter-rouge">hg19 (2451960000)</code></li>
+        <li>“Coverage file format” to <code class="highlighter-rouge">bedgraph</code></li>
+      </ul>
+
+      <blockquote class="question">
+        <h3 id="-questions-7"><i class="fa fa-question-circle" aria-hidden="true"></i> Questions</h3>
+
+        <ol>
+          <li>
+            <p>What are the different columns of a <code class="highlighter-rouge">bedgraph</code> file?</p>
+
+            <details>
+<summary>Click to view answers</summary>
+<ol type="1">
+  <li>chrom, chromStart, chromEnd and a data value</li>
+</ol>
+</details>
+          </li>
+        </ol>
+      </blockquote>
+    </li>
+    <li><strong>bamCoverage</strong> <i class="fa fa-wrench" aria-hidden="true"></i> with the same parameters but to generate a <code class="highlighter-rouge">bigWig</code> output file</li>
+    <li>
+      <p><strong>IGV</strong> <i class="fa fa-wrench" aria-hidden="true"></i> to inspect both signal coverages (input and ChIP samples) in IGV</p>
+
+      <blockquote class="question">
+        <h3 id="-questions-8"><i class="fa fa-question-circle" aria-hidden="true"></i> Questions</h3>
+
+        <ol>
+          <li>
+            <p>What is a bigWig file?</p>
+
+            <details>
+<summary>Click to view answers</summary>
+A bigWig file is a compressed bedgraph file. Similar in relation as BAm to SAM, but this time just for coverage data. This means bigWig and bedgraph
+files are much smaller than BAM or SAM files.
+</details>
+          </li>
+        </ol>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h2 id="generation-of-input-normalized-coverage-files-and-their-visualization">Generation of input-normalized coverage files and their visualization</h2>
+
+<p>To extract only the information induced by the immunoprecipitation, we normalize for each patient the coverage file for the sample that underwent immunoprecipitation by the coverage file for the input sample. Here we use the tool bamCompare which compare 2 BAM files while caring for sequencing depth normalization.</p>
+
+<blockquote class="hands_on">
+  <h3 id="-hands-on-generation-of-input-normalized-coverage-files"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Generation of input-normalized coverage files</h3>
+
+  <ol>
+    <li><strong>bamCompare</strong> <i class="fa fa-wrench" aria-hidden="true"></i> with
+      <ul>
+        <li>“First BAM file (e.g. treated sample)” to <code class="highlighter-rouge">patient1_ChIP_ER_good_outcome</code></li>
+        <li>“Second BAM file (e.g. control sample)” to <code class="highlighter-rouge">patient1_input_good_outcome</code></li>
+        <li>“Bin size in bases” to <code class="highlighter-rouge">50</code></li>
+        <li>“How to compare the two files” to <code class="highlighter-rouge">Compute log2 of the number of reads ratio</code></li>
+        <li>“Coverage file format” to <code class="highlighter-rouge">bedgraph</code></li>
+        <li>“Region of the genome to limit the operation to” to <code class="highlighter-rouge">chr11</code> (to reduce the computation time for the tutorial)</li>
+      </ul>
+    </li>
+  </ol>
+
+  <blockquote class="question">
+    <h3 id="-questions-9"><i class="fa fa-question-circle" aria-hidden="true"></i> Questions</h3>
+
+    <ol>
+      <li>
+        <p>What does mean a positive or a negative value in the 4th column?</p>
+
+        <details>
+<summary>Click to view answers</summary>
+<ol type="1">
+<li>The 4th column contains the log2 of the number of reads ratio between the ChIP-seq sample and the input sample. A positive value means that the coverage on the portion is more important in the ChIP-seq sample than in the input sample</li>
+</ol>
+</details>
+      </li>
+    </ol>
+  </blockquote>
+
+  <ol>
+    <li><strong>bamCompare</strong> <i class="fa fa-wrench" aria-hidden="true"></i> with the same parameters but to generate a <code class="highlighter-rouge">bigWig</code> output file</li>
+    <li>
+      <p><strong>IGV</strong> <i class="fa fa-wrench" aria-hidden="true"></i> to inspect the log2 ratio</p>
+
+      <p>Remember that the bigWig file contains only the signal on chromosome 11!</p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h1 id="step-5-detecting-enriched-regions-peak-calling">Step 5: Detecting enriched regions (peak calling)</h1>
+
+<p>We can also call the enriched regions, or peaks, found in the ChIP-seq samples.</p>
+
+<blockquote class="hands_on">
+  <h3 id="-hands-on-peak-calling"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Peak calling</h3>
+
+  <ol>
+    <li><strong>MACS2 callpeak</strong> <i class="fa fa-wrench" aria-hidden="true"></i> with
+      <ul>
+        <li>“ChIP-Seq Treatment File” to <code class="highlighter-rouge">patient1_ChIP_ER_good_outcome</code></li>
+        <li>“ChIP-Seq Control File” to <code class="highlighter-rouge">patient1_input_good_outcome</code></li>
+        <li>“Effective genome size” to <code class="highlighter-rouge">H. sapiens (2,451,960,000)</code></li>
+        <li>“Outputs” to <code class="highlighter-rouge">Summary page (html)</code></li>
+      </ul>
+
+      <blockquote class="comment">
+        <h3 id="-comments-3"><i class="fa fa-commenting-o" aria-hidden="true"></i> Comments</h3>
+        <p>The advanced options may be adjusted, depending of the samples.
+If your ChIP-seq experiment targets regions of broad enrichment, <em>e.g.</em> non-punctuate histone modifications, select calling of broad regions.
+If your sample has a low duplication rate (<em>e.g.</em> below 10%), you might keep all duplicate reads (tags). Otherwise, you might use the ‘auto’ option to estimate the maximal allowed number of duplicated reads per genomic location.</p>
+      </blockquote>
+    </li>
+    <li><strong>IGV</strong> <i class="fa fa-wrench" aria-hidden="true"></i> to inspect with the signal coverage and log2 ratio tracks</li>
+  </ol>
+
+</blockquote>
+
+<p>The called peak regions can be filtered by, <em>e.g.</em> fold change, FDR and region length for further downstream analysis.</p>
+
+<h1 id="step-6-plot-the-signal-on-the-peaks-between-samples">Step 6: Plot the signal on the peaks between samples</h1>
+
+<p>Plotting your region of interest will involve using two tools from the <strong>deepTools</strong> suite.</p>
+<ul>
+  <li>computeMatrix : Computes the signal on given regions, using the bigwig coverage files from different samples.</li>
+  <li>plotHeatmap : Plots heatMap of the signals using the computeMatrix output.</li>
+</ul>
+
+<p>ptionally, you can also use <code class="highlighter-rouge">plotProfile</code>to create a profile plot using to computeMatrix output.</p>
+
+<h2 id="computematrix">computeMatrix</h2>
+
+<blockquote class="hands_on">
+  <h3 id="-hands-on-visualization-of-the-coverage"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Visualization of the coverage</h3>
+
+  <ol>
+    <li><strong>UCSC Main</strong> <i class="fa fa-wrench" aria-hidden="true"></i> with
+      <ul>
+        <li>“assembly” to <code class="highlighter-rouge">hg18</code></li>
+        <li>“track” to <code class="highlighter-rouge">RefSeq genes</code></li>
+        <li>“region” to <code class="highlighter-rouge">position</code> with <code class="highlighter-rouge">chr11</code></li>
+        <li>“output format” to <code class="highlighter-rouge">BED</code></li>
+        <li>“Send output to” to <code class="highlighter-rouge">Galaxy</code></li>
+      </ul>
+    </li>
+    <li><strong>computeMatrix</strong> <i class="fa fa-wrench" aria-hidden="true"></i> with
+      <ul>
+        <li>“Regions to plot” to the imported UCSC file</li>
+        <li>“Score file” to the bigwig file generated by bamCompare</li>
+        <li>
+          <p>“computeMatrix has two main output options” to <code class="highlighter-rouge">scale-regions</code></p>
+
+          <p>This option stretches or shrinks all regions in the BED file (here: genes) to the same length (bp) as indicated by the user</p>
+        </li>
+        <li>“Show advanced options” to <code class="highlighter-rouge">yes</code></li>
+        <li>“Convert missing values to 0?” to <code class="highlighter-rouge">Yes</code></li>
+      </ul>
+
+      <p>This tool prepares a file with scores per genomic region, which is required as input for the next tool.</p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h2 id="plotheatmap">plotHeatmap</h2>
+
+<blockquote class="hands_on">
+  <h3 id="-hands-on-visualization-of-the-coverage-1"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Visualization of the coverage</h3>
+  <ol>
+    <li><strong>plotHeatmap</strong> <i class="fa fa-wrench" aria-hidden="true"></i> with
+      <ul>
+        <li>“Matrix file from the computeMatrix tool” to the generated matrix</li>
+        <li>“Show advanced options” to <code class="highlighter-rouge">yes</code></li>
+        <li>“Did you compute the matrix with more than one groups of regions?” to the correct setting</li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h1 class="no_toc" id="conclusion">Conclusion</h1>
+
+<figure id="figure-4"><img src="../../images/estrogen-receptor-binding-site-identification/tutorial-scheme.png" alt="Summary of the different steps of the tutorial and the generated files" title="Different steps of the tutorials with the generated files" /><figcaption><span class="figcaption-prefix">Figure 4:</span> Different steps of the tutorials with the generated files</figcaption></figure>
+
+<h1 id="additional-exercise-if-you-have-finished-all-above">Additional exercise (if you have finished all above)</h1>
+
+<h2 id="additional-quality-control--gc-bias-assessment">Additional Quality control : GC bias assessment</h2>
+
+<p>A common problem of PCR-based protocols is the observation that GC-rich regions tend to be amplified more readily than GC-poor regions.
+We need to check that our samples do not have more reads from regions of the genome with high GC.</p>
+
+<blockquote class="comment">
+  <h3 id="-comments-4"><i class="fa fa-commenting-o" aria-hidden="true"></i> Comments</h3>
+  <p>GC bias was for many years a big problem, but recent advances in sample preparation have solved this problem to a degree that you can skip this step more often.</p>
+</blockquote>
+
+<p>For practical reasons, we will focus here only on one of our BAM files. With real data you should repeat these steps for all your samples.</p>
+
+<blockquote class="question">
+  <h3 id="-questions-10"><i class="fa fa-question-circle" aria-hidden="true"></i> Questions</h3>
+
+  <ol>
+    <li>
+      <p>Can you guess why it makes more sense to check the input files for GC bias?</p>
+
+      <details>
+<summary>Click to view answers</summary>
+<ol type="1">
+   <li>We only want to assess the bias induced by the PCR-based protocols. This is not possible with the ChIP samples, as the enriched regions
+    (binding sites) can have a potential GC enrichment on their own.</li>
+</ol>
+</details>
+    </li>
+  </ol>
+</blockquote>
+
+<blockquote class="hands_on">
+  <h3 id="-hands-on-gc-bias-assessment"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: GC bias assessment</h3>
+
+  <ol>
+    <li><strong>computeGCbias</strong> <i class="fa fa-wrench" aria-hidden="true"></i> with
+      <ul>
+        <li>“BAM file” to <code class="highlighter-rouge">patient1_input_good_outcome</code></li>
+        <li>“Reference genome” to <code class="highlighter-rouge">locally cached</code></li>
+        <li>“Using reference genome” to <code class="highlighter-rouge">Human (Homo sapiens): hg18</code></li>
+        <li>“Effective genome size” to <code class="highlighter-rouge">hg19 (2451960000)</code></li>
+        <li>“Fragment length used for the sequencing” to <code class="highlighter-rouge">300</code></li>
+        <li>“Region of the genome to limit the operation to” to <code class="highlighter-rouge">chr1</code> (to reduce the computation time for the tutorial)</li>
+      </ul>
+
+      <blockquote class="question">
+        <h3 id="-questions-11"><i class="fa fa-question-circle" aria-hidden="true"></i> Questions</h3>
+
+        <figure id="figure-5"><img src="../../images/estrogen-receptor-binding-site-identification/computeGCBias_output.png" alt="Output for computeGCbias with the GC bias estimation" title="Estimation of the GC bias for the input sample for the Patient 1" /><figcaption><span class="figcaption-prefix">Figure 5:</span> Estimation of the GC bias for the input sample for the Patient 1</figcaption></figure>
+
+        <ol>
+          <li>
+            <p>Does this dataset have a GC bias?</p>
+
+            <details>
+<summary>Click to view answers</summary>
+<ol type="1">
+<li>There is no significantly more reads in the GC-rich regions.</li>
+</ol>
+</details>
+          </li>
+        </ol>
+      </blockquote>
+    </li>
+  </ol>
+</blockquote>
+
+<h2 id="plotting-heatmap-from-multiple-samples-with-clustering">Plotting heatmap from multiple samples with clustering</h2>
+
+<blockquote class="hands_on">
+  <h3 id="-hands-on-gc-bias-assessment-1"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: GC bias assessment</h3>
+
+  <ol>
+    <li><strong>bamCompare</strong> <i class="fa fa-wrench" aria-hidden="true"></i> with  same parameters as above:
+      <ul>
+        <li>“First BAM file (e.g. treated sample)” to <code class="highlighter-rouge">patient2_ChIP_ER_good_outcome</code></li>
+        <li>“Second BAM file (e.g. control sample)” to <code class="highlighter-rouge">patient2_input_good_outcome</code></li>
+      </ul>
+    </li>
+    <li>
+      <p>Perform peak calling again using treatment file : <code class="highlighter-rouge">patient2_ChIP_ER_good_outcome</code> and control <code class="highlighter-rouge">patient2_input_good_outcome</code>, using macs2 parameters same as above.</p>
+    </li>
+    <li>
+      <p>Concatenate the outputs (summits in BED) from <code class="highlighter-rouge">patient1</code> and <code class="highlighter-rouge">patient2</code> using <code class="highlighter-rouge">Operate on Genomic Intervals</code> –&gt; <code class="highlighter-rouge">Concatenate</code></p>
+    </li>
+    <li>
+      <p>Merge the overlapping intervals using <code class="highlighter-rouge">Operate on Genomic Intervals</code> –&gt; <code class="highlighter-rouge">MergeBED</code></p>
+    </li>
+    <li><strong>computeMatrix</strong> <i class="fa fa-wrench" aria-hidden="true"></i> with the same parameters but:
+      <ul>
+        <li>Regions to plot : select the merged bed from above</li>
+        <li>Output option : <code class="highlighter-rouge">reference-point</code></li>
+        <li>The reference point for the plotting: <code class="highlighter-rouge">center of region</code></li>
+        <li>Distance upstream of the start site of the regions defined in the region file : <code class="highlighter-rouge">3000</code></li>
+        <li>Distance downstream of the end site of the given regions: <code class="highlighter-rouge">3000</code></li>
+      </ul>
+
+      <p>With this option, it considers only those genomic positions before (downstream) and/or after (upstream) a reference point (<em>e.g.</em> TSS, which corresponds to the annotated gene start in our case)</p>
+    </li>
+    <li><strong>plotHeatmap</strong> <i class="fa fa-wrench" aria-hidden="true"></i> with
+      <ul>
+        <li>“Matrix file from the computeMatrix tool” to the generated matrix</li>
+        <li>“Show advanced options” to <code class="highlighter-rouge">yes</code></li>
+        <li>“Did you compute the matrix with more than one groups of regions?” to “No, I used only one group”</li>
+        <li>“Clustering algorithm” to Kmeans clustering
+Inspect the output</li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+
+        
+        <blockquote class="key_points">
+            <h3><i class="fa fa-key" aria-hidden="true"></i> Key points</h3>
+
+            <ul>
+                
+                <li>ChIP-seq data requires multiple methods of quality assessment to ensure that the data is of high quality.</li>
+                
+                <li>Multiple normalization methods exists depending on the availability of input data.</li>
+                
+                <li>Heatmaps containing all genes of an organism can be easily plotted given a BED file and a coverage file.</li>
+                
+            </ul>
+        </blockquote>
+        
+
+        
+        <h1>Useful literature</h1>
+        <p>Useful information regarding this type of analysis with descriptions and paper references for the tools used in this tutorial, and literature for this analysis techniques and interpretations can be found <a href="https://galaxyproject.github.io/training-material/topics/chip-seq#references">here</a>.</p>
+        
+
+        <h3><i class="fa fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!</h3>
+
+        <hr>
+
+        <blockquote class="overview">
+            <h3><i class="fa fa-comments-o" aria-hidden="true"></i> Feedback</h3>
+            Please take a moment and provide your feedback on this tutorial. Your feedback will help guide and improve future revisions to this tutorial.
+            <a href="https://tinyurl.com/GTNfeedback">Feedback Form</a>
+        </blockquote>
+    </section>
+</div>
+
+
+<footer>
+    <div class="container">
+        <p>
+            This material is the result of a collaborative work. Thanks the
+            <a href="https://wiki.galaxyproject.org/Teach/GTN">Galaxy Training Network</a>
+            and all the contributors (Friederike Dündar, Anika Exleben, Bérénice Batut)!
+        </p>
+        <p>
+            Found a typo? Something is wrong in this tutorial? Edit it on
+            <a href="https://github.com/galaxyproject/training-material/tree/master/topics/chip-seq/tutorials/estrogen-receptor-binding-site-identification/tutorial.md">GitHub</a>.
+        </p>
+    </div>
+</footer>
+
+    </body>
+    <script type="text/javascript" src="https://galaxyproject.github.io/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="https://galaxyproject.github.io/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="https://galaxyproject.github.io/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="https://galaxyproject.github.io/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</html>
