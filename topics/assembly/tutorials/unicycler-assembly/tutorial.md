@@ -4,59 +4,95 @@ topic_name: assembly
 tutorial_name: unicycler-assembly
 ---
 
-# Introduction
-{:.no_toc}
-# Small genome assembly with Unicycler
+# The goal: *E. coli* C-1 assembly
 
+In this tutorial we assemble and annotate genome of *E. coli* strain [C-1](http://cgsc2.biology.yale.edu/Strain.php?ID=8232). This strain is routinely used in experimental evolution studies involving bateriophages. For instance, now classical works by Holly Wichman and Jim Bull ([Bull et al. 1997](https://www.ncbi.nlm.nih.gov/pubmed/9409816), [Bull & Wichman 1998](https://www.ncbi.nlm.nih.gov/pubmed/9767038), [Wichman et al. 1999](https://www.ncbi.nlm.nih.gov/pubmed/10411508)) have been performed using this strain and bacteriophage phiX174. 
 
-A few definitions to start:
+To sequence the genome we have obtained the strain from the [Yale E. coli Stock Center](http://cgsc2.biology.yale.edu/). The stock center sent us a filter paper disk infused with cells. The disk was placed in the center of an LB-agar plate. A single colony was picked and resuspended in a liquid LB medium, grown overnight, and genomic DNA was isolated. The DNA was then sequenced using two methods. To obtain high coverage, high accuracy data we used Illumina miSEQ to generated 250-bp paired end reads. To generate high length reads we used the Oxford Nanopore MinIon machine. 
 
- * **Alignment** : Similarity-based arrangement of DNA, RNA or protein sequences. In this context, subject and query sequence should be orthologous and reflect evolutionary, not functional or structural relationships
- * **Assembly** : Computational reconstruction of a longer sequence from smaller sequence reads
- * **Contig** : A contiguous linear DNA or RNA consensus sequence. Constructed from the assembly of smaller, partially overlapping, sequence fragments (reads)
- * **Coverage** : Also known as ‘sequencing depth’. Sequence coverage refers to the average number of reads per locus.
- * **De novo assembly** : Refers to the reconstruction of contiguous sequences without making use of any reference sequence
- * **Library** : Collection of DNA (or RNA) fragments modified in a way that is appropriate for downstream analyses
- * **Mapping** : Alignment of short sequence reads to a longer reference sequence
- * **Masking** : Converting a DNA sequence [A,C,G,T] (usually repetitive or of low quality) to the uninformative character state N or to lower case characters [a,c,g,t] (soft masking)
- * **Mate-pair** : Sequence information from two ends of a DNA fragment, usually several thousand base-pairs long
- * **N50** : A statistic of a set of contigs or scaffolds : the length for which the collection of all contigs of that length or longer contains at least half of the total of the lengths of the contigs
- * **N90** : Equivalent to the N50 statistic describing the length for which the collection of all contigs of that length or longer contains at least 90% of the total of the lengths of the contigs
- * **Paired-end sequencing** : Sequence information from two ends of a short DNA fragment, usually a few hundred base pairs long
- * **Read** : Short base-pair sequence inferred from the DNA/RNA template by sequencing
- * **Scaffold** : Two or more contigs joined together using read-pair information
- 
-There are two types of genome assembly: *de novo* (from scratch) are reference assisted. Reference-assisted assembly is performed by mapping sequencing reads against a reference genome from the same or a closely-related species.
-*De novo* genome assembly is performed by inferring all information from overlaps between sequencing reads only. These overlaps are extended to ultimately cover all chromsomes. 
+Our goal is to reconstruct and annotate the full genome of *E. coli* C-1. As you will see in this tutorial a combination of many short, high accuracy reads with long, error-prone reads helps us produce an almost perfect assembly.
 
-![Concept of de novo genome assembly](../../images/concept.png  "<em>De novo</em> Genome Assembly. (Figure from <a href='http://www.nature.com/nmeth/journal/v9/n4/full/nmeth.1935.html'>Baker:2012</a>)")
+# Background on data and tools
 
-To understand how genome assembly works, look at our previous trainings : 
-* [Introduction to Genome Assembly](https://galaxyproject.github.io/training-material/topics/assembly/tutorials/general-introduction/slides.html#1)
-* [De Bruijn Graph Assembly](https://galaxyproject.github.io/training-material/topics/assembly/tutorials/debruijn-graph-assembly/slides.html#1)
+## The data
 
-Two currently available technologies are the most suitable for small genome sequencing. Illumina’s reversible terminator process offers high coverage and accuracy at relatively low cost but can at most generate reads 300 bp in length. On the other hand, Oxford Nanopore’s molecular ratcheting through nanopore generates multi-kilobase reads that often surpass 100,000 bp in length. 
+In this tutorial we assemble genome using two types of input data: (1) Illumina 250 bp paired-end reads and (2) Oxford Nanopore reads. 
 
-The two technologies produce different types of data. Illumina's reads are short and of higher quality, while much longer Oxford Nanopore have high error rate.  Combining both technologies amplifies their relative strengths and enables to produce complete, high quality assemblies. 
+### Illumina data
 
-*De novo* assembly involves several steps described in the following image:
+We generated 9,345,897 250 bp read pairs (library preparation performed on genomic DNA fragmented to main size of 600 bp). However, to make sure that you can complete this tutorial in a finite amount of time we have downsampled (reduced in size) this to 50,000 paired end reads - just enough to produce a reasonable assembly.
 
-![Steps of assembling a genome](../../images/assembly_steps.png  "Steps of assembling a genome. Shotgun Sequencing is a method for sequencing long DNA strands, small fragment are sequenced randomly on the genome to get a certain depth.These fragments can be single reads (50 to 1000 bp), or paired-end reads with variable insert size like mate pair librairies that have larger insert (2 to 20 kb insert). The long read technologies allow to sequences up to several thousand of basesFrom this fragments, an assembly allows to merge reads into contigs and then scaffolds. Once the genome assembli has been made, an annotation is performed by comparing to related genome or using RNA-seq data for example.")
+### Oxford Nanopore Data
 
-## QC
+There are 12,738 [2d-reads](http://www.nature.com/nmeth/journal/v12/n4/fig_tab/nmeth.3290_SF13.html). Maximum read length is 27,518. The distribution of reads lengths looks like this:
 
-The Oxford Nanopore Technology produces [fast5](http://bioinformatics.cvr.ac.uk/blog/tag/fast5/) files, one for each read, that need to be converted to fastq format. The [poretools](https://poretools.readthedocs.io/en/latest/) suite provides utilities for working with ONT data, and allows to convert from fast5 to fastq and to assess the read quality.  In this tutorial we will assume that this step has been completed and that we are already in the possession of fastq data.
+![Nanopore read length distribution](../../images/ont_length.png "Distribution of nanopore read lengths.")
 
-The quality of Illumina reads can be assessed with tools such as [FastQC](http://www.bioinformatics.babraham.ac.uk/projects/fastqc). A wide variety of tools can be used to improve the quality of the reads that won't be discussed in this tutorial (More info [here](https://galaxyproject.org/tutorials/ngs/)).
+You can see that there many reads under the second peak with median of approximately 7.5 kb. 
 
-## Assembly with Unicycler
+## The tools
 
-[Unicycler](https://github.com/rrwick/Unicycler) is an assembly pipeline for bacterial genomes, based on [Spades Assembler](http://cab.spbu.ru/software/spades/) to which it adds a cicularisation process. Unicycler provides an assembly graph in addition to the fasta file and can handle plasmid rich genomes. Like Spades, it can assemble Illumina-only or hybrid datasets. For Illumina assembly, Unicycler optimises Spades by selecting a range of *k*-mer sizes and selecting the best, and applying several filters to refine the results. For hybrid assembly, Unicycler uses long reads to build bridges to resolve high repeat regions and obtain longer assemblies. You can find more informations in 
-[Wick:2017](http://journals.plos.org/ploscompbiol/article/file?id=10.1371/journal.pcbi.1005595&type=printable)
+In this analysis we will perform two tasks: (1) assembly and (2) annotation. Below we will briefly outline main ideas behind these two procedures and will describe the tools we will be using.
 
-## Annotation with Prokka
+### Assembly
 
-The annotation of the newly assembled genomes will allow the identification of genomic features such as proptein-coding and RNA genes. In this tutorial we will use [Prokka](http://www.vicbioinformatics.com/software.prokka.shtml) designed for rapid annotation of small genomes. Prokka uses [Blast+](https://www.ncbi.nlm.nih.gov/books/NBK279690/) or [HMMer](http://hmmer.org/) on databases derived from [UniProtKB](http://www.uniprot.org/help/uniprotkb) to assign function to the predicted coding regions.
+> ### <i class="fa fa-lightbulb-o" aria-hidden="true"></i> Knowing your assembly
+>
+> Here we assume that you know a thing or two about assembly process. If you don't: look at the [slides](./slides) accompanying this tutorial as well as other tutorial is this section.
+{: .tip}
+
+For assembly we will be using [Unicycler](https://github.com/rrwick/Unicycler) (also see publication by Wick:[2017](http://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1005595)). Unicycler is designed specifically for *hybrid assembly* (the one combines short and long read sequencing data) of small (e.g., bacterial, viral, organellar) genomes. In out hard it gas produced complete high quality assemblies. Unicycler employs a multi-step process that utilizes a number of software tools:
+
+![Unicycler process](../../images/unicycler.png "Simplified view of the Unicycler assembly process (From Wick:2017). In short, Unicycler uses SPAdes (see below) to produce an assembly graph, which is then bridged (simplified) using long reads to produce longest possible set pf contigs. These are then polished by aligning original short reads against produced contigs and feeding these alignment to Pilon - an assembly improvement tool.")
+
+As you can see Unicycler relies heavily on [SPAdes](http://cab.spbu.ru/software/spades/) and [Pilon](https://github.com/broadinstitute/pilon/wiki). We will briefly describe these two tools.
+
+#### Spades
+
+##### Multisized deBruijn graph
+
+Assemblers usually constructing graphs for *k*-mers of a fixed size. We have noted that when *k* is small it is difficult to resolve the repeats. If *k* is too large a corresponding graph may become fragments (especially if read coverage is low). SPAdes uses several values for *k* (that are either manually set or inferred automatically) to create a *multisized* graph that minimized tangledness and fragmentation by combining various *k*-mers (see [Bankevich:2012](http://online.liebertpub.com/doi/full/10.1089/cmb.2012.0021)):
+
+![Multigraph approach implemented in SPAdes](../../images/multiGraph.jpg "Multisized de Bruijn graph. A circular Genome CATCAGATAGGA is covered by a set Reads consisting of nine 4-mers, {ACAT, CATC, ATCA, TCAG, CAGA, AGAT, GATA, TAGG, GGAC}. Three out of 12 possible 4-mers from Genome are missing from Reads (namely {ATAG,AGGA,GACA}), but all 3-mers from Genome are present in Reads. (A) The outside circle shows a separate black edge for each 3-mer from Reads. Dotted red lines indicate vertices that will be glued. The inner circle shows the result of applying some of the glues. (B) The graph DB(Reads, 3) resulting from all the glues is tangled. The three h-paths of length 2 in this graph (shown in blue) correspond to h-reads ATAG, AGGA, and GACA. Thus Reads3,4 contains all 4-mers from Genome. (C) The outside circle shows a separate edge for each of the nine 4-mer reads. The next inner circle shows the graph DB(Reads, 4), and the innermost circle represents the Genome. The graph DB(Reads, 4) is fragmented into 3 connected components. (D) The multisized de Bruijn graph DB (Reads, 3, 4). Figure from [Bankevich:2012]") 
+
+##### Read pair utilization
+
+While the use of paired reads and mate pairs is not new (and key) to genome assembly, SPAdes utilizes so called paired DeBruin graphs to take the advantage of the paired end data. One of the key issues with paired DeBruin graphs is the resulting genome assemblies do not tolerate variability in insert sizes (the initial formulation of paired DeBruijn graphs assumed constant distance between pairs of reads). In practice this distance is always variable. SPAdes performs *k*-bimer (these are *k*-mers derived from *paired* reads) adjustment to identify exact of nearly-exact distances for each *k*-bimer pair.
+
+##### Error correction
+
+Sequencing data contains a substantial number of sequencing errors that manifest themselves as deviations (bulges and non-connected components) within the assembly graph. One of the ways to improve the graph even constructing it is to minimize the amount sequencing errors by performing error correction. SPAdes uses [BayesHammer](https://goo.gl/1iGkMe) to correct the reads. Here is a brief summary of what it does (see [Nikolenko:2013](https://goo.gl/1iGkMe)):
+
+1. SPAdes (or rather BayesHammer) counts *k*-mers in reads and computed *k*-mer statistics that takes into account base quality values. 
+2. [Hamming graph](https://en.wikipedia.org/wiki/Hamming_graph) is constructed for *k*-mers is which *k*-mers are nodes. In this graph edges connect nodes (*k*-mers) is they differ from each other by a number of nucleotides up to a certain threshold (the [Hamming distance](https://en.wikipedia.org/wiki/Hamming_distance)). The graph is central to the error correction algorithm.
+3. At this step Bayesian subclustering of the graph produced in the previous step. For each *k*-mer we now know the center of its subcluster. 
+4. **Solid** *k*-mers are derived from cluster centers and are assumed to be *error free*.
+5. Solid *k*-mers are mapped back to the reads.
+6. Reads are corrected using solid *k*-mers:
+
+![Read correction with BayesHammer](../../images/readCorrection.jpg "Read correction. Black <em>k</em>-mers are solid. Grey <em>k</em>-mers are non-solid. Red <em>k</em>-mers are the centers of the corresponding clusters (two grey <em>k</em>-mers striked through on the right are non-solid singletons). As a result, one nucleotide is changed based on majority rule. (From [Nikolenko:2013])")
+
+In the case of the full dataset SPAdes error correction changed 14,013,757 bases in 3,382,337 reads - a substantial fraction of the full ~18 million read dataset.
+
+#### Pilon
+
+Pilon improves draft assemblies by using the information from the original reads aligned to the draft assembly. The following image from a publication by [Walker:2014](http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0112963) highlights the steps of this process:
+
+![Pilon workflow](../../images/pilon.png "The left column depicts the conceptual steps of the Pilon process, and the center and right columns describe what Pilon does at each step while in assembly improvement and variant detection modes, respectively. During the first step (top row), Pilon scans the read alignments for evidence where the sequencing data disagree with the input genome and makes corrections to small errors and detects small variants. During the second step (second row), Pilon looks for coverage and alignment discrepancies to identify potential mis-assemblies and larger variants. Finally (bottom row), Pilon uses reads and mate pairs which are anchored to the flanks of discrepant regions and gaps in the input genome to reassemble the area, attempting to fill in the true sequence including large insertions. The resulting output is an improved assembly and/or a VCF file of variants. (From Walker:2014)")
+
+### Annotation
+
+For annotation we are using [Prokka](http://www.vicbioinformatics.com/software.prokka.shtml) (also see [Seeman:2014](https://academic.oup.com/bioinformatics/article-lookup/doi/10.1093/bioinformatics/btu153)). It scans the assembly generated with Unicycler with a set of feature prediction tools and compiles a list of genome annotation. It predicts the following features (Table from [Seeman:2014](https://academic.oup.com/bioinformatics/article-lookup/doi/10.1093/bioinformatics/btu153)):
+
+| Feature | Tool used by Prokka |
+|---------|----------------------|
+| Protein-coding sequences (CDS) | [Prodigal](https://github.com/hyattpd/Prodigal) |
+| Ribosomal RNA genes | [RNAmmer](http://www.cbs.dtu.dk/cgi-bin/nph-runsafe?man=rnammer) |
+| Transfer RNA genes | [Aragorn](https://www.ncbi.nlm.nih.gov/pubmed/14704338) |
+| Signal leader peptides | [SignalP](https://www.ncbi.nlm.nih.gov/pubmed/21959131) |
+| Non-coding RNA genes | [Infernal](http://eddylab.org/infernal/) | 
+
+Prokka predicts protein-coding regions using a two step process. It first identifies coordinates of putative genes using [Prodigal](https://github.com/hyattpd/Prodigal) and then compares the gene sequence against databases of known sequences at protein level using [Blast+](https://www.ncbi.nlm.nih.gov/books/NBK279690/) and [HMMer](http://hmmer.org/).
 
 ## Let's try it
 
