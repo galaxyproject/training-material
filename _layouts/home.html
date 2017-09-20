@@ -3,6 +3,7 @@ layout: base
 ---
 
 {% include default-header.html %}
+{% assign sorted_topics = site.data | sort | order: "title" %}
 
 <div class="container main-content">
     <section>
@@ -22,7 +23,7 @@ layout: base
                         </tr>
                     </thead>
                     <tbody>
-                    {% for topic in site.data %}
+                    {% for topic in sorted_topics %}
                         {% if topic[1].type == "use" %}
                         <tr>
                             {% assign tutorial_number=0 %}
@@ -54,7 +55,7 @@ layout: base
                         </tr>
                     </thead>
                     <tbody>
-                    {% for topic in site.data %}
+                    {% for topic in sorted_topics %}
                         {% if topic[1].type == "admin-dev" %}
                         <tr>
                             {% assign tutorial_number=0 %}
