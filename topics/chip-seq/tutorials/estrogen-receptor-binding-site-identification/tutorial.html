@@ -919,13 +919,13 @@ We need to check that our samples do not have more reads from regions of the gen
 <h2 id="plotting-heatmap-from-multiple-samples-with-clustering">Plotting heatmap from multiple samples with clustering</h2>
 
 <blockquote class="hands_on">
-  <h3 id="-hands-on-gc-bias-assessment-1"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: GC bias assessment</h3>
+  <h3 id="-hands-on-plotting-multiple-samples"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: plotting multiple samples</h3>
 
   <ol>
-    <li><strong>bamCompare</strong> <i class="fa fa-wrench" aria-hidden="true"></i> with  same parameters as above:
+    <li>Run <strong>bamCompare</strong> <i class="fa fa-wrench" aria-hidden="true"></i> with  same parameters as above, for all 4 patients:
       <ul>
-        <li>“First BAM file (e.g. treated sample)” to <code class="highlighter-rouge">patient2_ChIP_ER_good_outcome</code></li>
-        <li>“Second BAM file (e.g. control sample)” to <code class="highlighter-rouge">patient2_input_good_outcome</code></li>
+        <li>“First BAM file (e.g. treated sample)” to <code class="highlighter-rouge">patient2_ChIP_ER_good_outcome</code>, <code class="highlighter-rouge">patient3_ChIP_ER_good_outcome</code>, <code class="highlighter-rouge">patient4_ChIP_ER_good_outcome</code></li>
+        <li>“Second BAM file (e.g. control sample)” to <code class="highlighter-rouge">patient2_input_good_outcome</code>, <code class="highlighter-rouge">patient3_input_good_outcome</code>, <code class="highlighter-rouge">patient4_input_good_outcome</code></li>
       </ul>
     </li>
     <li>
@@ -933,6 +933,9 @@ We need to check that our samples do not have more reads from regions of the gen
     </li>
     <li>
       <p>Concatenate the outputs (summits in BED) from <code class="highlighter-rouge">patient1</code> and <code class="highlighter-rouge">patient2</code> using <code class="highlighter-rouge">Operate on Genomic Intervals</code> –&gt; <code class="highlighter-rouge">Concatenate</code></p>
+    </li>
+    <li>
+      <p>Sort the output <code class="highlighter-rouge">Operate on Genomic Intervals</code> –&gt; <code class="highlighter-rouge">sortBED</code></p>
     </li>
     <li>
       <p>Merge the overlapping intervals using <code class="highlighter-rouge">Operate on Genomic Intervals</code> –&gt; <code class="highlighter-rouge">MergeBED</code></p>
@@ -952,8 +955,8 @@ We need to check that our samples do not have more reads from regions of the gen
       <ul>
         <li>“Matrix file from the computeMatrix tool” to the generated matrix</li>
         <li>“Show advanced options” to <code class="highlighter-rouge">yes</code></li>
-        <li>“Did you compute the matrix with more than one groups of regions?” to “No, I used only one group”</li>
-        <li>“Clustering algorithm” to Kmeans clustering
+        <li>“Did you compute the matrix with more than one groups of regions?” to <code class="highlighter-rouge">No, I used only one group</code></li>
+        <li>“Clustering algorithm” to <code class="highlighter-rouge">Kmeans clustering</code>
 Inspect the output</li>
       </ul>
     </li>
