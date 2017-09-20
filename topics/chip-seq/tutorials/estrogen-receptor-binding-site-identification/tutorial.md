@@ -543,18 +543,21 @@ For practical reasons, we will focus here only on one of our BAM files. With rea
 
 ## Plotting heatmap from multiple samples with clustering
 
-> ### {% icon hands_on %} Hands-on: GC bias assessment
+> ### {% icon hands_on %} Hands-on: plotting multiple samples
 >
-> 1. **bamCompare** {% icon tool %} with  same parameters as above:
->   - "First BAM file (e.g. treated sample)" to `patient2_ChIP_ER_good_outcome`
->   - "Second BAM file (e.g. control sample)" to `patient2_input_good_outcome`
+> 1. Run **bamCompare** {% icon tool %} with  same parameters as above, for all 4 patients:
+>   - "First BAM file (e.g. treated sample)" to `patient2_ChIP_ER_good_outcome`, `patient3_ChIP_ER_good_outcome`, `patient4_ChIP_ER_good_outcome`
+>   - "Second BAM file (e.g. control sample)" to `patient2_input_good_outcome`, `patient3_input_good_outcome`, `patient4_input_good_outcome`
+>
 > 2. Perform peak calling again using treatment file : `patient2_ChIP_ER_good_outcome` and control `patient2_input_good_outcome`, using macs2 parameters same as above.
 >
 > 3. Concatenate the outputs (summits in BED) from `patient1` and `patient2` using `Operate on Genomic Intervals` --> `Concatenate`
 >
-> 4. Merge the overlapping intervals using `Operate on Genomic Intervals` --> `MergeBED`
+> 4. Sort the output `Operate on Genomic Intervals` --> `sortBED`
 >
-> 5. **computeMatrix** {% icon tool %} with the same parameters but:
+> 5. Merge the overlapping intervals using `Operate on Genomic Intervals` --> `MergeBED`
+>
+> 6. **computeMatrix** {% icon tool %} with the same parameters but:
 >    - Regions to plot : select the merged bed from above
 >    - Output option : `reference-point`
 >    - The reference point for the plotting: `center of region`
@@ -563,11 +566,11 @@ For practical reasons, we will focus here only on one of our BAM files. With rea
 >
 >    With this option, it considers only those genomic positions before (downstream) and/or after (upstream) a reference point (*e.g.* TSS, which corresponds to the annotated gene start in our case)
 >
-> 6. **plotHeatmap** {% icon tool %} with
+> 7. **plotHeatmap** {% icon tool %} with
 >    - "Matrix file from the computeMatrix tool" to the generated matrix
 >    - "Show advanced options" to `yes`
->    - "Did you compute the matrix with more than one groups of regions?" to "No, I used only one group"
->    - "Clustering algorithm" to Kmeans clustering
+>    - "Did you compute the matrix with more than one groups of regions?" to `No, I used only one group`
+>    - "Clustering algorithm" to `Kmeans clustering`
 > Inspect the output
 >
 {: .hands_on}
