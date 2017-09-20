@@ -4,6 +4,17 @@ layout: base
 
 {% include default-header.html %}
 
+{% assign sorted_topics = "" | split: "," %}
+{% assign sorted_topics_pre = site.data | sort | order: "title" %}
+
+{% for topic in sorted_topics_pre %}
+    {% if topic[0] == "introduction" %}
+        {% assign sorted_topics = sorted_topics | unshift: topic %}
+    {% else %}
+        {% assign sorted_topics = sorted_topics | push: topic %}
+    {% endif %}
+{% endfor %}
+
 <div class="container main-content">
     <section>
         <h1>Welcome to {{ site.title }}</h1>
@@ -22,7 +33,7 @@ layout: base
                         </tr>
                     </thead>
                     <tbody>
-                    {% for topic in site.data %}
+                    {% for topic in sorted_topics %}
                         {% if topic[1].type == "use" %}
                         <tr>
                             {% assign tutorial_number=0 %}
@@ -54,7 +65,7 @@ layout: base
                         </tr>
                     </thead>
                     <tbody>
-                    {% for topic in site.data %}
+                    {% for topic in sorted_topics %}
                         {% if topic[1].type == "admin-dev" %}
                         <tr>
                             {% assign tutorial_number=0 %}
