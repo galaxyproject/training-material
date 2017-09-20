@@ -144,15 +144,17 @@
         <blockquote class="agenda">
   <h3 id="agenda">Agenda</h3>
 
-  <p>In this tutorial, we will deal with:</p>
+  <p>In this tutorial we will do:</p>
 
-<ol id="markdown-toc">
-  <li><a href="#load-data-and-quality-control" id="markdown-toc-load-data-and-quality-control">Load data and quality control</a></li>
-  <li><a href="#alignment" id="markdown-toc-alignment">Alignment</a></li>
-  <li><a href="#methylation-bias-and-metric-extraction" id="markdown-toc-methylation-bias-and-metric-extraction">Methylation bias and metric extraction</a></li>
-  <li><a href="#visualization" id="markdown-toc-visualization">Visualization</a></li>
-  <li><a href="#metilene" id="markdown-toc-metilene">Metilene</a></li>
-</ol>
+  <ol>
+    <li>quality control</li>
+    <li>alignment</li>
+    <li>methylation extraction</li>
+    <li>visualization of methylation levels</li>
+    <li>differentially methylated regions analysis</li>
+  </ol>
+
+  <p>We will use a small subset of the original data. If we would do the computation on the orginal data the computation time for a tutorial is too long. To show you all necessary steps for Methyl-Seq we decided to use a subset of the data set. In a second step we use precomputed data from the study to show you different levels of methylation. We will consider samples from normal breast cells (NB), fibroadenoma (noncancerous breast tumor, BT089), two invasive ductal carcinomas (BT126, BT198) and a breast adenocarcinoma cell line (MCF7).</p>
 
 </blockquote>
 
@@ -260,7 +262,7 @@ Compute now the alignment. Please notice that depending on your system this comp
 <blockquote class="hands_on">
   <h3 id="-hands-on-methylation-bias"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Methylation bias</h3>
 
-  <p>We will extract the methylation on the resulting BAM file of the alignment step.</p>
+  <p>In this step we will have a look at the distribution of the methylation and will look at a possible bias.</p>
 
   <ol>
     <li><strong>MethylDackel</strong> <i class="fa fa-wrench" aria-hidden="true"></i> with the following parameters:
@@ -296,12 +298,11 @@ Compute now the alignment. Please notice that depending on your system this comp
 
 </blockquote>
 
-<blockquote>
+<blockquote class="hands_on">
   <h3 id="-hands-on-methylation-extraction-with-methyldackel"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Methylation extraction with MethylDackel</h3>
 
-</blockquote>
+  <p>We will extract the methylation on the resulting BAM file of the alignment step. We need this to create a methylation level plot in the next step.</p>
 
-<blockquote class="hands_on">
   <ol>
     <li><strong>MethylDackel</strong> <i class="fa fa-wrench" aria-hidden="true"></i> with the following parameters:
       <ul>
@@ -322,7 +323,7 @@ Compute now the alignment. Please notice that depending on your system this comp
 <blockquote class="hands_on">
   <h3 id="-hands-on"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on:</h3>
 
-  <p>We visualize the example with the help of deepTools.</p>
+  <p>In this step we want to visualize the methylation level around all TSS of our data. When located at gene promoters, DNA methylation is usually a repressive mark.</p>
 
   <ol>
     <li><strong>Wig/BedGraph-to-bigWig</strong> <i class="fa fa-wrench" aria-hidden="true"></i> with the following parameters:
@@ -396,11 +397,13 @@ Compute now the alignment. Please notice that depending on your system this comp
         </ul>
       </blockquote>
     </li>
-    <li>To save compute time we prepared the converted files for you. Import the files: <code class="highlighter-rouge">NB1_CpG.meth_ucsc.bedGraph</code>, <code class="highlighter-rouge">NB2_CpG.meth_ucsc.bedGraph</code>, <code class="highlighter-rouge">BT089_CpG.meth_ucsc.bedGraph</code>, <code class="highlighter-rouge">BT126_CpG.meth_ucsc.bedGraph</code> and  <code class="highlighter-rouge">BT198_CpG.meth_ucsc.bedGraph</code>.</li>
+    <li>To save compute time we prepared the converted files for you. Import the files: <code class="highlighter-rouge">NB1_CpG.meth_ucsc.bedGraph</code>, <code class="highlighter-rouge">NB2_CpG.meth_ucsc.bedGraph</code>, <code class="highlighter-rouge">BT089_CpG.meth_ucsc.bedGraph</code>, <code class="highlighter-rouge">BT126_CpG.meth_ucsc.bedGraph</code>, <code class="highlighter-rouge">BT198_CpG.meth_ucsc.bedGraph</code> and <code class="highlighter-rouge">MCF7_CpG.meth_ucsc.bedgraph</code>.</li>
     <li>Compute the matrix and plot the profile as described above.</li>
   </ol>
 
-  <p>More information about deepTools can be found here: https://deeptools.github.io/</p>
+  <p><img src="../../images/methyl_level.png" alt="Methylation level around TSS" /></p>
+
+  <p>More information about deepTools can be found here: https://deeptools.readthedocs.io</p>
 
 </blockquote>
 
@@ -412,10 +415,10 @@ Compute now the alignment. Please notice that depending on your system this comp
   <p>With metilene it is possible to detect differentially methylated regions (DMRs) which is a necessary prerequisite for characterizing different epigenetic states.</p>
 
   <ol>
-    <li><strong>Galaxy</strong> <i class="fa fa-wrench" aria-hidden="true"></i>: Import from the data library the files <code class="highlighter-rouge">NB1_CpG.meth.bedGraph</code>, <code class="highlighter-rouge">NB2_CpG.meth.bedGraph</code>, <code class="highlighter-rouge">BT089_CpG.meth.bedGraph</code>, <code class="highlighter-rouge">BT126_CpG.meth.bedGraph</code> and  <code class="highlighter-rouge">BT198_CpG.meth.bedGraph</code>.</li>
+    <li><strong>Galaxy</strong> <i class="fa fa-wrench" aria-hidden="true"></i>: Import from the data library the files <code class="highlighter-rouge">NB1_CpG.meth.bedGraph</code>, <code class="highlighter-rouge">NB2_CpG.meth.bedGraph</code> and <code class="highlighter-rouge">BT198_CpG.meth.bedGraph</code>.</li>
     <li><strong>Metilene</strong> <i class="fa fa-wrench" aria-hidden="true"></i>:
       <ul>
-        <li>Choose for the first option <code class="highlighter-rouge">Input group 1</code> the imported files starting with <code class="highlighter-rouge">NB</code> and for <code class="highlighter-rouge">Input group 2</code> the imported files <code class="highlighter-rouge">Input group 2</code>.</li>
+        <li>Choose for the first option <code class="highlighter-rouge">Input group 1</code> the imported files starting with <code class="highlighter-rouge">NB</code> and for <code class="highlighter-rouge">Input group 2</code> the imported files <code class="highlighter-rouge">BT198_CpG.meth.bedGraph</code>.</li>
         <li>Select for the option <code class="highlighter-rouge">BED file containing regions of interest</code> the imported BAM file CpGIslands.bed.</li>
       </ul>
     </li>
