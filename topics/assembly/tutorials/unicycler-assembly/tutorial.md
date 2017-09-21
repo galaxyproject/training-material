@@ -20,7 +20,7 @@ In this tutorial we assemble genome using two types of input data: (1) Illumina 
 
 ### Illumina data
 
-We generated 9,345,897 250 bp read pairs (library preparation performed on genomic DNA fragmented to main size of 600 bp). However, to make sure that you can complete this tutorial in a finite amount of time we have downsampled (reduced in size) this to 50,000 paired end reads - just enough to produce a reasonable assembly.
+We generated 9,345,897 250 bp read pairs (library preparation performed on genomic DNA fragmented to mean size of 600 bp). However, to make sure that you can complete this tutorial in a finite amount of time we have downsampled (reduced in size) this to 50,000 paired end reads - just enough to produce a reasonable assembly.
 
 ### Oxford Nanopore Data
 
@@ -30,6 +30,11 @@ There are 12,738 [2d-reads](http://www.nature.com/nmeth/journal/v12/n4/fig_tab/n
 
 You can see that there many reads under the second peak with median of approximately 7.5 kb. 
 
+> ### <i class="fa fa-warning" aria-hidden="true"></i> Oxford Nanopore Data Format
+> Oxford Nanopore machines output
+ data in [fast5](http://bioinformatics.cvr.ac.uk/blog/exploring-the-fast5-format/) format that contains additional information besides sequence data. In this tutorial we assume that these data *already* converted into [fastq](https://en.wikipedia.org/wiki/FASTQ_format). An additional tutorial dedicated to handling of fast5 datasets will be developed shortly. 
+{: .warning-box}
+
 ## The tools
 
 In this analysis we will perform two tasks: (1) assembly and (2) annotation. Below we will briefly outline main ideas behind these two procedures and will describe the tools we will be using.
@@ -38,8 +43,8 @@ In this analysis we will perform two tasks: (1) assembly and (2) annotation. Bel
 
 > ### <i class="fa fa-lightbulb-o" aria-hidden="true"></i> Knowing your assembly
 >
-> Here we assume that you know a thing or two about assembly process. If you don't: look at the [slides](./slides) accompanying this tutorial as well as other tutorial is this section.
-{: .tip}
+> Here we assume that you know a thing or two about assembly process. If you don't: look at the [slides](./slides) accompanying this tutorial as well as other tutorials is this section.
+{: .info-box}
 
 For assembly we will be using [Unicycler](https://github.com/rrwick/Unicycler) (also see publication by Wick:[2017](http://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1005595)). Unicycler is designed specifically for *hybrid assembly* (the one combines short and long read sequencing data) of small (e.g., bacterial, viral, organellar) genomes. In out hard it gas produced complete high quality assemblies. Unicycler employs a multi-step process that utilizes a number of software tools:
 
@@ -94,9 +99,9 @@ For annotation we are using [Prokka](http://www.vicbioinformatics.com/software.p
 
 Prokka predicts protein-coding regions using a two step process. It first identifies coordinates of putative genes using [Prodigal](https://github.com/hyattpd/Prodigal) and then compares the gene sequence against databases of known sequences at protein level using [Blast+](https://www.ncbi.nlm.nih.gov/books/NBK279690/) and [HMMer](http://hmmer.org/).
 
-## Let's try it
+# Let's try it
 
-> ### Agenda
+> ### Outline step-by-step
 >
 > In this tutorial, we will deal with:
 >
@@ -108,64 +113,69 @@ Prokka predicts protein-coding regions using a two step process. It first identi
 > 6. [Visualize the results](#visualize-the-result)
 {: .agenda}
 
-### <a name="get-the-data">Get the data
+## <a name="get-the-data">Load data and assess quality
 
-In this example we will use a downsampled version of *E. coli* C Illumina and ONT sequencing data. These include 3 files: forward and reverse reads for Illumina, and Long read file produced by ONT.
+In this example we will use a downsampled version of *E. coli* C-1 Illumina and ONT sequencing data. These include 3 files: forward and reverse reads for Illumina, and Long read file produced by ONT. All data are in [fastq](https://en.wikipedia.org/wiki/FASTQ_format) format. 
 
-Here is what to do to load the data:
+### Load data into History
 
-> ### :pencil2: Hands-on: Getting the data
->
-> 1. Create and name a new history for this tutorial.
-> 2. From the left panel, click on the **Get data icon** :
-> ![Get Data](../../images/get_data.png  )
-> 3. From the **Get data** panel, select the local files (downloaded from zenodo) and click on **Start** to upload them
-> ![Upload file](../../images/upload_file.png  )
->
->    > ### :bulb: Tip: Uploading Files from Url
->    >
->    > * Instead of clicking on the **Choose Local File** button, click on **Paste/Fetch data**
->    > * Copy the files Urls in the text area 
->    > * Click on the **Start** button
->    {: .tip}
-> 4. Once the files have been uploaded, change their types to fastqsanger 
->
->    > ### :bulb: Tip: Changing a dataset datatype
->    >
->    > * Click on the pencil icon of the dataset in the history 
->    > * Open the Datatype tab
->    > * Change the data-type to **fastqsanger**
->    > * Save
->    {: .tip}
->
->
-{: .hands_on}
+To load data into your Galaxy instance log in into Galaxy and create new history (if you are new to Galaxy see [Galaxy 101 tutorial](/topics/introduction/tutorials/galaxy-intro-101/tutorial.html) first). 
 
-The datasets will appear in your history:
+Click **Get data** icon as shown below (see [these slides](/topics/introduction/tutorials/galaxy-intro-get-data/slides.html) for an introduction on how to load data into Galaxy):
 
-![Datasets in History](../../images/starting_data.png  "The datasets appear in your history ")
+<hr>
+![Get Data](../../images/get_data.png "Getting data into history starts with clicking <b>Get data</b> button")
+<hr>
+
+Open [Zenodo](https://zenodo.org/record/842795#.WcKdQtOGPOZ) link in a **new browser window** and right-click on dataset links:
+
+<hr>
+![Get Data](../../images/zenodo.png "Right click on links to copy them into clipboard")
+<hr>
+
+And paste them into the **Galaxy upload**:
+
+<hr>
+![Upload file](../../images/upload_file.png  "Uploading data into Galaxy. First (1) click <b>Paste/Fetch data</b> link. Next, paste URL copied from Zenodo. Finally (2), set type of all datasets to <tt>fastqsanger</tt>. Click <b>Start</b>.")
+<hr>
+
+If all goes well you will see this:
+
+-----
+![Datasets in History](../../images/starting_data.png  "Sequencing data loaded into Galaxy history.")
+-----
 
 ### <a name="assess-read-quality">Assess Read Quality
 
-You can assess the quality of Illumina reads by using FastQC.
+To assess quality we will use two tools: [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/) to generate quality statistics and [multiQC](http://multiqc.info/) to summarize these statistics.
 
-![Screenshots of FastQC interface](../../images/fastc_interface.png  "FastQC Interface. Use Fastqc to assess the quality of your reads.")
+First, run **FastQC** on all three datasets simultaneously:
 
-FastQC will provide you with an html report about your read quality. In addition to basic informations about the data (type of file, encoding read range of lengths and percentage of GC in the sequences), the report contains graphs for several quality metrics. One of them is a boxplot showing the sequence quality per base. 
+-----
+![Screenshots of FastQC interface](../../images/fastc_interface.png  "Using <b>fastqc</b> to compute the quality statistics for all reads. Note that multiple dataset selection button (<i class='fa fa-files-o' aria-hidden='true'></i>) is pressed and all three datasets are selected at the same time. ")
+-----
 
-![FastQC result](../../images/perbase_qual.png  "FastQC result : Per Base read Quality. The central red line is the median value and, the yellow box represent the inter-quartile range, the whiskers represent the extreme 10 percentiles, and the blue line represent the mean quality. The higher the score in the y-axis, the better the quality, and is devided in three categories : very good quality in green, reasonable quality in orange, and poor quality in red. We can see here that our Illumina files have a good perbase sequence quality in average.")
+Although FastQC generated graphical reports for each dataset we can look at everything at once using multiQC by selecting "raw" output of FastQC:
 
-Another plot shows the quality per sequence.
+-----
+![Screenshot of multiQC interface](../../images/multiqc_interface.png "Running <b>multiQC</b> requires selecting <em>RawData</em> output of <b>FastQC</b>. Again, note that multiple dataset selection button (<i class='fa fa-files-o' aria-hidden='true'></i>) is pressed and all <em>RawData</em> inputs are selected.") 
+-----
 
-![FastQC result](../../images/perseq_qual.png  "FastQC result : Per Sequence read Quality. We can see the average quality per read is high for our library. This metric can be useful to detect a problem if a significant portion of the reads are of lower quality.")
+A quick look at quality score distribution will show a confusing picture:
 
-The Quality read per tile represent the flowcell tiles from which the reads came.  
+-----
+![QC reported zoomed out](../../images/multiqc1.png "Because Illumina reads (green) are <b>much</b> shorted that ONT reads (red) the plot looks strange. ONT reads generally have low quality scores and so they are not really meaningful in the context of this technology. However, in case of Illumina data they mean a lot...")
+-----
 
-![FastQC result](../../images/pertile_qual.png  "FastQC result : Per Tile read Quality. The color scale goes from blue to red, the blue colors describing tiles with above average quality and the red color describing tiles with below average quality. We can see here our read have a above average quality, except for one green tile that describe an average quality of read.")
+So let's zoom in into Illumina data:
 
-The metrics on Illumina read shows a library of high quality reads, we can now perform the assembly with Unicycler.
+-----
+![QC reported zoomed in](../../images/multiqc2.png "Zooming in shows quality distribution for Illumina reads. This is excellent data with mean base qualities above 30 across all reads.")
+-----
 
-### <a name="assemble-with-unicycler"></a>Assembly with Unicycler 
+Our data is great and we can jump directly to assembly process. 
+
+## <a name="assemble-with-unicycler"></a>Assembly with Unicycler 
 
 The Unicycler tool takes fastqsanger files as inputs. If your files are identified as generic fastq files you will need to change the type of your files.
 
