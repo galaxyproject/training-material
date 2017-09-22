@@ -20,7 +20,7 @@ In this tutorial we assemble genome using two types of input data: (1) Illumina 
 
 ### Illumina data
 
-We generated 9,345,897 250 bp read pairs (library preparation performed on genomic DNA fragmented to mean size of 600 bp). However, to make sure that you can complete this tutorial in a finite amount of time we have downsampled (reduced in size) this to 50,000 paired end reads - just enough to produce a reasonable assembly.
+We generated 9,345,897 250 bp read pairs (library preparation performed on genomic DNA fragmented to mean size of 600 bp). However, to make sure that you can complete this tutorial in a finite amount of time we have downsampled (reduced in size) this to 1,000,000 paired end reads - just enough to produce an accurate assembly.
 
 ### Oxford Nanopore Data
 
@@ -45,6 +45,8 @@ In this analysis we will perform two tasks: (1) assembly and (2) annotation. Bel
 >
 > Here we assume that you know a thing or two about assembly process. If you don't: look at the [slides](./slides) accompanying this tutorial as well as other tutorials is this section.
 {: .info-box}
+
+![](https://github.com/rrwick/Unicycler/raw/master/misc/logo.png)
 
 For assembly we will be using [Unicycler](https://github.com/rrwick/Unicycler) (also see publication by Wick:[2017](http://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1005595)). Unicycler is designed specifically for *hybrid assembly* (the one combines short and long read sequencing data) of small (e.g., bacterial, viral, organellar) genomes. In out hard it gas produced complete high quality assemblies. Unicycler employs a multi-step process that utilizes a number of software tools:
 
@@ -127,7 +129,8 @@ Click **Get data** icon as shown below (see [these slides](/topics/introduction/
 ![Get Data](../../images/get_data.png "Getting data into history starts with clicking <b>Get data</b> button")
 <hr>
 
-Open [Zenodo](https://zenodo.org/record/842795#.WcKdQtOGPOZ) link in a **new browser window** and right-click on dataset links:
+Open Zenodo [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.940733.svg)](https://doi.org/10.5281/zenodo.940733)
+ link in a **new browser window** and right-click on dataset links:
 
 <hr>
 ![Get Data](../../images/zenodo.png "Right click on links to copy them into clipboard")
@@ -136,13 +139,13 @@ Open [Zenodo](https://zenodo.org/record/842795#.WcKdQtOGPOZ) link in a **new bro
 And paste them into the **Galaxy upload**:
 
 <hr>
-![Upload file](../../images/upload_file.png  "Uploading data into Galaxy. First (1) click <b>Paste/Fetch data</b> link. Next, paste URL copied from Zenodo. Finally (2), set type of all datasets to <tt>fastqsanger</tt>. Click <b>Start</b>.")
+![Upload file](../../images/upload_file.png  "Uploading data into Galaxy. First (1) click <b>Paste/Fetch data</b> link. Next (2), paste URL copied from Zenodo. Finally (3), set type of all datasets to <tt>fastqsanger</tt>. Click <b>Start</b> (4).")
 <hr>
 
-If all goes well you will see this:
+If all goes well you will see datasets uploading and changing states from gray to green as shown below. The figure below also shows how datasets can be tagged.
 
 -----
-![Datasets in History](../../images/starting_data.png  "Sequencing data loaded into Galaxy history.")
+![Datasets in History](../../images/starting_data.png  "Sequencing data loaded into Galaxy history. The full progression from gray (scheduling) to green (all OK) state is shown. To make it easier to identify datasets as we progress through the analysis we use so called <em>Hashtags</em>. To tag a dataset: click on dataset to expand it (as shown in panel four); click tag icon (<i class='fa fa-tags' aria-hidden='true'></i>) and a text field will appear. Add a tag (in this case <b>F</b>) pre-pended with hash (#). Hit enter. Do this for all three datasets and it will look like it is shown in panel five.")
 -----
 
 ### <a name="assess-read-quality">Assess Read Quality
@@ -173,60 +176,45 @@ So let's zoom in into Illumina data:
 ![QC reported zoomed in](../../images/multiqc2.png "Zooming in shows quality distribution for Illumina reads. This is excellent data with mean base qualities above 30 across all reads.")
 -----
 
-Our data is great and we can jump directly to assembly process. 
-
 ## <a name="assemble-with-unicycler"></a>Assembly with Unicycler 
 
-The Unicycler tool takes fastqsanger files as inputs. If your files are identified as generic fastq files you will need to change the type of your files.
+Now it is time to perform assembly. Unicycler takes three inputs: paired Illumina reads and long ONT reads:
 
-![Edit dataset attributes](../../images/edit_attribute.png  "Edit dataset attributes. Click on the pen bouton of a dataset in your history to edit its attributes.")
+-----
+![Running Unicycler](../../images/Unicycler_interface.png "Running Unicycler with default parameters. Note how forward and reverse Illumina raeds are specified and that ONT reads are entered as <em>long reads</em>.")
+-----
 
-![Dataset attribute interface](../../images/change_type.png  "Change datatype. Click on the Datatype tab and select the appropriate type in the list, here fastqsanger.")
-
-Repeat the process for the three datasets.
-
-You can now run Unicycler to perform the assembly with the following parameters: 
-
-* **Paired or Single end data?** : Select the appropriate option to describe you data. In this example we are using Paired end Data.
-* **Select first set of reads** : Specify the dataset containing the forward reads, often specified by a "-1" in the file name, but specified here by the "R1".
-* **Select second set of reads** : Specify the dataset containing the forward reads, often specified by a "-2" in the file name, but specified here by the "R2".
-* **Select long reads** : Optional, here specify you Oxford Nanopore dataset.
-
-![Unicyler Interface](../../images/Unicycler_interface.png  "Unicycler interface. Run Unicycler with your sequencing dataset in fastqsanger format.")
-
-Unicycler returns two output files: a fasta file containing the result of the assembly, and a graph file.  You can then evaluate the quality of the resulting alignments by using the Quast tool on the fasta file.
+> ### <i class="fa fa-cutlery" aria-hidden="true"></i> <i class="fa fa-coffee" aria-hidden="true"></i> Assembly takes time!
+>
+> There is no such thing as Assembly in real time. It takes time so it is a good time to have lunch or at least coffee. This Unicycler run will take anywhere between 90 min to two hours.
+{: .warning-box}
 
 ## <a name="quast">Assess Assembly quality with Quast
 
 [Quast](http://bioinf.spbau.ru/quast) is a tool providing quality metrics for assemblies, and can also be used to compare multiple assemblies. The tool can also take an optional reference file as input, and will provide complementary metrics.
 For this tutorial we will simply use quast on the fasta file resulting from the Unicycler assembly.
 
-![Quast Interface](../../images/Quast_Interface.png  "Quast Interface")
+-----
+![Quast Interface](../../images/Quast_Interface.png  "Quast Interface. Here we select contigs produced by Unicycler as inputs and leave everything else at default settings.")
+-----
 
-The Quast tool outputs assembly metrics as an html file with metrics and graphs.
+The Quast tool outputs assembly metrics as an html file with metrics and graphs. The image below looks exceptional boring. This is **good** thing:
 
+-----
 ![Quast Interface](../../images/quast_output.png  "Quast Output: Quast provides different statistics such as the number of contigs or scaffolds, the N50 and N75, and the total length of the assembly. You can also access 3 plots, the cumulative length of the contigs, the Nx, or the GC content.")
+-----
 
-We can now use Prokka to annotate our genome.
+One can see that there two (!) contigs. The largest contig is 4,576,290 bp (for comparison *E. coli* K12 MG1655 strain genome length is [4,656,144 bp](https://www.ncbi.nlm.nih.gov/nuccore/NZ_APIN00000000.1)) and the smallest is 4,581,676 (total length) - 4,576,290 (length of the largest) = 5,386 bp. When we analyzed this dataset for the first time we were initially puzzled by this second contig. But we quickly realized that this is simply genome of bacterophage [phiX174](https://www.ncbi.nlm.nih.gov/nuccore/NC_001422.1) which is routinely used as a spike-in in Illumina sequencing. This we have two genomes: the one of *E.coli* C-1 and phiX174! We can now use Prokka to annotate our two genomes.
 
 ### <a name="annotate-with-prokka">Annotation with Prokka
 
-Run Prokka with the following paramters:
+Run Prokka with the following parameters:
 
-* **Contigs to annotate** : Specify the fasta file resulting from your assembly with Unicycler.
-* **Locus tag prefix** : Specify the format you desire for your locus tags. By Default PROKKA.
-* **Locus tag counter increment** : By default 1, but a 10 increment facilitate the insertion of new genes when manually correcting the annotation.
-* **Force GenBank/ENA/DDJB compliance** : Select "yes" if you desire to force the GenFank Locus tag formatting. If you do so be aware of the length limitation. Here we select no for more convenience.
-* **Add 'gene' features for each 'CDS' feature** : Select yes to get the gene feature in addition to the CDS feature in the gff3.
-* **Genus name** : Specify the Genus of your organism. Here "Escherichia".
-* **Species name** : Specify the species of your organism. Here "Coli".
-* **Strain name** : Specify the strain of your organism. Here "C".
-* **Kingdom** : Select the kingdom to which your organism belong. Here "Bacteria".
-* **Use genus-specific BLAST database** : Select "yes" to use the genus-specific Blast.
-
+------
 ![Prokka Interface](../../images/Prokka_Interface.png  "Prokka Interface")
+------
 
-Prokka outputs 10 datasets. One of the is the Prokka log, another is the error repport,  but 8 are diverse result files : 
+Prokka outputs 10 datasets. One of the is the Prokka log, another is the error report,  but 8 are diverse result files : 
 * **txt file** : Provides Statistics on the annotation : number of CDS predicted, number of rRNA etc.
 * **tbl file** : Provides a tabulated list of annotated features.
 * **fsa file** : Nucleotide fasta file of the input contig sequence.
@@ -246,7 +234,7 @@ First, download and install [IGV](http://software.broadinstitute.org/software/ig
 
 You can then send the gff file resulting from the annotation with Prokka.
 
-![Prokka result Visualisation](../../images/prokka_result.png  "Prokka output can then be sent to a local instance of IGV")
+![Prokka result Visualization](../../images/prokka_result.png  "Prokka output can then be sent to a local instance of IGV")
 
 You can then visualize the result of your analysis in IGV 
 
