@@ -20,7 +20,7 @@ Sequence quality control is therefore an essential step to take right after rece
 >
 {: .agenda}
 
-# Sequence dataset importing
+# Importing sequences
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
