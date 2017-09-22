@@ -1,5 +1,5 @@
 ﻿id: mothur-miseq-sop
-name: Galaxy Tour
+name: Mothur MiSeq SOP
 description: >-
   In this tour we will perform the Standard Operating Procedure (SOP) for MiSeq
   data
@@ -55,21 +55,21 @@ steps:
       HMP_MOCK.v35.fasta which contains the sequences used in the mock community
       that were sequenced in fasta format.
     backdrop: true
-  - title: Step 1. History options
+  - title: History options
     element: '#history-options-button'
     content: >-
       We will start the analyses by creating a new history. Click on this button
       and then "Create New". Give it a name.
     placement: left
     backdrop: false
-  - title: Step 2. Import Sample Data
+  - title: Import Sample Data
     element: '#shared .dropdown a[href$="/library/index"]'
     content: >-
       The data for this course may be available from a shared library in Galaxy
       (ask your instructor). If this is not the case, you can upload it
       yourself.
     placement: right
-  - title: Step 3. Load  data from shared library
+  - title: Load  data from shared library
     element: 'li a[href$="/library/list"]'
     content: >-
       In the dropdown menu click on Data Libraries. Navigate to the shared data
@@ -84,7 +84,7 @@ steps:
       href="https://zenodo.org/record/165147#.Wa_FXsgjHIU">zenodo</a>. Unzip it
       on your computer and upload with a help of Upload manager.
     placement: right
-  - title: Step 4. Import Sample Data
+  - title: Import Sample Data
     element: '#shared .dropdown a[href$="/library/index"]'
     content: >-
       Go back to the data library and import the following reference datasets,
@@ -96,7 +96,7 @@ steps:
         <li>trainset9_032012.pds.tax</li>
       </ol>
     placement: right
-  - title: Step 5. Dataset collections
+  - title: Dataset collections
     content: >-
       Now that’s a lot of files to manage. Luckily Galaxy can make life a bit
       easier by allowing us to create dataset collections. This enables us to
@@ -108,7 +108,7 @@ steps:
       this paired naming convention, so that our tools will know which files
       belong together.
     backdrop: true
-  - title: Step 6. Organizing our data into a collection
+  - title: Organizing our data into a collection
     element: >-
       #current-history-panel .controls .actions a[href$="javascript:void(0);"]
       .fa.fa-check-square-o
@@ -117,7 +117,7 @@ steps:
       fastq files (40 in total), then click on for <b>all selected</b> and
       select <b>Build List of Dataset Pairs</b> from the dropdown menu.
     placement: left
-  - title: Step 7. Organizing our data into a collection
+  - title: Organizing our data into a collection
     content: >-
       In the next dialog window you can create the list of pairs. By default
       Galaxy will look for pairs of files that differ only by a <br>_1 and
@@ -129,7 +129,7 @@ steps:
       change these names by clicking on them. These names will be used as sample
       names in the downstream analysis so always make sure they are informative.
     backdrop: false
-  - title: Step 8. Organizing our data into a collection
+  - title: Organizing our data into a collection
     content: >-
       Once you are happy with your pairings, enter a name for your new
       collection at the bottom right of the screen. Then click the <b>Create
@@ -160,19 +160,19 @@ steps:
       in an overlap in the middle. We will now combine these pairs of reads into
       contigs.
     backdrop: true
-  - title: Step 9. Combine forward and reverse reads into contigs
+  - title: Combine forward and reverse reads into contigs
     element: '#tool-search-query'
     content: Search for Make.contigs tool
     placement: right
     textinsert: Make.contigs
-  - title: Step 10. Combine forward and reverse reads into contigs
+  - title: Combine forward and reverse reads into contigs
     element: '#tool-search'
     content: Click on the "Make.contigs" tool to open it
     placement: right
     postclick:
       - >-
         a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmothur_make_contigs%2Fmothur_make_contigs%2F1.36.1.0"]
-  - title: Step 11. Combine forward and reverse reads into contigs
+  - title: Combine forward and reverse reads into contigs
     element: '#tool-search'
     content: |-
       Execute the tool with  <ul>
@@ -181,7 +181,7 @@ steps:
         <li>Leave all other parameters to the default settings</li>
       </ul>
     position: left
-  - title: Step 12. Combine forward and reverse reads into contigs
+  - title: Combine forward and reverse reads into contigs
     element: '.history-right-panel .list-items > *:first'
     content: >-
       Observe the output. This step merged the forward and reverse reads into
@@ -197,19 +197,19 @@ steps:
       Before starting to work on the quality of the imported data, let's get a
       feel of it.
     backdrop: true
-  - title: Step 13. Summarize data
+  - title: Summarize data
     element: '#tool-search-query'
     content: Search for Summary.seqs tool
     placement: right
     textinsert: Summary.seqs
-  - title: Step 14. Summarize data
+  - title: Summarize data
     element: '#tool-search'
     content: Click on the "Summary.seqs" tool to open it
     placement: right
     postclick:
       - >-
         a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmothur_summary_seqs%2Fmothur_summary_seqs%2F1.36.1.0"]
-  - title: Step 15. Summarize data
+  - title: Summarize data
     element: '#tool-search'
     content: |-
       Execute the tool with  <ul>
@@ -217,7 +217,7 @@ steps:
         <li>We do not need to supply a names or count file</li>
       </ul>
     position: left
-  - title: Step 16. Summarize data
+  - title: Summarize data
     element: '.history-right-panel .list-items > *:first'
     content: >-
       Observe the output. The summary output files give information per read.
@@ -231,21 +231,21 @@ steps:
       <br>We’ll take care of these issues in the next step when we run
       <b>screen.seqs.</b>
     position: left
-  - title: Step 17. Filter reads based on quality and length
+  - title: Filter reads based on quality and length
     element: '#tool-search-query'
     content: >-
       Search for Screen.seqs tool. It will remove any sequences with ambiguous
       bases and anything longer than 275 bp.
     placement: right
     textinsert: Screen.seqs
-  - title: Step 18. Filter reads based on quality and length
+  - title: Filter reads based on quality and length
     element: '#tool-search'
     content: Click on the "Screen.seqs" tool to open it
     placement: right
     postclick:
       - >-
         a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmothur_screen_seqs%2Fmothur_screen_seqs%2F1.36.1.0"]
-  - title: Step 19. Filter reads based on quality and length
+  - title: Filter reads based on quality and length
     element: '#tool-search'
     content: |-
       Execute the tool with  <ul>
@@ -260,7 +260,7 @@ steps:
       Inspect the output <ul>
         <li>How many reads were removed in this screening step? (Hint: run the summary.seqs tool again)</li>
       </ul>
-    backdrop: true
+    backdrop: false
   - title: Optimize files for computation
     content: >-
       Because we are sequencing many of the same organisms, we anticipate that
@@ -268,19 +268,19 @@ steps:
       computationally wasteful to align the same thing a bazillion times, we’ll
       unique our sequences using the <b>unique.seqs</b> command.
     backdrop: true
-  - title: Step 20. Remove duplicate sequences
+  - title: Remove duplicate sequences
     element: '#tool-search-query'
     content: Search for Unique.seqs tool
     placement: right
     textinsert: Unique.seqs
-  - title: Step 21. Remove duplicate sequences
+  - title: Remove duplicate sequences
     element: '#tool-search'
     content: Click on the "Unique.seqs" tool to open it
     placement: right
     postclick:
       - >-
         a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmothur_unique_seqs%2Fmothur_unique_seqs%2F1.36.1.0"]
-  - title: Step 22. Remove duplicate sequences
+  - title: Remove duplicate sequences
     element: '#tool-search'
     content: |-
       Execute the tool with  <ul>
@@ -293,7 +293,7 @@ steps:
         <li>How many sequences were unique?</li>
         <li>how many duplicates were removed?</li>
       </ul>
-    backdrop: true
+    backdrop: false
   - title: Remove duplicate sequences
     content: >-
       Inspect the output. This tool outputed two files, one is a fasta file
@@ -304,19 +304,19 @@ steps:
       column. <br>To reduce file sizes further and streamline analysis, we can
       now summarize the data in a count table.
     backdrop: true
-  - title: Step 23. Generate count table
+  - title: Generate count table
     element: '#tool-search-query'
     content: Search for Count.seqs tool
     placement: right
     textinsert: Count.seqs
-  - title: Step 24. Generate count table
+  - title: Generate count table
     element: '#tool-search'
     content: Click on the "Count.seqs" tool to open it
     placement: right
     postclick:
       - >-
         a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmothur_count_seqs%2Fmothur_count_seqs%2F1.36.1.0"]
-  - title: Step 25. Generate count table
+  - title: Generate count table
     element: '#tool-search'
     content: |-
       Execute the tool with  <ul>
@@ -336,19 +336,19 @@ steps:
       We are now ready to align our sequences to the reference. This step is an
       important step to perform to improve the clustering of your OTUs
     backdrop: true
-  - title: Step 26. Align sequences
+  - title: Align sequences
     element: '#tool-search-query'
     content: Search for Align.seqs tool
     placement: right
     textinsert: Align.seqs
-  - title: Step 27. Align sequences
+  - title: Align sequences
     element: '#tool-search'
     content: Click on the "Align.seqs" tool to open it
     placement: right
     postclick:
       - >-
         a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmothur_align_seqs%2Fmothur_align_seqs%2F1.36.1.0"]
-  - title: Step 28. Align sequences
+  - title: Align sequences
     element: '#tool-search'
     content: |-
       Execute the tool with  <ul>
@@ -356,27 +356,27 @@ steps:
         <li>“reference” to the <b>silva.v4.fasta</b> reference file</li>
       </ul>
     position: left
-  - title: Step 29. Align sequences
+  - title: Align sequences
     element: '#tool-search-query'
     content: Search for Summary.seqs tool
     placement: right
     textinsert: Summary.seqs
-  - title: Step 30. Align sequences
+  - title: Align sequences
     element: '#tool-search'
     content: Click on the "Summary.seqs" tool to open it
     placement: right
     postclick:
       - >-
         a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmothur_summary_seqs%2Fmothur_summary_seqs%2F1.36.1.0"]
-  - title: Step 31. Align sequences
+  - title: Align sequences
     element: '#tool-search'
     content: |-
       Execute the tool with  <ul>
-        <li>“fasta” parameter to the aligned output from step 28</li>
+        <li>“fasta” parameter to the aligned output from align.seqs</li>
         <li>“count” parameter to <b>count_table</b> output from Count.seqs</li>
       </ul>
     position: left
-  - title: Step 32. Align sequences
+  - title: Align sequences
     element: '.history-right-panel .list-items > *:first'
     content: >-
       Observe the output. So what does this mean? You’ll see that the bulk of
@@ -396,19 +396,19 @@ steps:
       the same base in a row (this also could have been done in the first
       execution of screen.seqs before).
     backdrop: true
-  - title: Step 33. Remove poorly aligned sequences
+  - title: Remove poorly aligned sequences
     element: '#tool-search-query'
     content: Search for Screen.seqs tool
     placement: right
     textinsert: Screen.seqs
-  - title: Step 34. Remove poorly aligned sequences
+  - title: Remove poorly aligned sequences
     element: '#tool-search'
     content: Click on the "Screen.seqs" tool to open it
     placement: right
     postclick:
       - >-
         a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmothur_screen_seqs%2Fmothur_screen_seqs%2F1.36.1.0"]
-  - title: Step 35. Remove poorly aligned sequences
+  - title: Remove poorly aligned sequences
     element: '#tool-search'
     content: |-
       Execute the tool with  <ul>
@@ -424,7 +424,7 @@ steps:
       Inspect the output <ul>
         <li>How many sequences were removed in this step?</li>
       </ul>
-    backdrop: true
+    backdrop: false
   - title: Filter sequences
     content: >-
       Now we know our sequences overlap the same alignment coordinates, we want
@@ -435,19 +435,19 @@ steps:
       (i.e. “.”). These can be pulled out without losing any information. We’ll
       do all this with <b>filter.seqs</b>.
     backdrop: true
-  - title: Step 36. Filter sequences
+  - title: Filter sequences
     element: '#tool-search-query'
     content: Search for Filter.seqs tool
     placement: right
     textinsert: Filter.seqs
-  - title: Step 37. Filter sequences
+  - title: Filter sequences
     element: '#tool-search'
     content: Click on the "Filter.seqs" tool to open it
     placement: right
     postclick:
       - >-
         a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmothur_filter_seqs%2Fmothur_filter_seqs%2F1.36.1.0"]
-  - title: Step 38. Filter sequences
+  - title: Filter sequences
     element: '#tool-search'
     content: |-
       Execute the tool with  <ul>
@@ -456,7 +456,7 @@ steps:
         <li>“trump” to <b>.</b></li>
       </ul>
     position: left
-  - title: Step 39. Filter sequences
+  - title: Filter sequences
     element: '.history-right-panel .list-items > *:first'
     content: >-
       Observe the output. Our initial alignment was 13425 columns wide and that
@@ -465,19 +465,19 @@ steps:
       376 columns. Because we’ve perhaps created some redundancy across our
       sequences by trimming the ends, we can re-run unique.seqs
     position: left
-  - title: Step 40. Re-obtain unique sequences
+  - title: Re-obtain unique sequences
     element: '#tool-search-query'
     content: Search for Unique.seqs tool
     placement: right
     textinsert: Unique.seqs
-  - title: Step 41. Re-obtain unique sequences
+  - title: Re-obtain unique sequences
     element: '#tool-search'
     content: Click on the "Unique.seqs" tool to open it
     placement: right
     postclick:
       - >-
         a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmothur_unique_seqs%2Fmothur_unique_seqs%2F1.36.1.0"]
-  - title: Step 42. Re-obtain unique sequences
+  - title: Re-obtain unique sequences
     element: '#tool-search'
     content: |-
       Execute the tool with  <ul>
@@ -490,7 +490,7 @@ steps:
       Inspect the output <ul>
         <li>How many duplicate sequences did our filter step produce?</li>
       </ul>
-    backdrop: true
+    backdrop: false
   - title: Pre-clustering
     content: >-
       The next thing we want to do to further de-noise our sequences, is to
@@ -502,19 +502,19 @@ steps:
       generally recommend allowing 1 difference for every 100 basepairs of
       sequence
     backdrop: true
-  - title: Step 43. Perform preliminary clustering of sequences
+  - title: Perform preliminary clustering of sequences
     element: '#tool-search-query'
     content: Search for Pre.cluster tool
     placement: right
     textinsert: Pre.cluster
-  - title: Step 44. Perform preliminary clustering of sequences
+  - title: Perform preliminary clustering of sequences
     element: '#tool-search'
     content: Click on the "Pre.cluster" tool to open it
     placement: right
     postclick:
       - >-
         a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmothur_pre_cluster%2Fmothur_pre_cluster%2F1.36.1.0"]
-  - title: Step 45. Perform preliminary clustering of sequences
+  - title: Perform preliminary clustering of sequences
     element: '#tool-search'
     content: |-
       Execute the tool with  <ul>
@@ -528,7 +528,7 @@ steps:
       Inspect the output <ul>
         <li>How many unique sequences are we left with after this clustering of highly similar sequences?</li>
       </ul>
-    backdrop: true
+    backdrop: false
   - title: Chimera Removal
     content: >-
       At this point we have removed as much sequencing error as we can, and it
@@ -542,7 +542,7 @@ steps:
     content: >-
       We’ll do this chimera removal using the UCHIME algorithm that is called
       within Mothur, using the <b>chimera.uchime</b> command. This command will
-      split the data by sample and check for chimeras.    backdrop: true
+      split the data by sample and check for chimeras.
 
       <br>Our preferred way of doing this is to use the abundant sequences as
       our reference. In addition, if a sequence is flagged as chimeric in one
@@ -551,19 +551,19 @@ steps:
       sequences get flagged as chimeric when they’re the most abundant sequence
       in another sample
     backdrop: true
-  - title: Step 46. Remove chimeric sequences
+  - title: Remove chimeric sequences
     element: '#tool-search-query'
     content: Search for Chimera.uchime tool
     placement: right
     textinsert: Chimera.uchime
-  - title: Step 47. Remove chimeric sequences
+  - title: Remove chimeric sequences
     element: '#tool-search'
     content: Click on the "Chimera.uchime" tool to open it
     placement: right
     postclick:
       - >-
         a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmothur_chimera_uchime%2Fmothur_chimera_uchime%2F1.36.1.0"]
-  - title: Step 48. Remove chimeric sequences
+  - title: Remove chimeric sequences
     element: '#tool-search'
     content: |-
       Execute the tool with  <ul>
@@ -573,26 +573,26 @@ steps:
         <li>“dereplicate” to Yes</li>
       </ul>
     position: left
-  - title: Step 49. Remove chimeric sequences
+  - title: Remove chimeric sequences
     element: '.history-right-panel .list-items > *:first'
     content: >-
       Running chimera.uchime with the count file will remove the chimeric
       sequences from the count table, but we still need to remove those
       sequences from the fasta file as well    position: left
     position: left
-  - title: Step 50. Remove chimeric sequences
+  - title: Remove chimeric sequences
     element: '#tool-search-query'
     content: Search for Remove.seqs tool
     placement: right
     textinsert: Remove.seqs
-  - title: Step 51. Remove chimeric sequences
+  - title: Remove chimeric sequences
     element: '#tool-search'
     content: Click on the "Remove.seqs" tool to open it
     placement: right
     postclick:
       - >-
         a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmothur_remove_seqs%2Fmothur_remove_seqs%2F1.36.1.0"]
-  - title: Step 52. Remove chimeric sequences
+  - title: Remove chimeric sequences
     element: '#tool-search'
     content: |-
       Execute the tool with  <ul>
@@ -606,15 +606,15 @@ steps:
       Inspect the output <ul>
         <li>How many sequences were flagged as chimeric? what is the percentage? (Hint: summary.seqs)</li>
       </ul>
-    backdrop: true
-  - title: Step 51. Remove chimeric sequences
+    backdrop: false
+  - title: Remove chimeric sequences
     element: '#tool-search'
     content: Click on the "Remove.seqs" tool to open it
     placement: right
     postclick:
       - >-
         a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmothur_remove_seqs%2Fmothur_remove_seqs%2F1.36.1.0"]
-  - title: Step 52. Remove chimeric sequences
+  - title: Remove chimeric sequences
     element: '#tool-search'
     content: |-
       Execute the tool with  <ul>
@@ -636,19 +636,19 @@ steps:
       mitochondria and chloroplasts have no functional role in microbial
       community.
     backdrop: true
-  - title: Step 53. Remove undesired sequences
+  - title: Remove undesired sequences
     element: '#tool-search-query'
     content: Search for Classify.seqs tool
     placement: right
     textinsert: Classify.seqs
-  - title: Step 54. Remove undesired sequences
+  - title: Remove undesired sequences
     element: '#tool-search'
     content: Click on the "Classify.seqs" tool to open it
     placement: right
     postclick:
       - >-
         a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmothur_classify_seqs%2Fmothur_classify_seqs%2F1.36.1.0"]
-  - title: Step 55. Remove undesired sequences
+  - title: Remove undesired sequences
     element: '#tool-search'
     content: |-
       Execute the tool with  <ul>
@@ -659,30 +659,29 @@ steps:
         <li>“cutoff” to <b>80</b></li>
       </ul>
     position: left
-  - title: Step 56. Remove undesired sequences
+  - title: Remove undesired sequences
     element: '.history-right-panel .list-items > *:first'
     content: >-
       Have a look at the taxonomy output. You will see that every read now has a
       classification. <br><br>Now that everything is classified we want to
       remove our undesirables. We do this with the remove.lineage
     position: left
-  - title: Step 57. Remove undesired sequences
+  - title: Remove undesired sequences
     element: '#tool-search-query'
     content: Search for Remove.lineage tool
     placement: right
     textinsert: Remove.lineage
-  - title: Step 58. Remove undesired sequences
+  - title: Remove undesired sequences
     element: '#tool-search'
     content: Click on the "Remove.lineage" tool to open it
     placement: right
     postclick:
       - >-
         a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmothur_remove_lineage%2Fmothur_remove_lineage%2F1.36.1.0"]
-  - title: Step 59. Remove undesired sequences
+  - title: Remove undesired sequences
     element: '#tool-search'
     content: |-
       Execute the tool with  <ul>
-        <li>Remove.lineage  with the following parameters</li>
         <li>“taxonomy” to the taxonomy output from Classify.seqs</li>
         <li>“taxon” to <b>Chloroplast-Mitochondria-unknown-Archaea-Eukaryota</b> in the text box under Manually select taxons for filtering</li>
         <li>“fasta” to the fasta output from Remove.seqs</li>
@@ -695,7 +694,7 @@ steps:
         <li>How many unique (representative) sequences were removed in this step?</li>
         <li>How many sequences in total?</li>
       </ul>
-    backdrop: true
+    backdrop: false
   - title: Assessing error rates based on our mock community
     content: >-
       Measuring the error rate of your sequences is something you can only do if
@@ -718,19 +717,19 @@ steps:
       <br>First, let’s extract the sequences belonging to our mock samples from
       our data
     backdrop: true
-  - title: Step 59. Extract mock sample from our dataset
+  - title: Extract mock sample from our dataset
     element: '#tool-search-query'
     content: Search for Get.groups tool
     placement: right
     textinsert: Get.groups
-  - title: Step 60. Extract mock sample from our dataset
+  - title: Extract mock sample from our dataset
     element: '#tool-search'
     content: Click on the "Get.groups" tool to open it
     placement: right
     postclick:
       - >-
         a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmothur_get_groups%2Fmothur_get_groups%2F1.36.1.0"]
-  - title: Step 61. Extract mock sample from our dataset
+  - title: Extract mock sample from our dataset
     element: '#tool-search'
     content: |-
       Execute the tool with  <ul>
@@ -739,7 +738,7 @@ steps:
         <li>“fasta” to fasta output from Remove.lineage</li>
       </ul>
     position: left
-  - title: Step 62. Extract mock sample from our dataset
+  - title: Extract mock sample from our dataset
     element: '.history-right-panel .list-items > *:first'
     content: >-
       Have a look at the taxonomy output. It should tell you that we had 67
@@ -748,19 +747,19 @@ steps:
       on our mock reference. Here we align the reads from our mock sample back
       to their known sequences, to see how many fail to match.
     position: left
-  - title: Step 63. Assess error rates based on a mock community
+  - title: Assess error rates based on a mock community
     element: '#tool-search-query'
     content: Search for Seq.error tool
     placement: right
     textinsert: Seq.error
-  - title: Step 64. Assess error rates based on a mock community
+  - title: Assess error rates based on a mock community
     element: '#tool-search'
     content: Click on the "Seq.error" tool to open it
     placement: right
     postclick:
       - >-
         a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmothur_seq_error%2Fmothur_seq_error%2F1.36.1.0"]
-  - title: Step 65. Assess error rates based on a mock community
+  - title: Assess error rates based on a mock community
     element: '#tool-search'
     content: |-
       Execute the tool with  <ul>
@@ -769,7 +768,7 @@ steps:
         <li>“count” to the count table from Get.groups</li>
       </ul>
     position: left
-  - title: Step 66. Assess error rates based on a mock community
+  - title: Assess error rates based on a mock community
     element: '.history-right-panel .list-items > *:first'
     content: Inspect the output. The error rate should be 0.0065%!
     position: left
@@ -785,19 +784,19 @@ steps:
   - title: Cluster mock sequences into OTUs
     content: First we calculate the pairwise distances between our sequences
     backdrop: true
-  - title: Step 67. Cluster mock sequences into OTUs
+  - title: Cluster mock sequences into OTUs
     element: '#tool-search-query'
     content: Search for Dist.seqs tool
     placement: right
     textinsert: Dist.seqs
-  - title: Step 68. Cluster mock sequences into OTUs
+  - title: Cluster mock sequences into OTUs
     element: '#tool-search'
     content: Click on the "Dist.seqs" tool to open it
     placement: right
     postclick:
       - >-
         a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmothur_dist_seqs%2Fmothur_dist_seqs%2F1.36.1.0"]
-  - title: Step 69. Cluster mock sequences into OTUs
+  - title: Cluster mock sequences into OTUs
     element: '#tool-search'
     content: |-
       Execute the tool with  <ul>
@@ -808,19 +807,19 @@ steps:
   - title: Cluster mock sequences into OTUs
     content: Next we group sequences into OTUs
     backdrop: true
-  - title: Step 70. Cluster mock sequences into OTUs
+  - title: Cluster mock sequences into OTUs
     element: '#tool-search-query'
     content: Search for Cluster tool
     placement: right
     textinsert: Cluster
-  - title: Step 71. Cluster mock sequences into OTUs
+  - title: Cluster mock sequences into OTUs
     element: '#tool-search'
     content: Click on the "Cluster" tool to open it
     placement: right
     postclick:
       - >-
         a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmothur_cluster%2Fmothur_cluster%2F1.36.1.0"]
-  - title: Step 72. Cluster mock sequences into OTUs
+  - title: Cluster mock sequences into OTUs
     element: '#tool-search'
     content: |-
       Execute the tool with  <ul>
@@ -833,19 +832,19 @@ steps:
       Now we make a shared file that summarizes all our data into one handy
       table
     backdrop: true
-  - title: Step 70. Cluster mock sequences into OTUs
+  - title: Cluster mock sequences into OTUs
     element: '#tool-search-query'
     content: Search for Make.shared tool
     placement: right
     textinsert: Make.shared
-  - title: Step 71. Cluster mock sequences into OTUs
+  - title: Cluster mock sequences into OTUs
     element: '#tool-search'
     content: Click on the "Make.shared" tool to open it
     placement: right
     postclick:
       - >-
         a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmothur_make_shared%2Fmothur_make_shared%2F1.36.1.0"]
-  - title: Step 72. Cluster mock sequences into OTUs
+  - title: Cluster mock sequences into OTUs
     element: '#tool-search'
     content: |-
       Execute the tool with  <ul>
@@ -857,19 +856,19 @@ steps:
   - title: Cluster mock sequences into OTUs
     content: And now we generate intra-sample rarefaction curves
     backdrop: true
-  - title: Step 73. Cluster mock sequences into OTUs
+  - title: Cluster mock sequences into OTUs
     element: '#tool-search-query'
     content: Search for Rarefaction.single tool
     placement: right
     textinsert: Rarefaction.single
-  - title: Step 74. Cluster mock sequences into OTUs
+  - title: Cluster mock sequences into OTUs
     element: '#tool-search'
     content: Click on the "Rarefaction.single" tool to open it
     placement: right
     postclick:
       - >-
-        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmothur_rarefaction_shared%2Fmothur_rarefaction_shared%2F1.36.1.0"]
-  - title: Step 75. Cluster mock sequences into OTUs
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmothur_rarefaction_single%2Fmothur_rarefaction_single%2F1.36.1.0"]
+  - title: Cluster mock sequences into OTUs
     element: '#tool-search'
     content: |-
       Execute the tool with  <ul>
@@ -878,8 +877,8 @@ steps:
     position: left
   - title: Question
     content: <ul><li>How many OTUs were identified in our mock community?</li></ul>
-    backdrop: true
-  - title: Step 76. Cluster mock sequences into OTUs
+    backdrop: false
+  - title: Cluster mock sequences into OTUs
     element: >-
       #current-history-panel .controls .actions a[href$="javascript:void(0);"]
       .fa.fa-check-square-o
@@ -911,19 +910,19 @@ steps:
       served its purpose by allowing us to estimate our error rate, but in
       subsequent steps we only want to use our real samples.
     backdrop: true
-  - title: Step 77. Remove Mock community from our dataset
+  - title: Remove Mock community from our dataset
     element: '#tool-search-query'
     content: Search for Remove.groups tool
     placement: right
     textinsert: Remove.groups
-  - title: Step 78. Remove Mock community from our dataset
+  - title: Remove Mock community from our dataset
     element: '#tool-search'
     content: Click on the "Remove.groups" tool to open it
     placement: right
     postclick:
       - >-
         a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmothur_remove_groups%2Fmothur_remove_groups%2F1.36.1.0"]
-  - title: Step 79. Remove Mock community from our dataset
+  - title: Remove Mock community from our dataset
     element: '#tool-search'
     content: |-
       Execute the tool with  <ul>
@@ -952,19 +951,19 @@ steps:
       which corresponds to the level of Order. This is the approach that we
       generally use in the Schloss lab.
     backdrop: true
-  - title: Step 80. Cluster our data into OTUs
+  - title: Cluster our data into OTUs
     element: '#tool-search-query'
     content: Search for Cluster.split tool
     placement: right
     textinsert: Cluster.split
-  - title: Step 81. Cluster our data into OTUs
+  - title: Cluster our data into OTUs
     element: '#tool-search'
     content: Click on the "Cluster.split" tool to open it
     placement: right
     postclick:
       - >-
         a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmothur_cluster_split%2Fmothur_cluster_split%2F1.36.1.0"]
-  - title: Step 82. Cluster our data into OTUs
+  - title: Cluster our data into OTUs
     element: '#tool-search'
     content: |-
       Execute the tool with  <ul>
@@ -982,19 +981,19 @@ steps:
       and we can do this using the Make.shared command. Here we tell Mothur that
       we’re really only interested in the 0.03 cutoff level
     backdrop: true
-  - title: Step 83. Cluster our data into OTUs
+  - title: Cluster our data into OTUs
     element: '#tool-search-query'
     content: Search for Make.shared tool
     placement: right
     textinsert: Make.shared
-  - title: Step 84. Cluster our data into OTUs
+  - title: Cluster our data into OTUs
     element: '#tool-search'
     content: Click on the "Make.shared" tool to open it
     placement: right
     postclick:
       - >-
         a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmothur_make_shared%2Fmothur_make_shared%2F1.36.1.0"]
-  - title: Step 85. Cluster our data into OTUs
+  - title: Cluster our data into OTUs
     element: '#tool-search'
     content: |-
       Execute the tool with  <ul>
@@ -1009,19 +1008,19 @@ steps:
       We probably also want to know the taxonomy for each of our OTUs. We can
       get the consensus taxonomy for each OTU using the Classify.otu command
     backdrop: true
-  - title: Step 86. Cluster our data into OTUs
+  - title: Cluster our data into OTUs
     element: '#tool-search-query'
     content: Search for Classify.otu tool
     placement: right
     textinsert: Classify.otu
-  - title: Step 87. Cluster our data into OTUs
+  - title: Cluster our data into OTUs
     element: '#tool-search'
     content: Click on the "Classify.otu" tool to open it
     placement: right
     postclick:
       - >-
         a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmothur_classify_otu%2Fmothur_classify_otu%2F1.36.1.0"]
-  - title: Step 88. Cluster our data into OTUs
+  - title: Cluster our data into OTUs
     element: '#tool-search'
     content: |-
       Execute the tool with  <ul>
@@ -1031,7 +1030,7 @@ steps:
         <li>“label” to 0.03</li>
       </ul>
     position: left
-  - title: Step 89. Cluster our data into OTUs
+  - title: Cluster our data into OTUs
     element: >-
       #current-history-panel .controls .actions a[href$="javascript:void(0);"]
       .fa.fa-check-square-o
@@ -1058,26 +1057,26 @@ steps:
       What we now want to do is see how many sequences we have in each sample.
       We’ll do this with the Count.groups command
     backdrop: true
-  - title: Step 90. Subsampling
+  - title: Subsampling
     element: '#tool-search-query'
     content: Search for Count.groups tool
     placement: right
     textinsert: Count.groups
-  - title: Step 91. Subsampling
+  - title: Subsampling
     element: '#tool-search'
     content: Click on the "Count.groups" tool to open it
     placement: right
     postclick:
       - >-
         a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmothur_count_groups%2Fmothur_count_groups%2F1.36.1.0"]
-  - title: Step 92. Subsampling
+  - title: Subsampling
     element: '#tool-search'
     content: |-
       Execute the tool with  <ul>
         <li>“shared” to the shared file from Make.shared</li>
       </ul>
     position: left
-  - title: Step 93. Subsampling
+  - title: Subsampling
     element: >-
       #current-history-panel .controls .actions a[href$="javascript:void(0);"]
       .fa.fa-check-square-o
@@ -1087,19 +1086,19 @@ steps:
       subsampling and rarefying your data is an important thing to do. <br>We’ll
       generate a subsampled file for our analyses with the Sub.sample command
     placement: left
-  - title: Step 94. Subsampling
+  - title: Subsampling
     element: '#tool-search-query'
     content: Search for Sub.sample tool
     placement: right
     textinsert: Sub.sample
-  - title: Step 95. Subsampling
+  - title: Subsampling
     element: '#tool-search'
     content: Click on the "Sub.sample" tool to open it
     placement: right
     postclick:
       - >-
         a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmothur_sub_sample%2Fmothur_sub_sample%2F1.36.1.0"]
-  - title: Step 96. Subsampling
+  - title: Subsampling
     element: '#tool-search'
     content: |-
       Execute the tool with  <ul>
@@ -1114,7 +1113,7 @@ steps:
         <li>What would you exect the result of count.groups on this new shared file output to be?</li>
         <br>Note: since subsampling is a stochastic process, your results from any tools using this subsampled data will deviate from the ones presented in the tutorial.
       </ul>
-    backdrop: true
+    backdrop: false
   - title: Calculate Species Diversity
     content: >-
       Diversity indices provide valuable mathematical tools to describe the
@@ -1127,26 +1126,26 @@ steps:
       describing the number of OTUs observed as a function of sampling effort.
       We’ll do this with the Rarefaction.single command
     backdrop: true
-  - title: Step 97. Calculate Rarefaction
+  - title: Calculate Rarefaction
     element: '#tool-search-query'
     content: Search for Rarefaction.single tool
     placement: right
     textinsert: Rarefaction.single
-  - title: Step 98. Calculate Rarefaction
+  - title: Calculate Rarefaction
     element: '#tool-search'
     content: Click on the "Rarefaction.single" tool to open it
     placement: right
     postclick:
       - >-
-        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmothur_rarefaction_shared%2Fmothur_rarefaction_shared%2F1.36.1.0"]
-  - title: Step 99. Calculate Rarefaction
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmothur_rarefaction_single%2Fmothur_rarefaction_single%2F1.36.1.0"]
+  - title: Calculate Rarefaction
     element: '#tool-search'
     content: |-
       Execute the tool with  <ul>
         <li>“shared” to the shared file from Make.shared</li>
       </ul>
     position: left
-  - title: Step 100. Calculate Rarefaction
+  - title: Calculate Rarefaction
     content: >-
       Take a look at the output. The file displays the number of OTUs identified
       per amount of sequences used (numsampled). What we would like to see is
@@ -1160,42 +1159,42 @@ steps:
       First let’s make our life a little bit easier. As we only have one dataset
       in our collection anyways, we can collapse it into a single file
     backdrop: true
-  - title: Step 101. Plot Rarefaction
+  - title: Plot Rarefaction
     element: '#tool-search-query'
     content: Search for Collapse Collection tool
     placement: right
     textinsert: Collapse Collection
-  - title: Step 102. Plot Rarefaction
+  - title: Plot Rarefaction
     element: '#tool-search'
     content: Click on the "Collapse Collection" tool to open it
     placement: right
     postclick:
       - >-
         a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fnml%2Fcollapse_collections%2Fcollapse_dataset%2F4.0"]
-  - title: Step 103. Plot Rarefaction
+  - title: Plot Rarefaction
     element: '#tool-search'
     content: |-
       Execute the tool with  <ul>
         <li>Collection of files to collapse to a single dataset” to the rarefaction curve collection</li>
       </ul>
     position: left
-  - title: Step 104. Plot Rarefaction
+  - title: Plot Rarefaction
     element: '#tool-search-query'
     content: Search for 'Plotting tool'
     placement: right
-    textinsert: Collapse Collection
-  - title: Step 105. Plot Rarefaction
+    textinsert: Plotting tool
+  - title: Plot Rarefaction
     element: '#tool-search'
     content: Click on the "Plotting tool" to open it
     placement: right
     postclick:
       - >-
         a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fdevteam%2Fxy_plot%2FXY_Plot_1%2F1.0.2"]
-  - title: Step 106. Plot Rarefaction
+  - title: Plot Rarefaction
     element: '#tool-search'
     content: |-
       Execute the tool with  <ul>
-        <li“Plot Title” to Rarefaction</li>
+        <li>“Plot Title” to Rarefaction</li>
         <li>“Label for x axis” to Number of Sequences</li>
         <li>“Label for y axis” to Number of OTUs</li>
         <li>“Output File Type” to PNG</li>
@@ -1207,14 +1206,14 @@ steps:
         </ul>
       </ul>
     position: left
-  - title: Step 107. Plot Rarefaction
+  - title: Plot Rarefaction
     element: >-
       #current-history-panel .controls .actions a[href$="javascript:void(0);"]
       .fa.fa-check-square-o
     content: >-
       Observe the output. From the resulting image we can see that the
       rarefaction curves for all samples have started to level off so we are
-      confident we cover a large part of our sample diversity
+      confident we cover a large part of our sample diversity placement: left
   - title: Plot Rarefaction
     content: >-
       Alas, rarefaction is not a measure of richness, but a measure of
@@ -1232,19 +1231,19 @@ steps:
       everything, let’s randomly select 2440 sequences from each sample 1000
       times and calculate the average
     backdrop: true
-  - title: Step 108. Summary.single
+  - title: Summary.single
     element: '#tool-search-query'
     content: Search for Summary.single tool
     placement: right
     textinsert: Summary.single
-  - title: Step 109. Summary.single
+  - title: Summary.single
     element: '#tool-search'
     content: Click on the "Summary.single" tool to open it
     placement: right
     postclick:
       - >-
         a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmothur_summary_single%2Fmothur_summary_single%2F1.36.1.0"]
-  - title: Step 110. Summary.single
+  - title: Summary.single
     element: '#tool-search'
     content: |-
       Execute the tool with  <ul>
@@ -1253,7 +1252,7 @@ steps:
         <li>“size” to 2440</li>
       </ul>
     position: left
-  - title: Step 111. Summary.single
+  - title: Summary.single
     content: >-
       Observe the output. Interestingly, the sample coverages were all above
       97%, indicating that we did a pretty good job of sampling the communities.
@@ -1272,19 +1271,19 @@ steps:
       <br>We’ll do this with the Dist.shared command that will allow us to
       rarefy our data to a common number of sequences.
     backdrop: true
-  - title: Step 112. Beta diversity
+  - title: Beta diversity
     element: '#tool-search-query'
     content: Search for Dist.shared tool
     placement: right
     textinsert: Dist.shared
-  - title: Step 113. Beta diversity
+  - title: Beta diversity
     element: '#tool-search'
     content: Click on the "Dist.shared" tool to open it
     placement: right
     postclick:
       - >-
         a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmothur_dist_shared%2Fmothur_dist_shared%2F1.36.1.0"]
-  - title: Step 114. Beta diversity
+  - title: Beta diversity
     element: '#tool-search'
     content: |-
       Execute the tool with  <ul>
@@ -1293,19 +1292,19 @@ steps:
         <li>“subsample” to 2440</li>
       </ul>
     position: left
-  - title: Step 115. Beta diversity
+  - title: Beta diversity
     element: '#tool-search-query'
     content: Search for Heatmap.sim tool
     placement: right
     textinsert: Heatmap.sim
-  - title: Step 116. Beta diversity
+  - title: Beta diversity
     element: '#tool-search'
     content: Click on the "Heatmap.sim" tool to open it
     placement: right
     postclick:
       - >-
         a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmothur_heatmap_sim%2Fmothur_heatmap_sim%2F1.36.1.0"]
-  - title: Step 117. Beta diversity
+  - title: Beta diversity
     element: '#tool-search'
     content: |-
       Execute the tool with  <ul>
@@ -1313,7 +1312,7 @@ steps:
         <li>“phylip” to output by Dist.shared (this is a collection input)</li>
       </ul>
     position: left
-  - title: Step 118. Beta diversity
+  - title: Beta diversity
     content: >-
       Look at some of the resulting heatmaps (you may have to download the SVG
       images first). In all of these heatmaps the red colors indicate
@@ -1322,45 +1321,45 @@ steps:
       can analyze simultaneously.<br>Let’s take a look at the Venn diagrams for
       the first 4 time points of female 3 using the venn
     backdrop: false
-  - title: Step 119. Venn diagram
+  - title: Venn diagram
     element: '#tool-search-query'
     content: Search for Collapse Collection tool
     placement: right
     textinsert: Collapse Collection
-  - title: Step 120. Venn diagram
+  - title: Venn diagram
     element: '#tool-search'
     content: Click on the "Collapse Collection" tool to open it
     placement: right
     postclick:
       - >-
         a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fnml%2Fcollapse_collections%2Fcollapse_dataset%2F4.0"]
-  - title: Step 121. Venn diagram
+  - title: Venn diagram
     element: '#tool-search'
     content: |-
       Execute the tool with  <ul>
         <li>“Collection” to Subsample.shared output collection from Sub.sample step</li>
       </ul>
     position: left
-  - title: Step 122. Venn diagram
+  - title: Venn diagram
     element: >-
       #current-history-panel .controls .actions a[href$="javascript:void(0);"]
       .fa.fa-check-square-o
     content: >-
       After the tool has finished, rename the output to Subsample.shared to make
       it easier to recognize in further analysis
-  - title: Step 123. Venn diagram
+  - title: Venn diagram
     element: '#tool-search-query'
     content: Search for Venn tool
     placement: right
     textinsert: Venn
-  - title: Step 124. Venn diagram
+  - title: Venn diagram
     element: '#tool-search'
     content: Click on the "Venn" tool to open it
     placement: right
     postclick:
       - >-
         a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmothur_venn%2Fmothur_venn%2F1.36.1.0"]
-  - title: Step 125. Venn diagram
+  - title: Venn diagram
     element: '#tool-search'
     content: |-
       Execute the tool with  <ul>
@@ -1368,7 +1367,7 @@ steps:
         <li>Set groups to F3D0,F3D1,F3D2,F3D3</li>
       </ul>
     position: left
-  - title: Step 126. Venn diagram
+  - title: Venn diagram
     content: >-
       Observe the result. You should see that  there were a total of 180 OTUs
       observed between the 4 time points. Only 76 of those OTUs were shared by
@@ -1381,19 +1380,19 @@ steps:
       samples to each other. We will generate a dendrogram using the jclass and
       thetayc calculators within the tree.shared command
     backdrop: true
-  - title: Step 127. Tree
+  - title: Tree
     element: '#tool-search-query'
     content: Search for Tree.shared tool
     placement: right
     textinsert: Tree.shared
-  - title: Step 128. Tree
+  - title: Tree
     element: '#tool-search'
     content: Click on the "Tree.shared" tool to open it
     placement: right
     postclick:
       - >-
         a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmothur_tree_shared%2Fmothur_tree_shared%2F1.36.1.0"]
-  - title: Step 129. Tree
+  - title: Tree
     element: '#tool-search'
     content: |-
       Execute the tool with  <ul>
@@ -1401,32 +1400,33 @@ steps:
         <li>“phylip” to dist files from Dist.shared (collection)</li>
       </ul>
     position: left
-  - title: Step 130. Tree
+  - title: Tree
     element: '#tool-search-query'
     content: Search for Newick display tool
     placement: right
     textinsert: Newick display
-  - title: Step 131. Tree
+  - title: Tree
     element: '#tool-search'
     content: Click on the "Newick display" tool to open it
     placement: right
     postclick:
       - >-
         a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fdcorreia%2Fnewick_display%2Fnwdisplay%2F1"]
-  - title: Step 132. Tree
+  - title: Tree
     element: '#tool-search'
     content: |-
       Execute the tool with  <ul>
         <li>“Newick file” to output from Tree.shared (collection)</li>
       </ul>
     position: left
-  - title: Step 133. Tree
+  - title: Tree
     element: >-
       #current-history-panel .controls .actions a[href$="javascript:void(0);"]
       .fa.fa-check-square-o
     content: >-
       Inspect the output. It shows that the early and late communities cluster
       with themselves to the exclusion of the others
+    placement: left
   - title: Determine statistical significance of clusterings
     content: >-
       We can perform a test to determine whether the clustering within the tree
@@ -1435,13 +1435,13 @@ steps:
       first need to create a design file that indicates which treatment each
       sample belongs to.
     backdrop: true
-  - title: Step 134. Obtain design file
+  - title: Obtain design file
     content: |-
       Import the file called mouse.time.design to your history.<ul>
         <li>Go to the shared data library or the files you downloaded from Zenodo.</li>
       </ul>
     backdrop: true
-  - title: Step 135. Changing the datatype
+  - title: Changing the datatype
     element: >-
       #current-history-panel .controls .actions a[href$="javascript:void(0);"]
       .fa.fa-check-square-o
@@ -1452,7 +1452,8 @@ steps:
         <li>Select the new datatype from dropdown menu</li>
         <li>Click Save</li>
       </ul>
-  - title: Step 136. Obtain design file
+    placement: left
+  - title: Obtain design file
     element: >-
       #current-history-panel .controls .actions a[href$="javascript:void(0);"]
       .fa.fa-check-square-o
@@ -1460,19 +1461,20 @@ steps:
       Observe the output.<br>Using the parsimony command let’s look at the
       pairwise comparisons. Specifically, let’s focus on the early vs. late
       comparisons for each mouse
-  - title: Step 137. Compare Early-vs-Late
+    placement: left
+  - title: Compare Early-vs-Late
     element: '#tool-search-query'
     content: Search for Parsimony tool
     placement: right
     textinsert: Parsimony
-  - title: Step 138. Compare Early-vs-Late
+  - title: Compare Early-vs-Late
     element: '#tool-search'
     content: Click on the "Parsimony" tool to open it
     placement: right
     postclick:
       - >-
         a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmothur_parsimony%2Fmothur_parsimony%2F1.36.1.0"]
-  - title: Step 139. Compare Early-vs-Late
+  - title: Compare Early-vs-Late
     element: '#tool-search'
     content: |-
       Execute the tool with  <ul>
@@ -1480,7 +1482,7 @@ steps:
         <li>“group” to the design file described before</li>
       </ul>
     position: left
-  - title: Step 139. Compare Early-vs-Late
+  - title: Compare Early-vs-Late
     element: >-
       #current-history-panel .controls .actions a[href$="javascript:void(0);"]
       .fa.fa-check-square-o
@@ -1488,7 +1490,8 @@ steps:
       Inspect the output. There is clearly a significant difference between the
       clustering of the early and late time points. Recall that this method
       ignores the branch length.
-  - title: Step 140. PCoA
+    placement: left
+  - title: PCoA
     content: >-
       The two distance matrices that we generated earlier (i.e.
       jclass.0.03.lt.ave.dist and thetayc.0.03.lt.ave.dist) can then be
@@ -1498,26 +1501,26 @@ steps:
       represent multidimensional data in as few dimensions as possible. Our data
       is highly dimensional (~9 dimensions).
     backdrop: true
-  - title: Step 141. PCoA
+  - title: PCoA
     element: '#tool-search-query'
     content: Search for Pcoa tool
     placement: right
     textinsert: Pcoa
-  - title: Step 142. PCoA
+  - title: PCoA
     element: '#tool-search'
     content: Click on the "Pcoa" tool to open it
     placement: right
     postclick:
       - >-
         a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmothur_pcoa%2Fmothur_pcoa%2F1.36.1.0"]
-  - title: Step 143. PCoA
+  - title: PCoA
     element: '#tool-search'
     content: |-
       Execute the tool with  <ul>
         <li>“phylip” to dist files from Dist.shared (collection)</li>
       </ul>
     position: left
-  - title: Step 144. PCoA
+  - title: PCoA
     content: >-
       Observe the result. The loadings files will tell you what fraction of the
       total variance in the data are represented by each of the axes. <br>For
@@ -1534,26 +1537,26 @@ steps:
       preserve the distance between samples using a user defined number of
       dimensions. We can run our data through NMDS with 2 dimensions
     backdrop: true
-  - title: Step 145. Nmds
+  - title: Nmds
     element: '#tool-search-query'
     content: Search for Nmds tool
     placement: right
     textinsert: Nmds
-  - title: Step 146. Nmds
+  - title: Nmds
     element: '#tool-search'
     content: Click on the "Nmds" tool to open it
     placement: right
     postclick:
       - >-
         a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmothur_nmds%2Fmothur_nmds%2F1.36.1.0"]
-  - title: Step 147. Nmds
+  - title: Nmds
     element: '#tool-search'
     content: |-
       Execute the tool with  <ul>
         <li>“phylip” to dist files from Dist.shared (collection)</li>
       </ul>
     position: left
-  - title: Step 148. Nmds
+  - title: Nmds
     element: >-
       #current-history-panel .controls .actions a[href$="javascript:void(0);"]
       .fa.fa-check-square-o
@@ -1564,22 +1567,23 @@ steps:
       in the iteration with the lowest stress is reported in the axes file.<br>
       In the logfile we find that the lowest stress value was 0.11 with an
       R-squared value of 0.95; that stress level is actually pretty good.
+    placement: left
   - title: Nmds
     content: You can test what happens with three dimensions now.
     backdrop: true
-  - title: Step 149. Nmds
+  - title: Nmds
     element: '#tool-search-query'
     content: Search for Nmds tool
     placement: right
     textinsert: Nmds
-  - title: Step 150. Nmds
+  - title: Nmds
     element: '#tool-search'
     content: Click on the "Nmds" tool to open it
     placement: right
     postclick:
       - >-
         a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmothur_nmds%2Fmothur_nmds%2F1.36.1.0"]
-  - title: Step 151. Nmds
+  - title: Nmds
     element: '#tool-search'
     content: |-
       Execute the tool with  <ul>
@@ -1593,7 +1597,7 @@ steps:
       Inspect the output <ul>
         <li>What are stress and R-squared values when using 3 dimensions?</li>
       </ul>
-    backdrop: true
+    backdrop: false
   - title: Nmds vs. Pcoa
     content: >-
       In general, we would like a stress value below 0.20 and a value below 0.10
@@ -1611,19 +1615,19 @@ steps:
       treatment. This is done using the distance matrices we created earlier and
       does not actually use ordination.
     backdrop: true
-  - title: Step 152. Amova
+  - title: Amova
     element: '#tool-search-query'
     content: Search for Amova tool
     placement: right
     textinsert: Amova
-  - title: Step 153. Amova
+  - title: Amova
     element: '#tool-search'
     content: Click on the "Amova" tool to open it
     placement: right
     postclick:
       - >-
         a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmothur_amova%2Fmothur_amova%2F1.36.1.0"]
-  - title: Step 154. Amova
+  - title: Amova
     element: '#tool-search'
     content: |-
       Execute the tool with  <ul>
@@ -1631,7 +1635,7 @@ steps:
         <li>“design” to mouse.time.design file from your history</li>
       </ul>
     position: left
-  - title: Step 155. Amova
+  - title: Amova
     content: >-
       Inspect the output logfile. Here we see from the AMOVA that the “cloud”
       early and late time points has a significantly different centroid for this
@@ -1640,19 +1644,19 @@ steps:
       early samples is significantly different from the variation in the late
       samples using the Homova.
     backdrop: false
-  - title: Step 156. Homova
+  - title: Homova
     element: '#tool-search-query'
     content: Search for Homova tool
     placement: right
     textinsert: Homova
-  - title: Step 157. Homova
+  - title: Homova
     element: '#tool-search'
     content: Click on the "Homova" tool to open it
     placement: right
     postclick:
       - >-
         a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmothur_homova%2Fmothur_homova%2F1.36.1.0"]
-  - title: Step 158. Homova
+  - title: Homova
     element: '#tool-search'
     content: |-
       Execute the tool with  <ul>
@@ -1660,7 +1664,7 @@ steps:
         <li>“design” to mouse.time.design file from your history</li>
       </ul>
     position: left
-  - title: Step 159. Homova
+  - title: Homova
     content: >-
       Observe the output. We can see that there is a significant difference in
       the variation with the early samples having a larger amount of variation
@@ -1674,19 +1678,19 @@ steps:
       the relative abundance of each OTU with the two axes in the NMDS dataset.
       We do this with the corr.axes tool
     backdrop: true
-  - title: Step 160. Correlation
+  - title: Correlation
     element: '#tool-search-query'
     content: Search for Corr.axes tool
     placement: right
     textinsert: Corr.axes
-  - title: Step 161. Correlation
+  - title: Correlation
     element: '#tool-search'
     content: Click on the "Corr.axes" tool to open it
     placement: right
     postclick:
       - >-
         a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmothur_corr_axes%2Fmothur_corr_axes%2F1.36.1.0"]
-  - title: Step 162. Correlation
+  - title: Correlation
     element: '#tool-search'
     content: |-
       Execute the tool with  <ul>
@@ -1696,7 +1700,7 @@ steps:
         <li>“numaxes” to 3</li>
       </ul>
     position: left
-  - title: Step 163. Correlation
+  - title: Correlation
     content: >-
       Examining the axes output, we can see that OTUs 1 and 2 are responsible
       for moving points in a negative direction along axis 2. Recalling that we
@@ -1718,19 +1722,19 @@ steps:
       indicating metadata about each sample. For example, we may know the
       weight, height, blood pressure, etc. of the subjects in these samples.
     backdrop: true
-  - title: Step 164. Correlation
+  - title: Correlation
     element: '#tool-search-query'
     content: Search for Corr.axes tool
     placement: right
     textinsert: Corr.axes
-  - title: Step 165. Correlation
+  - title: Correlation
     element: '#tool-search'
     content: Click on the "Corr.axes" tool to open it
     placement: right
     postclick:
       - >-
         a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmothur_corr_axes%2Fmothur_corr_axes%2F1.36.1.0"]
-  - title: Step 166. Correlation
+  - title: Correlation
     element: '#tool-search'
     content: |-
       Execute the tool with  <ul>
@@ -1741,7 +1745,7 @@ steps:
         <li>“numaxes” to 3</li>
       </ul>
     position: left
-  - title: Step 167. Correlation
+  - title: Correlation
     element: >-
       #current-history-panel .controls .actions a[href$="javascript:void(0);"]
       .fa.fa-check-square-o
@@ -1750,26 +1754,27 @@ steps:
       communities shift to in the positive direction along axis 3. Another tool
       we can use is get.communitytype to see whether our data can be partitioned
       in to separate community types.
-  - title: Step 168. Get.communitype
+    placement: left
+  - title: Get.communitytype
     element: '#tool-search-query'
-    content: Search for Get.communitype tool
+    content: Search for Get.communitytype tool
     placement: right
-    textinsert: Get.communitype
-  - title: Step 169. Get.communitype
+    textinsert: Get.communitytype
+  - title: Get.communitytype
     element: '#tool-search'
-    content: Click on the "Get.communitype" tool to open it
+    content: Click on the "Get.communitytype" tool to open it
     placement: right
     postclick:
       - >-
         a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmothur_get_communitytype%2Fmothur_get_communitytype%2F1.36.1.0"]
-  - title: Step 170. Get.communitype
+  - title: Get.communitytype
     element: '#tool-search'
     content: |-
       Execute the tool with  <ul>
         <li>“shared” to Subsample.shared file</li>
       </ul>
     position: left
-  - title: Step 171. Get.communitype
+  - title: Get.communitytype
     content: >-
       Check the output file. We see that the minimum Laplace value is for a K
       value of 2 (9348.28). This indicates that our samples belonged to two
@@ -1785,7 +1790,7 @@ steps:
       <ul>
         <li>What organisms were the top 5 contributing OTUs classified as?</li>
       </ul>
-    backdrop: true
+    backdrop: false
   - title: Population-level Analysis
     content: >-
       In addition to the use of corr.axes and get.communitytype we have several
@@ -1794,19 +1799,19 @@ steps:
       determines whether there are any OTUs that are differentially represented
       between the samples from men and women in this study.
     backdrop: true
-  - title: Step 172. T-test
+  - title: T-test
     element: '#tool-search-query'
     content: Search for Metastats tool
     placement: right
     textinsert: Metastats
-  - title: Step 173. T-test
+  - title: T-test
     element: '#tool-search'
     content: Click on the "Metastats" tool to open it
     placement: right
     postclick:
       - >-
         a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmothur_metastats%2Fmothur_metastats%2F1.36.1.0"]
-  - title: Step 174. T-test
+  - title: T-test
     element: '#tool-search'
     content: |-
       Execute the tool with  <ul>
@@ -1814,7 +1819,7 @@ steps:
         <li>“design” to mouse.time.design</li>
       </ul>
     position: left
-  - title: Step 175. T-test
+  - title: T-test
     element: >-
       #current-history-panel .controls .actions a[href$="javascript:void(0);"]
       .fa.fa-check-square-o
@@ -1822,30 +1827,31 @@ steps:
       Look at the first 5 OTUs from Late-Early output file. These data tell us
       that OTUs 1, 2, and 3 was significantly different between the early and
       late samples.
+    placement: left
   - title: Question
     content: |-
       <ul>
         <li>Which of the top 10 OTUs in your output were significantly different between early and late samples?</li>
       </ul>
-    backdrop: true
+    backdrop: false
   - title: Lefse
     content: >-
       Another non-parametric tool we can use as an alternative to metastats is
       lefse
     backdrop: true
-  - title: Step 176. Lefse
+  - title: Lefse
     element: '#tool-search-query'
     content: Search for Lefse tool
     placement: right
     textinsert: Lefse
-  - title: Step 177. Lefse
+  - title: Lefse
     element: '#tool-search'
     content: Click on the "Lefse" tool to open it
     placement: right
     postclick:
       - >-
         a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmothur_lefse%2Fmothur_lefse%2F1.36.1.0"]
-  - title: Step 178. Lefse
+  - title: Lefse
     element: '#tool-search'
     content: |-
       Execute the tool with  <ul>
@@ -1853,7 +1859,7 @@ steps:
         <li>“design” to mouse.time.design</li>
       </ul>
     position: left
-  - title: Step 179. Lefse
+  - title: Lefse
     element: >-
       #current-history-panel .controls .actions a[href$="javascript:void(0);"]
       .fa.fa-check-square-o
@@ -1861,33 +1867,34 @@ steps:
       Look at the first 5 OTUs again. Again, OTUs 1, 2, and 3 are significantly
       different between the two groups and are significantly elevated in the
       late samples
+    placement: left
   - title: Lefse
     content: >-
       Finally, Mothur has an implementation of the random forest algorithm build
       into her as classify.rf. This will tell us which features (i.e. OTUs) are
       useful in discriminating between the two groups of samples
     backdrop: true
-  - title: Step 180. Classify.rf
+  - title: Classify.rf
     element: '#tool-search-query'
     content: Search for Classify.rf tool
     placement: right
     textinsert: Classify.rf
-  - title: Step 181. Classify.rf
+  - title: Classify.rf
     element: '#tool-search'
     content: Click on the "Classify.rf" tool to open it
     placement: right
     postclick:
       - >-
         a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmothur_classify_rf%2Fmothur_classify_rf%2F1.36.1.0"]
-  - title: Step 182. Classify.rf
+  - title: Classify.rf
     element: '#tool-search'
     content: |-
       Execute the tool with  <ul>
-        <li>“shared” to Subsample.shared>/li>
+        <li>“shared” to Subsample.shared</li>
         <li>“design” to mouse.time.design</li>
       </ul>
     position: left
-  - title: Step 183. Classify.rf
+  - title: Classify.rf
     content: >-
       Check the logfile.
 
@@ -1901,19 +1908,19 @@ steps:
       tools may be used for this. For instance we can convert our shared file to
       the more widely used biom format and view it in a platform like Phinch.
     backdrop: true
-  - title: Step 184. Phinch
+  - title: Phinch
     element: '#tool-search-query'
     content: Search for Make.biom tool
     placement: right
     textinsert: Make.biom
-  - title: Step 185. Phinch
+  - title: Phinch
     element: '#tool-search'
     content: Click on the "Make.biom" tool to open it
     placement: right
     postclick:
       - >-
         a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmothur_make_biom%2Fmothur_make_biom%2F1.36.1.0"]
-  - title: Step 186. Phinch
+  - title: Phinch
     element: '#tool-search'
     content: |-
       Execute the tool with  <ul>
@@ -1922,7 +1929,7 @@ steps:
         <li>“metadata” to mouse.dpw.metadata</li>
       </ul>
     position: left
-  - title: Step 187. Phinch
+  - title: Phinch
     element: >-
       #current-history-panel .controls .actions a[href$="javascript:void(0);"]
       .fa.fa-check-square-o
@@ -1933,22 +1940,23 @@ steps:
       Clicking on this link will lead you to the Phinch website, which will
       automatically load in your file, and where you can several interactive
       visualisations
+    placement: left
   - title: Krona
     content: 'A second tool we can use to visualize our data, is Krona'
     backdrop: true
-  - title: Step 188. Krona
+  - title: Krona
     element: '#tool-search-query'
     content: Search for Krona tool
     placement: right
     textinsert: Krona
-  - title: Step 189. Krona
+  - title: Krona
     element: '#tool-search'
     content: Click on the "Krona" tool to open it
     placement: right
     postclick:
       - >-
         a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fsaskia-hiltemann%2Fkrona_text%2Fkrona-text%2F1"]
-  - title: Step 190. Krona
+  - title: Krona
     element: '#tool-search'
     content: |-
       Execute the tool with  <ul>
@@ -1956,7 +1964,7 @@ steps:
         <li>Set Is this output from mothur? to yes</li>
       </ul>
     position: left
-  - title: Step 191. Krona
+  - title: Krona
     element: >-
       #current-history-panel .controls .actions a[href$="javascript:void(0);"]
       .fa.fa-check-square-o
@@ -1964,12 +1972,13 @@ steps:
       The resulting file is an HTML file containing an interactive
       visualization. For instance try double-clicking the innermost ring labeled
       “Bacteria”
+    placement: left
   - title: Question
     content: |-
       <ul>
         <li>what percentage of your sample was labelled Lactobacillus?</li>
       </ul>
-    backdrop: true
+    backdrop: false
   - title: Conclusion
     content: >-
       You have now seen how to perform the Schloss lab’s Standard Operating
