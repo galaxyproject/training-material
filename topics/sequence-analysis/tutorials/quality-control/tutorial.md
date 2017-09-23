@@ -36,9 +36,9 @@ Sequence quality control is therefore an essential step to take right after rece
 >    > * Press **Start**    
 >    {: .tip}
 >
->    > ### {% icon tip %} Tip: Changing the file type `fastq` to `fastqsanger` once the data file is in your history
+>    > ### {% icon tip %} Tip: Change the file type `fastq` to `fastqsanger` once the data file is in your history
 >    >
->    > * Click on the pencil button displayed in your dataset in the history
+>    > * Click on the pencil button displayed in your data file in the history
 >    > * Choose **Datatype** on the top
 >    > * Select `fastqsanger`
 >    > * Press **save**
@@ -48,7 +48,7 @@ Sequence quality control is therefore an essential step to take right after rece
 >    >
 >    > Rename the dataset to "First dataset"
 >    {: .comment}
-> As default, Galaxy takes the link as name.
+> By default, when data is imported via its link, Galaxy names it with its URL.
 {: .hands_on}
 
 # Quality checking of the sequences
