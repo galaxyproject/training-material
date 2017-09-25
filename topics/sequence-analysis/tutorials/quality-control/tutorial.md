@@ -168,19 +168,19 @@ Now, we take a look at the impact of quality control and treatment on a bad data
 >
 > 1. Create a new history
 > 2. Import the FASTQ file: [`GSM461182_untreat_single_subset`](https://zenodo.org/record/61771/files/GSM461182_untreat_single_subset.fastq)
-> 3. **FastQC** {% icon tool %}: Run FastQC on this new dataset
+> 3. **FastQC** {% icon tool %}: Run FastQC on the newly imported dataset
 >
 >    > ### {% icon question %} Questions
 >    >
 >    > 1. How good is this dataset?
->    > 2. What must be done to improve the sequences?
+>    > 2. What needs to be done to improve the sequences?
 >    >
 >    >    <details>
 >    >    <summary>Click to view answers</summary>
 >    >    <ol type="1">
->    >    <li>There is red warning for the per base sequence quality (pretty bad along the sequence but worst at the end of sequences), the per base sequence content (bad at the beginning of the sequences), the per sequence GC content. </li>
+>    >    <li>There is a red warning on the per-base sequence quality (pretty bad along the sequence but worse at the end of sequences), the per-base sequence content (bad at the beginning of the sequences), and the per-sequence GC content</li>
 >    >    <li>The end of sequences must be cut.</li>
->    >    <li>Generally, 5' ends of the reads are not of bad quality unless there is something went wrong. The problem with this particular data set is that it was sequenced using the old Illumina sequencing machine. The machine calibrates while reading fragments that are in the beginning of the flowcell. Unfortunately, the first 100k reads which we selected for the analysis are generated during the calibration. But with the latest sequencing machines, usually we do not see this problem. If you used latest sequencing machine and still see bad quality bases in the beginning of the reads, please investigate and not just trim them.</li>
+>    >    <li>Generally, the 5' end of each sequence read is not of bad quality unless something went wrong. Here, the problem is that the sample was sequenced using the an Illumina sequencing machine, which carries out its calibration while reading fragments that are in the beginning of the flowcell. Unfortunately, the first 100k reads which we selected for the analysis are generated during the calibration, a problem that we don't have with more recent sequencing machines. However, if you adopted one of the latest sequencing machine and still experience bad quality bases at the beginning of the reads, please don't just trim them, but consider investigating the problem further</li>
 >    >    </ol>
 >    >    </details>
 >    {: .question}
