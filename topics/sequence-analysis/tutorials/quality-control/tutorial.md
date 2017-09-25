@@ -99,9 +99,9 @@ To estimate sequence quality and how to further filter raw data, different indic
 >    {: .question}
 {: .hands_on}
 
-# Improvement of the quality of the sequences
+# Improvement of sequence quality
 
-Based on previous quality graphs, sequences must be treated to obtain good dataset and then the bias in downstream analysis.
+Based on the informations provided by the quality graphs, the sequences must to be treated to avoid bias in downstream analyis.
 
 In general, quality treatments are:
 
@@ -116,7 +116,7 @@ In general, quality treatments are:
     - tails
     - ...
 
-To improve the quality of the sequences, we use [Trim Galore!](https://www.bioinformatics.babraham.ac.uk/projects/trim_galore/) tool. It automates quality and adapter trimming as well as quality control.
+To improve the overall sequence quality, we use the [Trim Galore!](https://www.bioinformatics.babraham.ac.uk/projects/trim_galore/) tool. This tool enhances sequence quality by automating adapter trimming as well as quality control.
 
 > ### {% icon hands_on %} Hands-on: Quality treatment and re-checking
 >
