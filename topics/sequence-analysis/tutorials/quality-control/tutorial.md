@@ -133,32 +133,32 @@ To improve the overall sequence quality, we use the [Trim Galore!](https://www.b
 >    > <li>​
 If you know which adapter sequence was used during library preparation, provide its sequence. Otherwise use the option for automatic detection and trimming of adapter sequences</li>
 >    > <li>Trimming low-quality ends (below 20) from reads in addition to adapter removal</li>
->    > <li>Option for required overlap (in bp) with adapter sequence can be tweaked. The default value "1" is too stringent, and on average 25% of reads will be trimmed. Please set it to 5 bases to loose the required overlap.</li>
+>    > <li>Option for required overlap (in bp) with adapter sequence can be tweaked. The default value "1" is too stringent, and on average 25% of reads will be trimmed. Please set it to 5 bases to loose the required overlap</li>
 >    > <li>Removing reads shorter than 20 bp</li>
 >    > </ul>
 >    > </details>
 >    {: .question}
 >
-> 2. **FastQC** {% icon tool %}: Re-run FastQC on the quality controlled data file and inspect the new FastQC report
+> 2. **FastQC** {% icon tool %}: Re-run FastQC on the quality controlled data, and inspect the new FastQC report
 >
 >    > ### {% icon question %} Questions
 >    >
 >    > 1. How many sequences have been removed?
->    > 2. Has the quality of the sequences been improved?
->    > 3. Can you explain why the per base sequence content is not good now?
+>    > 2. Has sequence quality been improved?
+>    > 3. Can you explain why the per-base sequence content is not good now?
 >    >
 >    >    <details>
 >    >    <summary>Click to view answers</summary>
 >    >    <ol type="1">
->    >    <li>Before Trim Galore, the dataset was made of 100,000 sequences. After Trim Galore, there is 99,653 sequences.</li>
->    >    <li>The per base quality score is better but other indicators are bad now. The sequence length distribution is not clear as before because sequences have different size after the trimming</li>
->    >    <li>The per base sequence content is red now. The trimming of the end of some sequences may have biased </li>
+>    >    <li>Before Trim Galore, the dataset comprised 100,000 sequences. After Trim Galore, there are 99,653 sequences</li>
+>    >    <li>The per-base quality score looks better, but other indicators show bad values now. The sequence length distribution is not clear anymore because sequences have different size after the trimming operation</li>
+>    >    <li>The per-base sequence content has turned red. Again, the cause is the trimming of the end of some sequences</li>
 >    >    </ol>
 >    >    </details>
 >    {: .question}
 {: .hands_on}
 
-The quality of the previous dataset was pretty good from beginning. The quality treatment improved the quality score but to the cost of other parameters.
+The quality of the previous dataset was pretty good from beginning. The sequence quality treatment improved the quality score at the cost of other parameters.
 
 # Control the quality of a second dataset
 
