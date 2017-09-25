@@ -146,16 +146,16 @@ This graph will only appear with Illumina libraries which retain their original 
 ---
 
 ### Also to check: Sequence content
-#### Per base sequence content
+#### Per-base sequence content
 
 ![](../../images/per_base_sequence_content.png)
 
 ???
-Per Base Sequence Content checks out the proportion of each base position in a sequence file for which each of the four normal DNA bases has been called. In a random library there would be little to no difference between the different bases of a sequence run. The relative amount of each base should reflect the overall amount of these bases, but in any case they should not be hugely imbalanced from each other. It’s worth noting that some types of library will always produce biased sequence composition, normally at the start of the read. Libraries produced by priming using random hexamers (including nearly all RNA-Seq libraries) and those which were fragmented using transposases inherit an intrinsic bias in the positions at which reads start. This bias does not concern an absolute sequence, but instead provides enrichment of a number of different K-mers at the 5’ end of the reads. Whilst this is a true technical bias, it isn’t something which can be corrected by trimming and in most cases doesn’t seem to adversely affect the downstream analysis. It will however produce a warning or error in this module.
+The per-base sequence content highlights the proportion of each base in each position of a sequence for which each of the four DNA bases have been called. In a random library there would be little to no difference between the different bases of a sequence run. The relative amount of each base should reflect the overall amount of these bases, but in any case they should not be hugely imbalanced from one another. It is worth noting that some types of libraries will always produce biased sequence composition, normally at the start of the read. Libraries produced by priming with random hexamers (including nearly all RNA-Seq libraries) and those which were fragmented using transposases, inherit an intrinsic bias in the positions at which the reads start. This bias does not concern an absolute sequence, but instead provides an enrichment of a number of different K-mers at the 5’ end of the reads. Whilst this is a true technical bias, it isn’t something which can be corrected by trimming and in most cases doesn’t seem to adversely affect the downstream analysis. It will however produce a warning or error in this module.
 
 There are a number of common scenarios for these issues:
 
-- Overrepresented sequences:
+- Overrepresented sequences
 - Biased fragmentation
 - Biased composition libraries
 - Aggressive adapter trimming
