@@ -185,7 +185,7 @@ Now, we take a look at the impact of quality control and treatment on a bad data
 >    >    </details>
 >    {: .question}
 >
-> 3. **Trim Galore** {% icon tool %}: Run Trim Galore on the new dataset to fit the previous choices
+> 3. **Trim Galore** {% icon tool %}: Run Trim Galore on the new dataset to apply the decisions taken at the previous step
 > 4. **FastQC** {% icon tool %}: Re-run FastQC to check the impact of Trim Galore
 >
 >    > ### {% icon question %} Questions
