@@ -260,7 +260,7 @@ We will explain GitHub flow later and show you now how to start keeping track of
 
 <p>The content of the tutorial will go in the <code class="highlighter-rouge">tutorial.md</code>. The syntax of this file is really simple., as well as its structure:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>---
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>---
 layout: tutorial_hands_on
 topic_name: training
 tutorial_name: create-new-tutorial
@@ -290,8 +290,7 @@ blabla
 {:.no_toc}
 
 blabla
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h3 id="some-metadata-on-the-top">Some metadata on the top</h3>
 
@@ -357,9 +356,8 @@ no need to add the name of the tutorial: it is automatically added based on the 
 
   <p>“Figure” and the number are automatically added and the caption is added by adding the information in the markdown call of the image:</p>
 
-  <div class="highlighter-rouge"><pre class="highlight"><code>  ![A textual description of the image](../images/image.png "This is my super caption")
-</code></pre>
-  </div>
+  <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  ![A textual description of the image](../images/image.png "This is my super caption")
+</code></pre></div>  </div>
 
   <p>We can also cross-reference the figure inside our markdown with an anchor. For example, we can link to <a href="#figure-1">the previous figure</a> using <code class="highlighter-rouge">[the display text](#figure-nb)</code> (with changing <code class="highlighter-rouge">nb</code> to the figure number).</p>
 </blockquote>
@@ -395,11 +393,10 @@ This can be avoided by using the <code class="highlighter-rouge">\vert</code> co
 
 <p>They are defined always with the same structure:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>&gt; ### &lt;an emoji&gt; Type of box: Name of the box
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt; ### &lt;an emoji&gt; Type of box: Name of the box
 &gt; list
 {: .type_of_box}
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>This structure needs to be respected otherwise it would not be interpreted correctly by the templating system. The different defined boxes are:</p>
 
@@ -435,7 +432,7 @@ This can be avoided by using the <code class="highlighter-rouge">\vert</code> co
 
     <p>The second box in most of the tutorial is the agenda box at the end of the introduction. It indicates the plan of the tutorial</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code>  &gt; ### Agenda
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  &gt; ### Agenda
   &gt;
   &gt; In this tutorial, we will deal with:
   &gt;
@@ -443,12 +440,11 @@ This can be avoided by using the <code class="highlighter-rouge">\vert</code> co
   &gt; {:toc}
   &gt;
   {: .agenda}
-</code></pre>
-    </div>
+</code></pre></div>    </div>
 
     <p>No need to fill the list: it will be done automatically based on the title of the sections.</p>
 
-    <p>To avoid to add the “Introduction” and “Conclusion”, we add <code class="highlighter-rouge"><span class="p">{</span><span class="err">:.no_toc</span><span class="p">}</span></code> below the section name.</p>
+    <p>To avoid to add the “Introduction” and “Conclusion”, we add <code class="highlighter-rouge">{:.no_toc}</code> below the section name.</p>
 
     <figure id="figure-2"><img src="../../../../shared/images/tutorial_agenda_box.png" alt="Example of agenda box" title="Example of agenda box" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Example of agenda box</figcaption></figure>
 
@@ -465,12 +461,11 @@ This can be avoided by using the <code class="highlighter-rouge">\vert</code> co
 
     <p>We think that doing is important in the learning process. So we emphasize it by adding regularly some hands-on sections where the trainees can do by themselves some analyses. We designed some special boxes to make these sections easy to find.</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code>  &gt; ### &lt;i class="fa fa-pencil" aria-hidden="true"&gt;&lt;/i&gt; Hands-on: Sorting BAM dataset
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  &gt; ### &lt;i class="fa fa-pencil" aria-hidden="true"&gt;&lt;/i&gt; Hands-on: Sorting BAM dataset
   &gt;
   &gt; 1. **Sort BAM dataset** &lt;i class="fa fa-wrench" aria-hidden="true"&gt;&lt;/i&gt;: Sort the paired-end BAM file by "Read names" with **Sort BAM
   {: .hands_on}
-</code></pre>
-    </div>
+</code></pre></div>    </div>
 
     <figure id="figure-3"><img src="../../../../shared/images/tutorial_hand_on_box.png" alt="Example of hands-on box" title="Example of hands-on box" /><figcaption><span class="figcaption-prefix">Figure 3:</span> Example of hands-on box</figcaption></figure>
 
@@ -498,7 +493,7 @@ This can be avoided by using the <code class="highlighter-rouge">\vert</code> co
     <p>The questions are then to force the trainees to think about what they are currently doing and to put things in perspective.
  They are also a way to help the instructors to expose and clearify misunderstanding earily on.</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code> &gt; ### &lt;i class="fa fa-question-circle" aria-hidden="true"&gt;&lt;/i&gt; Questions
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> &gt; ### &lt;i class="fa fa-question-circle" aria-hidden="true"&gt;&lt;/i&gt; Questions
  &gt;
  &gt; 1. Why are some tests filtered?
  &gt; 2. Does it improve the *p*-value distribution?
@@ -508,8 +503,7 @@ This can be avoided by using the <code class="highlighter-rouge">\vert</code> co
  &gt;    Content goes here.
  &gt;    &lt;/details&gt;
  {: .question}
-</code></pre>
-    </div>
+</code></pre></div>    </div>
 
     <figure id="figure-4"><img src="../../../../shared/images/tutorial_question_box.png" alt="Example of question box" title="Example of question box" /><figcaption><span class="figcaption-prefix">Figure 4:</span> Example of question box</figcaption></figure>
 
@@ -529,7 +523,7 @@ This can be avoided by using the <code class="highlighter-rouge">\vert</code> co
   <li>
     <p>Tips</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code>  &gt; ### &lt;i class="fa fa-lightbulb-o" aria-hidden="true"&gt;&lt;/i&gt; Tip: Importing data via links
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  &gt; ### &lt;i class="fa fa-lightbulb-o" aria-hidden="true"&gt;&lt;/i&gt; Tip: Importing data via links
   &gt;
   &gt; * Copy the link location
   &gt; * Open the Galaxy Upload Manager
@@ -537,20 +531,18 @@ This can be avoided by using the <code class="highlighter-rouge">\vert</code> co
   &gt; * Paste the link into the text field
   &gt; * Press **Start**
   {: .tip}
-</code></pre>
-    </div>
+</code></pre></div>    </div>
 
     <figure id="figure-5"><img src="../../../../shared/images/tutorial_tip_box.png" alt="Example of tip box" title="Example of tip box" /><figcaption><span class="figcaption-prefix">Figure 5:</span> Example of tip box</figcaption></figure>
   </li>
   <li>
     <p>Comments</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code>  &gt; ### &lt;i class="fa fa-commenting-o" aria-hidden="true"&gt;&lt;/i&gt; Comments
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  &gt; ### &lt;i class="fa fa-commenting-o" aria-hidden="true"&gt;&lt;/i&gt; Comments
   &gt; - Edit the "Database/Build" to select "dm3"
   &gt; - Rename the datasets according to the samples
   {: .comment}
-</code></pre>
-    </div>
+</code></pre></div>    </div>
 
     <figure id="figure-6"><img src="../../../../shared/images/tutorial_comment_box.png" alt="Example of comment box" title="Example of comment box" /><figcaption><span class="figcaption-prefix">Figure 6:</span> Example of comment box</figcaption></figure>
   </li>
@@ -564,7 +556,7 @@ This can be avoided by using the <code class="highlighter-rouge">\vert</code> co
 <p>To render the boxes correctly, the syntax needs to be correct. If it does not work have a look at similar tutorials and get inspiration.
 The boxes can be nested, <em>e.g.</em> for having tips inside a hands-on:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>&gt; ### &lt;i class="fa fa-pencil" aria-hidden="true"&gt;&lt;/i&gt; Hands-on: Defining the topic for the tutorial
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt; ### &lt;i class="fa fa-pencil" aria-hidden="true"&gt;&lt;/i&gt; Hands-on: Defining the topic for the tutorial
 &gt;
 &gt; 1. Search for NCBI Blast+ on the [ToolShed](https://toolshed.g2.bx.psu.edu/)
 &gt; 2. Check in which category it is
@@ -580,8 +572,7 @@ The boxes can be nested, <em>e.g.</em> for having tips inside a hands-on:</p>
 &gt;    &gt;    &lt;/details&gt;
 &gt;    {: .question}
 {: .hands_on}
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h1 id="adding-slides-optional">Adding slides (optional)</h1>
 
@@ -594,7 +585,7 @@ to serve on the website slides related to the tutorial.</p>
 
 <p>We can now fill the <code class="highlighter-rouge">slides.html</code> file:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>---
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>---
 layout: tutorial_slides
 topic_name: "sequence-analysis"
 tutorial_name: search-similarity
@@ -612,8 +603,7 @@ logo: "GTN"
 ---
 
 ### Next slide
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>On the top, as for the <code class="highlighter-rouge">tutorial.md</code>, we need to define some metadata to link the slides to the correct tutorial. The metadata of the tutorial can then be used also to automatically fill the first slides (with the title, the requirements,…)  and the last slide (take-home message).</p>
 

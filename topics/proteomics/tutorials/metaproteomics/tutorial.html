@@ -462,15 +462,14 @@ will store the created database in the history, allowing to reuse it directly.</
         <li>
           <p><strong>SQL Query to generate tabular output</strong>:</p>
 
-          <div class="highlighter-rouge"><pre class="highlight"><code>SELECT distinct sequence
+          <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT distinct sequence
 
 FROM psm
 
 WHERE validation IS NOT 'Confident' AND confidence &gt;= 95
 
 ORDER BY sequence
-</code></pre>
-          </div>
+</code></pre></div>          </div>
         </li>
       </ul>
 
@@ -523,7 +522,7 @@ Therefore we can search the database for the peptides and count the occurrence w
         <li>
           <p><strong>SQL Query</strong>:</p>
 
-          <div class="highlighter-rouge"><pre class="highlight"><code>SELECT sequence as "peptide", count(id) as "PSMs"
+          <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT sequence as "peptide", count(id) as "PSMs"
 
 FROM psm
 
@@ -532,8 +531,7 @@ WHERE validation IS NOT 'Confident' AND confidence &gt;= 95
 GROUP BY sequence
 
 ORDER BY sequence
-</code></pre>
-          </div>
+</code></pre></div>          </div>
         </li>
       </ul>
     </li>
@@ -669,7 +667,7 @@ once again used, aggregating the number of peptides and PSMs for each genus leve
         <li>
           <p><strong>SQL Query to generate tabular output</strong>:</p>
 
-          <div class="highlighter-rouge"><pre class="highlight"><code>SELECT lca.genus,count(psm.sequence) as "PSMs",count(distinct psm.sequence) as "DISTINCT PEPTIDES"
+          <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT lca.genus,count(psm.sequence) as "PSMs",count(distinct psm.sequence) as "DISTINCT PEPTIDES"
 
 FROM psm LEFT JOIN lca ON psm.sequence = lca.peptide
 
@@ -678,8 +676,7 @@ WHERE validation IS NOT 'Confident' AND confidence &gt;= 95
 GROUP BY lca.genus
 
 ORDER BY PSMs desc, 'DISTINCT PEPTIDES' desc
-</code></pre>
-          </div>
+</code></pre></div>          </div>
         </li>
         <li><strong>Omit column headers from tabular output</strong>: <code class="highlighter-rouge">No</code></li>
       </ul>
@@ -951,7 +948,7 @@ for each protein.</p>
         <li>
           <p><strong>SQL Query to generate tabular output</strong>:</p>
 
-          <div class="highlighter-rouge"><pre class="highlight"><code>SELECT g.description, count(distinct b.peptide) as "bering_peptides", count(distinct b.id) as "bering_psms"
+          <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT g.description, count(distinct b.peptide) as "bering_peptides", count(distinct b.id) as "bering_psms"
 
 FROM go as g JOIN
 
@@ -968,8 +965,7 @@ WHERE g.aspect = 'biological_process'
 GROUP BY g.description
 
 ORDER BY  bering_peptides desc,bering_psms desc
-</code></pre>
-          </div>
+</code></pre></div>          </div>
         </li>
         <li><strong>Omit column headers from tabular output</strong>: <code class="highlighter-rouge">No</code></li>
       </ul>

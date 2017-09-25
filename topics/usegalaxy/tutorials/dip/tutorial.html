@@ -177,15 +177,14 @@ MathJax.Hub.Config({
 
 <p>Consider a set of sequencing reads derived from a diploid individual:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>REFERENCE: atcatgacggcaGtagcatat
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>REFERENCE: atcatgacggcaGtagcatat
 --------------------------------
 READ1:     atcatgacggcaGtagcatat
 READ2:         tgacggcaGtagcatat
 READ3:     atcatgacggcaAtagca
 READ4:            cggcaGtagcatat
 READ5:     atcatgacggcaGtagc
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>The capitalized position contains a G → A <a href="https://en.wikipedia.org/wiki/Transition_(genetics)">transition</a>. So, in principle this can be a heterozygous site with two alleles <strong>G</strong> and <strong>A</strong>. A commonly used naïve procedure would define a site as <em>heterozygous</em> if there is a non-reference allele with frequency between 20% and 80%. In this case <strong>A</strong> is present in 1/5 or 20% of the cases, so we can say that this is a heterozygous site. Yet it is only represented by a single read and thus is hardly reliable. Here are some of the possibilities that would explain this <em>variant</em>. It can be:</p>
 
@@ -385,16 +384,14 @@ Make sure the top part of the interface looks like shown below. Here we selected
 
 <p><strong>Before:</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>chr19 618851 . TAGG CAGA 81.7546
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>chr19 618851 . TAGG CAGA 81.7546
+</code></pre></div></div>
 
 <p><strong>After:</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>chr19 618851 . T C 81.7546
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>chr19 618851 . T C 81.7546
 chr19 618854 . G A 81.7546
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h3 id="annotating-variants-with-snpeff">Annotating variants with SnpEff</h3>
 
@@ -494,9 +491,8 @@ chr19 618854 . G A 81.7546
 
   <p>To answer this question we will type the following query:</p>
 
-  <div class="highlighter-rouge"><pre class="highlight"><code>SELECT count(*) FROM variants WHERE in_dbsnp == 0
-</code></pre>
-  </div>
+  <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT count(*) FROM variants WHERE in_dbsnp == 0
+</code></pre></div>  </div>
 
   <p>into <strong>The query to be issued to the database</strong> field of the interface:</p>
 
@@ -511,15 +507,13 @@ chr19 618854 . G A 81.7546
 
   <p>To answer this type:</p>
 
-  <div class="highlighter-rouge"><pre class="highlight"><code>SELECT * FROM variants WHERE filter is NULL and gene = 'POLRMT'
-</code></pre>
-  </div>
+  <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT * FROM variants WHERE filter is NULL and gene = 'POLRMT'
+</code></pre></div>  </div>
 
   <p>The above query will produce <a href="https://usegalaxy.org/datasets/bbd44e69cb8906b5a0bb5b2cc0695697/display/?preview=True">output</a> with very large number of columns. To restrict the number of columns to a manageable set let’s use this command (you may need to scroll sideways):</p>
 
-  <div class="highlighter-rouge"><pre class="highlight"><code>SELECT rs_ids, aaf_esp_ea, impact, clinvar_disease_name, clinvar_sig FROM variants WHERE filter is NULL and gene = 'POLRMT'
-</code></pre>
-  </div>
+  <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT rs_ids, aaf_esp_ea, impact, clinvar_disease_name, clinvar_sig FROM variants WHERE filter is NULL and gene = 'POLRMT'
+</code></pre></div>  </div>
 
   <p>(column definitions can be found <a href="https://gemini.readthedocs.org/en/latest/content/database_schema.html">here</a>)</p>
 
@@ -544,15 +538,13 @@ chr19 618854 . G A 81.7546
 
   <p>To answer this we will use two fields of <strong>GEMINI_query</strong> interface. In the <strong>The query to be issued to the database</strong> we will type:</p>
 
-  <div class="highlighter-rouge"><pre class="highlight"><code>SELECT * from variants
-</code></pre>
-  </div>
+  <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT * from variants
+</code></pre></div>  </div>
 
   <p>and in the field <strong>Restrictions to apply to genotype values</strong> we will enter:</p>
 
-  <div class="highlighter-rouge"><pre class="highlight"><code>gt_types.HG002_NA24385_son &lt;&gt; HOM_REF
-</code></pre>
-  </div>
+  <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gt_types.HG002_NA24385_son &lt;&gt; HOM_REF
+</code></pre></div>  </div>
 
   <p><img src="../../images/gemini_query2.png" alt="GEMINI queries" /></p>
 
@@ -565,15 +557,13 @@ chr19 618854 . G A 81.7546
 
   <p>To answer this we will type the same expression</p>
 
-  <div class="highlighter-rouge"><pre class="highlight"><code>SELECT * from variants
-</code></pre>
-  </div>
+  <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT * from variants
+</code></pre></div>  </div>
 
   <p>into <strong>The query to be issued to the database</strong> field and</p>
 
-  <div class="highlighter-rouge"><pre class="highlight"><code>(gt_types.HG002_NA24385_son &lt;&gt; HOM_REF AND gt_types.HG003_NA24149_father &lt;&gt; HOM_REF)
-</code></pre>
-  </div>
+  <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(gt_types.HG002_NA24385_son &lt;&gt; HOM_REF AND gt_types.HG003_NA24149_father &lt;&gt; HOM_REF)
+</code></pre></div>  </div>
 
   <p>into <strong>Restrictions to apply to genotype values</strong>.</p>
 
@@ -586,15 +576,13 @@ chr19 618854 . G A 81.7546
 
   <p>Type the following:</p>
 
-  <div class="highlighter-rouge"><pre class="highlight"><code>SELECT gts.HG002_NA24385_son, gts.HG003_NA24149_father from variants
-</code></pre>
-  </div>
+  <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT gts.HG002_NA24385_son, gts.HG003_NA24149_father from variants
+</code></pre></div>  </div>
 
   <p>into <strong>The query to be issued to the database</strong> and</p>
 
-  <div class="highlighter-rouge"><pre class="highlight"><code>(gt_types.HG002_NA24385_son &lt;&gt; HOM_REF AND gt_types.HG003_NA24149_father &lt;&gt; HOM_REF)
-</code></pre>
-  </div>
+  <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(gt_types.HG002_NA24385_son &lt;&gt; HOM_REF AND gt_types.HG003_NA24149_father &lt;&gt; HOM_REF)
+</code></pre></div>  </div>
 
   <p>into <strong>Restrictions to apply to genotype values</strong>. Output will look like <a href="https://usegalaxy.org/datasets/bbd44e69cb8906b543c67f80be21ed02/display/?preview=True">this</a>.</p>
 
@@ -604,9 +592,8 @@ chr19 618854 . G A 81.7546
 
 <p>Wilcards simply writing SQL expressions when searching across multiple terms. The syntax for genotype filter wilcards is</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>(COLUMN).(SAMPLE_WILDCARD).(SAMPLE_WILDCARD_RULE).(RULE_ENFORCEMENT)
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(COLUMN).(SAMPLE_WILDCARD).(SAMPLE_WILDCARD_RULE).(RULE_ENFORCEMENT)
+</code></pre></div></div>
 
 <p>Let’s try a few examples.</p>
 
@@ -615,15 +602,13 @@ chr19 618854 . G A 81.7546
 
   <p>Type</p>
 
-  <div class="highlighter-rouge"><pre class="highlight"><code>SELECT chrom, start, end, ref, alt, gene, impact, (gts).(*) FROM variants
-</code></pre>
-  </div>
+  <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT chrom, start, end, ref, alt, gene, impact, (gts).(*) FROM variants
+</code></pre></div>  </div>
 
   <p>into <strong>The query to be issued to the database</strong> and</p>
 
-  <div class="highlighter-rouge"><pre class="highlight"><code>(gt_types).(*).(==HET).(all)
-</code></pre>
-  </div>
+  <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(gt_types).(*).(==HET).(all)
+</code></pre></div>  </div>
 
   <p>into <strong>Restrictions to apply to genotype values</strong>. Here we use wildcards for the query</p>
 

@@ -250,10 +250,9 @@
 
 <p><strong>MarkDuplicates</strong> produces a BAM dataset with duplicates removed and also a metrics file. Let’s take a look at the metrics data:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>raw_child-ds-	55	27551	55	50	1658	0	0.061026	219628
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>raw_child-ds-	55	27551	55	50	1658	0	0.061026	219628
 raw_mother-ds-	96	54972	96	90	4712	0	0.086459	302063
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>where columns are:</p>
 
@@ -275,14 +274,13 @@ raw_mother-ds-	96	54972	96	90	4712	0	0.086459	302063
 
 <p>Left aligning of indels (a variant of re-aligning) is extremely important for obtaining accurate variant calls. This concept, while not difficult, requires some explanation. For illustrating how left-aligning works we expanded on an example provided by <a href="https://academic.oup.com/bioinformatics/article/31/13/2202/196142/Unified-representation-of-genetic-variants">Tan:2015</a>. Suppose you have a reference sequence and a sequencing read:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>Reference GGGCACACACAGGG
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Reference GGGCACACACAGGG
 Read      GGGCACACAGGG
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>If you look carefully you will see that the read is simply missing a <code class="highlighter-rouge">CA</code> repeat. But it is not apparent to a mapper, so some of possible alignments and corresponding variant calls include:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>Alignment                 Variant Call
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Alignment                 Variant Call
 
 GGGCACACACAGGG            Ref: CAC
 GGGCAC--ACAGGG            Alt: C
@@ -292,8 +290,7 @@ GGGCA--CACAGGG            Alt: A
 
 GGGCACACACAGGG            Ref: GCA
 GGG--CACACAGGG            Alt: G
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>The last of these is <em>left-aligned</em>. In this case gaps (dashes) as moved as far left as possible (for a formal definition of left-alignment and variant normalization see <a href="https://bioinformatics.oxfordjournals.org/content/31/13/2202.abstract">Tan:2015</a>).</p>
 
@@ -378,7 +375,7 @@ GGG--CACACAGGG            Alt: G
 
 <p>This will produce a <a href="https://samtools.github.io/hts-specs/VCFv4.2.pdf">VCF dataset</a> shows below (you may need to scroll sideways to see it in full). It lists 30 sites of interest (everything starting with a <code class="highlighter-rouge">#</code> is a comment):</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>Chrom	Pos	ID	Ref	Alt	Qual	Filter	Info	Format	data
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Chrom	Pos	ID	Ref	Alt	Qual	Filter	Info	Format	data
 ##fileformat=VCFv4.1
 ##fileDate=20161108
 ##source=freeBayes v0.9.20
@@ -467,8 +464,7 @@ chrM	14793	.	A	G	58080	.	AB=0;ABP=0;AC=4;AF=1;AN=4;AO=1967;CIGAR=1X;DP=1998;DPB=
 chrM	15301	.	G	A	76440.4	.	AB=0;ABP=0;AC=4;AF=1;AN=4;AO=2590;CIGAR=1X;DP=2644;DPB=2644;DPRA=0;EPP=3.76487;EPPR=7.94546;GTI=0;LEN=1;MEANALT=3;MQM=60;MQMR=60;NS=2;NUMALT=1;ODDS=1170.15;PAIRED=1;PAIREDR=1;PAO=0;PQA=0;PQR=0;PRO=0;QA=85385;QR=292;RO=11;RPL=1134;RPP=89.9396;RPPR=4.78696;RPR=1456;RUN=1;SAF=1194;SAP=37.2206;SAR=1396;SRF=3;SRP=7.94546;SRR=8;TYPE=snp;technology.ILLUMINA=1	GT:DP:RO:QR:AO:QA:GL	1/1:726:5:116:709:23434:-2098.78,-192.286,0	1/1:1918:6:176:1881:61951:-5559.91,-535.386,0
 chrM	15326	.	A	G	79542.1	.	AB=0;ABP=0;AC=4;AF=1;AN=4;AO=2574;CIGAR=1X;DP=2586;DPB=2586;DPRA=0;EPP=3.76956;EPPR=5.18177;GTI=0;LEN=1;MEANALT=3;MQM=60;MQMR=60;NS=2;NUMALT=1;ODDS=1207.35;PAIRED=1;PAIREDR=1;PAO=0;PQA=0;PQR=0;PRO=0;QA=88636;QR=86;RO=4;RPL=1116;RPP=101.683;RPPR=5.18177;RPR=1458;RUN=1;SAF=1198;SAP=29.7395;SAR=1376;SRF=0;SRP=11.6962;SRR=4;TYPE=snp;technology.ILLUMINA=1	GT:DP:RO:QR:AO:QA:GL	1/1:715:2:50:710:24322:-2184.63,-204.389,0	1/1:1871:2:36:1864:64314:-5785.22,-552.228,0
 
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h1 id="filtering-vcf-data">Filtering VCF data</h1>
 
@@ -513,14 +509,13 @@ chrM	15326	.	A	G	79542.1	.	AB=0;ABP=0;AC=4;AF=1;AN=4;AO=2574;CIGAR=1X;DP=2586;DP
 
 <p>The resulting VCF only contains five variants (most comments fields are omitted here):</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>#CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO	FORMAT	raw_child-ds-	raw_mother-ds-
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO	FORMAT	raw_child-ds-	raw_mother-ds-
 chrM	3243	.	A	G	46067	.	AB=0.612338;ABP=290.859;AC=2;AF=0.5;AN=4;AO=1608;CIGAR=1X;DP=2626;DPB=2626;DPRA=0;EPP=31.0126;EPPR=64.3549;GTI=0;LEN=1;MEANALT=2;MQM=59.9627;MQMR=59.815;NS=2;NUMALT=1;ODDS=1288.98;PAIRED=1;PAIREDR=1;PAO=0;PQA=0;PQR=0;PRO=0;QA=53165;QR=35336;RO=1011;RPL=974;RPP=159.119;RPPR=763.402;RPR=634;RUN=1;SAF=558;SAP=329.898;SAR=1050;SRF=383;SRP=131.935;SRR=628;TYPE=snp;technology.ILLUMINA=1	GT:DP:RO:QR:AO:QA:GL	0/1:1068:221:7574:841:27395:-2380.4,0,-596.524	0/1:1558:790:27762:767:25770:-2317.69,0,-2496.98
 chrM	3483	.	G	C	685.467	.	AB=0.254386;ABP=182.214;AC=1;AF=0.25;AN=4;AO=127;CIGAR=1X;DP=550;DPB=550;DPRA=0;EPP=37.6342;EPPR=22.2028;GTI=1;LEN=1;MEANALT=1.5;MQM=59.4646;MQMR=59.8504;NS=2;NUMALT=1;ODDS=25.0865;PAIRED=1;PAIREDR=1;PAO=0;PQA=0;PQR=0;PRO=0;QA=2032;QR=13200;RO=421;RPL=87;RPP=40.7802;RPPR=245.89;RPR=40;RUN=1;SAF=1;SAP=270.17;SAR=126;SRF=321;SRP=254.927;SRR=100;TYPE=snp;technology.ILLUMINA=1	GT:DP:RO:QR:AO:QA:GL	0/0:208:166:5264:40:608:-35.5966,0,-454.8	0/1:342:255:7936:87:1424:-108.297,0,-694.524
 chrM	3488	.	T	A	682.097	.	AB=0.264706;ABP=166.509;AC=1;AF=0.25;AN=4;AO=130;CIGAR=1X;DP=546;DPB=546;DPRA=0;EPP=44.7694;EPPR=34.7681;GTI=1;LEN=1;MEANALT=1;MQM=59.4231;MQMR=59.7139;NS=2;NUMALT=1;ODDS=17.5994;PAIRED=1;PAIREDR=1;PAO=0;PQA=0;PQR=0;PRO=0;QA=2069;QR=13578;RO=416;RPL=90;RPP=44.7694;RPPR=211.806;RPR=40;RUN=1;SAF=0;SAP=285.302;SAR=130;SRF=315;SRP=242.06;SRR=101;TYPE=snp;technology.ILLUMINA=1	GT:DP:RO:QR:AO:QA:GL	0/0:206:166:5535:40:650:-39.5324,0,-479.353	0/1:340:250:8043:90:1419:-109.544,0,-705.868
 chrM	5539	.	A	G	11837	.	AB=0.479167;ABP=6.26751;AC=2;AF=0.5;AN=4;AO=414;CIGAR=1X;DP=864;DPB=864;DPRA=0;EPP=192.358;EPPR=179.441;GTI=0;LEN=1;MEANALT=1.5;MQM=54.1957;MQMR=53.5924;NS=2;NUMALT=1;ODDS=622.768;PAIRED=1;PAIREDR=1;PAO=0;PQA=0;PQR=0;PRO=0;QA=14380;QR=15965;RO=449;RPL=85;RPP=315.283;RPPR=358.189;RPR=329;RUN=1;SAF=309;SAP=221.29;SAR=105;SRF=337;SRP=247.845;SRR=112;TYPE=snp;technology.ILLUMINA=1	GT:DP:RO:QR:AO:QA:GL	0/1:338:249:8721:89:3010:-252.807,0,-766.809	0/1:526:200:7244:325:11370:-1015.56,0,-644.23
 chrM	8557	.	G	C	2590.97	.	AB=0.267066;ABP=790.051;AC=2;AF=0.5;AN=4;AO=446;CIGAR=1X;DP=1670;DPB=1670;DPRA=0;EPP=44.2196;EPPR=97.7883;GTI=0;LEN=1;MEANALT=3;MQM=57.6951;MQMR=59.5256;NS=2;NUMALT=1;ODDS=125.064;PAIRED=1;PAIREDR=1;PAO=0;PQA=0;PQR=0;PRO=0;QA=6303;QR=38747;RO=1212;RPL=177;RPP=44.2196;RPPR=385.426;RPR=269;RUN=1;SAF=2;SAP=954.193;SAR=444;SRF=906;SRP=648.002;SRR=306;TYPE=snp;technology.ILLUMINA=1	GT:DP:RO:QR:AO:QA:GL	0/1:724:538:17225:181:2490:-182.373,0,-1508.7	0/1:946:674:21522:265:3813:-301.57,0,-1895.55
-</code></pre>
-</div>
+</code></pre></div></div>
 <h1 id="looking-at-the-data">Looking at the data</h1>
 
 <p>For visalizaning VCFs Galaxy relies on the two external tools.  The first is called <a href="http://vcf.iobio.io/">VCF.IOBIO</a> and is developed by <a href="http://marthlab.org/">Gabor Marth’s group</a> at the University of Utah. The second is called <a href="http://software.broadinstitute.org/software/igv/">IGV</a> developed by Broad Institute.</p>
@@ -609,7 +604,7 @@ The difference between “local” and “Human hg38” links is explained in th
 
   <p>This will generate the following dataset:</p>
 
-  <div class="highlighter-rouge"><pre class="highlight"><code>POS  REF ALT     SAMPLE       AO    DP
+  <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>POS  REF ALT     SAMPLE       AO    DP
 --------------------------------------
 3243  A   G   raw_child-ds-  841  1068
 3243  A   G   raw_mother-ds- 767  1558
@@ -622,18 +617,16 @@ The difference between “local” and “Human hg38” links is explained in th
 8557  G   C   raw_child-ds-  181   724
 8557  G   C   raw_mother-ds- 265   946
 
-</code></pre>
-  </div>
+</code></pre></div>  </div>
 </blockquote>
 
 <p>Let’s look at site 4,243. At this site Mother has 841 <code class="highlighter-rouge">G</code>s (since <code class="highlighter-rouge">G</code> is an alternative allele) and 1,068-841=227 <code class="highlighter-rouge">A</code>s. This child has 767 <code class="highlighter-rouge">G</code>s and 1,558-767=791 <code class="highlighter-rouge">A</code>s:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>Allele     A     G
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Allele     A     G
 -------------------
 Mother   227   841
 Child    791   767
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Thus the <em>major</em> allele in mother (<code class="highlighter-rouge">G</code>) becomes the <em>minor</em> allele in child – a remarkable frequency change due to mitochondrial bottleneck!</p>
 

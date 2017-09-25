@@ -346,14 +346,12 @@ times, we’ll unique our sequences using the <code class="highlighter-rouge">Un
 <p>This <code class="highlighter-rouge">Unique.seqs</code> tool outputs two files, one is a fasta file containing only the unique sequences, and a <em>names files</em>.
 The names file consists of two columns, the first contains the sequence names for each of the unique sequences, and the second column contains all other sequence names that are identical to the representative sequence in the first column.</p>
 
-<div class="highlighter-rouge">
-<pre class="highlight"><code>name          representatives
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>name          representatives
 read_name1    read_name2,read_name,read_name5,read_name11
 read_name4    read_name6,read_name,read_name10
 read_name7    read_name8
 ...
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <blockquote class="hands_on">
   <h3 id="-hands-on-count-sequences">
@@ -410,8 +408,7 @@ read_name7    read_name8
 <p>The <code class="highlighter-rouge">summary</code> output files give information per read. The <code class="highlighter-rouge">logfile</code> outputs also contain some summary
 statistics:</p>
 
-<div class="highlighter-rouge">
-<pre class="highlight"><code>              Start    End        NBases     Ambigs   Polymer  NumSeqs
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>              Start    End        NBases     Ambigs   Polymer  NumSeqs
 Minimum:      1        80         80         0        3        1
 2.5%-tile:    1        104        104        0        3        501
 25%-tile:     1        242        242        0        4        5001
@@ -422,8 +419,7 @@ Maximum:      1        275        275        2        31       20000
 Mean:         1        237.519    237.519    0.00495  4.24965
 # of unique seqs:   19502
 total # of seqs:    20000
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>This tells us that we have a total of 19,502 unique sequences, representing 20,000 total sequences that vary in length between 80 and 275 bases. Also, note that at least some of our sequences had some ambiguous base calls.
 Furthermore, at least one read had a homopolymer stretch of 31 bases, this is likely an error so we would like to filter such reads out as well.</p>
@@ -509,8 +505,7 @@ Furthermore, at least one read had a homopolymer stretch of 31 bases, this is li
 
 <p>To get an idea of the quality of the alignment, we can view the log output from the summary step:</p>
 
-<div class="highlighter-rouge">
-<pre class="highlight"><code>        Start   End NBases  Ambigs  Polymer NumSeqs
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>        Start   End NBases  Ambigs  Polymer NumSeqs
 Minimum:    2391    10674   9   0   2   1
 2.5%-tile:  3080    12071   234 0   4   455
 25%-tile:   3080    13424   244 0   4   4545
@@ -521,8 +516,7 @@ Maximum:    13396   13425   267 0   7   18178
 Mean:   3080.6  13380   244.212 0   4.27946
 # of unique seqs:   17698
 total # of seqs:    18178
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <blockquote class="question">
   <h3 id="-questions">
@@ -671,7 +665,7 @@ This corresponds exactly to the V4 target region of the 16S gene.</li>
     </li>
   </ol>
 
-  <p>This step may take a couple of minutes, now may be a good time to grab a cup of tea <img class="emoji" title=":coffee:" alt=":coffee:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2615.png" height="20" width="20" align="absmiddle"></p>
+  <p>This step may take a couple of minutes, now may be a good time to grab a cup of tea <img class="emoji" title=":coffee:" alt=":coffee:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2615.png" height="20" width="20"></p>
 
 </blockquote>
 
@@ -877,7 +871,7 @@ the two samples?</p>
     </li>
   </ol>
 
-  <p>This step may take a couple of minutes <img class="emoji" title=":coffee:" alt=":coffee:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2615.png" height="20" width="20" align="absmiddle"></p>
+  <p>This step may take a couple of minutes <img class="emoji" title=":coffee:" alt=":coffee:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2615.png" height="20" width="20"></p>
 </blockquote>
 
 <p>3 files are generated:</p>
@@ -887,14 +881,13 @@ the two samples?</p>
     <p>A tabular file with the community structure</p>
 
     <div class="highlighter-rouge">
-<pre class="highlight"><code>  #SampleID   Metaphlan2_Analysis
+<div class="highlight"><pre class="highlight"><code>  #SampleID   Metaphlan2_Analysis
   k__Bacteria 100.0
   k__Bacteria|p__Proteobacteria   86.20712
   k__Bacteria|p__Actinobacteria   13.79288
   k__Bacteria|p__Proteobacteria|c__Gammaproteobacteria    86.20712
   k__Bacteria|p__Actinobacteria|c__Actinobacteria 13.79288
-</code></pre>
-    </div>
+</code></pre></div>    </div>
 
     <p>Each line contains a taxa and its relative abundance found for our sample. The file starts with high level taxa (kingdom: <code class="highlighter-rouge">k__</code>) and go to more precise taxa.</p>
   </li>
