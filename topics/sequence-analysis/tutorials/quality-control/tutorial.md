@@ -71,7 +71,7 @@ To estimate sequence quality and how to further filter raw data, different indic
 
 [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/) is an open-source tool that provides a simple way to quality-control raw sequence data coming from high throughput sequencing pipelines. It gets rid of low quality score reads, and generates graphics and estimates providing a quick overview about which data might be the source of bias in the analysis.
 
-> ### {% icon hands_on %} Hands-on: Quality checking
+> ### {% icon hands_on %} Hands-on: Quality check
 >
 > 1. **FastQC** {% icon tool %}: Run FastQC on the imported FastQ file with default parameters
 > 2. Inspect the FastQC report on the webpage
