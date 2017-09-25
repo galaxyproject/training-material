@@ -207,6 +207,6 @@ Now, we take a look at the impact of quality control and treatment on a bad data
 # Conclusion
 {:.no_toc}
 
-In this tutorial, we have controlled the quality of two datasets to ensure that the raw data looks good before analysing them with tools to extract RNA-Seq, ChIP-Seq or any other type of information. The approach of quality control is similar for any type of sequencing data:
+In this tutorial we checked the quality of two datasets to ensure that their data looks good before inferring any further information. This step is the baseline for any pipeline analysis such as RNA-Seq, ChIP-Seq, or any other OMIC analysis relying on NGS data. Quality control steps are similar for any type of sequencing data:
 
 ![The quality control tutorial workflow](../../images/dive_into_qc_workflow.png)
