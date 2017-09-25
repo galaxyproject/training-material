@@ -74,7 +74,7 @@ To estimate sequence quality and how to further filter raw data, different indic
 > ### {% icon hands_on %} Hands-on: Quality check
 >
 > 1. **FastQC** {% icon tool %}: Run FastQC on the imported FastQ file with default parameters
-> 2. Inspect the FastQC report on the webpage
+> 2. Inspect the FastQC report on its webpage output
 >
 >    > ### {% icon tip %} Tip: Inspecting the content of a file in Galaxy
 >    >
@@ -85,15 +85,15 @@ To estimate sequence quality and how to further filter raw data, different indic
 >    > ### {% icon question %} Questions
 >    >
 >    > 1. How good are the quality scores?
->    > 2. Why is there warning for the per base sequence content and the per sequence GC content graphs?
->    > 3. What must be done to improve the sequences?
+>    > 2. Why is there a warning for the per-base sequence content and the per-sequence GC content graphs?
+>    > 3. What needs to be done to improve the sequences?
 >    >
 >    >    <details>
 >    >    <summary>Click to view answers</summary>
 >    >    <ol type="1">
->    >    <li>The scores of the sequences are quite good: no warning from FastQC, even if we can see a slight decrease of the quality at the end of sequences </li>
->    >    <li>In the beginning of sequences, the sequence content per base is not really good and the percentage are not equal. For the GC content, the distribution is bit shifted on the left and too high</li>
->    >    <li>We can trim a bit the end of the sequences, but not too much as the sequences are already small</li>
+>    >    <li>The sequence scores are quite good: no warnings from FastQC, even if we can see a slight decrease of the quality at the end of the reads</li>
+>    >    <li>In the beginning of sequences, the sequence content per base is not really good and the percentages are not equal. For the GC content, the distribution is slightly shifted on the left, and too high</li>
+>    >    <li>We can trim the end of the sequences a little, but not too much as the sequences are already small</li>
 >    >    </ol>
 >    >    </details>
 >    {: .question}
