@@ -120,7 +120,7 @@ To improve the overall sequence quality, we use the [Trim Galore!](https://www.b
 
 > ### {% icon hands_on %} Hands-on: Improvement of sequence quality
 >
-> 1. **Trim Galore** {% icon tool %}: Run Trim Galore on the imported data file
+> 1. **Trim Galore** {% icon tool %}: Run Trim Galore on the imported FastQ file
 >
 >    > ### {% icon question %} Questions
 >    >
