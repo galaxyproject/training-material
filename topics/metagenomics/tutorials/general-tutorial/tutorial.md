@@ -324,7 +324,6 @@ To make sure that everything overlaps the same region we'll re-run `Screen.seqs`
 >
 {: .hands_on}
 
-
 > ### {% icon question %} Question
 > How many sequences were removed in this step?
 > > ### {% icon solution %} Solution
