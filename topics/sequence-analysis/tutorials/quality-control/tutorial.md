@@ -191,14 +191,14 @@ Now, we take a look at the impact of quality control and treatment on a bad data
 >    > ### {% icon question %} Questions
 >    >
 >    > 1. How many sequences have been removed?
->    > 2. Has the quality of the sequences been improved?
->    > 3. Can you explain why the per base sequence content is not good now?
+>    > 2. Has sequence quality been improved?
+>    > 3. Can you explain why the per-base sequence content is not good now?
 >    >
 >    >    <details>
 >    >    <summary>Click to view answers</summary>
 >    >    <ol type="1">
->    >    <li>Before Trim Galore, the dataset was made of 100,000 sequences. After Trim Galore, there is 97,644 sequences.</li>
->    >    <li>The per base quality score is better (not red anymore). But the per base sequence content is still red even if it is a bit better.</li>
+>    >    <li>Before Trim Galore the dataset comprised 100,000 sequences. After Trim Galore, there are 97,644 sequences</li>
+>    >    <li>The per-base quality score looks better (not red anymore), but the per-base sequence content, even if slightly better, is still red</li>
 >    >    </ol>
 >    >    </details>
 >    {: .question}
