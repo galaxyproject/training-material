@@ -160,11 +160,11 @@ If you know which adapter sequence was used during library preparation, provide 
 
 The quality of the previous dataset was pretty good from beginning. The sequence quality treatment improved the quality score at the cost of other parameters.
 
-# Control the quality of a second dataset
+# Impact of quality control
 
-Now, we would like to see the impact to quality control and treatment on a bad dataset.
+Now, we take a look at the impact of quality control and treatment on a bad dataset.
 
-> ### {% icon hands_on %} Hands-on: Quality control and treatment
+> ### {% icon hands_on %} Hands-on: Impact of quality control
 >
 > 1. Create a new history
 > 2. Import the FASTQ file: [`GSM461182_untreat_single_subset`](https://zenodo.org/record/61771/files/GSM461182_untreat_single_subset.fastq)
