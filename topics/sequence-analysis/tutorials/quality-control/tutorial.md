@@ -118,7 +118,7 @@ In general, quality treatments are:
 
 To improve the overall sequence quality, we use the [Trim Galore!](https://www.bioinformatics.babraham.ac.uk/projects/trim_galore/) tool. This tool enhances sequence quality by automating adapter trimming as well as quality control.
 
-> ### {% icon hands_on %} Hands-on: Quality treatment and re-checking
+> ### {% icon hands_on %} Hands-on: Improvement of sequence quality
 >
 > 1. **Trim Galore** {% icon tool %}: Run Trim Galore on the imported data file
 >
