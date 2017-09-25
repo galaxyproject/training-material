@@ -4,12 +4,6 @@ topic_name: metagenomics
 tutorial_name: general-tutorial
 ---
 
-TODOS
-Metaphlan2
-	WARNING:galaxy.model:Datatype class not found for extension 'biom'
-Humann2 
-	needs long!
-
 # Introduction
 {:.no_toc}
 
