@@ -131,9 +131,9 @@ To improve the overall sequence quality, we use the [Trim Galore!](https://www.b
 >    > We use the default ones:
 >    > <ul>
 >    > <li>​
-If you already know the which adapter sequences were used during the library preparation, please use them. Otherwise, use the option for automatic detection and trimming of adapter sequences</li>
+If you know which adapter sequence was used during library preparation, provide its sequence. Otherwise use the option for automatic detection and trimming of adapter sequences</li>
 >    > <li>Trimming low-quality ends (below 20) from reads in addition to adapter removal</li>
->    > <li>Option for required number bases overlap with adapter sequence can be tweaked. The default value "1" is too stringent that on average 25% of reads will be trimmed. In order to reduce these falsely trimmed bases, please set it to 5 bases.</li>
+>    > <li>Option for required overlap (in bp) with adapter sequence can be tweaked. The default value "1" is too stringent, and on average 25% of reads will be trimmed. Please set it to 5 bases to loose the required overlap.</li>
 >    > <li>Removing reads shorter than 20 bp</li>
 >    > </ul>
 >    > </details>
