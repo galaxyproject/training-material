@@ -163,12 +163,12 @@ There are a number of common scenarios for these issues:
 ---
 
 ### Also to check: Sequence content
-#### Per sequence GC content
+#### Per-sequence GC content
 
 ![](../../images/per_sequence_GC_content.png)
 
 ???
-The GC content distribution of most samples should follow a normal distribution. In some cases, a bi-modal distribution can be observed, especially for metagenomic data sets. An unusually shaped distribution could indicate a contaminated library or some other kinds of biased subset. A normal distribution which is shifted indicates some systematic bias which is independent of base position. If there is a systematic bias which creates a shifted normal distribution then this won’t be flagged as an error by the module since it doesn’t know what your genome’s GC content should be.
+The GC content distribution of most samples should follow a normal distribution. In some cases, a bi-modal distribution can be observed, especially for metagenomic data sets. An unusually shaped distribution could indicate a contaminated library or some other kinds of biased subset. A normal distribution which is shifted indicates some systematic bias which is independent of base position. Such a systematic bias creating a shifted normal distribution won’t be flagged as an error, since the tool cannot guess what the provided genome’s GC content should be.
 
 Issues in the GC content distribution usually indicate a problem with the library. Sharp peaks on an otherwise smooth distribution are normally the result of a specific contaminant (adapter dimers for example), which may well be picked up by the overrepresented sequences module. Broader peaks may represent contamination with a different species.
 
