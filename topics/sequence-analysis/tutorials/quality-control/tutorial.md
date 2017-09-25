@@ -51,18 +51,18 @@ Sequence quality control is therefore an essential step to take right after rece
 > By default, when data is imported via its link, Galaxy names it with its URL.
 {: .hands_on}
 
-# Quality checking of the sequences
+# Quality check
 
-To estimate sequence quality and treatments to do on the data, many indicators can be checked:
+To estimate sequence quality and how to further filter raw data, different indicators can be checked:
 
 - Quality score of the sequences with
-    - Per base sequence quality
-    - Per sequence quality scores
-    - Per tile sequence quality
+    - Per-base sequence quality
+    - Per-sequence quality scores
+    - Per-tile sequence quality
 - Sequence content with
-    - Per base sequence content
-    - Per sequence GC content
-    - Per base N content
+    - Per-base sequence content
+    - Per-sequence GC content
+    - Per-base N content
 - Sequence length with the sequence length distribution
 - Duplicated sequences
 - Tag sequences with
