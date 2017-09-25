@@ -69,7 +69,7 @@ To estimate sequence quality and how to further filter raw data, different indic
     - Adapter contamination
     - Kmer Content
 
-[FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/) is an open-source tool provide a simple way to do some quality control checks on raw sequence data coming from high throughput sequencing pipelines. It generates quality graphics and estimates numerous quality informations and threshold. For each studied indicators, FastQC providing a quick overview to tell in which areas there may be problems.
+[FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/) is an open-source tool that provides a simple way to quality-control raw sequence data coming from high throughput sequencing pipelines. It gets rid of low quality score reads, and generates graphics and estimates providing a quick overview about which data might be the source of bias in the analysis.
 
 > ### {% icon hands_on %} Hands-on: Quality checking
 >
