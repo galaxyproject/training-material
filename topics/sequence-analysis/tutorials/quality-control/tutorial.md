@@ -89,7 +89,7 @@ To estimate sequence quality and how to further filter raw data, different indic
 >    > 3. What needs to be done to improve the sequences?
 >    >
 >    >    <details>
->    >    <summary>Click to view answers</summary>
+>    >    <summary>Click to view the answers</summary>
 >    >    <ol type="1">
 >    >    <li>The sequence scores are quite good: no warnings from FastQC, even if we can see a slight decrease of the quality at the end of the reads</li>
 >    >    <li>In the beginning of sequences, the sequence content per base is not really good and the percentages are not equal. For the GC content, the distribution is slightly shifted on the left, and too high</li>
@@ -127,7 +127,7 @@ To improve the overall sequence quality, we use the [Trim Galore!](https://www.b
 >    > Which parameters must be applied to follow the previous recommendations?
 >    >
 >    > <details>
->    > <summary>Click to view answers</summary>
+>    > <summary>Click to view the answers</summary>
 >    > We use the default ones:
 >    > <ul>
 >    > <li>​
@@ -148,7 +148,7 @@ If you know which adapter sequence was used during library preparation, provide 
 >    > 3. Can you explain why the per-base sequence content is not good now?
 >    >
 >    >    <details>
->    >    <summary>Click to view answers</summary>
+>    >    <summary>Click to view the answers</summary>
 >    >    <ol type="1">
 >    >    <li>Before Trim Galore, the dataset comprised 100,000 sequences. After Trim Galore, there are 99,653 sequences</li>
 >    >    <li>The per-base quality score looks better, but other indicators show bad values now. The sequence length distribution is not clear anymore because sequences have different size after the trimming operation</li>
@@ -176,7 +176,7 @@ Now, we take a look at the impact of quality control and treatment on a bad data
 >    > 2. What needs to be done to improve the sequences?
 >    >
 >    >    <details>
->    >    <summary>Click to view answers</summary>
+>    >    <summary>Click to view the answers</summary>
 >    >    <ol type="1">
 >    >    <li>There is a red warning on the per-base sequence quality (pretty bad along the sequence but worse at the end of sequences), the per-base sequence content (bad at the beginning of the sequences), and the per-sequence GC content</li>
 >    >    <li>The end of sequences must be cut.</li>
@@ -195,7 +195,7 @@ Now, we take a look at the impact of quality control and treatment on a bad data
 >    > 3. Can you explain why the per-base sequence content is not good now?
 >    >
 >    >    <details>
->    >    <summary>Click to view answers</summary>
+>    >    <summary>Click to view the answers</summary>
 >    >    <ol type="1">
 >    >    <li>Before Trim Galore the dataset comprised 100,000 sequences. After Trim Galore, there are 97,644 sequences</li>
 >    >    <li>The per-base quality score looks better (not red anymore), but the per-base sequence content, even if slightly better, is still red</li>
