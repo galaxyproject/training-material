@@ -66,7 +66,7 @@ using 454 GS FLX Titanium. The original data are available at EBI Metagenomics u
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
-> 1. Import from [Zenodo]() or from the data library (in "Analyses of metagenomics data") the files
+> 1. Import from [Zenodo](https://zenodo.org/record/815875) or from the data library (in "Analyses of metagenomics data") the files
 >    - `SRR531818_pampa.fasta`
 >    - `SRR651839_anguil.fasta`
 >
