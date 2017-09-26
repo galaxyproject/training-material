@@ -244,7 +244,7 @@ We recommend to structure the tutorials as follows:
 
 ### Improving the learning experience
 
-To improve the learning experience in our tutorial, we defined some boxes to highlight.
+To improve the learning experience in our tutorial, we defined some boxes to highlight their content.
 
 They are defined always with the same structure:
 
@@ -254,7 +254,8 @@ They are defined always with the same structure:
 {: .type_of_box}
 ```
 
-This structure needs to be respected otherwise it would not be interpreted correctly by the templating system. The different defined boxes are:
+For a correct rendering of the tutorial's content, the templating system requirest this structure to be kept as it.
+The different defined boxes are:
 
 - Overview
 
@@ -266,7 +267,7 @@ This structure needs to be respected otherwise it would not be interpreted corre
     >
     >    > ### {% icon question %} Questions
     >    >
-    >    > Which pedogical metadata are not added to this box?
+    >    > What metadata hasn't been added to this box?
     >    >
     >    >    <details>
     >    >    <summary>Click to view answers</summary>
@@ -277,20 +278,20 @@ This structure needs to be respected otherwise it would not be interpreted corre
 
 - Agenda
 
-    The second box in most of the tutorial is the agenda box at the end of the introduction. It indicates the plan of the tutorial
+    In most tutorial, the second box is the agenda box at the end of the introduction. It indicates the plan of the tutorial
 
         > ### Agenda
         >
-        > In this tutorial, we will deal with:
+        > In this tutorial we will deal with:
         >
         > 1. TOC
         > {:toc}
         >
         {: .agenda}
 
-    No need to fill the list: it will be done automatically based on the title of the sections.
+    No need to fill the list, since this will be done automatically reusing each section's title.
 
-    To avoid to add the "Introduction" and "Conclusion", we add `{:.no_toc}` below the section name.
+    To avoid adding the "Introduction" and "Conclusion", we add `{:.no_toc}` below the section name.
 
     ![Example of agenda box](../../../../shared/images/tutorial_agenda_box.png "Example of agenda box")
 
@@ -301,7 +302,7 @@ This structure needs to be respected otherwise it would not be interpreted corre
 
 - Hands-on
 
-    We think that doing is important in the learning process. So we emphasize it by adding regularly some hands-on sections where the trainees can do by themselves some analyses. We designed some special boxes to make these sections easy to find.
+    We think that actually walking through the tutorial by doing all its steps is important for learning its concepts. We therefore emphasize trying each step by regularly adding hands-on sections, where trainees are encouraged to do the analysis by themselves. We designed some special boxes to make these sections easy to find.
 
         > ### {% icon hands_on %} Hands-on: Sorting BAM dataset
         >
@@ -320,13 +321,13 @@ This structure needs to be respected otherwise it would not be interpreted corre
 
     > ### {% icon hands_on %} Hands-on: Add an hands-on box
     >
-    > 1. Add an hands-on box to run a BLAST of the small sequence dataset against the chosen database
+    > 1. Add a hands-on box to run a BLAST of the small sequence dataset against the chosen database
     {: .hands_on}
 
 -  Questions
 
-    The questions are then to force the trainees to think about what they are currently doing and to put things in perspective.
-    They are also a way to help the instructors to expose and clearify misunderstanding earily on.
+    Questions are there to force the trainees to think about what they are currently doing, and to put things in perspective.
+    They also help the instructors by exposing and clarify common scenarios, errors, or applications.
 
         > ### {% icon question %} Questions
         >
@@ -341,10 +342,10 @@ This structure needs to be respected otherwise it would not be interpreted corre
 
     ![Example of question box](../../../../shared/images/tutorial_question_box.png "Example of question box")
 
-    The questions has to be quick to answer. They can be small or also multiple choice (MCQs).
-    With well choosen wrong answers MCQs can do much more than just measure how much someone knows.
+    Questions have to be quick to answer, and answers can be also provided as multiple choices (MCQs).
+    With well choosen wrong answers, MCQs can do much more than just measure how much someone knows.
 
-    In the box below and hiffen we add also the correct answer, so that self-trainees can check the solution and its explanation.
+    In the box below and hidden we add also the correct answer, so that self-trainees can check the solution and its explanation.
 
     > ### {% icon hands_on %} Hands-on: Add a question box
     >
@@ -378,8 +379,8 @@ This structure needs to be respected otherwise it would not be interpreted corre
     This last box of the tutorial is automatically filled with the take-home messages defined in the metadata
 
 
-To render the boxes correctly, the syntax needs to be correct. If it does not work have a look at similar tutorials and get inspiration.
-The boxes can be nested, *e.g.* for having tips inside a hands-on:
+To render the boxes correctly, the syntax needs to be correct. If it does't work, have a look at similar tutorials and get inspiration.
+Boxes can be nested, *e.g.* for having tips inside a hands-on:
 
 ```
 > ### {% icon hands_on %} Hands-on: Defining the topic for the tutorial
