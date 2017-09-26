@@ -19,7 +19,7 @@ In 2016 the Galaxy Training Network decided to set up a new infrastructure to ea
 We took inspiration from [Software Carpentry](https://software-carpentry.org), and collected everything [on a GitHub repository](https://github.com/galaxyproject/training-material).
 We decided on a structure based on tutorials grouped by topics, and coupled with hands-on sections, thus providing support for on-line self-training as well as workshops. Each tutorial follows the same structure, and comes with a virtualised instance to run the training material everywhere.
 
-In this tutorial, you will learn how to write your first tutorial in markdown and contribute it to the Galaxy Training Network.
+In this tutorial, you will learn how to write your first tutorial in Markdown and contribute it to the Galaxy Training Network.
 
 > ### Agenda
 >
@@ -207,7 +207,7 @@ We recommend to structure the tutorials as follows:
 
 > ### {% icon tip %} Tip: Adding images with caption
 >
-> To add an image in markdown file, we need to use `![](../../images/image.png)`.
+> To add an image in Markdown file, we need to use `![](../../images/image.png)`.
 >
 > We added a small plugin to add a caption for each image:
 >
@@ -219,7 +219,7 @@ We recommend to structure the tutorials as follows:
 >   ![A textual description of the image](../images/image.png "This is my super caption")
 >   ```
 >
-> We can also cross-reference images inside our markdown with an anchor. For example, we can link to [the previous figure](#figure-1) using `[the display text](#figure-nb)` (changing `nb` with the image's number).
+> We can also cross-reference images inside our Markdown with an anchor. For example, we can link to [the previous figure](#figure-1) using `[the display text](#figure-nb)` (changing `nb` with the image's number).
 {: .tip}
 
 > ### {% icon tip %} Tip: Writing mathematical expressions
