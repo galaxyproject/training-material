@@ -67,9 +67,14 @@ The first step we need to define is in which topic to place our new tutorial. Th
 
 ## Creating the directory for the tutorial
 
-Once the topic is chosen, serious things can start: creating the tutorial. It is meaning the tutorial content, the metadata related to the tutorial but also the technical support for the tutorial with the description of the needed tool and dataset, a workflow of the tutorial and also a Galaxy Interactive Tour.
+Once the topic has been chosen, we can finally create the tutorial. A tutorial in the Galaxy Training Network contains:
+- the tutorial's content
+- the tutorial's metadata (description)
+- the tutorial's technical support, such as the needed tools and datasets
+- a workflow
+- a Galaxy Interactive Tour
 
-To help you, we created a template for a tutorial with the different required files.
+To ease this process, we created a template for new tutorials, complete with all aforementioned requirements.
 
 > ### {% icon hands_on %} Hands-on: Copy the needed file
 >
