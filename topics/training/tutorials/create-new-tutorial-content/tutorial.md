@@ -51,15 +51,15 @@ The first step we need to define is in which topic to place our new tutorial. Th
 > ### {% icon hands_on %} Hands-on: Defining the topic for the tutorial
 >
 > 1. Search for NCBI Blast+ on the [ToolShed](https://toolshed.g2.bx.psu.edu/)
-> 2. Check in which category it is
+> 2. Check in which category it has been placed
 >
 >    > ### {% icon question %} Questions
 >    >
->    > In which topic will you put the tutorial?
+>    > In which topic will you put the new tutorial?
 >    >
 >    >    <details>
 >    >    <summary>Click to view answers</summary>
->    >    If we search for [NCBI Blast+ in the ToolShed](https://toolshed.g2.bx.psu.edu/view/devteam/ncbi_blast_plus/7538e2bfcd41), it is attributed to 2 categories (bottom): "Next Gen Mappers" and "Sequence Analysis".
+>    >    If we search for [NCBI Blast+ in the ToolShed](https://toolshed.g2.bx.psu.edu/view/devteam/ncbi_blast_plus/7538e2bfcd41), it is placed in 2 categories (bottom): "Next Gen Mappers", and "Sequence Analysis".
 >    >    We decided to put it in "Sequence analysis" because this is the most general one for this tutorial.
 >    >    </details>
 >    {: .question}
