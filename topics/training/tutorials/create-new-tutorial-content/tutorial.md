@@ -46,9 +46,7 @@ Before anything, we need to get a local copy of the content of the GitHub reposi
 
 ## Defining the topic
 
-The first step we need to define is in which topic putting our tutorial. This first step can be tricky.
-
-When we structured the repository, we decided here to use as topic the names of the categories in the [ToolShed](https://toolshed.g2.bx.psu.edu/). So when decided where to put your tutorial, you can look in which ToolShed's category are the main tools used in the tutorial and use this category as topic. For example, this tutorial will rely on the NCBI Blast+ tool.
+The first step we need to define is in which topic to place our new tutorial. This can be tricky: when we structured the repository, we decided to use as topics the categories that are used in the [ToolShed](https://toolshed.g2.bx.psu.edu/). The ToolShed assigns a category to each tool. Therefore, to decide where to put your tutorial, have a look at which ToolShed's category the main tools in your tutorial belong. For example, this tutorial will rely on the NCBI Blast+ tool.
 
 > ### {% icon hands_on %} Hands-on: Defining the topic for the tutorial
 >
