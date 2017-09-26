@@ -115,7 +115,7 @@ Once we set up the infrastructure, we are ready to write the tutorial
 
 ## Finding a good toy dataset
 
-The first question to come is what data to use for waltking the tutorial through the hands-on sections. The selected data must be informative enough to illustrate the meaning of using a tool or a given technique, but not too big to reqire long waiting times for its processing during a workshop. Typically, the selected data should be the informative subset of a full real-life dataset.
+The first question to come is what data to use for walking the tutorial through the hands-on sections. The selected data must be informative enough to illustrate the meaning of using a tool or a given technique, but not too big to reqire long waiting times for its processing during a workshop. Typically, the selected data should be the informative subset of a full real-life dataset.
 
 For example for our tutorial, we generated a small dataset by
 
@@ -127,7 +127,7 @@ For example for our tutorial, we generated a small dataset by
 
 We then developed the tutorial and tested it on this toy dataset. Once we were ready to share it, we uploaded the toy datasets on [Zenodo](https://zenodo.org/) to obtain a dedicated DOI (in the [Galaxy training network community](https://zenodo.org/communities/galaxy-training/?page=1&size=20)).
 
-## Edit the tutorial
+## Filling the tutorial
 
 The tutorial's content will be placed in the file `tutorial.md`. Its syntax and structure are simple, and will follow the scheme:
 
