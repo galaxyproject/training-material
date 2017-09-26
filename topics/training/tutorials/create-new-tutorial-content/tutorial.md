@@ -106,7 +106,7 @@ Let's start tracking your changes!
 
 The GitHub interface can also help you in the process of editing a file. It will automatically create a fork of this repository where you can safely work.
 
-We will now start to fill the different files together. We recommend you to commit regurlarly your changes. It help to follow them but also revert them if needed.
+We will now start to fill the different files together. We recommend you to commit your changes regurlarly: it helps following them, but also revert them if needed.
 
 
 # Filling the tutorial content
