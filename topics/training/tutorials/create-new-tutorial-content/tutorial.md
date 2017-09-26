@@ -10,7 +10,7 @@ tutorial_name: create-new-tutorial-content
 Galaxy is a great solution to train the bioinformatics concepts:
 
 - numerous bioinformatics tools are available (almost 5,000 in the [ToolShed](https://toolshed.g2.bx.psu.edu/))
-- it can be used by people without amy computer science skills
+- it can be used by people without any computer science skills
 - it trains to use technology, outlining available resources and efforts that have made them accessible to researchers
 - it is scalable
 
