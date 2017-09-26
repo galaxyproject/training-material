@@ -181,9 +181,9 @@ If not correctly defined, the tutorial will not be found within the website.
 > 2. Check if the tutorial has been correctly added at [http://localhost:4000/topics/sequence-analysis/similarity-search ](http://localhost:4000/topics/sequence-analysis/similarity-search)
 {: .hands_on}
 
-### Content of the tutorial
+### Content
 
-Directly after the short metadata section on top the content of your tutorial starts. It is written in Markdow - a simple markup langage.
+The tutorial's content is written directly after the short section of metadata. This is written in Markdown, a simple markup langage.
 
 > ### {% icon tip %} Tip: Markdown
 >
