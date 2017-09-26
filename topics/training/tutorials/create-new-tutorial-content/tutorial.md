@@ -127,7 +127,7 @@ For example for our tutorial, we generated a small dataset by
 
 We then developed the tutorial and tested it on this toy dataset. Once we were ready to share it, we uploaded the toy datasets on [Zenodo](https://zenodo.org/) to obtain a dedicated DOI (in the [Galaxy training network community](https://zenodo.org/communities/galaxy-training/?page=1&size=20)).
 
-## Filling the tutorial content
+## Edit the tutorial
 
 The content of the tutorial will go in the `tutorial.md`. The syntax of this file is really simple., as well as its structure:
 
