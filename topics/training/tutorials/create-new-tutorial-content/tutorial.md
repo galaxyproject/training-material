@@ -164,7 +164,7 @@ blabla
 blabla
 ```
 
-### Some metadata on the top
+### Metadata
 
 The tutorial needs to start with some medatada on its top:
 
