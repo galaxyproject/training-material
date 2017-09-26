@@ -129,7 +129,7 @@ We then developed the tutorial and tested it on this toy dataset. Once we were r
 
 ## Edit the tutorial
 
-The content of the tutorial will go in the `tutorial.md`. The syntax of this file is really simple., as well as its structure:
+The tutorial's content will be placed in the file `tutorial.md`. Its syntax and structure are simple, and will follow the scheme:
 
 ```
 ---
