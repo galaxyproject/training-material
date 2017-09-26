@@ -200,7 +200,7 @@ We recommend to structure the tutorials as follows:
 
 > ### {% icon hands_on %} Hands-on: Structuring the tutorial
 >
-> 1. Add a small introduction about the dataset
+> 1. Add a small description of the dataset
 > 2. Add one or two sections with ideas for the tutorial
 > 3. Add a small conclusion
 {: .hands_on}
