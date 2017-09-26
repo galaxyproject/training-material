@@ -76,10 +76,10 @@ Once the topic has been chosen, we can finally create the tutorial. A tutorial i
 
 To ease this process, we created a template for new tutorials, complete with all aforementioned requirements.
 
-> ### {% icon hands_on %} Hands-on: Copy the needed file
+> ### {% icon hands_on %} Hands-on: Copy the required files
 >
-> 1. Copy the `tutorial1` folder (you can find it in `templates/tutorials/`) in `topics/sequence-analysis/topics`
-> 2. Rename the folder into `similarity-search`
+> 1. Copy the `tutorial1` directory (you can find it in `templates/tutorials/`) in `topics/sequence-analysis/topics`
+> 2. Rename the directory to `similarity-search`
 {: .hands_on}
 
 ## Keeping track of the changes
