@@ -115,7 +115,7 @@ Once we set up the infrastructure, we are ready to write the tutorial
 
 ## Finding a good toy dataset
 
-The first question to come is what data to use for walking the tutorial through the hands-on sections. The selected data must be informative enough to illustrate the meaning of using a tool or a given technique, but not too big to reqire long waiting times for its processing during a workshop. Typically, the selected data should be the informative subset of a full real-life dataset.
+The first question to come is what data to use for walking the tutorial through the hands-on sections. The selected data must be informative enough to illustrate the meaning of using a tool or a given technique, but not too big to require long waiting times for its processing during a workshop. Typically, the selected data should be the informative subset of a full real-life dataset.
 
 For example for our tutorial, we generated a small dataset by
 
