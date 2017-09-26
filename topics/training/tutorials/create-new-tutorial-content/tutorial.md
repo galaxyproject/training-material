@@ -16,8 +16,8 @@ Galaxy is a great solution to train the bioinformatics concepts:
 
 In 2016 the Galaxy Training Network decided to set up a new infrastructure to ease delivering Galaxy-related training material. The idea was that of providing it as a shared community effort, using open and online-based platforms.
 
-We took inspiration from [Software Carpentry](https://software-carpentry.org) and collected everything on a GitHub repository: [https://github.com/galaxyproject/training-material ](https://github.com/galaxyproject/training-material).
-We decided on a structure based on tutorials with hands-on, fitting both for online self-training but also for workshops, grouped in topics. Each tutorial follows the same structure and comes with a virtualised isntance to run the training everywhere.
+We took inspiration from [Software Carpentry](https://software-carpentry.org), and collected everything [on a GitHub repository](https://github.com/galaxyproject/training-material).
+We decided on a structure based on tutorials grouped by topics, and coupled with hands-on sections, thus providing support for on-line self-training as well as workshops. Each tutorial follows the same structure, and comes with a virtualised instance to run the training material everywhere.
 
 In this tutorial, you will learn how to write your first tutorial in markdown and contribute it to the Galaxy Training Network.
 
