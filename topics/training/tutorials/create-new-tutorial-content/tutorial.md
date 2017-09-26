@@ -205,21 +205,21 @@ We recommend to structure the tutorials as follows:
 > 3. Add a small conclusion
 {: .hands_on}
 
-> ### {% icon tip %} Tip: Adding images, with caption
+> ### {% icon tip %} Tip: Adding images with caption
 >
 > To add an image in markdown file, we need to use `![](../../images/image.png)`.
 >
-> On the top of that, we added a small plugin to add a caption for each image:
+> We added a small plugin to add a caption for each image:
 >
-> ![This figure shows an example of a figure with a caption](../../images/image_caption_screenshot.png "Example of a figure with a caption")
+> ![This figure shows an example of an image with a caption](../../images/image_caption_screenshot.png "Example of an image with a caption")
 >
-> "Figure" and the number are automatically added and the caption is added by adding the information in the markdown call of the image:
+> The preceding string "Figure" and its corresponding number is automatically added before its caption, which is in turn placed below the image by providing all informations in the Markdown call of the image:
 >
 >   ```
 >   ![A textual description of the image](../images/image.png "This is my super caption")
 >   ```
 >
-> We can also cross-reference the figure inside our markdown with an anchor. For example, we can link to [the previous figure](#figure-1) using `[the display text](#figure-nb)` (with changing `nb` to the figure number).
+> We can also cross-reference images inside our markdown with an anchor. For example, we can link to [the previous figure](#figure-1) using `[the display text](#figure-nb)` (changing `nb` with the image's number).
 {: .tip}
 
 > ### {% icon tip %} Tip: Writting mathematical expressions
