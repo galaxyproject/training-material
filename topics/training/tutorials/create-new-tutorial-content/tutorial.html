@@ -108,18 +108,18 @@
 <p>Galaxy is a great solution to train the bioinformatics concepts:</p>
 
 <ul>
-  <li>numerous bioinformatics tools are available (almost 5,000 in the ToolShed)</li>
-  <li>it can be used by people without amy computer science skills</li>
+  <li>numerous bioinformatics tools are available (almost 5,000 in the <a href="https://toolshed.g2.bx.psu.edu/">ToolShed</a>)</li>
+  <li>it can be used by people without any computer science skills</li>
   <li>it trains to use technology, outlining available resources and efforts that have made them accessible to researchers</li>
   <li>it is scalable</li>
 </ul>
 
-<p>In 2016, the Galaxy Training Network decide to set up a new infrastructure for delivering easily Galaxy related training material. The idea was to develop something open and online based on a community effort, as always in Galaxy.</p>
+<p>In 2016 the Galaxy Training Network decided to set up a new infrastructure to ease delivering Galaxy-related training material. The idea was that of providing it as a shared community effort, using open and online-based platforms.</p>
 
-<p>We took inspiration from <a href="https://software-carpentry.org">Software Carpentry</a> and collected everything on a GitHub repository: <a href="https://github.com/galaxyproject/training-material">https://github.com/galaxyproject/training-material </a>.
-We decided on a structure based on tutorials with hands-on, fitting both for online self-training but also for workshops, grouped in topics. Each tutorial follows the same structure and comes with a virtualised isntance to run the training everywhere.</p>
+<p>We took inspiration from <a href="https://software-carpentry.org">Software Carpentry</a>, and collected everything <a href="https://github.com/galaxyproject/training-material">on a GitHub repository</a>.
+We decided on a structure based on tutorials grouped by topics, and coupled with hands-on sections, thus providing support for on-line self-training as well as workshops. Each tutorial follows the same structure, and comes with a virtualised instance to run the training material everywhere.</p>
 
-<p>In this tutorial, you will learn how to write your first tutorial in markdown and contribute it to the Galaxy Training Network.</p>
+<p>In this tutorial, you will learn how to write your first tutorial in Markdown and contribute it to the Galaxy Training Network.</p>
 
 <blockquote class="agenda">
   <h3 id="agenda">Agenda</h3>
@@ -136,7 +136,7 @@ We decided on a structure based on tutorials with hands-on, fitting both for onl
   </li>
   <li><a href="#filling-the-tutorial-content" id="markdown-toc-filling-the-tutorial-content">Filling the tutorial content</a>    <ol>
       <li><a href="#finding-a-good-toy-dataset" id="markdown-toc-finding-a-good-toy-dataset">Finding a good toy dataset</a></li>
-      <li><a href="#filling-the-tutorial-content-1" id="markdown-toc-filling-the-tutorial-content-1">Filling the tutorial content</a></li>
+      <li><a href="#filling-the-tutorial" id="markdown-toc-filling-the-tutorial">Filling the tutorial</a></li>
     </ol>
   </li>
   <li><a href="#adding-slides-optional" id="markdown-toc-adding-slides-optional">Adding slides (optional)</a></li>
@@ -163,9 +163,7 @@ We decided on a structure based on tutorials with hands-on, fitting both for onl
 
 <h2 id="defining-the-topic">Defining the topic</h2>
 
-<p>The first step we need to define is in which topic putting our tutorial. This first step can be tricky.</p>
-
-<p>When we structured the repository, we decided here to use as topic the names of the categories in the <a href="https://toolshed.g2.bx.psu.edu/">ToolShed</a>. So when decided where to put your tutorial, you can look in which ToolShed’s category are the main tools used in the tutorial and use this category as topic. For example, this tutorial will rely on the NCBI Blast+ tool.</p>
+<p>The first step we need to define is in which topic to place our new tutorial. This can be tricky: when we structured the repository, we decided to use as topics the categories that are used in the <a href="https://toolshed.g2.bx.psu.edu/">ToolShed</a>. The ToolShed assigns a category to each tool. Therefore, to decide where to put your tutorial, have a look at which ToolShed’s category the main tools in your tutorial belong. For example, this tutorial will rely on the NCBI Blast+ tool.</p>
 
 <blockquote class="hands_on">
   <h3 id="-hands-on-defining-the-topic-for-the-tutorial"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Defining the topic for the tutorial</h3>
@@ -173,16 +171,16 @@ We decided on a structure based on tutorials with hands-on, fitting both for onl
   <ol>
     <li>Search for NCBI Blast+ on the <a href="https://toolshed.g2.bx.psu.edu/">ToolShed</a></li>
     <li>
-      <p>Check in which category it is</p>
+      <p>Check in which category it has been placed</p>
 
       <blockquote class="question">
         <h3 id="-questions"><i class="fa fa-question-circle" aria-hidden="true"></i> Questions</h3>
 
-        <p>In which topic will you put the tutorial?</p>
+        <p>In which topic will you put the new tutorial?</p>
 
         <details>
-   <summary>Click to view answers</summary>
-   If we search for [NCBI Blast+ in the ToolShed](https://toolshed.g2.bx.psu.edu/view/devteam/ncbi_blast_plus/7538e2bfcd41), it is attributed to 2 categories (bottom): "Next Gen Mappers" and "Sequence Analysis".
+   <summary>Click to view the answers</summary>
+   If we search for [NCBI Blast+ in the ToolShed](https://toolshed.g2.bx.psu.edu/view/devteam/ncbi_blast_plus/7538e2bfcd41), it is placed in 2 categories (bottom): "Next Gen Mappers", and "Sequence Analysis".
    We decided to put it in "Sequence analysis" because this is the most general one for this tutorial.
    </details>
       </blockquote>
@@ -192,46 +190,54 @@ We decided on a structure based on tutorials with hands-on, fitting both for onl
 
 <h2 id="creating-the-directory-for-the-tutorial">Creating the directory for the tutorial</h2>
 
-<p>Once the topic is chosen, serious things can start: creating the tutorial. It is meaning the tutorial content, the metadata related to the tutorial but also the technical support for the tutorial with the description of the needed tool and dataset, a workflow of the tutorial and also a Galaxy Interactive Tour.</p>
+<p>Once the topic has been chosen, we can finally create the tutorial. A tutorial in the Galaxy Training Network contains:</p>
+<ul>
+  <li>the tutorial’s content</li>
+  <li>the tutorial’s metadata (description)</li>
+  <li>the tutorial’s technical support, such as the needed tools and datasets</li>
+  <li>a workflow</li>
+  <li>a Galaxy Interactive Tour</li>
+</ul>
 
-<p>To help you, we created a template for a tutorial with the different required files.</p>
+<p>To ease this process, we created a template for new tutorials, complete with all aforementioned requirements.</p>
 
 <blockquote class="hands_on">
-  <h3 id="-hands-on-copy-the-needed-file"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Copy the needed file</h3>
+  <h3 id="-hands-on-copy-the-required-files"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Copy the required files</h3>
 
   <ol>
-    <li>Copy the <code class="highlighter-rouge">tutorial1</code> folder (you can find it in <code class="highlighter-rouge">templates/tutorials/</code>) in <code class="highlighter-rouge">topics/sequence-analysis/topics</code></li>
-    <li>Rename the folder into <code class="highlighter-rouge">similarity-search</code></li>
+    <li>Copy the <code class="highlighter-rouge">tutorial1</code> directory (you can find it in <code class="highlighter-rouge">templates/tutorials/</code>) in <code class="highlighter-rouge">topics/sequence-analysis/topics</code></li>
+    <li>Rename the directory to <code class="highlighter-rouge">similarity-search</code></li>
   </ol>
 </blockquote>
 
 <h2 id="keeping-track-of-the-changes">Keeping track of the changes</h2>
 
-<p>Once you started to change something, we need to keep track of these changes with a version control system (VCS). We are using Git as VCS and GitHub as hosting service.</p>
+<p>You need to keep track of all your new changes with a version control system (VCS). To do so, you will use Git as VCS, and GitHub as your personal hosting service.</p>
 
-<p>This repository is developed collaboratively with more than 40 contributors. For the collaboration, we are using the <a href="https://guides.github.com/introduction/flow/">GitHub flow</a>, which is based on forks, branches and pull requests.
-We will explain GitHub flow later and show you now how to start keeping track of the changes:</p>
+<p>This repository of tutorials is developed collaboratively among more than 40 contributors. Therefore, to ease the collaboration, we are using the <a href="https://guides.github.com/introduction/flow/">GitHub flow</a> approach, which is based on forks, branches, and pull requests.
+Let’s start tracking your changes!</p>
 
 <blockquote class="hands_on">
   <h3 id="-hands-on-start-keeping-track-of-the-changes"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Start keeping track of the changes</h3>
 
   <ol>
-    <li><a href="https://help.github.com/articles/fork-a-repo/">Create a fork</a> of this repository on GitHub</li>
-    <li>Add your fork to the current local copy: <code class="highlighter-rouge">git remote add fork https://github.com/galaxyproject/training-material</code></li>
-    <li>Create a new branch called “similarity-search” in your local copy: <code class="highlighter-rouge">git checkout -b similarity-search</code></li>
-    <li>Commit the changes in that branch with
-      <ul>
-        <li><code class="highlighter-rouge">git add topics/sequence-analysis/tutorials/similarity-search</code></li>
-        <li><code class="highlighter-rouge">git commit -m "Set up the similarity search tutorial"</code></li>
-      </ul>
-    </li>
-    <li>Push that branch to your fork on GitHub: <code class="highlighter-rouge">git push fork similarity-search</code></li>
+    <li><a href="https://help.github.com/articles/fork-a-repo/">Create a fork</a> of this repository on GitHub. Your account will contain a copy of the original collaboratively developed training material</li>
+    <li>Link your fork on GitHub to the local (cloned) copy on your machine:
+ <code class="highlighter-rouge">git remote add fork https://github.com/&lt;YOUR_GITHUB_USERNAME&gt;/training-material</code></li>
+    <li>Create a new branch called “similarity-search” in your local copy:
+ <code class="highlighter-rouge">git checkout -b similarity-search</code></li>
+    <li>Add your changes to the new branch:
+ <code class="highlighter-rouge">git add topics/sequence-analysis/tutorials/similarity-search</code></li>
+    <li>Commit your changes in that branch:
+ <code class="highlighter-rouge">git commit -m "Set up the similarity search tutorial"</code></li>
+    <li>Push the new branch to your fork on GitHub:
+ <code class="highlighter-rouge">git push fork similarity-search</code></li>
   </ol>
 </blockquote>
 
 <p>The GitHub interface can also help you in the process of editing a file. It will automatically create a fork of this repository where you can safely work.</p>
 
-<p>We will now start to fill the different files together. We recommend you to commit regurlarly your changes. It help to follow them but also revert them if needed.</p>
+<p>We will now start to fill the different files together. We recommend you to commit your changes regurlarly: it helps following them, but also revert them if needed.</p>
 
 <h1 id="filling-the-tutorial-content">Filling the tutorial content</h1>
 
@@ -239,7 +245,7 @@ We will explain GitHub flow later and show you now how to start keeping track of
 
 <h2 id="finding-a-good-toy-dataset">Finding a good toy dataset</h2>
 
-<p>The first question to come is which data using for the tutorial and particularly for the hands-on parts. This data must be informative enough to illustrate the use of a tool or a technic, but it must not be too big to be able to be run during workshop or locally. Typically, this is a subset of a full dataset where the informative data has been extracted.</p>
+<p>The first question to come is what data to use for walking the tutorial through the hands-on sections. The selected data must be informative enough to illustrate the meaning of using a tool or a given technique, but not too big to require long waiting times for its processing during a workshop. Typically, the selected data should be the informative subset of a full real-life dataset.</p>
 
 <p>For example for our tutorial, we generated a small dataset by</p>
 
@@ -249,16 +255,16 @@ We will explain GitHub flow later and show you now how to start keeping track of
     <ul>
       <li>Blasting it on the NR database on <a href="https://blast.ncbi.nlm.nih.gov/Blast.cgi?PROGRAM=blastn&amp;PAGE_TYPE=BlastSearch&amp;LINK_LOC=blasthome">NCBI Blast</a></li>
       <li>Extracting one similar sequence found with Blast</li>
-      <li>Searching and extracting 2 other sequences of the species using the <a href="https://www.ncbi.nlm.nih.gov/nuccore">NCBI Nucleotide database</a></li>
+      <li>Searching and extracting 2 other sequences of the same species using the <a href="https://www.ncbi.nlm.nih.gov/nuccore">NCBI Nucleotide database</a></li>
     </ul>
   </li>
 </ul>
 
-<p>We then developed the tutorial and tested it on this dataset. Once we were ready to share it, we uploaded the datasets on <a href="https://zenodo.org/">Zenodo</a> to obtain a dedicated DOI (in the <a href="https://zenodo.org/communities/galaxy-training/?page=1&amp;size=20">Galaxy training network community</a>).</p>
+<p>We then developed the tutorial and tested it on this toy dataset. Once we were ready to share it, we uploaded the toy datasets on <a href="https://zenodo.org/">Zenodo</a> to obtain a dedicated DOI (in the <a href="https://zenodo.org/communities/galaxy-training/?page=1&amp;size=20">Galaxy training network community</a>).</p>
 
-<h2 id="filling-the-tutorial-content-1">Filling the tutorial content</h2>
+<h2 id="filling-the-tutorial">Filling the tutorial</h2>
 
-<p>The content of the tutorial will go in the <code class="highlighter-rouge">tutorial.md</code>. The syntax of this file is really simple., as well as its structure:</p>
+<p>The tutorial’s content will be placed in the file <code class="highlighter-rouge">tutorial.md</code>. Its syntax and structure are simple, and will follow the scheme:</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>---
 layout: tutorial_hands_on
@@ -292,9 +298,9 @@ blabla
 blabla
 </code></pre></div></div>
 
-<h3 id="some-metadata-on-the-top">Some metadata on the top</h3>
+<h3 id="metadata">Metadata</h3>
 
-<p>On the top, there is some metadata:</p>
+<p>The tutorial needs to start with some medatada on its top:</p>
 
 <ul>
   <li><code class="highlighter-rouge">layout: tutorial_hands_on</code> (keep the default)</li>
@@ -302,8 +308,8 @@ blabla
   <li><code class="highlighter-rouge">tutorial_name: create-new-tutorial</code> with the name of tutorial</li>
 </ul>
 
-<p>These metadata are there to help the templating system to make the connection between the file and the global <a href="https://galaxyproject.github.io/training-material/topics/training/tutorials/create-new-tutorial-metadata/tutorial.html">metadata</a>.
-If they are not correctly defined the tutorial can not be found on the website.</p>
+<p>These metadata are there to help the templating system linking between the tutorial’s file and the global <a href="https://galaxyproject.github.io/training-material/topics/training/tutorials/create-new-tutorial-metadata/tutorial.html">metadata</a>.
+If not correctly defined, the tutorial will not be found within the website.</p>
 
 <blockquote class="hands_on">
   <h3 id="-hands-on-fix-the-top-metadata"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Fix the top metadata</h3>
@@ -314,9 +320,9 @@ If they are not correctly defined the tutorial can not be found on the website.<
   </ol>
 </blockquote>
 
-<h3 id="content-of-the-tutorial">Content of the tutorial</h3>
+<h3 id="content">Content</h3>
 
-<p>Directly after the short metadata section on top the content of your tutorial starts. It is written in Markdow - a simple markup langage.</p>
+<p>The tutorial’s content is written directly after the short section of metadata. This is written in Markdown, a simple markup langage.</p>
 
 <blockquote class="tip">
   <h3 id="-tip-markdown"><i class="fa fa-lightbulb-o" aria-hidden="true"></i> Tip: Markdown</h3>
@@ -324,14 +330,13 @@ If they are not correctly defined the tutorial can not be found on the website.<
   <p>Check <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">this cheatsheet</a> to learn more how to use Markdown.</p>
 </blockquote>
 
-<p>The content in Markdown is transformed by our templating system into the nice webpage which add the metadata. Indeed in the <code class="highlighter-rouge">tutorial.md</code> file,
-no need to add the name of the tutorial: it is automatically added based on the title defined in the metadata.</p>
+<p>The Markdown content is then transformed into a user friendly webpage throughout a templating system. With this approach, there is no need to add the name of every tutorial each time, since they are automatically added based on the tutorial’s metadata.</p>
 
-<p>We recommend to structure the tutorials like this</p>
+<p>We recommend to structure the tutorials as follows:</p>
 
 <ul>
-  <li>An introduction to introduce the tutorial with the use case, the data, the methods</li>
-  <li>Several sections with the content of the tutorial and some hands-on parts (practicing is an important part of the learning process)</li>
+  <li>An introduction, to bring an overview of the tutorial with its use cases, data, and methods</li>
+  <li>Multiple sections, representing the steps of the analysis, complete with their hands-on parts (practicing is an important part of the learning process)</li>
   <li>A conclusion to summarize what has been done in the tutorial (with a scheme)</li>
 </ul>
 
@@ -339,57 +344,57 @@ no need to add the name of the tutorial: it is automatically added based on the 
   <h3 id="-hands-on-structuring-the-tutorial"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Structuring the tutorial</h3>
 
   <ol>
-    <li>Add a small introduction about the dataset</li>
+    <li>Add a small description of the dataset</li>
     <li>Add one or two sections with ideas for the tutorial</li>
     <li>Add a small conclusion</li>
   </ol>
 </blockquote>
 
 <blockquote class="tip">
-  <h3 id="-tip-adding-images-with-caption"><i class="fa fa-lightbulb-o" aria-hidden="true"></i> Tip: Adding images, with caption</h3>
+  <h3 id="-tip-adding-images-with-caption"><i class="fa fa-lightbulb-o" aria-hidden="true"></i> Tip: Adding images with caption</h3>
 
-  <p>To add an image in markdown file, we need to use <code class="highlighter-rouge">![](../../images/image.png)</code>.</p>
+  <p>To add an image in Markdown file, we need to use <code class="highlighter-rouge">![](../../images/image.png)</code>.</p>
 
-  <p>On the top of that, we added a small plugin to add a caption for each image:</p>
+  <p>We added a small plugin to add a caption for each image:</p>
 
-  <figure id="figure-1"><img src="../../images/image_caption_screenshot.png" alt="This figure shows an example of a figure with a caption" title="Example of a figure with a caption" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Example of a figure with a caption</figcaption></figure>
+  <figure id="figure-1"><img src="../../images/image_caption_screenshot.png" alt="This figure shows an example of an image with a caption" title="Example of an image with a caption" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Example of an image with a caption</figcaption></figure>
 
-  <p>“Figure” and the number are automatically added and the caption is added by adding the information in the markdown call of the image:</p>
+  <p>The preceding string “Figure” and its corresponding number is automatically added before its caption, which is in turn placed below the image by providing all informations in the Markdown call of the image:</p>
 
   <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  ![A textual description of the image](../images/image.png "This is my super caption")
 </code></pre></div>  </div>
 
-  <p>We can also cross-reference the figure inside our markdown with an anchor. For example, we can link to <a href="#figure-1">the previous figure</a> using <code class="highlighter-rouge">[the display text](#figure-nb)</code> (with changing <code class="highlighter-rouge">nb</code> to the figure number).</p>
+  <p>We can also cross-reference images inside our Markdown with an anchor. For example, we can link to <a href="#figure-1">the previous figure</a> using <code class="highlighter-rouge">[the display text](#figure-nb)</code> (changing <code class="highlighter-rouge">nb</code> with the image’s number).</p>
 </blockquote>
 
 <blockquote class="tip">
-  <h3 id="-tip-writting-mathematical-expressions"><i class="fa fa-lightbulb-o" aria-hidden="true"></i> Tip: Writting mathematical expressions</h3>
+  <h3 id="-tip-writing-mathematical-expressions"><i class="fa fa-lightbulb-o" aria-hidden="true"></i> Tip: Writing mathematical expressions</h3>
 
-  <p>Mathematical expressions can be written in LaTeX: they will be rendered with <a href="https://www.mathjax.org/">MathJax</a>.</p>
+  <p>Mathematical expressions can be written in LaTeX, and rendered with <a href="https://www.mathjax.org/">MathJax</a>.</p>
 
-  <p>It is easy: surround your math content with two <code class="highlighter-rouge">$</code> signs, like with a math block:</p>
+  <p>Surround your math expression with two <code class="highlighter-rouge">$</code> signs (like in LaTeX math blocks):</p>
 
   <ul>
-    <li>inline, <em>e.g.</em> <code class="highlighter-rouge">$$ 5 + 5 $$</code> will be rendered as <script type="math/tex">5 + 5</script></li>
+    <li>inline expressions, <em>e.g.</em> <code class="highlighter-rouge">$$ 5 + 5 $$</code> will be rendered as <script type="math/tex">5 + 5</script></li>
     <li>
-      <p>not inline, <em>e.g.</em> <code class="highlighter-rouge">$$ 5 + 5 $$</code> alone in new line will be rendered as</p>
+      <p>block expressions, <em>e.g.</em> <code class="highlighter-rouge">$$ 5 + 5 $$</code> will be rendered in its own line block as</p>
 
       <script type="math/tex; mode=display">5 + 5</script>
     </li>
   </ul>
 
-  <p>If you don’t want to start an inline math statement, just escape the dollar signs and they will be treated as simple dollar signs.</p>
+  <p>Dollar signs are therefore <em>reserved caracters</em> for instructing the templating system to open/close LaTeX math blocks. In case you don’t want any math block to be opened/closed, but still be able to write a dollar sign, you have to <em>escape</em> it. Escaping enables the templating system to render the escaped caracter as a normal caracter.</p>
 
   <blockquote class="comment">
     <h3 id="-comments"><i class="fa fa-commenting-o" aria-hidden="true"></i> Comments</h3>
-    <p>LaTeX code that uses the pipe symbol <code class="highlighter-rouge">|</code> in inline math statements may lead to a line being recognized as a table line.
+    <p>LaTeX code that uses the pipe symbol <code class="highlighter-rouge">|</code> in inline math statements may lead to a line being recognized as a table line by the templating system.
 This can be avoided by using the <code class="highlighter-rouge">\vert</code> command instead of <code class="highlighter-rouge">|</code></p>
   </blockquote>
 </blockquote>
 
 <h3 id="improving-the-learning-experience">Improving the learning experience</h3>
 
-<p>To improve the learning experience in our tutorial, we defined some boxes to highlight.</p>
+<p>To improve the learning experience in our tutorial, we defined some boxes to highlight their content.</p>
 
 <p>They are defined always with the same structure:</p>
 
@@ -398,7 +403,8 @@ This can be avoided by using the <code class="highlighter-rouge">\vert</code> co
 {: .type_of_box}
 </code></pre></div></div>
 
-<p>This structure needs to be respected otherwise it would not be interpreted correctly by the templating system. The different defined boxes are:</p>
+<p>For a correct rendering of the tutorial’s content, the templating system requirest this structure to be kept as it.
+The different defined boxes are:</p>
 
 <ul>
   <li>
@@ -416,10 +422,10 @@ This can be avoided by using the <code class="highlighter-rouge">\vert</code> co
           <blockquote class="question">
             <h3 id="-questions-1"><i class="fa fa-question-circle" aria-hidden="true"></i> Questions</h3>
 
-            <p>Which pedogical metadata are not added to this box?</p>
+            <p>What metadata hasn’t been added to this box?</p>
 
             <details>
-   <summary>Click to view answers</summary>
+   <summary>Click to view the answers</summary>
    The take-home messages are not added to this box but into the last box of the tutorial
    </details>
           </blockquote>
@@ -430,11 +436,11 @@ This can be avoided by using the <code class="highlighter-rouge">\vert</code> co
   <li>
     <p>Agenda</p>
 
-    <p>The second box in most of the tutorial is the agenda box at the end of the introduction. It indicates the plan of the tutorial</p>
+    <p>In most tutorial, the second box is the agenda box at the end of the introduction. It indicates the plan of the tutorial</p>
 
     <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  &gt; ### Agenda
   &gt;
-  &gt; In this tutorial, we will deal with:
+  &gt; In this tutorial we will deal with:
   &gt;
   &gt; 1. TOC
   &gt; {:toc}
@@ -442,9 +448,9 @@ This can be avoided by using the <code class="highlighter-rouge">\vert</code> co
   {: .agenda}
 </code></pre></div>    </div>
 
-    <p>No need to fill the list: it will be done automatically based on the title of the sections.</p>
+    <p>No need to fill the list, since this will be done automatically reusing each section’s title.</p>
 
-    <p>To avoid to add the “Introduction” and “Conclusion”, we add <code class="highlighter-rouge">{:.no_toc}</code> below the section name.</p>
+    <p>To avoid adding the “Introduction” and “Conclusion”, we add <code class="highlighter-rouge">{:.no_toc}</code> below the section name.</p>
 
     <figure id="figure-2"><img src="../../../../shared/images/tutorial_agenda_box.png" alt="Example of agenda box" title="Example of agenda box" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Example of agenda box</figcaption></figure>
 
@@ -459,7 +465,7 @@ This can be avoided by using the <code class="highlighter-rouge">\vert</code> co
   <li>
     <p>Hands-on</p>
 
-    <p>We think that doing is important in the learning process. So we emphasize it by adding regularly some hands-on sections where the trainees can do by themselves some analyses. We designed some special boxes to make these sections easy to find.</p>
+    <p>We think that actually walking through the tutorial by doing all its steps is important for learning its concepts. We therefore emphasize trying each step by regularly adding hands-on sections, where trainees are encouraged to do the analysis by themselves. We designed some special boxes to make these sections easy to find.</p>
 
     <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  &gt; ### &lt;i class="fa fa-pencil" aria-hidden="true"&gt;&lt;/i&gt; Hands-on: Sorting BAM dataset
   &gt;
@@ -483,15 +489,15 @@ This can be avoided by using the <code class="highlighter-rouge">\vert</code> co
       <h3 id="-hands-on-add-an-hands-on-box"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Add an hands-on box</h3>
 
       <ol>
-        <li>Add an hands-on box to run a BLAST of the small sequence dataset against the chosen database</li>
+        <li>Add a hands-on box to run a BLAST of the small sequence dataset against the chosen database</li>
       </ol>
     </blockquote>
   </li>
   <li>
     <p>Questions</p>
 
-    <p>The questions are then to force the trainees to think about what they are currently doing and to put things in perspective.
- They are also a way to help the instructors to expose and clearify misunderstanding earily on.</p>
+    <p>Questions are there to force the trainees to think about what they are currently doing, and to put things in perspective.
+ They also help the instructors by exposing and clarify common scenarios, errors, or applications.</p>
 
     <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> &gt; ### &lt;i class="fa fa-question-circle" aria-hidden="true"&gt;&lt;/i&gt; Questions
  &gt;
@@ -499,7 +505,7 @@ This can be avoided by using the <code class="highlighter-rouge">\vert</code> co
  &gt; 2. Does it improve the *p*-value distribution?
  &gt;
  &gt;    &lt;details&gt;
- &gt;    &lt;summary&gt;Click to view answers&lt;/summary&gt;
+ &gt;    &lt;summary&gt;Click to view the answers&lt;/summary&gt;
  &gt;    Content goes here.
  &gt;    &lt;/details&gt;
  {: .question}
@@ -507,10 +513,10 @@ This can be avoided by using the <code class="highlighter-rouge">\vert</code> co
 
     <figure id="figure-4"><img src="../../../../shared/images/tutorial_question_box.png" alt="Example of question box" title="Example of question box" /><figcaption><span class="figcaption-prefix">Figure 4:</span> Example of question box</figcaption></figure>
 
-    <p>The questions has to be quick to answer. They can be small or also multiple choice (MCQs).
- With well choosen wrong answers MCQs can do much more than just measure how much someone knows.</p>
+    <p>Questions have to be quick to answer, and answers can be also provided as multiple choices (MCQs).
+ With well choosen wrong answers, MCQs can do much more than just measure how much someone knows.</p>
 
-    <p>In the box below and hiffen we add also the correct answer, so that self-trainees can check the solution and its explanation.</p>
+    <p>In the box below and hidden we add also the correct answer, so that self-trainees can check the solution and its explanation.</p>
 
     <blockquote class="hands_on">
       <h3 id="-hands-on-add-a-question-box"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Add a question box</h3>
@@ -553,8 +559,8 @@ This can be avoided by using the <code class="highlighter-rouge">\vert</code> co
   </li>
 </ul>
 
-<p>To render the boxes correctly, the syntax needs to be correct. If it does not work have a look at similar tutorials and get inspiration.
-The boxes can be nested, <em>e.g.</em> for having tips inside a hands-on:</p>
+<p>To render the boxes correctly, the syntax needs to be correct. If it does’t work, have a look at similar tutorials and get inspiration.
+Boxes can be nested, <em>e.g.</em> for having tips inside a hands-on:</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt; ### &lt;i class="fa fa-pencil" aria-hidden="true"&gt;&lt;/i&gt; Hands-on: Defining the topic for the tutorial
 &gt;
@@ -566,7 +572,7 @@ The boxes can be nested, <em>e.g.</em> for having tips inside a hands-on:</p>
 &gt;    &gt; In which topic will you put the tutorial?
 &gt;    &gt;
 &gt;    &gt;    &lt;details&gt;
-&gt;    &gt;    &lt;summary&gt;Click to view answers&lt;/summary&gt;
+&gt;    &gt;    &lt;summary&gt;Click to view the answers&lt;/summary&gt;
 &gt;    &gt;    If we search for [NCBI Blast+ in the ToolShed](https://toolshed.g2.bx.psu.edu/view/devteam/ncbi_blast_plus/7538e2bfcd41), it is attributed to 2 categories (bottom): "Next Gen Mappers" and "Sequence Analysis".
 &gt;    &gt;    We decided to put it in "Sequence analysis" because this is the most general one for this tutorial.
 &gt;    &gt;    &lt;/details&gt;
@@ -576,14 +582,13 @@ The boxes can be nested, <em>e.g.</em> for having tips inside a hands-on:</p>
 
 <h1 id="adding-slides-optional">Adding slides (optional)</h1>
 
-<p>Sometimes we also need slides to support the tutorial. With the current infrastructure, we also provide this possibility
-to serve on the website slides related to the tutorial.</p>
+<p>Sometimes we also need slides to support the tutorial’s topics. With the current infrastructure we are able to also provide this functionality, and integrate a tutorial with further support material.</p>
 
-<p>The slides are written in Markdown (only the file extension is .html), as the tutorial and are rendered as a webpage thanks to <a href="https://remarkjs.com"><code class="highlighter-rouge">Remark</code></a>. However this is not done automatically. We first need to tell the templating system to search for the slides by changing <code class="highlighter-rouge">slides</code> in the metadata from <code class="highlighter-rouge">no</code> to <code class="highlighter-rouge">yes</code>.</p>
+<p>Although the slide file’s extension is .html, all slides are written in Markdown as well, and their content is rendered as a webpage thanks to <a href="https://remarkjs.com"><code class="highlighter-rouge">Remark</code></a>. However, adding slides is not enough: we first need to tell the templating system to search for them by changing <code class="highlighter-rouge">slides</code> in the metadata from <code class="highlighter-rouge">no</code> to <code class="highlighter-rouge">yes</code>.</p>
 
 <p>Once it is done, the slides for our tutorial will be accessible at <a href="http://localhost:4000/topics/sequence-analysis/tutorials/similarity-search/slides.html">http://localhost:4000/topics/sequence-analysis/tutorials/similarity-search/slides.html </a></p>
 
-<p>We can now fill the <code class="highlighter-rouge">slides.html</code> file:</p>
+<p>We can now fill the <code class="highlighter-rouge">slides.html</code> file as follows:</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>---
 layout: tutorial_slides
@@ -605,9 +610,9 @@ logo: "GTN"
 ### Next slide
 </code></pre></div></div>
 
-<p>On the top, as for the <code class="highlighter-rouge">tutorial.md</code>, we need to define some metadata to link the slides to the correct tutorial. The metadata of the tutorial can then be used also to automatically fill the first slides (with the title, the requirements,…)  and the last slide (take-home message).</p>
+<p>On the top, as for the tutorial’s <code class="highlighter-rouge">tutorial.md</code>, we need to define some metadata to link the slides with the corresponding tutorial. The metadata of the tutorial can then be used also to automatically fill the first slides (with the title, requirements, etc)  and the last slide (take-home message).</p>
 
-<p>After, each new slide is introduced by <code class="highlighter-rouge">---</code>, and the content of each slide is written in Markdown.</p>
+<p>Each new slide is introduced by <code class="highlighter-rouge">---</code>, and the content of each slide is written in Markdown.</p>
 
 <blockquote class="hands_on">
   <h3 id="-hands-on-add-some-slides-for-the-tutorial"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Add some slides for the tutorial</h3>
