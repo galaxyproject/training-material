@@ -115,7 +115,7 @@ Once we set up the infrastructure, we are ready to write the tutorial
 
 ## Finding a good toy dataset
 
-The first question to come is which data using for the tutorial and particularly for the hands-on parts. This data must be informative enough to illustrate the use of a tool or a technic, but it must not be too big to be able to be run during workshop or locally. Typically, this is a subset of a full dataset where the informative data has been extracted.
+The first question to come is what data to use for waltking the tutorial through the hands-on sections. The selected data must be informative enough to illustrate the meaning of using a tool or a given technique, but not too big to reqire long waiting times for its processing during a workshop. Typically, the selected data should be the informative subset of a full real-life dataset.
 
 For example for our tutorial, we generated a small dataset by
 
@@ -123,9 +123,9 @@ For example for our tutorial, we generated a small dataset by
 - Generating a reference database
     - Blasting it on the NR database on [NCBI Blast](https://blast.ncbi.nlm.nih.gov/Blast.cgi?PROGRAM=blastn&PAGE_TYPE=BlastSearch&LINK_LOC=blasthome)
     - Extracting one similar sequence found with Blast
-    - Searching and extracting 2 other sequences of the species using the [NCBI Nucleotide database](https://www.ncbi.nlm.nih.gov/nuccore)
+    - Searching and extracting 2 other sequences of the same species using the [NCBI Nucleotide database](https://www.ncbi.nlm.nih.gov/nuccore)
 
-We then developed the tutorial and tested it on this dataset. Once we were ready to share it, we uploaded the datasets on [Zenodo](https://zenodo.org/) to obtain a dedicated DOI (in the [Galaxy training network community](https://zenodo.org/communities/galaxy-training/?page=1&size=20)).
+We then developed the tutorial and tested it on this toy dataset. Once we were ready to share it, we uploaded the toy datasets on [Zenodo](https://zenodo.org/) to obtain a dedicated DOI (in the [Galaxy training network community](https://zenodo.org/communities/galaxy-training/?page=1&size=20)).
 
 ## Filling the tutorial content
 
