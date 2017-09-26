@@ -84,10 +84,10 @@ To ease this process, we created a template for new tutorials, complete with all
 
 ## Keeping track of the changes
 
-Once you started to change something, we need to keep track of these changes with a version control system (VCS). We are using Git as VCS and GitHub as hosting service.
+You need to keep track of all your new changes with a version control system (VCS). To do so, you will use Git as VCS, and GitHub as your personal hosting service.
 
-This repository is developed collaboratively with more than 40 contributors. For the collaboration, we are using the [GitHub flow](https://guides.github.com/introduction/flow/), which is based on forks, branches and pull requests.
-We will explain GitHub flow later and show you now how to start keeping track of the changes:
+This repository of tutorials is developed collaboratively among more than 40 contributors. Therefore, to ease the collaboration, we are using the [GitHub flow](https://guides.github.com/introduction/flow/) approach, which is based on forks, branches, and pull requests.
+Let's start tracking your changes!
 
 > ### {% icon hands_on %} Hands-on: Start keeping track of the changes
 >
