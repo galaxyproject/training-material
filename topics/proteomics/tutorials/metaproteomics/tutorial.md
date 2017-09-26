@@ -291,7 +291,7 @@ As a tabular file is being read, line filters may be applied and an SQL query ca
 >    >    </details>
 >    {: .question}
 >
->    - **Omit column headers from tabular output**: `Yes`
+>    - **include query result column headers**: `No`
 >
 > 2. Click **Execute** and inspect the query results file after it turned green. If everything went well, it should look similiar:
 >
@@ -528,6 +528,7 @@ The UniPept result file can contain multiple GO IDs in a single row. In order to
 >
 >    - **Tabular Dataset to normalize**: The latest UniPept `tabluar`/`tsv` output
 >    - **Columns to split**: Select `Column: 6`, the one containing the GO IDs
+>    - **List delimiter in column**: Insert a single space in the input field
 >
 > 2. Click **Execute**.
 >
@@ -621,7 +622,7 @@ As a final step we will use **Query Tabular** in a more sophisticated way to com
 >
 >          ORDER BY  bering_peptides desc,bering_psms desc
 >
->    - **Omit column headers from tabular output**: `No`
+>    - **include query result column headers**: `Yes`
 >
 > 4. Click **Execute** and inspect the three query result files.
 >
