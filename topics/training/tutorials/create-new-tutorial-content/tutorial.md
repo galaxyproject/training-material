@@ -91,13 +91,17 @@ Let's start tracking your changes!
 
 > ### {% icon hands_on %} Hands-on: Start keeping track of the changes
 >
-> 1. [Create a fork](https://help.github.com/articles/fork-a-repo/) of this repository on GitHub
-> 2. Add your fork to the current local copy: `git remote add fork https://github.com/galaxyproject/training-material`
-> 3. Create a new branch called "similarity-search" in your local copy: `git checkout -b similarity-search`
-> 4. Commit the changes in that branch with
->     - `git add topics/sequence-analysis/tutorials/similarity-search`
->     - `git commit -m "Set up the similarity search tutorial"`
-> 5. Push that branch to your fork on GitHub: `git push fork similarity-search`
+> 1. [Create a fork](https://help.github.com/articles/fork-a-repo/) of this repository on GitHub. Your account will contain a copy of the original collaboratively developed training material
+> 2. Link your fork on GitHub to the local (cloned) copy on your machine:
+>     `git remote add fork https://github.com/<YOUR_GITHUB_USERNAME>/training-material`
+> 3. Create a new branch called "similarity-search" in your local copy:
+>     `git checkout -b similarity-search`
+> 4. Add your changes to the new branch:
+>     `git add topics/sequence-analysis/tutorials/similarity-search`
+> 5. Commit your changes in that branch:
+>     `git commit -m "Set up the similarity search tutorial"`
+> 6. Push the new branch to your fork on GitHub:
+>     `git push fork similarity-search`
 {: .hands_on}
 
 The GitHub interface can also help you in the process of editing a file. It will automatically create a fork of this repository where you can safely work.
