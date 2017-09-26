@@ -222,22 +222,22 @@ We recommend to structure the tutorials as follows:
 > We can also cross-reference images inside our markdown with an anchor. For example, we can link to [the previous figure](#figure-1) using `[the display text](#figure-nb)` (changing `nb` with the image's number).
 {: .tip}
 
-> ### {% icon tip %} Tip: Writting mathematical expressions
+> ### {% icon tip %} Tip: Writing mathematical expressions
 >
-> Mathematical expressions can be written in LaTeX: they will be rendered with [MathJax](https://www.mathjax.org/).
+> Mathematical expressions can be written in LaTeX, and rendered with [MathJax](https://www.mathjax.org/).
 >
-> It is easy: surround your math content with two `$` signs, like with a math block:
+> Surround your math expression with two `$` signs (like in LaTeX math blocks):
 >
-> - inline, *e.g.* `$$ 5 + 5 $$` will be rendered as $$ 5 + 5 $$
-> - not inline, *e.g.* `$$ 5 + 5 $$` alone in new line will be rendered as
+> - inline expressions, *e.g.* `$$ 5 + 5 $$` will be rendered as $$ 5 + 5 $$
+> - block expressions, *e.g.* `$$ 5 + 5 $$` will be rendered in its own line block as
 >
 >   $$ 5 + 5 $$
 >
 >
-> If you don't want to start an inline math statement, just escape the dollar signs and they will be treated as simple dollar signs.
+> Dollar signs are therefore *reserved caracters* for instructing the templating system to open/close LaTeX math blocks. In case you don't want any math block to be opened/closed, but still be able to write a dollar sign, you have to *escape* it. Escaping enables the templating system to render the escaped caracter as a normal caracter.
 >
 >    > ### {% icon comment %} Comments
->    > LaTeX code that uses the pipe symbol `|` in inline math statements may lead to a line being recognized as a table line.
+>    > LaTeX code that uses the pipe symbol `|` in inline math statements may lead to a line being recognized as a table line by the templating system.
 >    > This can be avoided by using the `\vert` command instead of `|`
 >    {: .comment}
 {: .tip}
