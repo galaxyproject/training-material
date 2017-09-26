@@ -190,13 +190,12 @@ The tutorial's content is written directly after the short section of metadata. 
 > Check [this cheatsheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet) to learn more how to use Markdown.
 {: .tip}
 
-The content in Markdown is transformed by our templating system into the nice webpage which add the metadata. Indeed in the `tutorial.md` file,
-no need to add the name of the tutorial: it is automatically added based on the title defined in the metadata.
+The Markdown content is then transformed into a user friendly webpage throughout a templating system. With this approach, there is no need to add the name of every tutorial each time, since they are automatically added based on the tutorial's metadata.
 
-We recommend to structure the tutorials like this
+We recommend to structure the tutorials as follows:
 
-- An introduction to introduce the tutorial with the use case, the data, the methods
-- Several sections with the content of the tutorial and some hands-on parts (practicing is an important part of the learning process)
+- An introduction, to bring an overview of the tutorial with its use cases, data, and methods
+- Multiple sections, representing the steps of the analysis, complete with their hands-on parts (practicing is an important part of the learning process)
 - A conclusion to summarize what has been done in the tutorial (with a scheme)
 
 > ### {% icon hands_on %} Hands-on: Structuring the tutorial
