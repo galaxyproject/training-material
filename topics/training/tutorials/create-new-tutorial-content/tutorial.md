@@ -403,14 +403,13 @@ Boxes can be nested, *e.g.* for having tips inside a hands-on:
 
 # Adding slides (optional)
 
-Sometimes we also need slides to support the tutorial. With the current infrastructure, we also provide this possibility
-to serve on the website slides related to the tutorial.
+Sometimes we also need slides to support the tutorial's topics. With the current infrastructure we are able to also provide this functionality, and integrate a tutorial with further support material.
 
-The slides are written in Markdown (only the file extension is .html), as the tutorial and are rendered as a webpage thanks to [`Remark`](https://remarkjs.com). However this is not done automatically. We first need to tell the templating system to search for the slides by changing `slides` in the metadata from `no` to `yes`.
+Although the slide file's extension is .html, all slides are written in Markdown as well, and their content is rendered as a webpage thanks to [`Remark`](https://remarkjs.com). However, adding slides is not enough: we first need to tell the templating system to search for them by changing `slides` in the metadata from `no` to `yes`.
 
 Once it is done, the slides for our tutorial will be accessible at [http://localhost:4000/topics/sequence-analysis/tutorials/similarity-search/slides.html ](http://localhost:4000/topics/sequence-analysis/tutorials/similarity-search/slides.html)
 
-We can now fill the `slides.html` file:
+We can now fill the `slides.html` file as follows:
 
 
 ```
@@ -434,9 +433,9 @@ logo: "GTN"
 ### Next slide
 ```
 
-On the top, as for the `tutorial.md`, we need to define some metadata to link the slides to the correct tutorial. The metadata of the tutorial can then be used also to automatically fill the first slides (with the title, the requirements,...)  and the last slide (take-home message).
+On the top, as for the tutorial's `tutorial.md`, we need to define some metadata to link the slides with the corresponding tutorial. The metadata of the tutorial can then be used also to automatically fill the first slides (with the title, requirements, etc)  and the last slide (take-home message).
 
-After, each new slide is introduced by `---`, and the content of each slide is written in Markdown.
+Each new slide is introduced by `---`, and the content of each slide is written in Markdown.
 
 > ### {% icon hands_on %} Hands-on: Add some slides for the tutorial
 >
