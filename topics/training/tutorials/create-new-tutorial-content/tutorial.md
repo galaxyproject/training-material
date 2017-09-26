@@ -166,14 +166,14 @@ blabla
 
 ### Some metadata on the top
 
-On the top, there is some metadata:
+The tutorial needs to start with some medatada on its top:
 
 - `layout: tutorial_hands_on` (keep the default)
 - `topic_name: training` with the name of the topic
 - `tutorial_name: create-new-tutorial` with the name of tutorial
 
-These metadata are there to help the templating system to make the connection between the file and the global [metadata]({{site.url}}/topics/training/tutorials/create-new-tutorial-metadata/tutorial.html).
-If they are not correctly defined the tutorial can not be found on the website.
+These metadata are there to help the templating system linking between the tutorial's file and the global [metadata]({{site.url}}/topics/training/tutorials/create-new-tutorial-metadata/tutorial.html).
+If not correctly defined, the tutorial will not be found within the website.
 
 > ### {% icon hands_on %} Hands-on: Fix the top metadata
 >
