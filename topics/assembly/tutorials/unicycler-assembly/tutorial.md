@@ -29,7 +29,7 @@ A few definitions to start:
 There are two types of genome assembly: *de novo* (from scratch) are reference assisted. Reference-assisted assembly is performed by mapping sequencing reads against a reference genome from the same or a closely-related species.
 *De novo* genome assembly is performed by inferring all information from overlaps between sequencing reads only. These overlaps are extended to ultimately cover all chromsomes. 
 
-![Concept of de novo genome assembly](../../images/concept.png  "<em>De novo</em> Genome Assembly. (Figure from <a href='http://www.nature.com/nmeth/journal/v9/n4/full/nmeth.1935.html'>Baker:2012</a>)")
+![Concept of de novo genome assembly](../../images/concept.png  "<em>De novo</em> Genome Assembly. (Figure from <a href='https://doi.org/10.1038/nmeth.1935'>Baker:2012</a>)")
 
 To understand how genome assembly works, look at our previous trainings : 
 * [Introduction to Genome Assembly](https://galaxyproject.github.io/training-material/topics/assembly/tutorials/general-introduction/slides.html#1)
@@ -52,7 +52,7 @@ The quality of Illumina reads can be assessed with tools such as [FastQC](http:/
 ## Assembly with Unicycler
 
 [Unicycler](https://github.com/rrwick/Unicycler) is an assembly pipeline for bacterial genomes, based on [Spades Assembler](http://cab.spbu.ru/software/spades/) to which it adds a cicularisation process. Unicycler provides an assembly graph in addition to the fasta file and can handle plasmid rich genomes. Like Spades, it can assemble Illumina-only or hybrid datasets. For Illumina assembly, Unicycler optimises Spades by selecting a range of *k*-mer sizes and selecting the best, and applying several filters to refine the results. For hybrid assembly, Unicycler uses long reads to build bridges to resolve high repeat regions and obtain longer assemblies. You can find more informations in 
-[Wick:2017](http://journals.plos.org/ploscompbiol/article/file?id=10.1371/journal.pcbi.1005595&type=printable)
+[Wick:2017](https://doi.org/10.1371/journal.pcbi.1005595)
 
 ## Annotation with Prokka
 
