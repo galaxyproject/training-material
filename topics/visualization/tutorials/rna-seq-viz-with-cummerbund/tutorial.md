@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
-topic_name: your_topic
-tutorial_name: your_tutorial_name
+topic_name: visualization
+tutorial_name: rna-seq-viz-with-cummerbund
 ---
 
 # Introduction
