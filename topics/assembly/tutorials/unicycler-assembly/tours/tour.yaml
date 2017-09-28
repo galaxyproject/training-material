@@ -90,18 +90,50 @@ steps:
 
     - title : "Run the tool on Multiple datasets"
       content : "To run the analysis on several datasets, here our two Illumina libraries, click on the 'Multiple Datasets icon.'"
-      element : "#uid-27 > div.ui-form-field > div.ui-select-content > div.ui-options > div.btn-group.ui-radiobutton > label.btn.btn-default.ui-option.active"
+      element : "#uid-24"
   
     - title : "Select the tool inputs"
-      content : "Select the Illumina read datasets"
+      content : "Select all the datasets"
+      element : "#uid-24"
       
     - title : "Run"
       content : "Click Execute to run the tool"
       element : "#execute"
 
-    - title: "Read Quality"
-      content: "You can now visualize the Quality control result by clicking on the eye icon of the Fastqc webpage output. For more information on the quality metrics of FastQC, see <a href=\"https://biof-edu.colorado.edu/videos/dowell-short-read-class/day-4/fastqc-manual\"> FastQC Manual."
+    - title: "Read Quality "
+      content: "Once FastQC is done running (green),you can visualize the Quality control result of each file by clicking on the eye icon of the Fastqc webpage output. For more information on the quality metrics of FastQC, see <a href=\"https://biof-edu.colorado.edu/videos/dowell-short-read-class/day-4/fastqc-manual\"> FastQC Manual."
       position: "center"
+
+    - title: "Read Quality aggregation for mutiple file"
+      content: "For a better visualization of your read quality across several datasets, you can aggregate FastQC results with MultiQC tool."
+      position: "center"
+
+    - title: "Aggregata FastQC results"
+      content: "Now search for the MultiQc tool."
+      position: "center"
+      element: "#tool-search-query"
+
+    - title: "Select software for MultiQC aggregation."
+      content: "Select FastQC in the Software list."
+      position: "right"
+      element: "#uid-61"
+
+    - title: "Select files for MultiQC aggregation."
+      content: "Select <b>RawData</b> result files."
+      position: "right"
+      element: "#uid-71"
+
+    - title : "Run"
+      content : "Click Execute to run the tool"
+      element : "#execute"
+
+    - title: "Read Quality "
+      content: "You can now visualize the aggregated Quality control results on the MultiQC webpage output. You can notice that Illumina reads have much shorter reads the ONT reads, giving a strange looking graph. You can zoom in to better visualize the short reads quality."
+      position: "left"
+
+    - title: "Read Quality "
+      content: "You can also notice that the ONT reads have a much poorer quality which is generally the case with long read technologies and is not very meaningful, whereas it really means a lot for Illumina Data. In that case, we can see the mean quality score is good across all reads."
+      position: "left"
 
     - title: "Let's run the assembly !"
       content: "Now search for the Unicycler tool, which will allow us to perform an hybrid assembly."
@@ -148,7 +180,7 @@ steps:
       element : "#execute"  
     
     - title: "Assembly Quality"
-      content: "You can now visualize Quast result by clicking on the eye icon of the html output. For more information on the Quast output, see <a href=\"http://quast.bioinf.spbau.ru/manual.html#sec3\"> Quast Manual. "
+      content: "You can now visualize Quast result by clicking on the eye icon of the html output. We can notice that our assembly produces two contigs, one large (4.5Mb) and one small (5kb). These contigs correspond to E. coli C genome and bacterophage phiX174 genome often used in Illumina sequencing. For more information on the Quast output, see <a href=\"http://quast.bioinf.spbau.ru/manual.html#sec3\"> Quast Manual. "
       position: "center"    
       
       
