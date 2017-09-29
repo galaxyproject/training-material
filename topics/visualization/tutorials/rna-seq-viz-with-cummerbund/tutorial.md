@@ -45,14 +45,19 @@ Visualization techniques are key to overcome the complexity of RNA-Seq data, and
 
 # Reasons for visualizations
 
-To make sense of the available RNA-Seq data, and overview the condition-specific gene expression levels of the provided samples, we need to visualize the imported dataset.
+To make sense of the available RNA-Seq data, and overview the condition-specific gene expression levels of the provided samples, we need to visualize the imported dataset. Here we will use [CummeRbund](http://compbio.mit.edu/cummeRbund/).
 
-[CummeRbund](http://compbio.mit.edu/cummeRbund/) is an open-source tool that simplifies the analysis of a Cuffdiff RNA-Seq output. In particular, it helps researchers
+CummeRbund is an open-source tool that simplifies the analysis of a Cuffdiff RNA-Seq output. In particular, it helps researchers
 - managing, integrating, and visualizing the data produced by Cuffdiff
 - simplifying data exploration
 - providing a bird's-eye view of the expresion analysis by describing relationships betweeen genes, transcripts, transcription start sites, and CDS regions
 - exploring subfeatures of individual genes or gene-sets
 - creating publication-ready plots
+
+A typical workflow for the visualization of RNA-Seq data involving CummeRbund:
+
+![workflow](../../images/rna-seq-viz-with-cummerbund.png)
+
 
 > ### {% icon hands_on %} Hands-on: Visualization
 >
