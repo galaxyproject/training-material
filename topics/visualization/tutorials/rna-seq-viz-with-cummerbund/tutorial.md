@@ -43,7 +43,7 @@ Visualization techniques are key to overcome the complexity of RNA-Seq data, and
 > By default, when data is imported via its link, Galaxy names it with its URL.
 {: .hands_on}
 
-# Visualization
+# Reasons for visualizations
 
 To make sense of the available RNA-Seq data, and overview the condition-specific gene expression levels of the provided samples, we need to visualize the imported dataset.
 
