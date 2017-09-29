@@ -7,7 +7,9 @@ tutorial_name: rna-seq-viz-with-cummerbund
 # Introduction
 {:.no_toc}
 
-General introduction about the topic and then an introduction of the tutorial (the questions and the objectives). It is nice also to have a scheme to sum up the pipeline used during the tutorial. The idea is to give to trainees insight into the content of the tutorial and the (theoretical and technical) key concepts they will learn.
+RNA-Seq analysis helps researchers finding new genes and spliced variants, and provides a quantification of cell- and context- specific gene expression. Its data is however complex to handle, and requires both computer science and mathematical knowledge to be managed and interpreted.
+
+Visualization techniques are key to overcome the complexity of RNA-Seq data, and represent valuable tools to gather information and insights.
 
 > ### Agenda
 >
