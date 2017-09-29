@@ -20,71 +20,66 @@ Visualization techniques are key to overcome the complexity of RNA-Seq data, and
 >
 {: .agenda}
 
-# Part 1
-
-Introduction about this part
-
-## Subpart 1
-
-Short introduction about this subpart.
+# Importing RNA-Seq data
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
-> 1. Step1
-> 2. Step2
+> 1. Create a new history
+> 2. Import the SQLite database [`cuffdiff-sqlite`](https:zenodo.org/record/XXX)
 >
->    > ### :nut_and_bolt: Comments
->    > A comment
->    {: .comment}
->
->    > ### :bulb: Tip: A tip
+>    > ### {% icon tip %} Tip: Importing data via links
 >    >
->    > * Step1
->    > * Step2
+>    > * Copy the link location
+>    > * Open the Galaxy Upload Manager
+>    > * Select **Paste/Fetch Data**
+>    > * Paste the link into the text field
+>    > * Press **Start**
 >    {: .tip}
+>
+>    > ### {% icon comment %} Comments
+>    >
+>    > Rename the dataset to "RNA-Seq SQLite data"
+>    {: .comment}
+> By default, when data is imported via its link, Galaxy names it with its URL.
 {: .hands_on}
 
-## Subpart 2
+# Visualization
 
-Short introduction about this subpart.
+To make sense of the available RNA-Seq data, and overview the condition-specific gene expression levels of the provided samples, we need to visualize the imported dataset.
 
-> ### {% icon hands_on %} Hands-on: Data upload
+[CummeRbund](http://compbio.mit.edu/cummeRbund/) is an open-source tool that simplifies the analysis of a Cuffdiff RNA-Seq output. In particular, it helps researchers
+- managing, integrating, and visualizing the data produced by Cuffdiff
+- simplifying data exploration
+- providing a bird's-eye view of the expresion analysis by describing relationships betweeen genes, transcripts, transcription start sites, and CDS regions
+- exploring subfeatures of individual genes or gene-sets
+- creating publication-ready plots
+
+> ### {% icon hands_on %} Hands-on: Visualization
 >
-> 1. Step1
-> 2. Step2
+> 1. **CummeRbund** {% icon tool %}: Run CummeRbund on the imported SQLite dataset with default parameters
+> 2. Inspect CummerBund's report on its webpage output
 >
->    > ### :question: Question
+>    > ### {% icon tip %} Tip: Inspecting the content of a file in Galaxy
 >    >
->    > Question?
->    >
->    > <details>
->    > <summary>Click to view answers</summary>
->    > Answer to question
->    > </details>
->    {: .question}
-{: .hands_on}
-
-Some blabla
-> ### {% icon hands_on %} Hands-on: Data upload
->
-> 1. Step1
-> 2. Step2
+>    > * Click on the eye ("View data") on the right of the file name in the history
+>    > * Inspect the content of the file on the middle
+>    {: .tip}
 >
 >    > ### {% icon question %} Questions
 >    >
->    > 1. Question1?
->    > 2. Question2?
+>    > 1. How XXX?
+>    > 2. How YYY?
+>    > 3. How ZZZ?
 >    >
->    >    <details>
->    >    <summary>Click to view answers</summary>
->    >    <ol type="1">
->    >    <li>Answer for question1</li>
->    >    <li>Answer for question2</li>
->    >    </ol>
->    >    </details>
+>    > <details>
+>    > <summary>Click to view the answers</summary>
+>    > <ol type="1">
+>    > <li></li>
+>    > <li></li>
+>    > <li></li>
+>    > </ol>
+>    > </details>
 >    {: .question}
->
-> 3. Step3
 {: .hands_on}
 
 # Part 2
