@@ -98,4 +98,6 @@ Short introduction about this subpart.
 # Conclusion
 {:.no_toc}
 
-Conclusion about the technical key points. And then relation between the technics and the biological question to end with a global view.
+Visualization tools help researchers making sense of data, providing a bird's-eye view of the underlying analysis.
+In this tutorial we overviewed the advantages of visualizing RNA-Seq results with CummeRbund, and gained insights on Cuffdiff's big-data output by plotting informations relative to CASE1, CASE2, CASE3.
+
