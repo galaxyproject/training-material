@@ -82,7 +82,7 @@ To make sense of the available RNA-Seq data, and overview the condition-specific
 >    {: .question}
 {: .hands_on}
 
-# Part 2
+# CASE 1
 
 Short introduction about this subpart.
 
@@ -90,6 +90,10 @@ Short introduction about this subpart.
 >
 > Do you want to learn more about the principles behind mapping? Follow our [training](../../NGS-mapping)
 > {: .comment}
+
+# CASE 2
+
+# CASE 3
 
 # Conclusion
 {:.no_toc}
