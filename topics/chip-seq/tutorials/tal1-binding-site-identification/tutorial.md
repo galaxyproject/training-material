@@ -40,7 +40,7 @@ Because of the long processing time for the large original files, we have downsa
 
 # Step 1: Quality control
 
-As for any NGS data analysis, ChIP-seq data must be quality controlled before being aligned to a reference genome. For more detailed information on NGS quality control, check out the tutorial [here]({{site.url}}/topics/sequence-analysis).
+As for any NGS data analysis, ChIP-seq data must be quality controlled before being aligned to a reference genome. For more detailed information on NGS quality control, check out the tutorial [here]({{site.baseurl}}/topics/sequence-analysis).
 
 > ### {% icon hands_on %} Hands-on: Quality control
 >
@@ -368,7 +368,7 @@ We show here an alternative to Trackster, [IGV](http://software.broadinstitute.o
 >
 > 1. Open IGV on your local computer.
 > 2. Click on each 'narrow peaks' result file from the MACS2 computations on 'display with IGV' --> 'local Mouse mm10'
-> 3. For more information about IGV see [here]({{site.url}}/topics/introduction/tutorials/igv-introduction/tutorial.html)
+> 3. For more information about IGV see [here]({{site.baseurl}}/topics/introduction/tutorials/igv-introduction/tutorial.html)
 
 # Step 8: Identifying unique and common TAL1 peaks between stages
 

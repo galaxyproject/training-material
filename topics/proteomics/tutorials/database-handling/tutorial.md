@@ -140,7 +140,7 @@ The most common method of peptide and protein FDR calculation is by adding known
 # Concluding remarks
 {:.no_toc}
 
-To keep your databases up-to-date, or if you need several databases for different organisms, it would make sense to create a workflow out of the Hands-On sections (to learn about workflows see [this tutorial]({{site.url}}/topics/introduction/tutorials/galaxy-intro-101/tutorial.html)). You might also want to combine the mycoplasma databases to a single file, which you then easily can add to each of your main databases.
+To keep your databases up-to-date, or if you need several databases for different organisms, it would make sense to create a workflow out of the Hands-On sections (to learn about workflows see [this tutorial]({{site.baseurl}}/topics/introduction/tutorials/galaxy-intro-101/tutorial.html)). You might also want to combine the mycoplasma databases to a single file, which you then easily can add to each of your main databases.
 
 Often you may not want to use the most recent database for reasons of reproducibility. If so, you can transfer the final database of this tutorial into other histories to work with it.
 

@@ -138,7 +138,7 @@ SearchGUI archive file) that will serve as an input for the next section, Peptid
 > ### {% icon comment %} Comment
 > Note that sequence databases used for metaproteomics are usually much larger than the excerpt used in this tutorial. When using large databases, the peptide identification step can take much more time for computation. In metaproteomics, choosing the optimal database is a crucial step of your workflow, for further reading see [Timmins-Schiffman et al (2017)](https://www.ncbi.nlm.nih.gov/pubmed/27824341).
 >
-> To learn more about database construction in general, like integrating contaminant databases or using a decoy strategy for FDR searching, please consult our tutorial on [Database Handling]({{site.url}}/topics/proteomics/tutorials/database-handling/tutorial.html).
+> To learn more about database construction in general, like integrating contaminant databases or using a decoy strategy for FDR searching, please consult our tutorial on [Database Handling]({{site.baseurl}}/topics/proteomics/tutorials/database-handling/tutorial.html).
 >
 {: .comment}
 
@@ -159,7 +159,7 @@ outputs.
 > all peptide sequence matching information and can be utilized by compatible downstream
 > software. Other outputs are focused on the inferred proteins identified from the PSMs, as well
 > as phosphorylation reports, relevant if a phosphoproteomics experiment has been undertaken. 
-> More detailed information on peptide inference using SearchGUI and PeptideShaker can be found in our tutorial on [Peptide and Protein ID]({{site.url}}/topics/proteomics/tutorials/protein-id-sg-ps/tutorial.html).
+> More detailed information on peptide inference using SearchGUI and PeptideShaker can be found in our tutorial on [Peptide and Protein ID]({{site.baseurl}}/topics/proteomics/tutorials/protein-id-sg-ps/tutorial.html).
 {: .comment}
 
 > ### {% icon hands_on %} Hands-on: PeptideShaker
