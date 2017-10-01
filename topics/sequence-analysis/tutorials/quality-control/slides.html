@@ -281,7 +281,13 @@ This module will raise a warning if all sequences are not the same length. This 
 ![](../../images/sequence_duplication_levels.png)
 
 ???
+This quality check module counts the degree of duplication for every sequence in the library, and creates a plot showing the relative number of sequences with different degrees of duplication:
+- the blue line represents the full sequence set, showing how its duplication levels are distributed;
+- the red line represents the de-duplicated sequences, plotting the proportions of deduplicated sequence sets which come from different duplication levels in the original data.
+
 In genomic projects, sequence duplication is investigated. Duplicated sequences can arise when there are too few fragments present at any stage prior to sequencing.
+
+This module issues a warning if non-unique sequences make up for more than 20% of the total sequences. An error is raised instead if non-unique sequences make up for more than 50% of the total.
 
 ---
 
@@ -303,7 +309,11 @@ To investigate tag or adapter content, FastQC generates a plot showing a cumulat
 ![](../../images/kmer_content.png)
 
 ???
-An other way to find tag sequences is to look at the K-mer content and find those which do not have even coverage through the length of your reads and could correspond to tag sequences.
+Another way to find tag sequences is to look at the K-mer content, and find those which do not have even coverage through the length of your reads and could correspond to tag sequences.
+
+K-mers with positionally biased enrichment are reported. The top 6 most biased K-mer are additionally plotted to show their distribution. 
+
+Overrepresented K-mers will appear as sharp spikes at a single point in the sequence, deviating from what should be a progressive or broad enrichment. 
 
 ---
 
