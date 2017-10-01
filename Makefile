@@ -30,13 +30,17 @@ build: ## build files but do not run a server
 	${JEKYLL} build
 .PHONY: build
 
-check: build ## validate HTML
+check-html: build ## validate HTML
 	timeout 120s bundle exec htmlproofer --http-status-ignore 405,999 --url-ignore "/.*localhost.*/","/.*vimeo\.com.*/" --file-ignore "/.*\/files\/.*/" ./_site
-.PHONY: check
+.PHONY: check-html
 
-lint:
+check-html-gh-pages:  ## validate HTML on gh-pages branch (for daily cron job)
+	timeout 120s bundle exec htmlproofer --http-status-ignore 405,999 --url-ignore "/.*localhost.*/","/.*vimeo\.com.*/" --file-ignore "/.*\/files\/.*/" .
+.PHONY: check-html-gh-pages
+
+check-yaml:
 	yamllint .
-.PHONY: lint
+.PHONY: check-yaml
 
 clean: ## clean up junk files
 	@rm -rf _site

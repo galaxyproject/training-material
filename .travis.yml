@@ -48,15 +48,15 @@ script:
     set -e
     if [ "$TRAVIS_BRANCH" == "gh-pages" ]
     then
-      timeout 120s htmlproofer --http-status-ignore 405,999 --url-ignore "/.*localhost.*/","/.*vimeo\.com.*/" --file-ignore "/.*\/files\/.*/"
+      make check-html-gh-pages
     elif [ "$TRAVIS_BRANCH" != "master" ]
     then
       if [ "$CHECK" == "htmlproofer" ]
       then
-        make check
+        make check-html
       elif [ "$CHECK" == "yamllint" ]
       then
-        make lint
+        make check-yaml
       elif [ "$CHECK" == "site-build" ]
       then
         make build
