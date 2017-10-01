@@ -21,10 +21,11 @@ env:
 
 matrix:
   include:
-    - env: CHECK=LINKS
-    - env: CHECK=BUILD
+    - env: CHECK=yamllint
+    - env: CHECK=htmlproofer
+    - env: CHECK=site-build
   allow_failures:
-    - env: CHECK=LINKS
+    - env: CHECK=htmlproofer
 
 install:
   - sudo apt-get update
@@ -50,10 +51,13 @@ script:
       timeout 120s htmlproofer --http-status-ignore 405,999 --url-ignore "/.*localhost.*/","/.*vimeo\.com.*/" --file-ignore "/.*\/files\/.*/"
     elif [ "$TRAVIS_BRANCH" != "master" ]
     then
-      if [ "$CHECK" == "LINKS" ]
+      if [ "$CHECK" == "htmlproofer" ]
       then
         make check
-      elif [ "$CHECK" == "BUILD" ]
+      elif [ "$CHECK" == "yamllint" ]
+      then
+        make lint
+      elif [ "$CHECK" == "site-build" ]
       then
         make build
       else
