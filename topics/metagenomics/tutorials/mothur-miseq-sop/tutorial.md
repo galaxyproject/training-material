@@ -147,6 +147,9 @@ create a collection now:
 >   The middle segment is the name for each pair. You can change these names by clicking on them. These
 >   names will be used as sample names in the downstream analysis so always make sure they are
 >   informative.
+>   **Important:** Make sure these sample names contain only alphanumeric characters. If you've
+>   imported the data from Zenodo, the sample names will default to the full url, please change these
+>   values to only their last part, e.g. `F3D0`, `F3D5` etc.
 >
 > 5. Once you are happy with your pairings, enter a name for your new collection at the bottom right of
 >   the screen. Then click the **Create List** button. A new dataset collection item will now appear in
