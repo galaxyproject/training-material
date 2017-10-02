@@ -20,7 +20,7 @@ Visualization techniques are key to overcome the complexity of RNA-Seq data, and
 >
 {: .agenda}
 
-# Importing RNA-Seq data
+# Importing RNA-Seq result data
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
