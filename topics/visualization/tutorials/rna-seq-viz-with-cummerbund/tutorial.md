@@ -20,6 +20,21 @@ Visualization techniques are key to overcome the complexity of RNA-Seq data, and
 >
 {: .agenda}
 
+# Reasons for visualizations
+
+To make sense of the available RNA-Seq data, and overview the condition-specific gene expression levels of the provided samples, we need to visualize our results. Here we will use [CummeRbund](http://compbio.mit.edu/cummeRbund/).
+
+CummeRbund is an open-source tool that simplifies the analysis of a Cuffdiff RNA-Seq output. In particular, it helps researchers:
+- managing, integrating, and visualizing the data produced by Cuffdiff
+- simplifying data exploration
+- providing a bird's-eye view of the expresion analysis by describing relationships betweeen genes, transcripts, transcription start sites, and CDS regions
+- exploring subfeatures of individual genes or gene-sets
+- creating publication-ready plots
+
+A typical workflow for the visualization of RNA-Seq data involving CummeRbund:
+
+![workflow](../../images/rna-seq-viz-with-cummerbund.png)
+
 # Importing RNA-Seq result data
 
 > ### {% icon hands_on %} Hands-on: Data upload
@@ -43,21 +58,7 @@ Visualization techniques are key to overcome the complexity of RNA-Seq data, and
 > By default, when data is imported via its link, Galaxy names it with its URL.
 {: .hands_on}
 
-# Reasons for visualizations
-
-To make sense of the available RNA-Seq data, and overview the condition-specific gene expression levels of the provided samples, we need to visualize the imported dataset. Here we will use [CummeRbund](http://compbio.mit.edu/cummeRbund/).
-
-CummeRbund is an open-source tool that simplifies the analysis of a Cuffdiff RNA-Seq output. In particular, it helps researchers
-- managing, integrating, and visualizing the data produced by Cuffdiff
-- simplifying data exploration
-- providing a bird's-eye view of the expresion analysis by describing relationships betweeen genes, transcripts, transcription start sites, and CDS regions
-- exploring subfeatures of individual genes or gene-sets
-- creating publication-ready plots
-
-A typical workflow for the visualization of RNA-Seq data involving CummeRbund:
-
-![workflow](../../images/rna-seq-viz-with-cummerbund.png)
-
+# CummeRbund
 
 > ### {% icon hands_on %} Hands-on: Visualization
 >
