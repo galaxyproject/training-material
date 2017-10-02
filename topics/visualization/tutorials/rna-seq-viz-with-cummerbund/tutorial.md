@@ -20,7 +20,7 @@ Visualization techniques are key to overcome the complexity of RNA-Seq data, and
 >
 {: .agenda}
 
-# Reasons for visualizations
+# Reasons for visualizing RNA-Seq results
 
 To make sense of the available RNA-Seq data, and overview the condition-specific gene expression levels of the provided samples, we need to visualize our results. Here we will use [CummeRbund](http://compbio.mit.edu/cummeRbund/).
 
