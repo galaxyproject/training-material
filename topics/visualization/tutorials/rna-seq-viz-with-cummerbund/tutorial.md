@@ -62,7 +62,7 @@ CummeRbund reads your RNA-Seq results from a [SQLite](XXX) database. This databa
 >
 >    > ### {% icon comment %} Comments
 >    >
->    > Rename the dataset to "RNA-Seq SQLite data"
+>    > Rename the dataset to "RNA-Seq SQLite result data"
 >    {: .comment}
 > By default, when data is imported via its link, Galaxy names it with its URL.
 {: .hands_on}
