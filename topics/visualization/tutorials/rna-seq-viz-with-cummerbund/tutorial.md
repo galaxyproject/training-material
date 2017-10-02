@@ -35,12 +35,21 @@ A typical workflow for the visualization of RNA-Seq data involving CummeRbund:
 
 ![workflow](../../images/rna-seq-viz-with-cummerbund.png)
 
+CummeRbund reads your RNA-Seq results from a [SQLite](XXX) database. This database has to be created using Cuffdiff's SQLite output option.
+
+> ### {% icon hands_on %} Hands-on: SQLite output with Cuffdiff
+>
+> Instruct Cuffdiff to organize its output in a SQLite database for later read with CummeRbund
+>
+> ![SQLite output](../../images/cuffdiff-set-sqlite.png)
+{: .hands_on}
+
 # Importing RNA-Seq result data
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
 > 1. Create a new history
-> 2. Import the SQLite database [`cuffdiff-sqlite`](https:zenodo.org/record/XXX)
+> 2. Import the SQLite database [`cuffdiff-sqlite`](XXX)
 >
 >    > ### {% icon tip %} Tip: Importing data via links
 >    >
