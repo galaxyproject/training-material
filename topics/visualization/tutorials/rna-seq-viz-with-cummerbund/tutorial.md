@@ -102,8 +102,8 @@ As researchers in the digital Life Sciences, our aim is to infer biological mean
 > 7. Select the extracted table as its input, and filter over the target column
 >
 >    > ### {% icon question %} Questions
->    > Which conditional expression has to be set to filter all records on the selected column?
->    > WHat happened to the records in the original table?
+>    > 1. Which conditional expression has to be set to filter all records on the selected column?
+>    > 2. What happened to the records in the original table?
 >    >
 >    > <details>
 >    > <summary>Click to view the answers</summary>
@@ -116,6 +116,19 @@ As researchers in the digital Life Sciences, our aim is to infer biological mean
 > 8. **Sort** {% icon tool %}: Look up for this tool in the search bar, and select it
 > 9. The values of differential expression are stored on column 10, we will sort (descending) all records on the basis of their value at the 10th column
 > 10. Select the filtered table as the input, and provide the column on which the records have to be sorted, the sorting flavor, and the order
+>
+>    > ### {% icon question %} Questions
+>    > 1. Since the start of our filtering process, how many records now represent the significant subset for extracting informations?
+>    > 2. What does this shrinking of the number of lines represent?
+>    >
+>    > <details>
+>    > <summary>Click to view the answers</summary>
+>    > <ol type="1">
+>    > <li>Click on the boxes in your history, their small preview higlights the number of lines: from ~140,000 to 219</li>
+>    > <li>This process represents a necessary step to gather insights on the biological meaning of our samples in our analyses: putting the original raw RNA-Seq result data into context, cutting down the less-meaningful records to focus on what is needed to go from data to information</li>
+>    > </ol>
+>    > </details>
+>    {: .question}
 {: .hands_on}
 
 # CummeRbund
