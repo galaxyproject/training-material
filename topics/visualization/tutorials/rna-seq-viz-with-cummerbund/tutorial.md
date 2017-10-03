@@ -113,9 +113,8 @@ As researchers in the digital Life Sciences, our aim is to infer biological mean
 >    > </ol>
 >    > </details>
 >    {: .question}
-> 8. **Sort** {% icon tool %}: Look up for this tool in the search bar, and select it
-> 9. The values of differential expression are stored on column 10, we will sort (descending) all records on the basis of their value at the 10th column
-> 10. Select the filtered table as the input, and provide the column on which the records have to be sorted, the sorting flavor, and the order
+> 8. **Sort** {% icon tool %}: Look up for this tool in the search bar, and select it. The values of differential expression are stored on column 10, we will sort (descending) all records on the basis of their value at the 10th column
+> 9. Select the filtered table as the input, and provide the column on which the records have to be sorted, the sorting flavor, and the order
 >
 >    > ### {% icon question %} Questions
 >    > 1. Since the start of our filtering process, how many records now represent the significant subset for extracting informations?
