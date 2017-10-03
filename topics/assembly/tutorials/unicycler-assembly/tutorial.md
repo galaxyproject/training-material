@@ -216,37 +216,53 @@ Run Prokka with the following parameters:
 ![Prokka Interface](../../images/Prokka_Interface.png  "Prokka Interface")
 ------
 
-Prokka outputs 10 datasets. One of the is the Prokka log, another is the error report,  but 8 are diverse result files : 
-* **txt file** : Provides Statistics on the annotation : number of CDS predicted, number of rRNA etc.
-* **tbl file** : Provides a tabulated list of annotated features.
-* **fsa file** : Nucleotide fasta file of the input contig sequence.
-* **sqn file** : ASN1 format file for submission to GenBank.
-* **ffn file** : Nucleotide FASTA file of all the prediction transcripts.
-* **faa file** : Protein FASTA file of the translated CDS sequences.
-* **fna file** : Nucleotide fasta file of the input contig sequence.
-* **gbk file** : GenBank file.
-* **gff file** : gff3 file.
+Prokka outputs 10 datasets (including two log files). These are in various formats: 
+
+* **txt** : Provides Statistics on the annotation : number of CDS predicted, number of rRNA etc.
+* **tbl** : Provides a tabulated list of annotated features.
+* **fsa** : Nucleotide fasta file of the input contig sequence.
+* **sqn** : [ASN.1](https://www.ncbi.nlm.nih.gov/Structure/asn1.html) format file for submission to GenBank.
+* **ffn** : Nucleotide FASTA file of all the prediction transcripts.
+* **faa** : Protein FASTA file of the translated CDS sequences.
+* **fna** : Nucleotide fasta file of the input contig sequence.
+* **gbk** : [GenBank](https://www.ncbi.nlm.nih.gov/Sitemap/samplerecord.html) file.
+* **gff** : [gff3](http://gmod.org/wiki/GFF3) file.
 
 ## Visualize the results in IGV
 
-You can visualize Prokka annotations using Integrative Genome Browser (IGV).
-First, download and install [IGV](http://software.broadinstitute.org/software/igv/) Open an instance of IGV on you computer, and then import the genome file from galaxy by clicking on the "display with IGV local" 
+Let's look at the entire assembly and its annotation in the genome browser. We can do this using Integrated Genome Browser ([IGV](http://software.broadinstitute.org/software/igv/). To start, locate the output of Unicycler and expand it (don't click anything yet):
 
-![Unicycler result Visualisation](../../images/unicycler_result.png  "Unicycler output can be sent to a local instance of IGV")
+----
+![Unicycler result Visualization](../../images/unicycler_igv.png  "Expanding Unicycler assembly reveals IGV link.")
+----
 
-You can then send the gff file resulting from the annotation with Prokka.
+Visualization requires a local installation of IGV. If you have IGV installed - just start it. If you don't - read on. 
 
-![Prokka result Visualization](../../images/prokka_result.png  "Prokka output can then be sent to a local instance of IGV")
+### Starting IGV
 
-You can then visualize the result of your analysis in IGV 
-
-
-![IGV whole assembly visualization](../../images/IGV.png  "IGV Whole assembly visualization. You can visualize the whole assembly and gene density by selecting the 'all' view.")
+Go to IGV [download page](http://software.broadinstitute.org/software/igv/download) and select one of the options. The one I would try first would be **Jave Web Start**. Simply click the **Launch** button for 10 GB distribution. Once IGV starts it will look something like this:
 
 
-![IGV zoomed visualization](../../images/zoomed_igv.png  "IGV zoomed visualization. For more detail view, select a contig and zoom on a region. You can see more information about a feature by passing over it with you cursor")
+-----
+![IGV just started](../../images/igv1.png "IGV started by using Java Web Start. Note that it is currently showing Human Genome (hg38) build. This is obviously <b>not</b> what we want.")
+----
+
+Now go back to the expanded Unicycler assembly dataset shown in [Figure 18](#figure-18) and click on the *local* link highlighted with orange outline. The browser will change:
+
+----
+![IGV with Unicycler assembly](../../images/igv2.png "Now you can the the major contig shown in the browser window.")
+----
+
+Finally, let's add Prokka annotations to the browser image. For this simply expand Prokka's GFF3 dataset:
+
+----
+![Expanded GFF3 dataset representing Prokka annotations](../../images/prokka_item.png "Expanded GFF dataset generated with Prokka. Click on the <em>local</em> link (highlighted with orange outline) to display this dataset within IGV.")
+----
+
+And this is it!
+
+You will now see the annotations within the browser window:
 
 
-
-
+![Prokka result Visualization](../../images/igv3.png  "Viewing annotated assembly withing IGV.")
 
