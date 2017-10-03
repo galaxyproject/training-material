@@ -69,7 +69,7 @@ CummeRbund reads your RNA-Seq results from a [SQLite](XXX) database. This databa
 
 # Filtering and sorting
 
-As researchers in the digital Life Sciences, our aim is to infer biological meaning from the raw RNA-Seq results. We therefore want to first highlight the most significant differentially expressed genes in our analysis.
+As researchers in the digital Life Sciences, our aim is to infer biological meaning from the raw RNA-Seq results. We therefore want to first highlight the most significant differentially expressed genes in our analysis, and then obtain informative visualizations.
 
 > ### {% icon hands_on %} Hands-on: Extracting the most significant differentially expressed genes
 >
