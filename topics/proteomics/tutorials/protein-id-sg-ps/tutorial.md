@@ -45,18 +45,19 @@ Raw data conversion is the first step of any proteomic data analysis. The most c
 
 > ### {% icon hands_on %} Optional Hands-On: Preparing raw data
 >
-> This part of the Hands-On section is optional, because it cannot be performed on most GalaxyP instances due to licensing reasons. Therefore, we provide the [input data](https://zenodo.org/record/546301) also already converted to `.mgf` and `.mzML` file formats. If you choose to omit this part of the Hands-On section, please download the file "qExactive01819_vendor-peakPicking.mzml" from [https://zenodo.org/record/546301/files/qExactive01819_vendor-peakPicking.mzml].
+> This part of the Hands-On section is optional, because it cannot be performed on most GalaxyP instances due to licensing reasons. Therefore, we provide the [input data](https://zenodo.org/record/796184) also already converted to `.mgf` and `.mzML` file formats. If you choose to omit this part of the Hands-On section, please download the file [preconverted mzML file](https://zenodo.org/record/892005/files/qExactive01819_profile.mzml).
 >
 > 1. Create a new history for this Peptide and Protein ID exercise.
 > 2. Load the example dataset into your history from this [link](ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2014/01/PXD000674/qExactive01819.raw).
 > 3. Rename the dataset to "Test data".
 > 4. Run ***msconvert*** {% icon tool %} on the test data to convert to the mzML format
+> 5. Run ***PeakPickerHiRes*** {% icon tool %} on the resulting mzML file.
+> 6. Run ***FileConverter*** {% icon tool %} on the picked mzML. In the **Advanced Options** set the **Output file type** to `mgf`.
+> 7. Change the ***Datatype*** of the ***FileConverter*** {% icon tool %} output to mgf by clicking the pencil :pencil: icon.
 >
 >   > ### {% icon comment %} Comment: Local Use of MSConvert
 >   > The vendor libraries used by MSConvert are only licensed for Windows systems and are therefore rarely implemented in Galaxy instances. If ***msconvert*** {% icon tool %} is not available in your Galaxy instance, please install the software on a Windows computer and run the conversion locally. You can find a detailed description of the necessary steps [here](http://genesis.ugent.be/files/costore/practicals/bioinformatics-for-proteomics/1-Peptide-and-Protein-Identification/1.2-Peak-List-Generation/1.2-Peak-List-Generation.pdf). Afterwards, upload the resulting mzML file to your Galaxy history.
 >  {: .comment}
->
-> 5. Run ***PeakPickerHiRes*** {% icon tool %} on the resulting mzML file.
 >
 >   > ### {% icon comment %} Comment: Peak Picking
 >   > Depending on your machine settings, raw data will be generated either in profile mode or centroid mode. For most peptide search engines, the MS2 data have to be converted to centroid mode, a process called "peak picking" or "centroiding". 
@@ -64,9 +65,6 @@ Raw data conversion is the first step of any proteomic data analysis. The most c
 >   >
 >   > If your data were generated on a low resolution mass spectrometer, use ***PeakPickerWavelet*** {% icon tool %} instead.
 >   {: .comment}
->
-> 6. Run ***FileConverter*** {% icon tool %} on the picked mzML to convert to mgf format.
-> 7. Change the ***Datatype*** of the ***FileConverter*** {% icon tool %} output to mgf by clicking the pencil :pencil: icon.
 {: .hands_on}
 
 
