@@ -9,17 +9,17 @@ tutorial_name: create-new-tutorial-content
 
 Galaxy is a great solution to train the bioinformatics concepts:
 
-- numerous bioinformatics tools are available (almost 5,000 in the ToolShed)
-- it can be used by people without amy computer science skills
+- numerous bioinformatics tools are available (almost 5,000 in the [ToolShed](https://toolshed.g2.bx.psu.edu/))
+- it can be used by people without any computer science skills
 - it trains to use technology, outlining available resources and efforts that have made them accessible to researchers
 - it is scalable
 
-In 2016, the Galaxy Training Network decide to set up a new infrastructure for delivering easily Galaxy related training material. The idea was to develop something open and online based on a community effort, as always in Galaxy.
+In 2016 the Galaxy Training Network decided to set up a new infrastructure to ease delivering Galaxy-related training material. The idea was that of providing it as a shared community effort, using open and online-based platforms.
 
-We took inspiration from [Software Carpentry](https://software-carpentry.org) and collected everything on a GitHub repository: [https://github.com/galaxyproject/training-material ](https://github.com/galaxyproject/training-material).
-We decided on a structure based on tutorials with hands-on, fitting both for online self-training but also for workshops, grouped in topics. Each tutorial follows the same structure and comes with a virtualised isntance to run the training everywhere.
+We took inspiration from [Software Carpentry](https://software-carpentry.org), and collected everything [on a GitHub repository](https://github.com/galaxyproject/training-material).
+We decided on a structure based on tutorials grouped by topics, and coupled with hands-on sections, thus providing support for on-line self-training as well as workshops. Each tutorial follows the same structure, and comes with a virtualised instance to run the training material everywhere.
 
-In this tutorial, you will learn how to write your first tutorial in markdown and contribute it to the Galaxy Training Network.
+In this tutorial, you will learn how to write your first tutorial in Markdown and contribute it to the Galaxy Training Network.
 
 > ### Agenda
 >
@@ -46,22 +46,20 @@ Before anything, we need to get a local copy of the content of the GitHub reposi
 
 ## Defining the topic
 
-The first step we need to define is in which topic putting our tutorial. This first step can be tricky.
-
-When we structured the repository, we decided here to use as topic the names of the categories in the [ToolShed](https://toolshed.g2.bx.psu.edu/). So when decided where to put your tutorial, you can look in which ToolShed's category are the main tools used in the tutorial and use this category as topic. For example, this tutorial will rely on the NCBI Blast+ tool.
+The first step we need to define is in which topic to place our new tutorial. This can be tricky: when we structured the repository, we decided to use as topics the categories that are used in the [ToolShed](https://toolshed.g2.bx.psu.edu/). The ToolShed assigns a category to each tool. Therefore, to decide where to put your tutorial, have a look at which ToolShed's category the main tools in your tutorial belong. For example, this tutorial will rely on the NCBI Blast+ tool.
 
 > ### {% icon hands_on %} Hands-on: Defining the topic for the tutorial
 >
 > 1. Search for NCBI Blast+ on the [ToolShed](https://toolshed.g2.bx.psu.edu/)
-> 2. Check in which category it is
+> 2. Check in which category it has been placed
 >
 >    > ### {% icon question %} Questions
 >    >
->    > In which topic will you put the tutorial?
+>    > In which topic will you put the new tutorial?
 >    >
 >    >    <details>
->    >    <summary>Click to view answers</summary>
->    >    If we search for [NCBI Blast+ in the ToolShed](https://toolshed.g2.bx.psu.edu/view/devteam/ncbi_blast_plus/7538e2bfcd41), it is attributed to 2 categories (bottom): "Next Gen Mappers" and "Sequence Analysis".
+>    >    <summary>Click to view the answers</summary>
+>    >    If we search for [NCBI Blast+ in the ToolShed](https://toolshed.g2.bx.psu.edu/view/devteam/ncbi_blast_plus/7538e2bfcd41), it is placed in 2 categories (bottom): "Next Gen Mappers", and "Sequence Analysis".
 >    >    We decided to put it in "Sequence analysis" because this is the most general one for this tutorial.
 >    >    </details>
 >    {: .question}
@@ -69,37 +67,46 @@ When we structured the repository, we decided here to use as topic the names of 
 
 ## Creating the directory for the tutorial
 
-Once the topic is chosen, serious things can start: creating the tutorial. It is meaning the tutorial content, the metadata related to the tutorial but also the technical support for the tutorial with the description of the needed tool and dataset, a workflow of the tutorial and also a Galaxy Interactive Tour.
+Once the topic has been chosen, we can finally create the tutorial. A tutorial in the Galaxy Training Network contains:
+- the tutorial's content
+- the tutorial's metadata (description)
+- the tutorial's technical support, such as the needed tools and datasets
+- a workflow
+- a Galaxy Interactive Tour
 
-To help you, we created a template for a tutorial with the different required files.
+To ease this process, we created a template for new tutorials, complete with all aforementioned requirements.
 
-> ### {% icon hands_on %} Hands-on: Copy the needed file
+> ### {% icon hands_on %} Hands-on: Copy the required files
 >
-> 1. Copy the `tutorial1` folder (you can find it in `templates/tutorials/`) in `topics/sequence-analysis/topics`
-> 2. Rename the folder into `similarity-search`
+> 1. Copy the `tutorial1` directory (you can find it in `templates/tutorials/`) in `topics/sequence-analysis/topics`
+> 2. Rename the directory to `similarity-search`
 {: .hands_on}
 
 ## Keeping track of the changes
 
-Once you started to change something, we need to keep track of these changes with a version control system (VCS). We are using Git as VCS and GitHub as hosting service.
+You need to keep track of all your new changes with a version control system (VCS). To do so, you will use Git as VCS, and GitHub as your personal hosting service.
 
-This repository is developed collaboratively with more than 40 contributors. For the collaboration, we are using the [GitHub flow](https://guides.github.com/introduction/flow/), which is based on forks, branches and pull requests.
-We will explain GitHub flow later and show you now how to start keeping track of the changes:
+This repository of tutorials is developed collaboratively among more than 40 contributors. Therefore, to ease the collaboration, we are using the [GitHub flow](https://guides.github.com/introduction/flow/) approach, which is based on forks, branches, and pull requests.
+Let's start tracking your changes!
 
 > ### {% icon hands_on %} Hands-on: Start keeping track of the changes
 >
-> 1. [Create a fork](https://help.github.com/articles/fork-a-repo/) of this repository on GitHub
-> 2. Add your fork to the current local copy: `git remote add fork https://github.com/galaxyproject/training-material`
-> 3. Create a new branch called "similarity-search" in your local copy: `git checkout -b similarity-search`
-> 4. Commit the changes in that branch with
->     - `git add topics/sequence-analysis/tutorials/similarity-search`
->     - `git commit -m "Set up the similarity search tutorial"`
-> 5. Push that branch to your fork on GitHub: `git push fork similarity-search`
+> 1. [Create a fork](https://help.github.com/articles/fork-a-repo/) of this repository on GitHub. Your account will contain a copy of the original collaboratively developed training material
+> 2. Link your fork on GitHub to the local (cloned) copy on your machine:
+>     `git remote add fork https://github.com/<YOUR_GITHUB_USERNAME>/training-material`
+> 3. Create a new branch called "similarity-search" in your local copy:
+>     `git checkout -b similarity-search`
+> 4. Add your changes to the new branch:
+>     `git add topics/sequence-analysis/tutorials/similarity-search`
+> 5. Commit your changes in that branch:
+>     `git commit -m "Set up the similarity search tutorial"`
+> 6. Push the new branch to your fork on GitHub:
+>     `git push fork similarity-search`
 {: .hands_on}
 
 The GitHub interface can also help you in the process of editing a file. It will automatically create a fork of this repository where you can safely work.
 
-We will now start to fill the different files together. We recommend you to commit regurlarly your changes. It help to follow them but also revert them if needed.
+We will now start to fill the different files together. We recommend you to commit your changes regurlarly: it helps following them, but also revert them if needed.
 
 
 # Filling the tutorial content
@@ -108,7 +115,7 @@ Once we set up the infrastructure, we are ready to write the tutorial
 
 ## Finding a good toy dataset
 
-The first question to come is which data using for the tutorial and particularly for the hands-on parts. This data must be informative enough to illustrate the use of a tool or a technic, but it must not be too big to be able to be run during workshop or locally. Typically, this is a subset of a full dataset where the informative data has been extracted.
+The first question to come is what data to use for walking the tutorial through the hands-on sections. The selected data must be informative enough to illustrate the meaning of using a tool or a given technique, but not too big to require long waiting times for its processing during a workshop. Typically, the selected data should be the informative subset of a full real-life dataset.
 
 For example for our tutorial, we generated a small dataset by
 
@@ -116,13 +123,13 @@ For example for our tutorial, we generated a small dataset by
 - Generating a reference database
     - Blasting it on the NR database on [NCBI Blast](https://blast.ncbi.nlm.nih.gov/Blast.cgi?PROGRAM=blastn&PAGE_TYPE=BlastSearch&LINK_LOC=blasthome)
     - Extracting one similar sequence found with Blast
-    - Searching and extracting 2 other sequences of the species using the [NCBI Nucleotide database](https://www.ncbi.nlm.nih.gov/nuccore)
+    - Searching and extracting 2 other sequences of the same species using the [NCBI Nucleotide database](https://www.ncbi.nlm.nih.gov/nuccore)
 
-We then developed the tutorial and tested it on this dataset. Once we were ready to share it, we uploaded the datasets on [Zenodo](https://zenodo.org/) to obtain a dedicated DOI (in the [Galaxy training network community](https://zenodo.org/communities/galaxy-training/?page=1&size=20)).
+We then developed the tutorial and tested it on this toy dataset. Once we were ready to share it, we uploaded the toy datasets on [Zenodo](https://zenodo.org/) to obtain a dedicated DOI (in the [Galaxy training network community](https://zenodo.org/communities/galaxy-training/?page=1&size=20)).
 
-## Filling the tutorial content
+## Filling the tutorial
 
-The content of the tutorial will go in the `tutorial.md`. The syntax of this file is really simple., as well as its structure:
+The tutorial's content will be placed in the file `tutorial.md`. Its syntax and structure are simple, and will follow the scheme:
 
 ```
 ---
@@ -157,16 +164,16 @@ blabla
 blabla
 ```
 
-### Some metadata on the top
+### Metadata
 
-On the top, there is some metadata:
+The tutorial needs to start with some medatada on its top:
 
 - `layout: tutorial_hands_on` (keep the default)
 - `topic_name: training` with the name of the topic
 - `tutorial_name: create-new-tutorial` with the name of tutorial
 
-These metadata are there to help the templating system to make the connection between the file and the global [metadata]({{site.url}}/topics/training/tutorials/create-new-tutorial-metadata/tutorial.html).
-If they are not correctly defined the tutorial can not be found on the website.
+These metadata are there to help the templating system linking between the tutorial's file and the global [metadata]({{site.url}}/topics/training/tutorials/create-new-tutorial-metadata/tutorial.html).
+If not correctly defined, the tutorial will not be found within the website.
 
 > ### {% icon hands_on %} Hands-on: Fix the top metadata
 >
@@ -174,71 +181,70 @@ If they are not correctly defined the tutorial can not be found on the website.
 > 2. Check if the tutorial has been correctly added at [http://localhost:4000/topics/sequence-analysis/similarity-search ](http://localhost:4000/topics/sequence-analysis/similarity-search)
 {: .hands_on}
 
-### Content of the tutorial
+### Content
 
-Directly after the short metadata section on top the content of your tutorial starts. It is written in Markdow - a simple markup langage.
+The tutorial's content is written directly after the short section of metadata. This is written in Markdown, a simple markup langage.
 
 > ### {% icon tip %} Tip: Markdown
 >
 > Check [this cheatsheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet) to learn more how to use Markdown.
 {: .tip}
 
-The content in Markdown is transformed by our templating system into the nice webpage which add the metadata. Indeed in the `tutorial.md` file,
-no need to add the name of the tutorial: it is automatically added based on the title defined in the metadata.
+The Markdown content is then transformed into a user friendly webpage throughout a templating system. With this approach, there is no need to add the name of every tutorial each time, since they are automatically added based on the tutorial's metadata.
 
-We recommend to structure the tutorials like this
+We recommend to structure the tutorials as follows:
 
-- An introduction to introduce the tutorial with the use case, the data, the methods
-- Several sections with the content of the tutorial and some hands-on parts (practicing is an important part of the learning process)
+- An introduction, to bring an overview of the tutorial with its use cases, data, and methods
+- Multiple sections, representing the steps of the analysis, complete with their hands-on parts (practicing is an important part of the learning process)
 - A conclusion to summarize what has been done in the tutorial (with a scheme)
 
 > ### {% icon hands_on %} Hands-on: Structuring the tutorial
 >
-> 1. Add a small introduction about the dataset
+> 1. Add a small description of the dataset
 > 2. Add one or two sections with ideas for the tutorial
 > 3. Add a small conclusion
 {: .hands_on}
 
-> ### {% icon tip %} Tip: Adding images, with caption
+> ### {% icon tip %} Tip: Adding images with caption
 >
-> To add an image in markdown file, we need to use `![](../../images/image.png)`.
+> To add an image in Markdown file, we need to use `![](../../images/image.png)`.
 >
-> On the top of that, we added a small plugin to add a caption for each image:
+> We added a small plugin to add a caption for each image:
 >
-> ![This figure shows an example of a figure with a caption](../../images/image_caption_screenshot.png "Example of a figure with a caption")
+> ![This figure shows an example of an image with a caption](../../images/image_caption_screenshot.png "Example of an image with a caption")
 >
-> "Figure" and the number are automatically added and the caption is added by adding the information in the markdown call of the image:
+> The preceding string "Figure" and its corresponding number is automatically added before its caption, which is in turn placed below the image by providing all informations in the Markdown call of the image:
 >
 >   ```
 >   ![A textual description of the image](../images/image.png "This is my super caption")
 >   ```
 >
-> We can also cross-reference the figure inside our markdown with an anchor. For example, we can link to [the previous figure](#figure-1) using `[the display text](#figure-nb)` (with changing `nb` to the figure number).
+> We can also cross-reference images inside our Markdown with an anchor. For example, we can link to [the previous figure](#figure-1) using `[the display text](#figure-nb)` (changing `nb` with the image's number).
 {: .tip}
 
-> ### {% icon tip %} Tip: Writting mathematical expressions
+> ### {% icon tip %} Tip: Writing mathematical expressions
 >
-> Mathematical expressions can be written in LaTeX: they will be rendered with [MathJax](https://www.mathjax.org/).
+> Mathematical expressions can be written in LaTeX, and rendered with [MathJax](https://www.mathjax.org/).
 >
-> It is easy: surround your math content with two `$` signs, like with a math block:
+> Surround your math expression with two `$` signs (like in LaTeX math blocks):
 >
-> - inline, *e.g.* `$$ 5 + 5 $$` will be rendered as $$ 5 + 5 $$
-> - not inline, *e.g.* `$$ 5 + 5 $$` alone in new line will be rendered as
+> - inline expressions, *e.g.* `$$ 5 + 5 $$` will be rendered as $$ 5 + 5 $$
+> - block expressions, *e.g.* `$$ 5 + 5 $$` will be rendered in its own line block as
 >
 >   $$ 5 + 5 $$
 >
 >
-> If you don't want to start an inline math statement, just escape the dollar signs and they will be treated as simple dollar signs.
+> Dollar signs are therefore *reserved caracters* for instructing the templating system to open/close LaTeX math blocks. In case you don't want any math block to be opened/closed, but still be able to write a dollar sign, you have to *escape* it. Escaping enables the templating system to render the escaped caracter as a normal caracter.
 >
 >    > ### {% icon comment %} Comments
->    > LaTeX code that uses the pipe symbol `|` in inline math statements may lead to a line being recognized as a table line.
+>    > LaTeX code that uses the pipe symbol `|` in inline math statements may lead to a line being recognized as a table line by the templating system.
 >    > This can be avoided by using the `\vert` command instead of `|`
 >    {: .comment}
 {: .tip}
 
 ### Improving the learning experience
 
-To improve the learning experience in our tutorial, we defined some boxes to highlight.
+To improve the learning experience in our tutorial, we defined some boxes to highlight their content.
 
 They are defined always with the same structure:
 
@@ -248,7 +254,8 @@ They are defined always with the same structure:
 {: .type_of_box}
 ```
 
-This structure needs to be respected otherwise it would not be interpreted correctly by the templating system. The different defined boxes are:
+For a correct rendering of the tutorial's content, the templating system requirest this structure to be kept as it.
+The different defined boxes are:
 
 - Overview
 
@@ -260,10 +267,10 @@ This structure needs to be respected otherwise it would not be interpreted corre
     >
     >    > ### {% icon question %} Questions
     >    >
-    >    > Which pedogical metadata are not added to this box?
+    >    > What metadata hasn't been added to this box?
     >    >
     >    >    <details>
-    >    >    <summary>Click to view answers</summary>
+    >    >    <summary>Click to view the answers</summary>
     >    >    The take-home messages are not added to this box but into the last box of the tutorial
     >    >    </details>
     >    {: .question}
@@ -271,20 +278,20 @@ This structure needs to be respected otherwise it would not be interpreted corre
 
 - Agenda
 
-    The second box in most of the tutorial is the agenda box at the end of the introduction. It indicates the plan of the tutorial
+    In most tutorial, the second box is the agenda box at the end of the introduction. It indicates the plan of the tutorial
 
         > ### Agenda
         >
-        > In this tutorial, we will deal with:
+        > In this tutorial we will deal with:
         >
         > 1. TOC
         > {:toc}
         >
         {: .agenda}
 
-    No need to fill the list: it will be done automatically based on the title of the sections.
+    No need to fill the list, since this will be done automatically reusing each section's title.
 
-    To avoid to add the "Introduction" and "Conclusion", we add `{:.no_toc}` below the section name.
+    To avoid adding the "Introduction" and "Conclusion", we add `{:.no_toc}` below the section name.
 
     ![Example of agenda box](../../../../shared/images/tutorial_agenda_box.png "Example of agenda box")
 
@@ -295,7 +302,7 @@ This structure needs to be respected otherwise it would not be interpreted corre
 
 - Hands-on
 
-    We think that doing is important in the learning process. So we emphasize it by adding regularly some hands-on sections where the trainees can do by themselves some analyses. We designed some special boxes to make these sections easy to find.
+    We think that actually walking through the tutorial by doing all its steps is important for learning its concepts. We therefore emphasize trying each step by regularly adding hands-on sections, where trainees are encouraged to do the analysis by themselves. We designed some special boxes to make these sections easy to find.
 
         > ### {% icon hands_on %} Hands-on: Sorting BAM dataset
         >
@@ -314,13 +321,13 @@ This structure needs to be respected otherwise it would not be interpreted corre
 
     > ### {% icon hands_on %} Hands-on: Add an hands-on box
     >
-    > 1. Add an hands-on box to run a BLAST of the small sequence dataset against the chosen database
+    > 1. Add a hands-on box to run a BLAST of the small sequence dataset against the chosen database
     {: .hands_on}
 
 -  Questions
 
-    The questions are then to force the trainees to think about what they are currently doing and to put things in perspective.
-    They are also a way to help the instructors to expose and clearify misunderstanding earily on.
+    Questions are there to force the trainees to think about what they are currently doing, and to put things in perspective.
+    They also help the instructors by exposing and clarify common scenarios, errors, or applications.
 
         > ### {% icon question %} Questions
         >
@@ -328,17 +335,17 @@ This structure needs to be respected otherwise it would not be interpreted corre
         > 2. Does it improve the *p*-value distribution?
         >
         >    <details>
-        >    <summary>Click to view answers</summary>
+        >    <summary>Click to view the answers</summary>
         >    Content goes here.
         >    </details>
         {: .question}
 
     ![Example of question box](../../../../shared/images/tutorial_question_box.png "Example of question box")
 
-    The questions has to be quick to answer. They can be small or also multiple choice (MCQs).
-    With well choosen wrong answers MCQs can do much more than just measure how much someone knows.
+    Questions have to be quick to answer, and answers can be also provided as multiple choices (MCQs).
+    With well choosen wrong answers, MCQs can do much more than just measure how much someone knows.
 
-    In the box below and hiffen we add also the correct answer, so that self-trainees can check the solution and its explanation.
+    In the box below and hidden we add also the correct answer, so that self-trainees can check the solution and its explanation.
 
     > ### {% icon hands_on %} Hands-on: Add a question box
     >
@@ -372,8 +379,8 @@ This structure needs to be respected otherwise it would not be interpreted corre
     This last box of the tutorial is automatically filled with the take-home messages defined in the metadata
 
 
-To render the boxes correctly, the syntax needs to be correct. If it does not work have a look at similar tutorials and get inspiration.
-The boxes can be nested, *e.g.* for having tips inside a hands-on:
+To render the boxes correctly, the syntax needs to be correct. If it does't work, have a look at similar tutorials and get inspiration.
+Boxes can be nested, *e.g.* for having tips inside a hands-on:
 
 ```
 > ### {% icon hands_on %} Hands-on: Defining the topic for the tutorial
@@ -386,7 +393,7 @@ The boxes can be nested, *e.g.* for having tips inside a hands-on:
 >    > In which topic will you put the tutorial?
 >    >
 >    >    <details>
->    >    <summary>Click to view answers</summary>
+>    >    <summary>Click to view the answers</summary>
 >    >    If we search for [NCBI Blast+ in the ToolShed](https://toolshed.g2.bx.psu.edu/view/devteam/ncbi_blast_plus/7538e2bfcd41), it is attributed to 2 categories (bottom): "Next Gen Mappers" and "Sequence Analysis".
 >    >    We decided to put it in "Sequence analysis" because this is the most general one for this tutorial.
 >    >    </details>
@@ -396,14 +403,13 @@ The boxes can be nested, *e.g.* for having tips inside a hands-on:
 
 # Adding slides (optional)
 
-Sometimes we also need slides to support the tutorial. With the current infrastructure, we also provide this possibility
-to serve on the website slides related to the tutorial.
+Sometimes we also need slides to support the tutorial's topics. With the current infrastructure we are able to also provide this functionality, and integrate a tutorial with further support material.
 
-The slides are written in Markdown (only the file extension is .html), as the tutorial and are rendered as a webpage thanks to [`Remark`](https://remarkjs.com). However this is not done automatically. We first need to tell the templating system to search for the slides by changing `slides` in the metadata from `no` to `yes`.
+Although the slide file's extension is .html, all slides are written in Markdown as well, and their content is rendered as a webpage thanks to [`Remark`](https://remarkjs.com). However, adding slides is not enough: we first need to tell the templating system to search for them by changing `slides` in the metadata from `no` to `yes`.
 
 Once it is done, the slides for our tutorial will be accessible at [http://localhost:4000/topics/sequence-analysis/tutorials/similarity-search/slides.html ](http://localhost:4000/topics/sequence-analysis/tutorials/similarity-search/slides.html)
 
-We can now fill the `slides.html` file:
+We can now fill the `slides.html` file as follows:
 
 
 ```
@@ -427,9 +433,9 @@ logo: "GTN"
 ### Next slide
 ```
 
-On the top, as for the `tutorial.md`, we need to define some metadata to link the slides to the correct tutorial. The metadata of the tutorial can then be used also to automatically fill the first slides (with the title, the requirements,...)  and the last slide (take-home message).
+On the top, as for the tutorial's `tutorial.md`, we need to define some metadata to link the slides with the corresponding tutorial. The metadata of the tutorial can then be used also to automatically fill the first slides (with the title, requirements, etc)  and the last slide (take-home message).
 
-After, each new slide is introduced by `---`, and the content of each slide is written in Markdown.
+Each new slide is introduced by `---`, and the content of each slide is written in Markdown.
 
 > ### {% icon hands_on %} Hands-on: Add some slides for the tutorial
 >

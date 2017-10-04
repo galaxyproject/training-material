@@ -11,6 +11,7 @@
     {% endif %}
   {% endfor %}
 {% endif %}
+{% assign contributors = site.data['contributors'] %}
 
   <head>
     <meta charset="utf-8">
@@ -31,17 +32,6 @@ class: center, middle, inverse
 <img src="{{ page.logo }}" alt="page logo" style="height: 40px;"/>
 {% endif %}
 </span></div>
----
-
-## Welcome!
-
-This material is the result of a collaborative work. Thanks the [Galaxy Training Network](https://wiki.galaxyproject.org/Teach/GTN) and all the contributors {% if tutorial.contributors %}({{ tutorial.contributors|map: 'name'|join: ', '}}){% endif %}!
-
-{% if page.logo == "GTN" %}
-<img src="{{ site.url }}{{ site.logo }}" alt="Galaxy Training Network" style="height: 100px;"/>
-{% else %}
-<img src="{{ page.logo }}" alt="page logo" style="height: 40px;"/>
-{% endif %}
 
 ---
 
@@ -76,6 +66,18 @@ This material is the result of a collaborative work. Thanks the [Galaxy Training
 ---
 
 {{ content | xml_escape }}
+
+---
+
+## Thank you!
+
+This material is the result of a collaborative work. Thanks the [Galaxy Training Network](https://wiki.galaxyproject.org/Teach/GTN) and all the contributors {% if tutorial.contributors %}{% capture contributors %}{% for c in tutorial.contributors %}, {{ contributors[c].name }}{% endfor %}{% endcapture %} ({{ contributors | remove_first: ', ' }}) {% endif %}!
+
+{% if page.logo == "GTN" %}
+<img src="{{ site.url }}{{ site.logo }}" alt="Galaxy Training Network" style="height: 100px;"/>
+{% else %}
+<img src="{{ page.logo }}" alt="page logo" style="height: 40px;"/>
+{% endif %}
 
 {% if page.layout == "tutorial_slides" %}
 .footnote[Found a typo? Something is wrong in this tutorial? <br/>Edit it on [GitHub]({{ site.github_repository }}/tree/master/topics/{{ topic.name }}/tutorials/{{ page.tutorial_name }}/slides.html)]

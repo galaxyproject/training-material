@@ -7,9 +7,9 @@ tutorial_name: quality-control
 # Introduction
 {:.no_toc}
 
-During the sequencing process, some errors may be introduced like incorporation of ambiguous nucleotides. Analyzing poor data wastes CPU and people time.
+During sequencing, errors might be introduced, such as the incorporation of ambiguous nucleotides. These are due to the technical limitations of each sequencing platform. Sequencing errors might bias the analysis, ultimately leading to a misinterpretation of the data.
 
-The quality control of the sequences right after sequencing is then an essential step to ensure that the raw data looks good before processing them. It reduces the biases in data that may compromised the downstream analyses with low-quality sequences, sequence artifacts, ... The process is the same for any type of sequencing data.
+Sequence quality control is therefore an essential step to take right after receiving the raw sequencing data. This ensures proper, analysis regardless the sequencing platform used to obtain the data.
 
 > ### Agenda
 >
@@ -20,7 +20,7 @@ The quality control of the sequences right after sequencing is then an essential
 >
 {: .agenda}
 
-# Sequence dataset importing
+# Importing sequences
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
@@ -36,9 +36,9 @@ The quality control of the sequences right after sequencing is then an essential
 >    > * Press **Start**    
 >    {: .tip}
 >
->    > ### {% icon tip %} Tip: Changing the file type `fastq` to `fastqsanger` once the data file is in your history
+>    > ### {% icon tip %} Tip: Change the file type `fastq` to `fastqsanger` once the data file is in your history
 >    >
->    > * Click on the pencil button displayed in your dataset in the history
+>    > * Click on the pencil button displayed in your data file in the history
 >    > * Choose **Datatype** on the top
 >    > * Select `fastqsanger`
 >    > * Press **save**
@@ -48,33 +48,33 @@ The quality control of the sequences right after sequencing is then an essential
 >    >
 >    > Rename the dataset to "First dataset"
 >    {: .comment}
-> As default, Galaxy takes the link as name.
+> By default, when data is imported via its link, Galaxy names it with its URL.
 {: .hands_on}
 
-# Quality checking of the sequences
+# Quality check
 
-To estimate sequence quality and treatments to do on the data, many indicators can be checked:
+To estimate sequence quality and how to further filter raw data, different indicators can be checked:
 
 - Quality score of the sequences with
-    - Per base sequence quality
-    - Per sequence quality scores
-    - Per tile sequence quality
+    - Per-base sequence quality
+    - Per-sequence quality scores
+    - Per-tile sequence quality
 - Sequence content with
-    - Per base sequence content
-    - Per sequence GC content
-    - Per base N content
+    - Per-base sequence content
+    - Per-sequence GC content
+    - Per-base N content
 - Sequence length with the sequence length distribution
 - Duplicated sequences
 - Tag sequences with
     - Adapter contamination
-    - Kmer Content
+    - K-mer content
 
-[FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/) is an open-source tool provide a simple way to do some quality control checks on raw sequence data coming from high throughput sequencing pipelines. It generates quality graphics and estimates numerous quality informations and threshold. For each studied indicators, FastQC providing a quick overview to tell in which areas there may be problems.
+[FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/) is an open-source tool that provides a simple way to quality-control raw sequence data coming from high throughput sequencing pipelines. It gets rid of low quality score reads, and generates graphics and estimates providing a quick overview about which data might be the source of bias in the analysis.
 
-> ### {% icon hands_on %} Hands-on: Quality checking
+> ### {% icon hands_on %} Hands-on: Quality check
 >
 > 1. **FastQC** {% icon tool %}: Run FastQC on the imported FastQ file with default parameters
-> 2. Inspect the FastQC report on the webpage
+> 2. Inspect the FastQC report on its webpage output
 >
 >    > ### {% icon tip %} Tip: Inspecting the content of a file in Galaxy
 >    >
@@ -85,23 +85,23 @@ To estimate sequence quality and treatments to do on the data, many indicators c
 >    > ### {% icon question %} Questions
 >    >
 >    > 1. How good are the quality scores?
->    > 2. Why is there warning for the per base sequence content and the per sequence GC content graphs?
->    > 3. What must be done to improve the sequences?
+>    > 2. Why is there a warning for the per-base sequence content and the per-sequence GC content graphs?
+>    > 3. What needs to be done to improve the sequences?
 >    >
 >    >    <details>
->    >    <summary>Click to view answers</summary>
+>    >    <summary>Click to view the answers</summary>
 >    >    <ol type="1">
->    >    <li>The scores of the sequences are quite good: no warning from FastQC, even if we can see a slight decrease of the quality at the end of sequences </li>
->    >    <li>In the beginning of sequences, the sequence content per base is not really good and the percentage are not equal. For the GC content, the distribution is bit shifted on the left and too high</li>
->    >    <li>We can trim a bit the end of the sequences, but not too much as the sequences are already small</li>
+>    >    <li>The sequence scores are quite good: no warnings from FastQC, even if we can see a slight decrease of the quality at the end of the reads</li>
+>    >    <li>In the beginning of sequences, the sequence content per base is not really good and the percentages are not equal. For the GC content, the distribution is slightly shifted on the left, and too high</li>
+>    >    <li>We can trim the end of the sequences a little, but not too much as the sequences are already small</li>
 >    >    </ol>
 >    >    </details>
 >    {: .question}
 {: .hands_on}
 
-# Improvement of the quality of the sequences
+# Improvement of sequence quality
 
-Based on previous quality graphs, sequences must be treated to obtain good dataset and then the bias in downstream analysis.
+Based on the informations provided by the quality graphs, the sequences must to be treated to avoid bias in downstream analyis.
 
 In general, quality treatments are:
 
@@ -116,89 +116,89 @@ In general, quality treatments are:
     - tails
     - ...
 
-To improve the quality of the sequences, we use [Trim Galore!](https://www.bioinformatics.babraham.ac.uk/projects/trim_galore/) tool. It automates quality and adapter trimming as well as quality control.
+To improve the overall sequence quality, we use the [Trim Galore!](https://www.bioinformatics.babraham.ac.uk/projects/trim_galore/) tool. This tool enhances sequence quality by automating adapter trimming as well as quality control.
 
-> ### {% icon hands_on %} Hands-on: Quality treatment and re-checking
+> ### {% icon hands_on %} Hands-on: Improvement of sequence quality
 >
-> 1. **Trim Galore** {% icon tool %}: Run Trim Galore on the imported data file
+> 1. **Trim Galore** {% icon tool %}: Run Trim Galore on the imported FastQ file
 >
 >    > ### {% icon question %} Questions
 >    >
 >    > Which parameters must be applied to follow the previous recommendations?
 >    >
 >    > <details>
->    > <summary>Click to view answers</summary>
+>    > <summary>Click to view the answers</summary>
 >    > We use the default ones:
 >    > <ul>
 >    > <li>​
-If you already know the which adapter sequences were used during the library preparation, please use them. Otherwise, use the option for automatic detection and trimming of adapter sequences</li>
+If you know which adapter sequence was used during library preparation, provide its sequence. Otherwise use the option for automatic detection and trimming of adapter sequences</li>
 >    > <li>Trimming low-quality ends (below 20) from reads in addition to adapter removal</li>
->    > <li>Option for required number bases overlap with adapter sequence can be tweaked. The default value "1" is too stringent that on average 25% of reads will be trimmed. In order to reduce these falsely trimmed bases, please set it to 5 bases.</li>
+>    > <li>Option for required overlap (in bp) with adapter sequence can be tweaked. The default value "1" is too stringent, and on average 25% of reads will be trimmed. Please set it to 5 bases to loose the required overlap</li>
 >    > <li>Removing reads shorter than 20 bp</li>
 >    > </ul>
 >    > </details>
 >    {: .question}
 >
-> 2. **FastQC** {% icon tool %}: Re-run FastQC on the quality controlled data file and inspect the new FastQC report
+> 2. **FastQC** {% icon tool %}: Re-run FastQC on the quality controlled data, and inspect the new FastQC report
 >
 >    > ### {% icon question %} Questions
 >    >
 >    > 1. How many sequences have been removed?
->    > 2. Has the quality of the sequences been improved?
->    > 3. Can you explain why the per base sequence content is not good now?
+>    > 2. Has sequence quality been improved?
+>    > 3. Can you explain why the per-base sequence content is not good now?
 >    >
 >    >    <details>
->    >    <summary>Click to view answers</summary>
+>    >    <summary>Click to view the answers</summary>
 >    >    <ol type="1">
->    >    <li>Before Trim Galore, the dataset was made of 100,000 sequences. After Trim Galore, there is 99,653 sequences.</li>
->    >    <li>The per base quality score is better but other indicators are bad now. The sequence length distribution is not clear as before because sequences have different size after the trimming</li>
->    >    <li>The per base sequence content is red now. The trimming of the end of some sequences may have biased </li>
+>    >    <li>Before Trim Galore, the dataset comprised 100,000 sequences. After Trim Galore, there are 99,653 sequences</li>
+>    >    <li>The per-base quality score looks better, but other indicators show bad values now. The sequence length distribution is not clear anymore because sequences have different size after the trimming operation</li>
+>    >    <li>The per-base sequence content has turned red. Again, the cause is the trimming of the end of some sequences</li>
 >    >    </ol>
 >    >    </details>
 >    {: .question}
 {: .hands_on}
 
-The quality of the previous dataset was pretty good from beginning. The quality treatment improved the quality score but to the cost of other parameters.
+The quality of the previous dataset was pretty good from beginning. The sequence quality treatment improved the quality score at the cost of other parameters.
 
-# Control the quality of a second dataset
+# Impact of quality control
 
-Now, we would like to see the impact to quality control and treatment on a bad dataset.
+Now, we take a look at the impact of quality control and treatment on a bad dataset.
 
-> ### {% icon hands_on %} Hands-on: Quality control and treatment
+> ### {% icon hands_on %} Hands-on: Impact of quality control
 >
 > 1. Create a new history
 > 2. Import the FASTQ file: [`GSM461182_untreat_single_subset`](https://zenodo.org/record/61771/files/GSM461182_untreat_single_subset.fastq)
-> 3. **FastQC** {% icon tool %}: Run FastQC on this new dataset
+> 3. **FastQC** {% icon tool %}: Run FastQC on the newly imported dataset
 >
 >    > ### {% icon question %} Questions
 >    >
 >    > 1. How good is this dataset?
->    > 2. What must be done to improve the sequences?
+>    > 2. What needs to be done to improve the sequences?
 >    >
 >    >    <details>
->    >    <summary>Click to view answers</summary>
+>    >    <summary>Click to view the answers</summary>
 >    >    <ol type="1">
->    >    <li>There is red warning for the per base sequence quality (pretty bad along the sequence but worst at the end of sequences), the per base sequence content (bad at the beginning of the sequences), the per sequence GC content. </li>
+>    >    <li>There is a red warning on the per-base sequence quality (pretty bad along the sequence but worse at the end of sequences), the per-base sequence content (bad at the beginning of the sequences), and the per-sequence GC content</li>
 >    >    <li>The end of sequences must be cut.</li>
->    >    <li>Generally, 5' ends of the reads are not of bad quality unless there is something went wrong. The problem with this particular data set is that it was sequenced using the old Illumina sequencing machine. The machine calibrates while reading fragments that are in the beginning of the flowcell. Unfortunately, the first 100k reads which we selected for the analysis are generated during the calibration. But with the latest sequencing machines, usually we do not see this problem. If you used latest sequencing machine and still see bad quality bases in the beginning of the reads, please investigate and not just trim them.</li>
+>    >    <li>Generally, the 5' end of each sequence read is not of bad quality unless something went wrong. Here, the problem is that the sample was sequenced using the an Illumina sequencing machine, which carries out its calibration while reading fragments that are in the beginning of the flowcell. Unfortunately, the first 100k reads which we selected for the analysis are generated during the calibration, a problem that we don't have with more recent sequencing machines. However, if you adopted one of the latest sequencing machine and still experience bad quality bases at the beginning of the reads, please don't just trim them, but consider investigating the problem further</li>
 >    >    </ol>
 >    >    </details>
 >    {: .question}
 >
-> 3. **Trim Galore** {% icon tool %}: Run Trim Galore on the new dataset to fit the previous choices
-> 4. **FastQC** {% icon tool %}: Re-run FastQC to check the impact of Trim Galore
+> 4. **Trim Galore** {% icon tool %}: Run Trim Galore on the new dataset to apply the decisions taken at the previous step
+> 5. **FastQC** {% icon tool %}: Re-run FastQC to check the impact of Trim Galore
 >
 >    > ### {% icon question %} Questions
 >    >
 >    > 1. How many sequences have been removed?
->    > 2. Has the quality of the sequences been improved?
->    > 3. Can you explain why the per base sequence content is not good now?
+>    > 2. Has sequence quality been improved?
+>    > 3. Can you explain why the per-base sequence content is not good now?
 >    >
 >    >    <details>
->    >    <summary>Click to view answers</summary>
+>    >    <summary>Click to view the answers</summary>
 >    >    <ol type="1">
->    >    <li>Before Trim Galore, the dataset was made of 100,000 sequences. After Trim Galore, there is 97,644 sequences.</li>
->    >    <li>The per base quality score is better (not red anymore). But the per base sequence content is still red even if it is a bit better.</li>
+>    >    <li>Before Trim Galore the dataset comprised 100,000 sequences. After Trim Galore, there are 97,644 sequences</li>
+>    >    <li>The per-base quality score looks better (not red anymore), but the per-base sequence content, even if slightly better, is still red</li>
 >    >    </ol>
 >    >    </details>
 >    {: .question}
@@ -207,6 +207,6 @@ Now, we would like to see the impact to quality control and treatment on a bad d
 # Conclusion
 {:.no_toc}
 
-In this tutorial, we have controlled the quality of two datasets to ensure that the raw data looks good before analysing them with tools to extract RNA-Seq, ChIP-Seq or any other type of information. The approach of quality control is similar for any type of sequencing data:
+In this tutorial we checked the quality of two datasets to ensure that their data looks good before inferring any further information. This step is the baseline for any pipeline analysis such as RNA-Seq, ChIP-Seq, or any other OMIC analysis relying on NGS data. Quality control steps are similar for any type of sequencing data:
 
 ![The quality control tutorial workflow](../../images/dive_into_qc_workflow.png)

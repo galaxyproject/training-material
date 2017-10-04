@@ -1,13 +1,16 @@
 #!/usr/bin/env bash
 
+# move generated site
+rm -rf /tmp/site
+mv _site /tmp/site
+
+# configure git
 git config user.name "Travis-CI"
 git config user.email "noreply@travis-ci.org"
 git remote rm origin
 git remote add origin "https://bebatut:$GH_TOKEN@github.com/galaxyproject/training-material"
 
-rm -rf /tmp/site
-mv _site /tmp/site
-
+# clean git for gh-pages
 git checkout -- .
 
 git fetch origin
@@ -18,6 +21,7 @@ git rm -r .
 # keep files needed for travis testing
 git checkout origin/master .travis.yml Makefile Gemfile
 
+# move previously build site
 cp -R /tmp/site/* .
 
 # this file must be there, if it is not, it is likely a bug during build
@@ -29,6 +33,7 @@ fi
 find * -type f -exec chmod 644 "{}" ";"
 find * -type d -exec chmod 755 "{}" ";"
 
+# add everything to gh-page
 git add -A .
 git commit -m "Update on: `date`"
 git push origin gh-pages
