@@ -44,7 +44,7 @@ You can see that there many reads under the second peak with median of approxima
 
 > ### <i class="fa fa-warning" aria-hidden="true"></i> Oxford Nanopore Data Format
 > Oxford Nanopore machines output
- data in [fast5](http://bioinformatics.cvr.ac.uk/blog/exploring-the-fast5-format/) format that contains additional information besides sequence data. In this tutorial we assume that these data *already* converted into [fastq](https://en.wikipedia.org/wiki/FASTQ_format). An additional tutorial dedicated to handling of fast5 datasets will be developed shortly. 
+ data in [fast5](http://bioinformatics.cvr.ac.uk/blog/exploring-the-fast5-format/) format that contains additional information besides sequence data. In this tutorial we assume that these data are *already* converted into [fastq](https://en.wikipedia.org/wiki/FASTQ_format). An additional tutorial dedicated to handling of fast5 datasets will be developed shortly. 
 {: .warning-box}
 
 
@@ -61,9 +61,9 @@ In this analysis we will perform two tasks: (1) assembly and (2) annotation. Bel
 
 ![](https://github.com/rrwick/Unicycler/raw/master/misc/logo.png)
 
-For assembly we will be using [Unicycler](https://github.com/rrwick/Unicycler) (also see publication by Wick:[2017](http://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1005595)). Unicycler is designed specifically for *hybrid assembly* (the one combines short and long read sequencing data) of small (e.g., bacterial, viral, organellar) genomes. In out hard it gas produced complete high quality assemblies. Unicycler employs a multi-step process that utilizes a number of software tools:
+For assembly we will be using [Unicycler](https://github.com/rrwick/Unicycler) (also see publication by Wick:[2017](http://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1005595)). Unicycler is designed specifically for *hybrid assembly* (the one combines short and long read sequencing data) of small (e.g., bacterial, viral, organellar) genomes. In our hands it has produced complete high quality assemblies. Unicycler employs a multi-step process that utilizes a number of software tools:
 
-![Unicycler process](../../images/unicycler.png "Simplified view of the Unicycler assembly process (From Wick:2017). In short, Unicycler uses SPAdes (see below) to produce an assembly graph, which is then bridged (simplified) using long reads to produce longest possible set pf contigs. These are then polished by aligning original short reads against produced contigs and feeding these alignment to Pilon - an assembly improvement tool.")
+![Unicycler process](../../images/unicycler.png "Simplified view of the Unicycler assembly process (From Wick:2017). In short, Unicycler uses SPAdes (see below) to produce an assembly graph, which is then bridged (simplified) using long reads to produce longest possible set of contigs. These are then polished by aligning original short reads against produced contigs and feeding these alignment to Pilon - an assembly improvement tool.")
 
 As you can see Unicycler relies heavily on [SPAdes](http://cab.spbu.ru/software/spades/) and [Pilon](https://github.com/broadinstitute/pilon/wiki). We will briefly describe these two tools.
 
@@ -169,7 +169,7 @@ Although FastQC generated graphical reports for each dataset we can look at ever
 A quick look at quality score distribution will show a confusing picture:
 
 -----
-![QC reported zoomed out](../../images/multiqc1.png "Because Illumina reads (green) are <b>much</b> shorted that ONT reads (red) the plot looks strange. ONT reads generally have low quality scores and so they are not really meaningful in the context of this technology. However, in case of Illumina data they mean a lot...")
+![QC reported zoomed out](../../images/multiqc1.png "Because Illumina reads (green) are <b>much</b> shorter that ONT reads (red) the plot looks strange. ONT reads generally have low quality scores and so they are not really meaningful in the context of this technology. However, in case of Illumina data they mean a lot...")
 -----
 
 So let's zoom in into Illumina data:
@@ -183,7 +183,7 @@ So let's zoom in into Illumina data:
 Now it is time to perform assembly. Unicycler takes three inputs: paired Illumina reads and long ONT reads:
 
 -----
-![Running Unicycler](../../images/Unicycler_interface.png "Running Unicycler with default parameters. Note how forward and reverse Illumina raeds are specified and that ONT reads are entered as <em>long reads</em>.")
+![Running Unicycler](../../images/Unicycler_interface.png "Running Unicycler with default parameters. Note how forward and reverse Illumina reads are specified and that ONT reads are entered as <em>long reads</em>.")
 -----
 
 > ### <i class="fa fa-cutlery" aria-hidden="true"></i> <i class="fa fa-coffee" aria-hidden="true"></i> Assembly takes time!
@@ -194,19 +194,19 @@ Now it is time to perform assembly. Unicycler takes three inputs: paired Illumin
 ## Assess Assembly quality with Quast
 
 [Quast](http://bioinf.spbau.ru/quast) is a tool providing quality metrics for assemblies, and can also be used to compare multiple assemblies. The tool can also take an optional reference file as input, and will provide complementary metrics.
-For this tutorial we will simply use quast on the fasta file resulting from the Unicycler assembly.
+For this tutorial we will simply use Quast on the fasta file resulting from the Unicycler assembly.
 
 -----
 ![Quast Interface](../../images/Quast_Interface.png  "Quast Interface. Here we select contigs produced by Unicycler as inputs and leave everything else at default settings.")
 -----
 
-The Quast tool outputs assembly metrics as an html file with metrics and graphs. The image below looks exceptional boring. This is **good** thing:
+The Quast tool outputs assembly metrics as an html file with metrics and graphs. The image below looks exceptionally boring. This is a **good** thing:
 
 -----
 ![Quast Interface](../../images/quast_output.png  "Quast Output: Quast provides different statistics such as the number of contigs or scaffolds, the N50 and N75, and the total length of the assembly. You can also access 3 plots, the cumulative length of the contigs, the Nx, or the GC content.")
 -----
 
-One can see that there two (!) contigs. The largest contig is 4,576,290 bp (for comparison *E. coli* K12 MG1655 strain genome length is [4,656,144 bp](https://www.ncbi.nlm.nih.gov/nuccore/NZ_APIN00000000.1)) and the smallest is 4,581,676 (total length) - 4,576,290 (length of the largest) = 5,386 bp. When we analyzed this dataset for the first time we were initially puzzled by this second contig. But we quickly realized that this is simply genome of bacterophage [phiX174](https://www.ncbi.nlm.nih.gov/nuccore/NC_001422.1) which is routinely used as a spike-in in Illumina sequencing. This we have two genomes: the one of *E.coli* C-1 and phiX174! We can now use Prokka to annotate our two genomes.
+One can see that there are two (!) contigs. The largest contig is 4,576,290 bp (for comparison *E. coli* K12 MG1655 strain genome length is [4,656,144 bp](https://www.ncbi.nlm.nih.gov/nuccore/NZ_APIN00000000.1)) and the smallest is 4,581,676 (total length) - 4,576,290 (length of the largest) = 5,386 bp. When we analyzed this dataset for the first time we were initially puzzled by this second contig. But we quickly realized that this is simply the genome of bacteriophage [phiX174](https://www.ncbi.nlm.nih.gov/nuccore/NC_001422.1) which is routinely used as a spike-in in Illumina sequencing. Thus we have two genomes: the one of *E.coli* C-1 and phiX174! We can now use Prokka to annotate our two genomes.
 
 ## Annotation with Prokka
 
@@ -230,7 +230,7 @@ Prokka outputs 10 datasets (including two log files). These are in various forma
 
 ## Visualize the results in IGV
 
-Let's look at the entire assembly and its annotation in the genome browser. We can do this using Integrated Genome Browser ([IGV](http://software.broadinstitute.org/software/igv/). To start, locate the output of Unicycler and expand it (don't click anything yet):
+Let's look at the entire assembly and its annotation in the genome browser. We can do this using Integrated Genome Browser ([IGV](http://software.broadinstitute.org/software/igv/)). To start, locate the output of Unicycler and expand it (don't click anything yet):
 
 ----
 ![Unicycler result Visualization](../../images/unicycler_igv.png  "Expanding Unicycler assembly reveals IGV link.")
@@ -250,7 +250,7 @@ Go to IGV [download page](http://software.broadinstitute.org/software/igv/downlo
 Now go back to the expanded Unicycler assembly dataset shown in [Figure 18](#figure-18) and click on the *local* link highlighted with orange outline. The browser will change:
 
 ----
-![IGV with Unicycler assembly](../../images/igv2.png "Now you can the the major contig shown in the browser window.")
+![IGV with Unicycler assembly](../../images/igv2.png "Now you can see the major contig shown in the browser window.")
 ----
 
 Finally, let's add Prokka annotations to the browser image. For this simply expand Prokka's GFF3 dataset:
