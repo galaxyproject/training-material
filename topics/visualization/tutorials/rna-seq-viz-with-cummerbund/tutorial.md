@@ -24,8 +24,8 @@ Visualization techniques are key to overcome the complexity of RNA-Seq data, and
 
 To make sense of the available RNA-Seq data, and overview the condition-specific gene expression levels of the provided samples, we need to visualize our results. Here we will use [CummeRbund](http://compbio.mit.edu/cummeRbund/).
 
-CummeRbund is an open-source tool that simplifies the analysis of a Cuffdiff RNA-Seq output. In particular, it helps researchers:
-- managing, integrating, and visualizing the data produced by Cuffdiff
+CummeRbund is an open-source tool that simplifies the analysis of a CuffDiff RNA-Seq output. In particular, it helps researchers:
+- managing, integrating, and visualizing the data produced by CuffDiff
 - simplifying data exploration
 - providing a bird's-eye view of the expresion analysis by describing relationships betweeen genes, transcripts, transcription start sites, and CDS regions
 - exploring subfeatures of individual genes or gene-sets
@@ -35,11 +35,11 @@ A typical workflow for the visualization of RNA-Seq data involving CummeRbund:
 
 ![workflow](../../images/rna-seq-viz-with-cummerbund.png)
 
-CummeRbund reads your RNA-Seq results from a [SQLite](XXX) database. This database has to be created using Cuffdiff's SQLite output option.
+CummeRbund reads your RNA-Seq results from a [SQLite](XXX) database. This database has to be created using CuffDiff's SQLite output option.
 
-> ### {% icon tip %} Tip: SQLite output with Cuffdiff
+> ### {% icon tip %} Tip: SQLite output with CuffDiff
 >
-> Instruct Cuffdiff to organize its output in a SQLite database for later read with CummeRbund
+> Instruct CuffDiff to organize its output in a SQLite database for later read with CummeRbund
 >
 > ![SQLite output](../../images/cuffdiff-set-sqlite.png)
 {: .tip}
@@ -67,11 +67,11 @@ CummeRbund reads your RNA-Seq results from a [SQLite](XXX) database. This databa
 > By default, when data is imported via its link, Galaxy names it with its URL.
 {: .hands_on}
 
-Cuffdiff's output data is organized in a SQLite database, so we need to extract it to be able to see how it looks like.
+CuffDiff's output data is organized in a SQLite database, so we need to extract it to be able to see how it looks like.
 
-For this tutorial, we are interested in Cuffdiff's tested transcripts for differential expression.
+For this tutorial, we are interested in CuffDiff's tested transcripts for differential expression.
 
-> ### {% icon hands_on %} Hands-on: Extract Cuffdiff results
+> ### {% icon hands_on %} Hands-on: Extract CuffDiff results
 >
 > 1. **Extract CuffDiff** {% icon tool %}: Lookup for this tool in the search bar, and select it
 > 2. Click on "Select tables to output", and select only the table called "Transcript differential expression testing"
@@ -104,7 +104,7 @@ For this tutorial, we are interested in Cuffdiff's tested transcripts for differ
 
 We now want to first highlight the most significant differentially expressed genes in our analysis, and then obtain informative visualizations.
 
-> ### {% icon hands_on %} Hands-on: Extract Cuffdiff's most significant differentially expressed genes
+> ### {% icon hands_on %} Hands-on: Extract CuffDiff's most significant differentially expressed genes
 >
 > 1. **Filter** {% icon tool %}: Look up for this tool in the search bar, and select it
 > 2. Select the extracted table as its input, and filter over the target column
@@ -188,5 +188,5 @@ Our plot has a modest number of isoforms, and is therefore already readable. How
 {:.no_toc}
 
 Visualization tools help researchers making sense of data, providing a bird's-eye view of the underlying analysis results.
-In this tutorial we overviewed the advantages of visualizing RNA-Seq results with CummeRbund, and gained insights on Cuffdiff's big-data output by plotting informations relative to the most significant differentially expressed genes in our RNA-Seq analysis.
+In this tutorial we overviewed the advantages of visualizing RNA-Seq results with CummeRbund, and gained insights on CuffDiff's big-data output by plotting informations relative to the most significant differentially expressed genes in our RNA-Seq analysis.
 
