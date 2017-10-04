@@ -102,7 +102,7 @@ For this tutorial, we are interested in Cuffdiff's tested transcripts for differ
 
 # Filtering and sorting
 
-As researchers in the digital Life Sciences, our aim is to infer biological meaning from the raw RNA-Seq results. We therefore want to first highlight the most significant differentially expressed genes in our analysis, and then obtain informative visualizations.
+We now want to first highlight the most significant differentially expressed genes in our analysis, and then obtain informative visualizations.
 
 > ### {% icon hands_on %} Hands-on: Extract Cuffdiff's most significant differentially expressed genes
 >
@@ -110,14 +110,16 @@ As researchers in the digital Life Sciences, our aim is to infer biological mean
 > 2. Select the extracted table as its input, and filter over the target column
 >
 >    > ### {% icon question %} Questions
->    > 1. Which conditional expression has to be set to filter all records on the selected column?
->    > 2. What happened to the records in the original table?
+>    > 1. What column stores the information of significance for each record?
+>    > 2. Which conditional expression has to be set to filter all records on the selected column?
+>    > 3. What happened to the records in the original table?
 >    >
 >    > <details>
 >    > <summary>Click to view the answers</summary>
 >    > <ol type="1">
+>    > <li>column 14</li>
 >    > <li>c14=='yes'</li>
->    > <li>All records whose "significant" field was set to "yes" have been filtered out, while the others filtered out</li>
+>    > <li>All records whose "significant" field was set to "yes" have been retained, while the others filtered out</li>
 >    > </ol>
 >    > </details>
 >    {: .question}
