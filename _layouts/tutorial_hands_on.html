@@ -8,6 +8,7 @@ layout: base
         {% assign tutorial = tuto %}
     {% endif %}
 {% endfor %}
+{% assign contributors = site.data['contributors'] %}
 
 <header>
     <nav class="navbar navbar-expand-md navbar-dark">
@@ -42,7 +43,7 @@ layout: base
                     </li>
                     {% endif %}
 
-                    {% if topic.docker_image %}
+                    {% if topic.docker_image and topic.docker_image != "" %}
                     <li class="nav-item">
                         <a class="nav-link" href="{{ site.github_repository }}/tree/master/topics/{{ topic.name }}/docker" title="Docker image for this tutorial">
                             {% icon docker_image %} Docker image
@@ -170,15 +171,15 @@ layout: base
     </section>
 </div>
 
+{% if tutorial.contributors %}
+{% capture contributors %}{% for contributor in tutorial.contributors %}, {{contributors[contributor].name }}{% endfor %}{% endcapture %}
+{% endif %}
 <footer>
     <div class="container">
         <p>
             This material is the result of a collaborative work. Thanks the
             <a href="https://wiki.galaxyproject.org/Teach/GTN">Galaxy Training Network</a>
-            and all the contributors
-            {% if tutorial.contributors %}
-            ({{ tutorial.contributors|map: 'name'|join: ', '}})
-            {% endif %}
+            and all the contributors ({{ contributors | remove_first: ', ' }})!
         </p>
         <p>
             Found a typo? Something is wrong in this tutorial? Edit it on

@@ -5,6 +5,7 @@ layout: base
 {% include default-header.html %}
 
 {% assign topic = site.data[page.topic_name] %}
+{% assign contributors = site.data['contributors'] %}
 
 <div class="container main-content">
     <section>
@@ -106,11 +107,11 @@ layout: base
             {% endfor %}
         </table>
 
-        {% if topic.docker_image %}
-        <h2 id="docker_image">Galaxy instance</h2>
-        <p>For these tutorials, you can use the dedicated Docker image:</p>
-            <pre><code>docker run -d -p 8080:80 {{ topic.docker_image }}</code></pre>
-        <p>It will launch a flavored Galaxy instance available on <a href="http://localhost:8080">http://localhost:8080</a>.</p>
+        {% if topic.docker_image and topic.docker_image != "" %}
+            <h2 id="docker_image">Galaxy instance</h2>
+            <p>For these tutorials, you can use the dedicated Docker image:</p>
+                <pre><code>docker run -d -p 8080:80 {{ topic.docker_image }}</code></pre>
+            <p>It will launch a flavored Galaxy instance available on <a href="http://localhost:8080">http://localhost:8080</a>.</p>
         {% endif %}
 
         {% if topic.galaxy_instance %}
@@ -124,13 +125,13 @@ layout: base
         <ul>
         {% for maintainer in topic.maintainers %}
             <li>
-            {% if maintainer.github_username != "" %}
-                <a href="https://github.com/{{ maintainer.github_username }}">{{ maintainer.name }}</a>
+            {% if contributors[maintainer].github != false %}
+                <a href="https://github.com/{{ maintainer }}">{{ contributors[maintainer].name }}</a>
             {% else %}
-                {{ maintainer.name }}
+                {{ contributors[maintainer].name }}
             {% endif %}
-            {% if maintainer.email and maintainer.email != "" %}
-                (<a href="mailto:{{ maintainer.email }}">{{ maintainer.email }}</a>)
+            {% if contributors[maintainer].email and contributors[maintainer].email != "" %}
+                (<a href="mailto:{{ contributors[maintainer].email }}">{{ contributors[maintainer].email }}</a>)
             {% endif %}
             </li>
         {% endfor %}
