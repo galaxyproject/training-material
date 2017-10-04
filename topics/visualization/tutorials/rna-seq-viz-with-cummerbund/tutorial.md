@@ -83,7 +83,6 @@ For this tutorial, we are interested in Cuffdiff's tested transcripts for differ
 >    > * Click on the eye ("View data") on the right of the file name in the history
 >    > * Inspect the content of the file on the middle
 >    {: .tip}
-{: .hands_on}
 > 5. Each entry represents a differentially expressed gene, but not all are significant. We want to keep only those that are reported as significant differentially expressed. 
 >
 >    > ### {% icon question %} Questions
@@ -99,6 +98,7 @@ For this tutorial, we are interested in Cuffdiff's tested transcripts for differ
 >    > </ol>
 >    > </details>
 >    {: .question}
+{: .hands_on}
 
 # Filtering and sorting
 
