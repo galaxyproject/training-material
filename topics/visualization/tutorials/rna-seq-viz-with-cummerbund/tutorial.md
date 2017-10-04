@@ -185,7 +185,7 @@ Expression Bar Plot of a single gene (NDUFV1) with replicate FPKMs exposed.
 
 > ### {% icon comment %} Comment
 >
-> Would you like to obtain more sophisticated visualization of your RNA-Seq analysis results? Select different CummeRbund plot options, and look at their parametrization according to the filtering and sorting operations we performed
+> Would you like to obtain more sophisticated visualization of your RNA-Seq analysis results? Select different CummeRbund plot options, and look at their parametrizations according to the filtering and sorting operations we performed
 > {: .comment}
 
 # Conclusion
