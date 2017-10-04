@@ -162,7 +162,9 @@ We are interested in visualizing all expression values of all transcripts relati
 > 7. Execute
 {: .hands_on}
 
-> ![SQLite output](../../images/cummerbund-expression-plot.png)
+![Expression plot](../../images/cummerbund-expression-plot.png)
+
+The Expression Plot represents the expression of all isoforms of a single gene (NDUFV1) with replicate FPKMs exposed.
 
 Our plot has a modest number of isoforms, and is therefore already readable. However, in case of 5 or 6 isoforms, the plot can look very busy. We can therefore change the visualization type by selecting another type of plot.
 
@@ -177,7 +179,9 @@ Our plot has a modest number of isoforms, and is therefore already readable. How
 > 7. Execute
 {: .hands_on}
 
-> ![SQLite output](../../images/cummerbund-expression-bar-plot.png)
+![Expression bar plot](../../images/cummerbund-expression-bar-plot.png)
+
+Expression Bar Plot of a single gene (NDUFV1) with replicate FPKMs exposed.
 
 > ### {% icon comment %} Comment
 >
