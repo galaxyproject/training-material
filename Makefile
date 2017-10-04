@@ -38,7 +38,7 @@ check-html-gh-pages:  ## validate HTML on gh-pages branch (for daily cron job)
 	timeout 120s bundle exec htmlproofer --http-status-ignore 405,999 --url-ignore "/.*localhost.*/","/.*vimeo\.com.*/" --file-ignore "/.*\/files\/.*/" .
 .PHONY: check-html-gh-pages
 
-check-yaml:
+check-yaml: ## lint yaml files
 	yamllint .
 .PHONY: check-yaml
 
