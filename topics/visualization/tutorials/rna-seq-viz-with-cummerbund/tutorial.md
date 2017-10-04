@@ -143,33 +143,50 @@ We now want to first highlight the most significant differentially expressed gen
 
 # CummeRbund
 
+With CummeRbund we can visualize our RNA-Seq results of interest.
+
+CummeRbund generates always two outputs:
+- the plot
+- the R script responsible for generating the plot
+
+We are interested in visualizing all expression values of all transcripts relative to the most significant differentially expressed gene we found in the previous section.
+
 > ### {% icon hands_on %} Hands-on: Visualization
 >
 > 1. **CummeRbund** {% icon tool %}: Lookup for this tool in the search bar, and select it
 > 2. Click on "Insert plot"
 > 3. Select 800 x 600 as the width and height of the resulting image
-> 4. Select "Expression plot" as the plot type
+> 4. Select "Expression Plot" as the plot type
 > 5. Select "Isoforms" as the expression levels to plot
 > 6. Select the gene "NDUFV1" as the gene to plot
 > 7. Execute
 {: .hands_on}
 
-# CASE 1
+> ![SQLite output](../../images/cummerbund-expression-plot.png)
 
-Short introduction about this subpart.
+Our plot has a modest number of isoforms, and is therefore already readable. However, in case of 5 or 6 isoforms, the plot can look very busy. We can therefore change the visualization type by selecting another type of plot.
+
+> ### {% icon hands_on %} Hands-on: Visualization
+>
+> 1. **CummeRbund** {% icon tool %}: Lookup for this tool in the search bar, and select it
+> 2. Click on "Insert plot"
+> 3. Select 800 x 600 as the width and height of the resulting image
+> 4. Select "Expression Bar Plot" as the plot type
+> 5. Select "Isoforms" as the expression levels to plot
+> 6. Select the gene "NDUFV1" as the gene to plot
+> 7. Execute
+{: .hands_on}
+
+> ![SQLite output](../../images/cummerbund-expression-bar-plot.png)
 
 > ### {% icon comment %} Comment
 >
-> Do you want to learn more about the principles behind mapping? Follow our [training](../../NGS-mapping)
+> Would you like to obtain more sophisticated visualization of your RNA-Seq analysis results? Select different CummeRbund plot options, and look at their parametrization according to the filtering and sorting operations we performed
 > {: .comment}
-
-# CASE 2
-
-# CASE 3
 
 # Conclusion
 {:.no_toc}
 
-Visualization tools help researchers making sense of data, providing a bird's-eye view of the underlying analysis.
-In this tutorial we overviewed the advantages of visualizing RNA-Seq results with CummeRbund, and gained insights on Cuffdiff's big-data output by plotting informations relative to CASE1, CASE2, CASE3.
+Visualization tools help researchers making sense of data, providing a bird's-eye view of the underlying analysis results.
+In this tutorial we overviewed the advantages of visualizing RNA-Seq results with CummeRbund, and gained insights on Cuffdiff's big-data output by plotting informations relative to the most significant differentially expressed genes in our RNA-Seq analysis.
 
