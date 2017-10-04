@@ -27,7 +27,7 @@ To make sense of the available RNA-Seq data, and overview the condition-specific
 CummeRbund is an open-source tool that simplifies the analysis of a CuffDiff RNA-Seq output. In particular, it helps researchers:
 - managing, integrating, and visualizing the data produced by CuffDiff
 - simplifying data exploration
-- providing a bird's-eye view of the expresion analysis by describing relationships betweeen genes, transcripts, transcription start sites, and CDS regions
+- providing a bird's-eye view of the expression analysis by describing relationships betweeen genes, transcripts, transcription start sites, and CDS regions
 - exploring subfeatures of individual genes or gene-sets
 - creating publication-ready plots
 
