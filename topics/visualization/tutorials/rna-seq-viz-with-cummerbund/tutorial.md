@@ -117,7 +117,7 @@ As researchers in the digital Life Sciences, our aim is to infer biological mean
 >    > <summary>Click to view the answers</summary>
 >    > <ol type="1">
 >    > <li>c14=='yes'</li>
->    > <li>All records whose "significance" field was set to "yes" have been filtered out, while the others filtered out</li>
+>    > <li>All records whose "significant" field was set to "yes" have been filtered out, while the others filtered out</li>
 >    > </ol>
 >    > </details>
 >    {: .question}
