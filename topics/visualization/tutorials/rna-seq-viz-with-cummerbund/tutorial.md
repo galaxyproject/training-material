@@ -67,11 +67,11 @@ CummeRbund reads your RNA-Seq results from a [SQLite](XXX) database. This databa
 > By default, when data is imported via its link, Galaxy names it with its URL.
 {: .hands_on}
 
-# Filtering and sorting
+Cuffdiff's output data is organized in a SQLite database, so we need to extract it to be able to see how it looks like.
 
-As researchers in the digital Life Sciences, our aim is to infer biological meaning from the raw RNA-Seq results. We therefore want to first highlight the most significant differentially expressed genes in our analysis, and then obtain informative visualizations.
+For this tutorial, we are interested in Cuffdiff's tested transcripts for differential expression.
 
-> ### {% icon hands_on %} Hands-on: Extracting the most significant differentially expressed genes
+> ### {% icon hands_on %} Hands-on: Extract Ciffdiff results
 >
 > 1. **Extract CuffDiff** {% icon tool %}: Lookup for this tool in the search bar, and select it
 > 2. Click on "Select tables to output", and select only the table called "Transcript differential expression testing"
@@ -83,6 +83,7 @@ As researchers in the digital Life Sciences, our aim is to infer biological mean
 >    > * Click on the eye ("View data") on the right of the file name in the history
 >    > * Inspect the content of the file on the middle
 >    {: .tip}
+{: .hands_on}
 > 5. Each entry represents a differentially expressed gene, but not all are significant. We want to keep only those that are reported as significant differentially expressed. 
 >
 >    > ### {% icon question %} Questions
@@ -98,8 +99,15 @@ As researchers in the digital Life Sciences, our aim is to infer biological mean
 >    > </ol>
 >    > </details>
 >    {: .question}
-> 6. **Filter** {% icon tool %}: Look up for this tool in the search bar, and select it
-> 7. Select the extracted table as its input, and filter over the target column
+
+# Filtering and sorting
+
+As researchers in the digital Life Sciences, our aim is to infer biological meaning from the raw RNA-Seq results. We therefore want to first highlight the most significant differentially expressed genes in our analysis, and then obtain informative visualizations.
+
+> ### {% icon hands_on %} Hands-on: Extract Cuffdiff's most significant differentially expressed genes
+>
+> 1. **Filter** {% icon tool %}: Look up for this tool in the search bar, and select it
+> 2. Select the extracted table as its input, and filter over the target column
 >
 >    > ### {% icon question %} Questions
 >    > 1. Which conditional expression has to be set to filter all records on the selected column?
@@ -113,8 +121,9 @@ As researchers in the digital Life Sciences, our aim is to infer biological mean
 >    > </ol>
 >    > </details>
 >    {: .question}
-> 8. **Sort** {% icon tool %}: Look up for this tool in the search bar, and select it. The values of differential expression are stored on column 10, we will sort (descending) all records on the basis of their value at the 10th column
-> 9. Select the filtered table as the input, and provide the column on which the records have to be sorted, the sorting flavor, and the order
+> 3. **Sort** {% icon tool %}: Look up for this tool in the search bar, and select it
+> 4. Look at your data. The differential expression values are stored on column 10, we will sort (descending) all records on the basis of their value at the 10th column
+> 4. Select the filtered table as the input, and provide the column on which the records have to be sorted, the sorting flavor, and the order
 >
 >    > ### {% icon question %} Questions
 >    > 1. Since the start of our filtering process, how many records now represent the significant subset for extracting informations?
@@ -134,24 +143,13 @@ As researchers in the digital Life Sciences, our aim is to infer biological mean
 
 > ### {% icon hands_on %} Hands-on: Visualization
 >
-> 1. **CummeRbund** {% icon tool %}: Run CummeRbund on the imported SQLite dataset with default parameters
-> 2. Inspect CummerBund's report on its webpage output
->
->    > ### {% icon question %} Questions
->    >
->    > 1. How XXX?
->    > 2. How YYY?
->    > 3. How ZZZ?
->    >
->    > <details>
->    > <summary>Click to view the answers</summary>
->    > <ol type="1">
->    > <li></li>
->    > <li></li>
->    > <li></li>
->    > </ol>
->    > </details>
->    {: .question}
+> 1. **CummeRbund** {% icon tool %}: Lookup for this tool in the search bar, and select it
+> 2. Click on "Insert plot"
+> 3. Select 800 x 600 as the width and height of the resulting image
+> 4. Select "Expression plot" as the plot type
+> 5. Select "Isoforms" as the expression levels to plot
+> 6. Select the gene "NDUFV1" as the gene to plot
+> 7. Execute
 {: .hands_on}
 
 # CASE 1
