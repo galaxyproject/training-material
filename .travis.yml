@@ -67,7 +67,7 @@ script:
 
 after_success:
   - |
-    if [ "$TRAVIS_PULL_REQUEST" == "false" -a "$TRAVIS_BRANCH" == "master" ]
+    if [ "$TRAVIS_PULL_REQUEST" == "false" -a "$TRAVIS_BRANCH" == "master" -a "$CHECK" == "site-build" ]
     then
       bin/publish
     fi
