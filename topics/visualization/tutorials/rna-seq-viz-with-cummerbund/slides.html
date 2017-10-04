@@ -59,16 +59,19 @@ Once the RNA-Seq pipeline is implemented, we still need to handle and analyse al
 
 ### Bioinformatic tools for RNA-Seq analysis
 
-The last step in our RNA-Seq analysis is Cuffdiff. Its output comprises multiple files containing the results of its differential analysis of the samples.
+The last step in our RNA-Seq analysis is CuffDiff. Its output comprises multiple files containing the results of the differential expression analysis.
 
-Gene and transcript expression levels are reported as <i>tab-separated</i> values: a simple tabular output that can be viewed with any spreadsheet application. Such files contain statistics, gene-related, and transcript-related attributes.
+- Gene expression levels are reported as <i>tab-separated</i> values: a simple tabular output that can be viewed with any spreadsheet application. Such files contain statistics, gene-related, and transcript-related attributes.
+.image-75[![CuffDiff output](../../images/cuffdiff-output.png)]
 
-![](../../images/cuffdiff-output.png)
+- A better way to collect all these data is to organize it within a dedicated database for later consultation. CuffDiff can be instructed to do so
+.image-50[![CuffDiff output SQLite](../../images/cuffdiff-set-sqlite.png)]
 
 ???
 - Cuffdiff provides analyses of differential expression and regulation at the gene and transcript level
 - its results are reported in a tab separated format
 - the overall collection of data is difficult to read to obtain a bird's-eye view of the change of expression
+- the data can be organized in a SQLite database
 
 ---
 
