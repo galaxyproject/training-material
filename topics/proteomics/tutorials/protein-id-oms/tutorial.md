@@ -91,14 +91,14 @@ In proteomics, this decision is typically done by calculating false discovery ra
 The calculation is based on a simple assumption: for every decoy protein identified with a given score, we expect on false positive with at least the same score.
 The false discovery rate is therefore defined as the number of false discoveries (decoy hits) divided by the number of false and correct discoveries (both target and decoy hits) at a given score threshold. 
 
-An alternative approach to FDR filtering is the calculation of posterior error probabilites (PEPs) based on the search engine scores. Here, we will use the FDR approach, which is much more common. Additionally, we will calculate PEPs, because they are needed for the protein inference algorithm used by OpenMS. We will then filter for 1 % FDR and set the score back to PEP.
+To calculate FDRs, we first have to annotate the identified peptides to determine which of them are decoys. This is done with the tool ***PeptideIndexer*** {% icon tool %}. Additionally, we will calculate peptide posterior error probabilities (PEPs), because they are needed for the protein inference algorithm used by OpenMS. We will then filter for 1 % FDR and set the score back to PEP.
 
 >
-> 3. Run ***IDPosteriorErrorProbability*** {% icon tool %}.
-> 4. Run ***PeptideIndexer*** {% icon tool %} with the same database file as used before.
-> 5. Run ***FalseDiscoveryRate*** {% icon tool %}. Set the option **`Perform FDR calculation on protein level`** to `false` and **`Filter PSMs based on q-value`** to `0.01`. Set `-add_decoy_peptides` to `Yes`.
-> 6. Run ***IDScoreSwitcher*** {% icon tool %}. Set the **`Name of the meta value to use as the new score`** to "Posterior Probability_score". and the **`Orientation of the new score`** to `higher_better`. 
-> 7. Run ***FileInfo*** {% icon tool %} to get basic information about the identified peptides.
+> 1. Run ***PeptideIndexer*** {% icon tool %} with the same database file as used before.
+> 2. Run ***IDPosteriorErrorProbability*** {% icon tool %}.
+> 3. Run ***FalseDiscoveryRate*** {% icon tool %}. Set the option **`Perform FDR calculation on protein level`** to `false` and **`Filter PSMs based on q-value`** to `0.01`. Set `-add_decoy_peptides` to `Yes`.
+> 4. Run ***IDScoreSwitcher*** {% icon tool %}. Set the **`Name of the meta value to use as the new score`** to "Posterior Probability_score". and the **`Orientation of the new score`** to `higher_better` (?). 
+> 5. Run ***FileInfo*** {% icon tool %} to get basic information about the identified peptides.
 >
 >   > ### {% icon question %} Questions:
 >   > 1. How many peptides were identified?
@@ -108,7 +108,7 @@ An alternative approach to FDR filtering is the calculation of posterior error p
 >   >  <details>
 >   >  <summary>Click to view answers</summary>
 >   >   <ol type="1">
->   >     <li> You should have identified 3,325 peptides and 1,170 proteins.</li>
+>   >     <li> You should have identified 3,325 peptides.</li>
 >   >     <li> 328 peptides contain an oxidized methionine (MeO). To get to this number, you can use ***Select*** {% icon tool %} on the Peptide Report and search for either "Oxidation of M" or "M\<ox\>".</li>
 >		>			<li> </li>
 >   >   </ol>
@@ -122,8 +122,9 @@ The OpenMS suite implemented the [Fido](https://www.ncbi.nlm.nih.gov/pubmed/2071
 
 > ### {% icon hands_on %} Hands-On: Protein inference
 >
-> 1. Run ***FidoAdapter*** {% icon tool %}. `Greedy group resolution` = Yes ? **Explain!**
-> 2. Run ***FalseDiscoveryRate*** {% icon tool %}. Set the option **`Perform FDR calculation on PSM level`** to `false` and **`Filter proteins based on q-value`** to `0.01`.
+> 1. Run ***FidoAdapter*** {% icon tool %}. Set `-greedy_group_resolution` = `Yes`.
+> 2. Run ***FalseDiscoveryRate*** {% icon tool %}. Set the option **`Perform FDR calculation on PSM level`** to `false`.
+> 3. Run ***IDFilter*** {% icon tool %}. Set `-remove_decoys` to `Yes` and `-prot` to `0.01`.
 >
 >   > {% icon comment %} Comment: "Greedy" Group Resolution
 >
