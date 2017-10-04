@@ -17,7 +17,7 @@ Identifying the proteins contained in a sample is an important step in any prote
 A plethora of different software solutions exists for each step. In this tutorial, we will show how to
 use the [ProteoWizard](http://proteowizard.sourceforge.net/) tool MSconvert and the [OpenMS](https://openms.de) tool [PeakPickerHiRes](http://ftp.mi.fu-berlin.de/pub/OpenMS/release-documentation/html/TOPP_PeakPickerHiRes.html) for step 1, and the [Compomics](https://compomics.com/) tools [SearchGUI](https://compomics.github.io/projects/searchgui.html) and [PeptideShaker](https://compomics.github.io/projects/peptide-shaker.html), for the steps 2-4.
 
-For an alternative ID pipeline using only tools provided by the [OpenMS software suite](https://openms.de), please consult [this tutorial]({{site.url}}/topics/proteomics/tutorials/protein-id-oms/tutorial.html).
+For an alternative ID pipeline using only tools provided by the [OpenMS software suite](https://openms.de), please consult [this tutorial]({{site.url}}/topics/proteomics/tutorials/protein-id-oms/tutorial.html). For using multiple search engines in OpenMS, consult [this tutorial]({{site.url}}/topics/proteomics/tutorials/protein-id-oms-consensus/tutorial.html).
 
 # Input data
 {:.no_toc}
@@ -27,8 +27,7 @@ in [Vaudel et al., 2014, Proteomics](https://www.ncbi.nlm.nih.gov/pubmed/2467804
 about the dataset can be found on [PRIDE](https://www.ebi.ac.uk/pride/archive/projects/PXD000674).
 For step 2 we will use a validated human Uniprot FASTA database without appended decoys.
 If you already completed the tutorial on [Database Handling]({{site.url}}/topics/proteomics/tutorials/database-handling/tutorial.html)
-you can use the constructed database before the **DecoyDatabase** {% icon tool %} step. You can find a prepared database, as well as the input proteomics data in different file formats on [Zenodo](https://zenodo.org/record/546301).
-
+you can use the constructed database before the **DecoyDatabase** {% icon tool %} step. You can find a prepared database, as well as the input proteomics data in different file formats on [Zenodo](https://zenodo.org/record/796184).
 
 > ### Agenda
 >
@@ -137,21 +136,25 @@ The FASTA database used for the peptide to spectrum matching contained some entr
 > 1. Run ***Select*** {% icon tool %} on the Peptide Shaker Protein Report to select all lines that match the pattern "CONTAMINANT".
 > 2. Remove all contaminants from your protein list by running ***Select*** {% icon tool %} on the Peptide Shaker Protein Report. Select only those lines that **do not** match the pattern "CONTAMINANT".
 >
->   > ### {% icon question %} Questions:
+>   > ### {% icon question %} Questions
 >   > 1. Which contaminants did you identify? Where do these contaminations come from?
 >   > 2. What other sources of contaminants exist?
->   > 2. How many mycoplasma proteins did you identify? Does this mean that the analyzed HeLa cells were infected with mycoplasma?
+>   > 3. How many mycoplasma proteins did you identify? Does this mean that the analyzed HeLa cells were infected with mycoplasma?
+>   > 4. How many false positives do we expect in our list? How many of these are expected to match mycoplasma proteins?
 >   >
 >   >  <details>
 >   >  <summary>Click to view answers</summary>
 >   >   <ol type="1">
->   >       <li> TRY_BOVIN is bovine trypsin. It was used to degrade the proteins to peptides. ALBU_BOVIN is bovine serum albumin. It is added to cell culture medium in high amounts.</li>
->   >       <li> Contaminants often stem from the experimenter, these are typically keratins or other high-abundant human proteins. Basically any protein present in the room of the mass spectrometer might get into the ion source, if it is airborne. As an example, sheep keratins are sometimes found in proteomic samples, stemming from clothing made of sheep wool.</li>
-> >   <li> There should be five mycoplasma proteins in your protein list. However, all of them stem from different mycoplasma species. Also, every protein was identified by one peptide only. You can see this in column 17-19 of your output. These observations make it very likely that we are facing false positives here. As we were allowing for a false discovery rate of 1 %, we would expect 12 false positive proteins in our list. False positives are distributed to random peptides in the FASTA database. Our database consists of about 20,000 human proteins and 4,000 mycoplasma proteins. Therefore, we would expect 20 % of all false positives to match to mycoplasma proteins.</li>
+>   >     <li> TRY_BOVIN is bovine trypsin. It was used to degrade the proteins to peptides. ALBU_BOVIN is bovine serum albumin. It is added to cell culture medium in high amounts.</li>
+>   >     <li> Contaminants often stem from the experimenter, these are typically keratins or other high-abundant human proteins. Basically any protein present in the room of the mass spectrometer might get into the ion source, if it is airborne. As an example, sheep keratins are sometimes found in proteomic samples, stemming from clothing made of sheep wool.</li>
+>   >     <li> There should be five mycoplasma proteins in your protein list. However, all of them stem from different mycoplasma species. Also, every protein was identified by one peptide only. You can see this in column 17-19 of your output. These observations make it very likely that we are facing false positives here.</li>
+>   >     <li> As we were allowing for a false discovery rate of 1 %, we would expect 12 false positive proteins in our list.
+>   >     False positives are expected to be randomly assigned to peptides in the FASTA database. Our database consists of about 20,000 human proteins and 4,000 mycoplasma proteins. Therefore, we would expect 17 % (= 2) of all false positives matching to mycoplasma proteins.</li>
 >   >   </ol>
 >   >  </details>
 >   {: .question}
 {: .hands_on}
+
 
 # Evaluation of Peptide and Protein IDs
 ***Peptide Shaker*** {% icon tool %} provides you with validation results for the identified PSM, peptides and proteins. It classifies all these IDs in the categories "Confident" or "Doubtful". On each level, the meaning of these terms differs to some extent:

@@ -15,8 +15,10 @@ Identifying the proteins contained in a sample is an important step in any prote
 4. Protein inference
 
 A plethora of different software solutions exists for each step. In this tutorial, we will use ***msconvert*** {% icon tool %}  for raw data conversion and tools from the [OpenMS software suite](https://openms.de) for all other steps. We will use one peptide search engine at first and later on show how to expand the workflow for using multiple search engines. Protein inference will be performed with the Fido algorithm ([Serang et al, JPR, (2010)](https://www.ncbi.nlm.nih.gov/pubmed/20712337)).
+This tutorial covers peptide and protein **identification** only, but you may use the output of this tutorial for the [tutorial on protein quantitation]({{site.url}}/topics/proteomics/tutorials/protein-quant-sil/tutorial.html).
 
-For an alternative ID pipeline using the [Compomics](https://compomics.com/) tools [SearchGUI](https://compomics.github.io/projects/searchgui.html) and [PeptideShaker](https://compomics.github.io/projects/peptide-shaker.html), please consult [this tutorial]({{site.url}}/topics/proteomics/tutorials/protein-id-sg-ps/tutorial.html).
+It is generally recommended to use more than one peptide search engine and use the combined results for the final peptide inference ([Shteynberg et al., 2013, Mol. Cell. Proteomics](https://www.ncbi.nlm.nih.gov/pubmed/23720762)). For an OpenMS-based workflow that makes use of multiple peptide search engines, please consult [this tutorial]({{site.url}}/topics/proteomics/tutorials/protein-id-oms-consensus/tutorial.html). 
+For an alternative ID pipeline using the [Compomics](https://compomics.com/) tools [SearchGUI](https://compomics.github.io/projects/searchgui.html) and [PeptideShaker](https://compomics.github.io/projects/peptide-shaker.html), please consult [this tutorial]({{site.url}}/topics/proteomics/tutorials/protein-id-sg-ps/tutorial.html). However, the latter tutorial does not allow to continue with the tutorial on protein quantitation.
 
 # Input data
 {:.no_toc}
@@ -26,7 +28,7 @@ in [Vaudel et al., 2014, Proteomics](https://www.ncbi.nlm.nih.gov/pubmed/2467804
 about the dataset can be found on [PRIDE](https://www.ebi.ac.uk/pride/archive/projects/PXD000674).
 For step 2 we will use a validated human Uniprot FASTA database with appended decoys.
 If you already completed the tutorial on [Database Handling]({{site.url}}/topics/proteomics/tutorials/database-handling/tutorial.html)
-you can use the constructed database after the **DecoyDatabase** {% icon tool %} step. You can find a prepared database, as well as the input proteomics data in different file formats on [Zenodo](https://zenodo.org/record/546301).
+you can use the constructed database after the **DecoyDatabase** {% icon tool %} step. You can find a prepared database, as well as the input proteomics data in different file formats on [Zenodo](https://zenodo.org/record/796184).
 
 > ### Agenda
 >
@@ -37,19 +39,18 @@ you can use the constructed database after the **DecoyDatabase** {% icon tool %}
 >
 {: .agenda}
 
-
 # Preparing raw data
 
 Raw data conversion is the first step of any proteomic data analysis. The most common converter is MSConvert from the [ProteoWizard software suite](http://proteowizard.sourceforge.net/), the format to convert to is mzML.
 
 > ### {% icon hands_on %} Optional Hands-On: Preparing raw data
 >
-> This part of the Hands-On section is optional, because it cannot be performed on most GalaxyP instances due to licensing reasons. Therefore, we provide the [input data](https://zenodo.org/record/546301) also already converted to `.mzML` file format. If you choose to omit this part of the Hands-On section, please download the file "qExactive01819.mzml_profile" from [https://zenodo.org/record/546301/files/qExactive01819_profile.mzml] and continue with step 5 below (***PeakPickerHiRes*** {% icon tool %}).
+> This part of the Hands-On section is optional, because it cannot be performed on most GalaxyP instances due to licensing reasons. Therefore, we provide the [input data](https://zenodo.org/record/796184) also already converted to `.mzML` file format. If you choose to omit this part of the Hands-On section, please download the file "qExactive01819.mzml_profile" from [https://zenodo.org/record/546301/files/qExactive01819_profile.mzml] and continue with step 5 below (***PeakPickerHiRes*** {% icon tool %}).
 >
 > 1. Create a new history for this Peptide and Protein ID exercise.
 > 2. Load the example dataset into your history from this [link](ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2014/01/PXD000674/qExactive01819.raw).
 > 3. Rename the dataset to "Test data".
-> 4. Run ***msconvert*** {% icon tool %} on the test data to convert to the mzML format
+> 4. Run ***msconvert*** {% icon tool %} on the test data to convert to the mzML format.
 >
 >   > ### {% icon comment %} Comment: Local Use of MSConvert
 >   > The vendor libraries used by MSConvert are only licensed for Windows systems and are therefore rarely implemented in Galaxy instances. If ***msconvert*** {% icon tool %} is not available in your Galaxy instance, please install the software on a Windows computer and run the conversion locally. You can find a detailed description of the necessary steps [here](http://genesis.ugent.be/files/costore/practicals/bioinformatics-for-proteomics/1-Peptide-and-Protein-Identification/1.2-Peak-List-Generation/1.2-Peak-List-Generation.pdf). Afterwards, upload the resulting mzML file to your Galaxy history.
@@ -70,42 +71,63 @@ Raw data conversion is the first step of any proteomic data analysis. The most c
 
 # Peptide Identification
 MS/MS experiments identify peptides by isolating them and subsequently colliding them with a gas for fragmentation. This method generates a spectrum of peptide fragment masses for each isolated peptide - an MS2 spectrum. 
-To find out the peptide sequences, the MS2 spectrum is compared to a theoretical spectrum generated from a protein database. This step is called peptide-to-spectrum (also: spectrum-to-sequence) matching. Accordingly, a peptide that is successfully matched to a sequence is termed PSM (Peptide-Spectrum-Match). There can be multiple PSMs per peptide, if the peptide was fragmented several times. Different peptide search engines have been developed to fulfill the matching procedure. 
-Here, we will use the search engine [X!Tandem](https://www.ncbi.nlm.nih.gov/pubmed/14976030).
+To find out the peptide sequences, the MS2 spectrum is compared to a theoretical spectrum generated from a protein database. This step is called peptide-to-spectrum (also: spectrum-to-sequence) matching. Accordingly, a peptide that is successfully matched to a sequence is termed PSM (Peptide-Spectrum-Match). There can be multiple PSMs per peptide, if the peptide was fragmented several times.
+Different peptide search engines have been developed to fulfill the matching procedure. Here, we will use the search engine [X!Tandem](https://www.ncbi.nlm.nih.gov/pubmed/14976030).
 
-> ### {% icon hands_on %} Hands-On: Peptide Identification
+> ### {% icon hands_on %} Hands-On: Peptide Identification and FDR filtering
 >
 > 1. Copy the prepared protein database from the tutorial [Database Handling](../database-handling/tutorial.md) into your current history by using the multiple history view or upload the ready-made database from this [link](https://zenodo.org/record/892005/files/Human_database_including_decoys_%28cRAP_and_Mycoplasma_added%29.fasta).
-> 2. Run the tool ***XTandemAdapter*** {% icon tool %} on the centroided mzML input file. Click `+ Insert param_fixed_modifications` and choose `Carbamidomethyl (C)`, then click `+ Insert param_variable_modifications` and choose `Oxidation (M)` and `Execute`.
-> 3. FDR filtering
-> 5. Run ***FileInfo*** {% icon tool %} to get basic information about the identified peptides.
+> 2. Run the tool ***XTandemAdapter*** {% icon tool %} on the centroided mzML input file and the database file. Click `+ Insert param_fixed_modifications` and choose `Carbamidomethyl (C)`, then click `+ Insert param_variable_modifications` and choose `Oxidation (M)` and `Execute`.
+> 3. Run the tool ***FileInfo*** {% icon tool %} on the XTandem output.
 >
 >   > ### {% icon comment %} Comment: Advanced X!Tandem Parameters
->   > The search engine X!Tandem features many more advanced options than the ones reflected in the ***XTandemAdapter*** {% icon tool %}. If you need those advanced options, the ***XTandemAdapter*** {% icon tool %} allows for the optional input of a classic X!Tandem parameter file. Upload your parameter file to the history and use it as input in the field `Default X!Tandem configuration file`. You may set the option `-ignore_adapter_param` to `Yes` to overwrite all options set by the GUI.
+>   > The search engine X!Tandem features some more advanced options than the ones reflected in the ***XTandemAdapter*** {% icon tool %}. If you need those advanced options, the ***XTandemAdapter*** {% icon tool %} allows for the optional input of a classic X!Tandem parameter file. Upload your parameter file to the history and use it as input in the field `Default X!Tandem configuration file`. You may also set the option `-ignore_adapter_param` to `Yes` to overwrite all options set by the GUI.
 >   {: .comment}
+
+# Peptide FDR filtering
+The next step of peptide identification is to decide which PSMs will be used for protein inference. Measured MS2 spectra never perfectly fit the theoretical spectra. Therefore, peptide search engines calculate a score which indicates how well the measured MS2 spectrum was fitting the theoretical spectrum. How do we decide which PSMs are likely true and which are false?
+
+In proteomics, this decision is typically done by calculating false discovery rates (FDRs). Remember that the database we were using for peptide-to-spectrum matching consisted not only of true proteins, but also the same number of "fake entries", the so-called decoys. Those decoys can now be used to estimate the number of false identifications in the list of PSMs. 
+The calculation is based on a simple assumption: for every decoy protein identified with a given score, we expect on false positive with at least the same score.
+The false discovery rate is therefore defined as the number of false discoveries (decoy hits) divided by the number of false and correct discoveries (both target and decoy hits) at a given score threshold. 
+
+An alternative approach to FDR filtering is the calculation of posterior error probabilites (PEPs) based on the search engine scores. Here, we will use the FDR approach, which is much more common. Additionally, we will calculate PEPs, because they are needed for the protein inference algorithm used by OpenMS. We will then filter for 1 % FDR and set the score back to PEP.
+
+>
+> 3. Run ***IDPosteriorErrorProbability*** {% icon tool %}.
+> 4. Run ***PeptideIndexer*** {% icon tool %} with the same database file as used before.
+> 5. Run ***FalseDiscoveryRate*** {% icon tool %}. Set the option **`Perform FDR calculation on protein level`** to `false` and **`Filter PSMs based on q-value`** to `0.01`. Set `-add_decoy_peptides` to `Yes`.
+> 6. Run ***IDScoreSwitcher*** {% icon tool %}. Set the **`Name of the meta value to use as the new score`** to "Posterior Probability_score". and the **`Orientation of the new score`** to `higher_better`. 
+> 7. Run ***FileInfo*** {% icon tool %} to get basic information about the identified peptides.
 >
 >   > ### {% icon question %} Questions:
 >   > 1. How many peptides were identified?
 >   > 2. How many peptides with oxidized methionine were identified?
+>		> 3. Compare the results before and after FDR filtering: how many peptides were rejected?
 >   >
 >   >  <details>
 >   >  <summary>Click to view answers</summary>
 >   >   <ol type="1">
 >   >     <li> You should have identified 3,325 peptides and 1,170 proteins.</li>
 >   >     <li> 328 peptides contain an oxidized methionine (MeO). To get to this number, you can use ***Select*** {% icon tool %} on the Peptide Report and search for either "Oxidation of M" or "M\<ox\>".</li>
+>		>			<li> </li>
 >   >   </ol>
 >   >  </details>
 >   {: .question}
 {: .hands_on}
 
-# Using Multiple Peptide Search Engines
-It is generally recommended to use more than one peptide search engine and use the combined results for the final peptide inference ([Shteynberg et al., 2013, Mol. Cell. Proteomics](https://www.ncbi.nlm.nih.gov/pubmed/23720762)). Again, there are several software solutions for this, e.g. iProphet (TPP) or SearchGUI. In this tutorial we will use the OpenMS tool ***ConsensusID*** {% icon tool %}.
-
 # Protein Inference
 In bottom-up proteomics, it is necessary to combine the identified peptides to proteins. This is not a trivial task, as proteins are redundant to some degree. Thus, not every peptide can be assigned to only one protein. 
 The OpenMS suite implemented the [Fido](https://www.ncbi.nlm.nih.gov/pubmed/20712337) algorithm for protein inference. Fido uses a Bayesian probabilistic model to group and score proteins based on peptide-spectrum matches.
 
-# FDR Filtering
+> ### {% icon hands_on %} Hands-On: Protein inference
+>
+> 1. Run ***FidoAdapter*** {% icon tool %}. `Greedy group resolution` = Yes ? **Explain!**
+> 2. Run ***FalseDiscoveryRate*** {% icon tool %}. Set the option **`Perform FDR calculation on PSM level`** to `false` and **`Filter proteins based on q-value`** to `0.01`.
+>
+>   > {% icon comment %} Comment: "Greedy" Group Resolution
+>
+>   > {% icon comment %} Comment: Posterior Error Probabilities vs. FDR **EVTL AUCH SCHON BEI PEPTIDEN**
 
 # Analysis of Contaminants
 The FASTA database used for the peptide to spectrum matching contained some entries that were not expected to stem from the HeLa cell lysate, but are common contaminations in LC-MS/MS samples. The main reason to add those is to avoid false assignment of the spectra to other proteins. However, it also enables you to check for contaminations in your samples. **CAVE:** in human samples, many proteins that are common contaminants may also stem from the real sample. The real source can never be determined for sure.
@@ -115,28 +137,27 @@ The FASTA database used for the peptide to spectrum matching contained some entr
 > 1. Run ***Select*** {% icon tool %} on the Peptide Shaker Protein Report to select all lines that match the pattern "CONTAMINANT".
 > 2. Remove all contaminants from your protein list by running ***Select*** {% icon tool %} on the Peptide Shaker Protein Report. Select only those lines that **do not** match the pattern "CONTAMINANT".
 >
->   > ### {% icon question %} Questions:
+>   > ### {% icon question %} Questions
 >   > 1. Which contaminants did you identify? Where do these contaminations come from?
 >   > 2. What other sources of contaminants exist?
->   > 2. How many mycoplasma proteins did you identify? Does this mean that the analyzed HeLa cells were infected with mycoplasma?
+>   > 3. How many mycoplasma proteins did you identify? Does this mean that the analyzed HeLa cells were infected with mycoplasma?
+>   > 4. How many false positives do we expect in our list? How many of these are expected to match mycoplasma proteins?
 >   >
 >   >  <details>
 >   >  <summary>Click to view answers</summary>
 >   >   <ol type="1">
->   >       <li> TRY_BOVIN is bovine trypsin. It was used to degrade the proteins to peptides. ALBU_BOVIN is bovine serum albumin. It is added to cell culture medium in high amounts.</li>
->   >       <li> Contaminants often stem from the experimenter, these are typically keratins or other high-abundant human proteins. Basically any protein present in the room of the mass spectrometer might get into the ion source, if it is airborne. As an example, sheep keratins are sometimes found in proteomic samples, stemming from clothing made of sheep wool.</li>
-> >   <li> There should be five mycoplasma proteins in your protein list. However, all of them stem from different mycoplasma species. Also, every protein was identified by one peptide only. You can see this in column 17-19 of your output. These observations make it very likely that we are facing false positives here. As we were allowing for a false discovery rate of 1 %, we would expect 12 false positive proteins in our list. False positives are distributed to random peptides in the FASTA database. Our database consists of about 20,000 human proteins and 4,000 mycoplasma proteins. Therefore, we would expect 20 % of all false positives to match to mycoplasma proteins.</li>
+>   >     <li> TRY_BOVIN is bovine trypsin. It was used to degrade the proteins to peptides. ALBU_BOVIN is bovine serum albumin. It is added to cell culture medium in high amounts.</li>
+>   >     <li> Contaminants often stem from the experimenter, these are typically keratins or other high-abundant human proteins. Basically any protein present in the room of the mass spectrometer might get into the ion source, if it is airborne. As an example, sheep keratins are sometimes found in proteomic samples, stemming from clothing made of sheep wool.</li>
+>   >     <li> There should be five mycoplasma proteins in your protein list. However, all of them stem from different mycoplasma species. Also, every protein was identified by one peptide only. You can see this in column 17-19 of your output. These observations make it very likely that we are facing false positives here.</li>
+>   >     <li> As we were allowing for a false discovery rate of 1 %, we would expect 12 false positive proteins in our list.
+>   >     False positives are expected to be randomly assigned to peptides in the FASTA database. Our database consists of about 20,000 human proteins and 4,000 mycoplasma proteins. Therefore, we would expect 17 % (= 2) of all false positives matching to mycoplasma proteins.</li>
 >   >   </ol>
 >   >  </details>
 >   {: .question}
 {: .hands_on}
 
 # Evaluation of Peptide and Protein IDs
-***Peptide Shaker*** {% icon tool %} provides you with validation results for the identified PSM, peptides and proteins. It classifies all these IDs in the categories "Confident" or "Doubtful". On each level, the meaning of these terms differs to some extent:
 
-- **PSMs** are marked as "Doubtful" when the measured MS2 spectrum did not fit well to the theoretical spectrum.
-- **Peptides** have a combined scoring of their PSMs. They are marked as "Doubtful", when the score is below a set threshold. The threshold is defined by the false discovery rate (FDR).
-- **Proteins** are marked as "Doubtful", when they were identified by only a single peptide or when they were identified solely by "Doubtful" peptides.
 
 > ### {% icon hands_on %} Hands-On: Evaluation of Peptide and Protein IDs
 >
