@@ -71,7 +71,7 @@ Cuffdiff's output data is organized in a SQLite database, so we need to extract 
 
 For this tutorial, we are interested in Cuffdiff's tested transcripts for differential expression.
 
-> ### {% icon hands_on %} Hands-on: Extract Ciffdiff results
+> ### {% icon hands_on %} Hands-on: Extract Cuffdiff results
 >
 > 1. **Extract CuffDiff** {% icon tool %}: Lookup for this tool in the search bar, and select it
 > 2. Click on "Select tables to output", and select only the table called "Transcript differential expression testing"
