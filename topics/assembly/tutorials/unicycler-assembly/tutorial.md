@@ -59,7 +59,7 @@ In this analysis we will perform two tasks: (1) assembly and (2) annotation. Bel
 > Here we assume that you know a thing or two about assembly process. If you don't: look at the [slides](./slides) accompanying this tutorial as well as other tutorials is this section.
 {: .info-box}
 
-![](https://github.com/rrwick/Unicycler/raw/master/misc/logo.png)
+![Logo unicycler](https://github.com/rrwick/Unicycler/raw/master/misc/logo.png)
 
 For assembly we will be using [Unicycler](https://github.com/rrwick/Unicycler) (also see publication by Wick:[2017](http://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1005595)). Unicycler is designed specifically for *hybrid assembly* (the one combines short and long read sequencing data) of small (e.g., bacterial, viral, organellar) genomes. In our hands it has produced complete high quality assemblies. Unicycler employs a multi-step process that utilizes a number of software tools:
 
@@ -121,28 +121,26 @@ Prokka predicts protein-coding regions using a two step process. It first identi
 
 In this example we will use a downsampled version of *E. coli* C-1 Illumina and ONT sequencing data. These include 3 files: forward and reverse reads for Illumina, and Long read file produced by ONT. All data are in [fastq](https://en.wikipedia.org/wiki/FASTQ_format) format. 
 
-### Load data into History
-
-To load data into your Galaxy instance log in into Galaxy and create new history (if you are new to Galaxy see [Galaxy 101 tutorial](/topics/introduction/tutorials/galaxy-intro-101/tutorial.html) first). 
-
-Click **Get data** icon as shown below (see [these slides](/topics/introduction/tutorials/galaxy-intro-get-data/slides.html) for an introduction on how to load data into Galaxy):
-
-<hr>
-![Get Data](../../images/get_data.png "Getting data into history starts with clicking <b>Get data</b> button")
-<hr>
-
-Open Zenodo [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.940733.svg)](https://doi.org/10.5281/zenodo.940733)
+> ### {% icon hands_on %} Hands-on: Load data into History
+> 
+> 1. To load data into your Galaxy instance:
+>   - Log in into Galaxy 
+>   - Create new history (if you are new to Galaxy see [Galaxy 101 tutorial](/topics/introduction/tutorials/galaxy-intro-101/tutorial.html) first). 
+> 
+> 2. **Get data** {% icon tool %} as shown below (see [these slides](/topics/introduction/tutorials/galaxy-intro-get-data/slides.html) for an introduction on how to load data into Galaxy):
+>    <hr>
+>       ![Get Data](../../images/get_data.png "Getting data into history starts with clicking <b>Get data</b> button")
+>    <hr>
+> 3. Open Zenodo [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.940733.svg)](https://doi.org/10.5281/zenodo.940733)
  link in a **new browser window** and right-click on dataset links:
+>       ![Get Data](../../images/zenodo.png "Right click on links to copy them into clipboard")
+> 4. And paste them into the **Galaxy upload**:
+> 
+>    <hr>
+>       ![Upload file](../../images/upload_file.png  "Uploading data into Galaxy. First (1) click <b>Paste/Fetch data</b> link. Next (2), paste URL copied from Zenodo. Finally (3), set type of all datasets to <tt>fastqsanger</tt>. Click <b>Start</b> (4).")
+>       <hr>
+{: .hands_on}
 
-<hr>
-![Get Data](../../images/zenodo.png "Right click on links to copy them into clipboard")
-<hr>
-
-And paste them into the **Galaxy upload**:
-
-<hr>
-![Upload file](../../images/upload_file.png  "Uploading data into Galaxy. First (1) click <b>Paste/Fetch data</b> link. Next (2), paste URL copied from Zenodo. Finally (3), set type of all datasets to <tt>fastqsanger</tt>. Click <b>Start</b> (4).")
-<hr>
 
 If all goes well you will see datasets uploading and changing states from gray to green as shown below. The figure below also shows how datasets can be tagged.
 
@@ -154,17 +152,21 @@ If all goes well you will see datasets uploading and changing states from gray t
 
 To assess quality we will use two tools: [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/) to generate quality statistics and [multiQC](http://multiqc.info/) to summarize these statistics.
 
-First, run **FastQC** on all three datasets simultaneously:
-
------
-![Screenshots of FastQC interface](../../images/fastc_interface.png  "Using <b>fastqc</b> to compute the quality statistics for all reads. Note that multiple dataset selection button (<i class='fa fa-files-o' aria-hidden='true'></i>) is pressed and all three datasets are selected at the same time. ")
------
-
-Although FastQC generated graphical reports for each dataset we can look at everything at once using multiQC by selecting "raw" output of FastQC:
-
------
-![Screenshot of multiQC interface](../../images/multiqc_interface.png "Running <b>multiQC</b> requires selecting <em>RawData</em> output of <b>FastQC</b>. Again, note that multiple dataset selection button (<i class='fa fa-files-o' aria-hidden='true'></i>) is pressed and all <em>RawData</em> inputs are selected.") 
------
+> ### {% icon hands_on %} Hands-on: Quality Control
+> 
+> 1. **FastQC** {% icon tool %} on all three datasets simultaneously:
+> 
+>       -----
+>       ![Screenshots of FastQC interface](../../images/fastc_interface.png  "Using <b>fastqc</b> to compute the quality statistics for all reads. Note that multiple dataset selection button (<i class='fa fa-files-o' aria-hidden='true'></i>) is pressed and all three datasets are selected at the same time. ")
+>       -----
+> 
+> 2. **MultiQC** {% icon tool %} on FastQC outputs. Although FastQC generated graphical reports for each dataset we can look at everything at once using multiQC by selecting "raw" output of FastQC:
+> 
+>       -----
+>       ![Screenshot of multiQC interface](../../images/multiqc_interface.png "Running <b>multiQC</b> requires selecting <em>RawData</em> output of <b>FastQC</b>. Again, note that multiple dataset selection button (<i class='fa fa-files-o' aria-hidden='true'></i>) is pressed and all <em>RawData</em> inputs are selected.") 
+>       -----
+> 
+{: .hands_on}
 
 A quick look at quality score distribution will show a confusing picture:
 
@@ -180,11 +182,17 @@ So let's zoom in into Illumina data:
 
 ## Assembly with Unicycler 
 
-Now it is time to perform assembly. Unicycler takes three inputs: paired Illumina reads and long ONT reads:
+Now it is time to perform assembly. 
 
------
-![Running Unicycler](../../images/Unicycler_interface.png "Running Unicycler with default parameters. Note how forward and reverse Illumina reads are specified and that ONT reads are entered as <em>long reads</em>.")
------
+> ### {% icon hands_on %} Hands-on: Unicycler Assembly
+> 
+> 1. **Unicycler** {% icon tool %} takes three inputs: paired Illumina reads and long ONT reads:
+> 
+>       -----
+>       ![Running Unicycler](../../images/Unicycler_interface.png "Running Unicycler with default parameters. Note how forward and reverse Illumina reads are specified and that ONT reads are entered as <em>long reads</em>.")
+>       -----
+{: .hands_on}
+
 
 > ### <i class="fa fa-cutlery" aria-hidden="true"></i> <i class="fa fa-coffee" aria-hidden="true"></i> Assembly takes time!
 >
@@ -194,11 +202,15 @@ Now it is time to perform assembly. Unicycler takes three inputs: paired Illumin
 ## Assess Assembly quality with Quast
 
 [Quast](http://bioinf.spbau.ru/quast) is a tool providing quality metrics for assemblies, and can also be used to compare multiple assemblies. The tool can also take an optional reference file as input, and will provide complementary metrics.
-For this tutorial we will simply use Quast on the fasta file resulting from the Unicycler assembly.
 
------
-![Quast Interface](../../images/Quast_Interface.png  "Quast Interface. Here we select contigs produced by Unicycler as inputs and leave everything else at default settings.")
------
+> ### {% icon hands_on %} Hands-on: Assembly Quality
+> 
+> 1. **Quast** {% icon tool %} on the fasta file resulting from the Unicycler assembly.
+> 
+>       -----
+>       ![Quast Interface](../../images/Quast_Interface.png  "Quast Interface. Here we select contigs produced by Unicycler as inputs and leave everything else at default settings.")
+>       -----
+{: .hands_on}
 
 The Quast tool outputs assembly metrics as an html file with metrics and graphs. The image below looks exceptionally boring. This is a **good** thing:
 
@@ -210,11 +222,20 @@ One can see that there are two (!) contigs. The largest contig is 4,576,290 bp (
 
 ## Annotation with Prokka
 
-Run Prokka with the following parameters:
 
-------
-![Prokka Interface](../../images/Prokka_Interface.png  "Prokka Interface")
-------
+> ### {% icon hands_on %} Hands-on: Annotation
+> 
+> 1. **Prokka** {% icon tool %} with the following parameters:
+>   - "Contigs to annotate" parameter to the assembly ouput of `Unicycler`
+>   - "Genus name" parameter to `Escherichia`
+>   - "Species name" parameter to `coli`
+>   - "Strain name" parameter to `C-1`
+>   - "Use genus" parameter to `yes`
+> 
+>       ------
+>       ![Prokka Interface](../../images/Prokka_Interface.png  "Prokka Interface")
+>       ------
+{: .hands_on}
 
 Prokka outputs 10 datasets (including two log files). These are in various formats: 
 
@@ -230,36 +251,44 @@ Prokka outputs 10 datasets (including two log files). These are in various forma
 
 ## Visualize the results in IGV
 
-Let's look at the entire assembly and its annotation in the genome browser. We can do this using Integrated Genome Browser ([IGV](http://software.broadinstitute.org/software/igv/)). To start, locate the output of Unicycler and expand it (don't click anything yet):
-
-----
-![Unicycler result Visualization](../../images/unicycler_igv.png  "Expanding Unicycler assembly reveals IGV link.")
-----
+Let's look at the entire assembly and its annotation in the genome browser. We can do this using Integrated Genome Browser ([IGV](http://software.broadinstitute.org/software/igv/)). 
 
 Visualization requires a local installation of IGV. If you have IGV installed - just start it. If you don't - read on. 
 
-### Starting IGV
+#### Starting IGV
 
-Go to IGV [download page](http://software.broadinstitute.org/software/igv/download) and select one of the options. The one I would try first would be **Jave Web Start**. Simply click the **Launch** button for 10 GB distribution. Once IGV starts it will look something like this:
+Go to IGV [download page](http://software.broadinstitute.org/software/igv/download) and select one of the options. The one I would try first would be **Jave Web Start**.Simply click the **Launch** button for 10 GB distribution. 
 
 
------
-![IGV just started](../../images/igv1.png "IGV started by using Java Web Start. Note that it is currently showing Human Genome (hg38) build. This is obviously <b>not</b> what we want.")
-----
-
-Now go back to the expanded Unicycler assembly dataset shown in [Figure 18](#figure-18) and click on the *local* link highlighted with orange outline. The browser will change:
-
-----
-![IGV with Unicycler assembly](../../images/igv2.png "Now you can see the major contig shown in the browser window.")
-----
-
-Finally, let's add Prokka annotations to the browser image. For this simply expand Prokka's GFF3 dataset:
-
-----
-![Expanded GFF3 dataset representing Prokka annotations](../../images/prokka_item.png "Expanded GFF dataset generated with Prokka. Click on the <em>local</em> link (highlighted with orange outline) to display this dataset within IGV.")
-----
-
-And this is it!
+> ### {% icon hands_on %} Hands-on: Visualization in IGV
+> 
+> 
+> 1. Start IGV, it will look something like this:
+> 
+>      -----
+>      ![IGV just started](../../images/igv1.png "IGV started by using Java Web Start. Note that it is currently showing Human Genome (hg38) build. This is obviously <b>not</b> what we want.")
+>      ----
+> 
+> 2. Locate the output of Unicycler and expand it :
+> 
+>      ----
+>      ![Unicycler result Visualization](../../images/unicycler_igv.png  "Expanding Unicycler assembly reveals IGV link.")
+>      ----
+> 
+> 
+> 3. Click on the *local* link highlighted with orange outline. The browser will change:
+> 
+>      ----
+>      ![IGV with Unicycler assembly](../../images/igv2.png "Now you can see the major contig shown in the browser window.")
+>      ----
+> 
+> 4. Let's add Prokka annotations to the browser image. For this simply expand Prokka's GFF3 dataset and click on the *local* link:
+> 
+>      ----
+>      ![Expanded GFF3 dataset representing Prokka annotations](../../images/prokka_item.png "Expanded GFF dataset generated with Prokka. Click on the <em>local</em> link (highlighted with orange outline) to display this dataset within IGV.")
+>      ----
+>      
+{: .hands_on}
 
 You will now see the annotations within the browser window:
 
