@@ -22,10 +22,8 @@ To start on Genome assembly you can read the previous assembly tutorials:
 * [Introduction to Genome Assembly](https://galaxyproject.github.io/training-material/topics/assembly/tutorials/general-introduction/slides.html#1)
 * [De Bruijn Graph Assembly](https://galaxyproject.github.io/training-material/topics/assembly/tutorials/debruijn-graph-assembly/slides.html#46)
 
-**Sources of this Training:**
-
-Assembly basics Topic 12 : Challenges of genome (and transcriptome) assembly <br>
-*Anton Nekrutenko*
+Training from [Assembly basics Topic 12](https://github.com/nekrut/BMMB554/tree/master/hugo/content/post) : Challenges of genome (and transcriptome) assembly <br>
+*Anton Nekrutenko* 
 
 ---
 
@@ -360,7 +358,7 @@ In the example above we had a collection of 3-mers and were always looking for o
 Read X CTCTAGGCC
 Read Y TAGGCCCTC
 ```
-what is the overlap between these two reads? For now we will define overlap of <code>length - l</code> suffix of Read X matches <code>length - l</code> prefix of Read Y, where <code>l</code> is given. To find these overlap we look in Read Y for instances <code>length - l</code> suffix of Read X.
+What is the overlap between these two reads? For now we will define overlap of <code>length - l</code> suffix of Read X matches <code>length - l</code> prefix of Read Y, where <code>l</code> is given. To find these overlap we look in Read Y for instances <code>length - l</code> suffix of Read X.
 
 ---
 
@@ -372,7 +370,7 @@ We will start with some minimal match of length $k$. Once a match is found it wi
 
 ---
 
-As a result we represent two two reads are connected nodes:
+As a result we represent two reads are connected nodes:
 >
 >![](../../images/og1.png)
 >
@@ -413,14 +411,14 @@ For simplicity let's suppose that we have the following set of strings <code>S</
 BAA AAB BBA ABA ABB BBB AAA BAB
 </samp>
 
-one way of getting a string that would contain all of these as substrings will simply be concatenating them:
+One way of getting a string that would contain all of these as substrings will simply be concatenating them:
 
 <samp>
 Concat(S): BAAAABBBAABAABBBBBAAABAB (length = 24)
 </samp>
 
 
-this, however, is not the *shortest* superstring that contains all strings from $S$. Instead the SCS is (just trust us here):
+This, however, is not the *shortest* superstring that contains all strings from $S$. Instead the SCS is (just trust us here):
 
 <samp>
 SCS(S):: AAABBBABAA (length = 10)
@@ -666,7 +664,7 @@ a_long_long_long_time
 
 As we've seen above the shortest common superstring (SCS) is:
 
-1. **Difficult to obtain** as Greedy SCS algorithm does not guarantee funding it. So the answer we get may be longer that the real genome we are trying to assemble.
+1. **Difficult to obtain** as Greedy SCS algorithm does not guarantee finding it. So the answer we get may be longer thans the real genome we are trying to assemble.
 
 2. **May be shorter than we want** because if the genome contains repeats that are longer than the reads we are using, Greedy SCS will collapse them and make assembly shorter that the genome we are trying to get. 
 
@@ -749,12 +747,12 @@ Some definitions:
 
 ---
 
-Let's apply Euler's Theorem to a classical problem: The bridges of Köninsberg problem. Here the question is: *Can you walk through all of Köninsberg traversing every bridge exactly one time?* In other words: *Is there a Eulerian path through the city of Köninsberg?*
+Let's apply Euler's Theorem to a classical problem: The bridges of Königsberg problem. Here the question is: *Can you walk through all of Königsberg traversing every bridge exactly one time?* In other words: *Is there a Eulerian path through the city of Königsberg?*
 
 
 >![](../../images/koninsberg.png)
 >
->**Köninsberg and Euler's Theorem**. (a) A map of old Königsberg, in which each area of the city is labeled with a different color point. (b) The Königsberg Bridge graph, formed by representing each of four land areas as a node and each of the city's seven bridges as an edge. (From [Campeau:2011](http://www.nature.com/nbt/journal/v29/n11/abs/nbt.2023.html#close))
+>**Königsberg and Euler's Theorem**. (a) A map of old Königsberg, in which each area of the city is labeled with a different color point. (b) The Königsberg Bridge graph, formed by representing each of four land areas as a node and each of the city's seven bridges as an edge. (From [Campeau:2011](http://www.nature.com/nbt/journal/v29/n11/abs/nbt.2023.html#close))
 
 By looking at this graph we can see that it is *unblanaced*. If one arrives to, say, the <font color="orange">orange</font> node from the <font color="blue">blue</font> node there are two ways to get out. Thus there is no way to see all of the city and traverse every bridge once!
 
@@ -922,7 +920,7 @@ Sequencing machines do not give perfect data. This results in spurious deviation
 
 **Ploidy**
 
-As we discussed earlier humans are, for example, diploid and there are multiple differences between maternal and paternal genomes. This creates "bubbles" on assembly graphs:
+As we discussed earlier humans are diploid and there are multiple differences between maternal and paternal genomes. This creates "bubbles" on assembly graphs:
 
 >![](../../images/t12_bubble.png)
 >
