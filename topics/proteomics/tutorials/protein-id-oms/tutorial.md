@@ -81,7 +81,7 @@ Different peptide search engines have been developed to fulfill the matching pro
 > 3. Run the tool ***FileInfo*** {% icon tool %} on the XTandem output.
 >
 >   > ### {% icon comment %} Comment: Advanced X!Tandem Parameters
->   > The search engine X!Tandem features some more advanced options than the ones reflected in the ***XTandemAdapter*** {% icon tool %}. If you need those advanced options, the ***XTandemAdapter*** {% icon tool %} allows for the optional input of a classic X!Tandem parameter file. Upload your parameter file to the history and use it as input in the field `Default X!Tandem configuration file`. You may also set the option `-ignore_adapter_param` to `Yes` to overwrite all options set by the GUI.
+>   > The search engine X!Tandem features some more advanced options than the ones reflected in the ***XTandemAdapter*** {% icon tool %}. If you need those advanced options, the ***XTandemAdapter*** {% icon tool %} allows for the optional input of a classic X!Tandem parameter file. Upload your parameter file to the history and use it as an input in the field `Default X!Tandem configuration file`. You may also set the option `-ignore_adapter_param` to `Yes` to overwrite all options set by the GUI.
 >   {: .comment}
 
 # Peptide FDR filtering
@@ -94,7 +94,7 @@ The false discovery rate is therefore defined as the number of false discoveries
 To calculate FDRs, we first have to annotate the identified peptides to determine which of them are decoys. This is done with the tool ***PeptideIndexer*** {% icon tool %}. Additionally, we will calculate peptide posterior error probabilities (PEPs), because they are needed for the protein inference algorithm used by OpenMS. We will then filter for 1 % FDR and set the score back to PEP.
 
 >
-> 1. Run ***PeptideIndexer*** {% icon tool %} with the same database file as used before.
+> 1. Run ***PeptideIndexer*** {% icon tool %} with the same database file as used before. Set **`Specificity of the enzyme`** to `none`.
 > 2. Run ***IDPosteriorErrorProbability*** {% icon tool %}.
 > 3. Run ***FalseDiscoveryRate*** {% icon tool %}. Set the option **`Perform FDR calculation on protein level`** to `false` and **`Filter PSMs based on q-value`** to `0.01`. Set `-add_decoy_peptides` to `Yes`.
 > 4. Run ***IDScoreSwitcher*** {% icon tool %}. Set the **`Name of the meta value to use as the new score`** to "Posterior Probability_score". and the **`Orientation of the new score`** to `higher_better` (?). 
@@ -103,14 +103,12 @@ To calculate FDRs, we first have to annotate the identified peptides to determin
 >   > ### {% icon question %} Questions:
 >   > 1. How many peptides were identified?
 >   > 2. How many peptides with oxidized methionine were identified?
->		> 3. Compare the results before and after FDR filtering: how many peptides were rejected?
 >   >
 >   >  <details>
 >   >  <summary>Click to view answers</summary>
 >   >   <ol type="1">
->   >     <li> You should have identified 3,325 peptides.</li>
->   >     <li> 328 peptides contain an oxidized methionine (MeO). To get to this number, you can use ***Select*** {% icon tool %} on the Peptide Report and search for either "Oxidation of M" or "M\<ox\>".</li>
->		>			<li> </li>
+>   >     <li> You should have identified 2,623 unique stripped peptides.</li>
+>   >     <li> 507 peptides contain an oxidized methionine (MeO).</li>
 >   >   </ol>
 >   >  </details>
 >   {: .question}
@@ -124,55 +122,35 @@ The OpenMS suite implemented the [Fido](https://www.ncbi.nlm.nih.gov/pubmed/2071
 >
 > 1. Run ***FidoAdapter*** {% icon tool %}. Set `-greedy_group_resolution` = `Yes`.
 > 2. Run ***FalseDiscoveryRate*** {% icon tool %}. Set the option **`Perform FDR calculation on PSM level`** to `false`.
-> 3. Run ***IDFilter*** {% icon tool %}. Set `-remove_decoys` to `Yes` and `-prot` to `0.01`.
+> 3. Run ***IDFilter*** {% icon tool %}. Set`-prot` to `0.01`.
+> 4. Run ***FileInfo*** {% icon tool %} to get basic information about the identified proteins.
 >
 >   > {% icon comment %} Comment: "Greedy" Group Resolution
->
->   > {% icon comment %} Comment: Posterior Error Probabilities vs. FDR **EVTL AUCH SCHON BEI PEPTIDEN**
+>		> Protein groups are reported, when an identified peptide maps to multiple proteins in the used database [Nesvizhskii and Aebersold (2005)](https://www.ncbi.nlm.nih.gov/pubmed/16009968). Some peptides may map to different protein groups and can therefore not be used for protein quantitation. The option `-greedy_group_resolution` solves this problem by assigning peptides only to the one most probable protein group, thus enabling to quantify proteins based not only on unique, but also on shared peptides. This usually leads to a much higher number of quantified proteins. However it will introduce noise in the FCs when a peptide was indeed shared by different proteins and the quantity of this peptide was a weighted sum of contributions. The greedy group resolution is similar to Occam's razor.
 
 # Analysis of Contaminants
-The FASTA database used for the peptide to spectrum matching contained some entries that were not expected to stem from the HeLa cell lysate, but are common contaminations in LC-MS/MS samples. The main reason to add those is to avoid false assignment of the spectra to other proteins. However, it also enables you to check for contaminations in your samples. **CAVE:** in human samples, many proteins that are common contaminants may also stem from the real sample. The real source can never be determined for sure.
+The FASTA database used for the peptide to spectrum matching contained some entries that were not expected to stem from the HeLa cell lysate, but are common contaminations in LC-MS/MS samples. The main reason to add those is to avoid false assignment of the spectra to other proteins. However, it also enables you to check for contaminations in your samples. **CAVE:** in human samples, many proteins that are common contaminants may also stem from the real sample. Therefore, you do not have to exclude those proteins from further analysis, but you should verify the expression of these proteins in your sample.
 
 > ### {% icon hands_on %} Hands-On: Analysis of Contaminants
 >
-> 1. Run ***Select*** {% icon tool %} on the Peptide Shaker Protein Report to select all lines that match the pattern "CONTAMINANT".
-> 2. Remove all contaminants from your protein list by running ***Select*** {% icon tool %} on the Peptide Shaker Protein Report. Select only those lines that **do not** match the pattern "CONTAMINANT".
+> 1. Run ***TextExporter*** {% icon tool %} to convert the idXML output to a human-readable tabular file.
+> 1. Run ***Select*** {% icon tool %} to select all lines **Matching** the pattern "CONTAMINANT".
+> 3. Run ***Select*** {% icon tool %} to select all lines that **NOT Matching** the pattern "HUMAN". 
+> 2. Remove all bovine and mycoplasma proteins from your list by running ***Select*** {% icon tool %}. Select only those lines **NOT Matching** match the pattern "HUMAN".
 >
 >   > ### {% icon question %} Questions
->   > 1. Which contaminants did you identify? Where do these contaminations come from?
+>   > 1. Which contaminants did you identify? Where do these contaminations likely come from?
 >   > 2. What other sources of contaminants exist?
 >   > 3. How many mycoplasma proteins did you identify? Does this mean that the analyzed HeLa cells were infected with mycoplasma?
->   > 4. How many false positives do we expect in our list? How many of these are expected to match mycoplasma proteins?
+>   > 4. How many false positives do we expect in our list?
 >   >
 >   >  <details>
 >   >  <summary>Click to view answers</summary>
 >   >   <ol type="1">
->   >     <li> TRY_BOVIN is bovine trypsin. It was used to degrade the proteins to peptides. ALBU_BOVIN is bovine serum albumin. It is added to cell culture medium in high amounts.</li>
+>   >     <li> TRY_BOVIN is bovine trypsin. It was used to degrade the proteins to peptides. ALBU_BOVIN is bovine serum albumin. It is added to cell culture medium in high amounts. Also, five human proteins are listed, these are commonly introduced during sample preparation. As we were analyzing a human sample, it is not neccessary to remove these proteins, as they may as well originate from the HeLa cells.</li>
 >   >     <li> Contaminants often stem from the experimenter, these are typically keratins or other high-abundant human proteins. Basically any protein present in the room of the mass spectrometer might get into the ion source, if it is airborne. As an example, sheep keratins are sometimes found in proteomic samples, stemming from clothing made of sheep wool.</li>
->   >     <li> There should be five mycoplasma proteins in your protein list. However, all of them stem from different mycoplasma species. Also, every protein was identified by one peptide only. You can see this in column 17-19 of your output. These observations make it very likely that we are facing false positives here.</li>
->   >     <li> As we were allowing for a false discovery rate of 1 %, we would expect 12 false positive proteins in our list.
->   >     False positives are expected to be randomly assigned to peptides in the FASTA database. Our database consists of about 20,000 human proteins and 4,000 mycoplasma proteins. Therefore, we would expect 17 % (= 2) of all false positives matching to mycoplasma proteins.</li>
->   >   </ol>
->   >  </details>
->   {: .question}
-{: .hands_on}
-
-# Evaluation of Peptide and Protein IDs
-
-
-> ### {% icon hands_on %} Hands-On: Evaluation of Peptide and Protein IDs
->
-> 1. Remove all "Doubtful" proteins from your protein list by running ***Select*** {% icon tool %} on the Peptide Shaker Protein Report. Select only those lines that **do not** match the pattern "Doubtful".
->
->   > ### {% icon question %} Questions:
->   > 1. How to exclude mycoplasma proteins?
->   > 2. How many "Confident" non-contaminant proteins were identified?
->   >
->   >  <details>
->   >  <summary>Click to view answers</summary>
->   >   <ol type="1">
->   >       <li> Add another ***Select*** {% icon tool %} matching the pattern "HUMAN".</li>
->   >   <li> You should have identified 582 human non-contaminant proteins that were validated to be "Confident".<\li>
+>   >     <li> One protein stemming from *Acholeplasma laidlawii* (ACHLI) was identified. If you again filter the protein list for "ACHLI", you will see that it was identified by a single peptide. Thus, it is likely a false positive and does not indicate contamination.</li>
+>   >     <li> As we were allowing for a false discovery rate of 1 %, we would expect 12 false positive proteins in our list.</li>
 >   >   </ol>
 >   >  </details>
 >   {: .question}
@@ -180,9 +158,10 @@ The FASTA database used for the peptide to spectrum matching contained some entr
 
 # Premade Workflow
 
-A premade workflow for this tutorial can be found [here](workflows/wf_proteinID_SG_PS.ga)
+A premade workflow for this tutorial can be found [here](workflows/workflow.ga)
 
 # Further Reading
 
-- [Search GUI and Peptide Shaker tutorials at Compomics](https://compomics.com/bioinformatics-for-proteomics/)
-- [Using Search GUI and Peptide Shaker in Galaxy](https://drive.google.com/file/d/0B6bIeOvjBkbWVnhMLWxXdGVUY3M/view)
+- [Protein inference](https://www.ncbi.nlm.nih.gov/pubmed/16009968)
+- [Fido publication](https://www.ncbi.nlm.nih.gov/pubmed/20712337)
+- [Evaluation of protein inference algorithms](https://www.ncbi.nlm.nih.gov/pubmed/27498275)
