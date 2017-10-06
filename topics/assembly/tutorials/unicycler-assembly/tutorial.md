@@ -57,7 +57,7 @@ In this analysis we will perform two tasks: (1) assembly and (2) annotation. Bel
 > ### <i class="fa fa-lightbulb-o" aria-hidden="true"></i> Knowing your assembly
 >
 > Here we assume that you know a thing or two about assembly process. If you don't: look at the [slides](./slides) accompanying this tutorial as well as other tutorials is this section.
-{: .info-box}
+{: .comment}
 
 ![Logo unicycler](https://github.com/rrwick/Unicycler/raw/master/misc/logo.png)
 
@@ -154,17 +154,11 @@ To assess quality we will use two tools: [FastQC](https://www.bioinformatics.bab
 
 > ### {% icon hands_on %} Hands-on: Quality Control
 > 
-> 1. **FastQC** {% icon tool %} on all three datasets simultaneously:
+> 1. **FastQC** {% icon tool %} on all three fastq datasets simultaneously using the multi-datasets button
 > 
->       -----
->       ![Screenshots of FastQC interface](../../images/fastc_interface.png  "Using <b>fastqc</b> to compute the quality statistics for all reads. Note that multiple dataset selection button (<i class='fa fa-files-o' aria-hidden='true'></i>) is pressed and all three datasets are selected at the same time. ")
->       -----
-> 
-> 2. **MultiQC** {% icon tool %} on FastQC outputs. Although FastQC generated graphical reports for each dataset we can look at everything at once using multiQC by selecting "raw" output of FastQC:
-> 
->       -----
->       ![Screenshot of multiQC interface](../../images/multiqc_interface.png "Running <b>multiQC</b> requires selecting <em>RawData</em> output of <b>FastQC</b>. Again, note that multiple dataset selection button (<i class='fa fa-files-o' aria-hidden='true'></i>) is pressed and all <em>RawData</em> inputs are selected.") 
->       -----
+> 2. **MultiQC** {% icon tool %} on FastQC outputs. Although FastQC generated graphical reports for each dataset we can look at everything at once using multiQC with the following parameters : 
+>   - "Software name" to `FastQC`
+>   - "Result file" to all Multiple datasets selection button an `RawData` outputs of FastQC
 > 
 {: .hands_on}
 
@@ -186,11 +180,13 @@ Now it is time to perform assembly.
 
 > ### {% icon hands_on %} Hands-on: Unicycler Assembly
 > 
-> 1. **Unicycler** {% icon tool %} takes three inputs: paired Illumina reads and long ONT reads:
+> 1. **Unicycler** {% icon tool %} with the following parameters :
+>   - "Paired or Single end data?" to `Paired`
+>   - "First Set of reads" to the forward reads file `f`
+>   - "Second Set of reads" to the reverse reads file `r`
+>   - "Long reads" to the minion file
+>   - Use default parameters
 > 
->       -----
->       ![Running Unicycler](../../images/Unicycler_interface.png "Running Unicycler with default parameters. Note how forward and reverse Illumina reads are specified and that ONT reads are entered as <em>long reads</em>.")
->       -----
 {: .hands_on}
 
 
@@ -205,11 +201,10 @@ Now it is time to perform assembly.
 
 > ### {% icon hands_on %} Hands-on: Assembly Quality
 > 
-> 1. **Quast** {% icon tool %} on the fasta file resulting from the Unicycler assembly.
+> 1. **Quast** {% icon tool %} with the following parameters : 
+>   - "Input assembly file" to the fasta file resulting from the Unicycler assembly.
+>   - Other parameters at default settings
 > 
->       -----
->       ![Quast Interface](../../images/Quast_Interface.png  "Quast Interface. Here we select contigs produced by Unicycler as inputs and leave everything else at default settings.")
->       -----
 {: .hands_on}
 
 The Quast tool outputs assembly metrics as an html file with metrics and graphs. The image below looks exceptionally boring. This is a **good** thing:
@@ -232,9 +227,6 @@ One can see that there are two (!) contigs. The largest contig is 4,576,290 bp (
 >   - "Strain name" parameter to `C-1`
 >   - "Use genus" parameter to `yes`
 > 
->       ------
->       ![Prokka Interface](../../images/Prokka_Interface.png  "Prokka Interface")
->       ------
 {: .hands_on}
 
 Prokka outputs 10 datasets (including two log files). These are in various formats: 
