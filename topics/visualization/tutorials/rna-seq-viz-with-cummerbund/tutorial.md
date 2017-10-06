@@ -33,7 +33,7 @@ CummeRbund is an open-source tool that simplifies the analysis of a CuffDiff RNA
 
 A typical workflow for the visualization of RNA-Seq data involving CummeRbund:
 
-![workflow](../../images/rna-seq-viz-with-cummerbund.png)
+![workflow](../../images/cummerbund-rna-seq-viz-with-cummerbund.png)
 
 CummeRbund reads your RNA-Seq results from a [SQLite](https://www.sqlite.org/) database. This database has to be created using CuffDiff's SQLite output option.
 
@@ -41,7 +41,7 @@ CummeRbund reads your RNA-Seq results from a [SQLite](https://www.sqlite.org/) d
 >
 > Instruct CuffDiff to organize its output in a SQLite database for later read with CummeRbund
 >
-> ![SQLite output](../../images/cuffdiff-set-sqlite.png)
+> ![SQLite output](../../images/cummerbund-cuffdiff-set-sqlite.png)
 {: .tip}
 
 # Importing RNA-Seq result data
