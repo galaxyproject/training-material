@@ -456,22 +456,58 @@ Check your graphics to refine your parameters
 
 ## retcor: Retention Time Correction
 
----
-
-### retcor: Peakgroup method
+<span style="color:red">NOTICE:</span> retcor must be followed by a second **group** step
 
 ---
 
-### retcor: Peakgroup method
+### retcor: Retention Time Correction
+
+.image-75[![](../../images/ms/lcms/retcor_graph_1.png)]
+
+Here, around 200 seconds, the predicted deviation values are very high (around +30 sec) than any observed value.
+That means that ions retention time correction in that region will be too important.
+
+---
+
+### retcor: Retention Time Correction
+
+.image-75[![](../../images/ms/lcms/retcor_graph_2.png)]
+
+Here deviations predicted by the model are more or less in the range of the observed values
+
+---
+
+### retcor: **Peakgroup** method
 #### Missing / Extra
 
+.image-75[![](../../images/ms/lcms/retcor_missing_extra.png)]
+
+XCMS ignores those groups by only considering well-behaved peak groups which are <span style="color:red">`missing`</span> at most one sample and have at most one <span style="color:red">`extra`</span> peak.
+
 ---
 
-### retcor: Obiwrap method
+### retcor: **Peakgroup** method
+#### Loess / Linear
+
+For each of those well-behaved groups, the algorithm calculates a median retention time and, for every sample, a deviation from that median.
+
+Within a sample, the observed deviation **generally** changes over time in a **nonlinear** fashion.
+
+Those changes are approximated using a local polynomial regression technique implemented in the <span style="color:red">`loess`</span> function.
+
+By default, the curve fitting is done using least-squares on all data points. However, it is possible to enable outlier detection and removal by setting the <span style="color:red">`Family`</span> argument to symmetric.
 
 ---
 
-### retcor: Outputs
+### retcor: **Obiwrap** method
+
+Calculate retention time deviations for each sample using the [OBI-Warp](http://obi-warp.sourceforge.net/) code.
+
+This function is able to align multiple samples by a center-star strategy. Ordered Bijective Interpolated Warping (OBI-Warp) aligns matrices along a single axis using Dynamic Time Warping (DTW) and a one-to-one (bijective) interpolated warp function.
+
+OBI-Warp harnesses the non-linear, comprehensive alignment power of DTW and builds on the discrete, non-bijective output of DTW to give natural interpolants that can be used across multiple datasets.
+
+.footnote[[Publication](http://pubs.acs.org/doi/abs/10.1021/ac0605344) - [Website](http://obi-warp.sourceforge.net/)]
 
 ---
 
