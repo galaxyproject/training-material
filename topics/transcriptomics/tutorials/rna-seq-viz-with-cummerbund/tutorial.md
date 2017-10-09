@@ -1,6 +1,6 @@
 ---
 layout: tutorial_hands_on
-topic_name: visualization
+topic_name: transcriptomics
 tutorial_name: rna-seq-viz-with-cummerbund
 ---
 
