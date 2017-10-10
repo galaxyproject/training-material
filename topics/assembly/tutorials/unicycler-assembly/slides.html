@@ -7,7 +7,7 @@ class: enlarge120
 
 ---
 
-# Small Bacterial Genome Assembly With Unicycler
+# Small Genome Assembly With Unicycler
 
 ---
 .enlarge120[
@@ -22,9 +22,6 @@ To start on Genome assembly you can read the previous assembly tutorials:
 * [Introduction to Genome Assembly](https://galaxyproject.github.io/training-material/topics/assembly/tutorials/general-introduction/slides.html#1)
 * [De Bruijn Graph Assembly](https://galaxyproject.github.io/training-material/topics/assembly/tutorials/debruijn-graph-assembly/slides.html#46)
 
-Training from [Assembly basics Topic 12](https://github.com/nekrut/BMMB554/tree/master/hugo/content/post) : Challenges of genome (and transcriptome) assembly <br>
-*Anton Nekrutenko* 
-
 ---
 
 .enlarge120[
@@ -35,20 +32,7 @@ Training from [Assembly basics Topic 12](https://github.com/nekrut/BMMB554/tree/
 
 [![](https://github.com/rrwick/Unicycler/raw/master/misc/illumina_graph_comparison.png)](https://github.com/rrwick/Unicycler)
 
-Previously we have learned about applications on PacBio technology:
-
-
-Assembly problem was featured prominently in this presentation. Today we will cover introductory concepts behind assembly. 
-
----
-
-.enlarge120[
-
-# **References**
-
-]
-
-Genome assembly is a difficult task. In trying to explain it I will be relying on two highly regarded sources:
+Genome assembly is a difficult task. In trying to explain it we will be relying on two highly regarded sources:
 
 - [Ben Langmead's Teaching Materials](http://www.langmead-lab.org/teaching-materials/)
 - [Pevzner and Compeau Bioinformatics Book](http://www.amazon.com/Bioinformatics-Algorithms-Active-Learning-Approach/dp/0990374602). 
@@ -167,11 +151,12 @@ TAATGTT   <- "genome" (7 bases)
 -------
 0123456    
 ```
-The *Coverage* at positions 1 and 6 is *1*, at positions 1 and 5 is *2*, and at position 2, 3, and 4 is *3*. <br>The *Average Coverage* will be \frac{15}{7} \approx 2 \times 
+The *Coverage* at positions 1 and 6 is *1*, at positions 1 and 5 is *2*, and at position 2, 3, and 4 is *3*. <br>The *Average Coverage* will be 15/7 ~ 2x
+
 
 ---
 
-Below is another, slightly more realistic example where average coverage is $\frac{177}{35}\approx7\times$ 
+Below is another, slightly more realistic example where average coverage is 177/35 ~ 7x: 
 
 ```
                   CTAGGCCCTCAATTTTT
@@ -320,7 +305,7 @@ can be represented as a following directed graph (or genome path):
 
 ![](../../images/4.6.png)
 
-**Genome path**. Trimers composing the <code>TAATGCCATGGGATGTT</code> sequence represented as the "genome" path. (Fig. 4.6 from CP). In this path a suffix of a 3-mer is equal to prefix of the next 3-mer. 
+**Genome path**. Trimers composing the <code>TAATGCCATGGGATGTT</code> sequence represented as the "genome" path. (Fig. 4.6 from [CP](http://bioinformaticsalgorithms.com/)). In this path a suffix of a 3-mer is equal to prefix of the next 3-mer. 
 
 ---
 
@@ -331,7 +316,7 @@ can be represented as a following directed graph (or genome path):
 
 >![](../../images/4.7.png)
 >
->**Overlap graph**. All possible overlap connections for our 3-mer collection. (Fig. 4.7 from CP)
+>**Overlap graph**. All possible overlap connections for our 3-mer collection. (Fig. 4.7 from [CP](http://bioinformaticsalgorithms.com/))
 
 So to determine the sequence of the underlying genome we are looking a path in this graph that visits every node (3-mer) once. Such path is called [Hamiltonial path](https://en.wikipedia.org/wiki/Hamiltonian_path) and it may not be unique. 
 
@@ -342,7 +327,7 @@ For example for our 3-mer collection there two possible Hamiltonian paths:
 ![](../../images/4.9a.png)
 ![](../../images/4.9b.png)
 
-**Two Hamiltonian paths for the 15 3-mers**. Edges spelling "genomes" <code>TAATGCCATGGGATGTT</code> and <code>TAATGGGATGCCATGTT</code> are highlighted in black. (Fig. 4.9. from CP). 
+**Two Hamiltonian paths for the 15 3-mers**. Edges spelling "genomes" <code>TAATGCCATGGGATGTT</code> and <code>TAATGGGATGCCATGTT</code> are highlighted in black. (Fig. 4.9. from [[CP](http://bioinformaticsalgorithms.com/)](http://bioinformaticsalgorithms.com/)). 
 
 ---
 
@@ -389,7 +374,7 @@ TACGAT
 
 ---
 
-Building an overlap graph with overlap of <code>length \geq 4</code> will give us the following:
+Building an overlap graph with overlap of <code>length >= 4</code> will give us the following:
 
 >![](../../images/og2.png)
 >
@@ -598,7 +583,7 @@ An overlap graph will look like this:
 
 >![](../../images/long.png)
 >
-<small>**An overlap graph** for with overlap length <code>\geq 3<code>.</small>
+<small>**An overlap graph** for with overlap length <code> >= 3<code>.</small>
 
 ---
 
@@ -695,7 +680,7 @@ We will assign 3-mers to _edges_ instead or _nodes_:
 
 ![](../../images/4.12.png)
 
-**_k_-mers as edges**. Edges represented by 3-mers connect nodes representing the overlaps. (Fig. 4.12 from CP)
+**_k_-mers as edges**. Edges represented by 3-mers connect nodes representing the overlaps. (Fig. 4.12 from [CP](http://bioinformaticsalgorithms.com/))
 
 This graph can be simplified by gluing identical nodes together:
 
@@ -722,13 +707,13 @@ Next, <font color="blue">`TG`</font> nodes are merged
 
 ---
 
-And, finally the two <font color="green">`GG`</font> nodes are resolved. (Fig. 4.13 from CP)
+And, finally the two <font color="green">`GG`</font> nodes are resolved. (Fig. 4.13 from [CP](http://bioinformaticsalgorithms.com/))
 
 Because we now represent _k_-mers as edges (rather than nodes), our problem has morphed into finding a path that visits every _edge_ once, or an [Eulerian Path](https://en.wikipedia.org/wiki/Eulerian_path):
 
 ![](../../images/4.15.png)
 
-**Eulerian paths for the 15 3-mers**. Numbering of edges provides a way to reconstruct the original "genome". (Fig. 4.15 from CP)
+**Eulerian paths for the 15 3-mers**. Numbering of edges provides a way to reconstruct the original "genome". (Fig. 4.15 from [CP](http://bioinformaticsalgorithms.com/))
 
 ---
 
@@ -941,200 +926,12 @@ As we've seen the third law of assembly is unbeatable. As a result some regions 
 
 .enlarge120[
 
-# **How to perform Assembly with Unicycler in Galaxy**
+# **How to perform Assembly with Galaxy?**
 
 ]
 
 ---
 
+See the tutorial accompanied by these slides!
 
-# Data for Hybrid Assembly
-
-
-To perform a hybrid assembly, we will need both short reads and long reads libraries. 
-
-* **Illumina sequencing**
-    * Short reads
-    * High accuracy sequencing
-    * Paired Reads
-    
-* **Oxford Nanopore sequencing**
-    * Long reads
-    * Low accuracy sequencing
-
-We will therefore use two Illumina datasets, for forward and reverse reads, and one Oxford Nanopore datasets, with long reads.
-
----
-
-# Why an hybrid assembly ?
-
-
-
-* Problem of short Reads : Problems to resolve repeat regions
-* Problem of long reads : Low Accuracy
-
-Using the two types of data together allows to combine their strength for a better assembly.
-
----
-
-
-.pull-left[
-
-# Hybrid Assembly steps
-
-> 1. Library Preparation
-
-> 2. Library Quality
-
-> 3. Genome Assembly
-
-> 4. Assembly Quality
-
-> 5. Genome Annotation
-
-]
-
-.pull-right[ ![](../../images/assembly_steps.png) ]
-
----
-
-
-# 1. Library Preparation
-
-A library is a formatting of data dedicated to be used in a specific set of analysis. 
-The two type of data will be processed differently depending of the output file format : 
-*    **Illumina reads** : The ouput of Illumina sequencing are Fastq Files
-*    **Oxford Nanopore long reads** : The output of Oxford Nanopore are fast5 files
-
----
-
-## Fastq Format
-
-The fastq file format is a text file in a format similar to the fasta one but with additionnal information of quality. It contains 4 lines per sequence (reads) :
-
-1.    Sequence identifier and optional description
-2.    Sequence 
-3.    Optional repeat of first line
-4.    Quality score per site
-
-
-![](../../images/fastq_format.png) 
-
-
----
-
-## Fastq Format : Quality Line 
-
-Most of the recently produced fastq files are using the Sanger format. In this format, the quality can have a quality score from 0 to 93 , encoded in ASCII code. The quality score *Q* is based on a logarithmic transformation of the probability *p* of the base call being wrong.
-
-![](../../images/sanger_quality.png)
-
-*Note* : Although most of recent file are encoded with Sanger format, be aware than older files can have different encoding. You may then need to convert your fastq files. [ [Cock:2010](https://doi.org/10.1093/nar/gkp1137) ]
-
----
-
-## Fast5 Format
-
-The Fast5 formated files, produced by Oxford Nanopore Technology, are HDF5 files. HDF5 files are binary files organized in hierarchical structure.
-A typical sequencing experiment can produce several thousands of fast5 files.
-The data can be explored through several tools suites, such as the Poretool suite [[Loan:2014](https://doi.org/10.1093/bioinformatics/btu555)]. 
-
-This suite allows manipulating the fast5 files, calculating several quality metrics and converting the file to fastq format.
-
-*Note* : This tutorial is based on already converted long read libraries and therefore doesn't cover the production of the fastq file.
-
-
----
-
-# 2. Quality Control
-
-This Step will allow you to check the quality of the reads and to spot any error that may need correcting. This step can be performed in Galaxy with the [FastQC](http://www.bioinformatics.babraham.ac.uk/projects/fastqc) tool. (For short reads libraries only) 
-
----
-
-## FastQC Output Per Base read Quality
-
-
-![FastQC result](../../images/perbase_qual.png )
-
-The central red line is the median value and, the yellow box represent the inter-quartile range, the whiskers represent the extreme 10 percentiles, and the blue line represent the mean quality.
-
----
-
-## FastQC Output Per Sequence read Quality
-
-![FastQC result](../../images/perseq_qual.png)
-
-We can see the average quality per read is high for our library. This metric can be useful to detect a problem if a significant portion of the reads are of lower quality.
-
----
-
-## FastQC Output Per Tile read Quality
-
-![FastQC result](../../images/pertile_qual.png)
-
-The color scale goes from blue to red, the blue colors describing tiles with above average quality and the red color describing tiles with below average quality. We can see here our read have a above average quality, except for one green tile that describe an average quality of read.
-
-
----
-
-# 3. Assembly with Unicycler
-
-Once you are satisfied with the quality of your reads, you can use [Unicycler](https://github.com/rrwick/Unicycler) to perform the assembly of your genome.
-Unicycler is a pipeline dedicated to the assembly of bacterial genome using Illumina only or Illumina and long reads. 
-Unicycler is pipeline based on [Spades](https://doi.org/10.1089/cmb.2012.0021), that add specific functions for bacterial genomes : like the circularization of replicons
-or th handling of plasmid rich genomes.
-
-Possible inputs :
-> *     Illumina short reads
-> *     Long reads (PacBio or Nanopore)
-> *     Illumina short reads and Long reads together
-
-Unicycler is based on [De Bruijn Graph Assembly](https://galaxyproject.github.io/training-material/topics/assembly/tutorials/debruijn-graph-assembly/slides.html#46) 
-
----
-
-## 4. Assembly quality with Quast
-
-Once you have performed your assembly, you can generate quality statistics with the tool [Quast](https://doi.org/10.1093/bioinformatics/btt086).
-
----
-
-.pull-left[
-
-Quast provides a set of metrics :
-> * Number of contigs 
-> * Largest of Contigs size
-> * Total Length of the assembly
-> * N50 : Length of the contig such as all the contigs of the same size or longer cover 50% of the genome
-> * N75 : Same thing than N50 for 75% of the genome
-> * L50 : Number of contigs whose sum length is N50
-> * L75 : Number of contigs whose sum length is N75
-> * GC % 
-> * Number of mismatches
-]
-
-.pull-right[ ![Quast output](../../images/quast_output.png)]
-
-
----
-
-## 5. Annotation with Prokka
-
-[Prokka](https://doi.org/10.1093/bioinformatics/btu153) is a tool dedicated to prokaryotic genome annotation. It identifies the ORFs and RNA regions on contigs, translate them to protein sequences and then perform an homology searching for their identification. The identification and translation is done with [Prodigal](https://github.com/hyattpd/Prodigal) program and the homology search with BLAST and HMMER against custom databases and several public databases : 
-> * [CDD](https://www.ncbi.nlm.nih.gov/cdd/)
-> * [PFAM](http://pfam.xfam.org/)
-> * [TIGRFAM](http://www.jcvi.org/cgi-bin/tigrfams/index.cgi)
-
-
----
-
-## 6. Visualization in IGV
-
-To visualize The result of you assembly and annotation, you can send your dataset from Galaxy to you local instance of IGV. In order to do that : 
-> * Install and/or launch [IGV](http://software.broadinstitute.org/software/igv/) on your computer
-> * Click on the "display with IGV" link on the fasta file output of Unicycler 
-> * Click on the "display with IGV" link on the gff3 file output of Prokka
-
-![IGV zoomed visualization](../../images/zoomed_igv.png)
 
