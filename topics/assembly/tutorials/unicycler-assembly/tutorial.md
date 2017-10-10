@@ -128,17 +128,17 @@ In this example we will use a downsampled version of *E. coli* C-1 Illumina and 
 >   - Create new history (if you are new to Galaxy see [Galaxy 101 tutorial](/topics/introduction/tutorials/galaxy-intro-101/tutorial.html) first). 
 > 
 > 2. **Get data** {% icon tool %} as shown below (see [these slides](/topics/introduction/tutorials/galaxy-intro-get-data/slides.html) for an introduction on how to load data into Galaxy):
->    <hr>
+> 
 >       ![Get Data](../../images/get_data.png "Getting data into history starts with clicking <b>Get data</b> button")
->    <hr>
+>
 > 3. Open Zenodo [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.940733.svg)](https://doi.org/10.5281/zenodo.940733)
  link in a **new browser window** and right-click on dataset links:
 >       ![Get Data](../../images/zenodo.png "Right click on links to copy them into clipboard")
 > 4. And paste them into the **Galaxy upload**:
 > 
->    <hr>
+> 
 >       ![Upload file](../../images/upload_file.png  "Uploading data into Galaxy. First (1) click <b>Paste/Fetch data</b> link. Next (2), paste URL copied from Zenodo. Finally (3), set type of all datasets to <tt>fastqsanger</tt>. Click <b>Start</b> (4).")
->       <hr>
+> 
 {: .hands_on}
 
 
@@ -257,28 +257,19 @@ Go to IGV [download page](http://software.broadinstitute.org/software/igv/downlo
 > 
 > 1. Start IGV, it will look something like this:
 > 
->      -----
 >      ![IGV just started](../../images/igv1.png "IGV started by using Java Web Start. Note that it is currently showing Human Genome (hg38) build. This is obviously <b>not</b> what we want.")
->      ----
 > 
 > 2. Locate the output of Unicycler and expand it :
 > 
->      ----
 >      ![Unicycler result Visualization](../../images/unicycler_igv.png  "Expanding Unicycler assembly reveals IGV link.")
->      ----
-> 
 > 
 > 3. Click on the *local* link highlighted with orange outline. The browser will change:
 > 
->      ----
 >      ![IGV with Unicycler assembly](../../images/igv2.png "Now you can see the major contig shown in the browser window.")
->      ----
 > 
 > 4. Let's add Prokka annotations to the browser image. For this simply expand Prokka's GFF3 dataset and click on the *local* link:
 > 
->      ----
 >      ![Expanded GFF3 dataset representing Prokka annotations](../../images/prokka_item.png "Expanded GFF dataset generated with Prokka. Click on the <em>local</em> link (highlighted with orange outline) to display this dataset within IGV.")
->      ----
 >      
 {: .hands_on}
 
