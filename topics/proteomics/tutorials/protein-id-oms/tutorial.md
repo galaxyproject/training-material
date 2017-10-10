@@ -94,10 +94,10 @@ The false discovery rate is therefore defined as the number of false discoveries
 To calculate FDRs, we first have to annotate the identified peptides to determine which of them are decoys. This is done with the tool ***PeptideIndexer*** {% icon tool %}. Additionally, we will calculate peptide posterior error probabilities (PEPs), because they are needed for the protein inference algorithm used by OpenMS. We will then filter for 1 % FDR and set the score back to PEP.
 
 >
+> 2. Run ***IDPosteriorErrorProbability*** {% icon tool %}. Set the option `-prob_correct` to `Yes`.
 > 1. Run ***PeptideIndexer*** {% icon tool %} with the same database file as used before. Set **`Specificity of the enzyme`** to `none`.
-> 2. Run ***IDPosteriorErrorProbability*** {% icon tool %}.
 > 3. Run ***FalseDiscoveryRate*** {% icon tool %}. Set the option **`Perform FDR calculation on protein level`** to `false` and **`Filter PSMs based on q-value`** to `0.01`. Set `-add_decoy_peptides` to `Yes`.
-> 4. Run ***IDScoreSwitcher*** {% icon tool %}. Set the **`Name of the meta value to use as the new score`** to "Posterior Probability_score". and the **`Orientation of the new score`** to `higher_better` (?). 
+> 4. Run ***IDScoreSwitcher*** {% icon tool %}. Set the **`Name of the meta value to use as the new score`** to "Posterior Probability_score". and the **`Orientation of the new score`** to `higher_better`. 
 > 5. Run ***FileInfo*** {% icon tool %} to get basic information about the identified peptides.
 >
 >   > ### {% icon question %} Questions:
