@@ -42,11 +42,11 @@ script:
     then
       timeout 120s htmlproofer --http-status-ignore 405,999 --url-ignore "/.*localhost.*/","/.*vimeo\.com.*/" --file-ignore "/.*\/files\/.*/"
     else
-      if [ "$TRAVIS_BRANCH" != "master" ]
+      if [ "$TRAVIS_PULL_REQUEST" == "false" -a "$TRAVIS_BRANCH" == "master" ]
       then
-        make check
-      else
         make build
+      else
+        make check
       fi
     fi
 
