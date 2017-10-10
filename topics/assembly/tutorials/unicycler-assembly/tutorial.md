@@ -56,7 +56,7 @@ In this analysis we will perform two tasks: (1) assembly and (2) annotation. Bel
 
 > ### <i class="fa fa-lightbulb-o" aria-hidden="true"></i> Knowing your assembly
 >
-> Here we assume that you know a thing or two about assembly process. If you don't: look at the [slides](./slides) accompanying this tutorial as well as other tutorials is this section.
+> Here we assume that you know a thing or two about assembly process. If you don't: look at the slides accompanying this tutorial as well as other tutorials is this section.
 {: .comment}
 
 ![Logo unicycler](https://github.com/rrwick/Unicycler/raw/master/misc/logo.png)
