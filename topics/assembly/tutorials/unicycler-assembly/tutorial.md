@@ -107,7 +107,7 @@ For annotation we are using [Prokka](http://www.vicbioinformatics.com/software.p
 | Feature | Tool used by Prokka |
 |---------|----------------------|
 | Protein-coding sequences (CDS) | [Prodigal](https://github.com/hyattpd/Prodigal) |
-| Ribosomal RNA genes | [RNAmmer](http://www.cbs.dtu.dk/cgi-bin/nph-runsafe?man=rnammer) |
+| Ribosomal RNA genes | [RNAmmer](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC1888812) |
 | Transfer RNA genes | [Aragorn](https://www.ncbi.nlm.nih.gov/pubmed/14704338) |
 | Signal leader peptides | [SignalP](https://www.ncbi.nlm.nih.gov/pubmed/21959131) |
 | Non-coding RNA genes | [Infernal](http://eddylab.org/infernal/) | 
