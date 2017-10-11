@@ -82,8 +82,8 @@ Different peptide search engines have been developed to fulfill the matching pro
 > 3. Run the tool ***FileInfo*** {% icon tool %} on the XTandem output.
 >
 >   > ### {% icon comment %} Comment: Advanced Search Engine Parameters
->		> The OpenMS adapters do not always allow to set every option of the underlying search engine. If an option is missing, you may also run the search engine locally or by using a Galaxy wrapper. Afterward, convert the search engine output to the OpenMS format `idXML` by running ***IDFileConverter*** {% icon tool %}.
->		>
+>   > The OpenMS adapters do not always allow to set every option of the underlying search engine. If an option is missing, you may also run the search engine locally or by using a Galaxy wrapper. Afterward, convert the search engine output to the OpenMS format `idXML` by running ***IDFileConverter*** {% icon tool %}.
+>   >
 >   > The search engine X!Tandem features some more advanced options than the ones reflected in the ***XTandemAdapter*** {% icon tool %}. If you need those advanced options, the ***XTandemAdapter*** {% icon tool %} allows for the optional input of a classic X!Tandem parameter file. Upload your parameter file to the history and use it as an input in the field `Default X!Tandem configuration file`. You may also set the option `-ignore_adapter_param` to `Yes` to overwrite all options set by the GUI.
 >   {: .comment}
 {: .hands_on}
@@ -130,9 +130,9 @@ The OpenMS suite implemented the [Fido](https://www.ncbi.nlm.nih.gov/pubmed/2071
 > 3. Run ***IDFilter*** {% icon tool %}. Set`-prot` to `0.01`.
 > 4. Run ***FileInfo*** {% icon tool %} to get basic information about the identified proteins.
 >
->   > {% icon comment %} Comment: "Greedy" Group Resolution
->		> Protein groups are reported, when an identified peptide maps to multiple proteins in the used database [Nesvizhskii and Aebersold (2005)](https://www.ncbi.nlm.nih.gov/pubmed/16009968). Some peptides may map to different protein groups and can therefore not be used for protein quantitation. The option `-greedy_group_resolution` solves this problem by assigning peptides only to the one most probable protein group, thus enabling to quantify proteins based not only on unique, but also on shared peptides. This usually leads to a much higher number of quantified proteins. However it will introduce noise in the FCs when a peptide was indeed shared by different proteins and the quantity of this peptide was a weighted sum of contributions. The greedy group resolution is similar to Occam's razor.
->		{: .comment}
+>   > ### {% icon comment %} Comment: "Greedy" Group Resolution
+>   > Protein groups are reported, when an identified peptide maps to multiple proteins in the used database [Nesvizhskii and Aebersold (2005)](https://www.ncbi.nlm.nih.gov/pubmed/16009968). Some peptides may map to different protein groups and can therefore not be used for protein quantitation. The option `-greedy_group_resolution` solves this problem by assigning peptides only to the one most probable protein group, thus enabling to quantify proteins based not only on unique, but also on shared peptides. This usually leads to a much higher number of quantified proteins. However it will introduce noise in the FCs when a peptide was indeed shared by different proteins and the quantity of this peptide was a weighted sum of contributions. The greedy group resolution is similar to Occam's razor.
+>   {: .comment}
 {: .hands_on}
 
 # Analysis of Contaminants
