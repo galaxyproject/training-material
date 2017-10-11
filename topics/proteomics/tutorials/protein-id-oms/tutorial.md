@@ -72,15 +72,18 @@ Raw data conversion is the first step of any proteomic data analysis. The most c
 # Peptide Identification
 MS/MS experiments identify peptides by isolating them and subsequently colliding them with a gas for fragmentation. This method generates a spectrum of peptide fragment masses for each isolated peptide - an MS2 spectrum. 
 To find out the peptide sequences, the MS2 spectrum is compared to a theoretical spectrum generated from a protein database. This step is called peptide-to-spectrum (also: spectrum-to-sequence) matching. Accordingly, a peptide that is successfully matched to a sequence is termed PSM (Peptide-Spectrum-Match). There can be multiple PSMs per peptide, if the peptide was fragmented several times.
-Different peptide search engines have been developed to fulfill the matching procedure. Here, we will use the search engine [X!Tandem](https://www.ncbi.nlm.nih.gov/pubmed/14976030).
 
-> ### {% icon hands_on %} Hands-On: Peptide Identification and FDR filtering
+Different peptide search engines have been developed to fulfill the matching procedure. Here, we will use the search engine [X!Tandem](https://www.ncbi.nlm.nih.gov/pubmed/14976030). OpenMS provides "adapters" (wrappers) for several other peptide search engines, like MSGF+ or OMSSA. You may replace the XTandemAdapter by another search engine of your choice. 
+
+> ### {% icon hands_on %} Hands-On: Peptide Identification
 >
 > 1. Copy the prepared protein database from the tutorial [Database Handling](../database-handling/tutorial.md) into your current history by using the multiple history view or upload the ready-made database from this [link](https://zenodo.org/record/892005/files/Human_database_including_decoys_%28cRAP_and_Mycoplasma_added%29.fasta).
 > 2. Run the tool ***XTandemAdapter*** {% icon tool %} on the centroided mzML input file and the database file. Click `+ Insert param_fixed_modifications` and choose `Carbamidomethyl (C)`, then click `+ Insert param_variable_modifications` and choose `Oxidation (M)` and `Execute`.
 > 3. Run the tool ***FileInfo*** {% icon tool %} on the XTandem output.
 >
->   > ### {% icon comment %} Comment: Advanced X!Tandem Parameters
+>   > ### {% icon comment %} Comment: Advanced Search Engine Parameters
+>		> The OpenMS adapters do not always allow to set every option of the underlying search engine. If an option is missing, you may also run the search engine locally or by using a Galaxy wrapper. Afterward, convert the search engine output to the OpenMS format `idXML` by running ***IDFileConverter*** {% icon tool %}.
+>		>
 >   > The search engine X!Tandem features some more advanced options than the ones reflected in the ***XTandemAdapter*** {% icon tool %}. If you need those advanced options, the ***XTandemAdapter*** {% icon tool %} allows for the optional input of a classic X!Tandem parameter file. Upload your parameter file to the history and use it as an input in the field `Default X!Tandem configuration file`. You may also set the option `-ignore_adapter_param` to `Yes` to overwrite all options set by the GUI.
 >   {: .comment}
 
@@ -93,6 +96,7 @@ The false discovery rate is therefore defined as the number of false discoveries
 
 To calculate FDRs, we first have to annotate the identified peptides to determine which of them are decoys. This is done with the tool ***PeptideIndexer*** {% icon tool %}. Additionally, we will calculate peptide posterior error probabilities (PEPs), because they are needed for the protein inference algorithm used by OpenMS. We will then filter for 1 % FDR and set the score back to PEP.
 
+> ### {% icon hands_on %} Hands-On: Peptide FDR filtering
 >
 > 2. Run ***IDPosteriorErrorProbability*** {% icon tool %}. Set the option `-prob_correct` to `Yes`.
 > 1. Run ***PeptideIndexer*** {% icon tool %} with the same database file as used before. Set **`Specificity of the enzyme`** to `none`.
