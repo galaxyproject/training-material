@@ -23,6 +23,7 @@ matrix:
   include:
     - env: CHECK=yamllint
     - env: CHECK=htmlproofer
+    - env: CHECK=slides
     - env: CHECK=site-build
 
 install:
@@ -39,6 +40,8 @@ install:
   - conda env create -f environment.yml
   - source activate galaxy_training_material
   - make install
+  - pip install vl
+  - vl --version
 
 script:
   # Check website
@@ -54,6 +57,9 @@ script:
       elif [ "$CHECK" == "yamllint" ]
       then
         make check-yaml
+      elif [ "$CHECK" == "slides" ]
+      then
+        make check-slides
       elif [ "$CHECK" == "site-build" ]
       then
         make build

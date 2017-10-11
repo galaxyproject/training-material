@@ -42,7 +42,11 @@ check-yaml: ## lint yaml files
 	yamllint .
 .PHONY: check-yaml
 
-check: check-yaml check-html  ## run all checks
+check-slides: build  ## check the markdown-formatted links in slides
+	find _site -path "**/slides*.html" | xargs -L 1 -I '{}' sh -c "echo {}; vl -d -t 15 -s 1000 --allow-codes 405 --whitelist localhost,127.0.0.1,fqdn,publish.twitter.com,linkedin.com,vimeo.com {}"
+.PHONY: check-slides
+
+check: check-yaml check-html check-slides  ## run all checks
 .PHONY: check
 
 clean: ## clean up junk files
