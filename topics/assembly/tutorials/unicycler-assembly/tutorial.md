@@ -54,7 +54,7 @@ In this analysis we will perform two tasks: (1) assembly and (2) annotation. Bel
 
 ### Assembly
 
-> ### <i class="fa fa-lightbulb-o" aria-hidden="true"></i> Knowing your assembly
+> ### {% icon comment %} Knowing your assembly
 >
 > Here we assume that you know a thing or two about assembly process. If you don't: look at the slides accompanying this tutorial as well as other tutorials is this section.
 {: .comment}
@@ -261,7 +261,7 @@ Go to IGV [download page](http://software.broadinstitute.org/software/igv/downlo
 > 
 > 4. Let's add Prokka annotations to the browser image. For this simply expand Prokka's GFF3 dataset and click on the *local* link:
 > 
->      ![Expanded GFF3 dataset representing Prokka annotations](../../images/prokka_item.png "Expanded GFF dataset generated with Prokka. Click on the <em>local</em> link (highlighted with orange outline) to display this dataset within IGV.")ßßß
+>      ![Expanded GFF3 dataset representing Prokka annotations](../../images/prokka_item.png "Expanded GFF dataset generated with Prokka. Click on the <em>local</em> link (highlighted with orange outline) to display this dataset within IGV.")
 >      
 {: .hands_on}
 
