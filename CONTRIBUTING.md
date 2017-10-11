@@ -26,7 +26,7 @@ If you have any questions, you can reach us using the [Gitter chat](https://gitt
 
 # What should I know before I get started?
 
-This repository is a project of unification of the Galaxy training material. You can find more information about this project in this [small presentation](https://galaxyproject.github.io/training-material/shared/slides/project_presentation#/)
+This repository is a project of unification of the Galaxy training material. You can find more information about this project in this [small presentation](https://galaxyproject.github.io/training-material/topics/training/slides/)
 
 By contributing, you agree that we may redistribute your work under [this repository's license](LICENSE.md).
 

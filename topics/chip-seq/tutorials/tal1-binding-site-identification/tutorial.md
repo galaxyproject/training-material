@@ -7,14 +7,14 @@ tutorial_name: tal1-binding-site-identification
 # Introduction
 {:.no_toc}
 
-This tutorial uses ChIP-seq datasets from a study published by [Wu *et al.* (2014)](http://genome.cshlp.org/content/24/12/1945.full.pdf+html). The goal of this study was to investigate "the dynamics of occupancy and the role in gene regulation of the transcription factor TAL1, a critical regulator of hematopoiesis, at multiple stages of hematopoietic differentiation."
+This tutorial uses ChIP-seq datasets from a study published by [*Wu et al.* (2014)](http://genome.cshlp.org/content/24/12/1945.full.pdf+html). The goal of this study was to investigate "the dynamics of occupancy and the role in gene regulation of the transcription factor TAL1, a critical regulator of hematopoiesis, at multiple stages of hematopoietic differentiation."
 
 To this end, ChIP-seq experiments were performed in multiple mouse cell types including G1E - a GATA-null immortalized cell line derived from targeted disruption of GATA-1 in mouse embryonic stem cells - and megakaryocytes.
 
 This dataset (GEO Accession: [GSE51338](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE51338)) consists of biological replicate TAL1 ChIP-seq and input control experiments.
 Input control experiments are used to identify and remove sampling bias, for example open/accessible chromatin or GC bias.
 
-Because of the long processing time for the large original files, we have downsampled the original raw data files to include only reads that align to chromosome 19 and a subset of interesting genomic loci identified by Wu *et al.* (2014).
+Because of the long processing time for the large original files, we have downsampled the original raw data files to include only reads that align to chromosome 19 and a subset of interesting genomic loci identified by *Wu et al.* (2014).
 
 **Table 1**: Metadata for ChIP-seq experiments in this tutorial. SE: single-end.
 
@@ -289,8 +289,6 @@ We will now evaluate the quality of the immuno-precipitation step in the ChIP-se
 
 For additional information on how to interpret **plotFingerprint** plots, read the information [here](https://deeptools.readthedocs.io/en/latest/content/tools/plotFingerprint.html#background)
 
-
-
 # Step 6: Determining TAL1 binding sites
 
 Now that **BWA** has aligned the reads to the genome, we will use the tool **MACS2** to identify regions of TAL1 occupancy, which are called "peaks". Peaks are determined from pileups of sequenced reads across the genome that correspond to where TAL1 binds.
@@ -318,7 +316,9 @@ More information about **MACS2** can be found [here](https://genomebiology.biome
 
 It is critical to visualize NGS data on a genome browser after alignment to evaluate the "goodness" of the analysis. Evaluation criteria will differ for various NGS experiment types, but for ChIP-seq data we want to ensure reads from a Treatment/IP sample are enriched at peaks and do not localize non-specifically (like the Control/input condition).
 
-**MACS2** generates BEDgraph and BED files that we will use to visualize read abundance and peaks, respectively, at regions **MACS2** determines to be TAL1 peaks using Galaxy's in-house genome browser, Trackster.
+**MACS2** generates BEDgraph and BED files that we will use to visualize read abundance and peaks, respectively, at regions **MACS2** determines to be TAL1 peaks using Galaxy's in-house genome browser, **Trackster**.
+
+## Step 7.1: Inspection of peaks and aligned data with Trackster
 
 First, we will reformat the peak file before we send it to Trackster, and then we will import a gene annotation file so we can visualize aligned reads and TAL1 peaks relative to gene features and positions.
 
@@ -361,7 +361,7 @@ First, we will reformat the peak file before we send it to Trackster, and then w
 >    ![runx1](../../images/Trackster_Runx1_locus.png "The Runx1 locus.")
 {: .hands_on}
 
-# Step 7.1: Inspection of peaks and aligned data with IGV
+## Step 7.2: Inspection of peaks and aligned data with IGV
 We show here an alternative to Trackster, [IGV](http://software.broadinstitute.org/software/igv/).
 
 > ### {% icon hands_on %} Hands-on: IGV
@@ -370,7 +370,7 @@ We show here an alternative to Trackster, [IGV](http://software.broadinstitute.o
 > 2. Click on each 'narrow peaks' result file from the MACS2 computations on 'display with IGV' --> 'local Mouse mm10'
 > 3. For more information about IGV see [here]({{site.url}}/topics/introduction/tutorials/igv-introduction/tutorial.html)
 
-# Step 8: Identifying unique and common TAL1 peaks between states
+# Step 8: Identifying unique and common TAL1 peaks between stages
 
 We have processed ChIP-seq data from two stages of hematopoiesis and have lists of TAL1 occupied sites (peaks) in both cellular states. The next analysis step is to identify TAL1 peaks that are *shared* between the two cellular states and peaks that are *specific* to either cellular state.
 

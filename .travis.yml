@@ -1,3 +1,4 @@
+---
 sudo: required
 language: python
 python: 3.6
@@ -39,9 +40,14 @@ script:
     set -e
     if [ "$TRAVIS_BRANCH" == "gh-pages" ]
     then
-      htmlproofer --http-status-ignore 405,999 --url-ignore "/.*localhost.*/","/.*vimeo\.com.*/" --file-ignore "/.*\/files\/.*/"
+      timeout 120s htmlproofer --http-status-ignore 405,999 --url-ignore "/.*localhost.*/","/.*vimeo\.com.*/" --file-ignore "/.*\/files\/.*/"
     else
-      make check
+      if [ "$TRAVIS_PULL_REQUEST" == "false" -a "$TRAVIS_BRANCH" == "master" ]
+      then
+        make build
+      else
+        make check
+      fi
     fi
 
 after_success:

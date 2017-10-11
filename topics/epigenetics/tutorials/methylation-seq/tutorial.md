@@ -6,16 +6,23 @@ tutorial_name: methylation-seq
 
 > ### Agenda
 >
-> In this tutorial, we will deal with:
+> In this tutorial we will do:
 >
-> 1. TOC
-> {:toc}
+> 1. quality control
+> 2. alignment
+> 3. methylation extraction 
+> 4. visualization of methylation levels
+> 5. differentially methylated regions analysis
+>
+> We will use a small subset of the original data. If we would do the computation on the orginal data the computation time for a tutorial is too long. To show you all necessary steps for Methyl-Seq we decided to use a subset of the data set. In a second step we use precomputed data from the study to show you different levels of methylation. We will consider samples from normal breast cells (NB), fibroadenoma (noncancerous breast tumor, BT089), two invasive ductal carcinomas (BT126, BT198) and a breast adenocarcinoma cell line (MCF7).
+>
 >
 {: .agenda}
 
 This tutorial is based on [I-Hsuan Lin et al.: 'Hierarchical Clustering of Breast Cancer Methylomes Revealed Differentially Methylated and Expressed Breast Cancer Genes'](https://dx.doi.org/10.1371/journal.pone.0118453).
 
 The data we use in this tutorial is available at [Zenodo](https://zenodo.org/record/557099).
+
 
 
 # Load data and quality control
@@ -89,8 +96,8 @@ The data we use in this tutorial is available at [Zenodo](https://zenodo.org/rec
 # Methylation bias and metric extraction
 
 > ### {% icon hands_on %} Hands-on: Methylation bias
->
-> We will extract the methylation on the resulting BAM file of the alignment step.
+> 
+> In this step we will have a look at the distribution of the methylation and will look at a possible bias.
 >
 > 1. **MethylDackel** {% icon tool %} with the following parameters: 
 > - Choose at the first option `Load reference genome from` `Local cache` and for `Using reference genome` the value `hg38`.
@@ -123,8 +130,9 @@ The data we use in this tutorial is available at [Zenodo](https://zenodo.org/rec
 > ### {% icon hands_on %} Hands-on: Methylation extraction with MethylDackel
 >
 >
-
-> 2. **MethylDackel** {% icon tool %} with the following parameters:
+> We will extract the methylation on the resulting BAM file of the alignment step. We need this to create a methylation level plot in the next step.
+>
+> 1. **MethylDackel** {% icon tool %} with the following parameters:
 > - Choose at the first option `Load reference genome from` the value: `Local cache` and for `Using reference genome` the value: `hg38`.
 > - Select for the option `sorted_alignments.bam` the computed bam file of step 4 of the `bwameth` alignment.
 > - Use for `What do you want to do?` the value `Extract methylation metrics from an alignment file in BAM/CRAN format`.
@@ -141,7 +149,7 @@ The data we use in this tutorial is available at [Zenodo](https://zenodo.org/rec
 
 > ### {% icon hands_on %} Hands-on:
 >
-> We visualize the example with the help of deepTools.
+> In this step we want to visualize the methylation level around all TSS of our data. When located at gene promoters, DNA methylation is usually a repressive mark. 
 >
 > 1. **Wig/BedGraph-to-bigWig** {% icon tool %} with the following parameters: 
 >    - Use the result of MethylDackel to transform it to a bigWig file.
@@ -188,10 +196,12 @@ The data we use in this tutorial is available at [Zenodo](https://zenodo.org/rec
 >    >    - Choose for `File in which you want to replace some values` the previous used `NB1_CpG.meth.bedGraph` file and for `Replace information file`  conversion file. For `Which column should be replaced?` choose `Column: 1`, for `Skip this many starting lines` a `1` and for `Delimited by` `Tab`.
 >    {: .tip}
 >
-> 3. To save compute time we prepared the converted files for you. Import the files: `NB1_CpG.meth_ucsc.bedGraph`, `NB2_CpG.meth_ucsc.bedGraph`, `BT089_CpG.meth_ucsc.bedGraph`, `BT126_CpG.meth_ucsc.bedGraph` and  `BT198_CpG.meth_ucsc.bedGraph`.
+> 3. To save compute time we prepared the converted files for you. Import the files: `NB1_CpG.meth_ucsc.bedGraph`, `NB2_CpG.meth_ucsc.bedGraph`, `BT089_CpG.meth_ucsc.bedGraph`, `BT126_CpG.meth_ucsc.bedGraph`, `BT198_CpG.meth_ucsc.bedGraph` and `MCF7_CpG.meth_ucsc.bedgraph`.
 > 4. Compute the matrix and plot the profile as described above.
 >
-> More information about deepTools can be found here: https://deeptools.github.io/
+> ![Methylation level around TSS](../../images/methyl_level.png)
+>
+> More information about deepTools can be found here: https://deeptools.readthedocs.io
 >
 {: .hands_on}
 
@@ -201,9 +211,9 @@ The data we use in this tutorial is available at [Zenodo](https://zenodo.org/rec
 >
 > With metilene it is possible to detect differentially methylated regions (DMRs) which is a necessary prerequisite for characterizing different epigenetic states.
 >
-> 1. **Galaxy** {% icon tool %}: Import from the data library the files `NB1_CpG.meth.bedGraph`, `NB2_CpG.meth.bedGraph`, `BT089_CpG.meth.bedGraph`, `BT126_CpG.meth.bedGraph` and  `BT198_CpG.meth.bedGraph`.
+> 1. **Galaxy** {% icon tool %}: Import from the data library the files `NB1_CpG.meth.bedGraph`, `NB2_CpG.meth.bedGraph` and `BT198_CpG.meth.bedGraph`.
 > 2. **Metilene** {% icon tool %}: 
->    - Choose for the first option `Input group 1` the imported files starting with ``NB`` and for `Input group 2` the imported files `Input group 2`.
+>    - Choose for the first option `Input group 1` the imported files starting with ``NB`` and for `Input group 2` the imported files `BT198_CpG.meth.bedGraph`.
 >    - Select for the option `BED file containing regions of interest` the imported BAM file CpGIslands.bed.
 > 3. More information about metilene can be found here: https://www.bioinf.uni-leipzig.de/Software/metilene/
 >
