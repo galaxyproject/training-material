@@ -42,6 +42,9 @@ check-yaml: ## lint yaml files
 	yamllint .
 .PHONY: check-yaml
 
+check: check-yaml check-html  ## run all checks
+.PHONY: check
+
 clean: ## clean up junk files
 	@rm -rf _site
 	@rm -rf .sass-cache
