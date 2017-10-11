@@ -45,10 +45,10 @@ Raw data conversion is the first step of any proteomic data analysis. The most c
 
 > ### {% icon hands_on %} Optional Hands-On: Preparing raw data
 >
-> This part of the Hands-On section is optional, because it cannot be performed on most GalaxyP instances due to licensing reasons. Therefore, we provide the [input data](https://zenodo.org/record/796184) also already converted to `.mzML` file format. If you choose to omit this part of the Hands-On section, please download the file "qExactive01819.mzml_profile" from [https://zenodo.org/record/546301/files/qExactive01819_profile.mzml] and continue with step 5 below (***PeakPickerHiRes*** {% icon tool %}).
+> This part of the Hands-On section is optional, because it cannot be performed on most GalaxyP instances due to licensing reasons. Therefore, we provide the input data also already converted to `.mzML` file format. If you choose to omit this part of the Hands-On section, please download the file [qExactive01819.mzml_profile](https://zenodo.org/record/546301/files/qExactive01819_profile.mzml) and continue with step 5 below (***PeakPickerHiRes*** {% icon tool %}).
 >
 > 1. Create a new history for this Peptide and Protein ID exercise.
-> 2. Load the example dataset into your history from this [link](ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2014/01/PXD000674/qExactive01819.raw).
+> 2. Load the example dataset into your history from this [Zenodo](ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2014/01/PXD000674/qExactive01819.raw).
 > 3. Rename the dataset to "Test data".
 > 4. Run ***msconvert*** {% icon tool %} on the test data to convert to the mzML format.
 >
@@ -86,6 +86,7 @@ Different peptide search engines have been developed to fulfill the matching pro
 >		>
 >   > The search engine X!Tandem features some more advanced options than the ones reflected in the ***XTandemAdapter*** {% icon tool %}. If you need those advanced options, the ***XTandemAdapter*** {% icon tool %} allows for the optional input of a classic X!Tandem parameter file. Upload your parameter file to the history and use it as an input in the field `Default X!Tandem configuration file`. You may also set the option `-ignore_adapter_param` to `Yes` to overwrite all options set by the GUI.
 >   {: .comment}
+{: .hands_on}
 
 # Peptide FDR filtering
 The next step of peptide identification is to decide which PSMs will be used for protein inference. Measured MS2 spectra never perfectly fit the theoretical spectra. Therefore, peptide search engines calculate a score which indicates how well the measured MS2 spectrum was fitting the theoretical spectrum. How do we decide which PSMs are likely true and which are false?
@@ -131,6 +132,8 @@ The OpenMS suite implemented the [Fido](https://www.ncbi.nlm.nih.gov/pubmed/2071
 >
 >   > {% icon comment %} Comment: "Greedy" Group Resolution
 >		> Protein groups are reported, when an identified peptide maps to multiple proteins in the used database [Nesvizhskii and Aebersold (2005)](https://www.ncbi.nlm.nih.gov/pubmed/16009968). Some peptides may map to different protein groups and can therefore not be used for protein quantitation. The option `-greedy_group_resolution` solves this problem by assigning peptides only to the one most probable protein group, thus enabling to quantify proteins based not only on unique, but also on shared peptides. This usually leads to a much higher number of quantified proteins. However it will introduce noise in the FCs when a peptide was indeed shared by different proteins and the quantity of this peptide was a weighted sum of contributions. The greedy group resolution is similar to Occam's razor.
+>		{: .comment}
+{: .hands_on}
 
 # Analysis of Contaminants
 The FASTA database used for the peptide to spectrum matching contained some entries that were not expected to stem from the HeLa cell lysate, but are common contaminations in LC-MS/MS samples. The main reason to add those is to avoid false assignment of the spectra to other proteins. However, it also enables you to check for contaminations in your samples. **CAVE:** in human samples, many proteins that are common contaminants may also stem from the real sample. Therefore, you do not have to exclude those proteins from further analysis, but you should verify the expression of these proteins in your sample.
