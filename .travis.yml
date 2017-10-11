@@ -47,8 +47,7 @@ script:
     if [ "$TRAVIS_BRANCH" == "gh-pages" ]
     then
       make check-html-gh-pages
-    elif [ "$TRAVIS_BRANCH" != "master" ]
-    then
+    else
       if [ "$CHECK" == "htmlproofer" ]
       then
         make check-html
@@ -58,8 +57,6 @@ script:
       elif [ "$CHECK" == "site-build" ]
       then
         make build
-      else
-        make check
       fi
     fi
 
