@@ -39,34 +39,29 @@ you can use the constructed database before the **DecoyDatabase** {% icon tool %
 {: .agenda}
 
 
-# Preparing raw data
+# Preparing Raw Data
 
-Raw data conversion is the first step of any proteomic data analysis. The most common converter is MSConvert from the [ProteoWizard software suite](http://proteowizard.sourceforge.net/), the format to convert to is mzML. Search GUI takes only mgf format as input, but as we need the mzML format for several other tasks, we will convert to mzML first.
+Raw data conversion is the first step of any proteomic data analysis. The most common converter is MSConvert from the [ProteoWizard software suite](http://proteowizard.sourceforge.net/), the format to convert to is mzML. Search GUI needs `mgf` format as input, but as we need the `mzML` format for several other tasks, we will convert to `mzML` first. Due to licensing reasons, MSConvert runs only on windows systems and will not work on most Galaxy servers.
 
-> ### {% icon hands_on %} Optional Hands-On: Preparing raw data
+Depending on your machine settings, raw data will be generated either in profile mode or centroid mode. For most peptide search engines, the MS2 data have to be converted to centroid mode, a process called "peak picking" or "centroiding". 
+Machine vendors offer algorithms to extract peaks from profile raw data. This is implemented in ***msconvert*** {% icon tool %} and can be run in parallel to the mzML conversion. However, the OpenMS tool ***PeakPickerHiRes*** {% icon tool %} is reported to generate slightly better results ([Lange et al., 2006, Pac Symp Biocomput](https://www.ncbi.nlm.nih.gov/pubmed/17094243)) and is therefore recommended for quantitative studies ([Vaudel et al., 2010, Proteomics](https://www.ncbi.nlm.nih.gov/pubmed/19953549)).
+If your data were generated on a low resolution mass spectrometer, use ***PeakPickerWavelet*** {% icon tool %} instead.
+
+> ### {% icon hands_on %} Hands-On: File Conversion and Peak Picking
 >
-> This part of the Hands-On section is optional, because it cannot be performed on most GalaxyP instances due to licensing reasons. Therefore, we provide the [input data](https://zenodo.org/record/796184) also already converted to `.mgf` and `.mzML` file formats. If you choose to omit this part of the Hands-On section, please download the file [preconverted mzML file](https://zenodo.org/record/892005/files/qExactive01819_profile.mzml).
+> We provide the [input data](https://zenodo.org/record/796184) in the original `raw` format and also already converted to `mgf` and `mzML` file formats. If ***msconvert*** {% icon tool %} does not run on your Galaxy instance, please download the preconverted `mzML` as an input.
 >
 > 1. Create a new history for this Peptide and Protein ID exercise.
-> 2. Load the example dataset into your history from this [link](ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2014/01/PXD000674/qExactive01819.raw).
-> 3. Rename the dataset to "Test data".
-> 4. Run ***msconvert*** {% icon tool %} on the test data to convert to the mzML format
-> 5. Run ***PeakPickerHiRes*** {% icon tool %} on the resulting mzML file.
+> 2. Load the example dataset into your history from Zenodo: [raw](https://zenodo.org/record/892005/files/qExactive01819.raw) [mzML](https://zenodo.org/record/892005/files/qExactive01819_profile.mzml)
+> 3. Rename the dataset to something meaningful.
+> 4. (*optional*) Run ***msconvert*** {% icon tool %} on the test data to convert to the `mzML` format.
+> 5. Run ***PeakPickerHiRes*** {% icon tool %} on the resulting file. Click `+ Insert param.algorithm_ms_levels` and change the entry to "2". Thus, peak picking will only be performed on MS2 level.
 > 6. Run ***FileConverter*** {% icon tool %} on the picked mzML. In the **Advanced Options** set the **Output file type** to `mgf`.
-> 7. Change the ***Datatype*** of the ***FileConverter*** {% icon tool %} output to mgf by clicking the pencil :pencil: icon.
 >
 >   > ### {% icon comment %} Comment: Local Use of MSConvert
 >   > The vendor libraries used by MSConvert are only licensed for Windows systems and are therefore rarely implemented in Galaxy instances. If ***msconvert*** {% icon tool %} is not available in your Galaxy instance, please install the software on a Windows computer and run the conversion locally. You can find a detailed description of the necessary steps [here](http://genesis.ugent.be/files/costore/practicals/bioinformatics-for-proteomics/1-Peptide-and-Protein-Identification/1.2-Peak-List-Generation/1.2-Peak-List-Generation.pdf). Afterwards, upload the resulting mzML file to your Galaxy history.
 >  {: .comment}
->
->   > ### {% icon comment %} Comment: Peak Picking
->   > Depending on your machine settings, raw data will be generated either in profile mode or centroid mode. For most peptide search engines, the MS2 data have to be converted to centroid mode, a process called "peak picking" or "centroiding". 
->   > Machine vendors offer algorithms to extract peaks from profile raw data. This is implemented in ***msconvert*** {% icon tool %} and can be run in parallel to the mzML conversion. However, the OpenMS tool ***PeakPickerHiRes*** {% icon tool %} is reported to generate better results ([Lange et al., 2006, Pac Symp Biocomput](https://www.ncbi.nlm.nih.gov/pubmed/17094243)) and is therefore recommended for quantitative studies ([Vaudel et al., 2010, Proteomics](https://www.ncbi.nlm.nih.gov/pubmed/19953549)).
->   >
->   > If your data were generated on a low resolution mass spectrometer, use ***PeakPickerWavelet*** {% icon tool %} instead.
->   {: .comment}
 {: .hands_on}
-
 
 # Peptide and Protein Identification
 MS/MS experiments identify peptides by isolating them and subsequently colliding them with a gas for fragmentation. This method generates a spectrum of peptide fragment masses for each isolated peptide - an MS2 spectrum. To find out the peptide sequences, the MS2 spectrum is compared to a theoretical spectrum generated from a protein database. This step is called peptide-to-spectrum (also: spectrum-to-sequence) matching. Accordingly, a peptide that is successfully matched to a sequence is termed PSM (Peptide-Spectrum-Match). There can be multiple PSMs per peptide, if the peptide was fragmented several times. Different peptide search engines have been developed to fulfill the matching procedure.
@@ -78,8 +73,23 @@ In bottom-up proteomics, it is necessary to combine the identified peptides to p
 > ### {% icon hands_on %} Hands-On: Peptide and Protein Identification
 >
 > 1. Copy the prepared protein database from the tutorial [Database Handling](../database-handling/tutorial.md) into your current history by using the multiple history view or upload the ready-made database from this [link](https://zenodo.org/record/892005/files/Human_database_%28cRAP_and_Mycoplasma_added%29.fasta).
-> 2. Open ***Search GUI*** {% icon tool %} to search the mgf file against the protein database. Select the `DB-Search Engines`: `X!Tandem` and `MS-GF+`. Add the `Fixed Modifications`: `Carbamidomethylation of C` and the `Variable Modifications`: `Oxidation of M`, then click `Execute`.
-> 3. Run ***Peptide Shaker*** {% icon tool %} on the Search GUI output. Enable the following outputs: `Zip File for import to Desktop App`, `mzidentML File`, `PSM Report`, `Peptide Report`, `Protein Report`. You can find a detailed description of possible Peptide Shaker outputs in the comment below.
+> 2. Open ***Search GUI*** {% icon tool %} to search the mgf file against the protein database. In the **`Search Engine Options`** select `X!Tandem` and `MS-GF+`. In the **`Protein Modification Options`** add the **`Fixed Modifications`**: `Carbamidomethylation of C` and the **`Variable Modifications`**: `Oxidation of M`.
+> 3. Run ***Peptide Shaker*** {% icon tool %} on the Search GUI output. Enable the following outputs: `Zip File for import to Desktop App`, `mzidentML File`, `PSM Report`, `Peptide Report`, `Protein Report`.
+>
+>   > ### {% icon comment %} Comment: Search GUI Parameters
+>   > We ran ***Search GUI*** {% icon tool %} with default settings. When you are processing files of a different experiment, you may need to adjust some of the parameters.
+>   > **Search GUI** bundles numerous peptide search engines for matching MS/MS to peptide sequences within a database. In practice, using 2-3 different search engines offers high confidence while keeping analysis time reasonable.
+>   > The **`Precursor Options`** have to be adjusted to the mass spectrometer which was used to generate the files. The default settings fit a  high resolution Orbitrap instrument.
+>   > In the **`Advanced Options`** you may set much more detailed settings for each of the used search engines. When using X!Tandem, we recommend to switch off the advanced X!Tandem options **`Noise suppression`**, **`Quick Pyrolidone`** and **`Quick Acetyl`**. When using MSGF, we recommend to select the correct **`Instrument type`**.
+>   {: .comment}
+>
+>   > ### {% icon comment %} Comment: PeptideShaker Outputs
+>   > Peptide Shaker offers a variety of outputs. 
+>   > The `Zip File for import to Desktop App` can be downloaded to view and evaluate the search results in the Peptide Shaker viewer ([Download](https://compomics.github.io/projects/peptide-shaker.html)). 
+>   > The several `Reports` contain tabular, human-readable information. 
+>   > Also, an `mzidentML` (= `mzid`) file can be created that contains all peptide sequence matching information and can be utilized by compatible downstream software.
+>   > The `Certificate of Analysis` provides details on all parameters settings of both Search GUI and Peptide Shaker used for the analysis.
+>   {: .comment}
 >
 >   > ### {% icon question %} Questions:
 >   > 1. How many peptides were identified? How many proteins?
@@ -94,37 +104,6 @@ In bottom-up proteomics, it is necessary to combine the identified peptides to p
 >   >  </details>
 >   {: .question}
 {: .hands_on}
-
-> ### {% icon comment %} Comment: Important Search GUI and Peptide Shaker Parameters
-> In this tutorial, we ran both ***Search GUI*** {% icon tool %} and ***Peptide Shaker*** {% icon tool %} with standard settings. When you are processing files of a different experiment, you may need to adjust some of the parameters.
-> 1. **Search GUI**
->
-> Search GUI bundles numerous sequence database search software tools for matching MS/MS to peptide sequences within a database. Describing the parameters for all of these programs is beyond the scope of this tutorial, but some of the key parameters for this software are described below:
->
-> a) **Database search programs.** A number of popular sequence database searching programs are available, and can be selected by the user. The more selected, the more processor time is necessary; however, matching MS/MS spectra to peptide sequence with more programs provides more confidence in results.
-> In practice, 2-3 programs used offers high confidence while keeping analysis times reasonable.
->
-> b) **Data quality parameters.** Values that reflect the performance of the instrument used can be entered. These include mass accuracy measures for both precursor ions and the resulting MS/MS fragment ions. For the workflow provided here, these have been set with default values for high resolution Orbitrap mass spectrometer instrumentation.
->
-> c) **Enzyme cleavage.** Although almost all proteomic samples are digested to peptides by trypsin, some other enzymes are used occasionally. Enzymes do not cut at 100 % of the possible cleavage sites, so you might want to allow searching for peptides where a few cleavage sites were missed.
->
-> d) **Covalent modifications.** A variety of covalent modifications are built in to the Search GUI parameters. Typing the modification into the field (e.g. “oxidation”) brings up the available modifications of that type to specific side chains or the n- or c-terminus of the protein and/or peptide.
->
-> ![parameters_SG](../../images/parameters_SG.png)
->
-> 2. **Peptide Shaker**
->
-> The Galaxy implementation of Peptide Shaker is fairly simple in terms of parameters available to the user:
->
-> a) **Processing and filtering options.** If desired, users can select “Advanced” processing or filtering options. The processing options allow a customized level of false discovery rate (FDR) to be set for peptide and protein identifications, while the filtering options offer selection of length of peptides to be considered, and thresholds for mass accuracy.
-> The default, validated values for processing and filtering are set in stored workflows, and follow community standards (e.g. 1% FDR levels, etc.).
->
-> b) **Outputs.** Peptide Shaker offers a variety of outputs which a user can select. A compressed file (.zip) can be made containing all information needed to view the results in the standalone Peptide Shaker viewer; a peptide spectrum match (PSM) report file, which provides all relevant information on all peptide sequences matched to MS/MS spectra in the analysis; a mzidentML file can be created that contains all peptide sequence matching information and can be utilized by compatible downstream software.
-> Other outputs are focused on the inferred proteins identified from the PSMs, as well as phosphorylation reports, relevant in a phosphoprotoemics experiment has been undertaken. The Certificate of Analysis provides details on all the parameters used by both Search GUI and Peptide Shaker in the analysis. All outputs can be downloaded from the Galaxy instance to the local computer if desired.
->
-> ![parameters_PS](../../images/parameters_PS.png)
->
-> {: .comment}
 
 # Analysis of Contaminants
 The FASTA database used for the peptide to spectrum matching contained some entries that were not expected to stem from the HeLa cell lysate, but are common contaminations in LC-MS/MS samples. The main reason to add those is to avoid false assignment of the spectra to other proteins. However, it also enables you to check for contaminations in your samples. **CAVE:** in human samples, many proteins that are common contaminants may also stem from the real sample. The real source can never be determined for sure.
