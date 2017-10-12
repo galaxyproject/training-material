@@ -1,0 +1,407 @@
+{
+    "a_galaxy_workflow": "true", 
+    "annotation": "", 
+    "format-version": "0.1", 
+    "name": "Unicycler training (imported from uploaded file)", 
+    "steps": {
+        "0": {
+            "annotation": "", 
+            "content_id": null, 
+            "errors": null, 
+            "id": 0, 
+            "input_connections": {}, 
+            "inputs": [], 
+            "label": "Forward reads", 
+            "name": "Input dataset", 
+            "outputs": [], 
+            "position": {
+                "left": 333.9757080078125, 
+                "top": 370.00001525878906
+            }, 
+            "tool_id": null, 
+            "tool_state": "{}", 
+            "tool_version": null, 
+            "type": "data_input", 
+            "uuid": "1e8ef78c-1cb2-4376-9fc5-3f9d47acfe69", 
+            "workflow_outputs": []
+        }, 
+        "1": {
+            "annotation": "", 
+            "content_id": null, 
+            "errors": null, 
+            "id": 1, 
+            "input_connections": {}, 
+            "inputs": [], 
+            "label": "Reverse Reads", 
+            "name": "Input dataset", 
+            "outputs": [], 
+            "position": {
+                "left": 142.96875, 
+                "top": 481.9965515136719
+            }, 
+            "tool_id": null, 
+            "tool_state": "{}", 
+            "tool_version": null, 
+            "type": "data_input", 
+            "uuid": "251d7a96-2b0d-4b8c-bf34-d24b65b32b41", 
+            "workflow_outputs": []
+        }, 
+        "2": {
+            "annotation": "", 
+            "content_id": null, 
+            "errors": null, 
+            "id": 2, 
+            "input_connections": {}, 
+            "inputs": [], 
+            "label": "Long Reads", 
+            "name": "Input dataset", 
+            "outputs": [], 
+            "position": {
+                "left": 276.9965515136719, 
+                "top": 830.9896545410156
+            }, 
+            "tool_id": null, 
+            "tool_state": "{}", 
+            "tool_version": null, 
+            "type": "data_input", 
+            "uuid": "80a96186-0c6f-448e-a8cd-11f18e04629d", 
+            "workflow_outputs": []
+        }, 
+        "3": {
+            "annotation": "", 
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.63", 
+            "errors": null, 
+            "id": 3, 
+            "input_connections": {
+                "input_file": {
+                    "id": 0, 
+                    "output_name": "output"
+                }
+            }, 
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool FastQC", 
+                    "name": "contaminants"
+                }, 
+                {
+                    "description": "runtime parameter for tool FastQC", 
+                    "name": "limits"
+                }, 
+                {
+                    "description": "runtime parameter for tool FastQC", 
+                    "name": "input_file"
+                }
+            ], 
+            "label": null, 
+            "name": "FastQC", 
+            "outputs": [
+                {
+                    "name": "html_file", 
+                    "type": "html"
+                }, 
+                {
+                    "name": "text_file", 
+                    "type": "txt"
+                }
+            ], 
+            "position": {
+                "left": 684.826416015625, 
+                "top": 271.3194580078125
+            }, 
+            "post_job_actions": {}, 
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.63", 
+            "tool_shed_repository": {
+                "changeset_revision": "2d094334f61e", 
+                "name": "fastqc", 
+                "owner": "devteam", 
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            }, 
+            "tool_state": "{\"__page__\": null, \"contaminants\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"__rerun_remap_job_id__\": null, \"limits\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"input_file\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}", 
+            "tool_version": "0.63", 
+            "type": "tool", 
+            "uuid": "ca4cf888-bf14-4cc9-9bc1-202b3ed818d0", 
+            "workflow_outputs": []
+        }, 
+        "4": {
+            "annotation": "", 
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.63", 
+            "errors": null, 
+            "id": 4, 
+            "input_connections": {
+                "input_file": {
+                    "id": 1, 
+                    "output_name": "output"
+                }
+            }, 
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool FastQC", 
+                    "name": "contaminants"
+                }, 
+                {
+                    "description": "runtime parameter for tool FastQC", 
+                    "name": "limits"
+                }, 
+                {
+                    "description": "runtime parameter for tool FastQC", 
+                    "name": "input_file"
+                }
+            ], 
+            "label": null, 
+            "name": "FastQC", 
+            "outputs": [
+                {
+                    "name": "html_file", 
+                    "type": "html"
+                }, 
+                {
+                    "name": "text_file", 
+                    "type": "txt"
+                }
+            ], 
+            "position": {
+                "left": 318.9757080078125, 
+                "top": 618.9931030273438
+            }, 
+            "post_job_actions": {}, 
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.63", 
+            "tool_shed_repository": {
+                "changeset_revision": "2d094334f61e", 
+                "name": "fastqc", 
+                "owner": "devteam", 
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            }, 
+            "tool_state": "{\"__page__\": null, \"limits\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"input_file\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"__rerun_remap_job_id__\": null, \"contaminants\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"chromInfo\": \"\\\"/galaxy-repl/localdata/chrom/?.len\\\"\"}", 
+            "tool_version": "0.63", 
+            "type": "tool", 
+            "uuid": "988ebf23-99af-4b76-a476-28b58f505f61", 
+            "workflow_outputs": []
+        }, 
+        "5": {
+            "annotation": "", 
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/unicycler/unicycler/0.2.0", 
+            "errors": null, 
+            "id": 5, 
+            "input_connections": {
+                "long_reads": {
+                    "id": 2, 
+                    "output_name": "output"
+                }, 
+                "paired_unpaired|fastq_input1": {
+                    "id": 0, 
+                    "output_name": "output"
+                }, 
+                "paired_unpaired|fastq_input2": {
+                    "id": 1, 
+                    "output_name": "output"
+                }
+            }, 
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Create assemblies with Unicycler", 
+                    "name": "lr_align"
+                }, 
+                {
+                    "description": "runtime parameter for tool Create assemblies with Unicycler", 
+                    "name": "paired_unpaired"
+                }, 
+                {
+                    "description": "runtime parameter for tool Create assemblies with Unicycler", 
+                    "name": "paired_unpaired"
+                }, 
+                {
+                    "description": "runtime parameter for tool Create assemblies with Unicycler", 
+                    "name": "rotation"
+                }, 
+                {
+                    "description": "runtime parameter for tool Create assemblies with Unicycler", 
+                    "name": "long_reads"
+                }
+            ], 
+            "label": null, 
+            "name": "Create assemblies with Unicycler", 
+            "outputs": [
+                {
+                    "name": "assembly_grapth", 
+                    "type": "txt"
+                }, 
+                {
+                    "name": "assembly", 
+                    "type": "fasta"
+                }
+            ], 
+            "position": {
+                "left": 725, 
+                "top": 609.982666015625
+            }, 
+            "post_job_actions": {}, 
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/unicycler/unicycler/0.2.0", 
+            "tool_shed_repository": {
+                "changeset_revision": "e9c1cdb9f9dc", 
+                "name": "unicycler", 
+                "owner": "iuc", 
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            }, 
+            "tool_state": "{\"__page__\": null, \"spades\": \"{\\\"min_kmer_frac\\\": \\\"\\\", \\\"max_kmer_frac\\\": \\\"\\\", \\\"kmer_count\\\": \\\"\\\"}\", \"graph_clean\": \"{\\\"min_dead_end_size\\\": \\\"\\\", \\\"min_component_size\\\": \\\"\\\"}\", \"uc_opt\": \"{\\\"no_correct\\\": \\\"false\\\", \\\"min_fasta_length\\\": \\\"\\\", \\\"mode\\\": \\\"normal\\\", \\\"no_pilon\\\": \\\"false\\\", \\\"no_rotate\\\": \\\"false\\\", \\\"lin_seq\\\": \\\"\\\"}\", \"__rerun_remap_job_id__\": null, \"lr_align\": \"{\\\"low_score\\\": \\\"\\\", \\\"scores\\\": \\\"\\\", \\\"contamination_fasta\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}}\", \"paired_unpaired\": \"{\\\"fastq_input2\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"__current_case__\\\": 0, \\\"fastq_input_selector\\\": \\\"paired\\\", \\\"fastq_input1\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}}\", \"__job_resource\": \"{\\\"__current_case__\\\": 0, \\\"__job_resource__select\\\": \\\"no\\\"}\", \"rotation\": \"{\\\"start_gene_id\\\": \\\"\\\", \\\"start_gene_cov\\\": \\\"\\\", \\\"start_genes\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}}\", \"chromInfo\": \"\\\"/galaxy-repl/localdata/chrom/?.len\\\"\", \"long_reads\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"pilon\": \"{\\\"min_polish_size\\\": \\\"\\\"}\"}", 
+            "tool_version": "0.2.0", 
+            "type": "tool", 
+            "uuid": "f469e49a-5729-4dbd-8f08-f5be3fca6191", 
+            "workflow_outputs": []
+        }, 
+        "6": {
+            "annotation": "", 
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/quast/quast/4.1.1", 
+            "errors": null, 
+            "id": 6, 
+            "input_connections": {
+                "files_0|input": {
+                    "id": 5, 
+                    "output_name": "assembly"
+                }
+            }, 
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Quast", 
+                    "name": "input_operon"
+                }, 
+                {
+                    "description": "runtime parameter for tool Quast", 
+                    "name": "annot"
+                }, 
+                {
+                    "description": "runtime parameter for tool Quast", 
+                    "name": "input_ref"
+                }
+            ], 
+            "label": null, 
+            "name": "Quast", 
+            "outputs": [
+                {
+                    "name": "quast_out", 
+                    "type": "txt"
+                }, 
+                {
+                    "name": "quast_tsv", 
+                    "type": "tsv"
+                }, 
+                {
+                    "name": "quast_tex", 
+                    "type": "tex"
+                }, 
+                {
+                    "name": "icarus", 
+                    "type": "html"
+                }, 
+                {
+                    "name": "report_html", 
+                    "type": "html"
+                }
+            ], 
+            "position": {
+                "left": 1145.9896240234375, 
+                "top": 200.0000114440918
+            }, 
+            "post_job_actions": {}, 
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/quast/quast/4.1.1", 
+            "tool_shed_repository": {
+                "changeset_revision": "2f581f956e1c", 
+                "name": "quast", 
+                "owner": "iuc", 
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            }, 
+            "tool_state": "{\"files\": \"[{\\\"type_file\\\": \\\"scaffold\\\", \\\"__index__\\\": 0, \\\"input\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}}]\", \"input_operon\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"__page__\": null, \"threshold_contig\": \"\\\"0,1000\\\"\", \"__rerun_remap_job_id__\": null, \"annot\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"input_size\": \"\\\"\\\"\", \"input_ref\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"chromInfo\": \"\\\"/galaxy-repl/localdata/chrom/?.len\\\"\", \"min_contig\": \"\\\"500\\\"\", \"gene_selection\": \"\\\"prokaryotes\\\"\"}", 
+            "tool_version": "4.1.1", 
+            "type": "tool", 
+            "uuid": "f20468eb-8292-4273-ac9e-b0d9c09b9e2e", 
+            "workflow_outputs": []
+        }, 
+        "7": {
+            "annotation": "", 
+            "content_id": "toolshed.g2.bx.psu.edu/repos/crs4/prokka/prokka/1.12.0", 
+            "errors": null, 
+            "id": 7, 
+            "input_connections": {
+                "input": {
+                    "id": 5, 
+                    "output_name": "assembly"
+                }
+            }, 
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Prokka", 
+                    "name": "input"
+                }, 
+                {
+                    "description": "runtime parameter for tool Prokka", 
+                    "name": "proteins"
+                }
+            ], 
+            "label": null, 
+            "name": "Prokka", 
+            "outputs": [
+                {
+                    "name": "out_gff", 
+                    "type": "gff"
+                }, 
+                {
+                    "name": "out_gbk", 
+                    "type": "txt"
+                }, 
+                {
+                    "name": "out_fna", 
+                    "type": "fasta"
+                }, 
+                {
+                    "name": "out_faa", 
+                    "type": "fasta"
+                }, 
+                {
+                    "name": "out_ffn", 
+                    "type": "fasta"
+                }, 
+                {
+                    "name": "out_sqn", 
+                    "type": "asn1"
+                }, 
+                {
+                    "name": "out_fsa", 
+                    "type": "fasta"
+                }, 
+                {
+                    "name": "out_tbl", 
+                    "type": "txt"
+                }, 
+                {
+                    "name": "out_err", 
+                    "type": "txt"
+                }, 
+                {
+                    "name": "out_txt", 
+                    "type": "txt"
+                }, 
+                {
+                    "name": "out_log", 
+                    "type": "txt"
+                }
+            ], 
+            "position": {
+                "left": 1100.9896240234375, 
+                "top": 555.0000305175781
+            }, 
+            "post_job_actions": {}, 
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/crs4/prokka/prokka/1.12.0", 
+            "tool_shed_repository": {
+                "changeset_revision": "a17498c603ec", 
+                "name": "prokka", 
+                "owner": "crs4", 
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            }, 
+            "tool_state": "{\"strain\": \"\\\"C\\\"\", \"increment\": \"\\\"10\\\"\", \"species\": \"\\\"Coli\\\"\", \"__page__\": null, \"usegenus\": \"\\\"true\\\"\", \"evalue\": \"\\\"1e-06\\\"\", \"compliant\": \"{\\\"mincontig\\\": \\\"200\\\", \\\"__current_case__\\\": 0, \\\"compliant_select\\\": \\\"no\\\", \\\"addgenes\\\": \\\"false\\\"}\", \"fast\": \"\\\"false\\\"\", \"__job_resource\": \"{\\\"__current_case__\\\": 0, \\\"__job_resource__select\\\": \\\"no\\\"}\", \"locustag\": \"\\\"PROKKA\\\"\", \"input\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"kingdom\": \"{\\\"gcode\\\": \\\"11\\\", \\\"kingdom_select\\\": \\\"Bacteria\\\", \\\"__current_case__\\\": 1}\", \"metagenome\": \"\\\"false\\\"\", \"centre\": \"\\\"\\\"\", \"outputs\": \"[\\\"gff\\\", \\\"gbk\\\", \\\"fna\\\", \\\"faa\\\", \\\"ffn\\\", \\\"sqn\\\", \\\"fsa\\\", \\\"tbl\\\", \\\"err\\\", \\\"txt\\\"]\", \"gffver\": \"\\\"3\\\"\", \"norrna\": \"\\\"false\\\"\", \"proteins\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"notrna\": \"\\\"false\\\"\", \"plasmid\": \"\\\"\\\"\", \"rfam\": \"\\\"false\\\"\", \"genus\": \"\\\"Escherichia\\\"\", \"chromInfo\": \"\\\"/galaxy-repl/localdata/chrom/?.len\\\"\", \"__rerun_remap_job_id__\": null}", 
+            "tool_version": "1.12.0", 
+            "type": "tool", 
+            "uuid": "9a6e8f35-351c-42c4-bbe0-9a9da64ae1a8", 
+            "workflow_outputs": []
+        }
+    }, 
+    "uuid": "47b74c44-e679-4b47-8cfa-552db9bddbd1"
+}

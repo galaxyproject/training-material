@@ -1,0 +1,216 @@
+---
+name: Small Genome assembly
+description: Perform a small bacterial genome Assembly and Annotation with Unicycler and Prokka
+title_default: "Small genome assembly"
+steps:
+  - title: "A tutorial on Small Genome Assembly"
+    content: "This tour will walk you through the process of genome assembly and annotation.<br><br>
+              Read and Follow the instructions before clicking 'Next'<br>
+              Click 'Prev' in case you missed out on any step.
+              You can also find the tutorial on Small genome assembly on our <a href=\"https://galaxyproject.github.io/training-material/\" > Galaxy Training Material."
+    backdrop: true
+
+  - title: "Create a new history"
+    element: '#history-options-button'
+    content: "Let's start by creating a new history:<br>
+            (History options :: Create New)"
+    position: "left"
+    preclick:
+      - '#center-panel'
+  - title: "Rename history"
+    element: "#current-history-panel > div.controls > div.title > div"
+    content: "Change the name of the new history to 'Genome Assembly', then hit return key."
+    position: "bottom"
+
+  - title: "Data Acquisition"
+    element: ".upload-button"
+    content: "We will import sequencing data into the history we just created.<br>
+            Click 'Next' and the tour will take you to the Upload screen"
+    position: "auto right "
+    postclick:
+      - ".upload-button"
+
+  - title: "Data Acquisition"
+    element: "#btn-new"
+    content: "We will use a downsampled dataset (for quick tutorial purpose) from the Ecoli C sequencing. We are using two library of matte pair reads from Illumina sequencing, and a long read library from Oxford Nanopore sequencing .<br>
+            Simple click 'Next' and the Interface to enter the urls will appear.<br>
+            Later on, when you want to upload other data, you can do so by clicking the 'Paste/Fetch Data' button"
+    position: "top"
+    postclick:
+      - "#btn-new"
+
+  - title: "Data Acquisition"
+    element: ".upload-text-content:first"
+    content: "Insert the url of the files."
+    position: "top"
+    textinsert: |
+      https://zenodo.org/record/940733/files/illumina_f.fq
+      https://zenodo.org/record/940733/files/illumina_r.fq
+      https://zenodo.org/record/940733/files/minion_2d.fq
+
+  - title: "Select File Type"
+    element: "#regular > div > div.upload-footer > span.upload-footer-extension"
+    content: "The tools used in this tutorial are taking fastqsanger as inputs. Select fastqsanger in the list to upload the file in that format"
+    position: "bottom"
+
+  - title: "Data Acquisition"
+    element: "button#btn-start"
+    content: "Click on 'Start' to upload the data into your Galaxy history."
+    position: "bottom"
+
+  - title: "Data Acquisition"
+    element: "button#btn-close"
+    content: "The upload may take awhile.<br>
+            Hit the close button when you see that the files are uploaded into your history."
+    position: "bottom"
+
+  - title: "Start the Analysis!"
+    content: "Let's start the analysis by assessing the quality of Illumina reads."
+    position: "center"
+
+  - title: "Search a Tool"
+    content: "Search for a tool to evaluate read quality: Type FastQC in the search field."
+    position: "auto right "
+    element: "#tool-search-query"
+
+  - title: "Run the tool on Multiple datasets"
+    content: "To run the analysis on several datasets, here our two Illumina libraries, click on the 'Multiple Datasets icon.'"
+    element: "#uid-24"
+
+  - title: "Select the tool inputs"
+    content: "Select all the datasets"
+    element: "#uid-24"
+
+  - title: "Run"
+    content: "Click Execute to run the tool"
+    element: "#execute"
+
+  - title: "Quality Control"
+    content: "Once FastQC is done running (green), you can visualize the Quality control result of each file by clicking on the eye icon of the Fastqc webpage output. For more information on the quality metrics of FastQC, see <a href=\"https://biof-edu.colorado.edu/videos/dowell-short-read-class/day-4/fastqc-manual\"> FastQC Manual."
+    position: "center"
+
+  - title: "Read Quality aggregation for mutiple file"
+    content: "For a better visualization of your read quality across several datasets, you can aggregate FastQC results with MultiQC tool."
+    position: "center"
+
+  - title: "Aggregata FastQC results"
+    content: "Now search for the MultiQc tool."
+    position: "center"
+    element: "#tool-search-query"
+
+  - title: "Select software for MultiQC aggregation."
+    content: "Select FastQC in the Software list."
+    position: "right"
+    element: "#uid-61"
+
+  - title: "Select files for MultiQC aggregation."
+    content: "Select <b>RawData</b> result files."
+    position: "right"
+    element: "#uid-71"
+
+  - title: "Run"
+    content: "Click Execute to run the tool"
+    element: "#execute"
+
+  - title: "Read Quality "
+    content: "You can now visualize the aggregated Quality control results on the MultiQC webpage output. You can notice that Illumina reads have much shorter reads the ONT reads, giving a strange looking graph. You can zoom in to better visualize the short reads quality."
+    position: "left"
+
+  - title: "Read Quality "
+    content: "You can also notice that the ONT reads have a much poorer quality which is generally the case with long read technologies and is not very meaningful, whereas it really means a lot for Illumina Data. In that case, we can see the mean quality score is good across all reads."
+    position: "left"
+
+  - title: "Let's run the assembly!"
+    content: "Now search for the Unicycler tool, which will allow us to perform an hybrid assembly."
+    position: "center"
+    element: "#tool-search-query"
+
+  - title: "Type of Data"
+    content: "Select the type of data for your single reads. For this tour we are using Paired end reads."
+    position: "auto right "
+    element: "#uid-85"
+
+  - title: "Select your short read datasets"
+    content: "Select the datasets containing your short read data : R1 for the forward reads, R2 for the reverse reads"
+    position: "auto right "
+    element: "#uid-87"
+
+  - title: "Select your long read dataset"
+    content: "Select the datasets containing your long read data"
+    position: "auto right "
+    element: "#uid-93"
+
+  - title: "Run"
+    content: "Click Execute to run the tool"
+    position: "auto right "
+
+  - title: "Wait for the assembly to run"
+    content: "The assembly may take a couple hours to run, in the meantime, you can visit our wonderful <a href=\"https://galaxyproject.github.io/training-material/\" > Galaxy Training Material and continue your tour when the analysis is finished. "
+    position: "center"
+
+  - title: "Assess the quality of the assembly!"
+    content: "Now search for the Quast tool, that will provide metrics about the assembly quality."
+    position: "center"
+    element: "#tool-search-query"
+
+  - title: "Select the assembly datasets"
+    content: "Select the fasta file output of Unicycler"
+    position: "auto right "
+    element: "#select2-drop"
+
+  - title: "Run"
+    content: "Click Execute to run the tool"
+    position: "auto right "
+    element: "#execute"
+
+  - title: "Assembly Quality"
+    content: "You can now visualize Quast result by clicking on the eye icon of the html output. We can notice that our assembly produces two contigs, one large (4.5Mb) and one small (5kb). These contigs correspond to E. coli C genome and bacterophage phiX174 genome often used in Illumina sequencing. For more information on the Quast output, see <a href=\"http://quast.bioinf.spbau.ru/manual.html#sec3\"> Quast Manual. "
+    position: "center"
+
+
+  - title: "Annotate your genome with Prokka"
+    content: "Now search for the Prokka tool, that will allow us to perform the annotation."
+    position: "center"
+    element: "#tool-search-query"
+
+  - title: "Select the contigs datasets"
+    content: "Select the fasta file output of Unicycler"
+    position: "auto right "
+
+  - title: "Enter the Genus Name"
+    content: "Enter the genus of your organisme, here Escherichia"
+    position: "auto right "
+
+  - title: "Enter the species Name"
+    content: "Enter the species of your organisme, here Coli"
+    position: "auto right "
+
+  - title: "Enter the Strain Name"
+    content: "Enter the species of your organisme, here C"
+    position: "auto right "
+
+  - title: "Select the usegenus option"
+    content: "Click on the yes button to activate the --usegenus option"
+    position: "auto right "
+
+  - title: "Run"
+    content: "Click Execute to run the tool"
+    position: "auto right "
+    element: "#execute"
+
+  - title: "Visualise Your result in IGV"
+    content: "To visualize the result of your genome assembly and annotation, you need to have IGV installed on you local machine and opened. You can find IGV <a href=\"http://software.broadinstitute.org/software/igv/\">here."
+    position: "center"
+
+  - title: "Send your genome assembly to IGV"
+    content: "To send the genome assembly to IGV, unfold the fasta assembly dataset in the history, and click on the \"display with IGV local\" link."
+    position: "center"
+
+  - title: "Send your genome annotation to IGV"
+    content: "You can now open the genome annotation. As you did previously, unfold the dataset and click on the \"display with IGV local\" link."
+    position: "center"
+
+  - title: "Thank you!"
+    content: "Thank you for following us on this Genome Assembly tour! You can find more information on genome assembly on our <a href=\"https://galaxyproject.github.io/training-material/\" > Galaxy Training Material."
+    position: "center"
+    backdrop: true

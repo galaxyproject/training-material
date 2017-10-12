@@ -1,0 +1,400 @@
+﻿id: peptide-protein-id
+name: Peptide and Protein ID
+description: >-
+  Identifying the proteins contained in a sample is an important step in any
+  proteomic experiment. However, in most settings, proteins are digested to
+  peptides before the LC-MS/MS analysis, which will be done in this tour.
+title_default: peptide-protein-id
+steps:
+  - title: Introduction
+    content: >-
+      Identifying the proteins contained in a sample is an important step in any
+      proteomic experiment. However, in most settings, proteins are digested to
+      peptides before the LC-MS/MS analysis, which will be done in this tour.
+    backdrop: true
+  - title: Introduction
+    content: >-
+      In this so-called “bottom-up” procedure, only peptide masses are measured.
+      Therefore, protein identification cannot be performed directly from raw
+      data, but is a multi-step process:
+
+      <ul>
+        <li>Raw data preparations</li>
+        <li>Peptide-to-Spectrum matching</li>
+        <li>Peptide inference</li>
+        <li>Protein inference</li>
+      </ul>
+
+      A plethora of different software solutions exists for each step. In this
+      tutorial, we will show how to use <b>msconvert</b>  and
+      <b>PeakPickerHiRes</b> :wrench: for step 1, <b>Search GUI</b> and
+      <b>Peptide Shaker</b> :wrench: for the steps 2-4.
+    backdrop: true
+  - title: Input data
+    content: >-
+      As an example dataset, we will use an LC-MS/MS analysis of HeLa cell
+      lysate published in <a
+      href="https://www.ncbi.nlm.nih.gov/pubmed/24678044">Vaudel et al., 2014,
+      Proteomics</a>. Detailed information about the dataset can be found on <a
+      href="https://www.ebi.ac.uk/pride/archive/projects/PXD000674">PRIDE</a>.
+      For step 2 we will use a validated human Uniprot FASTA database without
+      appended decoys. If you already completed the tutorial on <a
+      href="https://galaxyproject.github.io/training-material/topics/proteomics/tutorials/database-handling/tutorial.html">Database
+      Handling</a> you can use the constructed database before the
+      <b>DecoyDatabase</b>  step. You can find a prepared database, as well as
+      the input proteomics data in different file formats on <a
+      href="https://zenodo.org/record/546301">Zenodo</a>.
+    backdrop: true
+  - title: History options
+    element: '#history-options-button'
+    content: >-
+      We will start the analyses by creating a new history. Click on this button
+      and then "Create New"
+    placement: left
+  - title: Preparing raw data
+    content: >-
+      Raw data conversion is the first step of any proteomic data analysis. The
+      most common converter is MSConvert, the format to convert to is mzML.
+      Search GUI takes only mgf format as input, but as we need the mzML format
+      for several other tasks, we will convert to mzML first.
+    backdrop: true
+  - title: Preparing raw data
+    content: >-
+      This part of the Hands-On section is optional, because it cannot be
+      performed on most GalaxyP instances due to licensing reasons. Therefore,
+      we provide the <a href="https://zenodo.org/record/546301">input data</a>
+      also already converted to <b>.mgf</b> and <b>.mzML</b> file formats. If
+      you choose to omit this part of the Hands-On section, please download the
+      file “qExactive01819_profile.mzml” from <a
+      href="https://zenodo.org/record/546301/files/qExactive01819_profile.mzml">Zenodo</a>.
+    backdrop: true
+  - title: Uploading the new data
+    element: '#tool-panel-upload-button .fa.fa-upload'
+    content: We need to upload data. Open the Galaxy Upload Manager
+    placement: right
+    postclick:
+      - '#tool-panel-upload-button .fa.fa-upload'
+      - '#btn-reset'
+  - title: Uploading the input data
+    element: '#btn-new'
+    content: Click on Paste/Fetch Data
+    placement: right
+    postclick:
+      - '#btn-new'
+  - title: Uploading the input data
+    element: .upload-text-column .upload-text .upload-text-content.form-control
+    content: >-
+      Insert the link here.<br> The input is available on
+      ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2014/01/PXD000674/qExactive01819.raw.
+    placement: right
+    textinsert: >-
+      ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2014/01/PXD000674/qExactive01819.raw
+  - title: Uploading the input data
+    element: '#btn-start'
+    content: Click on "Start" to start loading the data to history
+    placement: right
+    postclick:
+      - '#btn-start'
+  - title: Uploading the input data
+    element: '#btn-close'
+    content: >-
+      The upload may take a while.<br> Hit the close button to close this
+      window.
+    placement: right
+    postclick:
+      - '#btn-close'
+  - title: Rename the input data
+    element: '.history-right-panel .list-items > *:first'
+    content: >-
+      The uploaded datasets is in the history, but its names corresponds to the
+      link. We want to rename them it to Test data<br><br> <ul>
+        <li>Click on the pencil icon beside the file to "Edit Attributes"</li>
+        <li>Change the name in "Name" to get only the name of the sample</li>
+      </ul>
+    position: left
+  - title: Preparing raw data
+    element: '#tool-search-query'
+    content: Search for msconvert tool to convert to mzML format
+    placement: right
+    textinsert: msconvert
+  - title: Local Use of MSConvert
+    content: >-
+      The vendor libraries used by MSConvert need a Windows system and is
+      therefore rarely implemented in Galaxy instances. If <b>msconvert</b>  is
+      not available in your Galaxy instance, please install the software on a
+      Windows computer and run the conversion locally. You can find a detailed
+      description of the necessary steps <a
+      href="http://genesis.ugent.be/files/costore/practicals/bioinformatics-for-proteomics/1-Peptide-and-Protein-Identification/1.2-Peak-List-Generation/1.2-Peak-List-Generation.pdf">here</a>.
+      Afterwards, upload the resulting mzML file to your Galaxy history.
+    backdrop: false
+  - title: Preparing raw data
+    element: '#tool-search'
+    content: Click on the "msconvert" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fgalaxyp%2Fmsconvert_nix%2Fmsconvert_nix%2F3.0.9992.0"]
+  - title: Preparing raw data
+    element: '#tool-search'
+    content: Execute the tool on the input data with default settings.
+    position: left
+  - title: Preparing raw data
+    element: '#tool-search-query'
+    content: Search for PeakPickerHiRes tool
+    placement: right
+    textinsert: PeakPickerHiRes
+  - title: Preparing raw data
+    element: '#tool-search'
+    content: Click on the "PeakPickerHiRes" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fgalaxyp%2Fopenms_peakpickerhires%2FPeakPickerHiRes%2F2.2.0"]
+  - title: Preparing raw data
+    element: '#tool-search'
+    content: Execute the tool on the input data with default settings.
+    position: left
+  - title: Peak Picking
+    content: >-
+      Depending on your machine settings, raw data will be generated either in
+      profile mode or centroid mode. For most peptide search engines, the data
+      have to be converted to centroid mode, a process called “peak picking”.
+      Machine vendors offer algorithms to extract peaks from profile raw data.
+      This is implemented in <b>msconvert</b>  and can be run in parallel to the
+      mzML conversion. However, the OpenMS tool <b>PeakPickerHiRes</b> :wrench:
+      is reported to generate better results (<a
+      href="https://www.ncbi.nlm.nih.gov/pubmed/17094243">Lange et al., 2006,
+      Pac Symp Biocomput</a>) and is therefore recommended for quantitative
+      studies (<a href="https://www.ncbi.nlm.nih.gov/pubmed/19953549">Vaudel et
+      al., 2010, Proteomics</a>). If your data were generated on a low
+      resolution mass spectrometer, use <b>PeakPickerWavelet</b> instead.
+    backdrop: false
+  - title: Preparing raw data
+    element: '#tool-search-query'
+    content: Search for FileConverter tool
+    placement: right
+    textinsert: FileConverter
+  - title: Preparing raw data
+    element: '#tool-search'
+    content: Click on the "FileConverter" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fgalaxyp%2Fopenms_fileconverter%2FFileConverter%2F2.2.0"]
+  - title: Preparing raw data
+    element: '#tool-search'
+    content: Execute the tool on the picked mzML, in order to convert to mgf format set the desired output in Advanced options section.
+    position: left
+  - title: Change the datatype
+    element: '.history-right-panel .list-items > *:first'
+    content: |-
+      Click on the pencil icon beside the file to "Edit Attributes".
+      Go to "Datatype" tab and adjust it.
+    position: left
+  - title: Peptide and Protein Identification
+    content: >-
+      MS/MS experiments identify peptides by isolating them and subsequently
+      colliding them with a gas for fragmentation. This method generates a
+      spectrum of peptide fragment masses for each isolated peptide - an MS2
+      spectrum. To find out the peptide sequences, the MS2 spectrum is compared
+      to a theoretical spectrum generated from a protein database. This step is
+      called peptide-to-spectrum (also: spectrum-to-sequence) matching.
+      Accordingly, a peptide that is successfully matched to a sequence is
+      termed PSM (Peptide-Spectrum-Match). There can be multiple PSMs per
+      peptide, if the peptide was fragmented several times. Different peptide
+      search engines have been developed to fulfill the matching procedure.
+
+      <br><br>It is generally recommended to use more than one peptide search
+      engine and use the combined results for the final peptide inference (<a
+      href="https://www.ncbi.nlm.nih.gov/pubmed/23720762>Shteynberg et al.,
+      2013, Mol. Cell. Proteomics</a>). Again, there are several software
+      solutions for this, e.g. iProphet (TPP) or ConsensusID (OpenMS). In this
+      tutorial we will use <b>Search GUI</b>, as it can automatically search the
+      data using several search engines. Its partner tool <b>Peptide Shaker</b>
+      :wrench: is then used to combine and evaluate the search engine results.
+
+      <br><br>In bottom-up proteomics, it is necessary to combine the identified
+      peptides to proteins. This is not a trivial task, as proteins are
+      redundant to some degree. Thus, not every peptide can be assigned to only
+      one protein. Luckily, the <b>Peptide Shaker</b>  already takes care of
+      protein inference and even gives us some information on validity of the
+      protein IDs. We will discuss validation in a <a
+      href="https://galaxyproject.github.io/training-material/topics/proteomics/tutorials/protein-id-sg-ps/tutorial.html#evaluation-of-peptide-and-protein-ids">later
+      step</a> of this tutorial.
+    backdrop: true
+  - title: Peptide and Protein Identification
+    element: '#history-options-button'
+    content: >-
+      Copy the prepared protein database from the tutorial “Database handling”
+      into your current history by using the multiple history view or upload the
+      ready-made database from this <a
+      href="https://galaxyproject.github.io/training-material/topics/proteomics/tutorials/protein-id-sg-ps/tutorial.html">link</a>.
+    placement: left
+  - title: Peptide and Protein Identification
+    element: '#tool-search-query'
+    content: >-
+      Look for Search GUI tool to search the mgf file against the protein
+      database.
+    placement: right
+    textinsert: Search GUI
+  - title: Peptide and Protein Identification
+    element: '#tool-search'
+    content: Click on the "Search GUI" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fgalaxyp%2Fpeptideshaker%2Fsearch_gui%2F3.2.13"]
+  - title: Peptide and Protein Identification
+    element: '#tool-search'
+    content: >-
+      Execute the tool with <ul> <li>Select the <b>DB-Search Engines
+      X!Tandem</b> and <b>MS-GF+</b></li> <li>Add the <b>Fixed Modifications
+      Carbamidomethylation of C</b></li> <li><b>Variable Modifications Oxidation
+      of M</b></li> </ul>
+    position: left
+  - title: Peptide and Protein Identification
+    element: '#tool-search-query'
+    content: Look for Peptide Shaker tool
+    placement: right
+    textinsert: Peptide Shaker
+  - title: Peptide and Protein Identification
+    element: '#tool-search'
+    content: Click on the "Peptide Shaker" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fgalaxyp%2Fpeptideshaker%2Fpeptide_shaker%2F1.16.4"]
+  - title: Peptide and Protein Identification
+    element: '#tool-search'
+    content: >-
+      Enable the following and execute the tool on the <i>Search GUI</i> output
+      <ul> <li>Zip File for import to Desktop App, mzidentML File, PSM Report,
+      Peptide Report, Protein Report</li> </ul>
+    position: left
+  - title: Questions
+    content: |-
+      <ul>
+        <li>How many peptides were identified? How many proteins?</li>
+        <li>How many peptides with oxidized methionine were identified?</li>
+      </ul>
+    backdrop: false
+  - title: Important Search GUI Parameters 1/3
+    content: >-
+      Search GUI bundles numerous sequence database search software tools for
+      matching MS/MS to peptide sequences within a database. Describing the
+      parameters for all of these programs is beyond the scope of this tutorial,
+      but some of the key parameters for this software are described below:
+
+      <ul>
+        <li><b>Database search programs.</b> A number of popular sequence database searching programs are available, and can be selected by the user. The more selected, the more processor time is necessary; however, matching MS/MS spectra to peptide sequence with more programs provides more confidence in results. In practice, 2-3 programs used offers high confidence while keeping analysis times reasonable.</li>
+      </ul>
+    backdrop: true
+  - title: Important Search GUI Parameters 2/3
+    content: |-
+      <ul>
+        <li><b>Data quality parameters.</b> Values that reflect the performance of the instrument used can be entered. These include mass accuracy measures for both precursor ions and the resulting MS/MS fragment ions. For the workflow provided here, these have been set with default values for high resolution Orbitrap mass spectrometer instrumentation.</li>
+        <li><b>Enzyme cleavage.</b> Although almost all proteomic samples are digested to peptides by trypsin, some other enzymes are used occasionally. Enzymes do not cut at 100 % of the possible cleavage sites, so you might want to allow searching for peptides where a few cleavage sites were missed.</li>
+      </ul>
+    backdrop: true
+  - title: Important Search GUI Parameters 3/3
+    content: |-
+      <ul>
+        <li><b>Covalent modifications.</b> A variety of covalent modifications are built in to the Search GUI parameters. Typing the modification into the field (e.g. “oxidation”) brings up the available modifications of that type to specific side chains or the n- or c-terminus of the protein and/or peptide.</li>
+      </ul>
+    backdrop: true
+  - title: Important Peptide Shaker Parameters 1/2
+    content: >-
+      The Galaxy implementation of Peptide Shaker is fairly simple in terms of
+      parameters available to the user:
+
+      <ul>
+        <li><b>Processing and filtering options.</b> If desired, users can select “Advanced” processing or filtering options. The processing options allow a customized level of false discovery rate (FDR) to be set for peptide and protein identifications, while the filtering options offer selection of length of peptides to be considered, and thresholds for mass accuracy. The default, validated values for processing and filtering are set in stored workflows, and follow community standards (e.g. 1% FDR levels, etc.).</li>
+      </ul>
+    backdrop: true
+  - title: Important Peptide Shaker Parameters 2/2
+    content: |-
+      <ul>
+        <li><b>Outputs</b>Peptide Shaker offers a variety of outputs which a user can select. A compressed file (.zip) can be made containing all information needed to view the results in the standalone Peptide Shaker viewer; a peptide spectrum match (PSM) report file, which provides all relevant information on all peptide sequences matched to MS/MS spectra in the analysis; a mzidentML file can be created that contains all peptide sequence matching information and can be utilized by compatible downstream software. Other outputs are focused on the inferred proteins identified from the PSMs, as well as phosphorylation reports, relevant in a phosphoprotoemics experiment has been undertaken. The Certificate of Analysis provides details on all the parameters used by both Search GUI and Peptide Shaker in the analysis. All outputs can be downloaded from the Galaxy instance to the local computer if desired.</li>
+      </ul>
+    backdrop: true
+  - title: Analysis of Contaminants
+    content: >-
+      The FASTA database used for the peptide to spectrum matching contained
+      some entries that were not expected to stem from the HeLa cell lysate, but
+      are common contaminations in LC-MS/MS samples. The main reason to add
+      those is to avoid false assignment of the spectra to other proteins.
+      However, it also enables you to check for contaminations in your samples.
+      <b>CAVE:</b> in human samples, many proteins that are common contaminants
+      may also stem from the real sample. The real source can never be
+      determined for sure.
+    backdrop: true
+  - title: Analysis of Contaminants
+    element: '#tool-search-query'
+    content: Look for Select tool
+    placement: right
+    textinsert: Select
+  - title: Analysis of Contaminants
+    element: '#tool-search'
+    content: Click on the "Select" tool to open it
+    placement: right
+    postclick:
+      - 'a[href$="/tool_runner?tool_id=Grep1"]'
+  - title: Analysis of Contaminants
+    element: '#tool-search'
+    content: >-
+      Execute the tool on the Peptide Shaker Report output, <ul> <li>you want to
+      select all lines that do <i>not</i> match the pattern
+      <b>“CONTAMINANT”</b></li> </ul>
+    position: left
+  - title: Questions
+    content: |-
+      <ul>
+        <li>Which contaminants did you identify? Where do these contaminations come from?</li>
+        <li>What other sources of contaminants exist?</li>
+        <li>How many mycoplasma proteins did you identify? Does this mean that the analyzed HeLa cells were infected with mycoplasma?</li>
+      </ul>
+    backdrop: false
+  - title: Evaluation of Peptide and Protein IDs
+    content: >-
+      <b>Peptide Shaker</b> provides you with validation results for the
+      identified PSM, peptides and proteins. It classifies all these IDs in the
+      categories “Confident” or “Doubtful”. On each level, the meaning of these
+      terms differs to some extent: <ul>
+        <li><b>PSMs</b> are marked as “Doubtful” when the measured MS2 spectrum did not fit well to the theoretical spectrum.</li>
+        <li><b>Peptides</b> have a combined scoring of their PSMs. They are marked as “Doubtful”, when the score is below a set threshold. The threshold is defined by the false discovery rate (FDR).</li>
+        <li><b>Proteins</b> are marked as “Doubtful”, when they were identified by only a single peptide or when they were identified solely by “Doubtful” peptides.</li>
+      </ul>
+    backdrop: true
+  - title: Evaluation of Peptide and Protein IDs
+    element: '#tool-search-query'
+    content: Look for Select tool
+    placement: right
+    textinsert: Select
+  - title: Evaluation of Peptide and Protein IDs
+    element: '#tool-search'
+    content: Click on the "Select" tool to open it
+    placement: right
+    postclick:
+      - 'a[href$="/tool_runner?tool_id=Grep1"]'
+  - title: Evaluation of Peptide and Protein IDs
+    element: '#tool-search'
+    content: >-
+      Execute the tool on the Peptide Shaker Report output, <ul> <li>you want to
+      select all lines that do <i>not</i> match the pattern
+      <b>“Doubtful”</b></li> </ul>
+    position: left
+  - title: Questions
+    content: |-
+      <ul>
+        <li>How to exclude mycoplasma proteins?</li>
+        <li>How many “Confident” non-contaminant proteins were identified?</li>
+      </ul>
+    backdrop: false
+  - title: Key points
+    content: |-
+      <ul>
+        <li>LC-MS/MS raw files have to be converted before using GalaxyP on most GalaxyP servers.</li>
+        <li>SearchGUI can be used for running several peptide search engines at once.</li>
+        <li>PeptideShaker can be used to combine and evaluate the results, and to perform protein inference.</li>
+      </ul>
+    backdrop: true
