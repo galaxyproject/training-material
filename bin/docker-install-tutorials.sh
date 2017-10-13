@@ -11,7 +11,7 @@ startup_lite
 galaxy-wait -g $galaxy_instance
 
 # run tutorial install as user galaxy
-su - galaxy
+su - $GALAXY_USER
 
 # install other tutorial materials
 for dir in /tutorials/*
