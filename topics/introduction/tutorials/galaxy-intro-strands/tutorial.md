@@ -4,7 +4,7 @@ topic_name: introduction
 tutorial_name: galaxy-intro-strands
 ---
 
-# Introduction to Galaxy 
+# Introduction to Galaxy
 {:.no_toc}
 
 This practical aims to familiarize you with the Galaxy user interface. It will teach you how to perform basic tasks such as importing data, running tools, working with histories, creating workflows, and sharing your work.
@@ -30,7 +30,7 @@ This practical teaches the same basic content as [Galaxy 101](/topics/introducti
 >
 > To run this practical you will need
 >
-> 1. An internet-connected computer.  Galaxy can run on your laptop without an internet connection, but this practical requires access to resources on the web. 
+> 1. An internet-connected computer.  Galaxy can run on your laptop without an internet connection, but this practical requires access to resources on the web.
 > 1. A web browser. Firefox and Google Chrome work well, as does Safari.  Internet Explorer is known to have issues with Galaxy so avoid using that.
 > 1. Access to a Galaxy instance.  Galaxy is available in many ways. If you are doing this practical as part of a workshop, the instructor will tell you which instance to use. If you are doing this on your own, you can use [usegalaxy.org](https://usegalaxy.org).
 {: .comment}
@@ -45,7 +45,7 @@ To explore this question we need a basic understanding of *genomes, chromosomes,
 > ### {% icon comment %} Definitions 1
 >
 > * **Genome**
->> The genome is the collection of all DNA native to an organism. For humans, the genome is all of a person's chromosomes. 
+>> The genome is the collection of all DNA native to an organism. For humans, the genome is all of a person's chromosomes.
 >
 > * **Chromosome**
 >> The largest unit of DNA organization in an organism.  Humans have two copies of 23 chromosomes.  Chromosomes are *linear* in humans, and all animals and plants.  (Bacteria have *circular* chromosomes.)
@@ -104,7 +104,7 @@ The Galaxy interface consists of three main parts. The available tools are liste
 
 There are [many ways to get data into a Galaxy instance](/topics/introduction/tutorials/galaxy-intro-get-data/slides.html). We are going to use the **Get Data** toolbox in the **Tools** panel on the left.
 
-> ### {% icon hands_on %} Open **Get Data** toolbox
+> ### {% icon hands_on %} Hands-on: Open **Get Data** toolbox
 >
 >  ![The Get Data toolbox](../../images/101_01.png)  *Click* on the **Get Data** toolbox to expand it.
 {: .hands_on}
@@ -113,7 +113,7 @@ The **Get Data** toolbox contains a list of data sources that are available on t
 
 ### Get exons
 
-> ### {% icon hands_on %} Go to UCSC
+> ### {% icon hands_on %} Hands-on: Go to UCSC
 >
 > ![Click on UCSC Main table browser](../../images/101_01.png) *Click* on **UCSC Main table browser** to go to UCSC.
 {: .hands_on}
@@ -149,18 +149,18 @@ Time for a few more definitions.
 >> A genome's sequence describes the DNA in that genome, down to the A, C, T, and G (single nucleotide) level including the exact location where each is.  Given a reference genome, you can ask questions like, "What's the DNA on chromosome 2 between positions 1,678,901 and 1.688,322?"
 >
 > * **Genome/Gene annotation**
->> The sequence tells us what DNA is where, but it doesn't tell us anything about the function of that DNA.  *Annotation* is additional information about particular regions of the genome like where genes, repeats, promotors, and centromeres are, or how active a particular gene is. 
+>> The sequence tells us what DNA is where, but it doesn't tell us anything about the function of that DNA.  *Annotation* is additional information about particular regions of the genome like where genes, repeats, promotors, and centromeres are, or how active a particular gene is.
 {: .comment}
 
-The **track** option asks us which set of annotations do we want to get?  There are so many choices because annotation is the result of analysis and interpretation, and there are many ways to do this. (And in this case, many of the options aren't even genes or gene predictions.) 
+The **track** option asks us which set of annotations do we want to get?  There are so many choices because annotation is the result of analysis and interpretation, and there are many ways to do this. (And in this case, many of the options aren't even genes or gene predictions.)
 
 GENCODE is "high-quality" and  "gene annotation." That sounds like a good thing to use.  Lets stay with the default: `GENCODE V24`.
 
 So far we haven't changed *anything* from the defaults.  Lets change something.  The default  **region** is the whole genome, which can be done, but it's a lot of information. For this exercise lets use just one (small) chromosome.
 
-> ### {% icon hands_on %} Limit the region and get the data.
+> ### {% icon hands_on %} Hands-on: Limit the region and get the data.
 >
-> * Say that we just want chromosome 22 
+> * Say that we just want chromosome 22
 >   * For **region** select `position`.
 >   * In the text box next to `position` enter `chr22` (case matters).
 >
@@ -177,7 +177,7 @@ This returns us to Galaxy, first displaying a big green box (that's good!) and t
 
 > ### {% icon comment %} UCSC Genome Browser
 >
-> If you aren't yet familiar with the [UCSC Genome Browser](https://genome.ucsc.edu/cgi-bin/hgGateway), then it's worth spending some time learning how to use it.  *Genome browsers* are software for viewing genomic information graphically.  The UCSC Genome Browser (and most genome browsers) typically display different types of *annotation* about a region of a genome.  This is displayed as a stack of *tracks* and each track contains a different type of information. 
+> If you aren't yet familiar with the [UCSC Genome Browser](https://genome.ucsc.edu/cgi-bin/hgGateway), then it's worth spending some time learning how to use it.  *Genome browsers* are software for viewing genomic information graphically.  The UCSC Genome Browser (and most genome browsers) typically display different types of *annotation* about a region of a genome.  This is displayed as a stack of *tracks* and each track contains a different type of information.
 >
 > Genome browsers are useful for seeing information in context and for seeing (and discovering) correlations between different types of information.
 >
@@ -200,7 +200,7 @@ See the *Galaxy History Item Status* practical for more. [TODO]
 
 ## Examine the data
 
-> ### {% icon hands_on %} Look at the data.
+> ### {% icon hands_on %} Hands-on: Look at the data.
 > Once the dataset is green, *click* on the dataset name (something like **UCSC Main on Human...**)
 {: .hands_on}
 
@@ -216,7 +216,7 @@ This expands the dataset and shows you information about it, and a preview of it
 
 The dataset preview is informative, but you can't see much of the actual dataset.  Lets use one of the dataset icons to see the whole dataset
 
-> ### {% icon hands_on %} Look at all the data.
+> ### {% icon hands_on %} Hands-on: Look at all the data.
 > *Click* on the **eye icon** to view the contents of the dataset.
 {: .hands_on}
 
@@ -249,12 +249,12 @@ Galaxy allow you to name your analyses (your histories) and your datasets.  We o
 
 You don't have to do this.  Galaxy is quite happy for you to have an infinite number of "Unnamed history" histories, and to have all your datasets be obscurely named.  However, once you've run your first 5 unnamed analyses, all with obscurely named datasets, you'll might wish you would have named everything.
 
-> ### {% icon hands_on %} Name your stuff
-> 
+> ### {% icon hands_on %} Hands-on: Name your stuff
+>
 > 1. **Name your history** to be meaningful and easy to find.
 >    - *Click* on the title of the history and enter something like **Intro - Strands** as the name.  Hit the `enter` key on your keyboard to save it.
 >   ![Rename the history](../../../../shared/images/rename_history.png)
-> 1. **Rename your dataset** 
+> 1. **Rename your dataset**
 >    - *Click* on the **pencil icon** to edit the dataset attributes.
 >    - In the next screen change the name of the dataset to something like `Genes` or `Genes chr22`.
 >    - *Click* the **Save** button at the bottom of the screen.
@@ -288,7 +288,7 @@ If you haven't already searched with it, enter `split` in the search box.  Near 
 
 That might work.
 
-> ### {% icon hands_on %} Open the Filter tool
+> ### {% icon hands_on %} Hands-on: Open the Filter tool
 > * *Click* on **Filter** to open the Filter tool in the middle panel.
 > * Take a look at the **Syntax** and **Example** sections to understand what the tool does.
 {: .hands_on}
@@ -301,8 +301,8 @@ The tool form for Filter looks like
 
 (You may have noticed during your search for tools that *all* tools have a similar look and feel.)
 
-> ### {% icon hands_on %} Run the Filter tool to get genes on the forwrd strand.
-> 
+> ### {% icon hands_on %} Hands-on: Run the Filter tool to get genes on the forwrd strand.
+>
 > The filter tool has 3 fields:
 >
 > 1. **Dataset**: This pulldown will list any dataset from your history that this tool can work on.  In your case that's probably only one dataset.  Make sure this is set to your `Genes` dataset.
@@ -317,8 +317,8 @@ This adds another dataset to your history.  This one should contain only genes o
 
 Now we want to get the genes on the reverse strand.  There are actually many ways to get this.  Here are two of them.
 
-> ### {% icon hands_on %} Get genes on the reverse strand
-> 
+> ### {% icon hands_on %} Hands-on: Get genes on the reverse strand
+>
 > **Method 1**
 >
 > 1. Open the dataset preview by *clicking* on the name of the `Genes, forward strand` dataset.  This show a different set of icons than the uploaded `Genes` dataset did.
@@ -343,8 +343,8 @@ The rerun button can be a huge help as you run more complex tools.
 > Try again and set the dataset to your `Genes` dataset.
 {: .tip}
 
-> ### {% icon hands_on %}
-> * *Rename* your new dataset to something like `Genes, reverse strand` 
+> ### {% icon hands_on %} Hands-on: Rename Dataset
+> * *Rename* your new dataset to something like `Genes, reverse strand`
 {: .hands_on}
 
 Your history should now have (at least) 3 datasets in it, with names something like:
@@ -367,7 +367,7 @@ Genes are an example of a *genomic interval*.
 
 Galaxy excels at answering questions about genomic intervals and different sets of genomic intervals relate to each other.  Lets take a look.
 
-> ### {% icon hands_on %} Genomic Interval Tools
+> ### {% icon hands_on %} Hands-on: Genomic Interval Tools
 >
 > * In the tool panel, *open* the **Operate on Genomic Intervals** toolbox.  It's typically past the **NGS** toolboxes.
 > * *Explore* the tools in this toolbox, looking for something that we can use to see which genes on opposite strands overlap.
@@ -375,7 +375,7 @@ Galaxy excels at answering questions about genomic intervals and different sets 
 
 Of the tools in the **Operate on Genomic Intervals** toolbox, **Join** and particularly **Intersect** have the most promise.  Let's try **Intersect**.
 
-> ### {% icon hands_on %} Genomic Interval Tools
+> ### {% icon hands_on %} Hands-on: Genomic Interval Tools
 >
 > * Run the **Intersect** tool
 >   * In the tool panel, *click* **Intersect** in the **Operate on Genomic Intervals** toolbox.
@@ -417,4 +417,4 @@ Another challenge with spreadsheet programs is that they don't scale to support 
 # Conclusion
 {: .no_toc}
 
-:tada: Well done! :clap: You have just performed your first analysis in Galaxy. 
+:tada: Well done! :clap: You have just performed your first analysis in Galaxy.
