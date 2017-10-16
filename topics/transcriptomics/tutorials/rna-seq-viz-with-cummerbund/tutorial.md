@@ -73,17 +73,18 @@ For this tutorial, we are interested in CuffDiff's tested transcripts for differ
 
 > ### {% icon hands_on %} Hands-on: Extract CuffDiff results
 >
-> 1. **Extract CuffDiff** {% icon tool %}: Lookup for this tool in the search bar, and select it
-> 2. Click on "Select tables to output", and select only the table called "Transcript differential expression testing"
-> 3. Click execute. Extract CuffDiff will extract the selected table
-> 4. Inspect the table
+> 1. **Extract CuffDiff** {% icon tool %} with the following parameters
+>   - "Select tables to output" to `Transcript differential expression testing`
+>
+> 2. Inspect the table
 >
 >    > ### {% icon tip %} Tip: Inspecting the content of a file in Galaxy
 >    >
 >    > * Click on the eye ("View data") on the right of the file name in the history
 >    > * Inspect the content of the file on the middle
 >    {: .tip}
-> 5. Each entry represents a differentially expressed gene, but not all are significant. We want to keep only those that are reported as significant differentially expressed. 
+>
+> Each entry represents a differentially expressed gene, but not all are significant. We want to keep only those that are reported as significant differentially expressed.
 >
 >    > ### {% icon question %} Questions
 >    >
@@ -106,8 +107,9 @@ We now want to first highlight the most significant differentially expressed gen
 
 > ### {% icon hands_on %} Hands-on: Extract CuffDiff's most significant differentially expressed genes
 >
-> 1. **Filter** {% icon tool %}: Look up for this tool in the search bar, and select it
-> 2. Select the extracted table as its input, and filter over the target column
+> 1. **Filter** {% icon tool %} with the following parameters
+>   - "Filter" to the extracted table from the previous step
+>   - "With following condition" to an appropriate filter over the target column (see questions below when in doubt)
 >
 >    > ### {% icon question %} Questions
 >    > 1. What column stores the information of significance for each record?
@@ -123,9 +125,13 @@ We now want to first highlight the most significant differentially expressed gen
 >    > </ol>
 >    > </details>
 >    {: .question}
-> 3. **Sort** {% icon tool %}: Look up for this tool in the search bar, and select it
-> 4. Look at your data. The differential expression values are stored on column 10, we will sort (descending) all records on the basis of their value at the 10th column
-> 4. Select the filtered table as the input, and provide the column on which the records have to be sorted, the sorting flavor, and the order
+>
+>  Look at your data. The differential expression values are stored on column 10, we will sort (descending) all records
+>  on the basis of their value at the 10th column
+>
+> 2. **Sort** {% icon tool %}: with the following parameters
+>   - "Sort Dataset" to the filtered table
+>   - "on column", "with flavor" and "everything in"  to the appropriate values (see above)
 >
 >    > ### {% icon question %} Questions
 >    > 1. Since the start of our filtering process, how many records now represent the significant subset for extracting informations?
@@ -153,13 +159,14 @@ We are interested in visualizing all expression values of all transcripts relati
 
 > ### {% icon hands_on %} Hands-on: Visualization
 >
-> 1. **CummeRbund** {% icon tool %}: Lookup for this tool in the search bar, and select it
-> 2. Click on "Insert plot"
-> 3. Select 800 x 600 as the width and height of the resulting image
-> 4. Select "Expression Plot" as the plot type
-> 5. Select "Isoforms" as the expression levels to plot
-> 6. Select the gene "NDUFV1" as the gene to plot
-> 7. Your input form parameters should look like the following. If so, click on "Execute"
+> 1. **CummeRbund** {% icon tool %} with the following parameters
+>   - Click on "Insert plot"
+>   - "Width" and "Height" to `800x600`
+>   - "Plot type" to `Expression Plot`
+>   - "Expression levels to plot" to `Isoforms`
+>   - "Gene ID" to `NDUFV1`
+>   - Your input form parameters should look like the following. If so, click on "Execute"
+>
 > ![Expression plot_form](../../images/cummerbund-expression-plot-form.png)
 {: .hands_on}
 
@@ -173,13 +180,12 @@ Our plot has a modest number of isoforms, and is therefore already readable. How
 
 > ### {% icon hands_on %} Hands-on: Visualization
 >
-> 1. **CummeRbund** {% icon tool %}: Lookup for this tool in the search bar, and select it
-> 2. Click on "Insert plot"
-> 3. Select 800 x 600 as the width and height of the resulting image
-> 4. Select "Expression Bar Plot" as the plot type
-> 5. Select "Isoforms" as the expression levels to plot
-> 6. Select the gene "NDUFV1" as the gene to plot
-> 7. Execute
+> 1. **CummeRbund** {% icon tool %} with the following parameters
+>   - Click on "Insert plot"
+>   - "Width" and "Height" to `800x600`
+>   - "Plot type" to `Expression Bar Plot`
+>   - "Expression levels to plot" to `Isoforms`
+>   - "Gene ID" to `NDUFV1`
 {: .hands_on}
 
 ![Expression bar plot](../../images/cummerbund-expression-bar-plot.png)
@@ -191,11 +197,10 @@ Expression Bar Plot of a single gene (NDUFV1) with replicate FPKMs exposed.
 > These plots are shown also in [this](https://vimeo.com/channels/884356/128265982) Galaxy video tutorial.
 >
 > Would you like to obtain more sophisticated visualization of your RNA-Seq analysis results? Select different CummeRbund plot options, and look at their parametrizations according to the filtering and sorting operations we performed
-> {: .comment}
+{: .comment}
 
 # Conclusion
 {:.no_toc}
 
 Visualization tools help researchers making sense of data, providing a bird's-eye view of the underlying analysis results.
 In this tutorial we overviewed the advantages of visualizing RNA-Seq results with CummeRbund, and gained insights on CuffDiff's big-data output by plotting informations relative to the most significant differentially expressed genes in our RNA-Seq analysis.
-
