@@ -68,8 +68,8 @@ Some blabla
 > 1. Step1
 > 2. **My Tool** {% icon tool %} with the following parameters
 >   - "param1" to the file `myfile`
->   - "param1" to `42`
->   - "param2" to `Yes`
+>   - "param2" to `42`
+>   - "param3" to `Yes`
 >
 >    > ### {% icon question %} Questions
 >    >
