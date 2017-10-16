@@ -159,8 +159,11 @@ We are interested in visualizing all expression values of all transcripts relati
 > 4. Select "Expression Plot" as the plot type
 > 5. Select "Isoforms" as the expression levels to plot
 > 6. Select the gene "NDUFV1" as the gene to plot
-> 7. Execute
+> 7. Your input form parameters should look like the following. If so, click on "Execute"
+> ![Expression plot_form](../../images/cummerbund-expression-plot-form.png)
 {: .hands_on}
+
+Our first CummeRbund plot is the "Expression Plot":
 
 ![Expression plot](../../images/cummerbund-expression-plot.png)
 
