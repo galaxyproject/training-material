@@ -1,7 +1,6 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
     <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -131,45 +130,50 @@
 <p>We chose to include all proteins that are annotated as, or predicted to be, lysosomal proteins. Lysosomal proteins are routinely secreted by malignant and non-malignant cells in high amounts, due to “leakiness” of the mannose-6-phosphate receptor pathway [1,2].
 Furthermore, we chose to exclude proteins annotated as being part of extracellular organelles, e.g. exosomes. While exosomes are secreted by malignant and non-malignant cells, exosomal proteins are expected in the secretome at very low amounts, if not especially enriched for.</p>
 
-<p>For secretome prediction, we combine localization data from the Gene Ontology database with a classical protein localization prediction algorithm (WoLF-PSORT). The workflow was designed for sensitivity, i.e. a protein predicted by <em>at least one of the used tools</em> will be included in the output. To change this, follow the instructions in the box below.</p>
+<p>For secretome prediction, we combine localization data from the Gene Ontology database with a classical protein localization prediction algorithm (WoLF PSORT). The workflow was designed for sensitivity, i.e. a protein predicted by <em>at least one of the used tools</em> will be included in the output. To change this, follow the instructions in the box <strong>Comment: Customizing the Workflow</strong> below.</p>
 
 <h2 id="overview">Overview</h2>
 
 <p>The figure below gives an overview of the Galaxy workflow:</p>
 
-<p><img src="../../images/wf_secretomePrediction_goWolfpsort.png" alt="Overview Secretome Prediction WF"></p>
+<p><img src="../../images/wf_secretomePrediction_goWolfpsort.png" alt="Overview Secretome Prediction WF" /></p>
 
 <h2 id="input">Input</h2>
 
 <p>The workflow needs three input files:</p>
 
-<p>1) A tabular file, the first column containing uniprot accession numbers of the proteins of interest. <a href="https://doi.org/10.5281/zenodo.519260">Test data</a>
-  2) The complete uniprot GO database for the organism of interest, available <a href="ftp://ftp.ebi.ac.uk/pub/databases/GO/goa/">via FTP</a>. To download the human GOA file needed for the test input, paste the following link to the Galaxy upload tool: ftp://ftp.ebi.ac.uk/pub/databases/GO/goa/HUMAN/goa_human.gaf.gz.
-  3) The complete GO Open Biomedical Ontology (OBO), i.e. “GO term tree”, accessible at http://purl.obolibrary.org/obo/go/go.obo.</p>
+<ol>
+  <li>
+    <p>A tabular file, the first column containing uniprot accession numbers of the proteins of interest. <a href="https://doi.org/10.5281/zenodo.519260">Test data</a></p>
 
-<blockquote>
-  <h3 id="-comment-test-data">
-<i class="fa fa-commenting-o" aria-hidden="true"></i> Comment: Test data</h3>
-  <p class="comment">The provided test dataset for input 1 is a list of human proteins, identified by LC-MS/MS in the cellular supernatant of MDA-MB-231 cells. It can be accessed over <a href="https://doi.org/10.5281/zenodo.519260">Zenodo</a>. The dataset was originally published in <a href="https://www.ncbi.nlm.nih.gov/pubmed/27526672">(Sigloch et al., BBA, 2016)</a>.</p>
-</blockquote>
+    <blockquote class="comment">
+      <h3 id="-comment-test-data"><i class="fa fa-commenting-o" aria-hidden="true"></i> Comment: Test data</h3>
+      <p>The provided test dataset for input 1 is a list of human proteins, identified by LC-MS/MS in the cellular supernatant of MDA-MB-231 cells. The dataset was originally published in <a href="https://www.ncbi.nlm.nih.gov/pubmed/27526672">(Sigloch et al., BBA, 2016)</a>.</p>
+    </blockquote>
+  </li>
+  <li>
+    <p>The complete uniprot GO database for the organism of interest, available <a href="ftp://ftp.ebi.ac.uk/pub/databases/GO/goa/">via FTP</a>. To download the human GOA file needed for the test input, paste the following link to the Galaxy upload tool: ‘ftp://ftp.ebi.ac.uk/pub/databases/GO/goa/HUMAN/goa_human.gaf.gz’</p>
 
-<blockquote>
-  <h3 id="-comment-uniprot-gene-ontology-association-goa-files">
-<i class="fa fa-commenting-o" aria-hidden="true"></i> Comment: Uniprot Gene Ontology Association (GOA) files</h3>
-  <ul class="comment">
-    <li>Information about different GOA file types can be found <a href="https://www.ebi.ac.uk/GOA/downloads">here</a>.</li>
-    <li>Information about the structure of the files can be found <a href="ftp://ftp.ebi.ac.uk/pub/databases/GO/goa/HUMAN/README">here</a>.</li>
-  </ul>
-</blockquote>
+    <blockquote class="comment">
+      <h3 id="-comment-uniprot-gene-ontology-association-goa-files"><i class="fa fa-commenting-o" aria-hidden="true"></i> Comment: Uniprot Gene Ontology Association (GOA) files</h3>
+      <ul>
+        <li>Information about different GOA file types can be found <a href="https://www.ebi.ac.uk/GOA/downloads">here</a>.</li>
+        <li>Information about the structure of the files can be found <a href="ftp://ftp.ebi.ac.uk/pub/databases/GO/goa/HUMAN/README">here</a>.</li>
+      </ul>
+    </blockquote>
+  </li>
+  <li>
+    <p>The complete GO Open Biomedical Ontology (OBO), i.e. “GO term tree”, accessible at http://purl.obolibrary.org/obo/go/go.obo</p>
+  </li>
+</ol>
 
-<blockquote>
-  <h3 id="-comment-customizing-the-workflow">
-<i class="fa fa-commenting-o" aria-hidden="true"></i> Comment: Customizing the Workflow</h3>
+<blockquote class="comment">
+  <h3 id="-comment-customizing-the-workflow"><i class="fa fa-commenting-o" aria-hidden="true"></i> Comment: Customizing the Workflow</h3>
   <p>This workflow was designed for sensitivity, not for specificity. If you need to increase the specificity, you have the following possibilities, with decreasing efficiency:</p>
-  <ol class="comment">
-    <li>Switch the setting <code class="highlighter-rouge">Output lines appearing in</code> of the last <strong>Join</strong> <i class="fa fa-wrench" aria-hidden="true"></i> (last tool before the final <strong>Unique</strong> <img class="emoji" title=":wrench:" alt=":wrench:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f527.png" height="20" width="20"> from <code class="highlighter-rouge">All lines [-a 1 -a 2]</code> to <code class="highlighter-rouge">Both 1st &amp; 2nd file</code>. Thus, your output will contain only those proteins that are equally predicted by both methods used.</li>
+  <ol>
+    <li>Switch the setting <code class="highlighter-rouge">Output lines appearing in</code> of the last <strong>Join</strong> <i class="fa fa-wrench" aria-hidden="true"></i> (last tool before the final <strong>Unique</strong> <i class="fa fa-wrench" aria-hidden="true"></i> from <code class="highlighter-rouge">All lines [-a 1 -a 2]</code> to <code class="highlighter-rouge">Both 1st &amp; 2nd file</code>. Thus, your output will contain only those proteins that are equally predicted by both methods used.</li>
     <li>(Only after doing 1.) Adding another way of localization prediction, i.e. another database or another prediction algorithm.</li>
-    <li>Replacing <strong>WoLF-PSORT</strong> <i class="fa fa-wrench" aria-hidden="true"></i> by a more precise localization prediction tool. If you choose this approach, remember that you will probably have to adjust the settings for all tools in the workflow that are processing the <strong>WoLF PSORT</strong> <img class="emoji" title=":wrench:" alt=":wrench:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f527.png" height="20" width="20"> output.</li>
+    <li>Replacing <strong>WoLF PSORT</strong> <i class="fa fa-wrench" aria-hidden="true"></i> by a more precise localization prediction tool. If you choose this approach, remember that you will probably have to adjust the settings for all tools in the workflow that are processing the <strong>WoLF PSORT</strong> <i class="fa fa-wrench" aria-hidden="true"></i> output.</li>
   </ol>
 </blockquote>
 
@@ -189,8 +193,7 @@ please cite:</p>
 
         
         <blockquote class="key_points">
-            <h3>
-<i class="fa fa-key" aria-hidden="true"></i> Key points</h3>
+            <h3><i class="fa fa-key" aria-hidden="true"></i> Key points</h3>
 
             <ul>
                 
@@ -207,14 +210,12 @@ please cite:</p>
         <p>Useful information regarding this type of analysis with descriptions and paper references for the tools used in this tutorial, and literature for this analysis techniques and interpretations can be found <a href="https://galaxyproject.github.io/training-material/topics/proteomics#references">here</a>.</p>
         
 
-        <h3>
-<i class="fa fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!</h3>
+        <h3><i class="fa fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!</h3>
 
         <hr>
 
         <blockquote class="overview">
-            <h3>
-<i class="fa fa-comments-o" aria-hidden="true"></i> Feedback</h3>
+            <h3><i class="fa fa-comments-o" aria-hidden="true"></i> Feedback</h3>
             Please take a moment and provide your feedback on this tutorial. Your feedback will help guide and improve future revisions to this tutorial.
             <a href="https://tinyurl.com/GTNfeedback">Feedback Form</a>
         </blockquote>

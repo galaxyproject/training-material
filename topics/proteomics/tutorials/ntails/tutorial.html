@@ -1,7 +1,6 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
     <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -120,27 +119,29 @@ The N-Tails technique includes the use of heavy isotope dimethyl labelling.</p>
 
 <p>The figure below illustrates the mechanism of N-Tails. It was originally published by Stefan Tholen (doctoral thesis, not available online). Further reading on N-Tails and other N-terminal techniques, see <a href="https://dx.doi.org/10.1007/978-3-7091-0885-7_5">Tholen et al., Springer Vienna, 2013</a>.</p>
 
-<p><img src="../../images/wf_ntails_technique.png" alt="N-Tails technique"></p>
+<figure id="figure-1"><img src="../../images/wf_ntails_technique.png" alt="N-Tails technique" title="Overview of the N-Tails technique" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Overview of the N-Tails technique</figcaption></figure>
 
 <p>The N-Tails technique was originally designed to research protease biology and has most often been used in this field. It was originally published in <a href="https://www.ncbi.nlm.nih.gov/pubmed/20208520">Kleifeld et al., Nat. Biotechnol., 2010</a>.</p>
 
-<blockquote>
-  <h3 id="-comment-interpretation-of-n-tails-results">
-<i class="fa fa-commenting-o" aria-hidden="true"></i> Comment: Interpretation of N-Tails results</h3>
+<blockquote class="comment">
+  <h3 id="-comment-interpretation-of-n-tails-results"><i class="fa fa-commenting-o" aria-hidden="true"></i> Comment: Interpretation of N-Tails results</h3>
 
-  <p class="comment">Be careful not to overinterprete the results of N-Tails experiments. While the technique <strong>is</strong> fit to identify direct protease substrates, it does not discriminate direct from indirect (“downstream”) effects. Thus, most of the identified N-termini will <strong>not</strong> be direct protease substrates, even if their change in protein abundance is statistically significant.
-This warning is not specific for the N-Tails technique, but applies as well to other proteomic N-terminal screening techniques (e.g. COFRADIC).</p>
+  <p>Be careful when interpreting the results of N-Tails experiments. While the technique <strong>is</strong> fit to identify direct protease substrates, it does not discriminate direct from indirect (“downstream”) effects. Thus, most of the identified N-termini will <strong>not</strong> be direct protease substrates, even if their change in protein abundance is statistically significant. To identify direct protease substrates, you have to further validate substrate candidates by comparing the prime and non-prime amino acids of each identified N-terminus with the protease cleavage motif. The information can be extracted from the peptide IDs, but this step is so far not included in the workflow.</p>
+
+  <p>Lacking discrimination between direct and indirect effects is a general restriction also in other N-terminal screening techniques (e.g. COFRADIC), and is not specific for the N-Tails technique.</p>
 </blockquote>
 
 <p>This workflow was originally built in the OpenMS framework “TOPPAS” and published in <a href="https://www.ncbi.nlm.nih.gov/pubmed/27087653">Lai, Weisser et al., MCP, 2016</a>. It was converted to OpenMS v2.1, rebuild for the Galaxy framework and tested on the original dataset by Melanie Föll. It was designed for data analysis of a three samples combined in one MS run, a technique based on dimethyl stable isotope labeling (SIL). For more information on SIL, consult <a href="https://galaxyproject.github.io/training-material/topics/proteomics/tutorials/protein-quant-sil/tutorial.html">this tutorial</a>. The original data were generated using pre-fractionation. Thus, peptides of one biological experiment are measured in multiple consecutive MS runs (one run per fraction).</p>
 
 <p>The figure below gives an overview of the used Galaxy nodes. For further description of the workflow, please consider the <a href="https://www.ncbi.nlm.nih.gov/pubmed/27087653">original publication</a>.</p>
 
-<p><img src="../../images/wf_ntails_tripleDimethylLabel.png" alt="N-Tails Galaxy Workflow"></p>
+<figure id="figure-2"><img src="../../images/wf_ntails_tripleDimethylLabel.png" alt="N-Tails Galaxy Workflow" title="N-Tails Galaxy Workflow" /><figcaption><span class="figcaption-prefix">Figure 2:</span> N-Tails Galaxy Workflow</figcaption></figure>
+
+<p>Notice that the given digestion enzyme is “ArgC”, even if the proteins were digested using trypsin. Due to the used labelling method prior to digestion, lysine (“K”) residues are dimethylated. Therefore, trypsin will not cut c-terminal of lysine, but only c-terminal of arginine in a N-TAILS experiment. This resembles the ArgC specificity and generally results in longer peptides <a href="http://www.mcponline.org/content/12/12/3532.full">Rogers and Overall, MCP, 2013</a>.</p>
 
 <h2 id="input">Input</h2>
 
-<p>The workflow needs three input files:</p>
+<p>The workflow needs two input files:</p>
 
 <p>1) A collection of mzML files (multiple fractions of the same experiment).
   2) A FASTA protein database for the organism of interest. For more information on protein databases, consult <a href="https://galaxyproject.github.io/training-material/topics/proteomics/tutorials/database-handling/tutorial.html">this tutorial</a></p>
@@ -148,10 +149,8 @@ This warning is not specific for the N-Tails technique, but applies as well to o
 <h2 id="customizing-the-workflow">Customizing the Workflow</h2>
 
 <ul>
-  <li>
-<em>Running the workflow on a non-prefractionated sample:</em> Simply use only one file as an input.</li>
-  <li>
-<em>Running the workflow on a double dimethyl labeling (only light and heavy labeling):</em> remove the third <code class="highlighter-rouge">MSGFPlusAdapter</code> <i class="fa fa-wrench" aria-hidden="true"></i> and the following <code class="highlighter-rouge">PeptideIndexer</code> <img class="emoji" title=":wrench:" alt=":wrench:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f527.png" height="20" width="20"> . Make sure that the mass changes are correctly given in the <code class="highlighter-rouge">MSGFPlusAdapter</code> <img class="emoji" title=":wrench:" alt=":wrench:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f527.png" height="20" width="20"> .</li>
+  <li><em>Running the workflow on a non-prefractionated sample:</em> Simply use only one file as an input.</li>
+  <li><em>Running the workflow on a double dimethyl labeling (only light and heavy labeling):</em> remove the third <strong>MSGFPlusAdapter</strong> <i class="fa fa-wrench" aria-hidden="true"></i> and the following <strong>PeptideIndexer</strong> <i class="fa fa-wrench" aria-hidden="true"></i> . Make sure that the mass changes are correctly given in the <strong>MSGFPlusAdapter</strong> <i class="fa fa-wrench" aria-hidden="true"></i> .</li>
 </ul>
 
 <h2 id="citation">Citation</h2>
@@ -164,8 +163,7 @@ please cite:</p>
 
         
         <blockquote class="key_points">
-            <h3>
-<i class="fa fa-key" aria-hidden="true"></i> Key points</h3>
+            <h3><i class="fa fa-key" aria-hidden="true"></i> Key points</h3>
 
             <ul>
                 
@@ -182,14 +180,12 @@ please cite:</p>
         <p>Useful information regarding this type of analysis with descriptions and paper references for the tools used in this tutorial, and literature for this analysis techniques and interpretations can be found <a href="https://galaxyproject.github.io/training-material/topics/proteomics#references">here</a>.</p>
         
 
-        <h3>
-<i class="fa fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!</h3>
+        <h3><i class="fa fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!</h3>
 
         <hr>
 
         <blockquote class="overview">
-            <h3>
-<i class="fa fa-comments-o" aria-hidden="true"></i> Feedback</h3>
+            <h3><i class="fa fa-comments-o" aria-hidden="true"></i> Feedback</h3>
             Please take a moment and provide your feedback on this tutorial. Your feedback will help guide and improve future revisions to this tutorial.
             <a href="https://tinyurl.com/GTNfeedback">Feedback Form</a>
         </blockquote>
