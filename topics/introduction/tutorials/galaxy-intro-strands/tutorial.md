@@ -9,10 +9,10 @@ tutorial_name: galaxy-intro-strands
 
 This practical aims to familiarize you with the Galaxy user interface. It will teach you how to perform basic tasks such as importing data, running tools, working with histories, creating workflows, and sharing your work.
 
-This practical teaches the same basic content as [Galaxy 101](/topics/introduction/tutorials/galaxy-intro-101/tutorial.html), but requires less knowledge of biology to understand the question.
+This tutorial teaches the same basic content as [Galaxy 101](/topics/introduction/tutorials/galaxy-intro-101/tutorial.html), but requires less knowledge of biology to understand the question this tutorial addresses.
 
 > ###  {% icon comment %} Audience
-> This practical is for those who are new to Galaxy, genomics, and bioinformatics.  If you aren't new to bioinformatics you can just do the items listed in the Hands-On boxes ({% icon hands_on %}), or you can try one of the other introductory tutorials.
+> This tutorial is for those who are new to Galaxy, genomics, and bioinformatics.  If you aren't new to bioinformatics you can just do the items listed in the Hands-On boxes ({% icon hands_on %}), or you can try one of the other introductory tutorials.
 {: .comment}
 
 > ### Agenda
@@ -31,7 +31,7 @@ This practical teaches the same basic content as [Galaxy 101](/topics/introducti
 > To run this practical you will need
 >
 > 1. An internet-connected computer.  Galaxy can run on your laptop without an internet connection, but this practical requires access to resources on the web.
-> 1. A web browser. Firefox and Google Chrome work well, as does Safari.  Internet Explorer is known to have issues with Galaxy so avoid using that.
+> 1. A web browser. [Firefox](https://www.mozilla.org/firefox) and [Google Chrome](https://www.google.com/chrome/) work well, as does [Safari](https://www.apple.com/safari/).  Internet Explorer is known to have issues with Galaxy so avoid using that.
 > 1. Access to a Galaxy instance.  Galaxy is available in many ways. If you are doing this practical as part of a workshop, the instructor will tell you which instance to use. If you are doing this on your own, you can use [usegalaxy.org](https://usegalaxy.org).
 {: .comment}
 
@@ -40,7 +40,7 @@ This practical teaches the same basic content as [Galaxy 101](/topics/introducti
 > *I wonder if genes on opposite strands ever overlap with each other, and if so, how common is that?*
 {: .question}
 
-To explore this question we need a basic understanding of *genomes, chromosomes, strands, genes,* and *exons*.
+To explore this question we need a basic understanding of *genomes, chromosomes, strands,* and  *genes.* 
 
 > ### {% icon comment %} Definitions 1
 >
@@ -55,9 +55,6 @@ To explore this question we need a basic understanding of *genomes, chromosomes,
 >
 > * **Gene**
 >> "What is a gene?" is actually a hotly debated question.  For our purposes, a gene is a section of DNA on chromosome strand that creates a molecule used by an organism.
->
-> * **Exon**
->> In humans (and in all plants and animals) the molecules that are built from genes are often only built from a part of the DNA in a gene. The sections of DNA that can produce the molecules are called exons.
 {: .comment}
 
 [ADD IMAGE HERE]
@@ -140,7 +137,7 @@ The Table Browser has a daunting number of options. Fortunately,they are all set
 
 Time for a few more definitions.
 
-> ### {% icon comment %} Definitions
+> ### {% icon comment %} Definitions 2
 >
 > * **Reference genome**
 >> A reference genome is the *genome of a single individual* that has been thoroughly studied, to the point that we know exactly what most of that individual's DNA is.  In practice a reference genome is used as shared map by researchers working on that organism. Reference genomes are updated periodically as techniques improve.
@@ -175,14 +172,6 @@ So far we haven't changed *anything* from the defaults.  Lets change something. 
 
 This returns us to Galaxy, first displaying a big green box (that's good!) and then returning us to the view we started with.  Excepnt that we now have an item in our history, the dataset from UCSC.
 
-> ### {% icon comment %} UCSC Genome Browser
->
-> If you aren't yet familiar with the [UCSC Genome Browser](https://genome.ucsc.edu/cgi-bin/hgGateway), then it's worth spending some time learning how to use it.  *Genome browsers* are software for viewing genomic information graphically.  The UCSC Genome Browser (and most genome browsers) typically display different types of *annotation* about a region of a genome.  This is displayed as a stack of *tracks* and each track contains a different type of information.
->
-> Genome browsers are useful for seeing information in context and for seeing (and discovering) correlations between different types of information.
->
-> The UCSC Genome Browser has information on over 100 animals, and their [Archaeal Genome Browser](http://archaea.ucsc.edu/cgi-bin/hgGateway?db=pyrFur2) has genomic information on well over 100 microbial species.
-{: .comment}
 
 ### History Item Status
 
@@ -392,15 +381,98 @@ Of the tools in the **Operate on Genomic Intervals** toolbox, **Join** and parti
 > * Finally give both of the new datasets meaningful names, like `Overlapping forward genes` and `Overlapping reverse genes`
 {: .hands_on}
 
-At this point, we have answered our question: Compare the number of genes in the `Overlapping forward` and `Overlapping reverse` datasets with the number of genes in the full `Genes` dataset.  Are there genes that overlap?  If so, how common is it?
 
-## Try something
+## Results and final steps.
 
-Run again with the entire genome.
+At this point we *could* say that we have answered our question. Using dataset previews in our history panel, we can compare the number of genes in the `Overlapping forward` and `Overlapping reverse` datasets with the number of genes in the full `Genes` dataset, and conclude that overlapping genes on opposite strands is actually pretty common.
 
-Exons!  Eek!  What if we want to ask this question, where we only look for genes with exons that overlap?  How can we do that?  (Hint, start by going back to UCSC, and selecting exons.)
+However, before we rush off to publish our conclusions, let's
 
-Are there genes on the same strand that overlap with each other?
+1. Get the both forward and reverse overlapping genes into a single dataset (one link will look better in our publication), and
+2. *Visualize* our new dataset, just to double-check our results.
+
+### Combine forward and reverse overlapping genes into one dataset.
+
+What tool can we use to combine the two datasets into one?  Try *seraching* for `combine` or `join` or `stack` in the tool search box.  You'll find lots of tools, but none of them do what we want to do. *Some times you just have to manually look through toolboxes to find what you need.*  Where should we look?  It's probably not **Get Data** or **Send Data**, but it could easily be in any of the next 4 toolboxes: **Lift-Over, Collection Operations, Text Manipulation, or Datamash**.
+
+It turns out that **Lift-Over** and **Collection Operations** are not what we want.  (But, take a look at them: if you are going to work with genomic data it won't take long before you'll need both.)
+
+> ### {% icon hands_on %} *Conctenate* two datasets 
+>
+> * *Open* the **Text Manipulation** toolbox.
+> * Near the top of the toolbox is **Concatenate datasets tail-to-head**. *Click* on it.  Lets try that tool.
+> * Set **Concatenate**'s parameters:
+>   * *Set* **Concatenate Dataset** to `Overlapping reverse genes`.
+>   * *Click **+ Insert Dataset**.  This adds a second dataset pull-down menu to the form.
+>   * *Select* `Overlapping forward genes` as the second dataset.
+> * *Click* **Execute**
+> * *Rename the resulting dataset something informative like `Overlapping genes`
+{: .hands_on}
+
+Once the concatenate operation is finished, preview the dataset in your history panel.  Does it have the expected number of genes in it?  If not, see if you can figure out what happened.
+
+### Visualize the overlapping genes
+
+Galaxy gives us several options for visualizing our overlapping genes dataset.  Galaxy knows about several visualization options for lots of different dataset types, including BED.  Whenever you preview a dataset in the history panel, Galaxy provides links to these visualizations.  For BED files (what we have), options include **IGB, IGV,** and **UCSC main.**  IGB and IGV are widely used desktop applications and eventually you may want to install one of them.  For now, let's visualize the data at UCSC main, using the UCSC *Genome* Browser.
+
+> ### {% icon hands_on %} *Conctenate* two datasets 
+>
+> * *Click* on your `Overlapping genes` dataset in your history panel. This will show the dataset preview in the history panel.
+> * *Click* on the **display at UCSC main** link.
+{: .hands_on}
+
+This will launch a new window, showing UCSC's Genome Browser with our dataset shown right at the top.  UCSC figures out that our first overlapping gene is ~11 million bases into chromosome 22, and it has landed us there.
+
+> ### {% icon comment %} UCSC Genome Browser
+>
+> *Genome browsers* are software for viewing genomic information graphically.  The [UCSC Genome Browser](https://genome.ucsc.edu/cgi-bin/hgGateway) (and most genome browsers) typically display different types of *annotation* about a region of a genome.  This is displayed as a stack of *tracks* and each track contains a different type of information.
+>
+> Genome browsers are useful for seeing information in context and for seeing (and discovering) correlations between different types of information.  (They are also useful for visually checking results, which is what we are doing now.)
+>
+> The UCSC Genome Browser has information on over 100 animals, and their [Archaeal Genome Browser](http://archaea.ucsc.edu/cgi-bin/hgGateway?db=pyrFur2) has genomic information on well over 100 microbial species.
+{: .comment}
+
+Now, take a look at one of our results.  (Any pair of overlapping genes will do.)  Our data is in the second to top track (**User Track**). That track shows a line of small black boxes, sometimes connected with a line.
+
+> ### {% icon hands_on %} Zoom in on an area of the chromosome that shows a set of black boxes
+> To zoom in,
+> * *click* on the **Scale** track (the top track) just to the left of the start of the black boxes.
+> * Now *drag* the mouse across the Scale track to just to the right of the  black boxes and let go.
+> * A window pops up describing several ways to interact with the browser.  Just *click* the **Zoom In* button at the bottom.
+> * This redraws the window, this time zoomed in to what you highlighted.
+>   * As you zoom in you may find that what originally appeared as a single black box can turn into multiple black boxes, linked to together with a thin line, and/or a stack of black boxes.
+> * Keep zooming in until you only have only one set of *overlapping* linked black boxes in the user track.
+{: .hands_on}
+
+The black boxes connected by lines represent genes.  What's up with the boxes and the lines connecting them?
+
+> ### {% icon comment %} Definitions 4
+>
+> * **Exon**
+>> In humans (and in all plants and animals) the molecules that are built from genes are often only built from a part of the DNA in the gene. The sections of DNA that can produce the molecules are called *exons*.
+{: .comment}
+
+As you may have guessed:
+
+* The black boxes are exons.
+* The thin lines connect all exons that are part of a gene.
+
+Genes cover the entire area from the first black box to the last connected black box.
+
+## Do we have a problem?
+
+*Maybe.*
+
+Our *ad hoc* review of identified overlapping genes in the UCSC Genome Browser has *(or should have!)* confirmed that every gene we said has an overlapping gene on the opposite strand does in fact have that.  So, our conclusion appears solid: A significant percentage of genes *do* overlap with other genes on the opposite strand.
+
+But, our conclusion may not be as *significant* as we had hoped. If only parts of genes, the exons, make stuff in our bodies, then should we have run this analysis on just the exons rather then the entire genes?  Probably.
+
+### So, I have to do this all over again, but with exons?
+
+Well, yes and no.  We will have to run the analysis again, this time on just exons instead of whole genes. But we won't have to manually recreate every step.  Instead Galaxy enables us to create a reusable *workflow* from the analysis we just did, and then we can rerun the analysis, as one step, anytime we want to, and on any dataset.
+
+See the Intro Workflow tutorial for how to do that.
+
 
 ## Final thoughts
 
@@ -410,9 +482,16 @@ You could use Excel or another spreadsheet program to do these calculations.  He
 
 In these cases your analysis, *and the ability to reproduce it exactly*, is vitally important.  Excel won't help you with this. It doesn't track changes and it offers very little insight to others on how you got from your initial data to your conclusions.
 
-Galaxy, on the other hand, *automatically records every step of your analysis.*  And when you are done, you can share your analysis with anyone.  You can even include a link to it in a paper (or your acceptance speech).  In addition, you can create a reusable recipe (a "workflow" in Galaxy) from your analysis that others (or yourself) can use on other datasets.
+Galaxy, on the other hand, *automatically records every step of your analysis.*  And when you are done, you can share your analysis with anyone.  You can even include a link to it in a paper (or your acceptance speech).  In addition, you can create a reusable recipe (a "workflow" in Galaxy terminology) from your analysis that others (or yourself) can use on other datasets.
 
-Another challenge with spreadsheet programs is that they don't scale to support next generation sequencing datasets, which often reach gigabytes or even terabytes in size.
+Another challenge with spreadsheet programs is that they don't scale to support *next generation sequencing* datasets, a common type of data in genomics, and which often reach gigabytes or even terabytes in size.
+
+
+## What next?
+
+Try sharing tutorial.
+
+Try workflow tutorial.
 
 # Conclusion
 {: .no_toc}
