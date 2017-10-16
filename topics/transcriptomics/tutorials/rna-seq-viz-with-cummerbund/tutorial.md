@@ -7,7 +7,7 @@ tutorial_name: rna-seq-viz-with-cummerbund
 # Introduction
 {:.no_toc}
 
-RNA-Seq analysis helps researchers finding new genes and spliced variants, and provides a quantification of cell- and context- specific gene expression. Its data is however complex to handle, and requires both computer science and mathematical knowledge to be managed and interpreted.
+RNA-Seq analysis helps researchers annotate new genes and splice variants, and provides cell- and context-specific quantification of gene expression. RNA-Seq data, however, are complex and require both computer science and mathematical knowledge to be managed and interpreted.
 
 Visualization techniques are key to overcome the complexity of RNA-Seq data, and represent valuable tools to gather information and insights.
 
@@ -27,7 +27,7 @@ To make sense of the available RNA-Seq data, and overview the condition-specific
 CummeRbund is an open-source tool that simplifies the analysis of a CuffDiff RNA-Seq output. In particular, it helps researchers:
 - managing, integrating, and visualizing the data produced by CuffDiff
 - simplifying data exploration
-- providing a bird's-eye view of the expression analysis by describing relationships betweeen genes, transcripts, transcription start sites, and CDS regions
+- providing a bird's-eye view of the expression analysis by describing relationships betweeen genes, transcripts, transcription start sites, and protein-coding regions
 - exploring subfeatures of individual genes or gene-sets
 - creating publication-ready plots
 
@@ -39,7 +39,7 @@ CummeRbund reads your RNA-Seq results from a [SQLite](https://www.sqlite.org/) d
 
 > ### {% icon tip %} Tip: SQLite output with CuffDiff
 >
-> Instruct CuffDiff to organize its output in a SQLite database for later read with CummeRbund
+> Instruct CuffDiff to organize its output in a SQLite database to be read CummeRbund.
 >
 > ![SQLite output](../../images/cummerbund-cuffdiff-set-sqlite.png)
 {: .tip}
@@ -67,7 +67,7 @@ CummeRbund reads your RNA-Seq results from a [SQLite](https://www.sqlite.org/) d
 > By default, when data is imported via its link, Galaxy names it with its URL.
 {: .hands_on}
 
-CuffDiff's output data is organized in a SQLite database, so we need to extract it to be able to see how it looks like.
+CuffDiff's output data is organized in a SQLite database, so we need to extract it to be able to see what it looks like.
 
 For this tutorial, we are interested in CuffDiff's tested transcripts for differential expression.
 
