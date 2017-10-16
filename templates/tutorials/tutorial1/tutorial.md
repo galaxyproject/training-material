@@ -66,7 +66,10 @@ Some blabla
 > ### {% icon hands_on %} Hands-on: Data upload
 >
 > 1. Step1
-> 2. Step2
+> 2. **My Tool** {% icon tool %} with the following parameters
+>   - "param1" to the file `myfile`
+>   - "param1" to `42`
+>   - "param2" to `Yes`
 >
 >    > ### {% icon question %} Questions
 >    >
