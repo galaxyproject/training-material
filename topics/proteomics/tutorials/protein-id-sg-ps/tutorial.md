@@ -72,7 +72,7 @@ In bottom-up proteomics, it is necessary to combine the identified peptides to p
 
 > ### {% icon hands_on %} Hands-On: Peptide and Protein Identification
 >
-> 1. Copy the prepared protein database from the tutorial [Database Handling](../database-handling/tutorial.md) into your current history by using the multiple history view or upload the ready-made database from this [link](https://zenodo.org/record/892005/files/Human_database_%28cRAP_and_Mycoplasma_added%29.fasta).
+> 1. Copy the prepared protein database from the tutorial [Database Handling](../database-handling/tutorial.html) into your current history by using the multiple history view or upload the ready-made database from this [link](https://zenodo.org/record/892005/files/Human_database_%28cRAP_and_Mycoplasma_added%29.fasta).
 > 2. Open ***Search GUI*** {% icon tool %} to search the mgf file against the protein database. In the **`Search Engine Options`** select `X!Tandem` and `MS-GF+`. In the **`Protein Modification Options`** add the **`Fixed Modifications`**: `Carbamidomethylation of C` and the **`Variable Modifications`**: `Oxidation of M`.
 > 3. Run ***Peptide Shaker*** {% icon tool %} on the Search GUI output. Enable the following outputs: `Zip File for import to Desktop App`, `mzidentML File`, `PSM Report`, `Peptide Report`, `Protein Report`.
 >

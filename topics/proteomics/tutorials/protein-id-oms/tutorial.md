@@ -70,7 +70,7 @@ Different peptide search engines have been developed to fulfill the matching pro
 
 > ### {% icon hands_on %} Hands-On: Peptide Identification
 >
-> 1. Copy the prepared protein database from the tutorial [Database Handling](../database-handling/tutorial.md) into your current history by using the multiple history view or upload the ready-made database from this [link](https://zenodo.org/record/892005/files/Human_database_including_decoys_%28cRAP_and_Mycoplasma_added%29.fasta).
+> 1. Copy the prepared protein database from the tutorial [Database Handling](../database-handling/tutorial.html) into your current history by using the multiple history view or upload the ready-made database from this [link](https://zenodo.org/record/892005/files/Human_database_including_decoys_%28cRAP_and_Mycoplasma_added%29.fasta).
 > 2. Run the tool ***XTandemAdapter*** {% icon tool %} on the centroided mzML input file and the database file. Click `+ Insert param_fixed_modifications` and choose `Carbamidomethyl (C)`, then click `+ Insert param_variable_modifications` and choose `Oxidation (M)` and `Execute`.
 > 3. Run the tool ***FileInfo*** {% icon tool %} on the XTandem output.
 >
