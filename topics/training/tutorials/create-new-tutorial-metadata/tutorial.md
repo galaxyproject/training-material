@@ -17,7 +17,7 @@ Galaxy is a great solution to train the bioinformatics concepts:
 In 2016, the Galaxy Training Network decide to set up a new infrastructure for delivering easily Galaxy related training material. The idea was to develop something open and online based on a community effort, as always in Galaxy.
 
 We took inspiration from [Software Carpentry](https://software-carpentry.org) and collected everything on a GitHub repository: [https://github.com/galaxyproject/training-material ](https://github.com/galaxyproject/training-material).
-We decided on a structure based on tutorials with hands-on, fitting both for online self-training but also for workshops, grouped in topics. Each tutorial follows the same structure and comes with a virtualised isntance to run the training everywhere.
+We decided on a structure based on tutorials with hands-on, fitting both for online self-training but also for workshops, grouped in topics. Each tutorial follows the same structure and comes with a virtualised instance to run the training everywhere.
 
 In this tutorial, you will learn how to annotate your training material with a lot of metadata, so that it can be reused and empower other services.
 
@@ -54,7 +54,7 @@ The first file we will fill is the `metadata.yaml` file describing the metadata 
 - `zenodo_link`: link on Zenodo to the input data for the tutorial (not ideal but it can be empty)
 - `galaxy_tour`: name of the galaxy tour
 - `hands_on`(`"yes"` or `"no"`): tell if an hands on is available for this material
-- `slides` (`"yes"` or `"no"`): tell if slides are available for this materialits title, its type, ...
+- `slides` (`"yes"` or `"no"`): tell if slides are available for this material its title, its type, ...
 - `requirements`: list of requirements specific to this tutorial (in addition to the one of the topic), with:
     - `title`
     - `link`: relative for internal (inside training material) requirement or full for external requirement)
