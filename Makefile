@@ -43,7 +43,7 @@ check-yaml: ## lint yaml files
 .PHONY: check-yaml
 
 check-slides: build  ## check the markdown-formatted links in slides
-	find _site -path "**/slides*.html" | xargs -L 1 -I '{}' sh -c "echo {}; vl -d -t 15 -s 1000 --allow-codes 405 --whitelist localhost,127.0.0.1,fqdn,publish.twitter.com,linkedin.com,vimeo.com {}"
+	find _site -path "**/slides*.html" | xargs -L 1 -I '{}' sh -c "awesome_bot --allow 405 --allow-redirect --white-list localhost,127.0.0.1,fqdn --allow-ssl --allow-dupe --skip-save-results -f {}"
 .PHONY: check-slides
 
 check: check-yaml check-html check-slides  ## run all checks
