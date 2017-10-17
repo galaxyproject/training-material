@@ -72,6 +72,7 @@ With `make serve`, a local Jekyll server will run in background. It will check t
 
 Once you are done, you can stop the server with `ctrl-c` and deactivate your conda environment with `source deactivate`.
 
+
 # Generating PDF of the tutorials and slides
 
 A PDF file of every tutorials and slide decks can be generated, using Chrome on command line and [Decktape](https://github.com/astefanutti/decktape).
@@ -84,6 +85,44 @@ A PDF file of every tutorials and slide decks can be generated, using Chrome on 
 >    - For Ubuntu, follow [these instructions](https://askubuntu.com/questions/510056/how-to-install-google-chrome#510186)
 > 2. Run `make pdf`
 > 3. Check the PDF in `_pdf` folder
+{: .hands_on}
+
+
+# (Not recommended) Using your fork for deployment and checking
+
+We do not recommend it, but sometimes, you may want to have a version of the website on your fork (on the `gh-pages` branch) or to have the `gh-pages` in your fork is automatically updated once something is pushed on the master branch of your fork, as it is currently for the main GitHub repository (to check the changes, for example)
+
+> ### {% icon hands_on %} Pushing the website on your fork
+>
+> 1. Activate `gh-pages` as branch on which the website is build:
+>    1. Go on your GitHub repository
+>    2. Go to "Settings"
+>    3. Select "gh-pages branch" as source in the "GitHub Pages" section
+> 2. Add your fork as a remote (if not already done): `git remote add fork "https://github.com/<your-github-username>/training-material"`
+> 3. Build the website locally: `make build`
+> 4. Prepare the `gh-pages` branch locally: `bin/publish`
+> 5. Push on the `gh-pages` on your fork: `git push -f fork gh-pages`
+> 6. Go back to your working branch: `git checkout --`
+{: .hands_on}
+
+> ### {% icon hands_on %} Checking the website on your fork
+>
+> 1. Activate `gh-pages` as branch on which the website is build
+>    1. Go on your GitHub repository
+>    2. Go to "Settings"
+>    3. Select "gh-pages branch" as source in the "GitHub Pages" section
+> 2. Generate a personal access token
+>    1. Go on the "Settings" of your GitHub account (after clicking on your avatar on the top right of the GitHub interface)
+>    2. Go the "Developer settings"
+>    3. Go to "Personal access tokens"
+>    4. Generate a new token by selecting "repo"
+>    5. Copy the generated token
+> 3. Encode your token
+>    1. Install travis: `gem install travis`
+>    2. Encrypt the token: `travis encrypt -r <your-github-username>/training-material`
+>    3. Replace the keys in `secure` by the generated encrypted token into `.travis.yml`
+> 4. Replace `bebatut` by your GitHub username in `bin/config-travis-git`
+> 5. Push everything on the master branch of your fork
 {: .hands_on}
 
 # Conclusion
