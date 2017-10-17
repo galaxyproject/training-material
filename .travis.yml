@@ -54,5 +54,7 @@ after_success:
   - |
     if [ "$TRAVIS_PULL_REQUEST" == "false" -a "$TRAVIS_BRANCH" == "master" ]
     then
+      bin/config-git-travis
       bin/publish
+      git push origin gh-pages
     fi
