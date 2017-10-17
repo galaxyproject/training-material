@@ -24,12 +24,12 @@ A basic overview of different quantitation techniques is shown below ([original 
 {: .agenda}
 
 
-# Drawbacks and Benefits of Labelled Quantitation
+# Benefits and Drawbacks of Labelled Quantitation
 Label-free techniques are immensely popular in the proteomics community and may be the most straight-forward laboratory technique in the field. However, labelled approaches have some benefits, which make them the method-of-choice for some scientific questions.
 
 We summarized the pros and cons in the table below:
 
-## Drawbacks and Benefits: Overview Table
+## Benefits and Drawbacks: Overview Table
 
 category | label-free | labelled
 :--|:--:|:--:
@@ -41,13 +41,14 @@ study design | **flexibel** | fixed
 
 The **superior technique** in each line is marked in **bold**.
 
-## Drawbacks and Benefits: Detailed Explanation
+## Benefits and Drawbacks: Detailed Explanation
 - **Machine time**: In label-free experiments, each sample is measured in a separate MS run. In labelled experiments, samples of each condition are combined prior to the MS run. This cuts down the machine time needed by the complexity of the labelling technique (usually between 2 and 8 times less machine time).
 - **Wet lab complexity & time**: While label-free samples can be measured without much preparation, all labelling techniques need additional pretreatments in the wet lab. The samples have to be labelled either metabolically (e.g. by SILAC) or chemically (e.g. ICAT or iTRAQ) and the different conditions have to be combined. Thus, label-free techniques are less prone to wet lab errors than labelling techniques.
-- **Comparability of samples**: A drawback of the label-free approaches is that exterior conditions (e.g. temperature, experimenter) may differ between samples. Such differences do not occur in labelled experiments, because all samples are measured in the very same MS run. Thus, label-free are more prone to errors introduced by the measurement conditions than labelled.
+- **Comparability of samples**: A drawback of the label-free approaches is that external conditions (e.g. temperature, experimenter) may differ between samples. Such differences do not occur in labelled experiments, because samples that are compared to each other are measured in the very same MS run. Therefore, label-free are more prone to errors introduced by the measurement conditions than labelled.
 Including a well-chosen standard in label-free experiments (e.g. a labelled control sample mixed to each sample prior to the MS run or the ["Super-SILAC"](https://www.ncbi.nlm.nih.gov/pubmed/20364148) approach) may reduce this problem, but has to be carefully planned in beforehand.
+A benefit of labelfree experiments is that any sample can be directly compared with any other, whereas in labelled experiments, you can typically only directly compare those samples that were physically mixed and measured in one run. A sample that is measured as a reference in each run of a labelled experiment can help to avoid this problem.
 - **Data analysis**: Data analysis of each type of experiment has it's special pitfalls. In our opinion, the benefits and drawbacks cancel each other out.
-- **Study design**: Label-free approaches have the advantage of being very adaptable, even after having started the study. New samples may be included at any time. In contrast, labelled approaches need the same number (n) of each condition. Thus, new samples cannot be measured, if they cannot be matched to a control.
+- **Study design**: Label-free approaches have the advantage of being very adaptable, even after having started the study. New samples may be included at any time. In contrast, labelled approaches need the same number (n) of each condition. New samples cannot be included into the study, if they cannot be physically mixed with and measured together with a control.
 Labelled techniques like the ["Super-SILAC"](https://www.ncbi.nlm.nih.gov/pubmed/20364148) approach do reduce this problem, but also need to be carefully planned in beforehand.
 
 > ### {% icon question %} Questions
@@ -58,7 +59,7 @@ Labelled techniques like the ["Super-SILAC"](https://www.ncbi.nlm.nih.gov/pubmed
 >    <details>
 >    <summary>Click to view answers</summary>
 >    <ol type="1">
->    <li>In metabolic labelling (e.g. "SILAC"), samples like cells or whole animals are labelled *in vivo* by providing amino acids containing stable isotope before starting the experiment. In chemical labelling, samples are labelled *in vitro* after extracting the proteins.</li>
+>    <li>In metabolic labelling (e.g. "SILAC"), samples like cells or whole animals are labelled <i>in vivo</i> by providing amino acids containing stable isotope before starting the experiment. In chemical labelling, samples are labelled <i>in vitro</i> after extracting the proteins.</li>
 >    <li>The "Super-SILAC" approach features mixing of easy obtainable control samples that are related to the sample of interest. An example is to use a mixture of several breast cancer cell lines to compare to breast cancer patient samples. The control sample usually is labelled with heavy isotopes, while the sample of interest is unlabelled. The "Super-SILAC" approach thus combines benefits of labelled and label-free experiments.</li>
 >    </ol>
 >    </details>
