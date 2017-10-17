@@ -34,9 +34,10 @@ check-html: build ## validate HTML
 	bundle exec htmlproofer --http-status-ignore 405,999 --url-ignore "/.*localhost.*/","/.*vimeo\.com.*/" --file-ignore "/.*\/files\/.*/" ./_site
 .PHONY: check-html
 
-check-html-gh-pages:  ## validate HTML on gh-pages branch (for daily cron job)
+check-links-gh-pages:  ## validate HTML on gh-pages branch (for daily cron job)
 	bundle exec htmlproofer --http-status-ignore 405,999 --url-ignore "/.*localhost.*/","/.*vimeo\.com.*/" --file-ignore "/.*\/files\/.*/" .
-.PHONY: check-html-gh-pages
+	find . -path "**/slides*.html" | xargs -L 1 -I '{}' sh -c "awesome_bot --allow 405 --allow-redirect --white-list localhost,127.0.0.1,fqdn --allow-ssl --allow-dupe --skip-save-results -f {}"
+.PHONY: check-links-gh-pages
 
 check-yaml: ## lint yaml files
 	yamllint .
