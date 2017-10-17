@@ -93,7 +93,7 @@ Now, the probability of having a variant and it being observed in our sequencing
 |                                    |                                    |                                     |
 |:----------------------------------:|:----------------------------------:|:-----------------------------------:|
 | ![P(A) polymorphism](../../images/pA.png) | ![P(B) variant calls](../../images/pB.png) | ![P(AB) polymorphism and variant calls](../../images/pAB.png) |
-| $P(A)$ <br> Polymorphisms          | $P(B)$ <br> Variant calls          | $P(AB)$ <br> Polymorphisms + Varinat calls |
+| $P(A)$ <br> Polymorphisms          | $P(B)$ <br> Variant calls          | $P(AB)$ <br> Polymorphisms + Variant calls |
 
 Now we can ask the following question: *What is the probability of a having a real polymorphism* $A$ *given our observation of variants in reads* $B$? In other words *what is the probability of* $A$ *given* $B$? Or, as stated in the original [blog](https://oscarbonilla.com/2009/05/visualizing-bayes-theorem/): "*given that we are in region $B$ what is the probability that we are in the region $AB$*?":
 
@@ -200,7 +200,7 @@ Here is what to do to load the data:
 >
 >![FreeBayes additional parameters](../../images/freebayes_gq.png)
 >
->Depending on how busy Galaxy is this may take a little bit of time (coffee break?). Eventially this will produce a dataset in [VCF](http://www.1000genomes.org/wiki/Analysis/variant-call-format) format containing 35 putative variants. Before we can continue we need to post-process this dataset by breaking compound variants into multiple independent variants with **VcfAllelicPrimitives** tool found within **NGS: VCF Manipulation** section. This is necessary for ensuring the smooth sailing through downstream analyses:
+>Depending on how busy Galaxy is this may take a little bit of time (coffee break?). Eventually this will produce a dataset in [VCF](http://www.1000genomes.org/wiki/Analysis/variant-call-format) format containing 35 putative variants. Before we can continue we need to post-process this dataset by breaking compound variants into multiple independent variants with **VcfAllelicPrimitives** tool found within **NGS: VCF Manipulation** section. This is necessary for ensuring the smooth sailing through downstream analyses:
 >
 {: .hands_on}
 
