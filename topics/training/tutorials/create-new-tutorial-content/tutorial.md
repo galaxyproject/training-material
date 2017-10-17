@@ -254,7 +254,7 @@ They are defined always with the same structure:
 {: .type_of_box}
 ```
 
-For a correct rendering of the tutorial's content, the templating system requirest this structure to be kept as it.
+For a correct rendering of the tutorial's content, the templating system requires this structure to be kept as it.
 The different defined boxes are:
 
 - Overview
