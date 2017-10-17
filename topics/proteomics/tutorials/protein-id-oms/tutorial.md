@@ -15,9 +15,9 @@ Identifying the proteins contained in a sample is an important step in any prote
 4. Protein inference
 
 A plethora of different software solutions exists for each step. In this tutorial, we will use ***msconvert*** {% icon tool %}  for raw data conversion and tools from the [OpenMS software suite](https://openms.de) for all other steps. We will use one peptide search engine at first and later on show how to expand the workflow for using multiple search engines. Protein inference will be performed with the Fido algorithm ([Serang et al, JPR, (2010)](https://www.ncbi.nlm.nih.gov/pubmed/20712337)).
-This tutorial covers peptide and protein **identification** only, but you may use the output of this tutorial for the [tutorial on protein quantitation]({{site.url}}/topics/proteomics/tutorials/protein-quant-sil/tutorial.html).
+This tutorial covers peptide and protein **identification** only, but you may use the output of this tutorial for the [tutorial on protein quantitation]({{site.baseurl}}/topics/proteomics/tutorials/protein-quant-sil/tutorial.html).
 
-For an alternative protein ID workflow using the [Compomics](https://compomics.com/) tools [SearchGUI](https://compomics.github.io/projects/searchgui.html) and [PeptideShaker](https://compomics.github.io/projects/peptide-shaker.html), please consult [this tutorial]({{site.url}}/topics/proteomics/tutorials/protein-id-sg-ps/tutorial.html). 
+For an alternative protein ID workflow using the [Compomics](https://compomics.com/) tools [SearchGUI](https://compomics.github.io/projects/searchgui.html) and [PeptideShaker](https://compomics.github.io/projects/peptide-shaker.html), please consult [this tutorial]({{site.baseurl}}/topics/proteomics/tutorials/protein-id-sg-ps/tutorial.html).
 The latter tutorial does not allow to continue with the tutorial on protein quantitation.
 
 # Input data
@@ -27,8 +27,9 @@ As an example dataset, we will use an LC-MS/MS analysis of HeLa cell lysate publ
 in [Vaudel et al., 2014, Proteomics](https://www.ncbi.nlm.nih.gov/pubmed/24678044). Detailed information
 about the dataset can be found on [PRIDE](https://www.ebi.ac.uk/pride/archive/projects/PXD000674).
 For step 2 we will use a validated human Uniprot FASTA database with appended decoys.
-If you already completed the tutorial on [Database Handling]({{site.url}}/topics/proteomics/tutorials/database-handling/tutorial.html)
-you can use the constructed database including decoys. 
+
+If you already completed the tutorial on [Database Handling]({{site.baseurl}}/topics/proteomics/tutorials/database-handling/tutorial.html)
+you can use the constructed database including decoys.
 You can find a prepared database, as well as the input LC-MS/MS data in different file formats on [Zenodo](https://zenodo.org/record/796184).
 
 > ### Agenda
@@ -71,10 +72,10 @@ If your data were generated on a low resolution mass spectrometer, use ***PeakPi
 {: .hands_on}
 
 # Peptide Identification
-MS/MS experiments identify peptides by isolating them and subsequently colliding them with a gas for fragmentation. This method generates a spectrum of peptide fragment masses for each isolated peptide - an MS2 spectrum. 
+MS/MS experiments identify peptides by isolating them and subsequently colliding them with a gas for fragmentation. This method generates a spectrum of peptide fragment masses for each isolated peptide - an MS2 spectrum.
 To find out the peptide sequences, the MS2 spectrum is compared to a theoretical spectrum generated from a protein database. This step is called peptide-to-spectrum (also: spectrum-to-sequence) matching. Accordingly, a peptide that is successfully matched to a sequence is termed PSM (Peptide-Spectrum-Match). There can be multiple PSMs per peptide, if the peptide was fragmented several times.
 
-Different peptide search engines have been developed to fulfill the matching procedure. Here, we will use the search engine [X!Tandem](https://www.ncbi.nlm.nih.gov/pubmed/14976030). OpenMS provides "adapters" (wrappers) for several other peptide search engines, like MSGF+ or OMSSA. You may replace the XTandemAdapter by another search engine of your choice. 
+Different peptide search engines have been developed to fulfill the matching procedure. Here, we will use the search engine [X!Tandem](https://www.ncbi.nlm.nih.gov/pubmed/14976030). OpenMS provides "adapters" (wrappers) for several other peptide search engines, like MSGF+ or OMSSA. You may replace the XTandemAdapter by another search engine of your choice.
 
 > ### {% icon hands_on %} Hands-On: Peptide Identification
 >
@@ -96,9 +97,9 @@ Different peptide search engines have been developed to fulfill the matching pro
 # Peptide FDR filtering
 The next step of peptide identification is to decide which PSMs will be used for protein inference. Measured MS2 spectra never perfectly fit the theoretical spectra. Therefore, peptide search engines calculate a score which indicates how well the measured MS2 spectrum was fitting the theoretical spectrum. How do we decide which PSMs are likely true and which are false?
 
-In proteomics, this decision is typically done by calculating false discovery rates (FDRs). Remember that the database we were using for peptide-to-spectrum matching consisted not only of true proteins, but also the same number of "fake entries", the so-called decoys. Those decoys can now be used to estimate the number of false identifications in the list of PSMs. 
+In proteomics, this decision is typically done by calculating false discovery rates (FDRs). Remember that the database we were using for peptide-to-spectrum matching consisted not only of true proteins, but also the same number of "fake entries", the so-called decoys. Those decoys can now be used to estimate the number of false identifications in the list of PSMs.
 The calculation is based on a simple assumption: for every decoy protein identified with a given score, we expect one false positive with at least the same score.
-The false discovery rate is therefore defined as the number of false discoveries (decoy hits) divided by the number of false and correct discoveries (both target and decoy hits) at a given score threshold. 
+The false discovery rate is therefore defined as the number of false discoveries (decoy hits) divided by the number of false and correct discoveries (both target and decoy hits) at a given score threshold.
 
 To calculate FDRs, we first have to annotate the identified peptides to determine which of them are decoys. This is done with the tool ***PeptideIndexer*** {% icon tool %}. Additionally, we will calculate peptide posterior error probabilities (PEPs), because they are needed for the protein inference algorithm used by OpenMS. We will then filter for 1 % FDR and set the score back to PEP.
 
@@ -115,7 +116,7 @@ To calculate FDRs, we first have to annotate the identified peptides to determin
 >   - `-add_decoy_peptides` set to `Yes`.
 > 4. Run ***IDScoreSwitcher*** {% icon tool %} with
 >   - **Name of the meta value to use as the new score** set to "Posterior Probability_score", and
->   - **Orientation of the new score`** set to `higher_better`. 
+>   - **Orientation of the new score`** set to `higher_better`.
 > 5. Run ***FileInfo*** {% icon tool %} to get basic information about the identified peptides.
 >
 >   > ### {% icon question %} Questions:
@@ -133,7 +134,7 @@ To calculate FDRs, we first have to annotate the identified peptides to determin
 {: .hands_on}
 
 # Protein Inference
-In bottom-up proteomics, it is necessary to combine the identified peptides to proteins. This is not a trivial task, as proteins are redundant to some degree. Thus, not every peptide can be assigned to only one protein. 
+In bottom-up proteomics, it is necessary to combine the identified peptides to proteins. This is not a trivial task, as proteins are redundant to some degree. Thus, not every peptide can be assigned to only one protein.
 The OpenMS suite implemented the [Fido](https://www.ncbi.nlm.nih.gov/pubmed/20712337) algorithm for protein inference. Fido uses a Bayesian probabilistic model to group and score proteins based on peptide-spectrum matches.
 
 > ### {% icon hands_on %} Hands-On: Protein inference
@@ -149,8 +150,8 @@ The OpenMS suite implemented the [Fido](https://www.ncbi.nlm.nih.gov/pubmed/2071
 {: .hands_on}
 
 # Analysis of Contaminants
-The FASTA database used for the peptide to spectrum matching contained some entries that were not expected to stem from the HeLa cell lysate, but are common contaminations in LC-MS/MS samples. The main reason to add those is to avoid false assignment of contaminant spectra to other proteins. 
-It also enables you to check for contaminations in your samples. 
+The FASTA database used for the peptide to spectrum matching contained some entries that were not expected to stem from the HeLa cell lysate, but are common contaminations in LC-MS/MS samples. The main reason to add those is to avoid false assignment of contaminant spectra to other proteins.
+It also enables you to check for contaminations in your samples.
 
 **CAVE:** When analyzing human samples, many proteins that are common contaminants may also stem from the sample. Therefore, human contaminants do not have to be excluded from further analysis, but you should keep in mind that the source of these proteins is unclear.
 
@@ -158,7 +159,7 @@ It also enables you to check for contaminations in your samples.
 >
 > 1. Run ***TextExporter*** {% icon tool %} to convert the idXML output to a human-readable tabular file.
 > 1. Run ***Select*** {% icon tool %} to select all lines **Matching** the pattern "CONTAMINANT".
-> 3. Run ***Select*** {% icon tool %} to select all lines that **NOT Matching** the pattern "HUMAN". 
+> 3. Run ***Select*** {% icon tool %} to select all lines that **NOT Matching** the pattern "HUMAN".
 > 2. Remove all bovine and mycoplasma proteins from your list by running ***Select*** {% icon tool %}. Select only those lines **NOT Matching** match the pattern "HUMAN".
 >
 >   > ### {% icon question %} Questions
