@@ -35,7 +35,7 @@ To start on Genome assembly you can read the previous assembly tutorials:
 Genome assembly is a difficult task. In trying to explain it we will be relying on two highly regarded sources:
 
 - [Ben Langmead's Teaching Materials](http://www.langmead-lab.org/teaching-materials/)
-- [Pevzner and Compeau Bioinformatics Book](http://www.amazon.com/Bioinformatics-Algorithms-Active-Learning-Approach/dp/0990374602). 
+- [Pevzner and Compeau Bioinformatics Book](https://www.goodreads.com/book/show/22033056-bioinformatics-algorithms).
 
 
 ---
@@ -49,7 +49,7 @@ Genome assembly is a difficult task. In trying to explain it we will be relying 
 
 ## *k*-mer composition
 
-Genomes are strings of text. When we sequence genomes we use sequencing machines that generate reads. For now let's assume that all reads have the same length *k* and every *k*-mer is sequenced only once. We will relax these assumptions later in this lecture. Thus sequencing a genome generates a large list of *k*-mers.  
+Genomes are strings of text. When we sequence genomes we use sequencing machines that generate reads. For now let's assume that all reads have the same length *k* and every *k*-mer is sequenced only once. We will relax these assumptions later in this lecture. Thus sequencing a genome generates a large list of *k*-mers.
 
 Suppose we are dealing with a *very* short genome `TATGGGGTGC`. Its *k*-mer composition (note the subscript) **Composition_k(Text)** is the collection of all *k*-mer substrings (including repeated ones). When *k* = 3 we get (basically we split sequence into windows of length 3 sliding window by 1 base every time):
 
@@ -65,7 +65,7 @@ Composition_3(TATGGGGTGC)= ATG,GGG,GGG,GGT,GTG,TAT,TGC,TGG
 Composition_3(TATGGGGTGC)= ATG,GGG,GGG,GGT,GTG,TAT,TGC,TGG
 <samp>
 
-Note that we have listed *k*-mers in lexicographic order (i.e., how they would appear in a dictionary) rather than in the order of their appearance in <code>TATGGGGTGC</code>. We have done this because the correct ordering of the reads is unknown when they are generated (i.e., a sequencing machine does not generate reads in any particular order). 
+Note that we have listed *k*-mers in lexicographic order (i.e., how they would appear in a dictionary) rather than in the order of their appearance in <code>TATGGGGTGC</code>. We have done this because the correct ordering of the reads is unknown when they are generated (i.e., a sequencing machine does not generate reads in any particular order).
 
 
 ---
@@ -94,7 +94,7 @@ Now let's apply it to slightly longer "genome" with the following 3-mer composit
 
 <code>
 AAT ATG ATG ATG CAT CCA GAT GCC GGA GGG GTT TAA TGC TGG TGT
-</code> 
+</code>
 
 `TAA` looks like a great beginning and we are continuing:
 ```
@@ -107,7 +107,7 @@ AAT ATG ATG ATG CAT CCA GAT GCC GGA GGG GTT TAA TGC TGG TGT
   TAATGTT
 ```
 
-There is nothing in the original 3-mer composition, which starts with `TT`. 
+There is nothing in the original 3-mer composition, which starts with `TT`.
 
 ---
 
@@ -132,7 +132,7 @@ Let's track back and instead of `TGT` in step 4 insert `TGC`:
    TAATGCCATGGATGTT
 ```
 
-We only used 14 3-mers from the total of 15, so our genome is shorter (we have extra parts!). This difficulty is related to the fact that there are three repeated `ATG` motifs in this genome and as a result each `ATG` can be extended by either `TGG`, `TGC`, or `TGT`. 
+We only used 14 3-mers from the total of 15, so our genome is shorter (we have extra parts!). This difficulty is related to the fact that there are three repeated `ATG` motifs in this genome and as a result each `ATG` can be extended by either `TGG`, `TGC`, or `TGT`.
 
 ---
 
@@ -149,14 +149,14 @@ TAA
 -------
 TAATGTT   <- "genome" (7 bases)
 -------
-0123456    
+0123456
 ```
 The *Coverage* at positions 1 and 6 is *1*, at positions 1 and 5 is *2*, and at position 2, 3, and 4 is *3*. <br>The *Average Coverage* will be 15/7 ~ 2x
 
 
 ---
 
-Below is another, slightly more realistic example where average coverage is 177/35 ~ 7x: 
+Below is another, slightly more realistic example where average coverage is 177/35 ~ 7x:
 
 ```
                   CTAGGCCCTCAATTTTT
@@ -215,7 +215,7 @@ The First law states that if a *suffix* of one read is similar to a *prefix* of 
 
 ```
 TCTATATCTCGGCTCTAGG    <- read 1
-    ||||||| ||||||| 
+    ||||||| |||||||
     TATCTCGACTCTAGGCC  <- read 2
 ```
 
@@ -234,8 +234,8 @@ TCTATATCTCGGCTCTAGG    <- read 1
 Note that in the above example suffix of the first read is *not* exactly identical to the prefix of the second read: they differ by a G-to-A substitution. Such differences are quite common in real life and may be caused by:
 
 * **sequencing errors** - experimental or computational artifacts of DNA sequencing procedures.
-* **allelic differences** - organisms such as human are diploid (and others, such as wheat are hexaploid) which maternal and paternal genomes being different at a number of genomic sites. 
-* **polymorphic sites** - DNA that is being sequenced is usually isolated from a large number of cells (e.g., white blood cells) or individuals (bacterial and viral cultures). Natural variation present in these cell (or viral particle) populations will manifest itself as these differences. 
+* **allelic differences** - organisms such as human are diploid (and others, such as wheat are hexaploid) which maternal and paternal genomes being different at a number of genomic sites.
+* **polymorphic sites** - DNA that is being sequenced is usually isolated from a large number of cells (e.g., white blood cells) or individuals (bacterial and viral cultures). Natural variation present in these cell (or viral particle) populations will manifest itself as these differences.
 
 ---
 
@@ -266,11 +266,11 @@ The Second law states that higher coverage leads to more frequent and longer ove
 
 # Solving assembly problem with graphs
 
-We can solve assembly challenge using overlaps between sequencing reads. However, to solve this problem effectively we need to first represent all overlaps in a way that would facilitate further analysis. *Directed graphs* help achieving this. 
+We can solve assembly challenge using overlaps between sequencing reads. However, to solve this problem effectively we need to first represent all overlaps in a way that would facilitate further analysis. *Directed graphs* help achieving this.
 
 ---
 
-## Directed graphs 
+## Directed graphs
 
 Finding overlaps is identical to building a *directed graph* where directed *edges* connect *nodes* representing overlapping reads:
 ![](../../images/dag.png)
@@ -305,7 +305,7 @@ can be represented as a following directed graph (or genome path):
 
 ![](../../images/4.6.png)
 
-**Genome path**. Trimers composing the <code>TAATGCCATGGGATGTT</code> sequence represented as the "genome" path. (Fig. 4.6 from [CP](http://bioinformaticsalgorithms.com/)). In this path a suffix of a 3-mer is equal to prefix of the next 3-mer. 
+**Genome path**. Trimers composing the <code>TAATGCCATGGGATGTT</code> sequence represented as the "genome" path. (Fig. 4.6 from [CP](http://bioinformaticsalgorithms.com/)). In this path a suffix of a 3-mer is equal to prefix of the next 3-mer.
 
 ---
 
@@ -318,7 +318,7 @@ can be represented as a following directed graph (or genome path):
 >
 >**Overlap graph**. All possible overlap connections for our 3-mer collection. (Fig. 4.7 from [CP](http://bioinformaticsalgorithms.com/))
 
-So to determine the sequence of the underlying genome we are looking a path in this graph that visits every node (3-mer) once. Such path is called [Hamiltonial path](https://en.wikipedia.org/wiki/Hamiltonian_path) and it may not be unique. 
+So to determine the sequence of the underlying genome we are looking a path in this graph that visits every node (3-mer) once. Such path is called [Hamiltonial path](https://en.wikipedia.org/wiki/Hamiltonian_path) and it may not be unique.
 
 ---
 
@@ -327,7 +327,7 @@ For example for our 3-mer collection there two possible Hamiltonian paths:
 ![](../../images/4.9a.png)
 ![](../../images/4.9b.png)
 
-**Two Hamiltonian paths for the 15 3-mers**. Edges spelling "genomes" <code>TAATGCCATGGGATGTT</code> and <code>TAATGGGATGCCATGTT</code> are highlighted in black. (Fig. 4.9. from [[CP](http://bioinformaticsalgorithms.com/)](http://bioinformaticsalgorithms.com/)). 
+**Two Hamiltonian paths for the 15 3-mers**. Edges spelling "genomes" <code>TAATGCCATGGGATGTT</code> and <code>TAATGGGATGCCATGTT</code> are highlighted in black. (Fig. 4.9. from [[CP](http://bioinformaticsalgorithms.com/)](http://bioinformaticsalgorithms.com/)).
 
 ---
 
@@ -359,7 +359,7 @@ As a result we represent two reads are connected nodes:
 >
 >![](../../images/og1.png)
 >
->Number above the edge shows the length of the overlap. 
+>Number above the edge shows the length of the overlap.
 
 While with just two reads the problem may seen quite straightforward. Let now consider a set of reads representing a very short genome <code>GTACGTACGAT</code>:
 
@@ -382,7 +382,7 @@ Building an overlap graph with overlap of <code>length >= 4</code> will give us 
 >
 >![](../../images/og3.png)
 >
->Here we are lucky enough to have all nodes having a single outgoing edge with the highest number (the length of overlap). 
+>Here we are lucky enough to have all nodes having a single outgoing edge with the highest number (the length of overlap).
 
 ---
 
@@ -410,11 +410,11 @@ SCS(S):: AAABBBABAA (length = 10)
 </samp>
 
 
-  
+
 ---
 
 It looks like finding SCS for a set of sequencing reads may just be what we need to produce a genome assembly. But how can this work in practice? One potential idea is to order the strings in some way and "reduce" them into a superstring (following examples are from Ben Langmead):
- 
+
 >![](../../images/scs1.png)
 
 >Let's look at the first two strings. They can be "reduced" to `AAAB`:
@@ -441,8 +441,8 @@ It looks like finding SCS for a set of sequencing reads may just be what we need
 >
 >Now we did better, but maybe we can do even better.
 
-Ultimately we need to try all possible ordering and pick the shortest among all. Using this approach is we have <code>S</code> strings we will need to do <code>S!</code> tries. This can quickly get impossible. For our set of 
-eight strings <code>8! = 40320</code>. If we get, say, a 1,000,000 reads from an Illumina machine then the factorial of a million is not going to be an attractive analysis option. 
+Ultimately we need to try all possible ordering and pick the shortest among all. Using this approach is we have <code>S</code> strings we will need to do <code>S!</code> tries. This can quickly get impossible. For our set of
+eight strings <code>8! = 40320</code>. If we get, say, a 1,000,000 reads from an Illumina machine then the factorial of a million is not going to be an attractive analysis option.
 
 ---
 
@@ -512,7 +512,7 @@ Next, we start collapsing the nodes to maximize the overlap (and hence to decrea
 >
 >![](../../images/greedy9.png)
 
-The above procedure can be computed *very* quickly. But there is a catch: it does not guarantee that it will give us truly the shortest superstring. It really depends on how we choose edges. 
+The above procedure can be computed *very* quickly. But there is a catch: it does not guarantee that it will give us truly the shortest superstring. It really depends on how we choose edges.
 
 ---
 
@@ -529,7 +529,7 @@ Below is another example of using the same dataset in which we traverse graph in
 >Merge `AAA` and `AAB`:
 >
 >![](../../images/greedy3.png)
-] 
+]
 
 ---
 .pull-left[
@@ -558,7 +558,7 @@ Below is another example of using the same dataset in which we traverse graph in
 ]
 ---
 
-And the SCS of these two will be a concatenation `AAABBABBB` of length 9. Thus a greedy approach may produce different answers. However, it is a sufficient approximation as the superstring yielded this way will not be more than ~2.5 times longer than the true SCS ([Gusfield](https://www.amazon.com/Algorithms-Strings-Trees-Sequences-Computational/dp/0521585198) 16.17.1).
+And the SCS of these two will be a concatenation `AAABBABBB` of length 9. Thus a greedy approach may produce different answers. However, it is a sufficient approximation as the superstring yielded this way will not be more than ~2.5 times longer than the true SCS ([Gusfield](https://www.goodreads.com/book/show/145058.Algorithms_on_Strings_Trees_and_Sequences) 16.17.1).
 
 ---
 
@@ -567,7 +567,7 @@ And the SCS of these two will be a concatenation `AAABBABBB` of length 9. Thus a
 Let's again apply Greedy SCS to a different "genome". Suppose we want to reconstruct the phrase:
 
 <samp>
-a_long_long_long_time 
+a_long_long_long_time
 </samp>
 
 from all 6-mers that overlap by at least 3 characters. The list of 6-mers is:
@@ -651,7 +651,7 @@ As we've seen above the shortest common superstring (SCS) is:
 
 1. **Difficult to obtain** as Greedy SCS algorithm does not guarantee finding it. So the answer we get may be longer thans the real genome we are trying to assemble.
 
-2. **May be shorter than we want** because if the genome contains repeats that are longer than the reads we are using, Greedy SCS will collapse them and make assembly shorter that the genome we are trying to get. 
+2. **May be shorter than we want** because if the genome contains repeats that are longer than the reads we are using, Greedy SCS will collapse them and make assembly shorter that the genome we are trying to get.
 
 Let's talk about an alternative way to represent the relationship between *k*-mers that may give us a more efficient algorithm.
 
@@ -749,7 +749,7 @@ Let's look at the de Bruijn graph from above again. But this time let's drop edg
 
 >![](../../images/dg1.png)
 >
->**Eulerian paths for the 15 3-mers**. 
+>**Eulerian paths for the 15 3-mers**.
 
 ---
 
@@ -854,7 +854,7 @@ In the above example we have used *k*-mer size of 3. But what if we try 4 or 5? 
 #### *k* = 5
 In this case there is only one path. This because our *k* is larger that the repeat size, so we can resolve it accurately.
 
-This is why technologies producing long sequencing reads stimulate so much enthusiasm - they will allow to resolve and produce accurate assembly of large genomes. 
+This is why technologies producing long sequencing reads stimulate so much enthusiasm - they will allow to resolve and produce accurate assembly of large genomes.
 ]
 .pull-right[
 ![](../../images/k4.png)
@@ -880,7 +880,7 @@ In this topic we've learned about two ways of representing the relationship betw
 ---
 
 **B.**
-An overlap (A) and DeBruijn (B) graphs for the same string. 
+An overlap (A) and DeBruijn (B) graphs for the same string.
 
 Whatever the representation will be it will be messy:
 
@@ -895,7 +895,7 @@ There are multiple reasons for such messiness:
 
 **Sequence errors**
 
-Sequencing machines do not give perfect data. This results in spurious deviations on the graph. Some sequencing technologies such as Oxford Nanopore have very high error rate of ~15%. 
+Sequencing machines do not give perfect data. This results in spurious deviations on the graph. Some sequencing technologies such as Oxford Nanopore have very high error rate of ~15%.
 
 >![](../../images/t12_errors.png)
 >
@@ -933,5 +933,3 @@ As we've seen the third law of assembly is unbeatable. As a result some regions 
 ---
 
 See the tutorial accompanied by these slides!
-
-
