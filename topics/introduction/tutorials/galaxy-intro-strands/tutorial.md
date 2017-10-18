@@ -106,7 +106,7 @@ There are [many ways to get data into a Galaxy instance](/topics/introduction/tu
 >
 {: .hands_on}
 
-The **Get Data** toolbox contains a list of data sources that this Galaxy instance can get data directly from.  **Upload file** is quite useful for getting data from your computer or from the web (see the [Getting data into Galaxy slides](/topics/introduction/tutorials/galaxy-intro-get-data/slides.html#4)).  Today we are going to use the **UCSC Main table browser**.
+The **Get Data** toolbox contains a list of data sources that this Galaxy instance can get data directly from.  **Upload file** is quite useful for getting data from your computer or from the web (see the [Getting data into Galaxy slides](/topics/introduction/tutorials/galaxy-intro-get-data/slides.html)).  Today we are going to use the **UCSC Main table browser**.
 
 ### Get genes
 
@@ -120,9 +120,9 @@ This will take you to the UCSC Table Browser:
 
  ![UCSC table browser tool, first screen for genes](../../images/ucsc_table_browser_w_default_settings.png)
 
-The [UCSC Table Browser](https://genome.ucsc.edu/cgi-bin/hgTables) provides access to all the data that is shown in the [UCSC Genome Browser](https://genome.ucsc.edu/cgi-bin/hgGateway) (see [box](#-ucsc-genome-browser) below). If you are working on a species that UCSC supports (like human) then the Table Browser is a great place to get genomic data.
+The [UCSC Table Browser](https://genome.ucsc.edu/cgi-bin/hgTables) provides access to all the data that is shown in the [UCSC Genome Browser](https://genome.ucsc.edu/cgi-bin/hgGateway) (see box below). If you are working on a species that UCSC supports (like human) then the Table Browser is a great place to get genomic data.
 
-The Table Browser has a daunting number of options. Fortunately,they are all set to commonly used defaults, greatly simplifying things, and most of the options are already set to what we want:
+The Table Browser has a daunting number of options. Fortunately, they are all set to commonly used defaults, greatly simplifying things, and most of the options are already set to what we want:
 
 * **clade:** `Mammal`
 * **genome:** `Human`
@@ -485,7 +485,7 @@ Let's refine our question slightly
 
 ## Walk through the workflow tutorial
 
-Run the [Create a reusable workflow from a history](../galaxy-intro-history-to-workflow/) tutorial for how to do this, *and then come back here to run your newly created workflow with the exon data.*
+Run the [Create a reusable workflow from a history](../galaxy-intro-history-to-workflow/tutorial.html) tutorial for how to do this, *and then come back here to run your newly created workflow with the exon data.*
 
 ## Rerun analysis with exon data
 
