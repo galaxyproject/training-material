@@ -1,0 +1,1122 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Galaxy Training!</title>
+        <link rel="stylesheet" href="https://galaxyproject.github.io/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="https://galaxyproject.github.io/training-material/assets/css/main.css?v=2">
+        <link rel="stylesheet" href="https://galaxyproject.github.io/training-material/assets/css/font-awesome.css">
+        <link rel="stylesheet" href="https://galaxyproject.github.io/training-material/assets/css/syntax_highlighting.css">
+    </head>
+    <body>
+        
+
+
+
+<header>
+    <nav class="navbar navbar-expand-md navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="https://galaxyproject.github.io/training-material/">
+                <img src="https://galaxyproject.github.io/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://galaxyproject.github.io/training-material/topics/introduction" title="Go back to list of tutorials">
+                            <i class="fa fa-folder-o" aria-hidden="true"></i> Introduction to Galaxy
+                        </a>
+                    </li>
+
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://galaxyproject.github.io/training-material/topics/introduction/slides" title="Introduction slides">
+                            <i class="fa fa-slideshare" aria-hidden="true"></i> Introduction slides
+                        </a>
+                    </li>
+                    
+
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/galaxyproject/training-material/tree/master/topics/introduction/docker" title="Docker image for this tutorial">
+                            <i class="fa fa-ship" aria-hidden="true"></i> Docker image
+                        </a>
+                    </li>
+                    
+
+                    
+
+                    
+
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://galaxyproject.github.io/training-material/topics/introduction#references" title="References">
+                            <i class="fa fa-book" aria-hidden="true"></i> Literature
+                        </a>
+                    </li>
+                    
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Chat on gitter">
+                            <i class="fa fa-life-ring" aria-hidden="true"></i> Help
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/galaxyproject/training-material/tree/master/topics/introduction/tutorials/galaxy-intro-strands/tutorial.md">
+                            <i class="fa fa-github" aria-hidden="true"></i> Edit
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<div class="container main-content">
+    <section class="tutorial">
+        <h1>Introduction to Genomics and Galaxy</h1>
+
+        <blockquote class="overview">
+            <h3>Overview</h3>
+
+            <strong><i class="fa fa-question-circle" aria-hidden="true"></i> Questions</strong>
+            <ul>
+            
+            <li>Do genes on opposite strands ever overlap?  If so, how often?</li>
+            
+            </ul>
+
+            <strong><i class="fa fa-bullseye" aria-hidden="true"></i> Objectives</strong>
+            <ul>
+            
+            <li>Learn some of the basic concepts of genomics and bioinformatics</li>
+            
+            <li>Familiarize yourself with the basics of Galaxy</li>
+            
+            </ul>
+
+            
+
+            <p><strong><i class="fa fa-hourglass-end" aria-hidden="true"></i> Time estimation:</strong> 2.5h</p>
+        </blockquote>
+
+        <h1 class="no_toc" id="introduction-to-galaxy">Introduction to Galaxy</h1>
+
+<p>This practical aims to familiarize you with the Galaxy user interface. It will teach you how to perform basic tasks such as importing data, running tools, working with histories, creating workflows, and sharing your work.</p>
+
+<blockquote class="comment">
+  <h3 id="-audience">
+<i class="fa fa-commenting-o" aria-hidden="true"></i> Audience</h3>
+  <p>This tutorial is for those who are new to Galaxy, genomics, and bioinformatics.  If you aren’t new to bioinformatics you can just do the items listed in the Hands-On boxes (<i class="fa fa-pencil" aria-hidden="true"></i>), or you can try one of the <a href="/topics/introduction/">other introductory tutorials</a>.</p>
+
+  <p>This tutorial teaches the same basic content as <a href="/topics/introduction/tutorials/galaxy-intro-101/tutorial.html">Galaxy 101</a>, but requires less knowledge of biology to understand the questions this tutorial addresses.</p>
+</blockquote>
+
+<blockquote class="agenda">
+  <h3 id="agenda">Agenda</h3>
+
+  <p>In this tutorial, we will:</p>
+
+<ol id="markdown-toc">
+  <li>
+<a href="#pretreatments" id="markdown-toc-pretreatments">Pretreatments</a>    <ol>
+      <li><a href="#get-human-gene-definitions" id="markdown-toc-get-human-gene-definitions">Get human gene definitions</a></li>
+      <li><a href="#get-data-into-galaxy" id="markdown-toc-get-data-into-galaxy">Get data into Galaxy</a></li>
+      <li><a href="#examine-the-data" id="markdown-toc-examine-the-data">Examine the data</a></li>
+      <li><a href="#naming" id="markdown-toc-naming">Naming</a></li>
+      <li><a href="#weve-got-the-data---whats-our-plan-for-answering-the-question" id="markdown-toc-weve-got-the-data---whats-our-plan-for-answering-the-question">We’ve got the data - what’s our plan for answering the question?</a></li>
+      <li><a href="#results-and-final-steps" id="markdown-toc-results-and-final-steps">Results and final steps.</a></li>
+      <li><a href="#do-we-have-a-problem" id="markdown-toc-do-we-have-a-problem">Do we have a problem?</a></li>
+      <li><a href="#walk-through-the-workflow-tutorial" id="markdown-toc-walk-through-the-workflow-tutorial">Walk through the workflow tutorial</a></li>
+      <li><a href="#rerun-analysis-with-exon-data" id="markdown-toc-rerun-analysis-with-exon-data">Rerun analysis with exon data</a></li>
+      <li><a href="#are-we-done" id="markdown-toc-are-we-done">Are we done?</a></li>
+    </ol>
+  </li>
+  <li><a href="#what-next" id="markdown-toc-what-next">What next?</a></li>
+  <li>
+<a href="#final-thoughts" id="markdown-toc-final-thoughts">Final thoughts</a>    <ol>
+      <li><a href="#why-not-use-excel-for-this" id="markdown-toc-why-not-use-excel-for-this">Why not use Excel for this?</a></li>
+    </ol>
+  </li>
+</ol>
+
+</blockquote>
+
+<h1 id="pretreatments">Pretreatments</h1>
+
+<blockquote class="comment">
+  <h3 id="-requirements">
+<i class="fa fa-check-circle" aria-hidden="true"></i> Requirements</h3>
+
+  <p>To run this practical you will need</p>
+
+  <ol>
+    <li>An internet-connected computer.  Galaxy can run on your laptop without an internet connection, but this practical requires access to resources on the web.</li>
+    <li>A web browser. <a href="https://www.mozilla.org/firefox">Firefox</a> and <a href="https://www.google.com/chrome/">Google Chrome</a> work well, as does <a href="https://www.apple.com/safari/">Safari</a>.  Internet Explorer is known to have issues with Galaxy so avoid using that.</li>
+    <li>Access to a Galaxy instance.  Galaxy is available in many ways. If you are doing this practical as part of a workshop, the instructor will tell you which instance to use. If you are doing this on your own, you can use <a href="https://usegalaxy.org">usegalaxy.org</a>.</li>
+  </ol>
+</blockquote>
+
+<blockquote class="question">
+  <h3 id="-our-motivating-question">
+<i class="fa fa-question-circle" aria-hidden="true"></i> Our Motivating Question</h3>
+  <p><em>I wonder if genes on opposite strands ever overlap with each other, and if so, how common is that?</em></p>
+</blockquote>
+
+<p>To explore this question we need a basic understanding of <em>genomes, chromosomes, strands,</em> and  <em>genes.</em></p>
+
+<blockquote class="comment">
+  <h3 id="-definitions-1">
+<i class="fa fa-commenting-o" aria-hidden="true"></i> Definitions 1</h3>
+
+  <ul>
+    <li>
+<strong>Genome</strong>
+      <blockquote>
+        <p>The genome is the collection of all DNA native to an organism. For humans, the genome is all of a person’s chromosomes.</p>
+      </blockquote>
+    </li>
+    <li>
+<strong>Chromosome</strong>
+      <blockquote>
+        <p>The largest unit of DNA organization in an organism.  Humans have two copies of 23 chromosomes.  Chromosomes are <em>linear</em> in humans, and all animals and plants.  (Bacteria have <em>circular</em> chromosomes.)</p>
+      </blockquote>
+    </li>
+    <li>
+<strong>Strand</strong>
+      <blockquote>
+        <p>Chromosomes are <em>double-stranded</em>.  One is the forward strand, is typically drawn on top, and moves from left to right. The other, reverse strand, is typically drawn on the bottom and moves from right to left.  Genes can occur on either strand.  A single gene will have parts on only one stand.</p>
+      </blockquote>
+    </li>
+    <li>
+<strong>Gene</strong>
+      <blockquote>
+        <p>“What is a gene?” is actually a hotly debated question.  For our purposes, a gene is a section of DNA on chromosome strand that creates a molecule used by an organism.</p>
+      </blockquote>
+    </li>
+  </ul>
+
+  <p>Graphically, the human genome can be shown as the chromosomes that are in it:</p>
+
+  <p><img src="../../images/human_genome_chroms.png" alt="Human genome consists of 23 (pairs of) chromosomes"></p>
+
+  <p>And here’s a representation of a chromosome, strands, and genes on the chromosome.</p>
+
+  <p><img src="../../images/chromosome_strands_genes.png" alt="Chromosomes are double stranded and have forward and reverse strands; strands have genes on them"></p>
+</blockquote>
+
+<p>The question we are asking looks like:</p>
+
+<p><img src="../../images/do_genes_on_opposite_strands_ever_overlap.png" alt="Does a situation like this exist?"></p>
+
+<p><em>Non-overlapping genes are common.  How common are overlapping genes?</em></p>
+
+<h2 id="get-human-gene-definitions">Get human gene definitions</h2>
+
+<p>To answer this question we need to know where genes start and stop on human chromosomes.  That seems like a simple question, but if you are new to bioinformatics it’s actually a hard question to answer.  Web searches will land you at any number of useful places on the web, but without a lot of background knowledge it’s hard to know what you want:  <em>What’s the difference between sequence and annotation?  What are FASTA, BED, GTF, GFF3, and VCF?  What are GRCh37, GRCh38, hg19, and hg38 (and what happened to hg20 through hg37 - are they okay)?</em></p>
+
+<p>It turns out that for this particular question (and for many others), most <strong>Galaxy</strong> instances can help us find this information.</p>
+
+<blockquote class="hands_on">
+  <h3 id="-hands-on-log-in-to-galaxy">
+<i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Log in to Galaxy</h3>
+  <p>In your web browser, <em>go to</em> <strong><a href="#-requirements">your Galaxy instance</a></strong> and <em>log in or register</em>.</p>
+</blockquote>
+
+<p>The Galaxy interface consists of three main parts. The available tools are listed on the left, your analysis history is recorded on the right, and the middle panel will show the home page, tool forms, and dataset content.</p>
+
+<p><img src="../../images/galaxy_interface.png" alt="Galaxy interface"></p>
+
+<blockquote class="hands_on">
+  <h3 id="-hands-on-start-with-an-empty-history">
+<i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Start with an empty history</h3>
+
+  <ul>
+    <li>
+      <p>If this is the first time you have used this Galaxy server, then your history panel will look like the image above.</p>
+    </li>
+    <li>
+      <p>If your history has datasets in it (there will be one or more green boxes, <em>datasets</em>, there) then create a new history:</p>
+      <ol>
+        <li>Click the <strong>gear icon</strong> at the top of the history panel</li>
+        <li>Select the option <strong>Create New</strong> from the menu</li>
+      </ol>
+    </li>
+  </ul>
+</blockquote>
+
+<h2 id="get-data-into-galaxy">Get data into Galaxy</h2>
+
+<p>There are <a href="/topics/introduction/tutorials/galaxy-intro-get-data/slides.html">many ways to get data into a Galaxy instance</a>. We are going to use the <strong>Get Data</strong> toolbox in the <strong>Tools</strong> panel on the left.</p>
+
+<blockquote class="hands_on">
+  <h3 id="-hands-on-open-get-data-toolbox">
+<i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Open <strong>Get Data</strong> toolbox</h3>
+
+  <ol>
+    <li>
+<em>Click</em> on the <strong>Get Data</strong> toolbox to expand it.
+      <blockquote>
+        <p><img src="../../images/101_01.png" alt="The Get Data toolbox"></p>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>The <strong>Get Data</strong> toolbox contains a list of data sources that this Galaxy instance can get data directly from.  <strong>Upload file</strong> is quite useful for getting data from your computer or from the web (see the <a href="/topics/introduction/tutorials/galaxy-intro-get-data/slides.html">Getting data into Galaxy slides</a>).  Today we are going to use the <strong>UCSC Main table browser</strong>.</p>
+
+<h3 id="get-genes">Get genes</h3>
+
+<blockquote class="hands_on">
+  <h3 id="-hands-on-go-to-ucsc">
+<i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Go to UCSC</h3>
+
+  <ol>
+    <li>
+<em>Click</em> on the tool <strong>UCSC Main table browser</strong> to go to UCSC.
+      <blockquote>
+        <p><img src="../../images/101_01.png" alt="Click on UCSC Main table browser"></p>
+      </blockquote>
+    </li>
+  </ol>
+</blockquote>
+
+<p>This will take you to the UCSC Table Browser:</p>
+
+<p><img src="../../images/ucsc_table_browser_w_default_settings.png" alt="UCSC table browser tool, first screen for genes"></p>
+
+<p>The <a href="https://genome.ucsc.edu/cgi-bin/hgTables">UCSC Table Browser</a> provides access to all the data that is shown in the <a href="https://genome.ucsc.edu/cgi-bin/hgGateway">UCSC Genome Browser</a> (see box below). If you are working on a species that UCSC supports (like human) then the Table Browser is a great place to get genomic data.</p>
+
+<p>The Table Browser has a daunting number of options. Fortunately, they are all set to commonly used defaults, greatly simplifying things, and most of the options are already set to what we want:</p>
+
+<ul>
+  <li>
+<strong>clade:</strong> <code class="highlighter-rouge">Mammal</code>
+</li>
+  <li>
+<strong>genome:</strong> <code class="highlighter-rouge">Human</code>
+</li>
+  <li>
+<strong>assembly:</strong> <code class="highlighter-rouge">Dec. 2013 (GRCh38/hg38)</code>
+</li>
+  <li>
+<strong>group:</strong> <code class="highlighter-rouge">Genes and Gene Predictions</code>
+</li>
+  <li>
+<strong>track:</strong> <code class="highlighter-rouge">GENCODE v24</code>
+</li>
+</ul>
+
+<p><strong>clade</strong> and <strong>genome</strong> seem pretty clear.  <strong>assembly</strong> asks which version/definition of the human genome we want.  (Any will do for our question, but UCSC is suggesting <code class="highlighter-rouge">hg38</code>, which is also the most recent.)  <strong>group</strong> is set to <code class="highlighter-rouge">Genes and Gene Predictions</code> which sounds like what we want. So far so good.</p>
+
+<p><strong>track</strong> has a bewildering list of options. UCSC suggests <code class="highlighter-rouge">GENCODE v24</code>.  A web search leads us to the <a href="https://www.gencodegenes.org/">GENCODE web site</a> which prominently states:</p>
+
+<blockquote>
+  <p>The GENCODE project produces high quality reference gene annotation and …</p>
+</blockquote>
+
+<p>Time for a few more definitions.</p>
+
+<blockquote class="comment">
+  <h3 id="-definitions-2">
+<i class="fa fa-commenting-o" aria-hidden="true"></i> Definitions 2</h3>
+
+  <ul>
+    <li>
+<strong>Reference genome</strong>
+      <blockquote>
+        <p>A reference genome is the <em>genome of a single individual</em> that has been thoroughly studied, to the point that we know exactly what most of that individual’s DNA is.  In practice a reference genome is used as shared map by researchers working on that organism. Reference genomes are updated periodically as techniques improve.</p>
+      </blockquote>
+    </li>
+    <li>
+<strong>Sequence</strong>
+      <blockquote>
+        <p>A genome’s sequence describes the DNA in that genome, down to the A, C, T, and G (single nucleotide) level including the exact location where each is.  Given a reference genome, you can ask questions like, “What’s the DNA on chromosome 2 between positions 1,678,901 and 1.688,322?”</p>
+      </blockquote>
+    </li>
+    <li>
+<strong>Genome/Gene annotation</strong>
+      <blockquote>
+        <p>The sequence tells us what DNA is where, but it doesn’t tell us anything about the function of that DNA.  <em>Annotation</em> is additional information about particular regions of the genome like where genes, repeats, promotors, and centromeres are, or how active a particular gene is.</p>
+      </blockquote>
+    </li>
+  </ul>
+</blockquote>
+
+<p>The <strong>track</strong> option asks us which set of annotations do we want to get?  There are so many choices because annotation is the result of analysis and interpretation, and there are many ways to do this. (And in this case, many of the options aren’t even genes or gene predictions.)</p>
+
+<p>GENCODE is “high-quality” and  “gene annotation.” That sounds like a good thing to use.  Lets stay with the default: <code class="highlighter-rouge">GENCODE V24</code>.</p>
+
+<p>So far we haven’t changed <em>anything</em> from the defaults.  Lets change something.  The default  <strong>region</strong> is the whole genome, which can be done, but it’s a lot of information. For this exercise lets use just one (small) chromosome.</p>
+
+<blockquote class="hands_on">
+  <h3 id="-hands-on-limit-the-region-and-get-the-data">
+<i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Limit the region and get the data.</h3>
+
+  <ol>
+    <li>Say that we just want chromosome 22
+      <ul>
+        <li>For <strong>region</strong> select <code class="highlighter-rouge">position</code>.</li>
+        <li>In the text box next to <code class="highlighter-rouge">position</code> enter <code class="highlighter-rouge">chr22</code> (case matters).
+          <blockquote>
+            <p><img src="../../images/ucsc_tb_set_region_chr22.png" alt="Change the region"></p>
+          </blockquote>
+        </li>
+      </ul>
+    </li>
+    <li>
+<em>Click</em> the <strong>get output</strong> button.
+      <ul>
+        <li>And, that doesn’t actually get us the output.  It sends us to a second UCSC page that asks us exactly what we want.
+ 
+          <blockquote>
+            <p><img src="../../images/ucsc_tb_2nd_page_whole_gene.png" alt="UCSC Table Browser 2nd page"></p>
+          </blockquote>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <p>Under <strong>Create one BED record per</strong> make sure that <strong>Whole Gene</strong> is selected.</p>
+    </li>
+    <li>
+<em>Click</em> the <strong>Send query to Galaxy</strong> button at the bottom of the form.</li>
+  </ol>
+</blockquote>
+
+<p>This returns us to Galaxy, first displaying a big green box (that’s good!) and then returning us to the view we started with.  Except that we now have an item in our history, the dataset from UCSC.</p>
+
+<h3 id="history-item-status">History Item Status</h3>
+
+<p>Watch your new history item.  It will go through three statuses before it’s done.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Color</th>
+      <th>Icon</th>
+      <th>Meaning</th>
+      <th> </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Grey</strong></td>
+      <td>Clock</td>
+      <td>Item is waiting to start (waiting for data transfer to start)</td>
+      <td><img src="../../images/status_queued.png" alt="Status: Queued"></td>
+    </tr>
+    <tr>
+      <td><strong>Yellow</strong></td>
+      <td>Spinner</td>
+      <td>Item is running (data is actively being transferred).</td>
+      <td><img src="../../images/status_running.png" alt="Status: Running"></td>
+    </tr>
+    <tr>
+      <td><strong>Green</strong></td>
+      <td>None</td>
+      <td>Item has finished successfully (data transfer complete).</td>
+      <td><img src="../../images/status_finished_success.png" alt="Status: Successfully finished"></td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Occasionally you will also see a 4th status</p>
+
+<ul>
+  <li>
+<strong>Red</strong>: Item did not finish successfully.</li>
+</ul>
+
+<p>See the <em>Galaxy History Item Status</em> practical for more. [TODO]</p>
+
+<h2 id="examine-the-data">Examine the data</h2>
+
+<blockquote class="hands_on">
+  <h3 id="-hands-on-look-at-the-data">
+<i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Look at the data.</h3>
+  <p>Once the dataset is green, <em>click</em> on the dataset name (something like <strong>UCSC Main on Human…</strong>)</p>
+</blockquote>
+
+<p>This expands the dataset and shows you information about it, and a preview of its contents.</p>
+
+<p><img src="../../images/genes_human_chr22_preview.png" alt="Preview of the data from UCSC Table Browser"></p>
+
+<ol>
+  <li>The preview tells us  several things:</li>
+  <li>The dataset has over 4000 regions, meaning that there are over 4000 genes on chromosome 22.</li>
+  <li>The dataset is in <strong>bed</strong> format.  BED is one of several standard formats for representing genome annotation.  BED is a tabular format that we’ll expand on below.  We got BED format because BED was preselected as the output format in the UCSC table browser.</li>
+  <li>The dataset’s “database” is <strong>hg38</strong>.  This says which revision of the reference genome this data maps too.  hg38 is the latest human reference genome.  hg38 was also selected by default in UCSC.</li>
+  <li>Finally, it shows us the first 5 rows in the dataset.</li>
+</ol>
+
+<p>The dataset preview is informative, but you can’t see much of the actual dataset.  Lets use one of the dataset icons to see the whole dataset</p>
+
+<blockquote class="hands_on">
+  <h3 id="-hands-on-look-at-all-the-data">
+<i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Look at all the data.</h3>
+  <ul>
+    <li>
+<em>Click</em> on the <strong>eye icon</strong> to view the contents of the dataset.
+      <blockquote>
+        <p>This displays all of the data
+   
+<img src="../../images/genes_human_chr22_dataset_view.png" alt="Full dataset in center panel"></p>
+      </blockquote>
+    </li>
+  </ul>
+</blockquote>
+
+<h3 id="bed-format">BED Format</h3>
+
+<p><a href="https://genome.ucsc.edu/FAQ/FAQformat.html#format1">BED</a> is one of several well-established tabular formats for genomic data.  Other formats include GFF3 and GTF.  For the type of analysis we are doing today, BED format is easiest to work with.  BED was created to power the UCSC Genome Browser.  BED files contain between 3 and 15 columns.  Our example BED file describes genes and contains 12 columns.</p>
+
+<p>We care about columns 1, 2, 3, and 6:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Column Name</th>
+      <th>Meaning</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>Chromosome</td>
+      <td>The name of the chromosome this gene is on.</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>Start</td>
+      <td>Where on the chromosome the gene starts.</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>End</td>
+      <td>Where on the chromosome the gene ends.</td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td>Strand</td>
+      <td>Which strand the gene is on.  <code class="highlighter-rouge">+</code> means forward (top, left to right), <code class="highlighter-rouge">-</code> means reverse (bottom, right to left)</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>See the <a href="https://genome.ucsc.edu/FAQ/FAQformat.html#format1">BED format description at UCSC</a> for a full description of all the columns.</p>
+
+<h2 id="naming">Naming</h2>
+
+<p>Galaxy allow you to name your analyses (your histories) and your datasets.  We only have one history (“Unnamed history”) and one dataset (“UCSC Main on Human:…”) so far, but it’s a good idea to</p>
+
+<ol>
+  <li>Always name your histories</li>
+  <li>Name your input and final output datasets, and any significant intermediate datasets.</li>
+</ol>
+
+<p>You don’t have to do this.  Galaxy is quite happy for you to have an infinite number of “Unnamed history” histories, and to have all your datasets be obscurely named.  However, once you’ve run your first 5 unnamed analyses, all with obscurely named datasets, you’ll might wish you would have named everything.</p>
+
+<blockquote class="hands_on">
+  <h3 id="-hands-on-name-your-stuff">
+<i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Name your stuff</h3>
+
+  <ol>
+    <li>
+<strong>Name your history</strong> to be meaningful and easy to find.
+      <ul>
+        <li>
+<em>Click</em> on the title of the history and enter something like <strong>Intro - Strands</strong> as the name.  Hit the <code class="highlighter-rouge">enter</code> key on your keyboard to save it.
+<img src="../../../../shared/images/rename_history.png" alt="Rename the history">
+</li>
+      </ul>
+    </li>
+    <li>
+<strong>Rename your dataset</strong>
+      <ul>
+        <li>
+<em>Click</em> on the <strong>pencil icon</strong> to edit the dataset attributes.</li>
+        <li>In the next screen change the name of the dataset to something like <code class="highlighter-rouge">Genes</code> or <code class="highlighter-rouge">Genes chr22</code>.</li>
+        <li>
+<em>Click</em> the <strong>Save</strong> button at the bottom of the screen.</li>
+      </ul>
+
+      <p>Your history should now look something like this:</p>
+
+      <p><img src="../../images/genes_human_chr22_rename.png" alt="Rename dataset"></p>
+    </li>
+  </ol>
+</blockquote>
+
+<h2 id="weve-got-the-data---whats-our-plan-for-answering-the-question">We’ve got the data - what’s our plan for answering the question?</h2>
+
+<p>You have to know what’s possible, before you can build a plan.  If you don’t have experience with data analysis then you might not have any idea how you would answer our question.  Before we dive in using a particular solution, think about how you might solve this.  If you don’t have any experience with tools, then think about how you might solve it manually, using pencil and paper (it may help to assume you have an infinite supply of helpers to do the pencil and paper work).</p>
+
+<p>Here’s how we’ll answer this question.</p>
+
+<ol>
+  <li>Split the genes dataset in two: one for genes on the forward strand, and one for genes on the reverse strand.</li>
+  <li>Compare the two datasets to see which ones, if any, overlap.</li>
+  <li>Check how many (or what percentage) of our genes overlap with another gene.</li>
+</ol>
+
+<p>It turns out that all of these steps are easy in Galaxy.</p>
+
+<h3 id="split-the-genes-into-forward-and-reverse-datasets">Split the genes into forward and reverse datasets</h3>
+
+<p>How might we do this?  Column 6 contains the strand information.  Can we split genes into two datasets based on the value of Column 6.  How?  Lets take a look at our available tools.  And <em>whoa! There are over 40 toolboxes, and several hundred tools.</em> How are we going to find a tool that can do the split?</p>
+
+<blockquote class="hands_on">
+  <h3 id="-searching-for-and-launching-a-tool">
+<i class="fa fa-pencil" aria-hidden="true"></i> Searching for and launching a tool</h3>
+
+  <ol>
+    <li>Try the <strong>tools search box</strong>.  Think of terms that might describe what we want to do and type them in the search box.  Do you see anything promising?  Explore a little.</li>
+    <li>If you haven’t already searched with it, <em>enter</em> <code class="highlighter-rouge">split</code> in the <strong>tool search box</strong>.  Near the top of the results is
+      <ul>
+        <li>
+<strong>Filter</strong> data on any column using simple expressions.</li>
+        <li>That might work.</li>
+      </ul>
+    </li>
+    <li>
+<em>Click</em> on <strong>Filter</strong> to open the Filter tool in the middle panel.</li>
+    <li>Take a look at the <strong>Syntax</strong> and <strong>Example</strong> sections to understand what the tool does.</li>
+  </ol>
+
+  <p><img src="../../images/filter_tool_defaults.png" alt="The Filter Tool form"></p>
+</blockquote>
+
+<p>It doesn’t say anything about Filter being able to split a file into multiple files.  It does look like we can use Filter to get only genes on the forward strand, or only genes on the reverse strand.  We would have to run Filter twice, once for forward strand genes, and once for reverse strand genes. Let’s do that.</p>
+
+<p>(You may have noticed during your search for tools that <em>all</em> tools have a similar look and feel.)</p>
+
+<blockquote class="hands_on">
+  <h3 id="-hands-on-run-the-filter-tool-to-get-genes-on-the-forward-strand">
+<i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Run the Filter tool to get genes on the forward strand.</h3>
+
+  <ul>
+    <li>
+      <p>The filter tool has 3 fields:</p>
+
+      <ol>
+        <li>
+<strong>Dataset</strong>: This pulldown will list any dataset from your history that this tool can work on.  In your case that’s probably only one dataset.  Make sure this is set to your <code class="highlighter-rouge">Genes</code> dataset.</li>
+        <li>
+<strong>Condition</strong>: this free text field is where we specify which records we want in the output dataset.  <em>Enter</em> <code class="highlighter-rouge">c6 == "+"</code> in the text box.
+          <ul>
+            <li>This specifies that column 6 (the strand) must be equal to (<code class="highlighter-rouge">==</code> is Python for <em>is equal to</em>) a plus sign.</li>
+          </ul>
+        </li>
+        <li>
+<strong>Header lines to skip</strong>: Leave this as <code class="highlighter-rouge">0</code>. Our dataset does not have any header lines.</li>
+      </ol>
+    </li>
+    <li>
+      <p>Finally, <em>click</em> the <strong>Execute</strong> button.</p>
+      <blockquote>
+        <p><img src="../../images/filter_tool_forward_strand_genes_only.png" alt="Run the Filter tool to get only the forward strand genes"></p>
+      </blockquote>
+    </li>
+  </ul>
+</blockquote>
+
+<p>This adds another dataset to your history.  This one should contain only genes on the forward strand.  Once the dataset is green, <em>click</em> the <strong>eye icon</strong> to confirm this.  We also recommend that you rename this dataset to something like <code class="highlighter-rouge">Genes, forward strand</code> (remember how?).</p>
+
+<p>Now we want to get the genes on the reverse strand.  There are actually many ways to get this.  Here are two of them.</p>
+
+<blockquote class="hands_on">
+  <h3 id="-hands-on-get-genes-on-the-reverse-strand">
+<i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Get genes on the reverse strand</h3>
+
+  <p><strong>Method 1</strong></p>
+
+  <ol>
+    <li>Open the dataset preview by <em>clicking</em> on the name of the <code class="highlighter-rouge">Genes, forward strand</code> dataset.  This shows an icon than the uploaded <code class="highlighter-rouge">Genes</code> dataset did not: a looping arrow.</li>
+    <li>
+<em>Click</em> the <strong>looping arrow</strong> (“Run this job again”) icon.  This won’t actually run the job again.  What it will do is bring up the Filter tool form with <em>the exact same settings that were used to produce this dataset.</em>
+</li>
+    <li>Rather than run Filter again with the same settings, <em>change</em> <strong>Condition</strong> to <code class="highlighter-rouge">c6 == "-"</code>
+</li>
+    <li>
+<em>Click</em> the <strong>Execute</strong> button.</li>
+  </ol>
+
+  <p><strong>Method 2</strong></p>
+  <ol>
+    <li>
+<em>Click</em> on <strong>Filter</strong> in the tool panel to open the Filter tool in the middle panel.</li>
+    <li>
+<em>Fill</em> the form as before, <em>except</em>:
+      <ul>
+        <li>Make sure the <strong>Dataset</strong> pulldown is set to the <code class="highlighter-rouge">Genes</code> dataset.</li>
+        <li>
+<em>Set</em> <strong>Condition</strong> to <code class="highlighter-rouge">c6 == "-"</code>.</li>
+      </ul>
+    </li>
+    <li>
+<em>Click</em> the <strong>Execute</strong> button.</li>
+  </ol>
+
+  <p><strong>Both Methods</strong></p>
+  <ol>
+    <li>
+<em>Rename</em> your new dataset to something like <code class="highlighter-rouge">Genes, reverse strand</code>
+</li>
+  </ol>
+</blockquote>
+
+<p>The rerun button can be a huge help as you run more complex tools.</p>
+
+<blockquote class="tip">
+  <h3 id="-tip-empty-result">
+<i class="fa fa-lightbulb-o" aria-hidden="true"></i> Tip: Empty result?</h3>
+
+  <p>If you used Method 2 and didn’t explicitly set the dataset, then you ran Filter on the <code class="highlighter-rouge">Genes, forward strand</code> dataset. None of the genes in the forward strand dataset have “-“ in column 6 so all of them were filtered out from the result.</p>
+
+  <p>Try again and set the dataset to your <code class="highlighter-rouge">Genes</code> dataset.</p>
+</blockquote>
+
+<p>Your history should now have (at least) 3 datasets in it, with names like:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">Genes</code></li>
+  <li><code class="highlighter-rouge">Genes, forward strand</code></li>
+  <li><code class="highlighter-rouge">Genes, reverse strand</code></li>
+</ul>
+
+<p>The number of genes in the <code class="highlighter-rouge">forward</code> plus <code class="highlighter-rouge">reverse</code> datasets should be the same as in the <code class="highlighter-rouge">Genes</code> dataset.  If they aren’t can you figure out why?</p>
+
+<h3 id="check-for-overlaps">Check for overlaps</h3>
+
+<p>Genes are an example of a <em>genomic interval</em>.</p>
+
+<blockquote class="comment">
+  <h3 id="-definitions-3">
+<i class="fa fa-commenting-o" aria-hidden="true"></i> Definitions 3</h3>
+
+  <ul>
+    <li>
+<strong>Genomic interval</strong>
+      <blockquote>
+        <p>In Galaxy, a <em>genomic interval</em> is a something that spans part of a chromosome (or some other linear frame of reference like a contig).  Genes are a common example of a genomic interval.  Even a chromosome is a genomic interval, albeit a very long one.</p>
+      </blockquote>
+    </li>
+  </ul>
+</blockquote>
+
+<p>Galaxy excels at answering questions about genomic intervals and different sets of genomic intervals relate to each other.  Lets take a look.</p>
+
+<blockquote class="hands_on">
+  <h3 id="-hands-on-genomic-interval-tools">
+<i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Genomic Interval Tools</h3>
+
+  <ul>
+    <li>In the tool panel, <em>open</em> the <strong>Operate on Genomic Intervals</strong> toolbox.  It’s typically past the <strong>NGS</strong> toolboxes.</li>
+    <li>
+<em>Explore</em> the tools in this toolbox, looking for something that we can use to see which genes on opposite strands overlap.</li>
+  </ul>
+</blockquote>
+
+<p>Of the tools in the <strong>Operate on Genomic Intervals</strong> toolbox, <strong>Join</strong> and particularly <strong>Intersect</strong> have the most promise.  Let’s try <strong>Intersect</strong>.</p>
+
+<blockquote class="hands_on">
+  <h3 id="-hands-on-genomic-interval-tools-1">
+<i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Genomic Interval Tools</h3>
+
+  <ol>
+    <li>In the tool panel, <em>click</em> <strong>Intersect</strong> in the <strong>Operate on Genomic Intervals</strong> toolbox.</li>
+    <li>
+<strong>Intersect</strong> <i class="fa fa-wrench" aria-hidden="true"></i> with the following parameters:
+      <ul>
+        <li>
+<strong>Return</strong> to <code class="highlighter-rouge">Overlapping Intervals</code>.
+          <ul>
+            <li>This looks like it might return whole genes, while <code class="highlighter-rouge">Overlapping pieces</code> may return only the parts that overlap.  We suspect that whole genes might be more useful.</li>
+          </ul>
+        </li>
+        <li>
+<strong>of</strong> (the first dataset) to <code class="highlighter-rouge">Genes, forward strand</code>
+</li>
+        <li>
+<strong>that intersect</strong> (the second dataset) to <code class="highlighter-rouge">Genes, reverse strand</code>
+</li>
+        <li>
+<strong>for at least</strong> to <code class="highlighter-rouge">1</code>
+          <ul>
+            <li>This will return genes with even just one position overlapping.</li>
+          </ul>
+        </li>
+        <li>
+<em>Click</em> <strong>Execute</strong>.
+          <blockquote>
+            <p><img src="../../images/genes_human_intersect_strands.png" alt="Run Intersect"></p>
+          </blockquote>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <p>Now repeat the intersect, but make the first dataset be the reverse genes, and the second be the forward genes.</p>
+    </li>
+    <li>Finally give both of the new datasets meaningful names, like <code class="highlighter-rouge">Overlapping forward genes</code> and <code class="highlighter-rouge">Overlapping reverse genes</code>
+</li>
+  </ol>
+</blockquote>
+
+<h2 id="results-and-final-steps">Results and final steps.</h2>
+
+<p>At this point we <em>could</em> say that we have answered our question. Using dataset previews in the history panel, we can compare the number of genes in the <code class="highlighter-rouge">Overlapping forward</code> and <code class="highlighter-rouge">Overlapping reverse</code> datasets with the number of genes in the full <code class="highlighter-rouge">Genes</code> dataset, and <em>conclude that overlapping genes on opposite strands are actually pretty common.</em></p>
+
+<p>However, before we rush off to publish our conclusions, let’s</p>
+
+<ol>
+  <li>Get both the forward and reverse overlapping genes into a single dataset (one link will look better in our publication), and</li>
+  <li>
+<em>Visualize</em> our new dataset, just to double-check our results.</li>
+</ol>
+
+<h3 id="combine-forward-and-reverse-overlapping-genes-into-one-dataset">Combine forward and reverse overlapping genes into one dataset.</h3>
+
+<p>What tool can we use to combine the two datasets into one?  Try <em>searching</em> for <code class="highlighter-rouge">combine</code> or <code class="highlighter-rouge">join</code> or <code class="highlighter-rouge">stack</code> in the tool search box.  You’ll find lots of tools, but none of them do what we want to do. <em>Some times you just have to manually look through toolboxes to find what you need.</em>  Where should we look?  It’s probably not <strong>Get Data</strong> or <strong>Send Data</strong>, but it could easily be in any of the next 4 toolboxes: <strong>Lift-Over, Collection Operations, Text Manipulation, or Datamash</strong>.</p>
+
+<p>It turns out that <strong>Lift-Over</strong> and <strong>Collection Operations</strong> are not what we want.  (But, take a look at them: if you are going to work with genomic data it won’t take long before you’ll need both.)</p>
+
+<blockquote class="hands_on">
+  <h3 id="-hands-on-concatenate-two-datasets">
+<i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: <em>Concatenate</em> two datasets</h3>
+
+  <ol>
+    <li>
+<em>Open</em> the <strong>Text Manipulation</strong> toolbox.</li>
+    <li>Near the top of the toolbox is <strong>Concatenate datasets tail-to-head</strong>. <em>Click</em> on it.  Lets try that tool.</li>
+    <li>
+<strong>Concatenate</strong> <i class="fa fa-wrench" aria-hidden="true"></i> with the following parameters:
+      <ul>
+        <li>
+<em>Set</em> <strong>Concatenate Dataset</strong> to <code class="highlighter-rouge">Overlapping reverse genes</code>.</li>
+        <li>
+<em>Click</em> <strong>+ Insert Dataset</strong>.  This adds a second dataset pull-down menu to the form.</li>
+        <li>
+<em>Select</em> <code class="highlighter-rouge">Overlapping forward genes</code> as the second dataset.</li>
+      </ul>
+    </li>
+    <li>
+<em>Click</em> <strong>Execute</strong>
+</li>
+    <li>
+<em>Rename</em> the resulting dataset something informative like <code class="highlighter-rouge">Overlapping genes</code>
+</li>
+  </ol>
+</blockquote>
+
+<p>Once the concatenate operation is finished, preview the dataset in your history panel.  Does it have the expected number of genes in it?  If not, see if you can figure out what happened.</p>
+
+<h3 id="visualize-the-overlapping-genes">Visualize the overlapping genes</h3>
+
+<p>Galaxy knows about several visualization options for lots of different dataset types, including BED.  Whenever you preview a dataset in the history panel, Galaxy provides links to these visualizations.  For BED files (which is the format we have), options include <strong>IGB, IGV,</strong> and <strong>UCSC main.</strong>  IGB and IGV are widely used desktop applications and eventually you may want to install one or both of them.  For now, let’s visualize the data at UCSC, using the UCSC <em>Genome</em> Browser.</p>
+
+<blockquote class="hands_on">
+  <h3 id="-hands-on-display-data-in-genome-browser">
+<i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Display data in Genome Browser</h3>
+
+  <ol>
+    <li>
+<em>Click</em> on your <code class="highlighter-rouge">Overlapping genes</code> dataset in your history panel. This will show the dataset preview in the history panel.</li>
+    <li>
+<em>Click</em> on the <strong>display at UCSC main</strong> link.</li>
+  </ol>
+
+  <p>This will launch a new window, showing UCSC’s Genome Browser with our dataset shown right at the top.  UCSC figures out that our first overlapping gene is ~11 million bases into chromosome 22, and it has landed us there.</p>
+
+  <p><img src="../../images/ucsc_gb_genes_strands_overlapping.png" alt="UCSC Genome Browser"></p>
+</blockquote>
+
+<blockquote class="comment">
+  <h3 id="-background-ucsc-genome-browser">
+<i class="fa fa-commenting-o" aria-hidden="true"></i> Background: UCSC Genome Browser</h3>
+
+  <ul>
+    <li>
+      <p><em>Genome browsers</em> are software for viewing genomic information graphically.  The <a href="https://genome.ucsc.edu/cgi-bin/hgGateway">UCSC Genome Browser</a> (and most genome browsers) typically display different types of <em>annotation</em> about a region of a genome.  This is displayed as a stack of <em>tracks</em> and each track contains a different type of information.</p>
+    </li>
+    <li>
+      <p>Genome browsers are useful for seeing information in context and for seeing (and discovering) correlations between different types of information.  (They are also useful for visually checking results, which is what we are doing now.)</p>
+    </li>
+    <li>
+      <p>The UCSC Genome Browser has information on over 100 animals, and their <a href="http://archaea.ucsc.edu/cgi-bin/hgGateway?db=pyrFur2">Archaeal Genome Browser</a> has genomic information on well over 100 microbial species.</p>
+    </li>
+  </ul>
+</blockquote>
+
+<p>Now, take a look at one of our results.  (Any pair of overlapping genes will do.)  Our data is in the second to top track (<strong>User Track / User Supplied Track</strong>). That track shows a line of small black boxes, sometimes connected with a line.</p>
+
+<blockquote class="hands_on">
+  <h3 id="-zoom-in-on-an-area-of-the-chromosome-that-shows-a-set-of-linked-black-boxes">
+<i class="fa fa-pencil" aria-hidden="true"></i> Zoom in on an area of the chromosome that shows a set of <em>linked</em> black boxes</h3>
+  <p>To zoom in,</p>
+  <ul>
+    <li>
+<em>Click</em> on the <strong>Scale</strong> track (the top track) just to the left of the start of the black boxes.</li>
+    <li>Now <em>drag</em> the mouse across the Scale track to just to the right of the  black boxes and let go.
+      <blockquote>
+        <p><img src="../../images/ucsc_gb_zoom_by_drag.png" alt="Zoom by clicking and dragging on the Scale track"></p>
+      </blockquote>
+    </li>
+    <li>A window pops up describing several ways to interact with the browser.  Just <em>click</em> the <strong>Zoom In</strong> button at the bottom.</li>
+    <li>This redraws the window, this time zoomed in to what you highlighted.</li>
+    <li>Continue to zoom in until you have the set of linked black boxes you picked centered on the screen.</li>
+    <li>Once you are as zoomed as you want to be, click on one of the linked boxes.  This will expand the track:
+      <blockquote>
+        <p><img src="../../images/ucsc_gb_zoom_to_1_gene.png" alt="One gene, fully zoomed and expanded"></p>
+      </blockquote>
+    </li>
+  </ul>
+</blockquote>
+
+<p>The black boxes connected by lines represent genes, and each set of connected boxes is a single gene (actually, a single transcript of a gene).  Take a close look at the top several tracks.</p>
+
+<ul>
+  <li>It looks like we preserved the gene definitions just fine.</li>
+  <li>It looks like, sure enough, there are overlapping genes here, and they are on opposite sides.  The arrows on the connecting lines tell us which strand the gene is on.</li>
+</ul>
+
+<p>Um, <em>what’s up with the boxes and the lines connecting them?</em></p>
+
+<blockquote class="comment">
+  <h3 id="-definitions-4">
+<i class="fa fa-commenting-o" aria-hidden="true"></i> Definitions 4</h3>
+
+  <ul>
+    <li>
+<strong>Exon</strong>
+      <blockquote>
+        <p>In humans (and in all plants and animals) the molecules that are built from genes are often only built from a part of the DNA in the gene. The sections of DNA that can produce the molecules are called <em>exons</em>.</p>
+      </blockquote>
+    </li>
+  </ul>
+</blockquote>
+
+<p>As you may have guessed (or already knew): The black boxes are exons.  <em>Genes</em> are defined as <em>covering the entire area from the first black box to the last connected black box.</em></p>
+
+<h2 id="do-we-have-a-problem">Do we have a problem?</h2>
+
+<p><em>Maybe.</em></p>
+
+<p>Our <em>ad hoc</em> review of identified overlapping genes in the UCSC Genome Browser has <em>(or should have!)</em> confirmed that every gene we said has an overlapping gene on the opposite strand does in fact have that.  So, our conclusion appears solid: A significant percentage of genes <em>do</em> overlap with other genes on the opposite strand.</p>
+
+<p>But, our conclusion may not be as <em>significant</em> as we had hoped. If only parts of genes, the exons, make stuff in our bodies, then should we have run this analysis on just the exons rather then the entire genes?  Probably.</p>
+
+<p>Let’s refine our question slightly</p>
+
+<blockquote class="question">
+  <h3 id="-our-revised-motivating-question">
+<i class="fa fa-question-circle" aria-hidden="true"></i> Our Revised Motivating Question</h3>
+  <p><em>I wonder if <strong>exons</strong> on opposite strands ever overlap with each other, and if so, how common is that?</em></p>
+</blockquote>
+
+<h3 id="so-i-have-to-do-this-all-over-again-but-with-exons">So, I have to do this all over again, but with exons?</h3>
+
+<p><em>Well, yes and no.</em>  We will have to run the analysis again, this time on exons instead of whole genes. But we won’t have to manually recreate every step of our analysis. Galaxy enables us to create a reusable <em>workflow</em> from the analysis we just did, and then we can rerun the analysis, as one step, anytime we want to, and on any dataset.</p>
+
+<h2 id="walk-through-the-workflow-tutorial">Walk through the workflow tutorial</h2>
+
+<p>Run the <a href="../galaxy-intro-history-to-workflow/tutorial.html">Create a reusable workflow from a history</a> tutorial for how to do this, <em>and then come back here to run your newly created workflow with the exon data.</em></p>
+
+<h2 id="rerun-analysis-with-exon-data">Rerun analysis with exon data</h2>
+
+<p>We want to run the same analysis, but this time only look for overlaps that happen in <em>exons</em>, the parts of genes that produce stuff our body uses.  Before we start looking at exons, let’s start a new history, one that contains only the genes file we got from UCSC. We could go back to UCSC and refetch the file, but there is an easier way.</p>
+
+<blockquote class="hands_on">
+  <h3 id="-hands-on-create-a-new-history-that-contains-some-data-from-current-history">
+<i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Create a new history that contains some data from current history</h3>
+
+  <ol>
+    <li>
+<em>Click</em> on the <strong>gear icon</strong> at the top of the current history.</li>
+    <li>
+<em>Select</em> the <strong>Copy Datasets</strong> option from the pull down menu.  This launches the copy datasets form.</li>
+    <li>Under <strong>Source History:</strong>, <em>select</em> the dataset(s) you want to copy to the new history.
+      <ul>
+        <li>In our case, we only want the <code class="highlighter-rouge">Genes</code> dataset.</li>
+      </ul>
+    </li>
+    <li>Under <strong>Destination History</strong> enter an informative history name in the <strong>New history named:</strong> box.
+      <ul>
+        <li>For example, <code class="highlighter-rouge">Exon overlaps on opposite strands</code>
+          <blockquote>
+            <p><img src="../../images/copy_datasets_to_new_history.png" alt="Copy only the Genes dataset to the new history"></p>
+          </blockquote>
+        </li>
+      </ul>
+    </li>
+    <li>
+<em>Click</em> the <strong>Copy History Items</strong> button to create your new history.
+      <ul>
+        <li>This creates a new history (with the copied dataset) and throws up a green box saying:
+          <blockquote>
+            <p>1 dataset copied to 1 history: <code class="highlighter-rouge">name you gave your new history</code>.</p>
+          </blockquote>
+        </li>
+      </ul>
+    </li>
+    <li>The history name is a link.  <em>Click</em> on it.</li>
+  </ol>
+</blockquote>
+
+<h3 id="get-the-exon-data">Get the exon data</h3>
+
+<p>And your new history appears in the history panel with the copied <em>genes</em> dataset.  What we need is <em>exons.</em> How can we get the exon information?  There are two relatively easy ways to get this information, one of which will be very familiar.</p>
+
+<p>The first method involves going back to the UCSC Table Browser.  Everything on the first form would stay the same: We still want human, hg38, GENCODE v24, and just <code class="highlighter-rouge">chr22</code>. The second form is what changes.  Instead of getting the <strong>Whole Gene</strong>, we need to retrieve the <strong>Coding Exons</strong> only.</p>
+
+<p>The second method is to use the <strong>Gene BED To Exon/Intron/Codon BED expander</strong> tool in the <strong>Operate on Genomic Intervals</strong> toolbox to extract the exon information from the genes BED file we already have. (<em>Of course!</em> you say.  Umm, there is no way that you should have known that you already had this information in the genes file, or that this tool existed.)</p>
+
+<blockquote class="hands_on">
+  <h3 id="-get-the-exon-data">
+<i class="fa fa-pencil" aria-hidden="true"></i> Get the exon data</h3>
+
+  <ol>
+    <li>Get the exon information, either by revisiting UCSC, or by using the <strong>Gene BED To Exon/Intron/Codon BED expander</strong> tool.  If you use the expander tool select <strong>Coding Exons only</strong> from the <strong>Extract</strong> pull-down.</li>
+    <li>Give the resulting dataset a meaningful name.</li>
+  </ol>
+</blockquote>
+
+<p>If you got the data from UCSC it will look something like this:
+<img src="../../images/101_exons.png" alt="Contents of the exons dataset from UCSC"></p>
+
+<p>Your history should now have two datasets: one describing entire genes, and one describing just the exons.</p>
+
+<h3 id="rerun-the-analysis-this-time-on-exons">Rerun the analysis, this time on exons.</h3>
+
+<p>When you did the <em>History to Workflow</em> tutorial you created a new workflow that was then added to your list of defined workflows.</p>
+
+<blockquote class="hands_on">
+  <h3 id="-run-the-workflow-on-the-exon-data">
+<i class="fa fa-pencil" aria-hidden="true"></i> Run the workflow on the exon data.</h3>
+
+  <ol>
+    <li>
+<em>Click</em> the <strong>Workflow</strong> tab in the menu at the top of the Galaxy page.
+      <ul>
+        <li>This lists all of your defined workflows, including the one you just created.</li>
+      </ul>
+    </li>
+    <li>
+<em>Click</em> on the newly created workflow and select <strong>Run</strong> from the pull-down menu.
+      <ul>
+        <li>This launches the workflow run form (which you also saw when testing this workflow)</li>
+      </ul>
+    </li>
+    <li>
+<em>Select</em> <strong>No</strong> under <strong>Send results to a new history</strong>
+</li>
+    <li>
+<em>Set</em> the first (and only) input dataset to the <code class="highlighter-rouge">Exons</code> dataset, using the pull-down menu.</li>
+    <li>
+<em>Click</em> the <strong>Run workflow</strong> button.</li>
+  </ol>
+</blockquote>
+
+<p>And Galaxy launches the workflow and says (in a nice big green box) something like:</p>
+
+<blockquote>
+  <p>You can check the status of queued jobs and view the resulting data by refreshing the History pane.</p>
+</blockquote>
+
+<p>Which in this case <em>is the truth</em>.  You can refresh the history panel by either reloading the whole page, of by clicking the looping arrow icon at the top of the history panel.  What you’ll see is a stack of history steps that will go from queued to running to done as you watch them.</p>
+
+<p>All steps in the history will be green when the workflow is done. Once that happens compare your output dataset with your input dataset?  What percentage of exons overlap with other exons on the opposite strand, and is it common or rare?  Is is a smaller percentage than we saw for whole genes?</p>
+
+<h2 id="are-we-done">Are we done?</h2>
+
+<p>Probably.  Note that we can no longer say what percentage of <em>genes</em> overlap.  We <em>can</em> say what percentage of exons overlap, and that is probably close enough for our goals.  If it isn’t and we actually need to say what percentage of genes overlap, then we will have to do some extra work.  This can be done is several ways, but the Galaxy 101 tutorial may give you some ideas on how to follow this question all the way to genes.</p>
+
+<h1 class="no_toc" id="conclusion">Conclusion</h1>
+
+<p><img class="emoji" title=":tada:" alt=":tada:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f389.png" height="20" width="20"> Well done! <img class="emoji" title=":clap:" alt=":clap:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f44f.png" height="20" width="20"> You have just performed your first analysis in Galaxy.</p>
+
+<h1 id="what-next">What next?</h1>
+
+<p>Sharing tutorial</p>
+
+<h1 id="final-thoughts">Final thoughts</h1>
+
+<h2 id="why-not-use-excel-for-this">Why not use Excel for this?</h2>
+
+<p>You could use Excel or another spreadsheet program to do this analysis.  Here, we learned how to use Galaxy by answering a question.  You could just as easily learn Excel by answering the same question, and if the goal is to learn how to use a tool, then either tool would be great. But what if you are working on a question where your analysis matters?  Maybe you are working with human clinical data trying to diagnose a set of symptoms, or you are working on research that will eventually be published and maybe earn you a Nobel Prize?</p>
+
+<p>In these cases your analysis, <em>and the ability to reproduce it exactly</em>, is vitally important, and Excel won’t help you here. It doesn’t track changes and it offers very little insight to others on how you got from your initial data to your conclusions.</p>
+
+<p>Galaxy, on the other hand, <em>automatically records every step of your analysis.</em>  And when you are done, you can share your analysis with anyone.  You can even include a link to it in a paper (or your acceptance speech).  In addition, you can create a reusable workflow from your analysis that others (or yourself) can use on other datasets.</p>
+
+<p>Another challenge with spreadsheet programs is that they don’t scale to support <em>next generation sequencing (NGS)</em> datasets, a common type of data in genomics, and which often reach gigabytes or even terabytes in size.</p>
+
+
+        
+        <blockquote class="key_points">
+            <h3>
+<i class="fa fa-key" aria-hidden="true"></i> Key points</h3>
+
+            <ul>
+                
+                <li>Galaxy provides an easy-to-use graphical user interface for often complex command-line tools</li>
+                
+                <li>Galaxy keeps a full record of your analysis in a history</li>
+                
+                <li>Workflows enable you to repeat your analysis on different data</li>
+                
+                <li>Galaxy can connect to external sources for data import and visualization purposes</li>
+                
+                <li>Galaxy provides ways to share your results and methods with others</li>
+                
+            </ul>
+        </blockquote>
+        
+
+        
+
+        <h3>
+<i class="fa fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!</h3>
+
+        <hr>
+
+        <blockquote class="overview">
+            <h3>
+<i class="fa fa-comments-o" aria-hidden="true"></i> Feedback</h3>
+            Please take a moment and provide your feedback on this tutorial. Your feedback will help guide and improve future revisions to this tutorial.
+            <a href="https://tinyurl.com/GTNfeedback">Feedback Form</a>
+        </blockquote>
+    </section>
+</div>
+
+
+<footer>
+    <div class="container">
+        <p>
+            This material is the result of a collaborative work. Thanks the
+            <a href="https://wiki.galaxyproject.org/Teach/GTN">Galaxy Training Network</a>
+            and all the contributors (Dave Clements)!
+        </p>
+        <p>
+            Found a typo? Something is wrong in this tutorial? Edit it on
+            <a href="https://github.com/galaxyproject/training-material/tree/master/topics/introduction/tutorials/galaxy-intro-strands/tutorial.md">GitHub</a>.
+        </p>
+    </div>
+</footer>
+
+    </body>
+    <script type="text/javascript" src="https://galaxyproject.github.io/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="https://galaxyproject.github.io/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="https://galaxyproject.github.io/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="https://galaxyproject.github.io/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</html>
