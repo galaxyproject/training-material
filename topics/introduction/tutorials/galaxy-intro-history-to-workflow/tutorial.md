@@ -65,14 +65,15 @@ By this time, you may have multiple histories under your Galaxy account.  You'll
 
 > ### {% icon hands_on %} Hands-on: Managing your histories
 >
-> To create a workflow, *you need to log in*.  If you haven't yet created an account, now is an ideal time to that.  Your current history will be saved as your first history under your new account.
->
-> * At the top right of your history panel is an icon that looks like a table.  *Click* on that **table icon** to switch to your *histories* view.
->    > This lists your histories, from left to right in reverse chronological order, based on the last time each history was your current history.
-> * If the history that you want to create a repeatable workflow for is *not* your *current* history (the left-most one), then find the history you want and then *click* the **Switch to** button at the top of the history.
->    > This makes that history the current history and moves it to the very left.
-> * *Click* the **Done** button at the top upper left of your histories view.
->    > This returns you to the Galaxy home page with the selected history as your current history.
+>  1. Make sure you are *logged in*.
+>    - If you haven't yet created an account, now is an ideal time to that.  Your current history will be saved as your first history under your new account.
+> 2. *Click* on the **table icon** at the top-right of the history panel to switch to your *histories* view.
+>    - This lists your histories, from left to right in reverse chronological order, based on the last time each history was your current history.
+> 3. *Switch to* the history you want to extract a workflow from.
+>    - If the history that you want to create a repeatable workflow for is *not* your *current* history (the left-most one), then find the history you want and then *click* the **Switch to** button at the top of the history.
+>    - This makes that history the current history and moves it to the very left.
+> 4. *Click* the **Done** button at the top upper left of your histories view.
+>    - This returns you to the Galaxy home page with the selected history as your current history.
 {: .hands_on}
 
 > ### {% icon tip %} Tip: Always name your histories
@@ -89,20 +90,22 @@ Now that we have the history we want, let's use Galaxy to create a reusable work
 
 > ### {% icon hands_on %} Hands-on: Extract workflow
 >
-> * *Click* on the **gear icon** at the top of your history.
->    > This opens a pull-down menu showing lots of actions that you can perform on this history.  Right now, we are interested in only one of them:
-> * *Click* on **Extract Workflow**.  It's about half-way down the menu.
->    > This launches a form to create a workflow.
-> * *Give* your workflow a meaningful name.
->    > Think about giving it a more general name than what your history has. The example history is about looking for overlapping genes on opposite strands in human on chromosome 22.  That's pretty specific.  We want to create a workflow that can be used to detect any type of overlapping features, not just genes, and in any species and on any chromosome (or on all chromosomes).  The name should reflect this goal.
->    > For this example we'll name it `Overlapping features on opposite strands`
-> * If there were any missteps or dead-ends in your history, uncheck those steps here.  Don't worry if you miss one - we can drop it in a subsequent step.
-> * Once you have named your workflow, click the **Create Workflow** button.
->    ![Create workflow form](../../images/workflow_strand_create.png)
->
->    * This replaces the workflow creation form with a box that says:
->       * Workflow *`whatever name you entered`* created from current history. You can edit or run the workflow.
-> * *Click* on the **edit** link in the box.
+> 1. *Click* on the **gear icon** at the top of your history.
+>    - This opens a pull-down menu showing lots of actions that you can perform on this history.  Right now, we are interested in only one of them:
+> 2. *Click* on **Extract Workflow**.  It's about half-way down the menu.
+>    - This launches a form to create a workflow.
+> 3. *Give* your workflow a meaningful name.
+>     - Think about giving it a more general name than what your history has. The example history is about looking for overlapping genes on opposite strands in human on chromosome 22.  That's pretty specific.  We want to create a workflow that can be used to detect any type of overlapping features, not just genes, and in any species and on any chromosome (or on all chromosomes).  The name should reflect this goal.
+>     - For this example we'll name it `Overlapping features on opposite strands`
+> 4. *Remove* unwanted steps
+>     - If there were any missteps or dead-ends in your history, uncheck those steps here.
+>     - Don't worry if you miss one - we can drop it in a subsequent step.
+> 5. Once you have named your workflow, click the **Create Workflow** button.
+>    > ![Create workflow form](../../images/workflow_strand_create.png)
+>    >
+>    - This replaces the workflow creation form with a box that says:
+>       - Workflow *`whatever name you entered`* created from current history. You can edit or run the workflow.
+> 6. *Click* on the **edit** link in the box.
 >
 {: .hands_on}
 
@@ -118,10 +121,15 @@ The *extract workflow* step assigns the name of input datasets in your history t
 
 > ### {% icon hands_on %} Hands-on: Rename inputs
 >
-> * *Click* on the first input dataset.
->    > This changes the right panel to show informtion about the seclected dataset.  In this example, this dataset is a set of genomic features (like genes or exons or repeats) that exist in an orgramism.
-> * *Set* the **Label** field to something more general, yet still informative.  In the example workflow, we'll name this `Genome features` about as general as you can get.
-> * To help make your general input dataset name more informative, *add* a description of the dataset in the **Annotation** box. For the example, we'll use `Workflow checks this set of genomic features to find any that overlap with each other on opposite strands.  **This must be at least a 6 column BED file,** as the workflow makes decisions based on column 6, the strand.`
+> 1. *Click* on the first input dataset.
+>    - This changes the right panel to show informtion about the seclected dataset.  In this example, this dataset is a set of genomic features (like genes or exons or repeats) that exist in an orgramism.
+> 2. *Set* the **Label** field to something more general, yet still informative.
+>    - In the example workflow, we'll name this `Genome features` about as general as you can get.
+> 3. Add a *description* for your input datasets
+>     - This helps make your general input dataset name more informative.
+>     - *add* a description of the dataset in the **Annotation** box.
+>     - For the example, we'll use:
+>        - `Workflow checks this set of genomic features to find any that overlap with each other on opposite strands.  **This must be at least a 6 column BED file,** as the workflow makes decisions based on column 6, the strand.`
 >      ![Renamed and annotated input dataset](../../images/workflow_strand_renamed_plus_annot.png)
 {: .hands_on}
 
@@ -131,8 +139,9 @@ First, your history might contain several false starts or tool runs where the pa
 
 > ### {% icon hands_on %} Hands-on: Drop unused input datasets and tool boxes
 >
-> * If your history contained any false starts or tool runs that didn't contribute to your final result, then *delete* them from the workflow by clicking the black **x** in the corner of those datasets/tools' boxes.
->    > This will remove them from the workflow.
+> 1. *Delete* unwanted steps
+>    - If your history contained any false starts or tool runs that didn't contribute to your final result, then *delete* them from the workflow by clicking the black **x** in the corner of those datasets/tools' boxes.
+>    - This will remove them from the workflow.
 {: .hands_on}
 
 > ### {% icon tip %} Tip
@@ -143,12 +152,12 @@ Second, you might want to give your output datasets meaningful names too.
 
 > ### {% icon hands_on %} Hands-on: Name output datasets
 >
-> * *Click* on a step that produces an output file.
->    > This brings up information about that step in the right panel.
-> * *Scroll* down in the right panel until you see a **Configure Output** link.  *Click* on it.
-> * *Enter* a meaningful name in the **Rename dataset** field.
->    > In the exmple, we'll enter `Features that overlap another feature on opposite strand.`
-> * Repeat for all your output datasets.
+> 1. *Click* on a step that produces an output file.
+>    - This brings up information about that step in the right panel.
+> 2. *Scroll* down in the right panel until you see a **Configure Output** link.  *Click* on it.
+> 3. *Enter* a meaningful name in the **Rename dataset** field.
+>    - In the example, we'll enter `Features that overlap another feature on opposite strand.`
+> 4. Repeat this for all your output datasets.
 {: .hands_on}
 
 We could add annotation to each step in the process as well, and if this workflow is going to be published in a paper, or shared with others, then that is definitely worth doing.
@@ -157,7 +166,7 @@ Now that our edits are done, let's save our work and run the workflow.
 
 > ### {% icon hands_on %} Hands-on: Save the workflow edits
 >
->  * *Click* on the **gear icon** at the top right of the center panel, *select* **Save** from the pull-down menu.
+>  1. *Click* on the **gear icon** at the top right of the center panel, *select* **Save** from the pull-down menu.
 {: .hands_on}
 
 
