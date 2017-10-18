@@ -155,28 +155,34 @@ We could add annotation to each step in the process as well, and if this workflo
 
 Now that our edits are done, let's save our work and run the workflow.
 
-> ### {% icon hands_on %} Hands-on: Save workflow edits
+> ### {% icon hands_on %} Hands-on: Save the workflow edits
 >
-> * To save our changes, *click* on the **gear icon** at the top right of the center panel, and *select* **Save** from the pull-down menu.
-> * Once your changes are saved, again *click* on the **gear icon** but this time select **Run**.  We are ready to go.
+>  * *Click* on the **gear icon** at the top right of the center panel, *select* **Save** from the pull-down menu.
 {: .hands_on}
 
-You should now see the workflow run form.  This form lists all the inputs and steps in the workflow also asks if you want to run this workflow in a new history, of just add it to your existing history.
 
-![Run workflow form](../../images/workflow_run_strand_landing.png)
+### Test the workflow
 
-In this form you can also change the run-time parameters of any of the steps.  We aren't going to do that, but it can be useful when are experimenting with different parameters in different steps.
+Now that we have finished creating our workflow, it is time to test it.
 
-Let's test the workflow by running it on the same input datasets we used in the current history.  If we created the workflow correctly, we should get the same results as in the history.
-
-> ### {% icon hands_on %} Hands-on: Test the workflow
+> ### {% icon hands_on %} Hands-on: Run the workflow
 >
-> * In this case we recommend *selecting* **Yes** under **Send results to a new history**.
->    > Sometimes you'll be building analyses out of component workflows and you will want to run them all in the same history.  Here we want a new history because the results will be cleaner and easier to understand.
->    > Give the new history a meaningful name.
-> * *Set* your first input dataset using the pull-down menu.
-> * *Repeat* until all input datasets are set.
-> * *Click* the **Run workflow** button.
+> 1. *Click* on the **gear icon** and this time select **Run**.
+> 2. *Examine* the workflow run form.
+>   >
+>   >
+>   >This form lists all the inputs and steps in the workflow also asks if you want to run this workflow in a new history, of just add it to your existing history.
+>   >![Run workflow form](../../images/workflow_run_strand_landing.png)
+>   >
+>   >In this form you can also change the run-time parameters of any of the steps.  We aren't going to do that, but it can be useful when are experimenting with different parameters in different steps.
+>   >Let's test the workflow by running it on the same input datasets we used in the current history.  If we created the workflow correctly, we should get the same results as in the history.
+>   >
+> 3. *Select* **Yes** under **Send results to a new history**.
+>    - Sometimes you'll be building analyses out of component workflows and you will want to run them all in the same history.  Here we want a new history because the results will be cleaner and easier to understand.
+> 4. Give the new history a meaningful name.
+> 5. *Set* your first input dataset using the pull-down menu.
+>   - *Repeat* until all input datasets are set.
+> 7. *Click* the **Run workflow** button.
 {: .hands_on}
 
 And Galaxy launches the workflow, running in a new history.  It says (in a nice big green box) something like:
