@@ -84,12 +84,12 @@ By this time, you may have multiple histories under your Galaxy account.  You'll
 
 ## Extract the recipe from your history
 
-Now that we have the history we want, let's use Galaxy to create a reusable workflow from it.  To do this we'll use the history's **cog / history options** pull-down list.
+Now that we have the history we want, let's use Galaxy to create a reusable workflow from it.  To do this we'll use the history's **gear / history options** pull-down list.
 
 
 > ### {% icon hands_on %} Hands-on: Extract workflow
 >
-> * *Click* on the **cog icon** at the top of your history.
+> * *Click* on the **gear icon** at the top of your history.
 >    > This opens a pull-down menu showing lots of actions that you can perform on this history.  Right now, we are interested in only one of them:
 > * *Click* on **Extract Workflow**.  It's about half-way down the menu.
 >    > This launches a form to create a workflow.
@@ -157,8 +157,8 @@ Now that our edits are done, let's save our work and run the workflow.
 
 > ### {% icon hands_on %} Hands-on: Save workflow edits
 >
-> * To save our changes, *click* on the **cog icon** at the top right of the center panel, and *select* **Save** from the pull-down menu.
-> * Once your changes are saved, again *click* on the **cog icon** but this time select **Run**.  We are ready to go.
+> * To save our changes, *click* on the **gear icon** at the top right of the center panel, and *select* **Save** from the pull-down menu.
+> * Once your changes are saved, again *click* on the **gear icon** but this time select **Run**.  We are ready to go.
 {: .hands_on}
 
 You should now see the workflow run form.  This form lists all the inputs and steps in the workflow also asks if you want to run this workflow in a new history, of just add it to your existing history.
