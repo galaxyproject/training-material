@@ -95,7 +95,7 @@ Let's start with a fresh history.
 >    > * Open the Galaxy Upload Manager
 >    > * Select **Paste/Fetch Data**
 >    > * Paste the link into the text field
->    > * Select `interval` in this case
+>    > * As **Type** select `interval`
 >    > * Press **Start**
 >    {: .tip}
 >
@@ -211,11 +211,9 @@ As we directly see, the peak file lacks `chr` before any chromosome number. But 
 
 > ### {% icon hands_on %} Hands-on: View end of file
 >
-> 1. Search for the **Select last** {% icon tool %} tool in the tool panel on the left
-> 2. Select the following settings
->     - **Text file** to our peak file `GSE37268_mof3.out.hpeak.txt`
->     - **Operation**: `Keep last lines`
->     - **Number of lines**: Choose a value, e.g. `100`
+> 1. **Select last** {% icon tool %}: Run **Select last lines from a dataset** with the following settings:
+>     - **Select last**: Choose a value, e.g. `100`
+>     - **from**: Our peak file `GSE37268_mof3.out.hpeak.txt`
 > 2. Click **Execute**
 > 3. Wait for the job to finish
 > 4. Inspect the file through the **eye icon**
@@ -240,7 +238,7 @@ In order to convert the chromosome names we have therefore two things to do:
 
 > ### {% icon hands_on %} Hands-on: Adjust chromosome names
 >
-> 1. **Replace Text** {% icon tool %}: Run **Replace Text in a specific column** with
+> 1. **Replace Text** {% icon tool %}: Run **Replace Text in a specific column** with the following settings:
 >     - **File to process** to our peak file `GSE37268_mof3.out.hpeak.txt`
 >     - **in column**: `Column:1`
 >     - **Find pattern**: `[0-9]+` (this will look for numerical digits)
@@ -275,12 +273,12 @@ you want to include Transcriptions factors in ChIP-seq experiments.
 
 > ### {% icon hands_on %} Hands-on: Add promoter region to gene records
 >
-> 1. **Get Flanks** {% icon tool %} with the following settings:
+> 1. **Get Flanks** {% icon tool %}: Run **Get flanks returns flanking region/s for every gene** with the following settings:
 >     - **Select data** to the file from UCSC
 >     - **Region** to `Around Start`
->     - **Location** to `Upstream`
+>     - **Location of the flanking region/s** to `Upstream`
 >     - **Offset** to `10000`
->     - **Length** to `12000`
+>     - **Length of the flanking region(s)** to `12000`
 >
 >     This tool returns flanking regions for every gene
 >
@@ -316,7 +314,7 @@ It's time to find the overlapping intervals (finally!). To do that, we want to e
 
 > ### {% icon hands_on %} Hands-on: Find Overlaps
 >
-> 1. **Intersect** {% icon tool %} with the following settings:
+> 1. **Intersect** {% icon tool %}: Run **Intersect the intervals of two datasets** with the following settings:
 >     - **Return** to `Overlapping Intervals`
 >     - **of**: the UCSC file with promoter regions
 >     - **that intersect**: our converted peak region file
@@ -333,12 +331,13 @@ We will regroup the table by chromosome and count the number of genes with peaks
 
 > ### {% icon hands_on %} Hands-on: Count genes on different chromosomes
 >
-> 1. **Group** {% icon tool %} with the following settings:
+> 1. **Group** {% icon tool %}: Run **Group data by a column and perform aggregate operation on other columns** with the following settings:
 >     - **Select data** to the result of the intersection
 >     - **Group by column**:`Column 1`
 >     - Press **Insert Operation** and choose:
 >     - **Type**: `Count`
 >     - **On column**: `Column 1`
+>     - **Round result to nearest integer?**: `No`
 >
 >    > ### {% icon question %} Questions
 >    >
@@ -461,7 +460,7 @@ We need to generate a new BED file from the original peak file that contains the
 
 > ### {% icon hands_on %} Hands-on: Create peak summit file
 >
-> 1. **Compute an expression on every row** {% icon tool %} with the following settings:
+> 1. **Compute** {% icon tool %}: Run **Compute an expression on every row** with the following settings:
 >   - **Add expression**: `c2+c5`
 >   - **as a new column to**: our peak file
 >   - **Round result?**: `YES`
@@ -475,8 +474,9 @@ We need to generate a new BED file from the original peak file that contains the
 Now we cut out just the chromosome plus the start and end of the summit:
 
 > ### {% icon hands_on %} Hands-on: Cut out columns
-> 1. **Cut columns from a table** {% icon tool %} with the following settings:
+> 1. **Cut** {% icon tool %}: Run the **Cut columns from a table** with the following settings:
 >   - **Cut columns**: `c1,c8,c9`
+>   - **Delimited by Tab**: `Tab`
 >   - **From**: our latest history item
 >
 >    The output from **Cut** will be in `tabular` format.
