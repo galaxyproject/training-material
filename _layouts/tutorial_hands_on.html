@@ -9,6 +9,7 @@ layout: base
     {% endif %}
 {% endfor %}
 {% assign contributors = site.data['contributors'] %}
+{% assign instances = site.data['instances'] %}
 
 <header>
     <nav class="navbar navbar-expand-lg navbar-dark">
@@ -64,11 +65,27 @@ layout: base
                         {% endif %}
                     {% endif %}
 
-                    {% if topic.docker_image and topic.docker_image != "" %}
+                    {% if topic.docker_image and topic.docker_image != "" or instances[topic.name] and instances[topic.name][tutorial.name] %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ site.baseurl }}/topics/{{ topic.name }}#docker_image" title="Docker image for this tutorial">
-                            {% icon docker_image %} Docker image
-                        </a>
+                        <div class="dropdown">
+                            <a href="#" class="nav-link" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+                                {% icon instances %} Galaxy Instances
+                                <b class="caret"></b>
+                            </a>
+                            <ul class="dropdown-menu">
+                            {% if topic.docker_image and topic.docker_image != "" %}
+                                <li><a href="{{ site.github_repository }}/tree/master/topics/{{ topic.name }}/docker" title="Docker image for this tutorial">{% icon docker_image %} Docker image</a></li>
+                            {% endif %}
+                            {% if topic.docker_image and topic.docker_image != "" and instances[topic.name] and instances[topic.name][tutorial.name] %}
+                                <hr>
+                            {% endif %}
+                            {% if instances[topic.name] and instances[topic.name][tutorial.name] %}
+                                {% for inst in instances[topic.name][tutorial.name] %}
+                                    <li><a href="{{ inst[1].url }}" title="{{ inst[0] }}">{{ inst[0] }}</a></li>
+                                {% endfor %}
+                            {% endif %}
+                            </ul>
+                        </div>
                     </li>
                     {% endif %}
 
