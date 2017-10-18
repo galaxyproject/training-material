@@ -21,23 +21,20 @@ def extract_public_galaxy_servers_tools():
     servers = extract_public_galaxy_servers()
     server_tools = {}
     for index, server in servers.iterrows():
-        #print(server['name'])
-        if server['name'] != "Freiburg Galaxy":
-            continue
+        print(server['name'])
         # request the tools via the API
         url = '%s/api/tools' % server['url']
-        response = requests.get(url)
+        try:
+            response = requests.get(url)
+        except:
+            print("Error of connection")
         # check status
         if response.status_code != requests.codes.ok:
-            #rej_servers[server['name']] = {
-            #    'url': server['url'],
-            #    'status': response.status_code}
+            print("Bad status")
             continue
         # check content
         if response.text.find("</html>") != -1:
-            #rej_servers[server['name']] = {
-            #    'url': server['url'],
-            #    'status': "Bad JSON"}
+            print("No JSON output")
             continue
         # extract the list of tools in this instance
         found_tools = set()
