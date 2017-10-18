@@ -144,7 +144,7 @@ Run `Stacks: De novo map` Galaxy tool. This program will run `ustacks`, `cstacks
 >
 >    ![Male and female matches files](../../images/RAD2_Genetic_Map/denovo_map_matches2.png)
 >
->    Conidering catalog SNPs 27 & 28, on the 302 catalog locus:
+>    Considering catalog SNPs 27 & 28, on the 302 catalog locus:
 >
 >    ![De novo map matches considering catalog SNPs](../../images/RAD2_Genetic_Map/denovo_map_matches_snps.png)
 >
@@ -173,7 +173,7 @@ Run `Stacks: De novo map` Galaxy tool. This program will run `ustacks`, `cstacks
 >    >
 >    > 3. Tresholds concernaing a minimal number of progeny and/or minimum stacks depth to consider a locus
 >    >
->    > 4. Automatic corrections. Concerning this last option, it's possible to to ask genotypes making automatic corrections on some errors as homozygous tags verification in the progeny to be sure a SNP is missing. Thus, if SNP detection model can't identify a site as heterygous or homozygous, this site is temporarily tagged as homozygous to facilitate the search, by sstacks, of concordance with the loci catalog. If a second allele is detected on the catalog (ie, in parents) is found on a progeny with a weak frequency (<10% of a stack reads number), genotypes program can correct the genotype. Additionnaly, it will delete a homozygous genotype on a particular individual if locus genotype is supported by less than 5 reads. Thus corrected genotypes are marked uppercase.
+>    > 4. Automatic corrections. Concerning this last option, it's possible to to ask genotypes making automatic corrections on some errors as homozygous tags verification in the progeny to be sure a SNP is missing. Thus, if SNP detection model can't identify a site as heterygous or homozygous, this site is temporarily tagged as homozygous to facilitate the search, by sstacks, of concordance with the loci catalog. If a second allele is detected on the catalog (ie, in parents) is found on a progeny with a weak frequency (<10% of a stack reads number), genotypes program can correct the genotype. Additionally, it will delete a homozygous genotype on a particular individual if locus genotype is supported by less than 5 reads. Thus corrected genotypes are marked uppercase.
 >
 >    Here is an example of a locus originally marke as homozygous before automatic correction because on allele is supported by less than 5 reads. After correction, this locus is marked as heterygous.
 >

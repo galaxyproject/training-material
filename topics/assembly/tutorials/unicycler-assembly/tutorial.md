@@ -6,7 +6,7 @@ tutorial_name: unicycler-assembly
 
 # The goal: *E. coli* C-1 assembly
 
-In this tutorial we assemble and annotate genome of *E. coli* strain [C-1](http://cgsc2.biology.yale.edu/Strain.php?ID=8232). This strain is routinely used in experimental evolution studies involving bateriophages. For instance, now classical works by Holly Wichman and Jim Bull ([Bull et al. 1997](https://www.ncbi.nlm.nih.gov/pubmed/9409816), [Bull & Wichman 1998](https://www.ncbi.nlm.nih.gov/pubmed/9767038), [Wichman et al. 1999](https://www.ncbi.nlm.nih.gov/pubmed/10411508)) have been performed using this strain and bacteriophage phiX174. 
+In this tutorial we assemble and annotate genome of *E. coli* strain [C-1](http://cgsc2.biology.yale.edu/Strain.php?ID=8232). This strain is routinely used in experimental evolution studies involving bacteriophages. For instance, now classical works by Holly Wichman and Jim Bull ([Bull et al. 1997](https://www.ncbi.nlm.nih.gov/pubmed/9409816), [Bull & Wichman 1998](https://www.ncbi.nlm.nih.gov/pubmed/9767038), [Wichman et al. 1999](https://www.ncbi.nlm.nih.gov/pubmed/10411508)) have been performed using this strain and bacteriophage phiX174. 
 
 To sequence the genome we have obtained the strain from the [Yale E. coli Stock Center](http://cgsc2.biology.yale.edu/). The stock center sent us a filter paper disk infused with cells. The disk was placed in the center of an LB-agar plate. A single colony was picked and resuspended in a liquid LB medium, grown overnight, and genomic DNA was isolated. The DNA was then sequenced using two methods. To obtain high coverage, high accuracy data we used Illumina miSEQ to generated 250-bp paired end reads. To generate high length reads we used the Oxford Nanopore MinIon machine. 
 

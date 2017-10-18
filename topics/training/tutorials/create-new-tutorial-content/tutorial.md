@@ -106,7 +106,7 @@ Let's start tracking your changes!
 
 The GitHub interface can also help you in the process of editing a file. It will automatically create a fork of this repository where you can safely work.
 
-We will now start to fill the different files together. We recommend you to commit your changes regurlarly: it helps following them, but also revert them if needed.
+We will now start to fill the different files together. We recommend you to commit your changes regularly: it helps following them, but also revert them if needed.
 
 
 # Filling the tutorial content
@@ -234,7 +234,7 @@ We recommend to structure the tutorials as follows:
 >   $$ 5 + 5 $$
 >
 >
-> Dollar signs are therefore *reserved caracters* for instructing the templating system to open/close LaTeX math blocks. In case you don't want any math block to be opened/closed, but still be able to write a dollar sign, you have to *escape* it. Escaping enables the templating system to render the escaped caracter as a normal caracter.
+> Dollar signs are therefore *reserved characters* for instructing the templating system to open/close LaTeX math blocks. In case you don't want any math block to be opened/closed, but still be able to write a dollar sign, you have to *escape* it. Escaping enables the templating system to render the escaped character as a normal character.
 >
 >    > ### {% icon comment %} Comments
 >    > LaTeX code that uses the pipe symbol `|` in inline math statements may lead to a line being recognized as a table line by the templating system.

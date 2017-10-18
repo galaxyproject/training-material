@@ -234,7 +234,7 @@ To save time, we already did that and we can now work directly on the BAM files 
 >    - [`patient3_ChIP_ER_poor_outcome.bam`](https://zenodo.org/record/892432/files/patient3_ChIP_ER_poor_outcome.bam)
 >    - [`patient3_input_poor_outcome.bam`](https://zenodo.org/record/892432/files/patient3_input_poor_outcome.bam)
 >    - [`patient4_ChIP_ER_poor_outcome.bam`](https://zenodo.org/record/892432/files/patient4_ChIP_ER_poor_outcome.bam)
->    - [`patient4_input_poor_outcome.bam`](url: https://zenodo.org/record/892432/files/patient4_input_poor_outcome.bam)
+>    - [`patient4_input_poor_outcome.bam`](https://zenodo.org/record/892432/files/patient4_input_poor_outcome.bam)
 >
 > 3. **multiBamSummary** {% icon tool %} with
 >    - "Sample order matters" to `No`
