@@ -101,20 +101,19 @@ There are [many ways to get data into a Galaxy instance](/topics/introduction/tu
 
 > ### {% icon hands_on %} Hands-on: Open **Get Data** toolbox
 >
->  ![The Get Data toolbox](../../images/101_01.png)
+> 1. *Click* on the **Get Data** toolbox to expand it.
+>  > ![The Get Data toolbox](../../images/101_01.png)
 >
-> *Click* on the **Get Data** toolbox to expand it.
 {: .hands_on}
 
-The **Get Data** toolbox contains a list of data sources that this Galaxy instance can get data directly from.  **Upload file** is quite useful for getting data from your computer or from the web (see the [Getting data into Galaxy slides](/topics/introduction/tutorials/galaxy-intro-get-data/slides.html#4).  Today we are going to use the **UCSC Main table browser**.
+The **Get Data** toolbox contains a list of data sources that this Galaxy instance can get data directly from.  **Upload file** is quite useful for getting data from your computer or from the web (see the [Getting data into Galaxy slides](/topics/introduction/tutorials/galaxy-intro-get-data/slides.html#4)).  Today we are going to use the **UCSC Main table browser**.
 
 ### Get genes
 
 > ### {% icon hands_on %} Hands-on: Go to UCSC
 >
-> 1. *Click* on **UCSC Main table browser** under the *Get Data* section of the tool panel to go to UCSC.
->
-> ![Click on UCSC Main table browser](../../images/101_01.png)
+> 1. *Click* on the tool **UCSC Main table browser** to go to UCSC.
+>  > ![Click on UCSC Main table browser](../../images/101_01.png)
 {: .hands_on}
 
 This will take you to the UCSC Table Browser:
@@ -183,11 +182,11 @@ Watch your new history item.  It will go through three statuses before it's done
 
 | Color | Icon | Meaning | |
 | ---- | ---- | ---- |
-| **Grey** | Clock | Item is waiting to start (wating for data transfer to start) | ![Status: Queued](../../images/status_queued.png) |
+| **Grey** | Clock | Item is waiting to start (waiting for data transfer to start) | ![Status: Queued](../../images/status_queued.png) |
 | **Yellow** | Spinner | Item is running (data is actively being transferred). | ![Status: Running](../../images/status_running.png) |
 | **Green** | None | Item has finished successfully (data transfer complete). | ![Status: Successfully finished](../../images/status_finished_success.png) |
 
-Occassionally you will also see a 4th status
+Occasionally you will also see a 4th status
 
 * **Red**: Item did not finish successfully.
 
@@ -463,7 +462,7 @@ Um, *what's up with the boxes and the lines connecting them?*
 >> In humans (and in all plants and animals) the molecules that are built from genes are often only built from a part of the DNA in the gene. The sections of DNA that can produce the molecules are called *exons*.
 {: .comment}
 
-As you may have guessed (or already kenw): The black boxes are exons.  *Genes* are defined as *covering the entire area from the first black box to the last connected black box.*
+As you may have guessed (or already knew): The black boxes are exons.  *Genes* are defined as *covering the entire area from the first black box to the last connected black box.*
 
 ## Do we have a problem?
 
@@ -498,7 +497,7 @@ We want to run the same analysis, but this time only look for overlaps that happ
 > 2. *Select* the **Copy Datasets** option from the pull down menu.  This launches the copy datasets form.
 > 3. Under **Source History:**, *select* the dataset(s) you want to copy to the new history.
 >    - In our case, we only want the `Genes` dataset.
-> 4. Under **Destination Hiistory** enter an informative history name in the **New history named:** box.  
+> 4. Under **Destination History** enter an informative history name in the **New history named:** box.
 >    - For example, `Exon overlaps on opposite strands`
 >    > ![Copy only the Genes dataset to the new history](../../images/copy_datasets_to_new_history.png)
 > 5. *Click* the **Copy History Items** button to create your new history.

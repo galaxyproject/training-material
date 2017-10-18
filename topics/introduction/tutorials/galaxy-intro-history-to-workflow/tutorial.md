@@ -52,7 +52,7 @@ Galaxy *workflows* enable this, and this tutorial shows how you can create one f
 >
 > * A *history* is a record of analysis that you have done, or of the analysis you are currently working on.  **Think of a history as a baked cake.**  It's something that been done.  It has input datasets, possibly intermediate datasets, and output datasets.  Think of the input datasets as the basic ingredients used to make the cake, like eggs and flour, and the output datasets are the cake.
 >
-> * A *workflow* is a **recipe** for running an analysis.  It doesn't contain any of the ingredients or the cake.  It does specify what you'll need to run the recipe: input datasets (the eggs and fllour), and all of the steps you'll need to do to create the cake (beat the eggs, mix the flour, sugar and baking powder, ...).
+> * A *workflow* is a **recipe** for running an analysis.  It doesn't contain any of the ingredients or the cake.  It does specify what you'll need to run the recipe: input datasets (the eggs and flour), and all of the steps you'll need to do to create the cake (beat the eggs, mix the flour, sugar and baking powder, ...).
 >
 > In this tutorial we will take a fully baked cake (a history), *ask it to tell us the recipe that was used to create it,* and then create a recipe (a workflow) based on what the cake tells us.
 >
@@ -122,7 +122,7 @@ The *extract workflow* step assigns the name of input datasets in your history t
 > ### {% icon hands_on %} Hands-on: Rename inputs
 >
 > 1. *Click* on the first input dataset.
->    - This changes the right panel to show informtion about the seclected dataset.  In this example, this dataset is a set of genomic features (like genes or exons or repeats) that exist in an orgramism.
+>    - This changes the right panel to show information about the selected dataset.  In this example, this dataset is a set of genomic features (like genes or exons or repeats) that exist in an organism.
 > 2. *Set* the **Label** field to something more general, yet still informative.
 >    - In the example workflow, we'll name this `Genome features` about as general as you can get.
 > 3. Add a *description* for your input datasets
