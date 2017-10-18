@@ -7,16 +7,16 @@ tutorial_name: galaxy-intro-history-to-workflow
 # Create a reusable workflow from a history
 {:.no_toc}
 
-This practical shows how to create a reusable analysis pipeline, called a *workflow* in Galaxy, from an analysis that you have already run in Galaxy, called a *history*. 
+This practical shows how to create a reusable analysis pipeline, called a *workflow* in Galaxy, from an analysis that you have already run in Galaxy, called a *history*.
 
 
 > ###  {% icon comment %} Audience
-> This tutorial is for those who are new to Galaxy.
+> This tutorial is intended for those who are new to Galaxy.
 {: .comment}
 
 > ### Agenda
 >
-> In this tutorial, we will:
+> In this tutorial, we will cover:
 >
 > 1. TOC
 > {:toc}
@@ -33,7 +33,7 @@ This practical shows how to create a reusable analysis pipeline, called a *workf
 > 1. An internet-connected computer.  Galaxy can run on your laptop without an internet connection, but this practical requires access to resources on the web.
 > 1. A web browser. [Firefox](https://www.mozilla.org/firefox) and [Google Chrome](https://www.google.com/chrome/) work well, as does [Safari](https://www.apple.com/safari/).  Internet Explorer is known to have issues with Galaxy so avoid using that.
 > 1. Access to a Galaxy instance, and an account on that instance. Galaxy is available in many ways. If you are doing this practical as part of a workshop, the instructor will tell you which instance to use. If you are doing this on your own, you can use [usegalaxy.org](https://usegalaxy.org).
-> 1. A Galaxy *history* from an analysis that you have already run.  If you don't have one handy, you can use this history on usegalaxy.org.  Click **Import History** to bring that history into your workspace on usegalaxy.org. Any history will work with this tutorial, but that's the one used in the examples. 
+> 1. A Galaxy *history* from an analysis that you have already run.  If you don't have one handy, you can use this history on usegalaxy.org.  Click **Import History** to bring that history into your workspace on usegalaxy.org. Any history will work with this tutorial, but that's the one used in the examples.
 {: .comment}
 
 This tutorial is a good second step after running your first analysis on Galaxy.
@@ -46,7 +46,7 @@ But what if you want to run that analysis again, maybe on updated datasets, or m
 
 Galaxy *workflows* enable this, and this tutorial shows how you can create one from the analysis you have already done, and then run the analysis exactly as you did before, but on the new datasets.
 
-> ### {% icon tip %} Confused about *Histories* and *Workflows?*
+> ### {% icon tip %} Tip: Confused about *Histories* and *Workflows?*
 >
 > Well, you are not alone.  This analogy may help.
 >
@@ -63,7 +63,7 @@ Galaxy *workflows* enable this, and this tutorial shows how you can create one f
 
 By this time, you may have multiple histories under your Galaxy account.  You'll need to make the history that you want create a recipe/workflow for be your *current* history.  Your current history is the one shown in the History panel on the right.
 
-> ### {% icon hands_on %} Your current history
+> ### {% icon hands_on %} Hands-on: Managing your histories
 >
 > To create a workflow, *you need to log in*.  If you haven't yet created an account, now is an ideal time to that.  Your current history will be saved as your first history under your new account.
 >
@@ -75,7 +75,7 @@ By this time, you may have multiple histories under your Galaxy account.  You'll
 >    > This returns you to the Galaxy home page with the selected history as your current history.
 {: .hands_on}
 
-> ### {% icon tip %} Always name your histories
+> ### {% icon tip %} Tip: Always name your histories
 >
 >If you just saw multiple `Unnamed history` entries in your histories view, then now you know why.
 >
@@ -87,7 +87,7 @@ By this time, you may have multiple histories under your Galaxy account.  You'll
 Now that we have the history we want, let's use Galaxy to create a reusable workflow from it.  To do this we'll use the history's **cog / history options** pull-down list.
 
 
-> ### {% icon hands_on %} Extract workflow
+> ### {% icon hands_on %} Hands-on: Extract workflow
 >
 > * *Click* on the **cog icon** at the top of your history.
 >    > This opens a pull-down menu showing lots of actions that you can perform on this history.  Right now, we are interested in only one of them:
@@ -114,9 +114,9 @@ While we could run this workflow right now, here are a few cleanup items we shou
 
 ### Rename input datasets
 
-The extrct workflow step assigns the name of input datasets in your history to the corresponding inputs in your workflow.  This is very helpful in the short term because it makes it clear which of the boxes are which datasets.  But, for a workflow, we want a more general (but still helpful) name for input datasets.
+The *extract workflow* step assigns the name of input datasets in your history to the corresponding inputs in your workflow.  This is very helpful in the short term because it makes it clear which of the boxes are which datasets.  But, for a workflow, we want a more general (but still helpful) name for input datasets.
 
-> ### {% icon hands_on %} Rename inputs
+> ### {% icon hands_on %} Hands-on: Rename inputs
 >
 > * *Click* on the first input dataset.
 >    > This changes the right panel to show informtion about the seclected dataset.  In this example, this dataset is a set of genomic features (like genes or exons or repeats) that exist in an orgramism.
@@ -129,7 +129,7 @@ There are several other things we could do in the workflow editor, but let's foc
 
 First, your history might contain several false starts or tool runs where the parameters weren't quite right. Lets get rid of those now.
 
-> ### {% icon hands_on %} Drop unused input datasets and tool boxes
+> ### {% icon hands_on %} Hands-on: Drop unused input datasets and tool boxes
 >
 > * If your history contained any false starts or tool runs that didn't contribute to your final result, then *delete* them from the workflow by clicking the black **x** in the corner of those datasets/tools' boxes.
 >    > This will remove them from the workflow.
@@ -141,7 +141,7 @@ First, your history might contain several false starts or tool runs where the pa
 
 Second, you might want to give your output datasets meaningful names too.
 
-> ### {% icon hands_on %} Name output datasets
+> ### {% icon hands_on %} Hands-on: Name output datasets
 >
 > * *Click* on a step that produces an output file.
 >    > This brings up information about that step in the right panel.
@@ -155,7 +155,7 @@ We could add annotation to each step in the process as well, and if this workflo
 
 Now that our edits are done, let's save our work and run the workflow.
 
-> ### {% icon hands_on %} Save workflow edits
+> ### {% icon hands_on %} Hands-on: Save workflow edits
 >
 > * To save our changes, *click* on the **cog icon** at the top right of the center panel, and *select* **Save** from the pull-down menu.
 > * Once your changes are saved, again *click* on the **cog icon** but this time select **Run**.  We are ready to go.
@@ -169,7 +169,7 @@ In this form you can also change the run-time parameters of any of the steps.  W
 
 Let's test the workflow by running it on the same input datasets we used in the current history.  If we created the workflow correctly, we should get the same results as in the history.
 
-> ### {% icon hands_on %} Test the workflow
+> ### {% icon hands_on %} Hands-on: Test the workflow
 >
 > * In this case we recommend *selecting* **Yes** under **Send results to a new history**.
 >    > Sometimes you'll be building analyses out of component workflows and you will want to run them all in the same history.  Here we want a new history because the results will be cleaner and easier to understand.
@@ -196,4 +196,3 @@ At this point it's worth doing a little cleanup.  In particular think about upda
 * If you ever work on large studies or even if you have just a few samples, workflows are critical to
   1. Running the same analysis on each dataset.
   1. Not going insane.
-
