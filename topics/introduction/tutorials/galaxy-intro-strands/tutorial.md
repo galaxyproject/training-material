@@ -60,7 +60,7 @@ To explore this question we need a basic understanding of *genomes, chromosomes,
 >
 > ![Human genome consists of 23 (pairs of) chromosomes](../../images/human_genome_chroms.png)
 >
-> And here's a representation of a chomosome, strands, and genes on the chromosome.
+> And here's a representation of a chromosome, strands, and genes on the chromosome.
 >
 > ![Chromosomes are double stranded and have forward and reverse strands; strands have genes on them](../../images/chromosome_strands_genes.png)
 {: .comment}
@@ -68,7 +68,7 @@ To explore this question we need a basic understanding of *genomes, chromosomes,
 
 The question we are asking looks like:
 
-![Does a sitution like this exist?](../../images/do_genes_on_opposite_strands_ever_overlap.png)
+![Does a situation like this exist?](../../images/do_genes_on_opposite_strands_ever_overlap.png)
 
 *Non-overlapping genes are common.  How common are overlapping genes?*
 
@@ -174,7 +174,7 @@ So far we haven't changed *anything* from the defaults.  Lets change something. 
 > 4. *Click* the **Send query to Galaxy** button at the bottom of the form.
 {: .hands_on}
 
-This returns us to Galaxy, first displaying a big green box (that's good!) and then returning us to the view we started with.  Excepnt that we now have an item in our history, the dataset from UCSC.
+This returns us to Galaxy, first displaying a big green box (that's good!) and then returning us to the view we started with.  Except that we now have an item in our history, the dataset from UCSC.
 
 
 ### History Item Status
@@ -394,7 +394,7 @@ However, before we rush off to publish our conclusions, let's
 
 ### Combine forward and reverse overlapping genes into one dataset.
 
-What tool can we use to combine the two datasets into one?  Try *seraching* for `combine` or `join` or `stack` in the tool search box.  You'll find lots of tools, but none of them do what we want to do. *Some times you just have to manually look through toolboxes to find what you need.*  Where should we look?  It's probably not **Get Data** or **Send Data**, but it could easily be in any of the next 4 toolboxes: **Lift-Over, Collection Operations, Text Manipulation, or Datamash**.
+What tool can we use to combine the two datasets into one?  Try *searching* for `combine` or `join` or `stack` in the tool search box.  You'll find lots of tools, but none of them do what we want to do. *Some times you just have to manually look through toolboxes to find what you need.*  Where should we look?  It's probably not **Get Data** or **Send Data**, but it could easily be in any of the next 4 toolboxes: **Lift-Over, Collection Operations, Text Manipulation, or Datamash**.
 
 It turns out that **Lift-Over** and **Collection Operations** are not what we want.  (But, take a look at them: if you are going to work with genomic data it won't take long before you'll need both.)
 
@@ -502,7 +502,7 @@ We want to run the same analysis, but this time only look for overlaps that happ
 >    - For example, `Exon overlaps on opposite strands`
 >    > ![Copy only the Genes dataset to the new history](../../images/copy_datasets_to_new_history.png)
 > 5. *Click* the **Copy History Items** button to create your new history.
->    - This creates a new history (with the copied dataset) and thows up a green box saying:
+>    - This creates a new history (with the copied dataset) and throws up a green box saying:
 >    >  1 dataset copied to 1 history: `name you gave your new history`.
 > 6. The history name is a link.  *Click* on it.
 {: .hands_on}
@@ -517,7 +517,7 @@ The second method is to use the **Gene BED To Exon/Intron/Codon BED expander** t
 
 > ### {% icon hands_on %} Get the exon data
 >
-> 1. Get the exon information, either by revisting UCSC, or by using the **Gene BED To Exon/Intron/Codon BED expander** tool.  If you use the expander tool select **Coding Exons only** from the **Extract** pull-down.
+> 1. Get the exon information, either by revisiting UCSC, or by using the **Gene BED To Exon/Intron/Codon BED expander** tool.  If you use the expander tool select **Coding Exons only** from the **Extract** pull-down.
 > 2. Give the resulting dataset a meaningful name.
 {: .hands_on}
 
@@ -549,7 +549,7 @@ And Galaxy launches the workflow and says (in a nice big green box) something li
 
 Which in this case *is the truth*.  You can refresh the history panel by either reloading the whole page, of by clicking the looping arrow icon at the top of the history panel.  What you'll see is a stack of history steps that will go from queued to running to done as you watch them.
 
-All steps in the history will be green when the workflow is done. Oonce that happens compare your output dataset with your input dataset?  What percentage of exons overlap with other exons on the opposite strand, and is it common or rare?  Is is a smaller percentage than we saw for whole genes?  
+All steps in the history will be green when the workflow is done. Once that happens compare your output dataset with your input dataset?  What percentage of exons overlap with other exons on the opposite strand, and is it common or rare?  Is is a smaller percentage than we saw for whole genes?  
 
 
 ## Are we done?
