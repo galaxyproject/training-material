@@ -113,7 +113,7 @@ Now we have information about the exon locations, but our question was which exo
 >
 >    ![`UCSC table browser` tool, first screen for SNPs](../../images/101_06.png)
 >
->    The **track** setting shows the version of the SNP database to get. In this example it is version 147, but you may select the latest one. Your results may vary slightly from the ones in this tutorial when you select a different version, but in general it is a good idea to select the latest version, as this will contain the most up-to-date SNP information.
+>    The **track** setting shows the version of the SNP database to get. In this example it is version 150, but you may select the latest one. Your results may vary slightly from the ones in this tutorial when you select a different version, but in general it is a good idea to select the latest version, as this will contain the most up-to-date SNP information.
 >
 > 3. Click on the **get output** button to find a menu similar to this:
 >
