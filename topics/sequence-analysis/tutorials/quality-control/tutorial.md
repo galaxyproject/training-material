@@ -73,7 +73,7 @@ To estimate sequence quality and how to further filter raw data, different indic
 
 > ### {% icon hands_on %} Hands-on: Quality check
 >
-> 1. **FastQC** {% icon tool %}: Run FastQC on the imported FastQ file with default parameters
+> 1. **FastQC** {% icon tool %}: Run **FastQC Read Quality reports** on the imported FastQ file with default parameters
 > 2. Inspect the FastQC report on its webpage output
 >
 >    > ### {% icon tip %} Tip: Inspecting the content of a file in Galaxy
@@ -120,7 +120,7 @@ To improve the overall sequence quality, we use the [Trim Galore!](https://www.b
 
 > ### {% icon hands_on %} Hands-on: Improvement of sequence quality
 >
-> 1. **Trim Galore** {% icon tool %}: Run Trim Galore on the imported FastQ file
+> 1. **Trim Galore!** {% icon tool %}: Run **Trim Galore! Quality and adapter trimmer of reads** on the imported FastQ file
 >
 >    > ### {% icon question %} Questions
 >    >
@@ -139,7 +139,7 @@ If you know which adapter sequence was used during library preparation, provide 
 >    > </details>
 >    {: .question}
 >
-> 2. **FastQC** {% icon tool %}: Re-run FastQC on the quality controlled data, and inspect the new FastQC report
+> 2. **FastQC** {% icon tool %}: Re-run **FastQC Read Quality reports** on the quality controlled data, and inspect the new FastQC report
 >
 >    > ### {% icon question %} Questions
 >    >
@@ -168,7 +168,7 @@ Now, we take a look at the impact of quality control and treatment on a bad data
 >
 > 1. Create a new history
 > 2. Import the FASTQ file: [`GSM461182_untreat_single_subset`](https://zenodo.org/record/61771/files/GSM461182_untreat_single_subset.fastq)
-> 3. **FastQC** {% icon tool %}: Run FastQC on the newly imported dataset
+> 3. **FastQC** {% icon tool %}: Run **FastQC Read Quality reports** on the newly imported dataset
 >
 >    > ### {% icon question %} Questions
 >    >
@@ -185,8 +185,8 @@ Now, we take a look at the impact of quality control and treatment on a bad data
 >    >    </details>
 >    {: .question}
 >
-> 4. **Trim Galore** {% icon tool %}: Run Trim Galore on the new dataset to apply the decisions taken at the previous step
-> 5. **FastQC** {% icon tool %}: Re-run FastQC to check the impact of Trim Galore
+> 4. **Trim Galore** {% icon tool %}: Run Run **Trim Galore! Quality and adapter trimmer of reads** on the new dataset to apply the decisions taken at the previous step
+> 5. **FastQC** {% icon tool %}: Re-run **FastQC Read Quality reports** to check the impact of Trim Galore
 >
 >    > ### {% icon question %} Questions
 >    >
