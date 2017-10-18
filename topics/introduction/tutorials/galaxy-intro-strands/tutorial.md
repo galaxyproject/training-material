@@ -9,10 +9,10 @@ tutorial_name: galaxy-intro-strands
 
 This practical aims to familiarize you with the Galaxy user interface. It will teach you how to perform basic tasks such as importing data, running tools, working with histories, creating workflows, and sharing your work.
 
-This tutorial teaches the same basic content as [Galaxy 101](/topics/introduction/tutorials/galaxy-intro-101/tutorial.html), but requires less knowledge of biology to understand the question this tutorial addresses.
-
 > ###  {% icon comment %} Audience
-> This tutorial is for those who are new to Galaxy, genomics, and bioinformatics.  If you aren't new to bioinformatics you can just do the items listed in the Hands-On boxes ({% icon hands_on %}), or you can try one of the other introductory tutorials.
+> This tutorial is for those who are new to Galaxy, genomics, and bioinformatics.  If you aren't new to bioinformatics you can just do the items listed in the Hands-On boxes ({% icon hands_on %}), or you can try one of the [other introductory tutorials](/topics/introduction/).
+>
+> This tutorial teaches the same basic content as [Galaxy 101](/topics/introduction/tutorials/galaxy-intro-101/tutorial.html), but requires less knowledge of biology to understand the questions this tutorial addresses.
 {: .comment}
 
 > ### Agenda
@@ -55,23 +55,22 @@ To explore this question we need a basic understanding of *genomes, chromosomes,
 >
 > * **Gene**
 >> "What is a gene?" is actually a hotly debated question.  For our purposes, a gene is a section of DNA on chromosome strand that creates a molecule used by an organism.
+>
+> Graphically, the human genome can be shown as the chromosomes that are in it:
+>
+> ![Human genome consists of 23 (pairs of) chromosomes](../../images/human_genome_chroms.png)
+>
+> And here's a representation of a chomosome, strands, and genes on the chromosome.
+>
+> ![Chromosomes are double stranded and have forward and reverse strands; strands have genes on them](../../images/chromosome_strands_genes.png)
 {: .comment}
 
-[ADD IMAGE HERE]
 
-Now lets refine our question slightly
+The question we are asking looks like:
 
-> ### {% icon question %} Our Revised Motivating Question
-> *I wonder if **exons** on opposite strands ever overlap with each other, and if so, how common is that?*
-{: .question}
+![Does a sitution like this exist?](../../images/do_genes_on_opposite_strands_ever_overlap.png)
 
-
-
-Conceptually our question looks like
-
-[IMAGE SHOWING CHROM STRANDS WITH GENES ON BOTH STRANDS. once without overlapping genes, and once with.]
-
-The first case is common.  We want to know if the second case happens.
+*Non-overlapping genes are common.  How common are overlapping genes?*
 
 ## Get human gene definitions
 
@@ -79,22 +78,20 @@ To answer this question we need to know where genes start and stop on human chro
 
 It turns out that for this particular question (and for many others), most **Galaxy** instances can help us find this information.
 
-In your web browser, go to [your Galaxy instance](#-requirements) and *log in or register*.
+> ### {% icon hands_on %} Definitions 1
+> In your web browser, *go to* **[your Galaxy instance](#-requirements)** and *log in or register*.
+{: .hands_on}
 
 The Galaxy interface consists of three main parts. The available tools are listed on the left, your analysis history is recorded on the right, and the middle panel will show the home page, tool forms, and dataset content.
 
 ![Galaxy interface](../../images/galaxy_interface.png)
 
-> ### {% icon hands_on %} Hands-on: Create history
+> ### {% icon hands_on %} Start with an empty history
 >
-> 1. Make sure you start from an empty analysis history.
->
->    > ### {% icon tip %} Creating a new history
->    >
->    > * Click the **gear icon** at the top of the history panel
->    > * Select the option **Create New** from the menu
->    {: .tip}
->
+> * If this is the first time you have used this Galaxy server, then your history panel will look like the image above.
+> * If your history has datasets in it (there will be one or more green boxes, *datasets*, there) then create a new history:
+>     * Click the **gear icon** at the top of the history panel
+>     * Select the option **Create New** from the menu
 {: .hands_on}
 
 ## Get data into Galaxy
@@ -106,9 +103,9 @@ There are [many ways to get data into a Galaxy instance](/topics/introduction/tu
 >  ![The Get Data toolbox](../../images/101_01.png)  *Click* on the **Get Data** toolbox to expand it.
 {: .hands_on}
 
-The **Get Data** toolbox contains a list of data sources that are available on this server.  **Upload file** is quite useful for getting data from your computer or from the web (see the [Getting data into Galaxy slides](topics/introduction/tutorials/galaxy-intro-get-data/slides.html#4).  Today we are going to use the **UCSC Main table browser**.
+The **Get Data** toolbox contains a list of data sources that this Galaxy instance can get data directly from.  **Upload file** is quite useful for getting data from your computer or from the web (see the [Getting data into Galaxy slides](/topics/introduction/tutorials/galaxy-intro-get-data/slides.html#4).  Today we are going to use the **UCSC Main table browser**.
 
-### Get exons
+### Get genes
 
 > ### {% icon hands_on %} Hands-on: Go to UCSC
 >
@@ -117,7 +114,7 @@ The **Get Data** toolbox contains a list of data sources that are available on t
 
 This will take you to the UCSC Table Browser:
 
- ![UCSC table browser tool, first screen for genes](../../images/101_02.png)
+ ![UCSC table browser tool, first screen for genes](../../images/ucsc_table_browser_w_default_settings.png)
 
 The [UCSC Table Browser](https://genome.ucsc.edu/cgi-bin/hgTables) provides access to all the data that is shown in the [UCSC Genome Browser](https://genome.ucsc.edu/cgi-bin/hgGateway) (see [box](#-ucsc-genome-browser) below). If you are working on a species that UCSC supports (like human) then the Table Browser is a great place to get genomic data.
 
@@ -160,12 +157,14 @@ So far we haven't changed *anything* from the defaults.  Lets change something. 
 > * Say that we just want chromosome 22
 >   * For **region** select `position`.
 >   * In the text box next to `position` enter `chr22` (case matters).
+>     > ![Change the region](../../images/ucsc_tb_set_region_chr22.png)
 >
 > * *Click* the **get output** button.
->   * And, that doesn't actually get us the output.  It sends us to a second UCSC page that asks us exactly what we want. Which is good, because we don't want the default.
+>   * And, that doesn't actually get us the output.  It sends us to a second UCSC page that asks us exactly what we want. 
+> &nbsp;
+>     > ![UCSC Table Browser 2nd page](../../images/ucsc_tb_2nd_page_whole_gene.png)
 >
-> * Under **Create one BED record per** *select* **Coding exons**.
->   * This will get only the parts of genes that actually produce active molecules.
+> * Under **Create one BED record per** make sure that **Whole Gene** is selected.
 >
 > * *Click* the **Send query to Galaxy** button at the bottom of the form.
 {: .hands_on}
@@ -177,9 +176,11 @@ This returns us to Galaxy, first displaying a big green box (that's good!) and t
 
 Watch your new history item.  It will go through three statuses before it's done.
 
-* **Grey**: Item is waiting to start (wating for data transfer to start)
-* **Yellow**: Item is running (data is actively being transferred).
-* **Green**: Item has finished successfully (data transfer complete).
+| Color | Icon | Meaning | |
+| ---- | ---- | ---- |
+| **Grey** | Clock | Item is waiting to start (wating for data transfer to start) | ![Status: Queued](../../images/status_queued.png) |
+| **Yellow** | Spinner | Item is running (data is actively being transferred). | ![Status: Running](../../images/status_running.png) |
+| **Green** | None | Item has finished successfully (data transfer complete). | ![Status: Successfully finished](../../images/status_finished_success.png) |
 
 Occassionally you will also see a 4th status
 
@@ -195,7 +196,7 @@ See the *Galaxy History Item Status* practical for more. [TODO]
 
 This expands the dataset and shows you information about it, and a preview of its contents.
 
-[IMAGE of PREVIEW]
+![Preview of the data from UCSC Table Browser](../../images/genes_human_chr22_preview.png)
 
 1. The preview tells us  several things:
 1. The dataset has over 4000 regions, meaning that there are over 4000 genes on chromosome 22.
@@ -206,17 +207,15 @@ This expands the dataset and shows you information about it, and a preview of it
 The dataset preview is informative, but you can't see much of the actual dataset.  Lets use one of the dataset icons to see the whole dataset
 
 > ### {% icon hands_on %} Hands-on: Look at all the data.
-> *Click* on the **eye icon** to view the contents of the dataset.
+> * *Click* on the **eye icon** to view the contents of the dataset.
+>   > This displays all of the data
+>     &nbsp;
+>   > ![Full dataset in center panel](../../images/genes_human_chr22_dataset_view.png)
 {: .hands_on}
-
-It will look something like this:
-![Contents of the `UCSC Main on Human: knownGene` dataset](../../images/101_exons.png)
 
 ### BED Format
 
-BED is one of several well-established tabular formats for genomic data.  Other formats include GFF3 and GTF.  For the type of analysis we are doing today, BED format is easiest to work with.
-
-BED was created to power the UCSC genome browser.  BED files contains between 3 and 15 columns.  Our example BED file describes genes and contains 12 columns.
+[BED](https://genome.ucsc.edu/FAQ/FAQformat.html#format1) is one of several well-established tabular formats for genomic data.  Other formats include GFF3 and GTF.  For the type of analysis we are doing today, BED format is easiest to work with.  BED was created to power the UCSC Genome Browser.  BED files contain between 3 and 15 columns.  Our example BED file describes genes and contains 12 columns.
 
 We care about columns 1, 2, 3, and 6:
 
@@ -225,13 +224,13 @@ We care about columns 1, 2, 3, and 6:
 | 1 | Chromosome | The name of the chromosome this gene is on. |
 | 2 | Start | Where on the chromosome the gene starts. |
 | 3 | End | Where on the chromosome the gene ends. |
-| 6 | Strand | Which strand the gene is on.  "+" means forward (top, left to right), "-" means reverse (bottom, right to left) |
+| 6 | Strand | Which strand the gene is on.  `+` means forward (top, left to right), `-` means reverse (bottom, right to left) |
 
 See the [BED format description at UCSC](https://genome.ucsc.edu/FAQ/FAQformat.html#format1) for a full description of all the columns.
 
 ## Naming
 
-Galaxy allow you to name your analyses (your histories) and your datasets.  We only have one history ("Unnamed history") and one dateset ("UCSC Main on Human:...") so far, but it's a good idea to
+Galaxy allow you to name your analyses (your histories) and your datasets.  We only have one history ("Unnamed history") and one dataset ("UCSC Main on Human:...") so far, but it's a good idea to
 
 1. Always name your histories
 2. Name your input and final output datasets, and any significant intermediate datasets.
@@ -250,18 +249,18 @@ You don't have to do this.  Galaxy is quite happy for you to have an infinite nu
 >
 >    Your history should now look something like this:
 >
->    ![Rename dataset](../../images/101_rename.png)
+>    ![Rename dataset](../../images/genes_human_chr22_rename.png)
 {: .hands_on}
 
 ## We've got the data - what's our plan for answering the question?
 
-You have to know what's possible, before you can build a plan.  If you don't have experience with data analysis then you might not have any idea how you would answer our question.  Before we dive in using a particular solution, think about how you might solve this.  If you don't have any experience with tools, then think about how you might solve it manually, using pencil and paper (it will help to assume you have an infinite supply of helpers to do the actual work).
+You have to know what's possible, before you can build a plan.  If you don't have experience with data analysis then you might not have any idea how you would answer our question.  Before we dive in using a particular solution, think about how you might solve this.  If you don't have any experience with tools, then think about how you might solve it manually, using pencil and paper (it may help to assume you have an infinite supply of helpers to do the pencil and paper work).
 
-Here's a high level description of how we'll answer this question.
+Here's how we'll answer this question.
 
 1. Split the genes dataset in two: one for genes on the forward strand, and one for genes on the reverse strand.
 1. Compare the two datasets to see which ones, if any, overlap.
-1. Figure out how many (or what percentage) or our genes overlap with another gene.
+1. Check how many (or what percentage) of our genes overlap with another gene.
 
 It turns out that all of these steps are easy in Galaxy.
 
@@ -269,40 +268,36 @@ It turns out that all of these steps are easy in Galaxy.
 
 How might we do this?  Column 6 contains the strand information.  Can we split genes into two datasets based on the value of Column 6.  How?  Lets take a look at our available tools.  And *whoa! There are over 40 toolboxes, and several hundred tools.* How are we going to find a tool that can do the split?
 
-First, we can try the *tools search box.*  Think of terms that might describe what we want to do and type them in the search box.  Do you see anything promising?  Explore a little.
 
-If you haven't already searched with it, enter `split` in the search box.  Near the top of the results is
-
-> **Filter** data on any column using simple expressions.
-
-That might work.
-
-> ### {% icon hands_on %} Hands-on: Open the Filter tool
+> ### {% icon hands_on %} Searching for and launching a tool 
+>
+> * Try the **tools search box**.  Think of terms that might describe what we want to do and type them in the search box.  Do you see anything promising?  Explore a little.
+> * If you haven't already searched with it, *enter* `split` in the **tool search box**.  Near the top of the results is
+>    > **Filter** data on any column using simple expressions.
+>    > That might work.
 > * *Click* on **Filter** to open the Filter tool in the middle panel.
 > * Take a look at the **Syntax** and **Example** sections to understand what the tool does.
+>
+> ![The Filter Tool form](../../images/filter_tool_defaults.png)
 {: .hands_on}
 
 It doesn't say anything about Filter being able to split a file into multiple files.  It does look like we can use Filter to get only genes on the forward strand, or only genes on the reverse strand.  We would have to run Filter twice, once for forward strand genes, and once for reverse strand genes. Let's do that.
-
-The tool form for Filter looks like
-
-[IMAGE]
 
 (You may have noticed during your search for tools that *all* tools have a similar look and feel.)
 
 > ### {% icon hands_on %} Hands-on: Run the Filter tool to get genes on the forwrd strand.
 >
-> The filter tool has 3 fields:
+> * The filter tool has 3 fields:
 >
-> 1. **Dataset**: This pulldown will list any dataset from your history that this tool can work on.  In your case that's probably only one dataset.  Make sure this is set to your `Genes` dataset.
-> 1. **Condition**: this free text field is where we specify which records we want in the output dataset.  *Enter* `c6 == "+"` in the text box.
+>   1. **Dataset**: This pulldown will list any dataset from your history that this tool can work on.  In your case that's probably only one dataset.  Make sure this is set to your `Genes` dataset.
+>   1. **Condition**: this free text field is where we specify which records we want in the output dataset.  *Enter* `c6 == "+"` in the text box.
 >   * This specifies that column 6 (the strand) must be equal to (`==` is Python for *is equal to*) a plus sign.
-> 1. **Header lines to skip**: Leave this as `0`. Our dataset does not have any header lines.
->
-> Finally, *click* the **Execute** button.
+>   1. **Header lines to skip**: Leave this as `0`. Our dataset does not have any header lines.
+> * Finally, *click* the **Execute** button.
+>   > ![Run the Filter tool to get only the forward strand genes](../../images/filter_tool_forward_strand_genes_only.png)
 {: .hands_on}
 
-This adds another dataset to your history.  This one should contain only genes on the forward strand.  Once the dataset is green, *click* the eye icon to confirm this.  We also recommend that you rename this dataset to something like `Genes, forward strand` (remember how?).
+This adds another dataset to your history.  This one should contain only genes on the forward strand.  Once the dataset is green, *click* the **eye icon** to confirm this.  We also recommend that you rename this dataset to something like `Genes, forward strand` (remember how?).
 
 Now we want to get the genes on the reverse strand.  There are actually many ways to get this.  Here are two of them.
 
@@ -310,17 +305,20 @@ Now we want to get the genes on the reverse strand.  There are actually many way
 >
 > **Method 1**
 >
-> 1. Open the dataset preview by *clicking* on the name of the `Genes, forward strand` dataset.  This show a different set of icons than the uploaded `Genes` dataset did.
+> 1. Open the dataset preview by *clicking* on the name of the `Genes, forward strand` dataset.  This shows an icon than the uploaded `Genes` dataset did not: a looping arrow.
 > 1. *Click* the **looping arrow** ("Run this job again") icon.  This won't actually run the job again.  What it will do is bring up the Filter tool form with *the exact same settings that were used to produce this dataset.*
 > 1. Rather than run Filter again with the same settings, *change* **Condition** to `c6 == "-"`
-> 1. Finally, *click* the **Execute** button.
+> 1. *Click* the **Execute** button.
 >
 > **Method 2**
 > 1. *Click* on **Filter** in the tool panel to open the Filter tool in the middle panel.
 > 1. *Fill* the form as before, *except*:
 >    * Make sure the **Dataset** pulldown is set to the `Genes` dataset.
 >    * *Set* **Condition** to `c6 == "-"`.
-> 1. Finally, *click* the **Execute** button.
+> 1. *Click* the **Execute** button.
+>
+> **Both Methods**
+> 1. *Rename* your new dataset to something like `Genes, reverse strand`
 {: .hands_on}
 
 The rerun button can be a huge help as you run more complex tools.
@@ -332,11 +330,8 @@ The rerun button can be a huge help as you run more complex tools.
 > Try again and set the dataset to your `Genes` dataset.
 {: .tip}
 
-> ### {% icon hands_on %} Hands-on: Rename Dataset
-> * *Rename* your new dataset to something like `Genes, reverse strand`
-{: .hands_on}
 
-Your history should now have (at least) 3 datasets in it, with names something like:
+Your history should now have (at least) 3 datasets in it, with names like:
 
 * `Genes`
 * `Genes, forward strand`
@@ -351,7 +346,7 @@ Genes are an example of a *genomic interval*.
 > ### {% icon comment %} Definitions 3
 >
 > * **Genomic interval**
->> In Galaxy, a *genomic interval* is a something that spans part of a chromosome (or some other frame of reference).  Genes and exons are common examples of genomic intervals.  Even a chromosome is a genetic interval, albeit a very long one.
+>> In Galaxy, a *genomic interval* is a something that spans part of a chromosome (or some other linear frame of reference like a contig).  Genes are a common example of a genomic interval.  Even a chromosome is a genomic interval, albeit a very long one.
 {: .comment}
 
 Galaxy excels at answering questions about genomic intervals and different sets of genomic intervals relate to each other.  Lets take a look.
@@ -376,6 +371,8 @@ Of the tools in the **Operate on Genomic Intervals** toolbox, **Join** and parti
 >     > This will return genes with even just one position overlapping.
 >   * *Click* **Execute**.
 >
+>     > ![Run Intersect](../../images/genes_human_intersect_strands.png)
+>
 > * Now repeat the intersect, but make the first dataset be the reverse genes, and the second be the forward genes.
 >
 > * Finally give both of the new datasets meaningful names, like `Overlapping forward genes` and `Overlapping reverse genes`
@@ -384,11 +381,11 @@ Of the tools in the **Operate on Genomic Intervals** toolbox, **Join** and parti
 
 ## Results and final steps.
 
-At this point we *could* say that we have answered our question. Using dataset previews in our history panel, we can compare the number of genes in the `Overlapping forward` and `Overlapping reverse` datasets with the number of genes in the full `Genes` dataset, and conclude that overlapping genes on opposite strands is actually pretty common.
+At this point we *could* say that we have answered our question. Using dataset previews in the history panel, we can compare the number of genes in the `Overlapping forward` and `Overlapping reverse` datasets with the number of genes in the full `Genes` dataset, and *conclude that overlapping genes on opposite strands are actually pretty common.*
 
 However, before we rush off to publish our conclusions, let's
 
-1. Get the both forward and reverse overlapping genes into a single dataset (one link will look better in our publication), and
+1. Get both the forward and reverse overlapping genes into a single dataset (one link will look better in our publication), and
 2. *Visualize* our new dataset, just to double-check our results.
 
 ### Combine forward and reverse overlapping genes into one dataset.
@@ -403,48 +400,58 @@ It turns out that **Lift-Over** and **Collection Operations** are not what we wa
 > * Near the top of the toolbox is **Concatenate datasets tail-to-head**. *Click* on it.  Lets try that tool.
 > * Set **Concatenate**'s parameters:
 >   * *Set* **Concatenate Dataset** to `Overlapping reverse genes`.
->   * *Click **+ Insert Dataset**.  This adds a second dataset pull-down menu to the form.
+>   * *Click* **+ Insert Dataset**.  This adds a second dataset pull-down menu to the form.
 >   * *Select* `Overlapping forward genes` as the second dataset.
 > * *Click* **Execute**
-> * *Rename the resulting dataset something informative like `Overlapping genes`
+> * *Rename* the resulting dataset something informative like `Overlapping genes`
 {: .hands_on}
 
 Once the concatenate operation is finished, preview the dataset in your history panel.  Does it have the expected number of genes in it?  If not, see if you can figure out what happened.
 
 ### Visualize the overlapping genes
 
-Galaxy gives us several options for visualizing our overlapping genes dataset.  Galaxy knows about several visualization options for lots of different dataset types, including BED.  Whenever you preview a dataset in the history panel, Galaxy provides links to these visualizations.  For BED files (what we have), options include **IGB, IGV,** and **UCSC main.**  IGB and IGV are widely used desktop applications and eventually you may want to install one of them.  For now, let's visualize the data at UCSC main, using the UCSC *Genome* Browser.
+Galaxy knows about several visualization options for lots of different dataset types, including BED.  Whenever you preview a dataset in the history panel, Galaxy provides links to these visualizations.  For BED files (which is the format we have), options include **IGB, IGV,** and **UCSC main.**  IGB and IGV are widely used desktop applications and eventually you may want to install one or both of them.  For now, let's visualize the data at UCSC, using the UCSC *Genome* Browser.
 
 > ### {% icon hands_on %} *Conctenate* two datasets 
 >
 > * *Click* on your `Overlapping genes` dataset in your history panel. This will show the dataset preview in the history panel.
 > * *Click* on the **display at UCSC main** link.
+>
+> This will launch a new window, showing UCSC's Genome Browser with our dataset shown right at the top.  UCSC figures out that our first overlapping gene is ~11 million bases into chromosome 22, and it has landed us there.
+>
+>   ![UCSC Genome Browser](../../images/ucsc_gb_genes_strands_overlapping.png)
 {: .hands_on}
 
-This will launch a new window, showing UCSC's Genome Browser with our dataset shown right at the top.  UCSC figures out that our first overlapping gene is ~11 million bases into chromosome 22, and it has landed us there.
 
 > ### {% icon comment %} UCSC Genome Browser
 >
-> *Genome browsers* are software for viewing genomic information graphically.  The [UCSC Genome Browser](https://genome.ucsc.edu/cgi-bin/hgGateway) (and most genome browsers) typically display different types of *annotation* about a region of a genome.  This is displayed as a stack of *tracks* and each track contains a different type of information.
+> * *Genome browsers* are software for viewing genomic information graphically.  The [UCSC Genome Browser](https://genome.ucsc.edu/cgi-bin/hgGateway) (and most genome browsers) typically display different types of *annotation* about a region of a genome.  This is displayed as a stack of *tracks* and each track contains a different type of information.
 >
-> Genome browsers are useful for seeing information in context and for seeing (and discovering) correlations between different types of information.  (They are also useful for visually checking results, which is what we are doing now.)
+> * Genome browsers are useful for seeing information in context and for seeing (and discovering) correlations between different types of information.  (They are also useful for visually checking results, which is what we are doing now.)
 >
-> The UCSC Genome Browser has information on over 100 animals, and their [Archaeal Genome Browser](http://archaea.ucsc.edu/cgi-bin/hgGateway?db=pyrFur2) has genomic information on well over 100 microbial species.
+> * The UCSC Genome Browser has information on over 100 animals, and their [Archaeal Genome Browser](http://archaea.ucsc.edu/cgi-bin/hgGateway?db=pyrFur2) has genomic information on well over 100 microbial species.
 {: .comment}
 
-Now, take a look at one of our results.  (Any pair of overlapping genes will do.)  Our data is in the second to top track (**User Track**). That track shows a line of small black boxes, sometimes connected with a line.
+Now, take a look at one of our results.  (Any pair of overlapping genes will do.)  Our data is in the second to top track (**User Track / User Supplied Track**). That track shows a line of small black boxes, sometimes connected with a line.
 
-> ### {% icon hands_on %} Zoom in on an area of the chromosome that shows a set of black boxes
+> ### {% icon hands_on %} Zoom in on an area of the chromosome that shows a set of *linked* black boxes
 > To zoom in,
-> * *click* on the **Scale** track (the top track) just to the left of the start of the black boxes.
+> * *Click* on the **Scale** track (the top track) just to the left of the start of the black boxes.
 > * Now *drag* the mouse across the Scale track to just to the right of the  black boxes and let go.
-> * A window pops up describing several ways to interact with the browser.  Just *click* the **Zoom In* button at the bottom.
+>    > ![Zoom by clicking and dragging on the Scale track](../../images/ucsc_gb_zoom_by_drag.png)
+> * A window pops up describing several ways to interact with the browser.  Just *click* the **Zoom In** button at the bottom.
 > * This redraws the window, this time zoomed in to what you highlighted.
->   * As you zoom in you may find that what originally appeared as a single black box can turn into multiple black boxes, linked to together with a thin line, and/or a stack of black boxes.
-> * Keep zooming in until you only have only one set of *overlapping* linked black boxes in the user track.
+> * Continue to zoom in until you have the set of linked black boxes you picked centered on the screen.
+> * Once you are as zoomed as you want to be, click on one of the linked boxes.  This will expand the track:
+>    > ![One gene, fully zoomed and expanded](../../images/ucsc_gb_zoom_to_1_gene.png)
 {: .hands_on}
 
-The black boxes connected by lines represent genes.  What's up with the boxes and the lines connecting them?
+The black boxes connected by lines represent genes, and each set of connected boxes is a single gene (actually, a single transcript of a gene).  Take a close look at the top several tracks.
+
+* It looks like we preserved the gene definitions just fine.
+* It looks like, sure enough, there are overlapping genes here, and they are on opposite sides.  The arrows on the connecting lines tell us which strand the gene is on.
+
+Um, *what's up with the boxes and the lines connecting them?*
 
 > ### {% icon comment %} Definitions 4
 >
@@ -452,12 +459,7 @@ The black boxes connected by lines represent genes.  What's up with the boxes an
 >> In humans (and in all plants and animals) the molecules that are built from genes are often only built from a part of the DNA in the gene. The sections of DNA that can produce the molecules are called *exons*.
 {: .comment}
 
-As you may have guessed:
-
-* The black boxes are exons.
-* The thin lines connect all exons that are part of a gene.
-
-Genes cover the entire area from the first black box to the last connected black box.
+As you may have guessed (or already kenw): The black boxes are exons.  *Genes* are defined as *covering the entire area from the first black box to the last connected black box.*
 
 ## Do we have a problem?
 
@@ -467,33 +469,106 @@ Our *ad hoc* review of identified overlapping genes in the UCSC Genome Browser h
 
 But, our conclusion may not be as *significant* as we had hoped. If only parts of genes, the exons, make stuff in our bodies, then should we have run this analysis on just the exons rather then the entire genes?  Probably.
 
+Let's refine our question slightly
+
+> ### {% icon question %} Our Revised Motivating Question
+> *I wonder if **exons** on opposite strands ever overlap with each other, and if so, how common is that?*
+{: .question}
+
+
 ### So, I have to do this all over again, but with exons?
 
-Well, yes and no.  We will have to run the analysis again, this time on just exons instead of whole genes. But we won't have to manually recreate every step.  Instead Galaxy enables us to create a reusable *workflow* from the analysis we just did, and then we can rerun the analysis, as one step, anytime we want to, and on any dataset.
+*Well, yes and no.*  We will have to run the analysis again, this time on exons instead of whole genes. But we won't have to manually recreate every step of our analysis. Galaxy enables us to create a reusable *workflow* from the analysis we just did, and then we can rerun the analysis, as one step, anytime we want to, and on any dataset.
 
-See the Intro Workflow tutorial for how to do that.
+## Walk through the workflow tutorial
+
+Run the [Create a reusable workflow from a history](../galaxy-intro-history-to-workflow/) tutorial for how to do this, *and then come back here to run your newly created workflow with the exon data.*
+
+## Rerun analysis with exon data
+
+We want to run the same analysis, but this time only look for overlaps that happen in *exons*, the parts of genes that produce stuff our body uses.  Before we start looking at exons, let's start a new history, one that contains only the genes file we got from UCSC. We could go back to UCSC and refetch the file, but there is an easier way.
+
+> ### {% icon hands_on %} Create a new history that contains some data from current history
+>
+> * *Click* on the **cog icon** at the top of the current history.
+> * *Select* the **Copy Datasets** option from the pull down menu.  This launches the copy datasets form.
+> * Under **Source History:**, *select* the dataset(s) you want to copy to the new history. In our case, we only want the `Genes` dataset.
+> * Under **Destination Hiistory** enter an informative history name in the **New history named:** box.  For example, `Exon overlaps on opposite strands`
+>    > ![Copy only the Genes dataset to the new history](../../images/copy_datasets_to_new_history.png)
+> * *Click* the **Copy History Items** button to create your new history. This creates a new history (with the copied dataset) and thows up a green box saying:
+>    >  1 dataset copied to 1 history: `name you gave your new history`.
+> * The history name is a link.  *Click* on it.
+{: .hands_on}
+
+### Get the exon data
+
+And your new history appears in the history panel with the copied *genes* dataset.  What we need is *exons.* How can we get the exon information?  There are two relatively easy ways to get this information, one of which will be very familiar.
+
+The first method involves going back to the UCSC Table Browser.  Everything on the first form would stay the same: We still want human, hg38, GENCODE v24, and just `chr22`. The second form is what changes.  Instead of getting the **Whole Gene**, we need to retrieve the **Coding Exons** only.
+
+The second method is to use the **Gene BED To Exon/Intron/Codon BED expander** tool in the **Operate on Genomic Intervals** toolbox to extract the exon information from the genes BED file we already have. (*Of course!* you say.  Umm, there is no way that you should have known that you already had this information in the genes file, or that this tool existed.)
+
+> ### {% icon hands_on %} Get the exon data
+>
+> * Get the exon information, either by revisting UCSC, or by using the **Gene BED To Exon/Intron/Codon BED expander** tool.  If you use the expander tool select **Coding Exons only** from the **Extract** pull-down.
+> * Give the resulting dataset a meaningful name.
+{: .hands_on}
 
 
-## Final thoughts
-
-### Why not use Excel for this?
-
-You could use Excel or another spreadsheet program to do these calculations.  Here, we learned how to use Galaxy by answering a question.  You could just as easily learn Excel by answering the same question, and if the goal is to learn how to do something, then either would be great. But what if you are working on a question where your analysis matters?  Maybe you are working with human clinical data trying to diagnose a set of symptoms, or you are working on research that will eventually be published and maybe earn you a Nobel Prize?
-
-In these cases your analysis, *and the ability to reproduce it exactly*, is vitally important.  Excel won't help you with this. It doesn't track changes and it offers very little insight to others on how you got from your initial data to your conclusions.
-
-Galaxy, on the other hand, *automatically records every step of your analysis.*  And when you are done, you can share your analysis with anyone.  You can even include a link to it in a paper (or your acceptance speech).  In addition, you can create a reusable recipe (a "workflow" in Galaxy terminology) from your analysis that others (or yourself) can use on other datasets.
-
-Another challenge with spreadsheet programs is that they don't scale to support *next generation sequencing* datasets, a common type of data in genomics, and which often reach gigabytes or even terabytes in size.
+If you got the data from UCSC it will look something like this:
+![Contents of the exons dataset from UCSC](../../images/101_exons.png)
 
 
-## What next?
+Your history should now have two datasets: one describing entire genes, and one describing just the exons.
 
-Try sharing tutorial.
+### Rerun the analysis, this time on exons.
 
-Try workflow tutorial.
+When you did the *History to Workflow* tutorial you created a new workflow that was then added to your list of defined workflows.  
+
+> ### {% icon hands_on %} Run the workflow on the exon data. 
+>
+> * *Click* the **Workflow** tab in the menu at the top of the Galaxy page.
+>    > This lists all of your defined workflows, including the one you just created.
+> * *Click* on the newly created workflow and select **Run** from the pull-down menu.
+>    > This launches the workflow run form (which you also saw when testing this workflow)
+> * *Select* **No** under **Send results to a new history**
+> * *Set* the first (and only input dataset to the `Exons` dataset, using the pull-down menu.
+> * *Click the **Run workflow** button.
+{: .hands_on}
+
+And Galaxy launches the workflow and says (in a nice big green box) something like:
+
+> You can check the status of queued jobs and view the resulting data by refreshing the History pane. 
+
+Which in this case *is the truth*.  You can refresh the history panel by either reloading the whole page, of by clicking the looping arrow icon at the top of the history panel.  What you'll see is a stack of history steps that will go from queud to running to done as you watch them.
+
+All steps in the history will be green when the workflow is done. Oonce that happens compare your output dataset with your input dataset?  What percentage of exons overlap with other exons on the opposite strand, and is it common or rare?  Is is a smaller percentage than we saw for whole genes?  
+
+
+## Are we done?
+
+Probably.  Note that we can no longer say what percentage of *genes* overlap.  We *can* say what percentage of exons overlap, and that is probably close enough for our goals.  If it isn't and we actually need to say what percentage of genes overlap, then we will have to do some extra work.  This can be done is several ways, but the Galaxy 101 tutorial may give you some ideas on how to follow this question all the way to genes.
 
 # Conclusion
 {: .no_toc}
 
 :tada: Well done! :clap: You have just performed your first analysis in Galaxy.
+
+
+# What next?
+
+Sharing tutorial
+
+
+# Final thoughts
+
+## Why not use Excel for this?
+
+You could use Excel or another spreadsheet program to do this analysis.  Here, we learned how to use Galaxy by answering a question.  You could just as easily learn Excel by answering the same question, and if the goal is to learn how to use a tool, then either tool would be great. But what if you are working on a question where your analysis matters?  Maybe you are working with human clinical data trying to diagnose a set of symptoms, or you are working on research that will eventually be published and maybe earn you a Nobel Prize?
+
+In these cases your analysis, *and the ability to reproduce it exactly*, is vitally important, and Excel won't help you here. It doesn't track changes and it offers very little insight to others on how you got from your initial data to your conclusions.
+
+Galaxy, on the other hand, *automatically records every step of your analysis.*  And when you are done, you can share your analysis with anyone.  You can even include a link to it in a paper (or your acceptance speech).  In addition, you can create a reusable workflow from your analysis that others (or yourself) can use on other datasets.
+
+Another challenge with spreadsheet programs is that they don't scale to support *next generation sequencing (NGS)* datasets, a common type of data in genomics, and which often reach gigabytes or even terabytes in size.
+
