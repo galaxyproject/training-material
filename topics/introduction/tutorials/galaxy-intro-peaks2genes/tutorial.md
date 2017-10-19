@@ -211,9 +211,10 @@ As we directly see, the peak file lacks `chr` before any chromosome number. But 
 
 > ### {% icon hands_on %} Hands-on: View end of file
 >
-> 1. **Select last** {% icon tool %}: Run **Select last lines from a dataset** with the following settings:
->     - **Select last**: Choose a value, e.g. `100`
->     - **from**: Our peak file `GSE37268_mof3.out.hpeak.txt`
+> 1. **Select last** {% icon tool %}: Run **Select last lines from a dataset (tail)** with the following settings:
+>     - **Text file** to our peak file `GSE37268_mof3.out.hpeak.txt`
+>     - **Operation**: `Keep last lines`
+>     - **Number of lines**: Choose a value, e.g. `100`
 > 2. Click **Execute**
 > 3. Wait for the job to finish
 > 4. Inspect the file through the **eye icon**
