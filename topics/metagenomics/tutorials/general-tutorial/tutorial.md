@@ -414,7 +414,10 @@ SRR531818.61708-G88ZSJI01AVPPR-2    Bacteria(100);Acidobacteria(99);Acidobacteri
 
 You will see that every read now has a classification.
 
-The next step is then to use this information to know the abundance of the different found taxons. First, we assign our sequences to OTUs:
+The next step is then to use this information to know the abundance of the different found taxons. This consists of three steps: 
+1. first all individual sequences are classified, and get assigned a confidence score (0-100%)
+2. next, sequences are grouped at 97% identity threshold (not using taxonomy info)
+3. finally, for each cluster, a consensus classification is determined based on the classification of the individual sequences and taking their confidence scores into account
 
 > ### {% icon hands_on %} Hands-on: Assign sequences to OTUs
 >
