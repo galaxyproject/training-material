@@ -196,7 +196,7 @@ We can now try to determine the library type of our data.
 >    - "Reference genome" to `dm3`
 >    - "Single-end or parired-end reads?" to `paired-end`
 >    - "FASTA/Q file #1" to the downsampled `Trimmed reads pair 1` (Trim Galore output)
->    - "FASTA/Q file #1" to the downsampled `Trimmed reads pair 2` (Trim Galore output)
+>    - "FASTA/Q file #2" to the downsampled `Trimmed reads pair 2` (Trim Galore output)
 >    - Default values for other parameters
 >
 > 4. **Infer Experiment** {% icon tool %}: Run **Infer Experiment** to determine the library type:
@@ -244,7 +244,7 @@ We can now map all the RNA sequences on the *Drosophila melanogaster* genome usi
 >    - "Reference genome" to `dm3`
 >    - "Single-end or parired-end reads?" to `paired-end`
 >    - "FASTA/Q file #1" to `Trimmed reads pair 1` (Trim Galore output)
->    - "FASTA/Q file #1" to `Trimmed reads pair 2` (Trim Galore output)
+>    - "FASTA/Q file #2" to `Trimmed reads pair 2` (Trim Galore output)
 >    - "Specify strand information" set to the previously determined value (`RF`)
 >    - Default values for other parameters except "Spliced alignment options"
 >    - "Disable spliced alignment" to `False`
