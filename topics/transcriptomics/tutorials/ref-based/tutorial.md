@@ -388,7 +388,7 @@ We will first investigate the differential gene expression to identify which gen
 
 ## Count the number of reads per annotated gene
 
-To compare the expression of single genes between different conditions (*e.g.* with or without PS depletion), an first essential step is to quantify the number of reads per gene. [**HTSeq-count**](https://www-huber.embl.de/users/anders/HTSeq/doc/count.html) is one of the most popular tool for gene quantification.
+To compare the expression of single genes between different conditions (*e.g.* with or without PS depletion), an essential first step is to quantify the number of reads per gene. [**HTSeq-count**](https://www-huber.embl.de/users/anders/HTSeq/doc/count.html) is one of the most popular tools for gene quantification.
 
 To quantify the number of reads mapped to a gene, an annotation of the gene position is needed. In a previous step, we have already uploaded the `Drosophila_melanogaster.BDGP5.78.gtf` with the Ensembl gene annotation for *Drosophila melanogaster* to Galaxy, which we can now make use of for this purpose.
 
