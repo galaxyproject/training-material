@@ -193,10 +193,10 @@ We can now try to determine the library type of our data.
 >
 > 3. **HISAT2** {% icon tool %}: Run **HISAT2** with:
 >    - "Source for the reference genome" to `Use a built-in genome`
->    - "dm3" as reference genome
->    - "paired-end reads"
->    - Downsampled "Trimmed reads pair 1" (Trim Galore output) as "FASTA/Q file #1"
->    - Downsampled "Trimmed reads pair 2" (Trim Galore output) as "FASTA/Q file #2"
+>    - "Reference genome" to `dm3`
+>    - "Single-end or parired-end reads?" to `paired-end`
+>    - "FASTA/Q file #1" to the downsampled `Trimmed reads pair 1` (Trim Galore output)
+>    - "FASTA/Q file #1" to the downsampled `Trimmed reads pair 2` (Trim Galore output)
 >    - Default values for other parameters
 >
 > 4. **Infer Experiment** {% icon tool %}: Run **Infer Experiment** to determine the library type:
