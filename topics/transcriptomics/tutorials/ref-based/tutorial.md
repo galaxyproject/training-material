@@ -126,7 +126,7 @@ To make sense of the reads, their positions within the *Drosophila melanogaster*
 > ### {% icon comment %} Comment
 >
 > Do you want to learn more about the principles behind mapping? Follow our [training]({{site.url}}/topics/sequence-analysis/)
-> {: .comment}
+{: .comment}
 
 Because in the case of a eukaryotic transcriptome, most reads originate from processed mRNAs lacking exons, they cannot be simply mapped back to the genome as we normally do for DNA data. Instead the reads must be separated into two categories:
 
