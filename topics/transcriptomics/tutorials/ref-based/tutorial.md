@@ -40,7 +40,9 @@ We have extracted sequences from the Sequence Read Archive (SRA) files to build 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
 > 1. Create a new history for this RNA-seq exercise
-> 2. Import a FASTQ file pair (*e.g.*  `GSM461177_untreat_paired_chr4_R1.fastq` and `GSM461177_untreat_paired_chr4_R2.fastq`) from [Zenodo](https://dx.doi.org/10.5281/zenodo.290221)
+> 2. Import a FASTQ file pair (*e.g.*  `GSM461177_untreat_paired_chr4_R1.fastq` and `GSM461177_untreat_paired_chr4_R2.fastq`)
+>     * Option 1: From a shared data library if available (ask your instructor)
+>     * Option 2: From [Zenodo](https://dx.doi.org/10.5281/zenodo.290221)
 >
 >    > ### {% icon tip %} Tip: Importing data via links
 >    >
@@ -51,20 +53,13 @@ We have extracted sequences from the Sequence Read Archive (SRA) files to build 
 >    > * Press **Start**    
 >    {: .tip}
 >
->    > ### {% icon tip %} Tip: Changing the file type from `fastq` to `fastqsanger` once the data file is in your history
->    >
->    > * Click on the pencil button displayed in your dataset in the history
->    > * Choose **Datatype** on the top
->    > * Select `fastqsanger`
->    > * Press **Save**
->    {: .tip}
->
->    As default, Galaxy uses the link as the name of the new dataset. It also does not link the dataset to a database or a reference genome.
->
->    > ### {% icon comment %} Comments
->    > - Edit the "Database/Build" to select "dm3"
->    > - Rename the datasets according to the samples
->    {: .comment}
+> 3. Change the file type from `fastq` to `fastqsanger` once the data file is in your history
+>     * Click on the pencil button displayed in your dataset in the history
+>     * Choose **Datatype** on the top
+>     * Select `fastqsanger`
+>     * Press **Save**
+> 4. Edit the "Database/Build" to select `dm3`
+> 5. Rename the datasets according to the samples
 >
 {: .hands_on}
 
