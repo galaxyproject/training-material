@@ -263,9 +263,9 @@ We can now map all the RNA sequences on the *Drosophila melanogaster* genome usi
 >    >    <details>
 >    >    <summary>Click to view answer</summary>
 >    >    <ol type="1">
->    >    <li>29.06% and 6.10%</li>
->    >    <li>11,963 reads (the reads aligned discordantly 1 time)</li>
->    >    <li>The overall alignment rate is 75.77%. It counts proportion of mapped reads: (12017+2486+11963+7390/2+1413/2)/40736</li>
+>    >    <li>37.84% and 14.69%</li>
+>    >    <li>14,454 reads (the reads aligned discordantly 1 time)</li>
+>    >    <li>The overall alignment rate is 93.52%. It counts proportion of mapped reads: (15413+5985+14454+3637/2+849/2)/40736</li>
 >    >    </ol>
 >    >    </details>
 >    {: .question}
