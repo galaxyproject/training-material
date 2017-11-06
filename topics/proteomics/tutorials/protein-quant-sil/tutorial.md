@@ -36,7 +36,7 @@ If you still are in the planning phase of your quantitative proteomics experimen
 # MS1 Feature Detection
 Quantitation on MS1 level may in principle be carried out without prior knowledge of peptide / protein IDs. However, some quantitation algorithms take the IDs as an input to make sure that every PSM that was identified is also quantified. This is not the case in our example here.
 In the OpenMS suite, most of the provided tools for MS1 feature detection quantify solely based on mzML files. The advantage of this approach is that quantitations can be made on strict criteria to reduce misquantitations. The drawback is that not all IDs can be matched to a quantitation later on in the workflow.
-The tool settings need to be carefully tested and evaluated manually to obtain optimal results. We will explain this in the section [Evaluation and Optimization of Quantitation Results](#expert-level-evaluation-and-optimization-of-quantitation-results).
+The tool settings need to be carefully tested and evaluated manually to obtain optimal results. We will explain this in the section [Evaluation and Optimization of Quantitation Results](#evaluation-and-optimization-of-quantitation-results).
 
 > ### {% icon hands_on %} Hands-on: MS1 Feature Detection
 >
@@ -44,23 +44,28 @@ The tool settings need to be carefully tested and evaluated manually to obtain o
 > 2. Run ***FeatureFinderMultiplex*** {% icon tool %} on the mzML file. Change **`Labelling`** to `\[ \] \[Arg6,Lys6\]`.
 >
 >   > ### {% icon tip %} Tip (Expert level): Detecting features of knockouts
->   > In biology, there are rarely cases in which a gene product is completely shut off between two conditions. Rather, most changes are gradual. However, in some situations, you will have the situation that a protein is present in only one of the tested conditions and completely lacking in another. A classical example would be comparing a "knockout" mouse with its "wild-type" counterpart.
->   > Due to the feature detection algorithm of ***FeatureFinderMultiplex*** {% icon tool %}, those features would normally be disregarded, as they do not look like typical features in labelled samples.
+>   > In biology, there are rarely cases in which a gene product is completely shut off between two conditions. Rather, most changes are gradual. However, in some situations, you will have the situation that a protein is detectable in only one of the tested conditions and completely lacking in another. A classical example would be comparing a "knockout" mouse with its "wild-type" counterpart.
 >   >
+>   > Due to the feature detection algorithm of ***FeatureFinderMultiplex*** {% icon tool %}, those features would normally be disregarded, as they do not look like typical features in labelled samples.
 >   > However, there is a built-in option in ***FeatureFinderMultiplex*** {% icon tool %} that enables finding of "knockout features". If you expect one or more proteins to be completely missing in at least one of your conditions, select the advanced option **`knockouts present`**.
->   > Switching on this option is not recommended as a default setting, as it increases the possibility of false positives. When using this option, be advised to check for false positives carefully, as described [below](#expert-level-evaluation-and-optimization-of-quantitation-results).
+>   > Switching on this option is not recommended as a default setting, as it increases the possibility of false positives. When using this option, be advised to check for false positives carefully, as described [below](#evaluation-and-optimization-of-quantitation-results).
 >   {: .tip}
 {: .hands_on}
 
 # Peptide and Protein Identification and Conversion
 
-In this tutorial, peptide identification will be performed using the workflow of the previous [Peptide ID Tutorial]({{site.url}}/topics/proteomics/tutorials/protein-id-sg-ps/tutorial.html). Here, peptide ID and protein inference were performed using [SearchGUI](https://compomics.github.io/projects/searchgui.html) and [PeptideShaker](https://compomics.github.io/projects/peptide-shaker.html). 
-To be able to further process the mzid output of ***PeptideShaker*** {% icon tool %}, we will have to modify the mzid slightly to make it compatible to the OpenMS tools used in this tutorial.
+In this tutorial, peptide identification will be performed using the workflow of the previous [Peptide ID Tutorial]({{site.url}}/topics/proteomics/tutorials/protein-id-oms/tutorial.html). 
+A common problem in mass spectrometry are misassigned mono-isotopic precursor peaks. Although most search engines allow for some adaptation of the monoisotopic peak, we will instead perform a recalculation of the monoisotopic peaks based on the previously identified features prior to peptide identification. This step facilitates mapping peptide IDs to identified features [later on](#mapping-features-to-ids). To do so, we will use the OpenMS tool ***HighResPrecursorMassCorrector*** {% icon tool %}.
+
+[//]: # TODO: Read about monoisotopic peak problem, give citation to review!
 
 > ### {% icon hands_on %} Hands-on: Peptide and Protein Identification and Conversion
-> 1. Run the workflow "ProteinID_SG_PS" on the test dataset.
-> 2. For compatibility reasons, run ***Replace*** {% icon tool %} on the mzid output of ***PeptideShaker*** {% icon tool %}. Copy the following pattern in the field **`Find pattern`**: `.*name="PeptideShaker PSM confidence type".*`. Leave the field **`Replace with`** empty. Change the tick box **`Find-Pattern is a regular expression`** to `Yes` and execute.
-> 3. Use ***IDFileConverter*** {% icon tool %} to convert the modified mzid to idXML. Change the parameter **'Output file type'** to `idXML` and leave the other options at default.
+> 1. Run ***HighResPrecursorMassCorrector*** {% icon tool %} on the `mzML` file. Use the output of ***FeatureFinderMultiplex*** {% icon tool %} as a second input file. 
+> 2. Open the workflow "proteinID_oms" and modify it:
+>   - Delete the **PeakPickerHiRes** {% icon tool %} node.
+>   - Connect the `mzML` input directly to the **XTandemAdapter** {% icon tool %} node
+> 1. Run the workflow "proteinID_oms" on the test dataset.
+[//]: # TODO: **Adapt the workflow name and delete 1) the PeakPickerHiRes node and 2) the contaminant analysis in the WF.**
 {: .hands_on}
 
 # Quant to ID matching
@@ -76,7 +81,11 @@ We now have identified
 >   {: .question}
 {: .hands_on}
 
-# Expert level: Evaluation and Optimization of Quantitation Results
+# Evaluation and Optimization of Quantitation Results
+
+[//]: # **General scheme: Use FileFilter to produce a small RT slice of data, then optimize on that.**
+[//]: # **Three (Four?) steps to optimize: 1) FFMult, 2) HighResPrecMassCorr, 3) IdMapper**
+[//]: # **HiResMassCorr can work on three levels: based on 1) features, 2) closest MS1 peak, 3) highest intensity MS1 peak. Maybe write to OpenMS developers about best settings / differences (see https://sourceforge.net/p/open-ms/mailman/message/34189191/). Find out about best settings! ppm could make sense, as heavier peptides are more likely to be misassigned, as the monoisotopic peaks get smaller compared to C13 peaks**)
 
 ***FeatureFinderMultiplex*** {% icon tool %} searches for multiple similar features that elute at the same time, but diverge by a mass shift fitting to the label used. ***FeatureFinderMultiplex*** {% icon tool %} uses several parameters that may be used to optimize your search results. Two important parameters are **`Average elution time`** and **`Averagine similarity`**.
 
