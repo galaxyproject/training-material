@@ -61,11 +61,17 @@ A common problem in mass spectrometry are misassigned mono-isotopic precursor pe
 
 > ### {% icon hands_on %} Hands-on: Peptide and Protein Identification and Conversion
 > 1. Run ***HighResPrecursorMassCorrector*** {% icon tool %} on the `mzML` file. Use the output of ***FeatureFinderMultiplex*** {% icon tool %} as a second input file. 
-> 2. Open the workflow "proteinID_oms" and modify it:
->   - Delete the **PeakPickerHiRes** {% icon tool %} node.
->   - Connect the `mzML` input directly to the **XTandemAdapter** {% icon tool %} node
+> 2. Import the [Protein identification using OpenMS tutorial workflow]({{site.url}}/topics/proteomics/tutorials/protein-id-oms/workflows/workflow.ga) and modify it:
+>   - Delete the **PeakPickerHiRes** {% icon tool %} node, as the MS2 data of the test dataset were already centroided during data acquisition.
+>   - Connect the `mzML` input directly to the **XTandemAdapter** {% icon tool %} node.
+>   - Change the **XTandemAdapter** {% icon tool %} parameters:
+>       - Add the variable modifications `Label:13C(6) (K)` and `Label:13C(6) (R)`.
 > 1. Run the workflow "proteinID_oms" on the test dataset.
 [//]: # TODO: **Adapt the workflow name and delete 1) the PeakPickerHiRes node and 2) the contaminant analysis in the WF.**
+>
+>   > ### {% icon tip %} Tip: Using Galaxy Workflows
+>   > If you want to learn more about 
+>   {: .tip}
 {: .hands_on}
 
 # Quant to ID matching
