@@ -7,7 +7,7 @@ tutorial_name: protein-id-oms
 # Introduction
 {:.no_toc}
 
-Identifying the proteins contained in a sample is an important step in any proteomic experiment. However, in most settings, proteins are digested to peptides before the LC-MS/MS analysis. In this so-called "bottom-up" procedure, only peptide masses are measured. Therefore, protein identification cannot be performed directly from raw data, but is a multi-step process:
+Identifying the proteins contained in a sample is an important step in any proteomic experiment. However, in most settings, proteins are digested to peptides prior to LC-MS/MS analysis. In this so-called "bottom-up" procedure, only peptide masses are measured. Therefore, protein identification cannot be performed directly from raw data, but is a multi-step process:
 
 1. Raw data preparations
 2. Peptide-to-Spectrum matching
@@ -18,7 +18,8 @@ A plethora of different software solutions exists for each step. In this tutoria
 This tutorial covers peptide and protein **identification** only, but you may use the output of this tutorial for the [tutorial on protein quantitation]({{site.url}}/topics/proteomics/tutorials/protein-quant-sil/tutorial.html).
 
 It is generally recommended to use more than one peptide search engine and use the combined results for the final peptide inference ([Shteynberg et al., 2013, Mol. Cell. Proteomics](https://www.ncbi.nlm.nih.gov/pubmed/23720762)).
-For an alternative ID pipeline using the [Compomics](https://compomics.com/) tools [SearchGUI](https://compomics.github.io/projects/searchgui.html) and [PeptideShaker](https://compomics.github.io/projects/peptide-shaker.html), please consult [this tutorial]({{site.url}}/topics/proteomics/tutorials/protein-id-sg-ps/tutorial.html). However, the latter tutorial does not allow to continue with the tutorial on protein quantitation.
+For an alternative ID pipeline using the [Compomics](https://compomics.com/) tools [SearchGUI](https://compomics.github.io/projects/searchgui.html) and [PeptideShaker](https://compomics.github.io/projects/peptide-shaker.html), please consult [this tutorial]({{site.url}}/topics/proteomics/tutorials/protein-id-sg-ps/tutorial.html). 
+The latter tutorial does not allow to continue with the tutorial on protein quantitation.
 
 # Input data
 {:.no_toc}
@@ -28,7 +29,8 @@ in [Vaudel et al., 2014, Proteomics](https://www.ncbi.nlm.nih.gov/pubmed/2467804
 about the dataset can be found on [PRIDE](https://www.ebi.ac.uk/pride/archive/projects/PXD000674).
 For step 2 we will use a validated human Uniprot FASTA database with appended decoys.
 If you already completed the tutorial on [Database Handling]({{site.url}}/topics/proteomics/tutorials/database-handling/tutorial.html)
-you can use the constructed database including decoys. You can find a prepared database, as well as the input proteomics data in different file formats on [Zenodo](https://zenodo.org/record/796184).
+you can use the constructed database including decoys. 
+You can find a prepared database, as well as the input LC-MS/MS data in different file formats on [Zenodo](https://zenodo.org/record/796184).
 
 > ### Agenda
 >
@@ -41,7 +43,8 @@ you can use the constructed database including decoys. You can find a prepared d
 
 # Preparing Raw Data
 
-Raw data conversion is the first step of any proteomic data analysis. The most common converter is MSConvert from the [ProteoWizard software suite](http://proteowizard.sourceforge.net/), the format to convert to is mzML. Search GUI needs `mgf` format as input, but as we need the `mzML` format for several other tasks, we will convert to `mzML` first. Due to licensing reasons, MSConvert runs only on windows systems and will not work on most Galaxy servers.
+Raw data conversion is the first step of any proteomic data analysis. The most common converter is MSConvert from the [ProteoWizard software suite](http://proteowizard.sourceforge.net/), the format to convert to is mzML.
+Due to licensing reasons, MSConvert runs only on windows systems and will not work on most Galaxy servers.
 
 Depending on your machine settings, raw data will be generated either in profile mode or centroid mode. For most peptide search engines, the MS2 data have to be converted to centroid mode, a process called "peak picking" or "centroiding".
 Machine vendors offer algorithms to extract peaks from profile raw data. Those are integrated in ***msconvert*** {% icon tool %} and can be run in parallel to the mzML conversion.
@@ -50,7 +53,7 @@ If your data were generated on a low resolution mass spectrometer, use ***PeakPi
 
 > ### {% icon hands_on %} Hands-On: File Conversion and Peak Picking
 >
-> We provide the [input data](https://zenodo.org/record/796184) in the original `raw` format and also already converted to `mgf` and `mzML` file formats. If ***msconvert*** {% icon tool %} does not run on your Galaxy instance, please download the preconverted `mzML` as an input.
+> We provide the [input data](https://zenodo.org/record/796184) in the original `raw` format and also already converted to `mzML`. If ***msconvert*** {% icon tool %} does not run on your Galaxy instance, please download the preconverted `mzML` as an input.
 >
 > 1. Create a new history for this Peptide and Protein ID exercise.
 > 2. Load the example dataset into your history from Zenodo: [raw](https://zenodo.org/record/892005/files/qExactive01819.raw) [mzML](https://zenodo.org/record/892005/files/qExactive01819_profile.mzml)
@@ -91,7 +94,7 @@ Different peptide search engines have been developed to fulfill the matching pro
 The next step of peptide identification is to decide which PSMs will be used for protein inference. Measured MS2 spectra never perfectly fit the theoretical spectra. Therefore, peptide search engines calculate a score which indicates how well the measured MS2 spectrum was fitting the theoretical spectrum. How do we decide which PSMs are likely true and which are false?
 
 In proteomics, this decision is typically done by calculating false discovery rates (FDRs). Remember that the database we were using for peptide-to-spectrum matching consisted not only of true proteins, but also the same number of "fake entries", the so-called decoys. Those decoys can now be used to estimate the number of false identifications in the list of PSMs. 
-The calculation is based on a simple assumption: for every decoy protein identified with a given score, we expect on false positive with at least the same score.
+The calculation is based on a simple assumption: for every decoy protein identified with a given score, we expect one false positive with at least the same score.
 The false discovery rate is therefore defined as the number of false discoveries (decoy hits) divided by the number of false and correct discoveries (both target and decoy hits) at a given score threshold. 
 
 To calculate FDRs, we first have to annotate the identified peptides to determine which of them are decoys. This is done with the tool ***PeptideIndexer*** {% icon tool %}. Additionally, we will calculate peptide posterior error probabilities (PEPs), because they are needed for the protein inference algorithm used by OpenMS. We will then filter for 1 % FDR and set the score back to PEP.
@@ -135,7 +138,10 @@ The OpenMS suite implemented the [Fido](https://www.ncbi.nlm.nih.gov/pubmed/2071
 {: .hands_on}
 
 # Analysis of Contaminants
-The FASTA database used for the peptide to spectrum matching contained some entries that were not expected to stem from the HeLa cell lysate, but are common contaminations in LC-MS/MS samples. The main reason to add those is to avoid false assignment of the spectra to other proteins. However, it also enables you to check for contaminations in your samples. **CAVE:** in human samples, many proteins that are common contaminants may also stem from the real sample. Therefore, you do not have to exclude those proteins from further analysis, but you should verify the expression of these proteins in your sample.
+The FASTA database used for the peptide to spectrum matching contained some entries that were not expected to stem from the HeLa cell lysate, but are common contaminations in LC-MS/MS samples. The main reason to add those is to avoid false assignment of contaminant spectra to other proteins. 
+It also enables you to check for contaminations in your samples. 
+
+**CAVE:** When analyzing human samples, many proteins that are common contaminants may also stem from the sample. Therefore, human contaminants do not have to be excluded from further analysis, but you should keep in mind that the source of these proteins is unclear.
 
 > ### {% icon hands_on %} Hands-On: Analysis of Contaminants
 >
