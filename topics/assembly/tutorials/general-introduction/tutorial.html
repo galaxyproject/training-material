@@ -127,9 +127,15 @@
 
         <h1 class="no_toc" id="genome-assembly-with-velvet-background">Genome assembly with Velvet: Background</h1>
 
-<p>Velvet is one of a number of <em>de novo</em> assemblers that use short read sets as input (e.g. Illumina Reads), and the assembly method is based on de Bruijn graphs. For information about Velvet see this <a href="https://en.wikipedia.org/wiki/Velvet_assembler">link</a>.</p>
+<p>Velvet is one of a number of <em>de novo</em> assemblers that use short read sets as input (<em>e.g.</em> Illumina Reads). The assembly method is based on the manipulation of de Bruijn graphs, via the removal of errors and the simplication of repeated regions.</p>
 
-<p>In this activity, we will perform a <em>de novo</em> assembly of a short read set using the Velvet assembler.</p>
+<blockquote class="comment">
+  <h3 id="-comment"><i class="fa fa-commenting-o" aria-hidden="true"></i> Comment</h3>
+
+  <p>For information about Velvet, you can check its (nice) <a href="https://en.wikipedia.org/wiki/Velvet_assembler">Wikipedia page</a>.</p>
+</blockquote>
+
+<p>For this tutorial, we have a set of reads from an imaginary <em>Staphylococcus aureus</em> bacterium with a miniature genome (197,394 bp). Our mutant strain read set was sequenced with whole genome shotgun method, using an Illumina DNA sequencing instrument. From these reads, we would like to rebuild our imaginary <em>Staphylococcus aureus</em> bacterium via a <em>de novo</em> assembly of a short read set using the Velvet assembler.</p>
 
 <blockquote class="agenda">
   <h3 id="agenda">Agenda</h3>
@@ -155,14 +161,17 @@
 
   <ol>
     <li>Create and name a new history for this tutorial.</li>
-    <li>
-      <p>Import the sequence read raw data (*.fastq) from <a href="https://doi.org/10.5281/zenodo.582600">Zenodo</a></p>
+    <li>Import from <a href="https://doi.org/10.5281/zenodo.582600">Zenodo</a> or from the data library the files:
+      <ul>
+        <li><a href="https://zenodo.org/record/582600/files/mutant_R1.fastq"><code class="highlighter-rouge">mutant_R1.fastq</code></a></li>
+        <li><a href="https://zenodo.org/record/582600/files/mutant_R2.fastq"><code class="highlighter-rouge">mutant_R2.fastq</code></a></li>
+      </ul>
 
       <blockquote class="tip">
         <h3 id="-tip-importing-data-via-links"><i class="fa fa-lightbulb-o" aria-hidden="true"></i> Tip: Importing data via links</h3>
 
         <ul>
-          <li>Copy the link location (Right-click on the filename <i class="fa fa-long-arrow-right"></i> Copy Link Address)</li>
+          <li>Copy the link location (Right-click on the filename then “Copy Link Address”)</li>
           <li>Open the Galaxy Upload Manager</li>
           <li>Select <strong>Paste/Fetch Data</strong></li>
           <li>Paste the link into the text field</li>
@@ -170,226 +179,387 @@
           <li>Press <strong>Start</strong></li>
         </ul>
       </blockquote>
-
-      <p><img src="../../images/upload_data_page.png" alt="upload" /></p>
-      <figcaption><b>Figure 1:</b> Data can be imported directly with links.</figcaption>
     </li>
     <li>
-      <p>Once the files have been uploaded, change their names to Mutant_R1.fastq and Mutant_R2.fastq respectively by clicking on the <img src="../../images/edit_file.png" alt="Pencil icon" /> icon next to the relevant history entry.</p>
+      <p>Change the name of the files to <code class="highlighter-rouge">mutant_R1</code> and <code class="highlighter-rouge">mutant_R2</code></p>
 
-      <p><img src="../../images/starting_history.png" alt="data" /></p>
-      <figcaption><b>Figure 2:</b> Imported datasets will appear in the history panel.</figcaption>
+      <p>As default, Galaxy uses the link as the name of the new dataset. It also does not link the dataset to a database or a reference genome.</p>
+
+      <blockquote class="tip">
+        <h3 id="-tip-changing-the-name-of-a-dataset"><i class="fa fa-lightbulb-o" aria-hidden="true"></i> Tip: Changing the name of a dataset</h3>
+
+        <ul>
+          <li>Click on <strong>Edit attributes</strong> <img src="../../images/edit_file.png" alt="Pencil icon" /> icon next to the relevant history entry</li>
+          <li>Change the <strong>Name</strong> in <code class="highlighter-rouge">Attributes</code> panel</li>
+        </ul>
+      </blockquote>
+
+      <figure id="figure-1"><img src="../../images/starting_history.png" alt="Imported datasets will appear in the history panel" title="Imported datasets in the history panel" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Imported datasets in the history panel</figcaption></figure>
+    </li>
+    <li>
+      <p>Inspect the content of a file</p>
+
+      <blockquote class="tip">
+        <h3 id="-tip-inspecting-the-content-of-a-dataset"><i class="fa fa-lightbulb-o" aria-hidden="true"></i> Tip: Inspecting the content of a dataset</h3>
+
+        <ul>
+          <li>Click on <strong>View Data</strong> (the <img src="../../images/eye.png" alt="Eye icon" />) icon next to the relevant history entry</li>
+          <li>View the content of the file in the middle panel</li>
+        </ul>
+      </blockquote>
+
+      <blockquote class="question">
+        <h3 id="-questions"><i class="fa fa-question-circle" aria-hidden="true"></i> Questions</h3>
+
+        <ol>
+          <li>What are four key features of a FASTQ file?</li>
+          <li>
+            <p>What is the main difference between a FASTQ and a FASTA file?</p>
+
+            <details>
+<summary>Click to view answers</summary>
+<ol type="1">
+<li>Each sequence in a FASTQ file is represented into 4 lines: 1st line with the id, 2nd line with the sequence, 3rd line with no information here, 4th line with quality of sequencing per nucleotide</li>
+<li>In a FASTQ file, not only the sequences are present but also information about the quality of sequencing</li>
+</ol>
+</details>
+          </li>
+        </ol>
+      </blockquote>
     </li>
   </ol>
 
-  <p>Click on the View Data button (the <img src="../../images/eye.png" alt="Eye icon" />) next to one of the FASTQ sequence files.</p>
-
-  <blockquote class="question">
-    <h3 id="-questions"><i class="fa fa-question-circle" aria-hidden="true"></i> Questions</h3>
-
-    <ol>
-      <li>What are four key features of a FASTQ file?</li>
-      <li>What is the main difference between a FASTQ and a FASTA file?</li>
-    </ol>
-  </blockquote>
-
 </blockquote>
 
-<p>The history will now appear in your Current History pane, and the files are ready to use in Galaxy analyses.</p>
+<p>The reads have been sequenced from an imaginary <em>Staphylococcus aureus</em> bacterium using an Illumina DNA sequencing instrument. We obtained the 2 files we imported (<code class="highlighter-rouge">mutant_R1</code> and <code class="highlighter-rouge">mutant_R2</code>)</p>
 
-<p>The read set for today is from an imaginary <em>Staphylococcus aureus</em> bacterium with a miniature genome. The whole genome shotgun method used to sequence our mutant strain read set. It was produced on an Illumina DNA sequencing instrument.</p>
+<blockquote class="question">
+  <h3 id="-question"><i class="fa fa-question-circle" aria-hidden="true"></i> Question</h3>
 
-<p>The files we need for assembly are the <strong><em>mutant_R1.fastq</em></strong> and <strong><em>mutant_R2.fastq</em></strong>.</p>
+  <p>Why do we have 2 files here if we only sequenced once the bacteria?</p>
 
-<ul>
-  <li>The reads are paired-end.</li>
-  <li>Each read is 150 bases long. <!--(before trimming)--></li>
-  <li>The number of bases sequenced is equivalent to 19x the genome sequence of the wildtype strain. (Read coverage 19x - rather low!).</li>
-</ul>
+  <details>
+   <summary>Click to view answer</summary>
+   <ol type="1">
+   <li>The bacteria has been sequenced using paired-end sequencing. The first file correspond to forward reads and the second file to reverse reads</li>
+   </ol>
+   </details>
+</blockquote>
 
 <h1 id="evaluate-the-input-reads">Evaluate the input reads</h1>
 
-<p>Questions you might ask about your input reads include:</p>
+<p>The first questions you might ask about your input reads (before doing any assembly) include:</p>
 
 <ul>
+  <li>What is the coverage of my genome?</li>
   <li>How good is my read set?</li>
   <li>Do I need to ask for a new sequencing run?</li>
   <li>Is it suitable for the analysis I need to do?</li>
 </ul>
 
-<p>We will evaluate the input reads using the FastQC tool.</p>
-
-<p>The FastQC tool:</p>
-
-<ul>
-  <li>Runs a standard series of tests on your read set and returns a relatively easy-to-interpret report.</li>
-  <li>We will use the FastQC tool in Galaxy to evaluate the quality of one of our FASTQ files.</li>
-</ul>
+<p>We will evaluate the input reads using the FastQC tool. This tool runs a standard series of tests on your read set and returns a relatively easy-to-interpret report. We will use it to evaluate the quality of our FASTQ files and combine the results with MultiQC.</p>
 
 <blockquote class="hands_on">
-  <h3 id="-hands-on-run-fastqc-on-a-fastq-file"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Run FastQC on a fastq file</h3>
+  <h3 id="-hands-on-fastqc-on-a-fastq-file"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: FastQC on a fastq file</h3>
 
-  <p>We will now run the FastQC tool on one of our fastq files. Normally we would run it on all of them but we will do 1 as an example here.</p>
-
-  <h4 id="1-run-fastqc--on-mutant_r1fastq-to-assess-the-quality-of-the-input-data">1. Run <strong>FastQC</strong> <i class="fa fa-wrench" aria-hidden="true"></i> on <strong>mutant_R1.fastq</strong> to assess the quality of the input data.</h4>
-
-  <ul>
-    <li>Once finished, examine the output called <strong><em>FastQC on data1:webpage</em></strong> (Hint:<img src="../../images/eye.png" alt="Eye icon" />). It has a summary at the top of the page and a number of graphs.</li>
-  </ul>
-
-  <p>Some of the important outputs of FastQC for our purposes are:</p>
-
-  <ul>
-    <li><strong>Basic Statistics: Sequence length</strong>: will be important in setting maximum k-mer size value for assembly</li>
-    <li><strong>Basic Statistics: Encoding</strong>: Quality encoding type: important for quality trimming software</li>
-    <li><strong>Basic Statistics: % GC</strong>: high GC organisms don’t tend to assemble well and may have an uneven read coverage distribution.</li>
-    <li><strong>Basic Statistics: Total sequences</strong>: Total number of reads: gives you an idea of coverage.</li>
-    <li><strong>Per base sequence quality</strong>: Dips in quality near the beginning, middle or end of the reads: determines possible trimming/cleanup methods and parameters and may indicate technical problems with the sequencing process/machine run.</li>
-    <li><strong>Per base N content</strong>: Presence of large numbers of Ns in reads: may point to poor quality sequencing run. You would need to trim these reads to remove Ns.</li>
-    <li>
-      <p><strong>Kmer content</strong>: Presence of highly recurring k-mers: may point to contamination of reads with barcodes or adapter sequences.</p>
-
-      <p><img src="../../images/quality_screen.png" alt="fastqc" /></p>
-      <figcaption><b>Figure 3:</b> Sequence quality per base generated by FastQC.</figcaption>
-
-      <blockquote class="question">
-        <h3 id="-questions-1"><i class="fa fa-question-circle" aria-hidden="true"></i> Questions</h3>
-
-        <ol>
-          <li>What does the y-axis represent in Figure 3?</li>
-          <li>Why is the quality score decreasing across the length of the reads?</li>
-        </ol>
-      </blockquote>
+  <ol>
+    <li><strong>FastQC</strong> <i class="fa fa-wrench" aria-hidden="true"></i> with the following parameters
+      <ul>
+        <li>“Short read data from your current history” to (<strong>Multiple datasets</strong>) <code class="highlighter-rouge">mutant_R1.fastq</code> and <code class="highlighter-rouge">mutant_R2.fastq</code></li>
+      </ul>
     </li>
-  </ul>
+    <li><strong>MultiQC</strong> <i class="fa fa-wrench" aria-hidden="true"></i> with the following parameters
+      <ul>
+        <li>“Software name” to <code class="highlighter-rouge">FastQC</code></li>
+        <li>“Result file” to the raw data files generated by FastQC</li>
+      </ul>
+    </li>
+  </ol>
 
 </blockquote>
 
-<p>Although we have warnings for two outputs (per base sequence content; Kmer content), we can ignore these for now.</p>
+<p>MultiQC generates a webpage combining the report of FastQC on both datasets. It is including graphs and tables:</p>
 
-<p>For a fuller discussion of FastQC outputs and warnings, see the <a href="https://www.bioinformatics.babraham.ac.uk/projects/fastqc/">FastQC website link</a>, including the section on each of the output <a href="https://www.bioinformatics.babraham.ac.uk/projects/fastqc/Help/3%20Analysis%20Modules/">reports</a>, and examples of <a href="https://www.bioinformatics.babraham.ac.uk/projects/fastqc/good_sequence_short_fastqc.html">“good”</a> and <a href="https://www.bioinformatics.babraham.ac.uk/projects/fastqc/bad_sequence_fastqc.html">“bad”</a> Illumina data.</p>
+<ul>
+  <li>
+    <p>General statistics</p>
+
+    <p>It will be important in setting maximum k-mer size value for assembly</p>
+
+    <blockquote class="tip">
+      <h3 id="-tip-having-the-length-of-sequences"><i class="fa fa-lightbulb-o" aria-hidden="true"></i> Tip: Having the length of sequences</h3>
+
+      <ul>
+        <li>Click on <strong>Configure Columns</strong></li>
+        <li>Check <strong>Length</strong></li>
+        <li>Close the window</li>
+      </ul>
+    </blockquote>
+
+    <blockquote class="question">
+      <h3 id="-questions-1"><i class="fa fa-question-circle" aria-hidden="true"></i> Questions</h3>
+
+      <ol>
+        <li>How long are the sequences?</li>
+        <li>
+          <p>What is the average coverage of the genome, given our imaginary <em>Staphylococcus aureus</em> bacterium has a genome of 197,394 bp?</p>
+
+          <details>
+<summary>Click to view answer</summary>
+<ol type="1">
+<li>The sequences are 150 bp long</li>
+<li>We have 2 x 12,480 sequences of 150 bp long. So the average genome coverage is: 2 * 12480 * 150 / 197394 ~ 19 X</li>
+</ol>
+</details>
+        </li>
+      </ol>
+    </blockquote>
+  </li>
+  <li>
+    <p>Sequence Quality Histograms</p>
+
+    <p>Dips in quality near the beginning, middle or end of the reads: determines possible trimming/cleanup methods and parameters and may indicate technical problems with the sequencing process/machine run</p>
+
+    <figure id="figure-2"><img src="../../images/fastqc_per_base_sequence_quality_plot.png" alt="Sequence Quality Histograms with the mean quality value across each base position in the read" title="The mean quality value across each base position in the read" /><figcaption><span class="figcaption-prefix">Figure 2:</span> The mean quality value across each base position in the read</figcaption></figure>
+
+    <blockquote class="question">
+      <h3 id="-questions-2"><i class="fa fa-question-circle" aria-hidden="true"></i> Questions</h3>
+
+      <ol>
+        <li>What does the y-axis represent?</li>
+        <li>
+          <p>Why is the quality score decreasing across the length of the reads?</p>
+
+          <details>
+<summary>Click to view answer</summary>
+<ol type="1">
+<li>The y-axis represents the quality score for each base (an estimate of the error during sequencing)</li>
+<li>The quality score is decreasing accross the length of the reads because the sequencing become less and less reliable at the end of the reads</li>
+</ol>
+</details>
+        </li>
+      </ol>
+    </blockquote>
+  </li>
+  <li>Per Sequence GC Content
+  High GC organisms don’t tend to assemble well and may have an uneven read coverage distribution.</li>
+  <li>Per Base N Content
+  Presence of large numbers of Ns in reads: may point to poor quality sequencing run. You would need to trim these reads to remove Ns.</li>
+  <li>Kmer content
+  Presence of highly recurring k-mers: may point to contamination of reads with barcodes or adapter sequences.</li>
+</ul>
+
+<blockquote class="comment">
+  <h3 id="-comment-1"><i class="fa fa-commenting-o" aria-hidden="true"></i> Comment</h3>
+
+  <p>For a fuller discussion of FastQC outputs and warnings, see the <a href="https://www.bioinformatics.babraham.ac.uk/projects/fastqc/">FastQC website link</a>, including the section on each of the output <a href="https://www.bioinformatics.babraham.ac.uk/projects/fastqc/Help/3%20Analysis%20Modules/">reports</a>, and examples of <a href="https://www.bioinformatics.babraham.ac.uk/projects/fastqc/good_sequence_short_fastqc.html">“good”</a> and <a href="https://www.bioinformatics.babraham.ac.uk/projects/fastqc/bad_sequence_fastqc.html">“bad”</a> Illumina data.</p>
+</blockquote>
 
 <p>We won’t be doing anything to these data to clean it up as there isn’t much need. Therefore we will get on with the assembly!</p>
 
 <h1 id="assemble-reads-with-velvet">Assemble reads with Velvet</h1>
 
-<p>We will perform a <em>de novo</em> assembly of the mutant FASTQ reads into long contiguous sequences (in FASTA format) using the Velvet short read assembler.</p>
+<p>Now, we want to assemble our reads to find the sequence of our imaginary <em>Staphylococcus aureus</em> bacterium. We will perform a <em>de novo</em> assembly of the reads into long contiguous sequences using the Velvet short read assembler.</p>
 
-<p>Velvet requires the user to input a value of <em>k</em> (k-mer size) for the assembly process. K-mers are fragments of sequence reads. Small k-mers will give greater connectivity, but large k-mers will give better specificity. We will discuss this more later.</p>
+<p>The first step of the assembler is to build a de Bruijn graph. For that, it will break our reads into k-mers, <em>i.e.</em> fragments of length <em>k</em>. Velvet requires the user to input a value of <em>k</em> (k-mer size) for the assembly process. Small k-mers will give greater connectivity, but large k-mers will give better specificity.</p>
 
 <blockquote class="hands_on">
-  <h3 id="-hands-on-run-velvet-on-the-input-reads"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Run Velvet on the input reads</h3>
+  <h3 id="-hands-on-assemble-the-reads"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Assemble the reads</h3>
 
-  <h4 id="1-run-velvet--run-velvet-on-both-the-input-read-files-mutant_r1fastq-and-mutant_r2fastq">1. Run <strong>Velvet</strong> <i class="fa fa-wrench" aria-hidden="true"></i> Run <strong>velvet</strong> on both the input read files <strong>mutant_R1.fastq</strong> and <strong>mutant_R2.fastq</strong></h4>
-
-  <ul>
-    <li>Set the following parameters (leave other settings as they are):
+  <ol>
+    <li><strong>FASTQ interlacer</strong> <i class="fa fa-wrench" aria-hidden="true"></i> with the following parameters
       <ul>
-        <li><strong>K-mer</strong>: 29</li>
-        <li><strong>Input file type</strong>: Fastq</li>
-        <li><strong>Single or paired end reads</strong>: Paired</li>
-        <li><strong>Select first set of reads</strong>: <em>mutant_R1.fastq</em></li>
-        <li><strong>Select second set of reads</strong>: <em>mutant_R2.fastq</em></li>
+        <li>“Type of paired-end datasets” to <code class="highlighter-rouge">2 separate datasets</code></li>
+        <li>“Left-hand mates” to <code class="highlighter-rouge">mutant_R1.fastq</code></li>
+        <li>“Right-hand mates” to <code class="highlighter-rouge">mutant_R2.fastq</code></li>
       </ul>
+
+      <p>Currently our paired-end reads are into 2 files (one with the forward reads and one with the reverse reads). But Velvet requires only one file where each read is next to its mate read. In other words, if the reads are indexed from 0, then reads 0 and 1 are paired, 2 and 3, 4 and 5, etc. Before doing the assembly <em>per se</em>, we need to prepare the files by combining them.</p>
     </li>
-  </ul>
-
-  <p>Your tool interface should look something like this (you will most likely have a different value for k):</p>
-
-  <p><img src="../../images/velvet_interface.png" alt="velvet interface" /></p>
-
-  <ul>
-    <li>Galaxy is now running velvet on the reads for you.</li>
-    <li>Press the refresh button in the history pane to see if it has finished.</li>
-    <li>When it is finished, you will have some new files in your history.
+    <li><strong>velveth</strong> <i class="fa fa-wrench" aria-hidden="true"></i> with the following parameters
       <ul>
-        <li>a <em>Contigs</em> file</li>
-        <li>a <em>Contigs stats</em> file</li>
-        <li>a <em>Last Graph</em> file</li>
-        <li>the velvet <em>log</em> file</li>
+        <li>“Hash Length” to <code class="highlighter-rouge">29</code></li>
+        <li>“Input Files”: click on <code class="highlighter-rouge">Insert Input Files</code></li>
+        <li>“file format” to <code class="highlighter-rouge">fastq</code></li>
+        <li>“read type” to <code class="highlighter-rouge">shortPaired reads</code></li>
+        <li>“Dataset” to the pairs output of <strong>FASTQ interlacer</strong></li>
       </ul>
+
+      <p>The tool takes our reads and break them into k-mers.</p>
     </li>
-  </ul>
-
-  <h4 id="2-examine-the-output">2. Examine the output</h4>
-
-  <ul>
-    <li>Click on the View Data button <img src="../../images/eye.png" alt="Eye icon" /> on each of the files.</li>
-    <li>The <em>Contigs</em> file will show each contig with the <em>k-mer length</em> and <em>k-mer coverage</em> listed as part of the header (however, these are just called <em>length</em> and <em>coverage</em>).
+    <li><strong>velvetg</strong> <i class="fa fa-wrench" aria-hidden="true"></i> with the following parameters
       <ul>
-        <li><em>K-mer length</em>: For the value of k chosen in the assembly, a measure of how many k-mers overlap (by 1 bp each overlap) to give this length.</li>
-        <li><em>K-mer coverage</em>: For the value of k chosen in the assembly, a measure of how many k-mers overlap each base position (in the assembly).</li>
+        <li>“Velvet Dataset” to the output of <strong>velveth</strong></li>
+        <li>“Using Paired Reads” to <code class="highlighter-rouge">Yes</code></li>
       </ul>
+
+      <p>This tool does the assembly <em>per se</em>.</p>
     </li>
-  </ul>
-
-  <p><img src="../../images/image10.png" alt="Contigs output" /></p>
-
-  <ul>
-    <li>The <em>Contigs stats</em> file will show a list of these k-mer lengths and k-mer coverages.</li>
-  </ul>
-
-  <p><img src="../../images/image11.png" alt="Contigs stats output" /></p>
-
+  </ol>
 </blockquote>
+
+<p>2 files are generated:</p>
+
+<ul>
+  <li>
+    <p>A “Contigs” file</p>
+
+    <p>This file contains the sequences of the contigs longer than 2k. In the header of each contig, several information is added</p>
+    <ul>
+      <li>the k-mer length (called “length”): For the value of k chosen in the assembly, a measure of how many k-mers overlap (by 1 bp each overlap) to give this length</li>
+      <li>the k-mer coverage (called “coverage”): For the value of k chosen in the assembly, a measure of how many k-mers overlap each base position (in the assembly).</li>
+    </ul>
+
+    <p><img src="../../images/image10.png" alt="Contigs output" /></p>
+  </li>
+  <li>
+    <p>A “Stats” file</p>
+
+    <p>It is tabular file with for each contigur the k-mer lengths, k-mer coverages and other measures.</p>
+
+    <p><img src="../../images/image11.png" alt="Contigs stats output" /></p>
+  </li>
+</ul>
 
 <h1 id="collect-some-statistics-on-the-contigs">Collect some statistics on the contigs</h1>
 
-<p>We will now collect some basic statistics on our assembly.</p>
+<blockquote class="question">
+  <h3 id="-question-1"><i class="fa fa-question-circle" aria-hidden="true"></i> Question</h3>
+
+  <ol>
+    <li>How many contigs has been built?</li>
+    <li>
+      <p>What is the mean, min and max length of the contigs?</p>
+
+      <details>
+<summary>Click to view answer</summary>
+<ol type="1">
+<li>190</li>
+<li>To compute this information, we can use the Datamash tool and do operation on the 2nd columns (length). But be careful with the first line: the header. As a result, we obtain: 597.82 as mean, 1 as min and 12904 as max. It would mean that the smallest contig has a length of 1 bp, even smaller than k. The length on the 2nd column correspond to length of the contig in k-mers. It means that the smallest contig has a length of 1k = 29. So to obtain the real length, we need to add k-1 to the length. We obtain then a mean contig length of 625.82 bp, a min contig of 29 bp and a max contig of 12,932 bp</li>
+</ol>
+</details>
+    </li>
+  </ol>
+</blockquote>
+
+<p>But we are quite limited with this table. We will now collect more basic statistics on our assembly.</p>
 
 <blockquote class="hands_on">
   <h3 id="-hands-on-collect-fasta-statistics-on-our-contigs"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Collect fasta statistics on our contigs</h3>
 
-  <h4 id="run-fasta-statistics--on-our-contigs-file">Run <strong>Fasta statistics</strong> <i class="fa fa-wrench" aria-hidden="true"></i> on our contigs file</h4>
-
-  <ul>
-    <li>A new file will appear called <em>Fasta summary stats</em></li>
-    <li>Click the eye icon to look at this file. (It will look something like - but not exactly like - this.)</li>
-  </ul>
-
-  <p><img src="../../images/image12.png" alt="Fasta stats" /></p>
-
-  <ul>
-    <li>Look at:
+  <ol>
+    <li><strong>Quast</strong> <i class="fa fa-wrench" aria-hidden="true"></i> with
       <ul>
-        <li><em>num_seq</em>: the number of contigs in the FASTA file.</li>
-        <li><em>num_bp</em>: the number of assembled bases. Roughly proportional to genome size.</li>
-        <li><em>len_max</em>: the biggest contig.</li>
-        <li><em>len_N50</em>: N50 is a contig size. If contigs were ordered from small to large, half of all the nucleotides will be in contigs this size or larger.</li>
+        <li>“Contigs/scaffolds output file” to the output of <strong>velvetg</strong></li>
+        <li>“Type of data” to <code class="highlighter-rouge">contig</code></li>
+        <li>“Reference File” to <code class="highlighter-rouge">wildtype.fna</code></li>
+        <li>“Type of organism” to <code class="highlighter-rouge">Prokaryotes</code></li>
+        <li>“Lower Threshold” to <code class="highlighter-rouge">500</code></li>
+        <li>“Thresholds” to <code class="highlighter-rouge">0,1000</code></li>
       </ul>
     </li>
-  </ul>
+  </ol>
+</blockquote>
 
+<p>This tool generates 5 output files, but we will focus on the HTML report and the Icarus viewer.</p>
+
+<blockquote class="question">
+  <h3 id="-question-2"><i class="fa fa-question-circle" aria-hidden="true"></i> Question</h3>
+
+  <ol>
+    <li>
+      <p>What is represented in the Icarus viewer?</p>
+
+      <details>
+<summary>Click to view answer</summary>
+<ol type="1">
+<li>Icarus is a novel genome visualizer for accurate assessment and analysis of genomic draft assemblies. It draws contigs ordered from longest to shortest, highlights N50, N75 (NG50, NG75) and long contigs larger than a user-specified threshold</li>
+</ol>
+</details>
+    </li>
+  </ol>
+</blockquote>
+
+<p>The HTML report reports many statistics computed by QUAST to assess the quality of the assembly:</p>
+
+<ul>
+  <li>Statistics about the quality of the assembly when compare to the reference (fraction of the genome, duplication ratio, etc)</li>
+  <li>
+    <p>Misassembly statistics with for example the number of misassemblies</p>
+
+    <p>A misassembly is a position in the contigs (breakpoints) that satisfy one of the following criteria:</p>
+    <ul>
+      <li>the left flanking sequence aligns over 1 kbp away from the right flanking sequence on the reference;</li>
+      <li>flanking sequences overlap on more than 1 kbp</li>
+      <li>flanking sequences align to different strands or different chromosomes</li>
+    </ul>
+  </li>
+  <li>Unaligned regions in the assembly</li>
+  <li>Mismatches compared to the reference genomes</li>
+  <li>Statistics about the assembly <em>per se</em>, such as the number of contigs, the length of the largest contig</li>
+</ul>
+
+<blockquote class="question">
+  <h3 id="-question-3"><i class="fa fa-question-circle" aria-hidden="true"></i> Question</h3>
+
+  <ol>
+    <li>How many contigs have been constructed?</li>
+    <li>Which proportion of the reference genome do they represent?</li>
+    <li>How many misassemblies have been found?</li>
+    <li>Has the assembly introduced mismatches and indels?</li>
+    <li>What are N50 and L50?</li>
+    <li>
+      <p>Is there a bias in GC percentage induced by the assembly?</p>
+
+      <details>
+<summary>Click to view answer</summary>
+<ol type="1">
+<li>190 contigs have been constructed, but only 47 have a length &gt; 500 bp</li>
+<li>The contigs represents 87.965 % of the reference genome</li>
+<li>1 misassembly has been found: it correspond to a relocation, *i.e.* a misassembly event (breakpoint) where the left flanking sequence aligns over 1 kbp away from the right flanking sequence on the reference genome</li>
+<li>8.06 mismatches per 100 kbp and 4.03 indels per 100 kbp are found</li>
+<li>N50 is the length for which the collection of all contigs of that length or longer covers at least half an assembly. In other words, if contigs were ordered from small to large, half of all the nucleotides will be in contigs this size or larger. And L50 is the number of contigs equal to or longer than N50: L50 is the minimal number of contigs that cover half the assembly</li>
+<li>The GC % in the assembly is 33.64%, really similar to the one of the reference genome (33.43%)</li>
+</ol>
+</details>
+    </li>
+  </ol>
 </blockquote>
 
 <h1 id="discussion">Discussion</h1>
 
+<blockquote class="hands_on">
+  <h3 id="-optional-hands-on-rerun-for-values-k-ranging-from-31-to-101"><i class="fa fa-pencil" aria-hidden="true"></i> (Optional) Hands-on: Rerun for values <em>k</em> ranging from 31 to 101</h3>
+
+  <ol>
+    <li><strong>velveth</strong> <i class="fa fa-wrench" aria-hidden="true"></i> with the same parameters as before except
+      <ul>
+        <li>“Hash Length” to a value between 31 and 101</li>
+      </ul>
+    </li>
+    <li><strong>velvetg</strong> <i class="fa fa-wrench" aria-hidden="true"></i> with the same parameters as before</li>
+    <li><strong>Quast</strong> <i class="fa fa-wrench" aria-hidden="true"></i> with the same parameters as before</li>
+  </ol>
+</blockquote>
+
 <p>We have completed an assembly on this data set for a number of k values ranging from 29 to 101. The results a few of the assembly metrics appear below.</p>
 
-<p><img src="../../images/number_of_contigs.png" alt="contigs" /></p>
+<figure id="figure-3"><img src="../../images/number_of_contigs.png" alt="contigs" title="Number of contigs in the assembly for various k-mer sizes" /><figcaption><span class="figcaption-prefix">Figure 3:</span> Number of contigs in the assembly for various k-mer sizes</figcaption></figure>
 
-<p>This chart shows the number of contigs in the assembly for various k-mer sizes.</p>
+<figure id="figure-4"><img src="../../images/largest_contig.png" alt="largest_contig" title="Largest contig in each of the assemblies by k-mer size" /><figcaption><span class="figcaption-prefix">Figure 4:</span> Largest contig in each of the assemblies by k-mer size</figcaption></figure>
 
-<p><img src="../../images/largest_contig.png" alt="largest_contig" /></p>
+<figure id="figure-5"><img src="../../images/total_bp.png" alt="total_bp" title="Total number of base pairs in all the contigs for each assembly by k-mer size" /><figcaption><span class="figcaption-prefix">Figure 5:</span> Total number of base pairs in all the contigs for each assembly by k-mer size</figcaption></figure>
 
-<p>This chart shows the largest contig in each of the assemblies by k-mer size.</p>
-
-<p><img src="../../images/total_bp.png" alt="total_bp" /></p>
-
-<p>This chart shows the total number of base pairs in all the contigs for each assembly by k-mer size.</p>
-
-<p><img src="../../images/n50.png" alt="n50" /></p>
-
-<p>This chart shows the n50 metric for each of the assemblies by k-mer size.</p>
+<figure id="figure-6"><img src="../../images/n50.png" alt="n50" title="N50 metric for each of the assemblies by k-mer size" /><figcaption><span class="figcaption-prefix">Figure 6:</span> N50 metric for each of the assemblies by k-mer size</figcaption></figure>
 
 <blockquote class="question">
-  <h3 id="-questions-2"><i class="fa fa-question-circle" aria-hidden="true"></i> Questions</h3>
+  <h3 id="-questions-3"><i class="fa fa-question-circle" aria-hidden="true"></i> Questions</h3>
 
   <ol>
     <li>Are there any distinct features in the charts?</li>
-    <li>Does it look like one assembly might be better than some of the others?
-3.</li>
+    <li>Does it look like one assembly might be better than some of the others?</li>
   </ol>
+
 </blockquote>
 
 <p>The reasons for these patterns will be discussed in detail in the De Bruijn graph assembly slides and tutorial.</p>
