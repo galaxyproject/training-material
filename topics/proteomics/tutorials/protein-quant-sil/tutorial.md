@@ -43,7 +43,7 @@ The tool settings need to be carefully tested and evaluated manually to obtain o
 > 1. Import the test data from [zenodo](). The file type of the data is mzML. The data have not been modified during the conversion from the machine raw file, neither background removal, nor peak picking (centroiding) has been performed.
 > 2. Run ***FeatureFinderMultiplex*** {% icon tool %} on the mzML file. Change **`Labelling`** to `\[ \] \[Arg6,Lys6\]`.
 >
->   > ### {% icon tip %} Tip (Expert level): Detecting features of knockouts
+>   > ### {% icon tip %} Tip: Detecting features of knockouts
 >   > In biology, there are rarely cases in which a gene product is completely shut off between two conditions. Rather, most changes are gradual. However, in some situations, you will have the situation that a protein is detectable in only one of the tested conditions and completely lacking in another. A classical example would be comparing a "knockout" mouse with its "wild-type" counterpart.
 >   >
 >   > Due to the feature detection algorithm of ***FeatureFinderMultiplex*** {% icon tool %}, those features would normally be disregarded, as they do not look like typical features in labelled samples.
@@ -55,33 +55,49 @@ The tool settings need to be carefully tested and evaluated manually to obtain o
 # Peptide and Protein Identification and Conversion
 
 In this tutorial, peptide identification will be performed using the workflow of the previous [Peptide ID Tutorial]({{site.url}}/topics/proteomics/tutorials/protein-id-oms/tutorial.html). 
-A common problem in mass spectrometry are misassigned mono-isotopic precursor peaks. Although most search engines allow for some adaptation of the monoisotopic peak, we will instead perform a recalculation of the monoisotopic peaks based on the previously identified features prior to peptide identification. This step facilitates mapping peptide IDs to identified features [later on](#mapping-features-to-ids). To do so, we will use the OpenMS tool ***HighResPrecursorMassCorrector*** {% icon tool %}.
+
+A common problem in mass spectrometry are misassigned mono-isotopic precursor peaks. Although most search engines allow for some adaptation of the monoisotopic peak, we will instead perform a recalculation of the monoisotopic peaks based on the previously identified features prior to peptide identification.
+This step facilitates mapping peptide IDs to identified features [later on](#mapping-features-to-ids). To do so, we will use the OpenMS tool ***HighResPrecursorMassCorrector*** {% icon tool %}.
 
 [//]: # TODO: Read about monoisotopic peak problem, give citation to review!
 
 > ### {% icon hands_on %} Hands-on: Peptide and Protein Identification and Conversion
-> 1. Run ***HighResPrecursorMassCorrector*** {% icon tool %} on the `mzML` file. Use the output of ***FeatureFinderMultiplex*** {% icon tool %} as a second input file. 
+> 1. Run ***HighResPrecursorMassCorrector*** {% icon tool %} with
+>   - the `mzML` file as **Input file**,
+>   - and the output of ***FeatureFinderMultiplex*** as **Features used to correct precursor masses**.
 > 2. Import the [Protein identification using OpenMS tutorial workflow]({{site.url}}/topics/proteomics/tutorials/protein-id-oms/workflows/workflow.ga) and modify it:
->   - Delete the **PeakPickerHiRes** {% icon tool %} node, as the MS2 data of the test dataset were already centroided during data acquisition.
+>   - Delete the **PeakPickerHiRes** {% icon tool %} node, as the MS2 data of our test dataset are already centroided.
 >   - Connect the `mzML` input directly to the **XTandemAdapter** {% icon tool %} node.
 >   - Change the **XTandemAdapter** {% icon tool %} parameters:
 >       - Add the variable modifications `Label:13C(6) (K)` and `Label:13C(6) (R)`.
-> 1. Run the workflow "proteinID_oms" on the test dataset.
-[//]: # TODO: **Adapt the workflow name and delete 1) the PeakPickerHiRes node and 2) the contaminant analysis in the WF.**
+> 3. Run the workflow on the output of ***HighResPrecursorMassCorrector***.
 >
->   > ### {% icon tip %} Tip: Using Galaxy Workflows
->   > If you want to learn more about 
+>   > {% icon tip %} Tip: Using Galaxy Workflows
+>   > If you want to learn more about Galaxy workflows, please consult the [Galaxy Introduction]({{site.url}}/topics/introduction/tutorials/galaxy-intro-101/tutorial.html#the-workflow-editor)
 >   {: .tip}
-{: .hands_on}
+{: .hands-on}
+>>>>>>> First full hands-on version
 
 # Quant to ID matching
 
-We now have identified
+We now have feature quantifications for MS1 elution peaks, peptide identifications for the MS2 spectra (linked to MS1 precursor peaks), as well as protein identifications. 
+The next step is to map the MS1-based quantifications to the MS1 precursor peaks that triggered peptide identifications. This will enable the quantification of identified peptides. 
+Finally, we have combine the peptide quantifications to protein quantifications.
 
 > ### {% icon hands_on %} Hands-on: Quant to ID matching
 >
-> 1. Run ***ProteinQuantifier*** {% icon tool %} on
-> 2.
+> 1. Run ***IDMapper*** {% icon tool %} with
+>   - the output of ***IDFilter*** as **Protein/peptide identifications file**
+>   - the `consensusXML` output of ***FidoAdapter*** as **Feature map/consensus map file**
+> 2. Change the ***IDMapper*** output filetype to `consensusXML`.
+> 3. Run ***FileFilter*** {% icon tool %} with
+>   - **Remove features without annotations** set to `Yes`, and
+>   - **Remove unassigned peptide identifications** set to `Yes`.
+> 4. Run ***IDConflictResolver*** {% icon tool %}.
+> 5. Run ***ProteinQuantifier*** {% icon tool %} with
+>   - the output of of ***IDFilter*** as **Protein inference results [...]**,
+>   - **Include results for proteins with fewer proteotypic peptides than indicated by 'top'** set to `Yes`, and
+>   - **Add the log2 ratios of the abundance values to the output** set to `Yes`.
 >
 >   > ### {% icon question %} Questions
 >   {: .question}
