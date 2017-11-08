@@ -21,7 +21,7 @@ steps:
         <li>Peptide inference</li>
         <li>Protein inference</li>
       </ul> A plethora of different software solutions exists for each step. In
-      this tour, we will use tools from the 
+      this tour, we will use tools from the
       <a href="https://openms.de/">OpenMS software suite</a> for all steps.
       Protein inference will be performed with the Fido algorithm (<a
       href="https://www.ncbi.nlm.nih.gov/pubmed/20712337">Serang et al, JPR,
@@ -35,7 +35,7 @@ steps:
       Proteomics</a>. Detailed information about the dataset can be found on <a
       href="https://www.ebi.ac.uk/pride/archive/projects/PXD000674">PRIDE</a>.<br><br>
       For step 2 we will use a validated human Uniprot FASTA database with
-      appended decoys. You can find a prepared database, as well as the input 
+      appended decoys. You can find a prepared database, as well as the input
       proteomics data in different file formats on <a
       href="https://zenodo.org/record/796184">Zenodo</a>.
     backdrop: true
@@ -49,7 +49,7 @@ steps:
     content: >-
       Raw data conversion is the first step of any proteomic data analysis. The
       most common converter is MSConvert, the format to convert to is mzML.
-      Due to licensing reasons, MSConvert runs only on windows systems and will 
+      Due to licensing reasons, MSConvert runs only on windows systems and will
       not work on most Galaxy servers. We will omit the data conversion step here
       and start directly with the mzML file format.
     backdrop: true
@@ -104,7 +104,7 @@ steps:
     element: '.history-right-panel .list-items > *:first'
     content: >-
       The uploaded datasets is in the history, but its name corresponds to the
-      link. We want to rename them it to "Test data". <br><br> 
+      link. We want to rename them it to "Test data". <br><br>
       <ul>
         <li>Click on the pencil icon beside the file to "Edit Attributes".</li>
         <li>Change the "<b>Name:</b>" to "Test data".</li>
@@ -126,12 +126,12 @@ steps:
   - title: Preparing raw data
     element: '#tool-search'
     content: >-
-      Execute the tool on the input data with 
-      <ul> 
-        <li>Click <b>+ Insert param.algorithm_ms_levels</b> 
-        and change the entry to “2”.</li> 
+      Execute the tool on the input data with
+      <ul>
+        <li>Click <b>+ Insert param.algorithm_ms_levels</b>
+        and change the entry to “2”.</li>
         <li>Click "Execute".
-      </ul> 
+      </ul>
     position: right
   - title: Uploading the protein database
     element: '#tool-panel-upload-button .fa.fa-upload'
@@ -174,7 +174,7 @@ steps:
     element: '.history-right-panel .list-items > *:first'
     content: >-
       The uploaded datasets is in the history, but its name corresponds to the
-      link. We want to rename them it to "Protein database". <br><br> 
+      link. We want to rename them it to "Protein database". <br><br>
       <ul>
         <li>Click on the pencil icon beside the file to "Edit Attributes".</li>
         <li>Change the "<b>Name:</b>" to "Protein database".</li>
@@ -197,8 +197,8 @@ steps:
   - title: Peptide and Protein Identification
     element: '#tool-search'
     content: >-
-      Execute the tool with 
-      <ul> 
+      Execute the tool with
+      <ul>
         <li>Click <b>+ Insert param_fixed_modifications</b> and choose <b>Carbamidomethyl (C)</b>.</li>
         <li>Click <b>+ Insert param_variable_modifications</b> and choose <b>Oxidation (M)</b>.</li>
         <li>Click "Execute".</li>
@@ -223,7 +223,7 @@ steps:
   - title: Peptide FDR filtering
     content: >-
       The next step of peptide identification is to decide which PSMs will be
-      used for protein inference. 
+      used for protein inference.
       To calculate "false discovery rates" (FDRs), we first have to annotate the identified peptides to
       determine which of them are decoys. This is done with the tool
       <b>PeptideIndexer</b>. Additionally, we will calculate peptide posterior
@@ -255,8 +255,8 @@ steps:
   - title: Peptide FDR filtering
     element: '#tool-search'
     content: >-
-      Execute the tool with 
-      <ul> 
+      Execute the tool with
+      <ul>
         <li><b>-prob_correct</b> set to <b>Yes</b>.</li>
       </ul>
     position: left
@@ -444,7 +444,7 @@ steps:
       those is to avoid false assignment of contaminant spectra to other proteins.
       It also enables you to check for contaminations in your samples.
       <br><br>
-      <b>CAVE</b>: When analyzing human samples, many proteins that are common contaminants may also stem from the sample. 
+      <b>CAVE</b>: When analyzing human samples, many proteins that are common contaminants may also stem from the sample.
       Therefore, human contaminants do not have to be excluded from further analysis,
       but you should keep in mind that the source of these proteins is unclear.
     backdrop: true
