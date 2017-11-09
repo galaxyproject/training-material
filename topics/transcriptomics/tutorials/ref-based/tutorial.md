@@ -326,11 +326,19 @@ A powerful tool to visualize the content of BAM files is the Integrative Genomic
 
 > ### {% icon hands_on %} Hands-on: Inspection of HISAT2 results
 >
-> 1. **IGV** {% icon tool %}: Visualize the HISAT2 output BAM file, particularly the region on chromosome 4 between 560 kb to 600 kb (`chr4:560,000-600,000`)
+> 1. **IGV** {% icon tool %}: Visualize the aligned reads
+>     - Click on the HISAT2 BAM output in your history
+>     - Towards the bottom of the history item, find the line starting with `Display with IGV`. This is followed by 2 links:
+>        - option 1: `local`. Select this option if you already have IGV installed on your machine.
+>        - option 2: `D. melanogaster (dm3)`. This will download and launch IGV on your local machine.
+>     - Once IGV has started, navigate to chromosome 4 between 560 kb to 600 kb (`chr4:560,000-600,000`)
 >
->    > ### {% icon comment %} Comment
+>    > ### {% icon comment %} Comments
 >    >
->    > Check the [IGV documentation](https://software.broadinstitute.org/software/igv/AlignmentData)
+>    > - In order for this step to work, you will need to have either IGV or [Java web start](https://www.java.com/en/download/faq/java_webstart.xml)
+>    >   installed on your machine. However, the questions in this section can also be answered by inspecting the IGV screenshots below.
+>    > - Check the [IGV documentation](https://software.broadinstitute.org/software/igv/AlignmentData) for more information.
+>    >
 >    {: .comment}
 >
 >    > ### {% icon question %} Question
