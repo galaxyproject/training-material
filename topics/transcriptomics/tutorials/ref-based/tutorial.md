@@ -181,7 +181,7 @@ Sequencing proceeds from 5' to 3'. So, in the First Strand case, all reads from 
 
 We can now try to determine the library type of our data.
 
-> ### {% icon hands_on %} Hands-on: Determining the library type
+> ### {% icon hands_on %} Hands-on: Determining the library type (Optional)
 >
 > 1. Load the Ensembl gene annotation for *Drosophila melanogaster* ([`Drosophila_melanogaster.BDGP5.78.gtf`](https://zenodo.org/record/290221/files/Drosophila_melanogaster.BDGP5.78.gtf)) from the shared data library or from [Zenodo](https://dx.doi.org/10.5281/zenodo.290221) into your current Galaxy history
 >  - Rename the dataset if necessary
@@ -244,7 +244,7 @@ We can now try to determine the library type of our data.
 >    >    <summary>Click to view answer</summary>
 >    >    <ol type="1">
 >    >    <li>Fraction of reads explained by "1++,1--,2+-,2-+": 0.0151 and Fraction of reads explained by "1+-,1-+,2++,2--": 0.9843</li>
->    >    <li>The library seems to be of the type "1+-,1-+,2++,2--", which is called First Strand (R/RF) type in HISAT2.</li>
+>    >    <li>The library seems to be of the type "1+-,1-+,2++,2--", which is called First Strand (R/RF) type in HISAT2, and "reverse" in htseq-count. </li>
 >    >    </ol>
 >    >    </details>
 >    {: .question}
@@ -429,7 +429,7 @@ The recommended mode is "union", which counts overlaps even if a read only share
 >    - `Drosophila_melanogaster.BDGP5.78.gtf` as "GFF file"
 >    - The "Union" mode
 >    - A "Minimum alignment quality" of 10
->    - Appropriate value for the "Stranded" option
+>    - "Stranded" to `reverse`
 >
 > 2. Inspect the result files
 >
