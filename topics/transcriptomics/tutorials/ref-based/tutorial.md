@@ -430,7 +430,7 @@ The recommended mode is "union", which counts overlaps even if a read only share
 >    - The "Union" mode
 >    - A "Minimum alignment quality" of 10
 >    - Appropriate value for the "Stranded" option
->       
+>
 > 2. Inspect the result files
 >
 >    > ### {% icon question %} Question
@@ -442,7 +442,7 @@ The recommended mode is "union", which counts overlaps even if a read only share
 >    >    <summary>Click to view answers</summary>
 >    >    <ol type="1">
 >    >    <li>The useful result file is a tabular file with two columns: the gene id and the number of reads mapped on the corresponding gene</li>
->    >    <li>To display the most abundantly detected feature, we need to sort the output file with the features and the number of reads mapped to them. This can be done using the Sort tool on the second column and in descending order, which reveals that FBgn0017545 is the feature with the most reads (4,030) mapped on it.</li>
+>    >    <li>To display the most abundantly detected feature, we need to sort the output file with the features and the number of reads mapped to them. This can be done using the Sort tool on the second column and in descending order, which reveals that FBgn0017545 is the feature with the most reads (7,650) mapped on it.</li>
 >    >    </ol>
 >    >    </details>
 >    {: .question}
