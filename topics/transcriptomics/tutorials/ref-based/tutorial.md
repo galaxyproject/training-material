@@ -92,7 +92,8 @@ For quality control, we use similar tools as described in [NGS-QC tutorial]({{si
 >    >    </details>
 >    {: .question}
 >
-> 2. **Trim Galore** {% icon tool %}: Treat for the quality of sequences by running Trim Galore on the paired-end datasets
+> 2. **Trim Galore** {% icon tool %}: Treat for the quality of sequences by running Trim Galore
+>      - Indicate we are dealing with *paired-end* datasets
 >
 >    > ### {% icon question %} Questions
 >    >
