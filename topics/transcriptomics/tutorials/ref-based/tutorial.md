@@ -196,11 +196,15 @@ We can now try to determine the library type of our data.
 >    >
 >    > <details>
 >    > <summary>Click to view answers</summary>
->    > 1. We are performing a preliminary mapping for the purpose of determining the library type. We do not need the full dataset for this, and
->    >    mapping the full dataset can take quite some time and resources, so it is better to perform this test on a small subset of the data.
->    > <br><br>
->    > 2. In a FastQ file, a read corresponds to 4 lines. So to conserve 200,000 reads, 800,000 must be selected. More details about the fastq format can be found
->    > <a href="https://en.wikipedia.org/wiki/FASTQ_format">here</a>.
+>    > <ol>
+>    > <li> We are performing a preliminary mapping for the purpose of determining the library type. We do not need the full dataset for this, and
+>    >      mapping the full dataset can take quite some time and resources, so it is better to perform this test on a small subset of the data.
+>    > </li>
+>    > <li> In a FastQ file, a read corresponds to 4 lines. So to conserve 200,000 reads, 800,000 must be selected.
+>    >      More details about the fastq format can be found <a href="https://en.wikipedia.org/wiki/FASTQ_format">here</a>.
+>    > </li>
+>    > </ol>
+>    >
 >    > </details>
 >    {: .question}
 >
@@ -327,7 +331,7 @@ A powerful tool to visualize the content of BAM files is the Integrative Genomic
 > ### {% icon hands_on %} Hands-on: Inspection of HISAT2 results
 >
 > 1. **IGV** {% icon tool %}: Visualize the aligned reads
->     - Click on the HISAT2 BAM output in your history
+>     - Click on the HISAT2 BAM output in your history to expand it.
 >     - Towards the bottom of the history item, find the line starting with `Display with IGV`. This is followed by 2 links:
 >        - option 1: `local`. Select this option if you already have IGV installed on your machine.
 >        - option 2: `D. melanogaster (dm3)`. This will download and launch IGV on your local machine.
