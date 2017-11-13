@@ -17,8 +17,7 @@ Identifying the proteins contained in a sample is an important step in any prote
 A plethora of different software solutions exists for each step. In this tutorial, we will use ***msconvert*** {% icon tool %}  for raw data conversion and tools from the [OpenMS software suite](https://openms.de) for all other steps. We will use one peptide search engine at first and later on show how to expand the workflow for using multiple search engines. Protein inference will be performed with the Fido algorithm ([Serang et al, JPR, (2010)](https://www.ncbi.nlm.nih.gov/pubmed/20712337)).
 This tutorial covers peptide and protein **identification** only, but you may use the output of this tutorial for the [tutorial on protein quantitation]({{site.url}}/topics/proteomics/tutorials/protein-quant-sil/tutorial.html).
 
-It is generally recommended to use more than one peptide search engine and use the combined results for the final peptide inference ([Shteynberg et al., 2013, Mol. Cell. Proteomics](https://www.ncbi.nlm.nih.gov/pubmed/23720762)).
-For an alternative ID pipeline using the [Compomics](https://compomics.com/) tools [SearchGUI](https://compomics.github.io/projects/searchgui.html) and [PeptideShaker](https://compomics.github.io/projects/peptide-shaker.html), please consult [this tutorial]({{site.url}}/topics/proteomics/tutorials/protein-id-sg-ps/tutorial.html). 
+For an alternative protein ID workflow using the [Compomics](https://compomics.com/) tools [SearchGUI](https://compomics.github.io/projects/searchgui.html) and [PeptideShaker](https://compomics.github.io/projects/peptide-shaker.html), please consult [this tutorial]({{site.url}}/topics/proteomics/tutorials/protein-id-sg-ps/tutorial.html). 
 The latter tutorial does not allow to continue with the tutorial on protein quantitation.
 
 # Input data
@@ -80,11 +79,15 @@ Different peptide search engines have been developed to fulfill the matching pro
 > ### {% icon hands_on %} Hands-On: Peptide Identification
 >
 > 1. Copy the prepared protein database from the tutorial [Database Handling](../database-handling/tutorial.html) into your current history by using the multiple history view or upload the ready-made database from this [link](https://zenodo.org/record/892005/files/Human_database_including_decoys_%28cRAP_and_Mycoplasma_added%29.fasta).
-> 2. Run the tool ***XTandemAdapter*** {% icon tool %} on the centroided mzML input file and the database file. Click `+ Insert param_fixed_modifications` and choose `Carbamidomethyl (C)`, then click `+ Insert param_variable_modifications` and choose `Oxidation (M)` and `Execute`.
+> 2. Run the tool ***XTandemAdapter*** {% icon tool %} with:
+    - the MS2-centroided mzML as **Input file containing MS2 spectra** and
+    - the FASTA protein database as **FASTA file or pro file**.
+    - Click `+ Insert param_fixed_modifications` and choose `Carbamidomethyl (C)`.
+    - Click `+ Insert param_variable_modifications` and choose `Oxidation (M)`.
 > 3. Run the tool ***FileInfo*** {% icon tool %} on the XTandem output.
 >
 >   > ### {% icon comment %} Comment: Advanced Search Engine Parameters
->   > The OpenMS adapters do not always allow to set every option of the underlying search engine. If an option is missing, you may also run the search engine locally or by using a Galaxy wrapper. Afterward, convert the search engine output to the OpenMS format `idXML` by running ***IDFileConverter*** {% icon tool %}.
+>   > The OpenMS adapters do not always allow to set every option of the underlying search engine. If an option is missing, you may also run the search engine locally or by using a Galaxy wrapper. Afterwards, convert the search engine output to the OpenMS format `idXML` by running ***IDFileConverter*** {% icon tool %}.
 >   >
 >   > The search engine X!Tandem features some more advanced options than the ones reflected in the ***XTandemAdapter*** {% icon tool %}. If you need those advanced options, the ***XTandemAdapter*** {% icon tool %} allows for the optional input of a classic X!Tandem parameter file. Upload your parameter file to the history and use it as an input in the field `Default X!Tandem configuration file`. You may also set the option `-ignore_adapter_param` to `Yes` to overwrite all options set by the GUI.
 >   {: .comment}
@@ -101,10 +104,18 @@ To calculate FDRs, we first have to annotate the identified peptides to determin
 
 > ### {% icon hands_on %} Hands-On: Peptide FDR filtering
 >
-> 2. Run ***IDPosteriorErrorProbability*** {% icon tool %}. Set the option `-prob_correct` to `Yes`.
-> 1. Run ***PeptideIndexer*** {% icon tool %} with the same database file as used before. Set **`Specificity of the enzyme`** to `none`.
-> 3. Run ***FalseDiscoveryRate*** {% icon tool %}. Set the option **`Perform FDR calculation on protein level`** to `false` and **`Filter PSMs based on q-value`** to `0.01`. Set `-add_decoy_peptides` to `Yes`.
-> 4. Run ***IDScoreSwitcher*** {% icon tool %}. Set the **`Name of the meta value to use as the new score`** to "Posterior Probability_score". and the **`Orientation of the new score`** to `higher_better`. 
+> 2. Run ***IDPosteriorErrorProbability*** {% icon tool %} with
+>   - `-prob_correct` set to `Yes`.
+> 1. Run ***PeptideIndexer*** {% icon tool %} with
+>   - the FASTA protein database as **Input sequence database in FASTA format**, and
+>   - **Specificity of the enzyme** set to `none`.
+> 3. Run ***FalseDiscoveryRate*** {% icon tool %} with
+>   - **Perform FDR calculation on protein level** set to `false`,
+>   - **Filter PSMs based on q-value** set to `0.01`, and
+>   - `-add_decoy_peptides` set to `Yes`.
+> 4. Run ***IDScoreSwitcher*** {% icon tool %} with
+>   - **Name of the meta value to use as the new score** set to "Posterior Probability_score", and
+>   - **Orientation of the new score`** set to `higher_better`. 
 > 5. Run ***FileInfo*** {% icon tool %} to get basic information about the identified peptides.
 >
 >   > ### {% icon question %} Questions:
@@ -163,6 +174,61 @@ It also enables you to check for contaminations in your samples.
 >   >     <li> Contaminants often stem from the experimenter, these are typically keratins or other high-abundant human proteins. Basically any protein present in the room of the mass spectrometer might get into the ion source, if it is airborne. As an example, sheep keratins are sometimes found in proteomic samples, stemming from clothing made of sheep wool.</li>
 >   >     <li> One protein stemming from *Acholeplasma laidlawii* (ACHLI) was identified. If you again filter the protein list for "ACHLI", you will see that it was identified by a single peptide. Thus, it is likely a false positive and does not indicate contamination.</li>
 >   >     <li> As we were allowing for a false discovery rate of 1 %, we would expect 12 false positive proteins in our list.</li>
+>   >   </ol>
+>   >  </details>
+>   {: .question}
+{: .hands_on}
+
+# Using multiple search engines
+
+It is generally recommended to use more than one peptide search engine and use the combined results for peptide inference ([Shteynberg et al., 2013, Mol. Cell. Proteomics](https://www.ncbi.nlm.nih.gov/pubmed/23720762)).
+By comparing results of multiple search engines, you may improve the *sensitivity* (when accepting peptides that were found by only one of the engines), the *specificity* (when accepting only peptides that were found by all of the search engines) or *both* (when using n>2 search engines and accept peptides found by a fraction of the (e.g. n-1) search engines).
+
+Here, we will use the OpenMS tool [ConsensusID](http://ftp.mi.fu-berlin.de/pub/OpenMS/release-documentation/html/TOPP_ConsensusID.html) to combine the search engine results.
+
+> ### {% icon hands_on %} Hands-On: Multiple search engines
+>
+> 1. Run ***MSGFPlusAdapter*** {% icon tool %} with
+    - the MS2-centroided mzML as **Input file** and
+    - the FASTA protein database as **Protein sequence database**.
+    - **Precursor monoisotopic mass tolerance** set to `10.0`.
+    - **Instrument that generated the data** set to `Q_Exactive`.
+    - Click `+ Insert param_fixed_modifications` and choose `Carbamidomethyl (C)`.
+    - Click `+ Insert param_variable_modifications` and choose `Oxidation (M)`.
+> 3. Run the tool ***FileInfo*** {% icon tool %} on the MSGFPlusAdapter output.
+> 2. Run ***IDPosteriorErrorProbability*** {% icon tool %} with
+>   - `-prob_correct` set to `No`.
+> 1. Run ***PeptideIndexer*** {% icon tool %} with
+>   - the FASTA protein database as **Input sequence database in FASTA format**, and
+>   - **Specificity of the enzyme** set to `none`.
+> 3. Run ***FalseDiscoveryRate*** {% icon tool %} with
+>   - **Perform FDR calculation on protein level** set to `false`,
+>   - **Filter PSMs based on q-value** set to `0.01`, and
+>   - `-add_decoy_peptides` set to `Yes`.
+> 4. Run ***IDScoreSwitcher*** {% icon tool %} with
+>   - **Name of the meta value to use as the new score** set to "Posterior Error Probability_score",
+>   - **Orientation of the new score`** set to `lower_better`, and
+>   - **Name to use as the type of the new score** set to "Posterior Error Probability".
+> 5. Run ***FileInfo*** {% icon tool %} to get basic information about the identified peptides.
+> 5. Run ***IDMerger*** {% icon tool %} with two **Input files [...]**:
+>   - the output of **IDScoreSwitcher** based on **XTandemAdapter**
+>   - the output of **IDScoreSwitcher** based on **MSGFPlusAdapter**
+> 6. Run ***ConsensusID*** {% icon tool %}.
+> 7. Run ***PeptideIndexer*** {% icon tool %} with
+>   - the FASTA protein database as **Input sequence database in FASTA format**, and
+>   - **Specificity of the enzyme** set to `none`.
+> 5. Run ***FileInfo*** {% icon tool %} to get basic information about the identified peptides.
+> 9. Proceed with the protein inference as described [above](#protein-inference)
+>
+>   > ### {% icon question %} Questions:
+>   > 1. How many peptides were identified with XTandem and MSGFPlus alone?
+>   > 2. How many were identified after combining the results with ConsensusID?
+>   >
+>   >  <details>
+>   >  <summary>Click to view answers</summary>
+>   >   <ol type="1">
+>   >     <li> After FDR-filtering, XTandem identified xxx peptides and MSGFPlus identified yyy peptides.</li>
+>   >     <li> Combining the results with ConsensusID leads to identification of zzz peptides.</li>
 >   >   </ol>
 >   >  </details>
 >   {: .question}
