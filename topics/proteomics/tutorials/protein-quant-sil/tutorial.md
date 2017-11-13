@@ -46,13 +46,13 @@ The tool settings need to be carefully tested and evaluated manually to obtain o
 >   > ### {% icon tip %} Tip: Detecting features of knockouts
 >   > In biology, there are rarely cases in which a gene product is completely shut off between two conditions. Rather, most changes are gradual. However, in some situations, you will have the situation that a protein is detectable in only one of the tested conditions and completely lacking in another. A classical example would be comparing a "knockout" mouse with its "wild-type" counterpart.
 >   >
->   > Due to the feature detection algorithm of ***FeatureFinderMultiplex*** {% icon tool %}, those features would normally be disregarded, as they do not look like typical features in labelled samples.
->   > However, there is a built-in option in ***FeatureFinderMultiplex*** {% icon tool %} that enables finding of "knockout features". If you expect one or more proteins to be completely missing in at least one of your conditions, select the advanced option **`knockouts present`**.
+>   > Due to the feature detection algorithm of ***FeatureFinderMultiplex***, those features would normally be disregarded, as they do not look like typical features in labelled samples.
+>   > However, there is a built-in option in ***FeatureFinderMultiplex*** that enables finding of "knockout features". If you expect one or more proteins to be completely missing in at least one of your conditions, select the advanced option **`knockouts present`**.
 >   > Switching on this option is not recommended as a default setting, as it increases the possibility of false positives. When using this option, be advised to check for false positives carefully, as described [below](#evaluation-and-optimization-of-quantitation-results).
 >   {: .tip}
 {: .hands_on}
 
-# Peptide and Protein Identification and Conversion
+# Peptide and Protein Identification
 
 In this tutorial, peptide identification will be performed using the workflow of the previous [Peptide ID Tutorial]({{site.url}}/topics/proteomics/tutorials/protein-id-oms/tutorial.html). 
 
@@ -82,20 +82,21 @@ This step facilitates mapping peptide IDs to identified features [later on](#map
 
 We now have feature quantifications for MS1 elution peaks, peptide identifications for the MS2 spectra (linked to MS1 precursor peaks), as well as protein identifications. 
 The next step is to map the MS1-based quantifications to the MS1 precursor peaks that triggered peptide identifications. This will enable the quantification of identified peptides. 
-Finally, we have combine the peptide quantifications to protein quantifications.
+Finally, we will combine the peptide quantifications to protein quantifications.
 
 > ### {% icon hands_on %} Hands-on: Quant to ID matching
 >
 > 1. Run ***IDMapper*** {% icon tool %} with
 >   - the output of ***IDFilter*** as **Protein/peptide identifications file**
 >   - the `consensusXML` output of ***FidoAdapter*** as **Feature map/consensus map file**
-> 2. Change the ***IDMapper*** output filetype to `consensusXML`.
+> 2. Change the filetype of the ***IDMapper*** output to `consensusXML`.
 > 3. Run ***FileFilter*** {% icon tool %} with
 >   - **Remove features without annotations** set to `Yes`, and
 >   - **Remove unassigned peptide identifications** set to `Yes`.
 > 4. Run ***IDConflictResolver*** {% icon tool %}.
 > 5. Run ***ProteinQuantifier*** {% icon tool %} with
->   - the output of of ***IDFilter*** as **Protein inference results [...]**,
+>   - the output of ***IDConflictResolver*** as **Input file**,
+>   - the output of ***IDFilter*** as **Protein inference results [...]**,
 >   - **Include results for proteins with fewer proteotypic peptides than indicated by 'top'** set to `Yes`, and
 >   - **Add the log2 ratios of the abundance values to the output** set to `Yes`.
 >
