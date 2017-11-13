@@ -65,7 +65,7 @@ pdf: install-pdf detached-serve ## generate the PDF of the tutorials and slides
             --print-to-pdf="$$name" \
             "$(SITE_URL)/$$t" \
             2> /dev/null ; \
-    done
+	done
 	@for s in $(SLIDES); do \
 		name="$(PDF_DIR)/$$(echo $$s | tr '/' '-' | sed -e 's/html/pdf/' -e 's/topics-//' -e 's/tutorials-//')"; \
 		$(DECKTAPE_DIR)/phantomjs \
