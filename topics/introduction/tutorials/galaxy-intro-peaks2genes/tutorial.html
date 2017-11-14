@@ -53,6 +53,12 @@
                     
 
                     
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://doi.org/10.5281/zenodo.1025585" title="Links to data">
+                            <i class="fa fa-files-o" aria-hidden="true"></i> Input Dataset
+                        </a>
+                    </li>
+                    
 
                     
                     <li class="nav-item">
@@ -538,8 +544,8 @@ As we directly see, the peak file lacks <code class="highlighter-rouge">chr</cod
 <h2 id="analysis">Analysis</h2>
 
 <p>Our goal is still to compare the 2 region files (the genes file and the peak file from the publication)
-to know which peaks are related to which genes. If you really only want to know which peaks are located <strong>inside</strong> genes you 
-can skip the next step. Otherwise, it might be reasonable to include the promoter region into the comparison, e.g. because 
+to know which peaks are related to which genes. If you really only want to know which peaks are located <strong>inside</strong> genes you
+can skip the next step. Otherwise, it might be reasonable to include the promoter region into the comparison, e.g. because
 you want to include Transcriptions factors in ChIP-seq experiments.</p>
 
 <blockquote class="hands_on">
@@ -827,19 +833,43 @@ The history is now empty, but we need our peak file again. Before we upload it t
 </blockquote>
 
 <blockquote class="hands_on">
-  <h3 id="-hands-on-get-new-gene-file-from-data-library"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Get new gene file from Data Library</h3>
-  <ol>
-    <li>Click in the top menu on <strong>Shared Data</strong></li>
-    <li>Navigate to <code class="highlighter-rouge">Genomes + Annotations -&gt; Annotations</code></li>
-    <li>Check the dataset <code class="highlighter-rouge">mm9.RefSeq_genes_from_UCSC</code></li>
-    <li>Click <strong>to History</strong>, select it and press <strong>Import</strong></li>
-    <li>
-      <p>Click in the top menu on <strong>Analyze Data</strong> to get back to your main page</p>
+  <h3 id="-hands-on-data-upload-1"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Data upload</h3>
 
-      <p>You should see a new item in your history.</p>
+  <ol>
+    <li>Import from <a href="https://zenodo.org/record/1025586">Zenodo</a> or from the data library (in “Introduction - From peaks to genes”) the file
+      <ul>
+        <li><code class="highlighter-rouge">mm9.RefSeq_genes_from_UCSC.bed</code></li>
+      </ul>
+
+      <blockquote class="tip">
+        <h3 id="-tip-importing-data-via-links-2"><i class="fa fa-lightbulb-o" aria-hidden="true"></i> Tip: Importing data via links</h3>
+
+        <ul>
+          <li>Copy the link location</li>
+          <li>Open the Galaxy Upload Manager</li>
+          <li>Select <strong>Paste/Fetch Data</strong></li>
+          <li>Paste the link into the text field</li>
+          <li>Press <strong>Start</strong></li>
+        </ul>
+      </blockquote>
+
+      <blockquote class="tip">
+        <h3 id="-tip-importing-data-from-a-data-library"><i class="fa fa-lightbulb-o" aria-hidden="true"></i> Tip: Importing data from a data library</h3>
+
+        <ul>
+          <li>Go into “Shared data” (top panel) then “Data libraries”</li>
+          <li>Click on “Training data” and then “Introduction - From peaks to genes”</li>
+          <li>Select interesting file</li>
+          <li>Click on “Import selected datasets into history”</li>
+          <li>Import in a new history</li>
+        </ul>
+      </blockquote>
+
+      <p>As default, Galaxy takes the link as name, so rename them.</p>
     </li>
     <li>Inspect the file content to check if it contains gene names</li>
   </ol>
+
 </blockquote>
 
 <h2 id="repeat-workflow">Repeat workflow</h2>
