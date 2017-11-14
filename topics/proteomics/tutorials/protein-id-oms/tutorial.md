@@ -198,6 +198,10 @@ Here, we will use the OpenMS tool [ConsensusID](http://ftp.mi.fu-berlin.de/pub/O
 > 3. Run the tool ***FileInfo*** {% icon tool %} on the MSGFPlusAdapter output.
 > 2. Run ***IDPosteriorErrorProbability*** {% icon tool %} with
 >   - `-prob_correct` set to `No`.
+> 5. Run ***IDMerger*** {% icon tool %} with two **Input files [...]**:
+>   - the output of **IDScoreSwitcher** based on **XTandemAdapter**
+>   - the output of **IDScoreSwitcher** based on **MSGFPlusAdapter**
+> 6. Run ***ConsensusID*** {% icon tool %}.
 > 1. Run ***PeptideIndexer*** {% icon tool %} with
 >   - the FASTA protein database as **Input sequence database in FASTA format**, and
 >   - **Specificity of the enzyme** set to `none`.
@@ -209,14 +213,6 @@ Here, we will use the OpenMS tool [ConsensusID](http://ftp.mi.fu-berlin.de/pub/O
 >   - **Name of the meta value to use as the new score** set to "Posterior Error Probability_score",
 >   - **Orientation of the new score`** set to `lower_better`, and
 >   - **Name to use as the type of the new score** set to "Posterior Error Probability".
-> 5. Run ***FileInfo*** {% icon tool %} to get basic information about the identified peptides.
-> 5. Run ***IDMerger*** {% icon tool %} with two **Input files [...]**:
->   - the output of **IDScoreSwitcher** based on **XTandemAdapter**
->   - the output of **IDScoreSwitcher** based on **MSGFPlusAdapter**
-> 6. Run ***ConsensusID*** {% icon tool %}.
-> 7. Run ***PeptideIndexer*** {% icon tool %} with
->   - the FASTA protein database as **Input sequence database in FASTA format**, and
->   - **Specificity of the enzyme** set to `none`.
 > 5. Run ***FileInfo*** {% icon tool %} to get basic information about the identified peptides.
 > 9. Proceed with the protein inference as described [above](#protein-inference)
 >
