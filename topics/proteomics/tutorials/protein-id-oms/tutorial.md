@@ -125,8 +125,8 @@ To calculate FDRs, we first have to annotate the identified peptides to determin
 >   >  <details>
 >   >  <summary>Click to view answers</summary>
 >   >   <ol type="1">
->   >     <li> You should have identified 2,623 unique stripped peptides.</li>
->   >     <li> 507 peptides contain an oxidized methionine (MeO).</li>
+>   >     <li> You should have identified 2,616 unique stripped peptides.</li>
+>   >     <li> 503 peptides contain an oxidized methionine (MeO).</li>
 >   >   </ol>
 >   >  </details>
 >   {: .question}
@@ -217,14 +217,14 @@ Here, we will use the OpenMS tool [ConsensusID](http://ftp.mi.fu-berlin.de/pub/O
 > 9. Proceed with the protein inference as described [above](#protein-inference)
 >
 >   > ### {% icon question %} Questions:
->   > 1. How many PSMs could be matched with XTandem and MSGFPlus alone?
->   > 2. How many PSMs could be matched after combining the results with ConsensusID?
+>   > 1. How many PSMs could be matched with XTandem and MSGFPlus alone? How many peptides were identified?
+>   > 2. How many PSMs could be matched after combining the results with ConsensusID? How many peptides were identified?
 >   >
 >   >  <details>
 >   >  <summary>Click to view answers</summary>
 >   >   <ol type="1">
->   >     <li> After FDR-filtering, XTandem identified xxx peptides and MSGFPlus identified 4299 peptides.</li>
->   >     <li> Combining the results with ConsensusID leads to identification of zzz peptides.</li>
+>   >     <li> After FDR-filtering, XTandem matched 3,552 PSMs (2,616 unique peptides) and MSGFPlus matched 4,292 PSMs (2,991 peptides).</li>
+>   >     <li> Combining the results with ConsensusID leads to matching of 4,299 PSMs (3,041 unique peptides).</li>
 >   >   </ol>
 >   >  </details>
 >   {: .question}
