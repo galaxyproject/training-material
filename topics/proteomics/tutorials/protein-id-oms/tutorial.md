@@ -217,13 +217,13 @@ Here, we will use the OpenMS tool [ConsensusID](http://ftp.mi.fu-berlin.de/pub/O
 > 9. Proceed with the protein inference as described [above](#protein-inference)
 >
 >   > ### {% icon question %} Questions:
->   > 1. How many peptides were identified with XTandem and MSGFPlus alone?
->   > 2. How many were identified after combining the results with ConsensusID?
+>   > 1. How many PSMs could be matched with XTandem and MSGFPlus alone?
+>   > 2. How many PSMs could be matched after combining the results with ConsensusID?
 >   >
 >   >  <details>
 >   >  <summary>Click to view answers</summary>
 >   >   <ol type="1">
->   >     <li> After FDR-filtering, XTandem identified xxx peptides and MSGFPlus identified yyy peptides.</li>
+>   >     <li> After FDR-filtering, XTandem identified xxx peptides and MSGFPlus identified 4299 peptides.</li>
 >   >     <li> Combining the results with ConsensusID leads to identification of zzz peptides.</li>
 >   >   </ol>
 >   >  </details>
@@ -232,7 +232,8 @@ Here, we will use the OpenMS tool [ConsensusID](http://ftp.mi.fu-berlin.de/pub/O
 
 # Premade Workflow
 
-A premade workflow for this tutorial can be found [here](workflows/workflow.ga)
+A premade workflow for this tutorial can be found [here](workflows/workflow.ga).
+A premade workflow using the search engines XTandem and MSGF+ can be found [here](workflows/workflow_two-search-engines.ga).
 
 # Further Reading
 
