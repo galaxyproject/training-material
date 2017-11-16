@@ -119,9 +119,10 @@ There is nothing in the database that results from direct manipulation of the ta
 
 > ### {% icon hands_on %} ***Hands on!***
 >
->   1. Connect to the PostgreSQL database
+>   1. Connect to the PostgreSQL database (change to user galaxy first)
 >
->    ```sh
+>    ```sh 
+>        su galaxy
 >        psql -d galaxy -U galaxy
 >    ```
 >
@@ -303,9 +304,10 @@ The following example is from the development server at the FMI
 >       \q
 >   ```
 >
->   Quit the interactive docker
+>   Quit the interactive docker (change back to root first)
 >
 >   ```sh
+>       exit
 >       exit
 >   ```
 
