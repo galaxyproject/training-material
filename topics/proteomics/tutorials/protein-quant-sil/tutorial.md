@@ -48,7 +48,7 @@ The tool settings need to be carefully tested and evaluated manually to obtain o
 >   >
 >   > Due to the feature detection algorithm of ***FeatureFinderMultiplex***, those features would normally be disregarded, as they do not look like typical features in labelled samples.
 >   > However, there is a built-in option in ***FeatureFinderMultiplex*** that enables finding of "knockout features". If you expect one or more proteins to be completely missing in at least one of your conditions, select the advanced option **`knockouts present`**.
->   > Switching on this option is not recommended as a default setting, as it increases the possibility of false positives. When using this option, be advised to check for false positives carefully, as described [below](#evaluation-and-optimization-of-quantitation-results).
+>   > Switching on this option is not recommended as a default setting, as it increases the probability of detecting false positives. When using this option, be advised to check for false positives carefully, as described [below](#evaluation-and-optimization-of-quantitation-results).
 >   {: .tip}
 {: .hands_on}
 
@@ -70,7 +70,9 @@ This step facilitates mapping peptide IDs to identified features [later on](#map
 >   - Connect the `mzML` input directly to the **XTandemAdapter** {% icon tool %} node.
 >   - Change the **XTandemAdapter** {% icon tool %} parameters:
 >       - Add the variable modifications `Label:13C(6) (K)` and `Label:13C(6) (R)`.
-> 3. Run the workflow on the output of ***HighResPrecursorMassCorrector***.
+> 3. Run the workflow with
+>   - the output of ***HighResPrecursorMassCorrector*** as `1: Input: mzML dataset`
+>   - the human FASTA database as `2: Human FASTA database including decoys`
 >
 >   > {% icon tip %} Tip: Using Galaxy Workflows
 >   > If you want to learn more about Galaxy workflows, please consult the [Galaxy Introduction]({{site.url}}/topics/introduction/tutorials/galaxy-intro-101/tutorial.html#the-workflow-editor)
