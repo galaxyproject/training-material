@@ -40,7 +40,7 @@ The tool settings need to be carefully tested and evaluated manually to obtain o
 
 > ### {% icon hands_on %} Hands-on: MS1 Feature Detection
 >
-> 1. Import the test data from [zenodo](). The file type of the data is mzML. The data have not been modified during the conversion from the machine raw file, neither background removal, nor peak picking (centroiding) has been performed.
+> 1. Import the test data from [zenodo](https://zenodo.org/record/1051552). The file type of the data is mzML. The data have not been modified during the conversion from the machine raw file, neither background removal, nor peak picking (centroiding) has been performed.
 > 2. Run ***FeatureFinderMultiplex*** {% icon tool %} on the mzML file. Change **`Labelling`** to `\[ \] \[Arg6,Lys6\]`.
 >
 >   > ### {% icon tip %} Tip: Detecting features of knockouts
@@ -82,8 +82,11 @@ This step facilitates mapping peptide IDs to identified features [later on](#map
 
 # Quant to ID matching
 
-We now have feature quantifications for MS1 elution peaks, peptide identifications for the MS2 spectra (linked to MS1 precursor peaks), as well as protein identifications. 
-The next step is to map the MS1-based quantifications to the MS1 precursor peaks that triggered peptide identifications. This will enable the quantification of identified peptides. 
+We now have feature quantifications for MS1 elution peaks, peptide identifications for the MS2 spectra and protein identifications. 
+The next step is to map the MS2-based peptide identifications to the quantified MS1 precursor peaks ("peptide features"). This will enable the quantification of identified peptides. 
+
+Sometimes several peptide identifications are mapped to a feature. The tool [IDConflictResolver](http://ftp.mi.fu-berlin.de/pub/OpenMS/release-documentation/html/TOPP_IDConflictResolver.html) filters the mapping so that only the identification with the best score is associated to each feature.
+
 Finally, we will combine the peptide quantifications to protein quantifications.
 
 > ### {% icon hands_on %} Hands-on: Quant to ID matching
@@ -103,6 +106,7 @@ Finally, we will combine the peptide quantifications to protein quantifications.
 >   - **Add the log2 ratios of the abundance values to the output** set to `Yes`.
 >
 >   > ### {% icon question %} Questions
+>   > 1. How many proteins were successfully quantified?
 >   {: .question}
 {: .hands_on}
 
