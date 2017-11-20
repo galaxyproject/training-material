@@ -8,24 +8,23 @@ tutorial_name: protein-quant-sil
 {:.no_toc}
 
 To compare protein amounts in different samples from MS/MS data, two different experiment setups exist. Firstly, unmodified proteins can be measured in separate runs at one sample per MS-run. Secondly, proteins of samples to compare can be labelled with small chemical tags, mixed, and measured side-by-side in a single MS-run.
-There are two types of chemical tags: isobaric tags display the same mass on first hand, but fragment during the generation of the MS/MS spectra to yield reporter ions of different mass. The intensity of those reporter ions can be compared in MS/MS spectra. There are two types of isobaric tags commercially available: tandem mass tags (TMT) and isobaric tags for relative and absolute quantitation (iTRAQ).
-The second type of chemical tags are isotopic. They are chemically identical, but differ in their mass due to incorporated stable isotopes. Examples of different isotopic tags for stable isotope labelling (SIL) are ICAT, SILAC, dimethylation, or heavy oxygen (<sup>18</sup>O).
-Quantitation can be achieved by comparing the intensity of MS1 peptide mass traces. The whole MS1 profile of a peptide, i.e. the intensities of all its isotopic peaks over time, is called a *peptide feature* (Figure 1a). Incorporation of stable isotopes results in different peptide masses on MS1 level, which give rise to coeluting ion traces in the TIC with a mass difference typical for each different chemical tag (Figure 1b).
+There are two types of chemical tags:
+  1. Isobaric tags display the same mass on first hand, but fragment during the generation of the MS/MS spectra to yield reporter ions of different mass. The intensity of those reporter ions can be compared in MS/MS spectra. There are two types of isobaric tags commercially available: *tandem mass tags* (TMT) and *isobaric tags for relative and absolute quantitation* (iTRAQ).
+  2. Isotopic tags are chemically identical, but differ in their mass due to incorporated stable isotopes. Examples of different isotopic tags for stable isotope labelling (SIL) are ICAT, SILAC, dimethylation, or heavy oxygen (<sup>18</sup>O).
 
-![MS1 mass traces. A) Two peptide features of co-eluting SIL peptides. B) MS1 spectra at a given RT. C) XIC monoisotopic peak light peptide. D) XIC monoisotopic peak heavy peptide. Figure originally published in [Nilse et al, 2015](http://www.ncbi.nlm.nih.gov/pubmed/25931027).](../../images/protein-quant-sil-ms1feature.png)
+This tutorial deals with protein quantitation via stable isotope labelling (SIL). For isotopic tags, quantitation can be achieved by comparing the intensity of MS1 peptide mass traces. The whole MS1 profile of a peptide, i.e. the intensities of all its isotopic peaks over time, is called a *peptide feature* (Figure 1a). Incorporation of stable isotopes results in different peptide masses on MS1 level, which give rise to coeluting ion traces in the TIC with a mass difference typical for each different chemical tag (Figure 1b). Figure originally published in [Nilse et al, 2015](http://www.ncbi.nlm.nih.gov/pubmed/25931027).
 
-This tutorial deals with protein quantitation via stable isotope labelling (SIL). We will use tools of the OpenMS suite.
-This tutorial covers *relative* quantitation only (i.e. comparison of abundances in different samples, no *absolute* quantitation of peptides / proteins).
+![ms1 feature](../../images/protein-quant-sil_ms1feature.png "MS1 mass traces. A) Two peptide features of co-eluting SIL peptides. B) MS1 spectra at a given RT. C) XIC monoisotopic peak light peptide. D) XIC monoisotopic peak heavy peptide.")
 
-# Prerequisites
+## Prerequisites
 {:.no_toc}
 
 If you still are in the planning phase of your quantitative proteomics experiment, you may want to consider our tutorial on different [quantitation methods]({{site.url}}/topics/proteomics/tutorials/labelfree-vs-labelled/tutorial.html) first.
 
-To learn about protein ID in Galaxy, please consider [this tutorial]({{site.url}}/topics/proteomics/tutorials/protein-id-oms/tutorial.html).
+To learn about *protein identification* in Galaxy, please consider [this tutorial]({{site.url}}/topics/proteomics/tutorials/protein-id-oms/tutorial.html).
 
 > ### {% icon hands_on %} Hands-on: Introduction
-> In the hands-on section of this tutorial, we will use a quantitative comparison of HEK cell lysate as a test dataset. In this experiment, HEK cells were once labelled with light, once with heavy SILAC. Both cultures were lysed simultaneosly and the cell lysates were mixed in a certain ratio. For a detailed description of the dataset, please refer to the description in the [PRIDE archive]().
+> In the hands-on section of this tutorial, we will use a quantitative comparison of HEK cell lysate as a test dataset. In this experiment, HEK cells were once labelled with light, once with heavy SILAC. Both cultures were lysed simultaneously and the cell lysates were mixed in a certain ratio. For a detailed description of the dataset, please refer to the description in the [PRIDE archive]().
 >
 > Your objective in this hands-on-tutorial is to find out the correct mixing ratio of the test sample.
 {: .hands_on}
@@ -47,7 +46,7 @@ The tool settings need to be carefully tested and evaluated manually to obtain o
 > ### {% icon hands_on %} Hands-on: MS1 Feature Detection
 >
 > 1. Import the test data from [zenodo](https://zenodo.org/record/1051552). The file type of the data is mzML. The data have not been modified during the conversion from the machine raw file, neither background removal, nor peak picking (centroiding) has been performed.
-> 2. Run ***FeatureFinderMultiplex*** {% icon tool %} on the mzML file. Change **`Labelling`** to `\[ \] \[Arg6,Lys6\]`.
+> 2. Run ***FeatureFinderMultiplex*** {% icon tool %} on the mzML file. Change **`Labelling`** to `[ ] [Arg6,Lys6]`.
 >
 >   > ### {% icon tip %} Tip: Detecting features of knockouts
 >   > In biology, there are rarely cases in which a gene product is completely shut off between two conditions. Rather, most changes are gradual. However, in some situations, you will have the situation that a protein is detectable in only one of the tested conditions and completely lacking in another. A classical example would be comparing a "knockout" mouse with its "wild-type" counterpart.
@@ -80,11 +79,10 @@ This step facilitates mapping peptide IDs to identified features [later on](#map
 >   - the output of ***HighResPrecursorMassCorrector*** as `1: Input: mzML dataset`
 >   - the human FASTA database as `2: Human FASTA database including decoys`
 >
->   > {% icon tip %} Tip: Using Galaxy Workflows
+>   > ### {% icon tip %} Tip: Using Galaxy Workflows
 >   > If you want to learn more about Galaxy workflows, please consult the [Galaxy Introduction]({{site.url}}/topics/introduction/tutorials/galaxy-intro-101/tutorial.html#the-workflow-editor)
 >   {: .tip}
-{: .hands-on}
->>>>>>> First full hands-on version
+{: .hands_on}
 
 # Quant to ID matching
 
@@ -123,10 +121,8 @@ Finally, we will combine the peptide quantifications to protein quantifications.
 [//]: # **HiResMassCorr can work on three levels: based on 1) features, 2) closest MS1 peak, 3) highest intensity MS1 peak. Maybe write to OpenMS developers about best settings / differences (see https://sourceforge.net/p/open-ms/mailman/message/34189191/). Find out about best settings! ppm could make sense, as heavier peptides are more likely to be misassigned, as the monoisotopic peaks get smaller compared to C13 peaks**)
 
 ***FeatureFinderMultiplex*** {% icon tool %} searches for multiple similar features that elute at the same time, but diverge by a mass shift fitting to the label used. ***FeatureFinderMultiplex*** {% icon tool %} uses several parameters that may be used to optimize your search results. Two important parameters are **`Average elution time`** and **`Averagine similarity`**.
-
-    - **`Average elution time`**: To improve results, you may look at the mzML file first and find out the average elution time of peaks. **How?**
-    
-    - **`Averagine similarity`**: describes the similarity of two features. Play around with this parameter to optimize the number of features detected. Be careful, reducing it may lead to false positives.
+  - **`Average elution time`**: To improve results, you may look at the mzML file first and find out the average elution time of peaks. **How?**
+  - **`Averagine similarity`**: describes the similarity of two features. Play around with this parameter to optimize the number of features detected. Be careful, reducing it may lead to false positives.
  
 > ### {% icon comment %} Comment: Benchmarking parameters for opimization - What is a good result?
 >
