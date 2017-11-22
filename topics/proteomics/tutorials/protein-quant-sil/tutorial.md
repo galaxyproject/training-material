@@ -45,16 +45,11 @@ The tool settings need to be carefully tested and evaluated manually to obtain o
 
 > ### {% icon hands_on %} Hands-on: MS1 Feature Detection
 >
-> 1. Import the test data from [zenodo](https://zenodo.org/record/1051552). The file type of the data is mzML. The data have not been modified during the conversion from the machine raw file, neither background removal, nor peak picking (centroiding) has been performed.
-> 2. Run ***FeatureFinderMultiplex*** {% icon tool %} on the mzML file. Change **`Labelling`** to `[ ] [Arg6,Lys6]`.
->
->   > ### {% icon tip %} Tip: Detecting features of knockouts
->   > In biology, there are rarely cases in which a gene product is completely shut off between two conditions. Rather, most changes are gradual. However, in some situations, you will have the situation that a protein is detectable in only one of the tested conditions and completely lacking in another. A classical example would be comparing a "knockout" mouse with its "wild-type" counterpart.
->   >
->   > Due to the feature detection algorithm of ***FeatureFinderMultiplex***, those features would normally be disregarded, as they do not look like typical features in labelled samples.
->   > However, there is a built-in option in ***FeatureFinderMultiplex*** that enables finding of "knockout features". If you expect one or more proteins to be completely missing in at least one of your conditions, select the advanced option **`knockouts present`**.
->   > Switching on this option is not recommended as a default setting, as it increases the probability of detecting false positives. When using this option, be advised to check for false positives carefully, as described [below](#evaluation-and-optimization-of-quantitation-results).
->   {: .tip}
+> 1. Import the test data from [zenodo](https://zenodo.org/record/1051552). The file type of the data is mzML.
+[//]: # The data have not been modified during the conversion from the machine raw file, neither background removal, nor peak picking (centroiding) has been performed. **Is this still true? I believe not, check!**
+> 2. Run ***FeatureFinderMultiplex*** {% icon tool %} with
+>   - the mzML file as **LC-MS dataset in centroid or profile mode**, and
+>   - **Labels used for labelling the samples** to `[ ][Arg6,Lys6]`.
 {: .hands_on}
 
 # Peptide and Protein Identification
@@ -98,6 +93,7 @@ Finally, we will combine the peptide quantifications to protein quantifications.
 > 1. Run ***IDMapper*** {% icon tool %} with
 >   - the output of ***IDFilter*** as **Protein/peptide identifications file**
 >   - the `consensusXML` output of ***FidoAdapter*** as **Feature map/consensus map file**
+>   - **Match using RT and m/z of sub-features instead of consensus RT and m/z** set to `Yes`.
 > 2. Change the filetype of the ***IDMapper*** output to `consensusXML`.
 > 3. Run ***FileFilter*** {% icon tool %} with
 >   - **Remove features without annotations** set to `Yes`, and
@@ -106,44 +102,62 @@ Finally, we will combine the peptide quantifications to protein quantifications.
 > 5. Run ***ProteinQuantifier*** {% icon tool %} with
 >   - the output of ***IDConflictResolver*** as **Input file**,
 >   - the output of ***IDFilter*** as **Protein inference results [...]**,
->   - **Include results for proteins with fewer proteotypic peptides than indicated by 'top'** set to `Yes`, and
+>   - **Calculate protein abundance from this number of proteotypic peptides (most abundant first; '0' for all)** set to `0`, 
+>   - **Averaging method used to compute protein abundances from peptide abundances** set to `sum`, and
 >   - **Add the log2 ratios of the abundance values to the output** set to `Yes`.
 >
 >   > ### {% icon question %} Questions
 >   > 1. How many proteins were successfully quantified?
 >   {: .question}
+>
+>   > ### {% icon comment %} Comment: ProteinQuantifier parameters
+>   > Peptide quantitation algorithms are more precise for high abundant peptides. Therefore, it is recommended to base protein quantitations on those peptides. In ProteinQuantifier, you may restrict the calculation of protein abundances to the most abundant peptides by using the option "Calculate protein abundance from this number of proteotypic peptides".
+>   > However, we recommend to use the averaging method `sum` instead. By using this option, protein ratios are based on the sum of all peptide abundances. Thus, highly abundant peptides thus have more influence on protein abundance calculation than low abundant peptides. 
+>   > A simple Sum-of-Intensities algorithm provided the best estimates of true protein ratios in a comparison of several protein quantitation algorithms ([Carrillo et al., Bioinformatics, 2009](https://www.ncbi.nlm.nih.gov/pubmed/19892804)).
+>   {: .comment}
 {: .hands_on}
 
 # Evaluation and Optimization of Quantitation Results
 
-[//]: # **General scheme: Use FileFilter to produce a small RT slice of data, then optimize on that.**
-[//]: # **Three (Four?) steps to optimize: 1) FFMult, 2) HighResPrecMassCorr, 3) IdMapper**
-[//]: # **HiResMassCorr can work on three levels: based on 1) features, 2) closest MS1 peak, 3) highest intensity MS1 peak. Maybe write to OpenMS developers about best settings / differences (see https://sourceforge.net/p/open-ms/mailman/message/34189191/). Find out about best settings! ppm could make sense, as heavier peptides are more likely to be misassigned, as the monoisotopic peaks get smaller compared to C13 peaks**)
+Protein quantitation is a multi-step procedure. Many parameters of different steps influence the final results. Therefore, it is recommended to optimize the tool parameters for each dataset and to carefully evaluate quantitation results. While the total number of quantified proteins is a first important parameter for optimization, it is also necessary to visualize the results and check for correct feature finding and ID mapping.
 
-***FeatureFinderMultiplex*** {% icon tool %} searches for multiple similar features that elute at the same time, but diverge by a mass shift fitting to the label used. ***FeatureFinderMultiplex*** {% icon tool %} uses several parameters that may be used to optimize your search results. Two important parameters are **`Average elution time`** and **`Averagine similarity`**.
-  - **`Average elution time`**: To improve results, you may look at the mzML file first and find out the average elution time of peaks. **How?**
-  - **`Averagine similarity`**: describes the similarity of two features. Play around with this parameter to optimize the number of features detected. Be careful, reducing it may lead to false positives.
- 
-> ### {% icon comment %} Comment: Benchmarking parameters for opimization - What is a good result?
->
-> The quality of the results can be measured by so-called "benchmarking parameters".
->  
-> Benchmarking parameters for ***FeatureFinderMultiplex*** {% icon tool %}:
->
-> 1. Number of features that can be linked to peptide IDs (and vice-versa).
-> 2. Although the first parameter gives a good measure of quality, it does not rule out that false positive features or IDs were matched. To check for false positives, you will have to scan through your data manually. To do so, open both the ***FeatureFinderMultiplex*** {% icon tool %} consensusXML output and the mzidentML file into [TOPPView]().
->
-> 	- **Caution**: Manual evaluation is prone to biases, as you can look solely at small parts of your data. To avoid this, try to look at the *very same* areas / the same features of all different result files.
->
-> 3. If you were using the option **`knockouts present`**, check, if the detected "knockout features" fit to your expectations.
-{: .comment}
+Galaxy does not feature a tool for proteomics visualization, we recommend to use the OpenMS Viewer [TOPPView](http://ftp.mi.fu-berlin.de/pub/OpenMS/release-documentation/html/TOPP_TOPPView.html). Basic TOPPView tutorials are available as [videos](https://www.openms.de/getting-started/command-line-and-visualisations/) and a more comprehensive tutorial as [PDF](http://ftp.mi.fu-berlin.de/pub/OpenMS/release-documentation/TOPP_tutorial.pdf).
 
-> ### {% icon hands_on %} Hands-on: Evaluation and Optimization of Quantitation Results
+For the optimization of tool parameters, it is recommended not to work with a complete LC-MS/MS run. Instead, we will use ***FileFilter*** to extract a small *RT-slice* of our input dataset, i.e. a fraction of the original dataset that was measured during a short period of time. Reducing the test data reduces the time needed for analysis and facilitates visual examination of the data.
+Be aware that only very small parts of your data can be checked by visual examination. To minimize biases, try to look at the same areas / features of each result file.
+
+> ### {% icon hands_on %} Hands-on: Data reduction and visual evaluation with TOPPView
 >
-> 1. Run the whole WF again, change **a single setting (averagine?)** in ***FeatureFinderMultiplex*** {% icon tool %}.
+> 1. Run ***FileFilter*** {% icon tool %} with
+>   - **Retention time range to extract** set to `2000:2200`.
+
+## Critical parameters for optimization
+
+[//]: # **Three steps to optimize: 1) FFMult, 2) HighResPrecMassCorr, 3) IdMapper**
+[//]: # **Test if HiResMassCorr can be optimized or if it only has litte impact**
+
+Three steps are critical for protein quantitations, the most relevant tool parameters are listed below:
+1. Feature finding by ***FeatureFinderMultiplex***:
+    - **Typical retention time [s] over which a characteristic peptide elutes**: To improve results, you may look at the mzML file first and find out the average elution time of peaks. **How?**
+    - **Lower bound for the intensity of isotopic peaks**:
+    - **Lower bound for the intensity of isotopic peaks**: If you already used an intensity cutoff during mzML preprocessing, set this parameter to `0`.
+    - **Two peptides in a multiplet are expected to have the same isotopic pattern**: The grade of similarity between isotopic patterns of the light and the heavy peptide.
+    - **The isotopic pattern of a peptide should resemble the averagine model at this m/z position**: The grade of similarity between the measured and the theoretical isotopic pattern. The theoretical pattern is estimated by the averagine model based upon peptide mass, as the peptide sequences are unknown.
+2. Precursor corrections by ***HighResPrecMassCorr***:
+    - **The precursor mass tolerance**
+    - **Additional retention time tolerance added to feature boundaries**
+3. Mapping of peptide IDs to features by ***IDMapper***:
+    - **RT tolerance (in seconds) for the matching of peptide identifications and (consensus) features**:
+    - **m/z tolerance (in ppm or Da) for the matching of peptide identifications and (consensus) features**: 
+
+For optimization, it is critical to change **only one parameter at a time**. Also, it is recommended to optimize the tools in the order of their position in the workflow.
+
+> ### {% icon hands_on %} Hands-on: Optimization of Quantitation Results
+>
+> 1. Extract a workflow out of your history or import the [premade workflow](./workflows/workflow.ga).
+> 2. Run the whole WF again, change **a single setting (averagine?)** in ***FeatureFinderMultiplex*** {% icon tool %}.
 > 2. Run ***FileInfo*** {% icon tool %} on the results -> number of ID-Feature-matches
-> 3. Run `dongs` {% icon tool %} on the results -> restrict to a small areas
-> 4. Open results in TOPPView.
+> 3. Open results in TOPPView.
 >
 >   > ### {% icon question %} Questions
 >   > 1. Which setting led to more ID-Feature-matches?
