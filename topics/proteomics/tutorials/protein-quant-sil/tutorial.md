@@ -57,11 +57,11 @@ The OpenMS suite provides several tools (FeatureFinders) for MS1 feature detecti
 
 > ### {% icon hands_on %} Hands-on: MS1 Feature Detection
 >
-> 1. Import the test dataset from [zenodo](https://zenodo.org/record/1051552).
-[//]: # The data have not been modified during the conversion from the machine raw file, neither background removal, nor peak picking (centroiding) has been performed. **Is this still true? I believe not, check!**
+> 1. Import the test dataset from [zenodo](https://zenodo.org/record/1051552). The data have been preprocessed during the conversion from the machine raw file. We used background removal on MS1 and MS2 level, and MS2 deisotoping.
 > 2. Run ***FeatureFinderMultiplex*** {% icon tool %} with
 >   - the mzML file as **LC-MS dataset in centroid or profile mode**,
->   - **Labels used for labelling the samples** set to `[ ][Arg6,Lys6]`, and
+>   - **Labels used for labelling the samples** set to `[ ][Arg6,Lys6]`, 
+>   - **m/z tolerance for search of peak patterns** set to `10`, and
 >   - **Maximum number of missed cleavages due to incomplete digestion** set to `1`.
 >
 >   > ### {% icon comment %} Comment: Multiple labels per peptide
@@ -82,7 +82,8 @@ This step facilitates mapping peptide IDs to identified features [later on](#map
 > ### {% icon hands_on %} Hands-on: Peptide and Protein Identification and Conversion
 > 1. Run ***HighResPrecursorMassCorrector*** {% icon tool %} with
 >   - the `mzML` file as **Input file**,
->   - and the output of ***FeatureFinderMultiplex*** as **Features used to correct precursor masses**.
+>   - the output of ***FeatureFinderMultiplex*** as **Features used to correct precursor masses**, and
+>   - **The precursor mass tolerance** set to `10`.
 > 1. Import the human protein database (including cRAP contaminants and decoys) from [zenodo](https://zenodo.org/record/892005/files/Human_database_including_decoys_%28cRAP_added%29.fasta).
 > 2. Import the [Protein identification using OpenMS tutorial workflow]({{site.url}}/topics/proteomics/tutorials/protein-id-oms/workflows/workflow.ga) and modify it:
 >   - Delete the **PeakPickerHiRes** {% icon tool %} node, as the MS2 data of our test dataset are already centroided.
@@ -112,9 +113,10 @@ Finally, we will combine the peptide quantifications to protein quantifications.
 > ### {% icon hands_on %} Hands-on: Quant to ID matching
 >
 > 1. Run ***IDMapper*** {% icon tool %} with
->   - **RT tolerance (in seconds) for the matching of peptide identifications and (consensus) features** set to `20`,
 >   - the output of ***IDFilter*** as **Protein/peptide identifications file**,
->   - the `consensusXML` output of ***FidoAdapter*** as **Feature map/consensus map file**, and
+>   - the `consensusXML` output of ***FidoAdapter*** as **Feature map/consensus map file**, 
+>   - **RT tolerance (in seconds) for the matching of peptide identifications and (consensus) features** set to `20`,
+>   - **m/z tolerance (in ppm or Da) for matching of peptide identifications and (consensus) features** set to `10`, and
 >   - **Match using RT and m/z of sub-features instead of consensus RT and m/z** set to `Yes`.
 > 2. Change the filetype of the ***IDMapper*** output to `consensusXML`.
 > 3. Run ***FileFilter*** {% icon tool %} with
@@ -124,6 +126,7 @@ Finally, we will combine the peptide quantifications to protein quantifications.
 >   - the output of ***IDConflictResolver*** as **Input file**,
 >   - the output of ***IDFilter*** as **Protein inference results [...]**,
 >   - **Calculate protein abundance from this number of proteotypic peptides (most abundant first; '0' for all)** set to `0`, 
+>   - **Include results for proteins with fewer proteotypic peptides than indicated by 'top'** set to `Yes`,
 >   - **Averaging method used to compute protein abundances from peptide abundances** set to `sum`, and
 >   - **Add the log2 ratios of the abundance values to the output** set to `Yes`.
 >
@@ -162,14 +165,16 @@ Comment lines in the beginning of a `tabular` file may sometimes cause errors, t
 >   > ### {% icon question %} Questions
 >   > 1. How many peptides and proteins were successfully quantified?
 >   > 2. How many proteins could not be mapped to MS1 features? (Click on the IDMapper output and look at the tool's infobox.)
+>   > 3. How many features could not be mapped to a peptide identification?
 >   > 2. What might have been the mixing ratio of the input dataset?
 >   >
 >   >  <details>
 >   >  <summary>Click to view answers</summary>
 >   >   <ol type="1">
->   >     <li> With the above parameters, you should have quantified 223 peptides and 176 proteins.</li>
->   >     <li> 2,475 peptide IDs could not be mapped to a feature.</li>
->   >     <li> In the summary statistics, you can see that the mean protein ratio was -0.99. In the histogram, you see that the peak of the density curve is a bit below -1. An FC of -1 indicates that the proteins labelled with heavy isotopes were twice as abundant as their unlabelled counterparts. Indeed, the mixing ratio of the dataset was 2 parts light labelled HEK cell lysate and 1 part heavy labelled HEK cell lysate.</li>
+>   >     <li> With the above parameters, you should have quantified **x** peptides and **y** proteins.</li>
+>   >     <li> **z** peptide IDs could not be mapped to a feature.</li>
+>   >     <li> </li>
+>   >     <li> In the summary statistics, you can see that the mean protein ratio was **xy**. In the histogram, you see that the peak of the density curve is a bit below -1. An FC of -1 indicates that the proteins labelled with heavy isotopes were twice as abundant as their unlabelled counterparts. Indeed, the mixing ratio of the dataset was 2 parts light labelled HEK cell lysate and 1 part heavy labelled HEK cell lysate.</li>
 >   >   </ol>
 >   >  </details>
 >   {: .question}
@@ -191,14 +196,19 @@ For the optimization of tool parameters, it is recommended not to work with a co
 >   - **Retention time range to extract** set to `2000:2200`.
 > 1. Extract a workflow out of your history or import the [premade workflow](./workflows/workflow.ga).
 > 3. Run the whole workflow again with default settings on the reduced `mzML` file.
+>
+>   > ### {%icon tip %} Tip: Galaxy Workflows
+>   > To learn about Galaxy Workflows, consult this [tutorial](https://galaxyproject.github.io/training-material/topics/introduction/tutorials/galaxy-intro-history-to-workflow/tutorial.html)
+>   {: .tip}
+>
 > 4. Run ***FileFilter*** {% icon tool %} with
 >   - the IDConflictResolver output as **Input file**, and
 >   - **Remove features without annotations** set to `Yes`.
-> 5. Rename the FileFilter output to "Annotated Features"
+> 5. Rename the FileFilter output to "Annotated features"
 > 5. Run ***FileFilter*** {% icon tool %} with
 >   - the IDConflictResolver output as **Input file**, and
 >   - **Remove features with annotations** set to `Yes`.
-> 5. Rename the FileFilter output to "UNannotated Features"
+> 5. Rename the FileFilter output to "UNannotated features"
 > 2. Download the following files:
 >   - Spectra: ***HighResPrecursorMassCorrector*** `mzML` output file
 >   - peptide IDs: ***IDScoreSwitcher*** `idXML` output file
@@ -211,10 +221,17 @@ For the optimization of tool parameters, it is recommended not to work with a co
 >   - **Low intensity cutoff** set to `off`.
 > 4. Open all other downloaded files in **TOPPView** with
 >   - **Open as** set to `new layer`.
-> 5. Activate the `mzML` layer and click on `Show projections` (Figure).
+> 5. Activate the `mzML` layer and click on `Show projections`.
+> ![showProjections](../../images/protein-quant-sil_showProjections.png "The projections display intensities plotted against RT (top panel) and plotted against m/z (right panel)."
 > 6. Activate the `consensusXML` layers and click on `Show consensus feature element positions` (Figure).
-> 7. Evaluate your data.
+> ![showConsensus](../../images/protein-quant-sil_showConsensus.png "Arrows between linked light and heavy features centroids are displayed."
+> 7. Evaluate your data analysis, by
+>   - holding `Ctrl` and using the mouse to zoom into a specific region,
+>   - holding `Shift` and using the mouse to measure distances,
+>   - switching on and off the display of single layers by clicking at the tick-boxes in the window "Layers".
 {: .hands_on}
+
+## Examples of Mapping
 
 ## Typical Problems
 Three problems typically hamper correct peptide quantitation:
@@ -244,14 +261,22 @@ In *low-resolution data*, wrong assignment may occur more often. If a high value
 For optimization, it is critical to modify **only one parameter at a time**.
 Also, it is recommended to optimize the tools in the order of their position in the workflow.
 
-> ### {% icon hands_on %} Hands-on: Optimization of Quantitation Results
+In the test dataset, several peptides were identified, but not quantified. Some of the peptides were even identified in the unlabelled, as well as in the labelled form. To optimize the feature detection, we will relax the parameters of FeatureFinderMultiplex.
+
+> ### {% icon hands_on %} Hands-on: Optimize Feature Detection
 >
-> 2. Run the whole WF again, change **a single setting (averagine?)** in ***FeatureFinderMultiplex*** {% icon tool %}.
-> 2. Run ***FileInfo*** {% icon tool %} on the results -> number of ID-Feature-matches
-> 3. Open results in TOPPView.
+> 1. Run the whole WF again, change **Two peptides in a multiplet are expected to have the same isotopic pattern** in ***FeatureFinderMultiplex*** {% icon tool %} from `0.5` to `0.4`.
+> 2. Run the whole WF again, change **The isotopic pattern of a peptide should resemble the averagine model at this m/z position** in ***FeatureFinderMultiplex*** {% icon tool %} from `0.4` to `0.3`.
+> 3. Rename the outputs to something meaningful.
+> 3. Open the `FeatureXML` outputs of FeatureFinderMultiplex in ***TOPPView***, with
+>   - **Open as** set to `new layer`.
+> 4. Open the "Annotated" and "UNannotated" `consensusXML` outputs of FileFilter in ***TOPPView***, with
+>   - **Open as** set to `new layer`.
+> 3. Press `Ctrl` + `G` to zoom to the following positions:
+>   - 
 >
 >   > ### {% icon question %} Questions
->   > 1. Which setting led to more ID-Feature-matches?
+>   > 1. Which parameter improved the feature detection?
 >   > 2. Using the default settings, how many features were not mapped to IDs? How many IDs were not mapped to features?
 >   {: .question}
 {: .hands_on}
