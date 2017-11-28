@@ -101,7 +101,9 @@ This step facilitates mapping peptide IDs to identified features [later on](#map
 # Quant to ID matching
 
 We now have feature quantifications for MS1 elution peaks, peptide identifications for the MS2 spectra and protein identifications. 
-The next step is to map the MS2-based peptide identifications to the quantified MS1 precursor peaks ("peptide features"). This will enable the quantification of identified peptides. 
+The next step is to map the MS2-based peptide identifications to the quantified MS1 precursor peaks ("peptide features"). This will enable the quantification of identified peptides.
+For labelled data, it is necessary to map peptide identifications to *consensus* features (i.e. a pair of one light peptide feature with one matching heavy feature in the correct m/z distance).
+For `consensusXML`, IDMapper uses the consensus centroids, not the feature boundaries for mapping. Therefore, the RT tolerance has to be set higher than for mapping to `featureXML`. A good starting value is half the expected typical retention time.
 
 Sometimes several peptide identifications are mapped to a feature. The tool [IDConflictResolver](http://ftp.mi.fu-berlin.de/pub/OpenMS/release-documentation/html/TOPP_IDConflictResolver.html) filters the mapping so that only the identification with the best score is associated to each feature.
 
@@ -174,7 +176,6 @@ Comment lines in the beginning of a `tabular` file may sometimes cause errors, t
 {: .hands_on}
 
 # Evaluation and Optimization of Quantitation Results
-
 Protein quantitation is a multi-step procedure. Many parameters of different steps influence the final results. Therefore, it is recommended to optimize the tool parameters for each dataset and to carefully evaluate quantitation results. While the total number of quantified proteins is a first important parameter for optimization, it is also necessary to visualize the results and check for correct feature finding and ID mapping.
 
 Galaxy does not provide a tool for proteomics visualization, we recommend to use the OpenMS Viewer ***TOPPView***.
@@ -217,13 +218,17 @@ For the optimization of tool parameters, it is recommended not to work with a co
 
 ## Typical Problems
 Three problems typically hamper correct peptide quantitation:
-1. A feature is detected, but no peptide identification is nearby.
+1. **A feature is detected, but no peptide identification is nearby.**
     - *Possible cause*: This may be caused by imperfect peptide identification. However, it is never expected that every single MS2-spectrum leads to an identification. The protein might be missing in the database, or the peptide may carry a modification that was not included in the search.
-    - *Possible solution*: You may try to improve your search engine settings.
-2. A peptide was identified, but no feature is nearby.
-    - *Possible cause*: The elution peaks of the peptide may be distorted. This is typical for low intensity peptides. If a lot of peptides have distorted elution peaks this may be a sign of spray instability.
-    - *Possible solution*: Try to lower the FeatureFinderMultiplex parameters **Two peptides in a multiplet are expected to have the same isotopic pattern** and/or **The isotopic pattern of a peptide should resemble the averagine model at this m/z position**.
-3. A peptide was identified and a feature was detected nearby, but the two are not mapped to each other.
+    - *Possible solution*: Improve your search engine settings.
+2. **A peptide was identified, but no feature is nearby.**
+    - *Possible cause*: 
+        1. The elution peaks of the peptide may be distorted. This is typical for low intensity peptides. If a lot of peptides have distorted elution peaks this may be a sign of spray instability.
+        2. The peptide is a contaminant.
+    - *Possible solution*: 
+        1. Lower the FeatureFinderMultiplex parameters **Two peptides in a multiplet are expected to have the same isotopic pattern** and/or **The isotopic pattern of a peptide should resemble the averagine model at this m/z position**.
+        2. Contaminants are often not labelled, but only detected in the unlabelled channel. Therefore, they do not give rise to a consensus feature in FeatureFinderMultiplex. No optimization of parameters is needed.
+3. **A peptide was identified and a feature was detected nearby, but the two are not mapped to each other.**
     - *Possible cause*: 
         1. The MS2 event and the feature are too far apart to be mapped.
         2. The precursor of the MS2 was not correctly assigned to the mono-isotopic peak.
@@ -231,23 +236,13 @@ Three problems typically hamper correct peptide quantitation:
         1. Try to increase the IDMapper parameter **RT tolerance (in seconds) for the matching of peptide identifications and (consensus) features**.
         2. Try to increase the HighResPrecursorMassCorrector parameter **Additional retention time tolerance added to feature boundaries**
 
+A fourth problem is assigning the wrong peptide to a feature. Co-eluting peptides of a similar mass may be falsely mapped to a nearby feature, if the correct peptide did not lead to an identification or was identified only with a low score.
+In *high-resolution data*, this problem of is very limited. Co-eluting peptides can normally be distinguished by slightly different m/z values.
+In *low-resolution data*, wrong assignment may occur more often. If a high value is used for the precursor mass tolerance, try to keep the RT tolerance low to avoid false mapping.
+
 ## Optimization of Quantitation Results
-
-Three steps are critical for protein quantitations, the most relevant tool parameters are listed below:
-1. Feature finding by ***FeatureFinderMultiplex***:
-    - **Typical retention time [s] over which a characteristic peptide elutes**: To improve results, you may look at the mzML file first and estimate the average elution time of peaks.
-    - **Lower bound for the intensity of isotopic peaks**: If you already used an intensity cutoff during mzML preprocessing, set this parameter to `0`.
-    - **Two peptides in a multiplet are expected to have the same isotopic pattern**: The grade of similarity between isotopic patterns of the light and the heavy peptide.
-    - **The isotopic pattern of a peptide should resemble the averagine model at this m/z position**: The grade of similarity between the measured and the theoretical isotopic pattern. The theoretical pattern is estimated by the averagine model based upon peptide mass, as the peptide sequences are unknown.
-    - **Maximum number of missed cleavages due to incomplete digestion**: Each missed trypsin cleavage increases the mass difference between light and heavy peptides for typical SILAC and dimethyl-labelling datasets, because more than one labelled amino acid is present. Setting the parameter to `1` should be sufficient in most cases.
-    For other enzymes than trypsin and other types of labelling, this parameter has to be adapted to the expected number of labelled amino acids in the peptide.
-2. Precursor corrections by ***HighResPrecMassCorr***:
-    - **Additional retention time tolerance added to feature boundaries**: 
-3. Mapping of peptide IDs to features by ***IDMapper***:
-    - **RT tolerance (in seconds) for the matching of peptide identifications and (consensus) features**:
-    - **m/z tolerance (in ppm or Da) for the matching of peptide identifications and (consensus) features**: 
-
-For optimization, it is critical to modify **only one parameter at a time**. Also, it is recommended to optimize the tools in the order of their position in the workflow.
+For optimization, it is critical to modify **only one parameter at a time**.
+Also, it is recommended to optimize the tools in the order of their position in the workflow.
 
 > ### {% icon hands_on %} Hands-on: Optimization of Quantitation Results
 >
