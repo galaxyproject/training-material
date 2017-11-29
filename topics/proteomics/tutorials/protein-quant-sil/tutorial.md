@@ -164,17 +164,15 @@ Comment lines in the beginning of a `tabular` file may sometimes cause errors, t
 >
 >   > ### {% icon question %} Questions
 >   > 1. How many peptides and proteins were successfully quantified?
->   > 2. How many proteins could not be mapped to MS1 features? (Click on the IDMapper output and look at the tool's infobox.)
->   > 3. How many features could not be mapped to a peptide identification?
 >   > 2. What might have been the mixing ratio of the input dataset?
+>   > 3. In the histogram, there is a second local maximum at about FC 0. What might that mean?
 >   >
 >   >  <details>
 >   >  <summary>Click to view answers</summary>
 >   >   <ol type="1">
->   >     <li> With the above parameters, you should have quantified **x** peptides and **y** proteins.</li>
->   >     <li> **z** peptide IDs could not be mapped to a feature.</li>
->   >     <li> </li>
->   >     <li> In the summary statistics, you can see that the mean protein ratio was **xy**. In the histogram, you see that the peak of the density curve is a bit below -1. An FC of -1 indicates that the proteins labelled with heavy isotopes were twice as abundant as their unlabelled counterparts. Indeed, the mixing ratio of the dataset was 2 parts light labelled HEK cell lysate and 1 part heavy labelled HEK cell lysate.</li>
+>   >     <li> With the above parameters, you should have quantified 818 peptides and 407 proteins.</li>
+>   >     <li> In the histogram, you see that the peak of the density curve is between -1.1 and -1.2. In the summary statistics, you can see that the mean protein ratio was -0.98. An FC of -1 indicates that the unlabelled proteins were twice as abundant as their heavy-labelled counterparts. Indeed, the mixing ratio of the dataset was 2 parts light labelled HEK cell lysate and 1 part heavy labelled HEK cell lysate.</li>
+>   >     <li> Some proteins were quantified with an FC close to 0. These may stem from incomplete SILAC labelling. Even after two weeks of cell culture in SILAC medium, some proteins with a very low turnover rate may remain unlabelled.
 >   >   </ol>
 >   >  </details>
 >   {: .question}
@@ -222,40 +220,84 @@ For the optimization of tool parameters, it is recommended not to work with a co
 > 4. Open all other downloaded files in **TOPPView** with
 >   - **Open as** set to `new layer`.
 > 5. Activate the `mzML` layer and click on `Show projections`.
-> ![showProjections](../../images/protein-quant-sil_showProjections.png "The projections display intensities plotted against RT (top panel) and plotted against m/z (right panel)."
+> ![showProjections](../../images/protein-quant-sil_showProjections.png "The projections display intensities plotted against RT (top panel) and plotted against m/z (right panel).")
 > 6. Activate the `consensusXML` layers and click on `Show consensus feature element positions` (Figure).
-> ![showConsensus](../../images/protein-quant-sil_showConsensus.png "Arrows between linked light and heavy features centroids are displayed."
+> ![showConsensus](../../images/protein-quant-sil_showConsensus.png "Arrows between linked light and heavy features centroids are displayed.")
 > 7. Evaluate your data analysis, by
->   - holding `Ctrl` and using the mouse to zoom into a specific region,
->   - holding `Shift` and using the mouse to measure distances,
->   - switching on and off the display of single layers by clicking at the tick-boxes in the window "Layers".
+>   - zooming into a specific region (hold `Ctrl` and use the mouse to zoom),
+>   - measuring m/z and RT distances (select the `mzML` layer, hold `Shift` and use the mouse to measure),
+>   - displaying an area in 3D view (`right-click` into the 2D View and select `Switch to 3D view`),
+>   - switching on and off the display of single layers (`left-click` at the tick-boxes in the window "Layers").
 {: .hands_on}
 
-## Examples of Mapping
+## Examples
+1. **Displaying annotated vs. UNannotated features**: visualize annotated (= mapped) and unannotated (= unmapped) features by switching between activating only the "Annotated_features.consensusxml" or only the "UNannotated_features.consensusxml" layer
+![displaying feature annotations](../../images/protein-quant-sil_example_highAbundant.png "The feature below was mapped to and annotated with a peptide identification, the feature above was not mapped. A) Annotated layer is active. B) UNannotated layer is active.")
+
+2. **Correct mapping**: a feature was detected, a peptide was identified and the two were mapped.
+![Correct mapping of a high-abundant peptide](../../images/protein-quant-sil_example_highAbundant.png "A high-abundant peptide. A) 2D View. B) 3D View.")
+![Correct mapping of a low-abundant peptide](../../images/protein-quant-sil_example_lowAbundant.png "A low-abundant peptide. A) 2D View. B) 3D View.")
+
+3. **No feature detected for a contaminant.** Contaminants are often not labelled, but occur only in their unlabelled isoform. Therefore, they do not give rise to a consensus feature in FeatureFinderMultiplex.
+![contaminant](../../images/protein-quant-sil_example_contaminant.png "A contaminant. There are no elution peaks for the heavy labelled peptide isoform. A) 2D View. B) 3D View.")
+
+> ### {% icon hands_on %} Hands-on: Check a possible contaminant
+> 1. Run ***TextExporter*** with
+>   - the IDFilter output file as the **Input file**.
+> 2. Run ***Search in textfiles (grep)*** with
+>   - **Select lines from** set to the TextExporter output file, and
+>   - **Regular Expression** set to the peptide sequence (e.g. "MFLSFPTTK")
+> 3. Check if the peptide was mapped to a protein marked with "CONTAMINANT".
+{: .hands_on}
 
 ## Typical Problems
-Three problems typically hamper correct peptide quantitation:
+Three problems typically hamper correct peptide mapping:
 1. **A feature is detected, but no peptide identification is nearby.**
+    ![noID](../../images/protein-quant-sil_problem_noID.png "Several features without peptide IDs. Several MS2 spectra were generated (fragment scan precursors marked with red arrows), but did not lead to a peptide identification.")
     - *Possible cause*: This may be caused by imperfect peptide identification. However, it is never expected that every single MS2-spectrum leads to an identification. The protein might be missing in the database, or the peptide may carry a modification that was not included in the search.
     - *Possible solution*: Improve your search engine settings.
 2. **A peptide was identified, but no feature is nearby.**
+    ![noID](../../images/protein-quant-sil_problem_noFeature.png "A peptide was identified in its unlabelled and in its labelled isoform, but no feature was detected. A) 2D View. No third isotopic peak was detected for the labelled peptide. B) 3D View.")
     - *Possible cause*: 
         1. The elution peaks of the peptide may be distorted. This is typical for low intensity peptides. If a lot of peptides have distorted elution peaks this may be a sign of spray instability.
         2. The peptide is a contaminant.
     - *Possible solution*: 
-        1. Lower the FeatureFinderMultiplex parameters **Two peptides in a multiplet are expected to have the same isotopic pattern** and/or **The isotopic pattern of a peptide should resemble the averagine model at this m/z position**.
-        2. Contaminants are often not labelled, but only detected in the unlabelled channel. Therefore, they do not give rise to a consensus feature in FeatureFinderMultiplex. No optimization of parameters is needed.
+        1. Lower the FeatureFinderMultiplex parameters **Two peptides in a multiplet are expected to have the same isotopic pattern** and/or **The isotopic pattern of a peptide should resemble the averagine model at this m/z position** or broaden the **Range of isotopes per peptide in the sample** (in **Advanced Options**).
+        2. No optimization of parameters is needed (see [example above](#examples))
 3. **A peptide was identified and a feature was detected nearby, but the two are not mapped to each other.**
+    ![noMapping](../../images/protein-quant-sil_problem_noMapping.png "A feature was detected, but the RT dimension is shorter than the peptides's elution peak. Also, the 2nd isotopic peak was fragmented and was not corrected due to the short feature. A) 2D View. B) 3D View.")
     - *Possible cause*: 
         1. The MS2 event and the feature are too far apart to be mapped.
         2. The precursor of the MS2 was not correctly assigned to the mono-isotopic peak.
+        3. The detected feature is too small in RT dimension and covers only a part of the peptide peaks.
     - *Possible solution*: 
-        1. Try to increase the IDMapper parameter **RT tolerance (in seconds) for the matching of peptide identifications and (consensus) features**.
-        2. Try to increase the HighResPrecursorMassCorrector parameter **Additional retention time tolerance added to feature boundaries**
+        1. Increase the IDMapper parameter **RT tolerance (in seconds) for the matching of peptide identifications and (consensus) features**.
+        2. Increase the HighResPrecursorMassCorrector parameter **Additional retention time tolerance added to feature boundaries**
+        3. Feature size in RT dimension cannot be directly corrected, use solution 1 instead.
 
-A fourth problem is assigning the wrong peptide to a feature. Co-eluting peptides of a similar mass may be falsely mapped to a nearby feature, if the correct peptide did not lead to an identification or was identified only with a low score.
-In *high-resolution data*, this problem of is very limited. Co-eluting peptides can normally be distinguished by slightly different m/z values.
-In *low-resolution data*, wrong assignment may occur more often. If a high value is used for the precursor mass tolerance, try to keep the RT tolerance low to avoid false mapping.
+Two problems typically disturb correct peptide quantitation:
+1. **A peptide is mapped to the wrong feature.**
+    - *Possible cause*: Co-eluting peptides of a similar mass may be falsely mapped to a nearby feature, if the correct peptide did not lead to an identification or was identified only with a low score. In *high-resolution data*, this problem of is very limited. Co-eluting peptides can normally be distinguished by slightly different m/z values. In *low-resolution data*, wrong assignment may occur more often. 
+    - *Possible solution*: If a high value is used for the precursor mass tolerance, try to keep the RT tolerance low to avoid false mapping.
+2. **Background noise (1) or co-eluting peptides (2) are incorporated in a feature.**
+    - *Possible solution*: 
+        1. Use noise-filtering either during pre-processing or by increasing the FeatureFinderMultiplex parameter **Lower bound for the intensity of isotopic peaks**
+        2. Reduce the FeatureFinderMultiplex parameter **m/z tolerance for search of peak patterns**.
+
+> ### {% icon question %} Question
+> 2. How many peptides could not be mapped to MS1 features? (Click on the IDMapper output and look at the tool's infobox.)
+> 3. How many features could not be mapped to a peptide identification? (Click on the ProteinQuantifier output and look at the tool's infobox.)
+> 1. Which problems are most prominent in the test dataset?
+>
+>  <details>
+>  <summary>Click to view answers</summary>
+>    <ol type="1">
+>      <li> 1,395 peptide IDs could not be mapped to a feature.</li>
+>      <li> 1,898 features, corresponding to 949 consensus features could not be mapped to a peptide identification.</li>
+>      <li> The mapping of peptide IDs to features seems to have worked mostly fine. The main problems seem to be (1) missing peptide identifications, (2) missing features where a peptide was identified and (3) features that span a shorter RT range than the corresponding peptide's elution peak.</li>
+>    </ol>
+>  </details>
+>   {: .question}
 
 ## Optimization of Quantitation Results
 For optimization, it is critical to modify **only one parameter at a time**.
