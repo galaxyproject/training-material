@@ -253,7 +253,7 @@ For the optimization of tool parameters, it is recommended not to work with a co
 ## Typical Problems
 Three problems typically hamper correct peptide mapping:
 1. **A feature is detected, but no peptide identification is nearby.**
-    ![noID](../../images/protein-quant-sil_problem_noID.png "Several features without peptide IDs. Several MS2 spectra were generated (fragment scan precursors marked with red arrows), but did not lead to a peptide identification.")
+    ![noID](../../images/protein-quant-sil_problem_noID.png "Several features without peptide IDs. Several MS2 spectra were generated (fragment scan precursors marked with red circles), but did not lead to a peptide identification.")
     - *Possible cause*: This may be caused by imperfect peptide identification. However, it is never expected that every single MS2-spectrum leads to an identification. The protein might be missing in the database, or the peptide may carry a modification that was not included in the search.
     - *Possible solution*: Improve your search engine settings.
 2. **A peptide was identified, but no feature is nearby.**
