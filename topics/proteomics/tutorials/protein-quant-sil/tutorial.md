@@ -307,18 +307,25 @@ In the test dataset, several peptides were identified, but not quantified. Some 
 
 > ### {% icon hands_on %} Hands-on: Optimize Feature Detection
 >
-> 1. Run the whole WF again, change **Two peptides in a multiplet are expected to have the same isotopic pattern** in ***FeatureFinderMultiplex*** {% icon tool %} from `0.5` to `0.4`.
-> 2. Run the whole WF again, change **The isotopic pattern of a peptide should resemble the averagine model at this m/z position** in ***FeatureFinderMultiplex*** {% icon tool %} from `0.4` to `0.3`.
-> 3. Rename the outputs to something meaningful.
-> 3. Open the `FeatureXML` outputs of FeatureFinderMultiplex in ***TOPPView***, with
->   - **Open as** set to `new layer`.
-> 4. Open the "Annotated" and "UNannotated" `consensusXML` outputs of FileFilter in ***TOPPView***, with
->   - **Open as** set to `new layer`.
-> 3. Press `Ctrl` + `G` to zoom to the following positions:
->   - 
+> 1. Run the whole WF again, change the FeatureFinderMultiplex parameter **Range of isotopes per peptide in the sample** from `3:6` to `2:6`.
+> 2. Run the whole WF again, change the HighResPrecursorMassCorrector parameter **Additional retention time tolerance added to feature boundaries** from `0.0` to `10.0`.
+>
+>   > ### {% icon tip %} Sending workflow results to new history
+>   > When running a workflow, you may send the results to a new history. This helps keeping track of different parameter settings.
+>   {: .tip}
+>
+> 3. Compare the number of identified proteins, unmatched features and unmapped peptides for each parameter setting.
+> 4. Visualize the results with TOPPView to check for correct feature detection and feature-to-peptide mapping.
 >
 >   > ### {% icon question %} Questions
->   > 1. Which parameter improved the feature detection?
->   > 2. Using the default settings, how many features were not mapped to IDs? How many IDs were not mapped to features?
+>   > 1. Which parameter improved the number of quantified proteins?
+>   >
+>   >  <details>
+>   >  <summary>Click to view answers</summary>
+>   >    <ol type="1">
+>   >      <li> Both changes led to more quantified proteins. Increasing the isotope range led to 26 \% more protein quantitations, increasing the RT tolerance led to 7 \% more protein quantitations. </li>
+>   >      <li> </li>
+>   >    </ol>
+>   >  </details>
 >   {: .question}
 {: .hands_on}
