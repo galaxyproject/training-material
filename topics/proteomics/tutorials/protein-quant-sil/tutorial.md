@@ -15,7 +15,7 @@ There are two types of chemical tags:
 This tutorial deals with protein quantitation via stable isotope labelling (SIL). For isotopic tags, quantitation can be achieved by comparing the intensity of MS1 peptide mass traces. The whole MS1 profile of a peptide, i.e. the intensities of all its isotopic peaks over time, is called a *peptide feature* (Figure 1a). 
 Incorporation of stable isotopes results in different peptide masses on MS1 level, which give rise to coeluting ion traces in the TIC with a mass difference typical for each different chemical tag (Figure 1b). Figure originally published in [Nilse et al, 2015](http://www.ncbi.nlm.nih.gov/pubmed/25931027).
 
-In this tutorial, we will use tools of the [OpenMS suite](www.openms.org) to identify and quantify peptides and proteins.
+In this tutorial, we will use tools of the [OpenMS suite](http://www.openms.org) to identify and quantify peptides and proteins.
 
 ![ms1 feature](../../images/protein-quant-sil_ms1feature.png "MS1 mass traces. A) Two peptide features of co-eluting SIL peptides. B) MS1 spectra at a given RT. C) XIC monoisotopic peak light peptide. D) XIC monoisotopic peak heavy peptide.")
 
@@ -85,11 +85,10 @@ This step facilitates mapping peptide IDs to identified features [later on](#map
 >   - the output of ***FeatureFinderMultiplex*** as **Features used to correct precursor masses**, and
 >   - **The precursor mass tolerance** set to `10`.
 > 1. Import the human protein database (including cRAP contaminants and decoys) from [zenodo](https://zenodo.org/record/892005/files/Human_database_including_decoys_%28cRAP_added%29.fasta).
-> 2. Import the [Protein identification using OpenMS tutorial workflow]({{site.url}}/topics/proteomics/tutorials/protein-id-oms/workflows/workflow.ga) and modify it:
+> 2. Import the [workflow]({{site.url}}/topics/proteomics/tutorials/protein-id-oms/workflows/workflow.ga) from the tutorial "Protein identification using OpenMS" and modify it:
 >   - Delete the **PeakPickerHiRes** {% icon tool %} node, as the MS2 data of our test dataset are already centroided.
->   - Connect the `mzML` input directly to the **XTandemAdapter** {% icon tool %} node.
->   - Change the **XTandemAdapter** {% icon tool %} parameters:
->       - Add the variable modifications `Label:13C(6) (K)` and `Label:13C(6) (R)`.
+>   - Connect the `mzML` input directly to the **MSGFPlusAdapter** {% icon tool %} node.
+>   - Change the **MSGFPlusAdapter** {% icon tool %} parameters: Add the variable modifications `Label:13C(6) (K)` and `Label:13C(6) (R)`.
 > 3. Run the workflow with
 >   - the output of ***HighResPrecursorMassCorrector*** as `1: Input: mzML dataset`
 >   - the human FASTA database as `2: protein FASTA database`
@@ -139,7 +138,7 @@ Finally, we will combine the peptide quantifications to protein quantifications.
 
 # Descriptive Statistics and Plotting of Protein Quantitations
 ***ProteinQuantifier*** produces two output tables: the first one gives information about the quantified proteins, the second one gives information about the quantified peptides.
-For proteins, we added a log-transformed ratio to the output, which is saved in column 8 of the protein table. The ratio is calculated as `log2(abundance2/abundance1)`, which is sometimes called the *fold change (FC)* ratio.
+For proteins, we added a log-transformed ratio to the output, which is saved in column 8 of the protein table. The ratio is calculated as **log2 (abundance2/abundance1)**, which is sometimes called the *fold change (FC)* ratio.
 
 To get a quick overview of the results, you can calculate basic descriptive statistics and plot the data as a histogram.
 Comment lines in the beginning of a `tabular` file may sometimes cause errors, therefore we will remove them with the tool ***Select last (tail)***.
@@ -186,6 +185,8 @@ Basic TOPPView tutorials are available as [videos](https://www.openms.de/getting
 
 For the optimization of tool parameters, it is recommended not to work with a complete LC-MS/MS run. Instead, we will use ***FileFilter*** to extract a small *RT-slice* of our input dataset, i.e. a fraction of the original dataset that was measured during a short period of time. Reducing the test data reduces the time needed for analysis and facilitates visual examination of the data.
 
+Using Galaxy Workflows enables us to quickly re-run a full analysis with changed parameters. To learn about Galaxy Workflows, consult this [tutorial](https://galaxyproject.github.io/training-material/topics/introduction/tutorials/galaxy-intro-history-to-workflow/tutorial.html).
+
 **Cave:** Be aware that only very small parts of your dataset can be checked by visual examination. To minimize biases, try to look at the same areas / features of each result file.
 
 > ### {% icon hands_on %} Hands-on: Data reduction and visual evaluation with TOPPView
@@ -194,11 +195,6 @@ For the optimization of tool parameters, it is recommended not to work with a co
 >   - **Retention time range to extract** set to `2000:2200`.
 > 1. Extract a workflow out of your history or import the [premade workflow](./workflows/workflow.ga).
 > 3. Run the whole workflow again with default settings on the reduced `mzML` file.
->
->   > ### {%icon tip %} Tip: Galaxy Workflows
->   > To learn about Galaxy Workflows, consult this [tutorial](https://galaxyproject.github.io/training-material/topics/introduction/tutorials/galaxy-intro-history-to-workflow/tutorial.html)
->   {: .tip}
->
 > 4. Run ***FileFilter*** {% icon tool %} with
 >   - the IDConflictResolver output as **Input file**, and
 >   - **Remove features without annotations** set to `Yes`.
@@ -220,9 +216,9 @@ For the optimization of tool parameters, it is recommended not to work with a co
 > 4. Open all other downloaded files in **TOPPView** with
 >   - **Open as** set to `new layer`.
 > 5. Activate the `mzML` layer and click on `Show projections`.
-> ![showProjections](../../images/protein-quant-sil_showProjections.png "The projections display intensities plotted against RT (top panel) and plotted against m/z (right panel).")
+>   > ![showProjections](../../images/protein-quant-sil_showProjections.png "The projections display intensities plotted against RT (top panel) and plotted against m/z (right panel).")
 > 6. Activate the `consensusXML` layers and click on `Show consensus feature element positions` (Figure).
-> ![showConsensus](../../images/protein-quant-sil_showConsensus.png "Arrows between linked light and heavy features centroids are displayed.")
+>   > ![showConsensus](../../images/protein-quant-sil_showConsensus.png "Arrows between linked light and heavy features centroids are displayed.")
 > 7. Evaluate your data analysis, by
 >   - zooming into a specific region (hold `Ctrl` and use the mouse to zoom),
 >   - measuring m/z and RT distances (select the `mzML` layer, hold `Shift` and use the mouse to measure),
@@ -232,14 +228,14 @@ For the optimization of tool parameters, it is recommended not to work with a co
 
 ## Examples
 1. **Displaying annotated vs. UNannotated features**: visualize annotated (= mapped) and unannotated (= unmapped) features by switching between activating only the "Annotated_features.consensusxml" or only the "UNannotated_features.consensusxml" layer
-![displaying feature annotations](../../images/protein-quant-sil_example_highAbundant.png "The feature below was mapped to and annotated with a peptide identification, the feature above was not mapped. A) Annotated layer is active. B) UNannotated layer is active.")
+    ![displaying feature annotations](../../images/protein-quant-sil_example_featureAnnotation.png "The feature below was mapped to and annotated with a peptide identification, the feature above was not mapped. A) Annotated layer is active. B) UNannotated layer is active.")
 
 2. **Correct mapping**: a feature was detected, a peptide was identified and the two were mapped.
-![Correct mapping of a high-abundant peptide](../../images/protein-quant-sil_example_highAbundant.png "A high-abundant peptide. A) 2D View. B) 3D View.")
-![Correct mapping of a low-abundant peptide](../../images/protein-quant-sil_example_lowAbundant.png "A low-abundant peptide. A) 2D View. B) 3D View.")
+    ![Correct mapping of a high-abundant peptide](../../images/protein-quant-sil_example_highAbundant.png "A high-abundant peptide. A) 2D View. B) 3D View.")
+    ![Correct mapping of a low-abundant peptide](../../images/protein-quant-sil_example_lowAbundant.png "A low-abundant peptide. A) 2D View. B) 3D View.")
 
 3. **No feature detected for a contaminant.** Contaminants are often not labelled, but occur only in their unlabelled isoform. Therefore, they do not give rise to a consensus feature in FeatureFinderMultiplex.
-![contaminant](../../images/protein-quant-sil_example_contaminant.png "A contaminant. There are no elution peaks for the heavy labelled peptide isoform. A) 2D View. B) 3D View.")
+    ![contaminant](../../images/protein-quant-sil_example_contaminant.png "A contaminant. There are no elution peaks for the heavy labelled peptide isoform. A) 2D View. B) 3D View.")
 
 > ### {% icon hands_on %} Hands-on: Check a possible contaminant
 > 1. Run ***TextExporter*** with
@@ -253,19 +249,18 @@ For the optimization of tool parameters, it is recommended not to work with a co
 ## Typical Problems
 Three problems typically hamper correct peptide mapping:
 1. **A feature is detected, but no peptide identification is nearby.**
-    ![noID](../../images/protein-quant-sil_problem_noID.png "Several features without peptide IDs. Several MS2 spectra were generated (fragment scan precursors marked with red circles), but did not lead to a peptide identification.")
     - *Possible cause*: This may be caused by imperfect peptide identification. However, it is never expected that every single MS2-spectrum leads to an identification. The protein might be missing in the database, or the peptide may carry a modification that was not included in the search.
     - *Possible solution*: Improve your search engine settings.
+    ![noID](../../images/protein-quant-sil_problem_noID.png "Several features without peptide IDs. Several MS2 spectra were generated (fragment scan precursors marked with red circles), but did not lead to a peptide identification.")
 2. **A peptide was identified, but no feature is nearby.**
-    ![noID](../../images/protein-quant-sil_problem_noFeature.png "A peptide was identified in its unlabelled and in its labelled isoform, but no feature was detected. A) 2D View. No third isotopic peak was detected for the labelled peptide. B) 3D View.")
     - *Possible cause*: 
         1. The elution peaks of the peptide may be distorted. This is typical for low intensity peptides. If a lot of peptides have distorted elution peaks this may be a sign of spray instability.
         2. The peptide is a contaminant.
     - *Possible solution*: 
         1. Lower the FeatureFinderMultiplex parameters **Two peptides in a multiplet are expected to have the same isotopic pattern** and/or **The isotopic pattern of a peptide should resemble the averagine model at this m/z position** or broaden the **Range of isotopes per peptide in the sample** (in **Advanced Options**).
         2. No optimization of parameters is needed (see [example above](#examples))
+    ![noID](../../images/protein-quant-sil_problem_noFeature.png "A peptide was identified in its unlabelled and in its labelled isoform, but no feature was detected. A) 2D View. No third isotopic peak was detected for the labelled peptide. B) 3D View.")
 3. **A peptide was identified and a feature was detected nearby, but the two are not mapped to each other.**
-    ![noMapping](../../images/protein-quant-sil_problem_noMapping.png "A feature was detected, but the RT dimension is shorter than the peptides's elution peak. Also, the 2nd isotopic peak was fragmented and was not corrected due to the short feature. A) 2D View. B) 3D View.")
     - *Possible cause*: 
         1. The MS2 event and the feature are too far apart to be mapped.
         2. The precursor of the MS2 was not correctly assigned to the mono-isotopic peak.
@@ -274,6 +269,7 @@ Three problems typically hamper correct peptide mapping:
         1. Increase the IDMapper parameter **RT tolerance (in seconds) for the matching of peptide identifications and (consensus) features**.
         2. Increase the HighResPrecursorMassCorrector parameter **Additional retention time tolerance added to feature boundaries**
         3. Feature size in RT dimension cannot be directly corrected, use solution 1 instead.
+    ![noMapping](../../images/protein-quant-sil_problem_noMapping.png "A feature was detected, but the RT dimension is shorter than the peptides's elution peak. Also, the 2nd isotopic peak was fragmented and was not corrected due to the short feature. A) 2D View. B) 3D View.")
 
 Two problems typically disturb correct peptide quantitation:
 1. **A peptide is mapped to the wrong feature.**
@@ -297,7 +293,7 @@ Two problems typically disturb correct peptide quantitation:
 >      <li> The mapping of peptide IDs to features seems to have worked mostly fine. The main problems seem to be (1) missing peptide identifications, (2) missing features where a peptide was identified and (3) features that span a shorter RT range than the corresponding peptide's elution peak.</li>
 >    </ol>
 >  </details>
->   {: .question}
+{: .question}
 
 ## Optimization of Quantitation Results
 For optimization, it is critical to modify **only one parameter at a time**.
@@ -309,22 +305,20 @@ In the test dataset, several peptides were identified, but not quantified. Some 
 >
 > 1. Run the whole WF again, change the FeatureFinderMultiplex parameter **Range of isotopes per peptide in the sample** from `3:6` to `2:6`.
 > 2. Run the whole WF again, change the HighResPrecursorMassCorrector parameter **Additional retention time tolerance added to feature boundaries** from `0.0` to `10.0`.
->
->   > ### {% icon tip %} Sending workflow results to new history
->   > When running a workflow, you may send the results to a new history. This helps keeping track of different parameter settings.
->   {: .tip}
->
 > 3. Compare the number of identified proteins, unmatched features and unmapped peptides for each parameter setting.
 > 4. Visualize the results with TOPPView to check for correct feature detection and feature-to-peptide mapping.
 >
->   > ### {% icon question %} Questions
+>   > ### {% icon tip %} Tip: Sending workflow results to new history
+>   > When running a workflow, you may send the results to a new history. This helps keeping track of different parameter settings.
+>   {: .tip}
+>
+>   > ### {% icon question %} Question
 >   > 1. Which parameter improved the number of quantified proteins?
 >   >
 >   >  <details>
 >   >  <summary>Click to view answers</summary>
 >   >    <ol type="1">
 >   >      <li> Both changes led to more quantified proteins. Increasing the isotope range led to 26 \% more protein quantitations, increasing the RT tolerance led to 7 \% more protein quantitations. </li>
->   >      <li> </li>
 >   >    </ol>
 >   >  </details>
 >   {: .question}
