@@ -272,18 +272,6 @@ The closest thing we could find is a list of the regions where the signal is sig
       <p>Click on the upload button in the upper left ot the interface</p>
 
       <p><img src="../../images/upload_button.png" alt="Upload icon" /></p>
-
-      <blockquote class="tip">
-        <h3 id="-tip-importing-data-via-links"><i class="fa fa-lightbulb-o" aria-hidden="true"></i> Tip: Importing data via links</h3>
-
-        <ul>
-          <li>Copy the link location</li>
-          <li>Open the Galaxy Upload Manager</li>
-          <li>Select <strong>Paste/Fetch Data</strong></li>
-          <li>Paste the link into the text field</li>
-          <li>Press <strong>Start</strong> and <strong>Close</strong> the window</li>
-        </ul>
-      </blockquote>
     </li>
     <li>
       <p>Press <strong>Choose local file</strong> and search for your file</p>
@@ -305,13 +293,14 @@ the gray (preparing/queued) and yellow (running) states to become green (success
       </blockquote>
 
       <blockquote class="tip">
-        <h3 id="-tip-importing-data-via-links-1"><i class="fa fa-lightbulb-o" aria-hidden="true"></i> Tip: Importing data via links</h3>
+        <h3 id="-tip-importing-data-via-links"><i class="fa fa-lightbulb-o" aria-hidden="true"></i> Tip: Importing data via links</h3>
 
         <ul>
           <li>Copy the link location</li>
           <li>Open the Galaxy Upload Manager</li>
           <li>Select <strong>Paste/Fetch Data</strong></li>
           <li>Paste the link into the text field</li>
+          <li>As <strong>Type</strong> select <code class="highlighter-rouge">interval</code></li>
           <li>Press <strong>Start</strong></li>
         </ul>
       </blockquote>
@@ -461,8 +450,7 @@ As we directly see, the peak file lacks <code class="highlighter-rouge">chr</cod
   <h3 id="-hands-on-view-end-of-file"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: View end of file</h3>
 
   <ol>
-    <li>Search for the <strong>Select last</strong> <i class="fa fa-wrench" aria-hidden="true"></i> tool in the tool panel on the left</li>
-    <li>Select the following settings
+    <li><strong>Select last</strong> <i class="fa fa-wrench" aria-hidden="true"></i>: Run <strong>Select last lines from a dataset (tail)</strong> with the following settings:
       <ul>
         <li><strong>Text file</strong> to our peak file <code class="highlighter-rouge">GSE37268_mof3.out.hpeak.txt</code></li>
         <li><strong>Operation</strong>: <code class="highlighter-rouge">Keep last lines</code></li>
@@ -505,7 +493,7 @@ As we directly see, the peak file lacks <code class="highlighter-rouge">chr</cod
   <h3 id="-hands-on-adjust-chromosome-names"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Adjust chromosome names</h3>
 
   <ol>
-    <li><strong>Replace Text</strong> <i class="fa fa-wrench" aria-hidden="true"></i>: Run <strong>Replace Text in a specific column</strong> with
+    <li><strong>Replace Text</strong> <i class="fa fa-wrench" aria-hidden="true"></i>: Run <strong>Replace Text in a specific column</strong> with the following settings:
       <ul>
         <li><strong>File to process</strong> to our peak file <code class="highlighter-rouge">GSE37268_mof3.out.hpeak.txt</code></li>
         <li><strong>in column</strong>: <code class="highlighter-rouge">Column:1</code></li>
@@ -552,13 +540,13 @@ you want to include Transcriptions factors in ChIP-seq experiments.</p>
   <h3 id="-hands-on-add-promoter-region-to-gene-records"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Add promoter region to gene records</h3>
 
   <ol>
-    <li><strong>Get Flanks</strong> <i class="fa fa-wrench" aria-hidden="true"></i> with the following settings:
+    <li><strong>Get Flanks</strong> <i class="fa fa-wrench" aria-hidden="true"></i>: Run <strong>Get flanks returns flanking region/s for every gene</strong> with the following settings:
       <ul>
         <li><strong>Select data</strong> to the file from UCSC</li>
         <li><strong>Region</strong> to <code class="highlighter-rouge">Around Start</code></li>
-        <li><strong>Location</strong> to <code class="highlighter-rouge">Upstream</code></li>
+        <li><strong>Location of the flanking region/s</strong> to <code class="highlighter-rouge">Upstream</code></li>
         <li><strong>Offset</strong> to <code class="highlighter-rouge">10000</code></li>
-        <li><strong>Length</strong> to <code class="highlighter-rouge">12000</code></li>
+        <li><strong>Length of the flanking region(s)</strong> to <code class="highlighter-rouge">12000</code></li>
       </ul>
 
       <p>This tool returns flanking regions for every gene</p>
@@ -608,7 +596,7 @@ you want to include Transcriptions factors in ChIP-seq experiments.</p>
   <h3 id="-hands-on-find-overlaps"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Find Overlaps</h3>
 
   <ol>
-    <li><strong>Intersect</strong> <i class="fa fa-wrench" aria-hidden="true"></i> with the following settings:
+    <li><strong>Intersect</strong> <i class="fa fa-wrench" aria-hidden="true"></i>: Run <strong>Intersect the intervals of two datasets</strong> with the following settings:
       <ul>
         <li><strong>Return</strong> to <code class="highlighter-rouge">Overlapping Intervals</code></li>
         <li><strong>of</strong>: the UCSC file with promoter regions</li>
@@ -632,13 +620,14 @@ We will regroup the table by chromosome and count the number of genes with peaks
   <h3 id="-hands-on-count-genes-on-different-chromosomes"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Count genes on different chromosomes</h3>
 
   <ol>
-    <li><strong>Group</strong> <i class="fa fa-wrench" aria-hidden="true"></i> with the following settings:
+    <li><strong>Group</strong> <i class="fa fa-wrench" aria-hidden="true"></i>: Run <strong>Group data by a column and perform aggregate operation on other columns</strong> with the following settings:
       <ul>
         <li><strong>Select data</strong> to the result of the intersection</li>
         <li><strong>Group by column</strong>:<code class="highlighter-rouge">Column 1</code></li>
         <li>Press <strong>Insert Operation</strong> and choose:</li>
         <li><strong>Type</strong>: <code class="highlighter-rouge">Count</code></li>
         <li><strong>On column</strong>: <code class="highlighter-rouge">Column 1</code></li>
+        <li><strong>Round result to nearest integer?</strong>: <code class="highlighter-rouge">No</code></li>
       </ul>
 
       <blockquote class="question">
@@ -788,7 +777,7 @@ The history is now empty, but we need our peak file again. Before we upload it t
   <h3 id="-hands-on-create-peak-summit-file"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Create peak summit file</h3>
 
   <ol>
-    <li><strong>Compute an expression on every row</strong> <i class="fa fa-wrench" aria-hidden="true"></i> with the following settings:
+    <li><strong>Compute</strong> <i class="fa fa-wrench" aria-hidden="true"></i>: Run <strong>Compute an expression on every row</strong> with the following settings:
       <ul>
         <li><strong>Add expression</strong>: <code class="highlighter-rouge">c2+c5</code></li>
         <li><strong>as a new column to</strong>: our peak file</li>
@@ -811,9 +800,10 @@ The history is now empty, but we need our peak file again. Before we upload it t
 <blockquote class="hands_on">
   <h3 id="-hands-on-cut-out-columns"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Cut out columns</h3>
   <ol>
-    <li><strong>Cut columns from a table</strong> <i class="fa fa-wrench" aria-hidden="true"></i> with the following settings:
+    <li><strong>Cut</strong> <i class="fa fa-wrench" aria-hidden="true"></i>: Run <strong>Cut columns from a table</strong> with the following settings:
       <ul>
         <li><strong>Cut columns</strong>: <code class="highlighter-rouge">c1,c8,c9</code></li>
+        <li><strong>Delimited by Tab</strong>: <code class="highlighter-rouge">Tab</code></li>
         <li><strong>From</strong>: our latest history item</li>
       </ul>
 
@@ -842,7 +832,7 @@ The history is now empty, but we need our peak file again. Before we upload it t
       </ul>
 
       <blockquote class="tip">
-        <h3 id="-tip-importing-data-via-links-2"><i class="fa fa-lightbulb-o" aria-hidden="true"></i> Tip: Importing data via links</h3>
+        <h3 id="-tip-importing-data-via-links-1"><i class="fa fa-lightbulb-o" aria-hidden="true"></i> Tip: Importing data via links</h3>
 
         <ul>
           <li>Copy the link location</li>
