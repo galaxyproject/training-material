@@ -75,7 +75,7 @@ The OpenMS suite provides several tools (FeatureFinders) for MS1 feature detecti
 In this tutorial, peptide identification will be performed using the workflow of the previous [Peptide ID Tutorial]({{site.url}}/topics/proteomics/tutorials/protein-id-oms/tutorial.html). 
 
 A common problem in mass spectrometry are misassigned mono-isotopic precursor peaks. Although most search engines allow for some adaptation of the monoisotopic peak, we will instead perform a recalculation of the monoisotopic peaks based on the previously identified features prior to peptide identification.
-This step facilitates mapping peptide IDs to identified features [later on](#mapping-features-to-ids). To do so, we will use the OpenMS tool ***HighResPrecursorMassCorrector*** {% icon tool %}.
+This step facilitates mapping peptide IDs to identified features [later on](#mapping-identifications-to-features). To do so, we will use the OpenMS tool ***HighResPrecursorMassCorrector*** {% icon tool %}.
 
 [//]: # TODO: Read about monoisotopic peak problem, give citation to review!
 
@@ -98,7 +98,7 @@ This step facilitates mapping peptide IDs to identified features [later on](#map
 >   {: .tip}
 {: .hands_on}
 
-# Quant to ID matching
+# Mapping Identifications to Features
 
 We now have feature quantifications for MS1 elution peaks, peptide identifications for the MS2 spectra and protein identifications. 
 The next step is to map the MS2-based peptide identifications to the quantified MS1 precursor peaks ("peptide features"). This will enable the quantification of identified peptides.
