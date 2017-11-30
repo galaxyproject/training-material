@@ -178,7 +178,7 @@ If not correctly defined, the tutorial will not be found within the website.
 > ### {% icon hands_on %} Hands-on: Fix the top metadata
 >
 > 1. Change the `tutorial-name` and the `topic_name` to fit to the ones defined in the metadata
-> 2. Check if the tutorial has been correctly added at [http://localhost:4000/topics/sequence-analysis/similarity-search ](http://localhost:4000/topics/sequence-analysis/similarity-search)
+> 2. Check if the tutorial has been correctly added at [http://localhost:4000/training-material/topics/sequence-analysis/similarity-search ](http://localhost:4000/training-material/topics/sequence-analysis/similarity-search)
 {: .hands_on}
 
 ### Content
