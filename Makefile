@@ -1,10 +1,6 @@
 # Settings
 JEKYLL=bundle exec jekyll
 CHROME=google-chrome-stable
-DECKTAPE_VERSION=1.0.0
-DECKTAPE_DIR=decktape-$(DECKTAPE_VERSION)
-PHANTOMJS_BIN=https://github.com/astefanutti/decktape/releases/download/v$(DECKTAPE_VERSION)/phantomjs-linux-x86-64
-DECKTAPE_ARCHIVE=https://github.com/astefanutti/decktape/archive/v$(DECKTAPE_VERSION).tar.gz
 TUTORIALS=$(shell find _site/training-material -name 'tutorial.html' | sed 's/_site\/training-material\///')
 SLIDES=$(shell find _site/training-material -name 'slides.html' | sed 's/_site\/training-material\///')
 SLIDES+=$(shell find _site/training-material/*/*/slides/* | sed 's/_site\/training-material\///')
@@ -13,7 +9,6 @@ PDF_DIR=_pdf
 
 ifeq ($(shell uname -s),Darwin)
 	CHROME=/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome
-	PHANTOMJS_BIN=https://github.com/astefanutti/decktape/releases/download/v1.0.0/phantomjs-osx-cocoa-x86-64
 endif
 
 default: help
@@ -58,19 +53,13 @@ clean: ## clean up junk files
 .PHONY: clean
 
 install: ## install dependencies
+	npm install decktape
 	gem install bundler
 	bundle install
 	bundle update
 .PHONY: install
 
-$(DECKTAPE_DIR)/phantomjs:
-	curl -L $(DECKTAPE_ARCHIVE) | tar -xz --exclude phantomjs
-	curl -L $(PHANTOMJS_BIN) -o $@ && chmod +x $@
-
-install-pdf: $(DECKTAPE_DIR)/phantomjs ## install dependencies for PDF generation
-.PHONY: install-pdf
-
-pdf: install-pdf detached-serve ## generate the PDF of the tutorials and slides
+pdf: detached-serve ## generate the PDF of the tutorials and slides
 	mkdir -p _pdf
 	@for t in $(TUTORIALS); do \
 		name="$(PDF_DIR)/$$(echo $$t | tr '/' '-' | sed -e 's/html/pdf/' -e 's/topics-//' -e 's/tutorials-//')"; \
@@ -83,12 +72,13 @@ pdf: install-pdf detached-serve ## generate the PDF of the tutorials and slides
     done
 	@for s in $(SLIDES); do \
 		name="$(PDF_DIR)/$$(echo $$s | tr '/' '-' | sed -e 's/html/pdf/' -e 's/topics-//' -e 's/tutorials-//')"; \
-		$(DECKTAPE_DIR)/phantomjs \
-			$(DECKTAPE_DIR)/decktape.js \
+		`npm bin`/decktape \
+			automatic \
 			"$(SITE_URL)/$$s" \
 			"$$name" \
             2> /dev/null ; \
 	done
+	pkill -f jekyll
 .PHONY: pdf
 
 help:
