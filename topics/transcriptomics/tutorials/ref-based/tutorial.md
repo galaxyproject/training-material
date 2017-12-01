@@ -40,7 +40,9 @@ We have extracted sequences from the Sequence Read Archive (SRA) files to build 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
 > 1. Create a new history for this RNA-seq exercise
-> 2. Import a FASTQ file pair (*e.g.*  `GSM461177_untreat_paired_chr4_R1.fastq` and `GSM461177_untreat_paired_chr4_R2.fastq`) from [Zenodo](https://dx.doi.org/10.5281/zenodo.290221)
+> 2. Import a FASTQ file pair (*e.g.*  `GSM461177_untreat_paired_chr4_R1.fastq` and `GSM461177_untreat_paired_chr4_R2.fastq`)
+>     * Option 1: From a shared data library if available (ask your instructor)
+>     * Option 2: From [Zenodo](https://dx.doi.org/10.5281/zenodo.290221)
 >
 >    > ### {% icon tip %} Tip: Importing data via links
 >    >
@@ -51,20 +53,18 @@ We have extracted sequences from the Sequence Read Archive (SRA) files to build 
 >    > * Press **Start**    
 >    {: .tip}
 >
->    > ### {% icon tip %} Tip: Changing the file type from `fastq` to `fastqsanger` once the data file is in your history
->    >
+> 3. Once the data file is in your history, verify that the datatype is `fastqsanger`, not `fastq`.
+>    If the datatype is `fastq`, please change the file type to `fastqsanger`
+>
+>    > ### {% icon tip %} Tip: Changing the datatype
 >    > * Click on the pencil button displayed in your dataset in the history
 >    > * Choose **Datatype** on the top
 >    > * Select `fastqsanger`
 >    > * Press **Save**
 >    {: .tip}
 >
->    As default, Galaxy uses the link as the name of the new dataset. It also does not link the dataset to a database or a reference genome.
->
->    > ### {% icon comment %} Comments
->    > - Edit the "Database/Build" to select "dm3"
->    > - Rename the datasets according to the samples
->    {: .comment}
+> 4. Edit the "Database/Build" to select `dm3`
+> 5. Rename the datasets according to the samples
 >
 {: .hands_on}
 
@@ -72,11 +72,11 @@ Both files contain the reads that belong to chromosome 4 of a paired-end sample.
 
 ## Quality control
 
-For quality control, we use similar tools as described in [NGS-QC tutorial]({{site.url}}/topics/sequence-analysis): [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/) and [Trim Galore](https://www.bioinformatics.babraham.ac.uk/projects/trim_galore/).
+For quality control, we use similar tools as described in [NGS-QC tutorial]({{site.baseurl}}/topics/sequence-analysis): [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/) and [Trim Galore](https://www.bioinformatics.babraham.ac.uk/projects/trim_galore/).
 
 > ### {% icon hands_on %} Hands-on: Quality control
 >
-> 1. **FastQC** {% icon tool %}: Run FastQC on both FastQ files to control the quality of the reads
+> 1. **FastQC** {% icon tool %}: Run FastQC on both FASTQ files to control the quality of the reads
 >
 >    > ### {% icon question %} Questions
 >    >
@@ -92,7 +92,8 @@ For quality control, we use similar tools as described in [NGS-QC tutorial]({{si
 >    >    </details>
 >    {: .question}
 >
-> 2. **Trim Galore** {% icon tool %}: Treat for the quality of sequences by running Trim Galore on the paired-end datasets
+> 2. **Trim Galore** {% icon tool %}: Treat for the quality of sequences by running Trim Galore
+>      - Indicate that we are dealing with *paired-end* datasets
 >
 >    > ### {% icon question %} Questions
 >    >
@@ -130,10 +131,10 @@ To make sense of the reads, their positions within the *Drosophila melanogaster*
 
 > ### {% icon comment %} Comment
 >
-> Do you want to learn more about the principles behind mapping? Follow our [training]({{site.url}}/topics/sequence-analysis/)
+> Do you want to learn more about the principles behind mapping? Follow our [training]({{site.baseurl}}/topics/sequence-analysis/)
 > {: .comment}
 
-Because in the case of a eukaryotic transcriptome, most reads originate from processed mRNAs lacking exons, they cannot be simply mapped back to the genome as we normally do for DNA data. Instead the reads must be separated into two categories:
+Because in the case of a eukaryotic transcriptome, most reads originate from processed mRNAs lacking introns, they cannot be simply mapped back to the genome as we normally do for DNA data. Instead the reads must be separated into two categories:
 
 - Reads that map entirely within exons
 - Reads that cannot be mapped within an exon across their entire length because they span two or more exons
@@ -180,28 +181,39 @@ Sequencing proceeds from 5' to 3'. So, in the First Strand case, all reads from 
 
 We can now try to determine the library type of our data.
 
-> ### {% icon hands_on %} Hands-on: Determining the library type
+> ### {% icon hands_on %} Hands-on: Determining the library type (Optional)
 >
-> 1. Load the Ensembl gene annotation for *Drosophila melanogaster* ([`Drosophila_melanogaster.BDGP5.78.gtf`](https://zenodo.org/record/290221/files/Drosophila_melanogaster.BDGP5.78.gtf)) from [Zenodo](https://dx.doi.org/10.5281/zenodo.290221) into your current Galaxy history and rename it
+> 1. Load the Ensembl gene annotation for *Drosophila melanogaster* ([`Drosophila_melanogaster.BDGP5.78.gtf`](https://zenodo.org/record/290221/files/Drosophila_melanogaster.BDGP5.78.gtf)) from the shared data library or from [Zenodo](https://dx.doi.org/10.5281/zenodo.290221) into your current Galaxy history
+>  - Rename the dataset if necessary
+>  - Verify that the datatype is `gtf` and not `gff`. If the datatype is not `gtf`, please change it using the pencil icon.
 >
-> 2. **Select first** {% icon tool %}: Downsample the both FastQ files generated by Trim Galore to 200k or 1M reads
+> 2. **Select first** {% icon tool %}: Use the tool **Select first - lines from a file**  to downsample both FASTQ files generated by Trim Galore to 200k or 1M reads
 >
 >    > ### {% icon question %} Questions
 >    >
->    > How many rows must be selected to conserve 200k reads?
+>    > 1. Why are we downsampling our data here?
+>    > 2. How many rows must be selected to conserve 200k reads?
 >    >
 >    > <details>
 >    > <summary>Click to view answers</summary>
->    > In a FastQ file, a read corresponds to 4 lines. So to conserve 200,000 reads, 800,000 must be selected.
+>    > <ol>
+>    > <li> We are performing a preliminary mapping for the purpose of determining the library type. We do not need the full dataset for this, and
+>    >      mapping the full dataset can take quite some time and resources, so it is better to perform this test on a small subset of the data.
+>    > </li>
+>    > <li> In a FASTQ file, a read corresponds to 4 lines. So to conserve 200,000 reads, 800,000 must be selected.
+>    >      More details about the FASTQ format can be found <a href="https://en.wikipedia.org/wiki/FASTQ_format">here</a>.
+>    > </li>
+>    > </ol>
+>    >
 >    > </details>
 >    {: .question}
 >
 > 3. **HISAT2** {% icon tool %}: Run **HISAT2** with:
->    - "FASTQ" as "Input data format"
->    - "Individual paired reads"
->    - Downsampled "Trimmed reads pair 1" (Trim Galore output) as "Forward reads"
->    - Downsampled "Trimmed reads pair 2" (Trim Galore output) as "Reverse reads"
->    - "dm3" as reference genome
+>    - "Source for the reference genome" to `Use a built-in genome`
+>    - "Reference genome" to `dm3`
+>    - "Single-end or parired-end reads?" to `paired-end`
+>    - "FASTA/Q file #1" to the downsampled `Trimmed reads pair 1` (Trim Galore output)
+>    - "FASTA/Q file #2" to the downsampled `Trimmed reads pair 2` (Trim Galore output)
 >    - Default values for other parameters
 >
 > 4. **Infer Experiment** {% icon tool %}: Run **Infer Experiment** to determine the library type:
@@ -232,7 +244,7 @@ We can now try to determine the library type of our data.
 >    >    <summary>Click to view answer</summary>
 >    >    <ol type="1">
 >    >    <li>Fraction of reads explained by "1++,1--,2+-,2-+": 0.0151 and Fraction of reads explained by "1+-,1-+,2++,2--": 0.9843</li>
->    >    <li>The library seems to be of the type "1+-,1-+,2++,2--", which is called First Strand (R/RF) type in HISAT2.</li>
+>    >    <li>The library seems to be of the type "1+-,1-+,2++,2--", which is called First Strand (R/RF) type in HISAT2, and "reverse" in htseq-count. </li>
 >    >    </ol>
 >    >    </details>
 >    {: .question}
@@ -245,18 +257,18 @@ We can now map all the RNA sequences on the *Drosophila melanogaster* genome usi
 > ### {% icon hands_on %} Hands-on: Spliced mapping
 >
 > 1. **HISAT2** {% icon tool %}: Run **HISAT2** with:
->    - "FASTQ" as "Input data format"
->    - "Individual paired reads"
->    - "Trimmed reads pair 1" (Trim Galore output) as "Forward reads"
->    - "Trimmed reads pair 2" (Trim Galore output) as "Reverse reads"
->    - "dm3" as reference genome
->    - Default values for other parameters except "Spliced alignment parameters"
->    - "Disable spliced alignment" to "False"
->    - "Specify strand-specific information" set to the previously determined value
->    - `Drosophila_melanogaster.BDGP5.78.gtf` as "GTF file with known splice sites"
+>    - "Source for the reference genome" to `Use a built-in genome`
+>    - "Reference genome" to `dm3`
+>    - "Single-end or parired-end reads?" to `paired-end`
+>    - "FASTA/Q file #1" to `Trimmed reads pair 1` (Trim Galore output)
+>    - "FASTA/Q file #2" to `Trimmed reads pair 2` (Trim Galore output)
+>    - "Specify strand information" set to the previously determined value (`RF`)
+>    - Default values for other parameters except "Spliced alignment options"
+>    - "Disable spliced alignment" to `False`
+>    - "GTF file with known splice sites" to `Drosophila_melanogaster.BDGP5.78.gtf`
 >
 > 2. Inspect the mapping statistics
->    - Click on "View details" (Warning icon)
+>    - Click on "View details" ("i" icon)
 >    - Click on "stderr" (Tool Standard Error)
 >
 >    > ### {% icon question %} Question
@@ -268,9 +280,9 @@ We can now map all the RNA sequences on the *Drosophila melanogaster* genome usi
 >    >    <details>
 >    >    <summary>Click to view answer</summary>
 >    >    <ol type="1">
->    >    <li>29.06% and 6.10%</li>
->    >    <li>11,963 reads (the reads aligned discordantly 1 time)</li>
->    >    <li>The overall alignment rate is 75.77%. It counts proportion of mapped reads: (12017+2486+11963+7390/2+1413/2)/40736</li>
+>    >    <li>37.84% and 14.69%</li>
+>    >    <li>14,454 reads (the reads aligned discordantly 1 time)</li>
+>    >    <li>The overall alignment rate is 93.52%. It counts proportion of mapped reads: (15413+5985+14454+3637/2+849/2)/40736</li>
 >    >    </ol>
 >    >    </details>
 >    {: .question}
@@ -318,11 +330,19 @@ A powerful tool to visualize the content of BAM files is the Integrative Genomic
 
 > ### {% icon hands_on %} Hands-on: Inspection of HISAT2 results
 >
-> 1. **IGV** {% icon tool %}: Visualize the HISAT2 output BAM file, particularly the region on chromosome 4 between 560 kb to 600 kb (`chr4:560,000-600,000`)
+> 1. **IGV** {% icon tool %}: Visualize the aligned reads
+>     - Click on the HISAT2 BAM output in your history to expand it.
+>     - Towards the bottom of the history item, find the line starting with `Display with IGV`. This is followed by 2 links:
+>        - option 1: `local`. Select this option if you already have IGV installed on your machine.
+>        - option 2: `D. melanogaster (dm3)`. This will download and launch IGV on your local machine.
+>     - Once IGV has started, navigate to chromosome 4 between 560 kb to 600 kb (`chr4:560,000-600,000`)
 >
->    > ### {% icon comment %} Comment
+>    > ### {% icon comment %} Comments
 >    >
->    > Check the [IGV documentation](https://software.broadinstitute.org/software/igv/AlignmentData)
+>    > - In order for this step to work, you will need to have either IGV or [Java web start](https://www.java.com/en/download/faq/java_webstart.xml)
+>    >   installed on your machine. However, the questions in this section can also be answered by inspecting the IGV screenshots below.
+>    > - Check the [IGV documentation](https://software.broadinstitute.org/software/igv/AlignmentData) for more information.
+>    >
 >    {: .comment}
 >
 >    > ### {% icon question %} Question
@@ -393,7 +413,7 @@ We will first investigate the differential gene expression to identify which gen
 
 ## Count the number of reads per annotated gene
 
-To compare the expression of single genes between different conditions (*e.g.* with or without PS depletion), an first essential step is to quantify the number of reads per gene. [**HTSeq-count**](https://www-huber.embl.de/users/anders/HTSeq/doc/count.html) is one of the most popular tool for gene quantification.
+To compare the expression of single genes between different conditions (*e.g.* with or without PS depletion), an essential first step is to quantify the number of reads per gene. [**HTSeq-count**](https://www-huber.embl.de/users/anders/HTSeq/doc/count.html) is one of the most popular tools for gene quantification.
 
 To quantify the number of reads mapped to a gene, an annotation of the gene position is needed. In a previous step, we have already uploaded the `Drosophila_melanogaster.BDGP5.78.gtf` with the Ensembl gene annotation for *Drosophila melanogaster* to Galaxy, which we can now make use of for this purpose.
 
@@ -409,8 +429,8 @@ The recommended mode is "union", which counts overlaps even if a read only share
 >    - `Drosophila_melanogaster.BDGP5.78.gtf` as "GFF file"
 >    - The "Union" mode
 >    - A "Minimum alignment quality" of 10
->    - Appropriate value for the "Stranded" option
->       
+>    - "Stranded" to `reverse`
+>
 > 2. Inspect the result files
 >
 >    > ### {% icon question %} Question
@@ -422,7 +442,7 @@ The recommended mode is "union", which counts overlaps even if a read only share
 >    >    <summary>Click to view answers</summary>
 >    >    <ol type="1">
 >    >    <li>The useful result file is a tabular file with two columns: the gene id and the number of reads mapped on the corresponding gene</li>
->    >    <li>To display the most abundantly detected feature, we need to sort the output file with the features and the number of reads mapped to them. This can be done using the Sort tool on the second column and in descending order, which reveals that FBgn0017545 is the feature with the most reads (4,030) mapped on it.</li>
+>    >    <li>To display the most abundantly detected feature, we need to sort the output file with the features and the number of reads mapped to them. This can be done using the Sort tool on the second column and in descending order, which reveals that FBgn0017545 is the feature with the most reads (7,650) mapped on it.</li>
 >    >    </ol>
 >    >    </details>
 >    {: .question}

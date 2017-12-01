@@ -1,0 +1,198 @@
+﻿id: mapping
+name: Introduction to next generation sequencing data mapping
+description: >-
+  To map DNA/RNA reads of an experiment to a reference genome is a key step in
+  modern genomic data analysis. With the mapping the reads are assigned to a
+  specific location in the genome and insights like the expression level of
+  genes can be gained. In the following we will process a dataset with a mapper,
+  ‘Bowtie2’, and we will visualize the data with the software ‘IGV’.
+title_default: denovo
+steps:
+  - title: Introduction
+    content: >-
+      To map DNA/RNA reads of an experiment to a reference genome is a key step
+      in modern genomic data analysis. With the mapping the reads are assigned
+      to a specific location in the genome and insights like the expression
+      level of genes can be gained. In the following we will process a dataset
+      with a mapper, ‘Bowtie2’, and we will visualize the data with the software
+      ‘IGV’.
+    backdrop: true
+  - title: Mapping
+    content: >-
+      We will process data inside Galaxy with Bowtie2 and have a look at the
+      results.
+    backdrop: true
+  - title: Data upload
+    content: >-
+      Load the <a
+      href="https://zenodo.org/record/61771/files/GSM461178_untreat_paired_subset_1.fastq">‘GSM461178_untreat_paired_subset_1.fastq’</a>
+      dataset from <a href="https://zenodo.org/record/61771">Zenodo</a> into
+      Galaxy.
+    backdrop: true
+  - title: History options
+    element: '#history-options-button'
+    content: >-
+      We will start the analysis by creating a new history. Click on this button
+      and then "Create New"
+    placement: left
+  - title: Uploading the new data
+    element: '#tool-panel-upload-button .fa.fa-upload'
+    content: We need to upload data. Open the Galaxy Upload Manager
+    placement: right
+    postclick:
+      - '#tool-panel-upload-button .fa.fa-upload'
+      - '#btn-reset'
+  - title: Uploading the input data
+    element: '#btn-new'
+    content: Click on Paste/Fetch Data
+    placement: right
+    postclick:
+      - '#btn-new'
+  - title: Uploading the input data
+    element: .upload-text-column .upload-text .upload-text-content.form-control
+    content: >-
+      Insert the link here.<br> The input is available on <a
+      href="https://zenodo.org/record/61771">Zenodo</a>.
+    placement: right
+    textinsert: >-
+      https://zenodo.org/record/61771/files/GSM461178_untreat_paired_subset_1.fastq
+  - title: Data types
+    content: |-
+      Make sure the datatypes are adjusted.
+      <ul>
+        <li>Set the datatype of the read file to fastqsanger</li>
+      </ul>
+    backdrop: false
+  - title: Uploading the input data
+    element: '#btn-start'
+    content: Click on "Start" to start loading the data to history
+    placement: right
+    postclick:
+      - '#btn-start'
+  - title: Uploading the input data
+    element: '#btn-close'
+    content: >-
+      The upload may take a while.<br> Hit the close button to close this
+      window.
+    placement: right
+    postclick:
+      - '#btn-close'
+  - title: Bowtie2
+    element: '#tool-search-query'
+    content: >-
+      Search in the tool bar on the left the mapper ‘bowtie2’ and run the mapper
+      with the dataset.
+    placement: right
+    textinsert: bowtie2
+  - title: Bowtie2
+    element: '#tool-search'
+    content: Click on the "bowtie2" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fdevteam%2Fbowtie2%2Fbowtie2%2F2.3.2.2"]
+  - title: Bowtie2
+    element: '#tool-search'
+    content: |-
+      Run the mapper with the uploaded dataset. <ul>
+        <li>Select the uploaded dataset as the fastq file</li>
+        <li>Choose as a reference genome human hg19</li>
+      </ul>
+    position: left
+  - title: Bowtie2
+    element: '.history-right-panel .list-items > *:first'
+    content: >-
+      Click on the right history panel on the Bowtie2 output. Look careful at
+      the information which is given.<ul>
+    position: left
+  - title: Questions
+    content: |-
+      <ul>
+        <li>What information is provided here?</li>
+        <li>Is everything as expected?</li>
+        <li>Why is the mapping so bad?</li>
+      </ul>
+    backdrop: false
+  - title: Bowtie2
+    element: '#tool-search-query'
+    content: >-
+      Rerun Bowtie2 with the correct reference genome ‘Drosophila melanogaster’
+      or short ‘dm3’.
+    placement: right
+    textinsert: bowtie2
+  - title: Bowtie2
+    element: '#tool-search'
+    content: Click on the "bowtie2" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fdevteam%2Fbowtie2%2Fbowtie2%2F2.3.2.2"]
+  - title: Bowtie2
+    element: '#tool-search'
+    content: |-
+      Run the mapper with the uploaded dataset. <ul>
+        <li>Select the uploaded dataset as the fastq file</li>
+        <li>Choose as a reference genome ‘Drosophila melanogaster’ or short <b>dm3</b>.</li>
+      </ul>
+    position: left
+  - title: Visualization
+    content: >-
+      A general description of the user interface of the IGV browser can be read
+      here: <a
+      href="https://galaxyproject.github.io/training-material/topics/introduction/tutorials/igv-introduction/tutorial.html>IGV
+      Browser description</a>.
+    backdrop: true
+  - title: Visualization
+    content: >-
+      The Integrative Genomics Viewer (IGV) is a high-performance visualization
+      tool for interactive exploration of large, integrated genomic datasets. It
+      supports a wide variety of data types, including array-based and
+      next-generation sequence data, and genomic annotations. In the following
+      we will use it to visualize the computed mapping.
+    backdrop: true
+  - title: Visualization
+    content: |-
+      <ul>
+        <li><b>IGV:</b> To display the result in IGV open the IGV browser local on your computer.</li>
+        <li><b>Galaxy:</b>Click on the right history panel on the Bowtie2 item.</li>
+        <li><b>Galaxy:</b>Choose in the history on the computed Bowtie2 results and click on ‘local’ at ‘display with IGV’.</li>
+        <li><b>IGV:</b> The BAM file should be opened in the IGV browser and the genome should be loaded automatically.</li>
+        <li><b>IGV:</b> The interesting part is at chromosome 4, position 86,761 to 87,907. Navigate to it.</li>
+        <li><b>IGV:</b> There are two views:<ul>
+          <li>the aligned reads view</li>
+          <li>the coverage view</li></ul></li>
+      </ul>
+    backdrop: true
+  - title: Questions
+    content: |-
+      <ul>
+        <li>What could it mean if a bar in the coverage view is colored?</li>
+        <li>What could be the reason that a read is white instead of grey?</li>
+        <li>How many reads are mapped at position chr4:87482?</li>
+      </ul>
+    backdrop: false
+  - title: Visualization
+    content: >-
+      To show you the difference between a good and a bad dataset we provided an
+      additional dataset which will give you a bad mapping. Load the <a
+      href="https://zenodo.org/record/61771/files/GSM461178_untreat_paired_subset_1.fastq">‘GSM461182_untreat_single_subset.fastq’</a>
+      dataset from <a href="https://zenodo.org/record/61771">Zenodo</a> into
+      Galaxy.
+    backdrop: true
+  - title: Visualization
+    content: Load the two mappings into IGV and compare them!
+    backdrop: true
+  - title: Questions
+    content: |-
+      <ul>
+        <li>How IGV helps you to see that the second dataset is bad?</li>
+      </ul>
+    backdrop: false
+  - title: Key points
+    content: |-
+      <ul>
+        <li>Know your data!</li>
+        <li>Mapping is not trivial</li>
+        <li>There are many mapping algorithms, it depends on your data which one to choose</li>
+      </ul>
+    backdrop: false

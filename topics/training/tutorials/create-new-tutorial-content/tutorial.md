@@ -106,7 +106,7 @@ Let's start tracking your changes!
 
 The GitHub interface can also help you in the process of editing a file. It will automatically create a fork of this repository where you can safely work.
 
-We will now start to fill the different files together. We recommend you to commit your changes regurlarly: it helps following them, but also revert them if needed.
+We will now start to fill the different files together. We recommend you to commit your changes regularly: it helps following them, but also revert them if needed.
 
 
 # Filling the tutorial content
@@ -172,13 +172,13 @@ The tutorial needs to start with some medatada on its top:
 - `topic_name: training` with the name of the topic
 - `tutorial_name: create-new-tutorial` with the name of tutorial
 
-These metadata are there to help the templating system linking between the tutorial's file and the global [metadata]({{site.url}}/topics/training/tutorials/create-new-tutorial-metadata/tutorial.html).
+These metadata are there to help the templating system linking between the tutorial's file and the global [metadata]({{site.baseurl}}/topics/training/tutorials/create-new-tutorial-metadata/tutorial.html).
 If not correctly defined, the tutorial will not be found within the website.
 
 > ### {% icon hands_on %} Hands-on: Fix the top metadata
 >
 > 1. Change the `tutorial-name` and the `topic_name` to fit to the ones defined in the metadata
-> 2. Check if the tutorial has been correctly added at [http://localhost:4000/topics/sequence-analysis/similarity-search ](http://localhost:4000/topics/sequence-analysis/similarity-search)
+> 2. Check if the tutorial has been correctly added at [http://localhost:4000/training-material/topics/sequence-analysis/similarity-search ](http://localhost:4000/training-material/topics/sequence-analysis/similarity-search)
 {: .hands_on}
 
 ### Content
@@ -234,7 +234,7 @@ We recommend to structure the tutorials as follows:
 >   $$ 5 + 5 $$
 >
 >
-> Dollar signs are therefore *reserved caracters* for instructing the templating system to open/close LaTeX math blocks. In case you don't want any math block to be opened/closed, but still be able to write a dollar sign, you have to *escape* it. Escaping enables the templating system to render the escaped caracter as a normal caracter.
+> Dollar signs are therefore *reserved characters* for instructing the templating system to open/close LaTeX math blocks. In case you don't want any math block to be opened/closed, but still be able to write a dollar sign, you have to *escape* it. Escaping enables the templating system to render the escaped character as a normal character.
 >
 >    > ### {% icon comment %} Comments
 >    > LaTeX code that uses the pipe symbol `|` in inline math statements may lead to a line being recognized as a table line by the templating system.
@@ -254,7 +254,7 @@ They are defined always with the same structure:
 {: .type_of_box}
 ```
 
-For a correct rendering of the tutorial's content, the templating system requirest this structure to be kept as it.
+For a correct rendering of the tutorial's content, the templating system requires this structure to be kept as it.
 The different defined boxes are:
 
 - Overview

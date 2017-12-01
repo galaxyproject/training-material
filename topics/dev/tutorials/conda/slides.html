@@ -544,7 +544,7 @@ build:
   skip: True  # [not py27]
 ```
 
-.footer[.center[https://conda.io/docs/building/meta-yaml.html#preprocessing-selectors]]
+.footer[.center[https://conda.io/docs/building/meta-yaml.html#preprocessing-selectors ]]
 
 ---
 
@@ -578,7 +578,7 @@ test:
 
 Please note that the Conda tests run inside the runtime environment and not in the build environment.
 
-.footnote[.center[https://conda.io/docs/building/meta-yaml.html#test-section]]
+.footnote[.center[https://conda.io/docs/building/meta-yaml.html#test-section ]]
 
 ---
 
@@ -597,7 +597,8 @@ https://bioconda.github.io/guidelines.html
 ./configure --prefix=$PREFIX
 make
 make install
-```sh
+```
+
 ```bash
 #!/bin/bash
 mkdir -p $PREFIX/bin
@@ -660,7 +661,7 @@ $ $HOME/miniconda3/bin/conda build .
 1. Fork [Bioconda](https://github.com/bioconda/bioconda-recipes/fork).
 1. Clone your fork:
 
-   `git clone https://github.com/<myuser>/bioconda-recipes`
+   `git clone https://github.com/ <myuser> /bioconda-recipes`
 1. Create a new branch `package`
 
    `git checkout -b package`
@@ -783,7 +784,7 @@ CONDA_HDF5: "1.8.17"
 MACOSX_DEPLOYMENT_TARGET: "10.9"
 ```
 
-.footnote[.center[https://github.com/bioconda/bioconda-recipes/blob/master/scripts/env_matrix.yml]]
+.footnote[.center[https://github.com/bioconda/bioconda-recipes/blob/master/scripts/env_matrix.yml ]]
 
 ---
 
@@ -793,7 +794,7 @@ class: left
 
 > If your package links dynamically against a particular library, it is **often necessary to pin the version against which it was compiled, in order to avoid ABI incompatibilities**. Instead of hardcoding a particular version in the recipe, we use jinja templates to achieve this. This **helps ensure that all bioconda packages are binary-compatible with each other**. For example, bioconda provides an environment variable `CONDA_BOOST` that contains the current major version of Boost.
 
-.footnote[.center[https://bioconda.github.io/guidelines.html#c-c]]
+.footnote[.center[https://bioconda.github.io/guidelines.html#c-c ]]
 
 ---
 
@@ -1006,7 +1007,7 @@ class: reduce70
 
 source:
     fn: {{ name }}-{{ version }}.zip
-    url: http://genesis.ugent.be/maven2/eu/isas/peptideshaker/{{ name }}/{{ version }}/{{ name }}-{{ version }}.zip
+    url: http://genesis.ugent.be/maven2/eu/isas/peptideshaker/ {{ name }}/{{ version }}/{{ name }}-{{ version }}.zip
     md5: 14a48413e28a25614f5fda2b381d7197
 
 requirements:

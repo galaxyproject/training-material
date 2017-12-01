@@ -147,6 +147,9 @@ create a collection now:
 >   The middle segment is the name for each pair. You can change these names by clicking on them. These
 >   names will be used as sample names in the downstream analysis so always make sure they are
 >   informative.
+>   **Important:** Make sure these sample names contain only alphanumeric characters. If you've
+>   imported the data from Zenodo, the sample names will default to the full url, please change these
+>   values to only their last part, e.g. `F3D0`, `F3D5` etc.
 >
 > 5. Once you are happy with your pairings, enter a name for your new collection at the bottom right of
 >   the screen. Then click the **Create List** button. A new dataset collection item will now appear in
@@ -209,7 +212,7 @@ Here the first column contains the read name, and the second column contains the
 ### Data Cleaning
 
 For more information on the topic of quality control, please see our training materials
-[here]({{site.url}}/topics/sequence-analysis/)
+[here]({{site.baseurl}}/topics/sequence-analysis/)
 
 Next we want to improve the quality of our data. But first, let's get a feel of our data
 
@@ -335,7 +338,7 @@ the number of duplicates of this sequence observed in each sample.
 ### Sequence Alignment
 
 For more information on the topic of alignment, please see our training materials
-[here]({{site.url}}/topics/sequence-analysis/)
+[here]({{site.baseurl}}/topics/sequence-analysis/)
 
 We are now ready to align our sequences to the reference. This step is an important
 step to perform to improve the clustering of your OTUs [[Schloss 2013]](https://doi.org/10.1038/ismej.2012.102)

@@ -20,7 +20,7 @@ layout: base
             {% for requirement in topic.requirements %}
                 <li>
                     {% if requirement.type == "internal" %}
-                    <a href="{{ site.url }}/topics{{ requirement.link }}">{{ requirement.title }}</a>
+                    <a href="{{ site.baseurl }}/topics/{{ requirement.link }}">{{ requirement.title }}</a>
                     {% elsif material.type == "external" %}
                     <a href="{{ requirement.link }}">{{ requirement.title }}</a>
                     {% endif %}
@@ -51,7 +51,7 @@ layout: base
                             <td></td>
                             <td>
                                 {% if material.slides == "yes" %}
-                                <a href="{{ site.url }}/{{ page.url }}/slides">
+                                <a href="{{ site.baseurl }}/topics/{{ topic.name }}/slides">
                                   {% icon slides %}
                                 </a>
                                 {% endif %}
@@ -67,7 +67,7 @@ layout: base
                                   {% icon tutorial %}
                                 </a>
                                 {% elsif material.hands_on == "yes" %}
-                                <a href="{{ site.url }}{{ page.url }}tutorials/{{ material.name }}/tutorial.html">
+                                <a href="{{ site.baseurl }}/topics/{{ topic.name }}/tutorials/{{ material.name }}/tutorial.html">
                                   {% icon tutorial %}
                                 </a>
                                 {% elsif material.hands_on == "github" %}
@@ -79,7 +79,7 @@ layout: base
 
                             <td>
                                 {% if material.slides == "yes" %}
-                                <a href="{{ site.url }}{{ page.url }}tutorials/{{ material.name }}/slides.html">
+                                <a href="{{ site.baseurl }}/topics/{{ topic.name }}/tutorials/{{ material.name }}/slides.html">
                                   {% icon slides %}
                                 </a>
                                 {% endif %}

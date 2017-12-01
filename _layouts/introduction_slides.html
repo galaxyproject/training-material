@@ -13,12 +13,11 @@ layout: base_slides
 {% for material in topic.material %}
     {% if material.type == "tutorial" %}
         {% if material.hands_on == "yes" %}
-- [{{ material.title }}]({{ site.url }}/topics/{{ topic.name }}/tutorials/{{ material.name }}/tutorial.html)
+- [{{ material.title }}]({{ site.baseurl }}/topics/{{ topic.name }}/tutorials/{{ material.name }}/tutorial.html")
         {% elsif material.hands_on == "github" %}
-- [{{ material.title }}]({{ site.github_repository }}/tree/master/topics/{{ topic.name }}/tutorials/{{ material.name }}.md)
+- [{{ material.title }}]({{ site.github_repository }}/tree/master/topics/{{ topic.name }}/tutorials/{{ material.name }}/tutorial.md)
         {% elsif material.slides == "yes" %}
-- [{{ material.title }}]({{ site.url }}/topics/{{ topic.name }}/tutorials/{{ material.name }}/slides.html)
+- [{{ material.title }}]({{ site.baseurl }}/topics/{{ topic.name }}/tutorials/{{ material.name }}/slides.html")
         {% endif %}
     {% endif %}
 {% endfor %}
-
