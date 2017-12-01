@@ -4,10 +4,10 @@ import glob
 from collections import defaultdict
 import os
 import re
-import shutil
 import subprocess
 import time
 import yaml
+DRY_RUN = False
 
 
 def discover_trainings(topics_dir):
@@ -15,6 +15,8 @@ def discover_trainings(topics_dir):
     for training in glob.glob(os.path.join(topics_dir, '*', 'metadata.yaml')):
         with open(training, 'r') as handle:
             training_data = yaml.load(handle)
+            yield training_data['name'], '', training_data['title']
+
             for material in training_data['material']:
                 yield training.split('/')[-2], material['name'], material['title']
 
@@ -45,22 +47,42 @@ def realise_badge(badge, badge_cache_dir):
             'wget', 'https://img.shields.io/badge/%s' % badge,
             '--quiet', '-O', os.path.join(badge_cache_dir, badge)
         ]
-        subprocess.check_call(cmd)
+        if not DRY_RUN:
+            subprocess.check_call(cmd)
+            time.sleep(1)
+        else:
+            print(' '.join(cmd))
         # Be nice to their servers
-        time.sleep(1)
     return os.path.join(badge_cache_dir, badge)
 
 
-def badge_it(label, value, color, CACHE_DIR, instance, identifier, output_dir):
+def badge_it(label, value, color, CACHE_DIR, identifier_parts, output_dir):
     # Get a path to a (cached) badge file.
     real_badge_path = realise_badge(get_badge_path(
         label, value, color
     ), CACHE_DIR)
     # Deteremine the per-instance output name
-    output_filename = safe_name(instance) + '__' + safe_name(identifier, dashes=True) + '.svg'
-    output_filepath = os.path.join(args.output, output_filename)
+    output_filedir = os.path.join(args.output, *map(safe_name, identifier_parts[0:-1]))
+    if not os.path.exists(output_filedir):
+        os.makedirs(output_filedir)
+
+    output_filename = safe_name(identifier_parts[-1]) + '.svg'
+    # Ensure dir exists
+    output_filepath = os.path.join(output_filedir, output_filename)
+
     # Copy the badge to a per-instance named .svg file.
-    shutil.copy(real_badge_path, output_filepath)
+    up = ['..'] * (len(identifier_parts) - 1)
+    symlink_source = os.path.join(*up, real_badge_path[len('badges/'):])
+    if not DRY_RUN:
+        # Remove it if it exists, since this is easier than testing for
+        # equality.
+        if os.path.exists(output_filepath):
+            os.unlink(output_filepath)
+
+        # Now (re-)create the symlink
+        os.symlink(symlink_source, output_filepath)
+    else:
+        print(' '.join(['ln -s ', symlink_source, output_filepath]))
     return output_filename
 
 
@@ -71,17 +93,21 @@ if __name__ == '__main__':
     parser.add_argument('--topics-directory', help='Path to the topics directory', default='./topics/')
     parser.add_argument('--instances', help='File containing the instances and their supported trainings', default='metadata/instances.yaml')
 
-    parser.add_argument('--output', help='Path to the the directory where the badges should be stored. The directory will be created if it does not exist.', default='output')
+    parser.add_argument('--output', help='Path to the the directory where the badges should be stored. The directory will be created if it does not exist.', default='badges')
     args = parser.parse_args()
 
     # Validate training dir argument
     if not os.path.exists(args.topics_directory) and os.path.is_dir(args.topics_directory):
         raise Exception("Invalid topics directory")
     all_trainings = list(discover_trainings(args.topics_directory))
-    trainings = {x[1]: x[2] for x in all_trainings}
+    trainings = {x[0] + '/' + x[1]: x[2] for x in all_trainings}
 
     topic_counts = defaultdict(int)
-    for (topic, _, _) in all_trainings:
+    for (topic, identifier, title) in all_trainings:
+        # Skip the overall one.
+        if not len(identifier):
+            continue
+
         topic_counts[topic] += 1
 
     training_keys = sorted(trainings.keys())
@@ -93,7 +119,7 @@ if __name__ == '__main__':
         os.makedirs(args.output)
 
     # Also check/create the badge cache directory.
-    CACHE_DIR = os.path.join(args.output, '.cache')
+    CACHE_DIR = os.path.join(args.output, 'cache')
     if not os.path.exists(CACHE_DIR):
         os.makedirs(CACHE_DIR)
 
@@ -118,19 +144,6 @@ if __name__ == '__main__':
                 if instance not in data[topic][training]:
                     data[topic][training][instance] = {'supported': False}
 
-    index_html = open(os.path.join(args.output, 'index.html'), 'w')
-
-    index_html.write("""
-<html><head></head>
-<body>
-<h1>Galaxy Training Support</h1>
-<p>
-These badges are the results of regularly checking in with your Galaxy
-instance to see if you support the various training courses that are available
-to end users. This requires having all of the appropriate tools installed and
-possibly datasets in specifically named data libraries.
-</p>""")
-
     # Map of instance -> badges
     instance_badges = {}
     # Count of tutorials in each topic.
@@ -151,18 +164,17 @@ possibly datasets in specifically named data libraries.
                 # in case they ever go out of compliance.)
                 if is_supported:
                     output_filename = badge_it(
-                        trainings[training],
+                        trainings[topic + '/' + training],
                         'Supported', 'green',
-                        CACHE_DIR, instance, training, args.output
+                        CACHE_DIR, (instance, topic, training), args.output
                     )
                     instance_badges[instance][topic].append(output_filename)
                 else:
                     badge_it(
-                        trainings[training],
+                        trainings[topic + '/' + training],
                         'Unsupported', 'lightgrey',
-                        CACHE_DIR, instance, training, args.output
+                        CACHE_DIR, (instance, topic, training), args.output
                     )
-
 
     # All instances, not just checked
     for instance in sorted(instance_badges):
@@ -171,15 +183,6 @@ possibly datasets in specifically named data libraries.
         if total == 0:
             continue
 
-        index_html.write('<h2 id="' + safe_name(instance, dashes=True) + '">' + instance + '</h2>')
-        index_html.write('<h3>Per-Training Badge</h3>')
-        index_html.write('<ul>')
-        for topic in instance_badges[instance]:
-            for badge in instance_badges[instance][topic]:
-                index_html.write('<li><img src="' + badge + '"/></li>')
-        index_html.write('</ul>')
-        index_html.write('<h3>Training Group Badges</h3>')
-        index_html.write('<ul>')
         for topic in instance_badges[instance]:
             # Get the number of badges in this topic.
             count = len(instance_badges[instance][topic])
@@ -192,12 +195,6 @@ possibly datasets in specifically named data libraries.
                 color = 'red'
 
             output_filename = badge_it(
-                topic, '%s%%2f%s' % (count, topic_counts[topic]), color,
-                CACHE_DIR, instance, topic, args.output
+                trainings[topic + '/'], '%s%%2f%s' % (count, topic_counts[topic]), color,
+                CACHE_DIR, (instance, topic), args.output
             )
-
-            if count > 0:
-                index_html.write('<li><img src="' + output_filename + '"/></li>')
-        index_html.write('</ul>')
-
-    index_html.write("</body></html>")
