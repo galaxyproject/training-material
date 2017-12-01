@@ -46,7 +46,7 @@ class: center, middle, inverse
 
   {% for requirement in topic.requirements %}
     {% if requirement.type == "internal" %}
-  - [{{ requirement.title }}]({{ site.url }}{{ requirement.link }})
+  - [{{ requirement.title }}]({{ site.url }}/topics/{{ requirement.link }})
     {% elsif material.type == "external" %}
   - [{{ requirement.title }}]({{ requirement.link }})
     {% endif %}
@@ -55,7 +55,7 @@ class: center, middle, inverse
   {% if page.tutorial_name %}
     {% for requirement in tutorial.requirements %}
       {% if requirement.type == "internal" %}
-  - [{{ requirement.title }}]({{ site.url }}{{ requirement.link }})
+  - [{{ requirement.title }}]({{ site.url }}/topics/{{ requirement.link }})
       {% elsif material.type == "external" %}
   - [{{ requirement.title }}]({{ requirement.link }})
       {% endif %}

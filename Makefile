@@ -30,9 +30,24 @@ build: ## build files but do not run a server
 	${JEKYLL} build
 .PHONY: build
 
-check: build ## validate HTML
+check-html: build ## validate HTML
+	bundle exec htmlproofer --http-status-ignore 405,999 --url-ignore "/.*localhost.*/","/.*vimeo\.com.*/" --file-ignore "/.*\/files\/.*/" ./_site
+.PHONY: check-html
+
+check-links-gh-pages:  ## validate HTML on gh-pages branch (for daily cron job)
+	bundle exec htmlproofer --http-status-ignore 405,999 --url-ignore "/.*localhost.*/","/.*vimeo\.com.*/" --file-ignore "/.*\/files\/.*/" .
+	find . -path "**/slides*.html" | xargs -L 1 -I '{}' sh -c "awesome_bot --allow 405 --allow-redirect --white-list localhost,127.0.0.1,fqdn --allow-ssl --allow-dupe --skip-save-results -f {}"
+.PHONY: check-links-gh-pages
+
+check-yaml: ## lint yaml files
 	yamllint .
-	timeout 120s bundle exec htmlproofer --http-status-ignore 405,999 --url-ignore "/.*localhost.*/","/.*vimeo\.com.*/" --file-ignore "/.*\/files\/.*/" ./_site
+.PHONY: check-yaml
+
+check-slides: build  ## check the markdown-formatted links in slides
+	find _site -path "**/slides*.html" | xargs -L 1 -I '{}' sh -c "awesome_bot --allow 405 --allow-redirect --white-list localhost,127.0.0.1,fqdn --allow-ssl --allow-dupe --skip-save-results -f {}"
+.PHONY: check-slides
+
+check: check-yaml check-html check-slides  ## run all checks
 .PHONY: check
 
 clean: ## clean up junk files
