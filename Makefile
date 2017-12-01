@@ -67,14 +67,14 @@ pdf: detached-serve ## generate the PDF of the tutorials and slides
             --headless \
             --disable-gpu \
             --print-to-pdf="$$name" \
-            "$(SITE_URL)/$$t" \
+            "$(SITE_URL)/$$t?with-answers" \
             2> /dev/null ; \
     done
 	@for s in $(SLIDES); do \
 		name="$(PDF_DIR)/$$(echo $$s | tr '/' '-' | sed -e 's/html/pdf/' -e 's/topics-//' -e 's/tutorials-//')"; \
 		`npm bin`/decktape \
 			automatic \
-			"$(SITE_URL)/$$s" \
+			"$(SITE_URL)/$$s?with-answers" \
 			"$$name" \
             2> /dev/null ; \
 	done
