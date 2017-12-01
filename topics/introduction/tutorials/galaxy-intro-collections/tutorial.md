@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
-topic_name: usegalaxy
-tutorial_name: collections
+topic_name: introduction
+tutorial_name: galaxy-intro-collections
 ---
 
 Here we will show Galaxy features designed to help with the analysis of large numbers of samples. When you have just a few samples - clicking through them is easy. But once you've got hundreds - it becomes very annoying. In Galaxy we have introduced **Dataset collections** that allow you to combine numerous datasets in a single entity that can be easily manipulated.

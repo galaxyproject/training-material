@@ -1,6 +1,6 @@
 ---
 layout: tutorial_hands_on
-topic_name: usegalaxy
+topic_name: variant-analysis
 tutorial_name: dunovo
 ---
 
