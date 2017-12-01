@@ -81,9 +81,11 @@ layout: base
                                 {% endif %}
                                 {% if instances[topic.name] and instances[topic.name][tutorial.name] %}
                                     {% for inst in instances[topic.name][tutorial.name] %}
+                                        {% if inst[1].supported %}
                                         <a class="dropdown-item" href="{{ inst[1].url }}" title="{{ inst[0] }}">
                                             {{ inst[0] }}
                                         </a>
+                                        {% endif %}
                                     {% endfor %}
                                 {% endif %}
                             </div>
