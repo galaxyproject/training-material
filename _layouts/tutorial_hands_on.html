@@ -66,27 +66,30 @@ layout: base
                     {% endif %}
 
                     {% if topic.docker_image and topic.docker_image != "" or instances[topic.name] and instances[topic.name][tutorial.name] %}
-                    <li class="nav-item">
-                        <div class="dropdown">
-                            <a href="#" class="nav-link" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+                        <li class="nav-item dropdown">
+                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
                                 {% icon instances %} Galaxy Instances
-                                <b class="caret"></b>
                             </a>
-                            <ul class="dropdown-menu">
-                            {% if topic.docker_image and topic.docker_image != "" %}
-                                <li><a href="{{ site.github_repository }}/tree/master/topics/{{ topic.name }}/docker" title="Docker image for this tutorial">{% icon docker_image %} Docker image</a></li>
-                            {% endif %}
-                            {% if topic.docker_image and topic.docker_image != "" and instances[topic.name] and instances[topic.name][tutorial.name] %}
-                                <hr>
-                            {% endif %}
-                            {% if instances[topic.name] and instances[topic.name][tutorial.name] %}
-                                {% for inst in instances[topic.name][tutorial.name] %}
-                                    <li><a href="{{ inst[1].url }}" title="{{ inst[0] }}">{{ inst[0] }}</a></li>
-                                {% endfor %}
-                            {% endif %}
-                            </ul>
-                        </div>
-                    </li>
+                            <div class="dropdown-menu">
+                                {% if topic.docker_image and topic.docker_image != "" %}
+                                    <a class="dropdown-item" href="{{ site.github_repository }}/tree/master/topics/{{ topic.name }}/docker" title="Docker image for this tutorial">
+                                        {% icon docker_image %} Docker image
+                                    </a>
+                                {% endif %}
+                                {% if topic.docker_image and topic.docker_image != "" and instances[topic.name] and instances[topic.name][tutorial.name] %}
+                                    <div class="dropdown-divider"></div>
+                                {% endif %}
+                                {% if instances[topic.name] and instances[topic.name][tutorial.name] %}
+                                    {% for inst in instances[topic.name][tutorial.name] %}
+                                        {% if inst[1].supported %}
+                                        <a class="dropdown-item" href="{{ inst[1].url }}" title="{{ inst[0] }}">
+                                            {{ inst[0] }}
+                                        </a>
+                                        {% endif %}
+                                    {% endfor %}
+                                {% endif %}
+                            </div>
+                        </li>
                     {% endif %}
 
                     {% if tutorial.tutorial_galaxy_instance %}
