@@ -125,7 +125,7 @@ layout: base
         <ul>
         {% for maintainer in topic.maintainers %}
             <li>
-                <a href="/hall-of-fame#{{ maintainer }}">{{ contributors[maintainer].name }}</a>
+                <a href="{{ site.baseurl }}/hall-of-fame#{{ maintainer }}">{{ contributors[maintainer].name }}</a>
                 {% if contributors[maintainer].email and contributors[maintainer].email != "" %}
                     (<a href="mailto:{{ contributors[maintainer].email }}">{{ contributors[maintainer].email }}</a>)
                 {% endif %}
@@ -155,7 +155,7 @@ layout: base
         {% for username in contributors_list %}
             {% assign contributor = contributors[username] %}
             <li>
-                <a href="/hall-of-fame#{{ username }}"> {{ contributor.name }}</a>
+                <a href="{{ site.baseurl }}/hall-of-fame#{{ username }}"> {{ contributor.name }}</a>
             </li>
         {% endfor %}
         </ul>
