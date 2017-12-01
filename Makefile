@@ -26,11 +26,11 @@ build: clean ## build files but do not run a server
 .PHONY: build
 
 check-html: build ## validate HTML
-	bundle exec htmlproofer --assume-extension --http-status-ignore 405,999 --url-ignore "/.*localhost.*/","/.*vimeo\.com.*/","/.*gitter\.im.*/" --file-ignore "/.*\/files\/.*/","/.*\/node_modules\/.*/" --allow-hash-href ./_site
+	bundle exec htmlproofer --assume-extension --http-status-ignore 405,503,999 --url-ignore "/.*localhost.*/","/.*vimeo\.com.*/","/.*gitter\.im.*/" --file-ignore "/.*\/files\/.*/","/.*\/node_modules\/.*/" --allow-hash-href ./_site
 .PHONY: check-html
 
 check-links-gh-pages:  ## validate HTML on gh-pages branch (for daily cron job)
-	bundle exec htmlproofer --assume-extension --http-status-ignore 405,999 --url-ignore "/.*localhost.*/","/.*vimeo\.com.*/","/.*gitter\.im.*/" --file-ignore "/.*\/files\/.*/" --allow-hash-href .
+	bundle exec htmlproofer --assume-extension --http-status-ignore 405,503,999 --url-ignore "/.*localhost.*/","/.*vimeo\.com.*/","/.*gitter\.im.*/" --file-ignore "/.*\/files\/.*/" --allow-hash-href .
 	find . -path "**/slides*.html" | xargs -L 1 -I '{}' sh -c "awesome_bot --allow 405 --allow-redirect --white-list localhost,127.0.0.1,fqdn --allow-ssl --allow-dupe --skip-save-results -f {}"
 .PHONY: check-links-gh-pages
 
