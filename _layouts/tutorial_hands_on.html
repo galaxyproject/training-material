@@ -11,7 +11,7 @@ layout: base
 {% assign contributors = site.data['contributors'] %}
 
 <header>
-    <nav class="navbar navbar-expand-md navbar-dark">
+    <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container">
             <a class="navbar-brand" href="{{ site.baseurl }}/">
                 <img src="{{ site.baseurl }}/{{ site.small_logo }}" height="30" alt="Galaxy Training Network logo">
@@ -45,10 +45,21 @@ layout: base
                             {% endif %}
                         {% endfor %}
                         {% if intro_link %}
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ site.baseurl }}/topics/{{ topic.name }}/slides" title="Introduction slides">
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Introduction slides">
                                     {% icon slides %} Introduction slides
                                 </a>
+                                <div class="dropdown-menu">
+                                    {% for material in topic.material %}
+                                        {% if material.enable != "false" %}
+                                            {% if material.type == "introduction" %}
+                                                <a class="dropdown-item" href="{{ site.baseurl }}/topics/{{ topic.name }}/slides/{{ material.name }}.html">
+                                                    {{ material.title }}
+                                                </a>
+                                            {% endif %}
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
                             </li>
                         {% endif %}
                     {% endif %}
