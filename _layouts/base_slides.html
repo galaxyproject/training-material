@@ -46,7 +46,7 @@ class: center, middle, inverse
 
   {% for requirement in topic.requirements %}
     {% if requirement.type == "internal" %}
-  - [{{ requirement.title }}]("{{ "/" | prepend: site.baseurl }}/topics/{{ requirement.link }}")
+  - [{{ requirement.title }}]({{ site.baseurl }}/topics/{{ requirement.link }})
     {% elsif material.type == "external" %}
   - [{{ requirement.title }}]({{ requirement.link }})
     {% endif %}
@@ -55,7 +55,7 @@ class: center, middle, inverse
   {% if page.tutorial_name %}
     {% for requirement in tutorial.requirements %}
       {% if requirement.type == "internal" %}
-  - [{{ requirement.title }}]("{{ "/" | prepend: site.baseurl }}/topics/{{ requirement.link }}")
+  - [{{ requirement.title }}]({{ site.baseurl }}/topics/{{ requirement.link }})
       {% elsif material.type == "external" %}
   - [{{ requirement.title }}]({{ requirement.link }})
       {% endif %}
@@ -82,7 +82,7 @@ This material is the result of a collaborative work. Thanks the [Galaxy Training
 {% if page.layout == "tutorial_slides" %}
 .footnote[Found a typo? Something is wrong in this tutorial? <br/>Edit it on [GitHub]({{ site.github_repository }}/tree/master/topics/{{ topic.name }}/tutorials/{{ page.tutorial_name }}/slides.html)]
 {% elsif page.layout == "introduction_slides" %}
-.footnote[Found a typo? Something is wrong in this tutorial? <br/>Edit it on [GitHub]({{ site.github_repository }}/tree/master/topics/{{ topic.name }}/slides/index.html)]
+.footnote[Found a typo? Something is wrong in this tutorial? <br/>Edit it on [GitHub]({{ site.github_repository }}/tree/master/topics/{{ topic.name }}/slides/{{ page.name }})]
 {% endif %}
     </textarea>
     <script src="{{ "/assets/js/remark-latest.min.js" | prepend: site.baseurl }}" type="text/javascript">
