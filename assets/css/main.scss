@@ -84,6 +84,7 @@ footer {
     .navbar-collapse {
         justify-content: flex-end;
         align-items: flex-end;
+        min-width: 0;
     }
 }
 
@@ -236,13 +237,42 @@ footer {
     }
 }
 
-// this is a fix to get the hamburger button (menu/navbar) correctly placed on
+// This is a fix to get the hamburger button (menu/navbar) correctly placed on
 // small screens.
 @media (max-width: 575px) {
     .navbar > .container {
         position: initial;
         margin-left: initial;
         margin-right: initial;
+    }
+}
+
+// This applies a "dark" style to the dropdown menus on small devices since
+// Bootstrap v4 does not do that by default.
+@media (max-width: 992px) {
+    .navbar {
+        .dropdown-menu {
+            background-color: transparent;
+            border-color: transparent;
+        }
+
+        .dropdown-item {
+            color: rgba($white, .5);
+
+            &:hover,
+            &:focus,
+            &:active {
+                background-color: transparent;
+                color: rgba($white, .75);
+            }
+        }
+
+        .nav-item,
+        .dropdown-item {
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
     }
 }
 
