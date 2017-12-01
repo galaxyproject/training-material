@@ -26,11 +26,11 @@ build: clean ## build files but do not run a server
 .PHONY: build
 
 check-html: build ## validate HTML
-	bundle exec htmlproofer --assume-extension --http-status-ignore 405,999 --url-ignore "/.*localhost.*/","/.*vimeo\.com.*/","/.*gitter\.im.*/" --file-ignore "/.*\/files\/.*/","/.*\/node_modules\/.*/" --allow-hash-href ./_site
+	bundle exec htmlproofer --assume-extension --http-status-ignore 405,503,999 --url-ignore "/.*localhost.*/","/.*vimeo\.com.*/","/.*gitter\.im.*/" --file-ignore "/.*\/files\/.*/","/.*\/node_modules\/.*/" --allow-hash-href ./_site
 .PHONY: check-html
 
 check-links-gh-pages:  ## validate HTML on gh-pages branch (for daily cron job)
-	bundle exec htmlproofer --assume-extension --http-status-ignore 405,999 --url-ignore "/.*localhost.*/","/.*vimeo\.com.*/","/.*gitter\.im.*/" --file-ignore "/.*\/files\/.*/" --allow-hash-href .
+	bundle exec htmlproofer --assume-extension --http-status-ignore 405,503,999 --url-ignore "/.*localhost.*/","/.*vimeo\.com.*/","/.*gitter\.im.*/" --file-ignore "/.*\/files\/.*/" --allow-hash-href .
 	find . -path "**/slides*.html" | xargs -L 1 -I '{}' sh -c "awesome_bot --allow 405 --allow-redirect --white-list localhost,127.0.0.1,fqdn --allow-ssl --allow-dupe --skip-save-results -f {}"
 .PHONY: check-links-gh-pages
 
@@ -67,14 +67,14 @@ pdf: detached-serve ## generate the PDF of the tutorials and slides
             --headless \
             --disable-gpu \
             --print-to-pdf="$$name" \
-            "$(SITE_URL)/$$t" \
+            "$(SITE_URL)/$$t?with-answers" \
             2> /dev/null ; \
     done
 	@for s in $(SLIDES); do \
 		name="$(PDF_DIR)/$$(echo $$s | tr '/' '-' | sed -e 's/html/pdf/' -e 's/topics-//' -e 's/tutorials-//')"; \
 		`npm bin`/decktape \
 			automatic \
-			"$(SITE_URL)/$$s" \
+			"$(SITE_URL)/$$s?with-answers" \
 			"$$name" \
             2> /dev/null ; \
 	done
