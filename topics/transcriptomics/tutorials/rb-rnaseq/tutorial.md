@@ -1,6 +1,6 @@
 ---
 layout: tutorial_hands_on
-topic_name: usegalaxy
+topic_name: transcriptomics
 tutorial_name: rb-rnaseq
 ---
 
