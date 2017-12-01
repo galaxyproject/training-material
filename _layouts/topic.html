@@ -33,8 +33,8 @@ layout: base
         <table class="table table-responsive table-striped">
             <tr>
                 <th>Lesson</th>
-                <th>Hands-on</th>
                 <th>Slides</th>
+                <th>Hands-on</th>
 
                 {% if topic.type != "admin-dev" %}
                 <th>Input dataset</th>
@@ -48,7 +48,6 @@ layout: base
                         <td>{{ material.title }}</td>
 
                         {% if material.type == "introduction" %}
-                            <td></td>
                             <td>
                                 {% if material.slides == "yes" %}
                                 <a href="{{ site.baseurl }}/topics/{{ topic.name }}/slides/{{ material.name }}.html">
@@ -56,11 +55,20 @@ layout: base
                                 </a>
                                 {% endif %}
                             </td>
+                            <td></td>
                             {% if topic.type != "admin-dev" %}
                                 <td></td>
                                 <td></td>
                             {% endif %}
                         {% elsif material.type == "tutorial" %}
+                            <td>
+                                {% if material.slides == "yes" %}
+                                <a href="{{ site.baseurl }}/topics/{{ topic.name }}/tutorials/{{ material.name }}/slides.html">
+                                  {% icon slides %}
+                                </a>
+                                {% endif %}
+                            </td>
+
                             <td>
                                 {% if material.hands_on == "external" %}
                                 <a href="{{ material.hands_on_url }}">
@@ -73,14 +81,6 @@ layout: base
                                 {% elsif material.hands_on == "github" %}
                                 <a href="{{ site.github_repository }}/tree/master/topics/{{ topic.name }}/tutorials/{{ material.name }}/tutorial.md">
                                   {% icon tutorial %}
-                                </a>
-                                {% endif %}
-                            </td>
-
-                            <td>
-                                {% if material.slides == "yes" %}
-                                <a href="{{ site.baseurl }}/topics/{{ topic.name }}/tutorials/{{ material.name }}/slides.html">
-                                  {% icon slides %}
                                 </a>
                                 {% endif %}
                             </td>
