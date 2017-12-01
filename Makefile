@@ -34,7 +34,7 @@ check-links-gh-pages:  ## validate HTML on gh-pages branch (for daily cron job)
 .PHONY: check-links-gh-pages
 
 check-yaml: ## lint yaml files
-	yamllint .
+	find . -path "**/*.yaml" | xargs -L 1 -I '{}' sh -c "yamllint {}"
 .PHONY: check-yaml
 
 check-slides: build  ## check the markdown-formatted links in slides
