@@ -3,6 +3,7 @@
 
 $white: #fff;
 $gray: #777;
+$light-gray: #ddd;
 $bg-color: #2c3143;
 $menu-color: #9d9d9d;
 $text-color: #292b2c;
@@ -163,6 +164,74 @@ footer {
 
         &.warning-box {
             @include tutorial-box($warning-color);
+        }
+    }
+}
+
+.contributors {
+    padding: 0;
+
+    .carousel-item {
+        align-items: flex-start;
+        flex-wrap: wrap;
+        flex-direction: row;
+        justify-content: space-around;
+    }
+
+    .carousel-item.active,
+    .carousel-item-next,
+    .carousel-item-prev {
+        display: flex;
+    }
+
+    .hall-of-fame-hero {
+        margin: 0;
+        width: 20%;
+
+        .name {
+            font-size: 0.7em;
+        }
+    }
+}
+
+.hall-of-fame {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.hall-of-fame-hero {
+    width: 140px;
+    margin: 1rem;
+    text-align: center;
+
+    .name {
+        margin-top: 0.5rem;
+    }
+
+    .contact-items {
+        margin-top: 0.2rem;
+    }
+
+    .thumbnail img {
+        background-color: white;
+        border-radius: 20px;
+        border: 1px solid $light-gray;
+        padding: 5px;
+        width: 100%;
+        -webkit-transition: border 0.2s ease-in-out;
+        -o-transition: border 0.2s ease-in-out;
+        transition: border 0.2s ease-in-out;
+    }
+
+    a.thumbnail {
+        &:hover,
+        &:focus,
+        &:active {
+            img {
+                border-color: $menu-color;
+            }
         }
     }
 }

@@ -26,16 +26,16 @@ build: clean ## build files but do not run a server
 .PHONY: build
 
 check-html: build ## validate HTML
-	bundle exec htmlproofer --http-status-ignore 405,999 --url-ignore "/.*localhost.*/","/.*vimeo\.com.*/" --file-ignore "/.*\/files\/.*/" ./_site
+	bundle exec htmlproofer --assume-extension --http-status-ignore 405,999 --url-ignore "/.*localhost.*/","/.*vimeo\.com.*/","/.*gitter\.im.*/" --file-ignore "/.*\/files\/.*/","/.*\/node_modules\/.*/" ./_site
 .PHONY: check-html
 
 check-links-gh-pages:  ## validate HTML on gh-pages branch (for daily cron job)
-	bundle exec htmlproofer --http-status-ignore 405,999 --url-ignore "/.*localhost.*/","/.*vimeo\.com.*/" --file-ignore "/.*\/files\/.*/" .
+	bundle exec htmlproofer --assume-extension --http-status-ignore 405,999 --url-ignore "/.*localhost.*/","/.*vimeo\.com.*/","/.*gitter\.im.*/" --file-ignore "/.*\/files\/.*/" .
 	find . -path "**/slides*.html" | xargs -L 1 -I '{}' sh -c "awesome_bot --allow 405 --allow-redirect --white-list localhost,127.0.0.1,fqdn --allow-ssl --allow-dupe --skip-save-results -f {}"
 .PHONY: check-links-gh-pages
 
 check-yaml: ## lint yaml files
-	yamllint .
+	find . -path "**/*.yaml" | xargs -L 1 -I '{}' sh -c "yamllint {}"
 .PHONY: check-yaml
 
 check-slides: build  ## check the markdown-formatted links in slides
