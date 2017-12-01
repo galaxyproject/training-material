@@ -13,11 +13,11 @@ The second type of chemical tags are isotopic. They are chemically identical, bu
 Incorporation of stable isotopes results in different peptide masses on MS1 level, which give rise to coeluting ion traces in the TIC with a mass difference typical for each different chemical tag.
 
 This tutorial deals with protein quantitation via stable isotope labelling (SIL). We will use tools of the OpenMS suite.  
-Because we solely cover *quantitation*, you need to perform peptide and protein ID in beforehand. To learn about protein ID in Galaxy, please consider [this tutorial]({{site.url}}/topics/proteomics/tutorials/protein-id-sg-ps/tutorial.html).
+Because we solely cover *quantitation*, you need to perform peptide and protein ID in beforehand. To learn about protein ID in Galaxy, please consider [this tutorial]({{site.baseurl}}/topics/proteomics/tutorials/protein-id-sg-ps/tutorial.html).
 
 This tutorial covers *relative* quantitation only (i.e. comparison of abundances in different samples, no *absolute* quantitation of peptides / proteins).
 
-If you still are in the planning phase of your quantitative proteomics experiment, you may want to consider our tutorial on different [quantitation methods]({{site.url}}/topics/proteomics/tutorials/labelfree-vs-labelled/tutorial.html) first.
+If you still are in the planning phase of your quantitative proteomics experiment, you may want to consider our tutorial on different [quantitation methods]({{site.baseurl}}/topics/proteomics/tutorials/labelfree-vs-labelled/tutorial.html) first.
 
 > ### {% icon hands_on %} Hands-on: Introduction
 > In the Hands-on section of this tutorial, we will use a quantitative comparison of **HEK _OR_ E.coli** cell lysate as a test dataset. In this experiment, the very same cell lysate was once labelled with light, once with heavy **dimethyl _OR_ SILAC** and both samples were subsequently mixed in a certain ratio. For a detailed description of the dataset, please refer to the description in the [PRIDE archive]().

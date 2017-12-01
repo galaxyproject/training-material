@@ -21,7 +21,7 @@ The N-Tails technique was originally designed to research protease biology and h
 > Lacking discrimination between direct and indirect effects is a general restriction also in other N-terminal screening techniques (e.g. COFRADIC), and is not specific for the N-Tails technique.
 {: .comment}
 
-This workflow was originally built in the OpenMS framework "TOPPAS" and published in [Lai, Weisser et al., MCP, 2016](https://www.ncbi.nlm.nih.gov/pubmed/27087653). It was converted to OpenMS v2.1, rebuild for the Galaxy framework and tested on the original dataset by Melanie Föll. It was designed for data analysis of a three samples combined in one MS run, a technique based on dimethyl stable isotope labeling (SIL). For more information on SIL, consult [this tutorial]({{site.url}}/topics/proteomics/tutorials/protein-quant-sil/tutorial.html). The original data were generated using pre-fractionation. Thus, peptides of one biological experiment are measured in multiple consecutive MS runs (one run per fraction).
+This workflow was originally built in the OpenMS framework "TOPPAS" and published in [Lai, Weisser et al., MCP, 2016](https://www.ncbi.nlm.nih.gov/pubmed/27087653). It was converted to OpenMS v2.1, rebuild for the Galaxy framework and tested on the original dataset by Melanie Föll. It was designed for data analysis of a three samples combined in one MS run, a technique based on dimethyl stable isotope labeling (SIL). For more information on SIL, consult [this tutorial]({{site.baseurl}}/topics/proteomics/tutorials/protein-quant-sil/tutorial.html). The original data were generated using pre-fractionation. Thus, peptides of one biological experiment are measured in multiple consecutive MS runs (one run per fraction).
 
 The figure below gives an overview of the used Galaxy nodes. For further description of the workflow, please consider the [original publication](https://www.ncbi.nlm.nih.gov/pubmed/27087653).
 
@@ -34,7 +34,7 @@ Notice that the given digestion enzyme is "ArgC", even if the proteins were dige
 The workflow needs two input files:
 
   1) A collection of mzML files (multiple fractions of the same experiment).
-  2) A FASTA protein database for the organism of interest. For more information on protein databases, consult [this tutorial]({{site.url}}/topics/proteomics/tutorials/database-handling/tutorial.html)
+  2) A FASTA protein database for the organism of interest. For more information on protein databases, consult [this tutorial]({{site.baseurl}}/topics/proteomics/tutorials/database-handling/tutorial.html)
 
 ## Customizing the Workflow
 

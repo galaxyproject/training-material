@@ -72,7 +72,7 @@ Both files contain the reads that belong to chromosome 4 of a paired-end sample.
 
 ## Quality control
 
-For quality control, we use similar tools as described in [NGS-QC tutorial]({{site.url}}/topics/sequence-analysis): [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/) and [Trim Galore](https://www.bioinformatics.babraham.ac.uk/projects/trim_galore/).
+For quality control, we use similar tools as described in [NGS-QC tutorial]({{site.baseurl}}/topics/sequence-analysis): [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/) and [Trim Galore](https://www.bioinformatics.babraham.ac.uk/projects/trim_galore/).
 
 > ### {% icon hands_on %} Hands-on: Quality control
 >
@@ -131,8 +131,8 @@ To make sense of the reads, their positions within the *Drosophila melanogaster*
 
 > ### {% icon comment %} Comment
 >
-> Do you want to learn more about the principles behind mapping? Follow our [training]({{site.url}}/topics/sequence-analysis/)
-{: .comment}
+> Do you want to learn more about the principles behind mapping? Follow our [training]({{site.baseurl}}/topics/sequence-analysis/)
+> {: .comment}
 
 Because in the case of a eukaryotic transcriptome, most reads originate from processed mRNAs lacking introns, they cannot be simply mapped back to the genome as we normally do for DNA data. Instead the reads must be separated into two categories:
 

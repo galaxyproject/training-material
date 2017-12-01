@@ -5,10 +5,10 @@ DECKTAPE_VERSION=1.0.0
 DECKTAPE_DIR=decktape-$(DECKTAPE_VERSION)
 PHANTOMJS_BIN=https://github.com/astefanutti/decktape/releases/download/v$(DECKTAPE_VERSION)/phantomjs-linux-x86-64
 DECKTAPE_ARCHIVE=https://github.com/astefanutti/decktape/archive/v$(DECKTAPE_VERSION).tar.gz
-TUTORIALS=$(shell find _site -name 'tutorial.html' | sed 's/_site\///')
-SLIDES=$(shell find _site -name 'slides.html' | sed 's/_site\///')
-SLIDES+=$(shell find _site/*/*/slides/* | sed 's/_site\///')
-SITE_URL=http://localhost:4000
+TUTORIALS=$(shell find _site/training-material -name 'tutorial.html' | sed 's/_site\/training-material\///')
+SLIDES=$(shell find _site/training-material -name 'slides.html' | sed 's/_site\/training-material\///')
+SLIDES+=$(shell find _site/training-material/*/*/slides/* | sed 's/_site\/training-material\///')
+SITE_URL=http://localhost:4000/training-material
 PDF_DIR=_pdf
 
 ifeq ($(shell uname -s),Darwin)
@@ -19,15 +19,15 @@ endif
 default: help
 
 serve: ## run a local server
-	${JEKYLL} serve
+	${JEKYLL} serve -d _site/training-material
 .PHONY: serve
 
-detached-serve: ## run a local server in detached mode
-	${JEKYLL} serve --detach
+detached-serve: clean ## run a local server in detached mode
+	${JEKYLL} serve --detach -d _site/training-material
 .PHONY: detached-serve
 
-build: ## build files but do not run a server
-	${JEKYLL} build
+build: clean ## build files but do not run a server
+	${JEKYLL} build -d _site/training-material
 .PHONY: build
 
 check-html: build ## validate HTML

@@ -146,7 +146,7 @@ Once the tutorial is ready, we need to extract workflows with the different step
 ## Adding a Galaxy Interactive Tour
 
 A Galaxy Interactive Tour is a way to go through an entire analysis, step by step inside Galaxy in an interactive and explorative way.
-It is a great way to run the tutorial directly inside Galaxy. To learn more about creating a Galaxy tour please have a look at our [dedicated tour training]({{site.url}}/topics/training/tutorials/create-new-tutorial-tours/tutorial.html).
+It is a great way to run the tutorial directly inside Galaxy. To learn more about creating a Galaxy tour please have a look at our [dedicated tour training]({{site.baseurl}}/topics/training/tutorials/create-new-tutorial-tours/tutorial.html).
 
 ## Testing the technical infrastructure
 

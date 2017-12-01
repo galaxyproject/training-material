@@ -90,7 +90,7 @@ In the following we will process a dataset with a mapper, 'Bowtie2', and we will
 
 # Visualization
 
-A general description of the user interface of the IGV browser can be read here: [IGV Browser description]({{site.url}}/topics/introduction/tutorials/igv-introduction/tutorial.html)
+A general description of the user interface of the IGV browser can be read here: [IGV Browser description]({{site.baseurl}}/topics/introduction/tutorials/igv-introduction/tutorial.html)
 
 > ### {% icon hands_on %} Hands-on: Visualization with the IGV browser
 >

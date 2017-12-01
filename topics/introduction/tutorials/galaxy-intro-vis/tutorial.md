@@ -33,7 +33,7 @@ tutorial_name: galaxy-intro-vis
 
 General introduction about the topic and then an introduction of the tutorial (the questions and the objectives). It is nice also to have a scheme to sum up the pipeline used during the tutorial. The idea is to give to trainees insight into the content of the tutorial and the (theoretical and technical) key concepts they will learn.
 
-It could be nice to use: [Using the Integrative Genomics Viewer]({{site.url}}/topics/introduction/tutorials/igv-introduction/tutorial.html)
+It could be nice to use: [Using the Integrative Genomics Viewer]({{site.baseurl}}/topics/introduction/tutorials/igv-introduction/tutorial.html)
 
 # Part 1
 

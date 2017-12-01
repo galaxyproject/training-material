@@ -60,7 +60,7 @@ The first file we will fill is the `metadata.yaml` file describing the metadata 
     - `link`: relative for internal (inside training material) requirement or full for external requirement)
     - `type`: the type of link (`internal` or `external`)
 
-This information is used to automatically make the tutorial available on the online website: [{{site.url}} ]({{site.url}})
+This information is used to automatically make the tutorial available on the online website: [{{site.url}}{{ site.baseurl}} ]({{site.url}}{{ site.baseurl}})
 
 > ### {% icon hands_on %} Hands-on: Fill the basic metadata
 >
