@@ -6,6 +6,7 @@ import yaml
 import requests
 import io
 import pandas as pd
+import multiprocessing.pool
 
 
 def extract_public_galaxy_servers():
@@ -16,73 +17,100 @@ def extract_public_galaxy_servers():
     return public_galaxy_servers
 
 
+def fetch_and_extract_individual_server_tools(server):
+    # request the tools via the API
+    url = '%s/api/tools' % server['url'].rstrip('/')
+    try:
+        response = requests.get(url, timeout=20)
+    except:
+        print(server['name'] + " Error of connection")
+        return
+
+    # check status
+    if response.status_code != requests.codes.ok:
+        print(server['name'] + " Bad status (%s)" % response.status_code)
+        return
+
+    # check content
+    if response.text.find("</html>") != -1:
+        print(server['name'] + " No JSON output")
+        return
+
+    # extract the list of tools in this instance
+    found_tools = set()
+    try:
+        response_json = response.json()
+    except json.decoder.JSONDecodeError:
+        print(server['name'] + " Invalid JSON")
+        return
+
+    for section in response_json:
+        if 'elems' in section:
+            for tool in section['elems']:
+                found_tools.add('/'.join( tool['id'].split('/')[:4] ))
+
+    return server['name'], {
+        'url': server['url'],
+        'tools': found_tools
+    }
+
+
 def extract_public_galaxy_servers_tools():
     """Extract the tools from the public Galaxy servers using their API"""
     servers = extract_public_galaxy_servers()
     server_tools = {}
-    for index, server in servers.iterrows():
-        print(server['name'])
-        # request the tools via the API
-        url = '%s/api/tools' % server['url'].rstrip('/')
-        try:
-            response = requests.get(url, timeout=20)
-        except:
-            print("Error of connection")
-        # check status
-        if response.status_code != requests.codes.ok:
-            print("Bad status (%s)" % response.status_code)
-            continue
-        # check content
-        if response.text.find("</html>") != -1:
-            print("No JSON output")
-            continue
-        # extract the list of tools in this instance
-        found_tools = set()
-        try:
-            response_json = response.json()
-        except json.decoder.JSONDecodeError:
-            print("Invalid JSON")
-            continue
 
-        for section in response_json:
-            if 'elems' in section:
-                for tool in section['elems']:
-                    found_tools.add('/'.join( tool['id'].split('/')[:4] ))
-        # save the server with its tools
-        server_tools[server['name']] = {
-            'url': server['url'],
-            'tools': found_tools
-        }
+    to_process = []
+    for index, server in servers.iterrows():
+        to_process.append(server)
+
+    pool = multiprocessing.pool.ThreadPool(processes=20)
+    processed = pool.map(fetch_and_extract_individual_server_tools, to_process, chunksize=1)
+    pool.close()
+
+    for server_data in processed:
+        if server_data:
+            server_tools[server_data[0]] = server_data[1]
+
     return server_tools
 
 
-def extract_tool_list(tool_filepath):
-    """Extract the list of tools for the tutorial"""
+def check_tutorial(tool_filepath, server_tools):
+    """Check which public Galaxy servers can run the tool in a tutorial"""
+
+    # Extract the list of tools for the tutorial
     with open(tool_filepath, "r") as f:
         tool_yaml = yaml.safe_load(f)
-    tools = set()
+
+    tutorial_tools = set()
     for tool in tool_yaml['tools']:
-        tools.add('toolshed.g2.bx.psu.edu/repos/%s/%s' % (tool['owner'], tool['name']))
-    return tools
+        tutorial_tools.add('toolshed.g2.bx.psu.edu/repos/%s/%s' % (tool['owner'], tool['name']))
 
+    servers_supported = {}
+    servers_unsupported = {}
 
-def check_tutorial(tool_filepath, serv_tools):
-    """Check which public Galaxy servers can run the tool in a tutorial"""
-    exp_tools = extract_tool_list(tool_filepath)
-    # parse the public servers
-    cons_servers = {}
-    for server in serv_tools:
+    for server in server_tools:
         # check overlap
-        res = exp_tools.issubset(serv_tools[server]['tools'])
-        if res:
-            cons_servers[server] = {'url': serv_tools[server]['url']}
-    return cons_servers
+        if tutorial_tools.issubset(server_tools[server]['tools']):
+            servers_supported[server] = server_tools[server]['url']
+        else:
+            servers_unsupported[server] = server_tools[server]['url']
+
+    return servers_supported, servers_unsupported
 
 
 def check_tutorials():
     """Check all tutorials to extract the instances on which the tutorials can
     be run and add this information to metadata/instances.yaml file"""
-    server_tools = extract_public_galaxy_servers_tools()
+    if os.path.exists('.cache.yaml'):
+        with open('.cache.yaml', 'r') as handle:
+            server_tools = yaml.load(handle)
+    else:
+        server_tools = extract_public_galaxy_servers_tools()
+        with open('.cache.yaml', 'w') as handle:
+            yaml.dump(server_tools, handle)
+
+
     instance_annot = {}
     for topic in os.listdir("topics"):
         topic_dir = os.path.join("topics", topic)
@@ -93,12 +121,13 @@ def check_tutorials():
             if not os.path.exists(tool_filepath):
                 continue
             # extract the instances on which the tutorial can be run
-            cons_servers = check_tutorial(tool_filepath, server_tools)
-            # add the conserved servers to the main dictionary if not empty
-            if not cons_servers:
-                continue
+            supported, unsupported = check_tutorial(tool_filepath, server_tools)
+
+            # Training-focused view
             instance_annot.setdefault(topic, {})
-            instance_annot[topic][tutorial] = cons_servers
+            instance_annot[topic][tutorial] = {k: {'url': v, 'supported': True} for (k, v) in supported.items()}
+            instance_annot[topic][tutorial].update({k: {'url': v, 'supported': False} for (k, v) in unsupported.items()})
+
     # add the conserved servers to the metadata/instances.yaml file
     inst_file = os.path.join("metadata", "instances.yaml")
     with open(inst_file, "w") as f:
