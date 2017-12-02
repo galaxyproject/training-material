@@ -6,10 +6,8 @@ galaxy_instance="http://localhost:8080"
 # launch the instance
 echo " - Starting Galaxy.. \n"
 
-service postgresql start
+startup_lite
 export GALAXY_CONFIG_TOOL_PATH=/galaxy-central/tools/
-./run.sh --daemon --skip-eggs --skip-wheels
-
 
 # wait until galaxy has started
 galaxy-wait -g $galaxy_instance
