@@ -6,8 +6,8 @@ galaxy_instance="http://localhost:8080"
 # launch the instance
 echo " - Starting Galaxy.. \n"
 
-startup_lite
 export GALAXY_CONFIG_TOOL_PATH=/galaxy-central/tools/
+startup_lite
 
 # wait until galaxy has started
 galaxy-wait -g $galaxy_instance
@@ -42,7 +42,7 @@ do
     if [ -f $dir/data-library.yaml ]
     then
         echo " - Installing data libraries"
-        setup-data-libraries -i $dir/data-library.yaml -g $galaxy_instance -u $GALAXY_DEFAULT_ADMIN_USER -p $GALAXY_DEFAULT_ADMIN_PASSWORD
+        setup-data-libraries -i $dir/data-library.yaml -g $galaxy_instance -u $GALAXY_DEFAULT_ADMIN_USER -p $GALAXY_DEFAULT_ADMIN_PASSWORD -v
     else
         echo " - No data libraries to install (no file named data-library.yaml present)"
     fi
