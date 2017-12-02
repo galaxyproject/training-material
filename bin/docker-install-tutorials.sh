@@ -50,13 +50,14 @@ do
     fi
 
     # install reference data? (discussion: do this at build or run time?)
-    if [ -f $dir/data-manager.yaml ]
-    then
-        echo " - Installing reference data"
-        run-data-managers --config $dir/data-manager.yaml -g $galaxy_instance -u $GALAXY_DEFAULT_ADMIN_USER -p $GALAXY_DEFAULT_ADMIN_PASSWORD
-    else
-        echo " - No reference data to install (no file named data-manager.yaml present)"
-    fi
+    # We are using CVMFS for the moment.
+    #if [ -f $dir/data-manager.yaml ]
+    #then
+    #    echo " - Installing reference data"
+    #    run-data-managers --config $dir/data-manager.yaml -g $galaxy_instance -u $GALAXY_DEFAULT_ADMIN_USER -p $GALAXY_DEFAULT_ADMIN_PASSWORD
+    #else
+    #    echo " - No reference data to install (no file named data-manager.yaml present)"
+    #fi
 
     # install tours
     dir_name="$(dirname $dir)"
