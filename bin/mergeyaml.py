@@ -8,17 +8,13 @@ merged_libs = dict()
 
 def is_url_included(url, lib):
     for files in lib.values():
-        #print f
         for _url, _file_type in files:
-            #print x
             if _url == url:
                 return True
     return False
 
 for filename in glob.iglob('./**/data-library.yaml'):
     a = yaml.load(open(filename))
-    #print a
-    #print '##########'
     libs = a['libraries']
     for lib in libs:
         name = lib['name']
@@ -32,6 +28,6 @@ for filename in glob.iglob('./**/data-library.yaml'):
 for name, files in merged_libs.items():
     merged['libraries'].extend([{'files': files, 'name': name}])
 
-print yaml.dump( merged, default_flow_style=False, default_style='' )
+print(yaml.dump( merged, default_flow_style=False, default_style='' ))
 
 
