@@ -21,4 +21,5 @@ ADD topics/<your_topic>/tutorials/ /tutorials/
 
 # install everything for tutorials
 ADD bin/docker-install-tutorials.sh /setup-tutorials.sh
+ADD bin/mergeyaml.py /mergeyaml.py
 RUN /setup-tutorials.sh
