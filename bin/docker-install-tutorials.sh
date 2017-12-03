@@ -38,15 +38,6 @@ do
         echo " - No workflows to install (no directory named workflows present)"
     fi
 
-    # install data libraries
-    if [ -f $dir/data-library.yaml ]
-    then
-        echo " - Installing data libraries"
-        setup-data-libraries -i $dir/data-library.yaml -g $galaxy_instance -u $GALAXY_DEFAULT_ADMIN_USER -p $GALAXY_DEFAULT_ADMIN_PASSWORD -v
-    else
-        echo " - No data libraries to install (no file named data-library.yaml present)"
-    fi
-
     # install reference data? (discussion: do this at build or run time?)
     # We are using CVMFS for the moment.
     #if [ -f $dir/data-manager.yaml ]
@@ -76,3 +67,9 @@ do
 
     echo "Finished installation of $dir tutorial \n"
 done
+
+cd /tutorials/
+python /mergeyaml.py > ./data-library_all.yaml
+setup-data-libraries -i ./data-library_all.yaml -g $galaxy_instance -u $GALAXY_DEFAULT_ADMIN_USER -p $GALAXY_DEFAULT_ADMIN_PASSWORD -v
+
+
