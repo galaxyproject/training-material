@@ -38,6 +38,7 @@ layout: base
 
                 {% if topic.type != "admin-dev" %}
                 <th>Input dataset</th>
+                <th>Workflows</th>
                 <th>Galaxy tour</th>
                 {% endif %}
             </tr>
@@ -46,7 +47,6 @@ layout: base
                 {% if material.enable != "false" %}
                     <tr>
                         <td>{{ material.title }}</td>
-
                         {% if material.type == "introduction" %}
                             <td>
                                 {% if material.slides %}
@@ -91,6 +91,20 @@ layout: base
                                     <a href="{{ material.zenodo_link }}">
                                       {% icon zenodo_link %}
                                     </a>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if material.workflows and material.workflows != "" %}
+                                        <a href="#" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Workflows">
+                                        {% icon workflow %}
+                                        </a>
+                                        <ul class="dropdown-menu">
+                                        {% for wf in material.workflows %}
+                                            <a class="dropdown-item" href="{{ site.github_repository  }}/tree/master/topics/{{ topic.name }}/tutorials/{{ material.name }}/workflows/{{ wf.name }}.ga" title="{{ wf.title }}">
+                                                {{ wf.title }}
+                                            </a>
+                                        {% endfor %}
+                                        </ul>
                                     {% endif %}
                                 </td>
                                 <td>
