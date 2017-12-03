@@ -42,9 +42,8 @@ Due to the large size of this dataset, we have downsampled it to only include re
 >    > Data available from zenodo: [![DOI](https://zenodo.org/badge/DOI/10.123/GTNdenovoRNAseq.svg)](https://zenodo.org/record/583140)
 >    >
 >    > Below are the links to the read files that can be copied and pasted in the upload manager.
-
->    > ```
->    > https://zenodo.org/record/583140/files/G1E_rep1_forward_read_%28SRR549355_1%29
+>    >
+>    > ``` https://zenodo.org/record/583140/files/G1E_rep1_forward_read_%28SRR549355_1%29
 >    > https://zenodo.org/record/583140/files/G1E_rep1_reverse_read_%28SRR549355_2%29
 >    > https://zenodo.org/record/583140/files/G1E_rep2_forward_read_%28SRR549356_1%29
 >    > https://zenodo.org/record/583140/files/G1E_rep2_reverse_read_%28SRR549356_2%29
@@ -53,7 +52,8 @@ Due to the large size of this dataset, we have downsampled it to only include re
 >    > https://zenodo.org/record/583140/files/Megakaryocyte_rep2_forward_read_%28SRR549358_1%29
 >    > https://zenodo.org/record/583140/files/Megakaryocyte_rep2_reverse_read_%28SRR549358_2%29
 >    > https://zenodo.org/record/583140/files/RefSeq_reference_GTF_%28DSv2%29
->    > ```
+>    >```
+>    >
 >    > You will need to fetch the link to the annotation file yourself ;)
 >    {: .tip}
 >
