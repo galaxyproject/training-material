@@ -7,11 +7,11 @@ merged = {'libraries': list()}
 merged_libs = dict()
 
 def is_url_included(url, lib):
-    for f in lib.values():
+    for files in lib.values():
         #print f
-        for x in f:
+        for _url, _file_type in files:
             #print x
-            if x['url'] == url:
+            if _url == url:
                 return True
     return False
 
