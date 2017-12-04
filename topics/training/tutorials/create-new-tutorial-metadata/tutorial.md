@@ -52,7 +52,7 @@ The first file we will fill is the `metadata.yaml` file describing the metadata 
 - `enable`: `false` to hide your tutorial from the topic page
 - `name`: name of the tutorial (name of the subdirectory where the files related to the tutorial will be stored)
 - `zenodo_link`: link on Zenodo to the input data for the tutorial (not ideal but it can be empty)
-- `galaxy_tour`(`"yes"` or `"no"`): tell if at least an interactive tour is avaible for the tutorial (in the `tours` subdirectory)
+- `galaxy_tour`(`yes` or `no`): tell if at least an interactive tour is avaible for the tutorial (in the `tours` subdirectory)
 - `workflows` (`yes` or `no`): tell if a workflow is available for this material
 - `hands_on`(`yes` or `no`): tell if an hands on is available for this material
 - `slides` (`yes` or `no`): tell if slides are available for this material its title, its type, ...
