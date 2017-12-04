@@ -53,6 +53,7 @@ The first file we will fill is the `metadata.yaml` file describing the metadata 
 - `name`: name of the tutorial (name of the subdirectory where the files related to the tutorial will be stored)
 - `zenodo_link`: link on Zenodo to the input data for the tutorial (not ideal but it can be empty)
 - `galaxy_tour`: name of the galaxy tour
+- `workflows` (`yes` or `no`): tell if a workflow is available for this material
 - `hands_on`(`yes` or `no`): tell if an hands on is available for this material
 - `slides` (`yes` or `no`): tell if slides are available for this material its title, its type, ...
 - `requirements`: list of requirements specific to this tutorial (in addition to the one of the topic), with:
