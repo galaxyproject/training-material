@@ -49,7 +49,7 @@ layout: base
 
                         {% if material.type == "introduction" %}
                             <td>
-                                {% if material.slides == "yes" %}
+                                {% if material.slides %}
                                 <a href="{{ site.baseurl }}/topics/{{ topic.name }}/slides/{{ material.name }}.html">
                                   {% icon slides %}
                                 </a>
@@ -62,7 +62,7 @@ layout: base
                             {% endif %}
                         {% elsif material.type == "tutorial" %}
                             <td>
-                                {% if material.slides == "yes" %}
+                                {% if material.slides %}
                                 <a href="{{ site.baseurl }}/topics/{{ topic.name }}/tutorials/{{ material.name }}/slides.html">
                                   {% icon slides %}
                                 </a>
@@ -74,12 +74,12 @@ layout: base
                                 <a href="{{ material.hands_on_url }}">
                                   {% icon tutorial %}
                                 </a>
-                                {% elsif material.hands_on == "yes" %}
-                                <a href="{{ site.baseurl }}/topics/{{ topic.name }}/tutorials/{{ material.name }}/tutorial.html">
-                                  {% icon tutorial %}
-                                </a>
                                 {% elsif material.hands_on == "github" %}
                                 <a href="{{ site.github_repository }}/tree/master/topics/{{ topic.name }}/tutorials/{{ material.name }}/tutorial.md">
+                                  {% icon tutorial %}
+                                </a>
+                                {% elsif material.hands_on %}
+                                <a href="{{ site.baseurl }}/topics/{{ topic.name }}/tutorials/{{ material.name }}/tutorial.html">
                                   {% icon tutorial %}
                                 </a>
                                 {% endif %}
