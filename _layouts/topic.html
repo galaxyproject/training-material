@@ -96,12 +96,12 @@ layout: base
                                 <td>
                                     {% if material.workflows and material.workflows != "" %}
                                         <a href="#" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Workflows">
-                                        {% icon workflow %}
+                                            {% icon workflow %}
                                         </a>
                                         <ul class="dropdown-menu">
-                                        {% for wf in material.workflows %}
-                                            <a class="dropdown-item" href="{{ site.github_repository  }}/tree/master/topics/{{ topic.name }}/tutorials/{{ material.name }}/workflows/{{ wf.name }}.ga" title="{{ wf.title }}">
-                                                {{ wf.title }}
+                                        {% for workflow in material.workflows %}
+                                            <a class="dropdown-item" href="{{ site.github_repository  }}/tree/master/topics/{{ topic.name }}/tutorials/{{ material.name }}/workflows/{{ workflow.name }}.ga" title="{{ workflow.title }}">
+                                                {{ workflow.title }}
                                             </a>
                                         {% endfor %}
                                         </ul>
