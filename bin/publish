@@ -4,12 +4,6 @@
 rm -rf /tmp/site
 mv _site/training-material /tmp/site
 
-# configure git
-git config user.name "Travis-CI"
-git config user.email "noreply@travis-ci.org"
-git remote rm origin
-git remote add origin "https://bebatut:$GH_TOKEN@github.com/galaxyproject/training-material"
-
 # clean git for gh-pages
 git checkout -- .
 
@@ -36,4 +30,3 @@ find * -type d -exec chmod 755 "{}" ";"
 # add everything to gh-page
 git add -A .
 git commit -m "Update on: `date`"
-git push origin gh-pages
