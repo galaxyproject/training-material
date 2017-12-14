@@ -709,7 +709,7 @@ As for DESeq2, in the previous step, we counted only reads that mapped to exons 
 >    - `GSM461182_untreat_single.dexseq.counts`
 >
 > 3. **DEXSeq** {% icon tool %}: Run **DEXSeq** with
->    - "Condition" as first factor with "treated" and "untreated" as levels and selection of count files corresponding to both levels
+>    - "condition" as first factor with "treated" and "untreated" as levels and selection of count files corresponding to both levels
 >    - "Sequencing" as second factor with "PE" and "SE" as levels and selection of count files corresponding to both levels
 >
 >    > ### {% icon comment %} Comment
