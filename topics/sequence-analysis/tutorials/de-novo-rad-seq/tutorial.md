@@ -181,8 +181,6 @@ Run `Stacks: De novo map` Galaxy tool. This program will run ustacks, cstacks, a
 # Calculate population genomics statistics
 > **Stacks: populations** {% icon tool %}: Run the last step of **Stacks: De novo map** pipeline specifying data filtering options (minimum percentage of individuals in a population required to process a locus for that population: 0.75 , output options (VCF and Structure) and enabling SNP and haplotype-based F statistics calculation.
 >
->    ![Stacks: populations tool parameters](../../images/RAD4_Population_Genomics/denovo/populations_in.png)
->
 >    ![The output of the populations tool](../../images/RAD4_Population_Genomics/denovo/populations_log.png)
 
 
