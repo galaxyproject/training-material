@@ -39,6 +39,10 @@ You can directly used archive from the Sequence Read Archive (SRA) for raw reads
 
 To download all training datasets (i.e reads, reference genome, population map file and barcodes file), you need to use the corresponding [CeSGO hub](https://cesgo.genouest.org/resources/370/supportingdocs) repository.
 
+TODO put on zenodo? get SRA data with SRA tool? 
+TODO chromFa.tar.gz upload does not work, Galaxy gunzips the file leaving a tar that leads to a problem in BWA
+	either provide fasta or use UCSC main table browser
+
 > ### {% icon hands_on %} Hands-on: Data upload
 >
 > 1. Create a new history for this RAD-seq exercise. If you are not inspired, you can name it "STACKS 1.42 RAD: population genomics with reference genome" for example...
@@ -81,63 +85,72 @@ The sequences are raw sequences from the sequencing machine, without any pretrea
 
 For demultiplexing, we use the Process Radtags tool from [STACKS](https://www.g3journal.org/content/1/3/171.full) .
 
-> ### {% icon hands_on %} Hands-on: Demultiplexing reads
+> ### {% icon hands_on %} Hands-on: 
 >
 > 1. **Process Radtags** {% icon tool %}: Run `Stacks: process radtags` on FastQ file to demultiplex the reads
+>  - Single-end or paired-end reads files: Single-end files
+>  - singles-end reads infile(s): SRR034310.fastq(.gz)
+>  - Barcode file: Barcode fileBarcodes_SRR034310.tabular
+>  - Number of enzymes: One
+>  - Enzyme: sbfI
+>  - Capture discarded reads to a file: Yes
+>  - Output format: fastq
+
+
+> ### {% icon question %} Questions
 >
-> ![Process radtags input parameters](../../images/RAD4_Population_Genomics/Process_radtags_in.png)
+> 1. How many reads were on the original dataset?
+> 2. How many are kept?
+> 3. Can you try to explain the reason why we loose a lot of reads here?
+> 4. What kind of information this result gives concerning the upcoming data analysis and the barcodes design in general ?
 >
->
->    > ### {% icon question %} Questions
->    >
->    > 1. How many reads were on the original dataset?
->    > 2. How many are kept?
->    > 3. Can you try to explain the reason why we loose a lot of reads here?
->    > 4. What kind of infiormation this result gives concerning the upcoming data analysis and the barcodes design in general ?
->    >
->    >    <details>
->    >    <summary>Click to view answers</summary>
->    >    <ol type="1">
->    >    <li>8895289 total reads</li>
->    >    <li>8139531 retained reads</li>
->    >    <li>Exploring the `results.log` file allows to see that there is no sequences filtered for low quality statement. As we don't specify the corresponding advanced option, Process radtags didn't apply quality related filtering. So here, all not retained sequences are not recorded because of an ambiguous barcode or an ambiguous RAD-Tag. This means that some barcodes are not exactly what was specified on the barcode file and that sometimes, no SbfI restriction enzyme site was found. This can be due to some sequencing problems but here, this is also due to the addition, in the original sequencing library, of RAD-seq samples from another study. This is something often used to avoid having too much sequences beginning with the exact same nucleotides sequences and thus Illumina related issues during sequencing and clusters analysis </li>
->    >    <li>Sequencing quality is essential! Each time your sequencing quality decreases, you loose data and thus essential biological information!</li>
->    >    </ol>
->    >    </details>
-> ![Process radtags output log](../../images/RAD4_Population_Genomics/Process_radtags_out_log.png)
+>    <details>
+>    <summary>Click to view answers</summary>
+>    The informations can be found in the results log file:
+>    <ol type="1">
+>    <li>8895289 total reads</li>
+>    <li>8139531 retained reads</li>
+>    <li>There are no sequences filtered because of low quality. This is because radtags didn't apply quality related filtering since the corresponding advanced option (Discard reads with low quality scores) has not been enabled. So here, all not retained sequences are removed because of an ambiguous barcode (626265) or an ambiguous RAD-Tag (129493). This means that some barcodes are not exactly what was specified on the barcode file and that sometimes, no SbfI restriction enzyme site was found. This can be due to some sequencing problems but here, this is also due to the addition, in the original sequencing library, of RAD-seq samples from another study. This strategy is often used to avoid having too much sequences beginning with the exact same nucleotide sequence which may cause Illumina related issues during sequencing and cluster analysis </li>
+>    <li>Sequencing quality is essential! Each time your sequencing quality decreases, you loose data and thus essential biological information!</li>
+>    </ol>
+>    In addition to the overall statistics the numbers of retained and removed reads are also given for each bar code sequence.
+>    </details>
+
+In order to obtain results of higher quality we will play with the advanced options:  
+
+> ### {% icon hands_on %} Hands-on: 
 >
 > 2. **Process Radtags** {% icon tool %}: Re-Run `Stacks: process radtags` on FastQ file playing with parameters
+>   - In `advanced options`, activate the `Discard reads with low quality scores` option and play with the score limit (default vs 20 vs 10 for example) and examine the change in reads retained. 
+>   - Note that you can play also with the sliding window score threshold, by default 15% of the length of the read. This sliding window parameter allows notably the user to deal with the declining quality at the 3' end of reads.
+
+Then we generate a graphical display of the changes: 
+
+> ### {% icon hands_on %} Hands-on: 
+> 
+> First we cut the interesting lines of each `result.log with Stacks: process radtags` 
 >
-> In `advanced options`, activate the `Discard reads with low quality scores` option and play with the score limit (default vs 20 for example) and examine the change in reads retained. Note that you can play also with the sliding window score threshold, by default 15% of the length of the read. This sliding window parameter allows notably the user to deal with the declining quality at the 3' end of reads.
->
-> ![Process radtags: advanced parameters](../../images/RAD4_Population_Genomics/Process_radtags_in_advancedparameter0.PNG)
->
-> ![Process radtags: advanced parameters](../../images/RAD4_Population_Genomics/Process_radtags_in_advancedparameter1.PNG)
->
-> To do that, you can use data handling Galaxy tools to cut the interesting lines of each `result.log with Stacks: process radtags` files OR, as I made, just copy/paste these lines on the Galaxy upload tool using Paste/fetch data section and modifying the File header by sample and filename by Score 10 / Score 20 and noscorelimit for example... Before Starting the upload, you can select the `Convert spaces to tabs` option through the `Upload configuration` wheel.
->
-> ![The output after using advanced parameters](../../images/RAD4_Population_Genomics/Process_radtags_in_advancedparameter_compare_copy.PNG)
->
-> ![Creating comparison file of the outputs](../../images/RAD4_Population_Genomics/Process_radtags_in_advancedparameter_compare_paste.PNG)
->
-> You can use the `Charts` functionality through the Visualize button reachable on the `Radtags logs` file you just generated.
->
-> ![Process radtags: visualizing with a chart](../../images/RAD4_Population_Genomics/Process_radtags_charts.PNG)
->
-> If like me you don't have payed attention to the organization of you file for the graphical representation you obtain a non optimal bars diagram with a not intelligent X-axis ordering. There is a lot of diffferent manner to fix this. You can use the copy/paste "bidouille" like seen previously, or you can use Galaxy tools to manipulate the `radtags logs` (did you change the filename from `pasted entry` to another label ?) file to generate a better graph. For example, you can use `Select lines that match an expression` tool to select rows then use the `Concatenate datasets tail-to-head` tool to reorganize these lines in a new file... OR, as I made, you can just sort the file using the first column.
->
-> ![Sort tool inputs](../../images/RAD4_Population_Genomics/Process_radtags_charts_tablemodif.PNG)
->
-> And you obtain a file like this one, ready to generate a beautiful and smart bar diagram!
->
-> ![The output of the sorted comparison file](../../images/RAD4_Population_Genomics/Process_radtags_charts_tablemodif_view.PNG)
->
-> ![The bar diagram](../../images/RAD4_Population_Genomics/Process_radtags_charts_end.PNG)
->
->Using filter like `clean data, remove any read with an uncalled base` has here few impact:
->
-> ![The output of clean tool](../../images/RAD4_Population_Genomics/Process_radtags_out_parameter2.png)
->
+> 3. **Select lines that match an expression** applying `^R1.fq.gz` on the log files and then
+> 4. **Concatenate datasets tail-to-head** on the resulting data sets
+> 
+> Alternatively just copy/paste these lines on the Galaxy upload tool using Paste/fetch data section and modifying the File header by sample and filename by Score 10 / Score 20 and noscorelimit for example... Before Starting the upload, you can select the `Convert spaces to tabs` option through the `Upload configuration` wheel. If you did not pay attention to the order you can just sort the file using the first column.
+
+```
+quality	Retained Reads	Low Quality	Ambiguous Barcodes	Ambiguous RAD-Tag	Total
+20	2980543		5158988		626265		129493		8895289
+10	7373160		766371		626265		129493		8895289
+nolimit	8139531		0		626265		129493		8895289
+```
+
+You can use the `Charts` functionality through the Visualize button to plot the data. 
+
+
+![The bar diagram](../../images/RAD4_Population_Genomics/Process_radtags_charts_end.PNG)
+
+Using a filter like `clean data, remove any read with an uncalled base` has only little impact:
+
+TODO with which parameter combination the results have been determined?
+![The output of clean tool](../../images/RAD4_Population_Genomics/Process_radtags_out_parameter2.png)
 
 The demultiplexed sequences are raw sequences from the sequencing machine, without any pretreatments. They need to be controlled for their quality.
 
@@ -160,8 +173,10 @@ For quality control, we use similar tools as described in [NGS-QC tutorial]({{si
 >    >    </ol>
 >    >    </details>
 >
+> TODO we need to talk about quality here and explain the drop at the begin and end! also why we don't do anything against it... 
 
-As it exists a draft genome for *Gasterosteus aculeatus*, we can use this information and map the sequences on this genome to identify polymorphism.
+
+As there is a draft genome for *Gasterosteus aculeatus*, we can use this information and map the sequences on this genome to identify polymorphism.
 
 # Mapping
 
@@ -176,9 +191,13 @@ Here we will use BWA. BWA is a fast light-weighted tool that aligns relatively s
 *[Li et Durbin, Bioinformatics, 2009](https://www.ncbi.nlm.nih.gov/pubmed/19451168)*
 
 
-> 1. **BWA** {% icon tool %}: Run **BWA** with the Commonly Used settings after specifying the fasta reference genome file from history, the fact that you are working with single-end libraries and finally the collection of demultiplexed FastQ files.
->
->    ![Stacks: Map with BWA tool parameters](../../images/RAD4_Population_Genomics/reference/Map_with_BWA.png)
+> 1. **Map with BWA - map short reads (< 100 bp) against reference genome ** {% icon tool %}: 
+> 
+> - Will you select a reference genome from your history or use a built-in index?: Use a genome from history and build index
+> - Use the following dataset as the reference sequence: chromFa
+> - Select input type: Single fastq
+> - Select fastq dataset: One dataset collections containing the demultiplexed (in the following we discuss the TODO which setting we discuss?)
+> - Leave everything else 
 
 **BWA** generates BAM files with the mapped reads.
 
@@ -186,34 +205,39 @@ We next want to run Stacks on the freshwater and oceanic populations.
 
 # SNP calling from radtags
 
-Run `Stacks: Reference map` Galaxy tool. This program will run pstacks, cstacks, and sstacks on the members of the population, accounting for the alignments of each read.
+Run `Stacks: Reference map` Galaxy tool. This program will run pstacks, cstacks, and sstacks using a perl scrip (ref_map.pl) on the members of the population, accounting for the alignments of each read.
 
 > ### {% icon comment %} Comment
 >
 > Information on ref_map.pl and its parameters can be found online: https://creskolab.uoregon.edu/stacks/comp/ref_map.php.
 
-
-> **Stacks: Reference map** {% icon tool %}: Run **Stacks** selecting the population usage. Specify each BWA-aligned individual as a sample, a population map and a minimum depth of coverage of 3.
+> **Stacks: Reference map** {% icon tool %}: 
+> - Select your usage: Population 
+> - Files containing an individual sample from a population: Choose the mapped reads (data collection)
+> - Specify a population map: Population_map.txt
+> - Minimum depth of coverage: 3
 >
->    ![Stacks: Reference map input parameters](../../images/RAD4_Population_Genomics/reference/reference_map_in.png)
-
 >    > ### {% icon comment %} Comment
 >    >
 >    > If you are using a file presenting population information and individual name in a different manner than expected by STACKS, you can use Galaxy tools like `Regex Replace` or `Cut columns from a table` to generate it.
 
-> Once Stacks has completed running, investigate the output files: `result.log` and `catalog.*` (snps, alleles and tags). Notice that each locus now has a chromosome/base pair specified in each of the *tags.tsv files and in the catalog files.
->
->    ![Stackss: Reference map output](../../images/RAD4_Population_Genomics/reference/reference_map_out.png)
->
+> Once Stacks has completed running, investigate the output files: `Summary from Stacks ref_map.log with Stacks` and `Catalog haplotypes (*)` (snps, alleles and tags). 
+> TODO: Summary from Stacks has some quite nice html output (seems preferable to the log file which is named ref_map.log .. not results.log)
+> Notice that each locus now has a chromosome/base pair specified in each of the `*tags.tsv` files and in the catalog files.
+> TODO: probably the tags summary file? 
+> TODO: Would be nice to have some specific informations to look for in the files.  
 
 # Calculate population genomics statistics
 > **Stacks: populations** {% icon tool %}: Run the last step of **Stacks: Reference map** pipeline specifying data filtering options (minimum percentage of individuals in a population required to process a locus for that population: 0.75 , output options (VCF and Structure) and enabling SNP and haplotype-based F statistics calculation.
->
->    ![Stacks: populations tool input](../../images/RAD4_Population_Genomics/reference/populations_in.png)
-
-
-
->	Now look at the output in the file `batch_1.sumstats` nammed `SNP and Haplotype-based F statistics with Stacks: populations ...` on your history. This file is also reachable on the data collection nammed `Full output from ref_map .....` with his original name `batch_1.sumstats`. There are a large number of statistics calculated at each SNP, so use Galaxy tools like filter, cut, and sort to focus on some.
+> - Input type: Stacks output
+> - Output from previous Stacks pipeline steps (e.g. denovo_map or refmap): Full output from ref_map 
+> - Specify a population map: Population_map.txt 
+> - Minimum percentage of individuals in a population required to process a locus for that population: 0.75
+> - Output results in Variant Call Format (VCF): yes
+> - Output results in Structure Format: yes
+> - Enable SNP and haplotype-based F statistics: yes
+> 
+> Now look at the output in the file `batch_1.sumstats` named `SNP and Haplotype-based F statistics with Stacks: populations ...` on your history. This file is also reachable on the data collection nammed `Full output from ref_map .....` with his original name `batch_1.sumstats`. There are a large number of statistics calculated at each SNP, so use Galaxy tools like filter, cut, and sort to focus on some.
 
 >
 >    > ### {% icon question %} Question
@@ -228,6 +252,8 @@ Run `Stacks: Reference map` Galaxy tool. This program will run pstacks, cstacks,
 >    >    <li>3500</li>
 >    >    </ol>
 >    >    </details>
+> TODO: There is no column named `FST`, but one named `Fst'` (column 30). I find larger values than 0.75 in my results (e.g. 1.00.
+
 
 # Conclusion
 {:.no_toc}
