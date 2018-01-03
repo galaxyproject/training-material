@@ -29,46 +29,34 @@ We here proposed to re-analyze these data at least until the population genomics
 
 The original data is available at NCBI SRA ENA under accession number [SRR034310](https://trace.ncbi.nlm.nih.gov/Traces/sra/?run=SRR034310) as part of the NCBI SRA ENA study accession number [SRP001747](https://trace.ncbi.nlm.nih.gov/Traces/sra/?study=SRP001747).
 
-We will look at the first run SRR034316 out of 7:
-
-- Here are 16 samples from 2 populations, 8 from Bear Paw (freshwater) and 8 from Rabbit Slough (oceanic)
-
-You can directly used archive from the Sequence Read Archive (SRA) for raw reads.
-
-![Input data in ENA](../../images/RAD4_Population_Genomics/Input_data_ENA.png)
-
-To download all training datasets (i.e reads, reference genome, population map file and barcodes file), you need to use the corresponding [CeSGO hub](https://cesgo.genouest.org/resources/370/supportingdocs) repository.
-
-TODO put on zenodo? get SRA data with SRA tool? 
-TODO chromFa.tar.gz upload does not work, Galaxy gunzips the file leaving a tar that leads to a problem in BWA
-	either provide fasta or use UCSC main table browser
+We will look at the first run SRR034316 out of seven which includes 16 samples from 2 populations, 8 from Bear Paw (freshwater) and 8 from Rabbit Slough (oceanic). We will download the reads directly from SRA and the remaining data (i.e reference genome, population map file, and barcodes file) from Zenodo. 
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
 > 1. Create a new history for this RAD-seq exercise. If you are not inspired, you can name it "STACKS 1.42 RAD: population genomics with reference genome" for example...
-> 2. Import FASTQ files (*e.g.*  [`SRR034310`](ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR034/SRR034310/SRR034310.fastq.gz) and corresponding reference genome FASTA file [`chromFa`](ftp://hgdownload.cse.ucsc.edu/goldenPath/gasAcu1/bigZips/chromFa.tar.gz) as population map information file [`Population_map.txt`](https://cesgo.genouest.org/resources/373/download/Population_map.txt) and barcodes file [`Barcodes_SRR034310`](https://cesgo.genouest.org/resources/374/download/Barcodes_SRR034310.tabular)) from SRA and [CeSGO](https://cesgo.genouest.org/)
-
+> 2. **Upload Reads from SRA** {% icon tool %}: Run `EBI SRA`
+>    - Select the Run from the results of the search for `SRR034316` (which will present you 1 Experiment (SRX015877) and 1 Run (SRR034316)). 
+>    - Click the link in the column **FASTQ files (Galaxy)** of the results table
+>    - This will redirect to the Galaxy website and start the download.
+> 3. Upload remaining training data from Zenodo: 
+>    - Open the Galaxy Upload Manager
+>    - Select **Paste/Fetch Data**
+>    - Paste the following links into the text field
+>    ```
+>    https://zenodo.org/record/1134547/files/Barcode_SRR034310.txt
+>    https://zenodo.org/record/1134547/files/Details_Barcode_Population_SRR034310.txt
+>    https://zenodo.org/record/1134547/files/Reference_genome_11_chromosomes.fasta
+>    ```
 >
 >    > ### {% icon comment %} Comments
 >    > If you are using the [GenOuest Galaxy instance](https://galaxy.genouest.org), you can load the dataset using 'Shared Data' <i class="fa fa-long-arrow-right"></i> 'Data Libraries' <i class="fa fa-long-arrow-right"></i> '1 Galaxy teaching folder' <i class="fa fa-long-arrow-right"></i> 'EnginesOn' <i class="fa fa-long-arrow-right"></i> 'RADseq' <i class="fa fa-long-arrow-right"></i> 'Stickelback population genomics' <i class="fa fa-long-arrow-right"></i> 'SRR034310'
 >
->    > ### {% icon tip %} Tip: Importing data via links
->    >
->    > * Open the Galaxy Upload Manager
->    > * Select **Paste/Fetch Data**
->    > * Paste the following links into the text field
->    >     * ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR034/SRR034310/SRR034310.fastq.gz
->    >     * ftp://hgdownload.cse.ucsc.edu/goldenPath/gasAcu1/bigZips/chromFa.tar.gz
->    >     * https://cesgo.genouest.org/resources/373/download/Population_map.txt
->    >     * https://cesgo.genouest.org/resources/374/download/Barcodes_SRR034310.tabular
->    > * Press **Start**    
->
->    > ### {% icon tip %} Tip: Changing the file type `fastq` to `fastqsanger` once the data file is in your history.
+>    > ### {% icon tip %} Tip: Changing the file type `fastq.gz` to `fastqsanger.gz` once the data file is in your history.
 >    > As we know here that the datatype is fastqsanger, we can directly change it through the upcoming method. Normally, you need to execute FastQGroomer to be sure to have a correct fastqsanger file format. And if you don't know how your quality score is encoded on raw fastQ files, please, use the FastQC tool to determine it!
 >    >
 >    > * Click on the pencil button displayed in your dataset in the history
 >    > * Choose **Datatype** on the top
->    > * Select `fastqsanger`
+>    > * Select `fastqsanger.gz`
 >    > * Press **Save**
 >
 >    As default, Galaxy takes the link as name. It also do not link the dataset to a database or a reference genome.
