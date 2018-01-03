@@ -29,13 +29,14 @@ We here proposed to re-analyze these data at least until the population genomics
 
 The original data is available at NCBI SRA ENA under accession number [SRR034310](https://trace.ncbi.nlm.nih.gov/Traces/sra/?run=SRR034310) as part of the NCBI SRA ENA study accession number [SRP001747](https://trace.ncbi.nlm.nih.gov/Traces/sra/?study=SRP001747).
 
-We will look at the first run SRR034316 out of seven which includes 16 samples from 2 populations, 8 from Bear Paw (freshwater) and 8 from Rabbit Slough (oceanic). We will download the reads directly from SRA and the remaining data (i.e reference genome, population map file, and barcodes file) from [Zenodo](https://zenodo.org/record/1134547#.WkugUjfjJXI). 
+We will look at the first run SRR034310 out of seven which includes 16 samples from 2 populations, 8 from Bear Paw (freshwater) and 8 from Rabbit Slough (oceanic). We will download the reads directly from SRA and the remaining data (i.e reference genome, population map file, and barcodes file) from [Zenodo](https://zenodo.org/record/1134547#.WkugUjfjJXI). 
+
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
 > 1. Create a new history for this RAD-seq exercise. If you are not inspired, you can name it "STACKS 1.42 RAD: population genomics with reference genome" for example...
 > 2. **Upload Reads from SRA** {% icon tool %}: Run `EBI SRA`
->    - Select the Run from the results of the search for `SRR034316` (which will present you 1 Experiment (SRX015877) and 1 Run (SRR034316)). 
+>    - Select the Run from the results of the search for `SRR034310` (which will present you 1 Experiment (SRX015877) and 1 Run (SRR034310)). 
 >    - Click the link in the column **FASTQ files (Galaxy)** of the results table
 >    - This will redirect to the Galaxy website and start the download.
 > 3. Upload remaining training data from Zenodo: 
