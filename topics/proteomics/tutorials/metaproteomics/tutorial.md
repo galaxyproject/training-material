@@ -107,7 +107,8 @@ The created dataset collection of the three *MGF files* in the history is used a
 >
 >    Section **Precursor Options**:
 >
->    - **Fragment Tolerance (Daltons)**: `0.02`- this is high resolution MS/MS data
+>    - **Fragment Tolerance Units**: `Daltons`
+>    - **Fragment Tolerance**: `0.02`- this is high resolution MS/MS data
 >    - **Maximum Charge**: `6`
 >
 >    Section **Protein Modification Options**:
@@ -593,7 +594,7 @@ As a final step we will use **Query Tabular** in a more sophisticated way to com
 >    - Add another Filter: Click on `+ Insert Filter Tabular Input Lines`:
 >    - **Filter By**: Select `normalize list columns, replicates row for each item in list`
 >        - **enter column numbers to normalize**: `2`
->        - **List item delimiter in column**: leave blank
+>        - **List item delimiter in column**: ` ` (a single blank character)
 >
 >    > ### {% icon comment %} Comments
 >    > - The UniPept result file can contain multiple GO IDs in a single row. In order to create a normalized table of this data, these rows will be split so each record contains only one GO ID.
