@@ -1404,8 +1404,7 @@ the names of these organisms.
 
 In addition to the use of `corr.axes` and `get.communitytype` we have several tools to differentiate between
 different groupings of samples. The first we'll demonstrate is `metastats`, which is a non-parametric T-test
-that determines whether there are any OTUs that are differentially represented between the samples from men
-and women in this study.
+that determines whether there are any OTUs that are differentially represented between the samples from early and late in this study.
 
 > ### {% icon hands_on %} Hands-on: T-test
 >
