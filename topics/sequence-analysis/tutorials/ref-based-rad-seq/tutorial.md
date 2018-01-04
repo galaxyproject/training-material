@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 topic_name: sequence-analysis
-tutorial_name: ref-based-rad-seq
+tutorial_name: denovo-rad-seq
 ---
 
 # Introduction
