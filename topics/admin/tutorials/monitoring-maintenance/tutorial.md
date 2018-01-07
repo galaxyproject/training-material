@@ -4,6 +4,8 @@ topic_name: admin
 tutorial_name: monitoring-maintenance
 ---
 
+# Monitoring and maintenance
+
 ## Runing the Reports Application
 
 ### Section 1 - Configure reports
