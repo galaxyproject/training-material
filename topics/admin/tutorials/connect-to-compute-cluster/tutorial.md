@@ -848,8 +848,8 @@ Hopefully, you now understand:
 
 - The [sample dynamic tool destination config file](https://github.com/galaxyproject/galaxy/blob/dev/config/tool_destinations.yml.sample) fully describes the configuration language
 - [Dynamic destination documentation](https://wiki.galaxyproject.org/Admin/Config/Jobs#Dynamic_Destination_Mapping)
-- Job resource parameters are not as well documented as they could be, but the [sample configuration file](https://github.com/galaxyproject/usegalaxy-playbook/blob/master/files/galaxy/test.galaxyproject.org/config/job_resource_params_conf.xml) shows some of the possibilities.
-- [usegalaxy.org's job_conf.xml](https://github.com/galaxyproject/usegalaxy-playbook/blob/master/templates/galaxy/usegalaxy.org/config/job_conf.xml.j2) is publicly available for reference.
+- Job resource parameters are not as well documented as they could be, but the [sample configuration file](https://github.com/galaxyproject/usegalaxy-playbook/blob/master/env/test/files/galaxy/config/job_resource_params_conf.xml) shows some of the possibilities.
+- [usegalaxy.org's job_conf.xml](https://github.com/galaxyproject/usegalaxy-playbook/blob/master/env/main/templates/galaxy/config/job_conf.xml.j2) is publicly available for reference.
 
 
 
