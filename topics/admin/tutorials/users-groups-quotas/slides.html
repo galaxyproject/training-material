@@ -1,0 +1,204 @@
+---
+layout: tutorial_slides
+topic_name: admin
+tutorial_name: users-groups-quotas
+logo: "GTN"
+
+---
+class: special, center, middle
+
+# Users, Groups, Quotas
+
+.footnote[\#usegalaxy / @galaxyproject]
+
+---
+
+class: left
+## Overview
+
+This section will cover handling of users, groups and quotas for Galaxy. We will look at the following in particular:
+* User Activation and Control
+* User Passwords and Session Policies
+* Setting Admin users and admin control of users
+* User Privacy
+* Roles and Groups
+* Setting permissions on Libraries and Datasets
+* Quotas
+* Introduction to alternate authentication
+---
+
+class: left
+## User Activation
+
+Require verification that a user's email is real. You must enable SMTP first.
+
+In `galaxy.ini`:
+* `user_activation_on` require users to click link in email before running jobs.
+* `activation_grace_period` time (hours) that a user can 'explore' Galaxy before activation lockout.
+* `inactivity_box_content` message provided to non-activated users.
+* Disposable domain blacklist
+  * `blacklist_file` defines domains in XXX.YYY format that will be rejected as user emails.
+
+
+Exercise:
+   - Enable User activation
+   - Register a new user (second email / email+1@domail.tld)
+   - Upload a Dataset
+---
+
+class: left
+## User Control
+
+In `galaxy.ini`:
+* `require_login` can be enabled to prevent anonymous access.
+* `show_welcome_with_login` show welcome page next to login page
+* `allow_user_creation` allow user registration. When False, admins must create users; often coupled with `require_login`.
+* `allow_user_dataset_purge` users can purge (permanently delete) their datasets.
+* `api_allow_run_as` list of email addresses of API users who can make calls on behalf of other users.
+* `expose_dataset_path` users to see the full path of datasets via the "View Details" option in the history.
+
+---
+class: left
+## Password & Session Policies
+
+In `galaxy.ini`:
+* `password_expiration_period` days before requiring a user to change password.
+* `session_duration` minutes before invaliding a user's session, requiring re-login.
+
+---
+
+class: left
+## Admin Control
+
+In `galaxy.ini`:
+* `admin_users` comma-separated list of admin users' emails
+* `allow_user_deletion` admins can delete users
+* `allow_user_impersonation` admins can become other users. Great for debugging / user assistance.
+* `master_api_key` admin super-key allows many API admin actions without having a real admin user.
+
+Exercise:
+ - Enable user impersonation
+ - Log in as admin and become other user
+ - View existing and create Histories and Datasets.
+
+---
+
+class: left
+## User Privacy
+
+In `galaxy.ini`:
+* `expose_user_name` users can view other registered usernames
+* `expose_user_email` users can view other registered emails
+* `new_user_dataset_access_role_default_private` newly created datasets are private to the creating user
+
+---
+
+class: left
+## Roles and Groups
+
+#### Role Based Access Control (RBAC)
+
+**Admin** can:
+* create roles (each user automatically has their own 'private' role)
+* create groups
+* assign roles to groups
+* asign users to groups
+* assign groups to roles
+* assign users to roles
+* assign permission sets to roles
+* assign permission sets to groups
+
+---
+
+class: left
+## Dataset Roles
+
+
+.left-column50[
+**manage permissions**
+* Users who have associated role on a dataset can manage the roles associated it.
+
+**access**
+* Users having associated role can use/view/download a dataset for analysis. Users must have every role associated with a dataset in order to access it
+]
+
+.right-column50[.middle[.image-90[
+![User_roles](../../images/dataset_roles.png)
+]]]
+---
+
+## Library Roles
+
+
+.left-column50[
+* **modify library item**: Users having associated role can modify this library item
+* **access library**: Restrict access to this library to only users having associated role
+* **add library item**: Users having associated role can add library items to this library item
+* **manage library permissions**: Users having associated role can manage roles associated with permissions on this library item
+]
+.left-column50[.image-90[
+![Library_roles](../../images/Library_roles.png)
+]]
+
+---
+class: left
+## Role Demo
+
+* We will now demonstrate creation of Groups and Roles.
+* We will show how restricting access to a Dataset prevents usage or download.
+
+---
+class: left
+## Quotas
+
+Used to control user disk usage.
+
+To turn on the use of quotas: In `galaxy.ini`:
+* `enable_quotas` Enable enforcement of quotas.  Quotas can be set from the Admin interface (under Data).
+* must create quotas in admin interface before any quota will be enforced, otherwise 'unlimited'
+
+Amounts:
+ - Examples: "10000MB", "99 gb", "0.2T", "unlimited"
+ - = / + / -
+
+Default for user class:
+ - None (No)
+ - Unregistered Users
+ - Registered Users
+
+or associated with Groups or Users
+
+---
+class: left
+## Exercise: Creating Quotas
+
+* Create quotas for Unregistered (1b) and Registered Users (1mb)
+* Create a quota that adds 1GB
+* Create a quota that decreases by 1GB
+* Create a quota that grants unlimited
+
+---
+class: left
+## Alternate Authentication
+
+* Galaxy-specific login using e-mail address and password
+* OpenID authentication with Galaxy as a relying party
+* HTTP remote user provided by any front-end Web server
+
+More on this topic in Advanced Session 4: External authentication
+
+---
+class: left
+## OpenID
+
+* `enable_openid` Enable authentication via OpenID.
+* `openid_config_file` = config/openid_conf.xml.sample used if default does not exist
+* `openid_consumer_cache_path` where to cache OpenID files
+
+Exercise: Enable OpenID:
+* `enable_openid = True`
+* Log in using GenomeSpace
+* Log out
+* Log in using GenomeSpace
+* Send files to GenomeSpace
+* Retrieve files from GenomeSpace
