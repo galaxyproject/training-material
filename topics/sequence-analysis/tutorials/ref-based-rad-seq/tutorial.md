@@ -34,7 +34,7 @@ We will look at the first run SRR034310 out of seven which includes 16 samples f
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
-> 1. Create a new history for this RAD-seq exercise. If you are not inspired, you can name it "STACKS 1.42 RAD: population genomics with reference genome" for example...
+> 1. Create a new history for this RAD-seq exercise. If you are not inspired, you can name it "STACKS RAD: population genomics with reference genome" for example...
 > 2. **Upload Reads from SRA** {% icon tool %}: Run `EBI SRA`
 >    - Select the Run from the results of the search for `SRR034310` (which will present you 1 Experiment (SRX015877) and 1 Run (SRR034310)). 
 >    - Click the link in the column **FASTQ files (Galaxy)** of the results table
@@ -110,7 +110,7 @@ In order to obtain results of higher quality we will play with the advanced opti
 > ### {% icon hands_on %} Hands-on: 
 >
 > 2. **Process Radtags** {% icon tool %}: Re-Run `Stacks: process radtags` on FastQ file playing with parameters
->   - In `advanced options`, activate the `Discard reads with low quality scores` option and play with the score limit (default vs 20 vs 10 for example) and examine the change in reads retained. 
+>   - In `advanced options`, activate the `Discard reads with low quality scores` option and play with the score limit (default (nolimit) vs 20 vs 10 for example) and examine the change in reads retained. 
 >   - Note that you can play also with the sliding window score threshold, by default 15% of the length of the read. This sliding window parameter allows notably the user to deal with the declining quality at the 3' end of reads.
 
 Then we generate a graphical display of the changes: 
@@ -187,7 +187,7 @@ To make sense of the reads, their positions within *Gasterosteus aculeatus* geno
 >
 > Do you want to learn more about the principles behind mapping? Follow our [training]({{site.baseurl}}/topics/sequence-analysis/)
 
-Here we will use BWA. BWA is a fast light-weighted tool that aligns relatively short sequences (queries) to a sequence database (large), such as the human reference genome. It is developed by Heng Li at the Sanger Insitute.
+Here we will use BWA. BWA is a fast light-weighted tool that aligns relatively short sequences (queries) to a sequence database (large), such as the human reference genome. It is developed by Heng Li at the Sanger Institute.
 
 *[Li et Durbin, Bioinformatics, 2009](https://www.ncbi.nlm.nih.gov/pubmed/19451168)*
 
@@ -195,9 +195,9 @@ Here we will use BWA. BWA is a fast light-weighted tool that aligns relatively s
 > 1. **Map with BWA - map short reads (< 100 bp) against reference genome ** {% icon tool %}: 
 > 
 > - Will you select a reference genome from your history or use a built-in index?: Use a genome from history and build index
-> - Use the following dataset as the reference sequence: chromFa
-> - Select input type: Single fastq
-> - Select fastq dataset: One dataset collections containing the demultiplexed (in the following we discuss the TODO which setting we discuss?)
+> - Use the following dataset as the reference sequence: Reference_genome_11_chromosomes.fasta
+> - Select input type: Single-end
+> - Select fastq dataset: One dataset collection containing the demultiplexed (in the following we discuss the TODO which setting we discuss?)
 > - Leave everything else 
 
 **BWA** generates BAM files with the mapped reads.
