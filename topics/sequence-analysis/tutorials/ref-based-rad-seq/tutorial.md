@@ -162,7 +162,19 @@ For quality control, we use similar tools as described in [NGS-QC tutorial]({{si
 >    >    </ol>
 >    >    </details>
 >
-> TODO we need to talk about quality here and explain the drop at the begin and end! also why we don't do anything against it... 
+
+Note the quality drop at bases 5-10 which are the cut site of the RADSeq
+protocol (TGCAGG). This is caused by the extremely uneven distribution the
+sequencer observes TGCAGG in lockstep on all spots/clusters, i.e. all clusters
+light up at the same time. Therefore the sequencer can not be sure that each
+spot/cluster is correct which is expressed by the lower quality score. Usually
+PhiX is added to reduce this problem, but in the publication it is not stated 
+if and to which extent this was done here. 
+Still, approximately ~99% of the cases match nucleotide expected for the cut 
+site sequence.  
+TODO the question now is: is that to be expected? Can we refer some document here?
+Also note that the nucleotide distribution of the inidices (bases 1-4) is 
+slightly skewed.
 
 
 As there is a draft genome for *Gasterosteus aculeatus*, we can use this information and map the sequences on this genome to identify polymorphism.
