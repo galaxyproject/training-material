@@ -175,128 +175,32 @@ be taken into consideration when choosing where to run jobs and what parameters 
 
 <p><strong>Part 1 - Install Slurm</strong></p>
 
-<p>Install Slurm from apt:</p>
+<p>Install Slurm with apt:</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> <span class="nb">sudo </span>apt <span class="nb">install </span>slurm-wlm
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> <span class="nb">sudo </span>apt-get <span class="nb">install</span> <span class="nt">-y</span> slurm-wlm
 <span class="go">Reading package lists... Done
 Building dependency tree       
 Reading state information... Done
 The following additional packages will be installed:
 </span><span class="c">  ...
-</span><span class="go">Suggested packages:
-</span><span class="c">  ...
-</span><span class="go">The following NEW packages will be installed:
-</span><span class="c">  ...
-</span><span class="go">0 upgraded, 56 newly installed, 0 to remove and 31 not upgraded.
-Need to get 28.4 MB of archives.
-After this operation, 119 MB of additional disk space will be used.
-Do you want to continue? [Y/n] 
-Get:1 http://archive.ubuntu.com/ubuntu xenial/main amd64 libxau6 amd64 1:1.0.8-1 [8376 B]
-</span><span class="c">  ...
-</span><span class="go">Get:56 http://archive.ubuntu.com/ubuntu xenial/universe amd64 slurm-wlm amd64 15.08.7-1build1 [6482 B]
-Fetched 28.4 MB in 3s (9030 kB/s)     
-Selecting previously unselected package libxau6:amd64.
-(Reading database ... 16043 files and directories currently installed.)
-Preparing to unpack .../libxau6_1%3a1.0.8-1_amd64.deb ...
-Unpacking libxau6:amd64 (1:1.0.8-1) ...
-</span><span class="c">  ...
-</span><span class="go">Setting up munge (0.5.11-3) ...
-Generating a pseudo-random key using /dev/urandom completed.
-Please refer to /usr/share/doc/munge/README.Debian for instructions to generate more secure key.
-Job for munge.service failed because the control process exited with error code. See "systemctl status munge.service" and "journalctl -xe" for details.
-invoke-rc.d: initscript munge, action "start" failed.
-dpkg: error processing package munge (--configure):
- subprocess installed post-installation script returned error exit status 1
-</span><span class="c">  ...
-</span><span class="go">dpkg: error processing package slurm-wlm (--configure):
- dependency problems - leaving unconfigured
-Processing triggers for libc-bin (2.23-0ubuntu3) ...
-Processing triggers for systemd (229-4ubuntu7) ...
-Processing triggers for ureadahead (0.100.0-19) ...
-Errors were encountered while processing:
- munge
- slurm-client
- slurmd
- slurmctld
- slurm-wlm
-E: Sub-process /usr/bin/dpkg returned an error code (1)
 </span><span class="gp">$</span>
 </code></pre></div></div>
 
 <p>Installed with Slurm is MUNGE (MUNGE Uid ‘N Gid Emporium…) which authenticates users between cluster hosts. You would normally need to ensure the same Munge key is distributed across all cluster hosts (in <code class="highlighter-rouge">/etc/munge/munge.key</code>) - A great task for Ansible. However, the installation of the munge package has created a random key for you, and you will not need to distribute this since you’ll run jobs locally.</p>
-
-<p>However, MUNGE installs in Ubuntu in a broken state(!): It does not like that <code class="highlighter-rouge">/var/log</code> is group writable. This can be seen by the failed <code class="highlighter-rouge">apt install</code> output, and some digging:</p>
-
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> systemctl status munge
-<span class="go">● munge.service - MUNGE authentication service
-</span><span class="gp">   Loaded: loaded (/lib/systemd/system/munge.service;</span> enabled<span class="p">;</span> vendor preset: enabled<span class="o">)</span>
-<span class="gp">   Active: failed (Result: exit-code) since Fri 2016-11-04 15:46:03 EDT;</span> 1min 27s ago
-<span class="go">     Docs: man:munged(8)
-
-Nov 04 15:46:03 gat2016 systemd[1]: Starting MUNGE authentication service...
-Nov 04 15:46:03 gat2016 systemd[1]: munge.service: Control process exited, code=exited status=1
-Nov 04 15:46:03 gat2016 systemd[1]: Failed to start MUNGE authentication service.
-Nov 04 15:46:03 gat2016 systemd[1]: munge.service: Unit entered failed state.
-Nov 04 15:46:03 gat2016 systemd[1]: munge.service: Failed with result 'exit-code'.
-</span><span class="gp">$</span> journalctl | <span class="nb">grep </span>munged
-<span class="go">Nov 04 15:46:03 gat2016 munged[4430]: munged: Error: Logfile is insecure: group-writable permissions set on "/var/log"
-</span><span class="gp">$</span>
-</code></pre></div></div>
-
-<p>You can fix this by instructing MUNGE to log to syslog instead of writing its log files to <code class="highlighter-rouge">/var/log/munge/</code> directly. To do this, modify its systemd service definition using <code class="highlighter-rouge">sudo systemctl edit --full munge</code>. Modify the <code class="highlighter-rouge">ExecStart</code> option and append ` –syslog` so that the entire file appears as:</p>
-
-<div class="language-ini highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">[Unit]</span>
-<span class="py">Description</span><span class="p">=</span><span class="s">MUNGE authentication service</span>
-<span class="py">Documentation</span><span class="p">=</span><span class="s">man:munged(8)</span>
-<span class="py">After</span><span class="p">=</span><span class="s">network.target</span>
-<span class="py">After</span><span class="p">=</span><span class="s">time-sync.target</span>
-
-<span class="nn">[Service]</span>
-<span class="py">Type</span><span class="p">=</span><span class="s">forking</span>
-<span class="py">ExecStart</span><span class="p">=</span><span class="s">/usr/sbin/munged --syslog</span>
-<span class="py">PIDFile</span><span class="p">=</span><span class="s">/var/run/munge/munged.pid</span>
-<span class="py">User</span><span class="p">=</span><span class="s">munge</span>
-<span class="py">Group</span><span class="p">=</span><span class="s">munge</span>
-<span class="py">Restart</span><span class="p">=</span><span class="s">on-abort</span>
-
-<span class="nn">[Install]</span>
-<span class="py">WantedBy</span><span class="p">=</span><span class="s">multi-user.target</span>
-</code></pre></div></div>
-
-<p>You can then complete the installation by running <code class="highlighter-rouge">sudo apt install</code> without any package arguments:</p>
-
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> <span class="nb">sudo </span>apt <span class="nb">install</span>
-<span class="go">Reading package lists... Done
-Building dependency tree
-Reading state information... Done
-0 upgraded, 0 newly installed, 0 to remove and 91 not upgraded.
-5 not fully installed or removed.
-After this operation, 0 B of additional disk space will be used.
-Setting up munge (0.5.11-3) ...
-Setting up slurm-client (15.08.7-1build1) ...
-Setting up slurmd (15.08.7-1build1) ...
-update-alternatives: using /usr/sbin/slurmd-wlm to provide /usr/sbin/slurmd (slurmd) in auto mode
-Setting up slurmctld (15.08.7-1build1) ...
-update-alternatives: using /usr/sbin/slurmctld-wlm to provide /usr/sbin/slurmctld (slurmctld) in auto mode
-Setting up slurm-wlm (15.08.7-1build1) ...
-Processing triggers for systemd (229-4ubuntu7) ...
-Processing triggers for ureadahead (0.100.0-19) ...
-</span></code></pre></div></div>
 
 <p>Verify that MUNGE is now running with <code class="highlighter-rouge">systemctl status munge</code>:</p>
 
 <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> systemctl status munge
 <span class="go">● munge.service - MUNGE authentication service
 </span><span class="gp">   Loaded: loaded (/etc/systemd/system/munge.service;</span> enabled<span class="p">;</span> vendor preset: enabled<span class="o">)</span>
-<span class="gp">   Active: active (running) since Fri 2016-11-04 16:05:29 EDT;</span> 4min 55s ago
+<span class="gp">   Active: active (running) since Wed 2018-01-10 13:15:33 UTC;</span> 3min 46s ago
 <span class="go">     Docs: man:munged(8)
  Main PID: 4805 (munged)
    CGroup: /system.slice/munge.service
            └─4805 /usr/sbin/munged --syslog
 
-Nov 04 16:05:29 gat2016 munged[4805]: Found 2 users with supplementary groups in 0.000 seconds
-Nov 04 16:05:29 gat2016 systemd[1]: Started MUNGE authentication service.
-Nov 04 16:05:30 gat2016 munged[4805]: Stirring PRNG entropy pool
+Jan 10 13:15:33 galaxy-admin-ws-big-35 systemd[1]: Starting MUNGE authentication service...
+Jan 10 13:15:33 galaxy-admin-ws-big-35 systemd[1]: Started MUNGE authentication service.
 </span><span class="gp">$</span>
 </code></pre></div></div>
 
@@ -783,7 +687,7 @@ but the package was later renamed to <code class="highlighter-rouge">slurm-wlm</
 <div class="language-ini highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="py">tool_destinations_config_file</span> <span class="p">=</span> <span class="s">/srv/galaxy/config/tool_destinations.yml</span>
 </code></pre></div></div>
 
-<p>Once the dynamic tool definition has been written, we need to update Galaxy’s job configuration to use this rule. Open <code class="highlighter-rouge">/srv/galaxy/job_conf.xml</code> and add a DTD destination:</p>
+<p>Once the dynamic tool definition has been written, we need to update Galaxy’s job configuration to use this rule. Open <code class="highlighter-rouge">/srv/galaxy/config/job_conf.xml</code> and add a DTD destination:</p>
 
 <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>        <span class="nt">&lt;destination</span> <span class="na">id=</span><span class="s">"dtd"</span> <span class="na">runner=</span><span class="s">"dynamic"</span><span class="nt">&gt;</span>
             <span class="nt">&lt;param</span> <span class="na">id=</span><span class="s">"type"</span><span class="nt">&gt;</span>dtd<span class="nt">&lt;/param&gt;</span>
