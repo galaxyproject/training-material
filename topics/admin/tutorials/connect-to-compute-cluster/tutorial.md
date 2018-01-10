@@ -16,117 +16,19 @@ be taken into consideration when choosing where to run jobs and what parameters 
 
 **Part 1 - Install Slurm**
 
-Install Slurm from apt:
+Install Slurm with apt:
 
 ```console
-$ sudo apt install slurm-wlm
+$ sudo apt-get install -y slurm-wlm
 Reading package lists... Done
 Building dependency tree       
 Reading state information... Done
 The following additional packages will be installed:
   ...
-Suggested packages:
-  ...
-The following NEW packages will be installed:
-  ...
-0 upgraded, 56 newly installed, 0 to remove and 31 not upgraded.
-Need to get 28.4 MB of archives.
-After this operation, 119 MB of additional disk space will be used.
-Do you want to continue? [Y/n] 
-Get:1 http://archive.ubuntu.com/ubuntu xenial/main amd64 libxau6 amd64 1:1.0.8-1 [8376 B]
-  ...
-Get:56 http://archive.ubuntu.com/ubuntu xenial/universe amd64 slurm-wlm amd64 15.08.7-1build1 [6482 B]
-Fetched 28.4 MB in 3s (9030 kB/s)     
-Selecting previously unselected package libxau6:amd64.
-(Reading database ... 16043 files and directories currently installed.)
-Preparing to unpack .../libxau6_1%3a1.0.8-1_amd64.deb ...
-Unpacking libxau6:amd64 (1:1.0.8-1) ...
-  ...
-Setting up munge (0.5.11-3) ...
-Generating a pseudo-random key using /dev/urandom completed.
-Please refer to /usr/share/doc/munge/README.Debian for instructions to generate more secure key.
-Job for munge.service failed because the control process exited with error code. See "systemctl status munge.service" and "journalctl -xe" for details.
-invoke-rc.d: initscript munge, action "start" failed.
-dpkg: error processing package munge (--configure):
- subprocess installed post-installation script returned error exit status 1
-  ...
-dpkg: error processing package slurm-wlm (--configure):
- dependency problems - leaving unconfigured
-Processing triggers for libc-bin (2.23-0ubuntu3) ...
-Processing triggers for systemd (229-4ubuntu7) ...
-Processing triggers for ureadahead (0.100.0-19) ...
-Errors were encountered while processing:
- munge
- slurm-client
- slurmd
- slurmctld
- slurm-wlm
-E: Sub-process /usr/bin/dpkg returned an error code (1)
 $
 ```
 
 Installed with Slurm is MUNGE (MUNGE Uid 'N Gid Emporium...) which authenticates users between cluster hosts. You would normally need to ensure the same Munge key is distributed across all cluster hosts (in `/etc/munge/munge.key`) - A great task for Ansible. However, the installation of the munge package has created a random key for you, and you will not need to distribute this since you'll run jobs locally.
-
-However, MUNGE installs in Ubuntu in a broken state(!): It does not like that `/var/log` is group writable. This can be seen by the failed `apt install` output, and some digging:
-
-```console
-$ systemctl status munge
-● munge.service - MUNGE authentication service
-   Loaded: loaded (/lib/systemd/system/munge.service; enabled; vendor preset: enabled)
-   Active: failed (Result: exit-code) since Fri 2016-11-04 15:46:03 EDT; 1min 27s ago
-     Docs: man:munged(8)
-
-Nov 04 15:46:03 gat2016 systemd[1]: Starting MUNGE authentication service...
-Nov 04 15:46:03 gat2016 systemd[1]: munge.service: Control process exited, code=exited status=1
-Nov 04 15:46:03 gat2016 systemd[1]: Failed to start MUNGE authentication service.
-Nov 04 15:46:03 gat2016 systemd[1]: munge.service: Unit entered failed state.
-Nov 04 15:46:03 gat2016 systemd[1]: munge.service: Failed with result 'exit-code'.
-$ journalctl | grep munged
-Nov 04 15:46:03 gat2016 munged[4430]: munged: Error: Logfile is insecure: group-writable permissions set on "/var/log"
-$
-```
-
-You can fix this by instructing MUNGE to log to syslog instead of writing its log files to `/var/log/munge/` directly. To do this, modify its systemd service definition using `sudo systemctl edit --full munge`. Modify the `ExecStart` option and append ` --syslog` so that the entire file appears as:
-
-```ini
-[Unit]
-Description=MUNGE authentication service
-Documentation=man:munged(8)
-After=network.target
-After=time-sync.target
-
-[Service]
-Type=forking
-ExecStart=/usr/sbin/munged --syslog
-PIDFile=/var/run/munge/munged.pid
-User=munge
-Group=munge
-Restart=on-abort
-
-[Install]
-WantedBy=multi-user.target
-```
-
-You can then complete the installation by running `sudo apt install` without any package arguments:
-
-```console
-$ sudo apt install
-Reading package lists... Done
-Building dependency tree
-Reading state information... Done
-0 upgraded, 0 newly installed, 0 to remove and 91 not upgraded.
-5 not fully installed or removed.
-After this operation, 0 B of additional disk space will be used.
-Setting up munge (0.5.11-3) ...
-Setting up slurm-client (15.08.7-1build1) ...
-Setting up slurmd (15.08.7-1build1) ...
-update-alternatives: using /usr/sbin/slurmd-wlm to provide /usr/sbin/slurmd (slurmd) in auto mode
-Setting up slurmctld (15.08.7-1build1) ...
-update-alternatives: using /usr/sbin/slurmctld-wlm to provide /usr/sbin/slurmctld (slurmctld) in auto mode
-Setting up slurm-wlm (15.08.7-1build1) ...
-Processing triggers for systemd (229-4ubuntu7) ...
-Processing triggers for ureadahead (0.100.0-19) ...
-```
 
 Verify that MUNGE is now running with `systemctl status munge`:
 
@@ -134,15 +36,14 @@ Verify that MUNGE is now running with `systemctl status munge`:
 $ systemctl status munge
 ● munge.service - MUNGE authentication service
    Loaded: loaded (/etc/systemd/system/munge.service; enabled; vendor preset: enabled)
-   Active: active (running) since Fri 2016-11-04 16:05:29 EDT; 4min 55s ago
+   Active: active (running) since Wed 2018-01-10 13:15:33 UTC; 3min 46s ago
      Docs: man:munged(8)
  Main PID: 4805 (munged)
    CGroup: /system.slice/munge.service
            └─4805 /usr/sbin/munged --syslog
 
-Nov 04 16:05:29 gat2016 munged[4805]: Found 2 users with supplementary groups in 0.000 seconds
-Nov 04 16:05:29 gat2016 systemd[1]: Started MUNGE authentication service.
-Nov 04 16:05:30 gat2016 munged[4805]: Stirring PRNG entropy pool
+Jan 10 13:15:33 galaxy-admin-ws-big-35 systemd[1]: Starting MUNGE authentication service...
+Jan 10 13:15:33 galaxy-admin-ws-big-35 systemd[1]: Started MUNGE authentication service.
 $
 ```
 
