@@ -543,7 +543,7 @@ We also need to inform Galaxy of the path to the file we've just created, which 
 tool_destinations_config_file = /srv/galaxy/config/tool_destinations.yml
 ```
 
-Once the dynamic tool definition has been written, we need to update Galaxy's job configuration to use this rule. Open `/srv/galaxy/job_conf.xml` and add a DTD destination:
+Once the dynamic tool definition has been written, we need to update Galaxy's job configuration to use this rule. Open `/srv/galaxy/config/job_conf.xml` and add a DTD destination:
 
 ```xml
         <destination id="dtd" runner="dynamic">
