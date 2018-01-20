@@ -845,10 +845,10 @@ animal) followed by a D and a three digit number (number of days post weaning).
 >
 > > ### {% icon question %} Question
 > >
-> >  What would you exect the result of `count.groups` on this new shared file output to be? Check if you are correct.
+> >  What would you exect the result of `count.groups` on this new shared output collection to be? Check if you are correct.
 > > <details>
 > >   <summary> Click to view answer</summary>
-> >   all groups (samples) should now have 2440 sequences. Run count.groups again on the shared file output by the sub.sample
+> >   all groups (samples) should now have 2440 sequences. Run count.groups again on the shared output collection by the sub.sample
 > >   tool to confirm that this is indeed what happened.
 > >  </details>
 > {: .question}
@@ -1352,7 +1352,7 @@ F3D9     9
 > community types
 >
 > <!-- TODO: add this tool to mothur suite -->
-> - **Get.communitype** {% icon tool %} with the following parameters
+> - **Get.communitytype** {% icon tool %} with the following parameters
 >   - "shared" to Subsample.shared file
 >
 {: .hands_on}
@@ -1404,8 +1404,7 @@ the names of these organisms.
 
 In addition to the use of `corr.axes` and `get.communitytype` we have several tools to differentiate between
 different groupings of samples. The first we'll demonstrate is `metastats`, which is a non-parametric T-test
-that determines whether there are any OTUs that are differentially represented between the samples from men
-and women in this study.
+that determines whether there are any OTUs that are differentially represented between the samples from early and late in this study.
 
 > ### {% icon hands_on %} Hands-on: T-test
 >

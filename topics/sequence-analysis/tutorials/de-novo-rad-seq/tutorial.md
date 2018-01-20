@@ -86,11 +86,28 @@ For demultiplexing, we use the Process Radtags tool from [STACKS](https://www.g3
 > As we are exporting demultiplexed reads in data collections, you have hidden datasets on your history. These datasets are in fact symlinks on the data collections and are by default hidden on the history. If you want to see these datasets, you can click on the `hidden` statement just under the history name.
 >
 > ### {% icon question %} Questions
+=======
+>    > ### {% icon question %} Questions
+>    >
+>    > 1. How many reads where on the original dataset?
+>    > 2. How many are kept?
+>    > 3. Can you try to explain the reason why we loose a lot of reads here?
+>    > 4. What kind of infiormation this result gives concerning the upcoming data analysis and the barcodes design in general ?
+>    >
+>    >    <details>
+>    >    <summary>Click to view answers</summary>
+>    >    <ol type="2">
+>    >    <li>8895289 total reads</li>
+>    >    <li>8139531 retained reads</li>
+>    >    <li>Exploring the `results.log` file allows you to see that there is no sequences filtered for low quality statement. As we don't specify the corresponding advanced option, Process radtags didn't apply quality related filtering. So here, all not retained sequences are not recorded because of an ambiguous barcode or an ambiguous RAD-Tag. This means that some barcodes are not exactly what was specified on the barcode file and that sometimes, no SbfI restriction enzyme site was found. This can be due to some sequencing problems but here, this is also due to the addition, in the original sequencing library, of RAD-seq samples from another study. This is something often used to avoid having too much sequences beginning with the exact same nucleotides sequences and thus Illumina related issues during sequencing and clusters analysis </li>
+>    >    <li>Sequencing quality is essential! Each time your sequencing quality decreases, you loose data and thus essential biological information!</li>
+>    >    </ol>
+>    >    </details>
 >
-> 1. How many reads were on the original dataset?
-> 2. How many are kept?
-> 3. Can you try to explain the reason why we loose a lot of reads here?
-> 4. What kind of information this result gives concerning the upcoming data analysis and the barcodes design in general ?
+> 2. **Process Radtags** {% icon tool %}: Re-Run `Stacks: process radtags` on FastQ file playing with parameters
+>
+> In `advanced options`, after activation of the `Discard reads with low quality scores` option, play with the score limit (default vs 20 for example) and examine the change in reads retained. Note that you can play also with the sliding window score threshold, by default 15% of the length of the read. This sliding window parameter allows notably the user to deal with the declining quality at the 3' end of reads.
+>
 >
 >    <details>
 >    <summary>Click to view answers</summary>
@@ -107,6 +124,23 @@ For demultiplexing, we use the Process Radtags tool from [STACKS](https://www.g3
 In order to obtain results of higher quality we will play with the advanced options:  
 
 > ### {% icon hands_on %} Hands-on: 
+=======
+>
+>
+> You can use the `Charts` functionality through the Visualize button reachable on the `Radtags logs` file you just generated.
+>
+>
+> If like me you don't have payed attention to the organization of you file for the graphical representation you obtain a non optimal bars diagram with a not intelligent X-axis ordering. There is a lot of different manner to fix this. You can use the copy/paste "bidouille" like seen previously, or you can use Galaxy tools to manipulate the `radtags logs` (did you change the filename from `pasted entry` to another label ?) file to generate a better graph. For example, you can use `Select lines that match an expression` tool to select rows then use the `Concatenate datasets tail-to-head` tool to reorganize these lines in a new file... OR, as I made, you can just sort the file using the first column.
+>
+>
+>
+> And you obtain a file like this one, ready to generate a beautiful and smart bar diagram!
+>
+> ![The result of sorting](../../images/RAD4_Population_Genomics/Process_radtags_charts_tablemodif_view.PNG)
+>
+> ![The chart on the sorted file](../../images/RAD4_Population_Genomics/Process_radtags_charts_end.PNG)
+>
+>Using filter like `clean data, remove any read with an uncalled base` has here few impact:
 >
 > 2. **Process Radtags** {% icon tool %}: Re-Run `Stacks: process radtags` on FastQ file playing with parameters
 >   - In `advanced options`, activate the `Discard reads with low quality scores` option and play with the score limit (default (nolimit) vs 20 vs 10 for example) and examine the change in reads retained. 

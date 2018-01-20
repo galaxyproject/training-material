@@ -1,6 +1,8 @@
 ---
 api_key: admin
 galaxy_instance: http://localhost:8080
+install_resolver_dependencies: true
+install_tool_dependencies: false
 tools:
   - name: fastqc
     owner: devteam
@@ -22,6 +24,10 @@ tools:
     owner: iuc
     tool_panel_section_label: 'NGS: RNA Analysis'
 
+  - name: deeptools_bam_coverage
+    owner: bgruening
+    tool_panel_section_label: 'NGS: QC and manipulation'
+
   - name: deseq2
     owner: iuc
     tool_panel_section_label: 'NGS: RNA Analysis'
@@ -30,31 +36,25 @@ tools:
     owner: iuc
     tool_panel_section_label: 'NGS: RNA Analysis'
 
-  - name: cast
-    owner: moheydarian
-    tool_shed_url: https://testtoolshed.g2.bx.psu.edu/
+  - name: reshape2_cast
+    owner: iuc
     tool_panel_section_label: 'Text Manipulation'
 
-  - name: melt
-    owner: moheydarian
-    tool_shed_url: https://testtoolshed.g2.bx.psu.edu/
+  - name: reshape2_melt
+    owner: iuc
     tool_panel_section_label: 'Text Manipulation'
 
-  - name: ggplot_scatterplot
-    owner: moheydarian
-    tool_shed_url: https://testtoolshed.g2.bx.psu.edu/
+  - name: ggplot2_point
+    owner: iuc
     tool_panel_section_label: 'Graph/Display Data'
 
-  - name: ggplot_histogram
-    owner: moheydarian
-    tool_shed_url: https://testtoolshed.g2.bx.psu.edu/
+  - name: ggplot2_histogram
+    owner: iuc
     tool_panel_section_label: 'Graph/Display Data'
 
-  - name: ggplot_violin_plot
-    owner: moheydarian
-    tool_shed_url: https://testtoolshed.g2.bx.psu.edu/
+  - name: ggplot2_violin
+    owner: iuc
     tool_panel_section_label: 'Graph/Display Data'
-
 
   - name: collection_column_join
     owner: iuc
@@ -81,13 +81,11 @@ tools:
     tool_panel_section_label: 'Text Manipulation'
 
   - name: tsne
-    owner: moheydarian
-    tool_shed_url: https://testtoolshed.g2.bx.psu.edu/
+    owner: iuc
     tool_panel_section_label: 'Graph/Display Data'
 
-  - name: heatmap2
-    owner: moheydarian
-    tool_shed_url: https://testtoolshed.g2.bx.psu.edu/
+  - name: ggplot2_heatmap2
+    owner: iuc
     tool_panel_section_label: 'Graph/Display Data'
 
   - name: column_maker
