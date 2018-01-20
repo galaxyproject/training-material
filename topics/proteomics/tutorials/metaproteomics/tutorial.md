@@ -128,6 +128,8 @@ The created dataset collection of the three *MGF files* in the history is used a
 >    - **X!Tandem: Protein stP Bias**: `No`
 >    - **X!Tandem: Maximum Valid Expectation Value**: `100`
 >
+>    - leave everything else as default
+>
 > 2. Click **Execute**.
 >
 {: .hands_on}
@@ -167,7 +169,8 @@ outputs.
 > 1. **PeptideShaker** {% icon tool %}: Run **PeptideShaker** with:
 >   - **Compressed SearchGUI results**: The SearchGUI archive file
 >   - **Specify Advanced PeptideShaker Processing Options**: `Default Processing Options`
->   - **Specify Advanced Filtering Options**: `Default Filtering Options`
+>   - **Specify Advanced Filtering Options**: `Advanced Filtering Options`
+>   - **Maximum Precursor Error Type**: `Daltons`
 >   - **Specify Contact Information for mzIdendML**: You can leave the default dummy options for now, but feel free to enter custom contact information.
 >   - **Include the protein sequences in mzIdentML**: `No`
 >   - **Output options**: Select the `PSM Report` (Peptide-Spectral Match) and the `Certificate of Analysis`
