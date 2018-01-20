@@ -97,29 +97,23 @@ For demultiplexing, we use the Process Radtags tool from [STACKS](https://www.g3
 >    >    <li>Sequencing quality is essential! Each time your sequencing quality decreases, you loose data and thus essential biological information!</li>
 >    >    </ol>
 >    >    </details>
-> ![Process radtags output](../../images/RAD4_Population_Genomics/Process_radtags_out_log.png)
 >
 > 2. **Process Radtags** {% icon tool %}: Re-Run `Stacks: process radtags` on FastQ file playing with parameters
 >
 > In `advanced options`, after activation of the `Discard reads with low quality scores` option, play with the score limit (default vs 20 for example) and examine the change in reads retained. Note that you can play also with the sliding window score threshold, by default 15% of the length of the read. This sliding window parameter allows notably the user to deal with the declining quality at the 3' end of reads.
 >
-> ![Advanced options in Process radtags tool](../../images/RAD4_Population_Genomics/Process_radtags_in_advancedparameter0.PNG)
 >
-> ![Advanced options in Process radtags tool](../../images/RAD4_Population_Genomics/Process_radtags_in_advancedparameter1.PNG)
 >
 > To do that, you can use data handling Galaxy tools to cut the interesting lines of each `result.log with Stacks: process radtags` files OR, as I made, just copy/paste these lines on the Galaxy upload tool using Paste/fetch data section and modifying the File header by sample and filename by Score 10 / Score 20 and noscorelimit for example... Before Starting the upload, you can select the `Convert spaces to tabs` option through the `Upload configuration` wheel.
 >
-> ![Output after using advanced parameters](../../images/RAD4_Population_Genomics/Process_radtags_in_advancedparameter_compare_copy.PNG)
 >
-> ![Output after using advanced parameters](../../images/RAD4_Population_Genomics/Process_radtags_in_advancedparameter_compare_paste.PNG)
 >
 > You can use the `Charts` functionality through the Visualize button reachable on the `Radtags logs` file you just generated.
 >
-> ![Process radtags chart](../../images/RAD4_Population_Genomics/Process_radtags_charts.PNG)
 >
 > If like me you don't have payed attention to the organization of you file for the graphical representation you obtain a non optimal bars diagram with a not intelligent X-axis ordering. There is a lot of different manner to fix this. You can use the copy/paste "bidouille" like seen previously, or you can use Galaxy tools to manipulate the `radtags logs` (did you change the filename from `pasted entry` to another label ?) file to generate a better graph. For example, you can use `Select lines that match an expression` tool to select rows then use the `Concatenate datasets tail-to-head` tool to reorganize these lines in a new file... OR, as I made, you can just sort the file using the first column.
 >
-> ![Sorting tool parameters](../../images/RAD4_Population_Genomics/Process_radtags_charts_tablemodif.PNG)
+>
 >
 > And you obtain a file like this one, ready to generate a beautiful and smart bar diagram!
 >
