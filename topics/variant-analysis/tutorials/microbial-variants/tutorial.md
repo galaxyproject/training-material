@@ -79,20 +79,13 @@ We have an annotated reference and so will use it in this case.
 
 > ### {% icon hands_on %} Hands-on: Run Snippy
 >
-> 1. Go to the Galaxy tools panel, and use the search box at the top to search for **Snippy** and then open it's interface.
-> 1. For **Reference type** select *Genbank*.
-> 1. Then for **Reference Genbank** choose the *wildtype.gbk* file.
-> 1. For **Single or Paired-end reads** choose *Paired*.
-> 1. Then choose the first set of reads, *mutant_R1.fastq* and second set of reads, *mutant_R2.fastq*.
-> 1. For **Cleanup the non-snp output files** select *No*.
-> <br/>
-> <br/>
-> Your tool interface should look like this:
->
->  ![Snippy interface](../../images/interface.png)
->
-> - Click **Execute**.
->
+> 1. Search for **Snippy** {% icon tool %} and run it with the following parameters
+>   - "Reference type" to `Genbank`
+>   - "Reference Genbank" to the `wildtype.gbk` file
+>   - "Single or Paired-end reads" to `Paired`
+>   - "Select first set of reads" to `mutant_R1.fastq`
+>   - "Select second set of reads" to `mutant_R2.fastq`
+>   - "Cleanup the non-snp output files" to `No`
 {: .hands_on}
 
 ## Step 3: Examine Snippy output
@@ -101,36 +94,35 @@ Snippy has taken the reads, mapped them against the reference using BWA MEM, loo
 
 It produces quite a bit of output, there can be up to 10 output files.
 
-| Filename | Description  |
-|----------|--------------|
-| snps vcf file | The final annotated variants in VCF format  |
-|----------|--------------|
-| snps gff file | The variants in GFF3 format |
-|----------|--------------|
-| snps table | A simple tab-separated summary of all the variants |
-|------------|------------|
-| snps summary  | A summary of the snps called  |
-|------------|------------|
-| log file  | A log file with the commands run and their outputs  |
-|------------|------------|
-| aligned fasta | A version of the reference but with - at position with depth=0 and N for 0 < depth < --mincov **(does not have variants)**  |
-|------------|------------|
-| consensus fasta | A version of the reference genome with all variants instantiated  |
-|------------|------------|
-| mapping depth | A table of the mapping depth  |
-|------------|------------|
-| mapped reads bam  | A bam file containing all of the mapped reads |
-|------------|------------|
-| outdir  | A tarball of the Snippy output directory for inout into Snippy-core if required |
-|------------|------------|
+Filename | Description
+--- | ---
+snps vcf file | The final annotated variants in VCF format
+snps gff file | The variants in GFF3 format
+snps table | A simple tab-separated summary of all the variants
+snps summary  | A summary of the snps called
+log file  | A log file with the commands run and their outputs
+aligned fasta | A version of the reference but with - at position with depth=0 and N for 0 < depth < --mincov **(does not have variants)** 
+consensus fasta | A version of the reference genome with all variants instantiated
+mapping depth | A table of the mapping depth
+mapped reads bam  | A bam file containing all of the mapped reads
+outdir  | A tarball of the Snippy output directory for inout into Snippy-core if required
 
 We will now have a look at the contents of the snp table file.
 
 > ### {% icon hands_on %} Hands-on: View the SNPs
 >
-> 1. Go to the file called *snippy on data XX, data XX and data XX table* and click on the eye icon.
->   - We can see a list of variants. Look in column 3 to see which types the variants are, such as a SNP or a deletion.
-> 1. Look at the third variant called. This is a T&rarr;A mutation, causing a stop codon. Look at column 14: the product of this gene is a methicillin resistance protein. Methicillin is an antibiotic.
+> 1. Inspect the `snippy on data XX, data XX and data XX table` file by clicking on the eye icon
+>    
+>     You can see a list of variants
+> 
+> 2. Look in **column 3** to which types the variants are, such as a SNP or a deletion
+> 3. Look at the third variant called
+>
+>     This is a T&rarr;A mutation, causing a stop codon. 
+>
+> 4. Look at **column 14**
+>
+>      The product of this gene is a methicillin resistance protein. Methicillin is an antibiotic.
 >
 >    > ### :question: Question
 >    >
@@ -147,87 +139,70 @@ We will now have a look at the contents of the snp table file.
 
 We could go through all of the variants like this and read them out of a text table, but this is onerous and doesn't really give the context of the changes very well. It would be much nicer to have a visualisation of the snps and the other relevant data. In Galaxy we can use a tool called JBrowse.
 
-> ### {% icon hands_on %} Hands-on: Run JBrowse
+> ### {% icon hands_on %} Hands-on: Inspecting the SNPs using JBrowse
 >
-> 1. Go to the Galaxy tools panel, and use the search box at the top to search for **JBrowse** and load it's interface.
-> 1. Under **Reference genome to display** choose *Use a genome from history*.
-> 1. Under **Select the reference genome** choose *wildtype.fna*. This sequence will be the reference against which annotations are displayed.
-> 1. For **Produce a Standalone Instance** select *Yes*.
-> 1. For **Genetic Code** choose *11: The Bacterial, Archaeal and Plant Plastid Code*.
-> 1. Under **JBrowse-in-Galaxy Action** choose *New JBrowse Instance*.
-> 1. We will now set up three different tracks - these are datasets displayed underneath the reference sequence (which is displayed as nucleotides in FASTA format). We will choose to display the sequence reads (the .bam file), the variants found by snippy (the .gff file) and the annotated reference genome (the wildtype.gff)
+> 1. Search for **JBrowse** {% icon tool %} and run it with the following parameters
+>    - "Reference genome to display" to `Use a genome from history`
+>    - "Select the reference genome" to `wildtype.fna`
+>       
+>       This sequence will be the reference against which annotations are displayed
 >
-> 1. *Track 1 - sequence reads*
->   - Click **Insert Track Group**
->   - For **Track Cateogry** name it "sequence reads"
->   - Click **Insert Annotation Track**
->   - For **Track Type** choose *BAM Pileups*
->   - For **BAM Track Data** select *snippy bam file*
->   - For **Autogenerate SNP Track** select *Yes*
->   - Under **Track Visibility** choose *On for new users*.
-> 1. *Track 2 - variants*
->   - Click **Insert Track Group** again
->   - For **Track Category** name it "variants"
->   - Click **Insert Annotation Track**
->   - For **Track Type** choose *GFF/GFF3/BED/GBK Features*
->   - For **Track Data** select *snippy snps gff file*
->   - Under **Track Visibility** choose *On for new users*.
-> 1. *Track 3 - annotated reference*
->   - Click **Insert Track Group** again
->   - For ** Track Category** name it "annotated reference"
->   - Click **Insert Annotation Track**
->   - For **Track Type** choose *GFF/GFF3/BED/GBK Features*
->   - For **Track Data** select *wildtype.gff*
->   - Under **JBrowse Track Type[Advanced]** select *Canvas Features*.
->   - Click on **JBrowse Styling Options [Advanced]**
->   - Under **JBrowse style.label** add in the word *product*.
->   - Under **JBrowse style.description** add in the word *product*.
->   - Under **Track Visibility** choose *On for new users*.
-> 1. Click **Execute**
+>    - "Produce Standalone Instance" to `Yes`
+>    - "Genetic Code" to `11: The Bacterial, Archaeal and Plant Plastid Code`
+>    - "JBrowse-in-Galaxy Action" to `New JBrowse Instance`
+>    - "Track Group"
+>       
+>        We will now set up three different tracks - these are datasets displayed underneath the reference sequence (which is displayed as nucleotides in FASTA format). We will choose to display the sequence reads (the .bam file), the variants found by snippy (the .gff file) and the annotated reference genome (the wildtype.gff)
 >
-{: .hands_on}
-
-
-A new file will be created in your history, this contains the JBrowse interactive visualisation. We will now view it's contents and play with it.
-
-> ### {% icon hands_on %} Hands-on: Viewing the JBrowse visualisation
+>       - **Track 1 - sequence reads**: Click on `Insert Track Group` and fill it with
+>           - "Track Cateogry" to `sequence reads`
+>           - Click on `Insert Annotation Track` and fill it with
+>               - "Track Type" to `BAM Pileups`
+>               - "BAM Track Data" to `snippy bam file`
+>               - "Autogenerate SNP Track" to `Yes`
+>               - "Track Visibility" to `On for new users`
+>       - **Track 2 - variants**: Click on `Insert Track Group` and fill it with
+>           - "Track Cateogry" to `variants`
+>           - Click on `Insert Annotation Track` and fill it with
+>               - "Track Type" to `GFF/GFF3/BED/GBK Features`
+>               - "GFF/GFF3/BED Track Data" to `snippy snps gff file`
+>               - "Track Visibility" to `On for new users`
+>       - **Track 3 - annotated reference**: Click on `Insert Track Group` and fill it with
+>           - "Track Cateogry" to `annotated reference`
+>           - Click on `Insert Annotation Track` and fill it with
+>               - "Track Type" to `GFF/GFF3/BED/GBK Features`
+>               - "GFF/GFF3/BED Track Data" to `wildtype.gff`
+>               - "Track Visibility" to `On for new users`
+>               - "JBrowse Track Type [Advanced]" to `Canvas Features`
+>               - Click on "JBrowse Styling Options [Advanced]"
+>               - "JBrowse style.label" to `product`
+>               - "JBrowse style.description" to `product`
+>               - "Track Visibility" to `On for new users`
 >
-> 1. Click on the eye icon on *JBrowse on data XX and data XX - Complete* in your history. The JBrowse window will appear in the centre Galaxy panel.
+>    A new file will be created in your history, this contains the JBrowse interactive visualisation. We will now view it's contents and play with it
+> 
+> 2. Inspect the `JBrowse on data XX and data XX - Complete` file by clicking on the eye icon
 >
-> <br/>
-> **Display all the tracks and practice maneuvering around**
+>    The JBrowse window will appear in the centre Galaxy panel.
 >
-> 1. On the left, tick boxes to display the tracks
-> 1. Use the minus button to zoom out to see:
->   - sequence reads and their coverage (the grey graph)
-> 1. Use the plus button to zoom in to see:
->   - probable real variants (a whole column of snps)
->   - probable errors (single one here and there)
-> <br/>
-> <br/>
+> 3. Display all the tracks and practice maneuvering around
+>    1. Click on the tick boxes on the left to display the tracks
+>    1. Zoom out by clicking on the `minus` button to see sequence reads and their coverage (the grey graph)
+>    1. Zoom in by clicking on the `plus` button to see
+>       - probable real variants (a whole column of snps)
+>       - probable errors (single one here and there)
 >
-> ![JBrowse screenshot](../../images/jbrowse1.png)
-> <br/>
-> <br/>
+>    ![JBrowse screenshot](../../images/jbrowse1.png "Screenshot of JBrowse")
 >
-> **Look at the stop SNP**
+> 4. Look at the stop SNP
+>    1. Type `47299` in the coordinates box
+>    2. Click on `Go` to see the position of the SNP discussed above
+>   
+>    The correct codon at this position is TGT, coding for the amino acid Cysteine (middle row of the amino acid translations). The mutation of T &rarr; A turns this triplet into TGA, a stop codon.
 >
-> 1. In the coordinates box, type in *47299* and then **Go** to see the position of the SNP discussed above.
->   - the correct codon at this position is TGT, coding for the amino acid Cysteine, in the middle row of the amino acid translations.
->   - the mutation of T &rarr; A turns this triplet into TGA, a stop codon.
-> <br/>
-> <br/>
->
-> ![JBrowse screenshot](../../images/jbrowse2.png)
+>    ![JBrowse screenshot](../../images/jbrowse2.png "Inspection of the STOP SNP using JBrowse")
 >
 {: .hands_on}
-
-<!--
->    > ### :nut_and_bolt: Comments
->    > A comment
->    {: .comment}
-
--->
 
 # Conclusion
 {:.no_toc}
