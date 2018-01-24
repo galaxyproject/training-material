@@ -280,7 +280,9 @@ generating PSMs from MS/MS data. For the purpose of this tutorial, <strong>X!Tan
       <p>Section <strong>Precursor Options</strong>:</p>
 
       <ul>
-        <li><strong>Fragment Tolerance (Daltons)</strong>: <code class="highlighter-rouge">0.02</code>- this is high resolution MS/MS data</li>
+        <li><strong>Fragment Tolerance Units</strong>: <code class="highlighter-rouge">Daltons</code></li>
+        <li><strong>Fragment Tolerance</strong>: <code class="highlighter-rouge">0.02</code>- this is high resolution MS/MS data</li>
+        <li><strong>Maximum Charge</strong>: <code class="highlighter-rouge">6</code></li>
       </ul>
 
       <p>Section <strong>Protein Modification Options</strong>:</p>
@@ -355,7 +357,8 @@ More detailed information on peptide inference using SearchGUI and PeptideShaker
       <ul>
         <li><strong>Compressed SearchGUI results</strong>: The SearchGUI archive file</li>
         <li><strong>Specify Advanced PeptideShaker Processing Options</strong>: <code class="highlighter-rouge">Default Processing Options</code></li>
-        <li><strong>Specify Advanced Filtering Options</strong>: <code class="highlighter-rouge">Default Filtering Options</code></li>
+        <li><strong>Specify Advanced Filtering Options</strong>: <code class="highlighter-rouge">Advanced Filtering Options</code></li>
+        <li><strong>Maximum Precursor Error Type</strong>: <code class="highlighter-rouge">Daltons</code></li>
         <li><strong>Specify Contact Information for mzIdendML</strong>: You can leave the default dummy options for now, but feel free to enter custom contact information.</li>
         <li><strong>Include the protein sequences in mzIdentML</strong>: <code class="highlighter-rouge">No</code></li>
         <li><strong>Output options</strong>: Select the <code class="highlighter-rouge">PSM Report</code> (Peptide-Spectral Match) and the <code class="highlighter-rouge">Certificate of Analysis</code></li>
@@ -481,7 +484,7 @@ will store the created database in the history, allowing to reuse it directly.</
 
 FROM psm
 
-WHERE validation IS NOT 'Confident' AND confidence &gt;= 95
+WHERE confidence &gt;= 95
 
 ORDER BY sequence
 </code></pre></div>          </div>
@@ -541,7 +544,7 @@ Therefore we can search the database for the peptides and count the occurrence w
 
 FROM psm
 
-WHERE validation IS NOT 'Confident' AND confidence &gt;= 95
+WHERE confidence &gt;= 95
 
 GROUP BY sequence
 
@@ -677,7 +680,7 @@ once again used, aggregating the number of peptides and PSMs for each genus leve
           <p><strong>Only load the columns you have named into database</strong>: <code class="highlighter-rouge">Yes</code></p>
         </li>
         <li>
-          <p><strong>Save the sqlite database in your history</strong>: <code class="highlighter-rouge">No</code></p>
+          <p><strong>Save the sqlite database in your history</strong>: <code class="highlighter-rouge">Yes</code></p>
         </li>
         <li>
           <p><strong>SQL Query to generate tabular output</strong>:</p>
@@ -686,14 +689,13 @@ once again used, aggregating the number of peptides and PSMs for each genus leve
 
 FROM psm LEFT JOIN lca ON psm.sequence = lca.peptide
 
-WHERE validation IS NOT 'Confident' AND confidence &gt;= 95
+WHERE confidence &gt;= 95
 
 GROUP BY lca.genus
 
 ORDER BY PSMs desc, 'DISTINCT PEPTIDES' desc
 </code></pre></div>          </div>
         </li>
-        <li><strong>Omit column headers from tabular output</strong>: <code class="highlighter-rouge">No</code></li>
       </ul>
     </li>
     <li>
@@ -829,37 +831,6 @@ for each protein.</p>
 
 </blockquote>
 
-<h4 id="normalizing-a-table-split-tabular-columns">Normalizing a table: Split Tabular Columns</h4>
-
-<p>The UniPept result file can contain multiple GO IDs in a single row. In order to create a normalized table of this data, these rows will be split so each record contains only one GO ID using the <strong>Split Tabular Columns</strong> tool:</p>
-
-<blockquote class="hands_on">
-  <h3 id="-hands-on-split-tabular-columns"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Split Tabular Columns</h3>
-
-  <ol>
-    <li>
-      <p><strong>Split Tabular Columns</strong> <i class="fa fa-wrench" aria-hidden="true"></i>: Run <strong>Split Tabular Columns</strong> with:</p>
-
-      <ul>
-        <li><strong>Tabular Dataset to normalize</strong>: The latest UniPept <code class="highlighter-rouge">tabluar</code>/<code class="highlighter-rouge">tsv</code> output</li>
-        <li><strong>Columns to split</strong>: Select <code class="highlighter-rouge">Column: 6</code>, the one containing the GO IDs</li>
-        <li><strong>List delimiter in column</strong>: Insert a single space in the input field</li>
-      </ul>
-    </li>
-    <li>
-      <p>Click <strong>Execute</strong>.</p>
-    </li>
-    <li>
-      <p>inspect the result:</p>
-
-      <ul>
-        <li>The column labeled <code class="highlighter-rouge">go_references</code> should now contain only no or one entry.</li>
-      </ul>
-    </li>
-  </ol>
-
-</blockquote>
-
 <h4 id="combine-all-information-to-quantify-the-go-results">Combine all information to quantify the GO results</h4>
 
 <p>As a final step we will use <strong>Query Tabular</strong> in a more sophisticated way to combine all information to quantify the GO analysis. The three used file and the extracted information are:</p>
@@ -898,28 +869,13 @@ for each protein.</p>
         <li><strong>Tabular Dataset for Table</strong>: The <code class="highlighter-rouge">Gene Ontology Terms</code> file</li>
       </ul>
 
-      <p>Section <strong>Table Options</strong>:</p>
-
-      <ul>
-        <li><strong>Specify Name for Table</strong>: <code class="highlighter-rouge">go</code></li>
-        <li><strong>Specify Column Names (comma-separated list)</strong>: <code class="highlighter-rouge">aspect,go_id,description</code></li>
-      </ul>
-    </li>
-    <li>
-      <p>Repeat this step to have a second <strong>Database Table</strong>:</p>
-
-      <ul>
-        <li><strong>Database Table</strong>: Click on <code class="highlighter-rouge">+ Insert Database Table</code></li>
-        <li><strong>Tabular Dataset for Table</strong>: The <strong>Unipept</strong> normalized <code class="highlighter-rouge">tabluar</code>/<code class="highlighter-rouge">tsv</code> output</li>
-      </ul>
-
       <p>Section <strong>Filter Dataset Input</strong>:</p>
 
       <ul>
         <li><strong>Filter Tabular Input Lines</strong>: Click on <code class="highlighter-rouge">+ Insert Filter Tabular Input Lines</code>:</li>
-        <li><strong>Filter By</strong>: Select <code class="highlighter-rouge">comment char</code>
+        <li><strong>Filter By</strong>: Select <code class="highlighter-rouge">skip leading lines</code>
           <ul>
-            <li><strong>Ignore lines beginning with these characters</strong>: Select <code class="highlighter-rouge">#</code></li>
+            <li><strong>Skip lines</strong>: <code class="highlighter-rouge">1</code></li>
           </ul>
         </li>
       </ul>
@@ -927,12 +883,106 @@ for each protein.</p>
       <p>Section <strong>Table Options</strong>:</p>
 
       <ul>
-        <li><strong>Specify Name for Table</strong>: <code class="highlighter-rouge">bering</code></li>
-        <li><strong>Specify Column Names (comma-separated list)</strong>: <code class="highlighter-rouge">peptide,uniprot_id,taxon_id,taxon_name, ec_references,go_reference,refseq_ids,refseq_protein_ids,insdc_ids,insdc_protein_ids</code></li>
+        <li><strong>Specify Name for Table</strong>: <code class="highlighter-rouge">go</code></li>
+        <li><strong>Specify Column Names (comma-separated list)</strong>: <code class="highlighter-rouge">aspect,go_id,description</code></li>
+        <li><strong>Table Index</strong>: Click on <code class="highlighter-rouge">+ Insert Table Index</code>:
+          <ul>
+            <li><strong>This is a unique index</strong>: <code class="highlighter-rouge">No</code></li>
+            <li><strong>Index on Columns</strong>: <code class="highlighter-rouge">aspect,go_id</code></li>
+          </ul>
+        </li>
       </ul>
     </li>
     <li>
-      <p>Repeat this step to have a third <strong>Database Table</strong>:</p>
+      <p>Repeat this step to have a second <strong>Database Table</strong>:</p>
+
+      <ul>
+        <li><strong>Database Table</strong>: Click on <code class="highlighter-rouge">+ Insert Database Table</code></li>
+        <li><strong>Tabular Dataset for Table</strong>: The <strong>Unipept</strong> <code class="highlighter-rouge">tabluar</code>/<code class="highlighter-rouge">tsv</code> output</li>
+      </ul>
+
+      <p>Section <strong>Filter Dataset Input</strong>:</p>
+
+      <ul>
+        <li><strong>Filter Tabular Input Lines</strong>: Click on <code class="highlighter-rouge">+ Insert Filter Tabular Input Lines</code>:</li>
+        <li><strong>Filter By</strong>: Select <code class="highlighter-rouge">skip leading lines</code>
+          <ul>
+            <li><strong>Skip lines</strong>: <code class="highlighter-rouge">1</code></li>
+          </ul>
+        </li>
+        <li>Add another Filter: Click on <code class="highlighter-rouge">+ Insert Filter Tabular Input Lines</code>:</li>
+        <li><strong>Filter By</strong>: Select <code class="highlighter-rouge">prepend a line number column</code></li>
+      </ul>
+
+      <p>Section <strong>Table Options</strong>:</p>
+
+      <ul>
+        <li><strong>Specify Name for Table</strong>: <code class="highlighter-rouge">bering_prot</code></li>
+        <li><strong>Specify Column Names (comma-separated list)</strong>: <code class="highlighter-rouge">id,peptide,uniprot_id,taxon_id,taxon_name,ec_references,go_references,refseq_ids,refseq_protein_ids,insdc_ids,insdc_protein_ids</code></li>
+        <li><strong>Table Index</strong>: Click on <code class="highlighter-rouge">+ Insert Table Index</code>:
+          <ul>
+            <li><strong>This is a unique index</strong>: <code class="highlighter-rouge">No</code></li>
+            <li><strong>Index on Columns</strong>: <code class="highlighter-rouge">id,peptide</code></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <p>Repeat this step to have another <strong>Database Table</strong>:</p>
+
+      <ul>
+        <li><strong>Database Table</strong>: Click on <code class="highlighter-rouge">+ Insert Database Table</code></li>
+        <li><strong>Tabular Dataset for Table</strong>: The same <strong>Unipept</strong> <code class="highlighter-rouge">tabluar</code>/<code class="highlighter-rouge">tsv</code> output</li>
+      </ul>
+
+      <p>Section <strong>Filter Dataset Input</strong>:</p>
+
+      <ul>
+        <li><strong>Filter Tabular Input Lines</strong>: Click on <code class="highlighter-rouge">+ Insert Filter Tabular Input Lines</code>:</li>
+        <li><strong>Filter By</strong>: Select <code class="highlighter-rouge">skip leading lines</code>
+          <ul>
+            <li><strong>Skip lines</strong>: leave blank</li>
+          </ul>
+        </li>
+        <li>Add another Filter: Click on <code class="highlighter-rouge">+ Insert Filter Tabular Input Lines</code>:</li>
+        <li><strong>Filter By</strong>: Select <code class="highlighter-rouge">prepend a line number column</code></li>
+        <li>Add another Filter: Click on <code class="highlighter-rouge">+ Insert Filter Tabular Input Lines</code>:</li>
+        <li><strong>Filter By</strong>: Select <code class="highlighter-rouge">select columns</code>
+          <ul>
+            <li><strong>enter column numbers to keep</strong>: <code class="highlighter-rouge">1,7</code></li>
+          </ul>
+        </li>
+        <li>Add another Filter: Click on <code class="highlighter-rouge">+ Insert Filter Tabular Input Lines</code>:</li>
+        <li><strong>Filter By</strong>: Select <code class="highlighter-rouge">normalize list columns, replicates row for each item in list</code>
+          <ul>
+            <li><strong>enter column numbers to normalize</strong>: <code class="highlighter-rouge">2</code></li>
+            <li><strong>List item delimiter in column</strong>: ` ` (a single blank character)</li>
+          </ul>
+        </li>
+      </ul>
+
+      <blockquote class="comment">
+        <h3 id="-comments-2"><i class="fa fa-commenting-o" aria-hidden="true"></i> Comments</h3>
+        <ul>
+          <li>The UniPept result file can contain multiple GO IDs in a single row. In order to create a normalized table of this data, these rows will be split so each record contains only one GO ID.</li>
+        </ul>
+      </blockquote>
+
+      <p>Section <strong>Table Options</strong>:</p>
+
+      <ul>
+        <li><strong>Specify Name for Table</strong>: <code class="highlighter-rouge">bering_prot_go</code></li>
+        <li><strong>Specify Column Names (comma-separated list)</strong>: <code class="highlighter-rouge">id,go_reference</code></li>
+        <li><strong>Table Index</strong>: Click on <code class="highlighter-rouge">+ Insert Table Index</code>:
+          <ul>
+            <li><strong>This is a unique index</strong>: <code class="highlighter-rouge">No</code></li>
+            <li><strong>Index on Columns</strong>: <code class="highlighter-rouge">go_reference,id</code></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <p>Repeat this step to have another <strong>Database Table</strong>:</p>
 
       <ul>
         <li><strong>Database Table</strong>: Click on <code class="highlighter-rouge">+ Insert Database Table</code></li>
@@ -949,14 +999,25 @@ for each protein.</p>
             <li><strong>action for regex match</strong>: <code class="highlighter-rouge">include line on pattern match</code></li>
           </ul>
         </li>
+        <li>Add another Filter: Click on <code class="highlighter-rouge">+ Insert Filter Tabular Input Lines</code>:</li>
+        <li><strong>Filter By</strong>: Select <code class="highlighter-rouge">select columns</code>
+          <ul>
+            <li><strong>enter column numbers to keep</strong>: <code class="highlighter-rouge">1,3,23,24</code></li>
+          </ul>
+        </li>
       </ul>
 
       <p>Section <strong>Table Options</strong>:</p>
 
       <ul>
         <li><strong>Specify Name for Table</strong>: <code class="highlighter-rouge">bering_psms</code></li>
-        <li>
-          <p><strong>Specify Column Names (comma-separated list)</strong>: <code class="highlighter-rouge">id,,sequence,,,,,,,,,,,,,,,,,,,,confidence,validation</code></p>
+        <li><strong>Specify Column Names (comma-separated list)</strong>: <code class="highlighter-rouge">id,sequence,confidence,validation</code></li>
+        <li><strong>Only load the columns you have named into database</strong>: <code class="highlighter-rouge">Yes</code></li>
+        <li><strong>Table Index</strong>: Click on <code class="highlighter-rouge">+ Insert Table Index</code>:
+          <ul>
+            <li><strong>This is a unique index</strong>: <code class="highlighter-rouge">No</code></li>
+            <li><strong>Index on Columns</strong>: <code class="highlighter-rouge">sequence,id</code></li>
+          </ul>
         </li>
         <li>
           <p><strong>Save the sqlite database in your history</strong>: <code class="highlighter-rouge">Yes</code></p>
@@ -964,37 +1025,64 @@ for each protein.</p>
         <li>
           <p><strong>SQL Query to generate tabular output</strong>:</p>
 
-          <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT g.description, count(distinct b.peptide) as "bering_peptides", count(distinct b.id) as "bering_psms"
+          <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT sequence as "peptide", count(id) as "PSMs"
 
-FROM go as g JOIN
+FROM bering_psms
 
-( SELECT go.description, bering.peptide, bering_psms.id
+WHERE confidence &gt;= 95
 
-FROM go LEFT OUTER JOIN bering ON go.go_id = bering.go_reference JOIN bering_psms ON bering.peptide = bering_psms.sequence
+GROUP BY sequence
 
-GROUP BY go.description, bering.peptide, bering_psms.id
-
-) as b ON g.description = b.description
-
-WHERE g.aspect = 'biological_process'
-
-GROUP BY g.description
-
-ORDER BY  bering_peptides desc,bering_psms desc
+ORDER BY sequence
 </code></pre></div>          </div>
         </li>
-        <li><strong>include query result column headers</strong>: <code class="highlighter-rouge">Yes</code></li>
       </ul>
     </li>
     <li>
-      <p>Click <strong>Execute</strong> and inspect the three query result files.</p>
+      <p>Click <strong>Execute</strong>.</p>
     </li>
   </ol>
 
 </blockquote>
 
-<p>With these three resulting files the functional analysis of this tutorial is finished. Each record contains the name of a GO term, the amount of peptides
-related to it and the amount of PSMs for these peptides.</p>
+<p>With this we have combined all the data into a single database which we can now query to extract the desired information with <strong>SQLite to tabular</strong>:</p>
+
+<blockquote class="hands_on">
+  <h3 id="-hands-on-sqlite-to-tabular-1"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: SQLite to tabular</h3>
+
+  <ol>
+    <li>
+      <p><strong>SQLite to tabular</strong> <i class="fa fa-wrench" aria-hidden="true"></i>: Run <strong>SQLite to tabular</strong> with:</p>
+
+      <ul>
+        <li><strong>SQLite Database</strong>: The created SQLite database from the former step</li>
+        <li>
+          <p><strong>SQL Query</strong>:</p>
+
+          <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT go.description, 
+
+count(distinct bering_psms.sequence) as "bering_peptides", count(distinct bering_psms.id) as "bering_psms" 
+
+FROM go JOIN bering_prot_go ON go.go_id = bering_prot_go.go_reference JOIN bering_prot on bering_prot_go.id = bering_prot.id JOIN 
+
+bering_psms ON bering_prot.peptide = bering_psms.sequence
+
+WHERE go.aspect = 'molecular_function'
+
+GROUP BY go.description
+
+ORDER BY  bering_peptides desc,bering_psms desc
+</code></pre></div>          </div>
+        </li>
+      </ul>
+    </li>
+    <li>Click <strong>Execute</strong>.</li>
+    <li>Repeat these steps two times by replacing <code class="highlighter-rouge">molecular_function</code> in the fifth row of the SQL query by <code class="highlighter-rouge">biological_process</code> and <code class="highlighter-rouge">cellular_component</code>.</li>
+  </ol>
+
+</blockquote>
+
+<p>With these three resulting files the functional analysis of this tutorial is finished. Each record contains the name of a GO term, the amount of peptides related to it and the amount of PSMs for these peptides.</p>
 
 <blockquote class="comment">
   <h3 id="-references"><i class="fa fa-commenting-o" aria-hidden="true"></i> References</h3>
