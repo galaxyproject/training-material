@@ -34,11 +34,7 @@ Prokka requires assembled contigs.
 >    > * Select the option **Create New** from the menu
 >    {: .tip}
 >
-> 2. **Import Sample Data.** The data for this course may be available from a shared library in Galaxy
-> (ask your instructor). If this is not the case, you can upload it yourself.
-> - Option 1: From data library:
->   - Navigate to the shared data library, you should find a file called `contigs.fasta`
-> - Option 2: From your computer:
+> 2. **Import Sample Data.**
 >   - Obtain data directly from Zenodo: [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.1156405.svg)](https://doi.org/10.5281/zenodo.1156405)
 >   - Download `contigs.fasta`
 >   - Upload the file to your history.
