@@ -11,15 +11,6 @@ In this section we will use a software tool called Prokka to annotate a draft ge
 
 Prokka finds and annotates features (both protein coding regions and RNA genes, i.e. tRNA, rRNA) present on on a sequence. Note, Prokka uses a two-step process for the annotation of protein coding regions: first, protein coding regions on the genome are identified using [Prodigal](http://prodigal.ornl.gov/); second, the *function* of the encoded protein is predicted by similarity to proteins in one of many protein or protein domain databases. Prokka is a software tool that can be used to annotate bacterial, archaeal and viral genomes quickly, generating standard output files in GenBank, EMBL and gff formats. More information about Prokka can be found [here](https://github.com/tseemann/prokka).
 
-## Learning objectives
-{:.no_toc}
-
-At the end of this tutorial you should be able to:
-
-1. load a genome assembly into Prokka
-2. annotate the assembly using Prokka
-3. examine the annotated genome using JBrowse
-
 > ### Agenda
 >
 > In this tutorial, we will deal with:
