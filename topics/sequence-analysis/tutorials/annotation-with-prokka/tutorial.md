@@ -77,7 +77,7 @@ Once Prokka has finished, examine each of its output files.
 
 Now that we have annotated the draft genome sequence, we would like to view the sequence in the JBrowse genome viewer. First, we have to make a JBrowse file. Then, we can view it within Galaxy.
 
-> ### {% icon hands_on %} Hands-on: Visualize the annotation
+> ### {% icon hands_on %} Hands-on: Create the JBrowse file
 >
 > 1. Search for **JBrowse** {% icon tool %} and run it with the following parameters
 >    - "Reference genome to display" to `Use a genome from history`
@@ -89,8 +89,8 @@ Now that we have annotated the draft genome sequence, we would like to view the 
 >    - "Genetic Code" to `11: The Bacterial, Archaeal and Plant Plastid Code`
 >    - "JBrowse-in-Galaxy Action" to `New JBrowse Instance`
 >    - "Track Group"
->       
-        We will now set up one track - each track is a dataset displayed underneath the reference sequence (which is displayed as nucleotides in FASTA format). We will choose to display the annotations (the Prokka.gff file).
+>    - We will now set up one track - each track is a dataset displayed underneath the reference sequence (which is displayed as nucleotides in FASTA format).
+>    - We will choose to display the annotations (the Prokka.gff file).
 >
 >       - **Track 1 - sequence reads**: Click on `Insert Track Group` and fill it with
 >           - "Track Cateogry" to `gene annotations`
@@ -102,12 +102,12 @@ Now that we have annotated the draft genome sequence, we would like to view the 
 >               - Click on "JBrowse Styling Options [Advanced]"
 >               - "JBrowse style.label" to `product,name,id`
 >               - "Track Visibility" to `On for new users`
+>               - Click Execute
 >
-> - Your tool interface should look like this:
->![JBrowse interface](images/jbrowse_int.png)
-> - Click Execute
-
->    A new file will be created in your history, this contains the JBrowse interactive visualisation. We will now view its contents and play with it
+>  - A new file will be created in your history, this contains the JBrowse interactive visualisation. We will now > view its contents and play with it
+> <br><br>
+> {: .hands_on}
+> ### {% icon hands_on %} Hands-on: Visualize the annotation
 >
 > 2. Inspect the `JBrowse on data XX and data XX - Complete` file by clicking on the eye icon
 >
@@ -118,21 +118,13 @@ Now that we have annotated the draft genome sequence, we would like to view the 
 >    2. Select contig 1 in the drop down box. You can only see one contig displayed at a time.
 >    1. Zoom out by clicking on the `minus` button to see sequence reads and their coverage (the grey graph)
 >    1. Zoom in by clicking on the `plus` button to see annotations.
-
->
-> <br><br>
-> - Zoom in to see the reference sequence at the top.
-> <br><br>
-> - JBrowse displays the sequence and a 6-frame amino acid translation.
-> Zoomed in view:
+>    1. JBrowse displays the sequence and a 6-frame amino acid translation.
+>    1. Right click on a gene/feature annotation (the bars on the annotation track), then select View Details to see more information.
+>      - gene name
+>      - product name
+>      - you can download the FASTA sequence by clicking on the disk icon.
 > <br><br>
 > ![JBrowse](images/jbrowse6.png)
-> - Right click on a gene/feature annotation (the bars on the annotation track), then select View Details to see more information.
-    - gene name
-    - product name
-    - you can download the FASTA sequence by clicking on the disk icon.
 > <br><br>
->
->
->
-{: .hands_on}
+
+>{: .hands_on}
