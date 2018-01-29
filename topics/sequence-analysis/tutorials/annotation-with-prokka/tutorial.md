@@ -66,51 +66,60 @@ Now we will run the tool called Prokka.
 
 Once Prokka has finished, examine each of its output files.
 
-> ### {% icon hands_on %} Hands-on: output files
->
-> - The GFF and GBK files contain all of the information about the features annotated (in different formats.)
-> - The .txt file contains a summary of the number of features annotated.
-> - The .faa file contains the protein sequences of the genes annotated.
-> - The .ffn file contains the nucleotide sequences of the genes annotated.
-> <br><br>
-{: .hands_on}
+ - The GFF and GBK files contain all of the information about the features annotated (in different formats.)
+ - The .txt file contains a summary of the number of features annotated.
+ - The .faa file contains the protein sequences of the genes annotated.
+ - The .ffn file contains the nucleotide sequences of the genes annotated.
+ <br><br>
+
 
 ## View annotated features in JBrowse
 
 Now that we have annotated the draft genome sequence, we would like to view the sequence in the JBrowse genome viewer. First, we have to make a JBrowse file. Then, we can view it within Galaxy.
 
-> ### {% icon hands_on %} Hands-on: Visualize annotation
+> ### {% icon hands_on %} Hands-on: Visualize the annotation
 >
-> 1. **JBrowse** {% icon tool %} with the following parameters
-> - Under Reference genome to display choose *Use a genome from history*.
-> - Under Select the reference genome choose Prokka on data XX:fna. This .fna sequence is the fasta nucleotide sequence, and will be the reference against which annotations are displayed.
-> - For Produce a Standalone Instance select *Yes*.
-> - For Genetic Code choose *11: The Bacterial, Archaeal and Plant Plastid Code*.
-> - Under JBrowse-in-Galaxy Action choose *New JBrowse Instance*.
-> - Click Insert Track Group
-> - Under Track Category type in *gene annotations*.
-> - Click Insert Annotation Track
-> - For Track Type choose *GFF/GFF3/BED/GBK Features*
-> - For GFF/GFF3/BED Track Data select Prokka on data XX:gff  [Note: not wildtype.gff]
-> - Under JBrowse Track Type[Advanced] select *Canvas Features*.
-> - Click on JBrowse Styling Options <Advanced]
-> - Under JBrowse style.label add in *product*.
-> - Under Track Visibility choose *On for new users*.
+> 1. Search for **JBrowse** {% icon tool %} and run it with the following parameters
+>    - "Reference genome to display" to `Use a genome from history`
+>    - "Select the reference genome" to `Prokka on data XX.fna`.
+>       
+>       This sequence will be the reference against which annotations are displayed
+>
+>    - "Produce Standalone Instance" to `Yes`
+>    - "Genetic Code" to `11: The Bacterial, Archaeal and Plant Plastid Code`
+>    - "JBrowse-in-Galaxy Action" to `New JBrowse Instance`
+>    - "Track Group"
+>       
+        We will now set up one track - each track is a dataset displayed underneath the reference sequence (which is displayed as nucleotides in FASTA format). We will choose to display the annotations (the Prokka.gff file).
+>
+>       - **Track 1 - sequence reads**: Click on `Insert Track Group` and fill it with
+>           - "Track Cateogry" to `gene annotations`
+>           - Click on `Insert Annotation Track` and fill it with
+>               - "Track Type" to `GFF/GFF3/BED/GBK Features`
+>               - "GFF/GFF3/BED Track Data" to `Prokka on data XX:gff`
+>               - "Track Visibility" to `On for new users`
+>               - "JBrowse Track Type [Advanced]" to `Canvas Features`
+>               - Click on "JBrowse Styling Options [Advanced]"
+>               - "JBrowse style.label" to `product,name,id`
+>               - "Track Visibility" to `On for new users`
+>
 > - Your tool interface should look like this:
 >![JBrowse interface](images/jbrowse_int.png)
 > - Click Execute
-> <br><br>
-{: .hands_on}
 
-A new file will be created, called JBrowse on data XX and data XX - Complete. Click on the eye icon next to the file name. The JBrowse window will appear in the centre Galaxy panel.
+>    A new file will be created in your history, this contains the JBrowse interactive visualisation. We will now view its contents and play with it
+>
+> 2. Inspect the `JBrowse on data XX and data XX - Complete` file by clicking on the eye icon
+>
+>    The JBrowse window will appear in the centre Galaxy panel.
+>
+> 3. Display all the tracks and practice maneuvering around
+>    1. Click on the tick boxes on the left to display the tracks
+>    2. Select contig 1 in the drop down box. You can only see one contig displayed at a time.
+>    1. Zoom out by clicking on the `minus` button to see sequence reads and their coverage (the grey graph)
+>    1. Zoom in by clicking on the `plus` button to see annotations.
 
-> ### {% icon hands_on %} Hands-on: Investigate the JBrowse file
->- Under Available Tracks on the left, tick the box for Prokka on data XX:gff.
-> - Select contig 1 in the drop down box. You can only see one contig displayed at a time.
-> ![JBrowse](images/jbrowse5.png)
-> <br><br>
-> <br><br>
-> - Use the plus and minus buttons to zoom in and out, and the arrows to move left or right (or click and drag within the window to move left or right).
+>
 > <br><br>
 > - Zoom in to see the reference sequence at the top.
 > <br><br>
@@ -123,4 +132,7 @@ A new file will be created, called JBrowse on data XX and data XX - Complete. Cl
     - product name
     - you can download the FASTA sequence by clicking on the disk icon.
 > <br><br>
+>
+>
+>
 {: .hands_on}
