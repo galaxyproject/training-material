@@ -22,9 +22,9 @@ In this tutorial, we will use tools of the [OpenMS suite](http://www.openms.org)
 ## Prerequisites
 {:.no_toc}
 
-If you are in the planning phase of your quantitative proteomics experiment, you may want to consider our tutorial on different [quantitation methods]({{site.url}}/topics/proteomics/tutorials/labelfree-vs-labelled/tutorial.html) first.
+If you are in the planning phase of your quantitative proteomics experiment, you may want to consider our tutorial on different [quantitation methods]({{site.baseurl}}/topics/proteomics/tutorials/labelfree-vs-labelled/tutorial.html) first.
 
-To learn about *protein identification* in Galaxy, please consider our OpenMS-based [peptide ID tutorial]({{site.url}}/topics/proteomics/tutorials/protein-id-oms/tutorial.html).
+To learn about *protein identification* in Galaxy, please consider our OpenMS-based [peptide ID tutorial]({{site.baseurl}}/topics/proteomics/tutorials/protein-id-oms/tutorial.html).
 
 > ### {% icon hands_on %} Hands-on: Introduction
 > In the hands-on section of this tutorial, we will use a quantitative comparison of HEK cell lysate as a test dataset. In this experiment, HEK cells were once labelled with light, once with heavy SILAC. Both cultures were lysed simultaneously and the cell lysates were mixed in a certain ratio. 
@@ -72,7 +72,7 @@ The OpenMS suite provides several tools (FeatureFinders) for MS1 feature detecti
 
 # Peptide and Protein Identification
 
-In this tutorial, peptide identification will be performed using the workflow of the previous [Peptide ID Tutorial]({{site.url}}/topics/proteomics/tutorials/protein-id-oms/tutorial.html). 
+In this tutorial, peptide identification will be performed using the workflow of the previous [Peptide ID Tutorial]({{site.baseurl}}/topics/proteomics/tutorials/protein-id-oms/tutorial.html). 
 
 A common problem in mass spectrometry are misassigned mono-isotopic precursor peaks. Although most search engines allow for some adaptation of the monoisotopic peak, we will instead perform a recalculation of the monoisotopic peaks based on the previously identified features prior to peptide identification.
 This step facilitates mapping peptide IDs to identified features [later on](#mapping-identifications-to-features). To do so, we will use the OpenMS tool ***HighResPrecursorMassCorrector*** {% icon tool %}.
@@ -85,7 +85,7 @@ This step facilitates mapping peptide IDs to identified features [later on](#map
 >   - the output of ***FeatureFinderMultiplex*** as **Features used to correct precursor masses**, and
 >   - **The precursor mass tolerance** set to `10`.
 > 1. Import the human protein database (including cRAP contaminants and decoys) from [zenodo](https://zenodo.org/record/892005/files/Human_database_including_decoys_%28cRAP_added%29.fasta).
-> 2. Import the [workflow]({{site.url}}/topics/proteomics/tutorials/protein-id-oms/workflows/workflow.ga) from the tutorial "Protein identification using OpenMS" and modify it:
+> 2. Import the [workflow]({{site.baseurl}}/topics/proteomics/tutorials/protein-id-oms/workflows/workflow.ga) from the tutorial "Protein identification using OpenMS" and modify it:
 >   - Delete the **PeakPickerHiRes** {% icon tool %} node, as the MS2 data of our test dataset are already centroided.
 >   - Connect the `mzML` input directly to the **MSGFPlusAdapter** {% icon tool %} node.
 >   - Change the **MSGFPlusAdapter** {% icon tool %} parameters: Add the variable modifications `Label:13C(6) (K)` and `Label:13C(6) (R)`.
@@ -94,7 +94,7 @@ This step facilitates mapping peptide IDs to identified features [later on](#map
 >   - the human FASTA database as `2: protein FASTA database`
 >
 >   > ### {% icon tip %} Tip: Using Galaxy Workflows
->   > If you want to learn more about Galaxy workflows, please consult the [Galaxy Introduction]({{site.url}}/topics/introduction/tutorials/galaxy-intro-101/tutorial.html#the-workflow-editor)
+>   > If you want to learn more about Galaxy workflows, please consult the [Galaxy Introduction]({{site.baseurl}}/topics/introduction/tutorials/galaxy-intro-101/tutorial.html#the-workflow-editor)
 >   {: .tip}
 {: .hands_on}
 
@@ -185,7 +185,7 @@ Basic TOPPView tutorials are available as [videos](https://www.openms.de/getting
 
 For the optimization of tool parameters, it is recommended not to work with a complete LC-MS/MS run. Instead, we will use ***FileFilter*** to extract a small *RT-slice* of our input dataset, i.e. a fraction of the original dataset that was measured during a short period of time. Reducing the test data reduces the time needed for analysis and facilitates visual examination of the data.
 
-Using Galaxy Workflows enables us to quickly re-run a full analysis with changed parameters. To learn about Galaxy Workflows, consult this [tutorial](https://galaxyproject.github.io/training-material/topics/introduction/tutorials/galaxy-intro-history-to-workflow/tutorial.html).
+Using Galaxy Workflows enables us to quickly re-run a full analysis with changed parameters. To learn about Galaxy Workflows, consult this [tutorial]({{site.baseurl}}/topics/introduction/tutorials/galaxy-intro-history-to-workflow/tutorial.html).
 
 **Cave:** Be aware that only very small parts of your dataset can be checked by visual examination. To minimize biases, try to look at the same areas / features of each result file.
 
