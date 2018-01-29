@@ -77,7 +77,7 @@ Once Prokka has finished, examine each of its output files.
 
 Now that we have annotated the draft genome sequence, we would like to view the sequence in the JBrowse genome viewer. First, we have to make a JBrowse file. Then, we can view it within Galaxy.
 
-> ### {% icon hands_on %} Hands-on: Create the JBrowse file
+> ### {% icon hands_on %} Hands-on: Visualize the annotation
 >
 > 1. Search for **JBrowse** {% icon tool %} and run it with the following parameters
 >    - "Reference genome to display" to `Use a genome from history`
@@ -104,11 +104,7 @@ Now that we have annotated the draft genome sequence, we would like to view the 
 >               - "Track Visibility" to `On for new users`
 >               - Click Execute
 >
->  - A new file will be created in your history, this contains the JBrowse interactive visualisation. We will now > view its contents and play with it
-> <br><br>
-> {: .hands_on}
-> ### {% icon hands_on %} Hands-on: Visualize the annotation
->
+> A new file will be created in your history, this contains the JBrowse interactive visualisation. We will now view its contents and play with it
 > 2. Inspect the `JBrowse on data XX and data XX - Complete` file by clicking on the eye icon
 >
 >    The JBrowse window will appear in the centre Galaxy panel.
@@ -123,8 +119,5 @@ Now that we have annotated the draft genome sequence, we would like to view the 
 >      - gene name
 >      - product name
 >      - you can download the FASTA sequence by clicking on the disk icon.
-> <br><br>
 > ![JBrowse](images/jbrowse6.png)
-> <br><br>
-
->{: .hands_on}
+{: .hands_on}
