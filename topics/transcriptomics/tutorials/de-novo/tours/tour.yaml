@@ -1,0 +1,663 @@
+﻿id: denovo
+name: De novo transcriptome reconstruction with RNA-seq
+description: >-
+  In this tutorial, we will identify what transcripts are present in the G1E and
+  megakaryocyte cellualr states and which transcripts are differentially
+  expressed between the two states. We will use a de novo transcript
+  reconstruction strategy to infer transcript structures from the mapped reads
+  in the absence of the actual annotated transcript structures. This will allow
+  us to identify novel transcripts and novel isoforms of known transcripts, as
+  well as identify differentially expressed transcripts.
+title_default: denovo
+steps:
+  - title: Introduction
+    content: >-
+      The data provided here are part of a Galaxy tutorial that analyzes RNA-seq
+      data from a study published by Wu et al. in 2014 <a
+      href="http://genome.cshlp.org/content/early/2014/10/12/gr.164830.113.abstract">DOI:10.1101/gr.164830.113</a>.
+      The goal of this study was to investigate “the dynamics of occupancy and
+      the role in gene regulation of the transcription factor Tal1, a critical
+      regulator of hematopoiesis, at multiple stages of hematopoietic
+      differentiation.” To this end, RNA-seq libraries were constructed from
+      multiple mouse cell types including G1E - a GATA-null immortalized cell
+      line derived from targeted disruption of GATA-1 in mouse embryonic stem
+      cells - and megakaryocytes. This RNA-seq data was used to determine
+      differential gene expression between G1E and megakaryocytes and later
+      correlated with Tal1 occupancy. This dataset (GEO Accession: GSE51338)
+      consists of biological replicate, paired-end, poly(A) selected RNA-seq
+      libraries. Because of the long processing time for the large original
+      files, we have downsampled the original raw data files to include only
+      reads that align to chromosome 19 and a subset of interesting genomic loci
+      identified by Wu et al.
+    backdrop: true
+  - title: Introduction
+    content: >-
+      In this tutorial, we will identify what transcripts are present in the G1E
+      and megakaryocyte cellualr states and which transcripts are differentially
+      expressed between the two states. We will use a de novo transcript
+      reconstruction strategy to infer transcript structures from the mapped
+      reads in the absence of the actual annotated transcript structures. This
+      will allow us to identify novel transcripts and novel isoforms of known
+      transcripts, as well as identify differentially expressed transcripts.
+    backdrop: true
+  - title: Data upload
+    content: >-
+      Due to the large size of this dataset, we have downsampled it to only
+      include reads mapping to chromosome 19 and certain loci with relevance to
+      hematopoeisis. This data is available at <a
+      href="https://zenodo.org/record/583140#.WSW3NhPyub8">Zenodo</a>, where you
+      can find the forward and reverse reads corresponding to replicate RNA-seq
+      libraries from G1E and megakaryocyte cells and an annotation file of
+      RefSeq transcripts we will use to generate our transcriptome database.
+    backdrop: true
+  - title: History options
+    element: '#history-options-button'
+    content: >-
+      We will start the analyses by creating a new history. Click on this button
+      and then "Create New"
+    placement: left
+  - title: Uploading the new data
+    element: '#tool-panel-upload-button .fa.fa-upload'
+    content: We need to upload data. Open the Galaxy Upload Manager
+    placement: right
+    postclick:
+      - '#tool-panel-upload-button .fa.fa-upload'
+      - '#btn-reset'
+  - title: Uploading the input data
+    element: '#btn-new'
+    content: Click on Paste/Fetch Data
+    placement: right
+    postclick:
+      - '#btn-new'
+  - title: Uploading the input data
+    element: .upload-text-column .upload-text .upload-text-content.form-control
+    content: >-
+      Insert the links here.<br> The input is available on <a
+      href="https://zenodo.org/record/583140">Zenodo</a>.
+    placement: right
+    textinsert: >-
+      https://zenodo.org/record/583140/files/G1E_rep1forward_read%28SRR549355_1%29
+
+      https://zenodo.org/record/583140/files/G1E_rep1reverse_read%28SRR549355_2%29
+
+      https://zenodo.org/record/583140/files/G1E_rep2forward_read%28SRR549356_1%29
+
+      https://zenodo.org/record/583140/files/G1E_rep2reverse_read%28SRR549356_2%29
+
+      https://zenodo.org/record/583140/files/Megakaryocyte_rep1forward_read%28SRR549357_1%29
+
+      https://zenodo.org/record/583140/files/Megakaryocyte_rep1reverse_read%28SRR549357_2%29
+
+      https://zenodo.org/record/583140/files/Megakaryocyte_rep2forward_read%28SRR549358_1%29
+
+      https://zenodo.org/record/583140/files/Megakaryocyte_rep2reverse_read%28SRR549358_2%29
+
+      https://zenodo.org/record/583140/files/RefSeq_reference_GTF_%28DSv2%29
+  - title: Data types
+    content: |-
+      Make sure the datatypes are adjusted.
+      <ul>
+        <li>Set the datatype of the read files to fastqsanger</li>
+        <li>Set the datatype of the annotation file to gtf and assign the Genome as mm10</li>
+      </ul>
+    backdrop: false
+  - title: Importing data via links
+    content: You will need to fetch the link to the annotation file yourself ;)
+    backdrop: false
+  - title: Uploading the input data
+    element: '#btn-start'
+    content: Click on "Start" to start loading the data to history
+    placement: right
+    postclick:
+      - '#btn-start'
+  - title: Uploading the input data
+    element: '#btn-close'
+    content: >-
+      The upload may take a while.<br> Hit the close button to close this
+      window.
+    placement: right
+    postclick:
+      - '#btn-close'
+  - title: Quality control
+    content: >-
+      For quality control, we use similar tools as described in <a
+      href="https://galaxyproject.github.io/training-material/topics/sequence-analysis/">NGS-QC
+      tutorial</a>: <a
+      href="https://www.bioinformatics.babraham.ac.uk/projects/fastqc/">FastQC</a>
+      and <a
+      href="http://www.usadellab.org/cms/?page=trimmomatic">Trimmomatic</a>.
+    backdrop: true
+  - title: Quality control
+    element: '#tool-search-query'
+    content: >-
+      Run FastQC on the forward and reverse read files to assess the quality of
+      the reads. Search for FastQC tool
+    placement: right
+    textinsert: FastQC
+  - title: Quality control
+    element: '#tool-search'
+    content: Click on the "FastQC" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fdevteam%2Ffastqc%2Ffastqc%2F0.68"]
+  - title: Quality control
+    element: '#tool-search'
+    content: >-
+      Run FastQC on the forward and reverse read files to assess the quality of
+      the reads.
+    position: left
+  - title: Questions
+    content: |-
+      <ul>
+        <li>What is the read length?</li>
+        <li>Is there anything interesting about the quality of the base calls based on the position in the reads?</li>
+      </ul>
+    backdrop: false
+  - title: Trimmomatic
+    content: >-
+      Trim off the low quality bases from the ends of the reads to increase
+      mapping efficiency. Run Trimmomatic on each pair of forward and reverse
+      reads.
+    backdrop: true
+  - title: Trimmomatic
+    element: '#tool-search-query'
+    content: Search for Trimmomatic tool
+    placement: right
+    textinsert: Trimmomatic
+  - title: Trimmomatic
+    element: '#tool-search'
+    content: Click on the "Trimmomatic" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fpjbriggs%2Ftrimmomatic%2Ftrimmomatic%2F0.36.0"]
+  - title: Trimmomatic
+    element: '#tool-search'
+    content: Run Trimmomatic on each pair of forward and reverse reads.
+    position: left
+  - title: Quality control
+    element: '#tool-search-query'
+    content: Look for FastQC tool.
+    placement: right
+    textinsert: FastQC
+  - title: Quality control
+    element: '#tool-search'
+    content: Click on the "FastQC" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fdevteam%2Ffastqc%2Ffastqc%2F0.68"]
+  - title: Quality control
+    element: '#tool-search'
+    content: Re-run FastQC on trimmed reads and inspect the differences.
+    position: left
+  - title: Questions
+    content: |-
+      <ul>
+        <li>What is the read length?</li>
+        <li>Is there anything interesting about the quality of the base calls based on the position in the reads?</li>
+      </ul>
+    backdrop: false
+  - title: Quality control
+    content: >-
+      Now that we have trimmed our reads and are fortunate that there is a
+      reference genome assembly for mouse, we will align our trimmed reads to
+      the genome. <br><br>Instead of running a single tool multiple times on all
+      your data, would you rather run a single tool on multiple datasets at
+      once? Check out the <a
+      href="https://galaxyproject.org/tutorials/collections/">dataset
+      collections</a> feature of Galaxy!
+    backdrop: true
+  - title: Mapping
+    content: >-
+      To make sense of the reads, their positions within mouse genome must be
+      determined. This process is known as aligning or ‘mapping’ the reads to
+      the reference genome.
+
+      <br><br>Do you want to learn more about the principles behind mapping?
+      Follow our <a
+      href="https://galaxyproject.github.io/training-material/topics/sequence-analysis/">training</a>
+    backdrop: true
+  - title: Mapping
+    content: >-
+      In the case of a eukaryotic transcriptome, most reads originate from
+      processed mRNAs lacking introns. Therefore, they cannot be simply mapped
+      back to the genome as we normally do for reads derived from DNA sequences.
+      Instead, the reads must be separated into two categories:
+        <ul>
+          <li>Reads contained within mature exons - these align perfectly to the reference genome</li>
+          <li>Reads that span splice junctions in the mature mRNA - these align with gaps to the reference genome</li>
+        </ul>
+      Spliced mappers have been developed to efficiently map transcript-derived
+      reads against genomes. <a
+      href="https://ccb.jhu.edu/software/hisat2/index.shtml>HISAT</a> is an
+      accurate and fast tool for mapping spliced reads to a genome. Another
+      popular spliced aligner is <a
+      href="https://ccb.jhu.edu/software/tophat/index.shtml">TopHat</a>, but we
+      will be using HISAT in this tutorial.
+    backdrop: true
+  - title: Spliced mapping
+    element: '#tool-search'
+    content: Run HISAT on one forward/reverse read pair
+    position: left
+  - title: Spliced mapping
+    element: '#tool-search-query'
+    content: Search for HISAT tool.
+    placement: right
+    textinsert: HISAT
+  - title: Spliced mapping
+    element: '#tool-search'
+    content: Click on the "HISAT" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fhisat2%2Fhisat2%2F2.0.5.2"]
+  - title: Spliced mapping
+    element: '#tool-search'
+    content: |-
+      Run the tool with the following settings:
+        <ul>
+          <li><b>Single end or paired reads?</b>Individual paired-end reads</li>
+          <li><b>Source for the reference genome to align against:</b>Use a built-in genome > Mouse (Mus Musculus): mm10</li>
+          <li><b>Spliced alignment parameters:</b>Specify spliced alignment parameters</li>
+          <li><b>Specify strand-specific information:</b>First Strand (R/RF)</li>
+          <li><b>Transcriptome assembly reporting:</b>Report alignments tailored for transcript assemblers including StringTie.</li>
+        </ul>
+    position: left
+  - title: Spliced mapping
+    content: >-
+      Run HISAT on the remaining forward/reverse read pairs with the same
+      parameters.
+    backdrop: true
+  - title: De novo transcript reconstruction
+    content: >-
+      Now that we have mapped our reads to the mouse genome with <i>HISAT</i>,
+      we want to determine transcript structures that are represented by the
+      aligned reads. This is called de novo transcriptome reconstruction. This
+      unbiased approach permits the comprehensive identification of all
+      transcripts present in a sample, including annotated genes, novel isoforms
+      of annotated genes, and novel genes. While common gene/transcript
+      databases are quite large, they are not comprehensive, and the de novo
+      transcriptome reconstruction approach ensures complete transcriptome(s)
+      identification from the experimental samples. The leading tool for
+      transcript reconstruction is <i>Stringtie</i>. Here, we will use
+      <i>Stringtie</i> to predict transcript structures based on the reads
+      aligned by <i>HISAT</i>.
+    backdrop: true
+  - title: Transcriptome reconstruction
+    element: '#tool-search-query'
+    content: Search for Stringtie-merge tool.
+    placement: right
+    textinsert: Stringtie-merge
+  - title: Transcriptome reconstruction
+    element: '#tool-search'
+    content: Click on the "Stringtie-merge" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fstringtie%2Fstringtie_merge%2F1.3.3"]
+  - title: Transcriptome reconstruction
+    element: '#tool-search'
+    content: >-
+      Run Stringtie-merge on the Stringtie assembled transcripts along with the
+      RefSeq annotation file we imported earlier.
+        <ul>
+          <li>Use batch mode to inlcude all four Stringtie assemblies as “input_gtf”.</li>
+          <li>Select the “RefSeq GTF mm10” file as the “guide_gff”.</li>
+        </ul>
+    position: left
+  - title: Transcriptome reconstruction
+    element: '#tool-search-query'
+    content: Search for GFFCompare tool.
+    placement: right
+    textinsert: GFFCompare
+  - title: Transcriptome reconstruction
+    element: '#tool-search'
+    content: Click on the "GFFCompare" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fgffcompare%2Fgffcompare%2F0.9.8"]
+        .tool-old-link
+  - title: Transcriptome reconstruction
+    element: '#tool-search'
+    content: >-
+      Run GFFCompare on the Stringtie-merge generated transcriptome along with
+      the RefSeq annotation file.
+        <ul>
+          <li>Select the output of Stringtie-merge as the GTF input.</li>
+          <li>Select <b>“Yes”</b> under Use Reference Annotation" and select the <b>"RefSeq GTF mm10"</b> file as the "Reference Annotation".</li>
+        </ul>
+    position: left
+  - title: Analysis of the differential gene expression
+    content: >-
+      We just generated a transriptome database that represents the transcripts
+      present in the G1E and megakaryocytes samples. This database provides the
+      location of our transcripts with non-redundant identifiers, as well as
+      information regarding the origin of the transcript.
+
+      <br><br>We now want to identify which transcripts are differentially
+      expressed between the G1E and megakaryocyte cellular states. To do this we
+      will implement a counting approach using <b>FeatureCounts</b> to count
+      reads per transcript. Then we will provide this information to
+      <b>DESeq2</b> to generate normalized transcript counts (abundance
+      estimates) and significance testing for differential expression.
+    backdrop: true
+  - title: Count the number of reads per transcript
+    content: >-
+      To compare the abundance of transcripts between different cellular states,
+      the first essential step is to quantify the number of reads per
+      transcript. <a
+      href="http://bioinf.wehi.edu.au/featureCounts/">FeatureCounts</a> is one
+      of the most popular tools for counting reads in genomic features. In our
+      case, we’ll be using <b>FeatureCounts</b> to count reads aligning in exons
+      of our <b>GFFCompare</b> generated transcriptome database.
+
+      <br><br>The recommended mode is “union”, which counts overlaps even if a
+      read only shares parts of its sequence with a genomic feature and
+      disregards reads that overlap more than one feature.
+    backdrop: true
+  - title: Counting the number of reads per transcript
+    element: '#tool-search-query'
+    content: Search for FeatureCounts tool.
+    placement: right
+    textinsert: FeatureCounts
+  - title: Counting the number of reads per transcript
+    element: '#tool-search'
+    content: Click on the "FeatureCounts" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Ffeaturecounts%2Ffeaturecounts%2F1.4.6.p5"]
+  - title: Counting the number of reads per transcript
+    element: '#tool-search'
+    content: >-
+      Run FeatureCounts on the aligned reads (HISAT output) using the GFFCompare
+      transcriptome database as the annotation file.
+        <ul>
+          <li>Using the batch mode for input selection, choose the four HISAT aligned read files</li>
+          <li><b>Gene annotation file:</b> in your history, then select the annotated transcripts GTF file output by GFFCompare (this specifies the “union” mode)</li>
+          <li>Expand Options for paired end reads</li>
+          <li><b>Orientation of the two read from the same pair:</b> Reverse, Forward (rf)</li>
+          <li>Expand <b>Advanced options</b></li>
+          <li><b>GFF gene identifier:</b> enter “transcript_id”</li>
+          <li><b>Strand specificity of the protocol:</b> select “Stranded (reverse)”</li>
+        </ul>
+    position: left
+  - title: Perform differential gene expression testing
+    content: >-
+      Transcript expression is estimated from read counts, and attempts are made
+      to correct for variability in measurements using replicates. This is
+      absolutely essential to obtaining accurate results. We recommend having at
+      least two biological replicates.
+
+      <br><br><a
+      href="https://bioconductor.org/packages/release/bioc/html/DESeq2.html">DESeq2</a>
+      is a great tool for differential gene expression analysis. It accepts read
+      counts produced by FeatureCounts and applies size factor normalization:
+        <ul>
+          <li>Computation for each gene of the geometric mean of read counts across all samples</li>
+          <li>Division of every gene count by the geometric mean</li>
+          <li>Use of the median of these ratios as sample’s size factor for normalization</li>
+        </ul>
+    backdrop: true
+  - title: Perform differential gene expression testing
+    element: '#tool-search-query'
+    content: Search for DESeq2 tool.
+    placement: right
+    textinsert: DESeq2
+  - title: Perform differential gene expression testing
+    element: '#tool-search'
+    content: Click on the "DESeq2" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fdeseq2%2Fdeseq2%2F2.11.39"]
+  - title: Perform differential gene expression testing
+    element: '#tool-search'
+    content: |-
+      Run DESeq2 with the following parameters:
+        <ul>
+          <li>Specify “G1E” as the first factor level (condition) and select the count files corresponding to the two replicates</li>
+          <li>Specify “Mega” as the second factor level (condition) and select the count files corresponding to the two replicates</li>
+          <li><b>Visualising the analysis results:</b> Yes</li>
+          <li><b>Output normalized counts table:</b> Yes</li>
+        </ul>
+    position: left
+  - title: Perform differential gene expression testing
+    element: '.history-right-panel .list-items > *:first'
+    content: |-
+      The first output of DESeq2 is a tabular file. The columns are:<ul>
+        <li>Gene identifiers</li>
+        <li>Mean normalized counts, averaged over all samples from both conditions</li>
+        <li>Logarithm (base 2) of the fold change (the values correspond to up- or downregulation relative to the condition listed as Factor level 1)</li>
+        <li>Standard error estimate for the log2 fold change estimate</li>
+        <li><a href="http://data.princeton.edu/wws509/notes/c2s3.html">Wald</a> statistic</li>
+        <li><i>p</i>-value for the statistical significance of this change</li>
+        <li><i>p</i>-value adjusted for multiple testing with the Benjamini-Hochberg procedure which controls false discovery rate (<a href="http://www.biostathandbook.com/multiplecomparisons.html">FDR</a>)</li>
+      </ul>
+    position: left
+  - title: Perform differential gene expression testing
+    element: '#tool-search-query'
+    content: Search for Filter tool.
+    placement: right
+    textinsert: Filter
+  - title: Perform differential gene expression testing
+    element: '#tool-search'
+    content: Click on the "Filter" tool to open it
+    placement: right
+    postclick:
+      - 'a[href$="/tool_runner?tool_id=Filter1"]'
+  - title: Perform differential gene expression testing
+    element: '#tool-search'
+    content: >-
+      Run Filter to extract genes with a significant change in gene expression
+      (adjusted p-value less than 0.05) between treated and untreated samples
+    position: left
+  - title: Question
+    content: |-
+      <ul>
+        <li>How many transcripts have a significant change in expression between these conditions?</li>
+      </ul>
+    backdrop: false
+  - title: Filter
+    content: Determine how many transcripts are up or down regulated in the G1E state.
+    backdrop: true
+  - title: Question
+    content: |-
+      <ul>
+        <li>Are there more upregulated or downregulated genes in the treated samples?</li>
+      </ul>
+    backdrop: false
+  - title: Perform differential gene expression testing
+    element: '.history-right-panel .list-items > *:first'
+    content: Rename your datasets for the downstream analyses
+    position: left
+  - title: Perform differential gene expression testing
+    content: >-
+      In addition to the list of genes, DESeq2 outputs a graphical summary of
+      the results, useful to evaluate the quality of the experiment:
+
+      <ul>
+        <li>Histogram of <i>p</i>-values for all tests</li>
+        <li><a href="https://en.wikipedia.org/wiki/MA_plot>MA plot</a>: global view of the relationship between the expression change of conditions (log ratios, M), the average expression strength of the genes (average mean, A), and the ability of the algorithm to detect differential gene expression. The genes that passed the significance threshold (adjusted p-value < 0.1) are colored in red.</li>
+        <li>Principal Component Analysis (<a href="https://en.wikipedia.org/wiki/Principal_component_analysis">PCA</a>) and the first two axes</li>
+        Each replicate is plotted as an individual data point. This type of plot is useful for visualizing the overall effect of experimental covariates and batch effects.
+        <li>Heatmap of sample-to-sample distance matrix: overview over similarities and dissimilarities between samples</li>
+      </ul>
+    backdrop: false
+  - title: Perform differential gene expression testing
+    content: |-
+      <ul>
+        <li>Dispersion estimates: gene-wise estimates (black), the fitted values (red), and the final maximum a posteriori estimates used in testing (blue)</li>
+        This dispersion plot is typical, with the final estimates shrunk from the gene-wise estimates towards the fitted estimates. Some gene-wise estimates are flagged as outliers and not shrunk towards the fitted value. The amount of shrinkage can be more or less than seen here, depending on the sample size, the number of coefficients, the row mean and the variability of the gene-wise estimates.
+        <br><br>For more information about DESeq2 and its outputs, you can have a look at <a href="https://www.bioconductor.org/packages/release/bioc/manuals/DESeq2/man/DESeq2.pdf>DESeq2 documentation</a>.
+      </ul>
+    backdrop: false
+  - title: Visualization
+    content: >-
+      Now that we have a list of transcript expression levels and their
+      differential expression levels, it is time to visually inspect our
+      transcript structures and the reads they were predicted from. It is a good
+      practice to visually inspect (and present) loci with transcripts of
+      interest. Fortunately, there is a built-in genome browser in Galaxy,
+      <b>Trackster</b>, that make this task simple (and even fun!).
+
+      <br><br>In this last section, we will convert our aligned read data from
+      BAM format to bigWig format to simplify observing where our stranded
+      RNA-seq data aligned to. We’ll then initiate a session on Trackster, load
+      it with our data, and visually inspect our interesting loci.
+    backdrop: true
+  - title: Converting aligned read files to bigWig format
+    element: '#tool-search-query'
+    content: Search for bamCoverage tool.
+    placement: right
+    textinsert: bamCoverage
+  - title: Converting aligned read files to bigWig format
+    element: '#tool-search'
+    content: Click on the "bamCoverage" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Fdeeptools_bam_coverage%2Fdeeptools_bam_coverage%2F2.5.1.1.0"]
+  - title: Converting aligned read files to bigWig format
+    element: '#tool-search'
+    content: >-
+      Run bamCoverage on all four aligned read files (HISAT output) with the
+      following parameters: <ul>
+        <li><b>Bin size in bases:</b> 1</li>
+        <li><b>Effective genome size:</b> mm9 (2150570000)</li>
+        <li>Expand the <b>Advanced options</b></li>
+        <li><b>Only include reads originating from fragments from the forward or reverse strand:</b> forward</li>
+      </ul>
+    position: left
+  - title: Perform differential gene expression testing
+    element: '.history-right-panel .list-items > *:first'
+    content: >-
+      Rename the outputs to reflect the origin of the reads and that they
+      represent the reads mapping to the PLUS strand.
+    position: left
+  - title: Perform differential gene expression testing
+    content: Now we need to repeat bamCoverage step with some changes in settings.
+    backdrop: true
+  - title: Converting aligned read files to bigWig format
+    element: '#tool-search'
+    content: Click on the "bamCoverage" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Fdeeptools_bam_coverage%2Fdeeptools_bam_coverage%2F2.5.1.1.0"]
+  - title: Converting aligned read files to bigWig format
+    element: '#tool-search'
+    content: >-
+      Run bamCoverage on all four aligned read files (HISAT output) with the
+      following parameters: <ul>
+        <li><b>Bin size in bases:</b> 1</li>
+        <li><b>Effective genome size:</b> mm9 (2150570000)</li>
+        <li>Expand the <b>Advanced options</b></li>
+        <li><b>Only include reads originating from fragments from the forward or reverse strand:</b> reverse</li>
+      </ul>
+    position: left
+  - title: Perform differential gene expression testing
+    element: '.history-right-panel .list-items > *:first'
+    content: >-
+      Rename the outputs to reflect the origin of the reads and that they
+      represent the reads mapping to the MINUS strand.
+    position: left
+  - title: Trackster based visualization
+    element: '#visualization .dropdown a[href$="/visualization/list"]'
+    content: >-
+      On the center console at the top of the Galaxy interface, choose “
+      Visualization” -> “New track browser”.
+    placement: left
+  - title: Trackster based visualization
+    content: |-
+      <ul>
+        <li>Name your visualization someting descriptive under “Browser name:”</li>
+        <li>Choose “Mouse Dec. 2011 (GRCm38/mm10) (mm10)” as the “Reference genome build (dbkey)</li>
+        <li>Click “Create” to initiate your Trackster session</li>
+      </ul>
+    backdrop: false
+  - title: Trackster based visualization
+    content: |-
+      Click “Add datasets to visualization”<ul>
+        <li>Select the “RefSeq GTF mm10” file</li>
+        <li>Select the output files from Stringtie</li>
+        <li>Select the output file from GFFCompare</li>
+        <li>Select the output files from bamCoverage</li>
+      </ul>
+    backdrop: false
+  - title: Trackster based visualization
+    content: >-
+      Using the grey labels on the left side of each track, drag and arrange the
+      track order to your preference.
+    backdrop: false
+  - title: Trackster based visualization
+    content: >-
+      Hover over the grey label on the left side of the “RefSeq GTF mm10” track
+      and click the “Edit settings” icon. <ul>
+        <li>Adjust the block color to blue (#0000ff) and antisense strand color to red (#ff0000)</li>
+      </ul>
+    backdrop: false
+  - title: Trackster based visualization
+    content: >-
+      Repeat the previous step on the output files from StringTie and
+      GFFCompare.
+    backdrop: false
+  - title: Trackster based visualization
+    content: >-
+      Hover over the grey label on the left side of the “G1E R1 plus” track and
+      click the “Edit settings” icon. <ul>
+        <li>Adjust the color to blue (#0000ff)</li>
+      </ul>
+    backdrop: false
+  - title: Trackster based visualization
+    content: >-
+      Repeat the previous step on the other three bigWig files representing the
+      plus strand.
+    backdrop: false
+  - title: Trackster based visualization
+    content: >-
+      Hover over the grey label on the left side of the “G1E R1 minus” track and
+      click the “Edit settings” icon. <ul>
+        <li>Adjust the color to red (#ff0000)</li>
+      </ul>
+    backdrop: false
+  - title: Trackster based visualization
+    content: >-
+      Repeat the previous step on the other three bigWig files representing the
+      minus strand.
+    backdrop: false
+  - title: Trackster based visualization
+    content: >-
+      Adjust the track height of the bigWig files to be consistent for each set
+      of plus strand and minus strand tracks.
+    backdrop: false
+  - title: Trackster based visualization
+    content: >-
+      Direct Trackster to the coordinates: chr11:96191452-96206029, what do you
+      see?
+    backdrop: false
+  - title: Question
+    content: |-
+      <ul>
+        <li>What do you see?</li>
+      </ul>
+    backdrop: false
+  - title: Conclusion
+    content: >-
+      In this tutorial, we have analyzed real RNA sequencing data to extract
+      useful information, such as which genes are up- or down-regulated by
+      depletion of the Pasilla gene and which genes are regulated by the Pasilla
+      gene. To answer these questions, we analyzed RNA sequence datasets using a
+      reference-based RNA-seq data analysis approach.
+    backdrop: true
+  - title: Key points
+    content: |-
+      <ul>
+        <li>De novo transcriptome reconstruction is the ideal approach for identifying differentially expressed known and novel transcripts.</li>
+        <li>Differential gene expression testing is improved with the use of replicate experiments and deep sequence coverage.</li>
+        <li>Visualizing data on a genome browser is a great way to display interesting patterns of differential expression.</li>
+      </ul>
+    backdrop: true
