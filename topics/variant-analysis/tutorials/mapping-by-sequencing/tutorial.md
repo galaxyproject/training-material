@@ -144,7 +144,7 @@ if you do not know what this means).
 >    - [outcrossed F2 pool](https://zenodo.org/record/1098034/files/outcrossed_F2.bam)
 > 2. Specify the genome that was used at the reads mapping step
 >    1. Click on **Edit attributes** (the pencil icon displayed with the dataset)
->    2. Select `Arabidopsis thaliana TAIR10` as the **Database/Build**
+>    2. As the **Database/Build** select `Arabidopsis thaliana TAIR10` 
 >    3. **Save** the edited attributes
 > 3. Import the reference genome
 >
@@ -155,17 +155,19 @@ if you do not know what this means).
 >
 >    1. Upload the reference genome using the URL:
 >       `https://www.arabidopsis.org/download_files/Genes/TAIR10_genome_release/TAIR10_chromosome_files/TAIR10_chr_all.fas`
->    2. Truncate the title lines in the fasta dataset to just the bare
->       chromosome names with the **Replace parts of text** {% icon tool %}
->       tool. Use:
->       - `^>(\w+).*` as the **Find pattern** (this will find entire fasta
->         title lines, or more specifically, any lines starting with `>`
->         followed by at least one letter, digit or underscore) and
->       - `>chr$1` as the **Replace with** pattern (the `$1` in it refers to
->         the parenthesized part of the find pattern, *i.e.*, just the
->         substring of letters/digits/underscores directly following the `>`),
->         and
->       - select `Yes` under **Find-Pattern is a regular expression**
+>    2. Use **Replace parts of text** {% icon tool %} to truncate the title
+>       lines in the fasta dataset to just the bare chromosome names. Set:
+>       - the **Find pattern** to `^>(\w+).*`
+>
+>         This will find entire fasta title lines, or more specifically, any
+>         lines starting with `>` followed by at least one letter, digit or
+>         underscore.
+>       - the **Replace with** pattern to `>chr$1`
+>
+>         The `$1` in it refers to the parenthesized part of the find pattern,
+>         *i.e.*, just the substring of letters/digits/underscores directly
+>         following the `>`.
+>       - **Find-Pattern is a regular expression** to `Yes`
 >    3. Make sure the datatype of the resulting dataset is set to `fasta` and
 >       give the dataset a nice name (*e.g.*, TAIR10 reference).
 >    4. At this point you can delete the originally downloaded dataset.
@@ -195,22 +197,21 @@ one sample appears to have a non-wt genotype, and report them in VCF format.
 
 > ### {% icon hands_on %} Hands-on: Variant Calling
 >
-> 1. Generate combined variant call statistics with the **MiModD Variant
->    Calling** {% icon tool %} tool:
->    1. Select the **reference genome** to call variants against.
->       If your Galaxy server offers version TAIR10 of the *A. thaliana*
->       reference as a **built-in genome**, you can go ahead and use it.
->       Otherwise, download and preprocess the reference as described under
->       Data Preparation and use it as a **genome from my history**.
->    2. Select the two BAM datasets for the two samples as the **Aligned reads
->       input datasets** for the analysis (use the `Control` key on the
->       keyboard to select multiple datasets from the list.
->    3. **Execute** the job
-> 2. Extract variants, for which at least one of our two samples shows a non-wt
->    genotype.
->    All you need to do for this is to run the **MiModD Extract Variant Sites**
->    {% icon tool %} tool with the BCF dataset generated in the previous step
->    selected as the **BCF input file**.
+> 1. Use **MiModD Variant Calling** {% icon tool %} to generate combined
+>    variant call statistics:
+>    - Select the **reference genome** to call variants against.
+>
+>      If your Galaxy server offers version TAIR10 of the *A. thaliana*
+>      reference as a **built-in genome**, you can go ahead and use it.
+>      Otherwise, download and preprocess the reference as described under
+>      Data Preparation and use it as a **genome from my history**.
+>    - As the **Aligned reads input datasets** for the analysis select the two
+>      BAM datasets representing the two samples (use the `Control` key on the
+>      keyboard to select multiple datasets from the list.
+>    - **Execute** the job
+> 2. Run **MiModD Extract Variant Sites** {% icon tool %} with
+>    - **BCF input file** set to the BCF dataset generated in the previous
+>      step.
 >
 > > ### {% icon question %} Questions
 > >
@@ -256,15 +257,16 @@ mutation.
 
 > ### {% icon hands_on %} Hands-on: Linkage Analysis with one set of parentally contributed markers
 >
-> 1. Select `Variant Allele Frequency Mapping` as the **type of mapping
->    analysis to perform** in the **MiModD NacreousMap** {% icon tool %}
->    interface.
-> 2. Select `VCF file of variants` as the **data source to use**, then your
->    extracted variants dataset as the **input file with variants to analyze**.
-> 3. Use `outcrossed F2` as the **mapping sample name**. In this two-sample
->    analysis, the next input field remains empty because there is no related
->    parent sample, but you should specify `Ler` as the
->    **name of the unrelated parent sample**.
+> In the **MiModD NacreousMap** {% icon tool %} interface, set
+> - **type of mapping analysis to perform** to `Variant Allele Frequency
+    Mapping` and
+> - **data source to use** to `VCF file of variants`.
+> - As the **input file with variants to analyze** select your extracted
+>   variants VCF dataset obtained in the previous step.
+> - As the **mapping sample name** use `outcrossed F2`. 
+> - Leave the **name of the related parent sample** input field empty because
+>   in this two-sample there is no such sample.
+> - As the **name of the unrelated parent sample** specify `Ler`.
 >    > ### {% icon comment %} Sample roles
 >    > In `Variant Allele Frequency Mapping` mode the tool requires:
 >    > - a **mapping sample**, which corresponds to the recombinant pool, from
@@ -280,15 +282,16 @@ mutation.
 >    >   from both sides for the linkage analysis.
 >    >
 >    {: .comment}
->    With these settings, we base the linkage analysis on crossed-in variants
->    only, *i.e.*, the tool will look for variants, for which the L*er* sample
->    appears homozygous mutant, and determine the contribution of each such
->    variant allele to the recombinant pool highlighting regions of low
->    contribution, *i.e.*, with suspected linkage to the causative variant, in
->    its output.
-> 4. Run the job, which will generate two datasets, one with linkage tables
->    for each chromosome in the *A. thaliana* genome, one with graphical
->    representations of the data.
+> With these settings, we base the linkage analysis on crossed-in variants
+> only, *i.e.*, the tool will look for variants, for which the L*er* sample
+> appears homozygous mutant, and determine the contribution of each such
+> variant allele to the recombinant pool highlighting regions of low
+> contribution, *i.e.*, with suspected linkage to the causative variant, in its
+> output.
+>
+> Running this job will generate two datasets, one with linkage tables for each
+> chromosome in the *A. thaliana* genome, one with graphical representations
+> of the data.
 >
 > > ### {% icon question %} Questions
 > >
@@ -346,20 +349,31 @@ so far:
 
 > ### {% icon hands_on %} Hands-on: Variant Filtering
 >
-> With the above information we can run the **MiModD VCF Filter**
-> {% icon tool %} tool to obtain a new VCF dataset with only those variants
-> from the originally extracted ones that fulfill all three criteria.
+> With the above information, we can run **MiModD VCF Filter** {% icon tool %}
+> to obtain a new VCF dataset with only those variants from the originally
+> extracted ones that fulfill all three criteria. In the tool interface,
 >
-> 1. Select the extracted variants dataset from your history as the **VCF input
->    file**.
-> 2. Add a first **Sample-specific Filter** and configure it to work on the
->    `outcrossed F2` sample and to retain only variants for which that sample
->    has a `1/1`, *i.e.*, homozygous mutant genotype.
-> 3. Add a second **Sample-specific Filter** and configure it to work on the
->    `Ler` sample and to retain only variants for which that sample has a
->    `0/0`, *i.e.*, homozygous wt genotype.
-> 4. Add a **Region Filter** and configure it to retain only variants falling
->    into the previously determined mapping interval on `chr2`.
+> - select as **VCF input file** the extracted variants dataset from your
+>   history
+> - add a **Sample-specific Filter** and set its
+>   - **sample** to `outcrossed F2`
+>   - **genotype pattern(s) for the inclusion of variants** to `1/1`
+>
+>   These settings will make the filter retain only variants for which the F2
+>   pool has a `1/1`, *i.e.*, homozygous mutant genotype.
+> - add another **Sample-specific Filter** and set its
+>   - **sample** to `Ler`
+>   - **genotype pattern(s) for the inclusion of variants** to `0/0`
+>
+>   This filter will retain only variants for which the mapping strain sample
+>   has a homozygous wt genotype.
+> - add a **Region Filter** and set its
+>   - **Chromosome** to `chr2`
+>   - **Region Start** to 18000000
+>   - **Region End** to 19000000
+>
+>   to retain only variants falling into the previously determined mapping
+>   interval.
 >
 >    > ### {% icon comment %} Sample and chromosome names
 >    > This is the second time in this tutorial that we ask you to type sample
@@ -375,8 +389,8 @@ so far:
 >    >
 >    {: .comment}
 >
-> 5. Run the job to obtain a new VCF dataset with variants that passed all
->    filters.
+> Running the job yields a new VCF dataset with variants that passed all
+> filters.
 >
 > > ### {% icon question %} Questions
 > >
@@ -405,7 +419,7 @@ causative mutation. Since the input datasets consist of reads from whole-genome
 sequencing, as opposed to exome sequencing, some of the variants may fall in
 intergenic regions or introns where they are unlikely to cause a phenotype.
 Other variants may fall in coding regions, but may be silent on the protein
-level. Hence, we could prioritize our candidate variants after annotating them
+level. Hence, we can prioritize our candidate variants after annotating them
 with predicted functional effects.
 
 > ### {% icon hands_on %} Hands-on: Variant Annotation
@@ -421,32 +435,35 @@ with predicted functional effects.
 >    > ### {% icon comment %} SnpEff versions
 >    > SnpEff genome databases can only be used with the specific version of
 >    > SnpEff they were built for. Make sure you are using version `4.1.0` of
->    > **SnpEff Download** {% icon tool %} in this and of the **SnpEff Variant
->    > effect and annotation** {% icon tool %} tool in the next step.
+>    > **SnpEff Download** {% icon tool %} in this and of **SnpEff Variant
+>    > effect and annotation** {% icon tool %} in the next step.
 >    > If your Galaxy server offers newer versions of these tools by default,
->    > you should be able to request version `4.1.0` explicitly using the
+>    > you may be able to request version `4.1.0` explicitly using the
 >    > **Versions** button at the top right of the tool interface.
 >    {: .comment}
 > 2. In the **SnpEff Variant effect and annotation** {% icon tool %} interface,
->    select:
->    1. your filtered VCF dataset as the source of **Sequence changes**
->    2. `Reference genome from your history` as the **Genome source** and your
->       downloaded genome dataset as the **SnpEff4.1 Genome Data**
->    3. `Use 'EFF' field compatible with older versions (instead of 'ANN')`
->       under **Annotation options** (this is required for compatibility of the
->       resulting dataset with **MiModD Report Variants** {% icon tool %} in
->       the next step).
-> 3. The **SnpEff Variant effect and annotation** {% icon tool %} tool will
->    produce another VCF dataset with the functional annotation data added to
->    the INFO column of the file. Inspecting this dataset is not particularly
->    convenient, but you can turn it into a more user-friendly report using the
->    **MiModD Report Variants** {% icon tool %} tool:
->    1. Select the annotated variants dataset generated by **SnpEff** as the
->       **VCF input with the variants to be reported**.
->    2. Choose `HTML` as the output **Format to use for the report**.
->    3. Declare `A. thaliana` as the **Species**. With this information the
->       tool can enrich the output with species-specific database and genome
->       browser links.
+>    set:
+>    - **Sequence changes (SNPs, MNPs, InDels)** to your filtered VCF dataset
+>    - **Genome source** to `Reference genome from your history`
+>    - **SnpEff4.1 Genome Data** to your just downloaded genome dataset
+>    - under **Annotation options** check `Use 'EFF' field compatible with
+>      older versions (instead of 'ANN')`
+>
+>      This last setting is required for compatibility of the resulting dataset
+>      with the current version of **MiModD Report Variants** {% icon tool %}.
+>
+>    Running this job will produce another VCF dataset with the functional
+>    annotation data added to its INFO column. Inspecting this dataset is not
+>    particularly convenient, but you can turn it into a more user-friendly
+>    report by
+> 3. using **MiModD Report Variants** {% icon tool %} and setting:
+>    - **The VCF input with the variants to be reported** to the annotated
+>      variants dataset generated by **SnpEff**
+>    - the **Format to use for the report** to `HTML`
+>    - **Species** to `A. thaliana`.
+>
+>      The species information can be used by the tool to enrich the output
+>      with species-specific database and genome browser links.
 >
 >    > ### {% icon comment %} Comment
 >    > Variant reports in html format are meant to be used on relatively small
@@ -500,6 +517,6 @@ results in very small lists of candidate variants that can then be confirmed
 through further experimental work. Importantly, the selection of biological
 samples for sequencing determines the meaningful variant comparisons that can
 be made in the bioinformatical analysis so it is important to understand the
-the essence of the analysis method **before** the preparation of any biological
+essence of the analysis method **before** the preparation of any biological
 samples.
 
