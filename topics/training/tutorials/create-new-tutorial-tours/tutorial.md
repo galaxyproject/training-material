@@ -126,8 +126,7 @@ We can now create easily a Galaxy Interactive Tour and test it on the fly.
 >
 > 1. [Writing content in markdown](../create-new-tutorial-content/tutorial.html)
 > 1. [Defining metadata](../create-new-tutorial-metadata/tutorial.html)
-> 1. [Setting up the infrastructure](../create-new-tutorial-jekyll/tutorial.html)
-> 1. [Creating Interactive Galaxy Tours](../create-new-tutorial-tours/tutorial.html)
-> 1. [Building a Docker flavor](../create-new-tutorial-docker/tutorial.html)
+> 1. [Setting up the infrastructure](../create-new-tutorial-technical-infrastructure/tutorial.html)
+> 1. [Getting a tutorial running on any Galaxy](../create-new-tutorial-technical-infrastructure/tutorial.html)
 > 1. [Submitting the new tutorial to the GitHub repository](../../../dev/tutorials/github-contribution/slides.html)
 {: .agenda}
