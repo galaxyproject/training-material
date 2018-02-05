@@ -7,9 +7,7 @@ tutorial_name: galaxy-intro-peaks2genes
 # イントロダクション
 {:.no_toc}
 
-We stumbled upon a paper [Li et al., Cell Stem Cell 2012](https://www.ncbi.nlm.nih.gov/pubmed/22862943) that contains the analysis of possible target genes of an interesting protein in mice. The targets were obtained by ChIP-seq and the raw data is available through [GEO](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE37268).
-The list of genes however is neither in the supplement of the paper nor part of the GEO submission.
-The closest thing we could find is a list of the regions where the signal is significantly enriched (so called *peaks*):
+先日、Cell Stem Cellに2012年にLi氏らが投稿した論文で、マウスにある興味深いタンパク質の標的遺伝子を解析することに成功したという内容を読みました[(Li et al., Cell Stem Cell 2012)](https://www.ncbi.nlm.nih.gov/pubmed/22862943)。この標的遺伝子の解析にはChIP-seqが用いられていて、結果のデータは [GEO](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE37268)にて手に入れることができるのですが、この入手できるデータは論文の補足でも、GEOに提出された形にもなっておらず、シグナルが顕著な部分を表した（いわゆるピークの）データでした。
 
 1 | 3660676 | 3661050 | 375 | 210 | 62.0876250438913 | -2.00329386666667
 1 | 3661326 | 3661500 | 175 | 102 | 28.2950833625942 | -0.695557142857143
@@ -17,32 +15,32 @@ The closest thing we could find is a list of the regions where the signal is sig
 1 | 3984926 | 3985075 | 150 | 93 | 34.1879823073944 | -0.816992
 1 | 4424801 | 4424900 | 100 | 70 | 26.8023246007435 | -0.66282
 
-**Table 1** Subsample of the available file
+**表1** 入手できるデータのサブサンプル
 
-The goal of this exercise is to **turn this list of genomic regions into a list of possible target genes**.
+というわけで、今回は**このゲノム領域のリストを、標的遺伝子が何か分かるような形に変える**ことを目標としてやっていきたいと思います。
 
-> ### Agenda
+> ### テーマ
 >
-> In this tutorial, we will deal with:
+> 今回のチュートリアルでは以下のものを扱います。
 >
 > 1. TOC
 > {:toc}
 >
 {: .agenda}
 
-# Pretreatments
+# はじめに
 
-Browse to your Galaxy instance and log in or register.
+まずはGalaxyを開いて、ログインしましょう（まだの方は登録しましょう）。
 
-The Galaxy interface consist of three main parts. The available tools are listed on the left, your analysis history is recorded on the right, and the middle pane will show the tools and datasets.
+Galaxyのインタフェースは以下のような3つの部分によって主に構成されていて、左側が使用出来るツールを並べたリストで、右側が解析した結果がヒストリーとして記録される場所、そして中央がツールやデータセットを操作する場所となっています。
 
 ![Galaxy interface](../../images/galaxy_interface.png)
 
-Let's start with a fresh history.
+それでは、新しいヒストリーを使ってチュートリアルを始めましょう。
 
-> ### {% icon hands_on %} Hands-on: Create history
+> ### {% icon hands_on %} ハンズオン:ヒストリーを作成する
 >
-> 1. Make sure you have an empty analysis history.
+> 1. 何も解析していない空のヒストリーがあることを確認する。
 >
 >    > ### {% icon tip %} Starting a new history
 >    >
