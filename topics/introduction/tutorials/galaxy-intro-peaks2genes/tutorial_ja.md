@@ -40,7 +40,7 @@ Galaxyのインタフェースは以下のような3つの部分によって主�
 
 > ### {% icon hands_on %} ハンズオン:ヒストリーを作成する
 >
-> 1. 何も解析していない空のヒストリーがあることを確認する。
+> 1. 何も解析していない空のヒストリーがあることを確認する
 >
 >    > ### {% icon tip %} Starting a new history
 >    >
@@ -48,7 +48,7 @@ Galaxyのインタフェースは以下のような3つの部分によって主�
 >    > * Select the option **Create New** from the menu
 >    {: .tip}
 >
-> 2. **Rename your history** to make it easy to recognize
+> 2. ヒストリーの名前を分かりやすいものに変える
 >
 >    > ### {% icon tip %} Rename a history
 >    >
@@ -62,23 +62,23 @@ Galaxyのインタフェースは以下のような3つの部分によって主�
 >
 {: .hands_on}
 
-## Data upload
+## データをアップロードする
 
-> ### {% icon hands_on %} Hands-on: Data upload
+> ### {% icon hands_on %} ハンズオン:データをアップロードする
 >
-> 1. Download the list of peak regions (the file [`GSE37268_mof3.out.hpeak.txt.gz`](https://www.ncbi.nlm.nih.gov/geo/download/?acc=GSE37268&format=file&file=GSE37268%5Fmof3%2Eout%2Ehpeak%2Etxt%2Egz)) from [GEO](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE37268) to your computer
-> 2. Click on the upload button in the upper left ot the interface
+> 1.  [GEO](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE37268)からピーク領域のリスト(ファイルはこちら [`GSE37268_mof3.out.hpeak.txt.gz`](https://www.ncbi.nlm.nih.gov/geo/download/?acc=GSE37268&format=file&file=GSE37268%5Fmof3%2Eout%2Ehpeak%2Etxt%2Egz))をPCにダウンロードする 
+> 2. インタフェースの左上にあるアップロードボタンをクリックする
 >
 >    ![Upload icon](../../images/upload_button.png)
 >
 >
-> 3. Press **Choose local file** and search for your file
+> 3. **Choose local file** を選択し、ダウンロードしたファイルを探す
 >
-> 4. As **Type** select `interval`
+> 4. **Type** を `interval`にする
 >
-> 5. Press **Start** and wait for the upload to finish
->  
->     Galaxy will automatically unpack the file.
+> 5. **Start** を押し、アップロードが完了するのを待つ    
+>    
+>     Galaxy が自動でファイルを展開する。
 >
 >     > ### {% icon comment %} Comment
 >     > After this you will see your first history item in Galaxy’s right pane. It will go through
@@ -105,7 +105,7 @@ Galaxyのインタフェースは以下のような3つの部分によって主�
 >    > * Press **Save**
 >    {: .tip}
 >
->    As default, Galaxy takes the link as name. It also doesn't link the dataset to a database or a reference genome.
+>    デフォルトでは、Galaxyはリンクを名前にします。また、データセットをデータベースや参照ゲノムにリンクしません。
 >
 >    > ### {% icon comment %} Comments
 >    > - Check that the database of your uploaded dataset is mm9. If not, click on the pencil icon and modify the Database/Build: field to Mouse July 2007 (NCBI37/mm9) (mm9).
@@ -114,12 +114,12 @@ Galaxyのインタフェースは以下のような3つの部分によって主�
 >
 {: .hands_on}
 
-In order to find the related genes to these peak regions,
-we also need a list of genes in mice, which we can obtain from UCSC.
+ピーク領域に関連する遺伝子を見つけるためには、
+UCSCから手に入る、マウスの遺伝子のリストが他に必要となります。
 
-> ### {% icon hands_on %} Hands-on: Data upload from UCSC
+> ### {% icon hands_on %} ハンズオン: UCSCからデータをアップロードする
 >
-> 1. In the tool menu, navigate to `Get Data -> UCSC Main - table browser`
+> 1. ツールのメニューから、 `Get Data -> UCSC Main - table browser` へと移動する。
 >
 >     ![UCSC Main tool in tools section](../../images/101_01.png)
 >
@@ -127,7 +127,7 @@ we also need a list of genes in mice, which we can obtain from UCSC.
 >
 >     ![UCSC table browser interface](../../images/intro_02.png)
 >
-> 2. Set the following options:
+> 2. 以下のようにオプションを設定する:
 >     - **clade** to `Mammal`
 >     - **genome** to `Mouse`
 >     - **assembly** to `July 2007 (NCBI37/mm9)`
@@ -138,13 +138,13 @@ we also need a list of genes in mice, which we can obtain from UCSC.
 >     - **output format** to `BED - browser extensible data`
 >     - **Send output to** to `Galaxy` checked
 >
-> 3. Click on the **get output** button
+> 3. **get output** ボタンをクリックする
 >
->    You will see the next screen:
+>    ボタンをクリックすると以下のようなスクリーンが表示される:
 >
 >    ![Output settings](../../images/intro_03.png)
 >
-> 4. Make sure that **Create one BED record per** is set to `Whole Gene` and click on the **Send Query to Galaxy** button.
+> 4. **Create one BED record per** の欄を見て、 `Whole Gene` がチェックされているかを確認した後、 **Send Query to Galaxy** ボタンをクリックする
 >
 > 5. Rename our dataset to something more recognizable
 >    - Click on the **pencil icon** to edit a file's attributes.
