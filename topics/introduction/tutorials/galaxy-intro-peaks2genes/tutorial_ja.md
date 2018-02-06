@@ -214,8 +214,8 @@ HPeakのマニュアルを見ると、列に以下のような情報が含まれ
 > 3. 作業が終了するまで待機する
 > 4. **目のアイコン** をクリックしてファイルを見る
 >
->    > ### {% icon question %} Questions
->    >
+>    > ### {% icon question %} 問題
+>    >
 >    > 1. Are the chromosomes 20 and 21 named X and Y?
 >    >
 >    >    <details>
@@ -227,14 +227,14 @@ HPeakのマニュアルを見ると、列に以下のような情報が含まれ
 >    {: .question}
 {: .hands_on}
 
-In order to convert the chromosome names we have therefore two things to do:
+したがって、染色体の名前を変換するには以下の2つの工程を踏む必要があります。:
 
- - add `chr`
- - change 20 and 21 to X and Y
+ - `chr` を加える
+ - 20 と 21 を X と Y に変える
 
-> ### {% icon hands_on %} Hands-on: Adjust chromosome names
+> ### {% icon hands_on %} ハンズオン: 染色体の名前を調整する
 >
-> 1. **Replace Text** {% icon tool %}: Run **Replace Text in a specific column** with the following settings:
+> 1. **テキストを置き換える** {% icon tool %}: 以下の設定を行った上で **Replace Text in a specific column** を走らせる:
 >     - **File to process** to our peak file `GSE37268_mof3.out.hpeak.txt`
 >     - **in column**: `Column:1`
 >     - **Find pattern**: `[0-9]+` (this will look for numerical digits)
@@ -257,17 +257,16 @@ In order to convert the chromosome names we have therefore two things to do:
 >
 {: .hands_on}
 
-We have quite some files now and should take care that we don't loose track. Let's rename our latest result to something more handy, e.g. `Peak regions`.
+現段階でGalaxyに沢山のファイルがあるため、それぞれのファイルが区別できなくならないように注意しなければなりません。なので、最新の結果のファイルを例えば `Peak regions` などといった分かりやすい名前に変えておきましょう。
 
 
-## Analysis
+## 解析
 
-Our goal is still to compare the 2 region files (the genes file and the peak file from the publication)
-to know which peaks are related to which genes. If you really only want to know which peaks are located **inside** genes you
-can skip the next step. Otherwise, it might be reasonable to include the promoter region into the comparison, e.g. because
-you want to include Transcriptions factors in ChIP-seq experiments.
+今回の目標は、2つの遺伝子領域のファイル(遺伝子のファイルと出版物のファイル)を比較して、どのピークがどの遺伝子に関連しているかを知ることです。
+もしあなたが、遺伝子**内**にどのようなピークがあるのかを知りたいだけであれば、このステップをスキップすることができます。
+もしそうでなければ、ChIP-seqの実験で転写因子を入れる必要があるなどの理由があるため、このステップを通してプロモーター領域を比較に加えた方が良いでしょう。
 
-> ### {% icon hands_on %} Hands-on: Add promoter region to gene records
+> ### {% icon hands_on %} ハンズオン: 遺伝子レコードにプロモーター領域を加える
 >
 > 1. **Get Flanks** {% icon tool %}: Run **Get flanks returns flanking region/s for every gene** with the following settings:
 >     - **Select data** to the file from UCSC
