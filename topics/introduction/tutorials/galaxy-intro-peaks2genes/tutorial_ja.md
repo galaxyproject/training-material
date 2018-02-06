@@ -154,68 +154,65 @@ UCSCから手に入る、マウスの遺伝子のリストが他に必要とな�
 >
 {: .hands_on}
 
-> ### {% icon comment %} BED file format
-> The **BED - Browser Extensible Data** format provides a flexible way to encode gene regions. BED lines have three required fields:
-> - chromosome ID
-> - start position (0-based)
-> - end position (end-exclusive)
+> ### {% icon comment %} BEDファイル形式について
+> **BED - Browser Extensible Data** 形式は遺伝子をコード化する領域を上手く表示する形式です。BEDラインには以下の3つの位置情報が必要です。:
+> - 染色体のID
+> - 染色体や足場での塩基の開始地点 (最初の塩基を0とする)
+> - 終了地点 (最後の塩基を除く)
 >
-> There can be up to and nine additional optional fields, but the number of fields per line must be consistent throughout any single set of data.
+> この3つの必須な位置情報に加えて最大9つのオプションの位置情報がありますが、1行あたりの位置情報の数は1つのデータセット全体を通して統一しなければなりません。
 >
-> You can find more information about it at [UCSC](https://genome.ucsc.edu/FAQ/FAQformat#format1) including a description of the optional fields.
+> オプションの位置情報の内容も含めたBEDのより詳しい情報は[UCSC](https://genome.ucsc.edu/FAQ/FAQformat#format1) で得ることができます。
 {: .comment}
 
-Now we collected all the data we need to start our analysis.
+これで、解析を開始するために必要なすべてのデータを揃えることができました。
 
-# Part 1: Naive approach
+# Part 1: 基本的なやり方
 
-## File preparation
+## ファイルの準備
 
-Let's have a look at our files to see what we actually have here.
+それでは、実際にどのような内容のデータを持っているか見るためにファイルを見てみましょう。
 
-> ### {% icon hands_on %} Hands-on: View file content
+> ### {% icon hands_on %} ハンズオン: ファイルの内容を表示する
 >
-> 1. To view the content of your peak file, click on the **eye icon**.
->    It should look like this:
+> 1. ピーク領域のファイルを表示するには、 **目のアイコン**をクリックする。クリックすると以下の図が現れる。:
 >
 >    ![Contents of the peak file](../../images/intro_04.png)
 >
-> 2. View the content of the regions of the genes from UCSC
+> 2. UCSCから得た遺伝子領域のデータの内容が表示される。
 >
 >    ![Contents of UCSC file](../../images/intro_05.png)
 >
 {: .hands_on}
 
-> ### {% icon question %} Questions
+> ### {% icon question %} 問題
 >
-> While the file from UCSC has labels for the columns, the peak file does not. Can you guess what the columns stand for?
+> UCSCのファイルには列のラベルが付いていますが、ピークのファイルにはラベルが付いてありません。どうすればラベルなしの状態でそれぞれの列が何の列か推測できるでしょうか。
 >
 {: .question}
 
-This peak file is not in any standard format and just by looking at it, we cannot find out what the numbers in the different columns mean. In the paper the authors mention that they used the peak caller [HPeak](https://www.ncbi.nlm.nih.gov/pubmed/20598134).
+このピークのファイルは一般的な形式ではなく、このファイルを見るだけではそれぞれの列が何を表しているか判断できません。今回挙げた論文の著者は [HPeak](https://www.ncbi.nlm.nih.gov/pubmed/20598134) と呼ばれるピークを用いていると述べています。
 
-By looking at the HPeak manual we can find out that the columns contain the following information:
+HPeakのマニュアルを見ると、列に以下のような情報が含まれていることがわかります。:
 
- - chromosome name by number
- - start coordinate
- - end coordinate
- - length
- - location within the peak that has the highest hypothetical DNA fragment coverage (summit)
- - not relevant
- - not relevant
+ - 番号で表されている染色体の名前
+ - 開始座標
+ - 終了座標
+ - 染色体の長さ
+ - 最も高い仮説的なDNAフラグメント（頂上）の範囲を含むピーク内の位置。
 
-In order to compare the two files, we have to make sure that the chromosome names follow the same format.
-As we directly see, the peak file lacks `chr` before any chromosome number. But what happens with chromosome 20 and 21? Will it be X and Y instead? Let's check:
+2つのファイルを比べるには、染色体の名前が同じ形式で表されていることを確認する必要があります。
+見てわかるように、ピークのファイルでは染色体番号の前に `chr` が欠けています。しかし、20番染色体と21番染色体ではどのように判断すればよいでしょうか。またはX染色体とY染色体では？確認してみましょう。:
 
-> ### {% icon hands_on %} Hands-on: View end of file
+> ### {% icon hands_on %} ハンズオン: ファイルの末尾を表示する
 >
-> 1. **Select last** {% icon tool %}: Run **Select last lines from a dataset (tail)** with the following settings:
+> 1. **末尾を選択する** {% icon tool %}: 以下の設定を行った上で **Select last lines from a dataset (tail)** を走らせる:
 >     - **Text file** to our peak file `GSE37268_mof3.out.hpeak.txt`
 >     - **Operation**: `Keep last lines`
 >     - **Number of lines**: Choose a value, e.g. `100`
-> 2. Click **Execute**
-> 3. Wait for the job to finish
-> 4. Inspect the file through the **eye icon**
+> 2. **Execute** をクリックする
+> 3. 作業が終了するまで待機する
+> 4. **目のアイコン** をクリックしてファイルを見る
 >
 >    > ### {% icon question %} Questions
 >    >
