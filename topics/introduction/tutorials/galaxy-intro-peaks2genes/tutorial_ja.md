@@ -239,7 +239,7 @@ HPeakのマニュアルを見ると、列に以下のような情報が含まれ
 >     - **in column**: `Column:1`
 >     - **Find pattern**: `[0-9]+` (this will look for numerical digits)
 >     - **Replace with**: `chr&` (`&` is a placeholder for the find result)
-> 3. **Replace Text** {% icon tool %}: Let's rerun the tool with
+> 3. **テキストを置き換える** {% icon tool %}: 上で使ったツールをもう一度走らせてみよう
 >    - **File to process** to the output from the last run, e.g. something like `Replace Text on data ...`
 >    - **in column**: `Column:1`
 >    - **Find pattern**: `chr20`
@@ -268,7 +268,7 @@ HPeakのマニュアルを見ると、列に以下のような情報が含まれ
 
 > ### {% icon hands_on %} ハンズオン: 遺伝子レコードにプロモーター領域を加える
 >
-> 1. **Get Flanks** {% icon tool %}: Run **Get flanks returns flanking region/s for every gene** with the following settings:
+> 1. **Get Flanks** {% icon tool %}: 以下の設定を行った上で**Get flanks returns flanking region/s for every gene** を走らせる:
 >     - **Select data** to the file from UCSC
 >     - **Region** to `Around Start`
 >     - **Location of the flanking region/s** to `Upstream`
@@ -277,7 +277,7 @@ HPeakのマニュアルを見ると、列に以下のような情報が含まれ
 >
 >     This tool returns flanking regions for every gene
 >
-> 2. Compare the rows of the resulting BED file with the input to find out how the start and end positions changed
+> 2. BEDファイルの結果の行とインプットを比べて、開始地点と終了地点の変更方法を見つける
 >
 >    > ### {% icon tip %} Tip: Inspecting several files using the scratchbook
 >    >
@@ -291,32 +291,32 @@ HPeakのマニュアルを見ると、列に以下のような情報が含まれ
 >    >    ![Show/Hide Scratchbook](../../images/intro_scratchbook_show_hide.png)
 >    {: .tip}
 >
-> 3. Rename your dataset to reflect your findings
+> 3. データセットの名前を変更して結果を反映させる
 {: .hands_on}
 
-You might have noticed that the UCSC file is in `BED` format and has a database associated to it. That's what we want for our peak file as well
+そろそろUCSCのファイルが `BED` 形式であり、それに関連したデータベースを持っていることに気付いたかもしれません。このファイルこそがピークファイルのために必要になっているのです。
 
-> ### {% icon hands_on %} Hands-on: Change format and database
+> ### {% icon hands_on %} ハンズオン: 形式とデータベースを変更する
 >
-> 1. Click on the **pencil icon** in the history entry of our peak region file:
+> 1. ピーク領域のファイルにある **鉛筆アイコン** をクリックする:
 >      ![Pencil icon](../../images/edit_icon.png)
 > 2. Switch to the `Convert Format` tab
 > 3. Select `Convert Genomic Intervals To BED` and press **Convert**
 > 4. Edit the "Database/Build" to select "mm9", the database build for mice used in the paper
 {: .hands_on}
 
-It's time to find the overlapping intervals (finally!). To do that, we want to extract the genes which overlap/intersect with our peaks.
+これで重複している部分を探す段階に来ました (ついに!)。そのためには、ピークと重複している遺伝子や交差している遺伝子を抽出する必要があります。
 
-> ### {% icon hands_on %} Hands-on: Find Overlaps
+> ### {% icon hands_on %} ハンズオン: 重複部分を探す
 >
-> 1. **Intersect** {% icon tool %}: Run **Intersect the intervals of two datasets** with the following settings:
+> 1. **Intersect** {% icon tool %}: 以下の設定を行った上で **Intersect the intervals of two datasets** を走らせる:
 >     - **Return** to `Overlapping Intervals`
 >     - **of**: the UCSC file with promoter regions
 >     - **that intersect**: our converted peak region file
 >     - **for at least**: `1`
 >
 >    > ### {% icon comment %} Comments
->    > The order of the inputs is important! We want to end up with a list of genes, so the corresponding dataset needs to be the first input.
+>    > 入力する順番はとても大事です！今回の目標としては遺伝子のリストで終わりたいので、対応するデータセットを最初に入力する必要があります。
 >    {: .comment}
 {: .hands_on}
 
