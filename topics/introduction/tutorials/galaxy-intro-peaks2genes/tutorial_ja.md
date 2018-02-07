@@ -366,21 +366,21 @@ HPeakのマニュアルを見ると、列に以下のような情報が含まれ
 
 これまでのヒストリーを注意深く見てみると、最初から最後までで解析の全てのステップが含まれていることが分かります。これらのヒストリーから、全てのステップで適用される全てのパラメーター設定を保存したGalaxyにおける解析の、非常に完成された記録を構築することができます。それならばこれらのヒストリーを、何度も何度も繰り返し実行することができるワークフローに変換したくありませんか？
 
-Galaxyでは `Extract workflow` というオプションを利用することで、ワークフローを非常に簡単に作ることができます。これはつまり、ワークフローを作成するには、一度だけ手動で実行してからワークフローに変換するだけで作成に時間がかからず、そして次回同じ解析をする際に行う作業が少なくて済むようになります。これにより、行った解析を簡単に共有したり公開することもできるようになります。
+Galaxyでは `ワークフローを抽出` というオプションを利用することで、ワークフローを非常に簡単に作ることができます。これはつまり、ワークフローを作成するには、一度だけ手動で実行してからワークフローに変換するだけで作成に時間がかからず、そして次回同じ解析をする際に行う作業が少なくて済むようになります。これにより、行った解析を簡単に共有したり公開することもできるようになります。
 
 > ### {% icon hands_on %} ハンズオン: ワークフローの抽出
 >
-> 1. **Clean up** your history
+> 1. ヒストリーを **クリーンアップ** する
 >
 >    If you had any failed jobs (red), please remove those datasets from your history by clicking on the `x` button. This will make the creation of a workflow easier.
 >
-> 2. Go to the history **Options menu** (gear symbol) and select the `Extract Workflow` option.
+> 2. ヒストリーの **Options menu** (歯車アイコン)を開き、 `ワークフローを抽出` を選択する。
 >
 >    ![Extracting workflow in history menu](../../images/history_menu_extract_workflow.png)
 >
 >    The center panel will change and you will be able to choose which steps to include/exclude and how to name the newly created workflow.
 >
-> 3. **Uncheck** any steps that shouldn't be included in the workflow
+> 3. ワークフローに加えるべきでない全てのステップの**チェックを外す** 
 >
 >    Since we did some steps which where specific to our custom peak file, we might want to exclude:
 >    - **Select last**
@@ -388,7 +388,7 @@ Galaxyでは `Extract workflow` というオプションを利用することで
 >    - **Convert Genomic Intervals to strict BED**
 >    - **Get flanks**
 >
-> 4. Rename the workflow to something descriptive, e.g. `From peaks to genes`
+> 4. ワークフローの名前を例えば `From peaks to genes` といった分かりやすい名前に変更する
 >
 > 5. Click on the **Create Workflow** button near the top.
 >
