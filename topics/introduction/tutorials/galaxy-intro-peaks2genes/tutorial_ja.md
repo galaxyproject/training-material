@@ -320,11 +320,11 @@ HPeakのマニュアルを見ると、列に以下のような情報が含まれ
 >    {: .comment}
 {: .hands_on}
 
-We now have the list of genes (column 4) overlapping with the peak regions.
-To get a better overview of the genes we obtained, we want to look at their distribution across the different chromosomes.
-We will regroup the table by chromosome and count the number of genes with peaks on each chromosome
+今私たちは、ピーク領域に重複している遺伝子のリスト（4列目）を持っています。
+得られた遺伝子のより良い概観を得るために、異なる複数の染色体上での遺伝子の分布を見たいので、
+染色体ごとに表を作り直して、各染色体上でピークをもつ遺伝子の数を数えてみましょう。
 
-> ### {% icon hands_on %} Hands-on: Count genes on different chromosomes
+> ### {% icon hands_on %} ハンズオン: 異なる染色体上の遺伝子の数を数える。
 >
 > 1. **Group** {% icon tool %}: Run **Group data by a column and perform aggregate operation on other columns** with the following settings:
 >     - **Select data** to the result of the intersection
@@ -334,8 +334,8 @@ We will regroup the table by chromosome and count the number of genes with peaks
 >     - **On column**: `Column 1`
 >     - **Round result to nearest integer?**: `No`
 >
->    > ### {% icon question %} Questions
->    >
+>    > ### {% icon question %} 問題
+>    >
 >    > Which chromosome contained the highest number of target genes?
 >    >
 >    >    <details>
@@ -348,11 +348,11 @@ We will regroup the table by chromosome and count the number of genes with peaks
 >
 {: .hands_on}
 
-## Visualization
+## 可視化
 
-Since we have some nice data, let's draw a barchart out of it!
+これまでの操作から、良いデータがいくつか得られたので、これらのデータから棒グラフを作成してみましょう!
 
-> ### {% icon hands_on %} Hands-on: Draw barchart
+> ### {% icon hands_on %} ハンズオン: 棒グラフを作る
 >
 > 1. Select the **Visualize icon** at the latest history item and select `Charts`
 > 2. Choose a title at **Provide a title**, e.g. `Gene counts per chromosome`
@@ -362,14 +362,13 @@ Since we have some nice data, let's draw a barchart out of it!
 >
 {: .hands_on}
 
-## Extracting workflow
+## ワークフローの抽出
 
-When you look carefully at your history, you can see that it contains all steps of our analysis, from the beginning to the end. By building this history we have actually built a complete record of our analysis with Galaxy preserving all parameter settings applied at every step.
-Wouldn't it be nice to just convert this history into a workflow that we'll be able to execute again and again?
+これまでのヒストリーを注意深く見てみると、最初から最後までで解析の全てのステップが含まれていることが分かります。これらのヒストリーから、全てのステップで適用される全てのパラメーター設定を保存したGalaxyにおける解析の、非常に完成された記録を構築することができます。それならばこれらのヒストリーを、何度も何度も繰り返し実行することができるワークフローに変換したくありませんか？
 
-Galaxy makes this very simple with the `Extract workflow` option. This means that any time you want to build a workflow, you can just perform it manually once, and then convert it to a workflow, so that next time it will be a lot less work to do the same analysis. It also allows you to easily share or publish your analysis.
+Galaxyでは `Extract workflow` というオプションを利用することで、ワークフローを非常に簡単に作ることができます。これはつまり、ワークフローを作成するには、一度だけ手動で実行してからワークフローに変換するだけで作成に時間がかからず、そして次回同じ解析をする際に行う作業が少なくて済むようになります。これにより、行った解析を簡単に共有したり公開することもできるようになります。
 
-> ### {% icon hands_on %} Hands-on: Extract workflow
+> ### {% icon hands_on %} ハンズオン: ワークフローの抽出
 >
 > 1. **Clean up** your history
 >
