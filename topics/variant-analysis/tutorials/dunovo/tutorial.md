@@ -11,7 +11,7 @@ This page explains how to perform discovery of low frequency variants from duple
 Calling low frequency variants from next generation sequencing (NGS) data is challenging due to significant amount of noise characteristic of these technologies. [Duplex sequencing](http://www.pnas.org/content/109/36/14508.short) (DS) was designed to address this problem by increasing sequencing accuracy by over four orders of magnitude. DS uses randomly generated barcodes to uniquely tag each molecule in a sample. The tagged fragments are then PCR amplified prior to the preparation of a sequencing library, creating fragment families characterized by unique combination of barcodes at both 5’ and 3’ ends:
 
 
->[![duplex](../../images/ds.png)](http://www.pnas.org/content/109/36/14508/F1.expansion.html)
+>[![duplex](../../images/ds.png)](http://www.pnas.org/content/109/36/14508#F1)
 >
 >The logic of duplex sequencing. From [Schmitt:2012](http://www.pnas.org/content/109/36/14508.short).
 
