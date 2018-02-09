@@ -130,7 +130,7 @@ The `--requirement seqtk@1.2` gets translated into the follow tool XML:
 
 class: enlarge120
 
-![](../../../../../shared/images/conda_logo.png)
+![](../../../../shared/images/conda_logo.png)
 
 Package, dependency and environment management
 
@@ -138,7 +138,7 @@ Package, dependency and environment management
 
 class: enlarge120
 
-###.image-25[![](../../../../../shared/images/conda_logo.png)] &lt;br/&gt; Conda Terminology
+###.image-25[![](../../../../shared/images/conda_logo.png)] &lt;br/&gt; Conda Terminology
 
 Conda **recipes** build **packages** that are published to **channels**.
 
@@ -146,13 +146,18 @@ Conda **recipes** build **packages** that are published to **channels**.
 
 class: enlarge120
 
-### .image-25[![](../../../../../shared/images/conda_logo.png)] &lt;br /&gt; Conda Key Features for Galaxy
+### .image-25[![](../../../../shared/images/conda_logo.png)] &lt;br /&gt; Conda Key Features for Galaxy
 
 - No compilation at install time - *binaries* with their dependencies, libraries...
+
 - Support for all operating systems Galaxy targets
+
 - Easy to manage *multiple versions* of the same recipe
+
 - HPC-ready: no root privileges needed
+
 - Easy-to-write YAML recipes
+
 - **Community** - not *restricted* to Galaxy
 
 ???
@@ -168,7 +173,7 @@ Compared with the Tool Shed dependency management (`tool_dependencies.xml`), Bio
 
 ---
 
-###.image-25[![](../../../../../shared/images/conda_logo.png)] &lt;br/&gt; Conda Distributions
+###.image-25[![](../../../../shared/images/conda_logo.png)] &lt;br/&gt; Conda Distributions
 
 ```
 
@@ -180,9 +185,10 @@ Compared with the Tool Shed dependency management (`tool_dependencies.xml`), Bio
 
 class: enlarge120
 
-###.image-25[![](../../../../../shared/images/conda_logo.png)] &lt;br/&gt; Best Practice Channels
+###.image-25[![](../../../../shared/images/conda_logo.png)] &lt;br/&gt; Best Practice Channels
 
 - Packages through channels within Continuum.
+
 - Conda channels searched by Galaxy for packages
     - iuc
     - bioconda
@@ -199,7 +205,7 @@ class: enlarge120
 
 class: left, enlarge120
 
-###.image-25[![](../../../../../shared/images/conda_logo.png)] &lt;br/&gt; Install and Configure
+###.image-25[![](../../../../shared/images/conda_logo.png)] &lt;br/&gt; Install and Configure
 
 ```bash
 $ planemo conda_init
@@ -216,7 +222,7 @@ This has already been done on [Planemo machine](https://github.com/galaxyproject
 
 class: enlarge120
 
-###.image-25[![](../../../../../shared/images/conda_logo.png)] &lt;br/&gt; Quickstart
+###.image-25[![](../../../../shared/images/conda_logo.png)] &lt;br/&gt; Quickstart
 #### Using Conda outside Planemo
 
 - Install a package
@@ -272,7 +278,7 @@ class: left, enlarge120
 The next few slides will use the seqtk example from Planemo's documentation - this can be downloaded to
 follow along using the following command:
 
-```
+```bash
 $ planemo project_init --template=seqtk_complete seqtk_example
 $ cd seqtk_example
 ```
@@ -287,7 +293,7 @@ class: left
 
 &lt;br&gt;
 
-```
+```bash
 $ planemo lint --conda_requirements seqtk_seq.xml
 Linting tool /Users/john/workspace/planemo/docs/writing/seqtk_seq_v6.xml
   ...
@@ -305,7 +311,8 @@ class: left
 
 ### The Planemo `conda_install` command
 
-```sh
+
+.reduce70[```sh
 $ planemo conda_install seqtk_seq.xml
 Install conda target CondaTarget[seqtk,version=1.2]
 /home/john/miniconda3/bin/conda create -y --name __seqtk@1.2 seqtk=1.2
@@ -327,7 +334,7 @@ Fetching packages ...
 #
 $ which seqtk
 seqtk not found
-```
+```]
 
 Notice seqtk hasn't been placed on the `PATH`, an environment has been setup that Galaxy (when
 used through Planemo) can leverage.
@@ -338,7 +345,7 @@ class: enlarge120
 
 ### The Planemo `conda_env` command
 
-```sh
+.reduce70[```sh
 $ . &lt;(planemo conda_env seqtk_seq.xml)
 Deactivate environment with conda_env_deactivate
 (seqtk_seq) $ which seqtk
@@ -357,7 +364,7 @@ Options: -q INT    mask bases with quality lower than INT [0]
          -S        strip of white spaces in sequences
 (seqtk_seq) $ conda_env_deactivate
 $
-```
+```]
 
 ---
 
@@ -374,7 +381,7 @@ class: left
 
 ### Planemo `test`
 
-.reduce90[```sh
+.reduce70[```sh
 $ planemo test seqtk_seq.xml
 ...
 INFO  [galaxy.tools.actions] Handled output named output1 for tool seqtk_seq (20.136 ms)
@@ -426,12 +433,22 @@ The following line indicates the seqtk package was found:
 
 Run the following commands to practice working with Galaxy tools, Planemo, and Conda.
 
-1. `planemo project_init --template=seqtk_complete seqtk_example`
-2. `cd seqtk_example`
-3. `planemo conda_install seqtk_seq.xml`
-4. `. &lt;(planemo conda_env seqtk_seq.xml)`
-5. `planemo test seqtk_seq.xml`
 
+```bash
+$ planemo project_init --template=seqtk_complete seqtk_example
+```
+```bash
+$ cd seqtk_example
+```
+```bash
+$ planemo conda_install seqtk_seq.xml
+```
+```bash
+$ . &lt;(planemo conda_env seqtk_seq.xml)
+```
+```bash
+$ planemo test seqtk_seq.xml
+```
 ---
 
 class: enlarge120
@@ -464,7 +481,7 @@ seqtk                        r75                           0  bioconda
 Alternatively, `conda` can be used directly:
 
 ```sh
-$ $HOME/miniconda3/bin/conda -c iuc -c bioconda -c conda-forge seqt
+$ $HOME/miniconda3/bin/conda search -c iuc -c bioconda -c conda-forge seqtk
 ```
 
 ---
@@ -524,7 +541,7 @@ pear.xml              test-data
 
 ---
 
-###.image-25[![](../../../../../shared/images/conda_logo.png)] &lt;br/&gt; Writing a Conda Recipe
+###.image-25[![](../../../../shared/images/conda_logo.png)] &lt;br/&gt; Writing a Conda Recipe
 
 If searching best practice channels fails, you may need to build a Conda recipe.
 
@@ -534,7 +551,7 @@ If searching best practice channels fails, you may need to build a Conda recipe.
 
 class: left
 
-###.image-25[![](../../../../../shared/images/conda_logo.png)] &lt;br/&gt; Writing a Conda Recipe - The Files
+###.image-25[![](../../../../shared/images/conda_logo.png)] &lt;br/&gt; Writing a Conda Recipe - The Files
 
 A Conda recipe is defined by a directory, the two most important files in this directory are:
 
@@ -545,7 +562,7 @@ A Conda recipe is defined by a directory, the two most important files in this d
 
 class: left
 
-###.image-25[![](../../../../../shared/images/conda_logo.png)] &lt;br/&gt; Writing a Conda Recipe - `meta.yaml`
+###.image-25[![](../../../../shared/images/conda_logo.png)] &lt;br/&gt; Writing a Conda Recipe - `meta.yaml`
 
 `meta.yaml` contains basic metadata about the recipe.
 
@@ -568,7 +585,7 @@ source:
 
 ---
 
-###.image-25[![](../../../../../shared/images/conda_logo.png)] &lt;br/&gt; Writing a Conda Recipe - `requirements`
+###.image-25[![](../../../../shared/images/conda_logo.png)] &lt;br/&gt; Writing a Conda Recipe - `requirements`
 
 ```yaml
 requirements:
@@ -588,7 +605,7 @@ requirements:
 
 ---
 
-###.image-25[![](../../../../../shared/images/conda_logo.png)] &lt;br/&gt; Writing a Conda Recipe - Preprocessing Selectors
+###.image-25[![](../../../../shared/images/conda_logo.png)] &lt;br/&gt; Writing a Conda Recipe - Preprocessing Selectors
 
 - Evaluated as Python expressions - feel free to use `and`, `or`, etc.
 - Other common selectors include `py2k`, `py3k`.
@@ -612,7 +629,7 @@ build:
 
 class: left
 
-###.image-25[![](../../../../../shared/images/conda_logo.png)] &lt;br/&gt; Writing a Conda Recipe - Tests
+###.image-25[![](../../../../shared/images/conda_logo.png)] &lt;br/&gt; Writing a Conda Recipe - Tests
 
 &lt;br/&gt;
 &lt;br/&gt;
@@ -646,13 +663,13 @@ Please note that the Conda tests run inside the runtime environment and not in t
 
 From Bioconda Guidelines:
 
-&gt; An adequate test must be included in the recipe. An "adequate" test depends on the recipe, but must be able to detect a successful installation. While many packages may ship their own test suite (unit tests or otherwise), including these in the recipe is not recommended since it may timeout the build system on Travis-CI. We especially want to avoid including any kind of test data in the repository.
+&gt; An adequate test must be included in the recipe. An "adequate" test depends on the recipe, but must be able to detect a successful installation. While many packages may ship their own test suite (unit tests or otherwise), including these in the recipe is not recommended since it may timeout the build system on CircleCI. We especially want to avoid including any kind of test data in the repository.
 
 https://bioconda.github.io/guidelines.html
 
 ---
 
-###.image-25[![](../../../../../shared/images/conda_logo.png)] &lt;br/&gt; Writing a Conda Recipe - `build.sh`
+###.image-25[![](../../../../shared/images/conda_logo.png)] &lt;br/&gt; Writing a Conda Recipe - `build.sh`
 
 ```bash
 #!/bin/bash
@@ -674,12 +691,20 @@ cp *.py $PREFIX/bin
 
 ---
 
-###.image-25[![](../../../../../shared/images/conda_logo.png)] &lt;br/&gt; Writing a Conda Recipe - Skeletons
+###.image-25[![](../../../../shared/images/conda_logo.png)] &lt;br/&gt; Writing a Conda Recipe - Skeletons
 
-- `conda skeleton pypi &lt;packagename&gt;`
-- `conda skeleton cran &lt;packagename&gt;`
-- `bioconductor_skeleton.py &lt;packagename&gt;`
-- `conda skeleton cpan &lt;packagename&gt;`
+```bash
+$ conda skeleton pypi &lt;packagename&gt;
+```
+```bash
+$ conda skeleton cran &lt;packagename&gt;
+```
+```bash
+$ bioconductor_skeleton.py &lt;packagename&gt;
+```
+```bash
+$ conda skeleton cpan &lt;packagename&gt;`
+```
 
 These generate pre-filled recipes &lt;small&gt;(not guaranteed to work out of the box)&lt;/small&gt; for specific programming environments.
 
@@ -687,7 +712,7 @@ These generate pre-filled recipes &lt;small&gt;(not guaranteed to work out of th
 
 ---
 
-###.image-25[![](../../../../../shared/images/conda_logo.png)] &lt;br/&gt; Writing a Conda Recipe - Building
+###.image-25[![](../../../../shared/images/conda_logo.png)] &lt;br/&gt; Writing a Conda Recipe - Building
 
 Once the recipe is ready to go, the `conda build` command can be used to build it.
 
@@ -707,7 +732,7 @@ $ $HOME/miniconda3/bin/conda build .
 
 ---
 
-.image-75[![](../../../../../shared/images/bioconda_logo.png)]
+.image-75[![](../../../../shared/images/bioconda_logo.png)]
 
 
 - A channel dedicated to bioinformatics (and other informatics) packages
@@ -718,25 +743,51 @@ $ $HOME/miniconda3/bin/conda build .
 
 ---
 
-###.image-25[![](../../../../../shared/images/bioconda_logo.png)] &lt;br /&gt; Contributing
+###.image-25[![](../../../../shared/images/bioconda_logo.png)] contributing 1/2
 
-1. Fork [Bioconda](https://github.com/bioconda/bioconda-recipes/fork).
-1. Clone your fork:
+- Fork [Bioconda](https://github.com/bioconda/bioconda-recipes/fork).
+- Clone your fork:
 
-   `git clone https://github.com/ &lt;myuser&gt; /bioconda-recipes`
-1. Create a new branch `package`
+  ```bash
+  $ git clone https://github.com/ &lt;myuser&gt; /bioconda-recipes
+  ```
 
-   `git checkout -b package`
-1. Fill two files `meta.yaml` and `build.sh` in a new recipe directory
-1. Build your new package and test it using `conda build`
-1. Commit and push to GitHub
+- Create a new branch `package`
 
-   `git add recipe; git commit -m 'my recipe description'; git push origin package`
-1. Create a [Pull Request](https://github.com/bioconda/bioconda-recipes)
-1. After the PR is merged, wait for the functional tests to pass on the master branch
-1. Enjoy your new Conda package at https://anaconda.org/bioconda
+  ```bash
+  $ git checkout -b package
+  ```
 
-See [Contributing with GitHub](github_contribution.html)
+- Fill two files `meta.yaml` and `build.sh` in a new recipe directory
+
+- Build your new package and test it using `conda build`
+
+---
+
+###.image-25[![](../../../../shared/images/bioconda_logo.png)] contributing 2/2
+
+- Commit and push to GitHub
+
+  ```bash
+  $ git add recipe
+  ```
+
+  ```bash
+  $ git commit -m 'my recipe description'
+  ```
+
+  ```bash
+  $ git push origin package
+  ```
+
+- Create a [Pull Request](https://github.com/bioconda/bioconda-recipes)
+
+- After the PR is merged, wait for the functional tests to pass on the master branch
+
+- Enjoy your new Conda package at https://anaconda.org/bioconda
+
+
+See [Contributing with GitHub](../github-contribution/slides.html)
 
 ---
 
@@ -913,7 +964,9 @@ $PYTHON setup.py install
 
 ---
 
-```yaml
+## Python - pysam's `meta.yaml`
+
+.reduce50[```yaml
 package:
     name: pysam
     version: 0.11.2.2
@@ -955,13 +1008,13 @@ test:
 
     imports:
         - pysam
-```
+```]
 
 ---
 
-## R (CRAN)
+## R
 
-For PyPI packages
+For CRAN packages
 
 ```sh
 conda skeleton cran &lt;packagename&gt;
@@ -1088,7 +1141,7 @@ test:
 
 ## Perl
 
-For PyPI packages
+For CPAN packages
 
 ```sh
 conda skeleton cpan &lt;packagename&gt;
@@ -1149,7 +1202,9 @@ class: left
 
 ## Metapackages
 
-&gt; Metapackages tie together other packages. All they do is define dependencies. For example, the hubward-all metapackage specifies the various other conda packages needed to get full hubward installation running just by installing one package. Other metapackages might tie together conda packages with a theme. For example, all UCSC utilities related to bigBed files, or a set of packages useful for variant calling.
+&gt; Metapackages tie together other packages. All they do is define dependencies. For example, the hubward-all metapackage specifies the various other conda packages needed to get full hubward installation running just by installing one package.
+
+&gt; Other metapackages might tie together conda packages with a theme. For example, all UCSC utilities related to bigBed files, or a set of packages useful for variant calling.
 
 https://bioconda.github.io/guidelines.html#metapackages
 
@@ -1157,9 +1212,9 @@ https://bioconda.github.io/guidelines.html#metapackages
 
 class: left
 
-## TravisCI Continuous Building
+## CircleCI Continuous Building
 
-.image-50[![](../../images/travis_ci_logo.png)]
+.image-70[![](../../images/circleci-logo.png)]
 
 - Lint recipes.
 - Build and run tests.
@@ -1168,32 +1223,27 @@ class: left
 
 ---
 
-## simulate-travis
+## CircleCI Command Line Interface (CLI)
 
-- The extended building and testing done by Travis can be executed locally using the script `simulate-travis.py` in the root directory of Bioconda
-- It is mandatory to build any recipe before using simulate-travis.py for the first time.
+- Installation:
+
+.reduce70[```bash
+$ curl -o /usr/local/bin/circleci https://circle-downloads.s3.amazonaws.com/releases/build_agent_wrapper/circleci
+```]
+
+.reduce70[```bash
+$ chmod +x /usr/local/bin/circleci
+```]
+
+- The extended building and testing done by CircleCI can be executed locally using the CircleCI CLI in the root directory of Bioconda
+
 - It should be run from the top-level dir of the repo.
 
----
+- Build and test recipes:
 
-class: left
-
-## simulate-travis
-
-Some example commands:
-
-&lt;dl&gt;
-  &lt;dt&gt;&lt;b&gt;&lt;code&gt;./simulate-travis.py --install-requirements&lt;/code&gt;&lt;/b&gt;&lt;/dt&gt;
-  &lt;dd&gt;&lt;i&gt;Installs all requirements that are needed for the Bioconda build system.&lt;/i&gt;&lt;/dd&gt;
-  &lt;dt&gt;&lt;b&gt;&lt;code&gt;./simulate-travis.py&lt;/code&gt;&lt;/b&gt;&lt;/dt&gt;
-  &lt;dd&gt;&lt;i&gt;Tests everything, using the installed &lt;code&gt;conda-build&lt;/code&gt;. Checks all recipes to see what needs to be built and is most comprehensive.&lt;/i&gt;&lt;/dd&gt;
-  &lt;dt&gt;&lt;b&gt;&lt;code&gt;./simulate-travis.py --docker&lt;/code&gt;&lt;/b&gt;&lt;/dt&gt;
-  &lt;dd&gt;&lt;i&gt;If you’re on OSX and have docker installed, you can use this to test the recipe under Linux.&lt;/i&gt;&lt;/dd&gt;
-  &lt;dt&gt;&lt;b&gt;&lt;code&gt;./simulate-travis.py --docker --quick&lt;/code&gt;&lt;/b&gt;&lt;/dt&gt;
-  &lt;dd&gt;&lt;i&gt;The `–quick` option which will just check recipes that have changed since the last commit to master branch.&lt;/i&gt;&lt;/dd&gt;
-  &lt;dt&gt;&lt;b&gt;&lt;code&gt;./simulate-travis.py --docker --package r-* bioconductor-*&lt;/code&gt;&lt;/b&gt;&lt;/dt&gt;
-  &lt;dd&gt;&lt;i&gt;Specific recipes can be tested using the &lt;code&gt;–packages&lt;/code&gt; argument. package names can be globs such as all R and Bioconductor packages above.&lt;/i&gt;&lt;/dd&gt;
-&lt;/dl&gt;
+.reduce70[```bash
+$ circleci build
+```]
 
 
 ---
