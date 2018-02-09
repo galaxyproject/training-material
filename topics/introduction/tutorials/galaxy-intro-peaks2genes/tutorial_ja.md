@@ -390,11 +390,11 @@ Galaxyでは `ワークフローを抽出` というオプションを利用す�
 >
 > 4. ワークフローの名前を例えば `From peaks to genes` といった分かりやすい名前に変更する
 >
-> 5. Click on the **Create Workflow** button near the top.
+> 5. 上部付近にある **Create Workflow** ボタンをクリックする
 >
 >    You will get a message that the workflow was created. But where did it go?
 >
-> 6. Click on **Workflow** in the top menu of Galaxy
+> 6. Galaxyのトップメニューにある **ワークフロー** をクリックする
 >
 >    Here you have a list of all your workflows
 >
