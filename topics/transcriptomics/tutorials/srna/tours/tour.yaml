@@ -308,7 +308,8 @@ steps:
       be utilized to deplete or avoid capture of rRNAs, but these methods are
       not always 100% efficient. We also want to remove any miRNA sequences, as
       these are not relevant to our analysis. After removing rRNA and miRNA
-      reads, we will analyze the remaining reads as siRNA and piRNA sequences.
+      reads, we will analyze the remaining reads, which may be siRNA or piRNA
+      sequences.
     backdrop: false
   - title: Hierarchical read alignment to remove rRNA/miRNA reads
     content: >-
@@ -500,7 +501,8 @@ steps:
       identify sequences that are length 12-19 or 23-50 (inclusive), and the
       <b>Miscellaneous Manipulation Type</b> parameter tells the tool to remove
       these sequences. What remains are sequences of length 20-22nt. We will now
-      repeat these steps to identify 23-29nt piRNA sequences.
+      repeat these steps to identify sequences in the size-range of piRNAs
+      (23-29nt).
     backdrop: true
   - title: Extract subclasses
     element: '#tool-search-query'
@@ -518,15 +520,15 @@ steps:
     element: '#tool-search'
     content: >-
       Execute the tool on each collection of non-r/miRNA reads to identify
-      piRNAs (23-29nt) using the following parameters <ul> <li><b>FASTQ
-      File:</b> Click the “Dataset collection” tab and then select the blank
-      RNAi sRNA-seq dataset of non-r/miRNA FASTQ files</li> <li><b>Match
-      Reads:</b> Click “Insert Match Reads”</li> <li><b>Match Reads by:</b> Set
-      to “Sequence Content”</li> <li><b>Match by:</b> ^.{12,22}$ ^.{30,50}$</li>
-      <li><b>Manipulate Reads:</b> Click “Insert Manipulate Reads”</li>
-      <li><b>Manipulate Reads on:</b> Set to “Miscellaneous actions”</li>
-      <li><b>Miscellaneous Manipulation Type:</b> Set to “Remove Read”</li>
-      </ul>
+      sequences in the size-range of piRNAs (23-29nt) using the following
+      parameters <ul> <li><b>FASTQ File:</b> Click the “Dataset collection” tab
+      and then select the blank RNAi sRNA-seq dataset of non-r/miRNA FASTQ
+      files</li> <li><b>Match Reads:</b> Click “Insert Match Reads”</li>
+      <li><b>Match Reads by:</b> Set to “Sequence Content”</li> <li><b>Match
+      by:</b> ^.{12,22}$ ^.{30,50}$</li> <li><b>Manipulate Reads:</b> Click
+      “Insert Manipulate Reads”</li> <li><b>Manipulate Reads on:</b> Set to
+      “Miscellaneous actions”</li> <li><b>Miscellaneous Manipulation Type:</b>
+      Set to “Remove Read”</li> </ul>
     position: left
   - title: Extract subclasses
     content: Repeat for the Symplekin RNAi dataset collection.
@@ -562,7 +564,9 @@ steps:
       are 23-29nt long in our Reads_23-29_nt_length_piRNAs file, as expected.
       Given that we had ~268k trimmed reads in the Blank RNAi replicate 3 file,
       siRNAs represent ~12.1% of the reads and piRNAs represent ~6.2% of the
-      reads in this experiment.
+      reads in this experiment. There is no distinct peak in the piRNA range (
+      you can find the example of the real piRNA profile in Figure 1 from [Colin
+      D. Malone et al, 2009](http://dx.doi.org/10.1016/j.cell.2009.03.040)).
     position: left
   - title: Extract subclasses
     content: >-
