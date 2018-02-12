@@ -398,59 +398,59 @@ Galaxyでは `ワークフローを抽出` というオプションを利用す�
 >
 >    Here you have a list of all your workflows
 >
-> 7. Select the newly generated workflow and click on **Edit**
+> 7. 新しく生成されたワークフローを選んで **Edit** をクリックする
 >
 >    You should see something similar to this:
 >
 >    ![Editing workflow interface](../../images/intro_06.png)
 >
->    > ### {% icon comment %} The workflow editor
->    > We can examine the workflow in Galaxy's workflow editor. Here you can view/change the parameter settings of each step, add and remove tools, and connect an output from one tool to the input of another, all in an easy and graphical manner. You can also use this editor to build workflows from scratch.
+>    > ### {% icon comment %} ワークフローの編集について
+>    > Galaxyのワークフローの編集画面でワークフローを調べることができます。この画面では各ステップでのパラメーター設定を見たり変更したり、ツールを加えたり除外したり、ツールのアウトプットを別のツールのインプットに接続することができて、これらはすべてグラフィカルな方法で簡単に行うことができます。また、この編集画面でワークフローを一から作成することもできます。
 >    {: .comment}
 >
->     Although we have our two inputs in the workflow they are missing their connection to the first tool (Intersect), because we didn't carry over some of the intermediate steps.
+>     ワークフローには今2つインプットがありますが、最初のツール（Intersect）への接続が切断されています。これは間のステップをいくつか外したために起こっています。
 >
-> 8. Connect each input dataset to the **Intersect** tool by dragging the arrow pointing outwards on the right of its box (which denotes an output) to an arrow on the left of the **Intersect** box pointing inwards (which denotes an input)
-> 9. Rename the input datasets to `Reference regions` and `Peak regions`
-> 10. Click on the **gear icon** at the top right and press **Auto Re-layout** to clean up our view:
+> 8. それぞれのインプットしたデータセットを **Intersect** ツールに接続するために、インプットしたデータセットのボックスの右側にある矢印（これはアウトプットを示している）を、 **Intersect** のボックスの左側にある矢印（これはインプットを示している）にドラッグする
+> 9. インプットしたデータセットをそれぞれ `Reference regions` と `Peak regions` に改名する
+> 10. 右上にある **歯車アイコン** をクリックした後、 **Auto Re-layout** を押し、表示されているワークフローのレイアウトを整える:
 >    ![Auto re-layouting](../../images/intro_07.png)
-> 11. Click on the **gear icon** at the top right and press **Save** to save your changes
+> 11. 同様に右上の **歯車アイコン** をクリックし、 **Save** を押して変更を保存する
 >
->    > ### {% icon tip %} Tip: Hiding intermediate steps
->    > When a workflow is executed, the user is usually primarily interested in the final product and not in all intermediate steps. By default all the outputs of a workflow will be shown, but we can explicitly tell Galaxy which output to show and which to hide for a given workflow. This behaviour is controlled by the little asterisk next to every output dataset:
+>    > ### {% icon tip %} Tip: 中間のステップを非表示にする
+>    > ワークフローが実行されると、ユーザーは基本的に最後に得られた結果のみに関心を持ち、中間にあるすべてのステップには関心がありません。デフォルトではワークフローのすべてのアウトプットが表示されますが、Galaxyではワークフローで表示したいアウトプットと隠したいアウトプットをはっきりと分けることができます。この動作はアウトプットのデータセットの横にある小さなアスタリスクによってコントロールされます。:
 >    >
 >    > ![Workflow editor mark output](../../../../shared/images/workflow_editor_mark_output.png)
 >    >
->    > If you click on this asterisk for any of the output datasets, then *only* files with an asterisk will be shown, and all outputs without an asterisk will be hidden (Note that clicking *all* outputs has the same effect as clicking *none* of the outputs, in both cases all the datasets will be shown).
->    {: .tip}
+>    > アウトプットのデータセットのどれかでアスタリスクをクリックすると、アスタリスクがついたファイル*のみ*が表示され、アスタリスクのないファイルはすべて非表示になります(*すべての*アウトプットのアスタリスクをクリックすると、*すべての*アウトプットをクリックしない場合と同じ効果となり、どちらの場合でもすべてのデータセットが表示されます)。
+>    {: .tip}
 >
 {: .hands_on}
 
-Now it's time to reuse our workflow for a more sophisticated approach.
+それではワークフローをもう一度使ってより応用的な方法で解析してみましょう。
 
-# Part 2: More sophisticated approach
+# Part 2: 応用的なやり方
 
-In part 1 we used an overlap definition of 1 bp (default setting). In order to get a more meaningful definition, we now want to use the information of the position of the peak summit and check for overlap of the summits with genes.
+Part 1では1 bp単位で重複を見ていました（デフォルトの設定）。より意味のある結果を得るために、ピークの頂上の位置の情報を利用してピーク頂上と遺伝子との重複を調べようと思います。
 
-## Preparation
+## 準備
 
-Create a new history and name it. If you forgot how to do that, you can have a look at the beginning of this tutorial.
-The history is now empty, but we need our peak file again. Before we upload it twice, we can copy it from our former history:
+ヒストリーを新規作成し名前を付けます。やり方を忘れた場合は、このチュートリアルの冒頭を確認してください。
+ヒストリーは空の状態ですが、ピークのファイルが再度必要です。二度目のアップロードをする前に、以前のヒストリーからコピーしてみましょう。:
 
-> ### {% icon hands_on %} Hands-on: Copy history items
+> ### {% icon hands_on %} ハンズオン: ヒストリーのファイルをコピーする
 >
-> 1. Click on the **View all histories icon** at the top right of your history
+> 1. ヒストリー上部にある **View all histories icon** をクリックする
 >
->       You should see both of your histories side-by-side now
+>       両方のヒストリーが並んで表示されていると思います
 >
-> 2. Use drag-and-drop with your mouse to copy the edited peak file (after the replace steps) but still in interval format, which contains the summit information, to your new history.
-> 3. Press **Done** in the top left to go back to your analysis window
+> 2. マウスのドラッグアンドドロップを利用して、編集したピークのファイル（置換のステップを終えた後のもの）コピーしますが、頂上の情報を含んだインターバル形式で新しいヒストリーにコピーします。
+> 3. **Done** を押して解析画面に戻る
 >
 {: .hands_on}
 
-## Create peak summit file
+## ピーク頂上のファイルを作成する
 
-We need to generate a new BED file from the original peak file that contains the positions of the peak summits. The start of the summit is the start of the peak (column 2) plus the location within the peak that has the highest hypothetical DNA fragment coverage (column 5). As the end we simply define `start + 1`.
+ピーク頂上の位置を含んだ元のピークファイルから新しいBEDファイルを生成する必要があります。ピークの頂上の始まりはピーク（第2列）の開始点で最も高い仮説的なDNAフラグメントカバレッジ（第5列）を有する位置です。終わりは `start + 1` をシンプルに定義します。
 
 > ### {% icon hands_on %} Hands-on: Create peak summit file
 >
