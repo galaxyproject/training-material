@@ -558,34 +558,34 @@ UCSCからダウンロードしたRefSeq遺伝子には、RefSeq識別子のみ�
 
 # 成果を共有する
 
-Galaxyの最も重要な機能の1つは解析の終わりにあります。When you have published striking findings, it is important that other researchers are able to reproduce your in-silico experiment. Galaxy enables users to easily share their workflows and histories with others.
+Galaxyの最も重要な機能の1つは解析の終わりにあります。素晴らしい発見を発表した際には、他の実験者がコンピューターを用いて実験を再現できることが重要です。Galaxyではユーザーは、ワークフローやヒストリーを他のユーザーと簡単に共有することができます。
 
-To share a history, click on the gear symbol in the history pane and select `Share or Publish`. On this page you can do 3 things:
+ヒストリーを共有するには、ヒストリーパネルにある歯車アイコンをクリックして`共有またはパブリッシュ`を選択します。ここでは3つの方法を紹介します。:
 
 1. **Make accessible via Link**
 
-    This generates a link that you can give out to others. Anybody with this link will be able to view your history.
+    他の人に教えることができるリンクを生成します。このリンクを持つ人は誰しもあなたのヒストリーを見ることができます。
 
 2. **Publish History**
 
-    This will not only create a link, but will also publish your history. This means your history will be listed under `Shared Data → Published Histories` in the top menu.
+    リンクのみを生成するのではなく、ヒストリーも公開します。つまり、トップメニューの`共有データ → ヒストリー`にあなたのヒストリーが表示されます。
 
 3. **Share with Individual Users**
 
-    This will share the history only with specific users on the Galaxy instance.
+    Galaxyインスタンス上の特定のユーザーにのみヒストリーが共有されます。
 
 
-> ### {% icon hands_on %} Hands-on: Share history and workflow
+> ### {% icon hands_on %} ハンズオン: ヒストリーやワークフローを共有する
 >
-> 1. Share one of your histories with your neighbour.
-> 2. See if you can do the same with your workflow!
-> 3. Find the history and/or workflow shared by your neighbour
+> 1. あなたの周りの人にヒストリーを1つ共有します。
+> 2. ワークフローで同じことができるかどうか確認しましょう!
+> 3. あなたの周りの人が共有しているヒストリーやワークフローを見つける
 >
->    Histories shared with specific users can be accessed by those users in their history menu (gear icon) under `Histories shared with me`.
+>    特定のユーザーと共有しているヒストリーには、歯車アイコンにある`Histories shared with me`にいるユーザーだけがアクセスすることができます。
 >
 {: .hands_on}
 
-# Conclusion
+# 結論
 {:.no_toc}
 
-{% icon trophy %} You have just performed your first analysis in Galaxy. You also created a workflow from your analysis so you can easily repeat the exact same analysis on other datasets. Additionally you shared your results and methods with others.
+{% icon trophy %} あなたはGalaxyで最初の解析を行いました。また、解析からワークフローを作成して他のデータセットから同じ解析を繰り返し簡単に行うことができるようになりました。そして、解析結果や方法を他の人と共有することもできるようになりました。
