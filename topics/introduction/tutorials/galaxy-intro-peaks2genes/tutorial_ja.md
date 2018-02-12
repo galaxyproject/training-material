@@ -452,88 +452,88 @@ Part 1では1 bp単位で重複を見ていました（デフォルトの設定�
 
 ピーク頂上の位置を含んだ元のピークファイルから新しいBEDファイルを生成する必要があります。ピークの頂上の始まりはピーク（第2列）の開始点で最も高い仮説的なDNAフラグメントカバレッジ（第5列）を有する位置です。終わりは `start + 1` をシンプルに定義します。
 
-> ### {% icon hands_on %} Hands-on: Create peak summit file
+> ### {% icon hands_on %} ハンズオン: ピークの頂上のファイルを作成する
 >
-> 1. **Compute** {% icon tool %}: Run **Compute an expression on every row** with the following settings:
+> 1. **計算する** {% icon tool %}: 以下の設定を行った上で **Compute an expression on every row** を走らせる:
 >   - **Add expression**: `c2+c5`
->   - **as a new column to**: our peak file
->   - **Round result?**: `YES`
-> 2. **Compute an expression on every row** {% icon tool %}: rerun this tool on the last result with:
+>   - **as a new column to**: ピークのファイル
+>   - **Round result?**: `YES`
+> 2. **Compute an expression on every row** {% icon tool %}: このツールを上の結果を用いて再度走らせる:
 >   - **Add expression**: `c8+1`
->   - **as a new column to**: the result from step 1
->   - **Round result?**: `YES`
+>   - **as a new column to**: step 1の結果
+>   - **Round result?**: `YES`
 >
 {: .hands_on}
 
-Now we cut out just the chromosome plus the start and end of the summit:
+そして、染色体に加えてピークの頂上の始まりと終わりを切り取ります。:
 
-> ### {% icon hands_on %} Hands-on: Cut out columns
-> 1. **Cut** {% icon tool %}: Run **Cut columns from a table** with the following settings:
+> ### {% icon hands_on %} ハンズオン: 列を切り取る
+> 1. **切り取る** {% icon tool %}: 以下の設定を行った上で **Cut columns from a table** を走らせる:
 >   - **Cut columns**: `c1,c8,c9`
 >   - **Delimited by Tab**: `Tab`
->   - **From**: our latest history item
+>   - **From**: 最新のファイル
 >
->    The output from **Cut** will be in `tabular` format.
+>    **Cut** のアウトプットは `tabular` 形式になります。
 >
-> 2. Change the format to `interval` since that's what the tool **Intersect** expects.
+> 2. **Intersect** のツールを想定して形式を `interval` に変えておきます。
 {: .hands_on}
 
-## Get gene names
+## 遺伝子名を取得する
 
-The RefSeq genes we downloaded from UCSC did only contain the RefSeq identifiers, but not the gene names. To get a list of gene names in the end, we use another BED file from the Data Libraries.
+UCSCからダウンロードしたRefSeq遺伝子には、RefSeq識別子のみが含まれていましたが、遺伝子名は含まれていませんでした。最終的に遺伝子名のリストを得るために、データライブラリから別のBEDファイルを利用しましょう。
 
-> ### {% icon comment %} Comments
-> There are several ways to get the gene names in, if you need to do it yourself. One way is to retrieve a mapping through Biomart and then join the two files (**Join two Datasets side by side on a specified field** {% icon tool %}). Another is to get the full RefSeq table from UCSC and manually convert it to BED format.
+> ### {% icon comment %} コメント
+> 自分自身で遺伝子名を所得するにはいくつかの方法があります。1つの方法としてはBiomartを通してマッピングを取り戻し、2つのファイルを結合する方法です ( **Join two Datasets side by side on a specified field** {% icon tool %})。もう1つの方法は、UCSCから完全なRefSeqの表を取得し、手動でBED形式に変換する方法です。
 {: .comment}
 
-> ### {% icon hands_on %} Hands-on: Data upload
+> ### {% icon hands_on %} ハンズオン: データをアップロードする
 >
-> 1. Import from [Zenodo](https://zenodo.org/record/1025586) or from the data library (in "Introduction - From peaks to genes") the file
+> 1. [Zenodo](https://zenodo.org/record/1025586)もしくはデータライブラリ(in "Introduction - From peaks to genes")からファイルをインポートする
 >    - `mm9.RefSeq_genes_from_UCSC.bed`
 >
->    > ### {% icon tip %} Tip: Importing data via links
+>    > ### {% icon tip %} Tip: リンクからデータをインポートする
 >    >
->    > * Copy the link location
->    > * Open the Galaxy Upload Manager
->    > * Select **Paste/Fetch Data**
->    > * Paste the link into the text field
->    > * Press **Start**
->    {: .tip}
+>    > * リンクをコピーする
+>    > * Galaxy Upload Managerを開く
+>    > * **Paste/Fetch Data** を選択する
+>    > * リンクをペーストする
+>    > * **Start** を押す
+>    {: .tip}
 >
->    > ### {% icon tip %} Tip: Importing data from a data library
+>    > ### {% icon tip %} Tip: データライブラリからデータをインポートする
 >    >
->    > * Go into "Shared data" (top panel) then "Data libraries"
->    > * Click on "Training data" and then "Introduction - From peaks to genes"
->    > * Select interesting file
->    > * Click on "Import selected datasets into history"
->    > * Import in a new history
->    {: .tip}
+>    > * "共有データ" (パネル上)から"データライブラリ"を選択する
+>    > * "Training data" をクリックし "Introduction - From peaks to genes" をクリックする
+>    > * インポートしたいファイルを選択する
+>    > * "Import selected datasets into history" をクリックする
+>    > * 新しいヒストリーにインポートする
+>    {: .tip}
 >
->    As default, Galaxy takes the link as name, so rename them.
+>    デフォルトでは、Galaxyはリンクを名前にするため、ファイル名がリンクになります。
 >
-> 2. Inspect the file content to check if it contains gene names
+> 2. 遺伝子名が含まれているか調べるためにファイルの内容を調べる
 >
 {: .hands_on}
 
-## Repeat workflow
+## ワークフローを繰り返す
 
-It's time to reuse the workflow we created earlier.
+先ほど作成したワークフローを再実行してみましょう。
 
-> ### {% icon hands_on %} Hands-on: Run a workflow
-> 1. Open the workflow menu (top menu bar)
-> 2. Find the workflow you made in the previous section, and select the option **Run**
-> 3. Choose as inputs our imported gene BED file and the result of the **Cut** tool
-> 4. Click **Run workflow**
+> ### {% icon hands_on %} ハンズオン: ワークフローを走らせる
+> 1. ワークフローのメニューを開く(上部にあるメニュー)
+> 2. 上のセクションで作成したワークフローを見つけて **Run** を選択する
+> 3. インポートされた遺伝子のBEDファイルと **Cut** ツールの結果をインプットとして選択する
+> 4. **Run workflow** をクリックする
 >
->    The outputs should appear in the history but it might take some time until they are finished.
+>    アウトプットはヒストリーに表示されますが、ワークフローが完了するまで時間がかかることがあります。
 >
 {: .hands_on}
 
-We used our workflow to rerun our analysis with the peak summits. The **Group** tool again produced a list containing the amount of genes found in each chromosome.
-But woudln't it be more interesting to know about the amount of peaks in each unique gene? Let's rerun the workflow with different settings!
+ワークフローを再実行することでピークの頂上を解析し始めました。また**Group** ツールで、各染色体にある遺伝子の量の情報を含んだリストを再び作成しました。 
+しかし、様々な特殊な遺伝子のピークの量を調べることは面白くないでしょうか？色々な設定でワークフローを再実行してみましょう!
 
-> ### {% icon hands_on %} Hands-on: Run a workflow with changed settings
-> 1. Open the workflow menu (top menu bar)
+> ### {% icon hands_on %} ハンズオン: ワークフローを設定を変えて実行する
+> 1. ワークフローのメニューを開く（上部にあるメニュー）
 > 2. Find the workflow you made in the previous section, and select the option **Run**
 > 2. Choose as inputs our imported gene BED file and the result of the **Cut** tool
 > 3. Click on the title of the Group tool to expand the options.
@@ -543,7 +543,7 @@ But woudln't it be more interesting to know about the amount of peaks in each un
 > 5. Click **Run workflow**
 {: .hands_on}
 
-Congratulations! You should have a file with all the unique gene names and a count on how many peaks they contained.
+おめでとうございます!すべての特殊な遺伝子の名前とそれらの遺伝子にあるピークの数の情報が含まれたファイルを取得しました。
 
 > ### {% icon question %} Questions
 >
@@ -556,9 +556,9 @@ Congratulations! You should have a file with all the unique gene names and a cou
 {: .question}
 
 
-# Share your work
+# 成果を共有する
 
-One of the most important features of Galaxy comes at the end of an analysis. When you have published striking findings, it is important that other researchers are able to reproduce your in-silico experiment. Galaxy enables users to easily share their workflows and histories with others.
+Galaxyの最も重要な機能の1つは解析の終わりにあります。When you have published striking findings, it is important that other researchers are able to reproduce your in-silico experiment. Galaxy enables users to easily share their workflows and histories with others.
 
 To share a history, click on the gear symbol in the history pane and select `Share or Publish`. On this page you can do 3 things:
 
