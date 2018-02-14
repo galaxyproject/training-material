@@ -57,6 +57,9 @@ Other possible `bin` directories:
 /yyy/bin        = a bin directory wherever you like (yyy=path)
 ```
 
+
+.center[.footnote[If you install a precompiled binary, make sure that it was compiled for the same architecture as your system (e.g. x64)]]
+
 ---
 
 class: left, enlarge120
@@ -115,7 +118,7 @@ $ which the_binary
 
 class: left, enlarge120
 
-### Show me the PATH
+### Thinking outside the PATH
 
 What if you want to run a binary only located in the current working directory?
 
@@ -167,7 +170,7 @@ Makefile    my_program.c    my_binary
 
 `make` will read the instructions defined in the file `Makefile` and run the compiler automatically to produce the binary.
 
-You can then install the binary to a bin dir.
+You can then copy the binary to a bin dir.
 
 Some exotic tools come with other scripts or methods for compiling, read the README or INSTALL files
 
@@ -195,10 +198,6 @@ Makefile    my_lib.c    my_lib.h    libmy.so.1.2.8
 `.h` files are code files defining which functions are provided by the library.
 
 `.so` are compiled binary code. Their file name structure is important: `libXXXX.so.version`
-
-`make` will read the instructions defined in the file `Makefile` and run the compiler automatically.
-
-Some exotic tools come with other scripts or methods for compiling, read the README or INSTALL files
 
 ---
 
@@ -258,7 +257,7 @@ class: left, enlarge120
 
 For example, if your program relies on `zlib` to read or create gzipped files.
 
-`make` will need to know where are the `.h` and `.so` files to compile your program properly.
+`make` needs to know where are the `.h` and `.so` files to compile your program properly.
 
 Usually, a script named 'configure' is distributed with the program sources.
 
@@ -268,7 +267,7 @@ $ ls
 configure   Makefile    my_program.c
 ```
 
-This script will explore the filesystem to find the needed `.h` and `.so` files. You can then run `make` and `make install` as usual.
+This script explores the filesystem to find the needed `.h` and `.so` files. You can then run `make` and `make install` as usual.
 
 ```sh
 $ ./configure
@@ -276,9 +275,7 @@ $ make
 $ make install
 ```
 
-Some exotic tools come with other scripts or methods for compiling, read the README or INSTALL files.
-
-Sometimes, `configure` is replaced by another software: Cmake.
+Sometimes, `configure` is replaced by another software like cmake.
 
 ---
 
@@ -322,7 +319,7 @@ class: left, enlarge120
 
 ### Playing with ./configure
 
-By default, `configure` will only search for `.h` and `.so` files in standard directories (`/usr/`, `/usr/local`)
+By default, `configure` only searches for `.h` and `.so` files in standard directories (`/usr/`, `/usr/local`)
 
 If your program depends on a library installed in an exotic location, you need to specify it.
 
@@ -330,18 +327,16 @@ There might be a specific `configure` option
 
 ```sh
 $ ./configure --zlib-dir=/home/somewhere/zlib/
-$ make
-$ make install
 ```
 
-Or, you can modify some standard environment variables:
+Or, you can define some standard environment variables:
 
 ```sh
 $ export CFLAGS="-I/home/somewhere/zlib/include"
 $ export LDFLAGS="-L/home/somewhere/zlib/lib"
 ```
 
-For poor or old `configure` scripts, you might need additional variables:
+In some cases, you might need to define additional variables:
 
 ```sh
 $ export CPATH=/home/somewhere/zlib/include
@@ -416,7 +411,7 @@ For example BioPython code will be installed in `/usr/lib/python3.6/site-package
 
 Some Python modules consists both of Python code and C code that need to be compiled.
 
-Python modules are usually installed with specific setup mechanisms that take care of it all for you
+Python modules are usually installed with specific setup mechanisms that take care of it all for you.
 
 ```sh
 $ pip install my_module
@@ -439,7 +434,7 @@ Symptom: you get an `Undefined symbol` while running an installed program
 
 Cause: the program uses a library which is not available in the expected location
 
-To find the library causing the problem:
+To list all the libraries needed by the program and idenfy library the one causing the problem:
 
 ```sh
 $ ldd `which nano`
