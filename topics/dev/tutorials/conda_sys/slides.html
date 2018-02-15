@@ -10,9 +10,9 @@ class: left, enlarge120
 ### Environment variables
 
 ```sh
-$ MY_NAME="Anthony"
+$ MY_NAME="Bobby"
 $ echo $MY_NAME
-Anthony
+Bobby
 ```
 
 ```sh
@@ -21,7 +21,7 @@ $ echo $MY_DATE
 Wed Feb 14 12:12:21 CET 2018
 ```
 
-Use export to make sure the variable is accessible to any script/program you run from the current shell
+Use export to make sure the variable is accessible to any script/program you run from the current shell.
 
 ```sh
 $ export MY_DATE=$(date)
@@ -30,35 +30,7 @@ Wed Feb 14 12:12:21 CET 2018
 $ bash some_script.sh # some_script.sh will have access to $MY_DATE
 ```
 
-Many predefined environment variables predefined in a shell: PATH, HOSTNAME, HOME, LANG, USER, ...
-
----
-
-class: left, enlarge120
-
-### Installing a single binary
-
-Just a single executable file (binary, script).
-
-You only need to copy it to a `bin` directory and make sure permissions are set:
-
-```sh
-$ cp the_binary /usr/local/bin
-$ chmod a+x /usr/local/bin/the_binary
-```
-
-Other possible `bin` directories:
-
-```sh
-/bin            = reserved for system
-/usr/bin        = installed by package manager (apt, yum, ...)
-/usr/local/bin  = manually installed binaries
-/opt/xxx/bin    = manually installed binaries (xxx=soft name)
-/yyy/bin        = a bin directory wherever you like (yyy=path)
-```
-
-
-.center[.footnote[If you install a precompiled binary, make sure that it was compiled for the same architecture as your system (e.g. x86_64)]]
+Many environment variables predefined in a shell: PATH, HOSTNAME, HOME, LANG, USER, ...
 
 ---
 
@@ -72,16 +44,16 @@ $ the_binary --help
 
 How does the system knows where to find the binary?
 
-PATH is an environment variable defining possible locations of binaries
+PATH is an environment variable defining possible locations of binaries.
 
 ```sh
 $ echo $PATH
 /usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/sbin
 ```
 
-Paths separated by `:`, ordered list (highest priority first)
+Paths separated by `:`, ordered list (highest priority first).
 
-As all env var, you can redefine it:
+As all environment variable, you can redefine it:
 
 ```sh
 $ export PATH="/opt/xxx/bin/:$PATH"
@@ -95,14 +67,14 @@ class: left, enlarge120
 
 ### Show me the PATH
 
-The command `which` lets you know which binary will be used by your shell
+The command `which` lets you know which binary will be used by your shell.
 
 ```sh
 $ which the_binary
 /opt/xxx/bin/the_binary
 ```
 
-Throws an error if the binary is not "in the PATH"
+It throws an error if the binary is not "in the PATH".
 
 ```sh
 $ export PATH="/usr/bin/"
@@ -129,7 +101,7 @@ $ my_binary --help
 bash: my_binary: command not found...
 ```
 
-You need to add `./` to bypass the use of PATH:
+You need to add `./` to explicitly tell the shell to run the file from working directory:
 
 ```sh
 $ ./my_binary --help
@@ -149,11 +121,39 @@ It works!
 
 class: left, enlarge120
 
+### Installing a single binary
+
+Just a single executable file (binary, script).
+
+You only need to copy it to a `bin` directory and make sure permissions are set:
+
+```sh
+$ cp the_binary /usr/local/bin
+$ chmod a+x /usr/local/bin/the_binary
+```
+
+Other possible `bin` directories:
+
+```sh
+/bin            = reserved for system
+/usr/bin        = installed by package manager (apt, yum, ...)
+/usr/local/bin  = manually installed binaries
+/opt/xxx/bin    = manually installed binaries (xxx=path)
+/yyy/bin        = a bin directory wherever you like (yyy=path)
+```
+
+
+.center[.footnote[If you install a precompiled binary, make sure that it was compiled for the same architecture as your system (e.g. x86_64)]]
+
+---
+
+class: left, enlarge120
+
 ### Compiling a single binary
 
 In the following slides we consider a program written in `C`.
 
-Usually, compilation is done with `make`
+Usually, compilation is done with `make`.
 
 ```sh
 $ ls
@@ -171,7 +171,7 @@ Makefile    my_program.c    my_binary
 
 You can then copy the binary to a bin dir.
 
-Some exotic tools come with other scripts or methods for compiling, read the README or INSTALL files
+Some exotic tools come with other scripts or methods for compiling, read the README or INSTALL files.
 
 ---
 
@@ -195,7 +195,7 @@ Makefile    my_lib.c    my_lib.h    libmy.so.1.2.8
 
 `.h` files are code files defining which functions are provided by the library.
 
-`.so` are compiled binary code. Their file name structure is important: `libXXXX.so.version`
+`.so` are compiled binary code. Their file name structure is important: `libXXXX.so.version`.
 
 ---
 
@@ -226,7 +226,7 @@ Other possible `lib` (or `lib64`) directories (same principle for `include`):
 /lib(64)            = reserved for system
 /usr/lib(64)        = installed by package manager (apt, yum, ...)
 /usr/local/lib(64)  = manually installed
-/opt/xxx/lib(64)    = manually installed (xxx=soft name)
+/opt/xxx/lib(64)    = manually installed (xxx=path)
 /yyy/lib(64)        = a lib directory wherever you like (yyy=path)
 ```
 
@@ -236,7 +236,7 @@ class: left, enlarge120
 
 ### make install
 
-Installing manually each file is painful.
+Copying/symlinking manually each file is painful.
 
 Running `make install` usually install everything automatically for you.
 
@@ -282,7 +282,7 @@ class: left, enlarge120
 
 You can pass many options to the `configure` script.
 
-A very common one is `--prefix` which allows to change the installation directory
+A very common one is `--prefix` which allows to change the installation directory.
 
 ```sh
 $ ./configure --prefix=/home/somewhere
@@ -302,7 +302,7 @@ class: left, enlarge120
 
 You can pass many options to the `configure` script.
 
-You can often disable or enable some software features this way
+You can often disable or enable some software features this way.
 
 ```sh
 $ ./configure --disable-gpu --enable-greedy-algorithm
@@ -316,11 +316,11 @@ class: left, enlarge120
 
 ### Playing with ./configure
 
-By default, `configure` only searches for `.h` and `.so` files in standard directories (`/usr/`, `/usr/local`)
+By default, `configure` only searches for `.h` and `.so` files in standard directories (`/usr/`, `/usr/local`).
 
 If your program depends on a library installed in an exotic location, you need to specify it.
 
-There might be a specific `configure` option
+There might be a specific `configure` option.
 
 ```sh
 $ ./configure --zlib-dir=/home/somewhere/zlib/
@@ -329,15 +329,15 @@ $ ./configure --zlib-dir=/home/somewhere/zlib/
 Or, you can define some standard environment variables:
 
 ```sh
-$ export CFLAGS="-I/home/somewhere/zlib/include"
-$ export LDFLAGS="-L/home/somewhere/zlib/lib"
+$ export CFLAGS="-I/home/somewhere/zlib/include $CFLAGS"
+$ export LDFLAGS="-L/home/somewhere/zlib/lib $LDFLAGS"
 ```
 
 In some cases, you might need to define additional variables:
 
 ```sh
-$ export CPATH=/home/somewhere/zlib/include
-$ export LIBRARY_PATH="/home/somewhere/zlib/lib"
+$ export CPATH="/home/somewhere/zlib/include:$CPATH"
+$ export LIBRARY_PATH="/home/somewhere/zlib/lib:$LIBRARY_PATH"
 ```
 
 ---
@@ -346,13 +346,13 @@ class: left, enlarge120
 
 ### Playing with ./configure
 
-The `CFLAGS` environment variable can also be used for other purposes like enabling some compiler optimisation, predefining some C macro or compiling with debugging symbols
+The `CFLAGS` environment variable can also be used for other purposes like enabling some compiler optimisation, predefining some C macro or compiling with debugging symbols.
 
 ```sh
 $ export CFLAGS="-I/home/somewhere/zlib/include -O2 -DDEBUG -g"
 ```
 
-When you are compiling C++ code, you need to use `CXXFLAGS` instead of `CFLAGS`
+When you are compiling C++ code, you need to use `CXXFLAGS` instead of `CFLAGS`.
 
 ---
 
@@ -360,13 +360,13 @@ class: left, enlarge120
 
 ### Shebang
 
-The first line of script is called the shebang
+The first line of script is called the [shebang](https://en.wikipedia.org/wiki/Shebang_%28Unix%29).
 
 ```sh
 #!/bin/bash
 ```
 
-It determines how your script will be run when called in a shell
+It determines how your script will be run when called in a shell.
 
 ```sh
 $ my_script.sh
@@ -404,7 +404,7 @@ class: left, enlarge120
 
 Installing Python modules consists in placing the source files in the correct path inside the Python installation.
 
-For example BioPython code will be installed in `/usr/lib/python3.6/site-packages/Bio/`.
+For example BioPython code will be installed in `/usr/lib/python3.6/site-packages/Bio/`
 
 Some Python modules consists both of Python code and C code that need to be compiled.
 
@@ -427,9 +427,9 @@ class: left, enlarge120
 
 ### Common error: Undefined symbol
 
-Symptom: you get an `Undefined symbol` while running an installed program
+Symptom: you get an `Undefined symbol` while running an installed program.
 
-Cause: the program uses a library which is not available in the expected location
+Cause: the program uses a library which is not available in the expected location.
 
 To list all the libraries needed by the program and identify the one causing the problem:
 
@@ -440,7 +440,7 @@ $ ldd `which nano`
 	libncursesw.so.6 => /lib64/libncursesw.so.6 (0x00007f16cbb54000)
 ```
 
-Make sure the library is correctly installed. If it is installed in an exotic location, use the `LD_LIBRARY_PATH` environment
+Make sure the library is correctly installed. If it is installed in an exotic location, use the `LD_LIBRARY_PATH` environment.
 
 ```sh
 $ export LD_LIBRARY_PATH="/home/somewhere/magic/:$LD_LIBRARY_PATH"
