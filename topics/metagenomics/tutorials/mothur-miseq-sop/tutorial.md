@@ -1534,9 +1534,14 @@ A second tool we can use to visualize our data, is [Krona]()
 
 > ### {% icon hands_on %} Hands-on: Krona
 >
-> - **Visualize with Krona** {% icon tool %} with the following parameters
->   - "input file" to taxonomy output from Classify.otu (collection)
->   - Set **Is this output from mothur?** to yes
+>  First we convert our mothur taxonomy file to a format compatible with Krona
+>
+> - **Taxonomy-to-Krona** {% icon tool %} with the following parameters
+>   - "Taxonomy file" to the taxonomy output from Classify.otu (collection)
+>
+> - **Krona pie chart** {% icon tool %} with the following parameters
+>   - "Type of input" to `Text`
+>   - "Input file" to taxonomy output from Classify.otu (collection)
 {: .hands_on}
 
 The resulting file is an HTML file containing an interactive visualization. For instance try double-clicking the
