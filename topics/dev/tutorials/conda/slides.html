@@ -825,9 +825,9 @@ CONDA_PY:
   - 27
   - 35
   - 36
-CONDA_HTSLIB: "1.4"
-CONDA_BOOST: "1.61"
-CONDA_R: "3.3.2"
+CONDA_HTSLIB: "1.7"
+CONDA_BOOST: "1.64"
+CONDA_R: "3.4.1"
 CONDA_PERL: "5.22.0"
 CONDA_NPY: "112"
 CONDA_NCURSES: "5.9"
@@ -835,6 +835,10 @@ CONDA_GSL: "1.16"
 CONDA_GMP: "5.1"
 CONDA_HDF5: "1.8.17"
 MACOSX_DEPLOYMENT_TARGET: "10.9"
+CONDA_ZLIB: "1.2.11"
+CONDA_BZIP2: "1.0"
+CONDA_XZ: "5.2"
+CONDA_BAMTOOLS: "2.4.1"
 ```
 
 .footnote[.center[https://github.com/bioconda/bioconda-recipes/blob/master/scripts/env_matrix.yml ]]
@@ -845,7 +849,18 @@ class: left
 
 ## Pinning Libraries - Use jinja
 
-> If your package links dynamically against a particular library, it is **often necessary to pin the version against which it was compiled, in order to avoid ABI incompatibilities**. Instead of hardcoding a particular version in the recipe, we use jinja templates to achieve this. This **helps ensure that all bioconda packages are binary-compatible with each other**. For example, bioconda provides an environment variable `CONDA_BOOST` that contains the current major version of Boost.
+> If your package links dynamically against a particular library, it is **often necessary to pin the version against which it was compiled, in order to avoid ABI incompatibilities**. Instead of hardcoding a particular version in the recipe, we use jinja templates to achieve this. This **helps ensure that all bioconda packages are binary-compatible with each other**. For example, bioconda provides an environment variable `CONDA_ZLIB` that contains the current major version of Zlib.
+
+
+```yaml
+{% raw %}
+requirements:
+  build:
+    - zlib {{ CONDA_ZLIB }}*
+  run:
+    - zlib {{ CONDA_ZLIB }}*
+{% endraw %}
+```
 
 .footnote[.center[https://bioconda.github.io/guidelines.html#c-c ]]
 
@@ -1060,10 +1075,12 @@ class: reduce70
 ```yaml
 ...
 
+{% raw %}
 source:
     fn: {{ name }}-{{ version }}.zip
-    url: http://genesis.ugent.be/maven2/eu/isas/peptideshaker/ {{ name }}/{{ version }}/{{ name }}-{{ version }}.zip
+    url: http://genesis.ugent.be/maven2/eu/isas/peptideshaker/{{ name }}/{{ version }}/{{ name }}-{{ version }}.zip
     md5: 14a48413e28a25614f5fda2b381d7197
+{% endraw %}
 
 requirements:
   build:
