@@ -636,15 +636,20 @@ planemo shed_update --check_diff --shed_target testtoolshed
 
 #### Checklist (3/3)
 
-&lt;p style="text-align: left;"&gt;
-  &lt;input type="checkbox"/&gt; Initiate the `.shed.yml` file with &lt;br/&gt;
-  ```planemo shed_init``` &lt;br/&gt;
-  &lt;input type="checkbox"/&gt; Create the repository on ToolShed with &lt;br/&gt;
-  ```planemo shed_create```&lt;br/&gt;
-  &lt;input type="checkbox"/&gt; Install and test the wrapper on a Galaxy instance &lt;br/&gt;
-  &lt;input type="checkbox"/&gt; Improve the wrapper and push modification on toolshed &lt;br/&gt;
-  ```planemo shed_update``` &lt;br/&gt;
-&lt;/p&gt;
+- Initiate the `.shed.yml` file with
+```bash
+planemo shed_init
+```
+- Create the repository on ToolShed with
+```bash
+planemo shed_create
+```
+- Install and test the wrapper on a Galaxy instance
+- Improve the wrapper and push modification on toolshed
+```bash
+planemo shed_update
+```
+
 
 ---
 
@@ -747,16 +752,12 @@ login: galaxy/azerty
 ### &lt;i class="fa fa-pencil" aria-hidden="true"&gt;&lt;/i&gt; Hands-on
 
 #### Step 2: Use planemo to publish your tool
-- `planemo config_init`
-- `planemo shed_init`
-- `planemo shed_lint`
-- `planemo shed_create`
 
-&lt;aside class="notes"&gt;
 ```bash
 planemo config_init
 ```
   - Creates file `.planemo.yml` in your home directory.
+
 ```yml
 [...]  local:
 #key: "&lt;TODO&gt;"
@@ -784,17 +785,13 @@ planemo shed_create --shed_target local
 ### &lt;i class="fa fa-pencil" aria-hidden="true"&gt;&lt;/i&gt; Hands-on
 
 #### Step 3: Update your tool and then use planemo to update your tool on the Tool Shed
-- `planemo shed_diff`
-- `planemo shed_update`
 
-&lt;aside class="notes"&gt;
 ```bash
 planemo shed_diff --shed_target local
 ```
 ```bash
 planemo shed_update --check_diff --shed_target local
 ```
-&lt;/aside&gt;
 
 ---
 
