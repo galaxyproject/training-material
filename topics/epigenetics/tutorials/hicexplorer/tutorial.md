@@ -18,7 +18,6 @@ For this the following steps are necessary to be performed:
 After a corrected Hi-C matrix is created other tools can be used to visualize it, call TADS or compare it with other matrices.
 This tutorial is based on the [following work](http://hicexplorer.readthedocs.io/en/latest/content/example_usage.html).
 
-We will be using a Hi-C dataset from [Marks et. al. 2015](http://www.genomebiology.com/2015/16/1/149), on mouse ESCs.
 
 > ### Agenda
 >
@@ -67,27 +66,25 @@ We have used the HiCExplorer sucessfuly with bwa, bowtie2 and hisat2. In this tu
 
 > ### {% icon hands_on %} Hands-on: Mapping reads
 >
-> 1. **Map with BWA-MEM** {% icon tool %}: Run Map with BWA-MEM on `HiC_S2_1p_10min_lowU_R1` with:
+> 1. **Map with BWA-MEM** {% icon tool %}: Run Map with BWA-MEM on both strands `HiC_S2_1p_10min_lowU_R1` and `HiC_S2_1p_10min_lowU_R2` with:
 >    - "Will you select a reference genome from your history or use a built-in index?" to `Use a built-in index`
->    - "Select a reference genome" to `mm10`
+>    - "Select a reference genome" to `dm6`
 >    - "Is this library mate-paired?" to `Single-end or interleaved paired-end`
->    - "FASTQ file" to `HiC_S2_1p_10min_lowU_R1`
+>    - Set multiple datasets
+>    - "FASTQ file" to `HiC_S2_1p_10min_lowU_R1`and `HiC_S2_1p_10min_lowU_R2`
 >    - "BWA settings to use" to `Full parameter List`
 >    - "Gap extension penalty (-E)" to `50`
 >    - "Penalty for clipping (-L)" to `0`
 >
-> 2. Rename the output of the tool according to the corresponding file: `R1.sam`
->
-> 3. **Map with BWA-MEM** {% icon tool %}: Run Map with BWA-MEM on the remaining strand with the same settings as during step 1. Rename accordingly, e.g., `R2.sam`.
+> 2. Rename the output of the tool according to the corresponding files: `R1.sam` and `R2.sam`
 >
 {: .hands_on}
 
 # Creation of a Hi-C matrix
 
-Once the reads have been mapped the Hi-C matrix can be built. In the following we will create three Hi-C matrices and merge them to one.
+Once the reads have been mapped the Hi-C matrix can be built.
 
 For this step we will use [hicBuildMatrix](http://hicexplorer.readthedocs.io/en/latest/content/tools/hicBuildMatrix.html#hicbuildmatrix) tool, which builds the matrix of read counts over the bins in the genome, considering the sites around the given restriction site.
-In order to increase the depth of reads we will merge the counts from these three replicates. We will be using *hicSumMatrices* tool.
 
 > ### {% icon hands_on %} Hands-on: hicBuildMatrix
 >
@@ -103,16 +100,6 @@ In order to increase the depth of reads we will merge the counts from these thre
 >       > *hicBuildMatrix* creates two files, a bam file containing only the valid Hi-C read pairs and a matrix containing the Hi-C contacts at the given resolution. The bam file is useful to check the quality of the Hi-C library on the genome browser. A good Hi-C library should contain piles of reads near the restriction fragment sites. In the QCfolder a html file is saved with plots containing useful information for the quality control of the Hi-C sample like the number of valid pairs, duplicated pairs, self-ligations etc. Usually, only 25%-40% of the reads are valid and used to build the Hi-C matrix mostly because of the reads that are on repetitive regions that need to be discarded.
 >       {: .comment}
 >
->    > ### {% icon question %} Question
->    >
->    > How many selected reads does the output bam file have?
->    >
->    > <details>
->    > <summary>Click to view answers</summary>
->    > The output bam file shows that we have around 34M selected reads.
->    > </details>
->    {: .question}
->
 >       > ### {% icon comment %} Comment
 >       >
 >       > Normally 25% of the total reads are selected. The output matrices have counts for the genomic regions. The extension of output matrix files is .h5.
@@ -123,7 +110,7 @@ In order to increase the depth of reads we will merge the counts from these thre
 
 # Plotting the Hi-C matrix
 
-AA 10kb bin matrix is too large to plot, it's better to reduce the resolution (to learn the the size of a Hi-C matrix use the tool [hicInfo](http://hicexplorer.readthedocs.io/en/latest/content/tools/hicInfo.html#hicinfo)). We usually run out of memory for a 1 kb or a 10 kb bin matrix and the time to plot it is very long (minutes instead of seconds). In order to reduce the resolution we use the tool [hicMergeMatrixBins](http://hicexplorer.readthedocs.io/en/latest/content/tools/hicMergeMatrixBins.html#hicmergematrixbins).
+A 10kb bin matrix is too large to plot, it's better to reduce the resolution. We usually run out of memory for a 1 kb or a 10 kb bin matrix and the time to plot it is very long (minutes instead of seconds). In order to reduce the resolution we use the tool [hicMergeMatrixBins](http://hicexplorer.readthedocs.io/en/latest/content/tools/hicMergeMatrixBins.html#hicmergematrixbins).
 
 [hicMergeMatrixBins](http://hicexplorer.readthedocs.io/en/latest/content/tools/hicMergeMatrixBins.html#hicmergematrixbins) merges the bins into larger bins of given number (specified by –numBins). We will merge 100 bins in the original (uncorrected) matrix and then correct it. The new bin size is going to be 10.000 bp * 100 = 1.000.000 bp = 1 Mb
 
@@ -133,7 +120,7 @@ AA 10kb bin matrix is too large to plot, it's better to reduce the resolution (t
 >    - "Number of bins to merge" to `100`
 >
 > 2. **hicPlotMatrix** {% icon tool %}: Run hicPlotMatrix on the output from hicMergeMatrixBins adjusting the parameters:
->    - "Plot title" to `Hi-C matrix for mESC`
+>    - "Plot title" to `Hi-C matrix for dm6`
 >    - "Plot per chromosome" to `True`
 >    - "Remove masked bins from the matrix" to `True`
 >    - "Chromosomes to include (and order to plot in)" to `chr2L`
@@ -157,14 +144,9 @@ AA 10kb bin matrix is too large to plot, it's better to reduce the resolution (t
 
 Matrix correction works in two steps: first a histogram containing the sum of contact per bin (row sum) is produced. This plot needs to be inspected to decide the best threshold for removing bins with lower number of reads. The second steps removes the low scoring bins and does the correction.
 
-First we will re-run hicMergeMatrixBins on the output and set the bin size to 20.
-
 > ### {% icon hands_on %} Hands-on: Matrix diagnostic
->
-> 1. **hicMergeMatrixBins** {% icon tool %}: Run hicMergeMatrixBins on the output setting the following parameter:
->    - "Number of bins to merge" to `2`
 > 
-> 2. **hicCorrectMatrix** {% icon tool %}: Run hicCorrectMatrix on the output from previous step adjusting the parameters:
+> 1. **hicCorrectMatrix** {% icon tool %}: Run hicCorrectMatrix adjusting the parameters:
 >    - "Range restriction (in bp)" to `Diagnostic plot`
 >    - "Chromosomes to include (and order to plot in)" to `chr2L`
 >    - "+ Insert Chromosomes to include (and order to plot in):" to `chr2R`
@@ -200,16 +182,16 @@ ERROR:iterative correction:*Error* matrix correction produced extremely large va
 This is often caused by bins of low counts. Use a more stringent filtering of bins.
 ```
 
-This can be solved by a more stringent z-score values for the filter threshold or by a look at the plotted matrix. In our case we see that chromosome Y is having more or less 0 counts in its bins. This chromosome can be excluded from the correction by not defining it for the set of chromosomes that should be corrected (parameter 'Include chromosomes').
+This can be solved by a more stringent z-score values for the filter threshold or by a look at the plotted matrix. For example, chromosome Y is often has more or less 0 counts in its bins. Chromosomes like that can be excluded from the correction by not defining it for the set of chromosomes that should be corrected (parameter 'Include chromosomes').
 
 ### Plotting the corrected Hi-C matrix
 
-We can now plot the one of the chromosomes (e.g. chromosome X) , with the corrected matrix.
+We can now plot the one of the chromosomes (e.g. chromosome 2L) , with the corrected matrix.
 
 > ### {% icon hands_on %} Hands-on: Plotting the corrected Hi-C matrix
 >
 > 1. **hicPlotMatrix** {% icon tool %}: Run hicPlotMatrix on the corrected matrix adjusting the parameters:
->    - "Plot title" to `Hi-C matrix for mESC`
+>    - "Plot title" to `Hi-C matrix for dm6`
 >    - "Plot per chromosome" to `False`
 >    - "Plot only this region" to `chr2L`
 >    - "Plot the log1p of the matrix values" to `True`
@@ -246,7 +228,7 @@ We can plot the TADs for a given chromosomal region. For this we will use [hicPl
 > 1. **hicPlotTADs** {% icon tool %}: Run hicPlotTADs adjusting the parameters:
 >    - "Region of the genome to limit the operation" to `chr2L:1000000-5000000`
 >    - "Choose style of the track" to `TAD visualization`
->    - "Plot title" to `HiC mESC chr2L:1000000-5000000`
+>    - "Plot title" to `HiC dm6 chr2L:1000000-5000000`
 >    - "Matrix to compute on." to the corrected matrix from hicCorrectMatrix step
 >    - "Depth" to `2000000`
 >    - "Plotting type" to `interaction`
