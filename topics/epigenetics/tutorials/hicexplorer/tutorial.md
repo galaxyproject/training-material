@@ -71,7 +71,7 @@ We have used the HiCExplorer sucessfuly with bwa, bowtie2 and hisat2. In this tu
 >
 > 1. **Map with BWA-MEM 0.8.0** {% icon tool %}: Run Map with BWA-MEM on both strands `HiC_S2_1p_10min_lowU_R1` and `HiC_S2_1p_10min_lowU_R2` with:
 >    - "Will you select a reference genome from your history or use a built-in index?" to `Use a built-in index`
->    - "Select a reference genome" to `dm6`
+>    - "Select a reference genome" to `dm3`
 >    - "Is this library mate-paired?" to `Single-end or interleaved paired-end`
 >    - Set multiple datasets
 >    - "FASTQ file" to `HiC_S2_1p_10min_lowU_R1`and `HiC_S2_1p_10min_lowU_R2`
@@ -123,7 +123,7 @@ A 10kb bin matrix is too large to plot, it's better to reduce the resolution. We
 >    - "Number of bins to merge" to `100`
 >
 > 2. **hicPlotMatrix** {% icon tool %}: Run hicPlotMatrix on the output from hicMergeMatrixBins adjusting the parameters:
->    - "Plot title" to `Hi-C matrix for dm6`
+>    - "Plot title" to `Hi-C matrix for dm3`
 >    - "Plot per chromosome" to `True`
 >    - "Remove masked bins from the matrix" to `True`
 >    - "Plot the log1p of the matrix values: `True`
@@ -193,7 +193,7 @@ We can now plot the one of the chromosomes (e.g. chromosome 2L) , with the corre
 > ### {% icon hands_on %} Hands-on: Plotting the corrected Hi-C matrix
 >
 > 1. **hicPlotMatrix** {% icon tool %}: Run hicPlotMatrix on the corrected matrix adjusting the parameters:
->    - "Plot title" to `Hi-C matrix for dm6`
+>    - "Plot title" to `Hi-C matrix for dm3`
 >    - "Plot per chromosome" to `False`
 >    - "Plot only this region" to `chr2L`
 >    - "Plot the log1p of the matrix values" to `True`
@@ -230,7 +230,7 @@ We can plot the TADs for a given chromosomal region. For this we will use [hicPl
 > 1. **hicPlotTADs** {% icon tool %}: Run hicPlotTADs adjusting the parameters:
 >    - "Region of the genome to limit the operation" to `chr2L:1000000-5000000`
 >    - "Choose style of the track" to `TAD visualization`
->    - "Plot title" to `HiC dm6 chr2L:1000000-5000000`
+>    - "Plot title" to `HiC dm3 chr2L:1000000-5000000`
 >    - "Matrix to compute on." to the corrected matrix from hicCorrectMatrix step
 >    - "Depth" to `2000000`
 >    - "Plotting type" to `interaction`
@@ -244,7 +244,7 @@ We can plot the TADs for a given chromosomal region. For this we will use [hicPl
 >    - "Width" to `2`
 >    - "+Insert Include tracks in your plot"
 >    - "Choose style of the track" to `Gene track`
->    - "Plot title" to `dm6 genes`
+>    - "Plot title" to `dm3 genes`
 >    - "Track file bedgraph format" the imported .bed file
 >    - "Width" to `5`
 >    - "Plot labels" to `No`
