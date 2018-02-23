@@ -142,13 +142,13 @@ A 10kb bin matrix is too large to plot, it's better to reduce the resolution. We
 
 # Correction of Hi-C matrix
 
-[hicCorrectMatrix](http://hicexplorer.readthedocs.io/en/latest/content/tools/hicCorrectMatrix.html#hiccorrectmatrix) corrects the matrix counts in an iterative manner. For correcting the matrix, it’s important to remove the unassembled scaffolds (e.g. NT_) and keep only chromosomes, as scaffolds create problems with matrix correction. Therefore we use the chromosome names (1-19, X, Y) here. **Important**: Use ‘chr1 chr2 chr3 etc.’ if your genome index uses chromosome names with the ‘chr’ prefix.
+[hicCorrectMatrix](http://hicexplorer.readthedocs.io/en/latest/content/tools/hicCorrectMatrix.html#hiccorrectmatrix) corrects the matrix counts in an iterative manner. For correcting the matrix, it’s important to remove the unassembled scaffolds (e.g. NT_) and keep only chromosomes, as scaffolds create problems with matrix correction. Therefore we use the chromosome names (2L, 2R, X, etc.) here. **Important**: Use ‘chr2L chr2R chr3L etc.’ if your genome index uses chromosome names with the ‘chr’ prefix.
 
 Matrix correction works in two steps: first a histogram containing the sum of contact per bin (row sum) is produced. This plot needs to be inspected to decide the best threshold for removing bins with lower number of reads. The second steps removes the low scoring bins and does the correction.
 
 > ### {% icon hands_on %} Hands-on: Matrix diagnostic
 > 
-> 1. **hicCorrectMatrix** {% icon tool %}: Run hicCorrectMatrix adjusting the parameters:
+> 1. **hicCorrectMatrix** {% icon tool %}: Run hicCorrectMatrix on the output from hicBuildMatrix adjusting the parameters:
 >    - "Range restriction (in bp)" to `Diagnostic plot`
 >    - "Chromosomes to include (and order to plot in)" to `chr2L`
 >    - "+ Insert Chromosomes to include (and order to plot in):" to `chr2R`
@@ -164,8 +164,8 @@ In our case the distribution describes the counts per bin of a genomic distance.
 
 > ### {% icon hands_on %} Hands-on: Matrix correction
 >
-> 1. **hicCorrectMatrix** {% icon tool %}: Run hicCorrectMatrix on the output from previous step adjusting the parameters:
->    - "Range restriction (in bp)" to `Correct matrix plot`
+> 1. **hicCorrectMatrix** {% icon tool %}: Run hicCorrectMatrix on the output from hicBuildMatrix step adjusting the parameters:
+>    - "Range restriction (in bp)" to `Correct matrix`
 >    - "Normalize each chromosome separately" to `True`
 >    - "Remove bins of low coverage" to `-1.6`
 >    - "Remove bins of large coverage" to `1.8`
@@ -239,7 +239,7 @@ We can plot the TADs for a given chromosomal region. For this we will use [hicPl
 >    - "+Insert Include tracks in your plot"
 >    - "Choose style of the track" to `TAD score`
 >    - "Plot title" to `TAD separation score`
->    - "Track file bedgraph format" to the output from previous step
+>    - "Track file bedgraph format" to the output from hicFindTADs step
 >    - "Color of track" to blue
 >    - "Width" to `2`
 >    - "+Insert Include tracks in your plot"
