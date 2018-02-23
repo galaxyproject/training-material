@@ -16,14 +16,16 @@ For this the following steps are necessary to be performed:
 5. TAD Calling
 
 After a corrected Hi-C matrix is created other tools can be used to visualize it, call TADS or compare it with other matrices.
-This tutorial is based on the [following work](http://hicexplorer.readthedocs.io/en/latest/content/example_usage.html).
-
 
 > ### Agenda
 >
 > In this tutorial, we will deal with:
 >
-> 1. TOC
+> 1. Mapping Hi-C data
+> 2. Create a contact matrix
+> 3. Learn how to correct a contact matrix
+> 4. Visualize a contact matrix
+> 5. Compute and visualize toplogical associating domains (TADs)
 > {:toc}
 >
 {: .agenda}
@@ -63,10 +65,11 @@ Mates have to be mapped individually to avoid mapper specific heuristics designe
 We have used the HiCExplorer sucessfuly with bwa, bowtie2 and hisat2. In this tutorial we will be using **Map with BWA-MEM** tool. It is important to remember to:
 - use local mapping, in contrast to end-to-end. A fraction of Hi-C reads are chimeric and will not map end-to-end thus, local mapping is important to increase the number of mapped reads
 - tune the aligner parameters to penalize deletions and insertions. This is important to avoid aligned reads with gaps if they happen to be chimeric.
+- If bowtie2 or hisat2 are used, `--reorder` option and as a file format `bam_native` needs to be used. Regular `bam` files are sorted by Galaxy and can not be used as an input for HiCExplorer.
 
 > ### {% icon hands_on %} Hands-on: Mapping reads
 >
-> 1. **Map with BWA-MEM** {% icon tool %}: Run Map with BWA-MEM on both strands `HiC_S2_1p_10min_lowU_R1` and `HiC_S2_1p_10min_lowU_R2` with:
+> 1. **Map with BWA-MEM 0.8.0** {% icon tool %}: Run Map with BWA-MEM on both strands `HiC_S2_1p_10min_lowU_R1` and `HiC_S2_1p_10min_lowU_R2` with:
 >    - "Will you select a reference genome from your history or use a built-in index?" to `Use a built-in index`
 >    - "Select a reference genome" to `dm6`
 >    - "Is this library mate-paired?" to `Single-end or interleaved paired-end`
@@ -123,6 +126,7 @@ A 10kb bin matrix is too large to plot, it's better to reduce the resolution. We
 >    - "Plot title" to `Hi-C matrix for dm6`
 >    - "Plot per chromosome" to `True`
 >    - "Remove masked bins from the matrix" to `True`
+>    - "Plot the log1p of the matrix values: `True`
 >    - "Chromosomes to include (and order to plot in)" to `chr2L`
 >    - "+ Insert Chromosomes to include (and order to plot in):" to `chr2R`
 >    - "+ Insert Chromosomes to include (and order to plot in):" to `chr3L`
@@ -131,10 +135,8 @@ A 10kb bin matrix is too large to plot, it's better to reduce the resolution. We
 >
 >    > ### {% icon tip %} Tip: log1p
 >    >
->    > Because of the large differences in counts found int he matrix, it is better to plot the counts using the *–log1p* option.
+>    > Because of the large differences in counts found in the matrix, it is better to plot the counts using the *–log1p* option.
 >    {: .tip}
->
->    - **Plot the log1p of the matrix values**: True
 >
 {: .hands_on}
 
@@ -242,7 +244,7 @@ We can plot the TADs for a given chromosomal region. For this we will use [hicPl
 >    - "Width" to `2`
 >    - "+Insert Include tracks in your plot"
 >    - "Choose style of the track" to `Gene track`
->    - "Plot title" to `mm10 genes`
+>    - "Plot title" to `dm6 genes`
 >    - "Track file bedgraph format" the imported .bed file
 >    - "Width" to `5`
 >    - "Plot labels" to `No`
@@ -255,4 +257,7 @@ We can plot the TADs for a given chromosomal region. For this we will use [hicPl
 # Conclusion
 {:.no_toc}
 
-In this tutorial we used HiCExplorer to analyze a published dataset. 
+In this tutorial we used HiCExplorer to analyze drosophila melanogaster cells. We mapped the chimeric reads and created a contact matrix, to reduce noise this contact matrix was normalized. We showed how to visualize a contact matrix and how we can investigate topological associating domains and relate them to additional data like gene tracks.
+
+
+ To improve your learned skills we offer an additonal tutorial based on mouse stem cells: [following work](http://hicexplorer.readthedocs.io/en/latest/content/example_usage.html).
