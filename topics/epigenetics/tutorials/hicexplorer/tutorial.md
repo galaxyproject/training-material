@@ -142,7 +142,7 @@ A 10kb bin matrix is too large to plot, it's better to reduce the resolution. We
 
 # Correction of Hi-C matrix
 
-[hicCorrectMatrix](http://hicexplorer.readthedocs.io/en/latest/content/tools/hicCorrectMatrix.html#hiccorrectmatrix) corrects the matrix counts in an iterative manner. For correcting the matrix, it’s important to remove the unassembled scaffolds (e.g. NT_) and keep only chromosomes, as scaffolds create problems with matrix correction. Therefore we use the chromosome names (1-19, X, Y) here. **Important**: Use ‘chr1 chr2 chr3 etc.’ if your genome index uses chromosome names with the ‘chr’ prefix.
+[hicCorrectMatrix](http://hicexplorer.readthedocs.io/en/latest/content/tools/hicCorrectMatrix.html#hiccorrectmatrix) corrects the matrix counts in an iterative manner. For correcting the matrix, it’s important to remove the unassembled scaffolds (e.g. NT_) and keep only chromosomes, as scaffolds create problems with matrix correction. Therefore we use the chromosome names (chr2R, chr2L, chr3R, chr3L, chrX) here.
 
 Matrix correction works in two steps: first a histogram containing the sum of contact per bin (row sum) is produced. This plot needs to be inspected to decide the best threshold for removing bins with lower number of reads. The second steps removes the low scoring bins and does the correction.
 
@@ -164,7 +164,7 @@ In our case the distribution describes the counts per bin of a genomic distance.
 
 > ### {% icon hands_on %} Hands-on: Matrix correction
 >
-> 1. **hicCorrectMatrix** {% icon tool %}: Run hicCorrectMatrix on the output from previous step adjusting the parameters:
+> 1. **hicCorrectMatrix** {% icon tool %}: Run hicCorrectMatrix on the original matrix (not the one with merged bins) adjusting the parameters:
 >    - "Range restriction (in bp)" to `Correct matrix plot`
 >    - "Normalize each chromosome separately" to `True`
 >    - "Remove bins of low coverage" to `-1.6`
@@ -184,11 +184,11 @@ ERROR:iterative correction:*Error* matrix correction produced extremely large va
 This is often caused by bins of low counts. Use a more stringent filtering of bins.
 ```
 
-This can be solved by a more stringent z-score values for the filter threshold or by a look at the plotted matrix. For example, chromosome Y is often has more or less 0 counts in its bins. Chromosomes like that can be excluded from the correction by not defining it for the set of chromosomes that should be corrected (parameter 'Include chromosomes').
+This can be solved by a more stringent z-score values for the filter threshold or by a look at the plotted matrix. For example, chromosomes with 0 reads in its bins can be excluded from the correction by not defining it for the set of chromosomes that should be corrected (parameter 'Include chromosomes').
 
 ### Plotting the corrected Hi-C matrix
 
-We can now plot the one of the chromosomes (e.g. chromosome 2L) , with the corrected matrix.
+We can now plot chromosome 2L with the corrected matrix.
 
 > ### {% icon hands_on %} Hands-on: Plotting the corrected Hi-C matrix
 >
@@ -204,7 +204,7 @@ We can now plot the one of the chromosomes (e.g. chromosome 2L) , with the corre
 
 “The partitioning of chromosomes into topologically associating domains (TADs) is an emerging concept that is reshaping our understanding of gene regulation in the context of physical organization of the genome” [Ramirez et al. 2017](https://doi.org/10.1101/115063).
 
-TAD calling works in two steps: First HiCExplorer computes a TAD-separation score based on a z-score matrix for all bins. Then those bins having a local minimum of the TAD-separation score are evaluated with respect to the surrounding bins to decide assign a p-value. Then a cutoff is applied to select the bins more likely to be TAD boundaries.
+TAD calling works in two steps: First HiCExplorer computes a TAD-separation score based on a z-score matrix for all bins. Then those bins having a local minimum of the TAD-separation score are evaluated with respect to the surrounding bins to assign a p-value. Then a cutoff is applied to select the bins more likely to be TAD boundaries.
 
 [hicFindTADs](http://hicexplorer.readthedocs.io/en/latest/content/tools/hicFindTADs.html#hicfindtads) tries to identify sensible parameters but those can be change to identify more stringent set of boundaries.
 
