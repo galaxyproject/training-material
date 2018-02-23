@@ -1,0 +1,552 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Galaxy Training!</title>
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <link rel="stylesheet" href="/training-material/assets/css/font-awesome.css">
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+    </head>
+    <body>
+        
+
+
+
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/training-material/topics/epigenetics" title="Go back to list of tutorials">
+                            <i class="fa fa-folder-o" aria-hidden="true"></i> Epigenetics
+                        </a>
+                    </li>
+
+                    
+                        
+                        
+                        
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Introduction slides">
+                                    <i class="fa fa-slideshare" aria-hidden="true"></i> Introduction slides
+                                </a>
+                                <div class="dropdown-menu">
+                                    
+                                        
+                                            
+                                                <a class="dropdown-item" href="/training-material/topics/epigenetics/slides/introduction.html">
+                                                    Introduction to DNA Methylation data analysis
+                                                </a>
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                </div>
+                            </li>
+                        
+                    
+
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="/training-material/topics/epigenetics#docker_image" title="Docker image for this tutorial">
+                            <i class="fa fa-ship" aria-hidden="true"></i> Docker image
+                        </a>
+                    </li>
+                    
+
+                    
+
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://doi.org/10.5281/zenodo.1176070" title="Links to data">
+                            <i class="fa fa-files-o" aria-hidden="true"></i> Input Dataset
+                        </a>
+                    </li>
+                    
+
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="/training-material/topics/epigenetics#references" title="References">
+                            <i class="fa fa-book" aria-hidden="true"></i> Literature
+                        </a>
+                    </li>
+                    
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="fa fa-life-ring" aria-hidden="true"></i> Help
+    </a>
+    <div class="dropdown-menu">
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Chat on Gitter">
+            Gitter
+        </a>
+        <a class="dropdown-item" href="https://biostar.usegalaxy.org/" title="Ask on Biostars">
+            Biostars
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/galaxyproject/training-material/tree/master/topics/epigenetics/tutorials/hicexplorer/tutorial.md">
+                            <i class="fa fa-github" aria-hidden="true"></i> Edit
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<div class="container main-content">
+    <section class="tutorial">
+        <h1>Hi-C analysis of Drosophila melanogaster cells using HiCExplorer</h1>
+
+        <blockquote class="overview">
+            <h3>Overview</h3>
+
+            <strong><i class="fa fa-question-circle" aria-hidden="true"></i> Questions</strong>
+            <ul>
+            
+            <li>Why is a Hi-C analysis useful?</li>
+            
+            <li>What is 'chromosome conformation capture'?</li>
+            
+            <li>What are main steps in order to generate and plot a Hi-C contact matrix?</li>
+            
+            </ul>
+
+            <strong><i class="fa fa-bullseye" aria-hidden="true"></i> Objectives</strong>
+            <ul>
+            
+            </ul>
+
+            
+            <strong><i class="fa fa-check-circle" aria-hidden="true"></i> Requirements</strong>
+            <ul>
+            
+                <li>
+                    
+                    <a href="/training-material/topics//introduction/">Galaxy introduction</a>
+                    
+                </li>
+            
+                <li>
+                    
+                    <a href="/training-material/topics//sequence-analysis/">Quality control</a>
+                    
+                </li>
+            
+                <li>
+                    
+                    <a href="/training-material/topics//sequence-analysis/">Mapping</a>
+                    
+                </li>
+            
+            
+            </ul>
+            
+
+            <p><strong><i class="fa fa-hourglass-end" aria-hidden="true"></i> Time estimation:</strong> 1h</p>
+        </blockquote>
+
+        <h1 class="no_toc" id="introduction">Introduction</h1>
+
+<p>In this HiCExplorer tutorial we will generate and plot a Hi-C contact matrix.
+For this the following steps are necessary to be performed:</p>
+<ol>
+  <li>Map the Hi-C reads to the reference genome</li>
+  <li>Creation of a Hi-C matrix</li>
+  <li>Plotting the Hi-C matrix</li>
+  <li>Correction of Hi-C matrix</li>
+  <li>TAD Calling</li>
+</ol>
+
+<p>After a corrected Hi-C matrix is created other tools can be used to visualize it, call TADS or compare it with other matrices.</p>
+
+<blockquote class="agenda">
+  <h3 id="agenda">Agenda</h3>
+
+  <p>In this tutorial, we will deal with:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#data-upload" id="markdown-toc-data-upload">Data upload</a></li>
+  <li><a href="#reads-mapping" id="markdown-toc-reads-mapping">Reads mapping</a></li>
+  <li><a href="#creation-of-a-hi-c-matrix" id="markdown-toc-creation-of-a-hi-c-matrix">Creation of a Hi-C matrix</a></li>
+  <li><a href="#plotting-the-hi-c-matrix" id="markdown-toc-plotting-the-hi-c-matrix">Plotting the Hi-C matrix</a></li>
+  <li><a href="#correction-of-hi-c-matrix" id="markdown-toc-correction-of-hi-c-matrix">Correction of Hi-C matrix</a></li>
+  <li><a href="#tad-calling" id="markdown-toc-tad-calling">TAD calling</a></li>
+</ol>
+
+</blockquote>
+
+<h2 id="data-upload">Data upload</h2>
+
+<blockquote class="hands_on">
+  <h3 id="-hands-on-data-upload"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Data upload</h3>
+
+  <ol>
+    <li>Create a new history</li>
+    <li>
+      <p>Import from <a href="https://doi.org/10.5281/zenodo.1176070">Zenodo</a>.</p>
+
+      <blockquote class="tip">
+        <h3 id="-tip-importing-data-via-links"><i class="fa fa-lightbulb-o" aria-hidden="true"></i> Tip: Importing data via links</h3>
+
+        <ul>
+          <li>Copy the link location</li>
+          <li>Open the Galaxy Upload Manager</li>
+          <li>Select <strong>Paste/Fetch Data</strong>
+Below are the links to the read files that can be copied and pasted in the upload manager.</li>
+        </ul>
+
+        <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/1176070/files/HiC_S2_1p_10min_lowU_R1.fastq.gz
+https://zenodo.org/record/1176070/files/HiC_S2_1p_10min_lowU_R2.fastq.gz
+</code></pre></div>        </div>
+
+        <ul>
+          <li>Paste the links into the text field</li>
+          <li>Press <strong>Start</strong></li>
+        </ul>
+      </blockquote>
+    </li>
+    <li>Rename the dataset to something meaningful, e.g. <code class="highlighter-rouge">HiC_S2_1p_10min_lowU_R1</code> and <code class="highlighter-rouge">HiC_S2_1p_10min_lowU_R2</code>.
+By default, when data is imported via its link, Galaxy names it with its URL.</li>
+  </ol>
+
+</blockquote>
+
+<h1 id="reads-mapping">Reads mapping</h1>
+
+<p>Mates have to be mapped individually to avoid mapper specific heuristics designed for standard paired-end libraries.</p>
+
+<p>We have used the HiCExplorer sucessfuly with bwa, bowtie2 and hisat2. In this tutorial we will be using <strong>Map with BWA-MEM</strong> tool. It is important to remember to:</p>
+<ul>
+  <li>use local mapping, in contrast to end-to-end. A fraction of Hi-C reads are chimeric and will not map end-to-end thus, local mapping is important to increase the number of mapped reads</li>
+  <li>tune the aligner parameters to penalize deletions and insertions. This is important to avoid aligned reads with gaps if they happen to be chimeric.</li>
+  <li>If bowtie2 or hisat2 are used, <code class="highlighter-rouge">--reorder</code> option and as a file format <code class="highlighter-rouge">bam_native</code> needs to be used. Regular <code class="highlighter-rouge">bam</code> files are sorted by Galaxy and can not be used as an input for HiCExplorer.</li>
+</ul>
+
+<blockquote class="hands_on">
+  <h3 id="-hands-on-mapping-reads"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Mapping reads</h3>
+
+  <ol>
+    <li><strong>Map with BWA-MEM 0.8.0</strong> <i class="fa fa-wrench" aria-hidden="true"></i>: Run Map with BWA-MEM on both strands <code class="highlighter-rouge">HiC_S2_1p_10min_lowU_R1</code> and <code class="highlighter-rouge">HiC_S2_1p_10min_lowU_R2</code> with:
+      <ul>
+        <li>“Will you select a reference genome from your history or use a built-in index?” to <code class="highlighter-rouge">Use a built-in index</code></li>
+        <li>“Select a reference genome” to <code class="highlighter-rouge">dm6</code></li>
+        <li>“Is this library mate-paired?” to <code class="highlighter-rouge">Single-end or interleaved paired-end</code></li>
+        <li>Set multiple datasets</li>
+        <li>“FASTQ file” to <code class="highlighter-rouge">HiC_S2_1p_10min_lowU_R1</code>and <code class="highlighter-rouge">HiC_S2_1p_10min_lowU_R2</code></li>
+        <li>“BWA settings to use” to <code class="highlighter-rouge">Full parameter List</code></li>
+        <li>“Gap extension penalty (-E)” to <code class="highlighter-rouge">50</code></li>
+        <li>“Penalty for clipping (-L)” to <code class="highlighter-rouge">0</code></li>
+      </ul>
+    </li>
+    <li>Rename the output of the tool according to the corresponding files: <code class="highlighter-rouge">R1.sam</code> and <code class="highlighter-rouge">R2.sam</code></li>
+  </ol>
+
+</blockquote>
+
+<h1 id="creation-of-a-hi-c-matrix">Creation of a Hi-C matrix</h1>
+
+<p>Once the reads have been mapped the Hi-C matrix can be built.</p>
+
+<p>For this step we will use <a href="http://hicexplorer.readthedocs.io/en/latest/content/tools/hicBuildMatrix.html#hicbuildmatrix">hicBuildMatrix</a> tool, which builds the matrix of read counts over the bins in the genome, considering the sites around the given restriction site.</p>
+
+<blockquote class="hands_on">
+  <h3 id="-hands-on-hicbuildmatrix"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: hicBuildMatrix</h3>
+
+  <ol>
+    <li><strong>hicBuildMatrix</strong> <i class="fa fa-wrench" aria-hidden="true"></i>: Run hicBuildMatrix on the <code class="highlighter-rouge">R1.sam</code> and <code class="highlighter-rouge">R2.sam</code> from previous step with modifying the following parameters:
+      <ul>
+        <li>“1: Sam/Bam files to process” to <code class="highlighter-rouge">R1.sam</code></li>
+        <li>“2: Sam/Bam files to process” to <code class="highlighter-rouge">R2.sam</code></li>
+        <li>“Choose to use a restriction cut file or a bin size” to <code class="highlighter-rouge">Bin size</code></li>
+        <li>“Bin size in bp” to <code class="highlighter-rouge">10000</code></li>
+        <li>
+          <p>“Sequence of the restriction site” to <code class="highlighter-rouge">GATC</code></p>
+
+          <blockquote class="comment">
+            <h3 id="-comment"><i class="fa fa-commenting-o" aria-hidden="true"></i> Comment</h3>
+
+            <p><em>hicBuildMatrix</em> creates two files, a bam file containing only the valid Hi-C read pairs and a matrix containing the Hi-C contacts at the given resolution. The bam file is useful to check the quality of the Hi-C library on the genome browser. A good Hi-C library should contain piles of reads near the restriction fragment sites. In the QCfolder a html file is saved with plots containing useful information for the quality control of the Hi-C sample like the number of valid pairs, duplicated pairs, self-ligations etc. Usually, only 25%-40% of the reads are valid and used to build the Hi-C matrix mostly because of the reads that are on repetitive regions that need to be discarded.</p>
+          </blockquote>
+
+          <blockquote class="comment">
+            <h3 id="-comment-1"><i class="fa fa-commenting-o" aria-hidden="true"></i> Comment</h3>
+
+            <p>Normally 25% of the total reads are selected. The output matrices have counts for the genomic regions. The extension of output matrix files is .h5.
+A quality report is created in e.g. <code class="highlighter-rouge">hicMatrix/R1_10kb_QC</code>, have a look at the report hicQC.html.</p>
+          </blockquote>
+        </li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h1 id="plotting-the-hi-c-matrix">Plotting the Hi-C matrix</h1>
+
+<p>A 10kb bin matrix is too large to plot, it’s better to reduce the resolution. We usually run out of memory for a 1 kb or a 10 kb bin matrix and the time to plot it is very long (minutes instead of seconds). In order to reduce the resolution we use the tool <a href="http://hicexplorer.readthedocs.io/en/latest/content/tools/hicMergeMatrixBins.html#hicmergematrixbins">hicMergeMatrixBins</a>.</p>
+
+<p><a href="http://hicexplorer.readthedocs.io/en/latest/content/tools/hicMergeMatrixBins.html#hicmergematrixbins">hicMergeMatrixBins</a> merges the bins into larger bins of given number (specified by –numBins). We will merge 100 bins in the original (uncorrected) matrix and then correct it. The new bin size is going to be 10.000 bp * 100 = 1.000.000 bp = 1 Mb</p>
+
+<blockquote class="hands_on">
+  <h3 id="-hands-on-hicmergematrixbins"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: hicMergeMatrixBins</h3>
+
+  <ol>
+    <li><strong>hicMergeMatrixBins</strong> <i class="fa fa-wrench" aria-hidden="true"></i>: Run hicMergeMatrixBins on the output from previous step setting the following parameter:
+      <ul>
+        <li>“Number of bins to merge” to <code class="highlighter-rouge">100</code></li>
+      </ul>
+    </li>
+    <li><strong>hicPlotMatrix</strong> <i class="fa fa-wrench" aria-hidden="true"></i>: Run hicPlotMatrix on the output from hicMergeMatrixBins adjusting the parameters:
+      <ul>
+        <li>“Plot title” to <code class="highlighter-rouge">Hi-C matrix for dm6</code></li>
+        <li>“Plot per chromosome” to <code class="highlighter-rouge">True</code></li>
+        <li>“Remove masked bins from the matrix” to <code class="highlighter-rouge">True</code></li>
+        <li>“Plot the log1p of the matrix values: <code class="highlighter-rouge">True</code></li>
+        <li>“Chromosomes to include (and order to plot in)” to <code class="highlighter-rouge">chr2L</code></li>
+        <li>”+ Insert Chromosomes to include (and order to plot in):” to <code class="highlighter-rouge">chr2R</code></li>
+        <li>”+ Insert Chromosomes to include (and order to plot in):” to <code class="highlighter-rouge">chr3L</code></li>
+        <li>”+ Insert Chromosomes to include (and order to plot in):” to <code class="highlighter-rouge">chr3R</code></li>
+        <li>”+ Insert Chromosomes to include (and order to plot in):” to <code class="highlighter-rouge">chrX</code></li>
+      </ul>
+
+      <blockquote class="tip">
+        <h3 id="-tip-log1p"><i class="fa fa-lightbulb-o" aria-hidden="true"></i> Tip: log1p</h3>
+
+        <p>Because of the large differences in counts found in the matrix, it is better to plot the counts using the <em>–log1p</em> option.</p>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h1 id="correction-of-hi-c-matrix">Correction of Hi-C matrix</h1>
+
+<p><a href="http://hicexplorer.readthedocs.io/en/latest/content/tools/hicCorrectMatrix.html#hiccorrectmatrix">hicCorrectMatrix</a> corrects the matrix counts in an iterative manner. For correcting the matrix, it’s important to remove the unassembled scaffolds (e.g. NT_) and keep only chromosomes, as scaffolds create problems with matrix correction. Therefore we use the chromosome names (1-19, X, Y) here. <strong>Important</strong>: Use ‘chr1 chr2 chr3 etc.’ if your genome index uses chromosome names with the ‘chr’ prefix.</p>
+
+<p>Matrix correction works in two steps: first a histogram containing the sum of contact per bin (row sum) is produced. This plot needs to be inspected to decide the best threshold for removing bins with lower number of reads. The second steps removes the low scoring bins and does the correction.</p>
+
+<blockquote class="hands_on">
+  <h3 id="-hands-on-matrix-diagnostic"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Matrix diagnostic</h3>
+
+  <ol>
+    <li><strong>hicCorrectMatrix</strong> <i class="fa fa-wrench" aria-hidden="true"></i>: Run hicCorrectMatrix adjusting the parameters:
+      <ul>
+        <li>“Range restriction (in bp)” to <code class="highlighter-rouge">Diagnostic plot</code></li>
+        <li>“Chromosomes to include (and order to plot in)” to <code class="highlighter-rouge">chr2L</code></li>
+        <li>”+ Insert Chromosomes to include (and order to plot in):” to <code class="highlighter-rouge">chr2R</code></li>
+        <li>”+ Insert Chromosomes to include (and order to plot in):” to <code class="highlighter-rouge">chr3L</code></li>
+        <li>”+ Insert Chromosomes to include (and order to plot in):” to <code class="highlighter-rouge">chr3R</code></li>
+        <li>”+ Insert Chromosomes to include (and order to plot in):” to <code class="highlighter-rouge">chrX</code></li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>The output of the program prints a threshold suggestion that is usually accurate but is better to revise the histogram plot. The threshold is visualized in the plot as a black vertical line.</p>
+
+<p>In our case the distribution describes the counts per bin of a genomic distance. To remove all bins with a z-score threshold less / more than X means to remove all bins which have less / more counts than X of mean of their specific distribution in units of the standard deviation. Looking at the distribution, we can select the value of -1.6 (lower end) and 1.8 (upper end) to remove. This is given by the –filterThreshold option in hicCorrectMatrix set to ‘correct matrix’ mode.</p>
+
+<blockquote class="hands_on">
+  <h3 id="-hands-on-matrix-correction"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Matrix correction</h3>
+
+  <ol>
+    <li><strong>hicCorrectMatrix</strong> <i class="fa fa-wrench" aria-hidden="true"></i>: Run hicCorrectMatrix on the output from previous step adjusting the parameters:
+      <ul>
+        <li>“Range restriction (in bp)” to <code class="highlighter-rouge">Correct matrix plot</code></li>
+        <li>“Normalize each chromosome separately” to <code class="highlighter-rouge">True</code></li>
+        <li>“Remove bins of low coverage” to <code class="highlighter-rouge">-1.6</code></li>
+        <li>“Remove bins of large coverage” to <code class="highlighter-rouge">1.8</code></li>
+        <li>“Chromosomes to include (and order to plot in)” to <code class="highlighter-rouge">chr2L</code></li>
+        <li>”+ Insert Chromosomes to include (and order to plot in):” to <code class="highlighter-rouge">chr2R</code></li>
+        <li>”+ Insert Chromosomes to include (and order to plot in):” to <code class="highlighter-rouge">chr3L</code></li>
+        <li>”+ Insert Chromosomes to include (and order to plot in):” to <code class="highlighter-rouge">chr3R</code></li>
+        <li>”+ Insert Chromosomes to include (and order to plot in):” to <code class="highlighter-rouge">chrX</code></li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>It can happen that the correction stops with:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ERROR:iterative correction:*Error* matrix correction produced extremely large values.
+This is often caused by bins of low counts. Use a more stringent filtering of bins.
+</code></pre></div></div>
+
+<p>This can be solved by a more stringent z-score values for the filter threshold or by a look at the plotted matrix. For example, chromosome Y is often has more or less 0 counts in its bins. Chromosomes like that can be excluded from the correction by not defining it for the set of chromosomes that should be corrected (parameter ‘Include chromosomes’).</p>
+
+<h3 id="plotting-the-corrected-hi-c-matrix">Plotting the corrected Hi-C matrix</h3>
+
+<p>We can now plot the one of the chromosomes (e.g. chromosome 2L) , with the corrected matrix.</p>
+
+<blockquote class="hands_on">
+  <h3 id="-hands-on-plotting-the-corrected-hi-c-matrix"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Plotting the corrected Hi-C matrix</h3>
+
+  <ol>
+    <li><strong>hicPlotMatrix</strong> <i class="fa fa-wrench" aria-hidden="true"></i>: Run hicPlotMatrix on the corrected matrix adjusting the parameters:
+      <ul>
+        <li>“Plot title” to <code class="highlighter-rouge">Hi-C matrix for dm6</code></li>
+        <li>“Plot per chromosome” to <code class="highlighter-rouge">False</code></li>
+        <li>“Plot only this region” to <code class="highlighter-rouge">chr2L</code></li>
+        <li>“Plot the log1p of the matrix values” to <code class="highlighter-rouge">True</code></li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h1 id="tad-calling">TAD calling</h1>
+
+<p>“The partitioning of chromosomes into topologically associating domains (TADs) is an emerging concept that is reshaping our understanding of gene regulation in the context of physical organization of the genome” <a href="https://doi.org/10.1101/115063">Ramirez et al. 2017</a>.</p>
+
+<p>TAD calling works in two steps: First HiCExplorer computes a TAD-separation score based on a z-score matrix for all bins. Then those bins having a local minimum of the TAD-separation score are evaluated with respect to the surrounding bins to decide assign a p-value. Then a cutoff is applied to select the bins more likely to be TAD boundaries.</p>
+
+<p><a href="http://hicexplorer.readthedocs.io/en/latest/content/tools/hicFindTADs.html#hicfindtads">hicFindTADs</a> tries to identify sensible parameters but those can be change to identify more stringent set of boundaries.</p>
+
+<blockquote class="hands_on">
+  <h3 id="-hands-on-finding-tads"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Finding TADs</h3>
+
+  <ol>
+    <li><strong>hicFindTADs</strong> <i class="fa fa-wrench" aria-hidden="true"></i>: Run hicFindTADs on the corrected matrix adjusting the parameters:
+      <ul>
+        <li>“Minimum window length (in bp) to be considered to the left and to the right of each Hi-C bin.” to <code class="highlighter-rouge">30000</code></li>
+        <li>“Maximum window length (in bp) to be considered to the left and to the right of each Hi-C bin.” to <code class="highlighter-rouge">60000</code></li>
+        <li>“Step size when moving from minDepth to maxDepth” to <code class="highlighter-rouge">10000</code></li>
+        <li>“Multiple Testing Corrections” to <code class="highlighter-rouge">False discovery rate</code></li>
+        <li>“q-value” to <code class="highlighter-rouge">0.05</code></li>
+        <li>“Minimum threshold of the difference between the TAD-separation score of a putative boundary and the mean of the TAD-sep. score of surrounding bins.” to <code class="highlighter-rouge">0.05</code></li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>As an output we get the boundaries, domains and scores separated files. We will use in the plot later only the TAD-score file.</p>
+
+<p>We can plot the TADs for a given chromosomal region. For this we will use <a href="http://hicexplorer.readthedocs.io/en/latest/content/tools/hicPlotTADs.html">hicPlotTADs</a>. But before make sure to import <a href="https://zenodo.org/record/1176070/files/dm6_genes.bed">gene track file</a> in .bed format from <a href="https://doi.org/10.5281/zenodo.1176070">Zenodo</a>.</p>
+
+<blockquote class="hands_on">
+  <h3 id="-hands-on-plotting-tads"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Plotting TADs</h3>
+
+  <ol>
+    <li><strong>hicPlotTADs</strong> <i class="fa fa-wrench" aria-hidden="true"></i>: Run hicPlotTADs adjusting the parameters:
+      <ul>
+        <li>“Region of the genome to limit the operation” to <code class="highlighter-rouge">chr2L:1000000-5000000</code></li>
+        <li>“Choose style of the track” to <code class="highlighter-rouge">TAD visualization</code></li>
+        <li>“Plot title” to <code class="highlighter-rouge">HiC dm6 chr2L:1000000-5000000</code></li>
+        <li>“Matrix to compute on.” to the corrected matrix from hicCorrectMatrix step</li>
+        <li>“Depth” to <code class="highlighter-rouge">2000000</code></li>
+        <li>“Plotting type” to <code class="highlighter-rouge">interaction</code></li>
+        <li>“Boundaries file” to the output from hicFindTADs</li>
+        <li>“Show x labels” to <code class="highlighter-rouge">Yes</code></li>
+        <li>“+Insert Include tracks in your plot”</li>
+        <li>“Choose style of the track” to <code class="highlighter-rouge">TAD score</code></li>
+        <li>“Plot title” to <code class="highlighter-rouge">TAD separation score</code></li>
+        <li>“Track file bedgraph format” to the output from previous step</li>
+        <li>“Color of track” to blue</li>
+        <li>“Width” to <code class="highlighter-rouge">2</code></li>
+        <li>“+Insert Include tracks in your plot”</li>
+        <li>“Choose style of the track” to <code class="highlighter-rouge">Gene track</code></li>
+        <li>“Plot title” to <code class="highlighter-rouge">dm6 genes</code></li>
+        <li>“Track file bedgraph format” the imported .bed file</li>
+        <li>“Width” to <code class="highlighter-rouge">5</code></li>
+        <li>“Plot labels” to <code class="highlighter-rouge">No</code></li>
+        <li>“Configure x-axis” to <code class="highlighter-rouge">Yes</code></li>
+        <li>“Fontsize” to <code class="highlighter-rouge">16</code></li>
+        <li>“Where to place the x-axis” to <code class="highlighter-rouge">Top</code></li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h1 class="no_toc" id="conclusion">Conclusion</h1>
+
+<p>In this tutorial we used HiCExplorer to analyze drosophila melanogaster cells. We mapped the chimeric reads and created a contact matrix, to reduce noise this contact matrix was normalized. We showed how to visualize a contact matrix and how we can investigate topological associating domains and relate them to additional data like gene tracks.</p>
+
+<p>To improve your learned skills we offer an additonal tutorial based on mouse stem cells: <a href="http://hicexplorer.readthedocs.io/en/latest/content/example_usage.html">following work</a>.</p>
+
+
+        
+        <blockquote class="key_points">
+            <h3><i class="fa fa-key" aria-hidden="true"></i> Key points</h3>
+
+            <ul>
+                
+                <li>Hi-C helps to investigate the 3D structure of the genome and to uncover folding principles of chromatin.</li>
+                
+                <li>In order to build a Hi-C contact matrix the reads have to be mapped to the reference genome.</li>
+                
+                <li>Based on a contact matrix open and closed chromatin (A/B compartments) and topological associating domains (TADs) can be computed.</li>
+                
+            </ul>
+        </blockquote>
+        
+
+        
+        <h1>Useful literature</h1>
+        <p>Useful information regarding this type of analysis with descriptions and paper references for the tools used in this tutorial, and literature for this analysis techniques and interpretations can be found <a href="/training-material/topics/epigenetics#references">here</a>.</p>
+        
+
+        <h3><i class="fa fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!</h3>
+
+        <hr>
+
+        <blockquote class="overview">
+            <h3><i class="fa fa-comments-o" aria-hidden="true"></i> Feedback</h3>
+            Please take a moment and provide your feedback on this tutorial. Your feedback will help guide and improve future revisions to this tutorial.
+            <a href="https://tinyurl.com/GTNfeedback">Feedback Form</a>
+        </blockquote>
+    </section>
+</div>
+
+
+<footer>
+    <div class="container">
+        <p>
+            This material is the result of a collaborative work. Thanks the
+            <a href="https://wiki.galaxyproject.org/Teach/GTN">Galaxy Training Network</a>
+            and all the <a href="/training-material/hall-of-fame">contributors</a> (Joachim Wolff, Fidel Ramirez, Vivek Bhardwaj, Ekaterina Polkh)!
+        </p>
+        <p>
+            Found a typo? Something is wrong in this tutorial? Edit it on
+            <a href="https://github.com/galaxyproject/training-material/tree/master/topics/epigenetics/tutorials/hicexplorer/tutorial.md">GitHub</a>.
+        </p>
+    </div>
+</footer>
+
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+</html>
