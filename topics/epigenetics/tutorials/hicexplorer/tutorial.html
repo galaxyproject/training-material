@@ -255,7 +255,7 @@ By default, when data is imported via its link, Galaxy names it with its URL.</l
     <li><strong>Map with BWA-MEM 0.8.0</strong> <i class="fa fa-wrench" aria-hidden="true"></i>: Run Map with BWA-MEM on both strands <code class="highlighter-rouge">HiC_S2_1p_10min_lowU_R1</code> and <code class="highlighter-rouge">HiC_S2_1p_10min_lowU_R2</code> with:
       <ul>
         <li>“Will you select a reference genome from your history or use a built-in index?” to <code class="highlighter-rouge">Use a built-in index</code></li>
-        <li>“Select a reference genome” to <code class="highlighter-rouge">dm6</code></li>
+        <li>“Select a reference genome” to <code class="highlighter-rouge">dm3</code></li>
         <li>“Is this library mate-paired?” to <code class="highlighter-rouge">Single-end or interleaved paired-end</code></li>
         <li>Set multiple datasets</li>
         <li>“FASTQ file” to <code class="highlighter-rouge">HiC_S2_1p_10min_lowU_R1</code>and <code class="highlighter-rouge">HiC_S2_1p_10min_lowU_R2</code></li>
@@ -324,7 +324,7 @@ A quality report is created in e.g. <code class="highlighter-rouge">hicMatrix/R1
     </li>
     <li><strong>hicPlotMatrix</strong> <i class="fa fa-wrench" aria-hidden="true"></i>: Run hicPlotMatrix on the output from hicMergeMatrixBins adjusting the parameters:
       <ul>
-        <li>“Plot title” to <code class="highlighter-rouge">Hi-C matrix for dm6</code></li>
+        <li>“Plot title” to <code class="highlighter-rouge">Hi-C matrix for dm3</code></li>
         <li>“Plot per chromosome” to <code class="highlighter-rouge">True</code></li>
         <li>“Remove masked bins from the matrix” to <code class="highlighter-rouge">True</code></li>
         <li>“Plot the log1p of the matrix values: <code class="highlighter-rouge">True</code></li>
@@ -347,7 +347,7 @@ A quality report is created in e.g. <code class="highlighter-rouge">hicMatrix/R1
 
 <h1 id="correction-of-hi-c-matrix">Correction of Hi-C matrix</h1>
 
-<p><a href="http://hicexplorer.readthedocs.io/en/latest/content/tools/hicCorrectMatrix.html#hiccorrectmatrix">hicCorrectMatrix</a> corrects the matrix counts in an iterative manner. For correcting the matrix, it’s important to remove the unassembled scaffolds (e.g. NT_) and keep only chromosomes, as scaffolds create problems with matrix correction. Therefore we use the chromosome names (1-19, X, Y) here. <strong>Important</strong>: Use ‘chr1 chr2 chr3 etc.’ if your genome index uses chromosome names with the ‘chr’ prefix.</p>
+<p><a href="http://hicexplorer.readthedocs.io/en/latest/content/tools/hicCorrectMatrix.html#hiccorrectmatrix">hicCorrectMatrix</a> corrects the matrix counts in an iterative manner. For correcting the matrix, it’s important to remove the unassembled scaffolds (e.g. NT_) and keep only chromosomes, as scaffolds create problems with matrix correction. Therefore we use the chromosome names (chr2R, chr2L, chr3R, chr3L, chrX) here.</p>
 
 <p>Matrix correction works in two steps: first a histogram containing the sum of contact per bin (row sum) is produced. This plot needs to be inspected to decide the best threshold for removing bins with lower number of reads. The second steps removes the low scoring bins and does the correction.</p>
 
@@ -355,7 +355,7 @@ A quality report is created in e.g. <code class="highlighter-rouge">hicMatrix/R1
   <h3 id="-hands-on-matrix-diagnostic"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Matrix diagnostic</h3>
 
   <ol>
-    <li><strong>hicCorrectMatrix</strong> <i class="fa fa-wrench" aria-hidden="true"></i>: Run hicCorrectMatrix adjusting the parameters:
+    <li><strong>hicCorrectMatrix</strong> <i class="fa fa-wrench" aria-hidden="true"></i>: Run hicCorrectMatrix on the output from hicBuildMatrix adjusting the parameters:
       <ul>
         <li>“Range restriction (in bp)” to <code class="highlighter-rouge">Diagnostic plot</code></li>
         <li>“Chromosomes to include (and order to plot in)” to <code class="highlighter-rouge">chr2L</code></li>
@@ -377,7 +377,7 @@ A quality report is created in e.g. <code class="highlighter-rouge">hicMatrix/R1
   <h3 id="-hands-on-matrix-correction"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Matrix correction</h3>
 
   <ol>
-    <li><strong>hicCorrectMatrix</strong> <i class="fa fa-wrench" aria-hidden="true"></i>: Run hicCorrectMatrix on the output from previous step adjusting the parameters:
+    <li><strong>hicCorrectMatrix</strong> <i class="fa fa-wrench" aria-hidden="true"></i>: Run hicCorrectMatrix on the original matrix (not the one with merged bins) adjusting the parameters:
       <ul>
         <li>“Range restriction (in bp)” to <code class="highlighter-rouge">Correct matrix plot</code></li>
         <li>“Normalize each chromosome separately” to <code class="highlighter-rouge">True</code></li>
@@ -400,11 +400,11 @@ A quality report is created in e.g. <code class="highlighter-rouge">hicMatrix/R1
 This is often caused by bins of low counts. Use a more stringent filtering of bins.
 </code></pre></div></div>
 
-<p>This can be solved by a more stringent z-score values for the filter threshold or by a look at the plotted matrix. For example, chromosome Y is often has more or less 0 counts in its bins. Chromosomes like that can be excluded from the correction by not defining it for the set of chromosomes that should be corrected (parameter ‘Include chromosomes’).</p>
+<p>This can be solved by a more stringent z-score values for the filter threshold or by a look at the plotted matrix. For example, chromosomes with 0 reads in its bins can be excluded from the correction by not defining it for the set of chromosomes that should be corrected (parameter ‘Include chromosomes’).</p>
 
 <h3 id="plotting-the-corrected-hi-c-matrix">Plotting the corrected Hi-C matrix</h3>
 
-<p>We can now plot the one of the chromosomes (e.g. chromosome 2L) , with the corrected matrix.</p>
+<p>We can now plot chromosome 2L with the corrected matrix.</p>
 
 <blockquote class="hands_on">
   <h3 id="-hands-on-plotting-the-corrected-hi-c-matrix"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Plotting the corrected Hi-C matrix</h3>
@@ -412,7 +412,7 @@ This is often caused by bins of low counts. Use a more stringent filtering of bi
   <ol>
     <li><strong>hicPlotMatrix</strong> <i class="fa fa-wrench" aria-hidden="true"></i>: Run hicPlotMatrix on the corrected matrix adjusting the parameters:
       <ul>
-        <li>“Plot title” to <code class="highlighter-rouge">Hi-C matrix for dm6</code></li>
+        <li>“Plot title” to <code class="highlighter-rouge">Hi-C matrix for dm3</code></li>
         <li>“Plot per chromosome” to <code class="highlighter-rouge">False</code></li>
         <li>“Plot only this region” to <code class="highlighter-rouge">chr2L</code></li>
         <li>“Plot the log1p of the matrix values” to <code class="highlighter-rouge">True</code></li>
@@ -426,7 +426,7 @@ This is often caused by bins of low counts. Use a more stringent filtering of bi
 
 <p>“The partitioning of chromosomes into topologically associating domains (TADs) is an emerging concept that is reshaping our understanding of gene regulation in the context of physical organization of the genome” <a href="https://doi.org/10.1101/115063">Ramirez et al. 2017</a>.</p>
 
-<p>TAD calling works in two steps: First HiCExplorer computes a TAD-separation score based on a z-score matrix for all bins. Then those bins having a local minimum of the TAD-separation score are evaluated with respect to the surrounding bins to decide assign a p-value. Then a cutoff is applied to select the bins more likely to be TAD boundaries.</p>
+<p>TAD calling works in two steps: First HiCExplorer computes a TAD-separation score based on a z-score matrix for all bins. Then those bins having a local minimum of the TAD-separation score are evaluated with respect to the surrounding bins to assign a p-value. Then a cutoff is applied to select the bins more likely to be TAD boundaries.</p>
 
 <p><a href="http://hicexplorer.readthedocs.io/en/latest/content/tools/hicFindTADs.html#hicfindtads">hicFindTADs</a> tries to identify sensible parameters but those can be change to identify more stringent set of boundaries.</p>
 
@@ -460,7 +460,7 @@ This is often caused by bins of low counts. Use a more stringent filtering of bi
       <ul>
         <li>“Region of the genome to limit the operation” to <code class="highlighter-rouge">chr2L:1000000-5000000</code></li>
         <li>“Choose style of the track” to <code class="highlighter-rouge">TAD visualization</code></li>
-        <li>“Plot title” to <code class="highlighter-rouge">HiC dm6 chr2L:1000000-5000000</code></li>
+        <li>“Plot title” to <code class="highlighter-rouge">HiC dm3 chr2L:1000000-5000000</code></li>
         <li>“Matrix to compute on.” to the corrected matrix from hicCorrectMatrix step</li>
         <li>“Depth” to <code class="highlighter-rouge">2000000</code></li>
         <li>“Plotting type” to <code class="highlighter-rouge">interaction</code></li>
@@ -469,12 +469,12 @@ This is often caused by bins of low counts. Use a more stringent filtering of bi
         <li>“+Insert Include tracks in your plot”</li>
         <li>“Choose style of the track” to <code class="highlighter-rouge">TAD score</code></li>
         <li>“Plot title” to <code class="highlighter-rouge">TAD separation score</code></li>
-        <li>“Track file bedgraph format” to the output from previous step</li>
+        <li>“Track file bedgraph format” to the output from hicFindTADs step</li>
         <li>“Color of track” to blue</li>
         <li>“Width” to <code class="highlighter-rouge">2</code></li>
         <li>“+Insert Include tracks in your plot”</li>
         <li>“Choose style of the track” to <code class="highlighter-rouge">Gene track</code></li>
-        <li>“Plot title” to <code class="highlighter-rouge">dm6 genes</code></li>
+        <li>“Plot title” to <code class="highlighter-rouge">dm3 genes</code></li>
         <li>“Track file bedgraph format” the imported .bed file</li>
         <li>“Width” to <code class="highlighter-rouge">5</code></li>
         <li>“Plot labels” to <code class="highlighter-rouge">No</code></li>
