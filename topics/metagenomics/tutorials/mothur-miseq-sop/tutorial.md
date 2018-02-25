@@ -39,10 +39,9 @@ In this tutorial we use 16S rRNA data, but similar pipelines can be used for WGS
 >
 > The 16S rRNA gene has several properties that make it ideally suited for our purposes
 >
-> 1. Present in all living organisms
-> 2. Single copy (no recombination)
-> 3. Highly conserved + highly variable regions
-> 4. Huge reference databases
+> 1. Present in all prokaryotes
+> 2. Highly conserved + highly variable regions
+> 3. Huge reference databases
 >
 > ![16S Variable regions](../../images/16S_variableregions.jpg)
 >
@@ -659,7 +658,7 @@ We can now cluster the mock sequences into OTUs to see how many spurious OTUs we
 > In 16S metagenomics approaches, OTUs are clusters of similar sequence variants of the 16S rDNA marker gene
 > sequence. Each of these clusters is intended to represent a taxonomic unit of a bacteria species or genus
 > depending on the sequence similarity threshold. Typically, OTU cluster are defined by a 97% identity
-> threshold of the 16S gene sequence variants at genus level. 98% or 99% identity is suggested for species
+> threshold of the 16S gene sequence variants at species level. 98% or 99% identity is suggested for strain
 > separation.
 >
 > ![OTU graph](../../images/OTU_graph.png)
@@ -978,7 +977,7 @@ repeated-measures ANOVA and find that there was no significant difference based 
 
 Beta diversity is a measure of the similarity of the membership and structure found between *different* samples.
 The default calculator in the following section is *thetaYC*, which is the [Yue & Clayton theta similarity
-coefficient](http://www.tandfonline.com/doi/abs/10.1080/STA-200066418)
+coefficient](https://doi.org/10.1080/STA-200066418)
 
 > ### {% icon hands_on %} Hands-on: Beta diversity
 >
