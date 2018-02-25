@@ -32,15 +32,15 @@ tutorial_name: galaxy-intro-peaks2genes
 
 まずは Galaxy を開いてログインまたは登録しましょう。
 
-Galaxyのインタフェースは以下のような3つの部分によって主に構成されています。左側が使用できるツールを並べたリストで、解析のヒストリが右側に記録され、そして中央の枠がツールやデータセットを表示します。
+Galaxyのインタフェースは以下のような3つの部分によって主に構成されています。左側が使用できるツールを並べたリストで、解析のヒストリーが右側に記録され、そして中央の枠がツールやデータセットを表示します。
 
 ![Galaxy interface](../../images/galaxy_interface.png)
 
-それでは、新しいヒストリーを使ってチュートリアルを始めましょう。
+それでは、新しいヒストリーを使って始めましょう。
 
 > ### {% icon hands_on %} ハンズオン:ヒストリーを作成する
 >
-> 1. 何も解析していない空のヒストリーがあることを確認する
+> 1. 空の解析ヒストリーがあることを確認する
 >
 >    > ### {% icon tip %} ヒストリーを新規作成する
 >    >
@@ -66,13 +66,13 @@ Galaxyのインタフェースは以下のような3つの部分によって主�
 
 > ### {% icon hands_on %} ハンズオン:データをアップロードする
 >
-> 1.  [GEO](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE37268)からピーク領域のリスト(ファイルはこちら [`GSE37268_mof3.out.hpeak.txt.gz`](https://www.ncbi.nlm.nih.gov/geo/download/?acc=GSE37268&format=file&file=GSE37268%5Fmof3%2Eout%2Ehpeak%2Etxt%2Egz))をPCにダウンロードする 
+> 1.  [GEO](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE37268)からピーク領域のリスト(ファイルはこちら [`GSE37268_mof3.out.hpeak.txt.gz`](https://www.ncbi.nlm.nih.gov/geo/download/?acc=GSE37268&format=file&file=GSE37268%5Fmof3%2Eout%2Ehpeak%2Etxt%2Egz))をコンピュータにダウンロードする 
 > 2. インタフェースの左上にあるアップロードボタンをクリックする
 >
 >    ![Upload icon](../../images/upload_button.png)
 >
 >
-> 3. **Choose local file** を選択し、ダウンロードしたファイルを探す
+> 3. **Choose local file** を押し、ダウンロードしたファイルを探す
 >
 > 4. **Type** を `interval`にする
 >
@@ -81,7 +81,7 @@ Galaxyのインタフェースは以下のような3つの部分によって主�
 >     Galaxy が自動でファイルを展開する。
 >
 >     > ### {% icon comment %} コメント
->     > アップロードするとGalaxyの右パネルに以下のようにヒストリーの項目が表示されます。このヒストリーは、
+>     > アップロードするとGalaxyの右枠に以下のようにヒストリーの項目が表示されます。このヒストリーは、
 >     > 灰色(準備中)→黄色(実行中)→緑色(完了)と色が変わります。:
 >     >
 >     > ![History section](../../images/intro_01.png)
@@ -123,7 +123,7 @@ UCSCから手に入る、マウスの遺伝子のリストが他に必要とな�
 >
 >     ![UCSC Main tool in tools section](../../images/101_01.png)
 >
->     **UCSC table browser** に進むと、以下のような画面が現れます。:
+>     **UCSC table browser** に進むと、以下のような画面が現れる:
 >
 >     ![UCSC table browser interface](../../images/intro_02.png)
 >
@@ -144,30 +144,30 @@ UCSCから手に入る、マウスの遺伝子のリストが他に必要とな�
 >
 >    ![Output settings](../../images/intro_03.png)
 >
-> 4. **Create one BED record per** の欄を見て、 `Whole Gene` がチェックされているかを確認した後、 **Send Query to Galaxy** ボタンをクリックする
+> 4. **Create one BED record per** の欄で `Whole Gene` がチェックされているかを確認した後、 **Send Query to Galaxy** ボタンをクリックする
 >
-> 5. Rename our dataset to something more recognizable
->    - Click on the **pencil icon** to edit a file's attributes.
+> 5. データセットの名前をより分かりやすいものに変更する
+>    - ファイルの属性を編集するには**鉛筆アイコン**をクリックする
 >      ![Pencil icon](../../images/edit_icon.png)
->    - In the next screen change the name of the dataset to `Genes`.
->    - Click the **Save** button at the bottom of the screen.
+>    - 次の画面でデータセットの名前を `Genes` に変える
+>    - 画面下にある **Save** ボタンをクリックする
 >
 {: .hands_on}
 
 > ### {% icon comment %} BEDファイル形式について
-> **BED - Browser Extensible Data** 形式は遺伝子をコード化する領域を上手く表示する形式です。BEDラインには以下の3つの位置情報が必要です。:
+> **BED - Browser Extensible Data** 形式は遺伝子領域をコード化する柔軟な方法を提供します。BEDラインには以下の3つの位置情報が必要です。:
 > - 染色体のID
-> - 染色体や足場での塩基の開始地点 (最初の塩基を0とする)
+> - 開始地点 (最初の塩基を0とする)
 > - 終了地点 (最後の塩基を除く)
 >
-> この3つの必須な位置情報に加えて最大9つのオプションの位置情報がありますが、1行あたりの位置情報の数は1つのデータセット全体を通して統一しなければなりません。
+> これらの位置情報に加えて最大9つのオプションの位置情報がありますが、1行あたりの位置情報の数は1つのデータセット全体を通して統一しなければなりません。
 >
-> オプションの位置情報の内容も含めたBEDのより詳しい情報は[UCSC](https://genome.ucsc.edu/FAQ/FAQformat#format1) で得ることができます。
+> オプションの位置情報の内容も含めたより詳しい情報は[UCSC](https://genome.ucsc.edu/FAQ/FAQformat#format1) で得ることができます。
 {: .comment}
 
 これで、解析を開始するために必要なすべてのデータを揃えることができました。
 
-# Part 1: 基本的なやり方
+# Part 1: 基本的なアプローチ
 
 ## ファイルの準備
 
