@@ -11,7 +11,7 @@ Variant calling is the process of identifying differences between two genome sam
 
 Imagine that you have been asked to find the differences between a sample that has been sequenced and a known genome. For example: You have a new sample from a patient and you want to see if it has any differences from a well known reference genome of the same species. Typically, you would have a couple of fastq read files sent back to you from the sequencing provider and either an annotated or non annotated reference genome.
 
-In this tutorial, we will use the tool “Snippy” (link to Snippy is [here](https://github.com/tseemann/snippy)) to find high confidence differences (indels or snps) between our known genome and our reads. Snippy uses one tool to align the reads to the reference genome, and another tool to decide (“call”) if any of the resulting discrepancies are real variants or technical artifacts that can be ignored. Finally, Snippy uses another tool to check what effect these differences have on the predicted genes - truncation, frame shift or if the changes are synonomous.
+In this tutorial, we will use the tool “Snippy” (link to Snippy is [here](https://github.com/tseemann/snippy)) to find high confidence differences (indels or SNPs) between our known genome and our reads. Snippy uses one tool to align the reads to the reference genome, and another tool to decide (“call”) if any of the resulting discrepancies are real variants or technical artifacts that can be ignored. Finally, Snippy uses another tool to check what effect these differences have on the predicted genes - truncation, frame shift or if the changes are synonomous.
 
 For the read alignment (read mapping) step, Snippy uses BWA MEM with a custom set of settings which are very suitable to aligning reads for microbial type data. For the variant calling step, Smippy uses Freebayes with a custom set of settings. snpeff is then used to describe what the predicted changes do in terms of the genes themselves.
 
@@ -40,10 +40,10 @@ We have used a whole genome shotgun approach to produce a set of short sequence 
 
 The files we will be using are:
 
-- mutant_R1.fastq & mutant_R2.fastq - the read files in fastq format.
-- wildtype.fna - The sequence of the reference strain in fasta format.
-- wildtype.gbk - The reference strain with gene and other annotations in genbank format.
-- wildtype.gff - The reference strain with gene and other annotations in gff3 format.
+- `mutant_R1.fastq` & `mutant_R2.fastq` - the read files in fastq format.
+- `wildtype.fna` - The sequence of the reference strain in fasta format.
+- `wildtype.gbk` - The reference strain with gene and other annotations in genbank format.
+- `wildtype.gff` - The reference strain with gene and other annotations in gff3 format.
 
 This data is available at Zenodo using the following [link](https://doi.org/10.5281/zenodo.582600).
 
@@ -88,7 +88,7 @@ We have an annotated reference and so will use it in this case.
 >   - "Cleanup the non-snp output files" to `No`
 {: .hands_on}
 
-## Step 3: Examine Snippy output
+## Section 3: Examine Snippy output
 
 Snippy has taken the reads, mapped them against the reference using BWA MEM, looked through the resulting BAM file and found differences using some fancy Bayesian statistics (Freebayes), filtered the differences for sensibility and finally checked what effect these differences will have on the predicted genes and other features in the genome.
 
@@ -99,9 +99,9 @@ Filename | Description
 snps vcf file | The final annotated variants in VCF format
 snps gff file | The variants in GFF3 format
 snps table | A simple tab-separated summary of all the variants
-snps summary  | A summary of the snps called
+snps summary  | A summary of the SNPs called
 log file  | A log file with the commands run and their outputs
-aligned fasta | A version of the reference but with - at position with depth=0 and N for 0 < depth < --mincov **(does not have variants)** 
+aligned fasta | A version of the reference but with - at position with depth=0 and N for 0 < depth < --mincov **(does not have variants)**
 consensus fasta | A version of the reference genome with all variants instantiated
 mapping depth | A table of the mapping depth
 mapped reads bam  | A bam file containing all of the mapped reads
@@ -114,11 +114,11 @@ We will now have a look at the contents of the snp table file.
 > 1. Inspect the `snippy on data XX, data XX and data XX table` file by clicking on the eye icon
 >    
 >     You can see a list of variants
-> 
+>
 > 2. Look in **column 3** to which types the variants are, such as a SNP or a deletion
 > 3. Look at the third variant called
 >
->     This is a T&rarr;A mutation, causing a stop codon. 
+>     This is a T&rarr;A mutation, causing a stop codon.
 >
 > 4. Look at **column 14**
 >
@@ -135,9 +135,9 @@ We will now have a look at the contents of the snp table file.
 >    {: .question}
 {: .hands_on}
 
-# Step 3: View Snippy output in JBrowse
+# Section 4: View Snippy output in JBrowse
 
-We could go through all of the variants like this and read them out of a text table, but this is onerous and doesn't really give the context of the changes very well. It would be much nicer to have a visualisation of the snps and the other relevant data. In Galaxy we can use a tool called JBrowse.
+We could go through all of the variants like this and read them out of a text table, but this is onerous and doesn't really give the context of the changes very well. It would be much nicer to have a visualisation of the SNPs and the other relevant data. In Galaxy we can use a tool called JBrowse.
 
 > ### {% icon hands_on %} Hands-on: Inspecting the SNPs using JBrowse
 >
@@ -180,7 +180,7 @@ We could go through all of the variants like this and read them out of a text ta
 >               - "Track Visibility" to `On for new users`
 >
 >    A new file will be created in your history, this contains the JBrowse interactive visualisation. We will now view it's contents and play with it
-> 
+>
 > 2. Inspect the `JBrowse on data XX and data XX - Complete` file by clicking on the eye icon
 >
 >    The JBrowse window will appear in the centre Galaxy panel.
@@ -189,7 +189,7 @@ We could go through all of the variants like this and read them out of a text ta
 >    1. Click on the tick boxes on the left to display the tracks
 >    1. Zoom out by clicking on the `minus` button to see sequence reads and their coverage (the grey graph)
 >    1. Zoom in by clicking on the `plus` button to see
->       - probable real variants (a whole column of snps)
+>       - probable real variants (a whole column of SNPs)
 >       - probable errors (single one here and there)
 >
 >    ![JBrowse screenshot](../../images/jbrowse1.png "Screenshot of JBrowse")
