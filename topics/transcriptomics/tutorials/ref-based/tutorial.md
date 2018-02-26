@@ -44,7 +44,7 @@ We have extracted sequences from the Sequence Read Archive (SRA) files to build 
 >       - `GSM461177` (untreated)
 >       - `GSM461180` (treated)
 >
->       To import the files, there is 2 options:
+>       To import the files, there are two options:
 >       - Option 1: From a shared data library if available (ask your instructor)
 >       - Option 2: From [Zenodo](https://dx.doi.org/10.5281/zenodo.290221)
 >
@@ -82,14 +82,16 @@ We have extracted sequences from the Sequence Read Archive (SRA) files to build 
 >    > ### {% icon tip %} Tip: Adding a tag
 >    > * Click on the dataset
 >    > * Click on **Edit dataset tags**
->    > * Add the tag: always starting with `#`
+>    > * Add the tag starting with `#`
+>    >    
+>    >     The tags starting with `#` will be automatically propagated to the outputs of tools using this dataset.
+>    >  
 >    > * Check that the tag is apparing below the dataset name
 >    > 
->    > These tags will propagate to the outputs of tools running using this dataset.
 >    {: .tip}
 {: .hands_on}
 
-The sequences are raw sequences from the sequencing machine, without any pretreatments. They need to be controlled for their quality.
+The sequences are raw sequences from the sequencing machine, without any pretreatments. They need to be investigated for their quality.
 
 ## Quality control
 
@@ -120,7 +122,7 @@ For quality control, we use similar tools as described in [NGS-QC tutorial]({{si
 >    >    </details>
 >    {: .question}
 >
-> 3. **MultiQC** {% icon tool %}: Aggregate the FastQC report with
+> 3. **MultiQC** {% icon tool %}: Aggregate the FastQC reports with
 >      - "Which tool was used generate logs?" to `FastQC`
 >      - "Type of FastQC output?" to `Raw data`
 >      - "FastQC output" to the generated `Raw data` files (multiple datasets)
@@ -129,12 +131,11 @@ For quality control, we use similar tools as described in [NGS-QC tutorial]({{si
 >
 >    > ### {% icon question %} Questions
 >    >
->    > 1. How is the quality score for the different files?
+>    > What is the quality for the sequences for the different files?
 >    >
 >    >    <details>
 >    >    <summary>Click to view answers</summary>
->    >    <ol type="1">
->    >    <li>Everything seems ok for 3 of the files. But for GSM461180_2, the quality seems to decrease quite a lot at the end of the sequences</li>
+>    >    Everything seems ok for 3 of the files. But for GSM461180_2, the quality seems to decrease quite a lot at the end of the sequences
 >    >    </details>
 >    {: .question}
 >
@@ -145,7 +146,7 @@ For quality control, we use similar tools as described in [NGS-QC tutorial]({{si
 >
 >    > ### {% icon question %} Questions
 >    >
->    > Why is Trim Galore run once on the paired-end dataset and not twice on each dataset?
+>    > Why do we run Trim Galore! only once on a paired-end dataset and not twice, once for each dataset?
 >    >
 >    > <details>
 >    > <summary>Click to view answers</summary>
@@ -166,7 +167,7 @@ To make sense of the reads, we need to determine to which genes they belong. The
 > Do you want to learn more about the principles behind mapping? Follow our [training]({{site.baseurl}}/topics/sequence-analysis/)
 {: .comment}
 
-In eukaryotic genomes, genes contain introns and reads sequenced from mature mRNA transcripts do not include these introns. A solution is to map the reads on a reference transcriptome. But the transcriptomes are incomplete even for well-studied species such as human and mouse. RNA-Seq analyses are forced to map to the reference genome as a proxy for the transcriptome. RNA-seq alignment programs must be able to handle gapped (or spliced) alignment with very large gaps. The reads must be separated into several categories:
+Because in the case of a eukaryotic transcriptome, most reads originate from processed mRNAs lacking introns, they cannot be simply mapped back to the genome as we normally do for DNA data. Instead the reads must be separated into two categories:
 
 - Reads that map entirely within exons
 - Reads that cannot be mapped within an exon across their entire length because they span two or more exons
@@ -178,16 +179,17 @@ Spliced mappers have been developed to efficiently map transcript-derived reads 
 ![Splice-aware alignment](../../images/splice_aware_alignment.png "Principle of spliced mappers: (1) identification of the reads spanning a single exon, (2) identification of the splicing junctions on the unmapped reads")
 
 <details>
-<summary>Click for more details on the different assemblers</summary>
-<p><a hef="https://ccb.jhu.edu/software/tophat/index.shtml">TopHat</a> (<a href="https://academic.oup.com/bioinformatics/article/25/9/1105/203994">Trapnell et al, Bioinformatics, 2009</a>) was one of the first tools designed specifically to address this problem by identifying potential exons using reads that do map to the genome, generating possible splices between neighboring exons, and comparing reads that did not initially map to the genome agaisnt these in silico created junctions.</p>
+<summary>Click for more details on the difference spliced mappers</summary>
 
-![Kim et al.](../../images/tophat.png "TopHat (Trapnell et al, Bioinformatics, 2009)")
+<p>Several spliced mappers have been developed over the year specially with the explosion of RNA-seq data.</p>
 
-<p>In TopHat reads are mapped against the genome and are separated into two categories: (1) those that map, and (2) those that initially unmapped (IUM). "Piles" of reads representing potential exons are extended in search of potential donor/acceptor splice sites and potential splice junctions are reconstructed. IUMs are then mapped to these junctions.</p>
+<p><a hef="https://ccb.jhu.edu/software/tophat/index.shtml">TopHat</a> (<a href="https://academic.oup.com/bioinformatics/article/25/9/1105/203994">Trapnell et al, Bioinformatics, 2009</a>) was one of the first tools designed specifically to address this problem. In TopHat reads are mapped against the genome and are separated into two categories: (1) those that map, and (2) those that initially unmapped (IUM). "Piles" of reads representing potential exons are extended in search of potential donor/acceptor splice sites and potential splice junctions are reconstructed. IUMs are then mapped to these junctions.</p>
+
+![TopHat](../../images/tophat.png "TopHat (Trapnell et al, Bioinformatics, 2009)")
 
 <p>TopHat has been subsequently improved with the development of TopHat2 (<a href="https://genomebiology.biomedcentral.com/articles/10.1186/gb-2013-14-4-r36">Kim et al, Genome Biology, 2013</a>):</p>
 
-![Kim et al.](../../images/13059_2012_Article_3053_Fig6_HTML.jpg "TopHat2 (Kim et al, Genome Biology, 2013)")
+![TopHat2](../../images/13059_2012_Article_3053_Fig6_HTML.jpg "TopHat2 (Kim et al, Genome Biology, 2013)")
 
 <p>To further optimize and speed up spliced read alignment Kim et al (<a href="https://www.nature.com/articles/nmeth.3317">Nat Methods, 2015</a>) developed <a href="https://ccb.jhu.edu/software/hisat2/index.shtml">HISAT</a>. It uses a set of <a href="https://en.wikipedia.org/wiki/FM-index">FM-indices</a> consisting one global genome-wide index and a collection of ~48,000 local overlapping 42 kb indices (~55,000 56 kb indices in HISAT2). This allows to find initial seed locations for potential read alignments in the genome using global index and to rapidly refine these alignments using a corresponding local index:</p>
 
@@ -226,7 +228,7 @@ We will map our RNA reads to the *Drosophila melanogaster* genome using STAR.
 >
 >        This parameter should be length of reads - 1
 >
-> 3. **MultiQC** {% icon tool %}: Aggregate the STAR log with
+> 3. **MultiQC** {% icon tool %}: Aggregate the STAR logs with
 >      - "Which tool was used generate logs?" to `STAR`
 >      - "Type of FastQC output?" to `Log`
 >      - "STAR log output" to the generated `log` files (multiple datasets)
@@ -358,7 +360,7 @@ To compare the expression of single genes between different conditions (*e.g.* w
 
 ![Counting the number of reads per annotated gene](../../images/gene_counting.png "Counting the number of reads per annotated gene")
 
-Two main tools could be used for that: [HTSeq-count](http://htseq.readthedocs.io/en/release_0.9.1/count.html) ([Anders et al, Bioinformatics, 2015](https://academic.oup.com/bioinformatics/article/31/2/166/2366196)) or featureCounts ([Liao et al, Bioinformatics, 2014](https://academic.oup.com/bioinformatics/article/31/2/166/2366196)). The second one is considerably faster and requires far less computer memory. We will use it.
+Two main tools could be used for that: [HTSeq-count](http://htseq.readthedocs.io/en/release_0.9.1/count.html) ([Anders et al, Bioinformatics, 2015](https://academic.oup.com/bioinformatics/article/31/2/166/2366196)) or featureCounts ([Liao et al, Bioinformatics, 2014](https://academic.oup.com/bioinformatics/article/31/2/166/2366196)). The second one is considerably faster and requires far less computational resources. We will use it.
 
 In principle, the counting of reads overlapping with genomic features is a fairly simple task. But there are some details that need to be given to featureCounts: for example the strandness...
 
@@ -374,9 +376,7 @@ Some library preparation protocols create so called *stranded* RNAseq libraries 
 
 ![Stranded RNAseq data look like this](../../images/stranded_result.png "How do stranded RNAseq data look like (image from GATC Biotech)")
 
-*This example contrasts unstranded and stranded RNAseq experiments. Red transcripts are from "+" strand and blue are from "-" strand. In stranded example reads are clearly stratified between the two strands. A small number of reads from opposite strand may represent anti-sense transcription.*
-
-Depending on the approach and whether one performs single- or paired-end sequencing there are multiple possibilities on how to interpret the results of mapping of these reads onto genome:
+Depending on the approach and whether one performs single- or paired-end sequencing there are multiple possibilities on how to interpret the results of mapping of these reads onto the genome:
 
 ![Effects of RNAseq library types](../../images/rnaseq_library_type.png "Effects of RNAseq library types (adapted from Sailfish documentation)")
 
@@ -387,7 +387,7 @@ In practice, with Illumina paired-end RNAseq protocols, you are unlikely to unco
 
 This information should usually come with your FASTQ files, ask your sequencing facility! If not, try to find them on the site where you downloaded the data or in the corresponding publication.
 
-Another option is to estimate these parameters with a tool called **Infer Experiment**. This tool takes the output of mapping, subsample a subset of reads, compare their genome coordinates and strands with those of the reference gene model (from an annotation file). Based on the strand of the genes, it can gauge whether sequencing is strand-specific, and if so, how reads are stranded.
+Another option is to estimate these parameters with a tool called **Infer Experiment**. This tool takes the output of your mappings (BAM files), takes a subsample of your reads and compares their genome coordinates and strands with those of the reference gene model (from an annotation file). Based on the strand of the genes, it can gauge whether sequencing is strand-specific, and if so, how reads are stranded.
 
 > ### {% icon hands_on %} Hands-on: Determining the library strandness
 >
@@ -623,7 +623,7 @@ Here treatment is the primary factor which we are interested in. The sequencing 
 
         This dispersion plot is typical, with the final estimates shrunk from the gene-wise estimates towards the fitted estimates. Some gene-wise estimates are flagged as outliers and not shrunk towards the fitted value. The amount of shrinkage can be more or less than seen here, depending on the sample size, the number of coefficients, the row mean and the variability of the gene-wise estimates.
 
-- A summary files with for each gene:
+- A summary file with the following values for each gene
 
     1.  Gene identifiers
     2.  Mean normalized counts, averaged over all samples from both conditions
@@ -753,16 +753,16 @@ You should obtain something similar to:
 
 > ### {% icon question %} Questions
 >
-> - Do you observe any tendency in the data?
-> - What is changing if we select `Plot the data as it is` in "Advanced - log transformation"?
-> - Can you generate an heatmap the normalized counts for the up-regulated genes with FC > 2?
+> 1. Do you observe any tendency in the data?
+> 2. What is changing if we select `Plot the data as it is` in "Advanced - log transformation"?
+> 3. Can you generate an heatmap the normalized counts for the up-regulated genes with FC > 2?
 >
 > <details>
 > <summary>Click to view answers</summary>
 > <ol type="1">    
->   <li></li>
->   <li></li>
->   <li></li>
+>   <li>The samples are clustering by treatment. The genes are also clustering based on the counts. 2 genes (FBgn0026562, FBgn00003360)</li>
+>   <li>The scale is changing and the differences between the genes are not visible anymore</li>
+>   <li>Extract the genes with logFC > 2 and run heatmap2 on the generated table</li>
 > </ol>
 > </details>
 {: .question}
@@ -829,7 +829,7 @@ We have now the two required files for goseq.
 >
 {: .hands_on}
 
-goseq generates a big table with for each GO terms:
+goseq generates a big table with the following columns for each GO term:
 1. `category`: GO category
 2. `over_rep_pval`: *p*-value for over representation of the term in the differentially expressed genes
 3. `under_rep_pval`: *p*-value for under representation of the term in the differentially expressed genes
