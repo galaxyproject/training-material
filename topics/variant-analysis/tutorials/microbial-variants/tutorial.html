@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Galaxy Training!</title>
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <link rel="stylesheet" href="/training-material/assets/css/font-awesome.css">
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+    </head>
+    <body>
+        
+
+
+
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/training-material/topics/variant-analysis" title="Go back to list of tutorials">
+                            <i class="fa fa-folder-o" aria-hidden="true"></i> Variant Analysis
+                        </a>
+                    </li>
+
+                    
+                        
+                        
+                        
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Introduction slides">
+                                    <i class="fa fa-slideshare" aria-hidden="true"></i> Introduction slides
+                                </a>
+                                <div class="dropdown-menu">
+                                    
+                                        
+                                            
+                                                <a class="dropdown-item" href="/training-material/topics/variant-analysis/slides/introduction.html">
+                                                    Introduction to Variant analysis
+                                                </a>
+                                            
+                                        
+                                    
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                </div>
+                            </li>
+                        
+                    
+
+                    
+
+                    
+
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://doi.org/10.5281/zenodo.582600" title="Links to data">
+                            <i class="fa fa-files-o" aria-hidden="true"></i> Input Dataset
+                        </a>
+                    </li>
+                    
+
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="/training-material/topics/variant-analysis#references" title="References">
+                            <i class="fa fa-book" aria-hidden="true"></i> Literature
+                        </a>
+                    </li>
+                    
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="fa fa-life-ring" aria-hidden="true"></i> Help
+    </a>
+    <div class="dropdown-menu">
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Chat on Gitter">
+            Gitter
+        </a>
+        <a class="dropdown-item" href="https://biostar.usegalaxy.org/" title="Ask on Biostars">
+            Biostars
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/galaxyproject/training-material/tree/master/topics/variant-analysis/tutorials/microbial-variants/tutorial.md">
+                            <i class="fa fa-github" aria-hidden="true"></i> Edit
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<div class="container main-content">
+    <section class="tutorial">
+        <h1>Microbial Variant Calling</h1>
+
+        <blockquote class="overview">
+            <h3>Overview</h3>
+
+            <strong><i class="fa fa-question-circle" aria-hidden="true"></i> Questions</strong>
+            <ul>
+            
+            <li>How do we detect differences between a set of reads from a microorganism and a reference genome</li>
+            
+            </ul>
+
+            <strong><i class="fa fa-bullseye" aria-hidden="true"></i> Objectives</strong>
+            <ul>
+            
+            <li>Find variants between a reference genome and a set of reads</li>
+            
+            <li>Visualise the SNP in context of the reads aligned to the genome</li>
+            
+            <li>Determine the effect of those variants on genomic features</li>
+            
+            <li>Understand if the SNP is potentially affecting the phenotype</li>
+            
+            </ul>
+
+            
+            <strong><i class="fa fa-check-circle" aria-hidden="true"></i> Requirements</strong>
+            <ul>
+            
+                <li>
+                    
+                    <a href="/training-material/topics//introduction/">Galaxy introduction</a>
+                    
+                </li>
+            
+                <li>
+                    
+                    <a href="/training-material/topics//sequence-analysis/">Quality control</a>
+                    
+                </li>
+            
+                <li>
+                    
+                    <a href="/training-material/topics//sequence-analysis/">Mapping</a>
+                    
+                </li>
+            
+            
+            </ul>
+            
+
+            <p><strong><i class="fa fa-hourglass-end" aria-hidden="true"></i> Time estimation:</strong> 45 min</p>
+        </blockquote>
+
+        <h1 class="no_toc" id="introduction">Introduction</h1>
+
+<p>Variant calling is the process of identifying differences between two genome samples. Usually differences are limited to single nucleotide polymorphisms (SNPs) and small insertions and deletions (indels). Larger structural variation such as inversions, duplications and large deletions are not typically covered by “variant calling”.</p>
+
+<p>Imagine that you have been asked to find the differences between a sample that has been sequenced and a known genome. For example: You have a new sample from a patient and you want to see if it has any differences from a well known reference genome of the same species. Typically, you would have a couple of fastq read files sent back to you from the sequencing provider and either an annotated or non annotated reference genome.</p>
+
+<p>In this tutorial, we will use the tool “Snippy” (link to Snippy is <a href="https://github.com/tseemann/snippy">here</a>) to find high confidence differences (indels or SNPs) between our known genome and our reads. Snippy uses one tool to align the reads to the reference genome, and another tool to decide (“call”) if any of the resulting discrepancies are real variants or technical artifacts that can be ignored. Finally, Snippy uses another tool to check what effect these differences have on the predicted genes - truncation, frame shift or if the changes are synonomous.</p>
+
+<p>For the read alignment (read mapping) step, Snippy uses BWA MEM with a custom set of settings which are very suitable to aligning reads for microbial type data. For the variant calling step, Smippy uses Freebayes with a custom set of settings. snpeff is then used to describe what the predicted changes do in terms of the genes themselves.</p>
+
+<p>The Galaxy wrapper for Snippy has the ability to change some of the underlying tool settings in the advanced section but it is not recommended.</p>
+
+<p>More can be read about SNP calling <a href="https://en.wikipedia.org/wiki/SNV_calling_from_NGS_data">here</a></p>
+
+<blockquote class="agenda">
+  <h3 id="agenda">Agenda</h3>
+
+  <p>In this tutorial, we will deal with:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#section-1-get-the-data" id="markdown-toc-section-1-get-the-data">Section 1: Get the data</a></li>
+  <li>
+<a href="#section-2-find-variants-with-snippy" id="markdown-toc-section-2-find-variants-with-snippy">Section 2: Find variants with Snippy</a>    <ol>
+      <li><a href="#section-3-examine-snippy-output" id="markdown-toc-section-3-examine-snippy-output">Section 3: Examine Snippy output</a></li>
+    </ol>
+  </li>
+  <li><a href="#section-4-view-snippy-output-in-jbrowse" id="markdown-toc-section-4-view-snippy-output-in-jbrowse">Section 4: View Snippy output in JBrowse</a></li>
+</ol>
+
+</blockquote>
+
+<h1 id="section-1-get-the-data">Section 1: Get the data</h1>
+
+<p>The data for today is a subset of a real dataset from a Staphylococcus aureus bacteria.
+We have a closed genome sequence and an annotation for our “wildtype” strain.
+We have used a whole genome shotgun approach to produce a set of short sequence reads on an Illumina DNA sequencing instrument for our mutant strain.</p>
+
+<ul>
+  <li>The reads are paired-end</li>
+  <li>Each read is on average 150 bases</li>
+  <li>The reads would cover the original wildtype genome to a depth of 19x</li>
+</ul>
+
+<p>The files we will be using are:</p>
+
+<ul>
+  <li>
+<code class="highlighter-rouge">mutant_R1.fastq</code> &amp; <code class="highlighter-rouge">mutant_R2.fastq</code> - the read files in fastq format.</li>
+  <li>
+<code class="highlighter-rouge">wildtype.fna</code> - The sequence of the reference strain in fasta format.</li>
+  <li>
+<code class="highlighter-rouge">wildtype.gbk</code> - The reference strain with gene and other annotations in genbank format.</li>
+  <li>
+<code class="highlighter-rouge">wildtype.gff</code> - The reference strain with gene and other annotations in gff3 format.</li>
+</ul>
+
+<p>This data is available at Zenodo using the following <a href="https://doi.org/10.5281/zenodo.582600">link</a>.</p>
+
+<blockquote class="hands_on">
+  <h3 id="-hands-on-get-the-data">
+<i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Get the data</h3>
+
+  <ol>
+    <li>Import all of the following files into a new history:
+      <ul>
+        <li><a href="https://zenodo.org/record/582600/files/mutant_R1.fastq">mutant_R1.fastq</a></li>
+        <li><a href="https://zenodo.org/record/582600/files/mutant_R2.fastq">mutant_R2.fastq</a></li>
+        <li><a href="https://zenodo.org/record/582600/files/wildtype.fna">wiltype.fna</a></li>
+        <li><a href="https://zenodo.org/record/582600/files/wildtype.gbk">wiltype.gbk</a></li>
+        <li><a href="https://zenodo.org/record/582600/files/wildtype.gff">wiltype.gff</a></li>
+      </ul>
+    </li>
+  </ol>
+
+  <blockquote class="tip">
+    <h3 id="-tip-importing-data-via-links">
+<i class="fa fa-lightbulb-o" aria-hidden="true"></i> Tip: Importing data via links</h3>
+
+    <ul>
+      <li>Copy the link location</li>
+      <li>Open the Galaxy Upload Manager</li>
+      <li>Select <strong>Paste/Fetch Data</strong>
+</li>
+      <li>Paste the link into the text field</li>
+      <li>Press <strong>Start</strong>
+</li>
+    </ul>
+  </blockquote>
+
+</blockquote>
+
+<p>Your history pane should look like this after you have uploaded all of the data:</p>
+
+<p><img src="../../images/micro-start-history.png" alt="micro-start-history.png"></p>
+
+<h1 id="section-2-find-variants-with-snippy">Section 2: Find variants with Snippy</h1>
+
+<p>We will now run the Snippy tool on our reads, comparing it to the reference. If we give Snippy an annotated reference, it will silently run a tool called snpeff which will figure out the effect of any changes on the genes and other features. If we just give Snippy the reference sequence alone without the annotations, it will not run snpeff.</p>
+
+<p>We have an annotated reference and so will use it in this case.</p>
+
+<blockquote class="hands_on">
+  <h3 id="-hands-on-run-snippy">
+<i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Run Snippy</h3>
+
+  <ol>
+    <li>Search for <strong>Snippy</strong> <i class="fa fa-wrench" aria-hidden="true"></i> and run it with the following parameters
+      <ul>
+        <li>“Reference type” to <code class="highlighter-rouge">Genbank</code>
+</li>
+        <li>“Reference Genbank” to the <code class="highlighter-rouge">wildtype.gbk</code> file</li>
+        <li>“Single or Paired-end reads” to <code class="highlighter-rouge">Paired</code>
+</li>
+        <li>“Select first set of reads” to <code class="highlighter-rouge">mutant_R1.fastq</code>
+</li>
+        <li>“Select second set of reads” to <code class="highlighter-rouge">mutant_R2.fastq</code>
+</li>
+        <li>“Cleanup the non-snp output files” to <code class="highlighter-rouge">No</code>
+</li>
+      </ul>
+    </li>
+  </ol>
+</blockquote>
+
+<h2 id="section-3-examine-snippy-output">Section 3: Examine Snippy output</h2>
+
+<p>Snippy has taken the reads, mapped them against the reference using BWA MEM, looked through the resulting BAM file and found differences using some fancy Bayesian statistics (Freebayes), filtered the differences for sensibility and finally checked what effect these differences will have on the predicted genes and other features in the genome.</p>
+
+<p>It produces quite a bit of output, there can be up to 10 output files.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Filename</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>snps vcf file</td>
+      <td>The final annotated variants in VCF format</td>
+    </tr>
+    <tr>
+      <td>snps gff file</td>
+      <td>The variants in GFF3 format</td>
+    </tr>
+    <tr>
+      <td>snps table</td>
+      <td>A simple tab-separated summary of all the variants</td>
+    </tr>
+    <tr>
+      <td>snps summary</td>
+      <td>A summary of the SNPs called</td>
+    </tr>
+    <tr>
+      <td>log file</td>
+      <td>A log file with the commands run and their outputs</td>
+    </tr>
+    <tr>
+      <td>aligned fasta</td>
+      <td>A version of the reference but with - at position with depth=0 and N for 0 &lt; depth &lt; –mincov <strong>(does not have variants)</strong>
+</td>
+    </tr>
+    <tr>
+      <td>consensus fasta</td>
+      <td>A version of the reference genome with all variants instantiated</td>
+    </tr>
+    <tr>
+      <td>mapping depth</td>
+      <td>A table of the mapping depth</td>
+    </tr>
+    <tr>
+      <td>mapped reads bam</td>
+      <td>A bam file containing all of the mapped reads</td>
+    </tr>
+    <tr>
+      <td>outdir</td>
+      <td>A tarball of the Snippy output directory for inout into Snippy-core if required</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>We will now have a look at the contents of the snp table file.</p>
+
+<blockquote class="hands_on">
+  <h3 id="-hands-on-view-the-snps">
+<i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: View the SNPs</h3>
+
+  <ol>
+    <li>
+      <p>Inspect the <code class="highlighter-rouge">snippy on data XX, data XX and data XX table</code> file by clicking on the eye icon</p>
+
+      <p>You can see a list of variants</p>
+    </li>
+    <li>Look in <strong>column 3</strong> to which types the variants are, such as a SNP or a deletion</li>
+    <li>
+      <p>Look at the third variant called</p>
+
+      <p>This is a T→A mutation, causing a stop codon.</p>
+    </li>
+    <li>
+      <p>Look at <strong>column 14</strong></p>
+
+      <p>The product of this gene is a methicillin resistance protein. Methicillin is an antibiotic.</p>
+
+      <blockquote class="question">
+        <h3 id="question-question">
+<img class="emoji" title=":question:" alt=":question:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2753.png" height="20" width="20"> Question</h3>
+
+        <p>What might be the result of such a mutation?</p>
+
+        <details>
+<summary>Click to view answers</summary>
+This will cause a truncation in the Methicillin gene and a loss of resistance in the organism.
+</details>
+      </blockquote>
+    </li>
+  </ol>
+</blockquote>
+
+<h1 id="section-4-view-snippy-output-in-jbrowse">Section 4: View Snippy output in JBrowse</h1>
+
+<p>We could go through all of the variants like this and read them out of a text table, but this is onerous and doesn’t really give the context of the changes very well. It would be much nicer to have a visualisation of the SNPs and the other relevant data. In Galaxy we can use a tool called JBrowse.</p>
+
+<blockquote class="hands_on">
+  <h3 id="-hands-on-inspecting-the-snps-using-jbrowse">
+<i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Inspecting the SNPs using JBrowse</h3>
+
+  <ol>
+    <li>Search for <strong>JBrowse</strong> <i class="fa fa-wrench" aria-hidden="true"></i> and run it with the following parameters
+      <ul>
+        <li>“Reference genome to display” to <code class="highlighter-rouge">Use a genome from history</code>
+</li>
+        <li>
+          <p>“Select the reference genome” to <code class="highlighter-rouge">wildtype.fna</code></p>
+
+          <p>This sequence will be the reference against which annotations are displayed</p>
+        </li>
+        <li>“Produce Standalone Instance” to <code class="highlighter-rouge">Yes</code>
+</li>
+        <li>“Genetic Code” to <code class="highlighter-rouge">11: The Bacterial, Archaeal and Plant Plastid Code</code>
+</li>
+        <li>“JBrowse-in-Galaxy Action” to <code class="highlighter-rouge">New JBrowse Instance</code>
+</li>
+        <li>
+          <p>“Track Group”</p>
+
+          <p>We will now set up three different tracks - these are datasets displayed underneath the reference sequence (which is displayed as nucleotides in FASTA format). We will choose to display the sequence reads (the .bam file), the variants found by snippy (the .gff file) and the annotated reference genome (the wildtype.gff)</p>
+
+          <ul>
+            <li>
+<strong>Track 1 - sequence reads</strong>: Click on <code class="highlighter-rouge">Insert Track Group</code> and fill it with
+              <ul>
+                <li>“Track Cateogry” to <code class="highlighter-rouge">sequence reads</code>
+</li>
+                <li>Click on <code class="highlighter-rouge">Insert Annotation Track</code> and fill it with
+                  <ul>
+                    <li>“Track Type” to <code class="highlighter-rouge">BAM Pileups</code>
+</li>
+                    <li>“BAM Track Data” to <code class="highlighter-rouge">snippy bam file</code>
+</li>
+                    <li>“Autogenerate SNP Track” to <code class="highlighter-rouge">Yes</code>
+</li>
+                    <li>“Track Visibility” to <code class="highlighter-rouge">On for new users</code>
+</li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+            <li>
+<strong>Track 2 - variants</strong>: Click on <code class="highlighter-rouge">Insert Track Group</code> and fill it with
+              <ul>
+                <li>“Track Cateogry” to <code class="highlighter-rouge">variants</code>
+</li>
+                <li>Click on <code class="highlighter-rouge">Insert Annotation Track</code> and fill it with
+                  <ul>
+                    <li>“Track Type” to <code class="highlighter-rouge">GFF/GFF3/BED/GBK Features</code>
+</li>
+                    <li>“GFF/GFF3/BED Track Data” to <code class="highlighter-rouge">snippy snps gff file</code>
+</li>
+                    <li>“Track Visibility” to <code class="highlighter-rouge">On for new users</code>
+</li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+            <li>
+<strong>Track 3 - annotated reference</strong>: Click on <code class="highlighter-rouge">Insert Track Group</code> and fill it with
+              <ul>
+                <li>“Track Cateogry” to <code class="highlighter-rouge">annotated reference</code>
+</li>
+                <li>Click on <code class="highlighter-rouge">Insert Annotation Track</code> and fill it with
+                  <ul>
+                    <li>“Track Type” to <code class="highlighter-rouge">GFF/GFF3/BED/GBK Features</code>
+</li>
+                    <li>“GFF/GFF3/BED Track Data” to <code class="highlighter-rouge">wildtype.gff</code>
+</li>
+                    <li>“Track Visibility” to <code class="highlighter-rouge">On for new users</code>
+</li>
+                    <li>“JBrowse Track Type [Advanced]” to <code class="highlighter-rouge">Canvas Features</code>
+</li>
+                    <li>Click on “JBrowse Styling Options [Advanced]”</li>
+                    <li>“JBrowse style.label” to <code class="highlighter-rouge">product</code>
+</li>
+                    <li>“JBrowse style.description” to <code class="highlighter-rouge">product</code>
+</li>
+                    <li>“Track Visibility” to <code class="highlighter-rouge">On for new users</code>
+</li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+
+      <p>A new file will be created in your history, this contains the JBrowse interactive visualisation. We will now view it’s contents and play with it</p>
+    </li>
+    <li>
+      <p>Inspect the <code class="highlighter-rouge">JBrowse on data XX and data XX - Complete</code> file by clicking on the eye icon</p>
+
+      <p>The JBrowse window will appear in the centre Galaxy panel.</p>
+    </li>
+    <li>Display all the tracks and practice maneuvering around
+      <ol>
+        <li>Click on the tick boxes on the left to display the tracks</li>
+        <li>Zoom out by clicking on the <code class="highlighter-rouge">minus</code> button to see sequence reads and their coverage (the grey graph)</li>
+        <li>Zoom in by clicking on the <code class="highlighter-rouge">plus</code> button to see
+          <ul>
+            <li>probable real variants (a whole column of SNPs)</li>
+            <li>probable errors (single one here and there)</li>
+          </ul>
+        </li>
+      </ol>
+
+      <figure id="figure-1"><img src="../../images/jbrowse1.png" alt="JBrowse screenshot" title="Screenshot of JBrowse"><figcaption><span class="figcaption-prefix">Figure 1:</span> Screenshot of JBrowse</figcaption></figure>
+    </li>
+    <li>Look at the stop SNP
+      <ol>
+        <li>Type <code class="highlighter-rouge">47299</code> in the coordinates box</li>
+        <li>Click on <code class="highlighter-rouge">Go</code> to see the position of the SNP discussed above</li>
+      </ol>
+
+      <p>The correct codon at this position is TGT, coding for the amino acid Cysteine (middle row of the amino acid translations). The mutation of T → A turns this triplet into TGA, a stop codon.</p>
+
+      <figure id="figure-2"><img src="../../images/jbrowse2.png" alt="JBrowse screenshot" title="Inspection of the STOP SNP using JBrowse"><figcaption><span class="figcaption-prefix">Figure 2:</span> Inspection of the STOP SNP using JBrowse</figcaption></figure>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h1 class="no_toc" id="conclusion">Conclusion</h1>
+
+<p>By running a tool such as Snippy on your read files and reference genome, we can find where the biologically important changes between genomes of different strains occur and perhaps what they mean to the phenotype.</p>
+
+
+        
+        <blockquote class="key_points">
+            <h3>
+<i class="fa fa-key" aria-hidden="true"></i> Key points</h3>
+
+            <ul>
+                
+                <li>We used a tool called Snippy to call variants between our reads and our reference genome.</li>
+                
+                <li>As our reference genome had annotations, we could see what effect the changes have on the features as annotated in the reference and therefore make inferences on the possible changes to the phenotype.</li>
+                
+                <li>We used the JBrowse genome browser to visualise what these changes look like.</li>
+                
+            </ul>
+        </blockquote>
+        
+
+        
+        <h1>Useful literature</h1>
+        <p>Useful information regarding this type of analysis with descriptions and paper references for the tools used in this tutorial, and literature for this analysis techniques and interpretations can be found <a href="/training-material/topics/variant-analysis#references">here</a>.</p>
+        
+
+        <h3>
+<i class="fa fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!</h3>
+
+        <hr>
+
+        <blockquote class="overview">
+            <h3>
+<i class="fa fa-comments-o" aria-hidden="true"></i> Feedback</h3>
+            Please take a moment and provide your feedback on this tutorial. Your feedback will help guide and improve future revisions to this tutorial.
+            <a href="https://tinyurl.com/GTNfeedback">Feedback Form</a>
+        </blockquote>
+    </section>
+</div>
+
+
+<footer>
+    <div class="container">
+        <p>
+            This material is the result of a collaborative work. Thanks the
+            <a href="https://wiki.galaxyproject.org/Teach/GTN">Galaxy Training Network</a>
+            and all the <a href="/training-material/hall-of-fame">contributors</a> (Anna Syme, Simon Gladman, Torsten Seemann)!
+        </p>
+        <p>
+            Found a typo? Something is wrong in this tutorial? Edit it on
+            <a href="https://github.com/galaxyproject/training-material/tree/master/topics/variant-analysis/tutorials/microbial-variants/tutorial.md">GitHub</a>.
+        </p>
+    </div>
+</footer>
+
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+</html>
