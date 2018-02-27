@@ -41,8 +41,8 @@ We have extracted sequences from the Sequence Read Archive (SRA) files to build 
 >
 > 1. Create a new history for this RNA-seq exercise
 > 2. Import the FASTQ file pairs for
->       - `GSM461177` (untreated)
->       - `GSM461180` (treated)
+>       - `GSM461177` (untreated): `GSM461177_1` and `GSM461177_2`
+>       - `GSM461180` (treated): `GSM461180_1` and `GSM461180_2`
 >
 >       To import the files, there are two options:
 >       - Option 1: From a shared data library if available (ask your instructor)
@@ -60,10 +60,10 @@ We have extracted sequences from the Sequence Read Archive (SRA) files to build 
 >           You can directly paste:
 >
 >           ```
->           https://zenodo.org/record/290221/files/GSM461177_1.fastq
->           https://zenodo.org/record/290221/files/GSM461177_2.fastq
->           https://zenodo.org/record/290221/files/GSM461180_1.fastq
->           https://zenodo.org/record/290221/files/GSM461180_2.fastq
+>           https://zenodo.org/record/290221/files/GSM461177_1.fastqsanger
+>           https://zenodo.org/record/290221/files/GSM461177_2.fastqsanger
+>           https://zenodo.org/record/290221/files/GSM461180_1.fastqsanger
+>           https://zenodo.org/record/290221/files/GSM461180_2.fastqsanger
 >           ```
 >
 > 3. Rename the datasets according to the samples
@@ -113,12 +113,11 @@ For quality control, we use similar tools as described in [NGS-QC tutorial]({{si
 >
 >    > ### {% icon question %} Questions
 >    >
->    > 1. What is the read length?
+>    > What is the read length?
 >    >
 >    >    <details>
 >    >    <summary>Click to view answers</summary>
->    >    <ol type="1">
->    >    <li>The read length is 37 bp</li>
+>    >    The read length is 37 bp
 >    >    </details>
 >    {: .question}
 >
@@ -447,7 +446,7 @@ We now run **featureCounts** to count the number of reads per annotated gene.
 >    - "Alignment file" to the STAR-generated `BAM` files (multiple datasets)
 >    - "Gene annotation file" to `GTF file`
 >    - "Gene annotation file" to `in your history`
->    - "Gene annotation file" to `Drosophila_melanogaster.BDGP6.87.gtf (dm6)`
+>    - "Gene annotation file" to `Drosophila_melanogaster.BDGP6.87.gtf`
 >    - "Output format" to `Gene-ID "\t" read-count (DESeq2 IUC wrapper compatible)`
 >    - Click on "Advanced options"
 >    - "GFF feature type filter" to `exon`
@@ -463,12 +462,12 @@ We now run **featureCounts** to count the number of reads per annotated gene.
 >
 >    > ### {% icon question %} Question
 >    >
->    > 1. Percentage of reads assigned?? Quality?
+>    > 1. How many reads have been assigned to a gene?
 >    >
 >    >    <details>
 >    >    <summary>Click to view answers</summary>
 >    >    <ol type="1">
->    >    <li>???</li>
+>    >    <li>Around 70% of the reads have been assigned to genes: this quantity is correct enough. If it is going below 50%, you should investigate where are mapping your reads (with IGV) and check that the annotation corresponds to the reference genome (version).</li>
 >    >    </ol>
 >    >    </details>
 >    {: .question}
@@ -486,7 +485,7 @@ The main output of **featureCounts** is a big table.
 >    <summary>Click to view answers</summary>
 >    <ol type="1">
 >    <li>The useful result file is a tabular file with two columns: the gene id and the number of reads mapped on the corresponding gene</li>
->    <li>To display the most abundantly detected feature, we need to sort the files with the features and the number of reads mapped to them. This can be done using the Sort tool on the second column and in descending order, which reveals that FBgn0000556 is the feature with the most reads (around 258,000 in GSM461177 and 253,000 in GSM461180) mapped on it for .</li>
+>    <li>To display the most abundantly detected feature, we need to sort the files with the features and the number of reads mapped to them. This can be done using the Sort tool on the second column and in descending order, which reveals that FBgn0000556 is the feature with the most reads (around 258,000 in GSM461177 and 253,000 in GSM461180) mapped on it.</li>
 >    </ol>
 >    </details>
 {: .question}
@@ -550,31 +549,31 @@ Here treatment is the primary factor which we are interested in. The sequencing 
 >
 > 1. Create a new history
 > 2. Import the seven count files from [Zenodo](https://dx.doi.org/10.5281/zenodo.290221) or the data library
->    - `GSM461176_untreat_single.deseq.counts`
->    - `GSM461177_untreat_paired.deseq.counts`
->    - `GSM461178_untreat_paired.deseq.counts`
->    - `GSM461179_treat_single.deseq.counts`
->    - `GSM461180_treat_paired.deseq.counts`
->    - `GSM461181_treat_paired.deseq.counts`
->    - `GSM461182_untreat_single.deseq.counts`
+>    - `GSM461176_untreat_single.counts`
+>    - `GSM461177_untreat_paired.counts`
+>    - `GSM461178_untreat_paired.counts`
+>    - `GSM461179_treat_single.counts`
+>    - `GSM461180_treat_paired.counts`
+>    - `GSM461181_treat_paired.counts`
+>    - `GSM461182_untreat_single.counts`
 >
 > 3. **DESeq2** {% icon tool %}: Run **DESeq2** with:
 >    - For "1: Factor"
->       - "Specify a factor name, e.g. effects_drug_x or cancer_markers" to `Treatment`
+>       - "Specify a factor name" to `Treatment`
 >       - "1: Factor level"
->           - "Specify a factor level, typical values could be 'tumor', 'normal', 'treated' or 'control'" to `treated`
->           - "Counts file(s)" to the generated count files (multiple datasets) with `treated` in name
+>           - "Specify a factor level" to `treated`
+>           - "Counts file(s)" to the 3 gene count files (multiple datasets) with `treated` in name
 >       - "2: Factor level"
->           - "Specify a factor level, typical values could be 'tumor', 'normal', 'treated' or 'control'" to `untreated`
->           - "Counts file(s)" to the generated count files (multiple datasets) with `untreated` in name
->    - Click on "Insert Factor"
+>           - "Specify a factor level" to `untreated`
+>           - "Counts file(s)" to the 4 gene count files (multiple datasets) with `untreated` in name
+>    - Click on "Insert Factor" (not on "Insert Factor level")
 >    - For "2: Factor"
->       - "Specify a factor name, e.g. effects_drug_x or cancer_markers" to `Sequencing`
+>       - "Specify a factor name" to `Sequencing`
 >       - "1: Factor level"
->           - "Specify a factor level, typical values could be 'tumor', 'normal', 'treated' or 'control'" to `PE`
+>           - "Specify a factor level" to `PE`
 >           - "Counts file(s)" to the generated count files (multiple datasets) with `paired` in name
 >       - "2: Factor level"
->           - "Specify a factor level, typical values could be 'tumor', 'normal', 'treated' or 'control'" to `SE`
+>           - "Specify a factor level" to `SE`
 >           - "Counts file(s)" to the generated count files (multiple datasets) with `single` in name   
 >    - "Output normalized counts table" to `Yes`
 {: .hands_on}
@@ -673,7 +672,7 @@ We would proceed in several steps
 >
 >    The generated file contains to many genes to get a meaningful heatmap. So we will take only the genes with an absoluted fold change > 2
 >
-> 2. **Filter** {% icon tool %}: Extract genes with an absolute log2FC > 1
+> 2. **Filter** {% icon tool %}: Extract genes with an abs(log2FC) > 1
 >    - "Filter" to the differentially expressed genes
 >    - "With following condition" to `abs(c3)>1`
 >
@@ -690,18 +689,18 @@ We would proceed in several steps
 >    The number of genes is still too high there. So we will take only the 10 most up-regulated and 10 most down-regulated genes
 >
 > 3. **Sort** {% icon tool %}: Sort the genes by log2 FC
->    - "Sort Dataset" to the differentially expressed genes with FC > 2
+>    - "Sort Dataset" to the differentially expressed genes with abs(FC) > 2
 >    - "on column" to `3`
 >    - "with flavor" to `Numerical sort`
 >    - "everything in" to `Descending order`
 >
 > 4. **Select first lines** {% icon tool %}: Extract the 10 most up-regulated genes
->    - "File to select" to the sorted DE genes with FC > 2
+>    - "File to select" to the sorted DE genes with abs(FC) > 2
 >    - "Operation" to `Keep first lines`
 >    - "Number of lines" to `10`
 > 
 > 4. **Select last lines** {% icon tool %}: Extract the 10 most down-regulated genes
->    - "Text file" to the sorted DE genes with FC > 2
+>    - "Text file" to the sorted DE genes with abs(FC) > 2
 >    - "Operation" to `Keep first lines`
 >    - "Number of lines" to `10`
 >
@@ -762,7 +761,7 @@ You should obtain something similar to:
 > <ol type="1">    
 >   <li>The samples are clustering by treatment. The genes are also clustering based on the counts. 2 genes (FBgn0026562, FBgn00003360)</li>
 >   <li>The scale is changing and the differences between the genes are not visible anymore</li>
->   <li>Extract the genes with logFC > 2 and run heatmap2 on the generated table</li>
+>   <li>Extract the genes with logFC > 2 (filter for genes with c3>1 on the summary of the differentially expressed genes) and run heatmap2 on the generated table</li>
 > </ol>
 > </details>
 {: .question}
@@ -802,7 +801,7 @@ goseq needs 2 files as inputs:
 >
 > 4. **Gene length and GC content** with
 >    - "Select a built-in GTF file or one from your history" to `Use a GTF from history`
->    - "Select a GTF file" to `Drosophila_melanogaster.BDGP6.87.gtf (dm6)`
+>    - "Select a GTF file" to `Drosophila_melanogaster.BDGP6.87.gtf`
 >    - "Select a built-in FASTA or one from your history" to `Use a built-in FASTA`
 >    - "Select a FASTA file" to `Fly (Drosophila melanogaster): dm6 Full`
 >    - "Output length file?" to `Yes`
@@ -844,8 +843,8 @@ To identify categories significantly enriched/unenriched below some p-value cuto
 
 > ### {% icon question %} Questions
 >
-> - How many GO terms are over represented? Under represented?
-> - How are the over represented GO terms divided between MF, CC and BP? And for under represented GO terms?
+> 1. How many GO terms are over represented? Under represented?
+> 2. How are the over represented GO terms divided between MF, CC and BP? And for under represented GO terms?
 >
 > <details>
 > <summary>Click to view answers</summary>
@@ -868,26 +867,35 @@ This step is similar to the step of [counting the number of reads per annotated 
 
 > ### {% icon hands_on %} Hands-on: Counting the number of reads per exon
 >
-> 1. **DEXSeq-Count** {% icon tool %}: Use the **DEXSeq-Count** to prepare the *Drosophila* annotations (`Drosophila_melanogaster.BDGP5.78.gtf`) to extract only exons with corresponding gene ids
->     - "Prepare annotation" of "Mode of operation"
+> 1. **DEXSeq-Count** {% icon tool %}: Use the **DEXSeq-Count** to prepare the *Drosophila* annotations to extract only exons with corresponding gene ids
+>     - "Mode of operation" to `Prepare annotation`
+>     - "GTF file" to `Drosophila_melanogaster.BDGP6.87.gtf`
 >
 >    The output is again a GTF file that is ready to be used for counting
 >
-> 4. **DEXSeq-Count** {% icon tool %}: Count reads using **DEXSeq-Count** with
->     - HISAT2 output as "Input bam file"
->     - The formatted GTF file
-> 5. Inspect the result files
+> 2. **DEXSeq-Count** {% icon tool %}: Count reads using **DEXSeq-Count** with
+>     - "Mode of operation" to `Count reads`
+>     - "Input bam file" to the STAR-generated `BAM` files (multiple datasets)
+>     - "DEXSeq compatible GTF file" to the previously generated GTF file
+>     - "Is libray paired end?" to `Yes`
+>     - "Is library strand specific?" to `No`
+>     - "Skip all reads with alignment quality lower than the given minimum value" to `10`
 >
->    > ### {% icon question %} Question
->    >
->    > Which exon has the most reads mapped to it? From which gene has this exon been extracted? Is there a connection to the previous result obtained with HTSeq-count?
->    >
->    > <details>
->    > <summary>Click to view answers</summary>
->    > FBgn0017545:004 is the exon with the most reads mapped to it. It is part of FBgn0017545, the feature with the most reads mapped with HTSeq-count
->    > </details>
->    {: .question}
 {: .hands_on}
+
+DEXSeq generates a file similar to the one generated by featureCounts, but with counts for exons.
+
+> ### {% icon question %} Question
+>
+> 1. Which exon has the most reads mapped to it for both samples?
+> 2. From which gene have these exon been extracted?
+> 3. Is there a connection to the previous result obtained with HTSeq-count?
+>
+> <details>
+> <summary>Click to view answers</summary>
+> FBgn0000556:005 is the exon with the most reads mapped to it for both samples. It is part of FBgn0000556, the feature with the most reads mapped on it (from featureCounts).
+> </details>
+{: .question}
 
 ## Differential exon usage
 
@@ -901,19 +909,30 @@ As for DESeq2, in the previous step, we counted only reads that mapped to exons 
 > ### {% icon hands_on %} Hands-on:
 >
 > 1. Create a new history
-> 2. Import the seven count files and the dexseq.gtf from [Zenodo](https://dx.doi.org/10.5281/zenodo.290221)
->    - `dexseq.gtf`
->    - `GSM461176_untreat_single.dexseq.counts`
->    - `GSM461177_untreat_paired.dexseq.counts`
->    - `GSM461178_untreat_paired.dexseq.counts`
->    - `GSM461179_treat_single.dexseq.counts`
->    - `GSM461180_treat_paired.dexseq.counts`
->    - `GSM461181_treat_paired.dexseq.counts`
->    - `GSM461182_untreat_single.dexseq.counts`
+> 2. Import the seven exon count files and the annotation GTF file from [Zenodo](https://dx.doi.org/10.5281/zenodo.290221) or the data library
+>    - `Drosophila_melanogaster.BDGP6.87.dexseq.gtf`
+>    - `GSM461176_untreat_single.exon.counts`
+>    - `GSM461177_untreat_paired.exon.counts`
+>    - `GSM461178_untreat_paired.exon.counts`
+>    - `GSM461179_treat_single.exon.counts`
+>    - `GSM461180_treat_paired.exon.counts`
+>    - `GSM461181_treat_paired.exon.counts`
+>    - `GSM461182_untreat_single.exon.counts`
 >
 > 3. **DEXSeq** {% icon tool %}: Run **DEXSeq** with
->    - "condition" as first factor with "treated" and "untreated" as levels and selection of count files corresponding to both levels
->    - "Sequencing" as second factor with "PE" and "SE" as levels and selection of count files corresponding to both levels
+>    - "GTF file created from DEXSeq-Count tool" to `Drosophila_melanogaster.BDGP6.87.dexseq.gtf`
+>    - For "1: Factor"
+>       - "Specify a factor name" to `condition`
+>       - "Specify a factor level" to `treated`
+>       - "Count file for factor level 1" to the exon count files (multiple datasets) with `treated` in name
+>       - "Specify a factor level" to `untreated`
+>       - "Count file for factor level 2" to the exon count files (multiple datasets) with `untreated` in name
+>    - For "2: Factor"
+>       - "Specify a factor name" to `sequencing`
+>       - "Specify a factor level" to `pe`
+>       - "Count file for factor level 1" to the exon count files (multiple datasets) with `paired` in name
+>       - "Specify a factor level" to `se`
+>       - "Count file for factor level 2" to the exon count files (multiple datasets) with `single` in name
 >
 >    > ### {% icon comment %} Comment
 >    >
