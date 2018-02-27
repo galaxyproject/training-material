@@ -109,6 +109,8 @@ For this step we will use [hicBuildMatrix](http://hicexplorer.readthedocs.io/en/
 >       > A quality report is created in e.g. `hicMatrix/R1_10kb_QC`, have a look at the report hicQC.html.
 >       {: .comment}
 >
+> 2. Rename the output to `10 kb contact matrix`.
+>
 {: .hands_on}
 
 # Plotting the Hi-C matrix
@@ -122,7 +124,9 @@ A 10kb bin matrix is too large to plot, it's better to reduce the resolution. We
 > 1. **hicMergeMatrixBins** {% icon tool %}: Run hicMergeMatrixBins on the output from previous step setting the following parameter:
 >    - "Number of bins to merge" to `100`
 >
-> 2. **hicPlotMatrix** {% icon tool %}: Run hicPlotMatrix on the output from hicMergeMatrixBins adjusting the parameters:
+> 2. Rename the output to `1 MB contact matrix`.
+>
+> 3. **hicPlotMatrix** {% icon tool %}: Run hicPlotMatrix on the output from hicMergeMatrixBins `1 MB contact matrix` adjusting the parameters:
 >    - "Plot title" to `Hi-C matrix for dm3`
 >    - "Plot per chromosome" to `True`
 >    - "Remove masked bins from the matrix" to `True`
@@ -150,7 +154,7 @@ Matrix correction works in two steps: first a histogram containing the sum of co
 
 > ### {% icon hands_on %} Hands-on: Matrix diagnostic
 > 
-> 1. **hicCorrectMatrix** {% icon tool %}: Run hicCorrectMatrix on the output from hicBuildMatrix adjusting the parameters:
+> 1. **hicCorrectMatrix** {% icon tool %}: Run hicCorrectMatrix on the output from hicBuildMatrix `10 kb contact matrix` adjusting the parameters:
 >    - "Range restriction (in bp)" to `Diagnostic plot`
 >    - "Chromosomes to include (and order to plot in)" to `chr2L`
 >    - "+ Insert Chromosomes to include (and order to plot in):" to `chr2R`
@@ -166,7 +170,7 @@ In our case the distribution describes the counts per bin of a genomic distance.
 
 > ### {% icon hands_on %} Hands-on: Matrix correction
 >
-> 1. **hicCorrectMatrix** {% icon tool %}: Run hicCorrectMatrix on the original matrix (not the one with merged bins) adjusting the parameters:
+> 1. **hicCorrectMatrix** {% icon tool %}: Run hicCorrectMatrix on the original matrix `10 kb contact matrix` adjusting the parameters:
 >    - "Range restriction (in bp)" to `Correct matrix plot`
 >    - "Normalize each chromosome separately" to `True`
 >    - "Remove bins of low coverage" to `-1.6`
