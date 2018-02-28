@@ -53,12 +53,11 @@ RNAs that are typically targeted in RNAseq experiments are single stranded (e.g.
 >
 >**Relationship between DNA and RNA orientation**
 
-During a typical RNAseq experiment the information about strandedness is lost after both strands of cDNA are synthesized, size selected, and converted into sequencing library. However, this information can be quite useful for various aspects of RNAseq analysis such as transcript reconstruction and quantification. There is a number of methods for creating so called *stranded* RNAseq libraries that preserve the strand information (for an excellent overview see Levin et al. [2010](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3005310/)):
+During a typical RNAseq experiment the information about strandedness is lost after both strands of cDNA are synthesized, size selected, and converted into sequencing library. However, this information can be quite useful for various aspects of RNAseq analysis such as transcript reconstruction and quantification. There is a number of methods for creating so called *stranded* RNAseq libraries that preserve the strand information (an excellent overview in [Levin et al, Nat Meth, 2010](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3005310/)):
 
-
->![Generation of stranded RNAseq libraries](../../images/stranded_protocols.png)
+![Generation of stranded RNAseq libraries](../../images/stranded_protocols.png "Generation of stranded RNAseq libraries (Levin et al, Nat Meth, 2010)")
 >
->**Generation of stranded RNAseq libraries**<br>
+>****<br>
 >Different types of stranded library generation protocols from [Levin:2010](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3005310/)
 
 Depending on the approach and whether one performs single- or paired-end sequencing there are multiple possibilities on how to interpret the results of mapping of these reads onto genome/transcriptome:
