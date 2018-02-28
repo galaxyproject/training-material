@@ -329,7 +329,6 @@ A quality report is created in e.g. <code class="highlighter-rouge">hicMatrix/R1
     <li><strong>hicPlotMatrix</strong> <i class="fa fa-wrench" aria-hidden="true"></i>: Run hicPlotMatrix on the output from hicMergeMatrixBins <code class="highlighter-rouge">1 MB contact matrix</code> adjusting the parameters:
       <ul>
         <li>“Plot title” to <code class="highlighter-rouge">Hi-C matrix for dm3</code></li>
-        <li>“Plot per chromosome” to <code class="highlighter-rouge">True</code></li>
         <li>“Remove masked bins from the matrix” to <code class="highlighter-rouge">True</code></li>
         <li>“Plot the log1p of the matrix values: <code class="highlighter-rouge">True</code></li>
         <li>“Chromosomes to include (and order to plot in)” to <code class="highlighter-rouge">chr2L</code></li>
@@ -348,6 +347,9 @@ A quality report is created in e.g. <code class="highlighter-rouge">hicMatrix/R1
   </ol>
 
 </blockquote>
+
+<p>The resulting plot of the 1 Mb contact matrix should look like: 
+<img src="../../images/plotMatrix.png" alt="TAD plot" /></p>
 
 <h1 id="correction-of-hi-c-matrix">Correction of Hi-C matrix</h1>
 
@@ -427,6 +429,8 @@ This is often caused by bins of low counts. Use a more stringent filtering of bi
 
 </blockquote>
 
+<h3 id="load-new-data">Load new data</h3>
+
 <p>The steps so far would have led to long run times if real data would have been used. We therefore prepared a new matrix for you, <code class="highlighter-rouge">corrected contact matrix dm3 large</code>. Please load it into your history.</p>
 
 <h1 id="tad-calling">TAD calling</h1>
@@ -487,67 +491,82 @@ This is often caused by bins of low counts. Use a more stringent filtering of bi
         <li>“Matrix to compute on.” to the corrected matrix from hicCorrectMatrix step</li>
         <li>“Depth” to <code class="highlighter-rouge">750000</code></li>
         <li>“Boundaries file” to <code class="highlighter-rouge">hicFindTads on data XX: TAD domains</code></li>
-        <li>
-          <p>“Show x labels” to <code class="highlighter-rouge">Yes</code></p>
-        </li>
-        <li>“+Insert Include tracks in your plot”</li>
-        <li>“Choose style of the track” to <code class="highlighter-rouge">Bedgraph matrix track</code></li>
-        <li>“Plot title” to <code class="highlighter-rouge">TAD separation score</code></li>
-        <li>“Track file bedgraph format” to <code class="highlighter-rouge">hicFindTads on data XX: matrix with multi-scale TAD scores</code></li>
-        <li>“Color of track” to blue</li>
-        <li>
-          <p>“Width” to <code class="highlighter-rouge">4</code></p>
-        </li>
-        <li>“+Insert Include tracks in your plot”</li>
-        <li>“Choose style of the track” to <code class="highlighter-rouge">Bigwig track</code></li>
-        <li>“Plot title” to <code class="highlighter-rouge">PC1</code></li>
-        <li>“Track file bigwig format” the first computed <code class="highlighter-rouge">hicPCA</code> result</li>
-        <li>
-          <p>“Width” to <code class="highlighter-rouge">1.5</code></p>
-        </li>
-        <li>“+Insert Include tracks in your plot”</li>
-        <li>“Choose style of the track” to <code class="highlighter-rouge">Bigwig track</code></li>
-        <li>“Plot title” to <code class="highlighter-rouge">PC1</code></li>
-        <li>“Track file bigwig format” the second computed <code class="highlighter-rouge">hicPCA</code> result</li>
-        <li>
-          <p>“Width” to <code class="highlighter-rouge">1.5</code></p>
-        </li>
-        <li>“+Insert Include tracks in your plot”</li>
-        <li>“Choose style of the track” to <code class="highlighter-rouge">Bigwig track</code></li>
-        <li>“Plot title” to <code class="highlighter-rouge">PC1</code></li>
-        <li>“Track file bigwig format” to <code class="highlighter-rouge">H3K36me3</code></li>
-        <li>
-          <p>“Width” to <code class="highlighter-rouge">1.5</code></p>
-        </li>
-        <li>“+Insert Include tracks in your plot”</li>
-        <li>“Choose style of the track” to <code class="highlighter-rouge">Bigwig track</code></li>
-        <li>“Plot title” to <code class="highlighter-rouge">PC1</code></li>
-        <li>“Track file bigwig format” to <code class="highlighter-rouge">H3K27me3</code></li>
-        <li>
-          <p>“Width” to <code class="highlighter-rouge">1.5</code></p>
-        </li>
-        <li>“+Insert Include tracks in your plot”</li>
-        <li>“Choose style of the track” to <code class="highlighter-rouge">Bigwig track</code></li>
-        <li>“Plot title” to <code class="highlighter-rouge">PC1</code></li>
-        <li>“Track file bigwig format” to <code class="highlighter-rouge">H4K16ac</code></li>
-        <li>
-          <p>“Width” to <code class="highlighter-rouge">1.5</code></p>
-        </li>
-        <li>“+Insert Include tracks in your plot”</li>
-        <li>“Choose style of the track” to <code class="highlighter-rouge">Gene track</code></li>
-        <li>“Plot title” to <code class="highlighter-rouge">dm3 genes</code></li>
-        <li>“Track file bedgraph format” the imported .bed file</li>
-        <li>“Width” to <code class="highlighter-rouge">3</code></li>
-        <li>“Type” to <code class="highlighter-rouge">genes</code></li>
-        <li>“Gene rows” to <code class="highlighter-rouge">15</code></li>
+        <li>“Show x labels” to <code class="highlighter-rouge">Yes</code></li>
       </ul>
     </li>
   </ol>
 
+  <p>2.<strong>hicPlotTADs</strong> <i class="fa fa-wrench" aria-hidden="true"></i>:</p>
+  <ul>
+    <li>“+Insert Include tracks in your plot”</li>
+    <li>“Choose style of the track” to <code class="highlighter-rouge">Bedgraph matrix track</code></li>
+    <li>“Plot title” to <code class="highlighter-rouge">TAD separation score</code></li>
+    <li>“Track file bedgraph format” to <code class="highlighter-rouge">hicFindTads on data XX: matrix with multi-scale TAD scores</code></li>
+    <li>“Color of track” to blue</li>
+    <li>“Width” to <code class="highlighter-rouge">4</code></li>
+    <li>“Set type to lines” to ‘True’</li>
+  </ul>
+
+  <p>3.<strong>hicPlotTADs</strong> <i class="fa fa-wrench" aria-hidden="true"></i>:</p>
+  <ul>
+    <li>“+Insert Include tracks in your plot”</li>
+    <li>“Choose style of the track” to <code class="highlighter-rouge">Bigwig track</code></li>
+    <li>“Plot title” to <code class="highlighter-rouge">PC1</code></li>
+    <li>“Track file bigwig format” the first computed <code class="highlighter-rouge">hicPCA</code> result</li>
+    <li>“Width” to <code class="highlighter-rouge">1.5</code></li>
+  </ul>
+
+  <p>4.<strong>hicPlotTADs</strong> <i class="fa fa-wrench" aria-hidden="true"></i>:</p>
+  <ul>
+    <li>“+Insert Include tracks in your plot”</li>
+    <li>“Choose style of the track” to <code class="highlighter-rouge">Bigwig track</code></li>
+    <li>“Plot title” to <code class="highlighter-rouge">PC1</code></li>
+    <li>“Track file bigwig format” the second computed <code class="highlighter-rouge">hicPCA</code> result</li>
+    <li>“Width” to <code class="highlighter-rouge">1.5</code></li>
+  </ul>
+
+  <p>5.<strong>hicPlotTADs</strong> <i class="fa fa-wrench" aria-hidden="true"></i>:</p>
+  <ul>
+    <li>“+Insert Include tracks in your plot”</li>
+    <li>“Choose style of the track” to <code class="highlighter-rouge">Bigwig track</code></li>
+    <li>“Plot title” to <code class="highlighter-rouge">PC1</code></li>
+    <li>“Track file bigwig format” to <code class="highlighter-rouge">H3K36me3</code></li>
+    <li>“Width” to <code class="highlighter-rouge">1.5</code></li>
+  </ul>
+
+  <p>6.<strong>hicPlotTADs</strong> <i class="fa fa-wrench" aria-hidden="true"></i>:</p>
+  <ul>
+    <li>“+Insert Include tracks in your plot”</li>
+    <li>“Choose style of the track” to <code class="highlighter-rouge">Bigwig track</code></li>
+    <li>“Plot title” to <code class="highlighter-rouge">PC1</code></li>
+    <li>“Track file bigwig format” to <code class="highlighter-rouge">H3K27me3</code></li>
+    <li>“Width” to <code class="highlighter-rouge">1.5</code></li>
+  </ul>
+
+  <p>7.<strong>hicPlotTADs</strong> <i class="fa fa-wrench" aria-hidden="true"></i>:</p>
+  <ul>
+    <li>“+Insert Include tracks in your plot”</li>
+    <li>“Choose style of the track” to <code class="highlighter-rouge">Bigwig track</code></li>
+    <li>“Plot title” to <code class="highlighter-rouge">PC1</code></li>
+    <li>“Track file bigwig format” to <code class="highlighter-rouge">H4K16ac</code></li>
+    <li>“Width” to <code class="highlighter-rouge">1.5</code></li>
+  </ul>
+
+  <p>8.<strong>hicPlotTADs</strong> <i class="fa fa-wrench" aria-hidden="true"></i>:</p>
+  <ul>
+    <li>“+Insert Include tracks in your plot”</li>
+    <li>“Choose style of the track” to <code class="highlighter-rouge">Gene track</code></li>
+    <li>“Plot title” to <code class="highlighter-rouge">dm3 genes</code></li>
+    <li>“Track file bedgraph format” the imported .bed file</li>
+    <li>“Width” to <code class="highlighter-rouge">3</code></li>
+    <li>“Type” to <code class="highlighter-rouge">genes</code></li>
+    <li>“Gene rows” to <code class="highlighter-rouge">15</code></li>
+  </ul>
+
 </blockquote>
 
 <p>The resulting image should look like this one: 
-<img src="../../images/plotTADs.png" alt="FastQC webpage results" /></p>
+<img src="../../images/plotTADs.png" alt="TAD plot" /></p>
 <h1 class="no_toc" id="conclusion">Conclusion</h1>
 
 <p>In this tutorial we used HiCExplorer to analyze drosophila melanogaster cells. We mapped the chimeric reads and created a contact matrix, to reduce noise this contact matrix was normalized. We showed how to visualize a contact matrix and how we can investigate topological associating domains and relate them to additional data like gene tracks.</p>
