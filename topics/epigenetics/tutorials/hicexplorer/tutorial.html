@@ -209,7 +209,7 @@ For this the following steps are necessary to be performed:</p>
   <ol>
     <li>Create a new history</li>
     <li>
-      <p>Import from <a href="https://doi.org/10.5281/zenodo.1176070">Zenodo</a>.</p>
+      <p>Import from <a href="https://doi.org/10.5281/zenodo.1183661">Zenodo</a>.</p>
 
       <blockquote class="tip">
         <h3 id="-tip-importing-data-via-links"><i class="fa fa-lightbulb-o" aria-hidden="true"></i> Tip: Importing data via links</h3>
@@ -221,8 +221,8 @@ For this the following steps are necessary to be performed:</p>
 Below are the links to the read files that can be copied and pasted in the upload manager.</li>
         </ul>
 
-        <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/1176070/files/HiC_S2_1p_10min_lowU_R1.fastq.gz
-https://zenodo.org/record/1176070/files/HiC_S2_1p_10min_lowU_R2.fastq.gz
+        <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/1183661/files/HiC_S2_1p_10min_lowU_R1.fastq.gz
+https://zenodo.org/record/1183661/files/HiC_S2_1p_10min_lowU_R2.fastq.gz
 </code></pre></div>        </div>
 
         <ul>
@@ -394,6 +394,7 @@ A quality report is created in e.g. <code class="highlighter-rouge">hicMatrix/R1
         <li>”+ Insert Chromosomes to include (and order to plot in):” to <code class="highlighter-rouge">chrX</code></li>
       </ul>
     </li>
+    <li>Rename the corrected matrix to <code class="highlighter-rouge">10 kb corrected contact matrix</code>.</li>
   </ol>
 
 </blockquote>
@@ -414,7 +415,7 @@ This is often caused by bins of low counts. Use a more stringent filtering of bi
   <h3 id="-hands-on-plotting-the-corrected-hi-c-matrix"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Plotting the corrected Hi-C matrix</h3>
 
   <ol>
-    <li><strong>hicPlotMatrix</strong> <i class="fa fa-wrench" aria-hidden="true"></i>: Run hicPlotMatrix on the corrected matrix adjusting the parameters:
+    <li><strong>hicPlotMatrix</strong> <i class="fa fa-wrench" aria-hidden="true"></i>: Run hicPlotMatrix on <code class="highlighter-rouge">10 kb corrected contact matrix</code> adjusting the parameters:
       <ul>
         <li>“Plot title” to <code class="highlighter-rouge">Hi-C matrix for dm3</code></li>
         <li>“Plot per chromosome” to <code class="highlighter-rouge">False</code></li>
@@ -425,6 +426,8 @@ This is often caused by bins of low counts. Use a more stringent filtering of bi
   </ol>
 
 </blockquote>
+
+<p>The steps so far would have led to long run times if real data would have been used. We therefore prepared a new matrix for you, <code class="highlighter-rouge">corrected contact matrix dm3 large</code>. Please load it into your history.</p>
 
 <h1 id="tad-calling">TAD calling</h1>
 
@@ -438,14 +441,14 @@ This is often caused by bins of low counts. Use a more stringent filtering of bi
   <h3 id="-hands-on-finding-tads"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Finding TADs</h3>
 
   <ol>
-    <li><strong>hicFindTADs</strong> <i class="fa fa-wrench" aria-hidden="true"></i>: Run hicFindTADs on the corrected matrix adjusting the parameters:
+    <li><strong>hicFindTADs</strong> <i class="fa fa-wrench" aria-hidden="true"></i>: Run hicFindTADs on <code class="highlighter-rouge">corrected contact matrix dm3 large</code> adjusting the parameters:
       <ul>
         <li>“Minimum window length (in bp) to be considered to the left and to the right of each Hi-C bin.” to <code class="highlighter-rouge">30000</code></li>
-        <li>“Maximum window length (in bp) to be considered to the left and to the right of each Hi-C bin.” to <code class="highlighter-rouge">60000</code></li>
+        <li>“Maximum window length (in bp) to be considered to the left and to the right of each Hi-C bin.” to <code class="highlighter-rouge">100000</code></li>
         <li>“Step size when moving from minDepth to maxDepth” to <code class="highlighter-rouge">10000</code></li>
         <li>“Multiple Testing Corrections” to <code class="highlighter-rouge">False discovery rate</code></li>
         <li>“q-value” to <code class="highlighter-rouge">0.05</code></li>
-        <li>“Minimum threshold of the difference between the TAD-separation score of a putative boundary and the mean of the TAD-sep. score of surrounding bins.” to <code class="highlighter-rouge">0.05</code></li>
+        <li>“Minimum threshold of the difference between the TAD-separation score of a putative boundary and the mean of the TAD-sep. score of surrounding bins.” to <code class="highlighter-rouge">0.001</code></li>
       </ul>
     </li>
   </ol>
@@ -454,7 +457,23 @@ This is often caused by bins of low counts. Use a more stringent filtering of bi
 
 <p>As an output we get the boundaries, domains and scores separated files. We will use in the plot later only the TAD-score file.</p>
 
+<blockquote class="hands_on">
+  <h3 id="-hands-on-computing-a--b-compartments"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Computing A / B compartments</h3>
+
+  <ol>
+    <li><strong>hicPlotTADs</strong> <i class="fa fa-wrench" aria-hidden="true"></i>: Run hicPCA adjusting the parameters:
+      <ul>
+        <li>“Matrix to compute on” to <code class="highlighter-rouge">corrected contact matrix dm3 large</code></li>
+        <li>“Output file format” to <code class="highlighter-rouge">bigwig</code></li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
 <p>We can plot the TADs for a given chromosomal region. For this we will use <a href="http://hicexplorer.readthedocs.io/en/latest/content/tools/hicPlotTADs.html">hicPlotTADs</a>. But before make sure to import <a href="https://zenodo.org/record/1176070/files/dm6_genes.bed">gene track file</a> in .bed format from <a href="https://doi.org/10.5281/zenodo.1176070">Zenodo</a>.</p>
+
+<p>For the next step we need additional data tracks. Please load <code class="highlighter-rouge">dm3_genes.bed</code>, <code class="highlighter-rouge">H3K27me3.bw</code>, <code class="highlighter-rouge">H3K36me3.bw</code> and <code class="highlighter-rouge">H4K16ac.bw</code> to your history.</p>
 
 <blockquote class="hands_on">
   <h3 id="-hands-on-plotting-tads"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Plotting TADs</h3>
@@ -462,35 +481,73 @@ This is often caused by bins of low counts. Use a more stringent filtering of bi
   <ol>
     <li><strong>hicPlotTADs</strong> <i class="fa fa-wrench" aria-hidden="true"></i>: Run hicPlotTADs adjusting the parameters:
       <ul>
-        <li>“Region of the genome to limit the operation” to <code class="highlighter-rouge">chr2L:1000000-5000000</code></li>
+        <li>“Region of the genome to limit the operation” to <code class="highlighter-rouge">chr2L:14500000-16500000</code></li>
         <li>“Choose style of the track” to <code class="highlighter-rouge">TAD visualization</code></li>
-        <li>“Plot title” to <code class="highlighter-rouge">HiC dm3 chr2L:1000000-5000000</code></li>
+        <li>“Plot title” to <code class="highlighter-rouge">HiC dm3 chr2L:14500000-16500000</code></li>
         <li>“Matrix to compute on.” to the corrected matrix from hicCorrectMatrix step</li>
-        <li>“Depth” to <code class="highlighter-rouge">2000000</code></li>
-        <li>“Plotting type” to <code class="highlighter-rouge">interaction</code></li>
-        <li>“Boundaries file” to the output from hicFindTADs</li>
-        <li>“Show x labels” to <code class="highlighter-rouge">Yes</code></li>
+        <li>“Depth” to <code class="highlighter-rouge">750000</code></li>
+        <li>“Boundaries file” to <code class="highlighter-rouge">hicFindTads on data XX: TAD domains</code></li>
+        <li>
+          <p>“Show x labels” to <code class="highlighter-rouge">Yes</code></p>
+        </li>
         <li>“+Insert Include tracks in your plot”</li>
-        <li>“Choose style of the track” to <code class="highlighter-rouge">TAD score</code></li>
+        <li>“Choose style of the track” to <code class="highlighter-rouge">Bedgraph matrix track</code></li>
         <li>“Plot title” to <code class="highlighter-rouge">TAD separation score</code></li>
-        <li>“Track file bedgraph format” to the output from hicFindTADs step</li>
+        <li>“Track file bedgraph format” to <code class="highlighter-rouge">hicFindTads on data XX: matrix with multi-scale TAD scores</code></li>
         <li>“Color of track” to blue</li>
-        <li>“Width” to <code class="highlighter-rouge">2</code></li>
+        <li>
+          <p>“Width” to <code class="highlighter-rouge">4</code></p>
+        </li>
+        <li>“+Insert Include tracks in your plot”</li>
+        <li>“Choose style of the track” to <code class="highlighter-rouge">Bigwig track</code></li>
+        <li>“Plot title” to <code class="highlighter-rouge">PC1</code></li>
+        <li>“Track file bigwig format” the first computed <code class="highlighter-rouge">hicPCA</code> result</li>
+        <li>
+          <p>“Width” to <code class="highlighter-rouge">1.5</code></p>
+        </li>
+        <li>“+Insert Include tracks in your plot”</li>
+        <li>“Choose style of the track” to <code class="highlighter-rouge">Bigwig track</code></li>
+        <li>“Plot title” to <code class="highlighter-rouge">PC1</code></li>
+        <li>“Track file bigwig format” the second computed <code class="highlighter-rouge">hicPCA</code> result</li>
+        <li>
+          <p>“Width” to <code class="highlighter-rouge">1.5</code></p>
+        </li>
+        <li>“+Insert Include tracks in your plot”</li>
+        <li>“Choose style of the track” to <code class="highlighter-rouge">Bigwig track</code></li>
+        <li>“Plot title” to <code class="highlighter-rouge">PC1</code></li>
+        <li>“Track file bigwig format” to <code class="highlighter-rouge">H3K36me3</code></li>
+        <li>
+          <p>“Width” to <code class="highlighter-rouge">1.5</code></p>
+        </li>
+        <li>“+Insert Include tracks in your plot”</li>
+        <li>“Choose style of the track” to <code class="highlighter-rouge">Bigwig track</code></li>
+        <li>“Plot title” to <code class="highlighter-rouge">PC1</code></li>
+        <li>“Track file bigwig format” to <code class="highlighter-rouge">H3K27me3</code></li>
+        <li>
+          <p>“Width” to <code class="highlighter-rouge">1.5</code></p>
+        </li>
+        <li>“+Insert Include tracks in your plot”</li>
+        <li>“Choose style of the track” to <code class="highlighter-rouge">Bigwig track</code></li>
+        <li>“Plot title” to <code class="highlighter-rouge">PC1</code></li>
+        <li>“Track file bigwig format” to <code class="highlighter-rouge">H4K16ac</code></li>
+        <li>
+          <p>“Width” to <code class="highlighter-rouge">1.5</code></p>
+        </li>
         <li>“+Insert Include tracks in your plot”</li>
         <li>“Choose style of the track” to <code class="highlighter-rouge">Gene track</code></li>
         <li>“Plot title” to <code class="highlighter-rouge">dm3 genes</code></li>
         <li>“Track file bedgraph format” the imported .bed file</li>
-        <li>“Width” to <code class="highlighter-rouge">5</code></li>
-        <li>“Plot labels” to <code class="highlighter-rouge">No</code></li>
-        <li>“Configure x-axis” to <code class="highlighter-rouge">Yes</code></li>
-        <li>“Fontsize” to <code class="highlighter-rouge">16</code></li>
-        <li>“Where to place the x-axis” to <code class="highlighter-rouge">Top</code></li>
+        <li>“Width” to <code class="highlighter-rouge">3</code></li>
+        <li>“Type” to <code class="highlighter-rouge">genes</code></li>
+        <li>“Gene rows” to <code class="highlighter-rouge">15</code></li>
       </ul>
     </li>
   </ol>
 
 </blockquote>
 
+<p>The resulting image should look like this one: 
+<img src="../../images/plotTADs.png" alt="FastQC webpage results" /></p>
 <h1 class="no_toc" id="conclusion">Conclusion</h1>
 
 <p>In this tutorial we used HiCExplorer to analyze drosophila melanogaster cells. We mapped the chimeric reads and created a contact matrix, to reduce noise this contact matrix was normalized. We showed how to visualize a contact matrix and how we can investigate topological associating domains and relate them to additional data like gene tracks.</p>
