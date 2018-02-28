@@ -30,6 +30,7 @@ check-html: build ## validate HTML
           --assume-extension \
           --http-status-ignore 405,503,999 \
           --url-ignore "/.*localhost.*/","/.*vimeo\.com.*/","/.*gitter\.im.*/","/.*drmaa\.org.*/" \
+          --url-swap "github.com/galaxyproject/training-material/tree/master:github.com/${REPO}/tree/${BRANCH}" \
           --file-ignore "/.*\/files\/.*/","/.*\/node_modules\/.*/" \
           --allow-hash-href \
         ./_site
