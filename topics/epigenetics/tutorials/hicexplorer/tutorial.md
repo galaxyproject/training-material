@@ -128,7 +128,6 @@ A 10kb bin matrix is too large to plot, it's better to reduce the resolution. We
 >
 > 3. **hicPlotMatrix** {% icon tool %}: Run hicPlotMatrix on the output from hicMergeMatrixBins `1 MB contact matrix` adjusting the parameters:
 >    - "Plot title" to `Hi-C matrix for dm3`
->    - "Plot per chromosome" to `True`
 >    - "Remove masked bins from the matrix" to `True`
 >    - "Plot the log1p of the matrix values: `True`
 >    - "Chromosomes to include (and order to plot in)" to `chr2L`
@@ -143,6 +142,9 @@ A 10kb bin matrix is too large to plot, it's better to reduce the resolution. We
 >    {: .tip}
 >
 {: .hands_on}
+
+The resulting plot of the 1 Mb contact matrix should look like: 
+![TAD plot](../../images/plotMatrix.png)
 
 # Correction of Hi-C matrix
 
@@ -209,6 +211,8 @@ We can now plot chromosome 2L with the corrected matrix.
 {: .hands_on}
 
 
+### Load new data
+
 The steps so far would have led to long run times if real data would have been used. We therefore prepared a new matrix for you, `corrected contact matrix dm3 large`. Please load it into your history.
 
 # TAD calling
@@ -257,45 +261,53 @@ For the next step we need additional data tracks. Please load `dm3_genes.bed`, `
 >    - "Depth" to `750000`
 >    - "Boundaries file" to `hicFindTads on data XX: TAD domains`
 >    - "Show x labels" to `Yes`
-> 
+>
+> 2.**hicPlotTADs** {% icon tool %}:
 >    - "+Insert Include tracks in your plot"
 >    - "Choose style of the track" to `Bedgraph matrix track`
 >    - "Plot title" to `TAD separation score`
 >    - "Track file bedgraph format" to `hicFindTads on data XX: matrix with multi-scale TAD scores`
 >    - "Color of track" to blue
 >    - "Width" to `4`
+>    - "Set type to lines" to 'True'
 >
 >
+> 3.**hicPlotTADs** {% icon tool %}:
 >    - "+Insert Include tracks in your plot"
 >    - "Choose style of the track" to `Bigwig track`
 >    - "Plot title" to `PC1`
 >    - "Track file bigwig format" the first computed `hicPCA` result
 >    - "Width" to `1.5`
 >
+> 4.**hicPlotTADs** {% icon tool %}:
 >    - "+Insert Include tracks in your plot"
 >    - "Choose style of the track" to `Bigwig track`
 >    - "Plot title" to `PC1`
 >    - "Track file bigwig format" the second computed `hicPCA` result
 >    - "Width" to `1.5`
 >
+> 5.**hicPlotTADs** {% icon tool %}:
 >    - "+Insert Include tracks in your plot"
 >    - "Choose style of the track" to `Bigwig track`
 >    - "Plot title" to `PC1`
 >    - "Track file bigwig format" to `H3K36me3`
 >    - "Width" to `1.5`
 >
+> 6.**hicPlotTADs** {% icon tool %}:
 >    - "+Insert Include tracks in your plot"
 >    - "Choose style of the track" to `Bigwig track`
 >    - "Plot title" to `PC1`
 >    - "Track file bigwig format" to `H3K27me3`
 >    - "Width" to `1.5`
 >
+> 7.**hicPlotTADs** {% icon tool %}:
 >    - "+Insert Include tracks in your plot"
 >    - "Choose style of the track" to `Bigwig track`
 >    - "Plot title" to `PC1`
 >    - "Track file bigwig format" to `H4K16ac`
 >    - "Width" to `1.5`
 >
+> 8.**hicPlotTADs** {% icon tool %}:
 >    - "+Insert Include tracks in your plot"
 >    - "Choose style of the track" to `Gene track`
 >    - "Plot title" to `dm3 genes`
@@ -307,7 +319,7 @@ For the next step we need additional data tracks. Please load `dm3_genes.bed`, `
 {: .hands_on}
 
 The resulting image should look like this one: 
-![FastQC webpage results](../../images/plotTADs.png)
+![TAD plot](../../images/plotTADs.png)
 # Conclusion
 {:.no_toc}
 
