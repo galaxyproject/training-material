@@ -236,7 +236,7 @@ As an output we get the boundaries, domains and scores separated files. We will 
 
 > ### {% icon hands_on %} Hands-on: Computing A / B compartments
 >
-> 1. **hicPlotTADs** {% icon tool %}: Run hicPCA adjusting the parameters:
+> 1. **hicPCA** {% icon tool %}: Run hicPCA adjusting the parameters:
 >    - "Matrix to compute on" to `corrected contact matrix dm3 large`
 >    - "Output file format" to `bigwig`
 >
