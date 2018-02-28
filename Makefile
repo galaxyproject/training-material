@@ -6,6 +6,8 @@ SLIDES=$(shell find _site/training-material -name 'slides.html' | sed 's/_site\/
 SLIDES+=$(shell find _site/training-material/*/*/slides/* | sed 's/_site\/training-material\///')
 SITE_URL=http://localhost:4000/training-material
 PDF_DIR=_pdf
+REPO=$(shell echo "$${ORIGIN_REPO:-galaxyproject/training-material}")
+BRANCH=$(shell echo "$${ORIGIN_BRANCH:-master}")
 
 ifeq ($(shell uname -s),Darwin)
 	CHROME=/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome

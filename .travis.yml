@@ -40,8 +40,9 @@ install:
   - conda env create -f environment.yml
   - source activate galaxy_training_material
   - make install
-  - if [[ $TRAVIS_EVENT_TYPE == "pull_request" ]]; then export BRANCH=$TRAVIS_PULL_REQUEST_BRANCH; else export BRANCH=$TRAVIS_BRANCH; fi
-  - if [[ $TRAVIS_EVENT_TYPE == "pull_request" ]]; then export REPO=$TRAVIS_PULL_REQUEST_SLUG; else export REPO=$TRAVIS_REPO_SLUG;
+  - if [[ $TRAVIS_EVENT_TYPE == "pull_request" ]]; then export ORIGIN_BRANCH=$TRAVIS_PULL_REQUEST_BRANCH; else export ORIGIN_BRANCH=$TRAVIS_BRANCH; fi
+  - if [[ $TRAVIS_EVENT_TYPE == "pull_request" ]]; then export ORIGIN_REPO=$TRAVIS_PULL_REQUEST_SLUG; else export ORIGIN_REPO=$TRAVIS_REPO_SLUG;
+  - echo $ORIGIN_REPO $ORIGIN_BRANCH
 
 script:
   # Check website
