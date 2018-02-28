@@ -35,7 +35,7 @@ After a corrected Hi-C matrix is created other tools can be used to visualize it
 > ### {% icon hands_on %} Hands-on: Data upload
 >
 > 1. Create a new history
-> 2. Import from [Zenodo](https://doi.org/10.5281/zenodo.1176070).
+> 2. Import from [Zenodo](https://doi.org/10.5281/zenodo.1183661).
 >
 >    > ### {% icon tip %} Tip: Importing data via links
 >    >
@@ -45,8 +45,8 @@ After a corrected Hi-C matrix is created other tools can be used to visualize it
 >    > Below are the links to the read files that can be copied and pasted in the upload manager.
 >    >
 >    > ```
->    > https://zenodo.org/record/1176070/files/HiC_S2_1p_10min_lowU_R1.fastq.gz
->    > https://zenodo.org/record/1176070/files/HiC_S2_1p_10min_lowU_R2.fastq.gz
+>    > https://zenodo.org/record/1183661/files/HiC_S2_1p_10min_lowU_R1.fastq.gz
+>    > https://zenodo.org/record/1183661/files/HiC_S2_1p_10min_lowU_R2.fastq.gz
 >    > ```
 >    >
 >    > * Paste the links into the text field
@@ -181,6 +181,8 @@ In our case the distribution describes the counts per bin of a genomic distance.
 >    - "+ Insert Chromosomes to include (and order to plot in):" to `chr3R`
 >    - "+ Insert Chromosomes to include (and order to plot in):" to `chrX`
 >
+> 2. Rename the corrected matrix to `10 kb corrected contact matrix`.
+>
 {: .hands_on}
 
 It can happen that the correction stops with:
@@ -198,13 +200,16 @@ We can now plot chromosome 2L with the corrected matrix.
 
 > ### {% icon hands_on %} Hands-on: Plotting the corrected Hi-C matrix
 >
-> 1. **hicPlotMatrix** {% icon tool %}: Run hicPlotMatrix on the corrected matrix adjusting the parameters:
+> 1. **hicPlotMatrix** {% icon tool %}: Run hicPlotMatrix on `10 kb corrected contact matrix` adjusting the parameters:
 >    - "Plot title" to `Hi-C matrix for dm3`
 >    - "Plot per chromosome" to `False`
 >    - "Plot only this region" to `chr2L`
 >    - "Plot the log1p of the matrix values" to `True`
 >
 {: .hands_on}
+
+
+The steps so far would have led to long run times if real data would have been used. We therefore prepared a new matrix for you, `corrected contact matrix dm3 large`. Please load it into your history.
 
 # TAD calling
 
@@ -216,50 +221,93 @@ TAD calling works in two steps: First HiCExplorer computes a TAD-separation scor
 
 > ### {% icon hands_on %} Hands-on: Finding TADs
 >
-> 1. **hicFindTADs** {% icon tool %}: Run hicFindTADs on the corrected matrix adjusting the parameters:
+> 1. **hicFindTADs** {% icon tool %}: Run hicFindTADs on `corrected contact matrix dm3 large` adjusting the parameters:
 >    - "Minimum window length (in bp) to be considered to the left and to the right of each Hi-C bin." to `30000`
->    - "Maximum window length (in bp) to be considered to the left and to the right of each Hi-C bin." to `60000`
+>    - "Maximum window length (in bp) to be considered to the left and to the right of each Hi-C bin." to `100000`
 >    - "Step size when moving from minDepth to maxDepth" to `10000`
 >    - "Multiple Testing Corrections" to `False discovery rate`
 >    - "q-value" to `0.05` 
->    - "Minimum threshold of the difference between the TAD-separation score of a putative boundary and the mean of the TAD-sep. score of surrounding bins." to `0.05`
+>    - "Minimum threshold of the difference between the TAD-separation score of a putative boundary and the mean of the TAD-sep. score of surrounding bins." to `0.001`
 >
 {: .hands_on}
 
 As an output we get the boundaries, domains and scores separated files. We will use in the plot later only the TAD-score file.
 
+
+> ### {% icon hands_on %} Hands-on: Computing A / B compartments
+>
+> 1. **hicPlotTADs** {% icon tool %}: Run hicPCA adjusting the parameters:
+>    - "Matrix to compute on" to `corrected contact matrix dm3 large`
+>    - "Output file format" to `bigwig`
+>
+{: .hands_on}
+
+
 We can plot the TADs for a given chromosomal region. For this we will use [hicPlotTADs](http://hicexplorer.readthedocs.io/en/latest/content/tools/hicPlotTADs.html). But before make sure to import [gene track file](https://zenodo.org/record/1176070/files/dm6_genes.bed) in .bed format from [Zenodo](https://doi.org/10.5281/zenodo.1176070).
 
+For the next step we need additional data tracks. Please load `dm3_genes.bed`, `H3K27me3.bw`, `H3K36me3.bw` and `H4K16ac.bw` to your history.
 
 > ### {% icon hands_on %} Hands-on: Plotting TADs
 >
 > 1. **hicPlotTADs** {% icon tool %}: Run hicPlotTADs adjusting the parameters:
->    - "Region of the genome to limit the operation" to `chr2L:1000000-5000000`
+>    - "Region of the genome to limit the operation" to `chr2L:14500000-16500000`
 >    - "Choose style of the track" to `TAD visualization`
->    - "Plot title" to `HiC dm3 chr2L:1000000-5000000`
+>    - "Plot title" to `HiC dm3 chr2L:14500000-16500000`
 >    - "Matrix to compute on." to the corrected matrix from hicCorrectMatrix step
->    - "Depth" to `2000000`
->    - "Plotting type" to `interaction`
->    - "Boundaries file" to the output from hicFindTADs
+>    - "Depth" to `750000`
+>    - "Boundaries file" to `hicFindTads on data XX: TAD domains`
 >    - "Show x labels" to `Yes`
+> 
 >    - "+Insert Include tracks in your plot"
->    - "Choose style of the track" to `TAD score`
+>    - "Choose style of the track" to `Bedgraph matrix track`
 >    - "Plot title" to `TAD separation score`
->    - "Track file bedgraph format" to the output from hicFindTADs step
+>    - "Track file bedgraph format" to `hicFindTads on data XX: matrix with multi-scale TAD scores`
 >    - "Color of track" to blue
->    - "Width" to `2`
+>    - "Width" to `4`
+>
+>
+>    - "+Insert Include tracks in your plot"
+>    - "Choose style of the track" to `Bigwig track`
+>    - "Plot title" to `PC1`
+>    - "Track file bigwig format" the first computed `hicPCA` result
+>    - "Width" to `1.5`
+>
+>    - "+Insert Include tracks in your plot"
+>    - "Choose style of the track" to `Bigwig track`
+>    - "Plot title" to `PC1`
+>    - "Track file bigwig format" the second computed `hicPCA` result
+>    - "Width" to `1.5`
+>
+>    - "+Insert Include tracks in your plot"
+>    - "Choose style of the track" to `Bigwig track`
+>    - "Plot title" to `PC1`
+>    - "Track file bigwig format" to `H3K36me3`
+>    - "Width" to `1.5`
+>
+>    - "+Insert Include tracks in your plot"
+>    - "Choose style of the track" to `Bigwig track`
+>    - "Plot title" to `PC1`
+>    - "Track file bigwig format" to `H3K27me3`
+>    - "Width" to `1.5`
+>
+>    - "+Insert Include tracks in your plot"
+>    - "Choose style of the track" to `Bigwig track`
+>    - "Plot title" to `PC1`
+>    - "Track file bigwig format" to `H4K16ac`
+>    - "Width" to `1.5`
+>
 >    - "+Insert Include tracks in your plot"
 >    - "Choose style of the track" to `Gene track`
 >    - "Plot title" to `dm3 genes`
 >    - "Track file bedgraph format" the imported .bed file
->    - "Width" to `5`
->    - "Plot labels" to `No`
->    - "Configure x-axis" to `Yes`
->    - "Fontsize" to `16`
->    - "Where to place the x-axis" to `Top`
+>    - "Width" to `3`
+>    - "Type" to `genes`
+>    - "Gene rows" to `15`
 >
 {: .hands_on}
 
+The resulting image should look like this one: 
+![FastQC webpage results](../../images/plotTADs.png)
 # Conclusion
 {:.no_toc}
 
