@@ -7,9 +7,9 @@ tutorial_name: ref-based
 # Introduction
 {:.no_toc}
 
-In the study of [Brooks *et al.* 2011](http://genome.cshlp.org/content/21/2/193.long), the Pasilla (PS) gene, *Drosophila* homologue of the Human splicing regulators Nova-1 and Nova-2 Proteins, was depleted in *Drosophila melanogaster* by RNAi. The authors wanted to identify exons that are regulated by Pasilla gene using RNA sequencing data.
+In the study of [Brooks *et al.* 2011](http://genome.cshlp.org/content/21/2/193.long), the *Pasilla* (*PS*) gene, *Drosophila* homologue of the Human splicing regulators Nova-1 and Nova-2 Proteins, was depleted in *Drosophila melanogaster* by RNAi. The authors wanted to identify exons that are regulated by *Pasilla* gene using RNA sequencing data.
 
-Total RNA was isolated and used for preparing either single-end or paired-end RNA-seq libraries for treated (PS depleted) samples and untreated samples. These libraries were sequenced to obtain a collection of RNA sequencing reads for each sample. The effects of Pasilla gene depletion on splicing events can then be analyzed by comparison of RNA sequencing data of the treated (PS depleted) and the untreated samples.
+Total RNA was isolated and used for preparing either single-end or paired-end RNA-seq libraries for treated (PS depleted) samples and untreated samples. These libraries were sequenced to obtain a collection of RNA sequencing reads for each sample. The effects of *Pasilla* gene depletion on splicing events can then be analyzed by comparison of RNA sequencing data of the treated (PS depleted) and the untreated samples.
 
 The genome of *Drosophila melanogaster* is known and assembled. It can be used as reference genome to ease this analysis.  In a reference based RNA-seq data analysis, the reads are aligned (or mapped) against a reference genome, *Drosophila melanogaster* here, to significantly improve the ability to reconstruct transcripts and then identify differences of expression between several conditions.
 
@@ -30,7 +30,7 @@ The original data is available at NCBI Gene Expression Omnibus (GEO) under acces
 
 We will look at the 7 first samples:
 
-- 3 treated samples with Pasilla (PS) gene depletion: [GSM461179](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM461179), [GSM461180](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM461180), [GSM461181](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM461181)
+- 3 treated samples with *Pasilla* (PS) gene depletion: [GSM461179](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM461179), [GSM461180](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM461180), [GSM461181](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM461181)
 - 4 untreated samples: [GSM461176](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM461176), [GSM461177](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM461177), [GSM461178](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM461178), [GSM461182](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM461182)
 
 Each sample constitutes a separate biological replicate of the corresponding condition (treated or untreated). Moreover, two of the treated and two of the untreated samples are from a paired-end sequencing assay, while the remaining samples are from a single-end sequencing experiment.
@@ -67,7 +67,7 @@ We have extracted sequences from the Sequence Read Archive (SRA) files to build 
 >           ```
 >
 > 3. Rename the datasets according to the samples
-> 4. Check that the datatype is `fastqsanger`, not `fastq`.
+> 4. Check that the datatype is `fastqsanger` (**not** `fastq`).
 >    If the datatype is `fastq`, please change the file type to `fastqsanger`
 >
 >    > ### {% icon tip %} Tip: Changing the datatype
@@ -91,7 +91,7 @@ We have extracted sequences from the Sequence Read Archive (SRA) files to build 
 >    {: .tip}
 {: .hands_on}
 
-The sequences are raw sequences from the sequencing machine, without any pretreatments. They need to be investigated for their quality.
+The sequences are raw data from the sequencing machine, without any pretreatments. They need to be assessed for their quality.
 
 ## Quality control
 
@@ -155,7 +155,7 @@ For quality control, we use similar tools as described in [NGS-QC tutorial]({{si
 >
 {: .hands_on}
 
-As the genome of *Drosophila melanogaster* is known and assembled, we can use this information and map the sequences on this genome to identify the effects of Pasilla gene depletion on splicing events.
+As the genome of *Drosophila melanogaster* is known and assembled, we can use this information and map the sequences on this genome to identify the effects of *Pasilla* gene depletion on splicing events.
 
 # Mapping
 
@@ -234,7 +234,7 @@ We will map our RNA reads to the *Drosophila melanogaster* genome using STAR.
 >
 >    > ### {% icon question %} Question
 >    >
->    > Which percentage of reads were mapped 1 time for both samples?
+>    > Which percentage of reads were mapped exactly once for both samples?
 >    >
 >    >    <details>
 >    >    <summary>Click to view answer</summary>
@@ -335,7 +335,7 @@ A powerful tool to visualize the content of BAM files is the Integrative Genomic
 >
 {: .hands_on}
 
-After the mapping, we have in the generated mapping file the information about where the reads are mapped on the reference genome. So for each mapped read, we know where it is mapped and how good it was mapped.
+After the mapping, we have the information on where the reads are located on the reference genome. We also know how well they were mapped.
 
 The next step in the RNA-Seq data analysis is quantification of expression level of the genomic features (gene, transcript, exons, ...) to be able then to compare several samples for the different expression analysis. The quantification consist into taking each known genomic feature (*e.g.* gene) of the reference genome and then counting how many reads are mapped on this genomic feature. So, in this step, we start with an information per mapped reads to end with an information per genomic feature.
 
@@ -344,14 +344,14 @@ The next step in the RNA-Seq data analysis is quantification of expression level
 > The quantification depends on the definition of the genomic features of the reference genome, and then on the annotations. We strongly recommend you to use an annotation corresponding to the same version of the reference genome you used for the mapping.
 {: .comment}
 
-To identify exons that are regulated by the Pasilla gene, we need to identify genes and exons which are differentially expressed between samples with PS gene depletion and control samples.
+To identify exons that are regulated by the *Pasilla* gene, we need to identify genes and exons which are differentially expressed between samples with PS gene depletion and control samples.
 In this tutorial, we will then analyze the differential gene expression, but also the differential exon usage.
 
-The mapping exercise worked for you? Great! :tada:
+Did mapping exercise work for you? Great! :tada:
 
 # Analysis of the differential gene expression
 
-We will first investigate the differential gene expression to identify which genes are impacted by the Pasilla gene depletion
+We will first investigate the differential gene expression to identify which genes are impacted by the *Pasilla* gene depletion
 
 ## Count the number of reads per annotated gene
 
@@ -511,7 +511,7 @@ In the previous section, we counted reads that mapped to genes for two sample. T
 
 To save time, we have run the necessary steps for you and obtained 7 count files, available on [Zenodo](https://dx.doi.org/10.5281/zenodo.1185122).
 
-These files contain for each gene of Drosophila the number of reads mapped to it. We could compare the files directly and calculate the extent of differential gene expression, but the number of sequenced reads mapped to a gene depends on:
+These files contain for each gene of *Drosophila* the number of reads mapped to it. We could compare the files directly and calculate the extent of differential gene expression, but the number of sequenced reads mapped to a gene depends on:
 
 - Its own expression level
 - Its length
@@ -672,7 +672,7 @@ We would proceed in several steps
 >
 >    The generated file contains to many genes to get a meaningful heatmap. So we will take only the genes with an absoluted fold change > 2
 >
-> 2. **Filter** {% icon tool %}: Extract genes with an abs(log2FC) > 1
+> 2. **Filter** {% icon tool %}: Extract genes with an abs(log<sub>2</sub>FC) > 1 (FC stands for "fold change")
 >    - "Filter" to the differentially expressed genes
 >    - "With following condition" to `abs(c3)>1`
 >
@@ -688,7 +688,7 @@ We would proceed in several steps
 >
 >    The number of genes is still too high there. So we will take only the 10 most up-regulated and 10 most down-regulated genes
 >
-> 3. **Sort** {% icon tool %}: Sort the genes by log2 FC
+> 3. **Sort** {% icon tool %}: Sort the genes by log<sub>2</sub>FC
 >    - "Sort Dataset" to the differentially expressed genes with abs(FC) > 2
 >    - "on column" to `3`
 >    - "with flavor" to `Numerical sort`
@@ -709,9 +709,9 @@ We would proceed in several steps
 >
 {: .hands_on}
 
-We now have a table with 20 lines corresponding to the most differentially expressed genes. And for each of the gene, we have its id, its mean normalized counts (averaged over all samples from both conditions), its log2FC and other information.
+We now have a table with 20 lines corresponding to the most differentially expressed genes. And for each of the gene, we have its id, its mean normalized counts (averaged over all samples from both conditions), its log<sub>2</sub>FC and other information.
 
-We could plot the log2FC for the different genes, but here we would like to look at the heatmap with the read counts for these genes in the different samples. So we need to extract the read counts for these genes.
+We could plot the log<sub>2</sub>FC for the different genes, but here we would like to look at the heatmap with the read counts for these genes in the different samples. So we need to extract the read counts for these genes.
 
 We will join the normalized count table generated by DESeq with the table we just generated to conserved in the normalized count table only the lines corresponding to the most differentially expressed genes
 
@@ -725,7 +725,7 @@ We will join the normalized count table generated by DESeq with the table we jus
 >    - "Keep lines of first input that do not join with second input" to `No`
 >    - "Keep the header lines" to `Yes`
 >
->    The generated files has too many columns: the ones with mean normalized counts, the log2FC and other information. We need to remove them
+>    The generated files has too many columns: the ones with mean normalized counts, the log<sub>2</sub>FC and other information. We need to remove them
 >
 > 2. **Cut** {% icon tool %}: Conserve the columns with normalized counts
 >    - "Cut columns" to `c1,c2,c3,c4,c5,c6,c7,c8`
@@ -981,6 +981,6 @@ Unfortunately, in the process of counting, we loose all the information of the g
 # Conclusion
 {:.no_toc}
 
-In this tutorial, we have analyzed real RNA sequencing data to extract useful information, such as which genes are up- or downregulated by depletion of the Pasilla gene and which genes are regulated by the Pasilla gene. To answer these questions, we analyzed RNA sequence datasets using a reference-based RNA-seq data analysis approach. This approach can be summarized with the following scheme:
+In this tutorial, we have analyzed real RNA sequencing data to extract useful information, such as which genes are up- or downregulated by depletion of the *Pasilla* gene and which genes are regulated by the *Pasilla* gene. To answer these questions, we analyzed RNA sequence datasets using a reference-based RNA-seq data analysis approach. This approach can be summarized with the following scheme:
 
 ![Summary of the analysis pipeline used](../../images/rna_quantification.png "Summary of the analysis pipeline used")
