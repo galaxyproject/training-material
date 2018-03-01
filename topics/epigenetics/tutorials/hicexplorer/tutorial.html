@@ -197,6 +197,7 @@ For this the following steps are necessary to be performed:</p>
   <li><a href="#plotting-the-hi-c-matrix" id="markdown-toc-plotting-the-hi-c-matrix">Plotting the Hi-C matrix</a></li>
   <li><a href="#correction-of-hi-c-matrix" id="markdown-toc-correction-of-hi-c-matrix">Correction of Hi-C matrix</a></li>
   <li><a href="#tad-calling" id="markdown-toc-tad-calling">TAD calling</a></li>
+  <li><a href="#integrating-hi-c-and-other-data" id="markdown-toc-integrating-hi-c-and-other-data">Integrating Hi-C and other data</a></li>
 </ol>
 
 </blockquote>
@@ -475,6 +476,8 @@ This is often caused by bins of low counts. Use a more stringent filtering of bi
 
 </blockquote>
 
+<h1 id="integrating-hi-c-and-other-data">Integrating Hi-C and other data</h1>
+
 <p>We can plot the TADs for a given chromosomal region. For this we will use <a href="http://hicexplorer.readthedocs.io/en/latest/content/tools/hicPlotTADs.html">hicPlotTADs</a>. But before make sure to import <a href="https://zenodo.org/record/1176070/files/dm6_genes.bed">gene track file</a> in .bed format from <a href="https://doi.org/10.5281/zenodo.1176070">Zenodo</a>.</p>
 
 <p>For the next step we need additional data tracks. Please load <code class="highlighter-rouge">dm3_genes.bed</code>, <code class="highlighter-rouge">H3K27me3.bw</code>, <code class="highlighter-rouge">H3K36me3.bw</code> and <code class="highlighter-rouge">H4K16ac.bw</code> to your history.</p>
@@ -501,7 +504,7 @@ This is often caused by bins of low counts. Use a more stringent filtering of bi
     <li>“+Insert Include tracks in your plot”</li>
     <li>“Choose style of the track” to <code class="highlighter-rouge">Bedgraph matrix track</code></li>
     <li>“Plot title” to <code class="highlighter-rouge">TAD separation score</code></li>
-    <li>“Track file bedgraph format” to <code class="highlighter-rouge">hicFindTads on data XX: matrix with multi-scale TAD scores</code></li>
+    <li>“Track file bedgraph format” to <code class="highlighter-rouge">hicFindTads on data XX: TAD information in bm file</code></li>
     <li>“Color of track” to blue</li>
     <li>“Width” to <code class="highlighter-rouge">4</code></li>
     <li>“Set type to lines” to ‘True’</li>
