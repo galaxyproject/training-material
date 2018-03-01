@@ -246,6 +246,7 @@ As an output we get the boundaries, domains and scores separated files. We will 
 >
 {: .hands_on}
 
+# Integrating Hi-C and other data
 
 We can plot the TADs for a given chromosomal region. For this we will use [hicPlotTADs](http://hicexplorer.readthedocs.io/en/latest/content/tools/hicPlotTADs.html). But before make sure to import [gene track file](https://zenodo.org/record/1176070/files/dm6_genes.bed) in .bed format from [Zenodo](https://doi.org/10.5281/zenodo.1176070).
 
@@ -266,7 +267,7 @@ For the next step we need additional data tracks. Please load `dm3_genes.bed`, `
 >    - "+Insert Include tracks in your plot"
 >    - "Choose style of the track" to `Bedgraph matrix track`
 >    - "Plot title" to `TAD separation score`
->    - "Track file bedgraph format" to `hicFindTads on data XX: matrix with multi-scale TAD scores`
+>    - "Track file bedgraph format" to `hicFindTads on data XX: TAD information in bm file`
 >    - "Color of track" to blue
 >    - "Width" to `4`
 >    - "Set type to lines" to 'True'
