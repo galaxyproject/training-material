@@ -171,8 +171,8 @@ The data we use in this tutorial is available at [Zenodo](https://zenodo.org/rec
 >
 > ![Methylation output](../../images/methylation_output.png)
 >
-> Lets see how the methylation looks for a view provided files:
-> 1. **Galaxy** {% icon tool %}: Import from the data library the files `NB1_CpG.meth.bedGraph`
+> Lets see how the methylation looks for a few provided files:
+> 1. **Galaxy** {% icon tool %}: Import the files `NB1_CpG.meth.bedGraph` from the data library
 > 2. **Wig/BedGraph-to-bigWig** {% icon tool %} with the following parameters:
 >    - Use the imported file to transform it to a bigWig file.
 >
