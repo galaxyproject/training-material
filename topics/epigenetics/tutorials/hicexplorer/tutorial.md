@@ -278,6 +278,8 @@ For the next step we need additional data tracks. Please load `dm3_genes.bed`, `
 >    - "Choose style of the track" to `Bigwig track`
 >    - "Plot title" to `PC1`
 >    - "Track file bigwig format" the first computed `hicPCA` result
+>    - "Minimum value" to `-0.03`
+>    - "Maximum value" to `0.03`
 >    - "Width" to `1.5`
 >
 > 4.**hicPlotTADs** {% icon tool %}:
@@ -285,6 +287,8 @@ For the next step we need additional data tracks. Please load `dm3_genes.bed`, `
 >    - "Choose style of the track" to `Bigwig track`
 >    - "Plot title" to `PC1`
 >    - "Track file bigwig format" the second computed `hicPCA` result
+>    - "Minimum value" to `-0.03`
+>    - "Maximum value" to `0.03`
 >    - "Width" to `1.5`
 >
 > 5.**hicPlotTADs** {% icon tool %}:
