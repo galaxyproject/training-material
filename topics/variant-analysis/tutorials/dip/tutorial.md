@@ -189,26 +189,24 @@ Here is what to do to load the data:
 
 ## Generating and post-processing FreeBayes calls
 
->### Running FreeBayes
+> ### {% icon hands_on %} Hands-on: Running FreeBayes
 >
->Select **FreeBayes** from **NGS: Variant Analysis** section of the tool menu (left pane of Galaxy's interface).
->Make sure the top part of the interface looks like shown below. Here we selected `GIAB-Ashkenazim-Trio-hg19` as input and set **Using reference genome** to `hg19` and **Choose parameter selection level** to `5`. The interface should look like this:
->
->![FreeBayes input and parameters](../../images/FreeBayes_settings.png)
->
->Scrolling down to **Tweak algorithmic features?** click `Yes` and set **Calculate the marginal probability of genotypes and report as GQ in each sample field in the VCF output** to `Yes`. This would help us evaluating the quality of genotype calls.
->
->![FreeBayes additional parameters](../../images/freebayes_gq.png)
->
->Depending on how busy Galaxy is this may take a little bit of time (coffee break?). Eventually this will produce a dataset in [VCF](http://www.1000genomes.org/wiki/Analysis/variant-call-format) format containing 35 putative variants. Before we can continue we need to post-process this dataset by breaking compound variants into multiple independent variants with **VcfAllelicPrimitives** tool found within **NGS: VCF Manipulation** section. This is necessary for ensuring the smooth sailing through downstream analyses:
+> 1. **FreeBayes** {% icon tool %}: Run FreeBayes adjusting parameters:
+>    - "BAM dataset" to `GIAB-Ashkenazim-Trio-hg19`
+>    - "Using reference genome" to `hg19`
+>    - "Choose parameter selection level" to `5. Full list of options`
+>    - "Algorithmic features" to `Set algorithmic features`
+>    - "Calculate the marginal probability of genotypes and report as GQ in each sample field in the VCF output" to `Yes`
 >
 {: .hands_on}
 
->### Simplifying variant representation
+>Depending on how busy Galaxy is this may take a little bit of time (coffee break?). Eventually this will produce a dataset in [VCF](http://www.1000genomes.org/wiki/Analysis/variant-call-format) format containing 35 putative variants. Before we can continue we need to post-process this dataset by breaking compound variants into multiple independent variants with **VcfAllelicPrimitives** tool found within **NGS: VCF Manipulation** section. This is necessary for ensuring the smooth sailing through downstream analyses.
+
+> ### {% icon hands_on %} Hands-on: Simplifying variant representation
 >
->Select FreeBayes output as the input for this tool and make sure **Maintain site and allele-level annotations when decomposing** and **Maintain genotype-level annotations when decomposing** are set to `Yes`:
->
->![VcfAllelicPrimitives tool and parameters](../../images/vcfallelicprimitives.png)
+> 1. **VcfAllelicPrimitives** {% icon tool %}: Run VcfAllelicPrimitives adjusting parameters:
+>    - "Maintain site and allele-level annotations when decomposing" to `Yes`
+>    - "Maintain genotype-level annotations when decomposing" to `Yes`
 >
 {: .hands_on}
 
@@ -231,12 +229,13 @@ chr19 618854 . G A 81.7546
 
 At this point we are ready to begin annotating variants using [SnpEff](http://snpeff.sourceforge.net/SnpEff.html). SnpEff, a project maintained by [Pablo Cingolani](https://www.linkedin.com/in/pablocingolani) "*...annotates and predicts the effects of variants on genes (such as amino acid changes)...*" and so is critical for functional interpretation of variation data.
 
->### Running SNPeff
+> ### {% icon hands_on %} Hands-on: Running SNPeff
 >
->Select **NGS: Variant Analysis** &#8594; **SnpEff**. Select the latest version of annotation database matching genome version against which reads were mapped and VCF produced. In this case it is `GRCh37.75: hg19`:
+> 1. **SNPeff** {% icon tool %}: Run SNPeff adjusting parameters:
+>    - "Genome" to `hg19`
 >
->![SNPeff input and parameters](../../images/snpeff.png)
->
+{: .hands_on}
+
 >SnpEff will generate two outputs: (1) an annotated VCF file and (2) an HTML report. The report contains a number of useful metrics such as distribution of variants across gene features:
 >
 >![SNPeff output](../../images/snpeff_chart.png)
@@ -262,17 +261,22 @@ The first step is to convert a VCF file we would like to analyze into a GEMINI d
 |family1	   | HG002_NA24385_son	  | HG003_NA24149_father | HG004_NA24143_mother | 1 | 2 | CEU|
 {: .table .table-responsive}
 
+> ### {% icon hands_on %} Hands-on: Loading data to GEMINI
+>
+> 1. **GEMINI Load** {% icon tool %}: Run GEMINI Load adjusting parameters:
+>    - "Sample information file in PED+ format" to the PED file
+>    - "Choose a gemini annotation database" to the latest
+>
+{: .hands_on}
 
->### Loading data to GEMINI
+>This creates a sqlite database. To see the content of the database use **GEMINI_db_info**.
+
+> ### {% icon hands_on %} Hands-on: GEMINI_db_info
 >
->So let's load data into GEMINI. Set VCF and PED inputs:
+> 1. **GEMINI_db_info** {% icon tool %}: Run GEMINI_db_info with default parameters.
 >
->![GEMINI load input and parameters](../../images/gemini_load.png)
->
->This creates a sqlite database. To see the content of the database use **GEMINI_db_info**:
->
->![gemini_db_info tool to observe sqlite database](../../images/gemini_db_info.png)
->
+{: .hands_on}
+
 >This produce a list of [all tables and fields](https://github.com/nekrut/galaxy/wiki/datasets/gemini_tables.txt) in the database.
 >
 {: .hands_on}
@@ -284,18 +288,14 @@ GEMINI database is queried using the versatile SQL language (more on SQL [here](
 The examples below are taken from "[Intro to Gemini](https://s3.amazonaws.com/gemini-tutorials/Intro-To-Gemini.pdf)" tutorial. For extensive documentation see "[Querying GEMINI](https://gemini.readthedocs.org/en/latest/content/querying.html)".
 
 > ### Are there "novel" varinats that are not annotated in dbSNP database?
+
+> ### {% icon hands_on %} Hands-on: GEMINI query
 >
+> 1. **GEMINI query** {% icon tool %}: Run GEMINI query adjusting parameters:
+>    - "The query to be issued to the database" to `SELECT count(*) FROM variants WHERE in_dbsnp == 0`
 >
->To answer this question we will type the following query:
->
->```
->SELECT count(*) FROM variants WHERE in_dbsnp == 0
->```
->
->into **The query to be issued to the database** field of the interface:
->
->![GEMINI query overview](../../images/gemini_query1.png)
->
+{: .hands_on}
+
 >As we can see from [output (Click this link to see it)](https://usegalaxy.org/datasets/bbd44e69cb8906b51bb37b9032761321/display/?preview=True) there are 21 variants that are not annotated in dbSNP.
 >
 {: .question}
@@ -332,21 +332,16 @@ GEMINI provides access to genotype, sequencing depth, genotype quality, and geno
 
 
 >### At how many sites does child in our trio have a non-reference allele?
+
+> ### {% icon hands_on %} Hands-on: GEMINI query
 >
->To answer this we will use two fields of **GEMINI_query** interface. In the **The query to be issued to the database** we will type:
+> 1. **GEMINI query** {% icon tool %}: Run GEMINI query adjusting parameters:
+>    - "The query to be issued to the database" to `SELECT * from variants`
 >
->```
->SELECT * from variants
->```
+>    - "Restrictions to apply to genotype values" to `gt_types.HG002_NA24385_son <> HOM_REF`
 >
->and in the field **Restrictions to apply to genotype values** we will enter:
->
->```
->gt_types.HG002_NA24385_son <> HOM_REF
->```
->
->![GEMINI queries](../../images/gemini_query2.png)
->
+{: .hands_on}
+
 >This produce [a list of sites](https://usegalaxy.org/datasets/bbd44e69cb8906b560921700703d0255/display/?preview=True)
 >
 {: .question}

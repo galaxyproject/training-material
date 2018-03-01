@@ -83,8 +83,6 @@ For quality control, we use similar tools as described in [NGS-QC tutorial]({{si
 >
 > 2. **Trimmomatic** {% icon tool %}: Trim off the low quality bases from the ends of the reads to increase mapping efficiency. Run `Trimmomatic` on each pair of forward and reverse reads.
 >
->    ![Trimmomatic tool input](../../images/trimmomatic.png)
->
 > 3. **FastQC** {% icon tool %}: Re-run `FastQC` on trimmed reads and inspect the differences.
 >
 >    > ### {% icon question %} Questions
@@ -148,8 +146,6 @@ Spliced mappers have been developed to efficiently map transcript-derived reads 
 >    - **Specify strand-specific information**: First Strand (R/RF)
 >    - **Transcriptome assembly reporting**: Report alignments tailored for transcript assemblers including StringTie.
 >
->       ![HISAT tool input and parameters](../../images/hisat_tool_form.png)
->
 > 2. **HISAT** {% icon tool %}: Run `HISAT` on the remaining forward/reverse read pairs with the same parameters.
 >
 {: .hands_on}
@@ -161,7 +157,6 @@ Now that we have mapped our reads to the mouse genome with `HISAT`, we want to d
 >
 > 1. **Stringtie** {% icon tool %}: Run `Stringtie` on the `HISAT` alignments using the default parameters.
 >    - Use batch mode to run all four samples from one tool form.
-> ![Stringtie input and parameters](../../images/Stringtie.png)
 {: .hands_on}
 
 # Transcriptome assembly
@@ -173,12 +168,10 @@ We just generated four transcriptomes with `Stringtie` representing each of the 
 > 1. **Stringtie-merge** {% icon tool %}: Run `Stringtie-merge` on the `Stringtie` assembled transcripts along with the RefSeq annotation file we imported earlier.
 >    - Use batch mode to inlcude all four `Stringtie` assemblies as "input_gtf".
 >    - Select the "RefSeq GTF mm10" file as the "guide_gff".
-> ![Stringtie-merge input and parameters](../../images/stringtiemergetf.png)
 >
 > 2. **GFFCompare** {% icon tool %}: Run `GFFCompare` on the `Stringtie-merge` generated transcriptome along with the RefSeq annotation file.
 >    - Select the output of `Stringtie-merge` as the GTF input.
 >    - Select "Yes" under `Use Reference Annotation" and select the "RefSeq GTF mm10" file as the "Reference Annotation".`
-> ![GFFCompare input and parameters](../../images/GFFComparetf.png)
 >
 {: .hands_on}
 
@@ -223,8 +216,6 @@ The recommended mode is "union", which counts overlaps even if a read only share
 >    - Expand **Advanced options**
 >    - **GFF gene identifier**: enter "transcript_id"
 >    - **Strand specificity of the protocol**: select "Stranded (reverse)"
-> ![FeatureCounts input and parameters](../../images/featurecountsA.png)
-> ![FeatureCounts advanced parameters](../../images/featurecountsB.png)
 >
 {: .hands_on}
 
@@ -250,7 +241,6 @@ Transcript expression is estimated from read counts, and attempts are made to co
 >       {: .comment}
 >    - **Visualising the analysis results**: Yes
 >    - **Output normalized counts table**: Yes
-> ![DESeq2 input and parameters](../../images/deseq2tf.png)
 {: .hands_on}
 
 The first output of `DESeq2` is a tabular file. The columns are:
@@ -336,12 +326,12 @@ In this last section, we will convert our aligned read data from BAM format to b
 >    - **Effective genome size**: mm9 (2150570000)
 >    - Expand the **Advanced options**
 >    - **Only include reads originating from fragments from the forward or reverse strand**: forward
->![bamCoverage input and parameters](../../images/bamCoverage_forward.png)
+>
 > 2. **Rename** {% icon tool %}: Rename the outputs to reflect the origin of the reads and that they represent the reads mapping to the PLUS strand.
 >
 > 3. **bamCoverage** {% icon tool %}: Repeat Step 1 except changing the following parameter:
 >    - **Only include reads originating from fragments from the forward or reverse strand**: reverse
-> ![bamCoverage input and reverse parameter](../../images/bamCoverage_reverse.png)
+>
 > 4. **Rename** {% icon tool %}: Rename the outputs to reflect the origin of the reads and that they represent the reads mapping to the MINUS strand.
 {: .hands_on}
 

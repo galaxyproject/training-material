@@ -167,7 +167,6 @@ We are interested in visualizing all expression values of all transcripts relati
 >   - "Gene ID" to `NDUFV1`
 >   - Your input form parameters should look like the following. If so, click on "Execute"
 >
-> ![Expression plot_form](../../images/cummerbund-expression-plot-form.png)
 {: .hands_on}
 
 Our first CummeRbund plot is the "Expression Plot":

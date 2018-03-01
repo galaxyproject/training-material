@@ -333,8 +333,6 @@ We will map the reads with TopHat2. Select **TopHat** from **NGS: RNA Analysis**
 >* **TopHat settings to use** = `Full parameter list` This is done to be able to specify the strandedness of the library.
 >* **Library Type** = `FR First Strand`
 >
->![TopHat interface](../../images/tophat_interface.png)
->
 >The same procedure is then repeated for collection **c2**. In the end it generates a lot of datasets in the history resulting in something resembling an image below. TopHat produces five types of output and because we started with dataset collections every one of the green boxes shown below is actually a collection of outputs for **c1** and **c2**, respectively.
 >
 >![TopHat outputs for both collections](../../images/tophat_output.png)
@@ -385,10 +383,7 @@ Before we can use `HTseq-count` we need to download gene annotations for version
 
 >`htseq-count` needs strand information to proceed. The strand information is specified as `+`, `-`, or `.` (unknown) in a GTF dataset. `htseq-count` does not like `.` and will generate an error if such unstranded features appear in data. To prevent these errors from happening we will filter them out from GTF file using **Filter** tool from **Filter and Sort** section of tool menu. Here `c7 != "."` means that we need to filter all rows where strand column (column #7) contains a dot:
 >
->![Filter parameters](../../images/filter_gtf.png)
->
->Select **htseq-count** from **NGS: RNA analysis** section on the left side of the menu. Set parameters as shown below. The red arrow points that to enable `htseq-count` to see collections, you need to select the 'folder' button. In the case of this particular Galaxy [history](https://usegalaxy.org/u/aun1/h/rna-seq-tutorial) we will need to run `htseq-count` twice. Once on TopHat alignemnts for collection **c1** (dataset #37; shown below) and then on alignments for collection **c2** (dataset # 57).|
-|![htseq-count parameters](../../images/htseq_count_interface.png)
+>Select **htseq-count** from **NGS: RNA analysis** section on the left side of the menu. Set parameters as shown below. The red arrow points that to enable `htseq-count` to see collections, you need to select the 'folder' button. In the case of this particular Galaxy [history](https://usegalaxy.org/u/aun1/h/rna-seq-tutorial) we will need to run `htseq-count` twice. Once on TopHat alignemnts for collection **c1** (dataset #37; shown below) and then on alignments for collection **c2** (dataset # 57).
 >
 >This will generate [read counts per gene](https://usegalaxy.org/datasets/bbd44e69cb8906b5d1e80eae6d363142/display/?preview=True).
 
@@ -405,8 +400,6 @@ Before we can use `HTseq-count` we need to download gene annotations for version
 #### DESeq2 in Galaxy
 
 >The `DESeq2` Galaxy's interface is shown below. `DESeq2` allows to incorporate multiple *factors* in the analysis. In our case we only have one factor, which we call **Conditions**. This is because we are trying to find genes that are differentially expressed between two conditions. The first condition will the first **factor level**, while condition 2 will be the second **factor level**. Here the input for this first factor level is set to a collection `84: htseq-count on collection 37` and the input for the second input is set to `92: htseq-count on collection 57`. Make sure that **Visualising the analysis results** is set to `Yes`:
->
->![DESeq2 parameters](../../images/deseq2_interface.png)
 >
 >This will produce [output](https://usegalaxy.org/datasets/bbd44e69cb8906b5d648fe21c36ac662/display/?preview=True) as shown below. The columns are: (**1**) gene identifier, (**2**) mean normalised counts, averaged over all samples from both conditions, (**3**) logarithm (base 2) of the fold change, (**4**) the standard error estimate for the log2 fold change estimate, (**5**) [Wald test](https://en.wikipedia.org/wiki/Wald_test) statistic, (**6**) p value for the statistical significance of this change, and (**7**) *p*-value adjusted for multiple testing with the Benjamini-Hochberg procedure which controls false discovery rate ([FDR](https://en.wikipedia.org/wiki/False_discovery_rate)). There is only one gene with significant change in gene expression between conditions: `CG1803-RC` with *p*-value = 1.6x10<sup>-05</sup>
 >

@@ -62,7 +62,7 @@ Read quality scores (phred scores) in FASTQ-formatted data can be encoded by one
 >
 > 1. **FastQC** {% icon tool %}: Run `FastQC` on each collection of FASTQ read files to assess the overall read/base quality and quality score encoding scheme using the following parameters:
 >    - **Short read data from your current history**: Click the "Dataset collection" tab and then select the blank RNAi sRNA-seq dataset collection
->    ![FastQC tool and parameters](../../images/sRNA/Fig4_fastqc_tool_form.png)
+>
 > 1. Repeat for the *Symplekin* RNAi dataset collection
 >
 >    > ### {% icon question %} Questions
@@ -118,8 +118,6 @@ sRNA-seq library preparation involves adding an artificial adaptor sequence to b
 >    - **Discard reads that became shorter than length INT**: 12
 >    - **Generate a report file**: Yes
 >
->    ![Trim Galore tool and parameters](../../images/sRNA/Fig7_trimgalore_tool_form.png)
->
 > 1. Repeat for the *Symplekin* RNAi dataset collection
 >
 >    We don't want to trim for quality because the adapter-trimmed sequences represent a full small RNA molecule, and we want to maintain the integrity of the entire molecule. We increase the minimum read length required to keep a read because small RNAs can potentially be shorter than 20 nt (the default value). We can check out the generated report file for any sample and see the command for the tool, a summary of the total reads processed and number of reads with an adapter identified, and histogram data of the length of adaptor trimmed. We also see that a very small percentage of low-quality bases have been trimmed
@@ -163,8 +161,6 @@ To first identify rRNA-originating reads (which we are not interested in in this
 >    - **Spliced alignment parameters**: Specify spliced alignment parameters
 >    - **Specify strand-specific information**: Second Strand (F/FR)
 >
->       ![HISAT input and parameters](../../images/sRNA/Fig9_HISAT_rRNA_tool_form.png)
->
 > 1. Repeat for the *Symplekin* RNAi dataset collection
 >
 >    We now need to extract the *unaligned* reads from the output BAM file for aligning to reference miRNA sequences. We can do this by using the `Filter SAM or BAM, output SAM or BAM` tool to obtain reads with a bit flag = 4 (meaning the read is unaligned) and then converting the filtered BAM file to FASTQ format with the `Convert from BAM to FastQ` tool.
@@ -176,15 +172,11 @@ To first identify rRNA-originating reads (which we are not interested in in this
 >
 > 1. Repeat for the *Symplekin* RNAi dataset collection
 >
->       ![Filter SAM or BAM, output SAM or BAM input and parameters](../../images/sRNA/Fig10_Filter_rRNA_tool_form.png)
->
 > 1. **Convert from BAM to FastQ** {% icon tool %}: Run `Convert from BAM to FastQ` on each collection of filtered HISAT2 output BAM files with the following parameters:
 >    - **Convert the following BAM file to FASTQ**: Click the "Dataset collection" tab and then select the blank RNAi sRNA-seq dataset of filtered HISAT2 BAM files
 >
 > 1. Click "Execute"
 > 1. Repeat for the *Symplekin* RNAi dataset collection
->
->       ![Filter SAM or BAM, output SAM or BAM input and parameters](../../images/sRNA/Fig11_Convert_to_fastq_tool_form.png)
 >
 >    Next we will align the non-rRNA reads to a known set of miRNA hairpin sequences to identify miRNA reads.
 >
@@ -220,8 +212,6 @@ In *Drosophila*, non-miRNA small RNAs are typically divided into two major group
 > 1. Repeat `Manipulate FASTQ` for the *Symplekin* RNAi dataset collection
 > 1. Rename each resulting dataset collection something meaningful (*i.e.* "blank RNAi - siRNA reads (20-22nt)")
 >
->       ![Manipulate FASTQ input and parameters](../../images/sRNA/Fig12a_Manipulate_Fastq_siRNA_tool_form.png)
->
 >    The regular expression in the **Match by** parameter tells the tool to identify sequences that are length 12-19 or 23-50 (inclusive), and the **Miscellaneous Manipulation Type** parameter tells the tool to remove these sequences. What remains are sequences of length 20-22nt. We will now repeat these steps to identify 23-29nt piRNA sequences.
 >
 > 1. **Manipulate FASTQ** {% icon tool %}: Run `Manipulate FASTQ` on each collection of non-r/miRNA reads to identify piRNAs (23-29nt) using the following parameters.
@@ -234,8 +224,6 @@ In *Drosophila*, non-miRNA small RNAs are typically divided into two major group
 >    - **Miscellaneous Manipulation Type**: Set to "Remove Read"
 > 1. Repeat `Manipulate FASTQ` for the *Symplekin* RNAi dataset collection
 > 1. Rename each resulting dataset collection something meaningful (*i.e.* "blank RNAi - piRNA reads (23-29nt)")
->
->       ![Manipulate FASTQ input and parameters on Symplekin dataset collection](../../images/sRNA/Fig12b_Manipulate_Fastq_piRNA_tool_form.png)
 >
 > 1. **FastQC** {% icon tool %}: Run `FastQC` on each collection of siRNA and piRNA read files to confirm the correct read lengths.
 >
@@ -262,8 +250,6 @@ We want to identify which siRNAs are differentially abundance between the blank 
 >    - **Additional Options**: Click to expand options
 >    - **Incompatible Prior**: 0
 >
->       ![Salmon input sRNA and parameters](../../images/sRNA/Fig14_salmon_siRNA_Blank_tool_form.png)
->
 > 1. Repeat `Salmon` for the *Symplekin* RNAi siRNAs (20-22nt) reads dataset collection
 > 1. **Salmon** {% icon tool %}: Repeat step 1 on each collection of siRNA reads (20-22nt) to quantify the abundance of *sense* siRNAs at relevant targets by changing the following parameters:
 >    - **Specify the strandedness of the reads**: read 1 (or single-end read) comes from the forward strand (SF)
@@ -289,16 +275,12 @@ The output of `Salmon` includes a table of RNA features, estimated counts, trans
 >    - **Tabular file with Transcript - Gene mapping**: Select reference tx2g (transcript to gene) file (available through zenodo link)
 >    - **Output normalized counts table**: Yes
 >
->       ![DESeq2 input and parameters](../../images/sRNA/Fig15_deseq2_sr_tool_form.png)
->
 > 1. Repeat `DESeq2` for the *sense* siRNAs at mRNA and TE features changing the following parameters:
 >    - Under "1: Factor level": **Counts file(s)**: Click the "Dataset collection" tab and then select the Symplekin RNAi siRNA counts from forward strand (SF)
 >    - Under "2: Factor level": **Counts file(s)**: Click the "Dataset collection" tab and then select the Symplekin RNAi siRNA counts from forward strand (SF)
 > 1. **Filter** {% icon tool %}: Run `Filter` to extract features with a significantly different *antisense* siRNA abundance (adjusted *p*-value less than 0.05).
 >    - **Filter**: Select the `DESeq2` result file from testing *antisense* (SR) siRNA abundances
 >    - **With following condition**: Enter: c7<0.05
->
->       ![Filter tool input and parameters](../../images/sRNA/Fig16_filter_tool_form.png)
 >
 > 1. Repeat `Filter` for the *sense* siRNAs at mRNA and TE features changing the following parameters:
 >    - **Filter**: Select the `DESeq2` result file from testing *sense* (SF) siRNA abundances

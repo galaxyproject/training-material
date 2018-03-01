@@ -107,13 +107,12 @@ It is often necessary to trim a sequenced read to remove bases sequenced with hi
 
 > ### {% icon hands_on %} Hands-on: Trimming and clipping reads
 >
-> 1. **Trimmomatic** {% icon tool %}: Run the tool **Trimmomatic** on each FASTQ file to trim low-quality bases (remember how to run tools on all files at once?). Explore the full parameter list for `Trimmomatic` in the Tool Form and set the following `Trimmomatic` parameters:
->
->    - **Paired end data?**: No
->    - **Perform initial ILLUMINACLIP?**: No
->    - **Select Trimmomatic operation to perform**: Sliding window trimming (SLIDINGWINDOW)
->    - **Number of bases to average across**: 4
->    - **Average quality required**: 20
+> 1. **Trimmomatic** {% icon tool %}: Run the tool **Trimmomatic** on each FASTQ file to trim low-quality bases with the following parameters:
+>    - "Paired end data?" to `No`
+>    - "Perform initial ILLUMINACLIP?" to `No`
+>    - "Select Trimmomatic operation to perform" to `Sliding window trimming (SLIDINGWINDOW)`
+>    - "Number of bases to average across" to `4`
+>    - "Average quality required" to `20`
 >
 >    > ### {% icon tip %} Tip: Changing datatypes
 >    >
@@ -146,12 +145,9 @@ Nowadays, there are many read alignment programs for sequenced DNA, `BWA` being 
 
 > ### {% icon hands_on %} Hands-on: Aligning reads to a reference genome
 >
-> 1. **Map with BWA** {% icon tool %}: Run the tool **Map with BWA** to map the trimmed/clipped reads to the mouse genome. Set the following **Map with BWA** parameters:
->
->    - **Using reference genome**: Mouse (mus musculus) mm10
->    - **Single or Paired-end reads**: Single
->
->    ![bwa](../../images/BWA_tool_form.png "Select the trimmed read files to be aligned.")
+> 1. **Map with BWA** {% icon tool %}: Run the tool with the following parameters:
+>    - "Using reference genome" to `Mouse (mus musculus) mm10`
+>    - "Single or Paired-end reads" to `Single`
 >
 > 2. Rename your files after **BWA** finishes to reflect the origin and contents
 > 3. Inspect a file produced by running **BWA**
@@ -204,28 +200,23 @@ We expect that the replicate samples will cluster more closely to each other tha
 
 > ### {% icon hands_on %} Hands-on: Assessing correlation between samples
 >
-> 1. **multiBamSummary** {% icon tool %}: Run the tool **multiBamSummary** from the **multiBamSummary** package
+> 1. **multiBamSummary** {% icon tool %}: Run the tool **multiBamSummary** with the following parameters:
 >
+>    > ### {% icon tip %} Comment: multiBamSummary
+>    >
 >    This tool splits the reference genome into bins of equal size and counts the number of reads in each bin from each sample. We set a small **Bin size** here because we are working with a subset of reads that align to only a fraction of the genome.
+>    {: .comment}
 >
 >    Set the following **multiBamSummary** parameters:
->
 >     - Select all of the aligned BAM files
->     - **Bin size in bp**: 1000
+>     - "Bin size in bp" to `1000`
 >
->     ![multiBamSummary](../../images/multiBamSummary_1000bin.png "Select all of the aligned BAM files and change Bin size.")
->
-> 2. **plotCorrelation** {% icon tool %}: Run the tool **plotCorrelation** from the **deepTools** package to visualize the results from the previous step.
->
->    Feel free to try different parameters. To start, set the following **plotCorrelation** parameters:
->
->     - **Correlation method**: Pearson
->     - **Plotting type**: Heatmap
->     - **Plot the correlation value**: Yes
->     - **Skip zeros**: Yes
->     - **Remove regions with very large counts**: Yes
->
->     ![corr](../../images/plotCorrelation.png "Select the newly generation correlation matrix file from the previous step.")
+> 2. **plotCorrelation** {% icon tool %}: Run the tool **plotCorrelation** from the **deepTools** package to visualize the results from the previous step with the following parameters:
+>     - "Correlation method" to `Pearson`
+>     - "Plotting type" to `Heatmap`
+>     - "Plot the correlation value" to `Yes`
+>     - "Skip zeros" to `Yes`
+>     - "Remove regions with very large counts" to `Yes`
 >
 >     > ### {% icon question %} Questions
 >     >
@@ -254,15 +245,11 @@ We will now evaluate the quality of the immuno-precipitation step in the ChIP-se
 
 > ### {% icon hands_on %} Hands-on: Assessing IP strength
 >
-> 1. **plotFingerprint** {% icon tool %}: Run the tool **plotFingerprint** from the **deepTools** package.
->
+> 1. **plotFingerprint** {% icon tool %}: Run the tool **plotFingerprint** from the **deepTools** setting:
 >    - Select all of the aligned BAM files for the G1E cell type
->    - **Show advanced options**: yes
->    - **Bin size in bases**: 100
->    - **Skip zeros**: Yes
->
->    ![fingerprint1](../../images/plotFingerprint1_v2.png)
->    ![fingerprint2](../../images/plotFingerprint2.png "Select all of the aligned BAM file to assess IP strength.")
+>    - "Show advanced options" to `yes`
+>    - "Bin size in bases" to `100`
+>    - "Skip zeros" to `Yes`
 >
 > 2. View the output image.
 >
@@ -302,12 +289,12 @@ More information about **MACS2** can be found [here](https://genomebiology.biome
 
 > ### {% icon hands_on %} Hands-on: Determining TAL1 binding sites
 >
-> 1. **MACS2 callpeak** {% icon tool %}: Run the tool **MACS2 callpeak** with the aligned read files from the previous step as Treatment (TAL1) and Control (input).
->
->    - Select replicate **ChIP-Seq Treatment Files** for one cell type
->    - Select replicate **ChIP-Seq Control Files** for the same cell type
->
->    ![macs2](../../images/MACS2_tool_form.png "Select the appropriate control and treatment files.")
+> 1. **MACS2 callpeak** {% icon tool %}: Run the tool **MACS2 callpeak** with the following parameters:
+>    - "Are you pooling Treatment Files?" to `Yes`
+>    - "ChIP-Seq Treatment File" to all Treatment(TAL1) files for one cell type
+>    - "Do you have a Control File?" to `Yes`
+>    - "Are you pooling Control Files?" to `Yes`
+>    - "ChIP-Seq Control File" to all Control(input) files for the same cell type
 >
 > 2. Rename your files after **MACS2 callpeak** finishes to reflect the origin and contents.
 {: .hands_on}
@@ -324,7 +311,8 @@ First, we will reformat the peak file before we send it to Trackster, and then w
 
 > ### {% icon hands_on %} Hands-on: Inspection of peaks and aligned data with Trackster
 >
-> 1. **Cut** {% icon tool %}: Run the tool **Cut** on the peak file choosing columns "c1,c2,c3,c4" and rename this file to reflect the origin and contents.
+> 1. **Cut** {% icon tool %}: Run the tool **Cut** on the peak file choosing parameters:
+>    - "Cut columns" to `c1,c2,c3,c4`
 >
 > 2. Import the gene annotations file from Zenodo [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.197100.svg)](https://doi.org/10.5281/zenodo.197100)
 >
@@ -369,6 +357,7 @@ We show here an alternative to Trackster, [IGV](http://software.broadinstitute.o
 > 1. Open IGV on your local computer.
 > 2. Click on each 'narrow peaks' result file from the MACS2 computations on 'display with IGV' --> 'local Mouse mm10'
 > 3. For more information about IGV see [here]({{site.baseurl}}/topics/introduction/tutorials/igv-introduction/tutorial.html)
+{: .hands_on}
 
 # Step 8: Identifying unique and common TAL1 peaks between stages
 
@@ -376,21 +365,18 @@ We have processed ChIP-seq data from two stages of hematopoiesis and have lists 
 
 > ### {% icon hands_on %} Hands-on: Identifying unique and common TAL1 peaks between states
 >
-> 1. **Intersect intervals** {% icon tool %}: Run the tool **Intersect intervals** to find peaks that exist both in G1E and megakaryocytes.
+> 1. **Intersect intervals** {% icon tool %}: Run the tool **Intersect intervals** to find peaks that exist both in G1E and megakaryocytes by setting:
+>    - "Return" to `overlapping intervals`
+>    - "of" to TAL1 G1E peaks file
+>    - "that intersect" to TAL1 Mega peaks file
 >
->    Select the "TAL1 G1E peaks" and "TAL1 Mega peaks" files as the inputs.
->
->    Running this tool with the default settings will return overlapping peaks of both files.
->
-> 2. **Intersect intervals** {% icon tool %}: Run the tool **Intersect intervals** to find peaks that exist only in G1E.
->
+> 2. **Intersect intervals** {% icon tool %}: Run the tool **Intersect intervals** to find peaks that exist only in G1E and choose parameters:
 >    - Select "TAL1 G1E peaks" as the first input and "TAL1 Mega peaks" as the second input file.
->    - **Report only those alignments that \*\*do not\*\* overlap the BED file**: Yes
+>    - "Report only those alignments that \*\*do not\*\* overlap the BED file" to `Yes`
 >
-> 3. **Intersect intervals** {% icon tool %}: Run the tool **Intersect intervals** to find peaks that exist only in megakaryocytes.
->
+> 3. **Intersect intervals** {% icon tool %}: Run the tool **Intersect intervals** to find peaks that exist only in megakaryocytes with parameters:
 >    - Select "TAL1 Mega peaks" as the first input and "TAL1 G1E peaks" as the second input file.
->    - **Report only those alignments that \*\*do not\*\* overlap the BED file**: Yes
+>    - "Report only those alignments that \*\*do not\*\* overlap the BED file" to `Yes`
 >
 > 4. Re-name the three files we generated to reflect their contents.
 >
@@ -417,12 +403,13 @@ We will generate Input normalized coverage (bigwig) files for the ChIP samples, 
 
 > ### {% icon hands_on %} Hands-on: Generate Input-normalized bigwigs
 >
-> 1. Search for **bamCompare** in the Galaxy tool panel.
-> 2. Select the treatment sample, for example "Megakaryocyte_Tal1_R2.bam", as the first sample, and the input sample "Megakaryocyte_Input_R2.bam" as the second sample.
-> 3. Check that you are using log2 ratio to compare the samples, and click "Execute".
-> 4. Repeat this step for all treatment and input samples: Megakaryocyte_Tal1_R1.bam and Megakaryocyte_Input_R1.bam; G1E_Tal1_R2.bam and G1E_Input_R2.bam; G1E_Tal1_R1.bam and G1E_Input_R1.bam.
+> 1. **bamCompare** {% icon tool %} with the following parameters:
+>    - "First BAM file (e.g. treated sample)" to the treatment sample, for example "Megakaryocyte_Tal1_R2.bam"
+>    - "Second BAM file (e.g. control sample)" to the input sample "Megakaryocyte_Input_R2.bam"
+>    - "How to compare the two files" to `Compute log2 of the number of reads ratio`
 >
-> ![bamCompare tool settings](../../images/bamcom.png)
+> 2. Repeat this step for all treatment and input samples: Megakaryocyte_Tal1_R1.bam and Megakaryocyte_Input_R1.bam; G1E_Tal1_R2.bam and G1E_Input_R2.bam; G1E_Tal1_R1.bam and G1E_Input_R1.bam.
+>
 {: .hands_on}
 
 # Step 10: Plot the signal on the peaks between samples
@@ -437,31 +424,27 @@ optionally, you can also use `plotProfile`to create a profile plot using to comp
 
 > ### {% icon hands_on %} Hands-on: calculate signal matrix on the MACS2 output
 >
-> 1. Search for **computeMatrix** in the Galaxy tool panel.
-> 2. Under "Regions to plot", select the MACS2 output (narrowpeaks) for G1E cells (TAL1 over Input).
-> 3. Under "Score file", select the bigWigs (log2 ratios from bamCompare).
-> 4. From "computeMatrix has two main output options", select "reference point".
-> 5. Under "The Reference point for plotting", select "Center of region".
-> 6. For the two fields region upstream and downstream choose both times the value '5000'
+> 1. Run **computeMatrix** {% icon tool %} with the settings:
+>    - "Regions to plot" to the MACS2 output (narrowpeaks) for G1E cells (TAL1 over Input)
+>    - "Score file" to the bigWigs (log2 ratios from bamCompare)
+>    - "computeMatrix has two main output options" to `reference point`
+>    - "The Reference point for plotting" to `Center of region`
+>    - "Region upstream" to `5000`
+>    - "Region downstream" to `5000`
+>    - "Show advanced options" to `yes`
+>    - "Convert missing values to zero" to `yes`
+>    - "Skip zeros" to `yes`
 >
-> ![compMatrix](../../images/compM.png)
->
-> 7. Under advanced options , select "Yes" for "Convert missing values to zero" and "Skip zeros".
-> 8. Select "Execute"
->
-> ![computeMatrix](../../images/compM2.png)
 {: .hands_on}
 
 ### plotHeatmap
 
 > ### {% icon hands_on %} Hands-on: plot a Heatmap using computeMarix output
 >
-> 1. Select "plotHeatmap" from the Galaxy tool panel.
-> 2. Select the computeMatrix output as an input.
-> 3. Under advanced options, go to "Labels for the samples ", and enter sample labels (in the order you added them in compueMatrix ), separated by space.
-> 4. Click "Execute"
->
-> ![plotHM](../../images/plothm.png)
+> 1. Run **plotHeatmap** {% icon tool %} with the settings:
+>    - "Matrix file from the computeMatrix tool" to the computeMatrix output
+>    - "Show advanced options" to `yes`
+>    - "Labels for the samples " to sample labels (in the order you added them in compueMatrix ), separated by space.
 >
 > The output shall look like this :
 >
@@ -478,16 +461,13 @@ We will now check whether the samples have more reads from regions of the genome
 
 > ### {% icon hands_on %} Hands-on: Assessing GC bias
 >
-> 1. **computeGCbias** {% icon tool %}: Run the tool **computeGCbias** from the **deepTools** package.
->
->    - First, select an aligned BAM files for an input dataset
->    - **Reference genome**: locally cached
->    - **Using reference genome**: mm10
->    - **Effective genome size**: user specified
->    - **Effective genome size**: 10000000
->    - **Fragment length used for the sequencing**: 50
->
->    ![gcbias](../../images/computeGCBias.png "Select a single aligned BAM file to check GC bias for that dataset.")
+> 1. **computeGCbias** {% icon tool %}: Run the tool **computeGCbias** from the **deepTools** package with the parameters:
+>    - "BAM file" to aligned BAM files
+>    - "Reference genome" to `locally cached`
+>    - "Using reference genome" to `mm10`
+>    - "Effective genome size" to `user specified`
+>    - "Effective genome size" to `10000000`
+>    - "Fragment length used for the sequencing" to `50`
 >
 >    > ### {% icon question %} Questions
 >    >
