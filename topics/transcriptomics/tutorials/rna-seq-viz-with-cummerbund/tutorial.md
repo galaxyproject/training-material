@@ -165,7 +165,6 @@ We are interested in visualizing all expression values of all transcripts relati
 >   - "Plot type" to `Expression Plot`
 >   - "Expression levels to plot" to `Isoforms`
 >   - "Gene ID" to `NDUFV1`
->   - Your input form parameters should look like the following. If so, click on "Execute"
 >
 {: .hands_on}
 

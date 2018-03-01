@@ -200,7 +200,7 @@ Here is what to do to load the data:
 >
 {: .hands_on}
 
->Depending on how busy Galaxy is this may take a little bit of time (coffee break?). Eventually this will produce a dataset in [VCF](http://www.1000genomes.org/wiki/Analysis/variant-call-format) format containing 35 putative variants. Before we can continue we need to post-process this dataset by breaking compound variants into multiple independent variants with **VcfAllelicPrimitives** tool found within **NGS: VCF Manipulation** section. This is necessary for ensuring the smooth sailing through downstream analyses.
+Depending on how busy Galaxy is this may take a little bit of time (coffee break?). Eventually this will produce a dataset in [VCF](http://www.1000genomes.org/wiki/Analysis/variant-call-format) format containing 35 putative variants. Before we can continue we need to post-process this dataset by breaking compound variants into multiple independent variants with **VcfAllelicPrimitives** tool found within **NGS: VCF Manipulation** section. This is necessary for ensuring the smooth sailing through downstream analyses.
 
 > ### {% icon hands_on %} Hands-on: Simplifying variant representation
 >
@@ -236,15 +236,13 @@ At this point we are ready to begin annotating variants using [SnpEff](http://sn
 >
 {: .hands_on}
 
->SnpEff will generate two outputs: (1) an annotated VCF file and (2) an HTML report. The report contains a number of useful metrics such as distribution of variants across gene features:
->
->![SNPeff output](../../images/snpeff_chart.png)
->
->or changes to codons:
->
->![SNPeff output codons changes](../../images/snpeff_codons.png)
->
-{: .hands_on}
+SnpEff will generate two outputs: (1) an annotated VCF file and (2) an HTML report. The report contains a number of useful metrics such as distribution of variants across gene features:
+
+![SNPeff output](../../images/snpeff_chart.png)
+
+or changes to codons:
+
+![SNPeff output codons changes](../../images/snpeff_codons.png)
 
 ## Manipulating variation data with GEMINI
 
@@ -277,9 +275,7 @@ The first step is to convert a VCF file we would like to analyze into a GEMINI d
 >
 {: .hands_on}
 
->This produce a list of [all tables and fields](https://github.com/nekrut/galaxy/wiki/datasets/gemini_tables.txt) in the database.
->
-{: .hands_on}
+This produce a list of [all tables and fields](https://github.com/nekrut/galaxy/wiki/datasets/gemini_tables.txt) in the database.
 
 ### Querying GEMINI database
 
@@ -296,11 +292,10 @@ The examples below are taken from "[Intro to Gemini](https://s3.amazonaws.com/ge
 >
 {: .hands_on}
 
->As we can see from [output (Click this link to see it)](https://usegalaxy.org/datasets/bbd44e69cb8906b51bb37b9032761321/display/?preview=True) there are 21 variants that are not annotated in dbSNP.
->
-{: .question}
+As we can see from [output (Click this link to see it)](https://usegalaxy.org/datasets/bbd44e69cb8906b51bb37b9032761321/display/?preview=True) there are 21 variants that are not annotated in dbSNP.
 
->### Which variants are found within POLRMT gene?
+> ### {% icon question %} Question
+> Which variants are found within POLRMT gene?
 >
 >To answer this type:
 >
@@ -342,10 +337,7 @@ GEMINI provides access to genotype, sequencing depth, genotype quality, and geno
 >
 {: .hands_on}
 
->This produce [a list of sites](https://usegalaxy.org/datasets/bbd44e69cb8906b560921700703d0255/display/?preview=True)
->
-{: .question}
-
+This produce [a list of sites](https://usegalaxy.org/datasets/bbd44e69cb8906b560921700703d0255/display/?preview=True)
 
 >### At how many sites both father and son have non reference alleles?
 >

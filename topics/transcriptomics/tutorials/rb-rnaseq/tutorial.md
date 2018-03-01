@@ -326,16 +326,31 @@ We will map the reads with TopHat2. Select **TopHat** from **NGS: RNA Analysis**
 
 #### Mapping with TopHat2
 
->In this case the input to TopHat is **not** individual datasets, but a collection instead. The [video](https://vimeo.com/163625221) above shows how to generate collection. Since we have created two collection as was described above, we will used them as inputs (note that **Is this single-end or paired-end data?** is set to `Paired-end (as collection)`). Make sure that the top part of TopHat interface looks like in the image below. Here the following parameters are set:
+>In this case the input to TopHat is **not** individual datasets, but a collection instead. The [video](https://vimeo.com/163625221) above shows how to generate collection. Since we have created two collection as was described above, we will used them as inputs.
+
+> ### {% icon hands_on %} Hands-on: Mapping with TopHat2
 >
->* **Mean Inner Distance between Mate Pairs** = `28` This is because paired reads are 100 bp and mean insert size is 228 bp so that 228 - (100 + 100) = 28
->* **Use a built in reference genome or own from your history** = `Use a build-in genome` and `dm3` is selected. This is because the reads are from *D. melanogaster*.
->* **TopHat settings to use** = `Full parameter list` This is done to be able to specify the strandedness of the library.
->* **Library Type** = `FR First Strand`
+> 1. **TopHat2** {% icon tool %}: Run the tool **TopHat2** with the following parameters:
+>    - "Is this single-end or paired-end data?" to `Paired-end (as collection)`
+>    - "Mean Inner Distance between Mate Pairs" to `28`
 >
->The same procedure is then repeated for collection **c2**. In the end it generates a lot of datasets in the history resulting in something resembling an image below. TopHat produces five types of output and because we started with dataset collections every one of the green boxes shown below is actually a collection of outputs for **c1** and **c2**, respectively.
+>    > ### {% icon comment %} Comment
+>    >
+>    > This is because paired reads are 100 bp and mean insert size is 228 bp so that 228 - (100 + 100) = 28.
+>    {: .comment}
 >
->![TopHat outputs for both collections](../../images/tophat_output.png)
+>    - "Use a built in reference genome or own from your history" to `Use a build-in genome` and `dm3`
+>    - "TopHat settings to use" to `Full parameter list`
+>    - "Library Type" to `FR First Strand`
+>
+> 2. **TopHat2** {% icon tool %}: The same procedure is then repeated for collection **c2**.
+>    > ### {% icon comment %} Comment
+>    >
+>    > In the end it generates a lot of datasets in the history resulting in something resembling an image below. TopHat produces five types of output and because we started with dataset collections every one of the green boxes shown below is actually a collection of outputs for **c1** and **c2**, respectively.
+>    {: .comment}
+>
+> ![TopHat outputs for both collections](../../images/tophat_output.png)
+{: .hands_on}
 
 Let's now take a look at some of the alignments. We will use IGV for this purpose.
 
@@ -381,11 +396,24 @@ Before we can use `HTseq-count` we need to download gene annotations for version
 
 #### Using HTseq-count in Galaxy
 
->`htseq-count` needs strand information to proceed. The strand information is specified as `+`, `-`, or `.` (unknown) in a GTF dataset. `htseq-count` does not like `.` and will generate an error if such unstranded features appear in data. To prevent these errors from happening we will filter them out from GTF file using **Filter** tool from **Filter and Sort** section of tool menu. Here `c7 != "."` means that we need to filter all rows where strand column (column #7) contains a dot:
+`htseq-count` needs strand information to proceed. The strand information is specified as `+`, `-`, or `.` (unknown) in a GTF dataset. `htseq-count` does not like `.` and will generate an error if such unstranded features appear in data. To prevent these errors from happening we will filter them out from GTF file using **Filter** tool from **Filter and Sort** section of tool menu.
+
+> ### {% icon hands_on %} Hands-on: Using HTseq-count in Galaxy
 >
->Select **htseq-count** from **NGS: RNA analysis** section on the left side of the menu. Set parameters as shown below. The red arrow points that to enable `htseq-count` to see collections, you need to select the 'folder' button. In the case of this particular Galaxy [history](https://usegalaxy.org/u/aun1/h/rna-seq-tutorial) we will need to run `htseq-count` twice. Once on TopHat alignemnts for collection **c1** (dataset #37; shown below) and then on alignments for collection **c2** (dataset # 57).
+> 1. **Filter** {% icon tool %}: Run the tool **Filter** with the following parameters:
+>    - "With following condition" to `c7 != "."`
+>
+> 2. **htseq-count** {% icon tool %}: Run the tool **htseq-count** with the following parameters:
+>    - "Aligned SAM/BAM file" to `Dataset collection` tab
+>    - "GFF file" to the output from Filter step
+>
+>  > ### {% icon comment %} Comment
+>  >
+>  > In the case of this particular Galaxy [history](https://usegalaxy.org/u/aun1/h/rna-seq-tutorial) we will need to run `htseq-count` twice. Once on TopHat alignemnts for collection **c1** (dataset #37; shown below) and then on alignments for collection **c2** (dataset # 57).
+>  {: .comment}
 >
 >This will generate [read counts per gene](https://usegalaxy.org/datasets/bbd44e69cb8906b5d1e80eae6d363142/display/?preview=True).
+{: .hands_on}
 
 #### Normalizing read counts and computing differential expression with `DESeq2`
 
@@ -399,24 +427,34 @@ Before we can use `HTseq-count` we need to download gene annotations for version
 
 #### DESeq2 in Galaxy
 
->The `DESeq2` Galaxy's interface is shown below. `DESeq2` allows to incorporate multiple *factors* in the analysis. In our case we only have one factor, which we call **Conditions**. This is because we are trying to find genes that are differentially expressed between two conditions. The first condition will the first **factor level**, while condition 2 will be the second **factor level**. Here the input for this first factor level is set to a collection `84: htseq-count on collection 37` and the input for the second input is set to `92: htseq-count on collection 57`. Make sure that **Visualising the analysis results** is set to `Yes`:
+`DESeq2` allows to incorporate multiple *factors* in the analysis. In our case we only have one factor, which we call **Conditions**. This is because we are trying to find genes that are differentially expressed between two conditions. 
+
+> ### {% icon hands_on %} Hands-on: DESeq2 in Galaxy
 >
->This will produce [output](https://usegalaxy.org/datasets/bbd44e69cb8906b5d648fe21c36ac662/display/?preview=True) as shown below. The columns are: (**1**) gene identifier, (**2**) mean normalised counts, averaged over all samples from both conditions, (**3**) logarithm (base 2) of the fold change, (**4**) the standard error estimate for the log2 fold change estimate, (**5**) [Wald test](https://en.wikipedia.org/wiki/Wald_test) statistic, (**6**) p value for the statistical significance of this change, and (**7**) *p*-value adjusted for multiple testing with the Benjamini-Hochberg procedure which controls false discovery rate ([FDR](https://en.wikipedia.org/wiki/False_discovery_rate)). There is only one gene with significant change in gene expression between conditions: `CG1803-RC` with *p*-value = 1.6x10<sup>-05</sup>
->
->![DESeq2 output](../../images/deseq2_output.png)
->
->In addition to the [list of genes](https://usegalaxy.org/datasets/bbd44e69cb8906b5d648fe21c36ac662/display/?preview=True) DESeq2 outputs a graphical summary of the result. It includes a number of plots that should be used to evaluate the quality of the experiment. The histogram of *p*-values below shows that in our sample there is in fact just one instance of a significant *p*-value:
->
->![p values histogram](../../images/p_val_hist.png)
->
->The [MA plot](https://en.wikipedia.org/wiki/MA_plot) below shows the relationship between the expression change (M) and average expression strength (A). Genes with adjusted *p*-value < 0.1 are in red (there is only one such gene in thi sample at the bottom of the graph):
->
->![MA plot](../../images/MA_plot.png)
->
->The Principal Component Analysis ([PCA](https://en.wikipedia.org/wiki/Principal_component_analysis)) shows the separation between Condition 1 and 2. This type of plot is useful for visualizing the overall effect of experimental covariates and batch effects (each replicate is plotted as an individual data point):
->
->![The Principal Component Analysis output](../../images/pca.png)
->
->A heatmap of sample-to-sample distance matrix gives us an overview over similarities and dissimilarities between samples:
->
->![A heatmap of sample-to-sample distance matrix](../../images/euc_dist.png)
+> 1. **DESeq2** {% icon tool %}: Run the tool **DESeq2** with the following parameters:
+>    - "1. Factor: Specify a factor name" to `Conditions`
+>    - "1: Factor level: Specify a factor level" to `Condition 1`
+>    - "Count file(s)" to the output htseq-count on collection 37
+>    - "2: Factor level: Specify a factor level" to `Condition 2`
+>    - "Count file(s)" to the output htseq-count on collection 57
+{: .hands_on}
+
+This will produce [output](https://usegalaxy.org/datasets/bbd44e69cb8906b5d648fe21c36ac662/display/?preview=True) as shown below. The columns are: (**1**) gene identifier, (**2**) mean normalised counts, averaged over all samples from both conditions, (**3**) logarithm (base 2) of the fold change, (**4**) the standard error estimate for the log2 fold change estimate, (**5**) [Wald test](https://en.wikipedia.org/wiki/Wald_test) statistic, (**6**) p value for the statistical significance of this change, and (**7**) *p*-value adjusted for multiple testing with the Benjamini-Hochberg procedure which controls false discovery rate ([FDR](https://en.wikipedia.org/wiki/False_discovery_rate)). There is only one gene with significant change in gene expression between conditions: `CG1803-RC` with *p*-value = 1.6x10<sup>-05</sup>
+
+![DESeq2 output](../../images/deseq2_output.png)
+
+In addition to the [list of genes](https://usegalaxy.org/datasets/bbd44e69cb8906b5d648fe21c36ac662/display/?preview=True) DESeq2 outputs a graphical summary of the result. It includes a number of plots that should be used to evaluate the quality of the experiment. The histogram of *p*-values below shows that in our sample there is in fact just one instance of a significant *p*-value:
+
+![p values histogram](../../images/p_val_hist.png)
+
+The [MA plot](https://en.wikipedia.org/wiki/MA_plot) below shows the relationship between the expression change (M) and average expression strength (A). Genes with adjusted *p*-value < 0.1 are in red (there is only one such gene in thi sample at the bottom of the graph):
+
+![MA plot](../../images/MA_plot.png)
+
+The Principal Component Analysis ([PCA](https://en.wikipedia.org/wiki/Principal_component_analysis)) shows the separation between Condition 1 and 2. This type of plot is useful for visualizing the overall effect of experimental covariates and batch effects (each replicate is plotted as an individual data point):
+
+![The Principal Component Analysis output](../../images/pca.png)
+
+A heatmap of sample-to-sample distance matrix gives us an overview over similarities and dissimilarities between samples:
+
+![A heatmap of sample-to-sample distance matrix](../../images/euc_dist.png)

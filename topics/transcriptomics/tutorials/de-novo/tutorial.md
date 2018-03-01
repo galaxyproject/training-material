@@ -65,7 +65,7 @@ For quality control, we use similar tools as described in [NGS-QC tutorial]({{si
 
 > ### {% icon hands_on %} Hands-on: Quality control
 >
-> 1. **FastQC** {% icon tool %}: Run `FastQC` on the forward and reverse read files to assess the quality of the reads.
+> 1. **FastQC** {% icon tool %}: Run **FastQC** on the forward and reverse read files to assess the quality of the reas.
 >
 >    > ### {% icon question %} Questions
 >    >
@@ -81,9 +81,14 @@ For quality control, we use similar tools as described in [NGS-QC tutorial]({{si
 >    >    </details>
 >    {: .question}
 >
-> 2. **Trimmomatic** {% icon tool %}: Trim off the low quality bases from the ends of the reads to increase mapping efficiency. Run `Trimmomatic` on each pair of forward and reverse reads.
+> 2. **Trimmomatic** {% icon tool %}: Run **Trimmomatic** with default settings.
 >
-> 3. **FastQC** {% icon tool %}: Re-run `FastQC` on trimmed reads and inspect the differences.
+>    > ### {% icon comment %} Comment
+>    >
+>    > Trim off the low quality bases from the ends of the reads to increase mapping efficiency. Run **Trimmomatic** on each pair of forward and reverse reads.
+>    {: .comment}
+>
+> 3. **FastQC** {% icon tool %}: Re-run **FastQC** on trimmed reads and inspect the differences.
 >
 >    > ### {% icon question %} Questions
 >    >
@@ -139,14 +144,14 @@ Spliced mappers have been developed to efficiently map transcript-derived reads 
 
 > ### {% icon hands_on %} Hands-on: Spliced mapping
 >
-> 1. **HISAT** {% icon tool %}: Run `HISAT` on one forward/reverse read pair and modify the following settings:
->    - **Single end or paired reads?**: Individual paired-end reads
->    - **Source for the reference genome to align against**: Use a built-in genome > Mouse (Mus Musculus): mm10
->    - **Spliced alignment parameters**: Specify spliced alignment parameters
->    - **Specify strand-specific information**: First Strand (R/RF)
->    - **Transcriptome assembly reporting**: Report alignments tailored for transcript assemblers including StringTie.
+> 1. **HISAT** {% icon tool %}: Run **HISAT** on one forward/reverse read pair and modify the following settings:
+>    - "Single end or paired reads?" to `Individual paired-end reads`
+>    - "Source for the reference genome to align against" to `Use a built-in genome` and `Mouse (Mus Musculus): mm10`
+>    - "Spliced alignment parameters" to `Specify spliced alignment parameters`
+>    - "Specify strand-specific information" to `First Strand (R/RF)`
+>    - "Transcriptome assembly reporting" to `Report alignments tailored for transcript assemblers including StringTie`
 >
-> 2. **HISAT** {% icon tool %}: Run `HISAT` on the remaining forward/reverse read pairs with the same parameters.
+> 2. **HISAT** {% icon tool %}: Run **HISAT** on the remaining forward/reverse read pairs with the same parameters.
 >
 {: .hands_on}
 
@@ -155,7 +160,7 @@ Now that we have mapped our reads to the mouse genome with `HISAT`, we want to d
 
 > ### {% icon hands_on %} Hands-on: Transcriptome reconstruction
 >
-> 1. **Stringtie** {% icon tool %}: Run `Stringtie` on the `HISAT` alignments using the default parameters.
+> 1. **Stringtie** {% icon tool %}: Run **Stringtie** on the **HISAT** alignments using the default parameters.
 >    - Use batch mode to run all four samples from one tool form.
 {: .hands_on}
 
@@ -165,13 +170,14 @@ We just generated four transcriptomes with `Stringtie` representing each of the 
 
 > ### {% icon hands_on %} Hands-on: Transcriptome assembly
 >
-> 1. **Stringtie-merge** {% icon tool %}: Run `Stringtie-merge` on the `Stringtie` assembled transcripts along with the RefSeq annotation file we imported earlier.
->    - Use batch mode to inlcude all four `Stringtie` assemblies as "input_gtf".
->    - Select the "RefSeq GTF mm10" file as the "guide_gff".
+> 1. **Stringtie-merge** {% icon tool %}: Run **Stringtie-merge** on the `Stringtie` assembled transcripts along with the RefSeq annotation file we imported earlier and set:
+>    - "input_gtf" to all four `Stringtie` assemblies
+>    - "guide_gff" to `RefSeq GTF mm10` file
 >
-> 2. **GFFCompare** {% icon tool %}: Run `GFFCompare` on the `Stringtie-merge` generated transcriptome along with the RefSeq annotation file.
->    - Select the output of `Stringtie-merge` as the GTF input.
->    - Select "Yes" under `Use Reference Annotation" and select the "RefSeq GTF mm10" file as the "Reference Annotation".`
+> 2. **GFFCompare** {% icon tool %}: Run **GFFCompare** with parameters:
+>    - "GTF input" to the output of Stringtie-merge
+>    - "Use Reference Annotation" to `yes`
+>    - "Reference Annotation" to the `RefSeq GTF mm10` file
 >
 {: .hands_on}
 
@@ -207,15 +213,15 @@ The recommended mode is "union", which counts overlaps even if a read only share
 
 > ### {% icon hands_on %} Hands-on: Counting the number of reads per transcript
 >
-> 1. **FeatureCounts** {% icon tool %}: Run `FeatureCounts` on the aligned reads (`HISAT` output) using the `GFFCompare` transcriptome database as the annotation file.
->
->    - Using the batch mode for input selection, choose the four `HISAT` aligned read files
->    - **Gene annotation file**:  in your history, then select the `annotated transcripts` GTF file output by `GFFCompare` (this specifies the "union" mode)
+> 1. **FeatureCounts** {% icon tool %}: Run **FeatureCounts** with the following parameters:
+>    - "Alignment file" to the four HISAT aligned read files
+>    - "Gene annotation file" to `GTF file`
+>    - "Gene annotation file" to `in your history` and select the `annotated transcripts` GTF output by GFFCompare
 >    - Expand **Options for paired end reads**
->    - **Orientation of the two read from the same pair**: Reverse, Forward (rf)
+>    - "Orientation of the two read from the same pair" to `Reverse, Forward (rf)`
 >    - Expand **Advanced options**
->    - **GFF gene identifier**: enter "transcript_id"
->    - **Strand specificity of the protocol**: select "Stranded (reverse)"
+>    - "GFF gene identifier" to `transcript_id`
+>    - "Strand specificity of the protocol"to `Stranded (reverse)`
 >
 {: .hands_on}
 
@@ -231,19 +237,22 @@ Transcript expression is estimated from read counts, and attempts are made to co
 
 > ### {% icon hands_on %} Hands-on:
 >
-> 1. **DESeq2** {% icon tool %}: Run `DESeq2` with the following parameters:
->    - Specify "G1E" as the first factor level (condition) and select the count files corresponding to the two replicates
->    - Specify "Mega" as the second factor level (condition) and select the count files corresponding to the two replicates
+> 1. **DESeq2** {% icon tool %}: Run **DESeq2** with the following parameters:
+>    - "1. Factor: Specify a factor name" to `Conditions`
+>    - "1: Factor level: Specify a factor level" to `G1E`
+>    - "Count file(s)" to the corresponding files
+>    - "2: Factor level: Specify a factor level" to `Mega`
+>    - "Count file(s)" to the corresponding files
 >
 >       > ### {% icon comment %} Comment
 >       >
 >       > You can select several files by holding down the CTRL (or COMMAND) key and clicking on the desired files
 >       {: .comment}
->    - **Visualising the analysis results**: Yes
->    - **Output normalized counts table**: Yes
+>    - "Visualising the analysis results" to `Yes`
+>    - "Output normalized counts table" to `Yes`
 {: .hands_on}
 
-The first output of `DESeq2` is a tabular file. The columns are:
+The first output of **DESeq2** is a tabular file. The columns are:
 
 1.	Gene identifiers
 2.	Mean normalized counts, averaged over all samples from both conditions
@@ -256,7 +265,7 @@ The first output of `DESeq2` is a tabular file. The columns are:
 
 > ### {% icon hands_on %} Hands-on:
 >
->1. **Filter** {% icon tool %}: Run `Filter` to extract genes with a significant change in gene expression (adjusted *p*-value less than 0.05) between treated and untreated samples
+> 1. **Filter** {% icon tool %}: Run **Filter** to extract genes with a significant change in gene expression (adjusted *p*-value less than 0.05) between treated and untreated samples with the following settings:
 >
 >    > ### {% icon question %} Question
 >    >
@@ -268,11 +277,9 @@ The first output of `DESeq2` is a tabular file. The columns are:
 >    > </details>
 >    {: .question}
 >
-> 2. **Filter** {% icon tool %}: Determine how many transcripts are up or down regulated in the G1E state.
+>    - "With following condition" to `c7<0.05`
 >
->    > ### {% icon comment %} Comments
->    > Rename your datasets for the downstream analyses
->    {: .comment}
+> 2. **Filter** {% icon tool %}: Rerun **Filter** to determine how many transcripts are up regulated in the G1E state. The explanation how to set settings is in the question box below:
 >
 >    > ### {% icon question %} Question
 >    >
@@ -283,9 +290,14 @@ The first output of `DESeq2` is a tabular file. The columns are:
 >    > To obtain the up-regulated genes in the G1E state, we filter the previously generated file (with the significant change in transcript expression) with the expression "c3>0" (the log2 fold changes must be greater than 0). We obtain 102  genes (40.9% of the genes with a significant change in gene expression). For the down-regulated genes in the G1E state, we did the inverse and we find 149 transcripts (59% of the genes with a significant change in transcript expression).
 >    > </details>
 >    {: .question}
+>    - "With following condition" to `c3>0`
+>
+> 2. **Filter** {% icon tool %}: Rerun **Filter** to determine how many transcripts are down regulated with the parameters:
+>    - "With following condition" to `c3<=0`
+>
 {: .hands_on}
 
-In addition to the list of genes, `DESeq2` outputs a graphical summary of the results, useful to evaluate the quality of the experiment:
+In addition to the list of genes, **DESeq2** outputs a graphical summary of the results, useful to evaluate the quality of the experiment:
 
 1. Histogram of *p*-values for all tests
 
@@ -321,18 +333,18 @@ In this last section, we will convert our aligned read data from BAM format to b
 
 > ### {% icon hands_on %} Hands-on: Converting aligned read files to bigWig format
 >
-> 1. **bamCoverage** {% icon tool %}: Run `bamCoverage` on all four aligned read files (`HISAT` output) with the following parameters:
->    - **Bin size in bases**: 1
->    - **Effective genome size**: mm9 (2150570000)
+> 1. **bamCoverage** {% icon tool %}: Run **bamCoverage** on all four aligned read files (`HISAT` output) with the following parameters:
+>    - "Bin size in bases" to `1`
+>    - "Effective genome size" to `mm9 (2150570000)`
 >    - Expand the **Advanced options**
->    - **Only include reads originating from fragments from the forward or reverse strand**: forward
+>    - "Only include reads originating from fragments from the forward or reverse strand" to `forward`
 >
-> 2. **Rename** {% icon tool %}: Rename the outputs to reflect the origin of the reads and that they represent the reads mapping to the PLUS strand.
+> 2. **Rename**: Rename the outputs to reflect the origin of the reads and that they represent the reads mapping to the PLUS strand.
 >
 > 3. **bamCoverage** {% icon tool %}: Repeat Step 1 except changing the following parameter:
->    - **Only include reads originating from fragments from the forward or reverse strand**: reverse
+>    - "Only include reads originating from fragments from the forward or reverse strand" to `reverse`
 >
-> 4. **Rename** {% icon tool %}: Rename the outputs to reflect the origin of the reads and that they represent the reads mapping to the MINUS strand.
+> 4. **Rename**: Rename the outputs to reflect the origin of the reads and that they represent the reads mapping to the MINUS strand.
 {: .hands_on}
 
 > ### {% icon hands_on %} Hands-on: Trackster based visualization

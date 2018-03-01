@@ -75,14 +75,14 @@ Our reads are long (250 bp) and as a result we will be using [bwa mem](https://a
 
 > ### {% icon hands_on %} Hands-on: Mapping with BWA-MEM
 >
-> 1. **BWA-MEM** {% icon tool %}: Run BWA-MEM with default parameters on all input files.
->    "Using reference genome" to `hg38`
->    "Select first set of reads" to `raw_child-ds-1.fq` and `raw_mother-ds-1.fq`
->    "Select second set of reads" to `raw_child-ds-2.fq` and `raw_mother-ds-2.fq`
->    "Set read groups information?" to `Set read groups (SAM/BAM specification)`
->    "Auto-assign" to `Yes`
->    "Auto-assign" to `Yes`
->    "Auto-assign" to `Yes`
+> 1. **BWA-MEM** {% icon tool %}: Run BWA-MEM with default parameters on all input files and set parameters:
+>    -"Using reference genome" to `hg38`
+>    -"Select first set of reads" to `raw_child-ds-1.fq` and `raw_mother-ds-1.fq`
+>    -"Select second set of reads" to `raw_child-ds-2.fq` and `raw_mother-ds-2.fq`
+>    -"Set read groups information?" to `Set read groups (SAM/BAM specification)`
+>    -"Auto-assign" to `Yes`
+>    -"Auto-assign" to `Yes`
+>    -"Auto-assign" to `Yes`
 >
 {: .hands_on}
 
