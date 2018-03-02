@@ -59,7 +59,7 @@ If your data were generated on a low resolution mass spectrometer, use ***PeakPi
 > 6. Run ***FileConverter*** {% icon tool %} on the picked mzML. In the **Advanced Options** set the **Output file type** to `mgf`.
 >
 >   > ### {% icon comment %} Comment: Local Use of MSConvert
->   > The vendor libraries used by MSConvert are only licensed for Windows systems and are therefore rarely implemented in Galaxy instances. If ***msconvert*** {% icon tool %} is not available in your Galaxy instance, please install the software on a Windows computer and run the conversion locally. You can find a detailed description of the necessary steps [here](https://compomics.com/bioinformatics-for-proteomics/identification/) (on "Peak List Generation"). Afterwards, upload the resulting mzML file to your Galaxy history.
+>   > The vendor libraries used by MSConvert are only licensed for Windows systems and are therefore rarely implemented in Galaxy instances. If ***msconvert*** {% icon tool %} is not available in your Galaxy instance, please install the software on a Windows computer and run the conversion locally. You can find a detailed description of the necessary steps [here](https://compomics.com/bioinformatics-for-proteomics/identification/) ("Peak List Generation"). Afterwards, upload the resulting mzML file to your Galaxy history.
 >  {: .comment}
 {: .hands_on}
 
