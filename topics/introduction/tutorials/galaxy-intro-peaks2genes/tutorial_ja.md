@@ -52,7 +52,7 @@ Galaxyのインタフェースは以下のような3つの部分によって主�
 >
 >    > ### {% icon tip %} ヒストリーの名前を変更する
 >    >
->    > * ヒストリーのタイトル部分をクリックする(デフォルトでは *Unnamed history* となっています)
+>    > * ヒストリーのタイトルをクリックする(デフォルトでは *Unnamed history* となっています)
 >    >
 >    >   ![Renaming history](../../../../shared/images/rename_history.png)
 >    >
@@ -74,7 +74,7 @@ Galaxyのインタフェースは以下のような3つの部分によって主�
 >
 > 3. **Choose local file** を押し、ダウンロードしたファイルを探す
 >
-> 4. **Type** を `interval`にする
+> 4. **Type** で `interval` を選択する
 >
 > 5. **Start** を押し、アップロードが完了するのを待つ    
 >    
@@ -89,7 +89,7 @@ Galaxyのインタフェースは以下のような3つの部分によって主�
 >
 >    > ### {% icon tip %} Tip: リンクからデータをインポートする
 >    >
->    > * リンクをコピーする
+>    > * リンク部分をコピーする
 >    > * Galaxy Upload Manager を開く
 >    > * **Paste/Fetch Data** を選択する
 >    > * テキスト部分にリンクをペーストする
@@ -115,7 +115,7 @@ Galaxyのインタフェースは以下のような3つの部分によって主�
 {: .hands_on}
 
 ピーク領域に関連する遺伝子を見つけるためには、
-UCSCから手に入る、マウスの遺伝子のリストが他に必要となります。
+UCSCから手に入る、マウスの遺伝子のリストも必要となります。
 
 > ### {% icon hands_on %} ハンズオン: UCSCからデータをアップロードする
 >
@@ -123,7 +123,7 @@ UCSCから手に入る、マウスの遺伝子のリストが他に必要とな�
 >
 >     ![UCSC Main tool in tools section](../../images/101_01.png)
 >
->     **UCSC table browser** に進むと、以下のような画面が現れる:
+>     **UCSC table browser** に進むと、以下のような画面が表示される:
 >
 >     ![UCSC table browser interface](../../images/intro_02.png)
 >
@@ -144,18 +144,18 @@ UCSCから手に入る、マウスの遺伝子のリストが他に必要とな�
 >
 >    ![Output settings](../../images/intro_03.png)
 >
-> 4. **Create one BED record per** の欄で `Whole Gene` がチェックされているかを確認した後、 **Send Query to Galaxy** ボタンをクリックする
+> 4. **Create one BED record per** の欄で `Whole Gene` がチェックされているかを確認した後、 **Send Query to Galaxy** ボタンをクリックする。
 >
 > 5. データセットの名前をより分かりやすいものに変更する
 >    - ファイルの属性を編集するには**鉛筆アイコン**をクリックする
 >      ![Pencil icon](../../images/edit_icon.png)
->    - 次の画面でデータセットの名前を `Genes` に変える
+>    - 次のスクリーンでデータセットの名前を `Genes` に変える
 >    - 画面下にある **Save** ボタンをクリックする
 >
 {: .hands_on}
 
 > ### {% icon comment %} BEDファイル形式について
-> **BED - Browser Extensible Data** 形式は遺伝子領域をコード化する柔軟な方法を提供します。BEDラインには以下の3つの位置情報が必要です。:
+> **BED - Browser Extensible Data** 形式は遺伝子領域をコード化する柔軟な方法を提供します。BEDラインには以下の3つの位置情報が必要です:
 > - 染色体のID
 > - 開始地点 (最初の塩基を0とする)
 > - 終了地点 (最後の塩基を除く)
@@ -175,7 +175,7 @@ UCSCから手に入る、マウスの遺伝子のリストが他に必要とな�
 
 > ### {% icon hands_on %} ハンズオン: ファイルの内容を表示する
 >
-> 1. ピーク領域のファイル内容を表示するには、**目のアイコン**をクリックする。クリックすると以下の図が表示される:
+> 1. ピーク領域のファイル内容を表示するには、**目のアイコン**をクリックする。クリックすると以下の表が表示される:
 >
 >    ![Contents of the peak file](../../images/intro_04.png)
 >
@@ -187,11 +187,11 @@ UCSCから手に入る、マウスの遺伝子のリストが他に必要とな�
 
 > ### {% icon question %} 問題
 >
-> UCSCのファイルには列のラベルが付いていますが、ピークのファイルにはラベルが付いてありません。どうすればラベルなしの状態でそれぞれの列が何の列か推測できるでしょうか。
+> UCSCのファイルには列のラベルが付いていますが、ピークのファイルにはラベルが付いてありません。どうすればラベルなしの状態でそれぞれの列が何を表しているか推測できるでしょうか。
 >
 {: .question}
 
-このピークのファイルは一般的な形式ではなく、このファイルを見るだけではそれぞれの列が何を表しているか判断できません。今回挙げた論文の著者は [HPeak](https://www.ncbi.nlm.nih.gov/pubmed/20598134) と呼ばれるピークを用いていると述べています。
+このピークファイルは一般的な形式ではなく単にこのファイルを見るだけでは、それぞれの列が何を表しているか判断できません。今回挙げた論文の著者は [HPeak](https://www.ncbi.nlm.nih.gov/pubmed/20598134) と呼ばれるピークを用いていると述べています。
 
 HPeakのマニュアルを見ると、列に以下のような情報が含まれていることがわかります。:
 
@@ -202,32 +202,32 @@ HPeakのマニュアルを見ると、列に以下のような情報が含まれ
  - 最も高い仮説的なDNAフラグメント（頂上）の範囲を含むピーク内の位置。
 
 2つのファイルを比べるには、染色体の名前が同じ形式で表されていることを確認する必要があります。
-見てわかるように、ピークのファイルでは染色体番号の前に `chr` が欠けています。しかし、20番染色体と21番染色体ではどのように判断すればよいでしょうか。またはX染色体とY染色体では？確認してみましょう。:
+見てわかるように、ピークのファイルでは染色体番号の前に `chr` が欠けています。しかし、20番染色体と21番染色体ではどのように判断すればよいでしょうか。またはX染色体とY染色体では？確認してみましょう:
 
 > ### {% icon hands_on %} ハンズオン: ファイルの末尾を表示する
 >
 > 1. **末尾を選択する** {% icon tool %}: 以下の設定を行った上で **Select last lines from a dataset (tail)** を実行する:
 >     - **Text file** でピークファイルである `GSE37268_mof3.out.hpeak.txt` を選択する
 >     - **Operation** → `Keep last lines`
->     - **Number of lines** → Choose a value, e.g. `100`
+>     - **Number of lines** → 数値を選択しますが、例えば `100` とします
 > 2. **Execute** をクリックする
 > 3. 作業が終了するまで待機する
 > 4. **目のアイコン** をクリックしてファイルを見る
 >
 >    > ### {% icon question %} 問題
 >    >
->    > 1. Are the chromosomes 20 and 21 named X and Y?
+>    > 1. 20番染色体と21番染色体はXやYと命名されていますか?
 >    >
 >    >    <details>
->    >    <summary>Click to view answers</summary>
+>    >    <summary>クリックで答えを表示</summary>
 >    >    <ol type="1">
->    >    <li>Not at all. One more thing to fix.</li>
+>    >    <li>命名されていません。もう一つ修正することがあります。</li>
 >    >    </ol>
 >    >    </details>
 >    {: .question}
 {: .hands_on}
 
-したがって、染色体の名前を変換するには以下の2つの工程を踏む必要があります。:
+したがって、染色体の名前を変換するには2つの工程を踏む必要があります:
 
  - `chr` を加える
  - 20 と 21 を X と Y に変える
@@ -235,11 +235,11 @@ HPeakのマニュアルを見ると、列に以下のような情報が含まれ
 > ### {% icon hands_on %} ハンズオン: 染色体の名前を調整する
 >
 > 1. **テキストを置き換える** {% icon tool %}: 以下の設定を行った上で **Replace Text in a specific column** を実行する:
->     - **File to process** で ピークファイルである`GSE37268_mof3.out.hpeak.txt` を選択
+>     - **File to process** でピークファイルである `GSE37268_mof3.out.hpeak.txt` を選択する
 >     - **in column** → `Column:1`
->     - **Find pattern** → `[0-9]+` (this will look for numerical digits)
->     - **Replace with** → `chr&` (`&` is a placeholder for the find result)
-> 3. **テキストを置き換える** {% icon tool %}: 上で使ったツールをもう一度実行してみましょう
+>     - **Find pattern** → `[0-9]+` (これで数字が検索される)
+>     - **Replace with** → `chr&` (`&` は検索した結果のプレースホルダです)
+> 3. **テキストを置き換える** {% icon tool %}: 上で使ったツールを再実行してみましょう
 >    - **File to process** to the output from the last run, e.g. something like `Replace Text on data ...`
 >    - **in column** → `Column:1`
 >    - **Find pattern** → `chr20`
@@ -257,7 +257,7 @@ HPeakのマニュアルを見ると、列に以下のような情報が含まれ
 >
 {: .hands_on}
 
-現段階でGalaxyに沢山のファイルがあるため、それぞれのファイルが区別できなくならないように注意しなければなりません。なので、最新の結果のファイルを例えば `Peak regions` などといった分かりやすい名前に変えておきましょう。
+現段階でGalaxyに沢山のファイルがあるためそれぞれのファイルが区別できなくならないように注意しなければなりません。なので最新の結果を例えば `Peak regions` といった分かりやすい名前に変えておきましょう。
 
 
 ## 解析
