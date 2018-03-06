@@ -1,0 +1,356 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Galaxy Training!</title>
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <link rel="stylesheet" href="/training-material/assets/css/font-awesome.css">
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+    </head>
+    <body>
+        
+
+
+
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/training-material/topics/sequence-analysis" title="Go back to list of tutorials">
+                            <i class="fa fa-folder-o" aria-hidden="true"></i> Sequence analysis
+                        </a>
+                    </li>
+
+                    
+                        
+                        
+                        
+                    
+
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="/training-material/topics/sequence-analysis#docker_image" title="Docker image for this tutorial">
+                            <i class="fa fa-ship" aria-hidden="true"></i> Docker image
+                        </a>
+                    </li>
+                    
+
+                    
+
+                    
+
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="/training-material/topics/sequence-analysis#references" title="References">
+                            <i class="fa fa-book" aria-hidden="true"></i> Literature
+                        </a>
+                    </li>
+                    
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="fa fa-life-ring" aria-hidden="true"></i> Help
+    </a>
+    <div class="dropdown-menu">
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Chat on Gitter">
+            Gitter
+        </a>
+        <a class="dropdown-item" href="https://biostar.usegalaxy.org/" title="Ask on Biostars">
+            Biostars
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/galaxyproject/training-material/tree/master/topics/sequence-analysis/tutorials/annotation-with-prokka/tutorial.md">
+                            <i class="fa fa-github" aria-hidden="true"></i> Edit
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<div class="container main-content">
+    <section class="tutorial">
+        <h1>Genome annotation with Prokka</h1>
+
+        <blockquote class="overview">
+            <h3>Overview</h3>
+
+            <strong><i class="fa fa-question-circle" aria-hidden="true"></i> Questions</strong>
+            <ul>
+            
+            <li>How to annotate a bacterial genome?</li>
+            
+            <li>How to visualize annoted genomic features?</li>
+            
+            </ul>
+
+            <strong><i class="fa fa-bullseye" aria-hidden="true"></i> Objectives</strong>
+            <ul>
+            
+            <li>Load genome into Galaxy</li>
+            
+            <li>Annotate genome with Prokka</li>
+            
+            <li>View annotations in JBrowse</li>
+            
+            </ul>
+
+            
+            <strong><i class="fa fa-check-circle" aria-hidden="true"></i> Requirements</strong>
+            <ul>
+            
+                <li>
+                    
+                    <a href="/training-material/topics//introduction/">Galaxy introduction</a>
+                    
+                </li>
+            
+            
+            </ul>
+            
+
+            <p><strong><i class="fa fa-hourglass-end" aria-hidden="true"></i> Time estimation:</strong> 1h</p>
+        </blockquote>
+
+        <h1 class="no_toc" id="introduction">Introduction</h1>
+
+<p>In this section we will use a software tool called Prokka to annotate a draft genome sequence. Prokka is a “wrapper”; it collects together several pieces of software (from various authors), and so avoids “re-inventing the wheel”.</p>
+
+<p>Prokka finds and annotates features (both protein coding regions and RNA genes, i.e. tRNA, rRNA) present on on a sequence. Note, Prokka uses a two-step process for the annotation of protein coding regions: first, protein coding regions on the genome are identified using <a href="http://prodigal.ornl.gov/">Prodigal</a>; second, the <em>function</em> of the encoded protein is predicted by similarity to proteins in one of many protein or protein domain databases. Prokka is a software tool that can be used to annotate bacterial, archaeal and viral genomes quickly, generating standard output files in GenBank, EMBL and gff formats. More information about Prokka can be found <a href="https://github.com/tseemann/prokka">here</a>.</p>
+
+<blockquote class="agenda">
+  <h3 id="agenda">Agenda</h3>
+
+  <p>In this tutorial, we will deal with:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#import-the-data" id="markdown-toc-import-the-data">Import the data</a></li>
+  <li><a href="#annotate-the-genome" id="markdown-toc-annotate-the-genome">Annotate the genome</a></li>
+  <li><a href="#examine-the-output" id="markdown-toc-examine-the-output">Examine the output</a></li>
+  <li><a href="#view-annotated-features-in-jbrowse" id="markdown-toc-view-annotated-features-in-jbrowse">View annotated features in JBrowse</a></li>
+</ol>
+
+</blockquote>
+
+<h2 id="import-the-data">Import the data</h2>
+
+<p>Prokka requires assembled contigs.</p>
+
+<blockquote class="hands_on">
+  <h3 id="-hands-on-obtaining-our-data"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Obtaining our data</h3>
+
+  <ol>
+    <li>
+      <p>Make sure you have an empty analysis history. Give it a name.</p>
+
+      <blockquote class="tip">
+        <h3 id="-starting-a-new-history"><i class="fa fa-lightbulb-o" aria-hidden="true"></i> Starting a new history</h3>
+
+        <ul>
+          <li>Click the <strong>gear icon</strong> at the top of the history panel</li>
+          <li>Select the option <strong>Create New</strong> from the menu</li>
+        </ul>
+      </blockquote>
+    </li>
+    <li>
+      <p><strong>Import Sample Data.</strong></p>
+      <ul>
+        <li>Obtain data directly from Zenodo: <a href="https://doi.org/10.5281/zenodo.1156405"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.1156405.svg" alt="DOI" /></a></li>
+        <li>Download <code class="highlighter-rouge">contigs.fasta</code></li>
+        <li>Upload the file to your history.
+<br /><br /></li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h2 id="annotate-the-genome">Annotate the genome</h2>
+
+<p>Now we will run the tool called Prokka.</p>
+
+<blockquote class="hands_on">
+  <h3 id="-hands-on-annotate-genome"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Annotate genome</h3>
+
+  <ol>
+    <li><strong>Prokka</strong> <i class="fa fa-wrench" aria-hidden="true"></i> with the following parameters (leave everything else unchanged)
+      <ul>
+        <li>contigs to annotate: <code class="highlighter-rouge">contigs.fasta</code></li>
+        <li>Locus tag prefix (–locustag): P</li>
+        <li>Force GenBank/ENA/DDJB compliance (–compliant): No</li>
+        <li>Sequencing Centre ID (–centre): V</li>
+        <li>Genus Name: Staphylococcus</li>
+        <li>Species Name: aureus</li>
+        <li>Use genus-specific BLAST database: No</li>
+        <li>Your tool interface should look like this:</li>
+        <li><img src="images/interface.png" alt="prokka interface" /></li>
+        <li>Click Execute
+<br /><br /></li>
+      </ul>
+    </li>
+  </ol>
+</blockquote>
+
+<h2 id="examine-the-output">Examine the output</h2>
+
+<p>Once Prokka has finished, examine each of its output files.</p>
+
+<ul>
+  <li>The GFF and GBK files contain all of the information about the features annotated (in different formats.)</li>
+  <li>The .txt file contains a summary of the number of features annotated.</li>
+  <li>The .faa file contains the protein sequences of the genes annotated.</li>
+  <li>The .ffn file contains the nucleotide sequences of the genes annotated.
+ <br /><br /></li>
+</ul>
+
+<h2 id="view-annotated-features-in-jbrowse">View annotated features in JBrowse</h2>
+
+<p>Now that we have annotated the draft genome sequence, we would like to view the sequence in the JBrowse genome viewer. First, we have to make a JBrowse file. Then, we can view it within Galaxy.</p>
+
+<blockquote class="hands_on">
+  <h3 id="-hands-on-visualize-the-annotation"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Visualize the annotation</h3>
+
+  <ol>
+    <li>Search for <strong>JBrowse</strong> <i class="fa fa-wrench" aria-hidden="true"></i> and run it with the following parameters
+      <ul>
+        <li>“Reference genome to display” to <code class="highlighter-rouge">Use a genome from history</code></li>
+        <li>
+          <p>“Select the reference genome” to <code class="highlighter-rouge">Prokka on data XX.fna</code>.</p>
+
+          <p>This sequence will be the reference against which annotations are displayed</p>
+        </li>
+        <li>“Produce Standalone Instance” to <code class="highlighter-rouge">Yes</code></li>
+        <li>“Genetic Code” to <code class="highlighter-rouge">11: The Bacterial, Archaeal and Plant Plastid Code</code></li>
+        <li>“JBrowse-in-Galaxy Action” to <code class="highlighter-rouge">New JBrowse Instance</code></li>
+        <li>“Track Group”</li>
+        <li>We will now set up one track - each track is a dataset displayed underneath the reference sequence (which is displayed as nucleotides in FASTA format).</li>
+        <li>
+          <p>We will choose to display the annotations (the Prokka.gff file).</p>
+
+          <ul>
+            <li><strong>Track 1 - sequence reads</strong>: Click on <code class="highlighter-rouge">Insert Track Group</code> and fill it with
+              <ul>
+                <li>“Track Cateogry” to <code class="highlighter-rouge">gene annotations</code></li>
+                <li>Click on <code class="highlighter-rouge">Insert Annotation Track</code> and fill it with
+                  <ul>
+                    <li>“Track Type” to <code class="highlighter-rouge">GFF/GFF3/BED/GBK Features</code></li>
+                    <li>“GFF/GFF3/BED Track Data” to <code class="highlighter-rouge">Prokka on data XX:gff</code></li>
+                    <li>“Track Visibility” to <code class="highlighter-rouge">On for new users</code></li>
+                    <li>“JBrowse Track Type [Advanced]” to <code class="highlighter-rouge">Canvas Features</code></li>
+                    <li>Click on “JBrowse Styling Options [Advanced]”</li>
+                    <li>“JBrowse style.label” to <code class="highlighter-rouge">product,name,id</code></li>
+                    <li>“Track Visibility” to <code class="highlighter-rouge">On for new users</code></li>
+                    <li>Click Execute</li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ol>
+
+  <p>A new file will be created in your history, this contains the JBrowse interactive visualisation. We will now view its contents and play with it</p>
+  <ol>
+    <li>
+      <p>Inspect the <code class="highlighter-rouge">JBrowse on data XX and data XX - Complete</code> file by clicking on the eye icon</p>
+
+      <p>The JBrowse window will appear in the centre Galaxy panel.</p>
+    </li>
+    <li>
+      <p>Display all the tracks and practice maneuvering around</p>
+      <ol>
+        <li>Click on the tick boxes on the left to display the tracks</li>
+        <li>Select contig 1 in the drop down box. You can only see one contig displayed at a time.</li>
+        <li>Zoom out by clicking on the <code class="highlighter-rouge">minus</code> button to see sequence reads and their coverage (the grey graph)</li>
+        <li>Zoom in by clicking on the <code class="highlighter-rouge">plus</code> button to see annotations.</li>
+        <li>JBrowse displays the sequence and a 6-frame amino acid translation.</li>
+        <li>Right click on a gene/feature annotation (the bars on the annotation track), then select View Details to see more information.
+          <ul>
+            <li>gene name</li>
+            <li>product name</li>
+            <li>you can download the FASTA sequence by clicking on the disk icon.
+<img src="images/jbrowse6.png" alt="JBrowse" /></li>
+          </ul>
+        </li>
+      </ol>
+    </li>
+  </ol>
+</blockquote>
+
+
+        
+        <blockquote class="key_points">
+            <h3><i class="fa fa-key" aria-hidden="true"></i> Key points</h3>
+
+            <ul>
+                
+                <li>Prokka is a useful tool to annotate a bacterial genome.</li>
+                
+                <li>JBrowse can be used to inspect the annotation of a genome.</li>
+                
+            </ul>
+        </blockquote>
+        
+
+        
+        <h1>Useful literature</h1>
+        <p>Useful information regarding this type of analysis with descriptions and paper references for the tools used in this tutorial, and literature for this analysis techniques and interpretations can be found <a href="/training-material/topics/sequence-analysis#references">here</a>.</p>
+        
+
+        <h3><i class="fa fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!</h3>
+
+        <hr>
+
+        <blockquote class="overview">
+            <h3><i class="fa fa-comments-o" aria-hidden="true"></i> Feedback</h3>
+            Please take a moment and provide your feedback on this tutorial. Your feedback will help guide and improve future revisions to this tutorial.
+            <a href="https://tinyurl.com/GTNfeedback">Feedback Form</a>
+        </blockquote>
+    </section>
+</div>
+
+
+<footer>
+    <div class="container">
+        <p>
+            This material is the result of a collaborative work. Thanks the
+            <a href="https://wiki.galaxyproject.org/Teach/GTN">Galaxy Training Network</a>
+            and all the <a href="/training-material/hall-of-fame">contributors</a> (Anna Syme, , Simon Gladman)!
+        </p>
+        <p>
+            Found a typo? Something is wrong in this tutorial? Edit it on
+            <a href="https://github.com/galaxyproject/training-material/tree/master/topics/sequence-analysis/tutorials/annotation-with-prokka/tutorial.md">GitHub</a>.
+        </p>
+    </div>
+</footer>
+
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+</html>
