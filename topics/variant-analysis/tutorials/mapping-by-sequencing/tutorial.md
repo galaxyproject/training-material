@@ -21,7 +21,7 @@ identification of the underlying causative mutation would be to
    the approximate genomic region that the mutation resides in, then
 2. sequence candidate DNA stretches in this region to identify the precise
    nature of the mutation.
-   
+
 Modern mapping-by-sequencing approaches, in contrast, use just one set of
 genome-wide sequencing data obtained from mapping-cross progeny and suitable
 parent strains to simultaneously:
@@ -103,7 +103,7 @@ reference background of *A. thaliana*. For mapping-by-sequencing, the line was
 outcrossed to the highly polymorphic **L**andsberg ***er**ecta* background as a
 source of marker variants. From this outcross, 119 F2 siblings showing the
 original late-flowering phenotype were recovered and their genomic DNA was
-pooled and subjected to whole-genome sequencing. 
+pooled and subjected to whole-genome sequencing.
 Together with whole-genome sequencing data of a pure L*er* background strain,
 this outcrossed pool data forms the starting point of our analysis.
 The L*er* strain sample, thus, can inform us about the markers that the
@@ -138,13 +138,13 @@ if you do not know what this means).
 > > and
 > > [File preparation](../../../introduction/tutorials/galaxy-intro-peaks2genes/tutorial.html#file-preparation)).
 > {: .tip}
-> 
+>
 > 1. Import the two BAM datasets representing the:
 >    - [L*er* mapping strain](https://zenodo.org/record/1098034/files/Ler_mapping_strain.bam)
 >    - [outcrossed F2 pool](https://zenodo.org/record/1098034/files/outcrossed_F2.bam)
 > 2. Specify the genome that was used at the reads mapping step
 >    1. Click on **Edit attributes** (the pencil icon displayed with the dataset)
->    2. As the **Database/Build** select `Arabidopsis thaliana TAIR10` 
+>    2. As the **Database/Build** select `Arabidopsis thaliana TAIR10`
 >    3. **Save** the edited attributes
 > 3. Import the reference genome
 >
@@ -263,7 +263,7 @@ mutation.
 > - **data source to use** to `VCF file of variants`.
 > - As the **input file with variants to analyze** select your extracted
 >   variants VCF dataset obtained in the previous step.
-> - As the **mapping sample name** use `outcrossed F2`. 
+> - As the **mapping sample name** use `outcrossed F2`.
 > - Leave the **name of the related parent sample** input field empty because
 >   in this two-sample there is no such sample.
 > - As the **name of the unrelated parent sample** specify `Ler`.
@@ -341,7 +341,7 @@ so far:
   This is because the F2 recombinants got selected based on the phenotype of
   the recessive mutation so we can assume that all individuals in the pool were
   homozygous for it.
-  
+
 * The L*er* strain should not carry it.
 
 * It should reside in the genomic region identified in the previous step.
