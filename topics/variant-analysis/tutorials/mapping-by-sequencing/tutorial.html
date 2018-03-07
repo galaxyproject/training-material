@@ -1,0 +1,858 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Galaxy Training!</title>
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <link rel="stylesheet" href="/training-material/assets/css/font-awesome.css">
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+    </head>
+    <body>
+        
+
+
+
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/training-material/topics/variant-analysis" title="Go back to list of tutorials">
+                            <i class="fa fa-folder-o" aria-hidden="true"></i> Variant Analysis
+                        </a>
+                    </li>
+
+                    
+                        
+                        
+                        
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Introduction slides">
+                                    <i class="fa fa-slideshare" aria-hidden="true"></i> Introduction slides
+                                </a>
+                                <div class="dropdown-menu">
+                                    
+                                        
+                                            
+                                                <a class="dropdown-item" href="/training-material/topics/variant-analysis/slides/introduction.html">
+                                                    Introduction to Variant analysis
+                                                </a>
+                                            
+                                        
+                                    
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                </div>
+                            </li>
+                        
+                    
+
+                    
+
+                    
+
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://doi.org/10.5281/zenodo.1098033" title="Links to data">
+                            <i class="fa fa-files-o" aria-hidden="true"></i> Input Dataset
+                        </a>
+                    </li>
+                    
+
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="/training-material/topics/variant-analysis#references" title="References">
+                            <i class="fa fa-book" aria-hidden="true"></i> Literature
+                        </a>
+                    </li>
+                    
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="fa fa-life-ring" aria-hidden="true"></i> Help
+    </a>
+    <div class="dropdown-menu">
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Chat on Gitter">
+            Gitter
+        </a>
+        <a class="dropdown-item" href="https://biostar.usegalaxy.org/" title="Ask on Biostars">
+            Biostars
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/galaxyproject/training-material/tree/master/topics/variant-analysis/tutorials/mapping-by-sequencing/tutorial.md">
+                            <i class="fa fa-github" aria-hidden="true"></i> Edit
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<div class="container main-content">
+    <section class="tutorial">
+        <h1>Mapping-by-sequencing</h1>
+
+        <blockquote class="overview">
+            <h3>Overview</h3>
+
+            <strong><i class="fa fa-question-circle" aria-hidden="true"></i> Questions</strong>
+            <ul>
+            
+            <li>What is mapping-by-sequencing?</li>
+            
+            <li>How can it help you identify the causative mutation in phenotypic mutants isolated from genetic screens?</li>
+            
+            </ul>
+
+            <strong><i class="fa fa-bullseye" aria-hidden="true"></i> Objectives</strong>
+            <ul>
+            
+            <li>Use joint variant calling and extraction to facilitate variant comparison across samples</li>
+            
+            <li>Perform variant linkage analyses for phenotypically selected recombinant progeny</li>
+            
+            <li>Filter, annotate and report lists of variants</li>
+            
+            </ul>
+
+            
+            <strong><i class="fa fa-check-circle" aria-hidden="true"></i> Requirements</strong>
+            <ul>
+            
+                <li>
+                    
+                    <a href="/training-material/topics//introduction/">Galaxy introduction</a>
+                    
+                </li>
+            
+                <li>
+                    
+                    <a href="/training-material/topics//sequence-analysis/">Quality control</a>
+                    
+                </li>
+            
+                <li>
+                    
+                    <a href="/training-material/topics//sequence-analysis/">Mapping</a>
+                    
+                </li>
+            
+            
+            </ul>
+            
+
+            <p><strong><i class="fa fa-hourglass-end" aria-hidden="true"></i> Time estimation:</strong> 2h</p>
+        </blockquote>
+
+        <h1 class="no_toc" id="introduction">Introduction</h1>
+
+<p>Mapping-by-sequencing is a technique in basic genetic research that combines
+classical genetic mapping concepts with the power of next-generation-sequencing
+to enable the mapping and molecular identification of phenotype-causing
+mutations from a single experiment.</p>
+
+<p>After having obtained, <em>e.g.</em>, from a forward genetic screen, a mutant strain
+of an organism with a particular phenotype, the classical approach towards
+identification of the underlying causative mutation would be to</p>
+
+<ol>
+  <li>perform mapping crosses to probe for linkage between the unknown mutation
+and selected markers with known location on the genome in order to determine
+the approximate genomic region that the mutation resides in, then</li>
+  <li>sequence candidate DNA stretches in this region to identify the precise
+nature of the mutation.</li>
+</ol>
+
+<p>Modern mapping-by-sequencing approaches, in contrast, use just one set of
+genome-wide sequencing data obtained from mapping-cross progeny and suitable
+parent strains to simultaneously:</p>
+
+<ul>
+  <li>discover available marker mutations for linkage analysis,</li>
+  <li>map the causative mutation using these markers, and</li>
+  <li>identify candidate mutations</li>
+</ul>
+
+<p>Since genome-wide sequencing will often reveal a few hundreds to many thousands
+of marker variants that should be considered together in the linkage analysis,
+mapping-by-sequencing data is typically analyzed with dedicated computational
+tools. For Galaxy, the <strong>MiModD</strong> suite of tools offers efficient and flexible
+analysis workflows compatible with a variety of mapping-by-sequencing
+approaches.</p>
+
+<blockquote class="tip">
+  <h3 id="-further-reading"><i class="fa fa-lightbulb-o" aria-hidden="true"></i> Further reading</h3>
+  <p>The MiModD documentation has its own chapter on supported
+<a href="http://mimodd.readthedocs.io/en/latest/nacreousmap.html">Mapping-by-sequencing schemes</a>
+not covered here.</p>
+</blockquote>
+
+<p>In this tutorial we are going to use several of these tools to map and identify
+a point mutation in an <em>Arabidopsis thaliana</em> strain from whole-genome
+sequencing data. This will demonstrate one particular kind of linkage analysis
+supported by <strong>MiModD</strong> called <em>Variant Allele Frequency Mapping</em>.</p>
+
+<h3 id="variant-allele-frequency-mapping">Variant Allele Frequency Mapping</h3>
+
+<figure id="figure-1"><img src="../../images/mbs_scheme.png" alt="Principal of variant allele frequency mapping" title="Principle of variant allele frequency mapping" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Principle of variant allele frequency mapping</figcaption></figure>
+
+<p>As illustrated in Figure 1, variant allele frequency mapping analyzes marker
+variant inheritance patterns in pooled F2 recombinants selected for the
+mutation to be mapped.</p>
+
+<p>A mutant line established for any organism - in the figure we assume a diploid
+organism with just two pairs (dark and light grey) of chromosomes - will harbor
+two types of variants (diamonds):</p>
+<ul>
+  <li>variants induced during mutagenesis (orange), among them the causative
+variant responsible for the mutant phenotype (yellow)</li>
+  <li>variants (with respect to the species’ reference genome) that were
+present in the premutagenesis strain (green open diamonds)</li>
+</ul>
+
+<p>For mapping the causative mutation, additional variants (blue open diamonds)
+are introduced through a cross to a mapping strain and F2 progeny is selected
+for the mutant phenotype. While each individuum in the F2 generation carries
+its uniquely recombined variant pattern (3 possible outcomes for the diploid
+genome are shown in the figure), this phenotypic selection will work against
+mapping strain variants in the vicinity (yellow boxes) of the causative
+variant. Hence, when the recombined DNA from phenotypic F2 progeny gets pooled
+and sequenced, the causative variant can be found by looking for a region for
+which all sequenced reads support variant alleles found in the original mutant
+line, rather than mapping strain variant alleles.</p>
+
+<blockquote class="agenda">
+  <h3 id="agenda">Agenda</h3>
+
+<ol id="markdown-toc">
+  <li><a href="#data-preparation" id="markdown-toc-data-preparation">Data Preparation</a></li>
+  <li><a href="#joint-variant-calling-and-extraction" id="markdown-toc-joint-variant-calling-and-extraction">Joint Variant Calling and Extraction</a></li>
+  <li><a href="#linkage-analysis" id="markdown-toc-linkage-analysis">Linkage Analysis</a></li>
+  <li><a href="#identifying-candidate-mutations" id="markdown-toc-identifying-candidate-mutations">Identifying Candidate Mutations</a></li>
+</ol>
+
+</blockquote>
+
+<h1 id="data-preparation">Data Preparation</h1>
+
+<p>In this tutorial we are going to (re-)identify the recessive causative mutation
+in a late-flowering mutant line of <em>Arabidopsis thaliana</em>.</p>
+
+<blockquote class="comment">
+  <h3 id="-comment"><i class="fa fa-commenting-o" aria-hidden="true"></i> Comment</h3>
+  <p><strong>MiModD</strong> was developed as a successor of the older and now unmaintained
+<em>CloudMap</em> suite of tools, but also uses some key concepts first implemented
+in the command line package <em>SHOREmap</em>.
+The data used in this tutorial represent a subsample of the
+<a href="http://bioinfo.mpipz.mpg.de/shoremap/examples.html">SHOREmap proof-of-principle data</a>
+(specifically of the <code class="highlighter-rouge">OCF2</code> and <code class="highlighter-rouge">Ler</code> datasets).</p>
+</blockquote>
+
+<p>The mutant line was obtained from a mutagenesis screen on the <strong>Col</strong>umbia
+reference background of <em>A. thaliana</em>. For mapping-by-sequencing, the line was
+outcrossed to the highly polymorphic <strong>L</strong>andsberg <em><strong>er</strong>ecta</em> background as a
+source of marker variants. From this outcross, 119 F2 siblings showing the
+original late-flowering phenotype were recovered and their genomic DNA was
+pooled and subjected to whole-genome sequencing.
+Together with whole-genome sequencing data of a pure L<em>er</em> background strain,
+this outcrossed pool data forms the starting point of our analysis.
+The L<em>er</em> strain sample, thus, can inform us about the markers that the
+outcrossed F2 pool <em>could</em> have inherited and exclusion of L<em>er</em> markers from
+a particular genomic region from the F2 pool provides evidence that the
+phenotype causing variant lies close to this region. With respect to
+<a href="#figure-1">Figure 1</a>, this means that we will only use “blue diamond” marker
+variants introduced through the mapping cross for the linkage analysis and
+ignore potentially informative (green and orange) variants found in the
+original mutant line.</p>
+
+<p>For your convenience, the sequenced reads from both datasets have already been
+mapped (using <strong>Bowtie2</strong>) to the <em>A. thaliana</em> Col reference genome (version
+TAIR10) so the two datasets take the form of BAM files with the mapping results
+(see the tutorial on
+<a href="../../../sequence-analysis/tutorials/mapping/tutorial.html">NGS data mapping</a>
+if you do not know what this means).</p>
+
+<blockquote class="hands_on">
+  <h3 id="-hands-on-data-upload-and-preprocessing"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Data upload and preprocessing</h3>
+
+  <blockquote class="tip">
+    <h3 id="-tip"><i class="fa fa-lightbulb-o" aria-hidden="true"></i> Tip</h3>
+    <p>This section assumes that you already know</p>
+
+    <ul>
+      <li>how to upload data to Galaxy via links</li>
+      <li>edit dataset attributes</li>
+      <li>do some basic text manipulation on datasets</li>
+    </ul>
+
+    <p>An excellent introduction into these topics can be found in the
+<a href="../../../introduction/tutorials/galaxy-intro-peaks2genes/tutorial.html">From peaks to genes</a>
+tutorial (specifically, in the sections on
+<a href="../../../introduction/tutorials/galaxy-intro-peaks2genes/tutorial.html#data-upload">Data upload</a>
+and
+<a href="../../../introduction/tutorials/galaxy-intro-peaks2genes/tutorial.html#file-preparation">File preparation</a>).</p>
+  </blockquote>
+
+  <ol>
+    <li>Import the two BAM datasets representing the:
+      <ul>
+        <li><a href="https://zenodo.org/record/1098034/files/Ler_mapping_strain.bam">L<em>er</em> mapping strain</a></li>
+        <li><a href="https://zenodo.org/record/1098034/files/outcrossed_F2.bam">outcrossed F2 pool</a></li>
+      </ul>
+    </li>
+    <li>Specify the genome that was used at the reads mapping step
+      <ol>
+        <li>Click on <strong>Edit attributes</strong> (the pencil icon displayed with the dataset)</li>
+        <li>As the <strong>Database/Build</strong> select <code class="highlighter-rouge">Arabidopsis thaliana TAIR10</code></li>
+        <li><strong>Save</strong> the edited attributes</li>
+      </ol>
+    </li>
+    <li>
+      <p>Import the reference genome</p>
+
+      <blockquote class="tip">
+        <h3 id="-tip-1"><i class="fa fa-lightbulb-o" aria-hidden="true"></i> Tip</h3>
+        <p>This step is only necessary if the TAIR10 version of the <em>A. thaliana</em>
+genome is not available as a built-in genome on your Galaxy server.</p>
+      </blockquote>
+
+      <ol>
+        <li>Upload the reference genome using the URL:
+<code class="highlighter-rouge">https://www.arabidopsis.org/download_files/Genes/TAIR10_genome_release/TAIR10_chromosome_files/TAIR10_chr_all.fas</code></li>
+        <li>Use <strong>Replace parts of text</strong> <i class="fa fa-wrench" aria-hidden="true"></i> to truncate the title
+lines in the fasta dataset to just the bare chromosome names. Set:
+          <ul>
+            <li>
+              <p>the <strong>Find pattern</strong> to <code class="highlighter-rouge">^&gt;(\w+).*</code></p>
+
+              <p>This will find entire fasta title lines, or more specifically, any
+lines starting with <code class="highlighter-rouge">&gt;</code> followed by at least one letter, digit or
+underscore.</p>
+            </li>
+            <li>
+              <p>the <strong>Replace with</strong> pattern to <code class="highlighter-rouge">&gt;chr$1</code></p>
+
+              <p>The <code class="highlighter-rouge">$1</code> in it refers to the parenthesized part of the find pattern,
+<em>i.e.</em>, just the substring of letters/digits/underscores directly
+following the <code class="highlighter-rouge">&gt;</code>.</p>
+            </li>
+            <li>
+              <p><strong>Find-Pattern is a regular expression</strong> to <code class="highlighter-rouge">Yes</code></p>
+            </li>
+          </ul>
+        </li>
+        <li>Make sure the datatype of the resulting dataset is set to <code class="highlighter-rouge">fasta</code> and
+give the dataset a nice name (<em>e.g.</em>, TAIR10 reference).</li>
+        <li>At this point you can delete the originally downloaded dataset.</li>
+      </ol>
+    </li>
+  </ol>
+</blockquote>
+
+<h1 id="joint-variant-calling-and-extraction">Joint Variant Calling and Extraction</h1>
+
+<p>A hallmark of all mapping-by-sequencing analyses is that one would like to
+follow the fate of variants through genetic crosses. In this tutorial, for
+example, we would like to determine, for every marker variant provided by the
+L<em>er</em> background, at what frequency it got inherited by the outcrossed F2 pool.
+For such analyses to work reliably, it is best to call variants jointly for all
+relevant samples because this allows the variant caller to give us per-sample
+variant call statistics for all sites at which <strong>any</strong> sample is found to have
+a non-wt genotype. In our case, this means that the variant caller will report
+any variants it finds for the L<em>er</em> background sample along with the call
+statistics for the outcrossed F2 pool at that same site - even if the variant
+allele contributes very little to the pool and would, thus, have been
+disregarded in a standard single-sample analysis.</p>
+
+<p>Here, we are using the <strong>MiModD Variant Calling</strong> tool for joint variant
+calling for our two samples. This tool outputs variant call statistics across
+all sites and all samples in the compact binary BCF format. We can then use
+the <strong>MiModD Extract Variant Sites</strong> tool to extract sites, for which at least
+one sample appears to have a non-wt genotype, and report them in VCF format.</p>
+
+<blockquote class="hands_on">
+  <h3 id="-hands-on-variant-calling"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Variant Calling</h3>
+
+  <ol>
+    <li>Use <strong>MiModD Variant Calling</strong> <i class="fa fa-wrench" aria-hidden="true"></i> to generate combined
+variant call statistics:
+      <ul>
+        <li>
+          <p>Select the <strong>reference genome</strong> to call variants against.</p>
+
+          <p>If your Galaxy server offers version TAIR10 of the <em>A. thaliana</em>
+reference as a <strong>built-in genome</strong>, you can go ahead and use it.
+Otherwise, download and preprocess the reference as described under
+Data Preparation and use it as a <strong>genome from my history</strong>.</p>
+        </li>
+        <li>As the <strong>Aligned reads input datasets</strong> for the analysis select the two
+BAM datasets representing the two samples (use the <code class="highlighter-rouge">Control</code> key on the
+keyboard to select multiple datasets from the list.</li>
+        <li><strong>Execute</strong> the job</li>
+      </ul>
+    </li>
+    <li>Run <strong>MiModD Extract Variant Sites</strong> <i class="fa fa-wrench" aria-hidden="true"></i> with
+      <ul>
+        <li><strong>BCF input file</strong> set to the BCF dataset generated in the previous
+step.</li>
+      </ul>
+    </li>
+  </ol>
+
+  <blockquote class="question">
+    <h3 id="-questions"><i class="fa fa-question-circle" aria-hidden="true"></i> Questions</h3>
+
+    <ol>
+      <li>Approximately how many variants did get extracted?</li>
+      <li>Does this number surprise you?</li>
+    </ol>
+
+    <details>
+  <summary>Click to view answers</summary>
+  <ol type="1">
+    <li>You can click on the extracted variants dataset in your history to
+    get more details about it. You should see that the file has an
+    estimated 130,000 lines and since, in VCF format, apart from a number
+    of header lines, one variant gets reported per line, this roughly
+    equals the number of variants in the dataset.</li>
+    <li>The huge number of variants reflects the fact that the L<em>er</em>
+    mapping strain is really quite diverged from the Col reference
+    background that the mutant was generated in and, thus, offers many
+    marker variants for mapping.
+    In total, the L<em>er</em> genome harbors &gt; 400,000 single nucleotide
+    variants compared to the Col reference, but to keep the tutorial
+    datasets small we only provided reads mapping to 2 out of 5
+    chromosomes. In addition, we provided really low-coverage data
+    even for those two chromosomes so our analysis will miss many true
+    variants and contain many questionable variant calls that may represent
+    false-positives, but an analysis based on such a large overall number
+    of variants is robust enough to provide useful results regardless.
+    </li>
+  </ol>
+</details>
+
+  </blockquote>
+</blockquote>
+
+<h1 id="linkage-analysis">Linkage Analysis</h1>
+
+<p>The extracted variants dataset obtained in the previous step contains
+information about thousands of sites that can be used as markers to map the
+causative mutation in the F2 pool. We will now analyze the data with the
+<strong>MiModD NacreousMap</strong> tool in <strong>Variant Allele Frequency</strong> mapping mode to
+identify these markers and look for linkage between them and the causative
+mutation.</p>
+
+<blockquote class="hands_on">
+  <h3 id="-hands-on-linkage-analysis-with-one-set-of-parentally-contributed-markers"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Linkage Analysis with one set of parentally contributed markers</h3>
+
+  <p>In the <strong>MiModD NacreousMap</strong> <i class="fa fa-wrench" aria-hidden="true"></i> interface, set</p>
+  <ul>
+    <li><strong>type of mapping analysis to perform</strong> to <code class="highlighter-rouge">Variant Allele Frequency
+  Mapping</code> and</li>
+    <li><strong>data source to use</strong> to <code class="highlighter-rouge">VCF file of variants</code>.</li>
+    <li>As the <strong>input file with variants to analyze</strong> select your extracted
+variants VCF dataset obtained in the previous step.</li>
+    <li>As the <strong>mapping sample name</strong> use <code class="highlighter-rouge">outcrossed F2</code>.</li>
+    <li>Leave the <strong>name of the related parent sample</strong> input field empty because
+in this two-sample there is no such sample.</li>
+    <li>As the <strong>name of the unrelated parent sample</strong> specify <code class="highlighter-rouge">Ler</code>.
+      <blockquote class="comment">
+        <h3 id="-sample-roles"><i class="fa fa-commenting-o" aria-hidden="true"></i> Sample roles</h3>
+        <p>In <code class="highlighter-rouge">Variant Allele Frequency Mapping</code> mode the tool requires:</p>
+        <ul>
+          <li>a <strong>mapping sample</strong>, which corresponds to the recombinant pool, from
+which allele frequencies should be calculated</li>
+          <li>either a <strong>related</strong> or an <strong>unrelated parent sample</strong> (, or both),
+from which the marker variant sites to use in the linkage analysis
+will be determined. A related parent sample is related (or identical)
+to the original mutant line by descent and provides information about
+(some of) the variants present in that line, while an unrelated parent
+sample provides information about the mapping strain variants
+introduced in the mapping cross. If both a related and an unrelated
+parent sample are available, the tool can also use the marker sets
+from both sides for the linkage analysis.</li>
+        </ul>
+
+      </blockquote>
+      <p>With these settings, we base the linkage analysis on crossed-in variants
+only, <em>i.e.</em>, the tool will look for variants, for which the L<em>er</em> sample
+appears homozygous mutant, and determine the contribution of each such
+variant allele to the recombinant pool highlighting regions of low
+contribution, <em>i.e.</em>, with suspected linkage to the causative variant, in its
+output.</p>
+    </li>
+  </ul>
+
+  <p>Running this job will generate two datasets, one with linkage tables for each
+chromosome in the <em>A. thaliana</em> genome, one with graphical representations
+of the data.</p>
+
+  <blockquote class="question">
+    <h3 id="-questions-1"><i class="fa fa-question-circle" aria-hidden="true"></i> Questions</h3>
+
+    <ol>
+      <li>Have a look at the linkage plots dataset generated by the tool run. In
+which interval on which chromosome would you expect the causative
+mutation?</li>
+      <li>Are the per-marker scatter plots and the histogram plots in agreement?</li>
+      <li>What about those <code class="highlighter-rouge">No markers found!</code> messages (you saw them, right?)
+that the tool printed?</li>
+    </ol>
+
+    <details>
+  <summary>Click to view answers</summary>
+  <ol type="1">
+    <li>The plots suggest that the causative variant is likely to be found
+    in the region from 18,000,000 to 19,000,000 on chr2.</li>
+    <li><p>Look at the y axis labels! The scatter plots show the rates at
+    which marker sites appear to recombine with the causative mutation
+    in the pool of F2 recombinants, while the histograms show linkage
+    evidence. Hence, a dip of the scatter plot regression line towards zero
+    corresponds to a peak in the histograms and the two kinds of plots are,
+    thus, in very good agreement for this analysis.</p>
+    <p>In general, the histogram plots are easier to digest and often
+    provide more precise mapping intervals, and are often all you need for
+    mapping a causative variant. The per-marker scatter plots, on the other
+    hand, are closer to the raw data and can sometimes reveal additional
+    irregularities in the data that may indicate problems with the mapping
+    cross or unexpected factors influencing the inheritance pattern.</p>
+    </li>
+    <li>Since we included only reads mapping to chromosome 1 or 2 in
+    the original BAM files, the tool will not be able to detect any markers
+    for the other chromosomes.</li>
+  </ol>
+</details>
+
+  </blockquote>
+</blockquote>
+
+<h1 id="identifying-candidate-mutations">Identifying Candidate Mutations</h1>
+
+<p>With the mapping results obtained above we can now try to get a list of
+candidates for the causative mutation. Here is what we know about this mutation
+so far:</p>
+
+<ul>
+  <li>
+    <p>The F2 recombinant pool should appear homozygous mutant for it.</p>
+
+    <p>This is because the F2 recombinants got selected based on the phenotype of
+the recessive mutation so we can assume that all individuals in the pool were
+homozygous for it.</p>
+  </li>
+  <li>
+    <p>The L<em>er</em> strain should not carry it.</p>
+  </li>
+  <li>
+    <p>It should reside in the genomic region identified in the previous step.</p>
+  </li>
+</ul>
+
+<blockquote class="hands_on">
+  <h3 id="-hands-on-variant-filtering"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Variant Filtering</h3>
+
+  <p>With the above information, we can run <strong>MiModD VCF Filter</strong> <i class="fa fa-wrench" aria-hidden="true"></i>
+to obtain a new VCF dataset with only those variants from the originally
+extracted ones that fulfill all three criteria. In the tool interface,</p>
+
+  <ul>
+    <li>select as <strong>VCF input file</strong> the extracted variants dataset from your
+history</li>
+    <li>add a <strong>Sample-specific Filter</strong> and set its
+      <ul>
+        <li><strong>sample</strong> to <code class="highlighter-rouge">outcrossed F2</code></li>
+        <li><strong>genotype pattern(s) for the inclusion of variants</strong> to <code class="highlighter-rouge">1/1</code></li>
+      </ul>
+
+      <p>These settings will make the filter retain only variants for which the F2
+pool has a <code class="highlighter-rouge">1/1</code>, <em>i.e.</em>, homozygous mutant genotype.</p>
+    </li>
+    <li>add another <strong>Sample-specific Filter</strong> and set its
+      <ul>
+        <li><strong>sample</strong> to <code class="highlighter-rouge">Ler</code></li>
+        <li><strong>genotype pattern(s) for the inclusion of variants</strong> to <code class="highlighter-rouge">0/0</code></li>
+      </ul>
+
+      <p>This filter will retain only variants for which the mapping strain sample
+has a homozygous wt genotype.</p>
+    </li>
+    <li>add a <strong>Region Filter</strong> and set its
+      <ul>
+        <li><strong>Chromosome</strong> to <code class="highlighter-rouge">chr2</code></li>
+        <li><strong>Region Start</strong> to 18000000</li>
+        <li><strong>Region End</strong> to 19000000</li>
+      </ul>
+
+      <p>to retain only variants falling into the previously determined mapping
+interval.</p>
+
+      <blockquote class="comment">
+        <h3 id="-sample-and-chromosome-names"><i class="fa fa-commenting-o" aria-hidden="true"></i> Sample and chromosome names</h3>
+        <p>This is the second time in this tutorial that we ask you to type sample
+or chromosome names exactly as they appear in a dataset, and so you
+may have started wondering how you are supposed to keep track of which
+names are used where in your own analyses.</p>
+
+        <p>Because this is a valid concern, the MiModD tool suite features the
+<strong>MiModD File Information</strong> <i class="fa fa-wrench" aria-hidden="true"></i> tool that can report the
+sample and sequence names stored in almost any dataset that you may
+encounter in a mapping-by-sequencing analysis (specifically, the
+tool can handle datasets in vcf, bcf, sam, bam and fasta format).</p>
+
+      </blockquote>
+    </li>
+  </ul>
+
+  <p>Running the job yields a new VCF dataset with variants that passed all
+filters.</p>
+
+  <blockquote class="question">
+    <h3 id="-questions-2"><i class="fa fa-question-circle" aria-hidden="true"></i> Questions</h3>
+
+    <ol>
+      <li>How many variants passed the filters?</li>
+      <li>How many variants would you have to consider as candidates if you did
+not have any mapping information?</li>
+    </ol>
+
+    <details>
+  <summary>Click to view answers</summary>
+  <ol type="1">
+    <li>If you used the suggested mapping interval of 1Mb on chr2, you
+    should have retained 5 variants. Filtering is a really powerful way to
+    reduce the number of variants to consider!</li>
+    <li>Rerunning the job with the region filter removed shows that across
+    the two chromosomes, for which the input datasets provided sequencing
+    reads, there are 50 variants for which the pool appears homozygous
+    mutant and for which the L<em>er</em> strain is homozygous wt.</li>
+  </ol>
+</details>
+
+  </blockquote>
+</blockquote>
+
+<p>Not all of the retained variants are equally likely candidates for being the
+causative mutation. Since the input datasets consist of reads from whole-genome
+sequencing, as opposed to exome sequencing, some of the variants may fall in
+intergenic regions or introns where they are unlikely to cause a phenotype.
+Other variants may fall in coding regions, but may be silent on the protein
+level. Hence, we can prioritize our candidate variants after annotating them
+with predicted functional effects.</p>
+
+<blockquote class="hands_on">
+  <h3 id="-hands-on-variant-annotation"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Variant Annotation</h3>
+
+  <p>To annotate our variants we are going to use <strong>SnpEff</strong> with the
+<code class="highlighter-rouge">athalianaTair10</code> genome database as the source of functional genomic
+annotations, then generate a human-friendly variant report with the
+<strong>MiModD Report Variants</strong> <i class="fa fa-wrench" aria-hidden="true"></i> tool.</p>
+
+  <ol>
+    <li>
+      <p>Use <strong>SnpEff Download</strong> <i class="fa fa-wrench" aria-hidden="true"></i> (Galaxy tool version 4.1.0) to
+download genome database <code class="highlighter-rouge">athalianaTair10</code>.</p>
+
+      <blockquote class="comment">
+        <h3 id="-snpeff-versions"><i class="fa fa-commenting-o" aria-hidden="true"></i> SnpEff versions</h3>
+        <p>SnpEff genome databases can only be used with the specific version of
+SnpEff they were built for. Make sure you are using version <code class="highlighter-rouge">4.1.0</code> of
+<strong>SnpEff Download</strong> <i class="fa fa-wrench" aria-hidden="true"></i> in this and of <strong>SnpEff Variant
+effect and annotation</strong> <i class="fa fa-wrench" aria-hidden="true"></i> in the next step.
+If your Galaxy server offers newer versions of these tools by default,
+you may be able to request version <code class="highlighter-rouge">4.1.0</code> explicitly using the
+<strong>Versions</strong> button at the top right of the tool interface.</p>
+      </blockquote>
+    </li>
+    <li>In the <strong>SnpEff Variant effect and annotation</strong> <i class="fa fa-wrench" aria-hidden="true"></i> interface,
+set:
+      <ul>
+        <li><strong>Sequence changes (SNPs, MNPs, InDels)</strong> to your filtered VCF dataset</li>
+        <li><strong>Genome source</strong> to <code class="highlighter-rouge">Reference genome from your history</code></li>
+        <li><strong>SnpEff4.1 Genome Data</strong> to your just downloaded genome dataset</li>
+        <li>
+          <p>under <strong>Annotation options</strong> check <code class="highlighter-rouge">Use 'EFF' field compatible with
+older versions (instead of 'ANN')</code></p>
+
+          <p>This last setting is required for compatibility of the resulting dataset
+with the current version of <strong>MiModD Report Variants</strong> <i class="fa fa-wrench" aria-hidden="true"></i>.</p>
+        </li>
+      </ul>
+
+      <p>Running this job will produce another VCF dataset with the functional
+annotation data added to its INFO column. Inspecting this dataset is not
+particularly convenient, but you can turn it into a more user-friendly
+report by</p>
+    </li>
+    <li>using <strong>MiModD Report Variants</strong> <i class="fa fa-wrench" aria-hidden="true"></i> and setting:
+      <ul>
+        <li><strong>The VCF input with the variants to be reported</strong> to the annotated
+variants dataset generated by <strong>SnpEff</strong></li>
+        <li>the <strong>Format to use for the report</strong> to <code class="highlighter-rouge">HTML</code></li>
+        <li>
+          <p><strong>Species</strong> to <code class="highlighter-rouge">A. thaliana</code>.</p>
+
+          <p>The species information can be used by the tool to enrich the output
+with species-specific database and genome browser links.</p>
+        </li>
+      </ul>
+
+      <blockquote class="comment">
+        <h3 id="-comment-1"><i class="fa fa-commenting-o" aria-hidden="true"></i> Comment</h3>
+        <p>Variant reports in html format are meant to be used on relatively small
+lists of candidate variants like in this example. If the input VCF
+contains &gt; 1000 variants, the relatively large size of the reports and
+slow loading in the browser may become annoying. In this case, or if you
+experience formatting problems with the generated html in your browser,
+it may be better to choose <code class="highlighter-rouge">Tab-separated plain text</code> as the report
+format although the output will then lack those convenient hyperlinks.</p>
+      </blockquote>
+    </li>
+  </ol>
+
+  <blockquote class="question">
+    <h3 id="-questions-3"><i class="fa fa-question-circle" aria-hidden="true"></i> Questions</h3>
+
+    <p>The published confirmed mutations in the mutant line are <em>chr2:18,774,111
+C→T</em> and <em>chr2:18,808,927 C→T</em>. The latter was shown through follow-up
+experiments to be the causative variant.</p>
+
+    <ol>
+      <li>What are the functional effects of these two mutations according to the
+report?</li>
+      <li>What biological functions are described for the two genes? How do these
+relate to the phenotype of our mutant line?</li>
+    </ol>
+
+    <details>
+  <summary>Click to view answers</summary>
+  <ol type="1">
+    <li>The C→T transition at 18,774,111 results in a premature
+    translational stop for the transcript AT2G45550.1. The C→T transition
+    at 18,808,927 affects a splice donor site and, thus, is likely to
+    interfere with correct splicing of the transcript AT2G45660.1.</li>
+    <li>From the linked gene pages at <em>TAIR</em> you can learn that the
+    gene AT2G45550 encodes a cytochrome P450, while AT2G45660 encodes a
+    protein called AGL20, which is known to control flowering. Thus, there
+    is a direct connection between the late-flowering phenotype of the
+    mutant line studied here and the known role of the gene affected by
+    chr2:18,808,927 C→T.</li>
+  </ol>
+</details>
+
+  </blockquote>
+</blockquote>
+
+<h1 class="no_toc" id="conclusion">Conclusion</h1>
+
+<p>Mapping-by-sequencing can greatly speed up and facilitate the molecular
+identification of mutations recovered from mutagenesis screens. The method
+makes extensive use of cross-sample comparison of variants and profits strongly
+from joint variant calling to generate reliable and manageable variant
+information. A combination of variant linkage analysis and filtering often
+results in very small lists of candidate variants that can then be confirmed
+through further experimental work. Importantly, the selection of biological
+samples for sequencing determines the meaningful variant comparisons that can
+be made in the bioinformatical analysis so it is important to understand the
+essence of the analysis method <strong>before</strong> the preparation of any biological
+samples.</p>
+
+
+
+        
+        <blockquote class="key_points">
+            <h3><i class="fa fa-key" aria-hidden="true"></i> Key points</h3>
+
+            <ul>
+                
+                <li>Mapping-by-sequencing is a powerful method for the molecular identification of mutations</li>
+                
+                <li>The MiModD suite of tools bundles most of the functionality required to perform mapping-by-sequencing analyses with Galaxy</li>
+                
+            </ul>
+        </blockquote>
+        
+
+        
+        <h1>Useful literature</h1>
+        <p>Useful information regarding this type of analysis with descriptions and paper references for the tools used in this tutorial, and literature for this analysis techniques and interpretations can be found <a href="/training-material/topics/variant-analysis#references">here</a>.</p>
+        
+
+        <h3><i class="fa fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!</h3>
+
+        <hr>
+
+        <blockquote class="overview">
+            <h3><i class="fa fa-comments-o" aria-hidden="true"></i> Feedback</h3>
+            Please take a moment and provide your feedback on this tutorial. Your feedback will help guide and improve future revisions to this tutorial.
+            <a href="https://tinyurl.com/GTNfeedback">Feedback Form</a>
+        </blockquote>
+    </section>
+</div>
+
+
+<footer>
+    <div class="container">
+        <p>
+            This material is the result of a collaborative work. Thanks the
+            <a href="https://wiki.galaxyproject.org/Teach/GTN">Galaxy Training Network</a>
+            and all the <a href="/training-material/hall-of-fame">contributors</a> (Wolfgang Maier)!
+        </p>
+        <p>
+            Found a typo? Something is wrong in this tutorial? Edit it on
+            <a href="https://github.com/galaxyproject/training-material/tree/master/topics/variant-analysis/tutorials/mapping-by-sequencing/tutorial.md">GitHub</a>.
+        </p>
+    </div>
+</footer>
+
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+</html>
