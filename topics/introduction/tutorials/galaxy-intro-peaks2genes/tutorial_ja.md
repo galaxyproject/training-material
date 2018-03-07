@@ -275,7 +275,7 @@ HPeakのマニュアルを見ると、列に以下のような情報が含まれ
 >     - **Offset** → `10000`
 >     - **Length of the flanking region(s)** → `12000`
 >
->     This tool returns flanking regions for every gene
+>     このツールは全ての遺伝子でのフランキング領域をリターンします
 >
 > 2. BEDファイルの結果の行とインプットを比べて開始地点と終了地点の変更方法を見つける
 >
@@ -341,8 +341,9 @@ HPeakのマニュアルを見ると、列に以下のような情報が含まれ
 >    >    <details>
 >    >    <summary>クリックで答えを表示</summary>
 >    >    <ol type="1">
->    >    <li>The result varies with different settings. If you followed step by step, it should be chromosome 7 with 1675 genes.</li>
->    >    </ol>
+>    >    <li>結果は設定によって異なります。もし、あなたがこれまでのステップを順々に行っていた場合は、最も多くの標的遺伝子をもつのは1675の遺伝子を
+ 持つ7番染色体になるはずです。</li>
+>    >    </ol>
 >    >    </details>
 >    {: .question}
 >
@@ -468,7 +469,7 @@ Part 1では1 bpで重複を見ていました（デフォルトの設定）。�
 そして、染色体に加えてピーク頂上の始まりと終わりを切り取ります。:
 
 > ### {% icon hands_on %} ハンズオン: 列を切り取る
-> 1. **切り取り** {% icon tool %}: 以下の設定を行った上で **Cut columns from a table** を実行する:
+> 1. **Cut** {% icon tool %}: 以下の設定を行った上で **Cut columns from a table** を実行する:
 >   - **Cut columns** → `c1,c8,c9`
 >   - **Delimited by Tab** → `Tab`
 >   - **From** → 最新のヒストリーファイル
@@ -530,7 +531,7 @@ UCSCからダウンロードしたRefSeq遺伝子には、RefSeq識別子のみ�
 {: .hands_on}
 
 ワークフローを再実行することでピークの頂上を解析し始めました。また**Group** ツールで、各染色体にある遺伝子の量の情報を含んだリストを再び作成しました。 
-しかし、様々な特殊な遺伝子のピークの量を調べることは面白くないでしょうか？色々な設定でワークフローを再実行してみましょう!
+しかし、様々な特殊な遺伝子のピークの量を調べるのはもっと面白くないでしょうか？色々な設定でワークフローを再実行してみましょう!
 
 > ### {% icon hands_on %} ハンズオン: ワークフローを設定を変えて実行する
 > 1. ワークフローのメニューを開く（上部にあるメニュー）
@@ -547,12 +548,12 @@ UCSCからダウンロードしたRefSeq遺伝子には、RefSeq識別子のみ�
 
 > ### {% icon question %} 問題
 >
-> The list of unique genes is not sorted. Try to sort it on your own!
+> 特殊な遺伝子のリストはソートされていません。あなた自身でソートしてみましょう!
 >
 >    <details>
->    <summary>Click to view answers</summary>
->    You can use the tool "Sort data in ascending or descending order" on column 2 and a numerical sort.
->    </details>
+>    <summary>クリックで答えを表示</summary>
+>    "Sort data in ascending or descending order" というツールを使用することができて、 column 2 と Numerical sort でソートすることができます。
+>    </details>
 {: .question}
 
 
