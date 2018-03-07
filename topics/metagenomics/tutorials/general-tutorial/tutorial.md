@@ -137,6 +137,7 @@ times, we'll unique our sequences using the `Unique.seqs` command:
 >
 > 1. **Unique.seqs** {% icon tool %} with the following parameters
 >   - "fasta" to the merged fasta file
+>   - "output format" to `Name File`
 >
 >    > ### {% icon question %} Question
 >    >

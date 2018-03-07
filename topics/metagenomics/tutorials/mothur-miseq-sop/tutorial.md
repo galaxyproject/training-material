@@ -281,7 +281,7 @@ times, we'll unique our sequences using the `unique.seqs` command:
 >
 > - **Unique.seqs** {% icon tool %} with the following parameters
 >   - "fasta" to the `good.fasta` output from Screen.seqs
->
+>   - "output format" to `Name File`
 >
 > > ### {% icon question %} Question
 > >
