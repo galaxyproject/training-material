@@ -1,0 +1,845 @@
+﻿id: tal1-binding-site-identification
+name: >-
+  Identification of the binding sites of the T-cell acute lymphocytic leukemia
+  protein 1 (TAL1)
+description: >-
+  In this tutorial we will identify the binding sites of the T-cell acute
+  lumphocytic leukemia protein 1 (TAL1), sing the data published by <a
+  href="http://genome.cshlp.org/content/24/12/1945.full.pdf+html">Wu et al.
+  (2014)</a>. The goal of this study was to investigate “the dynamics of
+  occupancy and the role in gene regulation of the transcription factor TAL1, a
+  critical regulator of hematopoiesis, at multiple stages of hematopoietic
+  differentiation.”
+title_default: peptide-protein-id
+steps:
+  - title: Introduction
+    content: >-
+      In this tutorial we will identify the binding sites of the T-cell acute
+      lumphocytic leukemia protein 1 (TAL1), sing the data published by <a
+      href="http://genome.cshlp.org/content/24/12/1945.full.pdf+html">Wu et al.
+      (2014)</a>. The goal of this study was to investigate “the dynamics of
+      occupancy and the role in gene regulation of the transcription factor
+      TAL1, a critical regulator of hematopoiesis, at multiple stages of
+      hematopoietic differentiation.” <br>Identifying the proteins contained in
+      a sample is an important step in any proteomic experiment. This tour deals
+      with protein identification from peptides ("bottom-up proteomics"). <br>To
+      this end, ChIP-seq experiments were performed in multiple mouse cell types
+      including G1E - a GATA-null immortalized cell line derived from targeted
+      disruption of GATA-1 in mouse embryonic stem cells - and megakaryocytes.
+    backdrop: true
+  - title: Introduction
+    content: >-
+      This dataset (GEO Accession:<a
+      href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE51338">GSE51338</a>)
+      consists of biological replicate TAL1 ChIP-seq and input control
+      experiments. Input control experiments are used to identify and remove
+      sampling bias, for example open/accessible chromatin or GC bias.
+      <br><br>Because of the long processing time for the large original files,
+      we have downsampled the original raw data files to include only reads that
+      align to chromosome 19 and a subset of interesting genomic loci identified
+      by Wu et al. (2014).
+    backdrop: true
+  - title: Quality control
+    content: >-
+      As for any NGS data analysis, ChIP-seq data must be quality controlled
+      before being aligned to a reference genome. For more detailed information
+      on NGS quality control, check out the tutorial <a
+      href="https://galaxyproject.github.io/training-material/topics/sequence-analysis">here</a>.
+    backdrop: true
+  - title: History options
+    element: '#history-options-button'
+    content: >-
+      We will start the analysis by creating a new history. Click on this button
+      and then "Create New"
+    placement: left
+  - title: Importing data via links
+    content: >-
+      Import the ChIP-seq raw data (*.fastqsanger) from <a
+      href="https://doi.org/10.5281/zenodo.197100">Zenodo</a>.
+    backdrop: true
+  - title: Uploading the new data
+    element: '#tool-panel-upload-button .fa.fa-upload'
+    content: We need to upload data. Open the Galaxy Upload Manager
+    placement: right
+    postclick:
+      - '#tool-panel-upload-button .fa.fa-upload'
+      - '#btn-reset'
+  - title: Uploading the input data
+    element: '#btn-new'
+    content: Click on Paste/Fetch Data
+    placement: right
+    postclick:
+      - '#btn-new'
+  - title: Uploading the input data
+    element: .upload-text-column .upload-text .upload-text-content.form-control
+    content: >-
+      Load the datasets into your history from <a
+      href="https://doi.org/10.5281/zenodo.197100">Zenodo</a>
+    placement: right
+    textinsert: >-
+      https://zenodo.org/record/197100/files/Megakaryocyte_Tal1_R1_downsampled_SRR549006.fastqsanger
+
+      https://zenodo.org/record/197100/files/Megakaryocytes_Tal1_R2_downsampled_SRR549007.fastqsanger
+
+      https://zenodo.org/record/197100/files/Megakaryocyte_input_R1_downsampled_SRR492453.fastqsanger
+
+      https://zenodo.org/record/197100/files/Megakaryocyte_input_R2_downsampled_SRR492454.fastqsanger
+
+      https://zenodo.org/record/197100/files/G1E_Tal1_R1_downsampled_SRR492444.fastqsanger
+
+      https://zenodo.org/record/197100/files/G1E_Tal1_R2_downsampled_SRR492445.fastqsanger
+
+      https://zenodo.org/record/197100/files/G1E_input_R1_downsampled_SRR507859.fastqsanger
+
+      https://zenodo.org/record/197100/files/G1E_input_R2_downsampled_SRR507860.fastqsanger
+
+      https://zenodo.org/record/197100/files/RefSeq_gene_annotations_mm10.bed
+    backdrop: false
+  - title: Uploading the input data
+    element: '#btn-start'
+    content: Click on "Start" to start loading the data to history
+    placement: right
+    postclick:
+      - '#btn-start'
+  - title: Uploading the input data
+    element: '#btn-close'
+    content: >-
+      The upload may take a while.<br> Hit the close button to close this
+      window.
+    placement: right
+    postclick:
+      - '#btn-close'
+  - title: Rename the input data
+    element: '.history-right-panel .list-items > *:first'
+    content: >-
+      The uploaded datasets is in the history, but its name corresponds to the
+      link. We want to rename them it to somthing more meaningful, e.g. 'G1E
+      TAL1 R1'. <br><br>  <ul>
+        <li>Click on the pencil icon beside the file to "Edit Attributes".</li>
+        <li>Change the "<b>Name:</b>" accordingly.</li>
+        <li>Click "Save".</li>
+      </ul>
+    position: left
+  - title: The input data
+    element: '.history-right-panel .list-items > *:first'
+    content: Examine in Galaxy the data in a FASTQ file by clicking on the eye icon.
+    position: left
+  - title: Questions
+    content: |-
+      <ul>
+        <li>What are four key features of a FASTQ file?</li>
+        <li>What is the main difference between a FASTQ and a FASTA file?</li>
+      </ul>
+    backdrop: false
+  - title: Quality control
+    element: '#tool-search-query'
+    content: Search for FastQC tool.
+    placement: right
+    textinsert: FastQC
+  - title: Quality control
+    element: '#tool-search'
+    content: Click on the "FastQC" tool to open it.
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fdevteam%2Ffastqc%2Ffastqc%2F0.69"]
+        .tool-old-link
+  - title: Quality control
+    element: '#tool-search'
+    content: >-
+      Run the tool FastQC on all FASTQ files to assess the quality of the raw
+      data. An explanation of the results can be found on the <a
+      href="https://www.bioinformatics.babraham.ac.uk/projects/fastqc/">FastQC
+      web page</a>
+    position: right
+  - title: Questions
+    content: |-
+      <ul>
+        <li>Check the FastQc webpage output, 'Per base sequence quality' figure. What does the y-axis represent?</li>
+        <li>Why is the quality score decreasing across the length of the reads?</li>
+      </ul>
+    backdrop: false
+  - title: Trimming and clipping reads
+    content: >-
+      It is often necessary to trim a sequenced read to remove bases sequenced
+      with high uncertainty (i.e. low-quality bases). In addition, artificial
+      adaptor sequences used in library preparation protocols need to be removed
+      before attempting to align the reads to a reference genome.
+    backdrop: true
+  - title: Trimming and clipping reads
+    element: '#tool-search-query'
+    content: Search for Trimmomatic tool.
+    placement: right
+    textinsert: Trimmomatic
+  - title: Trimming and clipping reads
+    element: '#tool-search'
+    content: Click on the "Trimmomatic" tool to open it.
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fpjbriggs%2Ftrimmomatic%2Ftrimmomatic%2F0.36.0"]
+        .tool-old-link
+  - title: Trimming and clipping reads
+    element: '#tool-search'
+    content: |-
+      Execute the tool with  <ul>
+        <li><b>Paired end data?</b>No</li>
+        <li><b>Perform initial ILLUMINACLIP?</b>No</li>
+        <li><b>Select Trimmomatic operation to perform</b> Sliding window trimming (SLIDINGWINDOW)</li>
+        <li><b>Number of bases to average across</b> 4</li>
+        <li><b>Average quality required</b> 20</li>
+      </ul>
+    position: right
+  - title: Changing datatypes
+    content: >-
+      If the FASTQ files cannot be selected, check whether their format is FASTQ
+      with Sanger-scaled quality values (fastqsanger). If not, you can edit the
+      data type by clicking on the pencil symbol next to a file in the history,
+      clicking the “Datatype” tab, and choosing fastqsanger as the “New Type”.
+    backdrop: false
+  - title: Trimming and clipping reads
+    element: '#tool-search-query'
+    content: Search for FastQC tool.
+    placement: right
+    textinsert: FastQC
+  - title: Trimming and clipping reads
+    element: '#tool-search'
+    content: Click on the "FastQC" tool to open it.
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fdevteam%2Ffastqc%2Ffastqc%2F0.69"]
+        .tool-old-link
+  - title: Trimming and clipping reads
+    element: '#tool-search'
+    content: >-
+      Re-run the tool FastQC on each trimmed/clipped FASTQ file to determine
+      whether low-quality and adaptor sequences were correctly removed.
+    position: right
+  - title: Questions
+    content: |-
+      <ul>
+        <li>How did the range of read lengths change after trimming/clipping?</li>
+        <li>What do you think could account for the enriched k-mers (Kmer Content heading in FASTQC output) observed in the Megakaryocytes TAL1 R2 ChIP-seq experiment?</li>
+      </ul>
+    backdrop: false
+  - title: Aligning reads to a reference genome
+    content: >-
+      To determine where DNA fragments originated from in the genome, the
+      sequenced reads must be aligned to a reference genome. This is equivalent
+      to solving a jigsaw puzzle, but unfortunately, not all pieces are unique.
+      In principle, you could do a BLAST analysis to figure out where the
+      sequenced pieces fit best in the known genome. Aligning millions of short
+      sequences this way, however, can take a couple of weeks. Nowadays, there
+      are many read alignment programs for sequenced DNA, BWA being one of them.
+      You can read more about the BWA algorithm and tool <a
+      href="https://academic.oup.com/bioinformatics/article-lookup/doi/10.1093/bioinformatics/btp324">here</a?.
+    backdrop: true
+  - title: Aligning reads to a reference genome
+    element: '#tool-search-query'
+    content: Search for Map with BWA tool.
+    placement: right
+    textinsert: Map with BWA
+  - title: Aligning reads to a reference genome
+    element: '#tool-search'
+    content: Click on the "Map with BWA" tool to open it.
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fdevteam%2Fbwa_wrappers%2Fbwa_wrapper%2F1.2.3"]
+        .tool-old-link
+  - title: Aligning reads to a reference genome
+    element: '#tool-search'
+    content: |-
+      Execute the tool with  <ul>
+        <li><b>Using reference genome:</b> Mouse (mus musculus) mm10</li>
+        <li><b>Single or Paired-Ended reads:</b> Single</li>
+      </ul>
+    position: right
+  - title: Aligning reads to a reference genome
+    element: '.history-right-panel .list-items > *:first'
+    content: >-
+      Rename your files after BWA finishes to reflect the origin and contents.
+      Inspect a file produced by running BWA.
+    position: left
+  - title: Questions
+    content: |-
+      <ul>
+        <li>What datatype is the BWA output file?</li>
+        <li>How many reads were mapped from each file?</li>
+      </ul>
+    backdrop: false
+  - title: Aligning reads to a reference genome
+    element: '#tool-search-query'
+    content: Search for IdxStats tool.
+    placement: right
+    textinsert: IdxStats
+  - title: Aligning reads to a reference genome
+    element: '#tool-search'
+    content: Click on the "IdxStats" tool to open it.
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fdevteam%2Fsamtools_idxstats%2Fsamtools_idxstats%2F2.0.1"]
+        .tool-old-link
+  - title: Aligning reads to a reference genome
+    element: '#tool-search'
+    content: Execute the tool on all mapped files.
+    position: right
+  - title: Questions
+    content: |-
+      <ul>
+        <li>What does each column in the output represent (Tip:look at the Tool Form)?</li>
+        <li>How many reads were mapped to chromosome 19 in each experiment?</li>
+        <li>If the mouse genome has 21 pairs of chromosomes, what are the other reference chromosomes (e.g. chr1_GL456210_random)?</li>
+      </ul>
+    backdrop: false
+  - title: Assessing correlation between samples
+    content: >-
+      To assess the similarity between the replicates sequencing datasets, it is
+      a common technique to calculate the correlation of read counts for the
+      different samples.
+
+      <br><br>We expect that the replicate samples will cluster more closely to
+      each other than to other samples. We will be use tools from the package
+      deepTools for the next few steps. More information on deepTools can be
+      found <a
+      href="https://deeptools.readthedocs.io/en/latest/content/list_of_tools.html">here</a>.
+    backdrop: true
+  - title: Assessing correlation between samples
+    element: '#tool-search-query'
+    content: Search for multiBamSummary tool.
+    placement: right
+    textinsert: multiBamSummary
+  - title: Assessing correlation between samples
+    element: '#tool-search'
+    content: Click on the "multiBamSummary" tool to open it.
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Fdeeptools_multi_bam_summary%2Fdeeptools_multi_bam_summary%2F2.5.1.1.0"]
+        .tool-old-link
+  - title: Assessing correlation between samples
+    content: >-
+      This tool splits the reference genome into bins of equal size and counts
+      the number of reads in each bin from each sample. We set a small Bin size
+      here because we are working with a subset of reads that align to only a
+      fraction of the genome.
+    backdrop: true
+  - title: Assessing correlation between samples
+    element: '#tool-search'
+    content: |-
+      Execute the tool with  <ul>
+        <li>Select all of the aligned BAM files</li>
+        <li><b>Bin size in bp</b> 1000</li>
+      </ul>
+    position: right
+  - title: Assessing correlation between samples
+    element: '#tool-search-query'
+    content: Search for plotCorrelation tool.
+    placement: right
+    textinsert: plotCorrelation
+  - title: Assessing correlation between samples
+    element: '#tool-search'
+    content: Click on the "plotCorrelation" tool to open it.
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Fdeeptools_plot_correlation%2Fdeeptools_plot_correlation%2F2.5.1.1.0"]
+        .tool-old-link
+  - title: Assessing correlation between samples
+    element: '#tool-search'
+    content: |-
+      Execute the tool with  <ul>
+        <li><b>Correlation method</b> Pearson</li>
+        <li><b>Plotting type</b> Heatmap</li>
+        <li><b>Plot the correlation value</b> Yes</li>
+        <li><b>Skip zeros</b> Yes</li>
+        <li><b>Remove regions with very large counts</b> Yes</li>
+      </ul>
+    position: right
+  - title: Questions
+    content: |-
+      <ul>
+        <li>Why do we want to skip zeros in plotCorrelation?</li>
+        <li>What happens if the Spearman correlation method is used instead of the Pearson method?</li>
+        <li>What does the output of making a Scatterplot instead of a Heatmap look like?</li>
+      </ul>
+    backdrop: false
+  - title: Assessing IP strength
+    content: >-
+      We will now evaluate the quality of the immuno-precipitation step in the
+      ChIP-seq protocol.
+    backdrop: true
+  - title: Assessing IP strength
+    element: '#tool-search-query'
+    content: Search for plotFingerprint tool.
+    placement: right
+    textinsert: plotFingerprint
+  - title: Assessing IP strength
+    element: '#tool-search'
+    content: Click on the "plotFingerprint" tool to open it.
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Fdeeptools_plot_fingerprint%2Fdeeptools_plot_fingerprint%2F2.5.1.1.0"]
+        .tool-old-link
+  - title: Assessing IP strength
+    element: '#tool-search'
+    content: |-
+      Execute the tool with  <ul>
+        <li>Select all of the aligned BAM files for the G1E cell type</li>
+        <li><b>Show advanced options</b> Yes</li>
+        <li><b>Bin size in bases</b> 100</li>
+        <li><b>Skip zeros</b> Yes</li>
+      </ul>
+    position: right
+  - title: Assessing IP strength
+    element: '.history-right-panel .list-items > *:first'
+    content: Observe the output image.
+    position: left
+  - title: Questions
+    content: |-
+      <ul>
+        <li>What does this graph in Figure 10 represent?</li>
+        <li>How do (or should) input datasets differ from IP datasets?</li>
+        <li>What do you think about the quality of the IP for this experiment?</li>
+        <li>How does the quality of the IP for megakaryocytes compare to G1E cells?</li>
+      </ul>
+    backdrop: false
+  - title: Determining TAL1 binding sites
+    content: >-
+      Now that <b>BWA</b> has aligned the reads to the genome, we will use the
+      tool <b>MACS2</b> to identify regions of TAL1 occupancy, which are called
+      “peaks”. Peaks are determined from pileups of sequenced reads across the
+      genome that correspond to where TAL1 binds.
+
+      <br><br><b>MACS2</b> will perform two tasks:<ul>
+        <li>Identify regions of TAL1 occupancy (peaks)</li>
+        <li>Generate bedgraph files for visual inspection of the data on a genome browser.</li>
+      </ul>
+
+      More information can be found <a
+      href="https://genomebiology.biomedcentral.com/articles/10.1186/gb-2008-9-9-r137">here</a>.
+    backdrop: true
+  - title: Determining TAL1 binding sites
+    element: '#tool-search-query'
+    content: Search for MACS2 callpeak tool.
+    placement: right
+    textinsert: MACS2 callpeak
+  - title: Determining TAL1 binding sites
+    element: '#tool-search'
+    content: Click on the "MACS2 callpeak" tool to open it.
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmacs2%2Fmacs2_callpeak%2F2.1.1.20160309.0"]
+        .tool-old-link
+  - title: Determining TAL1 binding sites
+    element: '#tool-search'
+    content: >-
+      Run the tool <b>MACS2</b> callpeak with the aligned read files from the
+      previous step as Treatment (TAL1) and Control (input) with<ul>
+        <li>Select replicate <b>ChIP-Seq Treatment Files</b> for one cell type</li>
+        <li>Select replicate <b>ChIP-Seq Control Files</b> for the same cell type</li>
+        <li><b>Effective genome size</b> Mouse(2,150,570,000)</li>
+      </ul>
+    position: right
+  - title: Determining TAL1 binding sites
+    element: '.history-right-panel .list-items > *:first'
+    content: >-
+      Rename your files after MACS2 callpeak finishes to reflect the origin and
+      contents.
+    position: left
+  - title: Inspection of peaks and aligned data
+    content: >-
+      It is critical to visualize NGS data on a genome browser after alignment
+      to evaluate the “goodness” of the analysis. Evaluation criteria will
+      differ for various NGS experiment types, but for ChIP-seq data we want to
+      ensure reads from a Treatment/IP sample are enriched at peaks and do not
+      localize non-specifically (like the Control/input condition).
+
+      <br><br>MACS2 generates BEDgraph and BED files that we will use to
+      visualize read abundance and peaks, respectively, at regions MACS2
+      determines to be TAL1 peaks using Galaxy’s in-house genome browser,
+      <b>Trackster</b>.
+    backdrop: true
+  - title: Inspection of peaks and aligned data with Trackster
+    content: >-
+      First, we will reformat the peak file before we send it to Trackster, and
+      then we will import a gene annotation file so we can visualize aligned
+      reads and TAL1 peaks relative to gene features and positions.
+    backdrop: true
+  - title: Inspection of peaks and aligned data with Trackster
+    element: '#tool-search-query'
+    content: Search for Cut tool.
+    placement: right
+    textinsert: Cut
+  - title: Inspection of peaks and aligned data with Trackster
+    element: '#tool-search'
+    content: Click on the "Cut" tool to open it.
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Ftext_processing%2Ftp_cut_tool%2F1.1.0"]
+        .tool-old-link
+  - title: Inspection of peaks and aligned data with Trackster
+    element: '#tool-search'
+    content: 'Run the tool Cut on the peak file choosing columns “c1,c2,c3,c4”.'
+    position: right
+  - title: Inspection of peaks and aligned data with Trackster
+    element: '.history-right-panel .list-items > *:first'
+    content: Rename the output to reflect the origin and contents.
+    position: left
+  - title: Inspection of peaks and aligned data with Trackster
+    content: >-
+      Now we need to import the gene annotations file from <a
+      href="https://doi.org/10.5281/zenodo.197100">Zenodo</a>.
+    backdrop: true
+  - title: Uploading the new data
+    element: '#tool-panel-upload-button .fa.fa-upload'
+    content: Open the Galaxy Upload Manager
+    placement: right
+    postclick:
+      - '#tool-panel-upload-button .fa.fa-upload'
+      - '#btn-reset'
+  - title: Uploading the input data
+    element: '#btn-new'
+    content: Click on Paste/Fetch Data
+    placement: right
+    postclick:
+      - '#btn-new'
+  - title: Uploading the input data
+    element: .upload-text-column .upload-text .upload-text-content.form-control
+    content: >-
+      Load the gene annotations into your history from <a
+      href="https://doi.org/10.5281/zenodo.197100">Zenodo</a>
+    placement: right
+    textinsert: 'https://zenodo.org/record/197100/files/RefSeq_gene_annotations_mm10.bed'
+    backdrop: false
+  - title: Uploading the input data
+    element: '#btn-start'
+    content: Click on "Start" to start loading the data to history
+    placement: right
+    postclick:
+      - '#btn-start'
+  - title: Uploading the input data
+    element: '#btn-close'
+    content: >-
+      The upload may take a while.<br> Hit the close button to close this
+      window.
+    placement: right
+    postclick:
+      - '#btn-close'
+  - title: Inspection of peaks and aligned data with Trackster
+    content: Click “Visualizations” on the page header and select “New Track Browser”.
+    backdrop: true
+  - title: Inspection of peaks and aligned data with Trackster
+    content: >-
+      Give this session a descriptive name and choose “mm10” as the “Reference
+      genome build (dbkey)”.
+    backdrop: false
+  - title: Inspection of peaks and aligned data with Trackster
+    content: >-
+      Click “Add Datasets to visualization” and select the history containing
+      the data from this analysis. Select the BEDgraph files and the peak files
+      that you renamed.
+    backdrop: false
+  - title: Inspection of peaks and aligned data with Trackster
+    content: >-
+      Navigate to the Runx1 locus (chr16:92501466-92926074) to inspect the
+      aligned reads and TAL1 peaks.
+    backdrop: false
+  - title: Questions
+    content: |-
+      <ul>
+        <li>What do you see at the Runx1 locus in Trackster?</li>
+        <li>What gene(s) other than Runx1 could be regulated by TAL1?</li>
+      </ul>
+    backdrop: false
+  - title: Inspection of peaks and aligned data with IGV
+    content: >-
+      Now we show here an alternative to Trackster, <a
+      href="http://software.broadinstitute.org/software/igv/">IGV</a>.
+    backdrop: true
+  - title: Inspection of peaks and aligned data with IGV
+    content: Open IGV on your local computer.
+    backdrop: true
+  - title: Inspection of peaks and aligned data with IGV
+    content: >-
+      Click on each ‘narrow peaks’ result file from the MACS2 computations on
+      ‘display with IGV’ –> ‘local Mouse mm10’
+    backdrop: true
+  - title: Inspection of peaks and aligned data with IGV
+    content: >-
+      For more information about IGV see <a
+      href="https://galaxyproject.github.io/training-material/topics/introduction/tutorials/igv-introduction/tutorial.html">here</a>
+    backdrop: true
+  - title: Identifying unique and common TAL1 peaks between stages
+    content: >-
+      We have processed ChIP-seq data from two stages of hematopoiesis and have
+      lists of TAL1 occupied sites (peaks) in both cellular states. The next
+      analysis step is to identify TAL1 peaks that are shared between the two
+      cellular states and peaks that are specific to either cellular state.
+    backdrop: true
+  - title: Inspection of peaks and aligned data with IGV
+    element: '#tool-search-query'
+    content: Search for Intersect intervals tool.
+    placement: right
+    textinsert: Intersect intervals
+  - title: Inspection of peaks and aligned data with IGV
+    element: '#tool-search'
+    content: Click on the "Intersect intervals" tool to open it.
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fdevteam%2Fintersect%2Fgops_intersect_1%2F1.0.0"]
+        .tool-old-link
+  - title: Inspection of peaks and aligned data with IGV
+    element: '#tool-search'
+    content: >-
+      Run the tool with default settings on "TAL1 G1E peaks" and "TAL1 Mega
+      peaks". This will return overlapping peaks of both files.
+    position: right
+  - title: Inspection of peaks and aligned data with IGV
+    element: '#tool-search-query'
+    content: Search for Compare two Datasets tool.
+    placement: right
+    textinsert: Compare two Datasets
+  - title: Inspection of peaks and aligned data with IGV
+    element: '#tool-search'
+    content: Click on the "Compare two Datasets" tool to open it.
+    placement: right
+    postclick:
+      - 'a[href$="/tool_runner?tool_id=comp1"] .tool-old-link'
+  - title: Inspection of peaks and aligned data with IGV
+    element: '#tool-search'
+    content: |-
+      Run the tool with
+      <ul>
+        <li>Select “TAL1 G1E peaks” as the first input and “TAL1 Mega peaks” as the second input file</li>
+        <li>Report only non-overlapping parts</li>
+      </ul>
+    position: right
+  - title: Inspection of peaks and aligned data with IGV
+    element: '#tool-search'
+    content: Click on the "Compare two Datasets" tool to open it.
+    placement: right
+    postclick:
+      - 'a[href$="/tool_runner?tool_id=comp1"] .tool-old-link'
+  - title: Inspection of peaks and aligned data with IGV
+    element: '#tool-search'
+    content: |-
+      Run the tool with
+      <ul>
+        <li>Select “TAL1 Mega peaks” as the first input and “TAL1 G1E peaks” as the second input file</li>
+        <li>Report only non=overlapping parts</li>
+      </ul>
+    position: right
+  - title: Inspection of peaks and aligned data with IGV
+    element: '.history-right-panel .list-items > *:first'
+    content: >-
+      Rename your files accordinly:common peaks, unique peaks to G1E, unique
+      peaks to Mega.
+    position: left
+  - title: Questions
+    content: |-
+      <ul>
+        <li>How many TAL1 binding sites are common to both G1E cells and megakaryocytes?</li>
+        <li>How many are unique to G1E cells?</li>
+        <li>How many are unique to megakaryocytes?</li>
+      </ul>
+    backdrop: false
+  - title: Generating Input normalized coverage files
+    content: >-
+      We will generate Input normalized coverage (bigwig) files for the ChIP
+      samples, using bamCompare tool from deepTools2. bamCompare provides
+      multiple options to compare the two files (e.g. log2ratio, subtraction).
+      We will use log2 ratio of the ChIP samples over Input.
+    backdrop: true
+  - title: Generate Input-normalized bigwigs
+    element: '#tool-search-query'
+    content: Search for bamCompare tool.
+    placement: right
+    textinsert: bamCompare
+  - title: Generate Input-normalized bigwigs
+    element: '#tool-search'
+    content: Click on the "bamCompare" tool to open it.
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Fdeeptools_bam_compare%2Fdeeptools_bam_compare%2F2.5.1.1.0"]
+        .tool-old-link
+  - title: Generate Input-normalized bigwigs
+    element: '#tool-search'
+    content: |-
+      Run the tool with
+      <ul>
+        <li>select the treatment sample, for example “Megakaryocyte_Tal1_R2.bam”, as the first sample, and the input sample “Megakaryocyte_Input_R2.bam” as the second sample</li>
+        <li>Check that you are using log2 ratio to compare the samples</li>
+      </ul>
+    position: right
+  - title: Generating Input normalized coverage files
+    content: >-
+      Now you need to run this tool three more times for remaining treatment and
+      input samples
+
+      <ul>
+        <li>Megakaryocyte_Tal1_R1.bam and Megakaryocyte_Input_R1.bam</li>
+        <li>G1E_Tal1_R2.bam and G1E_Input_R2.bam</li>
+        <li>G1E_Tal1_R1.bam and G1E_Input_R1.bam</li>
+      </ul>
+    backdrop: true
+  - title: Plot the signal on the peaks between samples
+    content: >-
+      Plotting your region of interest will involve using two tools from the
+      deepTools suite.
+
+      <ul>
+        <li>computeMatrix. Computes the signal on given regions, using the bigwig coverage files from different samples.</li>
+        <li>plotHeatmap. Plots heatMap of the signals using the computeMatrix output.</li>
+      </ul>
+
+      optionally, you can also use plotProfile to create a profile plot using to
+      computeMatrix output.
+    backdrop: true
+  - title: calculate signal matrix on the MACS2 output
+    element: '#tool-search-query'
+    content: Search for computeMatrix tool.
+    placement: right
+    textinsert: computeMatrix
+  - title: calculate signal matrix on the MACS2 output
+    element: '#tool-search'
+    content: Click on the "computeMatrix" tool to open it.
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Fdeeptools_compute_matrix%2Fdeeptools_compute_matrix%2F2.5.1.1.0"]
+        .tool-old-link
+  - title: calculate signal matrix on the MACS2 output
+    element: '#tool-search'
+    content: |-
+      Run the tool with
+      <ul>
+        <li>Under “Regions to plot”, select the MACS2 output (narrowpeaks) for G1E cells (TAL1 over Input).</li>
+        <li>Under “Score file”, select the bigWigs (log2 ratios from bamCompare).</li>
+        <li>From “computeMatrix has two main output options”, select “reference point”.</li>
+        <li>Under “The Reference point for plotting”, select “Center of region”.</li>
+        <li>For the two fields region upstream and downstream choose both times the value ‘5000’</li>
+      </ul>
+    position: right
+  - title: plot a Heatmap using computeMarix output
+    element: '#tool-search-query'
+    content: Search for plotHeatmap tool.
+    placement: right
+    textinsert: plotHeatmap
+  - title: plot a Heatmap using computeMarix output
+    element: '#tool-search'
+    content: Click on the "plotHeatmap" tool to open it.
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Fdeeptools_plot_heatmap%2Fdeeptools_plot_heatmap%2F2.5.1.1.0"]
+        .tool-old-link
+  - title: plot a Heatmap using computeMarix output
+    element: '#tool-search'
+    content: |-
+      Run the tool with
+      <ul>
+        <li>Select the computeMatrix output as an input.</li>
+        <li>Under advanced options, go to “Labels for the samples “, and enter sample labels (in the order you added them in computeMatrix ), separated by space.</li>
+      </ul>
+    position: right
+  - title: Assessing GC bias
+    content: >-
+      A common problem of PCR-based protocols is the observation that GC-rich
+      regions tend to be amplified more readily than GC-poor regions.
+
+      <br><br>We will now check whether the samples have more reads from regions
+      of the genome with high GC.
+    backdrop: true
+  - title: Assessing GC bias
+    element: '#tool-search-query'
+    content: Search for computeGCbias tool.
+    placement: right
+    textinsert: computeGCbias
+  - title: Assessing GC bias
+    element: '#tool-search'
+    content: Click on the "computeGCbias" tool to open it.
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Fdeeptools_plot_heatmap%2Fdeeptools_plot_heatmap%2F2.5.1.1.0"]
+        .tool-old-link
+  - title: Assessing GC bias
+    element: '#tool-search'
+    content: |-
+      Run the tool with
+      <ul>
+        <li>select an aligned BAM files for an input dataset</li>
+        <li><b>Reference genome:</b> locally cached</li>
+        <li><b>Using reference genome:</b> mm10</li>
+        <li><b>Effective genome size:</b> user specified</li>
+        <li><b>Effective genome size:</b> 10000000</li>
+        <li><b>Fragment length used for the sequencing:</b> 50</li>
+      </ul>
+    position: right
+  - title: Questions
+    content: |-
+      <ul>
+        <li>Why would we worry more about checking for GC bias in an input file?</li>
+        <li>Does this dataset have a GC bias?</li>
+      </ul>
+    backdrop: false
+  - title: Assessing GC bias
+    element: '#tool-search-query'
+    content: Search for correctGCbias tool.
+    placement: right
+    textinsert: correctGCbias
+  - title: Assessing GC bias
+    element: '#tool-search'
+    content: Click on the "correctGCbias" tool to open it.
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Fdeeptools_plot_heatmap%2Fdeeptools_plot_heatmap%2F2.5.1.1.0"]
+        .tool-old-link
+  - title: Assessing GC bias
+    element: '#tool-search'
+    content: |-
+      Run the tool with
+      <ul>
+        <li>select the outputs from the previous step as "Output of computeGCBias"</li>
+        <li>select aligned files as BAM file</li>
+        <li><b>Reference genome:</b> locally cached</li>
+        <li><b>Using reference genome:</b> mm10</li>
+        <li><b>Effective genome size:</b> user specified</li>
+        <li><b>Effective genome size:</b> 10000000</li>
+      </ul>
+    position: right
+  - title: Questions
+    content: |-
+      <ul>
+        <li>What does the tool correctGCbias do?</li>
+        <li>What is the output of this tool?</li>
+        <li>What are some caveats to be aware of if using the output of this tool in downstream analyses?</li>
+      </ul>
+    backdrop: false
+  - title: Conclusion
+    content: >-
+      In this exercise you imported raw Illumina sequencing data, evaluated the
+      quality before and after you trimmed reads with low confidence scores,
+      aligned the trimmed reads, identified TAL1 peaks relative to the negative
+      control (background), and visualized the aligned reads and TAL1 peaks
+      relative to gene structures and positions. Additional, you assessed the
+      “goodness” of the experiments by looking at metrics such as GC bias and IP
+      enrichment.
+    backdrop: true
+  - title: Key points
+    content: |-
+      <ul>
+        <li>Sophisticated analysis of ChIP-seq data is possible using tools hosted by Galaxy.</li>
+        <li>Genomic dataset analyses require multiple methods of quality assessment to ensure that the data are appropriate for answering the biology question of interest.</li>
+        <li>By using the sharable and transparent Galaxy platform, data analyses can easily be shared and reproduced.</li>
+      </ul>
+    backdrop: true

@@ -42,15 +42,18 @@ Due to the large size of this dataset, we have downsampled it to only include re
 >    > Data available from zenodo: [![DOI](https://zenodo.org/badge/DOI/10.123/GTNdenovoRNAseq.svg)](https://zenodo.org/record/583140)
 >    >
 >    > Below are the links to the read files that can be copied and pasted in the upload manager.
->    > - https://zenodo.org/record/583140/files/G1E_rep1_forward_read_%28SRR549355_1%29
->    > - https://zenodo.org/record/583140/files/G1E_rep1_reverse_read_%28SRR549355_2%29
->    > - https://zenodo.org/record/583140/files/G1E_rep2_forward_read_%28SRR549356_1%29
->    > - https://zenodo.org/record/583140/files/G1E_rep2_reverse_read_%28SRR549356_2%29
->    > - https://zenodo.org/record/583140/files/Megakaryocyte_rep1_forward_read_%28SRR549357_1%29
->    > - https://zenodo.org/record/583140/files/Megakaryocyte_rep1_reverse_read_%28SRR549357_2%29
->    > - https://zenodo.org/record/583140/files/Megakaryocyte_rep2_forward_read_%28SRR549358_1%29
->    > - https://zenodo.org/record/583140/files/Megakaryocyte_rep2_reverse_read_%28SRR549358_2%29
->    > - https://zenodo.org/record/583140/files/RefSeq_reference_GTF_%28DSv2%29
+>    >
+>    > ``` https://zenodo.org/record/583140/files/G1E_rep1_forward_read_%28SRR549355_1%29
+>    > https://zenodo.org/record/583140/files/G1E_rep1_reverse_read_%28SRR549355_2%29
+>    > https://zenodo.org/record/583140/files/G1E_rep2_forward_read_%28SRR549356_1%29
+>    > https://zenodo.org/record/583140/files/G1E_rep2_reverse_read_%28SRR549356_2%29
+>    > https://zenodo.org/record/583140/files/Megakaryocyte_rep1_forward_read_%28SRR549357_1%29
+>    > https://zenodo.org/record/583140/files/Megakaryocyte_rep1_reverse_read_%28SRR549357_2%29
+>    > https://zenodo.org/record/583140/files/Megakaryocyte_rep2_forward_read_%28SRR549358_1%29
+>    > https://zenodo.org/record/583140/files/Megakaryocyte_rep2_reverse_read_%28SRR549358_2%29
+>    > https://zenodo.org/record/583140/files/RefSeq_reference_GTF_%28DSv2%29
+>    >```
+>    >
 >    > You will need to fetch the link to the annotation file yourself ;)
 >    {: .tip}
 >
@@ -58,7 +61,7 @@ Due to the large size of this dataset, we have downsampled it to only include re
 
 ## Quality control
 
-For quality control, we use similar tools as described in [NGS-QC tutorial]({{site.url}}/topics/sequence-analysis/): [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/) and [Trimmomatic](http://www.usadellab.org/cms/?page=trimmomatic).
+For quality control, we use similar tools as described in [NGS-QC tutorial]({{site.baseurl}}/topics/sequence-analysis/): [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/) and [Trimmomatic](http://www.usadellab.org/cms/?page=trimmomatic).
 
 > ### {% icon hands_on %} Hands-on: Quality control
 >
@@ -113,7 +116,7 @@ To make sense of the reads, their positions within mouse genome must be determin
 
 > ### {% icon comment %} Comment
 >
-> Do you want to learn more about the principles behind mapping? Follow our [training]({{site.url}}/topics/sequence-analysis/)
+> Do you want to learn more about the principles behind mapping? Follow our [training]({{site.baseurl}}/topics/sequence-analysis/)
 {: .comment}
 
 In the case of a eukaryotic transcriptome, most reads originate from processed mRNAs lacking introns. Therefore, they cannot be simply mapped back to the genome as we normally do for reads derived from DNA sequences. Instead, the reads must be separated into two categories:

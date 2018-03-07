@@ -55,11 +55,11 @@ Let's start with a fresh history.
 >    > ### {% icon tip %} Rename a history
 >    >
 >    > * Click on the title of the history (by default the title is *Unnamed history*)
->    > 
+>    >
 >    >   ![Renaming history](../../../../shared/images/rename_history.png)
->    > 
+>    >
 >    > * Type **Galaxy Introduction** as the name
->    > 
+>    >
 >    {: .tip}
 >
 {: .hands_on}
@@ -68,19 +68,11 @@ Let's start with a fresh history.
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
-> 1. Download the list of peak regions (the file [`GSE37268_mof3.out.hpeak.txt.gz`](https://www.ncbi.nlm.nih.gov/geo/download/?acc=GSE37268&format=file&file=GSE37268%5Fmof3%2Eout%2Ehpeak%2Etxt%2Egz)) from [GEO](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE37268) to your computer 
+> 1. Download the list of peak regions (the file [`GSE37268_mof3.out.hpeak.txt.gz`](https://www.ncbi.nlm.nih.gov/geo/download/?acc=GSE37268&format=file&file=GSE37268%5Fmof3%2Eout%2Ehpeak%2Etxt%2Egz)) from [GEO](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE37268) to your computer
 > 2. Click on the upload button in the upper left ot the interface
 >
 >    ![Upload icon](../../images/upload_button.png)
 >
->    > ### {% icon tip %} Tip: Importing data via links
->    >
->    > * Copy the link location
->    > * Open the Galaxy Upload Manager
->    > * Select **Paste/Fetch Data**
->    > * Paste the link into the text field
->    > * Press **Start** and **Close** the window
->    {: .tip}
 >
 > 3. Press **Choose local file** and search for your file
 >
@@ -103,6 +95,7 @@ Let's start with a fresh history.
 >    > * Open the Galaxy Upload Manager
 >    > * Select **Paste/Fetch Data**
 >    > * Paste the link into the text field
+>    > * As **Type** select `interval`
 >    > * Press **Start**
 >    {: .tip}
 >
@@ -201,7 +194,7 @@ Let's have a look at our files to see what we actually have here.
 >
 {: .question}
 
-This peak file is not in any standard format and just by looking at it, we cannot find out what the numbers in the different columns mean. In the paper the authors mention that they used the peak caller [HPeak](https://www.ncbi.nlm.nih.gov/pubmed/20598134). 
+This peak file is not in any standard format and just by looking at it, we cannot find out what the numbers in the different columns mean. In the paper the authors mention that they used the peak caller [HPeak](https://www.ncbi.nlm.nih.gov/pubmed/20598134).
 
 By looking at the HPeak manual we can find out that the columns contain the following information:
 
@@ -218,8 +211,7 @@ As we directly see, the peak file lacks `chr` before any chromosome number. But 
 
 > ### {% icon hands_on %} Hands-on: View end of file
 >
-> 1. Search for the **Select last** {% icon tool %} tool in the tool panel on the left
-> 2. Select the following settings
+> 1. **Select last** {% icon tool %}: Run **Select last lines from a dataset (tail)** with the following settings:
 >     - **Text file** to our peak file `GSE37268_mof3.out.hpeak.txt`
 >     - **Operation**: `Keep last lines`
 >     - **Number of lines**: Choose a value, e.g. `100`
@@ -247,7 +239,7 @@ In order to convert the chromosome names we have therefore two things to do:
 
 > ### {% icon hands_on %} Hands-on: Adjust chromosome names
 >
-> 1. **Replace Text** {% icon tool %}: Run **Replace Text in a specific column** with 
+> 1. **Replace Text** {% icon tool %}: Run **Replace Text in a specific column** with the following settings:
 >     - **File to process** to our peak file `GSE37268_mof3.out.hpeak.txt`
 >     - **in column**: `Column:1`
 >     - **Find pattern**: `[0-9]+` (this will look for numerical digits)
@@ -276,18 +268,18 @@ We have quite some files now and should take care that we don't loose track. Let
 ## Analysis
 
 Our goal is still to compare the 2 region files (the genes file and the peak file from the publication)
-to know which peaks are related to which genes. If you really only want to know which peaks are located **inside** genes you 
-can skip the next step. Otherwise, it might be reasonable to include the promoter region into the comparison, e.g. because 
+to know which peaks are related to which genes. If you really only want to know which peaks are located **inside** genes you
+can skip the next step. Otherwise, it might be reasonable to include the promoter region into the comparison, e.g. because
 you want to include Transcriptions factors in ChIP-seq experiments.
 
 > ### {% icon hands_on %} Hands-on: Add promoter region to gene records
 >
-> 1. **Get Flanks** {% icon tool %} with the following settings:
+> 1. **Get Flanks** {% icon tool %}: Run **Get flanks returns flanking region/s for every gene** with the following settings:
 >     - **Select data** to the file from UCSC
 >     - **Region** to `Around Start`
->     - **Location** to `Upstream`
+>     - **Location of the flanking region/s** to `Upstream`
 >     - **Offset** to `10000`
->     - **Length** to `12000`
+>     - **Length of the flanking region(s)** to `12000`
 >
 >     This tool returns flanking regions for every gene
 >
@@ -298,7 +290,7 @@ you want to include Transcriptions factors in ChIP-seq experiments.
 >    > * Click **Enable/Disable Scratchbook** on the top panel
 >    >
 >    >    ![Enable/Disable Scratchbook](../../images/intro_scratchbook_enable.png)
->    > 
+>    >
 >    > * Click on the **eye** icon of the files to inspect
 >    > * Click on **Show/Hide Scratchbook**
 >    >
@@ -323,7 +315,7 @@ It's time to find the overlapping intervals (finally!). To do that, we want to e
 
 > ### {% icon hands_on %} Hands-on: Find Overlaps
 >
-> 1. **Intersect** {% icon tool %} with the following settings:
+> 1. **Intersect** {% icon tool %}: Run **Intersect the intervals of two datasets** with the following settings:
 >     - **Return** to `Overlapping Intervals`
 >     - **of**: the UCSC file with promoter regions
 >     - **that intersect**: our converted peak region file
@@ -340,12 +332,13 @@ We will regroup the table by chromosome and count the number of genes with peaks
 
 > ### {% icon hands_on %} Hands-on: Count genes on different chromosomes
 >
-> 1. **Group** {% icon tool %} with the following settings:
+> 1. **Group** {% icon tool %}: Run **Group data by a column and perform aggregate operation on other columns** with the following settings:
 >     - **Select data** to the result of the intersection
 >     - **Group by column**:`Column 1`
 >     - Press **Insert Operation** and choose:
 >     - **Type**: `Count`
 >     - **On column**: `Column 1`
+>     - **Round result to nearest integer?**: `No`
 >
 >    > ### {% icon question %} Questions
 >    >
@@ -422,7 +415,7 @@ Galaxy makes this very simple with the `Extract workflow` option. This means tha
 >    > We can examine the workflow in Galaxy's workflow editor. Here you can view/change the parameter settings of each step, add and remove tools, and connect an output from one tool to the input of another, all in an easy and graphical manner. You can also use this editor to build workflows from scratch.
 >    {: .comment}
 >
->     Although we have our two inputs in the workflow they are missing their connection to the first tool (Intersect), because we didn't carry over some of the intermediate steps. 
+>     Although we have our two inputs in the workflow they are missing their connection to the first tool (Intersect), because we didn't carry over some of the intermediate steps.
 >
 > 8. Connect each input dataset to the **Intersect** tool by dragging the arrow pointing outwards on the right of its box (which denotes an output) to an arrow on the left of the **Intersect** box pointing inwards (which denotes an input)
 > 9. Rename the input datasets to `Reference regions` and `Peak regions`
@@ -468,7 +461,7 @@ We need to generate a new BED file from the original peak file that contains the
 
 > ### {% icon hands_on %} Hands-on: Create peak summit file
 >
-> 1. **Compute an expression on every row** {% icon tool %} with the following settings:
+> 1. **Compute** {% icon tool %}: Run **Compute an expression on every row** with the following settings:
 >   - **Add expression**: `c2+c5`
 >   - **as a new column to**: our peak file
 >   - **Round result?**: `YES`
@@ -482,11 +475,12 @@ We need to generate a new BED file from the original peak file that contains the
 Now we cut out just the chromosome plus the start and end of the summit:
 
 > ### {% icon hands_on %} Hands-on: Cut out columns
-> 1. **Cut columns from a table** {% icon tool %} with the following settings:
+> 1. **Cut** {% icon tool %}: Run **Cut columns from a table** with the following settings:
 >   - **Cut columns**: `c1,c8,c9`
+>   - **Delimited by Tab**: `Tab`
 >   - **From**: our latest history item
-> 
->    The output from **Cut** will be in `tabular` format. 
+>
+>    The output from **Cut** will be in `tabular` format.
 >
 > 2. Change the format to `interval` since that's what the tool **Intersect** expects.
 {: .hands_on}
@@ -499,16 +493,33 @@ The RefSeq genes we downloaded from UCSC did only contain the RefSeq identifiers
 > There are several ways to get the gene names in, if you need to do it yourself. One way is to retrieve a mapping through Biomart and then join the two files (**Join two Datasets side by side on a specified field** {% icon tool %}). Another is to get the full RefSeq table from UCSC and manually convert it to BED format.
 {: .comment}
 
-> ### {% icon hands_on %} Hands-on: Get new gene file from Data Library
-> 1. Click in the top menu on **Shared Data**
-> 2. Navigate to `Genomes + Annotations -> Annotations`
-> 3. Check the dataset `mm9.RefSeq_genes_from_UCSC`
-> 4. Click **to History**, select it and press **Import**
-> 5. Click in the top menu on **Analyze Data** to get back to your main page
+> ### {% icon hands_on %} Hands-on: Data upload
 >
->    You should see a new item in your history.
+> 1. Import from [Zenodo](https://zenodo.org/record/1025586) or from the data library (in "Introduction - From peaks to genes") the file
+>    - `mm9.RefSeq_genes_from_UCSC.bed`
 >
-> 6. Inspect the file content to check if it contains gene names
+>    > ### {% icon tip %} Tip: Importing data via links
+>    >
+>    > * Copy the link location
+>    > * Open the Galaxy Upload Manager
+>    > * Select **Paste/Fetch Data**
+>    > * Paste the link into the text field
+>    > * Press **Start**
+>    {: .tip}
+>
+>    > ### {% icon tip %} Tip: Importing data from a data library
+>    >
+>    > * Go into "Shared data" (top panel) then "Data libraries"
+>    > * Click on "Training data" and then "Introduction - From peaks to genes"
+>    > * Select interesting file
+>    > * Click on "Import selected datasets into history"
+>    > * Import in a new history
+>    {: .tip}
+>
+>    As default, Galaxy takes the link as name, so rename them.
+>
+> 2. Inspect the file content to check if it contains gene names
+>
 {: .hands_on}
 
 ## Repeat workflow

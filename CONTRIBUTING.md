@@ -60,6 +60,8 @@ To manage changes, we use [GitHub flow](https://guides.github.com/introduction/f
 
 For beginners, the GitHub interface will help you in the process of editing a file. It will automatically create a fork of this repository where you can safely work and then submit the changes as a pull request without having to touch the command line.
 
+Pull requests will be merged by the training team members after at least one other person has reviewed the Pull request and approved it.
+
 # How is the training material structured?
 
 Each training material is related to a topic. All training materials (slides, tutorials, ...) related to a topic are found in a dedicated directory (e.g. `Exome-seq` directory contains the material related to exome sequencing analysis). Each topic have the following structure:

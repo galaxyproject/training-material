@@ -11,10 +11,10 @@ layout: base
 {% assign contributors = site.data['contributors'] %}
 
 <header>
-    <nav class="navbar navbar-expand-md navbar-dark">
+    <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container">
-            <a class="navbar-brand" href="{{ site.url }}/">
-                <img src="{{ site.url }}{{ site.small_logo }}" height="30" alt="Galaxy Training Network logo">
+            <a class="navbar-brand" href="{{ site.baseurl }}/">
+                <img src="{{ site.baseurl }}/{{ site.small_logo }}" height="30" alt="Galaxy Training Network logo">
                 {{ site.title }}
             </a>
 
@@ -24,28 +24,49 @@ layout: base
             <div class="collapse navbar-collapse" id="top-navbar">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ site.url }}/topics/{{ topic.name }}" title="Go back to list of tutorials">
+                        <a class="nav-link" href="{{ site.baseurl }}/topics/{{ topic.name }}" title="Go back to list of tutorials">
                             {% icon topic %} {{ topic.title }}
                         </a>
                     </li>
 
                     {% if tutorial.slides == "yes" %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ site.url }}/topics/{{ topic.name }}/tutorials/{{ tutorial.name }}/slides" title="Slides for this tutorial">
+                        <a class="nav-link" href="{{ site.baseurl }}/topics/{{ topic.name }}/tutorials/{{ tutorial.name }}/slides.html" title="Slides for this tutorial">
                             {% icon slides %} Associated slides
                         </a>
                     </li>
                     {% else %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ site.url }}/topics/{{ topic.name }}/slides" title="Introduction slides">
-                            {% icon slides %} Introduction slides
-                        </a>
-                    </li>
+                        {% assign intro_link = false %}
+                        {% for material in topic.material %}
+                            {% if material.enable != "false" %}
+                                {% if material.type == "introduction" %}
+                                    {% assign intro_link = true %}
+                                {% endif %}
+                            {% endif %}
+                        {% endfor %}
+                        {% if intro_link %}
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Introduction slides">
+                                    {% icon slides %} Introduction slides
+                                </a>
+                                <div class="dropdown-menu">
+                                    {% for material in topic.material %}
+                                        {% if material.enable != "false" %}
+                                            {% if material.type == "introduction" %}
+                                                <a class="dropdown-item" href="{{ site.baseurl }}/topics/{{ topic.name }}/slides/{{ material.name }}.html">
+                                                    {{ material.title }}
+                                                </a>
+                                            {% endif %}
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
+                            </li>
+                        {% endif %}
                     {% endif %}
 
                     {% if topic.docker_image and topic.docker_image != "" %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ site.github_repository }}/tree/master/topics/{{ topic.name }}/docker" title="Docker image for this tutorial">
+                        <a class="nav-link" href="{{ site.baseurl }}/topics/{{ topic.name }}#docker_image" title="Docker image for this tutorial">
                             {% icon docker_image %} Docker image
                         </a>
                     </li>
@@ -67,19 +88,15 @@ layout: base
                     </li>
                     {% endif %}
 
-                    {% if tutorial.references != "" %}
+                    {% if topic.references and topic.references != "" %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ site.url }}/topics/{{ topic.name }}#references" title="References">
+                        <a class="nav-link" href="{{ site.baseurl }}/topics/{{ topic.name }}#references" title="References">
                             {% icon references %} Literature
                         </a>
                     </li>
                     {% endif %}
 
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ site.gitter_url }}" title="Chat on gitter">
-                            {% icon gitter %} Help
-                        </a>
-                    </li>
+                    {% include help.html %}
 
                     <li class="nav-item">
                         <a class="nav-link" href="{{ site.github_repository }}/tree/master/topics/{{ topic.name }}/tutorials/{{ tutorial.name }}/tutorial.md">
@@ -119,7 +136,7 @@ layout: base
             {% for requirement in topic.requirements %}
                 <li>
                     {% if requirement.type == "internal" %}
-                    <a href="{{ site.url }}/topics{{ requirement.link }}">{{ requirement.title }}</a>
+                    <a href="{{ site.baseurl }}/topics/{{ requirement.link }}">{{ requirement.title }}</a>
                     {% elsif requirement.type == "external" %}
                     <a href="{{ requirement.link }}">{{ requirement.title }}</a>
                     {% endif %}
@@ -128,7 +145,7 @@ layout: base
             {% for requirement in tutorial.requirements %}
                 <li>
                     {% if requirement.type == "internal" %}
-                    <a href="{{ site.url }}{{ requirement.link }}">{{ requirement.title }}</a>
+                    <a href="{{ site.baseurl }}/topics/{{ requirement.link }}">{{ requirement.title }}</a>
                     {% elsif requirement.type == "external" %}
                     <a href="{{ requirement.link }}">{{ requirement.title }}</a>
                     {% endif %}
@@ -156,7 +173,7 @@ layout: base
 
         {% if topic.references %}
         <h1>Useful literature</h1>
-        <p>Useful information regarding this type of analysis with descriptions and paper references for the tools used in this tutorial, and literature for this analysis techniques and interpretations can be found <a href="{{ site.url }}/topics/{{ topic.name }}#references">here</a>.</p>
+        <p>Useful information regarding this type of analysis with descriptions and paper references for the tools used in this tutorial, and literature for this analysis techniques and interpretations can be found <a href="{{ site.baseurl }}/topics/{{ topic.name }}#references">here</a>.</p>
         {% endif %}
 
         <h3>{% icon congratulations %} Congratulations on successfully completing this tutorial!</h3>
@@ -179,7 +196,7 @@ layout: base
         <p>
             This material is the result of a collaborative work. Thanks the
             <a href="https://wiki.galaxyproject.org/Teach/GTN">Galaxy Training Network</a>
-            and all the contributors ({{ contributors | remove_first: ', ' }})!
+            and all the <a href="{{ site.baseurl }}/hall-of-fame">contributors</a> ({{ contributors | remove_first: ', ' }})!
         </p>
         <p>
             Found a typo? Something is wrong in this tutorial? Edit it on

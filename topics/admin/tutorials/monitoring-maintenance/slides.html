@@ -1,0 +1,357 @@
+---
+layout: tutorial_slides
+topic_name: admin
+tutorial_name: monitoring-maintenance
+logo: "GTN"
+---
+layout: true
+name: left-aligned
+class: left, middle
+---
+
+## Admin UI
+
+Has a lot of tools and lists that are useful for administrators of the Galaxy server.
+
+* Tools that list:
+  * Data types
+  * Data tables
+  * Display applications
+
+
+* Tools for manipulating
+  * Users, groups, roles and quotas etc
+  * Running jobs
+  * Installed Tools
+  * Errors etc
+
+---
+class: left
+## Data Types
+
+Data types are Galaxy's method of understanding how to handle data.
+
+* Display of that data
+* Which tools to present the data to
+* Mime-types etc.
+* Whether to allow specification at upload time
+* Which tools are used to convert to different types/versions/indexes
+
+The Admin UI has a link to display all the current data types that are registered.
+
+Datatypes are located in the `datatypes_conf.xml` file.
+---
+class: left
+## datatypes_conf.xml
+Config file for datatypes. Hard to find stuff...
+```
+<?xml version="1.0"?>
+<datatypes>
+  <registration converters_path="lib/galaxy/datatypes/converters" display_path="display_applications">
+    <datatype extension="ab1" type="galaxy.datatypes.binary:Ab1" mimetype="application/octet-stream" display_in_upload="true" description="A binary sequence file in 'ab1' format with a '.ab1' file extension.  You must manually select this 'File Format' when uploading the file." description_url="https://wiki.galaxyproject.org/Learn/Datatypes#Ab1"/>
+    <datatype extension="afg" type="galaxy.datatypes.assembly:Amos" display_in_upload="false" />
+    <datatype extension="arff" type="galaxy.datatypes.text:Arff" mimetype="text/plain" display_in_upload="True" />
+    <datatype extension="asn1" type="galaxy.datatypes.data:GenericAsn1" mimetype="text/plain" display_in_upload="true" />
+    <datatype extension="asn1-binary" type="galaxy.datatypes.binary:GenericAsn1Binary" mimetype="application/octet-stream" display_in_upload="true" />
+    <datatype extension="axt" type="galaxy.datatypes.sequence:Axt" display_in_upload="true" description="blastz pairwise alignment format.  Each alignment block in an axt file contains three lines: a summary line and 2 sequence lines.  Blocks are separated from one another by blank lines.  The summary line contains chromosomal position and size information about the alignment. It consists of 9 required fields." description_url="https://wiki.galaxyproject.org/Learn/Datatypes#Axt"/>
+    <datatype extension="fli" type="galaxy.datatypes.tabular:FeatureLocationIndex" display_in_upload="false"/>
+    <datatype extension="bam" type="galaxy.datatypes.binary:Bam" mimetype="application/octet-stream" display_in_upload="true" description="A binary file compressed in the BGZF format with a '.bam' file extension." description_url="https://wiki.galaxyproject.org/Learn/Datatypes#BAM">
+      <converter file="bam_to_bai.xml" target_datatype="bai"/>
+
+...
+
+```
+**Excercise**: Allow **Genbank** files to be specified at upload time.
+
+  * Search `/srv/galaxy/server/config/datatypes_conf.xml.sample` for Genbank
+  * Add `display_in_upload="true"` to the xml tag.
+
+You'll then need to restart Galaxy.
+---
+class: left
+## Display applications
+
+This link shows the list of applications that can be used to display various datatypes.
+
+They are set in the `datatypes_conf.xml` file. For example:
+```
+  <datatype extension="bam" type="galaxy.datatypes.binary:Bam" mimetype="application/octet-stream" display_in_upload="true" description="A binary file compressed in the BGZF format with a '.bam' file extension." description_url="https://wiki.galaxyproject.org/Learn/Datatypes#BAM">
+      <converter file="bam_to_bai.xml" target_datatype="bai"/>
+      <converter file="bam_to_bigwig_converter.xml" target_datatype="bigwig"/>
+      <display file="ucsc/bam.xml" />
+      <display file="ensembl/ensembl_bam.xml" />
+      <display file="igv/bam.xml" />
+      <display file="igb/bam.xml" />
+      <display file="iobio/bam.xml" />
+  </datatype>
+```
+
+We are not going to go into how to set these up here but there is a page on the [wiki](https://wiki.galaxyproject.org/Admin/Tools/External%20Display%20Applications%20Tutorial)
+---
+class: left
+## Manage Jobs
+
+An admin interface to list current unfinished jobs and finished jobs of a certain age.
+
+* You can stop unfinished jobs
+* You can show details of old jobs
+* You can lock the server from spawning new jobs. (If you need to do maintenance.)
+
+.large[
+**Can be very handy!**
+]
+---
+class: left
+## Tool tools/UIs!
+
+  * **Search Toolshed** - To install tools from the toolshed(s)
+
+  * **Manage Installed Tools** - To list, manage, repair, upgrade, check status, uninstall or disable currently installed tools.
+
+  * **Reset Metadata** - If something is wrong, try this!
+
+  * **Tool Lineage** - Shows the revision history and default versions of tools.
+
+  * **Reload Tool Configuration** - After you've edited a tool, this will reload it's xml wrapper etc.
+
+  * **Review Tool Error Logs** - Will show tool problems during Galaxy startup.
+
+  * **Manage Display Whitelist** - Allows admins to selectively allow fancy interactive stuff in tool output to be displayed/used.
+---
+class: left
+## Other links
+
+**Data management**
+
+  * **Quotas** - Allows for control of user disk space.
+  * **Data Libraries** - Links to the data library UI.
+  * **Local Data** - Links to the Reference Data and Data Managers UI.
+
+**User Management**
+
+  * **Users, Groups, Roles, Impersonate user** - Discussed earlier
+  * **API Keys** - Allows generation of API keys for various users.
+
+
+---
+# Log Files
+
+- Galaxy logs (`/srv/galaxy/log/*`)
+  - Web (uWSGI)
+  - Handler
+- nginx logs (`/var/log/nginx/*`)
+- supervisor logs (`/var/log/supervisor/*`)
+
+---
+# DB Shell
+
+A programmer's interface to the database
+
+Interact with the database using Galaxy's model
+
+---
+# Database Queries
+
+Sometimes it's the best way to get the exact data you need
+
+Can be very useful for:
+- Debugging
+- Reporting
+- Analytics
+
+---
+# Database Queries
+
+"Can you send me the number of jobs per day/state from Main in September and October?"
+
+```sql
+SELECT
+  date_trunc('month', j.create_time) AS month,
+  j.state,
+  COUNT(j.state) AS job_count
+FROM job j
+LEFT OUTER JOIN galaxy_user u
+  ON j.user_id = u.id
+WHERE u.email != 'monitor@bx.psu.edu'
+GROUP BY month,
+         j.state
+HAVING date_trunc('month', j.create_time) >= '2016-09-01'
+AND date_trunc('month', j.create_time) < '2016-11-01'
+ORDER BY month, j.state;
+```
+
+---
+# Database Queries
+
+```
+        month        |  state  | job_count
+---------------------+---------+-----------
+ 2016-09-01 00:00:00 | deleted |     11369
+ 2016-09-01 00:00:00 | error   |     15375
+ 2016-09-01 00:00:00 | new     |      1179
+ 2016-09-01 00:00:00 | ok      |    165963
+ 2016-09-01 00:00:00 | paused  |       933
+ 2016-09-01 00:00:00 | waiting |         9
+ 2016-10-01 00:00:00 | deleted |     13190
+ 2016-10-01 00:00:00 | error   |     12539
+ 2016-10-01 00:00:00 | new     |      1183
+ 2016-10-01 00:00:00 | ok      |    167547
+ 2016-10-01 00:00:00 | paused  |       645
+ 2016-10-01 00:00:00 | queued  |        75
+ 2016-10-01 00:00:00 | running |        36
+ 2016-10-01 00:00:00 | waiting |        17
+(14 rows)
+```
+
+---
+# Database Queries
+
+"I need a list of current main toolshed users and a number of their repos"
+
+```sql
+SELECT
+  u.username,
+  COUNT(r.id) AS r_count
+FROM galaxy_user u
+JOIN repository r
+  ON u.id = r.user_id
+WHERE NOT r.deleted
+GROUP BY u.id
+ORDER BY r_count DESC
+LIMIT 12;
+```
+
+---
+# Database Queries
+
+```
+                 username                 | r_count
+------------------------------------------+---------
+ iuc                                      |     571
+ devteam                                  |     366
+ bgruening                                |      95
+ galaxyp                                  |      87
+ jjohnson                                 |      46
+ xuebing                                  |      40
+ peterjc                                  |      39
+ rnateam                                  |      33
+ anton                                    |      32
+ nml                                      |      32
+ yhoogstrate                              |      31
+ iracooke                                 |      30
+(12 rows)
+```
+
+---
+# Analytics
+
+Can we make better walltime decisions?
+
+`scripts/runtime_stats.py`: Database-driven job runtime statistics
+
+---
+# Job Metrics
+
+Galaxy can collect metrics on each job through configurable plugins in `job_metrics_conf.xml`.
+
+Some plugins:
+- `core`: Captures Galaxy slots, start and end of job, runtime
+- `cpuinfo`: processor count for each job
+- `env`: dump environment for each job
+- `collectl`: monitor a wide array of system performance data
+
+---
+# Runaway Jobs
+
+Tips:
+- Set job output size limit in `job_conf.xml`
+- Set job concurrency limits in `job_conf.xml`
+- Public servers
+  - Require email verification
+  - Watch for duplicates
+
+---
+# Runaway Storage
+
+Tips:
+- Set quotas
+- `tmpwatch` your job working directory
+  - `cleanup_job` in `galaxy.ini` (defaults to `always` though)
+- Set up dataset cleanup
+
+---
+# Dataset Cleanup
+
+- `scripts/cleanup_datasets/pgcleanup.py`: PostgreSQL-optimized fast cleanup script
+- `scripts/cleanup_datasets/cleanup_datasets.py`: General cleanup script
+
+---
+# Dataset Cleanup Lifecycle
+
+Mark deleted all "anonymous" histories not used within the last `$days` days:
+
+`python ./scripts/cleanup_datasets/pgcleanup.py -o $days -s delete_userless_histories`
+
+Remove all history exports older than `$days` days:
+
+`python ./scripts/cleanup_datasets/pgcleanup.py -o $days -s delete_exported_histories`
+
+Mark purged HDAs in histories deleted `$days` or more days ago (not user-recoverable):
+
+`python ./scripts/cleanup_datasets/pgcleanup.py -o $days -s purge_deleted_histories`
+
+---
+# Dataset Cleanup Lifecycle
+
+Mark purged individual HDAs deleted `$days` or more days ago (not user-recoverable):
+
+`python ./scripts/cleanup_datasets/pgcleanup.py -o $days -s purge_deleted_hdas`
+
+Mark datasets with all purged HDAs last updated `$days` or more days ago deleted:
+
+`python ./scripts/cleanup_datasets/pgcleanup.py -o $days -s delete_datasets`
+
+Mark purged all datasets last updated `$days` or more days ago **and remove from disk**:
+
+`python ./scripts/cleanup_datasets/pgcleanup.py -o $days -s purge_datasets`
+
+---
+# Nagios
+
+General purpose tool for monitoring systems and services.
+
+Galaxy-specific check in `contrib/nagios/`: Runs Galaxy jobs
+
+---
+# Grafana and telegraf
+
+General purpose tool for monitoring systems and services.
+
+telegraf: The plugin-driven server agent for collecting & reporting metrics.
+grafana: dashboard for beautiful analytics and monitoring
+
+Example: usegalaxy.eu project [monitoring server](https://grafana.denbi.uni-freiburg.de)
+
+---
+
+# Backups
+
+What to back up:
+- Configs
+- Database
+- Installed shed tools and dependencies
+- Datasets (if you can...)
+
+What not to back up:
+- Anything in `database/` not mentioned above
+- Job working directories
+
+---
+# Reports
+
+[Run Galaxy Reports - Exercise](./tutorial.html)
+
+---
+
+layout: true
+class: center, middle

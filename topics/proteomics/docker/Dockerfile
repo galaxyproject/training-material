@@ -6,7 +6,7 @@
 # to run image:
 #    docker run -p "8080:80" -t <your_tag>
 
-FROM bgruening/galaxy-stable
+FROM quay.io/bgruening/galaxy-proteomics
 
 MAINTAINER Galaxy Training Material
 
@@ -17,4 +17,5 @@ ADD topics/proteomics/tutorials/ /tutorials/
 
 # install everything for tutorials
 ADD bin/docker-install-tutorials.sh /setup-tutorials.sh
+ADD bin/mergeyaml.py /mergeyaml.py
 RUN /setup-tutorials.sh

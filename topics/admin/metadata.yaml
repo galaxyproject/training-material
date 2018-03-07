@@ -3,24 +3,111 @@ name: "admin"
 type: "admin-dev"
 title: "Galaxy Server administration"
 summary: "Administration of Galaxy Servers (setting up, Docker use, databases, ...) can be a complex task"
-docker_image: ""
+docker_image: "galaxy/admin-training"
 material:
   -
-    title: "Introduction"
+    title: "Galaxy from an administrator point of view"
     type: "introduction"
     name: "introduction"
-    slides: "yes"
+    slides: yes
     contributors:
       - valentinmarcon
+
+  -
+    title: "Deployment and Platform options"
+    type: "tutorial"
+    name: "deployment-platforms-options"
+    zenodo_link: ""
+    hands_on: no
+    slides: yes
+    questions:
+      - What options to deploy Galaxy do I have?
+      - Which platforms are supported by Galaxy?
+      - What requirements does Galaxy have?
+    objectives:
+      - Learn about different options about Galaxy deployment.
+      - Make an educated decision about your preferred deployment model.
+    time_estimation: "1d/3h/6h"
+    key_points:
+      - Galaxy is scalable from personal computers to huge HPC and cloud-instances.
+      - Amount of expected users and storage capabilities does have a big impact on the deployment.
+    contributors:
+      - natefoo
+      - bgruening
+
+  -
+    title: "User, Group and Quota managment"
+    type: "tutorial"
+    name: "users-groups-quotas"
+    zenodo_link: ""
+    hands_on: no
+    slides: yes
+    questions:
+      - How does Galaxy manage users and groups?
+      - How can I assign Quotas to specific users/groups?
+    objectives:
+      - Learn the Galaxy user/group management and assign Quotas.
+      - Understand the Role Based Access Control (RBAC) of Galaxy.
+    time_estimation: "1h"
+    key_points:
+      - Galaxy has a powerful user and group managment system that can be utilized for Quota managment.
+    contributors:
+      - natefoo
+      - bgruening
+  -
+    title: "Server Monitoring and Maintenance"
+    type: "tutorial"
+    name: "monitoring-maintenance"
+    zenodo_link: ""
+    hands_on: yes
+    slides: yes
+    questions:
+      - How to monitor a Galaxy service?
+      - What are the best practices to maintain a Galaxy server?
+    objectives:
+      - Learn about different monitoring strategies.
+      - Setup and start the Galaxy reports app.
+    time_estimation: "1h"
+    key_points:
+      - Galaxy supports plugable monitoring extensions.
+      - Use grafana or the reports webapp to monitor your service.
+    contributors:
+      - natefoo
+      - bgruening
+      - Slugger70
+  -
+    title: "Connecting Galaxy to a compute cluster"
+    type: "tutorial"
+    name: "connect-to-compute-cluster"
+    zenodo_link: ""
+    hands_on: yes
+    slides: yes
+    questions:
+      - How to connect Galaxy to a compute cluster?
+      - How can I configure job dependent resources, like cores, memory for my DRM?
+    objectives:
+      - Be familiar with the basics of installing, configuring, and using Slurm
+      - Understand all components of the Galaxy job running stack
+      - Understand how the `job_conf.xml` file controls Galaxy's jobs subsystem
+      - Have a strong understanding of Galaxy job destinations
+      - Know how to map tools to job destinations
+      - Be able to use the dynamic job runner to make arbitrary destination mappings
+      - Understand the job resource selector config and dynamic rule creation
+    time_estimation: "2h"
+    key_points:
+      - Galaxy supports a variety of different DRMs.
+      - Tools/Jobs/Users etc can have their own resource.
+    contributors:
+      - natefoo
+      - bgruening
   -
     title: "Move from dev instance to production instance"
     type: "tutorial"
     name: "dev-to-production"
     zenodo_link: ""
-    galaxy_tour: ""
     hands_on: "github"
     enable: "false"
-    slides: "no"
+    slides: no
     questions:
       -
     objectives:
@@ -35,9 +122,8 @@ material:
     type: "tutorial"
     name: "database-schema"
     zenodo_link: ""
-    galaxy_tour: ""
-    hands_on: "yes"
-    slides: "no"
+    hands_on: yes
+    slides: no
     questions:
       - "Running a production Galaxy server, you some times end up in with a situation, where you manually need to interact with the Galaxy database: how do you do that"
       - "How to extract usage information, which can not be gathered using the given report tools"
@@ -58,9 +144,8 @@ material:
     type: "tutorial"
     name: "galaxy-docker"
     zenodo_link: ""
-    galaxy_tour: ""
-    hands_on: "no"
-    slides: "yes"
+    hands_on: no
+    slides: yes
     questions:
       - "Why Docker? What is it?"
       - "How to use Docker?"
@@ -82,7 +167,7 @@ material:
     title: "Advanced customisation of a Galaxy instance"
     type: "tutorial"
     name: "advanced-galaxy-customisation"
-    slides: "yes"
+    slides: yes
     contributors:
       - bgruening
       - erasche

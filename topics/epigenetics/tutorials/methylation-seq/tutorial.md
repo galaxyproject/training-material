@@ -171,8 +171,8 @@ The data we use in this tutorial is available at [Zenodo](https://zenodo.org/rec
 >
 > ![Methylation output](../../images/methylation_output.png)
 >
-> Lets see how the methylation looks for a view provided files:
-> 1. **Galaxy** {% icon tool %}: Import from the data library the files `NB1_CpG.meth.bedGraph`
+> Lets see how the methylation looks for a few provided files:
+> 1. **Galaxy** {% icon tool %}: Import the files `NB1_CpG.meth.bedGraph` from the data library
 > 2. **Wig/BedGraph-to-bigWig** {% icon tool %} with the following parameters:
 >    - Use the imported file to transform it to a bigWig file.
 >
@@ -214,8 +214,8 @@ The data we use in this tutorial is available at [Zenodo](https://zenodo.org/rec
 > 1. **Galaxy** {% icon tool %}: Import from the data library the files `NB1_CpG.meth.bedGraph`, `NB2_CpG.meth.bedGraph` and `BT198_CpG.meth.bedGraph`.
 > 2. **Metilene** {% icon tool %}: 
 >    - Choose for the first option `Input group 1` the imported files starting with ``NB`` and for `Input group 2` the imported files `BT198_CpG.meth.bedGraph`.
->    - Select for the option `BED file containing regions of interest` the imported BAM file CpGIslands.bed.
-> 3. More information about metilene can be found here: https://www.bioinf.uni-leipzig.de/Software/metilene/
+>    - Select for the option `BED file containing regions of interest` the imported BED file CpGIslands.bed.
+> 3. More information about metilene can be found here: https://www.bioinf.uni-leipzig.de/Software/metilene
 >
 >    > ### {% icon question %} Questions
 >    >

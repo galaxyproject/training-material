@@ -11,7 +11,7 @@ In the study of [Hohenlohe *et al.* 2010](http://journals.plos.org/plosgenetics/
 
 ![Abstract of the paper on Population Genomics](../../images/RAD4_Population_Genomics/Hohenlohe_et_al_2010.png)
 
-We here proposed to re-analyze these data at least until the population genomics statistics calculation step using STACKS pipeline. Existing *Gasterosteus aculeatus* draft genome will not be used here so the analysis will be performed de novo. In a de novo RAD-seq data analysis, the reads are aligned one on each other to create stacks and then clustered to build loci. A reference approach can also be conducted (see [ref_based tutorial]({{site.url}}/topics/sequence-analysis/tutorials/ref-based-rad-seq/tutorial.html), allowing to work on existing assembled loci).
+We here proposed to re-analyze these data at least until the population genomics statistics calculation step using STACKS pipeline. Existing *Gasterosteus aculeatus* draft genome will not be used here so the analysis will be performed de novo. In a de novo RAD-seq data analysis, the reads are aligned one on each other to create stacks and then clustered to build loci. A reference approach can also be conducted (see [ref_based tutorial]({{site.baseurl}}/topics/sequence-analysis/tutorials/ref-based-rad-seq/tutorial.html), allowing to work on existing assembled loci).
 
 
 > ### Agenda
@@ -29,33 +29,26 @@ We here proposed to re-analyze these data at least until the population genomics
 
 The original data is available at NCBI SRA ENA under accession number [SRR034310](https://trace.ncbi.nlm.nih.gov/Traces/sra/?run=SRR034310) as part of the NCBI SRA ENA study accession number [SRP001747](https://trace.ncbi.nlm.nih.gov/Traces/sra/?study=SRP001747).
 
-We will look at the first run SRR034316 out of 7:
-
-- Here are 16 samples from 2 populations, 8 from Bear Paw (freshwater) and 8 from Rabbit Slough (oceanic)
-
-You can directly used archive from the Sequence Read Archive (SRA) for raw reads.
-
-![ENA interface with input data](../../images/RAD4_Population_Genomics/Input_data_ENA.png)
-
-To download all training datasets (i.e reads, population map file and barcodes file), you can use the corresponding [CeSGO hub](https://cesgo.genouest.org/resources/370/supportingdocs) repository.
+We will look at the first run SRR034310 out of seven which includes 16 samples from 2 populations, 8 from Bear Paw (freshwater) and 8 from Rabbit Slough (oceanic). We will download the reads directly from SRA and the remaining data (i.e reference genome, population map file, and barcodes file) from [Zenodo](https://zenodo.org/record/1134547#.WkugUjfjJXI).
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
-> 1. Create a new history for this RAD-seq exercise. If you are not inspired, you can name it "STACKS 1.42 RAD: population genomics with reference genome" for example...
-> 2. Import FASTQ files (*e.g.*  [`SRR034310`](ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR034/SRR034310/SRR034310.fastq.gz) as population map information file [`Population_map.txt`](https://cesgo.genouest.org/resources/373/download/Population_map.txt) and barcodes file [`Barcodes_SRR034310`](https://cesgo.genouest.org/resources/374/download/Barcodes_SRR034310.tabular)) from SRA and [CeSGO](https://cesgo.genouest.org/)
+> 1. Create a new history for this RAD-seq exercise. If you are not inspired, you can name it "STACKS RAD: population genomics without reference genome" for example...
+> 2. **Upload Reads from SRA** {% icon tool %}: Run `EBI SRA`
+>    - Select the Run from the results of the search for `SRR034310` (which will present you 1 Experiment (SRX015877) and 1 Run (SRR034310)). 
+>    - Click the link in the column **FASTQ files (Galaxy)** of the results table
+>    - This will redirect to the Galaxy website and start the download.
+> 3. Upload remaining training data from Zenodo: 
+>    - Open the Galaxy Upload Manager
+>    - Select **Paste/Fetch Data**
+>    - Paste the following links into the text field
+>    ```
+>    https://zenodo.org/record/1134547/files/Barcode_SRR034310.txt
+>    https://zenodo.org/record/1134547/files/Details_Barcode_Population_SRR034310.txt
+>    ```
 >
 >    > ### {% icon comment %} Comments
 >    >    If you are using the [GenOuest Galaxy instance](https://galaxy.genouest.org), you can load the dataset using 'Shared Data' -> 'Data Libraries' -> '1 Galaxy teaching folder' -> 'EnginesOn' -> 'RADseq' -> 'Stickelback population genomics' -> 'SRR034310'
->
->    > ### {% icon tip %} Tip: Importing data via links
->    >
->    > * Open the Galaxy Upload Manager
->    > * Select **Paste/Fetch Data**
->    > * Paste the following links into the text field
->    >     * ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR034/SRR034310/SRR034310.fastq.gz
->    >     * https://cesgo.genouest.org/resources/373/download/Population_map.txt
->    >     * https://cesgo.genouest.org/resources/374/download/Barcodes_SRR034310.tabular
->    > * Press **Start**  
 >
 >    > ### {% icon tip %} Tip:
 >    >    Changing the file type `fastq` to `fastqsanger` once the data file is in your history (warning! Be cautious because there is closed datatpes as `fastqcssanger`). As we know here that the datatype is `fastqsanger`, we can directly change it through the upcoming method. Normally, you need to execute `FastQGroomer` tool to be sure to have a correct `fastqsanger` file format. And if you don't know how your quality score is encoded on raw fastQ files, please, use the `FastQC` tool to determine it!
@@ -65,6 +58,12 @@ To download all training datasets (i.e reads, population map file and barcodes f
 >    >    * Select `fastqsanger`
 >    >    * Press **Save**
 >
+>    As default, Galaxy takes the link as name. It also do not link the dataset to a database or a reference genome.
+>
+>    > ### {% icon comment %} Comments
+>    > - Add the "stickleback" custom build from the Fasta reference genome file
+>    > - Edit the "Database/Build" to select "stickleback"
+>    > - Rename the datasets according to the samples
 >
 
 The sequences are raw sequences from the sequencing machine, without any pretreatments. They need to be demultiplexed. To do so, we can use the Process Radtags tool from STACKS.
@@ -75,12 +74,19 @@ For demultiplexing, we use the Process Radtags tool from [STACKS](https://www.g3
 
 > ### {% icon hands_on %} Hands-on: Demultiplexing reads
 >
-> 1. **Process Radtags** {% icon tool %}: Run `Stacks: process radtags` on FastQ file to demultiplex the reads. You have to 1/point a tabular file mapping sample names and barcodes, 2/select the sbfI enzyme used for restriction. Finally, you can ask to capture discarded reads to a file (or not) and execute.
->
-> ![Process Radtags tool interface](../../images/RAD4_Population_Genomics/Process_radtags_in.png)
+> 1. **Process Radtags** {% icon tool %}: Run `Stacks: process radtags` on FastQ file to demultiplex the reads
+>  - Single-end or paired-end reads files: Single-end files
+>  - singles-end reads infile(s): SRR034310.fastq(.gz)
+>  - Barcode file: Barcode fileBarcodes_SRR034310.tabular
+>  - Number of enzymes: One
+>  - Enzyme: sbfI
+>  - Capture discarded reads to a file: Yes
+>  - Output format: fastq
 >
 > As we are exporting demultiplexed reads in data collections, you have hidden datasets on your history. These datasets are in fact symlinks on the data collections and are by default hidden on the history. If you want to see these datasets, you can click on the `hidden` statement just under the history name.
 >
+> ### {% icon question %} Questions
+=======
 >    > ### {% icon question %} Questions
 >    >
 >    > 1. How many reads where on the original dataset?
@@ -97,29 +103,36 @@ For demultiplexing, we use the Process Radtags tool from [STACKS](https://www.g3
 >    >    <li>Sequencing quality is essential! Each time your sequencing quality decreases, you loose data and thus essential biological information!</li>
 >    >    </ol>
 >    >    </details>
-> ![Process radtags output](../../images/RAD4_Population_Genomics/Process_radtags_out_log.png)
 >
 > 2. **Process Radtags** {% icon tool %}: Re-Run `Stacks: process radtags` on FastQ file playing with parameters
 >
 > In `advanced options`, after activation of the `Discard reads with low quality scores` option, play with the score limit (default vs 20 for example) and examine the change in reads retained. Note that you can play also with the sliding window score threshold, by default 15% of the length of the read. This sliding window parameter allows notably the user to deal with the declining quality at the 3' end of reads.
 >
-> ![Advanced options in Process radtags tool](../../images/RAD4_Population_Genomics/Process_radtags_in_advancedparameter0.PNG)
 >
-> ![Advanced options in Process radtags tool](../../images/RAD4_Population_Genomics/Process_radtags_in_advancedparameter1.PNG)
+>    <details>
+>    <summary>Click to view answers</summary>
+>    The informations can be found in the results log file:
+>    <ol type="1">
+>    <li>8895289 total reads</li>
+>    <li>8139531 retained reads</li>
+>    <li>There are no sequences filtered because of low quality. This is because radtags didn't apply quality related filtering since the corresponding advanced option (Discard reads with low quality scores) has not been enabled. So here, all not retained sequences are removed because of an ambiguous barcode (626265) or an ambiguous RAD-Tag (129493). This means that some barcodes are not exactly what was specified on the barcode file and that sometimes, no SbfI restriction enzyme site was found. This can be due to some sequencing problems but here, this is also due to the addition, in the original sequencing library, of RAD-seq samples from another study. This strategy is often used to avoid having too much sequences beginning with the exact same nucleotide sequence which may cause Illumina related issues during sequencing and cluster analysis </li>
+>    <li>Sequencing quality is essential! Each time your sequencing quality decreases, you loose data and thus essential biological information!</li>
+>    </ol>
+>    In addition to the overall statistics the numbers of retained and removed reads are also given for each bar code sequence.
+>    </details>
+
+In order to obtain results of higher quality we will play with the advanced options:  
+
+> ### {% icon hands_on %} Hands-on: 
+=======
 >
-> To do that, you can use data handling Galaxy tools to cut the interesting lines of each `result.log with Stacks: process radtags` files OR, as I made, just copy/paste these lines on the Galaxy upload tool using Paste/fetch data section and modifying the File header by sample and filename by Score 10 / Score 20 and noscorelimit for example... Before Starting the upload, you can select the `Convert spaces to tabs` option through the `Upload configuration` wheel.
->
-> ![Output after using advanced parameters](../../images/RAD4_Population_Genomics/Process_radtags_in_advancedparameter_compare_copy.PNG)
->
-> ![Output after using advanced parameters](../../images/RAD4_Population_Genomics/Process_radtags_in_advancedparameter_compare_paste.PNG)
 >
 > You can use the `Charts` functionality through the Visualize button reachable on the `Radtags logs` file you just generated.
 >
-> ![Process radtags chart](../../images/RAD4_Population_Genomics/Process_radtags_charts.PNG)
 >
 > If like me you don't have payed attention to the organization of you file for the graphical representation you obtain a non optimal bars diagram with a not intelligent X-axis ordering. There is a lot of different manner to fix this. You can use the copy/paste "bidouille" like seen previously, or you can use Galaxy tools to manipulate the `radtags logs` (did you change the filename from `pasted entry` to another label ?) file to generate a better graph. For example, you can use `Select lines that match an expression` tool to select rows then use the `Concatenate datasets tail-to-head` tool to reorganize these lines in a new file... OR, as I made, you can just sort the file using the first column.
 >
-> ![Sorting tool parameters](../../images/RAD4_Population_Genomics/Process_radtags_charts_tablemodif.PNG)
+>
 >
 > And you obtain a file like this one, ready to generate a beautiful and smart bar diagram!
 >
@@ -129,14 +142,40 @@ For demultiplexing, we use the Process Radtags tool from [STACKS](https://www.g3
 >
 >Using filter like `clean data, remove any read with an uncalled base` has here few impact:
 >
-> ![Comparison on clean and unclean data](../../images/RAD4_Population_Genomics/Process_radtags_out_parameter2.png)
+> 2. **Process Radtags** {% icon tool %}: Re-Run `Stacks: process radtags` on FastQ file playing with parameters
+>   - In `advanced options`, activate the `Discard reads with low quality scores` option and play with the score limit (default (nolimit) vs 20 vs 10 for example) and examine the change in reads retained. 
+>   - Note that you can play also with the sliding window score threshold, by default 15% of the length of the read. This sliding window parameter allows notably the user to deal with the declining quality at the 3' end of reads.
+
+Then we generate a graphical display of the changes: 
+
+> ### {% icon hands_on %} Hands-on: 
+> 
+> First we cut the interesting lines of each `result.log with Stacks: process radtags` 
 >
+> 3. **Select lines that match an expression** applying `^R1.fq.gz` on the log files and then
+> 4. **Concatenate datasets tail-to-head** on the resulting data sets
+> 
+> Alternatively just copy/paste these lines on the Galaxy upload tool using Paste/fetch data section and modifying the File header by sample and filename by Score 10 / Score 20 and noscorelimit for example... Before Starting the upload, you can select the `Convert spaces to tabs` option through the `Upload configuration` wheel. If you did not pay attention to the order you can just sort the file using the first column.
+
+```
+quality	Retained Reads	Low Quality	Ambiguous Barcodes	Ambiguous RAD-Tag	Total
+20	2980543		5158988		626265		129493		8895289
+10	7373160		766371		626265		129493		8895289
+nolimit	8139531		0		626265		129493		8895289
+```
+
+You can use the `Charts` functionality through the Visualize button to plot the data. 
+
+
+![The bar diagram](../../images/RAD4_Population_Genomics/Process_radtags_charts_end.PNG)
+
+Using a filter like `clean data, remove any read with an uncalled base` has only little impact:
 
 The demultiplexed sequences are raw sequences from the sequencing machine, without any pretreatments. They need to be controlled for their quality.
 
 ## Quality control
 
-For quality control, we use similar tools as described in [NGS-QC tutorial]({{site.url}}/topics/sequence-analysis/tutorials/quality-control/tutorial.html): [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/).
+For quality control, we use similar tools as described in [NGS-QC tutorial]({{site.baseurl}}/topics/sequence-analysis/tutorials/quality-control/tutorial.html): [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/).
 
 > ### {% icon hands_on %} Hands-on: Quality control
 >
@@ -154,9 +193,7 @@ For quality control, we use similar tools as described in [NGS-QC tutorial]({{si
 >    >    </details>
 >
 
-As it exists a draft genome for *Gasterosteus aculeatus*, we can use this information and map the sequences on this genome to identify polymorphism.
-
-# Building loci using STACKS
+# SNP calling from radtags
 
 Run `Stacks: De novo map` Galaxy tool. This program will run ustacks, cstacks, and sstacks on the members of the population, accounting for the alignments of each read.
 
@@ -180,8 +217,6 @@ Run `Stacks: De novo map` Galaxy tool. This program will run ustacks, cstacks, a
 
 # Calculate population genomics statistics
 > **Stacks: populations** {% icon tool %}: Run the last step of **Stacks: De novo map** pipeline specifying data filtering options (minimum percentage of individuals in a population required to process a locus for that population: 0.75 , output options (VCF and Structure) and enabling SNP and haplotype-based F statistics calculation.
->
->    ![Stacks: populations tool parameters](../../images/RAD4_Population_Genomics/denovo/populations_in.png)
 >
 >    ![The output of the populations tool](../../images/RAD4_Population_Genomics/denovo/populations_log.png)
 

@@ -3,7 +3,7 @@ name: "variant-analysis"
 type: "use"
 title: "Variant Analysis"
 summary: "Exome sequencing means that all protein-coding genes in a genome are sequenced"
-docker_image: "bgruening/galaxy-exome-seq-training"
+##docker_image: "quay.io/galaxy/variant-analysis-training" ## not yet ready
 
 requirements:
   -
@@ -21,10 +21,10 @@ requirements:
 
 material:
   -
-    title: "Introduction"
+    title: "Introduction to Variant analysis"
     type: "introduction"
     name: "introduction"
-    slides: "yes"
+    slides: yes
     contributors:
       - bebatut
       - yvanlebras
@@ -34,9 +34,10 @@ material:
     enable: "false"
     name: "diploid-variant-calling"
     zenodo_link: ""
-    galaxy_tour: ""
-    hands_on: "yes"
-    slides: "no"
+    galaxy_tour: no
+    hands_on: yes
+    slides: no
+    workflows: no
     questions:
       - "What is the pipeline of the processes for variant calling and processing it?"
     objectives:
@@ -57,9 +58,10 @@ material:
     type: "tutorial"
     name: "exome-seq"
     zenodo_link: "http://dx.doi.org/10.5281/zenodo.60520"
-    galaxy_tour: ""
-    hands_on: "yes"
-    slides: "no"
+    galaxy_tour: no
+    hands_on: yes
+    slides: no
+    workflows: no
     questions:
       - "How to identify the genetic variation with the use of exome sequencing?"
       - "What is the pipeline of the process of finding genetic variation which caused the disease?"
@@ -78,10 +80,122 @@ material:
       - torhou
       - erxleben
       - bgruening
+  -
+    title: "Mapping-by-sequencing"
+    type: "tutorial"
+    name: "mapping-by-sequencing"
+    zenodo_link: "https://doi.org/10.5281/zenodo.1098033"
+    galaxy_tour: no
+    hands_on: yes
+    slides: no
+    workflows: no
+    questions:
+      - "What is mapping-by-sequencing?"
+      - "How can it help you identify the causative mutation in phenotypic mutants isolated from genetic screens?"
+    objectives:
+      - "Use joint variant calling and extraction to facilitate variant comparison across samples"
+      - "Perform variant linkage analyses for phenotypically selected recombinant progeny"
+      - "Filter, annotate and report lists of variants"
+    time_estimation: "2h"
+    key_points:
+      - "Mapping-by-sequencing is a powerful method for the molecular identification of mutations"
+      - "The MiModD suite of tools bundles most of the functionality required to perform mapping-by-sequencing analyses with Galaxy"
+    contributors:
+      - wm75
+
+  -
+    title: "Microbial Variant Calling"
+    type: "tutorial"
+    name: "microbial-variants"
+    zenodo_link: "https://doi.org/10.5281/zenodo.582600"
+    galaxy_tour: no
+    hands_on: yes
+    slides: no
+    workflows: no
+    questions:
+      - "How do we detect differences between a set of reads from a microorganism and a reference genome"
+    objectives:
+      - "Find variants between a reference genome and a set of reads"
+      - "Visualise the SNP in context of the reads aligned to the genome"
+      - "Determine the effect of those variants on genomic features"
+      - "Understand if the SNP is potentially affecting the phenotype"
+    time_estimation: "45 min"
+    key_points:
+      - "We used a tool called Snippy to call variants between our reads and our reference genome."
+      - "As our reference genome had annotations, we could see what effect the changes have on the features as annotated in the reference and therefore make inferences on the possible changes to the phenotype."
+      - "We used the JBrowse genome browser to visualise what these changes look like."
+    contributors:
+      - annasyme
+      - slugger70
+      - tseemann
+
+  -
+    title: "Calling variants in non-diploid systems"
+    type: "tutorial"
+    name: "non-dip"
+    zenodo_link: ""
+    workflows: no
+    galaxy_tour: no
+    hands_on: yes
+    slides: no
+    questions:
+      - "How does frequency of mitochondrial polymorphisms change from mother to child?"
+    objectives:
+      - "Using Galaxy's main site we will see how to call variants in bacteria, viruses, and organelles."
+    time_estimation: "1-1.5h"
+    key_points:
+      - "Variation in human mitochondria is a proxy for other haploid systems."
+      - "Nucleotide variants in haploid systems may have any frequency between 0 and 1."
+      - "Distinguishing true variants from noise is not easy and requires accounting <br> for strand bias and read placement bias."
+      - "FreeBayes can be effectively used to call variants in haploid systems."
+    contributors:
+      - nekrut
+  -
+    title: "Calling variants in diploid systems"
+    type: "tutorial"
+    name: "dip"
+    zenodo_link: ""
+    workflows: no
+    galaxy_tour: no
+    hands_on: yes
+    slides: no
+    questions:
+      - "How to find variable sites in diploid genomes?"
+    objectives:
+      - "Using Galaxy's main site we will see how to call variants in human genome."
+    time_estimation: "1-1.5h"
+    key_points:
+      - "Variants versus Genotypes"
+      - "Bayesian approach to variant calling"
+      - "Freebayes calls variant using haplotype windows"
+      - "SNPEff allows functional annotation of variants"
+      - "Gemini is a flexible system for analyzing variation patterns"
+    contributors:
+      - nekrut
+  -
+    title: "Calling very rare variants"
+    type: "tutorial"
+    name: "dunovo"
+    zenodo_link: ""
+    workflows: no
+    galaxy_tour: no
+    hands_on: yes
+    slides: no
+    questions:
+      - "What is frequency of variants is so low that it is obscured by sequencing error rate?"
+    objectives:
+      - "Learn about duplex sequencing and analysis of duplex reads"
+    time_estimation: "1 hr"
+    key_points:
+    contributors:
+      - nekrut
+
 
 maintainers:
   - bebatut
   - torhou
+  - bgruening
+  - nekrut
 
 references:
   -
@@ -104,3 +218,18 @@ references:
     title: "Introduction to GEMINI"
     link: "https://s3.amazonaws.com/gemini-tutorials/Intro-To-Gemini.pdf"
     summary: "GEMINI query is the most versatile of all the GEMINI tools. You can use it to ask questions in simple SQL"
+  -
+    authors: "Torsten Seemann"
+    title: "Snippy: Rapid bacterial SNP calling and core genome alignments"
+    link: "https://github.com/tseemann/snippy"
+    summary: "Snippy finds SNPs between a haploid reference genome and your NGS sequence reads. It will find both substitutions (snps) and insertions/deletions (indels)."
+  -
+    authors: "Wolfgang Maier"
+    title: "MiModD Documentation"
+    link: "http://mimodd.readthedocs.io/en/latest/"
+    summary: "MiModD is a comprehensive software package for mapping-by-sequencing analyses"
+  -
+    authors: "Korbinian Schneeberger"
+    title: "Using next-generation sequencing to isolate mutant genes from forward genetic screens"
+    link: "https://www.researchgate.net/profile/Korbinian_Schneeberger/publication/264904703_Using_next-generation_sequencing_to_isolate_mutant_genes_from_forward_genetic_screens/"
+    summary: "Mapping the location of causal mutations using genetic crosses has traditionally been a complex procedure, but next-generation sequencing now allows the rapid identification of causal mutations even in complex genetic backgrounds"

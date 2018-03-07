@@ -7,37 +7,33 @@ docker_image: ""
 requirements:
 material:
   -
-    title: "Introduction"
+    title: "Galaxy from a developer point of view"
     type: "introduction"
     name: "introduction"
-    slides: "yes"
+    slides: yes
     contributors:
       - bebatut
   -
     title: "Contributing with GitHub"
     type: "tutorial"
     name: "github-contribution"
-    zenodo_link: ""
-    galaxy_tour: ""
-    hands_on: "no"
-    slides: "yes"
+    hands_on: no
+    slides: yes
     questions:
-      - ""
+      - "How can I contribute to an open-source project with GitHub"
     objectives:
-      - ""
+      - "Understand what is a pull request"
     time_estimation: "1d/3h/6h"
     key_points:
-      - ""
+      - "Work on *your* fork"
+      - "1 pull request = 1 branch"
+      - "Be careful on the branch you're working on"
     contributors:
-      -
-        name: "Cyril Monjeaud"
-        github_username: "cmonjeau"
+      - cmonjeau
   -
     title: "Tool development and integration into Galaxy"
     type: "tutorial"
     name: "tool-integration"
-    zenodo_link: ""
-    galaxy_tour: ""
     hands_on: "external"
     hands_on_url: "http://planemo.readthedocs.io/en/latest/writing_standalone.html"
     slides: "yes"
@@ -71,10 +67,8 @@ material:
     title: "Tool Shed: sharing Galaxy tools"
     type: "tutorial"
     name: "toolshed"
-    zenodo_link: ""
-    galaxy_tour: ""
-    hands_on: "no"
-    slides: "yes"
+    hands_on: no
+    slides: yes
     questions:
       - "What is a Tool Shed?"
       - "How to install tools and workflows from a Tool Shed into a Galaxy instance?"
@@ -97,10 +91,8 @@ material:
     title: "Galaxy Interactive Tours"
     type: "tutorial"
     name: "interactive-tours"
-    zenodo_link: ""
-    galaxy_tour: ""
-    hands_on: "no"
-    slides: "yes"
+    hands_on: no
+    slides: yes
     questions:
       - "What is a Galaxy Interactive Tour?"
       - "How to create a Galaxy Interactive Tour?"
@@ -120,10 +112,8 @@ material:
     title: "Galaxy Interactive Environments"
     type: "tutorial"
     name: "interactive-environments"
-    zenodo_link: ""
-    galaxy_tour: ""
-    hands_on: "no"
-    slides: "yes"
+    hands_on: no
+    slides: yes
     questions:
       - "What are Galaxy Interactive Environments (GIEs)?"
       - "How to enable GIEs in Galaxy?"
@@ -147,8 +137,8 @@ material:
     title: "Visualizations: charts plugins"
     type: "tutorial"
     name: "visualization-charts"
-    hands_on: "yes"
-    slides: "yes"
+    hands_on: yes
+    slides: yes
     questions:
       - "How can I make a custom plugin for Charts?"
     objectives:
@@ -167,10 +157,8 @@ material:
     title: "Galaxy Webhooks"
     type: "tutorial"
     name: "webhooks"
-    zenodo_link: ""
-    galaxy_tour: ""
-    hands_on: "yes"
-    slides: "yes"
+    hands_on: yes
+    slides: yes
     questions:
       - "What are Galaxy Webhooks?"
       - "How to create them?"
@@ -191,10 +179,8 @@ material:
     title: "Visualizations: generic plugins"
     type: "tutorial"
     name: "visualization-generic"
-    zenodo_link: ""
-    galaxy_tour: ""
-    hands_on: "yes"
-    slides: "yes"
+    hands_on: yes
+    slides: yes
     questions:
       - "How can visualization plugins benefit science?"
     objectives:
@@ -218,10 +204,8 @@ material:
     title: "BioBlend module, a Python library to use Galaxy API"
     type: "tutorial"
     name: "bioblend-api"
-    zenodo_link: ""
-    galaxy_tour: ""
-    hands_on: "no"
-    slides: "yes"
+    hands_on: no
+    slides: yes
     questions:
       - "What is the use of BioBlend?"
       - "How to use Galaxy through command line?"
@@ -245,14 +229,34 @@ material:
       - fmareuil
 
   -
+    title: "Prerequisites for building software/conda packages"
+    type: "tutorial"
+    name: "conda_sys"
+    hands_on: no
+    slides: yes
+    questions:
+      - "What does 'installing a software' means on a Linux architecture?"
+      - "Why my compilations always fail?"
+      - "How to solve common compiling and installation issues?"
+    objectives:
+      - "Learn how to compile and install tools using standard procedures."
+      - "Learn needed tricks to write conda build.sh files."
+    time_estimation: "1h"
+    key_points:
+      - "There is a common procedure to compile and install many tools: `./configure && make && make install`"
+      - "Some exotic tools require adjustements to compile or install properly"
+      - "Pay attention to INSTALL and README files, and to documentation"
+    contributors:
+      - abretaud
+      - cmonjeau
+
+  -
     title: "Tool Dependencies and Conda"
     type: "tutorial"
     name: "conda"
-    zenodo_link: ""
-    galaxy_tour: ""
     hands_on: "external"
     hands_on_url: "http://planemo.readthedocs.io/en/latest/writing_standalone.html"
-    slides: "yes"
+    slides: yes
     questions:
       - "How can I connect tools to applications and libraries?"
       - "What are the advantages of declaring dependencies for my tool?"
@@ -270,6 +274,10 @@ material:
         title: "Tool development and integration into Galaxy"
         type: "internal"
         link: "/topics/dev/tutorials/tool-integration/slides.html"
+      -
+        title: "Prerequisites for building software/conda packages"
+        type: "internal"
+        link: "/topics/dev/tutorials/conda_sys/slides.html"
     key_points:
       - "Conda and Bioconda are Galaxy best practices for connecting Galaxy tools to underlying applications and libraries."
       - "Leveraging Conda allows easy installation of your tool's dependencies by Galaxy deployers."
@@ -287,11 +295,9 @@ material:
     title: "Tool Dependencies and Containers"
     type: "tutorial"
     name: "containers"
-    zenodo_link: ""
-    galaxy_tour: ""
     hands_on: "external"
     hands_on_url: "http://planemo.readthedocs.io/en/latest/writing_standalone.html"
-    slides: "yes"
+    slides: yes
     questions:
       - "What are the advantages of running my Galaxy tool inside of a container?"
       - "How does Galaxy find a container to run my tool in?"
@@ -318,9 +324,7 @@ material:
     title: "Galaxy Code Architecture"
     type: "tutorial"
     name: "architecture"
-    zenodo_link: ""
-    galaxy_tour: ""
-    slides: "yes"
+    slides: yes
     questions:
       - "How is the Galaxy code structured?"
       - "What do the various other projects related to Galaxy do?"
@@ -343,11 +347,9 @@ material:
     title: "Data source integration"
     type: "tutorial"
     name: "data-source-integration"
-    zenodo_link: ""
-    galaxy_tour: ""
     enable: "false"
-    hands_on: "yes"
-    slides: "no"
+    hands_on: yes
+    slides: no
     questions:
       - "First question addressed during the tutorial"
       - "Second question addressed during the tutorial"

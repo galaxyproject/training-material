@@ -1,0 +1,409 @@
+id: de-novo-rad-seq
+name: >-
+  RAD-Seq de-novo data analysis
+description: >-
+  In this tutorial we will re-analyze data from <a
+  href="http://journals.plos.org/plosgenetics/article?id=10.1371/journal.pgen.1000862">Hohenlohe
+  et al. 2010</a> until the population genomics statistics calculation step
+  using STACKS pipeline. In a de novo RAD-seq data analysis, the reads are
+  aligned one on each other to create stacks and then clustered to build loci.
+title_default: peptide-protein-id
+steps:
+  - title: Introduction
+    content: >-
+      In the study of <a
+      href="http://journals.plos.org/plosgenetics/article?id=10.1371/journal.pgen.1000862">Hohenlohe
+      et al. 2010</a>, a genome scan of nucleotide diversity and differentiation
+      in natural populations of threespine stickleback Gasterosteus aculeatus
+      was conducted. Authors used Illumina-sequenced RAD tags to identify and
+      type over 45,000 single nucleotide polymorphisms (SNPs) in each of 100
+      individuals from two oceanic and three freshwater populations.
+    backdrop: true
+  - title: Introduction
+    content: >-
+      We will re-analyze these data at least until the population genomics
+      statistics calculation step using STACKS pipeline. Existing Gasterosteus
+      aculeatus draft genome will not be used here so the analysis will be
+      performed de novo. In a de novo RAD-seq data analysis, the reads are
+      aligned one on each other to create stacks and then clustered to build
+      loci. A reference approach can also be conducted (see <a
+      href="http://galaxyproject.github.io/training-material/topics/sequence-analysis/tutorials/ref-based-rad-seq/tutorial.html">ref_based
+      tutorial</a>, allowing to work on existing assembled loci).
+    backdrop: true
+  - title: Data upload
+    content: >-
+      The original data is available at NCBI SRA ENA under accession number <a
+      href="https://trace.ncbi.nlm.nih.gov/Traces/sra/?run=SRR034310>SRR034310</a>
+      as part of the NCBI SRA ENA study accession number <a
+      href="https://trace.ncbi.nlm.nih.gov/Traces/sra/?study=SRP001747">SRP001747</a>.
+    backdrop: true
+  - title: History options
+    element: '#history-options-button'
+    content: >-
+      We will start the analysis by creating a new history. Click on this button
+      and then "Create New"
+    placement: left
+  - title: Importing data via links
+    content: >-
+      Import FASTQ files (e.g. <a
+      href="ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR034/SRR034310/SRR034310.fastq.gz">SRR034310</a>
+      as population map information file <a
+      href="https://zenodo.org/record/1134547/files/Details_Barcode_Population_SRR034310.txt">Population_map.txt</a>
+      and barcodes file <a
+      href="https://zenodo.org/record/1134547/files/Barcode_SRR034310.txt">Barcodes_SRR034310</a>)
+      from SRA and <a href="https://zenodo.org/">Zenodo</a>
+    backdrop: true
+  - title: Uploading the new data
+    element: '#tool-panel-upload-button .fa.fa-upload'
+    content: We need to upload data. Open the Galaxy Upload Manager
+    placement: right
+    postclick:
+      - '#tool-panel-upload-button .fa.fa-upload'
+      - '#btn-reset'
+  - title: Uploading the input data
+    element: '#btn-new'
+    content: Click on Paste/Fetch Data
+    placement: right
+    postclick:
+      - '#btn-new'
+  - title: Uploading the input data
+    element: .upload-text-column .upload-text .upload-text-content.form-control
+    content: Load the data into your history
+    placement: right
+    textinsert: >-
+      ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR034/SRR034310/SRR034310.fastq.gz
+
+      https://zenodo.org/record/1134547/files/Details_Barcode_Population_SRR034310.txt
+
+      https://zenodo.org/record/1134547/files/Barcode_SRR034310.txt
+    backdrop: false
+  - title: Uploading the input data
+    element: '#btn-start'
+    content: Click on "Start" to start loading the data to history
+    placement: right
+    postclick:
+      - '#btn-start'
+  - title: Uploading the input data
+    element: '#btn-close'
+    content: >-
+      The upload may take a while.<br> Hit the close button to close this
+      window.
+    placement: right
+    postclick:
+      - '#btn-close'
+  - title: Rename the input data and change the datatype
+    element: '.history-right-panel .list-items > *:first'
+    content: >-
+      The uploaded datasets is in the history, but its name corresponds to the
+      link. We want to rename them it to something more meaningful<br><br>  <ul>
+        <li>Click on the pencil icon beside the file to "Edit Attributes".</li>
+        <li>Change the "<b>Name:</b>" accordingly.</li>
+        <li>Change the "<b>Datatype</b>" to <i>fastqsanger</i>.</li>
+      </ul>
+    position: left
+  - title: Demultiplexing reads
+    content: >-
+      The sequences are raw sequences from the sequencing machine, without any
+      pretreatments. They need to be demultiplexed. To do so, we can use the
+      Process Radtags tool from STACKS.
+
+      For demultiplexing, we use the Process Radtags tool from <a
+      href="https://www.g3journal.org/content/1/3/171.full">STACKS</a>.
+    backdrop: true
+  - title: Demultiplexing reads
+    element: '#tool-search-query'
+    content: 'Search for ''Stacks:process radtags'' tool.'
+    placement: right
+    textinsert: process radtags
+  - title: Demultiplexing reads
+    element: '#tool-search'
+    content: 'Click on the "Stacks:process radtags" tool to open it.'
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fstacks_procrad%2Fstacks_procrad%2F1.46.0"]
+        .tool-old-link
+  - title: Demultiplexing reads
+    element: '#tool-search'
+    content: >-
+      Run the tool on FastQ file to demultiplex the reads with the following
+      parameters:<ul>
+
+      <li>point a tabular file mapping sample names and barcodes</li>
+
+      <li>select the sbfI enzyme used for restriction</li>
+
+      <li>(optionally )you can ask to capture discarded reads to a file</li>
+
+      </ul>
+    position: right
+  - title: Demultiplexing reads
+    content: >-
+      As we are exporting demultiplexed reads in data collections, you have
+      hidden datasets on your history. These datasets are in fact symlinks on
+      the data collections and are by default hidden on the history. If you want
+      to see these datasets, you can click on the hidden statement just under
+      the history name.
+    backdrop: true
+  - title: Questions
+    content: |-
+      <ul>
+        <li>How many reads where on the original dataset?</li>
+        <li>How many are kept?</li>
+        <li>Can you try to explain the reason why we loose a lot of reads here?</li>
+        <li>What kind of infiormation this result gives concerning the upcoming data analysis and the barcodes design in general ?</li>
+      </ul>
+    backdrop: false
+  - title: Demultiplexing reads
+    content: 'Re-Run Stacks: process radtags on FastQ file playing with parameters'
+    backdrop: true
+  - title: Demultiplexing reads
+    element: '#tool-search'
+    content: 'Click on the "Stacks:process radtags" tool to open it.'
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fstacks_procrad%2Fstacks_procrad%2F1.46.0"]
+        .tool-old-link
+  - title: Demultiplexing reads
+    element: '#tool-search'
+    content: >-
+      Run the tool on FastQ file again with the following advanced
+      parameters:<ul>
+
+      <li>Discard reads with low quality scores<ul>
+        <li>play with the score limit (10 for example and use 20 for next re-run)</li></ul></li>
+      </ul>
+    position: right
+  - title: Demultiplexing reads
+    element: '#tool-search'
+    content: 'Click on the "Stacks:process radtags" tool to open it.'
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fstacks_procrad%2Fstacks_procrad%2F1.46.0"]
+        .tool-old-link
+  - title: Demultiplexing reads
+    element: '#tool-search'
+    content: >-
+      Run the tool on FastQ file again with the following advanced
+      parameters:<ul>
+
+      <li>Discard reads with low quality scores<ul>
+        <li>Set the score limit to 20</li></ul></li>
+      </ul>
+    position: right
+  - title: Demultiplexing reads
+    content: >-
+      Note that you can play also with the sliding window score threshold, by
+      default 15% of the length of the read. This sliding window parameter
+      allows notably the user to deal with the declining quality at the 3’ end
+      of reads.
+    backdrop: false
+  - title: Demultiplexing reads
+    element: '.history-right-panel .list-items > *:first'
+    content: >-
+      Check each result.log output (No score, 10, 20).
+
+      Now we want to combine these to a single file. So you just copy/paste the
+      important lines to Upload Manager.
+    position: left
+  - title: Creating the file
+    element: '#tool-panel-upload-button .fa.fa-upload'
+    content: >-
+      We need to upload data to create a new file. Open the Galaxy Upload
+      Manager
+    placement: right
+    postclick:
+      - '#tool-panel-upload-button .fa.fa-upload'
+      - '#btn-reset'
+  - title: Creating the file
+    element: '#btn-new'
+    content: Click on Paste/Fetch Data
+    placement: right
+    postclick:
+      - '#btn-new'
+  - title: Creating the file
+    element: .upload-text-column .upload-text .upload-text-content.form-control
+    content: >-
+      Insert the lines from the outputs here. You can go to Settings and select
+      <i>Convert spaces to tabs</i>
+    placement: right
+    textinsert: >-
+      # File  Retained_Reads  Low_Quality Ambiguous_Barcodes  Ambiguous_RAD-Tag
+      Total
+
+      Score20 2980543 5158988 626265  129493  8895289
+
+      Score10 7373160 766371  626265  129493  8895289
+
+      NoScore 8139531 0 626265  129493  8895289
+    backdrop: false
+  - title: Creating the file
+    element: '#btn-start'
+    content: Click on "Start" to start loading the file to history
+    placement: right
+    postclick:
+      - '#btn-start'
+  - title: Creating the file
+    element: '#btn-close'
+    content: Hit the close button to close this window.
+    placement: right
+    postclick:
+      - '#btn-close'
+  - title: Radtags logs
+    element: '.history-right-panel .list-items > *:first'
+    content: >-
+      You can rename the file to Radtags logs.
+
+      You can use the Charts functionality through the Visualize button
+      reachable on the Radtags logs file you just generated.
+    position: left
+  - title: Radtags logs
+    content: >-
+      You might have noticed, that the organization of you file for the
+      graphical representation you obtain has a non optimal bars diagram with a
+      not intelligent X-axis ordering.
+
+      Let's fix this.
+    backdrop: true
+  - title: Radtags logs
+    element: '#tool-search-query'
+    content: Search for 'Sort data in ascending or descending order' tool.
+    placement: right
+    textinsert: process radtags
+  - title: Radtags logs
+    element: '#tool-search'
+    content: Click on the 'Sort data in ascending or descending order' tool to open it.
+    placement: right
+    postclick:
+      - 'a[href$="/tool_runner?tool_id=sort1"] .tool-old-link'
+  - title: Radtags logs
+    element: '#tool-search'
+    content: |-
+      Run the tool on Radtags log with:<ul>
+      <li>sorting on the column 1</li>
+      <li>in ascending order</li>
+      </ul>
+    position: right
+  - title: Radtags logs
+    element: '.history-right-panel .list-items > *:first'
+    content: Now you can use the Charts functionality again to generate bar diagram.
+    position: left
+  - title: Demultiplexing reads
+    content: >-
+      Using filter like clean data, remove any read with an uncalled base would
+      have few impact.
+    backdrop: true
+  - title: Quality control
+    content: >-
+      For quality control, we use similar tools as described in <a
+      href="http://galaxyproject.github.io/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html">NGS-QC
+      tutorial</a>: <a
+      href="https://www.bioinformatics.babraham.ac.uk/projects/fastqc/">FastQC</a>.
+    backdrop: true
+  - title: Quality control
+    element: '#tool-search-query'
+    content: Search for FastQC tool
+    placement: right
+    textinsert: FastQC
+  - title: Quality control
+    element: '#tool-search'
+    content: Click on the "FastQC" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fdevteam%2Ffastqc%2Ffastqc%2F0.69"]
+        .tool-old-link
+  - title: Quality control
+    element: '#tool-search'
+    content: >-
+      Execute the tool on the FastQ files to control the quality of the reads.
+      Warning! Don’t forget you are working on data collections.
+    position: left
+  - title: Question
+    content: |-
+      <ul>
+        <li>What is the read length?</li>
+      </ul>
+    backdrop: false
+  - title: Building loci using STACKS
+    content: >-
+      As it exists a draft genome for Gasterosteus aculeatus, we can use this
+      information and map the sequences on this genome to identify polymorphism.
+    backdrop: true
+  - title: Building loci using STACKS
+    element: '#tool-search-query'
+    content: 'Search for Stacks:De novo map tool'
+    placement: right
+    textinsert: 'Stacks:De novo map'
+  - title: Building loci using STACKS
+    element: '#tool-search'
+    content: 'Click on the ''Stacks:Denovo map'' tool to open it'
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fstacks_denovomap%2Fstacks_denovomap%2F1.46.0"]
+        .tool-old-link
+  - title: Building loci using STACKS
+    element: '#tool-search'
+    content: |-
+      Run the tool and:<ul>
+      <li>select the population usage</li>
+      <li>specify each individual as a sample, a population map</li>
+      <li>minimum depth of coverage of 3</li>
+      </ul>
+    position: right
+  - title: Comment
+    content: >-
+      f you are using a file presenting population information and individual
+      name in a different manner than expected by STACKS, you can use Galaxy
+      tools like 'Regex Replace' or 'Cut columns from a table' to generate it.
+    backdrop: true
+  - title: Building loci using STACKS
+    element: '.history-right-panel .list-items > *:first'
+    content: >-
+      Once Stacks has completed running, investigate the output files:
+      result.log and catalog.* (snps, alleles and tags).
+    position: left
+  - title: Calculate population genomics statistics
+    content: 'Run the last step of Stacks: De novo map pipeline'
+    backdrop: true
+  - title: Calculate population genomics statistics
+    element: '#tool-search'
+    content: 'Run the last step of Stacks:De novo map pipeline'
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fstacks_populations%2Fstacks_populations%2F1.46.0"]
+        .tool-old-link
+  - title: Calculate population genomics statistics
+    element: '#tool-search'
+    content: >-
+      Run the tool with:<ul>
+
+      <li>specifying data filtering options (minimum percentage of individuals
+      in a population required to process a locus for that population:
+      <b>0.75</b></li>
+
+      <li>output options (VCF and Structure)</li>
+
+      <li>enabling SNP and haplotype-based F statistics calculation</li>
+
+      </ul>
+    position: right
+  - title: Questions
+    content: |-
+      <ul>
+        <li>What is the maximum value of FST at any SNP?</li>
+        <li>How many SNPs reach this FST value?</li>
+      </ul>
+    backdrop: false
+  - title: Conclusion
+    content: >-
+      In this tutorial, we have analyzed real RAD sequencing data to extract
+      useful information, such as which loci are candidate regarding the genetic
+      differentiation between freshwater and oceanic Stickelback populations. To
+      answer these questions, we analyzed RAD sequence datasets using a de novo
+      RAD-seq data analysis approach.
+    backdrop: true

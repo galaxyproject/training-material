@@ -7,6 +7,8 @@ tutorial_name: your_tutorial_name
 # Introduction
 {:.no_toc}
 
+<!-- This is a comment. -->
+
 General introduction about the topic and then an introduction of the tutorial (the questions and the objectives). It is nice also to have a scheme to sum up the pipeline used during the tutorial. The idea is to give to trainees insight into the content of the tutorial and the (theoretical and technical) key concepts they will learn.
 
 > ### Agenda
@@ -26,16 +28,21 @@ Introduction about this part
 
 Short introduction about this subpart.
 
+<!--
+{% icon hands_on %} will render the hands_on icon as specified in
+_config.yml in the root of this repository.
+-->
+
 > ### {% icon hands_on %} Hands-on: Data upload
 >
 > 1. Step1
 > 2. Step2
 >
->    > ### :nut_and_bolt: Comments
+>    > ### {% icon comment %} Comments
 >    > A comment
 >    {: .comment}
 >
->    > ### :bulb: Tip: A tip
+>    > ### {% icon tip %}Tip: A tip
 >    >
 >    > * Step1
 >    > * Step2
@@ -51,7 +58,7 @@ Short introduction about this subpart.
 > 1. Step1
 > 2. Step2
 >
->    > ### :question: Question
+>    > ### {% icon question %} Question
 >    >
 >    > Question?
 >    >
@@ -66,7 +73,10 @@ Some blabla
 > ### {% icon hands_on %} Hands-on: Data upload
 >
 > 1. Step1
-> 2. Step2
+> 2. **My Tool** {% icon tool %} with the following parameters
+>   - "param1" to the file `myfile`
+>   - "param2" to `42`
+>   - "param3" to `Yes`
 >
 >    > ### {% icon question %} Questions
 >    >

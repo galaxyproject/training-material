@@ -1,8 +1,8 @@
 <header>
     <nav class="navbar navbar-expand-md navbar-dark">
         <div class="container">
-            <a class="navbar-brand" href="{{ site.url }}/">
-                <img src="{{ site.url }}{{ site.small_logo }}" height="30" alt="Galaxy Training Network logo">
+            <a class="navbar-brand" href="{{ site.baseurl }}/">
+                <img src="{{ site.baseurl }}/{{ site.small_logo }}" height="30" alt="Galaxy Training Network logo">
                 {{ site.title }}
             </a>
 
@@ -16,11 +16,7 @@
                             {% icon github %} Fork me on GitHub
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ site.gitter_url }}" title="Chat on Gitter">
-                            {% icon gitter %} Help on Gitter
-                        </a>
-                    </li>
+                    {% include help.html %}
                 </ul>
             </div>
         </div>

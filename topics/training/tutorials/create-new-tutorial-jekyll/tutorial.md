@@ -19,7 +19,7 @@ In 2016, the Galaxy Training Network decide to set up a new infrastructure for d
 We took inspiration from [Software Carpentry](https://software-carpentry.org) and collected everything on a GitHub repository: [https://github.com/galaxyproject/training-material ](https://github.com/galaxyproject/training-material).
 We decided on a structure based on tutorials with hands-on, fitting both for online self-training but also for workshops, grouped in topics. Each tutorial follows the same structure and comes with a virtualised instance to run the training everywhere.
 
-If you want to run the entire GTN website locally or test your new training material you can do this! 
+If you want to run the entire GTN website locally or test your new training material you can do this!
 
 Currently, the website is generated from the metadata and the tutorials using Jekyll, a simple static site builder.
 We can use Jekyll to run a server to check if the tutorial is correctly added and rendered.
@@ -52,10 +52,10 @@ The first step is to install the requirements inside a conda environment. This s
 Once Jekyll and its modules are installed in our conda environment, we can check the generation of the website locally:
 
 > ### {% icon hands_on %} Hands-on: Checking the website generation locally
-> 
+>
 > 1. (If not done) Activate the conda environment: `source activate galaxy_training_material`
 > 1. Run a local Jekyll server with `make serve`
-> 2. Visualize at [http://localhost:4000/ ](http://localhost:4000/)
+> 2. Visualize at [http://localhost:4000/training-material/ ](http://localhost:4000/training-material/)
 >
 >    > ### {% icon question %} Questions
 >    >
@@ -63,7 +63,7 @@ Once Jekyll and its modules are installed in our conda environment, we can check
 >    >
 >    >    <details>
 >    >    <summary>Click to view answers</summary>
->    >    Please check [http://localhost:4000/topics/ ](http://localhost:4000/topics/) to get a list of topics.
+>    >    Please check [http://localhost:4000/training-material/topics/ ](http://localhost:4000/training-material/topics/) to get a list of topics.
 >    >    </details>
 >    {: .question}
 {: .hands_on}

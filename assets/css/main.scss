@@ -3,6 +3,7 @@
 
 $white: #fff;
 $gray: #777;
+$light-gray: #ddd;
 $bg-color: #2c3143;
 $menu-color: #9d9d9d;
 $text-color: #292b2c;
@@ -83,6 +84,7 @@ footer {
     .navbar-collapse {
         justify-content: flex-end;
         align-items: flex-end;
+        min-width: 0;
     }
 }
 
@@ -167,13 +169,110 @@ footer {
     }
 }
 
-// this is a fix to get the hamburger button (menu/navbar) correctly placed on
+.contributors {
+    padding: 0;
+
+    .carousel-item {
+        align-items: flex-start;
+        flex-wrap: wrap;
+        flex-direction: row;
+        justify-content: space-around;
+    }
+
+    .carousel-item.active,
+    .carousel-item-next,
+    .carousel-item-prev {
+        display: flex;
+    }
+
+    .hall-of-fame-hero {
+        margin: 0;
+        width: 20%;
+
+        .name {
+            font-size: 0.7em;
+        }
+    }
+}
+
+.hall-of-fame {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.hall-of-fame-hero {
+    width: 140px;
+    margin: 1rem;
+    text-align: center;
+
+    .name {
+        margin-top: 0.5rem;
+    }
+
+    .contact-items {
+        margin-top: 0.2rem;
+    }
+
+    .thumbnail img {
+        background-color: white;
+        border-radius: 20px;
+        border: 1px solid $light-gray;
+        padding: 5px;
+        width: 100%;
+        -webkit-transition: border 0.2s ease-in-out;
+        -o-transition: border 0.2s ease-in-out;
+        transition: border 0.2s ease-in-out;
+    }
+
+    a.thumbnail {
+        &:hover,
+        &:focus,
+        &:active {
+            img {
+                border-color: $menu-color;
+            }
+        }
+    }
+}
+
+// This is a fix to get the hamburger button (menu/navbar) correctly placed on
 // small screens.
 @media (max-width: 575px) {
     .navbar > .container {
         position: initial;
         margin-left: initial;
         margin-right: initial;
+    }
+}
+
+// This applies a "dark" style to the dropdown menus on small devices since
+// Bootstrap v4 does not do that by default.
+@media (max-width: 992px) {
+    .navbar {
+        .dropdown-menu {
+            background-color: transparent;
+            border-color: transparent;
+        }
+
+        .dropdown-item {
+            color: rgba($white, .5);
+
+            &:hover,
+            &:focus,
+            &:active {
+                background-color: transparent;
+                color: rgba($white, .75);
+            }
+        }
+
+        .nav-item,
+        .dropdown-item {
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
     }
 }
 

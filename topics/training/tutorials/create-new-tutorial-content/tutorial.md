@@ -172,13 +172,13 @@ The tutorial needs to start with some medatada on its top:
 - `topic_name: training` with the name of the topic
 - `tutorial_name: create-new-tutorial` with the name of tutorial
 
-These metadata are there to help the templating system linking between the tutorial's file and the global [metadata]({{site.url}}/topics/training/tutorials/create-new-tutorial-metadata/tutorial.html).
+These metadata are there to help the templating system linking between the tutorial's file and the global [metadata]({{site.baseurl}}/topics/training/tutorials/create-new-tutorial-metadata/tutorial.html).
 If not correctly defined, the tutorial will not be found within the website.
 
 > ### {% icon hands_on %} Hands-on: Fix the top metadata
 >
-> 1. Change the `tutorial-name` and the `topic_name` to fit to the ones defined in the metadata
-> 2. Check if the tutorial has been correctly added at [http://localhost:4000/topics/sequence-analysis/similarity-search ](http://localhost:4000/topics/sequence-analysis/similarity-search)
+> 1. Change the `tutorial_name` and the `topic_name` to fit to the ones defined in the metadata
+> 2. Check if the tutorial has been correctly added at [http://localhost:4000/training-material/topics/sequence-analysis/similarity-search ](http://localhost:4000/training-material/topics/sequence-analysis/similarity-search)
 {: .hands_on}
 
 ### Content

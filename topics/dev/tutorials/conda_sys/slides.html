@@ -1,0 +1,451 @@
+---
+layout: tutorial_slides
+topic_name: dev
+tutorial_name: conda_sys
+logo: "GTN"
+---
+
+class: left, enlarge120
+
+### Environment variables
+
+```sh
+$ MY_NAME="Bobby"
+$ echo $MY_NAME
+Bobby
+```
+
+```sh
+$ MY_DATE=$(date)
+$ echo $MY_DATE
+Wed Feb 14 12:12:21 CET 2018
+```
+
+Use export to make sure the variable is accessible to any script/program you run from the current shell.
+
+```sh
+$ export MY_DATE=$(date)
+$ echo $MY_DATE
+Wed Feb 14 12:12:21 CET 2018
+$ bash some_script.sh # some_script.sh will have access to $MY_DATE
+```
+
+Many environment variables predefined in a shell: PATH, HOSTNAME, HOME, LANG, USER, ...
+
+---
+
+class: left, enlarge120
+
+### Show me the PATH
+
+```sh
+$ the_binary --help
+```
+
+How does the system knows where to find the binary?
+
+PATH is an environment variable defining possible locations of binaries.
+
+```sh
+$ echo $PATH
+/usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/sbin
+```
+
+Paths separated by `:`, ordered list (highest priority first).
+
+As all environment variable, you can redefine it:
+
+```sh
+$ export PATH="/opt/xxx/bin/:$PATH"
+$ echo $PATH
+/opt/xxx/bin/:/usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/sbin
+```
+
+---
+
+class: left, enlarge120
+
+### Show me the PATH
+
+The command `which` lets you know which binary will be used by your shell.
+
+```sh
+$ which the_binary
+/opt/xxx/bin/the_binary
+```
+
+It throws an error if the binary is not "in the PATH".
+
+```sh
+$ export PATH="/usr/bin/"
+$ echo $PATH
+/usr/bin
+```
+```sh
+$ which the_binary
+/usr/bin/which: no the_binary in (/usr/bin)
+```
+
+---
+
+class: left, enlarge120
+
+### Thinking outside the PATH
+
+What if you want to run a binary only located in the current working directory?
+
+```sh
+$ ls
+my_binary
+$ my_binary --help
+bash: my_binary: command not found...
+```
+
+You need to add `./` to explicitly tell the shell to run the file from working directory:
+
+```sh
+$ ./my_binary --help
+It works!
+```
+
+`./` is just the relative path to `my_binary`, it could be a more complicated one, or an absolute path:
+
+```sh
+$ ../somewhere/my_binary --help
+It works!
+$ /home/someone/womewhere/my_binary --help
+It works!
+```
+
+---
+
+class: left, enlarge120
+
+### Installing a single binary
+
+Just a single executable file (binary, script).
+
+You only need to copy it to a `bin` directory and make sure permissions are set:
+
+```sh
+$ cp the_binary /usr/local/bin
+$ chmod a+x /usr/local/bin/the_binary
+```
+
+Other possible `bin` directories:
+
+```sh
+/bin            = reserved for system
+/usr/bin        = installed by package manager (apt, yum, ...)
+/usr/local/bin  = manually installed binaries
+/opt/xxx/bin    = manually installed binaries (xxx=path)
+/yyy/bin        = a bin directory wherever you like (yyy=path)
+```
+
+
+.center[.footnote[If you install a precompiled binary, make sure that it was compiled for the same architecture as your system (e.g. x86_64)]]
+
+---
+
+class: left, enlarge120
+
+### Compiling a single binary
+
+In the following slides we consider a program written in `C`.
+
+Usually, compilation is done with `make`.
+
+```sh
+$ ls
+Makefile    my_program.c
+```
+```sh
+$ make
+```
+```sh
+$ ls
+Makefile    my_program.c    my_binary
+```
+
+`make` will read the instructions defined in the file `Makefile` and run the compiler automatically to produce the binary.
+
+You can then copy the binary to a bin dir.
+
+Some exotic tools come with other scripts or methods for compiling, read the README or INSTALL files.
+
+---
+
+class: left, enlarge120
+
+### Compiling a library
+
+Libraries are reusable chunks of code. They are not executable as is. They are compiled similarly as binaries.
+
+```sh
+$ ls
+Makefile    my_lib.c    my_lib.h
+```
+```sh
+$ make
+```
+```sh
+$ ls
+Makefile    my_lib.c    my_lib.h    libmy.so.1.2.8
+```
+
+`.h` files are code files defining which functions are provided by the library.
+
+`.so` are compiled binary code. Their file name structure is important: `libXXXX.so.version`.
+
+---
+
+class: left, enlarge120
+
+### Installing a library
+
+```sh
+$ cp libmy.so.1.2.8 /usr/local/lib/
+```
+
+Some symbolic links need to be created:
+
+```sh
+$ ln -s /usr/local/lib/libmy.so.1.2.8 /usr/local/lib/libmy.so
+$ ln -s /usr/local/lib/libmy.so.1.2.8 /usr/local/lib/libmy.so.1
+```
+
+You also need to install `headers` in a `include` dir:
+
+```sh
+$ cp my_lib.h /usr/local/include/
+```
+
+Other possible `lib` (or `lib64`) directories (same principle for `include`):
+
+```sh
+/lib(64)            = reserved for system
+/usr/lib(64)        = installed by package manager (apt, yum, ...)
+/usr/local/lib(64)  = manually installed
+/opt/xxx/lib(64)    = manually installed (xxx=path)
+/yyy/lib(64)        = a lib directory wherever you like (yyy=path)
+```
+
+---
+
+class: left, enlarge120
+
+### make install
+
+Copying/symlinking manually each file is painful.
+
+Running `make install` usually install everything automatically for you.
+
+```sh
+$ make
+$ make install
+```
+
+By default, installs to `/usr/local`. We will see how to change this later.
+
+---
+
+class: left, enlarge120
+
+### Compiling a binary that uses an external library
+
+For example, if your program relies on `zlib` to read or create gzipped files.
+
+`make` needs to know where are the `.h` and `.so` files to compile your program properly.
+
+Usually, a script named 'configure' is distributed with the program sources.
+
+```sh
+$ ls
+configure   Makefile    my_program.c
+```
+
+This script explores the filesystem to find the needed `.h` and `.so` files. You can then run `make` and `make install` as usual.
+
+```sh
+$ ./configure
+$ make
+$ make install
+```
+
+Sometimes, `configure` is replaced by another software like cmake.
+
+---
+
+class: left, enlarge120
+
+### Playing with ./configure
+
+You can pass many options to the `configure` script.
+
+A very common one is `--prefix` which allows to change the installation directory.
+
+```sh
+$ ./configure --prefix=/home/somewhere
+$ make
+$ make install
+```
+
+The binary will be installed in `/home/somewhere/bin/`
+
+If you are compiling a library, files will be installed in `/home/somewhere/include/` and `/home/somewhere/lib(64)/`
+
+---
+
+class: left, enlarge120
+
+### Playing with ./configure
+
+You can pass many options to the `configure` script.
+
+You can often disable or enable some software features this way.
+
+```sh
+$ ./configure --disable-gpu --enable-greedy-algorithm
+$ make
+$ make install
+```
+
+---
+
+class: left, enlarge120
+
+### Playing with ./configure
+
+By default, `configure` only searches for `.h` and `.so` files in standard directories (`/usr/`, `/usr/local`).
+
+If your program depends on a library installed in an exotic location, you need to specify it.
+
+There might be a specific `configure` option.
+
+```sh
+$ ./configure --zlib-dir=/home/somewhere/zlib/
+```
+
+Or, you can define some standard environment variables:
+
+```sh
+$ export CFLAGS="-I/home/somewhere/zlib/include $CFLAGS"
+$ export LDFLAGS="-L/home/somewhere/zlib/lib $LDFLAGS"
+```
+
+In some cases, you might need to define additional variables:
+
+```sh
+$ export CPATH="/home/somewhere/zlib/include:$CPATH"
+$ export LIBRARY_PATH="/home/somewhere/zlib/lib:$LIBRARY_PATH"
+```
+
+---
+
+class: left, enlarge120
+
+### Playing with ./configure
+
+The `CFLAGS` environment variable can also be used for other purposes like enabling some compiler optimisation, predefining some C macro or compiling with debugging symbols.
+
+```sh
+$ export CFLAGS="-I/home/somewhere/zlib/include -O2 -DDEBUG -g"
+```
+
+When you are compiling C++ code, you need to use `CXXFLAGS` instead of `CFLAGS`.
+
+---
+
+class: left, enlarge120
+
+### Shebang
+
+The first line of script is called the [shebang](https://en.wikipedia.org/wiki/Shebang_%28Unix%29).
+
+```sh
+#!/bin/bash
+```
+
+It determines how your script will be run when called in a shell.
+
+```sh
+$ my_script.sh
+$ # is interpeted as
+$ /bin/bash /usr/bin/my_script.sh
+```
+
+---
+
+class: left, enlarge120
+
+### Shebang
+
+You need to write an absolute path in the shebang. But never do this:
+
+```sh
+#!/usr/bin/python
+```
+
+Because you are not sure /usr/bin/python will always be at this location. Preferred solution:
+
+```sh
+#!/usr/bin/env python
+```
+
+This will ensure to use the `python` found using the PATH environment variable.
+
+`/bin/bash` or `/usr/bin/env` are considered to always be present.
+
+---
+
+class: left, enlarge120
+
+### Python/Perl/R packages
+
+Installing Python modules consists in placing the source files in the correct path inside the Python installation.
+
+For example BioPython code will be installed in `/usr/lib/python3.6/site-packages/Bio/`
+
+Some Python modules consists both of Python code and C code that need to be compiled.
+
+Python modules are usually installed with specific setup mechanisms that take care of it all for you.
+
+```sh
+$ pip install my_module
+```
+
+```sh
+$ cd my_module_src/
+$ python setup.py install
+```
+
+Perl or R modules are installed in similar ways.
+
+---
+
+class: left, enlarge120
+
+### Common error: Undefined symbol
+
+Symptom: you get an `Undefined symbol` while running an installed program.
+
+Cause: the program uses a library which is not available in the expected location.
+
+To list all the libraries needed by the program and identify the one causing the problem:
+
+```sh
+$ ldd `which nano`
+	linux-vdso.so.1 (0x00007ffdfb48c000)
+	libmagic.so.1 => not found
+	libncursesw.so.6 => /lib64/libncursesw.so.6 (0x00007f16cbb54000)
+```
+
+Make sure the library is correctly installed. If it is installed in an exotic location, use the `LD_LIBRARY_PATH` environment.
+
+```sh
+$ export LD_LIBRARY_PATH="/home/somewhere/magic/:$LD_LIBRARY_PATH"
+$ ldd `which nano`
+	linux-vdso.so.1 (0x00007ffdfb48c000)
+	libmagic.so.1 => /home/somewhere/magic/lib/libmagic.so.1
+	libncursesw.so.6 => /lib64/libncursesw.so.6 (0x00007f16cbb54000)
+```

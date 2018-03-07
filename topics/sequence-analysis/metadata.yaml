@@ -3,7 +3,7 @@ name: "sequence-analysis"
 type: "use"
 title: "Sequence analysis"
 summary: "Analyses of sequences"
-docker_image: ""
+docker_image: "quay.io/galaxy/sequence-analysis-training"
 requirements:
   -
     title: "Galaxy introduction"
@@ -15,9 +15,10 @@ material:
     type: "tutorial"
     name: "quality-control"
     zenodo_link: ""
-    galaxy_tour: ""
-    hands_on: "yes"
-    slides: "yes"
+    galaxy_tour: yes
+    hands_on: yes
+    slides: yes
+    workflows: yes
     questions:
       - How to control quality of NGS data?
       - What are the quality parameters to check for each dataset?
@@ -41,9 +42,10 @@ material:
     type: "tutorial"
     name: "mapping"
     zenodo_link: ""
-    galaxy_tour: ""
-    hands_on: "yes"
-    slides: "yes"
+    galaxy_tour: yes
+    hands_on: yes
+    slides: yes
+    workflows: yes
     questions:
       - What two things are crucial for a correct mapping?
       - What is BAM?
@@ -62,9 +64,10 @@ material:
     type: "tutorial"
     name: "genome-annotation"
     zenodo_link: ""
-    galaxy_tour: ""
-    hands_on: "yes"
-    slides: "no"
+    galaxy_tour: no
+    hands_on: yes
+    slides: no
+    workflows: no
     questions:
       - "First question addressed during the tutorial"
       - "Second question addressed during the tutorial"
@@ -83,9 +86,10 @@ material:
     type: "tutorial"
     name: "ref-based-rad-seq"
     zenodo_link: ""
-    galaxy_tour: "ref-based-rad-seq"
-    hands_on: "yes"
-    slides: "no"
+    galaxy_tour: no
+    hands_on: yes
+    slides: no
+    workflows: yes
     questions:
       - "How to analyze RAD sequencing data using a reference genome for a population genomics study?"
     objectives:
@@ -102,9 +106,10 @@ material:
     type: "tutorial"
     name: "de-novo-rad-seq"
     zenodo_link: ""
-    galaxy_tour: "de-novo-rad-seq"
-    hands_on: "yes"
-    slides: "no"
+    galaxy_tour: no
+    hands_on: yes
+    slides: no
+    workflows: yes
     questions:
       - "How to analyze RAD sequencing data without a reference genome for a population genomics study?"
     objectives:
@@ -121,9 +126,10 @@ material:
     type: "tutorial"
     name: "genetic-map-rad-seq"
     zenodo_link: ""
-    galaxy_tour: "genetic-map-rad-seq"
-    hands_on: "yes"
-    slides: "no"
+    galaxy_tour: no
+    hands_on: yes
+    slides: no
+    workflows: yes
     questions:
       - "How to analyze RAD sequencing data for a genetic map study?"
     objectives:
@@ -135,6 +141,31 @@ material:
       - ""
     contributors:
       - yvanlebras
+
+  -
+    title: "Genome annotation with Prokka"
+    type: "tutorial"
+    name: "annotation-with-prokka"
+    zenodo_link: ""
+    galaxy_tour: no
+    hands_on: yes
+    slides: yes
+    workflows: yes
+    questions:
+      - "How to annotate a bacterial genome?"
+      - "How to visualize annoted genomic features?"
+    objectives:
+      - "Load genome into Galaxy"
+      - "Annotate genome with Prokka"
+      - "View annotations in JBrowse"
+    time_estimation: "1h"
+    key_points:
+      - "Prokka is a useful tool to annotate a bacterial genome."
+      - "JBrowse can be used to inspect the annotation of a genome."
+    contributors:
+      - annasyme
+      - torstenseemann
+      - slugger70
 
 maintainers:
   - yvanlebras
@@ -208,7 +239,7 @@ references:
   -
     authors: "Gompert, Z., and C. A. Buerkle. 2011b"
     title: "Bayesian estimation of genomic clines"
-    link: "http://onlinelibrary.wiley.com/doi/10.1111/j.1365-294X.2011.05074.x/abstract"
+    link: "http://onlinelibrary.wiley.com/wol1/doi/10.1111/j.1365-294X.2011.05074.x/abstract"
   -
     authors: "Lynch, M. 2009"
     title: "Estimation of allele frequencies from high-coverage genome-sequencing projects"

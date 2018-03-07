@@ -49,18 +49,19 @@ The first file we will fill is the `metadata.yaml` file describing the metadata 
 
 - `title`: title of the tutorial
 - `type: "tutorial"`
-- `enable`: `"true"` to make your tutorial accessible via the topic page or `"false"` otherwise
+- `enable`: `false` to hide your tutorial from the topic page
 - `name`: name of the tutorial (name of the subdirectory where the files related to the tutorial will be stored)
 - `zenodo_link`: link on Zenodo to the input data for the tutorial (not ideal but it can be empty)
-- `galaxy_tour`: name of the galaxy tour
-- `hands_on`(`"yes"` or `"no"`): tell if an hands on is available for this material
-- `slides` (`"yes"` or `"no"`): tell if slides are available for this material its title, its type, ...
+- `galaxy_tour`(`yes` or `no`): tell if at least an interactive tour is avaible for the tutorial (in the `tours` subdirectory)
+- `workflows` (`yes` or `no`): tell if a workflow is available for this material
+- `hands_on`(`yes` or `no`): tell if an hands on is available for this material
+- `slides` (`yes` or `no`): tell if slides are available for this material its title, its type, ...
 - `requirements`: list of requirements specific to this tutorial (in addition to the one of the topic), with:
     - `title`
     - `link`: relative for internal (inside training material) requirement or full for external requirement)
     - `type`: the type of link (`internal` or `external`)
 
-This information is used to automatically make the tutorial available on the online website: [{{site.url}} ]({{site.url}})
+This information is used to automatically make the tutorial available on the online website: [{{site.url}}{{ site.baseurl}} ]({{site.url}}{{ site.baseurl}})
 
 > ### {% icon hands_on %} Hands-on: Fill the basic metadata
 >

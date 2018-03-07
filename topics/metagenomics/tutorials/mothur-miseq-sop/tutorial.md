@@ -39,10 +39,9 @@ In this tutorial we use 16S rRNA data, but similar pipelines can be used for WGS
 >
 > The 16S rRNA gene has several properties that make it ideally suited for our purposes
 >
-> 1. Present in all living organisms
-> 2. Single copy (no recombination)
-> 3. Highly conserved + highly variable regions
-> 4. Huge reference databases
+> 1. Present in all prokaryotes
+> 2. Highly conserved + highly variable regions
+> 3. Huge reference databases
 >
 > ![16S Variable regions](../../images/16S_variableregions.jpg)
 >
@@ -212,7 +211,7 @@ Here the first column contains the read name, and the second column contains the
 ### Data Cleaning
 
 For more information on the topic of quality control, please see our training materials
-[here]({{site.url}}/topics/sequence-analysis/)
+[here]({{site.baseurl}}/topics/sequence-analysis/)
 
 Next we want to improve the quality of our data. But first, let's get a feel of our data
 
@@ -338,7 +337,7 @@ the number of duplicates of this sequence observed in each sample.
 ### Sequence Alignment
 
 For more information on the topic of alignment, please see our training materials
-[here]({{site.url}}/topics/sequence-analysis/)
+[here]({{site.baseurl}}/topics/sequence-analysis/)
 
 We are now ready to align our sequences to the reference. This step is an important
 step to perform to improve the clustering of your OTUs [[Schloss 2013]](https://doi.org/10.1038/ismej.2012.102)
@@ -659,7 +658,7 @@ We can now cluster the mock sequences into OTUs to see how many spurious OTUs we
 > In 16S metagenomics approaches, OTUs are clusters of similar sequence variants of the 16S rDNA marker gene
 > sequence. Each of these clusters is intended to represent a taxonomic unit of a bacteria species or genus
 > depending on the sequence similarity threshold. Typically, OTU cluster are defined by a 97% identity
-> threshold of the 16S gene sequence variants at genus level. 98% or 99% identity is suggested for species
+> threshold of the 16S gene sequence variants at species level. 98% or 99% identity is suggested for strain
 > separation.
 >
 > ![OTU graph](../../images/OTU_graph.png)
@@ -845,10 +844,10 @@ animal) followed by a D and a three digit number (number of days post weaning).
 >
 > > ### {% icon question %} Question
 > >
-> >  What would you exect the result of `count.groups` on this new shared file output to be? Check if you are correct.
+> >  What would you exect the result of `count.groups` on this new shared output collection to be? Check if you are correct.
 > > <details>
 > >   <summary> Click to view answer</summary>
-> >   all groups (samples) should now have 2440 sequences. Run count.groups again on the shared file output by the sub.sample
+> >   all groups (samples) should now have 2440 sequences. Run count.groups again on the shared output collection by the sub.sample
 > >   tool to confirm that this is indeed what happened.
 > >  </details>
 > {: .question}
@@ -978,7 +977,7 @@ repeated-measures ANOVA and find that there was no significant difference based 
 
 Beta diversity is a measure of the similarity of the membership and structure found between *different* samples.
 The default calculator in the following section is *thetaYC*, which is the [Yue & Clayton theta similarity
-coefficient](http://www.tandfonline.com/doi/abs/10.1080/STA-200066418)
+coefficient](https://doi.org/10.1080/STA-200066418)
 
 > ### {% icon hands_on %} Hands-on: Beta diversity
 >
@@ -1352,7 +1351,7 @@ F3D9     9
 > community types
 >
 > <!-- TODO: add this tool to mothur suite -->
-> - **Get.communitype** {% icon tool %} with the following parameters
+> - **Get.communitytype** {% icon tool %} with the following parameters
 >   - "shared" to Subsample.shared file
 >
 {: .hands_on}
@@ -1404,8 +1403,7 @@ the names of these organisms.
 
 In addition to the use of `corr.axes` and `get.communitytype` we have several tools to differentiate between
 different groupings of samples. The first we'll demonstrate is `metastats`, which is a non-parametric T-test
-that determines whether there are any OTUs that are differentially represented between the samples from men
-and women in this study.
+that determines whether there are any OTUs that are differentially represented between the samples from early and late in this study.
 
 > ### {% icon hands_on %} Hands-on: T-test
 >
