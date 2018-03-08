@@ -7,10 +7,9 @@ tutorial_name: mapping-by-sequencing
 # Introduction
 {:.no_toc}
 
-Mapping-by-sequencing is a technique in basic genetic research that combines
-classical genetic mapping concepts with the power of next-generation-sequencing
-to enable the mapping and molecular identification of phenotype-causing
-mutations from a single experiment.
+In order to map and identify phenotype-causing mutations efficiently from a
+single experiment, modern genetic research aims at combining classical genetic
+mapping concepts with the power of next-generation-sequencing.
 
 After having obtained, *e.g.*, from a forward genetic screen, a mutant strain
 of an organism with a particular phenotype, the classical approach towards
@@ -22,13 +21,16 @@ identification of the underlying causative mutation would be to
 2. sequence candidate DNA stretches in this region to identify the precise
    nature of the mutation.
 
-Modern mapping-by-sequencing approaches, in contrast, use just one set of
-genome-wide sequencing data obtained from mapping-cross progeny and suitable
-parent strains to simultaneously:
+Modern approaches, in contrast, use just one set of genome-wide sequencing data
+obtained from mapping-cross progeny and suitable parent strains to
+simultaneously:
 
 * discover available marker mutations for linkage analysis,
 * map the causative mutation using these markers, and
-* identify candidate mutations
+* identify candidate mutations.
+
+Since it uses sequencing data already at the mapping step, this process is
+called **mapping-by-sequencing**.
 
 Since genome-wide sequencing will often reveal a few hundreds to many thousands
 of marker variants that should be considered together in the linkage analysis,
@@ -39,7 +41,7 @@ approaches.
 
 > ### {% icon tip %} Further reading
 > The MiModD documentation has its own chapter on supported
-> [Mapping-by-sequencing schemes](http://mimodd.readthedocs.io/en/latest/nacreousmap.html)
+> [mapping-by-sequencing schemes](http://mimodd.readthedocs.io/en/latest/nacreousmap.html)
 > not covered here.
 {: .tip}
 
