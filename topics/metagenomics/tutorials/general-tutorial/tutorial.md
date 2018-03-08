@@ -393,6 +393,7 @@ The next step is then to use this information to know the abundance of the diffe
 >   - "fasta" to the fasta output from `Pre.cluster`
 >   - "taxonomy" to the taxonomy output from `Classify.seqs`
 >   - "count" to the count table output from `Pre.cluster`
+>   - "Clustering method" to `Average Neighbour`
 >   - "cutoff" to `0.15`
 >
 >     Next we want to know how many sequences are in each OTU from each group and we can do this using the `Make.shared` command. Here we tell mothur that we're really only interested in the 0.03 cutoff level:

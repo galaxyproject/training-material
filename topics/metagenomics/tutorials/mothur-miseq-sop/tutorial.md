@@ -681,6 +681,7 @@ We can now cluster the mock sequences into OTUs to see how many spurious OTUs we
 > - **Cluster** {% icon tool %} with the following parameters
 >   - "column" to the dist output from Dist.seqs
 >   - "count" to the count table from Get.groups
+>   - "Clustering method" to `Average Neighbour`
 >
 > Now we make a *shared* file that summarizes all our data into one handy table
 >
@@ -774,6 +775,7 @@ of *Order*. This is the approach that we  generally use in the Schloss lab.
 >   - "taxonomy" to the taxonomy output from Remove.groups
 >   - "taxlevel" to `4`
 >   - "count" to the count table output from Remove.groups
+>   - "Clustering method" to `Average Neighbour`
 >   - "cutoff" to `0.15`
 >
 > Next we want to know how many sequences are in each OTU from each group and we can do this using the
