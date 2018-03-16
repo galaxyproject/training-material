@@ -173,7 +173,7 @@ In our case the distribution describes the counts per bin of a genomic distance.
 > ### {% icon hands_on %} Hands-on: Matrix correction
 >
 > 1. **hicCorrectMatrix** {% icon tool %}: Run hicCorrectMatrix on the original matrix `10 kb contact matrix` adjusting the parameters:
->    - "Range restriction (in bp)" to `Correct matrix plot`
+>    - "Range restriction (in bp)" to `Correct matrix`
 >    - "Normalize each chromosome separately" to `True`
 >    - "Remove bins of low coverage" to `-1.6`
 >    - "Remove bins of large coverage" to `1.8`
