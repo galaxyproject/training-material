@@ -23,13 +23,14 @@ matrix:
   include:
     - env: CHECK=yamllint
       if: branch != gh-pages
-    - env: CHECK=htmlproofer
-      if: branch = gh-pages
     - env: CHECK=slides
       if: branch != gh-pages
     - env: CHECK=site-build
       if: branch != gh-pages
-
+    - env: CHECK=htmlproofer
+  allow_failures:
+    env: CHECK=htmlproofer
+  
 install:
   - sudo apt-get update
   - sudo update-ca-certificates
