@@ -189,7 +189,7 @@
   <p>The <code class="highlighter-rouge">PDB</code>-file format contains atomic coordinates of biomolecules derived through a range of experimental and computational methods. Most commonly the file contains a spatial cyrstallographic snapshot of a protein. There are 100s of thousands of protein structures publicly available at the Protein Databank (https://www.rcsb.org). Proteins are usually labeled by a four-letter code.
 Here is an example of a <code class="highlighter-rouge">PDB</code>-file for a hydrolase bond to its inhibitor (PDB: <a href="https://www.rcsb.org/pdb/explore/explore.do?structureId=1acb">1ACB</a>):</p>
 
-  <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HEADER    HYDROLASE/HYDROLASE INHIBITOR           08-NOV-91   1ACB              
+  <div class="language-bash highlighter-rouge"><pre class="highlight"><code>HEADER    HYDROLASE/HYDROLASE INHIBITOR           08-NOV-91   1ACB              
 TITLE     CRYSTAL AND MOLECULAR STRUCTURE OF THE BOVINE ALPHA-CHYMOTRYPSIN-EGLIN
 TITLE    2 C COMPLEX AT 2.0 ANGSTROMS RESOLUTION   
 ...
@@ -207,19 +207,20 @@ SEQRES   1 E  245  CYS GLY VAL PRO ALA ILE GLN PRO VAL LEU SER GLY LEU
 SEQRES   2 E  245  SER ARG ILE VAL ASN GLY GLU GLU ALA VAL PRO GLY SER          
 SEQRES   3 E  245  TRP PRO TRP GLN VAL SER LEU GLN ASP LYS THR GLY PHE          
 ...
-ATOM      1  N   CYS E   1       2.323 <span class="nt">-16</span>.405  18.812  1.00 43.48           N  
-ATOM      2  CA  CYS E   1       3.017 <span class="nt">-15</span>.136  18.786  1.00 35.11           C  
-ATOM      3  C   CYS E   1       4.134 <span class="nt">-15</span>.068  19.799  1.00 32.90           C  
-ATOM      4  O   CYS E   1       4.173 <span class="nt">-15</span>.810  20.772  1.00 41.38           O  
-ATOM      5  CB  CYS E   1       2.052 <span class="nt">-13</span>.969  19.139  1.00 31.14           C  
-ATOM      6  SG  CYS E   1       1.246 <span class="nt">-14</span>.085  20.788  1.00 34.72           S  
-ATOM      7  N   GLY E   2       4.993 <span class="nt">-14</span>.081  19.607  1.00 21.94           N  
+ATOM      1  N   CYS E   1       2.323 -16.405  18.812  1.00 43.48           N  
+ATOM      2  CA  CYS E   1       3.017 -15.136  18.786  1.00 35.11           C  
+ATOM      3  C   CYS E   1       4.134 -15.068  19.799  1.00 32.90           C  
+ATOM      4  O   CYS E   1       4.173 -15.810  20.772  1.00 41.38           O  
+ATOM      5  CB  CYS E   1       2.052 -13.969  19.139  1.00 31.14           C  
+ATOM      6  SG  CYS E   1       1.246 -14.085  20.788  1.00 34.72           S  
+ATOM      7  N   GLY E   2       4.993 -14.081  19.607  1.00 21.94           N  
 ...
 HETATM 2292  O   HOH E 406      12.343   1.842  12.901  0.86 18.70           O  
-HETATM 2293  O   HOH E 407      <span class="nt">-4</span>.767  17.237  10.630  1.00 59.78           O  
-HETATM 2294  O   HOH E 408      11.489  <span class="nt">-6</span>.278  18.740  0.96 20.00           O  
+HETATM 2293  O   HOH E 407      -4.767  17.237  10.630  1.00 59.78           O  
+HETATM 2294  O   HOH E 408      11.489  -6.278  18.740  0.96 20.00           O  
 ...
-</code></pre></div>  </div>
+</code></pre>
+  </div>
 
   <p>More resources on this file format:</p>
 
@@ -271,25 +272,30 @@ HETATM 2294  O   HOH E 408      11.489  <span class="nt">-6</span>.278  18.740  
 
   <ol>
     <li>Clone an instance of <em>Galaxy</em> in a path, further referred to as <code class="highlighter-rouge">$GALAXY_ROOT</code>:
-      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git clone https://github.com/galaxyproject/galaxy
-</code></pre></div>      </div>
+      <div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>git clone https://github.com/galaxyproject/galaxy
+</code></pre>
+      </div>
     </li>
     <li>Navigate to the <em>Charts</em> repository root:
-      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">cd</span> <span class="nv">$GALAXY_ROOT</span>/config/plugins/visualizations/charts/static/repository
-</code></pre></div>      </div>
+      <div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span><span class="nb">cd</span> <span class="nv">$GALAXY_ROOT</span>/config/plugins/visualizations/charts/static/repository
+</code></pre>
+      </div>
     </li>
     <li>Register your visualization by adding a new item to <code class="highlighter-rouge">registry.json</code>:
-      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="s2">"myviz"</span> : <span class="o">[</span> <span class="s2">"pdb"</span> <span class="o">]</span>
-</code></pre></div>      </div>
+      <div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="s2">"myviz"</span> : <span class="o">[</span> <span class="s2">"pdb"</span> <span class="o">]</span>
+</code></pre>
+      </div>
     </li>
     <li>Create a new directory:
-      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">mkdir</span> <span class="nt">-p</span> visualizations/myviz/pdb
-<span class="nv">$ </span><span class="nb">cd </span>visualizations/myviz/pdb
-</code></pre></div>      </div>
+      <div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>mkdir -p visualizations/myviz/pdb
+<span class="gp">$ </span><span class="nb">cd </span>visualizations/myviz/pdb
+</code></pre>
+      </div>
     </li>
     <li>Download the minified plugin code for <em>PV-Viewer</em> from <a href="https://github.com/biasmv/pv">Github</a>:
-      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl https://raw.githubusercontent.com/biasmv/pv/master/bio-pv.min.js <span class="nt">-o</span> plugin.js
-</code></pre></div>      </div>
+      <div class="language-bash highlighter-rouge"><pre class="highlight"><code>curl https://raw.githubusercontent.com/biasmv/pv/master/bio-pv.min.js -o plugin.js
+</code></pre>
+      </div>
     </li>
   </ol>
 </blockquote>
@@ -336,7 +342,7 @@ HETATM 2294  O   HOH E 408      11.489  <span class="nt">-6</span>.278  18.740  
     <li>
       <p>Create a file named <code class="highlighter-rouge">config.js</code> with the following content:</p>
 
-      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">define</span><span class="p">(</span> <span class="p">[],</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+      <div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="nx">define</span><span class="p">(</span> <span class="p">[],</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
     <span class="k">return</span> <span class="p">{</span>
         <span class="na">title</span>       <span class="p">:</span> <span class="s1">'A PDB viewer'</span><span class="p">,</span>
         <span class="na">library</span>     <span class="p">:</span> <span class="s1">'My Visualization'</span><span class="p">,</span>
@@ -345,7 +351,8 @@ HETATM 2294  O   HOH E 408      11.489  <span class="nt">-6</span>.278  18.740  
         <span class="na">keywords</span>    <span class="p">:</span> <span class="p">[]</span>
     <span class="p">}</span>
 <span class="p">});</span>
-</code></pre></div>      </div>
+</code></pre>
+      </div>
     </li>
     <li>
       <p>Place it into your plugins directory at <code class="highlighter-rouge">myviz/pdb</code>.</p>
@@ -372,14 +379,15 @@ HETATM 2294  O   HOH E 408      11.489  <span class="nt">-6</span>.278  18.740  
 
   <ol>
     <li>Create a file named <code class="highlighter-rouge">wrapper.js</code> which returns a <em>Backbone</em> model:
-      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">define</span><span class="p">(</span> <span class="p">[</span> <span class="s1">'visualizations/myviz/pdb/plugin'</span> <span class="p">],</span> <span class="kd">function</span><span class="p">(</span> <span class="nx">pv</span> <span class="p">)</span> <span class="p">{</span>
+      <div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="nx">define</span><span class="p">(</span> <span class="p">[</span> <span class="s1">'visualizations/myviz/pdb/plugin'</span> <span class="p">],</span> <span class="kd">function</span><span class="p">(</span> <span class="nx">pv</span> <span class="p">)</span> <span class="p">{</span>
     <span class="k">return</span> <span class="nx">Backbone</span><span class="p">.</span><span class="nx">Model</span><span class="p">.</span><span class="nx">extend</span><span class="p">({</span>
         <span class="na">initialize</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span> <span class="nx">options</span> <span class="p">)</span> <span class="p">{</span>
             <span class="c1">// Add code to configure and execute the plugin here.</span>
         <span class="p">}</span>
     <span class="p">});</span>
 <span class="p">});</span>
-</code></pre></div>      </div>
+</code></pre>
+      </div>
     </li>
     <li>Place it into your plugins directory at <code class="highlighter-rouge">myviz/pdb</code>.</li>
   </ol>
@@ -414,7 +422,7 @@ HETATM 2294  O   HOH E 408      11.489  <span class="nt">-6</span>.278  18.740  
     <li>
       <p>Modify <code class="highlighter-rouge">wrapper.js</code> by adding the following code into the <code class="highlighter-rouge">initialize</code> call:</p>
 
-      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">viewer</span> <span class="o">=</span> <span class="nx">pv</span><span class="p">.</span><span class="nx">Viewer</span><span class="p">(</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span> <span class="nx">options</span><span class="p">.</span><span class="nx">targets</span><span class="p">[</span> <span class="mi">0</span> <span class="p">]</span> <span class="p">),</span> <span class="p">{</span>
+      <div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">viewer</span> <span class="o">=</span> <span class="nx">pv</span><span class="p">.</span><span class="nx">Viewer</span><span class="p">(</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span> <span class="nx">options</span><span class="p">.</span><span class="nx">targets</span><span class="p">[</span> <span class="mi">0</span> <span class="p">]</span> <span class="p">),</span> <span class="p">{</span>
     <span class="na">width</span>       <span class="p">:</span> <span class="s1">'auto'</span><span class="p">,</span>
     <span class="na">height</span>      <span class="p">:</span> <span class="s1">'auto'</span><span class="p">,</span>
     <span class="na">antialias</span>   <span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
@@ -431,7 +439,8 @@ HETATM 2294  O   HOH E 408      11.489  <span class="nt">-6</span>.278  18.740  
         <span class="nx">options</span><span class="p">.</span><span class="nx">process</span><span class="p">.</span><span class="nx">resolve</span><span class="p">();</span>
     <span class="p">}</span>
 <span class="p">});</span>
-</code></pre></div>      </div>
+</code></pre>
+      </div>
     </li>
   </ol>
 </blockquote>
@@ -445,19 +454,22 @@ HETATM 2294  O   HOH E 408      11.489  <span class="nt">-6</span>.278  18.740  
 
   <ol>
     <li>Navigate to <em>Chart</em>’s root directory:
-      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">cd</span> <span class="nv">$GALAXY_ROOT</span>/config/plugins/visualizations/charts
-</code></pre></div>      </div>
+      <div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span><span class="nb">cd</span> <span class="nv">$GALAXY_ROOT</span>/config/plugins/visualizations/charts
+</code></pre>
+      </div>
     </li>
     <li>Install the necessary <code class="highlighter-rouge">node-modules</code>, unless already available:
-      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>npm <span class="nb">install</span>
-</code></pre></div>      </div>
+      <div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>npm install
+</code></pre>
+      </div>
     </li>
     <li>Run <code class="highlighter-rouge">webpack</code> to build the plugin:
-      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>webpack
+      <div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>webpack
 
 <span class="c"># If webpack is not available on your PATH, use the following command:</span>
-<span class="nv">$ </span>node_modules/webpack/bin/webpack.js
-</code></pre></div>      </div>
+<span class="gp">$ </span>node_modules/webpack/bin/webpack.js
+</code></pre>
+      </div>
     </li>
   </ol>
 
@@ -479,15 +491,17 @@ HETATM 2294  O   HOH E 408      11.489  <span class="nt">-6</span>.278  18.740  
     <li>
       <p>Copy the link to the raw <code class="highlighter-rouge">PDB</code>-file e.g.</p>
 
-      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://files.rcsb.org/view/1ACB.pdb
-</code></pre></div>      </div>
+      <div class="language-bash highlighter-rouge"><pre class="highlight"><code>https://files.rcsb.org/view/1ACB.pdb
+</code></pre>
+      </div>
     </li>
     <li>
       <p>Start your Galaxy instance</p>
 
-      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">cd</span> <span class="nv">$GALAXY_ROOT</span>
-<span class="nv">$ </span>run.sh
-</code></pre></div>      </div>
+      <div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span><span class="nb">cd</span> <span class="nv">$GALAXY_ROOT</span>
+<span class="gp">$ </span>run.sh
+</code></pre>
+      </div>
     </li>
     <li>
       <p>Open the uploader dialog, paste the above link and click on <em>Start</em>.</p>
@@ -517,14 +531,14 @@ More information on parameters can be found in the <a href="https://docs.galaxyp
 
   <ol>
     <li>Add the following block into the <code class="highlighter-rouge">config.js</code> file:
-      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">settings</span> <span class="p">:</span> <span class="p">{</span>
+      <div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="nx">settings</span> <span class="err">:</span> <span class="p">{</span>
     <span class="nl">mode</span> <span class="p">:</span> <span class="p">{</span>
         <span class="nl">label</span>   <span class="p">:</span> <span class="s1">'Render as:'</span><span class="p">,</span>
-        <span class="nx">help</span>    <span class="p">:</span> <span class="s1">'Select the rendering mode.'</span><span class="p">,</span>
-        <span class="nx">type</span>    <span class="p">:</span> <span class="s1">'select'</span><span class="p">,</span>
-        <span class="nx">display</span> <span class="p">:</span> <span class="s1">'radio'</span><span class="p">,</span>
-        <span class="nx">value</span>   <span class="p">:</span> <span class="s1">'cartoon'</span><span class="p">,</span>
-        <span class="nx">data</span>    <span class="p">:</span> <span class="p">[</span> <span class="p">{</span> <span class="na">label</span> <span class="p">:</span> <span class="s1">'Cartoon'</span><span class="p">,</span>        <span class="na">value</span> <span class="p">:</span> <span class="s1">'cartoon'</span> <span class="p">},</span>
+        <span class="nx">help</span>    <span class="err">:</span> <span class="s1">'Select the rendering mode.'</span><span class="p">,</span>
+        <span class="nx">type</span>    <span class="err">:</span> <span class="s1">'select'</span><span class="p">,</span>
+        <span class="nx">display</span> <span class="err">:</span> <span class="s1">'radio'</span><span class="p">,</span>
+        <span class="nx">value</span>   <span class="err">:</span> <span class="s1">'cartoon'</span><span class="p">,</span>
+        <span class="nx">data</span>    <span class="err">:</span> <span class="p">[</span> <span class="p">{</span> <span class="na">label</span> <span class="p">:</span> <span class="s1">'Cartoon'</span><span class="p">,</span>        <span class="na">value</span> <span class="p">:</span> <span class="s1">'cartoon'</span> <span class="p">},</span>
                     <span class="p">{</span> <span class="na">label</span> <span class="p">:</span> <span class="s1">'Lines'</span><span class="p">,</span>          <span class="na">value</span> <span class="p">:</span> <span class="s1">'lines'</span> <span class="p">},</span>
                     <span class="p">{</span> <span class="na">label</span> <span class="p">:</span> <span class="s1">'Points'</span><span class="p">,</span>         <span class="na">value</span> <span class="p">:</span> <span class="s1">'points'</span> <span class="p">},</span>
                     <span class="p">{</span> <span class="na">label</span> <span class="p">:</span> <span class="s1">'Spheres'</span><span class="p">,</span>        <span class="na">value</span> <span class="p">:</span> <span class="s1">'spheres'</span> <span class="p">},</span>
@@ -534,23 +548,27 @@ More information on parameters can be found in the <a href="https://docs.galaxyp
                     <span class="p">{</span> <span class="na">label</span> <span class="p">:</span> <span class="s1">'Tube'</span><span class="p">,</span>           <span class="na">value</span> <span class="p">:</span> <span class="s1">'tube'</span> <span class="p">}</span> <span class="p">]</span>
     <span class="p">}</span>
 <span class="p">}</span>
-</code></pre></div>      </div>
+</code></pre>
+      </div>
     </li>
     <li>Change the following line in <code class="highlighter-rouge">wrapper.js</code>:
-      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">viewer</span><span class="p">.</span><span class="nx">renderAs</span><span class="p">(</span> <span class="s1">'protein'</span><span class="p">,</span> <span class="nx">structure</span><span class="p">,</span> <span class="s1">'cartoon'</span><span class="p">,</span> <span class="p">{}</span> <span class="p">);</span>
-</code></pre></div>      </div>
+      <div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="nx">viewer</span><span class="p">.</span><span class="nx">renderAs</span><span class="p">(</span> <span class="s1">'protein'</span><span class="p">,</span> <span class="nx">structure</span><span class="p">,</span> <span class="s1">'cartoon'</span><span class="p">,</span> <span class="p">{}</span> <span class="p">);</span>
+</code></pre>
+      </div>
       <p>to</p>
 
-      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">settings</span> <span class="o">=</span> <span class="nx">options</span><span class="p">.</span><span class="nx">chart</span><span class="p">.</span><span class="nx">settings</span><span class="p">;</span>
-<span class="nx">viewer</span><span class="p">.</span><span class="nx">renderAs</span><span class="p">(</span> <span class="s1">'protein'</span><span class="p">,</span> <span class="nx">structure</span><span class="p">,</span> <span class="nx">settings</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span> <span class="s1">'mode'</span> <span class="p">),</span> <span class="nx">settings</span><span class="p">.</span><span class="nx">attributes</span> <span class="p">);</span>
-</code></pre></div>      </div>
+      <div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">settings</span> <span class="o">=</span> <span class="nx">options</span><span class="p">.</span><span class="nx">chart</span><span class="p">.</span><span class="nx">settings</span><span class="p">;</span>
+<span class="nx">viewer</span><span class="p">.</span><span class="nx">renderAs</span><span class="p">(</span> <span class="s1">'protein'</span><span class="p">,</span> <span class="nx">structure</span><span class="p">,</span> <span class="nx">settings</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span> <span class="s1">'mode'</span> <span class="p">),</span> <span class="nx">settings</span><span class="p">.</span><span class="nx">attributes</span> <span class="p">);</span>
+</code></pre>
+      </div>
     </li>
     <li>
       <p>Rebuild the plugin</p>
 
-      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">rm </span>static/repository/build/myviz_pdb.js
-<span class="nv">$ </span>webpack
-</code></pre></div>      </div>
+      <div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>rm static/repository/build/myviz_pdb.js
+<span class="gp">$ </span>webpack
+</code></pre>
+      </div>
     </li>
     <li>
       <p>Refresh your browser.</p>
@@ -569,38 +587,40 @@ More information on parameters can be found in the <a href="https://docs.galaxyp
 
   <ol>
     <li>Add the following block into the <code class="highlighter-rouge">settings</code> of your <code class="highlighter-rouge">config.js</code> file:
-      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">pointSize</span><span class="p">:</span> <span class="p">{</span>
+      <div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="nx">pointSize</span><span class="err">:</span> <span class="p">{</span>
     <span class="nl">label</span> <span class="p">:</span> <span class="s1">'Point size'</span><span class="p">,</span>
-    <span class="nx">help</span>  <span class="p">:</span> <span class="s1">'Specify the point size.'</span><span class="p">,</span>
-    <span class="nx">type</span>  <span class="p">:</span> <span class="s1">'float'</span><span class="p">,</span>
-    <span class="nx">min</span>   <span class="p">:</span> <span class="mf">0.1</span><span class="p">,</span>
-    <span class="nx">max</span>   <span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
-    <span class="nx">value</span> <span class="p">:</span> <span class="mi">1</span>
+    <span class="nx">help</span>  <span class="err">:</span> <span class="s1">'Specify the point size.'</span><span class="p">,</span>
+    <span class="nx">type</span>  <span class="err">:</span> <span class="s1">'float'</span><span class="p">,</span>
+    <span class="nx">min</span>   <span class="err">:</span> <span class="mf">0.1</span><span class="p">,</span>
+    <span class="nx">max</span>   <span class="err">:</span> <span class="mi">10</span><span class="p">,</span>
+    <span class="nx">value</span> <span class="err">:</span> <span class="mi">1</span>
 <span class="p">},</span>
-<span class="nx">lineWidth</span> <span class="p">:</span> <span class="p">{</span>
+<span class="nx">lineWidth</span> <span class="err">:</span> <span class="p">{</span>
     <span class="nl">label</span> <span class="p">:</span> <span class="s1">'Line width'</span><span class="p">,</span>
-    <span class="nx">help</span>  <span class="p">:</span> <span class="s1">'Specify the line width.'</span><span class="p">,</span>
-    <span class="nx">type</span>  <span class="p">:</span> <span class="s1">'float'</span><span class="p">,</span>
-    <span class="nx">min</span>   <span class="p">:</span> <span class="mf">0.1</span><span class="p">,</span>
-    <span class="nx">max</span>   <span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
-    <span class="nx">value</span> <span class="p">:</span> <span class="mi">4</span>
+    <span class="nx">help</span>  <span class="err">:</span> <span class="s1">'Specify the line width.'</span><span class="p">,</span>
+    <span class="nx">type</span>  <span class="err">:</span> <span class="s1">'float'</span><span class="p">,</span>
+    <span class="nx">min</span>   <span class="err">:</span> <span class="mf">0.1</span><span class="p">,</span>
+    <span class="nx">max</span>   <span class="err">:</span> <span class="mi">10</span><span class="p">,</span>
+    <span class="nx">value</span> <span class="err">:</span> <span class="mi">4</span>
 <span class="p">},</span>
-<span class="nx">radius</span> <span class="p">:</span> <span class="p">{</span>
+<span class="nx">radius</span> <span class="err">:</span> <span class="p">{</span>
     <span class="nl">label</span> <span class="p">:</span> <span class="s1">'Radius'</span><span class="p">,</span>
-    <span class="nx">help</span>  <span class="p">:</span> <span class="s1">'Radius of tube profile. Also influences the profile thickness for helix and strand profiles.'</span><span class="p">,</span>
-    <span class="nx">type</span>  <span class="p">:</span> <span class="s1">'float'</span><span class="p">,</span>
-    <span class="nx">min</span>   <span class="p">:</span> <span class="mf">0.1</span><span class="p">,</span>
-    <span class="nx">max</span>   <span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
-    <span class="nx">value</span> <span class="p">:</span> <span class="mf">0.3</span>
+    <span class="nx">help</span>  <span class="err">:</span> <span class="s1">'Radius of tube profile. Also influences the profile thickness for helix and strand profiles.'</span><span class="p">,</span>
+    <span class="nx">type</span>  <span class="err">:</span> <span class="s1">'float'</span><span class="p">,</span>
+    <span class="nx">min</span>   <span class="err">:</span> <span class="mf">0.1</span><span class="p">,</span>
+    <span class="nx">max</span>   <span class="err">:</span> <span class="mi">3</span><span class="p">,</span>
+    <span class="nx">value</span> <span class="err">:</span> <span class="mf">0.3</span>
 <span class="p">}</span>
-</code></pre></div>      </div>
+</code></pre>
+      </div>
     </li>
     <li>
       <p>Rebuild the plugin</p>
 
-      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">rm </span>static/repository/build/myviz_pdb.js
-<span class="nv">$ </span>webpack
-</code></pre></div>      </div>
+      <div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>rm static/repository/build/myviz_pdb.js
+<span class="gp">$ </span>webpack
+</code></pre>
+      </div>
     </li>
     <li>
       <p>Refresh your browser.</p>

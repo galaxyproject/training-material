@@ -89,7 +89,6 @@ install: ## install dependencies
 	npm install decktape
 	gem install bundler
 	bundle install
-	bundle update
 .PHONY: install
 
 pdf: detached-serve ## generate the PDF of the tutorials and slides

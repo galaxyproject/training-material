@@ -238,14 +238,16 @@
 
 <p>Consider a set of sequencing reads derived from a diploid individual:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>REFERENCE: atcatgacggcaGtagcatat
+<div class="highlighter-rouge">
+<pre class="highlight"><code>REFERENCE: atcatgacggcaGtagcatat
 --------------------------------
 READ1:     atcatgacggcaGtagcatat
 READ2:         tgacggcaGtagcatat
 READ3:     atcatgacggcaAtagca
 READ4:            cggcaGtagcatat
 READ5:     atcatgacggcaGtagc
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <p>The capitalized position contains a G-&gt;A <a href="https://en.wikipedia.org/wiki/Transition_(genetics)">transition</a>. So, in principle this can be a heterozygous site with two alleles <strong>G</strong> and <strong>A</strong>. A commonly used naïve procedure would define a site as <em>heterozygous</em> if there is a non-reference allele with frequency between 20% and 80%. In this case <strong>A</strong> is present in 1/5 or 20% of the cases, so we can say that this is a heterozygous site. Yet it is only represented by a single read and is hardly reliable. Here are some of the possibilities that would explain this <em>variant</em>. It can be:</p>
 
@@ -352,7 +354,7 @@ READ5:     atcatgacggcaGtagc
   </ol>
 </blockquote>
 
-<p><img class="emoji" title=":exclamation:" alt=":exclamation:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2757.png" height="20" width="20"> This leaves us with the need to estimate two things:</p>
+<p><img class="emoji" title=":exclamation:" alt=":exclamation:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2757.png" height="20" width="20" align="absmiddle"> This leaves us with the need to estimate two things:</p>
 
 <ol>
   <li>
@@ -584,11 +586,13 @@ READ5:     atcatgacggcaGtagc
 
 <p>The first step is to convert a VCF file we would like to analyze into a GEMINI database. For this we will use <strong>GEMINI Load</strong> tool from <strong>Gemini</strong> section. GEMINI takes as input a VCF file and a <a href="https://www.cog-genomics.org/plink2/formats#ped">PED</a> file describing the relationship between samples. In the case of our dataset the PED file looks like this (second imported file):</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#family_id sample_id            paternal_id          maternal_id         sex phenotype ethnicity
+<div class="highlighter-rouge">
+<pre class="highlight"><code>#family_id sample_id            paternal_id          maternal_id         sex phenotype ethnicity
 family1    HG004_NA24143_mother -9                   -9                   2  1         CEU
 family1	   HG003_NA24149_father -9                   -9                   1  1         CEU
 family1	   HG002_NA24385_son	HG003_NA24149_father HG004_NA24143_mother 1  2         CEU
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <blockquote class="hands_on">
   <h3 id="-hands-on-loading-data-">
@@ -625,8 +629,9 @@ family1	   HG002_NA24385_son	HG003_NA24149_father HG004_NA24143_mother 1  2     
   <p>Type <code class="highlighter-rouge">SELECT count(*) FROM variants WHERE in_dbsnp == 0</code> into <strong>The query to be issued to the database</strong></p>
 
   <div class="highlighter-rouge">
-<div class="highlight"><pre class="highlight"><code>![GEMINI query](../../images/gemini_query1.png)
-</code></pre></div>  </div>
+<pre class="highlight"><code>![GEMINI query](../../images/gemini_query1.png)
+</code></pre>
+  </div>
 
   <p>As we can see from <a href="https://usegalaxy.org/datasets/bbd44e69cb8906b51bb37b9032761321/display/?preview=True">output</a> there are 21 variants that are not annotated in dbSNP</p>
 
@@ -721,27 +726,27 @@ will generate<a href="https://usegalaxy.org/datasets/bbd44e69cb8906b543c67f80be2
   <tbody>
     <tr>
       <td style="text-align: left">Introduction</td>
-      <td style="text-align: center"><a href="https://s3.amazonaws.com/gemini-tutorials/Intro-To-Gemini.pdf"> <img class="emoji" title=":notebook:" alt=":notebook:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f4d3.png" height="20" width="20"> </a></td>
-      <td style="text-align: center"><a href="https://usegalaxy.org/library/list#folders/F0283ca691a41c352"><img class="emoji" title=":open_file_folder:" alt=":open_file_folder:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f4c2.png" height="20" width="20"></a></td>
-      <td style="text-align: center"><a href="https://usegalaxy.org/u/aun1/h/gemini-introduction"><img class="emoji" title=":arrow_forward:" alt=":arrow_forward:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/25b6.png" height="20" width="20"></a></td>
+      <td style="text-align: center"><a href="https://s3.amazonaws.com/gemini-tutorials/Intro-To-Gemini.pdf"> <img class="emoji" title=":notebook:" alt=":notebook:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f4d3.png" height="20" width="20" align="absmiddle"> </a></td>
+      <td style="text-align: center"><a href="https://usegalaxy.org/library/list#folders/F0283ca691a41c352"><img class="emoji" title=":open_file_folder:" alt=":open_file_folder:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f4c2.png" height="20" width="20" align="absmiddle"></a></td>
+      <td style="text-align: center"><a href="https://usegalaxy.org/u/aun1/h/gemini-introduction"><img class="emoji" title=":arrow_forward:" alt=":arrow_forward:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/25b6.png" height="20" width="20" align="absmiddle"></a></td>
     </tr>
     <tr>
       <td style="text-align: left">Identifying <em>de novo</em> mutations underlying Mendelian disease</td>
-      <td style="text-align: center"><a href="https://s3.amazonaws.com/gemini-tutorials/Gemini-DeNovo-Tutorial.pdf"> <img class="emoji" title=":notebook:" alt=":notebook:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f4d3.png" height="20" width="20"> </a></td>
-      <td style="text-align: center"><a href="https://usegalaxy.org/library/list#folders/F775008f45cbbf010"><img class="emoji" title=":open_file_folder:" alt=":open_file_folder:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f4c2.png" height="20" width="20"></a></td>
-      <td style="text-align: center"><a href="https://usegalaxy.org/u/aun1/h/gemini-de-novo-mutations"><img class="emoji" title=":arrow_forward:" alt=":arrow_forward:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/25b6.png" height="20" width="20"></a></td>
+      <td style="text-align: center"><a href="https://s3.amazonaws.com/gemini-tutorials/Gemini-DeNovo-Tutorial.pdf"> <img class="emoji" title=":notebook:" alt=":notebook:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f4d3.png" height="20" width="20" align="absmiddle"> </a></td>
+      <td style="text-align: center"><a href="https://usegalaxy.org/library/list#folders/F775008f45cbbf010"><img class="emoji" title=":open_file_folder:" alt=":open_file_folder:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f4c2.png" height="20" width="20" align="absmiddle"></a></td>
+      <td style="text-align: center"><a href="https://usegalaxy.org/u/aun1/h/gemini-de-novo-mutations"><img class="emoji" title=":arrow_forward:" alt=":arrow_forward:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/25b6.png" height="20" width="20" align="absmiddle"></a></td>
     </tr>
     <tr>
       <td style="text-align: left">Identifying autosomal recessive variants underlying Mendelian disease</td>
-      <td style="text-align: center"><a href="https://s3.amazonaws.com/gemini-tutorials/Gemini-Recessive-Tutorial.pdf"> <img class="emoji" title=":notebook:" alt=":notebook:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f4d3.png" height="20" width="20"> </a></td>
-      <td style="text-align: center"><a href="https://usegalaxy.org/library/list#folders/F35b262f5ac8aa63a"><img class="emoji" title=":open_file_folder:" alt=":open_file_folder:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f4c2.png" height="20" width="20"></a></td>
-      <td style="text-align: center"><a href="https://usegalaxy.org/u/aun1/h/gemini-autosomal-recessive"><img class="emoji" title=":arrow_forward:" alt=":arrow_forward:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/25b6.png" height="20" width="20"></a></td>
+      <td style="text-align: center"><a href="https://s3.amazonaws.com/gemini-tutorials/Gemini-Recessive-Tutorial.pdf"> <img class="emoji" title=":notebook:" alt=":notebook:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f4d3.png" height="20" width="20" align="absmiddle"> </a></td>
+      <td style="text-align: center"><a href="https://usegalaxy.org/library/list#folders/F35b262f5ac8aa63a"><img class="emoji" title=":open_file_folder:" alt=":open_file_folder:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f4c2.png" height="20" width="20" align="absmiddle"></a></td>
+      <td style="text-align: center"><a href="https://usegalaxy.org/u/aun1/h/gemini-autosomal-recessive"><img class="emoji" title=":arrow_forward:" alt=":arrow_forward:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/25b6.png" height="20" width="20" align="absmiddle"></a></td>
     </tr>
     <tr>
       <td style="text-align: left">Identifying autosomal dominant variants underlying Mendelian disease</td>
-      <td style="text-align: center"><a href="https://s3.amazonaws.com/gemini-tutorials/Gemini-Dominant-Tutorial.pdf"> <img class="emoji" title=":notebook:" alt=":notebook:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f4d3.png" height="20" width="20"> </a></td>
-      <td style="text-align: center"><a href="https://usegalaxy.org/library/list#folders/F1c4722ad56892a31"><img class="emoji" title=":open_file_folder:" alt=":open_file_folder:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f4c2.png" height="20" width="20"></a></td>
-      <td style="text-align: center"><a href="https://usegalaxy.org/u/aun1/h/gemini-autosomal-dominant"><img class="emoji" title=":arrow_forward:" alt=":arrow_forward:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/25b6.png" height="20" width="20"></a></td>
+      <td style="text-align: center"><a href="https://s3.amazonaws.com/gemini-tutorials/Gemini-Dominant-Tutorial.pdf"> <img class="emoji" title=":notebook:" alt=":notebook:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f4d3.png" height="20" width="20" align="absmiddle"> </a></td>
+      <td style="text-align: center"><a href="https://usegalaxy.org/library/list#folders/F1c4722ad56892a31"><img class="emoji" title=":open_file_folder:" alt=":open_file_folder:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f4c2.png" height="20" width="20" align="absmiddle"></a></td>
+      <td style="text-align: center"><a href="https://usegalaxy.org/u/aun1/h/gemini-autosomal-dominant"><img class="emoji" title=":arrow_forward:" alt=":arrow_forward:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/25b6.png" height="20" width="20" align="absmiddle"></a></td>
     </tr>
   </tbody>
 </table>
@@ -749,8 +754,8 @@ will generate<a href="https://usegalaxy.org/datasets/bbd44e69cb8906b543c67f80be2
 <h2 id="how-to-use-these-tutorials">How to use these tutorials?</h2>
 
 <ul>
-  <li>Right click on the <img class="emoji" title=":notebook:" alt=":notebook:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f4d3.png" height="20" width="20"> symbol and open tutorial in a new browser tab;</li>
-  <li>Right click on <img class="emoji" title=":arrow_forward:" alt=":arrow_forward:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/25b6.png" height="20" width="20"> symbol and open Galaxy history in another new browser tab;</li>
+  <li>Right click on the <img class="emoji" title=":notebook:" alt=":notebook:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f4d3.png" height="20" width="20" align="absmiddle"> symbol and open tutorial in a new browser tab;</li>
+  <li>Right click on <img class="emoji" title=":arrow_forward:" alt=":arrow_forward:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/25b6.png" height="20" width="20" align="absmiddle"> symbol and open Galaxy history in another new browser tab;</li>
   <li>
     <p>When Galaxy history interface opens you will need to click <strong>Import history</strong> link highlighted with a red border in the following figure:</p>
 

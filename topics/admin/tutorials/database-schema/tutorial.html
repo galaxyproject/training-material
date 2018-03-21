@@ -217,9 +217,11 @@ Galaxy is PostgreSQL (https://www.postgresql.org). PostgreSQL offers a full set 
 
 <p>Entity-relationship diagrams are a way to understand tables and the relationships between them inside a relational database.  SchemaSpy (http://schemaspy.sourceforge.net/) is a free (and remarkable tool) for generating ER diagrams.  We’ve used it generate a description of the database backing the server in this container.  See</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;!-- TODO: following link is broken, update with new link once fixed on Hub --&gt;
+<div class="highlighter-rouge">
+<pre class="highlight"><code>&lt;!-- TODO: following link is broken, update with new link once fixed on Hub --&gt;
 https://galaxyproject.org/schema/SchemaSpy/index.html
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <p>The “Tables” tab is a good place to start learning the structure of the database.  Each table represents a different type of thing, and often that thing is itself a relationship. For example, each record in the dataset table has information about a specific dataset, while records in the history_dataset_association table have information about what histories that dataset is in.</p>
 
@@ -265,24 +267,27 @@ PostgreSQL supports comments to table definitions, but there are none shown in t
   </ol>
 
   <div class="language-sh highlighter-rouge">
-<div class="highlight"><pre class="highlight"><code>      docker run <span class="nt">-i</span> <span class="nt">-t</span> <span class="nt">-p</span> 8080:80 bgruening/galaxy-stable /bin/bash
-</code></pre></div>  </div>
+<pre class="highlight"><code>      docker run -i -t -p 8080:80 bgruening/galaxy-stable /bin/bash
+</code></pre>
+  </div>
 
   <ol>
     <li>Start Galaxy and its PostgreSQL server</li>
   </ol>
 
   <div class="language-sh highlighter-rouge">
-<div class="highlight"><pre class="highlight"><code>      startup <span class="o">&gt;</span> log 2&gt;&amp;1 &amp;
-</code></pre></div>  </div>
+<pre class="highlight"><code>      startup &gt; log 2&gt;&amp;1 &amp;
+</code></pre>
+  </div>
 
   <ol>
     <li>Follow the startup process</li>
   </ol>
 
   <div class="language-sh highlighter-rouge">
-<div class="highlight"><pre class="highlight"><code>      <span class="nb">tail</span> <span class="nt">-f</span> log
-</code></pre></div>  </div>
+<pre class="highlight"><code>      tail -f log
+</code></pre>
+  </div>
 </blockquote>
 
 <h2 id="important-tables">Important tables</h2>
@@ -297,17 +302,19 @@ PostgreSQL supports comments to table definitions, but there are none shown in t
   </ol>
 
   <div class="language-sh highlighter-rouge">
-<div class="highlight"><pre class="highlight"><code>       su galaxy
-       psql <span class="nt">-d</span> galaxy <span class="nt">-U</span> galaxy
-</code></pre></div>  </div>
+<pre class="highlight"><code>       su galaxy
+       psql -d galaxy -U galaxy
+</code></pre>
+  </div>
 
   <ol>
     <li>List all tables</li>
   </ol>
 
   <div class="language-sql highlighter-rouge">
-<div class="highlight"><pre class="highlight"><code>      <span class="err">\</span><span class="n">dt</span>
-</code></pre></div>  </div>
+<pre class="highlight"><code>      <span class="err">\</span><span class="n">dt</span>
+</code></pre>
+  </div>
 </blockquote>
 
 <p>Enter <code class="highlighter-rouge">q</code> to exit the view results page, and space to see the next results page.</p>
@@ -319,8 +326,9 @@ PostgreSQL supports comments to table definitions, but there are none shown in t
 <i class="fa fa-pencil" aria-hidden="true"></i> Hands-on</h3>
 
   <div class="language-sql highlighter-rouge">
-<div class="highlight"><pre class="highlight"><code>       <span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">galaxy_user</span><span class="p">;</span>
-</code></pre></div>  </div>
+<pre class="highlight"><code>       <span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">galaxy_user</span><span class="p">;</span>
+</code></pre>
+  </div>
 </blockquote>
 
 <p>As described in Björn’s introduction, an Admin user is already pre-set (email: ‘admin@galaxy.org’, password: ‘admin’). Now let’s add (i.e. register) a new user via the Galaxy website. And check the database:</p>
@@ -330,8 +338,9 @@ PostgreSQL supports comments to table definitions, but there are none shown in t
 <i class="fa fa-pencil" aria-hidden="true"></i> Hands-on</h3>
 
   <div class="language-sql highlighter-rouge">
-<div class="highlight"><pre class="highlight"><code>       <span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">galaxy_user</span><span class="p">;</span>
-</code></pre></div>  </div>
+<pre class="highlight"><code>       <span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">galaxy_user</span><span class="p">;</span>
+</code></pre>
+  </div>
 </blockquote>
 
 <h3 id="table-job">Table “job”</h3>
@@ -341,8 +350,9 @@ PostgreSQL supports comments to table definitions, but there are none shown in t
 <i class="fa fa-pencil" aria-hidden="true"></i> Hands-on</h3>
 
   <div class="language-sql highlighter-rouge">
-<div class="highlight"><pre class="highlight"><code>       <span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">job</span><span class="p">;</span>
-</code></pre></div>  </div>
+<pre class="highlight"><code>       <span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">job</span><span class="p">;</span>
+</code></pre>
+  </div>
 </blockquote>
 
 <p>Run a few jobs on the galaxy website (e.g <em>upload file</em> a simple table and <em>add column</em> with ‘Iterate’ no and yes) and check the database again:</p>
@@ -352,8 +362,9 @@ PostgreSQL supports comments to table definitions, but there are none shown in t
 <i class="fa fa-pencil" aria-hidden="true"></i> Hands-on</h3>
 
   <div class="language-sql highlighter-rouge">
-<div class="highlight"><pre class="highlight"><code>       <span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">job</span> <span class="err">\</span><span class="n">x</span><span class="err">\</span><span class="k">g</span><span class="err">\</span><span class="n">x</span>
-</code></pre></div>  </div>
+<pre class="highlight"><code>       <span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">job</span> <span class="err">\</span><span class="n">x</span><span class="err">\</span><span class="k">g</span><span class="err">\</span><span class="n">x</span>
+</code></pre>
+  </div>
 </blockquote>
 
 <h3 id="table-job_parameter">Table “job_parameter”</h3>
@@ -363,8 +374,9 @@ PostgreSQL supports comments to table definitions, but there are none shown in t
 <i class="fa fa-pencil" aria-hidden="true"></i> Hands-on</h3>
 
   <div class="language-sql highlighter-rouge">
-<div class="highlight"><pre class="highlight"><code>      <span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">job_parameter</span><span class="p">;</span>
-</code></pre></div>  </div>
+<pre class="highlight"><code>      <span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">job_parameter</span><span class="p">;</span>
+</code></pre>
+  </div>
 </blockquote>
 
 <h3 id="table-history">Table “history”</h3>
@@ -374,8 +386,9 @@ PostgreSQL supports comments to table definitions, but there are none shown in t
 <i class="fa fa-pencil" aria-hidden="true"></i> Hands-on</h3>
 
   <div class="language-sql highlighter-rouge">
-<div class="highlight"><pre class="highlight"><code>      <span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">history</span><span class="p">;</span>
-</code></pre></div>  </div>
+<pre class="highlight"><code>      <span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">history</span><span class="p">;</span>
+</code></pre>
+  </div>
 </blockquote>
 
 <p>Give your current history a name and check the database again.</p>
@@ -387,8 +400,9 @@ PostgreSQL supports comments to table definitions, but there are none shown in t
 <i class="fa fa-pencil" aria-hidden="true"></i> Hands-on</h3>
 
   <div class="language-sql highlighter-rouge">
-<div class="highlight"><pre class="highlight"><code>      <span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">dataset</span><span class="p">;</span>
-</code></pre></div>  </div>
+<pre class="highlight"><code>      <span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">dataset</span><span class="p">;</span>
+</code></pre>
+  </div>
 </blockquote>
 
 <h3 id="table-history_dataset_association">Table “history_dataset_association”</h3>
@@ -398,8 +412,9 @@ PostgreSQL supports comments to table definitions, but there are none shown in t
 <i class="fa fa-pencil" aria-hidden="true"></i> Hands-on</h3>
 
   <div class="language-sql highlighter-rouge">
-<div class="highlight"><pre class="highlight"><code>      <span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">history_dataset_association</span><span class="p">;</span>
-</code></pre></div>  </div>
+<pre class="highlight"><code>      <span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">history_dataset_association</span><span class="p">;</span>
+</code></pre>
+  </div>
 </blockquote>
 
 <h2 id="more-hands-on-examples-not-covered-by-the-reports-app">More (hands-on) Examples, not covered by the reports app</h2>
@@ -416,38 +431,43 @@ PostgreSQL supports comments to table definitions, but there are none shown in t
 
 <blockquote>
   <div class="language-sql highlighter-rouge">
-<div class="highlight"><pre class="highlight"><code>      <span class="k">select</span> <span class="n">j</span><span class="p">.</span><span class="n">id</span><span class="p">,</span> <span class="n">j</span><span class="p">.</span><span class="n">create_time</span> <span class="k">from</span> <span class="n">job</span> <span class="n">j</span> <span class="k">limit</span> <span class="mi">5</span><span class="p">;</span>
-</code></pre></div>  </div>
+<pre class="highlight"><code>      <span class="k">select</span> <span class="n">j</span><span class="p">.</span><span class="n">id</span><span class="p">,</span> <span class="n">j</span><span class="p">.</span><span class="n">create_time</span> <span class="k">from</span> <span class="n">job</span> <span class="n">j</span> <span class="k">limit</span> <span class="mi">5</span><span class="p">;</span>
+</code></pre>
+  </div>
 
   <div class="language-sql highlighter-rouge">
-<div class="highlight"><pre class="highlight"><code>       <span class="k">select</span> <span class="n">j</span><span class="p">.</span><span class="n">id</span><span class="p">,</span> <span class="n">j</span><span class="p">.</span><span class="n">create_time</span> <span class="k">from</span> <span class="n">job</span> <span class="n">j</span>
+<pre class="highlight"><code>       <span class="k">select</span> <span class="n">j</span><span class="p">.</span><span class="n">id</span><span class="p">,</span> <span class="n">j</span><span class="p">.</span><span class="n">create_time</span> <span class="k">from</span> <span class="n">job</span> <span class="n">j</span>
            <span class="k">where</span> <span class="n">j</span><span class="p">.</span><span class="n">create_time</span> <span class="o">&gt;=</span> <span class="s1">'2015-12-31'</span>
            <span class="k">and</span> <span class="n">j</span><span class="p">.</span><span class="n">create_time</span> <span class="o">&lt;</span> <span class="s1">'2016-12-31'</span><span class="p">;</span>
-</code></pre></div>  </div>
+</code></pre>
+  </div>
 
   <div class="language-sql highlighter-rouge">
-<div class="highlight"><pre class="highlight"><code>       <span class="k">select</span> <span class="n">j</span><span class="p">.</span><span class="n">id</span><span class="p">,</span><span class="n">j</span><span class="p">.</span><span class="n">create_time</span> <span class="k">from</span> <span class="n">job</span> <span class="n">j</span>
+<pre class="highlight"><code>       <span class="k">select</span> <span class="n">j</span><span class="p">.</span><span class="n">id</span><span class="p">,</span><span class="n">j</span><span class="p">.</span><span class="n">create_time</span> <span class="k">from</span> <span class="n">job</span> <span class="n">j</span>
           <span class="k">where</span> <span class="k">EXTRACT</span><span class="p">(</span><span class="k">year</span> <span class="k">FROM</span> <span class="n">j</span><span class="p">.</span><span class="n">create_time</span><span class="p">)</span> <span class="o">=</span> <span class="mi">2016</span>
           <span class="k">and</span> <span class="n">j</span><span class="p">.</span><span class="n">tool_id</span><span class="o">=</span><span class="s1">'upload1'</span><span class="p">;</span><span class="nv">`
-</span></code></pre></div>  </div>
+</span></code></pre>
+  </div>
 
   <p>…and now include the user</p>
 
   <div class="language-sql highlighter-rouge">
-<div class="highlight"><pre class="highlight"><code>       <span class="k">select</span> <span class="k">count</span><span class="p">(</span><span class="n">j</span><span class="p">.</span><span class="n">id</span><span class="p">)</span> <span class="k">from</span> <span class="n">job</span> <span class="n">j</span><span class="p">,</span> <span class="n">galaxy_user</span> <span class="n">u</span>
+<pre class="highlight"><code>       <span class="k">select</span> <span class="k">count</span><span class="p">(</span><span class="n">j</span><span class="p">.</span><span class="n">id</span><span class="p">)</span> <span class="k">from</span> <span class="n">job</span> <span class="n">j</span><span class="p">,</span> <span class="n">galaxy_user</span> <span class="n">u</span>
           <span class="k">where</span> <span class="n">j</span><span class="p">.</span><span class="n">user_id</span> <span class="o">=</span> <span class="n">u</span><span class="p">.</span><span class="n">id</span>
           <span class="k">and</span> <span class="n">u</span><span class="p">.</span><span class="n">email</span> <span class="o">=</span> <span class="s1">'hansrudolf.hotz@fmi.ch'</span>
           <span class="k">and</span> <span class="k">EXTRACT</span><span class="p">(</span><span class="k">year</span> <span class="k">FROM</span> <span class="n">j</span><span class="p">.</span><span class="n">create_time</span><span class="p">)</span> <span class="o">=</span> <span class="mi">2016</span>
           <span class="k">and</span> <span class="n">j</span><span class="p">.</span><span class="n">tool_id</span><span class="o">=</span><span class="s1">'upload1'</span><span class="p">;</span>
-</code></pre></div>  </div>
+</code></pre>
+  </div>
 
   <div class="language-sql highlighter-rouge">
-<div class="highlight"><pre class="highlight"><code>       <span class="k">select</span> <span class="n">u</span><span class="p">.</span><span class="n">email</span><span class="p">,</span> <span class="k">count</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="k">from</span> <span class="n">job</span> <span class="n">j</span><span class="p">,</span> <span class="n">galaxy_user</span> <span class="n">u</span>
+<pre class="highlight"><code>       <span class="k">select</span> <span class="n">u</span><span class="p">.</span><span class="n">email</span><span class="p">,</span> <span class="k">count</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="k">from</span> <span class="n">job</span> <span class="n">j</span><span class="p">,</span> <span class="n">galaxy_user</span> <span class="n">u</span>
           <span class="k">where</span> <span class="n">j</span><span class="p">.</span><span class="n">user_id</span> <span class="o">=</span> <span class="n">u</span><span class="p">.</span><span class="n">id</span>
           <span class="k">and</span> <span class="k">EXTRACT</span><span class="p">(</span><span class="k">year</span> <span class="k">FROM</span> <span class="n">j</span><span class="p">.</span><span class="n">create_time</span><span class="p">)</span> <span class="o">=</span> <span class="mi">2016</span>
           <span class="k">and</span> <span class="n">j</span><span class="p">.</span><span class="n">tool_id</span><span class="o">=</span><span class="s1">'upload1'</span>
           <span class="k">GROUP</span> <span class="k">BY</span> <span class="n">u</span><span class="p">.</span><span class="n">email</span><span class="p">;</span>
-</code></pre></div>  </div>
+</code></pre>
+  </div>
 </blockquote>
 
 <h3 id="jobs-per-tool-of-a-certain-version">Jobs per tool of a certain version</h3>
@@ -459,22 +479,25 @@ all the users who have used the broken version, without alerting users who never
 
 <blockquote>
   <div class="language-sql highlighter-rouge">
-<div class="highlight"><pre class="highlight"><code>      <span class="k">select</span> <span class="k">distinct</span><span class="p">(</span><span class="n">j</span><span class="p">.</span><span class="n">tool_version</span><span class="p">)</span> <span class="k">from</span> <span class="n">job</span> <span class="n">j</span>
+<pre class="highlight"><code>      <span class="k">select</span> <span class="k">distinct</span><span class="p">(</span><span class="n">j</span><span class="p">.</span><span class="n">tool_version</span><span class="p">)</span> <span class="k">from</span> <span class="n">job</span> <span class="n">j</span>
           <span class="k">where</span> <span class="n">j</span><span class="p">.</span><span class="n">tool_id</span> <span class="o">=</span> <span class="s1">'qAlign'</span><span class="p">;</span>
-</code></pre></div>  </div>
+</code></pre>
+  </div>
 
   <div class="language-sql highlighter-rouge">
-<div class="highlight"><pre class="highlight"><code>       <span class="k">select</span> <span class="n">j</span><span class="p">.</span><span class="n">user_id</span> <span class="k">from</span> <span class="n">job</span> <span class="n">j</span>
+<pre class="highlight"><code>       <span class="k">select</span> <span class="n">j</span><span class="p">.</span><span class="n">user_id</span> <span class="k">from</span> <span class="n">job</span> <span class="n">j</span>
           <span class="k">where</span> <span class="n">j</span><span class="p">.</span><span class="n">tool_id</span> <span class="o">=</span> <span class="s1">'qAlign'</span>
           <span class="k">and</span> <span class="n">j</span><span class="p">.</span><span class="n">tool_version</span> <span class="o">=</span> <span class="s1">'1.0.4quasr'</span><span class="p">;</span>
-</code></pre></div>  </div>
+</code></pre>
+  </div>
 
   <div class="language-sql highlighter-rouge">
-<div class="highlight"><pre class="highlight"><code>      <span class="k">select</span> <span class="n">u</span><span class="p">.</span><span class="n">email</span><span class="p">,</span> <span class="n">j</span><span class="p">.</span><span class="n">create_time</span> <span class="k">from</span> <span class="n">job</span> <span class="n">j</span><span class="p">,</span> <span class="n">galaxy_user</span> <span class="n">u</span>
+<pre class="highlight"><code>      <span class="k">select</span> <span class="n">u</span><span class="p">.</span><span class="n">email</span><span class="p">,</span> <span class="n">j</span><span class="p">.</span><span class="n">create_time</span> <span class="k">from</span> <span class="n">job</span> <span class="n">j</span><span class="p">,</span> <span class="n">galaxy_user</span> <span class="n">u</span>
           <span class="k">where</span> <span class="n">j</span><span class="p">.</span><span class="n">user_id</span> <span class="o">=</span> <span class="n">u</span><span class="p">.</span><span class="n">id</span>
           <span class="k">and</span> <span class="n">j</span><span class="p">.</span><span class="n">tool_id</span> <span class="o">=</span> <span class="s1">'qAlign'</span>
           <span class="k">and</span> <span class="n">j</span><span class="p">.</span><span class="n">tool_version</span> <span class="o">=</span> <span class="s1">'1.0.4quasr'</span><span class="p">;</span>
-</code></pre></div>  </div>
+</code></pre>
+  </div>
 </blockquote>
 
 <h2 id="all-users-running-a-job-using-a-certain-parameter">All users running a job using a certain parameter</h2>
@@ -485,18 +508,20 @@ all the users who have used the broken version, without alerting users who never
 </h3>
 
   <div class="language-sql highlighter-rouge">
-<div class="highlight"><pre class="highlight"><code>      <span class="k">select</span> <span class="n">jp</span><span class="p">.</span><span class="n">name</span><span class="p">,</span> <span class="n">jp</span><span class="p">.</span><span class="n">value</span>  <span class="k">from</span> <span class="n">job_parameter</span> <span class="n">jp</span>
+<pre class="highlight"><code>      <span class="k">select</span> <span class="n">jp</span><span class="p">.</span><span class="n">name</span><span class="p">,</span> <span class="n">jp</span><span class="p">.</span><span class="n">value</span>  <span class="k">from</span> <span class="n">job_parameter</span> <span class="n">jp</span>
           <span class="k">where</span> <span class="n">name</span> <span class="o">=</span> <span class="s1">'iterate'</span><span class="nv">`
-</span></code></pre></div>  </div>
+</span></code></pre>
+  </div>
 
   <div class="language-sql highlighter-rouge">
-<div class="highlight"><pre class="highlight"><code>      <span class="k">select</span> <span class="n">u</span><span class="p">.</span><span class="n">email</span><span class="p">,</span> <span class="n">jp</span><span class="p">.</span><span class="n">name</span><span class="p">,</span> <span class="n">jp</span><span class="p">.</span><span class="n">value</span>
+<pre class="highlight"><code>      <span class="k">select</span> <span class="n">u</span><span class="p">.</span><span class="n">email</span><span class="p">,</span> <span class="n">jp</span><span class="p">.</span><span class="n">name</span><span class="p">,</span> <span class="n">jp</span><span class="p">.</span><span class="n">value</span>
           <span class="k">from</span> <span class="n">job_parameter</span> <span class="n">jp</span><span class="p">,</span> <span class="n">job</span> <span class="n">j</span><span class="p">,</span> <span class="n">galaxy_user</span> <span class="n">u</span>
           <span class="k">where</span> <span class="n">jp</span><span class="p">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">'iterate'</span>
           <span class="k">and</span> <span class="n">j</span><span class="p">.</span><span class="n">tool_id</span> <span class="o">=</span> <span class="s1">'addValue'</span>
           <span class="k">and</span> <span class="n">jp</span><span class="p">.</span><span class="n">job_id</span> <span class="o">=</span> <span class="n">j</span><span class="p">.</span><span class="n">id</span>
           <span class="k">and</span> <span class="n">j</span><span class="p">.</span><span class="n">user_id</span> <span class="o">=</span> <span class="n">u</span><span class="p">.</span><span class="n">id</span><span class="p">;</span>
-</code></pre></div>  </div>
+</code></pre>
+  </div>
 
 </blockquote>
 
@@ -506,15 +531,17 @@ all the users who have used the broken version, without alerting users who never
   <p>Close the PostgreSQL client</p>
 
   <div class="language-sql highlighter-rouge">
-<div class="highlight"><pre class="highlight"><code>      <span class="err">\</span><span class="n">q</span>
-</code></pre></div>  </div>
+<pre class="highlight"><code>      <span class="err">\</span><span class="n">q</span>
+</code></pre>
+  </div>
 
   <p>Quit the interactive docker (change back to root first)</p>
 
   <div class="language-sh highlighter-rouge">
-<div class="highlight"><pre class="highlight"><code>      <span class="nb">exit
+<pre class="highlight"><code>      <span class="nb">exit
       exit</span>
-</code></pre></div>  </div>
+</code></pre>
+  </div>
 </blockquote>
 
 <h2 id="other-topics">Other Topics</h2>
@@ -536,16 +563,18 @@ https://docs.google.com/presentation/d/1l4DD0IaJjuvk1zAT1Sjv26bLyrSOg3VUm7rD-TQl
 
 <blockquote>
   <div class="language-sh highlighter-rouge">
-<div class="highlight"><pre class="highlight"><code>  wget http://downloads.sourceforge.net/project/schemaspy/schemaspy/SchemaSpy%205.0.0/schemaSpy_5.0.0.jar
+<pre class="highlight"><code>  wget http://downloads.sourceforge.net/project/schemaspy/schemaspy/SchemaSpy%205.0.0/schemaSpy_5.0.0.jar
   apt-get update
-  apt-get <span class="nb">install </span>libpostgresql-jdbc-java
-  apt-get <span class="nb">install </span>graphviz
-</code></pre></div>  </div>
+  apt-get install libpostgresql-jdbc-java
+  apt-get install graphviz
+</code></pre>
+  </div>
 
   <p>To run SchemaSpy:</p>
   <div class="highlighter-rouge">
-<div class="highlight"><pre class="highlight"><code>  java -jar schemaSpy_5.0.0.jar -t pgsql -db galaxy -u galaxy -host localhost -s public -dp /usr/share/java/postgresql-jdbc4-9.2.jar -o SpyOut
-</code></pre></div>  </div>
+<pre class="highlight"><code>  java -jar schemaSpy_5.0.0.jar -t pgsql -db galaxy -u galaxy -host localhost -s public -dp /usr/share/java/postgresql-jdbc4-9.2.jar -o SpyOut
+</code></pre>
+  </div>
 
 </blockquote>
 
@@ -556,7 +585,7 @@ https://docs.google.com/presentation/d/1l4DD0IaJjuvk1zAT1Sjv26bLyrSOg3VUm7rD-TQl
 <p>There is a lot of information stored in the Galaxy database. Use this information for trouble shooting when necessary and use it as a source for extendend user statistics.</p>
 
 <h1 id="clap-thank-you">
-<img class="emoji" title=":clap:" alt=":clap:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f44f.png" height="20" width="20"> Thank you</h1>
+<img class="emoji" title=":clap:" alt=":clap:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f44f.png" height="20" width="20" align="absmiddle"> Thank you</h1>
 
 
         

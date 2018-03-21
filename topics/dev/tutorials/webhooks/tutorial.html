@@ -202,12 +202,13 @@ The key <code class="highlighter-rouge">activate</code> gives you control per-we
     <li>
       <p>Create a file named <code class="highlighter-rouge">config/phdcomics.yaml</code> with the following content:</p>
 
-      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   <span class="na">name</span><span class="pi">:</span> <span class="s">phdcomics</span>
-   <span class="na">type</span><span class="pi">:</span>
+      <div class="language-yaml highlighter-rouge"><pre class="highlight"><code>   <span class="s">name</span><span class="pi">:</span> <span class="s">phdcomics</span>
+   <span class="s">type</span><span class="pi">:</span>
      <span class="pi">-</span> <span class="s">tool</span>
      <span class="pi">-</span> <span class="s">workflow</span>
-   <span class="na">activate</span><span class="pi">:</span> <span class="no">true</span>
-</code></pre></div>      </div>
+   <span class="s">activate</span><span class="pi">:</span> <span class="s">true</span>
+</code></pre>
+      </div>
     </li>
   </ol>
 </blockquote>
@@ -226,7 +227,7 @@ calls an REST endpoint defined by use in the next step. The return value of this
     <li>
       <p>Create a file named <code class="highlighter-rouge">static/script.js</code> with the following content:</p>
 
-      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">ready</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+      <div class="language-js highlighter-rouge"><pre class="highlight"><code>    <span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">ready</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
 
         <span class="kd">var</span> <span class="nx">galaxyRoot</span> <span class="o">=</span> <span class="k">typeof</span> <span class="nx">Galaxy</span> <span class="o">!=</span> <span class="s1">'undefined'</span> <span class="p">?</span> <span class="nx">Galaxy</span><span class="p">.</span><span class="nx">root</span> <span class="p">:</span> <span class="s1">'/'</span><span class="p">;</span>
 
@@ -270,7 +271,7 @@ calls an REST endpoint defined by use in the next step. The return value of this
                     <span class="k">if</span> <span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">success</span><span class="p">)</span> <span class="p">{</span>
                         <span class="nx">me</span><span class="p">.</span><span class="nx">renderImg</span><span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">src</span><span class="p">);</span>
                     <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-                        <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="s1">'[ERROR] "'</span> <span class="o">+</span> <span class="nx">url</span> <span class="o">+</span> <span class="s1">'":</span><span class="err">\</span><span class="s1">n'</span> <span class="o">+</span> <span class="nx">data</span><span class="p">.</span><span class="nx">error</span><span class="p">);</span>
+                        <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="s1">'[ERROR] "'</span> <span class="o">+</span> <span class="nx">url</span> <span class="o">+</span> <span class="s1">'":\n'</span> <span class="o">+</span> <span class="nx">data</span><span class="p">.</span><span class="nx">error</span><span class="p">);</span>
                     <span class="p">}</span>
                 <span class="p">});</span>
             <span class="p">},</span>
@@ -282,7 +283,8 @@ calls an REST endpoint defined by use in the next step. The return value of this
 
         <span class="k">new</span> <span class="nx">PHDComicsAppView</span><span class="p">();</span>
     <span class="p">});</span>
-</code></pre></div>      </div>
+</code></pre>
+      </div>
     </li>
   </ol>
 </blockquote>
@@ -299,7 +301,7 @@ entire user-object, including histories and datasets.</p>
     <li>
       <p>Create a file named <code class="highlighter-rouge">helper/__init__.py</code> with the following content:</p>
 
-      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">urllib</span>
+      <div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">urllib</span>
 <span class="kn">import</span> <span class="nn">re</span>
 <span class="kn">import</span> <span class="nn">random</span>
 <span class="kn">import</span> <span class="nn">logging</span>
@@ -347,7 +349,8 @@ entire user-object, including histories and datasets.</p>
         <span class="n">error</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="p">{</span><span class="s">'success'</span><span class="p">:</span> <span class="ow">not</span> <span class="n">error</span><span class="p">,</span> <span class="s">'error'</span><span class="p">:</span> <span class="n">error</span><span class="p">,</span> <span class="s">'src'</span><span class="p">:</span> <span class="n">comic_src</span><span class="p">}</span>
-</code></pre></div>      </div>
+</code></pre>
+      </div>
     </li>
   </ol>
 </blockquote>
@@ -361,7 +364,7 @@ entire user-object, including histories and datasets.</p>
     <li>
       <p>Create a file named <code class="highlighter-rouge">static/styles.css</code> with the following content:</p>
 
-      <div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nf">#phdcomics</span> <span class="p">{</span>
+      <div class="language-css highlighter-rouge"><pre class="highlight"><code>    <span class="nf">#phdcomics</span> <span class="p">{</span>
         <span class="nl">border</span><span class="p">:</span> <span class="m">1px</span> <span class="nb">solid</span> <span class="m">#52697d</span><span class="p">;</span>
         <span class="nl">text-align</span><span class="p">:</span> <span class="nb">center</span><span class="p">;</span>
         <span class="nl">border-radius</span><span class="p">:</span> <span class="m">3px</span><span class="p">;</span>
@@ -427,7 +430,8 @@ entire user-object, including histories and datasets.</p>
         <span class="nt">0</span><span class="o">%</span> <span class="p">{</span> <span class="nl">transform</span><span class="p">:</span> <span class="n">rotate</span><span class="p">(</span><span class="m">0deg</span><span class="p">);</span> <span class="p">}</span>
         <span class="nt">100</span><span class="o">%</span> <span class="p">{</span> <span class="nl">transform</span><span class="p">:</span> <span class="n">rotate</span><span class="p">(</span><span class="m">360deg</span><span class="p">);</span> <span class="p">}</span>
     <span class="p">}</span>
-</code></pre></div>      </div>
+</code></pre>
+      </div>
     </li>
   </ol>
 </blockquote>

@@ -257,23 +257,26 @@ to which we align are named <code class="highlighter-rouge">RNAME</code> in the 
     <li>
       <p>Explore the plugin directory as follows:</p>
 
-      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">cd</span> <span class="nv">$GALAXY_ROOT</span>/config/plugins/visualizations
-</code></pre></div>      </div>
+      <div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span><span class="nb">cd</span> <span class="nv">$GALAXY_ROOT</span>/config/plugins/visualizations
+</code></pre>
+      </div>
     </li>
     <li>
       <p>Create a new directory for our new plugin project</p>
 
-      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">mkdir </span>alignment_rname_boxplot
-<span class="nv">$ </span><span class="nb">cd </span>alignment_rname_boxplot
-</code></pre></div>      </div>
+      <div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>mkdir alignment_rname_boxplot
+<span class="gp">$ </span><span class="nb">cd </span>alignment_rname_boxplot
+</code></pre>
+      </div>
     </li>
     <li>
       <p>Make three (sub-)directories to complete the structure of the project:</p>
 
-      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">mkdir </span>config
-<span class="nv">$ </span><span class="nb">mkdir </span>static
-<span class="nv">$ </span><span class="nb">mkdir </span>templates
-</code></pre></div>      </div>
+      <div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>mkdir config
+<span class="gp">$ </span>mkdir static
+<span class="gp">$ </span>mkdir templates
+</code></pre>
+      </div>
     </li>
   </ol>
 </blockquote>
@@ -288,7 +291,7 @@ configuration in XML format.</p>
 
   <p>Create the file  <code class="highlighter-rouge">config/alignment_rname_boxplot.xml</code> with the following contents:</p>
 
-  <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
+  <div class="language-xml highlighter-rouge"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
 <span class="cp">&lt;!DOCTYPE visualization SYSTEM "../../visualization.dtd"&gt;</span>
 <span class="nt">&lt;visualization</span> <span class="na">name=</span><span class="s">"alignment_rname_boxplot"</span><span class="nt">&gt;</span>
     <span class="nt">&lt;data_sources&gt;</span>
@@ -306,7 +309,8 @@ configuration in XML format.</p>
     <span class="nt">&lt;/params&gt;</span>
     <span class="nt">&lt;template&gt;</span>alignment_rname_boxplot.mako<span class="nt">&lt;/template&gt;</span>
 <span class="nt">&lt;/visualization&gt;</span>
-</code></pre></div>  </div>
+</code></pre>
+  </div>
 
 </blockquote>
 
@@ -335,23 +339,24 @@ exposed Galaxy URL prior to client-side rendering.</p>
 <p>The most basic part of the mako file are the variables used for further web development, given
 below.</p>
 
-<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;!DOCTYPE HTML&gt;</span>
-<span class="nt">&lt;</span><span class="err">%</span>
-    <span class="na">import</span> <span class="na">os</span>
+<div class="language-html highlighter-rouge"><pre class="highlight"><code><span class="cp">&lt;!DOCTYPE HTML&gt;</span>
+<span class="err">&lt;</span>%
+    import os
 
-    <span class="err">##</span> <span class="na">Generates</span> <span class="na">hash</span> <span class="err">(</span><span class="na">hdadict</span><span class="err">['</span><span class="na">id</span><span class="err">'])</span> <span class="na">of</span> <span class="na">history</span> <span class="na">item</span>
-    <span class="na">hdadict =</span><span class="err"> </span><span class="s">trans.security.encode_dict_ids(</span> <span class="na">hda</span><span class="err">.</span><span class="na">to_dict</span><span class="err">()</span> <span class="err">)</span>
+    ## Generates hash (hdadict['id']) of history item
+    hdadict = trans.security.encode_dict_ids( hda.to_dict() )
 
-    <span class="err">##</span> <span class="na">Finds</span> <span class="na">the</span> <span class="na">parent</span> <span class="na">directory</span> <span class="na">of</span> <span class="na">galaxy</span> <span class="err">(/,</span> <span class="err">/</span><span class="na">galaxy</span><span class="err">,</span> <span class="na">etc</span><span class="err">.)</span>
-    <span class="na">root     =</span><span class="err"> </span><span class="s">h.url_for(</span> <span class="err">'/'</span> <span class="err">)</span>
+    ## Finds the parent directory of galaxy (/, /galaxy, etc.)
+    root     = h.url_for( '/' )
 
-    <span class="err">##</span> <span class="na">Determines</span> <span class="na">the</span> <span class="na">exposed</span> <span class="na">URL</span> <span class="na">of</span> <span class="na">the</span> <span class="err">./</span><span class="na">static</span> <span class="na">directory</span>
-    <span class="na">app_root =</span><span class="err"> </span><span class="s">root</span> <span class="err">+</span> <span class="err">'</span><span class="na">plugins</span><span class="err">/</span><span class="na">visualizations</span><span class="err">/'+</span><span class="na">visualization_name</span><span class="err">+'/</span><span class="na">static</span><span class="err">/'</span>
+    ## Determines the exposed URL of the ./static directory
+    app_root = root + 'plugins/visualizations/'+visualization_name+'/static/'
 
-    <span class="err">##</span> <span class="na">Actual</span> <span class="na">file</span> <span class="na">URL:</span>
-    <span class="na">file_url =</span><span class="err"> </span><span class="s">os.path.join(root,</span> <span class="err">'</span><span class="na">datasets</span><span class="err">',</span> <span class="na">hdadict</span><span class="err">['</span><span class="na">id</span><span class="err">'],</span> <span class="err">"</span><span class="na">display</span><span class="err">?</span><span class="na">to_ext=</span><span class="s">"+hda.ext)
+    ## Actual file URL:
+    file_url = os.path.join(root, 'datasets', hdadict['id'], "display?to_ext="+hda.ext)
 %&gt;
-</span></code></pre></div></div>
+</code></pre>
+</div>
 
 <ul>
   <li><code class="highlighter-rouge">hdadict</code> is a variable that contains a file identifier that has been encoded to it’s
@@ -385,27 +390,29 @@ bam file and its index share the same prefix, as expected by samtools and pysam.
 
 <p>We can create this symlink as follows in our mako template:</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">## Ensure BAI index is symlinked</span>
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="c">## Ensure BAI index is symlinked</span>
 <span class="n">bai_target</span> <span class="o">=</span> <span class="n">hda</span><span class="o">.</span><span class="n">file_name</span><span class="o">+</span><span class="s">'.bai'</span>
 <span class="kn">import</span> <span class="nn">os</span>
 
 <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">bai_target</span><span class="p">):</span>
    <span class="n">os</span><span class="o">.</span><span class="n">symlink</span><span class="p">(</span><span class="n">hda</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">bam_index</span><span class="o">.</span><span class="n">file_name</span><span class="p">,</span> <span class="n">bai_target</span><span class="p">)</span>
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <p>Now the BAM file has a <code class="highlighter-rouge">.bai</code> file with the same prefix, and we can run the <code class="highlighter-rouge">idxstats</code>
 as follows:</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">## Extract idxstats</span>
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="c">## Extract idxstats</span>
 <span class="kn">import</span> <span class="nn">pysam</span>
 <span class="n">bam_idxstats_data</span> <span class="o">=</span> <span class="n">pysam</span><span class="o">.</span><span class="n">idxstats</span><span class="p">(</span><span class="n">hda</span><span class="o">.</span><span class="n">file_name</span><span class="p">)</span>
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <p>With the lines of python code above, the idxstats data is parsed into the RAM of python
 during compilation on the server, but is not yet exported into the HTML page nor parsed by JS.
 To do that, we add an HTML section to the end of the mako file.</p>
 
-<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;html&gt;</span>
+<div class="language-html highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;html&gt;</span>
     <span class="nt">&lt;head&gt;</span>
         <span class="nt">&lt;title&gt;</span>${hda.name | h} | ${visualization_name | h}<span class="nt">&lt;/title&gt;</span>
     <span class="nt">&lt;/head&gt;</span>
@@ -413,7 +420,8 @@ To do that, we add an HTML section to the end of the mako file.</p>
         ${bam_idxstats_data | h}
     <span class="nt">&lt;/body&gt;</span>
 <span class="nt">&lt;/html&gt;</span>
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <p>Here you see <code class="highlighter-rouge">${bam_idxstats_data | h}</code>, which prints the python variable into
 the HTML page and also does HTML escaping by providing the ` | h`-flag (for security reasons).</p>
@@ -428,21 +436,21 @@ the HTML page and also does HTML escaping by providing the ` | h`-flag (for secu
     <li>
       <p>Fill it with the following code:</p>
 
-      <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;!DOCTYPE HTML&gt;</span>
-<span class="nt">&lt;</span><span class="err">%</span>
-    <span class="na">import</span> <span class="na">os</span>
+      <div class="language-html highlighter-rouge"><pre class="highlight"><code><span class="cp">&lt;!DOCTYPE HTML&gt;</span>
+<span class="err">&lt;</span>%
+    import os
    
-    <span class="err">##</span> <span class="na">Generates</span> <span class="na">hash</span> <span class="err">(</span><span class="na">hdadict</span><span class="err">['</span><span class="na">id</span><span class="err">'])</span> <span class="na">of</span> <span class="na">history</span> <span class="na">item</span>
-    <span class="na">hdadict =</span><span class="err"> </span><span class="s">trans.security.encode_dict_ids(</span> <span class="na">hda</span><span class="err">.</span><span class="na">to_dict</span><span class="err">()</span> <span class="err">)</span>
+    ## Generates hash (hdadict['id']) of history item
+    hdadict = trans.security.encode_dict_ids( hda.to_dict() )
    
-    <span class="err">##</span> <span class="na">Finds</span> <span class="na">the</span> <span class="na">parent</span> <span class="na">directory</span> <span class="na">of</span> <span class="na">galaxy</span> <span class="err">(/,</span> <span class="err">/</span><span class="na">galaxy</span><span class="err">,</span> <span class="na">etc</span><span class="err">.)</span>
-    <span class="na">root     =</span><span class="err"> </span><span class="s">h.url_for(</span> <span class="err">'/'</span> <span class="err">)</span>
+    ## Finds the parent directory of galaxy (/, /galaxy, etc.)
+    root     = h.url_for( '/' )
    
-    <span class="err">##</span> <span class="na">Determines</span> <span class="na">the</span> <span class="na">exposed</span> <span class="na">URL</span> <span class="na">of</span> <span class="na">the</span> <span class="err">./</span><span class="na">static</span> <span class="na">directory</span>
-    <span class="na">app_root =</span><span class="err"> </span><span class="s">root</span> <span class="err">+</span> <span class="err">'</span><span class="na">plugins</span><span class="err">/</span><span class="na">visualizations</span><span class="err">/'+</span><span class="na">visualization_name</span><span class="err">+'/</span><span class="na">static</span><span class="err">/'</span>
+    ## Determines the exposed URL of the ./static directory
+    app_root = root + 'plugins/visualizations/'+visualization_name+'/static/'
    
-    <span class="err">##</span> <span class="na">Actual</span> <span class="na">file</span> <span class="na">URL:</span>
-    <span class="na">file_url =</span><span class="err"> </span><span class="s">os.path.join(root,</span> <span class="err">'</span><span class="na">datasets</span><span class="err">',</span> <span class="na">hdadict</span><span class="err">['</span><span class="na">id</span><span class="err">'],</span> <span class="err">"</span><span class="na">display</span><span class="err">?</span><span class="na">to_ext=</span><span class="s">"+hda.ext)
+    ## Actual file URL:
+    file_url = os.path.join(root, 'datasets', hdadict['id'], "display?to_ext="+hda.ext)
    
     ## Ensure BAI index is symlinked
     bai_target = hda.file_name+'.bai'
@@ -454,15 +462,16 @@ the HTML page and also does HTML escaping by providing the ` | h`-flag (for secu
     import pysam
     bam_idxstats_data = pysam.idxstats(hda.file_name)
 %&gt;
-&lt;html&gt;
-    &lt;head&gt;
-        &lt;title&gt;${hda.name | h} | ${visualization_name | h}&lt;/title&gt;
-    &lt;/head&gt;
-    &lt;body&gt;
+<span class="nt">&lt;html&gt;</span>
+    <span class="nt">&lt;head&gt;</span>
+        <span class="nt">&lt;title&gt;</span>${hda.name | h} | ${visualization_name | h}<span class="nt">&lt;/title&gt;</span>
+    <span class="nt">&lt;/head&gt;</span>
+    <span class="nt">&lt;body&gt;</span>
         ${bam_idxstats_data | h}
-    &lt;/body&gt;
-&lt;/html&gt;
-</span></code></pre></div>      </div>
+    <span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre>
+      </div>
 
       <p>We are now ready to test this very basic visualization, we just need a (small) BAM file for it.</p>
     </li>
@@ -470,9 +479,10 @@ the HTML page and also does HTML escaping by providing the ` | h`-flag (for secu
     <li>
       <p>Go the galaxy root directory and start Galaxy:</p>
 
-      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">cd</span> <span class="nv">$GALAXY_ROOT</span>
-<span class="nv">$ </span>./run.sh
-</code></pre></div>      </div>
+      <div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span><span class="nb">cd</span> <span class="nv">$GALAXY_ROOT</span>
+<span class="gp">$ </span>./run.sh
+</code></pre>
+      </div>
     </li>
     <li>
       <p>Upload the example BAM file to your history</p>
@@ -490,9 +500,10 @@ the HTML page and also does HTML escaping by providing the ` | h`-flag (for secu
 
 <p>All the visualization does at the moment, is show the contents of idxstats, compiled to HTML:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>['chrA\t5386\t2\t0\n', 'chrB\t5386\t4\t0\n', 'chrC\t5386\t1\t0\n', 'chrD\t5386\t6\t1\n',
+<div class="highlighter-rouge"><pre class="highlight"><code>['chrA\t5386\t2\t0\n', 'chrB\t5386\t4\t0\n', 'chrC\t5386\t1\t0\n', 'chrD\t5386\t6\t1\n',
 'chrE\t5386\t3\t0\n', 'chrF\t5386\t2\t0\n', 'chrG\t5386\t1\t0\n', '*\t0\t0\t0\n']
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <p>It contains eight entries, one for each of our (made-up) chromosomes and one to <code class="highlighter-rouge">*</code>, which represents
 the unmapped reads. Entries are tab delimited (<code class="highlighter-rouge">\t</code>) and for the <code class="highlighter-rouge">chrA</code> entry it indicates that the
@@ -501,28 +512,30 @@ length of the RNAME (chromosome) is 5386 bases and 2 reads are aligned to it.</p
 <p>To make the data a bit more usable for Javascript , we convert it into a simple dictionary
 of the following syntax:</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="s">'chrA'</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span> <span class="s">'chrB'</span><span class="p">:</span><span class="mi">4</span><span class="p">,</span> <span class="s">'chrC'</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span> <span class="s">'chrD'</span><span class="p">:</span><span class="mi">6</span><span class="p">,</span> <span class="s">'chrE'</span><span class="p">:</span><span class="mi">3</span><span class="p">,</span> <span class="s">'chrF'</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span> <span class="s">'chrG'</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span> <span class="s">'*'</span><span class="p">:</span> <span class="mi">0</span><span class="p">}</span>
-</code></pre></div></div>
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="s">'chrA'</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span> <span class="s">'chrB'</span><span class="p">:</span><span class="mi">4</span><span class="p">,</span> <span class="s">'chrC'</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span> <span class="s">'chrD'</span><span class="p">:</span><span class="mi">6</span><span class="p">,</span> <span class="s">'chrE'</span><span class="p">:</span><span class="mi">3</span><span class="p">,</span> <span class="s">'chrF'</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span> <span class="s">'chrG'</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span> <span class="s">'*'</span><span class="p">:</span> <span class="mi">0</span><span class="p">}</span>
+</code></pre>
+</div>
 
 <p>Although it is possible to do this in python we recommend doing this in JS.
 The var dump provided by python/pysam is actually a valid syntax for Javascript too,
 so getting the raw data into Javascript is rather easy:</p>
 
-<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;script&gt;</span>
+<div class="language-html highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;script&gt;</span>
     <span class="nx">bam_idxstats_data</span> <span class="o">=</span> <span class="nx">$</span><span class="p">{</span><span class="nx">bam_idxstats_data</span><span class="p">};</span>
 <span class="nt">&lt;/script&gt;</span>
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <p>Converting the data is not the scope of the tutorial, so here we provide such a function:</p>
 
-<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;script&gt;</span>
+<div class="language-html highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;script&gt;</span>
   <span class="nx">bam_idxstats_data</span> <span class="o">=</span> <span class="nx">$</span><span class="p">{</span><span class="nx">bam_idxstats_data</span><span class="p">};</span>
   <span class="kd">function</span> <span class="nx">parse_data</span><span class="p">(</span><span class="nx">bam_idxstats_data</span><span class="p">)</span> <span class="p">{</span>
     <span class="kd">var</span> <span class="nx">output</span> <span class="o">=</span> <span class="p">{};</span>
 
     <span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">data</span><span class="p">.</span><span class="nx">length</span> <span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
       <span class="kd">var</span> <span class="nx">line</span> <span class="o">=</span> <span class="nx">data</span><span class="p">[</span><span class="nx">i</span><span class="p">];</span>
-      <span class="kd">var</span> <span class="nx">chunks</span> <span class="o">=</span> <span class="nx">line</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s2">"</span><span class="err">\</span><span class="s2">t"</span><span class="p">);</span>
+      <span class="kd">var</span> <span class="nx">chunks</span> <span class="o">=</span> <span class="nx">line</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s2">"\t"</span><span class="p">);</span>
 
       <span class="k">if</span><span class="p">(</span><span class="nx">chunks</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">split</span><span class="p">(</span><span class="s2">"_"</span><span class="p">).</span><span class="nx">length</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// only if it does not contain underscore</span>
         <span class="nx">output</span><span class="p">[</span><span class="nx">chunks</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span> <span class="o">=</span> <span class="nb">parseInt</span><span class="p">(</span><span class="nx">chunks</span><span class="p">[</span><span class="mi">2</span><span class="p">]);</span>
@@ -532,7 +545,8 @@ so getting the raw data into Javascript is rather easy:</p>
    <span class="k">return</span> <span class="nx">output</span><span class="p">;</span>
   <span class="p">}</span>
   <span class="nt">&lt;/script&gt;</span>
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <p>The great thing about the mako system is that it does not require to restart galaxy in order to make
 functional changes to the mako files.</p>
@@ -544,21 +558,21 @@ functional changes to the mako files.</p>
     <li>
       <p>Change the mako file to the following:</p>
 
-      <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;!DOCTYPE HTML&gt;</span>
-<span class="nt">&lt;</span><span class="err">%</span>
-    <span class="na">import</span> <span class="na">os</span>
+      <div class="language-html highlighter-rouge"><pre class="highlight"><code><span class="cp">&lt;!DOCTYPE HTML&gt;</span>
+<span class="err">&lt;</span>%
+    import os
    
-    <span class="err">##</span> <span class="na">Generates</span> <span class="na">hash</span> <span class="err">(</span><span class="na">hdadict</span><span class="err">['</span><span class="na">id</span><span class="err">'])</span> <span class="na">of</span> <span class="na">history</span> <span class="na">item</span>
-    <span class="na">hdadict =</span><span class="err"> </span><span class="s">trans.security.encode_dict_ids(</span> <span class="na">hda</span><span class="err">.</span><span class="na">to_dict</span><span class="err">()</span> <span class="err">)</span>
+    ## Generates hash (hdadict['id']) of history item
+    hdadict = trans.security.encode_dict_ids( hda.to_dict() )
    
-    <span class="err">##</span> <span class="na">Finds</span> <span class="na">the</span> <span class="na">parent</span> <span class="na">directory</span> <span class="na">of</span> <span class="na">galaxy</span> <span class="err">(/,</span> <span class="err">/</span><span class="na">galaxy</span><span class="err">,</span> <span class="na">etc</span><span class="err">.)</span>
-    <span class="na">root     =</span><span class="err"> </span><span class="s">h.url_for(</span> <span class="err">'/'</span> <span class="err">)</span>
+    ## Finds the parent directory of galaxy (/, /galaxy, etc.)
+    root     = h.url_for( '/' )
    
-    <span class="err">##</span> <span class="na">Determines</span> <span class="na">the</span> <span class="na">exposed</span> <span class="na">URL</span> <span class="na">of</span> <span class="na">the</span> <span class="err">./</span><span class="na">static</span> <span class="na">directory</span>
-    <span class="na">app_root =</span><span class="err"> </span><span class="s">root</span> <span class="err">+</span> <span class="err">'</span><span class="na">plugins</span><span class="err">/</span><span class="na">visualizations</span><span class="err">/'+</span><span class="na">visualization_name</span><span class="err">+'/</span><span class="na">static</span><span class="err">/'</span>
+    ## Determines the exposed URL of the ./static directory
+    app_root = root + 'plugins/visualizations/'+visualization_name+'/static/'
    
-    <span class="err">##</span> <span class="na">Actual</span> <span class="na">file</span> <span class="na">URL:</span>
-    <span class="na">file_url =</span><span class="err"> </span><span class="s">os.path.join(root,</span> <span class="err">'</span><span class="na">datasets</span><span class="err">',</span> <span class="na">hdadict</span><span class="err">['</span><span class="na">id</span><span class="err">'],</span> <span class="err">"</span><span class="na">display</span><span class="err">?</span><span class="na">to_ext=</span><span class="s">"+hda.ext)
+    ## Actual file URL:
+    file_url = os.path.join(root, 'datasets', hdadict['id'], "display?to_ext="+hda.ext)
    
     ## Ensure BAI index is symlinked
     bai_target = hda.file_name+'.bai'
@@ -571,30 +585,31 @@ functional changes to the mako files.</p>
     bam_idxstats_data = pysam.idxstats(hda.file_name)
    
 %&gt;
-&lt;html&gt;
-    &lt;head&gt;
-       &lt;title&gt;${hda.name | h} | ${visualization_name | h}&lt;/title&gt;
-        &lt;script&gt;
-            bam_idxstats_data = ${bam_idxstats_data};
-            function parse_data(data) {
-                var output = {};
-                for(var i = 0; i &lt; data.length ; i++) {
-                    var line = data[i];
-                    var chunks = line.split("</span><span class="err">\</span><span class="na">t</span><span class="err">");</span>
+<span class="nt">&lt;html&gt;</span>
+    <span class="nt">&lt;head&gt;</span>
+       <span class="nt">&lt;title&gt;</span>${hda.name | h} | ${visualization_name | h}<span class="nt">&lt;/title&gt;</span>
+        <span class="nt">&lt;script&gt;</span>
+            <span class="nx">bam_idxstats_data</span> <span class="o">=</span> <span class="nx">$</span><span class="p">{</span><span class="nx">bam_idxstats_data</span><span class="p">};</span>
+            <span class="kd">function</span> <span class="nx">parse_data</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+                <span class="kd">var</span> <span class="nx">output</span> <span class="o">=</span> <span class="p">{};</span>
+                <span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">data</span><span class="p">.</span><span class="nx">length</span> <span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="kd">var</span> <span class="nx">line</span> <span class="o">=</span> <span class="nx">data</span><span class="p">[</span><span class="nx">i</span><span class="p">];</span>
+                    <span class="kd">var</span> <span class="nx">chunks</span> <span class="o">=</span> <span class="nx">line</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s2">"\t"</span><span class="p">);</span>
    
-                    <span class="na">if</span><span class="err">(</span><span class="na">chunks</span><span class="err">[</span><span class="na">0</span><span class="err">].</span><span class="na">split</span><span class="err">("</span><span class="na">_</span><span class="err">").</span><span class="na">length =</span><span class="s">=</span> <span class="na">1</span><span class="err">)</span> <span class="err">{</span> <span class="err">//</span> <span class="na">only</span> <span class="na">if</span> <span class="na">it</span> <span class="na">does</span> <span class="na">not</span> <span class="na">contain</span> <span class="na">underscore</span>
-                        <span class="na">output</span><span class="err">[</span><span class="na">chunks</span><span class="err">[</span><span class="na">0</span><span class="err">]]</span> <span class="err">=</span> <span class="na">parseInt</span><span class="err">(</span><span class="na">chunks</span><span class="err">[</span><span class="na">2</span><span class="err">]);</span>
-                    <span class="err">}</span>
-                <span class="err">}</span>
-                <span class="na">return</span> <span class="na">output</span><span class="err">;</span>
-            <span class="err">}</span>
-        <span class="err">&lt;/</span><span class="na">script</span><span class="nt">&gt;</span>
+                    <span class="k">if</span><span class="p">(</span><span class="nx">chunks</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">split</span><span class="p">(</span><span class="s2">"_"</span><span class="p">).</span><span class="nx">length</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// only if it does not contain underscore</span>
+                        <span class="nx">output</span><span class="p">[</span><span class="nx">chunks</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span> <span class="o">=</span> <span class="nb">parseInt</span><span class="p">(</span><span class="nx">chunks</span><span class="p">[</span><span class="mi">2</span><span class="p">]);</span>
+                    <span class="p">}</span>
+                <span class="p">}</span>
+                <span class="k">return</span> <span class="nx">output</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="nt">&lt;/script&gt;</span>
     <span class="nt">&lt;/head&gt;</span>
     <span class="nt">&lt;body</span> <span class="na">onload=</span><span class="s">"bam_idxstats = parse_data(bam_idxstats_data);"</span><span class="nt">&gt;</span>
         ${bam_idxstats_data | h}
     <span class="nt">&lt;/body&gt;</span>
 <span class="nt">&lt;/html&gt;</span>
-</code></pre></div>      </div>
+</code></pre>
+      </div>
     </li>
     <li>
       <p>Retrigger the visualization and open the developers console of your browser: In the console, type: <code class="highlighter-rouge">bam_idxstats_data</code> and press [Enter]
@@ -619,21 +634,21 @@ on your (local) Galaxy and restart Galaxy.</p>
 
 <p>The contents of the mako file for this example are given below.</p>
 
-<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;!DOCTYPE HTML&gt;</span>
-<span class="nt">&lt;</span><span class="err">%</span>
-    <span class="na">import</span> <span class="na">os</span>
+<div class="language-html highlighter-rouge"><pre class="highlight"><code><span class="cp">&lt;!DOCTYPE HTML&gt;</span>
+<span class="err">&lt;</span>%
+    import os
 
-    <span class="err">##</span> <span class="na">Generates</span> <span class="na">hash</span> <span class="err">(</span><span class="na">hdadict</span><span class="err">['</span><span class="na">id</span><span class="err">'])</span> <span class="na">of</span> <span class="na">history</span> <span class="na">item</span>
-    <span class="na">hdadict =</span><span class="err"> </span><span class="s">trans.security.encode_dict_ids(</span> <span class="na">hda</span><span class="err">.</span><span class="na">to_dict</span><span class="err">()</span> <span class="err">)</span>
+    ## Generates hash (hdadict['id']) of history item
+    hdadict = trans.security.encode_dict_ids( hda.to_dict() )
 
-    <span class="err">##</span> <span class="na">Finds</span> <span class="na">the</span> <span class="na">parent</span> <span class="na">directory</span> <span class="na">of</span> <span class="na">galaxy</span> <span class="err">(/,</span> <span class="err">/</span><span class="na">galaxy</span><span class="err">,</span> <span class="na">etc</span><span class="err">.)</span>
-    <span class="na">root     =</span><span class="err"> </span><span class="s">h.url_for(</span> <span class="err">'/'</span> <span class="err">)</span>
+    ## Finds the parent directory of galaxy (/, /galaxy, etc.)
+    root     = h.url_for( '/' )
 
-    <span class="err">##</span> <span class="na">Determines</span> <span class="na">the</span> <span class="na">exposed</span> <span class="na">URL</span> <span class="na">of</span> <span class="na">the</span> <span class="err">./</span><span class="na">static</span> <span class="na">directory</span>
-    <span class="na">app_root =</span><span class="err"> </span><span class="s">root</span> <span class="err">+</span> <span class="err">'</span><span class="na">plugins</span><span class="err">/</span><span class="na">visualizations</span><span class="err">/'+</span><span class="na">visualization_name</span><span class="err">+'/</span><span class="na">static</span><span class="err">/'</span>
+    ## Determines the exposed URL of the ./static directory
+    app_root = root + 'plugins/visualizations/'+visualization_name+'/static/'
 
-    <span class="err">##</span> <span class="na">Actual</span> <span class="na">file</span> <span class="na">URL:</span>
-    <span class="na">file_url =</span><span class="err"> </span><span class="s">os.path.join(root,</span> <span class="err">'</span><span class="na">datasets</span><span class="err">',</span> <span class="na">hdadict</span><span class="err">['</span><span class="na">id</span><span class="err">'],</span> <span class="err">"</span><span class="na">display</span><span class="err">?</span><span class="na">to_ext=</span><span class="s">"+hda.ext)
+    ## Actual file URL:
+    file_url = os.path.join(root, 'datasets', hdadict['id'], "display?to_ext="+hda.ext)
 
     ## Ensure BAI index is symlinked
     bai_target = hda.file_name+'.bai'
@@ -645,75 +660,75 @@ on your (local) Galaxy and restart Galaxy.</p>
     import pysam
     bam_idxstats_data = pysam.idxstats(hda.file_name)
 %&gt;
-&lt;html&gt;
-     &lt;head&gt;
-        &lt;title&gt;${hda.name | h} | ${visualization_name | h}&lt;/title&gt;
+<span class="nt">&lt;html&gt;</span>
+     <span class="nt">&lt;head&gt;</span>
+        <span class="nt">&lt;title&gt;</span>${hda.name | h} | ${visualization_name | h}<span class="nt">&lt;/title&gt;</span>
 
-        &lt;style&gt;
-             .chart div {
-               font: 10px sans-serif;
-               background-color: steelblue;
-               text-align: right;
-               padding: 3px;
-               margin: 1px;
-               color: white;
-             }
-        &lt;/style&gt;
-        &lt;script&gt;
-            bam_idxstats_data = ${bam_idxstats_data};
-            function parse_data(data) {
-                 /*
+        <span class="nt">&lt;style&gt;</span>
+             <span class="nc">.chart</span> <span class="nt">div</span> <span class="p">{</span>
+               <span class="nl">font</span><span class="p">:</span> <span class="m">10px</span> <span class="nb">sans-serif</span><span class="p">;</span>
+               <span class="nl">background-color</span><span class="p">:</span> <span class="no">steelblue</span><span class="p">;</span>
+               <span class="nl">text-align</span><span class="p">:</span> <span class="nb">right</span><span class="p">;</span>
+               <span class="nl">padding</span><span class="p">:</span> <span class="m">3px</span><span class="p">;</span>
+               <span class="nl">margin</span><span class="p">:</span> <span class="m">1px</span><span class="p">;</span>
+               <span class="nl">color</span><span class="p">:</span> <span class="no">white</span><span class="p">;</span>
+             <span class="p">}</span>
+        <span class="nt">&lt;/style&gt;</span>
+        <span class="nt">&lt;script&gt;</span>
+            <span class="nx">bam_idxstats_data</span> <span class="o">=</span> <span class="nx">$</span><span class="p">{</span><span class="nx">bam_idxstats_data</span><span class="p">};</span>
+            <span class="kd">function</span> <span class="nx">parse_data</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+                 <span class="cm">/*
                   Data comes in as tuple of unsplit lines:
-                  ["</span><span class="na">chr1</span><span class="err">\</span><span class="na">t1000</span><span class="err">\</span><span class="na">t0</span><span class="err">\</span><span class="na">t0</span><span class="err">",</span> <span class="err">"</span><span class="na">chr2</span><span class="err">\</span><span class="na">t2500</span><span class="err">\</span><span class="na">t0</span><span class="err">\</span><span class="na">t0</span><span class="err">"]</span>
+                  ["chr1\t1000\t0\t0", "chr2\t2500\t0\t0"]
 
-                  <span class="na">We</span> <span class="na">need</span> <span class="na">to</span> <span class="na">split</span> <span class="na">it</span> <span class="na">up</span><span class="err">,</span> <span class="na">and</span> <span class="na">ideally</span> <span class="na">only</span> <span class="na">keep</span> <span class="na">reference</span> <span class="na">names</span> <span class="na">without</span> <span class="na">an</span> <span class="na">underscore</span>
-                 <span class="err">*/</span>
-                 <span class="na">var</span> <span class="na">output =</span><span class="err"> </span><span class="s">{};</span>
+                  We need to split it up, and ideally only keep reference names without an underscore
+                 */</span>
+                 <span class="kd">var</span> <span class="nx">output</span> <span class="o">=</span> <span class="p">{};</span>
 
-                 <span class="na">for</span><span class="err">(</span><span class="na">var</span> <span class="na">i =</span><span class="err"> </span><span class="s">0;</span> <span class="na">i</span> <span class="err">&lt;</span> <span class="na">data</span><span class="err">.</span><span class="na">length</span> <span class="err">;</span> <span class="na">i</span><span class="err">++)</span> <span class="err">{</span>
-                     <span class="na">var</span> <span class="na">line =</span><span class="err"> </span><span class="s">data[i];</span>
-                     <span class="na">var</span> <span class="na">chunks =</span><span class="err"> </span><span class="s">line.split("\t");</span>
+                 <span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">data</span><span class="p">.</span><span class="nx">length</span> <span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+                     <span class="kd">var</span> <span class="nx">line</span> <span class="o">=</span> <span class="nx">data</span><span class="p">[</span><span class="nx">i</span><span class="p">];</span>
+                     <span class="kd">var</span> <span class="nx">chunks</span> <span class="o">=</span> <span class="nx">line</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s2">"\t"</span><span class="p">);</span>
 
-                     <span class="na">if</span><span class="err">(</span><span class="na">chunks</span><span class="err">[</span><span class="na">0</span><span class="err">].</span><span class="na">split</span><span class="err">("</span><span class="na">_</span><span class="err">").</span><span class="na">length =</span><span class="s">=</span> <span class="na">1</span><span class="err">)</span> <span class="err">{</span> <span class="err">//</span> <span class="na">only</span> <span class="na">if</span> <span class="na">it</span> <span class="na">does</span> <span class="na">not</span> <span class="na">contain</span> <span class="na">underscore</span>
-                         <span class="na">output</span><span class="err">[</span><span class="na">chunks</span><span class="err">[</span><span class="na">0</span><span class="err">]]</span> <span class="err">=</span> <span class="na">parseInt</span><span class="err">(</span><span class="na">chunks</span><span class="err">[</span><span class="na">2</span><span class="err">]);</span>
-                     <span class="err">}</span>
-                 <span class="err">}</span>
+                     <span class="k">if</span><span class="p">(</span><span class="nx">chunks</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">split</span><span class="p">(</span><span class="s2">"_"</span><span class="p">).</span><span class="nx">length</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// only if it does not contain underscore</span>
+                         <span class="nx">output</span><span class="p">[</span><span class="nx">chunks</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span> <span class="o">=</span> <span class="nb">parseInt</span><span class="p">(</span><span class="nx">chunks</span><span class="p">[</span><span class="mi">2</span><span class="p">]);</span>
+                     <span class="p">}</span>
+                 <span class="p">}</span>
 
-                 <span class="na">return</span> <span class="na">output</span><span class="err">;</span>
-            <span class="err">}</span>
+                 <span class="k">return</span> <span class="nx">output</span><span class="p">;</span>
+            <span class="p">}</span>
 
-            <span class="na">function</span> <span class="na">calc_stats</span><span class="err">(</span><span class="na">parsed</span><span class="err">)</span> <span class="err">{</span>
-                <span class="na">max =</span><span class="err"> </span><span class="s">0;</span>
-                <span class="na">sum =</span><span class="err"> </span><span class="s">0;</span>
-                <span class="na">for</span> <span class="err">(</span><span class="na">var</span> <span class="na">key</span> <span class="na">in</span> <span class="na">parsed</span><span class="err">)</span> <span class="err">{</span>
-                    <span class="na">if</span> <span class="err">(</span><span class="na">parsed</span><span class="err">[</span><span class="na">key</span><span class="err">]</span> <span class="nt">&gt;</span> max){
-                        max = parsed[key];
-                    }
-                    sum += parsed[key]
-                }
-                return [max, sum];
-            }
+            <span class="kd">function</span> <span class="nx">calc_stats</span><span class="p">(</span><span class="nx">parsed</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nx">max</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+                <span class="nx">sum</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+                <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">key</span> <span class="k">in</span> <span class="nx">parsed</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="k">if</span> <span class="p">(</span><span class="nx">parsed</span><span class="p">[</span><span class="nx">key</span><span class="p">]</span> <span class="o">&gt;</span> <span class="nx">max</span><span class="p">){</span>
+                        <span class="nx">max</span> <span class="o">=</span> <span class="nx">parsed</span><span class="p">[</span><span class="nx">key</span><span class="p">];</span>
+                    <span class="p">}</span>
+                    <span class="nx">sum</span> <span class="o">+=</span> <span class="nx">parsed</span><span class="p">[</span><span class="nx">key</span><span class="p">]</span>
+                <span class="p">}</span>
+                <span class="k">return</span> <span class="p">[</span><span class="nx">max</span><span class="p">,</span> <span class="nx">sum</span><span class="p">];</span>
+            <span class="p">}</span>
 
-            function plot_data(parsed) {
-                var max = calc_stats(parsed)[0];
-                var sum = calc_stats(parsed)[1];
+            <span class="kd">function</span> <span class="nx">plot_data</span><span class="p">(</span><span class="nx">parsed</span><span class="p">)</span> <span class="p">{</span>
+                <span class="kd">var</span> <span class="nx">max</span> <span class="o">=</span> <span class="nx">calc_stats</span><span class="p">(</span><span class="nx">parsed</span><span class="p">)[</span><span class="mi">0</span><span class="p">];</span>
+                <span class="kd">var</span> <span class="nx">sum</span> <span class="o">=</span> <span class="nx">calc_stats</span><span class="p">(</span><span class="nx">parsed</span><span class="p">)[</span><span class="mi">1</span><span class="p">];</span>
 
-                for (var key in parsed) {
-                     var value = parsed[key];
-                     var ratio = 100.0 * value / sum;
-                     var ratio2 = 100.0 * value / max;
+                <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">key</span> <span class="k">in</span> <span class="nx">parsed</span><span class="p">)</span> <span class="p">{</span>
+                     <span class="kd">var</span> <span class="nx">value</span> <span class="o">=</span> <span class="nx">parsed</span><span class="p">[</span><span class="nx">key</span><span class="p">];</span>
+                     <span class="kd">var</span> <span class="nx">ratio</span> <span class="o">=</span> <span class="mf">100.0</span> <span class="o">*</span> <span class="nx">value</span> <span class="o">/</span> <span class="nx">sum</span><span class="p">;</span>
+                     <span class="kd">var</span> <span class="nx">ratio2</span> <span class="o">=</span> <span class="mf">100.0</span> <span class="o">*</span> <span class="nx">value</span> <span class="o">/</span> <span class="nx">max</span><span class="p">;</span>
 
-                     var div = document.createElement("div");
-                     div.innerHTML = '<span class="nt">&lt;nobr&gt;</span>'+key+'<span class="nt">&lt;/nobr&gt;</span>';
-                     document.getElementById("chart_names").appendChild(div);
+                     <span class="kd">var</span> <span class="nx">div</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s2">"div"</span><span class="p">);</span>
+                     <span class="nx">div</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="s1">'&lt;nobr&gt;'</span><span class="o">+</span><span class="nx">key</span><span class="o">+</span><span class="s1">'&lt;/nobr&gt;'</span><span class="p">;</span>
+                     <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">"chart_names"</span><span class="p">).</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">div</span><span class="p">);</span>
 
-                     var div = document.createElement("div");
-                     div.innerHTML = '<span class="nt">&lt;nobr&gt;</span>'+value+" ("+Math.round(ratio*100)/100+"%)<span class="nt">&lt;/nobr&gt;</span>";
-                     div.title = key+': '+value+" ("+Math.round(ratio*100)/100+"%)";
-                     div.style.width =  ratio2+'%';
-                     document.getElementById("chart").appendChild(div);
-                }
-            }
+                     <span class="kd">var</span> <span class="nx">div</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s2">"div"</span><span class="p">);</span>
+                     <span class="nx">div</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="s1">'&lt;nobr&gt;'</span><span class="o">+</span><span class="nx">value</span><span class="o">+</span><span class="s2">" ("</span><span class="o">+</span><span class="nb">Math</span><span class="p">.</span><span class="nx">round</span><span class="p">(</span><span class="nx">ratio</span><span class="o">*</span><span class="mi">100</span><span class="p">)</span><span class="o">/</span><span class="mi">100</span><span class="o">+</span><span class="s2">"%)&lt;/nobr&gt;"</span><span class="p">;</span>
+                     <span class="nx">div</span><span class="p">.</span><span class="nx">title</span> <span class="o">=</span> <span class="nx">key</span><span class="o">+</span><span class="s1">': '</span><span class="o">+</span><span class="nx">value</span><span class="o">+</span><span class="s2">" ("</span><span class="o">+</span><span class="nb">Math</span><span class="p">.</span><span class="nx">round</span><span class="p">(</span><span class="nx">ratio</span><span class="o">*</span><span class="mi">100</span><span class="p">)</span><span class="o">/</span><span class="mi">100</span><span class="o">+</span><span class="s2">"%)"</span><span class="p">;</span>
+                     <span class="nx">div</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">width</span> <span class="o">=</span>  <span class="nx">ratio2</span><span class="o">+</span><span class="s1">'%'</span><span class="p">;</span>
+                     <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">"chart"</span><span class="p">).</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">div</span><span class="p">);</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
         <span class="nt">&lt;/script&gt;</span>
      <span class="nt">&lt;/head&gt;</span>
      <span class="nt">&lt;body</span> <span class="na">onload=</span><span class="s">"plot_data(parse_data(bam_idxstats_data));"</span><span class="nt">&gt;</span>
@@ -734,7 +749,8 @@ on your (local) Galaxy and restart Galaxy.</p>
      <span class="nt">&lt;/body&gt;</span>
 <span class="nt">&lt;/html&gt;</span>
 
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <p>In the given example, the <code class="highlighter-rouge">RNAME</code> queries containing an underscore were removed.
 This is because there are many alternative chromosomes, making the list very large

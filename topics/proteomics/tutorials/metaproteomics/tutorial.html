@@ -480,14 +480,15 @@ will store the created database in the history, allowing to reuse it directly.</
         <li>
           <p><strong>SQL Query to generate tabular output</strong>:</p>
 
-          <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT distinct sequence
+          <div class="highlighter-rouge"><pre class="highlight"><code>SELECT distinct sequence
 
 FROM psm
 
 WHERE confidence &gt;= 95
 
 ORDER BY sequence
-</code></pre></div>          </div>
+</code></pre>
+          </div>
         </li>
       </ul>
 
@@ -540,7 +541,7 @@ Therefore we can search the database for the peptides and count the occurrence w
         <li>
           <p><strong>SQL Query</strong>:</p>
 
-          <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT sequence as "peptide", count(id) as "PSMs"
+          <div class="highlighter-rouge"><pre class="highlight"><code>SELECT sequence as "peptide", count(id) as "PSMs"
 
 FROM psm
 
@@ -549,7 +550,8 @@ WHERE confidence &gt;= 95
 GROUP BY sequence
 
 ORDER BY sequence
-</code></pre></div>          </div>
+</code></pre>
+          </div>
         </li>
       </ul>
     </li>
@@ -685,7 +687,7 @@ once again used, aggregating the number of peptides and PSMs for each genus leve
         <li>
           <p><strong>SQL Query to generate tabular output</strong>:</p>
 
-          <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT lca.genus,count(psm.sequence) as "PSMs",count(distinct psm.sequence) as "DISTINCT PEPTIDES"
+          <div class="highlighter-rouge"><pre class="highlight"><code>SELECT lca.genus,count(psm.sequence) as "PSMs",count(distinct psm.sequence) as "DISTINCT PEPTIDES"
 
 FROM psm LEFT JOIN lca ON psm.sequence = lca.peptide
 
@@ -694,7 +696,8 @@ WHERE confidence &gt;= 95
 GROUP BY lca.genus
 
 ORDER BY PSMs desc, 'DISTINCT PEPTIDES' desc
-</code></pre></div>          </div>
+</code></pre>
+          </div>
         </li>
       </ul>
     </li>
@@ -1025,7 +1028,7 @@ for each protein.</p>
         <li>
           <p><strong>SQL Query to generate tabular output</strong>:</p>
 
-          <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT sequence as "peptide", count(id) as "PSMs"
+          <div class="highlighter-rouge"><pre class="highlight"><code>SELECT sequence as "peptide", count(id) as "PSMs"
 
 FROM bering_psms
 
@@ -1034,7 +1037,8 @@ WHERE confidence &gt;= 95
 GROUP BY sequence
 
 ORDER BY sequence
-</code></pre></div>          </div>
+</code></pre>
+          </div>
         </li>
       </ul>
     </li>
@@ -1059,7 +1063,7 @@ ORDER BY sequence
         <li>
           <p><strong>SQL Query</strong>:</p>
 
-          <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT go.description, 
+          <div class="highlighter-rouge"><pre class="highlight"><code>SELECT go.description, 
 
 count(distinct bering_psms.sequence) as "bering_peptides", count(distinct bering_psms.id) as "bering_psms" 
 
@@ -1072,7 +1076,8 @@ WHERE go.aspect = 'molecular_function'
 GROUP BY go.description
 
 ORDER BY  bering_peptides desc,bering_psms desc
-</code></pre></div>          </div>
+</code></pre>
+          </div>
         </li>
       </ul>
     </li>

@@ -183,46 +183,49 @@ be taken into consideration when choosing where to run jobs and what parameters 
 
 <p>Install Slurm with apt:</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> <span class="nb">sudo </span>apt-get <span class="nb">install</span> <span class="nt">-y</span> slurm-wlm
-<span class="go">Reading package lists... Done
+<div class="language-console highlighter-rouge"><pre class="highlight"><code><span class="w">$ </span><span class="nc">sudo</span><span class="kv"> apt-get install -y slurm-wlm
+</span>Reading package lists... Done
 Building dependency tree       
 Reading state information... Done
 The following additional packages will be installed:
-</span><span class="c">  ...
-</span><span class="gp">$</span>
-</code></pre></div></div>
+  ...
+$
+</code></pre>
+</div>
 
 <p>Installed with Slurm is MUNGE (MUNGE Uid ‘N Gid Emporium…) which authenticates users between cluster hosts. You would normally need to ensure the same Munge key is distributed across all cluster hosts (in <code class="highlighter-rouge">/etc/munge/munge.key</code>) - A great task for Ansible. However, the installation of the munge package has created a random key for you, and you will not need to distribute this since you’ll run jobs locally.</p>
 
 <p>Verify that MUNGE is now running with <code class="highlighter-rouge">systemctl status munge</code>:</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> systemctl status munge
-<span class="go">● munge.service - MUNGE authentication service
-</span><span class="gp">   Loaded: loaded (/etc/systemd/system/munge.service;</span> enabled<span class="p">;</span> vendor preset: enabled<span class="o">)</span>
-<span class="gp">   Active: active (running) since Wed 2018-01-10 13:15:33 UTC;</span> 3min 46s ago
-<span class="go">     Docs: man:munged(8)
+<div class="language-console highlighter-rouge"><pre class="highlight"><code><span class="w">$ </span><span class="nc">systemctl</span><span class="kv"> status munge
+</span>● munge.service - MUNGE authentication service
+   Loaded: loaded (/etc/systemd/system/munge.service; enabled; vendor preset: enabled)
+   Active: active (running) since Wed 2018-01-10 13:15:33 UTC; 3min 46s ago
+     Docs: man:munged(8)
  Main PID: 4805 (munged)
    CGroup: /system.slice/munge.service
            └─4805 /usr/sbin/munged --syslog
 
 Jan 10 13:15:33 galaxy-admin-ws-big-35 systemd[1]: Starting MUNGE authentication service...
 Jan 10 13:15:33 galaxy-admin-ws-big-35 systemd[1]: Started MUNGE authentication service.
-</span><span class="gp">$</span>
-</code></pre></div></div>
+$
+</code></pre>
+</div>
 
 <p>You can also see that Slurm’s controller and execution daemon processes are configured to start automatically, and that they attempted to start, but failed:</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> systemctl status slurmctld
-<span class="go">● slurmctld.service - Slurm controller daemon
-</span><span class="gp">   Loaded: loaded (/lib/systemd/system/slurmctld.service;</span> enabled<span class="p">;</span> vendor preset: enabled<span class="o">)</span>
-<span class="go">   Active: inactive (dead)
-</span><span class="gp">Condition: start condition failed at Fri 2016-11-04 16:05:30 EDT;</span> 39s ago
-<span class="gp">$</span> systemctl status slurmd
-<span class="go">● slurmd.service - Slurm node daemon
-</span><span class="gp">   Loaded: loaded (/lib/systemd/system/slurmd.service;</span> enabled<span class="p">;</span> vendor preset: enabled<span class="o">)</span>
-<span class="go">   Active: inactive (dead)
-</span><span class="gp">Condition: start condition failed at Fri 2016-11-04 16:05:29 EDT;</span> 43s ago
-</code></pre></div></div>
+<div class="language-console highlighter-rouge"><pre class="highlight"><code><span class="w">$ </span><span class="nc">systemctl</span><span class="kv"> status slurmctld
+</span>● slurmctld.service - Slurm controller daemon
+   Loaded: loaded (/lib/systemd/system/slurmctld.service; enabled; vendor preset: enabled)
+   Active: inactive (dead)
+Condition: start condition failed at Fri 2016-11-04 16:05:30 EDT; 39s ago
+<span class="w">$ </span><span class="nc">systemctl</span><span class="kv"> status slurmd
+</span>● slurmd.service - Slurm node daemon
+   Loaded: loaded (/lib/systemd/system/slurmd.service; enabled; vendor preset: enabled)
+   Active: inactive (dead)
+Condition: start condition failed at Fri 2016-11-04 16:05:29 EDT; 43s ago
+</code></pre>
+</div>
 
 <p>The start condition that failed was the missing slurm config file.</p>
 
@@ -252,13 +255,13 @@ Jan 10 13:15:33 galaxy-admin-ws-big-35 systemd[1]: Started MUNGE authentication 
 
 <p>It should now be possible to start Slurm’s daemons. Begin by starting <code class="highlighter-rouge">slurmctld</code>, The Slurm controller daemon (only one host runs the controller, this orchestrates job scheduling, dispatching, and completion):</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> <span class="nb">sudo </span>systemctl start slurmctld
-<span class="gp">$</span> systemctl status slurmctld
-<span class="go">● slurmctld.service - Slurm controller daemon
-</span><span class="gp">   Loaded: loaded (/lib/systemd/system/slurmctld.service;</span> enabled<span class="p">;</span> vendor preset: enabled<span class="o">)</span>
-<span class="gp">   Active: active (running) since Fri 2016-11-04 16:46:08 EDT;</span> 4s ago
-<span class="gp">  Process: 5134 ExecStart=/usr/sbin/slurmctld $</span>SLURMCTLD_OPTIONS <span class="o">(</span><span class="nv">code</span><span class="o">=</span>exited, <span class="nv">status</span><span class="o">=</span>0/SUCCESS<span class="o">)</span>
-<span class="go"> Main PID: 5138 (slurmctld)
+<div class="language-console highlighter-rouge"><pre class="highlight"><code><span class="w">$ </span><span class="nc">sudo</span><span class="kv"> systemctl start slurmctld
+</span><span class="w">$ </span><span class="nc">systemctl</span><span class="kv"> status slurmctld
+</span>● slurmctld.service - Slurm controller daemon
+   Loaded: loaded (/lib/systemd/system/slurmctld.service; enabled; vendor preset: enabled)
+   Active: active (running) since Fri 2016-11-04 16:46:08 EDT; 4s ago
+  Process: 5134 ExecStart=/usr/sbin/slurmctld $SLURMCTLD_OPTIONS (code=exited, status=0/SUCCESS)
+ Main PID: 5138 (slurmctld)
     Tasks: 10
    Memory: 884.0K
       CPU: 11ms
@@ -267,17 +270,18 @@ Jan 10 13:15:33 galaxy-admin-ws-big-35 systemd[1]: Started MUNGE authentication 
 
 Nov 04 16:46:08 gat2016 systemd[1]: Starting Slurm controller daemon...
 Nov 04 16:46:08 gat2016 systemd[1]: Started Slurm controller daemon.
-</span></code></pre></div></div>
+</code></pre>
+</div>
 
 <p>Next, start up <code class="highlighter-rouge">slurmd</code>, the Slurm execution daemon. Every host that will execute jobs runs slurmd, which manages the processes that the slurm controller dispatches to it:</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> <span class="nb">sudo </span>systemctl start slurmd
-<span class="gp">$</span> systemctl status slurmd
-<span class="go">● slurmd.service - Slurm node daemon
-</span><span class="gp">   Loaded: loaded (/lib/systemd/system/slurmd.service;</span> enabled<span class="p">;</span> vendor preset: enabled<span class="o">)</span>
-<span class="gp">   Active: active (running) since Fri 2016-11-04 16:50:35 EDT;</span> 2s ago
-<span class="gp">  Process: 5169 ExecStart=/usr/sbin/slurmd $</span>SLURMD_OPTIONS <span class="o">(</span><span class="nv">code</span><span class="o">=</span>exited, <span class="nv">status</span><span class="o">=</span>0/SUCCESS<span class="o">)</span>
-<span class="go"> Main PID: 5173 (slurmd)
+<div class="language-console highlighter-rouge"><pre class="highlight"><code><span class="w">$ </span><span class="nc">sudo</span><span class="kv"> systemctl start slurmd
+</span><span class="w">$ </span><span class="nc">systemctl</span><span class="kv"> status slurmd
+</span>● slurmd.service - Slurm node daemon
+   Loaded: loaded (/lib/systemd/system/slurmd.service; enabled; vendor preset: enabled)
+   Active: active (running) since Fri 2016-11-04 16:50:35 EDT; 2s ago
+  Process: 5169 ExecStart=/usr/sbin/slurmd $SLURMD_OPTIONS (code=exited, status=0/SUCCESS)
+ Main PID: 5173 (slurmd)
     Tasks: 1
    Memory: 2.0M
       CPU: 10ms
@@ -287,18 +291,20 @@ Nov 04 16:46:08 gat2016 systemd[1]: Started Slurm controller daemon.
 Nov 04 16:50:35 gat2016 systemd[1]: Starting Slurm node daemon...
 Nov 04 16:50:35 gat2016 systemd[1]: slurmd.service: PID file /var/run/slurm-llnl/slurmd.pid not readable (yet?) after start: No such
 Nov 04 16:50:35 gat2016 systemd[1]: Started Slurm node daemon.
-</span></code></pre></div></div>
+</code></pre>
+</div>
 
 <p>You should now be able to see that your slurm cluster is operational with the <code class="highlighter-rouge">sinfo</code> command. This shows the state of nodes and partitions (synonymous with queues in other DRMs). The “node-oriented view” provided with the <code class="highlighter-rouge">-N</code> flag is particularly useful:</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> sinfo
-<span class="go">PARTITION AVAIL  TIMELIMIT  NODES  STATE NODELIST
+<div class="language-console highlighter-rouge"><pre class="highlight"><code><span class="w">$ </span><span class="nc">sinfo</span><span class="kv">
+</span>PARTITION AVAIL  TIMELIMIT  NODES  STATE NODELIST
 debug*       up   infinite      1   idle localhost
-</span><span class="gp">$</span> sinfo <span class="nt">-Nel</span>
-<span class="go">Fri Nov  4 16:51:24 2016
+<span class="w">$ </span><span class="nc">sinfo</span><span class="kv"> -Nel
+</span>Fri Nov  4 16:51:24 2016
 NODELIST   NODES PARTITION       STATE CPUS    S:C:T MEMORY TMP_DISK WEIGHT FEATURES REASON
 localhost      1    debug*        idle    1    2:1:1      1        0      1   (null) none
-</span></code></pre></div></div>
+</code></pre>
+</div>
 
 <p>If your node state is not <code class="highlighter-rouge">idle</code>, something has gone wrong. If your node state ends with an asterisk <code class="highlighter-rouge">*</code>, the slurm controller is attempting to contact the slurm execution daemon but has not yet been successful.</p>
 
@@ -315,36 +321,39 @@ localhost      1    debug*        idle    1    2:1:1      1        0      1   (n
 
 <p>Galaxy runs <code class="highlighter-rouge">sbatch</code> jobs but we can use both <code class="highlighter-rouge">srun</code> and <code class="highlighter-rouge">sbatch</code> to test:</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> srun <span class="nb">uname</span> <span class="nt">-a</span>
-<span class="gp">Linux gat2016 4.4.0-31-generic #</span>50-Ubuntu SMP Wed Jul 13 00:07:12 UTC 2016 x86_64 x86_64 x86_64 GNU/Linux
-</code></pre></div></div>
+<div class="language-console highlighter-rouge"><pre class="highlight"><code><span class="w">$ </span><span class="nc">srun</span><span class="kv"> uname -a
+</span>Linux gat2016 4.4.0-31-generic #50-Ubuntu SMP Wed Jul 13 00:07:12 UTC 2016 x86_64 x86_64 x86_64 GNU/Linux
+</code></pre>
+</div>
 
 <p>Although it looks like this command ran as if I had not used <code class="highlighter-rouge">srun</code>, it was in fact routed through Slurm.</p>
 
 <p>Next, create a test job script somewhere, such as in <code class="highlighter-rouge">~/sbatch-test.sh</code>. This should be a shell script and must include the shell “shebang” line:</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/sh</span>
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="c">#!/bin/sh</span>
 
-<span class="nb">uname</span> <span class="nt">-a</span>
-<span class="nb">uptime
-cat</span> /etc/issue
-<span class="nb">sleep </span>30
-</code></pre></div></div>
+uname -a
+uptime
+cat /etc/issue
+sleep 30
+</code></pre>
+</div>
 
 <p>Submit it with <code class="highlighter-rouge">sbatch</code> and monitor it with <code class="highlighter-rouge">squeue</code>:</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> sbatch sbatch-test.sh
-<span class="go">Submitted batch job 3
-</span><span class="gp">$</span> squeue
-<span class="go">             JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
+<div class="language-console highlighter-rouge"><pre class="highlight"><code><span class="w">$ </span><span class="nc">sbatch</span><span class="kv"> sbatch-test.sh
+</span>Submitted batch job 3
+<span class="w">$ </span><span class="nc">squeue</span><span class="kv">
+</span>             JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
                  3     debug sbatch-t galaxygu  R       0:03      1 localhost
-</span><span class="gp">$</span> <span class="nb">cat </span>slurm-3.out
-<span class="gp">Linux gat2016 4.4.0-31-generic #</span>50-Ubuntu SMP Wed Jul 13 00:07:12 UTC 2016 x86_64 x86_64 x86_64 GNU/Linux
-<span class="go"> 17:09:18 up  1:28,  2 users,  load average: 0.00, 0.00, 0.00
+<span class="w">$ </span><span class="nc">cat</span><span class="kv"> slurm-3.out
+</span>Linux gat2016 4.4.0-31-generic #50-Ubuntu SMP Wed Jul 13 00:07:12 UTC 2016 x86_64 x86_64 x86_64 GNU/Linux
+ 17:09:18 up  1:28,  2 users,  load average: 0.00, 0.00, 0.00
 Ubuntu 16.04.1 LTS \n \l
 
-</span><span class="gp">$</span>
-</code></pre></div></div>
+$
+</code></pre>
+</div>
 
 <p>If you’ve made it this far, your Slurm installation is working!</p>
 
@@ -352,8 +361,8 @@ Ubuntu 16.04.1 LTS \n \l
 
 <p>Above Slurm in the stack sits slurm-drmaa, a library that provides a translational interface from the Slurm API to the generalized DRMAA API in C. Thankfully, Ubuntu has a package for it as well:</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> <span class="nb">sudo </span>apt-get <span class="nb">install </span>slurm-drmaa1
-<span class="go">Reading package lists... Done
+<div class="language-console highlighter-rouge"><pre class="highlight"><code><span class="w">$ </span><span class="nc">sudo</span><span class="kv"> apt-get install slurm-drmaa1
+</span>Reading package lists... Done
 Building dependency tree
 Reading state information... Done
 The following additional packages will be installed:
@@ -378,8 +387,9 @@ Processing triggers for libc-bin (2.23-0ubuntu3) ...
 Setting up libslurm29 (15.08.7-1build1) ...
 Setting up slurm-drmaa1 (1.0.7-1build3) ...
 Processing triggers for libc-bin (2.23-0ubuntu3) ...
-</span><span class="gp">$</span>
-</code></pre></div></div>
+$
+</code></pre>
+</div>
 
 <h3 id="section-3---run-galaxy-jobs-through-slurm">Section 3 - Run Galaxy jobs through Slurm</h3>
 
@@ -399,63 +409,69 @@ Processing triggers for libc-bin (2.23-0ubuntu3) ...
 
 <p>We can do this with a single command: <code class="highlighter-rouge">sudo -H -u galaxy /srv/galaxy/venv/bin/pip install drmaa</code>:</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> <span class="nb">sudo</span> <span class="nt">-H</span> <span class="nt">-u</span> galaxy /srv/galaxy/venv/bin/pip <span class="nb">install </span>drmaa
-<span class="go">Collecting drmaa
+<div class="language-console highlighter-rouge"><pre class="highlight"><code><span class="w">$ </span><span class="nc">sudo</span><span class="kv"> -H -u galaxy /srv/galaxy/venv/bin/pip install drmaa
+</span>Collecting drmaa
   Downloading drmaa-0.7.6-py2.py3-none-any.whl
 Installing collected packages: drmaa
 Successfully installed drmaa-0.7.6
 You are using pip version 8.1.2, however version 9.0.0 is available.
 You should consider upgrading via the 'pip install --upgrade pip' command.
-</span><span class="gp">$</span>
-</code></pre></div></div>
+$
+</code></pre>
+</div>
 
 <p><strong>Part 2 - Configure Galaxy</strong></p>
 
 <p>At the top of the stack sits Galaxy. Galaxy must now be configured to use the cluster we’ve just set up. The DRMAA Python documentation (and Galaxy’s own documentation) instruct that you should set the <code class="highlighter-rouge">$DRMAA_LIBRARY_PATH</code> environment variable so that DRMAA Python can find <code class="highlighter-rouge">libdrmaa.so</code> (aka slurm-drmaa). Because Galaxy is now being started under supervisor, the environment that Galaxy starts under is controlled by the <code class="highlighter-rouge">environment</code> option in <code class="highlighter-rouge">/etc/supervisor/conf.d/galaxy.conf</code>. The <code class="highlighter-rouge">[program:handler]</code> should thus be updated to refer to the path to slurm-drmaa, which is <code class="highlighter-rouge">/usr/lib/slurm-drmaa/lib/libdrmaa.so.1</code>:</p>
 
-<div class="language-ini highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="py">environment</span>     <span class="p">=</span> <span class="s">VIRTUAL_ENV="/srv/galaxy/venv",PATH="/srv/galaxy/venv/bin:%(ENV_PATH)s",DRMAA_LIBRARY_PATH="/usr/lib/slurm-drmaa/lib/libdrmaa.so.1"</span>
-</code></pre></div></div>
+<div class="language-ini highlighter-rouge"><pre class="highlight"><code><span class="py">environment</span>     <span class="p">=</span> <span class="s">VIRTUAL_ENV="/srv/galaxy/venv",PATH="/srv/galaxy/venv/bin:%(ENV_PATH)s",DRMAA_LIBRARY_PATH="/usr/lib/slurm-drmaa/lib/libdrmaa.so.1"</span>
+</code></pre>
+</div>
 
 <p>This change is not read until <code class="highlighter-rouge">supervisord</code> is notified with <code class="highlighter-rouge">sudo supervisorctl update</code>, but we’ll wait to do that until after we’ve updated Galaxy’s job configuration.</p>
 
 <p>We need to modify <code class="highlighter-rouge">job_conf.xml</code> to instruct Galaxy’s job handlers to load the Slurm job runner plugin, and set the Slurm job submission parameters. This file was installed by Ansible and can be found in <code class="highlighter-rouge">/srv/galaxy/config</code> (remember, it’s owned by the <code class="highlighter-rouge">galaxy</code> user so you’ll need to use <code class="highlighter-rouge">sudo</code> to edit it). A job runner plugin definition must have the <code class="highlighter-rouge">id</code>, <code class="highlighter-rouge">type</code>, and <code class="highlighter-rouge">load</code> attributes. The entire <code class="highlighter-rouge">&lt;plugins&gt;</code> tag group should look like:</p>
 
-<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nt">&lt;plugins</span> <span class="na">workers=</span><span class="s">"4"</span><span class="nt">&gt;</span>
+<div class="language-xml highlighter-rouge"><pre class="highlight"><code>    <span class="nt">&lt;plugins</span> <span class="na">workers=</span><span class="s">"4"</span><span class="nt">&gt;</span>
         <span class="nt">&lt;plugin</span> <span class="na">id=</span><span class="s">"local"</span> <span class="na">type=</span><span class="s">"runner"</span> <span class="na">load=</span><span class="s">"galaxy.jobs.runners.local:LocalJobRunner"</span><span class="nt">/&gt;</span>
         <span class="nt">&lt;plugin</span> <span class="na">id=</span><span class="s">"slurm"</span> <span class="na">type=</span><span class="s">"runner"</span> <span class="na">load=</span><span class="s">"galaxy.jobs.runners.slurm:SlurmJobRunner"</span><span class="nt">/&gt;</span>
     <span class="nt">&lt;/plugins&gt;</span>
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <p>Next, we need to add a new destination for the Slurm job runner. This is a basic destination with no parameters, Galaxy will do the equivalent of submitting a job as <code class="highlighter-rouge">sbatch /path/to/job_script.sh</code>. Note that we also need to set a default destination now that more than one destination is defined. In a <code class="highlighter-rouge">&lt;destination&gt;</code> tag, the <code class="highlighter-rouge">id</code> attribute is a unique identifier for that destination and the <code class="highlighter-rouge">runner</code> attribute must match the <code class="highlighter-rouge">id</code> of defined plugin:</p>
 
-<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nt">&lt;destinations</span> <span class="na">default=</span><span class="s">"slurm"</span><span class="nt">&gt;</span>
+<div class="language-xml highlighter-rouge"><pre class="highlight"><code>    <span class="nt">&lt;destinations</span> <span class="na">default=</span><span class="s">"slurm"</span><span class="nt">&gt;</span>
         <span class="nt">&lt;destination</span> <span class="na">id=</span><span class="s">"slurm"</span> <span class="na">runner=</span><span class="s">"slurm"</span><span class="nt">/&gt;</span>
         <span class="nt">&lt;destination</span> <span class="na">id=</span><span class="s">"local"</span> <span class="na">runner=</span><span class="s">"local"</span><span class="nt">/&gt;</span>
     <span class="nt">&lt;/destinations&gt;</span>
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <p>To reread the job config, Galaxy must be restarted. You can do this with <code class="highlighter-rouge">sudo supervisorctl restart all</code>. Technically these changes only require restarting the handlers (if we were changing a tool-to-handler mapping it’d require restarting the web server as well) so <code class="highlighter-rouge">sudo supervisorctl restart gx:handler0 gx:handler1</code> would suffice. However, the handlers will be restarted when we update supervisor to reread the config that we changed earlier. Do this now with <code class="highlighter-rouge">sudo supervisorctl update</code></p>
 
 <p>Before you restart, you can follow the handler log files using <code class="highlighter-rouge">tail</code>: <code class="highlighter-rouge">tail -f /srv/galaxy/log/handler?.log</code>.</p>
 
-<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ sudo supervisorctl update
+<div class="language-xml highlighter-rouge"><pre class="highlight"><code>$ sudo supervisorctl update
 gx: stopped
 gx: updated process group
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <p>Two sections of the log output are of interest. First, when Galaxy parses <code class="highlighter-rouge">job_conf.xml</code>:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>galaxy.jobs DEBUG 2016-11-05 14:07:12,649 Loading job configuration from /srv/galaxy/config/job_conf.xml
+<div class="highlighter-rouge"><pre class="highlight"><code>galaxy.jobs DEBUG 2016-11-05 14:07:12,649 Loading job configuration from /srv/galaxy/config/job_conf.xml
 galaxy.jobs DEBUG 2016-11-05 14:07:12,650 Read definition for handler 'handler0'
 galaxy.jobs DEBUG 2016-11-05 14:07:12,651 Read definition for handler 'handler1'
 galaxy.jobs DEBUG 2016-11-05 14:07:12,652 &lt;handlers&gt; default set to child with id or tag 'handlers'
 galaxy.jobs DEBUG 2016-11-05 14:07:12,652 &lt;destinations&gt; default set to child with id or tag 'slurm'
 galaxy.jobs DEBUG 2016-11-05 14:07:12,653 Done loading job configuration
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <p>Second, when Galaxy loads job runner plugins:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>galaxy.jobs.manager DEBUG 2016-11-05 14:07:22,341 Starting job handler
+<div class="highlighter-rouge"><pre class="highlight"><code>galaxy.jobs.manager DEBUG 2016-11-05 14:07:22,341 Starting job handler
 galaxy.jobs INFO 2016-11-05 14:07:22,347 Handler 'handler0' will load all configured runner plugins
 galaxy.jobs.runners DEBUG 2016-11-05 14:07:22,355 Starting 4 LocalRunner workers
 galaxy.jobs DEBUG 2016-11-05 14:07:22,367 Loaded job runner 'galaxy.jobs.runners.local:LocalJobRunner' as 'local'
@@ -463,7 +479,8 @@ pulsar.managers.util.drmaa DEBUG 2016-11-05 14:07:22,434 Initializing DRMAA sess
 galaxy.jobs.runners DEBUG 2016-11-05 14:07:22,443 Starting 4 SlurmRunner workers
 galaxy.jobs DEBUG 2016-11-05 14:07:22,455 Loaded job runner 'galaxy.jobs.runners.slurm:SlurmJobRunner' as 'slurm'
 galaxy.jobs.handler DEBUG 2016-11-05 14:07:22,455 Loaded job runners plugins: slurm:local
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <p><strong>Part 2 - Go!</strong></p>
 
@@ -480,7 +497,7 @@ galaxy.jobs.handler DEBUG 2016-11-05 14:07:22,455 Loaded job runners plugins: sl
 
 <p>In your <code class="highlighter-rouge">tail</code> terminal window you should see the following messages:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>galaxy.jobs DEBUG 2016-11-05 14:07:22,862 (2) Persisting job destination (destination id: slurm)
+<div class="highlighter-rouge"><pre class="highlight"><code>galaxy.jobs DEBUG 2016-11-05 14:07:22,862 (2) Persisting job destination (destination id: slurm)
 galaxy.jobs.runners DEBUG 2016-11-05 14:07:22,958 Job [2] queued (328.180 ms)
 galaxy.jobs.handler INFO 2016-11-05 14:07:22,996 (2) Job dispatched
 galaxy.tools.deps DEBUG 2016-11-05 14:07:23,621 Building dependency shell command for dependency 'samtools'
@@ -495,21 +512,24 @@ galaxy.jobs.runners.drmaa DEBUG 2016-11-05 14:07:24,125 (2) submitting file /srv
 galaxy.jobs.runners.drmaa INFO 2016-11-05 14:07:24,172 (2) queued as 7
 galaxy.jobs DEBUG 2016-11-05 14:07:24,172 (2) Persisting job destination (destination id: slurm)
 galaxy.jobs.runners.drmaa DEBUG 2016-11-05 14:07:24,539 (2/7) state change: job is queued and active
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <p>At this point the job has been accepted by Slurm and is awaiting scheduling on a node. Once it’s been sent to a node and starts running, Galaxy logs this event:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>galaxy.jobs.runners.drmaa DEBUG 2016-11-05 14:07:25,559 (2/7) state change: job is running
-</code></pre></div></div>
+<div class="highlighter-rouge"><pre class="highlight"><code>galaxy.jobs.runners.drmaa DEBUG 2016-11-05 14:07:25,559 (2/7) state change: job is running
+</code></pre>
+</div>
 
 <p>Finally, when the job is complete, Galaxy performs its job finalization process:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>galaxy.jobs.runners.drmaa DEBUG 2016-11-05 14:07:30,883 (2/7) state change: job finished normally
+<div class="highlighter-rouge"><pre class="highlight"><code>galaxy.jobs.runners.drmaa DEBUG 2016-11-05 14:07:30,883 (2/7) state change: job finished normally
 galaxy.model.metadata DEBUG 2016-11-05 14:07:31,132 loading metadata from file for: HistoryDatasetAssociation 2
 galaxy.jobs INFO 2016-11-05 14:07:31,336 Collecting metrics for Job 2
 galaxy.jobs DEBUG 2016-11-05 14:07:31,370 job 2 ended (finish() executed in (411.821 ms))
 galaxy.model.metadata DEBUG 2016-11-05 14:07:31,375 Cleaning up external metadata files
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <p>Note a few useful bits in the output:</p>
 <ul>
@@ -521,8 +541,8 @@ galaxy.model.metadata DEBUG 2016-11-05 14:07:31,375 Cleaning up external metadat
 
 <p>Slurm allows us to query the exit state of jobs for a time period of the value of Slurm’s <code class="highlighter-rouge">MinJobAge</code> option, which defaults to 300 (seconds, == 5 minutes):</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> scontrol show job 7
-<span class="go">JobId=7 JobName=g2_upload1_anonymous_10_0_2_2
+<div class="language-console highlighter-rouge"><pre class="highlight"><code><span class="w">$ </span><span class="nc">scontrol</span><span class="kv"> show job 7
+</span>JobId=7 JobName=g2_upload1_anonymous_10_0_2_2
    UserId=galaxy(999) GroupId=galaxy(999)
    Priority=4294901754 Nice=0 Account=(null) QOS=(null)
    JobState=COMPLETED Reason=None Dependency=(null)
@@ -547,7 +567,8 @@ galaxy.model.metadata DEBUG 2016-11-05 14:07:31,375 Cleaning up external metadat
    StdIn=StdIn=/dev/null
    StdOut=/srv/galaxy/server/database/jobs/000/2/galaxy_2.o
    Power= SICP=0
-</span></code></pre></div></div>
+</code></pre>
+</div>
 
 <p>After the job has been purged from the active jobs database, a bit of information (but not as much as <code class="highlighter-rouge">scontrol</code> provides) can be retrieved from Slurm’s logs. However, it’s a good idea to set up Slurm’s accounting database to keep old job information in a queryable format.</p>
 
@@ -583,15 +604,16 @@ but the package was later renamed to <code class="highlighter-rouge">slurm-wlm</
 
 <p>We don’t want to overload our training VMs trying to run real tools, so to demonstrate how to map a multicore tool to a multicore destination, we’ll create a fake tool. Since most of these operations are performed as the <code class="highlighter-rouge">galaxy</code> user it’s probably easiest to open a shell as that user before starting:</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">ubuntu$</span> <span class="nb">sudo</span> <span class="nt">-su</span> galaxy
-<span class="gp">galaxy$</span>
-</code></pre></div></div>
+<div class="language-console highlighter-rouge"><pre class="highlight"><code><span class="w">ubuntu$ </span><span class="nc">sudo</span><span class="kv"> -su galaxy
+</span>galaxy$
+</code></pre>
+</div>
 
 <p>If you prefer (as I do) to do less user switching, you can open a second shell to your VM to do this.</p>
 
 <p>Now, open a new file at <code class="highlighter-rouge">/srv/galaxy/server/tools/multi.xml</code> and add the contents:</p>
 
-<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;tool</span> <span class="na">id=</span><span class="s">"multi"</span> <span class="na">name=</span><span class="s">"Multicore Tool"</span><span class="nt">&gt;</span>
+<div class="language-xml highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;tool</span> <span class="na">id=</span><span class="s">"multi"</span> <span class="na">name=</span><span class="s">"Multicore Tool"</span><span class="nt">&gt;</span>
     <span class="nt">&lt;command&gt;</span>
         echo "Running with '\${GALAXY_SLOTS:-1}' threads" <span class="ni">&amp;gt;</span> "$output1"
     <span class="nt">&lt;/command&gt;</span>
@@ -602,34 +624,39 @@ but the package was later renamed to <code class="highlighter-rouge">slurm-wlm</
         <span class="nt">&lt;data</span> <span class="na">name=</span><span class="s">"output1"</span> <span class="na">format=</span><span class="s">"txt"</span> <span class="nt">/&gt;</span>
     <span class="nt">&lt;/outputs&gt;</span>
 <span class="nt">&lt;/tool&gt;</span>
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <p>Of course, this tool doesn’t actually <em>use</em> the allocated number of cores. In a real tool, you would call the tools’s underlying command with whatever flag that tool provides to control the number of threads or processes it starts, such as <code class="highlighter-rouge">foobar -t \${GALAXY_SLOTS:-1} ...</code>.</p>
 
 <p>Up until now we’ve been using the default tool panel config file, located at <code class="highlighter-rouge">/srv/galaxy/server/config/tool_conf.xml.sample</code>. Copy this to <code class="highlighter-rouge">/srv/galaxy/config/tool_conf.xml</code> in the same directory as the sample and open it up with an editor. We need to add the entry for our new tool. This can go anywhere, but I suggest putting it at the very top, between the opening <code class="highlighter-rouge">&lt;toolbox&gt;</code> and first <code class="highlighter-rouge">&lt;section&gt;</code>, so that it appears right at the top of the toolbox.</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> <span class="nb">cp</span> /srv/galaxy/server/config/tool_conf.xml.sample /srv/galaxy/config/tool_conf.xml
-<span class="gp">$</span> vim /srv/galaxy/config/tool_conf.xml
-</code></pre></div></div>
+<div class="language-console highlighter-rouge"><pre class="highlight"><code><span class="w">$ </span><span class="nc">cp</span><span class="kv"> /srv/galaxy/server/config/tool_conf.xml.sample /srv/galaxy/config/tool_conf.xml
+</span><span class="w">$ </span><span class="nc">vim</span><span class="kv"> /srv/galaxy/config/tool_conf.xml
+</span></code></pre>
+</div>
 
 <p>The tag to add is:</p>
 
-<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nt">&lt;tool</span> <span class="na">file=</span><span class="s">"multi.xml"</span><span class="nt">/&gt;</span>
-</code></pre></div></div>
+<div class="language-xml highlighter-rouge"><pre class="highlight"><code>  <span class="nt">&lt;tool</span> <span class="na">file=</span><span class="s">"multi.xml"</span><span class="nt">/&gt;</span>
+</code></pre>
+</div>
 
 <p>Galaxy needs to be instructed to read <code class="highlighter-rouge">tool_conf.xml</code> instead of <code class="highlighter-rouge">tool_conf.xml.sample</code>. Normally it does this automatically if <code class="highlighter-rouge">tool_conf.xml</code> exists, but the Ansible role we used to install Galaxy explicitly instructed Galaxy to load <code class="highlighter-rouge">tool_conf.xml.sample</code>.</p>
 
 <p>Edit <code class="highlighter-rouge">/srv/galaxy/config/galaxy.ini</code> and modify the value of <code class="highlighter-rouge">tool_config_file</code> accordingly:</p>
 
-<div class="language-ini highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="py">tool_config_file</span> <span class="p">=</span> <span class="s">/srv/galaxy/config/tool_conf.xml,/srv/galaxy/config/shed_tool_conf.xml</span>
-</code></pre></div></div>
+<div class="language-ini highlighter-rouge"><pre class="highlight"><code><span class="py">tool_config_file</span> <span class="p">=</span> <span class="s">/srv/galaxy/config/tool_conf.xml,/srv/galaxy/config/shed_tool_conf.xml</span>
+</code></pre>
+</div>
 
 <p>Finally, in order to read the toolbox changes, Galaxy should be restarted. You’ll need to return to the <code class="highlighter-rouge">ubuntu</code> user to do this (since the <code class="highlighter-rouge">galaxy</code> user does not have <code class="highlighter-rouge">sudo</code> privileges). It is, as usual, <code class="highlighter-rouge">sudo supervisorctl restart all</code>.</p>
 
 <p>Reload Galaxy in your browser and the new tool should now appear in the tool panel. If you have not already created a dataset in your history, upload a random text dataset. Once you have a dataset, click the tool’s name in the tool panel, then click Execute. When your job completes, the output should be:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Running with '1' threads
-</code></pre></div></div>
+<div class="highlighter-rouge"><pre class="highlight"><code>Running with '1' threads
+</code></pre>
+</div>
 
 <p><strong>Part 2 - Create a destination and map the tool</strong></p>
 
@@ -637,24 +664,27 @@ but the package was later renamed to <code class="highlighter-rouge">slurm-wlm</
 
 <p>As the <code class="highlighter-rouge">galaxy</code> user, open up <code class="highlighter-rouge">/srv/galaxy/config/job_conf.xml</code> and add the following new destination:</p>
 
-<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>        <span class="nt">&lt;destination</span> <span class="na">id=</span><span class="s">"slurm-2c"</span> <span class="na">runner=</span><span class="s">"slurm"</span><span class="nt">&gt;</span>
+<div class="language-xml highlighter-rouge"><pre class="highlight"><code>        <span class="nt">&lt;destination</span> <span class="na">id=</span><span class="s">"slurm-2c"</span> <span class="na">runner=</span><span class="s">"slurm"</span><span class="nt">&gt;</span>
             <span class="nt">&lt;param</span> <span class="na">id=</span><span class="s">"nativeSpecification"</span><span class="nt">&gt;</span>--nodes=1 --ntasks=2<span class="nt">&lt;/param&gt;</span>
         <span class="nt">&lt;/destination&gt;</span>
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <p>Then, map the new tool to the new destination using the tool ID (<code class="highlighter-rouge">&lt;tool id="multi"&gt;</code>) and destination id (<code class="highlighter-rouge">&lt;destination id="slurm-2c"&gt;</code>) by adding a new section to the job config, <code class="highlighter-rouge">&lt;tools&gt;</code>:</p>
 
-<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nt">&lt;tools&gt;</span>
+<div class="language-xml highlighter-rouge"><pre class="highlight"><code>    <span class="nt">&lt;tools&gt;</span>
         <span class="nt">&lt;tool</span> <span class="na">id=</span><span class="s">"multi"</span> <span class="na">destination=</span><span class="s">"slurm-2c"</span><span class="nt">/&gt;</span>
     <span class="nt">&lt;/tools&gt;</span>
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <p>And finally, restart Galaxy with <code class="highlighter-rouge">sudo supervisorctl restart all</code> (as the <code class="highlighter-rouge">ubuntu</code> user).</p>
 
 <p>Now, click the rerun button on the last history item, or click <strong>Multicore Tool</strong> in the tool panel, and then click the tool’s Execute button. If successful, your tool’s output should now be:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Running with '2' threads
-</code></pre></div></div>
+<div class="highlighter-rouge"><pre class="highlight"><code>Running with '2' threads
+</code></pre>
+</div>
 
 <h3 id="section-2---dynamically-map-a-tool-to-a-job-destination">Section 2 - Dynamically map a tool to a job destination</h3>
 
@@ -664,18 +694,19 @@ but the package was later renamed to <code class="highlighter-rouge">slurm-wlm</
 
 <p>Dynamic tool destinations are configured via a YAML file at <code class="highlighter-rouge">/srv/galaxy/config/tool_destinations.yml</code>. As before, we’ll use a fake example. Create the file with the following contents:</p>
 
-<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">---</span>
-<span class="na">tools</span><span class="pi">:</span>
-  <span class="na">multi</span><span class="pi">:</span>
-    <span class="na">rules</span><span class="pi">:</span>
-      <span class="pi">-</span> <span class="na">rule_type</span><span class="pi">:</span> <span class="s">file_size</span>
-        <span class="na">lower_bound</span><span class="pi">:</span> <span class="s">16</span>
-        <span class="na">upper_bound</span><span class="pi">:</span> <span class="s">Infinity</span>
-        <span class="na">destination</span><span class="pi">:</span> <span class="s">slurm-2c</span>
-    <span class="na">default_destination</span><span class="pi">:</span> <span class="s">slurm</span>
-<span class="na">default_destination</span><span class="pi">:</span> <span class="s">local</span>
-<span class="na">verbose</span><span class="pi">:</span> <span class="s">True</span>
-</code></pre></div></div>
+<div class="language-yaml highlighter-rouge"><pre class="highlight"><code><span class="nn">---</span>
+<span class="s">tools</span><span class="pi">:</span>
+  <span class="s">multi</span><span class="pi">:</span>
+    <span class="s">rules</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">rule_type</span><span class="pi">:</span> <span class="s">file_size</span>
+        <span class="s">lower_bound</span><span class="pi">:</span> <span class="s">16</span>
+        <span class="s">upper_bound</span><span class="pi">:</span> <span class="s">Infinity</span>
+        <span class="s">destination</span><span class="pi">:</span> <span class="s">slurm-2c</span>
+    <span class="s">default_destination</span><span class="pi">:</span> <span class="s">slurm</span>
+<span class="s">default_destination</span><span class="pi">:</span> <span class="s">local</span>
+<span class="s">verbose</span><span class="pi">:</span> <span class="s">True</span>
+</code></pre>
+</div>
 
 <p>The rule says:</p>
 <ul>
@@ -690,25 +721,28 @@ but the package was later renamed to <code class="highlighter-rouge">slurm-wlm</
 
 <p>We also need to inform Galaxy of the path to the file we’ve just created, which is done using the <code class="highlighter-rouge">tool_destinations_config_file</code> in <code class="highlighter-rouge">galaxy.ini</code>:</p>
 
-<div class="language-ini highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="py">tool_destinations_config_file</span> <span class="p">=</span> <span class="s">/srv/galaxy/config/tool_destinations.yml</span>
-</code></pre></div></div>
+<div class="language-ini highlighter-rouge"><pre class="highlight"><code><span class="py">tool_destinations_config_file</span> <span class="p">=</span> <span class="s">/srv/galaxy/config/tool_destinations.yml</span>
+</code></pre>
+</div>
 
 <p>Once the dynamic tool definition has been written, we need to update Galaxy’s job configuration to use this rule. Open <code class="highlighter-rouge">/srv/galaxy/config/job_conf.xml</code> and add a DTD destination:</p>
 
-<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>        <span class="nt">&lt;destination</span> <span class="na">id=</span><span class="s">"dtd"</span> <span class="na">runner=</span><span class="s">"dynamic"</span><span class="nt">&gt;</span>
+<div class="language-xml highlighter-rouge"><pre class="highlight"><code>        <span class="nt">&lt;destination</span> <span class="na">id=</span><span class="s">"dtd"</span> <span class="na">runner=</span><span class="s">"dynamic"</span><span class="nt">&gt;</span>
             <span class="nt">&lt;param</span> <span class="na">id=</span><span class="s">"type"</span><span class="nt">&gt;</span>dtd<span class="nt">&lt;/param&gt;</span>
         <span class="nt">&lt;/destination&gt;</span>
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <p>Also, comment out the previous <code class="highlighter-rouge">&lt;tool&gt;</code> definition for the <code class="highlighter-rouge">multi</code> tool, and replace it with a mapping to the dtd destination like so:</p>
 
-<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nt">&lt;tools&gt;</span>
+<div class="language-xml highlighter-rouge"><pre class="highlight"><code>    <span class="nt">&lt;tools&gt;</span>
 <span class="c">&lt;!--
         &lt;tool id="multi" destination="slurm-2c"/&gt;
 --&gt;</span>
         <span class="nt">&lt;tool</span> <span class="na">id=</span><span class="s">"multi"</span> <span class="na">destination=</span><span class="s">"dtd"</span><span class="nt">/&gt;</span>
     <span class="nt">&lt;/tools&gt;</span>
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <p>Then, restart Galaxy with <code class="highlighter-rouge">sudo supervisorctl restart all</code>.</p>
 
@@ -724,51 +758,56 @@ but the package was later renamed to <code class="highlighter-rouge">slurm-wlm</
 
 <p>Such form elements can be added to tools without modifying each tool’s configuration file through the use of the <strong>job resource parameters configuration file</strong>, <code class="highlighter-rouge">/srv/galaxy/config/job_resource_params_conf.xml</code>. Create this file and add the following contents:</p>
 
-<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;parameters&gt;</span>
+<div class="language-xml highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;parameters&gt;</span>
     <span class="nt">&lt;param</span> <span class="na">label=</span><span class="s">"Cores"</span> <span class="na">name=</span><span class="s">"cores"</span> <span class="na">type=</span><span class="s">"select"</span> <span class="na">help=</span><span class="s">"Number of cores to run job on."</span><span class="nt">&gt;</span>
         <span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">"1"</span><span class="nt">&gt;</span>1 (default)<span class="nt">&lt;/option&gt;</span>
         <span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">"2"</span><span class="nt">&gt;</span>2<span class="nt">&lt;/option&gt;</span>
     <span class="nt">&lt;/param&gt;</span>
   <span class="nt">&lt;param</span> <span class="na">label=</span><span class="s">"Time"</span> <span class="na">name=</span><span class="s">"time"</span> <span class="na">type=</span><span class="s">"integer"</span> <span class="na">size=</span><span class="s">"3"</span> <span class="na">min=</span><span class="s">"1"</span> <span class="na">max=</span><span class="s">"24"</span> <span class="na">value=</span><span class="s">"1"</span> <span class="na">help=</span><span class="s">"Maximum job time in hours, 'walltime' value (1-24). Leave blank to use default value."</span> <span class="nt">/&gt;</span>
 <span class="nt">&lt;/parameters&gt;</span>
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <p>This defines two resource fields, a select box where users can choose between 1 and 2 cores, and a text entry field where users can input an integer value from 1-24 to set the walltime for a job.</p>
 
 <p>As usual, we need to instruct Galaxy of where to find this file in <code class="highlighter-rouge">galaxy.ini</code> using the <code class="highlighter-rouge">job_resource_params_file</code> option:</p>
 
-<div class="language-ini highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="py">job_resource_params_file</span> <span class="p">=</span> <span class="s">/srv/galaxy/config/job_resource_params_conf.xml</span>
-</code></pre></div></div>
+<div class="language-ini highlighter-rouge"><pre class="highlight"><code><span class="py">job_resource_params_file</span> <span class="p">=</span> <span class="s">/srv/galaxy/config/job_resource_params_conf.xml</span>
+</code></pre>
+</div>
 
 <p><strong>Part 2 - Configure Galaxy to use the resource selector</strong></p>
 
 <p>Next, we define a new section in <code class="highlighter-rouge">job_conf.xml</code>: <code class="highlighter-rouge">&lt;resources&gt;</code>. This groups together parameters that should appear together on a tool form. Add the following section to <code class="highlighter-rouge">/srv/galaxy/server/job_conf.xml</code>:</p>
 
-<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nt">&lt;resources&gt;</span>
+<div class="language-xml highlighter-rouge"><pre class="highlight"><code>    <span class="nt">&lt;resources&gt;</span>
         <span class="nt">&lt;group</span> <span class="na">id=</span><span class="s">"multi_resources"</span><span class="nt">&gt;</span>cores,time<span class="nt">&lt;/group&gt;</span>
     <span class="nt">&lt;/resources&gt;</span>
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <p>The group ID will be used to map a tool to job resource parameters, and the text value of the <code class="highlighter-rouge">&lt;group&gt;</code> tag is a comma-separated list of <code class="highlighter-rouge">name</code>s from <code class="highlighter-rouge">job_resource_params_conf.xml</code> to include on the form of any tool that is mapped to the defined <code class="highlighter-rouge">&lt;group&gt;</code>.</p>
 
 <p>Finally, in <code class="highlighter-rouge">job_conf.xml</code>, move the previous <code class="highlighter-rouge">&lt;tool&gt;</code> definition for the <code class="highlighter-rouge">multi</code> tool into the comment and define a new <code class="highlighter-rouge">&lt;tool&gt;</code> that defines the <code class="highlighter-rouge">resources</code> for the tool:</p>
 
-<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nt">&lt;tools&gt;</span>
+<div class="language-xml highlighter-rouge"><pre class="highlight"><code>    <span class="nt">&lt;tools&gt;</span>
 <span class="c">&lt;!--
         &lt;tool id="multi" destination="slurm-2c"/&gt;
         &lt;tool id="multi" destination="dtd"/&gt;
 --&gt;</span>
         <span class="nt">&lt;tool</span> <span class="na">id=</span><span class="s">"multi"</span> <span class="na">destination=</span><span class="s">"dynamic_cores_time"</span> <span class="na">resources=</span><span class="s">"multi_resources"</span><span class="nt">/&gt;</span>
     <span class="nt">&lt;/tools&gt;</span>
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <p>We have assigned the <code class="highlighter-rouge">multi</code> tool to a new destination: <code class="highlighter-rouge">dynamic_cores_time</code>, but this destination does not exist. We need to create it. Add the following destination:</p>
 
-<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>        <span class="nt">&lt;destination</span> <span class="na">id=</span><span class="s">"dynamic_cores_time"</span> <span class="na">runner=</span><span class="s">"dynamic"</span><span class="nt">&gt;</span>
+<div class="language-xml highlighter-rouge"><pre class="highlight"><code>        <span class="nt">&lt;destination</span> <span class="na">id=</span><span class="s">"dynamic_cores_time"</span> <span class="na">runner=</span><span class="s">"dynamic"</span><span class="nt">&gt;</span>
             <span class="nt">&lt;param</span> <span class="na">id=</span><span class="s">"type"</span><span class="nt">&gt;</span>python<span class="nt">&lt;/param&gt;</span>
             <span class="nt">&lt;param</span> <span class="na">id=</span><span class="s">"function"</span><span class="nt">&gt;</span>dynamic_cores_time<span class="nt">&lt;/param&gt;</span>
         <span class="nt">&lt;/destination&gt;</span>
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <p>This is a <strong>Python function dynamic destination</strong>. Galaxy will load a function from <code class="highlighter-rouge">/srv/galaxy/server/lib/galaxy/jobs/rules/*.py</code> named <code class="highlighter-rouge">dynamic_cores_time</code> and that function will determine the job destination for this tool.</p>
 
@@ -778,7 +817,7 @@ but the package was later renamed to <code class="highlighter-rouge">slurm-wlm</
 
 <p>We need to write a Python function that will process these rules. Such rules live, by default, in <code class="highlighter-rouge">/srv/galaxy/server/lib/galaxy/jobs/rules/*.py</code> (although this can be configured). Create a new file, <code class="highlighter-rouge">/srv/galaxy/server/lib/galaxy/jobs/rules/cores_time.py</code>. This file should contains the function that we named in <code class="highlighter-rouge">job_conf.xml</code>: <code class="highlighter-rouge">dynamic_cores_time</code>:</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">logging</span>
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">logging</span>
 <span class="kn">from</span> <span class="nn">galaxy.jobs.mapper</span> <span class="kn">import</span> <span class="n">JobMappingException</span>
 
 <span class="n">log</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="n">__name__</span><span class="p">)</span>
@@ -831,7 +870,8 @@ but the package was later renamed to <code class="highlighter-rouge">slurm-wlm</
         <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">"native specification: </span><span class="si">%</span><span class="s">s"</span><span class="p">,</span> <span class="n">destination</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s">'nativeSpecification'</span><span class="p">])</span>
     <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">'returning destination: </span><span class="si">%</span><span class="s">s'</span><span class="p">,</span> <span class="n">destination_id</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">destination</span> <span class="ow">or</span> <span class="n">destination_id</span>
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <p>It is important to note that <strong>you are responsible for parameter validation, including the job resource selector</strong>. This function only handles the job resource parameter fields, but it could do many other things - examine inputs, job queues, other tool paramters, etc.</p>
 
@@ -853,8 +893,8 @@ but the package was later renamed to <code class="highlighter-rouge">slurm-wlm</
 
 <p>The cores parameter can be verified from the output of the tool. The walltime can be verified with <code class="highlighter-rouge">scontrol</code>:</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> scontrol show job 24
-<span class="go">JobId=24 JobName=g24_multi_anonymous_10_0_2_2
+<div class="language-console highlighter-rouge"><pre class="highlight"><code><span class="w">$ </span><span class="nc">scontrol</span><span class="kv"> show job 24
+</span>JobId=24 JobName=g24_multi_anonymous_10_0_2_2
    UserId=galaxy(999) GroupId=galaxy(999)
    Priority=4294901747 Nice=0 Account=(null) QOS=(null)
    JobState=COMPLETED Reason=None Dependency=(null)
@@ -879,7 +919,8 @@ but the package was later renamed to <code class="highlighter-rouge">slurm-wlm</
    StdIn=StdIn=/dev/null
    StdOut=/srv/galaxy/server/database/jobs/000/24/galaxy_24.o
    Power= SICP=0
-</span></code></pre></div></div>
+</code></pre>
+</div>
 
 <p>Note that the <code class="highlighter-rouge">TimeLimit</code> for this job (which I gave a 12 hour time limit) was set to <code class="highlighter-rouge">12:00:00</code>.</p>
 
