@@ -130,232 +130,232 @@ Table Browser には数多くのオプションがあります。幸運にも、
 * **group:** `Genes and Gene Predictions`
 * **track:** `GENCODE v24`
 
-**clade** と **genome** はとても明確でしょう。  **assembly** はasks which version/definition of the human genome we want.  (Any will do for our question, but UCSC is suggesting `hg38`, which is also the most recent.)  **group** is set to `Genes and Gene Predictions` which sounds like what we want. So far so good.
+**clade** と **genome** はとても明確でしょう。  **assembly** は私たちが使いたいヒトゲノムのバージョンや定義を選択します。（いかなる選択にも対応しますが、UCSCは `hg38` を提案しています、これは最近から提案されています。） **group** は私たちが使いたい `Genes and Gene Predictions` を選択します。ここまでは良いですね。
 
-**track** has a bewildering list of options. UCSC suggests `GENCODE v24`.  A web search leads us to the [GENCODE web site](https://www.gencodegenes.org/) which prominently states:
+**track** にはおびただしい量のリストがあります。 UCSC では `GENCODE v24` を提案しています。ウェブ検索では [GENCODE のウェブサイト](https://www.gencodegenes.org/)にアクセスできますwhich prominently states:
 
-> The GENCODE project produces high quality reference gene annotation and ...
+> GENCODE プロジェクトは高品質なリファレンス遺伝子のアノテーションを手掛けていて、そして...
 
-Time for a few more definitions.
+さらにいくつかの定義について話しましょう。
 
-> ### {% icon comment %} Definitions 2
+> ### {% icon comment %} 定義 2
 >
-> * **Reference genome**
->> A reference genome is the *genome of a single individual* that has been thoroughly studied, to the point that we know exactly what most of that individual's DNA is.  In practice a reference genome is used as shared map by researchers working on that organism. Reference genomes are updated periodically as techniques improve.
+> * **リファレンスゲノム**
+>> リファレンスゲノムは完全に研究された*単一個体のゲノム*であり、その個体のDNAの大部分が正確に解明されている。実際にはリファレンスゲノムはその生物を研究している研究者によってゲノムマップとして共有されています。リファレンスゲノムは技術が向上するにつれて定期的に更新されます。
 >
-> * **Sequence**
->> A genome's sequence describes the DNA in that genome, down to the A, C, T, and G (single nucleotide) level including the exact location where each is.  Given a reference genome, you can ask questions like, "What's the DNA on chromosome 2 between positions 1,678,901 and 1.688,322?"
+> * **シーケンス**
+>> ゲノムのシーケンスでは、A, C, T, そして G （単一ヌクレオチド）のレベルまで、それぞれの存在する正確な位置を含むゲノム中のDNAを表記します。リファレンスゲノムが与えられていると、あなたはこのような質問をするでしょう、「2番染色体上のDNAは1,678,901位から1.688,322位の間にあるのですか？」
 >
-> * **Genome/Gene annotation**
->> The sequence tells us what DNA is where, but it doesn't tell us anything about the function of that DNA.  *Annotation* is additional information about particular regions of the genome like where genes, repeats, promotors, and centromeres are, or how active a particular gene is.
+> * **ゲノム/遺伝子 アノテーション**
+>> シーケンスではどのようなDNAがどこにあるかを教えてくれますが、そのDNAの機能については何も教えてくれません。*アノテーション*ではゲノム上の特定の領域について、リピート、プロモーター、そして動原体といった遺伝子がどこにあるのか、または特定の遺伝子がどのような活性を示すかに関する情報を追加します。
 {: .comment}
 
-The **track** option asks us which set of annotations do we want to get?  There are so many choices because annotation is the result of analysis and interpretation, and there are many ways to do this. (And in this case, many of the options aren't even genes or gene predictions.)
+**track** オプションではどのアノテーションのセットを取得したいかを尋ねられています。アノテーションは解析と解釈の結果であるため選択肢が非常に多くあり、実行する方法も沢山あります。（そしてこの場合、多くのオプションは遺伝子や遺伝子の予測ですらありません。）
 
-GENCODE is "high-quality" and  "gene annotation." That sounds like a good thing to use.  Lets stay with the default: `GENCODE V24`.
+GENCODE は"高品質"な"遺伝子アノテーション"です。それは使用するのにとても良いように思えます。デフォルトのままにしておきましょう: `GENCODE V24`。
 
-So far we haven't changed *anything* from the defaults.  Lets change something.  The default  **region** is the whole genome, which can be done, but it's a lot of information. For this exercise lets use just one (small) chromosome.
+ここまでのところ*何も*デフォルトから変更していません。何かを変更してみましょう。 **region** のデフォルトは whole genome で、実行することが出来ますが、情報がとても多いです。このチュートリアルでは1つの（小さな）染色体を使用してみましょう。
 
-> ### {% icon hands_on %} Hands-on: Limit the region and get the data.
+> ### {% icon hands_on %} ハンズオン: region を限定してデータを取得する。
 >
-> 1. Say that we just want chromosome 22
->   * For **region** select `position`.
->   * In the text box next to `position` enter `chr22` (case matters).
+> 1. 22番染色体を欲しがりましょう
+>   * **region** で `position` を選択する.
+>   * `position` の隣にあるテキストボックスに `chr22` (case matters) と入力する。
 >     > ![Change the region](../../images/ucsc_tb_set_region_chr22.png)
 >
-> 2. *Click* the **get output** button.
->   * And, that doesn't actually get us the output.  It sends us to a second UCSC page that asks us exactly what we want.
+> 2. **get output** ボタンを*クリック*する。
+>   * ですが、これは実際にアウトプットを取得することはありません。このボタンをクリックすると私たちが欲しいものに正確に応えてくれる2つ目のUCSCのページに移動します。
 > &nbsp;
 >     > ![UCSC Table Browser 2nd page](../../images/ucsc_tb_2nd_page_whole_gene.png)
 >
-> 3. Under **Create one BED record per** make sure that **Whole Gene** is selected.
+> 3. **Create one BED record per** の下にある **Whole Gene** が選択されているか確認する。
 >
-> 4. *Click* the **Send query to Galaxy** button at the bottom of the form.
+> 4. フォームの下部にある **Send query to Galaxy** ボタンをクリックする。
 {: .hands_on}
 
-This returns us to Galaxy, first displaying a big green box (that's good!) and then returning us to the view we started with.  Except that we now have an item in our history, the dataset from UCSC.
+これでGalaxyに戻り、緑色の大きなボックスが初めて表示されています（いい感じです！）、そして Galaxy を始めたときの画面に戻っています。ただし今ヒストリーに1つ項目が入っており、これは UCSC からのデータセットです。
 
 
-### History Item Status
+### ヒストリーのステータスについて
 
-Watch your new history item.  It will go through three statuses before it's done.
+新しいヒストリーの項目を見てください。それは完了までに3つのステータスを経るでしょう。
 
-| Color | Icon | Meaning | |
+| 色 | アイコン | 意味 | |
 | ---- | ---- | ---- |
-| **Grey** | Clock | Item is waiting to start (waiting for data transfer to start) | ![Status: Queued](../../images/status_queued.png) |
-| **Yellow** | Spinner | Item is running (data is actively being transferred). | ![Status: Running](../../images/status_running.png) |
-| **Green** | None | Item has finished successfully (data transfer complete). | ![Status: Successfully finished](../../images/status_finished_success.png) |
+| **灰色** | 時計 | 項目が開始待ちです（データ転送の開始を待っています）。 | ![Status: Queued](../../images/status_queued.png) |
+| **黄色** | スピナー | 項目が実行中です（データが能動的に転送されています）。 | ![Status: Running](../../images/status_running.png) |
+| **緑色** | なし | 項目が正常に終了しました（データ転送が完了しました）。 | ![Status: Successfully finished](../../images/status_finished_success.png) |
 
-Occasionally you will also see a 4th status
+場合によっては4番目のステータスも表示されます
 
-* **Red**: Item did not finish successfully.
+* **赤色**: 項目が正常に完了しませんでした。
 
-See the *Galaxy History Item Status* practical for more. [TODO]
+詳細については *Galaxy History Item Status* を参照してください。 [TODO]
 
-## Examine the data
+## データを調べる
 
-> ### {% icon hands_on %} Hands-on: Look at the data.
-> Once the dataset is green, *click* on the dataset name (something like **UCSC Main on Human...**)
+> ### {% icon hands_on %} ハンズオン: データを見る
+> データセットが緑色になったら、データセット名（ **UCSC Main on Human...** のようなもの）を*クリック*する
 {: .hands_on}
 
-This expands the dataset and shows you information about it, and a preview of its contents.
+これによりデータセットが展開されてその情報とその内容のプレビューが表示されます。
 
 ![Preview of the data from UCSC Table Browser](../../images/genes_human_chr22_preview.png)
 
-1. The preview tells us  several things:
-1. The dataset has over 4000 regions, meaning that there are over 4000 genes on chromosome 22.
-1. The dataset is in **bed** format.  BED is one of several standard formats for representing genome annotation.  BED is a tabular format that we'll expand on below.  We got BED format because BED was preselected as the output format in the UCSC table browser.
-1. The dataset's "database" is **hg38**.  This says which revision of the reference genome this data maps too.  hg38 is the latest human reference genome.  hg38 was also selected by default in UCSC.
-1. Finally, it shows us the first 5 rows in the dataset.
+1. プレビューではいくつかのことがわかります:
+1. このデータセットには4000以上の領域があり、これは22番染色体上に4000を超える遺伝子が存在することを意味しています。
+1. データセットは **bed** 形式です。BED はゲノムアノテーションを表現するためのいくつかの標準フォーマットの1つです。BED は表の形式であり下記で展開します。 BED は UCSC table browser のアウトプット形式として事前に選択されていたので BED 形式を取得しました。
+1. データセットの"データベース"は **hg38** です。 これはこのデータマップのどのリファレンスゲノムのリビジョンも示しています。hg38 は最新のヒトリファレンスゲノムです。UCSCでは hg38 もデフォルトで選択されていました。
+1. 最後に、データセットの最初の5行を示します。
 
-The dataset preview is informative, but you can't see much of the actual dataset.  Lets use one of the dataset icons to see the whole dataset
+データセットのプレビューは有益ですが、実際のデータセットの多くを見ることはできません。データセットアイコンを1つを使用してデータセットの全体を表示しましょう。
 
-> ### {% icon hands_on %} Hands-on: Look at all the data.
-> * *Click* on the **eye icon** to view the contents of the dataset.
->   > This displays all of the data
+> ### {% icon hands_on %} ハンズオン: データ全体を見る
+> * **目のアイコン**を*クリック*してデータセットの内容を表示する。
+>   > これにより、すべてのデータが表示されます
 >     &nbsp;
 >   > ![Full dataset in center panel](../../images/genes_human_chr22_dataset_view.png)
 {: .hands_on}
 
-### BED Format
+### BED 形式
 
-[BED](https://genome.ucsc.edu/FAQ/FAQformat.html#format1) is one of several well-established tabular formats for genomic data.  Other formats include GFF3 and GTF.  For the type of analysis we are doing today, BED format is easiest to work with.  BED was created to power the UCSC Genome Browser.  BED files contain between 3 and 15 columns.  Our example BED file describes genes and contains 12 columns.
+[BED](https://genome.ucsc.edu/FAQ/FAQformat.html#format1) はゲノムデータのためのいくつかの定評のある表形式の1つです。その他のフォーマットには GFF3 と GTF があります。今回行っている解析のタイプとしては、BED 形式が最も簡単に操作できます。BED は UCSC Genome Browser を動かすために作成されました。BED ファイルには3～15列が含まれています。私たちの BED ファイルの例は遺伝子を記述し、12の列を含んでいます。
 
-We care about columns 1, 2, 3, and 6:
+私たちは1、2、3列目、および6列目を注目します:
 
-| # | Column Name | Meaning |
+| # | 列名 | 意味 |
 | ---- | ---- | ---- |
-| 1 | Chromosome | The name of the chromosome this gene is on. |
-| 2 | Start | Where on the chromosome the gene starts. |
-| 3 | End | Where on the chromosome the gene ends. |
-| 6 | Strand | Which strand the gene is on.  `+` means forward (top, left to right), `-` means reverse (bottom, right to left) |
+| 1 | 染色体 | 遺伝子が存在する染色体の名前です。 |
+| 2 | 開始 | 染色体上で遺伝子が始まる地点（訳をどうにかしたい） |
+| 3 | 終了 | 染色体上で遺伝子が終わる地点 （上と同じ）|
+| 6 | 鎖 | どの鎖に遺伝子が存在するか。`+`はフォワード鎖（上、左から右）を意味していて、`-`はリバース鎖（下、右から左）を意味しています。 |
 
-See the [BED format description at UCSC](https://genome.ucsc.edu/FAQ/FAQformat.html#format1) for a full description of all the columns.
+すべての列の詳細については、[UCSC の BED 形式の説明](https://genome.ucsc.edu/FAQ/FAQformat.html#format1)を参照してください。
 
-## Naming
+## 命名
 
-Galaxy allow you to name your analyses (your histories) and your datasets.  We only have one history ("Unnamed history") and one dataset ("UCSC Main on Human:...") so far, but it's a good idea to
+Galaxyでは解析（ヒストリー）とデータセットに名前をつけることができます。これまでのところ1つのヒストリー（"Unnamed history"）と1つのデータセット（"UCSC Main on Human:..."）がありますが、これは以下にとって良いアイデアです
 
-1. Always name your histories
-2. Name your input and final output datasets, and any significant intermediate datasets.
+1. ヒストリーに常に名前をつける
+2. インプットと最終アウトプットのデータセット、そして重要な中間データセットに名前をつける。
 
-You don't have to do this.  Galaxy is quite happy for you to have an infinite number of "Unnamed history" histories, and to have all your datasets be obscurely named.  However, once you've run your first 5 unnamed analyses, all with obscurely named datasets, you'll might wish you would have named everything.
+あなたはこれを行う必要はありません。Galaxy は幸いなことにいくらでも "Unnamed history" のヒストリーを持つことができ、そしてすべてのデータセットに曖昧な名前をつけることができます。しかしながら、始めてから5つ目まで名前をつけずに、データセットの名前も曖昧なままに解析を実行していたならば、すべてに名前をつけたほうが良いでしょう。
 
-> ### {% icon hands_on %} Hands-on: Name your stuff
+> ### {% icon hands_on %} ハンズオン: あなたのものに名前をつける
 >
-> 1. **Name your history** to be meaningful and easy to find.
->    - *Click* on the title of the history and enter something like **Intro - Strands** as the name.  Hit the `enter` key on your keyboard to save it.
+> 1. **ヒストリーに**意味が分かり見つけやすい**名前をつける**。
+>    - ヒストリーのタイトルを*クリック*して **Intro - Strands** のような名前をつけます。キーボードの `enter` キーを押して保存する。
 >   ![Rename the history](../../../../shared/images/rename_history.png)
-> 1. **Rename your dataset**
->    - *Click* on the **pencil icon** to edit the dataset attributes.
->    - In the next screen change the name of the dataset to something like `Genes` or `Genes chr22`.
->    - *Click* the **Save** button at the bottom of the screen.
+> 1. **データセットの名前を変える**
+>    - データセットの属性を編集するには**鉛筆アイコン**を*クリック*する。
+>    - 次の画面でデータセットを `Genes` や `Genes chr22` のような名前に変更する。
+>    - 画面下部（上部では？）の **Save** ボタンを*クリック*する。
 >
->    Your history should now look something like this:
+>    今、ヒストリーは以下のように表示されています:
 >
 >    ![Rename dataset](../../images/genes_human_chr22_rename.png)
 {: .hands_on}
 
-## We've got the data - what's our plan for answering the question?
+## 私たちはデータを持っています - どのような計画で質問に答えましょうか？
 
-You have to know what's possible, before you can build a plan.  If you don't have experience with data analysis then you might not have any idea how you would answer our question.  Before we dive in using a particular solution, think about how you might solve this.  If you don't have any experience with tools, then think about how you might solve it manually, using pencil and paper (it may help to assume you have an infinite supply of helpers to do the pencil and paper work).
+計画を立てる前に、できることを知る必要があります。データ解析の経験がなければ質問にどのように答えればいいのか分かりません。特定の解決法をなぞる前に、この質問をどのように解決するかを考えましょう。ツールを使った経験がない場合は、鉛筆と紙を用いて、手を動かしながらどのように解決するか考えましょう（鉛筆と紙による作業ならいくらでも行うことができます）。
 
-Here's how we'll answer this question.
+このような質問にどのように答えましょうか。
 
-1. Split the genes dataset in two: one for genes on the forward strand, and one for genes on the reverse strand.
-1. Compare the two datasets to see which ones, if any, overlap.
-1. Check how many (or what percentage) of our genes overlap with another gene.
+1. 遺伝子のデータセットを2つに分割する:1つはフォワード鎖上の遺伝子で、もう1つはリバース鎖上の遺伝子です。
+1. 2つのデータセットを比較して、重複しているかどうかを確認する。
+1. どれだけの数の（またはどれくらいの割合の）遺伝子が他の遺伝子と重複しているかどうかを確認する。
 
-It turns out that all of these steps are easy in Galaxy.
+Galaxy ではこれらのステップはすべて簡単に行うことができます。
 
-### Split the genes into forward and reverse datasets
+### 遺伝子をフォワード鎖とリバース鎖のデータセットに分割する
 
-How might we do this?  Column 6 contains the strand information.  Can we split genes into two datasets based on the value of Column 6.  How?  Lets take a look at our available tools.  And *whoa! There are over 40 toolboxes, and several hundred tools.* How are we going to find a tool that can do the split?
+どのすれば良いでしょうか？6列目には鎖の情報が載っています。6列目の値に基づいて遺伝子を2つのデータセットに分割できますか？どのように？利用できるツールを見てみましょう。「わあ！40個以上のツールボックスと、数百個のツールがあるじゃないか。」どうやって分割を行うことができるツールを見つけるつもりですか？
 
 
-> ### {% icon hands_on %} Searching for and launching a tool
+> ### {% icon hands_on %} ツールの検索と実行
 >
-> 1. Try the **tools search box**.  Think of terms that might describe what we want to do and type them in the search box.  Do you see anything promising?  Explore a little.
-> 2. If you haven't already searched with it, *enter* `split` in the **tool search box**.  Near the top of the results is
->    - **Filter** data on any column using simple expressions.
->    - That might work.
-> 3. *Click* on **Filter** to open the Filter tool in the middle panel.
-> 4. Take a look at the **Syntax** and **Example** sections to understand what the tool does.
+> 1. **ツールの検索ボックス**を試してみましょう。私たちが何を行いたいかを表した用語を考えて検索ボックスに入力します。使えそうな何かは見つかりましたか？少し探してみて下さい。
+> 2. まだ検索していない場合は、**ツールの検索ボックス**に `split` と*入力*してください。結果の上部近くに、
+>    - **Filter** data on any column using simple expressions というツールがあります。
+>    - このツールは使えるかもしれません。
+> 3.  **Filter** を*クリック*して Filter ツールを中央のパネルで開く。
+> 4. **Syntax** と **Example** のセクションを見てツールが何をするかを理解する。
 >
 > ![The Filter Tool form](../../images/filter_tool_defaults.png)
 {: .hands_on}
 
-It doesn't say anything about Filter being able to split a file into multiple files.  It does look like we can use Filter to get only genes on the forward strand, or only genes on the reverse strand.  We would have to run Filter twice, once for forward strand genes, and once for reverse strand genes. Let's do that.
+Filter ツールがファイルを複数のファイルに分割できることについては何も言及していません。フォワード鎖上の遺伝子のみか、リバース鎖上の遺伝子のみを取得する目的で Filter が使用できると述べているように見えます。私たちは、フォワード鎖の遺伝子で1回、リバース鎖の遺伝子で1回の、計2回 Filter を実行しなければならないようです。やってみましょう。
 
-(You may have noticed during your search for tools that *all* tools have a similar look and feel.)
+（ツールを検索している間に *all* ツールのルック＆フィールが Filter のそれと似ていることに気付いたかもしれません。）
 
-> ### {% icon hands_on %} Hands-on: Run the Filter tool to get genes on the forward strand.
+> ### {% icon hands_on %} ハンズオン: フォワード鎖上の遺伝子を取得するために Filter ツールを実行する。
 >
-> * The filter tool has 3 fields:
+> * filter ツールは3つのフィールドからなります:
 >
->   1. **Dataset**: This pulldown will list any dataset from your history that this tool can work on.  In your case that's probably only one dataset.  Make sure this is set to your `Genes` dataset.
->   1. **Condition**: this free text field is where we specify which records we want in the output dataset.  *Enter* `c6 == "+"` in the text box.
->   * This specifies that column 6 (the strand) must be equal to (`==` is Python for *is equal to*) a plus sign.
->   1. **Header lines to skip**: Leave this as `0`. Our dataset does not have any header lines.
-> * Finally, *click* the **Execute** button.
+>   1. **Dataset**: このプルダウンではこのツールで作業ができるヒストリーからすべてのデータセットがリストされます。あなたの場合はデータセットはおそらく1つだけです。ここに `Genes` というデータセットが設定されていることを確認してください。
+>   1. **Condition**: このフリーテキストフィールドはアウトプットデータセットでどのレコードを使用したいか指定します。テキストボックスに `c6 == "+"` と *入力*しましょう。
+>    * これは6列目（鎖）がプラス記号と等しくならなければならない（`==` は Python での*等しい*を指します）ことを指定しています。
+>   1. **Header lines to skip**: これは`0`のままにしておきましょう。私たちのデータセットにはヘッダーの行はありません。
+> * 最後に、**Execute** ボタンを*クリック*する。
 >   > ![Run the Filter tool to get only the forward strand genes](../../images/filter_tool_forward_strand_genes_only.png)
 {: .hands_on}
 
-This adds another dataset to your history.  This one should contain only genes on the forward strand.  Once the dataset is green, *click* the **eye icon** to confirm this.  We also recommend that you rename this dataset to something like `Genes, forward strand` (remember how?).
+これによりヒストリーに別のデータセットが追加されます。これはフォワード鎖上の遺伝子のみを含まれるべきです。データセットが緑色になったら、**目のアイコン**を*クリック*して確認しましょう。また、このデータセットの名前を `Genes, forward strand` のように変更することをお勧めします（どのようにやるか覚えていますか？）。
 
-Now we want to get the genes on the reverse strand.  There are actually many ways to get this.  Here are two of them.
+今私たちはリバース鎖上の遺伝子を取得しようとしています。実際に取得する方法はたくさんあります。ここでは2つ紹介します。
 
-> ### {% icon hands_on %} Hands-on: Get genes on the reverse strand
+> ### {% icon hands_on %} ハンズオン: リバース鎖上の遺伝子を取得する
 >
-> **Method 1**
+> **方法 1**
 >
-> 1. Open the dataset preview by *clicking* on the name of the `Genes, forward strand` dataset.  This shows an icon than the uploaded `Genes` dataset did not: a looping arrow.
-> 1. *Click* the **looping arrow** ("Run this job again") icon.  This won't actually run the job again.  What it will do is bring up the Filter tool form with *the exact same settings that were used to produce this dataset.*
-> 1. Rather than run Filter again with the same settings, *change* **Condition** to `c6 == "-"`
-> 1. *Click* the **Execute** button.
+> 1. `Genes, forward strand` データセットの名前を*クリック*してデータセットのプレビューを開く。ここではアップロードされている `Genes` データセットでは表示されなかったアイコンが表示されています: ループ矢印。
+> 1. **ループ矢印**のアイコン（"このジョブをもう一度実行する"）を*クリック*する。これは実際にはジョブを再実行するわけではありません。ループ矢印を押すことで行われるのは*このデータセットを生成するために使用されたものとまったく同じ設定を持つ* Filter ツールのフォームを呼び出すことです。
+> 1. 同じ設定で Filter を再実行するのではなく、**Condition** の欄を `c6 == "-"` に*変更*します。
+> 1. **Execute** ボタンを*クリック*する。
 >
-> **Method 2**
-> 1. *Click* on **Filter** in the tool panel to open the Filter tool in the middle panel.
-> 1. *Fill* the form as before, *except*:
->    * Make sure the **Dataset** pulldown is set to the `Genes` dataset.
->    * *Set* **Condition** to `c6 == "-"`.
-> 1. *Click* the **Execute** button.
+> **方法 2**
+> 1. ツールパネルの **Filter** を*クリック*して中央パネルで Filter ツールを開く。
+> 1. 前と同じようにフォームを*入力*しますが、*ただし*:
+>    * **Dataset** のプルダウンに `Genes` データセットが設定されていることを確認してください。
+>    * **Condition** で `c6 == "-"` と*入力*してください。
+> 1. **Execute** ボタンを*クリック*する。
 >
-> **Both Methods**
-> 1. *Rename* your new dataset to something like `Genes, reverse strand`
+> **両方の方法で**
+> 1. 新しいデータセットの名前を `Genes, reverse strand` のように変更しましょう。
 {: .hands_on}
 
-The rerun button can be a huge help as you run more complex tools.
+再実行のボタンはより複雑なツールを実行する際に大きな助けになります。
 
-> ### {% icon tip %} Tip: Empty result?
+> ### {% icon tip %} Tip: 結果が出ない？
 >
-> If you used Method 2 and didn't explicitly set the dataset, then you ran Filter on the `Genes, forward strand` dataset. None of the genes in the forward strand dataset have "-" in column 6 so all of them were filtered out from the result.
+> 方法2を使用してデータセットをはっきりと設定しなかった場合は、`Genes, forward strand` のデータセットで Filter を実行していました。フォワード鎖のデータセット上の遺伝子で6列目が "-" のものがないため、それらすべてが結果から除外されていたために結果が出なかったのです。
 >
-> Try again and set the dataset to your `Genes` dataset.
+> もう一度実行してデータセットを `Genes` データセットに設定してください。
 {: .tip}
 
 
-Your history should now have (at least) 3 datasets in it, with names like:
+あなたのヒストリーには（少なくとも）3つのデータセットがあり、以下のような名前になっているはずです:
 
 * `Genes`
 * `Genes, forward strand`
 * `Genes, reverse strand`
 
-The number of genes in the `forward` plus `reverse` datasets should be the same as in the `Genes` dataset.  If they aren't can you figure out why?
+`forward` と `reverse` データセットの遺伝子の総数が `Genes` データセットの遺伝子数と同じでなければなりません。もしそのようになっていない場合、何故だかわかりますか？
 
-### Check for overlaps
+### 重複をチェックする
 
-Genes are an example of a *genomic interval*.
+Genes は *genomic interval* の一例です。
 
-> ### {% icon comment %} Definitions 3
+> ### {% icon comment %} 定義 3
 >
-> * **Genomic interval**
->> In Galaxy, a *genomic interval* is a something that spans part of a chromosome (or some other linear frame of reference like a contig).  Genes are a common example of a genomic interval.  Even a chromosome is a genomic interval, albeit a very long one.
+> * **genomic interval**
+>> Galaxy では、*genomic interval* は染色体の一部（またはコンティグのような別の線状フレームのリファレンス）にまたがるものです。Genes は genomic interval の一般的な例です。たとえ染色体であっても、非常に長いですが、genomic interval です。
 {: .comment}
 
-Galaxy excels at answering questions about genomic intervals and different sets of genomic intervals relate to each other.  Lets take a look.
+Galaxy は genomic intervals に関する質問に答えることに優れており、そして異なる genomic intervals のセットは互いに関係しています。見てみましょう。
 
-> ### {% icon hands_on %} Hands-on: Genomic Interval Tools
+> ### {% icon hands_on %} ハンズオン: Genomic Interval のツール
 >
 > * In the tool panel, *open* the **Operate on Genomic Intervals** toolbox.  It's typically past the **NGS** toolboxes.
 > * *Explore* the tools in this toolbox, looking for something that we can use to see which genes on opposite strands overlap.
