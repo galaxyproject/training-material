@@ -357,16 +357,16 @@ Galaxy は genomic intervals に関する質問に答えることに優れてお
 
 > ### {% icon hands_on %} ハンズオン: Genomic Interval のツール
 >
-> * In the tool panel, *open* the **Operate on Genomic Intervals** toolbox.  It's typically past the **NGS** toolboxes.
-> * *Explore* the tools in this toolbox, looking for something that we can use to see which genes on opposite strands overlap.
+> * ツールパネルで、**Operate on Genomic Intervals** のツールボックスを*開きましょう*。これは通常 **NGS** のツールボックスの後にあります。
+> * このツールボックスのツールを*調べて*、もう一方の鎖のどの遺伝子と重複しているかを見るために使用できるようなものを探しましょう。
 {: .hands_on}
 
-Of the tools in the **Operate on Genomic Intervals** toolbox, **Join** and particularly **Intersect** have the most promise.  Let's try **Intersect**.
+ **Operate on Genomic Intervals** のツールボックスの中で、**Join** そして特に **Intersect** は最も使えそうです。 **Intersect** を試してみましょう。
 
-> ### {% icon hands_on %} Hands-on: Genomic Interval Tools
+> ### {% icon hands_on %} ハンズオン: Genomic Interval のツール
 >
-> 1. In the tool panel, *click* **Intersect** in the **Operate on Genomic Intervals** toolbox.
-> 2. **Intersect** {% icon tool %} with the following parameters:
+> 1. ツールパネルで、 **Operate on Genomic Intervals** のツールボックスにある **Intersect** を*クリック*する。
+> 2. **Intersect** {% icon tool %} には以下のパラメーターがあります:
 >     - **Return** to `Overlapping Intervals`.
 >       - This looks like it might return whole genes, while `Overlapping pieces` may return only the parts that overlap.  We suspect that whole genes might be more useful.
 >     - **of** (the first dataset) to `Genes, forward strand`
