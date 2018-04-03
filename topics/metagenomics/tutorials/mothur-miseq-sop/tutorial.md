@@ -69,12 +69,12 @@ setup, we additionally resequenced a mock community composed of genomic DNA from
 > ### {% icon comment %} Dataset details
 > Because of the large size of the original dataset (3.9 GB) you are given 20 of the 362 pairs of fastq
 > files. For example, you will see two files: `F3D0_S188_L001_R1_001.fastq`, and
-> `F3D0_S188_L001_R2_001.fastq`  
->
+> `F3D0_S188_L001_R2_001.fastq`
+> <br><br>
 > These two files correspond to Female 3 on Day 0 (F3D0) (i.e. the day of weaning). The first file
 > (and all those with R1 in the name) correspond to the forward reads, while the second (and all
 > those with R2 in the name) correspond to the reverse reads.
->
+> <br><br>
 > These sequences are 250 bp and overlap in the V4 region of the 16S rRNA gene; this region is about
 > 253 bp long. Looking at the datasets, you will see 22 fastq files, representing 10 time points from
 > Female 3 and 1 mock community. You will also see `HMP_MOCK.v35.fasta` which contains the sequences used
@@ -104,19 +104,76 @@ Now that we know what our input data is, let's get it into our Galaxy history:
 > - Option 1: From data library:
 >   - Navigate to the shared data library, you should find 20 pairs of fastq files; 19 from the mice,
 > and one pair from the mock community.
-> - Option 2: From your computer:
->   - Obtain data directly from Zenodo: [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.165147.svg)](https://doi.org/10.5281/zenodo.165147)
->   - Download `input_data.zip` and unzip it
->   - Upload all files to your history.
-> <br><br>
+> - Option 2: From your Zenodo:
+>   - Data is available from Zenodo here: [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.800651.svg)](https://doi.org/10.5281/zenodo.800651)
+>   - Paste the following urls into the file upload menu to import them to Galaxy directly
+>       <details>
+>       <summary>Click to view Zenodo URLs</summary>
+>       <pre>
+>       https://zenodo.org/record/800651/files/F3D0_R1.fastq
+>       https://zenodo.org/record/800651/files/F3D0_R2.fastq
+>       https://zenodo.org/record/800651/files/F3D141_R1.fastq
+>       https://zenodo.org/record/800651/files/F3D141_R2.fastq
+>       https://zenodo.org/record/800651/files/F3D142_R1.fastq
+>       https://zenodo.org/record/800651/files/F3D142_R2.fastq
+>       https://zenodo.org/record/800651/files/F3D143_R1.fastq
+>       https://zenodo.org/record/800651/files/F3D143_R2.fastq
+>       https://zenodo.org/record/800651/files/F3D144_R1.fastq
+>       https://zenodo.org/record/800651/files/F3D144_R2.fastq
+>       https://zenodo.org/record/800651/files/F3D145_R1.fastq
+>       https://zenodo.org/record/800651/files/F3D145_R2.fastq
+>       https://zenodo.org/record/800651/files/F3D146_R1.fastq
+>       https://zenodo.org/record/800651/files/F3D146_R2.fastq
+>       https://zenodo.org/record/800651/files/F3D147_R1.fastq
+>       https://zenodo.org/record/800651/files/F3D147_R2.fastq
+>       https://zenodo.org/record/800651/files/F3D148_R1.fastq
+>       https://zenodo.org/record/800651/files/F3D148_R2.fastq
+>       https://zenodo.org/record/800651/files/F3D149_R1.fastq
+>       https://zenodo.org/record/800651/files/F3D149_R2.fastq
+>       https://zenodo.org/record/800651/files/F3D150_R1.fastq
+>       https://zenodo.org/record/800651/files/F3D150_R2.fastq
+>       https://zenodo.org/record/800651/files/F3D1_R1.fastq
+>       https://zenodo.org/record/800651/files/F3D1_R2.fastq
+>       https://zenodo.org/record/800651/files/F3D2_R1.fastq
+>       https://zenodo.org/record/800651/files/F3D2_R2.fastq
+>       https://zenodo.org/record/800651/files/F3D3_R1.fastq
+>       https://zenodo.org/record/800651/files/F3D3_R2.fastq
+>       https://zenodo.org/record/800651/files/F3D5_R1.fastq
+>       https://zenodo.org/record/800651/files/F3D5_R2.fastq
+>       https://zenodo.org/record/800651/files/F3D6_R1.fastq
+>       https://zenodo.org/record/800651/files/F3D6_R2.fastq
+>       https://zenodo.org/record/800651/files/F3D7_R1.fastq
+>       https://zenodo.org/record/800651/files/F3D7_R2.fastq
+>       https://zenodo.org/record/800651/files/F3D8_R1.fastq
+>       https://zenodo.org/record/800651/files/F3D8_R2.fastq
+>       https://zenodo.org/record/800651/files/F3D9_R1.fastq
+>       https://zenodo.org/record/800651/files/F3D9_R2.fastq
+>       https://zenodo.org/record/800651/files/Mock_R1.fastq
+>       https://zenodo.org/record/800651/files/Mock_R2.fastq
+>       </pre>
+>       </details>
+> <br>
 >
 > 3. **Import Reference Data.**  Go back to the data library and import the following reference
-> datasets, or download them from Zenodo (`reference_data.zip`) and upload them to your history:
+> datasets, or import them from Zenodo:
 >  - `silva.v4.fasta`
 >  - `HMP_MOCK.v35.fasta`
+>  - `mouse.dpw.metadata`
+>  - `mouse.time.design`
 >  - `trainset9_032012.pds.fasta`
 >  - `trainset9_032012.pds.tax`
 >
+>    <details>
+>    <summary>Click to view Zenodo URLs</summary>
+>    <pre>
+>     https://zenodo.org/record/800651/files/HMP_MOCK.v35.fasta
+>     https://zenodo.org/record/800651/files/mouse.dpw.metadata
+>     https://zenodo.org/record/800651/files/mouse.time.design
+>     https://zenodo.org/record/800651/files/silva.v4.fasta
+>     https://zenodo.org/record/800651/files/trainset9_032012.pds.fasta
+>     https://zenodo.org/record/800651/files/trainset9_032012.pds.tax
+>    </pre>
+>    </details>
 {: .hands_on}
 
 Now that's a lot of files to manage. Luckily Galaxy can make life a bit easier by allowing us to create
@@ -573,7 +630,7 @@ Let's go ahead and classify those sequences using the Bayesian classifier with t
 > >      <br><br>
 > >      162 total sequences were removed. <br>
 > >      If you run summary.seqs with the count table, you will see that we now have 2608 unique sequences
-> >      representing a total of 119,168 total sequences (down from 119,330 before). This means 162 of our  
+> >      representing a total of 119,168 total sequences (down from 119,330 before). This means 162 of our
 > >      sequences were in represented by these 20 representative sequences.
 > >    </details>
 > {: .question}
@@ -600,7 +657,7 @@ you to see how well your curation is going, and whether something is wrong with 
 {: .note}
 
 Our mock community is composed of genomic DNA from 21 bacterial strains. So in a perfect world, this is
-exactly what we would expect the analysis to produce as a result.   
+exactly what we would expect the analysis to produce as a result.
 
 First, let's extract the sequences belonging to our mock samples from our data:
 
@@ -675,7 +732,7 @@ We can now cluster the mock sequences into OTUs to see how many spurious OTUs we
 > - **Dist.seqs** {% icon tool %} with the following parameters
 >   - "fasta" to the fasta from Get.groups
 >   - "cutoff" to `0.20`
->  
+>
 > Next we group sequences into OTUs
 >
 > - **Cluster** {% icon tool %} with the following parameters
@@ -997,7 +1054,7 @@ coefficient](https://doi.org/10.1080/STA-200066418)
 > - **Heatmap.sim** {% icon tool %} with the following parameters
 >   - "Generate Heatmap for" to `phylip`
 >   - "phylip" to output by Dist.shared (this is a collection input)
->  
+>
 > <!-- TODO: way to view the SVGs inside Galaxy? -->
 {: .hands_on}
 
