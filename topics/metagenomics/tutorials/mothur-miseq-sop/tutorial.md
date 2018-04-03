@@ -246,7 +246,7 @@ fragment, resulting in an overlap in the middle. We will now combine these pairs
 > ### {% icon hands_on %} Hands-on: Combine forward and reverse reads into contigs
 >
 > - **Make.contigs** {% icon tool %} with the following parameters
->   - "Way to provide files" to the *Multiple pairs - Combo mode*
+>   - "Way to provide files" to `Multiple pairs - Combo mode`
 >   - "Fastq pairs" to the collection you just created
 >   - Leave all other parameters to the default settings <br><br>
 >
@@ -277,7 +277,7 @@ Next we want to improve the quality of our data. But first, let's get a feel of 
 >
 > - **Summary.seqs** {% icon tool %} with the following parameters
 >   - "fasta" parameter to the `trim.contigs.fasta` file created by the make.contigs tool
->   - We do not need to supply a names or count file
+>   - "Output logfile?" to `yes`
 >
 {: .hands_on}
 
@@ -303,7 +303,7 @@ are supposed to be 251 bp each. This read clearly didn't assemble well (or at al
 least 2.5% of our sequences had some ambiguous base calls. We'll take care of these issues in the next
 step when we run `screen.seqs`.
 
-The following tool will remove any sequences with ambiguous bases and anything longer than 275 bp.
+The following tool will remove any sequences with ambiguous bases (`maxambig` parameter) and anything longer than 275 bp (`maxlength` parameter).
 
 > ### {% icon hands_on %} Hands-on: Filter reads based on quality and length
 >
@@ -348,10 +348,7 @@ times, we'll unique our sequences using the `unique.seqs` command:
 > >    <summary>Click to view answer</summary>
 > >    16,426 unique sequences and 112,446 duplicates. <br>
 > >    This can be determined from the number of lines in the fasta (or names) output, compared to the
-> >    number of lines in the fasta file before this step. The log file also contains a line showing the
-> >    total number of sequences before and the command: <br><br>
-> >    mothur > unique.seqs(fasta=fasta.dat) <br>
-> >    128872	16426
+> >    number of lines in the fasta file before this step.
 > >    </details>
 > {: .question}
 {: .hands_on}
@@ -409,6 +406,7 @@ step to perform to improve the clustering of your OTUs [[Schloss 2013]](https://
 > 2. **Summary.seqs** {% icon tool %} with the following parameters
 >   - "fasta" parameter to the aligned output from previous step
 >   - "count" parameter to `count_table` output from Count.seqs
+>   - "Output logfile?" to `yes`
 >
 {: .hands_on}
 
@@ -438,8 +436,8 @@ amplification.
 
 To make sure that everything overlaps the same region we'll re-run screen.seqs to get sequences that
 start at or before position 1968 and end at or after position 11550. We'll also set the maximum
-homopolymer length to 8 since there's nothing in the database with a stretch of 9 or more of the same
-base in a row (this also could have been done in the first execution of screen.seqs above).
+homopolymer length to 8 (`maxhomop` parameter) since there's nothing in the database with a stretch of 9 or more of the same
+base in a row (this also could have been done in the first execution of `screen.seqs` above).
 
 > ### {% icon hands_on %} Hands-on: Remove poorly aligned sequences
 >
@@ -473,8 +471,9 @@ losing any information. We'll do all this with filter.seqs:
 >
 > - **Filter.seqs** {% icon tool %} with the following parameters
 >   - "fasta"" to good.fasta output from Sreen.seqs
->   - "vertical" to Yes
+>   - "Vertical" to `yes`
 >   - "trump" to `.`
+>   - "Output logfile" to `yes`
 {: .hands_on}
 
 In the log file we see the following information:
@@ -502,9 +501,7 @@ columns. Because we've perhaps created some redundancy across our sequences by t
 > >  How many duplicate sequences did our filter step produce?
 > > <details>
 > >   <summary> Click to view answer</summary>
-> >   3. <br>
-> >   This can be seen in the log file, which tells us the number of sequences was reduced from 16298 to
-> >   16295
+> >   3. The number of unique sequences was reduced from 16298 to 16295
 > > </details>
 > {: .question}
 {: .hands_on}
@@ -529,8 +526,7 @@ merged. We generally recommend allowing 1 difference for every 100 basepairs of 
 > >  How many unique sequences are we left with after this clustering of highly similar sequences?
 > > <details>
 > >   <summary> Click to view answer</summary>
-> >   5672. <br>
-> >   This is the number of lines in the fasta output
+> >   5720. This is the number of lines in the fasta output
 > > </details>
 > {: .question}
 {: .hands_on}
@@ -545,8 +541,8 @@ removing sequencing artefacts known as chimeras.
 > (slide credit: [http://slideplayer.com/slide/4559004/ ](http://slideplayer.com/slide/4559004/ ))
 {: .tip}
 
-We'll do this chimera removal using the `UCHIME` algorithm that is called within Mothur, using the
-`chimera.uchime` command. This command will split the data by sample and check for chimeras.
+We'll do this chimera removal using the `VSEARCH` algorithm that is called within Mothur, using the
+`chimera.vsearch` command. This command will split the data by sample and check for chimeras.
 
 Our preferred way of doing this is to use the abundant sequences as our reference. In addition, if a sequence
 is flagged as chimeric in one sample, the default (`dereplicate=No`) is to remove it from all samples. Our
@@ -555,26 +551,26 @@ when they're the most abundant sequence in another sample. This is how we do it:
 
 > ### {% icon hands_on %} Hands-on: Remove chimeric sequences
 >
-> - **Chimera.uchime** {% icon tool %} with the following parameters
+> - **Chimera.vsearch** {% icon tool %} with the following parameters
 >   - "fasta" to the fasta output from Pre.cluster
 >   - "Select Reference Template from" to `Self`
 >   - "count" to the count table from the last Pre.cluster
 >   - "dereplicate" to Yes
 >
-> Running chimera.uchime with the count file will remove the chimeric sequences from the count table, but we
+> Running chimera.vsearch with the count file will remove the chimeric sequences from the count table, but we
 > still need to remove those sequences from the fasta file as well. We do this using remove.seqs:
 >
 > - **Remove.seqs** {% icon tool %} with the following parameters
->   - "accnos" to the uchime.accnos file from Chimera.uchime
+>   - "accnos" to the vsearch.accnos file from Chimera.vsearch
 >   - "fasta" to the fasta output from Pre.cluster
->   - "count" to the count table from Chimera.uchime
+>   - "count" to the count table from Chimera.vsearch
 >
 > > ### {% icon question %} Question
 > >
 > >  How many sequences were flagged as chimeric? what is the percentage? (Hint: summary.seqs)
 > > <details>
 > >   <summary> Click to view answer</summary>
-> >   If we run summary.seqs on the resulting fasta file and count table, we see that we went from 128,655
+> >   If we run <pre>summary.seqs</pre> on the resulting fasta file and count table, we see that we went from 128,655
 > >   sequences down to 119,330 sequences in this step, for a reduction of 7.3%. This is a reasonable number of
 > >   sequences to be flagged as chimeric.
 > > </details>
