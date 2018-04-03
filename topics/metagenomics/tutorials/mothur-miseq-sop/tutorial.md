@@ -106,52 +106,52 @@ Now that we know what our input data is, let's get it into our Galaxy history:
 > and one pair from the mock community.
 > - Option 2: From your Zenodo:
 >   - Data is available from Zenodo here: [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.800651.svg)](https://doi.org/10.5281/zenodo.800651)
->   - Paste the following urls into the file upload menu to import them to Galaxy directly
->       <details>
->       <summary>Click to view Zenodo URLs</summary>
->       <pre>
->       https://zenodo.org/record/800651/files/F3D0_R1.fastq
->       https://zenodo.org/record/800651/files/F3D0_R2.fastq
->       https://zenodo.org/record/800651/files/F3D141_R1.fastq
->       https://zenodo.org/record/800651/files/F3D141_R2.fastq
->       https://zenodo.org/record/800651/files/F3D142_R1.fastq
->       https://zenodo.org/record/800651/files/F3D142_R2.fastq
->       https://zenodo.org/record/800651/files/F3D143_R1.fastq
->       https://zenodo.org/record/800651/files/F3D143_R2.fastq
->       https://zenodo.org/record/800651/files/F3D144_R1.fastq
->       https://zenodo.org/record/800651/files/F3D144_R2.fastq
->       https://zenodo.org/record/800651/files/F3D145_R1.fastq
->       https://zenodo.org/record/800651/files/F3D145_R2.fastq
->       https://zenodo.org/record/800651/files/F3D146_R1.fastq
->       https://zenodo.org/record/800651/files/F3D146_R2.fastq
->       https://zenodo.org/record/800651/files/F3D147_R1.fastq
->       https://zenodo.org/record/800651/files/F3D147_R2.fastq
->       https://zenodo.org/record/800651/files/F3D148_R1.fastq
->       https://zenodo.org/record/800651/files/F3D148_R2.fastq
->       https://zenodo.org/record/800651/files/F3D149_R1.fastq
->       https://zenodo.org/record/800651/files/F3D149_R2.fastq
->       https://zenodo.org/record/800651/files/F3D150_R1.fastq
->       https://zenodo.org/record/800651/files/F3D150_R2.fastq
->       https://zenodo.org/record/800651/files/F3D1_R1.fastq
->       https://zenodo.org/record/800651/files/F3D1_R2.fastq
->       https://zenodo.org/record/800651/files/F3D2_R1.fastq
->       https://zenodo.org/record/800651/files/F3D2_R2.fastq
->       https://zenodo.org/record/800651/files/F3D3_R1.fastq
->       https://zenodo.org/record/800651/files/F3D3_R2.fastq
->       https://zenodo.org/record/800651/files/F3D5_R1.fastq
->       https://zenodo.org/record/800651/files/F3D5_R2.fastq
->       https://zenodo.org/record/800651/files/F3D6_R1.fastq
->       https://zenodo.org/record/800651/files/F3D6_R2.fastq
->       https://zenodo.org/record/800651/files/F3D7_R1.fastq
->       https://zenodo.org/record/800651/files/F3D7_R2.fastq
->       https://zenodo.org/record/800651/files/F3D8_R1.fastq
->       https://zenodo.org/record/800651/files/F3D8_R2.fastq
->       https://zenodo.org/record/800651/files/F3D9_R1.fastq
->       https://zenodo.org/record/800651/files/F3D9_R2.fastq
->       https://zenodo.org/record/800651/files/Mock_R1.fastq
->       https://zenodo.org/record/800651/files/Mock_R2.fastq
->       </pre>
->       </details>
+>   - In the file upload menu choose the `Paste/Fetch data` option and enter the following urls to import the file from Zenodo to Galaxy directly
+>    <details>
+>    <summary> Click to view Zenodo URLs</summary>
+>    <pre>
+> https://zenodo.org/record/800651/files/F3D0_R1.fastq
+> https://zenodo.org/record/800651/files/F3D0_R2.fastq
+> https://zenodo.org/record/800651/files/F3D141_R1.fastq
+> https://zenodo.org/record/800651/files/F3D141_R2.fastq
+> https://zenodo.org/record/800651/files/F3D142_R1.fastq
+> https://zenodo.org/record/800651/files/F3D142_R2.fastq
+> https://zenodo.org/record/800651/files/F3D143_R1.fastq
+> https://zenodo.org/record/800651/files/F3D143_R2.fastq
+> https://zenodo.org/record/800651/files/F3D144_R1.fastq
+> https://zenodo.org/record/800651/files/F3D144_R2.fastq
+> https://zenodo.org/record/800651/files/F3D145_R1.fastq
+> https://zenodo.org/record/800651/files/F3D145_R2.fastq
+> https://zenodo.org/record/800651/files/F3D146_R1.fastq
+> https://zenodo.org/record/800651/files/F3D146_R2.fastq
+> https://zenodo.org/record/800651/files/F3D147_R1.fastq
+> https://zenodo.org/record/800651/files/F3D147_R2.fastq
+> https://zenodo.org/record/800651/files/F3D148_R1.fastq
+> https://zenodo.org/record/800651/files/F3D148_R2.fastq
+> https://zenodo.org/record/800651/files/F3D149_R1.fastq
+> https://zenodo.org/record/800651/files/F3D149_R2.fastq
+> https://zenodo.org/record/800651/files/F3D150_R1.fastq
+> https://zenodo.org/record/800651/files/F3D150_R2.fastq
+> https://zenodo.org/record/800651/files/F3D1_R1.fastq
+> https://zenodo.org/record/800651/files/F3D1_R2.fastq
+> https://zenodo.org/record/800651/files/F3D2_R1.fastq
+> https://zenodo.org/record/800651/files/F3D2_R2.fastq
+> https://zenodo.org/record/800651/files/F3D3_R1.fastq
+> https://zenodo.org/record/800651/files/F3D3_R2.fastq
+> https://zenodo.org/record/800651/files/F3D5_R1.fastq
+> https://zenodo.org/record/800651/files/F3D5_R2.fastq
+> https://zenodo.org/record/800651/files/F3D6_R1.fastq
+> https://zenodo.org/record/800651/files/F3D6_R2.fastq
+> https://zenodo.org/record/800651/files/F3D7_R1.fastq
+> https://zenodo.org/record/800651/files/F3D7_R2.fastq
+> https://zenodo.org/record/800651/files/F3D8_R1.fastq
+> https://zenodo.org/record/800651/files/F3D8_R2.fastq
+> https://zenodo.org/record/800651/files/F3D9_R1.fastq
+> https://zenodo.org/record/800651/files/F3D9_R2.fastq
+> https://zenodo.org/record/800651/files/Mock_R1.fastq
+> https://zenodo.org/record/800651/files/Mock_R2.fastq
+>    </pre>
+>    </details>
 > <br>
 >
 > 3. **Import Reference Data.**  Go back to the data library and import the following reference
@@ -166,12 +166,12 @@ Now that we know what our input data is, let's get it into our Galaxy history:
 >    <details>
 >    <summary>Click to view Zenodo URLs</summary>
 >    <pre>
->     https://zenodo.org/record/800651/files/HMP_MOCK.v35.fasta
->     https://zenodo.org/record/800651/files/mouse.dpw.metadata
->     https://zenodo.org/record/800651/files/mouse.time.design
->     https://zenodo.org/record/800651/files/silva.v4.fasta
->     https://zenodo.org/record/800651/files/trainset9_032012.pds.fasta
->     https://zenodo.org/record/800651/files/trainset9_032012.pds.tax
+>    https://zenodo.org/record/800651/files/HMP_MOCK.v35.fasta
+>    https://zenodo.org/record/800651/files/mouse.dpw.metadata
+>    https://zenodo.org/record/800651/files/mouse.time.design
+>    https://zenodo.org/record/800651/files/silva.v4.fasta
+>    https://zenodo.org/record/800651/files/trainset9_032012.pds.fasta
+>    https://zenodo.org/record/800651/files/trainset9_032012.pds.tax
 >    </pre>
 >    </details>
 {: .hands_on}
