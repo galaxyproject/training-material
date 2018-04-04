@@ -570,8 +570,8 @@ when they're the most abundant sequence in another sample. This is how we do it:
 > >  How many sequences were flagged as chimeric? what is the percentage? (Hint: summary.seqs)
 > > <details>
 > >   <summary> Click to view answer</summary>
-> >   If we run <pre>summary.seqs</pre> on the resulting fasta file and count table, we see that we went from 128,655
-> >   sequences down to 119,330 sequences in this step, for a reduction of 7.3%. This is a reasonable number of
+> >   If we run summary.seqs on the resulting fasta file and count table, we see that we went from 128,655
+> >   sequences down to 118,091 sequences in this step, for a reduction of 8.2%. This is a reasonable number of
 > >   sequences to be flagged as chimeric.
 > > </details>
 > {: .question}
@@ -599,7 +599,6 @@ Let's go ahead and classify those sequences using the Bayesian classifier with t
 >   - "reference" to `trainset9032012.pds.fasta` from your history
 >   - "taxonomy" to `trainset9032012.pds.tax` from your history
 >   - "count" to the count table file from Remove.seqs
->   - "cutoff" to 80
 >
 > Have a look at the taxonomy output. You will see that every read now has a classification.
 >
@@ -621,12 +620,12 @@ Let's go ahead and classify those sequences using the Bayesian classifier with t
 > >    <details>
 > >      <summary> Click to view answer</summary><br>
 > >      20 representative sequences were removed. <br>
-> >      The fasta file output from Remove.seqs had 2628 sequences while the fasta output from Remove.lineages
-> >      contained 2608 sequences.
+> >      The fasta file output from Remove.seqs had 2281 sequences while the fasta output from Remove.lineages
+> >      contained 2261 sequences.
 > >      <br><br>
 > >      162 total sequences were removed. <br>
-> >      If you run summary.seqs with the count table, you will see that we now have 2608 unique sequences
-> >      representing a total of 119,168 total sequences (down from 119,330 before). This means 162 of our
+> >      If you run summary.seqs with the count table, you will see that we now have 2261 unique sequences
+> >      representing a total of 117,929 total sequences (down from 118,091 before). This means 162 of our
 > >      sequences were in represented by these 20 representative sequences.
 > >    </details>
 > {: .question}
@@ -650,7 +649,7 @@ you to see how well your curation is going, and whether something is wrong with 
 > **Mock community:** A defined mixture of microbial cells and/or viruses or nucleic acid molecules created
 > *in vitro* to simulate the composition of a microbiome sample or the nucleic acid isolated therefrom.
 >
-{: .note}
+{: .comment}
 
 Our mock community is composed of genomic DNA from 21 bacterial strains. So in a perfect world, this is
 exactly what we would expect the analysis to produce as a result.
@@ -665,17 +664,18 @@ First, let's extract the sequences belonging to our mock samples from our data:
 >   - "group file or count table" to the count table from Remove.lineage
 >   - "groups" to `Mock`
 >   - "fasta" to fasta output from Remove.lineage
+>   - "output logfile?" to `yes`
 >
 {: .hands_on}
 
 In the log file we see the following:
 
 ```
-Selected 67 sequences from your fasta file.
-Selected 4060 sequences from your count file
+Selected 58 sequences from your fasta file.
+Selected 4046 sequences from your count file
 ```
 
-This tells us that we had 67 unique sequences and a total of 4,060 total sequences in our Mock sample. We
+This tells us that we had 58 unique sequences and a total of 4,046 total sequences in our Mock sample. We
 can now use the `seq.error` command to measure the error rates based on our mock reference. Here we align
 the reads from our mock sample back to their known sequences, to see how many fail to match.
 
@@ -684,13 +684,13 @@ the reads from our mock sample back to their known sequences, to see how many fa
 >   - "fasta" to the fasta from Get.groups
 >   - "reference" to `HMP_MOCK.v35.fasta` file from your history
 >   - "count" to the count table from Get.groups
+>   - "output log?" to `yes`
 >
 {: .hands_on}
 
  In the log file we see something like this:
 
 ```
-It took 0 to read 32 sequences.
 Overall error rate:    6.5108e-05
 Errors    Sequences
 0    3998
@@ -698,6 +698,7 @@ Errors    Sequences
 2    0
 3    2
 4    1
+[..]
 ```
 
 That rocks, eh? Our error rate is 0.0065%!
@@ -712,7 +713,7 @@ We can now cluster the mock sequences into OTUs to see how many spurious OTUs we
 > In 16S metagenomics approaches, OTUs are clusters of similar sequence variants of the 16S rDNA marker gene
 > sequence. Each of these clusters is intended to represent a taxonomic unit of a bacteria species or genus
 > depending on the sequence similarity threshold. Typically, OTU cluster are defined by a 97% identity
-> threshold of the 16S gene sequence variants at genus level. 98% or 99% identity is suggested for species
+> threshold of the 16S gene sequence variants at species level. 98% or 99% identity is suggested for strain
 > separation.
 >
 > ![OTU graph](../../images/OTU_graph.png)
@@ -764,7 +765,7 @@ We can now cluster the mock sequences into OTUs to see how many spurious OTUs we
 Open the rarefaction output (dataset named `sobs` inside the `rarefaction curves` output collection).
 You'll see that for 4060 sequences, we'd have 34 OTUs from the Mock community. This number of course
 includes some stealthy chimeras that escaped our detection methods. If we used 3000 sequences, we would
-have about 31 OTUs. In a perfect world with no chimeras and no sequencing errors, we'd have 21 OTUs.
+have about 31 OTUs. In a perfect world with no chimeras and no sequencing errors, we'd have 20 OTUs.
 This is not a perfect world. But this is pretty darn good!
 
 > ### {% icon tip %} Background: Rarefaction
