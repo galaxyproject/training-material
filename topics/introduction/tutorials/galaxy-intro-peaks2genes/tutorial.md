@@ -255,7 +255,12 @@ In order to convert the chromosome names we have therefore two things to do:
 >    > * Press the **rerun icon** in the history
 >    {: .tip}
 >
-> 4. **Replace Text** {% icon tool %}: Rerun this tool accordingly for chromosome Y
+> 4. **Replace Text** {% icon tool %}: Rerun this tool to do that for chromosome Y
+>    - **File to process** to the output from the **last** run
+>    - **in column**: `Column:1`
+>    - **Find pattern**: `chr21`
+>    - **Replace with**: `chrY`
+>
 > 5. Inspect the latest file through the **eye icon**
 >
 >    Have we been successful?
