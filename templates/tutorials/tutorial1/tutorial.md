@@ -102,7 +102,7 @@ Short introduction about this subpart.
 > ### {% icon comment %} Comment
 >
 > Do you want to learn more about the principles behind mapping? Follow our [training](../../NGS-mapping)
-> {: .comment}
+{: .comment}
 
 # Conclusion
 {:.no_toc}

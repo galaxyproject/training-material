@@ -70,9 +70,10 @@ This information is used to automatically make the tutorial available on the onl
 >   - `type: "tutorial"`
 >   - `name: "similarity-search"`
 >   - `zenodo_link: ""` (we do not have data currently)
->   - `galaxy_tour: ""` (we do not have Galaxy Interactive Tour currently)
->   - `hands_on: "yes"`
->   - `slides: "no"`
+>   - `galaxy_tour: no` (we do not have Galaxy Interactive Tour currently)
+>   - `hands_on: yes`
+>   - `slides: no`
+>   - `workflows: no`
 >   - `requirements`: a requirement to "Galaxy introduction" with internal link to `introduction`
 {: .hands_on}
 
