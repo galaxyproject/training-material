@@ -32,21 +32,18 @@ In the metagenomics fields, amplicon sequencing refers to capture and sequence o
 It can be 16S for bacteria or archea or 18S for eukaryotes.
 
 > ### {% icon tip %} Background: The 16S ribosomal RNA gene
-> ![The 16S ribosomal RNA gene](../../images/16S_gene.png) <br><br>
+> ![The 16S ribosomal RNA gene](../../images/16S_gene.png "The 16S ribosomal RNA gene. Credit: https://www.slideshare.net/beiko/ccbc-tutorial-beiko")
 >
 > The 16S rRNA gene has several properties that make it ideally suited for our purposes
 >
 > 1. Present in all living organisms
-> 2. Single copy (no recombination)
-> 3. Highly conserved + highly variable regions
-> 4. Huge reference databases
+> 2. Highly conserved + highly variable regions
+> 3. Huge reference databases
 >
-> ![Variable regions](../../images/16S_variableregions.jpg)
+> ![Variable regions](../../images/16S_variableregions.jpg "Variable regions of the 16S rRNA")
 >
-> The highly conserved regions make it easy to target the gene across different organisms,
-> while the highly variable regions allow us to distinguish between different species.
+> The highly conserved regions make it easy to target the gene across different organisms, while the highly variable regions allow us to distinguish between different species. 
 >
-> (slide credit [https://www.slideshare.net/beiko/ccbc-tutorial-beiko ](http://www.slideshare.net/beiko/ccbc-tutorial-beiko ))
 {: .tip}
 
 With amplicon data, we can extract from which micro-organisms the sequences in our sample are coming from. This is called taxonomic assignation.
@@ -69,6 +66,11 @@ using 454 GS FLX Titanium. The original data are available at EBI Metagenomics u
 > 1. Import from [Zenodo](https://zenodo.org/record/815875) or from the data library (in "Analyses of metagenomics data") the files
 >    - `SRR531818_pampa.fasta`
 >    - `SRR651839_anguil.fasta`
+>
+>    ```
+>    https://zenodo.org/record/815875/files/SRR531818_pampa.fasta
+>    https://zenodo.org/record/815875/files/SRR651839_anguil.fasta
+>    ```
 >
 >    > ### {% icon tip %} Tip: Importing data via links
 >    >
@@ -114,8 +116,14 @@ and create a *group file*, indicating which reads belong to which samples.
 >   - "Inputs" to the two sample fasta files
 >
 > 2. **Make.group** {% icon tool %} with the following parameters
->   - "Method" to `Manually specify fasta files and group names`
->   - "Additional": Add two elements to this repeat: Pampa sample fasta file, with group name `pampa` and Anguil sample fasta file, with group name `anguil`
+>   - "Method to create group file" to `Manually specify fasta files and group names`
+>   - "Additional": Add two elements to this repeat
+>        - Fist element
+>            - "fasta - Fasta to group" to `SRR531818_pampa` file
+>            - "group - Group name" to `pampa`
+>        - Second element (click on "Insert Additional")
+>            - "fasta - Fasta to group" to `SRR651839_anguil` file
+>            - "group - Group name" to `anguil`
 >
 {: .hands_on}
 
@@ -144,7 +152,7 @@ times, we'll unique our sequences using the `Unique.seqs` command:
 >    >
 >    >    <details>
 >    >    <summary>Click to view answer</summary>
->    >    9,502 unique sequences and 498 duplicates. <br>
+>    >    19,502 unique sequences and 498 duplicates. <br>
 >    >    This can be determined from the number of lines in the fasta (or names) output, compared to the
 >    >    number of lines in the fasta file before this step.
 >    >    </details>
@@ -230,17 +238,18 @@ The following tool will remove any sequences with ambiguous bases and anything l
 >   - "maxhomop" parameter to `8`
 >   - "count" to the count file from `Count.seqs`
 >
-> > ### {% icon question %} Question
-> >
-> > How many reads were removed in this screening step? (Hint: run the `Summary.seqs` tool again)
-> >
-> >    <details>
-> >    <summary>Click to view answer</summary>
-> >    1,804. <br>
-> >    This can be determined by looking at the number of lines in bad.accnos output of screen.seqs step or by comparing the total number of seqs between of the summary.seqs log before and after this screening step
-> >    </details>
-> {: .question}
 {: .hands_on}
+
+> ### {% icon question %} Question
+>
+> How many reads were removed in this screening step? (Hint: run the `Summary.seqs` tool again)
+>
+> <details>
+> <summary>Click to view answer</summary>
+> 1,804. <br>
+> This can be determined by looking at the number of lines in bad.accnos output of screen.seqs step or by comparing the total number of seqs between of the summary.seqs log before and after this screening step
+> </details>
+{: .question}
 
 ## Sequence Alignment
 
@@ -249,8 +258,14 @@ Aligning our sequences to a reference helps improve OTU assignment [[Schloss et.
 > ### {% icon hands_on %} Hands-on: Align sequences
 >
 > 1. Import the `silva.v4.fasta` file in your history
+> 
+>    ```
+>    https://zenodo.org/record/815875/files/SRR531818_pampa.fasta
+>    ```
+>
 > 2. **Align.seqs** {% icon tool %} with the following parameters
 >   - "fasta" to the `good.fasta` output from `Screen.seqs`
+>   - "Select Reference Template from" to `Your history`
 >   - "reference" to the `silva.v4.fasta` reference file
 >   - "flip" to `Yes`
 >
@@ -303,15 +318,15 @@ To make sure that everything overlaps the same region we'll re-run `Screen.seqs`
 >   - "end" to `13424`
 >   - "count" to the group file created by the previous run of `Screen.seqs`
 >
-> > ### {% icon question %} Question
-> >
-> >  How many sequences were removed in this step?
-> > <details>
-> >   <summary> Click to view answer</summary>
-> >   4,579 sequences were removed. This is the number of lines in the bad.accnos output.
-> > </details>
-> {: .question}
 {: .hands_on}
+
+> ### {% icon question %} Question
+> How many sequences were removed in this step?
+> <details>
+> <summary> Click to view answer</summary>
+> 4,579 sequences were removed. This is the number of lines in the bad.accnos output.
+> </details>
+{: .question}
 
 Now we know our sequences overlap the same alignment coordinates, we want to make sure they *only* overlap that region. So we'll filter the sequences to remove the overhangs at both ends. In addition, there are many columns in the alignment that only contain gap characters (*i.e.* "."). These can be pulled out without losing any information. We'll do all this with `Filter.seqs`:
 
@@ -334,14 +349,11 @@ The idea is to take the sequences and assign them to a taxon. To do that, we gro
 >
 > In 16S metagenomics approaches, OTUs are clusters of similar sequence variants of the 16S rDNA marker gene sequence. Each of these clusters is intended to represent a taxonomic unit of a bacteria species or genus depending on the sequence similarity threshold. Typically, OTU cluster are defined by a 97% identity threshold of the 16S gene sequence variants at genus level. 98% or 99% identity is suggested for species separation.
 >
-> ![OTU and cluster with 97% identity threshold](../../images/otu.png)
+> ![OTU and cluster with 97% identity threshold](../../images/otu.png "OTU and cluster with 97% identity threshold")
 >
-> ![OTU graph](../../images/OTU_graph.png)
+> ![OTU graph](../../images/OTU_graph.png "Cladogram of operational taxonomic units (OTUs). Credit: Danzeisen et al. 2013, 10.7717/peerj.237")
 >
-> (Image credit: Danzeisen et al. 2013, 10.7717/peerj.237)
 {: .tip}
-
-
 
 The first thing we want to do is to further de-noise our sequences, by pre-clustering the sequences using the `Pre.cluster` command, allowing for up to 2 differences between sequences. This command will split the sequences by group and then sort them by abundance and go from most abundant to least and identify sequences that differ no more than 2 nucleotides from on another. If this is the case, then they get merged. We generally recommend allowing 1 difference for every 100 basepairs of sequence:
 
@@ -370,9 +382,17 @@ We would like to classify the sequences using a training set.
 > ### {% icon hands_on %} Hands-on: Classify the sequences
 >
 > 1. Import the `trainset16_022016.pds.fasta` and `trainset16_022016.pds.tax` in your history
+>
+>    ```
+>    https://zenodo.org/record/815875/files/trainset16_022016.pds.fasta
+>    https://zenodo.org/record/815875/files/trainset16_022016.pds.tax
+>    ```
+>
 > 2. **Classify.seqs** {% icon tool %} with the following parameters
 >   - "fasta" to the fasta output from `Pre.cluster`
+>   - "Select Reference Template from" to `History`
 >   - "reference" to `trainset16_022016.pds.fasta` from your history
+>   - "Select Taxonomy from" to `History`
 >   - "taxonomy" to `trainset16_022016.pds.tax` from your history
 >   - "cutoff" to 80
 >   - "count" to the count table from `Pre.cluster`
@@ -381,11 +401,27 @@ We would like to classify the sequences using a training set.
 >
 {: .hands_on}
 
-Have a look at the taxonomy output. You will see that every read now has a classification.
+Have a look at the taxonomy output. 
 
-The next step is then to use this information to know the abundance of the different found taxons.
+```
+name    taxonomy
+SRR651839.9109-HXY9DLL01BSHQO-2 Bacteria(99);Verrucomicrobia(99);Spartobacteria(99);unclassified;unclassified;unclassified;
+SRR651839.11437-HXY9DLL01AMIPI-2    Bacteria(100);Verrucomicrobia(97);Spartobacteria(97);unclassified;unclassified;unclassified;
+SRR651839.15884-HXY9DLL01BDG2F-2    Bacteria(99);unclassified;unclassified;unclassified;unclassified;unclassified;
+SRR651839.12048-HXY9DLL01DSOWS-2    Bacteria(100);Verrucomicrobia(100);Spartobacteria(100);unclassified;unclassified;unclassified;
+SRR651839.9410-HXY9DLL01BGRG2-2 Bacteria(100);Proteobacteria(100);Alphaproteobacteria(100);Rhizobiales(100);Bradyrhizobiaceae(100);unclassified;
+SRR651839.9029-HXY9DLL01E4W9Z-2 Bacteria(100);Verrucomicrobia(100);Spartobacteria(100);unclassified;unclassified;unclassified;
+SRR651839.6283-HXY9DLL01CHX25-2 Bacteria(100);Acidobacteria(100);Acidobacteria_Gp4(100);Gp4(100);unclassified;unclassified;
+SRR651839.3134-HXY9DLL01DOM67-2 Bacteria(100);Acidobacteria(100);Acidobacteria_Gp6(100);Gp6(100);unclassified;unclassified;
+SRR651839.13044-HXY9DLL01ETN7L-2    Bacteria(100);Proteobacteria(100);Alphaproteobacteria(100);Rhizobiales(100);Bradyrhizobiaceae(100);unclassified;
+SRR531818.61708-G88ZSJI01AVPPR-2    Bacteria(100);Acidobacteria(99);Acidobacteria_Gp6(99);Gp6(99);unclassified;unclassified;
+```
 
-> ### {% icon hands_on %} Hands-on: Cluster our data into OTUs
+You will see that every read now has a classification.
+
+The next step is then to use this information to know the abundance of the different found taxons. First, we assign our sequences to OTUs:
+
+> ### {% icon hands_on %} Hands-on: Assign sequences to OTUs
 >
 > 1. **Cluster.split** {% icon tool %} with the following parameters
 >   - "Split by" to `Classification using fasta`
@@ -394,7 +430,13 @@ The next step is then to use this information to know the abundance of the diffe
 >   - "count" to the count table output from `Pre.cluster`
 >   - "cutoff" to `0.15`
 >
->     Next we want to know how many sequences are in each OTU from each group and we can do this using the `Make.shared` command. Here we tell mothur that we're really only interested in the 0.03 cutoff level:
+{: .hands_on}
+
+We obtain a table with the columns being the different identified OTUs, the rows the different distances and the cells the ids of the sequences identified for these OTUs for the different distances.
+
+Next we want to know how many sequences are in each OTU from each group with a distance of 0.03 (97% similarity). We can do this using the `Make.shared` command with the 0.03 cutoff level:
+
+> ### {% icon hands_on %} Hands-on: Estimate OTU abundance
 >
 > 2. **Make.shared** {% icon tool %} with the following parameters
 >   - "Select input type" to `OTU list`
@@ -402,22 +444,31 @@ The next step is then to use this information to know the abundance of the diffe
 >   - "count" to the count table from `Pre.cluster`
 >   - "label" to `0.03`
 >
->     We probably also want to know the taxonomy for each of our OTUs. We can get the consensus taxonomy for each OTU using the `Classify.otu` command:
+{: .hands_on}
+
+We probably also want to know the taxonomy for each of our OTUs. We can get the consensus taxonomy for each OTU using the `Classify.otu` command:
+
+> ### {% icon hands_on %} Hands-on: Classify the OTUs
 >
 > 3. **Classify.otu** {% icon tool %} with the following parameters
 >   - "list" to output from `Cluster.split`
 >   - "count" to the count table from `Pre.cluster`
+>   - "Select Taxonomy from" to `History`
 >   - "taxonomy" to the taxonomy output from `Classify.seqs`
 >   - "label" to `0.03`
 {: .hands_on}
 
 > ### {% icon question %} Questions
 >
-> How many OTUs with taxonomic assignation are found for the Anguil sample? And for the Pampa sample?
+> 1. How many OTUs with taxonomic assignation are found for the Anguil sample? And for the Pampa sample?
+> 2. What is the annotation of first OTU and its size?
 >
 >    <details>
 >    <summary>Click to view answers</summary>
->    2,212 for Anguil and 2,490 for Pampa ("tax.summary" output of `Classify.otus`)
+>    <ol type="1">
+>    <li>2,213 for Anguil and 2,484 for Pampa ("tax.summary")</li>
+>    <li>Otu00001 is associated to 935 sequences and to Bacteria (kingdom), Verrucomicrobia (phylum), Spartobacteria (class) in "taxonomy" file</li>
+>    </ol>
 >    </details>
 {: .question}
 
@@ -430,7 +481,7 @@ Let's visualize our data using Krona:
 >
 > 1. **Visualize with Krona** {% icon tool %} with the following parameters
 >   - "Input file" to taxonomy output from `Classify.otu` (collection)
->   - Set **Is this output from mothur?** to `Yes`
+>   - "is this output from MOTHUR?" to `Yes`
 >
 {: .hands_on}
 
@@ -455,23 +506,24 @@ the two samples?
 {: .hands_on}
 
 
-To further explore the community structure, we can visualize it with dedicated tools such as Phinch:
+To further explore the community structure, we can visualize it with dedicated tools such as Phinch.
 
 > ### {% icon hands_on %} Hands-on: Visualization of the community structure with Phinch
 >
 > 1. **Make.biom** {% icon tool %} with the following parameters
->   - "shared" to Make.shared
->   - "constaxonomy" to taxonomy output from the first run of `classify.otu` (collection)
+>   - "shared" to `Make.shared` output
+>   - "constaxonomy" to taxonomy output from the first run of `Classify.otu` (collection)
+> 1. Expand the dataset and click on the "view biom at phinch" link
+> 
+>     > ### {% icon comment %} Comment
+>     >
+>     > If this link is not present on your Galaxy, you can download the generated BIOM file and upload directly to Phinch server at [http://phinch.org](http://phinch.org).
+>    {: .comment}
+> 
+> 2. Play with the several interactive visualisations:
 >
->    The Galaxy project runs an instance of Phinch, and if you look at the output BIOM file, you will see a link to view the file at Phinch:
+> ![Phinch website interface](../../../../shared/images/phinch_overviewpage.png "Phinch visualizations")
 >
->    ![Link to Phinch](../../../../shared/images/viewatphinch.png)
->
-> 2. Click on the icon
->
->    It will lead you to the Phinch website, which will automatically load in your file, and where you can several interactive visualisations:
->
->     ![Phinch website interface](../../../../shared/images/phinch_overviewpage.png)
 {: .hands_on}
 
 Once we have information about the community structure (OTUs with taxonomic structure), we can do more analysis on it: estimation of the diversity of micro-organism, comparison fo diversity between samples, analysis of populations, ... We will not go into detail of such analyses here but you follow our tutorials on amplicon data analyses to learn about them.
@@ -489,7 +541,12 @@ In this second part, we will use a metagenomic sample of the Pampas Soil ([SRR60
 > ### {% icon hands_on %} Hands-on: Data upload
 >
 > 1. Create a new history
-> 2. Import the "SRR606451_pampa" Fasta file from [Zenodo](http://zenodo.org/record/815875) or from the data library (in "Analyses of metagenomics data")
+> 2. Import the `SRR606451_pampa` Fasta file from [Zenodo](http://zenodo.org/record/815875) or from the data library (in "Analyses of metagenomics data")
+>
+>    ```
+>    https://zenodo.org/record/815875/files/SRR606451_pampa.fasta
+>    ```
+>
 {: .hands_on}
 
 ## Extraction of taxonomic information
@@ -507,8 +564,8 @@ In this tutorial, we use the second approach with MetaPhlAn2. This tools is usin
 > ### {% icon hands_on %} Hands-on: Taxonomic assignation with MetaPhlAn2
 >
 > 1. **MetaPhlAN2** {% icon tool %} with
->    - "Input file" to the imported file`
->    - "MetaPhlAn2 clade-specific marker genes" to `locally cached`
+>    - "Input file" to the imported file
+>    - "Database with clade-specific marker genes" to `locally cached`
 >    - "Cached database with clade-specific marker genes" to `MetaPhlAn2 clade-specific marker genes`
 >
 > This step may take a couple of minutes :coffee:
@@ -559,7 +616,7 @@ Even if the output of MetaPhlAn2 is bit easier to parse than the BIOM file, we w
 > 1. **Format MetaPhlAn2 output for Krona** {% icon tool %} with
 >    - "Input file" to `Community profile` output of `MetaPhlAn2`
 >
-> 2. **KRONA pie chart** {% icon tool %}: with
+> 2. **KRONA pie chart** {% icon tool %} with
 >    - "What is the type of your input data" as `MetaPhlan`
 >    - "Input file" to the output of `Format MetaPhlAn2`
 >
@@ -589,6 +646,12 @@ In the shotgun data, we have access to the sequences from the full genome, with 
 >    This step is long so we generated the output for you!
 >
 > 2. Import the 3 files whose the name is starting with "humann2"
+>
+>    ```
+>    https://zenodo.org/record/815875/files/humann2_gene_families_abundance.tsv
+>    https://zenodo.org/record/815875/files/humann2_pathways_abundance.tsv
+>    https://zenodo.org/record/815875/files/humann2_pathways_coverage.tsv
+>    ```
 {: .hands_on}
 
 HUMAnN2 generates 3 files
@@ -634,37 +697,6 @@ The RPK for the gene families are quite difficult to interpret in term of relati
 >  >    <ol type="1">
 >  >    <li>55% of the sequences has not be assigned to a gene family</li>
 >  >    <li>The most abundant gene family with 25% of sequences is a putative secreted protein</li>
->  >    </ol>
->  >    </details>
->  {: .question}
-{: .hands_on}
-
-With the HUMAnN2 output, we have access to UniRef50 gene families. However, the names can remains cryptic and sometimes we would like a more general view about the functions. HUMAnN proposes a tool to regroup the gene families into different meta-groups: GO (Gene Ontology), EC, etc.
-
-> ### {% icon hands_on %} Hands-on: Regroup the gene families into GO terms
->
-> 1. **Regroup a HUMAnN2 generated table by features** {% icon tool %} with
->    - "Gene/pathway table" to the gene family table generated with `HUMAnN2`
->    - "How to combine grouped features?" to `Sum`
->    - "Use built-in grouping options?" to `Yes`
->    - "Gene family type" to `UniRef50 gene families`
->    - "Grouping options" to `UniRef50 gene families into GO`
->
-> 2. **Renormalize a HUMAnN2 generated table** {% icon tool %} with
->    - "Gene/pathway table" to the gene family table generated with `Regroup`
->    - "Normalization scheme" to `Relative abundance`
->    - "Normalization level" to `Normalization of all levels by community total`
->
->  > ### {% icon question %} Questions
->  >
->  > 1. What is the most abundant GO term?
->  > 2. What is related to in [Gene Ontology](http://www.geneontology.org/)?
->  >
->  >    <details>
->  >    <summary>Click to view answers</summary>
->  >    <ol type="1">
->  >    <li>GO:0007275 (found after sorting) with 2.68%</li>
->  >    <li>It seems to correspond to "multicellular organism development"(?)</li>
 >  >    </ol>
 >  >    </details>
 >  {: .question}
