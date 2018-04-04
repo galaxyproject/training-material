@@ -432,9 +432,9 @@ The next step is then to use this information to know the abundance of the diffe
 >
 {: .hands_on}
 
-We obtain a table with in column the different identified OTUs, in lines the different distances and the cells the ids of the sequences identified for these OTUs for the different distances.
+We obtain a table with the columns being the different identified OTUs, the rows the different distances and the cells the ids of the sequences identified for these OTUs for the different distances.
 
-Next we want to know how many sequences are in each OTU from each group with a distance of 0.03 (97% of similarity). We can do this using the `Make.shared` command with the 0.03 cutoff level:
+Next we want to know how many sequences are in each OTU from each group with a distance of 0.03 (97% similarity). We can do this using the `Make.shared` command with the 0.03 cutoff level:
 
 > ### {% icon hands_on %} Hands-on: Estimate OTU abundance
 >
@@ -467,7 +467,7 @@ We probably also want to know the taxonomy for each of our OTUs. We can get the 
 >    <summary>Click to view answers</summary>
 >    <ol type="1">
 >    <li>2,213 for Anguil and 2,484 for Pampa ("tax.summary")</li>
->    <li>Otu00001 is associated to 935 sequences and to Bacteria (kingdom), Verrucomicrobia (phylum), Spartobacteria (classis) in "taxonomy" file</li>
+>    <li>Otu00001 is associated to 935 sequences and to Bacteria (kingdom), Verrucomicrobia (phylum), Spartobacteria (class) in "taxonomy" file</li>
 >    </ol>
 >    </details>
 {: .question}
@@ -514,6 +514,12 @@ To further explore the community structure, we can visualize it with dedicated t
 >   - "shared" to `Make.shared` output
 >   - "constaxonomy" to taxonomy output from the first run of `Classify.otu` (collection)
 > 1. On "calculator" collection, click on "Visualize" and then "Phinch"
+> 
+>     > ### {% icon comment %} Comment
+>     >
+>     > If the link is not present on the user server (since it is not turned on by default), the alternative is to download the generated BIOM file and upload directly to Phinch server at [http://phinch.org](http://phinch.org).
+>    {: .comment}
+> 
 > 2. Play with the several interactive visualisations:
 >
 > ![Phinch website interface](../../../../shared/images/phinch_overviewpage.png "Phinch visualizations")
