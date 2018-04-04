@@ -513,11 +513,11 @@ To further explore the community structure, we can visualize it with dedicated t
 > 1. **Make.biom** {% icon tool %} with the following parameters
 >   - "shared" to `Make.shared` output
 >   - "constaxonomy" to taxonomy output from the first run of `Classify.otu` (collection)
-> 1. On "calculator" collection, click on "Visualize" and then "Phinch"
+> 1. Expand the dataset and click on the "view biom at phinch" link
 > 
 >     > ### {% icon comment %} Comment
 >     >
->     > If the link is not present on the user server (since it is not turned on by default), the alternative is to download the generated BIOM file and upload directly to Phinch server at [http://phinch.org](http://phinch.org).
+>     > If this link is not present on your Galaxy, you can download the generated BIOM file and upload directly to Phinch server at [http://phinch.org](http://phinch.org).
 >    {: .comment}
 > 
 > 2. Play with the several interactive visualisations:
