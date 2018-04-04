@@ -78,8 +78,8 @@ To ease this process, we created a template for new tutorials, complete with all
 
 > ### {% icon hands_on %} Hands-on: Copy the required files
 >
-> 1. Copy the `tutorial1` directory (you can find it in `templates/tutorials/`) in `topics/sequence-analysis/topics`
-> 2. Rename the directory to `similarity-search`
+> 1. Copy the `tutorial1` directory (you can find it in `templates/tutorials/`) in `topics/sequence-analysis/tutorials`
+> 2. Rename the copied directory to `similarity-search`
 {: .hands_on}
 
 ## Keeping track of the changes
