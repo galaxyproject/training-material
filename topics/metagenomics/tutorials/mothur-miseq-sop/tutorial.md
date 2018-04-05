@@ -1156,6 +1156,11 @@ instance we can convert our shared file to the more widely used `biom` format an
 > where you can several interactive visualisations:
 >
 > ![Phinch overview](../../../../shared/images/phinch_overviewpage.png)
+>
+> > ### {% icon comment %} Comment
+> >
+> > If this link is not present on your Galaxy, you can download the generated BIOM file and upload directly to Phinch server at [http://phinch.org](http://phinch.org).
+> {: .comment}
 {: .hands_on}
 
 ## Krona
@@ -1170,7 +1175,7 @@ A second tool we can use to visualize our data, is [Krona]()
 >   - "Taxonomy file" to the taxonomy output from Classify.otu (collection)
 >
 > - **Krona pie chart** {% icon tool %} with the following parameters
->   - "Type of input" to `Text`
+>   - "Type of input" to `Tabular`
 >   - "Input file" to taxonomy output from Classify.otu (collection)
 {: .hands_on}
 
@@ -1181,7 +1186,7 @@ innermost ring labeled "Bacteria"
 
 > ### {% icon question %} Question
 >
->  what percentage of your sample was labelled `Lactobacillus`?
+>  What percentage of your sample was labelled `Lactobacillus`?
 >
 > <details>
 >   <summary> Click to view answer</summary>
@@ -1189,7 +1194,7 @@ innermost ring labeled "Bacteria"
 >   clearly (16% in our case), click on this segment and the right-hand side will show you the percentages at
 >   any point in the hierarchy (here 5% of all)
 >
->  ![Lactobacillus in Krona](../../images/krona_lacto.png)
+>  <img src="../../images/krona_lacto.png" alt="image showing view with Lactobacillus highlighted">
 > </details>
 {: .question}
 
