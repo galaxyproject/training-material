@@ -1131,7 +1131,74 @@ of the others.
 
 ![Jclass tree](../../images/tree.jclass.png)
 
-### Determine statistical significance of clusterings
+
+# Visualisations
+
+Mothur does not have a lot of visualization tools built in, but external tools may be used for this. For
+instance we can convert our shared file to the more widely used `biom` format and view it in a platform like
+[Phinch](http://www.phinch.org/).
+
+## Phinch
+
+> ### {% icon hands_on %} Hands-on: Phinch
+>
+> - **Make.biom** {% icon tool %} with the following parameters
+>   - "shared" to Subsample.shared
+>   - "constaxonomy" to taxonomy output from Classify.otu (collection)
+>   - "metadata" to `mouse.dpw.metadata`
+>
+> The Galaxy project runs an instance of Phinch, and if you look at the output biom file, you will see a link
+> to view the file at Phinch:
+>
+> ![Icon to view at Phinch](../../../../shared/images/viewatphinch.png)
+>
+> Clicking on this link will lead you to the Phinch website, which will automatically load in your file, and
+> where you can several interactive visualisations:
+>
+> ![Phinch overview](../../../../shared/images/phinch_overviewpage.png)
+{: .hands_on}
+
+## Krona
+
+A second tool we can use to visualize our data, is [Krona]()
+
+> ### {% icon hands_on %} Hands-on: Krona
+>
+>  First we convert our mothur taxonomy file to a format compatible with Krona
+>
+> - **Taxonomy-to-Krona** {% icon tool %} with the following parameters
+>   - "Taxonomy file" to the taxonomy output from Classify.otu (collection)
+>
+> - **Krona pie chart** {% icon tool %} with the following parameters
+>   - "Type of input" to `Text`
+>   - "Input file" to taxonomy output from Classify.otu (collection)
+{: .hands_on}
+
+The resulting file is an HTML file containing an interactive visualization. For instance try double-clicking the
+innermost ring labeled "Bacteria"
+
+![Krona](../../images/krona.png)
+
+> ### {% icon question %} Question
+>
+>  what percentage of your sample was labelled `Lactobacillus`?
+>
+> <details>
+>   <summary> Click to view answer</summary>
+>   Explore the Krona plot, double click on Firmicutes, here you should see Lactobacillus
+>   clearly (16% in our case), click on this segment and the right-hand side will show you the percentages at
+>   any point in the hierarchy (here 5% of all)
+>
+>  ![Lactobacillus in Krona](../../images/krona_lacto.png)
+> </details>
+{: .question}
+
+Well done! you have completed the basics of the mothur SOP. Below are some more exercises for those who wish to
+go into more details about statistical significance testing and population-level analysis.
+
+# Extra Credit
+
+## Determine statistical significance of clusterings
 
 We can perform a test to determine whether the clustering within the tree is statistically significant or not
 using by choosing from the `parsimony`, `unifrac.unweighted`, or `unifrac.weighted` commands. To run these we
@@ -1576,67 +1643,6 @@ Otu0015    0.09
 Otu0082    0.08
 Otu0042    0.07
 ```
-
-# Step 4: Visualisations
-
-Mothur does not have a lot of visualization tools built in, but external tools may be used for this. For
-instance we can convert our shared file to the more widely used `biom` format and view it in a platform like
-[Phinch](http://www.phinch.org/).
-
-## Phinch
-
-> ### {% icon hands_on %} Hands-on: Phinch
->
-> - **Make.biom** {% icon tool %} with the following parameters
->   - "shared" to Subsample.shared
->   - "constaxonomy" to taxonomy output from Classify.otu (collection)
->   - "metadata" to `mouse.dpw.metadata`
->
-> The Galaxy project runs an instance of Phinch, and if you look at the output biom file, you will see a link
-> to view the file at Phinch:
->
-> ![Icon to view at Phinch](../../../../shared/images/viewatphinch.png)
->
-> Clicking on this link will lead you to the Phinch website, which will automatically load in your file, and
-> where you can several interactive visualisations:
->
-> ![Phinch overview](../../../../shared/images/phinch_overviewpage.png)
-{: .hands_on}
-
-## Krona
-
-A second tool we can use to visualize our data, is [Krona]()
-
-> ### {% icon hands_on %} Hands-on: Krona
->
->  First we convert our mothur taxonomy file to a format compatible with Krona
->
-> - **Taxonomy-to-Krona** {% icon tool %} with the following parameters
->   - "Taxonomy file" to the taxonomy output from Classify.otu (collection)
->
-> - **Krona pie chart** {% icon tool %} with the following parameters
->   - "Type of input" to `Text`
->   - "Input file" to taxonomy output from Classify.otu (collection)
-{: .hands_on}
-
-The resulting file is an HTML file containing an interactive visualization. For instance try double-clicking the
-innermost ring labeled "Bacteria"
-
-![Krona](../../images/krona.png)
-
-> ### {% icon question %} Question
->
->  what percentage of your sample was labelled `Lactobacillus`?
->
-> <details>
->   <summary> Click to view answer</summary>
->   Explore the Krona plot, double click on Firmicutes, here you should see Lactobacillus
->   clearly (16% in our case), click on this segment and the right-hand side will show you the percentages at
->   any point in the hierarchy (here 5% of all)
->
->  ![Lactobacillus in Krona](../../images/krona_lacto.png)
-> </details>
-{: .question}
 
 # Conclusion
 {:.no_toc}
