@@ -369,7 +369,7 @@ The first thing we want to do is to further de-noise our sequences, by pre-clust
 >   >  How many unique sequences are we left with after this clustering of highly similar sequences?
 >   > <details>
 >   >   <summary> Click to view answer</summary>
->   >   10,386 <br>
+>   >   10,398 <br>
 >   >   This is the number of lines in the fasta output
 >   > </details>
 >   {: .question}
