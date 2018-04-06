@@ -28,7 +28,7 @@ More can be read about SNP calling [here](https://en.wikipedia.org/wiki/SNV_call
 >
 {: .agenda}
 
-# Section 1: Get the data
+# Get the data
 
 The data for today is a subset of a real dataset from a Staphylococcus aureus bacteria.
 We have a closed genome sequence and an annotation for our "wildtype" strain.
@@ -52,43 +52,51 @@ This data is available at Zenodo using the following [link](https://doi.org/10.5
 > 1.  Import all of the following files into a new history:
 >     - [mutant_R1.fastq](https://zenodo.org/record/582600/files/mutant_R1.fastq)
 >     - [mutant_R2.fastq](https://zenodo.org/record/582600/files/mutant_R2.fastq)
->     - [wiltype.fna](https://zenodo.org/record/582600/files/wildtype.fna)  
->     - [wiltype.gbk](https://zenodo.org/record/582600/files/wildtype.gbk)
->     - [wiltype.gff](https://zenodo.org/record/582600/files/wildtype.gff)
+>     - [wildtype.fna](https://zenodo.org/record/582600/files/wildtype.fna)  
+>     - [wildtype.gbk](https://zenodo.org/record/582600/files/wildtype.gbk)
+>     - [wildtype.gff](https://zenodo.org/record/582600/files/wildtype.gff)
+> 
+>     ```
+>     https://zenodo.org/record/582600/files/mutant_R1.fastq
+>     https://zenodo.org/record/582600/files/mutant_R2.fastq
+>     https://zenodo.org/record/582600/files/wildtype.fna
+>     https://zenodo.org/record/582600/files/wildtype.gbk
+>     https://zenodo.org/record/582600/files/wildtype.gff
+>     ```  
 >
->    > ### {% icon tip %} Tip: Importing data via links
->    >
->    > * Copy the link location
->    > * Open the Galaxy Upload Manager
->    > * Select **Paste/Fetch Data**
->    > * Paste the link into the text field
->    > * Press **Start**
->    {: .tip}
+>     > ### {% icon tip %} Tip: Importing data via links
+>     >
+>     > * Copy the link location
+>     > * Open the Galaxy Upload Manager
+>     > * Select **Paste/Fetch Data**
+>     > * Paste the link into the text field
+>     > * Press **Start**
+>     {: .tip}
 >
 {: .hands_on}
 
-Your history pane should look like this after you have uploaded all of the data:
+# Find variants with Snippy
 
-![micro-start-history.png](../../images/micro-start-history.png)
+We will now run the Snippy tool on our reads, comparing it to the reference. 
 
-# Section 2: Find variants with Snippy
+Snippy is a tool for rapid bacterial SNP calling and core genome alignments. Snippy finds SNPs between a haploid reference genome and your NGS sequence reads. It will find both substitutions (snps) and insertions/deletions (indels).
 
-We will now run the Snippy tool on our reads, comparing it to the reference. If we give Snippy an annotated reference, it will silently run a tool called snpeff which will figure out the effect of any changes on the genes and other features. If we just give Snippy the reference sequence alone without the annotations, it will not run snpeff.
+If we give Snippy an annotated reference, it will silently run a tool called SnpEff which will figure out the effect of any changes on the genes and other features. If we just give Snippy the reference sequence alone without the annotations, it will not run SnpEff.
 
 We have an annotated reference and so will use it in this case.
 
 > ### {% icon hands_on %} Hands-on: Run Snippy
 >
-> 1. Search for **Snippy** {% icon tool %} and run it with the following parameters
->   - "Reference type" to `Genbank`
->   - "Reference Genbank" to the `wildtype.gbk` file
+> 1. **Snippy** {% icon tool %} with the following parameters
+>   - "Reference File" to the `wildtype.gbk` file
 >   - "Single or Paired-end reads" to `Paired`
 >   - "Select first set of reads" to `mutant_R1.fastq`
 >   - "Select second set of reads" to `mutant_R2.fastq`
->   - "Cleanup the non-snp output files" to `No`
+>   - Select all outputs
+>
 {: .hands_on}
 
-## Section 3: Examine Snippy output
+# Examine Snippy output
 
 Snippy has taken the reads, mapped them against the reference using BWA MEM, looked through the resulting BAM file and found differences using some fancy Bayesian statistics (Freebayes), filtered the differences for sensibility and finally checked what effect these differences will have on the predicted genes and other features in the genome.
 
@@ -104,44 +112,56 @@ log file  | A log file with the commands run and their outputs
 aligned fasta | A version of the reference but with - at position with depth=0 and N for 0 < depth < --mincov **(does not have variants)**
 consensus fasta | A version of the reference genome with all variants instantiated
 mapping depth | A table of the mapping depth
-mapped reads bam  | A bam file containing all of the mapped reads
+mapped reads bam  | A BAM file containing all of the mapped reads
 outdir  | A tarball of the Snippy output directory for inout into Snippy-core if required
 
-We will now have a look at the contents of the snp table file.
+We will now have a look at the contents of the SNP table file (`snippy on data XX, data XX and data XX table`):
 
-> ### {% icon hands_on %} Hands-on: View the SNPs
->
-> 1. Inspect the `snippy on data XX, data XX and data XX table` file by clicking on the eye icon
+```
+1   2   3   4   5   6   7   8   9   10  11  12  13  14
+CHROM   POS TYPE    REF ALT EVIDENCE    FTYPE   STRAND  NT_POS  AA_POS  EFFECT  LOCUS_TAG   GENE    PRODUCT
+Wildtype    24388   snp A   G   G:22 A:0    CDS +   1/702   1/233   initiator_codon_variant c.1A>G p.Met1?  WILD_00022  walR    Transcriptional regulatory protein WalR
+Wildtype    29479   snp T   G   G:21 T:0    CDS +   39/792  13/263  synonymous_variant c.39T>G p.Gly13Gly   WILD_00026  yycJ    Putative metallo-hydrolase YycJ
+Wildtype    47299   snp T   A   A:24 T:0    CDS +   54/1758 18/585  stop_gained c.54T>A p.Cys18*    WILD_00043  mecR1   Methicillin resistance mecR1 protein
+Wildtype    102969  snp G   C   C:16 G:0    CDS -   87/1281 29/426  synonymous_variant c.87C>G p.Gly29Gly   WILD_00093  spa Immunoglobulin G-binding protein A
+Wildtype    103048  snp T   A   A:20 T:0    CDS -   8/1281  3/426   missense_variant c.8A>T p.Lys3Met   WILD_00093  spa Immunoglobulin G-binding protein A
+Wildtype    103379  del GAA GA  GA:11 GAA:0                             
+Wildtype    106602  snp T   G   G:21 T:0    CDS -   993/993 331/330 stop_lost&splice_region_variant c.993A>C p.Ter331Tyrext*?   WILD_00097  yfiY    putative siderophore-binding lipoprotein YfiY
+Wildtype    109833  snp T   A   A:16 T:0    CDS +   1/1755  1/584   initiator_codon_variant c.1T>A p.Leu1?  WILD_00100  iucC_1  Aerobactin synthase
+Wildtype    114540  del ATT AT  AT:25 ATT:0 CDS +   1717/1737   573/578 frameshift_variant c.1717delT p.Cys573fs    WILD_00102  iucA    N(2)-citryl-N(6)-acetyl-N(6)-hydroxylysine synthase
+Wildtype    129881  mnp GT  AA  AA:18 GT:0  CDS +   55/708  19/235  missense_variant c.55_56delGTinsAA p.Val19Asn   WILD_00117  deoD    Purine nucleoside phosphorylase DeoD-type
+Wildtype    138877  snp G   C   C:14 G:0    CDS +   1119/1545   373/514 missense_variant c.1119G>C p.Trp373Cys  WILD_00125      hypothetical protein
+Wildtype    138920  snp A   G   G:10 A:0    CDS +   1162/1545   388/514 missense_variant c.1162A>G p.Lys388Glu  WILD_00125      hypothetical protein
+Wildtype    160547  del GTC GC  GC:18 GTC:0                             
+Wildtype    160552  del CTA CA  CA:20 CTA:0                             
+Wildtype    190866  del GTT GT  GT:18 GTT:0 CDS -   28/1356 10/451  frameshift_variant c.28delA p.Asn10fs   WILD_00166  brnQ    Branched-chain amino acid transport system 2 carrier protein
+```
+
+> ### {% icon question %} Question
+> 
+> 1. Which types of variants have been found?
+> 2. What is the third variant called?
+> 3. What is the product of the mutation?
+> 4. What might be the result of such a mutation?
 >    
->     You can see a list of variants
->
-> 2. Look in **column 3** to which types the variants are, such as a SNP or a deletion
-> 3. Look at the third variant called
->
->     This is a T&rarr;A mutation, causing a stop codon.
->
-> 4. Look at **column 14**
->
->      The product of this gene is a methicillin resistance protein. Methicillin is an antibiotic.
->
->    > ### :question: Question
->    >
->    > What might be the result of such a mutation?
->    >
->    > <details>
->    > <summary>Click to view answers</summary>
->    > This will cause a truncation in the Methicillin gene and a loss of resistance in the organism.
->    > </details>
->    {: .question}
-{: .hands_on}
+> <details>
+> <summary>Click to view answers</summary>
+> <ol type="1">
+>    <li>In the 3rd column, you have "snp" for SNP, "del" for deletion, "mnp" for </li>
+>    <li>This is a T&rarr;A mutation, causing a stop codon</li>
+>    <li>On the 14th column, we see that The product of this gene is a methicillin resistance protein. Methicillin is an antibiotic.</li>
+>    <li>This will cause a truncation in the Methicillin gene and a loss of resistance in the organism.</li>
+> </ol>
+> </details>
+{: .question}
 
-# Section 4: View Snippy output in JBrowse
+# View Snippy output in JBrowse
 
 We could go through all of the variants like this and read them out of a text table, but this is onerous and doesn't really give the context of the changes very well. It would be much nicer to have a visualisation of the SNPs and the other relevant data. In Galaxy we can use a tool called JBrowse.
 
-> ### {% icon hands_on %} Hands-on: Inspecting the SNPs using JBrowse
+> ### {% icon hands_on %} Hands-on: Run JBrowse
 >
-> 1. Search for **JBrowse** {% icon tool %} and run it with the following parameters
+> 1. **JBrowse** {% icon tool %} with the following parameters
 >    - "Reference genome to display" to `Use a genome from history`
 >    - "Select the reference genome" to `wildtype.fna`
 >       
@@ -155,7 +175,7 @@ We could go through all of the variants like this and read them out of a text ta
 >        We will now set up three different tracks - these are datasets displayed underneath the reference sequence (which is displayed as nucleotides in FASTA format). We will choose to display the sequence reads (the .bam file), the variants found by snippy (the .gff file) and the annotated reference genome (the wildtype.gff)
 >
 >       - **Track 1 - sequence reads**: Click on `Insert Track Group` and fill it with
->           - "Track Cateogry" to `sequence reads`
+>           - "Track Category" to `sequence reads`
 >           - Click on `Insert Annotation Track` and fill it with
 >               - "Track Type" to `BAM Pileups`
 >               - "BAM Track Data" to `snippy bam file`
@@ -172,20 +192,17 @@ We could go through all of the variants like this and read them out of a text ta
 >           - Click on `Insert Annotation Track` and fill it with
 >               - "Track Type" to `GFF/GFF3/BED/GBK Features`
 >               - "GFF/GFF3/BED Track Data" to `wildtype.gff`
->               - "Track Visibility" to `On for new users`
 >               - "JBrowse Track Type [Advanced]" to `Canvas Features`
 >               - Click on "JBrowse Styling Options [Advanced]"
 >               - "JBrowse style.label" to `product`
 >               - "JBrowse style.description" to `product`
 >               - "Track Visibility" to `On for new users`
->
->    A new file will be created in your history, this contains the JBrowse interactive visualisation. We will now view it's contents and play with it
->
-> 2. Inspect the `JBrowse on data XX and data XX - Complete` file by clicking on the eye icon
->
->    The JBrowse window will appear in the centre Galaxy panel.
->
-> 3. Display all the tracks and practice maneuvering around
+{: .hands_on}
+
+A new file will be created in your history, this contains the JBrowse interactive visualisation. We will now view its contents and play with it by inspecting the `JBrowse on data XX and data XX - Complete` file (eye icon). The JBrowse window will appear in the centre Galaxy panel.
+
+> ### {% icon hands_on %} Hands-on: Inspecting the SNPs using JBrowse
+> 1. Display all the tracks and practice maneuvering around
 >    1. Click on the tick boxes on the left to display the tracks
 >    1. Zoom out by clicking on the `minus` button to see sequence reads and their coverage (the grey graph)
 >    1. Zoom in by clicking on the `plus` button to see
@@ -194,13 +211,25 @@ We could go through all of the variants like this and read them out of a text ta
 >
 >    ![JBrowse screenshot](../../images/jbrowse1.png "Screenshot of JBrowse")
 >
-> 4. Look at the stop SNP
+> 2. Look at the stop SNP
 >    1. Type `47299` in the coordinates box
 >    2. Click on `Go` to see the position of the SNP discussed above
->   
->    The correct codon at this position is TGT, coding for the amino acid Cysteine (middle row of the amino acid translations). The mutation of T &rarr; A turns this triplet into TGA, a stop codon.
 >
 >    ![JBrowse screenshot](../../images/jbrowse2.png "Inspection of the STOP SNP using JBrowse")
+>
+>     > ### {% icon question %} Questions
+>     >
+>     > 1. What is the correct codon at this position?
+>     > 2. What is the mutation found here?
+>     >
+>     >    <details>
+>     >    <summary>Click to view answers</summary>
+>     >    <ol type="1">
+>     >    <li>The correct codon at this position is TGT, coding for the amino acid Cysteine (middle row of the amino acid translations). </li>
+>     >    <li>The mutation of T &rarr; A turns this triplet into TGA, a stop codon.</li>
+>     >    </ol>
+>     >    </details>
+>     {: .question}
 >
 {: .hands_on}
 
