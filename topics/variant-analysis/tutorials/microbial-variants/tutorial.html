@@ -1,7 +1,6 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
     <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -11,7 +10,7 @@
         <link rel="stylesheet" href="/training-material/assets/css/font-awesome.css">
         <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
         <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
-        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
     </head>
     <body>
         
@@ -208,18 +207,15 @@
   <p>In this tutorial, we will deal with:</p>
 
 <ol id="markdown-toc">
-  <li><a href="#section-1-get-the-data" id="markdown-toc-section-1-get-the-data">Section 1: Get the data</a></li>
-  <li>
-<a href="#section-2-find-variants-with-snippy" id="markdown-toc-section-2-find-variants-with-snippy">Section 2: Find variants with Snippy</a>    <ol>
-      <li><a href="#section-3-examine-snippy-output" id="markdown-toc-section-3-examine-snippy-output">Section 3: Examine Snippy output</a></li>
-    </ol>
-  </li>
-  <li><a href="#section-4-view-snippy-output-in-jbrowse" id="markdown-toc-section-4-view-snippy-output-in-jbrowse">Section 4: View Snippy output in JBrowse</a></li>
+  <li><a href="#get-the-data" id="markdown-toc-get-the-data">Get the data</a></li>
+  <li><a href="#find-variants-with-snippy" id="markdown-toc-find-variants-with-snippy">Find variants with Snippy</a></li>
+  <li><a href="#examine-snippy-output" id="markdown-toc-examine-snippy-output">Examine Snippy output</a></li>
+  <li><a href="#view-snippy-output-in-jbrowse" id="markdown-toc-view-snippy-output-in-jbrowse">View Snippy output in JBrowse</a></li>
 </ol>
 
 </blockquote>
 
-<h1 id="section-1-get-the-data">Section 1: Get the data</h1>
+<h1 id="get-the-data">Get the data</h1>
 
 <p>The data for today is a subset of a real dataset from a Staphylococcus aureus bacteria.
 We have a closed genome sequence and an annotation for our “wildtype” strain.
@@ -234,85 +230,79 @@ We have used a whole genome shotgun approach to produce a set of short sequence 
 <p>The files we will be using are:</p>
 
 <ul>
-  <li>
-<code class="highlighter-rouge">mutant_R1.fastq</code> &amp; <code class="highlighter-rouge">mutant_R2.fastq</code> - the read files in fastq format.</li>
-  <li>
-<code class="highlighter-rouge">wildtype.fna</code> - The sequence of the reference strain in fasta format.</li>
-  <li>
-<code class="highlighter-rouge">wildtype.gbk</code> - The reference strain with gene and other annotations in genbank format.</li>
-  <li>
-<code class="highlighter-rouge">wildtype.gff</code> - The reference strain with gene and other annotations in gff3 format.</li>
+  <li><code class="highlighter-rouge">mutant_R1.fastq</code> &amp; <code class="highlighter-rouge">mutant_R2.fastq</code> - the read files in fastq format.</li>
+  <li><code class="highlighter-rouge">wildtype.fna</code> - The sequence of the reference strain in fasta format.</li>
+  <li><code class="highlighter-rouge">wildtype.gbk</code> - The reference strain with gene and other annotations in genbank format.</li>
+  <li><code class="highlighter-rouge">wildtype.gff</code> - The reference strain with gene and other annotations in gff3 format.</li>
 </ul>
 
 <p>This data is available at Zenodo using the following <a href="https://doi.org/10.5281/zenodo.582600">link</a>.</p>
 
 <blockquote class="hands_on">
-  <h3 id="-hands-on-get-the-data">
-<i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Get the data</h3>
+  <h3 id="-hands-on-get-the-data"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Get the data</h3>
 
   <ol>
     <li>Import all of the following files into a new history:
       <ul>
         <li><a href="https://zenodo.org/record/582600/files/mutant_R1.fastq">mutant_R1.fastq</a></li>
         <li><a href="https://zenodo.org/record/582600/files/mutant_R2.fastq">mutant_R2.fastq</a></li>
-        <li><a href="https://zenodo.org/record/582600/files/wildtype.fna">wiltype.fna</a></li>
-        <li><a href="https://zenodo.org/record/582600/files/wildtype.gbk">wiltype.gbk</a></li>
-        <li><a href="https://zenodo.org/record/582600/files/wildtype.gff">wiltype.gff</a></li>
+        <li><a href="https://zenodo.org/record/582600/files/wildtype.fna">wildtype.fna</a></li>
+        <li><a href="https://zenodo.org/record/582600/files/wildtype.gbk">wildtype.gbk</a></li>
+        <li><a href="https://zenodo.org/record/582600/files/wildtype.gff">wildtype.gff</a></li>
       </ul>
+
+      <div class="highlighter-rouge"><pre class="highlight"><code>https://zenodo.org/record/582600/files/mutant_R1.fastq
+https://zenodo.org/record/582600/files/mutant_R2.fastq
+https://zenodo.org/record/582600/files/wildtype.fna
+https://zenodo.org/record/582600/files/wildtype.gbk
+https://zenodo.org/record/582600/files/wildtype.gff
+</code></pre>
+      </div>
+
+      <blockquote class="tip">
+        <h3 id="-tip-importing-data-via-links"><i class="fa fa-lightbulb-o" aria-hidden="true"></i> Tip: Importing data via links</h3>
+
+        <ul>
+          <li>Copy the link location</li>
+          <li>Open the Galaxy Upload Manager</li>
+          <li>Select <strong>Paste/Fetch Data</strong></li>
+          <li>Paste the link into the text field</li>
+          <li>Press <strong>Start</strong></li>
+        </ul>
+      </blockquote>
     </li>
   </ol>
 
-  <blockquote class="tip">
-    <h3 id="-tip-importing-data-via-links">
-<i class="fa fa-lightbulb-o" aria-hidden="true"></i> Tip: Importing data via links</h3>
-
-    <ul>
-      <li>Copy the link location</li>
-      <li>Open the Galaxy Upload Manager</li>
-      <li>Select <strong>Paste/Fetch Data</strong>
-</li>
-      <li>Paste the link into the text field</li>
-      <li>Press <strong>Start</strong>
-</li>
-    </ul>
-  </blockquote>
-
 </blockquote>
 
-<p>Your history pane should look like this after you have uploaded all of the data:</p>
+<h1 id="find-variants-with-snippy">Find variants with Snippy</h1>
 
-<p><img src="../../images/micro-start-history.png" alt="micro-start-history.png"></p>
+<p>We will now run the Snippy tool on our reads, comparing it to the reference.</p>
 
-<h1 id="section-2-find-variants-with-snippy">Section 2: Find variants with Snippy</h1>
+<p>Snippy is a tool for rapid bacterial SNP calling and core genome alignments. Snippy finds SNPs between a haploid reference genome and your NGS sequence reads. It will find both substitutions (snps) and insertions/deletions (indels).</p>
 
-<p>We will now run the Snippy tool on our reads, comparing it to the reference. If we give Snippy an annotated reference, it will silently run a tool called snpeff which will figure out the effect of any changes on the genes and other features. If we just give Snippy the reference sequence alone without the annotations, it will not run snpeff.</p>
+<p>If we give Snippy an annotated reference, it will silently run a tool called SnpEff which will figure out the effect of any changes on the genes and other features. If we just give Snippy the reference sequence alone without the annotations, it will not run SnpEff.</p>
 
 <p>We have an annotated reference and so will use it in this case.</p>
 
 <blockquote class="hands_on">
-  <h3 id="-hands-on-run-snippy">
-<i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Run Snippy</h3>
+  <h3 id="-hands-on-run-snippy"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Run Snippy</h3>
 
   <ol>
-    <li>Search for <strong>Snippy</strong> <i class="fa fa-wrench" aria-hidden="true"></i> and run it with the following parameters
+    <li><strong>Snippy</strong> <i class="fa fa-wrench" aria-hidden="true"></i> with the following parameters
       <ul>
-        <li>“Reference type” to <code class="highlighter-rouge">Genbank</code>
-</li>
-        <li>“Reference Genbank” to the <code class="highlighter-rouge">wildtype.gbk</code> file</li>
-        <li>“Single or Paired-end reads” to <code class="highlighter-rouge">Paired</code>
-</li>
-        <li>“Select first set of reads” to <code class="highlighter-rouge">mutant_R1.fastq</code>
-</li>
-        <li>“Select second set of reads” to <code class="highlighter-rouge">mutant_R2.fastq</code>
-</li>
-        <li>“Cleanup the non-snp output files” to <code class="highlighter-rouge">No</code>
-</li>
+        <li>“Reference File” to the <code class="highlighter-rouge">wildtype.gbk</code> file</li>
+        <li>“Single or Paired-end reads” to <code class="highlighter-rouge">Paired</code></li>
+        <li>“Select first set of reads” to <code class="highlighter-rouge">mutant_R1.fastq</code></li>
+        <li>“Select second set of reads” to <code class="highlighter-rouge">mutant_R2.fastq</code></li>
+        <li>Select all outputs</li>
       </ul>
     </li>
   </ol>
+
 </blockquote>
 
-<h2 id="section-3-examine-snippy-output">Section 3: Examine Snippy output</h2>
+<h1 id="examine-snippy-output">Examine Snippy output</h1>
 
 <p>Snippy has taken the reads, mapped them against the reference using BWA MEM, looked through the resulting BAM file and found differences using some fancy Bayesian statistics (Freebayes), filtered the differences for sensibility and finally checked what effect these differences will have on the predicted genes and other features in the genome.</p>
 
@@ -348,8 +338,7 @@ We have used a whole genome shotgun approach to produce a set of short sequence 
     </tr>
     <tr>
       <td>aligned fasta</td>
-      <td>A version of the reference but with - at position with depth=0 and N for 0 &lt; depth &lt; –mincov <strong>(does not have variants)</strong>
-</td>
+      <td>A version of the reference but with - at position with depth=0 and N for 0 &lt; depth &lt; –mincov <strong>(does not have variants)</strong></td>
     </tr>
     <tr>
       <td>consensus fasta</td>
@@ -361,7 +350,7 @@ We have used a whole genome shotgun approach to produce a set of short sequence 
     </tr>
     <tr>
       <td>mapped reads bam</td>
-      <td>A bam file containing all of the mapped reads</td>
+      <td>A BAM file containing all of the mapped reads</td>
     </tr>
     <tr>
       <td>outdir</td>
@@ -370,132 +359,111 @@ We have used a whole genome shotgun approach to produce a set of short sequence 
   </tbody>
 </table>
 
-<p>We will now have a look at the contents of the snp table file.</p>
+<p>We will now have a look at the contents of the SNP table file (<code class="highlighter-rouge">snippy on data XX, data XX and data XX table</code>):</p>
 
-<blockquote class="hands_on">
-  <h3 id="-hands-on-view-the-snps">
-<i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: View the SNPs</h3>
+<div class="highlighter-rouge"><pre class="highlight"><code>1   2   3   4   5   6   7   8   9   10  11  12  13  14
+CHROM   POS TYPE    REF ALT EVIDENCE    FTYPE   STRAND  NT_POS  AA_POS  EFFECT  LOCUS_TAG   GENE    PRODUCT
+Wildtype    24388   snp A   G   G:22 A:0    CDS +   1/702   1/233   initiator_codon_variant c.1A&gt;G p.Met1?  WILD_00022  walR    Transcriptional regulatory protein WalR
+Wildtype    29479   snp T   G   G:21 T:0    CDS +   39/792  13/263  synonymous_variant c.39T&gt;G p.Gly13Gly   WILD_00026  yycJ    Putative metallo-hydrolase YycJ
+Wildtype    47299   snp T   A   A:24 T:0    CDS +   54/1758 18/585  stop_gained c.54T&gt;A p.Cys18*    WILD_00043  mecR1   Methicillin resistance mecR1 protein
+Wildtype    102969  snp G   C   C:16 G:0    CDS -   87/1281 29/426  synonymous_variant c.87C&gt;G p.Gly29Gly   WILD_00093  spa Immunoglobulin G-binding protein A
+Wildtype    103048  snp T   A   A:20 T:0    CDS -   8/1281  3/426   missense_variant c.8A&gt;T p.Lys3Met   WILD_00093  spa Immunoglobulin G-binding protein A
+Wildtype    103379  del GAA GA  GA:11 GAA:0                             
+Wildtype    106602  snp T   G   G:21 T:0    CDS -   993/993 331/330 stop_lost&amp;splice_region_variant c.993A&gt;C p.Ter331Tyrext*?   WILD_00097  yfiY    putative siderophore-binding lipoprotein YfiY
+Wildtype    109833  snp T   A   A:16 T:0    CDS +   1/1755  1/584   initiator_codon_variant c.1T&gt;A p.Leu1?  WILD_00100  iucC_1  Aerobactin synthase
+Wildtype    114540  del ATT AT  AT:25 ATT:0 CDS +   1717/1737   573/578 frameshift_variant c.1717delT p.Cys573fs    WILD_00102  iucA    N(2)-citryl-N(6)-acetyl-N(6)-hydroxylysine synthase
+Wildtype    129881  mnp GT  AA  AA:18 GT:0  CDS +   55/708  19/235  missense_variant c.55_56delGTinsAA p.Val19Asn   WILD_00117  deoD    Purine nucleoside phosphorylase DeoD-type
+Wildtype    138877  snp G   C   C:14 G:0    CDS +   1119/1545   373/514 missense_variant c.1119G&gt;C p.Trp373Cys  WILD_00125      hypothetical protein
+Wildtype    138920  snp A   G   G:10 A:0    CDS +   1162/1545   388/514 missense_variant c.1162A&gt;G p.Lys388Glu  WILD_00125      hypothetical protein
+Wildtype    160547  del GTC GC  GC:18 GTC:0                             
+Wildtype    160552  del CTA CA  CA:20 CTA:0                             
+Wildtype    190866  del GTT GT  GT:18 GTT:0 CDS -   28/1356 10/451  frameshift_variant c.28delA p.Asn10fs   WILD_00166  brnQ    Branched-chain amino acid transport system 2 carrier protein
+</code></pre>
+</div>
+
+<blockquote class="question">
+  <h3 id="-question"><i class="fa fa-question-circle" aria-hidden="true"></i> Question</h3>
 
   <ol>
-    <li>
-      <p>Inspect the <code class="highlighter-rouge">snippy on data XX, data XX and data XX table</code> file by clicking on the eye icon</p>
-
-      <p>You can see a list of variants</p>
-    </li>
-    <li>Look in <strong>column 3</strong> to which types the variants are, such as a SNP or a deletion</li>
-    <li>
-      <p>Look at the third variant called</p>
-
-      <p>This is a T→A mutation, causing a stop codon.</p>
-    </li>
-    <li>
-      <p>Look at <strong>column 14</strong></p>
-
-      <p>The product of this gene is a methicillin resistance protein. Methicillin is an antibiotic.</p>
-
-      <blockquote class="question">
-        <h3 id="question-question">
-<img class="emoji" title=":question:" alt=":question:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2753.png" height="20" width="20" align="absmiddle"> Question</h3>
-
-        <p>What might be the result of such a mutation?</p>
-
-        <details>
-<summary>Click to view answers</summary>
-This will cause a truncation in the Methicillin gene and a loss of resistance in the organism.
-</details>
-      </blockquote>
-    </li>
+    <li>Which types of variants have been found?</li>
+    <li>What is the third variant called?</li>
+    <li>What is the product of the mutation?</li>
+    <li>What might be the result of such a mutation?</li>
   </ol>
+
+  <details>
+<summary>Click to view answers</summary>
+<ol type="1">
+   <li>In the 3rd column, you have "snp" for SNP, "del" for deletion, "mnp" for </li>
+   <li>This is a T&rarr;A mutation, causing a stop codon</li>
+   <li>On the 14th column, we see that The product of this gene is a methicillin resistance protein. Methicillin is an antibiotic.</li>
+   <li>This will cause a truncation in the Methicillin gene and a loss of resistance in the organism.</li>
+</ol>
+</details>
 </blockquote>
 
-<h1 id="section-4-view-snippy-output-in-jbrowse">Section 4: View Snippy output in JBrowse</h1>
+<h1 id="view-snippy-output-in-jbrowse">View Snippy output in JBrowse</h1>
 
 <p>We could go through all of the variants like this and read them out of a text table, but this is onerous and doesn’t really give the context of the changes very well. It would be much nicer to have a visualisation of the SNPs and the other relevant data. In Galaxy we can use a tool called JBrowse.</p>
 
 <blockquote class="hands_on">
-  <h3 id="-hands-on-inspecting-the-snps-using-jbrowse">
-<i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Inspecting the SNPs using JBrowse</h3>
+  <h3 id="-hands-on-run-jbrowse"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Run JBrowse</h3>
 
   <ol>
-    <li>Search for <strong>JBrowse</strong> <i class="fa fa-wrench" aria-hidden="true"></i> and run it with the following parameters
+    <li><strong>JBrowse</strong> <i class="fa fa-wrench" aria-hidden="true"></i> with the following parameters
       <ul>
-        <li>“Reference genome to display” to <code class="highlighter-rouge">Use a genome from history</code>
-</li>
+        <li>“Reference genome to display” to <code class="highlighter-rouge">Use a genome from history</code></li>
         <li>
           <p>“Select the reference genome” to <code class="highlighter-rouge">wildtype.fna</code></p>
 
           <p>This sequence will be the reference against which annotations are displayed</p>
         </li>
-        <li>“Produce Standalone Instance” to <code class="highlighter-rouge">Yes</code>
-</li>
-        <li>“Genetic Code” to <code class="highlighter-rouge">11: The Bacterial, Archaeal and Plant Plastid Code</code>
-</li>
-        <li>“JBrowse-in-Galaxy Action” to <code class="highlighter-rouge">New JBrowse Instance</code>
-</li>
+        <li>“Produce Standalone Instance” to <code class="highlighter-rouge">Yes</code></li>
+        <li>“Genetic Code” to <code class="highlighter-rouge">11: The Bacterial, Archaeal and Plant Plastid Code</code></li>
+        <li>“JBrowse-in-Galaxy Action” to <code class="highlighter-rouge">New JBrowse Instance</code></li>
         <li>
           <p>“Track Group”</p>
 
           <p>We will now set up three different tracks - these are datasets displayed underneath the reference sequence (which is displayed as nucleotides in FASTA format). We will choose to display the sequence reads (the .bam file), the variants found by snippy (the .gff file) and the annotated reference genome (the wildtype.gff)</p>
 
           <ul>
-            <li>
-<strong>Track 1 - sequence reads</strong>: Click on <code class="highlighter-rouge">Insert Track Group</code> and fill it with
+            <li><strong>Track 1 - sequence reads</strong>: Click on <code class="highlighter-rouge">Insert Track Group</code> and fill it with
               <ul>
-                <li>“Track Cateogry” to <code class="highlighter-rouge">sequence reads</code>
-</li>
+                <li>“Track Category” to <code class="highlighter-rouge">sequence reads</code></li>
                 <li>Click on <code class="highlighter-rouge">Insert Annotation Track</code> and fill it with
                   <ul>
-                    <li>“Track Type” to <code class="highlighter-rouge">BAM Pileups</code>
-</li>
-                    <li>“BAM Track Data” to <code class="highlighter-rouge">snippy bam file</code>
-</li>
-                    <li>“Autogenerate SNP Track” to <code class="highlighter-rouge">Yes</code>
-</li>
-                    <li>“Track Visibility” to <code class="highlighter-rouge">On for new users</code>
-</li>
+                    <li>“Track Type” to <code class="highlighter-rouge">BAM Pileups</code></li>
+                    <li>“BAM Track Data” to <code class="highlighter-rouge">snippy bam file</code></li>
+                    <li>“Autogenerate SNP Track” to <code class="highlighter-rouge">Yes</code></li>
+                    <li>“Track Visibility” to <code class="highlighter-rouge">On for new users</code></li>
                   </ul>
                 </li>
               </ul>
             </li>
-            <li>
-<strong>Track 2 - variants</strong>: Click on <code class="highlighter-rouge">Insert Track Group</code> and fill it with
+            <li><strong>Track 2 - variants</strong>: Click on <code class="highlighter-rouge">Insert Track Group</code> and fill it with
               <ul>
-                <li>“Track Cateogry” to <code class="highlighter-rouge">variants</code>
-</li>
+                <li>“Track Cateogry” to <code class="highlighter-rouge">variants</code></li>
                 <li>Click on <code class="highlighter-rouge">Insert Annotation Track</code> and fill it with
                   <ul>
-                    <li>“Track Type” to <code class="highlighter-rouge">GFF/GFF3/BED/GBK Features</code>
-</li>
-                    <li>“GFF/GFF3/BED Track Data” to <code class="highlighter-rouge">snippy snps gff file</code>
-</li>
-                    <li>“Track Visibility” to <code class="highlighter-rouge">On for new users</code>
-</li>
+                    <li>“Track Type” to <code class="highlighter-rouge">GFF/GFF3/BED/GBK Features</code></li>
+                    <li>“GFF/GFF3/BED Track Data” to <code class="highlighter-rouge">snippy snps gff file</code></li>
+                    <li>“Track Visibility” to <code class="highlighter-rouge">On for new users</code></li>
                   </ul>
                 </li>
               </ul>
             </li>
-            <li>
-<strong>Track 3 - annotated reference</strong>: Click on <code class="highlighter-rouge">Insert Track Group</code> and fill it with
+            <li><strong>Track 3 - annotated reference</strong>: Click on <code class="highlighter-rouge">Insert Track Group</code> and fill it with
               <ul>
-                <li>“Track Cateogry” to <code class="highlighter-rouge">annotated reference</code>
-</li>
+                <li>“Track Cateogry” to <code class="highlighter-rouge">annotated reference</code></li>
                 <li>Click on <code class="highlighter-rouge">Insert Annotation Track</code> and fill it with
                   <ul>
-                    <li>“Track Type” to <code class="highlighter-rouge">GFF/GFF3/BED/GBK Features</code>
-</li>
-                    <li>“GFF/GFF3/BED Track Data” to <code class="highlighter-rouge">wildtype.gff</code>
-</li>
-                    <li>“Track Visibility” to <code class="highlighter-rouge">On for new users</code>
-</li>
-                    <li>“JBrowse Track Type [Advanced]” to <code class="highlighter-rouge">Canvas Features</code>
-</li>
+                    <li>“Track Type” to <code class="highlighter-rouge">GFF/GFF3/BED/GBK Features</code></li>
+                    <li>“GFF/GFF3/BED Track Data” to <code class="highlighter-rouge">wildtype.gff</code></li>
+                    <li>“JBrowse Track Type [Advanced]” to <code class="highlighter-rouge">Canvas Features</code></li>
                     <li>Click on “JBrowse Styling Options [Advanced]”</li>
-                    <li>“JBrowse style.label” to <code class="highlighter-rouge">product</code>
-</li>
-                    <li>“JBrowse style.description” to <code class="highlighter-rouge">product</code>
-</li>
-                    <li>“Track Visibility” to <code class="highlighter-rouge">On for new users</code>
-</li>
+                    <li>“JBrowse style.label” to <code class="highlighter-rouge">product</code></li>
+                    <li>“JBrowse style.description” to <code class="highlighter-rouge">product</code></li>
+                    <li>“Track Visibility” to <code class="highlighter-rouge">On for new users</code></li>
                   </ul>
                 </li>
               </ul>
@@ -503,14 +471,15 @@ This will cause a truncation in the Methicillin gene and a loss of resistance in
           </ul>
         </li>
       </ul>
-
-      <p>A new file will be created in your history, this contains the JBrowse interactive visualisation. We will now view it’s contents and play with it</p>
     </li>
-    <li>
-      <p>Inspect the <code class="highlighter-rouge">JBrowse on data XX and data XX - Complete</code> file by clicking on the eye icon</p>
+  </ol>
+</blockquote>
 
-      <p>The JBrowse window will appear in the centre Galaxy panel.</p>
-    </li>
+<p>A new file will be created in your history, this contains the JBrowse interactive visualisation. We will now view its contents and play with it by inspecting the <code class="highlighter-rouge">JBrowse on data XX and data XX - Complete</code> file (eye icon). The JBrowse window will appear in the centre Galaxy panel.</p>
+
+<blockquote class="hands_on">
+  <h3 id="-hands-on-inspecting-the-snps-using-jbrowse"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Inspecting the SNPs using JBrowse</h3>
+  <ol>
     <li>Display all the tracks and practice maneuvering around
       <ol>
         <li>Click on the tick boxes on the left to display the tracks</li>
@@ -523,7 +492,7 @@ This will cause a truncation in the Methicillin gene and a loss of resistance in
         </li>
       </ol>
 
-      <figure id="figure-1"><img src="../../images/jbrowse1.png" alt="JBrowse screenshot" title="Screenshot of JBrowse"><figcaption><span class="figcaption-prefix">Figure 1:</span> Screenshot of JBrowse</figcaption></figure>
+      <figure id="figure-1"><img src="../../images/jbrowse1.png" alt="JBrowse screenshot" title="Screenshot of JBrowse" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Screenshot of JBrowse</figcaption></figure>
     </li>
     <li>Look at the stop SNP
       <ol>
@@ -531,9 +500,26 @@ This will cause a truncation in the Methicillin gene and a loss of resistance in
         <li>Click on <code class="highlighter-rouge">Go</code> to see the position of the SNP discussed above</li>
       </ol>
 
-      <p>The correct codon at this position is TGT, coding for the amino acid Cysteine (middle row of the amino acid translations). The mutation of T → A turns this triplet into TGA, a stop codon.</p>
+      <figure id="figure-2"><img src="../../images/jbrowse2.png" alt="JBrowse screenshot" title="Inspection of the STOP SNP using JBrowse" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Inspection of the STOP SNP using JBrowse</figcaption></figure>
 
-      <figure id="figure-2"><img src="../../images/jbrowse2.png" alt="JBrowse screenshot" title="Inspection of the STOP SNP using JBrowse"><figcaption><span class="figcaption-prefix">Figure 2:</span> Inspection of the STOP SNP using JBrowse</figcaption></figure>
+      <blockquote class="question">
+        <h3 id="-questions"><i class="fa fa-question-circle" aria-hidden="true"></i> Questions</h3>
+
+        <ol>
+          <li>What is the correct codon at this position?</li>
+          <li>
+            <p>What is the mutation found here?</p>
+
+            <details>
+<summary>Click to view answers</summary>
+<ol type="1">
+<li>The correct codon at this position is TGT, coding for the amino acid Cysteine (middle row of the amino acid translations). </li>
+<li>The mutation of T &rarr; A turns this triplet into TGA, a stop codon.</li>
+</ol>
+</details>
+          </li>
+        </ol>
+      </blockquote>
     </li>
   </ol>
 
@@ -546,8 +532,7 @@ This will cause a truncation in the Methicillin gene and a loss of resistance in
 
         
         <blockquote class="key_points">
-            <h3>
-<i class="fa fa-key" aria-hidden="true"></i> Key points</h3>
+            <h3><i class="fa fa-key" aria-hidden="true"></i> Key points</h3>
 
             <ul>
                 
@@ -566,14 +551,12 @@ This will cause a truncation in the Methicillin gene and a loss of resistance in
         <p>Further information, including links to documentation and original publications, regarding the tools, analysis techniques and the interpretation of results described in this tutorial can be found <a href="/training-material/topics/variant-analysis#references">here</a>.</p>
         
 
-        <h3>
-<i class="fa fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!</h3>
+        <h3><i class="fa fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!</h3>
 
         <hr>
 
         <blockquote class="overview">
-            <h3>
-<i class="fa fa-comments-o" aria-hidden="true"></i> Help us improve this content!</h3>
+            <h3><i class="fa fa-comments-o" aria-hidden="true"></i> Help us improve this content!</h3>
             Please take a moment to fill in the Galaxy Training Network
             <a href="https://tinyurl.com/GTNfeedback">Feedback Form</a>.
             Your feedback helps us improve this tutorial and will be considered
