@@ -7,7 +7,8 @@ tutorial_name: genetic-map-rad-seq
 # Introduction
 {:.no_toc}
 
-Original description is reachable on a [dedicated page of the official STACKS website](http://catchenlab.life.illinois.edu/stacks). Writers describe that they developed a genetic map in the spotted gar and present here data from a single linkage group. The gar genetic map is an F1 pseudotest cross between two parents and 94 of their F1 progeny. They took the markers that appeared in one of the linkage groups and worked backwards to provide the raw reads from all of the stacks contributing to that linkage group.
+This tutorial is based on the analysis originally described this [publication](http://www.genetics.org/content/188/4/799). Further information about the pipeline is available from a [dedicated page of the official STACKS website](http://catchenlab.life.illinois.edu/stacks). Authors describe that they developed a genetic map in the spotted gar and present here data from a single linkage group. The gar genetic map is an F1 pseudotest cross between two parents and 94 of their F1 progeny. They took the markers that appeared in one of the linkage groups and worked backwards to provide the raw reads from all of the stacks contributing to that linkage group.
+
 
 We here proposed to re-analyze these data at least until genotypes determination. Data are already clean so you don't have to demultiplex it using barcode information through `Process Radtags tool`.
 
@@ -62,7 +63,7 @@ The original data is available at [STACKS website](http://catchenlab.life.illino
 >    >     * https://cesgo.genouest.org/resources/394/download/progeny_18.fa
 >    >     * https://cesgo.genouest.org/resources/395/download/progeny_19.fa
 >    >     * https://cesgo.genouest.org/resources/417/download/progeny_20.fa
->    > * Press **Start**  
+>    > * Press **Start**
 >
 >    As default, Galaxy takes the link as name. It also do not link the dataset to a database or a reference genome.
 >
