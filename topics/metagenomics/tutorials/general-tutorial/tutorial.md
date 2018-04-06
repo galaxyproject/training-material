@@ -480,10 +480,14 @@ Let's visualize our data using Krona:
 
 > ### {% icon hands_on %} Hands-on: Krona
 >
-> 1. **Visualize with Krona** {% icon tool %} with the following parameters
->   - "Input file" to taxonomy output from `Classify.otu` (collection)
->   - "is this output from MOTHUR?" to `Yes`
+>  First we convert our mothur taxonomy file to a format compatible with Krona
 >
+> - **Taxonomy-to-Krona** {% icon tool %} with the following parameters
+>   - "Taxonomy file" to the taxonomy output from Classify.otu (note: this is a collection input)
+>
+> - **Krona pie chart** {% icon tool %} with the following parameters
+>   - "Type of input" to `Tabular`
+>   - "Input file" to taxonomy output from Taxonomy-to-Krona (collection)
 {: .hands_on}
 
 The result is an HTML file with an interactive visualization, for instance try clicking
@@ -500,11 +504,25 @@ the two samples?
 >
 >    Hit the rerun button on the `Classify.otu` job in your history and see if you can find settings that will give you per-sample taxonomy data
 >
-> 2. **Visualize with Krona** {% icon tool %}
+> 2. **Krona** {% icon tool %}
 >
 >    Now use this new output collection to create per-sample Krona plots
 >
 {: .hands_on}
+
+In this new Krona output you can switch between the combined plot and the per-sample plots via the selector in the top-left corner.
+
+> ### {% icon question %} Question
+> Which soil sample had a higher percentage of Acidobacteria, anguil or pampa? what were the respecive percentages?
+> <details>
+> <summary> Click to view answer</summary>
+> The anguil sample had a higher proportion of Acidobacteria. The exact percentages can be found by looking at the pie charts at the
+> top right-hand corner after clicking on the label Acidobacteria. For anguil the percentage is 36%, for the pampa sample it is 26%.
+>
+> <img src="../../images/krona-multisample.png" alt="krona plot with acidobactaria highlighted"/>
+>
+> </details>
+{: .question}
 
 
 To further explore the community structure, we can visualize it with dedicated tools such as Phinch.
