@@ -513,7 +513,7 @@ the two samples?
 In this new Krona output you can switch between the combined plot and the per-sample plots via the selector in the top-left corner.
 
 > ### {% icon question %} Question
-> Which soil sample had a higher percentage of Acidobacteria, anguil or pampa? what were the respecive percentages?
+> Which soil sample had a higher percentage of Acidobacteria, anguil or pampa? what were the respective percentages?
 > <details>
 > <summary> Click to view answer</summary>
 > The anguil sample had a higher proportion of Acidobacteria. The exact percentages can be found by looking at the pie charts at the
