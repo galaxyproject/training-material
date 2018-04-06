@@ -395,7 +395,6 @@ We would like to classify the sequences using a training set.
 >   - "reference" to `trainset16_022016.pds.fasta` from your history
 >   - "Select Taxonomy from" to `History`
 >   - "taxonomy" to `trainset16_022016.pds.tax` from your history
->   - "cutoff" to 80
 >   - "count" to the count table from `Pre.cluster`
 >
 > This step may take a couple of minutes, now may be a good time to grab a cup of tea :coffee:
