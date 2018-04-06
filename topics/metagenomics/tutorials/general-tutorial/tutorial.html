@@ -382,6 +382,8 @@ times, we’ll unique our sequences using the <code class="highlighter-rouge">Un
 <strong>Unique.seqs</strong> <i class="fa fa-wrench" aria-hidden="true"></i> with the following parameters
       <ul>
         <li>“fasta” to the merged fasta file</li>
+        <li>“output format” to <code class="highlighter-rouge">Name File</code>
+</li>
       </ul>
 
       <blockquote class="question">
@@ -460,6 +462,8 @@ read_name7    read_name8
 </li>
         <li>“count” to count table from <code class="highlighter-rouge">Count.seqs</code>
 </li>
+        <li>“output logfile?” to <code class="highlighter-rouge">yes</code>
+</li>
       </ul>
     </li>
   </ol>
@@ -491,7 +495,7 @@ Furthermore, at least one read had a homopolymer stretch of 31 bases, this is li
 
 <p>We can filter our dataset on length, base quality, and maximum homopolymer length using the <code class="highlighter-rouge">Screen.seqs</code> tool</p>
 
-<p>The following tool will remove any sequences with ambiguous bases and anything longer than 275 bp.</p>
+<p>The following tool will remove any sequences with ambiguous bases (<code class="highlighter-rouge">maxambig</code> parameter), homopolymer stretches of 9 or more bases (<code class="highlighter-rouge">maxhomop</code> parameter) and any reads longer than 275 bp or shorter than 225 bp.</p>
 
 <blockquote class="hands_on">
   <h3 id="-hands-on-filter-reads-based-on-quality-and-length">
@@ -545,7 +549,7 @@ This can be determined by looking at the number of lines in bad.accnos output of
       <p>Import the <code class="highlighter-rouge">silva.v4.fasta</code> file in your history</p>
 
       <div class="highlighter-rouge">
-<pre class="highlight"><code>https://zenodo.org/record/815875/files/SRR531818_pampa.fasta
+<pre class="highlight"><code>https://zenodo.org/record/815875/files/silva.v4.fasta
 </code></pre>
       </div>
     </li>
@@ -659,7 +663,6 @@ This corresponds exactly to the V4 target region of the 16S gene.</li>
       <ul>
         <li>“fasta”” to <code class="highlighter-rouge">good.fasta</code> output from <code class="highlighter-rouge">Screen.seqs</code>
 </li>
-        <li>“vertical” to Yes</li>
         <li>“trump” to <code class="highlighter-rouge">.</code>
 </li>
       </ul>
@@ -744,7 +747,6 @@ https://zenodo.org/record/815875/files/trainset16_022016.pds.tax
         <li>“Select Taxonomy from” to <code class="highlighter-rouge">History</code>
 </li>
         <li>“taxonomy” to <code class="highlighter-rouge">trainset16_022016.pds.tax</code> from your history</li>
-        <li>“cutoff” to 80</li>
         <li>“count” to the count table from <code class="highlighter-rouge">Pre.cluster</code>
 </li>
       </ul>
@@ -792,6 +794,8 @@ SRR531818.61708-G88ZSJI01AVPPR-2    Bacteria(100);Acidobacteria(99);Acidobacteri
 </li>
         <li>“count” to the count table output from <code class="highlighter-rouge">Pre.cluster</code>
 </li>
+        <li>“Clustering method” to <code class="highlighter-rouge">Average Neighbour</code>
+</li>
         <li>“cutoff” to <code class="highlighter-rouge">0.15</code>
 </li>
       </ul>
@@ -816,7 +820,7 @@ SRR531818.61708-G88ZSJI01AVPPR-2    Bacteria(100);Acidobacteria(99);Acidobacteri
 </li>
         <li>“list” to list output from <code class="highlighter-rouge">Cluster.split</code>
 </li>
-        <li>“count” to the count table from <code class="highlighter-rouge">Pre.cluster</code>
+        <li>“name file or count table” to the count table from <code class="highlighter-rouge">Pre.cluster</code>
 </li>
         <li>“label” to <code class="highlighter-rouge">0.03</code>
 </li>
@@ -863,8 +867,8 @@ SRR531818.61708-G88ZSJI01AVPPR-2    Bacteria(100);Acidobacteria(99);Acidobacteri
       <details>
 <summary>Click to view answers</summary>
 <ol type="1">
-<li>2,213 for Anguil and 2,484 for Pampa ("tax.summary")</li>
-<li>Otu00001 is associated to 935 sequences and to Bacteria (kingdom), Verrucomicrobia (phylum), Spartobacteria (class) in "taxonomy" file</li>
+<li>2,195 for Anguil and 2,472 for Pampa ("tax.summary")</li>
+<li>Otu00001 is associated to 929 sequences and to Bacteria (kingdom), Verrucomicrobia (phylum), Spartobacteria (class) in "taxonomy" file</li>
 </ol>
 </details>
     </li>
@@ -880,17 +884,24 @@ Let’s visualize our data using Krona:</p>
   <h3 id="-hands-on-krona">
 <i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Krona</h3>
 
-  <ol>
+  <p>First we convert our mothur taxonomy file to a format compatible with Krona</p>
+
+  <ul>
     <li>
-<strong>Visualize with Krona</strong> <i class="fa fa-wrench" aria-hidden="true"></i> with the following parameters
+<strong>Taxonomy-to-Krona</strong> <i class="fa fa-wrench" aria-hidden="true"></i> with the following parameters
       <ul>
-        <li>“Input file” to taxonomy output from <code class="highlighter-rouge">Classify.otu</code> (collection)</li>
-        <li>“is this output from MOTHUR?” to <code class="highlighter-rouge">Yes</code>
-</li>
+        <li>“Taxonomy file” to the taxonomy output from Classify.otu (note: this is a collection input)</li>
       </ul>
     </li>
-  </ol>
-
+    <li>
+<strong>Krona pie chart</strong> <i class="fa fa-wrench" aria-hidden="true"></i> with the following parameters
+      <ul>
+        <li>“Type of input” to <code class="highlighter-rouge">Tabular</code>
+</li>
+        <li>“Input file” to taxonomy output from Taxonomy-to-Krona (collection)</li>
+      </ul>
+    </li>
+  </ul>
 </blockquote>
 
 <p>The result is an HTML file with an interactive visualization, for instance try clicking
@@ -912,12 +923,28 @@ the two samples?</p>
       <p>Hit the rerun button on the <code class="highlighter-rouge">Classify.otu</code> job in your history and see if you can find settings that will give you per-sample taxonomy data</p>
     </li>
     <li>
-      <p><strong>Visualize with Krona</strong> <i class="fa fa-wrench" aria-hidden="true"></i></p>
+      <p><strong>Krona</strong> <i class="fa fa-wrench" aria-hidden="true"></i></p>
 
       <p>Now use this new output collection to create per-sample Krona plots</p>
     </li>
   </ol>
 
+</blockquote>
+
+<p>In this new Krona output you can switch between the combined plot and the per-sample plots via the selector in the top-left corner.</p>
+
+<blockquote class="question">
+  <h3 id="-question-4">
+<i class="fa fa-question-circle" aria-hidden="true"></i> Question</h3>
+  <p>Which soil sample had a higher percentage of Acidobacteria, anguil or pampa? what were the respective percentages?</p>
+  <details>
+<summary> Click to view answer</summary>
+The anguil sample had a higher proportion of Acidobacteria. The exact percentages can be found by looking at the pie charts at the
+top right-hand corner after clicking on the label Acidobacteria. For anguil the percentage is 36%, for the pampa sample it is 26%.
+
+<img src="../../images/krona-multisample.png" alt="krona plot with acidobactaria highlighted">
+
+</details>
 </blockquote>
 
 <p>To further explore the community structure, we can visualize it with dedicated tools such as Phinch.</p>
