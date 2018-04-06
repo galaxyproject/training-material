@@ -228,7 +228,7 @@ If you are thinking that 20,000 is an oddly round number, you are correct, we do
 
 We can filter our dataset on length, base quality, and maximum homopolymer length using the `Screen.seqs` tool
 
-The following tool will remove any sequences with ambiguous bases and anything longer than 275 bp.
+The following tool will remove any sequences with ambiguous bases (`maxambig` parameter), homopolymer stretches of 9 or more bases (`maxhomop` parameter) and any reads longer than 275 bp or shorter than 225 bp.
 
 > ### {% icon hands_on %} Hands-on: Filter reads based on quality and length
 >
