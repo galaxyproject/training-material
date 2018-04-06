@@ -42,7 +42,7 @@ It can be 16S for bacteria or archea or 18S for eukaryotes.
 >
 > ![Variable regions](../../images/16S_variableregions.jpg "Variable regions of the 16S rRNA")
 >
-> The highly conserved regions make it easy to target the gene across different organisms, while the highly variable regions allow us to distinguish between different species. 
+> The highly conserved regions make it easy to target the gene across different organisms, while the highly variable regions allow us to distinguish between different species.
 >
 {: .tip}
 
@@ -145,6 +145,7 @@ times, we'll unique our sequences using the `Unique.seqs` command:
 >
 > 1. **Unique.seqs** {% icon tool %} with the following parameters
 >   - "fasta" to the merged fasta file
+>   - "output format" to `Name File`
 >
 >    > ### {% icon question %} Question
 >    >
@@ -199,6 +200,7 @@ First, let's get a feel of our data:
 > 1. **Summary.seqs** {% icon tool %} with the following parameters
 >   - "fasta" parameter to the fasta from `Unique.seqs`
 >   - "count" to count table from `Count.seqs`
+>   - "output logfile?" to `yes`
 >
 {: .hands_on}
 
@@ -226,7 +228,7 @@ If you are thinking that 20,000 is an oddly round number, you are correct, we do
 
 We can filter our dataset on length, base quality, and maximum homopolymer length using the `Screen.seqs` tool
 
-The following tool will remove any sequences with ambiguous bases and anything longer than 275 bp.
+The following tool will remove any sequences with ambiguous bases (`maxambig` parameter), homopolymer stretches of 9 or more bases (`maxhomop` parameter) and any reads longer than 275 bp or shorter than 225 bp.
 
 > ### {% icon hands_on %} Hands-on: Filter reads based on quality and length
 >
@@ -258,9 +260,9 @@ Aligning our sequences to a reference helps improve OTU assignment [[Schloss et.
 > ### {% icon hands_on %} Hands-on: Align sequences
 >
 > 1. Import the `silva.v4.fasta` file in your history
-> 
+>
 >    ```
->    https://zenodo.org/record/815875/files/SRR531818_pampa.fasta
+>    https://zenodo.org/record/815875/files/silva.v4.fasta
 >    ```
 >
 > 2. **Align.seqs** {% icon tool %} with the following parameters
@@ -334,7 +336,6 @@ Now we know our sequences overlap the same alignment coordinates, we want to mak
 >
 > 1. **Filter.seqs** {% icon tool %} with the following parameters
 >   - "fasta"" to `good.fasta` output from `Screen.seqs`
->   - "vertical" to Yes
 >   - "trump" to `.`
 {: .hands_on}
 
@@ -394,14 +395,13 @@ We would like to classify the sequences using a training set.
 >   - "reference" to `trainset16_022016.pds.fasta` from your history
 >   - "Select Taxonomy from" to `History`
 >   - "taxonomy" to `trainset16_022016.pds.tax` from your history
->   - "cutoff" to 80
 >   - "count" to the count table from `Pre.cluster`
 >
 > This step may take a couple of minutes, now may be a good time to grab a cup of tea :coffee:
 >
 {: .hands_on}
 
-Have a look at the taxonomy output. 
+Have a look at the taxonomy output.
 
 ```
 name    taxonomy
@@ -428,6 +428,7 @@ The next step is then to use this information to know the abundance of the diffe
 >   - "fasta" to the fasta output from `Pre.cluster`
 >   - "taxonomy" to the taxonomy output from `Classify.seqs`
 >   - "count" to the count table output from `Pre.cluster`
+>   - "Clustering method" to `Average Neighbour`
 >   - "cutoff" to `0.15`
 >
 {: .hands_on}
@@ -441,7 +442,7 @@ Next we want to know how many sequences are in each OTU from each group with a d
 > 2. **Make.shared** {% icon tool %} with the following parameters
 >   - "Select input type" to `OTU list`
 >   - "list" to list output from `Cluster.split`
->   - "count" to the count table from `Pre.cluster`
+>   - "name file or count table" to the count table from `Pre.cluster`
 >   - "label" to `0.03`
 >
 {: .hands_on}
@@ -466,8 +467,8 @@ We probably also want to know the taxonomy for each of our OTUs. We can get the 
 >    <details>
 >    <summary>Click to view answers</summary>
 >    <ol type="1">
->    <li>2,213 for Anguil and 2,484 for Pampa ("tax.summary")</li>
->    <li>Otu00001 is associated to 935 sequences and to Bacteria (kingdom), Verrucomicrobia (phylum), Spartobacteria (class) in "taxonomy" file</li>
+>    <li>2,195 for Anguil and 2,472 for Pampa ("tax.summary")</li>
+>    <li>Otu00001 is associated to 929 sequences and to Bacteria (kingdom), Verrucomicrobia (phylum), Spartobacteria (class) in "taxonomy" file</li>
 >    </ol>
 >    </details>
 {: .question}
@@ -479,10 +480,14 @@ Let's visualize our data using Krona:
 
 > ### {% icon hands_on %} Hands-on: Krona
 >
-> 1. **Visualize with Krona** {% icon tool %} with the following parameters
->   - "Input file" to taxonomy output from `Classify.otu` (collection)
->   - "is this output from MOTHUR?" to `Yes`
+>  First we convert our mothur taxonomy file to a format compatible with Krona
 >
+> - **Taxonomy-to-Krona** {% icon tool %} with the following parameters
+>   - "Taxonomy file" to the taxonomy output from Classify.otu (note: this is a collection input)
+>
+> - **Krona pie chart** {% icon tool %} with the following parameters
+>   - "Type of input" to `Tabular`
+>   - "Input file" to taxonomy output from Taxonomy-to-Krona (collection)
 {: .hands_on}
 
 The result is an HTML file with an interactive visualization, for instance try clicking
@@ -499,11 +504,25 @@ the two samples?
 >
 >    Hit the rerun button on the `Classify.otu` job in your history and see if you can find settings that will give you per-sample taxonomy data
 >
-> 2. **Visualize with Krona** {% icon tool %}
+> 2. **Krona** {% icon tool %}
 >
 >    Now use this new output collection to create per-sample Krona plots
 >
 {: .hands_on}
+
+In this new Krona output you can switch between the combined plot and the per-sample plots via the selector in the top-left corner.
+
+> ### {% icon question %} Question
+> Which soil sample had a higher percentage of Acidobacteria, anguil or pampa? what were the respective percentages?
+> <details>
+> <summary> Click to view answer</summary>
+> The anguil sample had a higher proportion of Acidobacteria. The exact percentages can be found by looking at the pie charts at the
+> top right-hand corner after clicking on the label Acidobacteria. For anguil the percentage is 36%, for the pampa sample it is 26%.
+>
+> <img src="../../images/krona-multisample.png" alt="krona plot with acidobactaria highlighted"/>
+>
+> </details>
+{: .question}
 
 
 To further explore the community structure, we can visualize it with dedicated tools such as Phinch.
@@ -514,12 +533,12 @@ To further explore the community structure, we can visualize it with dedicated t
 >   - "shared" to `Make.shared` output
 >   - "constaxonomy" to taxonomy output from the first run of `Classify.otu` (collection)
 > 1. Expand the dataset and click on the "view biom at phinch" link
-> 
+>
 >     > ### {% icon comment %} Comment
 >     >
 >     > If this link is not present on your Galaxy, you can download the generated BIOM file and upload directly to Phinch server at [http://phinch.org](http://phinch.org).
 >    {: .comment}
-> 
+>
 > 2. Play with the several interactive visualisations:
 >
 > ![Phinch website interface](../../../../shared/images/phinch_overviewpage.png "Phinch visualizations")
