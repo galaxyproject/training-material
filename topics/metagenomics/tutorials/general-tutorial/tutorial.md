@@ -200,6 +200,7 @@ First, let's get a feel of our data:
 > 1. **Summary.seqs** {% icon tool %} with the following parameters
 >   - "fasta" parameter to the fasta from `Unique.seqs`
 >   - "count" to count table from `Count.seqs`
+>   - "output logfile?" to `yes`
 >
 {: .hands_on}
 
