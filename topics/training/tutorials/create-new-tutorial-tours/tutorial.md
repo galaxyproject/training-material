@@ -90,20 +90,13 @@ The YAML file of a tour can be integrated in a Galaxy instance by placing the YA
 
 > ### {% icon hands_on %} Hands-on: Install and start the plugin
 >
-> 1. Install [node.js](https://nodejs.org/en/)
-> 2. Clone the [plugin GitHub repository](https://github.com/TailorDev/galaxy-tourbuilder)
-> 3. Run `npm install`
-> 4. Run `npm run build`
-> 5. Load the extension in your Web browser
->    - Load the extension in Chrome & Opera
->       - Open Chrome/Opera browser and navigate to chrome://extensions
->       - Select "Developer Mode" and then click "Load unpacked extension..."
->       - From the file browser, choose to `galaxy-tourbuilder/build/chrome` or (`galaxy-tourbuilder/build/opera`)
->    - Load the extension in Firefox
->       - Open Firefox browser and navigate to about:debugging
->       - Click "Load Temporary Add-on" and from the file browser, choose `galaxy-tourbuilder/build/firefox`
-> 6. Load the webpage of any Galaxy instance
-> 7. Start the plugin by clicking on the icon on the right
+> 1. Install the plugin using the app store of your web-browser:
+>     - [Chrome Web Store](https://chrome.google.com/webstore/detail/galaxy-tour-builder/mdfbapknmcpnbmggahhaegehbbbmhmgg)
+>     - [Mozilla Add-ons (Firefox)](https://addons.mozilla.org/en-US/firefox/addon/galaxy-tour-builder/)
+>     - [Opera add-ons](https://addons.opera.com/en/extensions/details/galaxy-tour-builder/)
+>
+> 2. Load the webpage of any Galaxy instance
+> 3. Start the plugin by clicking on the icon with Galaxy icon close to the address bar
 {: .hands_on}
 
 We can now create easily a Galaxy Interactive Tour and test it on the fly.

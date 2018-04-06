@@ -135,7 +135,7 @@ A general description of the user interface of the IGV browser can be read here:
 
 > ### {% icon hands_on %} Hands-on: Differences between a good and a bad mapping
 >
-> 1. **Galaxy** {% icon tool %}: To show you the difference between a good and a bad dataset we provided an additional dataset which will give you a bad mapping. Load the ['GSM461182_untreat_single_subset.fastq'](https://zenodo.org/record/61771/files/GSM461178_untreat_paired_subset_1.fastq) dataset from [Zenodo](https://zenodo.org/record/61771) into Galaxy.
+> 1. **Galaxy** {% icon tool %}: To show you the difference between a good and a bad dataset we provided an additional dataset which will give you a bad mapping. Load the ['GSM461182_untreat_single_subset.fastq'](https://zenodo.org/record/61771/files/GSM461182_untreat_single_subset.fastq) dataset from [Zenodo](https://zenodo.org/record/61771) into Galaxy.
 >
 >    > ### {% icon comment %} Comments
 >    > If you are using the [Freiburg Galaxy instance](http://galaxy.uni-freiburg.de), you can load the dataset using 'Shared Data' -> 'Data Libraries' -> 'Galaxy Courses' -> 'RNA-Seq' -> 'fastq'

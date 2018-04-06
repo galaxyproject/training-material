@@ -20,12 +20,18 @@ env:
     - secure: AVbwBaVtCtTQCR4KC4gqnVeYSuE+gKFy5KgVWfKmog/eSJ60nQGLgCSJEwzzA5Q80vZkh9WFn5TmVHiSnSikMCQkUXPrux7vnwxSPkeLV23Vy3gOXDqyJQKHzVzuSsw2X7ikX9EAOaD8cn4McL1TwQqQK440gS1gudwFHZDCfdnqjMAVRW9eNVxq2kOfFMm7iUOd0uHl94fPxGQzAK7H8mGLwpphoWPgwsWO/JuIKWXE0gp6yTTZ1OuK2SrB9ZC2rURWeDHN5Q7NMHIeLjfD42NuAFAN5igZ+2CtzQKRCsO9C5vnuuvfby/yMmxrBKEkbWw0GWPanyNcKZ6j8kICIWwhSUt0Hc25gBE6BOn7aijqBCeJlwMKvVgUBASdg2P23Q2jOqy2o4n9iNAHmRKZtvrpBRhzdCu7lDVn4s7VVBfUwBj/e0+E9x1g0jbwofHo8j/BTjK0iDiHnC4O/IBneATeEcFx4bG6xg5+3uBt8/mLqG1BRUAZMz6SpBGi1PlL527t2Z3w5DNyKBzLDC3rborADdaxgjYH989vHakItq3RhiT8ZRGGfpULTnVO2gmFLCHGoVxKQX2RbTm5xiQ2aj5pnnhtYwKqPGSutdyUfJyxz/Av03NnEN65mv9TioA+sWLMKUL6KeJTT1+HcO5D01ZC7cpYc/M/S+gmff6O5eg=
 
 matrix:
+  fast_finish: true
   include:
     - env: CHECK=yamllint
-    - env: CHECK=htmlproofer
+      if: branch != gh-pages
     - env: CHECK=slides
+      if: branch != gh-pages
     - env: CHECK=site-build
-
+      if: branch != gh-pages
+    - env: CHECK=htmlproofer
+  allow_failures:
+    - env: CHECK=htmlproofer
+  
 install:
   - sudo apt-get update
   - sudo update-ca-certificates
@@ -40,6 +46,9 @@ install:
   - conda env create -f environment.yml
   - source activate galaxy_training_material
   - make install
+  - if [[ $TRAVIS_EVENT_TYPE == "pull_request" ]]; then export ORIGIN_BRANCH=$TRAVIS_PULL_REQUEST_BRANCH; else export ORIGIN_BRANCH=$TRAVIS_BRANCH; fi
+  - if [[ $TRAVIS_EVENT_TYPE == "pull_request" ]]; then export ORIGIN_REPO=$TRAVIS_PULL_REQUEST_SLUG; else export ORIGIN_REPO=$TRAVIS_REPO_SLUG; fi
+  - echo $ORIGIN_REPO $ORIGIN_BRANCH
 
 script:
   # Check website

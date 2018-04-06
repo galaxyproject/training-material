@@ -80,6 +80,54 @@ material:
       - torhou
       - erxleben
       - bgruening
+  -
+    title: "Mapping and molecular identification of phenotype-causing mutations"
+    type: "tutorial"
+    name: "mapping-by-sequencing"
+    zenodo_link: "https://doi.org/10.5281/zenodo.1098033"
+    galaxy_tour: no
+    hands_on: yes
+    slides: no
+    workflows: yes
+    questions:
+      - "What is mapping-by-sequencing?"
+      - "How can it help you identify the causative mutation in phenotypic mutants isolated from genetic screens?"
+    objectives:
+      - "Use joint variant calling and extraction to facilitate variant comparison across samples"
+      - "Perform variant linkage analyses for phenotypically selected recombinant progeny"
+      - "Filter, annotate and report lists of variants"
+    time_estimation: "2h"
+    key_points:
+      - "Mapping-by-sequencing is a powerful method for the molecular identification of mutations"
+      - "The MiModD suite of tools bundles most of the functionality required to perform mapping-by-sequencing analyses with Galaxy"
+    contributors:
+      - wm75
+
+  -
+    title: "Microbial Variant Calling"
+    type: "tutorial"
+    name: "microbial-variants"
+    zenodo_link: "https://doi.org/10.5281/zenodo.582600"
+    galaxy_tour: no
+    hands_on: yes
+    slides: no
+    workflows: no
+    questions:
+      - "How do we detect differences between a set of reads from a microorganism and a reference genome"
+    objectives:
+      - "Find variants between a reference genome and a set of reads"
+      - "Visualise the SNP in context of the reads aligned to the genome"
+      - "Determine the effect of those variants on genomic features"
+      - "Understand if the SNP is potentially affecting the phenotype"
+    time_estimation: "45 min"
+    key_points:
+      - "We used a tool called Snippy to call variants between our reads and our reference genome."
+      - "As our reference genome had annotations, we could see what effect the changes have on the features as annotated in the reference and therefore make inferences on the possible changes to the phenotype."
+      - "We used the JBrowse genome browser to visualise what these changes look like."
+    contributors:
+      - annasyme
+      - slugger70
+      - tseemann
 
   -
     title: "Calling variants in non-diploid systems"
@@ -133,7 +181,6 @@ material:
     galaxy_tour: no
     hands_on: yes
     slides: no
-    tutorial_galaxy_instance: "https://usegalaxy.org"
     questions:
       - "What is frequency of variants is so low that it is obscured by sequencing error rate?"
     objectives:
@@ -171,3 +218,18 @@ references:
     title: "Introduction to GEMINI"
     link: "https://s3.amazonaws.com/gemini-tutorials/Intro-To-Gemini.pdf"
     summary: "GEMINI query is the most versatile of all the GEMINI tools. You can use it to ask questions in simple SQL"
+  -
+    authors: "Torsten Seemann"
+    title: "Snippy: Rapid bacterial SNP calling and core genome alignments"
+    link: "https://github.com/tseemann/snippy"
+    summary: "Snippy finds SNPs between a haploid reference genome and your NGS sequence reads. It will find both substitutions (snps) and insertions/deletions (indels)."
+  -
+    authors: "Wolfgang Maier"
+    title: "MiModD Documentation"
+    link: "http://mimodd.readthedocs.io/en/latest/"
+    summary: "MiModD is a comprehensive software package for mapping-by-sequencing analyses"
+  -
+    authors: "Korbinian Schneeberger"
+    title: "Using next-generation sequencing to isolate mutant genes from forward genetic screens"
+    link: "https://www.researchgate.net/profile/Korbinian_Schneeberger/publication/264904703_Using_next-generation_sequencing_to_isolate_mutant_genes_from_forward_genetic_screens/"
+    summary: "Mapping the location of causal mutations using genetic crosses has traditionally been a complex procedure, but next-generation sequencing now allows the rapid identification of causal mutations even in complex genetic backgrounds"

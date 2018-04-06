@@ -6,6 +6,8 @@ SLIDES=$(shell find _site/training-material -name 'slides.html' | sed 's/_site\/
 SLIDES+=$(shell find _site/training-material/*/*/slides/* | sed 's/_site\/training-material\///')
 SITE_URL=http://localhost:4000/training-material
 PDF_DIR=_pdf
+REPO=$(shell echo "$${ORIGIN_REPO:-galaxyproject/training-material}")
+BRANCH=$(shell echo "$${ORIGIN_BRANCH:-master}")
 
 ifeq ($(shell uname -s),Darwin)
 	CHROME=/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome
@@ -26,24 +28,55 @@ build: clean ## build files but do not run a server
 .PHONY: build
 
 check-html: build ## validate HTML
-	bundle exec htmlproofer --assume-extension --http-status-ignore 405,503,999 --url-ignore "/.*localhost.*/","/.*vimeo\.com.*/","/.*gitter\.im.*/","/.*drmaa\.org.*/" --file-ignore "/.*\/files\/.*/","/.*\/node_modules\/.*/" --allow-hash-href ./_site
+	bundle exec htmlproofer \
+          --assume-extension \
+          --http-status-ignore 405,503,999 \
+          --url-ignore "/.*localhost.*/","/.*vimeo\.com.*/","/.*gitter\.im.*/","/.*drmaa\.org.*/" \
+          --url-swap "github.com/galaxyproject/training-material/tree/master:github.com/${REPO}/tree/${BRANCH}" \
+          --file-ignore "/.*\/files\/.*/","/.*\/node_modules\/.*/" \
+          --allow-hash-href \
+        ./_site
 .PHONY: check-html
 
-check-links-gh-pages:  ## validate HTML on gh-pages branch (for daily cron job)
-	bundle exec htmlproofer --assume-extension --http-status-ignore 405,503,999 --url-ignore "/.*localhost.*/","/.*vimeo\.com.*/","/.*gitter\.im.*/","/.*drmaa\.org.*/" --file-ignore "/.*\/files\/.*/" --allow-hash-href .
-	find . -path "**/slides*.html" | xargs -L 1 -I '{}' sh -c "awesome_bot --allow 405 --allow-redirect --white-list localhost,127.0.0.1,fqdn,vimeo.com,drmaa.com --allow-ssl --allow-dupe --skip-save-results -f {}"
-.PHONY: check-links-gh-pages
+check-slides: build  ## check the markdown-formatted links in slides
+	find _site -path "**/slides*.html" \
+        | xargs -L 1 -I '{}' sh -c \
+        "awesome_bot \
+           --allow 405 \
+           --allow-redirect \
+           --white-list localhost,127.0.0.1,fqdn,vimeo.com,drmaa.com \
+           --allow-ssl \
+           --allow-dupe \
+           --skip-save-results \
+         -f {}"
+.PHONY: check-slides
 
 check-yaml: ## lint yaml files
 	find . -path "**/*.yaml" | xargs -L 1 -I '{}' sh -c "yamllint {}"
 .PHONY: check-yaml
 
-check-slides: build  ## check the markdown-formatted links in slides
-	find _site -path "**/slides*.html" | xargs -L 1 -I '{}' sh -c "awesome_bot --allow 405 --allow-redirect --white-list localhost,127.0.0.1,fqdn,vimeo.com,drmaa.com --allow-ssl --allow-dupe --skip-save-results -f {}"
-.PHONY: check-slides
-
 check: check-yaml check-html check-slides  ## run all checks
 .PHONY: check
+
+check-links-gh-pages:  ## validate HTML on gh-pages branch (for daily cron job)
+	bundle exec htmlproofer \
+          --assume-extension \
+          --http-status-ignore 405,503,999 \
+          --url-ignore "/.*localhost.*/","/.*vimeo\.com.*/","/.*gitter\.im.*/","/.*drmaa\.org.*/" \
+          --file-ignore "/.*\/files\/.*/" \
+          --allow-hash-href \
+        .
+	find . -path "**/slides*.html" \
+        | xargs -L 1 -I '{}' sh -c \
+        "awesome_bot \
+           --allow 405 \
+           --allow-redirect \
+           --white-list localhost,127.0.0.1,fqdn,vimeo.com,drmaa.com \
+           --allow-ssl \
+           --allow-dupe \
+           --skip-save-results \
+       -f {}"
+.PHONY: check-links-gh-pages
 
 clean: ## clean up junk files
 	@rm -rf _site
@@ -56,7 +89,6 @@ install: ## install dependencies
 	npm install decktape
 	gem install bundler
 	bundle install
-	bundle update
 .PHONY: install
 
 pdf: detached-serve ## generate the PDF of the tutorials and slides
