@@ -336,7 +336,6 @@ Now we know our sequences overlap the same alignment coordinates, we want to mak
 >
 > 1. **Filter.seqs** {% icon tool %} with the following parameters
 >   - "fasta"" to `good.fasta` output from `Screen.seqs`
->   - "vertical" to Yes
 >   - "trump" to `.`
 {: .hands_on}
 
