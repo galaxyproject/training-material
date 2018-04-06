@@ -79,7 +79,7 @@ This data is available at Zenodo using the following [link](https://doi.org/10.5
 
 We will now run the Snippy tool on our reads, comparing it to the reference. 
 
-Snippy is a rapid bacterial SNP calling and core genome alignments. Snippy finds SNPs between a haploid reference genome and your NGS sequence reads. It will find both substitutions (snps) and insertions/deletions (indels).
+Snippy is a tool for rapid bacterial SNP calling and core genome alignments. Snippy finds SNPs between a haploid reference genome and your NGS sequence reads. It will find both substitutions (snps) and insertions/deletions (indels).
 
 If we give Snippy an annotated reference, it will silently run a tool called SnpEff which will figure out the effect of any changes on the genes and other features. If we just give Snippy the reference sequence alone without the annotations, it will not run SnpEff.
 
@@ -199,7 +199,7 @@ We could go through all of the variants like this and read them out of a text ta
 >               - "Track Visibility" to `On for new users`
 {: .hands_on}
 
-A new file will be created in your history, this contains the JBrowse interactive visualisation. We will now view it's contents and play with it by inspecting the `JBrowse on data XX and data XX - Complete` file (eye icon). The JBrowse window will appear in the centre Galaxy panel.
+A new file will be created in your history, this contains the JBrowse interactive visualisation. We will now view its contents and play with it by inspecting the `JBrowse on data XX and data XX - Complete` file (eye icon). The JBrowse window will appear in the centre Galaxy panel.
 
 > ### {% icon hands_on %} Hands-on: Inspecting the SNPs using JBrowse
 > 1. Display all the tracks and practice maneuvering around
