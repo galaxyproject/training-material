@@ -42,7 +42,7 @@ It can be 16S for bacteria or archea or 18S for eukaryotes.
 >
 > ![Variable regions](../../images/16S_variableregions.jpg "Variable regions of the 16S rRNA")
 >
-> The highly conserved regions make it easy to target the gene across different organisms, while the highly variable regions allow us to distinguish between different species. 
+> The highly conserved regions make it easy to target the gene across different organisms, while the highly variable regions allow us to distinguish between different species.
 >
 {: .tip}
 
@@ -402,7 +402,7 @@ We would like to classify the sequences using a training set.
 >
 {: .hands_on}
 
-Have a look at the taxonomy output. 
+Have a look at the taxonomy output.
 
 ```
 name    taxonomy
@@ -516,12 +516,12 @@ To further explore the community structure, we can visualize it with dedicated t
 >   - "shared" to `Make.shared` output
 >   - "constaxonomy" to taxonomy output from the first run of `Classify.otu` (collection)
 > 1. Expand the dataset and click on the "view biom at phinch" link
-> 
+>
 >     > ### {% icon comment %} Comment
 >     >
 >     > If this link is not present on your Galaxy, you can download the generated BIOM file and upload directly to Phinch server at [http://phinch.org](http://phinch.org).
 >    {: .comment}
-> 
+>
 > 2. Play with the several interactive visualisations:
 >
 > ![Phinch website interface](../../../../shared/images/phinch_overviewpage.png "Phinch visualizations")
