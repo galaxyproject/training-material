@@ -9,7 +9,7 @@ tutorial_name: "annotation-with-prokka"
 
 In this section we will use a software tool called Prokka to annotate a draft genome sequence. Prokka is a “wrapper”; it collects together several pieces of software (from various authors), and so avoids “re-inventing the wheel”.
 
-Prokka finds and annotates features (both protein coding regions and RNA genes, i.e. tRNA, rRNA) present on on a sequence. Note, Prokka uses a two-step process for the annotation of protein coding regions: first, protein coding regions on the genome are identified using [Prodigal](http://prodigal.ornl.gov/); second, the *function* of the encoded protein is predicted by similarity to proteins in one of many protein or protein domain databases. Prokka is a software tool that can be used to annotate bacterial, archaeal and viral genomes quickly, generating standard output files in GenBank, EMBL and gff formats. More information about Prokka can be found [here](https://github.com/tseemann/prokka).
+Prokka finds and annotates features (both protein coding regions and RNA genes, i.e. tRNA, rRNA) present on on a sequence. Note, Prokka uses a two-step process for the annotation of protein coding regions: first, protein coding regions on the genome are identified using [Prodigal](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2848648/); second, the *function* of the encoded protein is predicted by similarity to proteins in one of many protein or protein domain databases. Prokka is a software tool that can be used to annotate bacterial, archaeal and viral genomes quickly, generating standard output files in GenBank, EMBL and gff formats. More information about Prokka can be found [here](https://github.com/tseemann/prokka).
 
 > ### Agenda
 >
@@ -53,9 +53,9 @@ Now we will run the tool called Prokka.
 >    - Locus tag prefix (--locustag): P
 >    - Force GenBank/ENA/DDJB compliance (--compliant): No
 >    - Sequencing Centre ID (--centre): V
->    - Genus Name: Staphylococcus  
->    - Species Name: aureus  
->    - Use genus-specific BLAST database: No  
+>    - Genus Name: Staphylococcus
+>    - Species Name: aureus
+>    - Use genus-specific BLAST database: No
 >    - Your tool interface should look like this:
 >    - ![prokka interface](images/interface.png)
 >    - Click Execute
@@ -82,7 +82,7 @@ Now that we have annotated the draft genome sequence, we would like to view the 
 > 1. Search for **JBrowse** {% icon tool %} and run it with the following parameters
 >    - "Reference genome to display" to `Use a genome from history`
 >    - "Select the reference genome" to `Prokka on data XX.fna`.
->       
+>
 >       This sequence will be the reference against which annotations are displayed
 >
 >    - "Produce Standalone Instance" to `Yes`
