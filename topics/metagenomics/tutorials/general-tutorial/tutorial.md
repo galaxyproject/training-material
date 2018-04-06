@@ -259,9 +259,9 @@ Aligning our sequences to a reference helps improve OTU assignment [[Schloss et.
 > ### {% icon hands_on %} Hands-on: Align sequences
 >
 > 1. Import the `silva.v4.fasta` file in your history
-> 
+>
 >    ```
->    https://zenodo.org/record/815875/files/SRR531818_pampa.fasta
+>    https://zenodo.org/record/815875/files/silva.v4.fasta
 >    ```
 >
 > 2. **Align.seqs** {% icon tool %} with the following parameters
