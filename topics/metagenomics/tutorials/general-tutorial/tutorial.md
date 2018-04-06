@@ -467,8 +467,8 @@ We probably also want to know the taxonomy for each of our OTUs. We can get the 
 >    <details>
 >    <summary>Click to view answers</summary>
 >    <ol type="1">
->    <li>2,213 for Anguil and 2,484 for Pampa ("tax.summary")</li>
->    <li>Otu00001 is associated to 935 sequences and to Bacteria (kingdom), Verrucomicrobia (phylum), Spartobacteria (class) in "taxonomy" file</li>
+>    <li>2,195 for Anguil and 2,472 for Pampa ("tax.summary")</li>
+>    <li>Otu00001 is associated to 929 sequences and to Bacteria (kingdom), Verrucomicrobia (phylum), Spartobacteria (class) in "taxonomy" file</li>
 >    </ol>
 >    </details>
 {: .question}
