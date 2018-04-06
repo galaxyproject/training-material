@@ -442,7 +442,7 @@ Next we want to know how many sequences are in each OTU from each group with a d
 > 2. **Make.shared** {% icon tool %} with the following parameters
 >   - "Select input type" to `OTU list`
 >   - "list" to list output from `Cluster.split`
->   - "count" to the count table from `Pre.cluster`
+>   - "name file or count table" to the count table from `Pre.cluster`
 >   - "label" to `0.03`
 >
 {: .hands_on}
