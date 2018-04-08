@@ -16,7 +16,7 @@ With exome sequencing, one can identify genetic variation that is responsible
 for both Mendelian and common diseases without the high costs associated with
 whole-genome sequencing. Indeed, exome sequencing is the most efficient way to
 identify the genetic variants in all of an individual's genes. Exome sequencing
-is cheaper also than whole-genome sequencing. With a high coverage rate of
+is also cheaper than whole-genome sequencing. With a high coverage rate of
 100+ DP, 98% of all exons are covered.
 
 Items where exome sequencing can't identify genetic variation in:
@@ -117,9 +117,9 @@ for each family member, we will start with one BAM file with mapping results.
 >     2. Select `Human Feb 2009` on **Database/Build**
 >     3. Save it
 > 2. Import the reference genome {% icon tool %}:
->    1. Go on **Data Libraries** in **Shared data** (top panel on Galaxy's interface)
->    2. Click on **Training Data**
->    3. Select `hg19`
+>    1. Go to **Data Libraries** in **Shared data** (top panel on Galaxy's interface)
+>    2. Click on **Genomes + annotations** followed by **Genomes**
+>    3. Select `hg19.fa`
 >    4. Click on **Import selected datasets into history** (just below the top panel)
 >    5. Import it
 >    6. Convert it from 2bit to fasta with **twoBitToFa** from **Convert Formats**
