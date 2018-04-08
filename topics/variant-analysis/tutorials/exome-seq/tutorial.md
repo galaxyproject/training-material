@@ -173,7 +173,7 @@ to simplify the variant representation.
 
 > ### {% icon tip %} Tip:
 >
-> Have a look at the examples which help you constructing the correct expression.
+> Have a look at the examples that can help you construct the correct expression for the Filter criteria.
 {: .tip}
 
 ## Annotate your variants
