@@ -367,41 +367,41 @@ Galaxy は genomic intervals に関する質問に答えることに優れてお
 >
 > 1. ツールパネルで、 **Operate on Genomic Intervals** のツールボックスにある **Intersect** を*クリック*する。
 > 2. **Intersect** {% icon tool %} には以下のパラメーターがあります:
->     - **Return** to `Overlapping Intervals`.
->       - This looks like it might return whole genes, while `Overlapping pieces` may return only the parts that overlap.  We suspect that whole genes might be more useful.
->     - **of** (the first dataset) to `Genes, forward strand`
->     - **that intersect** (the second dataset) to `Genes, reverse strand`
->     - **for at least** to `1`
->       - This will return genes with even just one position overlapping.
->     - *Click* **Execute**.
+>     - **Return** → `Overlapping Intervals`
+>       - これは遺伝子全体をリターンするように見えますが、 while `Overlapping pieces` では重なっている部分のみをリターンすることがあります。私たちは遺伝子全体での方がより有用であるのではないかと考えています。
+>     - **of** （1つ目のデータセット）→ `Genes, forward strand`
+>     - **that intersect** （2つ目のデータセット）→ `Genes, reverse strand`
+>     - **for at least** → `1`
+>       - これは1つの配列が重なっている遺伝子だけをリターンします。
+>     - **Execute** を*クリック*する。
 >     > ![Run Intersect](../../images/genes_human_intersect_strands.png)
 >
-> 3. Now repeat the intersect, but make the first dataset be the reverse genes, and the second be the forward genes.
+> 3. 今から intersect を再実行しますが、今度は1つ目のデータセットをリバース鎖の遺伝子のものにして、そして2つ目のデータセットをフォワード鎖の遺伝子のものにします。
 >
-> 4. Finally give both of the new datasets meaningful names, like `Overlapping forward genes` and `Overlapping reverse genes`
+> 4. 最後に新しいデータセットの両方に意味のある名前を、例えば `Overlapping forward genes` と `Overlapping reverse genes` のような名前をつける。
 {: .hands_on}
 
 
-## Results and final steps.
+## 結果と最後のステップ
 
-At this point we *could* say that we have answered our question. Using dataset previews in the history panel, we can compare the number of genes in the `Overlapping forward` and `Overlapping reverse` datasets with the number of genes in the full `Genes` dataset, and *conclude that overlapping genes on opposite strands are actually pretty common.*
+この時点で私たちは問いに答えることが*できた*と言えるでしょう。ヒストリーパネルでデータセットのプレビューを見ると、 `Overlapping forward` や `Overlapping reverse` のデータセットの遺伝子数を大本の `Genes` データセットと比較すると、*反対のストランドと重なっている遺伝子は実際にはかなり一般的であると結論付けることができます。*
 
-However, before we rush off to publish our conclusions, let's
+しかし、結論をすぐに発表しようとする前に、次のことをやりましょう。
 
-1. Get both the forward and reverse overlapping genes into a single dataset (one link will look better in our publication), and
-2. *Visualize* our new dataset, just to double-check our results.
+1. フォワード鎖とリバース鎖の両方の重複している遺伝子を1つのデータセットにまとめ（発表においてはリンクを1つにした方が見栄えが良いです）、そして、
+2. 新たなデータセットを*可視化*して、結果を再確認しましょう。
 
-### Combine forward and reverse overlapping genes into one dataset.
+### フォワード鎖とリバース鎖の重なっている遺伝子を1つのデータセットにまとめる。
 
-What tool can we use to combine the two datasets into one?  Try *searching* for `combine` or `join` or `stack` in the tool search box.  You'll find lots of tools, but none of them do what we want to do. *Some times you just have to manually look through toolboxes to find what you need.*  Where should we look?  It's probably not **Get Data** or **Send Data**, but it could easily be in any of the next 4 toolboxes: **Lift-Over, Collection Operations, Text Manipulation, or Datamash**.
+2つのデータセットを1つにまとめるにはどんなツールを使うことができるでしょうか？ツールの検索ボックスで `combine` や `join` や `stack` と*検索*してみましょう。たくさんのツールがありますが、私たちがやりたいことに合うものはありません。*必要とするツールを見つけるためにツールボックスを手動で見なければならない時もあります。*どこを見るべきでしょうか？おそらく **Get Data** や **Send Data** にはありませんが、次の4つのツールボックスのいずれかで簡単に見つかるかもしれません: **Lift-Over か Collection Operations か Text Manipulation 、または Datamash のいずれかです。**
 
-It turns out that **Lift-Over** and **Collection Operations** are not what we want.  (But, take a look at them: if you are going to work with genomic data it won't take long before you'll need both.)
+**Lift-Over** や **Collection Operations** は私たちが使いたいものではないということが分かりました。（しかし、それらを見てください:ゲノムデータを扱う場合はすぐに両方が必要になるでしょう。）
 
-> ### {% icon hands_on %} Hands-on: *Concatenate* two datasets
+> ### {% icon hands_on %} ハンズオン: 2つのデータセットを*連結する*
 >
-> 1. *Open* the **Text Manipulation** toolbox.
-> 2. Near the top of the toolbox is **Concatenate datasets tail-to-head**. *Click* on it.  Lets try that tool.
-> 3. **Concatenate** {% icon tool %} with the following parameters:
+> 1. **Text Manipulation** ツールボックスを*開く*。
+> 2. ツールボックス最上部の近くに **Concatenate datasets tail-to-head** があります。これを*クリック*してください。このツールを試しましょう。
+> 3. **Concatenate** {% icon tool %} 以下のパラメーターにしましょう:
 >   * *Set* **Concatenate Dataset** to `Overlapping reverse genes`.
 >   * *Click* **+ Insert Dataset**.  This adds a second dataset pull-down menu to the form.
 >   * *Select* `Overlapping forward genes` as the second dataset.
@@ -409,33 +409,33 @@ It turns out that **Lift-Over** and **Collection Operations** are not what we wa
 > 5. *Rename* the resulting dataset something informative like `Overlapping genes`
 {: .hands_on}
 
-Once the concatenate operation is finished, preview the dataset in your history panel.  Does it have the expected number of genes in it?  If not, see if you can figure out what happened.
+連結の操作が完了したので、ヒストリーパネルでデータセットをプレビューしましょう。そのデータセットには期待している遺伝子数がありましたか？もしなければ、何が起きたか把握することができます。
 
-### Visualize the overlapping genes
+### 重なっている遺伝子を視覚化する
 
-Galaxy knows about several visualization options for lots of different dataset types, including BED.  Whenever you preview a dataset in the history panel, Galaxy provides links to these visualizations.  For BED files (which is the format we have), options include **IGB, IGV,** and **UCSC main.**  IGB and IGV are widely used desktop applications and eventually you may want to install one or both of them.  For now, let's visualize the data at UCSC, using the UCSC *Genome* Browser.
+GalaxyはBEDを含めた、様々な種類のデータセットの様々な視覚化オプションについて認識しています。ヒストリーパネルでデータセットをプレビューすると、Galaxyはこれらの視覚化へのリンクを表示します。BED ファイル（私たちの持っている形式のファイルです）には、 **IGB と IGV 、** そして **UCSC main ** があります。IGB と IGV は広く使われているデスクトップアプリケーションで最終的にはどちらか一方または両方をインストールしたくなるかもしれません。ここでは、 UCSC *Genome* Browser を利用して、UCSCでデータを視覚化しましょう。
 
-> ### {% icon hands_on %} Hands-on: Display data in Genome Browser
+> ### {% icon hands_on %} ハンズオン: ゲノムブラウザーでデータを表示する
 >
-> 1. *Click* on your `Overlapping genes` dataset in your history panel. This will show the dataset preview in the history panel.
-> 2. *Click* on the **display at UCSC main** link.
+> 1. ヒストリーパネルの `Overlapping genes` のデータセットを*クリック*する。ヒストリーパネルにデータセットのプレビューが表示されます。
+> 2. **display at UCSC main** のリンクを*クリック*する。
 >
-> This will launch a new window, showing UCSC's Genome Browser with our dataset shown right at the top.  UCSC figures out that our first overlapping gene is ~11 million bases into chromosome 22, and it has landed us there.
+> これにより新しいウィンドウが開き、UCSCのゲノムブラウザーにデータセットが上部に表示されます。UCSCは、私たちの1つ目の重複する遺伝子が第22染色体でおよそ1100万塩基あり、私たちがそこまで調べたことを理解しています。
 >
 >   ![UCSC Genome Browser](../../images/ucsc_gb_genes_strands_overlapping.png)
 {: .hands_on}
 
 
-> ### {% icon comment %} Background: UCSC Genome Browser
+> ### {% icon comment %} 背景: UCSC ゲノムブラウザー
 >
-> * *Genome browsers* are software for viewing genomic information graphically.  The [UCSC Genome Browser](https://genome.ucsc.edu/cgi-bin/hgGateway) (and most genome browsers) typically display different types of *annotation* about a region of a genome.  This is displayed as a stack of *tracks* and each track contains a different type of information.
+> * *ゲノムブラウザー*はゲノム情報をグラフィカルに表示するためのソフトウェアです。 [UCSC ゲノムブラウザー](https://genome.ucsc.edu/cgi-bin/hgGateway) （および大部分のゲノムブラウザー）は通常ゲノム領域について異なる種類の*アノテーション*を表示します。これは *tracks* のスタックとして表示されていて各トラックには異なる種類の情報が含まれています。
 >
-> * Genome browsers are useful for seeing information in context and for seeing (and discovering) correlations between different types of information.  (They are also useful for visually checking results, which is what we are doing now.)
+> * ゲノムブラウザーは配列の中の情報を見ることや異なる種類の情報間の相関関係を見たり（発見したり）するのに役立ちます。（これらは視覚的に結果を確認することにも役立ちますし、これは私たちが現在行っていることです。）
 >
-> * The UCSC Genome Browser has information on over 100 animals, and their [Archaeal Genome Browser](http://archaea.ucsc.edu/cgi-bin/hgGateway?db=pyrFur2) has genomic information on well over 100 microbial species.
+> * UCSC ゲノムブラウザーには100種を超える動物に関する情報があり、それらの[古細菌ゲノムブラウザー](http://archaea.ucsc.edu/cgi-bin/hgGateway?db=pyrFur2)は100以上の微生物種に関するゲノム情報を持っています。
 {: .comment}
 
-Now, take a look at one of our results.  (Any pair of overlapping genes will do.)  Our data is in the second to top track (**User Track / User Supplied Track**). That track shows a line of small black boxes, sometimes connected with a line.
+それでは、結果の1つを見てみましょう。（遺伝子が重なっているペアがあれば。）私たちのデータを2番目のトラック (**User Track / User Supplied Track**) にあります。そのトラックには小さな黒いボックスのラインが表示され、時にはラインで接続されています。
 
 > ### {% icon hands_on %} Zoom in on an area of the chromosome that shows a set of *linked* black boxes
 > To zoom in,
@@ -449,41 +449,41 @@ Now, take a look at one of our results.  (Any pair of overlapping genes will do.
 >    > ![One gene, fully zoomed and expanded](../../images/ucsc_gb_zoom_to_1_gene.png)
 {: .hands_on}
 
-The black boxes connected by lines represent genes, and each set of connected boxes is a single gene (actually, a single transcript of a gene).  Take a close look at the top several tracks.
+線で結ばれた黒いボックスは遺伝子を表し、接続されたボックスの各セットは単一の遺伝子（実際には、遺伝子の単一の転写物）を指しています。上のいくつかのトラックをよく見てください。
 
-* It looks like we preserved the gene definitions just fine.
-* It looks like, sure enough, there are overlapping genes here, and they are on opposite sides.  The arrows on the connecting lines tell us which strand the gene is on.
+* それは遺伝子の定義をそのまま保存しているようです。
+* それは、案の定、ここには重複している遺伝子があり、それらは反対側にあるように見えます。接続された線上の矢印は遺伝子がどの鎖にあるのかを示しています。
 
-Um, *what's up with the boxes and the lines connecting them?*
+ええと、*ボックスとそれらを結ぶ線はなんですか？*
 
-> ### {% icon comment %} Definitions 4
+> ### {% icon comment %} 定義 4
 >
-> * **Exon**
->> In humans (and in all plants and animals) the molecules that are built from genes are often only built from a part of the DNA in the gene. The sections of DNA that can produce the molecules are called *exons*.
+> * **エキソン**
+>> ヒト（やすべての植物および動物）において遺伝子から作られた分子は遺伝子中のDNAの一部からのみで作られることが多い。分子を作ることができるDNAの部分は*エキソン*と呼ばれています。
 {: .comment}
 
-As you may have guessed (or already knew): The black boxes are exons.  *Genes* are defined as *covering the entire area from the first black box to the last connected black box.*
+あなたは推測している（またはすでに知っていた）かもしれませんが: 黒いボックスはエキソンです。*Genes* は*最初の黒いボックスから最後に接続された黒いボックスまでの全領域をカバーするもの*として定義されています。
 
-## Do we have a problem?
+## 問題はあるでしょうか？
 
-*Maybe.*
+*多分。*
 
-Our *ad hoc* review of identified overlapping genes in the UCSC Genome Browser has *(or should have!)* confirmed that every gene we said has an overlapping gene on the opposite strand does in fact have that.  So, our conclusion appears solid: A significant percentage of genes *do* overlap with other genes on the opposite strand.
+Our *ad hoc* review of identified overlapping genes in the UCSC Genome Browser has *(or should have!)* confirmed that every gene we said has an overlapping gene on the opposite strand does in fact have that. したがって、結論がはっきりと出ます:遺伝子のかなりの割合は反対鎖上の他の遺伝子と重なっています。
 
-But, our conclusion may not be as *significant* as we had hoped. If only parts of genes, the exons, make stuff in our bodies, then should we have run this analysis on just the exons rather then the entire genes?  Probably.
+しかし、この結論は私たちが望んでいたものほど*重要*ではないかもしれません。もし遺伝子の一部、エキソンだけが、私たちの身体中の物質を作るならば、遺伝子全体ではなくエキソン上でこの分析を行うべきでしょうか？多分そうです。
 
-Let's refine our question slightly
+私たちの質問を少し洗練させましょう
 
-> ### {% icon question %} Our Revised Motivating Question
-> *I wonder if **exons** on opposite strands ever overlap with each other, and if so, how common is that?*
+> ### {% icon question %} Our Motivating Question を改良する
+> *向かい合ったストランド上の**エキソン**が互いに重なり合っているのではないでしょうか、そしてもしそうだった場合、どのように解き明かしましょうか？*
 {: .question}
 
 
 ### So, I have to do this all over again, but with exons?
 
-*Well, yes and no.*  We will have to run the analysis again, this time on exons instead of whole genes. But we won't have to manually recreate every step of our analysis. Galaxy enables us to create a reusable *workflow* from the analysis we just did, and then we can rerun the analysis, as one step, anytime we want to, and on any dataset.
+*Well, yes and no.*  解析をもう一度やり直す必要がありますが、今回は遺伝子全体ではなくエキソンで解析を行います。しかし解析の全てのステップを手動で再構成する必要はありません。Galaxyを使用すると先ほど行った解析から再利用可能な*ワークフロー*を作成でき、その後、ワークフロー中の1ステップだけでも、解析を行いたいときはいつでも、そしてどんなデータセットを用いても、解析を再実行することができます。
 
-## Walk through the workflow tutorial
+## ワークフローのチュートリアルを一通り見直す
 
 Run the [Create a reusable workflow from a history](../galaxy-intro-history-to-workflow/tutorial.html) tutorial for how to do this, *and then come back here to run your newly created workflow with the exon data.*
 
