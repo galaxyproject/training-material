@@ -572,8 +572,8 @@ Sharing tutorial
 
 Excel や別のスプレッドシートプログラムを使ってこの解析を行うことはできます。ここでは、質問に答えることで Galaxy を使う方法を学びました。同じ質問に答えるだけでも Excel を簡単に学ぶことができますし、ツールの使い方を学ぶことが目的であれば、どちらのツールも素晴らしいかもしれません。しかしあなたの解析が問題に取り組むうえで重要であればどうでしょうか？例えばあなたが一連の症状を診断しようとするためにヒトの臨床データを扱っているとしたら、または最終的に発表されておそらくノーベル賞が授与されるような研究をしているとしたらどうでしょうか？
 
-このような場合の解析では、*解析とそれを正確に再現する能力*は、非常に重要であり、Excel はこの場面では助けてくれません。 It doesn't track changes and it offers very little insight to others on how you got from your initial data to your conclusions.
+このような場合の解析では、*解析とそれを正確に再現する能力*は、非常に重要であり、Excel はこの場面では助けてくれません。それは変更を追跡せず、あなたが最初のデータから結論となるものをどのように取得したのかを他の人にはほとんど伝わらないようになっています。 
 
-Galaxy, on the other hand, *automatically records every step of your analysis.*  And when you are done, you can share your analysis with anyone.  You can even include a link to it in a paper (or your acceptance speech).  In addition, you can create a reusable workflow from your analysis that others (or yourself) can use on other datasets.
+Galaxy は、一方で、*解析のすべてのステップを自動的に記録します。*解析が終わったら、誰とでも解析を共有することができます。論文（または受賞スピーチ）の中にリンクを入れることもできます。加えて、他の人（またはあなた自身）が他のデータセットを使うことができるように、解析から再実行可能なワークフローを作成することができます。 
 
-Another challenge with spreadsheet programs is that they don't scale to support *next generation sequencing (NGS)* datasets, a common type of data in genomics, and which often reach gigabytes or even terabytes in size.
+スプレッドシートプログラムのもう1つの課題は*次世代シーケンサー（NGS）*のデータセットや、ゲノミクスの標準的な種類のデータ、そしてギガバイトまたはテラバイトのサイズに到達するようなデータに対応できるように拡張できないことです。
