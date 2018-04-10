@@ -479,21 +479,21 @@ Our *ad hoc* review of identified overlapping genes in the UCSC Genome Browser h
 {: .question}
 
 
-### So, I have to do this all over again, but with exons?
+### したがって、解析を全てやり直さなければならないのですが、エキソンはどうしましょうか？
 
-*Well, yes and no.*  解析をもう一度やり直す必要がありますが、今回は遺伝子全体ではなくエキソンで解析を行います。しかし解析の全てのステップを手動で再構成する必要はありません。Galaxyを使用すると先ほど行った解析から再利用可能な*ワークフロー*を作成でき、その後、ワークフロー中の1ステップだけでも、解析を行いたいときはいつでも、そしてどんなデータセットを用いても、解析を再実行することができます。
+*そうですね、はいでありいいえでもあります。*  解析をもう一度やり直す必要がありますが、今回は遺伝子全体ではなくエキソンで解析を行います。しかし解析の全てのステップを手動で再構成する必要はありません。Galaxyを使用すると先ほど行った解析から再利用可能な*ワークフロー*を作成でき、その後、ワークフロー中の1ステップだけでも、解析を行いたいときはいつでも、そしてどんなデータセットを用いても、解析を再実行することができます。
 
 ## ワークフローのチュートリアルを一通り見直す
 
-Run the [Create a reusable workflow from a history](../galaxy-intro-history-to-workflow/tutorial.html) tutorial for how to do this, *and then come back here to run your newly created workflow with the exon data.*
+[ヒストリーから再利用可能なワークフローを作成する](../galaxy-intro-history-to-workflow/tutorial.html) というチュートリアルを行ってこれを行う方法を学び、*そしてここに戻って新しく作成したワークフローをエキソンのデータで実行します。*
 
-## Rerun analysis with exon data
+## エキソンのデータで解析を再実行する
 
-We want to run the same analysis, but this time only look for overlaps that happen in *exons*, the parts of genes that produce stuff our body uses.  Before we start looking at exons, let's start a new history, one that contains only the genes file we got from UCSC. We could go back to UCSC and refetch the file, but there is an easier way.
+私たちは同じ解析を実行しようと思いますが、今度は、身体が使う原料を作る遺伝子の一部である*エキソン*で起こる重なりのみを探します。エキソンを見始める前に、UCSCから取得した遺伝子ファイルのみを含む新しいヒストリーで始めましょう。UCSCに戻りファイルを再取得することができますが、より簡単な方法があります。
 
-> ### {% icon hands_on %} Hands-on: Create a new history that contains some data from current history
+> ### {% icon hands_on %} ハンズオン: 現在のヒストリーからいくつかのデータを含む新しいヒストリーを作成する
 >
-> 1. *Click* on the **gear icon** at the top of the current history.
+> 1. 現在のヒストリーの上部にある**歯車アイコン**を*クリック*する。
 > 2. *Select* the **Copy Datasets** option from the pull down menu.  This launches the copy datasets form.
 > 3. Under **Source History:**, *select* the dataset(s) you want to copy to the new history.
 >    - In our case, we only want the `Genes` dataset.
@@ -506,73 +506,73 @@ We want to run the same analysis, but this time only look for overlaps that happ
 > 6. The history name is a link.  *Click* on it.
 {: .hands_on}
 
-### Get the exon data
+### エキソンのデータを取得する
 
-And your new history appears in the history panel with the copied *genes* dataset.  What we need is *exons.* How can we get the exon information?  There are two relatively easy ways to get this information, one of which will be very familiar.
+そして今新しいヒストリーのヒストリーパネルには *genes* のデータセットのコピーが表示されています。私たちが必要としているのは*エキソン*です。どのようにしてエキソンの情報を取得することができるでしょうか？この情報を取得するには比較的簡単な方法が2つありますが、そのうちの1つは非常に良く知られています。
 
-The first method involves going back to the UCSC Table Browser.  Everything on the first form would stay the same: We still want human, hg38, GENCODE v24, and just `chr22`. The second form is what changes.  Instead of getting the **Whole Gene**, we need to retrieve the **Coding Exons** only.
+1つ目の方法は UCSC テーブルブラウザーに戻ることです。最初の形式はすべて同じままです:私たちはまだ、human、hg38、GENCODE v24、そして `chr22` を要求します。続いての形式は変更します。**Whole Gene** を取得する代わりに、**Coding Exons** のみを取得する必要があります。
 
-The second method is to use the **Gene BED To Exon/Intron/Codon BED expander** tool in the **Operate on Genomic Intervals** toolbox to extract the exon information from the genes BED file we already have. (*Of course!* you say.  Umm, there is no way that you should have known that you already had this information in the genes file, or that this tool existed.)
+2つ目の方法は **Operate on Genomic Intervals** のツールボックスにある **Gene BED To Exon/Intron/Codon BED expander** というツールを使用してすでに持っている遺伝子 BED ファイルからエキソン情報を抽出するというものです。（*もちろん！*あなたは言うでしょう。うーん、すでに持っている遺伝子ファイルにこの情報が入っていることや、こんなツールがあったことなんて知っているわけないじゃないか。）
 
-> ### {% icon hands_on %} Get the exon data
+> ### {% icon hands_on %} エキソンのデータを取得する
 >
-> 1. Get the exon information, either by revisiting UCSC, or by using the **Gene BED To Exon/Intron/Codon BED expander** tool.  If you use the expander tool select **Coding Exons only** from the **Extract** pull-down.
-> 2. Give the resulting dataset a meaningful name.
+> 1. エキソンの情報を所得するには、UCSCにもう一度アクセスするか、 **Gene BED To Exon/Intron/Codon BED expander** というツールを使うかで入手します。expander のツールを使う場合は **Extract** のプルダウンから **Coding Exons only** を選択します。
+> 2. 結果のデータセットに意味のある名前をつける。
 {: .hands_on}
 
 
-If you got the data from UCSC it will look something like this:
+UCSC からデータを取得した場合、以下のように表示されます:
 ![Contents of the exons dataset from UCSC](../../images/101_exons.png)
 
 
-Your history should now have two datasets: one describing entire genes, and one describing just the exons.
+現在ヒストリーには2つのデータセットはあるはずです: 1つは遺伝子全体を記したもので、もう1つはエキソンを記したものです。
 
-### Rerun the analysis, this time on exons.
+### 今度はエキソンで、解析を再実行する。
 
-When you did the *History to Workflow* tutorial you created a new workflow that was then added to your list of defined workflows.  
+ *History to Workflow* のチュートリアルを行うことで、定義したワークフローのリストに追加した新しいワークフローを作成しました。
 
-> ### {% icon hands_on %} Run the workflow on the exon data.
+> ### {% icon hands_on %} エキソンのデータでワークフローを実行する。
 >
-> 1. *Click* the **Workflow** tab in the menu at the top of the Galaxy page.
->    - This lists all of your defined workflows, including the one you just created.
-> 2. *Click* on the newly created workflow and select **Run** from the pull-down menu.
->    - This launches the workflow run form (which you also saw when testing this workflow)
-> 3. *Select* **No** under **Send results to a new history**
-> 4. *Set* the first (and only) input dataset to the `Exons` dataset, using the pull-down menu.
+> 1. Galaxy のページ上部にあるメニューの**ワークフロー**タブを*クリック*する。
+>    - ここには、作成したばかりのワークフローを含めた、定義済みのワークフローがすべて一覧表示されます。
+> 2. 新しく作成したワークフローを*クリック*してプルダウンメニューから **Run** を選択する。
+>    - これによりワークフローの実行フォームが起動されます（ワークフローをテストする際にも表示されました）
+> 3. **Send results to a new history** の下の **No** を*選択*する
+> 4. プルダウンメニューを使用して、最初の（そして唯一の）インプットのデータセットに `Exons` のデータセットを*設定*します。
 > 5. *Click* the **Run workflow** button.
 {: .hands_on}
 
-And Galaxy launches the workflow and says (in a nice big green box) something like:
+そして Galaxy はワークフローを実行し（素敵な緑色のボックスで）次のようなことを表示します:
 
 > You can check the status of queued jobs and view the resulting data by refreshing the History pane.
 
-Which in this case *is the truth*.  You can refresh the history panel by either reloading the whole page, of by clicking the looping arrow icon at the top of the history panel.  What you'll see is a stack of history steps that will go from queued to running to done as you watch them.
+Which in this case *is the truth*. ヒストリーパネルを更新するにはページ全体を再読み込みするか、ヒストリーパネルの上部にあるループ矢印のアイコンをクリックします。表示されるのは  What you'll see is a stack of history steps that will go from queued to running to done as you watch them.
 
-All steps in the history will be green when the workflow is done. Once that happens compare your output dataset with your input dataset?  What percentage of exons overlap with other exons on the opposite strand, and is it common or rare?  Is is a smaller percentage than we saw for whole genes?  
+ワークフローが完了するとヒストリーのすべてのステップが緑色になります。ワークフローが完了したらアウトプットのデータセットとインプットのデータセットを比較しますか？エキソンの何％が反対鎖上の他のエキソンと重なっており、それは一般的か稀かのどちらですか？  Is is a smaller percentage than we saw for whole genes?  
 
 
-## Are we done?
+## 終わったのでしょうか？
 
-Probably.  Note that we can no longer say what percentage of *genes* overlap.  We *can* say what percentage of exons overlap, and that is probably close enough for our goals.  If it isn't and we actually need to say what percentage of genes overlap, then we will have to do some extra work.  This can be done is several ways, but the Galaxy 101 tutorial may give you some ideas on how to follow this question all the way to genes.
+多分終わりました。*遺伝子*の何％が重なっているかはもう分かりません。エキソンの何％が重なっているのかを言うことはできて、それはおそらく私たちの目標に十分な到達点となるでしょう。そうではなく実際に何％の遺伝子が重なっているのかを言う必要がある場合、私たちは追加で作業をしなければならないでしょう。これはいくつかの方法で行うことができますが、Galaxy 101 のチュートリアルではこの質問を全ての遺伝子で解き明かす方法についてのいくつかのアイデアを提示しています。
 
-# Conclusion
+# 結論
 {: .no_toc}
 
-:tada: Well done! :clap: You have just performed your first analysis in Galaxy.
+:tada: よくできました！:拍手！: あなたは Galaxy で最初の解析を行ったばかりです。
 
 
-# What next?
+# 次は何を行いましょうか？
 
 Sharing tutorial
 
 
-# Final thoughts
+# 最後に
 
-## Why not use Excel for this?
+## どうしてこのために Excel を使用しないのでしょうか？
 
-You could use Excel or another spreadsheet program to do this analysis.  Here, we learned how to use Galaxy by answering a question.  You could just as easily learn Excel by answering the same question, and if the goal is to learn how to use a tool, then either tool would be great. But what if you are working on a question where your analysis matters?  Maybe you are working with human clinical data trying to diagnose a set of symptoms, or you are working on research that will eventually be published and maybe earn you a Nobel Prize?
+Excel や別のスプレッドシートプログラムを使ってこの解析を行うことはできます。ここでは、質問に答えることで Galaxy を使う方法を学びました。同じ質問に答えるだけでも Excel を簡単に学ぶことができますし、ツールの使い方を学ぶことが目的であれば、どちらのツールも素晴らしいかもしれません。しかしあなたの解析が問題に取り組むうえで重要であればどうでしょうか？例えばあなたが一連の症状を診断しようとするためにヒトの臨床データを扱っているとしたら、または最終的に発表されておそらくノーベル賞が授与されるような研究をしているとしたらどうでしょうか？
 
-In these cases your analysis, *and the ability to reproduce it exactly*, is vitally important, and Excel won't help you here. It doesn't track changes and it offers very little insight to others on how you got from your initial data to your conclusions.
+このような場合の解析では、*解析とそれを正確に再現する能力*は、非常に重要であり、Excel はこの場面では助けてくれません。 It doesn't track changes and it offers very little insight to others on how you got from your initial data to your conclusions.
 
 Galaxy, on the other hand, *automatically records every step of your analysis.*  And when you are done, you can share your analysis with anyone.  You can even include a link to it in a paper (or your acceptance speech).  In addition, you can create a reusable workflow from your analysis that others (or yourself) can use on other datasets.
 
