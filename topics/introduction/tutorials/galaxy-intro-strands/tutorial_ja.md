@@ -402,11 +402,11 @@ Galaxy は genomic intervals に関する質問に答えることに優れてお
 > 1. **Text Manipulation** ツールボックスを*開く*。
 > 2. ツールボックス最上部の近くに **Concatenate datasets tail-to-head** があります。これを*クリック*してください。このツールを試しましょう。
 > 3. **Concatenate** {% icon tool %} 以下のパラメーターにしましょう:
->   * *Set* **Concatenate Dataset** to `Overlapping reverse genes`.
->   * *Click* **+ Insert Dataset**.  This adds a second dataset pull-down menu to the form.
->   * *Select* `Overlapping forward genes` as the second dataset.
-> 4. *Click* **Execute**
-> 5. *Rename* the resulting dataset something informative like `Overlapping genes`
+>   * **Concatenate Dataset** に `Overlapping reverse genes` を*設定*する。
+>   * **+ Insert Dataset** を*クリック*する。これにより、フォームに2番目のデータセットのプルダウンメニューが追加されます。
+>   * 2番目のデータセットとして `Overlapping forward genes` を*選択*する。
+> 4. **Execute** を*クリック*する
+> 5. 結果のデータセットに `Overlapping genes` のような内容が分かるものに*名前を変える*
 {: .hands_on}
 
 連結の操作が完了したので、ヒストリーパネルでデータセットをプレビューしましょう。そのデータセットには期待している遺伝子数がありましたか？もしなければ、何が起きたか把握することができます。
@@ -437,19 +437,19 @@ GalaxyはBEDを含めた、様々な種類のデータセットの様々な視�
 
 それでは、結果の1つを見てみましょう。（遺伝子が重なっているペアがあれば。）私たちのデータを2番目のトラック (**User Track / User Supplied Track**) にあります。そのトラックには小さな黒いボックスのラインが表示され、時にはラインで接続されています。
 
-> ### {% icon hands_on %} Zoom in on an area of the chromosome that shows a set of *linked* black boxes
-> To zoom in,
-> * *Click* on the **Scale** track (the top track) just to the left of the start of the black boxes.
-> * Now *drag* the mouse across the Scale track to just to the right of the  black boxes and let go.
+> ### {% icon hands_on %} *連結している*黒いボックスのセットが示している染色体の領域にズームする
+> 拡大するには、
+> * 黒いボックスの開始部分である左側の **Scale** トラック（トップにあるトラック）を*クリック*する。
+> * そのまま Scale トラック上をマウスでドラッグして黒いボックスのすぐ右まで移動させる。
 >    > ![Zoom by clicking and dragging on the Scale track](../../images/ucsc_gb_zoom_by_drag.png)
-> * A window pops up describing several ways to interact with the browser.  Just *click* the **Zoom In** button at the bottom.
-> * This redraws the window, this time zoomed in to what you highlighted.
-> * Continue to zoom in until you have the set of linked black boxes you picked centered on the screen.
-> * Once you are as zoomed as you want to be, click on one of the linked boxes.  This will expand the track:
+> * ブラウザで操作するいくつかの方法を説明するポップアップウィンドウが表示されます。ちょうど下にある **Zoom In** ボタンを*クリック*してください。
+> * これによりウィンドウが再描画されて、強調した部分が拡大されて表示されます。
+> * 連結している黒いボックスのセットが画面の中央に配置されるまでズームインの操作を続ける。
+> * 拡大したいところまで拡大したら、連結しているボックスの1つをクリックしてください。これでトラックが拡張されます:
 >    > ![One gene, fully zoomed and expanded](../../images/ucsc_gb_zoom_to_1_gene.png)
 {: .hands_on}
 
-線で結ばれた黒いボックスは遺伝子を表し、接続されたボックスの各セットは単一の遺伝子（実際には、遺伝子の単一の転写物）を指しています。上のいくつかのトラックをよく見てください。
+線で結ばれた黒いボックスは遺伝子を表し、連結しているボックスの各セットは単一の遺伝子（実際には、遺伝子の単一の転写物）を指しています。上のいくつかのトラックをよく見てください。
 
 * それは遺伝子の定義をそのまま保存しているようです。
 * それは、案の定、ここには重複している遺伝子があり、それらは反対側にあるように見えます。接続された線上の矢印は遺伝子がどの鎖にあるのかを示しています。
@@ -466,9 +466,9 @@ GalaxyはBEDを含めた、様々な種類のデータセットの様々な視�
 
 ## 問題はあるでしょうか？
 
-*多分。*
+*多分あります。*
 
-Our *ad hoc* review of identified overlapping genes in the UCSC Genome Browser has *(or should have!)* confirmed that every gene we said has an overlapping gene on the opposite strand does in fact have that. したがって、結論がはっきりと出ます:遺伝子のかなりの割合は反対鎖上の他の遺伝子と重なっています。
+UCSC ゲノムブラウザーで重なり合う遺伝子を確認するという*特定の目的のための*見直しはすべての遺伝子が実際に向かい合っているストランドに重なっている遺伝子を持っていることを裏付けられています（または裏付けられるべきです！）。したがって、結論がはっきりと出ます:遺伝子のかなりの割合は反対鎖上の他の遺伝子と重なっています。
 
 しかし、この結論は私たちが望んでいたものほど*重要*ではないかもしれません。もし遺伝子の一部、エキソンだけが、私たちの身体中の物質を作るならば、遺伝子全体ではなくエキソン上でこの分析を行うべきでしょうか？多分そうです。
 
@@ -485,7 +485,7 @@ Our *ad hoc* review of identified overlapping genes in the UCSC Genome Browser h
 
 ## ワークフローのチュートリアルを一通り見直す
 
-[ヒストリーから再利用可能なワークフローを作成する](../galaxy-intro-history-to-workflow/tutorial.html) というチュートリアルを行ってこれを行う方法を学び、*そしてここに戻って新しく作成したワークフローをエキソンのデータで実行します。*
+[Create a reusable workflow from a history](../galaxy-intro-history-to-workflow/tutorial.html) というチュートリアルを行ってこれを行う方法を学び、*そしてここに戻って新しく作成したワークフローをエキソンのデータで実行します。*
 
 ## エキソンのデータで解析を再実行する
 
@@ -572,8 +572,8 @@ Sharing tutorial
 
 Excel や別のスプレッドシートプログラムを使ってこの解析を行うことはできます。ここでは、質問に答えることで Galaxy を使う方法を学びました。同じ質問に答えるだけでも Excel を簡単に学ぶことができますし、ツールの使い方を学ぶことが目的であれば、どちらのツールも素晴らしいかもしれません。しかしあなたの解析が問題に取り組むうえで重要であればどうでしょうか？例えばあなたが一連の症状を診断しようとするためにヒトの臨床データを扱っているとしたら、または最終的に発表されておそらくノーベル賞が授与されるような研究をしているとしたらどうでしょうか？
 
-このような場合の解析では、*解析とそれを正確に再現する能力*は、非常に重要であり、Excel はこの場面では助けてくれません。それは変更を追跡せず、あなたが最初のデータから結論となるものをどのように取得したのかを他の人にはほとんど伝わらないようになっています。 
+このような場合の解析では、*解析とそれを正確に再現する能力*は、非常に重要であり、Excel はこの場面では助けてくれません。それは変更を追跡せず、あなたが最初のデータから結論となるものをどのように取得したのかを他の人にはほとんど伝わらないようになっています。
 
-Galaxy は、一方で、*解析のすべてのステップを自動的に記録します。*解析が終わったら、誰とでも解析を共有することができます。論文（または受賞スピーチ）の中にリンクを入れることもできます。加えて、他の人（またはあなた自身）が他のデータセットを使うことができるように、解析から再実行可能なワークフローを作成することができます。 
+Galaxy は、一方で、*解析のすべてのステップを自動的に記録します。*解析が終わったら、誰とでも解析を共有することができます。論文（または受賞スピーチ）の中にリンクを入れることもできます。加えて、他の人（またはあなた自身）が他のデータセットを使うことができるように、解析から再実行可能なワークフローを作成することができます。
 
 スプレッドシートプログラムのもう1つの課題は*次世代シーケンサー（NGS）*のデータセットや、ゲノミクスの標準的な種類のデータ、そしてギガバイトまたはテラバイトのサイズに到達するようなデータに対応できるように拡張できないことです。
