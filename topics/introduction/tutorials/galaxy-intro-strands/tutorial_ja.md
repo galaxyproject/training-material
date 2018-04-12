@@ -459,7 +459,7 @@ GalaxyはBEDを含めた、様々な種類のデータセットの様々な視�
 > ### {% icon comment %} 定義 4
 >
 > * **エキソン**
->> ヒト（やすべての植物および動物）において遺伝子から作られた分子は遺伝子中のDNAの一部からのみで作られることが多い。分子を作ることができるDNAの部分は*エキソン*と呼ばれています。
+>> ヒト（やすべての植物および動物）において遺伝子から作られた分子は遺伝子中の DNA の一部からのみで作られることが多い。分子を作ることができる DNA の部分は*エキソン*と呼ばれています。
 {: .comment}
 
 あなたは推測している（またはすでに知っていた）かもしれませんが: 黒いボックスはエキソンです。*Genes* は*最初の黒いボックスから最後に接続された黒いボックスまでの全領域をカバーするもの*として定義されています。
@@ -494,16 +494,16 @@ UCSC ゲノムブラウザーで重なり合う遺伝子を確認するという
 > ### {% icon hands_on %} ハンズオン: 現在のヒストリーからいくつかのデータを含む新しいヒストリーを作成する
 >
 > 1. 現在のヒストリーの上部にある**歯車アイコン**を*クリック*する。
-> 2. *Select* the **Copy Datasets** option from the pull down menu.  This launches the copy datasets form.
-> 3. Under **Source History:**, *select* the dataset(s) you want to copy to the new history.
->    - In our case, we only want the `Genes` dataset.
-> 4. Under **Destination History** enter an informative history name in the **New history named:** box.
->    - For example, `Exon overlaps on opposite strands`
+> 2. プルダウンメニューから**データセットをコピー**を*選択*する。これによりデータセットをコピーするためのフォームが起動されます。
+> 3. **Source History:** の下から、新しいヒストリーにコピーしたいデータセットを*選択*する。
+>    - 私たちの場合は、`Genes` のデータセットだけが必要です。
+> 4. **Destination History** の下にある **New history named:** のテキストボックスに内容がわかるヒストリー名を入力する。
+>    - 例えば、`Exon overlaps on opposite strands` とする。
 >    > ![Copy only the Genes dataset to the new history](../../images/copy_datasets_to_new_history.png)
-> 5. *Click* the **Copy History Items** button to create your new history.
->    - This creates a new history (with the copied dataset) and throws up a green box saying:
+> 5. **Copy History Items** ボタンを*クリック*して新しいヒストリーを作成する。
+>    - これにより（コピーされたデータセットで）新しいヒストリーが作成されて緑色のボックスが現れて次のようなメッセージが表示されます:
 >    >  1 dataset copied to 1 history: `name you gave your new history`.
-> 6. The history name is a link.  *Click* on it.
+> 6. ヒストリー名はリンクです。*クリック*しましょう。
 {: .hands_on}
 
 ### エキソンのデータを取得する
@@ -516,7 +516,7 @@ UCSC ゲノムブラウザーで重なり合う遺伝子を確認するという
 
 > ### {% icon hands_on %} エキソンのデータを取得する
 >
-> 1. エキソンの情報を所得するには、UCSCにもう一度アクセスするか、 **Gene BED To Exon/Intron/Codon BED expander** というツールを使うかで入手します。expander のツールを使う場合は **Extract** のプルダウンから **Coding Exons only** を選択します。
+> 1. エキソンの情報を所得するには、UCSCにもう一度アクセスするか、**Gene BED To Exon/Intron/Codon BED expander** というツールを使うかで入手します。expander のツールを使う場合は **Extract** のプルダウンから **Coding Exons only** を選択します。
 > 2. 結果のデータセットに意味のある名前をつける。
 {: .hands_on}
 
@@ -539,14 +539,14 @@ UCSC からデータを取得した場合、以下のように表示されます
 >    - これによりワークフローの実行フォームが起動されます（ワークフローをテストする際にも表示されました）
 > 3. **Send results to a new history** の下の **No** を*選択*する
 > 4. プルダウンメニューを使用して、最初の（そして唯一の）インプットのデータセットに `Exons` のデータセットを*設定*します。
-> 5. *Click* the **Run workflow** button.
+> 5. **Run workflow** ボタンを*クリック*する。
 {: .hands_on}
 
-そして Galaxy はワークフローを実行し（素敵な緑色のボックスで）次のようなことを表示します:
+そして Galaxy はワークフローを実行し（素敵な緑色のボックスで）次のようなメッセージを表示します:
 
 > You can check the status of queued jobs and view the resulting data by refreshing the History pane.
 
-Which in this case *is the truth*. ヒストリーパネルを更新するにはページ全体を再読み込みするか、ヒストリーパネルの上部にあるループ矢印のアイコンをクリックします。表示されるのは  What you'll see is a stack of history steps that will go from queued to running to done as you watch them.
+これは*正しいです*。ヒストリーパネルを更新するにはページ全体を再読み込みするか、ヒストリーパネルの上部にあるループ矢印のアイコンをクリックします。表示されるのはキューを入れた時から実行中の際に経るヒストリーの各ステップでスタックされて表示されています。 
 
 ワークフローが完了するとヒストリーのすべてのステップが緑色になります。ワークフローが完了したらアウトプットのデータセットとインプットのデータセットを比較しますか？エキソンの何％が反対鎖上の他のエキソンと重なっており、それは一般的か稀かのどちらですか？  Is is a smaller percentage than we saw for whole genes?  
 
