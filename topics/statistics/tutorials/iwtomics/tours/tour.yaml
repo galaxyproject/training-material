@@ -7,10 +7,6 @@ steps:
     - title: "Welcome to IWTomics"
       content: "IWTomics is a tool to statistically evaluate differences in genomic features between groups of regions along the genome. This tour will guide you through a real data example. Please follow the instructions (interaction is required)."
       backdrop: true
-    
-    ######################
-    ## load ETn example ##
-    ######################
 
     - title: "Upload data"
       element: ".upload-button"
@@ -19,7 +15,7 @@ steps:
       postclick:
         - ".upload-button"
         - "#btn-new"
-    
+
     - title: "Upload data"
       element: ".upload-text-content:first"
       intro: "ETn example: real data from Campos-Sànchez et al. (2016). Upload 'Fixed ETn' and 'Control' regions, as well as 'Recombination Hotspot' content."
@@ -57,7 +53,7 @@ steps:
       textinsert: |
         https://raw.githubusercontent.com/fabio-cumbo/IWTomics4Galaxy/master/ETn_example/regions_header.tabular
         https://raw.githubusercontent.com/fabio-cumbo/IWTomics4Galaxy/master/ETn_example/features_header.tabular
-    
+
     - title: "Select header file type"
       element: ".upload-extension:first"
       intro: "INTERACTION REQUIRED: Select 'tabular' type, then click 'Next'."
@@ -91,7 +87,7 @@ steps:
       element: "#current-history-panel .list-item:eq(3)"
       intro: "Control.bed contains genomic coordinates of 1142 64-kb regions that do not overlap ETn flanking regions. Click on the eye symbol to inspect it."
       position: "left"
-    
+
     - title: "Recombination Hotspot Content"
       element: "#current-history-panel .list-item:eq(2)"
       intro: "Recombination_hotspots.txt contains genomic coordinates of 2438 64-kb regions (Fixed ETn and Control regions) and, for each of them, the recombination hotspot content measured in 64 1-kb windows. Click on the eye symbol to inspect it."
@@ -112,10 +108,6 @@ steps:
       intro: "INTERACTION REQUIRED: Write 'IWTomics' in the search field. The IWTomics suite contains three tools: 'Load, Smooth and Plot', 'Test and Plot', and 'Plot with Threshold on Test Scale'. Those tools should be used sequentially. Click 'Next' to continue the tour."
       position: "right"
 
-    #####################################
-    ## start Load Smooth and Plot tool ##
-    #####################################
-
     - title: "Select 'Load, Smooth and Plot' tool"
       element: 'a[href$="tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fiwtomics_loadandplot%2Fiwtomics_loadandplot%2F1.0.0.0"]'
       intro: "Select the first tool 'Load, Smooth and Plot'."
@@ -131,7 +123,7 @@ steps:
       element: 'div[tour_id$="regions"]'
       intro: "INTERACTION REQUIRED: select the two region datasets 'ETn_fixed.bed' and 'Control.bed', then click 'Next'."
       position: "bottom"
-    
+
     - title: "Select region header"
       element: 'div[tour_id$="regionsheader"]'
       intro: "INTERACTION REQUIRED: select the region header file 'regions_header.tabular', then click 'Next'."
@@ -151,7 +143,7 @@ steps:
       element: 'div[tour_id$="zerobased"]'
       intro: "Start positions are 0-based in this example."
       position: "top"
-    
+
     - title: "Select smoothing"
       element: 'div[tour_id$="conditionaltype|smoothing"]'
       intro: "Select the type of smoothing to be applied to the feature curves. Default is 'No' smoothing. Other choices include 'Local Polynomials', 'Gaussian Kernel', and 'B-Splines'."
@@ -166,7 +158,7 @@ steps:
       element: 'div[tour_id$="plotres|average"]'
       intro: "If 'Yes' is selected, a mean feature curve is plotted for each region dataset."
       position: "top"
-    
+
     - title: "Plot sample size in each position"
       element: 'div[tour_id$="plotres|size"]'
       intro: "If 'Yes' is selected, an heatmap with the sample size in each position is plotted for each region dataset."
@@ -197,7 +189,7 @@ steps:
       element: "#current-history-panel .list-item:eq(3)"
       intro: "This is an RData with the IWTomicsData object, that stores the aligned genomic region datasets, and their associated feature measurements."
       position: "left"
-    
+
     - title: "Region Dataset IDs"
       element: "#current-history-panel .list-item:eq(2)"
       intro: "Region Dataset IDs contains the region datasets identifiers. Click on the eye symbol to inspect it."
@@ -212,14 +204,10 @@ steps:
       element: "#current-history-panel .list-item:eq(0)"
       intro: "Plotted Data is a PDF with the pointwise boxplots. Click on the eye symbol to inspect it."
       position: "left"
-    
+
     - title: "'Load, Smooth and Plot' completed"
       content: "The 'Load, Smooth and Plot' tool demonstration is completed. Click 'Next' to continue with the tool 'Test and Plot'."
       backdrop: true
-    
-    ##############################
-    ## start Test and Plot tool ##
-    ##############################
 
     - title: "Select 'Test and Plot' tool"
       element: 'a[href$="tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fiwtomics_testandplot%2Fiwtomics_testandplot%2F1.0.0.0"]'
@@ -236,7 +224,7 @@ steps:
       element: 'div[tour_id$="rdata"]'
       intro: "INTERACTION REQUIRED: select the IWTomicsData Object created by 'Load, Smooth and Plot' tool, then click 'Next'."
       position: "bottom"
-    
+
     - title: "Select region dataset IDs"
       element: 'div[tour_id$="regionids"]'
       intro: "INTERACTION REQUIRED: select the Region Dataset IDs created by 'Load, Smooth and Plot' tool, then click 'Next'."
@@ -251,7 +239,7 @@ steps:
       element: 'div[tour_id$="regionssection|regions_0|region0"]'
       intro: "INTERACTION REQUIRED: select pairs of genomic region datasets to be compared using two-sample Interval-Wise Testing. In this example we consider one two-sample test contrasting 'ETn_fixed' (select it as 'Region 1') to 'Control' (select it as 'Region 2'), then click 'Next'."
       position: "top"
-    
+
     - title: "Select features"
       element: 'div[tour_id$="featureslist"]'
       intro: "INTERACTION REQUIRED: select feature measurements to be tested. In this example, select 'Recomb_hot' feature, then click 'Next'."
@@ -266,7 +254,7 @@ steps:
       element: 'div[tour_id$="permutations"]'
       intro: "Select number of permutations to be used to compute p-values."
       position: "top"
-    
+
     - title: "Select alpha"
       element: 'div[tour_id$="plotres|alpha"]'
       intro: "Select the level alpha of the test (significance level of the test)."
@@ -322,7 +310,7 @@ steps:
       element: "#current-history-panel .list-item:eq(3)"
       intro: "If a summary plot was selected in 'Test and Plot' tool, this is a PDF file with the summary plot. If 'No plot' was selected, this is empty."
       position: "left"
-    
+
     - title: "IWTomicsData Object with Test Results"
       element: "#current-history-panel .list-item:eq(2)"
       intro: "This is an RData with the IWTomicsData Object with the test results."
@@ -341,10 +329,6 @@ steps:
     - title: "'Test and Plot' completed"
       content: "The 'Test and Plot' tool demonstration is completed. Click 'Next' to continue with the tool 'Plot with Threshold on Test Scale'."
       backdrop: true
-
-    #############################################
-    ## start Plot with Threshold on Test Scale ##
-    #############################################
 
     - title: "Select 'Plot with Threshold on Test Scale' tool"
       element: 'a[href$="tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fiwtomics_plotwithscale%2Fiwtomics_plotwithscale%2F1.0.0.0"]'
