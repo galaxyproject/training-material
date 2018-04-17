@@ -233,7 +233,7 @@ https://zenodo.org/record/1183661/files/HiC_S2_1p_10min_lowU_R2.fastq.gz
         </ul>
       </blockquote>
     </li>
-    <li>Rename the dataset to something meaningful, e.g. <code class="highlighter-rouge">HiC_S2_1p_10min_lowU_R1</code> and <code class="highlighter-rouge">HiC_S2_1p_10min_lowU_R2</code>.
+    <li>Rename the data set to something meaningful, e.g. <code class="highlighter-rouge">HiC_S2_1p_10min_lowU_R1</code> and <code class="highlighter-rouge">HiC_S2_1p_10min_lowU_R2</code>.
 By default, when data is imported via its link, Galaxy names it with its URL.</li>
   </ol>
 
@@ -243,7 +243,7 @@ By default, when data is imported via its link, Galaxy names it with its URL.</l
 
 <p>Mates have to be mapped individually to avoid mapper specific heuristics designed for standard paired-end libraries.</p>
 
-<p>We have used the HiCExplorer sucessfuly with bwa, bowtie2 and hisat2. In this tutorial we will be using <strong>Map with BWA-MEM</strong> tool. It is important to remember to:</p>
+<p>We have used the HiCExplorer successfully with bwa, bowtie2 and hisat2. In this tutorial we will be using <strong>Map with BWA-MEM</strong> tool. It is important to remember to:</p>
 <ul>
   <li>use local mapping, in contrast to end-to-end. A fraction of Hi-C reads are chimeric and will not map end-to-end thus, local mapping is important to increase the number of mapped reads</li>
   <li>tune the aligner parameters to penalize deletions and insertions. This is important to avoid aligned reads with gaps if they happen to be chimeric.</li>
@@ -259,7 +259,7 @@ By default, when data is imported via its link, Galaxy names it with its URL.</l
         <li>“Will you select a reference genome from your history or use a built-in index?” to <code class="highlighter-rouge">Use a built-in index</code></li>
         <li>“Select a reference genome” to <code class="highlighter-rouge">dm3</code></li>
         <li>“Is this library mate-paired?” to <code class="highlighter-rouge">Single-end or interleaved paired-end</code></li>
-        <li>Set multiple datasets</li>
+        <li>Set multiple data sets</li>
         <li>“FASTQ file” to <code class="highlighter-rouge">HiC_S2_1p_10min_lowU_R1</code>and <code class="highlighter-rouge">HiC_S2_1p_10min_lowU_R2</code></li>
         <li>“BWA settings to use” to <code class="highlighter-rouge">Full parameter List</code></li>
         <li>“Gap extension penalty (-E)” to <code class="highlighter-rouge">50</code></li>
@@ -293,7 +293,7 @@ By default, when data is imported via its link, Galaxy names it with its URL.</l
           <blockquote class="comment">
             <h3 id="-comment"><i class="fa fa-commenting-o" aria-hidden="true"></i> Comment</h3>
 
-            <p><em>hicBuildMatrix</em> creates two files, a bam file containing only the valid Hi-C read pairs and a matrix containing the Hi-C contacts at the given resolution. The bam file is useful to check the quality of the Hi-C library on the genome browser. A good Hi-C library should contain piles of reads near the restriction fragment sites. In the QCfolder a html file is saved with plots containing useful information for the quality control of the Hi-C sample like the number of valid pairs, duplicated pairs, self-ligations etc. Usually, only 25%-40% of the reads are valid and used to build the Hi-C matrix mostly because of the reads that are on repetitive regions that need to be discarded.</p>
+            <p><em>hicBuildMatrix</em> creates two files, a bam file containing only the valid Hi-C read pairs and a matrix containing the Hi-C contacts at the given resolution. The bam file is useful to check the quality of the Hi-C library on the genome browser. A good Hi-C library should contain piles of reads near the restriction fragment sites. In the QC folder a html file is saved with plots containing useful information for the quality control of the Hi-C sample like the number of valid pairs, duplicated pairs, self-ligations etc. Usually, only 25%-40% of the reads are valid and used to build the Hi-C matrix mostly because of the reads that are on repetitive regions that need to be discarded.</p>
           </blockquote>
 
           <blockquote class="comment">
@@ -496,6 +496,7 @@ This is often caused by bins of low counts. Use a more stringent filtering of bi
             <li>“Plot title” to <code class="highlighter-rouge">HiC dm3 chr2L:14500000-16500000</code></li>
             <li>“Matrix to compute on.” to the corrected matrix from hicCorrectMatrix step</li>
             <li>“Depth” to <code class="highlighter-rouge">750000</code></li>
+            <li>“Width” to <code class="highlighter-rouge">4</code></li>
             <li>“Boundaries file” to <code class="highlighter-rouge">hicFindTads on data XX: TAD domains</code></li>
             <li>“Show x labels” to <code class="highlighter-rouge">Yes</code></li>
           </ul>
@@ -505,7 +506,6 @@ This is often caused by bins of low counts. Use a more stringent filtering of bi
             <li>“Choose style of the track” to <code class="highlighter-rouge">Bedgraph matrix track</code></li>
             <li>“Plot title” to <code class="highlighter-rouge">TAD separation score</code></li>
             <li>“Track file bedgraph format” to <code class="highlighter-rouge">hicFindTads on data XX: TAD information in bm file</code></li>
-            <li>“Color of track” to blue</li>
             <li>“Width” to <code class="highlighter-rouge">4</code></li>
             <li>“Set type to lines” to ‘True’</li>
           </ul>
@@ -518,40 +518,45 @@ This is often caused by bins of low counts. Use a more stringent filtering of bi
             <li>“Minimum value” to <code class="highlighter-rouge">-0.03</code></li>
             <li>“Maximum value” to <code class="highlighter-rouge">0.03</code></li>
             <li>“Width” to <code class="highlighter-rouge">1.5</code></li>
+            <li>“Color of track” to a color of your choice</li>
           </ul>
         </li>
         <li>“+Insert Include tracks in your plot”
           <ul>
             <li>“Choose style of the track” to <code class="highlighter-rouge">Bigwig track</code></li>
-            <li>“Plot title” to <code class="highlighter-rouge">PC1</code></li>
+            <li>“Plot title” to <code class="highlighter-rouge">PC2</code></li>
             <li>“Track file bigwig format” the second computed <code class="highlighter-rouge">hicPCA</code> result</li>
             <li>“Minimum value” to <code class="highlighter-rouge">-0.03</code></li>
             <li>“Maximum value” to <code class="highlighter-rouge">0.03</code></li>
             <li>“Width” to <code class="highlighter-rouge">1.5</code></li>
+            <li>“Color of track” to a color of your choice</li>
           </ul>
         </li>
         <li>“+Insert Include tracks in your plot”
           <ul>
             <li>“Choose style of the track” to <code class="highlighter-rouge">Bigwig track</code></li>
-            <li>“Plot title” to <code class="highlighter-rouge">PC1</code></li>
+            <li>“Plot title” to <code class="highlighter-rouge">H3K36me3</code></li>
             <li>“Track file bigwig format” to <code class="highlighter-rouge">H3K36me3</code></li>
             <li>“Width” to <code class="highlighter-rouge">1.5</code></li>
+            <li>“Color of track” to a color of your choice</li>
           </ul>
         </li>
         <li>“+Insert Include tracks in your plot”
           <ul>
             <li>“Choose style of the track” to <code class="highlighter-rouge">Bigwig track</code></li>
-            <li>“Plot title” to <code class="highlighter-rouge">PC1</code></li>
+            <li>“Plot title” to <code class="highlighter-rouge">H3K27me3</code></li>
             <li>“Track file bigwig format” to <code class="highlighter-rouge">H3K27me3</code></li>
             <li>“Width” to <code class="highlighter-rouge">1.5</code></li>
+            <li>“Color of track” to a color of your choice</li>
           </ul>
         </li>
         <li>“+Insert Include tracks in your plot”
           <ul>
             <li>“Choose style of the track” to <code class="highlighter-rouge">Bigwig track</code></li>
-            <li>“Plot title” to <code class="highlighter-rouge">PC1</code></li>
+            <li>“Plot title” to <code class="highlighter-rouge">H4K16ac</code></li>
             <li>“Track file bigwig format” to <code class="highlighter-rouge">H4K16ac</code></li>
             <li>“Width” to <code class="highlighter-rouge">1.5</code></li>
+            <li>“Color of track” to a color of your choice</li>
           </ul>
         </li>
         <li>“+Insert Include tracks in your plot”
@@ -562,6 +567,7 @@ This is often caused by bins of low counts. Use a more stringent filtering of bi
             <li>“Width” to <code class="highlighter-rouge">3</code></li>
             <li>“Type” to <code class="highlighter-rouge">genes</code></li>
             <li>“Gene rows” to <code class="highlighter-rouge">15</code></li>
+            <li>“Color of track” to a color of your choice</li>
           </ul>
         </li>
       </ul>
@@ -576,7 +582,7 @@ This is often caused by bins of low counts. Use a more stringent filtering of bi
 
 <p>In this tutorial we used HiCExplorer to analyze drosophila melanogaster cells. We mapped the chimeric reads and created a contact matrix, to reduce noise this contact matrix was normalized. We showed how to visualize a contact matrix and how we can investigate topological associating domains and relate them to additional data like gene tracks.</p>
 
-<p>To improve your learned skills we offer an additonal tutorial based on mouse stem cells: <a href="http://hicexplorer.readthedocs.io/en/latest/content/example_usage.html">following work</a>.</p>
+<p>To improve your learned skills we offer an additional tutorial based on mouse stem cells: <a href="http://hicexplorer.readthedocs.io/en/latest/content/example_usage.html">following work</a>.</p>
 
 
         
