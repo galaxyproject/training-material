@@ -476,24 +476,3 @@ This entire analysis is available as a [Galaxy history](https://usegalaxy.org/u/
 
 
 Now you know how to call variants in non-diploid system, so try it on bacteria, viruses etc...
-
-
-# Exercise
-
-Time to really do it yourself. Please, complete the following exercise:
-
-> ### Find variants in a virus
->
->Suppose you obtained a virus from some source and you would like to see how it is different from its published reference sequence. You have sequenced the virus and obtained two Illumina files (these files are large, so don't open them. Rather copy their addresses (right click) and use them to upload into Galaxy as explained in *Hints* section below):
->
->- [Forward reads](https://www.bx.psu.edu/~anton/share/ng_test_data/bmmb554/hw4/f.fq.gz)
->- [Reverse reads](https://www.bx.psu.edu/~anton/share/ng_test_data/bmmb554/hw4/r.fq.gz)
->
->Analyze these files using Galaxy as was explained in this lesson by mapping them against [this reference genome](https://www.bx.psu.edu/~anton/share/ng_test_data/bmmb554/hw4/phix.fa) (again right click to copy the address); see *Tips*).
->
->    > ### {% icon tip %} Tips
->    >
->    > - You need to upload reads and the reference genome into Galaxy (https://usegalaxy.org) as shown in [this video](https://vimeo.com/120973708)
->    > - You will be mapping reads against an uploaded reference genome as shown in [this video](https://vimeo.com/123108417).
->    {: .tip}
-{: .comment}
