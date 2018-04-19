@@ -40,28 +40,30 @@ The original data was available at [STACKS website](https://creskolab.uoregon.ed
 >    > * Open the Galaxy Upload Manager
 >    > * Select **Paste/Fetch Data**
 >    > * Paste the following links into the text field
->    >     * https://zenodo.org/record/1219888/files/female
->    >     * https://zenodo.org/record/1219888/files/male
->    >     * https://zenodo.org/record/1219888/files/progeny_1
->    >     * https://zenodo.org/record/1219888/files/progeny_2
->    >     * https://zenodo.org/record/1219888/files/progeny_3
->    >     * https://zenodo.org/record/1219888/files/progeny_4
->    >     * https://zenodo.org/record/1219888/files/progeny_5
->    >     * https://zenodo.org/record/1219888/files/progeny_6
->    >     * https://zenodo.org/record/1219888/files/progeny_7
->    >     * https://zenodo.org/record/1219888/files/progeny_8
->    >     * https://zenodo.org/record/1219888/files/progeny_9.fa
->    >     * https://zenodo.org/record/1219888/files/progeny_10.fa
->    >     * https://zenodo.org/record/1219888/files/progeny_11.fa
->    >     * https://zenodo.org/record/1219888/files/progeny_12.fa
->    >     * https://zenodo.org/record/1219888/files/progeny_13.fa
->    >     * https://zenodo.org/record/1219888/files/progeny_14.fa
->    >     * https://zenodo.org/record/1219888/files/progeny_15.fa
->    >     * https://zenodo.org/record/1219888/files/progeny_16.fa
->    >     * https://zenodo.org/record/1219888/files/progeny_17.fa
->    >     * https://zenodo.org/record/1219888/files/progeny_18.fa
->    >     * https://zenodo.org/record/1219888/files/progeny_19.fa
->    >     * https://zenodo.org/record/1219888/files/progeny_20.fa
+>    >  ```
+>    > https://zenodo.org/record/1219888/files/female
+>    > https://zenodo.org/record/1219888/files/male
+>    > https://zenodo.org/record/1219888/files/progeny_1
+>    > https://zenodo.org/record/1219888/files/progeny_2
+>    > https://zenodo.org/record/1219888/files/progeny_3
+>    > https://zenodo.org/record/1219888/files/progeny_4
+>    > https://zenodo.org/record/1219888/files/progeny_5
+>    > https://zenodo.org/record/1219888/files/progeny_6
+>    > https://zenodo.org/record/1219888/files/progeny_7
+>    > https://zenodo.org/record/1219888/files/progeny_8
+>    > https://zenodo.org/record/1219888/files/progeny_9
+>    > https://zenodo.org/record/1219888/files/progeny_10
+>    > https://zenodo.org/record/1219888/files/progeny_11
+>    > https://zenodo.org/record/1219888/files/progeny_12
+>    > https://zenodo.org/record/1219888/files/progeny_13
+>    > https://zenodo.org/record/1219888/files/progeny_14
+>    > https://zenodo.org/record/1219888/files/progeny_15
+>    > https://zenodo.org/record/1219888/files/progeny_16
+>    > https://zenodo.org/record/1219888/files/progeny_17
+>    > https://zenodo.org/record/1219888/files/progeny_18
+>    > https://zenodo.org/record/1219888/files/progeny_19
+>    > https://zenodo.org/record/1219888/files/progeny_20
+>    > ```
 >    > * Press **Start**  
 >
 >    As default, Galaxy takes the link as name. It also do not link the dataset to a database or a reference genome.
