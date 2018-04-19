@@ -4,14 +4,16 @@ topic_name: metagenomics
 tutorial_name: mothur-miseq-sop
 ---
 
-# 概要
+# Overview
 {:.no_toc}
 
-このチュートリアルでは、Mothur ソフトウェアパッケージを開発した [Schloss lab](http://www.schlosslab.org/) が作成した [MiSeq データの標準操作手順（SOP）](https://www.mothur.org/wiki/MiSeq_SOP)を Galaxy で行います。
+In this tutorial we will perform the
+[Standard Operating Procedure (SOP) for MiSeq data](https://www.mothur.org/wiki/MiSeq_SOP), developed by the
+creators of the Mothur software package, the [Schloss lab](http://www.schlosslab.org/), within Galaxy.
 
-> ### アジェンダ
+> ### Agenda
 >
-> このチュートリアルでは、次のことを行います:
+> In this tutorial, we will:
 >
 > 1. TOC
 > {:toc}
@@ -19,67 +21,82 @@ tutorial_name: mothur-miseq-sop
 {: .agenda}
 
 
-> ### {% icon comment %} 注意
-> Galaxy にある Mothur ツールのそれぞれにはヘルプセクションにある mothur wiki へのリンクが含まれています。ここではツールのすべてのインプットや、アウトプット、そしてパラメーターに関するより詳しい内容を見ることができます。
+> ### {% icon comment %} Note
+> Each of the Mothur tools in Galaxy contains a link to the mothur wiki in the help section. Here you can find
+> more details about all the inputs, outputs and parameters for the tool.
 > <br><br>
 > Your results may deviate slightly from the ones presented in this tutorial due to differing tool or
 > reference data versions or stochastic processes in the algorithms.
 {: .comment}
 
 
-# データの取得と準備  
+# Obtaining and preparing data
 
-このチュートリアルでは16S rRNA データを使用しますが、チュートリアルの同様の流れを WGS データを使用しても行うことができます。
+In this tutorial we use 16S rRNA data, but similar pipelines can be used for WGS data.
 
-> ### {% icon tip %} 背景: 16S リボソーム RNA 遺伝子
+> ### {% icon tip %} Background: The 16S ribosomal RNA gene
 > ![The 16S ribosomal RNA gene](../../images/16S_gene.png) <br><br>
 >
-> 16S rRNA 遺伝子は私たちの目的に非常に適したいくつかの特性を持っています
+> The 16S rRNA gene has several properties that make it ideally suited for our purposes
 >
-> 1. すべての生物に存在する
-> 2. シングルコピー（組換えが起きない）
-> 3. 高度に保存されていて、高度に可変な領域
-> 4. 巨大なリファレンスのデータベース
+> 1. Present in all living organisms
+> 2. Single copy (no recombination)
+> 3. Highly conserved + highly variable regions
+> 4. Huge reference databases
 >
 > ![16S Variable regions](../../images/16S_variableregions.jpg)
 >
-> 高度に保存された領域は異なる生物の間で遺伝子を標的とすることを容易にし、高度に可変な領域は異なる種を区別することを可能にします。
+> The highly conserved regions make it easy to target the gene across different organisms,
+> while the highly variable regions allow us to distinguish between different species.
 >
 > (slide credit [https://www.slideshare.net/beiko/ccbc-tutorial-beiko ](https://www.slideshare.net/beiko/ccbc-tutorial-beiko ))
 {: .tip}
 
-## インプットデータを理解する
-このチュートリアルでは宿主の健康に対する腸内微生物叢の一般的な変化の影響を知ることに興味があります。
-そのために、離乳後365日間マウスから新鮮な糞を毎日採集しました。離乳後最初の150日間（dpw）は、 nothing was done to our mice except allow them to eat, get fat, and be merry. 私たちは離乳後最初の10日間で観察された急激な重量の変化が140～150日の間で観察された微生物叢と比較して安定した微生物叢に影響を及ぼすのかどうか興味がありました。このチュートリアルでは OTU、phylotype、そして系統発生学的な手法を組み合わせて使うことでこの問いに取り組みます。
+## Understanding our input data
+In this tutorial we are interested in understanding the effect of normal variation in the gut microbiome on host health.
+To that end, fresh feces from mice were collected on a daily basis for 365 days post weaning. During the first 150 days
+post weaning (dpw), nothing was done to our mice except allow them to eat, get fat, and be merry. We were curious whether
+the rapid change in weight observed during the first 10 dpw affected the stability microbiome compared to the microbiome
+observed between days 140 and 150. We will address this question in this tutorial using a combination of OTU, phylotype,
+and phylogenetic methods.
 
 ![Experiment setup](../../images/experiment_setup.png)
 
-このチュートリアルを行いやすくするため、私たちはデータの一部分のみを用意していて、1匹の動物の10のタイムポイント（初期の5時点と後期の5時点）のフローファイルをあなたに提供します。解析パイプラインと実験機器のエラー率を評価するために、21種のバクテリア株由来のゲノムDNAからなる疑似集団を追加でリシーケンスしました。
+To make this tutorial easier to execute, we are providing only part of the data - you are given the flow files for one
+animal at 10 time points (5 early and 5 late). In order to assess the error rate of our analysis pipeline and experimental
+setup, we additionally resequenced a mock community composed of genomic DNA from 21 bacterial strains.
 
-> ### {% icon comment %} データセットの詳細
-> オリジナルのデータセットのサイズが大きいため（3.9 GB）fastq ファイルの362 ペアのうちの20 ペアを与えています。例えば、次の2ファイルが表示されます: `F3D0_S188_L001_R1_001.fastq` と `F3D0_S188_L001_R2_001.fastq`  
+> ### {% icon comment %} Dataset details
+> Because of the large size of the original dataset (3.9 GB) you are given 20 of the 362 pairs of fastq
+> files. For example, you will see two files: `F3D0_S188_L001_R1_001.fastq`, and
+> `F3D0_S188_L001_R2_001.fastq`  
 >
-> これら2つのファイルは0日目の3匹のメス（F3D0）（離乳した日）のものに対応しています。1つ目のファイル（および名前にR1があるすべてのファイル）はフォワードリードに対応していて、もう一方の2つ目のファイル（および名前にR2があるすべてのファイル）はリバースリードに対応しています。
+> These two files correspond to Female 3 on Day 0 (F3D0) (i.e. the day of weaning). The first file
+> (and all those with R1 in the name) correspond to the forward reads, while the second (and all
+> those with R2 in the name) correspond to the reverse reads.
 >
-> これらの配列は250 bpで、16S rRNA 遺伝子の V4 領域で重なり合っています; この領域はおよそ250 bp ほどの長さです。データセットを見てみると、22個のfastqファイルがあり、これらはメス3匹と疑似集団1つからの10のタイムポイントを表しています。`HMP_MOCK.v35.fasta` も見ることができて、このファイルには疑似集団で使用されている配列が fasta 形式で並べて入っています。
+> These sequences are 250 bp and overlap in the V4 region of the 16S rRNA gene; this region is about
+> 253 bp long. Looking at the datasets, you will see 22 fastq files, representing 10 time points from
+> Female 3 and 1 mock community. You will also see `HMP_MOCK.v35.fasta` which contains the sequences used
+> in the mock community that were sequenced in fasta format.
 {: .comment}
 
 <!-- note: mothur seems to have forgotten day 4 in their SOP example data, therefore this description and results
 in this document differ slightly from the description on their website -->
 
 
-## Galaxy にデータをインポートする
+## Importing the data into Galaxy
 
-それではインプットデータについて理解したので、Galaxy のヒストリーにデータを取得してみましょう:
+Now that we know what our input data is, let's get it into our Galaxy history:
 
-> ### {% icon hands_on %} ハンズオン: データを入手する
+> ### {% icon hands_on %} Hands-on: Obtaining our data
 >
-> 1. 空の解析ヒストリーがあることを確認してください。そのヒストリーに名前をつけましょう。
+> 1. Make sure you have an empty analysis history. Give it a name.
 >
->    > ### {% icon tip %} 新しいヒストリーを始める
+>    > ### {% icon tip %} Starting a new history
 >    >
->    > * ヒストリーパネルの上部にある**歯車アイコン**をクリックする
->    > * メニューから**新しく作成**というオプションを選択する
+>    > * Click the **gear icon** at the top of the history panel
+>    > * Select the option **Create New** from the menu
 >    {: .tip}
 >
 > 2. **Import Sample Data.** The data for this course may be available from a shared library in Galaxy
