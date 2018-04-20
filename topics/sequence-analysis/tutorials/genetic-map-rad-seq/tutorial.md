@@ -7,8 +7,11 @@ tutorial_name: genetic-map-rad-seq
 # Introduction
 {:.no_toc}
 
-This tutorial is based on the analysis originally described this [publication](http://www.genetics.org/content/188/4/799). Further information about the pipeline is available from a [dedicated page of the official STACKS website](http://catchenlab.life.illinois.edu/stacks). Authors describe that they developed a genetic map in the spotted gar and present here data from a single linkage group. The gar genetic map is an F1 pseudotest cross between two parents and 94 of their F1 progeny. They took the markers that appeared in one of the linkage groups and worked backwards to provide the raw reads from all of the stacks contributing to that linkage group.
-
+This tutorial is based on the analysis originally described in [publication](http://www.genetics.org/content/188/4/799). 
+Further information about the pipeline is available from a [dedicated page of the official STACKS website](http://catchenlab.life.illinois.edu/stacks).
+Authors describe that they developed a genetic map in the spotted gar and present here data from a single linkage group.
+The gar genetic map is an F1 pseudotest cross between two parents and 94 of their F1 progeny. They took the markers that
+appeared in one of the linkage groups and worked backwards to provide the raw reads from all of the stacks contributing to that linkage group.
 
 We here proposed to re-analyze these data at least until genotypes determination. Data are already clean so you don't have to demultiplex it using barcode information through `Process Radtags tool`.
 
@@ -25,7 +28,7 @@ We here proposed to re-analyze these data at least until genotypes determination
 
 ## Data upload
 
-The original data is available at [STACKS website](http://catchenlab.life.illinois.edu/stacks/param_tut.php) and the subset used here is findable on [CeSGO hub](https://cesgo.genouest.org/resources/370/supportingdocs).
+The original data is available at [STACKS website](http://catchenlab.life.illinois.edu/stacks/) and the subset used here is findable on [Zenodo](https://zenodo.org/record/1219888#.WtZlK5c6-00).
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
@@ -41,29 +44,31 @@ The original data is available at [STACKS website](http://catchenlab.life.illino
 >    > * Open the Galaxy Upload Manager
 >    > * Select **Paste/Fetch Data**
 >    > * Paste the following links into the text field
->    >     * https://cesgo.genouest.org/resources/375/download/female.fa
->    >     * https://cesgo.genouest.org/resources/376/download/male.fa
->    >     * https://cesgo.genouest.org/resources/377/download/progeny_1.fa
->    >     * https://cesgo.genouest.org/resources/378/download/progeny_2.fa
->    >     * https://cesgo.genouest.org/resources/379/download/progeny_3.fa
->    >     * https://cesgo.genouest.org/resources/380/download/progeny_4.fa
->    >     * https://cesgo.genouest.org/resources/381/download/progeny_5.fa
->    >     * https://cesgo.genouest.org/resources/382/download/progeny_6.fa
->    >     * https://cesgo.genouest.org/resources/383/download/progeny_7.fa
->    >     * https://cesgo.genouest.org/resources/384/download/progeny_8.fa
->    >     * https://cesgo.genouest.org/resources/385/download/progeny_9.fa
->    >     * https://cesgo.genouest.org/resources/386/download/progeny_10.fa
->    >     * https://cesgo.genouest.org/resources/387/download/progeny_11.fa
->    >     * https://cesgo.genouest.org/resources/388/download/progeny_12.fa
->    >     * https://cesgo.genouest.org/resources/389/download/progeny_13.fa
->    >     * https://cesgo.genouest.org/resources/390/download/progeny_14.fa
->    >     * https://cesgo.genouest.org/resources/391/download/progeny_15.fa
->    >     * https://cesgo.genouest.org/resources/392/download/progeny_16.fa
->    >     * https://cesgo.genouest.org/resources/393/download/progeny_17.fa
->    >     * https://cesgo.genouest.org/resources/394/download/progeny_18.fa
->    >     * https://cesgo.genouest.org/resources/395/download/progeny_19.fa
->    >     * https://cesgo.genouest.org/resources/417/download/progeny_20.fa
->    > * Press **Start**
+>    >  ```
+>    > https://zenodo.org/record/1219888/files/female
+>    > https://zenodo.org/record/1219888/files/male
+>    > https://zenodo.org/record/1219888/files/progeny_1
+>    > https://zenodo.org/record/1219888/files/progeny_2
+>    > https://zenodo.org/record/1219888/files/progeny_3
+>    > https://zenodo.org/record/1219888/files/progeny_4
+>    > https://zenodo.org/record/1219888/files/progeny_5
+>    > https://zenodo.org/record/1219888/files/progeny_6
+>    > https://zenodo.org/record/1219888/files/progeny_7
+>    > https://zenodo.org/record/1219888/files/progeny_8
+>    > https://zenodo.org/record/1219888/files/progeny_9
+>    > https://zenodo.org/record/1219888/files/progeny_10
+>    > https://zenodo.org/record/1219888/files/progeny_11
+>    > https://zenodo.org/record/1219888/files/progeny_12
+>    > https://zenodo.org/record/1219888/files/progeny_13
+>    > https://zenodo.org/record/1219888/files/progeny_14
+>    > https://zenodo.org/record/1219888/files/progeny_15
+>    > https://zenodo.org/record/1219888/files/progeny_16
+>    > https://zenodo.org/record/1219888/files/progeny_17
+>    > https://zenodo.org/record/1219888/files/progeny_18
+>    > https://zenodo.org/record/1219888/files/progeny_19
+>    > https://zenodo.org/record/1219888/files/progeny_20
+>    > ```
+>    > * Press **Start**  
 >
 >    As default, Galaxy takes the link as name. It also do not link the dataset to a database or a reference genome.
 >
