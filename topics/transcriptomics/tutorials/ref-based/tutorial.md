@@ -7,7 +7,7 @@ tutorial_name: ref-based
 # Introduction
 {:.no_toc}
 
-In the study of [Brooks *et al.* 2011](http://genome.cshlp.org/content/21/2/193.long), the *Pasilla* (*PS*) gene, *Drosophila* homologue of the Human splicing regulators Nova-1 and Nova-2 Proteins, was depleted in *Drosophila melanogaster* by RNAi. The authors wanted to identify exons that are regulated by *Pasilla* gene using RNA sequencing data.
+In the study of [Brooks *et al.* 2011](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3032923/), the *Pasilla* (*PS*) gene, *Drosophila* homologue of the Human splicing regulators Nova-1 and Nova-2 Proteins, was depleted in *Drosophila melanogaster* by RNAi. The authors wanted to identify exons that are regulated by *Pasilla* gene using RNA sequencing data.
 
 Total RNA was isolated and used for preparing either single-end or paired-end RNA-seq libraries for treated (PS depleted) samples and untreated samples. These libraries were sequenced to obtain a collection of RNA sequencing reads for each sample. The effects of *Pasilla* gene depletion on splicing events can then be analyzed by comparison of RNA sequencing data of the treated (PS depleted) and the untreated samples.
 

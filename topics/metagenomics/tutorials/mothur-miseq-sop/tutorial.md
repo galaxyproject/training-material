@@ -1047,7 +1047,7 @@ repeated-measures ANOVA and find that there was no significant difference based 
 
 Beta diversity is a measure of the similarity of the membership and structure found between *different* samples.
 The default calculator in the following section is *thetaYC*, which is the [Yue & Clayton theta similarity
-coefficient](https://doi.org/10.1080/STA-200066418)
+coefficient](http://csyue.nccu.edu.tw/2005communicationindex.pdf)
 
 > ### {% icon hands_on %} Hands-on: Beta diversity
 >

@@ -7,7 +7,11 @@ tutorial_name: genetic-map-rad-seq
 # Introduction
 {:.no_toc}
 
-Original description was reachable on a [dedicated page of the official STACKS website](http://catchenlab.life.illinois.edu/stacks/). Writers describe that they developed a genetic map in the spotted gar and present here data from a single linkage group. The gar genetic map is an F1 pseudotest cross between two parents and 94 of their F1 progeny. They took the markers that appeared in one of the linkage groups and worked backwards to provide the raw reads from all of the stacks contributing to that linkage group.
+This tutorial is based on the analysis originally described in [publication](http://www.genetics.org/content/188/4/799). 
+Further information about the pipeline is available from a [dedicated page of the official STACKS website](http://catchenlab.life.illinois.edu/stacks).
+Authors describe that they developed a genetic map in the spotted gar and present here data from a single linkage group.
+The gar genetic map is an F1 pseudotest cross between two parents and 94 of their F1 progeny. They took the markers that
+appeared in one of the linkage groups and worked backwards to provide the raw reads from all of the stacks contributing to that linkage group.
 
 We here proposed to re-analyze these data at least until genotypes determination. Data are already clean so you don't have to demultiplex it using barcode information through `Process Radtags tool`.
 
@@ -24,7 +28,7 @@ We here proposed to re-analyze these data at least until genotypes determination
 
 ## Data upload
 
-The original data was available at [STACKS website](https://creskolab.uoregon.edu/stacks/) as a stacks_samples.tar.gz file, unreachable for now. The subset used here is findable on [Zenodo](https://zenodo.org/record/1219888#.WtZlK5c6-00).
+The original data is available at [STACKS website](http://catchenlab.life.illinois.edu/stacks/) and the subset used here is findable on [Zenodo](https://zenodo.org/record/1219888#.WtZlK5c6-00).
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
