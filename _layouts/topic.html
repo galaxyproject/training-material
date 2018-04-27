@@ -46,7 +46,16 @@ layout: base
             {% for material in topic.material %}
                 {% if material.enable != "false" %}
                     <tr>
-                        <td>{{ material.title }}</td>
+                        <td>
+                            {{ material.title }}
+                            {% if material.tags %}
+                                <div class="">
+                                    {% for tag in material.tags %}
+                                        <span class="label label-default">{{ tag }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </td>
                         {% if material.type == "introduction" %}
                             <td>
                                 {% if material.slides %}
