@@ -70,7 +70,7 @@ steps:
   - title: Rename the input data and edit datatype
     content: >-
       The uploaded dataset is in the history, but its names corresponds to the
-      link. We want to rename them it to something meaningful, e.g.
+      link. We want to rename the histroy item to something meaningful, e.g.
       HiC_S2_1p_10min_lowU_R1.<br><br> <ul>
         <li>Click on the pencil icon beside the file to "Edit Attributes"</li>
         <li>Change the name in "Name" to get only the name of the sample</li>
@@ -111,6 +111,7 @@ steps:
         <li>“Gap extension penalty (-E)” to <b>50</b></li>
         <li>“Penalty for clipping (-L)” to <b>0</b></li>
       </ul>
+      Click on 'Execute'.
     position: left
   - title: Rename the result
     element: '.history-right-panel .list-items > *:first'
@@ -167,8 +168,7 @@ steps:
 
       Normally 25% of the total reads are selected. The output matrices have
       counts for the genomic regions. The extension of output matrix files is
-      .h5 or .cool. A quality report is created in e.g.
-      <i>hicMatrix/R1_10kb_QC</i>, have a look at the report hicQC.html.
+      .h5 or .cool. A quality report is created have a look at the history item <b>hicBuildMatrix QC on data X</b>.
     backdrop: false
   - title: Rename the output
     element: '.history-right-panel .list-items > *:first'
@@ -187,9 +187,7 @@ steps:
       <atarget="_blank" 
       href="http://hicexplorer.readthedocs.io/en/latest/content/tools/hicMergeMatrixBins.html#hicmergematrixbins">hicMergeMatrixBins</a>
       merges the bins into larger bins of given number (specified by –numBins).
-      We will merge 100 bins in the original (uncorrected) matrix and then
-      correct it. The new bin size is going to be 10.000 bp * 100 = 1.000.000 bp
-      = 1 Mb
+      We will merge 100 bins in the original matrix to get the desired new bin size: 10.000 bp * 100 = 1.000.000 bp = 1 Mbp
     backdrop: true
   - title: hicMergeMatrixBins
     element: '#tool-search-query'
@@ -207,10 +205,11 @@ steps:
   - title: hicMergeMatrixBins
     element: '#tool-search'
     content: |-
-      Execute the tool on the output from previous step with:
+      Execute the tool on the 10kb contact matrix:
       <ul>
         <li>“Number of bins to merge” to <b>100</b></li>
       </ul>
+      Click on 'Execute'.
     position: left
   - title: Rename the output
     element: '.history-right-panel .list-items > *:first'
@@ -236,8 +235,7 @@ steps:
       with:
 
       <ul>
-        <li>“Plot title” to Hi-C matrix for <b>dm3</b></li>
-        <li>“Remove masked bins from the matrix” to <b>Yes</b></li>
+        <li>“Plot title” to <b>Hi-C matrix for dm3</b></li>
         <li>“Plot the log1p of the matrix values" to <b>Yes</b></li>
         <li>“Chromosomes to include (and order to plot in)” to <b>chr2L</b></li>
         <li>”+ Insert Chromosomes to include (and order to plot in):” to <b>chr2R</b></li>
@@ -279,7 +277,7 @@ steps:
     content: |-
       Execute the tool on the <i>10 kb contact matrix</i> with:
       <ul>
-        <li>“Range restriction (in bp)” to <b>Diagnostic plot</b></li>
+        <li>“Mode” to <b>Diagnostic plot</b></li>
         <li>“Chromosomes to include (and order to plot in)” to <b>chr2L</b></li>
         <li>”+ Insert Chromosomes to include (and order to plot in):” to <b>chr2R</b></li>
         <li>”+ Insert Chromosomes to include (and order to plot in):” to <b>chr3L</b></li>
@@ -338,7 +336,8 @@ steps:
     content: Rename the corrected matrix to <i>10 kb corrected contact matrix</i>
     position: left
   - title: Plotting the corrected Hi-C matrix
-    content: We can now plot chromosome 2L with the corrected matrix.
+    content: In the next step we will plot the contact matrix only for chromosome 2L with the corrected matrix. 
+    Therefore we can use the <i>10kb contact matrix</i> instead of the <i>1 MB contact matrix</i>.
     backdrop: true
   - title: Plotting the corrected Hi-C matrix
     element: '#tool-search-query'
@@ -363,6 +362,7 @@ steps:
         <li>“Plot only this region” to <b>chr2L</b></li>
         <li>“Plot the log1p of the matrix values” to <b>Yes</b></li>
       </ul>
+      Click on 'Execute'.
     position: left
   - title: Load new data
     content: >-
