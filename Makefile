@@ -108,7 +108,7 @@ create-env: install-conda ## create conda environment
 
 install: ## install dependencies
 	npm install decktape
-	gem install bundler
+	gem install --install-dir $(CONDA_PREFIX) bundler
 	bundle install
 .PHONY: install
 
