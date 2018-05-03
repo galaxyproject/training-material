@@ -109,7 +109,7 @@ create-env: install-conda ## create conda environment
 install: ## install dependencies
 	npm install decktape
 	gem install --install-dir $(CONDA_PREFIX) bundler
-	bundle install
+	bundle install --path vendor/bundle
 .PHONY: install
 
 pdf: detached-serve ## generate the PDF of the tutorials and slides
