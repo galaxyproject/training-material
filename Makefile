@@ -8,9 +8,13 @@ SITE_URL=http://localhost:4000/training-material
 PDF_DIR=_pdf
 REPO=$(shell echo "$${ORIGIN_REPO:-galaxyproject/training-material}")
 BRANCH=$(shell echo "$${ORIGIN_BRANCH:-master}")
+MINICONDA_URL = https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
+SHELL=bash
+CONDA_VERSION := $(shell conda --version 2>/dev/null)
 
 ifeq ($(shell uname -s),Darwin)
 	CHROME=/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome
+	MINICONDA_URL=https://repo.continuum.io/miniconda/Miniconda3-latest-MacOSX-x86_64.sh
 endif
 
 default: help
@@ -84,6 +88,23 @@ clean: ## clean up junk files
 	@find . -name .DS_Store -exec rm {} \;
 	@find . -name '*~' -exec rm {} \;
 .PHONY: clean
+
+install-conda: ## install Miniconda
+ifndef CONDA_VERSION
+	wget $(MINICONDA_URL) -O miniconda.sh
+	bash miniconda.sh -b
+	conda config --set show_channel_urls yes --set always_yes yes
+	conda update conda conda-env
+	conda config --system --add channels conda-forge
+	conda config --system --add channels defaults
+	conda config --system --add channels r
+	conda config --system --add channels bioconda
+endif
+.PHONY: install-conda
+
+create-env: install-conda ## create conda environment
+	conda env create -f environment.yml -q --force
+.PHONY: create-env	
 
 install: ## install dependencies
 	npm install decktape
