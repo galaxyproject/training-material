@@ -65,7 +65,7 @@ layout: base
                         {% endif %}
                     {% endif %}
 
-                    {% if topic.docker_image and topic.docker_image != "" or instances[topic.name] and instances[topic.name][tutorial.name] %}
+                    {% if topic.docker_image and topic.docker_image != "" or instances[topic.name].supported and instances[topic.name]['tutorials'][tutorial.name].supported %}
                         <li class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
                                 {% icon instances %} Galaxy Instances
@@ -76,11 +76,11 @@ layout: base
                                         {% icon docker_image %} Docker image
                                     </a>
                                 {% endif %}
-                                {% if topic.docker_image and topic.docker_image != "" and instances[topic.name] and instances[topic.name][tutorial.name] %}
+                                {% if topic.docker_image and topic.docker_image != "" and instances[topic.name].supported and instances[topic.name]['tutorials'][tutorial.name].supported %}
                                     <div class="dropdown-divider"></div>
                                 {% endif %}
-                                {% if instances[topic.name] and instances[topic.name][tutorial.name] %}
-                                    {% for inst in instances[topic.name][tutorial.name] %}
+                                {% if instances[topic.name]['tutorials'][tutorial.name].supported %}
+                                    {% for inst in instances[topic.name]['tutorials'][tutorial.name]['instances'] %}
                                         {% if inst[1].supported %}
                                         <a class="dropdown-item" href="{{ inst[1].url }}" title="{{ inst[0] }}">
                                             {{ inst[0] }}

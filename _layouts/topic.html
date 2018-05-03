@@ -43,7 +43,7 @@ layout: base
                 <th>Galaxy tour</th>
                 {% endif %}
 
-                {% if instances[topic.name] %}
+                {% if instances[topic.name].supported %}
                 <th>Galaxy instances</th>
                 {% endif %}
             </tr>
@@ -74,7 +74,7 @@ layout: base
                                 <td></td>
                                 <td></td>
                             {% endif %}
-                            {% if instances[topic.name] %}
+                            {% if instances[topic.name].supported %}
                                 <td></td>
                             {% endif %}
                         {% elsif material.type == "tutorial" %}
@@ -125,14 +125,14 @@ layout: base
                                     {% endif %}
                                 </td>
                             {% endif %}
-                            {% if instances[topic.name] %}
+                            {% if instances[topic.name].supported %}
                                 <td>
-                                {% if instances[topic.name][material.name] %}
+                                {% if instances[topic.name]['tutorials'][material.name].supported %}
                                     <a href="#" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
                                         {% icon instances %}
                                     </a>
                                     <ul class="dropdown-menu">
-                                    {% for inst in instances[topic.name][material.name] %}
+                                    {% for inst in instances[topic.name]['tutorials'][material.name]['instances'] %}
                                         {% if inst[1].supported %}
                                         <a class="dropdown-item" href="{{ inst[1].url }}" title="{{ inst[0] }}">
                                             {{ inst[0] }}

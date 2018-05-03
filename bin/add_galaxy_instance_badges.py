@@ -130,27 +130,27 @@ if __name__ == '__main__':
     # Collect a list of instances seen
     instances = []
     for topic in data:
-        for training in data[topic]:
-            for instance in data[topic][training]:
-                data[topic][training][instance]['supported'] = True
+        for training in data[topic]['tutorials']:
+            for instance in data[topic]['tutorials'][training]['instances']:
+                data[topic]['tutorials'][training]['instances'][instance]['supported'] = True
                 instances.append(instance)
     instances = sorted(set(instances))
 
     # Mark the unsupported ones as such for easier processing later.
     for topic in data:
-        for training in data[topic]:
+        for training in data[topic]['tutorials']:
             for instance in instances:
                 # Not in one of the existing supported ones
-                if instance not in data[topic][training]:
-                    data[topic][training][instance] = {'supported': False}
+                if instance not in data[topic]['tutorials'][training]['instances']:
+                    data[topic]['tutorials'][training]['instances'][instance]['supported'] = False
 
     # Map of instance -> badges
     instance_badges = {}
     # Count of tutorials in each topic.
     for topic in data:
         # All trainings, not just those available
-        for training in sorted(data[topic]):
-            for instance in data[topic][training]:
+        for training in sorted(data[topic]['tutorials']):
+            for instance in data[topic]['tutorials'][training]['instances']:
                 if instance not in instance_badges:
                     instance_badges[instance] = {}
 
@@ -158,7 +158,7 @@ if __name__ == '__main__':
                     instance_badges[instance][topic] = []
 
                 # If available, green badge
-                is_supported = data[topic][training][instance]['supported']
+                is_supported = data[topic]['tutorials'][training]['instances'][instance]['supported']
                 # We'll only place the badge in the HTML if the training is
                 # supported (but the unavailable badge will still be available
                 # in case they ever go out of compliance.)
