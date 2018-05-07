@@ -36,13 +36,14 @@ We can use Jekyll to run a server to check if the tutorial is correctly added an
 
 # Installation of the requirements
 
-The first step is to install the requirements inside a conda environment. This step has to be done once.
+The first step is to install the needed tools inside a conda environment. A conda environment is a directory that contains a specific collection of packages. For example here to run the website, we need ruby, pandas, requests, etc. By creating a conda environment and installing the needed tools there, we do not affect your main installation.
+
+This step has to be done once.
 
 > ### {% icon hands_on %} Hands-on: Install the requirements
 >
-> 1. Install [conda](https://conda.io/miniconda.html)
-> 2. Navigate to `training-material/` folder
-> 3. Create the conda environment: `conda env create -f environment.yml`
+> 1. Navigate to the `training-material/` folder
+> 3. Install `conda` and create the conda environment: `make create-env`
 > 4. Activate the conda environment: `source activate galaxy_training_material`
 > 5. Install Jekyll and related modules using [RubyGems](https://rubygems.org/pages/download): `make install`
 {: .hands_on}
