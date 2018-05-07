@@ -85,6 +85,9 @@ check-links-gh-pages:  ## validate HTML on gh-pages branch (for daily cron job)
 clean: ## clean up junk files
 	@rm -rf _site
 	@rm -rf .sass-cache
+	@rm -rf .bundle
+	@rm -rf vendor
+	@rm -rf node_modules
 	@find . -name .DS_Store -exec rm {} \;
 	@find . -name '*~' -exec rm {} \;
 .PHONY: clean
@@ -108,6 +111,10 @@ create-env: install-conda ## create conda environment
 install: ## install dependencies
 	npm install decktape
 	gem install --install-dir $(CONDA_PREFIX) bundler
+ifeq ($(shell uname -s),Darwin)
+	brew install libxml2
+	gem install --install-dir vendor/bundle/ruby/2.4.0 nokogiri -- --use-system-libraries --with-xml=$(`brew --cellar libxml2`)
+endif
 	bundle install --path vendor/bundle
 .PHONY: install
 
