@@ -97,7 +97,6 @@ ifndef CONDA_VERSION
 	conda update conda conda-env
 	conda config --system --add channels conda-forge
 	conda config --system --add channels defaults
-	conda config --system --add channels r
 	conda config --system --add channels bioconda
 endif
 .PHONY: install-conda
