@@ -1,8 +1,10 @@
 {
+    "a_galaxy_workflow": "true",
     "uuid": "2909d897-1870-4144-afd1-23567932e933",
     "tags": [],
     "format-version": "0.1",
     "name": "Microbial variant calling",
+    "annotation": "",
     "steps": {
         "0": {
             "tool_id": null,
@@ -179,7 +181,16 @@
                     "name": "outdir"
                 }
             ],
-            "workflow_outputs": [],
+            "workflow_outputs": [
+                {
+                    "output_name": "snpconsensus",
+                    "label": "snippy_fasta"
+                },
+                {
+                    "output_name": "snpsum",
+                    "label": "snippy_tabular"
+                }
+            ],
             "input_connections": {
                 "fastq_input|fastq_input1": {
                     "output_name": "output",
@@ -225,7 +236,12 @@
                     "name": "output"
                 }
             ],
-            "workflow_outputs": [],
+            "workflow_outputs": [
+                {
+                    "output_name": "output",
+                    "label": "jbrowse_html"
+                }
+            ],
             "input_connections": {
                 "track_groups_1|data_tracks_0|data_format|annotation": {
                     "output_name": "snpgff",
@@ -266,7 +282,5 @@
             "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/0.7.0.3",
             "type": "tool"
         }
-    },
-    "annotation": "",
-    "a_galaxy_workflow": "true"
+    }
 }
