@@ -82,19 +82,16 @@ in this document differ slightly from the description on their website -->
 >    > * メニューから**新しく作成**というオプションを選択する
 >    {: .tip}
 >
-> 2. **Import Sample Data.** The data for this course may be available from a shared library in Galaxy
-> (ask your instructor). If this is not the case, you can upload it yourself.
-> - Option 1: From data library:
->   - Navigate to the shared data library, you should find 20 pairs of fastq files; 19 from the mice,
-> and one pair from the mock community.
-> - Option 2: From your computer:
->   - Obtain data directly from Zenodo: [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.165147.svg)](https://doi.org/10.5281/zenodo.165147)
->   - Download `input_data.zip` and unzip it
->   - Upload all files to your history.
+> 2. **サンプルデータをインポートする。**このコースのデータは Galaxy の共有ライブラリから入手することができます（インストラクターに聞いてください）。もしデータがない場合は、自分自身でアップロードすることができます。
+> - オプション 1: データライブラリから:
+>   - 共有データライブラリに移動すると、20 ペアの fastq ファイルが見つかります; マウスからは19 ペア、そして残り1 ペアは疑似集団からのものです。
+> - オプション 2: コンピュータから:
+>   - Zenodo から直接データを取得する: [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.165147.svg)](https://doi.org/10.5281/zenodo.165147)
+>   - `input_data.zip` をダウンロードし解凍する
+>   - すべてのファイルをヒストリーにアップロードする。
 > <br><br>
 >
-> 3. **Import Reference Data.**  Go back to the data library and import the following reference
-> datasets, or download them from Zenodo (`reference_data.zip`) and upload them to your history:
+> 3. **リファレンスデータをインポートする。**データライブラリに戻り、以下のリファレンスデータセットをインポートするか、 Zenodo からダウンロードして (`reference_data.zip`) ヒストリーにアップロードしましょう:
 >  - `silva.v4.fasta`
 >  - `HMP_MOCK.v35.fasta`
 >  - `trainset9_032012.pds.fasta`
@@ -102,86 +99,58 @@ in this document differ slightly from the description on their website -->
 >
 {: .hands_on}
 
-Now that's a lot of files to manage. Luckily Galaxy can make life a bit easier by allowing us to create
-*dataset collections*. This enables us to easily run tools on multiple datasets at once. Let's
-create a collection now:
+現在扱うファイルがたくさんあります。幸いなことに Galaxy では *dataset collections* を作成することでファイルの扱いを少し用簡単にすることができます。これにより一度に複数のデータセットでツールを簡単に実行することができます。それではコレクションを作成してみましょう:
 
-> ### {% icon hands_on %} Hands-on: Organizing our data into a collection
+> ### {% icon hands_on %} ハンズオン: データをコレクションにまとめる
 >
-> Since we have paired-end data, each sample consist of two separate fastq files, one containing the
-> forward reads, and one containing the reverse reads. We can recognize the pairing from the file names,
-> which will differ only by `_R1` or `_R2` in the filename. We can tell Galaxy about this paired naming
-> convention, so that our tools will know which files belong together.
+> ペアエンドデータを持っているため、各サンプルは2つの別々の fastq ファイルで構成されており、1つはフォワードリード、もう1つはリバースリードのものが入っております。ペアはファイル名で分かり、このペアはファイル名の `_R1`または` _R2` のみ異なっています。Galaxy にはこのペアの命名法について認識させることができ、このためどのファイルがどのファイルとセットになっているかをツールが認識できるようになっています。
 >
-> 1. Click on the **checkmark icon** at top of your history.
+> 1. ヒストリー上部にある**チェックマークアイコン**をクリックする。
 >   ![Checkmark icon in history menu](../../../../shared/images/history_menu_buttons2.png)
 >
-> 2. Select all the fastq files (40 in total), then click on **for all selected..** and select
->   **Build List of Dataset Pairs** from the dropdown menu.
-> 3. In the next dialog window you can create the list of pairs. By default Galaxy will look for pairs
->   of files that differ only by a `_1` and `_2` part in their names. In our case however, these
->   should be `_R1` and `_R2`. Please change these values accordingly. You should now see a list of
->   pairs suggested by Galaxy,
+> 2. すべての fastq ファイル（計40個）を選択して、**各項目を...**をクリックしてドロップダウンメニューから **Build List of Dataset Pairs** を選択する。
+> 3. 次のダイアログウィンドウでペアのリストを作成することができます。デフォルトでは Galaxy は名前において `_1` と `_2` の部分だけが異なるファイルのペアを探します。私たちの場合は、`_R1` と `_R2` を探すようにしなければなりません。よってこれらの値を変更しましょう。変更すると Galaxy がペアのリストを提案し表示します。
 >   ![List of suggested paired datasets](../../images/create_collection.png) <br><br>
 >
-> 4. Examine the pairings, if it looks good, you can click on **auto-pair** to create the suggested
->   pairs.
+> 4. ペアを調べて、大丈夫そうだったら、**auto-pair** をクリックすることで提案されたペアを作成できます。
 >   ![The result of pairing](../../images/create_collection2.png) <br><br>
->   The middle segment is the name for each pair. You can change these names by clicking on them. These
->   names will be used as sample names in the downstream analysis so always make sure they are
->   informative.
->   **Important:** Make sure these sample names contain only alphanumeric characters. If you've
->   imported the data from Zenodo, the sample names will default to the full url, please change these
->   values to only their last part, e.g. `F3D0`, `F3D5` etc.
+>   中央のセグメントは各ペアの名前です。これらの名前はクリックして変更することができます。これらの名前は以降の解析でサンプル名として使用されるため、常に内容がわかるような名前であることを確認してください。
+>   **重要:**これらのサンプル名が英数字のみであることを確認してください。Zenodo からデータをインポートした場合、デフォルトではサンプル名はフルの URL になっているため、`F3D0` や `F3D5` などというような、最後の部分のみに変更してください。
 >
-> 5. Once you are happy with your pairings, enter a name for your new collection at the bottom right of
->   the screen. Then click the **Create List** button. A new dataset collection item will now appear in
->   your history.
+> 5. 納得のいくペアになったら、画面の右下に新しいコレクションの名前を入力します。そして **Create List** ボタンをクリックしましょう。ヒストリーに新しいデータセットのコレクションアイテムが表示されます。
 {: .hands_on}
 
 
-# Quality Control
+# 品質管理
 
-## Reducing sequencing and PCR errors
+## シーケンシングと PCR のエラーを減らす
 
-The first thing we want to do is combine our forward and reverse reads for each sample. This is done
-using the `make.contigs` command, which requires the paired collection as input. This command will extract
-the sequence and quality score data from your fastq files, create the reverse complement of the reverse
-read and then join the reads into contigs. Then we will combine all samples into a single fasta file,
-remembering which reads came from which samples using a *group* file.
+まず初めに各サンプルのフォワードリードとリバースリードを組み合わせます。これはインプットとしてペアのコレクションが必要で、 `make.contigs` コマンドを利用して行われます。このコマンドは fastq ファイルからシーケンスと品質スコアのデータを抽出し、リバースリードの reverse complement を作成してリードをコンティグに加えます。そしてすべてのサンプルを1つの fasta ファイルにまとめ、*group* ファイルを使ってどのサンプルからどのリードを持ってきたかを記憶させます。
 
-> ### {% icon comment %} Algorithm details
-> We have a very simple algorithm to do this. First, we align the pairs of sequences. Next, we look
-> across the alignment and identify any positions where the two reads disagree. If one sequence has a
-> base and the other has a gap, the quality score of the base must be over 25 to be considered real. If
-> both sequences have a base at that position, then we require one of the bases to have a quality score
-> 6 or more points better than the other. If it is less than 6 points better, then we set the consensus
-> base to an N.
+> ### {% icon comment %} アルゴリズムの詳細
+> これを行うための非常にシンプルなアルゴリズムを私たちは持っています。まずはシーケンスのペアを揃えます。次にアライメントを調べて２つのリードが一致しない位置を特定します。１つのシーケンスにベースがありもう１つにギャップがある場合、ベースの品質スコアは２５以上であることを考慮する必要があります。両方のシーケンスにベースがある場合は、ベースの1つが他のものよりも６点以上の品質スコアである必要があります。もしそれが６点以下であれば、コンセンサスベースを N に設定します。
 {: .comment}
 
-### Merging our data
+### データを統合する
 
-#### Make contigs from paired-end reads
+#### ペアエンドリードからコンティグを作成する
 
-In this experiment we used paired-end sequencing, this means sequencing was done from from both ends of each
+この実験ではペアエンドシーケンシングを使用し、 this means sequencing was done from from both ends of each
 fragment, resulting in an overlap in the middle. We will now combine these pairs of reads into *contigs*.
 
 ![Merging into contigs](../../images/16S_merge_contigs.png)
 
 
-> ### {% icon hands_on %} Hands-on: Combine forward and reverse reads into contigs
+> ### {% icon hands_on %} ハンズオン: フォワードとリバースリードを結合してコンティグにする
 >
-> - **Make.contigs** {% icon tool %} with the following parameters
->   - "Way to provide files" to the *Multiple pairs - Combo mode*
->   - "Fastq pairs" to the collection you just created
->   - Leave all other parameters to the default settings <br><br>
+> - **Make.contigs** {% icon tool %} で次のように設定する
+>   - "Way to provide files" → *Multiple pairs - Combo mode*
+>   - "Fastq pairs" → 先ほど作成したコレクションを選択
+>   - 他のすべてのパラメーターはデフォルトのままにする <br><br>
 >
 {: .hands_on}
 
-This step merges the forward and reverse reads into contigs for each pair, and
-then combines the results into a single fasta file. To retain information about
-which reads originated from which samples, it also made a group file. View that
-file now, it should look something like this:
+このステップではフォワードリードとリバースリードを各ペアのコンティグに統合し、結果を1つの fasta ファイルにまとめています。また、サンプルからのリードについての情報を保持するために、グループファイルも作成しています。そのファイルを表示すると、次のようになっています:
 
 ```
 M00967_43_000000000-A3JHG_1_1101_10011_3881     F3D0
@@ -189,26 +158,25 @@ M00967_43_000000000-A3JHG_1_1101_10050_15564    F3D0
 M00967_43_000000000-A3JHG_1_1101_10051_26098    F3D0
 ```
 
-Here the first column contains the read name, and the second column contains the sample name.
+このファイルでは1列目にリードの名前があり、２列目にサンプル名が表記されています。
 
 
-### Data Cleaning
+### データクリーニング
 
-For more information on the topic of quality control, please see our training materials
-[here]({{site.baseurl}}/topics/sequence-analysis/)
+品質管理のトピックについてより知りたい場合は、training material をご覧ください。
+[こちら]({{site.baseurl}}/topics/sequence-analysis/)
 
-Next we want to improve the quality of our data. But first, let's get a feel of our data
+次にデータの品質を向上させようと思います。ですがまずは、データをよく見てみましょうNext we want to improve the quality of our data. But first, let's get a feel of our data
 
-> ### {% icon hands_on %} Hands-on: Summarize data
+> ### {% icon hands_on %} ハンズオン: データを要約する
 >
-> - **Summary.seqs** {% icon tool %} with the following parameters
->   - "fasta" parameter to the `trim.contigs.fasta` file created by the make.contigs tool
->   - We do not need to supply a names or count file
+> - **Summary.seqs** {% icon tool %} で次のように設定する
+>   - "fasta" のパラメーターには make.contigs ツールによって作成された `trim.contigs.fasta` ファイルを選択する
+>   - name や count にファイルを選択する必要はありません
 >
 {: .hands_on}
 
-The `summary` output files give information per read. The `logfile` outputs also contain some summary
-statistics:
+`summary` のアウトプットファイルはリードごとの情報を表示します。`logfile` のアウトプットにも次のようないくつかのサマリーの統計が含まれています:
 
 ```
              Start    End        NBases     Ambigs   Polymer  NumSeqs
@@ -223,69 +191,58 @@ Mean:        1        252.811    252.811    0.70063  4.44854
 # of Seqs:   152360
 ```
 
-This tells us that we have 152,360 sequences that for the most part vary between 248 and 253 bases.
-Interestingly, the longest read in the dataset is 502 bp. Be suspicious of this. Recall that the reads
-are supposed to be 251 bp each. This read clearly didn't assemble well (or at all). Also, note that at
-least 2.5% of our sequences had some ambiguous base calls. We'll take care of these issues in the next
-step when we run `screen.seqs`.
+これは 152,360の配列があり、大部分が248～253塩基の間にあることを示しています。
+面白いことに、データセット内の最も長いリードは 502 bp です。これについて疑いましょう。それぞれのリードの長さは 251 bp であることを思い出してください。このリードははっきりと（または全く）集めていませんでした。そして、塩基配列の少なくとも 2.5% に曖昧なリードが含まれていることも注意してください。次のステップでは `screen.seqs` を実行してこれらの問題を対処します。
 
-The following tool will remove any sequences with ambiguous bases and anything longer than 275 bp.
+次のツールでは曖昧な塩基や 275 bp 以上の長さのリードである配列を除去します。
 
-> ### {% icon hands_on %} Hands-on: Filter reads based on quality and length
+> ### {% icon hands_on %} ハンズオン: 品質と長さに基づいてリードをフィルタリングする
 >
-> - **Screen.seqs** {% icon tool %} with the following parameters
->   - "fasta" to the `trim.contigs.fasta` file created by the make.contigs tool
->   - "group" the group file created in the make.contigs step
->   - "maxlength" parameter to `275`
->   - "maxambig" parameter to `0`
+> - **Screen.seqs** {% icon tool %} で次のように設定する
+>   - "fasta" には make.contigs ツールで作成された `trim.contigs.fasta` ファイルを選択する
+>   - "group" には make.contigs のステップで作成された group file を選択する
+>   - "maxlength" → `275`
+>   - "maxambig" → `0`
 >
 > > ### {% icon question %} Question
 > >
-> > How many reads were removed in this screening step? (Hint: run the summary.seqs tool again)
+> > このスクリーニングのステップでいくつのリードが除去されましたか？（ヒント：summary.seqs ツールを再実行しましょう）
 > >
 > >    <details>
-> >    <summary>Click to view answer</summary>
+> >    <summary>クリックして答えを表示</summary>
 > >    23,488. <br>
-> >    This can be determined by looking at the number of lines in bad.accnos output of screen.seqs
-> >    or by comparing the total number of seqs between of the summary log before and after this screening
-> >    step
+> >    これは screen.seqs のアウトプットである bad.accnos のライン数を見るか、スクリーニングステップ前後のサマリーログ間の seqs の合計数を比べることで分かります。
 > >    </details>
 > {: .question}
 {: .hands_on}
 
-## Processing improved sequences
+## 改良されたシーケンスの処理
 
-### Optimize files for computation
-Because we are sequencing many of the same organisms, we anticipate that many of our sequences are
-duplicates of each other. Because it's computationally wasteful to align the same thing a bazillion
-times, we'll unique our sequences using the `unique.seqs` command:
+### 計算のためにファイルを最適化する
+私たちは多くの同種の生物をシーケンスしているので、シーケンスの多くは互いに重複していることが予想されます。同じことに莫大な時間を費やすのは計算上無駄なので、 `unique.seqs` コマンドを用いてシーケンスを一意なものにします:
 
-> ### {% icon hands_on %} Hands-on: Remove duplicate sequences
+> ### {% icon hands_on %} ハンズオン: 重複しているシーケンスを除去する
 >
-> - **Unique.seqs** {% icon tool %} with the following parameters
->   - "fasta" to the `good.fasta` output from Screen.seqs
+> - **Unique.seqs** {% icon tool %} で次のように設定する
+>   - "fasta" には Screen.seqs のアウトプットである `good.fasta` を選択する
 >
 >
 > > ### {% icon question %} Question
 > >
-> > How many sequences were unique? how many duplicates were removed?
+> > 一意な配列の数はいくつでしょうか？除去された重複した配列の数はいくつでしょうか？
 > >
 > >    <details>
-> >    <summary>Click to view answer</summary>
-> >    16,426 unique sequences and 112,446 duplicates. <br>
-> >    This can be determined from the number of lines in the fasta (or names) output, compared to the
-> >    number of lines in the fasta file before this step. The log file also contains a line showing the
-> >    total number of sequences before and the command: <br><br>
+> >    <summary>クリックして答えを表示</summary>
+> >    一意な配列は 16,426 あり、112,446 の配列が重複していました。 <br>
+> >    これはこのステップの前の fasta ファイルのライン数と、fasta（もしくは names）アウトプットのライン数を比べることで分かります。ログファイルには前段階の配列の合計数とコマンドも書いてあります: <br><br>
 > >    mothur > unique.seqs(fasta=fasta.dat) <br>
 > >    128872	16426
 > >    </details>
 > {: .question}
 {: .hands_on}
 
-This tool outputs two files, one is a fasta file containing only the unique sequences, and a *names files*.
-The names file consists of two columns, the first contains the sequence names for each of the unique
-sequences, and the second column contains all other sequence names that are identical to the representative
-sequence in the first column.
+このツールは2つのファイルをアウトプットとし、1つは一意な配列のみを含んだ fasta ファイルで、*names files* です。
+この names file は2列で構成されていて、1列目には一意な配列の配列名があり、２列目には1列目の代表的な配列と同じ配列を持つすべての配列名が書かれています。
 
 ```
 name          representatives
@@ -295,17 +252,17 @@ read_name7    read_name8
 ...
 ```
 
-To reduce file sizes further and streamline analysis, we can now summarize the data in a *count table*.
+ファイルサイズを小さくし解析を能率化するために、データを *count table* にまとめることができます。
 
-> ### {% icon hands_on %} Hands-on: Generate count table
+> ### {% icon hands_on %} ハンズオン: カウントテーブルを生成する
 >
-> - **Count.seqs** {% icon tool %} with the following parameters
->   - "name" to the `names` output from Unique.seqs
->   - "Use a Group file" to `yes`
->   - "group" to the group file we created using the Screen.seqs tool
+> - **Count.seqs** {% icon tool %} で次のように設定する
+>   - "name" では Unique.seqs のアウトプットである `names` を選択する
+>   - "Use a Group file" → `yes`
+>   - "group" では Screen.seqs ツールを用いて作成した group file を選択する
 {: .hands_on}
 
-The *count_table* output will look something like this:
+*count_table* のアウトプットは次のようになっています:
 
 ```
 Representative_Sequence                      total   F3D0   F3D1  F3D141  F3D142  ...
@@ -315,20 +272,17 @@ M00967_43_000000000-A3JHG_1_1101_13234_1983  10522   425    281   340     205
 ...
 ```
 
-The first column contains the read names of the representative sequence, and the subsequent columns contain
-the number of duplicates of this sequence observed in each sample.
+1列目には代表的な配列のリード名が書かれていて、後続の列には各サンプルで見られる配列の重複数が書かれています。
 
 ### Sequence Alignment
 
-For more information on the topic of alignment, please see our training materials
-[here]({{site.baseurl}}/topics/sequence-analysis/)
+アライメントについて詳しく知りたい場合は、training materials をご覧ください[こちら]({{site.baseurl}}/topics/sequence-analysis/)
 
-We are now ready to align our sequences to the reference. This step is an important
-step to perform to improve the clustering of your OTUs [[Schloss 2013]](https://doi.org/10.1038/ismej.2012.102)
+シーケンスをリファレンスに対してアライメントする準備ができました。このステップは OTU のクラスタリングを改善するために実行する重要な段階です [[Schloss 2013]](https://doi.org/10.1038/ismej.2012.102)
 
-> ### {% icon hands_on %} Hands-on: Align sequences
+> ### {% icon hands_on %} ハンズオン: Align sequences
 >
-> 1. **Align.seqs** {% icon tool %} with the following parameters
+> 1. **Align.seqs** {% icon tool %} で次のように設定する
 >   - "fasta" to the fasta output from Unique.seqs
 >   - "reference" to the `silva.v4.fasta` reference file
 > <br><br>
