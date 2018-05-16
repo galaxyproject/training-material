@@ -1,25 +1,11 @@
 ---
 layout: tutorial_hands_on
-topic_name: training
+topic_name: contributing
 tutorial_name: create-new-tutorial-content
 ---
 
 # Introduction
 {:.no_toc}
-
-Galaxy is a great solution to train the bioinformatics concepts:
-
-- numerous bioinformatics tools are available (almost 5,000 in the [ToolShed](https://toolshed.g2.bx.psu.edu/))
-- it can be used by people without any computer science skills
-- it trains to use technology, outlining available resources and efforts that have made them accessible to researchers
-- it is scalable
-
-In 2016 the Galaxy Training Network decided to set up a new infrastructure to ease delivering Galaxy-related training material. The idea was that of providing it as a shared community effort, using open and online-based platforms.
-
-We took inspiration from [Software Carpentry](https://software-carpentry.org), and collected everything [on a GitHub repository](https://github.com/galaxyproject/training-material).
-We decided on a structure based on tutorials grouped by topics, and coupled with hands-on sections, thus providing support for on-line self-training as well as workshops. Each tutorial follows the same structure, and comes with a virtualised instance to run the training material everywhere.
-
-In this tutorial, you will learn how to write your first tutorial in Markdown and contribute it to the Galaxy Training Network.
 
 > ### Agenda
 >
@@ -33,16 +19,6 @@ In this tutorial, you will learn how to write your first tutorial in Markdown an
 # Setting up a new tutorial
 
 Here, we want to develop a small tutorial to explain how to use BLAST.
-
-## Clone the Galaxy Training material repository
-
-Before anything, we need to get a local copy of the content of the GitHub repository by cloning it
-
-> ### {% icon hands_on %} Hands-on: Clone the GitHub repository
->
-> 1. Clone the repository locally with: `git clone https://github.com/galaxyproject/training-material.git`
-> 2. Check that you have the same structure as the one in [GitHub](https://github.com/galaxyproject/training-material)
-{: .hands_on}
 
 ## Defining the topic
 
@@ -86,16 +62,13 @@ To ease this process, we created a template for new tutorials, complete with all
 
 ## Keeping track of the changes
 
-You need to keep track of all your new changes with a version control system (VCS). To do so, you will use Git as VCS, and GitHub as your personal hosting service.
+You need to keep track of all your new changes with a control version system (CVS). To do so, you will use Git as VCS, and GitHub as your personal hosting service.
 
-This repository of tutorials is developed collaboratively among more than 40 contributors. Therefore, to ease the collaboration, we are using the [GitHub flow](https://guides.github.com/introduction/flow/) approach, which is based on forks, branches, and pull requests.
+This repository of tutorials is developed collaboratively. Therefore, to ease the collaboration, we are using the [GitHub flow](https://guides.github.com/introduction/flow/) approach, which is based on forks, branches, and pull requests. To learn more how to use it, you can follow our [dedicated tutorial]()
 Let's start tracking your changes!
 
 > ### {% icon hands_on %} Hands-on: Start keeping track of the changes
 >
-> 1. [Create a fork](https://help.github.com/articles/fork-a-repo/) of this repository on GitHub. Your account will contain a copy of the original collaboratively developed training material
-> 2. Link your fork on GitHub to the local (cloned) copy on your machine:
->     `git remote add fork https://github.com/<YOUR_GITHUB_USERNAME>/training-material`
 > 3. Create a new branch called "similarity-search" in your local copy:
 >     `git checkout -b similarity-search`
 > 4. Add your changes to the new branch:
@@ -103,7 +76,7 @@ Let's start tracking your changes!
 > 5. Commit your changes in that branch:
 >     `git commit -m "Set up the similarity search tutorial"`
 > 6. Push the new branch to your fork on GitHub:
->     `git push fork similarity-search`
+>     `git push <fork_name> similarity-search`
 {: .hands_on}
 
 The GitHub interface can also help you in the process of editing a file. It will automatically create a fork of this repository where you can safely work.

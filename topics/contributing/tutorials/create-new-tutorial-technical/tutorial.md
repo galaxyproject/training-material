@@ -1,27 +1,13 @@
 ---
 layout: tutorial_hands_on
-topic_name: training
-tutorial_name: create-new-tutorial-technical-infrastructure
+topic_name: contributing
+tutorial_name: create-new-tutorial-technical
 ---
 
 # Introduction
 {:.no_toc}
 
-Galaxy is a great solution to train the bioinformatics concepts:
-
-- numerous bioinformatics tools are available (almost 5,000 in the ToolShed)
-- it can be used by people without amy computer science skills
-- it trains to use technology, outlining available resources and efforts that have made them accessible to researchers
-- it is scalable
-
-In 2016, the Galaxy Training Network decide to set up a new infrastructure for delivering easily Galaxy related training material. The idea was to develop something open and online based on a community effort, as always in Galaxy.
-
-We took inspiration from [Software Carpentry](https://software-carpentry.org) and collected everything on a GitHub repository: [https://github.com/galaxyproject/training-material ](https://github.com/galaxyproject/training-material).
-We decided on a structure based on tutorials with hands-on, fitting both for online self-training but also for workshops, grouped in topics. Each tutorial follows the same structure and comes with a virtualised isntance to run the training everywhere.
-
-To able to run a tutorial, we need a Galaxy instance where the needed tools are installed along with the data. We need then to describe the needed technical infrastructure. This description can be be used to populate an existing Galaxy instance or to automatically set up a Docker Galaxy flavour and also to test if a public Galaxy instance is able to run the tool.
-
-In this tutorial, you will learn how to extract the technical infrastructure for a tutorial, how to prepare an existing Galaxy and how to create a virtualised Galaxy instance, based on Docker, to run your training - either on normal computers or cloud environments.
+In this tutorial, you will learn how to create a virtualised Galaxy instance, based on Docker, to run your training - either on normal computers or cloud environments.
 
 > ### Agenda
 >
@@ -32,35 +18,35 @@ In this tutorial, you will learn how to extract the technical infrastructure for
 >
 {: .agenda}
 
-# Extracting the technical details to support your training
-
-Once you wrote the tutorial in the `tutorial.md`, you need to create other files to detail the requirements for the tutorial:
-
-- Workflow files
-- `tools.yaml` file
-- `data-library.yaml` file
-- `data-manager.yaml` file
-
-## Extracting workflows
-
-The first step is to to extract workflows with the different steps of the tutorial and add them to the `workflows` directory in the tutorial. These files can be used to extract the needed tools and also to run and test a tutorial automatically on a Galaxy instance.
-
-> ### {% icon hands_on %} Hands-on: Extract the workflow
+> ### Devloping GTN training material
 >
-> 1. Extract the workflow for the tutorial
-> 2. Add some description about the tutorial in a `README.md` file with the workflow file
-{: .hands_on}
+> This tutorial is part of a series to develop GTN training material, feel free to also look at:
+>
+> 1. [Writing content in markdown](../create-new-tutorial-content/tutorial.html)
+> 1. [Defining metadata](../create-new-tutorial-metadata/tutorial.html)
+> 1. [Setting up the infrastructure](../create-new-tutorial-jekyll/tutorial.html)
+> 1. [Creating Interactive Galaxy Tours](../create-new-tutorial-tours/tutorial.html)
+> 1. [Building a Docker flavor](../create-new-tutorial-docker/tutorial.html)
+> 1. [Submitting the new tutorial to the GitHub repository](../../../dev/tutorials/github-contribution/slides.html)
+{: .agenda}
+
+
+# Building a Galaxy instance specifically for your training
+
+To able to run the tutorial, we need a Galaxy instance where the needed tools are installed and the data. We need then to describe the needed technical infrastructure.
+
+This description will be used to automatically set up a Docker Galaxy flavour and also to test if a public Galaxy instance is able to run the tool.
 
 ## Filling the `tools.yaml`
 
-Once you have the workflow, you can extract from it the required tools into the `tools.yaml` file. This file contains the description of the required tools that could be installed from the ToolShed:
+The first file to fill is the `tools.yaml` file, containing the description of the required tools that could be installed from the ToolShed.
+
+This file looks like:
 
 ```
 ---
 api_key: admin
 galaxy_instance: http://localhost:8080
-install_resolver_dependencies: True
-install_tool_dependencies: False
 tools:
 - name: tool1
   owner: owner
@@ -81,35 +67,9 @@ with:
 > 1. Add the BLAST tool into the `tools.yaml` file
 {: .hands_on}
 
-This list of tools can be automatically extracted from the workflow using [Ephemeris](https://ephemeris.readthedocs.io/en/latest/index.html) (which should be in the conda environment):
-
-```
-$ workflow-to-tools -w path/to/worflow -o path/to/tools.yaml
-```
-
-After the extraction, some formatting is needed:
-
-1. Add at the beginning:
-
-    ```
-    ---
-    api_key: admin
-    galaxy_instance: http://localhost:8080
-    ```
-
-2. Change the `tool_panel_section_label` to something more informative
-
-> ### {% icon hands_on %} Hands-on: Fill the `tools.yaml` from your workflow
->
-> 1. Fill the `tools.yaml` file using your workflow and Ephemeris
-> 2. Format the `tools.yaml` file correctly
-{: .hands_on}
-
 ## Filling the `data-library.yaml`
 
 The data can also be integrated in the Galaxy instance inside a data libraries and then make the data shared between the users. It lets then avoid every trainees to redownload the input data.
-
-We recommend to put the data on [Zenodo](https://zenodo.org/).
 
 Such data are described in the `data-library.yaml`:
 
@@ -161,16 +121,24 @@ data_managers:
         - __dbkeys__
 ```
 
+## Extracting workflows
+
+Once the tutorial is ready, we need to extract workflows with the different steps of the tutorial and add them to the `workflows` directory in the tutorial with some explanation about the tutorial in a `README.md` file
+
+> ### {% icon hands_on %} Hands-on: Extract the workflow
+>
+> 1. Extract the workflow for the tutorial
+> 2. Add some description about the tutorial in a `README.md` file with the workflow file
+{: .hands_on}
+
 ## Adding a Galaxy Interactive Tour
 
 A Galaxy Interactive Tour is a way to go through an entire analysis, step by step inside Galaxy in an interactive and explorative way.
 It is a great way to run the tutorial directly inside Galaxy. To learn more about creating a Galaxy tour please have a look at our [dedicated tour training]({{site.baseurl}}/topics/training/tutorials/create-new-tutorial-tours/tutorial.html).
 
-# Population a Galaxy instance for your training
+## Testing the technical infrastructure
 
-TO FILL
-
-# Building a Galaxy instance specifically for your training
+Once we defined all the requirements for running the tutorial, we can test these requirements.
 
 Every topic will come with a Docker image containing the tools, data, workflows and Galaxy Interactive Tours required by each tutorial of this topic. The Docker image is described in the Dockerfile found in the `docker` directory of each topic. This file uses scripts to automatically add the files for each tutorial. The only thing to change is the name of the topic in the Dockerfile copied from the templates.
 
@@ -201,5 +169,6 @@ Every topic will come with a Docker image containing the tools, data, workflows 
 > 1. [Defining metadata](../create-new-tutorial-metadata/tutorial.html)
 > 1. [Setting up the infrastructure](../create-new-tutorial-jekyll/tutorial.html)
 > 1. [Creating Interactive Galaxy Tours](../create-new-tutorial-tours/tutorial.html)
+> 1. [Building a Docker flavor](../create-new-tutorial-docker/tutorial.html)
 > 1. [Submitting the new tutorial to the GitHub repository](../../../dev/tutorials/github-contribution/slides.html)
 {: .agenda}

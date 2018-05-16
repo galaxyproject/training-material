@@ -1,6 +1,6 @@
 ---
 layout: tutorial_hands_on
-topic_name: training
+topic_name: contributing
 tutorial_name: create-new-tutorial-tours
 ---
 
