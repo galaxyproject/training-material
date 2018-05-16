@@ -43,7 +43,8 @@ Due to the large size of this dataset, we have downsampled it to only include re
 >    >
 >    > Below are the links to the read files that can be copied and pasted in the upload manager.
 >    >
->    > ``` https://zenodo.org/record/583140/files/G1E_rep1_forward_read_%28SRR549355_1%29
+>    > ```
+>    > https://zenodo.org/record/583140/files/G1E_rep1_forward_read_%28SRR549355_1%29
 >    > https://zenodo.org/record/583140/files/G1E_rep1_reverse_read_%28SRR549355_2%29
 >    > https://zenodo.org/record/583140/files/G1E_rep2_forward_read_%28SRR549356_1%29
 >    > https://zenodo.org/record/583140/files/G1E_rep2_reverse_read_%28SRR549356_2%29
