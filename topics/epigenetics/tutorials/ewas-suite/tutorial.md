@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 topic_name: your_topic
-tutorial_name: your_tutorial_name
+tutorial_name: ewas_suite_analysis
 ---
 
 # Introduction
@@ -9,8 +9,7 @@ tutorial_name: your_tutorial_name
 
 <!-- This is a comment. -->
 
-General introduction about the topic and then an introduction of the tutorial (the questions and the objectives). It is nice also to have a scheme to sum up the pipeline used during the tutorial. The idea is to give to trainees insight into the content of the tutorial and the (theoretical and technical) key concepts they will learn.
-
+The field of cancer genomics has demonstrated the power of massively parallel sequencing techniques to inform on the genes and specific alterations that drive tumor onset and progression. Although large comprehensive sequence data sets continue to be made increasingly available, data analysis remains an ongoing challenge, particularly for laboratories lacking dedicated resources and bioinformatics expertise. To address this, we have provide training based on  Galaxy tools ewas suite that represent many popular algorithms for detecting somatic genetic alterations from cancer genome and exome data.  
 > ### Agenda
 >
 > In this tutorial, we will deal with:
