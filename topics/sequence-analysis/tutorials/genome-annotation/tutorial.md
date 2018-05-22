@@ -45,7 +45,7 @@ It consists of three main steps:
 
 # Structural Annotation
 
-For the genome annotation we use a piece of the *Aspergillus fumigatus* [genome sequence](../../input_data/Aspergillus_sequence.fasta) as input file.
+For the genome annotation we use a piece of the *Aspergillus fumigatus* [genome sequence](https://zenodo.org/record/1250793/files/Aspergillus_sequence.fasta) as input file.
 
 ## Sequence Features
 
