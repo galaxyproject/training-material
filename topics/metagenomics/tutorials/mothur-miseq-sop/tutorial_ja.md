@@ -27,7 +27,7 @@ tutorial_name: mothur-miseq-sop
 {: .comment}
 
 
-# データの取得と準備  
+# データの取得と準備
 
 このチュートリアルでは16S rRNA データを使用しますが、チュートリアルの同様の流れを WGS データを使用しても行うことができます。
 
@@ -57,7 +57,7 @@ tutorial_name: mothur-miseq-sop
 このチュートリアルを行いやすくするため、私たちはデータの一部分のみを用意していて、1匹の動物の10のタイムポイント（初期の5時点と後期の5時点）のフローファイルをあなたに提供します。解析パイプラインと実験機器のエラー率を評価するために、21種のバクテリア株由来のゲノムDNAからなる疑似集団を追加でリシーケンスしました。
 
 > ### {% icon comment %} データセットの詳細
-> オリジナルのデータセットのサイズが大きいため（3.9 GB）fastq ファイルの362 ペアのうちの20 ペアを与えています。例えば、次の2ファイルが表示されます: `F3D0_S188_L001_R1_001.fastq` と `F3D0_S188_L001_R2_001.fastq`  
+> オリジナルのデータセットのサイズが大きいため（3.9 GB）fastq ファイルの362 ペアのうちの20 ペアを与えています。例えば、次の2ファイルが表示されます: `F3D0_S188_L001_R1_001.fastq` と `F3D0_S188_L001_R2_001.fastq`
 >
 > これら2つのファイルは0日目の3匹のメス（F3D0）（離乳した日）のものに対応しています。1つ目のファイル（および名前にR1があるすべてのファイル）はフォワードリードに対応していて、もう一方の2つ目のファイル（および名前にR2があるすべてのファイル）はリバースリードに対応しています。
 >
@@ -121,14 +121,14 @@ in this document differ slightly from the description on their website -->
 {: .hands_on}
 
 
-# 品質管理
+# クオリティコントロール
 
 ## シーケンシングと PCR のエラーを減らす
 
-まず初めに各サンプルのフォワードリードとリバースリードを組み合わせます。これはインプットとしてペアのコレクションが必要で、 `make.contigs` コマンドを利用して行われます。このコマンドは fastq ファイルからシーケンスと品質スコアのデータを抽出し、リバースリードの reverse complement を作成してリードをコンティグに加えます。そしてすべてのサンプルを1つの fasta ファイルにまとめ、*group* ファイルを使ってどのサンプルからどのリードを持ってきたかを記憶させます。
+まず初めに各サンプルのフォワードリードとリバースリードを組み合わせます。これはインプットとしてペアのコレクションが必要で、 `make.contigs` コマンドを利用して行われます。このコマンドは fastq ファイルから配列と品質スコアのデータを抽出し、リバースリードの reverse complement を作成してリードをコンティグに加えます。そしてすべてのサンプルを1つの fasta ファイルにまとめ、*group* ファイルを使ってどのサンプルからどのリードを持ってきたかを記憶させます。
 
 > ### {% icon comment %} アルゴリズムの詳細
-> これを行うための非常にシンプルなアルゴリズムを私たちは持っています。まずはシーケンスのペアを揃えます。次にアライメントを調べて２つのリードが一致しない位置を特定します。１つのシーケンスにベースがありもう１つにギャップがある場合、ベースの品質スコアは２５以上であることを考慮する必要があります。両方のシーケンスにベースがある場合は、ベースの1つが他のものよりも６点以上の品質スコアである必要があります。もしそれが６点以下であれば、コンセンサスベースを N に設定します。
+> これを行うための非常にシンプルなアルゴリズムを私たちは持っています。まずは配列のペアを揃えます。次にアライメントを調べて２つのリードが一致しない位置を特定します。１つの配列にベースがありもう１つにギャップがある場合、ベースの品質スコアは２５以上であることを考慮する必要があります。両方の配列にベースがある場合は、ベースの1つが他のものよりも６点以上の品質スコアである必要があります。もしそれが６点以下であれば、コンセンサスベースを N に設定します。
 {: .comment}
 
 ### データを統合する
@@ -163,7 +163,7 @@ M00967_43_000000000-A3JHG_1_1101_10051_26098    F3D0
 
 ### データクリーニング
 
-品質管理のトピックについてより知りたい場合は、training material をご覧ください。
+クオリティコントロールのトピックについてより知りたい場合は、training material をご覧ください。
 [こちら]({{site.baseurl}}/topics/sequence-analysis/)
 
 次にデータの品質を向上させようと思います。ですがまずは、データをよく見てみましょうNext we want to improve the quality of our data. But first, let's get a feel of our data
@@ -216,12 +216,12 @@ Mean:        1        252.811    252.811    0.70063  4.44854
 > {: .question}
 {: .hands_on}
 
-## 改良されたシーケンスの処理
+## 改良された配列の処理
 
 ### 計算のためにファイルを最適化する
-私たちは多くの同種の生物をシーケンスしているので、シーケンスの多くは互いに重複していることが予想されます。同じことに莫大な時間を費やすのは計算上無駄なので、 `unique.seqs` コマンドを用いてシーケンスを一意なものにします:
+私たちは多くの同種の生物をシーケンスしているので、配列の多くは互いに重複していることが予想されます。同じことに莫大な時間を費やすのは計算上無駄なので、 `unique.seqs` コマンドを用いて配列を一意なものにします:
 
-> ### {% icon hands_on %} ハンズオン: 重複しているシーケンスを除去する
+> ### {% icon hands_on %} ハンズオン: 重複している配列を除去する
 >
 > - **Unique.seqs** {% icon tool %} で次のように設定する
 >   - "fasta" には Screen.seqs のアウトプットである `good.fasta` を選択する
@@ -278,21 +278,21 @@ M00967_43_000000000-A3JHG_1_1101_13234_1983  10522   425    281   340     205
 
 アライメントについて詳しく知りたい場合は、training materials をご覧ください[こちら]({{site.baseurl}}/topics/sequence-analysis/)
 
-シーケンスをリファレンスに対してアライメントする準備ができました。このステップは OTU のクラスタリングを改善するために実行する重要な段階です [[Schloss 2013]](https://doi.org/10.1038/ismej.2012.102)
+配列をリファレンスに対して比較する準備ができました。このステップは OTU のクラスタリングを改善するために実行する重要な段階です [[Schloss 2013]](https://doi.org/10.1038/ismej.2012.102)
 
 > ### {% icon hands_on %} ハンズオン: Align sequences
 >
 > 1. **Align.seqs** {% icon tool %} で次のように設定する
->   - "fasta" to the fasta output from Unique.seqs
->   - "reference" to the `silva.v4.fasta` reference file
+>   - "fasta" には Unique.seqs のアウトプットである fasta ファイルを選択する
+>   - "reference" にはリファレンスファイルである `silva.v4.fasta` を選択する
 > <br><br>
-> 2. **Summary.seqs** {% icon tool %} with the following parameters
->   - "fasta" parameter to the aligned output from previous step
->   - "count" parameter to `count_table` output from Count.seqs
+> 2. **Summary.seqs** {% icon tool %} で次のように設定する
+>   - "fasta" パラメーターには前段階の Align のアウトプットを選択する
+>   - "count" パラメーターには Count.seqs のアウトプットである `count_table` ファイルを選択する
 >
 {: .hands_on}
 
-Have a look at the summary output (log file):
+summary のアウトプット(log file)を見てみましょう:
 
 ```
             Start    End      NBases  Ambigs   Polymer  NumSeqs
@@ -308,56 +308,49 @@ Mean:       1967.99  11550    252.462 0        4.36693
 total # of seqs:    128872
 ```
 
-So what does this mean? You'll see that the bulk of the sequences start at position 1968 and end at position 11550.
-Some sequences start at position 1250 or 1982 and end at 10693 or 13400. These deviants from the mode positions
-are likely due to an insertion or deletion at the terminal ends of the alignments. Sometimes you'll see sequences
-that start and end at the same position indicating a very poor alignment, which is generally due to non-specific
-amplification.
+さて、これはどういう意味でしょうか? 大部分の配列が開始座標が1968で終了座標が11550であることが分かります。
+いくつかの配列は開始座標が1250や1982で、終了座標が10693や13400です。 These deviants from the mode positions
+are likely due to an insertion or deletion at the terminal ends of the alignments. 時として同じ座標で開始し終了する配列が非常に乏しいアライメントを示すことがありますが、これは一般的に非特異的な増幅によるものです。
 
 ### More Data Cleaning
 
-To make sure that everything overlaps the same region we'll re-run screen.seqs to get sequences that
-start at or before position 1968 and end at or after position 11550. We'll also set the maximum
+すべてが同じ領域に重複するように screen.seqs を再実行して開始や先頭の座標は1968で終了や末尾の座標を11550の配列を取得します。  We'll also set the maximum
 homopolymer length to 8 since there's nothing in the database with a stretch of 9 or more of the same
 base in a row (this also could have been done in the first execution of screen.seqs above).
 
-> ### {% icon hands_on %} Hands-on: Remove poorly aligned sequences
+> ### {% icon hands_on %} ハンズオン: 共通部分の少ない配列を除去する
 >
-> - **Screen.seqs** {% icon tool %} with the following parameters
->   - "fasta" to the aligned fasta file
->   - "start" to 1968
->   - "end" to 11550
->   - "maxhomop" to 8
->   - "count" to our most recent count_table
+> - **Screen.seqs** {% icon tool %} で次のように設定する
+>   - "fasta" → aligned fasta file
+>   - "start" → 1968
+>   - "end" → 11550
+>   - "maxhomop" → 8
+>   - "count" には最も直近の count_table を選択する
 >
-> **Note:** we supply the count table so that it can be updated for the sequences we're removing.
+> **注:** 除去する配列に対して更新できるように count table を使います。
 >
 > > ### {% icon question %} Question
 > >
-> >  How many sequences were removed in this step?
+> >  このステップではいくつの配列が除去されるのでしょうか？
 > > <details>
-> >   <summary> Click to view answer</summary>
-> >   128 sequences were removed. This is the number of lines in the bad.accnos output.
+> >   <summary> クリックして回答を表示</summary>
+> >   128 配列が除去されました。これは bad.accnos のアウトプットの配列数です。
 > > </details>
 > {: .question}
 {: .hands_on}
 
 
-Now we know our sequences overlap the same alignment coordinates, we want to make sure they *only* overlap
-that region. So we'll filter the sequences to remove the overhangs at both ends. Since we've done
-paired-end sequencing, this shouldn't be much of an issue. In addition, there are many
-columns in the alignment that only contain gap characters (i.e. "."). These can be pulled out without
-losing any information. We'll do all this with filter.seqs:
+今私たちは同じアライメント座標で重なっている配列を知っていますが、それらがその領域*だけ*で重なっていることを確認したいです。そこで配列をフィルタリングして両端のはみ出しているものを除去します。ペアエンドシーケンシングを行っているため、これは大きな問題にはなりません。加えて、アライメントの中にはギャップ文字（即ち「.」）だけを含んだ多くの列があります。これらは情報を失うことなく抜き出すことができます。これはすべて filter.seqs を用いて行います:
 
-> ### {% icon hands_on %} Hands-on: Filter sequences
+> ### {% icon hands_on %} ハンズオン: 配列をフィルタリングする
 >
-> - **Filter.seqs** {% icon tool %} with the following parameters
+> - **Filter.seqs** {% icon tool %} で次のように設定する
 >   - "fasta"" to good.fasta output from Sreen.seqs
->   - "vertical" to Yes
->   - "trump" to `.`
+>   - "vertical" → Yes
+>   - "trump" → `.`
 {: .hands_on}
 
-In the log file we see the following information:
+log file には次のような情報が表示されます:
 
 ```
 Length of filtered alignment: 376
@@ -371,89 +364,83 @@ characters using `trump=.` and vertical gap characters using `vertical=yes`. The
 columns. Because we've perhaps created some redundancy across our sequences by trimming the ends, we can re-run
 `unique.seqs`:
 
-> ### {% icon hands_on %} Hands-on: Re-obtain unique sequences
+> ### {% icon hands_on %} ハンズオン: 一意な配列を再取得する
 >
-> - **Unique.seqs** {% icon tool %} with the following parameters
->   - "fasta" to the `filtered fasta` output from Filter.seqs
+> - **Unique.seqs** {% icon tool %} で次のように設定する
+>   - "fasta" には Filter.seqs のアウトプットである `filtered fasta` ファイルを選択する
 >   - "name file or count table" to the count table from the last Screen.seqs
 >
 > > ### {% icon question %} Question
 > >
-> >  How many duplicate sequences did our filter step produce?
+> >  filter の段階ではいくつの複製配列が生成されましたか？
 > > <details>
-> >   <summary> Click to view answer</summary>
-> >   3. <br>
-> >   This can be seen in the log file, which tells us the number of sequences was reduced from 16298 to
-> >   16295
+> >   <summary>クリックして解答を表示</summary>
+> >   3塩基。 <br>
+> >   一意な配列数は16298から16295に減少しました
 > > </details>
 > {: .question}
 {: .hands_on}
 
 
-### Pre-clustering
-The next thing we want to do to further de-noise our sequences, is to pre-cluster the sequences using the
-`pre.cluster` command, allowing for up to 2 differences between sequences. This command will split the
+### プレクラスタリング
+配列をさらにノイズ除去したいので次に、 `pre.cluster` コマンドを使用して配列のプレクラスタリングを行い、配列間の違いを2塩基までにします。このコマンドはグループごとに配列を分割して This command will split the
 sequences by group and then sort them by abundance and go from most abundant to least and identify
-sequences that differ no more than 2 nucleotides from on another. If this is the case, then they get
-merged. We generally recommend allowing 1 difference for every 100 basepairs of sequence:
+sequences that differ no more than 2 nucleotides from on another.  この場合、それらはマージされます。一般的に、100塩基対あたり1塩基の違いを許容することをお勧めします:
 
-> ### {% icon hands_on %} Hands-on: Perform preliminary clustering of sequences
+> ### {% icon hands_on %} ハンズオン: 配列のプレクラスタリングを行う
 >
-> - **Pre.cluster** {% icon tool %} with the following parameters
->   - "fasta" to the fasta output from the last Unique.seqs run
->   - "name file or count table" to the count table from the last Unique.seqs
->   - "diffs" to 2
+> - **Pre.cluster** {% icon tool %} で次のように設定する
+>   - "fasta" には最後に実行した Unique.seqs のアウトプットである fasta ファイルを選択する
+>   - "name file or count table" には最後に実行した Unique.seqs のアウトプットである count table を選択する
+>   - "diffs" → 2
 >
 > > ### {% icon question %} Question
 > >
-> >  How many unique sequences are we left with after this clustering of highly similar sequences?
+> >  類似度の高い配列をクラスタリングした後では一意な配列はいくつ残りましたか？
 > > <details>
-> >   <summary> Click to view answer</summary>
-> >   5672. <br>
-> >   This is the number of lines in the fasta output
+> >   <summary> クリックして解答を表示</summary>
+> >   5672塩基。 <br>
+> >   これは fasta のアウトプットのライン数です
 > > </details>
 > {: .question}
 {: .hands_on}
 
 
-### Chimera Removal
-At this point we have removed as much sequencing error as we can, and it is time to turn our attention to
-removing sequencing artefacts known as chimeras.
+### キメラを除去する
+ここまでの時点でできる限りの多くのシーケンシングエラーを除去したので、ここからはキメラと呼ばれるシーケンシングアーティファクトを除去することに注意を向けましょう。
 
-> ### {% icon tip %} Background: Chimeras
+> ### {% icon tip %} 背景: キメラ
 > ![Chemirec sequence](../../images/chimeras.jpg)
 > (slide credit: [http://slideplayer.com/slide/4559004/ ](http://slideplayer.com/slide/4559004/ ))
 {: .tip}
 
-We'll do this chimera removal using the `UCHIME` algorithm that is called within Mothur, using the
-`chimera.uchime` command. This command will split the data by sample and check for chimeras.
+`chimera.uchime` コマンドを利用して、Mothur で `UCHIME` と呼ばれるアルゴリズムを利用しこのキメラを除去します。このコマンドはサンプルごとにデータを分割しキメラをチェックします。
 
-Our preferred way of doing this is to use the abundant sequences as our reference. In addition, if a sequence
+これを行うための良い方法としては大量の配列をリファレンスとして用いることです。 In addition, if a sequence
 is flagged as chimeric in one sample, the default (`dereplicate=No`) is to remove it from all samples. Our
 experience suggests that this is a bit aggressive since we've seen rare sequences get flagged as chimeric
 when they're the most abundant sequence in another sample. This is how we do it:
 
-> ### {% icon hands_on %} Hands-on: Remove chimeric sequences
+> ### {% icon hands_on %} ハンズオン: キメラ配列を除去する
 >
-> - **Chimera.uchime** {% icon tool %} with the following parameters
->   - "fasta" to the fasta output from Pre.cluster
->   - "Select Reference Template from" to `Self`
->   - "count" to the count table from the last Pre.cluster
->   - "dereplicate" to Yes
+> - **Chimera.uchime** {% icon tool %} で次のように設定する
+>   - "fasta" には Pre.cluster のアウトプットである fasta ファイルを選択する
+>   - "Select Reference Template from" → `Self`
+>   - "count" には Pre.cluster のアウトプットである count table を選択する
+>   - "dereplicate" → Yes
 >
-> Running chimera.uchime with the count file will remove the chimeric sequences from the count table, but we
-> still need to remove those sequences from the fasta file as well. We do this using remove.seqs:
+> count ファイルで chimera.uchime を実行すると、count table からキメラ配列が除去されますが、fasta ファイルからもそれらの配列を除去する必要があります。これは remove.seqs を使って行います:
 >
-> - **Remove.seqs** {% icon tool %} with the following parameters
->   - "accnos" to the uchime.accnos file from Chimera.uchime
->   - "fasta" to the fasta output from Pre.cluster
->   - "count" to the count table from Chimera.uchime
+> - **Remove.seqs** {% icon tool %} で次のように設定する
+>   - "accnos" には Chimera.uchime のアウトプットである uchime.accnos ファイルを選択する
+>   - "fasta" には Pre.cluster のアウトプットである fasta ファイルを選択する
+>   - "count" には Chimera.uchime のアウトプットである count table を選択する
 >
 > > ### {% icon question %} Question
 > >
-> >  How many sequences were flagged as chimeric? what is the percentage? (Hint: summary.seqs)
+> >  いくつの配列がキメラとしてフラグされましたか？その割合は？（ヒント: summary.seqs）
 > > <details>
-> >   <summary> Click to view answer</summary>
+> >   <summary> クリックして解答を表示</summary>
 > >   If we run summary.seqs on the resulting fasta file and count table, we see that we went from 128,655
 > >   sequences down to 119,330 sequences in this step, for a reduction of 7.3%. This is a reasonable number of
 > >   sequences to be flagged as chimeric.
@@ -463,34 +450,30 @@ when they're the most abundant sequence in another sample. This is how we do it:
 
 
 
-### Removal of non-bacterial sequences
+### 細菌以外の配列の除去
 
-As a final quality control step, we need to see if there are any "undesirables" in our dataset. Sometimes when
-we pick a primer set they will amplify other stuff that survives to this point in the pipeline, such as
-18S rRNA gene fragments or 16S rRNA from Archaea, chloroplasts, and mitochondria. There's also just the
-random stuff that we want to get rid of.
+クオリティコントロールの最後のステップとして、データセットに"望ましくないもの"があるかを確認する必要があります。プライマーのセットを選ぶとき、アーキア由来の 18S rRNA や 16S rRNA の遺伝子断片や、葉緑体や、ミトコンドリアといった他のものがパイプラインのこの時点まで残っていると増幅されてしまいます。除去したい不特定のものもあります。
 
 Now you may say, "But wait I want that stuff". Fine. But, the primers we use, are only supposed to amplify
 members of the Bacteria and if they're hitting Eukaryota or Archaea, then it is a mistake. Also, realize
 that chloroplasts and mitochondria have no functional role in a microbial community.
 
-Let's go ahead and classify those sequences using the Bayesian classifier with the `classify.seqs` command:
+それでは `classify.seqs` コマンドでベイズ分類器を利用してこれらの配列を分類しましょう:
 
-> ### {% icon hands_on %} Hands-on: Remove undesired sequences
+> ### {% icon hands_on %} ハンズオン: 望ましくない配列を除去する
 >
-> - **Classify.seqs** {% icon tool %} with the following parameters
+> - **Classify.seqs** {% icon tool %} で次のように設定する
 >   - "fasta" to the fasta output from Remove.seqs
 >   - "reference" to `trainset9032012.pds.fasta` from your history
 >   - "taxonomy" to `trainset9032012.pds.tax` from your history
 >   - "count" to the count table file from Remove.seqs
 >   - "cutoff" to 80
 >
-> Have a look at the taxonomy output. You will see that every read now has a classification.
+> taxonomy のアウトプットを見てください。すべてのリードが分類されています。
 >
-> Now that everything is classified we want to remove our undesirables. We do this with the remove.lineage
-> command:
+> 現在すべてのリードが分類されているので望ましくないものを除去します。これは remove.lineage コマンドによって行います:
 >
-> - **Remove.lineage** {% icon tool %} with the following parameters
+> - **Remove.lineage** {% icon tool %} で次のように設定する
 >   - "taxonomy" to the taxonomy output from Classify.seqs
 >   - "taxon" to `Chloroplast-Mitochondria-unknown-Archaea-Eukaryota` in the text box under *Manually
 > select taxons for filtering*
@@ -503,7 +486,7 @@ Let's go ahead and classify those sequences using the Bayesian classifier with t
 > > 2. How many sequences in total?
 > >
 > >    <details>
-> >      <summary> Click to view answer</summary><br>
+> >      <summary> クリックして解答を表示</summary><br>
 > >      20 representative sequences were removed. <br>
 > >      The fasta file output from Remove.seqs had 2628 sequences while the fasta output from Remove.lineages
 > >      contained 2608 sequences.
@@ -541,11 +524,11 @@ exactly what we would expect the analysis to produce as a result.
 
 First, let's extract the sequences belonging to our mock samples from our data:
 
-> ### {% icon hands_on %} Hands-on: extract mock sample from our dataset
+> ### {% icon hands_on %} ハンズオン: extract mock sample from our dataset
 >
 >
 >
-> 1. **Get.groups** {% icon tool %} with the following parameters
+> 1. **Get.groups** {% icon tool %} で次のように設定する
 >   - "group file or count table" to the count table from Remove.lineage
 >   - "groups" to `Mock`
 >   - "fasta" to fasta output from Remove.lineage
@@ -563,8 +546,8 @@ This tells us that we had 67 unique sequences and a total of 4,060 total sequenc
 can now use the `seq.error` command to measure the error rates based on our mock reference. Here we align
 the reads from our mock sample back to their known sequences, to see how many fail to match.
 
-> ### {% icon hands_on %} Hands-on: Assess error rates based on a mock community
-> - **Seq.error** {% icon tool %} with the following parameters
+> ### {% icon hands_on %} ハンズオン: Assess error rates based on a mock community
+> - **Seq.error** {% icon tool %} で次のように設定する
 >   - "fasta" to the fasta from Get.groups
 >   - "reference" to `HMP_MOCK.v35.fasta` file from your history
 >   - "count" to the count table from Get.groups
@@ -605,37 +588,37 @@ We can now cluster the mock sequences into OTUs to see how many spurious OTUs we
 {: .tip}
 
 
-> ### {% icon hands_on %} Hands-on: Cluster mock sequences into OTUs
+> ### {% icon hands_on %} ハンズオン: Cluster mock sequences into OTUs
 >
 > First we calculate the pairwise distances between our sequences
 >
-> - **Dist.seqs** {% icon tool %} with the following parameters
+> - **Dist.seqs** {% icon tool %} で次のように設定する
 >   - "fasta" to the fasta from Get.groups
 >   - "cutoff" to `0.20`
 >  
 > Next we group sequences into OTUs
 >
-> - **Cluster** {% icon tool %} with the following parameters
+> - **Cluster** {% icon tool %} で次のように設定する
 >   - "column" to the dist output from Dist.seqs
 >   - "count" to the count table from Get.groups
 >
 > Now we make a *shared* file that summarizes all our data into one handy table
 >
-> - **Make.shared** {% icon tool %} with the following parameters
+> - **Make.shared** {% icon tool %} で次のように設定する
 >     - "list" to the OTU list from Cluster
 >     - "count" to the count table from Get.groups
 >     - "label" to `0.03` (this indicates we are interested in the clustering at a 97% identity threshold)
 >
 > And now we generate intra-sample rarefaction curves
 >
-> - **Rarefaction.single** {% icon tool %} with the following parameters
+> - **Rarefaction.single** {% icon tool %} で次のように設定する
 >   - "shared" to the shared file from Make.shared
 >
 > > ### {% icon question %} Question
 > >
 > >  How many OTUs were identified in our mock community?
 > > <details>
-> >   <summary> Click to view answer</summary>
+> >   <summary> クリックして解答を表示</summary>
 > >   34. <br>
 > >   Open the shared file or OTU list and look at the header line. You will see a column for each OTU
 > >  </details>
@@ -679,9 +662,9 @@ our real samples.
 using
 the `remove.groups` command:
 
-> ### {% icon hands_on %} Hands-on: Remove Mock community from our dataset
+> ### {% icon hands_on %} ハンズオン: Remove Mock community from our dataset
 >
-> - **Remove.groups** {% icon tool %} with the following parameters
+> - **Remove.groups** {% icon tool %} で次のように設定する
 >   - "Select input type" to `fasta , name, taxonomy, or list with a group file or count table`
 >   - "count table", "fasta", and "taxonomy" to the respective outputs from Remove.lineage
 >   - "groups" to `Mock`
@@ -703,9 +686,9 @@ multiple processors. In an ideal world we would prefer the traditional route bec
 also think that kind of humor is funny.... In this command we use `taxlevel=4`, which corresponds to the level
 of *Order*. This is the approach that we  generally use in the Schloss lab.
 
-> ### {% icon hands_on %} Hands-on: Cluster our data into OTUs
+> ### {% icon hands_on %} ハンズオン: Cluster our data into OTUs
 >
-> - **Cluster.split** {% icon tool %} with the following parameters
+> - **Cluster.split** {% icon tool %} で次のように設定する
 >   - "Split by" to `Classification using fasta`
 >   - "fasta" to the fasta output from Remove.groups
 >   - "taxonomy" to the taxonomy output from Remove.groups
@@ -716,7 +699,7 @@ of *Order*. This is the approach that we  generally use in the Schloss lab.
 > Next we want to know how many sequences are in each OTU from each group and we can do this using the
 > `Make.shared` command. Here we tell Mothur that we're really only interested in the 0.03 cutoff level:
 >
-> - **Make.shared** {% icon tool %} with the following parameters
+> - **Make.shared** {% icon tool %} で次のように設定する
 >   - "Select input type" to `OTU list`
 >   - "list" to list output from Cluster.split
 >   - "count" to the count table from Remove.groups
@@ -725,7 +708,7 @@ of *Order*. This is the approach that we  generally use in the Schloss lab.
 > We probably also want to know the taxonomy for each of our OTUs. We can get the consensus taxonomy for each
 > OTU using the `Classify.otu` command:
 >
-> - **Classify.otu** {% icon tool %} with the following parameters
+> - **Classify.otu** {% icon tool %} で次のように設定する
 >   - "list" to output from Cluster.split
 >   - "count" to the count table from Remove.groups
 >   - "taxonomy" to the taxonomy output from Remove.groups
@@ -762,12 +745,12 @@ stability and change in community structure in these samples when comparing earl
 Keep in mind that the group names have either a F or M (sex of animal) followed by a number (number of
 animal) followed by a D and a three digit number (number of days post weaning).
 
-> ### {% icon hands_on %} Hands-on: Subsampling
+> ### {% icon hands_on %} ハンズオン: Subsampling
 >
 > What we now want to do is see how many sequences we have in each sample. We'll do this with the
 > `Count.groups` command:
 >
-> - **Count.groups** {% icon tool %} with the following parameters
+> - **Count.groups** {% icon tool %} で次のように設定する
 >   - "shared" to the shared file from Make.shared
 >
 > Take a look at the output. We see that our smallest sample had 2440 sequences in it. That is a reasonable
@@ -775,7 +758,7 @@ animal) followed by a D and a three digit number (number of days post weaning).
 >
 > We'll generate a subsampled file for our analyses with the `Sub.sample` command:
 >
-> - **Sub.sample** {% icon tool %} with the following parameters
+> - **Sub.sample** {% icon tool %} で次のように設定する
 >   - "Select type of data to subsample" to `OTU Shared`
 >   - "shared" to output from Make.shared
 >   - "size" to `2440`
@@ -784,7 +767,7 @@ animal) followed by a D and a three digit number (number of days post weaning).
 > >
 > >  What would you exect the result of `count.groups` on this new shared output collection to be? Check if you are correct.
 > > <details>
-> >   <summary> Click to view answer</summary>
+> >   <summary> クリックして解答を表示</summary>
 > >   all groups (samples) should now have 2440 sequences. Run count.groups again on the shared output collection by the sub.sample
 > >   tool to confirm that this is indeed what happened.
 > >  </details>
@@ -807,8 +790,8 @@ Let's start our analysis by analyzing the alpha diversity of the samples. First 
 curves describing the number of OTUs observed as a function of sampling effort. We'll do this with the
 `Rarefaction.single` command:
 
-> ### {% icon hands_on %} Hands-on: Calculate Rarefaction
-> - **Rarefaction.single** {% icon tool %} with the following parameters
+> ### {% icon hands_on %} ハンズオン: Calculate Rarefaction
+> - **Rarefaction.single** {% icon tool %} で次のように設定する
 >   - "shared" to shared file from Make.shared
 {: .hands_on}
 
@@ -834,17 +817,17 @@ to see is the number of additional OTUs identified when adding more sequences re
 we have covered our full diversity. This information would be easier to interpret in the form of a graph.
 Let's plot the rarefaction curve for a couple of our sequences:
 
-> ### {% icon hands_on %} Hands-on: Plot Rarefaction
+> ### {% icon hands_on %} ハンズオン: Plot Rarefaction
 > <!-- the following tool is because plotting tool will not detect columns in files inside collections yet -->
 > First let's make our life a little bit easier. As we only have one dataset in our collection anyways, we can
 > collapse it into a single file.
 >
-> - **Collapse Collection** {% icon tool %} with the following parameters
+> - **Collapse Collection** {% icon tool %} で次のように設定する
 >   - "Collection of files to collapse to a single dataset" to the rarefaction curve collection
 >
 > Now we are ready to plot our rarefaction curves:
 >
-> - **Plotting tool** {% icon tool %} with the following parameters
+> - **Plotting tool** {% icon tool %} で次のように設定する
 >   - "Plot Title" to `Rarefaction`
 >   - "Label for x axis" to `Number of Sequences`
 >   - "Label for y axis" to `Number of OTUs`
@@ -873,9 +856,9 @@ Finally, let's get a table containing the number of sequences, the sample covera
 OTUs, and the Inverse Simpson diversity estimate using the `Summary.single` command. To standardize everything,
 let's randomly select 2440 sequences from each sample 1000 times and calculate the average:
 
-> ### {% icon hands_on %} Hands-on: Summary.single
+> ### {% icon hands_on %} ハンズオン: Summary.single
 >
-> - **Summary.single** {% icon tool %} with the following parameters
+> - **Summary.single** {% icon tool %} で次のように設定する
 >   - "share" to shared file from Make.shared
 >   - "calc" to `nseqs,coverage,sobs,invsimpson`
 >   - "size" to 2440
@@ -917,19 +900,19 @@ Beta diversity is a measure of the similarity of the membership and structure fo
 The default calculator in the following section is *thetaYC*, which is the [Yue & Clayton theta similarity
 coefficient](http://www.tandfonline.com/doi/abs/10.1080/STA-200066418)
 
-> ### {% icon hands_on %} Hands-on: Beta diversity
+> ### {% icon hands_on %} ハンズオン: Beta diversity
 >
 > Let's calculate . We'll do this
 > with the `Dist.shared` command that will allow us to rarefy our data to a common number of sequences.
 >
-> - **Dist.shared** {% icon tool %} with the following parameters
+> - **Dist.shared** {% icon tool %} で次のように設定する
 >   - "shared" to the shared file from Make.shared
 >   - "calc" to thetayc,jclass
 >   - "subsample" to 2440
 >
 > Let's visualize our data in a Heatmap
 >
-> - **Heatmap.sim** {% icon tool %} with the following parameters
+> - **Heatmap.sim** {% icon tool %} で次のように設定する
 >   - "Generate Heatmap for" to `phylip`
 >   - "phylip" to output by Dist.shared (this is a collection input)
 >  
@@ -950,18 +933,18 @@ and the jclass calulator (output `jclass.0.03.lt.ave`):
 When generating Venn diagrams we are limited by the number of samples that we can analyze simultaneously.
 Let's take a look at the Venn diagrams for the first 4 time points of female 3 using the `venn` command:
 
-> ### {% icon hands_on %} Hands-on: Venn diagram
+> ### {% icon hands_on %} ハンズオン: Venn diagram
 >
 > <!-- need to collapse collection again for group select to work -->
 > First we collapse our collection again
 >
-> - **Collapse Collection** {% icon tool %} with the following parameters
+> - **Collapse Collection** {% icon tool %} で次のように設定する
 >   - "Collection" to Subsample.shared output collection from Sub.sample step
 >
 > After the tool has finished, rename the output to `Subsample.shared` to make it easier to recognize in
 > further analysis
 >
-> - **Venn** {% icon tool %} with the following parameters
+> - **Venn** {% icon tool %} で次のように設定する
 >   - Set `OTU Shared` to Subsample.shared file from previous step
 >   - Set `groups` to `F3D0,F3D1,F3D2,F3D3`
 {: .hands_on}
@@ -979,11 +962,11 @@ dendrogram using the jclass and thetayc calculators within the `tree.shared` com
 
 > ### {% icon hands_on %} Tree
 >
-> 1. **Tree.shared** {% icon tool %} with the following parameters
+> 1. **Tree.shared** {% icon tool %} で次のように設定する
 >   - "Select input format" to Phylip Distance Matrix
 >   - "phylip" to dist files from Dist.shared (collection)
 >
-> 2. **Newick display** {% icon tool %} with the following parameters
+> 2. **Newick display** {% icon tool %} で次のように設定する
 >  - "Newick file" to output from Tree.shared (collection)
 {: .hands_on}
 
@@ -1004,7 +987,7 @@ We can perform a test to determine whether the clustering within the tree is sta
 using by choosing from the `parsimony`, `unifrac.unweighted`, or `unifrac.weighted` commands. To run these we
 will first need to create a design file that indicates which treatment each sample belongs to.
 
-> ### {% icon hands_on %} Hands-on: Obtain design file
+> ### {% icon hands_on %} ハンズオン: Obtain design file
 >
 > - Import the file called `mouse.time.design` to your history
 >   - Go to the shared data library or the files you downloaded from Zenodo.
@@ -1047,8 +1030,8 @@ F3D9     Early
 Using the `parsimony` command let's look at the pairwise comparisons. Specifically, let's focus on the
 early vs. late comparisons for each mouse:
 
-> ### {% icon hands_on %} Hands-on: Compare Early-vs-Late
-> - **Parsimony** {% icon tool %} with the following parameters
+> ### {% icon hands_on %} ハンズオン: Compare Early-vs-Late
+> - **Parsimony** {% icon tool %} で次のように設定する
 >   - "tree" to the `tre` output from Tree.Shared (collection)
 >   - "group" to the design file described above
 {: .hands_on}
@@ -1069,9 +1052,9 @@ The two distance matrices that we generated earlier (i.e. `jclass.0.03.lt.ave.di
 Principal Coordinates (PCoA) uses an eigenvector-based approach to represent multidimensional
 data in as few dimensions as possible. Our data is highly dimensional (~9 dimensions).
 
-> ### {% icon hands_on %} Hands-on: PCoA
+> ### {% icon hands_on %} ハンズオン: PCoA
 >
-> - **Pcoa** {% icon tool %} with the following parameters
+> - **Pcoa** {% icon tool %} で次のように設定する
 >   - "phylip" to dist files from Dist.shared (collection)
 {: .hands_on}
 
@@ -1106,9 +1089,9 @@ Alternatively, non-metric multidimensional scaling (NMDS) tries to preserve the 
 a user defined number of dimensions. We can run our data through NMDS with 2 dimensions with the following
 tool:
 
-> ### {% icon hands_on %} Hands-on: Nmds
+> ### {% icon hands_on %} ハンズオン: Nmds
 >
-> - **Nmds** {% icon tool %} with the following parameters
+> - **Nmds** {% icon tool %} で次のように設定する
 >   - "phylip" to dist files from Dist.shared (collection)
 >
 > Opening the `stress` file for `thetayc.0.03.lt.ave` we can inspect the stress and R^2 values, which describe
@@ -1124,7 +1107,7 @@ tool:
 > We find that the lowest stress value was 0.11 with an R-squared value of 0.95; that stress level is
 > actually pretty good. You can test what happens with three dimensions in the following way:
 >
-> - **Nmds** {% icon tool %} with the following parameters
+> - **Nmds** {% icon tool %} で次のように設定する
 >   - "phylip" to dist files collection from Dist.shared
 >   - "mindim" to `3`
 >   - "maxdim" to `3`
@@ -1134,7 +1117,7 @@ tool:
 > > What are stress and R-squared values when using 3 dimensions?
 > >
 > > <details>
-> >   <summary> Click to view answer</summary>
+> >   <summary> クリックして解答を表示</summary>
 > >   The stress value drops to 0.05 and the R2 value goes up to 0.99 (see logfile). Not bad.
 > > </details>
 > {: .question}
@@ -1153,9 +1136,9 @@ The first analysis of molecular variance (AMOVA), tests whether the centers of t
 are more separated than the variation among samples of the same treatment. This is done using the distance
 matrices we created earlier and does not actually use ordination.
 
-> ### {% icon hands_on %} Hands-on: Amova
+> ### {% icon hands_on %} ハンズオン: Amova
 >
-> - **Amova** {% icon tool %} with the following parameters
+> - **Amova** {% icon tool %} で次のように設定する
 >   - "phylip" to dist files from Dist.shared (collection)
 >   - "design" to mouse.time.design file from your history
 {: .hands_on}
@@ -1177,9 +1160,9 @@ for this mouse. Thus, the observed separation in early and late samples is stati
 also see whether the variation in the early samples is significantly different from the variation in the late
 samples using the `Homova` command:
 
-> ### {% icon hands_on %} Hands-on: Homova
+> ### {% icon hands_on %} ハンズオン: Homova
 >
-> - **Homova** {% icon tool %} with the following parameters
+> - **Homova** {% icon tool %} で次のように設定する
 >   - "phylip" to dist files from Dist.shared (collection)
 >   - "design" to mouse.time.design file from your history
 {: .hands_on}
@@ -1197,9 +1180,9 @@ Next, we might ask which OTUs are responsible for shifting the samples along the
 this by measuring the correlation of the relative abundance of each OTU with the two axes in the NMDS dataset.
 We do this with the `corr.axes` tool:
 
-> ### {% icon hands_on %} Hands-on: Correlation
+> ### {% icon hands_on %} ハンズオン: Correlation
 >
-> - **Corr.axes** {% icon tool %} with the following parameters
+> - **Corr.axes** {% icon tool %} で次のように設定する
 >   - "axes" to axes output from Nmds in 3 dimension (collection)
 >   - "shared" to shared output from collapse collection on Sub.sample
 >   - "method" to `Spearman`
@@ -1267,9 +1250,9 @@ F3D8     8
 F3D9     9
 ```
 
-> ### {% icon hands_on %} Hands-on
+> ### {% icon hands_on %} ハンズオン
 >
-> - **Corr.axes** {% icon tool %} with the following parameters
+> - **Corr.axes** {% icon tool %} で次のように設定する
 >   - "axes" to axes output from Nmds in 3 dimension
 >   - "Generate Collector Curvers for" to Metadata table
 >   - "metadata table" to `mouse.dpw.metadata`
@@ -1289,7 +1272,7 @@ F3D9     9
 > community types
 >
 > <!-- TODO: add this tool to mothur suite -->
-> - **Get.communitytype** {% icon tool %} with the following parameters
+> - **Get.communitytype** {% icon tool %} で次のように設定する
 >   - "shared" to Subsample.shared file
 >
 {: .hands_on}
@@ -1328,7 +1311,7 @@ the names of these organisms.
 > What organisms were the top 5 contributing OTUs classified as?
 >
 > <details>
->   <summary> Click to view answer</summary>
+>   <summary> クリックして解答を表示</summary>
 >   Note down the names of the top 5 OTUs as output by thesummary output of get.communitytype.
 >   Then look at the taxonomy file output by Classify.otu. <br><br>
 >
@@ -1343,9 +1326,9 @@ In addition to the use of `corr.axes` and `get.communitytype` we have several to
 different groupings of samples. The first we'll demonstrate is `metastats`, which is a non-parametric T-test
 that determines whether there are any OTUs that are differentially represented between the samples from early and late in this study.
 
-> ### {% icon hands_on %} Hands-on: T-test
+> ### {% icon hands_on %} ハンズオン: T-test
 >
-> - **Metastats** {% icon tool %} with the following parameters
+> - **Metastats** {% icon tool %} で次のように設定する
 >   - "shared" to Subsample.shared
 >   - "design" to `mouse.time.design`
 {: .hands_on}
@@ -1368,7 +1351,7 @@ These data tell us that OTUs 1, 2, and 3 was significantly different between the
 >  Which of the top 10 OTUs in your output were significantly different between early and late samples?
 >
 > <details>
->  <summary> Click to view answer</summary>
+>  <summary> クリックして解答を表示</summary>
 >  Looking at the p-value cut-off and using your favorite cutoff threshold (say 0.01).
 >  Answer to the question is all OTUs with a value lower than this threshold. Note that these OTU labels may
 >  be different for you and may very between one repetition of this tutorial to the next, and therefore may
@@ -1378,9 +1361,9 @@ These data tell us that OTUs 1, 2, and 3 was significantly different between the
 
 Another non-parametric tool we can use as an alternative to metastats is lefse:
 
-> ### {% icon hands_on %} Hands-on: Lefse
+> ### {% icon hands_on %} ハンズオン: Lefse
 >
-> - **Lefse** {% icon tool %} with the following parameters
+> - **Lefse** {% icon tool %} で次のように設定する
 >   - "shared" to Subsample.shared
 >   - "design" to `mouse.time.design`
 {: .hands_on}
@@ -1402,9 +1385,9 @@ late samples
 Finally, Mothur has an implementation of the random forest algorithm build into her as classify.rf. This will tell
 us which features (i.e. OTUs) are useful in discriminating between the two groups of samples:
 
-> ### {% icon hands_on %} Hands-on: Classify.rf
+> ### {% icon hands_on %} ハンズオン: Classify.rf
 >
-> - **Classify.rf** {% icon tool %} with the following parameters
+> - **Classify.rf** {% icon tool %} で次のように設定する
 >   - "shared" to Subsample.shared
 >   - "design" to `mouse.time.design`
 {: .hands_on}
@@ -1447,9 +1430,9 @@ instance we can convert our shared file to the more widely used `biom` format an
 
 ## Phinch
 
-> ### {% icon hands_on %} Hands-on: Phinch
+> ### {% icon hands_on %} ハンズオン: Phinch
 >
-> - **Make.biom** {% icon tool %} with the following parameters
+> - **Make.biom** {% icon tool %} で次のように設定する
 >   - "shared" to Subsample.shared
 >   - "constaxonomy" to taxonomy output from Classify.otu (collection)
 >   - "metadata" to `mouse.dpw.metadata`
@@ -1469,9 +1452,9 @@ instance we can convert our shared file to the more widely used `biom` format an
 
 A second tool we can use to visualize our data, is [Krona]()
 
-> ### {% icon hands_on %} Hands-on: Krona
+> ### {% icon hands_on %} ハンズオン: Krona
 >
-> - **Visualize with Krona** {% icon tool %} with the following parameters
+> - **Visualize with Krona** {% icon tool %} で次のように設定する
 >   - "input file" to taxonomy output from Classify.otu (collection)
 >   - Set **Is this output from mothur?** to yes
 {: .hands_on}
@@ -1486,7 +1469,7 @@ innermost ring labeled "Bacteria"
 >  what percentage of your sample was labelled `Lactobacillus`?
 >
 > <details>
->   <summary> Click to view answer</summary>
+>   <summary> クリックして解答を表示</summary>
 >   Explore the Krona plot, double click on Firmicutes, here you should see Lactobacillus
 >   clearly (16% in our case), click on this segment and the right-hand side will show you the percentages at
 >   any point in the hierarchy (here 5% of all)
