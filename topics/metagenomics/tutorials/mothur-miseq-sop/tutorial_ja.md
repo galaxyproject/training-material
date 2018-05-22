@@ -54,14 +54,14 @@ tutorial_name: mothur-miseq-sop
 
 ![Experiment setup](../../images/experiment_setup.png)
 
-このチュートリアルを行いやすくするため、私たちはデータの一部分のみを用意していて、1匹の動物の10のタイムポイント（初期の5時点と後期の5時点）のフローファイルをあなたに提供します。解析パイプラインと実験機器のエラー率を評価するために、21種のバクテリア株由来のゲノムDNAからなる疑似集団を追加でリシーケンスしました。
+このチュートリアルを行いやすくするため、私たちはデータの一部分のみを用意していて、1匹の動物の10のタイムポイント（初期の5時点と後期の5時点）のフローファイルをあなたに提供します。解析パイプラインと実験機器のエラー率を評価するために、21種のバクテリア株由来のゲノムDNAからなる mock 共同体を追加でリシーケンスしました。
 
 > ### {% icon comment %} データセットの詳細
 > オリジナルのデータセットのサイズが大きいため（3.9 GB）fastq ファイルの362 ペアのうちの20 ペアを与えています。例えば、次の2ファイルが表示されます: `F3D0_S188_L001_R1_001.fastq` と `F3D0_S188_L001_R2_001.fastq`
 >
 > これら2つのファイルは0日目の3匹のメス（F3D0）（離乳した日）のものに対応しています。1つ目のファイル（および名前にR1があるすべてのファイル）はフォワードリードに対応していて、もう一方の2つ目のファイル（および名前にR2があるすべてのファイル）はリバースリードに対応しています。
 >
-> これらの配列は250 bpで、16S rRNA 遺伝子の V4 領域で重なり合っています; この領域はおよそ250 bp ほどの長さです。データセットを見てみると、22個のfastqファイルがあり、これらはメス3匹と疑似集団1つからの10のタイムポイントを表しています。`HMP_MOCK.v35.fasta` も見ることができて、このファイルには疑似集団で使用されている配列が fasta 形式で並べて入っています。
+> これらの配列は250 bpで、16S rRNA 遺伝子の V4 領域で重なり合っています; この領域はおよそ250 bp ほどの長さです。データセットを見てみると、22個のfastqファイルがあり、これらはメス3匹と mock 共同体1つからの10のタイムポイントを表しています。`HMP_MOCK.v35.fasta` も見ることができて、このファイルには mock 共同体で使用されている配列が fasta 形式で並べて入っています。
 {: .comment}
 
 <!-- note: mothur seems to have forgotten day 4 in their SOP example data, therefore this description and results
@@ -84,7 +84,7 @@ in this document differ slightly from the description on their website -->
 >
 > 2. **サンプルデータをインポートする。**このコースのデータは Galaxy の共有ライブラリから入手することができます（インストラクターに聞いてください）。もしデータがない場合は、自分自身でアップロードすることができます。
 > - オプション 1: データライブラリから:
->   - 共有データライブラリに移動すると、20 ペアの fastq ファイルが見つかります; マウスからは19 ペア、そして残り1 ペアは疑似集団からのものです。
+>   - 共有データライブラリに移動すると、20 ペアの fastq ファイルが見つかります; マウスからは19 ペア、そして残り1 ペアは mock 共同体からのものです。
 > - オプション 2: コンピュータから:
 >   - Zenodo から直接データを取得する: [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.165147.svg)](https://doi.org/10.5281/zenodo.165147)
 >   - `input_data.zip` をダウンロードし解凍する
@@ -463,35 +463,33 @@ that chloroplasts and mitochondria have no functional role in a microbial commun
 > ### {% icon hands_on %} ハンズオン: 望ましくない配列を除去する
 >
 > - **Classify.seqs** {% icon tool %} で次のように設定する
->   - "fasta" to the fasta output from Remove.seqs
->   - "reference" to `trainset9032012.pds.fasta` from your history
->   - "taxonomy" to `trainset9032012.pds.tax` from your history
->   - "count" to the count table file from Remove.seqs
->   - "cutoff" to 80
+>   - "fasta" には Remove.seqs のアウトプットである fasta ファイルを選択する
+>   - "reference" にはヒストリーから `trainset9032012.pds.fasta` を選択する
+>   - "taxonomy" にはヒストリーから `trainset9032012.pds.tax` を選択する
+>   - "count" には Remove.seqs からの count table ファイルを選択する
+>   - "cutoff" → 80
 >
 > taxonomy のアウトプットを見てください。すべてのリードが分類されています。
 >
 > 現在すべてのリードが分類されているので望ましくないものを除去します。これは remove.lineage コマンドによって行います:
 >
 > - **Remove.lineage** {% icon tool %} で次のように設定する
->   - "taxonomy" to the taxonomy output from Classify.seqs
->   - "taxon" to `Chloroplast-Mitochondria-unknown-Archaea-Eukaryota` in the text box under *Manually
-> select taxons for filtering*
->   - "fasta" to the fasta output from Remove.seqs
->   - "count" to the count table from Remove.seqs
+>   - "taxonomy" には Classify.seqs のアウトプットである taxonomy を選択する
+>   - "taxon" には *Manually select taxons for filtering* の下のテキストボックスに `Chloroplast-Mitochondria-unknown-Archaea-Eukaryota` と入力する
+>   - "fasta" には Remove.seqs のアウトプットである fasta ファイルを選択する
+>   - "count" には Remove.seqs からの count table ファイルを選択する
 >
 > > ### {% icon question %} Questions
 > >
-> > 1. How many unique (representative) sequences were removed in this step?
-> > 2. How many sequences in total?
+> > 1. このステップでいくつの一意な（代表的な）配列が除去されたでしょうか？
+> > 2. 合計の配列はいくつでしょうか？
 > >
 > >    <details>
 > >      <summary> クリックして解答を表示</summary><br>
-> >      20 representative sequences were removed. <br>
-> >      The fasta file output from Remove.seqs had 2628 sequences while the fasta output from Remove.lineages
-> >      contained 2608 sequences.
+> >      20 の代表的な配列が除去されました。 <br>
+> >      Remove.seqs からのアウトプットである fasta ファイルには 2628 の配列があり、Remove.lineages からのアウトプットである fasta ファイルは 2608 の配列を含んでいました。
 > >      <br><br>
-> >      162 total sequences were removed. <br>
+> >      合計で 162 の配列が除去されました。 <br>
 > >      If you run summary.seqs with the count table, you will see that we now have 2608 unique sequences
 > >      representing a total of 119,168 total sequences (down from 119,330 before). This means 162 of our  
 > >      sequences were in represented by these 20 representative sequences.
@@ -499,62 +497,54 @@ that chloroplasts and mitochondria have no functional role in a microbial commun
 > {: .question}
 {: .hands_on}
 
-Also of note is that *unknown* only pops up as a classification if the classifier cannot classify your
-sequence to one of the domains.
+また、*unknown* が分類としてポップアップするのは分類する際に配列がドメインの1つに仕分けることができないときのみであることに注意しましょう。
 
-At this point we have curated our data as far as possible and we're ready to see what our error rate is.
+この段階まででデータを可能な限り精選したので、エラー率について調べる準備が整いました。
 
 
-## Assessing error rates based on our mock community
+## mock 共同体に基づいてエラー率を評価する
 
-Measuring the error rate of your sequences is something you can only do if you have co-sequenced a mock
-community, that is, a sample of which you know the exact composition. This is something we include for
-every 95 samples we sequence. You should too because it will help you gauge your error rates and allow
-you to see how well your curation is going, and whether something is wrong with your sequencing setup.
+配列のエラー率を測ることは mock 共同体を co-sequenced した場合、つまり、正確な構成を知っているサンプルである場合のみ行うことができます。  This is something we include for every 95 samples we sequence. You should too because it will help you gauge your error rates and allow you to see how well your curation is going, and whether something is wrong with your sequencing setup.
 
-> ### {% icon comment %} Definition
+> ### {% icon comment %} 定義
 >
-> **Mock community:** A defined mixture of microbial cells and/or viruses or nucleic acid molecules created
-> *in vitro* to simulate the composition of a microbiome sample or the nucleic acid isolated therefrom.
+> **mock 共同体:** 微生物のサンプルやそれから単離した核酸の組成をシミュレートするための *in vitro* で作成された微生物細胞および/またはウイルスまたは核酸分子による明確な混合物。
 >
 {: .note}
 
-Our mock community is composed of genomic DNA from 21 bacterial strains. So in a perfect world, this is
-exactly what we would expect the analysis to produce as a result.   
+私たちの mock 共同体は 21 の細菌株由来のゲノムDNAから作成されています。ですので完璧な世界では、これは解析の結果産物とまったく同じものになります。    
 
-First, let's extract the sequences belonging to our mock samples from our data:
+まずは、データから mock サンプルに属する配列を抽出しましょう:
 
-> ### {% icon hands_on %} ハンズオン: extract mock sample from our dataset
+> ### {% icon hands_on %} ハンズオン: データセットから mock サンプルを抽出する
 >
 >
 >
 > 1. **Get.groups** {% icon tool %} で次のように設定する
->   - "group file or count table" to the count table from Remove.lineage
->   - "groups" to `Mock`
->   - "fasta" to fasta output from Remove.lineage
+>   - "group file or count table" には Remove.lineage からの count table を選択する
+>   - "groups" → `Mock`
+>   - "fasta" には Remove.lineage のアウトプットである fasta ファイルを選択する
 >
 {: .hands_on}
 
-In the log file we see the following:
+log file には次の内容が表示されます:
 
 ```
 Selected 67 sequences from your fasta file.
 Selected 4060 sequences from your count file
 ```
 
-This tells us that we had 67 unique sequences and a total of 4,060 total sequences in our Mock sample. We
-can now use the `seq.error` command to measure the error rates based on our mock reference. Here we align
-the reads from our mock sample back to their known sequences, to see how many fail to match.
+これは mock サンプル中に67個の一意な配列と合計4060個の配列があることを示しています。 `seq.error` コマンドを用いて mock リファレンスに基づいてエラー率を測ることができます。ここでは mock サンプルのリードを既知の配列に照らし合わせて、どのくらい一致していないかを確認します。
 
-> ### {% icon hands_on %} ハンズオン: Assess error rates based on a mock community
+> ### {% icon hands_on %} ハンズオン: mock 共同体に基づいてエラー率を評価する
 > - **Seq.error** {% icon tool %} で次のように設定する
->   - "fasta" to the fasta from Get.groups
->   - "reference" to `HMP_MOCK.v35.fasta` file from your history
->   - "count" to the count table from Get.groups
+>   - "fasta" には Get.groups からの fasta ファイルを選択する
+>   - "reference" にはヒストリーから `HMP_MOCK.v35.fasta` ファイルを選択する
+>   - "count" には Get.groups からの count table を選択する
 >
 {: .hands_on}
 
- In the log file we see something like this:
+ log file には次のような内容が表示されます:
 
 ```
 It took 0 to read 32 sequences.
@@ -567,20 +557,16 @@ Errors    Sequences
 4    1
 ```
 
-That rocks, eh? Our error rate is 0.0065%!
+えぇ？すごいですね、エラー率は 0.0065% です！
 
 
-### Cluster mock sequences into OTUs
+### OTU への mock 配列の集約
 
-We can now cluster the mock sequences into OTUs to see how many spurious OTUs we have:
+今 mock 配列を OTU へ集約して We can now cluster the mock sequences into OTUs to see how many spurious OTUs we have:
 
-> ### {% icon tip %} Background: Operational Taxonomic Units (OTUs)
+> ### {% icon tip %} 背景: Operational Taxonomic Units (OTUs)
 >
-> In 16S metagenomics approaches, OTUs are clusters of similar sequence variants of the 16S rDNA marker gene
-> sequence. Each of these clusters is intended to represent a taxonomic unit of a bacteria species or genus
-> depending on the sequence similarity threshold. Typically, OTU cluster are defined by a 97% identity
-> threshold of the 16S gene sequence variants at genus level. 98% or 99% identity is suggested for species
-> separation.
+> 16S メタゲノミクスアプローチでは、OTU は 16S rDNA マーカー遺伝子と同種な配列の変異体のクラスターである。これらのクラスターのそれぞれは配列の類似性の閾値に応じて細菌種または属の分類学的な単位を示すことを意図している。典型的には、OTU クラスターは Typically, OTU cluster are defined by a 97% identity threshold of the 16S gene sequence variants at genus level. 98% or 99% identity is suggested for species separation.
 >
 > ![OTU graph](../../images/OTU_graph.png)
 >
@@ -590,29 +576,29 @@ We can now cluster the mock sequences into OTUs to see how many spurious OTUs we
 
 > ### {% icon hands_on %} ハンズオン: Cluster mock sequences into OTUs
 >
-> First we calculate the pairwise distances between our sequences
+> まず、配列間の pairwise 距離を計算します
 >
 > - **Dist.seqs** {% icon tool %} で次のように設定する
->   - "fasta" to the fasta from Get.groups
->   - "cutoff" to `0.20`
+>   - "fasta" には Get.groups からの fasta ファイルを選択する
+>   - "cutoff" → `0.20`
 >  
-> Next we group sequences into OTUs
+> 次に配列を OTU にグループ化します
 >
 > - **Cluster** {% icon tool %} で次のように設定する
->   - "column" to the dist output from Dist.seqs
->   - "count" to the count table from Get.groups
+>   - "column" には Dist.seqs のアウトプットである dist を選択する
+>   - "count" には Get.groups からの count table を選択する
 >
-> Now we make a *shared* file that summarizes all our data into one handy table
+> それからすべてのデータを1つの便利な表にまとめた *shared* ファイルを作成します
 >
 > - **Make.shared** {% icon tool %} で次のように設定する
->     - "list" to the OTU list from Cluster
->     - "count" to the count table from Get.groups
->     - "label" to `0.03` (this indicates we are interested in the clustering at a 97% identity threshold)
+>     - "list" には Cluster からの OTU list を選択する
+>     - "count" には Get.groups からの count table を選択する
+>     - "label" → `0.03` （これは97％の同定閾値でのクラスタリングに関心があることを示しています）
 >
-> And now we generate intra-sample rarefaction curves
+> そしてサンプル内の rarefaction 曲線を生成します
 >
 > - **Rarefaction.single** {% icon tool %} で次のように設定する
->   - "shared" to the shared file from Make.shared
+>   - "shared" には Make.shared からの shared ファイルを選択する 
 >
 > > ### {% icon question %} Question
 > >
@@ -633,7 +619,7 @@ includes some stealthy chimeras that escaped our detection methods. If we used 3
 have about 31 OTUs. In a perfect world with no chimeras and no sequencing errors, we'd have 21 OTUs.
 This is not a perfect world. But this is pretty darn good!
 
-> ### {% icon tip %} Background: Rarefaction
+> ### {% icon tip %} 背景: Rarefaction
 >
 > To estimate the fraction of species sequenced, rarefaction curves are typically used. A rarefaction curve
 > plots the number of species as a function of the number of individuals sampled. The curve usually begins
