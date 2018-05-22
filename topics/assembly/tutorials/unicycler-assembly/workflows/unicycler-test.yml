@@ -1,0 +1,15 @@
+- doc: Test sample data for the unicycler assembly workflow
+  job: unicycler-job.yml
+  outputs:
+    ffn:
+      asserts:
+        has_text:
+          text: "JBrowseDefaultMainPage"
+    gbk:
+      asserts:
+        has_line:
+          line: '>Wildtype Staphylococcus aureus strain WT.'
+    tbl:
+      asserts:
+        has_n_columns:
+          n: 2
