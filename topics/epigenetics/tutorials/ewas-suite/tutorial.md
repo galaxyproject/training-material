@@ -1,6 +1,6 @@
 ---
 layout: tutorial_hands_on
-topic_name: your_topic
+topic_name: epigenetics
 tutorial_name: ewas_suite_analysis
 ---
 
@@ -14,8 +14,12 @@ The field of cancer genomics has demonstrated the power of massively parallel se
 >
 > In this tutorial, we will deal with:
 >
-> 1. TOC
-> {:toc}
+> 1. Illumina Array Data Loading
+> 2. Preprocessing and Normalization
+> 3. Quality Assessment and Control
+> 4. Annotating probes affected by genetic variation
+> 5. DMPs and DMRs Identification
+> 6. Functional Annotation (optional)
 >
 {: .agenda}
 
