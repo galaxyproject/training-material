@@ -15,23 +15,24 @@ If you have any questions, you can reach us using the [Gitter chat](https://gitt
 
 # How can I use these ressources to learn about Galaxy and data analyses?
 
-Annotations
+- Parse the website to find interesting tutorials
+- Find a Galaxy instance to use for the tutorial 
+- Take one of our interactive tour directly on a Galaxy instance
 
 # How can I use these ressources as an instructor?
 
-Good practices
-
-
-
-## Docker
-
-## Training Infrastructure as a Service
+- Parse the website to find interesting tutorials to teach
+- Find a Galaxy instance to use for the workshop
+    - Check the annotated Galaxy instance
+    - Training Infrastructure as a Service on useGalaxy.eu
+    - Docker image
+    - Deployment of the tools, data, etc on an exisiting instance using our provided scripts
+- Have a look at our [Good practices slides]()
 
 # How can I make sure a tutorial is running on a Galaxy instance?
 
-Badge?
-Installations
-
+- Badge?
+- Installations
 
 # How can I contribute?
 
@@ -84,6 +85,12 @@ In [issues](https://github.com/galaxyproject/training-material/issues), you will
 
 We strongly recommend you read and follow Software Carpentry's recommendations on [lesson design](https://swcarpentry.github.io/lesson-example/01-design/) and [lesson writing](https://swcarpentry.github.io/instructor-training/19-lessons/) if you plan to add or change some training materials, and also to check the [structure of the training material](#how-the-training-material-is-structured).
 
+## Is there any interesting events in which I could participate?
+
+Contribution Fest
+- GCC
+- Every 3 months on the 3rd Friday: check our next event
+
 # How is the training material structured?
 
 Each training material is related to a topic. All training materials (slides, tutorials, ...) related to a topic are found in a dedicated directory (*e.g.* `transcriptomics` directory contains the material related to transcriptomis analysis). Each topic have the following structure:
@@ -110,10 +117,16 @@ Each training material is related to a topic. All training materials (slides, tu
 
 You want to add a new topic? You can check our [dedicated tutorial]({{ site.baseurl }}/topics/contributing/tutorials/create-new-topic/tutorial.html) and also contact us to discuss about it.
 
+# How can I give feedbacks?
+
+- tutorial level
+- contributions
+- issues
+
 # How is the content licensed?
 
 The content of this website is Creative Commons Attribution 4.0 ([License]({{ site.github_repository }}/LICENSE.md)).
 
 # How can I cite this effort?
 
-We wrote an [article](https://www.biorxiv.org/content/early/2018/04/05/225680) about our effort there. You can cite it
+We wrote an [article](https://www.biorxiv.org/content/early/2018/04/05/225680) about our effort there. You can cite it and then giving us some credit.
