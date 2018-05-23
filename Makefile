@@ -10,7 +10,6 @@ REPO=$(shell echo "$${ORIGIN_REPO:-galaxyproject/training-material}")
 BRANCH=$(shell echo "$${ORIGIN_BRANCH:-master}")
 MINICONDA_URL=https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
 SHELL=bash
-CONDA_VERSION := $(shell conda --version 2>/dev/null)
 RUBY_VERSION=2.4.4
 
 ifeq ($(shell uname -s),Darwin)
@@ -18,9 +17,35 @@ ifeq ($(shell uname -s),Darwin)
 	MINICONDA_URL=https://repo.continuum.io/miniconda/Miniconda3-latest-MacOSX-x86_64.sh
 endif
 
+CONDA=$(shell which conda)
+ifeq ($(CONDA),)
+	CONDA=${HOME}/miniconda3/bin/conda
+endif
+
 default: help
 
-serve: ## run a local server
+install-conda: ## install Miniconda
+	wget $(MINICONDA_URL) -O miniconda.sh
+	bash miniconda.sh -b
+.PHONY: install-conda
+
+create-env: ## create conda environment
+	${CONDA} env create -f environment.yml
+.PHONY: create-env	
+
+install: ## install dependencies
+	npm install decktape
+	gem install bundler
+	gem install pkg-config -v "~> 1.1"
+	gem install nokogiri -v '1.8.2' -- --use-system-libraries --with-xml=$(CONDA_PREFIX)/lib
+	gem install jemoji
+	gem install jekyll
+	gem install jekyll-feed
+	gem install html-proofer
+	gem install awesome_bot
+.PHONY: install
+
+serve: ## run a local server}
 	${JEKYLL} serve -d _site/training-material
 .PHONY: serve
 
@@ -83,44 +108,6 @@ check-links-gh-pages:  ## validate HTML on gh-pages branch (for daily cron job)
        -f {}"
 .PHONY: check-links-gh-pages
 
-clean: ## clean up junk files
-	@rm -rf _site
-	@rm -rf .sass-cache
-	@rm -rf .bundle
-	@rm -rf vendor
-	@rm -rf node_modules
-	@find . -name .DS_Store -exec rm {} \;
-	@find . -name '*~' -exec rm {} \;
-.PHONY: clean
-
-install-conda: ## install Miniconda
-ifndef CONDA_VERSION
-	wget $(MINICONDA_URL) -O miniconda.sh
-	bash miniconda.sh -b
-	export PATH="$(HOME)/miniconda/bin:$(PATH)"
-	conda config --system --add channels conda-forge
-	conda config --system --add channels defaults
-	conda update -q conda
-	conda info -a
-endif
-.PHONY: install-conda
-
-create-env: install-conda ## create conda environment
-	conda env create -f environment.yml -q --force
-.PHONY: create-env	
-
-install: ## install dependencies
-	npm install decktape
-	gem install bundler
-	gem install pkg-config -v "~> 1.1"
-	gem install nokogiri -v '1.8.2' -- --use-system-libraries --with-xml=$(CONDA_PREFIX)/lib
-	gem install jemoji
-	gem install jekyll
-	gem install jekyll-feed
-	gem install html-proofer
-	gem install awesome_bot
-.PHONY: install
-
 pdf: detached-serve ## generate the PDF of the tutorials and slides
 	mkdir -p _pdf
 	@for t in $(TUTORIALS); do \
@@ -146,6 +133,17 @@ pdf: detached-serve ## generate the PDF of the tutorials and slides
 annotate:
 	python bin/add_galaxy_instance_annotations.py
 	python bin/add_galaxy_instance_badges.py
+.PHONY: annotate
+
+clean: ## clean up junk files
+	@rm -rf _site
+	@rm -rf .sass-cache
+	@rm -rf .bundle
+	@rm -rf vendor
+	@rm -rf node_modules
+	@find . -name .DS_Store -exec rm {} \;
+	@find . -name '*~' -exec rm {} \;
+.PHONY: clean
 
 help:
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'

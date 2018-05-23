@@ -36,6 +36,8 @@ install:
   - sudo apt-get update
   - sudo update-ca-certificates
   - make install-conda
+  - export PATH="$HOME/miniconda3/bin:$PATH"
+  - conda config --set always_yes yes --set changeps1 no
   - make create-env
   - source activate galaxy_training_material
   - make install
