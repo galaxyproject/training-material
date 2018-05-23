@@ -1,5 +1,5 @@
 # Settings
-JEKYLL=bundle exec jekyll
+JEKYLL=jekyll
 CHROME=google-chrome-stable
 TUTORIALS=$(shell find _site/training-material -name 'tutorial.html' | sed 's/_site\/training-material\///')
 SLIDES=$(shell find _site/training-material -name 'slides.html' | sed 's/_site\/training-material\///')
@@ -8,9 +8,10 @@ SITE_URL=http://localhost:4000/training-material
 PDF_DIR=_pdf
 REPO=$(shell echo "$${ORIGIN_REPO:-galaxyproject/training-material}")
 BRANCH=$(shell echo "$${ORIGIN_BRANCH:-master}")
-MINICONDA_URL = https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
+MINICONDA_URL=https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
 SHELL=bash
 CONDA_VERSION := $(shell conda --version 2>/dev/null)
+RUBY_VERSION=2.4.4
 
 ifeq ($(shell uname -s),Darwin)
 	CHROME=/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome
@@ -32,7 +33,7 @@ build: clean ## build files but do not run a server
 .PHONY: build
 
 check-html: build ## validate HTML
-	bundle exec htmlproofer \
+	htmlproofer \
           --assume-extension \
           --http-status-ignore 405,503,999 \
           --url-ignore "/.*localhost.*/","/.*vimeo\.com.*/","/.*gitter\.im.*/","/.*drmaa\.org.*/" \
@@ -63,7 +64,7 @@ check: check-yaml check-html check-slides  ## run all checks
 .PHONY: check
 
 check-links-gh-pages:  ## validate HTML on gh-pages branch (for daily cron job)
-	bundle exec htmlproofer \
+	htmlproofer \
           --assume-extension \
           --http-status-ignore 405,503,999 \
           --url-ignore "/.*localhost.*/","/.*vimeo\.com.*/","/.*gitter\.im.*/","/.*drmaa\.org.*/" \
@@ -109,11 +110,14 @@ create-env: install-conda ## create conda environment
 
 install: ## install dependencies
 	npm install decktape
-	gem install --install-dir $(CONDA_PREFIX) bundler
-ifeq ($(shell uname -s),Darwin)
-	gem install --install-dir vendor/bundle/ruby/2.4.0 nokogiri
-endif
-	bundle install --path vendor/bundle
+	gem install bundler
+	gem install pkg-config -v "~> 1.1"
+	gem install nokogiri -v '1.8.2' -- --use-system-libraries --with-xml=$(CONDA_PREFIX)/lib
+	gem install jemoji
+	gem install jekyll
+	gem install jekyll-feed
+	gem install html-proofer
+	gem install awesome_bot
 .PHONY: install
 
 pdf: detached-serve ## generate the PDF of the tutorials and slides
