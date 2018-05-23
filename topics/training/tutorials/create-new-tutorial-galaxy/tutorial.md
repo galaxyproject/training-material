@@ -250,7 +250,7 @@ run-data-managers -g <Galaxy url> -a <API key> --config topic/<topic>/tutorial/<
 
 **Installing Tours**
 
-This is currently not possible using ephhemeris, however, these can be installed by copying the files to the `config/plugins/tours/` directory of your Galaxy instance.
+This is currently not possible using ephemeris, however, these can be installed by copying the files to the `config/plugins/tours/` directory of your Galaxy instance.
 
 # Conclusion
 {:.no_toc}
