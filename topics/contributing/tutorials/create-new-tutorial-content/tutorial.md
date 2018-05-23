@@ -43,6 +43,8 @@ The first step we need to define is in which topic to place our new tutorial. Th
 >    {: .question}
 {: .hands_on}
 
+> Want to create a new topic? [Check out our tutorial to create a new topic]({{ site.baseurl }}/topics/contributing/tutorials/create-new-topic/tutorial.html)
+
 ## Creating the directory for the tutorial
 
 Once the topic has been chosen, we can finally create the tutorial. A tutorial in the Galaxy Training Network contains:
@@ -153,7 +155,12 @@ If not correctly defined, the tutorial will not be found within the website.
 > ### {% icon hands_on %} Hands-on: Fix the top metadata
 >
 > 1. Change the `tutorial_name` and the `topic_name` to fit to the ones defined in the metadata
-> 2. Check if the tutorial has been correctly added at [http://localhost:4000/training-material/topics/sequence-analysis/similarity-search ](http://localhost:4000/training-material/topics/sequence-analysis/similarity-search)
+> 2. Make sure that Jekyll is running
+> 
+>    > Want to learm how to start Jekyll? [Check out our tutorial to serve the website locally]({{ site.baseurl }}/topics/contributing/tutorials/create-new-tutorial-jekyll/tutorial.html)
+>
+> 2. Check if the tutorial has been correctly added at [http://localhost:4000/training-material/](http://localhost:4000/training-material/)
+>
 {: .hands_on}
 
 ### Content
