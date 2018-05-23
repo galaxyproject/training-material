@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 topic_name: epigenetics
-tutorial_name: ewas_suite_analysis
+tutorial_name: ewas-suite
 ---
 
 # Introduction
@@ -36,117 +36,75 @@ The first step of EWAS data anylalysis is raw methylation data loading (intensit
 > ### {% icon hands_on %} Hands-on: Data Loading
 >
 > 1. Create a new history for this tutorial and give it a proper name
-> 2. Import Grn and Red .IDAT files from [Zenodo](https://zenodo.org/record/1251211#.WwREQ1Mvz-Y) or from the data library into the history
+> 2. Import Grn and Red .IDAT files from [Zenodo](https://zenodo.org/record/1251211#.WwREQ1Mvz-Y)
+> 3. Run **minfi read450k**  {% icon tool %} with red and green .IDAT files i.e. `red files:` GSM1588704_8795207135_R01C02_Red.idat, GSM1588705_8795207119_R05C02_Red.idat, GSM1588706_8795207135_R02C02_Red.idat, GSM1588707_8795207119_R06C02_Red.idat and `green files:` GSM1588704_8795207135_R01C02_Grn.idat, GSM1588705_8795207119_R05C02_Grn.idat, GSM1588706_8795207135_R02C02_Grn.idat, GSM1588707_8795207119_R06C02_Grn.idat
+> 4. Inspect generated set of data
+{: .hands_on}
+> ### {% icon question %} Questions
 >
->
->     ### {% icon tip %} Tip: Importing data via links
->    
->     * Copy the link location
->     * Open the Galaxy Upload Manager
->     * Select **Paste/Fetch Data**
->     * Paste the link into the text field
->     * Press **Start** and **Close** the window
->     * Click on the `pencil` icon once the file is imported
->     * Click on **Datatype** in the middle panel
->     * Select `idat` as **New Type**
+> 1. How are the Green and Red signals are stored?
+>  <details>
+>    <summary>Click to view answers</summary>
+>    <ol type="1">
+>    <li> Green and Red micro arrays are builded up into `RGChannelSet` class</li>
+>    </ol>
+>   </details>
+>  {: .question}  
+
+# Step 2: Preprocessing and  Quality Assessment
+Preprocessing and data quality assurance is an important step in Infinium Methylation Assay analysis. 
+`RGChannelSet` represents two color data with a green and a red channel and can be converted into methylated and unmethylated signals assigned to `MethylSet` or into Beta values build in `RatioSet`. User can convert from `RGChannelSet` into `MethylSet` using the **minfi mset** {% icon tool %} or compute Beta values using **minfi set** {% icon tool %}. The **minfi qc** {% icon tool %} tool extracts and plots the quality control data frame with two columns mMed and uMed which are the medians of `MethylSet` signals (Meth and Unmeth).Comparing them against one another allows user to detect and remove low-quality samples. 
+> ### {% icon hands_on %} Hands-on: Preprocessing
+> 1. Run **minfi mset** {% icon tool %} to create `MethylSet` object
+> 2. Run **minfi qc** {% icon tool %} to estimate sample-specific quality control
+> 3. Convert methylation data from the `MethylSet` , to ratios with **minfi rset** {% icon tool %}
+> 4. Then map ratio data to the genome using **minfi maptogenome** {% icon tool %} tool  
+> 
+> ### {% icon tip %} Tip: Preprocess and Normalize data
+> 
+> If your files require normalisation, you might prefer to use other of preprocessing tools provided in EWAS suite i.e. **minfi ppfun** {% icon tool %} or **minfi ppquantile**  {% icon tool %} look for recomendation at (ref).
 >    {: .tip}
+> 
+{: .hands_on}
+# Step 3: Removing probes affected by genetic variation
+Incomplete annotation of genetic variations such as single nucleotide polymorphism (SNP) may affect DNA measurements and interfere results from downstream analysis. 
+> ### {% icon hands_on %} Hands-on: Removing probes affected by genetic variation
+> 1. Run **minfi dropsnp** {% icon tool %} to remove the probes that contain either a SNP at the metylated loci interrogation or at the single nucleotide extension (highly recommended /ref)
+> 
+> 
+# Step 4: DMPs and DMRs Identification
+The main goal of the EWAS suite is to simplify the way differentially methylated loci sites are detected. The EWAS suite contains **minfi dmp** {% icon tool %} tool detecting differentially methylated positions (DMPs) with respect to a phenotype covariate, and more complex **minfi dmr** {% icon tool %} solution for finding differentially methylated regions (DMRs). Genomic regions that are differentially methylated between two conditions can be tracked using a bump hunting algorithm. The algorithm first implements a t-statistic at each methylated loci location, with optional smoothing, then groups probes into clusters with a maximum location gap and a cutoff size to refer the lowest possible value of genomic profile hunted by our tool.
+> ### {% icon question %} Questions
 >
->    ### {% icon tip %} Tip: Importing data from a data library
->    
->    * Go into "Shared data" (top panel) then "Data libraries"
->    * Click on "Training data" and then "EWAS suite analysis"
->    * Select interesting file
->    * Click on "Import selected datasets into history"
->    * Import in the history
+> 1. How are we define phenotype covariate?
+>  <details>
+>    <summary>Click to view answers</summary>
+>    <ol type="1">
+>    <li>Phenotype covariate is the set of observable characteristics of an individual resulting from the gene-environment interactions.</li>
+>    </ol>
+>   </details>
+>  {: .question}
+> ### {% icon hands_on %} Hands-on: DMPs and DMRs Identification
+> 1. Import phenotypeTable.txt from [Zenodo](https://zenodo.org/record/1251211#.WwREQ1Mvz-Y)
+> 2. Run **minfi dmp** {% icon tool %} with 
+    -  `GenomicRatioSet` from step4 and phenotypeTable.txt
+    -  Phenotype Type = categorical
+    -  qCutoff Size = 0.5 (DMPs with an FDR q-value greater than this will not be returned)
+    -  Variance Shrinkage = TRUE (is recommended when sample sizes are small <10)
+> 3. Run **minfi dmr** {% icon tool %} 
+    -  `GenomicRatioSet` from step4 and phenotypeTable.txt
+    -  factor1 = sensitive factor2 = resistant (factor1 vs factor2)
+    -  maxGap Size = 250
+    - coef Size = 2
+    - Cutoff Size = 0.1
+    - nullMethod = permutation
+    - verbose = TRUE
+> ### {% icon tip %} Tip: Preprocess and Normalize data
+> 
+> Phenotype table can be in diffrent size with diffrent arguments only second column is required to contain phenotype covariate information for each sample. 
 >    {: .tip}
->
->    As default, Galaxy takes the link as name, so rename them.
->
-> 3. Run **minfi read450k**  {% icon tool %} with red and green .IDAT files i.e. red files: GSM1588704_8795207135_R01C02_Red.idat, GSM1588705_8795207119_R05C02_Red.idat, GSM1588706_8795207135_R02C02_Red.idat, GSM1588707_8795207119_R06C02_Red.idat and green files: GSM1588704_8795207135_R01C02_Grn.idat, GSM1588705_8795207119_R05C02_Grn.idat, GSM1588706_8795207135_R02C02_Grn.idat, GSM1588707_8795207119_R06C02_Grn.idat
-> 4. Inspect generated RGChannelSet class
-{: .hands_on}
-  
-## Subpart 1
-
-Short introduction about this subpart.
-
-<!--
-{% icon hands_on %} will render the hands_on icon as specified in
-_config.yml in the root of this repository.
--->
-
-> ### {% icon hands_on %} Hands-on: Data upload
->
-> 1. Step1
-> 2. Step2
->
->    > ### {% icon comment %} Comments
->    > A comment
->    {: .comment}
->
->    > ### {% icon tip %}Tip: A tip
->    >
->    > * Step1
->    > * Step2
->    {: .tip}
-{: .hands_on}
-
-## Subpart 2
-
-Short introduction about this subpart.
-
-> ### {% icon hands_on %} Hands-on: Data upload
->
-> 1. Step1
-> 2. Step2
->
->    > ### {% icon question %} Question
->    >
->    > Question?
->    >
->    > <details>
->    > <summary>Click to view answers</summary>
->    > Answer to question
->    > </details>
->    {: .question}
-{: .hands_on}
-
-Some blabla
-> ### {% icon hands_on %} Hands-on: Data upload
->
-> 1. Step1
-> 2. **My Tool** {% icon tool %} with the following parameters
->   - "param1" to the file `myfile`
->   - "param2" to `42`
->   - "param3" to `Yes`
->
->    > ### {% icon question %} Questions
->    >
->    > 1. Question1?
->    > 2. Question2?
->    >
->    >    <details>
->    >    <summary>Click to view answers</summary>
->    >    <ol type="1">
->    >    <li>Answer for question1</li>
->    >    <li>Answer for question2</li>
->    >    </ol>
->    >    </details>
->    {: .question}
->
-> 3. Step3
-{: .hands_on}
-
-# Part 2
-
-Short introduction about this subpart.
-
-> ### {% icon comment %} Comment
->
-> Do you want to learn more about the principles behind mapping? Follow our [training](../../NGS-mapping)
-{: .comment}
 
 # Conclusion
 {:.no_toc}
 
-Conclusion about the technical key points. And then relation between the technics and the biological question to end with a global view.
+Epigenetic aberrations which involve DNA modifications give researchers an interest to identify novel non-genetic factors responsible for complex human phenotypes such as height, weight, and disease. To identify methylation changes researchers need to perform complicated and  time consuming computational analysis. Here, the EWAS suite becomes a solution for this inconvenience and provides a simplified downstream analysis available as ready to run pipline in supplementary materials. 
