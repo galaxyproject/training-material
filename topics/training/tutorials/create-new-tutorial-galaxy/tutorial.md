@@ -174,7 +174,7 @@ Every topic will come with a Docker image containing the tools, data, workflows 
 
 If you have a Galaxy server already running somewhere and would like to support one or more training modules, [ephemeris]() can be used to easily install all the required tools, reference data, data libraries, tours and workflows.
 
-### Installing Ephemeris
+### Prerequisites
 
 First let us install ephemeris on our system:
 
