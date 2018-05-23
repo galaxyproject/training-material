@@ -1,0 +1,69 @@
+
+{
+    "@context": "http://schema.org",
+    "@type": "CreativeWork",
+    "name": "{{material.title}}",
+    "mentions": [
+    {% if material.zenodo_link %}
+        {
+            "@type": "Thing",
+            "url": "{{material.zenodo_link}}",
+            "name": "Training data for {{material.title}} tutorial"
+        },
+    {% endif %}
+    {% if material.workflows %}
+        {
+            "@type": "Thing",
+            "url": "{{ site.github_repository  }}/tree/master/topics/{{ topic.name }}/tutorials/{{ material.name }}/workflows/",
+            "name": "Workflow for {{material.title}} tutorial"
+        },
+    {% endif %}
+    {}],
+    "contributor": [
+        {% for contributor in material.contributors %}
+            {
+                "@type": "Person",
+                "name": "{{contributor}}"
+            },
+        {% endfor %}
+    {}],
+    {% if material.type == "introduction" %}
+            "url": "{{ site.baseurl }}/topics/{{ topic.name }}/slides/{{ material.name }}.html",
+    {% elsif  material.type == "tutorial" %}
+        {% if material.hands_on %}
+            {% if material.hands_on == "external" %}
+                "url": "{{ material.hands_on_url }}",
+            {% elsif material.hands_on == "github" %}
+                "url": "{{ site.github_repository }}/tree/master/topics/{{ topic.name }}/tutorials/{{ material.name }}/tutorial.md",
+            {% elsif material.hands_on %}
+                "url": "{{ site.baseurl }}/topics/{{ topic.name }}/tutorials/{{ material.name }}/tutorial.html",
+            {% endif %}
+            "hasPart": [
+            {% if material.slides %}
+                     {
+                        "@type": "CreativeWork",
+                        "url": "{{ site.baseurl }}/topics/{{ topic.name }}/slides/{{ material.name }}.html",
+                        "name": "Slides for {{material.title}}"
+                      },            
+            {% endif %}
+            {% if material.galaxy_tour %}
+                    {
+                        "@type": "CreativeWork",
+                        "url": "{{ site.github_repository }}/tree/master/topics/{{ topic.name }}/tutorials/{{ material.name }}/tours/",
+                        "name": "Galaxy Tour for {{material.title}}"
+                      },                
+            {% endif %}
+            {}],
+        {% elsif material.slides %}
+                "url": "{{ site.baseurl }}/topics/{{ topic.name }}/slides/{{ material.name }}.html",
+                {% if material.galaxy_tour %}        
+                      "hasPart": {
+                        "@type": "CreativeWork",
+                        "url": "{{ site.github_repository }}/tree/master/topics/{{ topic.name }}/tutorials/{{ material.name }}/tours/",
+                        "name": "Galaxy Tour for {{material.title}}"
+                      },
+                {% endif %}                
+        {% endif %}
+    {% endif %}
+    "learningResourceType": "{{material.type}}"
+}
