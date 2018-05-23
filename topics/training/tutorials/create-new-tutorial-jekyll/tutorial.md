@@ -97,6 +97,6 @@ A PDF file of every tutorials and slide decks can be generated, using Chrome on 
 > 1. [Defining metadata](../create-new-tutorial-metadata/tutorial.html)
 > 1. [Setting up the infrastructure](../create-new-tutorial-jekyll/tutorial.html)
 > 1. [Creating Interactive Galaxy Tours](../create-new-tutorial-tours/tutorial.html)
-> 1. [Building a Docker flavor](../create-new-tutorial-docker/tutorial.html)
+> 1. [Configuring Galaxy for Training](../create-new-tutorial-galaxy/tutorial.html)
 > 1. [Submitting the new tutorial to the GitHub repository](../../../dev/tutorials/github-contribution/slides.html)
 {: .agenda}

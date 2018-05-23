@@ -120,7 +120,7 @@ images. We recommend to use the content of [`templates/docker`](templates/docker
 
 The `docker` image must also integrate a Galaxy tour from the [`tours` repository](https://github.com/galaxyproject/galaxy-tours)
 
-> Want to learn more? [Check out our tutorial to build a Docker flavor for a tutorial](https://galaxyproject.github.io/training-material//topics/training/tutorials/create-new-tutorial-docker/tutorial.html)
+> Want to learn more? [Check out our tutorial to build a Docker flavor for a tutorial](https://galaxyproject.github.io/training-material//topics/training/tutorials/create-new-tutorial-galaxy/tutorial.html)
 
 # How do I add new content?
 
@@ -130,7 +130,7 @@ Most of the content is written in Markdown with some metadata (or variables) sto
 - [Defining metadata](https://galaxyproject.github.io/training-material//topics/training/tutorials/create-new-tutorial-metadata/tutorial.html)
 - [Setting up the infrastructure](https://galaxyproject.github.io/training-material//topics/training/tutorials/create-new-tutorial-jekyll/tutorial.html) to run Jekyll and check the website generation
 - [Creating Interactive Galaxy Tours](https://galaxyproject.github.io/training-material//topics/training/tutorials/create-new-tutorial-tours/tutorial.html)
-- [Building a Docker flavor for a tutorial](https://galaxyproject.github.io/training-material//topics/training/tutorials/create-new-tutorial-docker/tutorial.html)
+- [Configuring Galaxy for a tutorial](https://galaxyproject.github.io/training-material//topics/training/tutorials/create-new-tutorial-/txyutorial.html)
 
 If you want to add a new topic, please contact us before: open an issue on this GitHub repository to discuss!
 
