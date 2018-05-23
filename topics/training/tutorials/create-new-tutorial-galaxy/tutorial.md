@@ -206,18 +206,20 @@ bin/install_topic_requirements.sh topics/metagenomics -g <galaxy url> -a <api ke
 
 
 
-### Installing subset of components
+### Installing a subset of components
 
 If you would like to pick and choose what to install for each tutorial, below are descriptions of the commands used to install each of the components (tools, workflows, reference data, data libraries, tours)
 
-#### Installing Tools
+**Installing Tools**
+
+The ephemeris command to install tools defined in a `tools.yaml` file to a running Galaxy instance is:
 
 ```bash
 shed-tools install -g <Galaxy url> -a <API key> -t topics/<topic>/tutorials/<tutorial>/tools.yaml
 ```
 
 
-#### Installing Workflows
+**Installing Workflows**
 
 The ephemeris command to install a workflow or directory of workflows:
 
@@ -230,7 +232,7 @@ This command will install all the workflows in the `workflows` directory, but yo
 The `--publish_workflow` parameter will make the workflows available to anybody on the Galaxy instance.
 
 
-### Installing Data Libraries
+**Installing Data Libraries**
 
 The ephemeris command to populate a data library with the input datasets from Zenodo is:
 
@@ -238,7 +240,7 @@ The ephemeris command to populate a data library with the input datasets from Ze
 setup-data-libraries -g <Galaxy url> -a <API key> -i topic/<topic>/tutorial/<tutorial>/data-library.yaml
 ```
 
-### Installing Reference Data
+**Installing Reference Data**
 
 To run the data manager that installs and configures the reference data needed for a tutorial, run the following ephemeris command:
 
@@ -246,7 +248,7 @@ To run the data manager that installs and configures the reference data needed f
 run-data-managers -g <Galaxy url> -a <API key> --config topic/<topic>/tutorial/<tutorial>/data-manager.yaml
 ```
 
-### Installing Tours
+**Installing Tours**
 
 This is currently not possible using ephhemeris, however, these can be installed by copying the files to the `config/plugins/tours/` directory of your Galaxy instance.
 
