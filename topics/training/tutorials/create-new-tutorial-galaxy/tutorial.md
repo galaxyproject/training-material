@@ -172,7 +172,7 @@ Every topic will come with a Docker image containing the tools, data, workflows 
 
 # Provisioning an existing Galaxy with the training requirements
 
-If you have a Galaxy server already running somewhere and would like to support one or more training modules, [ephemeris]() can be used to easily install all the required tools, reference data, data libraries, tours and workflows.
+If you have a Galaxy server already running somewhere and would like to support one or more training modules, [ephemeris](https://ephemeris.readthedocs.io) can be used to easily install all the required tools, reference data, data libraries, tours and workflows.
 
 ### Prerequisites
 
