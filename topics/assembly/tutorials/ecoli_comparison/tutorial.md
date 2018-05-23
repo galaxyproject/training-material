@@ -76,11 +76,36 @@ Short introduction about this subpart.
 ><div style="padding:56.25% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/271336444?title=0&byline=0&portrait=0" style="position:absolute;top:0;left:0;width:100%;height:100%;" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
 {: .hands_on}
 
-Some blabla
-> ### {% icon hands_on %} Hands-on: Data upload
+## Preparing assembly
+
+Before doing any analyses we need to upload assembly produced in [Unicycler tutorial]({{site.baseurl}}/topics/assembly/tutorials/unicycler-assembly/tutorial.html) from Zenodo. 
+
+ > ### {% icon hands_on %} Uploading *E. coli* assembly into Galaxy
+ >
+ > 1. Open upload tool (Upload icon on the top of the left pane)
+ > 2. Click **Paste/Fetch data** button (Bottom of the interface box)
+ > 3. Paste `https://zenodo.org/record/1251125/files/Ecoli_C_assembly.fna` into the box.
+ > 4. Set **Type** to `fasta`
+ > 5. Click **Start**
+{: .hands_on}
+
+The assembly we just uploaded has two issues that need to be addressed before proceeding with our analysis:
+
+ 1. It contains two sequences: the one of *E. coli* C genome (the one we really needed) and another representing phage phiX174 (a by product of Illumina sequencing were it is used a spike in DNA). 
+ 2. Sequences have unwieldy names like `>1 length=4576293 depth=1.00x circular=true`. We need to rename it to something more meaningful.
+
+ Let's fix these two problems.
+
+ > ### {% icon tip %} Tip: Finding tools mentioned in this tutorial
+ >Galaxy instances contain hundreds of tools. As a result it is sometimes hard to find tools mentioned in tutorials such as this one. 
+ >
+ >To help with this challenge Galaxy has a search box at the top of the left panel. Use this box to find the tools mentioned here.
+ >![](../../images/tool_search.png "Use search box to find tools!")
+ {: .tip}
+
+> ### {% icon hands_on %} Hands-on: Fixing assembly
 >
-> 1. Step1
-> 2. **My Tool** {% icon tool %} with the following parameters
+> 1. First we will use **Filter sequences by length** {% icon tool %} tool to remove phiX 174 genome. 
 >   - "param1" to the file `myfile`
 >   - "param2" to `42`
 >   - "param3" to `Yes`
