@@ -100,7 +100,6 @@ ifndef CONDA_VERSION
 	conda update conda conda-env
 	conda config --system --add channels conda-forge
 	conda config --system --add channels defaults
-	conda config --system --add channels bioconda
 endif
 .PHONY: install-conda
 
@@ -112,8 +111,7 @@ install: ## install dependencies
 	npm install decktape
 	gem install --install-dir $(CONDA_PREFIX) bundler
 ifeq ($(shell uname -s),Darwin)
-	brew install libxml2
-	gem install --install-dir vendor/bundle/ruby/2.4.0 nokogiri -- --use-system-libraries --with-xml=$(`brew --cellar libxml2`)
+	gem install --install-dir vendor/bundle/ruby/2.4.0 nokogiri
 endif
 	bundle install --path vendor/bundle
 .PHONY: install
