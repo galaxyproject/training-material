@@ -48,6 +48,10 @@ This step has to be done once.
 > 5. Install Jekyll and related modules using [RubyGems](https://rubygems.org/pages/download): `make install`
 {: .hands_on}
 
+> ### {% icon tip %} Troubleshooting
+> If you encounter an error about libxml2 on linux, please try installing `libxml2-dev`, e.g. by the command `sudo apt-get install libxml2-dev`, and re-run `make install
+{: .tip}
+
 # Checking the website generation
 
 Once Jekyll and its modules are installed in our conda environment, we can check the generation of the website locally:
