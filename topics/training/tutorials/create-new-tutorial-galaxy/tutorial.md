@@ -53,7 +53,7 @@ This description will be used to automatically set up a Docker Galaxy flavour, o
 
 The first file to fill is the `tools.yaml` file, containing the description of the required tools that could be installed from the ToolShed.
 
-This file looks like:}
+This file looks like:
 
 ```
 ---
