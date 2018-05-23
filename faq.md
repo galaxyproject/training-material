@@ -17,13 +17,13 @@ This website is a collection of tutorials developed and maintained by the [world
 
 ## What are the tutorials for?
 
-These tutorials can be used for learning and teaching how to use Galaxy for general data analysis, and for specific domains from assembly to differential gene expression analysis with RNA-Seq data.
+These tutorials can be used for learning and teaching how to use Galaxy for general data analysis, and for learning/teaching specific domains such as assembly and differential gene expression analysis with RNA-Seq data.
 
 ## What audiences are the tutorials for?
 
 There are two distinct audiences for these materials.
 
-1. **Self-paced individual learners.** These tutorials provide everything you need to learn a topic, from explanations of basic concepts to detailed hands-on exercises.
+1. **Self-paced individual learners.** These tutorials provide everything you need to learn a topic, from explanations of concepts to detailed hands-on exercises.
 2. **Instructors.** They are also designed to be used by instructors in teaching/training settings.  Slides, and detailed tutorials are provided.  Some tutorials also include computational support such as Docker images that can be used to scale the lessons up to many participants.
 
 ## How is the content licensed?
@@ -32,18 +32,19 @@ The content of this website is Creative Commons Attribution 4.0 ([License]({{ si
 
 ## How can I cite this effort?
 
-We wrote an [article](https://www.biorxiv.org/content/early/2018/04/05/225680) about our effort there. You can cite it and then giving us some credit.
-
+We wrote an [article](https://www.biorxiv.org/content/early/2018/04/05/225680) about our efforts.
 
 # For Individual Learners
 
-Learning Galaxy and data analysis on your own, at your own pace?  This material is for you.
+Learning Galaxy and data analysis on your own and at your own pace?  This material is for you.
 
 ## Where do I start?
 
 If you are new to Galaxy then start with one of the introductory topics.  These introduce you to concepts that are useful in Galaxy, no matter what domain you are doing analysis in.
 
 If you are already familiar with Galaxy basics and want to learn how to use it in a particular domain (for example, ChIP-Seq), then start with one of those topics.
+
+If you are already well informed about bioinformatics data analysis and you just want to get a feel for how it works in Galaxy than many tutorials include *Instructions for the impatient* sections.
 
 ## How do I use this material?
 
@@ -55,19 +56,17 @@ Most of your learning will happen in the next step - the hands-on tutorials.  Th
 
 To run the hands-on tutorials you need a Galaxy server to run them on.
 
-Some topics have a Docker image that can be installed and run on all participants' laptops.  These images contain Galaxy instances that include all tools and datasets used in a tutorial, as well as saved analyses and repeatable workflows that are relevant.
+Some topics have a [Docker](https://www.docker.com/) image that can be installed and run on participants' laptops.  These images contain Galaxy instances that include all tools and datasets used in a tutorial, as well as saved analyses and repeatable workflows that are relevant. You will need to [install Docker](https://docs.docker.com/install/).
 
-You can also run many tutorials on public Galaxy servers.  These servers are available to anyone on the world wide web and have all the tools that are needed by a specific tutorial.
+Many tutorials can be run on [public Galaxy servers](https://galaxyproject.org/public-galaxy-servers/).  These servers are available to anyone on the world wide web and some may have all the tools that are needed by a specific tutorial.
 
-If your organization (or consortia) has its own Galaxy server, then you may be able to run tutorials on that. Before you start you should confirm that all needed tools and reference genomes are available on your server.
+If your organization/consortia/community has its own Galaxy server, then you may be able to run tutorials on that. Before you start you should confirm that all needed tools and reference genomes are available on your server.
 
-Finally, you can also run your tutorials on cloud-based infrastructures.  Galaxy is available on many national research infrastructures such as Jetstream (United States), GenAP (Canada), GVL (Australia), CLIMB (United Kingdom), and more.  These instances are typically easy to launch before you start, and easy to shut down when you are done.
+Finally, you can also run your tutorials on cloud-based infrastructures.  Galaxy is [available on many national research infrastructures](https://galaxyproject.org/galaxy-services/) such as [Jetstream](https://galaxyproject.org/cloud/jetstream/) (United States), [GenAP](https://www.genap.ca/) (Canada), [GVL](https://launch.genome.edu.au/launch) (Australia), [CLIMB](http://www.climb.ac.uk/) (United Kingdom), and more.  These instances are typically easy to launch, and easy to shut down when you are done.
 
-If you are already familiar with, and have an account on Amazon Web Services then you can also launch a Galaxy server there.
+If you are already familiar with, and have an account on [Amazon Web Services](https://aws.amazon.com/) then you can also launch a Galaxy server there using [CloudLaunch](https://launch.usegalaxy.org/).
 
 ## How can I get help?
-
-**HELP FOR INDIVIDUAL LEARNERS**
 
 If you have questions about this training material, you can reach us using the [Gitter chat](https://gitter.im/Galaxy-Training-Network/Lobby).  You'll need a [GitHub](https://github.com/) or [Twitter](https://twitter.com/) account to post questions.  If you have questions about Galaxy outside the context of training, see the [Galaxy Support page](https://galaxyproject.org/support/).
 
@@ -104,15 +103,16 @@ Finally, you can also run your training on cloud-based infrastructures.  Galaxy 
 
 ## How do I get help?
 
-The support channel for instructors is the same as for individual learners.  We suggest you start by posting a question to the Galaxy Training Network Gitter channel.  Anyone can view the discussion, but you'll need to login (using your GitHub or Twitter account) to add to the discussion.
+The support channel for instructors is the same as for individual learners.  We suggest you start by posting a question to the Galaxy Training Network [Gitter chat](https://gitter.im/Galaxy-Training-Network/Lobby).  Anyone can view the discussion, but you'll need to login (using your GitHub or Twitter account) to add to the discussion.
 
-If you have questions about Galaxy in general (that are not training-centric) then there are numerous support options.
+If you have questions about Galaxy in general (that are not training-centric) then there are [several support options](https://galaxyproject.org/support/).
+
 
 # Contributing
 
 First off, thanks for your interest in contributing to the Galaxy training materials!
 
-Individual learners and instructors can make these training more effective by contributing back to them. You can report mistakes and errors, create more content, etc. Whatever is your background, there is a way to contribute.  See the [contributing page]() for how.
+Individual learners and instructors can make these training more effective by contributing back to them. You can report mistakes and errors, create more content, etc. Whatever is your background, there is a way to contribute.  See the [contributing page]({{ site.github_repository }}/CONTRIBUTING.md)) for how.
 
 TODO: @tnabtaf suggests moving rest of this section to CONTRIBUTING.md
 
@@ -178,13 +178,14 @@ We strongly recommend you read and follow [Software Carpentry's](https://softwar
 Yes.  As of May 2018, these events are on the horizon:
 
 * [CarpentryCon 2018](http://www.carpentrycon.org/), 30 May - 1 June, Dublin, Ireland
-* Not specifically about Galaxy Training, but an excellent opportunity to gather with other computational science educators. [Bérénice Batut](@bebatut) will present a poster and lightning talk on [Community-Driven Training for Biological Data Analysis with the Galaxy Training Network](https://github.com/carpentries/carpentrycon/blob/master/Sessions/2018-05-30/13-Poster-Session/abstract-berenice-batut.md)
+  * Not specifically about Galaxy Training, but an excellent opportunity to gather with other computational science educators. [Bérénice Batut](@bebatut) will present a poster and lightning talk on [Community-Driven Training for Biological Data Analysis with the Galaxy Training Network](https://github.com/carpentries/carpentrycon/blob/master/Sessions/2018-05-30/13-Poster-Session/abstract-berenice-batut.md)
 * [GCCBOSC 2018](https://gccbosc2018.sched.com/), June 25-30, Portland, Oregon, United States
   * The annual gathering of the Galaxy Community is an opportunity to learn from experienced Galaxy trainers and to contribute to these efforts:
     * [Bioinformatics Training and Education with the Galaxy Training Network](http://sched.co/Drp9), training session on how to use and contribute to these materials, presented by [Bérénice Batut](@bebatut)
-    * [A fruitful year for the Galaxy Training materials], conference talk by [Bérénice Batut](@bebatut)
+    * [A fruitful year for the Galaxy Training materials]()http://sched.co/EYF1, conference talk by [Bérénice Batut](@bebatut)
+    * [Panel: Training and Documentation in Bioinformatics](http://sched.co/Dup7)
     * The *Galaxy documentation, analysis, and training (Galaxy DAT)* track of  [CollaborationFest](https://galaxyproject.org/events/gccbosc2018/collaboration/), June 29 - July 2. Focus on expanding Galaxy community resources like training materials and documentation.
-    * Quarterly online training material Contribution Fests: The training community will meet online on the 3rd Friday of every 3rd month to focus on enhancing particular areas of the training material.
+* Quarterly online training material Contribution Fests: The training community will meet online on the 3rd Friday of every 3rd month to focus on enhancing particular areas of the training material.
 
 Is the above list now out of data (it happens).  See the [Galaxy Community Events Calendar](https://galaxyproject.org/events/) for what coming up right now.
 
