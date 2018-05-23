@@ -107,7 +107,7 @@ In general, quality treatments include:
 - Filtering of sequences
     - with low mean quality score
     - too short
-    - with too many missing (N) bases
+    - with too many ambiguous (N) bases
     - based on their GC content
 - Cutting/Trimming/masking sequences
     - from low quality score regions
