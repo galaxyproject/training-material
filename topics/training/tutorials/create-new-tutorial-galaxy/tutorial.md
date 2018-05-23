@@ -148,7 +148,7 @@ Once the tutorial is ready, we need to extract workflows with the different step
 A Galaxy Interactive Tour is a way to go through an entire analysis, step by step inside Galaxy in an interactive and explorative way.
 It is a great way to run the tutorial directly inside Galaxy. To learn more about creating a Galaxy tour please have a look at our [dedicated tour training]({{site.baseurl}}/topics/training/tutorials/create-new-tutorial-tours/tutorial.html).
 
-## Testing the technical infrastructure using Docker
+# Testing the technical infrastructure using Docker
 
 Once we defined all the requirements for running the tutorial, we can test these requirements with Docker.
 
@@ -170,7 +170,7 @@ Every topic will come with a Docker image containing the tools, data, workflows 
 >     4. Check the Galaxy Interactive Tours in "Help"
 {: .hands_on}
 
-## Provisioning an existing Galaxy with the training requirements
+# Provisioning an existing Galaxy with the training requirements
 
 If you have a Galaxy server already running somewhere and would like to support one or more training modules, [ephemeris]() can be used to easily install all the required tools, reference data, data libraries, tours and workflows.
 
@@ -186,7 +186,7 @@ Next, make sure you have your Galaxy API key ready (you must be an admin user on
 
 ### Installing tutorial requirements
 
-If you are looking to install all the requirements for every a given tutorial you can use the script provided here: [`bin/install_tutorial_requirements.sh`](https://github.com/galaxyproject/training-material/tree/master/bin/install_tutorial_requirements.sh)
+If you are looking to install all the requirements for every a given tutorial you can use the script provided here: [`bin/install_tutorial_requirements.sh`]({{ site.github_repository }}/tree/master/bin/install_tutorial_requirements.sh)
 
 Example usage from root of the repository:
 
@@ -196,7 +196,7 @@ bin/install_tutorial_requirements.sh topics/transcriptomics/tutorials/ref-based 
 
 ### Installing an entire topic
 
-If you would like to install all the requirements for every tutorial within an entire topic, you can use the script in [`bin/install_topic_requirements.sh`](https://github.com/galaxyproject/training-material/tree/master/bin/install_topic_requirements.sh)
+If you would like to install all the requirements for every tutorial within an entire topic, you can use the script in [`bin/install_topic_requirements.sh`]({{ site.github_repository }}/tree/master/bin/install_topic_requirements.sh)
 
 Example usage from root of the repository:
 
