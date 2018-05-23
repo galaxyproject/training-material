@@ -105,29 +105,70 @@ The assembly we just uploaded has two issues that need to be addressed before pr
 
 > ### {% icon hands_on %} Hands-on: Fixing assembly
 >
-> 1. First we will use **Filter sequences by length** {% icon tool %} tool to remove phiX 174 genome. 
->   - "param1" to the file `myfile`
->   - "param2" to `42`
->   - "param3" to `Yes`
+> 1. First we will use **Filter sequences by length** {% icon tool %} tool to remove phiX 174 genome. Set parameters as follows:
+>   - **Fasta file** to the dataset you've just uploaded. (It will have a name something like `https://zenodo.org/record/1251125/files/Ecoli_C_assembly.fna` ).
+>   - **Minimal length** to `10000` (this was phiX174, which is around 5,000 bp, will be filtered out)
+>   - **Maxumum length** you do not need to change.
+> 2. Second we will use **Text transformation with sed** {% icon tool %} tool to convert name of the assembly from `>1 length=4576293 depth=1.00x circular=true` to `>Ecoli_C`. Set parameters as follows:
+>   - **File to process** should be set to the output of the previous step
+>   - Inside **SED program** box enter the following expression (so called [Regular Expression](https://en.wikipedia.org/wiki/Regular_expression): `s/^\>1.*$/\>Ecoli_C/`
+>
+>	> ### {% icon tip %} Highlight: SED editor and Regular Expressions
+>	>The expression `s/^>1.*$/>Ecoli_C/` contains several pieces that you need to understand. Let's write it top-to-bottom and explain:
+>	>
+>	> - `s` - tell SED to *Substitute*
+>	> - `/` - opens a section of the commands telling SED *what* to substitute. 
+>	> - `^` - tell SED to start looking at *the beginning* of each line
+>	> - `>` - is the first character we want to match. Remember that name of the sequence in FASTA files starts with `>`
+>	> - `1` - is the number present is our old name (`>1 length=4576293 depth=1.00x circular=true` to `>Ecoli_C`)
+>	> - `.` - dot has a special meaning. It signifies *any* character. 
+>	> - `*` - is a *quantifier*. From [Wikipedia](https://en.wikipedia.org/wiki/Regular_expression): "The asterisk indicates zero or more occurrences of the preceding element. For example, ab*c matches `ac`, `abc`, `abbc`, `abbbc`, and so on."
+>	> - `$` - signifies *the end* of a line
+> 	> - `/` - is *the end* of the *what to substitute* section. It also serves as the beginning of *what to substitute WITH* section
+> 	> - `>` - is the required element of the FASTA sequence name
+>	> - `Ecoli_C` is the *name* we want the sequence to have
+>	> - `/` - is the end of SED command
+>	>
+>	>So in short we are replacing `>1 length=4576293 depth=1.00x circular=true` with `>Ecoli_C`. The *Regular expression* `^\>1.*$` is used here to represent `>1 length=4576293 depth=1.00x circular=true`.<br>
+>	>Detailed description of regular expressions is outside of the scope of this tutorial, but there are other great resources. Start with [Software Carpentry Regular Expressions tutorial](http://v4.software-carpentry.org/regexp/index.html)!
+>	{: .tip}
 >
 >    > ### {% icon question %} Questions
 >    >
->    > 1. Question1?
->    > 2. Question2?
+>    > 1. What is the meaning of `^` character is SED expression?
+>    > 2. Where do you go to learn more about regular expressions?
 >    >
 >    >    <details>
 >    >    <summary>Click to view answers</summary>
 >    >    <ol type="1">
->    >    <li>Answer for question1</li>
->    >    <li>Answer for question2</li>
+>    >    <li>It tells SED to start matching from the beginning of the string.</li>
+>    >    <li>Software carpentry at <a href="https://software-carpentry.org">https://software-carpentry.org</a></li>
 >    >    </ol>
 >    >    </details>
 >    {: .question}
 >
-> 3. Step3
 {: .hands_on}
 
-# Part 2
+# Generating alignments
+
+Now everything is loaded and ready to go. We will now align our assembly against each of the *E. coli* genomes we have uploaded into the collection. To do this we will use [LASTZ](https://lastz.github.io/lastz/) an aligner designed to align long sequences. 
+
+> ### {% icon hands_on %} Hands-on: Running LASTZ
+> 1. Open **LASTZ** interface 
+> 2. Change **Select TARGET sequnce(s) to align against** to `from your history`
+> 3. In **Select a reference dataset** click on the folder icon (![](../../images/folder-o.png)) and the collection containing all *E. coli* genomes we uploaded below. 
+> 4. In **Select QUERY sequence(s)** choose our assembly which was prepared in the previous step.
+> 5. Find section of LASTZ interface called **Chaining** and expand it.
+> 6. Set **Perform chaining of HSPs with no penalties** to `Yes`
+> 7. Run LASTZ by clicking **Execute** button
+{: .hands_on}
+
+> ### {% icon warning %} It will take a while!
+> Please understand that alignment is not an instantaneous process: allow several hours for these jobs to clear.
+{: .warning-box}
+
+# Finding closely related assemblies
+
 
 Short introduction about this subpart.
 
