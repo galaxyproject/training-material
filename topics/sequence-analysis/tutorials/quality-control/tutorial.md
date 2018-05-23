@@ -7,9 +7,9 @@ tutorial_name: quality-control
 # Introduction
 {:.no_toc}
 
-During sequencing, errors might be introduced, such as the incorporation of ambiguous nucleotides. These are due to the technical limitations of each sequencing platform. Sequencing errors might bias the analysis, ultimately leading to a misinterpretation of the data.
+During sequencing, errors are introduced, such as incorrect nucleotides being called. These are due to the technical limitations of each sequencing platform. Sequencing errors might bias the analysis, ultimately leading to a misinterpretation of the data. 
 
-Sequence quality control is therefore an essential step to take right after receiving the raw sequencing data. This ensures proper, analysis regardless the sequencing platform used to obtain the data.
+Sequence quality control is therefore an essential first step in your analysis. Catching errors early saves time later on.
 
 > ### Agenda
 >
@@ -53,12 +53,11 @@ Sequence quality control is therefore an essential step to take right after rece
 
 # Quality check
 
-To estimate sequence quality and how to further filter raw data, different indicators can be checked:
+To estimate sequence quality and how to filter raw data, different indicators can be checked:
 
 - Quality score of the sequences with
     - Per-base sequence quality
     - Per-sequence quality scores
-    - Per-tile sequence quality
 - Sequence content with
     - Per-base sequence content
     - Per-sequence GC content
@@ -69,7 +68,7 @@ To estimate sequence quality and how to further filter raw data, different indic
     - Adapter contamination
     - K-mer content
 
-[FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/) is an open-source tool that provides a simple way to quality-control raw sequence data coming from high throughput sequencing pipelines. It gets rid of low quality score reads, and generates graphics and estimates providing a quick overview about which data might be the source of bias in the analysis.
+[FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/) is an open-source tool that provides a simple way to quality control raw sequence data. It removes reads with low quality scores, and generates graphics and estimates providing a quick overview about which data might be the source of bias in the analysis.
 
 > ### {% icon hands_on %} Hands-on: Quality check
 >
@@ -91,9 +90,9 @@ To estimate sequence quality and how to further filter raw data, different indic
 >    >    <details>
 >    >    <summary>Click to view the answers</summary>
 >    >    <ol type="1">
->    >    <li>The sequence scores are quite good: no warnings from FastQC, even if we can see a slight decrease of the quality at the end of the reads</li>
->    >    <li>In the beginning of sequences, the sequence content per base is not really good and the percentages are not equal. For the GC content, the distribution is slightly shifted on the left, and too high</li>
->    >    <li>We can trim the end of the sequences a little, but not too much as the sequences are already small</li>
+>    >    <li>The sequence scores are quite good: no warnings from FastQC, even if we can see a slight decrease of the quality at the end of the reads.</li>
+>    >    <li>In the beginning of sequences, the sequence content per base is not really good and the percentages are not equal. For the GC content, the distribution is slightly shifted on the left, and too high.</li>
+>    >    <li>We can trim the end of the sequences a little, but not too much as the sequences are already small.</li>
 >    >    </ol>
 >    >    </details>
 >    {: .question}
@@ -101,20 +100,19 @@ To estimate sequence quality and how to further filter raw data, different indic
 
 # Improvement of sequence quality
 
-Based on the informations provided by the quality graphs, the sequences must to be treated to avoid bias in downstream analyis.
+Based on the information provided by the quality graphs, the sequences should be treated to reduce bias in downstream analyis.
 
-In general, quality treatments are:
+In general, quality treatments include:
 
 - Filtering of sequences
-    - with small mean quality score
-    - too small
-    - with too many N bases
+    - with low mean quality score
+    - too short
+    - with too many missing (N) bases
     - based on their GC content
-    - ...
-- Cutting/Trimming sequences
-    - from low quality score parts
-    - tails
-    - ...
+- Cutting/Trimming/masking sequences
+    - from low quality score regions
+    - beginning/end of sequence
+    - removing adapters
 
 To improve the overall sequence quality, we use the [Trim Galore!](https://www.bioinformatics.babraham.ac.uk/projects/trim_galore/) tool. This tool enhances sequence quality by automating adapter trimming as well as quality control.
 
@@ -131,9 +129,9 @@ To improve the overall sequence quality, we use the [Trim Galore!](https://www.b
 >    > We use the default ones:
 >    > <ul>
 >    > <li>​
-If you know which adapter sequence was used during library preparation, provide its sequence. Otherwise use the option for automatic detection and trimming of adapter sequences</li>
+If you know which adapter sequence was used during library preparation, provide its sequence. Otherwise use the option for automatic detection and trimming of adapter sequences.</li>
 >    > <li>Trimming low-quality ends (below 20) from reads in addition to adapter removal</li>
->    > <li>Option for required overlap (in bp) with adapter sequence can be tweaked. The default value "1" is too stringent, and on average 25% of reads will be trimmed. Please set it to 5 bases to loose the required overlap</li>
+>    > <li>Option for required overlap (in bp) with adapter sequence can be tweaked. The default value "1" is too stringent, and on average 25% of reads will be trimmed. Please set it to 5 bases to loosen the required overlap</li>
 >    > <li>Removing reads shorter than 20 bp</li>
 >    > </ul>
 >    > </details>
@@ -180,7 +178,7 @@ Now, we take a look at the impact of quality control and treatment on a bad data
 >    >    <ol type="1">
 >    >    <li>There is a red warning on the per-base sequence quality (pretty bad along the sequence but worse at the end of sequences), the per-base sequence content (bad at the beginning of the sequences), and the per-sequence GC content</li>
 >    >    <li>The end of sequences must be cut.</li>
->    >    <li>Generally, the 5' end of each sequence read is not of bad quality unless something went wrong. Here, the problem is that the sample was sequenced using the an Illumina sequencing machine, which carries out its calibration while reading fragments that are in the beginning of the flowcell. Unfortunately, the first 100k reads which we selected for the analysis are generated during the calibration, a problem that we don't have with more recent sequencing machines. However, if you adopted one of the latest sequencing machine and still experience bad quality bases at the beginning of the reads, please don't just trim them, but consider investigating the problem further</li>
+>    >    <li>Generally, the 5' end of each sequence read is not of bad quality unless something went wrong with the sequencng experiment itself. Here, the problem is that the sample was sequenced using the an Illumina sequencing machine, which carries out its calibration while reading fragments that are in the beginning of the flowcell. Unfortunately, the first 100k reads which we selected for the analysis are generated during the calibration, a problem that we don't have with more recent sequencing machines. However, if you adopted one of the latest sequencing machine and still experience bad quality bases at the beginning of the reads, please don't just trim them, but consider investigating the problem further.</li>
 >    >    </ol>
 >    >    </details>
 >    {: .question}
@@ -197,8 +195,8 @@ Now, we take a look at the impact of quality control and treatment on a bad data
 >    >    <details>
 >    >    <summary>Click to view the answers</summary>
 >    >    <ol type="1">
->    >    <li>Before Trim Galore the dataset comprised 100,000 sequences. After Trim Galore, there are 97,644 sequences</li>
->    >    <li>The per-base quality score looks better (not red anymore), but the per-base sequence content, even if slightly better, is still red</li>
+>    >    <li>Before Trim Galore the dataset comprised 100,000 sequences. After Trim Galore, there are 97,644 sequences.</li>
+>    >    <li>The per-base quality score looks better (not red anymore), but the per-base sequence content, even if slightly better, is still red.</li>
 >    >    </ol>
 >    >    </details>
 >    {: .question}
