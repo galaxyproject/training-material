@@ -598,7 +598,7 @@ Errors    Sequences
 > そしてサンプル内の rarefaction 曲線を生成します
 >
 > - **Rarefaction.single** {% icon tool %} で次のように設定する
->   - "shared" には Make.shared からの shared ファイルを選択する 
+>   - "shared" には Make.shared からの shared ファイルを選択する
 >
 > > ### {% icon question %} Question
 > >
@@ -613,74 +613,58 @@ Errors    Sequences
 
 
 
-Open the rarefaction output (dataset named `sobs` inside the `rarefaction curves` output collection).
-You'll see that for 4060 sequences, we'd have 34 OTUs from the Mock community. This number of course
-includes some stealthy chimeras that escaped our detection methods. If we used 3000 sequences, we would
-have about 31 OTUs. In a perfect world with no chimeras and no sequencing errors, we'd have 21 OTUs.
-This is not a perfect world. But this is pretty darn good!
+rarefaction のアウトプット（ `rarefaction curves` のアウトプットコレクションの中にある `sobs` という名前のデータセット）を開きましょう。
+4060 の配列があり、 Mock 共同体からの34のOTUがあることが分かります。この数には検出方法から逃れた隠れたキメラが含まれています。3000配列を使用する場合は、およそ31のOTUが必要になります。キメラがなくシーケンシングのエラーもない完璧な世界には、21のOTUがあります。
+これは完璧な世界ではありません。ですが、かなり良いです！
 
 > ### {% icon tip %} 背景: Rarefaction
 >
-> To estimate the fraction of species sequenced, rarefaction curves are typically used. A rarefaction curve
-> plots the number of species as a function of the number of individuals sampled. The curve usually begins
-> with a steep slope, which at some point begins to flatten as fewer species are being discovered per sample:
-> the gentler the slope, the less contribution of the sampling to the total number of operational taxonomic
-> units or OTUs.
+> 典型的には、配列決定された種の割合を推定するために、rarefaction 曲線が用いられる。rarefaction 曲線はサンプリングされた個体数を関数として種の数をプロットします。曲線は基本的に序盤は傾きが急ですが、サンプルごとに発見される種が少なくなっていくため、ある時点で平坦化し始めます:
+> 傾きが緩やかになればなるほど、操作分類学的な単位または OTU の合計数に対するサンプルの寄与が少なくなります。
 >
 > ![Rarefaction curves](../../images/rarefaction.png)
 >
-> Green, most or all species have been sampled; blue, this habitat has not been exhaustively sampled; red,
-> species rich habitat, only a small fraction has been sampled.
+> 緑色は、ほとんどまたはすべての種がサンプリングされています; 青色は、この生息地は完全にはサンプリングされていません; 赤色は、様々な種がいる生息地だが、ごくわずかな部分しかサンプリングされていません。
 >
 > (*A Primer on Metagenomics*, Wooley et al. 2010, https://dx.doi.org/10.1371/journal.pcbi.1000667)
 {: .tip}
 
-Now that we have assessed our error rates we are ready for some real analysis.
+エラー率を評価したので実際の解析を行う準備が整いました。
 
-## Preparing for analysis
+## 解析の前準備
 
-### Removing Mock sample
-We're almost to the point where you can have some fun with your data (I'm already having fun, aren't you?).
-Next, we would assign sequences to OTUs, but first, we should remove the Mock sample from our dataset, it has
-served its purpose by allowing us to estimate our error rate, but in subsequent steps we only want to use
-our real samples.
+### Mock サンプルを除去する
+私たちは自分のデータを楽しむことのできる段階になっています（私はすでに楽しんでいますが、あなたはどうですか？）
+次に、OTU に配列を割り当てますが、最初に、データセットから Mock サンプルを除去する必要があり、エラー率を見積もることで目的を果たしますが、その後の手順では実際のサンプルのみを使用したいです。
 
-using
-the `remove.groups` command:
+`remove.groups` コマンドを利用します:
 
-> ### {% icon hands_on %} ハンズオン: Remove Mock community from our dataset
+> ### {% icon hands_on %} ハンズオン: データセットから Mock 共同体を除去する
 >
 > - **Remove.groups** {% icon tool %} で次のように設定する
->   - "Select input type" to `fasta , name, taxonomy, or list with a group file or count table`
->   - "count table", "fasta", and "taxonomy" to the respective outputs from Remove.lineage
->   - "groups" to `Mock`
+>   - "Select input type" → `fasta , name, taxonomy, or list with a group file or count table`
+>   - "count table" と "fasta" 、そして "taxonomy" には Remove.lineage のそれぞれのアウトプットを選択する
+>   - "groups" → `Mock`
 {: .hands_on}
 
 
-### Clustering sequences into OTUs
+### OTU への配列のクラスタリング
 
-Now, we have a couple of options for clustering sequences into OTUs. For a small dataset like this, we could
-do the traditional approach using `dist.seqs` and `cluster` as we did with the Mock sample.
+今、配列を OTU にクラスタリングするための2つのオプションがあります。このような小さなデータセットには、Mock サンプルで行ったように `dist.seqs` と `cluster` を用いて伝統的なアプローチを行うことができました。
 
-The alternative is to use the `cluster.split` command. In this approach, we use the taxonomic information to
-split the sequences into bins and then cluster within each bin. The Schloss lab have published results
-showing that if you split at the level of Order or Family, and cluster to a 0.03 cutoff, you'll get just as
-good of clustering as you would with the "traditional" approach.
+今回は代わりに `cluster.split` コマンドを利用します。このアプローチでは、分類情報を利用して配列をビンに分割しそれぞれのビン内でクラスタリングします。Schloss lab の発表した結果によると Order や Family のレベルで分割して、クラスターを0.03でカットオフすると、「伝統的な」アプローチと同じように適したクラスタリングを行うことができます。
 
-The advantage of the `cluster.split` approach is that it should be faster, use less memory, and can be run on
-multiple processors. In an ideal world we would prefer the traditional route because "Trad is rad", but we
-also think that kind of humor is funny.... In this command we use `taxlevel=4`, which corresponds to the level
-of *Order*. This is the approach that we  generally use in the Schloss lab.
+`cluster.split` アプローチの利点としてはより高速で、より少ないメモリを使用し、そして複数のプロセッサー上で実行できることです。  In an ideal world we would prefer the traditional route because "Trad is rad", but we also think that kind of humor is funny.... このコマンドでは *Order* のレベルに対応する、`taxlevel=4` を使用します。これは Schloss lab で一般的に使用しているアプローチです。
 
 > ### {% icon hands_on %} ハンズオン: Cluster our data into OTUs
 >
 > - **Cluster.split** {% icon tool %} で次のように設定する
->   - "Split by" to `Classification using fasta`
->   - "fasta" to the fasta output from Remove.groups
->   - "taxonomy" to the taxonomy output from Remove.groups
->   - "taxlevel" to `4`
->   - "count" to the count table output from Remove.groups
->   - "cutoff" to `0.15`
+>   - "Split by" → `Classification using fasta`
+>   - "fasta" には Remove.groups のアウトプットである fasta を選択する
+>   - "taxonomy" には Remove.groups のアウトプットである taxonomy を選択する
+>   - "name file or count table" には Remove.groups のアウトプットである count table を選択する
+>   - "taxlevel" → `4`
+>   - "cutoff" → `0.03`
 >
 > Next we want to know how many sequences are in each OTU from each group and we can do this using the
 > `Make.shared` command. Here we tell Mothur that we're really only interested in the 0.03 cutoff level:
@@ -707,17 +691,33 @@ Opening the taxonomy output for level 0.03 shows a file structured like the foll
 ```
 OTU       Size    Taxonomy
 ..
-Otu0008	5377	Bacteria(100);"Bacteroidetes"(100);"Bacteroidia"(100);"Bacteroidales"(100);"Rikenellaceae"(100);Alistipes(100);
-Otu0009	3619	Bacteria(100);"Bacteroidetes"(100);"Bacteroidia"(100);"Bacteroidales"(100);"Porphyromonadaceae"(100);unclassified(100);
-Otu0010	3239	Bacteria(100);Firmicutes(100);Bacilli(100);Lactobacillales(100);Lactobacillaceae(100);Lactobacillus(100);
-Otu0011	2960	Bacteria(100);"Bacteroidetes"(100);"Bacteroidia"(100);"Bacteroidales"(100);"Porphyromonadaceae"(100);unclassified(100);
-Otu0012	2134	Bacteria(100);"Bacteroidetes"(100);"Bacteroidia"(100);"Bacteroidales"(100);"Porphyromonadaceae"(100);unclassified(100);
-Otu0013	1922	Bacteria(100);Firmicutes(100);Bacilli(100);Lactobacillales(100);Lactobacillaceae(100);Lactobacillus(100);
+Otu0008	5260	Bacteria(100);"Bacteroidetes"(100);"Bacteroidia"(100);"Bacteroidales"(100);"Rikenellaceae"(100);Alistipes(100);
+Otu0009	3613	Bacteria(100);"Bacteroidetes"(100);"Bacteroidia"(100);"Bacteroidales"(100);"Porphyromonadaceae"(100);"Porphyromonadaceae"_unclassified(100);
+Otu0010	3058	Bacteria(100);Firmicutes(100);Bacilli(100);Lactobacillales(100);Lactobacillaceae(100);Lactobacillus(100);
+Otu0011	2958	Bacteria(100);"Bacteroidetes"(100);"Bacteroidia"(100);"Bacteroidales"(100);"Porphyromonadaceae"(100);"Porphyromonadaceae"_unclassified(100);
+Otu0012	2134	Bacteria(100);"Bacteroidetes"(100);"Bacteroidia"(100);"Bacteroidales"(100);"Porphyromonadaceae"(100);"Porphyromonadaceae"_unclassified(100);
+Otu0013	1856	Bacteria(100);Firmicutes(100);Bacilli(100);Lactobacillales(100);Lactobacillaceae(100);Lactobacillus(100);
 ..
 ```
 
-This file tells you that Otu008 was observed 5377 times in your samples and that all of the
+This file tells you that Otu008 was observed 5260 times in your samples and that all of the
 sequences (100%) were classified as being members of the Alistipes.
+
+> ### {% icon question %} Question
+>
+> Which samples contained sequences belonging to an OTU classified as Staphylococcus?
+>
+> <details><summary>Hint</summary>
+> Examine the tax.summary file.
+>  </details>
+>
+> <details><summary>Answer</summary>
+> Samples F3D141, F3D142,  F3D144, F3D145, F3D2. This answer can be found by
+> examining the tax.summary output and finding the columns with nonzero
+> values for the line of Staphylococcus
+> </details>
+{: .question}
+
 
 In this tutorial we will continue with this otu-based approach, for the phylotype and phylogenic
 approaches, please refer to the [Mothur wiki page](https://www.mothur.org/wiki/MiSeq_SOP).
@@ -739,7 +739,7 @@ animal) followed by a D and a three digit number (number of days post weaning).
 > - **Count.groups** {% icon tool %} で次のように設定する
 >   - "shared" to the shared file from Make.shared
 >
-> Take a look at the output. We see that our smallest sample had 2440 sequences in it. That is a reasonable
+> Take a look at the output. We see that our smallest sample had 2389 sequences in it. That is a reasonable
 > number. Despite what some say, subsampling and rarefying your data is an important thing to do.
 >
 > We'll generate a subsampled file for our analyses with the `Sub.sample` command:
@@ -747,7 +747,7 @@ animal) followed by a D and a three digit number (number of days post weaning).
 > - **Sub.sample** {% icon tool %} で次のように設定する
 >   - "Select type of data to subsample" to `OTU Shared`
 >   - "shared" to output from Make.shared
->   - "size" to `2440`
+>   - "size" to `2389`
 >
 > > ### {% icon question %} Question
 > >
@@ -847,7 +847,7 @@ let's randomly select 2440 sequences from each sample 1000 times and calculate t
 > - **Summary.single** {% icon tool %} で次のように設定する
 >   - "share" to shared file from Make.shared
 >   - "calc" to `nseqs,coverage,sobs,invsimpson`
->   - "size" to 2440
+>   - "size" to 2389
 {: .hands_on}
 
 The data will be outputted to a table called the *summary file*:
@@ -884,7 +884,7 @@ repeated-measures ANOVA and find that there was no significant difference based 
 
 Beta diversity is a measure of the similarity of the membership and structure found between *different* samples.
 The default calculator in the following section is *thetaYC*, which is the [Yue & Clayton theta similarity
-coefficient](http://www.tandfonline.com/doi/abs/10.1080/STA-200066418)
+coefficient](http://csyue.nccu.edu.tw/2005communicationindex.pdf)
 
 > ### {% icon hands_on %} ハンズオン: Beta diversity
 >
@@ -894,14 +894,14 @@ coefficient](http://www.tandfonline.com/doi/abs/10.1080/STA-200066418)
 > - **Dist.shared** {% icon tool %} で次のように設定する
 >   - "shared" to the shared file from Make.shared
 >   - "calc" to thetayc,jclass
->   - "subsample" to 2440
+>   - "subsample" to 2389
 >
 > Let's visualize our data in a Heatmap
 >
 > - **Heatmap.sim** {% icon tool %} で次のように設定する
 >   - "Generate Heatmap for" to `phylip`
 >   - "phylip" to output by Dist.shared (this is a collection input)
->  
+>
 > <!-- TODO: way to view the SVGs inside Galaxy? -->
 {: .hands_on}
 
@@ -967,7 +967,79 @@ of the others.
 
 ![Jclass tree](../../images/tree.jclass.png)
 
-### Determine statistical significance of clusterings
+
+# Visualisations
+
+Mothur does not have a lot of visualization tools built in, but external tools may be used for this. For
+instance we can convert our shared file to the more widely used `biom` format and view it in a platform like
+[Phinch](http://www.phinch.org/).
+
+## Phinch
+
+> ### {% icon hands_on %} ハンズオン: Phinch
+>
+> - **Make.biom** {% icon tool %} で次のように設定する
+>   - "shared" to Subsample.shared
+>   - "constaxonomy" to taxonomy output from Classify.otu (collection)
+>   - "metadata" to `mouse.dpw.metadata`
+>
+> The Galaxy project runs an instance of Phinch, and if you look at the output biom file, you will see a link
+> to view the file at Phinch:
+>
+> ![Icon to view at Phinch](../../../../shared/images/viewatphinch.png)
+>
+> Clicking on this link will lead you to the Phinch website, which will automatically load in your file, and
+> where you can several interactive visualisations:
+>
+> ![Phinch overview](../../../../shared/images/phinch_overviewpage.png)
+>
+> > ### {% icon comment %} Comment
+> >
+> > If this link is not present on your Galaxy, you can download the generated BIOM file and upload directly to Phinch server at [http://phinch.org](http://phinch.org).
+> {: .comment}
+{: .hands_on}
+
+## Krona
+
+A second tool we can use to visualize our data, is [Krona]()
+
+> ### {% icon hands_on %} ハンズオン: Krona
+>
+>  First we convert our mothur taxonomy file to a format compatible with Krona
+>
+> - **Taxonomy-to-Krona** {% icon tool %} で次のように設定する
+>   - "Taxonomy file" to the taxonomy output from Classify.otu (collection)
+>
+> - **Krona pie chart** {% icon tool %} で次のように設定する
+>   - "Type of input" to `Tabular`
+>   - "Input file" to taxonomy output from Classify.otu (collection)
+{: .hands_on}
+
+The resulting file is an HTML file containing an interactive visualization. For instance try double-clicking the
+innermost ring labeled "Bacteria"
+
+![Krona](../../images/krona.png)
+
+> ### {% icon question %} Question
+>
+>  What percentage of your sample was labelled `Lactobacillus`?
+>
+> <details>
+>   <summary> クリックして解答を表示</summary>
+>   Explore the Krona plot, double click on Firmicutes, here you should see Lactobacillus
+>   clearly (16% in our case), click on this segment and the right-hand side will show you the percentages at
+>   any point in the hierarchy (here 5% of all)
+>
+>  <img src="../../images/krona_lacto.png" alt="image showing view with Lactobacillus highlighted">
+> </details>
+{: .question}
+
+Well done! you have completed the basics of the mothur SOP. Below are some more exercises for those who wish to
+go into more details about statistical significance testing and population-level analysis.
+
+# Extra Credit
+
+## Determine statistical significance of clusterings
 
 We can perform a test to determine whether the clustering within the tree is statistically significant or not
 using by choosing from the `parsimony`, `unifrac.unweighted`, or `unifrac.weighted` commands. To run these we
@@ -975,13 +1047,12 @@ will first need to create a design file that indicates which treatment each samp
 
 > ### {% icon hands_on %} ハンズオン: Obtain design file
 >
-> - Import the file called `mouse.time.design` to your history
->   - Go to the shared data library or the files you downloaded from Zenodo.
+> - Find the file `mouse.time.design` in your history (you imported this file at the start of this tutorial)
 > - Make sure the datatype is set to `mothur.design`.
 >
 > > ### {% icon tip %} Changing datatype of a datasets
 > >  - Click on the **pencil icon** of the dataset
-> >  - Click on the **Datatype** tab
+> >  - Click on the **Datatypes** tab
 > >  - Select the new datatype from dropdown menu
 > >  - Click **Save**
 > {: .tip}
@@ -1020,13 +1091,14 @@ early vs. late comparisons for each mouse:
 > - **Parsimony** {% icon tool %} で次のように設定する
 >   - "tree" to the `tre` output from Tree.Shared (collection)
 >   - "group" to the design file described above
+>   - "output logfile?" to `yes`
 {: .hands_on}
 
 In the logfile for `thetayc.0.03.lt.ave` we see
 
 ```
 Tree#   Groups      ParsScore   ParsSig
-1       Early-Late  1           0.001
+1       Early-Late  1           <0.001
 ```
 
 There was clearly a significant difference between the clustering of the early and late time points.
@@ -1079,6 +1151,7 @@ tool:
 >
 > - **Nmds** {% icon tool %} で次のように設定する
 >   - "phylip" to dist files from Dist.shared (collection)
+>   - "output logfile?" to `yes`
 >
 > Opening the `stress` file for `thetayc.0.03.lt.ave` we can inspect the stress and R^2 values, which describe
 > the quality of the ordination. Each line in this file represents a different iteration and the configuration
@@ -1097,6 +1170,7 @@ tool:
 >   - "phylip" to dist files collection from Dist.shared
 >   - "mindim" to `3`
 >   - "maxdim" to `3`
+>   - "output logfile?" to `yes`
 >
 > > ### {% icon question %} Question
 > >
@@ -1127,6 +1201,7 @@ matrices we created earlier and does not actually use ordination.
 > - **Amova** {% icon tool %} で次のように設定する
 >   - "phylip" to dist files from Dist.shared (collection)
 >   - "design" to mouse.time.design file from your history
+>   - "output logfile?" to `yes`
 {: .hands_on}
 
 in logfile for thetaYC we find:
@@ -1151,6 +1226,7 @@ samples using the `Homova` command:
 > - **Homova** {% icon tool %} で次のように設定する
 >   - "phylip" to dist files from Dist.shared (collection)
 >   - "design" to mouse.time.design file from your history
+>   - "output logfile?" to `yes`
 {: .hands_on}
 
 ```
@@ -1260,6 +1336,7 @@ F3D9     9
 > <!-- TODO: add this tool to mothur suite -->
 > - **Get.communitytype** {% icon tool %} で次のように設定する
 >   - "shared" to Subsample.shared file
+>   - "output logfile?" to `yes`
 >
 {: .hands_on}
 
@@ -1407,62 +1484,6 @@ Otu0015    0.09
 Otu0082    0.08
 Otu0042    0.07
 ```
-
-# Step 4: Visualisations
-
-Mothur does not have a lot of visualization tools built in, but external tools may be used for this. For
-instance we can convert our shared file to the more widely used `biom` format and view it in a platform like
-[Phinch](http://www.phinch.org/).
-
-## Phinch
-
-> ### {% icon hands_on %} ハンズオン: Phinch
->
-> - **Make.biom** {% icon tool %} で次のように設定する
->   - "shared" to Subsample.shared
->   - "constaxonomy" to taxonomy output from Classify.otu (collection)
->   - "metadata" to `mouse.dpw.metadata`
->
-> The Galaxy project runs an instance of Phinch, and if you look at the output biom file, you will see a link
-> to view the file at Phinch:
->
-> ![Icon to view at Phinch](../../../../shared/images/viewatphinch.png)
->
-> Clicking on this link will lead you to the Phinch website, which will automatically load in your file, and
-> where you can several interactive visualisations:
->
-> ![Phinch overview](../../../../shared/images/phinch_overviewpage.png)
-{: .hands_on}
-
-## Krona
-
-A second tool we can use to visualize our data, is [Krona]()
-
-> ### {% icon hands_on %} ハンズオン: Krona
->
-> - **Visualize with Krona** {% icon tool %} で次のように設定する
->   - "input file" to taxonomy output from Classify.otu (collection)
->   - Set **Is this output from mothur?** to yes
-{: .hands_on}
-
-The resulting file is an HTML file containing an interactive visualization. For instance try double-clicking the
-innermost ring labeled "Bacteria"
-
-![Krona](../../images/krona.png)
-
-> ### {% icon question %} Question
->
->  what percentage of your sample was labelled `Lactobacillus`?
->
-> <details>
->   <summary> クリックして解答を表示</summary>
->   Explore the Krona plot, double click on Firmicutes, here you should see Lactobacillus
->   clearly (16% in our case), click on this segment and the right-hand side will show you the percentages at
->   any point in the hierarchy (here 5% of all)
->
->  ![Lactobacillus in Krona](../../images/krona_lacto.png)
-> </details>
-{: .question}
 
 # Conclusion
 {:.no_toc}
