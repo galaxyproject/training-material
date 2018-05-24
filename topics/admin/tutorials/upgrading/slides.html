@@ -7,8 +7,8 @@ logo: "GTN"
 
 # Release Cycle
 
-* Galaxy aims to release each 4 months
-* Releases are tagged with year and month, for example 17.09, 18.01
+* Galaxy aims to release every 4 months
+* Releases are named after the **year** and **month** when the release was branched, for example 18.01, 18.05
 * Per the [security policy](https://github.com/galaxyproject/galaxy/blob/dev/SECURITY_POLICY.md), releases within the past 12 months are supported
 
 ---
@@ -18,34 +18,47 @@ logo: "GTN"
   * We put substantial effort in making them as useful as we can
   * Highlights, security announcements, deprecation notices, enhancements grouped by impact, etc...
 * Every release has its own branch in the `galaxy` GitHub repository
-  * Named as `release_YY_MM`
+  * Named as `release_YY.MM`
   * Kept up to date (especially for recent releases)
 
 ---
-# Mantain local Galaxy modifications
+class: left
+# Deal with local Galaxy modifications
 
-Two options:
-1. `git stash && git ... && git stash pop`
-2. Commit your changes to a local branch, merge/rebase upstream Galaxy
+Two scenarios:
+1. Uncommitted changes
+2. Changes committed to a local branch (or to a fork)
 
-The latter is probably better in case of large changes
+The latter is probably better in case of large changes.
 
 ---
-# Keeping a release up to date
+class: left
+# Keeping a release up to date (1)
 
-To keep your `release_*` branch up to date you can:
+If there are *no local commits*, you can update a `release_YY.MM` branch by running:
 
 ```console
-$ git stash  # optional
+$ git stash  # optional, in case of uncommitted modifications
 $ git pull --ff-only
-$ git stash pop  # optional
+$ git stash pop  # optional, as above
 ```
 
-and restart Galaxy
-
-Works well if no local commits exist
+and restarting Galaxy.
 
 ---
+class: left
+# Keeping a release up to date (2)
+
+In case of changes committed to a local branch:
+
+```console
+$ git pull [--rebase] origin release_YY.MM
+```
+
+and restart Galaxy.
+
+---
+class: left
 # Major release upgrade
 
 When a new release is out:
@@ -57,6 +70,7 @@ When a new release is out:
 * When it's time, stop the Galaxy server processes (not the database server!)
 
 ---
+class: left
 # Housekeeping
 
 Not usually necessary, but might help:
@@ -81,24 +95,16 @@ $ git stash pop  # optional
 # Diff samples
 
 ```console
-$ diff -u galaxy.ini galaxy.ini.sample
-$ diff -u datatypes_conf.xml datatypes_xml.conf.sample
+$ git diff release_18.01..release_18.05 -- config/*.sample
 ```
 
 Merge changes as desired/necessary.
-
-???
-Alternatively:
-
-```console
-$ git diff release_17.09..release_18.01 -- config/galaxy.ini.sample
-```
 
 ---
 # Upgrade virtualenv
 
 ```console
-$ export GALAXY_CONFIG_FILE=/srv/galaxy/config/galaxy.ini
+$ export GALAXY_CONFIG_FILE=/srv/galaxy/config/galaxy.yml
 $ export GALAXY_VIRTUAL_ENV=/srv/galaxy/venv
 $ . $GALAXY_VIRTUAL_ENV/bin/activate
 $ pip install --upgrade pip setuptools
@@ -107,22 +113,24 @@ $ deactivate
 ```
 
 ---
+class: left
 # make client on `dev`
 
-Since January 2018, the `dev` Galaxy branch does not contain updated client
+Since January 2018, the `dev` and the freezed Galaxy branches do not contain updated client
 build artifacts (e.g. JavaScript bundles in `static/`).
 
 1. install `yarn`
 2. run `make client`
 
 ---
+class: left
 # Tool migrations?
 
 Galaxy source tools -> Tool Shed
 
-We haven't done these in a long time, but may do more
+We haven't done any in a long time, but may do more.
 
-Galaxy will notify you on first startup after upgrade including migration
+Galaxy will notify you on the first startup it the upgrade includes migrations.
 
 ---
 # Database migrations
@@ -131,7 +139,7 @@ Galaxy will notify you on first startup after upgrade including migration
    - [PostgreSQL backup docs](https://www.postgresql.org/docs/current/static/backup.html)
 2. Run
    ```console
-   $ sh manage_db.sh upgrade -c /srv/galaxy/config/galaxy.ini
+   $ sh manage_db.sh upgrade -c $GALAXY_CONFIG_FILE
    ```
 
 ---
@@ -147,24 +155,26 @@ Galaxy will notify you on first startup after upgrade including migration
 If you're using a compute cluster and not running from shared file system
 
 ---
+class: left
 # Downgrading
 
-If for some reason you need to move back to an older release, the process is similar, but the
-order is a bit different:
+If for some reason you need to move back to an older release, the process is
+similar, but the order is a bit different because the database downgrade needs
+to be done while being on the newer branch:
 
 ```console
-$ export GALAXY_CONFIG_FILE=/srv/galaxy/config/galaxy.ini
+$ export GALAXY_CONFIG_FILE=/srv/galaxy/config/galaxy.yml
 $ export GALAXY_VIRTUAL_ENV=/srv/galaxy/venv
-$ sh manage_db.sh -c /srv/galaxy/config/galaxy.ini downgrade 135
+$ sh manage_db.sh -c /srv/galaxy/config/galaxy.yml downgrade 140
 $ find . -name '*.pyc' -delete
 $ git fetch
 $ git stash  # optional
-$ git checkout release_17.09
+$ git checkout release_18.01
 $ git pull --ff-only
 $ git stash pop  # optional
 $ ./scripts/common_startup.sh
 ```
 
-Here we assume you know the database version of the Galaxy release you want to
-downgrade to (135 in the example above). This simplifies the procedure because
-the database downgrade needs to be done while being on the newer branch.
+The database version of the release you want to downgrade to (version 135 for
+the 18.01 release in the example above) can be found by looking at the last file in:
+https://github.com/galaxyproject/galaxy/tree/release_18.01/lib/galaxy/model/migrate/versions/
