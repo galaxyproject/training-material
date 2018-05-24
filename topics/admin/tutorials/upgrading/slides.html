@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html>
+
+
+
+
+
+
+  <head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <title>Upgrading Galaxy</title>
+    <link rel="stylesheet" href="/training-material/assets/css/slides.css">
+    <link rel="stylesheet" href="/training-material/assets/css/font-awesome.css" id="theme">
+  </head>
+  <body>
+    <textarea id="source">
+name: inverse
+layout: true
+class: center, middle, inverse
+
+<div class="my-footer"><span>
+
+<img src="/training-material/assets/images/GTN-60px.png" alt="Galaxy Training Network" style="height: 40px;">
+
+</span></div>
+
+---
+
+# Upgrading Galaxy
+
+
+
+---
+
+
+
+
+
+### <img class="emoji" title=":grey_question:" alt=":grey_question:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2754.png" height="20" width="20" align="absmiddle"> Questions
+
+
+- What is the release cycle of Galaxy?
+
+- What do I need to do before updating my Galaxy server?
+
+- How to upgrade Galaxy to a new release?
+
+
+---
+
+### <img class="emoji" title=":dart:" alt=":dart:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f3af.png" height="20" width="20" align="absmiddle"> Objectives
+
+
+- Identify the challenges involved in the Galaxy upgrade process.
+
+- Complete the upgrade to a new release.
+
+
+---
+
+# Release Cycle
+
+* Galaxy aims to release every 4 months
+* Releases are named after the **year** and **month** when the release was branched, for example 18.01, 18.05
+* Per the [security policy](https://github.com/galaxyproject/galaxy/blob/dev/SECURITY_POLICY.md), releases within the past 12 months are supported
+
+---
+# Releases
+
+* Every release has [release notes](https://docs.galaxyproject.org/en/master/releases)
+  * We put substantial effort in making them as useful as we can
+  * Highlights, security announcements, deprecation notices, enhancements grouped by impact, etc...
+* Every release has its own branch in the `galaxy` GitHub repository
+  * Named as `release_YY.MM`
+  * Kept up to date (especially for recent releases)
+
+---
+class: left
+# Deal with local Galaxy modifications
+
+Two scenarios:
+1. Uncommitted changes
+2. Changes committed to a local branch (or to a fork)
+
+The latter is probably better in case of large changes.
+
+---
+class: left
+# Keeping a release up to date (1)
+
+If there are *no local commits*, you can update a `release_YY.MM` branch by running:
+
+```console
+$ git stash  # optional, in case of uncommitted modifications
+$ git pull --ff-only
+$ git stash pop  # optional, as above
+```
+
+and restarting Galaxy.
+
+---
+class: left
+# Keeping a release up to date (2)
+
+In case of changes committed to a local branch:
+
+```console
+$ git pull [--rebase] origin release_YY.MM
+```
+
+and restart Galaxy.
+
+---
+class: left
+# Major release upgrade
+
+When you upgrade to a new release:
+* Plan a service downtime for the upgrade and inform your users
+* Configure your reverse proxy to serve a custom error page, e.g. for nginx inside the `server` section add:
+  ```ini
+  error_page 502 /static/custom_502.html;
+  ```
+* When it's time, stop the Galaxy server processes (not the database server!)
+
+---
+class: left
+# Housekeeping
+
+Not usually necessary, but might help:
+
+```console
+$ find . -name '*.pyc' -delete
+$ rm -rf database/compiled_templates/*
+```
+
+---
+# Upgrading the galaxy repo
+
+```console
+$ git fetch
+$ git stash  # optional
+$ git checkout release_YY.MM
+$ git pull --ff-only
+$ git stash pop  # optional
+```
+
+---
+# Diff samples
+
+```console
+$ git diff release_18.01..release_18.05 -- config/*.sample
+```
+
+Merge changes as desired/necessary.
+
+---
+# Upgrade virtualenv
+
+```console
+$ export GALAXY_CONFIG_FILE=/srv/galaxy/config/galaxy.yml
+$ export GALAXY_VIRTUAL_ENV=/srv/galaxy/venv
+$ . $GALAXY_VIRTUAL_ENV/bin/activate
+$ pip install --upgrade pip setuptools
+$ ./scripts/common_startup.sh
+$ deactivate
+```
+
+---
+class: left
+# make client on `dev`
+
+Since January 2018, the `dev` and the freezed Galaxy branches do not contain updated client
+build artifacts (e.g. JavaScript bundles in `static/`).
+
+1. install `yarn`
+2. run `make client-production`
+
+[Documentation](https://github.com/galaxyproject/galaxy/blob/dev/client/README.md)
+---
+class: left
+# Tool migrations?
+
+Galaxy source tools -&gt; Tool Shed
+
+We haven't done any in a long time, but may do more.
+
+Galaxy will notify you on the first startup it the upgrade includes migrations.
+
+---
+# Database migrations
+
+1. **Backup** your database
+   - [PostgreSQL backup docs](https://www.postgresql.org/docs/current/static/backup.html)
+2. Run
+   ```console
+   $ sh manage_db.sh upgrade -c $GALAXY_CONFIG_FILE
+   ```
+
+---
+# Start Galaxy
+
+* Monitor the log files
+* Check `/api/version`
+* Check that everything still works
+
+---
+# Distribute Galaxy
+
+If you're using a compute cluster and not running from shared file system
+
+---
+class: left
+# Downgrading
+
+If for some reason you need to move back to an older release, the process is
+similar, but the order is a bit different because the database downgrade needs
+to be done while being on the newer branch:
+
+```console
+$ export GALAXY_CONFIG_FILE=/srv/galaxy/config/galaxy.yml
+$ export GALAXY_VIRTUAL_ENV=/srv/galaxy/venv
+$ sh manage_db.sh -c /srv/galaxy/config/galaxy.yml downgrade 140
+$ find . -name '*.pyc' -delete
+$ git fetch
+$ git stash  # optional
+$ git checkout release_18.01
+$ git pull --ff-only
+$ git stash pop  # optional
+$ ./scripts/common_startup.sh
+```
+
+The database version of the release you want to downgrade to (version 135 for
+the 18.01 release in the example above) can be found by looking at the last file in:
+https://github.com/galaxyproject/galaxy/tree/release_18.01/lib/galaxy/model/migrate/versions/
+
+
+---
+
+### <img class="emoji" title=":grey_exclamation:" alt=":grey_exclamation:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2755.png" height="20" width="20" align="absmiddle"> Key points
+
+
+- Galaxy release notes contain important information about a new release.
+
+- Backup of the database is essential when database migrations are necessary.
+
+
+
+---
+
+## Thank you!
+
+This material is the result of a collaborative work. Thanks the [Galaxy Training Network](https://wiki.galaxyproject.org/Teach/GTN) and all the contributors  (Martin Čech, Enis Afgan, Nicola Soranzo) !
+
+
+<img src="/training-material/assets/images/GTN.png" alt="Galaxy Training Network" style="height: 100px;">
+
+
+
+.footnote[Found a typo? Something is wrong in this tutorial? <br>Edit it on [GitHub](https://github.com/galaxyproject/training-material/tree/master/topics/admin/tutorials/upgrading/slides.html)]
+
+    </textarea>
+    <script src="/training-material/assets/js/remark-latest.min.js" type="text/javascript">
+    </script>
+    <script type="text/javascript">
+      var slideshow = remark.create({navigation: {scroll: false,}});
+      var hljs = remark.highlighter.engine;
+    </script>
+  </body>
+</html>
