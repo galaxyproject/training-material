@@ -154,20 +154,207 @@ The assembly we just uploaded has two issues that need to be addressed before pr
 Now everything is loaded and ready to go. We will now align our assembly against each of the *E. coli* genomes we have uploaded into the collection. To do this we will use [LASTZ](https://lastz.github.io/lastz/) an aligner designed to align long sequences. 
 
 > ### {% icon hands_on %} Hands-on: Running LASTZ
-> 1. Open **LASTZ** interface 
+> 1. Open **LASTZ** interface
 > 2. Change **Select TARGET sequnce(s) to align against** to `from your history`
 > 3. In **Select a reference dataset** click on the folder icon (![](../../images/folder-o.png)) and the collection containing all *E. coli* genomes we uploaded below. 
 > 4. In **Select QUERY sequence(s)** choose our assembly which was prepared in the previous step.
 > 5. Find section of LASTZ interface called **Chaining** and expand it.
 > 6. Set **Perform chaining of HSPs with no penalties** to `Yes`
-> 7. Run LASTZ by clicking **Execute** button
+> 7. Find section of LASTZ interface called **Output** and expand it.
+> 8. Set **Specify the output format** to `blastn`
+> 9. Run LASTZ by clicking **Execute** button
 {: .hands_on}
+
+Note that because we started LASTZ on *a collection* of *E. coli* genomes is will output alignment information as *a collection* as well. Collection is simply a way to represent large sets of similar data in compact way within Galaxy's interface.
 
 > ### {% icon warning %} It will take a while!
 > Please understand that alignment is not an instantaneous process: allow several hours for these jobs to clear.
 {: .warning-box}
 
 # Finding closely related assemblies
+
+## Understanding LASTZ output
+
+LASTZ produced data in so-called `blastn` format, which looks like this:
+
+```
+         1       2     3   4  5 6       7       8    9   10      11    12
+-------------------------------------------------------------------------
+BA000007.2 Ecoli_C 66.81 232 51 6 3668174 3668397 5936 6149 3.2e-40 162.7
+BA000007.2 Ecoli_C 57.77 206 38 8  643802  643962 5945 6146 1.6e-18  90.6
+BA000007.2 Ecoli_C 67.03 185 32 6 4849373 4849528 5965 6149 2.9e-28 122.9
+BA000007.2 Ecoli_C 63.06 157 33 3 1874604 1874735 5991 6147 5.8e-26 115.3
+```
+
+where columns are:
+
+ 1. `qseqid` - query (e.g., gene) sequence id
+ 2.	`sseqid` - subject (e.g., reference genome) sequence id
+ 3.	`pident` - percentage of identical matches
+ 4.	`length` - alignment length
+ 5.	`mismatch` - number of mismatches
+ 6.	`gapopen` - number of gap openings
+ 7.	`qstart` - start of alignment in query
+ 8.	`qend` - end of alignment in query
+ 9.	`sstart` - start of alignment in subject
+ 10. `send` - end of alignment in subject
+ 11. `evalue` - [expect value](https://blast.ncbi.nlm.nih.gov/Blast.cgi?CMD=Web&PAGE_TYPE=BlastDocs&DOC_TYPE=FAQ#expect)
+ 12. `bitscore`	- [bit score](https://www.ncbi.nlm.nih.gov/BLAST/tutorial/Altschul-1.html)
+
+ The alignment information produced by LASTZ is a collection. In this collection each element contains alignment data between each of the *E. coli* genomes and our assembly:
+
+![LASTZ collection](../../images/lastz_collection.png "LASTZ produced a collection where each element corresponds to an alignment between an <i>E. coli</i> genome and our assembly. Here one of the elements is expanded.").
+
+## Collapsing collection
+
+Collections are a wonderful way to organize large sets of data and parallelize data processing like we did here. However, at this point we need to combine all data into one dataset. Follow the steps below to accomplish this:
+
+> ### {% icon hands_on %} Hands-on: Combining collection into a single dataset
+> 1. Open **Collapse Collection** tool.
+> 2. In **Collection of files to collapse** click on the folder icon (![](../../images/folder-o.png)) and select the output of **LASTZ** produced on previous step. 
+> 3. Leave all other options as they are - no changes needed. 
+> 4. Click **Execute**
+{: .hands_on}
+
+This will produce one gigantic table (over 12 million lines) containing combined LASTZ output for all genomes. 
+
+## Getting taste of the alignment data
+
+To make further analyses we need to obtain some understanding about the nature of the alignment data. To do this let's select a random subsample of the large dataset we've generated above. This is necessary because processing the entire dataset will take time and will not give us a better insight anyway. So first we will select 10,000 lines from the alignment data:
+
+> ### {% icon hands_on %} Hands-on: Selecting random subset of data
+> 1. Open **Select random lines from a file** tool.
+> 2. Set **Randomly select** to `10000`
+> 3. In **from** choose the dataset generated on previous step (it will called something like `Collapse Collection on data...` )
+> 4. Click **Execute**
+{: .hands_on}
+
+Now we can visualize this dataset to discover generalities:
+
+> ### {% icon hands_on %} Hands-on: Graphing alignment data
+> 1. Expand the random subset of alignment data generated on the previous step by clicking on it.
+> 2. You will see "chart" button (![](../../images/bar-chart-o.png)). Click on it.
+> 3. In the center pane you will see a list of visualizations. Select **Scatter plot (NVD3)**
+> 4. Click **Select data** button (![](../../images/disks.png))
+> 5. Set **Values for x-axis** to `Column: 3` (alignment identity)
+> 6. Set **Values for y-axis** to `Column: 4` (alignment length)
+> 7. You can also click on configuration button (![](../../images/chart_cog.png)) and specify axis labels etc.
+{: .hands_on}
+
+The relationship between the alignment identity and alignment length looks like this (remember that this only a subsample of the data):
+
+![Identity versus length](../../images/id_vs_len.png "Alignment identity (%) versus length (bp). This graph is truncated at teh top")
+
+you can see that most alignments are short and have relatively low identity. Thus we can filter the original dataset by identity and length. Judging form this graph we can selected alignment longer than 10,000 bp with identity above 90%. 
+
+> ### {% icon hands_on %} Hands-on: Filtering data
+> 1. Select **Filter data on any column using simple expressions** tool.
+> 2. In **Filter** select the full dataset. **IMPORTANT** you need to select the full dataset, not the down-sampled one, but the one generated by collection collapsing operation. 
+> 3. In **With following condition** enter our filtering criteria: `c3 >= 90 and c4 >= 10000` (here `c` stands for *column*).
+> 4. Click **Execute**
+{: .hands_on}
+
+## Aggregating data
+
+Remember, our objective is to find genomes that are most similar to our. Given the alignment data in the table we just created we can define similarity as follows:
+
+------
+*Genomes that have the smallest number of alignment blocks but the highest overall alignment length are most similar to our assembly. This essentially means that they have longest uninterrupted region of high similarity to our assembly.*
+
+-------
+
+However, to extract this information from our data we need to aggregate it. In other words, for each *E. coli* genome we need to calculate the total number of alignment blocks, their combined length, and average identity. The following section explain how to do this:
+
+> ### {% icon hands_on %} Hands-on: Aggregating the data
+> 1. Select **Datamash (operations on tabular data)**
+> 2. In **Input tabular dataset** select results of the filtering performed in the previous step (it will have a name with `Filter on data...` in it. 
+> 3. In **Group by fields** enter `1`. This is because column 1 contains name of the *E. coli* genome we mapped against. 
+> 4. Set **Sort input** to `Yes`.
+> 5. On **Operation to perform on each group** set **Type** to `Count` and **On column** to `Column: 1`.
+> 6. Click **Insert operation to perform on each group** button twice to add two more input boxes.
+> 7. In second **Operation to perform on each group** set **Type** to `Mean` and **On column** to `Column: 3`.
+> 8. In third **Operation to perform on each group** set **Type** to `Sum` and **On column** to `Column: 4`.
+> 9. Click **Execute**
+{: .hands_on}
+
+## Finding closest relatives
+
+Dataset generated above lists each *E. coli* genome accession only once and will have aggregate information of the number of alignment blocks, mean identity, and total length. Let's graph these data:
+
+> ### {% icon hands_on %} Hands-on: Graphing aggregated data
+> 1. Expand the aggregated data generated on the previous step by clicking on it.
+> 2. You will see "chart" button (![](../../images/bar-chart-o.png)). Click on it.
+> 3. In the center pane you will see a list of visualizations. Select **Scatter plot (NVD3)**
+> 4. Click **Select data** button (![](../../images/disks.png))
+> 5. Set **Data point labels** to `Column: 1` (Accession number of each *E. coli* genome)
+> 5. Set **Values for x-axis** to `Column: 2` (# of alignment blocks)
+> 6. Set **Values for y-axis** to `Column: 4` (Total alignment length)
+> 7. You can also click on configuration button (![](../../images/chart_cog.png)) and specify axis labels etc.
+{: .hands_on}
+
+The relationship between the number of alignment blocks and total alignment length looks like this:
+
+![Identity versus length](../../images/best_genomes_chart.png "Number of alignment blocks versus total alignment length (bp)."")
+
+A group of three dots in the upper left corner of this scatter plot represents genomes that are most similar to our assembly: they have the small number of alignment blocks and high total alignment length. Mousing over these three dots (if you set **Data point labels** correctly in the previous step) will reveal they accession numbers: `LT906474.1`, `CP024090.1`, and `CP020543.1`. 
+
+> ### {% icon warning %} Things change
+> It is possible that when you will be repeating these steps the set of sequences in NCBI will change and you will obtain different accession numbers. Keep this in mind.
+{: .warning-box}
+
+Let's find table entries corresponding to these:
+
+> ### {% icon hands_on %} Hands-on: Extracting into about best hits
+> 1. Open **Select lines that match an expression** tool. 
+> 2. Set **Select lines from** to previous dataset (named like `Datamash on data...`)
+> 3. In **the pattern** enter `LT906474|CP024090|CP020543`. Here `|` means `or`.
+> 4. Click **Execute**
+{: .hands_on}
+
+This will generate a short table like this:
+
+```
+CP020543.1 11 99.91	4487098
+CP024090.1 12 99.91	4540487
+LT906474.1  8 99.94	4575223
+```
+
+From this it appears that `LT906474.1` is closes to our assembly as it has eight alignment blocks, longest total alignment length (4,575,223) and highest mean identity (99.94%). 
+
+# Comparing genome architectures
+
+Now that we know the three genomes most closely related to ours, let's take a closer look at them. First we will re-download sequence and annotation data. 
+
+## Getting sequences and annotations
+
+Using the three accession listed above we will fetch necessary data from NCBI. The following section explains how to do this for `LT906474`. You will need to repeat these steps for `CP024090` and `CP020543`.
+
+> ### {% icon hands_on %} Hands-on: Downloading annotations
+> 1. Go to [NCBI](https://www.ncbi.nlm.nih.gov/) and enter `LT906474` in the **Search NCBI** box.
+> 2. Once results load scroll to the **Assembly** section (under heading **Genomes**) and click on it. 
+> 3. After the page click **Download GenBank assembly** link.
+> 4. You will need to right click the links to **Copy linl address**
+> 5. Paste these links into Galaxy upload interface as shown in the following video (note that each URL is pasted into an individual Paste box in teh upload interface is set to `fasta`  and NOT `fasta.gz`)
+>
+>----------
+><div style="padding:56.25% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/271758643?title=0&byline=0&portrait=0" style="position:absolute;top:0;left:0;width:100%;height:100%;" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
+>-----------
+>
+>This will create a collection of three genomic sequences. Now repeat the same steps to upload annotation data as shown here:
+>
+>--------
+><div style="padding:56.25% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/271754600?title=0&byline=0&portrait=0" style="position:absolute;top:0;left:0;width:100%;height:100%;" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
+>-----------------
+>
+{: .hands_on}
+
+At the end of this you should have two collections: one containing genomic sequences and another containing annotations. 
+
+## Producing alignments once again
+
+Now we will perform alignments between our assembly and the three most closely related genomes to get a detailed look at any possible genome architecture changes. 
+
+> ### {% icon hands_on %} Hands-on: Downloading annotations
 
 
 Short introduction about this subpart.
