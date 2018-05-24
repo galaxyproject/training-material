@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 topic_name: training
-tutorial_name: create-new-tutorial-docker
+tutorial_name: create-new-tutorial-galaxy
 ---
 
 # Introduction
@@ -38,7 +38,7 @@ In this tutorial, you will learn how to create a virtualised Galaxy instance, ba
 > 1. [Defining metadata](../create-new-tutorial-metadata/tutorial.html)
 > 1. [Setting up the infrastructure](../create-new-tutorial-jekyll/tutorial.html)
 > 1. [Creating Interactive Galaxy Tours](../create-new-tutorial-tours/tutorial.html)
-> 1. [Building a Docker flavor](../create-new-tutorial-docker/tutorial.html)
+> 1. [Configuring Galaxy for training](../create-new-tutorial-galaxy/tutorial.html)
 > 1. [Submitting the new tutorial to the GitHub repository](../../../dev/tutorials/github-contribution/slides.html)
 {: .agenda}
 
@@ -47,7 +47,7 @@ In this tutorial, you will learn how to create a virtualised Galaxy instance, ba
 
 To able to run the tutorial, we need a Galaxy instance where the needed tools are installed and the data. We need then to describe the needed technical infrastructure.
 
-This description will be used to automatically set up a Docker Galaxy flavour and also to test if a public Galaxy instance is able to run the tool.
+This description will be used to automatically set up a Docker Galaxy flavour, or provision an existing Galaxy instance, and also to test if a public Galaxy instance is able to run the tool.
 
 ## Filling the `tools.yaml`
 
@@ -148,9 +148,9 @@ Once the tutorial is ready, we need to extract workflows with the different step
 A Galaxy Interactive Tour is a way to go through an entire analysis, step by step inside Galaxy in an interactive and explorative way.
 It is a great way to run the tutorial directly inside Galaxy. To learn more about creating a Galaxy tour please have a look at our [dedicated tour training]({{site.baseurl}}/topics/training/tutorials/create-new-tutorial-tours/tutorial.html).
 
-## Testing the technical infrastructure
+# Testing the technical infrastructure using Docker
 
-Once we defined all the requirements for running the tutorial, we can test these requirements.
+Once we defined all the requirements for running the tutorial, we can test these requirements with Docker.
 
 Every topic will come with a Docker image containing the tools, data, workflows and Galaxy Interactive Tours required by each tutorial of this topic. The Docker image is described in the Dockerfile found in the `docker` directory of each topic. This file uses scripts to automatically add the files for each tutorial. The only thing to change is the name of the topic in the Dockerfile copied from the templates.
 
@@ -159,7 +159,7 @@ Every topic will come with a Docker image containing the tools, data, workflows 
 > 1. Check that the Dockerfile uses 'sequence-analysis' as topic name
 > 2. Move to the root of the training material repository
 > 3. Build the Docker image for the topic with: `docker build -f topic/sequence-analysis/docker/Dockerfile -t training-sequence-analysis .`
->     
+>
 >    This command needs to be launched a the root of training material repository because the Dockerfile uses some scripts available there to install the tools, import the data and the workflows
 >
 > 4. Launch the Docker container: `docker run -d -p 8080:80 training-sequence-analysis`
@@ -169,6 +169,88 @@ Every topic will come with a Docker image containing the tools, data, workflows 
 >     3. Check the workflows
 >     4. Check the Galaxy Interactive Tours in "Help"
 {: .hands_on}
+
+# Provisioning an existing Galaxy with the training requirements
+
+If you have a Galaxy server already running somewhere and would like to support one or more training modules, [ephemeris](https://ephemeris.readthedocs.io) can be used to easily install all the required tools, reference data, data libraries, tours and workflows.
+
+### Prerequisites
+
+First let us install ephemeris on our system:
+
+```bash
+pip install ephemeris
+```
+
+Next, make sure you have your Galaxy API key ready (you must be an admin user on the Galaxy instance). You can find your Galaxy API key in the user preferences menu of your Galaxy.
+
+### Installing tutorial requirements
+
+If you are looking to install all the requirements for every a given tutorial you can use the script provided here: [`bin/install_tutorial_requirements.sh`]({{ site.github_repository }}/tree/master/bin/install_tutorial_requirements.sh)
+
+Example usage from root of the repository:
+
+```bash
+bin/install_tutorial_requirements.sh topics/transcriptomics/tutorials/ref-based -g <galaxy url> -a <api key>
+```
+
+### Installing an entire topic
+
+If you would like to install all the requirements for every tutorial within an entire topic, you can use the script in [`bin/install_topic_requirements.sh`]({{ site.github_repository }}/tree/master/bin/install_topic_requirements.sh)
+
+Example usage from root of the repository:
+
+```bash
+bin/install_topic_requirements.sh topics/metagenomics -g <galaxy url> -a <api key>
+```
+
+
+
+### Installing a subset of components
+
+If you would like to pick and choose what to install for each tutorial, below are descriptions of the commands used to install each of the components (tools, workflows, reference data, data libraries, tours)
+
+**Installing Tools**
+
+The ephemeris command to install tools defined in a `tools.yaml` file to a running Galaxy instance is:
+
+```bash
+shed-tools install -g <Galaxy url> -a <API key> -t topics/<topic>/tutorials/<tutorial>/tools.yaml
+```
+
+
+**Installing Workflows**
+
+The ephemeris command to install a workflow or directory of workflows:
+
+```bash
+workflow-install --publish-workflows -g <Galaxy url> -a <API key> -w topics/<topic>/tutorials/<tutorial>/workflows
+```
+
+This command will install all the workflows in the `workflows` directory, but you may also specify a single workflow file here.
+
+The `--publish_workflow` parameter will make the workflows available to anybody on the Galaxy instance.
+
+
+**Installing Data Libraries**
+
+The ephemeris command to populate a data library with the input datasets from Zenodo is:
+
+```
+setup-data-libraries -g <Galaxy url> -a <API key> -i topic/<topic>/tutorial/<tutorial>/data-library.yaml
+```
+
+**Installing Reference Data**
+
+To run the data manager that installs and configures the reference data needed for a tutorial, run the following ephemeris command:
+
+```bash
+run-data-managers -g <Galaxy url> -a <API key> --config topic/<topic>/tutorial/<tutorial>/data-manager.yaml
+```
+
+**Installing Tours**
+
+This is currently not possible using ephemeris, however, these can be installed by copying the files to the `config/plugins/tours/` directory of your Galaxy instance.
 
 # Conclusion
 {:.no_toc}
@@ -181,6 +263,6 @@ Every topic will come with a Docker image containing the tools, data, workflows 
 > 1. [Defining metadata](../create-new-tutorial-metadata/tutorial.html)
 > 1. [Setting up the infrastructure](../create-new-tutorial-jekyll/tutorial.html)
 > 1. [Creating Interactive Galaxy Tours](../create-new-tutorial-tours/tutorial.html)
-> 1. [Building a Docker flavor](../create-new-tutorial-docker/tutorial.html)
+> 1. [Configuring Galaxy for Training](../create-new-tutorial-galaxy/tutorial.html)
 > 1. [Submitting the new tutorial to the GitHub repository](../../../dev/tutorials/github-contribution/slides.html)
 {: .agenda}
