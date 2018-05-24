@@ -666,27 +666,25 @@ rarefaction のアウトプット（ `rarefaction curves` のアウトプット�
 >   - "taxlevel" → `4`
 >   - "cutoff" → `0.03`
 >
-> Next we want to know how many sequences are in each OTU from each group and we can do this using the
-> `Make.shared` command. Here we tell Mothur that we're really only interested in the 0.03 cutoff level:
+> 次に各グループの各 OTU にある配列の数を知りたいので `Make.shared` コマンドを使用してこれを知ります。ここでは Mothur には0.03のカットオフレベルに興味があると伝えています:
 >
 > - **Make.shared** {% icon tool %} で次のように設定する
->   - "Select input type" to `OTU list`
->   - "list" to list output from Cluster.split
->   - "count" to the count table from Remove.groups
->   - "label" to `0.03`
+>   - "Select input type" → `OTU list`
+>   - "list" には Cluster.split のアウトプットであるリストを選択する
+>   - "count" には Remove.groups からの count table を選択する
+>   - "label" → `0.03`
 >
-> We probably also want to know the taxonomy for each of our OTUs. We can get the consensus taxonomy for each
-> OTU using the `Classify.otu` command:
+> 私たちはまた OTU のそれぞれの分類法について知りたいと思うでしょう。`Classify.otu` コマンドを使用して各 OTU の分類のコンセンサスを得ることができます:
 >
 > - **Classify.otu** {% icon tool %} で次のように設定する
->   - "list" to output from Cluster.split
->   - "count" to the count table from Remove.groups
->   - "taxonomy" to the taxonomy output from Remove.groups
->   - "label" to `0.03`
+>   - "list" には Cluster.split のアウトプットを選択する
+>   - "count" には Remove.groups からの count table を選択する
+>   - "taxonomy" には Remove.groups のアウトプットである taxonomy を選択する
+>   - "label" → `0.03`
 >
 {: .hands_on}
 
-Opening the taxonomy output for level 0.03 shows a file structured like the following:
+レベル 0.03 の taxonomy のアウトプットを開くと次のような構造のファイルが表示されます:
 
 ```
 OTU       Size    Taxonomy
