@@ -1,0 +1,1099 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Galaxy Training!</title>
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <link rel="stylesheet" href="/training-material/assets/css/font-awesome.css">
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+    </head>
+    <body>
+        
+
+
+
+
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/training-material/topics/introduction" title="Go back to list of tutorials">
+                            <i class="fa fa-folder-o" aria-hidden="true"></i> Introduction to Galaxy
+                        </a>
+                    </li>
+
+                    
+                        
+                        
+                        
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Introduction slides">
+                                    <i class="fa fa-slideshare" aria-hidden="true"></i> Introduction slides
+                                </a>
+                                <div class="dropdown-menu">
+                                    
+                                        
+                                            
+                                                <a class="dropdown-item" href="/training-material/topics/introduction/slides/introduction.html">
+                                                    Introduction to Galaxy
+                                                </a>
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                </div>
+                            </li>
+                        
+                    
+
+                    
+                        <li class="nav-item dropdown">
+                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+                                <i class="fa fa-cog" aria-hidden="true"></i> Galaxy Instances
+                            </a>
+                            <div class="dropdown-menu">
+                                
+                                    <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/tree/master/topics/introduction/docker" title="Docker image for this tutorial">
+                                        <i class="fa fa-ship" aria-hidden="true"></i> Docker image
+                                    </a>
+                                
+                                
+                                
+                            </div>
+                        </li>
+                    
+
+                    
+
+                    
+
+                    
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="fa fa-life-ring" aria-hidden="true"></i> Help
+    </a>
+    <div class="dropdown-menu">
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Chat on Gitter">
+            Gitter
+        </a>
+        <a class="dropdown-item" href="https://biostar.usegalaxy.org/" title="Ask on Biostars">
+            Biostars
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/galaxyproject/training-material/edit/master/topics/introduction/tutorials/galaxy-intro-rules/tutorial.md">
+                            <i class="fa fa-github" aria-hidden="true"></i> Edit
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<div class="container main-content">
+    <section class="tutorial">
+        <h1>Rule Based Uploader</h1>
+
+        <blockquote class="overview">
+            <h3>Overview</h3>
+
+            <strong><i class="fa fa-question-circle" aria-hidden="true"></i> Questions</strong>
+            <ul>
+            
+            <li>How to use the rule based uploader to create complex collections</li>
+            
+            </ul>
+
+            <strong><i class="fa fa-bullseye" aria-hidden="true"></i> Objectives</strong>
+            <ul>
+            
+            <li>Learn about the Rule Based Uploader</li>
+            
+            </ul>
+
+            
+
+            <p><strong><i class="fa fa-hourglass-end" aria-hidden="true"></i> Time estimation:</strong> 30 min</p>
+        </blockquote>
+
+        <h1 class="no_toc" id="introduction">Introduction</h1>
+
+<p>Through a series of examples, this tutorial aims to familiarize the reader with building Galaxy collections from tabular data containing URLs, sample sheets, list of accessions or identifiers, etc..</p>
+
+<blockquote>
+  <h3 id="-audience"><i class="fa fa-commenting-o" aria-hidden="true"></i> Audience</h3>
+  <p>This tutorial assumes a basic knowledge of using dataset collections in Galaxy but doesn’t assume any particular knowledge of biology or bioinformatics. If you have not used collections with Galaxy previously, please check out the <a href="/training-material/topics/introduction/galaxy-intro-collections/tutorial.html">using dataset collections</a> tutorial.</p>
+</blockquote>
+
+<blockquote class="agenda">
+  <h3 id="agenda">Agenda</h3>
+
+  <p>In this tutorial, we will:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#uploading-datasets-with-rules" id="markdown-toc-uploading-datasets-with-rules">Uploading Datasets with Rules</a></li>
+  <li><a href="#creating-a-simple-dataset-list" id="markdown-toc-creating-a-simple-dataset-list">Creating a Simple Dataset List</a></li>
+  <li><a href="#creating-a-list-of-dataset-pairs" id="markdown-toc-creating-a-list-of-dataset-pairs">Creating a List of Dataset Pairs</a></li>
+  <li><a href="#building-urls-from-accession-information" id="markdown-toc-building-urls-from-accession-information">Building URLs from Accession Information</a></li>
+  <li><a href="#building-matched-collections" id="markdown-toc-building-matched-collections">Building Matched Collections</a></li>
+  <li><a href="#building-nested-lists" id="markdown-toc-building-nested-lists">Building Nested Lists</a></li>
+  <li><a href="#apply-rules-to-existing-collections" id="markdown-toc-apply-rules-to-existing-collections">Apply Rules to Existing Collections</a></li>
+</ol>
+
+</blockquote>
+
+<h1 id="uploading-datasets-with-rules">Uploading Datasets with Rules</h1>
+
+<p>This approach could be used to manipulate lists of uploads coming from many different formats, but we will start with a tabular description of files for a study from the <a href="https://www.ebi.ac.uk/ena">European Nucleotide Archive</a>. We wlil be using the data from a study of <a href="https://www.ebi.ac.uk/ena/data/view/PRJDA60709">16s ribosomal RNA</a>.</p>
+
+<blockquote class="hands_on">
+  <h3 id="-hands-on-downloading-data-from-ena"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Downloading Data from ENA</h3>
+  <p>To start, navigate to the above study and click the option to “Select columns”. Here we will narrow the set of columns we consider to just a few relevant to uploading these files to Galaxy.</p>
+
+  <p>Select only:</p>
+
+  <ul>
+    <li>Study accession</li>
+    <li>Experiment accession</li>
+    <li>FASTQ files (FTP)</li>
+    <li>Sample accession</li>
+  </ul>
+
+  <p>The table should look like:</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Study accession</th>
+        <th>Sample accession</th>
+        <th>Experiment accession</th>
+        <th>FASTQ files (FTP)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>PRJDA60709</td>
+        <td>SAMD00016379</td>
+        <td>DRX000475</td>
+        <td>File 1</td>
+      </tr>
+      <tr>
+        <td>PRJDA60709</td>
+        <td>SAMD00016383</td>
+        <td>DRX000476</td>
+        <td>File 1</td>
+      </tr>
+      <tr>
+        <td>PRJDA60709</td>
+        <td>SAMD00016380</td>
+        <td>DRX000477</td>
+        <td>File 1</td>
+      </tr>
+      <tr>
+        <td>PRJDA60709</td>
+        <td>SAMD00016378</td>
+        <td>DRX000478</td>
+        <td>File 1</td>
+      </tr>
+      <tr>
+        <td>PRJDA60709</td>
+        <td>SAMD00016381</td>
+        <td>DRX000479</td>
+        <td>File 1</td>
+      </tr>
+      <tr>
+        <td>PRJDA60709</td>
+        <td>SAMD00016382</td>
+        <td>DRX000480</td>
+        <td>File 1</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>Download the resulting tabular data describing the files by clicking the “TEXT” link at the top of the page. Alternatively, the resulting sample sheet can be downloaded directly <a href="https://www.ebi.ac.uk/ena/data/warehouse/filereport?accession=PRJDA60709&amp;result=read_run&amp;fields=study_accession,sample_accession,experiment_accession,fastq_ftp&amp;download=txt">here</a>. The number and size of the files for this example are relatively small for sequencing data but larger files and larger numbers of files should work as well - Galaxy will just need more time to download and process the files.</p>
+</blockquote>
+
+<p>You can now open the resulting spreadsheet in your local spreadsheet program, a text editor, or in your web browser and select all the data and copy to your clipboard.</p>
+
+<div id="example-1-metadata" class="highlighter-rouge"><pre class="highlight"><code>study_accession	sample_accession	experiment_accession	fastq_ftp
+PRJDA60709	SAMD00016379	DRX000475	ftp.sra.ebi.ac.uk/vol1/fastq/DRR000/DRR000770/DRR000770.fastq.gz
+PRJDA60709	SAMD00016383	DRX000476	ftp.sra.ebi.ac.uk/vol1/fastq/DRR000/DRR000771/DRR000771.fastq.gz
+PRJDA60709	SAMD00016380	DRX000477	ftp.sra.ebi.ac.uk/vol1/fastq/DRR000/DRR000772/DRR000772.fastq.gz
+PRJDA60709	SAMD00016378	DRX000478	ftp.sra.ebi.ac.uk/vol1/fastq/DRR000/DRR000773/DRR000773.fastq.gz
+PRJDA60709	SAMD00016381	DRX000479	ftp.sra.ebi.ac.uk/vol1/fastq/DRR000/DRR000774/DRR000774.fastq.gz
+PRJDA60709	SAMD00016382	DRX000480	ftp.sra.ebi.ac.uk/vol1/fastq/DRR000/DRR000775/DRR000775.fastq.gz
+</code></pre>
+</div>
+
+<blockquote class="hands_on">
+  <h3 id="-hands-on-accessing-the-rule-based-uploader"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Accessing the Rule Based Uploader</h3>
+  <p>Next navigate to Galaxy, and click the upload icon toward the top left corner. By default the familiar simple upload dialog should appear. This dialog has more advanced options as different tabs across the top of this dialog though. Click “Rule-based” as shown below.</p>
+
+  <p><img src="../../images/rules/rules_example_1_1_rules_landing.png" alt="screenshot" /></p>
+
+  <p>As you can see in this dialog, data can be selected from a history dataset or pasted in directly. If Galaxy is configured to allow FTP uploads, the contents of your FTP directory may be loaded directly as well. For this example, simply paste your tabular data right into the textbox on this page as shown below and then click the “Build” button.</p>
+
+  <p><img src="../../images/rules/rules_example_1_2_paste.png" alt="screenshot" /></p>
+
+  <p>This should bring you to the “rules” editor.</p>
+
+  <p><img src="../../images/rules/rules_example_1_3_initial_rules.png" alt="screenshot" /></p>
+</blockquote>
+
+<p>At first glance, this may be feel like Excel or another spreadsheet program and you may feel the urge to start editing cells but we strongly encourage defining rules for manipulating the data instead. There are a few reasons for this:</p>
+
+<ul>
+  <li>Manually modifying this metadata is not reproducible - we will not belabor the point here but check out <a href="/training-material/topics/introduction/tutorials/galaxy-intro-strands/tutorial.html#why-not-use-excel-for-this">Why not use excel for this?</a> for more context. Building up rules for modifying this metadata will allow Galaxy to track and report your manipulations (providing tracibility) and apply them to new sets of files (providing reproducibility).</li>
+  <li>Manually modifying this metadata is error prone - we believe defining rules and treating the metadata in a systematic way minimizes the possibility to manual errors. These errors can be very hard to detect for large sets of data.</li>
+  <li>Manually modifying data is not scalable - this rule-based technique potentailly scales to importing tens of thousands of datasets.</li>
+</ul>
+
+<p>So rather than modifying the data, we will define rules for manipulating it and setting up “column definitions” that tell Galaxy how to use the metadata during upload or collection creation.</p>
+
+<p>In order to get these files into Galaxy, we will want to do a few things.</p>
+
+<ul>
+  <li>Strip that header out of the data (it doesn’t contain a URL Galaxy can download).</li>
+  <li>Define column “C” as the dataset name.</li>
+  <li>Define column “D” as the dataset URL (this is the location Galaxy can download the data from).</li>
+  <li>Tell Galaxy to treat these files as “fastqsanger.gz” files.</li>
+</ul>
+
+<blockquote class="hands_on">
+  <h3 id="-hands-on-using-tabular-inputs-to-the-rule-builder"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Using Tabular Inputs to the Rule Builder</h3>
+
+  <ol>
+    <li>
+      <p>We will start by stripping that header out of the table. We call rules that strip rows out the table “Filter” rules in this dialog. Click on the <strong>Filter</strong> popup menu button to bring up a list of filters to apply and select <strong>First or Last N Rows</strong>.
+  <img src="../../images/rules/rules_example_1_4_filter_header.png" alt="screenshot" /></p>
+    </li>
+    <li>
+      <p>Fill in <strong>1</strong> as the number of rows to filter out as shown above and click “Apply”.</p>
+    </li>
+    <li>
+      <p>Next we will define these columns for Galaxy. Click on the <strong>Rules</strong> popup menu button and select <strong>Add / Modify Column Definitions</strong>.</p>
+    </li>
+    <li>
+      <p>Here we will add two column definitions. Click on the <strong>Add Definition</strong> button and select <strong>Name</strong>. Repeat this again and select <strong>URL</strong> instead. Then use the resulting dropdown selection box to define column “C” as “Name” and column “D” as “URL”.
+  <img src="../../images/rules/rules_example_1_5_mapping_edit.png" alt="screenshot" /></p>
+    </li>
+    <li>
+      <p>Now click <strong>Apply</strong>, and you should see your new column definitions listed as in the following screenshot.
+  <img src="../../images/rules/rules_example_1_6_mapping_set.png" alt="screenshot" /></p>
+    </li>
+    <li>
+      <p>Click the <strong>Type</strong> selection box at the bottom left of the upload dialog, and change the datatype from “Auto-detect” to <strong>fastqsanger</strong>.
+  <img src="../../images/rules/rules_example_1_7_extension_set.png" alt="screenshot" /></p>
+    </li>
+    <li>
+      <p>You are now ready to start the upload, click the <strong>Upload</strong> button and wait for the upload job to complete.
+After some time, the result in this case will be six datasets in your history. The next example will show to use the rule builder to create a collection.</p>
+    </li>
+  </ol>
+</blockquote>
+
+<h1 id="creating-a-simple-dataset-list">Creating a Simple Dataset List</h1>
+
+<p>This example will demonstrate using such history datasets as the source for collection uploads - this can be handy when you’d like to apply existing Galaxy tabular manipulation tools to the metadata before processing for instance.</p>
+
+<blockquote class="hands_on">
+  <h3 id="-hands-on-creating-a-simple-dataset-list"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Creating a Simple Dataset List</h3>
+
+  <blockquote class="tip">
+    <h3 id="-tip-create-a-new-history"><i class="fa fa-lightbulb-o" aria-hidden="true"></i> Tip: Create a new history</h3>
+    <p>Before we start uploading, it may be a good idea to create a new history for this example to keep things simple and match the following screenshots.</p>
+  </blockquote>
+
+  <p>For our second example, we will use the same initial metadata.</p>
+
+  <blockquote class="tip">
+    <h3 id="-tip-loading-metadata-from-a-history-element"><i class="fa fa-lightbulb-o" aria-hidden="true"></i> Tip: Loading Metadata from a History Element</h3>
+    <p>In addition to directly pasting data into the Rule Based Uploader, you can also load the metadata from a dataset in your Galaxy History, or from a file in your FTP directory if the admin has enabled FTP upload</p>
+  </blockquote>
+
+  <ol>
+    <li>Upload the metadata from the <a href="#example-1-metadata">first example</a> to your Galaxy</li>
+    <li>
+      <p>Next open the “Rule-based” upload tab again, but this time:</p>
+
+      <ul>
+        <li><strong>Upload data as</strong> Collection(s)</li>
+        <li><strong>Load tabular data from</strong> a History Dataset</li>
+        <li><strong>Select dataset to load</strong> selecting the dataset you have just uploaded
+<img src="../../images/rules/rules_example_2_1_inputs.png" alt="screenshot" /></li>
+      </ul>
+    </li>
+    <li>Now click <strong>Build</strong> to bring up the rule builder.
+<img src="../../images/rules/rules_example_2_2_initial_rules.png" alt="screenshot" /></li>
+    <li>
+      <p>Repeat the steps from last time, except define column C as a “List Identifier” instead of Name.</p>
+
+      <ul>
+        <li><strong>Filter</strong> menu, select First or Last N Rows
+          <ul>
+            <li>Filter 1 Row</li>
+          </ul>
+        </li>
+        <li><strong>Rules</strong> menu, select Add / Modify Column Definitions
+          <ul>
+            <li>Add Definition, URL, Select Column D</li>
+            <li>Add Definition, List Identifier(s), Column C</li>
+          </ul>
+        </li>
+        <li><strong>Type</strong>, change “Auto-detect” to “fastqsanger”</li>
+      </ul>
+
+      <p>Rather than assiging column “C” as “Name” in this example we will assign it as a “List Identifier”. This is the description of the element in the resulting dataset collection. This identifier is preserved in mapped outputs as you map tools over collections and is useful for tracking sample names, replicate numbers, conditions, etc..
+<img src="../../images/rules/rules_example_2_3_rules.png" alt="screenshot" /></p>
+    </li>
+    <li>Unlike the last example, this time we need to give the resulting collection a name before the “Upload” button becomes clickable. Enter the ENA study identifier as shown below, PRJDA60709.
+<img src="../../images/rules/rules_example_2_4_name.png" alt="screenshot" /></li>
+    <li>Finally, click “Upload” and wait for the collection to be created. This time a single new entry will appear in your history panel corresponding to all the files gathered together in a simple list named <strong>PRJDA60709</strong>.</li>
+  </ol>
+</blockquote>
+
+<h1 id="creating-a-list-of-dataset-pairs">Creating a List of Dataset Pairs</h1>
+
+<p>For this next example we will again use ENA data, this time corresponding to the study <a href="https://www.ebi.ac.uk/ena/data/view/PRJDB3920">PRJDB3920</a> instead. Again you can build the spreadsheet from the ENA website link or copy it from below:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>study_accession	sample_accession	experiment_accession	fastq_ftp
+PRJDB3920	SAMD00034150	DRX036147	ftp.sra.ebi.ac.uk/vol1/fastq/DRR039/DRR039919/DRR039919_1.fastq.gz;ftp.sra.ebi.ac.uk/vol1/fastq/DRR039/DRR039919/DRR039919_2.fastq.gz
+PRJDB3920	SAMD00034150	DRX036148	ftp.sra.ebi.ac.uk/vol1/fastq/DRR039/DRR039920/DRR039920_1.fastq.gz;ftp.sra.ebi.ac.uk/vol1/fastq/DRR039/DRR039920/DRR039920_2.fastq.gz
+PRJDB3920	SAMD00034150	DRX036149	ftp.sra.ebi.ac.uk/vol1/fastq/DRR039/DRR039921/DRR039921_1.fastq.gz;ftp.sra.ebi.ac.uk/vol1/fastq/DRR039/DRR039921/DRR039921_2.fastq.gz
+PRJDB3920	SAMD00034150	DRX036150	ftp.sra.ebi.ac.uk/vol1/fastq/DRR039/DRR039922/DRR039922_1.fastq.gz;ftp.sra.ebi.ac.uk/vol1/fastq/DRR039/DRR039922/DRR039922_2.fastq.gz
+PRJDB3920	SAMD00034150	DRX036151	ftp.sra.ebi.ac.uk/vol1/fastq/DRR039/DRR039923/DRR039923_1.fastq.gz;ftp.sra.ebi.ac.uk/vol1/fastq/DRR039/DRR039923/DRR039923_2.fastq.gz
+PRJDB3920	SAMD00034153	DRX036152	ftp.sra.ebi.ac.uk/vol1/fastq/DRR039/DRR039924/DRR039924_1.fastq.gz;ftp.sra.ebi.ac.uk/vol1/fastq/DRR039/DRR039924/DRR039924_2.fastq.gz
+PRJDB3920	SAMD00034152	DRX036164	ftp.sra.ebi.ac.uk/vol1/fastq/DRR039/DRR039936/DRR039936_1.fastq.gz;ftp.sra.ebi.ac.uk/vol1/fastq/DRR039/DRR039936/DRR039936_2.fastq.gz
+</code></pre>
+</div>
+
+<blockquote class="hands_on">
+  <h3 id="-hands-on-creating-a-list-of-dataset-pair"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Creating a List of Dataset Pair</h3>
+
+  <ol>
+    <li>
+      <p>Open the Rule Builder</p>
+    </li>
+    <li>
+      <p>Next open the “Rule-based” upload tab again, but this time:</p>
+
+      <ul>
+        <li><strong>Upload data as</strong> Collection(s)</li>
+        <li><strong>Load tabular data from</strong> a “Pasted Table”</li>
+        <li>Paste the table from above</li>
+      </ul>
+    </li>
+    <li>
+      <p>Click <strong>Build</strong> and proceed to the rule builder.
+<img src="../../images/rules/rules_example_3_2_initial_rules.png" alt="screenshot" /></p>
+    </li>
+    <li>Like in the last example:
+      <ul>
+        <li><strong>Filter</strong>, select First or Last N Rows
+          <ul>
+            <li>Filter 1 Row</li>
+          </ul>
+        </li>
+        <li><strong>Rules</strong>, select Add / Modify Column Definitions
+          <ul>
+            <li>Add Definition, List Identifier(s), Column C</li>
+          </ul>
+        </li>
+        <li><strong>Type</strong>, change “Auto-detect” to “fastqsanger”</li>
+      </ul>
+    </li>
+    <li>In this dataset, column D contains two URLs, separated by a semicolon <code class="highlighter-rouge">;</code>. So we cannot define that column as the URL directly, we will need to split it into two columns first.
+We will build a regular expression that captures two “groups” from this column with two URLs - one group for everything before the <code class="highlighter-rouge">;</code> and one group for everything after.
+      <ul>
+        <li><strong>Column</strong>, select <strong>Using a Regular Expression</strong>
+          <ul>
+            <li><strong>Column</strong> <code class="highlighter-rouge">D</code></li>
+            <li>Select the option for <strong>Create columns matching expression groups</strong></li>
+            <li>Provide the <strong>Regular Expression</strong> <code class="highlighter-rouge">(.*);(.*)</code>. Here <code class="highlighter-rouge">.*</code> means match any number of any character - so basically match anything. The parentheses around <code class="highlighter-rouge">.*</code> means form a “group” from whatever is matched. The <code class="highlighter-rouge">;</code> will match with the actual <code class="highlighter-rouge">;</code> in the target cells.</li>
+            <li>We have defined two matching groups (the <code class="highlighter-rouge">(.*)</code> in the regex), so set <strong>Number of Groups</strong> to 2</li>
+          </ul>
+        </li>
+        <li>The completed form should look like:
+<img src="../../images/rules/rules_example_3_4_regex.png" alt="screenshot" /></li>
+      </ul>
+    </li>
+    <li>
+      <p>Click <strong>Apply</strong> to apply the regular expression to the metadata table</p>
+    </li>
+    <li>
+      <p>Column <code class="highlighter-rouge">D</code> is no longer needed, so we can remove it. Select <strong>Rules</strong> and <strong>Remove Column(s)</strong>, and then select column <strong>D</strong> to remove.
+<img src="../../images/rules/rules_example_3_7_removed_column.png" alt="screenshot" /></p>
+    </li>
+    <li>We now have two columns containing URLs - but we can only have one URL per row. So we will split each row into two (one for the forward reads and one for the reverse). Do this by opening the <strong>Rules</strong> menu and selecting <strong>Split Column(s)</strong>.
+      <ul>
+        <li><strong>Odd Row Column(s)</strong> select <code class="highlighter-rouge">D</code></li>
+        <li><strong>Even Row Column(s)</strong> selecte <code class="highlighter-rouge">E</code></li>
+        <li>Click <strong>Apply</strong>
+For every row before the transformation with columns <code class="highlighter-rouge">ABCDE</code>, this will produce two rows, <code class="highlighter-rouge">ABCD</code> and <code class="highlighter-rouge">ABCE</code>. Thus you will have twice as many rows as before.
+<img src="../../images/rules/rules_example_3_9_columns_are_split.png" alt="screenshot" /></li>
+      </ul>
+    </li>
+    <li>Now we need to inform Galaxy which of these rows are “forward” reads and which are “reverse” reads. We will do this by adding a new column again using a regular expression. Here we will match on the _1 or _2 in the filename at the end of the URLs. We can use the regular expression wildcard <code class="highlighter-rouge">\d</code> that matches any digit to do this.
+      <ul>
+        <li>Click <strong>Column</strong>, select <strong>Using a Regular Expression</strong>
+          <ul>
+            <li><strong>Column</strong> <code class="highlighter-rouge">D</code></li>
+            <li>Select the option for <strong>Create columns matching expression groups</strong></li>
+            <li>Provide the <strong>Regular Expression</strong> <code class="highlighter-rouge">.*_(\d).fastq.gz</code>. This will use a capturing group to select only the <code class="highlighter-rouge">1</code> or <code class="highlighter-rouge">2</code> part of the URL that appears before the extension.</li>
+            <li>We have defined one matching group (the <code class="highlighter-rouge">(\d)</code> in the regex), so set <strong>Number of Groups</strong> to 1</li>
+          </ul>
+        </li>
+        <li>The completed form should look like:
+<img src="../../images/rules/rules_example_3_10_regex_paired.png" alt="screenshot" /></li>
+      </ul>
+    </li>
+    <li>
+      <p>At this point, you can swap the last two columns to bring this new paired indicator column toward the beginning of the table. This is not nessecary but it makes the screenshots more informative. To do this, use the <strong>Rule</strong> menu to select <strong>Swap Columns</strong>, and swap columns <strong>D</strong> and <strong>E</strong>.
+   <img src="../../images/rules/rules_example_3_12_swap_columns.png" alt="screenshot" /></p>
+    </li>
+    <li>
+      <p>Finally open the column definitions back up (<strong>Rules</strong> Menu, <strong>Add / Modify Column Definitions</strong>) and set the <strong>paired indicator</strong> to column <strong>D</strong> and the <strong>URL</strong> to column <strong>E</strong>.</p>
+
+      <blockquote class="tip">
+        <h3 id="-tip-paired-indicator-column-definition"><i class="fa fa-lightbulb-o" aria-hidden="true"></i> Tip: Paired Indicator Column Definition</h3>
+        <p>The column selector for paired indicator is a bit less obvious and a bit more picky than the other ones we have used. The row value of the paired indicator column must be one of the following to indicate “forward” or “reverse” reads.</p>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Column</th>
+              <th>Acceptable Indicators</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Forward</td>
+              <td><code class="highlighter-rouge">1</code>, <code class="highlighter-rouge">R1</code>, <code class="highlighter-rouge">forward</code>, <code class="highlighter-rouge">f</code>, or <code class="highlighter-rouge">F</code></td>
+            </tr>
+            <tr>
+              <td>Reverse</td>
+              <td><code class="highlighter-rouge">2</code>, <code class="highlighter-rouge">R2</code>, <code class="highlighter-rouge">reverse</code>, <code class="highlighter-rouge">r</code>, or <code class="highlighter-rouge">R</code></td>
+            </tr>
+          </tbody>
+        </table>
+      </blockquote>
+    </li>
+    <li>Finally, supply a Name to your collection and click <strong>Upload</strong>
+<img src="../../images/rules/rules_example_3_14_paired_identifier_set.png" alt="screenshot" /></li>
+  </ol>
+
+</blockquote>
+
+<h1 id="building-urls-from-accession-information">Building URLs from Accession Information</h1>
+
+<p>In the previous examples the metadata we started with already contained URLs. In some cases such URLs will not be present in the available metadata and may need to be constructed dynamically from identifiers.</p>
+
+<p>For this multiomics example, we will start with a uniprot query and build URLs from accession numbers contained within the supplied tabular data. Consider the uniprot query <a href="https://uniprot.org/uniprot/?query=proteome:UP000052092+AND+proteomecomponent:&quot;Genome&quot;">https://uniprot.org/uniprot/?query=proteome:UP000052092+AND+proteomecomponent:”Genome”</a>, pictured below.</p>
+
+<p><img src="../../images/rules/uniprot_url.png" alt="UniProt table screenshot" /></p>
+
+<p>Lets describe how to turn these accession IDs into URLs. If you:</p>
+
+<ol>
+  <li>Click on one of the entries in the table (e.g. <code class="highlighter-rouge">E7C0H6</code>) in your <a href="https://www.uniprot.org/uniprot/E7C0H6">web browser</a></li>
+  <li>Select “Format” from the top menu</li>
+  <li>
+    <p>Click “FASTA (canonical)”</p>
+
+    <p><img src="../../images/rules/uniprot_fasta.png" alt="Link to access FASTA file" /></p>
+  </li>
+  <li>
+    <p>Your browser will redirect to the fasta file</p>
+
+    <p><img src="../../images/rules/uniprot_fasta_url.png" alt="Viewing the FASTA file" /></p>
+  </li>
+  <li>We can deduce that the FASTA files for the other entires in our table will be available from URLs of the form <code class="highlighter-rouge">https://www.uniprot.org/uniprot/{identifier}.fasta</code></li>
+</ol>
+
+<p>We can use that to build a collection of FASTA files for this query. The following metadata will be used for this example</p>
+
+<div id="example-3-metadata" class="highlighter-rouge"><pre class="highlight"><code>Entry	Entry name	Status	Protein names	Gene names	Organism	Length
+E7C0H6	E7C0H6_9PAPI	unreviewed	Major capsid protein L1	L1	Equus caballus papillomavirus 3	498
+E7C0H0	E7C0H0_9PAPI	unreviewed	Protein E6	E6	Equus caballus papillomavirus 3	150
+E7C0H5	E7C0H5_9PAPI	unreviewed	Minor capsid protein L2	L2	Equus caballus papillomavirus 3	498
+E7C0H1	E7C0H1_9PAPI	unreviewed	Protein E7		Equus caballus papillomavirus 3	93
+E7C0H3	E7C0H3_9PAPI	unreviewed	Regulatory protein E2	E2	Equus caballus papillomavirus 3	421
+E7C0H4	E7C0H4_9PAPI	unreviewed	Putative E4 early protein (Fragment)		Equus caballus papillomavirus 3	175
+E7C0H2	E7C0H2_9PAPI	unreviewed	Replication protein E1 (EC 3.6.4.12) (ATP-dependent helicase E1)	E1	Equus caballus papillomavirus 3	621
+</code></pre>
+</div>
+
+<blockquote class="hands_on">
+  <h3 id="-hands-on-create-history"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Create history</h3>
+
+  <ol>
+    <li>
+      <p>Open the Rule Builder</p>
+    </li>
+    <li>
+      <p>Next open the “Rule-based” upload tab again, but this time:</p>
+
+      <ul>
+        <li><strong>Upload data as</strong> Collection(s)</li>
+        <li><strong>Load tabular data from</strong> a “Pasted Table”</li>
+        <li>Paste the table from above</li>
+      </ul>
+    </li>
+    <li>
+      <p>Click <strong>Build</strong> and proceed to the rule builder.
+  <img src="../../images/rules/rules_example_4_2_initial_rules.png" alt="screenshot" /></p>
+    </li>
+    <li>Let’s apply some initial filtering to our data:
+      <ul>
+        <li><strong>Filter</strong> menu, select  <strong>First or Last N Rows</strong>
+          <ul>
+            <li>Filter 1 Row</li>
+          </ul>
+        </li>
+        <li><strong>Rules</strong> menu, select  <strong>Remove Columns</strong>
+          <ul>
+            <li>Remove columns B, C, E, F, and G.</li>
+          </ul>
+        </li>
+        <li><strong>Rules</strong> menu, select  <strong>Add / Modify Column Definitions</strong>
+          <ul>
+            <li>Add Definition, “Info”, Column B. This is a block of text that appears in the history panel when the dataset is expanded.
+<img src="../../images/rules/rules_example_4_3_basic_rules.png" alt="screenshot" /></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>These datasets appear in a seemingly random order, it will be easier to manage things in the history panel if we sort this data first.
+  <img src="../../images/rules/rules_example_4_4_sort.png" alt="screenshot" />
+      <ul>
+        <li><strong>Rules</strong> menu, select <strong>Sort</strong>
+          <ul>
+            <li><strong>From Column</strong>: A</li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>Next is the key step, we will build a URL from the pattern we described above using the accession ID in column A. Click to add a new column “Using a Regular Expression” from the “Column” popup menu.
+      <ul>
+        <li><strong>Column</strong> menu, select <strong>Using a Regular Expression</strong>
+          <ul>
+            <li><strong>From Column</strong> select A</li>
+            <li><strong>Create column from expression replacement</strong></li>
+            <li><strong>Regular Expression</strong> set to a value of <code class="highlighter-rouge">.*</code>. This will capture the entire accession ID.</li>
+            <li><strong>Replacement Expression</strong> set to <code class="highlighter-rouge">https://www.uniprot.org/uniprot/\0.fasta</code>. The <code class="highlighter-rouge">\0</code> will be replaced by the captured regular expression in the resulting column values.</li>
+          </ul>
+        </li>
+        <li>
+          <p>The final screen should look like:</p>
+
+          <p><img src="../../images/rules/rules_example_4_5_url.png" alt="screenshot" /></p>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <p>After clicking “Okay”, the new column C with the URL we built should appear as shown below.
+  <img src="../../images/rules/rules_example_4_6_url_built.png" alt="screenshot" /></p>
+    </li>
+    <li>
+      <p>Finally let us set our column definitions</p>
+
+      <ul>
+        <li><strong>Rules</strong> menu, select Add / Modify Column Definitions
+          <ul>
+            <li>Add Definition, List Identifier(s), Select Column A</li>
+            <li>Add Definition, URL, Column C</li>
+          </ul>
+        </li>
+        <li><strong>Type</strong>, change “Auto-detect” to “fasta”</li>
+      </ul>
+    </li>
+    <li>
+      <p>Give the collection a name, such as “UP000052092” and finally “Upload”
+  <img src="../../images/rules/rules_example_4_7_mapping_extension_and_name.png" alt="screenshot" /></p>
+
+      <blockquote class="tip">
+        <h3 id="-tip-json-rule-definitions"><i class="fa fa-lightbulb-o" aria-hidden="true"></i> Tip: JSON Rule Definitions</h3>
+        <p>This example is ready to go, but before clicking “Build” it may be interesting to check out the rules Galaxy is following to clean and import your data. Click the little Wrench icon at the top of the list of rules. The result is a bunch of JavaScript object notation (JSON) text that you should never need to worry about but that you can build or modify by hand if you find it useful. We will use it the next example to quickly restore the list builder back to this state.</p>
+
+        <p><img src="../../images/rules/rules_example_4_8_source.png" alt="screenshot" /></p>
+
+        <p>This could additionally be copied and pasted if you need to do the same set of operations on multiple metadata inputs that are similarly formatted.</p>
+      </blockquote>
+    </li>
+    <li>Click “Build” and wait for your list of FASTA files to appear.</li>
+  </ol>
+</blockquote>
+
+<h1 id="building-matched-collections">Building Matched Collections</h1>
+
+<p>This example will demonstrate creating multiple collections at the same time. We will use the same metadata generated from UniProt as the last example but we will build two collections with matching list identifiers - one collection of FASTA files and one collection of GFF files. This will also demonstrate reading the collection name and the target datatype from the metadata itself - important techniques if generating multiple collections with different names and datatypes.</p>
+
+<p>For this example we will re-use the metadata from the <a href="#example-3-metadata">previous example</a>.</p>
+
+<blockquote class="hands_on">
+  <h3 id="-hands-on-create-history-1"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Create history</h3>
+
+  <ol>
+    <li>
+      <p>Open the Rule Builder</p>
+    </li>
+    <li>
+      <p>Next open the “Rule-based” upload tab again, but this time:</p>
+
+      <ul>
+        <li><strong>Upload data as</strong> Collection(s)</li>
+        <li><strong>Load tabular data from</strong> a “Pasted Table”</li>
+        <li>Paste the table from above</li>
+      </ul>
+    </li>
+    <li>
+      <p>Click <strong>Build</strong> and proceed to the rule builder.
+  <img src="../../images/rules/rules_example_5_1_inputs.png" alt="screenshot" /></p>
+    </li>
+    <li>
+      <p>Instead of manually creating the rules this time, we will import an existing set of rules from some JSON. Copy the following text into your clipboard. These are the same rules as used in the <a href="#building-urls-from-accession-information">“Building URLs from Accession Information”</a> tutorial.</p>
+
+      <div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="nt">"rules"</span><span class="p">:[{</span><span class="nt">"type"</span><span class="p">:</span><span class="s2">"add_filter_count"</span><span class="p">,</span><span class="nt">"count"</span><span class="p">:</span><span class="s2">"1"</span><span class="p">,</span><span class="nt">"which"</span><span class="p">:</span><span class="s2">"first"</span><span class="p">,</span><span class="nt">"invert"</span><span class="p">:</span><span class="kc">false</span><span class="p">},{</span><span class="nt">"type"</span><span class="p">:</span><span class="s2">"remove_columns"</span><span class="p">,</span><span class="nt">"target_columns"</span><span class="p">:[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">]},{</span><span class="nt">"type"</span><span class="p">:</span><span class="s2">"sort"</span><span class="p">,</span><span class="nt">"target_column"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="nt">"numeric"</span><span class="p">:</span><span class="kc">false</span><span class="p">},{</span><span class="nt">"type"</span><span class="p">:</span><span class="s2">"add_column_regex"</span><span class="p">,</span><span class="nt">"target_column"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="nt">"expression"</span><span class="p">:</span><span class="s2">".*"</span><span class="p">,</span><span class="nt">"replacement"</span><span class="p">:</span><span class="s2">"http://www.uniprot.org/uniprot/\\0.fasta"</span><span class="p">}],</span><span class="nt">"mapping"</span><span class="p">:[{</span><span class="nt">"type"</span><span class="p">:</span><span class="s2">"info"</span><span class="p">,</span><span class="nt">"columns"</span><span class="p">:[</span><span class="mi">1</span><span class="p">]},{</span><span class="nt">"type"</span><span class="p">:</span><span class="s2">"list_identifiers"</span><span class="p">,</span><span class="nt">"columns"</span><span class="p">:[</span><span class="mi">0</span><span class="p">],</span><span class="nt">"editing"</span><span class="p">:</span><span class="kc">false</span><span class="p">},{</span><span class="nt">"type"</span><span class="p">:</span><span class="s2">"url"</span><span class="p">,</span><span class="nt">"columns"</span><span class="p">:[</span><span class="mi">2</span><span class="p">]}],</span><span class="nt">"extension"</span><span class="p">:</span><span class="s2">"csfasta"</span><span class="p">}</span><span class="w">
+</span></code></pre>
+      </div>
+    </li>
+    <li>
+      <p>In the ruler builder interface, select the wrench icon next to the world “Rules” and paste the rules into the textbox. Click <strong>Apply</strong>
+  <img src="../../images/rules/rules_example_5_2_source.png" alt="screenshot" /></p>
+    </li>
+    <li>
+      <p>You should now see the rules you created in the last example.
+  <img src="../../images/rules/rules_example_5_3_initial_rules.png" alt="screenshot" /></p>
+    </li>
+    <li>This part may seem a bit silly at first but we are going to add some columns with fixed values into the builder. When we split up the columns at a later step this will make sense. So click “Fixed Value” under the “Column” value. Enter “fasta” for the column type.
+      <ul>
+        <li><strong>Column</strong> menu, select  <strong>Fixed Value</strong>
+          <ul>
+            <li>Enter <strong>fasta</strong> and click Apply. This value will eventually be used for the datatype of the file.</li>
+          </ul>
+        </li>
+        <li>Repeat this process with the value:
+          <ul>
+            <li><strong>UP000052092 FASTA</strong></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <p>Next we will repeat the process of adding URL, name, and datatype columns but for GFF files.</p>
+
+      <ul>
+        <li><strong>Column</strong>, select <strong>Using a Regular Expression</strong>
+          <ul>
+            <li><strong>From Column</strong> select A</li>
+            <li><strong>Create column from expression replacement</strong></li>
+            <li><strong>Regular Expression</strong> set to a value of <code class="highlighter-rouge">.*</code></li>
+            <li><strong>Replacement Expression</strong> set to <code class="highlighter-rouge">https://www.uniprot.org/uniprot/\0.gff</code>. The <code class="highlighter-rouge">\0</code> will be replaced by the captured regular expression in the resulting column values.</li>
+          </ul>
+        </li>
+        <li>This mirrors exactly what we did for FASTA files earlier on.
+<img src="../../images/rules/rules_example_5_5_url.png" alt="screenshot" /></li>
+      </ul>
+    </li>
+    <li>Next add two more columns
+      <ul>
+        <li><strong>Column</strong> menu, select  <strong>Fixed Value</strong>
+          <ul>
+            <li>Enter <strong>gff3</strong> and click Apply. This value will eventually be used for the datatype of the file.</li>
+          </ul>
+        </li>
+        <li>Repeat this process with the value:
+          <ul>
+            <li><strong>UP000052092 GFF3</strong></li>
+          </ul>
+        </li>
+        <li>Your very large list of rules should now look like the following screenshot.
+<img src="../../images/rules/rules_example_5_6_presplit.png" alt="screenshot" /></li>
+      </ul>
+    </li>
+    <li>Notice we have two URLs, two collection names, and two datatype extensions for each accession ID we started with. Like in the example where we split the columns, here we will split these up to describe multiple collections.
+      <ul>
+        <li><strong>Rules</strong> menu, select  <strong>Split Columns</strong></li>
+      </ul>
+      <ul>
+        <li><strong>Odd Number Column(s)</strong> specify C, D, and E (the fasta columns)</li>
+        <li><strong>Even Number Column(s)</strong> specify F, G, and H (the gff3 columns)
+      - This will take the row consisting of the columns <code class="highlighter-rouge">ABCDEFGH</code> and build two rows, one with <code class="highlighter-rouge">ABCDEF</code> and the other with <code class="highlighter-rouge">ABFGH</code>
+ <img src="../../images/rules/rules_example_5_7_split_columns.png" alt="screenshot" /></li>
+      </ul>
+    </li>
+    <li>
+      <p>Click “Apply” and you should be returned the list of rules.
+   <img src="../../images/rules/rules_example_5_8_split.png" alt="screenshot" /></p>
+    </li>
+    <li>Finally, we need to add some more column definitions for these new columns we just created:
+      <ul>
+        <li><strong>Rules</strong> menu, select Add / Modify Column Definitions</li>
+      </ul>
+      <ul>
+        <li>Add Definition, List Identifier, Select Column A</li>
+        <li>Add Definition, Info, Column B</li>
+        <li>Add Definition, URL, Column C</li>
+        <li>Add Definition, Type, Column D</li>
+        <li>Add Definition, Collection Name, Column E
+      -  Notice when these values are being generated from the metadata the option to specify them manually from the <strong>type</strong> and <strong>collection name</strong> boxes from the bottom of the form disappear.
+ <img src="../../images/rules/rules_example_5_9_mapping.png" alt="screenshot" /></li>
+      </ul>
+    </li>
+    <li>Click “Upload” and Galaxy should make two collections - one containing FASTA files and one containing GFF3 files.</li>
+  </ol>
+
+</blockquote>
+
+<h1 id="building-nested-lists">Building Nested Lists</h1>
+
+<p>In this example, we will be building a nested list using data from <a href="https://www.ncbi.nlm.nih.gov/sra">SRA</a>. This is a more sophisticated structure for organizing datasets in Galaxy. In the above examples we organized datasets into simple lists with a single “list identifier” describing the files in the collection. Galaxy allows lists to be organized into nested lists - where each level of the list has an identifier.</p>
+
+<p>If two such identifiers are present, this is a list of lists (called <code class="highlighter-rouge">list:list</code> in the workflow editor). In such a structure the outer identifiers (or first level of identifiers) may describe sample names and the inner identifiers (or second level) may describe replicates. Alternative the outer identifiers may describe conditions and the inner identifiers may describe individual samples. The structure of such collections should ideally be dictated by the study design.</p>
+
+<p>If certain parts of your analysis require benefit from datasets being nested this way while other parts require feeding you data to a Galaxy tool all together without such a structure, then it is probably best to go ahead and build nested lists at the start of your analysis and then use the “Flatten Collection” tool on the resulting collection or a derivative collection to get the flat structure needed by certain tools in certain parts of your analysis.</p>
+
+<p>For this example, we will describe analyzing the metadata of the <a href="https://www.ncbi.nlm.nih.gov/sra?term=PRJNA355367&amp;cmd=DetailsSearch">SRA project PRJNA355367</a>. Unlike the other examples, these SRA files are relatively large and not ideal for training purposes. So we’ve pre-downloaded the project metadata and replaced all the links with simple text files that should download really quickly - the <a href="./PRJNA355367.tsv">result is here</a>.</p>
+
+<p>So use either the SRA exporter tool or download the CSV file with fake URLs. If you download the data from the SRA exporter tool, select only the first 12 columns from the data (up to the column labeled “Library Name”) and copy the resulting data to your clipboard.</p>
+
+<blockquote class="hands_on">
+  <h3 id="-hands-on-building-nested-lists"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Building Nested Lists</h3>
+
+  <ol>
+    <li>
+      <p>Open the Rule Builder</p>
+    </li>
+    <li>
+      <p>Next open the “Rule-based” upload tab again, but this time:</p>
+
+      <ul>
+        <li><strong>Upload data as</strong> Collection(s)</li>
+        <li><strong>Load tabular data from</strong> a “Pasted Table”</li>
+        <li>Paste the table from above
+<img src="../../images/rules/rules_example_6_1_paste.png" alt="screenshot" /></li>
+      </ul>
+    </li>
+    <li>
+      <p>The resulting table should look something like the following:
+  <img src="../../images/rules/rules_example_6_2_rules_landing.png" alt="screenshot" /></p>
+    </li>
+    <li>Like in other examples, strip the header row. Navigate to the end of the table and notice that column J is the URL target we are hoping to download for each file. Set this column definition accordingly.
+      <ul>
+        <li><strong>Filter</strong> menu, select  <strong>First or Last N Rows</strong>
+          <ul>
+            <li>Filter 1 Row</li>
+          </ul>
+        </li>
+        <li><strong>Rules</strong> menu, select  <strong>Add / Modify Column Definitions</strong>
+          <ul>
+            <li>Add Definition, “URL”, Column J.
+<img src="../../images/rules/rules_example_6_3_end_of_table.png" alt="screenshot" /></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>For the analysis we wish to do, we want to group these files based on the type indicated in column L (LibraryName) shown below. The source data though adds numbers to the library type to to generate the LibraryName, we need to strip those out to use the type as an identifier for grouping the datasets. To do this, use the regex column adder rule again.
+      <ul>
+        <li><strong>Column</strong> menu, select <strong>Using a Regular Expression</strong>
+          <ul>
+            <li><strong>From Column</strong> select L</li>
+            <li><strong>Create column from regular expression groups</strong></li>
+            <li><strong>Regular Expression</strong> set to a value of <code class="highlighter-rouge">([^\d]+)\d+</code>. Here <code class="highlighter-rouge">\d</code> means any digit, so <code class="highlighter-rouge">[^...]</code> means match anything that is not inside the brackets. So together <code class="highlighter-rouge">[^\d]+</code> means match one or more, non digits at the start of the column and the <code class="highlighter-rouge">()</code> around that means capture them into a group. We’ve add <code class="highlighter-rouge">\d+</code> at the end of the expression but it isn’t groupped so we are effectively ignoring the digits at the end as we had hoped.</li>
+            <li><strong>Number of Groups</strong>: 1</li>
+          </ul>
+        </li>
+        <li>The result looks like:
+ <img src="../../images/rules/rules_example_6_4_regex.png" alt="screenshot" /></li>
+      </ul>
+    </li>
+    <li>Now we have two columns we need to assign list identifiers for, the new column “M” for the first, outer identifier and the first column “A” for the inner, second identifier. Do this by adding a list identifier column definition as before, but after the first (“M”) is set, click “Assign Another Column” under “List Identifier(s)” to assign a second column.
+      <ul>
+        <li><strong>Rules</strong> menu, select  <strong>Add / Modify Column Definitions</strong>
+          <ul>
+            <li>Add Definition, “List Identifier(s)”. Select column “M”</li>
+            <li>Assign another column: Select column “A”</li>
+          </ul>
+
+          <blockquote class="tip">
+            <h3 id="-tip-re-ordering-columns"><i class="fa fa-lightbulb-o" aria-hidden="true"></i> Tip: Re-ordering columns</h3>
+            <p>If you make a mistake in the order you select columns in you can simple use the up and down arrows to re-arrange the list</p>
+          </blockquote>
+        </li>
+        <li>The result should look something like this:
+ <img src="../../images/rules/rules_example_6_5_multiple_identifiers_edit.png" alt="screenshot" /></li>
+      </ul>
+    </li>
+    <li>
+      <p>Click “Apply” to return to the rule preview screen and notice there are two column listed for the list identifier definition
+  <img src="../../images/rules/rules_example_6_6_multiple_identifiers.png" alt="screenshot" /></p>
+    </li>
+    <li>
+      <p>Finally, set the datatype for this collection (“txt” if you used the dummy data above or “sra” if you are really using data from the SRA). Give your collection a name.
+  <img src="../../images/rules/rules_example_6_7_named.png" alt="screenshot" /></p>
+    </li>
+    <li>Click “Upload” to tell Galaxy to proceed to building the collection.</li>
+  </ol>
+
+</blockquote>
+
+<h1 id="apply-rules-to-existing-collections">Apply Rules to Existing Collections</h1>
+
+<p>To start this example, we will first upload a simple, flat collection of data. The data files we will use
+will be the same as those used by the <a href="https://bioconductor.org/packages/devel/bioc/vignettes/DESeq2/inst/doc/DESeq2.html">DESeq2 Vignette</a>
+from the <a href="https://bioconductor.org/packages/release/data/experiment/html/pasilla.html">Pasilla Biooconductor Package</a>.</p>
+
+<p>Here is the metadata we’ll be using for this</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>https://raw.githubusercontent.com/jmchilton/galaxy/apply_rules_tutorials/test-data/rules/treated1fb.txt treated_single_1
+https://raw.githubusercontent.com/jmchilton/galaxy/apply_rules_tutorials/test-data/rules/treated2fb.txt treated_paired_2
+https://raw.githubusercontent.com/jmchilton/galaxy/apply_rules_tutorials/test-data/rules/treated3fb.txt treated_paired_3
+https://raw.githubusercontent.com/jmchilton/galaxy/apply_rules_tutorials/test-data/rules/untreated1fb.txt untreated_single_4
+https://raw.githubusercontent.com/jmchilton/galaxy/apply_rules_tutorials/test-data/rules/untreated2fb.txt untreated_single_5
+https://raw.githubusercontent.com/jmchilton/galaxy/apply_rules_tutorials/test-data/rules/untreated3fb.txt untreated_paired_6
+https://raw.githubusercontent.com/jmchilton/galaxy/apply_rules_tutorials/test-data/rules/untreated4fb.txt untreated_paired_7
+</code></pre>
+</div>
+
+<blockquote class="hands_on">
+  <h3 id="-hands-on-applying-rules-to-existing-collections"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Applying Rules to Existing Collections</h3>
+
+  <ol>
+    <li>
+      <p>Open the Rule Builder</p>
+    </li>
+    <li>
+      <p>Next open the “Rule-based” upload tab again, but this time:</p>
+
+      <ul>
+        <li><strong>Upload data as</strong> Collection(s)</li>
+        <li><strong>Load tabular data from</strong> a “Pasted Table”</li>
+        <li>Paste the table from above</li>
+      </ul>
+    </li>
+    <li>
+      <p>Setup the column types</p>
+
+      <ul>
+        <li><strong>Rules</strong> menu, select  <strong>Add / Modify Column Definitions</strong>
+          <ul>
+            <li>Add Definition, “URL”, column A</li>
+            <li>Add Definition, “List Identifier(s)”, column B
+<img src="../../images/rules/rules_apply_rules_example_4_2_input_rules.png" alt="screenshot" /></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>Select “txt” as the datatype and give the collection a name.</li>
+    <li>
+      <p>Click “Build” and Wait for your list to be created properly.
+  <img src="../../images/rules/rules_apply_rules_example_4_4_input_list.png" alt="screenshot" /></p>
+    </li>
+    <li>
+      <p>The first thing we will do to this new collection is add some levels or depth to its structure. Lets assume we want to group it into “treated” and “untreated” lists and “paired” and “single” sublists below that. We can do this with the “Apply Rules” collection operation tool, which will likely be under the “Collection Operations” tool menu in your Galaxy interface. Click the tool and the very simple interface should look something like this:
+  <img src="../../images/rules/rules_apply_rules_example_4_5_apply_rules_landing.png" alt="screenshot" /></p>
+    </li>
+    <li>
+      <p>This interface simply lets one pick a collection to operate on and then launch the rule builder window to work to describe and preview manipulating the metadata of that collection. Be sure your uploaded collection is selected and then click the “Edit” button to build rules to apply to the collection. 
+  <img src="../../images/rules/rules_apply_rules_example_4_6_apply_rules_init_flat.png" alt="screenshot" /></p>
+    </li>
+    <li>
+      <p>When a flat collection is used with this tool, the rule builder will initialize a default rule to pull the list identifier out for each item of the collection as shown above. Next we will use regular expressions to build two new columns, these columns will group the datasets into “treated” and “untreated” sublists and then “single” and “paired” sublists of that. This rule is found under the “Column” menu, in this example we chose</p>
+    </li>
+    <li>
+      <p>We’ll transform column A into some more useful columns</p>
+
+      <ul>
+        <li><strong>Column</strong>, select <strong>Using a Regular Expression</strong>
+          <ul>
+            <li><strong>Column</strong> <code class="highlighter-rouge">A</code></li>
+            <li>Select the option for <strong>Create columns matching expression groups</strong></li>
+            <li>Provide the <strong>Regular Expression</strong> <code class="highlighter-rouge">(.*)_(.*)_.*</code>. Here <code class="highlighter-rouge">.*</code> means match any number of any character - so basically match anything. The parentheses around <code class="highlighter-rouge">.*</code> means form a “group” from whatever is matched. The <code class="highlighter-rouge">_</code> describes the literal <code class="highlighter-rouge">_</code> values in the identifier we are matching. The result is that everything before the first <code class="highlighter-rouge">_</code> will be matched as the first group and everything between the <code class="highlighter-rouge">_</code> characters will be matched as the second group. Click to apply this rule and two new columns should be created.</li>
+            <li>We have defined two matching groups (the <code class="highlighter-rouge">(.*)</code> in the regex), so set <strong>Number of Groups</strong> to 2</li>
+          </ul>
+        </li>
+        <li><strong>Rules</strong>, select Add / Modify Column Definitions
+          <ul>
+            <li>Add Definition, List Identifier(s), Column B</li>
+            <li>Assign another column: Select column “C”</li>
+            <li>Assign another column: Select column “A”
+  <img src="../../images/rules/rules_apply_rules_example_4_7_apply_rules_add_depth.png" alt="screenshot" /></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <p>Click the “Save” button and run the tool. The resulting collection should have two new levels of depth for “untreated” vs “treated” and “paired” vs “single” as shown below.
+   <img src="../../images/rules/rules_apply_rules_example_4_8_nested.png" alt="screenshot" /></p>
+    </li>
+    <li>Placing the “single” and “paired” sublists inside the “treated” and “untreated” lists was a bit arbitrary and depending on the workflow these may need to be inverted at different parts of an analysis. The Apply Rules tool can be used to invert these levels if that is needed. Click to open the tool again and this time ensure the new nested list is selected before clicking “Edit”.
+   <img src="../../images/rules/rules_apply_rules_example_4_9_apply_rules_init_nested.png" alt="screenshot" />
+   Notice when loading a nested collection into the rule builder, there is a column for each layer of the list for each element.
+   One can pretty easily invert the outer two layers of the list by simply assigning the list identifiers in a new order. So select to assign “List Identifiers” and this time assign them to columns “B”, “A”, and “C” - in that order.
+      <ul>
+        <li><strong>Rules</strong>, select Add / Modify Column Definitions</li>
+      </ul>
+      <ul>
+        <li>Add Definition, List Identifier(s), Column B</li>
+        <li>Assign another column: Select column “A”</li>
+        <li>Assign another column: Select column “C”
+   <img src="../../images/rules/rules_apply_rules_example_4_10_apply_rules_inverted.png" alt="screenshot" /></li>
+      </ul>
+    </li>
+    <li>Click “Save” and then execute the tool. The resulting collection should be inverted.
+   <img src="../../images/rules/rules_apply_rules_example_4_11_inverted.png" alt="screenshot" /></li>
+    <li>In addition to structural re-organizations of a collection, the Apply Rules tool can be used to filter elements out of the collection. To demonstrate this, reopen the original flat list created for this example in the rule builder of the Apply Rules tool. This time use a regular expression to just keep the single end data as show below.
+   <img src="../../images/rules/rules_apply_rules_example_4_12_apply_rules_filter.png" alt="screenshot" /></li>
+    <li>Click “Save” and then execute the tool. The resulting collection should be a filtered version of the original list.
+   <img src="../../images/rules/rules_apply_rules_example_4_13_filtered.png" alt="screenshot" /></li>
+    <li>
+      <p>Structural re-organizations of collections can also be combined with filtering. To demonstrate this, reopen the original flat list created for this example again in the rule builder of the Apply Rules tool. Use the same regular expression as last time to filter the result but also add a column for “treated” and “untreated” list identifiers.</p>
+
+      <p>Select the new column and the original column in that order as the “List Identifiers” of the new collection to be built as below:</p>
+    </li>
+  </ol>
+
+  <ul>
+    <li><strong>Filter</strong> menu, select <strong>Using a Regular Expression</strong>
+      <ul>
+        <li>From Column <strong>A</strong></li>
+        <li><strong>Regular Expression</strong>: <code class="highlighter-rouge">.*_single_.*</code></li>
+        <li>Apply</li>
+      </ul>
+    </li>
+    <li><strong>Column</strong> menu, select <strong>Using a Regular Expression</strong>
+      <ul>
+        <li><strong>From Column</strong> select A</li>
+        <li><strong>Create column from regular expression groups</strong></li>
+        <li><strong>Regular Expression</strong> set to a value of <code class="highlighter-rouge">(.*)_single_.*</code></li>
+        <li><strong>Number of Groups</strong>: 1</li>
+      </ul>
+    </li>
+    <li><strong>Rules</strong> menu, select  <strong>Add / Modify Column Definitions</strong>
+      <ul>
+        <li>Add Definition, “List Identifier(s)”. Select column “B”</li>
+        <li>Assign another column: Select column “A”
+   <img src="../../images/rules/rules_apply_rules_example_4_14_apply_rules_filtered_and_nested.png" alt="screenshot" /></li>
+      </ul>
+    </li>
+  </ul>
+
+  <ol>
+    <li>Click “Save” and then execute the tool. The resulting collection should be a filtered to only include the “single” data and broken into “treated” and “untreated” sublists.
+   <img src="../../images/rules/rules_apply_rules_example_4_15_filtered_and_nested.png" alt="screenshot" /></li>
+  </ol>
+</blockquote>
+
+
+        
+
+        
+
+        <h3><i class="fa fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!</h3>
+
+        <hr>
+
+        <blockquote class="overview">
+            <h3><i class="fa fa-comments-o" aria-hidden="true"></i> Help us improve this content!</h3>
+            Please take a moment to fill in the Galaxy Training Network
+            <a href="https://tinyurl.com/GTNfeedback">Feedback Form</a>.
+            Your feedback helps us improve this tutorial and will be considered
+            in future revisions.
+        </blockquote>
+    </section>
+</div>
+
+
+<footer>
+    <div class="container">
+        <p>
+            This material is the result of a collaborative work. Thanks to the
+            <a href="https://wiki.galaxyproject.org/Teach/GTN">Galaxy Training Network</a>
+            and all the <a href="/training-material/hall-of-fame">contributors</a> (John Chilton, Helena Rasche)!
+        </p>
+        <p>
+            Found a typo? Something is wrong in this tutorial? Edit it on
+            <a href="https://github.com/galaxyproject/training-material/tree/master/topics/introduction/tutorials/galaxy-intro-rules/tutorial.md">GitHub</a>.
+        </p>
+    </div>
+</footer>
+
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+</html>
