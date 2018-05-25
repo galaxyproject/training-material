@@ -698,75 +698,62 @@ Otu0013	1856	Bacteria(100);Firmicutes(100);Bacilli(100);Lactobacillales(100);Lac
 ..
 ```
 
-This file tells you that Otu008 was observed 5260 times in your samples and that all of the
-sequences (100%) were classified as being members of the Alistipes.
+このファイルはあなたのサンプルで Otu008 が5260回観察されたことやすべての配列（100％）が Alistipes のメンバーであると分類されたことを示しています。
 
 > ### {% icon question %} Question
 >
-> Which samples contained sequences belonging to an OTU classified as Staphylococcus?
+> どのサンプルに Staphylococcus と分類された OTU に属する配列が含まれていますか？
 >
-> <details><summary>Hint</summary>
-> Examine the tax.summary file.
+> <details><summary>ヒント</summary>
+> tax.summary ファイルを調べてみましょう。
 >  </details>
 >
-> <details><summary>Answer</summary>
-> Samples F3D141, F3D142,  F3D144, F3D145, F3D2. This answer can be found by
-> examining the tax.summary output and finding the columns with nonzero
-> values for the line of Staphylococcus
+> <details><summary>回答</summary>
+> サンプル F3D141 と F3D142 、F3D144 、F3D145 、そして F3D2。この答えは tax.summary のアウトプットを調べて Staphylococcus の列について非ゼロ値の列を見つけることによって分かります。
 > </details>
 {: .question}
 
 
-In this tutorial we will continue with this otu-based approach, for the phylotype and phylogenic
-approaches, please refer to the [Mothur wiki page](https://www.mothur.org/wiki/MiSeq_SOP).
+このチュートリアルではこの otu をベースとしたアプローチを行っていきます。phylotype と phylogenic のアプローチについては、 [Mothur wiki page](https://www.mothur.org/wiki/MiSeq_SOP) を参照してください。
 
-# OTU-based Analysis
+# OTU-based 解析
 
-Let's do something more interesting and actually analyze our data. We'll focus on the OTU-based dataset. The
-phylotype-based analysis is essentially the same. Also, remember that our initial question had to do with the
-stability and change in community structure in these samples when comparing early and late samples.
+より面白いことをして実際にデータを解析してみましょう。OTU ベースのデータセットに焦点を当てます。phylotype ベースの解析は本質的に同じです。また、当初の質問が早期サンプルと後期サンプルを比較する時のこれらのサンプルのコミュニティー構造の変化や安定性に関係していたことを忘れないでください。
 
 Keep in mind that the group names have either a F or M (sex of animal) followed by a number (number of
 animal) followed by a D and a three digit number (number of days post weaning).
 
-> ### {% icon hands_on %} ハンズオン: Subsampling
+> ### {% icon hands_on %} ハンズオン: サブサンプリング
 >
-> What we now want to do is see how many sequences we have in each sample. We'll do this with the
-> `Count.groups` command:
+> 私たちが今したいことは各サンプルにどれくらいの配列があるかを見ることです。これは `Count.groups` コマンドで行います:
 >
 > - **Count.groups** {% icon tool %} で次のように設定する
->   - "shared" to the shared file from Make.shared
+>   - "shared" には Make.shared からの shared ファイルを選択する
 >
-> Take a look at the output. We see that our smallest sample had 2389 sequences in it. That is a reasonable
-> number. Despite what some say, subsampling and rarefying your data is an important thing to do.
+> アウトプットを見てください。最も小さいサンプルには 2389 の配列が入っていることが分かります。それは適当な数です。何を述べるかに関わらず、データをサブサンプリングし希薄化することは重要なことです。
 >
-> We'll generate a subsampled file for our analyses with the `Sub.sample` command:
+> `Sub.sample` コマンドを用いて解析のためのサブサンプリングされたファイルを生成します:
 >
 > - **Sub.sample** {% icon tool %} で次のように設定する
->   - "Select type of data to subsample" to `OTU Shared`
->   - "shared" to output from Make.shared
->   - "size" to `2389`
+>   - "Select type of data to subsample" → `OTU Shared`
+>   - "shared" には Make.shared のアウトプットを選択する
+>   - "size" → `2389`
 >
 > > ### {% icon question %} Question
 > >
-> >  What would you exect the result of `count.groups` on this new shared output collection to be? Check if you are correct.
+> >  この新しい共有アウトプットコレクションの `count.groups` の結果は正確なのでしょうか？正しいかどうかを確認しましょう。
 > > <details>
 > >   <summary> クリックして解答を表示</summary>
-> >   all groups (samples) should now have 2440 sequences. Run count.groups again on the shared output collection by the sub.sample
-> >   tool to confirm that this is indeed what happened.
+> >   今すべてのグループ（サンプル）は 2440 の配列を持っているはずです。sub.sample ツールからの共有アウトプットコレクションに対して count.groups を再実行して実際に何が起きていたのか確認します。
 > >  </details>
 > {: .question}
 >
-> **Note:** since subsampling is a stochastic process, your results from any tools using this subsampled data
-> will deviate from the ones presented here.
+> **注意:** サブサンプリングは確率的なプロセスなので、このサブサンプリングされたデータを使用するツールの結果はここに示されているものから逸脱しています。
 {: .hands_on}
 
-## Calculate Species Diversity
+## 種の多様性を計算する
 
-Diversity indices provide valuable mathematical tools to describe the ecological complexity of a single sample
-(*alpha diversity*) or to detect species differences between samples (*beta diversity*). However, diversity
-is not a determined physical quantity for which a consensus definition and unit of measure have been established,
-and several diversity indices are currently available [Finotello et al. 2016].
+Diversity indices provide valuable mathematical tools to describe the ecological complexity of a single sample (*alpha diversity*) or to detect species differences between samples (*beta diversity*). However, diversity is not a determined physical quantity for which a consensus definition and unit of measure have been established, and several diversity indices are currently available [Finotello et al. 2016].
 
 ### Alpha diversity
 
