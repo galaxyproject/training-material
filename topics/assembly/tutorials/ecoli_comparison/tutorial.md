@@ -155,7 +155,7 @@ Now everything is loaded and ready to go. We will now align our assembly against
 
 > ### {% icon hands_on %} Hands-on: Running LASTZ
 > 1. Open **LASTZ** interface
-> 2. Change **Select TARGET sequnce(s) to align against** to `from your history`
+> 2. Change **Select TARGET sequence(s) to align against** to `from your history`
 > 3. In **Select a reference dataset** click on the folder icon (![](../../images/folder-o.png)) and the collection containing all *E. coli* genomes we uploaded below. 
 > 4. In **Select QUERY sequence(s)** choose our assembly which was prepared in the previous step.
 > 5. Find section of LASTZ interface called **Chaining** and expand it.
@@ -294,7 +294,7 @@ Dataset generated above lists each *E. coli* genome accession only once and will
 
 The relationship between the number of alignment blocks and total alignment length looks like this:
 
-![Identity versus length](../../images/best_genomes_chart.png "Number of alignment blocks versus total alignment length (bp)."")
+![Identity versus length](../../images/best_genomes_chart.png "Number of alignment blocks versus total alignment length (bp).")
 
 A group of three dots in the upper left corner of this scatter plot represents genomes that are most similar to our assembly: they have the small number of alignment blocks and high total alignment length. Mousing over these three dots (if you set **Data point labels** correctly in the previous step) will reveal they accession numbers: `LT906474.1`, `CP024090.1`, and `CP020543.1`. 
 
@@ -346,15 +346,106 @@ Using the three accession listed above we will fetch necessary data from NCBI. T
 ><div style="padding:56.25% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/271754600?title=0&byline=0&portrait=0" style="position:absolute;top:0;left:0;width:100%;height:100%;" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
 >-----------------
 >
+>At the end of this you should have two collections: one containing genomic sequences and another containing annotations. 
 {: .hands_on}
 
-At the end of this you should have two collections: one containing genomic sequences and another containing annotations. 
+## Visualizing rearrangements
 
-## Producing alignments once again
+Now we will perform alignments between our assembly and the three most closely related genomes to get a detailed look at any possible genome architecture changes. We will again use LASTZ:
 
-Now we will perform alignments between our assembly and the three most closely related genomes to get a detailed look at any possible genome architecture changes. 
+> ### {% icon hands_on %} Hands-on: Aligning again
+> 1. Open **LASTZ** interface
+> 2. Change **Select TARGET sequence(s) to align against** to `from your history`
+> 3. In **Select a reference dataset** click on the folder icon (![](../../images/folder-o.png)) and select the collection of the three genomes (in the video above we called it `best hits`). 
+> 4. In **Select QUERY sequence(s)** choose our assembly which was prepared in the beginning (it has a name `Text transformation on data...`).
+> 5. Find section of LASTZ interface called **Chaining** and expand it.
+> 6. Set **Perform chaining of HSPs with no penalties** to `Yes`
+> 7. Find section of LASTZ interface called **Output** and expand it.
+> 8. Set **Specify the output format** to `Customized general`
+> 9. Within **Select which fields to include** select the following:
+>	* `score`
+>	* `name1`
+>	* `strand`
+>	* `zstart`
+>	* `end1`
+>	* `length1`
+>	* `name2`
+>	* `strand2`
+>	* `zstart2`
+>	* `end2`
+>	* `identity`
+> 9. In **Create a dotplot representation of alignments?** select `Yes`
+> 10. Run LASTZ by clicking **Execute** button
+{: .hands_on}
 
-> ### {% icon hands_on %} Hands-on: Downloading annotations
+Because we chose to produce Dot Plots as well LASTZ will generate two collections: one containing alignment data and the other containing DotPlots in PNG format:
+
+![Dot Plots](../../images/three_dot_plots.png "Dot Plot representations of alignments between three <i>E. coli</i> genomes and our assembly. Query (Y-axis) is indicated above each dot plot. Target (X-axis) is our assembly. Red circle indicates a region deleted in our assembly.")
+
+A quick conclusion that can be drawn here is that there is a large inversion in CP020543 and deletion in our assembly. 
+
+## Producing a Genome Browser for this experiment
+
+Dot plots we've produced above are great, but they are static. It would be wonderful to load these data into a genome browser where one can zoom in and out as well as add tracks such as those containing genes. To create a browser we need a genome and a set of tracks. Tracks are features such as genes or SNPs with start and end positions corresponding to a coordinate system provided by the genome. Thus the first thing to do is to create a *genome* that would represent our experiment. We can create such a genome by simply combining the three genomes of closely related strains with our assembly in a single dataset - a hybrid genome.
+
+> ### {% icon hands_on %} Hands-on: Creating a single FASTA dataset with all genomes
+> First step will be collapsing the collection containing the three genomes into a single file. To do this:
+> 1. Open **Collapse Collection** tool.
+> 2. In **Collection of files to collapse** click on the folder icon (![](../../images/folder-o.png)) and select the collection of the three genomes (in the video above we called it `best hits`). 
+> 3. Leave all other options as they are - no changes needed. 
+> 4. Click **Execute**
+{: .hands_on}
+
+This will produce a single FASTA dataset containing the three genomes. There is one problem though. If we look at the data in this file, we will see that FASTA headers look like this:
+```
+>CP020543.1 Escherichia coli C, complete genome
+```
+This is a problem because a browser will "think" that this particular genome is called `CP020543.1 Escherichia coli C, complete genome` while in the alignment files produced by LASTZ the same genome will be listed as simply `CP020543.1`. Because these two seemingly identical things are technically different it will notbe possible to render alignment results (or any other annotation) on a browser. To solve this issue we simply need to remove ` Escherichia coli C, complete genome` from `>CP020543.1 Escherichia coli C, complete genome` and convert it into `>CP020543.1`. For this we will use **sed** tool we already used above to [prepare assembly files](#preparing-assembly):
+
+> ### {% icon hands_on %} Hands-on: Cleaning sequence names
+> 1. Open **Text transformation with sed** {% icon tool %} tool
+> 2. Set **File to process** to the output of the previous step (a FASTA file produced by collection collapse)
+> 3. Inside **SED program** box enter the following expression (so called [Regular Expression](https://en.wikipedia.org/wiki/Regular_expression): `s/\ Esc.*$//`. Here we are matching from space (`\ `) separating `CP020543.1` and `Escherichia coli C, complete genome` and substituting this with nothing. 
+> 4. Click **Execute**
+{: .hands_on}
+
+To make sure that everything completed correctly let's grab FASTA headers from all sequences in the dataset produced by the last tool:
+
+> ### {% icon hands_on %} Hands-on: "Grepping" FASTA headers
+> 1. Open **Search in textfiles (grep)** tool.
+> 2. In **Select lines from** select output of the previous step (called `Text transformation on data...`)
+> 3. In **Regular Expression** box enter `^>`. This tells to return all line that begin (`^` signifies the beginning) with `>`.
+> 4. Click **Execute**
+{: .hands_on}
+
+If everything went well we will see something like this:
+ ```
+ >CP020543.1
+ >CP024090.1
+ >LT906474.1
+ ```
+
+Finally, we need to add our own assembly to the FASTA dataset containing the three genomes. This can be done by a simple concatenation:
+
+> ### {% icon hands_on %} Hands-on: Concatenate FASTA files
+> 1. Open **Concatenate datasets tail-to-head (cat)**
+> 2. In **Datasets to concatenate** select output of **sed** tool we performed one step ago (*before* last step; it is called `Text transformation on...`)
+> 3. Click **Insert Dataset** button
+> 4. Select our assembly (its name also begins with `Text transformation on...` but is located earlier in the history)
+{: .hands_on}
+
+The resulting dataset contains four sequences: three genomes plus our assembly. Let's start a browser using these sequences:
+
+> ### {% icon hands_on %} Hands-on: Starting a custom IGV browser
+> 1. Go to [IGV web page](http://software.broadinstitute.org/software/igv/download) and launch a browser appropriate for your platform. Wait for it to start. It will display human genome, but we will change that. 
+> 2. Go back to your Galaxy session and expand the dataset generated during the last step.
+> 3. Click on `local` link in **display with IGV local**
+> 4. Wait a bit and IGV will refresh displaying "chromosomes" of our *hybrid* genome:
+>
+>-------------
+>
+> ![Empty IGV](../../images/igv_empty.png "IGV instance displaying <i>Hybrid</i> genome without tracks")
+{: .hands_on}
 
 
 Short introduction about this subpart.
