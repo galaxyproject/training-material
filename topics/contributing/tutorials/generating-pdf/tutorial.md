@@ -47,7 +47,7 @@ To generate the PDFs, a command `make pdf` is given. This command:
 > 1. [Writing content in markdown](../create-new-tutorial-content/tutorial.html)
 > 1. [Defining metadata](../create-new-tutorial-metadata/tutorial.html)
 > 1. [Creating a new topic](../create-new-topic/tutorial.html)
-> 1. [Generating PDF handouts](../generate-pdf/tutorial.html)
+> 1. [Generating PDF handouts](../generating-pdf/tutorial.html)
 > 1. [Creating Interactive Galaxy Tours](../create-new-tutorial-tours/tutorial.html)
 > 1. [Defining technical requirements for a tutorial](../create-new-tutorial-technical/tutorial.html)
 > 1. [Setting up Galaxy for training](../setup-galaxy-for-training/tutorial.html)
