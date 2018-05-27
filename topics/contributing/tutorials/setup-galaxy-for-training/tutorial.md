@@ -76,7 +76,7 @@ To setup a Galaxy server locally, we will first clone the Galaxy github reposito
 {: .hands_on}
 
 
-### Find your Galaxy API key
+## Find your Galaxy API key
 
 In order to install the tutorial requirements, we will need the API key of an admin user.
 
@@ -108,13 +108,20 @@ To install to training requirements to our Galaxy, we will use ephemeris, let's 
 {: .hands_on}
 
 
-# Installing tutorial requirements
+# Install tutorial requirements with Ephemeris
 
-We have created a small bash script to automatically install all the tutorial :
+We have created a small bash script to automatically install all the tutorial requirements to an existing Galaxy, it's located in this repository under: [`bin/install_tutorial_requirements.sh`]({{ site.github_repository }}/tree/master/bin/install_tutorial_requirements.sh)
 
-[`bin/install_tutorial_requirements.sh`]({{ site.github_repository }}/tree/master/bin/install_tutorial_requirements.sh)
+The syntax for running this script is:
 
-> ### {% icon hands_on %} Hands-on: Obtain Galaxy API key
+```bash
+bin/install_tutorial_requirments.sh <path-to-tutorial> <Galaxy url> <API key>
+```
+
+In this example we will install the requirements for the [*Quality Control*]({{ site.baseurl }}/topics/sequence-analysis/quality-control/tutorial.md) tutorial to the Galaxy instance running on localhost.
+
+
+> ### {% icon hands_on %} Hands-on: Install a tutorial
 >
 > 1. If you have not done so yet, clone the training material github repo:
 >    ```bash
@@ -122,78 +129,64 @@ We have created a small bash script to automatically install all the tutorial :
 >    cd training-material
 >    ```
 >
+> 2. Run the script to install the RNASeq tutorial (Remember to insert your API key in the command)
+>
+>    ```bash
+>    bin/install_tutorial_requirements.sh topics/sequence-analysis/tutorials/quality-control http://localhost:8080 <api key>
+>    ```
+>
+{: .hands_on}
 
+Installation may take some time, this script will automatically install the tools, create a data library and populate it with the input datasets from Zenodo, install and publish the workflows, and run any data managers that might be required.
 
+The only thing the script currently cannot automate, is the installation of the interactive tours. We will now do this manually by copying the contents of the `tours` folder to our Galaxy instance, in the folder `$GALAXY_ROOT/config/plugins/tours`
 
-Example usage from root of the repository:
+> ### {% icon hands_on %} Hands-on: Install the interactive Tours
+>
+> 1. Copy the `tour.yaml` file from the training materials repo to Galaxy
+>    ```bash
+>    cp -r topics/sequence-analysis/tutorials/quality-control/tours/ <GALAXY_ROOT>/config/plugins/tours
+>    ```
+>
+{: .hands_on}
 
-```bash
-bin/install_tutorial_requirements.sh topics/transcriptomics/tutorials/ref-based -g <galaxy url> -a <api key>
-```
 
 ### Installing an entire topic
 
-If you would like to install all the requirements for every tutorial within an entire topic, you can use the script in [`bin/install_topic_requirements.sh`]({{ site.github_repository }}/tree/master/bin/install_topic_requirements.sh)
-
-Example usage from root of the repository:
-
-```bash
-bin/install_topic_requirements.sh topics/metagenomics -g <galaxy url> -a <api key>
-```
-
+If you would like to install all the requirements for every tutorial within an entire topic, you can use the script in [`bin/install_topic_requirements.sh`]({{ site.github_repository }}/tree/master/bin/install_topic_requirements.sh). The command is similar to that to install a single tutorial.
 
 
 ### Installing a subset of components
 
-If you would like to pick and choose what to install for each tutorial, below are descriptions of the commands used to install each of the components (tools, workflows, reference data, data libraries, tours)
-
-**Installing Tools**
-
-The ephemeris command to install tools defined in a `tools.yaml` file to a running Galaxy instance is:
-
-```bash
-shed-tools install -g <Galaxy url> -a <API key> -t topics/<topic>/tutorials/<tutorial>/tools.yaml
-```
+If you would like to pick and choose what to install for each tutorial, below are descriptions of the commands used to install each of the components (tools, workflows, reference data, data libraries, tours) please see the [Quickstart section](#Quickstart) for the individual commands used by the script
 
 
-**Installing Workflows**
+# Creating a Docker image for your topic
 
-The ephemeris command to install a workflow or directory of workflows:
+Every topic will come with a Docker image containing the tools, data, workflows and Galaxy Interactive Tours required by each tutorial of this topic. The Docker image is described in the Dockerfile found in the `docker` directory of each topic. This file uses scripts to automatically add the files for each tutorial. The only thing to change is the name of the topic in the Dockerfile copied from the templates.
 
-```bash
-workflow-install --publish-workflows -g <Galaxy url> -a <API key> -w topics/<topic>/tutorials/<tutorial>/workflows
-```
+> ### {% icon hands_on %} Hands-on: Testing the Docker
+>
+> 1. Check that the Dockerfile uses 'sequence-analysis' as topic name
+> 2. Move to the root of the training material repository
+> 3. Build the Docker image for the topic with: `docker build -f topic/sequence-analysis/docker/Dockerfile -t training-sequence-analysis .`
+>
+>    This command needs to be launched a the root of training material repository because the Dockerfile uses some scripts available there to install the tools, import the data and the workflows
+>
+> 4. Launch the Docker container: `docker run -d -p 8080:80 training-sequence-analysis`
+> 5. Check the Galaxy instance on [http://localhost:8080/](http://localhost:8080/):
+>     1. Check the installed tools
+>     2. Check the data libraries in "Shared data"
+>     3. Check the workflows
+>     4. Check the Galaxy Interactive Tours in "Help"
+{: .hands_on}
 
-This command will install all the workflows in the `workflows` directory, but you may also specify a single workflow file here.
-
-The `--publish_workflow` parameter will make the workflows available to anybody on the Galaxy instance.
-
-
-**Installing Data Libraries**
-
-The ephemeris command to populate a data library with the input datasets from Zenodo is:
-
-```
-setup-data-libraries -g <Galaxy url> -a <API key> -i topic/<topic>/tutorial/<tutorial>/data-library.yaml
-```
-
-**Installing Reference Data**
-
-To run the data manager that installs and configures the reference data needed for a tutorial, run the following ephemeris command:
-
-```bash
-run-data-managers -g <Galaxy url> -a <API key> --config topic/<topic>/tutorial/<tutorial>/data-manager.yaml
-```
-
-**Installing Tours**
-
-This is currently not possible using ephemeris, however, these can be installed by copying the files to the `config/plugins/tours/` directory of your Galaxy instance.
 
 # Quickstart
 
 Below is the list of commands used in this tutorial.
 
-Using the scripts in this repository:
+Using the convenience scripts in this repository:
 
 ```bash
 # Make sure you are in the root of the training-material repo
@@ -225,6 +218,8 @@ workflow-install --publish-workflows -g <Galaxy url> -a <API key> -w topics/<top
 # install tours
 copy the contents of the "tours" directory for the tutorial to Galaxy's "config/plugins/tours/"
 ```
+
+
 
 # Conclusion
 {:.no_toc}
