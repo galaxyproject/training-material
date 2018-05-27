@@ -107,7 +107,7 @@ In this tutorial, we want to add a new topic called about "my-favorite-topic".
 
 # Creating the directory for the topic
 
-Once the topic name has been chosen, we can create it. 
+Once the topic name has been chosen, we can create it.
 
 > ### {% icon hands_on %} Hands-on: Copy the required files
 >
@@ -125,7 +125,7 @@ We use Jekyll to generate the website out of the Markdown and YAML files. We nee
 > 2. Add a symbolic link to the `metadata.yaml` file on our new topic: `ln -s ../topics/my-favorite-topic/metadata.yaml my-favorite-topic.yaml`
 > 3. Move back to the root: `cd ..`
 > 2. Make sure that Jekyll is running
-> 
+>
 >    > Want to learm how to start Jekyll? [Check out our tutorial to serve the website locally]({{ site.baseurl }}/topics/contributing/tutorials/running-jekyll/tutorial.html)
 >
 > 2. Check if the tutorial has been correctly added at [http://localhost:4000/training-material/](http://localhost:4000/training-material/)
@@ -135,9 +135,19 @@ We use Jekyll to generate the website out of the Markdown and YAML files. We nee
 # Conclusion
 {:.no_toc}
 
-We just created a new topic. We can now fill it with new tutorials. To do that, you can follow our dedicated tutorial:
+We just created a new topic. We can now fill it with new tutorials. To do that, you can follow our dedicated tutorials:
 
-- [Creating a new tutorial - Writing content in Markdown]({{ site.baseurl }}/topics/contributing/tutorials/creating-new-tutorial-content/tutorial.html)
-- [Creating a new tutorial - Defining metadata]({{ site.baseurl }}/topics/contributing/tutorials/creating-new-tutorial-metadata/tutorial.html)
-- [Creating a new tutorial - Creating Interactive Galaxy Tours]({{ site.baseurl }}/topics/contributing/tutorials/creating-new-tutorial-tours/tutorial.html)
-- [Creating a new tutorial - Defining the technical infrastructure]({{ site.baseurl }}/topics/contributing/tutorials/creating-new-tutorial-technical/tutorial.html)
+> ### Developing GTN training material
+>
+> This tutorial is part of a series to develop GTN training material, feel free to also look at:
+>
+> 1. [Setting up the tutorial infrastructure](../running-jekyll/tutorial.html)
+> 1. [Writing content in markdown](../create-new-tutorial-content/tutorial.html)
+> 1. [Defining metadata](../create-new-tutorial-metadata/tutorial.html)
+> 1. [Creating a new topic](../create-new-topic/tutorial.html)
+> 1. [Generating PDF handouts](../generate-pdf/tutorial.html)
+> 1. [Creating Interactive Galaxy Tours](../create-new-tutorial-tours/tutorial.html)
+> 1. [Defining technical requirements for a tutorial](../create-new-tutorial-technical/tutorial.html)
+> 1. [Setting up Galaxy for training](../setup-galaxy-for-training/tutorial.html)
+> 1. [Submitting the new tutorial to the GitHub repository](../github-command-line-contribution/slides.html)
+{: .agenda}

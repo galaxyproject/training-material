@@ -96,9 +96,13 @@ For the take-home messages, it is easier to define them once the tutorial is wri
 >
 > This tutorial is part of a series to develop GTN training material, feel free to also look at:
 >
+> 1. [Setting up the tutorial infrastructure](../running-jekyll/tutorial.html)
 > 1. [Writing content in markdown](../create-new-tutorial-content/tutorial.html)
-> 1. [Setting up the infrastructure](../create-new-tutorial-jekyll/tutorial.html)
+> 1. [Defining metadata](../create-new-tutorial-metadata/tutorial.html)
+> 1. [Creating a new topic](../create-new-topic/tutorial.html)
+> 1. [Generating PDF handouts](../generate-pdf/tutorial.html)
 > 1. [Creating Interactive Galaxy Tours](../create-new-tutorial-tours/tutorial.html)
-> 1. [Getting a tutorial running on any Galaxy](../create-new-tutorial-technical-infrastructure/tutorial.html)
-> 1. [Submitting the new tutorial to the GitHub repository](../../../dev/tutorials/github-contribution/slides.html)
+> 1. [Defining technical requirements for a tutorial](../create-new-tutorial-technical/tutorial.html)
+> 1. [Setting up Galaxy for training](../setup-galaxy-for-training/tutorial.html)
+> 1. [Submitting the new tutorial to the GitHub repository](../github-command-line-contribution/slides.html)
 {: .agenda}

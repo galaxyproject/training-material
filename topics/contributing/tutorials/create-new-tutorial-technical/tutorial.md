@@ -22,12 +22,15 @@ In this tutorial, you will learn how to create a virtualised Galaxy instance, ba
 >
 > This tutorial is part of a series to develop GTN training material, feel free to also look at:
 >
+> 1. [Setting up the tutorial infrastructure](../running-jekyll/tutorial.html)
 > 1. [Writing content in markdown](../create-new-tutorial-content/tutorial.html)
 > 1. [Defining metadata](../create-new-tutorial-metadata/tutorial.html)
-> 1. [Setting up the infrastructure](../create-new-tutorial-jekyll/tutorial.html)
+> 1. [Creating a new topic](../create-new-topic/tutorial.html)
+> 1. [Generating PDF handouts](../generate-pdf/tutorial.html)
 > 1. [Creating Interactive Galaxy Tours](../create-new-tutorial-tours/tutorial.html)
-> 1. [Building a Docker flavor](../create-new-tutorial-docker/tutorial.html)
-> 1. [Submitting the new tutorial to the GitHub repository](../../../dev/tutorials/github-contribution/slides.html)
+> 1. [Defining technical requirements for a tutorial](../create-new-tutorial-technical/tutorial.html)
+> 1. [Setting up Galaxy for training](../setup-galaxy-for-training/tutorial.html)
+> 1. [Submitting the new tutorial to the GitHub repository](../github-command-line-contribution/slides.html)
 {: .agenda}
 
 
@@ -147,7 +150,7 @@ Every topic will come with a Docker image containing the tools, data, workflows 
 > 1. Check that the Dockerfile uses 'sequence-analysis' as topic name
 > 2. Move to the root of the training material repository
 > 3. Build the Docker image for the topic with: `docker build -f topic/sequence-analysis/docker/Dockerfile -t training-sequence-analysis .`
->     
+>
 >    This command needs to be launched a the root of training material repository because the Dockerfile uses some scripts available there to install the tools, import the data and the workflows
 >
 > 4. Launch the Docker container: `docker run -d -p 8080:80 training-sequence-analysis`
@@ -165,10 +168,13 @@ Every topic will come with a Docker image containing the tools, data, workflows 
 >
 > This tutorial is part of a series to develop GTN training material, feel free to also look at:
 >
+> 1. [Setting up the tutorial infrastructure](../running-jekyll/tutorial.html)
 > 1. [Writing content in markdown](../create-new-tutorial-content/tutorial.html)
 > 1. [Defining metadata](../create-new-tutorial-metadata/tutorial.html)
-> 1. [Setting up the infrastructure](../create-new-tutorial-jekyll/tutorial.html)
+> 1. [Creating a new topic](../create-new-topic/tutorial.html)
+> 1. [Generating PDF handouts](../generate-pdf/tutorial.html)
 > 1. [Creating Interactive Galaxy Tours](../create-new-tutorial-tours/tutorial.html)
-> 1. [Building a Docker flavor](../create-new-tutorial-docker/tutorial.html)
-> 1. [Submitting the new tutorial to the GitHub repository](../../../dev/tutorials/github-contribution/slides.html)
+> 1. [Defining technical requirements for a tutorial](../create-new-tutorial-technical/tutorial.html)
+> 1. [Setting up Galaxy for training](../setup-galaxy-for-training/tutorial.html)
+> 1. [Submitting the new tutorial to the GitHub repository](../github-command-line-contribution/slides.html)
 {: .agenda}
