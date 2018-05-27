@@ -150,4 +150,5 @@ We just created a new topic. We can now fill it with new tutorials. To do that, 
 > 1. [Defining technical requirements for a tutorial](../create-new-tutorial-technical/tutorial.html)
 > 1. [Setting up Galaxy for training](../setup-galaxy-for-training/tutorial.html)
 > 1. [Submitting the new tutorial to the GitHub repository](../github-command-line-contribution/slides.html)
+> 1. [Good practices for teaching](../good-practices/slides.html)
 {: .agenda}

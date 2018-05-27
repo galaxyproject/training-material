@@ -108,17 +108,11 @@ To install to training requirements to our Galaxy, we will use ephemeris, let's 
 {: .hands_on}
 
 
-# Install tutorial requirements with Ephemeris
+# Installing tutorial requirements
 
 We have created a small bash script to automatically install all the tutorial requirements to an existing Galaxy, it's located in this repository under: [`bin/install_tutorial_requirements.sh`]({{ site.github_repository }}/tree/master/bin/install_tutorial_requirements.sh)
 
-The syntax for running this script is:
-
-```bash
-bin/install_tutorial_requirments.sh <path-to-tutorial> <Galaxy url> <API key>
-```
-
-In this example we will install the requirements for the [*Quality Control*]({{ site.baseurl }}/topics/sequence-analysis/quality-control/tutorial.md) tutorial to the Galaxy instance running on localhost.
+In this example we will install the requirements for the [*Reference-based RNASeq*]({{ site.baseurl }}/topics/transcriptomics/ref-based/tutorial.md) tutorial to the Galaxy instance running on localhost.
 
 
 > ### {% icon hands_on %} Hands-on: Install a tutorial
@@ -129,10 +123,10 @@ In this example we will install the requirements for the [*Quality Control*]({{ 
 >    cd training-material
 >    ```
 >
-> 2. Run the script to install the RNASeq tutorial (Remember to insert your API key in the command)
+> 2. Run the script to install the RNASeq tutorial
 >
 >    ```bash
->    bin/install_tutorial_requirements.sh topics/sequence-analysis/tutorials/quality-control http://localhost:8080 <api key>
+>    bin/install_tutorial_requirements.sh topics/transcriptomics/tutorials/ref-based -g http://localhost:8080 -a <api key>
 >    ```
 >
 {: .hands_on}
@@ -145,48 +139,28 @@ The only thing the script currently cannot automate, is the installation of the 
 >
 > 1. Copy the `tour.yaml` file from the training materials repo to Galaxy
 >    ```bash
->    cp -r topics/sequence-analysis/tutorials/quality-control/tours/ <GALAXY_ROOT>/config/plugins/tours
+>    cp -r topics/transcriptomics/tutorials/ref-based/tours/ path/to/local/galaxy/config/plugins/tours
 >    ```
 >
 {: .hands_on}
 
 
+
+
 ### Installing an entire topic
 
-If you would like to install all the requirements for every tutorial within an entire topic, you can use the script in [`bin/install_topic_requirements.sh`]({{ site.github_repository }}/tree/master/bin/install_topic_requirements.sh). The command is similar to that to install a single tutorial.
+If you would like to install all the requirements for every tutorial within an entire topic, you can use the script in [`bin/install_topic_requirements.sh`]({{ site.github_repository }}/tree/master/bin/install_topic_requirements.sh)
 
 
 ### Installing a subset of components
 
 If you would like to pick and choose what to install for each tutorial, below are descriptions of the commands used to install each of the components (tools, workflows, reference data, data libraries, tours) please see the [Quickstart section](#Quickstart) for the individual commands used by the script
 
-
-# Creating a Docker image for your topic
-
-Every topic will come with a Docker image containing the tools, data, workflows and Galaxy Interactive Tours required by each tutorial of this topic. The Docker image is described in the Dockerfile found in the `docker` directory of each topic. This file uses scripts to automatically add the files for each tutorial. The only thing to change is the name of the topic in the Dockerfile copied from the templates.
-
-> ### {% icon hands_on %} Hands-on: Testing the Docker
->
-> 1. Check that the Dockerfile uses 'sequence-analysis' as topic name
-> 2. Move to the root of the training material repository
-> 3. Build the Docker image for the topic with: `docker build -f topic/sequence-analysis/docker/Dockerfile -t training-sequence-analysis .`
->
->    This command needs to be launched a the root of training material repository because the Dockerfile uses some scripts available there to install the tools, import the data and the workflows
->
-> 4. Launch the Docker container: `docker run -d -p 8080:80 training-sequence-analysis`
-> 5. Check the Galaxy instance on [http://localhost:8080/](http://localhost:8080/):
->     1. Check the installed tools
->     2. Check the data libraries in "Shared data"
->     3. Check the workflows
->     4. Check the Galaxy Interactive Tours in "Help"
-{: .hands_on}
-
-
 # Quickstart
 
 Below is the list of commands used in this tutorial.
 
-Using the convenience scripts in this repository:
+Using the scripts in this repository:
 
 ```bash
 # Make sure you are in the root of the training-material repo
@@ -232,9 +206,10 @@ copy the contents of the "tours" directory for the tutorial to Galaxy's "config/
 > 1. [Writing content in markdown](../create-new-tutorial-content/tutorial.html)
 > 1. [Defining metadata](../create-new-tutorial-metadata/tutorial.html)
 > 1. [Creating a new topic](../create-new-topic/tutorial.html)
-> 1. [Generating PDF handouts](../generating-pdf/tutorial.html)
+> 1. [Generating PDF handouts](../generate-pdf/tutorial.html)
 > 1. [Creating Interactive Galaxy Tours](../create-new-tutorial-tours/tutorial.html)
 > 1. [Defining technical requirements for a tutorial](../create-new-tutorial-technical/tutorial.html)
 > 1. [Setting up Galaxy for training](../setup-galaxy-for-training/tutorial.html)
 > 1. [Submitting the new tutorial to the GitHub repository](../github-command-line-contribution/slides.html)
+> 1. [Good practices for teaching](../good-practices/slides.html)
 {: .agenda}
