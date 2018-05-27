@@ -65,53 +65,83 @@ PRJDA60709	SAMD00016382	DRX000480	ftp.sra.ebi.ac.uk/vol1/fastq/DRR000/DRR000775/
 {:#example-1-metadata}
 
 > ### {% icon hands_on %} Hands-on: Accessing the Rule Based Uploader
-> Next navigate to Galaxy, and click the upload icon toward the top left corner. By default the familiar simple upload dialog should appear. This dialog has more advanced options as different tabs across the top of this dialog though. Click "Rule-based" as shown below.
 >
-> ![screenshot](../../images/rules/rules_example_1_1_rules_landing.png)
+> 1. **Click** the upload icon toward the top left corner.
 >
-> As you can see in this dialog, data can be selected from a history dataset or pasted in directly. If Galaxy is configured to allow FTP uploads, the contents of your FTP directory may be loaded directly as well. For this example, simply paste your tabular data right into the textbox on this page as shown below and then click the "Build" button.
+>    By default the familiar simple upload dialog should appear. This dialog has more advanced options as different tabs across the top of this dialog though.
 >
-> ![screenshot](../../images/rules/rules_example_1_2_paste.png)
+> 2. **Click** `Rule-based` as shown below.
 >
-> This should bring you to the "rules" editor.
+>    ![screenshot](../../images/rules/rules_example_1_1_rules_landing.png)
+>    As you can see in this dialog, data can be selected from a history dataset or pasted in directly. If Galaxy is configured to allow FTP uploads, the contents of your FTP directory may be loaded directly as well.
 >
-> ![screenshot](../../images/rules/rules_example_1_3_initial_rules.png)
+> 3. **Paste** your tabular data right into the textbox on this page as shown below
+>     - **Click** the `Build` button.
+>
+>    ```
+>    study_accession	sample_accession	experiment_accession	fastq_ftp
+>    PRJDA60709	SAMD00016379	DRX000475	ftp.sra.ebi.ac.uk/vol1/fastq/DRR000/DRR000770/DRR000770.fastq.gz
+>    PRJDA60709	SAMD00016383	DRX000476	ftp.sra.ebi.ac.uk/vol1/fastq/DRR000/DRR000771/DRR000771.fastq.gz
+>    PRJDA60709	SAMD00016380	DRX000477	ftp.sra.ebi.ac.uk/vol1/fastq/DRR000/DRR000772/DRR000772.fastq.gz
+>    PRJDA60709	SAMD00016378	DRX000478	ftp.sra.ebi.ac.uk/vol1/fastq/DRR000/DRR000773/DRR000773.fastq.gz
+>    PRJDA60709	SAMD00016381	DRX000479	ftp.sra.ebi.ac.uk/vol1/fastq/DRR000/DRR000774/DRR000774.fastq.gz
+>    PRJDA60709	SAMD00016382	DRX000480	ftp.sra.ebi.ac.uk/vol1/fastq/DRR000/DRR000775/DRR000775.fastq.gz
+>    ```
+>
+>    ![screenshot](../../images/rules/rules_example_1_2_paste.png)
+>
+> 4. **Examine** the  the `rules editor` which now pops up.
+>
+>    ![screenshot](../../images/rules/rules_example_1_3_initial_rules.png)
+>
 {: .hands_on}
 
 At first glance, this may be feel like Excel or another spreadsheet program and you may feel the urge to start editing cells but we strongly encourage defining rules for manipulating the data instead. There are a few reasons for this:
 
-* Manually modifying this metadata is not reproducible - we will not belabor the point here but check out [Why not use excel for this?]({{ site.baseurl }}/topics/introduction/tutorials/galaxy-intro-strands/tutorial.html#why-not-use-excel-for-this) for more context. Building up rules for modifying this metadata will allow Galaxy to track and report your manipulations (providing tracibility) and apply them to new sets of files (providing reproducibility).
-* Manually modifying this metadata is error prone - we believe defining rules and treating the metadata in a systematic way minimizes the possibility to manual errors. These errors can be very hard to detect for large sets of data.
-* Manually modifying data is not scalable - this rule-based technique potentailly scales to importing tens of thousands of datasets.
+* **Manually modifying this metadata is not reproducible** - we will not belabor the point here but check out [Why not use excel for this?]({{ site.baseurl }}/topics/introduction/tutorials/galaxy-intro-strands/tutorial.html#why-not-use-excel-for-this) for more context. Building up rules for modifying this metadata will allow Galaxy to track and report your manipulations (providing tracibility) and apply them to new sets of files (providing reproducibility).
+* **Manually modifying this metadata is error prone** - we believe defining rules and treating the metadata in a systematic way minimizes the possibility to manual errors. These errors can be very hard to detect for large sets of data.
+* **Manually modifying data is not scalable** - this rule-based technique potentailly scales to importing tens of thousands of datasets.
 
 So rather than modifying the data, we will define rules for manipulating it and setting up "column definitions" that tell Galaxy how to use the metadata during upload or collection creation.
 
-In order to get these files into Galaxy, we will want to do a few things.
-
+In order to get these files into Galaxy, we will want to do a few things:
 * Strip that header out of the data (it doesn't contain a URL Galaxy can download).
-* Define column "C" as the dataset name.
-* Define column "D" as the dataset URL (this is the location Galaxy can download the data from).
-* Tell Galaxy to treat these files as "fastqsanger.gz" files.
+* Define column `C` as the dataset name.
+* Define column `D` as the dataset URL (this is the location Galaxy can download the data from).
+* Tell Galaxy to treat these files as `fastqsanger.gz` files.
 
 > ### {% icon hands_on %} Hands-on: Using Tabular Inputs to the Rule Builder
 >
-> 1. We will start by stripping that header out of the table. We call rules that strip rows out the table "Filter" rules in this dialog. Click on the **Filter** popup menu button to bring up a list of filters to apply and select **First or Last N Rows**.
->   ![screenshot](../../images/rules/rules_example_1_4_filter_header.png)
+> We will start by stripping that header out of the table. We call rules that strip rows out the table `Filter rules` in this dialog.
 >
-> 2. Fill in **1** as the number of rows to filter out as shown above and click "Apply".
+> 1. **Click** on the `Filter` popup menu button to bring up a list of filters to apply.
+>    - Select `First or Last N Rows`.
+>    - Fill in `1` to strip the first row as shown below
+>    - Click `Apply`
+>    ![screenshot](../../images/rules/rules_example_1_4_filter_header.png)
 >
-> 3. Next we will define these columns for Galaxy. Click on the **Rules** popup menu button and select **Add / Modify Column Definitions**.
+>    Next we will define these columns for Galaxy.
 >
-> 4. Here we will add two column definitions. Click on the **Add Definition** button and select **Name**. Repeat this again and select **URL** instead. Then use the resulting dropdown selection box to define column "C" as "Name" and column "D" as "URL".
->   ![screenshot](../../images/rules/rules_example_1_5_mapping_edit.png)
+> 3. **Click** on the `Rules` popup menu button
+>     - Select `Add / Modify Column Definitions`.
 >
-> 5. Now click **Apply**, and you should see your new column definitions listed as in the following screenshot.
->   ![screenshot](../../images/rules/rules_example_1_6_mapping_set.png)
+>    Here we will add two column definitions.
 >
-> 6. Click the **Type** selection box at the bottom left of the upload dialog, and change the datatype from "Auto-detect" to **fastqsanger**.
->   ![screenshot](../../images/rules/rules_example_1_7_extension_set.png)
+> 4. **Click** on the `Add Definition` button and select `Name`.
+>     - Repeat this again and select `URL` instead.
+>     - Use the resulting dropdown selection box to define column `C` as `Name` and column `D` as `URL`.
+>       ![screenshot](../../images/rules/rules_example_1_5_mapping_edit.png)
 >
-> 7. You are now ready to start the upload, click the **Upload** button and wait for the upload job to complete.
+> 5. **Click** `Apply`, and you should see your new column definitions listed as in the following screenshot.
+>    ![screenshot](../../images/rules/rules_example_1_6_mapping_set.png)
+>
+> 6. **Click** the `Type` selection box at the bottom left of the upload dialog
+       - Change the datatype from `Auto-detect` to `fastqsanger`.
+>    ![screenshot](../../images/rules/rules_example_1_7_extension_set.png)
+>
+>    You are now ready to start the upload
+>
+> 7. **Click** the `Upload` button and wait for the upload job to complete.
 >    After some time, the result in this case will be six datasets in your history. The next example will show to use the rule builder to create a collection.
 {: .hands_on}
 
@@ -131,17 +161,15 @@ This example will demonstrate using such history datasets as the source for coll
 >    > In addition to directly pasting data into the Rule Based Uploader, you can also load the metadata from a dataset in your Galaxy History, or from a file in your FTP directory if the admin has enabled FTP upload
 >    {: .tip}
 >
-> 1. Upload the metadata from the [first example](#example-1-metadata) to your Galaxy
-> 2. Next open the "Rule-based" upload tab again, but this time:
->
+> 1. **Upload** the metadata from the [first example](#example-1-metadata) to your Galaxy
+> 2. **Open** the `Rule-based` upload tab again, but this time:
 >    - **Upload data as** Collection(s)
 >    - **Load tabular data from** a History Dataset
 >    - **Select dataset to load** selecting the dataset you have just uploaded
 >    ![screenshot](../../images/rules/rules_example_2_1_inputs.png)
 > 3. Now click **Build** to bring up the rule builder.
 >    ![screenshot](../../images/rules/rules_example_2_2_initial_rules.png)
-> 4. Repeat the steps from last time, except define column C as a "List Identifier" instead of Name.
->
+> 4. **Repeat** the steps from last time, except define column `C` as a `List Identifier` instead of Name.
 >    - **Filter** menu, select First or Last N Rows
 >        - Filter 1 Row
 >    - **Rules** menu, select Add / Modify Column Definitions
@@ -149,7 +177,7 @@ This example will demonstrate using such history datasets as the source for coll
 >        - Add Definition, List Identifier(s), Column C
 >    - **Type**, change "Auto-detect" to "fastqsanger"
 >
->    Rather than assiging column "C" as "Name" in this example we will assign it as a "List Identifier". This is the description of the element in the resulting dataset collection. This identifier is preserved in mapped outputs as you map tools over collections and is useful for tracking sample names, replicate numbers, conditions, etc..
+>    Rather than assiging column `C` as `Name` in this example we will assign it as a `List Identifier`. This is the description of the element in the resulting dataset collection. This identifier is preserved in mapped outputs as you map tools over collections and is useful for tracking sample names, replicate numbers, conditions, etc..
 >    ![screenshot](../../images/rules/rules_example_2_3_rules.png)
 > 5. Unlike the last example, this time we need to give the resulting collection a name before the "Upload" button becomes clickable. Enter the ENA study identifier as shown below, PRJDA60709.
 >    ![screenshot](../../images/rules/rules_example_2_4_name.png)
@@ -174,25 +202,24 @@ PRJDB3920	SAMD00034152	DRX036164	ftp.sra.ebi.ac.uk/vol1/fastq/DRR039/DRR039936/D
 
 > ### {% icon hands_on %} Hands-on: Creating a List of Dataset Pair
 >
-> 1. Open the Rule Builder
+> 1. **Open** the Rule Builder
 >
-> 2. Next open the "Rule-based" upload tab again, but this time:
+> 2. **Open** the `Rule-based` upload tab again, but this time:
+>    - *"Upload data as"*: Collection(s)
+>    - *"Load tabular data from"*: a `Pasted Table`
+>    - **Paste** the table from above
 >
->    - **Upload data as** Collection(s)
->    - **Load tabular data from** a "Pasted Table"
->    - Paste the table from above
->
-> 3. Click **Build** and proceed to the rule builder.
+> 3. **Click** `Build` and proceed to the rule builder.
 >    ![screenshot](../../images/rules/rules_example_3_2_initial_rules.png)
 >
-> 4. Like in the last example:
->    - **Filter**, select First or Last N Rows
+> 4. **Repeat** the last example with:
+>    - *"Filter"*: select First or Last N Rows
 >        - Filter 1 Row
->    - **Rules**, select Add / Modify Column Definitions
+>    - *"Rules"*: `Add / Modify Column Definitions`
 >        - Add Definition, List Identifier(s), Column C
->    - **Type**, change "Auto-detect" to "fastqsanger"
+>    - *"Type"*: `fastqsanger`
 >
-> 5. In this dataset, column D contains two URLs, separated by a semicolon `;`. So we cannot define that column as the URL directly, we will need to split it into two columns first.
+> 5. In this dataset, column `D` contains two URLs, separated by a semicolon `;`. So we cannot define that column as the URL directly, we will need to split it into two columns first.
 >    We will build a regular expression that captures two "groups" from this column with two URLs - one group for everything before the `;` and one group for everything after.
 >    - **Column**, select **Using a Regular Expression**
 >        - **Column** `D`
@@ -258,7 +285,7 @@ Lets describe how to turn these accession IDs into URLs. If you:
 
    ![Link to access FASTA file](../../images/rules/uniprot_fasta.png)
 
-4. Your browser will redirect to the fasta file 
+4. Your browser will redirect to the fasta file
 
    ![Viewing the FASTA file](../../images/rules/uniprot_fasta_url.png)
 
@@ -527,7 +554,7 @@ https://raw.githubusercontent.com/jmchilton/galaxy/apply_rules_tutorials/test-da
 > 6. The first thing we will do to this new collection is add some levels or depth to its structure. Lets assume we want to group it into "treated" and "untreated" lists and "paired" and "single" sublists below that. We can do this with the "Apply Rules" collection operation tool, which will likely be under the "Collection Operations" tool menu in your Galaxy interface. Click the tool and the very simple interface should look something like this:
 >   ![screenshot](../../images/rules/rules_apply_rules_example_4_5_apply_rules_landing.png)
 >
-> 7. This interface simply lets one pick a collection to operate on and then launch the rule builder window to work to describe and preview manipulating the metadata of that collection. Be sure your uploaded collection is selected and then click the "Edit" button to build rules to apply to the collection. 
+> 7. This interface simply lets one pick a collection to operate on and then launch the rule builder window to work to describe and preview manipulating the metadata of that collection. Be sure your uploaded collection is selected and then click the "Edit" button to build rules to apply to the collection.
 >   ![screenshot](../../images/rules/rules_apply_rules_example_4_6_apply_rules_init_flat.png)
 >
 > 8. When a flat collection is used with this tool, the rule builder will initialize a default rule to pull the list identifier out for each item of the collection as shown above. Next we will use regular expressions to build two new columns, these columns will group the datasets into "treated" and "untreated" sublists and then "single" and "paired" sublists of that. This rule is found under the "Column" menu, in this example we chose
