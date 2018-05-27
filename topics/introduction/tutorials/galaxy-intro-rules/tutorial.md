@@ -11,6 +11,7 @@ Through a series of examples, this tutorial aims to familiarize the reader with 
 
 > ###  {% icon comment %} Audience
 > This tutorial assumes a basic knowledge of using dataset collections in Galaxy but doesn't assume any particular knowledge of biology or bioinformatics. If you have not used collections with Galaxy previously, please check out the [using dataset collections]({{ site.baseurl }}/topics/introduction/galaxy-intro-collections/tutorial.html) tutorial.
+{: .comment}
 
 > ### Agenda
 >
