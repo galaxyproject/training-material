@@ -55,6 +55,31 @@ with:
 > 1. Add the BLAST tool into the `tools.yaml` file
 {: .hands_on}
 
+This list of tools can be automatically extracted from the workflow using [Ephemeris](https://ephemeris.readthedocs.io/en/latest/index.html) (which should be in the conda environment):
+
+```
+$ workflow-to-tools -w path/to/worflow -o path/to/tools.yaml
+```
+
+After the extraction, some formatting is needed:
+
+1. Add at the beginning:
+
+    ```
+    ---
+    api_key: admin
+    galaxy_instance: http://localhost:8080
+    ```
+
+2. Change the `tool_panel_section_label` to something more informative
+
+> ### {% icon hands_on %} Hands-on: Fill the `tools.yaml` from your workflow
+>
+> 1. Fill the `tools.yaml` file using your workflow and Ephemeris
+> 2. Format the `tools.yaml` file correctly
+{: .hands_on}
+
+
 ## Filling the `data-library.yaml`
 
 The data can also be integrated in the Galaxy instance inside a data libraries and then make the data shared between the users. It lets then avoid every trainees to redownload the input data.
@@ -78,7 +103,7 @@ with:
     - `url`: URL to the input file
     - `file-type`: type of the input file
 
-The URL must refer to the URL of the files in Zenodo.
+The URL must refer to the URL of the files in [Zenodo](https://zenodo.org).
 
 > ### {% icon hands_on %} Hands-on: Fill the `data-library.yaml`
 >
@@ -126,25 +151,8 @@ It is a great way to run the tutorial directly inside Galaxy. To learn more abou
 
 ## Testing the technical infrastructure
 
-Once we defined all the requirements for running the tutorial, we can test these requirements.
+Once we have defined all the requirements for running the tutorial, we can test these requirements, either in a locally running Galaxy or in a Docker container. Please see our tutorial about [Setting up Galaxy for Training](../setup-galaxy-for-training/tutorial.html) about how to test your tutorial requirements.
 
-Every topic will come with a Docker image containing the tools, data, workflows and Galaxy Interactive Tours required by each tutorial of this topic. The Docker image is described in the Dockerfile found in the `docker` directory of each topic. This file uses scripts to automatically add the files for each tutorial. The only thing to change is the name of the topic in the Dockerfile copied from the templates.
-
-> ### {% icon hands_on %} Hands-on: Testing the Docker
->
-> 1. Check that the Dockerfile uses 'sequence-analysis' as topic name
-> 2. Move to the root of the training material repository
-> 3. Build the Docker image for the topic with: `docker build -f topic/sequence-analysis/docker/Dockerfile -t training-sequence-analysis .`
->
->    This command needs to be launched a the root of training material repository because the Dockerfile uses some scripts available there to install the tools, import the data and the workflows
->
-> 4. Launch the Docker container: `docker run -d -p 8080:80 training-sequence-analysis`
-> 5. Check the Galaxy instance on [http://localhost:8080/](http://localhost:8080/):
->     1. Check the installed tools
->     2. Check the data libraries in "Shared data"
->     3. Check the workflows
->     4. Check the Galaxy Interactive Tours in "Help"
-{: .hands_on}
 
 # Conclusion
 {:.no_toc}
