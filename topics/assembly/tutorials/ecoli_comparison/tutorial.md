@@ -327,24 +327,12 @@ Now that we know the three genomes most closely related to ours, let's take a cl
 
 ## Getting sequences and annotations
 
-Using the three accession listed above we will fetch necessary data from NCBI. The following section explains how to do this for `LT906474`. You will need to repeat these steps for `CP024090` and `CP020543`.
-
-> ### {% icon hands_on %} Hands-on: Downloading annotations
-> 1. Go to [NCBI](https://www.ncbi.nlm.nih.gov/) and enter `LT906474` in the **Search NCBI** box.
-> 2. Once results load scroll to the **Assembly** section (under heading **Genomes**) and click on it. 
-> 3. After the page click **Download GenBank assembly** link.
-> 4. You will need to right click the links to **Copy linl address**
-> 5. Paste these links into Galaxy upload interface as shown in the following video (note that each URL is pasted into an individual Paste box in teh upload interface is set to `fasta`  and NOT `fasta.gz`)
+> ### {% icon hands_on %} Hands-on: Uploading sequences and annotations
+> Using the three accession listed above we will fetch necessary data from NCBI. Follow the steps in the video below:
 >
 >----------
-><div style="padding:56.25% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/271758643?title=0&byline=0&portrait=0" style="position:absolute;top:0;left:0;width:100%;height:100%;" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
+><div style="padding:56.25% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/272379016?title=0&byline=0&portrait=0" style="position:absolute;top:0;left:0;width:100%;height:100%;" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
 >-----------
->
->This will create a collection of three genomic sequences. Now repeat the same steps to upload annotation data as shown here:
->
->--------
-><div style="padding:56.25% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/271754600?title=0&byline=0&portrait=0" style="position:absolute;top:0;left:0;width:100%;height:100%;" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
->-----------------
 >
 >At the end of this you should have two collections: one containing genomic sequences and another containing annotations. 
 {: .hands_on}
@@ -356,33 +344,38 @@ Now we will perform alignments between our assembly and the three most closely r
 > ### {% icon hands_on %} Hands-on: Aligning again
 > 1. Open **LASTZ** interface
 > 2. Change **Select TARGET sequence(s) to align against** to `from your history`
-> 3. In **Select a reference dataset** click on the folder icon (![](../../images/folder-o.png)) and select the collection of the three genomes (in the video above we called it `best hits`). 
+> 3. In **Select a reference dataset** click on the folder icon (![](../../images/folder-o.png)) and select the collection of the three genomes (in the video above we called it `DNA`). 
 > 4. In **Select QUERY sequence(s)** choose our assembly which was prepared in the beginning (it has a name `Text transformation on data...`).
 > 5. Find section of LASTZ interface called **Chaining** and expand it.
 > 6. Set **Perform chaining of HSPs with no penalties** to `Yes`
 > 7. Find section of LASTZ interface called **Output** and expand it.
 > 8. Set **Specify the output format** to `Customized general`
 > 9. Within **Select which fields to include** select the following:
->	* `score`
->	* `name1`
->	* `strand`
->	* `zstart`
->	* `end1`
->	* `length1`
->	* `name2`
->	* `strand2`
->	* `zstart2`
->	* `end2`
->	* `identity`
+>	* `score` - alignment score
+>	* `name1` - name of the *target* sequence
+>	* `strand` - strand for the *target* sequence
+>	* `zstart` - 0-based start of alignment in *target*
+>	* `end1` - end of alignment in *target*
+>	* `length1` - length of alignment in *target*
+>	* `name2` - name of *query* sequence
+>	* `strand2` - strand for the *query* sequence
+>	* `zstart2` - 0-based start of alignment in *query*
+>	* `end2` - end of alignment in *query*
+>	* `identity` - alignment identity 
+>	* `number` - alignment number 
 > 9. In **Create a dotplot representation of alignments?** select `Yes`
 > 10. Run LASTZ by clicking **Execute** button
 {: .hands_on}
 
 Because we chose to produce Dot Plots as well LASTZ will generate two collections: one containing alignment data and the other containing DotPlots in PNG format:
 
-![Dot Plots](../../images/three_dot_plots.png "Dot Plot representations of alignments between three <i>E. coli</i> genomes and our assembly. Query (Y-axis) is indicated above each dot plot. Target (X-axis) is our assembly. Red circle indicates a region deleted in our assembly.")
+![Dot Plots](../../images/three_dot_plots.png "Dot Plot representations of alignments between three <i>E. coli</i> genomes and our assembly. Query (Y-axis) is indicated above each dot plot. Query (X-axis) is our assembly. Red circle indicates a region deleted in our assembly.")
 
-A quick conclusion that can be drawn here is that there is a large inversion in CP020543 and deletion in our assembly. 
+A quick conclusion that can be drawn here is that there is a large inversion in CP020543 and deletion in our assembly. If you are not sure how to interpret Dot Plots here is a great explanation by [Michael Schatz](http://schatz-lab.org/):
+
+![Interpreting Dot Plots](../../images/dotplot.png "A quick reference to interpreting Dot Plots. Our case is identical to <i>Insertion into Reference</i> shown in the upper left.")
+
+For a moment let's leave LASTZ result and create a browser that would allows us to display our results. 
 
 ## Producing a Genome Browser for this experiment
 
@@ -447,6 +440,32 @@ The resulting dataset contains four sequences: three genomes plus our assembly. 
 > ![Empty IGV](../../images/igv_empty.png "IGV instance displaying <i>Hybrid</i> genome without tracks")
 {: .hands_on}
 
+## Preparing and displaying alignments
+
+[Above](#-hands-on-aligning-again) we computed alignments using LASTZ. Because we ran LASTZ on a collection containing genomic sequences, LASTZ produced a collection as well (actually two collections: one congtaining alignments an the other with dot plots). To display alignments in the browser 
+
+Now that we have a browser set up we can start visualizing. We will start with visualizing alignments we have produced with LASTZ just a few steps ago. Output of LASTZ looks like this:
+
+```
+       1          2 3      4      5      6       7 8      9     10            11    12  13
+------------------------------------------------------------------------------------------
+10141727 CP020543.1 +     48 106157 106109 Ecoli_C +      0 106109 106107/106109 100.0%  1
+    5465 CP020543.1 + 121267 121367    100 Ecoli_C + 109317 109418    76/100     76.0%   2
+    4870 CP020543.1 + 159368 159512    144 Ecoli_C + 128706 128828    95/115     82.6%   3
+```
+
+One immediate problem is `%` character in column 12 (alignment identity). We need to remove it. 
+
+The columns were chosen by us [above](#-hands-on-aligning-again) and represent coordinates of alignment blocks identified by LASTZ. Because these are coordinates they can be easily visualized in the browser we just created. There is only problem though, to visualize these alignments we need to convert them into a format that the browser would understand. One of these formats is [BED](https://genome.ucsc.edu/FAQ/FAQformat.html#format1). In one of its simplest forms it has six columns:
+
+ 1. Chromosome ID
+ 2. Start
+ 3. End
+ 4. Name of the feature
+ 5. Score
+ 6. Strand (`+`, `-`, or `.` for no strand data)
+
+
 
 Short introduction about this subpart.
 
@@ -458,4 +477,4 @@ Short introduction about this subpart.
 # Conclusion
 {:.no_toc}
 
-Conclusion about the technical key points. And then relation between the technics and the biological question to end with a global view.
+Conclusion about the technical key points. And then relation between the technical and the biological question to end with a global view.
