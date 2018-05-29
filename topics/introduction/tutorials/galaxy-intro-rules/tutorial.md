@@ -24,7 +24,7 @@ Through a series of examples, this tutorial aims to familiarize the reader with 
 # Uploading Datasets with Rules
 
 
-This approach could be used to manipulate lists of uploads coming from many different formats, but we will start with a tabular description of files for a study from the [European Nucleotide Archive](https://www.ebi.ac.uk/ena). We wlil be using the data from a study of [16s ribosomal RNA](https://www.ebi.ac.uk/ena/data/view/PRJDA60709).
+This approach could be used to manipulate lists of uploads coming from many different formats, but we will start with a tabular description of files for a study from the [European Nucleotide Archive](https://www.ebi.ac.uk/ena). We will be using the data from a study of [16s ribosomal RNA](https://www.ebi.ac.uk/ena/data/view/PRJDA60709).
 
 > ### {% icon hands_on %} Hands-on: Downloading Data from ENA
 > To start, navigate to the above study and click the option to "Select columns". Here we will narrow the set of columns we consider to just a few relevant to uploading these files to Galaxy.
@@ -81,7 +81,7 @@ At first glance, this may be feel like Excel or another spreadsheet program and 
 
 * Manually modifying this metadata is not reproducible - we will not belabor the point here but check out [Why not use excel for this?]({{ site.baseurl }}/topics/introduction/tutorials/galaxy-intro-strands/tutorial.html#why-not-use-excel-for-this) for more context. Building up rules for modifying this metadata will allow Galaxy to track and report your manipulations (providing tracibility) and apply them to new sets of files (providing reproducibility).
 * Manually modifying this metadata is error prone - we believe defining rules and treating the metadata in a systematic way minimizes the possibility to manual errors. These errors can be very hard to detect for large sets of data.
-* Manually modifying data is not scalable - this rule-based technique potentailly scales to importing tens of thousands of datasets.
+* Manually modifying data is not scalable - this rule-based technique potentially scales to importing tens of thousands of datasets.
 
 So rather than modifying the data, we will define rules for manipulating it and setting up "column definitions" that tell Galaxy how to use the metadata during upload or collection creation.
 
@@ -148,7 +148,7 @@ This example will demonstrate using such history datasets as the source for coll
 >        - Add Definition, List Identifier(s), Column C
 >    - **Type**, change "Auto-detect" to "fastqsanger"
 >
->    Rather than assiging column "C" as "Name" in this example we will assign it as a "List Identifier". This is the description of the element in the resulting dataset collection. This identifier is preserved in mapped outputs as you map tools over collections and is useful for tracking sample names, replicate numbers, conditions, etc..
+>    Rather than assigning column "C" as "Name" in this example we will assign it as a "List Identifier". This is the description of the element in the resulting dataset collection. This identifier is preserved in mapped outputs as you map tools over collections and is useful for tracking sample names, replicate numbers, conditions, etc..
 >    ![screenshot](../../images/rules/rules_example_2_3_rules.png)
 > 5. Unlike the last example, this time we need to give the resulting collection a name before the "Upload" button becomes clickable. Enter the ENA study identifier as shown below, PRJDA60709.
 >    ![screenshot](../../images/rules/rules_example_2_4_name.png)
@@ -487,7 +487,7 @@ So use either the SRA exporter tool or download the CSV file with fake URLs. If 
 
 To start this example, we will first upload a simple, flat collection of data. The data files we will use
 will be the same as those used by the [DESeq2 Vignette](https://bioconductor.org/packages/devel/bioc/vignettes/DESeq2/inst/doc/DESeq2.html)
-from the [Pasilla Biooconductor Package](https://bioconductor.org/packages/release/data/experiment/html/pasilla.html).
+from the [Pasilla Bioconductor Package](https://bioconductor.org/packages/release/data/experiment/html/pasilla.html).
 
 Here is the metadata we'll be using for this
 
