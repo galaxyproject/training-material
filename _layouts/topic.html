@@ -50,6 +50,9 @@ layout: base
 
             {% for material in topic.material %}
                 {% if material.enable != "false" %}
+                        <script type="application/ld+json">
+                            {% include material.jsonld content=material %}
+                        </script>  
                     <tr>
                         <td>
                             {{ material.title }}
