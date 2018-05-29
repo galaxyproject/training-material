@@ -442,9 +442,14 @@ The resulting dataset contains four sequences: three genomes plus our assembly. 
 
 ## Preparing and displaying alignments
 
-[Above](#-hands-on-aligning-again) we computed alignments using LASTZ. Because we ran LASTZ on a collection containing genomic sequences, LASTZ produced a collection as well (actually two collections: one congtaining alignments an the other with dot plots). To display alignments in the browser 
+[Above](#-hands-on-aligning-again) we computed alignments using LASTZ. Because we ran LASTZ on a collection containing genomic sequences, LASTZ produced a collection as well (actually two collections: one containing alignments an the other with dot plots). To display alignments in the browser we need to do several things:
 
-Now that we have a browser set up we can start visualizing. We will start with visualizing alignments we have produced with LASTZ just a few steps ago. Output of LASTZ looks like this:
+ 1. Fix unwanted `%` signs in LASTZ output
+ 2. Create names for alignment blocks
+ 3. Convert LASTZ output into [BED](https://genome.ucsc.edu/FAQ/FAQformat.html#format1) format
+ 4. Create a single BED track containing alignments against all four genomes.
+
+To begin, let's look at the LASTZ output:
 
 ```
        1          2 3      4      5      6       7 8      9     10            11    12  13
@@ -454,7 +459,51 @@ Now that we have a browser set up we can start visualizing. We will start with v
     4870 CP020543.1 + 159368 159512    144 Ecoli_C + 128706 128828    95/115     82.6%   3
 ```
 
-One immediate problem is `%` character in column 12 (alignment identity). We need to remove it. 
+One immediate problem is `%` character in column 12 (alignment identity). We need to remove it. For this we will use **SED** tool that should be familiar to us from [previous hands-on exercises](#-hands-on-cleaning-sequence-names):
+
+> ### {% icon hands_on %} Hands-on: Removing `%` character from LASTZ output
+>
+> 1. Open **Text transformation with sed** {% icon tool %} tool
+> 2. In **File to process** click on the folder icon (![](../../images/folder-o.png)) and select the output of LASTZ (called `LASTZ on collection ...: mapped reads` ).
+> 3. Inside **SED program** box enter the following expression (so called [Regular Expression](https://en.wikipedia.org/wiki/Regular_expression): `s/\%//`. Here we are matching percent character `%` (it is pre-pended with `\` because it is a special character, but we want `sed` to interpret it literally, as the percentage sign) and substituting this with nothing. 
+> 4. Click **Execute**
+{: .hands_on}
+
+As a result LASTZ output will look like this (no `%` signs):
+
+```
+      1          2 3      4      5      6       7 8      9     10            11    12  13
+------------------------------------------------------------------------------------------
+10141727 CP020543.1 +     48 106157 106109 Ecoli_C +      0 106109 106107/106109 100.0  1
+    5465 CP020543.1 + 121267 121367    100 Ecoli_C + 109317 109418    76/100     76.0   2
+    4870 CP020543.1 + 159368 159512    144 Ecoli_C + 128706 128828    95/115     82.6   3
+```
+
+One of the fields chosen by us for [LASTZ run](#-hands-on-aligning-again) is `number`. This is an incrementing number given by LASTZ to every alignment block so it can be uniquely identified. The problem is that by running LASTZ on a collection on three genomes it generated number for each output independently starting with `1` each time. So these alignment identified are unique within each individual run but are redundant for multiple runs. We can fix that by pre-pending each alignment identified (column 13) with name of the target sequence (column 2). This would create alignment identified that are truly unique. For example, in case of LASTZ output shown above alignment identifier `1` will become `CP020543.11`, `2` will become `CP020543.12` and so on. Here is how we will do that:
+
+> ### {% icon hands_on %} Hands-on: Creating unique alignment identifiers
+> 
+> 1. Open **Merge Columns together** tool.
+> 2. In **Select data** choose the output of the previous step (called `Text transformation of collection ...`)
+> 3. In **Merge column** select `Column: 2` (this is Targe sequence name)
+> 4. In **with column** select `Column: 13` (this is the alignment block identified created by LASTZ)
+> 5. Click **Execute**
+{: .hands_on}
+
+The output will look like this:
+
+```
+     1          2 3      4      5      6       7 8      9     10            11    12  13           14
+-----------------------------------------------------------------------------------------------------
+10141727 CP020543.1 +     48 106157 106109 Ecoli_C +      0 106109 106107/106109 100.0  1 CP020543.11 
+    5465 CP020543.1 + 121267 121367    100 Ecoli_C + 109317 109418    76/100     76.0   2 CP020543.12 
+    4870 CP020543.1 + 159368 159512    144 Ecoli_C + 128706 128828    95/115     82.6   3 CP020543.13 
+```
+
+the tool added a new column (Column 14) containing a merge between the target name and alignment id. 
+
+Our next goals is to convert this into a format that will be acceptable to the genome browser [created above](#producing-a-genome-browser-for-this-experiment)
+
 
 The columns were chosen by us [above](#-hands-on-aligning-again) and represent coordinates of alignment blocks identified by LASTZ. Because these are coordinates they can be easily visualized in the browser we just created. There is only problem though, to visualize these alignments we need to convert them into a format that the browser would understand. One of these formats is [BED](https://genome.ucsc.edu/FAQ/FAQformat.html#format1). In one of its simplest forms it has six columns:
 
