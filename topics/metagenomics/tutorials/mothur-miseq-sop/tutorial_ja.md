@@ -971,27 +971,23 @@ Mothur にはあまり視覚化ツールが組み込まれていませんが、�
 >   - "Input file" to taxonomy output from Classify.otu (collection)
 {: .hands_on}
 
-The resulting file is an HTML file containing an interactive visualization. For instance try double-clicking the
-innermost ring labeled "Bacteria"
+結果のファイルはインタラクティブな視覚化を含む HTML ファイルです。例えば "Bacteria" とラベルされている最も内側のリングをダブルクリックしてみてください 
 
 ![Krona](../../images/krona.png)
 
 > ### {% icon question %} Question
 >
->  What percentage of your sample was labelled `Lactobacillus`?
+>  あなたのサンプルの何パーセントが `Lactobacillus` とラベルされましたか？
 >
 > <details>
 >   <summary> クリックして解答を表示</summary>
->   Explore the Krona plot, double click on Firmicutes, here you should see Lactobacillus
->   clearly (16% in our case), click on this segment and the right-hand side will show you the percentages at
->   any point in the hierarchy (here 5% of all)
+>   Krona プロットを探って、Firmicutes をダブルクリックすると、Lactobacillus が何パーセントあるか明らかになるはずで（私たちの場合は16％）、このセグメントを右クリックすると階層内の任意のポイントでのパーセンテージが表示されます（ここでは全体の5％） 
 >
 >  <img src="../../images/krona_lacto.png" alt="image showing view with Lactobacillus highlighted">
 > </details>
 {: .question}
 
-Well done! you have completed the basics of the mothur SOP. Below are some more exercises for those who wish to
-go into more details about statistical significance testing and population-level analysis.
+よくできました！あなたは mothur の SOP の基本を修了しました。統計的な有意性テストや母集団レベルの解析についてより詳細なことに進みたい場合は以下の演習を行ってください。 
 
 # Extra Credit
 
