@@ -19,7 +19,7 @@ tutorial_name: methylation-seq
 >
 {: .agenda}
 
-This tutorial is based on [I-Hsuan Lin et al.: 'Hierarchical Clustering of Breast Cancer Methylomes Revealed Differentially Methylated and Expressed Breast Cancer Genes'](https://dx.doi.org/10.1371/journal.pone.0118453).
+This tutorial is based on [I-Hsuan Lin et al.: 'Hierarchical Clustering of Breast Cancer Methylomes Revealed Differentially Methylated and Expressed Breast Cancer Genes'](https://doi.org/10.1371/journal.pone.0118453).
 
 The data we use in this tutorial is available at [Zenodo](https://zenodo.org/record/557099).
 

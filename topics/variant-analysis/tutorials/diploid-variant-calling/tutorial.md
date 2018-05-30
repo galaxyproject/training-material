@@ -140,7 +140,7 @@ In this example we will perform variant calling and annotation using [genome in 
 * HG003- NA24149 - hu6E4515 (father)
 * HG004- NA24143 - hu8E87A9 (mother)
 
-Yet for a quick tutorial these datasets are way too big, so we created a [downsampled dataset](https://dx.doi.org/10.5281/zenodo.60520). This dataset was produced by mapping the trio reads against `hg19` version of the human genome, merging the resulting bam files together (we use readgroups to label individual reads so they can be traced to each of the original individuals), and restricting alignments to a small portion of chromosome 19 containing the [*POLRMT*](http://www.ncbi.nlm.nih.gov/gene?cmd=Retrieve&dopt=Graphics&list_uids=5442) gene.
+Yet for a quick tutorial these datasets are way too big, so we created a [downsampled dataset](https://doi.org/10.5281/zenodo.60520). This dataset was produced by mapping the trio reads against `hg19` version of the human genome, merging the resulting bam files together (we use readgroups to label individual reads so they can be traced to each of the original individuals), and restricting alignments to a small portion of chromosome 19 containing the [*POLRMT*](http://www.ncbi.nlm.nih.gov/gene?cmd=Retrieve&dopt=Graphics&list_uids=5442) gene.
 
 > ### {% icon hands_on %} Hands-on: Variant calling
 >

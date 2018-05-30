@@ -779,7 +779,7 @@ This is not a perfect world. But this is pretty darn good!
 > Green, most or all species have been sampled; blue, this habitat has not been exhaustively sampled; red,
 > species rich habitat, only a small fraction has been sampled.
 >
-> (*A Primer on Metagenomics*, Wooley et al. 2010, https://dx.doi.org/10.1371/journal.pcbi.1000667)
+> (*A Primer on Metagenomics*, Wooley et al. 2010, https://doi.org/10.1371/journal.pcbi.1000667)
 {: .tip}
 
 Now that we have assessed our error rates we are ready for some real analysis.
