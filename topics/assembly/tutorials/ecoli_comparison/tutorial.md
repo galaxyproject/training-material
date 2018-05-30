@@ -500,19 +500,242 @@ The output will look like this:
     4870 CP020543.1 + 159368 159512    144 Ecoli_C + 128706 128828    95/115     82.6   3 CP020543.13 
 ```
 
-the tool added a new column (Column 14) containing a merge between the target name and alignment id. 
+the tool added a new column (Column 14) containing a merge between the target name and alignment id. Now we can differentiate between alignment blocks that exist between, for example, `CP020543.1` and `LT906474.1` because they will have accessions embedded within alignment block IDs. For example, the first alignment between `CP020543.1` and our assembly `Ecoli_C` will have alignment block id `CP020543.11`, while the 225th alignment between `LT906474.1` and `Ecoli_C` will have ID `LT906474.1225`. Because of this we can collapse the entire collection of alignments into a single dataset:
 
-Our next goals is to convert this into a format that will be acceptable to the genome browser [created above](#producing-a-genome-browser-for-this-experiment)
+> ### {% icon hands_on %} Hands-on: Collapsing all alignment info into a single dataset
+> 1. Open **Collapse Collection** tool.
+> 2. In **Collection of files to collapse** click on the folder icon (![](../../images/folder-o.png)) and select the output of the previous step (called `Merge Columns on collection...`)
+> 3. Leave all other options as they are - no changes needed. 
+> 4. Click **Execute**
+{: .hands_on}
 
+This will produce a single datasets combining all alignment info. We can tell which alignments are between which genomes because we have set identifiers such as `CP020543.13`. 
 
-The columns were chosen by us [above](#-hands-on-aligning-again) and represent coordinates of alignment blocks identified by LASTZ. Because these are coordinates they can be easily visualized in the browser we just created. There is only problem though, to visualize these alignments we need to convert them into a format that the browser would understand. One of these formats is [BED](https://genome.ucsc.edu/FAQ/FAQformat.html#format1). In one of its simplest forms it has six columns:
+Our next goals is to convert this into a format that will be acceptable to the genome browser [created above](#producing-a-genome-browser-for-this-experiment). One of such formats is [BED](https://genome.ucsc.edu/FAQ/FAQformat.html#format1). In one of its simplest forms (there is one even simpler - 3 column BED) it has six columns:
 
  1. Chromosome ID
  2. Start
  3. End
  4. Name of the feature
  5. Score
- 6. Strand (`+`, `-`, or `.` for no strand data)
+ 6. Strand (`+`, `-`, or `.` for no strand data).
+
+Let's again look at the data we generated at the last step:
+
+```
+     1          2 3      4      5      6       7 8      9     10            11    12  13           14
+-----------------------------------------------------------------------------------------------------
+10141727 CP020543.1 +     48 106157 106109 Ecoli_C +      0 106109 106107/106109 100.0  1 CP020543.11 
+    5465 CP020543.1 + 121267 121367    100 Ecoli_C + 109317 109418    76/100     76.0   2 CP020543.12 
+    4870 CP020543.1 + 159368 159512    144 Ecoli_C + 128706 128828    95/115     82.6   3 CP020543.13 
+```
+
+alignments are regions of high similarity between two sequences. Therefore each alignment block has two sets of coordinates associated with it: start/end in the first sequences (target) and start/end in the second sequence (query). But BED only has one set of coordinates. Thus we can create two BEDs: one using coordinates from the target and the other one from query. The first file will depict alignment data from the standpoint of target sequences `CP020543.1`, `CP024090.1`, `LT906474.1` and the second from the standpoint of query - our own assembly [we called](#-hands-on-fixing-assembly) `Ecoli_C`. In the first BED column 1 will contain names of targets (`CP020543.1`, `CP024090.1`, and `LT906474.1`). In the second BED column 1 will contain name of our assembly `Ecoli_C`. To create the first bed we will cut six columns from the dataset produced at the last step. Specifically, to produce target BED will cut columns 2, 4, 5, 14, 12, and 8. To produce query BED columns 7,9,10,14,12,8 will be cut.
+
+> ### {% icon warning %} There are multiple **CUT** tools!
+> The Hands-On box below uses **Cut** tool. Beware that some Galaxy instances contain multiple **Cut** tools. The one that is used below is called **Cut columns from a table** while the other one, which will NOT use is called **Cut columns from a table (cut)**. It is a small difference, but tools are different.
+{: .warning-box}
+
+> ### {% icon hands_on %} Hands-on: Creating target BED
+> 1. Open **Cut columns from a table** tool.
+> 2. In **Cut columns** box enter `c2,c4,c5,c14,c12,c8` (look at the data shown above and definition of BED to see why we make these choices.)
+> 3. In **From** select the output of the previous step (called `Collapse Collection on data ...`)
+> 4. Click **Execute**
+
+This will produce a dataset looking like this:
+
+```
+         1      2      3           4     5 6
+--------------------------------------------
+CP020543.1     48 106157 CP020543.11 100.0 +
+CP020543.1 121267 121367 CP020543.12  76.0 +
+CP020543.1 159368 159512 CP020543.13  82.6 +
+```
+
+Now let's do a similar operation to create query BED:
+
+> ### {% icon hands_on %} Hands-on: Creating query BED
+> 1. Open **Cut columns from a table** tool. (In fact you can just click the rerun button (![](../../images/refresh.png)) at the previous step and change column names)
+> 2. In **Cut columns** box enter `c7,c9,c10,c14,c12,c8` (look at the data shown above and definition of BED to see why we make these choices.)
+> 3. In **From** select the output of *collection collapse* (a step before the last step!) (called `Collapse Collection on data ...`)
+> 4. Click **Execute**
+{: .hands_on}
+
+This will produce a dataset looking like this:
+
+```
+Ecoli_C      0 106109 CP020543.11 100.0 +
+Ecoli_C 109317 109418 CP020543.12  76.0 +
+Ecoli_C 128706 128828 CP020543.13  82.6 +
+```
+
+Now we can merge these two datasets into a single BED datasets that will ready for displaying in the browser:
+
+> ### {% icon hands_on %} Hands-on: Merging Target and Query BEDs
+>
+> 1. Open **Concatenate datasets tail-to-head** tool
+> 2. Click **Insert Dataset** button
+> 3. For **Concatenate Dataset** select the output of the step before last (called `Cut on data...`)
+> 4. For **1: Dataset** select the output of the previous step (also called `Cut on data...`)
+> 5. Click **Execute**.
+{: .hands_on}
+
+Now we have a single BED that combines everything. Before displaying it at the browser we need to tell Galaxy that it is in fact a BED dataset:
+
+> ### {% icon hands_on %} Hands-on: Changing dataset type
+> 
+> 1. Click the pencil (![](../../images/pencil.png)) icon next to the last dataset in the history.
+> 2. Once we are at it let's also rename the dataset to `Alignments BED` by changing the content of the **Name** box.
+> 3. Click **Datatypes** (![](../../images/disks.png)) tab
+> 4. In the dropdown **New Type** find `bed`
+> 5. Click **Change datatype** button.
+{: .hands_on}
+
+Now we are ready to display these data in the browser (make sure the browser we've created [above](#-hands-on-starting-a-custom-igv-browser) is open:
+
+> ### {% icon hands_on %} Hands-on: Display alignments in the browser
+> 
+> 1. Expand the latest data (the one we just changed to `bed` above)
+> 2. You will see **display with IGV local**. Click this.
+> 3. After a few minutes you will see alignments rendered within the browser.
+> 4. If you get `Could not locate genome:` error ignore it and click **OK**.
+> 5. At the time of writing dataset sent by Galaxy to IGV have uninformative names such as `galaxy_bbd44h445645h45454`. While this will soon be fixed we can deal with it by renaming the displayed track manually by right clicking on IGV sidebar and choosing **Rename Track..** option. 
+{: .hands_on}
+
+The result will look like this:
+
+![IGV Collage](../../images/igv_panels.png "A collage of IGV screen-shots showing alignment tracks for the four genomes. The deletion from our assembly is highlighted with the red circle. It looks like a gap in alignments because target genomes are longer than our assembly by the amount equal to the length of the deletion.")
+
+Now it is time to think about the genes.
+
+## Analyzing the deletion for gene content
+
+Earlier we [downloaded](#-hands-on-uploading-sequences-and-annotations) gene annotations for the three genomes most closely related to our assembly. The data was downloaded as a collection containing annotation for `CP020543.1`, `CP024090.1`, and `LT906474.1`. The annotation data contains multiple columns described by NCBI as follows (you can look at the actual data by finding the annotation collection from above (called `GENES` if you followed the video)):
+
+```
+Tab-delimited text file reporting locations and attributes for a subset of 
+annotated features. Included feature types are: gene, CDS, RNA (all types), 
+operon, C/V/N/S_region, and V/D/J_segment. 
+
+The file is tab delimited (including a #header) with the following columns:
+col 1: feature: INSDC feature type
+col 2: class: Gene features are subdivided into classes according to the gene 
+       biotype computed based on the set of child features for that gene. See 
+       the description of the gene_biotype attribute in the GFF3 documentation
+       for more details: ftp://ftp.ncbi.nlm.nih.gov/genomes/README_GFF3.txt
+       ncRNA features are subdivided according to the ncRNA_class. CDS features
+       are subdivided into with_protein and without_protein, depending on 
+       whether the CDS feature has a protein accession assigned or not. CDS 
+       features marked as without_protein include CDS features for C regions and 
+       V/D/J segments of immunoglobulin and similar genes that undergo genomic 
+       rearrangement, and pseudogenes.
+col 3: assembly: assembly accession.version
+col 4: assembly_unit: name of the assembly unit, such as "Primary Assembly", 
+       "ALT_REF_LOCI_1", or "non-nuclear"
+col 5: seq_type: sequence type, computed from the "Sequence-Role" and 
+       "Assigned-Molecule-Location/Type" in the *_assembly_report.txt file. The
+       value is computed as:
+       if an assembled-molecule, then reports the location/type value. e.g. 
+       chromosome, mitochondrion, or plasmid
+       if an unlocalized-scaffold, then report "unlocalized scaffold on <type>".
+       e.g. unlocalized scaffold on chromosome
+       else the role, e.g. alternate scaffold, fix patch, or novel patch
+col 6: chromosome
+col 7: genomic_accession
+col 8: start: feature start coordinate (base-1). start is always less than end
+col 9: end: feature end coordinate (base-1)
+col10: strand
+col11: product_accession: accession.version of the product referenced by this 
+       feature, if exists
+col12: non-redundant_refseq: for bacteria and archaea assemblies, the 
+       non-redundant WP_ protein accession corresponding to the CDS feature. May
+       be the same as column 11, for RefSeq genomes annotated directly with WP_
+       RefSeq proteins, or may be different, for genomes annotated with 
+       genome-specific protein accessions (e.g. NP_ or YP_ RefSeq proteins) that
+       reference a WP_ RefSeq accession.
+col13: related_accession: for eukaryotic RefSeq annotations, the RefSeq protein
+       accession corresponding to the transcript feature, or the RefSeq 
+       transcript accession corresponding to the protein feature.
+col14: name: For genes, this is the gene description or full name. For RNA, CDS,
+       and some other features, this is the product name.
+col15: symbol: gene symbol
+col16: GeneID: NCBI GeneID, for those RefSeq genomes included in NCBI's Gene 
+       resource
+col17: locus_tag
+col18: feature_interval_length: sum of the lengths of all intervals for the 
+       feature (i.e. the length without introns for a joined feature)
+col19: product_length: length of the product corresponding to the 
+       accession.version in column 11. Protein product lengths are in amino acid
+       units, and do not include the stop codon which is included in column 18.
+       Additionally, product_length may differ from feature_interval_length if 
+       the product contains sequence differences vs. the genome, as found for 
+       some RefSeq transcript and protein products based on mRNA sequences and 
+       also for INSDC proteins that are submitted to correct genome 
+       discrepancies.
+col20: attributes: semi-colon delimited list of a controlled set of qualifiers.
+       The list currently includes:
+       partial, pseudo, pseudogene, ribosomal_slippage, trans_splicing, 
+       anticodon=NNN (for tRNAs), old_locus_tag=XXX 
+```
+
+Our objective is convert these data into BED. In this analysis we want to initially concentrate on protein coding regions. To do this let's select all lines from the annotation datasets that contain the term `CDS`:
+
+> ### {% icon hands_on %} Hands-on: Retain CDS rows in annotation datasets
+> 1. Open **Select lines that match an expression** tool
+> 2. In **Select lines from** click on the folder icon (![](../../images/folder-o.png)) and select the collection containing annotations(called `GENES`)
+> 3. In **the pattern** type `^CDS`. This is because we want to retain all lines that begin (`^`) with `CDS`.
+> 4. Click **Execute** 
+{: .hands_on}
+
+this will produce a collection with tree datasets just like the original `GENES` collection but containing only CDS data. Next we need to cut out only those columns that need to be included into BED. These columns are 8 (start), 9 (end), 14 (gene name), 19 (product length that will be used BED score), and c10 (strand). **Note** that we do not select a column corresponding to genome name. We will add this information on the next step. 
+
+> ### {% icon hands_on %} Hands-on: Cutting columns form annotation data
+>
+> 1. Open **Cut columns from a table** tool. 
+> 2. In **Cut columns** type `c8,c9,c14,c19,c10`
+> 3. In **From** click on the folder icon (![](../../images/folder-o.png)) and select the collection produced at the previous step (`Select on collection...`)
+> 4. Click **Execute**
+{: .hands_on}
+
+This will produce a collection with each element containing data like this:
+
+```
+   1    2                                              3   4 5
+--------------------------------------------------------------
+  49 1452 chromosomal replication initiator protein DnaA 467 +
+1457 2557 DNA polymerase III subunit beta                366 +
+2557 3630 DNA replication and repair protein RecF        357 +
+```
+
+as we mentioned above this datasets lacks genome IDs such as `CP020543.1`. However, the individual elements in the collection we've created already have genomes IDs (if you are unsure make sure you followed direction when [creating collection containing annotations](#-hands-on-uploading-sequences-and-annotations)). We will leverage this while collapsing this collection into a single dataset:
+
+> ### {% icon hands_on %} Hands-on: Collapsing annotations in to a single BED dataset
+> 1. Open **Collapse Collection** tool.
+> 2. In **Collection of files to collapse** click on the folder icon (![](../../images/folder-o.png)) and select the output of the previous step (`Cut on collection...`)
+> 3. Set **Append File name** to `Yes` 
+> 4. In **Where to add dataset name** choose "Same line and each line in dataset"
+> 5. Click **Execute**
+{: .hands_on}
+
+Resulting data looks like this:
+
+```
+         1    2    3                                              4   5 6
+-------------------------------------------------------------------------
+CP020543.1   49 1452 chromosomal replication initiator protein DnaA 467 +
+CP020543.1 1457 2557 DNA polymerase III subunit beta                366 +
+CP020543.1 2557 3630 DNA replication and repair protein RecF        357 +
+```
+
+you can see that the genome ID is now appended in the beginning and this dataset looks like a legitimate BED that can be displayed in IGV. The one thing that remains is to tell Galaxy that it is BED as [we did before](#-hands-on-changing-dataset-type). After the format of the last dataset is set to BED it can displayed at IGV by clicking **display with IGV local** link:
+
+## Extracting deleting genes programmatically
+
+Above we've been able to look at genes that appear deleted in our assembly. But what we really need is to create a list that can interrogate further. For example, which of these genes are essential. We can easily create such a list by overlapping coordinates of genes with coordinates of our deletion. But to do this we first need to create a set of coordinates corresponding to the deletion. This can be done by complementing coordinates of alignments we created [above](#-hands-on-changing-dataset-type):
+
+![Complementing genomic ranges](../../images/complement.png "Any set of genomic intervals can <i>complemented</i> or converted into a set of intervals that do not overlap the original set (image from BEDTools documentation).")
+
+
 
 
 
