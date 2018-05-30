@@ -511,14 +511,16 @@ the tool added a new column (Column 14) containing a merge between the target na
 
 This will produce a single datasets combining all alignment info. We can tell which alignments are between which genomes because we have set identifiers such as `CP020543.13`. 
 
-Our next goals is to convert this into a format that will be acceptable to the genome browser [created above](#producing-a-genome-browser-for-this-experiment). One of such formats is [BED](https://genome.ucsc.edu/FAQ/FAQformat.html#format1). In one of its simplest forms (there is one even simpler - 3 column BED) it has six columns:
-
- 1. Chromosome ID
- 2. Start
- 3. End
- 4. Name of the feature
- 5. Score
- 6. Strand (`+`, `-`, or `.` for no strand data).
+> ### {% icon tip %} Tip: BED format 
+> Our next goals is to convert this into a format that will be acceptable to the genome browser [created above](#producing-a-genome-browser-for-this-experiment). One of such formats is [BED](https://genome.ucsc.edu/FAQ/FAQformat.html#format1). In one of its simplest forms (there is one even simpler - 3 column BED) it has six columns:
+>
+> 1. Chromosome ID
+> 2. Start
+> 3. End
+> 4. Name of the feature
+> 5. Score (must be between 0 and 1000)
+> 6. Strand (`+`, `-`, or `.` for no strand data).
+{: .tip}
 
 Let's again look at the data we generated at the last step:
 
@@ -598,9 +600,13 @@ Now we are ready to display these data in the browser (make sure the browser we'
 > 1. Expand the latest data (the one we just changed to `bed` above)
 > 2. You will see **display with IGV local**. Click this.
 > 3. After a few minutes you will see alignments rendered within the browser.
-> 4. If you get `Could not locate genome:` error ignore it and click **OK**.
-> 5. At the time of writing dataset sent by Galaxy to IGV have uninformative names such as `galaxy_bbd44h445645h45454`. While this will soon be fixed we can deal with it by renaming the displayed track manually by right clicking on IGV sidebar and choosing **Rename Track..** option. 
+> 4. If you get `Could not locate genome:` error ignore it and click **OK**. 
 {: .hands_on}
+
+> ### {% icon tip %} Tip: Naming IGV tracks
+> At the time of writing dataset sent by Galaxy to IGV have uninformative names such as `galaxy_bbd44h445645h45454`. While this will soon be fixed we can deal with it by renaming the displayed track manually by right clicking on IGV sidebar and choosing **Rename Track..** option.
+>
+{ .tip}
 
 The result will look like this:
 
@@ -687,7 +693,17 @@ Our objective is convert these data into BED. In this analysis we want to initia
 > 4. Click **Execute** 
 {: .hands_on}
 
-this will produce a collection with tree datasets just like the original `GENES` collection but containing only CDS data. Next we need to cut out only those columns that need to be included into BED. These columns are 8 (start), 9 (end), 14 (gene name), 19 (product length that will be used BED score), and c10 (strand). **Note** that we do not select a column corresponding to genome name. We will add this information on the next step. 
+this will produce a collection with tree datasets just like the original `GENES` collection but containing only CDS data. Next we need to cut out only those columns that need to be included into BED. There is one problem with this. We are trying to convert these data into [6 column BED](#-tip-bed-format). In this format the fifth column (score) must have a value between 0 and 1000. To satisfy this requirement we will create a dummy column that will always have a value of `0`:
+
+> ### {% icon hands_on %} Hands-on: Creating a dummy score column
+>
+> 1. Open **Add column to an existing dataset** tool
+> 2. In **Add this value** type `0`
+> 3. In **to Dataset** select collection produced by the previous step (`Select on collection...`)
+> 4. Click **Execute**
+{: .hands_on}
+
+This will 21st column containing `0` for all rows. Now we can cut necessary columns from these datasets. These columns are 8 (start), 9 (end), 15 (gene symbol), 21 (dummy column we just created), and c10 (strand). **Note** that we do not select a column corresponding to genome name. We will add this information on the next step. 
 
 > ### {% icon hands_on %} Hands-on: Cutting columns form annotation data
 >
@@ -700,16 +716,16 @@ this will produce a collection with tree datasets just like the original `GENES`
 This will produce a collection with each element containing data like this:
 
 ```
-   1    2                                              3   4 5
---------------------------------------------------------------
-  49 1452 chromosomal replication initiator protein DnaA 467 +
-1457 2557 DNA polymerase III subunit beta                366 +
-2557 3630 DNA replication and repair protein RecF        357 +
+   1    2                                              3 4 5
+------------------------------------------------------------
+  49 1452 chromosomal replication initiator protein DnaA 0 +
+1457 2557 DNA polymerase III subunit beta                0 +
+2557 3630 DNA replication and repair protein RecF        0 +
 ```
 
 as we mentioned above this datasets lacks genome IDs such as `CP020543.1`. However, the individual elements in the collection we've created already have genomes IDs (if you are unsure make sure you followed direction when [creating collection containing annotations](#-hands-on-uploading-sequences-and-annotations)). We will leverage this while collapsing this collection into a single dataset:
 
-> ### {% icon hands_on %} Hands-on: Collapsing annotations in to a single BED dataset
+> ### {% icon hands_on %} Hands-on: Collapsing annotations into a single BED dataset
 > 1. Open **Collapse Collection** tool.
 > 2. In **Collection of files to collapse** click on the folder icon (![](../../images/folder-o.png)) and select the output of the previous step (`Cut on collection...`)
 > 3. Set **Append File name** to `Yes` 
@@ -720,23 +736,117 @@ as we mentioned above this datasets lacks genome IDs such as `CP020543.1`. Howev
 Resulting data looks like this:
 
 ```
-         1    2    3                                              4   5 6
--------------------------------------------------------------------------
-CP020543.1   49 1452 chromosomal replication initiator protein DnaA 467 +
-CP020543.1 1457 2557 DNA polymerase III subunit beta                366 +
-CP020543.1 2557 3630 DNA replication and repair protein RecF        357 +
+         1    2    3                                              4 5 6
+-----------------------------------------------------------------------
+CP020543.1   49 1452 chromosomal replication initiator protein DnaA 0 +
+CP020543.1 1457 2557 DNA polymerase III subunit beta                0 +
+CP020543.1 2557 3630 DNA replication and repair protein RecF        0 +
 ```
 
-you can see that the genome ID is now appended in the beginning and this dataset looks like a legitimate BED that can be displayed in IGV. The one thing that remains is to tell Galaxy that it is BED as [we did before](#-hands-on-changing-dataset-type). After the format of the last dataset is set to BED it can displayed at IGV by clicking **display with IGV local** link:
+you can see that the genome ID is now appended in the beginning and this dataset looks like a legitimate BED that can be displayed in IGV. The one thing that remains is to tell Galaxy that it is BED as [we did before](#-hands-on-changing-dataset-type). After the format of the last dataset is set to BED it can displayed at IGV by clicking **display with IGV local** link (remember to give this new track a ["humane" name](#-tip-naming-igv-tracks):
+
+![Displaying genes in IGV](../../images/igv_genes.png "Gene track is added to the browser. Here we are zoomed in at the gap region in LT906474.")
 
 ## Extracting deleting genes programmatically
 
-Above we've been able to look at genes that appear deleted in our assembly. But what we really need is to create a list that can interrogate further. For example, which of these genes are essential. We can easily create such a list by overlapping coordinates of genes with coordinates of our deletion. But to do this we first need to create a set of coordinates corresponding to the deletion. This can be done by complementing coordinates of alignments we created [above](#-hands-on-changing-dataset-type):
+Above we've been able to look at genes that appear deleted in our assembly. But what we really need is to create a list that can interrogate further. For example, which of these genes are essential? We can easily create such a list by overlapping coordinates of genes with coordinates of our deletion. But to do this we first need to create a set of coordinates corresponding to the deletion. This can be done by complementing coordinates of alignments we created [above](#-hands-on-changing-dataset-type):
 
 ![Complementing genomic ranges](../../images/complement.png "Any set of genomic intervals can <i>complemented</i> or converted into a set of intervals that do not overlap the original set (image from BEDTools documentation).")
 
+However, before we convert coordinates of aligned into their complement we need to prepare so called *genome file*, which is a list of "chromosomes" and their lengths in our [hybrid genome](#-hands-on-concatenate-fasta-files):
 
+> ### {% icon hands_on %} Hands-on: Creating a genome file
+>
+> 1. Open **Compute sequence length** tool
+> 2. In **Compute length for these sequences** select FASTA dataset we generated [concatenated "hybrid" genome](#-hands-on-concatenate-fasta-files)
+> 3. Click **Execute**
+{: .hands_on}
 
+This will generate a dataset that looks like this:
+
+```
+         1       2
+------------------
+CP020543.1 4617024
+CP024090.1 4592887
+LT906474.1 4625968
+Ecoli_C    4576293
+```
+
+Next, we need to sort this file lexicographically:
+
+> ### {% icon hands_on %} Hands-on: Sorting genome file
+>
+> 1. Open **Sort data in ascending or descending order**
+> 2. In **Sort Dataset** select the output of the previous step (`Compute sequence length on ...`)
+> 3. Keep **on column** set as `Column: 1`
+> 4. Set **with flavor** to `Alphabetical sort`
+> 5. Set **everything in** to `Ascending order`
+> 6. Click **Execute**
+{: .hands_on}
+
+you will get a sorted version of the above dataset:
+
+```
+         1       2
+------------------
+CP020543.1 4617024
+CP024090.1 4592887
+Ecoli_C    4576293
+LT906474.1 4625968
+```
+
+next we need to go back to the BED file containing [alignment data](#-hands-on-changing-dataset-type) and sort it as well:
+
+> ### {% icon hands_on %} Hands-on: Sorting BED file
+> 1. Open **SortBED order the intervals** 
+> 2. In **Sort the following BED file** select [alignment BED](#-hands-on-changing-dataset-type)
+> 3. Keep **Sort by** on its default setting (`chromosome, then by start position (asc)`)
+> 4. Click **Execute**
+{: .hands_on}
+
+Now we can finally compute complement on sorted BED dataset:
+
+> ### {% icon hands_on %} Hands-on: Sorting BED file
+>
+> 1. Open **ComplementBed Extract intervals not represented by an interval file**
+> 2. In **BED/VCF/GFF file** select output of the previous step
+> 3. In **Genome file** select `Genome file from your history`
+> 4. In **Genome file** below select sorter genome file we've generated [two steps ago](#-hands-on-sorting-genome-file)
+> 5. Click execute
+{: .hands_on}
+
+The output of this step can directly viewed in IGV by clicking on **display with IGV** link:
+
+![Gaps in IGV](../../images/igv_gaps.png "Complement of alignment bed shows the position of the insertion.")
+
+At this point we have two BEDs: one just created and the other containing [gene annotation](#-hands-on-collapsing-annotations-into-a-single-bed-dataset). We can simply intersect two of them:
+
+![Intersect between two BED datasets](../../images/intersect.png "Computing intersect meaning finding overlapping regions in two BED datasets (image from BEDTools documentation).")
+
+But before we do that let's filter all small intervals below 10,000 kb to remove noise:
+
+> ### {% icon hands_on %} Hands-on: Filtering BED on interval length
+> 
+> 1. Open **Filter data on any column using simple expressions**
+> 2. In **Filter** select dataset from the last step (`Complement of SortBed on ...`)
+> 3. In **With following condition** type `c3-c2>=10000`. Here we are computing the length (difference bewteen end (column 3) and start (column 2) and making sire it is above 10,000).
+> 4. Click **Execute**
+{: .hands_on}
+
+The resulting dataset will look like this:
+
+```
+         1       2       3
+--------------------------
+CP020543.1 1668702 1697834
+CP020543.1 1700832 1742068
+CP020543.1 3253711 3288956
+CP020543.1 3289091 3304937
+CP024090.1 3233375 3283074
+LT906474.1 3252785 3288031
+LT906474.1 3288166 3304009
+```
 
 
 Short introduction about this subpart.
