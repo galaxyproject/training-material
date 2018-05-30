@@ -753,24 +753,20 @@ animal) followed by a D and a three digit number (number of days post weaning).
 
 ## 種の多様性を計算する
 
-Diversity indices provide valuable mathematical tools to describe the ecological complexity of a single sample (*alpha diversity*) or to detect species differences between samples (*beta diversity*). However, diversity is not a determined physical quantity for which a consensus definition and unit of measure have been established, and several diversity indices are currently available [Finotello et al. 2016].
+多様性指数は、単一のサンプルでの生態学的な複雑性を説明するため（*α多様性*）やサンプル間の種の違いを見つけるため（*β多様性*）に用いられる意味のある数学的なツールです。しかしながら、多様性は一般的な定義や測定単位が確立されている決まった物理量ではなく、いくつかの多様性指数が現在利用されています [Finotello et al. 2016]。
 
-### Alpha diversity
+### α多様性
 
-Let's start our analysis by analyzing the alpha diversity of the samples. First we will generate rarefaction
-curves describing the number of OTUs observed as a function of sampling effort. We'll do this with the
-`Rarefaction.single` command:
+サンプルのα多様性を調べる解析を始めましょう。まずサンプリングの成果の関数として観測された OTU の数を記述する rarefaction curves を生成します。これは `Rarefaction.single` コマンドを用いて行います:
 
-> ### {% icon hands_on %} ハンズオン: Calculate Rarefaction
+> ### {% icon hands_on %} ハンズオン: Rarefaction を計算する
 > - **Rarefaction.single** {% icon tool %} で次のように設定する
->   - "shared" to shared file from Make.shared
+>   - "shared" には Make.shared からの shared ファイルを選択する
 {: .hands_on}
 
-Note that we used the default diversity measure here (*sobs*; observed species richness), but there are many
-more options available under the *calc* parameter. The mothur wiki describes some of these calculators
-[here](https://mothur.org/wiki/Calculators).
+ここではデフォルトの多様性の尺度である（*sobs*; 観察された種の豊富さ）を使用しましたが、*calc* パラメーターではより多くのオプションを利用することができます。mothur の wiki にはこれらの計算法のいくつかについて記述しています[ページはこちら](https://mothur.org/wiki/Calculators)。
 
-Examine the rarefaction curve output.
+rarefaction curve のアウトプットを調べてみましょう。
 
 ```
 numsampled    0.03-F3D0    lci-F3D0    hci-F3D0    0.03-F3D1   ...
@@ -783,59 +779,48 @@ numsampled    0.03-F3D0    lci-F3D0    hci-F3D0    0.03-F3D1   ...
 ...
 ```
 
-This file displays the number of OTUs identified per amount of sequences used (numsampled). What we would like
-to see is the number of additional OTUs identified when adding more sequences reaching a plateau. Then we know
-we have covered our full diversity. This information would be easier to interpret in the form of a graph.
-Let's plot the rarefaction curve for a couple of our sequences:
+このファイルには使用された配列の量ごとに識別された OTU の数 (numsampled) が表示されています。私たちが知りたいのはさらに配列を追加して曲線が水平状態に達したときに追加で識別される OTU の数です。それを知ることで私たちは多様性のすべてを把握したことになります。この情報はグラフの形にすることで理解しやすくなります。
+私たちの一対の配列で rarefaction curve をプロットしてみましょう:
 
-> ### {% icon hands_on %} ハンズオン: Plot Rarefaction
+> ### {% icon hands_on %} ハンズオン: Rarefaction をプロットする
 > <!-- the following tool is because plotting tool will not detect columns in files inside collections yet -->
-> First let's make our life a little bit easier. As we only have one dataset in our collection anyways, we can
-> collapse it into a single file.
+> まずは操作を少しでも楽にしましょう。コレクションにはデータセットが1つしかないので、ファイルを1つにまとめることができます。
 >
 > - **Collapse Collection** {% icon tool %} で次のように設定する
->   - "Collection of files to collapse to a single dataset" to the rarefaction curve collection
+>   - "Collection of files to collapse to a single dataset" には rarefaction curve のコレクションを選択する
 >
-> Now we are ready to plot our rarefaction curves:
+> これで rarefaction curve をプロットする準備が整いました:
 >
 > - **Plotting tool** {% icon tool %} で次のように設定する
->   - "Plot Title" to `Rarefaction`
->   - "Label for x axis" to `Number of Sequences`
->   - "Label for y axis" to `Number of OTUs`
->   - "Output File Type" to `PNG`
->   - Click on Insert Series,
->     - "Dataset" to the collapsed rarefaction curve collection
->     - Set **Header in first line?** to `Yes`
->     - "Column for x axis" to `Column 1`
->     - "Column for y-axis" to `Column 2` and `Column 5` and every third column until the end (we are
->       skipping the low confidence and high confidence interval columns)
+>   - "Plot Title" → `Rarefaction`
+>   - "Label for x axis" → `Number of Sequences`
+>   - "Label for y axis" → `Number of OTUs`
+>   - "Output File Type" → `PNG`
+>   - Insert Series をクリックし、
+>     - "Dataset" には1つにまとめた rarefaction curve のコレクションを選択する
+>     - **Header in first line?** → `Yes` を選択する
+>     - "Column for x axis" → `Column 1`
+>     - "Column for y-axis" には `Column 2` と `Column 5` そして最後の列まで2つおきに列を選択する（列間における低い信頼度と高い信頼度の列をスキップしています）
 >
 {: .hands_on}
 
-From the resulting image we can see that the rarefaction curves for all samples have started to level
-off so we are confident we cover a large part of our sample diversity.
+結果の画像から、すべてのサンプルで rarefaction curves が水平になり始めたので、サンプルの多様性の大部分を把握したと確信しました。
 
 ![Rarefaction curves](../../images/rarefaction_curves.png)
 
-Alas, rarefaction is not a measure of richness, but a measure of diversity. If you consider two communities
-with the same richness, but different evenness then after sampling a large number of individuals their
-rarefaction curves will asymptote to the same value. Since they have different evennesses the shapes of
-the curves will differ. Therefore, selecting a number of individuals to cutoff the rarefaction curve isn't
-allowing a researcher to compare samples based on richness, but their diversity.
+残念ながら、rarefaction は豊富さの尺度ではなく、多様性の尺度です。多くの個体をサンプリングした後に豊富さは同じだが水平度は異なる2つのコミュニティを考えると、それらの rarefaction curves は同じ値に漸近します。それらは水平度が異なるために曲線の形が異なります。したがって、   Therefore, selecting a number of individuals to cutoff the rarefaction curve isn't allowing a researcher to compare samples based on richness, but their diversity.
 
-Finally, let's get a table containing the number of sequences, the sample coverage, the number of observed
-OTUs, and the Inverse Simpson diversity estimate using the `Summary.single` command. To standardize everything,
-let's randomly select 2440 sequences from each sample 1000 times and calculate the average:
+最後に、`Summary.single` を用いて配列数、サンプルのカバレッジ、観測された OTU の数、そしてシンプソン多様度の逆数の推定を含んだ表を取得しましょう。すべてを標準化するために、無作為に各サンプルから2440配列を1000回選択して平均を計算してみましょう:
 
 > ### {% icon hands_on %} ハンズオン: Summary.single
 >
 > - **Summary.single** {% icon tool %} で次のように設定する
->   - "share" to shared file from Make.shared
->   - "calc" to `nseqs,coverage,sobs,invsimpson`
->   - "size" to 2389
+>   - "share" には Make.shared からの shared ファイルを選択する
+>   - "calc" → `nseqs,coverage,sobs,invsimpson`
+>   - "size" → 2389
 {: .hands_on}
 
-The data will be outputted to a table called the *summary file*:
+データは *summary file* と呼ばれる表にアウトプットされます:
 
 ```
 label   group   sobs          coverage    invsimpson   invsimpson_lci   invsimpson_hci  nseqs
@@ -860,89 +845,79 @@ label   group   sobs          coverage    invsimpson   invsimpson_lci   invsimps
 0.03    F3D9    162.000000    0.994803    24.120541    23.105499        25.228865       5773.000000
 ```
 
-Interestingly, the sample coverages were all above 97%, indicating that we did a pretty good job of sampling
-the communities. Plotting the richness or diversity of the samples would show that there was little difference
-between the different animals or between the early and late time points. You could follow this up with a
-repeated-measures ANOVA and find that there was no significant difference based on sex or early vs. late.
+興味深いことに、サンプルのカバレッジはすべて97％を超えており、コミュニティをサンプリングするのに非常に良い仕事をしたことを物語っています。サンプルの豊かさまたは多様性をプロットすることで異なる動物間または初期と後期の時点の間に差がほぼないことが示されました。これは反復測定 ANOVA で追跡調査することができ、性別または初期と後期に有意差がないことを見出すことができます。
 
-### Beta diversity
+### β多様性
 
-Beta diversity is a measure of the similarity of the membership and structure found between *different* samples.
-The default calculator in the following section is *thetaYC*, which is the [Yue & Clayton theta similarity
-coefficient](http://csyue.nccu.edu.tw/2005communicationindex.pdf)
+β多様性は *異なる* サンプル間にみられるメンバーシップや構造の類似性を測るものです。
+次のセクションでのデフォルトの計算法は *thetaYC* で、これは [Yue & Clayton theta similarity
+coefficient](http://csyue.nccu.edu.tw/2005communicationindex.pdf) です。
 
-> ### {% icon hands_on %} ハンズオン: Beta diversity
+> ### {% icon hands_on %} ハンズオン: β多様性
 >
-> Let's calculate . We'll do this
-> with the `Dist.shared` command that will allow us to rarefy our data to a common number of sequences.
+> それでは計算してみましょう。これを行うには `Dist.shared` コマンドを使用し、このコマンドは私たちのデータを共通の数の配列に希薄化してくれます。
 >
 > - **Dist.shared** {% icon tool %} で次のように設定する
->   - "shared" to the shared file from Make.shared
->   - "calc" to thetayc,jclass
->   - "subsample" to 2389
+>   - "shared" には Make.shared からの shared ファイルを選択する
+>   - "calc" → thetayc,jclass
+>   - "subsample" → 2389
 >
-> Let's visualize our data in a Heatmap
+> データをヒートマップで視覚化してみましょう
 >
 > - **Heatmap.sim** {% icon tool %} で次のように設定する
->   - "Generate Heatmap for" to `phylip`
->   - "phylip" to output by Dist.shared (this is a collection input)
+>   - "Generate Heatmap for" → `phylip`
+>   - "phylip" には Dist.shared のアウトプットを選択する（これはコレクションのインプットです）
 >
 > <!-- TODO: way to view the SVGs inside Galaxy? -->
 {: .hands_on}
 
-Look at some of the resulting heatmaps (you may have to download the SVG images first). In all of these
-heatmaps the red colors indicate communities that are more similar than those with black colors.
+いくつかのヒートマップを見てください（最初に SVG のイメージをダウンロードする必要があるかもしれません）。これらすべてのヒートマップにおいて赤色は黒色のものよりも類似したコミュニティを示しています。
 
-For example this is the heatmap for the `thetayc` calculator (output `thetayc.0.03.lt.ave`):
+例えばこれは `thetayc` の計算法によるヒートマップです（アウトプット `thetayc.0.03.lt.ave`）:
 
 ![Heatmap for the thetayc calculator](../../images/heatmap.sim_thetayc.png)
 
-and the jclass calulator (output `jclass.0.03.lt.ave`):
+そしてこれは jclass の計算法によるものです（アウトプット `jclass.0.03.lt.ave`）:
 
 ![Heatmap for the jclass calculator](../../images/heatmap.sim_jclass.png)
 
-When generating Venn diagrams we are limited by the number of samples that we can analyze simultaneously.
-Let's take a look at the Venn diagrams for the first 4 time points of female 3 using the `venn` command:
+ベン図を生成する際には同時に解析できるサンプルの数によって制限を受けます。
+`venn` コマンドを用いてメス3の最初の4時点についてのベン図を見てみましょう:
 
-> ### {% icon hands_on %} ハンズオン: Venn diagram
+> ### {% icon hands_on %} ハンズオン: ベン図
 >
 > <!-- need to collapse collection again for group select to work -->
-> First we collapse our collection again
+> まずは私たちのコレクションを再びまとめましょう
 >
 > - **Collapse Collection** {% icon tool %} で次のように設定する
->   - "Collection" to Subsample.shared output collection from Sub.sample step
+>   - "Collection" には Sub.sample ステップのアウトプットコレクションである Subsample.shared を選択する
 >
-> After the tool has finished, rename the output to `Subsample.shared` to make it easier to recognize in
-> further analysis
+> ツールの終了後、アウトプットの名前を `Subsample.shared` に変更して今後の解析で認識しやすくしましょう
 >
 > - **Venn** {% icon tool %} で次のように設定する
->   - Set `OTU Shared` to Subsample.shared file from previous step
->   - Set `groups` to `F3D0,F3D1,F3D2,F3D3`
+>   - `OTU Shared` には前段階からの Subsample.shared ファイルを選択する
+>   - `groups` → `F3D0,F3D1,F3D2,F3D3`
 {: .hands_on}
 
 This generates a 4-way Venn diagram and a table listing the shared OTUs.
 
 ![Venn diagram and table with shared OTUs](../../images/venn.png)
 
-This shows that there were a total of 180 OTUs observed between the 4 time points. Only 76 of those OTUs were
-shared by all four time points. We could look deeper at the shared file to see whether those OTUs were
-umerically rare or just had a low incidence.
+これは4つの時点の間に合計180の OTU が観察されたことを示しています。これらの OTU で76個だけが4つの時点で共有されていました。これらの OTU  We could look deeper at the shared file to see whether those OTUs were umerically rare or just had a low incidence.
 
-Next, let's generate a dendrogram to describe the similarity of the samples to each other. We will generate a
-dendrogram using the jclass and thetayc calculators within the `tree.shared` command:
+次に、サンプルのそれぞれの類似性を示す樹形図を生成します。`tree.shared` コマンドで jclass と thetayc の計算法を使って樹形図を生成しましょう:
 
 > ### {% icon hands_on %} Tree
 >
 > 1. **Tree.shared** {% icon tool %} で次のように設定する
->   - "Select input format" to Phylip Distance Matrix
->   - "phylip" to dist files from Dist.shared (collection)
+>   - "Select input format" → Phylip Distance Matrix
+>   - "phylip" には Dist.shared からの dist ファイル（コレクション）を選択する
 >
 > 2. **Newick display** {% icon tool %} で次のように設定する
->  - "Newick file" to output from Tree.shared (collection)
+>  - "Newick file" には Tree.shared のアウトプット（コレクション）を選択する
 {: .hands_on}
 
-Inspection of the the tree shows that the early and late communities cluster with themselves to the exclusion
-of the others.
+樹形図を調べることで初期と後期のコミュニティがほかのコミュニティとは排他的にクラスターを作っていることが分かります。
 
 `thetayc.0.03.lt.ave`:
 
@@ -953,44 +928,40 @@ of the others.
 ![Jclass tree](../../images/tree.jclass.png)
 
 
-# Visualisations
+# 視覚化
 
-Mothur does not have a lot of visualization tools built in, but external tools may be used for this. For
-instance we can convert our shared file to the more widely used `biom` format and view it in a platform like
-[Phinch](http://www.phinch.org/).
+Mothur にはあまり視覚化ツールが組み込まれていませんが、外部ツールを使うことで視覚化を行うことができます。例えば私たちの持っている shared ファイルをより広く使われている `biom` 形式に変換し [Phinch](http://www.phinch.org/) のようなプラットフォームで見ることができます。
 
 ## Phinch
 
 > ### {% icon hands_on %} ハンズオン: Phinch
 >
 > - **Make.biom** {% icon tool %} で次のように設定する
->   - "shared" to Subsample.shared
->   - "constaxonomy" to taxonomy output from Classify.otu (collection)
->   - "metadata" to `mouse.dpw.metadata`
+>   - "shared" → Subsample.shared
+>   - "constaxonomy" には Classify.otu の taxonomy アウトプット（コレクション）を選択する
+>   - "metadata" → `mouse.dpw.metadata`
 >
-> The Galaxy project runs an instance of Phinch, and if you look at the output biom file, you will see a link
-> to view the file at Phinch:
+> Galaxy は Phinch のインスタンスを実行し、そしてそのアウトプットである biom ファイルを見ると、Phinch でファイルを表示するためのリンクがあることが分かります:
 >
 > ![Icon to view at Phinch](../../../../shared/images/viewatphinch.png)
 >
-> Clicking on this link will lead you to the Phinch website, which will automatically load in your file, and
-> where you can several interactive visualisations:
+> このリンクをクリックすると、ファイルを自動的にロードして、いくつかのインタラクティブな視覚化を行うことができる Phinch のウェブサイトに移動します:
 >
 > ![Phinch overview](../../../../shared/images/phinch_overviewpage.png)
 >
 > > ### {% icon comment %} Comment
 > >
-> > If this link is not present on your Galaxy, you can download the generated BIOM file and upload directly to Phinch server at [http://phinch.org](http://phinch.org).
+> > このリンクが Galaxy に現れない場合は、生成された BIOM ファイルをダウンロードして Phinch のサーバー [http://phinch.org](http://phinch.org) に直接アップロードすることでできます。
 > {: .comment}
 {: .hands_on}
 
 ## Krona
 
-A second tool we can use to visualize our data, is [Krona]()
+データを視覚化するために使うことができるツールの2つ目として、[Krona]() があります。
 
 > ### {% icon hands_on %} ハンズオン: Krona
 >
->  First we convert our mothur taxonomy file to a format compatible with Krona
+>  まず、私たちの mothur taxonomy ファイルを Krona と互換性のある形式に変換しましょう
 >
 > - **Taxonomy-to-Krona** {% icon tool %} で次のように設定する
 >   - "Taxonomy file" to the taxonomy output from Classify.otu (collection)
