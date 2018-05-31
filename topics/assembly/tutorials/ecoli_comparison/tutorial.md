@@ -848,15 +848,123 @@ LT906474.1 3252785 3288031
 LT906474.1 3288166 3304009
 ```
 
+you will notice that all three genomes have a region starting past 3,200,000 and only `CP020543.1` has another region starting at 1,668,702. However, this region reflects some unique feature of `CP020543.1` rather than that of our assembly. This is why we will concentrate on *common* region which is deleted in our genome, but is present in the three closely related *E. coli* strains:
 
-Short introduction about this subpart.
-
-> ### {% icon comment %} Comment
+> ### {% icon hands_on %} Hands-on: Restricting list of deleted region to the *common* deletion
 >
-> Do you want to learn more about the principles behind mapping? Follow our [training](../../NGS-mapping)
-{: .comment}
+> 1. Open **Filter data on any column using simple expressions**
+> 2. In **Filter** select dataset from the last step (`Filter on data...`)
+> 3. In **With following condition** type `c2 > 2000000`. 
+> 4. Click **Execute**
+{: .hands_on}
 
-# Conclusion
-{:.no_toc}
+The new set of regions will look like this:
 
-Conclusion about the technical key points. And then relation between the technical and the biological question to end with a global view.
+```
+         1       2       3
+--------------------------
+CP020543.1 3253711 3288956
+CP020543.1 3289091 3304937
+CP024090.1 3233375 3283074
+LT906474.1 3252785 3288031
+LT906474.1 3288166 3304009
+```
+
+We can look closely at these using IGV:
+
+![Close up of the deleted region](../../images/igv_gap_closeup.png "Close up of deleted region (this region is deleted from our assembly and looks like a gap when our assembly is aligned to genomic sequences shown here). In CP0205543 and LT906474 the continuity of the region is interrupted by small aligned region that relatively low identity (~72%). This is a spurious alignment and can be ignored.")
+
+Now we are ready to intersect these regions with gene coordinates we formatted [earlier](#-hands-on-collapsing-annotations-into-a-single-bed-dataset):
+
+> ### {% icon hands_on %} Hands-on: Finding genes deleted in our assembly
+>
+> 1. Open **Intersect intervals find overlapping intervals in various ways**.
+> 2. In **File A to intersect with B** select output of the previous step
+> 3. In **File(s) B to intersect with A** select gene annotations in [BED format](#-hands-on-collapsing-annotations-into-a-single-bed-dataset)
+> 4. In **What should be written to the output file?** select `Write the original A and B entries plus the number of base pairs of overlap between the two features. Only A features with overlap are reported. Restricted by the fraction- and reciprocal option (-wo)`
+> 5. Click **Execute**
+{: .hands_on}
+
+As a result we will get a list of all genes that overlap with the positions of the deletion. Because of the parameters we have select the tool joins rows from the two datasets if their coordinates overlap:
+
+```
+         1       2       3          4       5       6    7 8 9   10
+-------------------------------------------------------------------   
+LT906474.1 3252785 3288031 LT906474.1 3252764 3252961 ybdD 0 -  176
+LT906474.1 3252785 3288031 LT906474.1 3253144 3255249 cstA 0 - 2105
+LT906474.1 3252785 3288031 LT906474.1 3255430 3255843 entH 0 -  413
+```
+
+## Are any of these genes essential?
+
+[Goodall et al. (2018)](http://mbio.asm.org/content/9/1/e02096-17) have recently published a list of essential genes for *E. coli* K-12. We can use their data to answer this question. This paper contains a supplementary file in Excel format listing genes and whether they are essential or not. To actually use these data we need to first convert it into TAB-delimited format. This can be done using any spreadsheet application such as Google Sheets:
+
+> ### {% icon hands_on %} Hands-on: Converting a list of essential genes to TAB-delimited format
+> 
+> 1. Download [this file](http://mbio.asm.org/content/9/1/e02096-17/DC7/embed/inline-supplementary-material-7.xlsx) to your computer.
+> 2. Open your Google Drive and create a new Google Sheet
+> 3. Go to **File** and select **Import**
+> 4. Within the **Import** dialog box select **Upload** and use it to upload the file downloaded at step 1
+> 5. You will the contents of the file
+> 6. Remove the first two header rows so that there is only data and nothing else
+> 7. Go to **File** and choose **Download as ... TAB-separated values**
+> 8. Upload this file into Galaxy using its upload tool.
+> 9. Once it uploads click on it and use the pencil (![](../../images/pencil.png)) button to rename it as "Essential list"
+{: .hands_on}
+
+This dataset will look like this:
+
+```
+   1           2           3     4    5     6
+---------------------------------------------
+thrL 0.242424242 54.62640955 FALSE TRUE FALSE
+thrA 0.149817296 32.64262069 FALSE TRUE FALSE
+thrB 0.177920686 39.389847   FALSE TRUE FALSE
+```
+
+the two truly important columns here are 1 (gene name) and 4 (is gene essential?). Let's join the results of the [intersect](#-hands-on-finding-genes-deleted-in-our-assembly) with this list:
+
+> ### {% icon hands_on %} Hands-on: Are there essential genes?
+>
+> 1. Open **Join two Datasets side by side on a specified field** 
+> 2. In **Join** select the results of [intersect operation](#-hands-on-finding-genes-deleted-in-our-assembly)(`Intersect intervals on data...`)
+> 3. Set **using column** to `Column: 7` because it contains gene names.
+> 4. Set **with** to newly uploaded dataset with essential gene data. 
+> 5. In **and column** select `Column: 1` as in this dataset the first column contains gene names.
+> 6. Click **Execute**
+{: .hands_on}
+
+Once the tool finished we will find that there are no essential genes deleted from our assembly. So our version of *E. coli* C is safe!
+
+```
+CP020543.1	3253711	3288956	CP020543.1	3258389	3259999	entE	0	-	1610	entE	0.105524519	21.77552317	FALSE	TRUE	FALSE
+CP020543.1	3253711	3288956	CP020543.1	3268031	3271912	entF	0	-	3881	entF	0.121329212	25.69567228	FALSE	TRUE	FALSE
+CP020543.1	3289091	3304937	CP020543.1	3303016	3305253	nfrB	0	+	1921	nfrB	0.124218052	26.40641127	FALSE	TRUE	FALSE
+CP024090.1	3233375	3283074	CP024090.1	3238053	3239663	entE	0	-	1610	entE	0.105524519	21.77552317	FALSE	TRUE	FALSE
+CP024090.1	3233375	3283074	CP024090.1	3247695	3251576	entF	0	-	3881	entF	0.121329212	25.69567228	FALSE	TRUE	FALSE
+CP024090.1	3233375	3283074	CP024090.1	3282681	3284918	nfrB	0	+	393	nfrB	0.124218052	26.40641127	FALSE	TRUE	FALSE
+LT906474.1	3252785	3288031	LT906474.1	3252764	3252961	ybdD	0	-	176	ybdD	0.045454545	5.962226281	FALSE	TRUE	FALSE
+LT906474.1	3252785	3288031	LT906474.1	3253144	3255249	cstA	0	-	2105	cstA	0.126305793	26.91906538	FALSE	TRUE	FALSE
+LT906474.1	3252785	3288031	LT906474.1	3255430	3255843	entH	0	-	413	entH	0.120772947	25.55862649	FALSE	TRUE	FALSE
+LT906474.1	3252785	3288031	LT906474.1	3255846	3256592	entA	0	-	746	entA	0.104417671	21.49872632	FALSE	TRUE	FALSE
+LT906474.1	3252785	3288031	LT906474.1	3256592	3257449	entB	0	-	857	entB	0.088578089	17.49770599	FALSE	TRUE	FALSE
+LT906474.1	3252785	3288031	LT906474.1	3257463	3259073	entE	0	-	1610	entE	0.105524519	21.77552317	FALSE	TRUE	FALSE
+LT906474.1	3252785	3288031	LT906474.1	3259083	3260258	entC	0	-	1175	entC	0.102891156	21.11643881	FALSE	TRUE	FALSE
+LT906474.1	3252785	3288031	LT906474.1	3260633	3261589	fepB	0	+	956	fepB	0.056426332	9.033369483	FALSE	TRUE	FALSE
+LT906474.1	3252785	3288031	LT906474.1	3261593	3262843	entS	0	-	1250	entS	0.10871303	22.57111617	FALSE	TRUE	FALSE
+LT906474.1	3252785	3288031	LT906474.1	3262954	3263958	fepD	0	+	1004	fepD	0.058706468	9.656014307	FALSE	TRUE	FALSE
+LT906474.1	3252785	3288031	LT906474.1	3263955	3264947	fepG	0	+	992	fepG	0.057401813	9.30031147	FALSE	TRUE	FALSE
+LT906474.1	3252785	3288031	LT906474.1	3264944	3265759	fepC	0	+	815	fepC	0.053921569	8.343849462	FALSE	TRUE	FALSE
+LT906474.1	3252785	3288031	LT906474.1	3265756	3266889	fepE	0	-	1133	fepE	0.207231041	46.34828202	FALSE	TRUE	FALSE
+LT906474.1	3252785	3288031	LT906474.1	3267105	3270986	entF	0	-	3881	entF	0.121329212	25.69567228	FALSE	TRUE	FALSE
+LT906474.1	3252785	3288031	LT906474.1	3271204	3272406	fes	0	-	1202	fes	0.073150457	13.5095101	FALSE	TRUE	FALSE
+LT906474.1	3252785	3288031	LT906474.1	3272649	3274889	fepA	0	+	2240	fepA	0.115573405	24.27454047	FALSE	TRUE	FALSE
+LT906474.1	3252785	3288031	LT906474.1	3274941	3275684	entD	0	+	743	entD	0.111111111	23.16781243	FALSE	TRUE	FALSE
+LT906474.1	3252785	3288031	LT906474.1	3277760	3278878	ybdK	0	+	1118	ybdK	0.124218052	26.40641127	FALSE	TRUE	FALSE
+LT906474.1	3252785	3288031	LT906474.1	3280480	3281727	mscM	0	+	1247	mscM	0.189530686	42.15435344	FALSE	TRUE	FALSE
+LT906474.1	3252785	3288031	LT906474.1	3281795	3283171	pheP	0	-	1376	pheP	0.12345679	26.21927547	FALSE	TRUE	FALSE
+LT906474.1	3252785	3288031	LT906474.1	3286428	3287651	cusB	0	-	1223	cusB	0.14624183	31.77751373	FALSE	TRUE	FALSE
+LT906474.1	3288166	3304009	LT906474.1	3288157	3289530	cusC	0	-	1364	cusC	0.237991266	53.58750384	FALSE	TRUE	FALSE
+```
+
+# The End!
