@@ -66,12 +66,94 @@ Slide notes
 
 ---
 
-# Part 2
+# GeneSeqToFamily
 
 ---
 
-### An other slide
+### GeneSeqToFamily
 
-With text and a resized image
+Inputs
+- CDS
+- GFF3/JSON
+- Species Tree
+
+---
+
+### GeneSeqToFamily Preparation
+
+Inputs
+- CDS
+- GFF3/JSON
+
+Outputs
+- Formatted CDS
+- SQLite (containing gene features)
+
+---
+
+### GeneSeqToFamily Workflow
+
+Steps
+- Translation
+- Pre-clustering Alignment
+- Cluster Generation
+- Cluster Alignment
+- Build GeneTree
+- Gene Alignments and Family Aggregator
+- Visualisation
+
+
+---
+
+### GeneSeqToFamily Workflow - Translation
+
+- Translates CDS into Protein sequences using Transeq
+
+---
+
+### GeneSeqToFamily Workflow - Pre-clustering Alignment
+
+- Uses BLAST to create BLAST database
+- Run BLASTP for protein sequences against the database
+- Default Parameters: -seg no -max_hsps_per_subject 1 -use_sw_tback -num_threads 1
+BLAST Parser
+- BLAST parser converts 12/24 column BLAST result into 3 column input for hcluster_sg
+- Query - Hit - Score
+- Score is calculated by MIN(100, ROUND(-LOG10(evalue)/2))
+
+
+---
+
+### GeneSeqToFamily Workflow - Cluster Generation
+
+- Clusters are generated using hcluster_sg tool 
+- The following command line arguments: -m 750 -w 0 -s 0.34 -O
+
+---
+
+### GeneSeqToFamily Workflow - Cluster Alignment
+
+- Multiple Sequence Alignemnt for each cluster is generated using T-Coffee with Muscle or MAFFT
+
+---
+
+### GeneSeqToFamily Workflow - Build GeneTree
+
+- GeneTrees for each cluster is generated using TreeBeST 
+- TreeBeST uses nucleotide sequence alignment, which is generated using Tranalign with input CDS and T-Coffee alignemnt.
+
+---
+
+### GeneSeqToFamily Workflow - Gene Alignments and Family Aggregator
+
+- Gene Alignments and Family Aggregator (GAFA) aggregates output of TreeBeST, T-Coffee and SQLite from GeneSeqToFamily Preparation
+
+---
+
+### GeneSeqToFamily Workflow - Visualisation
+
+- Final results can be visualised within Galaxy using Aequatus Plugin.
+
+---
 
 .image-25[![](../images/ecker_2012.jpg)]
