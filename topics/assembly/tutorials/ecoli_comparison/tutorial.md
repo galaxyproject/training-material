@@ -111,7 +111,7 @@ The assembly we just uploaded has two issues that need to be addressed before pr
 >   - **Maximum length** you do not need to change.
 > 2. Second we will use **Text transformation with sed** {% icon tool %} tool to convert the name of the assembly from `>1 length=4576293 depth=1.00x circular=true` to `>Ecoli_C`. Set parameters as follows:
 >   - **File to process** should be set to the output of the previous step
->   - Inside **SED program** box enter the following expression (so called [Regular Expression](https://en.wikipedia.org/wiki/Regular_expression): `s/^\>1.*$/\>Ecoli_C/`
+>   - Inside **SED program** box enter the following expression (so called [Regular Expression](https://en.wikipedia.org/wiki/Regular_expression): `s/^>1.*$/>Ecoli_C/`
 >
 >	> ### {% icon tip %} Highlight: SED editor and Regular Expressions
 >	>The expression `s/^>1.*$/>Ecoli_C/` contains several pieces that you need to understand. Let's write it top-to-bottom and explain:
@@ -500,7 +500,7 @@ The output will look like this:
     4870 CP020543.1 + 159368 159512    144 Ecoli_C + 128706 128828    95/115     82.6   3 CP020543.13
 ```
 
-the tool added a new column (Column 14) containing a merge between the target name and alignment id. Now we can differentiate between alignment blocks that exist between, for example, `CP020543.1` and `LT906474.1` because they will have accessions embedded within alignment block IDs. For example, the first alignment between `CP020543.1` and our assembly `Ecoli_C` will have alignment block id `CP020543.11`, while the 225th alignment between `LT906474.1` and `Ecoli_C` will have ID `LT906474.1225`. Because of this we can collapse the entire collection of alignments into a single dataset:
+The tool added a new column (Column 14) containing a merge between the target name and alignment id. Now we can differentiate between alignment blocks that exist between, for example, `CP020543.1` and `LT906474.1` because they will have accessions embedded within alignment block IDs. For example, the first alignment between `CP020543.1` and our assembly `Ecoli_C` will have alignment block id `CP020543.11`, while the 225th alignment between `LT906474.1` and `Ecoli_C` will have ID `LT906474.1225`. Because of this we can collapse the entire collection of alignments into a single dataset:
 
 > ### {% icon hands_on %} Hands-on: Collapsing all alignment info into a single dataset
 > 1. Open **Collapse Collection** tool.
@@ -532,7 +532,7 @@ Let's again look at the data we generated at the last step:
     4870 CP020543.1 + 159368 159512    144 Ecoli_C + 128706 128828    95/115     82.6   3 CP020543.13
 ```
 
-alignments are regions of high similarity between two sequences. Therefore each alignment block has two sets of coordinates associated with it: start/end in the first sequences (target) and start/end in the second sequence (query). But BED only has one set of coordinates. Thus we can create two BEDs: one using coordinates from the target and the other one from query. The first file will depict alignment data from the standpoint of target sequences `CP020543.1`, `CP024090.1`, `LT906474.1` and the second from the standpoint of query - our own assembly [we called](#-hands-on-fixing-assembly) `Ecoli_C`. In the first BED column 1 will contain names of targets (`CP020543.1`, `CP024090.1`, and `LT906474.1`). In the second BED column 1 will contain name of our assembly `Ecoli_C`. To create the first bed we will cut six columns from the dataset produced at the last step. Specifically, to produce target BED will cut columns 2, 4, 5, 14, 12, and 8. To produce query BED columns 7,9,10,14,12,8 will be cut.
+Alignments are regions of high similarity between two sequences. Therefore each alignment block has two sets of coordinates associated with it: start/end in the first sequences (target) and start/end in the second sequence (query). But BED only has one set of coordinates. Thus we can create two BEDs: one using coordinates from the target and the other one from query. The first file will depict alignment data from the standpoint of target sequences `CP020543.1`, `CP024090.1`, `LT906474.1` and the second from the standpoint of query - our own assembly [we called](#-hands-on-fixing-assembly) `Ecoli_C`. In the first BED column 1 will contain names of targets (`CP020543.1`, `CP024090.1`, and `LT906474.1`). In the second BED column 1 will contain name of our assembly `Ecoli_C`. To create the first bed we will cut six columns from the dataset produced at the last step. Specifically, to produce target BED will cut columns 2, 4, 5, 14, 12, and 8. To produce query BED columns 7,9,10,14,12,8 will be cut.
 
 > ### {% icon warning %} There are multiple **CUT** tools!
 > The Hands-On box below uses **Cut** tool. Beware that some Galaxy instances contain multiple **Cut** tools. The one that is used below is called **Cut columns from a table** while the other one, which will NOT use is called **Cut columns from a table (cut)**. It is a small difference, but tools are different.
@@ -571,7 +571,7 @@ Ecoli_C 109317 109418 CP020543.12  76.0 +
 Ecoli_C 128706 128828 CP020543.13  82.6 +
 ```
 
-Now we can merge these two datasets into a single BED datasets that will ready for displaying in the browser:
+Now we can merge these two datasets into a single BED datasets that will be ready for displaying in the browser:
 
 > ### {% icon hands_on %} Hands-on: Merging Target and Query BEDs
 >
@@ -582,7 +582,7 @@ Now we can merge these two datasets into a single BED datasets that will ready f
 > 5. Click **Execute**.
 {: .hands_on}
 
-Now we have a single BED that combines everything. Before displaying it at the browser we need to tell Galaxy that it is in fact a BED dataset:
+Now we have a single BED that combines everything. Before displaying it in the browser we need to tell Galaxy that it is in fact a BED dataset:
 
 > ### {% icon hands_on %} Hands-on: Changing dataset type
 >
@@ -693,7 +693,7 @@ Our objective is convert these data into BED. In this analysis we want to initia
 > 4. Click **Execute**
 {: .hands_on}
 
-this will produce a collection with tree datasets just like the original `GENES` collection but containing only CDS data. Next we need to cut out only those columns that need to be included into BED. There is one problem with this. We are trying to convert these data into [6 column BED](#-tip-bed-format). In this format the fifth column (score) must have a value between 0 and 1000. To satisfy this requirement we will create a dummy column that will always have a value of `0`:
+This will produce a collection with three datasets just like the original `GENES` collection but containing only CDS data. Next we need to cut out only those columns that need to be included into BED. There is one problem with this. We are trying to convert these data into [6 column BED](#-tip-bed-format). In this format the fifth column (score) must have a value between 0 and 1000. To satisfy this requirement we will create a dummy column that will always have a value of `0`:
 
 > ### {% icon hands_on %} Hands-on: Creating a dummy score column
 >
@@ -703,7 +703,7 @@ this will produce a collection with tree datasets just like the original `GENES`
 > 4. Click **Execute**
 {: .hands_on}
 
-This will 21st column containing `0` for all rows. Now we can cut necessary columns from these datasets. These columns are 8 (start), 9 (end), 15 (gene symbol), 21 (dummy column we just created), and c10 (strand). **Note** that we do not select a column corresponding to genome name. We will add this information on the next step.
+This will create a 21st column containing `0` for all rows. Now we can cut necessary columns from these datasets. These columns are 8 (start), 9 (end), 15 (gene symbol), 21 (dummy column we just created), and c10 (strand). **Note** that we do not select a column corresponding to genome name. We will add this information on the next step.
 
 > ### {% icon hands_on %} Hands-on: Cutting columns form annotation data
 >
@@ -723,7 +723,7 @@ This will produce a collection with each element containing data like this:
 2557 3630 DNA replication and repair protein RecF        0 +
 ```
 
-as we mentioned above this datasets lacks genome IDs such as `CP020543.1`. However, the individual elements in the collection we've created already have genomes IDs (if you are unsure make sure you followed direction when [creating collection containing annotations](#-hands-on-uploading-sequences-and-annotations)). We will leverage this while collapsing this collection into a single dataset:
+As we mentioned above this datasets lacks genome IDs such as `CP020543.1`. However, the individual elements in the collection we've created already have genomes IDs (if you are unsure make sure you followed direction when [creating collection containing annotations](#-hands-on-uploading-sequences-and-annotations)). We will leverage this while collapsing this collection into a single dataset:
 
 > ### {% icon hands_on %} Hands-on: Collapsing annotations into a single BED dataset
 > 1. Open **Collapse Collection** tool.
