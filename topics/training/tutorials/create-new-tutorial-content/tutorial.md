@@ -280,6 +280,8 @@ The different defined boxes are:
 
     In most tutorial, the second box is the agenda box at the end of the introduction. It indicates the plan of the tutorial
 
+        {% raw %}
+        ```
         > ### Agenda
         >
         > In this tutorial we will deal with:
@@ -288,6 +290,8 @@ The different defined boxes are:
         > {:toc}
         >
         {: .agenda}
+        ```
+        {% endraw %}
 
     No need to fill the list, since this will be done automatically reusing each section's title.
 
@@ -304,10 +308,14 @@ The different defined boxes are:
 
     We think that actually walking through the tutorial by doing all its steps is important for learning its concepts. We therefore emphasize trying each step by regularly adding hands-on sections, where trainees are encouraged to do the analysis by themselves. We designed some special boxes to make these sections easy to find.
 
-        > ### {% icon hands_on %} Hands-on: Sorting BAM dataset
-        >
-        > 1. **Sort BAM dataset** {% icon tool %}: Sort the paired-end BAM file by "Read names" with **Sort BAM
-        {: .hands_on}
+    {% raw %}
+    ```
+    > ### {% icon hands_on %} Hands-on: Sorting BAM dataset
+    >
+    > 1. **Sort BAM dataset** {% icon tool %}: Sort the paired-end BAM file by "Read names" with **Sort BAM
+    {: .hands_on}
+    ```
+    {% endraw %}
 
     ![Example of hands-on box](../../../../shared/images/tutorial_hand_on_box.png "Example of hands-on box")
 
@@ -324,23 +332,31 @@ The different defined boxes are:
     > 1. Add a hands-on box to run a BLAST of the small sequence dataset against the chosen database
     {: .hands_on}
 
--  Questions
+-  Questions and solution
 
     Questions are there to force the trainees to think about what they are currently doing, and to put things in perspective.
     They also help the instructors by exposing and clarify common scenarios, errors, or applications.
 
-        > ### {% icon question %} Questions
-        >
-        > 1. Why are some tests filtered?
-        > 2. Does it improve the *p*-value distribution?
-        >
-        >    <details>
-        >    <summary>Click to view the answers</summary>
-        >    Content goes here.
-        >    </details>
-        {: .question}
+    {% raw %}
+    ```
+    > ### {% icon question %} Questions
+    >
+    > 1. Why are some tests filtered?
+    > 2. Does it improve the *p*-value distribution?
+    >
+    >    > ### {% icon solution %} Solution
+    >    >
+    >    > 1. Sol for the first question
+    >    > 2. Sol for the second question
+    >    >
+    >    {: .solution}
+    {: .question}
+    ```
+    {% endraw %}
 
-    ![Example of question box](../../../../shared/images/tutorial_question_box.png "Example of question box")
+    ![Example of question box](../../../../shared/images/tutorial_question_box_collapsed.png "Example of question box with collapsed solution")
+
+    ![Example of question box](../../../../shared/images/tutorial_question_box_expanded.png "Example of question box with expanded solution")
 
     Questions have to be quick to answer, and answers can be also provided as multiple choices (MCQs).
     With well choosen wrong answers, MCQs can do much more than just measure how much someone knows.
@@ -352,27 +368,54 @@ The different defined boxes are:
     > 1. Add an hands-on box to construct the BLAST database
     {: .hands_on}
 
+
 - Tips
 
-        > ### {% icon tip %} Tip: Importing data via links
-        >
-        > * Copy the link location
-        > * Open the Galaxy Upload Manager
-        > * Select **Paste/Fetch Data**
-        > * Paste the link into the text field
-        > * Press **Start**
-        {: .tip}
+    {% raw %}
+    ```
+    > ### {% icon tip %} Tip: Importing data via links
+    >
+    > * Copy the link location
+    > * Open the Galaxy Upload Manager
+    > * Select **Paste/Fetch Data**
+    > * Paste the link into the text field
+    > * Press **Start**
+    {: .tip}
+    ```
+    {% endraw %}
 
     ![Example of tip box](../../../../shared/images/tutorial_tip_box.png "Example of tip box")
 
 - Comments
 
-        > ### {% icon comment %} Comments
-        > - Edit the "Database/Build" to select "dm3"
-        > - Rename the datasets according to the samples
-        {: .comment}
+    {% raw %}
+    ```
+    > ### {% icon comment %} Comments
+    > - Edit the "Database/Build" to select "dm3"
+    > - Rename the datasets according to the samples
+    {: .comment}
+    ```
+    {% endraw %}
 
     ![Example of comment box](../../../../shared/images/tutorial_comment_box.png "Example of comment box")
+
+- Details
+
+    The detail box is used to give more background explanation on the subject. By default the box is collapsed. 
+
+    {% raw %}
+    ```
+    > ### {% icon details %} More details on the ....
+    > 
+    > Add more details in Markdown...
+    > 
+    {: .details}
+    ```
+    {% endraw %}
+
+    ![Example of collapsed detail box](../../../../shared/images/tutorial_collapsed_detail_box.png "Example of collapsed detail box")
+
+    ![Example of expanded detail box](../../../../shared/images/tutorial_expanded_detail_box.png "Example of expanded detail box")
 
 - Key points
 
@@ -382,7 +425,7 @@ The different defined boxes are:
 To render the boxes correctly, the syntax needs to be correct. If it does't work, have a look at similar tutorials and get inspiration.
 Boxes can be nested, *e.g.* for having tips inside a hands-on:
 
-```
+
 > ### {% icon hands_on %} Hands-on: Defining the topic for the tutorial
 >
 > 1. Search for NCBI Blast+ on the [ToolShed](https://toolshed.g2.bx.psu.edu/)
@@ -399,7 +442,7 @@ Boxes can be nested, *e.g.* for having tips inside a hands-on:
 >    >    </details>
 >    {: .question}
 {: .hands_on}
-```
+
 
 # Adding slides (optional)
 
