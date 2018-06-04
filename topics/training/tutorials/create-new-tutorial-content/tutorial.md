@@ -57,11 +57,13 @@ The first step we need to define is in which topic to place our new tutorial. Th
 >    >
 >    > In which topic will you put the new tutorial?
 >    >
->    >    <details>
->    >    <summary>Click to view the answers</summary>
->    >    If we search for [NCBI Blast+ in the ToolShed](https://toolshed.g2.bx.psu.edu/view/devteam/ncbi_blast_plus/7538e2bfcd41), it is placed in 2 categories (bottom): "Next Gen Mappers", and "Sequence Analysis".
->    >    We decided to put it in "Sequence analysis" because this is the most general one for this tutorial.
->    >    </details>
+>    >    > ### {% icon solution %} Solution
+>    >    >
+>    >    > If we search for [NCBI Blast+ in the ToolShed](https://toolshed.g2.bx.psu.edu/view/devteam/ncbi_blast_plus/7538e2bfcd41), it is placed in 2 categories (bottom): "Next Gen Mappers", and "Sequence Analysis".
+>    >    > We decided to put it in "Sequence analysis" because this is the most general one for this tutorial.
+>    >    >
+>    >    {: .solution}
+>    >
 >    {: .question}
 {: .hands_on}
 
@@ -248,11 +250,13 @@ To improve the learning experience in our tutorial, we defined some boxes to hig
 
 They are defined always with the same structure:
 
+{% raw %}
 ```
-> ### <an emoji> Type of box: Name of the box
+> ### {% icon an_icon %} Type of box: Name of the box
 > list
 {: .type_of_box}
 ```
+{% endraw %}
 
 For a correct rendering of the tutorial's content, the templating system requires this structure to be kept as it.
 The different defined boxes are:
@@ -269,10 +273,10 @@ The different defined boxes are:
     >    >
     >    > What metadata hasn't been added to this box?
     >    >
-    >    >    <details>
-    >    >    <summary>Click to view the answers</summary>
-    >    >    The take-home messages are not added to this box but into the last box of the tutorial
-    >    >    </details>
+    >    >    > ### {% icon solution %} Solution
+    >    >    >
+    >    >    > The take-home messages are not added to this box but into the last box of the tutorial
+    >    >    {: .solution}
     >    {: .question}
     {: .hands_on}
 
@@ -280,29 +284,31 @@ The different defined boxes are:
 
     In most tutorial, the second box is the agenda box at the end of the introduction. It indicates the plan of the tutorial
 
-        {% raw %}
-        ```
-        > ### Agenda
-        >
-        > In this tutorial we will deal with:
-        >
-        > 1. TOC
-        > {:toc}
-        >
-        {: .agenda}
-        ```
-        {% endraw %}
+    {% raw %}
+    ```
+    > ### Agenda
+    >
+    > In this tutorial we will deal with:
+    >
+    > 1. TOC
+    > {:toc}
+    >
+    {: .agenda}
+    ```
+    {% endraw %}
 
     No need to fill the list, since this will be done automatically reusing each section's title.
 
-    To avoid adding the "Introduction" and "Conclusion", we add `{:.no_toc}` below the section name.
+    To avoid adding the "Introduction" and "Conclusion", we add `{:.no_toc}` below the section name. This will be rendered as follows:
 
-    ![Example of agenda box](../../../../shared/images/tutorial_agenda_box.png "Example of agenda box")
-
-    > ### {% icon hands_on %} Hands-on: Add an agenda box to the tutorial
+    > ### Agenda
     >
-    > 1. Add an agenda box to the tutorial that fit the structure we defined previously
-    {: .hands_on}
+    > In this tutorial we will deal with:
+    >
+    > 1. TOC
+    > {:toc}
+    >
+    {: .agenda}
 
 - Hands-on
 
@@ -310,27 +316,55 @@ The different defined boxes are:
 
     {% raw %}
     ```
-    > ### {% icon hands_on %} Hands-on: Sorting BAM dataset
+    > ### {% icon hands_on %} Hands-on: Spliced mapping
     >
-    > 1. **Sort BAM dataset** {% icon tool %}: Sort the paired-end BAM file by "Read names" with **Sort BAM
+    > 1. **RNA STAR** {% icon tool %}: Map your reads on the reference genome with
+    >    - "Single-end or paired-end reads" to `Paired-end (as individual datasets)`
+    >    - "RNA-Seq FASTQ/FASTA file, forward reads" to the generated `trimmed reads pair 1` files (multiple datasets)
+    >    - "RNA-Seq FASTQ/FASTA file, reverse reads" to the generated `trimmed reads pair 2` files (multiple datasets)
+    >    - "Custom or built-in reference genome" to `Use a built-in index`
+    >    - "Reference genome with or without an annotation" to `use genome reference without builtin gene-model`
+    >    - "Select reference genome" to `Drosophila Melanogaster (dm6)`
+    >    - "Gene model (gff3,gtf) file for splice junctions" to the imported `Drosophila_melanogaster.BDGP6.87.gtf`
+    >    - "Length of the genomic sequence around annotated junctions" to `36`
+    >
+    >        This parameter should be length of reads - 1
+    >
+    > 2. **MultiQC** {% icon tool %}: Aggregate the STAR logs with
+    >      - "Which tool was used generate logs?" to `STAR`
+    >      - "Type of FastQC output?" to `Log`
+    >      - "STAR log output" to the generated `log` files (multiple datasets)
     {: .hands_on}
     ```
     {% endraw %}
 
-    ![Example of hands-on box](../../../../shared/images/tutorial_hand_on_box.png "Example of hands-on box")
-
     with the
 
-    - `{% icon hands_on %}` emoji to define that is an hands-on
+    - {% raw %}`{% icon hands_on %}`{% endraw %} emoji to define that is an hands-on
     - Short imperative sentence to make it easy to identify the tasks
-    - Name of the tool in bold with the `{% icon tool %}` emoji to make it easy to identify a Galaxy tool
-    - Parameters for the tool as a sublist<br/>
-    <br/>
+    - Name of the tool in bold with the {% raw %}`{% icon tool %}`{% endraw %} emoji to make it easy to identify a Galaxy tool
+    - Parameters for the tool as a sublist
 
-    > ### {% icon hands_on %} Hands-on: Add an hands-on box
+    It will be rendered like:
+
+    > ### {% icon hands_on %} Hands-on: Spliced mapping
     >
-    > 1. Add a hands-on box to run a BLAST of the small sequence dataset against the chosen database
+    > 1. **RNA STAR** {% icon tool %}: Map your reads on the reference genome with
+    >    - "Single-end or paired-end reads" to `Paired-end (as individual datasets)`
+    >    - "RNA-Seq FASTQ/FASTA file, forward reads" to the generated `trimmed reads pair 1` files (multiple datasets)
+    >    - "RNA-Seq FASTQ/FASTA file, reverse reads" to the generated `trimmed reads pair 2` files (multiple datasets)
+    >    - "Length of the genomic sequence around annotated junctions" to `36`
+    >
+    >        This parameter should be length of reads - 1
+    >
+    > 2. **MultiQC** {% icon tool %}: Aggregate the STAR logs with
+    >      - "Which tool was used generate logs?" to `STAR`
+    >      - "Type of FastQC output?" to `Log`
+    >      - "STAR log output" to the generated `log` files (multiple datasets)
     {: .hands_on}
+    {: .hands_on}
+
+    
 
 -  Questions and solution
 
@@ -354,19 +388,25 @@ The different defined boxes are:
     ```
     {% endraw %}
 
-    ![Example of question box](../../../../shared/images/tutorial_question_box_collapsed.png "Example of question box with collapsed solution")
+    Which will be rendered as:
 
-    ![Example of question box](../../../../shared/images/tutorial_question_box_expanded.png "Example of question box with expanded solution")
+    > ### {% icon question %} Questions
+    >
+    > 1. Why are some tests filtered?
+    > 2. Does it improve the *p*-value distribution?
+    >
+    >    > ### {% icon solution %} Solution
+    >    >
+    >    > 1. Sol for the first question
+    >    > 2. Sol for the second question
+    >    >
+    >    {: .solution}
+    {: .question}
 
     Questions have to be quick to answer, and answers can be also provided as multiple choices (MCQs).
     With well choosen wrong answers, MCQs can do much more than just measure how much someone knows.
 
     In the box below and hidden we add also the correct answer, so that self-trainees can check the solution and its explanation.
-
-    > ### {% icon hands_on %} Hands-on: Add a question box
-    >
-    > 1. Add an hands-on box to construct the BLAST database
-    {: .hands_on}
 
 
 - Tips
@@ -384,7 +424,16 @@ The different defined boxes are:
     ```
     {% endraw %}
 
-    ![Example of tip box](../../../../shared/images/tutorial_tip_box.png "Example of tip box")
+    Rendered:
+
+    > ### {% icon tip %} Tip: Importing data via links
+    >
+    > * Copy the link location
+    > * Open the Galaxy Upload Manager
+    > * Select **Paste/Fetch Data**
+    > * Paste the link into the text field
+    > * Press **Start**
+    {: .tip}
 
 - Comments
 
@@ -397,25 +446,34 @@ The different defined boxes are:
     ```
     {% endraw %}
 
-    ![Example of comment box](../../../../shared/images/tutorial_comment_box.png "Example of comment box")
+    Rendered:
+
+    > ### {% icon comment %} Comments
+    > - Edit the "Database/Build" to select "dm3"
+    > - Rename the datasets according to the samples
+    {: .comment}
 
 - Details
 
-    The detail box is used to give more background explanation on the subject. By default the box is collapsed. 
+    The detail box is used to give more background explanation on the subject. By default the box is collapsed.
 
     {% raw %}
     ```
     > ### {% icon details %} More details on the ....
-    > 
+    >
     > Add more details in Markdown...
-    > 
+    >
     {: .details}
     ```
     {% endraw %}
 
-    ![Example of collapsed detail box](../../../../shared/images/tutorial_collapsed_detail_box.png "Example of collapsed detail box")
+    Rendered:
 
-    ![Example of expanded detail box](../../../../shared/images/tutorial_expanded_detail_box.png "Example of expanded detail box")
+    > ### {% icon details %} More details on the ....
+    >
+    > Add more details in Markdown...
+    >
+    {: .details}
 
 - Key points
 
@@ -435,11 +493,11 @@ Boxes can be nested, *e.g.* for having tips inside a hands-on:
 >    >
 >    > In which topic will you put the tutorial?
 >    >
->    >    <details>
->    >    <summary>Click to view the answers</summary>
->    >    If we search for [NCBI Blast+ in the ToolShed](https://toolshed.g2.bx.psu.edu/view/devteam/ncbi_blast_plus/7538e2bfcd41), it is attributed to 2 categories (bottom): "Next Gen Mappers" and "Sequence Analysis".
->    >    We decided to put it in "Sequence analysis" because this is the most general one for this tutorial.
->    >    </details>
+>    >    > ### {% icon solution %} Solution
+>    >    >
+>    >    > If we search for [NCBI Blast+ in the ToolShed](https://toolshed.g2.bx.psu.edu/view/devteam/ncbi_blast_plus/7538e2bfcd41), it is attributed to 2 categories (bottom): "Next Gen Mappers" and "Sequence Analysis".
+>    >    > We decided to put it in "Sequence analysis" because this is the most general one for this tutorial.
+>    >    {: .solution}
 >    {: .question}
 {: .hands_on}
 
