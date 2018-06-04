@@ -37,7 +37,7 @@ layout: base
                 <th>Slides</th>
                 <th>Hands-on</th>
 
-                {% if topic.type != "admin-dev" %}
+                {% if topic.type == "use" %}
                 <th>Input dataset</th>
                 <th>Workflows</th>
                 <th>Galaxy tour</th>
@@ -73,7 +73,7 @@ layout: base
                                 {% endif %}
                             </td>
                             <td></td>
-                            {% if topic.type != "admin-dev" %}
+                            {% if topic.type == "use" %}
                                 <td></td>
                                 <td></td>
                             {% endif %}
@@ -105,7 +105,7 @@ layout: base
                                 {% endif %}
                             </td>
 
-                            {% if topic.type != "admin-dev" %}
+                            {% if topic.type == "use" %}
                                 <td>
                                     {% if material.zenodo_link != "" %}
                                     <a href="{{ material.zenodo_link }}">

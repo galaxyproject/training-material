@@ -24,16 +24,16 @@ do
     if [ -f $dir/tools.yaml ]
     then
         echo " - Installing tools"
-        shed-install -t $dir/tools.yaml -g $galaxy_instance -u $GALAXY_DEFAULT_ADMIN_USER -p $GALAXY_DEFAULT_ADMIN_PASSWORD
+        shed-tools install -t $dir/tools.yaml -g $galaxy_instance -u $GALAXY_DEFAULT_ADMIN_USER -p $GALAXY_DEFAULT_ADMIN_PASSWORD
     else
         echo " - No tools to install (no file named tools.yaml present)"
     fi
 
-    # install workflows (TODO: make them shared instead of just under admin user account?)
+    # install workflows
     if [ -d $dir/workflows/ ];
     then
         echo " - Installing workflows"
-        workflow-install --workflow_path $dir/workflows/ -g $galaxy_instance -u $GALAXY_DEFAULT_ADMIN_USER -p $GALAXY_DEFAULT_ADMIN_PASSWORD
+        workflow-install --publish_workflows --workflow_path $dir/workflows/ -g $galaxy_instance -u $GALAXY_DEFAULT_ADMIN_USER -p $GALAXY_DEFAULT_ADMIN_PASSWORD
     else
         echo " - No workflows to install (no directory named workflows present)"
     fi
