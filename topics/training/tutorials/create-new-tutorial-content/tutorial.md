@@ -250,11 +250,13 @@ To improve the learning experience in our tutorial, we defined some boxes to hig
 
 They are defined always with the same structure:
 
+{% raw %}
 ```
-> ### <an emoji> Type of box: Name of the box
+> ### {% icon an_icon %} Type of box: Name of the box
 > list
 {: .type_of_box}
 ```
+{% endraw %}
 
 For a correct rendering of the tutorial's content, the templating system requires this structure to be kept as it.
 The different defined boxes are:
@@ -314,27 +316,55 @@ The different defined boxes are:
 
     {% raw %}
     ```
-    > ### {% icon hands_on %} Hands-on: Sorting BAM dataset
+    > ### {% icon hands_on %} Hands-on: Spliced mapping
     >
-    > 1. **Sort BAM dataset** {% icon tool %}: Sort the paired-end BAM file by "Read names" with **Sort BAM
+    > 1. **RNA STAR** {% icon tool %}: Map your reads on the reference genome with
+    >    - "Single-end or paired-end reads" to `Paired-end (as individual datasets)`
+    >    - "RNA-Seq FASTQ/FASTA file, forward reads" to the generated `trimmed reads pair 1` files (multiple datasets)
+    >    - "RNA-Seq FASTQ/FASTA file, reverse reads" to the generated `trimmed reads pair 2` files (multiple datasets)
+    >    - "Custom or built-in reference genome" to `Use a built-in index`
+    >    - "Reference genome with or without an annotation" to `use genome reference without builtin gene-model`
+    >    - "Select reference genome" to `Drosophila Melanogaster (dm6)`
+    >    - "Gene model (gff3,gtf) file for splice junctions" to the imported `Drosophila_melanogaster.BDGP6.87.gtf`
+    >    - "Length of the genomic sequence around annotated junctions" to `36`
+    >
+    >        This parameter should be length of reads - 1
+    >
+    > 2. **MultiQC** {% icon tool %}: Aggregate the STAR logs with
+    >      - "Which tool was used generate logs?" to `STAR`
+    >      - "Type of FastQC output?" to `Log`
+    >      - "STAR log output" to the generated `log` files (multiple datasets)
     {: .hands_on}
     ```
     {% endraw %}
 
-    Which, when rendered will appear like:
-
-    > ### {% icon hands_on %} Hands-on: Sorting BAM dataset
-    >
-    > 1. **Sort BAM dataset** {% icon tool %}: Sort the paired-end BAM file by "Read names" with **Sort BAM
-    {: .hands_on}
-
     with the
 
-    - `{% icon hands_on %}` emoji to define that is an hands-on
+    - {% raw %}`{% icon hands_on %}`{% endraw %} emoji to define that is an hands-on
     - Short imperative sentence to make it easy to identify the tasks
-    - Name of the tool in bold with the `{% icon tool %}` emoji to make it easy to identify a Galaxy tool
-    - Parameters for the tool as a sublist<br/>
-    <br/>
+    - Name of the tool in bold with the {% raw %}`{% icon tool %}`{% endraw %} emoji to make it easy to identify a Galaxy tool
+    - Parameters for the tool as a sublist
+
+    It will be rendered like:
+
+    > ### {% icon hands_on %} Hands-on: Spliced mapping
+    >
+    > 1. **RNA STAR** {% icon tool %}: Map your reads on the reference genome with
+    >    - "Single-end or paired-end reads" to `Paired-end (as individual datasets)`
+    >    - "RNA-Seq FASTQ/FASTA file, forward reads" to the generated `trimmed reads pair 1` files (multiple datasets)
+    >    - "RNA-Seq FASTQ/FASTA file, reverse reads" to the generated `trimmed reads pair 2` files (multiple datasets)
+    >    - "Length of the genomic sequence around annotated junctions" to `36`
+    >
+    >        This parameter should be length of reads - 1
+    >
+    > 2. **MultiQC** {% icon tool %}: Aggregate the STAR logs with
+    >      - "Which tool was used generate logs?" to `STAR`
+    >      - "Type of FastQC output?" to `Log`
+    >      - "STAR log output" to the generated `log` files (multiple datasets)
+    {: .hands_on}
+    {: .hands_on}
+
+    
 
 -  Questions and solution
 
