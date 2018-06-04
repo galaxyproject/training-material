@@ -112,13 +112,10 @@ Run `Stacks: De novo map` Galaxy tool. This program will run `ustacks`, `cstacks
 >    > 1. Can you identify the meanning of the number 425?
 >    > 2. Looking at the catalog.tags file, identify specific and shared loci from each individual. Count nuber of catalog loci coming from the first individual, from the second and thus find on both parents.
 >    >
->    >    <details>
->    >    <summary>Click to view answers</summary>
->    >    <ol type="1">
->    >    <li> Here, the catalog is made with 459 tags, 425 coming from the "reference individual", here female. Some of these 425 can be shared with the other parent.</li>
->    >    <li>3500</li>
->    >    </ol>
->    >    </details>
+>    >    > ### {% icon solution %} Solution
+>    >    > 1. Here, the catalog is made with 459 tags, 425 coming from the "reference individual", here female. Some of these 425 can be shared with the other parent.
+>    >    > 2. 3500
+>    >    {: .solution }
 >
 >    `sstacks`
 >
@@ -212,13 +209,10 @@ Run `Stacks: De novo map` Galaxy tool. This program will run `ustacks`, `cstacks
 >    > 1. The use of the deleverage algorithm allows to not consider loci obtained from merging more than 3 stacks. Why 3 if biologically, you are waiting something related to 2 for diploid organisms?
 >    > 2. Re-execute **Stacks: De novo map** pipeline modifying the p-value treshold for the SNP model. What is the difference regarding to unverified haplotypes ?
 >    >
->    >    <details>
->    >    <summary>Click to view answers</summary>
->    >    <ol type="1">
->    >    <li>This value of 3 is important to use if we don't want to blacklist loci for whom 99.9% of individuals have one and/or the alt allele and 0.01% have a third one, resulting of a sequencing error.</li>
->    >    <li>We see a moficiation of the number of unverified haplotypes</li>
->    >    </ol>
->    >    </details>
+>    >    > ### {% icon solution %} Solution
+>    >    > 1. This value of 3 is important to use if we don't want to blacklist loci for whom 99.9% of individuals have one and/or the alt allele and 0.01% have a third one, resulting of a sequencing error.
+>    >    > 2. We see a moficiation of the number of unverified haplotypes
+>    >    {: .solution }
 
 # Conclusion
 {:.no_toc}

@@ -75,13 +75,10 @@ The first step of any ChIP-Seq data analysis is quality control of the raw seque
 >    > 1. How are the DNA sequences stored?
 >    > 2. What are the other entries?
 >    >
->    >    <details>
->    >    <summary>Click to view answers</summary>
->    >    <ol type="1">
->    >    <li>The DNA sequences are stored in the second line of every 4-line group</li>
->    >    <li>This file is called a <a href="https://en.wikipedia.org/wiki/FASTQ_format">FastQ file</a>. It stores sequence information and quality information. Each sequence is represented by a group of 4 lines with the 1st line being the sequence id, the second the sequence of nucleotides, the third a transition line and the last one a sequence of quality score for each nucleotide.</li>
->    >    </ol>
->    >    </details>
+>    >    > ### {% icon solution %} Solution
+>    >    > 1. The DNA sequences are stored in the second line of every 4-line group
+>    >    > 2. This file is called a [FastQ file](https://en.wikipedia.org/wiki/FASTQ_format). It stores sequence information and quality information. Each sequence is represented by a group of 4 lines with the 1st line being the sequence id, the second the sequence of nucleotides, the third a transition line and the last one a sequence of quality score for each nucleotide.
+>    >    {: .solution }
 >    {: .question}
 >
 > 4. Run **FastQC** {% icon tool %} with
@@ -128,12 +125,9 @@ Nowadays, there are many read alignment programs for shotgun sequenced DNA, Bowt
 >    >
 >    > 1. How many reads where mapped?
 >    >
->    >    <details>
->    >    <summary>Click to view answers</summary>
->    >    <ol type="1">
->    >    <li>This information can be accessed by clicking on the resulting history entry. You can see some basic mapping statistics once the alignment is completed. 16676 (66.96%) were mapped exactly 1 time and 7919 (31.80%) aligned >1 times. The overall alignment rate is then 98.76%.</li>
->    >    </ol>
->    >    </details>
+>    >    > ### {% icon solution %} Solution
+>    >    > 1. This information can be accessed by clicking on the resulting history entry. You can see some basic mapping statistics once the alignment is completed. 16676 (66.96%) were mapped exactly 1 time and 7919 (31.80%) aligned >1 times. The overall alignment rate is then 98.76%.
+>    >    {: .solution }
 >    {: .question}
 >
 {: .hands_on}
@@ -160,12 +154,9 @@ The reads have a direction: they are mapped to the forward or reverse strand, re
 >
 > 1. Some reads have colored lines included. What is this?
 >
->    <details>
->    <summary>Click to view answers</summary>
->    <ol type="1">
->    <li>Try to zoom in in one of those lines and you will see the answer!</li>
->    </ol>
->    </details>
+>    > ### {% icon solution %} Solution
+>    > 1. Try to zoom in in one of those lines and you will see the answer!
+>    {: .solution }
 {: .question}
 
 > ### {% icon comment %} Comments
@@ -196,14 +187,11 @@ A SAM file is a file with
 >
 > 1. Which information do you find in a SAM/BAM file? What is the additional information compared to a FASTQ file.
 >
->    <details>
->    <summary>Click to view answers</summary>
->    <ol type="1">
->       <li>Sequences and Quality information, like FASTQ</li>
->       <li>Mapping information; Location of the read on the chromosome; Mapping quality ...</li>
->       <li>For more information please see <a href="https://en.wikipedia.org/wiki/SAM_(file_format)">https://en.wikipedia.org/wiki/SAM_(file_format)</a></li>
->    </ol>
->    </details>
+>    > ### {% icon solution %} Solution
+>    > 1. Sequences and Quality information, like FASTQ
+>    > 2. Mapping information; Location of the read on the chromosome; Mapping quality ...
+>    > 3. For more information please see [https://en.wikipedia.org/wiki/SAM_(file_format)](https://en.wikipedia.org/wiki/SAM_(file_format))
+>    {: .solution }
 {: .question}
 
 # Step 3: ChIP-seq Quality Control
@@ -262,13 +250,10 @@ To save time, we already did that and we can now work directly on the BAM files 
 >
 > 1. How are your samples clustered? Does that correspond to your expectations?
 >
->    <details>
->    <summary>Click to view answers</summary>
->    <ol type="1">
->       <li>Badly, this is due to the subsampling of our data. You should expect better results from your real data.</li>
->       <li>Expected is that your inputs and your ChIP samples cluster together.</li>
->    </ol>
->    </details>
+>    > ### {% icon solution %} Solution
+>    > 1. Badly, this is due to the subsampling of our data. You should expect better results from your real data.
+>    > 2. Expected is that your inputs and your ChIP samples cluster together.
+>    {: .solution }
 {: .question}
 
 > ### {% icon comment %} Comments
@@ -301,11 +286,10 @@ The plotFingerprint tool generates a fingerprint plot. You need to intepret it t
 >
 > 1. What do you think about the quality of the IP for this experiment?
 >
->    <details>
->    <summary>Click to view answers</summary>
->       The difference between input and ChIP signal is not totally clear. 20% of chromosome 1 are not sequenced
->       at all and the ChIP signal is only slightly more enrichted then the input.
->    </details>
+>    > ### {% icon solution %} Solution
+>    >  The difference between input and ChIP signal is not totally clear. 20% of chromosome 1 are not sequenced
+>    >  at all and the ChIP signal is only slightly more enrichted then the input.
+>    {: .solution }
 {: .question}
 
 > ### {% icon hands_on %} (Optional) Hands-on: IP strength estimation (other samples)
@@ -340,13 +324,10 @@ These differences can bias the interpretation of the number of reads mapped to a
 >    > 1. What is the output of this tool?
 >    > 2. How many reads has been mapped on chr2 for the input and for the ChIP-seq samples?
 >    >
->    >    <details>
->    >    <summary>Click to view answers</summary>
->    >    <ol type="1">
->    >    <li>This tool estimates how many reads mapped to which chromosome. Furthermore, it tells the chromosome lengths and naming convention (with or without 'chr' in the beginning)</li>
->    >    <li>1,089,370 for ChIP-seq samples and 1,467,480 for the input</li>
->    >    </ol>
->    >    </details>
+>    >    > ### {% icon solution %} Solution
+>    >    > 1. This tool estimates how many reads mapped to which chromosome. Furthermore, it tells the chromosome lengths and naming convention (with or without 'chr' in the beginning)
+>    >    > 2. 1,089,370 for ChIP-seq samples and 1,467,480 for the input
+>    >    {: .solution }
 >    {: .question}
 >
 > 2. **bamCoverage** {% icon tool %} with
@@ -360,12 +341,9 @@ These differences can bias the interpretation of the number of reads mapped to a
 >    >
 >    > 1. What are the different columns of a `bedgraph` file?
 >    >
->    >    <details>
->    >    <summary>Click to view answers</summary>
->    >    <ol type="1">
->    >      <li>chrom, chromStart, chromEnd and a data value</li>
->    >    </ol>
->    >    </details>
+>    >    > ### {% icon solution %} Solution
+>    >    > 1. chrom, chromStart, chromEnd and a data value
+>    >    {: .solution }
 >    {: .question}
 >
 > 3. **bamCoverage** {% icon tool %} with the same parameters but to generate a `bigWig` output file
@@ -375,11 +353,10 @@ These differences can bias the interpretation of the number of reads mapped to a
 >    >
 >    > 1. What is a bigWig file?
 >    >
->    >    <details>
->    >    <summary>Click to view answers</summary>
->    >    A bigWig file is a compressed bedgraph file. Similar in relation as BAm to SAM, but this time just for coverage data. This means bigWig and bedgraph
->    >    files are much smaller than BAM or SAM files.
->    >    </details>
+>    >    > ### {% icon solution %} Solution
+>    >    > A bigWig file is a compressed bedgraph file. Similar in relation as BAm to SAM, but this time just for coverage data. This means bigWig and bedgraph
+>    >    > files are much smaller than BAM or SAM files.
+>    >    {: .solution }
 >    {: .question}
 >
 {: .hands_on}
@@ -402,12 +379,9 @@ To extract only the information induced by the immunoprecipitation, we normalize
 >    >
 >    > 1. What does mean a positive or a negative value in the 4th column?
 >    >
->    >    <details>
->    >    <summary>Click to view answers</summary>
->    >    <ol type="1">
->    >    <li>The 4th column contains the log2 of the number of reads ratio between the ChIP-seq sample and the input sample. A positive value means that the coverage on the portion is more important in the ChIP-seq sample than in the input sample</li>
->    >    </ol>
->    >    </details>
+>    >    > ### {% icon solution %} Solution
+>    >    > 1. The 4th column contains the log2 of the number of reads ratio between the ChIP-seq sample and the input sample. A positive value means that the coverage on the portion is more important in the ChIP-seq sample than in the input sample
+>    >    {: .solution }
 >    {: .question}
 >
 > 2. **bamCompare** {% icon tool %} with the same parameters but to generate a `bigWig` output file
@@ -507,13 +481,9 @@ For practical reasons, we will focus here only on one of our BAM files. With rea
 >
 > 1. Can you guess why it makes more sense to check the input files for GC bias?
 >
->    <details>
->    <summary>Click to view answers</summary>
->    <ol type="1">
->       <li>We only want to assess the bias induced by the PCR-based protocols. This is not possible with the ChIP samples, as the enriched regions
->        (binding sites) can have a potential GC enrichment on their own.</li>
->    </ol>
->    </details>
+>    > ### {% icon solution %} Solution
+>    > 1. We only want to assess the bias induced by the PCR-based protocols. This is not possible with the ChIP samples, as the enriched regions (binding sites) can have a potential GC enrichment on their own.
+>    {: .solution }
 {: .question}
 
 > ### {% icon hands_on %} Hands-on: GC bias assessment
@@ -532,12 +502,9 @@ For practical reasons, we will focus here only on one of our BAM files. With rea
 >    >
 >    > 1. Does this dataset have a GC bias?
 >    >
->    >    <details>
->    >    <summary>Click to view answers</summary>
->    >    <ol type="1">
->    >    <li>There is no significantly more reads in the GC-rich regions.</li>
->    >    </ol>
->    >    </details>
+>    >    > ### {% icon solution %} Solution
+>    >    > 1. There is no significantly more reads in the GC-rich regions.
+>    >    {: .solution }
 >    {: .question}
 {: .hands_on}
 

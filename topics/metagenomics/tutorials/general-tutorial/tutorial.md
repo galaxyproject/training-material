@@ -151,12 +151,12 @@ times, we'll unique our sequences using the `Unique.seqs` command:
 >    >
 >    > How many sequences were unique? How many duplicates were removed?
 >    >
->    >    <details>
->    >    <summary>Click to view answer</summary>
->    >    19,502 unique sequences and 498 duplicates. <br>
->    >    This can be determined from the number of lines in the fasta (or names) output, compared to the
->    >    number of lines in the fasta file before this step.
->    >    </details>
+>    >    > ### {% icon solution %} Solution
+>    >    > 19,502 unique sequences and 498 duplicates.
+>    >    >
+>    >    > This can be determined from the number of lines in the fasta (or names) output, compared to the
+>    >    > number of lines in the fasta file before this step.
+>    >    {: .solution }
 >    {: .question}
 >
 {: .hands_on}
@@ -246,11 +246,11 @@ The following tool will remove any sequences with ambiguous bases (`maxambig` pa
 >
 > How many reads were removed in this screening step? (Hint: run the `Summary.seqs` tool again)
 >
-> <details>
-> <summary>Click to view answer</summary>
-> 1,804. <br>
-> This can be determined by looking at the number of lines in bad.accnos output of screen.seqs step or by comparing the total number of seqs between of the summary.seqs log before and after this screening step
-> </details>
+> > ### {% icon solution %} Solution
+> > 1,804.
+> >
+> > This can be determined by looking at the number of lines in bad.accnos output of screen.seqs step or by comparing the total number of seqs between of the summary.seqs log before and after this screening step
+> {: .solution }
 {: .question}
 
 ## Sequence Alignment
@@ -300,14 +300,10 @@ total # of seqs:    18178
 > 1. How many sequences have been aligned?
 > 2. Between which positions most of the reads are aligned to this references?
 >
->    <details>
->    <summary>Click to view answers</summary>
->    <ol type="1">
->    <li>17,698 are aligned</li>
->    <li>From this we can see that most of our reads align nicely to positions `3080-13424` on this reference.
-This corresponds exactly to the V4 target region of the 16S gene.</li>
->    </ol>
->    </details>
+>    > ### {% icon solution %} Solution
+>    > 1. 17,698 are aligned
+>    > 2. From this we can see that most of our reads align nicely to positions `3080-13424` on this reference. This corresponds exactly to the V4 target region of the 16S gene.
+>    {: .solution }
 {: .question}
 
 To make sure that everything overlaps the same region we'll re-run `Screen.seqs` to get sequences that start at or before position 3,080 and end at or after position 13,424.
@@ -324,10 +320,9 @@ To make sure that everything overlaps the same region we'll re-run `Screen.seqs`
 
 > ### {% icon question %} Question
 > How many sequences were removed in this step?
-> <details>
-> <summary> Click to view answer</summary>
-> 4,579 sequences were removed. This is the number of lines in the bad.accnos output.
-> </details>
+> > ### {% icon solution %} Solution
+> > 4,579 sequences were removed. This is the number of lines in the bad.accnos output.
+> {: .solution }
 {: .question}
 
 Now we know our sequences overlap the same alignment coordinates, we want to make sure they *only* overlap that region. So we'll filter the sequences to remove the overhangs at both ends. In addition, there are many columns in the alignment that only contain gap characters (*i.e.* "."). These can be pulled out without losing any information. We'll do all this with `Filter.seqs`:
@@ -368,11 +363,11 @@ The first thing we want to do is to further de-noise our sequences, by pre-clust
 >   > ### {% icon question %} Question
 >   >
 >   >  How many unique sequences are we left with after this clustering of highly similar sequences?
->   > <details>
->   >   <summary> Click to view answer</summary>
->   >   10,398 <br>
->   >   This is the number of lines in the fasta output
->   > </details>
+>   > > ### {% icon solution %} Solution
+>   > > 10,398
+>   > >
+>   > > This is the number of lines in the fasta output
+>   > {: .solution }
 >   {: .question}
 >
 {: .hands_on}
@@ -464,13 +459,10 @@ We probably also want to know the taxonomy for each of our OTUs. We can get the 
 > 1. How many OTUs with taxonomic assignation are found for the Anguil sample? And for the Pampa sample?
 > 2. What is the annotation of first OTU and its size?
 >
->    <details>
->    <summary>Click to view answers</summary>
->    <ol type="1">
->    <li>2,195 for Anguil and 2,472 for Pampa ("tax.summary")</li>
->    <li>Otu00001 is associated to 929 sequences and to Bacteria (kingdom), Verrucomicrobia (phylum), Spartobacteria (class) in "taxonomy" file</li>
->    </ol>
->    </details>
+>    > ### {% icon solution %} Solution
+>    > 1. 2,195 for Anguil and 2,472 for Pampa ("tax.summary")
+>    > 2. Otu00001 is associated to 929 sequences and to Bacteria (kingdom), Verrucomicrobia (phylum), Spartobacteria (class) in "taxonomy" file
+>    {: .solution }
 {: .question}
 
 ## Visualization
@@ -514,14 +506,13 @@ In this new Krona output you can switch between the combined plot and the per-sa
 
 > ### {% icon question %} Question
 > Which soil sample had a higher percentage of Acidobacteria, anguil or pampa? what were the respective percentages?
-> <details>
-> <summary> Click to view answer</summary>
-> The anguil sample had a higher proportion of Acidobacteria. The exact percentages can be found by looking at the pie charts at the
-> top right-hand corner after clicking on the label Acidobacteria. For anguil the percentage is 36%, for the pampa sample it is 26%.
+> > ### {% icon solution %} Solution
+> > The anguil sample had a higher proportion of Acidobacteria. The exact percentages can be found by looking at the pie charts at the
+> > top right-hand corner after clicking on the label Acidobacteria. For anguil the percentage is 36%, for the pampa sample it is 26%.
+> >
+> ![krona plot with acidobactaria highlighted](../../images/krona-multisample.png)
 >
-> <img src="../../images/krona-multisample.png" alt="krona plot with acidobactaria highlighted"/>
->
-> </details>
+> {: .solution }
 {: .question}
 
 
@@ -618,14 +609,11 @@ In this tutorial, we use the second approach with MetaPhlAn2. This tools is usin
 > 2. What are the two orders found in our sample?
 > 3. What is the most abundant family in our sample?
 >
->    <details>
->    <summary>Click to view answers</summary>
->    <ol type="1">
->    <li>We have access to species level</li>
->    <li>Pseudomonadales and Solirubrobacterales are found in our sample</li>
->    <li>The most abundant family is Pseudomonadaceae with 86.21 % of the assigned sequences</li>
->    </ol>
->    </details>
+>    > ### {% icon solution %} Solution
+>    > 1. We have access to species level
+>    > 2. Pseudomonadales and Solirubrobacterales are found in our sample
+>    > 3. The most abundant family is Pseudomonadaceae with 86.21 % of the assigned sequences
+>    {: .solution }
 {: .question}
 
 Even if the output of MetaPhlAn2 is bit easier to parse than the BIOM file, we want to visualize and explore the community structure with KRONA
@@ -691,10 +679,9 @@ HUMAnN2 generates 3 files
 >
 > How many gene families and pathways have been identified?
 >
->    <details>
->    <summary>Click to view answers</summary>
->    44 gene families but no pathways are identified
->    </details>
+>    > ### {% icon solution %} Solution
+>    > 44 gene families but no pathways are identified
+>    {: .solution }
 {: .question}
 
 The RPK for the gene families are quite difficult to interpret in term of relative abundance. We decide then to normalize the values
@@ -711,13 +698,10 @@ The RPK for the gene families are quite difficult to interpret in term of relati
 >  > 1. Which percentage of sequences has not be assigned to a gene family?
 >  > 2. What is the most abundant gene family?
 >  >
->  >    <details>
->  >    <summary>Click to view answers</summary>
->  >    <ol type="1">
->  >    <li>55% of the sequences has not be assigned to a gene family</li>
->  >    <li>The most abundant gene family with 25% of sequences is a putative secreted protein</li>
->  >    </ol>
->  >    </details>
+>  >    > ### {% icon solution %} Solution
+>  >    > 1. 55% of the sequences has not be assigned to a gene family
+>  >    > 2. The most abundant gene family with 25% of sequences is a putative secreted protein
+>  >    {: .solution }
 >  {: .question}
 {: .hands_on}
 

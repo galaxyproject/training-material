@@ -106,51 +106,50 @@ Now that we know what our input data is, let's get it into our Galaxy history:
 > - Option 2: From your Zenodo:
 >   - Data is available from Zenodo here: [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.800651.svg)](https://doi.org/10.5281/zenodo.800651)
 >   - In the file upload menu choose the `Paste/Fetch data` option and enter the following urls to import the file from Zenodo to Galaxy directly
->    <details>
->    <summary> Click to view Zenodo URLs</summary>
->    <pre>
-> https://zenodo.org/record/800651/files/F3D0_R1.fastq
-> https://zenodo.org/record/800651/files/F3D0_R2.fastq
-> https://zenodo.org/record/800651/files/F3D141_R1.fastq
-> https://zenodo.org/record/800651/files/F3D141_R2.fastq
-> https://zenodo.org/record/800651/files/F3D142_R1.fastq
-> https://zenodo.org/record/800651/files/F3D142_R2.fastq
-> https://zenodo.org/record/800651/files/F3D143_R1.fastq
-> https://zenodo.org/record/800651/files/F3D143_R2.fastq
-> https://zenodo.org/record/800651/files/F3D144_R1.fastq
-> https://zenodo.org/record/800651/files/F3D144_R2.fastq
-> https://zenodo.org/record/800651/files/F3D145_R1.fastq
-> https://zenodo.org/record/800651/files/F3D145_R2.fastq
-> https://zenodo.org/record/800651/files/F3D146_R1.fastq
-> https://zenodo.org/record/800651/files/F3D146_R2.fastq
-> https://zenodo.org/record/800651/files/F3D147_R1.fastq
-> https://zenodo.org/record/800651/files/F3D147_R2.fastq
-> https://zenodo.org/record/800651/files/F3D148_R1.fastq
-> https://zenodo.org/record/800651/files/F3D148_R2.fastq
-> https://zenodo.org/record/800651/files/F3D149_R1.fastq
-> https://zenodo.org/record/800651/files/F3D149_R2.fastq
-> https://zenodo.org/record/800651/files/F3D150_R1.fastq
-> https://zenodo.org/record/800651/files/F3D150_R2.fastq
-> https://zenodo.org/record/800651/files/F3D1_R1.fastq
-> https://zenodo.org/record/800651/files/F3D1_R2.fastq
-> https://zenodo.org/record/800651/files/F3D2_R1.fastq
-> https://zenodo.org/record/800651/files/F3D2_R2.fastq
-> https://zenodo.org/record/800651/files/F3D3_R1.fastq
-> https://zenodo.org/record/800651/files/F3D3_R2.fastq
-> https://zenodo.org/record/800651/files/F3D5_R1.fastq
-> https://zenodo.org/record/800651/files/F3D5_R2.fastq
-> https://zenodo.org/record/800651/files/F3D6_R1.fastq
-> https://zenodo.org/record/800651/files/F3D6_R2.fastq
-> https://zenodo.org/record/800651/files/F3D7_R1.fastq
-> https://zenodo.org/record/800651/files/F3D7_R2.fastq
-> https://zenodo.org/record/800651/files/F3D8_R1.fastq
-> https://zenodo.org/record/800651/files/F3D8_R2.fastq
-> https://zenodo.org/record/800651/files/F3D9_R1.fastq
-> https://zenodo.org/record/800651/files/F3D9_R2.fastq
-> https://zenodo.org/record/800651/files/Mock_R1.fastq
-> https://zenodo.org/record/800651/files/Mock_R2.fastq
->    </pre>
->    </details>
+>    > ### {% icon solution %} Solution
+>    > ```
+>    > https://zenodo.org/record/800651/files/F3D0_R1.fastq
+>    > https://zenodo.org/record/800651/files/F3D0_R2.fastq
+>    > https://zenodo.org/record/800651/files/F3D141_R1.fastq
+>    > https://zenodo.org/record/800651/files/F3D141_R2.fastq
+>    > https://zenodo.org/record/800651/files/F3D142_R1.fastq
+>    > https://zenodo.org/record/800651/files/F3D142_R2.fastq
+>    > https://zenodo.org/record/800651/files/F3D143_R1.fastq
+>    > https://zenodo.org/record/800651/files/F3D143_R2.fastq
+>    > https://zenodo.org/record/800651/files/F3D144_R1.fastq
+>    > https://zenodo.org/record/800651/files/F3D144_R2.fastq
+>    > https://zenodo.org/record/800651/files/F3D145_R1.fastq
+>    > https://zenodo.org/record/800651/files/F3D145_R2.fastq
+>    > https://zenodo.org/record/800651/files/F3D146_R1.fastq
+>    > https://zenodo.org/record/800651/files/F3D146_R2.fastq
+>    > https://zenodo.org/record/800651/files/F3D147_R1.fastq
+>    > https://zenodo.org/record/800651/files/F3D147_R2.fastq
+>    > https://zenodo.org/record/800651/files/F3D148_R1.fastq
+>    > https://zenodo.org/record/800651/files/F3D148_R2.fastq
+>    > https://zenodo.org/record/800651/files/F3D149_R1.fastq
+>    > https://zenodo.org/record/800651/files/F3D149_R2.fastq
+>    > https://zenodo.org/record/800651/files/F3D150_R1.fastq
+>    > https://zenodo.org/record/800651/files/F3D150_R2.fastq
+>    > https://zenodo.org/record/800651/files/F3D1_R1.fastq
+>    > https://zenodo.org/record/800651/files/F3D1_R2.fastq
+>    > https://zenodo.org/record/800651/files/F3D2_R1.fastq
+>    > https://zenodo.org/record/800651/files/F3D2_R2.fastq
+>    > https://zenodo.org/record/800651/files/F3D3_R1.fastq
+>    > https://zenodo.org/record/800651/files/F3D3_R2.fastq
+>    > https://zenodo.org/record/800651/files/F3D5_R1.fastq
+>    > https://zenodo.org/record/800651/files/F3D5_R2.fastq
+>    > https://zenodo.org/record/800651/files/F3D6_R1.fastq
+>    > https://zenodo.org/record/800651/files/F3D6_R2.fastq
+>    > https://zenodo.org/record/800651/files/F3D7_R1.fastq
+>    > https://zenodo.org/record/800651/files/F3D7_R2.fastq
+>    > https://zenodo.org/record/800651/files/F3D8_R1.fastq
+>    > https://zenodo.org/record/800651/files/F3D8_R2.fastq
+>    > https://zenodo.org/record/800651/files/F3D9_R1.fastq
+>    > https://zenodo.org/record/800651/files/F3D9_R2.fastq
+>    > https://zenodo.org/record/800651/files/Mock_R1.fastq
+>    > https://zenodo.org/record/800651/files/Mock_R2.fastq
+>    > ```
+>    {: .solution }
 > <br>
 >
 > 3. **Import Reference Data.**  Go back to the data library and import the following reference
@@ -162,17 +161,16 @@ Now that we know what our input data is, let's get it into our Galaxy history:
 >  - `trainset9_032012.pds.fasta`
 >  - `trainset9_032012.pds.tax`
 >
->    <details>
->    <summary>Click to view Zenodo URLs</summary>
->    <pre>
->    https://zenodo.org/record/800651/files/HMP_MOCK.v35.fasta
->    https://zenodo.org/record/800651/files/mouse.dpw.metadata
->    https://zenodo.org/record/800651/files/mouse.time.design
->    https://zenodo.org/record/800651/files/silva.v4.fasta
->    https://zenodo.org/record/800651/files/trainset9_032012.pds.fasta
->    https://zenodo.org/record/800651/files/trainset9_032012.pds.tax
->    </pre>
->    </details>
+>    > ### {% icon solution %} Solution
+>    > ```
+>    > https://zenodo.org/record/800651/files/HMP_MOCK.v35.fasta
+>    > https://zenodo.org/record/800651/files/mouse.dpw.metadata
+>    > https://zenodo.org/record/800651/files/mouse.time.design
+>    > https://zenodo.org/record/800651/files/silva.v4.fasta
+>    > https://zenodo.org/record/800651/files/trainset9_032012.pds.fasta
+>    > https://zenodo.org/record/800651/files/trainset9_032012.pds.tax
+>    > ```
+>    {: .solution }
 {: .hands_on}
 
 Now that's a lot of files to manage. Luckily Galaxy can make life a bit easier by allowing us to create
@@ -316,13 +314,13 @@ The following tool will remove any sequences with ambiguous bases (`maxambig` pa
 > >
 > > How many reads were removed in this screening step? (Hint: run the summary.seqs tool again)
 > >
-> >    <details>
-> >    <summary>Click to view answer</summary>
-> >    23,488. <br>
-> >    This can be determined by looking at the number of lines in bad.accnos output of screen.seqs
-> >    or by comparing the total number of seqs between of the summary log before and after this screening
-> >    step
-> >    </details>
+> >    > ### {% icon solution %} Solution
+> >    > 23,488.
+> >    > 
+> >    > This can be determined by looking at the number of lines in bad.accnos output of screen.seqs
+> >    > or by comparing the total number of seqs between of the summary log before and after this screening
+> >    > step
+> >    {: .solution }
 > {: .question}
 {: .hands_on}
 
@@ -343,12 +341,11 @@ times, we'll unique our sequences using the `unique.seqs` command:
 > >
 > > How many sequences were unique? how many duplicates were removed?
 > >
-> >    <details>
-> >    <summary>Click to view answer</summary>
-> >    16,426 unique sequences and 112,446 duplicates. <br>
-> >    This can be determined from the number of lines in the fasta (or names) output, compared to the
-> >    number of lines in the fasta file before this step.
-> >    </details>
+> >    > ### {% icon solution %} Solution
+> >    > 16,426 unique sequences and 112,446 duplicates.
+> >    >
+> >    > This can be determined from the number of lines in the fasta (or names) output, compared to the
+> >    > number of lines in the fasta file before this step.
 > {: .question}
 {: .hands_on}
 
@@ -452,10 +449,9 @@ base in a row (this also could have been done in the first execution of `screen.
 > > ### {% icon question %} Question
 > >
 > >  How many sequences were removed in this step?
-> > <details>
-> >   <summary> Click to view answer</summary>
-> >   128 sequences were removed. This is the number of lines in the bad.accnos output.
-> > </details>
+> > > ### {% icon solution %} Solution
+> > > 128 sequences were removed. This is the number of lines in the bad.accnos output.
+> > {: .solution }
 > {: .question}
 {: .hands_on}
 
@@ -498,10 +494,10 @@ columns. Because we've perhaps created some redundancy across our sequences by t
 > > ### {% icon question %} Question
 > >
 > >  How many duplicate sequences did our filter step produce?
-> > <details>
-> >   <summary> Click to view answer</summary>
-> >   3. The number of unique sequences was reduced from 16298 to 16295
-> > </details>
+> >
+> > > ### {% icon solution %} Solution
+> > > 3. The number of unique sequences was reduced from 16298 to 16295
+> > {: .solution }
 > {: .question}
 {: .hands_on}
 
@@ -523,10 +519,9 @@ merged. We generally recommend allowing 1 difference for every 100 basepairs of 
 > > ### {% icon question %} Question
 > >
 > >  How many unique sequences are we left with after this clustering of highly similar sequences?
-> > <details>
-> >   <summary> Click to view answer</summary>
-> >   5720. This is the number of lines in the fasta output
-> > </details>
+> > > ### {% icon solution %} Solution
+> > > 5720. This is the number of lines in the fasta output
+> > {: .solution }
 > {: .question}
 {: .hands_on}
 
@@ -567,12 +562,11 @@ when they're the most abundant sequence in another sample. This is how we do it:
 > > ### {% icon question %} Question
 > >
 > >  How many sequences were flagged as chimeric? what is the percentage? (Hint: summary.seqs)
-> > <details>
-> >   <summary> Click to view answer</summary>
-> >   If we run summary.seqs on the resulting fasta file and count table, we see that we went from 128,655
-> >   sequences down to 118,091 sequences in this step, for a reduction of 8.2%. This is a reasonable number of
-> >   sequences to be flagged as chimeric.
-> > </details>
+> > > ### {% icon solution %} Solution
+> > > If we run summary.seqs on the resulting fasta file and count table, we see that we went from 128,655
+> > > sequences down to 118,091 sequences in this step, for a reduction of 8.2%. This is a reasonable number of
+> > > sequences to be flagged as chimeric.
+> > {: .solution }
 > {: .question}
 {: .hands_on}
 
@@ -616,17 +610,18 @@ Let's go ahead and classify those sequences using the Bayesian classifier with t
 > > 1. How many unique (representative) sequences were removed in this step?
 > > 2. How many sequences in total?
 > >
-> >    <details>
-> >      <summary> Click to view answer</summary><br>
-> >      20 representative sequences were removed. <br>
-> >      The fasta file output from Remove.seqs had 2281 sequences while the fasta output from Remove.lineages
-> >      contained 2261 sequences.
-> >      <br><br>
-> >      162 total sequences were removed. <br>
-> >      If you run summary.seqs with the count table, you will see that we now have 2261 unique sequences
-> >      representing a total of 117,929 total sequences (down from 118,091 before). This means 162 of our
-> >      sequences were in represented by these 20 representative sequences.
-> >    </details>
+> >    > ### {% icon solution %} Solution
+> >    > 20 representative sequences were removed.
+> >    >
+> >    > The fasta file output from Remove.seqs had 2281 sequences while the fasta output from Remove.lineages
+> >    > contained 2261 sequences.
+> >    >
+> >    > 162 total sequences were removed.
+> >    >
+> >    > If you run summary.seqs with the count table, you will see that we now have 2261 unique sequences
+> >    > representing a total of 117,929 total sequences (down from 118,091 before). This means 162 of our
+> >    > sequences were in represented by these 20 representative sequences.
+> >    {: .solution }
 > {: .question}
 {: .hands_on}
 
@@ -750,11 +745,10 @@ We can now cluster the mock sequences into OTUs to see how many spurious OTUs we
 > > ### {% icon question %} Question
 > >
 > >  How many OTUs were identified in our mock community?
-> > <details>
-> >   <summary> Click to view answer</summary>
-> >   34. <br>
-> >   Open the shared file or OTU list and look at the header line. You will see a column for each OTU
-> >  </details>
+> > > ### {% icon solution %} Solution
+> > > 34.
+> > > Open the shared file or OTU list and look at the header line. You will see a column for each OTU
+> > {: .solution }
 > {: .question}
 {: .hands_on}
 
@@ -870,15 +864,15 @@ sequences (100%) were classified as being members of the Alistipes.
 >
 > Which samples contained sequences belonging to an OTU classified as Staphylococcus?
 >
-> <details><summary>Hint</summary>
-> Examine the tax.summary file.
->  </details>
+> > ### {% icon solution %} Solution
+> > Examine the tax.summary file.
+> {: .solution }
 >
-> <details><summary>Answer</summary>
-> Samples F3D141, F3D142,  F3D144, F3D145, F3D2. This answer can be found by
-> examining the tax.summary output and finding the columns with nonzero
-> values for the line of Staphylococcus
-> </details>
+> > ### {% icon solution %} Solution
+> > Samples F3D141, F3D142,  F3D144, F3D145, F3D2. This answer can be found by
+> > examining the tax.summary output and finding the columns with nonzero
+> > values for the line of Staphylococcus
+> {: .solution }
 {: .question}
 
 
@@ -915,11 +909,10 @@ animal) followed by a D and a three digit number (number of days post weaning).
 > > ### {% icon question %} Question
 > >
 > >  What would you exect the result of `count.groups` on this new shared output collection to be? Check if you are correct.
-> > <details>
-> >   <summary> Click to view answer</summary>
-> >   all groups (samples) should now have 2440 sequences. Run count.groups again on the shared output collection by the sub.sample
-> >   tool to confirm that this is indeed what happened.
-> >  </details>
+> > > ### {% icon solution %} Solution
+> > > all groups (samples) should now have 2440 sequences. Run count.groups again on the shared output collection by the sub.sample
+> > > tool to confirm that this is indeed what happened.
+> > {: .solution }
 > {: .question}
 >
 > **Note:** since subsampling is a stochastic process, your results from any tools using this subsampled data
@@ -1187,14 +1180,13 @@ innermost ring labeled "Bacteria"
 >
 >  What percentage of your sample was labelled `Lactobacillus`?
 >
-> <details>
->   <summary> Click to view answer</summary>
->   Explore the Krona plot, double click on Firmicutes, here you should see Lactobacillus
->   clearly (16% in our case), click on this segment and the right-hand side will show you the percentages at
->   any point in the hierarchy (here 5% of all)
->
->  <img src="../../images/krona_lacto.png" alt="image showing view with Lactobacillus highlighted">
-> </details>
+> > ### {% icon solution %} Solution
+> > Explore the Krona plot, double click on Firmicutes, here you should see Lactobacillus
+> > clearly (16% in our case), click on this segment and the right-hand side will show you the percentages at
+> > any point in the hierarchy (here 5% of all)
+> >
+> > ![image showing view with Lactobacillus highlighted](../../images/krona_lacto.png)
+> {: .solution }
 {: .question}
 
 Well done! you have completed the basics of the mothur SOP. Below are some more exercises for those who wish to
@@ -1339,10 +1331,9 @@ tool:
 > >
 > > What are stress and R-squared values when using 3 dimensions?
 > >
-> > <details>
-> >   <summary> Click to view answer</summary>
-> >   The stress value drops to 0.05 and the R2 value goes up to 0.99 (see logfile). Not bad.
-> > </details>
+> > > ### {% icon solution %} Solution
+> > > The stress value drops to 0.05 and the R2 value goes up to 0.99 (see logfile). Not bad.
+> > {: .solution }
 > {: .question}
 {: .hands_on}
 
@@ -1536,14 +1527,13 @@ the names of these organisms.
 >
 > What organisms were the top 5 contributing OTUs classified as?
 >
-> <details>
->   <summary> Click to view answer</summary>
->   Note down the names of the top 5 OTUs as output by thesummary output of get.communitytype.
->   Then look at the taxonomy file output by Classify.otu. <br><br>
->
->   In our example these top 5 OTUs were classified
->   as belonging to Porphyromonadaceae (top 3 OTUs), Alistipes and Lactobacillus.
-> </details>
+> > ### {% icon solution %} Solution
+> > Note down the names of the top 5 OTUs as output by thesummary output of get.communitytype.
+> > Then look at the taxonomy file output by Classify.otu.
+> >
+> > In our example these top 5 OTUs were classified
+> > as belonging to Porphyromonadaceae (top 3 OTUs), Alistipes and Lactobacillus.
+> {: .solution }
 {: .question}
 
 ## Population-level Analysis
@@ -1576,13 +1566,12 @@ These data tell us that OTUs 1, 2, and 3 was significantly different between the
 >
 >  Which of the top 10 OTUs in your output were significantly different between early and late samples?
 >
-> <details>
->  <summary> Click to view answer</summary>
->  Looking at the p-value cut-off and using your favorite cutoff threshold (say 0.01).
->  Answer to the question is all OTUs with a value lower than this threshold. Note that these OTU labels may
->  be different for you and may very between one repetition of this tutorial to the next, and therefore may
->  vary between you and your neighbour as well.
-> </details>
+> > ### {% icon solution %} Solution
+> > Looking at the p-value cut-off and using your favorite cutoff threshold (say 0.01).
+> > Answer to the question is all OTUs with a value lower than this threshold. Note that these OTU labels may
+> > be different for you and may very between one repetition of this tutorial to the next, and therefore may
+> > vary between you and your neighbour as well.
+> {: .solution }
 {: .question}
 
 Another non-parametric tool we can use as an alternative to metastats is lefse:
