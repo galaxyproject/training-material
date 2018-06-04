@@ -12,7 +12,7 @@ steps:
     backdrop: true
   - title: Introduction
     content: >-
-      Prokka is a “wrapper”; it collects together several pieces of software
+      Prokka is a "wrapper"; it collects together several pieces of software
       (from various authors), and so avoids “re-inventing the wheel”. Prokka
       finds and annotates features (both protein coding regions and RNA genes,
       i.e. tRNA, rRNA) present on on a sequence. Note, Prokka uses a two-step
@@ -26,17 +26,12 @@ steps:
       formats. More information about Prokka can be found <a
       href="https://github.com/tseemann/prokka">here</a>.
     backdrop: true
-  - title: History options
+  - title: Create a new history
     element: '#history-options-button'
     content: >-
       We will start the analyses by creating a new history. Click on this button
-      and then "Create New"
+      and then "Create New". Rename it to "Genome annotation with Prokka"
     placement: left
-  - title: Obtaining our data
-    content: >-
-      Prokka requires assembled contigs, available on <a
-      href="https://zenodo.org/record/1156405">zenodo</a>.
-    backdrop: true
   - title: Uploading the new data
     element: '#tool-panel-upload-button .fa.fa-upload'
     content: We need to upload data. Open the Galaxy Upload Manager
@@ -53,12 +48,13 @@ steps:
   - title: Uploading the input data
     element: .upload-text-column .upload-text .upload-text-content.form-control
     content: >-
-      Insert the links here.<br> Load the file into your history from <a
-      href="https://zenodo.org/record/1156405/files/contigs.fasta5">zenodo</a>.
+      Insert the links here: https://zenodo.org/record/1156405/files/contigs.fasta
     placement: right
   - title: Uploading the input data
     element: '#btn-start'
-    content: Click on "Start" to start loading the data to history
+    content: Click on "Start" to start loading the data to history. <br>
+      It will Load the file into your history from <a
+      href="https://zenodo.org/record/1156405/files/contigs.fasta">zenodo</a>.
     placement: right
     postclick:
       - '#btn-start'
@@ -75,9 +71,11 @@ steps:
     content: >-
       The uploaded data is in the history, but its name corresponds to the link.
       We want to rename them it to something meaningful, e.g.
-      contigs.fasta<br><br> <ul>
+      contigs.fasta<br><br>
+      <ul>
         <li>Click on the pencil icon beside the file to "Edit Attributes"</li>
         <li>Change the name in "Name" to get only the name of the sample</li>
+        <li>Click on "Save"</li>
       </ul>
     position: left
   - title: Annotate the genome
@@ -85,7 +83,13 @@ steps:
     backdrop: true
   - title: Annotate the genome
     element: '#tool-search-query'
-    content: Search for "Prokka" tool
+    content: >-
+      Search for "Prokka" tool:
+      <ul>
+        <li>Type in "Prokka"</li>
+        <li>Press "Enter"</li>
+        <li>Click on the tool "Prokka" in the tool list</li>
+      </ul>
     placement: right
     textinsert: Prokka
   - title: Annotate the genome
@@ -163,7 +167,7 @@ steps:
     position: left
   - title: View annotated features in JBrowse
     content: >-
-      A new file will be created in your history, this contains the JBrowse
+      A new file will be created in your history (it may take a few minutes), this contains the JBrowse
       interactive visualisation. We will now view its contents and play with it
     backdrop: true
   - title: View annotated features in JBrowse
@@ -174,7 +178,8 @@ steps:
     position: left
   - title: View annotated features in JBrowse
     content: |-
-      Display all the tracks and practice maneuvering around<ul>
+      Display all the tracks and practice maneuvering around
+      <ul>
         <li>Click on the tick boxes on the left to display the tracks</li>
         <li>Select contig 1 in the drop down box. You can only see one contig displayed at a time.</li>
         <li>Zoom out by clicking on the `minus` button to see sequence reads and their coverage (the grey graph)</li>
@@ -185,6 +190,8 @@ steps:
           <li>product name</li>
           <li>you can download the FASTA sequence by clicking on the disk icon. </li></ul>
         </li>
+      </ul>
+      To get a larger view, you can collapse the history panel and tool panel by clicking on the arrow symbols in each panel corner.
     backdrop: false
   - title: Key points
     content: |-
