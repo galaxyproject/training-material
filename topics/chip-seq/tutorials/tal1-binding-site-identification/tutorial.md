@@ -167,14 +167,14 @@ Nowadays, there are many read alignment programs for sequenced DNA, `BWA` being 
 >    > 3. If the mouse genome has 21 pairs of chromosomes, what are the other reference chromosomes (*e.g.* chr1_GL456210_random)?
 >    >
 >    >    > ### {% icon solution %} Solution
->    >    > 1. ```
->    >    >    Column &emsp; Description
->    >    >    ------------ &emsp;------------------
->    >    >       1 &emsp; &emsp; &emsp;     Reference sequence identifier
->    >    >       2 &emsp; &emsp; &emsp;     Reference sequence length
->    >    >       3 &emsp; &emsp; &emsp;     Number of mapped reads
->    >    >       4 &emsp; &emsp; &emsp;     Number of placed but unmapped reads  (typically unmapped partners of mapped reads)
->    >    >   ```
+>    >    > 1. 
+>    >    >    Column | Description
+>    >    >    --- | ---
+>    >    >    1 | Reference sequence identifier
+>    >    >    2 | Reference sequence length
+>    >    >    3 | Number of mapped reads
+>    >    >    4 | Number of placed but unmapped reads (typically unmapped partners of mapped reads)
+>    >    >   
 >    >    > 2. This information can be seen in column 3, e.g. for Megakaryocyte_Tal1_R1 2143352 reads are mapped.
 >    >    > 3. These are parts of chromosomes that e.g. for chr1_GL456210_random do belong to chr1 but it is unclear where exactly. There entires like chrUn that are not associated with a chromosome but it is believed that they are part of the genome. 
 >    >    {: .solution }
