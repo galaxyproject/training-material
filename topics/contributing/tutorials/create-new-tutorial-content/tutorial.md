@@ -342,9 +342,6 @@ The different defined boxes are:
     >      - "Type of FastQC output?" to `Log`
     >      - "STAR log output" to the generated `log` files (multiple datasets)
     {: .hands_on}
-    {: .hands_on}
-
-    
 
 -  Questions and solution
 

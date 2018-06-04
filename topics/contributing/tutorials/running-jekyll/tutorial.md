@@ -23,16 +23,30 @@ We can use Jekyll to run a server to check if the tutorial is correctly added an
 
 # Installation of the requirements
 
-The first step is to install the requirements inside a conda environment. This step has to be done once.
+The first step is to install the needed tools inside a conda environment. A conda environment is a directory that contains a specific collection of packages. For example here to run the website, we need ruby, pandas, requests, etc. By creating a conda environment and installing the needed tools there, we do not affect your main installation.
+
+This step has to be done once.
 
 > ### {% icon hands_on %} Hands-on: Install the requirements
 >
-> 1. Install [conda](https://conda.io/miniconda.html)
-> 2. Navigate to `training-material/` folder
-> 3. Create the conda environment: `conda env create -f environment.yml`
+> 1. Open a Terminal
+> 1. Navigate to the `training-material/` folder with `cd`
+> 3. Set up the conda environment
+>     
+>     It will install some needed tools (ruby, nodejs, etc) in a protected environment, without interferring with the existing tools or versions.
+>
+>     1. Install conda (if not already installed): `make install-conda`
+>     2. Add conda to the path: `export PATH="$HOME/miniconda/bin:$PATH"`
+>     3. Create conda environment: `make create-env`
+> 
 > 4. Activate the conda environment: `source activate galaxy_training_material`
 > 5. Install Jekyll and related modules using [RubyGems](https://rubygems.org/pages/download): `make install`
 {: .hands_on}
+
+> ### {% icon tip %} Troubleshooting
+> If you encounter an error about libxml2 on linux, please try installing `libxml2-dev`, e.g. by the command `sudo apt-get install libxml2-dev`, and re-run `make install`
+{: .tip}
+
 
 # Checking the website generation
 
@@ -50,10 +64,14 @@ With `make serve`, a local Jekyll server will run in background. It will check t
 
 # Stoping the server
 
-Once you are done, you can:
-- stop the server with <kbd>CTRL</kbd>-<kbd>C</kbd>
-- deactivate your conda environment with `source deactivate`
-- clean the repository: `make clean`
+Once you are done, you can stop the server and cleaning your repository.
+
+> ### {% icon hands_on %} Hands-on: Stoping the server
+>
+> 1. Stop the server with <kbd>CTRL</kbd>-<kbd>C</kbd>
+> 2. Deactivate your conda environment with `source deactivate`
+> 3. Clean the repository: `make clean`
+{: .hands_on}
 
 # Conclusion
 {:.no_toc}
