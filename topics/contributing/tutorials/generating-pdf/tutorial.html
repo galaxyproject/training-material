@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Galaxy Training!</title>
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <link rel="stylesheet" href="/training-material/assets/css/font-awesome.css">
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+    </head>
+    <body>
+        
+
+
+
+
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/training-material/topics/contributing" title="Go back to list of tutorials">
+                            <i class="fa fa-folder-o" aria-hidden="true"></i> Contributing to the Galaxy Training Material
+                        </a>
+                    </li>
+
+                    
+                        
+                        
+                        
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Introduction slides">
+                                    <i class="fa fa-slideshare" aria-hidden="true"></i> Introduction slides
+                                </a>
+                                <div class="dropdown-menu">
+                                    
+                                        
+                                            
+                                                <a class="dropdown-item" href="/training-material/topics/contributing/slides/introduction.html">
+                                                    Overview of the Galaxy Training Material
+                                                </a>
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                </div>
+                            </li>
+                        
+                    
+
+                    
+
+                    
+
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="" title="Links to data">
+                            <i class="fa fa-files-o" aria-hidden="true"></i> Input Dataset
+                        </a>
+                    </li>
+                    
+
+                    
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="fa fa-life-ring" aria-hidden="true"></i> Help
+    </a>
+    <div class="dropdown-menu">
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Chat on Gitter">
+            Gitter
+        </a>
+        <a class="dropdown-item" href="https://biostar.usegalaxy.org/" title="Ask on Biostars">
+            Biostars
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/galaxyproject/training-material/edit/master/topics/contributing/tutorials/generating-pdf/tutorial.md">
+                            <i class="fa fa-github" aria-hidden="true"></i> Edit
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<div class="container main-content">
+    <section class="tutorial">
+        <h1>Generating PDF artefacts of the website</h1>
+
+        <blockquote class="overview">
+            <h3>Overview</h3>
+
+            <strong><i class="fa fa-question-circle" aria-hidden="true"></i> Questions</strong>
+            <ul>
+            
+            <li>How to generate PDF of the different tutorials and slides?</li>
+            
+            </ul>
+
+            <strong><i class="fa fa-bullseye" aria-hidden="true"></i> Objectives</strong>
+            <ul>
+            
+            <li>Generating PDFs</li>
+            
+            </ul>
+
+            
+
+            <p><strong><i class="fa fa-hourglass-end" aria-hidden="true"></i> Time estimation:</strong> 10min</p>
+        </blockquote>
+
+        <h1 class="no_toc" id="introduction">Introduction</h1>
+
+<p>The website with the training material can be run locally. Sometimes, it is also interesting to freeze the tutorials or to get PDFs of the tutorials.</p>
+
+<blockquote class="agenda">
+  <h3 id="agenda">Agenda</h3>
+
+  <p>In this tutorial, you will learn how to run a local instance of the GTN website:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#generate-pdfs-artifact" id="markdown-toc-generate-pdfs-artifact">Generate PDFs artifact</a></li>
+</ol>
+
+</blockquote>
+
+<h1 id="generate-pdfs-artifact">Generate PDFs artifact</h1>
+
+<p>To generate the PDFs, a command <code class="highlighter-rouge">make pdf</code> is given. This command:</p>
+
+<ul>
+  <li>Launches a detached Jekyll server to serve the website</li>
+  <li>Generates the PDFs of the tutorials by calling Chrome via command line</li>
+  <li>Generates the PDFs of the slide decks by calling decktage</li>
+</ul>
+
+<blockquote class="hands_on">
+  <h3 id="-hands-on-checking-the-website-generation-locally"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Checking the website generation locally</h3>
+
+  <ol>
+    <li>(If not done) Activate the conda environment: <code class="highlighter-rouge">source activate galaxy_training_material</code></li>
+    <li>Install Chrome
+      <ul>
+        <li>For OSX, install the <a href="">Chrome browser</a></li>
+        <li>For Ubuntu, follow <a href="">these instructions</a></li>
+      </ul>
+    </li>
+    <li>Generate the PDFs: <code class="highlighter-rouge">make pdf</code></li>
+    <li>Check the generated PDFs in <code class="highlighter-rouge">_pdf</code> folder</li>
+  </ol>
+</blockquote>
+
+<h1 class="no_toc" id="conclusion">Conclusion</h1>
+
+<blockquote class="agenda">
+  <h3 id="developing-gtn-training-material">Developing GTN training material</h3>
+
+  <p>This tutorial is part of a series to develop GTN training material, feel free to also look at:</p>
+
+  <ol>
+    <li><a href="../running-jekyll/tutorial.html">Setting up the tutorial infrastructure</a></li>
+    <li><a href="../create-new-tutorial-content/tutorial.html">Writing content in markdown</a></li>
+    <li><a href="../create-new-tutorial-metadata/tutorial.html">Defining metadata</a></li>
+    <li><a href="../create-new-topic/tutorial.html">Creating a new topic</a></li>
+    <li><a href="../generating-pdf/tutorial.html">Generating PDF handouts</a></li>
+    <li><a href="../create-new-tutorial-tours/tutorial.html">Creating Interactive Galaxy Tours</a></li>
+    <li><a href="../create-new-tutorial-technical/tutorial.html">Defining technical requirements for a tutorial</a></li>
+    <li><a href="../setup-galaxy-for-training/tutorial.html">Setting up Galaxy for training</a></li>
+    <li><a href="../github-command-line-contribution/slides.html">Submitting the new tutorial to the GitHub repository</a></li>
+    <li><a href="../good-practices/slides.html">Good practices for teaching</a></li>
+  </ol>
+</blockquote>
+
+
+        
+        <blockquote class="key_points">
+            <h3><i class="fa fa-key" aria-hidden="true"></i> Key points</h3>
+
+            <ul>
+                
+                <li>PDFs can be easily generated for the different tutorials to share with learnees or to keep a fixed version of a tutorial</li>
+                
+            </ul>
+        </blockquote>
+        
+
+        
+
+        <h3><i class="fa fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!</h3>
+
+        <hr>
+
+        <blockquote class="overview">
+            <h3><i class="fa fa-comments-o" aria-hidden="true"></i> Help us improve this content!</h3>
+            Please take a moment to fill in the Galaxy Training Network
+            <a href="https://tinyurl.com/GTNfeedback">Feedback Form</a>.
+            Your feedback helps us improve this tutorial and will be considered
+            in future revisions.
+        </blockquote>
+    </section>
+</div>
+
+
+<footer>
+    <div class="container">
+        <p>
+            This material is the result of a collaborative work. Thanks to the
+            <a href="https://wiki.galaxyproject.org/Teach/GTN">Galaxy Training Network</a>
+            and all the <a href="/training-material/hall-of-fame">contributors</a> (Bérénice Batut)!
+        </p>
+        <p>
+            Found a typo? Something is wrong in this tutorial? Edit it on
+            <a href="https://github.com/galaxyproject/training-material/tree/master/topics/contributing/tutorials/generating-pdf/tutorial.md">GitHub</a>.
+        </p>
+    </div>
+</footer>
+
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+</html>

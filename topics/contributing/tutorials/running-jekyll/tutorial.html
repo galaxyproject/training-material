@@ -32,8 +32,8 @@
             <div class="collapse navbar-collapse" id="top-navbar">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="/training-material/topics/training" title="Go back to list of tutorials">
-                            <i class="fa fa-folder-o" aria-hidden="true"></i> Train the trainers
+                        <a class="nav-link" href="/training-material/topics/contributing" title="Go back to list of tutorials">
+                            <i class="fa fa-folder-o" aria-hidden="true"></i> Contributing to the Galaxy Training Material
                         </a>
                     </li>
 
@@ -49,9 +49,25 @@
                                     
                                         
                                             
-                                                <a class="dropdown-item" href="/training-material/topics/training/slides/introduction.html">
-                                                    Introduction to training with Galaxy
+                                                <a class="dropdown-item" href="/training-material/topics/contributing/slides/introduction.html">
+                                                    Overview of the Galaxy Training Material
                                                 </a>
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
                                             
                                         
                                     
@@ -114,7 +130,7 @@
 
 
                     <li class="nav-item">
-                        <a class="nav-link" href="https://github.com/galaxyproject/training-material/edit/master/topics/training/tutorials/create-new-tutorial-jekyll/tutorial.md">
+                        <a class="nav-link" href="https://github.com/galaxyproject/training-material/edit/master/topics/contributing/tutorials/running-jekyll/tutorial.md">
                             <i class="fa fa-github" aria-hidden="true"></i> Edit
                         </a>
                     </li>
@@ -126,7 +142,7 @@
 
 <div class="container main-content">
     <section class="tutorial">
-        <h1>Creating a new tutorial - Setting up the infrastructure</h1>
+        <h1>Running the Galaxy Training material website locally</h1>
 
         <blockquote class="overview">
             <h3>Overview</h3>
@@ -143,7 +159,7 @@
             
             <li>Installing packages needed for rendering the webpage</li>
             
-            <li>Running the GTN website locally</li>
+            <li>Running the GTN material website locally</li>
             
             <li>Tracking changes to the content live in the webbrowser</li>
             
@@ -156,21 +172,7 @@
 
         <h1 class="no_toc" id="introduction">Introduction</h1>
 
-<p>Galaxy is a great solution to train the bioinformatics concepts:</p>
-
-<ul>
-  <li>numerous bioinformatics tools are available (almost 5,000 in the ToolShed)</li>
-  <li>it can be used by people without any computer science skills</li>
-  <li>it trains to use technology, outlining available resources and efforts that have made them accessible to researchers</li>
-  <li>it is scalable</li>
-</ul>
-
-<p>In 2016, the Galaxy Training Network decide to set up a new infrastructure for delivering easily Galaxy related training material. The idea was to develop something open and online based on a community effort, as always in Galaxy.</p>
-
-<p>We took inspiration from <a href="https://software-carpentry.org">Software Carpentry</a> and collected everything on a GitHub repository: <a href="https://github.com/galaxyproject/training-material">https://github.com/galaxyproject/training-material </a>.
-We decided on a structure based on tutorials with hands-on, fitting both for online self-training but also for workshops, grouped in topics. Each tutorial follows the same structure and comes with a virtualised instance to run the training everywhere.</p>
-
-<p>If you want to run the entire GTN website locally or test your new training material you can do this!</p>
+<p>If you want to run the entire GTN material website locally or test your new training material you can do this!</p>
 
 <p>Currently, the website is generated from the metadata and the tutorials using Jekyll, a simple static site builder.
 We can use Jekyll to run a server to check if the tutorial is correctly added and rendered.</p>
@@ -183,7 +185,7 @@ We can use Jekyll to run a server to check if the tutorial is correctly added an
 <ol id="markdown-toc">
   <li><a href="#installation-of-the-requirements" id="markdown-toc-installation-of-the-requirements">Installation of the requirements</a></li>
   <li><a href="#checking-the-website-generation" id="markdown-toc-checking-the-website-generation">Checking the website generation</a></li>
-  <li><a href="#generating-pdf-of-the-tutorials-and-slides" id="markdown-toc-generating-pdf-of-the-tutorials-and-slides">Generating PDF of the tutorials and slides</a></li>
+  <li><a href="#stoping-the-server" id="markdown-toc-stoping-the-server">Stoping the server</a></li>
 </ol>
 
 </blockquote>
@@ -218,7 +220,7 @@ We can use Jekyll to run a server to check if the tutorial is correctly added an
 
 <blockquote class="tip">
   <h3 id="-troubleshooting"><i class="fa fa-lightbulb-o" aria-hidden="true"></i> Troubleshooting</h3>
-  <p>If you encounter an error about libxml2 on linux, please try installing <code class="highlighter-rouge">libxml2-dev</code>, e.g. by the command <code class="highlighter-rouge">sudo apt-get install libxml2-dev</code>, and re-run `make install</p>
+  <p>If you encounter an error about libxml2 on linux, please try installing <code class="highlighter-rouge">libxml2-dev</code>, e.g. by the command <code class="highlighter-rouge">sudo apt-get install libxml2-dev</code>, and re-run <code class="highlighter-rouge">make install</code></p>
 </blockquote>
 
 <h1 id="checking-the-website-generation">Checking the website generation</h1>
@@ -231,44 +233,24 @@ We can use Jekyll to run a server to check if the tutorial is correctly added an
   <ol>
     <li>(If not done) Activate the conda environment: <code class="highlighter-rouge">source activate galaxy_training_material</code></li>
     <li>Run a local Jekyll server with <code class="highlighter-rouge">make serve</code></li>
-    <li>
-      <p>Visualize at <a href="http://localhost:4000/training-material/">http://localhost:4000/training-material/ </a></p>
-
-      <blockquote class="question">
-        <h3 id="-questions"><i class="fa fa-question-circle" aria-hidden="true"></i> Questions</h3>
-
-        <p>How to check if the server was started and if all topics are included?</p>
-
-        <details>
-   <summary>Click to view answers</summary>
-   Please check [http://localhost:4000/training-material/topics/ ](http://localhost:4000/training-material/topics/) to get a list of topics.
-   </details>
-      </blockquote>
-    </li>
+    <li>Visualize at <a href="http://localhost:4000/training-material/">http://localhost:4000/training-material/ </a></li>
   </ol>
+
 </blockquote>
 
-<p>With <code class="highlighter-rouge">make serve</code>, a local Jekyll server will run in background. It will check the changes and regenerate the website accordingly. You may need to reload the page to see the changes (and sometimes to wait 1-2 minutes)</p>
+<p>With <code class="highlighter-rouge">make serve</code>, a local Jekyll server will run in background. It will check the changes and regenerate the website accordingly. You may need to reload the page to see the changes (and sometimes to wait 1-2 minutes).</p>
 
-<p>Once you are done, you can stop the server with <code class="highlighter-rouge">ctrl-c</code> and deactivate your conda environment with <code class="highlighter-rouge">source deactivate</code>.</p>
+<h1 id="stoping-the-server">Stoping the server</h1>
 
-<h1 id="generating-pdf-of-the-tutorials-and-slides">Generating PDF of the tutorials and slides</h1>
-
-<p>A PDF file of every tutorials and slide decks can be generated, using Chrome on command line and <a href="https://github.com/astefanutti/decktape">Decktape</a>.</p>
+<p>Once you are done, you can stop the server and cleaning your repository.</p>
 
 <blockquote class="hands_on">
-  <h3 id="-hands-on-checking-the-website-generation-locally-1"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Checking the website generation locally</h3>
+  <h3 id="-hands-on-stoping-the-server"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Stoping the server</h3>
 
   <ol>
-    <li>(If not done) Activate the conda environment: <code class="highlighter-rouge">source activate galaxy_training_material</code></li>
-    <li>Install Chrome
-      <ul>
-        <li>For OSX, install the <a href="https://www.google.com/chrome/browser/desktop/index.html">Chrome browser</a></li>
-        <li>For Ubuntu, follow <a href="https://askubuntu.com/questions/510056/how-to-install-google-chrome#510186">these instructions</a></li>
-      </ul>
-    </li>
-    <li>Run <code class="highlighter-rouge">make pdf</code></li>
-    <li>Check the PDF in <code class="highlighter-rouge">_pdf</code> folder</li>
+    <li>Stop the server with <kbd>CTRL</kbd>-<kbd>C</kbd></li>
+    <li>Deactivate your conda environment with <code class="highlighter-rouge">source deactivate</code></li>
+    <li>Clean the repository: <code class="highlighter-rouge">make clean</code></li>
   </ol>
 </blockquote>
 
@@ -280,12 +262,16 @@ We can use Jekyll to run a server to check if the tutorial is correctly added an
   <p>This tutorial is part of a series to develop GTN training material, feel free to also look at:</p>
 
   <ol>
+    <li><a href="../running-jekyll/tutorial.html">Setting up the tutorial infrastructure</a></li>
     <li><a href="../create-new-tutorial-content/tutorial.html">Writing content in markdown</a></li>
     <li><a href="../create-new-tutorial-metadata/tutorial.html">Defining metadata</a></li>
-    <li><a href="../create-new-tutorial-jekyll/tutorial.html">Setting up the infrastructure</a></li>
+    <li><a href="../create-new-topic/tutorial.html">Creating a new topic</a></li>
+    <li><a href="../generating-pdf/tutorial.html">Generating PDF handouts</a></li>
     <li><a href="../create-new-tutorial-tours/tutorial.html">Creating Interactive Galaxy Tours</a></li>
-    <li><a href="../create-new-tutorial-docker/tutorial.html">Building a Docker flavor</a></li>
-    <li><a href="../../../dev/tutorials/github-contribution/slides.html">Submitting the new tutorial to the GitHub repository</a></li>
+    <li><a href="../create-new-tutorial-technical/tutorial.html">Defining technical requirements for a tutorial</a></li>
+    <li><a href="../setup-galaxy-for-training/tutorial.html">Setting up Galaxy for training</a></li>
+    <li><a href="../github-command-line-contribution/slides.html">Submitting the new tutorial to the GitHub repository</a></li>
+    <li><a href="../good-practices/slides.html">Good practices for teaching</a></li>
   </ol>
 </blockquote>
 
@@ -328,7 +314,7 @@ We can use Jekyll to run a server to check if the tutorial is correctly added an
         </p>
         <p>
             Found a typo? Something is wrong in this tutorial? Edit it on
-            <a href="https://github.com/galaxyproject/training-material/tree/master/topics/training/tutorials/create-new-tutorial-jekyll/tutorial.md">GitHub</a>.
+            <a href="https://github.com/galaxyproject/training-material/tree/master/topics/contributing/tutorials/running-jekyll/tutorial.md">GitHub</a>.
         </p>
     </div>
 </footer>

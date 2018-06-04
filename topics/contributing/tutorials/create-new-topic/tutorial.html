@@ -1,0 +1,386 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Galaxy Training!</title>
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <link rel="stylesheet" href="/training-material/assets/css/font-awesome.css">
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+    </head>
+    <body>
+        
+
+
+
+
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/training-material/topics/contributing" title="Go back to list of tutorials">
+                            <i class="fa fa-folder-o" aria-hidden="true"></i> Contributing to the Galaxy Training Material
+                        </a>
+                    </li>
+
+                    
+                        
+                        
+                        
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Introduction slides">
+                                    <i class="fa fa-slideshare" aria-hidden="true"></i> Introduction slides
+                                </a>
+                                <div class="dropdown-menu">
+                                    
+                                        
+                                            
+                                                <a class="dropdown-item" href="/training-material/topics/contributing/slides/introduction.html">
+                                                    Overview of the Galaxy Training Material
+                                                </a>
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                </div>
+                            </li>
+                        
+                    
+
+                    
+
+                    
+
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="" title="Links to data">
+                            <i class="fa fa-files-o" aria-hidden="true"></i> Input Dataset
+                        </a>
+                    </li>
+                    
+
+                    
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="fa fa-life-ring" aria-hidden="true"></i> Help
+    </a>
+    <div class="dropdown-menu">
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Chat on Gitter">
+            Gitter
+        </a>
+        <a class="dropdown-item" href="https://biostar.usegalaxy.org/" title="Ask on Biostars">
+            Biostars
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/galaxyproject/training-material/edit/master/topics/contributing/tutorials/create-new-topic/tutorial.md">
+                            <i class="fa fa-github" aria-hidden="true"></i> Edit
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<div class="container main-content">
+    <section class="tutorial">
+        <h1>Including a new topic</h1>
+
+        <blockquote class="overview">
+            <h3>Overview</h3>
+
+            <strong><i class="fa fa-question-circle" aria-hidden="true"></i> Questions</strong>
+            <ul>
+            
+            <li></li>
+            
+            </ul>
+
+            <strong><i class="fa fa-bullseye" aria-hidden="true"></i> Objectives</strong>
+            <ul>
+            
+            <li></li>
+            
+            </ul>
+
+            
+
+            <p><strong><i class="fa fa-hourglass-end" aria-hidden="true"></i> Time estimation:</strong> 30min</p>
+        </blockquote>
+
+        <h1 class="no_toc" id="introduction">Introduction</h1>
+
+<p>Each training material is related to a topic. All training materials (slides, tutorials, …) related to a topic are found in a dedicated directory (<em>e.g.</em> <code class="highlighter-rouge">transcriptomics</code> directory contains the material related to exome sequencing analysis). Each topic have the following structure:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>├── README.md
+├── metadata.yaml
+├── images
+├── docker
+│   ├── Dockerfile
+├── slides
+│   ├── index.html
+├── tutorials
+│   ├── tutorial1
+│   │   ├── tutorial.md
+│   │   ├── slides.html
+│   │   ├── tools.yaml
+│   │   ├── data-library.yaml
+│   │   ├── workflows
+│   │   │   ├── workflow.ga
+│   │   ├── tours
+│   │   │   ├── tour.yaml
+</code></pre></div></div>
+
+<h2 class="no_toc" id="images-directory"><code class="highlighter-rouge">images</code> directory</h2>
+
+<p>The <code class="highlighter-rouge">images</code> directory collects all images/pictures needed for the training materials related to the topic, <em>i.e</em> pictures for the slides or the tutorials.</p>
+
+<p>Images shared between several topics are in the <code class="highlighter-rouge">shared/images</code> directory at the root.</p>
+
+<p>All images for the slides must be in <code class="highlighter-rouge">images</code> directory. The images must be in good quality. The sources (<code class="highlighter-rouge">svg</code> or other) of the images must also be added to the <code class="highlighter-rouge">images</code> directory. We encourage you to use <a href="https://www.yworks.com/products/yed">yEd</a> to easily generate diagrams and <a href="https://inkscape.org/en/">Inkscape</a> for any other images.</p>
+
+<h2 class="no_toc" id="slides-directory"><code class="highlighter-rouge">slides</code> directory</h2>
+
+<p>This directory contains introduction slide deck. There could be several slide decks, to cover different aspect. The slides are rendered using <code class="highlighter-rouge">remark.js</code> but written in Markdown to facilitate collaboration.</p>
+
+<h2 class="no_toc" id="tutorials-directory"><code class="highlighter-rouge">tutorials</code> directory</h2>
+
+<p>This directory collects the tutorials related to the topic, one per subdirectory.</p>
+
+<p>The tutorials are hands-on built for workshop and self-training, with description of the whole infrastructure needed to run the tutorial on any Galaxy instance (tools, data library, etc).</p>
+
+<p>The templates for the tutorials are different from the other pages to help users to focus on the content of the tutorial. To improve the output of the tutorial, several metadata are mandatory for every tutorials, such as the requirements or the objectives of the tutorials. Boxes are also used to highlight some key points as the hands-on or the tips.</p>
+
+<p>The content of each tutorial is generated with <a href="https://jekyllrb.com/">Jekyll</a> from a Markdown file and some metadata (e.g. the requirements, the Zenodo link, the questions) defined inside the metadata of the related topic.</p>
+
+<blockquote>
+  <p>Want to contribute to a tutorial? <a href="/training-material/topics/contributing/">Check out our training materials about that</a></p>
+</blockquote>
+
+<p>Sometimes, an hands-on tutorial is not the most appropriate format for a tutorial and slides are better. The content must be then added in the <code class="highlighter-rouge">slides</code> directory.</p>
+
+<h2 class="no_toc" id="docker-directory"><code class="highlighter-rouge">docker</code> directory</h2>
+
+<p>For each topic, a flavored Docker image must integrate the tools needed for
+the tutorials. The corresponding image must be based on official Galaxy Docker
+images. We recommend to use the content of <a href="templates/docker"><code class="highlighter-rouge">templates/docker</code></a> as a template.</p>
+
+<p>The <code class="highlighter-rouge">docker</code> image will also integrate the Galaxy tours available for each topics and the workflows.</p>
+
+<blockquote>
+  <p>Want to learn more? <a href="/training-material/topics/training/tutorials/create-new-tutorial-docker/tutorial.html">Check out our tutorial to build a Docker flavor for a tutorial</a></p>
+</blockquote>
+
+<h1 class="no_toc" id="creating-a-new-topic">Creating a new topic</h1>
+
+<blockquote class="agenda">
+  <h3 id="agenda">Agenda</h3>
+
+  <p>In this tutorial, we will deal with:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#defining-the-topic" id="markdown-toc-defining-the-topic">Defining the topic</a></li>
+  <li><a href="#creating-the-directory-for-the-topic" id="markdown-toc-creating-the-directory-for-the-topic">Creating the directory for the topic</a></li>
+  <li><a href="#make-the-templating-system-aware-about-the-topic" id="markdown-toc-make-the-templating-system-aware-about-the-topic">Make the templating system aware about the topic</a></li>
+</ol>
+
+</blockquote>
+
+<h1 id="defining-the-topic">Defining the topic</h1>
+
+<p>When we structured the repository, we decided to use as topics the categories that are used in the <a href="https://toolshed.g2.bx.psu.edu/">ToolShed</a>. The ToolShed assigns a category to each tool. Therefore, to decide where to put your tutorial, have a look at which ToolShed’s category the main tools in your tutorial belong. For example, herethis tutorial will rely on the NCBI Blast+ tool.</p>
+
+<blockquote class="hands_on">
+  <h3 id="-hands-on-defining-the-topic-for-the-tutorial"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Defining the topic for the tutorial</h3>
+
+  <ol>
+    <li>Search for NCBI Blast+ on the <a href="https://toolshed.g2.bx.psu.edu/">ToolShed</a></li>
+    <li>
+      <p>Check in which category it has been placed</p>
+
+      <blockquote class="question">
+        <h3 id="-questions"><i class="fa fa-question-circle" aria-hidden="true"></i> Questions</h3>
+
+        <p>In which topic will you put the new tutorial?</p>
+
+        <details>
+   <summary>Click to view the answers</summary>
+   If we search for [NCBI Blast+ in the ToolShed](https://toolshed.g2.bx.psu.edu/view/devteam/ncbi_blast_plus/7538e2bfcd41), it is placed in 2 categories (bottom): "Next Gen Mappers", and "Sequence Analysis".
+   We decided to put it in "Sequence analysis" because this is the most general one for this tutorial.
+   </details>
+      </blockquote>
+    </li>
+  </ol>
+</blockquote>
+
+<p>In this tutorial, we want to add a new topic called about “my-favorite-topic”.</p>
+
+<h1 id="creating-the-directory-for-the-topic">Creating the directory for the topic</h1>
+
+<p>Once the topic name has been chosen, we can create it.</p>
+
+<blockquote class="hands_on">
+  <h3 id="-hands-on-copy-the-required-files"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Copy the required files</h3>
+
+  <ol>
+    <li>Copy the <code class="highlighter-rouge">templates</code> directory in <code class="highlighter-rouge">topics</code></li>
+    <li>Rename the copied directory to <code class="highlighter-rouge">my-favorite-topic</code></li>
+  </ol>
+</blockquote>
+
+<h1 id="make-the-templating-system-aware-about-the-topic">Make the templating system aware about the topic</h1>
+
+<p>We use Jekyll to generate the website out of the Markdown and YAML files. We need to tell Jekyll that there is a new topic by adding a symbolic link to the <code class="highlighter-rouge">metadata.yaml</code> inside the <code class="highlighter-rouge">metadata</code> folder.</p>
+
+<blockquote class="hands_on">
+  <h3 id="-hands-on-add-the-new-topic-to-the-website"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Add the new topic to the website</h3>
+
+  <ol>
+    <li>Go the <code class="highlighter-rouge">metadata</code> folder using the terminal: <code class="highlighter-rouge">cd metadata</code></li>
+    <li>Add a symbolic link to the <code class="highlighter-rouge">metadata.yaml</code> file on our new topic: <code class="highlighter-rouge">ln -s ../topics/my-favorite-topic/metadata.yaml my-favorite-topic.yaml</code></li>
+    <li>Move back to the root: <code class="highlighter-rouge">cd ..</code></li>
+    <li>
+      <p>Make sure that Jekyll is running</p>
+
+      <blockquote>
+        <p>Want to learm how to start Jekyll? <a href="/training-material/topics/contributing/tutorials/running-jekyll/tutorial.html">Check out our tutorial to serve the website locally</a></p>
+      </blockquote>
+    </li>
+    <li>Check if the tutorial has been correctly added at <a href="http://localhost:4000/training-material/">http://localhost:4000/training-material/</a></li>
+  </ol>
+
+</blockquote>
+
+<h1 class="no_toc" id="conclusion">Conclusion</h1>
+
+<p>We just created a new topic. We can now fill it with new tutorials. To do that, you can follow our dedicated tutorials:</p>
+
+<blockquote class="agenda">
+  <h3 id="developing-gtn-training-material">Developing GTN training material</h3>
+
+  <p>This tutorial is part of a series to develop GTN training material, feel free to also look at:</p>
+
+  <ol>
+    <li><a href="../running-jekyll/tutorial.html">Setting up the tutorial infrastructure</a></li>
+    <li><a href="../create-new-tutorial-content/tutorial.html">Writing content in markdown</a></li>
+    <li><a href="../create-new-tutorial-metadata/tutorial.html">Defining metadata</a></li>
+    <li><a href="../create-new-topic/tutorial.html">Creating a new topic</a></li>
+    <li><a href="../generating-pdf/tutorial.html">Generating PDF handouts</a></li>
+    <li><a href="../create-new-tutorial-tours/tutorial.html">Creating Interactive Galaxy Tours</a></li>
+    <li><a href="../create-new-tutorial-technical/tutorial.html">Defining technical requirements for a tutorial</a></li>
+    <li><a href="../setup-galaxy-for-training/tutorial.html">Setting up Galaxy for training</a></li>
+    <li><a href="../github-command-line-contribution/slides.html">Submitting the new tutorial to the GitHub repository</a></li>
+    <li><a href="../good-practices/slides.html">Good practices for teaching</a></li>
+  </ol>
+</blockquote>
+
+
+        
+        <blockquote class="key_points">
+            <h3><i class="fa fa-key" aria-hidden="true"></i> Key points</h3>
+
+            <ul>
+                
+                <li></li>
+                
+            </ul>
+        </blockquote>
+        
+
+        
+
+        <h3><i class="fa fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!</h3>
+
+        <hr>
+
+        <blockquote class="overview">
+            <h3><i class="fa fa-comments-o" aria-hidden="true"></i> Help us improve this content!</h3>
+            Please take a moment to fill in the Galaxy Training Network
+            <a href="https://tinyurl.com/GTNfeedback">Feedback Form</a>.
+            Your feedback helps us improve this tutorial and will be considered
+            in future revisions.
+        </blockquote>
+    </section>
+</div>
+
+
+<footer>
+    <div class="container">
+        <p>
+            This material is the result of a collaborative work. Thanks to the
+            <a href="https://wiki.galaxyproject.org/Teach/GTN">Galaxy Training Network</a>
+            and all the <a href="/training-material/hall-of-fame">contributors</a> (Bérénice Batut)!
+        </p>
+        <p>
+            Found a typo? Something is wrong in this tutorial? Edit it on
+            <a href="https://github.com/galaxyproject/training-material/tree/master/topics/contributing/tutorials/create-new-topic/tutorial.md">GitHub</a>.
+        </p>
+    </div>
+</footer>
+
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+</html>

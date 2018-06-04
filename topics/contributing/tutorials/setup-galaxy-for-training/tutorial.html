@@ -1,0 +1,454 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Galaxy Training!</title>
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <link rel="stylesheet" href="/training-material/assets/css/font-awesome.css">
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+    </head>
+    <body>
+        
+
+
+
+
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/training-material/topics/contributing" title="Go back to list of tutorials">
+                            <i class="fa fa-folder-o" aria-hidden="true"></i> Contributing to the Galaxy Training Material
+                        </a>
+                    </li>
+
+                    
+                        
+                        
+                        
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Introduction slides">
+                                    <i class="fa fa-slideshare" aria-hidden="true"></i> Introduction slides
+                                </a>
+                                <div class="dropdown-menu">
+                                    
+                                        
+                                            
+                                                <a class="dropdown-item" href="/training-material/topics/contributing/slides/introduction.html">
+                                                    Overview of the Galaxy Training Material
+                                                </a>
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                </div>
+                            </li>
+                        
+                    
+
+                    
+
+                    
+
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="" title="Links to data">
+                            <i class="fa fa-files-o" aria-hidden="true"></i> Input Dataset
+                        </a>
+                    </li>
+                    
+
+                    
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="fa fa-life-ring" aria-hidden="true"></i> Help
+    </a>
+    <div class="dropdown-menu">
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Chat on Gitter">
+            Gitter
+        </a>
+        <a class="dropdown-item" href="https://biostar.usegalaxy.org/" title="Ask on Biostars">
+            Biostars
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/galaxyproject/training-material/edit/master/topics/contributing/tutorials/setup-galaxy-for-training/tutorial.md">
+                            <i class="fa fa-github" aria-hidden="true"></i> Edit
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<div class="container main-content">
+    <section class="tutorial">
+        <h1>Set up a Galaxy for Training</h1>
+
+        <blockquote class="overview">
+            <h3>Overview</h3>
+
+            <strong><i class="fa fa-question-circle" aria-hidden="true"></i> Questions</strong>
+            <ul>
+            
+            <li>How do I prepare my Galaxy instance to support a training module?</li>
+            
+            <li>How can I generate a Docker Galaxy instance for my topic?</li>
+            
+            </ul>
+
+            <strong><i class="fa fa-bullseye" aria-hidden="true"></i> Objectives</strong>
+            <ul>
+            
+            <li>Use ephemeris to install the training requirements to a Galaxy instance</li>
+            
+            <li>Create a docker image for a training topic</li>
+            
+            </ul>
+
+            
+
+            <p><strong><i class="fa fa-hourglass-end" aria-hidden="true"></i> Time estimation:</strong> 2h</p>
+        </blockquote>
+
+        <h1 class="no_toc" id="introduction">Introduction</h1>
+
+<p>In this tutorial, you will learn how to provision your Galaxy instance to support training modules from the GTN repository.</p>
+
+<p>Tutorials in this repo are all supplemented with files describing the technical requirements to run them. This makes it easy to automate installation of tutorial requirements.</p>
+<ul>
+  <li><code class="highlighter-rouge">tools.yaml</code>: describes the Tool Shed tools used in the tutorial</li>
+  <li><code class="highlighter-rouge">data-library.yaml</code>: describes the input datasets</li>
+  <li><code class="highlighter-rouge">data-manager.yaml</code>: describes the reference data required by tools</li>
+  <li><code class="highlighter-rouge">workflows</code> folder: contains one or more workflows with all steps in the tutorial</li>
+  <li><code class="highlighter-rouge">tours</code> folder: contains one or more yaml files describing interactive tours</li>
+</ul>
+
+<p>For more information about how to create these files, please see our module on <a href="/training-material/topics/contributing/create-new-tutorial-technical/">specifying the technical requirements for your tutorial</a>.</p>
+
+<p>For just the list of ephemeris commands needed for installation, skip to the <a href="#Quickstart">Quickstart section</a> at the end of this tutorial.</p>
+
+<blockquote class="agenda">
+  <h3 id="agenda">Agenda</h3>
+
+  <p>In this tutorial, we will deal with:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#prepare-for-installation" id="markdown-toc-prepare-for-installation">Prepare for installation</a>    <ol>
+      <li><a href="#start-a-local-galaxy" id="markdown-toc-start-a-local-galaxy">Start a local Galaxy</a></li>
+      <li><a href="#find-your-galaxy-api-key" id="markdown-toc-find-your-galaxy-api-key">Find your Galaxy API key</a></li>
+      <li><a href="#install-ephemeris" id="markdown-toc-install-ephemeris">Install Ephemeris</a></li>
+    </ol>
+  </li>
+  <li><a href="#installing-tutorial-requirements" id="markdown-toc-installing-tutorial-requirements">Installing tutorial requirements</a></li>
+  <li><a href="#quickstart" id="markdown-toc-quickstart">Quickstart</a></li>
+</ol>
+
+</blockquote>
+
+<h1 id="prepare-for-installation">Prepare for installation</h1>
+
+<p>If you have a Galaxy server already running somewhere and would like to support one or more training modules, <a href="https://ephemeris.readthedocs.io">ephemeris</a> can be used to easily install all the required tools, reference data, data libraries, tours and workflows.</p>
+
+<p>For the purposes of this training, we will create a Galaxy instance running on <code class="highlighter-rouge">localhost:8080</code>, but these instructions can be adapted for use with any Galaxy instance by replacing this value with the URL or IP address of your Galaxy server.</p>
+
+<h2 id="start-a-local-galaxy">Start a local Galaxy</h2>
+
+<p>To setup a Galaxy server locally, we will first clone the Galaxy github repository, make a few small edits to the <code class="highlighter-rouge">galaxy.yaml</code> configuration file, and then start the server.</p>
+
+<blockquote class="hands_on">
+  <h3 id="-hands-on-setup-a-local-galaxy-instance"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Setup a local Galaxy instance</h3>
+
+  <ol>
+    <li>Clone the github repository
+      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone https://github.com/galaxyproject/galaxy.git
+<span class="nb">cd </span>galaxy
+</code></pre></div>      </div>
+    </li>
+    <li>Add yourself as admin user in <code class="highlighter-rouge">config/galaxy.yaml</code>
+      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cp </span>config/galaxy.yml.sample config/galaxy.yml
+</code></pre></div>      </div>
+      <p>open the <code class="highlighter-rouge">galaxy.yml</code> file with your favorite editor and edit the following line with your email address:</p>
+      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">admin_users</span><span class="pi">:</span> <span class="s">user@example.eu</span>
+</code></pre></div>      </div>
+    </li>
+    <li>Start Galaxy
+      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sh run.sh
+</code></pre></div>      </div>
+      <p>Galaxy will now install all its requirements, which may take a few minutes,
+when all is finished installing, you should see something like this in your screen:</p>
+
+      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Starting server in PID 9560.
+serving on http://localhost:8080
+</code></pre></div>      </div>
+    </li>
+    <li>Open Galaxy
+      <ul>
+        <li>Open a web browser</li>
+        <li>Navigate to <code class="highlighter-rouge">localhost:8080</code> to access Galaxy</li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h2 id="find-your-galaxy-api-key">Find your Galaxy API key</h2>
+
+<p>In order to install the tutorial requirements, we will need the API key of an admin user.</p>
+
+<blockquote class="hands_on">
+  <h3 id="-hands-on-obtain-galaxy-api-key"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Obtain Galaxy API key</h3>
+
+  <ol>
+    <li>Register an account on Galaxy using the email address you added to the <code class="highlighter-rouge">config/galaxy.yml</code> file
+      <ul>
+        <li>Once logged in, verify that you have a menu item named <code class="highlighter-rouge">Admin</code> in your top menu bar.</li>
+      </ul>
+    </li>
+    <li>Go to your <code class="highlighter-rouge">User -&gt; preferences -&gt; Manage API key</code> in the top menu bar</li>
+    <li>Click on <code class="highlighter-rouge">Create a new key</code> to generate an API key
+      <ul>
+        <li>Copy your API key to somewhere convenient, you will need it throughout this tutorial</li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h2 id="install-ephemeris">Install Ephemeris</h2>
+
+<p>To install to training requirements to our Galaxy, we will use ephemeris, let’s install it now:</p>
+
+<blockquote class="hands_on">
+  <h3 id="-hands-on-install-ephemeris"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Install Ephemeris</h3>
+
+  <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># optional: create a virtual environment</span>
+virtualenv .venv<span class="p">;</span> <span class="nb">.</span> .venv/bin/activate
+
+<span class="c"># install ephemeris</span>
+pip <span class="nb">install </span>ephemeris
+</code></pre></div>  </div>
+</blockquote>
+
+<h1 id="installing-tutorial-requirements">Installing tutorial requirements</h1>
+
+<p>We have created a small bash script to automatically install all the tutorial requirements to an existing Galaxy, it’s located in this repository under: <a href="https://github.com/galaxyproject/training-material/tree/master/bin/install_tutorial_requirements.sh"><code class="highlighter-rouge">bin/install_tutorial_requirements.sh</code></a></p>
+
+<p>In this example we will install the requirements for the <a href="/training-material/topics/transcriptomics/ref-based/tutorial.md"><em>Reference-based RNASeq</em></a> tutorial to the Galaxy instance running on localhost.</p>
+
+<blockquote class="hands_on">
+  <h3 id="-hands-on-install-a-tutorial"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Install a tutorial</h3>
+
+  <ol>
+    <li>If you have not done so yet, clone the training material github repo:
+      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone https://github.com/galaxyproject/training-material.git
+<span class="nb">cd </span>training-material
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p>Run the script to install the RNASeq tutorial</p>
+
+      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bin/install_tutorial_requirements.sh topics/transcriptomics/tutorials/ref-based <span class="nt">-g</span> http://localhost:8080 <span class="nt">-a</span> &lt;api key&gt;
+</code></pre></div>      </div>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>Installation may take some time, this script will automatically install the tools, create a data library and populate it with the input datasets from Zenodo, install and publish the workflows, and run any data managers that might be required.</p>
+
+<p>The only thing the script currently cannot automate, is the installation of the interactive tours. We will now do this manually by copying the contents of the <code class="highlighter-rouge">tours</code> folder to our Galaxy instance, in the folder <code class="highlighter-rouge">$GALAXY_ROOT/config/plugins/tours</code></p>
+
+<blockquote class="hands_on">
+  <h3 id="-hands-on-install-the-interactive-tours"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Install the interactive Tours</h3>
+
+  <ol>
+    <li>Copy the <code class="highlighter-rouge">tour.yaml</code> file from the training materials repo to Galaxy
+      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cp</span> <span class="nt">-r</span> topics/transcriptomics/tutorials/ref-based/tours/ path/to/local/galaxy/config/plugins/tours
+</code></pre></div>      </div>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h3 id="installing-an-entire-topic">Installing an entire topic</h3>
+
+<p>If you would like to install all the requirements for every tutorial within an entire topic, you can use the script in <a href="https://github.com/galaxyproject/training-material/tree/master/bin/install_topic_requirements.sh"><code class="highlighter-rouge">bin/install_topic_requirements.sh</code></a></p>
+
+<h3 id="installing-a-subset-of-components">Installing a subset of components</h3>
+
+<p>If you would like to pick and choose what to install for each tutorial, below are descriptions of the commands used to install each of the components (tools, workflows, reference data, data libraries, tours) please see the <a href="#Quickstart">Quickstart section</a> for the individual commands used by the script</p>
+
+<h1 id="quickstart">Quickstart</h1>
+
+<p>Below is the list of commands used in this tutorial.</p>
+
+<p>Using the scripts in this repository:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Make sure you are in the root of the training-material repo</span>
+<span class="nb">cd</span> &lt;training-materials repo root&gt;
+
+<span class="c"># install single tutorial</span>
+bin/install_tutorial_requirements.sh &lt;Galaxy url&gt; &lt;API key&gt; topics/&lt;yourtopic&gt;/tutorial/&lt;yourtutorial
+
+<span class="c"># install entire topic</span>
+bin/install_topic_requirements.sh &lt;Galaxy url&gt; &lt;API key&gt; topics/&lt;yourtopic&gt;
+
+</code></pre></div></div>
+
+<p>Using ephemeris directly:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># install tools
+shed-tools install -g &lt;Galaxy url&gt; -a &lt;API key&gt; -t topics/&lt;topic&gt;/tutorials/&lt;tutorial&gt;/tools.yaml
+
+# create data library with input datasets
+setup-data-libraries -g &lt;Galaxy url&gt; -a &lt;API key&gt; -i topic/&lt;topic&gt;/tutorial/&lt;tutorial&gt;/data-library.yaml
+
+# install refefernce data
+run-data-managers -g &lt;Galaxy url&gt; -a &lt;API key&gt; --config topic/&lt;topic&gt;/tutorial/&lt;tutorial&gt;/data-manager.yaml
+
+# install workflows
+workflow-install --publish-workflows -g &lt;Galaxy url&gt; -a &lt;API key&gt; -w topics/&lt;topic&gt;/tutorials/&lt;tutorial&gt;/workflows
+
+# install tours
+copy the contents of the "tours" directory for the tutorial to Galaxy's "config/plugins/tours/"
+</code></pre></div></div>
+
+<h1 class="no_toc" id="conclusion">Conclusion</h1>
+
+<blockquote class="agenda">
+  <h3 id="developing-gtn-training-material">Developing GTN training material</h3>
+
+  <p>This tutorial is part of a series to develop GTN training material, feel free to also look at:</p>
+
+  <ol>
+    <li><a href="../running-jekyll/tutorial.html">Setting up the tutorial infrastructure</a></li>
+    <li><a href="../create-new-tutorial-content/tutorial.html">Writing content in markdown</a></li>
+    <li><a href="../create-new-tutorial-metadata/tutorial.html">Defining metadata</a></li>
+    <li><a href="../create-new-topic/tutorial.html">Creating a new topic</a></li>
+    <li><a href="../generate-pdf/tutorial.html">Generating PDF handouts</a></li>
+    <li><a href="../create-new-tutorial-tours/tutorial.html">Creating Interactive Galaxy Tours</a></li>
+    <li><a href="../create-new-tutorial-technical/tutorial.html">Defining technical requirements for a tutorial</a></li>
+    <li><a href="../setup-galaxy-for-training/tutorial.html">Setting up Galaxy for training</a></li>
+    <li><a href="../github-command-line-contribution/slides.html">Submitting the new tutorial to the GitHub repository</a></li>
+    <li><a href="../good-practices/slides.html">Good practices for teaching</a></li>
+  </ol>
+</blockquote>
+
+
+        
+        <blockquote class="key_points">
+            <h3><i class="fa fa-key" aria-hidden="true"></i> Key points</h3>
+
+            <ul>
+                
+                <li>Technical requirements have been defined for all the training materials</li>
+                
+                <li>Ephemeris can be used to automatically install these requirements to an existing Galaxy</li>
+                
+                <li>Convenience scripts are provided in the training material repository allow for easy installation</li>
+                
+                <li>Docker images can easily be created per topic</li>
+                
+            </ul>
+        </blockquote>
+        
+
+        
+
+        <h3><i class="fa fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!</h3>
+
+        <hr>
+
+        <blockquote class="overview">
+            <h3><i class="fa fa-comments-o" aria-hidden="true"></i> Help us improve this content!</h3>
+            Please take a moment to fill in the Galaxy Training Network
+            <a href="https://tinyurl.com/GTNfeedback">Feedback Form</a>.
+            Your feedback helps us improve this tutorial and will be considered
+            in future revisions.
+        </blockquote>
+    </section>
+</div>
+
+
+<footer>
+    <div class="container">
+        <p>
+            This material is the result of a collaborative work. Thanks to the
+            <a href="https://wiki.galaxyproject.org/Teach/GTN">Galaxy Training Network</a>
+            and all the <a href="/training-material/hall-of-fame">contributors</a> (Saskia Hiltemann, Bérénice Batut)!
+        </p>
+        <p>
+            Found a typo? Something is wrong in this tutorial? Edit it on
+            <a href="https://github.com/galaxyproject/training-material/tree/master/topics/contributing/tutorials/setup-galaxy-for-training/tutorial.md">GitHub</a>.
+        </p>
+    </div>
+</footer>
+
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+</html>

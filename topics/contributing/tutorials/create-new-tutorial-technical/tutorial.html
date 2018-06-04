@@ -32,8 +32,8 @@
             <div class="collapse navbar-collapse" id="top-navbar">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="/training-material/topics/training" title="Go back to list of tutorials">
-                            <i class="fa fa-folder-o" aria-hidden="true"></i> Train the trainers
+                        <a class="nav-link" href="/training-material/topics/contributing" title="Go back to list of tutorials">
+                            <i class="fa fa-folder-o" aria-hidden="true"></i> Contributing to the Galaxy Training Material
                         </a>
                     </li>
 
@@ -49,9 +49,25 @@
                                     
                                         
                                             
-                                                <a class="dropdown-item" href="/training-material/topics/training/slides/introduction.html">
-                                                    Introduction to training with Galaxy
+                                                <a class="dropdown-item" href="/training-material/topics/contributing/slides/introduction.html">
+                                                    Overview of the Galaxy Training Material
                                                 </a>
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
                                             
                                         
                                     
@@ -114,7 +130,7 @@
 
 
                     <li class="nav-item">
-                        <a class="nav-link" href="https://github.com/galaxyproject/training-material/edit/master/topics/training/tutorials/create-new-tutorial-docker/tutorial.md">
+                        <a class="nav-link" href="https://github.com/galaxyproject/training-material/edit/master/topics/contributing/tutorials/create-new-tutorial-technical/tutorial.md">
                             <i class="fa fa-github" aria-hidden="true"></i> Edit
                         </a>
                     </li>
@@ -126,7 +142,7 @@
 
 <div class="container main-content">
     <section class="tutorial">
-        <h1>Creating a new tutorial - Building a Docker flavor for a tutorial</h1>
+        <h1>Creating a new tutorial - Defining the technical infrastructure</h1>
 
         <blockquote class="overview">
             <h3>Overview</h3>
@@ -144,10 +160,16 @@
             
             <li>How can we check the technical infrastructure is working?</li>
             
+            <li>How can we make an existing Galaxy instance able to run a tutorial?</li>
+            
             </ul>
 
             <strong><i class="fa fa-bullseye" aria-hidden="true"></i> Objectives</strong>
             <ul>
+            
+            <li>Extracting the technical description for a tutorial</li>
+            
+            <li>Populating an existing instance with the needed tools, data and workflows for a tutorial</li>
             
             <li>Creating a Galaxy Docker flavor with the needed tools, data and workflows for a tutorial</li>
             
@@ -161,20 +183,6 @@
         </blockquote>
 
         <h1 class="no_toc" id="introduction">Introduction</h1>
-
-<p>Galaxy is a great solution to train the bioinformatics concepts:</p>
-
-<ul>
-  <li>numerous bioinformatics tools are available (almost 5,000 in the ToolShed)</li>
-  <li>it can be used by people without amy computer science skills</li>
-  <li>it trains to use technology, outlining available resources and efforts that have made them accessible to researchers</li>
-  <li>it is scalable</li>
-</ul>
-
-<p>In 2016, the Galaxy Training Network decide to set up a new infrastructure for delivering easily Galaxy related training material. The idea was to develop something open and online based on a community effort, as always in Galaxy.</p>
-
-<p>We took inspiration from <a href="https://software-carpentry.org">Software Carpentry</a> and collected everything on a GitHub repository: <a href="https://github.com/galaxyproject/training-material">https://github.com/galaxyproject/training-material </a>.
-We decided on a structure based on tutorials with hands-on, fitting both for online self-training but also for workshops, grouped in topics. Each tutorial follows the same structure and comes with a virtualised isntance to run the training everywhere.</p>
 
 <p>In this tutorial, you will learn how to create a virtualised Galaxy instance, based on Docker, to run your training - either on normal computers or cloud environments.</p>
 
@@ -195,21 +203,6 @@ We decided on a structure based on tutorials with hands-on, fitting both for onl
   </li>
 </ol>
 
-</blockquote>
-
-<blockquote class="agenda">
-  <h3 id="devloping-gtn-training-material">Devloping GTN training material</h3>
-
-  <p>This tutorial is part of a series to develop GTN training material, feel free to also look at:</p>
-
-  <ol>
-    <li><a href="../create-new-tutorial-content/tutorial.html">Writing content in markdown</a></li>
-    <li><a href="../create-new-tutorial-metadata/tutorial.html">Defining metadata</a></li>
-    <li><a href="../create-new-tutorial-jekyll/tutorial.html">Setting up the infrastructure</a></li>
-    <li><a href="../create-new-tutorial-tours/tutorial.html">Creating Interactive Galaxy Tours</a></li>
-    <li><a href="../create-new-tutorial-docker/tutorial.html">Building a Docker flavor</a></li>
-    <li><a href="../../../dev/tutorials/github-contribution/slides.html">Submitting the new tutorial to the GitHub repository</a></li>
-  </ol>
 </blockquote>
 
 <h1 id="building-a-galaxy-instance-specifically-for-your-training">Building a Galaxy instance specifically for your training</h1>
@@ -252,6 +245,36 @@ tools:
   </ol>
 </blockquote>
 
+<p>This list of tools can be automatically extracted from the workflow using <a href="https://ephemeris.readthedocs.io/en/latest/index.html">Ephemeris</a> (which should be in the conda environment):</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ workflow-to-tools -w path/to/worflow -o path/to/tools.yaml
+</code></pre></div></div>
+
+<p>After the extraction, some formatting is needed:</p>
+
+<ol>
+  <li>
+    <p>Add at the beginning:</p>
+
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> ---
+ api_key: admin
+ galaxy_instance: http://localhost:8080
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Change the <code class="highlighter-rouge">tool_panel_section_label</code> to something more informative</p>
+  </li>
+</ol>
+
+<blockquote class="hands_on">
+  <h3 id="-hands-on-fill-the-toolsyaml-from-your-workflow"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Fill the <code class="highlighter-rouge">tools.yaml</code> from your workflow</h3>
+
+  <ol>
+    <li>Fill the <code class="highlighter-rouge">tools.yaml</code> file using your workflow and Ephemeris</li>
+    <li>Format the <code class="highlighter-rouge">tools.yaml</code> file correctly</li>
+  </ol>
+</blockquote>
+
 <h2 id="filling-the-data-libraryyaml">Filling the <code class="highlighter-rouge">data-library.yaml</code></h2>
 
 <p>The data can also be integrated in the Galaxy instance inside a data libraries and then make the data shared between the users. It lets then avoid every trainees to redownload the input data.</p>
@@ -279,7 +302,7 @@ tools:
   </li>
 </ul>
 
-<p>The URL must refer to the URL of the files in Zenodo.</p>
+<p>The URL must refer to the URL of the files in <a href="https://zenodo.org">Zenodo</a>.</p>
 
 <blockquote class="hands_on">
   <h3 id="-hands-on-fill-the-data-libraryyaml"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Fill the <code class="highlighter-rouge">data-library.yaml</code></h3>
@@ -332,32 +355,7 @@ It is a great way to run the tutorial directly inside Galaxy. To learn more abou
 
 <h2 id="testing-the-technical-infrastructure">Testing the technical infrastructure</h2>
 
-<p>Once we defined all the requirements for running the tutorial, we can test these requirements.</p>
-
-<p>Every topic will come with a Docker image containing the tools, data, workflows and Galaxy Interactive Tours required by each tutorial of this topic. The Docker image is described in the Dockerfile found in the <code class="highlighter-rouge">docker</code> directory of each topic. This file uses scripts to automatically add the files for each tutorial. The only thing to change is the name of the topic in the Dockerfile copied from the templates.</p>
-
-<blockquote class="hands_on">
-  <h3 id="-hands-on-testing-the-docker"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Testing the Docker</h3>
-
-  <ol>
-    <li>Check that the Dockerfile uses ‘sequence-analysis’ as topic name</li>
-    <li>Move to the root of the training material repository</li>
-    <li>
-      <p>Build the Docker image for the topic with: <code class="highlighter-rouge">docker build -f topic/sequence-analysis/docker/Dockerfile -t training-sequence-analysis .</code></p>
-
-      <p>This command needs to be launched a the root of training material repository because the Dockerfile uses some scripts available there to install the tools, import the data and the workflows</p>
-    </li>
-    <li>Launch the Docker container: <code class="highlighter-rouge">docker run -d -p 8080:80 training-sequence-analysis</code></li>
-    <li>Check the Galaxy instance on <a href="http://localhost:8080/">http://localhost:8080/</a>:
-      <ol>
-        <li>Check the installed tools</li>
-        <li>Check the data libraries in “Shared data”</li>
-        <li>Check the workflows</li>
-        <li>Check the Galaxy Interactive Tours in “Help”</li>
-      </ol>
-    </li>
-  </ol>
-</blockquote>
+<p>Once we have defined all the requirements for running the tutorial, we can test these requirements, either in a locally running Galaxy or in a Docker container. Please see our tutorial about <a href="../setup-galaxy-for-training/tutorial.html">Setting up Galaxy for Training</a> about how to test your tutorial requirements.</p>
 
 <h1 class="no_toc" id="conclusion">Conclusion</h1>
 
@@ -367,12 +365,15 @@ It is a great way to run the tutorial directly inside Galaxy. To learn more abou
   <p>This tutorial is part of a series to develop GTN training material, feel free to also look at:</p>
 
   <ol>
+    <li><a href="../running-jekyll/tutorial.html">Setting up the tutorial infrastructure</a></li>
     <li><a href="../create-new-tutorial-content/tutorial.html">Writing content in markdown</a></li>
     <li><a href="../create-new-tutorial-metadata/tutorial.html">Defining metadata</a></li>
-    <li><a href="../create-new-tutorial-jekyll/tutorial.html">Setting up the infrastructure</a></li>
+    <li><a href="../create-new-topic/tutorial.html">Creating a new topic</a></li>
+    <li><a href="../generating-pdf/tutorial.html">Generating PDF handouts</a></li>
     <li><a href="../create-new-tutorial-tours/tutorial.html">Creating Interactive Galaxy Tours</a></li>
-    <li><a href="../create-new-tutorial-docker/tutorial.html">Building a Docker flavor</a></li>
-    <li><a href="../../../dev/tutorials/github-contribution/slides.html">Submitting the new tutorial to the GitHub repository</a></li>
+    <li><a href="../create-new-tutorial-technical/tutorial.html">Defining technical requirements for a tutorial</a></li>
+    <li><a href="../setup-galaxy-for-training/tutorial.html">Setting up Galaxy for training</a></li>
+    <li><a href="../github-command-line-contribution/slides.html">Submitting the new tutorial to the GitHub repository</a></li>
   </ol>
 </blockquote>
 
@@ -419,7 +420,7 @@ It is a great way to run the tutorial directly inside Galaxy. To learn more abou
         </p>
         <p>
             Found a typo? Something is wrong in this tutorial? Edit it on
-            <a href="https://github.com/galaxyproject/training-material/tree/master/topics/training/tutorials/create-new-tutorial-docker/tutorial.md">GitHub</a>.
+            <a href="https://github.com/galaxyproject/training-material/tree/master/topics/contributing/tutorials/create-new-tutorial-technical/tutorial.md">GitHub</a>.
         </p>
     </div>
 </footer>
