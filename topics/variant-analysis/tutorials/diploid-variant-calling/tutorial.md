@@ -81,29 +81,30 @@ Suppose you have **A** samples with a variant in a population. You are performin
 > 2. Now, let's ask an opposite question. Given a true polymorphism **A** what are the chances that we do detect it (i.e., find ourselves in **AB**)?
 >
 >    > ### {% icon solution %} Solution
->    > 1. P(A|B) = |AB|/|B|.
->    >    Dividing by |U|: P(A|B) = (|AB|/|U|)/(|B|/|U|).
+>    > 1. $$P(A|B) = \frac{\vert AB \vert}{|B|}$$
 >    >
->    >    Because we know that P(AB) = |AB|/|U| and P(B) = |B|/|U|, we can rewrite the equation in the previous bullet point as P(A|B) = P(AB)/P(B)
+>    >    Dividing by $$\vert U \vert$$: $$P(A \vert B) = \frac{\frac{\vert AB \vert}{\vert U \vert}}{\frac{\vert B \vert}{\vert U \vert}}$$
 >    >
->    > 2. It will be P(B|A) = P(AB)/P(A).
+>    >    Because we know that $$P(AB) = \frac{\vert AB \vert}{\vert U \vert}$$ and $$P(B) = \frac{\vert B \vert}{\vert U \vert}$$, we can rewrite the equation in the previous bullet point as $$P(A \vert B) = \frac{P(AB)}{P(B)}$$
 >    >
->    >    So, because we know that P(A|B) = P(AB)/P(B) and we just reasoned that P(B|A) = P(AB)/P(A), we can say that P(A|B)P(B) = P(B|A)P(A) leading us to the Bayes formula P(A|B) = P(B|A)P(A)/P(B).
+>    > 2. It will be $$P(B \vert A) = \frac{P(AB)}{P(A)}$$.
 >    >
->    >    Translating this into "genomics terms" the probability of having a genotype G given reads R is:  P(G|R) = P(R|G)P(G)/P(R). Because in a given calculation of P(G|R) reads are fixed we can re-write the Bayes formula in the following way P(G|R) ~ P(R|G)P(G) with P(R) becoming a constant.
+>    >    So, because we know that $$P(A \vert B) = \frac{P(AB)}{P(B)}$$ and we just reasoned that $$P(B \vert A) = \frac{P(AB)}{P(A)}$$, we can say that $$P(A \vert B)P(B) = P(B \vert A)P(A)$$ leading us to the Bayes formula $$P(A \vert B) = \frac{P(B \vert A)P(A)}{P(B)}$$.
+>    >
+>    >    Translating this into "genomics terms" the probability of having a genotype G given reads R is: $$P(G \vert R) = \frac{P(R \vert G)P(G)}{P(R)}$$. Because in a given calculation of $$P(G \vert R)$$ reads are fixed we can re-write the Bayes formula in the following way $$P(G \vert R) \sim P(R \vert G)P(G)$$ with $$P(R)$$ becoming a constant.
 >    {: .solution }
 {: .question}
 
 :exclamation: This leaves us with the need to estimate two things:
 
-1. *P(R|G)*, the data likelihood;
-2. *P(G)*, the prior probability for the variant.
+1. $$P(R \vert G)$$, the data likelihood;
+2. $$P(G)$$, the prior probability for the variant.
 
 In the simplest case we can estimate these as follows:
 
 #### *P(R|G)*
 
-Suppose *R<sub>i</sub>* is a base in read *i* corresponding to a genome position with genotype *G*. The probability of seeing *R<sub>i</sub>* given *G*, *P(R<sub>i</sub>|G)*, is given by the quality score of *R<sub>i</sub>* (the quality scores are given by base calling software and reported as [phred scores](https://en.wikipedia.org/wiki/Phred_quality_score)). Thus the genotype likelihood *P(R|G)* is the product of *P(R<sub>i</sub>|G)* over all *i*. In reality however there are many other sources of uncertainty (in addition to base qualities) that are incorporated in the calculation of data likelihoods including NGS technology-related issues, dependency of error rates on substitution type (e.g., transitions versus transversions), sequencing context etc...
+Suppose $$R_{i}$$ is a base in read $$i$$ corresponding to a genome position with genotype $$G$$. The probability of seeing $$R_{i}$$ given $$G$$, $$P(R_{i} \vert G)$$, is given by the quality score of $$R_{i}$$ (the quality scores are given by base calling software and reported as [phred scores](https://en.wikipedia.org/wiki/Phred_quality_score)). Thus the genotype likelihood $$P(R \vert G)$$ is the product of $$P(R_{i} \vert G)$$ over all $$i$$. In reality however there are many other sources of uncertainty (in addition to base qualities) that are incorporated in the calculation of data likelihoods including NGS technology-related issues, dependency of error rates on substitution type (e.g., transitions versus transversions), sequencing context etc...
 
 #### *P(G)* - a single sample case
 
