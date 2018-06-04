@@ -35,15 +35,10 @@ matrix:
 install:
   - sudo apt-get update
   - sudo update-ca-certificates
-  - wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh
-  - bash miniconda.sh -b -p $HOME/miniconda
-  - export PATH="$HOME/miniconda/bin:$PATH"
-  - hash -r
+  - make install-conda
+  - export PATH="$HOME/miniconda3/bin:$PATH"
   - conda config --set always_yes yes --set changeps1 no
-  - conda config --add channels conda-forge
-  - conda update -q conda
-  - conda info -a
-  - conda env create -f environment.yml
+  - make create-env
   - source activate galaxy_training_material
   - make install
   - if [[ $TRAVIS_EVENT_TYPE == "pull_request" ]]; then export ORIGIN_BRANCH=$TRAVIS_PULL_REQUEST_BRANCH; else export ORIGIN_BRANCH=$TRAVIS_BRANCH; fi
