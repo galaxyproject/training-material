@@ -87,13 +87,46 @@ layout: base
                     {% endfor %}
                     </tbody>
                 </table>
-                <h3>How to contribute?</h3>
+
+                <h2>How to contribute?</h2>
 
                 <p>First off, thanks for taking the time to contribute!</p>
 
                 <p>You can report mistakes or errors, create more contents, etc. Whatever is your background, there is probably a way to do it: via the GitHub website, via command-line. If you feel it is too much, you can even write it with any text editor and contact us: we will work together to integrate it.</p>
 
-                <p>You can check our <a href="{{ site.baseurl }}/topics/contributing">dedicated tutorials</a> to get you started.</p>
+                <p>To get you started, check our <a href="{{ site.baseurl }}/topics/contributing">dedicated tutorials</a></p>
+
+                <h3>Galaxy for Contributors and Instructors</h3>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Topic</th>
+                            <th>Tutorials</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for topic in sorted_topics %}
+                        {% if topic[1].type == "instructors" %}
+                        <tr>
+                            {% assign tutorial_number=0 %}
+                            {% assign introduction=0 %}
+                            {% for tuto in topic[1].material %}
+                                {% if tuto.type == "tutorial" %}
+                                    {% assign tutorial_number=tutorial_number | plus:1 %}
+                                {% endif %}
+                                {% if tuto.type == "introduction" %}
+                                    {% assign introduction=introduction | plus:1 %}
+                                {% endif %}
+                            {% endfor %}
+
+                            <td><a href="{{ site.baseurl }}/topics/{{ topic[1].name }}">{{ topic[1].title }}</a></td>
+                            <td>{{ tutorial_number }}</td>
+                        </tr>
+                        {% endif %}
+                    {% endfor %}
+                    </tbody>
+                </table>
+
             </div>
         </div>
 
