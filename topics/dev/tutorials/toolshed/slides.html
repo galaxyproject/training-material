@@ -7,7 +7,6 @@
 
 
   <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
     <title>Tool Shed: sharing Galaxy tools</title>
     <link rel="stylesheet" href="/training-material/assets/css/slides.css">
@@ -37,7 +36,7 @@ class: center, middle, inverse
 
 
 
-### <img class="emoji" title=":grey_question:" alt=":grey_question:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2754.png" height="20" width="20" align="absmiddle"> Questions
+### <img class="emoji" title=":grey_question:" alt=":grey_question:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2754.png" height="20" width="20"> Questions
 
 
 - What is a Tool Shed?
@@ -51,7 +50,7 @@ class: center, middle, inverse
 
 ---
 
-### <img class="emoji" title=":dart:" alt=":dart:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f3af.png" height="20" width="20" align="absmiddle"> Objectives
+### <img class="emoji" title=":dart:" alt=":dart:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f3af.png" height="20" width="20"> Objectives
 
 
 - Discover what is a Tool Shed
@@ -123,9 +122,9 @@ class: center, middle, inverse
 - Only for third party toolsheds (Main and Test by default)
 - In `config/tool_sheds_conf.xml`:
 ```bash
-  &lt;tool_sheds&gt;
-    &lt;tool_shed name="Galaxy main tool shed" url="https://toolshed.g2.bx.psu.edu/" /&gt;
-  &lt;/tool_sheds&gt;
+  <tool_sheds>
+    <tool_shed name="Galaxy main tool shed" url="https://toolshed.g2.bx.psu.edu/"></tool_shed>
+  </tool_sheds>
 ```
 - Restart Galaxy
 
@@ -150,10 +149,10 @@ class: center, middle, inverse
 
 ### Install a tool from the Tool Shed
 
-- Types of repository&lt;/span&gt;
-  - &lt;span style="color:orange"&gt; Tools (`$name`)&lt;/span&gt;
-  - &lt;span style="color:blue"&gt; Tool suites (`suite_$name`)&lt;/span&gt;
-  - &lt;span style="color:red"&gt; Tool dependencies (`package_$name_$version`)&lt;/span&gt; (gradually removed, replaced by Conda dependencies)
+- Types of repository
+  - <span style="color:orange"> Tools (`$name`)</span>
+  - <span style="color:blue"> Tool suites (`suite_$name`)</span>
+  - <span style="color:red"> Tool dependencies (`package_$name_$version`)</span> (gradually removed, replaced by Conda dependencies)
 ![](../../images/typeOfRep_ss.png)
 
 ---
@@ -170,8 +169,8 @@ class: center, middle, inverse
 
 - Install the tool
 ![](../../images/installTool_ss.png)
-- &lt;span style="font-size:70%"&gt; Selecting Tool Shed AND conda will make Galaxy to install both&lt;/span&gt;
-- &lt;span style="font-size:70%"&gt; Recommended: use conda &lt;/span&gt;
+- <span style="font-size:70%"> Selecting Tool Shed AND conda will make Galaxy to install both</span>
+- <span style="font-size:70%"> Recommended: use conda </span>
 
 ---
 
@@ -208,7 +207,7 @@ class: center, middle, inverse
 - Search the workflow
   1. ![](../../images/toolshedWorkflow_ss.png)
   2. ![](../../images/schemaWorkflow_ss.png)
-- &lt;span style="font-size:70%"&gt; Tools can come with the workflow if they are not yet installed &lt;/span&gt;
+- <span style="font-size:70%"> Tools can come with the workflow if they are not yet installed </span>
 
 ---
 
@@ -290,14 +289,13 @@ class: center, middle, inverse
 - relationship between a dependent repository and one or more required repository (tools, datatypes, workflows,...)
 - -&gt; One XML file
 ```xml
-&lt;?xml version="1.0"?&gt;
-&lt;repositories description="Pipeline phylogeny"&gt;
-   &lt;repository toolshed="https://testtoolshed.g2.bx.psu.edu"
-     name="fasta_to_phylip" owner="gandres" changeset_revision="a895633568" /&gt;
-   &lt;repository name="mafft" owner="gandres" /&gt;
-   &lt;repository name="phyml" owner="gandres" /&gt;
+<?xml version="1.0"?>
+<repositories description="Pipeline phylogeny">
+   <repository toolshed="https://testtoolshed.g2.bx.psu.edu" name="fasta_to_phylip" owner="gandres" changeset_revision="a895633568"></repository>
+   <repository name="mafft" owner="gandres"></repository>
+   <repository name="phyml" owner="gandres"></repository>
 […]
-&lt;/repositories&gt;
+</repositories>
 ```
 No need to write it yourself, Planemo does it for you
 
@@ -342,10 +340,10 @@ No need to write it yourself, Planemo does it for you
 - How to automatically install the tools used in the workflow?
   - -&gt; `repository_dependencies.xml`
 ```xml
-&lt;?xml version="1.0"?&gt;
-&lt;repositories description="Phylogeny workflow"&gt;
-   &lt;repository name="suite_phylogeny" owner="galaxy" /&gt;
-&lt;/repositories&gt;
+<?xml version="1.0"?>
+<repositories description="Phylogeny workflow">
+   <repository name="suite_phylogeny" owner="galaxy"></repository>
+</repositories>
 ```
 
 ---
@@ -384,18 +382,18 @@ Their content or the file themselves are put to the right location on tool set u
 
 ![](../../images/repWithLoc_ss.png)
 
-&lt;span style="font-size:60%"&gt;`tool_data_table_conf.xml.sample`&lt;/span&gt;
+<span style="font-size:60%">`tool_data_table_conf.xml.sample`</span>
 ```xml
-&lt;tables&gt;
-	&lt;!-- Locations of indexes in the Bowtie2 mapper format --&gt;
-	&lt;table name="bowtie2_indexes" comment_char="#"&gt;
-		&lt;columns&gt;value, dbkey, name, path&lt;/columns&gt;
-		&lt;file path="tool-data/bowtie2_indices.loc" /&gt;
-	&lt;/table&gt;
-&lt;/tables&gt;
+<tables>
+	<!-- Locations of indexes in the Bowtie2 mapper format -->
+	<table name="bowtie2_indexes" comment_char="#">
+		<columns>value, dbkey, name, path</columns>
+		<file path="tool-data/bowtie2_indices.loc"></file>
+	</table>
+</tables>
 ```
-&lt;span style="font-size:60%"&gt;On install, the content of the file and the right
-path to the *.loc file is added to `shed_tool_data_table_conf.xml`&lt;/span&gt;
+<span style="font-size:60%">On install, the content of the file and the right
+path to the *.loc file is added to `shed_tool_data_table_conf.xml`</span>
 
 ---
 
@@ -417,17 +415,17 @@ planemo config_init
 ## [...]
 sheds:
      toolshed:
-           #key: "&lt;TODO&gt;"
-           #email: "&lt;TODO&gt;"
-           #password: "&lt;TODO&gt;"
+           #key: "<todo>"
+           #email: "<todo>"
+           #password: "<todo>"
      testtoolshed:
-           #key: "&lt;TODO&gt;"
-           #email: "&lt;TODO&gt;"
-           #password: "&lt;TODO&gt;"
+           #key: "<todo>"
+           #email: "<todo>"
+           #password: "<todo>"
      local:
-           #key: "&lt;TODO&gt;"
-           #email: "&lt;TODO&gt;"
-           #password: "&lt;TODO&gt;"
+           #key: "<todo>"
+           #email: "<todo>"
+           #password: "<todo>"
 ```
 
 ---
@@ -444,16 +442,16 @@ sheds:
 sheds:
      toolshed:
            key: "xxxxxxxxxmytoolshedAPIkeyxxxxxxx"
-           #email: "&lt;TODO&gt;"
-           #password: "&lt;TODO&gt;"
+           #email: "<todo>"
+           #password: "<todo>"
      testtoolshed:
-           #key: "&lt;TODO&gt;"
-           #email: "&lt;TODO&gt;"
-           #password: "&lt;TODO&gt;"
+           #key: "<todo>"
+           #email: "<todo>"
+           #password: "<todo>"
      local:
-           #key: "&lt;TODO&gt;"
-           #email: "&lt;TODO&gt;"
-           #password: "&lt;TODO&gt;"
+           #key: "<todo>"
+           #email: "<todo>"
+           #password: "<todo>"
 ```
 
 ---
@@ -466,8 +464,8 @@ planemo shed_init --name="tandem_repeats_finder_2"
                      --description="Tandem Repeats Finder description"
                      --long_description="A long long description."
                      --category="Sequence Analysis"
-                     [--remote_repository_url=&lt;URL to .shed.yml on github&gt;]
-                     [--homepage_url=&lt;Homepage for tool.&gt;]
+                     [--remote_repository_url=<url to .shed.yml on github>]
+                     [--homepage_url=<homepage for tool.>]
 ```
 - Creates `.shed.yml` file in the current repository (tool repository):
 
@@ -484,7 +482,7 @@ owner: gandres
 ### Configure repository
 
 #### Naming conventions
-&lt;small&gt;
+<small>
 
 | Repository Type | Recommended Name         | Examples                 |
 | --------------- |--------------------------| -------------------------|
@@ -493,8 +491,8 @@ owner: gandres
 | Tool Suites     | `suite_$name`            | `suite_samtools`         |
 | Tools           | `$name`                  | `stringle`, `bowtie2`    |
 
-&lt;/small&gt;
-&lt;span style="color:red"&gt;Planemo will determine the repository type based on these conventions&lt;/span&gt;
+</small>
+<span style="color:red">Planemo will determine the repository type based on these conventions</span>
 
 ---
 
@@ -576,7 +574,7 @@ mkdir "/tmp/tool_shed_diff_DMcOrR/_local_"; tar -xzf "/tmp/tmp5ousfg" -C "/tmp/t
 cd "/tmp/tool_shed_diff_DMcOrR"; diff -r _local_ _testtoolshed_
 diff -r _local_/tandem_repeats_finder.xml _testtoolshed_/tandem_repeats_finder.xml
 41d40
-&lt;     &lt;param name="fileout_label2" type="text" value="Unused" label="none" help="Output name for files" /&gt;
+&lt;     <param name="fileout_label2" type="text" value="Unused" label="none" help="Output name for files">
 ```
 - The repository needs to be updated
 
@@ -594,7 +592,7 @@ mkdir "/tmp/tool_shed_diff_DMcOrR/_local_"; tar -xzf "/tmp/tmp5ousfg" -C "/tmp/t
 cd "/tmp/tool_shed_diff_DMcOrR"; diff -r _local_ _testtoolshed_
 diff -r _local_/tandem_repeats_finder.xml _testtoolshed_/tandem_repeats_finder.xml
 41d40
-&lt;     &lt;param name="fileout_label2" type="text" value="Unused" label="none" help="Output name for files" /&gt;
+&lt;     <param name="fileout_label2" type="text" value="Unused" label="none" help="Output name for files">
 Repository tandem_repeats_finder updated successfully.
 Repository metadata updated.
 ```
@@ -716,20 +714,20 @@ Using planemo by hand
 
 ---
 
-### &lt;i class="fa fa-pencil" aria-hidden="true"&gt;&lt;/i&gt; Hands-on
+### <i class="fa fa-pencil" aria-hidden="true"></i> Hands-on
 
 ![](../../images/exercise.png)
 
 ---
 
-### &lt;i class="fa fa-pencil" aria-hidden="true"&gt;&lt;/i&gt; Hands-on
+### <i class="fa fa-pencil" aria-hidden="true"></i> Hands-on
 
 #### The goal
 Publish your tool (seqtk_seq) in your local toolshed with Planemo
 
 ---
 
-### &lt;i class="fa fa-pencil" aria-hidden="true"&gt;&lt;/i&gt; Hands-on
+### <i class="fa fa-pencil" aria-hidden="true"></i> Hands-on
 
 #### Step 1: Start and configure your toolshed
 - Start your toolshed (in galaxy home directory):
@@ -737,19 +735,19 @@ Publish your tool (seqtk_seq) in your local toolshed with Planemo
 ./run_tool_shed.sh
 ```
 - Toolshed available at `http://localhost:9009`
-&lt;aside class="notes"&gt;
+<aside class="notes">
 login: galaxy/azerty
-&lt;/aside&gt;
+</aside>
 
 ---
 
-### &lt;i class="fa fa-pencil" aria-hidden="true"&gt;&lt;/i&gt; Hands-on
+### <i class="fa fa-pencil" aria-hidden="true"></i> Hands-on
 
 #### Step 2: Use planemo to publish your tool
 
 ---
 
-### &lt;i class="fa fa-pencil" aria-hidden="true"&gt;&lt;/i&gt; Hands-on
+### <i class="fa fa-pencil" aria-hidden="true"></i> Hands-on
 
 #### Step 2: Use planemo to publish your tool
 
@@ -760,7 +758,7 @@ planemo config_init
 
 ```yml
 [...]  local:
-#key: "&lt;TODO&gt;"
+#key: "<todo>"
 email: "galaxy@localhost.fr"
 password: "azerty"
 ```
@@ -776,13 +774,13 @@ planemo shed_create --shed_target local
 
 ---
 
-### &lt;i class="fa fa-pencil" aria-hidden="true"&gt;&lt;/i&gt; Hands-on
+### <i class="fa fa-pencil" aria-hidden="true"></i> Hands-on
 
 #### Step 3: Update your tool and then use planemo to update your tool on the Tool Shed
 
 ---
 
-### &lt;i class="fa fa-pencil" aria-hidden="true"&gt;&lt;/i&gt; Hands-on
+### <i class="fa fa-pencil" aria-hidden="true"></i> Hands-on
 
 #### Step 3: Update your tool and then use planemo to update your tool on the Tool Shed
 
@@ -795,7 +793,7 @@ planemo shed_update --check_diff --shed_target local
 
 ---
 
-### &lt;i class="fa fa-exclamation-circle" aria-hidden="true"&gt;&lt;/i&gt; Key points
+### <i class="fa fa-exclamation-circle" aria-hidden="true"></i> Key points
 
 - Use Planemo
 - Contribute to the Main Tool Shed
@@ -803,7 +801,7 @@ planemo shed_update --check_diff --shed_target local
 
 ---
 
-### <img class="emoji" title=":grey_exclamation:" alt=":grey_exclamation:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2755.png" height="20" width="20" align="absmiddle"> Key points
+### <img class="emoji" title=":grey_exclamation:" alt=":grey_exclamation:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2755.png" height="20" width="20"> Key points
 
 
 - Use Planemo
@@ -819,7 +817,7 @@ planemo shed_update --check_diff --shed_target local
 This material is the result of a collaborative work. Thanks the [Galaxy Training Network](https://wiki.galaxyproject.org/Teach/GTN) and all the contributors  (Anthony Bretaudeau, Loraine Guéguen, Stéphanie Legras, Bérénice Batut) !
 
 
-<img src="/training-material/assets/images/GTN.png" alt="Galaxy Training Network" style="height: 100px;">
+</todo></homepage></url></todo></todo></todo></todo></todo></todo></todo></todo></todo></todo></todo></todo></todo></todo></todo></todo></todo><img src="/training-material/assets/images/GTN.png" alt="Galaxy Training Network" style="height: 100px;">
 
 
 

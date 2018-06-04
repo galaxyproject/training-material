@@ -245,7 +245,7 @@
 
 <p>Fastq format looks like this:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
 @M02286:19:000000000-AA549:1:1101:12677:1273 1:N:0:23
 CCTACGGGTGGCAGCAGTGAGGAATATTGGTCAATGGACGGAAGTCTGAACCAGCCAAGTAGCGTGCAG
 +
@@ -259,8 +259,7 @@ CCTACGGGAGGCAGCAGTAGGGAATCTTCGGCAATGGACGGAAGTCTGACCGAGCAACGCCGCGTGAGT
 +
 AAC&lt;CCF+@@&gt;CC,C9,F9C9@9-CFFFE@7@:+CC8-C@:7,@EFE,6CF:+8F7EFEEF@EGGGEEE
 
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Each sequencing read is represented by four lines:</p>
 
@@ -297,7 +296,7 @@ AAC&lt;CCF+@@&gt;CC,C9,F9C9@9-CFFFE@7@:+CC8-C@:7,@EFE,6CF:+8F7EFEEF@EGGGEEE
 
 <p><strong>File 1</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code> @M02286:19:000000000-AA549:1:1101:12677:1273 1:N:0:23
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> @M02286:19:000000000-AA549:1:1101:12677:1273 1:N:0:23
  CCTACGGGTGGCAGCAGTGAGGAATATTGGTCAATGGACGGAAGTCT
  +
  ABC8C,:@F:CE8,B-,C,-6-9-C,CE9-CC--C-&lt;-C++,,+;CE
@@ -305,12 +304,11 @@ AAC&lt;CCF+@@&gt;CC,C9,F9C9@9-CFFFE@7@:+CC8-C@:7,@EFE,6CF:+8F7EFEEF@EGGGEEE
  CCTACGGGTGGCTGCAGTGAGGAATATTGGACAATGGTCGGAAGACT
  +
  ABC@CC77CFCEG;F9&lt;F89&lt;9--C,CE,--C-6C-,CE:++7:,CF
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p><strong>File 2</strong></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>@M02286:19:000000000-AA549:1:1101:12677:1273 2:N:0:23
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@M02286:19:000000000-AA549:1:1101:12677:1273 2:N:0:23
 CACTACCCGTGTATCTAATCCTGTTTGATACCCGCACCTTCGAGCTTA
 +
 --8A,CCE+,,;,&lt;CC,,&lt;CE@,CFD,,C,CFF+@+@CCEF,,,B+C,
@@ -318,8 +316,7 @@ CACTACCCGTGTATCTAATCCTGTTTGATACCCGCACCTTCGAGCTTA
 CACTACCGGGGTATCTAATCCTGTTCGCTCCCCACGCTTTCGTCCATC
 +
 -6AC,EE@::CF7CFF&lt;&lt;FFGGDFFF,@FGGGG?F7FEGGGDEFF&gt;FF
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <div class="alert alert-info" role="alert">
 
@@ -329,7 +326,7 @@ CACTACCGGGGTATCTAATCCTGTTCGCTCCCCACGCTTTCGTCCATC
 
 <h4 id="interleaved-file">Interleaved file</h4>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>@1/1
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@1/1
 AGGGATGTGTTAGGGTTAGGGTTAGGGTTAGGGTTAGGGTTAGGGTTA
 +
 EGGEGGGDFGEEEAEECGDEGGFEEGEFGBEEDDECFEFDD@CDD&lt;ED
@@ -345,8 +342,7 @@ HHHHHHEGFHEEFEEHEEHHGGEGGGGEFGFGGGGHHHHFBEEEEEFG
 CCTAACCCTAACCCTAACCCTAACCCTAACCCTAACCCTAACCCTAAC
 +
 HHHHHHHHHHHHHGHHHHHHGHHHHHHHHHHHFHHHFHHHHHHHHHHH
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Here the first and the second reads are identified with <code class="highlighter-rouge">/1</code> and <code class="highlighter-rouge">/2</code> tags.</p>
 
@@ -521,25 +517,22 @@ Sanger/Phred format that is also used by other sequencing platforms and the sequ
 
 <p>The header section includes information about how the alignment was generated and stored. All lines in the header section are tab-delimited and begin with the “@” character, followed by tag:value pairs, where tag is a two-letter string that defines the content and the format of value. For example, the “@SQ” line in the header section contains the information about the names and lengths of the *reference sequences to which the reads were aligned. For a hypothetical organism with three chromosomes of length 1,000 bp, the SAM header should contain the following three lines:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>@SQ SN:chr1 LN:1000
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@SQ SN:chr1 LN:1000
 @SQ SN:chr2 LN:1000
 @SQ SN:chr3 LN:1000
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h2 id="sam-alignment-section">SAM alignment section</h2>
 
 <p>The optional header section is followed by the alignment section where each line corresponds to one sequenced read. For each read, there are 11 mandatory fields that always appear in the same order:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>&lt;QNAME&gt; &lt;FLAG&gt; &lt;RNAME&gt; &lt;POS&gt; &lt;MAPQ&gt; &lt;CIGAR&gt; &lt;MRNM&gt; &lt;MPOS&gt; &lt;ISIZE&gt; &lt;SEQ&gt; &lt;QUAL&gt;
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;QNAME&gt; &lt;FLAG&gt; &lt;RNAME&gt; &lt;POS&gt; &lt;MAPQ&gt; &lt;CIGAR&gt; &lt;MRNM&gt; &lt;MPOS&gt; &lt;ISIZE&gt; &lt;SEQ&gt; &lt;QUAL&gt;
+</code></pre></div></div>
 
 <p>If the corresponding information is unavailable or irrelevant, field values can be ‘0’ or ‘*’ (depending on the field, see below), but they cannot be missing! After the 11 mandatory fields, a variable number of optional fields can be present. Here’s an example of one single line of a real-life SAM file (you may need to scroll sideways):</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>ERR458493 .552967 16 chrI 140 255 12 M61232N37M2S * 0 0 CCACTCGTTCACCAGGGCCGGCGGGCTGATCACTTTATCGTGCATCTTGGC BB?HHJJIGHHJIGIIJJIJGIJIJJIIIGHBJJJJJJHHHHFFDDDA1+B NH:i:1 HI:i:1 AS:i:41 nM:i:2
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ERR458493 .552967 16 chrI 140 255 12 M61232N37M2S * 0 0 CCACTCGTTCACCAGGGCCGGCGGGCTGATCACTTTATCGTGCATCTTGGC BB?HHJJIGHHJIGIIJJIJGIJIJJIIIGHBJJJJJJHHHHFFDDDA1+B NH:i:1 HI:i:1 AS:i:41 nM:i:2
+</code></pre></div></div>
 
 <p>The following table explains the format and content of each field. The <code class="highlighter-rouge">FLAG</code>, <code class="highlighter-rouge">CIGAR</code>, and the optional fields (marked in blue) are explained in more detail below. The number of optional fields can vary widely between different SAM files and even between reads within in the same file. The field types marked in blue are explained in more detail in the main text below.</p>
 

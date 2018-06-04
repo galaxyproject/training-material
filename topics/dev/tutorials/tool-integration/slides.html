@@ -7,7 +7,6 @@
 
 
   <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
     <title>Tool development and integration into Galaxy</title>
     <link rel="stylesheet" href="/training-material/assets/css/slides.css">
@@ -37,7 +36,7 @@ class: center, middle, inverse
 
 
 
-### <img class="emoji" title=":grey_question:" alt=":grey_question:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2754.png" height="20" width="20" align="absmiddle"> Questions
+### <img class="emoji" title=":grey_question:" alt=":grey_question:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2754.png" height="20" width="20"> Questions
 
 
 - What is a tool for Galaxy?
@@ -49,7 +48,7 @@ class: center, middle, inverse
 
 ---
 
-### <img class="emoji" title=":dart:" alt=":dart:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f3af.png" height="20" width="20" align="absmiddle"> Objectives
+### <img class="emoji" title=":dart:" alt=":dart:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f3af.png" height="20" width="20"> Objectives
 
 
 - Discover what is a wrapper and its structure
@@ -101,10 +100,10 @@ graphlan.py --format "png" --size 7 input_tree.txt png_image.png
 
 ???
 
-1. `&lt;inputs&gt;` (datasets and parameters) specified in the tool XML are exposed in the Galaxy tool UI
-2. When the user fills the form and click the `Execute` button, Galaxy fills the `&lt;command&gt;` template in the XML with the inputs entered by the user and execute the Cheetah code, producing a script as output
+1. `<inputs>` (datasets and parameters) specified in the tool XML are exposed in the Galaxy tool UI
+2. When the user fills the form and click the `Execute` button, Galaxy fills the `<command>` template in the XML with the inputs entered by the user and execute the Cheetah code, producing a script as output
 3. Galaxy creates a job for the generated script and executes it somewhere (bowtie is run in this case)
-4. Some (not necessarily all) output files become new history datasets, as specified in the `&lt;outputs&gt;` XML tag set
+4. Some (not necessarily all) output files become new history datasets, as specified in the `<outputs>` XML tag set
 
 ---
 
@@ -141,23 +140,12 @@ Galaxy tool XML format is formally defined in a XML Schema Definition (XSD), use
 #### How to invoke the tool?
 
 ```xml
-&lt;command&gt;&lt;![CDATA[
-graphlan.py
---format $format
-#if $dpi
-    --dpi $dpi
-#end if
---size $size
-'$input_tree'
-]]&gt;&lt;/command&gt;
+<command></command>
 ```
 
-&lt;small&gt;If the script is provided with the wrapper xml&lt;/small&gt;
+<small>If the script is provided with the wrapper xml</small>
 ```xml
-&lt;command&gt;&lt;![CDATA[
-python '$__tool_directory__/graphlan.py'
-# command params...
-]]&gt;&lt;/command&gt;
+<command></command>
 ```
 
 ???
@@ -179,12 +167,11 @@ python '$__tool_directory__/graphlan.py'
 #### How to pass the parameters?
 
 ```xml
-&lt;inputs&gt;
-    &lt;param name="input_tree" type="data" label="..."/&gt;
+<inputs>
+    <param name="input_tree" type="data" label="...">
 
-    &lt;param argument="--dpi" type="integer" optional="true" label="..."
-        help="For non vectorial formats" /&gt;
-&lt;/inputs&gt;
+    <param argument="--dpi" type="integer" optional="true" label="..." help="For non vectorial formats">
+</inputs>
 ```
 
 ???
@@ -197,18 +184,10 @@ python '$__tool_directory__/graphlan.py'
 ---
 
 ### `inputs` &gt; `param` to `command`
-#### Directly linked to `&lt;command&gt;`
+#### Directly linked to `<command>`
 
 ```xml
-&lt;command&gt;&lt;![CDATA[
-graphlan.py
-...
-#if $dpi
-    --dpi $dpi
-#end if
-'$input_tree'
-...
-]]&gt;&lt;/command&gt;
+<command></command>
 ```
 
 ---
@@ -218,7 +197,7 @@ graphlan.py
 ![](../../images/input_data.png)
 
 ```xml
-&lt;param name="..." type="data" format="txt" label="..." help="..." /&gt;
+<param name="..." type="data" format="txt" label="..." help="...">
 ```
 
 .footnote[[List of possible formats](https://github.com/galaxyproject/galaxy/blob/dev/config/datatypes_conf.xml.sample)]
@@ -230,14 +209,13 @@ graphlan.py
 ![](../../images/input_integer.png)
 
 ```xml
-&lt;param name="..." type="integer" value="7" label="..." help="..."/&gt;
+<param name="..." type="integer" value="7" label="..." help="...">
 ```
 
 ![](../../images/input_integer_range.png)
 
 ```xml
-&lt;param name="..." type="float" min="0" max="10" value="1" label="..."
-    help="..."/&gt;
+<param name="..." type="float" min="0" max="10" value="1" label="..." help="...">
 ```
 
 ???
@@ -252,7 +230,7 @@ graphlan.py
 ![](../../images/input_text.png)
 
 ```xml
-&lt;param name="..." type="text" value="" label="..." help="..."/&gt;
+<param name="..." type="text" value="" label="..." help="...">
 ```
 
 ---
@@ -262,13 +240,13 @@ graphlan.py
 ![](../../images/input_select.png)
 
 ```xml
-&lt;param name="..." type="select" label="..." help="..."&gt;
-    &lt;option value="png" selected="true"&gt;PNG&lt;/option&gt;
-    &lt;option value="pdf"&gt;PDF&lt;/option&gt;
-    &lt;option value="ps"&gt;PS&lt;/option&gt;
-    &lt;option value="eps"&gt;EPS&lt;/option&gt;
-    &lt;option value="svg"&gt;SVG&lt;/option&gt;
-&lt;/param&gt;
+<param name="..." type="select" label="..." help="...">
+    <option value="png" selected>PNG</option>
+    <option value="pdf">PDF</option>
+    <option value="ps">PS</option>
+    <option value="eps">EPS</option>
+    <option value="svg">SVG</option>
+
 ```
 
 If no `option` has `selected="true"`, the first one is selected by default.
@@ -280,12 +258,12 @@ If no `option` has `selected="true"`, the first one is selected by default.
 ![](../../images/input_select_checkboxes.png)
 
 ```xml
-&lt;param name="..." type="select" display="radio" label="..." help="..."&gt;
-    &lt;option value="min" selected="true"&gt;Minimum&lt;/option&gt;
-    &lt;option value="mean"&gt;Mean&lt;/option&gt;
-    &lt;option value="max"&gt;Max&lt;/option&gt;
-    &lt;option value="sum"&gt;Sum&lt;/option&gt;
-&lt;/param&gt;
+<param name="..." type="select" display="radio" label="..." help="...">
+    <option value="min" selected>Minimum</option>
+    <option value="mean">Mean</option>
+    <option value="max">Max</option>
+    <option value="sum">Sum</option>
+
 ```
 
 ---
@@ -295,10 +273,10 @@ If no `option` has `selected="true"`, the first one is selected by default.
 ![](../../images/input_select_multiple.png)
 
 ```xml
-&lt;param name="..." type="select" multiple="true" label="..." help="..."&gt;
-    &lt;option value="ld" selected="true"&gt;Length distribution&lt;/option&gt;
-    &lt;option value="gc" selected="true"&gt;GC content distribution&lt;/option&gt;
-&lt;/param&gt;
+<param name="..." type="select" multiple label="..." help="...">
+    <option value="ld" selected>Length distribution</option>
+    <option value="gc" selected>GC content distribution</option>
+
 ```
 
 ---
@@ -308,8 +286,7 @@ If no `option` has `selected="true"`, the first one is selected by default.
 ![](../../images/input_boolean.png)
 
 ```xml
-&lt;param name="..." type="boolean" checked="false" truevalue="--log" falsevalue=""
-    label="..." help="..." /&gt;
+<param name="..." type="boolean" checked truevalue="--log" falsevalue="" label="..." help="...">
 ```
 
 ---
@@ -321,28 +298,22 @@ class: packed
 .image-75[ ![](../../images/input_conditional.png) ]
 
 ```xml
-&lt;command&gt;&lt;![CDATA[
-#if $fastq_input.selector == 'paired':
-    '$fastq_input.input1' '$fastq_input.input2'
-#else:
-    '$fastq_input.input'
-#end if
-]]&gt;&lt;/command&gt;
-&lt;inputs&gt;
-    &lt;conditional name="fastq_input"&gt;
-        &lt;param name="selector" type="select" label="Single or paired-end reads?"&gt;
-            &lt;option value="paired"&gt;Paired-end&lt;/option&gt;
-            &lt;option value="single"&gt;Single-end&lt;/option&gt;
-        &lt;/param&gt;
-        &lt;when value="paired"&gt;
-            &lt;param name="input1" type="data" format="fastq" label="Forward reads" /&gt;
-            &lt;param name="input2" type="data" format="fastq" label="Reverse reads" /&gt;
-        &lt;/when&gt;
-        &lt;when value="single"&gt;
-            &lt;param name="input" type="data" format="fastq" label="Single reads" /&gt;
-        &lt;/when&gt;
-    &lt;/conditional&gt;
-&lt;/inputs&gt;
+<command></command>
+<inputs>
+    <conditional name="fastq_input">
+        <param name="selector" type="select" label="Single or paired-end reads?">
+            <option value="paired">Paired-end</option>
+            <option value="single">Single-end</option>
+        
+        <when value="paired">
+            <param name="input1" type="data" format="fastq" label="Forward reads">
+            <param name="input2" type="data" format="fastq" label="Reverse reads">
+        </when>
+        <when value="single">
+            <param name="input" type="data" format="fastq" label="Single reads">
+        </when>
+    </conditional>
+</inputs>
 ```
 
 ---
@@ -354,25 +325,19 @@ class: packed
 ![](../../images/input_repeat.png)
 
 ```xml
-&lt;command&gt;&lt;![CDATA[
-#for $i, $s in enumerate( $series )
-    rank_of_series=$i
-    input_path=${s.input}
-    x_column=${s.xcol}
-#end for
-]]&gt;&lt;/command&gt;
+<command></command>
 
-&lt;inputs&gt;
-    &lt;repeat name="series" title="Series"&gt;
-        &lt;param name="input" type="data" format="tabular" label="Dataset"/&gt;
-        &lt;param name="xcol" type="data_column" data_ref="input" label="Column for x axis"/&gt;
-    &lt;/repeat&gt;
-&lt;/inputs&gt;
+<inputs>
+    <repeat name="series" title="Series">
+        <param name="input" type="data" format="tabular" label="Dataset">
+        <param name="xcol" type="data_column" data_ref="input" label="Column for x axis">
+    </repeat>
+</inputs>
 ```
 
 ???
 
-It makes sense to use a `&lt;repeat&gt;` block only if it contains multiple related parameters, otherwise adding `multiple="true"` is preferrable.
+It makes sense to use a `<repeat>` block only if it contains multiple related parameters, otherwise adding `multiple="true"` is preferrable.
 
 ---
 
@@ -386,11 +351,10 @@ It makes sense to use a `&lt;repeat&gt;` block only if it contains multiple rela
 ### `outputs`
 
 ```xml
-&lt;outputs&gt;
-    &lt;data name="tree" format="txt" label="${tool.name} on ${on_string}: Tree" /&gt;
-    &lt;data name="annotation" format="txt"
-        label="${tool.name} on ${on_string}: Annotation" /&gt;
-&lt;/outputs&gt;
+<outputs>
+    <data name="tree" format="txt" label="${tool.name} on ${on_string}: Tree"></data>
+    <data name="annotation" format="txt" label="${tool.name} on ${on_string}: Annotation"></data>
+</outputs>
 ```
 
 ???
@@ -403,20 +367,20 @@ It makes sense to use a `&lt;repeat&gt;` block only if it contains multiple rela
 #### Conditional
 
 ```xml
-&lt;inputs&gt;
-    &lt;param type="select" name="format" label="Output format"&gt;
-        &lt;option value="png"&gt;PNG&lt;/option&gt;
-        &lt;option value="pdf"&gt;PDF&lt;/option&gt;
-    &lt;/param&gt;
-&lt;/inputs&gt;
-&lt;outputs&gt;
-    &lt;data name="png_output" format="png" label="${tool.name} on ${on_string}: PNG"&gt;
-        &lt;filter&gt;format == "png"&lt;/filter&gt;
-    &lt;/data&gt;
-    &lt;data name="pdf_output" format="pdf" label="${tool.name} on ${on_string}: PDF"&gt;
-        &lt;filter&gt;format == "pdf"&lt;/filter&gt;
-    &lt;/data&gt;
-&lt;/outputs&gt;
+<inputs>
+    <param type="select" name="format" label="Output format">
+        <option value="png">PNG</option>
+        <option value="pdf">PDF</option>
+    
+</inputs>
+<outputs>
+    <data name="png_output" format="png" label="${tool.name} on ${on_string}: PNG">
+        <filter>format == "png"</filter>
+    </data>
+    <data name="pdf_output" format="pdf" label="${tool.name} on ${on_string}: PDF">
+        <filter>format == "pdf"</filter>
+    </data>
+</outputs>
 ```
 
 ???
@@ -429,23 +393,23 @@ N.B. If the filter expression raises an Exception, the dataset will NOT be filte
 
 Error if tool exit code is not 0 (default):
 ```xml
-&lt;command detect_errors="exit_code"&gt; ... &lt;/command&gt;
+<command detect_errors="exit_code"> ... </command>
 ```
 Error if tool exit code is not 0 or either "Exception:" or "Error:" appears in standard error/output:
 ```xml
-&lt;command detect_errors="aggressive"&gt; ... &lt;/command&gt;
+<command detect_errors="aggressive"> ... </command>
 ```
 If you need more precision:
 ```xml
-&lt;stdio&gt;
-    &lt;exit_code range=":-2" level="warning" description="Low disk space" /&gt;
-    &lt;exit_code range="1:" level="fatal"  /&gt;
-    &lt;regex match="Error:"  level="fatal" /&gt;
-&lt;/stdio&gt;
-&lt;command&gt; ... &lt;/command&gt;
+<stdio>
+    <exit_code range=":-2" level="warning" description="Low disk space"></exit_code>
+    <exit_code range="1:" level="fatal"></exit_code>
+    <regex match="Error:" level="fatal"></regex>
+</stdio>
+<command> ... </command>
 ```
 
-&lt;small&gt;"Warning" level allows to add information to `stderr` without marking the dataset as failed&lt;/small&gt;
+<small>"Warning" level allows to add information to `stderr` without marking the dataset as failed</small>
 
 ---
 
@@ -454,19 +418,9 @@ If you need more precision:
 ![](../../images/help.png)
 
 ```xml
-&lt;help&gt;&lt;![CDATA[
+<help>`_.
 
-**What it does**
-GraPhlAn is a software tool for producing high-quality circular
-representations of taxonomic and phylogenetic trees. GraPhlAn focuses
-on concise, integrative, informative, and publication-ready
-representations of phylogenetically- and taxonomically-driven
-investigation.
-
-For more information, check the `user manual
-&lt; https://bitbucket.org/nsegata/graphlan/overview &gt;`_.
-
-]]&gt;&lt;/help&gt;
+]]&gt;</help>
 ```
 
 .footnote[[reStructuredText markup format](http://docutils.sourceforge.net/rst.html)]
@@ -478,16 +432,16 @@ For more information, check the `user manual
 ![](../../images/citations.png)
 
 ```xml
-&lt;citations&gt;
-    &lt;citation type="doi"&gt;10.1093/bioinformatics/bts611&lt;/citation&gt;
-    &lt;citation type="doi"&gt;10.1093/nar/gks1219&lt;/citation&gt;
-    &lt;citation type="doi"&gt;10.1093/nar/gks1005&lt;/citation&gt;
-    &lt;citation type="doi"&gt;10.1093/bioinformatics/btq461&lt;/citation&gt;
-    &lt;citation type="doi"&gt;10.1038/nbt.2198&lt;/citation&gt;
-&lt;/citations&gt;
+<citations>
+    <citation type="doi">10.1093/bioinformatics/bts611</citation>
+    <citation type="doi">10.1093/nar/gks1219</citation>
+    <citation type="doi">10.1093/nar/gks1005</citation>
+    <citation type="doi">10.1093/bioinformatics/btq461</citation>
+    <citation type="doi">10.1038/nbt.2198</citation>
+</citations>
 ```
 
-&lt;small&gt;If no DOI is available, a BibTeX citation can be specified with `type="bibtex"`&lt;/small&gt;
+<small>If no DOI is available, a BibTeX citation can be specified with `type="bibtex"`</small>
 
 ---
 
@@ -496,12 +450,7 @@ For more information, check the `user manual
 Always quote `text` and `data` parameters and output `data`
 
 ```xml
-&lt;command&gt;&lt;![CDATA[
-graphlan.py
-...
-'$input_tree'
-'$png_output_image'
-]]&gt;&lt;/command&gt;
+<command></command>
 ```
 
 - For security reasons
@@ -515,15 +464,10 @@ graphlan.py
 Use `&amp;&amp;` to concatenate multiple commands
 
 ```xml
-&lt;command&gt;&lt;![CDATA[
-graphlan.py
---format '$format'
-&amp;&amp;
-echo "Yeah it worked!"
-]]&gt;&lt;/command&gt;
+<command></command>
 ```
 
-&lt;small&gt;The job will exit on the first error encountered.&lt;/small&gt;
+<small>The job will exit on the first error encountered.</small>
 
 ---
 
@@ -532,7 +476,7 @@ echo "Yeah it worked!"
 Use the `argument` tag when a param name reflects the command line argument
 
 ```xml
-&lt;param argument="--size" type="integer" value="7" label="..." help="..."/&gt;
+<param argument="--size" type="integer" value="7" label="..." help="...">
 ```
 
 - It will be printed at the end of the param help section
@@ -547,10 +491,10 @@ Use sections to group related parameters
 ![](../../images/input_section.png)
 
 ```xml
-&lt;section name="advanced" title="Advanced options" expanded="False"&gt;
-    &lt;param argument="--size" type="integer" value="7" label="..." help="..."/&gt;
+<section name="advanced" title="Advanced options" expanded="False">
+    <param argument="--size" type="integer" value="7" label="..." help="...">
     ...
-&lt;/section&gt;
+</section>
 ```
 
 ---
@@ -683,19 +627,19 @@ Open http://127.0.0.1:9090/ in your web browser to view your new tool
 ### `tests`
 
 ```xml
-&lt;tests&gt;
-    &lt;test&gt;
-        &lt;param name="input_tree" value="input_tree.txt"/&gt;
-        &lt;param name="format" value="png"/&gt;
-        &lt;param name="dpi" value="100"/&gt;
-        &lt;param name="size" value="7"/&gt;
-        &lt;param name="pad" value="2"/&gt;
-        &lt;output name="png_output_image" file="png_image.png" /&gt;
-    &lt;/test&gt;
-&lt;/tests&gt;
+<tests>
+    <test>
+        <param name="input_tree" value="input_tree.txt">
+        <param name="format" value="png">
+        <param name="dpi" value="100">
+        <param name="size" value="7">
+        <param name="pad" value="2">
+        <output name="png_output_image" file="png_image.png"></output>
+    </test>
+</tests>
 ```
 
-&lt;small&gt;`input_tree.txt` and `png_image.png` must be in the `test-data/` directory&lt;/small&gt;
+<small>`input_tree.txt` and `png_image.png` must be in the `test-data/` directory</small>
 
 ---
 
@@ -717,7 +661,7 @@ graphlan/
 #### Comparison Methods: comparing to an expected result
 
 ```xml
-&lt;output name="out_file1" file="cf_maf2fasta_concat.dat" ftype="fasta" /&gt;
+<output name="out_file1" file="cf_maf2fasta_concat.dat" ftype="fasta"></output>
 ```
 
 .footnote[[Complete documentation](https://docs.galaxyproject.org/en/latest/dev/schema.html#tool-tests-test)]
@@ -728,7 +672,7 @@ graphlan/
 #### Comparison Methods: comparing to an expected result
 
 ```xml
-&lt;output ... compare="diff|re_match|sim_size|contains|re_match_multiline" ... /&gt;
+<output ... compare="diff|re_match|sim_size|contains|re_match_multiline"></output>
 ```
 
 .footnote[[Complete documentation](https://docs.galaxyproject.org/en/latest/dev/schema.html#tool-tests-test-output)]
@@ -739,7 +683,7 @@ graphlan/
 #### Comparison Methods: comparing to an expected result
 
 ```xml
-&lt;output ... compare="diff" lines_diff="4" /&gt;
+<output ... compare="diff" lines_diff="4"></output>
 ```
 
 .footnote[[Complete documentation](https://docs.galaxyproject.org/en/latest/dev/schema.html#tool-tests-test-output)]
@@ -750,7 +694,7 @@ graphlan/
 #### Comparison Methods: comparing to an expected result
 
 ```xml
-&lt;output ... compare="sim_size" delta="1000" /&gt;
+<output ... compare="sim_size" delta="1000"></output>
 ```
 
 .footnote[[Complete documentation](https://docs.galaxyproject.org/en/latest/dev/schema.html#tool-tests-test-output)]
@@ -761,7 +705,7 @@ graphlan/
 #### Comparison Methods: comparing to an expected result
 
 ```xml
-&lt;output ... md5="68b329da9893e34099c7d8ad5cb9c940" /&gt;
+<output ... md5="68b329da9893e34099c7d8ad5cb9c940"></output>
 ```
 
 .footnote[[Complete documentation](https://docs.galaxyproject.org/en/latest/dev/schema.html#tool-tests-test-output)]
@@ -772,17 +716,17 @@ graphlan/
 #### Comparison Methods: checking the content
 
 ```xml
-&lt;output name="out_file1"&gt;
-    &lt;assert_contents&gt;
-        &lt;has_text text="chr7" /&gt;
-        &lt;not_has_text text="chr8" /&gt;
-        &lt;has_text_matching expression="1274\d+53" /&gt;
-        &lt;has_line_matching expression=".*\s+127489808\s+127494553" /&gt;
-        &lt;!-- &amp;#009; is XML escape code for tab --&gt;
-        &lt;has_line line="chr7&amp;#009;127471195&amp;#009;127489808" /&gt;
-        &lt;has_n_columns n="3" /&gt;
-    &lt;/assert_contents&gt;
-&lt;/output&gt;
+<output name="out_file1">
+    <assert_contents>
+        <has_text text="chr7"></has_text>
+        <not_has_text text="chr8"></not_has_text>
+        <has_text_matching expression="1274\d+53"></has_text_matching>
+        <has_line_matching expression=".*\s+127489808\s+127494553"></has_line_matching>
+        <!-- &#009; is XML escape code for tab -->
+        <has_line line="chr7	127471195	127489808"></has_line>
+        <has_n_columns n="3"></has_n_columns>
+    </assert_contents>
+</output>
 ```
 
 .footnote[[Complete documentation](https://docs.galaxyproject.org/en/latest/dev/schema.html#tool-tests-test-output-assert-contents)]
@@ -793,10 +737,10 @@ graphlan/
 #### Comparison Methods: checking the stdout/stderr
 
 ```xml
-&lt;assert_stdout&gt;
-    &lt;has_text text="Step 1... determine cutoff point" /&gt;
-    &lt;has_text text="Step 2... estimate parameters of null distribution" /&gt;
-&lt;/assert_stdout&gt;
+<assert_stdout>
+    <has_text text="Step 1... determine cutoff point"></has_text>
+    <has_text text="Step 2... estimate parameters of null distribution"></has_text>
+</assert_stdout>
 ```
 
 .footnote[[Complete documentation](https://docs.galaxyproject.org/en/latest/dev/schema.html#tool-tests-test-output-assert-contents)]
@@ -807,25 +751,25 @@ graphlan/
 #### Tests with conditionals, repeats, sections
 
 ```xml
-&lt;tests&gt;
-    &lt;test&gt;
-        &lt;section name="advanced"&gt;
-            &lt;repeat name="names"&gt;
-                &lt;param name="first" value="Abraham"/&gt;
-                &lt;param name="last" value="Lincoln"/&gt;
-            &lt;/repeat&gt;
-            &lt;repeat name="names"&gt;
-                &lt;param name="first" value="Donald"/&gt;
-                &lt;param name="last" value="Trump"/&gt;
-            &lt;/repeat&gt;
-            &lt;conditional name="image"&gt;
-                &lt;param name="output_image" value="yes"/&gt;
-                &lt;param name="format" value="png"/&gt;
-            &lt;/conditional&gt;
-        &lt;/section&gt;
+<tests>
+    <test>
+        <section name="advanced">
+            <repeat name="names">
+                <param name="first" value="Abraham">
+                <param name="last" value="Lincoln">
+            </repeat>
+            <repeat name="names">
+                <param name="first" value="Donald">
+                <param name="last" value="Trump">
+            </repeat>
+            <conditional name="image">
+                <param name="output_image" value="yes">
+                <param name="format" value="png">
+            </conditional>
+        </section>
         ...
-    &lt;/test&gt;
-&lt;/tests&gt;
+    </test>
+</tests>
 ```
 
 ---
@@ -874,10 +818,7 @@ graphlan/
 ```
 
 ```xml
-&lt;command&gt;&lt;![CDATA[
-$__tool_directory__/graphlan.py
-...
-]]&gt;&lt;/command&gt;
+<command></command>
 ```
 
 ---
@@ -888,10 +829,10 @@ $__tool_directory__/graphlan.py
 Definition of requirements in `.xml` file
 
 ```xml
-&lt;requirements&gt;
-    &lt;requirement type="package" version="1.66"&gt;biopython&lt;/requirement&gt;
-    &lt;requirement type="package" version="1.0.0"&gt;graphlan&lt;/requirement&gt;
-&lt;/requirements&gt;
+<requirements>
+    <requirement type="package" version="1.66">biopython</requirement>
+    <requirement type="package" version="1.0.0">graphlan</requirement>
+</requirements>
 ```
 
 Local installation using Conda packages
@@ -920,13 +861,13 @@ See [Tool Dependencies and Conda](../conda/slides.html)
 
 ---
 
-### &lt;i class="fa fa-pencil" aria-hidden="true"&gt;&lt;/i&gt; Hands-on
+### <i class="fa fa-pencil" aria-hidden="true"></i> Hands-on
 
 ![](../../images/exercise.png)
 
 ---
 
-### &lt;i class="fa fa-pencil" aria-hidden="true"&gt;&lt;/i&gt; Hands-on
+### <i class="fa fa-pencil" aria-hidden="true"></i> Hands-on
 
 #### The Goal
 
@@ -936,7 +877,7 @@ See [Tool Dependencies and Conda](../conda/slides.html)
 
 ---
 
-### &lt;i class="fa fa-pencil" aria-hidden="true"&gt;&lt;/i&gt; Hands-on
+### <i class="fa fa-pencil" aria-hidden="true"></i> Hands-on
 
 #### Steps
 
@@ -967,20 +908,11 @@ class: packed
 ### `configfiles`
 
 ```xml
-&lt;command&gt;&lt;![CDATA[ mb $script_nexus ]]&gt;&lt;/command&gt;
+<command></command>
 
-&lt;configfiles&gt;
-    &lt;configfile name="script_nexus"&gt;&lt;![CDATA[
-set autoclose = yes;
-execute $input_data;
-#if str( $data_type.type ) == "nuc“
-    lset nst=$data_type.lset_params.lset_Nst;
-#end if
-mcmcp ngen=$mcmcp_ngen;
-mcmc;
-quit
-    ]]&gt;&lt;/configfile&gt;
-&lt;/configfiles&gt;
+<configfiles>
+    <configfile name="script_nexus"></configfile>
+</configfiles>
 ```
 
 ```bash
@@ -1009,28 +941,28 @@ class: packed
 macros.xml
 
 ```xml
-&lt;macros&gt;
-    &lt;xml name="requirements"&gt;
-        &lt;requirements&gt;
-            &lt;requirement type="package" version="2.5.0"&gt;blast&lt;/requirement&gt;
-        &lt;/requirements&gt;
-    &lt;/xml&gt;
-    &lt;xml name="stdio"&gt;
-        &lt;stdio&gt;
-            &lt;exit_code range="1" level="fatal" /&gt;
-        &lt;/stdio&gt;
-    &lt;/xml&gt;
-&lt;/macros&gt;
+<macros>
+    <xml name="requirements">
+        <requirements>
+            <requirement type="package" version="2.5.0">blast</requirement>
+        </requirements>
+    </xml>
+    <xml name="stdio">
+        <stdio>
+            <exit_code range="1" level="fatal"></exit_code>
+        </stdio>
+    </xml>
+</macros>
 ```
 
 ncbi_blastn_wrapper.xml
 
 ```xml
-&lt;macros&gt;
-    &lt;import&gt;macros.xml&lt;/import&gt;
-&lt;/macros&gt;
-&lt;expand macro="requirements"/&gt;
-&lt;expand macro="stdio"/&gt;
+<macros>
+    <import>macros.xml</import>
+</macros>
+<expand macro="requirements"></expand>
+<expand macro="stdio"></expand>
 ```
 
 ---
@@ -1040,17 +972,17 @@ ncbi_blastn_wrapper.xml
 macros.xml
 
 ```xml
-&lt;macros&gt;
-    &lt;token name="@THREADS@"&gt;-num_threads "\${GALAXY_SLOTS:-8}"&lt;/token&gt;
-&lt;/macros&gt;
+<macros>
+    <token name="@THREADS@">-num_threads "\${GALAXY_SLOTS:-8}"</token>
+</macros>
 ```
 
 ncbi_blastn_wrapper.xml
 
 ```xml
-&lt;command&gt;
+<command>
 blastn -query '$query' @THREADS@ [...]
-&lt;/command&gt;
+</command>
 ```
 
 ---
@@ -1060,23 +992,23 @@ blastn -query '$query' @THREADS@ [...]
 macros.xml
 
 ```xml
-&lt;macros&gt;
-    &lt;xml name="requirements"&gt;
-        &lt;requirements&gt;
-            &lt;requirement type="package" version="2.2.0"&gt;trinity&lt;/requirement&gt;
-            &lt;yield/&gt;
-        &lt;/requirements&gt;
-    &lt;/xml&gt;
-&lt;/macros&gt;
+<macros>
+    <xml name="requirements">
+        <requirements>
+            <requirement type="package" version="2.2.0">trinity</requirement>
+            <yield></yield>
+        </requirements>
+    </xml>
+</macros>
 ```
 
 trinity.xml
 
 ```xml
-&lt;expand macro="requirements"&gt;
-    &lt;requirement type="package" version="1.1.2"&gt;bowtie&lt;/requirement&gt;
-    &lt;requirement type="set_environment"&gt;TRINITY_MEM_OPTIONS&lt;/requirement&gt;
-&lt;/expand&gt;
+<expand macro="requirements">
+    <requirement type="package" version="1.1.2">bowtie</requirement>
+    <requirement type="set_environment">TRINITY_MEM_OPTIONS</requirement>
+</expand>
 ```
 
 ---
@@ -1084,22 +1016,7 @@ trinity.xml
 ### `command` &gt; Reserved Variables
 
 ```xml
-&lt;command&gt;&lt;![CDATA[
-# Email’s numeric ID (id column of galaxy_user table in the database)
-echo $__user_id__
-
-# User’s email address
-echo $__user_email__
-
-# The galaxy.app.UniverseApplication instance, gives access to all other configuration file variables.
-# Should be used as a last resort, may go away in future releases.
-echo $__app__.config.user_library_import_dir
-
-# Check a dataset type
-#if $input1.is_of_type('gff'):
-    echo "input1 type is ${input1.datatype}"
-#end if
-]]&gt;&lt;/command&gt;
+<command></command>
 ```
 .footnote[[Reserved Variables List](https://docs.galaxyproject.org/en/latest/dev/schema.html#reserved-variables)]
 
@@ -1108,7 +1025,7 @@ echo $__app__.config.user_library_import_dir
 ### Multiple input
 
 ```xml
-&lt;param name="..." type="data" format="txt" label="..." help="..." /&gt;
+<param name="..." type="data" format="txt" label="..." help="...">
 ```
 
 ![](../../images/input_data.png)
@@ -1125,7 +1042,7 @@ Possible to select multiple dataset:
 ### Multiple input
 
 ```xml
-&lt;param name="..." type="data" format="txt" multiple="true" label="..." help="..." /&gt;
+<param name="..." type="data" format="txt" multiple label="..." help="...">
 ```
 
 ![](../../images/input_data_multiple2.png)
@@ -1133,12 +1050,7 @@ Possible to select multiple dataset:
 In the command:
 
 ```xml
-&lt;command&gt;&lt;![CDATA[
-...
-#for $input in $inputs
-    --input "$input"
-#end for
-]]&gt;&lt;/command&gt;
+<command></command>
 ```
 
 One job for all selected dataset
@@ -1148,12 +1060,11 @@ One job for all selected dataset
 ### Multiple output
 
 ```xml
-&lt;outputs&gt;
-    &lt;data name="output" format="txt"&gt;
-        &lt;discover_datasets pattern="__designation_and_ext__"
-            directory="output_dir" visible="true" /&gt;
-    &lt;/data&gt;
-&lt;/outputs&gt;
+<outputs>
+    <data name="output" format="txt">
+        <discover_datasets pattern="__designation_and_ext__" directory="output_dir" visible="true"></discover_datasets>
+    </data>
+</outputs>
 ```
 
 - `__designation_and_ext__`: a predefined regexp,
@@ -1163,12 +1074,11 @@ One job for all selected dataset
 If the output file extension is not present/usable:
 
 ```xml
-&lt;outputs&gt;
-    &lt;data name="output" format="txt"&gt;
-        &lt;discover_datasets pattern="__designation__" format="txt"
-            directory="output_dir" visible="true" /&gt;
-    &lt;/data&gt;
-&lt;/outputs&gt;
+<outputs>
+    <data name="output" format="txt">
+        <discover_datasets pattern="__designation__" format="txt" directory="output_dir" visible="true"></discover_datasets>
+    </data>
+</outputs>
 ```
 
 ---
@@ -1214,7 +1124,7 @@ Creation when uploading (&gt;=17.05)
 ### Dataset collection &gt; input
 
 ```xml
-&lt;param name="inputs" type="data" format="bam" multiple="true" label="Input BAM(s)" /&gt;
+<param name="inputs" type="data" format="bam" multiple label="Input BAM(s)">
 ```
 
 ![](../../images/input_data_collection.png)
@@ -1222,18 +1132,11 @@ Creation when uploading (&gt;=17.05)
 Accept only collections:
 
 ```xml
-&lt;param name="inputs" type="data_collection" collection_type="list|paired|list:paired|..."
-    format="bam" label="Input BAM(s)" /&gt;
+<param name="inputs" type="data_collection" collection_type="list|paired|list:paired|..." format="bam" label="Input BAM(s)">
 ```
 
 ```xml
-&lt;command&gt;&lt;![CDATA[
-...
-#for $input in $inputs
-    --input '$input'
-    --sample_name '$input.element_identifier'
-#end for
-]]&gt;&lt;/command&gt;
+<command></command>
 ```
 
 ---
@@ -1243,18 +1146,18 @@ Accept only collections:
 A single paired collection:
 
 ```xml
-&lt;collection name="paired_output" type="paired" label="Split Pair"&gt;
-    &lt;data name="forward" format="txt" /&gt;
-    &lt;data name="reverse" format_source="input1" from_work_dir="reverse.txt" /&gt;
-&lt;/collection&gt;
+<collection name="paired_output" type="paired" label="Split Pair">
+    <data name="forward" format="txt"></data>
+    <data name="reverse" format_source="input1" from_work_dir="reverse.txt"></data>
+</collection>
 ```
 
 Unknown number of files:
 
 ```xml
-&lt;collection name="output" type="list" label="Unknown number of files"&gt;
-    &lt;discover_datasets pattern="__name_and_ext__" directory="outputs" /&gt;
-&lt;/collection&gt;
+<collection name="output" type="list" label="Unknown number of files">
+    <discover_datasets pattern="__name_and_ext__" directory="outputs"></discover_datasets>
+</collection>
 ```
 
 
@@ -1421,7 +1324,7 @@ docker run -d -p 8080:80 galaxy-deeptools
 
 ---
 
-### <img class="emoji" title=":grey_exclamation:" alt=":grey_exclamation:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2755.png" height="20" width="20" align="absmiddle"> Key points
+### <img class="emoji" title=":grey_exclamation:" alt=":grey_exclamation:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2755.png" height="20" width="20"> Key points
 
 
 - Galaxy Tool Syntax
@@ -1445,7 +1348,7 @@ docker run -d -p 8080:80 galaxy-deeptools
 This material is the result of a collaborative work. Thanks the [Galaxy Training Network](https://wiki.galaxyproject.org/Teach/GTN) and all the contributors  (Saskia Hiltemann, Bérénice Batut, Anthony Bretaudeau, John Chilton, Nicola Soranzo, Björn Grüning, Gildas Le Corguillé) !
 
 
-<img src="/training-material/assets/images/GTN.png" alt="Galaxy Training Network" style="height: 100px;">
+</repeat></command></outputs></command></inputs><img src="/training-material/assets/images/GTN.png" alt="Galaxy Training Network" style="height: 100px;">
 
 
 

@@ -190,18 +190,35 @@ We can use Jekyll to run a server to check if the tutorial is correctly added an
 
 <h1 id="installation-of-the-requirements">Installation of the requirements</h1>
 
-<p>The first step is to install the requirements inside a conda environment. This step has to be done once.</p>
+<p>The first step is to install the needed tools inside a conda environment. A conda environment is a directory that contains a specific collection of packages. For example here to run the website, we need ruby, pandas, requests, etc. By creating a conda environment and installing the needed tools there, we do not affect your main installation.</p>
+
+<p>This step has to be done once.</p>
 
 <blockquote class="hands_on">
   <h3 id="-hands-on-install-the-requirements"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Install the requirements</h3>
 
   <ol>
-    <li>Install <a href="https://conda.io/miniconda.html">conda</a></li>
-    <li>Navigate to <code class="highlighter-rouge">training-material/</code> folder</li>
-    <li>Create the conda environment: <code class="highlighter-rouge">conda env create -f environment.yml</code></li>
+    <li>Open a Terminal</li>
+    <li>Navigate to the <code class="highlighter-rouge">training-material/</code> folder with <code class="highlighter-rouge">cd</code></li>
+    <li>
+      <p>Set up the conda environment</p>
+
+      <p>It will install some needed tools (ruby, nodejs, etc) in a protected environment, without interferring with the existing tools or versions.</p>
+
+      <ol>
+        <li>Install conda (if not already installed): <code class="highlighter-rouge">make install-conda</code></li>
+        <li>Add conda to the path: <code class="highlighter-rouge">export PATH="$HOME/miniconda/bin:$PATH"</code></li>
+        <li>Create conda environment: <code class="highlighter-rouge">make create-env</code></li>
+      </ol>
+    </li>
     <li>Activate the conda environment: <code class="highlighter-rouge">source activate galaxy_training_material</code></li>
     <li>Install Jekyll and related modules using <a href="https://rubygems.org/pages/download">RubyGems</a>: <code class="highlighter-rouge">make install</code></li>
   </ol>
+</blockquote>
+
+<blockquote class="tip">
+  <h3 id="-troubleshooting"><i class="fa fa-lightbulb-o" aria-hidden="true"></i> Troubleshooting</h3>
+  <p>If you encounter an error about libxml2 on linux, please try installing <code class="highlighter-rouge">libxml2-dev</code>, e.g. by the command <code class="highlighter-rouge">sudo apt-get install libxml2-dev</code>, and re-run `make install</p>
 </blockquote>
 
 <h1 id="checking-the-website-generation">Checking the website generation</h1>

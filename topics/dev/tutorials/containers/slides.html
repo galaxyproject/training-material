@@ -7,7 +7,6 @@
 
 
   <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
     <title>Tool Dependencies and Containers</title>
     <link rel="stylesheet" href="/training-material/assets/css/slides.css">
@@ -37,7 +36,7 @@ class: center, middle, inverse
 
 
 
-### <img class="emoji" title=":grey_question:" alt=":grey_question:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2754.png" height="20" width="20" align="absmiddle"> Questions
+### <img class="emoji" title=":grey_question:" alt=":grey_question:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2754.png" height="20" width="20"> Questions
 
 
 - What are the advantages of running my Galaxy tool inside of a container?
@@ -49,7 +48,7 @@ class: center, middle, inverse
 
 ---
 
-### <img class="emoji" title=":dart:" alt=":dart:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f3af.png" height="20" width="20" align="absmiddle"> Objectives
+### <img class="emoji" title=":dart:" alt=":dart:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f3af.png" height="20" width="20"> Objectives
 
 
 - Explore the differences between containerizing Galaxy and tool execution.
@@ -129,8 +128,8 @@ class: left
 
 Decomposes to basic problems:
 
-* &lt;i class="fa fa-square-o" aria-hidden="true"&gt;&lt;/i&gt; Instruct Galaxy where to find a container for the tool.
-* &lt;i class="fa fa-square-o" aria-hidden="true"&gt;&lt;/i&gt; Instruct Galaxy to run the tool in a container.
+* <i class="fa fa-square-o" aria-hidden="true"></i> Instruct Galaxy where to find a container for the tool.
+* <i class="fa fa-square-o" aria-hidden="true"></i> Instruct Galaxy to run the tool in a container.
 
 ---
 
@@ -141,20 +140,20 @@ class: left
 Just configure the destination. For instance, transform the cluster destination:
 
 ```
-&lt;destination id="short_fast" runner="slurm"&gt;
-    &lt;param id="nativeSpecification"&gt;--time=00:05:00 --nodes=1&lt;/param&gt;
-&lt;/destination&gt;
+<destination id="short_fast" runner="slurm">
+    <param id="nativeSpecification">--time=00:05:00 --nodes=1
+</destination>
 ```
 
 as follows:
 
 
 ```
-&lt;destination id="short_fast" runner="slurm"&gt;
-    &lt;param id="nativeSpecification"&gt;--time=00:05:00 --nodes=1&lt;/param&gt;
-    &lt;param id="docker_enabled"&gt;true&lt;/parma&gt;
-    &lt;param id="docker_sudo"&gt;false&lt;/param&gt;
-&lt;/destination&gt;
+<destination id="short_fast" runner="slurm">
+    <param id="nativeSpecification">--time=00:05:00 --nodes=1
+    <param id="docker_enabled">true
+    <param id="docker_sudo">false
+</destination>
 ```
 
 That is it!
@@ -169,8 +168,8 @@ class: left
 
 #### Decomposes to basic problems
 
-* &lt;i class="fa fa-square-o" aria-hidden="true"&gt;&lt;/i&gt; Instruct Galaxy where to find a container for the tool.
-* &lt;i class="fa fa-check-square-o" aria-hidden="true"&gt;&lt;/i&gt; Instruct Galaxy to run the tool in a container.
+* <i class="fa fa-square-o" aria-hidden="true"></i> Instruct Galaxy where to find a container for the tool.
+* <i class="fa fa-check-square-o" aria-hidden="true"></i> Instruct Galaxy to run the tool in a container.
 
 ---
 
@@ -181,18 +180,18 @@ class: left
 Returning to the seqtk example, lets change the `requirements` from:
 
 ```
-&lt;requirements&gt;
-    &lt;requirement type="package" version="1.2"&gt;seqtk&lt;/requirement&gt;
-&lt;/requirements&gt;
+<requirements>
+    <requirement type="package" version="1.2">seqtk</requirement>
+</requirements>
 ```
 
 into
 
 ```
-&lt;requirements&gt;
-    &lt;container type="docker"&gt;dukegcb/seqtk&lt;/container&gt;
-    &lt;requirement type="package" version="1.2"&gt;seqtk&lt;/requirement&gt;
-&lt;/requirements&gt;
+<requirements>
+    <container type="docker">dukegcb/seqtk</container>
+    <requirement type="package" version="1.2">seqtk</requirement>
+</requirements>
 ```
 
 Now run Planemo `test` and `serve` with the `--docker` flag and as a tool developer you are done!
@@ -203,8 +202,8 @@ Now run Planemo `test` and `serve` with the `--docker` flag and as a tool develo
 
 #### Decomposes to basic problems
 
-* &lt;i class="fa fa-check-square-o" aria-hidden="true"&gt;&lt;/i&gt; Instruct Galaxy where to find a container for the tool.
-* &lt;i class="fa fa-check-square-o" aria-hidden="true"&gt;&lt;/i&gt; Instruct Galaxy to run the tool in a container.
+* <i class="fa fa-check-square-o" aria-hidden="true"></i> Instruct Galaxy where to find a container for the tool.
+* <i class="fa fa-check-square-o" aria-hidden="true"></i> Instruct Galaxy to run the tool in a container.
 
 We're done... right?
 
@@ -228,9 +227,9 @@ class: left
 This:
 
 ```
-&lt;requirements&gt;
-    &lt;requirement type="package" version="1.2"&gt;seqtk&lt;/requirement&gt;
-&lt;/requirements&gt;
+<requirements>
+    <requirement type="package" version="1.2">seqtk</requirement>
+</requirements>
 ```
 
 should have been sufficient!
@@ -349,8 +348,8 @@ These containers will have same names as would be published to quay.io (e.g. `qu
 
 #### Decomposes to basic problems
 
-* &lt;i class="fa fa-check-square-o" aria-hidden="true"&gt;&lt;/i&gt;&lt;i class="fa fa-check-square-o" aria-hidden="true"&gt;&lt;/i&gt; Instruct Galaxy where to find a container for the tool.
-* &lt;i class="fa fa-check-square-o" aria-hidden="true"&gt;&lt;/i&gt; Instruct Galaxy to run the tool in a container.
+* <i class="fa fa-check-square-o" aria-hidden="true"></i><i class="fa fa-check-square-o" aria-hidden="true"></i> Instruct Galaxy where to find a container for the tool.
+* <i class="fa fa-check-square-o" aria-hidden="true"></i> Instruct Galaxy to run the tool in a container.
 
 We're done this time now right?
 
@@ -376,10 +375,10 @@ The BWA tool is an example of one such tool that has multiple requirements - bec
 $ planemo project_init --template=conda_testing conda_testing
 $ cd conda_testing/
 $ grep -r require bwa_and_samtools.xml
-bwa_and_samtools.xml:    &lt;requirements&gt;
-bwa_and_samtools.xml:        &lt;requirement type="package" version="0.7.15"&gt;bwa&lt;/requirement&gt;
-bwa_and_samtools.xml:        &lt;requirement type="package" version="1.3.1"&gt;samtools&lt;/requirement&gt;
-bwa_and_samtools.xml:    &lt;/requirements&gt;
+bwa_and_samtools.xml:    <requirements>
+bwa_and_samtools.xml:        <requirement type="package" version="0.7.15">bwa</requirement>
+bwa_and_samtools.xml:        <requirement type="package" version="1.3.1">samtools</requirement>
+bwa_and_samtools.xml:    </requirements>
 ```]
 
 ---
@@ -422,7 +421,7 @@ we said the resulting container will be
 This can be broken into these parts:
 
 ```
-quay.io/ &lt;namespace&gt; /mulled-v2-&lt;package_hash&gt;:&lt;version_hash&gt;-&lt;build&gt;
+quay.io/ <namespace> /mulled-v2-<package_hash>:<version_hash>-<build>
 ```
 
 ???
@@ -546,13 +545,13 @@ bwa_and_samtools[0]: passed
 
 ---
 
-### &lt;i class="fa fa-pencil" aria-hidden="true"&gt;&lt;/i&gt; Hands-on
+### <i class="fa fa-pencil" aria-hidden="true"></i> Hands-on
 
 ![](../../images/exercise.png)
 
 ---
 
-### &lt;i class="fa fa-pencil" aria-hidden="true"&gt;&lt;/i&gt; Hands-on
+### <i class="fa fa-pencil" aria-hidden="true"></i> Hands-on
 
 #### The Goal
 
@@ -562,7 +561,7 @@ bwa_and_samtools[0]: passed
 
 class: left
 
-### &lt;i class="fa fa-pencil" aria-hidden="true"&gt;&lt;/i&gt; Hands-on
+### <i class="fa fa-pencil" aria-hidden="true"></i> Hands-on
 
 #### Steps
 
@@ -601,7 +600,7 @@ daily for package combinations to publish.
 
 ---
 
-### <img class="emoji" title=":grey_exclamation:" alt=":grey_exclamation:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2755.png" height="20" width="20" align="absmiddle"> Key points
+### <img class="emoji" title=":grey_exclamation:" alt=":grey_exclamation:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2755.png" height="20" width="20"> Key points
 
 
 - It is becoming easier, more advantageous, and more common for Galaxy admins to run all tools within their own container.
@@ -621,7 +620,7 @@ daily for package combinations to publish.
 This material is the result of a collaborative work. Thanks the [Galaxy Training Network](https://wiki.galaxyproject.org/Teach/GTN) and all the contributors  (John Chilton, Björn Grüning) !
 
 
-<img src="/training-material/assets/images/GTN.png" alt="Galaxy Training Network" style="height: 100px;">
+</build></version_hash></package_hash></namespace><img src="/training-material/assets/images/GTN.png" alt="Galaxy Training Network" style="height: 100px;">
 
 
 

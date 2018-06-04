@@ -7,7 +7,6 @@
 
 
   <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
     <title>Server Monitoring and Maintenance</title>
     <link rel="stylesheet" href="/training-material/assets/css/slides.css">
@@ -37,7 +36,7 @@ class: center, middle, inverse
 
 
 
-### <img class="emoji" title=":grey_question:" alt=":grey_question:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2754.png" height="20" width="20" align="absmiddle"> Questions
+### <img class="emoji" title=":grey_question:" alt=":grey_question:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2754.png" height="20" width="20"> Questions
 
 
 - How to monitor a Galaxy service?
@@ -47,7 +46,7 @@ class: center, middle, inverse
 
 ---
 
-### <img class="emoji" title=":dart:" alt=":dart:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f3af.png" height="20" width="20" align="absmiddle"> Objectives
+### <img class="emoji" title=":dart:" alt=":dart:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f3af.png" height="20" width="20"> Objectives
 
 
 - Learn about different monitoring strategies.
@@ -98,18 +97,18 @@ class: left
 ## datatypes_conf.xml
 Config file for datatypes. Hard to find stuff...
 ```
-&lt;?xml version="1.0"?&gt;
-&lt;datatypes&gt;
-  &lt;registration converters_path="lib/galaxy/datatypes/converters" display_path="display_applications"&gt;
-    &lt;datatype extension="ab1" type="galaxy.datatypes.binary:Ab1" mimetype="application/octet-stream" display_in_upload="true" description="A binary sequence file in 'ab1' format with a '.ab1' file extension.  You must manually select this 'File Format' when uploading the file." description_url="https://wiki.galaxyproject.org/Learn/Datatypes#Ab1"/&gt;
-    &lt;datatype extension="afg" type="galaxy.datatypes.assembly:Amos" display_in_upload="false" /&gt;
-    &lt;datatype extension="arff" type="galaxy.datatypes.text:Arff" mimetype="text/plain" display_in_upload="True" /&gt;
-    &lt;datatype extension="asn1" type="galaxy.datatypes.data:GenericAsn1" mimetype="text/plain" display_in_upload="true" /&gt;
-    &lt;datatype extension="asn1-binary" type="galaxy.datatypes.binary:GenericAsn1Binary" mimetype="application/octet-stream" display_in_upload="true" /&gt;
-    &lt;datatype extension="axt" type="galaxy.datatypes.sequence:Axt" display_in_upload="true" description="blastz pairwise alignment format.  Each alignment block in an axt file contains three lines: a summary line and 2 sequence lines.  Blocks are separated from one another by blank lines.  The summary line contains chromosomal position and size information about the alignment. It consists of 9 required fields." description_url="https://wiki.galaxyproject.org/Learn/Datatypes#Axt"/&gt;
-    &lt;datatype extension="fli" type="galaxy.datatypes.tabular:FeatureLocationIndex" display_in_upload="false"/&gt;
-    &lt;datatype extension="bam" type="galaxy.datatypes.binary:Bam" mimetype="application/octet-stream" display_in_upload="true" description="A binary file compressed in the BGZF format with a '.bam' file extension." description_url="https://wiki.galaxyproject.org/Learn/Datatypes#BAM"&gt;
-      &lt;converter file="bam_to_bai.xml" target_datatype="bai"/&gt;
+<?xml version="1.0"?>
+<datatypes>
+  <registration converters_path="lib/galaxy/datatypes/converters" display_path="display_applications">
+    <datatype extension="ab1" type="galaxy.datatypes.binary:Ab1" mimetype="application/octet-stream" display_in_upload="true" description="A binary sequence file in 'ab1' format with a '.ab1' file extension.  You must manually select this 'File Format' when uploading the file." description_url="https://wiki.galaxyproject.org/Learn/Datatypes#Ab1"></datatype>
+    <datatype extension="afg" type="galaxy.datatypes.assembly:Amos" display_in_upload="false"></datatype>
+    <datatype extension="arff" type="galaxy.datatypes.text:Arff" mimetype="text/plain" display_in_upload="True"></datatype>
+    <datatype extension="asn1" type="galaxy.datatypes.data:GenericAsn1" mimetype="text/plain" display_in_upload="true"></datatype>
+    <datatype extension="asn1-binary" type="galaxy.datatypes.binary:GenericAsn1Binary" mimetype="application/octet-stream" display_in_upload="true"></datatype>
+    <datatype extension="axt" type="galaxy.datatypes.sequence:Axt" display_in_upload="true" description="blastz pairwise alignment format.  Each alignment block in an axt file contains three lines: a summary line and 2 sequence lines.  Blocks are separated from one another by blank lines.  The summary line contains chromosomal position and size information about the alignment. It consists of 9 required fields." description_url="https://wiki.galaxyproject.org/Learn/Datatypes#Axt"></datatype>
+    <datatype extension="fli" type="galaxy.datatypes.tabular:FeatureLocationIndex" display_in_upload="false"></datatype>
+    <datatype extension="bam" type="galaxy.datatypes.binary:Bam" mimetype="application/octet-stream" display_in_upload="true" description="A binary file compressed in the BGZF format with a '.bam' file extension." description_url="https://wiki.galaxyproject.org/Learn/Datatypes#BAM">
+      <converter file="bam_to_bai.xml" target_datatype="bai"></converter>
 
 ...
 
@@ -128,15 +127,15 @@ This link shows the list of applications that can be used to display various dat
 
 They are set in the `datatypes_conf.xml` file. For example:
 ```
-  &lt;datatype extension="bam" type="galaxy.datatypes.binary:Bam" mimetype="application/octet-stream" display_in_upload="true" description="A binary file compressed in the BGZF format with a '.bam' file extension." description_url="https://wiki.galaxyproject.org/Learn/Datatypes#BAM"&gt;
-      &lt;converter file="bam_to_bai.xml" target_datatype="bai"/&gt;
-      &lt;converter file="bam_to_bigwig_converter.xml" target_datatype="bigwig"/&gt;
-      &lt;display file="ucsc/bam.xml" /&gt;
-      &lt;display file="ensembl/ensembl_bam.xml" /&gt;
-      &lt;display file="igv/bam.xml" /&gt;
-      &lt;display file="igb/bam.xml" /&gt;
-      &lt;display file="iobio/bam.xml" /&gt;
-  &lt;/datatype&gt;
+  <datatype extension="bam" type="galaxy.datatypes.binary:Bam" mimetype="application/octet-stream" display_in_upload="true" description="A binary file compressed in the BGZF format with a '.bam' file extension." description_url="https://wiki.galaxyproject.org/Learn/Datatypes#BAM">
+      <converter file="bam_to_bai.xml" target_datatype="bai"></converter>
+      <converter file="bam_to_bigwig_converter.xml" target_datatype="bigwig"></converter>
+      <display file="ucsc/bam.xml"></display>
+      <display file="ensembl/ensembl_bam.xml"></display>
+      <display file="igv/bam.xml"></display>
+      <display file="igb/bam.xml"></display>
+      <display file="iobio/bam.xml"></display>
+  </datatype>
 ```
 
 We are not going to go into how to set these up here but there is a page on the [wiki](https://wiki.galaxyproject.org/Admin/Tools/External%20Display%20Applications%20Tutorial)
@@ -412,7 +411,7 @@ class: center, middle
 
 ---
 
-### <img class="emoji" title=":grey_exclamation:" alt=":grey_exclamation:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2755.png" height="20" width="20" align="absmiddle"> Key points
+### <img class="emoji" title=":grey_exclamation:" alt=":grey_exclamation:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2755.png" height="20" width="20"> Key points
 
 
 - Galaxy supports pluggable monitoring extensions.
@@ -428,7 +427,7 @@ class: center, middle
 This material is the result of a collaborative work. Thanks the [Galaxy Training Network](https://wiki.galaxyproject.org/Teach/GTN) and all the contributors  (Nate Coraor, Björn Grüning, ) !
 
 
-<img src="/training-material/assets/images/GTN.png" alt="Galaxy Training Network" style="height: 100px;">
+</datatype></registration></datatypes><img src="/training-material/assets/images/GTN.png" alt="Galaxy Training Network" style="height: 100px;">
 
 
 

@@ -7,7 +7,6 @@
 
 
   <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
     <title>Visualization of RNA-Seq results with CummeRbund</title>
     <link rel="stylesheet" href="/training-material/assets/css/slides.css">
@@ -57,7 +56,7 @@ class: center, middle, inverse
 
 
 
-### <img class="emoji" title=":grey_question:" alt=":grey_question:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2754.png" height="20" width="20" align="absmiddle"> Questions
+### <img class="emoji" title=":grey_question:" alt=":grey_question:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2754.png" height="20" width="20"> Questions
 
 
 - How are RNA-Seq results stored?
@@ -69,7 +68,7 @@ class: center, middle, inverse
 
 ---
 
-### <img class="emoji" title=":dart:" alt=":dart:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f3af.png" height="20" width="20" align="absmiddle"> Objectives
+### <img class="emoji" title=":dart:" alt=":dart:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f3af.png" height="20" width="20"> Objectives
 
 
 - Manage RNA-Seq results
@@ -92,7 +91,7 @@ Data alone does not bring any information: to carry information, data needs to b
 
 ![Wang et al, Nat Rev Genet, 2009](../../images/cummerbund-rna-seq-experiment.jpg)
 
-&lt;small&gt;[*Wang et al, Nat Rev Genet, 2009*](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2949280/)&lt;/small&gt;
+<small>[*Wang et al, Nat Rev Genet, 2009*](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2949280/)</small>
 
 ???
 - RNAs are converted into cDNA fragments through RNA fragmentation
@@ -124,7 +123,7 @@ Once the RNA-Seq pipeline is implemented, we still need to handle and analyse al
 
 ![Trapnell et al, Nat Protoc, 2012](../../images/cummerbund-rna-seq-experiment-tuxedo.jpg)
 
-&lt;small&gt;[*Trapnell et al, Nat Protoc, 2012*](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3334321/)&lt;/small&gt;
+<small>[*Trapnell et al, Nat Protoc, 2012*](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3334321/)</small>
 ???
 - first, reads from each condition are mapped to the reference genome using TopHat
 - the resulting alignment files are given to Cufflinks, which generates a transcriptome assembly for each condition
@@ -137,7 +136,7 @@ Once the RNA-Seq pipeline is implemented, we still need to handle and analyse al
 
 The last step in our RNA-Seq analysis is CuffDiff. Its output comprises multiple files containing the results of the differential expression analysis.
 
-- Gene expression levels are reported as &lt;i&gt;tab-separated&lt;/i&gt; values: a simple tabular output that can be viewed with any spreadsheet application. Such files contain statistics, gene-related, and transcript-related attributes
+- Gene expression levels are reported as <i>tab-separated</i> values: a simple tabular output that can be viewed with any spreadsheet application. Such files contain statistics, gene-related, and transcript-related attributes
 .image-75[![CuffDiff output](../../images/cummerbund-cuffdiff-output.png)]
 
 - Another way to collect all these data is to organize it within a dedicated database for later consultation. CuffDiff can be instructed to do so
@@ -155,7 +154,7 @@ The last step in our RNA-Seq analysis is CuffDiff. Its output comprises multiple
 
 Whatever storage strategy you opted for, i.e. multiple tab-separated-value files or a SQLite database, all data is still retained within text format.
 
-We need to have a bird's-eye view of that data, and &lt;i&gt;make sense&lt;/i&gt; of it
+We need to have a bird's-eye view of that data, and <i>make sense</i> of it
 
 ---
 
@@ -181,11 +180,11 @@ We need to have a bird's-eye view of that data, and &lt;i&gt;make sense&lt;/i&gt
 
 CummeRbund needs to be instructed on which data to be visualized:
 
-- &lt;i&gt;Extract CuffDiff&lt;/i&gt;'s "Transcript differential expression testing" table
+- <i>Extract CuffDiff</i>'s "Transcript differential expression testing" table
 
-- &lt;i&gt;Filter&lt;/i&gt; the table on the column storing the significance of a differentially expressed gene
+- <i>Filter</i> the table on the column storing the significance of a differentially expressed gene
 
-- &lt;i&gt;Sort&lt;/i&gt; all entries on the basis of most significant differentially expressed gene
+- <i>Sort</i> all entries on the basis of most significant differentially expressed gene
 
 - Identify the most significant differentially expressed gene
 
@@ -222,7 +221,7 @@ Have a look at [CummerBund's tutorial](https://bioconductor.org/packages/2.11/bi
 
 ---
 
-### <img class="emoji" title=":grey_exclamation:" alt=":grey_exclamation:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2755.png" height="20" width="20" align="absmiddle"> Key points
+### <img class="emoji" title=":grey_exclamation:" alt=":grey_exclamation:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2755.png" height="20" width="20"> Key points
 
 
 - Extract informations from a SQLite CuffDiff database

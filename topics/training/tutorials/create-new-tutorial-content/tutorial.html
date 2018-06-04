@@ -317,7 +317,7 @@ Let’s start tracking your changes!</p>
 
 <p>The tutorial’s content will be placed in the file <code class="highlighter-rouge">tutorial.md</code>. Its syntax and structure are simple, and will follow the scheme:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>---
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>---
 layout: tutorial_hands_on
 topic_name: training
 tutorial_name: create-new-tutorial
@@ -347,8 +347,7 @@ blabla
 {:.no_toc}
 
 blabla
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h3 id="metadata">Metadata</h3>
 
@@ -413,9 +412,8 @@ If not correctly defined, the tutorial will not be found within the website.</p>
 
   <p>The preceding string “Figure” and its corresponding number is automatically added before its caption, which is in turn placed below the image by providing all informations in the Markdown call of the image:</p>
 
-  <div class="highlighter-rouge"><pre class="highlight"><code>  ![A textual description of the image](../images/image.png "This is my super caption")
-</code></pre>
-  </div>
+  <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  ![A textual description of the image](../images/image.png "This is my super caption")
+</code></pre></div>  </div>
 
   <p>We can also cross-reference images inside our Markdown with an anchor. For example, we can link to <a href="#figure-1">the previous figure</a> using <code class="highlighter-rouge">[the display text](#figure-nb)</code> (changing <code class="highlighter-rouge">nb</code> with the image’s number).</p>
 </blockquote>
@@ -451,11 +449,10 @@ This can be avoided by using the <code class="highlighter-rouge">\vert</code> co
 
 <p>They are defined always with the same structure:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>&gt; ### &lt;an emoji&gt; Type of box: Name of the box
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt; ### &lt;an emoji&gt; Type of box: Name of the box
 &gt; list
 {: .type_of_box}
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>For a correct rendering of the tutorial’s content, the templating system requires this structure to be kept as it.
 The different defined boxes are:</p>
@@ -492,7 +489,7 @@ The different defined boxes are:</p>
 
     <p>In most tutorial, the second box is the agenda box at the end of the introduction. It indicates the plan of the tutorial</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code>  ```
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  ```
   &gt; ### Agenda
   &gt;
   &gt; In this tutorial we will deal with:
@@ -502,12 +499,11 @@ The different defined boxes are:</p>
   &gt;
   {: .agenda}
   ```
-</code></pre>
-    </div>
+</code></pre></div>    </div>
 
     <p>No need to fill the list, since this will be done automatically reusing each section’s title.</p>
 
-    <p>To avoid adding the “Introduction” and “Conclusion”, we add <code class="highlighter-rouge"><span class="p">{</span><span class="err">:.no_toc</span><span class="p">}</span></code> below the section name.</p>
+    <p>To avoid adding the “Introduction” and “Conclusion”, we add <code class="highlighter-rouge">{:.no_toc}</code> below the section name.</p>
 
     <figure id="figure-2"><img src="../../../../shared/images/tutorial_agenda_box.png" alt="Example of agenda box" title="Example of agenda box" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Example of agenda box</figcaption></figure>
 
@@ -524,12 +520,11 @@ The different defined boxes are:</p>
 
     <p>We think that actually walking through the tutorial by doing all its steps is important for learning its concepts. We therefore emphasize trying each step by regularly adding hands-on sections, where trainees are encouraged to do the analysis by themselves. We designed some special boxes to make these sections easy to find.</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code>  &gt; ### {% icon hands_on %} Hands-on: Sorting BAM dataset
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  &gt; ### {% icon hands_on %} Hands-on: Sorting BAM dataset
   &gt;
   &gt; 1. **Sort BAM dataset** {% icon tool %}: Sort the paired-end BAM file by "Read names" with **Sort BAM
   {: .hands_on}
-</code></pre>
-    </div>
+</code></pre></div>    </div>
 
     <figure id="figure-3"><img src="../../../../shared/images/tutorial_hand_on_box.png" alt="Example of hands-on box" title="Example of hands-on box" /><figcaption><span class="figcaption-prefix">Figure 3:</span> Example of hands-on box</figcaption></figure>
 
@@ -557,7 +552,7 @@ The different defined boxes are:</p>
     <p>Questions are there to force the trainees to think about what they are currently doing, and to put things in perspective.
  They also help the instructors by exposing and clarify common scenarios, errors, or applications.</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code> &gt; ### {% icon question %} Questions
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> &gt; ### {% icon question %} Questions
  &gt;
  &gt; 1. Why are some tests filtered?
  &gt; 2. Does it improve the *p*-value distribution?
@@ -569,8 +564,7 @@ The different defined boxes are:</p>
  &gt;    &gt;
  &gt;    {: .solution}
  {: .question}
-</code></pre>
-    </div>
+</code></pre></div>    </div>
 
     <figure id="figure-4"><img src="../../../../shared/images/tutorial_question_box_collapsed.png" alt="Example of question box" title="Example of question box with collapsed solution" /><figcaption><span class="figcaption-prefix">Figure 4:</span> Example of question box with collapsed solution</figcaption></figure>
 
@@ -592,7 +586,7 @@ The different defined boxes are:</p>
   <li>
     <p>Tips</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code>  &gt; ### {% icon tip %} Tip: Importing data via links
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  &gt; ### {% icon tip %} Tip: Importing data via links
   &gt;
   &gt; * Copy the link location
   &gt; * Open the Galaxy Upload Manager
@@ -600,20 +594,18 @@ The different defined boxes are:</p>
   &gt; * Paste the link into the text field
   &gt; * Press **Start**
   {: .tip}
-</code></pre>
-    </div>
+</code></pre></div>    </div>
 
     <figure id="figure-6"><img src="../../../../shared/images/tutorial_tip_box.png" alt="Example of tip box" title="Example of tip box" /><figcaption><span class="figcaption-prefix">Figure 6:</span> Example of tip box</figcaption></figure>
   </li>
   <li>
     <p>Comments</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code>  &gt; ### {% icon comment %} Comments
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  &gt; ### {% icon comment %} Comments
   &gt; - Edit the "Database/Build" to select "dm3"
   &gt; - Rename the datasets according to the samples
   {: .comment}
-</code></pre>
-    </div>
+</code></pre></div>    </div>
 
     <figure id="figure-7"><img src="../../../../shared/images/tutorial_comment_box.png" alt="Example of comment box" title="Example of comment box" /><figcaption><span class="figcaption-prefix">Figure 7:</span> Example of comment box</figcaption></figure>
   </li>
@@ -622,13 +614,12 @@ The different defined boxes are:</p>
 
     <p>The detail box is used to give more background explanation on the subject. By default the box is collapsed.</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code>  &gt; ### {% icon details %} More details on the ....
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  &gt; ### {% icon details %} More details on the ....
   &gt; 
   &gt; Add more details in Markdown...
   &gt; 
   {: .details}
-</code></pre>
-    </div>
+</code></pre></div>    </div>
 
     <figure id="figure-8"><img src="../../../../shared/images/tutorial_collapsed_detail_box.png" alt="Example of collapsed detail box" title="Example of collapsed detail box" /><figcaption><span class="figcaption-prefix">Figure 8:</span> Example of collapsed detail box</figcaption></figure>
 
@@ -677,7 +668,7 @@ Boxes can be nested, <em>e.g.</em> for having tips inside a hands-on:</p>
 
 <p>We can now fill the <code class="highlighter-rouge">slides.html</code> file as follows:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>---
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>---
 layout: tutorial_slides
 topic_name: "sequence-analysis"
 tutorial_name: search-similarity
@@ -695,8 +686,7 @@ logo: "GTN"
 ---
 
 ### Next slide
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>On the top, as for the tutorial’s <code class="highlighter-rouge">tutorial.md</code>, we need to define some metadata to link the slides with the corresponding tutorial. The metadata of the tutorial can then be used also to automatically fill the first slides (with the title, requirements, etc)  and the last slide (take-home message).</p>
 

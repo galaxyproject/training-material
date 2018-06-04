@@ -181,59 +181,53 @@
 
 <p>Begin by making a copy of the reports config file to your config directory, and editing it:</p>
 
-<div class="language-console highlighter-rouge"><pre class="highlight"><code><span class="w">$ </span><span class="nc">sudo</span><span class="kv"> -u galaxy cp /srv/galaxy/server/config/reports.ini.sample /srv/galaxy/config/reports.ini
-</span><span class="w">$ </span><span class="nc">sudo</span><span class="kv"> -u galaxy -e /srv/galaxy/config/reports.ini
-</span></code></pre>
-</div>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> <span class="nb">sudo</span> <span class="nt">-u</span> galaxy <span class="nb">cp</span> /srv/galaxy/server/config/reports.ini.sample /srv/galaxy/config/reports.ini
+<span class="gp">$</span> <span class="nb">sudo</span> <span class="nt">-u</span> galaxy <span class="nt">-e</span> /srv/galaxy/config/reports.ini
+</code></pre></div></div>
 
 <p>Since we serve Galaxy at the root of our webserver, we’ll need to serve Reports from a subdirectory: <code class="highlighter-rouge">/reports</code>. This is the default if we enable the <code class="highlighter-rouge">proxy-prefix</code> filter, all we need to do is uncomment the <code class="highlighter-rouge">proxy-prefix</code> setting. We also need to point the reports application at Galaxy’s PostgreSQL database:</p>
 
-<div class="language-ini highlighter-rouge"><pre class="highlight"><code><span class="py">filter-with</span> <span class="p">=</span> <span class="s">proxy-prefix</span>
+<div class="language-ini highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="py">filter-with</span> <span class="p">=</span> <span class="s">proxy-prefix</span>
 <span class="py">cookie_path</span> <span class="p">=</span> <span class="s">/reports</span>
 <span class="py">database_connection</span> <span class="p">=</span> <span class="s">postgresql:///galaxy?host=/var/run/postgresql</span>
 <span class="py">file_path</span> <span class="p">=</span> <span class="s">/srv/galaxy/data</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h3 id="section-2---configure-nginx">Section 2 - Configure nginx</h3>
 
 <p>We now have to configure nginx to serve the reports app at <code class="highlighter-rouge">/reports</code>. This is done in <code class="highlighter-rouge">/etc/nginx/sites-available/galaxy</code>. Add the following upstream:</p>
 
-<div class="language-nginx highlighter-rouge"><pre class="highlight"><code><span class="k">upstream</span> <span class="s">reports</span> <span class="p">{</span>
+<div class="language-nginx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">upstream</span> <span class="s">reports</span> <span class="p">{</span>
     <span class="kn">server</span> <span class="nf">localhost</span><span class="p">:</span><span class="mi">9001</span><span class="p">;</span>
 <span class="p">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>And in addition, add this new section to the existing <code class="highlighter-rouge">server { ... }</code> block:</p>
 
-<div class="language-nginx highlighter-rouge"><pre class="highlight"><code>    <span class="k">location</span> <span class="n">/reports</span> <span class="p">{</span>
+<div class="language-nginx highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="k">location</span> <span class="n">/reports</span> <span class="p">{</span>
         <span class="kn">proxy_pass</span>           <span class="s">http://reports</span><span class="p">;</span>
         <span class="kn">proxy_set_header</span>     <span class="s">X-Forwarded-Host</span> <span class="nv">$host</span><span class="p">;</span>
         <span class="kn">proxy_set_header</span>     <span class="s">X-Forwarded-For</span>  <span class="nv">$proxy_add_x_forwarded_for</span><span class="p">;</span>
     <span class="p">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Then, restart nginx with:</p>
 
-<div class="language-console highlighter-rouge"><pre class="highlight"><code><span class="w">$ </span><span class="nc">sudo</span><span class="kv"> systemctl restart nginx
-</span></code></pre>
-</div>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> <span class="nb">sudo </span>systemctl restart nginx
+</code></pre></div></div>
 
 <h3 id="section-3---start-reports">Section 3 - Start reports</h3>
 
 <p>We need a way to start and stop the reports application. This can be done with supervisor. Add the following to <code class="highlighter-rouge">/etc/supervisor/conf.d/galaxy.conf</code>:</p>
 
-<div class="language-ini highlighter-rouge"><pre class="highlight"><code><span class="nn">[program:reports]</span>
+<div class="language-ini highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">[program:reports]</span>
 <span class="py">command</span>         <span class="p">=</span> <span class="s">/srv/galaxy/venv/bin/python ./scripts/paster.py serve /srv/galaxy/config/reports.ini --log-file=/srv/galaxy/log/reports.log</span>
 <span class="py">directory</span>       <span class="p">=</span> <span class="s">/srv/galaxy/server</span>
 <span class="py">autostart</span>       <span class="p">=</span> <span class="s">true</span>
 <span class="py">autorestart</span>     <span class="p">=</span> <span class="s">true</span>
 <span class="py">startsecs</span>       <span class="p">=</span> <span class="s">10</span>
 <span class="py">user</span>            <span class="p">=</span> <span class="s">galaxy</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 
         
