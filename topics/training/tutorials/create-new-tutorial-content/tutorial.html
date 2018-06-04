@@ -229,11 +229,14 @@ We decided on a structure based on tutorials grouped by topics, and coupled with
 
         <p>In which topic will you put the new tutorial?</p>
 
-        <details>
-   <summary>Click to view the answers</summary>
-   If we search for [NCBI Blast+ in the ToolShed](https://toolshed.g2.bx.psu.edu/view/devteam/ncbi_blast_plus/7538e2bfcd41), it is placed in 2 categories (bottom): "Next Gen Mappers", and "Sequence Analysis".
-   We decided to put it in "Sequence analysis" because this is the most general one for this tutorial.
-   </details>
+        <blockquote class="solution">
+          <h3 id="-solution"><i class="fa fa-eye" aria-hidden="true"></i> Solution</h3>
+
+          <p>If we search for <a href="https://toolshed.g2.bx.psu.edu/view/devteam/ncbi_blast_plus/7538e2bfcd41">NCBI Blast+ in the ToolShed</a>, it is placed in 2 categories (bottom): “Next Gen Mappers”, and “Sequence Analysis”.
+We decided to put it in “Sequence analysis” because this is the most general one for this tutorial.</p>
+
+        </blockquote>
+
       </blockquote>
     </li>
   </ol>
@@ -449,7 +452,7 @@ This can be avoided by using the <code class="highlighter-rouge">\vert</code> co
 
 <p>They are defined always with the same structure:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt; ### &lt;an emoji&gt; Type of box: Name of the box
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt; ### {% icon an_icon %} Type of box: Name of the box
 &gt; list
 {: .type_of_box}
 </code></pre></div></div>
@@ -475,10 +478,11 @@ The different defined boxes are:</p>
 
             <p>What metadata hasn’t been added to this box?</p>
 
-            <details>
-   <summary>Click to view the answers</summary>
-   The take-home messages are not added to this box but into the last box of the tutorial
-   </details>
+            <blockquote class="solution">
+              <h3 id="-solution-1"><i class="fa fa-eye" aria-hidden="true"></i> Solution</h3>
+
+              <p>The take-home messages are not added to this box but into the last box of the tutorial</p>
+            </blockquote>
           </blockquote>
         </li>
       </ol>
@@ -489,8 +493,7 @@ The different defined boxes are:</p>
 
     <p>In most tutorial, the second box is the agenda box at the end of the introduction. It indicates the plan of the tutorial</p>
 
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  ```
-  &gt; ### Agenda
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  &gt; ### Agenda
   &gt;
   &gt; In this tutorial we will deal with:
   &gt;
@@ -498,21 +501,21 @@ The different defined boxes are:</p>
   &gt; {:toc}
   &gt;
   {: .agenda}
-  ```
 </code></pre></div>    </div>
 
     <p>No need to fill the list, since this will be done automatically reusing each section’s title.</p>
 
-    <p>To avoid adding the “Introduction” and “Conclusion”, we add <code class="highlighter-rouge">{:.no_toc}</code> below the section name.</p>
+    <p>To avoid adding the “Introduction” and “Conclusion”, we add <code class="highlighter-rouge">{:.no_toc}</code> below the section name. This will be rendered as follows:</p>
 
-    <figure id="figure-2"><img src="../../../../shared/images/tutorial_agenda_box.png" alt="Example of agenda box" title="Example of agenda box" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Example of agenda box</figcaption></figure>
+    <blockquote class="agenda">
+      <h3 id="agenda-1">Agenda</h3>
 
-    <blockquote class="hands_on">
-      <h3 id="-hands-on-add-an-agenda-box-to-the-tutorial"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Add an agenda box to the tutorial</h3>
+      <p>In this tutorial we will deal with:</p>
 
       <ol>
-        <li>Add an agenda box to the tutorial that fit the structure we defined previously</li>
+        <li>TOC</li>
       </ol>
+
     </blockquote>
   </li>
   <li>
@@ -520,29 +523,61 @@ The different defined boxes are:</p>
 
     <p>We think that actually walking through the tutorial by doing all its steps is important for learning its concepts. We therefore emphasize trying each step by regularly adding hands-on sections, where trainees are encouraged to do the analysis by themselves. We designed some special boxes to make these sections easy to find.</p>
 
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  &gt; ### {% icon hands_on %} Hands-on: Sorting BAM dataset
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  &gt; ### {% icon hands_on %} Hands-on: Spliced mapping
   &gt;
-  &gt; 1. **Sort BAM dataset** {% icon tool %}: Sort the paired-end BAM file by "Read names" with **Sort BAM
+  &gt; 1. **RNA STAR** {% icon tool %}: Map your reads on the reference genome with
+  &gt;    - "Single-end or paired-end reads" to `Paired-end (as individual datasets)`
+  &gt;    - "RNA-Seq FASTQ/FASTA file, forward reads" to the generated `trimmed reads pair 1` files (multiple datasets)
+  &gt;    - "RNA-Seq FASTQ/FASTA file, reverse reads" to the generated `trimmed reads pair 2` files (multiple datasets)
+  &gt;    - "Custom or built-in reference genome" to `Use a built-in index`
+  &gt;    - "Reference genome with or without an annotation" to `use genome reference without builtin gene-model`
+  &gt;    - "Select reference genome" to `Drosophila Melanogaster (dm6)`
+  &gt;    - "Gene model (gff3,gtf) file for splice junctions" to the imported `Drosophila_melanogaster.BDGP6.87.gtf`
+  &gt;    - "Length of the genomic sequence around annotated junctions" to `36`
+  &gt;
+  &gt;        This parameter should be length of reads - 1
+  &gt;
+  &gt; 2. **MultiQC** {% icon tool %}: Aggregate the STAR logs with
+  &gt;      - "Which tool was used generate logs?" to `STAR`
+  &gt;      - "Type of FastQC output?" to `Log`
+  &gt;      - "STAR log output" to the generated `log` files (multiple datasets)
   {: .hands_on}
 </code></pre></div>    </div>
-
-    <figure id="figure-3"><img src="../../../../shared/images/tutorial_hand_on_box.png" alt="Example of hands-on box" title="Example of hands-on box" /><figcaption><span class="figcaption-prefix">Figure 3:</span> Example of hands-on box</figcaption></figure>
 
     <p>with the</p>
 
     <ul>
-      <li><code class="highlighter-rouge">&lt;i class="fa fa-pencil" aria-hidden="true"&gt;&lt;/i&gt;</code> emoji to define that is an hands-on</li>
+      <li><code class="highlighter-rouge">{% icon hands_on %}</code> emoji to define that is an hands-on</li>
       <li>Short imperative sentence to make it easy to identify the tasks</li>
-      <li>Name of the tool in bold with the <code class="highlighter-rouge">&lt;i class="fa fa-wrench" aria-hidden="true"&gt;&lt;/i&gt;</code> emoji to make it easy to identify a Galaxy tool</li>
-      <li>Parameters for the tool as a sublist<br />
-  <br /></li>
+      <li>Name of the tool in bold with the <code class="highlighter-rouge">{% icon tool %}</code> emoji to make it easy to identify a Galaxy tool</li>
+      <li>Parameters for the tool as a sublist</li>
     </ul>
 
-    <blockquote class="hands_on">
-      <h3 id="-hands-on-add-an-hands-on-box"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Add an hands-on box</h3>
+    <p>It will be rendered like:</p>
+
+    <blockquote class="hands_on hands_on">
+      <h3 id="-hands-on-spliced-mapping"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Spliced mapping</h3>
 
       <ol>
-        <li>Add a hands-on box to run a BLAST of the small sequence dataset against the chosen database</li>
+        <li><strong>RNA STAR</strong> <i class="fa fa-wrench" aria-hidden="true"></i>: Map your reads on the reference genome with
+          <ul>
+            <li>“Single-end or paired-end reads” to <code class="highlighter-rouge">Paired-end (as individual datasets)</code></li>
+            <li>“RNA-Seq FASTQ/FASTA file, forward reads” to the generated <code class="highlighter-rouge">trimmed reads pair 1</code> files (multiple datasets)</li>
+            <li>“RNA-Seq FASTQ/FASTA file, reverse reads” to the generated <code class="highlighter-rouge">trimmed reads pair 2</code> files (multiple datasets)</li>
+            <li>
+              <p>“Length of the genomic sequence around annotated junctions” to <code class="highlighter-rouge">36</code></p>
+
+              <p>This parameter should be length of reads - 1</p>
+            </li>
+          </ul>
+        </li>
+        <li><strong>MultiQC</strong> <i class="fa fa-wrench" aria-hidden="true"></i>: Aggregate the STAR logs with
+          <ul>
+            <li>“Which tool was used generate logs?” to <code class="highlighter-rouge">STAR</code></li>
+            <li>“Type of FastQC output?” to <code class="highlighter-rouge">Log</code></li>
+            <li>“STAR log output” to the generated <code class="highlighter-rouge">log</code> files (multiple datasets)</li>
+          </ul>
+        </li>
       </ol>
     </blockquote>
   </li>
@@ -566,22 +601,33 @@ The different defined boxes are:</p>
  {: .question}
 </code></pre></div>    </div>
 
-    <figure id="figure-4"><img src="../../../../shared/images/tutorial_question_box_collapsed.png" alt="Example of question box" title="Example of question box with collapsed solution" /><figcaption><span class="figcaption-prefix">Figure 4:</span> Example of question box with collapsed solution</figcaption></figure>
+    <p>Which will be rendered as:</p>
 
-    <figure id="figure-5"><img src="../../../../shared/images/tutorial_question_box_expanded.png" alt="Example of question box" title="Example of question box with expanded solution" /><figcaption><span class="figcaption-prefix">Figure 5:</span> Example of question box with expanded solution</figcaption></figure>
+    <blockquote class="question">
+      <h3 id="-questions-2"><i class="fa fa-question-circle" aria-hidden="true"></i> Questions</h3>
+
+      <ol>
+        <li>Why are some tests filtered?</li>
+        <li>
+          <p>Does it improve the <em>p</em>-value distribution?</p>
+
+          <blockquote class="solution">
+            <h3 id="-solution-2"><i class="fa fa-eye" aria-hidden="true"></i> Solution</h3>
+
+            <ol>
+              <li>Sol for the first question</li>
+              <li>Sol for the second question</li>
+            </ol>
+
+          </blockquote>
+        </li>
+      </ol>
+    </blockquote>
 
     <p>Questions have to be quick to answer, and answers can be also provided as multiple choices (MCQs).
  With well choosen wrong answers, MCQs can do much more than just measure how much someone knows.</p>
 
     <p>In the box below and hidden we add also the correct answer, so that self-trainees can check the solution and its explanation.</p>
-
-    <blockquote class="hands_on">
-      <h3 id="-hands-on-add-a-question-box"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Add a question box</h3>
-
-      <ol>
-        <li>Add an hands-on box to construct the BLAST database</li>
-      </ol>
-    </blockquote>
   </li>
   <li>
     <p>Tips</p>
@@ -596,7 +642,19 @@ The different defined boxes are:</p>
   {: .tip}
 </code></pre></div>    </div>
 
-    <figure id="figure-6"><img src="../../../../shared/images/tutorial_tip_box.png" alt="Example of tip box" title="Example of tip box" /><figcaption><span class="figcaption-prefix">Figure 6:</span> Example of tip box</figcaption></figure>
+    <p>Rendered:</p>
+
+    <blockquote class="tip">
+      <h3 id="-tip-importing-data-via-links"><i class="fa fa-lightbulb-o" aria-hidden="true"></i> Tip: Importing data via links</h3>
+
+      <ul>
+        <li>Copy the link location</li>
+        <li>Open the Galaxy Upload Manager</li>
+        <li>Select <strong>Paste/Fetch Data</strong></li>
+        <li>Paste the link into the text field</li>
+        <li>Press <strong>Start</strong></li>
+      </ul>
+    </blockquote>
   </li>
   <li>
     <p>Comments</p>
@@ -607,7 +665,15 @@ The different defined boxes are:</p>
   {: .comment}
 </code></pre></div>    </div>
 
-    <figure id="figure-7"><img src="../../../../shared/images/tutorial_comment_box.png" alt="Example of comment box" title="Example of comment box" /><figcaption><span class="figcaption-prefix">Figure 7:</span> Example of comment box</figcaption></figure>
+    <p>Rendered:</p>
+
+    <blockquote class="comment">
+      <h3 id="-comments-1"><i class="fa fa-commenting-o" aria-hidden="true"></i> Comments</h3>
+      <ul>
+        <li>Edit the “Database/Build” to select “dm3”</li>
+        <li>Rename the datasets according to the samples</li>
+      </ul>
+    </blockquote>
   </li>
   <li>
     <p>Details</p>
@@ -615,15 +681,20 @@ The different defined boxes are:</p>
     <p>The detail box is used to give more background explanation on the subject. By default the box is collapsed.</p>
 
     <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  &gt; ### {% icon details %} More details on the ....
-  &gt; 
+  &gt;
   &gt; Add more details in Markdown...
-  &gt; 
+  &gt;
   {: .details}
 </code></pre></div>    </div>
 
-    <figure id="figure-8"><img src="../../../../shared/images/tutorial_collapsed_detail_box.png" alt="Example of collapsed detail box" title="Example of collapsed detail box" /><figcaption><span class="figcaption-prefix">Figure 8:</span> Example of collapsed detail box</figcaption></figure>
+    <p>Rendered:</p>
 
-    <figure id="figure-9"><img src="../../../../shared/images/tutorial_expanded_detail_box.png" alt="Example of expanded detail box" title="Example of expanded detail box" /><figcaption><span class="figcaption-prefix">Figure 9:</span> Example of expanded detail box</figcaption></figure>
+    <blockquote class="details">
+      <h3 id="-more-details-on-the-"><i class="fa fa-info-circle" aria-hidden="true"></i> More details on the ….</h3>
+
+      <p>Add more details in Markdown…</p>
+
+    </blockquote>
   </li>
   <li>
     <p>Key points</p>
@@ -644,15 +715,16 @@ Boxes can be nested, <em>e.g.</em> for having tips inside a hands-on:</p>
       <p>Check in which category it is</p>
 
       <blockquote class="question">
-        <h3 id="-questions-2"><i class="fa fa-question-circle" aria-hidden="true"></i> Questions</h3>
+        <h3 id="-questions-3"><i class="fa fa-question-circle" aria-hidden="true"></i> Questions</h3>
 
         <p>In which topic will you put the tutorial?</p>
 
-        <details>
-   <summary>Click to view the answers</summary>
-   If we search for [NCBI Blast+ in the ToolShed](https://toolshed.g2.bx.psu.edu/view/devteam/ncbi_blast_plus/7538e2bfcd41), it is attributed to 2 categories (bottom): "Next Gen Mappers" and "Sequence Analysis".
-   We decided to put it in "Sequence analysis" because this is the most general one for this tutorial.
-   </details>
+        <blockquote class="solution">
+          <h3 id="-solution-3"><i class="fa fa-eye" aria-hidden="true"></i> Solution</h3>
+
+          <p>If we search for <a href="https://toolshed.g2.bx.psu.edu/view/devteam/ncbi_blast_plus/7538e2bfcd41">NCBI Blast+ in the ToolShed</a>, it is attributed to 2 categories (bottom): “Next Gen Mappers” and “Sequence Analysis”.
+We decided to put it in “Sequence analysis” because this is the most general one for this tutorial.</p>
+        </blockquote>
       </blockquote>
     </li>
   </ol>
