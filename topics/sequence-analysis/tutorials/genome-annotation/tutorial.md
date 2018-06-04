@@ -97,9 +97,6 @@ At first you need to identify those structures of the genome which code for prot
 >    >
 >    > Are there tRNAs or tmRNAs in the sequence?
 >    >
->    > > ### {% icon solution %} Solution
->    > >
->    > {: .solution }
 >    {: .question}
 >
 {: .hands_on}
@@ -136,9 +133,6 @@ For similarity searches we use *NCBI BLAST+ blastp* to find similar proteins in 
 >    >
 >    > What information do you see in the BLAST output?
 >    >
->    > > ### {% icon solution %} Solution
->    > >
->    > {: .solution }
 > {: .question}
 >
 >
@@ -149,9 +143,6 @@ For similarity searches we use *NCBI BLAST+ blastp* to find similar proteins in 
 >    >
 >    > For how many proteins we do not get a BLAST hit?
 >    >
->    > > ### {% icon solution %} Solution
->    > >
->    > {: .solution }
 > {: .question}
 >
 > 5. {% icon tool %} Choose the tool **Select lines that match an expression** and enter the following information: *Select lines from* [select the BLAST top hit descriptions result file]; *that* [not matching]; *the pattern* [gi].
@@ -225,9 +216,6 @@ For identification of gene clusters, **antiSMASH** is used. The tool uses genban
 >
 > Which gene clusters are identified?
 >
-> > ### {% icon solution %} Solution
-> >
-> {: .solution }
 {: .question}
 
 When you have a whole genome **antiSMASH** analysis, your result may look like this:
