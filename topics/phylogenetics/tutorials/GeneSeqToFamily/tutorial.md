@@ -7,27 +7,16 @@ tutorial_name: GeneSeqToFamily
 # Introduction
 {:.no_toc}
 
-GeneSeqToFamily: Discovery and Visualisation of Homologous Genes and Gene Families Using Galaxy
+This tutorial uses GeneSeqToFamily a Galaxy workflow published by Thanki et al. (2018). The goal of this workflow was to investigate “Discovery and Visualisation of Homologous Genes and Gene Families Using Galaxy”
 
-A gene family is a set of several similar genes formed by duplication of a single original gene.
-
-The study of homologous genes helps to understand the evolution of gene families
-Various tools available but they provide overview of homology at family level information such as, MSOAR, OrthoMCL, HomoloGene
-
-They can not provide information about structural changes within gene
-
-
-# Ensembl GeneTree pipeline
+## Ensembl GeneTrees pipeline
 {:.no_toc}
 
-The Ensembl GeneTrees computational pipeline generates gene families based on coding sequences. 
-It uses various tools: 
-BLAST
-hcluster_sg
-T-Coffee
-TreeBeST
+The Ensembl GeneTrees pipeline, a computational workflow developed by the EMBL-EBI Ensembl Compara team produces familial relationships based on clustering, MSA, and phylogenetic tree inference. The pipeline comprises 7 steps, starting from a set of protein sequences and performing similarity searching and multiple large-scale alignments to infer homology among them, using various tools: BLAST, hcluster_sg, T-Coffee, and phylogenetic tree construction tools, including TreeBeST. 
 
-> ## Agenda
+In this tutorial we will cover all these steps one-by-one, which makes GeneSeqToFamily workflow all together.
+
+> ### Agenda
 >
 > In this tutorial, we will deal with:
 >
@@ -38,19 +27,21 @@ TreeBeST
 
 # Importing dataset
 
-> ## {% icon hands_on %} Hands-on: Data upload
+> ### {% icon hands_on %} Hands-on: Data upload
 >
-> Make sure you have an empty analysis history. Give it a name.
+> 1. Make sure you have an empty analysis history. Give it a name.
+>
 >	> ### {% icon tip %} Tip: Starting a new history
 >	>
 >	> * Click the gear icon at the top of the history panel
 >	> * Select the option Create New from the menu
+>	>
 >	{: .tip}
 > 
 > 2. Import Sample Data
->	> * FASTA file
->	> * GFF file: 
->	> * Species tree
+>	> * FASTA file:  [`CDS.fasta`](https://doi.org/10.5281/zenodo.1256760)
+>	> * JSON file: [`gene.json`](https://doi.org/10.5281/zenodo.1256762)
+>	> * Species tree: [`species.nhx`](https://doi.org/10.5281/zenodo.1256753)
 >
 >	> ### {% icon tip %} Tip: Importing data via links
 >	>
@@ -125,7 +116,7 @@ We use Transeq to convert a CDS to protein sequences in order to run BLASTP and 
 
 We are using BLASTP to run over the set of sequences against the database of the same input, as is the case with BLAST-all, in order to form clusters of related sequences.
 
-## BLAST Database
+## Create BLAST Database
 
 > ### {% icon hands_on %} Hands-on: makeblastdb
 >
@@ -135,7 +126,7 @@ We are using BLASTP to run over the set of sequences against the database of the
 >	> * Run tool
 {: .hands_on}
 
-## BLASTP
+## Run BLASTP
 
 > ### {% icon hands_on %} Hands-on: BLASTP : Run BLASTP
 >
@@ -159,7 +150,9 @@ We are using BLASTP to run over the set of sequences against the database of the
 ## BLAST parser
 
 BLAST parser is a small Galaxy tool to convert the BLAST output into the input format required by hcluster_sg. 
-It takes the BLAST 12 or 25-column output as input and generates a 3-column tabular file, comprising the BLAST query, the hit result, and the edge weight. The weight value is simply calculated as minus log10 of the BLAST e-value divided by 2, replacing this with 100 if this value is greater than 100. It also removes the self-matching BLAST results and lets the user filter out non-Reciprocal Best Hits (if selected).
+It takes the BLAST 12 or 25-column output as input and generates a 3-column tabular file, comprising the BLAST query, the hit result, and the edge weight. 
+
+The weight value is simply calculated as minus log10 of the BLAST e-value divided by 2, replacing this with 100 if this value is greater than 100. It also removes the self-matching BLAST results and lets the user filter out non-Reciprocal Best Hits (if selected).
 
 > ### {% icon hands_on %} Hands-on: BLAST Parser 
 >
@@ -170,7 +163,7 @@ It takes the BLAST 12 or 25-column output as input and generates a 3-column tabu
 
 # Cluster generation
 
-## hcluster_sg
+## Generate clusters with hcluster_sg
 
 hcluster_sg performs clustering for sparse graphs. It reads an input file that describes the similarity between 2 sequences, and iterates through the process of grouping 2 nearest nodes at each iteration. hcluster_sg outputs a single list of gene clusters.
 
@@ -183,7 +176,7 @@ hcluster_sg performs clustering for sparse graphs. It reads an input file that d
 >	> * Run tool
 {: .hands_on}
 
-## hcluster_sg parser
+## Parse generated clusters with hcluster_sg parser
 
 hcluster_sg parser tool creates collection of files each containing sequence IDs for cluster.
 
@@ -214,9 +207,9 @@ Filter by FASTA IDs is used to create separate FASTA files using the sequence ID
 
 # Cluster Alignment
 
-## T-Coffee
+## Multiple Sequence Alignment using T-Coffee
 
-T-Coffee is a MSA package, it can align both nucleotide and protein sequences. We use it to align the protein sequences in each cluster generated by hcluster_sg.
+T-Coffee is a Multiple Sequence Alignment package, it can align both nucleotide and protein sequences. We use it to align the protein sequences in each cluster generated by hcluster_sg.
 
 > ### {% icon hands_on %} Hands-on: T-Coffee 
 >
