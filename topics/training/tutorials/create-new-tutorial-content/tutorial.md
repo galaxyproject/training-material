@@ -57,11 +57,13 @@ The first step we need to define is in which topic to place our new tutorial. Th
 >    >
 >    > In which topic will you put the new tutorial?
 >    >
->    >    <details>
->    >    <summary>Click to view the answers</summary>
->    >    If we search for [NCBI Blast+ in the ToolShed](https://toolshed.g2.bx.psu.edu/view/devteam/ncbi_blast_plus/7538e2bfcd41), it is placed in 2 categories (bottom): "Next Gen Mappers", and "Sequence Analysis".
->    >    We decided to put it in "Sequence analysis" because this is the most general one for this tutorial.
->    >    </details>
+>    >    > ### {% icon solution %} Solution
+>    >    >
+>    >    > If we search for [NCBI Blast+ in the ToolShed](https://toolshed.g2.bx.psu.edu/view/devteam/ncbi_blast_plus/7538e2bfcd41), it is placed in 2 categories (bottom): "Next Gen Mappers", and "Sequence Analysis".
+>    >    > We decided to put it in "Sequence analysis" because this is the most general one for this tutorial.
+>    >    >
+>    >    {: .solution}
+>    >
 >    {: .question}
 {: .hands_on}
 
@@ -269,10 +271,10 @@ The different defined boxes are:
     >    >
     >    > What metadata hasn't been added to this box?
     >    >
-    >    >    <details>
-    >    >    <summary>Click to view the answers</summary>
-    >    >    The take-home messages are not added to this box but into the last box of the tutorial
-    >    >    </details>
+    >    >    > ### {% icon solution %} Solution
+    >    >    >
+    >    >    > The take-home messages are not added to this box but into the last box of the tutorial
+    >    >    {: .solution}
     >    {: .question}
     {: .hands_on}
 
@@ -280,29 +282,31 @@ The different defined boxes are:
 
     In most tutorial, the second box is the agenda box at the end of the introduction. It indicates the plan of the tutorial
 
-        {% raw %}
-        ```
-        > ### Agenda
-        >
-        > In this tutorial we will deal with:
-        >
-        > 1. TOC
-        > {:toc}
-        >
-        {: .agenda}
-        ```
-        {% endraw %}
+    {% raw %}
+    ```
+    > ### Agenda
+    >
+    > In this tutorial we will deal with:
+    >
+    > 1. TOC
+    > {:toc}
+    >
+    {: .agenda}
+    ```
+    {% endraw %}
 
     No need to fill the list, since this will be done automatically reusing each section's title.
 
-    To avoid adding the "Introduction" and "Conclusion", we add `{:.no_toc}` below the section name.
+    To avoid adding the "Introduction" and "Conclusion", we add `{:.no_toc}` below the section name. This will be rendered as follows:
 
-    ![Example of agenda box](../../../../shared/images/tutorial_agenda_box.png "Example of agenda box")
-
-    > ### {% icon hands_on %} Hands-on: Add an agenda box to the tutorial
+    > ### Agenda
     >
-    > 1. Add an agenda box to the tutorial that fit the structure we defined previously
-    {: .hands_on}
+    > In this tutorial we will deal with:
+    >
+    > 1. TOC
+    > {:toc}
+    >
+    {: .agenda}
 
 - Hands-on
 
@@ -317,7 +321,12 @@ The different defined boxes are:
     ```
     {% endraw %}
 
-    ![Example of hands-on box](../../../../shared/images/tutorial_hand_on_box.png "Example of hands-on box")
+    Which, when rendered will appear like:
+
+    > ### {% icon hands_on %} Hands-on: Sorting BAM dataset
+    >
+    > 1. **Sort BAM dataset** {% icon tool %}: Sort the paired-end BAM file by "Read names" with **Sort BAM
+    {: .hands_on}
 
     with the
 
@@ -326,11 +335,6 @@ The different defined boxes are:
     - Name of the tool in bold with the `{% icon tool %}` emoji to make it easy to identify a Galaxy tool
     - Parameters for the tool as a sublist<br/>
     <br/>
-
-    > ### {% icon hands_on %} Hands-on: Add an hands-on box
-    >
-    > 1. Add a hands-on box to run a BLAST of the small sequence dataset against the chosen database
-    {: .hands_on}
 
 -  Questions and solution
 
@@ -354,19 +358,25 @@ The different defined boxes are:
     ```
     {% endraw %}
 
-    ![Example of question box](../../../../shared/images/tutorial_question_box_collapsed.png "Example of question box with collapsed solution")
+    Which will be rendered as:
 
-    ![Example of question box](../../../../shared/images/tutorial_question_box_expanded.png "Example of question box with expanded solution")
+    > ### {% icon question %} Questions
+    >
+    > 1. Why are some tests filtered?
+    > 2. Does it improve the *p*-value distribution?
+    >
+    >    > ### {% icon solution %} Solution
+    >    >
+    >    > 1. Sol for the first question
+    >    > 2. Sol for the second question
+    >    >
+    >    {: .solution}
+    {: .question}
 
     Questions have to be quick to answer, and answers can be also provided as multiple choices (MCQs).
     With well choosen wrong answers, MCQs can do much more than just measure how much someone knows.
 
     In the box below and hidden we add also the correct answer, so that self-trainees can check the solution and its explanation.
-
-    > ### {% icon hands_on %} Hands-on: Add a question box
-    >
-    > 1. Add an hands-on box to construct the BLAST database
-    {: .hands_on}
 
 
 - Tips
@@ -384,7 +394,16 @@ The different defined boxes are:
     ```
     {% endraw %}
 
-    ![Example of tip box](../../../../shared/images/tutorial_tip_box.png "Example of tip box")
+    Rendered:
+
+    > ### {% icon tip %} Tip: Importing data via links
+    >
+    > * Copy the link location
+    > * Open the Galaxy Upload Manager
+    > * Select **Paste/Fetch Data**
+    > * Paste the link into the text field
+    > * Press **Start**
+    {: .tip}
 
 - Comments
 
@@ -397,25 +416,34 @@ The different defined boxes are:
     ```
     {% endraw %}
 
-    ![Example of comment box](../../../../shared/images/tutorial_comment_box.png "Example of comment box")
+    Rendered:
+
+    > ### {% icon comment %} Comments
+    > - Edit the "Database/Build" to select "dm3"
+    > - Rename the datasets according to the samples
+    {: .comment}
 
 - Details
 
-    The detail box is used to give more background explanation on the subject. By default the box is collapsed. 
+    The detail box is used to give more background explanation on the subject. By default the box is collapsed.
 
     {% raw %}
     ```
     > ### {% icon details %} More details on the ....
-    > 
+    >
     > Add more details in Markdown...
-    > 
+    >
     {: .details}
     ```
     {% endraw %}
 
-    ![Example of collapsed detail box](../../../../shared/images/tutorial_collapsed_detail_box.png "Example of collapsed detail box")
+    Rendered:
 
-    ![Example of expanded detail box](../../../../shared/images/tutorial_expanded_detail_box.png "Example of expanded detail box")
+    > ### {% icon details %} More details on the ....
+    >
+    > Add more details in Markdown...
+    >
+    {: .details}
 
 - Key points
 
@@ -435,11 +463,11 @@ Boxes can be nested, *e.g.* for having tips inside a hands-on:
 >    >
 >    > In which topic will you put the tutorial?
 >    >
->    >    <details>
->    >    <summary>Click to view the answers</summary>
->    >    If we search for [NCBI Blast+ in the ToolShed](https://toolshed.g2.bx.psu.edu/view/devteam/ncbi_blast_plus/7538e2bfcd41), it is attributed to 2 categories (bottom): "Next Gen Mappers" and "Sequence Analysis".
->    >    We decided to put it in "Sequence analysis" because this is the most general one for this tutorial.
->    >    </details>
+>    >    > ### {% icon solution %} Solution
+>    >    >
+>    >    > If we search for [NCBI Blast+ in the ToolShed](https://toolshed.g2.bx.psu.edu/view/devteam/ncbi_blast_plus/7538e2bfcd41), it is attributed to 2 categories (bottom): "Next Gen Mappers" and "Sequence Analysis".
+>    >    > We decided to put it in "Sequence analysis" because this is the most general one for this tutorial.
+>    >    {: .solution}
 >    {: .question}
 {: .hands_on}
 
