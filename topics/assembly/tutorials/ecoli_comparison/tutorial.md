@@ -11,9 +11,11 @@ tutorial_name: your_tutorial_name
 
 Here we will demonstrate genome analyses strategies for understanding structural differences between a newly assembled genome and a set of published, annotated genomes.
 
-> ### Agenda
+> ### Outline of this tutorial
 >
-> In this tutorial we begin with a new genome assembly just produced in the [Unicycler tutorial]({{site.baseurl}}/topics/assembly/tutorials/unicycler-assembly/tutorial.html). This is an assembly of *E. coli* C, which we will be comparing to assemblies of all other complete genes of *E. coli*.
+> In this tutorial we begin with a new genome assembly just produced in the [Unicycler tutorial]({{site.baseurl}}/topics/assembly/tutorials/unicycler-assembly/tutorial.html). This is an assembly of *E. coli* C, which we will be comparing to assemblies of all other complete genes of this species.
+>
+>--------------
 >
 > 1. TOC
 > {:toc}
@@ -22,13 +24,13 @@ Here we will demonstrate genome analyses strategies for understanding structural
 
 # Finding and loading all complete *E. coli* genomes
 
-*E. coli* is one of the most studied organisms. Naturally, there are hundreds of complete genomes. Here we will shows how to uploaded all (!) complete *E. coli* genomes as once.
+*E. coli* is one of the most studied organisms. Naturally, there are hundreds of complete genomes (in fact, the total number of *E. coli* assemblies in Genbank is over 10,500). Here we will shows how to uploaded all (!) complete *E. coli* genomes at once.
 
 ## Preparing the data
 
-Our initial objective is to compare our assembly against all complete *E. coli* genomes to identify the most related ones and to identify any interesting genome alterations. In order to do this we need to align our assembly against all other genomes. And in order to do that we need to first obtain all these other genomes.
+Our initial objective is to compare our assembly against all complete *E. coli* genomes to identify the most related ones and to find any interesting genome alterations. In order to do this we need to align our assembly against all other genomes. And in order to do that we need to first obtain all these other genomes.
 
-[NCBI](https://www.ncbi.nlm.nih.gov/) is the resource that would store all complete *E. coli* genomes. Specifically, they can be found [here](https://www.ncbi.nlm.nih.gov/genome/genomes/167). As we will see this list contains over 500 genomes and so uploading them by hand will likely result in carpal tunnel syndrome, which we want to prevent. Galaxy has several features that are specifically designed for uploading and managing large sets of similar types of data. The following two **Hands-on** section show how they can be used to import all completed *E. coli* genomes into Galaxy.
+[NCBI](https://www.ncbi.nlm.nih.gov/) is the resource that would store all complete *E. coli* genomes. Specifically, they can be found [here](https://www.ncbi.nlm.nih.gov/genome/genomes/167). As we will see, this list contains over 500 genomes and so uploading them by hand will likely result in carpal tunnel syndrome, which we want to prevent. Galaxy has several features that are specifically designed for uploading and managing large sets of similar types of data. The following two **Hands-on** sections show how they can be used to import all completed *E. coli* genomes into Galaxy.
 
 <!--
 {% icon hands_on %} will render the hands_on icon as specified in
@@ -47,23 +49,23 @@ _config.yml in the root of this repository.
 
 ## Getting complete *E. coli* genomes into Galaxy
 
-Now that the list is formatted as a table in a spreadsheet, it is time to upload it into Galaxy. There is a problem though &uarr; the URLs (web addresses) in the list do not actually point to sequence files that we would need to perform alignments. Instead they point to directories. For example, this URL:
+Now that the list is formatted as a table in a spreadsheet, it is time to upload it into Galaxy. There is a problem though &rarr; the URLs (web addresses) in the list do not actually point to sequence files that we would need to perform alignments. Instead they point to directories. For example, this URL:
 
 ```
 ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/000/008/865/GCA_000008865.1_ASM886v1					
 ```
 
-points to a directory (rather than a file) containing the following files:
+points to a directory (rather than a file) containing many files most of which we do not need:
 
-![GenBank assembly files for an E. coli strain](../../images/genbank_dir.png "A list of files for an E. coli assembly. For further analyses we need datasets ending with '_genomic.fna.gz'.")
+![GenBank assembly files for an E. coli strain](../../images/genbank_dir.png "A list of files for an <i>E. coli</i> assembly. For further analyses we need datasets ending with <code>_genomic.fna.gz</code>.")
 
-So to download sequence files we need to edit URLs by adding filenames to them. For example, in the case of the URL shown above we need to add `/GCA_000008865.1_ASM886v1_genomic.fna.gz` to the end to get this:
+So to download sequence files we need to edit URLs by adding filenames to them. For example, in the case of the URL shown above we need to add `/GCA_000008865.1_ASM886v1` and `_genomic.fna.gz` to the end to get this:
 
 ```
 ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/000/008/865/GCA_000008865.1_ASM886v1/GCA_000008865.1_ASM886v1_genomic.fna.gz
 ```
 
-This can be done as a two step process where we first copy the end part of the existing URL (`/GCA_000008865.1_ASM886v1_genomic.fna.gz`) and then add a fixed string `_genomic.fna.gz` to the end of it. Doing by hand is crazy and trying it in a spreadsheet is complicated. Fortunately Galaxy's new rule-based unloader helps with that as shown in the next **Hands-on** section.
+This can be done as a two step process where we first copy the end part of the existing URL (`/GCA_000008865.1_ASM886v1`) and then add a fixed string `_genomic.fna.gz` to the end of it. Doing by hand is crazy and trying it in a spreadsheet is complicated. Fortunately Galaxy's new rule-based uploader helps with that as shown in the next **Hands-on** section.
 
 <!--Short introduction about this subpart.-->
 
