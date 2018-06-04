@@ -223,12 +223,9 @@ As we directly see, the peak file lacks `chr` before any chromosome number. But 
 >    >
 >    > 1. Are the chromosomes 20 and 21 named X and Y?
 >    >
->    >    <details>
->    >    <summary>Click to view answers</summary>
->    >    <ol type="1">
->    >    <li>Not at all. One more thing to fix.</li>
->    >    </ol>
->    >    </details>
+>    >    > ### {% icon solution %} Solution
+>    >    > Not at all. One more thing to fix.
+>    >    {: .solution }
 >    {: .question}
 {: .hands_on}
 
@@ -349,12 +346,9 @@ We will regroup the table by chromosome and count the number of genes with peaks
 >    >
 >    > Which chromosome contained the highest number of target genes?
 >    >
->    >    <details>
->    >    <summary>Click to view answers</summary>
->    >    <ol type="1">
->    >    <li>The result varies with different settings. If you followed step by step, it should be chromosome 7 with 1675 genes.</li>
->    >    </ol>
->    >    </details>
+>    >    > ### {% icon solution %} Solution
+>    >    > The result varies with different settings. If you followed step by step, it should be chromosome 7 with 1675 genes.
+>    >    {: .solution }
 >    {: .question}
 >
 {: .hands_on}
@@ -561,10 +555,9 @@ Congratulations! You should have a file with all the unique gene names and a cou
 >
 > The list of unique genes is not sorted. Try to sort it on your own!
 >
->    <details>
->    <summary>Click to view answers</summary>
->    You can use the tool "Sort data in ascending or descending order" on column 2 and a numerical sort.
->    </details>
+>    > ### {% icon solution %} Solution
+>    > You can use the tool "Sort data in ascending or descending order" on column 2 and a numerical sort.
+>    {: .solution }
 {: .question}
 
 
