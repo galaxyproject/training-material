@@ -401,14 +401,14 @@
           <li>
             <p>What needs to be done to improve the sequences?</p>
 
-            <details>
-<summary>Click to view the answers</summary>
-<ol type="1">
-<li>The sequence scores are quite good: no warnings from FastQC, even if we can see a slight decrease of the quality at the end of the reads.</li>
-<li>In the beginning of sequences, the sequence content per base is not really good and the percentages are not equal. For the GC content, the distribution is slightly shifted on the left, and too high.</li>
-<li>We can trim the end of the sequences a little, but not too much as the sequences are already small.</li>
-</ol>
-</details>
+            <blockquote class="solution">
+              <h3 id="-solution"><i class="fa fa-eye" aria-hidden="true"></i> Solution</h3>
+              <ol>
+                <li>The sequence scores are quite good: no warnings from FastQC, even if we can see a slight decrease of the quality at the end of the reads.</li>
+                <li>In the beginning of sequences, the sequence content per base is not really good and the percentages are not equal. For the GC content, the distribution is slightly shifted on the left, and too high.</li>
+                <li>We can trim the end of the sequences a little, but not too much as the sequences are already small.</li>
+              </ol>
+            </blockquote>
           </li>
         </ol>
       </blockquote>
@@ -454,17 +454,17 @@
 
         <p>Which parameters must be applied to follow the previous recommendations?</p>
 
-        <details>
-<summary>Click to view the answers</summary>
-We use the default ones:
-<ul>
-<li>​
-If you know which adapter sequence was used during library preparation, provide its sequence. Otherwise use the option for automatic detection and trimming of adapter sequences.</li>
-<li>Trimming low-quality ends (below 20) from reads in addition to adapter removal</li>
-<li>Option for required overlap (in bp) with adapter sequence can be tweaked. The default value "1" is too stringent, and on average 25% of reads will be trimmed. Please set it to 5 bases to loosen the required overlap</li>
-<li>Removing reads shorter than 20 bp</li>
-</ul>
-</details>
+        <blockquote class="solution">
+          <h3 id="-solution-1"><i class="fa fa-eye" aria-hidden="true"></i> Solution</h3>
+          <p>We use the default ones:</p>
+
+          <ol>
+            <li>If you know which adapter sequence was used during library preparation, provide its sequence. Otherwise use the option for automatic detection and trimming of adapter sequences.</li>
+            <li>Trimming low-quality ends (below 20) from reads in addition to adapter removal</li>
+            <li>Option for required overlap (in bp) with adapter sequence can be tweaked. The default value “1” is too stringent, and on average 25% of reads will be trimmed. Please set it to 5 bases to loosen the required overlap</li>
+            <li>Removing reads shorter than 20 bp</li>
+          </ol>
+        </blockquote>
       </blockquote>
     </li>
     <li>
@@ -479,14 +479,14 @@ If you know which adapter sequence was used during library preparation, provide 
           <li>
             <p>Can you explain why the per-base sequence content is not good now?</p>
 
-            <details>
-<summary>Click to view the answers</summary>
-<ol type="1">
-<li>Before Trim Galore, the dataset comprised 100,000 sequences. After Trim Galore, there are 99,653 sequences</li>
-<li>The per-base quality score looks better, but other indicators show bad values now. The sequence length distribution is not clear anymore because sequences have different size after the trimming operation</li>
-<li>The per-base sequence content has turned red. Again, the cause is the trimming of the end of some sequences</li>
-</ol>
-</details>
+            <blockquote class="solution">
+              <h3 id="-solution-2"><i class="fa fa-eye" aria-hidden="true"></i> Solution</h3>
+              <ol>
+                <li>Before Trim Galore, the dataset comprised 100,000 sequences. After Trim Galore, there are 99,653 sequences</li>
+                <li>The per-base quality score looks better, but other indicators show bad values now. The sequence length distribution is not clear anymore because sequences have different size after the trimming operation</li>
+                <li>The per-base sequence content has turned red. Again, the cause is the trimming of the end of some sequences</li>
+              </ol>
+            </blockquote>
           </li>
         </ol>
       </blockquote>
@@ -517,14 +517,14 @@ If you know which adapter sequence was used during library preparation, provide 
           <li>
             <p>What needs to be done to improve the sequences?</p>
 
-            <details>
-<summary>Click to view the answers</summary>
-<ol type="1">
-<li>There is a red warning on the per-base sequence quality (pretty bad along the sequence but worse at the end of sequences), the per-base sequence content (bad at the beginning of the sequences), and the per-sequence GC content</li>
-<li>The end of sequences must be cut.</li>
-<li>Generally, the 5' end of each sequence read is not of bad quality unless something went wrong with the sequencng experiment itself. Here, the problem is that the sample was sequenced using the an Illumina sequencing machine, which carries out its calibration while reading fragments that are in the beginning of the flowcell. Unfortunately, the first 100k reads which we selected for the analysis are generated during the calibration, a problem that we don't have with more recent sequencing machines. However, if you adopted one of the latest sequencing machine and still experience bad quality bases at the beginning of the reads, please don't just trim them, but consider investigating the problem further.</li>
-</ol>
-</details>
+            <blockquote class="solution">
+              <h3 id="-solution-3"><i class="fa fa-eye" aria-hidden="true"></i> Solution</h3>
+              <ol>
+                <li>There is a red warning on the per-base sequence quality (pretty bad along the sequence but worse at the end of sequences), the per-base sequence content (bad at the beginning of the sequences), and the per-sequence GC content</li>
+                <li>The end of sequences must be cut.</li>
+                <li>Generally, the 5’ end of each sequence read is not of bad quality unless something went wrong with the sequencng experiment itself. Here, the problem is that the sample was sequenced using the an Illumina sequencing machine, which carries out its calibration while reading fragments that are in the beginning of the flowcell. Unfortunately, the first 100k reads which we selected for the analysis are generated during the calibration, a problem that we don’t have with more recent sequencing machines. However, if you adopted one of the latest sequencing machine and still experience bad quality bases at the beginning of the reads, please don’t just trim them, but consider investigating the problem further.</li>
+              </ol>
+            </blockquote>
           </li>
         </ol>
       </blockquote>
@@ -542,13 +542,13 @@ If you know which adapter sequence was used during library preparation, provide 
           <li>
             <p>Can you explain why the per-base sequence content is not good now?</p>
 
-            <details>
-<summary>Click to view the answers</summary>
-<ol type="1">
-<li>Before Trim Galore the dataset comprised 100,000 sequences. After Trim Galore, there are 97,644 sequences.</li>
-<li>The per-base quality score looks better (not red anymore), but the per-base sequence content, even if slightly better, is still red.</li>
-</ol>
-</details>
+            <blockquote class="solution">
+              <h3 id="-solution-4"><i class="fa fa-eye" aria-hidden="true"></i> Solution</h3>
+              <ol>
+                <li>Before Trim Galore the dataset comprised 100,000 sequences. After Trim Galore, there are 97,644 sequences.</li>
+                <li>The per-base quality score looks better (not red anymore), but the per-base sequence content, even if slightly better, is still red.</li>
+              </ol>
+            </blockquote>
           </li>
         </ol>
       </blockquote>

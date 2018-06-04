@@ -374,13 +374,13 @@ Input control experiments are used to identify and remove sampling bias, for exa
           <li>
             <p>What is the main difference between a FASTQ and a FASTA file?</p>
 
-            <details>
-<summary>Click to view answers</summary>
-<ol type="1">
-<li>Sequence identifier and additonal information, the raw sequence, information about the sequence again with optional information, and quality information about the sequence</li>
-<li>A fasta file contains only the description of the sequence and the sequence itself. A fasta file does not contain any quality information.</li>
-</ol>
-</details>
+            <blockquote class="solution">
+              <h3 id="-solution"><i class="fa fa-eye" aria-hidden="true"></i> Solution</h3>
+              <ol>
+                <li>Sequence identifier and additonal information, the raw sequence, information about the sequence again with optional information, and quality information about the sequence</li>
+                <li>A fasta file contains only the description of the sequence and the sequence itself. A fasta file does not contain any quality information.</li>
+              </ol>
+            </blockquote>
           </li>
         </ol>
       </blockquote>
@@ -405,13 +405,13 @@ To do this, first select the “Multiple datasets” icon (two stacked pages) un
           <li>
             <p>Why is the quality score decreasing across the length of the reads?</p>
 
-            <details>
-<summary>Click to view answers</summary>
-<ol type="1">
-<li>The phred-score. This score gives the probability of an incorrect base e.g. a score of 20 means that it is likely by 1% that one base is incorrect. See <a href="https://en.wikipedia.org/wiki/Phred_quality_score"> here </a>for more information. </li>
-<li>This is an unsolved technical issue of the sequencing machines. The longer the sequences are the more likely are errors. More <a href="https://www.ecseq.com/support/ngs/why-does-the-sequence-quality-decrease-over-the-read-in-illumina">information.</a></li>
-</ol>
-</details>
+            <blockquote class="solution">
+              <h3 id="-solution-1"><i class="fa fa-eye" aria-hidden="true"></i> Solution</h3>
+              <ol>
+                <li>The phred-score. This score gives the probability of an incorrect base e.g. a score of 20 means that it is likely by 1% that one base is incorrect. See <a href="https://en.wikipedia.org/wiki/Phred_quality_score">here</a> for more information.</li>
+                <li>This is an unsolved technical issue of the sequencing machines. The longer the sequences are the more likely are errors. More <a href="https://www.ecseq.com/support/ngs/why-does-the-sequence-quality-decrease-over-the-read-in-illumina">information.</a></li>
+              </ol>
+            </blockquote>
           </li>
         </ol>
       </blockquote>
@@ -455,13 +455,13 @@ To do this, first select the “Multiple datasets” icon (two stacked pages) un
           <li>
             <p>What do you think could account for the enriched k-mers (<strong>Kmer Content</strong> heading in <strong>FASTQC</strong> output) observed in the Megakaryocytes TAL1 R2 ChIP-seq experiment?</p>
 
-            <details>
-<summary>Click to view answers</summary>
-<ol type="1">
-<li>Before trimming, all the reads were the same length, which reflected the number of rounds of nucleotide incorporation in the sequencing experiment. After trimming, read lengths span a range of values reflecting different lengths of the actual DNA fragments captured during the ChIP experiement.</li>
-<li>Many transcription factors recognize and bind to specific sequence motifs. Since a ChIP-seq experiment enriches for DNA fragments bound by the protein being immunopurified, we might expect that protein's recognition motif to be slightly enriched in the resulting sequenced reads.</li>
-</ol>
-</details>
+            <blockquote class="solution">
+              <h3 id="-solution-2"><i class="fa fa-eye" aria-hidden="true"></i> Solution</h3>
+              <ol>
+                <li>Before trimming, all the reads were the same length, which reflected the number of rounds of nucleotide incorporation in the sequencing experiment. After trimming, read lengths span a range of values reflecting different lengths of the actual DNA fragments captured during the ChIP experiement.</li>
+                <li>Many transcription factors recognize and bind to specific sequence motifs. Since a ChIP-seq experiment enriches for DNA fragments bound by the protein being immunopurified, we might expect that protein’s recognition motif to be slightly enriched in the resulting sequenced reads.</li>
+              </ol>
+            </blockquote>
           </li>
         </ol>
       </blockquote>
@@ -502,13 +502,13 @@ Nowadays, there are many read alignment programs for sequenced DNA, <code class=
           <li>
             <p>How many reads were mapped from each file?</p>
 
-            <details>
-<summary>Click to view answers</summary>
-<ol type="1">
-<li> The output is a BAM file.</li>
-<li>Check the number of lines for each file in your history. This gives you a rough estimate.</li>
-</ol>
-</details>
+            <blockquote class="solution">
+              <h3 id="-solution-3"><i class="fa fa-eye" aria-hidden="true"></i> Solution</h3>
+              <ol>
+                <li>The output is a BAM file.</li>
+                <li>Check the number of lines for each file in your history. This gives you a rough estimate.</li>
+              </ol>
+            </blockquote>
           </li>
         </ol>
       </blockquote>
@@ -525,21 +525,41 @@ Nowadays, there are many read alignment programs for sequenced DNA, <code class=
           <li>
             <p>If the mouse genome has 21 pairs of chromosomes, what are the other reference chromosomes (<em>e.g.</em> chr1_GL456210_random)?</p>
 
-            <details>
-<summary>Click to view answers</summary>
-<ol type="1">
-<li>
-  Column &emsp; Description&lt;/br&gt;
-  ------------ &emsp;------------------&lt;/br&gt;
-     1 &emsp; &emsp; &emsp;     Reference sequence identifier&lt;/br&gt;
-     2 &emsp; &emsp; &emsp;     Reference sequence length&lt;/br&gt;
-     3 &emsp; &emsp; &emsp;     Number of mapped reads&lt;/br&gt;
-     4 &emsp; &emsp; &emsp;     Number of placed but unmapped reads  (typically unmapped partners of mapped reads)</li>
-<li>This information can be seen in column 3, e.g. for Megakaryocyte_Tal1_R1 2143352 reads are mapped.</li>
-<li>These are parts of chromosomes that e.g. for chr1_GL456210_random do belong to chr1 but it is unclear where exactly. There entires like chrUn that are not associated with a chromosome but it is believed that they are part of the genome. </li>
-
-</ol>
-</details>
+            <blockquote class="solution">
+              <h3 id="-solution-4"><i class="fa fa-eye" aria-hidden="true"></i> Solution</h3>
+              <ol>
+                <li>
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Column</th>
+                        <th>Description</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>1</td>
+                        <td>Reference sequence identifier</td>
+                      </tr>
+                      <tr>
+                        <td>2</td>
+                        <td>Reference sequence length</td>
+                      </tr>
+                      <tr>
+                        <td>3</td>
+                        <td>Number of mapped reads</td>
+                      </tr>
+                      <tr>
+                        <td>4</td>
+                        <td>Number of placed but unmapped reads (typically unmapped partners of mapped reads)</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </li>
+                <li>This information can be seen in column 3, e.g. for Megakaryocyte_Tal1_R1 2143352 reads are mapped.</li>
+                <li>These are parts of chromosomes that e.g. for chr1_GL456210_random do belong to chr1 but it is unclear where exactly. There entires like chrUn that are not associated with a chromosome but it is believed that they are part of the genome.</li>
+              </ol>
+            </blockquote>
           </li>
         </ol>
       </blockquote>
@@ -595,14 +615,14 @@ Nowadays, there are many read alignment programs for sequenced DNA, <code class=
           <li>
             <p>What does the output of making a Scatterplot instead of a Heatmap look like?</p>
 
-            <details>
-<summary>Click to view answers</summary>
-<ol type="1">
-<li>Large areas of zeros would lead to a correlation of these areas. The information we would get out of this computation would be meaningless. </li>
-<li>The clusters are different, e.g. Megakaryocyte_input_R2 and G1E_input_R2 are clustered together. <a href="http://support.minitab.com/en-us/minitab-express/1/help-and-how-to/modeling-statistics/regression/supporting-topics/basics/a-comparison-of-the-pearson-and-spearman-correlation-methods/"> More information about Pearson and Spearman correlation. </a> </li>
-<li>No solution for you, just compare the different outputs. </li>
-</ol>
-</details>
+            <blockquote class="solution">
+              <h3 id="-solution-5"><i class="fa fa-eye" aria-hidden="true"></i> Solution</h3>
+              <ol>
+                <li>Large areas of zeros would lead to a correlation of these areas. The information we would get out of this computation would be meaningless.</li>
+                <li>The clusters are different, e.g. Megakaryocyte_input_R2 and G1E_input_R2 are clustered together. <a href="http://support.minitab.com/en-us/minitab-express/1/help-and-how-to/modeling-statistics/regression/supporting-topics/basics/a-comparison-of-the-pearson-and-spearman-correlation-methods/"> More information about Pearson and Spearman correlation. </a></li>
+                <li>No solution for you, just compare the different outputs.</li>
+              </ol>
+            </blockquote>
           </li>
         </ol>
       </blockquote>
@@ -650,15 +670,15 @@ Nowadays, there are many read alignment programs for sequenced DNA, <code class=
           <li>
             <p>How does the quality of the IP for megakaryocytes compare to G1E cells?</p>
 
-            <details>
-<summary>Click to view answers</summary>
-<ol type="1">
-<li>It shows us how good the ChIP Signal compared to the control signal is. An ideal control [input] with perfect uniform distribution of reads along the genome (i.e. without enrichments in open chromatin etc.) and infinite sequencing coverage should generate a straight diagonal line. A very specific and strong ChIP enrichment will be indicated by a prominent and steep rise of the cumulative sum towards the highest rank. </li>
-<li>We expect that the control (input) signal is more or less uniform distributed over the genome (e.g. like the green line in the image above.) The IP dataset should look more like the red line but it would be better if the values for IP start to increase at around 0.8 on the x-axis. </li>
-<li>The enrichment did not work as it should. Compare the blue line with the red one! For your future experiments: You can never have enough replicates! </li>
-<li>The quality of megakaryocytes is better then G1E.</li>
-</ol>
-</details>
+            <blockquote class="solution">
+              <h3 id="-solution-6"><i class="fa fa-eye" aria-hidden="true"></i> Solution</h3>
+              <ol>
+                <li>It shows us how good the ChIP Signal compared to the control signal is. An ideal control [input] with perfect uniform distribution of reads along the genome (i.e. without enrichments in open chromatin etc.) and infinite sequencing coverage should generate a straight diagonal line. A very specific and strong ChIP enrichment will be indicated by a prominent and steep rise of the cumulative sum towards the highest rank.</li>
+                <li>We expect that the control (input) signal is more or less uniform distributed over the genome (e.g. like the green line in the image above.) The IP dataset should look more like the red line but it would be better if the values for IP start to increase at around 0.8 on the x-axis.</li>
+                <li>The enrichment did not work as it should. Compare the blue line with the red one! For your future experiments: You can never have enough replicates!</li>
+                <li>The quality of megakaryocytes is better then G1E.</li>
+              </ol>
+            </blockquote>
           </li>
         </ol>
       </blockquote>
@@ -749,13 +769,12 @@ Nowadays, there are many read alignment programs for sequenced DNA, <code class=
           <li>
             <p>What gene(s) other than Runx1 could be regulated by TAL1?</p>
 
-            <details>
-<summary>Click to view answers</summary>
-<ol type="1">
-<li>Directly upstream of the shorter Runx1 gene models is a cluster of 3 TAL1 peaks that only appear in the G1E cell type, but not in Megakaryocytes. Further upstream, there are some shared TAL1 peaks in both cell types.</li>
-<li></li>
-</ol>
-</details>
+            <blockquote class="solution">
+              <h3 id="-solution-7"><i class="fa fa-eye" aria-hidden="true"></i> Solution</h3>
+              <ol>
+                <li>Directly upstream of the shorter Runx1 gene models is a cluster of 3 TAL1 peaks that only appear in the G1E cell type, but not in Megakaryocytes. Further upstream, there are some shared TAL1 peaks in both cell types.</li>
+              </ol>
+            </blockquote>
           </li>
         </ol>
       </blockquote>
@@ -821,14 +840,14 @@ Nowadays, there are many read alignment programs for sequenced DNA, <code class=
           <li>
             <p>How many are unique to megakaryocytes?</p>
 
-            <details>
-<summary>Click to view answers</summary>
-<ol type="1">
-<li>1 region</li>
-<li>407 regions</li>
-<li>139 regions</li>
-</ol>
-</details>
+            <blockquote class="solution">
+              <h3 id="-solution-8"><i class="fa fa-eye" aria-hidden="true"></i> Solution</h3>
+              <ol>
+                <li>1 region</li>
+                <li>407 regions</li>
+                <li>139 regions</li>
+              </ol>
+            </blockquote>
           </li>
         </ol>
       </blockquote>
@@ -940,13 +959,13 @@ Nowadays, there are many read alignment programs for sequenced DNA, <code class=
           <li>
             <p>Does this dataset have a GC bias?</p>
 
-            <details>
-<summary>Click to view answers</summary>
-<ol type="1">
-<li>In an input ChIP-seq file, the expectation is that DNA fragments are uniformly sampled from the genome. This is in contrast to an IP ChIP-seq file where it is *expected* that certain genomic regions contain more reads  (i.e. regions that are bound by the protein that is immunopurified). Therefore, non-uniformity of reads in the input sample could be a result of GC-bias, whereby more GC-rich fragments are preferentially amplified during PCR.</li>
-<li>To answer this question, run the **computeGCbias** tool as described above and check out the results. What do YOU think? For more examples and information on how to interpret the results, check out the tool usage documentation [here](https://deeptools.readthedocs.io/en/latest/content/tools/computeGCBias.html#background).</li>
-</ol>
-</details>
+            <blockquote class="solution">
+              <h3 id="-solution-9"><i class="fa fa-eye" aria-hidden="true"></i> Solution</h3>
+              <ol>
+                <li>In an input ChIP-seq file, the expectation is that DNA fragments are uniformly sampled from the genome. This is in contrast to an IP ChIP-seq file where it is <em>expected</em> that certain genomic regions contain more reads  (i.e. regions that are bound by the protein that is immunopurified). Therefore, non-uniformity of reads in the input sample could be a result of GC-bias, whereby more GC-rich fragments are preferentially amplified during PCR.</li>
+                <li>To answer this question, run the <strong>computeGCbias</strong> tool as described above and check out the results. What do YOU think? For more examples and information on how to interpret the results, check out the tool usage documentation <a href="https://deeptools.readthedocs.io/en/latest/content/tools/computeGCBias.html#background">here</a>.</li>
+              </ol>
+            </blockquote>
           </li>
         </ol>
       </blockquote>
@@ -963,14 +982,14 @@ Nowadays, there are many read alignment programs for sequenced DNA, <code class=
           <li>
             <p>What are some caveats to be aware of if using the output of this tool in downstream analyses?</p>
 
-            <details>
-<summary>Click to view answers</summary>
-<ol type="1">
-<li>The **corectGCbias** tool removes reads from regions with higher coverage than expected (typically corresponding to GC-rich regions) and adds reads to regions with lower coverage than expected (typically corresponding to AT-rich regions).</li>
-<li>The output of this tool is a GC-corrected file in BAM, bigWig, or bedGraph format.</li>
-<li>The GC-corrected output file likely contains duplicated reads in low-coverage regions where reads were added to match the expected read density. Therefore, it is necessary to *avoid* filtering or removing duplicate reads in any downstream analyses.</li>
-</ol>
-</details>
+            <blockquote class="solution">
+              <h3 id="-solution-10"><i class="fa fa-eye" aria-hidden="true"></i> Solution</h3>
+              <ol>
+                <li>The <strong>corectGCbias</strong> tool removes reads from regions with higher coverage than expected (typically corresponding to GC-rich regions) and adds reads to regions with lower coverage than expected (typically corresponding to AT-rich regions).</li>
+                <li>The output of this tool is a GC-corrected file in BAM, bigWig, or bedGraph format.</li>
+                <li>The GC-corrected output file likely contains duplicated reads in low-coverage regions where reads were added to match the expected read density. Therefore, it is necessary to <em>avoid</em> filtering or removing duplicate reads in any downstream analyses.</li>
+              </ol>
+            </blockquote>
           </li>
         </ol>
       </blockquote>

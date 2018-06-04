@@ -397,7 +397,7 @@ in this document differ slightly from the description on their website -->
     </li>
     <li><strong>Import Sample Data.</strong> The data for this course may be available from a shared library in Galaxy
 (ask your instructor). If this is not the case, you can upload it yourself.
-      <ul>
+      <ul class="solution">
         <li>Option 1: From data library:
           <ul>
             <li>Navigate to the shared data library, you should find 20 pairs of fastq files; 19 from the mice,
@@ -407,14 +407,10 @@ and one pair from the mock community.</li>
         <li>Option 2: From your Zenodo:
           <ul>
             <li>Data is available from Zenodo here: <a href="https://doi.org/10.5281/zenodo.800651"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.800651.svg" alt="DOI" /></a></li>
-            <li>In the file upload menu choose the <code class="highlighter-rouge">Paste/Fetch data</code> option and enter the following urls to import the file from Zenodo to Galaxy directly</li>
-          </ul>
-        </li>
-      </ul>
-      <details>
-<summary> Click to view Zenodo URLs</summary>
-<pre>
-https://zenodo.org/record/800651/files/F3D0_R1.fastq
+            <li>In the file upload menu choose the <code class="highlighter-rouge">Paste/Fetch data</code> option and enter the following urls to import the file from Zenodo to Galaxy directly
+              <blockquote>
+                <h3 id="-solution"><i class="fa fa-eye" aria-hidden="true"></i> Solution</h3>
+                <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/800651/files/F3D0_R1.fastq
 https://zenodo.org/record/800651/files/F3D0_R2.fastq
 https://zenodo.org/record/800651/files/F3D141_R1.fastq
 https://zenodo.org/record/800651/files/F3D141_R2.fastq
@@ -454,8 +450,12 @@ https://zenodo.org/record/800651/files/F3D9_R1.fastq
 https://zenodo.org/record/800651/files/F3D9_R2.fastq
 https://zenodo.org/record/800651/files/Mock_R1.fastq
 https://zenodo.org/record/800651/files/Mock_R2.fastq
-</pre>
-</details>
+</code></pre></div>                </div>
+              </blockquote>
+            </li>
+          </ul>
+        </li>
+      </ul>
       <p><br /></p>
     </li>
     <li><strong>Import Reference Data.</strong>  Go back to the data library and import the following reference
@@ -469,17 +469,16 @@ datasets, or import them from Zenodo:
         <li><code class="highlighter-rouge">trainset9_032012.pds.tax</code></li>
       </ul>
 
-      <details>
-<summary>Click to view Zenodo URLs</summary>
-<pre>
-https://zenodo.org/record/800651/files/HMP_MOCK.v35.fasta
+      <blockquote class="solution">
+        <h3 id="-solution-1"><i class="fa fa-eye" aria-hidden="true"></i> Solution</h3>
+        <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/800651/files/HMP_MOCK.v35.fasta
 https://zenodo.org/record/800651/files/mouse.dpw.metadata
 https://zenodo.org/record/800651/files/mouse.time.design
 https://zenodo.org/record/800651/files/silva.v4.fasta
 https://zenodo.org/record/800651/files/trainset9_032012.pds.fasta
 https://zenodo.org/record/800651/files/trainset9_032012.pds.tax
-</pre>
-</details>
+</code></pre></div>        </div>
+      </blockquote>
     </li>
   </ol>
 </blockquote>
@@ -646,13 +645,14 @@ step when we run <code class="highlighter-rouge">screen.seqs</code>.</p>
 
     <p>How many reads were removed in this screening step? (Hint: run the summary.seqs tool again)</p>
 
-    <details>
-   <summary>Click to view answer</summary>
-   23,488. <br />
-   This can be determined by looking at the number of lines in bad.accnos output of screen.seqs
-   or by comparing the total number of seqs between of the summary log before and after this screening
-   step
-   </details>
+    <blockquote class="solution">
+      <h3 id="-solution-2"><i class="fa fa-eye" aria-hidden="true"></i> Solution</h3>
+      <p>23,488.</p>
+
+      <p>This can be determined by looking at the number of lines in bad.accnos output of screen.seqs
+or by comparing the total number of seqs between of the summary log before and after this screening
+step</p>
+    </blockquote>
   </blockquote>
 </blockquote>
 
@@ -680,12 +680,13 @@ times, we’ll unique our sequences using the <code class="highlighter-rouge">un
 
     <p>How many sequences were unique? how many duplicates were removed?</p>
 
-    <details>
-   <summary>Click to view answer</summary>
-   16,426 unique sequences and 112,446 duplicates. <br />
-   This can be determined from the number of lines in the fasta (or names) output, compared to the
-   number of lines in the fasta file before this step.
-   </details>
+    <blockquote>
+      <h3 id="-solution-3"><i class="fa fa-eye" aria-hidden="true"></i> Solution</h3>
+      <p>16,426 unique sequences and 112,446 duplicates.</p>
+
+      <p>This can be determined from the number of lines in the fasta (or names) output, compared to the
+number of lines in the fasta file before this step.</p>
+    </blockquote>
   </blockquote>
 </blockquote>
 
@@ -808,10 +809,10 @@ base in a row (this also could have been done in the first execution of <code cl
     <h3 id="-question-2"><i class="fa fa-question-circle" aria-hidden="true"></i> Question</h3>
 
     <p>How many sequences were removed in this step?</p>
-    <details>
-  <summary> Click to view answer</summary>
-  128 sequences were removed. This is the number of lines in the bad.accnos output.
-</details>
+    <blockquote class="solution">
+      <h3 id="-solution-4"><i class="fa fa-eye" aria-hidden="true"></i> Solution</h3>
+      <p>128 sequences were removed. This is the number of lines in the bad.accnos output.</p>
+    </blockquote>
   </blockquote>
 </blockquote>
 
@@ -865,10 +866,13 @@ columns. Because we’ve perhaps created some redundancy across our sequences by
     <h3 id="-question-3"><i class="fa fa-question-circle" aria-hidden="true"></i> Question</h3>
 
     <p>How many duplicate sequences did our filter step produce?</p>
-    <details>
-  <summary> Click to view answer</summary>
-  3. The number of unique sequences was reduced from 16298 to 16295
-</details>
+
+    <blockquote class="solution">
+      <h3 id="-solution-5"><i class="fa fa-eye" aria-hidden="true"></i> Solution</h3>
+      <ol>
+        <li>The number of unique sequences was reduced from 16298 to 16295</li>
+      </ol>
+    </blockquote>
   </blockquote>
 </blockquote>
 
@@ -896,10 +900,12 @@ merged. We generally recommend allowing 1 difference for every 100 basepairs of 
     <h3 id="-question-4"><i class="fa fa-question-circle" aria-hidden="true"></i> Question</h3>
 
     <p>How many unique sequences are we left with after this clustering of highly similar sequences?</p>
-    <details>
-  <summary> Click to view answer</summary>
-  5720. This is the number of lines in the fasta output
-</details>
+    <blockquote class="solution">
+      <h3 id="-solution-6"><i class="fa fa-eye" aria-hidden="true"></i> Solution</h3>
+      <ol>
+        <li>This is the number of lines in the fasta output</li>
+      </ol>
+    </blockquote>
   </blockquote>
 </blockquote>
 
@@ -952,12 +958,12 @@ still need to remove those sequences from the fasta file as well. We do this usi
     <h3 id="-question-5"><i class="fa fa-question-circle" aria-hidden="true"></i> Question</h3>
 
     <p>How many sequences were flagged as chimeric? what is the percentage? (Hint: summary.seqs)</p>
-    <details>
-  <summary> Click to view answer</summary>
-  If we run summary.seqs on the resulting fasta file and count table, we see that we went from 128,655
-  sequences down to 118,091 sequences in this step, for a reduction of 8.2%. This is a reasonable number of
-  sequences to be flagged as chimeric.
-</details>
+    <blockquote class="solution">
+      <h3 id="-solution-7"><i class="fa fa-eye" aria-hidden="true"></i> Solution</h3>
+      <p>If we run summary.seqs on the resulting fasta file and count table, we see that we went from 128,655
+sequences down to 118,091 sequences in this step, for a reduction of 8.2%. This is a reasonable number of
+sequences to be flagged as chimeric.</p>
+    </blockquote>
   </blockquote>
 </blockquote>
 
@@ -1013,17 +1019,19 @@ select taxons for filtering</em></li>
       <li>
         <p>How many sequences in total?</p>
 
-        <details>
-  <summary> Click to view answer</summary><br />
-  20 representative sequences were removed. <br />
-  The fasta file output from Remove.seqs had 2281 sequences while the fasta output from Remove.lineages
-  contained 2261 sequences.
-  <br /><br />
-  162 total sequences were removed. <br />
-  If you run summary.seqs with the count table, you will see that we now have 2261 unique sequences
-  representing a total of 117,929 total sequences (down from 118,091 before). This means 162 of our
-  sequences were in represented by these 20 representative sequences.
-</details>
+        <blockquote class="solution">
+          <h3 id="-solution-8"><i class="fa fa-eye" aria-hidden="true"></i> Solution</h3>
+          <p>20 representative sequences were removed.</p>
+
+          <p>The fasta file output from Remove.seqs had 2281 sequences while the fasta output from Remove.lineages
+contained 2261 sequences.</p>
+
+          <p>162 total sequences were removed.</p>
+
+          <p>If you run summary.seqs with the count table, you will see that we now have 2261 unique sequences
+representing a total of 117,929 total sequences (down from 118,091 before). This means 162 of our
+sequences were in represented by these 20 representative sequences.</p>
+        </blockquote>
       </li>
     </ol>
   </blockquote>
@@ -1178,11 +1186,11 @@ separation.</p>
     <h3 id="-question-6"><i class="fa fa-question-circle" aria-hidden="true"></i> Question</h3>
 
     <p>How many OTUs were identified in our mock community?</p>
-    <details>
-  <summary> Click to view answer</summary>
-  34. <br />
-  Open the shared file or OTU list and look at the header line. You will see a column for each OTU
- </details>
+    <blockquote class="solution">
+      <h3 id="-solution-9"><i class="fa fa-eye" aria-hidden="true"></i> Solution</h3>
+      <p>34.
+Open the shared file or OTU list and look at the header line. You will see a column for each OTU</p>
+    </blockquote>
   </blockquote>
 </blockquote>
 
@@ -1318,15 +1326,17 @@ sequences (100%) were classified as being members of the Alistipes.</p>
 
   <p>Which samples contained sequences belonging to an OTU classified as Staphylococcus?</p>
 
-  <details><summary>Hint</summary>
-Examine the tax.summary file.
- </details>
+  <blockquote class="solution">
+    <h3 id="-solution-10"><i class="fa fa-eye" aria-hidden="true"></i> Solution</h3>
+    <p>Examine the tax.summary file.</p>
+  </blockquote>
 
-  <details><summary>Answer</summary>
-Samples F3D141, F3D142,  F3D144, F3D145, F3D2. This answer can be found by
+  <blockquote class="solution">
+    <h3 id="-solution-11"><i class="fa fa-eye" aria-hidden="true"></i> Solution</h3>
+    <p>Samples F3D141, F3D142,  F3D144, F3D145, F3D2. This answer can be found by
 examining the tax.summary output and finding the columns with nonzero
-values for the line of Staphylococcus
-</details>
+values for the line of Staphylococcus</p>
+  </blockquote>
 </blockquote>
 
 <p>In this tutorial we will continue with this otu-based approach, for the phylotype and phylogenic
@@ -1374,11 +1384,11 @@ number. Despite what some say, subsampling and rarefying your data is an importa
     <h3 id="-question-8"><i class="fa fa-question-circle" aria-hidden="true"></i> Question</h3>
 
     <p>What would you exect the result of <code class="highlighter-rouge">count.groups</code> on this new shared output collection to be? Check if you are correct.</p>
-    <details>
-  <summary> Click to view answer</summary>
-  all groups (samples) should now have 2440 sequences. Run count.groups again on the shared output collection by the sub.sample
-  tool to confirm that this is indeed what happened.
- </details>
+    <blockquote class="solution">
+      <h3 id="-solution-12"><i class="fa fa-eye" aria-hidden="true"></i> Solution</h3>
+      <p>all groups (samples) should now have 2440 sequences. Run count.groups again on the shared output collection by the sub.sample
+tool to confirm that this is indeed what happened.</p>
+    </blockquote>
   </blockquote>
 
   <p><strong>Note:</strong> since subsampling is a stochastic process, your results from any tools using this subsampled data
@@ -1715,14 +1725,14 @@ innermost ring labeled “Bacteria”</p>
 
   <p>What percentage of your sample was labelled <code class="highlighter-rouge">Lactobacillus</code>?</p>
 
-  <details>
-  <summary> Click to view answer</summary>
-  Explore the Krona plot, double click on Firmicutes, here you should see Lactobacillus
-  clearly (16% in our case), click on this segment and the right-hand side will show you the percentages at
-  any point in the hierarchy (here 5% of all)
+  <blockquote class="solution">
+    <h3 id="-solution-13"><i class="fa fa-eye" aria-hidden="true"></i> Solution</h3>
+    <p>Explore the Krona plot, double click on Firmicutes, here you should see Lactobacillus
+clearly (16% in our case), click on this segment and the right-hand side will show you the percentages at
+any point in the hierarchy (here 5% of all)</p>
 
- <img src="../../images/krona_lacto.png" alt="image showing view with Lactobacillus highlighted" />
-</details>
+    <p><img src="../../images/krona_lacto.png" alt="image showing view with Lactobacillus highlighted" /></p>
+  </blockquote>
 </blockquote>
 
 <p>Well done! you have completed the basics of the mothur SOP. Below are some more exercises for those who wish to
@@ -1891,10 +1901,10 @@ actually pretty good. You can test what happens with three dimensions in the fol
 
     <p>What are stress and R-squared values when using 3 dimensions?</p>
 
-    <details>
-  <summary> Click to view answer</summary>
-  The stress value drops to 0.05 and the R2 value goes up to 0.99 (see logfile). Not bad.
-</details>
+    <blockquote class="solution">
+      <h3 id="-solution-14"><i class="fa fa-eye" aria-hidden="true"></i> Solution</h3>
+      <p>The stress value drops to 0.05 and the R2 value goes up to 0.99 (see logfile). Not bad.</p>
+    </blockquote>
   </blockquote>
 </blockquote>
 
@@ -2108,14 +2118,14 @@ the names of these organisms.</p>
 
   <p>What organisms were the top 5 contributing OTUs classified as?</p>
 
-  <details>
-  <summary> Click to view answer</summary>
-  Note down the names of the top 5 OTUs as output by thesummary output of get.communitytype.
-  Then look at the taxonomy file output by Classify.otu. <br /><br />
+  <blockquote class="solution">
+    <h3 id="-solution-15"><i class="fa fa-eye" aria-hidden="true"></i> Solution</h3>
+    <p>Note down the names of the top 5 OTUs as output by thesummary output of get.communitytype.
+Then look at the taxonomy file output by Classify.otu.</p>
 
-  In our example these top 5 OTUs were classified
-  as belonging to Porphyromonadaceae (top 3 OTUs), Alistipes and Lactobacillus.
-</details>
+    <p>In our example these top 5 OTUs were classified
+as belonging to Porphyromonadaceae (top 3 OTUs), Alistipes and Lactobacillus.</p>
+  </blockquote>
 </blockquote>
 
 <h2 id="population-level-analysis">Population-level Analysis</h2>
@@ -2154,13 +2164,13 @@ Otu0005    0.068139      0.000087          0.002957        0.070058      0.00016
 
   <p>Which of the top 10 OTUs in your output were significantly different between early and late samples?</p>
 
-  <details>
- <summary> Click to view answer</summary>
- Looking at the p-value cut-off and using your favorite cutoff threshold (say 0.01).
- Answer to the question is all OTUs with a value lower than this threshold. Note that these OTU labels may
- be different for you and may very between one repetition of this tutorial to the next, and therefore may
- vary between you and your neighbour as well.
-</details>
+  <blockquote class="solution">
+    <h3 id="-solution-16"><i class="fa fa-eye" aria-hidden="true"></i> Solution</h3>
+    <p>Looking at the p-value cut-off and using your favorite cutoff threshold (say 0.01).
+Answer to the question is all OTUs with a value lower than this threshold. Note that these OTU labels may
+be different for you and may very between one repetition of this tutorial to the next, and therefore may
+vary between you and your neighbour as well.</p>
+  </blockquote>
 </blockquote>
 
 <p>Another non-parametric tool we can use as an alternative to metastats is lefse:</p>

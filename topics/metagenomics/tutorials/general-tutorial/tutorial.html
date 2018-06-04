@@ -500,12 +500,14 @@ times, we’ll unique our sequences using the <code class="highlighter-rouge">Un
 
         <p>How many sequences were unique? How many duplicates were removed?</p>
 
-        <details>
-   <summary>Click to view answer</summary>
-   19,502 unique sequences and 498 duplicates. <br>
-   This can be determined from the number of lines in the fasta (or names) output, compared to the
-   number of lines in the fasta file before this step.
-   </details>
+        <blockquote class="solution">
+          <h3 id="-solution">
+<i class="fa fa-eye" aria-hidden="true"></i> Solution</h3>
+          <p>19,502 unique sequences and 498 duplicates.</p>
+
+          <p>This can be determined from the number of lines in the fasta (or names) output, compared to the
+number of lines in the fasta file before this step.</p>
+        </blockquote>
       </blockquote>
     </li>
   </ol>
@@ -633,11 +635,13 @@ Furthermore, at least one read had a homopolymer stretch of 31 bases, this is li
 
   <p>How many reads were removed in this screening step? (Hint: run the <code class="highlighter-rouge">Summary.seqs</code> tool again)</p>
 
-  <details>
-<summary>Click to view answer</summary>
-1,804. <br>
-This can be determined by looking at the number of lines in bad.accnos output of screen.seqs step or by comparing the total number of seqs between of the summary.seqs log before and after this screening step
-</details>
+  <blockquote class="solution">
+    <h3 id="-solution-1">
+<i class="fa fa-eye" aria-hidden="true"></i> Solution</h3>
+    <p>1,804.</p>
+
+    <p>This can be determined by looking at the number of lines in bad.accnos output of screen.seqs step or by comparing the total number of seqs between of the summary.seqs log before and after this screening step</p>
+  </blockquote>
 </blockquote>
 
 <h2 id="sequence-alignment">Sequence Alignment</h2>
@@ -707,14 +711,14 @@ total # of seqs:    18178
     <li>
       <p>Between which positions most of the reads are aligned to this references?</p>
 
-      <details>
-<summary>Click to view answers</summary>
-<ol type="1">
-<li>17,698 are aligned</li>
-<li>From this we can see that most of our reads align nicely to positions `3080-13424` on this reference.
-This corresponds exactly to the V4 target region of the 16S gene.</li>
-</ol>
-</details>
+      <blockquote class="solution">
+        <h3 id="-solution-2">
+<i class="fa fa-eye" aria-hidden="true"></i> Solution</h3>
+        <ol>
+          <li>17,698 are aligned</li>
+          <li>From this we can see that most of our reads align nicely to positions <code class="highlighter-rouge">3080-13424</code> on this reference. This corresponds exactly to the V4 target region of the 16S gene.</li>
+        </ol>
+      </blockquote>
     </li>
   </ol>
 </blockquote>
@@ -746,10 +750,11 @@ This corresponds exactly to the V4 target region of the 16S gene.</li>
   <h3 id="-question-2">
 <i class="fa fa-question-circle" aria-hidden="true"></i> Question</h3>
   <p>How many sequences were removed in this step?</p>
-  <details>
-<summary> Click to view answer</summary>
-4,579 sequences were removed. This is the number of lines in the bad.accnos output.
-</details>
+  <blockquote class="solution">
+    <h3 id="-solution-3">
+<i class="fa fa-eye" aria-hidden="true"></i> Solution</h3>
+    <p>4,579 sequences were removed. This is the number of lines in the bad.accnos output.</p>
+  </blockquote>
 </blockquote>
 
 <p>Now we know our sequences overlap the same alignment coordinates, we want to make sure they <em>only</em> overlap that region. So we’ll filter the sequences to remove the overhangs at both ends. In addition, there are many columns in the alignment that only contain gap characters (<em>i.e.</em> “.”). These can be pulled out without losing any information. We’ll do all this with <code class="highlighter-rouge">Filter.seqs</code>:</p>
@@ -811,11 +816,13 @@ This corresponds exactly to the V4 target region of the 16S gene.</li>
 <i class="fa fa-question-circle" aria-hidden="true"></i> Question</h3>
 
     <p>How many unique sequences are we left with after this clustering of highly similar sequences?</p>
-    <details>
-  <summary> Click to view answer</summary>
-  10,398 <br>
-  This is the number of lines in the fasta output
-</details>
+    <blockquote class="solution">
+      <h3 id="-solution-4">
+<i class="fa fa-eye" aria-hidden="true"></i> Solution</h3>
+      <p>10,398</p>
+
+      <p>This is the number of lines in the fasta output</p>
+    </blockquote>
   </blockquote>
 
 </blockquote>
@@ -962,13 +969,14 @@ SRR531818.61708-G88ZSJI01AVPPR-2    Bacteria(100);Acidobacteria(99);Acidobacteri
     <li>
       <p>What is the annotation of first OTU and its size?</p>
 
-      <details>
-<summary>Click to view answers</summary>
-<ol type="1">
-<li>2,195 for Anguil and 2,472 for Pampa ("tax.summary")</li>
-<li>Otu00001 is associated to 929 sequences and to Bacteria (kingdom), Verrucomicrobia (phylum), Spartobacteria (class) in "taxonomy" file</li>
-</ol>
-</details>
+      <blockquote class="solution">
+        <h3 id="-solution-5">
+<i class="fa fa-eye" aria-hidden="true"></i> Solution</h3>
+        <ol>
+          <li>2,195 for Anguil and 2,472 for Pampa (“tax.summary”)</li>
+          <li>Otu00001 is associated to 929 sequences and to Bacteria (kingdom), Verrucomicrobia (phylum), Spartobacteria (class) in “taxonomy” file</li>
+        </ol>
+      </blockquote>
     </li>
   </ol>
 </blockquote>
@@ -1035,14 +1043,15 @@ the two samples?</p>
   <h3 id="-question-4">
 <i class="fa fa-question-circle" aria-hidden="true"></i> Question</h3>
   <p>Which soil sample had a higher percentage of Acidobacteria, anguil or pampa? what were the respective percentages?</p>
-  <details>
-<summary> Click to view answer</summary>
-The anguil sample had a higher proportion of Acidobacteria. The exact percentages can be found by looking at the pie charts at the
-top right-hand corner after clicking on the label Acidobacteria. For anguil the percentage is 36%, for the pampa sample it is 26%.
+  <blockquote>
+    <h3 id="-solution-6">
+<i class="fa fa-eye" aria-hidden="true"></i> Solution</h3>
+    <p>The anguil sample had a higher proportion of Acidobacteria. The exact percentages can be found by looking at the pie charts at the
+top right-hand corner after clicking on the label Acidobacteria. For anguil the percentage is 36%, for the pampa sample it is 26%.</p>
 
-<img src="../../images/krona-multisample.png" alt="krona plot with acidobactaria highlighted">
+    <p><img src="../../images/krona-multisample.png" alt="krona plot with acidobactaria highlighted"></p>
+  </blockquote>
 
-</details>
 </blockquote>
 
 <p>To further explore the community structure, we can visualize it with dedicated tools such as Phinch.</p>
@@ -1179,14 +1188,15 @@ top right-hand corner after clicking on the label Acidobacteria. For anguil the 
     <li>
       <p>What is the most abundant family in our sample?</p>
 
-      <details>
-<summary>Click to view answers</summary>
-<ol type="1">
-<li>We have access to species level</li>
-<li>Pseudomonadales and Solirubrobacterales are found in our sample</li>
-<li>The most abundant family is Pseudomonadaceae with 86.21 % of the assigned sequences</li>
-</ol>
-</details>
+      <blockquote class="solution">
+        <h3 id="-solution-7">
+<i class="fa fa-eye" aria-hidden="true"></i> Solution</h3>
+        <ol>
+          <li>We have access to species level</li>
+          <li>Pseudomonadales and Solirubrobacterales are found in our sample</li>
+          <li>The most abundant family is Pseudomonadaceae with 86.21 % of the assigned sequences</li>
+        </ol>
+      </blockquote>
     </li>
   </ol>
 </blockquote>
@@ -1294,10 +1304,11 @@ https://zenodo.org/record/815875/files/humann2_pathways_coverage.tsv
 
   <p>How many gene families and pathways have been identified?</p>
 
-  <details>
-   <summary>Click to view answers</summary>
-   44 gene families but no pathways are identified
-   </details>
+  <blockquote class="solution">
+    <h3 id="-solution-8">
+<i class="fa fa-eye" aria-hidden="true"></i> Solution</h3>
+    <p>44 gene families but no pathways are identified</p>
+  </blockquote>
 </blockquote>
 
 <p>The RPK for the gene families are quite difficult to interpret in term of relative abundance. We decide then to normalize the values</p>
@@ -1329,13 +1340,14 @@ https://zenodo.org/record/815875/files/humann2_pathways_coverage.tsv
       <li>
         <p>What is the most abundant gene family?</p>
 
-        <details>
-<summary>Click to view answers</summary>
-<ol type="1">
-<li>55% of the sequences has not be assigned to a gene family</li>
-<li>The most abundant gene family with 25% of sequences is a putative secreted protein</li>
-</ol>
-</details>
+        <blockquote class="solution">
+          <h3 id="-solution-9">
+<i class="fa fa-eye" aria-hidden="true"></i> Solution</h3>
+          <ol>
+            <li>55% of the sequences has not be assigned to a gene family</li>
+            <li>The most abundant gene family with 25% of sequences is a putative secreted protein</li>
+          </ol>
+        </blockquote>
       </li>
     </ol>
   </blockquote>

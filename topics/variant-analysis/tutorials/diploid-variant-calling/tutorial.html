@@ -333,21 +333,26 @@ READ5:     atcatgacggcaGtagc
     <li>
       <p>Now, let’s ask an opposite question. Given a true polymorphism <strong>A</strong> what are the chances that we do detect it (i.e., find ourselves in <strong>AB</strong>)?</p>
 
-      <details>
-<summary>Click to view answer</summary>
-<ol type="1">
-<li>
-<p>P(A|B) = |AB|/|B|.</p>
-<p>Dividing by |U|: P(A|B) = (|AB|/|U|)/(|B|/|U|).</p>
-<p>Because we know that P(AB) = |AB|/|U| and P(B) = |B|/|U|, we can rewrite the equation in the previous bullet point as P(A|B) = P(AB)/P(B)</p>
-</li>
-<li>
-<p>It will be P(B|A) = P(AB)/P(A).</p>
-<p>So, because we know that P(A|B) = P(AB)/P(B) and we just reasoned that P(B|A) = P(AB)/P(A), we can say that P(A|B)P(B) = P(B|A)P(A) leading us to the Bayes formula P(A|B) = P(B|A)P(A)/P(B).</p>
-<p>Translating this into "genomics terms" the probability of having a genotype G given reads R is:  P(G|R) = P(R|G)P(G)/P(R). Because in a given calculation of P(G|R) reads are fixed we can re-write the Bayes formula in the following way P(G|R) ~ P(R|G)P(G) with P(R) becoming a constant.</p>
-</li>
-</ol>
-</details>
+      <blockquote class="solution">
+        <h3 id="-solution">
+<i class="fa fa-eye" aria-hidden="true"></i> Solution</h3>
+        <ol>
+          <li>
+            <script type="math/tex; mode=display">P(A|B) = \frac{\vert AB \vert}{|B|}</script>
+
+            <p>Dividing by <script type="math/tex">\vert U \vert</script>: <script type="math/tex">P(A \vert B) = \frac{\frac{\vert AB \vert}{\vert U \vert}}{\frac{\vert B \vert}{\vert U \vert}}</script></p>
+
+            <p>Because we know that <script type="math/tex">P(AB) = \frac{\vert AB \vert}{\vert U \vert}</script> and <script type="math/tex">P(B) = \frac{\vert B \vert}{\vert U \vert}</script>, we can rewrite the equation in the previous bullet point as <script type="math/tex">P(A \vert B) = \frac{P(AB)}{P(B)}</script></p>
+          </li>
+          <li>
+            <p>It will be <script type="math/tex">P(B \vert A) = \frac{P(AB)}{P(A)}</script>.</p>
+
+            <p>So, because we know that <script type="math/tex">P(A \vert B) = \frac{P(AB)}{P(B)}</script> and we just reasoned that <script type="math/tex">P(B \vert A) = \frac{P(AB)}{P(A)}</script>, we can say that <script type="math/tex">P(A \vert B)P(B) = P(B \vert A)P(A)</script> leading us to the Bayes formula <script type="math/tex">P(A \vert B) = \frac{P(B \vert A)P(A)}{P(B)}</script>.</p>
+
+            <p>Translating this into “genomics terms” the probability of having a genotype G given reads R is: <script type="math/tex">P(G \vert R) = \frac{P(R \vert G)P(G)}{P(R)}</script>. Because in a given calculation of <script type="math/tex">P(G \vert R)</script> reads are fixed we can re-write the Bayes formula in the following way <script type="math/tex">P(G \vert R) \sim P(R \vert G)P(G)</script> with <script type="math/tex">P(R)</script> becoming a constant.</p>
+          </li>
+        </ol>
+      </blockquote>
     </li>
   </ol>
 </blockquote>
@@ -356,35 +361,16 @@ READ5:     atcatgacggcaGtagc
 
 <ol>
   <li>
-    <table>
-      <tbody>
-        <tr>
-          <td>*P(R</td>
-          <td>G)*, the data likelihood;</td>
-        </tr>
-      </tbody>
-    </table>
-  </li>
+<script type="math/tex">P(R \vert G)</script>, the data likelihood;</li>
   <li>
-<em>P(G)</em>, the prior probability for the variant.</li>
+<script type="math/tex">P(G)</script>, the prior probability for the variant.</li>
 </ol>
 
 <p>In the simplest case we can estimate these as follows:</p>
 
 <h4 id="prg"><em>P(R|G)</em></h4>
 
-<table>
-  <tbody>
-    <tr>
-      <td>Suppose <em>R<sub>i</sub></em> is a base in read <em>i</em> corresponding to a genome position with genotype <em>G</em>. The probability of seeing <em>R<sub>i</sub></em> given <em>G</em>, *P(R<sub>i</sub>
-</td>
-      <td>G)<em>, is given by the quality score of *R<sub>i</sub></em> (the quality scores are given by base calling software and reported as <a href="https://en.wikipedia.org/wiki/Phred_quality_score">phred scores</a>). Thus the genotype likelihood *P(R</td>
-      <td>G)* is the product of *P(R<sub>i</sub>
-</td>
-      <td>G)* over all <em>i</em>. In reality however there are many other sources of uncertainty (in addition to base qualities) that are incorporated in the calculation of data likelihoods including NGS technology-related issues, dependency of error rates on substitution type (e.g., transitions versus transversions), sequencing context etc…</td>
-    </tr>
-  </tbody>
-</table>
+<p>Suppose <script type="math/tex">R_{i}</script> is a base in read <script type="math/tex">i</script> corresponding to a genome position with genotype <script type="math/tex">G</script>. The probability of seeing <script type="math/tex">R_{i}</script> given <script type="math/tex">G</script>, <script type="math/tex">P(R_{i} \vert G)</script>, is given by the quality score of <script type="math/tex">R_{i}</script> (the quality scores are given by base calling software and reported as <a href="https://en.wikipedia.org/wiki/Phred_quality_score">phred scores</a>). Thus the genotype likelihood <script type="math/tex">P(R \vert G)</script> is the product of <script type="math/tex">P(R_{i} \vert G)</script> over all <script type="math/tex">i</script>. In reality however there are many other sources of uncertainty (in addition to base qualities) that are incorporated in the calculation of data likelihoods including NGS technology-related issues, dependency of error rates on substitution type (e.g., transitions versus transversions), sequencing context etc…</p>
 
 <h4 id="pg---a-single-sample-case">
 <em>P(G)</em> - a single sample case</h4>
@@ -670,21 +656,26 @@ family1	   HG002_NA24385_son	HG003_NA24149_father HG004_NA24143_mother 1  2     
     <li>
       <p>List genotypes for father and son where they have non-reference alleles.</p>
 
-      <details>
-<summary>Click to view answers</summary>
-<ol type="1">
-<li>
-<p>To answer this question we will use two fields of GEMINI_query interface:</p>
-<p>Type `SELECT * from variants` into <b>The query to be issued to the database</b></p>
-<p>Type `gt_types.HG002_NA24385_son &lt;&gt; HOM_REF` into <b>Restrictions to apply to genotype values</b></p>Here is an <a href="../../images/gemini_query2.png">example</a>. It will generate <a href="https://usegalaxy.org/datasets/bbd44e69cb8906b560921700703d0255/display/?preview=True">this output</a>
-</li>.
-<li>Typing the same expression `SELECT * from variants` into <b>The query to be issued to the database</b> and `(gt_types.HG002_NA24385_son &lt;&gt; HOM_REF AND gt_types.HG003_NA24149_father &lt;&gt; HOM_REF)` into <b>Restrictions to apply to genotype values</b> will generate <a href="https://usegalaxy.org/datasets/bbd44e69cb8906b5aab445b3cd632ba7/display/?preview=True">this output</a>
-</li>.
-<li>Typing `SELECT gts.HG002_NA24385_son, gts.HG003_NA24149_father from variants` into <b>The query to be issued to the database</b> and `(gt_types.HG002_NA24385_son &lt;&gt; HOM_REF AND gt_types.HG003_NA24149_father &lt;&gt; HOM_REF)` into <b>Restrictions to apply to genotype values</b>
-will generate<a href="https://usegalaxy.org/datasets/bbd44e69cb8906b543c67f80be21ed02/display/?preview=True">this output</a>
-</li>.
-</ol>
-</details>
+      <blockquote class="solution">
+        <h3 id="-solution-1">
+<i class="fa fa-eye" aria-hidden="true"></i> Solution</h3>
+        <ol>
+          <li>
+            <p>To answer this question we will use two fields of GEMINI_query interface:</p>
+
+            <ul>
+              <li>Type <code class="highlighter-rouge">SELECT * from variants</code> into <strong>The query to be issued to the database</strong>
+</li>
+              <li>Type <code class="highlighter-rouge">gt_types.HG002_NA24385_son &lt;&gt; HOM_REF</code> into <strong>Restrictions to apply to genotype values</strong>
+</li>
+            </ul>
+
+            <p>Here is an <a href="../../images/gemini_query2.png">example</a>. It will generate <a href="https://usegalaxy.org/datasets/bbd44e69cb8906b560921700703d0255/display/?preview=True">this output</a></p>
+          </li>
+          <li>Typing the same expression <code class="highlighter-rouge">SELECT * from variants</code> into <strong>The query to be issued to the database</strong> and <code class="highlighter-rouge">(gt_types.HG002_NA24385_son &lt;&gt; HOM_REF AND gt_types.HG003_NA24149_father &lt;&gt; HOM_REF)</code> into <strong>Restrictions to apply to genotype values</strong> will generate <a href="https://usegalaxy.org/datasets/bbd44e69cb8906b5aab445b3cd632ba7/display/?preview=True">this output</a>.</li>
+          <li>Typing <code class="highlighter-rouge">SELECT gts.HG002_NA24385_son, gts.HG003_NA24149_father from variants</code> into <strong>The query to be issued to the database</strong> and <code class="highlighter-rouge">(gt_types.HG002_NA24385_son &lt;&gt; HOM_REF AND gt_types.HG003_NA24149_father &lt;&gt; HOM_REF)</code> into <strong>Restrictions to apply to genotype values</strong> will generate <a href="https://usegalaxy.org/datasets/bbd44e69cb8906b543c67f80be21ed02/display/?preview=True">this output</a>.</li>
+        </ol>
+      </blockquote>
     </li>
   </ol>
 </blockquote>
@@ -699,10 +690,13 @@ will generate<a href="https://usegalaxy.org/datasets/bbd44e69cb8906b543c67f80be2
 
   <p>At which variants are every sample heterozygous?</p>
 
-  <details>
-   <summary>Click to view answer</summary>
-   Type `SELECT chrom, start, end, ref, alt, gene, impact, (gts).(*) FROM variants` into <b>The query to be issued to the database</b> and `(gt_types).(*).(==HET).(all)` into <b>Restrictions to apply to genotype values</b>. Here we use wildcards for the query (`(gts.*)` = get genotypes for <b>all</b> samples) and genotype filtering (`(gt_types).(*).(==HET).(all)`, the <a href="https://gemini.readthedocs.org/en/latest/content/querying.html#the-all-operator">all operator</a> implies that want results for <b>all</b> afftected individuals). It will generate <a href="https://usegalaxy.org/datasets/bbd44e69cb8906b5819e1404b5e127d1/display/?preview=True">this output</a>.
-   </details>
+  <blockquote class="solution">
+    <h3 id="-solution-2">
+<i class="fa fa-eye" aria-hidden="true"></i> Solution</h3>
+
+    <p>Type <code class="highlighter-rouge">SELECT chrom, start, end, ref, alt, gene, impact, (gts).(*) FROM variants</code> into <strong>The query to be issued to the database</strong> and <code class="highlighter-rouge">(gt_types).(*).(==HET).(all)</code> into <strong>Restrictions to apply to genotype values</strong>. Here we use wildcards for the query (<code class="highlighter-rouge">(gts.*)</code> = get genotypes for <strong>all</strong> samples) and genotype filtering (<code class="highlighter-rouge">(gt_types).(*).(==HET).(all)</code>, the <a href="https://gemini.readthedocs.org/en/latest/content/querying.html#the-all-operator">all operator</a> implies that want results for <strong>all</strong> afftected individuals). It will generate <a href="https://usegalaxy.org/datasets/bbd44e69cb8906b5819e1404b5e127d1/display/?preview=True">this output</a>.</p>
+
+  </blockquote>
 </blockquote>
 
 <h1 class="no_toc" id="going-further">Going further</h1>
