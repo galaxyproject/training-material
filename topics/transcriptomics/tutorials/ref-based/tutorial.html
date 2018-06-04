@@ -369,10 +369,14 @@ If the datatype is <code class="highlighter-rouge">fastq</code>, please change t
 
         <p>What is the read length?</p>
 
-        <details>
-   <summary>Click to view answers</summary>
-   The read length is 37 bp
-   </details>
+        <blockquote class="solution">
+          <h3 id="-solution">
+<i class="fa fa-eye" aria-hidden="true"></i> Solution</h3>
+
+          <p>The read length is 37 bp</p>
+
+        </blockquote>
+
       </blockquote>
     </li>
     <li>
@@ -394,10 +398,14 @@ If the datatype is <code class="highlighter-rouge">fastq</code>, please change t
 
         <p>What is the quality for the sequences for the different files?</p>
 
-        <details>
-   <summary>Click to view answers</summary>
-   Everything seems ok for 3 of the files. But for GSM461180_2, the quality seems to decrease quite a lot at the end of the sequences
-   </details>
+        <blockquote class="solution">
+          <h3 id="-solution-1">
+<i class="fa fa-eye" aria-hidden="true"></i> Solution</h3>
+
+          <p>Everything seems ok for 3 of the files. But for GSM461180_2, the quality seems to decrease quite a lot at the end of the sequences</p>
+
+        </blockquote>
+
       </blockquote>
     </li>
     <li>
@@ -415,10 +423,14 @@ If the datatype is <code class="highlighter-rouge">fastq</code>, please change t
 
         <p>Why do we run Trim Galore! only once on a paired-end dataset and not twice, once for each dataset?</p>
 
-        <details>
-<summary>Click to view answers</summary>
-Trim Galore can remove sequences if they become too short during the trimming process. For paired-end files Trim Galore! removes entire sequence pairs if one (or both) of the two reads became shorter than the set length cutoff. Reads of a read-pair that are longer than a given threshold but for which the partner read has become too short can optionally be written out to single-end files. This ensures that the information of a read pair is not lost entirely if only one read is of good quality.
-</details>
+        <blockquote class="solution">
+          <h3 id="-solution-2">
+<i class="fa fa-eye" aria-hidden="true"></i> Solution</h3>
+
+          <p>Trim Galore can remove sequences if they become too short during the trimming process. For paired-end files Trim Galore! removes entire sequence pairs if one (or both) of the two reads became shorter than the set length cutoff. Reads of a read-pair that are longer than a given threshold but for which the partner read has become too short can optionally be written out to single-end files. This ensures that the information of a read pair is not lost entirely if only one read is of good quality.</p>
+
+        </blockquote>
+
       </blockquote>
     </li>
   </ol>
@@ -451,33 +463,35 @@ Trim Galore can remove sequences if they become too short during the trimming pr
 
 <figure id="figure-2"><img src="../../images/splice_aware_alignment.png" alt="Splice-aware alignment" title="Principle of spliced mappers: (1) identification of the reads spanning a single exon, (2) identification of the splicing junctions on the unmapped reads"><figcaption><span class="figcaption-prefix">Figure 2:</span> Principle of spliced mappers: (1) identification of the reads spanning a single exon, (2) identification of the splicing junctions on the unmapped reads</figcaption></figure>
 
-<details>
-<summary>Click for more details on the difference spliced mappers</summary>
+<blockquote class="details">
+  <h3 id="-more-details-on-the-difference-spliced-mappers">
+<i class="fa fa-info-circle" aria-hidden="true"></i> More details on the difference spliced mappers</h3>
 
-<p>Several spliced mappers have been developed over the year specially with the explosion of RNA-seq data.</p>
+  <p>Several spliced mappers have been developed over the year specially with the explosion of RNA-seq data.</p>
 
-<p><a hef="https://ccb.jhu.edu/software/tophat/index.shtml">TopHat</a> (<a href="https://academic.oup.com/bioinformatics/article/25/9/1105/203994">Trapnell et al, Bioinformatics, 2009</a>) was one of the first tools designed specifically to address this problem. In TopHat reads are mapped against the genome and are separated into two categories: (1) those that map, and (2) those that initially unmapped (IUM). "Piles" of reads representing potential exons are extended in search of potential donor/acceptor splice sites and potential splice junctions are reconstructed. IUMs are then mapped to these junctions.</p>
+  <p><a href="https://ccb.jhu.edu/software/tophat/index.shtml">TopHat</a> (<a href="https://academic.oup.com/bioinformatics/article/25/9/1105/203994">Trapnell et al, Bioinformatics, 2009</a>) was one of the first tools designed specifically to address this problem. In TopHat reads are mapped against the genome and are separated into two categories: (1) those that map, and (2) those that initially unmapped (IUM). “Piles” of reads representing potential exons are extended in search of potential donor/acceptor splice sites and potential splice junctions are reconstructed. IUMs are then mapped to these junctions.</p>
 
-<figure id="figure-3"><img src="../../images/tophat.png" alt="TopHat" title="TopHat (Trapnell et al, Bioinformatics, 2009)"><figcaption><span class="figcaption-prefix">Figure 3:</span> TopHat (Trapnell et al, Bioinformatics, 2009)</figcaption></figure>
+  <figure id="figure-3"><img src="../../images/tophat.png" alt="TopHat" title="TopHat (Trapnell et al, Bioinformatics, 2009)"><figcaption><span class="figcaption-prefix">Figure 3:</span> TopHat (Trapnell et al, Bioinformatics, 2009)</figcaption></figure>
 
-<p>TopHat has been subsequently improved with the development of TopHat2 (<a href="https://genomebiology.biomedcentral.com/articles/10.1186/gb-2013-14-4-r36">Kim et al, Genome Biology, 2013</a>):</p>
+  <p>TopHat has been subsequently improved with the development of TopHat2 (<a href="https://genomebiology.biomedcentral.com/articles/10.1186/gb-2013-14-4-r36">Kim et al, Genome Biology, 2013</a>):</p>
 
-<figure id="figure-4"><img src="../../images/13059_2012_Article_3053_Fig6_HTML.jpg" alt="TopHat2" title="TopHat2 (Kim et al, Genome Biology, 2013)"><figcaption><span class="figcaption-prefix">Figure 4:</span> TopHat2 (Kim et al, Genome Biology, 2013)</figcaption></figure>
+  <figure id="figure-4"><img src="../../images/13059_2012_Article_3053_Fig6_HTML.jpg" alt="TopHat2" title="TopHat2 (Kim et al, Genome Biology, 2013)"><figcaption><span class="figcaption-prefix">Figure 4:</span> TopHat2 (Kim et al, Genome Biology, 2013)</figcaption></figure>
 
-<p>To further optimize and speed up spliced read alignment Kim et al (<a href="https://www.nature.com/articles/nmeth.3317">Nat Methods, 2015</a>) developed <a href="https://ccb.jhu.edu/software/hisat2/index.shtml">HISAT</a>. It uses a set of <a href="https://en.wikipedia.org/wiki/FM-index">FM-indices</a> consisting one global genome-wide index and a collection of ~48,000 local overlapping 42 kb indices (~55,000 56 kb indices in HISAT2). This allows to find initial seed locations for potential read alignments in the genome using global index and to rapidly refine these alignments using a corresponding local index:</p>
+  <p>To further optimize and speed up spliced read alignment Kim et al (<a href="https://www.nature.com/articles/nmeth.3317">Nat Methods, 2015</a>) developed <a href="https://ccb.jhu.edu/software/hisat2/index.shtml">HISAT</a>. It uses a set of <a href="https://en.wikipedia.org/wiki/FM-index">FM-indices</a> consisting one global genome-wide index and a collection of ~48,000 local overlapping 42 kb indices (~55,000 56 kb indices in HISAT2). This allows to find initial seed locations for potential read alignments in the genome using global index and to rapidly refine these alignments using a corresponding local index:</p>
 
-<figure id="figure-5"><img src="../../images/hisat.png" alt="Hierarchical Graph FM index in HISAT/HISAT2" title="Hierarchical Graph FM index in HiSat/HiSat2 (Kim et al, Nat Methods, 2015)"><figcaption><span class="figcaption-prefix">Figure 5:</span> Hierarchical Graph FM index in HiSat/HiSat2 (Kim et al, Nat Methods, 2015)</figcaption></figure>
+  <figure id="figure-5"><img src="../../images/hisat.png" alt="Hierarchical Graph FM index in HISAT/HISAT2" title="Hierarchical Graph FM index in HiSat/HiSat2 (Kim et al, Nat Methods, 2015)"><figcaption><span class="figcaption-prefix">Figure 5:</span> Hierarchical Graph FM index in HiSat/HiSat2 (Kim et al, Nat Methods, 2015)</figcaption></figure>
 
-<p>A part of the read (blue arrow) is first mapped to the genome using the global FM index. The HISAT then tries to extend the alignment directly utilizing the genome sequence (violet arrow). In (<strong>a</strong>) it succeeds and this read aligned as it completely resides within an exon. In (<strong>b</strong>) the extension hits a mismatch. Now HISAT takes advantage of the local FM index overlapping this location to find the appropriate mapping for the remainder of this read (green arrow). The (<strong>c</strong>) shows a combination these two strategies: the beginning of the read is mapped using global FM index (blue arrow), extended until it reaches the end of the exon (violet arrow), mapped using local FM index (green arrow) and extended again (violet arrow).</p>
+  <p>A part of the read (blue arrow) is first mapped to the genome using the global FM index. The HISAT then tries to extend the alignment directly utilizing the genome sequence (violet arrow). In (<strong>a</strong>) it succeeds and this read aligned as it completely resides within an exon. In (<strong>b</strong>) the extension hits a mismatch. Now HISAT takes advantage of the local FM index overlapping this location to find the appropriate mapping for the remainder of this read (green arrow). The (<strong>c</strong>) shows a combination these two strategies: the beginning of the read is mapped using global FM index (blue arrow), extended until it reaches the end of the exon (violet arrow), mapped using local FM index (green arrow) and extended again (violet arrow).</p>
 
-<p><a href="https://github.com/alexdobin/STAR">STAR aligner</a> is a fast alternative for mapping RNAseq reads against genome utilizing uncompressed <a href="https://en.wikipedia.org/wiki/Suffix_array">suffix array</a>. It operates in two stages (<a href="https://academic.oup.com/bioinformatics/article/29/1/15/272537">Dobin et al, Bioinformatics, 2013</a>). In the first stage it performs seed search:</p>
+  <p><a href="https://github.com/alexdobin/STAR">STAR aligner</a> is a fast alternative for mapping RNAseq reads against genome utilizing uncompressed <a href="https://en.wikipedia.org/wiki/Suffix_array">suffix array</a>. It operates in two stages <a href="https://academic.oup.com/bioinformatics/article/29/1/15/272537">Dobin et al, Bioinformatics, 2013</a>. In the first stage it performs seed search:</p>
 
-<figure id="figure-6"><img src="../../images/star.png" alt="STAR's seed search" title="STAR's seed search (Dobin et al, Bioinformatics, 2013)"><figcaption><span class="figcaption-prefix">Figure 6:</span> STAR's seed search (Dobin et al, Bioinformatics, 2013)</figcaption></figure>
+  <figure id="figure-6"><img src="../../images/star.png" alt="STAR's seed search" title="STAR's seed search (Dobin et al, Bioinformatics, 2013)"><figcaption><span class="figcaption-prefix">Figure 6:</span> STAR's seed search (Dobin et al, Bioinformatics, 2013)</figcaption></figure>
 
-<p>Here a read is split between two consecutive exons. STAR starts to look for a maximum mappable prefix (MMP) from the beginning of the read until it can no longer match continuously. After this point it start to MMP for the unmatched portion of the read (<strong>a</strong>). In the case of mismatches (<strong>b</strong>) and unalignable regions (<strong>c</strong>) MMPs serve as anchors from which to extend alignments</p>
+  <p>Here a read is split between two consecutive exons. STAR starts to look for a maximum mappable prefix (MMP) from the beginning of the read until it can no longer match continuously. After this point it start to MMP for the unmatched portion of the read (<strong>a</strong>). In the case of mismatches (<strong>b</strong>) and unalignable regions (<strong>c</strong>) MMPs serve as anchors from which to extend alignments&lt;/p&gt;</p>
 
-<p>At the second stage STAR stitches MMPs to generate read-level alignments that (contrary to MMPs) can contain mismatches and indels. A scoring scheme is used to evaluate and prioritize stitching combinations and to evaluate reads that map to multiple locations. STAR is extremely fast but requires a substantial amount of RAM to run efficiently.</p>
-</details>
+  <p>At the second stage STAR stitches MMPs to generate read-level alignments that (contrary to MMPs) can contain mismatches and indels. A scoring scheme is used to evaluate and prioritize stitching combinations and to evaluate reads that map to multiple locations. STAR is extremely fast but requires a substantial amount of RAM to run efficiently.</p>
+
+</blockquote>
 
 <h2 id="mapping-1">Mapping</h2>
 
@@ -533,10 +547,14 @@ Trim Galore can remove sequences if they become too short during the trimming pr
 
         <p>Which percentage of reads were mapped exactly once for both samples?</p>
 
-        <details>
-   <summary>Click to view answer</summary>
-   More than 83% for GSM461177 and more than 78% for GSM461180
-   </details>
+        <blockquote class="solution">
+          <h3 id="-solution-3">
+<i class="fa fa-eye" aria-hidden="true"></i> Solution</h3>
+
+          <p>More than 83% for GSM461177 and more than 78% for GSM461180</p>
+
+        </blockquote>
+
       </blockquote>
     </li>
   </ol>
@@ -553,13 +571,16 @@ Trim Galore can remove sequences if they become too short during the trimming pr
     <li>
       <p>What does such a file contain?</p>
 
-      <details>
-<summary>Click to view answer</summary>
-<ol type="1">
-<li>a BAM file is the binary version of a SAM file</li>
-<li>It contains information about the mapping: for each mapped read, the position on the reference genome, the mapping quality, ...</li>
-</ol>
-</details>
+      <blockquote class="solution">
+        <h3 id="-solution-4">
+<i class="fa fa-eye" aria-hidden="true"></i> Solution</h3>
+
+        <ol>
+          <li>a BAM file is the binary version of a SAM file</li>
+          <li>It contains information about the mapping: for each mapped read, the position on the reference genome, the mapping quality, …</li>
+        </ol>
+
+      </blockquote>
     </li>
   </ol>
 </blockquote>
@@ -615,13 +636,16 @@ installed on your machine. However, the questions in this section can also be an
           <li>
             <p>What do the connecting lines between some of the aligned reads indicate?</p>
 
-            <details>
-<summary>Click to view answers</summary>
-<ol type="1">
-<li>The coverage plot: the sum of mapped reads at each position</li>
-<li>They indicate junction events (or splice sites), *i.e.*, reads that are mapped across an intron</li>
-</ol>
-</details>
+            <blockquote class="solution">
+              <h3 id="-solution-5">
+<i class="fa fa-eye" aria-hidden="true"></i> Solution</h3>
+
+              <ol>
+                <li>The coverage plot: the sum of mapped reads at each position</li>
+                <li>They indicate junction events (or splice sites), <em>i.e.</em>, reads that are mapped across an intron</li>
+              </ol>
+
+            </blockquote>
           </li>
         </ol>
       </blockquote>
@@ -651,14 +675,17 @@ installed on your machine. However, the questions in this section can also be an
           <li>
             <p>Why do we observe different stacked groups of blue linked boxes at the bottom?</p>
 
-            <details>
-<summary>Click to view answers</summary>
-<ol type="1">
-<li>The coverage for each alignment track is plotted as a bar graph. Arcs represent observed splice junctions, *i.e.*, reads spanning introns</li>
-<li>The numbers refer to the number of these observed junction reads. </li>
-<li>The groups of linked boxes on the bottom represent different transcripts from a single gene differing in the involved exon.</li>
-</ol>
-</details>
+            <blockquote class="solution">
+              <h3 id="-solution-6">
+<i class="fa fa-eye" aria-hidden="true"></i> Solution</h3>
+
+              <ol>
+                <li>The coverage for each alignment track is plotted as a bar graph. Arcs represent observed splice junctions, <em>i.e.</em>, reads spanning introns</li>
+                <li>The numbers refer to the number of these observed junction reads.</li>
+                <li>The groups of linked boxes on the bottom represent different transcripts from a single gene differing in the involved exon.</li>
+              </ol>
+
+            </blockquote>
           </li>
         </ol>
       </blockquote>
@@ -782,13 +809,15 @@ In this tutorial, we will then analyze the differential gene expression, but als
     <li>
       <p>Which library type do you choose for both samples?</p>
 
-      <details>
-<summary>Click to view answer</summary>
-<ol type="1">
-<li>Fraction of reads explained by "1++,1--,2+-,2-+": 0.4648 - Fraction of reads explained by "1+-,1-+,2++,2--": 0.4388</li>
-<li>The library seems to be of the type unstranded for both samples. </li>
-</ol>
-</details>
+      <blockquote class="solution">
+        <h3 id="-solution-7">
+<i class="fa fa-eye" aria-hidden="true"></i> Solution</h3>
+
+        <ol>
+          <li>Fraction of reads explained by “1++,1–,2+-,2-+”: 0.4648 - Fraction of reads explained by “1+-,1-+,2++,2–”: 0.4388</li>
+          <li>The library seems to be of the type unstranded for both samples.</li>
+        </ol>
+      </blockquote>
     </li>
   </ol>
 </blockquote>
@@ -903,18 +932,15 @@ In this tutorial, we will then analyze the differential gene expression, but als
         <h3 id="-question-5">
 <i class="fa fa-question-circle" aria-hidden="true"></i> Question</h3>
 
-        <ol>
-          <li>
-            <p>How many reads have been assigned to a gene?</p>
+        <p>How many reads have been assigned to a gene?</p>
 
-            <details>
-<summary>Click to view answers</summary>
-<ol type="1">
-<li>Around 70% of the reads have been assigned to genes: this quantity is correct enough. If it is going below 50%, you should investigate where are mapping your reads (with IGV) and check that the annotation corresponds to the reference genome (version).</li>
-</ol>
-</details>
-          </li>
-        </ol>
+        <blockquote class="solution">
+          <h3 id="-solution-8">
+<i class="fa fa-eye" aria-hidden="true"></i> Solution</h3>
+
+          <p>Around 70% of the reads have been assigned to genes: this quantity is correct enough. If it is going below 50%, you should investigate where are mapping your reads (with IGV) and check that the annotation corresponds to the reference genome (version).</p>
+
+        </blockquote>
       </blockquote>
     </li>
   </ol>
@@ -932,13 +958,16 @@ In this tutorial, we will then analyze the differential gene expression, but als
     <li>
       <p>Which feature has the most reads mapped on it for both samples?</p>
 
-      <details>
-<summary>Click to view answers</summary>
-<ol type="1">
-<li>The useful result file is a tabular file with two columns: the gene id and the number of reads mapped on the corresponding gene</li>
-<li>To display the most abundantly detected feature, we need to sort the files with the features and the number of reads mapped to them. This can be done using the Sort tool on the second column and in descending order, which reveals that FBgn0000556 is the feature with the most reads (around 258,000 in GSM461177 and 253,000 in GSM461180) mapped on it.</li>
-</ol>
-</details>
+      <blockquote class="solution">
+        <h3 id="-solution-9">
+<i class="fa fa-eye" aria-hidden="true"></i> Solution</h3>
+
+        <ol>
+          <li>The useful result file is a tabular file with two columns: the gene id and the number of reads mapped on the corresponding gene</li>
+          <li>To display the most abundantly detected feature, we need to sort the files with the features and the number of reads mapped to them. This can be done using the Sort tool on the second column and in descending order, which reveals that FBgn0000556 is the feature with the most reads (around 258,000 in GSM461177 and 253,000 in GSM461180) mapped on it.</li>
+        </ol>
+
+      </blockquote>
     </li>
   </ol>
 </blockquote>
@@ -1115,13 +1144,15 @@ In this tutorial, we will then analyze the differential gene expression, but als
             <li>
               <p>And the second axis?</p>
 
-              <details>
-<summary>Click to view answers</summary>
-<ol type="1">
-<li>The first axis is seperating the treated samples from the untreated samples, as defined when DESeq2 was launched</li>
-<li>The second axis is separating the single-end datasets from the paired-end datasets</li>
-</ol>
-</details>
+              <blockquote class="solution">
+                <h3 id="-solution-10">
+<i class="fa fa-eye" aria-hidden="true"></i> Solution</h3>
+
+                <ol>
+                  <li>The first axis is seperating the treated samples from the untreated samples, as defined when DESeq2 was launched</li>
+                  <li>The second axis is separating the single-end datasets from the paired-end datasets</li>
+                </ol>
+              </blockquote>
             </li>
           </ol>
         </blockquote>
@@ -1135,12 +1166,12 @@ In this tutorial, we will then analyze the differential gene expression, but als
 
           <p>How are the samples grouped?</p>
 
-          <details>
-   <summary>Click to view answers</summary>
-   <ol type="1">    
-   <li>They are first grouped depending on the treatment (the first factor) and after on the library type (the second factor), as defined when DESeq2 was launched</li>
-   </ol>
-   </details>
+          <blockquote class="solution">
+            <h3 id="-solution-11">
+<i class="fa fa-eye" aria-hidden="true"></i> Solution</h3>
+            <p>They are first grouped depending on the treatment (the first factor) and after on the library type (the second factor), as defined when DESeq2 was launched</p>
+
+          </blockquote>
         </blockquote>
       </li>
       <li>
@@ -1209,10 +1240,13 @@ In this tutorial, we will then analyze the differential gene expression, but als
 
         <p>How many genes have a significant change in gene expression between these conditions?</p>
 
-        <details>
-<summary>Click to view answers</summary>
-We get 1,091 genes (6.21%) with a significant change in gene expression between treated and untreated samples.
-</details>
+        <blockquote class="solution">
+          <h3 id="-solution-12">
+<i class="fa fa-eye" aria-hidden="true"></i> Solution</h3>
+
+          <p>We get 1,091 genes (6.21%) with a significant change in gene expression between treated and untreated samples.</p>
+
+        </blockquote>
       </blockquote>
 
       <blockquote class="comment">
@@ -1238,10 +1272,13 @@ We get 1,091 genes (6.21%) with a significant change in gene expression between 
 
         <p>How many genes have been conserved?</p>
 
-        <details>
-<summary>Click to view answers</summary>
-11.92% (130) of the differentially expressed genes 
-</details>
+        <blockquote class="solution">
+          <h3 id="-solution-13">
+<i class="fa fa-eye" aria-hidden="true"></i> Solution</h3>
+
+          <p>11.92% (130) of the differentially expressed genes</p>
+
+        </blockquote>
       </blockquote>
 
       <p>The number of genes is still too high there. So we will take only the 10 most up-regulated and 10 most down-regulated genes</p>
@@ -1366,14 +1403,16 @@ We get 1,091 genes (6.21%) with a significant change in gene expression between 
     <li>Can you generate an heatmap the normalized counts for the up-regulated genes with FC &gt; 2?</li>
   </ol>
 
-  <details>
-<summary>Click to view answers</summary>
-<ol type="1">    
-  <li>The samples are clustering by treatment. The genes are also clustering based on the counts. 2 genes (FBgn0026562, FBgn00003360)</li>
-  <li>The scale is changing and the differences between the genes are not visible anymore</li>
-  <li>Extract the genes with logFC &gt; 2 (filter for genes with c3&gt;1 on the summary of the differentially expressed genes) and run heatmap2 on the generated table</li>
-</ol>
-</details>
+  <blockquote class="solution">
+    <h3 id="-solution-14">
+<i class="fa fa-eye" aria-hidden="true"></i> Solution</h3>
+
+    <ol>
+      <li>The samples are clustering by treatment. The genes are also clustering based on the counts. 2 genes (FBgn0026562, FBgn00003360)</li>
+      <li>The scale is changing and the differences between the genes are not visible anymore</li>
+      <li>Extract the genes with logFC &gt; 2 (filter for genes with c3&gt;1 on the summary of the differentially expressed genes) and run heatmap2 on the generated table</li>
+    </ol>
+  </blockquote>
 </blockquote>
 
 <h2 id="analysis-of-the-functional-enrichment-among-the-differentially-expressed-genes">Analysis of the functional enrichment among the differentially expressed genes</h2>
@@ -1523,13 +1562,16 @@ We get 1,091 genes (6.21%) with a significant change in gene expression between 
     <li>How are the over represented GO terms divided between MF, CC and BP? And for under represented GO terms?</li>
   </ol>
 
-  <details>
-<summary>Click to view answers</summary>
-<ol type="1">    
-  <li>48 GO terms (0.49%) are over represented and 65 (0.66%) - Filter on c8 (over-represented) and c9 (under-represented)</li>
-  <li>For over-represented, 31 BP, 6 CC and 10 MF - For under-represented, 36 BP, 25 CC and 3 MF - Group data on column 7 and count on column 1</li>
-</ol>
-</details>
+  <blockquote class="solution">
+    <h3 id="-solution-15">
+<i class="fa fa-eye" aria-hidden="true"></i> Solution</h3>
+
+    <ol>
+      <li>48 GO terms (0.49%) are over represented and 65 (0.66%) - Filter on c8 (over-represented) and c9 (under-represented)</li>
+      <li>For over-represented, 31 BP, 6 CC and 10 MF - For under-represented, 36 BP, 25 CC and 3 MF - Group data on column 7 and count on column 1</li>
+    </ol>
+
+  </blockquote>
 </blockquote>
 
 <h1 id="inference-of-the-differential-exon-usage">Inference of the differential exon usage</h1>
@@ -1586,13 +1628,19 @@ We get 1,091 genes (6.21%) with a significant change in gene expression between 
   <ol>
     <li>Which exon has the most reads mapped to it for both samples?</li>
     <li>From which gene have these exon been extracted?</li>
-    <li>Is there a connection to the previous result obtained with HTSeq-count?</li>
+    <li>
+      <p>Is there a connection to the previous result obtained with HTSeq-count?</p>
+
+      <blockquote class="solution">
+        <h3 id="-solution-16">
+<i class="fa fa-eye" aria-hidden="true"></i> Solution</h3>
+
+        <p>FBgn0000556:005 is the exon with the most reads mapped to it for both samples. It is part of FBgn0000556, the feature with the most reads mapped on it (from featureCounts).</p>
+
+      </blockquote>
+    </li>
   </ol>
 
-  <details>
-<summary>Click to view answers</summary>
-FBgn0000556:005 is the exon with the most reads mapped to it for both samples. It is part of FBgn0000556, the feature with the most reads mapped on it (from featureCounts).
-</details>
 </blockquote>
 
 <h2 id="differential-exon-usage">Differential exon usage</h2>
@@ -1698,10 +1746,13 @@ FBgn0000556:005 is the exon with the most reads mapped to it for both samples. I
 
         <p>How many exons show a significant change in usage between these conditions?</p>
 
-        <details>
-<summary>Click to view answers</summary>
-We get 38 exons (12.38%) with a significant usage change between treated and untreated samples
-</details>
+        <blockquote class="solution">
+          <h3 id="-solution-17">
+<i class="fa fa-eye" aria-hidden="true"></i> Solution</h3>
+
+          <p>We get 38 exons (12.38%) with a significant usage change between treated and untreated samples</p>
+
+        </blockquote>
       </blockquote>
     </li>
   </ol>

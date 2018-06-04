@@ -492,7 +492,8 @@ The different defined boxes are:</p>
 
     <p>In most tutorial, the second box is the agenda box at the end of the introduction. It indicates the plan of the tutorial</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code>  &gt; ### Agenda
+    <div class="highlighter-rouge"><pre class="highlight"><code>  ```
+  &gt; ### Agenda
   &gt;
   &gt; In this tutorial we will deal with:
   &gt;
@@ -500,6 +501,7 @@ The different defined boxes are:</p>
   &gt; {:toc}
   &gt;
   {: .agenda}
+  ```
 </code></pre>
     </div>
 
@@ -522,9 +524,9 @@ The different defined boxes are:</p>
 
     <p>We think that actually walking through the tutorial by doing all its steps is important for learning its concepts. We therefore emphasize trying each step by regularly adding hands-on sections, where trainees are encouraged to do the analysis by themselves. We designed some special boxes to make these sections easy to find.</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code>  &gt; ### &lt;i class="fa fa-pencil" aria-hidden="true"&gt;&lt;/i&gt; Hands-on: Sorting BAM dataset
+    <div class="highlighter-rouge"><pre class="highlight"><code>  &gt; ### {% icon hands_on %} Hands-on: Sorting BAM dataset
   &gt;
-  &gt; 1. **Sort BAM dataset** &lt;i class="fa fa-wrench" aria-hidden="true"&gt;&lt;/i&gt;: Sort the paired-end BAM file by "Read names" with **Sort BAM
+  &gt; 1. **Sort BAM dataset** {% icon tool %}: Sort the paired-end BAM file by "Read names" with **Sort BAM
   {: .hands_on}
 </code></pre>
     </div>
@@ -550,25 +552,29 @@ The different defined boxes are:</p>
     </blockquote>
   </li>
   <li>
-    <p>Questions</p>
+    <p>Questions and solution</p>
 
     <p>Questions are there to force the trainees to think about what they are currently doing, and to put things in perspective.
  They also help the instructors by exposing and clarify common scenarios, errors, or applications.</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code> &gt; ### &lt;i class="fa fa-question-circle" aria-hidden="true"&gt;&lt;/i&gt; Questions
+    <div class="highlighter-rouge"><pre class="highlight"><code> &gt; ### {% icon question %} Questions
  &gt;
  &gt; 1. Why are some tests filtered?
  &gt; 2. Does it improve the *p*-value distribution?
  &gt;
- &gt;    &lt;details&gt;
- &gt;    &lt;summary&gt;Click to view the answers&lt;/summary&gt;
- &gt;    Content goes here.
- &gt;    &lt;/details&gt;
+ &gt;    &gt; ### {% icon solution %} Solution
+ &gt;    &gt;
+ &gt;    &gt; 1. Sol for the first question
+ &gt;    &gt; 2. Sol for the second question
+ &gt;    &gt;
+ &gt;    {: .solution}
  {: .question}
 </code></pre>
     </div>
 
-    <figure id="figure-4"><img src="../../../../shared/images/tutorial_question_box.png" alt="Example of question box" title="Example of question box" /><figcaption><span class="figcaption-prefix">Figure 4:</span> Example of question box</figcaption></figure>
+    <figure id="figure-4"><img src="../../../../shared/images/tutorial_question_box_collapsed.png" alt="Example of question box" title="Example of question box with collapsed solution" /><figcaption><span class="figcaption-prefix">Figure 4:</span> Example of question box with collapsed solution</figcaption></figure>
+
+    <figure id="figure-5"><img src="../../../../shared/images/tutorial_question_box_expanded.png" alt="Example of question box" title="Example of question box with expanded solution" /><figcaption><span class="figcaption-prefix">Figure 5:</span> Example of question box with expanded solution</figcaption></figure>
 
     <p>Questions have to be quick to answer, and answers can be also provided as multiple choices (MCQs).
  With well choosen wrong answers, MCQs can do much more than just measure how much someone knows.</p>
@@ -586,7 +592,7 @@ The different defined boxes are:</p>
   <li>
     <p>Tips</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code>  &gt; ### &lt;i class="fa fa-lightbulb-o" aria-hidden="true"&gt;&lt;/i&gt; Tip: Importing data via links
+    <div class="highlighter-rouge"><pre class="highlight"><code>  &gt; ### {% icon tip %} Tip: Importing data via links
   &gt;
   &gt; * Copy the link location
   &gt; * Open the Galaxy Upload Manager
@@ -597,19 +603,36 @@ The different defined boxes are:</p>
 </code></pre>
     </div>
 
-    <figure id="figure-5"><img src="../../../../shared/images/tutorial_tip_box.png" alt="Example of tip box" title="Example of tip box" /><figcaption><span class="figcaption-prefix">Figure 5:</span> Example of tip box</figcaption></figure>
+    <figure id="figure-6"><img src="../../../../shared/images/tutorial_tip_box.png" alt="Example of tip box" title="Example of tip box" /><figcaption><span class="figcaption-prefix">Figure 6:</span> Example of tip box</figcaption></figure>
   </li>
   <li>
     <p>Comments</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code>  &gt; ### &lt;i class="fa fa-commenting-o" aria-hidden="true"&gt;&lt;/i&gt; Comments
+    <div class="highlighter-rouge"><pre class="highlight"><code>  &gt; ### {% icon comment %} Comments
   &gt; - Edit the "Database/Build" to select "dm3"
   &gt; - Rename the datasets according to the samples
   {: .comment}
 </code></pre>
     </div>
 
-    <figure id="figure-6"><img src="../../../../shared/images/tutorial_comment_box.png" alt="Example of comment box" title="Example of comment box" /><figcaption><span class="figcaption-prefix">Figure 6:</span> Example of comment box</figcaption></figure>
+    <figure id="figure-7"><img src="../../../../shared/images/tutorial_comment_box.png" alt="Example of comment box" title="Example of comment box" /><figcaption><span class="figcaption-prefix">Figure 7:</span> Example of comment box</figcaption></figure>
+  </li>
+  <li>
+    <p>Details</p>
+
+    <p>The detail box is used to give more background explanation on the subject. By default the box is collapsed.</p>
+
+    <div class="highlighter-rouge"><pre class="highlight"><code>  &gt; ### {% icon details %} More details on the ....
+  &gt; 
+  &gt; Add more details in Markdown...
+  &gt; 
+  {: .details}
+</code></pre>
+    </div>
+
+    <figure id="figure-8"><img src="../../../../shared/images/tutorial_collapsed_detail_box.png" alt="Example of collapsed detail box" title="Example of collapsed detail box" /><figcaption><span class="figcaption-prefix">Figure 8:</span> Example of collapsed detail box</figcaption></figure>
+
+    <figure id="figure-9"><img src="../../../../shared/images/tutorial_expanded_detail_box.png" alt="Example of expanded detail box" title="Example of expanded detail box" /><figcaption><span class="figcaption-prefix">Figure 9:</span> Example of expanded detail box</figcaption></figure>
   </li>
   <li>
     <p>Key points</p>
@@ -621,24 +644,28 @@ The different defined boxes are:</p>
 <p>To render the boxes correctly, the syntax needs to be correct. If it does’t work, have a look at similar tutorials and get inspiration.
 Boxes can be nested, <em>e.g.</em> for having tips inside a hands-on:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>&gt; ### &lt;i class="fa fa-pencil" aria-hidden="true"&gt;&lt;/i&gt; Hands-on: Defining the topic for the tutorial
-&gt;
-&gt; 1. Search for NCBI Blast+ on the [ToolShed](https://toolshed.g2.bx.psu.edu/)
-&gt; 2. Check in which category it is
-&gt;
-&gt;    &gt; ### &lt;i class="fa fa-question-circle" aria-hidden="true"&gt;&lt;/i&gt; Questions
-&gt;    &gt;
-&gt;    &gt; In which topic will you put the tutorial?
-&gt;    &gt;
-&gt;    &gt;    &lt;details&gt;
-&gt;    &gt;    &lt;summary&gt;Click to view the answers&lt;/summary&gt;
-&gt;    &gt;    If we search for [NCBI Blast+ in the ToolShed](https://toolshed.g2.bx.psu.edu/view/devteam/ncbi_blast_plus/7538e2bfcd41), it is attributed to 2 categories (bottom): "Next Gen Mappers" and "Sequence Analysis".
-&gt;    &gt;    We decided to put it in "Sequence analysis" because this is the most general one for this tutorial.
-&gt;    &gt;    &lt;/details&gt;
-&gt;    {: .question}
-{: .hands_on}
-</code></pre>
-</div>
+<blockquote class="hands_on">
+  <h3 id="-hands-on-defining-the-topic-for-the-tutorial-1"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Defining the topic for the tutorial</h3>
+
+  <ol>
+    <li>Search for NCBI Blast+ on the <a href="https://toolshed.g2.bx.psu.edu/">ToolShed</a></li>
+    <li>
+      <p>Check in which category it is</p>
+
+      <blockquote class="question">
+        <h3 id="-questions-2"><i class="fa fa-question-circle" aria-hidden="true"></i> Questions</h3>
+
+        <p>In which topic will you put the tutorial?</p>
+
+        <details>
+   <summary>Click to view the answers</summary>
+   If we search for [NCBI Blast+ in the ToolShed](https://toolshed.g2.bx.psu.edu/view/devteam/ncbi_blast_plus/7538e2bfcd41), it is attributed to 2 categories (bottom): "Next Gen Mappers" and "Sequence Analysis".
+   We decided to put it in "Sequence analysis" because this is the most general one for this tutorial.
+   </details>
+      </blockquote>
+    </li>
+  </ol>
+</blockquote>
 
 <h1 id="adding-slides-optional">Adding slides (optional)</h1>
 
