@@ -134,23 +134,3 @@ We use Jekyll to generate the website out of the Markdown and YAML files. We nee
 {:.no_toc}
 
 We just created a new topic. We can now fill it with new tutorials.
-
-> ### Developing GTN training material
->
-> This tutorial is part of a series to develop GTN training material, feel free to also look at:
->
-> {% assign topic = site.data[page.topic_name] %}
-> {% for material in topic.material %}
->  {% if material.enable != "false" and material.name != page.tutorial_name %}
->   {% if material.type == "introduction" %}
-> 1. [{{ material.title }}]({{ site.baseurl }}/topics/{{ topic.name }}/slides/{{ material.name }}.html)
->  {% elsif material.type == "tutorial" %}
->   {% if material.hands_on %}
-> 1. [{{ material.title }}]({{ site.baseurl }}/topics/{{ topic.name  }}/tutorials/{{ material.name }}/tutorial.html)
->   {% elsif material.slides %}
-> 1. [{{ material.title }}]({{ site.baseurl }}/topics/{{ topic.name }}/tutorials/{{ material.name }}/slides.html)
->    {% endif %}
->   {% endif %}
->  {% endif %}
-> {% endfor %}
-{: .agenda}
