@@ -117,14 +117,18 @@ We can now create easily a Galaxy Interactive Tour and test it on the fly.
 >
 > This tutorial is part of a series to develop GTN training material, feel free to also look at:
 >
-> 1. [Setting up the tutorial infrastructure](../running-jekyll/tutorial.html)
-> 1. [Writing content in markdown](../create-new-tutorial-content/tutorial.html)
-> 1. [Defining metadata](../create-new-tutorial-metadata/tutorial.html)
-> 1. [Creating a new topic](../create-new-topic/tutorial.html)
-> 1. [Generating PDF handouts](../generating-pdf/tutorial.html)
-> 1. [Creating Interactive Galaxy Tours](../create-new-tutorial-tours/tutorial.html)
-> 1. [Defining technical requirements for a tutorial](../create-new-tutorial-technical/tutorial.html)
-> 1. [Setting up Galaxy for training](../setup-galaxy-for-training/tutorial.html)
-> 1. [Submitting the new tutorial to the GitHub repository](../github-command-line-contribution/slides.html)
-> 1. [Good practices for teaching](../good-practices/slides.html)
+> {% assign topic = site.data[page.topic_name] %}
+> {% for material in topic.material %}
+>  {% if material.enable != "false" and material.name != page.tutorial_name %}
+>   {% if material.type == "introduction" %}
+> 1. [{{ material.title }}]({{ site.baseurl }}/topics/{{ topic.name }}/slides/{{ material.name }}.html)
+>  {% elsif material.type == "tutorial" %}
+>   {% if material.hands_on %}
+> 1. [{{ material.title }}]({{ site.baseurl }}/topics/{{ topic.name  }}/tutorials/{{ material.name }}/tutorial.html)
+>   {% elsif material.slides %}
+> 1. [{{ material.title }}]({{ site.baseurl }}/topics/{{ topic.name }}/tutorials/{{ material.name }}/slides.html)
+>    {% endif %}
+>   {% endif %}
+>  {% endif %}
+> {% endfor %}
 {: .agenda}
