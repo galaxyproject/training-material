@@ -54,14 +54,14 @@ tutorial_name: mothur-miseq-sop
 
 ![Experiment setup](../../images/experiment_setup.png)
 
-このチュートリアルを行いやすくするため、私たちはデータの一部分のみを用意していて、1匹の動物の10のタイムポイント（初期の5時点と後期の5時点）のフローファイルをあなたに提供します。解析パイプラインと実験機器のエラー率を評価するために、21種のバクテリア株由来のゲノムDNAからなる mock 共同体を追加でリシーケンスしました。
+このチュートリアルを行いやすくするため、私たちはデータの一部分のみを用意していて、1匹の動物の10のタイムポイント（初期の5時点と後期の5時点）のフローファイルをあなたに提供します。解析パイプラインと実験機器のエラー率を評価するために、21種のバクテリア株由来のゲノムDNAからなる 疑似的なコミュニティ（以降 mock と表現）を追加でリシーケンスしました。
 
 > ### {% icon comment %} データセットの詳細
 > オリジナルのデータセットのサイズが大きいため（3.9 GB）fastq ファイルの362 ペアのうちの20 ペアを与えています。例えば、次の2ファイルが表示されます: `F3D0_S188_L001_R1_001.fastq` と `F3D0_S188_L001_R2_001.fastq`
 >
 > これら2つのファイルは0日目の3匹のメス（F3D0）（離乳した日）のものに対応しています。1つ目のファイル（および名前にR1があるすべてのファイル）はフォワードリードに対応していて、もう一方の2つ目のファイル（および名前にR2があるすべてのファイル）はリバースリードに対応しています。
 >
-> これらの配列は250 bpで、16S rRNA 遺伝子の V4 領域で重なり合っています; この領域はおよそ250 bp ほどの長さです。データセットを見てみると、22個のfastqファイルがあり、これらはメス3匹と mock 共同体1つからの10のタイムポイントを表しています。`HMP_MOCK.v35.fasta` も見ることができて、このファイルには mock 共同体で使用されている配列が fasta 形式で並べて入っています。
+> これらの配列は250 bpで、16S rRNA 遺伝子の V4 領域で重なり合っています; この領域はおよそ250 bp ほどの長さです。データセットを見てみると、22個のfastqファイルがあり、これらはメス3匹と mock 1つからの10のタイムポイントを表しています。`HMP_MOCK.v35.fasta` も見ることができて、このファイルには mock で使用されている配列が fasta 形式で並べて入っています。
 {: .comment}
 
 <!-- note: mothur seems to have forgotten day 4 in their SOP example data, therefore this description and results
@@ -84,8 +84,8 @@ in this document differ slightly from the description on their website -->
 >
 > 2. **サンプルデータをインポートする。**このコースのデータは Galaxy の共有ライブラリから入手することができます（インストラクターに聞いてください）。もしデータがない場合は、自分自身でアップロードすることができます。
 > - オプション 1: データライブラリから:
->   - 共有データライブラリに移動すると、20 ペアの fastq ファイルが見つかります; マウスからは19 ペア、そして残り1 ペアは mock 共同体からのものです。
-> - オプション 2: コンピュータから:
+>   - 共有データライブラリに移動すると、20 ペアの fastq ファイルが見つかります; マウスからは19 ペア、そして残り1 ペアは mock からのものです。
+> - オプション 2: 自分のコンピュータから:
 >   - Zenodo から直接データを取得する: [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.165147.svg)](https://doi.org/10.5281/zenodo.165147)
 >   - `input_data.zip` をダウンロードし解凍する
 >   - すべてのファイルをヒストリーにアップロードする。
@@ -99,7 +99,7 @@ in this document differ slightly from the description on their website -->
 >
 {: .hands_on}
 
-現在扱うファイルがたくさんあります。幸いなことに Galaxy では *dataset collections* を作成することでファイルの扱いを少し用簡単にすることができます。これにより一度に複数のデータセットでツールを簡単に実行することができます。それではコレクションを作成してみましょう:
+現在扱うファイルがたくさんあります。幸いなことに Galaxy では *dataset collections* を作成することでファイルの扱いを少し簡単にすることができます。これにより一度に複数のデータセットでツールを簡単に実行することができます。それではコレクションを作成してみましょう:
 
 > ### {% icon hands_on %} ハンズオン: データをコレクションにまとめる
 >
@@ -125,7 +125,7 @@ in this document differ slightly from the description on their website -->
 
 ## シーケンシングと PCR のエラーを減らす
 
-まず初めに各サンプルのフォワードリードとリバースリードを組み合わせます。これはインプットとしてペアのコレクションが必要で、 `make.contigs` コマンドを利用して行われます。このコマンドは fastq ファイルから配列と品質スコアのデータを抽出し、リバースリードの reverse complement を作成してリードをコンティグに加えます。そしてすべてのサンプルを1つの fasta ファイルにまとめ、*group* ファイルを使ってどのサンプルからどのリードを持ってきたかを記憶させます。
+まず初めに各サンプルのフォワードリードとリバースリードを組み合わせます。これはインプットとしてペアのコレクションが必要で、 `make.contigs` コマンドを利用して行われます。このコマンドは fastq ファイルから配列と品質スコアのデータを抽出し、リバースリードの相補鎖を作成してリードをコンティグに加えます。そしてすべてのサンプルを1つの fasta ファイルにまとめ、*group* ファイルを使ってどのサンプルからどのリードを持ってきたかを記憶させます。
 
 > ### {% icon comment %} アルゴリズムの詳細
 > これを行うための非常にシンプルなアルゴリズムを私たちは持っています。まずは配列のペアを揃えます。次にアライメントを調べて２つのリードが一致しない位置を特定します。１つの配列にベースがありもう１つにギャップがある場合、ベースの品質スコアは２５以上であることを考慮する必要があります。両方の配列にベースがある場合は、ベースの1つが他のものよりも６点以上の品質スコアである必要があります。もしそれが６点以下であれば、コンセンサスベースを N に設定します。
@@ -192,7 +192,7 @@ Mean:        1        252.811    252.811    0.70063  4.44854
 ```
 
 これは 152,360の配列があり、大部分が248～253塩基の間にあることを示しています。
-面白いことに、データセット内の最も長いリードは 502 bp です。これについて疑いましょう。それぞれのリードの長さは 251 bp であることを思い出してください。このリードははっきりと（または全く）集めていませんでした。そして、塩基配列の少なくとも 2.5% に曖昧なリードが含まれていることも注意してください。次のステップでは `screen.seqs` を実行してこれらの問題を対処します。
+面白いことに、データセット内の最も長いリードは 502 bp です。これについて疑いましょう。それぞれのリードの長さは 251 bp であることを思い出してください。このリードはあまりうまく（または全く）結合されませんでした。そして、塩基配列の少なくとも 2.5% に曖昧なリードが含まれていることも注意してください。次のステップでは `screen.seqs` を実行してこれらの問題を対処します。
 
 次のツールでは曖昧な塩基や 275 bp 以上の長さのリードである配列を除去します。
 
@@ -502,17 +502,17 @@ that chloroplasts and mitochondria have no functional role in a microbial commun
 この段階まででデータを可能な限り精選したので、エラー率について調べる準備が整いました。
 
 
-## mock 共同体に基づいてエラー率を評価する
+## mock に基づいてエラー率を評価する
 
-配列のエラー率を測ることは mock 共同体を co-sequenced した場合、つまり、正確な構成を知っているサンプルである場合のみ行うことができます。  This is something we include for every 95 samples we sequence. You should too because it will help you gauge your error rates and allow you to see how well your curation is going, and whether something is wrong with your sequencing setup.
+配列のエラー率を測ることは mock を co-sequenced した場合、つまり、正確な構成を知っているサンプルである場合のみ行うことができます。  This is something we include for every 95 samples we sequence. You should too because it will help you gauge your error rates and allow you to see how well your curation is going, and whether something is wrong with your sequencing setup.
 
 > ### {% icon comment %} 定義
 >
-> **mock 共同体:** 微生物のサンプルやそれから単離した核酸の組成をシミュレートするための *in vitro* で作成された微生物細胞および/またはウイルスまたは核酸分子による明確な混合物。
+> **mock:** 微生物のサンプルやそれから単離した核酸の組成をシミュレートするための *in vitro* で作成された微生物細胞および/またはウイルスまたは核酸分子による明確な混合物。
 >
 {: .note}
 
-私たちの mock 共同体は 21 の細菌株由来のゲノムDNAから作成されています。ですので完璧な世界では、これは解析の結果産物とまったく同じものになります。    
+私たちの mock は 21 の細菌株由来のゲノムDNAから作成されています。ですので完璧な世界では、これは解析の結果産物とまったく同じものになります。    
 
 まずは、データから mock サンプルに属する配列を抽出しましょう:
 
@@ -536,7 +536,7 @@ Selected 4060 sequences from your count file
 
 これは mock サンプル中に67個の一意な配列と合計4060個の配列があることを示しています。 `seq.error` コマンドを用いて mock リファレンスに基づいてエラー率を測ることができます。ここでは mock サンプルのリードを既知の配列に照らし合わせて、どのくらい一致していないかを確認します。
 
-> ### {% icon hands_on %} ハンズオン: mock 共同体に基づいてエラー率を評価する
+> ### {% icon hands_on %} ハンズオン: mock に基づいてエラー率を評価する
 > - **Seq.error** {% icon tool %} で次のように設定する
 >   - "fasta" には Get.groups からの fasta ファイルを選択する
 >   - "reference" にはヒストリーから `HMP_MOCK.v35.fasta` ファイルを選択する
@@ -614,7 +614,7 @@ Errors    Sequences
 
 
 rarefaction のアウトプット（ `rarefaction curves` のアウトプットコレクションの中にある `sobs` という名前のデータセット）を開きましょう。
-4060 の配列があり、 Mock 共同体からの34のOTUがあることが分かります。この数には検出方法から逃れた隠れたキメラが含まれています。3000配列を使用する場合は、およそ31のOTUが必要になります。キメラがなくシーケンシングのエラーもない完璧な世界には、21のOTUがあります。
+4060 の配列があり、 mock からの34のOTUがあることが分かります。この数には検出方法から逃れた隠れたキメラが含まれています。3000配列を使用する場合は、およそ31のOTUが必要になります。キメラがなくシーケンシングのエラーもない完璧な世界には、21のOTUがあります。
 これは完璧な世界ではありません。ですが、かなり良いです！
 
 > ### {% icon tip %} 背景: Rarefaction
@@ -639,7 +639,7 @@ rarefaction のアウトプット（ `rarefaction curves` のアウトプット�
 
 `remove.groups` コマンドを利用します:
 
-> ### {% icon hands_on %} ハンズオン: データセットから Mock 共同体を除去する
+> ### {% icon hands_on %} ハンズオン: データセットから mock を除去する
 >
 > - **Remove.groups** {% icon tool %} で次のように設定する
 >   - "Select input type" → `fasta , name, taxonomy, or list with a group file or count table`
@@ -971,7 +971,7 @@ Mothur にはあまり視覚化ツールが組み込まれていませんが、�
 >   - "Input file" to taxonomy output from Classify.otu (collection)
 {: .hands_on}
 
-結果のファイルはインタラクティブな視覚化を含む HTML ファイルです。例えば "Bacteria" とラベルされている最も内側のリングをダブルクリックしてみてください 
+結果のファイルはインタラクティブな視覚化を含む HTML ファイルです。例えば "Bacteria" とラベルされている最も内側のリングをダブルクリックしてみてください
 
 ![Krona](../../images/krona.png)
 
@@ -981,37 +981,35 @@ Mothur にはあまり視覚化ツールが組み込まれていませんが、�
 >
 > <details>
 >   <summary> クリックして解答を表示</summary>
->   Krona プロットを探って、Firmicutes をダブルクリックすると、Lactobacillus が何パーセントあるか明らかになるはずで（私たちの場合は16％）、このセグメントを右クリックすると階層内の任意のポイントでのパーセンテージが表示されます（ここでは全体の5％） 
+>   Krona プロットを探って、Firmicutes をダブルクリックすると、Lactobacillus が何パーセントあるか明らかになるはずで（私たちの場合は16％）、このセグメントを右クリックすると階層内の任意のポイントでのパーセンテージが表示されます（ここでは全体の5％）
 >
 >  <img src="../../images/krona_lacto.png" alt="image showing view with Lactobacillus highlighted">
 > </details>
 {: .question}
 
-よくできました！あなたは mothur の SOP の基本を修了しました。統計的な有意性テストや母集団レベルの解析についてより詳細なことに進みたい場合は以下の演習を行ってください。 
+よくできました！あなたは mothur の SOP の基本を修了しました。統計的な有意性テストや母集団レベルの解析についてより詳細なことに進みたい場合は以下の演習を行ってください。
 
 # Extra Credit
 
-## Determine statistical significance of clusterings
+## クラスタリングの統計的有意性を測定する
 
-We can perform a test to determine whether the clustering within the tree is statistically significant or not
-using by choosing from the `parsimony`, `unifrac.unweighted`, or `unifrac.weighted` commands. To run these we
-will first need to create a design file that indicates which treatment each sample belongs to.
+`parsimony`、 `unifrac.unweighted`、または `unifrac.weighted` コマンドから選んで使うことで、tree 内のクラスタリングが統計的に有意であるか否かを判断するテストを行うことができます。これらを実行するにはまずは各サンプルがどの処理に適しているかを示す design ファイルを作成する必要があります。
 
-> ### {% icon hands_on %} ハンズオン: Obtain design file
+> ### {% icon hands_on %} ハンズオン: design ファイルを取得する
 >
-> - Find the file `mouse.time.design` in your history (you imported this file at the start of this tutorial)
-> - Make sure the datatype is set to `mothur.design`.
+> - `mouse.time.design` というファイルをヒストリーから見つける（このファイルはこのチュートリアルの初めにインポートしました）
+> - データタイプが `mothur.design` に設定されていることを確認してください。
 >
-> > ### {% icon tip %} Changing datatype of a datasets
-> >  - Click on the **pencil icon** of the dataset
-> >  - Click on the **Datatypes** tab
-> >  - Select the new datatype from dropdown menu
-> >  - Click **Save**
+> > ### {% icon tip %} データセットの datatype を変更する
+> >  - データセットの**鉛筆アイコン**をクリックする
+> >  - **Datatypes** タブをクリックする
+> >  - ドロップダウンメニューから新しいデータタイプを選択する
+> >  - **Save** をクリックする
 > {: .tip}
 {: .hands_on}
 
 
-The design file look something like this:
+design ファイルを見るとこのようになっています:
 
 ```
 group    time
@@ -1036,40 +1034,36 @@ F3D8     Early
 F3D9     Early
 ```
 
-Using the `parsimony` command let's look at the pairwise comparisons. Specifically, let's focus on the
-early vs. late comparisons for each mouse:
+`parsimony` コマンドを使用してペアワイズ比較を見てみましょう。具体的には、各マウスの初期と後期の比較に焦点を当ててみましょう:
 
-> ### {% icon hands_on %} ハンズオン: Compare Early-vs-Late
+> ### {% icon hands_on %} ハンズオン: 初期と後期で比較する
 > - **Parsimony** {% icon tool %} で次のように設定する
->   - "tree" to the `tre` output from Tree.Shared (collection)
->   - "group" to the design file described above
->   - "output logfile?" to `yes`
+>   - "tree" には Tree.Shared のアウトプット（コレクション）である `tre` を選択する
+>   - "group" には上記の design ファイルを選択する
+>   - "output logfile?" → `yes`
 {: .hands_on}
 
-In the logfile for `thetayc.0.03.lt.ave` we see
+ログファイルの `thetayc.0.03.lt.ave` では以下の内容を見ることができます
 
 ```
 Tree#   Groups      ParsScore   ParsSig
 1       Early-Late  1           <0.001
 ```
 
-There was clearly a significant difference between the clustering of the early and late time points.
-Recall that this method ignores the branch length.
+初期と後期の時点のクラスタリング間には明らかに大きな違いありました。
+この手法では branch の長さを無視していることを思い出してください。
 
-The two distance matrices that we generated earlier (i.e. `jclass.0.03.lt.ave.dist` and
-    `thetayc.0.03.lt.ave.dist`) can then be visualized using the pcoa or nmds plots.
+先に生成した2つの距離行列（即ち、 `jclass.0.03.lt.ave.dist` と `thetayc.0.03.lt.ave.dist` ）は pcoa または nmds プロットを使用して視覚化することができます。
 
-Principal Coordinates (PCoA) uses an eigenvector-based approach to represent multidimensional
-data in as few dimensions as possible. Our data is highly dimensional (~9 dimensions).
+Principal Coordinates (PCoA) は多次元データをできるだけ少ない次元にするために固有ベクトルベースのアプローチを使用します。私たちのデータは次元が高いです（～9次元）。
 
 > ### {% icon hands_on %} ハンズオン: PCoA
 >
 > - **Pcoa** {% icon tool %} で次のように設定する
->   - "phylip" to dist files from Dist.shared (collection)
+>   - "phylip" には Dist.shared の dist ファイル（コレクション）を選択する
 {: .hands_on}
 
-The loadings files will tell you what fraction of the total variance in the data are represented
-by each of the axes. For instance the loading file for `thetayc.0.03.lt.ave` looks something like:
+loadings ファイルは各軸によって表されるデータ内の分散の割合を示します。例えば `thetayc.0.03.lt.ave` という loadings ファイルは次のようになっています:
 
 ```
 axis  loading
@@ -1081,8 +1075,7 @@ axis  loading
 ...
 ```
 
-In this case the first and second axis represent about 45 and 14% of the variation (59% of the total)
-for the thetaYC distances. The output to the logfile:
+この場合第1軸と第2軸では thetaYC 距離において約45%と14%（合計59%）が分散していることを示しています。アウトプットの logfile は次のようになっています:
 
 ```
 Processing...
@@ -1091,23 +1084,17 @@ Rsq 2 axis: 0.882025
 Rsq 3 axis: 0.978093
 ```
 
-indicates that the R-squared between the original distance matrix and the distance between the points in 2D
-PCoA space was 0.88, but that if you add a third dimension the R-squared value increases to 0.98. All in all,
-not bad.
+元の距離行列と2D PCoA 空間内の点間の R の二乗が 0.88 であることを示していますが三次元を追加すると R の二乗の値は 0.98 に増加します。概して言えば、まあ悪くないでしょう。
 
-Alternatively, non-metric multidimensional scaling (NMDS) tries to preserve the distance between samples using
-a user defined number of dimensions. We can run our data through NMDS with 2 dimensions with the following
-tool:
+代わりに、非計量多次元尺度法（NMDS）でユーザー定義の次元数を用いてサンプル間の距離を保存してみましょう。次のツールで2次元のNMDSを通してデータを実行することができます:
 
 > ### {% icon hands_on %} ハンズオン: Nmds
 >
 > - **Nmds** {% icon tool %} で次のように設定する
->   - "phylip" to dist files from Dist.shared (collection)
->   - "output logfile?" to `yes`
+>   - "phylip" には Dist.shared の dist ファイル（コレクション）を選択する
+>   - "output logfile?" → `yes`
 >
-> Opening the `stress` file for `thetayc.0.03.lt.ave` we can inspect the stress and R^2 values, which describe
-> the quality of the ordination. Each line in this file represents a different iteration and the configuration
-> obtained in the iteration with the lowest stress is reported in the `axes` file. In the logfile:
+> `thetayc.0.03.lt.ave` の `stress` を開くとストレス値と R の二乗を調べることができ、これは座標付けの質を表しています。このファイルの各行は異なる反復を示していて最小のストレス値での反復で得られた立体配置は `axes` ファイルに記録されます。ログファイルは次のようになっています:
 >
 > ```
 > Number of dimensions:           2
@@ -1115,48 +1102,41 @@ tool:
 > R-squared for configuration:    0.947622
 > ```
 >
-> We find that the lowest stress value was 0.11 with an R-squared value of 0.95; that stress level is
-> actually pretty good. You can test what happens with three dimensions in the following way:
+> 最も低いストレス値は 0.11 で R の二乗値は 0.95 であることが分かります; このストレスレベルは実際にはかなり良いです。次の方法で3次元で何が起こるかをテストできます:
 >
 > - **Nmds** {% icon tool %} で次のように設定する
->   - "phylip" to dist files collection from Dist.shared
->   - "mindim" to `3`
->   - "maxdim" to `3`
->   - "output logfile?" to `yes`
+>   - "phylip" には Dist.shared のコレクションである dist ファイル を選択する
+>   - "mindim" → `3`
+>   - "maxdim" → `3`
+>   - "output logfile?" → `yes`
 >
 > > ### {% icon question %} Question
 > >
-> > What are stress and R-squared values when using 3 dimensions?
+> > 3次元にするとストレス値とRの二乗値はどうなりましたか？
 > >
 > > <details>
 > >   <summary> クリックして解答を表示</summary>
-> >   The stress value drops to 0.05 and the R2 value goes up to 0.99 (see logfile). Not bad.
+> >   ストレス値は0.05に下がりRの二乗値は0.99になります（ログファイルを見てください）。悪くないです。
 > > </details>
 > {: .question}
 {: .hands_on}
 
 
 
-In general, we would like a stress value below 0.20 and a value below 0.10 is even better. Thus, we can conclude that,
-NMDS is better than PCoA. We can plot the three dimensions of the NMDS data by plotting the contents of the `axes`
-file. <!-- TODO: tool for 3D plots in Galaxy? -->
+一般的に、ストレス値は0.20未満で値が0.10未満だとより良いです。したがって、NMDS は PCoA より優れていると結論付けることができます。 `axes` ファイルの内容をプロットすることで NMDS データの3次元をプロットすることができます。 <!-- TODO: tool for 3D plots in Galaxy? -->
 
-Again, it is clear that the early and late samples cluster separately from each other. Ultimately, ordination
-is a data visualization tool. We might ask if the spatial separation that we see between the early and late
-plots in the NMDS plot is statistically significant. To do this we have two statistical tools at our disposal.
-The first analysis of molecular variance (AMOVA), tests whether the centers of the clouds representing a group
-are more separated than the variation among samples of the same treatment. This is done using the distance
-matrices we created earlier and does not actually use ordination.
+ここでも、初期サンプルと後期サンプルがそれぞれ別々にクラスタリングされていることは明らかです。結局のところ、座標付けはデータを視覚化するツールです。私たちは初期プロットと後期プロットの間にある空間的な分離が統計的に有意であるかを知りたくなるかもしれません。これを知るために2つの統計ツールが用意されています。
+１つ目の分子分散分析（AMOVA）は、集団を表すクラウドの中心が同じ処理のサンプルでの分散に比べてどれだけ分離されているかをテストします。これは先に作成した距離行列を利用して行われ実際には座標付けは使用されません。
 
 > ### {% icon hands_on %} ハンズオン: Amova
 >
 > - **Amova** {% icon tool %} で次のように設定する
->   - "phylip" to dist files from Dist.shared (collection)
->   - "design" to mouse.time.design file from your history
->   - "output logfile?" to `yes`
+>   - "phylip" には Dist.shared の dist ファイル（コレクション）を選択する
+>   - "design" にはヒストリーから mouse.time.design ファイルを選択する
+>   - "output logfile?" → `yes`
 {: .hands_on}
 
-in logfile for thetaYC we find:
+thetaYC のログファイルは次のようになっています:
 
 ```
 Early-Late    Among       Within     Total
@@ -1168,17 +1148,14 @@ Fs:    19.3445
 p-value: <0.001*
 ```
 
-Here we see from the AMOVA that the "cloud" early and late time points has a significantly different centroid
-for this mouse. Thus, the observed separation in early and late samples is statistically significant. We can
-also see whether the variation in the early samples is significantly different from the variation in the late
-samples using the `Homova` command:
+ここでは AMOVA から、このマウスにおいて"クラウド"の重心が早期と後期の時点で大きく異なっていることが分かります。したがって、早期と後期のサンプルで観察された分離は統計的に有意である。私たちはまた初期サンプルの分散が後期サンプルの分散と大きく異なるかどうかを `Homova` コマンドを用いて見ることもできます:
 
 > ### {% icon hands_on %} ハンズオン: Homova
 >
 > - **Homova** {% icon tool %} で次のように設定する
->   - "phylip" to dist files from Dist.shared (collection)
->   - "design" to mouse.time.design file from your history
->   - "output logfile?" to `yes`
+>   - "phylip" には Dist.shared の dist ファイル（コレクション）を選択する
+>   - "design" にはヒストリーから mouse.time.design ファイルを選択する
+>   - "output logfile?" → `yes`
 {: .hands_on}
 
 ```
@@ -1186,24 +1163,20 @@ HOMOVA        BValue     P-value    SSwithin/(Ni-1)_values
 Early-Late    7.51408    <0.001*    0.0603208    0.00773943
 ```
 
-We see that there is a significant difference in the variation with the early samples having a larger amount
-of variation (0.061) than the late samples (0.008). This was what we found in the original study - the early
-samples were less stable than the late samples.
+後期サンプルの分散（0.008）よりも初期サンプルの分散がより大きな値（0.061）になったことから有意差があることが分かりました。これは最初の研究で発見したことでした - 初期サンプルは後期サンプルよりも不安定である。
 
-Next, we might ask which OTUs are responsible for shifting the samples along the two axes. We can determine
-this by measuring the correlation of the relative abundance of each OTU with the two axes in the NMDS dataset.
-We do this with the `corr.axes` tool:
+次に、どの OTU が2つの軸に沿ってサンプルをシフトさせているかを知ろうと思います。私たちは NMDS データセット内の2つの軸と各OTUの相対存在量の相関を測定することでこれを決定することができます。これは `corr.axes` ツールで行います:
 
-> ### {% icon hands_on %} ハンズオン: Correlation
+> ### {% icon hands_on %} ハンズオン: 相関
 >
 > - **Corr.axes** {% icon tool %} で次のように設定する
->   - "axes" to axes output from Nmds in 3 dimension (collection)
->   - "shared" to shared output from collapse collection on Sub.sample
->   - "method" to `Spearman`
->   - "numaxes" to `3`
+>   - "axes" には3次元での NMDs のアウトプットである axes （コレクション）を選択する
+>   - "shared" には Sub.sample の collapse collection のアウトプットである shared を選択する
+>   - "method" → `Spearman`
+>   - "numaxes" → `3`
 {: .hands_on}
 
-Examining the axes output, we see the data for the first five OTUs look something like this..
+axes のアウトプットを調べると、最初の5つのOTUのデータはこのように表示されています..
 
 ```
 OTU         axis1       p-value      axis2       p-value     axis3       p-value     length
@@ -1215,9 +1188,7 @@ Otu0005    -0.315327    0.180955     0.046553    0.843432    0.097497    0.67913
 ...
 ```
 
-What these results show is that OTUs 1 and 2 are responsible for moving points in a negative direction along
-axis 2. Recalling that we classified each OTU earlier (see taxonomy output from `Classify.otu`), we can see
-that these first five OTUs are mainly members of the Porphyromonadaceae:
+これらの結果が示すことは OTUs 1 と 2 が軸2に沿って負の方向にポイントを移動させているということです。私たちが各OTUを先に分類したことを思い出すと（ `Classify.otu` の taxonomy アウトプットを見てください）、これらの最初の5つのOTUは主に Porphyromonadaceae のメンバーであることがわかります:
 
 ```
 OTU        Size   Taxonomy
@@ -1229,17 +1200,14 @@ Otu0005    7479    Bacteria(100);"Bacteroidetes"(100);"Bacteroidia"(100);"Bacter
 ...
 ```
 
-This helps to illustrate the power of OTUs over phylotypes since each of these OTUs is behaving differently.
-These data can be plotted in what's known as a biplot where lines radiating from the origin (axis1=0, axis2=0,
-axis3=0) to the correlation values with each axis are mapped on top of the PCoA or NMDS plots.
+これはこれらのOTUのそれぞれが別々に働くので系統型に対するOTUの効果を説明するのに役立ちます。
+These data can be plotted in what's known as a biplot where lines radiating from the origin (axis1=0, axis2=0, axis3=0) to the correlation values with each axis are mapped on top of the PCoA or NMDS plots.
 <!-- TODO: make this plot? -->
 
-Later, using the metastats command, we will see another method for describing which populations are
-responsible for differences seen between specific treatments.
+この後、metastats コマンドを使用して、特定の条件下に見られる差異の原因となる個体群を調べるもう一つの方法を見ていきます。
 
-An alternative approach to building a biplot would be to provide data indicating metadata about each sample.
-For example, we may know the weight, height, blood pressure, etc. of the subjects in these samples. For
-discussion purposes the file `mouse.dpw.metadata` is provided and looks something like this:
+biplot を構築する別のアプローチとして各サンプルについてのメタデータを示すデータを用意することがあります。
+例えば、これらのサンプルの実験体の体重や身長、血圧などを知ることができます。この議論のため `mouse.dpw.metadata` ファイルが提供されていて次のようになっています:
 
 ```
 group    dpw
@@ -1267,23 +1235,22 @@ F3D9     9
 > ### {% icon hands_on %} ハンズオン
 >
 > - **Corr.axes** {% icon tool %} で次のように設定する
->   - "axes" to axes output from Nmds in 3 dimension
->   - "Generate Collector Curvers for" to Metadata table
->   - "metadata table" to `mouse.dpw.metadata`
->   - "method" to `Spearman`
->   - "numaxes" to `3`
+>   - "axes" には3次元の Nmds のアウトプットである axes を選択する
+>   - "Generate Collector Curvers for" → Metadata table
+>   - "metadata table" → `mouse.dpw.metadata`
+>   - "method" → `Spearman`
+>   - "numaxes" → `3`
 >
-> This will output a file like the following:
+> これは次のようなファイルをアウトプットします:
 >
 > ```
 > Feature    axis1       p-value      axis2       p-value     axis3       p-value     length
 > dpw        0.205263    0.383832    -0.292982    0.213861    0.821053    0.000016    0.895600
 > ```
 >
-> Indicating that as the dpw increases, the communities shift to in the positive direction along axis 3.
+> dpw が増加は、コミュニティは軸3に沿って正の方向にシフトすることを示します。
 >
-> Another tool we can use is `get.communitytype` to see whether our data can be partitioned in to separate
-> community types
+> もう一つのツールでは `get.communitytype` を使用して、データを別々のコミュニティタイプに分割できるかどうかを調べることができます
 >
 > <!-- TODO: add this tool to mothur suite -->
 > - **Get.communitytype** {% icon tool %} で次のように設定する
@@ -1292,7 +1259,7 @@ F3D9     9
 >
 {: .hands_on}
 
-In logfile we find the following output:
+ログファイルには次のアウトプットがあります:
 
 ```
 K    NLE        logDet    BIC         AIC         Laplace
@@ -1303,10 +1270,7 @@ K    NLE        logDet    BIC         AIC         Laplace
 5    11662.52  -250.61    13957.71    13221.52    10104.59
 ```
 
-We see that the minimum Laplace value is for a K value of 2 (9348.28). This indicates that our samples
-belonged to two community types. Opening the `design` output we see that all of the late samples and the Day 0
-sample belonged to Partition_1 and the other early samples belonged to Partition_2. We can look at the
-`summary` output to see which OTUs were most responsible for separating the communities:
+ラプラスの最小値は2の K 値（9348.28）であることがわかります。これは、サンプルが2つのコミュニティタイプに属することを示しています。`design` アウトプットを開くと後期サンプルと Day 0 サンプルのすべてが Partition_1 に属していて他の初期サンプルは Partition_2 に属していたことがわかります。私たちは `summary` のアウトプットを見てどの OTU がコミュニティの分離に最も大きく関わっているかを調べることができます:
 
 ```
 OTU        P0.mean  P1.mean  P1.lci  P1.uci  P2.mean  P2.lci  P2.uci  Difference   CumFraction
@@ -1318,8 +1282,7 @@ Otu0019    2.07     3.48     2.90    4.18    0.94     0.63    1.40    2.54      
 ...
 ```
 
-Again we can cross reference these OTU labels with the consensus classifications in the taxonomy file to get
-the names of these organisms.
+これらの生物の名前を得るために taxonomy ファイルをコンセンサス分類して OTU ラベルを再び相互に参照することができます。
 
 > ### {% icon question %} Question
 >
@@ -1335,20 +1298,18 @@ the names of these organisms.
 > </details>
 {: .question}
 
-## Population-level Analysis
+## 母集団レベルの解析
 
-In addition to the use of `corr.axes` and `get.communitytype` we have several tools to differentiate between
-different groupings of samples. The first we'll demonstrate is `metastats`, which is a non-parametric T-test
-that determines whether there are any OTUs that are differentially represented between the samples from early and late in this study.
+`corr.axes` と `get.communitytype` の使用に加えてサンプルの異なるグループを区別するためのツールがいくつかあります。最初に示すのは `metastats` で、これはノンパラメトリック T 検定でこの研究の初期と後期のサンプルの間で差異的に表れる OTU があるかどうかを決定します。
 
-> ### {% icon hands_on %} ハンズオン: T-test
+> ### {% icon hands_on %} ハンズオン: T検定
 >
 > - **Metastats** {% icon tool %} で次のように設定する
->   - "shared" to Subsample.shared
->   - "design" to `mouse.time.design`
+>   - "shared" → Subsample.shared
+>   - "design" → `mouse.time.design`
 {: .hands_on}
 
-Looking at the first 5 OTUs from `Late-Early` output file we see the following:
+`Late-Early` のアウトプットファイルにおける最初の5つの OTU を見ると次のようになっています:
 
 ```
 OTU        mean(group1)  variance(group1)  stderr(group1)  mean(group2)  variance(group2)  stderr(group2)  p-value
@@ -1359,7 +1320,7 @@ Otu0004    0.029451      0.000064          0.002536        0.020427      0.00014
 Otu0005    0.068139      0.000087          0.002957        0.070058      0.000163          0.004254        0.729271
 ```
 
-These data tell us that OTUs 1, 2, and 3 was significantly different between the early and late samples.
+これらのデータは OTU 1, 2, および 3 が初期と後期のサンプル間で有意に異なることを示しています。
 
 > ### {% icon question %} Question
 >
@@ -1374,16 +1335,16 @@ These data tell us that OTUs 1, 2, and 3 was significantly different between the
 > </details>
 {: .question}
 
-Another non-parametric tool we can use as an alternative to metastats is lefse:
+metastats の代わりとして使用することができるもう一つのノンパラメトリックのツールは lefse です:
 
 > ### {% icon hands_on %} ハンズオン: Lefse
 >
 > - **Lefse** {% icon tool %} で次のように設定する
->   - "shared" to Subsample.shared
->   - "design" to `mouse.time.design`
+>   - "shared" → Subsample.shared
+>   - "design" → `mouse.time.design`
 {: .hands_on}
 
-Looking at the top of the lefse summary file we see:
+lefse の summary ファイルの一番上を見ると次のようになっています:
 
 ```
 OTU        LogMaxMean  Class   LDA         pValue
@@ -1394,20 +1355,18 @@ Otu0004    4.4691      -
 Otu0005    4.84546     -
 ```
 
-Again, OTUs 1, 2, and 3 are significantly different between the two groups and are significantly elevated in the
-late samples
+改めて言うと、OTU 1, 2, および 3 は2つのグループ間で有意に異なり、後期のサンプルで有意に上昇しました
 
-Finally, Mothur has an implementation of the random forest algorithm build into her as classify.rf. This will tell
-us which features (i.e. OTUs) are useful in discriminating between the two groups of samples:
+最後に、Mothur は classify.rf というランダムフォレストアルゴリズムを実装しています。これにより、2つのサンプルグループを区別する際にどの機能（即ち OTU ）が役立つかがわかります:
 
 > ### {% icon hands_on %} ハンズオン: Classify.rf
 >
 > - **Classify.rf** {% icon tool %} で次のように設定する
->   - "shared" to Subsample.shared
->   - "design" to `mouse.time.design`
+>   - "shared" → Subsample.shared
+>   - "design" → `mouse.time.design`
 {: .hands_on}
 
-in the logfile we see:
+ログファイルは次のようになっています:
 
 ```
 Creating 100 (th) Decision tree
@@ -1420,8 +1379,8 @@ Late    0        10      0
 time    0        0       0
 ```
 
-We can ignore the time row and column and see that our samples were all correctly assigned to the proper groups.
-Looking at `summary` output, we see the top 10 OTUs that resulted in the greatest mean decrease in activity were:
+時間の行と列を無視してサンプルがすべて適切なグループに正しく割り当てられていることを確認することができます。
+`summary` アウトプットを見ると、アクティビティの平均減少が最も大きいトップ10の OTU が次のように表示されています:
 
 ```
 OTU        Mean decrease accuracy
@@ -1437,10 +1396,10 @@ Otu0082    0.08
 Otu0042    0.07
 ```
 
-# Conclusion
+# 結論
 {:.no_toc}
 
-You have now seen how to perform the Schloss lab's Standard Operating Procedure (SOP) for MiSeq data.
-You have worked your way through the following pipeline:
+MiSeq データについての Schloss ラボの標準操作手順（SOP）の実行方法を確認しました。
+あなたは次のパイプラインを通してやり方を学びました:
 
 ![Mothur sop tutorial pipeline](../../images/mothur_sop_pipeline.jpg)
