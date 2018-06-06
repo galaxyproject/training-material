@@ -833,7 +833,7 @@ but the package was later renamed to <code class="highlighter-rouge">slurm-wlm</
                 <span class="n">destination</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s">'nativeSpecification'</span><span class="p">]</span> <span class="o">=</span> <span class="s">''</span>
             <span class="n">destination</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s">'nativeSpecification'</span><span class="p">]</span> <span class="o">+=</span> <span class="s">' --time=</span><span class="si">%</span><span class="s">s:00:00'</span> <span class="o">%</span> <span class="n">time</span>
         <span class="k">elif</span> <span class="n">param_dict</span><span class="p">[</span><span class="s">'__job_resource'</span><span class="p">][</span><span class="s">'__job_resource__select'</span><span class="p">]</span> <span class="o">!=</span> <span class="s">'no'</span><span class="p">:</span>
-            <span class="c"># someone's up to some shennanigans</span>
+            <span class="c"># someone's up to some shenanigans</span>
             <span class="n">log</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s">'(</span><span class="si">%</span><span class="s">s) resource selector not yes/no, param_dict was: </span><span class="si">%</span><span class="s">s'</span><span class="p">,</span> <span class="n">job</span><span class="o">.</span><span class="nb">id</span><span class="p">,</span> <span class="n">param_dict</span><span class="p">)</span>
             <span class="k">raise</span> <span class="n">JobMappingException</span><span class="p">(</span> <span class="n">FAILURE_MESSAGE</span> <span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
@@ -847,7 +847,7 @@ but the package was later renamed to <code class="highlighter-rouge">slurm-wlm</
     <span class="k">return</span> <span class="n">destination</span> <span class="ow">or</span> <span class="n">destination_id</span>
 </code></pre></div></div>
 
-<p>It is important to note that <strong>you are responsible for parameter validation, including the job resource selector</strong>. This function only handles the job resource parameter fields, but it could do many other things - examine inputs, job queues, other tool paramters, etc.</p>
+<p>It is important to note that <strong>you are responsible for parameter validation, including the job resource selector</strong>. This function only handles the job resource parameter fields, but it could do many other things - examine inputs, job queues, other tool parameters, etc.</p>
 
 <p>Once written, restart Galaxy with <code class="highlighter-rouge">sudo supervisorctl restart all</code>.</p>
 
