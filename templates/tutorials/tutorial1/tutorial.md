@@ -116,4 +116,4 @@ Short introduction about this subpart.
 # Conclusion
 {:.no_toc}
 
-Conclusion about the technical key points. And then relation between the technics and the biological question to end with a global view.
+Conclusion about the technical key points. And then relation between the techniques and the biological question to end with a global view.
