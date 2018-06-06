@@ -143,7 +143,7 @@ blabla
 
 ### Metadata
 
-The tutorial needs to start with some medatada on its top:
+The tutorial needs to start with some metadata on its top:
 
 - `layout: tutorial_hands_on` (keep the default)
 - `topic_name: training` with the name of the topic
@@ -157,7 +157,7 @@ If not correctly defined, the tutorial will not be found within the website.
 > 1. Change the `tutorial_name` and the `topic_name` to fit to the ones defined in the metadata
 > 2. Make sure that Jekyll is running
 >
->    > Want to learm how to start Jekyll? [Check out our tutorial to serve the website locally]({{ site.baseurl }}/topics/contributing/tutorials/running-jekyll/tutorial.html)
+>    > Want to learn how to start Jekyll? [Check out our tutorial to serve the website locally]({{ site.baseurl }}/topics/contributing/tutorials/running-jekyll/tutorial.html)
 >
 > 2. Check if the tutorial has been correctly added at [http://localhost:4000/training-material/](http://localhost:4000/training-material/)
 >
@@ -165,7 +165,7 @@ If not correctly defined, the tutorial will not be found within the website.
 
 ### Content
 
-The tutorial's content is written directly after the short section of metadata. This is written in Markdown, a simple markup langage.
+The tutorial's content is written directly after the short section of metadata. This is written in Markdown, a simple markup language.
 
 > ### {% icon tip %} Tip: Markdown
 >
@@ -195,7 +195,7 @@ We recommend to structure the tutorials as follows:
 >
 > ![This figure shows an example of an image with a caption](../../images/image_caption_screenshot.png "Example of an image with a caption")
 >
-> The preceding string "Figure" and its corresponding number is automatically added before its caption, which is in turn placed below the image by providing all informations in the Markdown call of the image:
+> The preceding string "Figure" and its corresponding number is automatically added before its caption, which is in turn placed below the image by providing all information in the Markdown call of the image:
 >
 >   ```
 >   ![A textual description of the image](../images/image.png "This is my super caption")
@@ -381,7 +381,7 @@ The different defined boxes are:
     {: .question}
 
     Questions have to be quick to answer, and answers can be also provided as multiple choices (MCQs).
-    With well choosen wrong answers, MCQs can do much more than just measure how much someone knows.
+    With well chosen wrong answers, MCQs can do much more than just measure how much someone knows.
 
     In the box below and hidden we add also the correct answer, so that self-trainees can check the solution and its explanation.
 
@@ -457,7 +457,7 @@ The different defined boxes are:
     This last box of the tutorial is automatically filled with the take-home messages defined in the metadata
 
 
-To render the boxes correctly, the syntax needs to be correct. If it does't work, have a look at similar tutorials and get inspiration.
+To render the boxes correctly, the syntax needs to be correct. If it doesn't work, have a look at similar tutorials and get inspiration.
 Boxes can be nested, *e.g.* for having tips inside a hands-on:
 
 
