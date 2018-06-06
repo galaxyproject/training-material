@@ -50,7 +50,7 @@ tutorial_name: mothur-miseq-sop
 
 ## インプットデータを理解する
 このチュートリアルでは宿主の健康に対する腸内微生物叢の一般的な変化の影響を知ることに興味があります。
-そのために、離乳後365日間マウスから新鮮な糞を毎日採集しました。離乳後最初の150日間（dpw）は、 nothing was done to our mice except allow them to eat, get fat, and be merry. 私たちは離乳後最初の10日間で観察された急激な重量の変化が140～150日の間で観察された微生物叢と比較して安定した微生物叢に影響を及ぼすのかどうか興味がありました。このチュートリアルでは OTU、phylotype、そして系統発生学的な手法を組み合わせて使うことでこの問いに取り組みます。
+そのために、離乳後365日間マウスから新鮮な糞を毎日採集しました。離乳後最初の150日間（dpw）は、餌を与えて、太らせて、楽しませる以外はマウスに対して何もしませんでした。私たちは離乳後最初の10日間で観察された急激な重量の変化が140～150日の間で観察された微生物叢と比較して安定した微生物叢に影響を及ぼすのかどうか興味がありました。このチュートリアルでは OTU、phylotype、そして系統発生学的な手法を組み合わせて使うことでこの問いに取り組みます。
 
 ![Experiment setup](../../images/experiment_setup.png)
 
@@ -82,7 +82,7 @@ in this document differ slightly from the description on their website -->
 >    > * メニューから**新しく作成**というオプションを選択する
 >    {: .tip}
 >
-> 2. **サンプルデータをインポートする。**このコースのデータは Galaxy の共有ライブラリから入手することができます（インストラクターに聞いてください）。もしデータがない場合は、自分自身でアップロードすることができます。
+> 2. **サンプルデータをインポートする。** このコースのデータは Galaxy の共有ライブラリから入手することができます（インストラクターに聞いてください）。もしデータがない場合は、自分自身でアップロードすることができます。
 > - オプション 1: データライブラリから:
 >   - 共有データライブラリに移動すると、20 ペアの fastq ファイルが見つかります; マウスからは19 ペア、そして残り1 ペアは mock からのものです。
 > - オプション 2: 自分のコンピュータから:
@@ -91,9 +91,11 @@ in this document differ slightly from the description on their website -->
 >   - すべてのファイルをヒストリーにアップロードする。
 > <br><br>
 >
-> 3. **リファレンスデータをインポートする。**データライブラリに戻り、以下のリファレンスデータセットをインポートするか、 Zenodo からダウンロードして (`reference_data.zip`) ヒストリーにアップロードしましょう:
+> 3. **リファレンスデータをインポートする。** データライブラリに戻り、以下のリファレンスデータセットをインポートするか、 Zenodo からダウンロードして (`reference_data.zip`) ヒストリーにアップロードしましょう:
 >  - `silva.v4.fasta`
 >  - `HMP_MOCK.v35.fasta`
+>  - `mouse.dpw.metadata`
+>  - `mouse.time.design`
 >  - `trainset9_032012.pds.fasta`
 >  - `trainset9_032012.pds.tax`
 >
@@ -108,14 +110,14 @@ in this document differ slightly from the description on their website -->
 > 1. ヒストリー上部にある**チェックマークアイコン**をクリックする。
 >   ![Checkmark icon in history menu](../../../../shared/images/history_menu_buttons2.png)
 >
-> 2. すべての fastq ファイル（計40個）を選択して、**各項目を...**をクリックしてドロップダウンメニューから **Build List of Dataset Pairs** を選択する。
+> 2. すべての fastq ファイル（計40個）を選択して、**各項目を...** をクリックしてドロップダウンメニューから **Build List of Dataset Pairs** を選択する。
 > 3. 次のダイアログウィンドウでペアのリストを作成することができます。デフォルトでは Galaxy は名前において `_1` と `_2` の部分だけが異なるファイルのペアを探します。私たちの場合は、`_R1` と `_R2` を探すようにしなければなりません。よってこれらの値を変更しましょう。変更すると Galaxy がペアのリストを提案し表示します。
 >   ![List of suggested paired datasets](../../images/create_collection.png) <br><br>
 >
 > 4. ペアを調べて、大丈夫そうだったら、**auto-pair** をクリックすることで提案されたペアを作成できます。
 >   ![The result of pairing](../../images/create_collection2.png) <br><br>
 >   中央のセグメントは各ペアの名前です。これらの名前はクリックして変更することができます。これらの名前は以降の解析でサンプル名として使用されるため、常に内容がわかるような名前であることを確認してください。
->   **重要:**これらのサンプル名が英数字のみであることを確認してください。Zenodo からデータをインポートした場合、デフォルトではサンプル名はフルの URL になっているため、`F3D0` や `F3D5` などというような、最後の部分のみに変更してください。
+>   **重要:** これらのサンプル名が英数字のみであることを確認してください。Zenodo からデータをインポートした場合、デフォルトではサンプル名はフルの URL になっているため、`F3D0` や `F3D5` などというような、最後の部分のみに変更してください。
 >
 > 5. 納得のいくペアになったら、画面の右下に新しいコレクションの名前を入力します。そして **Create List** ボタンをクリックしましょう。ヒストリーに新しいデータセットのコレクションアイテムが表示されます。
 {: .hands_on}
@@ -128,15 +130,14 @@ in this document differ slightly from the description on their website -->
 まず初めに各サンプルのフォワードリードとリバースリードを組み合わせます。これはインプットとしてペアのコレクションが必要で、 `make.contigs` コマンドを利用して行われます。このコマンドは fastq ファイルから配列と品質スコアのデータを抽出し、リバースリードの相補鎖を作成してリードをコンティグに加えます。そしてすべてのサンプルを1つの fasta ファイルにまとめ、*group* ファイルを使ってどのサンプルからどのリードを持ってきたかを記憶させます。
 
 > ### {% icon comment %} アルゴリズムの詳細
-> これを行うための非常にシンプルなアルゴリズムを私たちは持っています。まずは配列のペアを揃えます。次にアライメントを調べて２つのリードが一致しない位置を特定します。１つの配列にベースがありもう１つにギャップがある場合、ベースの品質スコアは２５以上であることを考慮する必要があります。両方の配列にベースがある場合は、ベースの1つが他のものよりも６点以上の品質スコアである必要があります。もしそれが６点以下であれば、コンセンサスベースを N に設定します。
+> これを行うための非常にシンプルなアルゴリズムを私たちは持っています。まずは配列のペアを揃えます。次にアライメントを調べて2つのリードが一致しない位置を特定します。1つの配列にベースがありもう1つにギャップがある場合、ベースの品質スコアは25以上であることを考慮する必要があります。両方の配列にベースがある場合は、ベースの1つが他のものよりも6点以上の品質スコアである必要があります。もしそれが6点以下であれば、コンセンサスベースを N に設定します。
 {: .comment}
 
 ### データを統合する
 
 #### ペアエンドリードからコンティグを作成する
 
-この実験ではペアエンドシーケンシングを使用し、 this means sequencing was done from from both ends of each
-fragment, resulting in an overlap in the middle. We will now combine these pairs of reads into *contigs*.
+この実験ではペアエンドシーケンシングを使用し、ペアエンドシーケンスとは各フラグメントの両端からシーケンスするという意味で、結果として中央の配列部分が重なります。これから、これらのペアのリードを結合して *コンティグ* にしましょう。
 
 ![Merging into contigs](../../images/16S_merge_contigs.png)
 
@@ -166,13 +167,14 @@ M00967_43_000000000-A3JHG_1_1101_10051_26098    F3D0
 クオリティコントロールのトピックについてより知りたい場合は、training material をご覧ください。
 [こちら]({{site.baseurl}}/topics/sequence-analysis/)
 
-次にデータの品質を向上させようと思います。ですがまずは、データをよく見てみましょうNext we want to improve the quality of our data. But first, let's get a feel of our data
+次にデータの品質を向上させようと思います。ですがまずは、データをよく見てみましょう。
 
 > ### {% icon hands_on %} ハンズオン: データを要約する
 >
 > - **Summary.seqs** {% icon tool %} で次のように設定する
 >   - "fasta" のパラメーターには make.contigs ツールによって作成された `trim.contigs.fasta` ファイルを選択する
 >   - name や count にファイルを選択する必要はありません
+>   - “Output logfile?” → `yes`
 >
 {: .hands_on}
 
@@ -194,7 +196,7 @@ Mean:        1        252.811    252.811    0.70063  4.44854
 これは 152,360の配列があり、大部分が248～253塩基の間にあることを示しています。
 面白いことに、データセット内の最も長いリードは 502 bp です。これについて疑いましょう。それぞれのリードの長さは 251 bp であることを思い出してください。このリードはあまりうまく（または全く）結合されませんでした。そして、塩基配列の少なくとも 2.5% に曖昧なリードが含まれていることも注意してください。次のステップでは `screen.seqs` を実行してこれらの問題を対処します。
 
-次のツールでは曖昧な塩基や 275 bp 以上の長さのリードである配列を除去します。
+次のツールでは曖昧な塩基（`maxambig` パラメーター）や 275 bp 以上の長さのリードである配列（`maxlength` パラメーター）を除去します。
 
 > ### {% icon hands_on %} ハンズオン: 品質と長さに基づいてリードをフィルタリングする
 >
@@ -225,6 +227,7 @@ Mean:        1        252.811    252.811    0.70063  4.44854
 >
 > - **Unique.seqs** {% icon tool %} で次のように設定する
 >   - "fasta" には Screen.seqs のアウトプットである `good.fasta` を選択する
+>   - "output format" → `Name File`
 >
 >
 > > ### {% icon question %} Question
@@ -289,6 +292,7 @@ M00967_43_000000000-A3JHG_1_1101_13234_1983  10522   425    281   340     205
 > 2. **Summary.seqs** {% icon tool %} で次のように設定する
 >   - "fasta" パラメーターには前段階の Align のアウトプットを選択する
 >   - "count" パラメーターには Count.seqs のアウトプットである `count_table` ファイルを選択する
+>   - "Output logfile?" → `yes`
 >
 {: .hands_on}
 
@@ -309,14 +313,11 @@ total # of seqs:    128872
 ```
 
 さて、これはどういう意味でしょうか? 大部分の配列が開始座標が1968で終了座標が11550であることが分かります。
-いくつかの配列は開始座標が1250や1982で、終了座標が10693や13400です。 These deviants from the mode positions
-are likely due to an insertion or deletion at the terminal ends of the alignments. 時として同じ座標で開始し終了する配列が非常に乏しいアライメントを示すことがありますが、これは一般的に非特異的な増幅によるものです。
+いくつかの配列は開始座標が1250や1982で、終了座標が10693や13400です。最頻値の位置からのこれらのズレは恐らくアライメントの末端での挿入または欠失によるものです。時々同じ座標で開始し終了する配列が非常に乏しいアライメントを示すことがありますが、これは一般的に非特異的な増幅によるものです。
 
 ### More Data Cleaning
 
-すべてが同じ領域に重複するように screen.seqs を再実行して開始や先頭の座標は1968で終了や末尾の座標を11550の配列を取得します。  We'll also set the maximum
-homopolymer length to 8 since there's nothing in the database with a stretch of 9 or more of the same
-base in a row (this also could have been done in the first execution of screen.seqs above).
+すべてが同じ領域に重複するように screen.seqs を再実行して開始や先頭の座標は1968で終了や末尾の座標を11550の配列を取得します。また、ホモポリマーの最大長を8に設定するのはデータベース内に同じ配列が9つ以上一列に並んでいるものがないためです（これは上記の最初に実行した screen.seqs でも行うことができました）。
 
 > ### {% icon hands_on %} ハンズオン: 共通部分の少ない配列を除去する
 >
@@ -340,7 +341,7 @@ base in a row (this also could have been done in the first execution of screen.s
 {: .hands_on}
 
 
-今私たちは同じアライメント座標で重なっている配列を知っていますが、それらがその領域*だけ*で重なっていることを確認したいです。そこで配列をフィルタリングして両端のはみ出しているものを除去します。ペアエンドシーケンシングを行っているため、これは大きな問題にはなりません。加えて、アライメントの中にはギャップ文字（即ち「.」）だけを含んだ多くの列があります。これらは情報を失うことなく抜き出すことができます。これはすべて filter.seqs を用いて行います:
+今私たちは同じアライメント座標で重なっている配列を知っていますが、それらがその領域 **だけ** で重なっていることを確認したいです。そこで配列をフィルタリングして両端のはみ出しているものを除去します。ペアエンドシーケンシングを行っているため、これは大きな問題にはなりません。加えて、アライメントの中にはギャップ文字（即ち「.」）だけを含んだ多くの列があります。これらは情報を失うことなく抜き出すことができます。これはすべて filter.seqs を用いて行います:
 
 > ### {% icon hands_on %} ハンズオン: 配列をフィルタリングする
 >
@@ -348,6 +349,7 @@ base in a row (this also could have been done in the first execution of screen.s
 >   - "fasta"" to good.fasta output from Sreen.seqs
 >   - "vertical" → Yes
 >   - "trump" → `.`
+>   - "Output logfile" → `yes`
 {: .hands_on}
 
 log file には次のような情報が表示されます:
@@ -359,16 +361,13 @@ Length of the original alignment: 13425
 Number of sequences used to construct filter: 16298
 ```
 
-This means that our initial alignment was 13425 columns wide and that we were able to remove 13049 terminal gap
-characters using `trump=.` and vertical gap characters using `vertical=yes`. The final alignment length is 376
-columns. Because we've perhaps created some redundancy across our sequences by trimming the ends, we can re-run
-`unique.seqs`:
+これは最初のアライメントが 13425 カラム幅で、終端のギャップ文字は `trump=.` を使い垂直ギャップ文字には `vertical=yes` を使うことで 13049 列が除去できたことを意味しています。最終的なアライメントの長さは 376 列です。私たちは恐らく両端をトリミングすることで配列全体にいくつかのリダンダンシーを作り出したので、`unique.seqs` を再実行することができます:
 
 > ### {% icon hands_on %} ハンズオン: 一意な配列を再取得する
 >
 > - **Unique.seqs** {% icon tool %} で次のように設定する
 >   - "fasta" には Filter.seqs のアウトプットである `filtered fasta` ファイルを選択する
->   - "name file or count table" to the count table from the last Screen.seqs
+>   - "name file or count table" には最後の Screen.seqs の count table を選択する
 >
 > > ### {% icon question %} Question
 > >
@@ -383,9 +382,7 @@ columns. Because we've perhaps created some redundancy across our sequences by t
 
 
 ### プレクラスタリング
-配列をさらにノイズ除去したいので次に、 `pre.cluster` コマンドを使用して配列のプレクラスタリングを行い、配列間の違いを2塩基までにします。このコマンドはグループごとに配列を分割して This command will split the
-sequences by group and then sort them by abundance and go from most abundant to least and identify
-sequences that differ no more than 2 nucleotides from on another.  この場合、それらはマージされます。一般的に、100塩基対あたり1塩基の違いを許容することをお勧めします:
+配列をさらにノイズ除去したいので次に、`pre.cluster` コマンドを使用して配列のプレクラスタリングを行い、配列間の違いを2塩基までにします。このコマンドはグループごとに配列を分割して This command will split the sequences by group and then sort them by abundance and go from most abundant to least and identify sequences that differ no more than 2 nucleotides from on another.  この場合、それらはマージされます。一般的に、100塩基対あたり1塩基の違いを許容することをお勧めします:
 
 > ### {% icon hands_on %} ハンズオン: 配列のプレクラスタリングを行う
 >
@@ -454,9 +451,7 @@ when they're the most abundant sequence in another sample. This is how we do it:
 
 クオリティコントロールの最後のステップとして、データセットに"望ましくないもの"があるかを確認する必要があります。プライマーのセットを選ぶとき、アーキア由来の 18S rRNA や 16S rRNA の遺伝子断片や、葉緑体や、ミトコンドリアといった他のものがパイプラインのこの時点まで残っていると増幅されてしまいます。除去したい不特定のものもあります。
 
-Now you may say, "But wait I want that stuff". Fine. But, the primers we use, are only supposed to amplify
-members of the Bacteria and if they're hitting Eukaryota or Archaea, then it is a mistake. Also, realize
-that chloroplasts and mitochondria have no functional role in a microbial community.
+今あなたは、「だけど私はそのものが欲しいです」と言うかもしれません。分かります。ただ、私たちが使っているプライマーは、細菌のメンバーをただ増幅するだけでは真核生物または古細菌に当たると思ったら間違いです。また、葉緑体とミトコンドリアは微生物群集に対して機能的な役割を持っていないことが分かっています。
 
 それでは `classify.seqs` コマンドでベイズ分類器を利用してこれらの配列を分類しましょう:
 
@@ -490,9 +485,7 @@ that chloroplasts and mitochondria have no functional role in a microbial commun
 > >      Remove.seqs からのアウトプットである fasta ファイルには 2628 の配列があり、Remove.lineages からのアウトプットである fasta ファイルは 2608 の配列を含んでいました。
 > >      <br><br>
 > >      合計で 162 の配列が除去されました。 <br>
-> >      If you run summary.seqs with the count table, you will see that we now have 2608 unique sequences
-> >      representing a total of 119,168 total sequences (down from 119,330 before). This means 162 of our  
-> >      sequences were in represented by these 20 representative sequences.
+> >      カウントテーブルで summary.seqs を実行すると、合計 119,168 の配列を表す 2608 の一意な配列があることが分かります（以前の 119,330 から減少しています）。これは私たちの配列のうち 162 個がこれら 20 個の代表的な配列によって表されていることを意味しています。
 > >    </details>
 > {: .question}
 {: .hands_on}
@@ -504,7 +497,7 @@ that chloroplasts and mitochondria have no functional role in a microbial commun
 
 ## mock に基づいてエラー率を評価する
 
-配列のエラー率を測ることは mock を co-sequenced した場合、つまり、正確な構成を知っているサンプルである場合のみ行うことができます。  This is something we include for every 95 samples we sequence. You should too because it will help you gauge your error rates and allow you to see how well your curation is going, and whether something is wrong with your sequencing setup.
+配列のエラー率を測ることは mock を co-sequenced した場合、つまり、正確な構成を知っているサンプルである場合のみ行うことができます。これは95サンプル毎にシーケンスすると含まれるものです。エラー率を測定してキュレーションがどれほどうまくいくか、シーケンスの設定に何か問題があるかどうかを確認するのに役立ちます。
 
 > ### {% icon comment %} 定義
 >
@@ -512,7 +505,7 @@ that chloroplasts and mitochondria have no functional role in a microbial commun
 >
 {: .note}
 
-私たちの mock は 21 の細菌株由来のゲノムDNAから作成されています。ですので完璧な世界では、これは解析の結果産物とまったく同じものになります。    
+私たちの mock は 21 の細菌株由来のゲノム DNA から作成されています。ですので完璧な世界では、これは解析の結果産物とまったく同じものになります。    
 
 まずは、データから mock サンプルに属する配列を抽出しましょう:
 
@@ -524,6 +517,7 @@ that chloroplasts and mitochondria have no functional role in a microbial commun
 >   - "group file or count table" には Remove.lineage からの count table を選択する
 >   - "groups" → `Mock`
 >   - "fasta" には Remove.lineage のアウトプットである fasta ファイルを選択する
+>   - "output logfile?" → `yes`
 >
 {: .hands_on}
 
@@ -541,6 +535,7 @@ Selected 4060 sequences from your count file
 >   - "fasta" には Get.groups からの fasta ファイルを選択する
 >   - "reference" にはヒストリーから `HMP_MOCK.v35.fasta` ファイルを選択する
 >   - "count" には Get.groups からの count table を選択する
+>   - "output log?" → `yes`
 >
 {: .hands_on}
 
@@ -560,13 +555,13 @@ Errors    Sequences
 えぇ？すごいですね、エラー率は 0.0065% です！
 
 
-### OTU への mock 配列の集約
+### OTU への mock 配列のクラスタリング
 
-今 mock 配列を OTU へ集約して We can now cluster the mock sequences into OTUs to see how many spurious OTUs we have:
+今 mock 配列を OTU にクラスタリングして私たちがいくつ疑似的なOTUを持っているかを確認することができます:
 
 > ### {% icon tip %} 背景: Operational Taxonomic Units (OTUs)
 >
-> 16S メタゲノミクスアプローチでは、OTU は 16S rDNA マーカー遺伝子と同種な配列の変異体のクラスターである。これらのクラスターのそれぞれは配列の類似性の閾値に応じて細菌種または属の分類学的な単位を示すことを意図している。典型的には、OTU クラスターは Typically, OTU cluster are defined by a 97% identity threshold of the 16S gene sequence variants at genus level. 98% or 99% identity is suggested for species separation.
+> 16S メタゲノミクスアプローチでは、OTU は 16S rDNA マーカー遺伝子と同種な配列の変異体のクラスターである。これらのクラスターのそれぞれは配列の類似性の閾値に応じて細菌種または属の分類学的な単位を示すことを意図している。典型的には、OTU クラスターでは 16S 遺伝子配列変異体が 97% まで同一だと属レベルで定義されます。98% または 99% 同一だと種の分類まで示唆されます。
 >
 > ![OTU graph](../../images/OTU_graph.png)
 >
@@ -602,11 +597,11 @@ Errors    Sequences
 >
 > > ### {% icon question %} Question
 > >
-> >  How many OTUs were identified in our mock community?
+> >  私たちの mock ではいくつの OTU が特定されましたか？
 > > <details>
 > >   <summary> クリックして解答を表示</summary>
-> >   34. <br>
-> >   Open the shared file or OTU list and look at the header line. You will see a column for each OTU
+> >   34個です。 <br>
+> >   shared file または OTU のリストを開いてヘッダー行を確認してください。各 OTU の列が表示されるでしょう。
 > >  </details>
 > {: .question}
 {: .hands_on}
@@ -718,10 +713,9 @@ Otu0013	1856	Bacteria(100);Firmicutes(100);Bacilli(100);Lactobacillales(100);Lac
 
 # OTU-based 解析
 
-より面白いことをして実際にデータを解析してみましょう。OTU ベースのデータセットに焦点を当てます。phylotype ベースの解析は本質的に同じです。また、当初の質問が早期サンプルと後期サンプルを比較する時のこれらのサンプルのコミュニティー構造の変化や安定性に関係していたことを忘れないでください。
+より面白いことをして実際にデータを解析してみましょう。OTU ベースのデータセットに焦点を当てます。系統型に基づく解析は本質的に同じです。また、当初の質問が早期サンプルと後期サンプルを比較する時のこれらのサンプルのコミュニティー構造の変化や安定性に関係していたことを忘れないでください。
 
-Keep in mind that the group names have either a F or M (sex of animal) followed by a number (number of
-animal) followed by a D and a three digit number (number of days post weaning).
+グループ名には F または M （動物の性別）が続きその後ろに数字（動物の番号）と D および 3桁の数字（離乳後の日数）が続いていることを覚えておいてください。
 
 > ### {% icon hands_on %} ハンズオン: サブサンプリング
 >
