@@ -82,7 +82,7 @@ The `docker` image will also integrate the Galaxy tours available for each topic
 
 # Defining the topic
 
-When we structured the repository, we decided to use as topics the categories that are used in the [ToolShed](https://toolshed.g2.bx.psu.edu/). The ToolShed assigns a category to each tool. Therefore, to decide where to put your tutorial, have a look at which ToolShed's category the main tools in your tutorial belong. For example, here this tutorial will rely on the NCBI Blast+ tool.
+When we structured the repository, we decided to use as topics the categories that are used in the [ToolShed](https://toolshed.g2.bx.psu.edu/). The ToolShed assigns a category to each tool. Therefore, to decide where to put your tutorial, have a look at which ToolShed's category the main tools in your tutorial belong. For example, this tutorial will rely on the NCBI Blast+ tool.
 
 > ### {% icon hands_on %} Hands-on: Defining the topic for the tutorial
 >
