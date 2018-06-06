@@ -234,7 +234,7 @@ remembering which reads came from which samples using a *group* file.
 
 #### Make contigs from paired-end reads
 
-In this experiment we used paired-end sequencing, this means sequencing was done from from both ends of each
+In this experiment we used paired-end sequencing, this means sequencing was done from both ends of each
 fragment, resulting in an overlap in the middle. We will now combine these pairs of reads into *contigs*.
 
 ![Merging into contigs](../../images/16S_merge_contigs.png)
@@ -1044,7 +1044,7 @@ coefficient](http://csyue.nccu.edu.tw/2005communicationindex.pdf)
 
 > ### {% icon hands_on %} Hands-on: Beta diversity
 >
-> Let's calculate . We'll do this
+> Let's calculate. We'll do this
 > with the `Dist.shared` command that will allow us to rarefy our data to a common number of sequences.
 >
 > - **Dist.shared** {% icon tool %} with the following parameters
