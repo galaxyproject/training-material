@@ -10,7 +10,7 @@ tutorial_name: create-new-tutorial-metadata
 Galaxy is a great solution to train the bioinformatics concepts:
 
 - numerous bioinformatics tools are available (almost 5,000 in the ToolShed)
-- it can be used by people without amy computer science skills
+- it can be used by people without any computer science skills
 - it trains to use technology, outlining available resources and efforts that have made them accessible to researchers
 - it is scalable
 
@@ -40,7 +40,7 @@ The first file we will fill is the `metadata.yaml` file describing the metadata 
 - `enable`: `false` to hide your tutorial from the topic page
 - `name`: name of the tutorial (name of the subdirectory where the files related to the tutorial will be stored)
 - `zenodo_link`: link on Zenodo to the input data for the tutorial (not ideal but it can be empty)
-- `galaxy_tour`(`yes` or `no`): tell if at least an interactive tour is avaible for the tutorial (in the `tours` subdirectory)
+- `galaxy_tour`(`yes` or `no`): tell if at least an interactive tour is available for the tutorial (in the `tours` subdirectory)
 - `workflows` (`yes` or `no`): tell if a workflow is available for this material
 - `hands_on`(`yes` or `no`): tell if an hands on is available for this material
 - `slides` (`yes` or `no`): tell if slides are available for this material its title, its type, ...
@@ -71,7 +71,7 @@ In the second part of the metadata, we define metadata related to the content of
 - `questions`: list of questions that will be addressed in the tutorial
 - `objectives`: list of learning objectives of the tutorial
 
-    A learning objective is a single sentence describing what a learner will be able to do once they have deone the tutorial
+    A learning objective is a single sentence describing what a learner will be able to do once they have done the tutorial
 
 - `key_points`: list of take-home messages
 
@@ -85,7 +85,7 @@ For this metadata, we take inspiration from what Software Carpentry is doing and
 > 2. Define 2 learning objectives for the tutorial and add them to the metadata
 {: .hands_on}
 
-We recommend you to fill the questions and the learning objectives before starting writing the tutorial content. You can still refine them afterwards, but it will help to design your tutorial and think beforehands what is worth training.
+We recommend you to fill the questions and the learning objectives before starting writing the tutorial content. You can still refine them afterwards, but it will help to design your tutorial and think beforehand what is worth training.
 
 For the take-home messages, it is easier to define them once the tutorial is written and you identified the issues.
 
