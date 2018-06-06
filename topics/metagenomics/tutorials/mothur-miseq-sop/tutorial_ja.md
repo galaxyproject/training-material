@@ -22,8 +22,7 @@ tutorial_name: mothur-miseq-sop
 > ### {% icon comment %} 注意
 > Galaxy にある Mothur ツールのそれぞれにはヘルプセクションにある mothur wiki へのリンクが含まれています。ここではツールのすべてのインプットや、アウトプット、そしてパラメーターに関するより詳しい内容を見ることができます。
 > <br><br>
-> Your results may deviate slightly from the ones presented in this tutorial due to differing tool or
-> reference data versions or stochastic processes in the algorithms.
+> ツールやリファレンスデータのバージョンまたはアルゴリズムの確率的なプロセスの違いでこのチュートリアルで挙げられている結果とわずかに異なる結果が得られる場合があります。 
 {: .comment}
 
 
