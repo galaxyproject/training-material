@@ -81,7 +81,7 @@ We have extracted sequences from the Sequence Read Archive (SRA) files to build 
 > 
 >    > ### {% icon tip %} Tip: Adding a tag
 >    > * Click on the dataset
->    > * Click on **Edit dataset tags**
+>    > * Click on <i class="fa fa-tags"></i> **Edit dataset tags** 
 >    > * Add the tag starting with `#`
 >    >    
 >    >     The tags starting with `#` will be automatically propagated to the outputs of tools using this dataset.
