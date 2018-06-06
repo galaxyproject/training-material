@@ -21,9 +21,7 @@ steps:
       Human splicing regulators Nova-1 and Nova-2 Proteins, was depleted in
       <i>Drosophila melanogaster</i> by RNAi. The authors wanted to identify
       exons that are regulated by <i>Pasilla</i> gene using RNA sequencing
-      data.      <br><br>We here proposed to re-analyze these data at least
-      until genotypes determination. Data are already clean so you don’t have to
-      demultiplex it using barcode information through `Process Radtags tool`
+      data.
     backdrop: true
   - title: Introduction
     content: >-
@@ -45,9 +43,11 @@ steps:
       The original data is available at NCBI Gene Expression Omnibus (GEO) under
       accession number <a
       href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE18508">GSE18508</a>.
-      <br><br>We will look at the 7 first samples:<ul>
+      <br><br>We will look at the 7 first samples:
+      <ul>
         <li>3 treated samples with <i>Pasilla</i> (PS) gene depletion: <a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM461179">GSM461179</a>, <a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM461180">GSM461180</a>, <a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM461181">GSM461181</a></li>
-        <li>4 untreated samples: <a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM461176">GSM461176</a>, <a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM461177">GSM461177</a>, <a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM461178">GSM461178</a>, <a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM461182">GSM461182</a></li></ul>
+        <li>4 untreated samples: <a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM461176">GSM461176</a>, <a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM461177">GSM461177</a>, <a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM461178">GSM461178</a>, <a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM461182">GSM461182</a></li>
+      </ul>
       <br>Each sample constitutes a separate biological replicate of the
       corresponding condition (treated or untreated). Moreover, two of the
       treated and two of the untreated samples are from a paired-end sequencing
@@ -63,8 +63,7 @@ steps:
     placement: left
   - title: Importing data via links
     content: >-
-      Import files from <a
-      href="https://dx.doi.org/10.5281/zenodo.1185122">Zenodo</a>.
+      Import files from <a href="https://dx.doi.org/10.5281/zenodo.1185122">Zenodo</a>.
     backdrop: true
   - title: Uploading the new data
     element: '#tool-panel-upload-button .fa.fa-upload'
@@ -117,7 +116,8 @@ steps:
     element: '.history-right-panel .list-items > *:first'
     content: >-
       In order to each database a tag corresponding to the name of the sample
-      (`#GSM461177` or `#GSM461180`)<ul>
+      (`#GSM461177` or `#GSM461180`)
+      <ul>
         <li>Click on the dataset</li>
         <li>Click on <b>Edit dataset tags</b></li>
         <li>Add the tag starting with `#`</li>
@@ -126,9 +126,8 @@ steps:
   - title: Quality control
     content: >-
       The sequences are raw data from the sequencing machine, without any
-      pretreatments. They need to be assessed for their quality.
-
-      <br><br>For quality control, we use similar tools as described in <a
+      pretreatments. They need to be assessed for their quality.<br><br>
+      For quality control, we use similar tools as described in <a
       href="http://galaxyproject.github.io/training-material/topics/sequence-analysis">NGS-QC
       tutorial</a>: <a
       href="https://www.bioinformatics.babraham.ac.uk/projects/fastqc/">FastQC</a>
@@ -152,14 +151,12 @@ steps:
   - title: Quality control
     element: '#tool-search'
     content: >-
-      Run the tool with the following parameters:<ul>
-
-      <li>“Short read data from your current history”  to `Multiple
-      datasets`</li>
-
+      Run the tool with the following parameters:
+      <ul>
+        <li>"Short read data from your current history" to `Multiple datasets`</li>
       </ul>
     position: right
-  - title: Building loci using STACKS
+  - title: Quality control
     element: '.history-right-panel .list-items > *:first'
     content: Inspect on the generated webpage for GSM461177_1 sample.
     position: left
@@ -184,15 +181,11 @@ steps:
   - title: Quality control
     element: '#tool-search'
     content: >-
-      Run the tool with the following parameters:<ul>
-
-      <li>“Which tool was used generate logs?” to `FastQC`</li>
-
-      <li>Type of FastQC output?” to `Raw data`</li>
-
-      <li>“FastQC output” to the generated Raw data files (multiple
-      datasets)</li>
-
+      Run the tool with the following parameters:
+      <ul>
+        <li>"Which tool was used generate logs?" to `FastQC`</li>
+        <li>Type of FastQC output?" to `Raw data`</li>
+        <li>"FastQC output" to the generated Raw data files (multiple datasets)</li>
       </ul>
     position: right
   - title: Quality control
@@ -221,16 +214,11 @@ steps:
   - title: Quality control
     element: '#tool-search'
     content: >-
-      Run the tool with the following parameters:<ul>
-
-      <li>“Is this library paired- or single-end?” to `Paired-end`</li>
-
-      <li>First “Reads in FASTQ format” to both `_1` fastqsanger datasets
-      (multiple datasets)</li>
-
-      <li>Second “Reads in FASTQ format” to both `_2` fastqsanger datasets
-      (multiple datasets)</li>
-
+      Run the tool with the following parameters:
+      <ul>
+        <li>"Is this library paired- or single-end?" to `Paired-end`</li>
+        <li>First "Reads in FASTQ format" to both `_1` fastqsanger datasets (multiple datasets)</li>
+        <li>Second "Reads in FASTQ format" to both `_2` fastqsanger datasets (multiple datasets)</li>
       </ul>
     position: right
   - title: Questions
@@ -243,19 +231,21 @@ steps:
     content: >-
       As the genome of <i>Drosophila melanogaster</i> is known and assembled, we
       can use this information and map the sequences on this genome to identify
-      the effects of <i>Pasilla</i> gene depletion on splicing events.
+      the effects of <i>Pasilla</i> gene depletion on splicing events.<br><br>
 
-      <br><br>To make sense of the reads, we need to determine to which genes
+      To make sense of the reads, we need to determine to which genes
       they belong. The first step is to determine their positions within the
       <i>Drosophila melanogaster</i> genome. This process is known as aligning
-      or ‘mapping’ the reads to a reference.
+      or ‘mapping’ the reads to a reference.<br><br>
 
-      <br><br>Because in the case of a eukaryotic transcriptome, most reads
+      Because in the case of a eukaryotic transcriptome, most reads
       originate from processed mRNAs lacking introns, they cannot be simply
       mapped back to the genome as we normally do for DNA data. Instead the
-      reads must be separated into two categories:<ul>
+      reads must be separated into two categories:
+      <ul>
         <li>Reads that map entirely within exons</li>
-        <li>Reads that cannot be mapped within an exon across their entire length because they span two or more exons</li></ul>
+        <li>Reads that cannot be mapped within an exon across their entire length because they span two or more exons</li>
+      </ul>
     backdrop: true
   - title: Mapping
     element: '#tool-search-query'
@@ -273,30 +263,16 @@ steps:
   - title: Mapping
     element: '#tool-search'
     content: >-
-      Run the tool with the following parameters:<ul>
-
-      <li>“Single-end or paired-end reads” to `Paired-end (as individual
-      datasets)`</li>
-
-      <li>“RNA-Seq FASTQ/FASTA file, forward reads” to the generated `trimmed
-      reads pair 1` files (multiple datasets)</li>
-
-      <li>“RNA-Seq FASTQ/FASTA file, reverse reads” to the generated `trimmed
-      reads pair 2` files (multiple datasets)</li>
-
-      <li>“Custom or built-in reference genome” to `Use a built-in index`</li>
-
-      <li>“Reference genome with or without an annotation” to `use genome
-      reference without builtin gene-model`</li>
-
-      <li>“Select reference genome” to `Drosophila Melanogaster (dm6)`</li>
-
-      <li>“Gene model (gff3,gtf) file for splice junctions” to the imported
-      `Drosophila_melanogaster.BDGP6.87.gtf`</li>
-
-      <li>“Length of the genomic sequence around annotated junctions” to
-      `36`</li></ul>
-
+      Run the tool with the following parameters:
+      <ul>
+        <li>"Single-end or paired-end reads" to `Paired-end (as individual datasets)`</li>
+        <li>"RNA-Seq FASTQ/FASTA file, forward reads" to the generated `trimmed reads pair 1` files (multiple datasets)</li>
+        <li>"RNA-Seq FASTQ/FASTA file, reverse reads" to the generated `trimmed reads pair 2` files (multiple datasets)</li>
+        <li>"Custom or built-in reference genome" to `Use a built-in index`</li>
+        <li>"Reference genome with or without an annotation" to `use genome reference without builtin gene-model`</li>
+        <li>"Select reference genome" to `Drosophila Melanogaster (dm6)`</li>
+        <li>"Gene model (gff3,gtf) file for splice junctions" to the imported `Drosophila_melanogaster.BDGP6.87.gtf`</li>
+        <li>"Length of the genomic sequence around annotated junctions" to `36`</li></ul>
       </ul>
     position: right
   - title: Mapping
@@ -315,15 +291,11 @@ steps:
   - title: Mapping
     element: '#tool-search'
     content: >-
-      Run the tool with the following parameters:<ul>
-
-      <li>“Which tool was used generate logs?” to `STAR`</li>
-
-      <li>“Type of FastQC output?” to `Log`</li>
-
-      <li>“STAR log output” to the generated `log` files (multiple
-      datasets)</li></ul>
-
+      Run the tool with the following parameters:
+      <ul>
+        <li>"Which tool was used generate logs?" to `STAR`</li>
+        <li>"Type of FastQC output?" to `Log`</li>
+        <li>"STAR log output" to the generated `log` files (multiple datasets)</li>
       </ul>
     position: right
   - title: Questions
@@ -349,7 +321,8 @@ steps:
     content: |-
       <ul>Visualize the aligned reads for `GSM461177`
         <li>Click on the STAR BAM output in your history to expand it.</li>
-        <li>Towards the bottom of the history item, find the line starting with `Display with IGV`</li></ul>
+        <li>Towards the bottom of the history item, find the line starting with `Display with IGV`</li>
+      </ul>
     position: left
   - title: Inspection of the mapping results with IGV
     content: 'Zoom to `chr4:540,000-560,000` (Chromosome 4 between 540 kb to 560 kb)'
@@ -365,7 +338,8 @@ steps:
     content: |-
       <ul>
         <li>Right click on the BAM file</li>
-        <li>Select Sashimi Plot from the context menu</li></ul>
+        <li>Select Sashimi Plot from the context menu</li>
+      </ul>
     backdrop: false
   - title: Questions
     content: |-
@@ -443,9 +417,11 @@ steps:
   - title: Estimation of the strandness
     content: >-
       In practice, with Illumina paired-end RNAseq protocols, you are unlikely
-      to uncover many of these possibilities. You will either deal with:<ul>
+      to uncover many of these possibilities. You will either deal with:
+      <ul>
         <li>Unstranded RNAseq data</li>
-        <li>Stranded RNAseq data produced with Illumina TrueSeq RNAseq kits and <a href='https://nar.oxfordjournals.org/content/37/18/e123'>dUTP tagging</a> (<b>ISR</b>)</li></ul>
+        <li>Stranded RNAseq data produced with Illumina TrueSeq RNAseq kits and <a href='https://nar.oxfordjournals.org/content/37/18/e123'>dUTP tagging</a> (<b>ISR</b>)</li>
+      </ul>
       This information should usually come with your FASTQ files, ask your
       sequencing facility! If not, try to find them on the site where you
       downloaded the data or in the corresponding publication.<br>
@@ -473,34 +449,36 @@ steps:
   - title: Determining the library strandness
     element: '#tool-search'
     content: >-
-      Run the tool with the following parameters:<ul>
-
-      <li>“Input .bam file” to the STAR-generated `BAM` files (multiple
+      Run the tool with the following parameters:
+      <ul>
+        <li>"Input .bam file" to the STAR-generated `BAM` files (multiple
       datasets)</li>
-
-      <li>“Reference gene model” to `Drosophila_melanogaster.BDGP6.87.gtf`</li>
-
-      <li>“Number of reads sampled from SAM/BAM file (default = 200000)” to
-      `200000`</li>
-
+        <li>"Reference gene model" to `Drosophila_melanogaster.BDGP6.87.gtf`</li>
+        <li>"Number of reads sampled from SAM/BAM file (default = 200000)" to `200000`</li>
       </ul>
     position: right
   - title: The output
     element: '.history-right-panel .list-items > *:first'
     content: >-
-      The tool generates one file with:<ul>
+      The tool generates one file with:
+      <ul>
         <li>Paired-end or singled-end library</li>
         <li>Fraction of reads failed to determine</li>
-        <li>2 lines<ul>
-          <li>For single-end<ul>
-            <li>Fraction of reads explained by “++,–”</li>
-            <li>Fraction of reads explained by “+-,-+”</li>
-            </ul></il>
-          <li>For paired-end<ul>
-            <li>Fraction of reads explained by “1++,1–,2+-,2-+”</li>
-            <li>Fraction of reads explained by “1+-,1-+,2++,2–”</li></ul></li>
-        </ul></li>
-      </ul> If the fractions in the two last lines are too close to each other,
+        <li>2 lines
+          <ul>
+            <li>For single-end<ul>
+            <li>Fraction of reads explained by "++,–"</li>
+            <li>Fraction of reads explained by "+-,-+"</li>
+            </ul>
+        </il>
+        <li>For paired-end
+          <ul>
+            <li>Fraction of reads explained by "1++,1–,2+-,2-+"</li>
+            <li>Fraction of reads explained by "1+-,1-+,2++,2–"</li></ul></li>
+          </ul>
+        </li>
+      </ul>
+      If the fractions in the two last lines are too close to each other,
       we conclude that this is the library is not specific to a strand specific
       dataset (U in previous figure).
     position: left
@@ -532,35 +510,20 @@ steps:
   - title: Counting the number of reads per annotated gene
     element: '#tool-search'
     content: >-
-      Run the tool with the following parameters:<ul>
-
-      <li>“Alignment file” to the STAR-generated `BAM` files (multiple
-      datasets)</li>
-
-      <li>“Gene annotation file” to `GTF file`</li>
-
-      <li>“Gene annotation file” to `in your history`</li>
-
-      <li>“Gene annotation file” to `Drosophila_melanogaster.BDGP6.87.gtf`</li>
-
-      <li>“Output format” to `Gene-ID "\t" read-count (DESeq2 IUC wrapper
-      compatible)`</li>
-
-      <li>Click on “Advanced options”</li>
-
-      <li>“GFF feature type filter” to `exon`</li>
-
-      <li>“GFF gene identifier” to `gene_id`</li>
-
-      <li>“Allow read to contribute to multiple features” to `No`</li>
-
-      <li>“Strand specificity of the protocol” to `Unstranded`</li>
-
-      <li>“Count multi-mapping reads/fragments” to `Disabled; multi-mapping
-      reads are excluded (default)`</li>
-
-      <li>“Minimum mapping quality per read” to `10`</li>
-
+      Run the tool with the following parameters:
+      <ul>
+        <li>"Alignment file" to the STAR-generated `BAM` files (multiple datasets)</li>
+        <li>"Gene annotation file" to `GTF file`</li>
+        <li>"Gene annotation file" to `in your history`</li>
+        <li>"Gene annotation file" to `Drosophila_melanogaster.BDGP6.87.gtf`</li>
+        <li>"Output format" to `Gene-ID "\t" read-count (DESeq2 IUC wrapper compatible)`</li>
+        <li>Click on "Advanced options"</li>
+        <li>"GFF feature type filter" to `exon`</li>
+        <li>"GFF gene identifier" to `gene_id`</li>
+        <li>"Allow read to contribute to multiple features" to `No`</li>
+        <li>"Strand specificity of the protocol" to `Unstranded`</li>
+        <li>"Count multi-mapping reads/fragments" to `Disabled; multi-mapping reads are excluded (default)`</li>
+        <li>"Minimum mapping quality per read" to `10`</li>
       </ul>
     position: right
   - title: Counting the number of reads per annotated gene
@@ -579,13 +542,11 @@ steps:
   - title: Counting the number of reads per annotated gene
     element: '#tool-search'
     content: >-
-      Run the tool with the following parameters:<ul>
-
-      <li>“Which tool was used generate logs?” to `featureCounts`</li>
-
-      <li>“Output of FeatureCounts” to the generated `summary` files (multiple
+      Run the tool with the following parameters:
+      <ul>
+        <li>"Which tool was used generate logs?" to `featureCounts`</li>
+        <li>"Output of FeatureCounts" to the generated `summary` files (multiple
       datasets)</li>
-
       </ul>
     position: right
   - title: Questions
@@ -621,19 +582,23 @@ steps:
       <br><br>These files contain for each gene of Drosophila the number of
       reads mapped to it. We could compare the files directly and calculate the
       extent of differential gene expression, but the number of sequenced reads
-      mapped to a gene depends on:<ul>
+      mapped to a gene depends on:
+      <ul>
         <li>Its own expression level</li>
         <li>Its length</li>
         <li>The sequencing depth of the sample</li>
-        <li>The expression of all other genes within the sample</li></ul>
+        <li>The expression of all other genes within the sample</li>
+      </ul>
     backdrop: true
   - title: Identification of the differentially expressed features
     content: >-
       Either for within- or for between-sample comparison, the gene counts need
       to be normalized. We can then use the Differential Gene Expression (DGE)
-      analysis, whose two basic tasks are:<ul>
+      analysis, whose two basic tasks are:
+      <ul>
         <li>Estimate the biological variance using the replicates for each condition</li>
-        <li>Estimate the significance of expression differences between any two conditions</li></ul>
+        <li>Estimate the significance of expression differences between any two conditions</li>
+      </ul>
       This expression analysis is estimated from read counts and attempts are
       made to correct for variability in measurements using replicates that are
       absolutely essential for accurate results. For your own analysis, we
@@ -646,10 +611,12 @@ steps:
       href="https://bioconductor.org/packages/release/bioc/html/DESeq2.html">DESeq2</a>
       is a great tool for DGE analysis. It takes read counts produced
       previously, combines them into a big table (with genes in the rows and
-      samples in the columns) and applies size factor normalization:<ul>
+      samples in the columns) and applies size factor normalization:
+      <ul>
         <li>Computation for each gene of the geometric mean of read counts across all samples</li>
         <li>Division of every gene count by the geometric mean</li>
-        <li>Use of the median of these ratios as a sample’s size factor for normalization</li></ul>
+        <li>Use of the median of these ratios as a sample’s size factor for normalization</li>
+      </ul>
       Multiple factors with several levels can then be incorporated in the
       analysis. After normalization we can compare, in a statistically reliable
       way, the response of the expression of any gene to the presence of
@@ -658,9 +625,11 @@ steps:
   - title: Identification of the differentially expressed features
     content: >-
       In our example, we have samples with two varying factors that can explain
-      differences in gene expression:<ul>
+      differences in gene expression:
+      <ul>
         <li>Treatment (either treated or untreated)</li>
-        <li>Sequencing type (paired-end or single-end)</li></ul>
+        <li>Sequencing type (paired-end or single-end)</li>
+      </ul>
       Here treatment is the primary factor which we are interested in. The
       sequencing type is some further information that we know about the data
       that might affect the analysis. This particular multi-factor analysis
@@ -729,43 +698,62 @@ steps:
   - title: Determines differentially expressed features 1/2
     element: '#tool-search'
     content: |-
-      Run the tool with the following parameters:<ul>
-      <li>For “1: Factor”<ul>
-        <li>“Specify a factor name” to `Treatment`</li>
-        <li>“1: Factor level”<ul>
-          <li>“Specify a factor level” to `treated`</li>
-          <li>“Counts file(s)” to the 3 gene count files (multiple datasets) with `treated` in name</li></ul></li>
-        <li>“2: Factor level”<ul>
-          <li>“Specify a factor level” to `untreated`</li>
-          <li>“Counts file(s)” to the 4 gene count files (multiple datasets) with `untreated` in name</li></ul></li></ul></li>
+      Run the tool with the following parameters:
+      <ul>
+        <li>For "1: Factor"<ul>
+        <li>"Specify a factor name" to `Treatment`</li>
+        <li>"1: Factor level"
+          <ul>
+            <li>"Specify a factor level" to `treated`</li>
+            <li>"Counts file(s)" to the 3 gene count files (multiple datasets) with `treated` in name</li>
+          </ul>
+        </li>
+        <li>"2: Factor level"
+          <ul>
+            <li>"Specify a factor level" to `untreated`</li>
+            <li>"Counts file(s)" to the 4 gene count files (multiple datasets) with `untreated` in name</li>
+          </ul>
+        </li>
       </ul>
     position: right
   - title: Determines differentially expressed features 2/2
     element: '#tool-search'
     content: |-
-      Run the tool with the following parameters:<ul>
-      <li>Click on “Insert Factor” (not on “Insert Factor level”)</li>
-      <li>For “2: Factor”<ul>
-        <li>“Specify a factor name” to `Sequencing`</li>
-        <li>“1: Factor level”<ul>
-          <li>“Specify a factor level” to `PE`</li>
-          <li>“Counts file(s)” to the generated count files (multiple datasets) with `paired` in name</li></ul></li>
-        <li>“2: Factor level”<ul>
-          <li>“Specify a factor level” to `SE`</li>
-          <li>“Counts file(s)” to the generated count files (multiple datasets) with `single` in name</li></ul></li></ul></li>
-      <li>“Output normalized counts table” to `Yes`</li>
+      Run the tool with the following parameters:
+      <ul>
+        <li>Click on "Insert Factor" (not on "Insert Factor level")</li>
+        <li>For "2: Factor"
+          <ul>
+            <li>"Specify a factor name" to `Sequencing`</li>
+            <li>"1: Factor level"
+              <ul>
+                <li>"Specify a factor level" to `PE`</li>
+                <li>"Counts file(s)" to the generated count files (multiple datasets) with `paired` in name</li>
+              </ul>
+            </li>
+            <li>"2: Factor level"
+              <ul>
+                <li>"Specify a factor level" to `SE`</li>
+                <li>"Counts file(s)" to the generated count files (multiple datasets) with `single` in name</li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li>"Output normalized counts table" to `Yes`</li>
       </ul>
     position: right
   - title: Determines differentially expressed features
     element: '.history-right-panel .list-items > *:first'
     content: >-
-      <b>DESeq2</b> generated 3 outputs<ul>
+      <b>DESeq2</b> generated 3 outputs
+      <ul>
         <li>A table with the normalized counts for each genes (rows) and each samples (columns)</li>
         <li>A graphical summary of the results, useful to evaluate the quality of the experiment:<ul>
-          <li>Histogram of <i>p</i>-values for all tests</li>
-          <li><a href="https://en.wikipedia.org/wiki/MA_plot">MA plot</a>: global view of the relationship between the expression change of conditions (log ratios, M), the average expression strength of the genes (average mean, A), and the ability of the algorithm to detect differential gene expression. The genes that passed the significance threshold (adjusted p-value < 0.1) are colored in red.</li>
-          <li>Principal Component Analysis (<a href="https://en.wikipedia.org/wiki/Principal_component_analysis">PCA</a>) and the first two axes</li></ul></li>
-      </ul> Each replicate is plotted as an individual data point. This type of
+        <li>Histogram of <i>p</i>-values for all tests</li>
+        <li><a href="https://en.wikipedia.org/wiki/MA_plot">MA plot</a>: global view of the relationship between the expression change of conditions (log ratios, M), the average expression strength of the genes (average mean, A), and the ability of the algorithm to detect differential gene expression. The genes that passed the significance threshold (adjusted p-value < 0.1) are colored in red.</li>
+        <li>Principal Component Analysis (<a href="https://en.wikipedia.org/wiki/Principal_component_analysis">PCA</a>) and the first two axes</li></ul></li>
+      </ul>
+      Each replicate is plotted as an individual data point. This type of
       plot is useful for visualizing the overall effect of experimental
       covariates and batch effects.
     position: left
@@ -782,7 +770,8 @@ steps:
       <ul>
         <li>Heatmap of sample-to-sample distance matrix: overview over similarities and dissimilarities between samples</li>
         <li>Dispersion estimates: gene-wise estimates (black), the fitted values (red), and the final maximum a posteriori estimates used in testing (blue)</li>
-      </ul> This dispersion plot is typical, with the final estimates shrunk
+      </ul>
+      This dispersion plot is typical, with the final estimates shrunk
       from the gene-wise estimates towards the fitted estimates. Some gene-wise
       estimates are flagged as outliers and not shrunk towards the fitted value.
       The amount of shrinkage can be more or less than seen here, depending on
@@ -798,7 +787,8 @@ steps:
   - title: Determines differentially expressed features
     element: '.history-right-panel .list-items > *:first'
     content: |-
-      A summary file with the following values for each gene: <ul>
+      A summary file with the following values for each gene:
+      <ul>
         <li>Gene identifiers</li>
         <li>Mean normalized counts, averaged over all samples from both conditions</li>
         <li>Logarithm (to basis 2) of the fold change</li>
@@ -835,9 +825,10 @@ steps:
   - title: Extract the most differentially expressed genes
     element: '#tool-search'
     content: |-
-      Run the tool with the following parameters:<ul>
-      <li>“Filter” to the DESeq2 summary file</li>
-      <li>“With following condition” to `c7<0.05`</li>
+      Run the tool with the following parameters:
+      <ul>
+        <li>"Filter" to the DESeq2 summary file</li>
+        <li>"With following condition" to `c7<0.05`</li>
       </ul>
     position: right
   - title: Questions
@@ -865,9 +856,10 @@ steps:
   - title: Extract the most differentially expressed genes
     element: '#tool-search'
     content: |-
-      Run the tool with the following parameters:<ul>
-      <li>“Filter” to the differentially expressed genes</li>
-      <li>“With following condition” to `abs(c3)>1`</li>
+      Run the tool with the following parameters:
+      <ul>
+        <li>"Filter" to the differentially expressed genes</li>
+        <li>"With following condition" to `abs(c3)>1`</li>
       </ul>
     position: right
   - title: Questions
@@ -898,17 +890,12 @@ steps:
   - title: Extract the most differentially expressed genes
     element: '#tool-search'
     content: >-
-      Run the tool with the following parameters:<ul>
-
-      <li>“Sort Dataset” to the differentially expressed genes with abs(FC) >
-      2</li>
-
-      <li>“on column” to `3`</li>
-
-      <li>“with flavor” to `Numerical sort`</li>
-
-      <li>“everything in” to `Descending order`</li>
-
+      Run the tool with the following parameters:
+      <ul>
+        <li>"Sort Dataset" to the differentially expressed genes with abs(FC) > 2</li>
+        <li>"on column" to `3`</li>
+        <li>"with flavor" to `Numerical sort`</li>
+        <li>"everything in" to `Descending order`</li>
       </ul>
     position: right
   - title: Extract the most differentially expressed genes
@@ -927,10 +914,11 @@ steps:
   - title: Extract the most differentially expressed genes
     element: '#tool-search'
     content: |-
-      Run the tool with the following parameters:<ul>
-      <li>“File to select” to the sorted DE genes with abs(FC) > 2</li>
-      <li>“Operation” to `Keep first lines`</li>
-      <li>“Number of lines” to `10`</li>
+      Run the tool with the following parameters:
+      <ul>
+        <li>"File to select" to the sorted DE genes with abs(FC) > 2</li>
+        <li>"Operation" to `Keep first lines`</li>
+        <li>"Number of lines" to `10`</li>
       </ul>
     position: right
   - title: Extract the most differentially expressed genes
@@ -947,10 +935,11 @@ steps:
   - title: Extract the most differentially expressed genes
     element: '#tool-search'
     content: |-
-      Run the tool with the following parameters:<ul>
-      <li>“Text file” to the sorted DE genes with abs(FC) > 2</li>
-      <li>“Operation” to `Keep first lines`</li>
-      <li>“Number of lines” to `10`</li>
+      Run the tool with the following parameters:
+      <ul>
+        <li>"Text file" to the sorted DE genes with abs(FC) > 2</li>
+        <li>"Operation" to `Keep first lines`</li>
+        <li>"Number of lines" to `10`</li>
       </ul>
     position: right
   - title: Extract the most differentially expressed genes
@@ -969,11 +958,10 @@ steps:
   - title: Extract the most differentially expressed genes
     element: '#tool-search'
     content: >-
-      Run the tool with the following parameters:<ul>
-
-      <li>“Datasets to concatenate” to the 10 most up-regulated genes and to the
-      10 most down-regulated genes</li>
-
+      Run the tool with the following parameters:
+      <ul>
+        <li>"Datasets to concatenate" to the 10 most up-regulated genes and to the
+        10 most down-regulated genes</li>
       </ul>
     position: right
   - title: Extract the most differentially expressed genes
@@ -1012,22 +1000,14 @@ steps:
       the different samples
     element: '#tool-search'
     content: >-
-      Run the tool with the following parameters:<ul>
-
-      <li>“Join” to the normalized count table generated by DESeq2</li>
-
-      <li>“using column” to `1`</li>
-
-      <li>“with” to the concatenated file with 10 most up-regulated genes and
-      the 10 most down-regulated genes</li>
-
-      <li>“and column” to `1`</li>
-
-      <li>“Keep lines of first input that do not join with second input” to
-      `No`</li>
-
-      <li>“Keep the header lines” to `Yes`</li>
-
+      Run the tool with the following parameters:
+      <ul>
+        <li>"Join" to the normalized count table generated by DESeq2</li>
+        <li>"using column" to `1`</li>
+        <li>"with" to the concatenated file with 10 most up-regulated genes and the 10 most down-regulated genes</li>
+        <li>"and column" to `1`</li>
+        <li>"Keep lines of first input that do not join with second input" to `No`</li>
+        <li>"Keep the header lines" to `Yes`</li>
       </ul>
     position: right
   - title: >-
@@ -1061,9 +1041,9 @@ steps:
     element: '#tool-search'
     content: |-
       Run the tool with the following parameters:<ul>
-      <li>“Cut columns” to `c1,c2,c3,c4,c5,c6,c7,c8`</li>
-      <li>“Delimited by” to `Tab`</li>
-      <li>“From” the joined dataset</li>
+      <li>"Cut columns" to `c1,c2,c3,c4,c5,c6,c7,c8`</li>
+      <li>"Delimited by" to `Tab`</li>
+      <li>"From" the joined dataset</li>
       </ul>
     position: right
   - title: >-
@@ -1090,24 +1070,19 @@ steps:
   - title: Plot the heatmap of the normalized counts of these genes for each sample
     element: '#tool-search'
     content: >-
-      Run the tool with the following parameters:<ul>
-
-      <li>“Input should have column headers” to the generated table</li>
-
-      <li>“Advanced - log transformation” to `Log2(value) transform my
-      data`</li>
-
-      <li>“Enable data clustering” to `Yes`</li>
-
-      <li>“Coloring groups” to `Blue to white to red`</li>
-
+      Run the tool with the following parameters:
+      <ul>
+        <li>"Input should have column headers" to the generated table</li>
+        <li>"Advanced - log transformation" to `Log2(value) transform my data`</li>
+        <li>"Enable data clustering" to `Yes`</li>
+        <li>"Coloring groups" to `Blue to white to red`</li>
       </ul>
     position: right
   - title: Questions
     content: |-
       <ul>
         <li>Do you observe any tendency in the data?</li>
-        <li>What is changing if we select `Plot the data as it is` in “Advanced - log transformation”?</li>
+        <li>What is changing if we select `Plot the data as it is` in "Advanced - log transformation"?</li>
         <li>Can you generate an heatmap the normalized counts for the up-regulated genes with FC > 2?</li>
       </ul>
     backdrop: false
@@ -1137,11 +1112,13 @@ steps:
       Analysis of the functional enrichment among the differentially expressed
       genes
     content: |-
-      goseq needs 2 files as inputs:<ul>
+      goseq needs 2 files as inputs:
+      <ul>
         <li>A tabular file with the differentially expressed genes from all genes assayed in the RNA-seq experiment with 2 columns:<ul>
-          <li>the Gene IDs (unique within the file)</li>
-          <li>True (differentially expressed) or False (not differentially expressed)</li></ul></li>
-        <li>A file with information about the length of a gene to correct for potential length bias in differentially expressed genes</li></ul>
+        <li>the Gene IDs (unique within the file)</li>
+         <li>True (differentially expressed) or False (not differentially expressed)</li></ul></li>
+        <li>A file with information about the length of a gene to correct for potential length bias in differentially expressed genes</li>
+      </ul>
     backdrop: true
   - title: Prepare the datasets for GOSeq
     element: '#tool-search-query'
@@ -1159,9 +1136,10 @@ steps:
   - title: Prepare the datasets for GOSeq
     element: '#tool-search'
     content: |-
-      Run the tool with the following parameters:<ul>
-      <li>“Add expression” to `bool(c7<0.05)`</li>
-      <li>“as a new column to” to DESeq summary file</li>
+      Run the tool with the following parameters:
+      <ul>
+        <li>"Add expression" to `bool(c7<0.05)`</li>
+        <li>"as a new column to" to DESeq summary file</li>
       </ul>
     position: right
   - title: Prepare the datasets for GOSeq
@@ -1180,10 +1158,11 @@ steps:
   - title: Prepare the datasets for GOSeq
     element: '#tool-search'
     content: |-
-      Run the tool with the following parameters:<ul>
-      <li>“Cut columns” to `c1,c8`</li>
-      <li>“Delimited by” to `Tab`</li>
-      <li>“From” to the previously generated file</li>
+      Run the tool with the following parameters:
+      <ul>
+        <li>"Cut columns" to `c1,c8`</li>
+        <li>"Delimited by" to `Tab`</li>
+        <li>"From" to the previously generated file</li>
       </ul>
     position: right
   - title: Prepare the datasets for GOSeq
@@ -1200,11 +1179,12 @@ steps:
   - title: Prepare the datasets for GOSeq
     element: '#tool-search'
     content: |-
-      Run the tool with the following parameters:<ul>
-      <li>“From” to the previously generated file</li>
-      <li>“Change case of columns” to `c1`</li>
-      <li>“Delimited by” to `Tab`</li>
-      <li>“To” to `Upper case`</li>
+      Run the tool with the following parameters:
+      <ul>
+        <li>"From" to the previously generated file</li>
+        <li>"Change case of columns" to `c1`</li>
+        <li>"Delimited by" to `Tab`</li>
+        <li>"To" to `Upper case`</li>
       </ul>
     position: right
   - title: Prepare the datasets for GOSeq
@@ -1223,23 +1203,14 @@ steps:
   - title: Prepare the datasets for GOSeq
     element: '#tool-search'
     content: >-
-      Run the tool with the following parameters:<ul>
-
-      <li>“Select a built-in GTF file or one from your history” to `Use a GTF
-      from history`</li>
-
-      <li>“Select a GTF file” to `Drosophila_melanogaster.BDGP6.87.gtf`</li>
-
-      <li>“Select a built-in FASTA or one from your history” to `Use a built-in
-      FASTA`</li>
-
-      <li>“Select a FASTA file” to `Fly (Drosophila melanogaster): dm6
-      Full`</li>
-
-      <li>“Output length file?” to `Yes`</li>
-
-      <li>“Output GC content file?” to `No`</li>
-
+      Run the tool with the following parameters:
+      <ul>
+        <li>"Select a built-in GTF file or one from your history" to `Use a GTF from history`</li>
+        <li>"Select a GTF file" to `Drosophila_melanogaster.BDGP6.87.gtf`</li>
+        <li>"Select a built-in FASTA or one from your history" to `Use a built-in FASTA`</li>
+        <li>"Select a FASTA file" to `Fly (Drosophila melanogaster): dm6 Full`</li>
+        <li>"Output length file?" to `Yes`</li>
+        <li>"Output GC content file?" to `No`</li>
       </ul>
     position: right
   - title: Prepare the datasets for GOSeq
@@ -1256,11 +1227,12 @@ steps:
   - title: Prepare the datasets for GOSeq
     element: '#tool-search'
     content: |-
-      Run the tool with the following parameters:<ul>
-      <li>“From” to the previously generated file</li>
-      <li>“Change case of columns” to `c1`</li>
-      <li>“Delimited by” to `Tab`</li>
-      <li>“To” to `Upper case`</li>
+      Run the tool with the following parameters:
+      <ul>
+        <li>"From" to the previously generated file</li>
+        <li>"Change case of columns" to `c1`</li>
+        <li>"Delimited by" to `Tab`</li>
+        <li>"To" to `Upper case`</li>
       </ul>
     position: right
   - title: >-
@@ -1284,29 +1256,22 @@ steps:
   - title: Perform GO analysis
     element: '#tool-search'
     content: >-
-      Run the tool with the following parameters:<ul>
-
-      <li>“Differentially expressed genes file” to first file generated on
-      previous step</li>
-
-      <li>“Gene lengths file” to second file generated on previous step</li>
-
-      <li>“Gene categories” to `Get categories`</li>
-
-      <li>“Select a genome to use” to `Fruit fly (dm6)`</li>
-
-      <li>“Select Gene ID format” to `Ensembl Gene ID`</li>
-
-      <li>“Select one or more categories” to `GO: Cellular Component`, `GO:
-      Biological Process`, `GO: Molecular Function`</li>
-
+      Run the tool with the following parameters:
+      <ul>
+        <li>"Differentially expressed genes file" to first file generated on previous step</li>
+        <li>"Gene lengths file" to second file generated on previous step</li>
+        <li>"Gene categories" to `Get categories`</li>
+        <li>"Select a genome to use" to `Fruit fly (dm6)`</li>
+        <li>"Select Gene ID format" to `Ensembl Gene ID`</li>
+        <li>"Select one or more categories" to `GO: Cellular Component`, `GO: Biological Process`, `GO: Molecular Function`</li>
       </ul>
     position: right
   - title: Perform GO analysis
     element: '.history-right-panel .list-items > *:first'
     content: >-
       goseq generates a big table with the following columns for each GO
-      term:<ul>
+      term:
+      <ul>
         <li>category</li>
         <li>over_rep_pval</li>
         <li>under_rep_pval</li>
@@ -1316,7 +1281,8 @@ steps:
         <li>ontology</li>
         <li>p.adjust.over_represented</li>
         <li>p.adjust.under_represented</li>
-      </ul> To identify categories significantly enriched/unenriched below some
+      </ul>
+      To identify categories significantly enriched/unenriched below some
       <i>p</i>-value cutoff, it is necessary to use the adjusted p-value.
     position: left
   - title: Questions
@@ -1355,9 +1321,10 @@ steps:
   - title: Counting the number of reads per exon
     element: '#tool-search'
     content: |-
-      Run the tool with the following parameters:<ul>
-      <li>“Mode of operation” to `Prepare annotation`</li>
-      <li>“GTF file” to `Drosophila_melanogaster.BDGP6.87.gtf`</li>
+      Run the tool with the following parameters:
+      <ul>
+        <li>"Mode of operation" to `Prepare annotation`</li>
+        <li>"GTF file" to `Drosophila_melanogaster.BDGP6.87.gtf`</li>
       </ul>
     position: right
   - title: Counting the number of reads per exon
@@ -1371,22 +1338,14 @@ steps:
   - title: Counting the number of reads per exon
     element: '#tool-search'
     content: >-
-      Run the tool with the following parameters:<ul>
-
-      <li>“Mode of operation” to `Count reads`</li>
-
-      <li>“Input bam file” to the STAR-generated `BAM` files (multiple
-      datasets)</li>
-
-      <li>“DEXSeq compatible GTF file” to the previously generated GTF file</li>
-
-      <li>“Is library paired end?” to `Yes`</li>
-
-      <li>“Is library strand specific?” to `No`</li>
-
-      <li>“Skip all reads with alignment quality lower than the given minimum
-      value” to `10`</li>
-
+      Run the tool with the following parameters:
+      <ul>
+        <li>"Mode of operation" to `Count reads`</li>
+        <li>"Input bam file" to the STAR-generated `BAM` files (multiple datasets)</li>
+        <li>"DEXSeq compatible GTF file" to the previously generated GTF file</li>
+        <li>"Is library paired end?" to `Yes`</li>
+        <li>"Is library strand specific?" to `No`</li>
+        <li>"Skip all reads with alignment quality lower than the given minimum value" to `10`</li>
       </ul>
     position: right
   - title: Counting the number of reads per exon
@@ -1436,19 +1395,12 @@ steps:
     placement: right
     textinsert: >-
       https://zenodo.org/record/1185122/files/Drosophila_melanogaster.BDGP6.87.dexseq.gtf
-
       https://zenodo.org/record/1185122/files/GSM461176_untreat_single.exon.counts
-
       https://zenodo.org/record/1185122/files/GSM461177_untreat_paired.exon.counts
-
       https://zenodo.org/record/1185122/files/GSM461178_untreat_paired.exon.counts
-
       https://zenodo.org/record/1185122/files/GSM461179_treat_single.exon.counts
-
       https://zenodo.org/record/1185122/files/GSM461180_treat_paired.exon.counts
-
       https://zenodo.org/record/1185122/files/GSM461181_treat_paired.exon.counts
-
       https://zenodo.org/record/1185122/files/GSM461182_untreat_single.exon.counts
     backdrop: false
   - title: Uploading the input data
@@ -1481,38 +1433,41 @@ steps:
   - title: Differential exon usage 1/2
     element: '#tool-search'
     content: >-
-      Run the tool with the following parameters:<ul>
-
-      <li>“GTF file created from DEXSeq-Count tool” to
-      `Drosophila_melanogaster.BDGP6.87.dexseq.gtf`</li>
-
-      <li>For “1: Factor”<ul>
-        <li>“Specify a factor name” to `condition`</li>
-        <li>“Specify a factor level” to `treated`</li>
-        <li>“Count file for factor level 1” to the exon count files (multiple datasets) with `treated` in name</li>
-        <li>“Specify a factor level” to `untreated`</li>
-        <li>“Count file for factor level 2” to the exon count files (multiple datasets) with `untreated` in name</li>
-      </ul></li>
-
+      Run the tool with the following parameters:
+      <ul>
+        <li>"GTF file created from DEXSeq-Count tool" to `Drosophila_melanogaster.BDGP6.87.dexseq.gtf`</li>
+        <li>For "1: Factor"
+          <ul>
+            <li>"Specify a factor name" to `condition`</li>
+            <li>"Specify a factor level" to `treated`</li>
+            <li>"Count file for factor level 1" to the exon count files (multiple datasets) with `treated` in name</li>
+            <li>"Specify a factor level" to `untreated`</li>
+            <li>"Count file for factor level 2" to the exon count files (multiple datasets) with `untreated` in name</li>
+          </ul>
+        </li>
       </ul>
     position: right
   - title: Differential exon usage 2/2
     element: '#tool-search'
     content: |-
-      Run the tool with the following parameters:<ul>
-      <li>For “2: Factor”<ul>
-        <li>“Specify a factor name” to `sequencing`</li>
-        <li>“Specify a factor level” to `pe`</li>
-        <li>“Count file for factor level 1” to the exon count files (multiple datasets) with `paired` in name</li>
-        <li>“Specify a factor level” to `se`</li>
-        <li>“Count file for factor level 2” to the exon count files (multiple datasets) with `single` in name</li>
-      </ul></li>
+      Run the tool with the following parameters:
+      <ul>
+        <li>For "2: Factor"
+          <ul>
+            <li>"Specify a factor name" to `sequencing`</li>
+            <li>"Specify a factor level" to `pe`</li>
+            <li>"Count file for factor level 1" to the exon count files (multiple datasets) with `paired` in name</li>
+            <li>"Specify a factor level" to `se`</li>
+            <li>"Count file for factor level 2" to the exon count files (multiple datasets) with `single` in name</li>
+          </ul>
+        </li>
       </ul>
     position: right
   - title: Counting the number of reads per exon
     element: '.history-right-panel .list-items > *:first'
     content: |-
-      DEXSeq generates a table with:<ul>
+      DEXSeq generates a table with:
+      <ul>
         <li>Exon identifiers</li>
         <li>Gene identifiers</li>
         <li>Exon identifiers in the Gene</li>
@@ -1537,9 +1492,10 @@ steps:
   - title: Counting the number of reads per exon
     element: '#tool-search'
     content: |-
-      Run the tool with the following parameters:<ul>
-      <li>“Filter” to the generated file</li>
-      <li>“With following condition” to `c8<=0.05`</li>
+      Run the tool with the following parameters:
+      <ul>
+        <li>"Filter" to the generated file</li>
+        <li>"With following condition" to `c8<=0.05`</li>
       </ul>
     position: right
   - title: Questions
@@ -1569,8 +1525,9 @@ steps:
   - title: Annotation of the result tables with gene information
     element: '#tool-search'
     content: |-
-      Run the tool with the following parameters:<ul>
-      <li>“annotation file" to `Drosophila_melanogaster.BDGP5.78.gtf`</li>
+      Run the tool with the following parameters:
+      <ul>
+        <li>"annotation file" to `Drosophila_melanogaster.BDGP5.78.gtf`</li>
       </ul>
     position: right
   - title: Conclusion
