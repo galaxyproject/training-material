@@ -6,7 +6,7 @@ tutorial_name: monitoring-maintenance
 
 # Monitoring and maintenance
 
-## Runing the Reports Application
+## Running the Reports Application
 
 ### Section 1 - Configure reports
 

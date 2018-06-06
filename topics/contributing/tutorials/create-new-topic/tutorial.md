@@ -82,7 +82,7 @@ The `docker` image will also integrate the Galaxy tours available for each topic
 
 # Defining the topic
 
-When we structured the repository, we decided to use as topics the categories that are used in the [ToolShed](https://toolshed.g2.bx.psu.edu/). The ToolShed assigns a category to each tool. Therefore, to decide where to put your tutorial, have a look at which ToolShed's category the main tools in your tutorial belong. For example, herethis tutorial will rely on the NCBI Blast+ tool.
+When we structured the repository, we decided to use as topics the categories that are used in the [ToolShed](https://toolshed.g2.bx.psu.edu/). The ToolShed assigns a category to each tool. Therefore, to decide where to put your tutorial, have a look at which ToolShed's category the main tools in your tutorial belong. For example, this tutorial will rely on the NCBI Blast+ tool.
 
 > ### {% icon hands_on %} Hands-on: Defining the topic for the tutorial
 >
@@ -124,7 +124,7 @@ We use Jekyll to generate the website out of the Markdown and YAML files. We nee
 > 3. Move back to the root: `cd ..`
 > 2. Make sure that Jekyll is running
 >
->    > Want to learm how to start Jekyll? [Check out our tutorial to serve the website locally]({{ site.baseurl }}/topics/contributing/tutorials/running-jekyll/tutorial.html)
+>    > Want to learn how to start Jekyll? [Check out our tutorial to serve the website locally]({{ site.baseurl }}/topics/contributing/tutorials/running-jekyll/tutorial.html)
 >
 > 2. Check if the tutorial has been correctly added at [http://localhost:4000/training-material/](http://localhost:4000/training-material/)
 >

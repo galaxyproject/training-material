@@ -9,7 +9,7 @@ tutorial_name: setup-galaxy-for-training
 
 In this tutorial, you will learn how to provision your Galaxy instance to support training modules from the GTN repository.
 
-Tutorials in this repo are all supplemented with files describing the technical requirements to run them. This makes it easy to automate installation of tutorial requirements.
+Tutorials in this repository are all supplemented with files describing the technical requirements to run them. This makes it easy to automate installation of tutorial requirements.
   - `tools.yaml`: describes the Tool Shed tools used in the tutorial
   - `data-library.yaml`: describes the input datasets
   - `data-manager.yaml`: describes the reference data required by tools
@@ -18,7 +18,7 @@ Tutorials in this repo are all supplemented with files describing the technical 
 
 > For more information about how to create these files, please see our module on [specifying the technical requirements for your tutorial]({{ site.baseurl }}/topics/contributing/tutorials/create-new-tutorial-technical/tutorial.html).
 
-For just the list of ephemeris commands needed for installation, skip to the [Quickstart section](#Quickstart) at the end of this tutorial.
+For just the list of Ephemeris commands needed for installation, skip to the [Quickstart section](#Quickstart) at the end of this tutorial.
 
 > ### Agenda
 >
@@ -93,7 +93,7 @@ In order to install the tutorial requirements, we will need the API key of an ad
 
 ## Install Ephemeris
 
-To install to training requirements to our Galaxy, we will use ephemeris, let's install it now:
+To install to training requirements to our Galaxy, we will use Ephemeris, let's install it now:
 
 
 > ### {% icon hands_on %} Hands-on: Install Ephemeris
@@ -183,7 +183,7 @@ shed-tools install -g <Galaxy url> -a <API key> -t topics/<topic>/tutorials/<tut
 # create data library with input datasets
 setup-data-libraries -g <Galaxy url> -a <API key> -i topic/<topic>/tutorial/<tutorial>/data-library.yaml
 
-# install refefernce data
+# install reference data
 run-data-managers -g <Galaxy url> -a <API key> --config topic/<topic>/tutorial/<tutorial>/data-manager.yaml
 
 # install workflows

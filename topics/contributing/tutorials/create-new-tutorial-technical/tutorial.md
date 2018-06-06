@@ -58,7 +58,7 @@ with:
 This list of tools can be automatically extracted from the workflow using [Ephemeris](https://ephemeris.readthedocs.io/en/latest/index.html) (which should be in the conda environment):
 
 ```
-$ workflow-to-tools -w path/to/worflow -o path/to/tools.yaml
+$ workflow-to-tools -w path/to/workflow -o path/to/tools.yaml
 ```
 
 After the extraction, some formatting is needed:
@@ -82,7 +82,7 @@ After the extraction, some formatting is needed:
 
 ## Filling the `data-library.yaml`
 
-The data can also be integrated in the Galaxy instance inside a data libraries and then make the data shared between the users. It lets then avoid every trainees to redownload the input data.
+The data can also be integrated in the Galaxy instance inside a data libraries and then make the data shared between the users. It lets then avoid every trainees to re-download the input data.
 
 Such data are described in the `data-library.yaml`:
 
@@ -123,7 +123,7 @@ data_managers:
       params:
         - 'param1': '{{ item }}'
         - 'param2': 'value'
-      # Items refere to a list of variables you want to run this data manager. You can use them inside the param field with {{ item }}
+      # Items refer to a list of variables you want to run this data manager. You can use them inside the param field with {{ item }}
       # In case of genome for example you can run this DM with multiple genomes, or you could give multiple URLs.
       items:
         - item1
