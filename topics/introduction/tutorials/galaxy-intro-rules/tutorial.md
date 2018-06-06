@@ -10,7 +10,7 @@ tutorial_name: galaxy-intro-rules
 Through a series of examples, this tutorial aims to familiarize the reader with building Galaxy collections from tabular data containing URLs, sample sheets, list of accessions or identifiers, etc..
 
 > ###  {% icon comment %} Audience
-> This tutorial assumes a basic knowledge of using dataset collections in Galaxy but doesn't assume any particular knowledge of biology or bioinformatics. If you have not used collections with Galaxy previously, please check out the [using dataset collections]({{ site.baseurl }}/topics/introduction/galaxy-intro-collections/tutorial.html) tutorial.
+> This tutorial assumes a basic knowledge of using dataset collections in Galaxy but doesn't assume any particular knowledge of biology or bioinformatics. If you have not used collections with Galaxy previously, please check out the [using dataset collections]({{ site.baseurl }}/topics/introduction/tutorials/galaxy-intro-collections/tutorial.html) tutorial.
 
 > ### Agenda
 >
@@ -245,7 +245,7 @@ PRJDB3920	SAMD00034152	DRX036164	ftp.sra.ebi.ac.uk/vol1/fastq/DRR039/DRR039936/D
 
 In the previous examples the metadata we started with already contained URLs. In some cases such URLs will not be present in the available metadata and may need to be constructed dynamically from identifiers.
 
-For this multiomics example, we will start with a uniprot query and build URLs from accession numbers contained within the supplied tabular data. Consider the uniprot query [https://uniprot.org/uniprot/?query=proteome:UP000052092+AND+proteomecomponent:"Genome"](https://uniprot.org/uniprot/?query=proteome:UP000052092+AND+proteomecomponent:"Genome"), pictured below.
+For this multiomics example, we will start with a uniprot query and build URLs from accession numbers contained within the supplied tabular data. Consider the uniprot query [https://uniprot.org/uniprot/?query=proteome:UP000052092+AND+proteomecomponent:"Genome"](https://uniprot.org/uniprot/?query=proteome:UP000052092+AND+proteomecomponent:%22Genome%22), pictured below.
 
 ![UniProt table screenshot](../../images/rules/uniprot_url.png)
 
@@ -257,7 +257,7 @@ Lets describe how to turn these accession IDs into URLs. If you:
 
    ![Link to access FASTA file](../../images/rules/uniprot_fasta.png)
 
-4. Your browser will redirect to the fasta file 
+4. Your browser will redirect to the fasta file
 
    ![Viewing the FASTA file](../../images/rules/uniprot_fasta_url.png)
 
@@ -526,7 +526,7 @@ https://raw.githubusercontent.com/jmchilton/galaxy/apply_rules_tutorials/test-da
 > 6. The first thing we will do to this new collection is add some levels or depth to its structure. Lets assume we want to group it into "treated" and "untreated" lists and "paired" and "single" sublists below that. We can do this with the "Apply Rules" collection operation tool, which will likely be under the "Collection Operations" tool menu in your Galaxy interface. Click the tool and the very simple interface should look something like this:
 >   ![screenshot](../../images/rules/rules_apply_rules_example_4_5_apply_rules_landing.png)
 >
-> 7. This interface simply lets one pick a collection to operate on and then launch the rule builder window to work to describe and preview manipulating the metadata of that collection. Be sure your uploaded collection is selected and then click the "Edit" button to build rules to apply to the collection. 
+> 7. This interface simply lets one pick a collection to operate on and then launch the rule builder window to work to describe and preview manipulating the metadata of that collection. Be sure your uploaded collection is selected and then click the "Edit" button to build rules to apply to the collection.
 >   ![screenshot](../../images/rules/rules_apply_rules_example_4_6_apply_rules_init_flat.png)
 >
 > 8. When a flat collection is used with this tool, the rule builder will initialize a default rule to pull the list identifier out for each item of the collection as shown above. Next we will use regular expressions to build two new columns, these columns will group the datasets into "treated" and "untreated" sublists and then "single" and "paired" sublists of that. This rule is found under the "Column" menu, in this example we chose

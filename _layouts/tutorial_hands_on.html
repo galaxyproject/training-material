@@ -196,6 +196,29 @@ layout: base
         <p>Further information, including links to documentation and original publications, regarding the tools, analysis techniques and the interpretation of results described in this tutorial can be found <a href="{{ site.baseurl }}/topics/{{ topic.name }}#references">here</a>.</p>
         {% endif %}
 
+        {% if topic.name == "contributing" %}
+        <blockquote class="agenda">
+            <h3>Developing GTN training material</h3>
+            This tutorial is part of a series to develop GTN training material, feel free to also look at:
+            {% assign topic = site.data[page.topic_name] %}
+            <ol>
+            {% for material in topic.material %}
+             {% if material.enable != "false" and material.name != page.tutorial_name %}
+              {% if material.type == "introduction" %}
+            <li><a href="{{ site.baseurl }}/topics/{{ topic.name }}/slides/{{ material.name }}.html">{{ material.title }}</a></li>
+             {% elsif material.type == "tutorial" %}
+              {% if material.hands_on %}
+            <li><a href="{{ site.baseurl }}/topics/{{ topic.name  }}/tutorials/{{ material.name }}/tutorial.html">{{ material.title }}</a></li>
+              {% elsif material.slides %}
+            <li><a href="{{ site.baseurl }}/topics/{{ topic.name }}/tutorials/{{ material.name }}/slides.html">{{ material.title }}</a></li>
+               {% endif %}
+              {% endif %}
+             {% endif %}
+            {% endfor %}
+             </ol>
+        </blockquote>
+        {% endif %}
+
         <h3>{% icon congratulations %} Congratulations on successfully completing this tutorial!</h3>
 
         <hr>

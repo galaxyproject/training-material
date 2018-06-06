@@ -149,7 +149,7 @@ The tutorial needs to start with some medatada on its top:
 - `topic_name: training` with the name of the topic
 - `tutorial_name: create-new-tutorial` with the name of tutorial
 
-These metadata are there to help the templating system linking between the tutorial's file and the global [metadata]({{site.baseurl}}/topics/training/tutorials/create-new-tutorial-metadata/tutorial.html).
+These metadata are there to help the templating system linking between the tutorial's file and the global [metadata]({{site.baseurl}}/topics/contributing/tutorials/create-new-tutorial-metadata/tutorial.html).
 If not correctly defined, the tutorial will not be found within the website.
 
 > ### {% icon hands_on %} Hands-on: Fix the top metadata
@@ -157,7 +157,7 @@ If not correctly defined, the tutorial will not be found within the website.
 > 1. Change the `tutorial_name` and the `topic_name` to fit to the ones defined in the metadata
 > 2. Make sure that Jekyll is running
 >
->    > Want to learm how to start Jekyll? [Check out our tutorial to serve the website locally]({{ site.baseurl }}/topics/contributing/tutorials/create-new-tutorial-jekyll/tutorial.html)
+>    > Want to learm how to start Jekyll? [Check out our tutorial to serve the website locally]({{ site.baseurl }}/topics/contributing/tutorials/running-jekyll/tutorial.html)
 >
 > 2. Check if the tutorial has been correctly added at [http://localhost:4000/training-material/](http://localhost:4000/training-material/)
 >
@@ -523,19 +523,3 @@ Each new slide is introduced by `---`, and the content of each slide is written 
 
 # Conclusion
 {:.no_toc}
-
-> ### Developing GTN training material
->
-> This tutorial is part of a series to develop GTN training material, feel free to also look at:
->
-> 1. [Setting up the tutorial infrastructure](../running-jekyll/tutorial.html)
-> 1. [Writing content in markdown](../create-new-tutorial-content/tutorial.html)
-> 1. [Defining metadata](../create-new-tutorial-metadata/tutorial.html)
-> 1. [Creating a new topic](../create-new-topic/tutorial.html)
-> 1. [Generating PDF handouts](../generating-pdf/tutorial.html)
-> 1. [Creating Interactive Galaxy Tours](../create-new-tutorial-tours/tutorial.html)
-> 1. [Defining technical requirements for a tutorial](../create-new-tutorial-technical/tutorial.html)
-> 1. [Setting up Galaxy for training](../setup-galaxy-for-training/tutorial.html)
-> 1. [Submitting the new tutorial to the GitHub repository](../github-command-line-contribution/slides.html)
-> 1. [Good practices for teaching](../good-practices/slides.html)
-{: .agenda}
