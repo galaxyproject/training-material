@@ -1,0 +1,63 @@
+---
+layout: tutorial_slides
+topic_name: visualisation
+tutorial_name: jbrowse
+logo: GTN
+---
+
+# JBrowse for Genomics Visualisation
+
+---
+
+### What is JBrowse
+
+- Interactive genome browser
+- HTML5 / Javascript
+- Process data + copy directory to a webserver
+- Can be deployed to apache/nginx, S3 buckets, etc.
+- Many [plugins](https://gmod.github.io/jbrowse-registry/) available for
+  - Themes
+  - Datatype support (mafviewer, agp_parser)
+  - Third party data integration (ga4gh, MyVariantViewer)
+  - Visualisations (GC Content track, Sashimi for RNAseq,)
+  - More
+
+---
+
+### JBrowse in Galaxy
+
+- Tool that produces a JBrowse instance (client side code + processed data)
+- Covers *most* of the possibilities of JBrowse
+- Supports many Galaxy datatypes:
+	- GFF3 / GBK /BED
+	- BAM (SAM)
+	- (big)Wig
+	- Blast XML*
+	- VCF
+	- REST/SPARQL* endpoints
+- Complex JBrowse made easy (Thanks Galaxy!)
+
+---
+
+### Built in Provenance Tracking
+
+- "ComboTrackSelector" supports attaching metadata to tracks + filtering
+- We attached Galaxy metadata
+	- Dataset Creator
+	- Dataset Job Parameters
+	- Tool + Version
+	- Date
+- Can "build on top of" existing JBrowses, adding more data. Complete history tracked.
+
+---
+
+### Building a JBrowse Instance
+
+- Select reference genome
+- Select datasets
+	- Give them some fun colors (by default brewer palette)
+	- Configure rich linking to external resources
+	- Make some stylistic decisions
+- Click "yes/no" buttons to enable + auto-configure plugins
+- *Execute*
+- **JBrowse as dataset that can be downloaded from Galaxy + deployed on a server.**
