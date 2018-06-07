@@ -46,6 +46,10 @@ Forking a repository is a simple two-step process:
 >   
 >    ![Fork](../../images/PR_fork.jpg)
 >
+> > ### {% icon comment %} Comment
+> > When you click the **Fork** button GitHub will show you a list with your user and any groups where you can create a fork of this repository. If you do not see yourself, it means you already have a fork.
+> {: .comment}
+> 
 {: .hands_on}
 
 # Clone the GitHub repository on your computer
