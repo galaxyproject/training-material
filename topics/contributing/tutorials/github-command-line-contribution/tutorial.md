@@ -86,11 +86,11 @@ To modify the content of the repository, you need a copy of it on your computer.
 
 # Create a new branch
 
-You have now your repository locally and you want to modify it. For example for this tutorial, you want to add yourself as contributor of the project to appear on the [Hall of Fame]({{ site.baseurl }}/hall-of-fame).
+You have now your repository locally and you want to modify it. For this example tutorial, you will add yourself as contributor of the project to appear on the [Hall of Fame]({{ site.baseurl }}/hall-of-fame).
 
-In the GitHub flow, there is a concept: one new feature/change = one branch.
+In GitHub flow, there is a concept: one new feature or change = one branch.
 
-When you're working on a project, you're going to have a bunch of different features or ideas in progress at any given time – some of which are ready to go, and others which are not. Branching exists to help you manage this workflow.
+When you're working on a project, you're going to have a bunch of different features or ideas in progress at any given time – some of which are ready to go, and others which are not. Branching exists to help you manage this workflow. You should develop different features on different branches to help keep the changes you make simple and easy to review.
 
 ![Divergence of a branch compared to master](../../images/PR_branches_01.png "When you create a branch in your project, you're creating an environment where you can try out new ideas. Changes you make on a branch don't affect the master branch")
 
@@ -98,7 +98,7 @@ Here for this tutorial, you will create a branch called "my_new_branch" in which
 
 > ### {% icon hands_on %} Hands-on: Create a branch
 >
-> 1. List the existing branch
+> 1. See which branch you are currently on
 >
 >    ```
 >    $ git branch 
@@ -119,17 +119,18 @@ This branch is added to your local copy:
 
 # Make your changes on this branch
 
-You created a branch. Now you want to add the change in the `CONTRIBUTING.yaml` file. By doing that, you will diverge from the `master` branch:
+You have created your first branch! Now you want to make the change in the `CONTRIBUTING.yaml` file. By changing a file in this branch, it will diverge from the `master` branch. It will contain data that is only on this new branch:
 
 ![Divergence of the branch compared to master](../../images/PR_branches_02.png "The changes on your branch will not be on the master branch")
 
 > ### {% icon hands_on %} Hands-on: Make changes in a branch
 >
-> 1. Modify the `CONTRIBUTORS.yaml` by adding yourself
+> 1. Modify the `CONTRIBUTORS.yaml` to add yourself
 >
 >    You should use your GitHub username and add it followed by `:` at the correct position given the alphabetical order
 >
-> 2. Check the changes you made
+> 2. Save the file
+> 3. Check the changes you made
 >
 >    ```
 >    $ git status
@@ -143,15 +144,15 @@ You created a branch. Now you want to add the change in the `CONTRIBUTING.yaml` 
 >    no changes added to commit (use "git add" and/or "git commit -a")
 >    ```
 >
-> 2. Commit the changes
+> 4. Add the file and commit the changes
 >
 >    ```
 >    $ git add CONTRIBUTORS.yaml
 >    $ git commit -m "Add ..."
 >    ```
 >
-> 3. Check there is no changes to add again with `git status`
-> 
+> 5. Check that there are no more changes to commit with `git status`
+>
 {: .hands_on}
 
 # Push your branch on your GitHub repository
@@ -166,28 +167,33 @@ The changes you made on your branch are only on the local copy of the repository
 >    $ git push origin my_new_branch
 >    ```
 >
-> 2. Go on your GitHub repository
-> 3. Move to the "my_new_branch" branch:
+>    > ### {% icon details %} "push origin"
+>    > When you `git push`ed, you specified `origin`. Git repositories can know that forks exist in multiple places. When you clone one, it creates a "remote" (a remote repository) which it names `origin`, set to the URL that you used when you cloned. By having multiple remotes, you can manage more complex workflows.
+>    {: .details}
+>
+> 2. Go to your GitHub repository
+> 3. Change to the "my_new_branch" branch:
 >    1. Click on **Branch: master** (left)
 >
 >       ![Selecting branch on GitHub](../../images/PR_branch_github.png)
 >
 >    2. Select the branch "my_new_branch"
 >
-> 4. Check you are in the `CONTRIBUTORS.yaml` file
+> 4. Check that your name is in the `CONTRIBUTORS.yaml` file
+>
 {: .hands_on}
 
 ![Pushing changes to the fork from the local copy](../../images/PR_schema_04.png "Pushing changes from the local copy to the fork on GitHub")
 
 # Open a pull request
 
-You pushed your changes to GitHub, but on your fork, You want now to have them in the main GitHub repository to appear on our [Hall of Fame]({{ site.baseurl }}/hall-of-fame) online. You can't add or push directly the main GitHub repository. You need to create what we call a pull request:
+You pushed your changes to GitHub, but currently they are only on your fork. You want to have these changes in the main GitHub repository in order to appear on our [Hall of Fame]({{ site.baseurl }}/hall-of-fame) online. You can't add or push directly the main GitHub repository, so you need to create what we call a pull request:
 
 ![Pull request](../../images/PR_schema_05.png "Pull Requests provide a way to notify project maintainers about the changes you'd like them to consider")
 
 > ### {% icon hands_on %} Hands-on: Create a pull request
 >
-> 2. Go on your GitHub repository
+> 2. Go to your GitHub repository
 > 1. Click on **Compare & pull request**
 >
 >    !["Opening a pull request"](../../images/PR_button.png)
@@ -196,20 +202,20 @@ You pushed your changes to GitHub, but on your fork, You want now to have them i
 >
 >    ![Branches in PR](../../images/PR_branch_check.png)
 > 
-> 2. Fill the pull request description
+> 2. Fill in the pull request description
 >    
 >    ![PR description](../../images/PR_description.png)
 >
 >    1. Add a title for the Pull Request
->    2. Add a message explaining the changes you made (Be kind :smile:)
+>    2. Add a message explaining the changes you made (Be kind <i class="fa fa-smile-o" aria-hidden="true"></i>)
 >    3. Click on **Create pull request**
 > 3. Go to **Pull requests** to check if it is there
 {: .hands_on}
 
-Once the pull is open, it will be reviewed. 2 cases are then possible:
+Once the pull is open, it will be reviewed. There are two possible outcomes:
 
-- Your pull request is accepted. Congratulations! Your changes will be merged into the master branch of the original repository. The website will be re-built and you will be in the [Hall of Fame]({{ site.baseurl }}/hall-of-fame)
-- Your pull request need modifications: the reviewers ask for some changes or the automatic tests are failing.
+1. Your pull request is accepted. Congratulations! Your changes will be merged into the master branch of the original repository. The website will be re-built and you will be in the [Hall of Fame]({{ site.baseurl }}/hall-of-fame)
+2. Your pull request needs modifications: the reviewers will ask for some changes, possibly because the automatic tests are failing.
 
 # Make the requested changes
 
@@ -217,7 +223,7 @@ One of the reviewers of your pull request asked you to add your name after your 
 
 > ### {% icon hands_on %} Hands-on: Make further changes
 >
-> 2. Do the requested changes in the `CONTRIBUTORS.yaml` file 
+> 1. Make the requested changes in the `CONTRIBUTORS.yaml` file 
 >
 >    It should look like
 >    
@@ -226,7 +232,7 @@ One of the reviewers of your pull request asked you to add your name after your 
 >         name: Bérénice Batut
 >    ```
 >
-> 2. Check the changes you made
+> 2. Check the changes that you made
 >
 >    ```
 >    $ git status
@@ -240,15 +246,15 @@ One of the reviewers of your pull request asked you to add your name after your 
 >    no changes added to commit (use "git add" and/or "git commit -a")
 >    ```
 >
-> 2. Commit the changes
+> 3. Add the file and commit the changes
 >
 >    ```
 >    $ git add CONTRIBUTORS.yaml
 >    $ git commit -m "Add ..."
 >    ```
 >
-> 3. Check there is no changes to add again with `git status`
-> 4. Push the new changes to GitHub
+> 4. Check that there are no more changes to commit with `git status`
+> 5. Push the new changes to GitHub
 >
 >    ```
 >    $ git push origin my_new_branch
@@ -256,13 +262,13 @@ One of the reviewers of your pull request asked you to add your name after your 
 >
 >    The pull request should be automatically updated
 >
-> 5. Check the new changes has been added to the pull request on GitHub
+> 6. Check that the new changes are added to the pull request on GitHub
 >
 {: .hands_on}
 
 # Check the automatic tests
 
-Once pull Request is open, some automated tests are automatically launched on [Travis](http://travis-ci.org/) to be sure that the changes do not break the website, the URL are valid, etc.
+When a pull request is opened, some automated tests are automatically launched on [Travis](http://travis-ci.org/) to be sure that the changes do not break the website, the URL are valid, etc.
 
 On the bottom of your pull request, you can see the status of the tests:
 
@@ -282,17 +288,19 @@ On the bottom of your pull request, you can see the status of the tests:
 
     ![Passed tests](../../images/PR_test_green.png)
 
-    The tests passed. Good point!
+    The tests passed. Good job!
 
     Even it is green, we recommend to check the result of the tests, as some of tests are allowed to fail (to avoid too much noise).
 
 # Conclusion
 {:.no_toc}
 
-With this tutorial, you learn the basics to contribute using GitHub:
+With this tutorial, you have learned the basics of contributing using GitHub:
 
 ![Summary of the links between GitHub, fork and local repository](../../images/PR_global_schema.png "Summary of the links between GitHub, fork and local repository")
 
-We can now contribute and help us to improve our tutorials
+You can now contribute and help us to improve our tutorials.
 
-This tutorial is a quick introduction to explain the basics to contribute to the training material. We recommend anyone to follow a git tutorial, e.g. the one of [Software Carpentry](), and test yourself using the [GitHub test]().
+> ### {% icon tip %} Git in Depth
+> This tutorial was a quick introduction to explain the basics of contributing to the training material. We recommend that everyone follow a more detailed git tutorial, e.g. the one of [Software Carpentry](), and test yourself using the [GitHub test]().
+{: .tip}
