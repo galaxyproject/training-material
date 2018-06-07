@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
-topic_name: your_topic
-tutorial_name: your_tutorial_name
+topic_name: templates
+tutorial_name: tutorial1
 ---
 
 # Introduction
