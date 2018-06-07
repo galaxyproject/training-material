@@ -282,13 +282,13 @@
 <p>In metagenomics, information about micro-organisms in an environment can be extracted with two main techniques:</p>
 
 <ul>
-  <li>Amplicon sequencing (or 16S rRNA/rDNA), which sequence only on the rRNA/rDNA of organisms</li>
+  <li>Amplicon sequencing, which sequence only the rRNA or ribosomal DNA of organisms</li>
   <li>Shotgun sequencing, which sequence full genomes of the micro-organisms in the environment</li>
 </ul>
 
 <p>In this tutorial, we will introduce the two types of analyses with the general principles behind and the differences. To go deeper in such analyses, we recommend to check our detailed tutorials on each analysis.</p>
 
-<p>For that, we will use two datasets (one amplicon and one shotgun) from the same environment: the Argentina Anguil Bulk Soil, studied in a <a href="https://www.ebi.ac.uk/metagenomics/projects/SRP016633">project on the Argentinean agricultural pampean soils</a>. In this project, three different types of land uses and two soil types (bulk and rhizospheric) were analyzed using shotgun and amplicon sequencing. We will focus on the Argentina Anguil Bulk Soil.</p>
+<p>For that, we will use two datasets (one amplicon and one shotgun) from the same <a href="https://www.ebi.ac.uk/metagenomics/projects/SRP016633">project on the Argentinean agricultural pampean soils</a>. In this project, three different geographic regions that are under different types of land uses and two soil types (bulk and rhizospheric) were analyzed using shotgun and amplicon sequencing. We will focus on data from the Argentina Anguil and Pampas Bulk Soil (the original study included one more geographical regions, <a href="https://doi.org/10.1186/2049-2618-1-21">see</a>).</p>
 
 <blockquote class="agenda">
   <h3 id="agenda">Agenda</h3>
@@ -344,13 +344,13 @@ It can be 16S for bacteria or archea or 18S for eukaryotes.</p>
 <p>With amplicon data, we can extract from which micro-organisms the sequences in our sample are coming from. This is called taxonomic assignation.
 We try to assign sequences to taxons and then classify or extract the taxonomy in our sample.</p>
 
-<p>In this analysis, we will use <a href="https://mothur.org">mothur tool suite</a>, but only a small portion of its tools and possibilities.
+<p>In this analysis, we will use the <a href="https://mothur.org">mothur tool suite</a>, but only a small portion of its tools and possibilities.
 To learn more in detail how to use, check out the full <a href="../mothur-miseq-sop/tutorial.html">mothur tutorial</a>.</p>
 
 <h2 id="importing-the-data">Importing the data</h2>
 
-<p>Our datasets comes from a soil samples in two different Argentinian locations, with capture and sequencing of the 16S rDNA V4 region
-using 454 GS FLX Titanium. The original data are available at EBI Metagenomics under the following run numbers:</p>
+<p>Our datasets comes from a soil samples in two different Argentinian locations, for which the 16S rDNA V4 region
+has been sequenced using 454 GS FLX Titanium. For the tutorial the original fastq data has been down sampled and converted to fasta. The original data are available at EBI Metagenomics under the following run numbers:</p>
 
 <ul>
   <li>Pampa soil: <a href="https://www.ebi.ac.uk/metagenomics/projects/SRP016633/samples/SRS353016/runs/SRR531818/results/versions/2.0">SRR531818</a>
@@ -646,7 +646,7 @@ Furthermore, at least one read had a homopolymer stretch of 31 bases, this is li
 
 <h2 id="sequence-alignment">Sequence Alignment</h2>
 
-<p>Aligning our sequences to a reference helps improve OTU assignment [<a href="https://www.ncbi.nlm.nih.gov/pubmed/23018771">Schloss et. al.</a>], so we will now align our sequences to the Silva reference database.</p>
+<p>Aligning our sequences to a reference helps improve OTU assignment [<a href="https://www.ncbi.nlm.nih.gov/pubmed/23018771">Schloss et. al.</a>], so we will now align our sequences to an alignment of the V4 variable region of the 16S rRNA. This alignment has been created as described in [<a href="https://mothur.org/wiki/MiSeq_SOP">mothur’s MiSeq SOP</a>] from the Silva reference database.</p>
 
 <blockquote class="hands_on">
   <h3 id="-hands-on-align-sequences">
@@ -757,7 +757,7 @@ total # of seqs:    18178
   </blockquote>
 </blockquote>
 
-<p>Now we know our sequences overlap the same alignment coordinates, we want to make sure they <em>only</em> overlap that region. So we’ll filter the sequences to remove the overhangs at both ends. In addition, there are many columns in the alignment that only contain gap characters (<em>i.e.</em> “.”). These can be pulled out without losing any information. We’ll do all this with <code class="highlighter-rouge">Filter.seqs</code>:</p>
+<p>Now we know our sequences overlap the same alignment coordinates, we want to make sure they <em>only</em> overlap that region. So we’ll filter the sequences to remove the overhangs at both ends. In addition, there are many columns in the alignment that only contain external gap characters (<em>i.e.</em> “.”), while columns containing only internal gap characters (i.e., “-“) are not considered. These can be pulled out without losing any information. We’ll do all this with <code class="highlighter-rouge">Filter.seqs</code>:</p>
 
 <blockquote class="hands_on">
   <h3 id="-hands-on-filter-sequences">
@@ -794,7 +794,7 @@ total # of seqs:    18178
 
 </blockquote>
 
-<p>The first thing we want to do is to further de-noise our sequences, by pre-clustering the sequences using the <code class="highlighter-rouge">Pre.cluster</code> command, allowing for up to 2 differences between sequences. This command will split the sequences by group and then sort them by abundance and go from most abundant to least and identify sequences that differ no more than 2 nucleotides from on another. If this is the case, then they get merged. We generally recommend allowing 1 difference for every 100 basepairs of sequence:</p>
+<p>The first thing we want to do is to further de-noise our sequences from potential sequencing errors, by pre-clustering the sequences using the <code class="highlighter-rouge">Pre.cluster</code> command, allowing for up to 2 differences between sequences. This command will split the sequences by group and then sort them by abundance and go from most abundant to least and identify sequences that differ no more than 2 nucleotides from on another. If this is the case, then they get merged. We generally recommend allowing 1 difference for every 100 basepairs of sequence:</p>
 
 <blockquote class="hands_on">
   <h3 id="-hands-on-perform-preliminary-clustering-of-sequences-and-remove-undesired-sequences">
@@ -828,11 +828,11 @@ total # of seqs:    18178
 </blockquote>
 
 <!-- optional additional QC: chimera.uchime -->
-<p>We would like to classify the sequences using a training set.</p>
+<p>We would like to classify the sequences using a training set, which is again is provided on [<a href="https://mothur.org/wiki/MiSeq_SOP">mothur’s MiSeq SOP</a>].</p>
 
 <blockquote class="hands_on">
-  <h3 id="-hands-on-classify-the-sequences">
-<i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Classify the sequences</h3>
+  <h3 id="-hands-on-classify-the-sequences-into-phylotypes">
+<i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Classify the sequences into phylotypes</h3>
 
   <ol>
     <li>
@@ -881,7 +881,12 @@ SRR531818.61708-G88ZSJI01AVPPR-2    Bacteria(100);Acidobacteria(99);Acidobacteri
 
 <p>You will see that every read now has a classification.</p>
 
-<p>The next step is then to use this information to know the abundance of the different found taxons. First, we assign our sequences to OTUs:</p>
+<p>The next step is then to use this information to know the abundance of the different found taxons. This consists of three steps:</p>
+<ol>
+  <li>first all individual sequences are classified, and get assigned a confidence score (0-100%)</li>
+  <li>next, sequences are grouped at 97% identity threshold (not using taxonomy info)</li>
+  <li>finally, for each cluster, a consensus classification is determined based on the classification of the individual sequences and taking their confidence scores into account</li>
+</ol>
 
 <blockquote class="hands_on">
   <h3 id="-hands-on-assign-sequences-to-otus">
@@ -1232,7 +1237,7 @@ top right-hand corner after clicking on the label Acidobacteria. For anguil the 
 
 <p>We would like now to answer the question “What are the micro-organisms doing?” or “Which functions are done by the micro-organisms in the environment?”.</p>
 
-<p>In the shotgun data, we have access to the sequences from the full genome, with gene sequences then. We use that to identify the genes, associate them to a function, build pathways, etc to investigate the functional part of the community.</p>
+<p>In the shotgun data, we have access to the gene sequences from the full genome. We use that to identify the genes, associate them to a function, build pathways, etc to investigate the functional part of the community.</p>
 
 <blockquote class="hands_on">
   <h3 id="-hands-on-metabolism-function-identification">
