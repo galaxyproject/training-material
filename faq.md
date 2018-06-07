@@ -88,8 +88,6 @@ To teach the hands-on tutorials you need a Galaxy server to run the examples on.
 
 Each tutorial is annotated with the information on which [public Galaxy servers](https://galaxyproject.org/public-galaxy-servers/) it can be run. These servers are available to anyone on the world wide web and some may have all the tools that are needed by a specific tutorial. If you choose this option then you should work with that server's admins to confirm that think the server can handle the workload for a workshop. For example, the [usegalaxy.eu](https://usegalaxy.eu/)
 
-TODO: Training Infrastructure as a Service on useGalaxy.eu
-
 If your organization/consortia/community has its own Galaxy server, then you may  want to run tutorials on that. This can be ideal because then the instance you are teaching on is the same you your participants will be using after the training. They'll also be able to revisit any analysis they did during the training. If you pursue this option you'll need to work with your organization's Galaxy Admins to confirm that 
 
 - the server can support a room full of people all doing the same analysis at the same time.
