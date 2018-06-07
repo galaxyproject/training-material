@@ -42,7 +42,7 @@ There are 12,738 [2d-reads](http://www.nature.com/nmeth/journal/v12/n4/fig_tab/n
 
 You can see that there many reads under the second peak with median of approximately 7.5 kb.
 
-> ### <i class="fa fa-warning" aria-hidden="true"></i> Oxford Nanopore Data Format
+> ### {% icon warning %} Oxford Nanopore Data Format
 > Oxford Nanopore machines output
  data in [fast5](http://bioinformatics.cvr.ac.uk/blog/exploring-the-fast5-format/) format that contains additional information besides sequence data. In this tutorial we assume that these data are *already* converted into [fastq](https://en.wikipedia.org/wiki/FASTQ_format). An additional tutorial dedicated to handling of fast5 datasets will be developed shortly.
 {: .warning-box}
@@ -128,7 +128,7 @@ In this example we will use a downsampled version of *E. coli* C-1 Illumina and 
 >   - Create new history (if you are new to Galaxy see [Galaxy 101 tutorial]({{site.baseurl}}/topics/introduction/tutorials/galaxy-intro-101/tutorial.html) first).
 >
 > 2. **Get data** {% icon tool %} as shown below (see [these slides]({{site.baseurl}}/topics/introduction/tutorials/galaxy-intro-get-data/slides.html) for an introduction on how to load data into Galaxy):
-> 
+>
 >       ![Get Data](../../images/get_data.png "Getting data into history starts with clicking <b>Get data</b> button")
 >
 > 3. Open Zenodo [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.940733.svg)](https://doi.org/10.5281/zenodo.940733)
@@ -262,7 +262,7 @@ Go to IGV [download page](http://software.broadinstitute.org/software/igv/downlo
 > 4. Let's add Prokka annotations to the browser image. For this simply expand Prokka's GFF3 dataset and click on the *local* link:
 >
 >      ![Expanded GFF3 dataset representing Prokka annotations](../../images/prokka_item.png "Expanded GFF dataset generated with Prokka. Click on the <em>local</em> link (highlighted with orange outline) to display this dataset within IGV.")
->      
+>
 {: .hands_on}
 
 You will now see the annotations within the browser window:
