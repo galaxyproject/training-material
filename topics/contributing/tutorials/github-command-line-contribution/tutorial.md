@@ -54,7 +54,7 @@ Forking a repository is a simple two-step process:
 
 # Clone the GitHub repository on your computer
 
-To modify the content of the repository, you need to it on your computer. This step of importing a git repository is called "cloning":
+To modify the content of the repository, you need a copy of it on your computer. This step of importing a git repository is called "cloning":
 
 ![Explanation of the cloning](../../images/PR_schema_02.png "Cloning a repository"){: width="900px"}
 
