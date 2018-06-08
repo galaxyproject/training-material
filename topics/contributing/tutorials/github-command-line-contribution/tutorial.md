@@ -98,12 +98,14 @@ Here for this tutorial, you will create a branch called "my_new_branch" in which
 
 > ### {% icon hands_on %} Hands-on: Create a branch
 >
-> 1. See which branch you are currently on
+> 1. List the existing branch
 >
 >    ```
 >    $ git branch 
 >      * master
 >    ```
+>
+>    The branch on which you are is shown with the `*`
 >
 > 2. Create a new branch
 >
@@ -111,6 +113,8 @@ Here for this tutorial, you will create a branch called "my_new_branch" in which
 >    $ git checkout -b my_new_branch
 >    Switched to a new branch 'my_new_branch'
 >    ```
+>
+> 3. List the existing branch to check that the branch has been created and you are now on it
 {: .hands_on}
 
 This branch is added to your local copy:
