@@ -400,7 +400,7 @@ We can also call the enriched regions, or peaks, found in the ChIP-seq samples.
 > 1. **MACS2 callpeak** {% icon tool %} with
 >    - "ChIP-Seq Treatment File" to `patient1_ChIP_ER_good_outcome`
 >    - "ChIP-Seq Control File" to `patient1_input_good_outcome`
->    - "Effective genome size" to `H. sapiens (2,451,960,000)`
+>    - "Effective genome size" to `H. sapiens (2.7e9)`
 >    - "Outputs" to `Summary page (html)`
 >
 >    > ### {% icon comment %} Comments
