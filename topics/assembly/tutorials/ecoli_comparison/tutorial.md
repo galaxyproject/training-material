@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
-topic_name: your_topic
-tutorial_name: your_tutorial_name
+topic_name: assembly
+tutorial_name: ecoli_comparison
 ---
 
 # Introduction
@@ -22,9 +22,9 @@ Here we will demonstrate genome analyses strategies for understanding structural
 >
 {: .agenda}
 
-# Finding and loading all complete *E. coli* genomes
+# Comparing bacterial genomes
 
-*E. coli* is one of the most studied organisms. Naturally, there are hundreds of complete genomes (in fact, the total number of *E. coli* assemblies in Genbank is over 10,500). Here we will shows how to uploaded all (!) complete *E. coli* genomes at once.
+*E. coli* is one of the most studied organisms. There are hundreds of complete genomes (in fact, the total number of *E. coli* assemblies in Genbank is over 10,500). Here we will shows how to uploaded all (!) complete *E. coli* genomes at once.
 
 ## Preparing the data
 
