@@ -306,5 +306,9 @@ With this tutorial, you have learned the basics of contributing using GitHub:
 You can now contribute and help us to improve our tutorials.
 
 > ### {% icon tip %} Git in Depth
-> This tutorial was a quick introduction to explain the basics of contributing to the training material. We recommend that everyone follow a more detailed git tutorial, e.g. the one of [Software Carpentry](), and test yourself using the [GitHub test]().
+> This tutorial was a quick introduction to explain the basics of contributing to the training material. We recommend that everyone follow a more detailed git tutorials:
+> - [Software Carpentry tutorial](http://swcarpentry.github.io/git-novice/) which explains a bit more in detail some git commands and the concept of remote, local and stagging
+> - [Learn Git Branching](https://learngitbranching.js.org/) by GitHub to test the different git commands
+>
+> You should also download, print and keep always with you the [Git Cheat Sheet](https://services.github.com/on-demand/downloads/github-git-cheat-sheet.pdf)
 {: .tip}
