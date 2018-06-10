@@ -4,13 +4,6 @@ topic_name: assembly
 tutorial_name: ecoli_comparison
 ---
 
-# Introduction
-{:.no_toc}
-
-<!-- This is a comment. -->
-
-Here we will demonstrate genome analyses strategies for understanding structural differences between a newly assembled genome and a set of published, annotated genomes.
-
 > ### Outline of this tutorial
 >
 > In this tutorial we begin with a new genome assembly just produced in the [Unicycler tutorial]({{site.baseurl}}/topics/assembly/tutorials/unicycler-assembly/tutorial.html). This is an assembly of *E. coli* C, which we will be comparing to assemblies of all other complete genes of this species.
@@ -22,20 +15,17 @@ Here we will demonstrate genome analyses strategies for understanding structural
 >
 {: .agenda}
 
-# Comparing bacterial genomes
+# Finding closely related genomes
 
 *E. coli* is one of the most studied organisms. There are hundreds of complete genomes (in fact, the total number of *E. coli* assemblies in Genbank is over 10,500). Here we will shows how to uploaded all (!) complete *E. coli* genomes at once.
 
-## Preparing the data
+## Getting complete *E. coli* genomes into Galaxy
+
+---------------------
 
 Our initial objective is to compare our assembly against all complete *E. coli* genomes to identify the most related ones and to find any interesting genome alterations. In order to do this we need to align our assembly against all other genomes. And in order to do that we need to first obtain all these other genomes.
 
 [NCBI](https://www.ncbi.nlm.nih.gov/) is the resource that would store all complete *E. coli* genomes. Specifically, they can be found [here](https://www.ncbi.nlm.nih.gov/genome/genomes/167). As we will see, this list contains over 500 genomes and so uploading them by hand will likely result in carpal tunnel syndrome, which we want to prevent. Galaxy has several features that are specifically designed for uploading and managing large sets of similar types of data. The following two **Hands-on** sections show how they can be used to import all completed *E. coli* genomes into Galaxy.
-
-<!--
-{% icon hands_on %} will render the hands_on icon as specified in
-_config.yml in the root of this repository.
--->
 
 > ### {% icon hands_on %} Hands-on: Preparing a list of all complete *E. coli* genomes
 >
@@ -46,8 +36,6 @@ _config.yml in the root of this repository.
 ><div style="padding:56.25% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/271328293?title=0&byline=0&portrait=0" style="position:absolute;top:0;left:0;width:100%;height:100%;" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
 >
 {: .hands_on}
-
-## Getting complete *E. coli* genomes into Galaxy
 
 Now that the list is formatted as a table in a spreadsheet, it is time to upload it into Galaxy. There is a problem though &rarr; the URLs (web addresses) in the list do not actually point to sequence files that we would need to perform alignments. Instead they point to directories. For example, this URL:
 
@@ -65,9 +53,7 @@ So to download sequence files we need to edit URLs by adding filenames to them. 
 ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/000/008/865/GCA_000008865.1_ASM886v1/GCA_000008865.1_ASM886v1_genomic.fna.gz
 ```
 
-This can be done as a two step process where we first copy the end part of the existing URL (`/GCA_000008865.1_ASM886v1`) and then add a fixed string `_genomic.fna.gz` to the end of it. Doing by hand is crazy and trying it in a spreadsheet is complicated. Fortunately Galaxy's new rule-based uploader helps with that as shown in the next **Hands-on** section.
-
-<!--Short introduction about this subpart.-->
+This can be done as a two step process where we first copy the end part of the existing URL (`/GCA_000008865.1_ASM886v1`) and then add a fixed string `_genomic.fna.gz` to the end of it. Doing this by hand is crazy and trying it in a spreadsheet is complicated. Fortunately Galaxy's new rule-based uploader helps with that as shown in the next **Hands-on** section:
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
@@ -78,9 +64,13 @@ This can be done as a two step process where we first copy the end part of the e
 ><div style="padding:56.25% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/271336444?title=0&byline=0&portrait=0" style="position:absolute;top:0;left:0;width:100%;height:100%;" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
 {: .hands_on}
 
+Now we have all complete *E. coli* genomes in Galaxy's history. It is time to do a few things to out assembly. 
+
 ## Preparing assembly
 
-Before doing any analyses we need to upload the assembly produced in [Unicycler tutorial]({{site.baseurl}}/topics/assembly/tutorials/unicycler-assembly/tutorial.html) from Zenodo.
+--------------------
+
+Before starting any analyses we need to upload the assembly produced in [Unicycler tutorial]({{site.baseurl}}/topics/assembly/tutorials/unicycler-assembly/tutorial.html) from Zenodo:
 
  > ### {% icon hands_on %} Uploading *E. coli* assembly into Galaxy
  >
@@ -93,46 +83,44 @@ Before doing any analyses we need to upload the assembly produced in [Unicycler 
 
 The assembly we just uploaded has two issues that need to be addressed before proceeding with our analysis:
 
- 1. It contains two sequences: the one of *E. coli* C genome (the one we really need) and another representing phage phiX174 (a by product of Illumina sequencing were it is used as spike in DNA).
+ 1. It contains two sequences: the one of *E. coli* C genome (the one we really need) and another representing phage phiX174 (a by product of Illumina sequencing where it is used as a spike-in DNA).
  2. Sequences have unwieldy names like `>1 length=4576293 depth=1.00x circular=true`. We need to rename it to something more meaningful.
 
  Let's fix these two problems.
 
  > ### {% icon tip %} Tip: Finding tools mentioned in this tutorial
- >Galaxy instances contain hundreds of tools. As a result, it is sometimes hard to find tools mentioned in tutorials such as this one.
- >
- >To help with this challenge, Galaxy has a search box at the top of the left panel. Use this box to find the tools mentioned here.
+ >Galaxy instances contain hundreds of tools. As a result, it can be hard to find tools mentioned in tutorials such as this one. To help with this challenge, Galaxy has a search box at the top of the left panel. Use this box to find the tools mentioned here.
  >![](../../images/tool_search.png "Use search box to find tools!")
  {: .tip}
 
 > ### {% icon hands_on %} Hands-on: Fixing assembly
 >
-> 1. First we will use **Filter sequences by length** {% icon tool %} tool to remove phiX 174 genome. Set parameters as follows:
+> 1. {% icon tool %} First we will use **Filter sequences by length** tool to remove phiX 174 genome. Set parameters as follows:
 >   - **Fasta file** to the dataset you've just uploaded. (It will have a name looking like `https://zenodo.org/record/1251125/files/Ecoli_C_assembly.fna` ).
 >   - **Minimal length** to `10000` (so that phiX174, which is around 5,000 bp, will be filtered out)
 >   - **Maximum length** you do not need to change.
-> 2. Second we will use **Text transformation with sed** {% icon tool %} tool to convert the name of the assembly from `>1 length=4576293 depth=1.00x circular=true` to `>Ecoli_C`. Set parameters as follows:
+> 2. {% icon tool %} Second we will use **Text transformation with sed** tool to convert the name of the assembly from `>1 length=4576293 depth=1.00x circular=true` to `>Ecoli_C`. Set parameters as follows:
 >   - **File to process** should be set to the output of the previous step
 >   - Inside **SED program** box enter the following expression (so called [Regular Expression](https://en.wikipedia.org/wiki/Regular_expression): `s/^>1.*$/>Ecoli_C/`
 >
 >	> ### {% icon tip %} Highlight: SED editor and Regular Expressions
 >	>The expression `s/^>1.*$/>Ecoli_C/` contains several pieces that you need to understand. Let's write it top-to-bottom and explain:
 >	>
->	> - `s` - tell SED to *Substitute*
->	> - `/` - opens a section of the commands telling SED *what* to substitute.
+>	> - `s` - tells SED to *Substitute*
+>	> - `/` - opens a section of the commands telling SED *what* to substitute
 >	> - `^` - tell SED to start looking at *the beginning* of each line
 >	> - `>` - is the first character we want to match. Remember that name of the sequence in FASTA files starts with `>`
 >	> - `1` - is the number present is our old name (`>1 length=4576293 depth=1.00x circular=true` to `>Ecoli_C`)
->	> - `.` - dot has a special meaning. It signifies *any* character.
+>	> - `.` - dot has a special meaning. It signifies *any* character
 >	> - `*` - is a *quantifier*. From [Wikipedia](https://en.wikipedia.org/wiki/Regular_expression): "The asterisk indicates zero or more occurrences of the preceding element. For example, ab*c matches `ac`, `abc`, `abbc`, `abbbc`, and so on."
 >	> - `$` - signifies *the end* of a line
 > 	> - `/` - is *the end* of the *what to substitute* section. It also serves as the beginning of *what to substitute WITH* section
 > 	> - `>` - is the required element of the FASTA sequence name
 >	> - `Ecoli_C` is the *name* we want the sequence to have
->	> - `/` - is the end of SED command
+>	> - `/` - is the end of the SED command
 >	>
 >	>So in short we are replacing `>1 length=4576293 depth=1.00x circular=true` with `>Ecoli_C`. The *Regular expression* `^\>1.*$` is used here to represent `>1 length=4576293 depth=1.00x circular=true`.<br>
->	>Detailed description of regular expressions is outside of the scope of this tutorial, but there are other great resources. Start with [Software Carpentry Regular Expressions tutorial](http://v4.software-carpentry.org/regexp/index.html)!
+>	>Detailed description of regular expressions is outside of the scope of this tutorial, but there are other great resources. Start with [Software Carpentry Regular Expressions tutorial](http://v4.software-carpentry.org/regexp/index.html).
 >	{: .tip}
 >
 >    > ### {% icon question %} Questions
@@ -151,12 +139,14 @@ The assembly we just uploaded has two issues that need to be addressed before pr
 >
 {: .hands_on}
 
-# Generating alignments
+## Generating alignments
 
-Now everything is loaded and ready to go. We will now align our assembly against each of the *E. coli* genomes we have uploaded into the collection. To do this we will use [LASTZ](https://lastz.github.io/lastz/) an aligner designed to align long sequences.
+---------------
 
-> ### {% icon hands_on %} Hands-on: Running LASTZ
-> 1. Open **LASTZ** interface
+Now everything is loaded and ready to go. We will now align our assembly against each of the *E. coli* genomes we have uploaded into the collection. To do this we will use [LASTZ](https://lastz.github.io/lastz/)&mdash;an aligner designed for long sequences.
+
+> ###   Hands-on: Running LASTZ
+> 1. {% icon tool %} Open **LASTZ** interface
 > 2. Change **Select TARGET sequence(s) to align against** to `from your history`
 > 3. In **Select a reference dataset** click on the folder icon (![](../../images/folder-o.png)) and the collection containing all *E. coli* genomes we uploaded earlier.
 > 4. In **Select QUERY sequence(s)** choose our assembly which was prepared in the previous step.
@@ -173,11 +163,13 @@ Note that because we started LASTZ on *a collection* of *E. coli* genomes, it wi
 > Please understand that alignment is not an instantaneous process: allow several hours for these jobs to clear.
 {: .warning-box}
 
-# Finding closely related assemblies
+## Finding closely related assemblies
 
-## Understanding LASTZ output
+------------------------
 
-LASTZ produced data in so-called `blastn` format, which looks like this:
+### Understanding LASTZ output
+
+LASTZ produced data in so-called `blastn` format (because we [explicitly told](#-hands-on-running-lastz) LASTZ to output in this format), which looks like this:
 
 ```
          1       2     3   4  5 6       7       8    9   10      11    12
@@ -205,14 +197,14 @@ where columns are:
 
  The alignment information produced by LASTZ is a collection. In this collection each element contains alignment data between each of the *E. coli* genomes and our assembly:
 
-![LASTZ collection](../../images/lastz_collection.png "LASTZ produced a collection where each element corresponds to an alignment between an <i>E. coli</i> genome and our assembly. Here one of the elements is expanded.").
+![LASTZ collection](../../images/lastz_collection.png "LASTZ produced a collection where each element corresponds to an alignment between an <i>E. coli</i> genome and our assembly. Here one of the elements is expanded (to expand an element simply click on it).").
 
 ## Collapsing collection
 
-Collections are a wonderful way to organize large sets of data and parallelize data processing like we did here. However, at this point we need to combine all data into one dataset. Follow the steps below to accomplish this:
+Collections are a wonderful way to organize large sets of data and parallelize data processing like we did here with LASTZ. However, at this point we need to combine all data into one dataset. Follow the steps below to accomplish this:
 
 > ### {% icon hands_on %} Hands-on: Combining collection into a single dataset
-> 1. Open **Collapse Collection** tool.
+> 1. {% icon tool %} Open **Collapse Collection** tool.
 > 2. In **Collection of files to collapse** click on the folder icon (![](../../images/folder-o.png)) and select the output of **LASTZ** produced on previous step.
 > 3. Leave all other options as they are - no changes needed.
 > 4. Click **Execute**
@@ -225,7 +217,7 @@ This will produce one gigantic table (over 12 million lines) containing combined
 To make further analyses we need to obtain some understanding about the nature of the alignment data. To do this let's select a random subsample of the large dataset we've generated above. This is necessary because processing the entire dataset will take time and will not give us a better insight anyway. So first we will select 10,000 lines from the alignment data:
 
 > ### {% icon hands_on %} Hands-on: Selecting random subset of data
-> 1. Open **Select random lines from a file** tool.
+> 1. {% icon tool %} Open **Select random lines from a file** tool.
 > 2. Set **Randomly select** to `10000`
 > 3. In **from** choose the dataset generated on previous step (it will be called something like `Collapse Collection on data...` )
 > 4. Click **Execute**
@@ -250,7 +242,7 @@ The relationship between the alignment identity and alignment length looks like 
 You can see that most alignments are short and have relatively low identity. Thus we can filter the original dataset by identity and length. Judging form this graph we can selected alignment longer than 10,000 bp with identity above 90%.
 
 > ### {% icon hands_on %} Hands-on: Filtering data
-> 1. Select **Filter data on any column using simple expressions** tool.
+> 1. {% icon tool %} Select **Filter data on any column using simple expressions** tool.
 > 2. In **Filter** select the full dataset. **IMPORTANT** you need to select the full dataset, not the down-sampled one, but the one generated by collection collapsing operation.
 > 3. In **With following condition** enter our filtering criteria: `c3 >= 90 and c4 >= 10000` (here `c` stands for *column*).
 > 4. Click **Execute**
@@ -268,7 +260,7 @@ Remember, our objective is to find genomes that are most similar to our. Given t
 However, to extract this information from our data we need to aggregate it. In other words, for each *E. coli* genome we need to calculate the total number of alignment blocks, their combined length, and average identity. The following section explain how to do this:
 
 > ### {% icon hands_on %} Hands-on: Aggregating the data
-> 1. Select **Datamash (operations on tabular data)**
+> 1. {% icon tool %} Select **Datamash (operations on tabular data)**
 > 2. In **Input tabular dataset** select results of the filtering performed in the previous step (it will have a name with `Filter on data...` in it.
 > 3. In **Group by fields** enter `1`. This is because column 1 contains name of the *E. coli* genome we mapped against.
 > 4. Set **Sort input** to `Yes`.
@@ -307,7 +299,7 @@ A group of three dots in the upper left corner of this scatter plot represents g
 Let's find table entries corresponding to these:
 
 > ### {% icon hands_on %} Hands-on: Extracting into about best hits
-> 1. Open **Select lines that match an expression** tool.
+> 1. {% icon tool %} Open **Select lines that match an expression** tool.
 > 2. Set **Select lines from** to previous dataset (named like `Datamash on data...`)
 > 3. In **the pattern** enter `LT906474|CP024090|CP020543`. Here `|` means `or`.
 > 4. Click **Execute**
@@ -344,7 +336,7 @@ Now that we know the three genomes most closely related to ours, let's take a cl
 Now we will perform alignments between our assembly and the three most closely related genomes to get a detailed look at any possible genome architecture changes. We will again use LASTZ:
 
 > ### {% icon hands_on %} Hands-on: Aligning again
-> 1. Open **LASTZ** interface
+> 1. {% icon tool %} Open **LASTZ** interface
 > 2. Change **Select TARGET sequence(s) to align against** to `from your history`
 > 3. In **Select a reference dataset** click on the folder icon (![](../../images/folder-o.png)) and select the collection of the three genomes (in the video above we called it `DNA`).
 > 4. In **Select QUERY sequence(s)** choose our assembly which was prepared in the beginning (it has a name `Text transformation on data...`).
@@ -385,7 +377,7 @@ Dot plots we've produced above are great, but they are static. It would be wonde
 
 > ### {% icon hands_on %} Hands-on: Creating a single FASTA dataset with all genomes
 > First step will be collapsing the collection containing the three genomes into a single file. To do this:
-> 1. Open **Collapse Collection** tool.
+> 1. {% icon tool %} Open **Collapse Collection** tool.
 > 2. In **Collection of files to collapse** click on the folder icon (![](../../images/folder-o.png)) and select the collection of the three genomes (in the video above we called it `best hits`).
 > 3. Leave all other options as they are - no changes needed.
 > 4. Click **Execute**
@@ -407,7 +399,7 @@ This is a problem because a browser will "think" that this particular genome is 
 To make sure that everything completed correctly let's grab FASTA headers from all sequences in the dataset produced by the last tool:
 
 > ### {% icon hands_on %} Hands-on: "Grepping" FASTA headers
-> 1. Open **Search in textfiles (grep)** tool.
+> 1. {% icon tool %} Open **Search in textfiles (grep)** tool.
 > 2. In **Select lines from** select output of the previous step (called `Text transformation on data...`)
 > 3. In **Regular Expression** box enter `^>`. This tells to return all line that begin (`^` signifies the beginning) with `>`.
 > 4. Click **Execute**
@@ -423,7 +415,7 @@ If everything went well we will see something like this:
 Finally, we need to add our own assembly to the FASTA dataset containing the three genomes. This can be done by a simple concatenation:
 
 > ### {% icon hands_on %} Hands-on: Concatenate FASTA files
-> 1. Open **Concatenate datasets tail-to-head (cat)**
+> 1. {% icon tool %} Open **Concatenate datasets tail-to-head (cat)**
 > 2. In **Datasets to concatenate** select output of **sed** tool we performed one step ago (*before* last step; it is called `Text transformation on...`)
 > 3. Click **Insert Dataset** button
 > 4. Select our assembly (its name also begins with `Text transformation on...` but is located earlier in the history)
@@ -465,7 +457,7 @@ One immediate problem is `%` character in column 12 (alignment identity). We nee
 
 > ### {% icon hands_on %} Hands-on: Removing `%` character from LASTZ output
 >
-> 1. Open **Text transformation with sed** {% icon tool %} tool
+> 1. {% icon tool %} Open **Text transformation with sed** {% icon tool %} tool
 > 2. In **File to process** click on the folder icon (![](../../images/folder-o.png)) and select the output of LASTZ (called `LASTZ on collection ...: mapped reads` ).
 > 3. Inside **SED program** box enter the following expression (so called [Regular Expression](https://en.wikipedia.org/wiki/Regular_expression): `s/\%//`. Here we are matching percent character `%` (it is pre-pended with `\` because it is a special character, but we want `sed` to interpret it literally, as the percentage sign) and substituting this with nothing.
 > 4. Click **Execute**
@@ -485,7 +477,7 @@ One of the fields chosen by us for [LASTZ run](#-hands-on-aligning-again) is `nu
 
 > ### {% icon hands_on %} Hands-on: Creating unique alignment identifiers
 >
-> 1. Open **Merge Columns together** tool.
+> 1. {% icon tool %} Open **Merge Columns together** tool.
 > 2. In **Select data** choose the output of the previous step (called `Text transformation of collection ...`)
 > 3. In **Merge column** select `Column: 2` (this is Targe sequence name)
 > 4. In **with column** select `Column: 13` (this is the alignment block identified created by LASTZ)
@@ -505,7 +497,7 @@ The output will look like this:
 The tool added a new column (Column 14) containing a merge between the target name and alignment id. Now we can differentiate between alignment blocks that exist between, for example, `CP020543.1` and `LT906474.1` because they will have accessions embedded within alignment block IDs. For example, the first alignment between `CP020543.1` and our assembly `Ecoli_C` will have alignment block id `CP020543.11`, while the 225th alignment between `LT906474.1` and `Ecoli_C` will have ID `LT906474.1225`. Because of this we can collapse the entire collection of alignments into a single dataset:
 
 > ### {% icon hands_on %} Hands-on: Collapsing all alignment info into a single dataset
-> 1. Open **Collapse Collection** tool.
+> 1. {% icon tool %} Open **Collapse Collection** tool.
 > 2. In **Collection of files to collapse** click on the folder icon (![](../../images/folder-o.png)) and select the output of the previous step (called `Merge Columns on collection...`)
 > 3. Leave all other options as they are - no changes needed.
 > 4. Click **Execute**
@@ -541,7 +533,7 @@ Alignments are regions of high similarity between two sequences. Therefore each 
 {: .warning-box}
 
 > ### {% icon hands_on %} Hands-on: Creating target BED
-> 1. Open **Cut columns from a table** tool.
+> 1. {% icon tool %} Open **Cut columns from a table** tool.
 > 2. In **Cut columns** box enter `c2,c4,c5,c14,c12,c8` (look at the data shown above and definition of BED to see why we make these choices.)
 > 3. In **From** select the output of the previous step (called `Collapse Collection on data ...`)
 > 4. Click **Execute**
@@ -577,7 +569,7 @@ Now we can merge these two datasets into a single BED datasets that will be read
 
 > ### {% icon hands_on %} Hands-on: Merging Target and Query BEDs
 >
-> 1. Open **Concatenate datasets tail-to-head** tool
+> 1. {% icon tool %} Open **Concatenate datasets tail-to-head** tool
 > 2. Click **Insert Dataset** button
 > 3. For **Concatenate Dataset** select the output of the step before last (called `Cut on data...`)
 > 4. For **1: Dataset** select the output of the previous step (also called `Cut on data...`)
@@ -689,7 +681,7 @@ col20: attributes: semi-colon delimited list of a controlled set of qualifiers.
 Our objective is convert these data into BED. In this analysis we want to initially concentrate on protein coding regions. To do this let's select all lines from the annotation datasets that contain the term `CDS`:
 
 > ### {% icon hands_on %} Hands-on: Retain CDS rows in annotation datasets
-> 1. Open **Select lines that match an expression** tool
+> 1. {% icon tool %} Open **Select lines that match an expression** tool
 > 2. In **Select lines from** click on the folder icon (![](../../images/folder-o.png)) and select the collection containing annotations(called `GENES`)
 > 3. In **the pattern** type `^CDS`. This is because we want to retain all lines that begin (`^`) with `CDS`.
 > 4. Click **Execute**
@@ -699,7 +691,7 @@ This will produce a collection with three datasets just like the original `GENES
 
 > ### {% icon hands_on %} Hands-on: Creating a dummy score column
 >
-> 1. Open **Add column to an existing dataset** tool
+> 1. {% icon tool %} Open **Add column to an existing dataset** tool
 > 2. In **Add this value** type `0`
 > 3. In **to Dataset** select collection produced by the previous step (`Select on collection...`)
 > 4. Click **Execute**
@@ -709,7 +701,7 @@ This will create a 21st column containing `0` for all rows. Now we can cut neces
 
 > ### {% icon hands_on %} Hands-on: Cutting columns form annotation data
 >
-> 1. Open **Cut columns from a table** tool.
+> 1. {% icon tool %} Open **Cut columns from a table** tool.
 > 2. In **Cut columns** type `c8,c9,c14,c19,c10`
 > 3. In **From** click on the folder icon (![](../../images/folder-o.png)) and select the collection produced at the previous step (`Select on collection...`)
 > 4. Click **Execute**
@@ -728,7 +720,7 @@ This will produce a collection with each element containing data like this:
 As we mentioned above this datasets lacks genome IDs such as `CP020543.1`. However, the individual elements in the collection we've created already have genomes IDs (if you are unsure make sure you followed direction when [creating collection containing annotations](#-hands-on-uploading-sequences-and-annotations)). We will leverage this while collapsing this collection into a single dataset:
 
 > ### {% icon hands_on %} Hands-on: Collapsing annotations into a single BED dataset
-> 1. Open **Collapse Collection** tool.
+> 1. {% icon tool %} Open **Collapse Collection** tool.
 > 2. In **Collection of files to collapse** click on the folder icon (![](../../images/folder-o.png)) and select the output of the previous step (`Cut on collection...`)
 > 3. Set **Append File name** to `Yes`
 > 4. In **Where to add dataset name** choose "Same line and each line in dataset"
@@ -759,7 +751,7 @@ However, before we convert coordinates of aligned into their complement we need 
 
 > ### {% icon hands_on %} Hands-on: Creating a genome file
 >
-> 1. Open **Compute sequence length** tool
+> 1. {% icon tool %} Open **Compute sequence length** tool
 > 2. In **Compute length for these sequences** select FASTA dataset we generated [concatenated "hybrid" genome](#-hands-on-concatenate-fasta-files)
 > 3. Click **Execute**
 {: .hands_on}
@@ -779,7 +771,7 @@ Next, we need to sort this file lexicographically:
 
 > ### {% icon hands_on %} Hands-on: Sorting genome file
 >
-> 1. Open **Sort data in ascending or descending order**
+> 1. {% icon tool %} Open **Sort data in ascending or descending order**
 > 2. In **Sort Dataset** select the output of the previous step (`Compute sequence length on ...`)
 > 3. Keep **on column** set as `Column: 1`
 > 4. Set **with flavor** to `Alphabetical sort`
@@ -801,7 +793,7 @@ LT906474.1 4625968
 next we need to go back to the BED file containing [alignment data](#-hands-on-changing-dataset-type) and sort it as well:
 
 > ### {% icon hands_on %} Hands-on: Sorting BED file
-> 1. Open **SortBED order the intervals**
+> 1. {% icon tool %} Open **SortBED order the intervals**
 > 2. In **Sort the following BED file** select [alignment BED](#-hands-on-changing-dataset-type)
 > 3. Keep **Sort by** on its default setting (`chromosome, then by start position (asc)`)
 > 4. Click **Execute**
@@ -811,7 +803,7 @@ Now we can finally compute complement on sorted BED dataset:
 
 > ### {% icon hands_on %} Hands-on: Sorting BED file
 >
-> 1. Open **ComplementBed Extract intervals not represented by an interval file**
+> 1. {% icon tool %} Open **ComplementBed Extract intervals not represented by an interval file**
 > 2. In **BED/VCF/GFF file** select output of the previous step
 > 3. In **Genome file** select `Genome file from your history`
 > 4. In **Genome file** below select sorter genome file we've generated [two steps ago](#-hands-on-sorting-genome-file)
@@ -830,7 +822,7 @@ But before we do that let's filter all small intervals below 10,000 kb to remove
 
 > ### {% icon hands_on %} Hands-on: Filtering BED on interval length
 >
-> 1. Open **Filter data on any column using simple expressions**
+> 1. {% icon tool %} Open **Filter data on any column using simple expressions**
 > 2. In **Filter** select dataset from the last step (`Complement of SortBed on ...`)
 > 3. In **With following condition** type `c3-c2>=10000`. Here we are computing the length (difference bewteen end (column 3) and start (column 2) and making sire it is above 10,000).
 > 4. Click **Execute**
@@ -854,7 +846,7 @@ you will notice that all three genomes have a region starting past 3,200,000 and
 
 > ### {% icon hands_on %} Hands-on: Restricting list of deleted region to the *common* deletion
 >
-> 1. Open **Filter data on any column using simple expressions**
+> 1. {% icon tool %} Open **Filter data on any column using simple expressions**
 > 2. In **Filter** select dataset from the last step (`Filter on data...`)
 > 3. In **With following condition** type `c2 > 2000000`.
 > 4. Click **Execute**
@@ -880,7 +872,7 @@ Now we are ready to intersect these regions with gene coordinates we formatted [
 
 > ### {% icon hands_on %} Hands-on: Finding genes deleted in our assembly
 >
-> 1. Open **Intersect intervals find overlapping intervals in various ways**.
+> 1. {% icon tool %} Open **Intersect intervals find overlapping intervals in various ways**.
 > 2. In **File A to intersect with B** select output of the previous step
 > 3. In **File(s) B to intersect with A** select gene annotations in [BED format](#-hands-on-collapsing-annotations-into-a-single-bed-dataset)
 > 4. In **What should be written to the output file?** select `Write the original A and B entries plus the number of base pairs of overlap between the two features. Only A features with overlap are reported. Restricted by the fraction- and reciprocal option (-wo)`
@@ -928,7 +920,7 @@ the two truly important columns here are 1 (gene name) and 4 (is gene essential?
 
 > ### {% icon hands_on %} Hands-on: Are there essential genes?
 >
-> 1. Open **Join two Datasets side by side on a specified field**
+> 1. {% icon tool %} Open **Join two Datasets side by side on a specified field**
 > 2. In **Join** select the results of [intersect operation](#-hands-on-finding-genes-deleted-in-our-assembly)(`Intersect intervals on data...`)
 > 3. Set **using column** to `Column: 7` because it contains gene names.
 > 4. Set **with** to newly uploaded dataset with essential gene data.
