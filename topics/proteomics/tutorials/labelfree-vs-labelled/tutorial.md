@@ -56,13 +56,10 @@ Labelled techniques like the ["Super-SILAC"](https://www.ncbi.nlm.nih.gov/pubmed
 > 1. What is the difference between metabolic and chemical labelling?
 > 2. What is the "Super-SILAC" approach?
 >
->    <details>
->    <summary>Click to view answers</summary>
->    <ol type="1">
->    <li>In metabolic labelling (e.g. "SILAC"), samples like cells or whole animals are labelled <i>in vivo</i> by providing amino acids containing stable isotope before starting the experiment. In chemical labelling, samples are labelled <i>in vitro</i> after extracting the proteins.</li>
->    <li>The "Super-SILAC" approach features mixing of easy obtainable control samples that are related to the sample of interest. An example is to use a mixture of several breast cancer cell lines to compare to breast cancer patient samples. The control sample usually is labelled with heavy isotopes, while the sample of interest is unlabelled. The "Super-SILAC" approach thus combines benefits of labelled and label-free experiments.</li>
->    </ol>
->    </details>
+>    > ### {% icon solution %} Solution
+>    > 1. In metabolic labelling (e.g. "SILAC"), samples like cells or whole animals are labelled *in vivo* by providing amino acids containing stable isotope before starting the experiment. In chemical labelling, samples are labelled *in vitro* after extracting the proteins.
+>    > 2. The "Super-SILAC" approach features mixing of easy obtainable control samples that are related to the sample of interest. An example is to use a mixture of several breast cancer cell lines to compare to breast cancer patient samples. The control sample usually is labelled with heavy isotopes, while the sample of interest is unlabelled. The "Super-SILAC" approach thus combines benefits of labelled and label-free experiments.
+>    {: .solution }
 {: .question}
 
 # Guideline: How to Choose Your Technique

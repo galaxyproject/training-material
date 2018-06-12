@@ -1,3 +1,15 @@
+// Handle foldable challenges and solutions (on click and at start).
+$(".solution,.details").click(function(event) {
+    $(">*:not(h3)", this).toggle(400);
+    $(">h3>span.fold-unfold", this).toggleClass("fa-plus-square fa-minus-square");
+});
+
+$(".solution,.details").each(function() {
+    $(">*:not(h3)", this).toggle();
+    var h3 = $("h3:first", this);
+    h3.append("<span class='fold-unfold fa fa-plus-square'></span>");
+});
+
 (function (window, document) {
     function onDocumentReady(fn) {
         if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
@@ -19,4 +31,5 @@
             });
         }
     });
+
 })(window, document);
