@@ -57,15 +57,13 @@ The data we use in this tutorial is available at [Zenodo](https://doi.org/10.528
 
 > ### {% icon hands_on %} Hands-on: Pre-process data and create pointwise boxplot
 > 1. Execute the IWTomics Tool **Load, Smooth and Plot**.
->    > ### {% icon tip %} Tip: Tool setup
->    > * Select the two region datasets `ETn_fixed.bed` and `Control.bed`.
->    > * Select the region header file `regions_header.tabular`.
->    > * Select the feature file `Recombination_hotspot.txt`.
->    > * Select the feature header file `features_header.tabular`.
->    > * Start positions are 0-based in this example; all region alignments are equivalent in this case.
->    > * You can choose to smooth the feature curves.
->    > * Select the graphical representation type **Pointwise quantile curves (boxplot)**.
->    {: .tip}
+>    * Select the two region datasets `ETn_fixed.bed` and `Control.bed`.
+>    * Select the region header file `regions_header.tabular`.
+>    * Select the feature file `Recombination_hotspot.txt`.
+>    * Select the feature header file `features_header.tabular`.
+>    * Start positions are 0-based in this example; all region alignments are equivalent in this case.
+>    * You can choose to smooth the feature curves.
+>    * Select the graphical representation type **Pointwise quantile curves (boxplot)**.
 > 2. Take a look at the output!
 >
 > ![Recombination hotspot pointwise boxplot](../../images/load_smooth_and_plot_output.png)
@@ -79,13 +77,11 @@ The data we use in this tutorial is available at [Zenodo](https://doi.org/10.528
 
 > ### {% icon hands_on %} Hands-on: Test for difference between ETn and Control regions
 > 1. Execute the IWTomics Tool **Test and Plot**.
->    > ### {% icon tip %} Tip: Tool setup
->    > * Select the `IWTomicsData Object`, `Region Dataset IDs`, and `Feature IDs` created during **Step 1**.
->    > * Select pairs of genomic region datasets to be compared using two-sample Interval-Wise Testing. In this example we consider one two-sample test contrasting `ETn_fixed` (select it as **Region 1**) to `Control` (select it as **Region 2**).
->    > * Select feature measurements to be tested. In this example, select `Recomb_hot` feature.
->    > * You can choose the test statistic, the number of permutations, and the significance level of the test (alpha).
->    > * Select the graphical representation type **Pointwise quantile curves (boxplot)**.
->    {: .tip}
+>    * Select the `IWTomicsData Object`, `Region Dataset IDs`, and `Feature IDs` created during **Step 1**.
+>    * Select pairs of genomic region datasets to be compared using two-sample Interval-Wise Testing. In this example we consider one two-sample test contrasting `ETn_fixed` (select it as **Region 1**) to `Control` (select it as **Region 2**).
+>    * Select feature measurements to be tested. In this example, select `Recomb_hot` feature.
+>    * You can choose the test statistic, the number of permutations, and the significance level of the test (alpha).
+>    * Select the graphical representation type **Pointwise quantile curves (boxplot)**.
 > 2. Take a look at the output!
 >
 > ![Recombination hotspot IWT results](../../images/test_and_plot_output.png)
@@ -97,11 +93,9 @@ The data we use in this tutorial is available at [Zenodo](https://doi.org/10.528
 
 > ### {% icon hands_on %} Hands-on: Change scale for test results
 > 1. Execute the IWTomics Tool **Plot with Threshold on Test Scale**.
->    > ### {% icon tip %} Tip: Tool setup
->    > * Select the `IWTomicsData Object with Test Results`, `Test IDs`, and `Feature IDs` created during **Step 2**.
->    > * Select the scale to be used in Interval-Wise Testing results and plot. Select the test identifier `ETn_fixed vs Control`, the feature identifier `Recomb_hot`, and the scale `8` (8-kb scale).
->    > * Select the graphical representation type **Pointwise quantile curves (boxplot)**.
->    {: .tip}
+>    * Select the `IWTomicsData Object with Test Results`, `Test IDs`, and `Feature IDs` created during **Step 2**.
+>    * Select the scale to be used in Interval-Wise Testing results and plot. Select the test identifier `ETn_fixed vs Control`, the feature identifier `Recomb_hot`, and the scale `8` (8-kb scale).
+>    * Select the graphical representation type **Pointwise quantile curves (boxplot)**.
 > 2. Take a look at the output!
 >
 > ![Recombination hotspot IWT results scale 8](../../images/plot_with_threshold_on_test_scale_output.png)
