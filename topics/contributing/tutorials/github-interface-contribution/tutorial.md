@@ -32,7 +32,7 @@ The GitHub repository for the training material is: [{{ site.github_repository }
 >
 >    ![Click on CONTRIBUTOR](../../images/github_contributor.png)
 >
-> 3. Parse the file 
+> 3. View the file 
 > 
 >    You should see something like:
 >
