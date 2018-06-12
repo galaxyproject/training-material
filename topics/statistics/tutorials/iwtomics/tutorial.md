@@ -34,12 +34,25 @@ The data we use in this tutorial is available at [Zenodo](https://doi.org/10.528
 > The first tool (IWTomics Load Smooth and Plot) imports a collection of genomic region datasets, and associates to each region multiple genomic feature measurements. It allows to align the regions in multiple ways (center, left, right or scale alignment), to smooth the feature curves (possibly filling gaps in the measurements) and to create a graphical representation of the feature measurements in each region datasets (aligned curves or pointwise quantile curves).
 
 > ### {% icon hands_on %} Hands-on: Get the data
-> Load the example dataset which will be used for the tutorial.
-> 1. Upload Fixed ETn (`ETn_fixed.bed`) and Control (`Control.bed`) regions, as well as Recombination Hotspot (`Recombination_hotspots.txt`) content.
-> 2. Upload header files for regions (regions_header.tabular) and features (features_header.tabular).
->    > ### {% icon tip %} Tip: Make sure to select the rigth data type
->    > * Select `tabular` type.
->    {: .tip}
+> 1. Create a new history for this tutorial
+> 2. Import datasets:
+>    - Fixed ETn (`ETn_fixed.bed`) regions
+>    - Control (`Control.bed`) regions
+>    - Recombination Hotspot (`Recombination_hotspots.txt`) content
+>     
+>    ```
+>    https://doi.org/10.5281/zenodo.1184682/ETn_fixed.bed
+>    https://doi.org/10.5281/zenodo.1184682/Control.bed
+>    https://doi.org/10.5281/zenodo.1184682/Recombination_hotspots.txt
+>    ```
+> 3. Import header files for regions and features:
+>    - `regions_header.tabular`
+>    - `features_header.tabular`
+>
+>    ```
+>    https://doi.org/10.5281/zenodo.1184682/regions_header.tabular
+>    https://doi.org/10.5281/zenodo.1184682/features_header.tabular
+>    ```
 {: .hands_on}
 
 > ### {% icon hands_on %} Hands-on: Pre-process data and create pointwise boxplot
