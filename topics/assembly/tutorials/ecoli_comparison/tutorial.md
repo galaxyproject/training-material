@@ -90,7 +90,7 @@ The assembly we just uploaded has two issues that need to be addressed before pr
 
  > ### {% icon tip %} Tip: Finding tools mentioned in this tutorial
  >Galaxy instances contain hundreds of tools. As a result, it can be hard to find tools mentioned in tutorials such as this one. To help with this challenge, Galaxy has a search box at the top of the left panel. Use this box to find the tools mentioned here.
- >![](../../images/tool_search.png "Use search box to find tools!")
+ >![Tool search](../../images/tool_search.png "Use search box to find tools!")
  {: .tip}
 
 > ### {% icon hands_on %} Hands-on: Fixing assembly
@@ -145,10 +145,10 @@ The assembly we just uploaded has two issues that need to be addressed before pr
 
 Now everything is loaded and ready to go. We will now align our assembly against each of the *E. coli* genomes we have uploaded into the collection. To do this we will use [LASTZ](https://lastz.github.io/lastz/)&mdash;an aligner designed for long sequences.
 
-> ###   Hands-on: Running LASTZ
+> ### {% icon hands_on %} Hands-on: Running LASTZ
 > 1. {% icon tool %} Open **LASTZ** interface
 > 2. Change **Select TARGET sequence(s) to align against** to `from your history`
-> 3. In **Select a reference dataset** click on the folder icon (![](../../images/folder-o.png)) and the collection containing all *E. coli* genomes we uploaded earlier.
+> 3. In **Select a reference dataset** click on the folder icon (![Folder](../../images/folder-o.png)) and the collection containing all *E. coli* genomes we uploaded earlier.
 > 4. In **Select QUERY sequence(s)** choose our assembly which was prepared in the previous step.
 > 5. Find section of LASTZ interface called **Chaining** and expand it.
 > 6. Set **Perform chaining of HSPs with no penalties** to `Yes`
@@ -205,7 +205,7 @@ Collections are a wonderful way to organize large sets of data and parallelize d
 
 > ### {% icon hands_on %} Hands-on: Combining collection into a single dataset
 > 1. {% icon tool %} Open **Collapse Collection** tool.
-> 2. In **Collection of files to collapse** click on the folder icon (![](../../images/folder-o.png)) and select the output of **LASTZ** produced on [previous step](#hands-on-running-lastz).
+> 2. In **Collection of files to collapse** click on the folder icon (![Folder](../../images/folder-o.png)) and select the output of **LASTZ** produced on [previous step](#hands-on-running-lastz).
 > 3. Leave all other options as they are - no changes needed.
 > 4. Click **Execute**
 {: .hands_on}
@@ -227,12 +227,12 @@ Now we can visualize this dataset to discover generalities:
 
 > ### {% icon hands_on %} Hands-on: Graphing alignment data
 > 1. Expand random subset of alignment data generated on the previous step by clicking on it.
-> 2. You will see "chart" button (![](../../images/bar-chart-o.png)). Click on it.
+> 2. You will see "chart" button (![Chart icon](../../images/bar-chart-o.png)). Click on it.
 > 3. In the center pane you will see a list of visualizations. Select **Scatter plot (NVD3)**
-> 4. Click **Select data** button (![](../../images/disks.png))
+> 4. Click **Select data** button (![Disks](../../images/disks.png))
 > 5. Set **Values for x-axis** to `Column: 3` (alignment identity)
 > 6. Set **Values for y-axis** to `Column: 4` (alignment length)
-> 7. You can also click on configuration button (![](../../images/chart_cog.png)) and specify axis labels etc.
+> 7. You can also click on configuration button (![Cog](../../images/chart_cog.png)) and specify axis labels etc.
 {: .hands_on}
 
 The relationship between the alignment identity and alignment length looks like this (remember that this only a subsample of the data):
@@ -277,13 +277,13 @@ Dataset generated above lists each *E. coli* genome accession only once and will
 
 > ### {% icon hands_on %} Hands-on: Graphing aggregated data
 > 1. Expand the aggregated data generated on the previous step by clicking on it.
-> 2. You will see "chart" button (![](../../images/bar-chart-o.png)). Click on it.
+> 2. You will see "chart" button (![Chart icon](../../images/bar-chart-o.png)). Click on it.
 > 3. In the center pane you will see a list of visualizations. Select **Scatter plot (NVD3)**
-> 4. Click **Select data** button (![](../../images/disks.png))
+> 4. Click **Select data** button (![Disks](../../images/disks.png))
 > 5. Set **Data point labels** to `Column: 1` (Accession number of each *E. coli* genome)
 > 5. Set **Values for x-axis** to `Column: 2` (# of alignment blocks)
 > 6. Set **Values for y-axis** to `Column: 4` (Total alignment length)
-> 7. You can also click on configuration button (![](../../images/chart_cog.png)) and specify axis labels etc.
+> 7. You can also click on configuration button (![Cog](../../images/chart_cog.png)) and specify axis labels etc.
 {: .hands_on}
 
 The relationship between the number of alignment blocks and total alignment length looks like this:
@@ -338,7 +338,7 @@ Now we will perform alignments between our assembly and the three most closely r
 > ### {% icon hands_on %} Hands-on: Aligning again
 > 1. {% icon tool %} Open **LASTZ** interface
 > 2. Change **Select TARGET sequence(s) to align against** to `from your history`
-> 3. In **Select a reference dataset** click on the folder icon (![](../../images/folder-o.png)) and select the collection of the three genomes (in the video above we called it `DNA`).
+> 3. In **Select a reference dataset** click on the folder icon (![Folder](../../images/folder-o.png)) and select the collection of the three genomes (in the video above we called it `DNA`).
 > 4. In **Select QUERY sequence(s)** choose our assembly which was prepared in the beginning (it has a name `Text transformation on data...`).
 > 5. Find section of LASTZ interface called **Chaining** and expand it.
 > 6. Set **Perform chaining of HSPs with no penalties** to `Yes` (for more information about chaining [look here](https://lastz.github.io/lastz/#ex_stages))
@@ -378,7 +378,7 @@ Dot plots we've produced above are great, but they are static. It would be wonde
 > ### {% icon hands_on %} Hands-on: Creating a single FASTA dataset with all genomes
 > First step will be collapsing the collection containing the three genomes into a single file. To do this:
 > 1. {% icon tool %} Open **Collapse Collection** tool.
-> 2. In **Collection of files to collapse** click on the folder icon (![](../../images/folder-o.png)) and select the collection of the three genomes (in the video above we called it `best hits`).
+> 2. In **Collection of files to collapse** click on the folder icon (![Folder](../../images/folder-o.png)) and select the collection of the three genomes (in the video above we called it `best hits`).
 > 3. Leave all other options as they are - no changes needed.
 > 4. Click **Execute**
 {: .hands_on}
@@ -458,7 +458,7 @@ One immediate problem is `%` character in column 12 (alignment identity). We nee
 > ### {% icon hands_on %} Hands-on: Removing `%` character from LASTZ output
 >
 > 1. {% icon tool %} Open **Text transformation with sed** {% icon tool %} tool
-> 2. In **File to process** click on the folder icon (![](../../images/folder-o.png)) and select the output of LASTZ (called `LASTZ on collection ...: mapped reads` ).
+> 2. In **File to process** click on the folder icon (![Folder](../../images/folder-o.png)) and select the output of LASTZ (called `LASTZ on collection ...: mapped reads` ).
 > 3. Inside **SED program** box enter the following expression (so called [Regular Expression](https://en.wikipedia.org/wiki/Regular_expression): `s/\%//`. Here we are matching percent character `%` (it is pre-pended with `\` because it is a special character, but we want `sed` to interpret it literally, as the percentage sign) and substituting this with nothing.
 > 4. Click **Execute**
 {: .hands_on}
@@ -498,7 +498,7 @@ The tool added a new column (Column 14) containing a merge between the target na
 
 > ### {% icon hands_on %} Hands-on: Collapsing all alignment info into a single dataset
 > 1. {% icon tool %} Open **Collapse Collection** tool.
-> 2. In **Collection of files to collapse** click on the folder icon (![](../../images/folder-o.png)) and select the output of the previous step (called `Merge Columns on collection...`)
+> 2. In **Collection of files to collapse** click on the folder icon (![Folder](../../images/folder-o.png)) and select the output of the previous step (called `Merge Columns on collection...`)
 > 3. Leave all other options as they are - no changes needed.
 > 4. Click **Execute**
 {: .hands_on}
@@ -552,7 +552,7 @@ CP020543.1 159368 159512 CP020543.13  82.6 +
 Now let's do a similar operation to create query BED:
 
 > ### {% icon hands_on %} Hands-on: Creating query BED
-> 1. Open **Cut columns from a table** tool. (In fact you can just click the rerun button (![](../../images/refresh.png)) at the previous step and change column names)
+> 1. Open **Cut columns from a table** tool. (In fact you can just click the rerun button (![Rerun](../../images/refresh.png)) at the previous step and change column names)
 > 2. In **Cut columns** box enter `c7,c9,c10,c14,c12,c8` (look at the data shown above and definition of BED to see why we make these choices.)
 > 3. In **From** select the output of *collection collapse* (a step before the last step!) (called `Collapse Collection on data ...`)
 > 4. Click **Execute**
@@ -581,9 +581,9 @@ Now we have a single BED that combines everything. Before displaying it in the b
 
 > ### {% icon hands_on %} Hands-on: Changing dataset type
 >
-> 1. Click the pencil (![](../../images/pencil.png)) icon next to the last dataset in the history.
+> 1. Click the pencil (![Pencil](../../images/pencil.png)) icon next to the last dataset in the history.
 > 2. Once we are at it let's also rename the dataset to `Alignments BED` by changing the content of the **Name** box.
-> 3. Click **Datatypes** (![](../../images/disks.png)) tab
+> 3. Click **Datatypes** (![Disks](../../images/disks.png)) tab
 > 4. In the dropdown **New Type** find `bed`
 > 5. Click **Change datatype** button.
 {: .hands_on}
@@ -683,7 +683,7 @@ Our objective is convert these data into BED. In this analysis we want to initia
 
 > ### {% icon hands_on %} Hands-on: Retain CDS rows in annotation datasets
 > 1. {% icon tool %} Open **Select lines that match an expression** tool
-> 2. In **Select lines from** click on the folder icon (![](../../images/folder-o.png)) and select the collection containing annotations(called `GENES`)
+> 2. In **Select lines from** click on the folder icon (![Folder](../../images/folder-o.png)) and select the collection containing annotations(called `GENES`)
 > 3. In **the pattern** type `^CDS`. This is because we want to retain all lines that begin (`^`) with `CDS`.
 > 4. Click **Execute**
 {: .hands_on}
@@ -704,7 +704,7 @@ This will create a 21st column containing `0` for all rows. Now we can cut neces
 >
 > 1. {% icon tool %} Open **Cut columns from a table** tool.
 > 2. In **Cut columns** type `c8,c9,c14,c19,c10`
-> 3. In **From** click on the folder icon (![](../../images/folder-o.png)) and select the collection produced at the previous step (`Select on collection...`)
+> 3. In **From** click on the folder icon (![Folder](../../images/folder-o.png)) and select the collection produced at the previous step (`Select on collection...`)
 > 4. Click **Execute**
 {: .hands_on}
 
@@ -722,7 +722,7 @@ As we mentioned above this datasets lacks genome IDs such as `CP020543.1`. Howev
 
 > ### {% icon hands_on %} Hands-on: Collapsing annotations into a single BED dataset
 > 1. {% icon tool %} Open **Collapse Collection** tool.
-> 2. In **Collection of files to collapse** click on the folder icon (![](../../images/folder-o.png)) and select the output of the previous step (`Cut on collection...`)
+> 2. In **Collection of files to collapse** click on the folder icon (![Folder](../../images/folder-o.png)) and select the output of the previous step (`Cut on collection...`)
 > 3. Set **Append File name** to `Yes`
 > 4. In **Where to add dataset name** choose "Same line and each line in dataset"
 > 5. Click **Execute**
@@ -904,7 +904,7 @@ LT906474.1 3252785 3288031 LT906474.1 3255430 3255843 entH 0 -  413
 > 6. Remove the first two header rows so that there is only data and nothing else
 > 7. Go to **File** and choose **Download as ... TAB-separated values**
 > 8. Upload this file into Galaxy using its upload tool.
-> 9. Once it uploads click on it and use the pencil (![](../../images/pencil.png)) button to rename it as "Essential list"
+> 9. Once it uploads click on it and use the pencil (![Pencil](../../images/pencil.png)) button to rename it as "Essential list"
 {: .hands_on}
 
 This dataset will look like this:
