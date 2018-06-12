@@ -107,7 +107,7 @@ Some text with a [link](https://example.com/) and an image:
 --
 
 
-Source:
+Just separate every item with two dashes (`--`)
 
 ```markdown
 1. Item
@@ -123,21 +123,29 @@ Source:
 
 ### Formatting: Tables
 
-column1 | column2 | column3
---- | --- | ---
-row1row1row1row1 | r1c2 | r1c3
-row2 | r2c2r2c2r2c2 | r2c3
-row3 | r3c2 | r3c3r3c3r3c3r3c3r3c3r3
+.pull-left[
+Demo:
+
+column1    | column2      | column3
+---        | ---          | ---
+aaaaaaaaaa | bbbb         | cccc
+dddd       | eeeeeeeeeeee | ffff
+gggg       | hhhh         | iiiiiiiiii
+]
+
+.pull-right[
+Source:
 
 ```markdown
 column1 | column2 | column3
 --- | --- | ---
-row1row1row1row1 | r1c2 | r1c3
-row2 | r2c2r2c2r2c2 | r2c3
-row3 | r3c2 | r3c3r3c3r3c3r3c3r3c3r3
+aaaaaaaaaa | bbbb | cccc
+dddd | eeeeeeeeeeee | ffff
+gggg | hhhh | iiiiiiiiii
 ```
+]
 
-All table are centered with text left-aligned
+All table are left-aligned with text left-aligned
 
 ---
 
@@ -145,20 +153,53 @@ All table are centered with text left-aligned
 
 ### Formatting: Tables with Aligned Text
 
-But different alignment for the columns can be chosen
+Different alignments for the individual columns can be controlled with the `:` character
 
-| Tables       |    Are   | Cool          |
-|--------------|:--------:|--------------:|
+.pull-left[
+Demo:
+
+| Tables       | Are      | Cool          |
+|:-------------|:--------:|--------------:|
 | left-aligned | centered | right-aligned |
 | row2         | row2     | row2          |
 
+]
+
+.pull-right[
+Source:
 ```markdown
-| Tables       |    Are   | Cool          |
-|--------------|:--------:|--------------:|
+| Tables       | Are      | Cool          |
+|:-------------|:--------:|--------------:|
 | left-aligned | centered | right-aligned |
 | row2         | row2     | row2          |
 ```
+]
 
+---
+
+
+
+### Formatting: Two Columns
+
+This is achived with the `.pull-left` and `.pull-right` classes.
+
+```
+.pull-left[
+Some text, as many text as we want.....
+
+or even table
+
+column1 | column2 | column3
+--- | --- | ---
+row1 | r1c2 | r1c3
+row2 | r2c2 | r2c3
+row3 | r3c2 | r3c3
+]
+
+.pull-right[ ![](/training-material/assets/images/GTN-60px.png) ]
+```
+
+Will be rendered as:
 ---
 
 
@@ -177,7 +218,9 @@ row2 | r2c2 | r2c3
 row3 | r3c2 | r3c3
 ]
 
-.pull-right[ ![](/training-material/assets/images/GTN-60px.png) ]
+.pull-right[
+![](/training-material/assets/images/GTN-60px.png)
+]
 
 ---
 
