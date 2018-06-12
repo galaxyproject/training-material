@@ -1,0 +1,707 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Galaxy Training!</title>
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <link rel="stylesheet" href="/training-material/assets/css/font-awesome.css">
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+    </head>
+    <body>
+        
+
+
+
+
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/training-material/topics/contributing" title="Go back to list of tutorials">
+                            <i class="fa fa-folder-o" aria-hidden="true"></i> Contributing to the Galaxy Training Material
+                        </a>
+                    </li>
+
+                    
+                        
+                        
+                        
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Introduction slides">
+                                    <i class="fa fa-slideshare" aria-hidden="true"></i> Introduction slides
+                                </a>
+                                <div class="dropdown-menu">
+                                    
+                                        
+                                            
+                                                <a class="dropdown-item" href="/training-material/topics/contributing/slides/introduction.html">
+                                                    Overview of the Galaxy Training Material
+                                                </a>
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                </div>
+                            </li>
+                        
+                    
+
+                    
+
+                    
+
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="" title="Links to data">
+                            <i class="fa fa-files-o" aria-hidden="true"></i> Input Dataset
+                        </a>
+                    </li>
+                    
+
+                    
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="fa fa-life-ring" aria-hidden="true"></i> Help
+    </a>
+    <div class="dropdown-menu">
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Chat on Gitter">
+            Gitter
+        </a>
+        <a class="dropdown-item" href="https://biostar.usegalaxy.org/" title="Ask on Biostars">
+            Biostars
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/galaxyproject/training-material/edit/master/topics/contributing/tutorials/github-command-line-contribution/tutorial.md">
+                            <i class="fa fa-github" aria-hidden="true"></i> Edit
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<div class="container main-content">
+    <section class="tutorial">
+        <h1>Contributing with GitHub via command-line</h1>
+
+        <blockquote class="overview">
+            <h3>Overview</h3>
+
+            <strong><i class="fa fa-question-circle" aria-hidden="true"></i> Questions</strong>
+            <ul>
+            
+            <li>How can I contribute to an open-source project with GitHub?</li>
+            
+            <li>What is the GitHub flow?</li>
+            
+            </ul>
+
+            <strong><i class="fa fa-bullseye" aria-hidden="true"></i> Objectives</strong>
+            <ul>
+            
+            <li>Fork a repository on GitHub</li>
+            
+            <li>Clone a remote repository locally</li>
+            
+            <li>Create a branch</li>
+            
+            <li>Commit changes</li>
+            
+            <li>Push changes to a remote repository</li>
+            
+            <li>Create a pull request</li>
+            
+            <li>Update a pull request</li>
+            
+            </ul>
+
+            
+
+            <p><strong><i class="fa fa-hourglass-end" aria-hidden="true"></i> Time estimation:</strong> 30min</p>
+        </blockquote>
+
+        <h1 class="no_toc" id="introduction">Introduction</h1>
+
+<p>Most of the content is written in <a href="https://guides.github.com/features/mastering-markdown/">GitHub Flavored Markdown</a> with some metadata (or variables) found in <a href="http://yaml.org/">YAML</a> files. Everything is stored on a <a href="https://github.com">GitHub</a> repository: <a href="https://github.com/galaxyproject/training-material">https://github.com/galaxyproject/training-material</a>.</p>
+
+<p>The process of development of new content is open and transparent, using git and following the <a href="https://guides.github.com/introduction/flow/">GitHub flow</a>:</p>
+
+<figure id="figure-1"><img src="../../images/oss_development_process.png" alt="Open source development process" title="Open source development process" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Open source development process</figcaption></figure>
+
+<ol>
+  <li>Create a fork</li>
+  <li>Clone your fork of this repository to create a local copy on your computer</li>
+  <li>Create a new branch in your local copy for each significant change</li>
+  <li>Commit the changes in that branch</li>
+  <li>Push that branch to your fork on GitHub</li>
+  <li>Submit a pull request from that branch to the <a href="https://github.com/galaxyproject/training-material">master repository</a></li>
+  <li>If you receive feedback, make changes in your local clone and push them to your branch on GitHub: the pull request will update automatically</li>
+  <li>Pull requests will be merged by the training team members after at least one other person has reviewed the Pull request and approved it.</li>
+</ol>
+
+<blockquote class="agenda">
+  <h3 id="agenda">Agenda</h3>
+
+  <p>In this tutorial, you will learn how to contribute to the GitHub repository:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#create-a-fork-of-this-repository-on-github" id="markdown-toc-create-a-fork-of-this-repository-on-github">Create a fork of this repository on GitHub</a></li>
+  <li><a href="#clone-the-github-repository-on-your-computer" id="markdown-toc-clone-the-github-repository-on-your-computer">Clone the GitHub repository on your computer</a></li>
+  <li><a href="#create-a-new-branch" id="markdown-toc-create-a-new-branch">Create a new branch</a></li>
+  <li><a href="#make-your-changes-on-this-branch" id="markdown-toc-make-your-changes-on-this-branch">Make your changes on this branch</a></li>
+  <li><a href="#push-your-branch-on-your-github-repository" id="markdown-toc-push-your-branch-on-your-github-repository">Push your branch on your GitHub repository</a></li>
+  <li><a href="#open-a-pull-request" id="markdown-toc-open-a-pull-request">Open a pull request</a></li>
+  <li><a href="#make-the-requested-changes" id="markdown-toc-make-the-requested-changes">Make the requested changes</a></li>
+  <li><a href="#check-the-automatic-tests" id="markdown-toc-check-the-automatic-tests">Check the automatic tests</a></li>
+</ol>
+
+</blockquote>
+
+<h1 id="create-a-fork-of-this-repository-on-github">Create a fork of this repository on GitHub</h1>
+
+<p>A fork is a copy of a repository. <a href="https://help.github.com/articles/fork-a-repo/">Forking</a> a repository allows you to freely experiment with changes without affecting the original project:</p>
+
+<figure id="figure-2" width="900px"><img src="../../images/PR_schema_01.png" alt="Explanation of the forking" title="Creation of a fork" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Creation of a fork</figcaption></figure>
+
+<p>Forking a repository is a simple two-step process:</p>
+
+<blockquote class="hands_on">
+  <h3 id="-hands-on-fork-the-repository"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Fork the repository</h3>
+
+  <ol>
+    <li>Go on the GitHub repository: <a href=""></a></li>
+    <li>
+      <p>Click on <strong>Fork</strong> (top-right corner of the page)</p>
+
+      <p><img src="../../images/PR_fork.jpg" alt="Fork" /></p>
+    </li>
+  </ol>
+
+  <blockquote class="comment">
+    <h3 id="-comment"><i class="fa fa-commenting-o" aria-hidden="true"></i> Comment</h3>
+    <p>When you click the <strong>Fork</strong> button GitHub will show you a list with your user and any groups where you can create a fork of this repository. If you do not see yourself, it means you already have a fork.</p>
+  </blockquote>
+
+</blockquote>
+
+<h1 id="clone-the-github-repository-on-your-computer">Clone the GitHub repository on your computer</h1>
+
+<p>To modify the content of the repository, you need a copy of it on your computer. This step of importing a git repository is called “cloning”:</p>
+
+<figure id="figure-3" width="900px"><img src="../../images/PR_schema_02.png" alt="Explanation of the cloning" title="Cloning a repository" /><figcaption><span class="figcaption-prefix">Figure 3:</span> Cloning a repository</figcaption></figure>
+
+<blockquote class="hands_on">
+  <h3 id="-hands-on-clone-the-github-repository"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Clone the GitHub repository</h3>
+
+  <ol>
+    <li>Get the URL of your fork. You can find this on the main page of your fork under the green button:
+      <ol>
+        <li>
+          <p>Click on <strong>Clone or download</strong> (right)</p>
+
+          <p><img src="../../images/PR_github_url.png" alt="Get fork URL" /></p>
+        </li>
+        <li>
+          <p>Copy the URL</p>
+
+          <p>It should be something like <code class="highlighter-rouge">https://github.com/&lt; Your GitHub Username &gt;/training-material.git</code></p>
+        </li>
+      </ol>
+    </li>
+    <li>Open a terminal</li>
+    <li>Navigate with <code class="highlighter-rouge">cd</code> to the folder in which you will clone the repository</li>
+    <li>
+      <p>Clone the repository with the command:</p>
+
+      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ git clone https://github.com/&lt; Your GitHub Username &gt;/training-material.git
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p>Navigate to the repository</p>
+
+      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cd training-material
+</code></pre></div>      </div>
+    </li>
+  </ol>
+</blockquote>
+
+<h1 id="create-a-new-branch">Create a new branch</h1>
+
+<p>You have now your repository locally and you want to modify it. For this example tutorial, you will add yourself as contributor of the project to appear on the <a href="/training-material/hall-of-fame">Hall of Fame</a>.</p>
+
+<p>In GitHub flow, there is a concept: one new feature or change = one branch.</p>
+
+<p>When you’re working on a project, you’re going to have a bunch of different features or ideas in progress at any given time – some of which are ready to go, and others which are not. Branching exists to help you manage this workflow. You should develop different features on different branches to help keep the changes you make simple and easy to review.</p>
+
+<figure id="figure-4"><img src="../../images/PR_branches_01.png" alt="Divergence of a branch compared to master" title="When you create a branch in your project, you're creating an environment where you can try out new ideas. Changes you make on a branch don't affect the master branch" /><figcaption><span class="figcaption-prefix">Figure 4:</span> When you create a branch in your project, you're creating an environment where you can try out new ideas. Changes you make on a branch don't affect the master branch</figcaption></figure>
+
+<p>Here for this tutorial, you will create a branch called “my_new_branch” in which you will modify the <code class="highlighter-rouge">CONTRIBUTORS.yaml</code> file, the file used to generate the <a href="/training-material/hall-of-fame">Hall of Fame</a>.</p>
+
+<blockquote class="hands_on">
+  <h3 id="-hands-on-create-a-branch"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Create a branch</h3>
+
+  <ol>
+    <li>
+      <p>List the existing branch</p>
+
+      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ git branch 
+  * master
+</code></pre></div>      </div>
+
+      <p>The branch on which you are is shown with the <code class="highlighter-rouge">*</code></p>
+    </li>
+    <li>
+      <p>Create a new branch</p>
+
+      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ git checkout -b my_new_branch
+Switched to a new branch 'my_new_branch'
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p>List the existing branch to check that the branch has been created and you are now on it</p>
+    </li>
+  </ol>
+</blockquote>
+
+<p>This branch is added to your local copy:</p>
+
+<figure id="figure-5"><img src="../../images/PR_schema_03.png" alt="Creation of a branch on the local copy of the repository" title="Creation of a branch on the local copy of the repository" /><figcaption><span class="figcaption-prefix">Figure 5:</span> Creation of a branch on the local copy of the repository</figcaption></figure>
+
+<h1 id="make-your-changes-on-this-branch">Make your changes on this branch</h1>
+
+<p>You have created your first branch! Now you want to make the change in the <code class="highlighter-rouge">CONTRIBUTING.yaml</code> file. By changing a file in this branch, it will diverge from the <code class="highlighter-rouge">master</code> branch. It will contain data that is only on this new branch:</p>
+
+<figure id="figure-6"><img src="../../images/PR_branches_02.png" alt="Divergence of the branch compared to master" title="The changes on your branch will not be on the master branch" /><figcaption><span class="figcaption-prefix">Figure 6:</span> The changes on your branch will not be on the master branch</figcaption></figure>
+
+<blockquote class="hands_on">
+  <h3 id="-hands-on-make-changes-in-a-branch"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Make changes in a branch</h3>
+
+  <ol>
+    <li>
+      <p>Modify the <code class="highlighter-rouge">CONTRIBUTORS.yaml</code> to add yourself</p>
+
+      <p>You should use your GitHub username and add it followed by <code class="highlighter-rouge">:</code> at the correct position given the alphabetical order</p>
+    </li>
+    <li>Save the file</li>
+    <li>
+      <p>Check the changes you made</p>
+
+      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ git status
+On branch my_new_branch
+Changes not staged for commit:
+  (use "git add/rm &lt;file&gt;..." to update what will be committed)
+  (use "git checkout -- &lt;file&gt;..." to discard changes in working directory)
+   
+    modified:   CONTRIBUTORS.yaml
+   
+no changes added to commit (use "git add" and/or "git commit -a")
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p>Add the file and commit the changes</p>
+
+      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ git add CONTRIBUTORS.yaml
+$ git commit -m "Add ..."
+</code></pre></div>      </div>
+    </li>
+    <li>Check that there are no more changes to commit with <code class="highlighter-rouge">git status</code></li>
+  </ol>
+
+</blockquote>
+
+<h1 id="push-your-branch-on-your-github-repository">Push your branch on your GitHub repository</h1>
+
+<p>The changes you made on your branch are only on the local copy of the repository. To propagate them online, you need to push them on your fork on GitHub:</p>
+
+<blockquote class="hands_on">
+  <h3 id="-hands-on-push-the-changes"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Push the changes</h3>
+
+  <ol>
+    <li>
+      <p>Push the changes to the GitHub repository</p>
+
+      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ git push origin my_new_branch
+</code></pre></div>      </div>
+
+      <blockquote class="details">
+        <h3 id="-push-origin"><i class="fa fa-info-circle" aria-hidden="true"></i> “push origin”</h3>
+        <p>When you <code class="highlighter-rouge">git push</code>ed, you specified <code class="highlighter-rouge">origin</code>. Git repositories can know that forks exist in multiple places. When you clone one, it creates a “remote” (a remote repository) which it names <code class="highlighter-rouge">origin</code>, set to the URL that you used when you cloned. By having multiple remotes, you can manage more complex workflows.</p>
+      </blockquote>
+    </li>
+    <li>Go to your GitHub repository</li>
+    <li>Change to the “my_new_branch” branch:
+      <ol>
+        <li>
+          <p>Click on <strong>Branch: master</strong> (left)</p>
+
+          <p><img src="../../images/PR_branch_github.png" alt="Selecting branch on GitHub" /></p>
+        </li>
+        <li>
+          <p>Select the branch “my_new_branch”</p>
+        </li>
+      </ol>
+    </li>
+    <li>Check that your name is in the <code class="highlighter-rouge">CONTRIBUTORS.yaml</code> file</li>
+  </ol>
+
+</blockquote>
+
+<figure id="figure-7"><img src="../../images/PR_schema_04.png" alt="Pushing changes to the fork from the local copy" title="Pushing changes from the local copy to the fork on GitHub" /><figcaption><span class="figcaption-prefix">Figure 7:</span> Pushing changes from the local copy to the fork on GitHub</figcaption></figure>
+
+<h1 id="open-a-pull-request">Open a pull request</h1>
+
+<p>You pushed your changes to GitHub, but currently they are only on your fork. You want to have these changes in the main GitHub repository in order to appear on our <a href="/training-material/hall-of-fame">Hall of Fame</a> online. You can’t add or push directly the main GitHub repository, so you need to create what we call a pull request:</p>
+
+<figure id="figure-8"><img src="../../images/PR_schema_05.png" alt="Pull request" title="Pull Requests provide a way to notify project maintainers about the changes you'd like them to consider" /><figcaption><span class="figcaption-prefix">Figure 8:</span> Pull Requests provide a way to notify project maintainers about the changes you'd like them to consider</figcaption></figure>
+
+<blockquote class="hands_on">
+  <h3 id="-hands-on-create-a-pull-request"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Create a pull request</h3>
+
+  <ol>
+    <li>Go to your GitHub repository</li>
+    <li>
+      <p>Click on <strong>Compare &amp; pull request</strong></p>
+
+      <p><img src="../../images/PR_button.png" alt="&quot;Opening a pull request&quot;" /></p>
+    </li>
+    <li>
+      <p>Check that the selected branch are correct: <strong>master</strong> on the left and your branch name on the right</p>
+
+      <p><img src="../../images/PR_branch_check.png" alt="Branches in PR" /></p>
+    </li>
+    <li>
+      <p>Fill in the pull request description</p>
+
+      <p><img src="../../images/PR_description.png" alt="PR description" /></p>
+
+      <ol>
+        <li>Add a title for the Pull Request</li>
+        <li>Add a message explaining the changes you made (Be kind <i class="fa fa-smile-o" aria-hidden="true"></i>)</li>
+        <li>Click on <strong>Create pull request</strong></li>
+      </ol>
+    </li>
+    <li>Go to <strong>Pull requests</strong> to check if it is there</li>
+  </ol>
+</blockquote>
+
+<p>Once the pull is open, it will be reviewed. There are two possible outcomes:</p>
+
+<ol>
+  <li>Your pull request is accepted. Congratulations! Your changes will be merged into the master branch of the original repository. The website will be re-built and you will be in the <a href="/training-material/hall-of-fame">Hall of Fame</a></li>
+  <li>Your pull request needs modifications: the reviewers will ask for some changes, possibly because the automatic tests are failing.</li>
+</ol>
+
+<h1 id="make-the-requested-changes">Make the requested changes</h1>
+
+<p>One of the reviewers of your pull request asked you to add your name after your GitHub username in the <code class="highlighter-rouge">CONTRIBUTORS.yaml</code> file</p>
+
+<blockquote class="hands_on">
+  <h3 id="-hands-on-make-further-changes"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Make further changes</h3>
+
+  <ol>
+    <li>
+      <p>Make the requested changes in the <code class="highlighter-rouge">CONTRIBUTORS.yaml</code> file</p>
+
+      <p>It should look like</p>
+
+      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bebatut:
+     name: Bérénice Batut
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p>Check the changes that you made</p>
+
+      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ git status
+On branch my_new_branch
+Changes not staged for commit:
+  (use "git add/rm &lt;file&gt;..." to update what will be committed)
+  (use "git checkout -- &lt;file&gt;..." to discard changes in working directory)
+   
+    modified:   CONTRIBUTORS.yaml
+   
+no changes added to commit (use "git add" and/or "git commit -a")
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p>Add the file and commit the changes</p>
+
+      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ git add CONTRIBUTORS.yaml
+$ git commit -m "Add ..."
+</code></pre></div>      </div>
+    </li>
+    <li>Check that there are no more changes to commit with <code class="highlighter-rouge">git status</code></li>
+    <li>
+      <p>Push the new changes to GitHub</p>
+
+      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ git push origin my_new_branch
+</code></pre></div>      </div>
+
+      <p>The pull request should be automatically updated</p>
+    </li>
+    <li>Check that the new changes are added to the pull request on GitHub</li>
+  </ol>
+
+</blockquote>
+
+<h1 id="check-the-automatic-tests">Check the automatic tests</h1>
+
+<p>When a pull request is opened, some automated tests are automatically launched on <a href="http://travis-ci.org/">Travis</a> to be sure that the changes do not break the website, the URL are valid, etc.</p>
+
+<p>On the bottom of your pull request, you can see the status of the tests:</p>
+
+<ul>
+  <li>
+    <p>Yellow (with circle)</p>
+
+    <p><img src="../../images/PR_test_yellow.png" alt="Running" /></p>
+
+    <p>The tests are still running</p>
+  </li>
+  <li>
+    <p>Red (with cross)</p>
+
+    <p><img src="../../images/PR_test_red.png" alt="Failed tests" /></p>
+
+    <p>When it is red, you can investigate why by clicking on <strong>Details</strong>. You will be redirected on <a href="http://travis-ci.org/">Travis</a> where you can see the logs of the tests. Get in touch with us on <a href="https://gitter.im/Galaxy-Training-Network/Lobby">Gitter</a> if you need help to understand the issue.</p>
+  </li>
+  <li>
+    <p>Green (with tick)</p>
+
+    <p><img src="../../images/PR_test_green.png" alt="Passed tests" /></p>
+
+    <p>The tests passed. Good job!</p>
+
+    <p>Even it is green, we recommend to check the result of the tests, as some of tests are allowed to fail (to avoid too much noise).</p>
+  </li>
+</ul>
+
+<h1 class="no_toc" id="conclusion">Conclusion</h1>
+
+<p>With this tutorial, you have learned the basics of contributing using GitHub:</p>
+
+<figure id="figure-9"><img src="../../images/PR_global_schema.png" alt="Summary of the links between GitHub, fork and local repository" title="Summary of the links between GitHub, fork and local repository" /><figcaption><span class="figcaption-prefix">Figure 9:</span> Summary of the links between GitHub, fork and local repository</figcaption></figure>
+
+<p>You can now contribute and help us to improve our tutorials.</p>
+
+<blockquote class="tip">
+  <h3 id="-git-in-depth"><i class="fa fa-lightbulb-o" aria-hidden="true"></i> Git in Depth</h3>
+  <p>This tutorial was a quick introduction to explain the basics of contributing to the training material. We recommend that everyone follow a more detailed git tutorials:</p>
+  <ul>
+    <li><a href="http://swcarpentry.github.io/git-novice/">Software Carpentry tutorial</a> which explains a bit more in detail some git commands and the concept of remote, local and stagging</li>
+    <li><a href="https://learngitbranching.js.org/">Learn Git Branching</a> by GitHub to test the different git commands</li>
+  </ul>
+
+  <p>You should also download, print and keep always with you the <a href="https://services.github.com/on-demand/downloads/github-git-cheat-sheet.pdf">Git Cheat Sheet</a></p>
+</blockquote>
+
+
+        
+        <blockquote class="key_points">
+            <h3><i class="fa fa-key" aria-hidden="true"></i> Key points</h3>
+
+            <ul>
+                
+                <li>Work on your fork</li>
+                
+                <li>1 branch = 1 feature</li>
+                
+                <li>1 pull request = 1 branch</li>
+                
+                <li>Be careful of the branch you're working on</li>
+                
+                <li>Check the automated tests</li>
+                
+            </ul>
+        </blockquote>
+        
+
+        
+
+        
+        <blockquote class="agenda">
+            <h3>Developing GTN training material</h3>
+            This tutorial is part of a series to develop GTN training material, feel free to also look at:
+            
+            <ol>
+            
+             
+              
+            <li><a href="/training-material/topics/contributing/slides/introduction.html">Overview of the Galaxy Training Material</a></li>
+             
+             
+            
+             
+            
+             
+              
+              
+            <li><a href="/training-material/topics/contributing/tutorials/create-new-tutorial-content/tutorial.html">Creating a new tutorial - Writing content in Markdown</a></li>
+              
+              
+             
+            
+             
+              
+              
+            <li><a href="/training-material/topics/contributing/tutorials/create-new-tutorial-metadata/tutorial.html">Creating a new tutorial - Defining metadata</a></li>
+              
+              
+             
+            
+             
+              
+              
+            <li><a href="/training-material/topics/contributing/tutorials/create-new-tutorial-tours/tutorial.html">Creating a new tutorial - Creating Interactive Galaxy Tours</a></li>
+              
+              
+             
+            
+             
+              
+              
+            <li><a href="/training-material/topics/contributing/tutorials/create-new-tutorial-technical/tutorial.html">Creating a new tutorial - Defining the technical infrastructure</a></li>
+              
+              
+             
+            
+             
+              
+              
+            <li><a href="/training-material/topics/contributing/tutorials/create-new-topic/tutorial.html">Including a new topic</a></li>
+              
+              
+             
+            
+             
+              
+              
+            <li><a href="/training-material/topics/contributing/tutorials/running-jekyll/tutorial.html">Running the Galaxy Training material website locally</a></li>
+              
+              
+             
+            
+             
+              
+              
+            <li><a href="/training-material/topics/contributing/tutorials/generating-pdf/tutorial.html">Generating PDF artefacts of the website</a></li>
+              
+              
+             
+            
+             
+              
+              
+            <li><a href="/training-material/topics/contributing/tutorials/good-practices/slides.html">Good practices to run a workshop</a></li>
+               
+              
+             
+            
+             
+              
+              
+            <li><a href="/training-material/topics/contributing/tutorials/setup-galaxy-for-training/tutorial.html">Set up a Galaxy for Training</a></li>
+              
+              
+             
+            
+             </ol>
+        </blockquote>
+        
+
+        <h3><i class="fa fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!</h3>
+
+        <hr>
+
+        <blockquote class="overview">
+            <h3><i class="fa fa-comments-o" aria-hidden="true"></i> Help us improve this content!</h3>
+            Please take a moment to fill in the Galaxy Training Network
+            <a href="https://tinyurl.com/GTNfeedback">Feedback Form</a>.
+            Your feedback helps us improve this tutorial and will be considered
+            in future revisions.
+        </blockquote>
+    </section>
+</div>
+
+
+<footer>
+    <div class="container">
+        <p>
+            This material is the result of a collaborative work. Thanks to the
+            <a href="https://wiki.galaxyproject.org/Teach/GTN">Galaxy Training Network</a>
+            and all the <a href="/training-material/hall-of-fame">contributors</a> (Cyril Monjeaud, Bérénice Batut)!
+        </p>
+        <p>
+            Found a typo? Something is wrong in this tutorial? Edit it on
+            <a href="https://github.com/galaxyproject/training-material/tree/master/topics/contributing/tutorials/github-command-line-contribution/tutorial.md">GitHub</a>.
+        </p>
+    </div>
+</footer>
+
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+</html>
