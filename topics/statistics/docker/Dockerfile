@@ -10,10 +10,10 @@ FROM bgruening/galaxy-stable
 
 MAINTAINER Galaxy Training Material
 
-ENV GALAXY_CONFIG_BRAND "GTN: <your_topic>"
+ENV GALAXY_CONFIG_BRAND "GTN: Statistics"
 
 # copy the tutorials directory for your topic
-ADD topics/<your_topic>/tutorials/ /tutorials/
+ADD topics/statistics/tutorials/ /tutorials/
 
 # install everything for tutorials
 ADD bin/docker-install-tutorials.sh /setup-tutorials.sh
