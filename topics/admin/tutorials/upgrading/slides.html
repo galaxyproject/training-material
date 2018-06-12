@@ -1,0 +1,184 @@
+---
+layout: tutorial_slides
+topic_name: admin
+tutorial_name: upgrading
+logo: "GTN"
+---
+
+# Release Cycle
+
+* Galaxy aims to release every 4 months
+* Releases are named after the **year** and **month** when the release was branched, for example 18.01, 18.05
+* Per the [security policy](https://github.com/galaxyproject/galaxy/blob/dev/SECURITY_POLICY.md), releases within the past 12 months are supported
+
+---
+# Releases
+
+* Every release has [release notes](https://docs.galaxyproject.org/en/master/releases)
+  * We put substantial effort in making them as useful as we can
+  * Highlights, security announcements, deprecation notices, enhancements grouped by impact, etc...
+* Every release has its own branch in the `galaxy` GitHub repository
+  * Named as `release_YY.MM`
+  * Kept up to date (especially for recent releases)
+
+---
+class: left
+# Deal with local Galaxy modifications
+
+Two scenarios:
+1. Uncommitted changes
+2. Changes committed to a local branch (or to a fork)
+
+The latter is probably better in case of large changes.
+
+---
+class: left
+# Keeping a release up to date (1)
+
+If there are *no local commits*, you can update a `release_YY.MM` branch by running:
+
+```console
+$ git stash  # optional, in case of uncommitted modifications
+$ git pull --ff-only
+$ git stash pop  # optional, as above
+```
+
+and restarting Galaxy.
+
+---
+class: left
+# Keeping a release up to date (2)
+
+In case of changes committed to a local branch:
+
+```console
+$ git pull [--rebase] origin release_YY.MM
+```
+
+and restart Galaxy.
+
+---
+class: left
+# Major release upgrade
+
+When you upgrade to a new release:
+* Plan a service downtime for the upgrade and inform your users
+* Configure your reverse proxy to serve a custom error page, e.g. for nginx inside the `server` section add:
+  ```ini
+  error_page 502 /static/custom_502.html;
+  ```
+* When it's time, stop the Galaxy server processes (not the database server!)
+
+---
+class: left
+# Housekeeping
+
+Not usually necessary, but might help:
+
+```console
+$ find . -name '*.pyc' -delete
+$ rm -rf database/compiled_templates/*
+```
+
+---
+# Upgrading the galaxy repo
+
+```console
+$ git fetch
+$ git stash  # optional
+$ git checkout release_YY.MM
+$ git pull --ff-only
+$ git stash pop  # optional
+```
+
+---
+# Diff samples
+
+```console
+$ git diff release_18.01..release_18.05 -- config/*.sample
+```
+
+Merge changes as desired/necessary.
+
+---
+# Upgrade virtualenv
+
+```console
+$ export GALAXY_CONFIG_FILE=/srv/galaxy/config/galaxy.yml
+$ export GALAXY_VIRTUAL_ENV=/srv/galaxy/venv
+$ . $GALAXY_VIRTUAL_ENV/bin/activate
+$ pip install --upgrade pip setuptools
+$ ./scripts/common_startup.sh
+$ deactivate
+```
+
+---
+class: left
+# make client on `dev`
+
+Since January 2018, the `dev` and pre-release (frozen) Galaxy branches do not
+contain client build artifacts (e.g. JavaScript bundles in `static/`).  For
+`dev`, Galaxy will automatically build the client locally, as needed, though if
+you need to do so manually (e.g. to include local changes), the following steps
+should do it:
+
+1. install `yarn`
+2. run `make client-production`
+
+[Documentation](https://github.com/galaxyproject/galaxy/blob/dev/client/README.md)
+---
+class: left
+# Tool migrations?
+
+Galaxy source tools -> Tool Shed
+
+We haven't done any in a long time, but may do more.
+
+Galaxy will notify you on the first startup it the upgrade includes migrations.
+
+---
+# Database migrations
+
+1. **Backup** your database
+   - [PostgreSQL backup docs](https://www.postgresql.org/docs/current/static/backup.html)
+2. Run
+   ```console
+   $ sh manage_db.sh upgrade -c $GALAXY_CONFIG_FILE
+   ```
+
+---
+# Start Galaxy
+
+* Monitor the log files
+* Check `/api/version`
+* Check that everything still works
+
+---
+# Distribute Galaxy
+
+If you're using a compute cluster and not running from shared file system
+
+---
+class: left
+# Downgrading
+
+If for some reason you need to move back to an older release, the process is
+similar, but the order is a bit different because the database downgrade needs
+to be done while being on the newer branch:
+
+```console
+$ export GALAXY_CONFIG_FILE=/srv/galaxy/config/galaxy.yml
+$ export GALAXY_VIRTUAL_ENV=/srv/galaxy/venv
+$ sh manage_db.sh -c /srv/galaxy/config/galaxy.yml downgrade 140
+$ find . -name '*.pyc' -delete
+$ git fetch
+$ git stash  # optional
+$ git checkout release_18.01
+$ git pull --ff-only
+$ git stash pop  # optional
+$ ./scripts/common_startup.sh
+```
+
+The database version of the release you want to downgrade to (version 135 for
+the 18.01 release in the example above) can be found by looking at the last file in:
+https://github.com/galaxyproject/galaxy/tree/release_18.01/lib/galaxy/model/migrate/versions/

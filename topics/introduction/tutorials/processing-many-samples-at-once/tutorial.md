@@ -39,7 +39,7 @@ Here we will show Galaxy features designed to help with the analysis of large nu
 
 These datasets represent genomic DNA (enriched for mitochondria via a long range PCR) isolated from blood and cheek (buccal swab) of mother (`M117`) and her child (`M117C1`) that was sequenced on an Illumina miSeq machine as paired-read library (250-bp reads; see our [2014](http://www.pnas.org/content/111/43/15474.abstract) manuscript for **Methods**).
 
-## 1. Creating a paired dataset collection
+## 1. Creating a list of paired datasets
 
 If you imported [history]( https://test.galaxyproject.org/u/anton/h/collections-1) as described [above](https://github.com/nekrut/galaxy/wiki/Processing-many-samples-at-once#0-getting-data), your screen will look something like this:
 
