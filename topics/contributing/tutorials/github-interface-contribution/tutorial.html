@@ -1,0 +1,568 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Galaxy Training!</title>
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <link rel="stylesheet" href="/training-material/assets/css/font-awesome.css">
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+    </head>
+    <body>
+        
+
+
+
+
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/training-material/topics/contributing" title="Go back to list of tutorials">
+                            <i class="fa fa-folder-o" aria-hidden="true"></i> Contributing to the Galaxy Training Material
+                        </a>
+                    </li>
+
+                    
+                        
+                        
+                        
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Introduction slides">
+                                    <i class="fa fa-slideshare" aria-hidden="true"></i> Introduction slides
+                                </a>
+                                <div class="dropdown-menu">
+                                    
+                                        
+                                            
+                                                <a class="dropdown-item" href="/training-material/topics/contributing/slides/introduction.html">
+                                                    Overview of the Galaxy Training Material
+                                                </a>
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                        
+                                            
+                                        
+                                    
+                                </div>
+                            </li>
+                        
+                    
+
+                    
+
+                    
+
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="" title="Links to data">
+                            <i class="fa fa-files-o" aria-hidden="true"></i> Input Dataset
+                        </a>
+                    </li>
+                    
+
+                    
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="fa fa-life-ring" aria-hidden="true"></i> Help
+    </a>
+    <div class="dropdown-menu">
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Chat on Gitter">
+            Gitter
+        </a>
+        <a class="dropdown-item" href="https://biostar.usegalaxy.org/" title="Ask on Biostars">
+            Biostars
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/galaxyproject/training-material/edit/master/topics/contributing/tutorials/github-interface-contribution/tutorial.md">
+                            <i class="fa fa-github" aria-hidden="true"></i> Edit
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<div class="container main-content">
+    <section class="tutorial">
+        <h1>Contributing with GitHub via its interface</h1>
+
+        <blockquote class="overview">
+            <h3>Overview</h3>
+
+            <strong><i class="fa fa-question-circle" aria-hidden="true"></i> Questions</strong>
+            <ul>
+            
+            <li>How can I contribute to an open-source project with GitHub and its interface</li>
+            
+            </ul>
+
+            <strong><i class="fa fa-bullseye" aria-hidden="true"></i> Objectives</strong>
+            <ul>
+            
+            <li>Edit a file via GitHub interface</li>
+            
+            <li>Create a pull request</li>
+            
+            <li>Update a pull request</li>
+            
+            </ul>
+
+            
+
+            <p><strong><i class="fa fa-hourglass-end" aria-hidden="true"></i> Time estimation:</strong> 20min</p>
+        </blockquote>
+
+        <h1 class="no_toc" id="introduction">Introduction</h1>
+
+<p>All the training material which you find on <a href="https://galaxyproject.github.io//training-material">https://galaxyproject.github.io//training-material</a> is stored on a <a href="https://github.com">GitHub</a> repository (<a href="https://github.com/galaxyproject/training-material">https://github.com/galaxyproject/training-material</a>), a code hosting platform for version control and collaboration. GitHub interface is quite intuitive and simplifies the contributions from anyone.</p>
+
+<blockquote class="agenda">
+  <h3 id="agenda">Agenda</h3>
+
+  <p>In this tutorial, you will learn how to use GitHub interface to contribute to the training material:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#github" id="markdown-toc-github">GitHub</a></li>
+  <li><a href="#edit-a-file" id="markdown-toc-edit-a-file">Edit a file</a></li>
+  <li><a href="#open-a-pull-request" id="markdown-toc-open-a-pull-request">Open a Pull Request</a></li>
+  <li><a href="#update-a-pull-request" id="markdown-toc-update-a-pull-request">Update a Pull Request</a></li>
+</ol>
+
+</blockquote>
+
+<h1 id="github">GitHub</h1>
+
+<p>The GitHub repository for the training material is: <a href="https://github.com/galaxyproject/training-material">https://github.com/galaxyproject/training-material</a>.</p>
+
+<blockquote class="hands_on">
+  <h3 id="-hands-on-familiarization-with-github"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Familiarization with GitHub</h3>
+
+  <ol>
+    <li>
+      <p>Go on the GitHub repository: <a href="https://github.com/galaxyproject/training-material">https://github.com/galaxyproject/training-material</a></p>
+
+      <figure id="figure-1"><img src="../../images/github_interface.png" alt="GitHub interface" title="Interface of the GitHub repository of the training material" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Interface of the GitHub repository of the training material</figcaption></figure>
+    </li>
+    <li>
+      <p>Click on <code class="highlighter-rouge">CONTRIBUTORS.yaml</code> file</p>
+
+      <p><img src="../../images/github_contributor.png" alt="Click on CONTRIBUTOR" /></p>
+    </li>
+    <li>
+      <p>View the file</p>
+
+      <p>You should see something like:</p>
+
+      <figure id="figure-2"><img src="../../images/github_contributor_interface.png" alt="Click on CONTRIBUTOR" title="CONTRIBUTOR file" /><figcaption><span class="figcaption-prefix">Figure 2:</span> CONTRIBUTOR file</figcaption></figure>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>This <code class="highlighter-rouge">CONTRIBUTORS.yaml</code> file is where we collect the information (name, email, etc) about the different contributors to display them on our <a href="/training-material/hall-of-fame">Hall of Fame</a>. You will add your information there. But first you need to sign in to GitHub to be able to change this file.</p>
+
+<blockquote class="hands_on">
+  <h3 id="-hands-on-sign-in-to-github"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Sign in to GitHub</h3>
+
+  <ol>
+    <li>
+      <p>Create a GitHub account (if you do not have one already)</p>
+
+      <p><img src="../../images/github_sign_up.png" alt="GitHub signup" /></p>
+    </li>
+    <li>
+      <p>Sign in (if you have already a GitHub account)</p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h1 id="edit-a-file">Edit a file</h1>
+
+<p>You can now modify the <code class="highlighter-rouge">CONTRIBUTORS.yaml</code> file to add your information there</p>
+
+<blockquote class="hands_on">
+  <h3 id="-hands-on-edit-a-file"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Edit a file</h3>
+
+  <ol>
+    <li>Open the <code class="highlighter-rouge">CONTRIBUTORS.yaml</code> file on GitHub</li>
+    <li>
+      <p>Click on <i class="fa fa-pencil" aria-hidden="true"></i> icon (top right of the file)</p>
+
+      <p><img src="../../images/github_edit.png" alt="GitHub edit" /></p>
+
+      <p>A new page will open:</p>
+
+      <figure id="figure-3"><img src="../../images/github_contributor_edit.png" alt="GitHub contributor edit page" title="CONTRIBUTOR file in edit mode" /><figcaption><span class="figcaption-prefix">Figure 3:</span> CONTRIBUTOR file in edit mode</figcaption></figure>
+    </li>
+    <li>
+      <p>Modify the <code class="highlighter-rouge">CONTRIBUTORS.yaml</code> by adding yourself</p>
+
+      <p>You should use your GitHub username and add it followed by <code class="highlighter-rouge">:</code> (the <code class="highlighter-rouge">:</code> is important) at the correct position given the alphabetical order.</p>
+    </li>
+    <li>Go the bottom of the file</li>
+    <li>
+      <p>Fill the <strong>Propose file change</strong> form</p>
+
+      <ol>
+        <li>
+          <p>Fill the box “Update CONTRIBUTORS.yaml” with “Add &lt; GitHub username &gt; as contributor” (replace &lt; GitHub username &gt; by your GitHub username)</p>
+
+          <blockquote class="comment">
+            <h3 id="-commit-messages"><i class="fa fa-commenting-o" aria-hidden="true"></i> Commit messages</h3>
+            <p>This a commit message: a description explaining why a particular change was made. Theses messages capture the history of the changes, so other contributors can understand what have been done and why</p>
+          </blockquote>
+        </li>
+        <li>
+          <p>Leave “Add an optional extended description…” empty</p>
+        </li>
+      </ol>
+
+      <p><img src="../../images/github_propose_change_form.png" alt="Propose file change form" /></p>
+    </li>
+    <li>
+      <p>Click on <strong>Propose file change</strong></p>
+
+      <p><img src="../../images/github_propose_change_form_submit.png" alt="Submit propose file change form" /></p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>Without realizing it, GitHub let you create your first branch (named here <code class="highlighter-rouge">patch-1</code>) and add a changement on this branch.</p>
+
+<blockquote class="comment">
+  <h3 id="-branching"><i class="fa fa-commenting-o" aria-hidden="true"></i> Branching</h3>
+  <p>Branching is the way to work on different versions of a repository at one time. By default your repository has one branch named <code class="highlighter-rouge">master</code> which is considered to be the definitive branch. When you create a branch off the master branch, you’re making a copy, or snapshot, of <code class="highlighter-rouge">master</code> as it was at that point in time.</p>
+
+  <p>By changing a file in this branch, it will diverge from the <code class="highlighter-rouge">master</code> branch. It will contain data that is only on this new branch.</p>
+</blockquote>
+
+<h1 id="open-a-pull-request">Open a Pull Request</h1>
+
+<p>Then the addition of your information in the <code class="highlighter-rouge">CONTRIBUTORS.yaml</code> file is currently only on your branch <code class="highlighter-rouge">patch-1</code>. Not on the <code class="highlighter-rouge">master</code> branch and so not only on the <a href="/training-material/hall-of-fame">Hall of Fame</a>. You can’t add or push directly to the <code class="highlighter-rouge">master</code> branch, so you need to create what we call a pull request.</p>
+
+<p>The GitHub interface guides you through this process: after clicking on <strong>Propose file change</strong>, a new page opens:</p>
+
+<figure id="figure-4"><img src="../../images/github_pr_interface.png" alt="Pull request form" title="Pull request form" /><figcaption><span class="figcaption-prefix">Figure 4:</span> Pull request form</figcaption></figure>
+
+<blockquote class="hands_on">
+  <h3 id="-hands-on-edit-a-file-1"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Edit a file</h3>
+
+  <ol>
+    <li>Open and read the <a href="https://github.com/galaxyproject/training-material/blob/master/CONTRIBUTING.md">CONTRIBUTING.md</a> file</li>
+    <li>Come pack to the pull request</li>
+    <li>
+      <p>Fill in the pull request description</p>
+
+      <p><img src="../../images/github_pr_form.png" alt="Pull request description" /></p>
+
+      <ol>
+        <li>Add a title for the Pull Request</li>
+        <li>
+          <p>Add a message explaining the changes you made</p>
+
+          <p>This message is a good way to introduce yourself and to explain the message you made. Be kind and descriptive. It helps the reviewers to understand why you did your changes and if it should be intergrated into the <code class="highlighter-rouge">master</code> branch (and then website).</p>
+
+          <blockquote class="comment">
+            <h3 id="-pull-request-messages"><i class="fa fa-commenting-o" aria-hidden="true"></i> Pull request messages</h3>
+            <p>GitHub uses <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">Markdown</a>, a simple Markup language, to render the Pull request messages. You can then add bold test, lists, images, etc.</p>
+          </blockquote>
+        </li>
+      </ol>
+    </li>
+    <li>Check the changes you made to be sure</li>
+    <li>Click on <strong>Create pull request</strong></li>
+  </ol>
+</blockquote>
+
+<p>You have created your first pull request!</p>
+
+<p>Your pull request will be reviewed. There are two possible outcomes:</p>
+
+<ol>
+  <li>Your pull request is accepted. Congratulations! Your changes will be merged into the master branch of the original repository. The website will be re-built and you will be in the <a href="/training-material/hall-of-fame">Hall of Fame</a></li>
+  <li>Your pull request needs modifications: the reviewers will ask for some changes, possibly because the automatic tests are failing.</li>
+</ol>
+
+<h1 id="update-a-pull-request">Update a Pull Request</h1>
+
+<p>One of the reviewers of your pull request asked you to add your name after your GitHub username in the <code class="highlighter-rouge">CONTRIBUTORS.yaml</code> file.</p>
+
+<blockquote class="hands_on">
+  <h3 id="-hands-on-update-a-pull-request"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Update a Pull Request</h3>
+
+  <ol>
+    <li>Go to the list of pull request tab on GitHub</li>
+    <li>
+      <p>Click on your pull request</p>
+
+      <p>You can see here the comments the reviewers left you</p>
+    </li>
+    <li>
+      <p>Click on <strong>Files changed</strong> tab</p>
+
+      <p><img src="../../images/github_pr_file_changed.png" alt="Pull request files changed tab" /></p>
+
+      <p>You can see there the changes you made:</p>
+      <ul>
+        <li>In green with <code class="highlighter-rouge">+</code>: what you added</li>
+        <li>In red with <code class="highlighter-rouge">-</code>: what you deleted</li>
+      </ul>
+    </li>
+    <li>Click on <i class="fa fa-pencil" aria-hidden="true"></i> icon</li>
+    <li>
+      <p>Add your name below your GitHub username</p>
+
+      <p>It should look like:</p>
+
+      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bebatut:
+     name: Bérénice Batut
+</code></pre></div>      </div>
+    </li>
+    <li>Navigate to the bottom of the file</li>
+    <li>Fill the <strong>Commit changes</strong> form, similarly to the <strong>Propose file change</strong> form before</li>
+    <li>
+      <p>Make sure the <strong>Commit directly to the <code class="highlighter-rouge">patch-1</code> branch</strong> is selected</p>
+
+      <p><img src="../../images/github_pr_commit.png" alt="Commit directly to the `patch-1` branch" /></p>
+    </li>
+    <li>
+      <p>Click on <strong>Commit changes</strong></p>
+
+      <p><img src="../../images/github_pr_commit_changes.png" alt="Submit propose file change form" /></p>
+
+      <p>The pull request should be automatically updated</p>
+    </li>
+    <li>Check that the new changes are added to the pull request on GitHub</li>
+  </ol>
+
+</blockquote>
+
+<h1 class="no_toc" id="conclusion">Conclusion</h1>
+
+<p>With this tutorial, you learn how to use GitHub to change a file, create a pull request and then contribute to the training material.</p>
+
+<blockquote class="tip">
+  <h3 id="-more-about-github"><i class="fa fa-lightbulb-o" aria-hidden="true"></i> More about GitHub</h3>
+  <p>Via the GitHub interface, you can also go further: create file, branch directly, etc.
+To learn that, we recommend you to read the <a href="https://guides.github.com/activities/hello-world/">GitHub guide</a></p>
+</blockquote>
+
+
+        
+        <blockquote class="key_points">
+            <h3><i class="fa fa-key" aria-hidden="true"></i> Key points</h3>
+
+            <ul>
+                
+                <li>You can't add or push directly to the `master` branch, so you need to create a pull request</li>
+                
+                <li>1 pull request = 1 branch</li>
+                
+                <li>The pull request is the foundation of the collaborative development of the training material</li>
+                
+            </ul>
+        </blockquote>
+        
+
+        
+
+        
+        <blockquote class="agenda">
+            <h3>Developing GTN training material</h3>
+            This tutorial is part of a series to develop GTN training material, feel free to also look at:
+            
+            <ol>
+            
+             
+              
+            <li><a href="/training-material/topics/contributing/slides/introduction.html">Overview of the Galaxy Training Material</a></li>
+             
+             
+            
+             
+            
+             
+              
+              
+            <li><a href="/training-material/topics/contributing/tutorials/github-command-line-contribution/tutorial.html">Contributing with GitHub via command-line</a></li>
+              
+              
+             
+            
+             
+              
+              
+            <li><a href="/training-material/topics/contributing/tutorials/create-new-tutorial-content/tutorial.html">Creating a new tutorial - Writing content in Markdown</a></li>
+              
+              
+             
+            
+             
+              
+              
+            <li><a href="/training-material/topics/contributing/tutorials/create-new-tutorial-metadata/tutorial.html">Creating a new tutorial - Defining metadata</a></li>
+              
+              
+             
+            
+             
+              
+              
+            <li><a href="/training-material/topics/contributing/tutorials/create-new-tutorial-tours/tutorial.html">Creating a new tutorial - Creating Interactive Galaxy Tours</a></li>
+              
+              
+             
+            
+             
+              
+              
+            <li><a href="/training-material/topics/contributing/tutorials/create-new-tutorial-technical/tutorial.html">Creating a new tutorial - Defining the technical infrastructure</a></li>
+              
+              
+             
+            
+             
+              
+              
+            <li><a href="/training-material/topics/contributing/tutorials/create-new-topic/tutorial.html">Including a new topic</a></li>
+              
+              
+             
+            
+             
+              
+              
+            <li><a href="/training-material/topics/contributing/tutorials/running-jekyll/tutorial.html">Running the Galaxy Training material website locally</a></li>
+              
+              
+             
+            
+             
+              
+              
+            <li><a href="/training-material/topics/contributing/tutorials/generating-pdf/tutorial.html">Generating PDF artefacts of the website</a></li>
+              
+              
+             
+            
+             
+              
+              
+            <li><a href="/training-material/topics/contributing/tutorials/good-practices/slides.html">Good practices to run a workshop</a></li>
+               
+              
+             
+            
+             
+              
+              
+            <li><a href="/training-material/topics/contributing/tutorials/setup-galaxy-for-training/tutorial.html">Set up a Galaxy for Training</a></li>
+              
+              
+             
+            
+             </ol>
+        </blockquote>
+        
+
+        <h3><i class="fa fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!</h3>
+
+        <hr>
+
+        <blockquote class="overview">
+            <h3><i class="fa fa-comments-o" aria-hidden="true"></i> Help us improve this content!</h3>
+            Please take a moment to fill in the Galaxy Training Network
+            <a href="https://tinyurl.com/GTNfeedback">Feedback Form</a>.
+            Your feedback helps us improve this tutorial and will be considered
+            in future revisions.
+        </blockquote>
+    </section>
+</div>
+
+
+<footer>
+    <div class="container">
+        <p>
+            This material is the result of a collaborative work. Thanks to the
+            <a href="https://wiki.galaxyproject.org/Teach/GTN">Galaxy Training Network</a>
+            and all the <a href="/training-material/hall-of-fame">contributors</a> (Bérénice Batut)!
+        </p>
+        <p>
+            Found a typo? Something is wrong in this tutorial? Edit it on
+            <a href="https://github.com/galaxyproject/training-material/tree/master/topics/contributing/tutorials/github-interface-contribution/tutorial.md">GitHub</a>.
+        </p>
+    </div>
+</footer>
+
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+</html>
