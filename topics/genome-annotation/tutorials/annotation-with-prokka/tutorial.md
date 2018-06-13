@@ -1,6 +1,6 @@
 ---
 layout: tutorial_hands_on
-topic_name: sequence-analysis
+topic_name: genome-annotation
 tutorial_name: "annotation-with-prokka"
 ---
 

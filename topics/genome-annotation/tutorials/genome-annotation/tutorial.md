@@ -1,6 +1,6 @@
 ---
 layout: tutorial_hands_on
-topic_name: sequence-analysis
+topic_name: genome-annotation
 tutorial_name: genome-annotation
 ---
 
@@ -104,7 +104,7 @@ At first you need to identify those structures of the genome which code for prot
 > ### {% icon tip %} Tip:
 >
 > read more about **Aragorn** [here](https://nar.oxfordjournals.org/content/32/1/11.full.pdf+html).
-{: .tip}  
+{: .tip}
 
 # Functional Annotation
 
