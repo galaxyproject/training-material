@@ -41,17 +41,17 @@ The data we use in this tutorial is available at [Zenodo](https://doi.org/10.528
 >    - Recombination Hotspot (`Recombination_hotspots.txt`) content
 >     
 >    ```
->    https://zenodo.org/record/1288391/files/ETn_fixed.bed
->    https://zenodo.org/record/1288391/files/Control.bed
->    https://zenodo.org/record/1288391/files/Recombination_hotspots.txt
+>    https://zenodo.org/record/1288429/files/ETn_fixed.bed
+>    https://zenodo.org/record/1288429/files/Control.bed
+>    https://zenodo.org/record/1288429/files/Recombination_hotspots.txt
 >    ```
 > 3. Import header files for regions and features:
 >    - `regions_header.tabular`
 >    - `features_header.tabular`
 >
 >    ```
->    https://zenodo.org/record/1288391/files/regions_header.tabular
->    https://zenodo.org/record/1288391/files/features_header.tabular
+>    https://zenodo.org/record/1288429/files/regions_header.tabular
+>    https://zenodo.org/record/1288429/files/features_header.tabular
 >    ```
 {: .hands_on}
 
