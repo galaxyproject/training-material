@@ -175,7 +175,7 @@ Globally, the process of development of new content is open and transparent:
 6. Extraction of the workflows of the tutorial
 7. Automatic extraction of the required tools to populate the tool file
 8. Automatic annotation of the public Galaxy servers
-9. Generation of an interactive tour for the tutorial with the Tourbuilder web-browser extension
+9. Generation of an interactive tour for the tutorial with the [Tourbuilder](https://tailordev.fr/blog/2017/07/19/the-galaxy-tour-builder-extension/) web-browser extension
 10. Upload of the datasets to Zenodo and addition of the links in the data library file.
 11. Once ready, opening a Pull Request
 12. Automatic checks of the changes are automatically checked for the right format and working links using continuous integration testing on Travis CI
