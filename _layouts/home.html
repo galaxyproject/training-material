@@ -20,7 +20,7 @@ layout: base
     <section>
         <h1>Welcome to {{ site.title }}</h1>
         <p class="lead">
-            Collection of tutorials developed and maintained by the worldwide Galaxy community.
+            Collection of tutorials developed and maintained by the worldwide Galaxy community
         </p>
 
         <div class="row">
@@ -87,6 +87,46 @@ layout: base
                     {% endfor %}
                     </tbody>
                 </table>
+
+                <h2>How to contribute?</h2>
+
+                <p>First off, thanks for taking the time to contribute!</p>
+
+                <p>You can report mistakes or errors, create more contents, etc. Whatever is your background, there is probably a way to do it: via the GitHub website, via command-line. If you feel it is too much, you can even write it with any text editor and contact us: we will work together to integrate it.</p>
+
+                <p>To get you started, check our <a href="{{ site.baseurl }}/topics/contributing">dedicated tutorials</a> or our <a href="{{ site.baseurl }}/faq">Frequently Asked Questions</a></p>
+
+                <h3>Galaxy for Contributors and Instructors</h3>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Topic</th>
+                            <th>Tutorials</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for topic in sorted_topics %}
+                        {% if topic[1].type == "instructors" %}
+                        <tr>
+                            {% assign tutorial_number=0 %}
+                            {% assign introduction=0 %}
+                            {% for tuto in topic[1].material %}
+                                {% if tuto.type == "tutorial" %}
+                                    {% assign tutorial_number=tutorial_number | plus:1 %}
+                                {% endif %}
+                                {% if tuto.type == "introduction" %}
+                                    {% assign introduction=introduction | plus:1 %}
+                                {% endif %}
+                            {% endfor %}
+
+                            <td><a href="{{ site.baseurl }}/topics/{{ topic[1].name }}">{{ topic[1].title }}</a></td>
+                            <td>{{ tutorial_number }}</td>
+                        </tr>
+                        {% endif %}
+                    {% endfor %}
+                    </tbody>
+                </table>
+
             </div>
         </div>
 
@@ -94,17 +134,20 @@ layout: base
         <p>
             We would like to thank all <a href="{{ site.baseurl }}/hall-of-fame">contributors</a>
             to our Galaxy courses, the Galaxy community for their constant
-            support, and our funding partners.
+            support, and our funding sources:
         </p>
 
         <p>
             <a href="https://www.denbi.de/"><img src="https://raw.githubusercontent.com/bgruening/rbc_docs/master/logo/deNBI_Logo_rgb.png" alt="de.NBI" width="15%" style="max-width:100%;"></a>
-            <a href="http://www.sfb992.uni-freiburg.de/"><img src="https://raw.githubusercontent.com/bgruening/presentations/bce348bb606c312d531c479e63a66efc2bc38d44/shared/resources/img/MEDEP.jpg" alt="Collaborative Research Centre 992" width="15%" style="max-width:100%;"></a>
+            <a href="https://www.nih.gov"><img src="{{ site.baseurl }}/shared/images/nih.png" alt="National Institutes of Health" width="7%" style="max-width:100%;"></a>
+            <a href="https://www.sfb992.uni-freiburg.de/"><img src="https://raw.githubusercontent.com/bgruening/presentations/bce348bb606c312d531c479e63a66efc2bc38d44/shared/resources/img/MEDEP.jpg" alt="Collaborative Research Centre 992" width="15%" style="max-width:100%;"></a>
             <a href="https://www.ie-freiburg.mpg.de"><img src="https://raw.githubusercontent.com/bgruening/presentations/master/shared/resources/img/14_MPI_IE_logo_mit_180.gif" alt="Max Planck Institute of Immunology and Epigenetics" width="15%" style="max-width:100%;"></a>
-            <a href="http://www.uni-freiburg.de/"><img src="https://raw.githubusercontent.com/bgruening/presentations/a2e38e4b007994af798320db3a0131c4bb891c0e/shared/resources/img/logo_freiburg.jpg" alt="University of Freiburg" width="15%" style="max-width:100%;"></a>
-            <a href="https://wiki.galaxyproject.org/Teach/GTN"><img src="./shared/images/GTNLogo1000.png" alt="Galaxy Training Network" width="15%" style="max-width:100%;"></a>
-            <a href="http://www.france-bioinformatique.fr/"><img src="http://www.france-bioinformatique.fr/sites/default/files/ifb-logo_1.png" alt="Institut Français de Bioinformatique" width="15%" style="max-width:100%;"></a>
-            <a href="https://www.elixir-europe.org/excelerate/"><img src="./shared/images/Excelerate_whitebackground.png" alt="Elixir Excelerate" width="15%" style="max-width:100%;"></a>
+            <a href="https://www.uni-freiburg.de/"><img src="https://raw.githubusercontent.com/bgruening/presentations/a2e38e4b007994af798320db3a0131c4bb891c0e/shared/resources/img/logo_freiburg.jpg" alt="University of Freiburg" width="15%" style="max-width:100%;"></a>
+            <a href="http://www.psu.edu"><img src="{{ site.baseurl }}/shared/images/psu.png" alt="The Pennsylvania State University" width="5%" style="max-width:100%;"></a>
+            <a href="https://wiki.galaxyproject.org/Teach/GTN"><img src="{{ site.baseurl }}/shared/images/GTNLogo1000.png" alt="Galaxy Training Network" width="15%" style="max-width:100%;"></a>
+            <a href="https://www.france-bioinformatique.fr/"><img src="https://www.france-bioinformatique.fr/sites/default/files/ifb-logo_1.png" alt="Institut Français de Bioinformatique" width="15%" style="max-width:100%;"></a>
+            <a href="https://www.elixir-europe.org/excelerate/"><img src="{{ site.baseurl }}/shared/images/Excelerate_whitebackground.png" alt="Elixir Excelerate" width="15%" style="max-width:100%;"></a>
+            <a href="https://www.nsf.gov"><img src="{{ site.baseurl }}/shared/images/nsf.gif" alt="National Science Foundation" width="7%" style="max-width:100%;"></a>
         </p>
 
         <div class="row">
@@ -147,8 +190,7 @@ layout: base
                     Check out the full <a href="{{ site.baseurl }}/hall-of-fame">Hall of Fame</a>.
                 </p>
 
-                <h2>Contributing</h2>
-                <p>Do you want to help with this project and join our Hall of Fame? Please see the <a href="{{ site.github_repository }}/blob/master/CONTRIBUTING.md">CONTRIBUTING</a> file to get you started.</p>
+                <p>Do you want to help with this project and join our Hall of Fame? Please see our <a href="{{ site.baseurl }}/topics/contributing">dedicated tutorials</a> or our <a href="{{ site.baseurl }}/faq">Frequently Asked Questions</a> to get you started.</p>
 
                 <h2>License</h2>
                 <p>This work is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</p>

@@ -1,0 +1,100 @@
+---
+layout: base
+---
+
+{% include default-header.html %}
+
+{% assign sorted_topics = "" | split: "," %}
+{% assign sorted_topics_pre = site.data | sort | order: "title" %}
+{% assign instances = site.data['instances'] %}
+
+{% for topic in sorted_topics_pre %}
+    {% if topic[0] == "introduction" %}
+        {% assign sorted_topics = sorted_topics | unshift: topic %}
+    {% else %}
+        {% assign sorted_topics = sorted_topics | push: topic %}
+    {% endif %}
+{% endfor %}
+
+<div class="container main-content">
+    <section>
+        <h1>Server Training Badges</h1>
+        <p class="lead">
+            Collection of badges denoting compatibility with training workflows from the training materials repository.
+        </p>
+
+        <div class="row">
+            <div class="col">
+                {% assign servers = "" | split: "," %}
+                {% for server in instances.assembly.tutorials.debruijn-graph-assembly.instances %}
+                    {% assign servers = servers | push: server[0] %}
+                {% endfor %}
+                {% assign servers = servers | sort %}
+
+                {% for server in servers %}
+                    {% assign has_badges = false %}
+
+                    {% for topic in instances %}
+                        {% for tutorial in topic[1].tutorials %}
+                            {% for instance in tutorial[1].instances %}
+                                {% if instance[0] == server and instance[1].supported %}
+                                    {% assign has_badges = true %}
+                                {% endif %}
+                            {% endfor %}
+                        {% endfor %}
+                    {% endfor %}
+
+                    {% if has_badges %}
+                    <h2>{{ server }}</h2>
+
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Topic</td>
+                                <th>Training Badges</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for topic in instances %}
+                                <!-- Count how many badges we have for this topic -->
+                                {% assign badge_data = "" | split: "," %}
+                                <!-- so we cna decide to show it/not -->
+
+                                {% for tutorial in topic[1].tutorials %}
+                                    {% for instance in tutorial[1].instances %}
+                                        {% if instance[0] == server and instance[1].supported %}
+                                            {% assign badge_data = badge_data | push: tutorial[0]  %}
+                                        {% endif %}
+                                    {% endfor %}
+                                {% endfor %}
+
+                                {% assign badge_data_size = badge_data | size %}
+                                {% if badge_data_size > 0 %}
+                                <tr>
+                                    <td style="width:25%">
+                                        {% for _topic in site.data %}
+                                            {% if _topic[0] == topic[0] %}
+                                                {{ _topic[1].title }}
+                                                <br/>
+                                            {% endif %}
+                                        {% endfor %}
+                                        <img alt="Badge for {{ server }}/{{ topic[0] }}" src="{{ server }}/{{ topic[0] }}.svg">
+                                    </td>
+                                    <td>
+                                        {% for badge in badge_data %}
+                                            <img alt="Badge for {{ server }}/{{ topic[0] }}/{{ badge }}" src="{{ server }}/{{ topic[0] }}/{{ badge }}.svg"><br/>
+                                        {% endfor %}
+                                    </td>
+                                </tr>
+                                {% endif %}
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+</div>
+
+{% include default-footer.html %}

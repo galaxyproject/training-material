@@ -677,7 +677,7 @@ def dynamic_cores_time(app, tool, job, user_email):
                 destination.params['nativeSpecification'] = ''
             destination.params['nativeSpecification'] += ' --time=%s:00:00' % time
         elif param_dict['__job_resource']['__job_resource__select'] != 'no':
-            # someone's up to some shennanigans
+            # someone's up to some shenanigans
             log.error('(%s) resource selector not yes/no, param_dict was: %s', job.id, param_dict)
             raise JobMappingException( FAILURE_MESSAGE )
     else:
@@ -691,7 +691,7 @@ def dynamic_cores_time(app, tool, job, user_email):
     return destination or destination_id
 ```
 
-It is important to note that **you are responsible for parameter validation, including the job resource selector**. This function only handles the job resource parameter fields, but it could do many other things - examine inputs, job queues, other tool paramters, etc.
+It is important to note that **you are responsible for parameter validation, including the job resource selector**. This function only handles the job resource parameter fields, but it could do many other things - examine inputs, job queues, other tool parameters, etc.
 
 Once written, restart Galaxy with `sudo supervisorctl restart all`.
 

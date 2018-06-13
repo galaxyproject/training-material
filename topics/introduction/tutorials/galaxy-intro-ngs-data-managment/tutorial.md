@@ -44,8 +44,8 @@ Finally, datasets can be uploaded directly from NCBI's short read archive:
 
 - Create a new Galaxy history at https://usegalaxy.org (don't forget to log in).
 - Import the following two datasets (for help see the above video):
-  - [A set of Forward reads](https://www.bx.psu.edu/~anton/share/ng_test_data/var/raw_mother-ds-1.fq.gz)
-  - [A set of Reverse reads](https://www.bx.psu.edu/~anton/share/ng_test_data/var/raw_mother-ds-2.fq.gz)
+  - [A set of Forward reads](https://zenodo.org/record/583613/files/sample1-f.fq.gz)
+  - [A set of Reverse reads](https://zenodo.org/record/583613/files/sample1-r.fq.gz)
 
 These are paired end data (see below for explanation of what paired-end is) for a single Illumina run. Keep Galaxy history for later. We will need it again in a few minutes.
 

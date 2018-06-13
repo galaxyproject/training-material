@@ -300,7 +300,6 @@ class: packed
     rank_of_series=$i
     input_path=${s.input}
     x_column=${s.xcol}
-    y_column=${s.ycol}
 #end for
 ]]></command>
 
@@ -308,14 +307,13 @@ class: packed
     <repeat name="series" title="Series">
         <param name="input" type="data" format="tabular" label="Dataset"/>
         <param name="xcol" type="data_column" data_ref="input" label="Column for x axis"/>
-        <param name="ycol" type="data_column" data_ref="input" label="Column for y axis"/>
     </repeat>
 </inputs>
 ```
 
 ???
 
-It makes sense to use a `<repeat>` block only if it contains multiple related parameters, otherwise adding `multiple="true"` is preferrable.
+It makes sense to use a `<repeat>` block only if it contains multiple related parameters, otherwise adding `multiple="true"` is preferable.
 
 ---
 
@@ -1235,7 +1233,7 @@ blastn -query foo_bar -num_threads 4
 ### Data tables
 
 - They list all reference data used by tools
-- e.g.: Blast databanks, BWA indexes, Fasta files
+- e.g.: Blast databases, BWA indexes, Fasta files
 - Stored in `.loc` files
 - Populated by hand or using Data Managers
 - Data Managers are dedicated kind of Galaxy tools

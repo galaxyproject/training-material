@@ -1,0 +1,286 @@
+{
+    "a_galaxy_workflow": "true",
+    "uuid": "2909d897-1870-4144-afd1-23567932e933",
+    "tags": [],
+    "format-version": "0.1",
+    "name": "Microbial variant calling",
+    "annotation": "",
+    "steps": {
+        "0": {
+            "tool_id": null,
+            "tool_version": null,
+            "outputs": [],
+            "workflow_outputs": [],
+            "input_connections": {},
+            "tool_state": "{\"name\": \"mutant_R1\"}",
+            "id": 0,
+            "uuid": "f78a5562-288a-49fa-a8e4-a6facf09bffe",
+            "errors": null,
+            "name": "Input dataset",
+            "label": null,
+            "inputs": [
+                {
+                    "name": "mutant_R1",
+                    "description": ""
+                }
+            ],
+            "position": {
+                "top": 10,
+                "left": 10
+            },
+            "annotation": "",
+            "content_id": null,
+            "type": "data_input"
+        },
+        "1": {
+            "tool_id": null,
+            "tool_version": null,
+            "outputs": [],
+            "workflow_outputs": [],
+            "input_connections": {},
+            "tool_state": "{\"name\": \"mutant_R2\"}",
+            "id": 1,
+            "uuid": "9f0aa29d-da56-4535-96ce-696a721d1d76",
+            "errors": null,
+            "name": "Input dataset",
+            "label": null,
+            "inputs": [
+                {
+                    "name": "mutant_R2",
+                    "description": ""
+                }
+            ],
+            "position": {
+                "top": 130,
+                "left": 10
+            },
+            "annotation": "",
+            "content_id": null,
+            "type": "data_input"
+        },
+        "2": {
+            "tool_id": null,
+            "tool_version": null,
+            "outputs": [],
+            "workflow_outputs": [],
+            "input_connections": {},
+            "tool_state": "{\"name\": \"wildtype.fna\"}",
+            "id": 2,
+            "uuid": "1ad30281-3ee6-4725-8515-8db4936de0ff",
+            "errors": null,
+            "name": "Input dataset",
+            "label": null,
+            "inputs": [
+                {
+                    "name": "wildtype.fna",
+                    "description": ""
+                }
+            ],
+            "position": {
+                "top": 250,
+                "left": 10
+            },
+            "annotation": "",
+            "content_id": null,
+            "type": "data_input"
+        },
+        "3": {
+            "tool_id": null,
+            "tool_version": null,
+            "outputs": [],
+            "workflow_outputs": [],
+            "input_connections": {},
+            "tool_state": "{\"name\": \"wildtype.gbk\"}",
+            "id": 3,
+            "uuid": "3c0c913a-7106-4ac7-b653-a0a0da1d14f8",
+            "errors": null,
+            "name": "Input dataset",
+            "label": null,
+            "inputs": [
+                {
+                    "name": "wildtype.gbk",
+                    "description": ""
+                }
+            ],
+            "position": {
+                "top": 370,
+                "left": 10
+            },
+            "annotation": "",
+            "content_id": null,
+            "type": "data_input"
+        },
+        "4": {
+            "tool_id": null,
+            "tool_version": null,
+            "outputs": [],
+            "workflow_outputs": [],
+            "input_connections": {},
+            "tool_state": "{\"name\": \"wildtype.gff\"}",
+            "id": 4,
+            "uuid": "0a4f5c3d-4f34-4461-8114-98f3bb0a4cf8",
+            "errors": null,
+            "name": "Input dataset",
+            "label": null,
+            "inputs": [
+                {
+                    "name": "wildtype.gff",
+                    "description": ""
+                }
+            ],
+            "position": {
+                "top": 490,
+                "left": 10
+            },
+            "annotation": "",
+            "content_id": null,
+            "type": "data_input"
+        },
+        "5": {
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/snippy/snippy/3.2",
+            "tool_version": "3.2",
+            "outputs": [
+                {
+                    "type": "vcf",
+                    "name": "snpvcf"
+                },
+                {
+                    "type": "gff3",
+                    "name": "snpgff"
+                },
+                {
+                    "type": "tabular",
+                    "name": "snptab"
+                },
+                {
+                    "type": "tabular",
+                    "name": "snpsum"
+                },
+                {
+                    "type": "txt",
+                    "name": "snplog"
+                },
+                {
+                    "type": "fasta",
+                    "name": "snpalign"
+                },
+                {
+                    "type": "fasta",
+                    "name": "snpconsensus"
+                },
+                {
+                    "type": "tabular",
+                    "name": "snpsdepth"
+                },
+                {
+                    "type": "bam",
+                    "name": "snpsbam"
+                },
+                {
+                    "type": "zip",
+                    "name": "outdir"
+                }
+            ],
+            "workflow_outputs": [
+                {
+                    "output_name": "snpconsensus",
+                    "label": "snippy_fasta"
+                },
+                {
+                    "output_name": "snpsum",
+                    "label": "snippy_tabular"
+                }
+            ],
+            "input_connections": {
+                "fastq_input|fastq_input1": {
+                    "output_name": "output",
+                    "id": 0
+                },
+                "fastq_input|fastq_input2": {
+                    "output_name": "output",
+                    "id": 1
+                },
+                "ref": {
+                    "output_name": "output",
+                    "id": 3
+                }
+            },
+            "tool_state": "{\"adv\": \"{\\\"mapqual\\\": \\\"60\\\", \\\"bwaopt\\\": \\\"\\\", \\\"minfrac\\\": \\\"0.9\\\", \\\"rgid\\\": \\\"\\\", \\\"mincov\\\": \\\"10\\\"}\", \"__page__\": null, \"outputs\": \"[\\\"outvcf\\\", \\\"outgff\\\", \\\"outtab\\\", \\\"outsum\\\", \\\"outlog\\\", \\\"outaln\\\", \\\"outcon\\\", \\\"outdep\\\", \\\"outbam\\\", \\\"outzip\\\"]\", \"__rerun_remap_job_id__\": null, \"fastq_input\": \"{\\\"fastq_input2\\\": null, \\\"__current_case__\\\": 0, \\\"fastq_input_selector\\\": \\\"paired\\\", \\\"fastq_input1\\\": null}\", \"chromInfo\": \"\\\"/usr/local/galaxy/galaxy-dist/tool-data/shared/ucsc/chrom/?.len\\\"\", \"ref\": \"null\"}",
+            "id": 5,
+            "tool_shed_repository": {
+                "owner": "iuc",
+                "changeset_revision": "c9a8ef2aa380",
+                "name": "snippy",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "uuid": "5f5638b5-3553-4522-9cfa-d47dd45e8c42",
+            "errors": null,
+            "name": "snippy",
+            "post_job_actions": {},
+            "label": null,
+            "inputs": [],
+            "position": {
+                "top": 10,
+                "left": 230
+            },
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/snippy/snippy/3.2",
+            "type": "tool"
+        },
+        "6": {
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/0.7.0.3",
+            "tool_version": "0.7.0.3",
+            "outputs": [
+                {
+                    "type": "html",
+                    "name": "output"
+                }
+            ],
+            "workflow_outputs": [
+                {
+                    "output_name": "output",
+                    "label": "jbrowse_html"
+                }
+            ],
+            "input_connections": {
+                "track_groups_1|data_tracks_0|data_format|annotation": {
+                    "output_name": "snpgff",
+                    "id": 5
+                },
+                "track_groups_2|data_tracks_0|data_format|annotation": {
+                    "output_name": "output",
+                    "id": 4
+                },
+                "track_groups_0|data_tracks_0|data_format|annotation": {
+                    "output_name": "snpsbam",
+                    "id": 5
+                },
+                "reference_genome|genomes": {
+                    "output_name": "output",
+                    "id": 2
+                }
+            },
+            "tool_state": "{\"__page__\": null, \"standalone\": \"\\\"true\\\"\", \"__rerun_remap_job_id__\": null, \"reference_genome\": \"{\\\"genomes\\\": null, \\\"__current_case__\\\": 1, \\\"genome_type_select\\\": \\\"history\\\"}\", \"track_groups\": \"[{\\\"category\\\": \\\"sequence reads\\\", \\\"__index__\\\": 0, \\\"data_tracks\\\": [{\\\"__index__\\\": 0, \\\"data_format\\\": {\\\"auto_snp\\\": \\\"true\\\", \\\"track_visibility\\\": \\\"default_on\\\", \\\"override_apollo_drag\\\": \\\"False\\\", \\\"__current_case__\\\": 3, \\\"override_apollo_plugins\\\": \\\"False\\\", \\\"annotation\\\": null, \\\"data_format_select\\\": \\\"pileup\\\"}}]}, {\\\"category\\\": \\\"variants\\\", \\\"__index__\\\": 1, \\\"data_tracks\\\": [{\\\"__index__\\\": 0, \\\"data_format\\\": {\\\"index\\\": \\\"false\\\", \\\"match_part\\\": {\\\"match_part_select\\\": \\\"false\\\", \\\"__current_case__\\\": 1}, \\\"jbstyle\\\": {\\\"style_classname\\\": \\\"feature\\\", \\\"style_description\\\": \\\"note,description\\\", \\\"style_height\\\": \\\"10px\\\", \\\"max_height\\\": \\\"600\\\", \\\"style_label\\\": \\\"product,name,id\\\"}, \\\"track_visibility\\\": \\\"default_on\\\", \\\"track_config\\\": {\\\"track_class\\\": \\\"JBrowse/View/Track/CanvasFeatures\\\", \\\"canvas_options\\\": {\\\"transcriptType\\\": \\\"\\\", \\\"subParts\\\": \\\"\\\", \\\"impliedUTRs\\\": \\\"false\\\"}, \\\"__current_case__\\\": 0}, \\\"jbcolor_scale\\\": {\\\"color_score\\\": {\\\"color\\\": {\\\"color_select\\\": \\\"automatic\\\", \\\"__current_case__\\\": 0}, \\\"__current_case__\\\": 0, \\\"color_score_select\\\": \\\"none\\\"}}, \\\"override_apollo_drag\\\": \\\"False\\\", \\\"__current_case__\\\": 2, \\\"override_apollo_plugins\\\": \\\"False\\\", \\\"jbmenu\\\": {\\\"track_menu\\\": []}, \\\"annotation\\\": null, \\\"data_format_select\\\": \\\"gene_calls\\\"}}]}, {\\\"category\\\": \\\"annotated reference\\\", \\\"__index__\\\": 2, \\\"data_tracks\\\": [{\\\"__index__\\\": 0, \\\"data_format\\\": {\\\"index\\\": \\\"false\\\", \\\"match_part\\\": {\\\"match_part_select\\\": \\\"false\\\", \\\"__current_case__\\\": 1}, \\\"jbstyle\\\": {\\\"style_classname\\\": \\\"feature\\\", \\\"style_description\\\": \\\"product\\\", \\\"style_height\\\": \\\"10px\\\", \\\"max_height\\\": \\\"600\\\", \\\"style_label\\\": \\\"product\\\"}, \\\"track_visibility\\\": \\\"default_on\\\", \\\"track_config\\\": {\\\"track_class\\\": \\\"JBrowse/View/Track/CanvasFeatures\\\", \\\"canvas_options\\\": {\\\"transcriptType\\\": \\\"\\\", \\\"subParts\\\": \\\"\\\", \\\"impliedUTRs\\\": \\\"false\\\"}, \\\"__current_case__\\\": 0}, \\\"jbcolor_scale\\\": {\\\"color_score\\\": {\\\"color\\\": {\\\"color_select\\\": \\\"automatic\\\", \\\"__current_case__\\\": 0}, \\\"__current_case__\\\": 0, \\\"color_score_select\\\": \\\"none\\\"}}, \\\"override_apollo_drag\\\": \\\"False\\\", \\\"__current_case__\\\": 2, \\\"override_apollo_plugins\\\": \\\"False\\\", \\\"jbmenu\\\": {\\\"track_menu\\\": []}, \\\"annotation\\\": null, \\\"data_format_select\\\": \\\"gene_calls\\\"}}]}]\", \"plugins\": \"{\\\"GCContent\\\": \\\"false\\\", \\\"Bookmarks\\\": \\\"false\\\", \\\"theme\\\": \\\"\\\", \\\"ComboTrackSelector\\\": \\\"false\\\"}\", \"action\": \"{\\\"action_select\\\": \\\"create\\\", \\\"__current_case__\\\": 0}\", \"gencode\": \"\\\"11\\\"\", \"uglyTestingHack\": \"\\\"\\\"\", \"chromInfo\": \"\\\"/usr/local/galaxy/galaxy-dist/tool-data/shared/ucsc/chrom/?.len\\\"\", \"jbgen\": \"{\\\"trackPadding\\\": \\\"20\\\", \\\"show_tracklist\\\": \\\"true\\\", \\\"show_overview\\\": \\\"true\\\", \\\"show_nav\\\": \\\"true\\\", \\\"aboutDescription\\\": \\\"\\\", \\\"defaultLocation\\\": \\\"\\\", \\\"hideGenomeOptions\\\": \\\"false\\\", \\\"shareLink\\\": \\\"true\\\", \\\"show_menu\\\": \\\"true\\\"}\"}",
+            "id": 6,
+            "tool_shed_repository": {
+                "owner": "iuc",
+                "changeset_revision": "836d1aa3e89a",
+                "name": "jbrowse",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "uuid": "2a2aad62-4281-4bd1-bb5c-cd8bc078ec85",
+            "errors": null,
+            "name": "JBrowse",
+            "post_job_actions": {},
+            "label": null,
+            "inputs": [],
+            "position": {
+                "top": 10,
+                "left": 450
+            },
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/0.7.0.3",
+            "type": "tool"
+        }
+    }
+}

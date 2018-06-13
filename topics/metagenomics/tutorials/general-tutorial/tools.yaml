@@ -3,28 +3,70 @@
 api_key: admin
 galaxy_instance: http://localhost:8080
 tools:
+  - name: taxonomy_krona_chart
+    owner: crs4
+    tool_panel_section_label: Krona
 
-  - name: 'suite_metaphlan2'
-    owner: 'iuc'
-    tool_panel_section_label: 'MetaPhlAn2'
-
-  - name: 'suite_humann2'
-    owner: 'iuc'
-    tool_panel_section_label: 'HUMAnN2'
-
-  - name: 'combine_metaphlan2_humann2'
-    owner: 'bebatut'
-    tool_panel_section_label: 'Combine MetaPhlAn2 and HUMAnN2'
-
-  - name: 'taxonomy_krona_chart'
-    owner: 'crs4'
-    tool_panel_section_label: 'KRONA'
-
-  - name: suite_mothur
+  # WGS workflow
+  - name: metaphlan2
     owner: iuc
-    tool_panel_section_label: "Mothur"
+    tool_panel_section_label: MetaPhlAn2
+  - name: humann2
+    owner: iuc
+    tool_panel_section_label: MetaPhlAn2
+  - name: metaphlan2krona
+    owner: iuc
+    tool_panel_section_label: HUMAnN2
+  - name: humann2_renorm_table
+    owner: iuc
+    tool_panel_section_label: HUMAnN2
+  - name: humann2_regroup_table
+    owner: iuc
+    tool_panel_section_label: HUMAnN2
 
-  # this version of Krona saves some annoying file conversion steps from mothur output files
-  - name: krona_text
-    owner: saskia-hiltemann
-    tool_panel_section_label: "Krona"
+  # Amplicon workflow
+  - name: mothur_make_biom
+    owner: iuc
+    tool_panel_section_label: Mothur
+  - name: mothur_merge_files
+    owner: iuc
+    tool_panel_section_label: Mothur
+  - name: mothur_unique_seqs
+    owner: iuc
+    tool_panel_section_label: Mothur
+  - name: mothur_make_group
+    owner: iuc
+    tool_panel_section_label: Mothur
+  - name: mothur_summary_seqs
+    owner: iuc
+    tool_panel_section_label: Mothur
+  - name: mothur_count_seqs
+    owner: iuc
+    tool_panel_section_label: Mothur
+  - name: mothur_align_seqs
+    owner: iuc
+    tool_panel_section_label: Mothur
+  - name: mothur_screen_seqs
+    owner: iuc
+    tool_panel_section_label: Mothur
+  - name: mothur_pre_cluster
+    owner: iuc
+    tool_panel_section_label: Mothur
+  - name: mothur_filter_seqs
+    owner: iuc
+    tool_panel_section_label: Mothur
+  - name: mothur_cluster_split
+    owner: iuc
+    tool_panel_section_label: Mothur
+  - name: mothur_classify_seqs
+    owner: iuc
+    tool_panel_section_label: Mothur
+  - name: mothur_classify_otu
+    owner: iuc
+    tool_panel_section_label: Mothur
+  - name: mothur_make_shared
+    owner: iuc
+    tool_panel_section_label: Mothur
+  - name: mothur_taxonomy_to_krona
+    owner: iuc
+    tool_panel_section_label: Mothur

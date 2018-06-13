@@ -1,0 +1,479 @@
+{
+    "annotation": "Reproduce the tutorial analysis at http://galaxyproject.github.io/training-material/topics/variant-analysis/tutorials/mapping-by-sequencing/tutorial.html",
+    "a_galaxy_workflow": "true",
+    "uuid": "7ba4dd09-1927-47ca-b0d7-71edc4c730ff",
+    "format-version": "0.1",
+    "name": "Mapping and molecular identification of phenotype-causing mutations",
+    "steps": {
+        "0": {
+            "tool_id": null,
+            "tool_version": null,
+            "outputs": [],
+            "workflow_outputs": [],
+            "input_connections": {},
+            "tool_state": "{}",
+            "id": 0,
+            "uuid": "e1f007b9-4064-4085-a5f9-3f58db2dfe80",
+            "errors": null,
+            "name": "Input dataset",
+            "label": "A. thaliana TAIR10 ref genome",
+            "inputs": [],
+            "position": {
+                "top": 200,
+                "left": 169
+            },
+            "annotation": "can be obtained from https://www.arabidopsis.org/download_files/Genes/TAIR10_genome_release/TAIR10_chromosome_files/TAIR10_chr_all.fas",
+            "content_id": null,
+            "type": "data_input"
+        },
+        "1": {
+            "tool_id": null,
+            "tool_version": null,
+            "outputs": [],
+            "workflow_outputs": [],
+            "input_connections": {},
+            "tool_state": "{}",
+            "id": 1,
+            "uuid": "d8951962-720f-444f-9ba9-38eb5d3bc69d",
+            "errors": null,
+            "name": "Input dataset",
+            "label": "aligned reads from outcrossed F2 pool",
+            "inputs": [],
+            "position": {
+                "top": 524,
+                "left": 174
+            },
+            "annotation": "as obtained from\nhttps://zenodo.org/record/1098034/files/outcrossed_F2.bam",
+            "content_id": null,
+            "type": "data_input"
+        },
+        "2": {
+            "tool_id": null,
+            "tool_version": null,
+            "outputs": [],
+            "workflow_outputs": [],
+            "input_connections": {},
+            "tool_state": "{}",
+            "id": 2,
+            "uuid": "299b9599-74e4-45ac-b6db-cabedca6d396",
+            "errors": null,
+            "name": "Input dataset",
+            "label": "aligned reads from Ler mapping strain",
+            "inputs": [],
+            "position": {
+                "top": 687,
+                "left": 172
+            },
+            "annotation": "as obtained from\nhttps://zenodo.org/record/1098034/files/Ler_mapping_strain.bam",
+            "content_id": null,
+            "type": "data_input"
+        },
+        "3": {
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/snpeff/snpEff_download/4.1.0",
+            "tool_version": "4.1.0",
+            "outputs": [
+                {
+                    "type": "snpeffdb",
+                    "name": "snpeff_db"
+                }
+            ],
+            "workflow_outputs": [],
+            "input_connections": {},
+            "tool_state": "{\"__page__\": null, \"__rerun_remap_job_id__\": null, \"genome_version\": \"\\\"athalianaTair10\\\"\"}",
+            "id": 3,
+            "tool_shed_repository": {
+                "owner": "iuc",
+                "changeset_revision": "20f0429a4bfe",
+                "name": "snpeff",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "uuid": "41db47ac-e27b-4b51-8bba-c36915f4dc6e",
+            "errors": null,
+            "name": "SnpEff Download",
+            "post_job_actions": {},
+            "label": null,
+            "inputs": [],
+            "position": {
+                "top": 846,
+                "left": 518
+            },
+            "annotation": "download the SnpEff genome annotation file corresponding to TAIR10",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/snpeff/snpEff_download/4.1.0",
+            "type": "tool"
+        },
+        "4": {
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.1",
+            "tool_version": "1.1.1",
+            "outputs": [
+                {
+                    "type": "input",
+                    "name": "outfile"
+                }
+            ],
+            "workflow_outputs": [],
+            "input_connections": {
+                "infile": {
+                    "output_name": "output",
+                    "id": 0
+                }
+            },
+            "tool_state": "{\"__page__\": null, \"caseinsensitive\": \"\\\"false\\\"\", \"searchwhere\": \"{\\\"searchwhere_select\\\": \\\"line\\\", \\\"__current_case__\\\": 0}\", \"find_pattern\": \"\\\"^>(\\\\\\\\w+).*\\\"\", \"__rerun_remap_job_id__\": null, \"is_regex\": \"\\\"true\\\"\", \"skip_first_line\": \"\\\"false\\\"\", \"replace_pattern\": \"\\\">chr$1\\\"\", \"infile\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"wholewords\": \"\\\"false\\\"\"}",
+            "id": 4,
+            "tool_shed_repository": {
+                "owner": "bgruening",
+                "changeset_revision": "74a8bef53a00",
+                "name": "text_processing",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "uuid": "68636875-cb22-4e7d-af94-60bb66db003f",
+            "errors": null,
+            "name": "Replace",
+            "post_job_actions": {
+                "RenameDatasetActionoutfile": {
+                    "output_name": "outfile",
+                    "action_type": "RenameDatasetAction",
+                    "action_arguments": {
+                        "newname": "TAIR10"
+                    }
+                }
+            },
+            "label": "Replace parts of text",
+            "inputs": [
+                {
+                    "name": "infile",
+                    "description": "runtime parameter for tool Replace"
+                }
+            ],
+            "position": {
+                "top": 383,
+                "left": 356
+            },
+            "annotation": "truncate ref genome chromosome names",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.1",
+            "type": "tool"
+        },
+        "5": {
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/wolma/mimodd_main/mimodd_varcall/0.1.8_1",
+            "tool_version": "0.1.8_1",
+            "outputs": [
+                {
+                    "type": "bcf",
+                    "name": "ofile"
+                }
+            ],
+            "workflow_outputs": [],
+            "input_connections": {
+                "reference|genome": {
+                    "output_name": "outfile",
+                    "id": 4
+                },
+                "list_input": [
+                    {
+                        "output_name": "output",
+                        "id": 2
+                    },
+                    {
+                        "output_name": "output",
+                        "id": 1
+                    }
+                ]
+            },
+            "tool_state": "{\"adv_settings\": \"{\\\"md5_check\\\": \\\"true\\\", \\\"max_depth\\\": \\\"250\\\"}\", \"reference\": \"{\\\"source\\\": \\\"history\\\", \\\"genome\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"__current_case__\\\": 1}\", \"group_by_id\": \"\\\"false\\\"\", \"__page__\": null, \"__rerun_remap_job_id__\": null, \"list_input\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}",
+            "id": 5,
+            "tool_shed_repository": {
+                "owner": "wolma",
+                "changeset_revision": "f0f2795de2c7",
+                "name": "mimodd_main",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "uuid": "cfa4ea9c-d900-4cec-8e66-7f845aebaa18",
+            "errors": null,
+            "name": "MiModD Variant Calling",
+            "post_job_actions": {},
+            "label": "MiModD Variant Calling",
+            "inputs": [
+                {
+                    "name": "list_input",
+                    "description": "runtime parameter for tool MiModD Variant Calling"
+                },
+                {
+                    "name": "reference",
+                    "description": "runtime parameter for tool MiModD Variant Calling"
+                }
+            ],
+            "position": {
+                "top": 539,
+                "left": 463
+            },
+            "annotation": "compute variant call statistics for both samples across the entire genome",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/wolma/mimodd_main/mimodd_varcall/0.1.8_1",
+            "type": "tool"
+        },
+        "6": {
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/wolma/mimodd_main/mimodd_varextract/0.1.8_1",
+            "tool_version": "0.1.8_1",
+            "outputs": [
+                {
+                    "type": "vcf",
+                    "name": "output_vcf"
+                }
+            ],
+            "workflow_outputs": [],
+            "input_connections": {
+                "ifile": {
+                    "output_name": "ofile",
+                    "id": 5
+                }
+            },
+            "tool_state": "{\"__page__\": null, \"ifile\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"keep_alts\": \"\\\"false\\\"\", \"sitesinfo\": \"[]\", \"__rerun_remap_job_id__\": null}",
+            "id": 6,
+            "tool_shed_repository": {
+                "owner": "wolma",
+                "changeset_revision": "f0f2795de2c7",
+                "name": "mimodd_main",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "uuid": "fce0f348-9ae2-4c09-9b06-d3399b0b628e",
+            "errors": null,
+            "name": "MiModD Extract Variant Sites",
+            "post_job_actions": {},
+            "label": null,
+            "inputs": [
+                {
+                    "name": "ifile",
+                    "description": "runtime parameter for tool MiModD Extract Variant Sites"
+                }
+            ],
+            "position": {
+                "top": 486,
+                "left": 719
+            },
+            "annotation": "extract variants at sites for which at least one sample is not homozygous wildtype",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/wolma/mimodd_main/mimodd_varextract/0.1.8_1",
+            "type": "tool"
+        },
+        "7": {
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/wolma/mimodd_main/mimodd_map/0.1.8_1",
+            "tool_version": "0.1.8_1",
+            "outputs": [
+                {
+                    "type": "tabular",
+                    "name": "ofile"
+                },
+                {
+                    "type": "tabular",
+                    "name": "tfile"
+                },
+                {
+                    "type": "pdf",
+                    "name": "pfile"
+                }
+            ],
+            "workflow_outputs": [],
+            "input_connections": {
+                "opt|source|ifile": {
+                    "output_name": "output_vcf",
+                    "id": 6
+                }
+            },
+            "tool_state": "{\"opt\": \"{\\\"source\\\": {\\\"infer_missing\\\": \\\"false\\\", \\\"ifile\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"unrelated_parent_sample\\\": \\\"Ler\\\", \\\"tabfile\\\": \\\"\\\", \\\"sample\\\": \\\"outcrossed F2\\\", \\\"bin_sizes\\\": [], \\\"__current_case__\\\": 0, \\\"plotopts\\\": {\\\"hylim\\\": \\\"0.0\\\", \\\"xlim\\\": \\\"\\\", \\\"sylim\\\": \\\"1.0\\\", \\\"show_kde\\\": \\\"true\\\", \\\"hcols\\\": [], \\\"__current_case__\\\": 3, \\\"span\\\": \\\"0.1\\\", \\\"plots\\\": \\\"-p\\\", \\\"scols\\\": []}, \\\"contrast_sample\\\": \\\"\\\", \\\"seqinfo_external\\\": {\\\"source\\\": \\\"\\\", \\\"__current_case__\\\": 3}, \\\"related_parent_sample\\\": \\\"\\\", \\\"inputtype\\\": \\\"vcf\\\"}, \\\"mode\\\": \\\"VAF\\\", \\\"__current_case__\\\": 1}\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "id": 7,
+            "tool_shed_repository": {
+                "owner": "wolma",
+                "changeset_revision": "f0f2795de2c7",
+                "name": "mimodd_main",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "uuid": "7a5fc11a-b9e4-4bfa-8bdc-fb9112c5eea8",
+            "errors": null,
+            "name": "MiModD NacreousMap",
+            "post_job_actions": {},
+            "label": "MiModD NacreousMap",
+            "inputs": [],
+            "position": {
+                "top": 239,
+                "left": 700
+            },
+            "annotation": "Variant allele frequency-based linkage analysis",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/wolma/mimodd_main/mimodd_map/0.1.8_1",
+            "type": "tool"
+        },
+        "8": {
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/wolma/mimodd_main/mimodd_vcf_filter/0.1.8_1",
+            "tool_version": "0.1.8_1",
+            "outputs": [
+                {
+                    "type": "vcf",
+                    "name": "outputfile"
+                }
+            ],
+            "workflow_outputs": [],
+            "input_connections": {
+                "inputfile": {
+                    "output_name": "output_vcf",
+                    "id": 6
+                }
+            },
+            "tool_state": "{\"__page__\": null, \"vfilter\": \"\\\"\\\"\", \"__rerun_remap_job_id__\": null, \"regions\": \"[{\\\"stop\\\": \\\"19000000\\\", \\\"__index__\\\": 0, \\\"chrom\\\": \\\"chr2\\\", \\\"start\\\": \\\"18000000\\\"}]\", \"datasets\": \"[{\\\"GT\\\": \\\"1/1\\\", \\\"GQ\\\": \\\"0\\\", \\\"AF\\\": \\\"\\\", \\\"sample\\\": \\\"outcrossed F2\\\", \\\"__index__\\\": 0, \\\"DP\\\": \\\"0\\\"}, {\\\"GT\\\": \\\"0/0\\\", \\\"GQ\\\": \\\"0\\\", \\\"AF\\\": \\\"\\\", \\\"sample\\\": \\\"Ler\\\", \\\"__index__\\\": 1, \\\"DP\\\": \\\"0\\\"}]\", \"vartype\": \"\\\"\\\"\", \"inputfile\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}",
+            "id": 8,
+            "tool_shed_repository": {
+                "owner": "wolma",
+                "changeset_revision": "f0f2795de2c7",
+                "name": "mimodd_main",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "uuid": "3e80eb3b-42be-4c25-ac76-f61af7c4f506",
+            "errors": null,
+            "name": "MiModD VCF Filter",
+            "post_job_actions": {
+                "RenameDatasetActionoutputfile": {
+                    "output_name": "outputfile",
+                    "action_type": "RenameDatasetAction",
+                    "action_arguments": {
+                        "newname": "Candidate Mutations"
+                    }
+                }
+            },
+            "label": "MiModD VCF Filter",
+            "inputs": [
+                {
+                    "name": "inputfile",
+                    "description": "runtime parameter for tool MiModD VCF Filter"
+                }
+            ],
+            "position": {
+                "top": 612,
+                "left": 925
+            },
+            "annotation": "get candidates in linked region",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/wolma/mimodd_main/mimodd_vcf_filter/0.1.8_1",
+            "type": "tool"
+        },
+        "9": {
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/snpeff/snpEff/4.1.0",
+            "tool_version": "4.1.0",
+            "outputs": [
+                {
+                    "type": "vcf",
+                    "name": "snpeff_output"
+                },
+                {
+                    "type": "html",
+                    "name": "statsFile"
+                }
+            ],
+            "workflow_outputs": [],
+            "input_connections": {
+                "input": {
+                    "output_name": "outputfile",
+                    "id": 8
+                },
+                "snpDb|snpeff_db": {
+                    "output_name": "snpeff_db",
+                    "id": 3
+                }
+            },
+            "tool_state": "{\"spliceSiteSize\": \"\\\"2\\\"\", \"filter\": \"{\\\"specificEffects\\\": \\\"no\\\", \\\"__current_case__\\\": 0}\", \"udLength\": \"\\\"5000\\\"\", \"inputFormat\": \"\\\"vcf\\\"\", \"spliceRegion\": \"{\\\"__current_case__\\\": 0, \\\"setSpliceRegions\\\": \\\"no\\\"}\", \"outputConditional\": \"{\\\"outputFormat\\\": \\\"vcf\\\", \\\"__current_case__\\\": 0}\", \"__page__\": null, \"__rerun_remap_job_id__\": null, \"filterOut\": \"null\", \"generate_stats\": \"\\\"false\\\"\", \"noLog\": \"\\\"true\\\"\", \"chr\": \"\\\"\\\"\", \"intervals\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"snpDb\": \"{\\\"extra_annotations\\\": \\\"\\\", \\\"snpeff_db\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"regulation\\\": \\\"\\\", \\\"__current_case__\\\": 1, \\\"genomeSrc\\\": \\\"history\\\"}\", \"offset\": \"\\\"default\\\"\", \"input\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"transcripts\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"annotations\": \"[\\\"-formatEff\\\"]\"}",
+            "id": 9,
+            "tool_shed_repository": {
+                "owner": "iuc",
+                "changeset_revision": "20f0429a4bfe",
+                "name": "snpeff",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "uuid": "104897a0-a896-49d1-8750-2072419f897d",
+            "errors": null,
+            "name": "SnpEff",
+            "post_job_actions": {
+                "RenameDatasetActionsnpeff_output": {
+                    "output_name": "snpeff_output",
+                    "action_type": "RenameDatasetAction",
+                    "action_arguments": {
+                        "newname": "Annotated Candidate Mutations"
+                    }
+                }
+            },
+            "label": "SnpEff",
+            "inputs": [
+                {
+                    "name": "input",
+                    "description": "runtime parameter for tool SnpEff"
+                },
+                {
+                    "name": "intervals",
+                    "description": "runtime parameter for tool SnpEff"
+                },
+                {
+                    "name": "snpDb",
+                    "description": "runtime parameter for tool SnpEff"
+                },
+                {
+                    "name": "transcripts",
+                    "description": "runtime parameter for tool SnpEff"
+                }
+            ],
+            "position": {
+                "top": 719,
+                "left": 925
+            },
+            "annotation": "annotate the candidate mutations",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/snpeff/snpEff/4.1.0",
+            "type": "tool"
+        },
+        "10": {
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/wolma/mimodd_main/mimodd_varreport/0.1.8_1",
+            "tool_version": "0.1.8_1",
+            "outputs": [
+                {
+                    "type": "html",
+                    "name": "ofile"
+                }
+            ],
+            "workflow_outputs": [],
+            "input_connections": {
+                "inputfile": {
+                    "output_name": "snpeff_output",
+                    "id": 9
+                }
+            },
+            "tool_state": "{\"__page__\": null, \"__rerun_remap_job_id__\": null, \"formatting\": \"{\\\"oformat\\\": \\\"html\\\", \\\"species\\\": \\\"A. thaliana\\\", \\\"__current_case__\\\": 0, \\\"link_formatter\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}}\", \"inputfile\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}",
+            "id": 10,
+            "tool_shed_repository": {
+                "owner": "wolma",
+                "changeset_revision": "f0f2795de2c7",
+                "name": "mimodd_main",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "uuid": "4c692cb5-f38f-442f-add1-d9d4dcaff749",
+            "errors": null,
+            "name": "MiModD Report Variants",
+            "post_job_actions": {
+                "RenameDatasetActionofile": {
+                    "output_name": "ofile",
+                    "action_type": "RenameDatasetAction",
+                    "action_arguments": {
+                        "newname": "Final Candidate Report"
+                    }
+                }
+            },
+            "label": "MiModD Report Variants",
+            "inputs": [
+                {
+                    "name": "formatting",
+                    "description": "runtime parameter for tool MiModD Report Variants"
+                },
+                {
+                    "name": "inputfile",
+                    "description": "runtime parameter for tool MiModD Report Variants"
+                }
+            ],
+            "position": {
+                "top": 241,
+                "left": 1003
+            },
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/wolma/mimodd_main/mimodd_varreport/0.1.8_1",
+            "type": "tool"
+        }
+    }
+}

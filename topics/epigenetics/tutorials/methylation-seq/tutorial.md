@@ -19,7 +19,7 @@ tutorial_name: methylation-seq
 >
 {: .agenda}
 
-This tutorial is based on [I-Hsuan Lin et al.: 'Hierarchical Clustering of Breast Cancer Methylomes Revealed Differentially Methylated and Expressed Breast Cancer Genes'](https://dx.doi.org/10.1371/journal.pone.0118453).
+This tutorial is based on [I-Hsuan Lin et al.: 'Hierarchical Clustering of Breast Cancer Methylomes Revealed Differentially Methylated and Expressed Breast Cancer Genes'](https://doi.org/10.1371/journal.pone.0118453).
 
 The data we use in this tutorial is available at [Zenodo](https://zenodo.org/record/557099).
 
@@ -56,13 +56,10 @@ The data we use in this tutorial is available at [Zenodo](https://zenodo.org/rec
 >    > - Is everything as expected?
 >    >
 >    >
->    >    <details>
->    >    <summary>Click to view answers</summary>
->    >    <ol type="1">
->    >    <li>The attentive audience of the theory part knows: Every C-meth stays a C and every normal C becomes a T during the bisulfite conversion. </li>
->    >    <li>Yes it is. Always be careful and have the specific characteristics of your data in mind during the interpretation of FastQC results.</li>
->    >    </ol>
->    >    </details>
+>    >    > ### {% icon solution %} Solution
+>    >    > 1. The attentive audience of the theory part knows: Every C-meth stays a C and every normal C becomes a T during the bisulfite conversion. 
+>    >    > 2. Yes it is. Always be careful and have the specific characteristics of your data in mind during the interpretation of FastQC results.
+>    >    {: .solution }
 >    {: .question}
 >
 {: .hands_on}
@@ -83,12 +80,9 @@ The data we use in this tutorial is available at [Zenodo](https://zenodo.org/rec
 >    > -  Why we need other alignment tools for bisulfite sequencing data?
 >    >
 >    >
->    >    <details>
->    >    <summary>Click to view answers</summary>
->    >    <ol type="1">
->    >    <li>You may have noticed that all the C's are C-meth's and a T can be a T or a C. A mapper for methylation data needs to find out what is what.</li>
->    >    </ol>
->    >    </details>
+>    >    > ### {% icon solution %} Solution
+>    >    > 1. You may have noticed that all the C's are C-meth's and a T can be a T or a C. A mapper for methylation data needs to find out what is what.
+>    >    {: .solution }
 >    {: .question}
 >
 {: .hands_on}
@@ -114,13 +108,10 @@ The data we use in this tutorial is available at [Zenodo](https://zenodo.org/rec
 >    >
 >    >
 >    >
->    >    <details>
->    >    <summary>Click to view answers</summary>
->    >    <ol type="1">
->    >    <li>The distribution of the methylation is more or less equal. Only at the start and the end we could trim a bit but a +- 5% variation is acceptable. </li>
->    >    <li>To trim the reads we would include for the first strand only the positions 0 to 145, for the second 6 to 149.</li>
->    >    </ol>
->    >    </details>
+>    >    > ### {% icon solution %} Solution
+>    >    > 1. The distribution of the methylation is more or less equal. Only at the start and the end we could trim a bit but a +- 5% variation is acceptable. 
+>    >    > 2. To trim the reads we would include for the first strand only the positions 0 to 145, for the second 6 to 149.
+>    >    {: .solution }
 >    {: .question}
 >
 >
@@ -171,8 +162,8 @@ The data we use in this tutorial is available at [Zenodo](https://zenodo.org/rec
 >
 > ![Methylation output](../../images/methylation_output.png)
 >
-> Lets see how the methylation looks for a view provided files:
-> 1. **Galaxy** {% icon tool %}: Import from the data library the files `NB1_CpG.meth.bedGraph`
+> Lets see how the methylation looks for a few provided files:
+> 1. **Galaxy** {% icon tool %}: Import the files `NB1_CpG.meth.bedGraph` from the data library
 > 2. **Wig/BedGraph-to-bigWig** {% icon tool %} with the following parameters:
 >    - Use the imported file to transform it to a bigWig file.
 >
@@ -181,12 +172,9 @@ The data we use in this tutorial is available at [Zenodo](https://zenodo.org/rec
 >    > - The execution fails. Do you have an idea why?
 >    >
 >    >  
->    >    <details>
->    >    <summary>Click to view answers</summary>
->    >    <ol type="1">
->    >    <li>A conversion to bigWig would fail right now, probably with some error message like <code>hashMustFindVal: '1' not found</code>. The reason is the source of the reference genome which was used. There is ensembl and UCSC as sources which differ in naming the chromosomes. Ensembl is using just numbers e.g. 1 for chromosome one. UCSC is using chr1 for the same. Be careful with this especially if you have data from different sources. We need to convert this.</li>
->    >    </ol>
->    >    </details>
+>    >    > ### {% icon solution %} Solution
+>    >    > 1. A conversion to bigWig would fail right now, probably with some error message like `hashMustFindVal: '1' not found`. The reason is the source of the reference genome which was used. There is ensembl and UCSC as sources which differ in naming the chromosomes. Ensembl is using just numbers e.g. 1 for chromosome one. UCSC is using chr1 for the same. Be careful with this especially if you have data from different sources. We need to convert this.
+>    >    {: .solution }
 >    {: .question}
 >
 >    > ### {% icon tip %} Tip: UCSC - Ensembl convert
@@ -214,8 +202,8 @@ The data we use in this tutorial is available at [Zenodo](https://zenodo.org/rec
 > 1. **Galaxy** {% icon tool %}: Import from the data library the files `NB1_CpG.meth.bedGraph`, `NB2_CpG.meth.bedGraph` and `BT198_CpG.meth.bedGraph`.
 > 2. **Metilene** {% icon tool %}: 
 >    - Choose for the first option `Input group 1` the imported files starting with ``NB`` and for `Input group 2` the imported files `BT198_CpG.meth.bedGraph`.
->    - Select for the option `BED file containing regions of interest` the imported BAM file CpGIslands.bed.
-> 3. More information about metilene can be found here: https://www.bioinf.uni-leipzig.de/Software/metilene/
+>    - Select for the option `BED file containing regions of interest` the imported BED file CpGIslands.bed.
+> 3. More information about metilene can be found here: https://www.bioinf.uni-leipzig.de/Software/metilene
 >
 >    > ### {% icon question %} Questions
 >    >
@@ -223,12 +211,9 @@ The data we use in this tutorial is available at [Zenodo](https://zenodo.org/rec
 >    >
 >    >
 >    >
->    >    <details>
->    >    <summary>Click to view answers</summary>
->    >    <ol type="1">
->    >    <li>It shows the distribution of DMR differences, DMR length in nucleotides and number CpGs, DMR differences vs. q-values, mean methylation group 1 vs. mean methylation group 2 and DMR length in nucleotides vs. length in CpGs</li>
->    >    </ol>
->    >    </details>
+>    >    > ### {% icon solution %} Solution
+>    >    > 1. It shows the distribution of DMR differences, DMR length in nucleotides and number CpGs, DMR differences vs. q-values, mean methylation group 1 vs. mean methylation group 2 and DMR length in nucleotides vs. length in CpGs
+>    >    {: .solution }
 >    {: .question}
 >
 >

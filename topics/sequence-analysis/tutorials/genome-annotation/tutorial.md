@@ -45,7 +45,7 @@ It consists of three main steps:
 
 # Structural Annotation
 
-For the genome annotation we use a piece of the *Aspergillus fumigatus* [genome sequence](../../input_data/Aspergillus_sequence.fasta) as input file.
+For the genome annotation we use a piece of the *Aspergillus fumigatus* [genome sequence](https://zenodo.org/record/1250793/files/Aspergillus_sequence.fasta) as input file.
 
 ## Sequence Features
 
@@ -80,10 +80,9 @@ At first you need to identify those structures of the genome which code for prot
 >    >
 >    > How many genes are predicted?
 >    >
->    > <details>
->    > <summary>Click to view answer</summary>
->    > Check the output: <a href="../../images/augustus_out.png">augustus_output</a>
->    > </details>
+>    > > ### {% icon solution %} Solution
+>    > > Check the output: [augustus_output](../../images/augustus_out.png)
+>    > {: .solution }
 > {: .question}
 >
 {: .hands_on}
@@ -98,9 +97,6 @@ At first you need to identify those structures of the genome which code for prot
 >    >
 >    > Are there tRNAs or tmRNAs in the sequence?
 >    >
->    > <details>
->    > <summary></summary>
->    > </details>
 >    {: .question}
 >
 {: .hands_on}
@@ -137,9 +133,6 @@ For similarity searches we use *NCBI BLAST+ blastp* to find similar proteins in 
 >    >
 >    > What information do you see in the BLAST output?
 >    >
->    > <details>
->    > <summary></summary>
->    > </details>
 > {: .question}
 >
 >
@@ -150,9 +143,6 @@ For similarity searches we use *NCBI BLAST+ blastp* to find similar proteins in 
 >    >
 >    > For how many proteins we do not get a BLAST hit?
 >    >
->    > <details>
->    > <summary></summary>
->    > </details>
 > {: .question}
 >
 > 5. {% icon tool %} Choose the tool **Select lines that match an expression** and enter the following information: *Select lines from* [select the BLAST top hit descriptions result file]; *that* [not matching]; *the pattern* [gi].
@@ -226,9 +216,6 @@ For identification of gene clusters, **antiSMASH** is used. The tool uses genban
 >
 > Which gene clusters are identified?
 >
-> <details>
-> <summary></summary>
-> </details>
 {: .question}
 
 When you have a whole genome **antiSMASH** analysis, your result may look like this:

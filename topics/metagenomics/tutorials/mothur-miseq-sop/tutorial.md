@@ -39,10 +39,9 @@ In this tutorial we use 16S rRNA data, but similar pipelines can be used for WGS
 >
 > The 16S rRNA gene has several properties that make it ideally suited for our purposes
 >
-> 1. Present in all living organisms
-> 2. Single copy (no recombination)
-> 3. Highly conserved + highly variable regions
-> 4. Huge reference databases
+> 1. Present in all prokaryotes
+> 2. Highly conserved + highly variable regions
+> 3. Huge reference databases
 >
 > ![16S Variable regions](../../images/16S_variableregions.jpg)
 >
@@ -69,12 +68,12 @@ setup, we additionally resequenced a mock community composed of genomic DNA from
 > ### {% icon comment %} Dataset details
 > Because of the large size of the original dataset (3.9 GB) you are given 20 of the 362 pairs of fastq
 > files. For example, you will see two files: `F3D0_S188_L001_R1_001.fastq`, and
-> `F3D0_S188_L001_R2_001.fastq`  
->
+> `F3D0_S188_L001_R2_001.fastq`
+> <br><br>
 > These two files correspond to Female 3 on Day 0 (F3D0) (i.e. the day of weaning). The first file
 > (and all those with R1 in the name) correspond to the forward reads, while the second (and all
 > those with R2 in the name) correspond to the reverse reads.
->
+> <br><br>
 > These sequences are 250 bp and overlap in the V4 region of the 16S rRNA gene; this region is about
 > 253 bp long. Looking at the datasets, you will see 22 fastq files, representing 10 time points from
 > Female 3 and 1 mock community. You will also see `HMP_MOCK.v35.fasta` which contains the sequences used
@@ -104,19 +103,74 @@ Now that we know what our input data is, let's get it into our Galaxy history:
 > - Option 1: From data library:
 >   - Navigate to the shared data library, you should find 20 pairs of fastq files; 19 from the mice,
 > and one pair from the mock community.
-> - Option 2: From your computer:
->   - Obtain data directly from Zenodo: [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.165147.svg)](https://doi.org/10.5281/zenodo.165147)
->   - Download `input_data.zip` and unzip it
->   - Upload all files to your history.
-> <br><br>
+> - Option 2: From your Zenodo:
+>   - Data is available from Zenodo here: [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.800651.svg)](https://doi.org/10.5281/zenodo.800651)
+>   - In the file upload menu choose the `Paste/Fetch data` option and enter the following urls to import the file from Zenodo to Galaxy directly
+>    > ### {% icon solution %} Solution
+>    > ```
+>    > https://zenodo.org/record/800651/files/F3D0_R1.fastq
+>    > https://zenodo.org/record/800651/files/F3D0_R2.fastq
+>    > https://zenodo.org/record/800651/files/F3D141_R1.fastq
+>    > https://zenodo.org/record/800651/files/F3D141_R2.fastq
+>    > https://zenodo.org/record/800651/files/F3D142_R1.fastq
+>    > https://zenodo.org/record/800651/files/F3D142_R2.fastq
+>    > https://zenodo.org/record/800651/files/F3D143_R1.fastq
+>    > https://zenodo.org/record/800651/files/F3D143_R2.fastq
+>    > https://zenodo.org/record/800651/files/F3D144_R1.fastq
+>    > https://zenodo.org/record/800651/files/F3D144_R2.fastq
+>    > https://zenodo.org/record/800651/files/F3D145_R1.fastq
+>    > https://zenodo.org/record/800651/files/F3D145_R2.fastq
+>    > https://zenodo.org/record/800651/files/F3D146_R1.fastq
+>    > https://zenodo.org/record/800651/files/F3D146_R2.fastq
+>    > https://zenodo.org/record/800651/files/F3D147_R1.fastq
+>    > https://zenodo.org/record/800651/files/F3D147_R2.fastq
+>    > https://zenodo.org/record/800651/files/F3D148_R1.fastq
+>    > https://zenodo.org/record/800651/files/F3D148_R2.fastq
+>    > https://zenodo.org/record/800651/files/F3D149_R1.fastq
+>    > https://zenodo.org/record/800651/files/F3D149_R2.fastq
+>    > https://zenodo.org/record/800651/files/F3D150_R1.fastq
+>    > https://zenodo.org/record/800651/files/F3D150_R2.fastq
+>    > https://zenodo.org/record/800651/files/F3D1_R1.fastq
+>    > https://zenodo.org/record/800651/files/F3D1_R2.fastq
+>    > https://zenodo.org/record/800651/files/F3D2_R1.fastq
+>    > https://zenodo.org/record/800651/files/F3D2_R2.fastq
+>    > https://zenodo.org/record/800651/files/F3D3_R1.fastq
+>    > https://zenodo.org/record/800651/files/F3D3_R2.fastq
+>    > https://zenodo.org/record/800651/files/F3D5_R1.fastq
+>    > https://zenodo.org/record/800651/files/F3D5_R2.fastq
+>    > https://zenodo.org/record/800651/files/F3D6_R1.fastq
+>    > https://zenodo.org/record/800651/files/F3D6_R2.fastq
+>    > https://zenodo.org/record/800651/files/F3D7_R1.fastq
+>    > https://zenodo.org/record/800651/files/F3D7_R2.fastq
+>    > https://zenodo.org/record/800651/files/F3D8_R1.fastq
+>    > https://zenodo.org/record/800651/files/F3D8_R2.fastq
+>    > https://zenodo.org/record/800651/files/F3D9_R1.fastq
+>    > https://zenodo.org/record/800651/files/F3D9_R2.fastq
+>    > https://zenodo.org/record/800651/files/Mock_R1.fastq
+>    > https://zenodo.org/record/800651/files/Mock_R2.fastq
+>    > ```
+>    {: .solution }
+> <br>
 >
 > 3. **Import Reference Data.**  Go back to the data library and import the following reference
-> datasets, or download them from Zenodo (`reference_data.zip`) and upload them to your history:
+> datasets, or import them from Zenodo:
 >  - `silva.v4.fasta`
 >  - `HMP_MOCK.v35.fasta`
+>  - `mouse.dpw.metadata`
+>  - `mouse.time.design`
 >  - `trainset9_032012.pds.fasta`
 >  - `trainset9_032012.pds.tax`
 >
+>    > ### {% icon solution %} Solution
+>    > ```
+>    > https://zenodo.org/record/800651/files/HMP_MOCK.v35.fasta
+>    > https://zenodo.org/record/800651/files/mouse.dpw.metadata
+>    > https://zenodo.org/record/800651/files/mouse.time.design
+>    > https://zenodo.org/record/800651/files/silva.v4.fasta
+>    > https://zenodo.org/record/800651/files/trainset9_032012.pds.fasta
+>    > https://zenodo.org/record/800651/files/trainset9_032012.pds.tax
+>    > ```
+>    {: .solution }
 {: .hands_on}
 
 Now that's a lot of files to manage. Luckily Galaxy can make life a bit easier by allowing us to create
@@ -180,7 +234,7 @@ remembering which reads came from which samples using a *group* file.
 
 #### Make contigs from paired-end reads
 
-In this experiment we used paired-end sequencing, this means sequencing was done from from both ends of each
+In this experiment we used paired-end sequencing, this means sequencing was done from both ends of each
 fragment, resulting in an overlap in the middle. We will now combine these pairs of reads into *contigs*.
 
 ![Merging into contigs](../../images/16S_merge_contigs.png)
@@ -189,7 +243,7 @@ fragment, resulting in an overlap in the middle. We will now combine these pairs
 > ### {% icon hands_on %} Hands-on: Combine forward and reverse reads into contigs
 >
 > - **Make.contigs** {% icon tool %} with the following parameters
->   - "Way to provide files" to the *Multiple pairs - Combo mode*
+>   - "Way to provide files" to `Multiple pairs - Combo mode`
 >   - "Fastq pairs" to the collection you just created
 >   - Leave all other parameters to the default settings <br><br>
 >
@@ -220,7 +274,7 @@ Next we want to improve the quality of our data. But first, let's get a feel of 
 >
 > - **Summary.seqs** {% icon tool %} with the following parameters
 >   - "fasta" parameter to the `trim.contigs.fasta` file created by the make.contigs tool
->   - We do not need to supply a names or count file
+>   - "Output logfile?" to `yes`
 >
 {: .hands_on}
 
@@ -246,7 +300,7 @@ are supposed to be 251 bp each. This read clearly didn't assemble well (or at al
 least 2.5% of our sequences had some ambiguous base calls. We'll take care of these issues in the next
 step when we run `screen.seqs`.
 
-The following tool will remove any sequences with ambiguous bases and anything longer than 275 bp.
+The following tool will remove any sequences with ambiguous bases (`maxambig` parameter) and anything longer than 275 bp (`maxlength` parameter).
 
 > ### {% icon hands_on %} Hands-on: Filter reads based on quality and length
 >
@@ -260,13 +314,13 @@ The following tool will remove any sequences with ambiguous bases and anything l
 > >
 > > How many reads were removed in this screening step? (Hint: run the summary.seqs tool again)
 > >
-> >    <details>
-> >    <summary>Click to view answer</summary>
-> >    23,488. <br>
-> >    This can be determined by looking at the number of lines in bad.accnos output of screen.seqs
-> >    or by comparing the total number of seqs between of the summary log before and after this screening
-> >    step
-> >    </details>
+> >    > ### {% icon solution %} Solution
+> >    > 23,488.
+> >    > 
+> >    > This can be determined by looking at the number of lines in bad.accnos output of screen.seqs
+> >    > or by comparing the total number of seqs between of the summary log before and after this screening
+> >    > step
+> >    {: .solution }
 > {: .question}
 {: .hands_on}
 
@@ -281,21 +335,17 @@ times, we'll unique our sequences using the `unique.seqs` command:
 >
 > - **Unique.seqs** {% icon tool %} with the following parameters
 >   - "fasta" to the `good.fasta` output from Screen.seqs
->
+>   - "output format" to `Name File`
 >
 > > ### {% icon question %} Question
 > >
 > > How many sequences were unique? how many duplicates were removed?
 > >
-> >    <details>
-> >    <summary>Click to view answer</summary>
-> >    16,426 unique sequences and 112,446 duplicates. <br>
-> >    This can be determined from the number of lines in the fasta (or names) output, compared to the
-> >    number of lines in the fasta file before this step. The log file also contains a line showing the
-> >    total number of sequences before and the command: <br><br>
-> >    mothur > unique.seqs(fasta=fasta.dat) <br>
-> >    128872	16426
-> >    </details>
+> >    > ### {% icon solution %} Solution
+> >    > 16,426 unique sequences and 112,446 duplicates.
+> >    >
+> >    > This can be determined from the number of lines in the fasta (or names) output, compared to the
+> >    > number of lines in the fasta file before this step.
 > {: .question}
 {: .hands_on}
 
@@ -352,6 +402,7 @@ step to perform to improve the clustering of your OTUs [[Schloss 2013]](https://
 > 2. **Summary.seqs** {% icon tool %} with the following parameters
 >   - "fasta" parameter to the aligned output from previous step
 >   - "count" parameter to `count_table` output from Count.seqs
+>   - "Output logfile?" to `yes`
 >
 {: .hands_on}
 
@@ -381,8 +432,8 @@ amplification.
 
 To make sure that everything overlaps the same region we'll re-run screen.seqs to get sequences that
 start at or before position 1968 and end at or after position 11550. We'll also set the maximum
-homopolymer length to 8 since there's nothing in the database with a stretch of 9 or more of the same
-base in a row (this also could have been done in the first execution of screen.seqs above).
+homopolymer length to 8 (`maxhomop` parameter) since there's nothing in the database with a stretch of 9 or more of the same
+base in a row (this also could have been done in the first execution of `screen.seqs` above).
 
 > ### {% icon hands_on %} Hands-on: Remove poorly aligned sequences
 >
@@ -398,10 +449,9 @@ base in a row (this also could have been done in the first execution of screen.s
 > > ### {% icon question %} Question
 > >
 > >  How many sequences were removed in this step?
-> > <details>
-> >   <summary> Click to view answer</summary>
-> >   128 sequences were removed. This is the number of lines in the bad.accnos output.
-> > </details>
+> > > ### {% icon solution %} Solution
+> > > 128 sequences were removed. This is the number of lines in the bad.accnos output.
+> > {: .solution }
 > {: .question}
 {: .hands_on}
 
@@ -416,8 +466,9 @@ losing any information. We'll do all this with filter.seqs:
 >
 > - **Filter.seqs** {% icon tool %} with the following parameters
 >   - "fasta"" to good.fasta output from Sreen.seqs
->   - "vertical" to Yes
+>   - "Vertical" to `yes`
 >   - "trump" to `.`
+>   - "Output logfile" to `yes`
 {: .hands_on}
 
 In the log file we see the following information:
@@ -443,12 +494,10 @@ columns. Because we've perhaps created some redundancy across our sequences by t
 > > ### {% icon question %} Question
 > >
 > >  How many duplicate sequences did our filter step produce?
-> > <details>
-> >   <summary> Click to view answer</summary>
-> >   3. <br>
-> >   This can be seen in the log file, which tells us the number of sequences was reduced from 16298 to
-> >   16295
-> > </details>
+> >
+> > > ### {% icon solution %} Solution
+> > > 3. The number of unique sequences was reduced from 16298 to 16295
+> > {: .solution }
 > {: .question}
 {: .hands_on}
 
@@ -470,11 +519,9 @@ merged. We generally recommend allowing 1 difference for every 100 basepairs of 
 > > ### {% icon question %} Question
 > >
 > >  How many unique sequences are we left with after this clustering of highly similar sequences?
-> > <details>
-> >   <summary> Click to view answer</summary>
-> >   5672. <br>
-> >   This is the number of lines in the fasta output
-> > </details>
+> > > ### {% icon solution %} Solution
+> > > 5720. This is the number of lines in the fasta output
+> > {: .solution }
 > {: .question}
 {: .hands_on}
 
@@ -488,8 +535,8 @@ removing sequencing artefacts known as chimeras.
 > (slide credit: [http://slideplayer.com/slide/4559004/ ](http://slideplayer.com/slide/4559004/ ))
 {: .tip}
 
-We'll do this chimera removal using the `UCHIME` algorithm that is called within Mothur, using the
-`chimera.uchime` command. This command will split the data by sample and check for chimeras.
+We'll do this chimera removal using the `VSEARCH` algorithm that is called within Mothur, using the
+`chimera.vsearch` command. This command will split the data by sample and check for chimeras.
 
 Our preferred way of doing this is to use the abundant sequences as our reference. In addition, if a sequence
 is flagged as chimeric in one sample, the default (`dereplicate=No`) is to remove it from all samples. Our
@@ -498,29 +545,28 @@ when they're the most abundant sequence in another sample. This is how we do it:
 
 > ### {% icon hands_on %} Hands-on: Remove chimeric sequences
 >
-> - **Chimera.uchime** {% icon tool %} with the following parameters
+> - **Chimera.vsearch** {% icon tool %} with the following parameters
 >   - "fasta" to the fasta output from Pre.cluster
 >   - "Select Reference Template from" to `Self`
 >   - "count" to the count table from the last Pre.cluster
 >   - "dereplicate" to Yes
 >
-> Running chimera.uchime with the count file will remove the chimeric sequences from the count table, but we
+> Running chimera.vsearch with the count file will remove the chimeric sequences from the count table, but we
 > still need to remove those sequences from the fasta file as well. We do this using remove.seqs:
 >
 > - **Remove.seqs** {% icon tool %} with the following parameters
->   - "accnos" to the uchime.accnos file from Chimera.uchime
+>   - "accnos" to the vsearch.accnos file from Chimera.vsearch
 >   - "fasta" to the fasta output from Pre.cluster
->   - "count" to the count table from Chimera.uchime
+>   - "count" to the count table from Chimera.vsearch
 >
 > > ### {% icon question %} Question
 > >
 > >  How many sequences were flagged as chimeric? what is the percentage? (Hint: summary.seqs)
-> > <details>
-> >   <summary> Click to view answer</summary>
-> >   If we run summary.seqs on the resulting fasta file and count table, we see that we went from 128,655
-> >   sequences down to 119,330 sequences in this step, for a reduction of 7.3%. This is a reasonable number of
-> >   sequences to be flagged as chimeric.
-> > </details>
+> > > ### {% icon solution %} Solution
+> > > If we run summary.seqs on the resulting fasta file and count table, we see that we went from 128,655
+> > > sequences down to 118,091 sequences in this step, for a reduction of 8.2%. This is a reasonable number of
+> > > sequences to be flagged as chimeric.
+> > {: .solution }
 > {: .question}
 {: .hands_on}
 
@@ -546,7 +592,6 @@ Let's go ahead and classify those sequences using the Bayesian classifier with t
 >   - "reference" to `trainset9032012.pds.fasta` from your history
 >   - "taxonomy" to `trainset9032012.pds.tax` from your history
 >   - "count" to the count table file from Remove.seqs
->   - "cutoff" to 80
 >
 > Have a look at the taxonomy output. You will see that every read now has a classification.
 >
@@ -565,17 +610,18 @@ Let's go ahead and classify those sequences using the Bayesian classifier with t
 > > 1. How many unique (representative) sequences were removed in this step?
 > > 2. How many sequences in total?
 > >
-> >    <details>
-> >      <summary> Click to view answer</summary><br>
-> >      20 representative sequences were removed. <br>
-> >      The fasta file output from Remove.seqs had 2628 sequences while the fasta output from Remove.lineages
-> >      contained 2608 sequences.
-> >      <br><br>
-> >      162 total sequences were removed. <br>
-> >      If you run summary.seqs with the count table, you will see that we now have 2608 unique sequences
-> >      representing a total of 119,168 total sequences (down from 119,330 before). This means 162 of our  
-> >      sequences were in represented by these 20 representative sequences.
-> >    </details>
+> >    > ### {% icon solution %} Solution
+> >    > 20 representative sequences were removed.
+> >    >
+> >    > The fasta file output from Remove.seqs had 2281 sequences while the fasta output from Remove.lineages
+> >    > contained 2261 sequences.
+> >    >
+> >    > 162 total sequences were removed.
+> >    >
+> >    > If you run summary.seqs with the count table, you will see that we now have 2261 unique sequences
+> >    > representing a total of 117,929 total sequences (down from 118,091 before). This means 162 of our
+> >    > sequences were in represented by these 20 representative sequences.
+> >    {: .solution }
 > {: .question}
 {: .hands_on}
 
@@ -597,10 +643,10 @@ you to see how well your curation is going, and whether something is wrong with 
 > **Mock community:** A defined mixture of microbial cells and/or viruses or nucleic acid molecules created
 > *in vitro* to simulate the composition of a microbiome sample or the nucleic acid isolated therefrom.
 >
-{: .note}
+{: .comment}
 
 Our mock community is composed of genomic DNA from 21 bacterial strains. So in a perfect world, this is
-exactly what we would expect the analysis to produce as a result.   
+exactly what we would expect the analysis to produce as a result.
 
 First, let's extract the sequences belonging to our mock samples from our data:
 
@@ -612,17 +658,18 @@ First, let's extract the sequences belonging to our mock samples from our data:
 >   - "group file or count table" to the count table from Remove.lineage
 >   - "groups" to `Mock`
 >   - "fasta" to fasta output from Remove.lineage
+>   - "output logfile?" to `yes`
 >
 {: .hands_on}
 
 In the log file we see the following:
 
 ```
-Selected 67 sequences from your fasta file.
-Selected 4060 sequences from your count file
+Selected 58 sequences from your fasta file.
+Selected 4046 sequences from your count file
 ```
 
-This tells us that we had 67 unique sequences and a total of 4,060 total sequences in our Mock sample. We
+This tells us that we had 58 unique sequences and a total of 4,046 total sequences in our Mock sample. We
 can now use the `seq.error` command to measure the error rates based on our mock reference. Here we align
 the reads from our mock sample back to their known sequences, to see how many fail to match.
 
@@ -631,13 +678,13 @@ the reads from our mock sample back to their known sequences, to see how many fa
 >   - "fasta" to the fasta from Get.groups
 >   - "reference" to `HMP_MOCK.v35.fasta` file from your history
 >   - "count" to the count table from Get.groups
+>   - "output log?" to `yes`
 >
 {: .hands_on}
 
  In the log file we see something like this:
 
 ```
-It took 0 to read 32 sequences.
 Overall error rate:    6.5108e-05
 Errors    Sequences
 0    3998
@@ -645,6 +692,7 @@ Errors    Sequences
 2    0
 3    2
 4    1
+[..]
 ```
 
 That rocks, eh? Our error rate is 0.0065%!
@@ -659,7 +707,7 @@ We can now cluster the mock sequences into OTUs to see how many spurious OTUs we
 > In 16S metagenomics approaches, OTUs are clusters of similar sequence variants of the 16S rDNA marker gene
 > sequence. Each of these clusters is intended to represent a taxonomic unit of a bacteria species or genus
 > depending on the sequence similarity threshold. Typically, OTU cluster are defined by a 97% identity
-> threshold of the 16S gene sequence variants at genus level. 98% or 99% identity is suggested for species
+> threshold of the 16S gene sequence variants at species level. 98% or 99% identity is suggested for strain
 > separation.
 >
 > ![OTU graph](../../images/OTU_graph.png)
@@ -675,7 +723,7 @@ We can now cluster the mock sequences into OTUs to see how many spurious OTUs we
 > - **Dist.seqs** {% icon tool %} with the following parameters
 >   - "fasta" to the fasta from Get.groups
 >   - "cutoff" to `0.20`
->  
+>
 > Next we group sequences into OTUs
 >
 > - **Cluster** {% icon tool %} with the following parameters
@@ -697,11 +745,10 @@ We can now cluster the mock sequences into OTUs to see how many spurious OTUs we
 > > ### {% icon question %} Question
 > >
 > >  How many OTUs were identified in our mock community?
-> > <details>
-> >   <summary> Click to view answer</summary>
-> >   34. <br>
-> >   Open the shared file or OTU list and look at the header line. You will see a column for each OTU
-> >  </details>
+> > > ### {% icon solution %} Solution
+> > > 34.
+> > > Open the shared file or OTU list and look at the header line. You will see a column for each OTU
+> > {: .solution }
 > {: .question}
 {: .hands_on}
 
@@ -710,7 +757,7 @@ We can now cluster the mock sequences into OTUs to see how many spurious OTUs we
 Open the rarefaction output (dataset named `sobs` inside the `rarefaction curves` output collection).
 You'll see that for 4060 sequences, we'd have 34 OTUs from the Mock community. This number of course
 includes some stealthy chimeras that escaped our detection methods. If we used 3000 sequences, we would
-have about 31 OTUs. In a perfect world with no chimeras and no sequencing errors, we'd have 21 OTUs.
+have about 31 OTUs. In a perfect world with no chimeras and no sequencing errors, we'd have 20 OTUs.
 This is not a perfect world. But this is pretty darn good!
 
 > ### {% icon tip %} Background: Rarefaction
@@ -726,7 +773,7 @@ This is not a perfect world. But this is pretty darn good!
 > Green, most or all species have been sampled; blue, this habitat has not been exhaustively sampled; red,
 > species rich habitat, only a small fraction has been sampled.
 >
-> (*A Primer on Metagenomics*, Wooley et al. 2010, https://dx.doi.org/10.1371/journal.pcbi.1000667)
+> (*A Primer on Metagenomics*, Wooley et al. 2010, https://doi.org/10.1371/journal.pcbi.1000667)
 {: .tip}
 
 Now that we have assessed our error rates we are ready for some real analysis.
@@ -772,9 +819,9 @@ of *Order*. This is the approach that we  generally use in the Schloss lab.
 >   - "Split by" to `Classification using fasta`
 >   - "fasta" to the fasta output from Remove.groups
 >   - "taxonomy" to the taxonomy output from Remove.groups
+>   - "name file or count table" to the count table output from Remove.groups
 >   - "taxlevel" to `4`
->   - "count" to the count table output from Remove.groups
->   - "cutoff" to `0.15`
+>   - "cutoff" to `0.03`
 >
 > Next we want to know how many sequences are in each OTU from each group and we can do this using the
 > `Make.shared` command. Here we tell Mothur that we're really only interested in the 0.03 cutoff level:
@@ -801,17 +848,33 @@ Opening the taxonomy output for level 0.03 shows a file structured like the foll
 ```
 OTU       Size    Taxonomy
 ..
-Otu0008	5377	Bacteria(100);"Bacteroidetes"(100);"Bacteroidia"(100);"Bacteroidales"(100);"Rikenellaceae"(100);Alistipes(100);
-Otu0009	3619	Bacteria(100);"Bacteroidetes"(100);"Bacteroidia"(100);"Bacteroidales"(100);"Porphyromonadaceae"(100);unclassified(100);
-Otu0010	3239	Bacteria(100);Firmicutes(100);Bacilli(100);Lactobacillales(100);Lactobacillaceae(100);Lactobacillus(100);
-Otu0011	2960	Bacteria(100);"Bacteroidetes"(100);"Bacteroidia"(100);"Bacteroidales"(100);"Porphyromonadaceae"(100);unclassified(100);
-Otu0012	2134	Bacteria(100);"Bacteroidetes"(100);"Bacteroidia"(100);"Bacteroidales"(100);"Porphyromonadaceae"(100);unclassified(100);
-Otu0013	1922	Bacteria(100);Firmicutes(100);Bacilli(100);Lactobacillales(100);Lactobacillaceae(100);Lactobacillus(100);
+Otu0008	5260	Bacteria(100);"Bacteroidetes"(100);"Bacteroidia"(100);"Bacteroidales"(100);"Rikenellaceae"(100);Alistipes(100);
+Otu0009	3613	Bacteria(100);"Bacteroidetes"(100);"Bacteroidia"(100);"Bacteroidales"(100);"Porphyromonadaceae"(100);"Porphyromonadaceae"_unclassified(100);
+Otu0010	3058	Bacteria(100);Firmicutes(100);Bacilli(100);Lactobacillales(100);Lactobacillaceae(100);Lactobacillus(100);
+Otu0011	2958	Bacteria(100);"Bacteroidetes"(100);"Bacteroidia"(100);"Bacteroidales"(100);"Porphyromonadaceae"(100);"Porphyromonadaceae"_unclassified(100);
+Otu0012	2134	Bacteria(100);"Bacteroidetes"(100);"Bacteroidia"(100);"Bacteroidales"(100);"Porphyromonadaceae"(100);"Porphyromonadaceae"_unclassified(100);
+Otu0013	1856	Bacteria(100);Firmicutes(100);Bacilli(100);Lactobacillales(100);Lactobacillaceae(100);Lactobacillus(100);
 ..
 ```
 
-This file tells you that Otu008 was observed 5377 times in your samples and that all of the
+This file tells you that Otu008 was observed 5260 times in your samples and that all of the
 sequences (100%) were classified as being members of the Alistipes.
+
+> ### {% icon question %} Question
+>
+> Which samples contained sequences belonging to an OTU classified as Staphylococcus?
+>
+> > ### {% icon solution %} Solution
+> > Examine the tax.summary file.
+> {: .solution }
+>
+> > ### {% icon solution %} Solution
+> > Samples F3D141, F3D142,  F3D144, F3D145, F3D2. This answer can be found by
+> > examining the tax.summary output and finding the columns with nonzero
+> > values for the line of Staphylococcus
+> {: .solution }
+{: .question}
+
 
 In this tutorial we will continue with this otu-based approach, for the phylotype and phylogenic
 approaches, please refer to the [Mothur wiki page](https://www.mothur.org/wiki/MiSeq_SOP).
@@ -833,7 +896,7 @@ animal) followed by a D and a three digit number (number of days post weaning).
 > - **Count.groups** {% icon tool %} with the following parameters
 >   - "shared" to the shared file from Make.shared
 >
-> Take a look at the output. We see that our smallest sample had 2440 sequences in it. That is a reasonable
+> Take a look at the output. We see that our smallest sample had 2389 sequences in it. That is a reasonable
 > number. Despite what some say, subsampling and rarefying your data is an important thing to do.
 >
 > We'll generate a subsampled file for our analyses with the `Sub.sample` command:
@@ -841,16 +904,15 @@ animal) followed by a D and a three digit number (number of days post weaning).
 > - **Sub.sample** {% icon tool %} with the following parameters
 >   - "Select type of data to subsample" to `OTU Shared`
 >   - "shared" to output from Make.shared
->   - "size" to `2440`
+>   - "size" to `2389`
 >
 > > ### {% icon question %} Question
 > >
 > >  What would you exect the result of `count.groups` on this new shared output collection to be? Check if you are correct.
-> > <details>
-> >   <summary> Click to view answer</summary>
-> >   all groups (samples) should now have 2440 sequences. Run count.groups again on the shared output collection by the sub.sample
-> >   tool to confirm that this is indeed what happened.
-> >  </details>
+> > > ### {% icon solution %} Solution
+> > > all groups (samples) should now have 2440 sequences. Run count.groups again on the shared output collection by the sub.sample
+> > > tool to confirm that this is indeed what happened.
+> > {: .solution }
 > {: .question}
 >
 > **Note:** since subsampling is a stochastic process, your results from any tools using this subsampled data
@@ -941,7 +1003,7 @@ let's randomly select 2440 sequences from each sample 1000 times and calculate t
 > - **Summary.single** {% icon tool %} with the following parameters
 >   - "share" to shared file from Make.shared
 >   - "calc" to `nseqs,coverage,sobs,invsimpson`
->   - "size" to 2440
+>   - "size" to 2389
 {: .hands_on}
 
 The data will be outputted to a table called the *summary file*:
@@ -978,24 +1040,24 @@ repeated-measures ANOVA and find that there was no significant difference based 
 
 Beta diversity is a measure of the similarity of the membership and structure found between *different* samples.
 The default calculator in the following section is *thetaYC*, which is the [Yue & Clayton theta similarity
-coefficient](https://doi.org/10.1080/STA-200066418)
+coefficient](http://csyue.nccu.edu.tw/2005communicationindex.pdf)
 
 > ### {% icon hands_on %} Hands-on: Beta diversity
 >
-> Let's calculate . We'll do this
+> Let's calculate. We'll do this
 > with the `Dist.shared` command that will allow us to rarefy our data to a common number of sequences.
 >
 > - **Dist.shared** {% icon tool %} with the following parameters
 >   - "shared" to the shared file from Make.shared
 >   - "calc" to thetayc,jclass
->   - "subsample" to 2440
+>   - "subsample" to 2389
 >
 > Let's visualize our data in a Heatmap
 >
 > - **Heatmap.sim** {% icon tool %} with the following parameters
 >   - "Generate Heatmap for" to `phylip`
 >   - "phylip" to output by Dist.shared (this is a collection input)
->  
+>
 > <!-- TODO: way to view the SVGs inside Galaxy? -->
 {: .hands_on}
 
@@ -1061,7 +1123,78 @@ of the others.
 
 ![Jclass tree](../../images/tree.jclass.png)
 
-### Determine statistical significance of clusterings
+
+# Visualisations
+
+Mothur does not have a lot of visualization tools built in, but external tools may be used for this. For
+instance we can convert our shared file to the more widely used `biom` format and view it in a platform like
+[Phinch](http://www.phinch.org/).
+
+## Phinch
+
+> ### {% icon hands_on %} Hands-on: Phinch
+>
+> - **Make.biom** {% icon tool %} with the following parameters
+>   - "shared" to Subsample.shared
+>   - "constaxonomy" to taxonomy output from Classify.otu (collection)
+>   - "metadata" to `mouse.dpw.metadata`
+>
+> The Galaxy project runs an instance of Phinch, and if you look at the output biom file, you will see a link
+> to view the file at Phinch:
+>
+> ![Icon to view at Phinch](../../../../shared/images/viewatphinch.png)
+>
+> Clicking on this link will lead you to the Phinch website, which will automatically load in your file, and
+> where you can several interactive visualisations:
+>
+> ![Phinch overview](../../../../shared/images/phinch_overviewpage.png)
+>
+> > ### {% icon comment %} Comment
+> >
+> > If this link is not present on your Galaxy, you can download the generated BIOM file and upload directly to Phinch server at [http://phinch.org](http://phinch.org).
+> {: .comment}
+{: .hands_on}
+
+## Krona
+
+A second tool we can use to visualize our data, is [Krona]()
+
+> ### {% icon hands_on %} Hands-on: Krona
+>
+>  First we convert our mothur taxonomy file to a format compatible with Krona
+>
+> - **Taxonomy-to-Krona** {% icon tool %} with the following parameters
+>   - "Taxonomy file" to the taxonomy output from Classify.otu (collection)
+>
+> - **Krona pie chart** {% icon tool %} with the following parameters
+>   - "Type of input" to `Tabular`
+>   - "Input file" to taxonomy output from Classify.otu (collection)
+{: .hands_on}
+
+The resulting file is an HTML file containing an interactive visualization. For instance try double-clicking the
+innermost ring labeled "Bacteria"
+
+![Krona](../../images/krona.png)
+
+> ### {% icon question %} Question
+>
+>  What percentage of your sample was labelled `Lactobacillus`?
+>
+> > ### {% icon solution %} Solution
+> > Explore the Krona plot, double click on Firmicutes, here you should see Lactobacillus
+> > clearly (16% in our case), click on this segment and the right-hand side will show you the percentages at
+> > any point in the hierarchy (here 5% of all)
+> >
+> > ![image showing view with Lactobacillus highlighted](../../images/krona_lacto.png)
+> {: .solution }
+{: .question}
+
+Well done! you have completed the basics of the mothur SOP. Below are some more exercises for those who wish to
+go into more details about statistical significance testing and population-level analysis.
+
+# Extra Credit
+
+## Determine statistical significance of clusterings
 
 We can perform a test to determine whether the clustering within the tree is statistically significant or not
 using by choosing from the `parsimony`, `unifrac.unweighted`, or `unifrac.weighted` commands. To run these we
@@ -1069,13 +1202,12 @@ will first need to create a design file that indicates which treatment each samp
 
 > ### {% icon hands_on %} Hands-on: Obtain design file
 >
-> - Import the file called `mouse.time.design` to your history
->   - Go to the shared data library or the files you downloaded from Zenodo.
+> - Find the file `mouse.time.design` in your history (you imported this file at the start of this tutorial)
 > - Make sure the datatype is set to `mothur.design`.
 >
 > > ### {% icon tip %} Changing datatype of a datasets
 > >  - Click on the **pencil icon** of the dataset
-> >  - Click on the **Datatype** tab
+> >  - Click on the **Datatypes** tab
 > >  - Select the new datatype from dropdown menu
 > >  - Click **Save**
 > {: .tip}
@@ -1114,13 +1246,14 @@ early vs. late comparisons for each mouse:
 > - **Parsimony** {% icon tool %} with the following parameters
 >   - "tree" to the `tre` output from Tree.Shared (collection)
 >   - "group" to the design file described above
+>   - "output logfile?" to `yes`
 {: .hands_on}
 
 In the logfile for `thetayc.0.03.lt.ave` we see
 
 ```
 Tree#   Groups      ParsScore   ParsSig
-1       Early-Late  1           0.001
+1       Early-Late  1           <0.001
 ```
 
 There was clearly a significant difference between the clustering of the early and late time points.
@@ -1173,6 +1306,7 @@ tool:
 >
 > - **Nmds** {% icon tool %} with the following parameters
 >   - "phylip" to dist files from Dist.shared (collection)
+>   - "output logfile?" to `yes`
 >
 > Opening the `stress` file for `thetayc.0.03.lt.ave` we can inspect the stress and R^2 values, which describe
 > the quality of the ordination. Each line in this file represents a different iteration and the configuration
@@ -1191,15 +1325,15 @@ tool:
 >   - "phylip" to dist files collection from Dist.shared
 >   - "mindim" to `3`
 >   - "maxdim" to `3`
+>   - "output logfile?" to `yes`
 >
 > > ### {% icon question %} Question
 > >
 > > What are stress and R-squared values when using 3 dimensions?
 > >
-> > <details>
-> >   <summary> Click to view answer</summary>
-> >   The stress value drops to 0.05 and the R2 value goes up to 0.99 (see logfile). Not bad.
-> > </details>
+> > > ### {% icon solution %} Solution
+> > > The stress value drops to 0.05 and the R2 value goes up to 0.99 (see logfile). Not bad.
+> > {: .solution }
 > {: .question}
 {: .hands_on}
 
@@ -1221,6 +1355,7 @@ matrices we created earlier and does not actually use ordination.
 > - **Amova** {% icon tool %} with the following parameters
 >   - "phylip" to dist files from Dist.shared (collection)
 >   - "design" to mouse.time.design file from your history
+>   - "output logfile?" to `yes`
 {: .hands_on}
 
 in logfile for thetaYC we find:
@@ -1245,6 +1380,7 @@ samples using the `Homova` command:
 > - **Homova** {% icon tool %} with the following parameters
 >   - "phylip" to dist files from Dist.shared (collection)
 >   - "design" to mouse.time.design file from your history
+>   - "output logfile?" to `yes`
 {: .hands_on}
 
 ```
@@ -1354,6 +1490,7 @@ F3D9     9
 > <!-- TODO: add this tool to mothur suite -->
 > - **Get.communitytype** {% icon tool %} with the following parameters
 >   - "shared" to Subsample.shared file
+>   - "output logfile?" to `yes`
 >
 {: .hands_on}
 
@@ -1390,14 +1527,13 @@ the names of these organisms.
 >
 > What organisms were the top 5 contributing OTUs classified as?
 >
-> <details>
->   <summary> Click to view answer</summary>
->   Note down the names of the top 5 OTUs as output by thesummary output of get.communitytype.
->   Then look at the taxonomy file output by Classify.otu. <br><br>
->
->   In our example these top 5 OTUs were classified
->   as belonging to Porphyromonadaceae (top 3 OTUs), Alistipes and Lactobacillus.
-> </details>
+> > ### {% icon solution %} Solution
+> > Note down the names of the top 5 OTUs as output by thesummary output of get.communitytype.
+> > Then look at the taxonomy file output by Classify.otu.
+> >
+> > In our example these top 5 OTUs were classified
+> > as belonging to Porphyromonadaceae (top 3 OTUs), Alistipes and Lactobacillus.
+> {: .solution }
 {: .question}
 
 ## Population-level Analysis
@@ -1430,13 +1566,12 @@ These data tell us that OTUs 1, 2, and 3 was significantly different between the
 >
 >  Which of the top 10 OTUs in your output were significantly different between early and late samples?
 >
-> <details>
->  <summary> Click to view answer</summary>
->  Looking at the p-value cut-off and using your favorite cutoff threshold (say 0.01).
->  Answer to the question is all OTUs with a value lower than this threshold. Note that these OTU labels may
->  be different for you and may very between one repetition of this tutorial to the next, and therefore may
->  vary between you and your neighbour as well.
-> </details>
+> > ### {% icon solution %} Solution
+> > Looking at the p-value cut-off and using your favorite cutoff threshold (say 0.01).
+> > Answer to the question is all OTUs with a value lower than this threshold. Note that these OTU labels may
+> > be different for you and may very between one repetition of this tutorial to the next, and therefore may
+> > vary between you and your neighbour as well.
+> {: .solution }
 {: .question}
 
 Another non-parametric tool we can use as an alternative to metastats is lefse:
@@ -1501,62 +1636,6 @@ Otu0015    0.09
 Otu0082    0.08
 Otu0042    0.07
 ```
-
-# Step 4: Visualisations
-
-Mothur does not have a lot of visualization tools built in, but external tools may be used for this. For
-instance we can convert our shared file to the more widely used `biom` format and view it in a platform like
-[Phinch](http://www.phinch.org/).
-
-## Phinch
-
-> ### {% icon hands_on %} Hands-on: Phinch
->
-> - **Make.biom** {% icon tool %} with the following parameters
->   - "shared" to Subsample.shared
->   - "constaxonomy" to taxonomy output from Classify.otu (collection)
->   - "metadata" to `mouse.dpw.metadata`
->
-> The Galaxy project runs an instance of Phinch, and if you look at the output biom file, you will see a link
-> to view the file at Phinch:
->
-> ![Icon to view at Phinch](../../../../shared/images/viewatphinch.png)
->
-> Clicking on this link will lead you to the Phinch website, which will automatically load in your file, and
-> where you can several interactive visualisations:
->
-> ![Phinch overview](../../../../shared/images/phinch_overviewpage.png)
-{: .hands_on}
-
-## Krona
-
-A second tool we can use to visualize our data, is [Krona]()
-
-> ### {% icon hands_on %} Hands-on: Krona
->
-> - **Visualize with Krona** {% icon tool %} with the following parameters
->   - "input file" to taxonomy output from Classify.otu (collection)
->   - Set **Is this output from mothur?** to yes
-{: .hands_on}
-
-The resulting file is an HTML file containing an interactive visualization. For instance try double-clicking the
-innermost ring labeled "Bacteria"
-
-![Krona](../../images/krona.png)
-
-> ### {% icon question %} Question
->
->  what percentage of your sample was labelled `Lactobacillus`?
->
-> <details>
->   <summary> Click to view answer</summary>
->   Explore the Krona plot, double click on Firmicutes, here you should see Lactobacillus
->   clearly (16% in our case), click on this segment and the right-hand side will show you the percentages at
->   any point in the hierarchy (here 5% of all)
->
->  ![Lactobacillus in Krona](../../images/krona_lacto.png)
-> </details>
-{: .question}
 
 # Conclusion
 {:.no_toc}

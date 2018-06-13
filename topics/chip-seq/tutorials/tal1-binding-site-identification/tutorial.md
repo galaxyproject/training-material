@@ -7,7 +7,7 @@ tutorial_name: tal1-binding-site-identification
 # Introduction
 {:.no_toc}
 
-This tutorial uses ChIP-seq datasets from a study published by [*Wu et al.* (2014)](http://genome.cshlp.org/content/24/12/1945.full.pdf+html). The goal of this study was to investigate "the dynamics of occupancy and the role in gene regulation of the transcription factor TAL1, a critical regulator of hematopoiesis, at multiple stages of hematopoietic differentiation."
+This tutorial uses ChIP-seq datasets from a study published by [*Wu et al.* (2014)](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4248312/). The goal of this study was to investigate "the dynamics of occupancy and the role in gene regulation of the transcription factor TAL1, a critical regulator of hematopoiesis, at multiple stages of hematopoietic differentiation."
 
 To this end, ChIP-seq experiments were performed in multiple mouse cell types including G1E - a GATA-null immortalized cell line derived from targeted disruption of GATA-1 in mouse embryonic stem cells - and megakaryocytes.
 
@@ -67,13 +67,10 @@ As for any NGS data analysis, ChIP-seq data must be quality controlled before be
 >    > 1. What are four key features of a FASTQ file?
 >    > 2. What is the main difference between a FASTQ and a FASTA file?
 >    >
->    >    <details>
->    >    <summary>Click to view answers</summary>
->    >    <ol type="1">
->    >    <li>Sequence identifier and additonal information, the raw sequence, information about the sequence again with optional information, and quality information about the sequence</li>
->    >    <li>A fasta file contains only the description of the sequence and the sequence itself. A fasta file does not contain any quality information.</li>
->    >    </ol>
->    >    </details>
+>    >    > ### {% icon solution %} Solution
+>    >    > 1. Sequence identifier and additonal information, the raw sequence, information about the sequence again with optional information, and quality information about the sequence
+>    >    > 2. A fasta file contains only the description of the sequence and the sequence itself. A fasta file does not contain any quality information.
+>    >    {: .solution }
 >    {: .question}
 >
 > 4. **FastQC** {% icon tool %}: Run the tool **FastQC** on each FASTQ file to assess the quality of the raw data. An explanation of the results can be found on the [FastQC web page](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/).
@@ -91,13 +88,10 @@ As for any NGS data analysis, ChIP-seq data must be quality controlled before be
 >    > 1. What does the y-axis represent in Figure 3?
 >    > 2. Why is the quality score decreasing across the length of the reads?
 >    >
->    >    <details>
->    >    <summary>Click to view answers</summary>
->    >    <ol type="1">
->    >    <li>The phred-score. This score gives the probability of an incorrect base e.g. a score of 20 means that it is likely by 1% that one base is incorrect. See <a href="https://en.wikipedia.org/wiki/Phred_quality_score"> here </a>for more information. </li>
->    >    <li>This is an unsolved technical issue of the sequencing machines. The longer the sequences are the more likely are errors. More <a href="https://www.ecseq.com/support/ngs/why-does-the-sequence-quality-decrease-over-the-read-in-illumina">information.</a></li>
->    >    </ol>
->    >    </details>
+>    >    > ### {% icon solution %} Solution
+>    >    > 1. The phred-score. This score gives the probability of an incorrect base e.g. a score of 20 means that it is likely by 1% that one base is incorrect. See [here](https://en.wikipedia.org/wiki/Phred_quality_score) for more information.
+>    >    > 2. This is an unsolved technical issue of the sequencing machines. The longer the sequences are the more likely are errors. More [information.](https://www.ecseq.com/support/ngs/why-does-the-sequence-quality-decrease-over-the-read-in-illumina)
+>    >    {: .solution }
 >    {: .question}
 {: .hands_on}
 
@@ -127,13 +121,10 @@ It is often necessary to trim a sequenced read to remove bases sequenced with hi
 >    > 1. How did the range of read lengths change after trimming/clipping?
 >    > 2. What do you think could account for the enriched k-mers (**Kmer Content** heading in **FASTQC** output) observed in the Megakaryocytes TAL1 R2 ChIP-seq experiment?
 >    >
->    >    <details>
->    >    <summary>Click to view answers</summary>
->    >    <ol type="1">
->    >    <li>Before trimming, all the reads were the same length, which reflected the number of rounds of nucleotide incorporation in the sequencing experiment. After trimming, read lengths span a range of values reflecting different lengths of the actual DNA fragments captured during the ChIP experiement.</li>
->    >    <li>Many transcription factors recognize and bind to specific sequence motifs. Since a ChIP-seq experiment enriches for DNA fragments bound by the protein being immunopurified, we might expect that protein's recognition motif to be slightly enriched in the resulting sequenced reads.</li>
->    >    </ol>
->    >    </details>
+>    >    > ### {% icon solution %} Solution
+>    >    > 1. Before trimming, all the reads were the same length, which reflected the number of rounds of nucleotide incorporation in the sequencing experiment. After trimming, read lengths span a range of values reflecting different lengths of the actual DNA fragments captured during the ChIP experiement.
+>    >    > 2. Many transcription factors recognize and bind to specific sequence motifs. Since a ChIP-seq experiment enriches for DNA fragments bound by the protein being immunopurified, we might expect that protein's recognition motif to be slightly enriched in the resulting sequenced reads.
+>    >    {: .solution }
 >    {: .question}
 >
 >    ![fastqafter](../../images/fastqc_after.png "Sequence quality per base generated by **FastQC** <b>after</b> end trimming.")
@@ -161,13 +152,10 @@ Nowadays, there are many read alignment programs for sequenced DNA, `BWA` being 
 >    > 1. What datatype is the `BWA` output file?
 >    > 2. How many reads were mapped from each file?
 >    >
->    >    <details>
->    >    <summary>Click to view answers</summary>
->    >    <ol type="1">
->    >    <li> The output is a BAM file.</li>
->    >    <li>Check the number of lines for each file in your history. This gives you a rough estimate.</li>
->    >    </ol>
->    >    </details>
+>    >    > ### {% icon solution %} Solution
+>    >    > 1. The output is a BAM file.
+>    >    > 2. Check the number of lines for each file in your history. This gives you a rough estimate.
+>    >    {: .solution }
 >    {: .question}
 >
 > 3. **IdxStats** {% icon tool %}: Run the tool **IdxStats** on all mapped files and look at the output (poke it in the eye!).
@@ -178,21 +166,18 @@ Nowadays, there are many read alignment programs for sequenced DNA, `BWA` being 
 >    > 2. How many reads were mapped to chromosome 19 in each experiment?
 >    > 3. If the mouse genome has 21 pairs of chromosomes, what are the other reference chromosomes (*e.g.* chr1_GL456210_random)?
 >    >
->    >    <details>
->    >    <summary>Click to view answers</summary>
->    >    <ol type="1">
->    >    <li>
->    >      Column &emsp; Description</br>
->    >      ------------ &emsp;------------------</br>
->    >         1 &emsp; &emsp; &emsp;     Reference sequence identifier</br>
->    >         2 &emsp; &emsp; &emsp;     Reference sequence length</br>
->    >         3 &emsp; &emsp; &emsp;     Number of mapped reads</br>
->    >         4 &emsp; &emsp; &emsp;     Number of placed but unmapped reads  (typically unmapped partners of mapped reads)</li>
->    >    <li>This information can be seen in column 3, e.g. for Megakaryocyte_Tal1_R1 2143352 reads are mapped.</li>
->    >    <li>These are parts of chromosomes that e.g. for chr1_GL456210_random do belong to chr1 but it is unclear where exactly. There entires like chrUn that are not associated with a chromosome but it is believed that they are part of the genome. </li>
->    >
->    >    </ol>
->    >    </details>
+>    >    > ### {% icon solution %} Solution
+>    >    > 1. 
+>    >    >    Column | Description
+>    >    >    --- | ---
+>    >    >    1 | Reference sequence identifier
+>    >    >    2 | Reference sequence length
+>    >    >    3 | Number of mapped reads
+>    >    >    4 | Number of placed but unmapped reads (typically unmapped partners of mapped reads)
+>    >    >   
+>    >    > 2. This information can be seen in column 3, e.g. for Megakaryocyte_Tal1_R1 2143352 reads are mapped.
+>    >    > 3. These are parts of chromosomes that e.g. for chr1_GL456210_random do belong to chr1 but it is unclear where exactly. There entires like chrUn that are not associated with a chromosome but it is believed that they are part of the genome. 
+>    >    {: .solution }
 >    {: .question}
 {: .hands_on}
 
@@ -233,14 +218,11 @@ We expect that the replicate samples will cluster more closely to each other tha
 >     > 2. What happens if the Spearman correlation method is used instead of the Pearson method?
 >     > 3. What does the output of making a Scatterplot instead of a Heatmap look like?
 >    >
->    >    <details>
->    >    <summary>Click to view answers</summary>
->    >    <ol type="1">
->    >    <li>Large areas of zeros would lead to a correlation of these areas. The information we would get out of this computation would be meaningless. </li>
->    >    <li>The clusters are different, e.g. Megakaryocyte_input_R2 and G1E_input_R2 are clustered together. <a href="http://support.minitab.com/en-us/minitab-express/1/help-and-how-to/modeling-statistics/regression/supporting-topics/basics/a-comparison-of-the-pearson-and-spearman-correlation-methods/" > More information about Pearson and Spearman correlation. </a> </li>
->    >    <li>No solution for you, just compare the different outputs. </li>
->    >    </ol>
->    >    </details>
+>    >    > ### {% icon solution %} Solution
+>    >    > 1. Large areas of zeros would lead to a correlation of these areas. The information we would get out of this computation would be meaningless. 
+>    >    > 2. The clusters are different, e.g. Megakaryocyte_input_R2 and G1E_input_R2 are clustered together. [ More information about Pearson and Spearman correlation. ](http://support.minitab.com/en-us/minitab-express/1/help-and-how-to/modeling-statistics/regression/supporting-topics/basics/a-comparison-of-the-pearson-and-spearman-correlation-methods/)
+>    >    > 3. No solution for you, just compare the different outputs. 
+>    >    {: .solution }
 >     {: .question}
 >
 >     ![heatmap](../../images/plotCorrelation_heatmap_pearson_1kb.png "Heatmap of correlation matrix generated by **plotCorrelation**.")
@@ -275,15 +257,12 @@ We will now evaluate the quality of the immuno-precipitation step in the ChIP-se
 >    > 3. What do you think about the quality of the IP for this experiment?
 >    > 4. How does the quality of the IP for megakaryocytes compare to G1E cells?
 >    >
->    >    <details>
->    >    <summary>Click to view answers</summary>
->    >    <ol type="1">
->    >    <li>It shows us how good the ChIP Signal compared to the control signal is. An ideal control [input] with perfect uniform distribution of reads along the genome (i.e. without enrichments in open chromatin etc.) and infinite sequencing coverage should generate a straight diagonal line. A very specific and strong ChIP enrichment will be indicated by a prominent and steep rise of the cumulative sum towards the highest rank. </li>
->    >    <li>We expect that the control (input) signal is more or less uniform distributed over the genome (e.g. like the green line in the image above.) The IP dataset should look more like the red line but it would be better if the values for IP start to increase at around 0.8 on the x-axis. </li>
->    >    <li>The enrichment did not work as it should. Compare the blue line with the red one! For your future experiments: You can never have enough replicates! </li>
->    >    <li>The quality of megakaryocytes is better then G1E.</li>
->    >    </ol>
->    >    </details>
+>    >    > ### {% icon solution %} Solution
+>    >    > 1. It shows us how good the ChIP Signal compared to the control signal is. An ideal control [input] with perfect uniform distribution of reads along the genome (i.e. without enrichments in open chromatin etc.) and infinite sequencing coverage should generate a straight diagonal line. A very specific and strong ChIP enrichment will be indicated by a prominent and steep rise of the cumulative sum towards the highest rank. 
+>    >    > 2. We expect that the control (input) signal is more or less uniform distributed over the genome (e.g. like the green line in the image above.) The IP dataset should look more like the red line but it would be better if the values for IP start to increase at around 0.8 on the x-axis. 
+>    >    > 3. The enrichment did not work as it should. Compare the blue line with the red one! For your future experiments: You can never have enough replicates! 
+>    >    > 4. The quality of megakaryocytes is better then G1E.
+>    >    {: .solution }
 >    {: .question}
 {: .hands_on}
 
@@ -349,13 +328,9 @@ First, we will reformat the peak file before we send it to Trackster, and then w
 >    > 1. What do you see at the Runx1 locus in Trackster?
 >    > 2. What gene(s) other than Runx1 could be regulated by TAL1?
 >    >
->    >    <details>
->    >    <summary>Click to view answers</summary>
->    >    <ol type="1">
->    >    <li>Directly upstream of the shorter Runx1 gene models is a cluster of 3 TAL1 peaks that only appear in the G1E cell type, but not in Megakaryocytes. Further upstream, there are some shared TAL1 peaks in both cell types.</li>
->    >    <li></li>
->    >    </ol>
->    >    </details>
+>    >    > ### {% icon solution %} Solution
+>    >    > 1. Directly upstream of the shorter Runx1 gene models is a cluster of 3 TAL1 peaks that only appear in the G1E cell type, but not in Megakaryocytes. Further upstream, there are some shared TAL1 peaks in both cell types.
+>    >    {: .solution }
 >    {: .question}
 >
 >    ![runx1](../../images/Trackster_Runx1_locus.png "The Runx1 locus.")
@@ -400,14 +375,11 @@ We have processed ChIP-seq data from two stages of hematopoiesis and have lists 
 >    > 2. How many are unique to G1E cells?
 >    > 3. How many are unique to megakaryocytes?
 >    >
->    >    <details>
->    >    <summary>Click to view answers</summary>
->    >    <ol type="1">
->    >    <li>1 region</li>
->    >    <li>407 regions</li>
->    >    <li>139 regions</li>
->    >    </ol>
->    >    </details>
+>    >    > ### {% icon solution %} Solution
+>    >    > 1. 1 region
+>    >    > 2. 407 regions
+>    >    > 3. 139 regions
+>    >    {: .solution }
 >    {: .question}
 {: .hands_on}
 
@@ -494,13 +466,10 @@ We will now check whether the samples have more reads from regions of the genome
 >    > 1. Why would we worry more about checking for GC bias in an input file?
 >    > 2. Does this dataset have a GC bias?
 >    >
->    >    <details>
->    >    <summary>Click to view answers</summary>
->    >    <ol type="1">
->    >    <li>In an input ChIP-seq file, the expectation is that DNA fragments are uniformly sampled from the genome. This is in contrast to an IP ChIP-seq file where it is *expected* that certain genomic regions contain more reads  (i.e. regions that are bound by the protein that is immunopurified). Therefore, non-uniformity of reads in the input sample could be a result of GC-bias, whereby more GC-rich fragments are preferentially amplified during PCR.</li>
->    >    <li>To answer this question, run the **computeGCbias** tool as described above and check out the results. What do YOU think? For more examples and information on how to interpret the results, check out the tool usage documentation [here](https://deeptools.readthedocs.io/en/latest/content/tools/computeGCBias.html#background).</li>
->    >    </ol>
->    >    </details>
+>    >    > ### {% icon solution %} Solution
+>    >    > 1. In an input ChIP-seq file, the expectation is that DNA fragments are uniformly sampled from the genome. This is in contrast to an IP ChIP-seq file where it is *expected* that certain genomic regions contain more reads  (i.e. regions that are bound by the protein that is immunopurified). Therefore, non-uniformity of reads in the input sample could be a result of GC-bias, whereby more GC-rich fragments are preferentially amplified during PCR.
+>    >    > 2. To answer this question, run the **computeGCbias** tool as described above and check out the results. What do YOU think? For more examples and information on how to interpret the results, check out the tool usage documentation [here](https://deeptools.readthedocs.io/en/latest/content/tools/computeGCBias.html#background).
+>    >    {: .solution }
 >    {: .question}
 >
 > 2. **correctGCbias** {% icon tool %}: Explore the tool **correctGCbias** from the **deepTools** package.
@@ -511,14 +480,11 @@ We will now check whether the samples have more reads from regions of the genome
 >    > 2. What is the output of this tool?
 >    > 3. What are some caveats to be aware of if using the output of this tool in downstream analyses?
 >    >
->    >    <details>
->    >    <summary>Click to view answers</summary>
->    >    <ol type="1">
->    >    <li>The **corectGCbias** tool removes reads from regions with higher coverage than expected (typically corresponding to GC-rich regions) and adds reads to regions with lower coverage than expected (typically corresponding to AT-rich regions).</li>
->    >    <li>The output of this tool is a GC-corrected file in BAM, bigWig, or bedGraph format.</li>
->    >    <li>The GC-corrected output file likely contains duplicated reads in low-coverage regions where reads were added to match the expected read density. Therefore, it is necessary to *avoid* filtering or removing duplicate reads in any downstream analyses.</li>
->    >    </ol>
->    >    </details>
+>    >    > ### {% icon solution %} Solution
+>    >    > 1. The **corectGCbias** tool removes reads from regions with higher coverage than expected (typically corresponding to GC-rich regions) and adds reads to regions with lower coverage than expected (typically corresponding to AT-rich regions).
+>    >    > 2. The output of this tool is a GC-corrected file in BAM, bigWig, or bedGraph format.
+>    >    > 3. The GC-corrected output file likely contains duplicated reads in low-coverage regions where reads were added to match the expected read density. Therefore, it is necessary to *avoid* filtering or removing duplicate reads in any downstream analyses.
+>    >    {: .solution }
 >    {: .question}
 {: .hands_on}
 
