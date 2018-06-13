@@ -28,7 +28,7 @@ These tutorials can be used for learning and teaching how to use Galaxy for gene
 There are two distinct audiences for these materials.
 
 1. **Self-paced individual learners.** These tutorials provide everything you need to learn a topic, from explanations of concepts to detailed hands-on exercises.
-2. **Instructors.** They are also designed to be used by instructors in teaching/training settings.  Slides, and detailed tutorials are provided. Most tutorials also include computational support with the needed tools, data as well as Docker images that can be used to scale the lessons up to many participants.
+2. **Instructors.** They are also designed to be used by instructors in teaching/training settings. Slides, and detailed tutorials are provided. Most tutorials also include computational support with the needed tools, data as well as Docker images that can be used to scale the lessons up to many participants.
 
 ## How is the content licensed?
 
@@ -48,7 +48,7 @@ If you are new to Galaxy then start with one of the introductory topics.  These 
 
 If you are already familiar with Galaxy basics and want to learn how to use it in a particular domain (for example, ChIP-Seq), then start with one of those topics.
 
-If you are already well informed about bioinformatics data analysis and you just want to get a feel for how it works in Galaxy than many tutorials include *Instructions for the impatient* sections.
+If you are already well informed about bioinformatics data analysis and you just want to get a feel for how it works in Galaxy, then many tutorials include *Instructions for the impatient* sections.
 
 ## How do I use this material?
 
@@ -157,7 +157,7 @@ Most of the content is written in [GitHub Flavored Markdown](https://guides.gith
 To manage changes, we use [GitHub flow](https://guides.github.com/introduction/flow/) based on Pull Requests (check our [tutorial]({{ site.baseurl }}/topics/contributing/tutorials/create-new-tutorial-content/tutorial.html)):
 
 1. [Create a fork](https://help.github.com/articles/fork-a-repo/) of this repository on GitHub
-2. Clone your fork of this repository to create a local copy on your computer and init needed submodules (`git submodule init` and `git submodule update`)
+2. Clone your fork of this repository to create a local copy on your computer and initialize the required submodules (`git submodule init` and `git submodule update`)
 3. Create a new branch in your local copy for each significant change
 4. Commit the changes in that branch
 5. Push that branch to your fork on GitHub
@@ -181,7 +181,7 @@ Globally, the process of development of new content is open and transparent:
 12. Automatic checks of the changes are automatically checked for the right format and working links using continuous integration testing on Travis CI
 13. Review of the content by several other instructors via discussions
 14. After the review process, merge of the content into the main branch, starting a series of automatic steps triggered by Travis CI
-15. Regeneration of the website and publication on [{{site.url}}/{{site.baseurl}}]({{site.url}}/{{site.baseurl}})
+15. Regeneration of the website and publication on [{{site.url}}{{site.baseurl}}]({{site.url}}{{site.baseurl}})
 16. Generation of PDF artifacts of the tutorials and slides and upload on the FTP server
 18. Population of [TeSS](https://tess.elixir-europe.org/), the ELIXIR’s Training Portal, via the metadata
 
@@ -210,7 +210,7 @@ We also strongly recommend you read and follow [Software Carpentry's](https://so
 
 ## What can I do to help the project?
 
-In [issues](https://github.com/galaxyproject/training-material/issues), you will find lists of issues to fix and features to implement (with the ["newcomer-friendly"]({{ site.github_repository }}/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc+label%3Anewcomer-friendly) label for example). Feel free to solve them.
+In [issues](https://github.com/galaxyproject/training-material/issues), you will find lists of issues to fix and features to implement (with the ["newcomer-friendly"]({{ site.github_repository }}/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc+label%3Anewcomer-friendly) label for example). Feel free to work on them!
 
 # Other Questions
 
@@ -228,4 +228,4 @@ Yes. As of May 2018, these events are on the horizon:
     * The *Galaxy documentation, analysis, and training (Galaxy DAT)* track of [CollaborationFest](https://galaxyproject.org/events/gccbosc2018/collaboration/), June 29 - July 2. Focus on expanding Galaxy community resources like training materials and documentation.
 * Quarterly online training material Contribution Fests: The training community will meet online on the 3rd Friday of every 3rd month to focus on enhancing particular areas of the training material.
 
-Is the above list now out of data (it happens).  See the [Galaxy Community Events Calendar](https://galaxyproject.org/events/) for what coming up right now.
+Is the above list now out of date? (it happens). See the [Galaxy Community Events Calendar](https://galaxyproject.org/events/) for what coming up right now.
