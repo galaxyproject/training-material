@@ -32,7 +32,7 @@ There are two distinct audiences for these materials.
 
 ## How is the content licensed?
 
-The content of this website is Creative Commons Attribution 4.0 ([License]({{ site.github_repository }}/LICENSE.md)).
+The content of this website is Creative Commons Attribution 4.0 ([License]({{ site.github_repository }}/tree/master/LICENSE.md)).
 
 ## How can I cite this effort?
 
@@ -66,7 +66,7 @@ If your organization/consortia/community has its own Galaxy server, then you may
 
 Some topics have a [Docker](https://www.docker.com/) image that can be installed and run on participants' laptops.  These images contain Galaxy instances that include all tools and datasets used in a tutorial, as well as saved analyses and repeatable workflows that are relevant. You will need to [install Docker](https://docs.docker.com/install/).
 
-Finally, you can also run your tutorials on cloud-based infrastructures.  Galaxy is [available on many national research infrastructures](https://galaxyproject.org/galaxy-services/) such as [Jetstream](https://galaxyproject.org/cloud/jetstream/) (United States), [GenAP](https://www.genap.ca/) (Canada), [GVL](https://launch.genome.edu.au/launch) (Australia), [CLIMB](http://www.climb.ac.uk/) (United Kingdom), and more.  These instances are typically easy to launch, and easy to shut down when you are done. 
+Finally, you can also run your tutorials on cloud-based infrastructures.  Galaxy is [available on many national research infrastructures](https://galaxyproject.org/galaxy-services/) such as [Jetstream](https://galaxyproject.org/cloud/jetstream/) (United States), [GenAP](https://www.genap.ca/) (Canada), [GVL](https://launch.genome.edu.au/launch) (Australia), [CLIMB](http://www.climb.ac.uk/) (United Kingdom), and more.  These instances are typically easy to launch, and easy to shut down when you are done.
 
 If you are already familiar with, and have an account on [Amazon Web Services](https://aws.amazon.com/) then you can also launch a Galaxy server there using [CloudLaunch](https://launch.usegalaxy.org/).
 
@@ -88,7 +88,7 @@ To teach the hands-on tutorials you need a Galaxy server to run the examples on.
 
 Each tutorial is annotated with the information on which [public Galaxy servers](https://galaxyproject.org/public-galaxy-servers/) it can be run. These servers are available to anyone on the world wide web and some may have all the tools that are needed by a specific tutorial. If you choose this option then you should work with that server's admins to confirm that think the server can handle the workload for a workshop. For example, the [usegalaxy.eu](https://usegalaxy.eu/)
 
-If your organization/consortia/community has its own Galaxy server, then you may  want to run tutorials on that. This can be ideal because then the instance you are teaching on is the same you your participants will be using after the training. They'll also be able to revisit any analysis they did during the training. If you pursue this option you'll need to work with your organization's Galaxy Admins to confirm that 
+If your organization/consortia/community has its own Galaxy server, then you may  want to run tutorials on that. This can be ideal because then the instance you are teaching on is the same you your participants will be using after the training. They'll also be able to revisit any analysis they did during the training. If you pursue this option you'll need to work with your organization's Galaxy Admins to confirm that
 
 - the server can support a room full of people all doing the same analysis at the same time.
 - all tools and reference datasets needed in the tutorial are locally installed.  To learn how to setup a Galaxy instance for a tutorial, you can follow our [dedicated tutorial]({{ site.baseurl }}/topics/contributing/tutorials/setup-galaxy-for-training/tutorial.html).
@@ -149,10 +149,10 @@ Most of the content is written in [GitHub Flavored Markdown](https://guides.gith
     - an optional slides file in Markdown with slides to support the tutorial
     - a directory with Galaxy Interactive Tours to reproduce the tutorial
     - a directory with workflows extracted from the tutoria
-    - a YAML file with the links to the input data needed for the tutorial 
+    - a YAML file with the links to the input data needed for the tutorial
     - a YAML file with the description of needed tools to run the tutorial
 
-- a directory with the Dockerfile describing the details to build a container for the topic (self-study environments). 
+- a directory with the Dockerfile describing the details to build a container for the topic (self-study environments).
 
 To manage changes, we use [GitHub flow](https://guides.github.com/introduction/flow/) based on Pull Requests (check our [tutorial]({{ site.baseurl }}/topics/contributing/tutorials/create-new-tutorial-content/tutorial.html)):
 
@@ -177,7 +177,7 @@ Globally, the process of development of new content is open and transparent:
 8. Automatic annotation of the public Galaxy servers
 9. Generation of an interactive tour for the tutorial with the Tourbuilder web-browser extension
 10. Upload of the datasets to Zenodo and addition of the links in the data library file.
-11. Once ready, opening a Pull Request 
+11. Once ready, opening a Pull Request
 12. Automatic checks of the changes are automatically checked for the right format and working links using continuous integration testing on Travis CI
 13. Review of the content by several other instructors via discussions
 14. After the review process, merge of the content into the main branch, starting a series of automatic steps triggered by Travis CI
@@ -229,5 +229,3 @@ Yes. As of May 2018, these events are on the horizon:
 * Quarterly online training material Contribution Fests: The training community will meet online on the 3rd Friday of every 3rd month to focus on enhancing particular areas of the training material.
 
 Is the above list now out of data (it happens).  See the [Galaxy Community Events Calendar](https://galaxyproject.org/events/) for what coming up right now.
-
-
