@@ -206,7 +206,7 @@ To learn how to add new content, check out our [series of tutorials on creating 
 {% endfor %}
  </ol>
 
-We also strongly recommend you read and follow [Software Carpentry's](https://software-carpentry.org/) recommendations on [lesson design](https://swcarpentry.github.io/lesson-example/01-design/) and [lesson writing](https://swcarpentry.github.io/instructor-training/19-lessons/) if you plan to add or change some training materials, and also to check the [structure of the training material](#how-the-training-material-is-structured).
+We also strongly recommend you read and follow [Software Carpentry's](https://software-carpentry.org/) recommendations on [lesson design](https://carpentries.github.io/lesson-example/01-design/) and [lesson writing](https://carpentries.github.io/instructor-training/14-lesson-study/) if you plan to add or change some training materials, and also to check the [structure of the training material](#how-the-training-material-is-structured).
 
 ## What can I do to help the project?
 
