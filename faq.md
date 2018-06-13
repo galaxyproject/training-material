@@ -114,7 +114,7 @@ First off, thanks for your interest in contributing to the Galaxy training mater
 
 Individual learners and instructors can make these training more effective by contributing back to them. You can report mistakes and errors, create more content, etc. Whatever is your background, there is a way to contribute: via the GitHub website, via command-line or even without dealing with GitHub.
 
-We will address your issues and/or assess your change proposal as promptly as we can, and help you become a member of our community. You can also check our [tutorials]({{ site.github_repository }}/topics/contributing) for more details.
+We will address your issues and/or assess your change proposal as promptly as we can, and help you become a member of our community. You can also check our [tutorials]({{ site.baseurl }}/topics/contributing) for more details.
 
 ## How can I give feedback?
 
