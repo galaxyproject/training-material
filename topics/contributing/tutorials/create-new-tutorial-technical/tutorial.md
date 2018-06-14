@@ -87,28 +87,39 @@ The data can also be integrated in the Galaxy instance inside a data libraries a
 Such data are described in the `data-library.yaml`:
 
 ```
-libraries:
-    - name: Name of the tutorial
-      files:
-        - url: "https://raw.githubusercontent.com/bgruening/galaxytools/master/tools/rna_tools/sortmerna/test-data/read_small.fasta"
-          file_type: fasta
-        - url: ""
-          file_type: ""
+destination:
+  description: Galaxy Training Network Material
+  name: GTN - Material
+  synopsis: Galaxy Training Network Material. See https://training.galaxyproject.org
+  type: library
+items:
+- name: <Topic title>
+  description: <Topic summary>
+  items:
+  - url: <URL to one of the file on Zenodo>
+    ext: <Format of the file>
+    info: <DOI on Zenodo>
+    src: url
+    
 ```
 
 with:
 
-- `name`: name of the tutorial, where to put the data in the data libraries
-- `files`: list of the files to download
-    - `url`: URL to the input file
-    - `file-type`: type of the input file
+- `name`: name of the topic
+- `items`: list of the input files to download and put on the data library
+    - `url`: URL to the input file on [Zenodo](https://zenodo.org)
+    - `ext`: format of the input file
+    - `info`: URL to the DOI on Zendo
 
-The URL must refer to the URL of the files in [Zenodo](https://zenodo.org).
+This file can be automatically generated from the metadata information:
+
+```
+$ python bin/create-data-library.py --tutorial <tutorial-name> --topic <topic-name>
+```
 
 > ### {% icon hands_on %} Hands-on: Fill the `data-library.yaml`
 >
 > 1. Add the input files into the `data-library.yaml` file
-> 2. Add the link to Zenodo in the `metadata.yaml` file
 {: .hands_on}
 
 ## Filling the `data-manager.yaml`
