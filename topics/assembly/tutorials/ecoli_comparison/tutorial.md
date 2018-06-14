@@ -164,7 +164,7 @@ Note that because we started LASTZ on *a collection* of *E. coli* genomes, it wi
 
 ### Understanding LASTZ output
 
-LASTZ produced data in so-called `blastn` format (because we [explicitly told](#-hands-on-running-lastz) LASTZ to output in this format), which looks like this:
+LASTZ produced data in so-called `blastn` format (because we explicitly told LASTZ to output in this format, see previous step), which looks like this:
 
 ```
          1       2     3   4  5 6       7       8    9   10      11    12
