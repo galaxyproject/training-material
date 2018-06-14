@@ -6,6 +6,12 @@ import yaml
 from pathlib import Path
 
 
+class MyDumper(yaml.Dumper):
+
+    def increase_indent(self, flow=False, indentless=False):
+        return super(MyDumper, self).increase_indent(flow, False)
+
+
 def get_metadata_info(tuto, metadata_filepath):
     '''
     Extract the Zenodo DOI of the tutorial from the metadata.yaml file and also 
@@ -88,7 +94,13 @@ def create_data_library(meta_info, tuto_dir, overwrite = False):
         print("The data library file already exist and will be overwrite")
 
     with open(data_lib_filepath, 'w') as stream:
-        yaml.dump(data_lib, stream, default_flow_style=False, default_style='' )
+        yaml.dump(data_lib,
+                  stream,
+                  Dumper=MyDumper,
+                  indent=2,
+                  default_flow_style=False,
+                  default_style='',
+                  explicit_start=True)
 
 
 if __name__ == '__main__':
