@@ -130,7 +130,7 @@ pdf: detached-serve ## generate the PDF of the tutorials and slides
 	pkill -f jekyll
 .PHONY: pdf
 
-annotate:
+annotate: ## annotate the tutorials with usable Galaxy instances and generate badges
 	python bin/add_galaxy_instance_annotations.py
 	python bin/add_galaxy_instance_badges.py
 .PHONY: annotate
