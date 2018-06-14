@@ -38,7 +38,11 @@ def get_metadata_info(tuto, metadata_filepath):
                 raise ValueError("Empty Zenodo record found for the tutorial")
 
             meta_info['z_link'] = mat['zenodo_link']
-            meta_info['z_record'] = meta_info['z_link'].split('.')[-1]
+
+            if 'doi' in meta_info['z_link']:
+                meta_info['z_record'] = meta_info['z_link'].split('.')[-1]
+            else:
+                meta_info['z_record'] = meta_info['z_link'].split('/')[-1]
 
     if meta_info['z_record'] is None:
         raise ValueError("No information about the tutorial in the metadata file")
@@ -77,8 +81,6 @@ def create_data_library(meta_info, tuto_dir, overwrite = False):
         if 'links' not in file and 'self' not in file['links']:
             raise ValueError("No link for file %s" % file)
         file_dict['url'] = file['links']['self']
-        print(file_dict)
-        print(file)
         data_lib['items'][0]['items'].append(file_dict)
 
     data_lib_filepath = tuto_dir / Path("data-library.yaml")
