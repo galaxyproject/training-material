@@ -1,0 +1,351 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Galaxy Training!</title>
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <link rel="stylesheet" href="/training-material/assets/css/font-awesome.css">
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+    </head>
+    <body>
+        
+
+
+
+
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/training-material/topics/statistics" title="Go back to list of tutorials">
+                            <i class="fa fa-folder-o" aria-hidden="true"></i> Statistics
+                        </a>
+                    </li>
+
+                    
+                        
+                        
+                        
+                    
+
+                    
+                        <li class="nav-item dropdown">
+                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+                                <i class="fa fa-cog" aria-hidden="true"></i> Galaxy Instances
+                            </a>
+                            <div class="dropdown-menu">
+                                
+                                    <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/tree/master/topics/statistics/docker" title="Docker image for this tutorial">
+                                        <i class="fa fa-ship" aria-hidden="true"></i> Docker image
+                                    </a>
+                                
+                                
+                                
+                            </div>
+                        </li>
+                    
+
+                    
+
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://doi.org/10.5281/zenodo.1184682" title="Links to data">
+                            <i class="fa fa-files-o" aria-hidden="true"></i> Input Dataset
+                        </a>
+                    </li>
+                    
+
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="/training-material/topics/statistics#references" title="References">
+                            <i class="fa fa-book" aria-hidden="true"></i> Literature
+                        </a>
+                    </li>
+                    
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="fa fa-life-ring" aria-hidden="true"></i> Help
+    </a>
+    <div class="dropdown-menu">
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQ">
+            FAQ
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Chat on Gitter">
+            Gitter
+        </a>
+        <a class="dropdown-item" href="https://biostar.usegalaxy.org/" title="Ask on Biostars">
+            Biostars
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/galaxyproject/training-material/edit/master/topics/statistics/tutorials/iwtomics/tutorial.md">
+                            <i class="fa fa-github" aria-hidden="true"></i> Edit
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<div class="container main-content">
+    <section class="tutorial">
+        <h1>Interval-Wise Testing for omics data</h1>
+
+        <blockquote class="overview">
+            <h3>Overview</h3>
+
+            <strong><i class="fa fa-question-circle" aria-hidden="true"></i> Questions</strong>
+            <ul>
+            
+            <li>How to visualize high-resolution omics data in different groups of genomic regions?</li>
+            
+            <li>How to evaluate differences in high-resolution omics data between groups of genomic regions?</li>
+            
+            <li>How to detect locations and scales at which the significant effects unfold?</li>
+            
+            </ul>
+
+            <strong><i class="fa fa-bullseye" aria-hidden="true"></i> Objectives</strong>
+            <ul>
+            
+            <li>Pre-process high-resolution omics data</li>
+            
+            <li>Create pointwise boxplots corresponding to different groups of genomic regions</li>
+            
+            <li>Perform the Interval-Wise Testing between two groups of genomic regions</li>
+            
+            <li>Visualize and inspect test results</li>
+            
+            <li>Detect relevant locations and scales</li>
+            
+            </ul>
+
+            
+            <strong><i class="fa fa-check-circle" aria-hidden="true"></i> Requirements</strong>
+            <ul>
+            
+                <li>
+                    
+                    <a href="/training-material/topics//introduction/">Galaxy introduction</a>
+                    
+                </li>
+            
+            
+            </ul>
+            
+
+            <p><strong><i class="fa fa-hourglass-end" aria-hidden="true"></i> Time estimation:</strong> 1h</p>
+        </blockquote>
+
+        <h1 class="no_toc" id="introduction">Introduction</h1>
+
+<p>IWTomics implements the Interval-Wise Testing (IWT) for omics data. This
+inferential procedure tests for differences in “Omics” data between two groups
+of genomic regions, and does not require fixing location and scale at the
+outset.</p>
+
+<p>In this tutorial we use real data about endogenous retroviruses (ERVs) in mouse.
+In particular, we compare recombination hotspots in the flanking regions of fixed ETn versus control regions.
+The dataset contains two region datasets “ETn fixed”, “Control” and one feature “Recombination hotspots content”. The region dataset “ETn fixed” contains 1296 genomic regions of 64 kb surrounding fixed ETns elements (32-kb flanking sequences upstream and 32-kb flanking sequences downstream of each element). The region dataset “Control” contains 1142 regions of 64 kb without elements, used as control in the test. The regions are aligned around their center (i.e. around the ETn integration sites).</p>
+
+<p>Recombination hotspots measurements are associated to each “ETn fixed” and “Control” region. In particular, this feature is measured in 1-kb windows, so that each region is associated to a recombination hotspots curve made of 64 values. The measurement used is the feature content, i.e. the fraction of the 1-kb window that is covered by recombination hotspots</p>
+
+<p>The data we use in this tutorial is available at <a href="https://doi.org/10.5281/zenodo.1184682">Zenodo</a>.</p>
+
+<blockquote class="agenda">
+  <h3 id="agenda">Agenda</h3>
+
+  <p>IWTomics is composed of three steps (corresponding to three tools):</p>
+
+<ol id="markdown-toc">
+  <li><a href="#step-1-loading-and-pre-processing" id="markdown-toc-step-1-loading-and-pre-processing">Step 1: Loading and pre-processing</a></li>
+  <li><a href="#step-2-performing-interval-wise-testing" id="markdown-toc-step-2-performing-interval-wise-testing">Step 2: Performing Interval-Wise Testing</a></li>
+  <li><a href="#step-3-selecting-test-scale" id="markdown-toc-step-3-selecting-test-scale">Step 3: Selecting test scale</a></li>
+</ol>
+
+</blockquote>
+
+<h1 id="step-1-loading-and-pre-processing">Step 1: Loading and pre-processing</h1>
+
+<blockquote>
+  <p>The first tool (IWTomics Load Smooth and Plot) imports a collection of genomic region datasets, and associates to each region multiple genomic feature measurements. It allows to align the regions in multiple ways (center, left, right or scale alignment), to smooth the feature curves (possibly filling gaps in the measurements) and to create a graphical representation of the feature measurements in each region datasets (aligned curves or pointwise quantile curves).</p>
+</blockquote>
+
+<blockquote class="hands_on">
+  <h3 id="-hands-on-get-the-data"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Get the data</h3>
+  <ol>
+    <li>Create a new history for this tutorial</li>
+    <li>Import datasets:
+      <ul>
+        <li>Fixed ETn (<code class="highlighter-rouge">ETn_fixed.bed</code>) regions</li>
+        <li>Control (<code class="highlighter-rouge">Control.bed</code>) regions</li>
+        <li>Recombination Hotspot (<code class="highlighter-rouge">Recombination_hotspots.txt</code>) content</li>
+      </ul>
+
+      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/1288429/files/ETn_fixed.bed
+https://zenodo.org/record/1288429/files/Control.bed
+https://zenodo.org/record/1288429/files/Recombination_hotspots.txt
+</code></pre></div>      </div>
+    </li>
+    <li>Import header files for regions and features:
+      <ul>
+        <li><code class="highlighter-rouge">regions_header.tabular</code></li>
+        <li><code class="highlighter-rouge">features_header.tabular</code></li>
+      </ul>
+
+      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/1288429/files/regions_header.tabular
+https://zenodo.org/record/1288429/files/features_header.tabular
+</code></pre></div>      </div>
+    </li>
+  </ol>
+</blockquote>
+
+<blockquote class="hands_on">
+  <h3 id="-hands-on-pre-process-data-and-create-pointwise-boxplot"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Pre-process data and create pointwise boxplot</h3>
+  <p><strong>Load, Smooth and Plot</strong> <i class="fa fa-wrench" aria-hidden="true"></i>: Run <strong>Load, Smooth and Plot</strong> with:</p>
+  <ul>
+    <li>Select the two region datasets <code class="highlighter-rouge">ETn_fixed.bed</code> and <code class="highlighter-rouge">Control.bed</code>.</li>
+    <li>Select the region header file <code class="highlighter-rouge">regions_header.tabular</code>.</li>
+    <li>Select the feature file <code class="highlighter-rouge">Recombination_hotspot.txt</code>.</li>
+    <li>Select the feature header file <code class="highlighter-rouge">features_header.tabular</code>.</li>
+    <li>Start positions are 0-based in this example; all region alignments are equivalent in this case.</li>
+    <li>You can choose to smooth the feature curves.</li>
+    <li>Select the graphical representation type <strong>Pointwise quantile curves (boxplot)</strong>.</li>
+  </ul>
+
+  <p><img src="../../images/load_smooth_and_plot_output.png" alt="Recombination hotspot pointwise boxplot" /></p>
+</blockquote>
+
+<h1 id="step-2-performing-interval-wise-testing">Step 2: Performing Interval-Wise Testing</h1>
+
+<blockquote>
+  <p>The second tool (IWTomics Test and Plot) statistically evaluates differences in genomic features between groups of regions along the genome. In particular, it implements the Interval-Wise Testing for omics data, an extended version of the Interval-Wise Testing for functional data presented in <a href="https://doi.org/10.1080/10485252.2017.1306627">Pini and Vantini (2017)</a>.</p>
+</blockquote>
+
+<blockquote>
+  <p>It allows to perform multiple two sample permutation tests between pairs of region datasets, on several features. It returns the adjusted p-value curves for every test and all possible scales. Moreover, it creates a graphical representation of the Interval-Wise Testing results and a summary plot (optional) with p-values at the maximum scale. The tool IWTomics Plot with Threshold on Test Scale permits to select the scale to be used in the plots.</p>
+</blockquote>
+
+<blockquote class="hands_on">
+  <h3 id="-hands-on-test-for-difference-between-etn-and-control-regions"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Test for difference between ETn and Control regions</h3>
+  <p><strong>Test and Plot</strong> <i class="fa fa-wrench" aria-hidden="true"></i>: Run <strong>Test and Plot</strong> with:</p>
+  <ul>
+    <li>Select the <code class="highlighter-rouge">IWTomicsData Object</code>, <code class="highlighter-rouge">Region Dataset IDs</code>, and <code class="highlighter-rouge">Feature IDs</code> created during <strong>Step 1</strong>.</li>
+    <li>Select pairs of genomic region datasets to be compared using two-sample Interval-Wise Testing. In this example we consider one two-sample test contrasting <code class="highlighter-rouge">ETn_fixed</code> (select it as <strong>Region 1</strong>) to <code class="highlighter-rouge">Control</code> (select it as <strong>Region 2</strong>).</li>
+    <li>Select feature measurements to be tested. In this example, select <code class="highlighter-rouge">Recomb_hot</code> feature.</li>
+    <li>You can choose the test statistic, the number of permutations, and the significance level of the test (alpha).</li>
+    <li>Select the graphical representation type <strong>Pointwise quantile curves (boxplot)</strong>.</li>
+  </ul>
+
+  <p><img src="../../images/test_and_plot_output.png" alt="Recombination hotspot IWT results" /></p>
+</blockquote>
+
+<h1 id="step-3-selecting-test-scale">Step 3: Selecting test scale</h1>
+
+<blockquote>
+  <p>The third tool (IWTomics Plot with Threshold on Test Scale) allows to select the scale for the Interval-Wise Testing results. In particular it returns the p-value curves for the different tests performed at the selected scale, and it creates a graphical representation of the Interval-Wise Testing results and a summary plot (optional) at the selected scale.</p>
+</blockquote>
+
+<blockquote class="hands_on">
+  <h3 id="-hands-on-change-scale-for-test-results"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Change scale for test results</h3>
+  <p><strong>Plot with Threshold on Test Scale</strong> <i class="fa fa-wrench" aria-hidden="true"></i>: Run <strong>Plot with Threshold on Test Scale</strong> with:</p>
+  <ul>
+    <li>Select the <code class="highlighter-rouge">IWTomicsData Object with Test Results</code>, <code class="highlighter-rouge">Test IDs</code>, and <code class="highlighter-rouge">Feature IDs</code> created during <strong>Step 2</strong>.</li>
+    <li>Select the scale to be used in Interval-Wise Testing results and plot. Select the test identifier <code class="highlighter-rouge">ETn_fixed vs Control</code>, the feature identifier <code class="highlighter-rouge">Recomb_hot</code>, and the scale <code class="highlighter-rouge">8</code> (8-kb scale).</li>
+    <li>Select the graphical representation type <strong>Pointwise quantile curves (boxplot)</strong>.</li>
+  </ul>
+
+  <p><img src="../../images/plot_with_threshold_on_test_scale_output.png" alt="Recombination hotspot IWT results scale 8" /></p>
+</blockquote>
+
+<blockquote class="tip">
+  <h3 id="-additional-resources"><i class="fa fa-lightbulb-o" aria-hidden="true"></i> Additional resources:</h3>
+
+  <p>Read more about <strong>IWTomics</strong> <a href="https://bioconductor.org/packages/release/bioc/vignettes/IWTomics/inst/doc/IWTomics.pdf">here</a>.</p>
+</blockquote>
+
+
+        
+        <blockquote class="key_points">
+            <h3><i class="fa fa-key" aria-hidden="true"></i> Key points</h3>
+
+            <ul>
+                
+                <li>High-resolution omics data can be represented as curves along the genome</li>
+                
+                <li>IWTomics permits to visualize these data</li>
+                
+                <li>The Interval-Wise Testing detects statistically significant differences between pairs of genomic regions</li>
+                
+                <li>The Interval-Wise Testing corrects p-values taking into consideration the ordered nature of measurements along the genome</li>
+                
+                <li>Locations and scales do not need to be specified at the outset, indeed IWTomics permits to detect them</li>
+                
+            </ul>
+        </blockquote>
+        
+
+        
+        <h1>Useful literature</h1>
+        <p>Further information, including links to documentation and original publications, regarding the tools, analysis techniques and the interpretation of results described in this tutorial can be found <a href="/training-material/topics/statistics#references">here</a>.</p>
+        
+
+        
+
+        <h3><i class="fa fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!</h3>
+
+        <hr>
+
+        <blockquote class="overview">
+            <h3><i class="fa fa-comments-o" aria-hidden="true"></i> Help us improve this content!</h3>
+            Please take a moment to fill in the Galaxy Training Network
+            <a href="https://tinyurl.com/GTNfeedback">Feedback Form</a>.
+            Your feedback helps us improve this tutorial and will be considered
+            in future revisions.
+        </blockquote>
+    </section>
+</div>
+
+
+<footer>
+    <div class="container">
+        <p>
+            This material is the result of a collaborative work. Thanks to the
+            <a href="https://wiki.galaxyproject.org/Teach/GTN">Galaxy Training Network</a>
+            and all the <a href="/training-material/hall-of-fame">contributors</a> (Marzia A Cremona, Fabio Cumbo)!
+        </p>
+        <p>
+            Found a typo? Something is wrong in this tutorial? Edit it on
+            <a href="https://github.com/galaxyproject/training-material/tree/master/topics/statistics/tutorials/iwtomics/tutorial.md">GitHub</a>.
+        </p>
+    </div>
+</footer>
+
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+</html>
