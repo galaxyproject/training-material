@@ -241,7 +241,7 @@ They are defined always with the same structure:
 For a correct rendering of the tutorial's content, the templating system requires this structure to be kept as it.
 The different defined boxes are:
 
-- Overview
+- **Overview**
 
     This box at the top of each tutorial is automatically generated using the metadata we defined
 
@@ -260,7 +260,7 @@ The different defined boxes are:
     >    {: .question}
     {: .hands_on}
 
-- Agenda
+- **Agenda**
 
     In most tutorial, the second box is the agenda box at the end of the introduction. It indicates the plan of the tutorial
 
@@ -290,7 +290,7 @@ The different defined boxes are:
     >
     {: .agenda}
 
-- Hands-on
+- **Hands-on**
 
     We think that actually walking through the tutorial by doing all its steps is important for learning its concepts. We therefore emphasize trying each step by regularly adding hands-on sections, where trainees are encouraged to do the analysis by themselves. We designed some special boxes to make these sections easy to find.
 
@@ -299,21 +299,21 @@ The different defined boxes are:
     > ### {% icon hands_on %} Hands-on: Spliced mapping
     >
     > 1. **RNA STAR** {% icon tool %}: Map your reads on the reference genome with
-    >    - "Single-end or paired-end reads" to `Paired-end (as individual datasets)`
-    >    - "RNA-Seq FASTQ/FASTA file, forward reads" to the generated `trimmed reads pair 1` files (multiple datasets)
-    >    - "RNA-Seq FASTQ/FASTA file, reverse reads" to the generated `trimmed reads pair 2` files (multiple datasets)
-    >    - "Custom or built-in reference genome" to `Use a built-in index`
-    >    - "Reference genome with or without an annotation" to `use genome reference without builtin gene-model`
-    >    - "Select reference genome" to `Drosophila Melanogaster (dm6)`
-    >    - "Gene model (gff3,gtf) file for splice junctions" to the imported `Drosophila_melanogaster.BDGP6.87.gtf`
-    >    - "Length of the genomic sequence around annotated junctions" to `36`
+    >    - *"Single-end or paired-end reads"*:  `Paired-end (as individual datasets)`
+    >    - *"RNA-Seq FASTQ/FASTA file, forward reads"*: the generated `trimmed reads pair 1` files (multiple datasets)
+    >    - *"RNA-Seq FASTQ/FASTA file, reverse reads"*: the generated `trimmed reads pair 2` files (multiple datasets)
+    >    - *"Custom or built-in reference genome"*: `Use a built-in index`
+    >    - *"Reference genome with or without an annotation"*: `use genome reference without builtin gene-model`
+    >    - *"Select reference genome"*: `Drosophila Melanogaster (dm6)`
+    >    - *"Gene model (gff3,gtf) file for splice junctions"*: the imported `Drosophila_melanogaster.BDGP6.87.gtf`
+    >    - *"Length of the genomic sequence around annotated junctions"*: `36`
     >
     >        This parameter should be length of reads - 1
     >
     > 2. **MultiQC** {% icon tool %}: Aggregate the STAR logs with
-    >      - "Which tool was used generate logs?" to `STAR`
-    >      - "Type of FastQC output?" to `Log`
-    >      - "STAR log output" to the generated `log` files (multiple datasets)
+    >      - *"Which tool was used generate logs?"*: `STAR`
+    >      - *"Type of FastQC output?"*: `Log`
+    >      - *"STAR log output"*: the generated `log` files (multiple datasets)
     {: .hands_on}
     ```
     {% endraw %}
@@ -327,23 +327,60 @@ The different defined boxes are:
 
     It will be rendered like:
 
+
     > ### {% icon hands_on %} Hands-on: Spliced mapping
     >
     > 1. **RNA STAR** {% icon tool %}: Map your reads on the reference genome with
-    >    - "Single-end or paired-end reads" to `Paired-end (as individual datasets)`
-    >    - "RNA-Seq FASTQ/FASTA file, forward reads" to the generated `trimmed reads pair 1` files (multiple datasets)
-    >    - "RNA-Seq FASTQ/FASTA file, reverse reads" to the generated `trimmed reads pair 2` files (multiple datasets)
-    >    - "Length of the genomic sequence around annotated junctions" to `36`
+    >    - *"Single-end or paired-end reads"*:  `Paired-end (as individual datasets)`
+    >    - *"RNA-Seq FASTQ/FASTA file, forward reads"*: the generated `trimmed reads pair 1` files (multiple datasets)
+    >    - *"RNA-Seq FASTQ/FASTA file, reverse reads"*: the generated `trimmed reads pair 2` files (multiple datasets)
+    >    - *"Custom or built-in reference genome"*: `Use a built-in index`
+    >    - *"Reference genome with or without an annotation"*: `use genome reference without builtin gene-model`
+    >    - *"Select reference genome"*: `Drosophila Melanogaster (dm6)`
+    >    - *"Gene model (gff3,gtf) file for splice junctions"*: the imported `Drosophila_melanogaster.BDGP6.87.gtf`
+    >    - *"Length of the genomic sequence around annotated junctions"*: `36`
     >
     >        This parameter should be length of reads - 1
     >
     > 2. **MultiQC** {% icon tool %}: Aggregate the STAR logs with
-    >      - "Which tool was used generate logs?" to `STAR`
-    >      - "Type of FastQC output?" to `Log`
-    >      - "STAR log output" to the generated `log` files (multiple datasets)
+    >      - *"Which tool was used generate logs?"*: `STAR`
+    >      - *"Type of FastQC output?"*: `Log`
+    >      - *"STAR log output"*: the generated `log` files (multiple datasets)
     {: .hands_on}
 
--  Questions and solution
+    There are also some predefined **parameter icons** available which can be used to indicate the *type* of parameter. These are optional,
+    but may be helpful in some cases (for example to distinguish between single file inputs and collection inputs).
+
+    The available icons are:
+
+    {% raw %}
+    ```
+    > ### {% icon hands_on %} Hands-on: My Step
+    >
+    > 1. **My Tool** {% icon tool %} with the following parameters
+    >  - {% icon param-text %} *"My text parameter"*: `my value`
+    >  - {% icon param-file %} *"My input file"*: `my file`
+    >  - {% icon param-files %} *"My multiple file input or collection"*: `my collection`
+    >  - {% icon param-select %} *"My select menu"*: `my choice`
+    >  - {% icon param-check %} *"My check box"*: `yes`
+    {: .hands_on}
+    ```
+    {% endraw %}
+
+    which, when rendered, look like:
+
+    > ### {% icon hands_on %} Hands-on: My Step
+    >
+    > 1. **My Tool** {% icon tool %} with the following parameters
+    >  - {% icon param-text %} *"My text parameter"*: `my value`
+    >  - {% icon param-file %} *"My input file"*: `my file`
+    >  - {% icon param-files %} *"My multiple file input or collection"*: `my collection`
+    >  - {% icon param-select %} *"My select menu"*: `my choice`
+    >  - {% icon param-check %} *"My check box"*: `yes`
+    {: .hands_on}
+
+
+-  **Questions and solution**
 
     Questions are there to force the trainees to think about what they are currently doing, and to put things in perspective.
     They also help the instructors by exposing and clarify common scenarios, errors, or applications.
@@ -386,7 +423,7 @@ The different defined boxes are:
     In the box below and hidden we add also the correct answer, so that self-trainees can check the solution and its explanation.
 
 
-- Tips
+- **Tips**
 
     {% raw %}
     ```
@@ -412,7 +449,7 @@ The different defined boxes are:
     > * Press **Start**
     {: .tip}
 
-- Comments
+- **Comments**
 
     {% raw %}
     ```
@@ -430,7 +467,7 @@ The different defined boxes are:
     > - Rename the datasets according to the samples
     {: .comment}
 
-- Details
+- **Details**
 
     The detail box is used to give more background explanation on the subject. By default the box is collapsed.
 
@@ -452,7 +489,7 @@ The different defined boxes are:
     >
     {: .details}
 
-- Key points
+- **Key points**
 
     This last box of the tutorial is automatically filled with the take-home messages defined in the metadata
 
