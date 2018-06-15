@@ -25,7 +25,7 @@ After a corrected Hi-C matrix is created other tools can be used to visualize it
 > 2. Create a contact matrix
 > 3. Learn how to correct a contact matrix
 > 4. Visualize a contact matrix
-> 5. Compute and visualize toplogical associating domains (TADs)
+> 5. Compute and visualize topological associating domains (TADs)
 > {:toc}
 >
 {: .agenda}
@@ -53,7 +53,7 @@ After a corrected Hi-C matrix is created other tools can be used to visualize it
 >    > * Press **Start**
 >    {: .tip}
 >
-> 3. Rename the dataset to something meaningful, e.g. `HiC_S2_1p_10min_lowU_R1` and `HiC_S2_1p_10min_lowU_R2`.
+> 3. Rename the data set to something meaningful, e.g. `HiC_S2_1p_10min_lowU_R1` and `HiC_S2_1p_10min_lowU_R2`.
 > By default, when data is imported via its link, Galaxy names it with its URL.
 >
 {: .hands_on}
@@ -62,7 +62,7 @@ After a corrected Hi-C matrix is created other tools can be used to visualize it
 
 Mates have to be mapped individually to avoid mapper specific heuristics designed for standard paired-end libraries.
 
-We have used the HiCExplorer sucessfuly with bwa, bowtie2 and hisat2. In this tutorial we will be using **Map with BWA-MEM** tool. It is important to remember to:
+We have used the HiCExplorer successfully with bwa, bowtie2 and hisat2. In this tutorial we will be using **Map with BWA-MEM** tool. It is important to remember to:
 - use local mapping, in contrast to end-to-end. A fraction of Hi-C reads are chimeric and will not map end-to-end thus, local mapping is important to increase the number of mapped reads
 - tune the aligner parameters to penalize deletions and insertions. This is important to avoid aligned reads with gaps if they happen to be chimeric.
 - If bowtie2 or hisat2 are used, `--reorder` option and as a file format `bam_native` needs to be used. Regular `bam` files are sorted by Galaxy and can not be used as an input for HiCExplorer.
@@ -73,7 +73,7 @@ We have used the HiCExplorer sucessfuly with bwa, bowtie2 and hisat2. In this tu
 >    - "Will you select a reference genome from your history or use a built-in index?" to `Use a built-in index`
 >    - "Select a reference genome" to `dm3`
 >    - "Is this library mate-paired?" to `Single-end or interleaved paired-end`
->    - Set multiple datasets
+>    - Set multiple data sets
 >    - "FASTQ file" to `HiC_S2_1p_10min_lowU_R1`and `HiC_S2_1p_10min_lowU_R2`
 >    - "BWA settings to use" to `Full parameter List`
 >    - "Gap extension penalty (-E)" to `50`
@@ -100,7 +100,7 @@ For this step we will use [hicBuildMatrix](http://hicexplorer.readthedocs.io/en/
 >
 >       > ### {% icon comment %} Comment
 >       >
->       > *hicBuildMatrix* creates two files, a bam file containing only the valid Hi-C read pairs and a matrix containing the Hi-C contacts at the given resolution. The bam file is useful to check the quality of the Hi-C library on the genome browser. A good Hi-C library should contain piles of reads near the restriction fragment sites. In the QCfolder a html file is saved with plots containing useful information for the quality control of the Hi-C sample like the number of valid pairs, duplicated pairs, self-ligations etc. Usually, only 25%-40% of the reads are valid and used to build the Hi-C matrix mostly because of the reads that are on repetitive regions that need to be discarded.
+>       > *hicBuildMatrix* creates two files, a bam file containing only the valid Hi-C read pairs and a matrix containing the Hi-C contacts at the given resolution. The bam file is useful to check the quality of the Hi-C library on the genome browser. A good Hi-C library should contain piles of reads near the restriction fragment sites. In the QC folder a html file is saved with plots containing useful information for the quality control of the Hi-C sample like the number of valid pairs, duplicated pairs, self-ligations etc. Usually, only 25%-40% of the reads are valid and used to build the Hi-C matrix mostly because of the reads that are on repetitive regions that need to be discarded.
 >       {: .comment}
 >
 >       > ### {% icon comment %} Comment
@@ -173,7 +173,7 @@ In our case the distribution describes the counts per bin of a genomic distance.
 > ### {% icon hands_on %} Hands-on: Matrix correction
 >
 > 1. **hicCorrectMatrix** {% icon tool %}: Run hicCorrectMatrix on the original matrix `10 kb contact matrix` adjusting the parameters:
->    - "Range restriction (in bp)" to `Correct matrix plot`
+>    - "Range restriction (in bp)" to `Correct matrix`
 >    - "Normalize each chromosome separately" to `True`
 >    - "Remove bins of low coverage" to `-1.6`
 >    - "Remove bins of large coverage" to `1.8`
@@ -260,6 +260,7 @@ For the next step we need additional data tracks. Please load `dm3_genes.bed`, `
 >         - "Plot title" to `HiC dm3 chr2L:14500000-16500000`
 >         - "Matrix to compute on." to the corrected matrix from hicCorrectMatrix step
 >         - "Depth" to `750000`
+>         - "Width" to `4`
 >         - "Boundaries file" to `hicFindTads on data XX: TAD domains`
 >         - "Show x labels" to `Yes`
 >
@@ -267,7 +268,6 @@ For the next step we need additional data tracks. Please load `dm3_genes.bed`, `
 >        - "Choose style of the track" to `Bedgraph matrix track`
 >        - "Plot title" to `TAD separation score`
 >        - "Track file bedgraph format" to `hicFindTads on data XX: TAD information in bm file`
->        - "Color of track" to blue
 >        - "Width" to `4`
 >        - "Set type to lines" to 'True'
 >
@@ -279,32 +279,37 @@ For the next step we need additional data tracks. Please load `dm3_genes.bed`, `
 >        - "Minimum value" to `-0.03`
 >        - "Maximum value" to `0.03`
 >        - "Width" to `1.5`
+>        - "Color of track" to a color of your choice
 >
 >    - "+Insert Include tracks in your plot"
 >        - "Choose style of the track" to `Bigwig track`
->        - "Plot title" to `PC1`
+>        - "Plot title" to `PC2`
 >        - "Track file bigwig format" the second computed `hicPCA` result
 >        - "Minimum value" to `-0.03`
 >        - "Maximum value" to `0.03`
 >        - "Width" to `1.5`
+>        - "Color of track" to a color of your choice
 >
 >    - "+Insert Include tracks in your plot"
 >        - "Choose style of the track" to `Bigwig track`
->        - "Plot title" to `PC1`
+>        - "Plot title" to `H3K36me3`
 >        - "Track file bigwig format" to `H3K36me3`
 >        - "Width" to `1.5`
+>        - "Color of track" to a color of your choice
 >
 >    - "+Insert Include tracks in your plot"
 >        - "Choose style of the track" to `Bigwig track`
->        - "Plot title" to `PC1`
+>        - "Plot title" to `H3K27me3`
 >        - "Track file bigwig format" to `H3K27me3`
 >        - "Width" to `1.5`
+>        - "Color of track" to a color of your choice
 >
 >    - "+Insert Include tracks in your plot"
 >        - "Choose style of the track" to `Bigwig track`
->        - "Plot title" to `PC1`
+>        - "Plot title" to `H4K16ac`
 >        - "Track file bigwig format" to `H4K16ac`
 >        - "Width" to `1.5`
+>        - "Color of track" to a color of your choice
 >
 >    - "+Insert Include tracks in your plot"
 >        - "Choose style of the track" to `Gene track`
@@ -313,6 +318,7 @@ For the next step we need additional data tracks. Please load `dm3_genes.bed`, `
 >        - "Width" to `3`
 >        - "Type" to `genes`
 >        - "Gene rows" to `15`
+>        - "Color of track" to a color of your choice
 >
 {: .hands_on}
 
@@ -324,4 +330,4 @@ The resulting image should look like this one:
 In this tutorial we used HiCExplorer to analyze drosophila melanogaster cells. We mapped the chimeric reads and created a contact matrix, to reduce noise this contact matrix was normalized. We showed how to visualize a contact matrix and how we can investigate topological associating domains and relate them to additional data like gene tracks.
 
 
- To improve your learned skills we offer an additonal tutorial based on mouse stem cells: [following work](http://hicexplorer.readthedocs.io/en/latest/content/example_usage.html).
+ To improve your learned skills we offer an additional tutorial based on mouse stem cells: [following work](http://hicexplorer.readthedocs.io/en/latest/content/example_usage.html).

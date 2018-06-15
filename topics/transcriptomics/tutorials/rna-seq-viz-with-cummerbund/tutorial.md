@@ -91,13 +91,10 @@ For this tutorial, we are interested in CuffDiff's tested transcripts for differ
 >    > 1. How to retain only the significant differentially expressed genes?
 >    > 2. Which column stores this information?
 >    >
->    > <details>
->    > <summary>Click to view the answers</summary>
->    > <ol type="1">
->    > <li>We need to filter on the column storing the record's significance</li>
->    > <li>Column 14</li>
->    > </ol>
->    > </details>
+>    > > ### {% icon solution %} Solution
+>    > > 1. We need to filter on the column storing the record's significance
+>    > > 2. Column 14
+>    > {: .solution }
 >    {: .question}
 {: .hands_on}
 
@@ -116,14 +113,11 @@ We now want to first highlight the most significant differentially expressed gen
 >    > 2. Which conditional expression has to be set to filter all records on the selected column?
 >    > 3. What happened to the records in the original table?
 >    >
->    > <details>
->    > <summary>Click to view the answers</summary>
->    > <ol type="1">
->    > <li>column 14</li>
->    > <li>c14=='yes'</li>
->    > <li>All records whose "significant" field was set to "yes" have been retained, while the others filtered out</li>
->    > </ol>
->    > </details>
+>    > > ### {% icon solution %} Solution
+>    > > 1. column 14
+>    > > 2. c14=='yes'
+>    > > 3. All records whose "significant" field was set to "yes" have been retained, while the others filtered out
+>    > {: .solution }
 >    {: .question}
 >
 >  Look at your data. The differential expression values are stored on column 10, we will sort (descending) all records
@@ -137,13 +131,10 @@ We now want to first highlight the most significant differentially expressed gen
 >    > 1. Since the start of our filtering process, how many records now represent the significant subset for extracting informations?
 >    > 2. What does this shrinking of the number of lines represent?
 >    >
->    > <details>
->    > <summary>Click to view the answers</summary>
->    > <ol type="1">
->    > <li>Click on the boxes in your history, their small preview higlights the number of lines: from ~140,000 to 219</li>
->    > <li>This process represents a necessary step to gather insights on the biological meaning of our samples in our analyses: putting the original raw RNA-Seq result data into context, cutting down the less-meaningful records to focus on what is needed to go from data to information</li>
->    > </ol>
->    > </details>
+>    > > ### {% icon solution %} Solution
+>    > > 1. Click on the boxes in your history, their small preview higlights the number of lines: from ~140,000 to 219
+>    > > 2. This process represents a necessary step to gather insights on the biological meaning of our samples in our analyses: putting the original raw RNA-Seq result data into context, cutting down the less-meaningful records to focus on what is needed to go from data to information
+>    > {: .solution }
 >    {: .question}
 {: .hands_on}
 

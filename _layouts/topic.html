@@ -6,6 +6,7 @@ layout: base
 
 {% assign topic = site.data[page.topic_name] %}
 {% assign contributors = site.data['contributors'] %}
+{% assign instances = site.data['instances'] %}
 
 <div class="container main-content">
     <section>
@@ -36,17 +37,33 @@ layout: base
                 <th>Slides</th>
                 <th>Hands-on</th>
 
-                {% if topic.type != "admin-dev" %}
+                {% if topic.type == "use" %}
                 <th>Input dataset</th>
                 <th>Workflows</th>
                 <th>Galaxy tour</th>
+                {% endif %}
+
+                {% if instances[topic.name].supported %}
+                <th>Galaxy instances</th>
                 {% endif %}
             </tr>
 
             {% for material in topic.material %}
                 {% if material.enable != "false" %}
+                        <script type="application/ld+json">
+                            {% include material.jsonld content=material %}
+                        </script>
                     <tr>
-                        <td>{{ material.title }}</td>
+                        <td>
+                            {{ material.title }}
+                            {% if material.tags %}
+                                <div class="">
+                                    {% for tag in material.tags %}
+                                        <span class="label label-default">{{ tag }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </td>
                         {% if material.type == "introduction" %}
                             <td>
                                 {% if material.slides %}
@@ -56,8 +73,11 @@ layout: base
                                 {% endif %}
                             </td>
                             <td></td>
-                            {% if topic.type != "admin-dev" %}
+                            {% if topic.type == "use" %}
                                 <td></td>
+                                <td></td>
+                            {% endif %}
+                            {% if instances[topic.name].supported %}
                                 <td></td>
                             {% endif %}
                         {% elsif material.type == "tutorial" %}
@@ -85,7 +105,7 @@ layout: base
                                 {% endif %}
                             </td>
 
-                            {% if topic.type != "admin-dev" %}
+                            {% if topic.type == "use" %}
                                 <td>
                                     {% if material.zenodo_link != "" %}
                                     <a href="{{ material.zenodo_link }}">
@@ -108,23 +128,36 @@ layout: base
                                     {% endif %}
                                 </td>
                             {% endif %}
+                            {% if instances[topic.name].supported %}
+                                <td>
+                                {% if instances[topic.name]['tutorials'][material.name].supported %}
+                                    <a href="#" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+                                        {% icon instances %}
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                    {% for inst in instances[topic.name]['tutorials'][material.name]['instances'] %}
+                                        {% if inst[1].supported %}
+                                        <a class="dropdown-item" href="{{ inst[1].url }}" title="{{ inst[0] }}">
+                                            {{ inst[0] }}
+                                        </a>
+                                        {% endif %}
+                                    {% endfor %}
+                                    </ul>
+                                {% endif %}
+                                </td>
+                            {% endif %}
                         {% endif %}
                     </tr>
                 {% endif %}
             {% endfor %}
         </table>
 
+        <h2 id="docker_image">Galaxy instances</h2>
+        <p>You can use a public Galaxy instance which has been tested for the availability of the used tools. They are listed along with the tutorials above.</p>
         {% if topic.docker_image and topic.docker_image != "" %}
-            <h2 id="docker_image">Galaxy instance</h2>
-            <p>For these tutorials, you can use the dedicated Docker image:</p>
-                <pre><code>docker run -d -p 8080:80 {{ topic.docker_image }}</code></pre>
+            <p>You can also use the following Docker image for these tutorials:</p>
+            <pre><code>docker run -d -p 8080:80 {{ topic.docker_image }}</code></pre>
             <p>It will launch a flavored Galaxy instance available on <a href="http://localhost:8080">http://localhost:8080</a>.</p>
-        {% endif %}
-
-        {% if topic.galaxy_instance %}
-        <h2>Galaxy instance</h2>
-
-        <p>For these tutorials, use Galaxy instance at <a href="{{ topic.galaxy_instance }}">{{ topic.galaxy_instance }}</a>.</p>
         {% endif %}
 
         <h2 id="maintainers">Maintainers</h2>
@@ -133,15 +166,22 @@ layout: base
         {% for maintainer in topic.maintainers %}
             <li>
                 <a href="{{ site.baseurl }}/hall-of-fame#{{ maintainer }}">{{ contributors[maintainer].name }}</a>
-                {% if contributors[maintainer].email and contributors[maintainer].email != "" %}
-                    (<a href="mailto:{{ contributors[maintainer].email }}">{{ contributors[maintainer].email }}</a>)
+                {% if contributors[maintainer].maintainer_contact %}
+                    {% if contributors[maintainer].maintainer_contact == 'email' %}
+                    (<a href="mailto:{{ contributors[maintainer].email }}">Contact {% icon email %}</a> )
+                    {% elsif contributors[maintainer].maintainer_contact == 'gitter' %}
+                    (<a href="https://gitter.im/{{ contributors[maintainer].gitter }}">Contact {% icon gitter %}</a> )
+                    {% else %}
+                    (<a href="{{ contributors[maintainer].maintainer_contact }}">Contact</a>)
+                    {% endif %}
+
                 {% endif %}
             </li>
         {% endfor %}
         </ul>
 
         <p>
-            <em>For any question related to this topic and the content, you can contact them.</em>
+            <em>For any question related to this topic and the content, you can contact them or visit our <a href="https://gitter.im/Galaxy-Training-Network/Lobby">Gitter channel</a>.</em>
         </p>
 
         <h2 id="contributors">Contributors</h2>

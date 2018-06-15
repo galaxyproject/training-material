@@ -9,6 +9,7 @@ layout: base
     {% endif %}
 {% endfor %}
 {% assign contributors = site.data['contributors'] %}
+{% assign instances = site.data['instances'] %}
 
 <header>
     <nav class="navbar navbar-expand-lg navbar-dark">
@@ -64,12 +65,31 @@ layout: base
                         {% endif %}
                     {% endif %}
 
-                    {% if topic.docker_image and topic.docker_image != "" %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ site.baseurl }}/topics/{{ topic.name }}#docker_image" title="Docker image for this tutorial">
-                            {% icon docker_image %} Docker image
-                        </a>
-                    </li>
+                    {% if topic.docker_image or instances[topic.name].supported and instances[topic.name]['tutorials'][tutorial.name].supported %}
+                        <li class="nav-item dropdown">
+                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+                                {% icon instances %} Galaxy Instances
+                            </a>
+                            <div class="dropdown-menu">
+                                {% if topic.docker_image %}
+                                    <a class="dropdown-item" href="{{ site.github_repository }}/tree/master/topics/{{ topic.name }}/docker" title="Docker image for this tutorial">
+                                        {% icon docker_image %} Docker image
+                                    </a>
+                                {% endif %}
+                                {% if topic.docker_image and instances[topic.name].supported and instances[topic.name]['tutorials'][tutorial.name].supported %}
+                                    <div class="dropdown-divider"></div>
+                                {% endif %}
+                                {% if instances[topic.name]['tutorials'][tutorial.name].supported %}
+                                    {% for inst in instances[topic.name]['tutorials'][tutorial.name]['instances'] %}
+                                        {% if inst[1].supported %}
+                                        <a class="dropdown-item" href="{{ inst[1].url }}" title="{{ inst[0] }}">
+                                            {{ inst[0] }}
+                                        </a>
+                                        {% endif %}
+                                    {% endfor %}
+                                {% endif %}
+                            </div>
+                        </li>
                     {% endif %}
 
                     {% if tutorial.tutorial_galaxy_instance %}
@@ -99,7 +119,7 @@ layout: base
                     {% include help.html %}
 
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ site.github_repository }}/tree/master/topics/{{ topic.name }}/tutorials/{{ tutorial.name }}/tutorial.md">
+                        <a class="nav-link" href="{{ site.github_repository }}/edit/master/topics/{{ topic.name }}/tutorials/{{ tutorial.name }}/tutorial.md">
                             {% icon github %} Edit
                         </a>
                     </li>
@@ -173,7 +193,30 @@ layout: base
 
         {% if topic.references %}
         <h1>Useful literature</h1>
-        <p>Useful information regarding this type of analysis with descriptions and paper references for the tools used in this tutorial, and literature for this analysis techniques and interpretations can be found <a href="{{ site.baseurl }}/topics/{{ topic.name }}#references">here</a>.</p>
+        <p>Further information, including links to documentation and original publications, regarding the tools, analysis techniques and the interpretation of results described in this tutorial can be found <a href="{{ site.baseurl }}/topics/{{ topic.name }}#references">here</a>.</p>
+        {% endif %}
+
+        {% if topic.name == "contributing" %}
+        <blockquote class="agenda">
+            <h3>Developing GTN training material</h3>
+            This tutorial is part of a series to develop GTN training material, feel free to also look at:
+            {% assign topic = site.data[page.topic_name] %}
+            <ol>
+            {% for material in topic.material %}
+             {% if material.enable != "false" and material.name != page.tutorial_name %}
+              {% if material.type == "introduction" %}
+            <li><a href="{{ site.baseurl }}/topics/{{ topic.name }}/slides/{{ material.name }}.html">{{ material.title }}</a></li>
+             {% elsif material.type == "tutorial" %}
+              {% if material.hands_on %}
+            <li><a href="{{ site.baseurl }}/topics/{{ topic.name  }}/tutorials/{{ material.name }}/tutorial.html">{{ material.title }}</a></li>
+              {% elsif material.slides %}
+            <li><a href="{{ site.baseurl }}/topics/{{ topic.name }}/tutorials/{{ material.name }}/slides.html">{{ material.title }}</a></li>
+               {% endif %}
+              {% endif %}
+             {% endif %}
+            {% endfor %}
+             </ol>
+        </blockquote>
         {% endif %}
 
         <h3>{% icon congratulations %} Congratulations on successfully completing this tutorial!</h3>
@@ -181,9 +224,11 @@ layout: base
         <hr>
 
         <blockquote class="overview">
-            <h3>{% icon feedback %} Feedback</h3>
-            Please take a moment and provide your feedback on this tutorial. Your feedback will help guide and improve future revisions to this tutorial.
-            <a href="https://tinyurl.com/GTNfeedback">Feedback Form</a>
+            <h3>{% icon feedback %} Help us improve this content!</h3>
+            Please take a moment to fill in the Galaxy Training Network
+            <a href="https://tinyurl.com/GTNfeedback">Feedback Form</a>.
+            Your feedback helps us improve this tutorial and will be considered
+            in future revisions.
         </blockquote>
     </section>
 </div>
@@ -194,7 +239,7 @@ layout: base
 <footer>
     <div class="container">
         <p>
-            This material is the result of a collaborative work. Thanks the
+            This material is the result of a collaborative work. Thanks to the
             <a href="https://wiki.galaxyproject.org/Teach/GTN">Galaxy Training Network</a>
             and all the <a href="{{ site.baseurl }}/hall-of-fame">contributors</a> ({{ contributors | remove_first: ', ' }})!
         </p>

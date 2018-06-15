@@ -7,10 +7,9 @@ tutorial_name: mapping-by-sequencing
 # Introduction
 {:.no_toc}
 
-Mapping-by-sequencing is a technique in basic genetic research that combines
-classical genetic mapping concepts with the power of next-generation-sequencing
-to enable the mapping and molecular identification of phenotype-causing
-mutations from a single experiment.
+In order to map and identify phenotype-causing mutations efficiently from a
+single experiment, modern genetic research aims at combining classical genetic
+mapping concepts with the power of next-generation-sequencing.
 
 After having obtained, *e.g.*, from a forward genetic screen, a mutant strain
 of an organism with a particular phenotype, the classical approach towards
@@ -22,13 +21,16 @@ identification of the underlying causative mutation would be to
 2. sequence candidate DNA stretches in this region to identify the precise
    nature of the mutation.
 
-Modern mapping-by-sequencing approaches, in contrast, use just one set of
-genome-wide sequencing data obtained from mapping-cross progeny and suitable
-parent strains to simultaneously:
+Modern approaches, in contrast, use just one set of genome-wide sequencing data
+obtained from mapping-cross progeny and suitable parent strains to
+simultaneously:
 
 * discover available marker mutations for linkage analysis,
 * map the causative mutation using these markers, and
-* identify candidate mutations
+* identify candidate mutations.
+
+Since it uses sequencing data already at the mapping step, this process is
+called **mapping-by-sequencing**.
 
 Since genome-wide sequencing will often reveal a few hundreds to many thousands
 of marker variants that should be considered together in the linkage analysis,
@@ -39,7 +41,7 @@ approaches.
 
 > ### {% icon tip %} Further reading
 > The MiModD documentation has its own chapter on supported
-> [Mapping-by-sequencing schemes](http://mimodd.readthedocs.io/en/latest/nacreousmap.html)
+> [mapping-by-sequencing schemes](http://mimodd.readthedocs.io/en/latest/nacreousmap.html)
 > not covered here.
 {: .tip}
 
@@ -218,29 +220,26 @@ one sample appears to have a non-wt genotype, and report them in VCF format.
 > > 1. Approximately how many variants did get extracted?
 > > 2. Does this number surprise you?
 > >
-> > <details>
-> >   <summary>Click to view answers</summary>
-> >   <ol type="1">
-> >     <li>You can click on the extracted variants dataset in your history to
-> >     get more details about it. You should see that the file has an
-> >     estimated 130,000 lines and since, in VCF format, apart from a number
-> >     of header lines, one variant gets reported per line, this roughly
-> >     equals the number of variants in the dataset.</li>
-> >     <li>The huge number of variants reflects the fact that the L<em>er</em>
-> >     mapping strain is really quite diverged from the Col reference
-> >     background that the mutant was generated in and, thus, offers many
-> >     marker variants for mapping.
-> >     In total, the L<em>er</em> genome harbors > 400,000 single nucleotide
-> >     variants compared to the Col reference, but to keep the tutorial
-> >     datasets small we only provided reads mapping to 2 out of 5
-> >     chromosomes. In addition, we provided really low-coverage data
-> >     even for those two chromosomes so our analysis will miss many true
-> >     variants and contain many questionable variant calls that may represent
-> >     false-positives, but an analysis based on such a large overall number
-> >     of variants is robust enough to provide useful results regardless.
-> >     </li>
-> >   </ol>
-> > </details>
+> > > ### {% icon solution %} Solution
+> > >  1. You can click on the extracted variants dataset in your history to
+> > >     get more details about it. You should see that the file has an
+> > >     estimated 130,000 lines and since, in VCF format, apart from a number
+> > >     of header lines, one variant gets reported per line, this roughly
+> > >     equals the number of variants in the dataset.
+> > >  2. The huge number of variants reflects the fact that the L*er*
+> > >     mapping strain is really quite diverged from the Col reference
+> > >     background that the mutant was generated in and, thus, offers many
+> > >     marker variants for mapping.
+> > >
+> > >     In total, the L*er* genome harbors >400,000 single nucleotide
+> > >     variants compared to the Col reference, but to keep the tutorial
+> > >     datasets small we only provided reads mapping to 2 out of 5
+> > >     chromosomes. In addition, we provided really low-coverage data
+> > >     even for those two chromosomes so our analysis will miss many true
+> > >     variants and contain many questionable variant calls that may represent
+> > >     false-positives, but an analysis based on such a large overall number
+> > >     of variants is robust enough to provide useful results regardless.
+> > {: .solution }
 > >
 > {: .question}
 {: .hands_on}
@@ -302,29 +301,26 @@ mutation.
 > > 3. What about those `No markers found!` messages (you saw them, right?)
 > >    that the tool printed?
 > >
-> > <details>
-> >   <summary>Click to view answers</summary>
-> >   <ol type="1">
-> >     <li>The plots suggest that the causative variant is likely to be found
-> >     in the region from 18,000,000 to 19,000,000 on chr2.</li>
-> >     <li><p>Look at the y axis labels! The scatter plots show the rates at
-> >     which marker sites appear to recombine with the causative mutation
-> >     in the pool of F2 recombinants, while the histograms show linkage
-> >     evidence. Hence, a dip of the scatter plot regression line towards zero
-> >     corresponds to a peak in the histograms and the two kinds of plots are,
-> >     thus, in very good agreement for this analysis.</p>
-> >     <p>In general, the histogram plots are easier to digest and often
-> >     provide more precise mapping intervals, and are often all you need for
-> >     mapping a causative variant. The per-marker scatter plots, on the other
-> >     hand, are closer to the raw data and can sometimes reveal additional
-> >     irregularities in the data that may indicate problems with the mapping
-> >     cross or unexpected factors influencing the inheritance pattern.</p>
-> >     </li>
-> >     <li>Since we included only reads mapping to chromosome 1 or 2 in
-> >     the original BAM files, the tool will not be able to detect any markers
-> >     for the other chromosomes.</li>
-> >   </ol>
-> > </details>
+> > > ### {% icon solution %} Solution
+> > > 1. The plots suggest that the causative variant is likely to be found
+> > >    in the region from 18,000,000 to 19,000,000 on chr2.
+> > > 2. Look at the y axis labels! The scatter plots show the rates at
+> > >    which marker sites appear to recombine with the causative mutation
+> > >    in the pool of F2 recombinants, while the histograms show linkage
+> > >    evidence. Hence, a dip of the scatter plot regression line towards zero
+> > >    corresponds to a peak in the histograms and the two kinds of plots are,
+> > >    thus, in very good agreement for this analysis.
+> > >
+> > >    In general, the histogram plots are easier to digest and often
+> > >    provide more precise mapping intervals, and are often all you need for
+> > >    mapping a causative variant. The per-marker scatter plots, on the other
+> > >    hand, are closer to the raw data and can sometimes reveal additional
+> > >    irregularities in the data that may indicate problems with the mapping
+> > >    cross or unexpected factors influencing the inheritance pattern.
+> > > 3. Since we included only reads mapping to chromosome 1 or 2 in
+> > >    the original BAM files, the tool will not be able to detect any markers
+> > >    for the other chromosomes.
+> > {: .solution }
 > >
 > {: .question}
 {: .hands_on}
@@ -398,19 +394,15 @@ so far:
 > > 2. How many variants would you have to consider as candidates if you did
 > >    not have any mapping information?
 > >
-> > <details>
-> >   <summary>Click to view answers</summary>
-> >   <ol type="1">
-> >     <li>If you used the suggested mapping interval of 1Mb on chr2, you
-> >     should have retained 5 variants. Filtering is a really powerful way to
-> >     reduce the number of variants to consider!</li>
-> >     <li>Rerunning the job with the region filter removed shows that across
-> >     the two chromosomes, for which the input datasets provided sequencing
-> >     reads, there are 50 variants for which the pool appears homozygous
-> >     mutant and for which the L<em>er</em> strain is homozygous wt.</li>
-> >   </ol>
-> > </details>
-> >
+> > > ### {% icon solution %} Solution
+> > > 1. If you used the suggested mapping interval of 1Mb on chr2, you
+> > >    should have retained 5 variants. Filtering is a really powerful way to
+> > >    reduce the number of variants to consider!
+> > > 2. Rerunning the job with the region filter removed shows that across
+> > >    the two chromosomes, for which the input datasets provided sequencing
+> > >    reads, there are 50 variants for which the pool appears homozygous
+> > >    mutant and for which the L*er* strain is homozygous wt.
+> > {: .solution }
 > {: .question}
 {: .hands_on}
 
@@ -486,22 +478,18 @@ with predicted functional effects.
 > > 2. What biological functions are described for the two genes? How do these
 > >    relate to the phenotype of our mutant line?
 > >
-> > <details>
-> >   <summary>Click to view answers</summary>
-> >   <ol type="1">
-> >     <li>The C→T transition at 18,774,111 results in a premature
-> >     translational stop for the transcript AT2G45550.1. The C→T transition
-> >     at 18,808,927 affects a splice donor site and, thus, is likely to
-> >     interfere with correct splicing of the transcript AT2G45660.1.</li>
-> >     <li>From the linked gene pages at <em>TAIR</em> you can learn that the
-> >     gene AT2G45550 encodes a cytochrome P450, while AT2G45660 encodes a
-> >     protein called AGL20, which is known to control flowering. Thus, there
-> >     is a direct connection between the late-flowering phenotype of the
-> >     mutant line studied here and the known role of the gene affected by
-> >     chr2:18,808,927 C→T.</li>
-> >   </ol>
-> > </details>
-> >
+> > > ### {% icon solution %} Solution
+> > > 1. The C→T transition at 18,774,111 results in a premature
+> > >    translational stop for the transcript AT2G45550.1. The C→T transition
+> > >    at 18,808,927 affects a splice donor site and, thus, is likely to
+> > >    interfere with correct splicing of the transcript AT2G45660.1.
+> > > 2. From the linked gene pages at *TAIR* you can learn that the
+> > >    gene AT2G45550 encodes a cytochrome P450, while AT2G45660 encodes a
+> > >    protein called AGL20, which is known to control flowering. Thus, there
+> > >    is a direct connection between the late-flowering phenotype of the
+> > >    mutant line studied here and the known role of the gene affected by
+> > >    chr2:18,808,927 C→T.
+> > {: .solution }
 > {: .question}
 {: .hands_on}
 

@@ -69,14 +69,11 @@ In the following we will process a dataset with a mapper, 'Bowtie2', and we will
 >    > - Is everything as expected?
 >    > - Why is the mapping so bad?
 >    >
->    >    <details>
->    >    <summary>Click to view answers</summary>
->    >    <ol type="1">
->    >    <li>The information given here is a quantity one. We can see how many sequences are aligned. It does not tell us something about the quality.</li>
->    >    <li>No, only 0.59% of all reads could be mapped.</li>
->    >    <li>We mapped against the wrong reference genome! </li>
->    >    </ol>
->    >    </details>
+>    >    > ### {% icon solution %} Solution
+>    >    > 1. The information given here is a quantity one. We can see how many sequences are aligned. It does not tell us something about the quality.
+>    >    > 2. No, only 0.59% of all reads could be mapped.
+>    >    > 3. We mapped against the wrong reference genome! 
+>    >    {: .solution }
 >    {: .question}
 >
 >
@@ -121,25 +118,18 @@ A general description of the user interface of the IGV browser can be read here:
 >       > - What could be the reason that a read is white instead of grey?
 >       > - How many reads are mapped at position chr4:87482?
 >       >
->       >    <details>
->       >    <summary>Click to view answers</summary>
->       >    <ol type="1">
->       >    <li>If a nucleotide differs from the reference sequence in greater than 20% of quality weighted reads, IGV colors the bar in proportion to the read count of each base.</li>
->       >    <li>They have a mapping quality equal to zero. Interpretation of this mapping quality depends on the mapping aligner as some commonly used aligners use this convention to mark a read with multiple alignments. In such a case, the read also maps to another location with equally good placement. It is also possible the read could not be uniquely placed but the other placements do not necessarily give equally good quality hits.</li>
->       >    <li>There are seven reads. Six have the correct 'T', one read a 'G'.</li>
->       >    </ol>
->       >    </details>
+>       >    > ### {% icon solution %} Solution
+>       >    > 1. If a nucleotide differs from the reference sequence in greater than 20% of quality weighted reads, IGV colors the bar in proportion to the read count of each base.
+>       >    > 2. They have a mapping quality equal to zero. Interpretation of this mapping quality depends on the mapping aligner as some commonly used aligners use this convention to mark a read with multiple alignments. In such a case, the read also maps to another location with equally good placement. It is also possible the read could not be uniquely placed but the other placements do not necessarily give equally good quality hits.
+>       >    > 3. There are seven reads. Six have the correct 'T', one read a 'G'.
+>       >    {: .solution }
 >       {: .question}
 >
 {: .hands_on}
 
 > ### {% icon hands_on %} Hands-on: Differences between a good and a bad mapping
 >
-> 1. **Galaxy** {% icon tool %}: To show you the difference between a good and a bad dataset we provided an additional dataset which will give you a bad mapping. Load the ['GSM461182_untreat_single_subset.fastq'](https://zenodo.org/record/61771/files/GSM461178_untreat_paired_subset_1.fastq) dataset from [Zenodo](https://zenodo.org/record/61771) into Galaxy.
->
->    > ### {% icon comment %} Comments
->    > If you are using the [Freiburg Galaxy instance](http://galaxy.uni-freiburg.de), you can load the dataset using 'Shared Data' -> 'Data Libraries' -> 'Galaxy Courses' -> 'RNA-Seq' -> 'fastq'
->    {: .comment}
+> 1. **Galaxy** {% icon tool %}: To show you the difference between a good and a bad dataset we provided an additional dataset which will give you a bad mapping. Load the ['GSM461182_untreat_single_subset.fastq'](https://zenodo.org/record/61771/files/GSM461182_untreat_single_subset.fastq) dataset from [Zenodo](https://zenodo.org/record/61771) into Galaxy.
 >
 > 2. **IGV** {% icon tool %}: Load the two mappings into IGV and compare them!
 >
@@ -147,12 +137,9 @@ A general description of the user interface of the IGV browser can be read here:
 >       >
 >       > - How IGV helps you to see that the second dataset is bad?
 >       >
->       >    <details>
->       >    <summary>Click to view answers</summary>
->       >    <ol type="1">
->       >    <li>White/transparent reads indicate bad mapping quality. Second, IGV shows you the nucleotides in color if they are different in the reference genome.</li>
->       >    </ol>
->       >    </details>
+>       >    > ### {% icon solution %} Solution
+>       >    > 1. White/transparent reads indicate bad mapping quality. Second, IGV shows you the nucleotides in color if they are different in the reference genome.
+>       >    {: .solution }
 >       {: .question}
 >
 {: .hands_on}

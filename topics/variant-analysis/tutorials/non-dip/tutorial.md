@@ -28,7 +28,7 @@ In this tutorials we will take the *first* path is which we map reads against an
 
 The goal of this example is to detect heteroplasmies (variants within mitochondrial DNA). Mitochondria is transmitted maternally and heteroplasmy frequencies may change dramatically and unpredictably during the transmission, due to a germ-line bottleneck [Cree:2008](https://www.nature.com/ng/journal/v40/n2/abs/ng.2007.63.html). As we mentioned above the procedure for finding variants in bacterial or viral genomes will be essentially the same.
 
-[A Galaxy Library](https://usegalaxy.org/library/list#folders/Fe4842bd0c37b03a7) contains datasets representing a child and a mother. These datasets are obtained by paired-end Illumina sequencing of human genomic DNA enriched for mitochondria. The enrichment was performed using long-range PCR with two primer pairs that amplify the entire mitochondrial genome. This means that these samples still contain a lot of DNA from the nuclear genome, which, in this case, is a contaminant.
+Zenodo contains [datasets representing a child and a mother](https://doi.org/10.5281/zenodo.1251112). These datasets are obtained by paired-end Illumina sequencing of human genomic DNA enriched for mitochondria. The enrichment was performed using long-range PCR with two primer pairs that amplify the entire mitochondrial genome. This means that these samples still contain a lot of DNA from the nuclear genome, which, in this case, is a contaminant.
 
 # Importing example datasets
 
@@ -476,24 +476,3 @@ This entire analysis is available as a [Galaxy history](https://usegalaxy.org/u/
 
 
 Now you know how to call variants in non-diploid system, so try it on bacteria, viruses etc...
-
-
-# Exercise
-
-Time to really do it yourself. Please, complete the following exercise:
-
-> ### Find variants in a virus
->
->Suppose you obtained a virus from some source and you would like to see how it is different from its published reference sequence. You have sequenced the virus and obtained two Illumina files (these files are large, so don't open them. Rather copy their addresses (right click) and use them to upload into Galaxy as explained in *Hints* section below):
->
->- [Forward reads](https://www.bx.psu.edu/~anton/share/ng_test_data/bmmb554/hw4/f.fq.gz)
->- [Reverse reads](https://www.bx.psu.edu/~anton/share/ng_test_data/bmmb554/hw4/r.fq.gz)
->
->Analyze these files using Galaxy as was explained in this lesson by mapping them against [this reference genome](https://www.bx.psu.edu/~anton/share/ng_test_data/bmmb554/hw4/phix.fa) (again right click to copy the address); see *Tips*).
->
->    > ### {% icon tip %} Tips
->    >
->    > - You need to upload reads and the reference genome into Galaxy (https://usegalaxy.org) as shown in [this video](https://vimeo.com/120973708)
->    > - You will be mapping reads against an uploaded reference genome as shown in [this video](https://vimeo.com/123108417).
->    {: .tip}
-{: .comment}

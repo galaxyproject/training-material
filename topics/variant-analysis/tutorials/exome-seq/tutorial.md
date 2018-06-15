@@ -142,9 +142,10 @@ substitution events) smaller than the length of a short-read sequencing alignmen
 > 1. Select **FreeBayes** in the tool menu (left panel of Galaxy's interface)
 > 2. Run **FreeBayes**{% icon tool %}:
 >    1. Load reference genome from local cache
->    2. Use `Human (Homo sapiens): hg19` as reference genome
->    3. Choose other default settings
->    4. Execute
+>    2. Select the father data as the BAM dataset
+>    3. Use `Human (Homo sapiens): hg19` as reference genome
+>    4. Choose other default settings
+>    5. Execute
 >
 {: .hands_on}
 
@@ -173,7 +174,7 @@ to simplify the variant representation.
 
 > ### {% icon tip %} Tip:
 >
-> Have a look at the examples which help you constructing the correct expression.
+> Have a look at the examples that can help you construct the correct expression for the Filter criteria.
 {: .tip}
 
 ## Annotate your variants

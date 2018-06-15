@@ -7,7 +7,7 @@ tutorial_name: de-novo
 # Introduction
 {:.no_toc}
 
-The data provided here are part of a Galaxy tutorial that analyzes RNA-seq data from a study published by *Wu et al.* in 2014 [DOI:10.1101/gr.164830.113](http://genome.cshlp.org/content/early/2014/10/12/gr.164830.113.abstract). The goal of this study was to investigate "the dynamics of occupancy and the role in gene regulation of the transcription factor Tal1, a critical regulator of hematopoiesis, at multiple stages of hematopoietic differentiation." To this end, RNA-seq libraries were constructed from multiple mouse cell types including G1E - a GATA-null immortalized cell line derived from targeted disruption of GATA-1 in mouse embryonic stem cells - and megakaryocytes. This RNA-seq data was used to determine differential gene expression between G1E and megakaryocytes and later correlated with Tal1 occupancy. This dataset (GEO Accession: GSE51338) consists of biological replicate, paired-end, poly(A) selected RNA-seq libraries. Because of the long processing time for the large original files, we have downsampled the original raw data files to include only reads that align to chromosome 19 and a subset of interesting genomic loci identified by Wu *et al*.
+The data provided here are part of a Galaxy tutorial that analyzes RNA-seq data from a study published by *Wu et al.* in 2014 [DOI:10.1101/gr.164830.113](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4248312/). The goal of this study was to investigate "the dynamics of occupancy and the role in gene regulation of the transcription factor Tal1, a critical regulator of hematopoiesis, at multiple stages of hematopoietic differentiation." To this end, RNA-seq libraries were constructed from multiple mouse cell types including G1E - a GATA-null immortalized cell line derived from targeted disruption of GATA-1 in mouse embryonic stem cells - and megakaryocytes. This RNA-seq data was used to determine differential gene expression between G1E and megakaryocytes and later correlated with Tal1 occupancy. This dataset (GEO Accession: GSE51338) consists of biological replicate, paired-end, poly(A) selected RNA-seq libraries. Because of the long processing time for the large original files, we have downsampled the original raw data files to include only reads that align to chromosome 19 and a subset of interesting genomic loci identified by Wu *et al*.
 
 # Analysis strategy
 
@@ -43,7 +43,8 @@ Due to the large size of this dataset, we have downsampled it to only include re
 >    >
 >    > Below are the links to the read files that can be copied and pasted in the upload manager.
 >    >
->    > ``` https://zenodo.org/record/583140/files/G1E_rep1_forward_read_%28SRR549355_1%29
+>    > ```
+>    > https://zenodo.org/record/583140/files/G1E_rep1_forward_read_%28SRR549355_1%29
 >    > https://zenodo.org/record/583140/files/G1E_rep1_reverse_read_%28SRR549355_2%29
 >    > https://zenodo.org/record/583140/files/G1E_rep2_forward_read_%28SRR549356_1%29
 >    > https://zenodo.org/record/583140/files/G1E_rep2_reverse_read_%28SRR549356_2%29
@@ -72,13 +73,10 @@ For quality control, we use similar tools as described in [NGS-QC tutorial]({{si
 >    > 1. What is the read length?
 >    > 2. Is there anything interesting about the quality of the base calls based on the position in the reads?
 >    >
->    >    <details>
->    >    <summary>Click to view answers</summary>
->    >    <ol type="1">
->    >    <li>The read length is 99 bp</li>
->    >    <li>The quality of base calls declines throughout a sequencing run. </li>
->    >    </ol>
->    >    </details>
+>    >    > ### {% icon solution %} Solution
+>    >    > 1. The read length is 99 bp
+>    >    > 2. The quality of base calls declines throughout a sequencing run. 
+>    >    {: .solution }
 >    {: .question}
 >
 > 2. **Trimmomatic** {% icon tool %}: Trim off the low quality bases from the ends of the reads to increase mapping efficiency. Run `Trimmomatic` on each pair of forward and reverse reads.
@@ -92,13 +90,10 @@ For quality control, we use similar tools as described in [NGS-QC tutorial]({{si
 >    > 1. What is the read length?
 >    > 2. Is there anything interesting about the quality of the base calls based on the position in the reads?
 >    >
->    >    <details>
->    >    <summary>Click to view answers</summary>
->    >    <ol type="1">
->    >    <li>The read lengths range from 1 to 99 bp after trimming</li>
->    >    <li>The average quality of base calls does not drop off as sharply at the 3' ends of reads.</li>
->    >    </ol>
->    >    </details>
+>    >    > ### {% icon solution %} Solution
+>    >    > 1. The read lengths range from 1 to 99 bp after trimming
+>    >    > 2. The average quality of base calls does not drop off as sharply at the 3' ends of reads.
+>    >    {: .solution }
 >    {: .question}
 > ![Before and after trimming comparison](../../images/BeforeAndAfterTrimming.png)
 {: .hands_on}
@@ -272,10 +267,9 @@ The first output of `DESeq2` is a tabular file. The columns are:
 >    >
 >    > How many transcripts have a significant change in expression between these conditions?
 >    >
->    > <details>
->    > <summary>Click to view answers</summary>
->    > To filter, use "c7<0.05". And we get 249 transcripts with a significant change in gene expression between the G1E and megakaryocyte cellular states.
->    > </details>
+>    > > ### {% icon solution %} Solution
+>    > > To filter, use "c7<0.05". And we get 249 transcripts with a significant change in gene expression between the G1E and megakaryocyte cellular states.
+>    > {: .solution }
 >    {: .question}
 >
 > 2. **Filter** {% icon tool %}: Determine how many transcripts are up or down regulated in the G1E state.
@@ -288,10 +282,9 @@ The first output of `DESeq2` is a tabular file. The columns are:
 >    >
 >    > Are there more upregulated or downregulated genes in the treated samples?
 >    >
->    > <details>
->    > <summary>Click to view answers</summary>
->    > To obtain the up-regulated genes in the G1E state, we filter the previously generated file (with the significant change in transcript expression) with the expression "c3>0" (the log2 fold changes must be greater than 0). We obtain 102  genes (40.9% of the genes with a significant change in gene expression). For the down-regulated genes in the G1E state, we did the inverse and we find 149 transcripts (59% of the genes with a significant change in transcript expression).
->    > </details>
+>    > > ### {% icon solution %} Solution
+>    > > To obtain the up-regulated genes in the G1E state, we filter the previously generated file (with the significant change in transcript expression) with the expression "c3>0" (the log2 fold changes must be greater than 0). We obtain 102  genes (40.9% of the genes with a significant change in gene expression). For the down-regulated genes in the G1E state, we did the inverse and we find 149 transcripts (59% of the genes with a significant change in transcript expression).
+>    > {: .solution }
 >    {: .question}
 {: .hands_on}
 
@@ -382,14 +375,11 @@ In this last section, we will convert our aligned read data from BAM format to b
 >
 >    > ### {% icon question %} Question
 >    > what do you see?
->    >    <details>
->    >    <summary>Click to view answers</summary>
->    >    <ol type="1">
->    >    <li>There are two clusters of transcripts that are exclusively expressed in the G1E background</li>
->    >    <li>The left-most transcript is the Hoxb13 transcript</li>
->    >    <li>The center cluster of transcripts are not present in the RefSeq annotation and are determined by `GFFCompare` to be "u" and "x"</li>
->    >    </ol>
->    >    </details>
+>    >    > ### {% icon solution %} Solution
+>    >    > 1. There are two clusters of transcripts that are exclusively expressed in the G1E background
+>    >    > 2. The left-most transcript is the Hoxb13 transcript
+>    >    > 3. The center cluster of transcripts are not present in the RefSeq annotation and are determined by `GFFCompare` to be "u" and "x"
+>    >    {: .solution }
 >    {: .question}
 >
 {: .hands_on}
@@ -399,9 +389,6 @@ In this last section, we will convert our aligned read data from BAM format to b
 
 In this tutorial, we have analyzed real RNA sequencing data to extract useful information, such as which genes are up- or down-regulated by depletion of the Pasilla gene and which genes are regulated by the Pasilla gene. To answer these questions, we analyzed RNA sequence datasets using a reference-based RNA-seq data analysis approach. This approach can be sum up with the following scheme:
 
-
 ![RNAseq de novo tutorial workflow](../../images/schematic_for_RNAseq_de_novo_tutorial.png)
 
 
-> # Workflow
-> This analysis pipeline can be recreated using the workflow here: [https://tinyurl.com/GTNdenovoRNAseqWorkflow ](https://tinyurl.com/GTNdenovoRNAseqWorkflow)

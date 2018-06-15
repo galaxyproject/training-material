@@ -59,7 +59,7 @@ If your data were generated on a low resolution mass spectrometer, use ***PeakPi
 > 6. Run ***FileConverter*** {% icon tool %} on the picked mzML. In the **Advanced Options** set the **Output file type** to `mgf`.
 >
 >   > ### {% icon comment %} Comment: Local Use of MSConvert
->   > The vendor libraries used by MSConvert are only licensed for Windows systems and are therefore rarely implemented in Galaxy instances. If ***msconvert*** {% icon tool %} is not available in your Galaxy instance, please install the software on a Windows computer and run the conversion locally. You can find a detailed description of the necessary steps [here](http://genesis.ugent.be/files/costore/practicals/bioinformatics-for-proteomics/1-Peptide-and-Protein-Identification/1.2-Peak-List-Generation/1.2-Peak-List-Generation.pdf). Afterwards, upload the resulting mzML file to your Galaxy history.
+>   > The vendor libraries used by MSConvert are only licensed for Windows systems and are therefore rarely implemented in Galaxy instances. If ***msconvert*** {% icon tool %} is not available in your Galaxy instance, please install the software on a Windows computer and run the conversion locally. You can find a detailed description of the necessary steps [here](https://compomics.com/bioinformatics-for-proteomics/identification/) ("Peak List Generation"). Afterwards, upload the resulting mzML file to your Galaxy history.
 >  {: .comment}
 {: .hands_on}
 
@@ -95,13 +95,10 @@ In bottom-up proteomics, it is necessary to combine the identified peptides to p
 >   > 1. How many peptides were identified? How many proteins?
 >   > 2. How many peptides with oxidized methionine were identified?
 >   >
->   >  <details>
->   >  <summary>Click to view answers</summary>
->   >   <ol type="1">
->   >     <li> You should have identified 3,325 peptides and 1,170 proteins.</li>
->   >     <li> 328 peptides contain an oxidized methionine (MeO). To get to this number, you can use ***Select*** {% icon tool %} on the Peptide Report and search for either "Oxidation of M" or "M\<ox\>".</li>
->   >   </ol>
->   >  </details>
+>   >  > ### {% icon solution %} Solution
+>   >  > 1. You should have identified 3,325 peptides and 1,170 proteins.
+>   >  > 2. 328 peptides contain an oxidized methionine (MeO). To get to this number, you can use ***Select*** {% icon tool %} on the Peptide Report and search for either "Oxidation of M" or "M\<ox\>".
+>   >  {: .solution }
 >   {: .question}
 {: .hands_on}
 
@@ -119,16 +116,13 @@ The FASTA database used for the peptide to spectrum matching contained some entr
 >   > 3. How many mycoplasma proteins did you identify? Does this mean that the analyzed HeLa cells were infected with mycoplasma?
 >   > 4. How many false positives do we expect in our list? How many of these are expected to match mycoplasma proteins?
 >   >
->   >  <details>
->   >  <summary>Click to view answers</summary>
->   >   <ol type="1">
->   >     <li> TRY_BOVIN is bovine trypsin. It was used to degrade the proteins to peptides. ALBU_BOVIN is bovine serum albumin. It is added to cell culture medium in high amounts.</li>
->   >     <li> Contaminants often stem from the experimenter, these are typically keratins or other high-abundant human proteins. Basically any protein present in the room of the mass spectrometer might get into the ion source, if it is airborne. As an example, sheep keratins are sometimes found in proteomic samples, stemming from clothing made of sheep wool.</li>
->   >     <li> There should be five mycoplasma proteins in your protein list. However, all of them stem from different mycoplasma species. Also, every protein was identified by one peptide only. You can see this in column 17-19 of your output. These observations make it very likely that we are facing false positives here.</li>
->   >     <li> As we were allowing for a false discovery rate of 1 %, we would expect 12 false positive proteins in our list.
->   >     False positives are expected to be randomly assigned to peptides in the FASTA database. Our database consists of about 20,000 human proteins and 4,000 mycoplasma proteins. Therefore, we would expect 17 % (= 2) of all false positives matching to mycoplasma proteins.</li>
->   >   </ol>
->   >  </details>
+>   >  > ### {% icon solution %} Solution
+>   >  1. TRY_BOVIN is bovine trypsin. It was used to degrade the proteins to peptides. ALBU_BOVIN is bovine serum albumin. It is added to cell culture medium in high amounts.
+>   >  2. Contaminants often stem from the experimenter, these are typically keratins or other high-abundant human proteins. Basically any protein present in the room of the mass spectrometer might get into the ion source, if it is airborne. As an example, sheep keratins are sometimes found in proteomic samples, stemming from clothing made of sheep wool.
+>   >  3. There should be five mycoplasma proteins in your protein list. However, all of them stem from different mycoplasma species. Also, every protein was identified by one peptide only. You can see this in column 17-19 of your output. These observations make it very likely that we are facing false positives here.
+>   >  4. As we were allowing for a false discovery rate of 1 %, we would expect 12 false positive proteins in our list.
+>   >     False positives are expected to be randomly assigned to peptides in the FASTA database. Our database consists of about 20,000 human proteins and 4,000 mycoplasma proteins. Therefore, we would expect 17 % (= 2) of all false positives matching to mycoplasma proteins.
+>   >  {: .solution }
 >   {: .question}
 {: .hands_on}
 
@@ -148,13 +142,10 @@ The FASTA database used for the peptide to spectrum matching contained some entr
 >   > 1. How to exclude mycoplasma proteins?
 >   > 2. How many "Confident" non-contaminant proteins were identified?
 >   >
->   >  <details>
->   >  <summary>Click to view answers</summary>
->   >   <ol type="1">
->   >       <li> Add another ***Select*** {% icon tool %} matching the pattern "HUMAN".</li>
->   >   <li> You should have identified 582 human non-contaminant proteins that were validated to be "Confident".<\li>
->   >   </ol>
->   >  </details>
+>   >  > ### {% icon solution %} Solution
+>   >  > 1. Add another ***Select*** {% icon tool %} matching the pattern "HUMAN".
+>   >  > 2. You should have identified 582 human non-contaminant proteins that were validated to be "Confident".
+>   >  {: .solution }
 >   {: .question}
 {: .hands_on}
 
