@@ -24,7 +24,7 @@ tutorial_name: galaxy-intro-peaks2genes
 > 今回のチュートリアルでは以下のものを扱います。
 >
 > 1. TOC
-> {:toc} 
+> {:toc}
 >
 {: .agenda}
 
@@ -42,21 +42,21 @@ Galaxyのインタフェースは以下のような3つの部分によって主�
 >
 > 1. 空の解析ヒストリーがあることを確認する
 >
->    > ### {% icon tip %} ヒストリーを新規作成する
->    >
->    > * ヒストリーパネルの上部にある**歯車**アイコンをクリックする
->    > * メニューにある**新しく作成**を選択する
+>    > ### {% icon tip %} ヒストリーを新規作成する
+>    >
+>    > * ヒストリーパネルの上部にある**歯車**アイコンをクリックする
+>    > * メニューにある**新しく作成**を選択する
 >    {: .tip}
 >
 > 2. ヒストリーの名前を分かりやすいものに変える
 >
->    > ### {% icon tip %} ヒストリーの名前を変更する
+>    > ### {% icon tip %} ヒストリーの名前を変更する
 >    >
->    > * ヒストリーのタイトルをクリックする(デフォルトでは *Unnamed history* となっています)
+>    > * ヒストリーのタイトルをクリックする(デフォルトでは *Unnamed history* となっています)
 >    >
 >    >   ![Renaming history](../../../../shared/images/rename_history.png)
 >    >
->    > * **Galaxy Introduction** という名前に変更します
+>    > * **Galaxy Introduction** という名前に変更します
 >    >
 >    {: .tip}
 >
@@ -66,7 +66,7 @@ Galaxyのインタフェースは以下のような3つの部分によって主�
 
 > ### {% icon hands_on %} ハンズオン:データをアップロードする
 >
-> 1.  [GEO](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE37268)からピーク領域のリスト(ファイルはこちら [`GSE37268_mof3.out.hpeak.txt.gz`](https://www.ncbi.nlm.nih.gov/geo/download/?acc=GSE37268&format=file&file=GSE37268%5Fmof3%2Eout%2Ehpeak%2Etxt%2Egz))をコンピュータにダウンロードする 
+> 1.  [GEO](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE37268)からピーク領域のリスト(ファイルはこちら [`GSE37268_mof3.out.hpeak.txt.gz`](https://www.ncbi.nlm.nih.gov/geo/download/?acc=GSE37268&format=file&file=GSE37268%5Fmof3%2Eout%2Ehpeak%2Etxt%2Egz))をコンピュータにダウンロードする
 > 2. インタフェースの左上にあるアップロードボタンをクリックする
 >
 >    ![Upload icon](../../images/upload_button.png)
@@ -77,39 +77,39 @@ Galaxyのインタフェースは以下のような3つの部分によって主�
 > 4. **Type** で `interval` を選択する
 >
 > 5. **Start** を押し、アップロードが完了するのを待つ    
->    
->     Galaxy が自動でファイルを展開する。
+>    
+>     Galaxy が自動でファイルを展開する。
 >
->     > ### {% icon comment %} コメント
->     > アップロードするとGalaxyの右枠に以下のようにヒストリーの項目が表示されます。このヒストリーは、
->     > 灰色(準備中)→黄色(実行中)→緑色(完了)と色が変わります。:
+>     > ### {% icon comment %} コメント
+>     > アップロードするとGalaxyの右枠に以下のようにヒストリーの項目が表示されます。このヒストリーは、
+>     > 灰色(準備中)→黄色(実行中)→緑色(完了)と色が変わります。:
 >     >
 >     > ![History section](../../images/intro_01.png)
 >     {: .comment}
 >
->    > ### {% icon tip %} Tip: リンクからデータをインポートする
+>    > ### {% icon tip %} Tip: リンクからデータをインポートする
 >    >
->    > * リンク部分をコピーする
->    > * Galaxy Upload Manager を開く
->    > * **Paste/Fetch Data** を選択する
->    > * テキスト部分にリンクをペーストする
->    > * **Type** で `interval` を選択する
->    > * **Start** を押す
->    {: .tip}
+>    > * リンク部分をコピーする
+>    > * Galaxy Upload Manager を開く
+>    > * **Paste/Fetch Data** を選択する
+>    > * テキスト部分にリンクをペーストする
+>    > * **Type** で `interval` を選択する
+>    > * **Start** を押す
+>    {: .tip}
 >
->    > ### {% icon tip %} Tip: ヒストリーにあるデータファイルのタイプを変更する
+>    > ### {% icon tip %} Tip: ヒストリーにあるデータファイルのタイプを変更する
 >    >
->    > * ヒストリーのデータセットにある鉛筆ボタンをクリックする
->    > * トップにある**Datatype** を選択する
->    > * 今回では`interval` を選択する
->    > * **Change datatype** を押す
->    {: .tip}
+>    > * ヒストリーのデータセットにある鉛筆ボタンをクリックする
+>    > * トップにある**Datatype** を選択する
+>    > * 今回では`interval` を選択する
+>    > * **Change datatype** を押す
+>    {: .tip}
 >
->    デフォルトでは、Galaxyはリンクを名前にします。また、データセットをデータベースや参照ゲノムにリンクしません。
+>    デフォルトでは、Galaxyはリンクを名前にします。また、データセットをデータベースや参照ゲノムにリンクしません。
 >
->    > ### {% icon comment %} コメント
->    > - アップロードしたデータセットのデータベースが mm9 であることを確認してください。そうでなければ、鉛筆アイコンをクリックして Database/BuildCheck の欄で Mouse July 2007 (NCBI37/mm9)(mm9) に変更してください。
->    > - サンプルによってデータセットの名前を変更しましょう。
+>    > ### {% icon comment %} コメント
+>    > - アップロードしたデータセットのデータベースが mm9 であることを確認してください。そうでなければ、鉛筆アイコンをクリックして Database/BuildCheck の欄で Mouse July 2007 (NCBI37/mm9)(mm9) に変更してください。
+>    > - サンプルによってデータセットの名前を変更しましょう。
 >    {: .comment}
 >
 {: .hands_on}
@@ -119,48 +119,48 @@ UCSCから手に入る、マウスの遺伝子のリストも必要となりま�
 
 > ### {% icon hands_on %} ハンズオン: UCSCからデータをアップロードする
 >
-> 1. ツールのメニューから、 `Get Data -> UCSC Main - table browser` へと移動する。
+> 1. ツールのメニューから、 `Get Data -> UCSC Main - table browser` へと移動する。
 >
 >     ![UCSC Main tool in tools section](../../images/101_01.png)
 >
->     **UCSC table browser** に進むと、以下のような画面が表示される:
+>     **UCSC table browser** に進むと、以下のような画面が表示される:
 >
 >     ![UCSC table browser interface](../../images/intro_02.png)
 >
 > 2. 以下のようにオプションを設定する:
->     - **clade** → `Mammal`
->     - **genome** → `Mouse`
->     - **assembly** → `July 2007 (NCBI37/mm9)`
->     - **group** → `Genes and Gene Predictions`
->     - **track** → `RefSeq Genes`
->     - **table** → `refGene`
->     - **region** → `genome`
->     - **output format** → `BED - browser extensible data`
->     - **Send output to** → `Galaxy` にチェックを入れる
+>     - **clade** → `Mammal`
+>     - **genome** → `Mouse`
+>     - **assembly** → `July 2007 (NCBI37/mm9)`
+>     - **group** → `Genes and Gene Predictions`
+>     - **track** → `RefSeq Genes`
+>     - **table** → `refGene`
+>     - **region** → `genome`
+>     - **output format** → `BED - browser extensible data`
+>     - **Send output to** → `Galaxy` にチェックを入れる
 >
 > 3. **get output** ボタンをクリックする
 >
->    ボタンをクリックすると以下のようなスクリーンが表示される:
+>    ボタンをクリックすると以下のようなスクリーンが表示される:
 >
 >    ![Output settings](../../images/intro_03.png)
 >
-> 4. **Create one BED record per** の欄で `Whole Gene` がチェックされているかを確認した後、 **Send Query to Galaxy** ボタンをクリックする。
+> 4. **Create one BED record per** の欄で `Whole Gene` がチェックされているかを確認した後、 **Send Query to Galaxy** ボタンをクリックする。
 >
 > 5. データセットの名前をより分かりやすいものに変更する
->    - ファイルの属性を編集するには**鉛筆アイコン**をクリックする
+>    - ファイルの属性を編集するには**鉛筆アイコン**をクリックする
 >      ![Pencil icon](../../images/edit_icon.png)
->    - 次のスクリーンでデータセットの名前を `Genes` に変える
->    - 画面下にある **Save** ボタンをクリックする
+>    - 次のスクリーンでデータセットの名前を `Genes` に変える
+>    - 画面下にある **Save** ボタンをクリックする
 >
 {: .hands_on}
 
 > ### {% icon comment %} BEDファイル形式について
 > **BED - Browser Extensible Data** 形式は遺伝子領域をコード化する柔軟な方法を提供します。BEDラインには以下の3つの位置情報が必要です:
 > - 染色体のID
-> - 開始位置 (最初の塩基を0とする)
-> - 終了位置 (最後の塩基を除く)
+> - 開始地点 (最初の塩基を0とする)
+> - 終了地点 (最後の塩基を除く)
 >
-> これらの位置情報に加えて最大9つのオプションの位置情報がありますが、1行に含まれるフィールドの数は1つのデータセット全体を通して統一しなければなりません。
+> これらの位置情報に加えて最大9つのオプションの位置情報がありますが、1行あたりの位置情報の数は1つのデータセット全体を通して統一しなければなりません。
 >
 > オプションの位置情報の内容も含めたより詳しい情報は[UCSC](https://genome.ucsc.edu/FAQ/FAQformat#format1) で得ることができます。
 {: .comment}
@@ -191,14 +191,14 @@ UCSCから手に入る、マウスの遺伝子のリストも必要となりま�
 >
 {: .question}
 
-このピークファイルは一般的な形式ではなく単にこのファイルを見るだけでは、それぞれの列が何を表しているか判断できません。今回挙げた論文の著者はピークコールに [HPeak](https://www.ncbi.nlm.nih.gov/pubmed/20598134) を用いていると述べています。
+このピークファイルは一般的な形式ではなく単にこのファイルを見るだけでは、それぞれの列が何を表しているか判断できません。今回挙げた論文の著者は [HPeak](https://www.ncbi.nlm.nih.gov/pubmed/20598134) と呼ばれるピークを用いていると述べています。
 
 HPeakのマニュアルを見ると、列に以下のような情報が含まれていることがわかります。:
 
  - 番号で表されている染色体の名前
- - 開始位置
- - 終了位置
- - フラグメント長
+ - 開始座標
+ - 終了座標
+ - 染色体の長さ
  - 最も高い仮説的なDNAフラグメント（頂上）の範囲を含むピーク内の位置。
 
 2つのファイルを比べるには、染色体の名前が同じ形式で表されていることを確認する必要があります。
@@ -206,22 +206,22 @@ HPeakのマニュアルを見ると、列に以下のような情報が含まれ
 
 > ### {% icon hands_on %} ハンズオン: ファイルの末尾を表示する
 >
-> 1. **末尾を選択する** {% icon tool %}: 以下の設定を行った上で **Select last lines from a dataset (tail)** を実行する:
->     - **Text file** でピークファイルである `GSE37268_mof3.out.hpeak.txt` を選択する
->     - **Operation** → `Keep last lines`
->     - **Number of lines** → 数値を選択しますが、例えば `100` とします
+> 1. **末尾を選択する** {% icon tool %}: 以下の設定を行った上で **Select last lines from a dataset (tail)** を実行する:
+>     - **Text file** でピークファイルである `GSE37268_mof3.out.hpeak.txt` を選択する
+>     - **Operation** → `Keep last lines`
+>     - **Number of lines** → 数値を選択しますが、例えば `100` とします
 > 2. **Execute** をクリックする
 > 3. 作業が終了するまで待機する
 > 4. **目のアイコン** をクリックしてファイルを見る
 >
->    > ### {% icon question %} 問題
->    >
->    > 1. 20番染色体と21番染色体はXやYと命名されていますか?
+>    > ### {% icon question %} 問題
+>    >
+>    > 1. 20番染色体と21番染色体はXやYと命名されていますか?
 >    >
 >    >    <details>
->    >    <summary>クリックで答えを表示</summary>
+>    >    <summary>クリックで答えを表示</summary>
 >    >    <ol type="1">
->    >    <li>命名されていません。もう一つ修正することがあります。</li>
+>    >    <li>命名されていません。もう一つ修正することがあります。</li>
 >    >    </ol>
 >    >    </details>
 >    {: .question}
@@ -235,25 +235,25 @@ HPeakのマニュアルを見ると、列に以下のような情報が含まれ
 > ### {% icon hands_on %} ハンズオン: 染色体の名前を調整する
 >
 > 1. **テキストを置き換える** {% icon tool %}: 以下の設定を行った上で **Replace Text in a specific column** を実行する:
->     - **File to process** でピークファイルである `GSE37268_mof3.out.hpeak.txt` を選択する
->     - **in column** → `Column:1`
->     - **Find pattern** → `[0-9]+` (これで数字が検索される)
->     - **Replace with** → `chr&` (`&` は検索した結果のプレースホルダです)
+>     - **File to process** でピークファイルである `GSE37268_mof3.out.hpeak.txt` を選択する
+>     - **in column** → `Column:1`
+>     - **Find pattern** → `[0-9]+` (これで数字が検索される)
+>     - **Replace with** → `chr&` (`&` は検索した結果のプレースホルダです)
 > 3. **テキストを置き換える** {% icon tool %}: 上で使ったツールを再実行してみましょう
->    - **File to process** 最後に実行した操作によるアウトプットで、例えば `Replace Text on data ...` といった名前のファイル
->    - **in column** → `Column:1`
->    - **Find pattern** → `chr20`
->    - **Replace with** → `chrX`
+>    - **File to process** 最後に実行した操作によるアウトプットで、例えば `Replace Text on data ...` といった名前のファイル
+>    - **in column** → `Column:1`
+>    - **Find pattern** → `chr20`
+>    - **Replace with** → `chrX`
 >
->    > ### {% icon tip %} Tip: ツールを再実行する
->    >
->    > * ヒストリーにある**もう一度このジョブを実行する**を押す
+>    > ### {% icon tip %} Tip: ツールを再実行する
+>    >
+>    > * ヒストリーにある**もう一度このジョブを実行する**を押す
 >    {: .tip}
 >
 > 4. **テキストを置き換える** {% icon tool %}: Y染色体についてこのツールを再実行する
 > 5. **目のアイコン**で直近のファイルを確認する
 >
->    出来ましたか?
+>    出来ましたか?
 >
 {: .hands_on}
 
@@ -269,25 +269,25 @@ HPeakのマニュアルを見ると、列に以下のような情報が含まれ
 > ### {% icon hands_on %} ハンズオン: 遺伝子レコードにプロモーター領域を加える
 >
 > 1. **Get Flanks** {% icon tool %}: 以下の設定を行った上で**Get flanks returns flanking region/s for every gene** を実行する:
->     - **Select data** でUCSCからのファイルを選択する
->     - **Region** → `Around Start`
->     - **Location of the flanking region/s** → `Upstream`
->     - **Offset** → `10000`
->     - **Length of the flanking region(s)** → `12000`
+>     - **Select data** でUCSCからのファイルを選択する
+>     - **Region** → `Around Start`
+>     - **Location of the flanking region/s** → `Upstream`
+>     - **Offset** → `10000`
+>     - **Length of the flanking region(s)** → `12000`
 >
->     このツールは全ての遺伝子でのフランキング領域を計算します
+>     このツールは全ての遺伝子でのフランキング領域をリターンします
 >
 > 2. BEDファイルの結果の行とインプットを比べて開始地点と終了地点の変更方法を見つける
 >
->    > ### {% icon tip %} Tip: scratchbookを利用して複数のファイルを確認する
+>    > ### {% icon tip %} Tip: scratchbookを利用して複数のファイルを確認する
 >    >
->    > * トップパネルにある **Enable/Disable Scratchbook** をクリックする
->    >
+>    > * トップパネルにある **Enable/Disable Scratchbook** をクリックする
+>    >
 >    >    ![Enable/Disable Scratchbook](../../images/intro_scratchbook_enable.png)
 >    >
->    > * ファイルを見るために**目のアイコン**をクリックする
->    > * **Show/Hide Scratchbook** をクリックする
->    >
+>    > * ファイルを見るために**目のアイコン**をクリックする
+>    > * **Show/Hide Scratchbook** をクリックする
+>    >
 >    >    ![Show/Hide Scratchbook](../../images/intro_scratchbook_show_hide.png)
 >    {: .tip}
 >
@@ -309,14 +309,14 @@ HPeakのマニュアルを見ると、列に以下のような情報が含まれ
 
 > ### {% icon hands_on %} ハンズオン: 重複部分を探す
 >
-> 1. **Intersect** {% icon tool %}: 以下の設定を行った上で **Intersect the intervals of two datasets** を実行する:
->     - **Return** → `Overlapping Intervals`
->     - **of** でプロモーター領域を含んだUCSCファイルを選択する
->     - **that intersect** で変換したピーク領域のファイルを選択する
->     - **for at least** → `1`
+> 1. **Intersect** {% icon tool %}: 以下の設定を行った上で **Intersect the intervals of two datasets** を実行する:
+>     - **Return** → `Overlapping Intervals`
+>     - **of** でプロモーター領域を含んだUCSCファイルを選択する
+>     - **that intersect** で変換したピーク領域のファイルを選択する
+>     - **for at least** → `1`
 >
->    > ### {% icon comment %} コメント
->    > 入力する順番はとても大事です！今回の目標としては遺伝子のリストで終わりたいので、対応するデータセットを最初に入力する必要があります。
+>    > ### {% icon comment %} コメント
+>    > 入力する順番はとても大事です！今回の目標としては遺伝子のリストで終わりたいので、対応するデータセットを最初に入力する必要があります。
 >    {: .comment}
 {: .hands_on}
 
@@ -327,23 +327,23 @@ HPeakのマニュアルを見ると、列に以下のような情報が含まれ
 > ### {% icon hands_on %} ハンズオン: 異なる染色体上の遺伝子の数を数える。
 >
 > 1. **Group** {% icon tool %}: 以下の設定を行った上で **Group data by a column and perform aggregate operation on other columns** を実行する:
->     - **Select data** で intersection の結果を選択する
->     - **Group by column** → `Column 1`
->     - **Insert Operation** を押して選択する:
->     - **Type** → `Count`
->     - **On column** → `Column 1`
->     - **Round result to nearest integer?** → `No`
+>     - **Select data** で intersection の結果を選択する
+>     - **Group by column** → `Column 1`
+>     - **Insert Operation** を押して選択する:
+>     - **Type** → `Count`
+>     - **On column** → `Column 1`
+>     - **Round result to nearest integer?** → `No`
 >
->    > ### {% icon question %} 問題
->    >
->    > どの染色体に最も多くの標的遺伝子が含まれていましたか?
+>    > ### {% icon question %} 問題
+>    >
+>    > どの染色体に最も多くの標的遺伝子が含まれていましたか?
 >    >
 >    >    <details>
->    >    <summary>クリックで答えを表示</summary>
+>    >    <summary>クリックで答えを表示</summary>
 >    >    <ol type="1">
->    >    <li>結果は設定によって異なります。もし、あなたがこれまでのステップを順々に行っていた場合は、最も多くの標的遺伝子をもつのは1675の遺伝子を
+>    >    <li>結果は設定によって異なります。もし、あなたがこれまでのステップを順々に行っていた場合は、最も多くの標的遺伝子をもつのは1675の遺伝子を
  持つ7番染色体になるはずです。</li>
->    >    </ol>
+>    >    </ol>
 >    >    </details>
 >    {: .question}
 >
@@ -373,57 +373,57 @@ Galaxyでは `ワークフローを抽出` というオプションを利用す�
 >
 > 1. ヒストリーを **クリーンアップ** する
 >
->    もし、操作が失敗している赤色のデータセットがありましたら、ヒストリーにある `x` ボタンをクリックしてそのデータセットを削除してください。このように整理することでワークフローの作製が容易になります。
+>    もし、操作が失敗している赤色のデータセットがありましたら、ヒストリーにある `x` ボタンをクリックしてそのデータセットを削除してください。このように整理することでワークフローの作製が容易になります。
 >
 > 2. ヒストリーの **Options menu** (歯車アイコン)を開き、 `ワークフローを抽出` を選択する。
 >
 >    ![Extracting workflow in history menu](../../images/history_menu_extract_workflow.png)
 >
->    中央のパネルが変わり、ワークフローにどのステップを入れるかの選択や、新しく作るワークフローの名前を決める画面が現れます。
+>    中央のパネルが変わり、ワークフローにどのステップを入れるかの選択や、新しく作るワークフローの名前を決める画面が現れます。
 >
-> 3. ワークフローに加えるべきでない全てのステップの**チェックを外す** 
+> 3. ワークフローに加えるべきでない全てのステップの**チェックを外す**
 >
->    これまでのステップでピークファイルをいくつか改変したので、そのような改変をした以下のステップは除外しましょう。:
+>    これまでのステップでピークファイルをいくつか改変したので、そのような改変をした以下のステップは除外しましょう。:
 >    - **Select last**
->    - 全ての **Replace Text** のステップ
->    - **Convert Genomic Intervals to strict BED**
+>    - 全ての **Replace Text** のステップ
+>    - **Convert Genomic Intervals to strict BED**
 >    - **Get flanks**
 >
 > 4. ワークフローの名前を例えば `From peaks to genes` といった分かりやすい名前に変更する
 >
 > 5. 上部付近にある **Create Workflow** ボタンをクリックする
 >
->    ワークフローが作成されましたというメッセージが表示されたと思いますが、作成されたワークフローはどこでみられるのでしょうか。
+>    ワークフローが作成されましたというメッセージが表示されたと思いますが、作成されたワークフローはどこでみられるのでしょうか。
 >
 > 6. Galaxyのトップメニューにある **ワークフロー** をクリックする
 >
->    ここにはあなたのワークフローが全てリストで表示されます。
+>    ここにはあなたのワークフローが全てリストで表示されます。
 >
 > 7. 新しく生成されたワークフローを選んで **Edit** をクリックする
 >
->    以下のようなものが確認できると思います。:
+>    以下のようなものが確認できると思います。:
 >
 >    ![Editing workflow interface](../../images/intro_06.png)
 >
->    > ### {% icon comment %} ワークフローの編集について
->    > Galaxyのワークフローの編集画面でワークフローを調べることができます。この画面では各ステップでのパラメーター設定を見たり変更したり、ツールを加えたり除外したり、ツールのアウトプットを別のツールのインプットに接続することができて、これらはすべてグラフィカルな方法で簡単に行うことができます。また、この編集画面でワークフローを一から作成することもできます。
+>    > ### {% icon comment %} ワークフローの編集について
+>    > Galaxyのワークフローの編集画面でワークフローを調べることができます。この画面では各ステップでのパラメーター設定を見たり変更したり、ツールを加えたり除外したり、ツールのアウトプットを別のツールのインプットに接続することができて、これらはすべてグラフィカルな方法で簡単に行うことができます。また、この編集画面でワークフローを一から作成することもできます。
 >    {: .comment}
 >
->     ワークフローには今2つインプットがありますが、最初のツール（Intersect）への接続が切断されています。これは間のステップをいくつか外したために起こっています。
+>     ワークフローには今2つインプットがありますが、最初のツール（Intersect）への接続が切断されています。これは間のステップをいくつか外したために起こっています。
 >
 > 8. それぞれのインプットしたデータセットを **Intersect** ツールに接続するために、インプットしたデータセットのボックスの右側にある矢印（これはアウトプットを示している）を、 **Intersect** のボックスの左側にある矢印（これはインプットを示している）にドラッグする
-> 9. インプットしたデータセットをそれぞれ `Reference regions` と `Peak regions` に改名する
+> 9. インプットしたデータセットをそれぞれ `Reference regions` と `Peak regions` に改名する
 > 10. 右上にある **歯車アイコン** をクリックした後、 **Auto Re-layout** を押し、表示されているワークフローのレイアウトを整える:
 >    ![Auto re-layouting](../../images/intro_07.png)
-> 11. 同様に右上の **歯車アイコン** をクリックし、 **Save** を押して変更を保存する
+> 11. 同様に右上の **歯車アイコン** をクリックし、 **Save** を押して変更を保存する
 >
->    > ### {% icon tip %} Tip: 中間のステップを非表示にする
->    > ワークフローが実行されると、ユーザーは基本的に最後に得られた結果のみに関心を持ち、中間にあるすべてのステップには関心がありません。デフォルトではワークフローのすべてのアウトプットが表示されますが、Galaxyではワークフローで表示したいアウトプットと隠したいアウトプットをはっきりと分けることができます。この動作はアウトプットのデータセットの横にある小さなアスタリスクによってコントロールされます:
+>    > ### {% icon tip %} Tip: 中間のステップを非表示にする
+>    > ワークフローが実行されると、ユーザーは基本的に最後に得られた結果のみに関心を持ち、中間にあるすべてのステップには関心がありません。デフォルトではワークフローのすべてのアウトプットが表示されますが、Galaxyではワークフローで表示したいアウトプットと隠したいアウトプットをはっきりと分けることができます。この動作はアウトプットのデータセットの横にある小さなアスタリスクによってコントロールされます:
 >    >
 >    > ![Workflow editor mark output](../../../../shared/images/workflow_editor_mark_output.png)
 >    >
->    > アウトプットのデータセットのどれかでアスタリスクをクリックすると、アスタリスクがついたファイル*のみ*が表示され、アスタリスクのないファイルはすべて非表示になります(*すべての*アウトプットのアスタリスクをクリックすると、*すべての*アウトプットをクリックしない場合と同じ効果となり、どちらの場合でもすべてのデータセットが表示されます)。
->    {: .tip}
+>    > アウトプットのデータセットのどれかでアスタリスクをクリックすると、アスタリスクがついたファイル*のみ*が表示され、アスタリスクのないファイルはすべて非表示になります(*すべての*アウトプットのアスタリスクをクリックすると、*すべての*アウトプットをクリックしない場合と同じ効果となり、どちらの場合でもすべてのデータセットが表示されます)。
+>    {: .tip}
 >
 {: .hands_on}
 
@@ -442,7 +442,7 @@ Part 1では1 bpで重複を見ていました（デフォルトの設定）。�
 >
 > 1. ヒストリー上部にある **View all histories icon** をクリックする
 >
->       両方のヒストリーが並んで表示されていると思います
+>       両方のヒストリーが並んで表示されていると思います
 >
 > 2. マウスのドラッグアンドドロップを利用して、編集したピークのファイル（置換のステップを終えた後のもの）をコピーしますが、頂上の情報を含んだインターバル形式で新しいヒストリーにコピーします。
 > 3. 左上にある **Done** を押して解析画面に戻る
@@ -451,30 +451,30 @@ Part 1では1 bpで重複を見ていました（デフォルトの設定）。�
 
 ## ピーク頂上のファイルを作成する
 
-ピーク頂上の位置を含んだ元のピークファイルから新しいBEDファイルを生成する必要があります。ピークの頂上の始まりはピーク（第2列）の開始点で最も高い仮説的なDNAフラグメントカバレッジ（第5列）を有する位置です。終わりは単純に `start + 1` と定義します。
+ピーク頂上の位置を含んだ元のピークファイルから新しいBEDファイルを生成する必要があります。ピークの頂上の始まりはピーク（第2列）の開始点で最も高い仮説的なDNAフラグメントカバレッジ（第5列）を有する位置です。終わりは `start + 1` をシンプルに定義します。
 
 > ### {% icon hands_on %} ハンズオン: ピーク頂上のファイルを作成する
 >
 > 1. **計算** {% icon tool %}: 以下の設定を行った上で **Compute an expression on every row** を実行する:
->   - **Add expression** → `c2+c5`
->   - **as a new column to** → ピークのファイル
->   - **Round result?** → `YES`
+>   - **Add expression** → `c2+c5`
+>   - **as a new column to** → ピークのファイル
+>   - **Round result?** → `YES`
 > 2. **Compute an expression on every row** {% icon tool %}: このツールを上の結果を用いて再実行する:
->   - **Add expression** → `c8+1`
->   - **as a new column to** → step 1の結果
->   - **Round result?** → `YES`
+>   - **Add expression** → `c8+1`
+>   - **as a new column to** → step 1の結果
+>   - **Round result?** → `YES`
 >
 {: .hands_on}
 
 そして、染色体に加えてピーク頂上の始まりと終わりを切り取ります。:
 
 > ### {% icon hands_on %} ハンズオン: 列を切り取る
-> 1. **Cut** {% icon tool %}: 以下の設定を行った上で **Cut columns from a table** を実行する:
->   - **Cut columns** → `c1,c8,c9`
->   - **Delimited by Tab** → `Tab`
->   - **From** → 最新のヒストリーファイル
+> 1. **Cut** {% icon tool %}: 以下の設定を行った上で **Cut columns from a table** を実行する:
+>   - **Cut columns** → `c1,c8,c9`
+>   - **Delimited by Tab** → `Tab`
+>   - **From** → 最新のヒストリーファイル
 >
->    **Cut** のアウトプットは `tabular` 形式になります。
+>    **Cut** のアウトプットは `tabular` 形式になります。
 >
 > 2. **Intersect** のツールを想定して形式を `interval` に変えておきます。
 {: .hands_on}
@@ -492,25 +492,25 @@ UCSCからダウンロードしたRefSeq遺伝子には、RefSeq識別子のみ�
 > 1. [Zenodo](https://zenodo.org/record/1025586)もしくはデータライブラリ(in "Introduction - From peaks to genes")からファイルをインポートする
 >    - `mm9.RefSeq_genes_from_UCSC.bed`
 >
->    > ### {% icon tip %} Tip: リンクからデータをインポートする
+>    > ### {% icon tip %} Tip: リンクからデータをインポートする
 >    >
->    > * リンクをコピーする
->    > * Galaxy Upload Managerを開く
->    > * **Paste/Fetch Data** を選択する
->    > * リンクをペーストする
->    > * **Start** を押す
->    {: .tip}
+>    > * リンクをコピーする
+>    > * Galaxy Upload Managerを開く
+>    > * **Paste/Fetch Data** を選択する
+>    > * リンクをペーストする
+>    > * **Start** を押す
+>    {: .tip}
 >
->    > ### {% icon tip %} Tip: データライブラリからデータをインポートする
+>    > ### {% icon tip %} Tip: データライブラリからデータをインポートする
 >    >
->    > * "共有データ" (パネル上)から"データライブラリ"を選択する
->    > * "Training data" をクリックし "Introduction - From peaks to genes" をクリックする
->    > * インポートしたいファイルを選択する
->    > * "Import selected datasets into history" をクリックする
->    > * 新しいヒストリーにインポートする
->    {: .tip}
+>    > * "共有データ" (パネル上)から"データライブラリ"を選択する
+>    > * "Training data" をクリックし "Introduction - From peaks to genes" をクリックする
+>    > * インポートしたいファイルを選択する
+>    > * "Import selected datasets into history" をクリックする
+>    > * 新しいヒストリーにインポートする
+>    {: .tip}
 >
->    デフォルトでは、Galaxyはリンクを名前にするため、ファイル名がリンクになります。
+>    デフォルトでは、Galaxyはリンクを名前にするため、ファイル名がリンクになります。
 >
 > 2. 遺伝子名が含まれているか調べるためにファイルの内容を調べる
 >
@@ -526,34 +526,34 @@ UCSCからダウンロードしたRefSeq遺伝子には、RefSeq識別子のみ�
 > 3. インポートされた遺伝子のBEDファイルと **Cut** ツールの結果をインプットとして選択する
 > 4. **Run workflow** をクリックする
 >
->    アウトプットはヒストリーに表示されますが、ワークフローが完了するまで時間がかかることがあります。
+>    アウトプットはヒストリーに表示されますが、ワークフローが完了するまで時間がかかることがあります。
 >
 {: .hands_on}
 
-ワークフローを再実行することでピークの頂上を解析し始めました。また**Group** ツールで、各染色体にある遺伝子の量の情報を含んだリストを再び作成しました。 
-しかし、様々な一意な遺伝子のピークの量を調べるのはもっと面白くないでしょうか？色々な設定でワークフローを再実行してみましょう!
+ワークフローを再実行することでピークの頂上を解析し始めました。また**Group** ツールで、各染色体にある遺伝子の量の情報を含んだリストを再び作成しました。
+しかし、様々な特殊な遺伝子のピークの量を調べるのはもっと面白くないでしょうか？色々な設定でワークフローを再実行してみましょう!
 
 > ### {% icon hands_on %} ハンズオン: ワークフローを設定を変えて実行する
 > 1. ワークフローのメニューを開く（上部にあるメニュー）
 > 2. 前のセクションで作成したワークフローを探し、 **Run** を選択する
 > 2. インプットとしてインポートした遺伝子のBEDファイルと **Cut** ツールの結果を選択する
-> 3. the title of the Group tool to expand the optionsをクリックする
-> 4. Change the following settings by clicking at the **edit icon** on the left:
->   - **Group by column** → `7`
->   - **Operation -> On column** → `7`
+> 3. Group ツールのタイトルをクリックしてオプションを展開する
+> 4. 左側にある **編集アイコン** をクリックして以下の設定を変更する:
+>   - **Group by column** → `7`
+>   - **Operation -> On column** → `7`
 > 5. **Run workflow** をクリックする
 {: .hands_on}
 
-おめでとうございます!すべての一意な遺伝子の名前とそれらの遺伝子にあるピークの数の情報が含まれたファイルを取得しました。
+おめでとうございます!すべての特殊な遺伝子の名前とそれらの遺伝子にあるピークの数の情報が含まれたファイルを取得しました。
 
 > ### {% icon question %} 問題
 >
-> 一意な遺伝子のリストはソートされていません。あなた自身でソートしてみましょう!
+> 特殊な遺伝子のリストはソートされていません。あなた自身でソートしてみましょう!
 >
 >    <details>
->    <summary>クリックで答えを表示</summary>
->    "Sort data in ascending or descending order" というツールを使用することができて、 column 2 と Numerical sort でソートすることができます。
->    </details>
+>    <summary>クリックで答えを表示</summary>
+>    "Sort data in ascending or descending order" というツールを使用することができて、 column 2 と Numerical sort でソートすることができます。
+>    </details>
 {: .question}
 
 
@@ -565,15 +565,15 @@ Galaxyの最も重要な機能の1つは解析の終わりにあります。素�
 
 1. **Make accessible via Link**
 
-    他の人に教えることができるリンクを生成します。このリンクを持つ人は誰しもあなたのヒストリーを見ることができます。
+    他の人に教えることができるリンクを生成します。このリンクを持つ人は誰しもあなたのヒストリーを見ることができます。
 
 2. **Publish History**
 
-    リンクのみを生成するのではなく、ヒストリーも公開します。つまり、トップメニューの`共有データ → ヒストリー`にあなたのヒストリーが表示されます。
+    リンクのみを生成するのではなく、ヒストリーも公開します。つまり、トップメニューの`共有データ → ヒストリー`にあなたのヒストリーが表示されます。
 
 3. **Share with Individual Users**
 
-    Galaxy上の特定のユーザーにのみヒストリーが共有されます。
+    Galaxy上の特定のユーザーにのみヒストリーが共有されます。
 
 
 > ### {% icon hands_on %} ハンズオン: ヒストリーやワークフローを共有する
@@ -582,7 +582,7 @@ Galaxyの最も重要な機能の1つは解析の終わりにあります。素�
 > 2. ワークフローで同じことができるかどうか確認しましょう!
 > 3. あなたの周りの人が共有しているヒストリーやワークフローを見つける
 >
->    特定のユーザーと共有しているヒストリーには、歯車アイコンにある`Histories shared with me`にいるユーザーだけがアクセスすることができます。
+>    特定のユーザーと共有しているヒストリーには、歯車アイコンにある`Histories shared with me`にいるユーザーだけがアクセスすることができます。
 >
 {: .hands_on}
 
