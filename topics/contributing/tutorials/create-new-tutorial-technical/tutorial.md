@@ -4,8 +4,13 @@ topic_name: contributing
 tutorial_name: create-new-tutorial-technical
 ---
 
-# Introduction
+# Building a Galaxy instance specifically for your training
 {:.no_toc}
+
+
+To able to run the tutorial, we need a Galaxy instance where the needed tools are installed and the data. We need then to describe the needed technical infrastructure.
+
+This description will be used to automatically set up a Docker Galaxy flavour and also to test if a public Galaxy instance is able to run the tool.
 
 In this tutorial, you will learn how to create a virtualised Galaxy instance, based on Docker, to run your training - either on normal computers or cloud environments.
 
@@ -18,14 +23,18 @@ In this tutorial, you will learn how to create a virtualised Galaxy instance, ba
 >
 {: .agenda}
 
+# Extracting workflows
 
-# Building a Galaxy instance specifically for your training
+Once the tutorial is ready, we need to extract workflows with the different steps of the tutorial and add them to the `workflows` directory in the tutorial with some explanation about the tutorial in a `README.md` file
 
-To able to run the tutorial, we need a Galaxy instance where the needed tools are installed and the data. We need then to describe the needed technical infrastructure.
+> ### {% icon hands_on %} Hands-on: Extract the workflow
+>
+> 1. Extract the workflow for the tutorial
+> 2. Save it in the `workflow` directory of the tutorial
+> 2. Add `yes` to `workflow` in the tutorial section `metadata.yaml` file of the topic
+{: .hands_on}
 
-This description will be used to automatically set up a Docker Galaxy flavour and also to test if a public Galaxy instance is able to run the tool.
-
-## Filling the `tools.yaml`
+# Filling the `tools.yaml` (recommended)
 
 The first file to fill is the `tools.yaml` file, containing the description of the required tools that could be installed from the ToolShed.
 
@@ -49,11 +58,6 @@ with:
 - `name`: the name of the wrapper of the tool in the ToolShed
 - `owner`: the owner of the wrapper of the tool in the ToolShed
 - `tool_panel_section_label`: section where to put the tool (in the left panel in the Galaxy instance)
-
-> ### {% icon hands_on %} Hands-on: Fill the `tools.yaml`
->
-> 1. Add the BLAST tool into the `tools.yaml` file
-{: .hands_on}
 
 This list of tools can be automatically extracted from the workflow using [Ephemeris](https://ephemeris.readthedocs.io/en/latest/index.html) (which should be in the conda environment):
 
@@ -80,7 +84,7 @@ After the extraction, some formatting is needed:
 {: .hands_on}
 
 
-## Filling the `data-library.yaml`
+# Filling the `data-library.yaml` (recommended)
 
 The data can also be integrated in the Galaxy instance inside a data libraries and then make the data shared between the users. It lets then avoid every trainees to re-download the input data.
 
@@ -111,7 +115,7 @@ The URL must refer to the URL of the files in [Zenodo](https://zenodo.org).
 > 2. Add the link to Zenodo in the `metadata.yaml` file
 {: .hands_on}
 
-## Filling the `data-manager.yaml`
+# Filling the `data-manager.yaml` (optional)
 
 Some of the tools require specific databases, specifically prepared for the tool. Then some Galaxy tools come with data managers to manage these databases.
 
@@ -134,24 +138,14 @@ data_managers:
         - __dbkeys__
 ```
 
-## Extracting workflows
-
-Once the tutorial is ready, we need to extract workflows with the different steps of the tutorial and add them to the `workflows` directory in the tutorial with some explanation about the tutorial in a `README.md` file
-
-> ### {% icon hands_on %} Hands-on: Extract the workflow
->
-> 1. Extract the workflow for the tutorial
-> 2. Add some description about the tutorial in a `README.md` file with the workflow file
-{: .hands_on}
-
-## Adding a Galaxy Interactive Tour
+# Adding a Galaxy Interactive Tour (optional)
 
 A Galaxy Interactive Tour is a way to go through an entire analysis, step by step inside Galaxy in an interactive and explorative way.
 It is a great way to run the tutorial directly inside Galaxy. To learn more about creating a Galaxy tour please have a look at our [dedicated tour training]({{site.baseurl}}/topics/contributing/tutorials/create-new-tutorial-tours/tutorial.html).
 
-## Testing the technical infrastructure
+# Testing the technical infrastructure
 
-Once we have defined all the requirements for running the tutorial, we can test these requirements, either in a locally running Galaxy or in a Docker container. Please see our tutorial about [Setting up Galaxy for Training](../setup-galaxy-for-training/tutorial.html) about how to test your tutorial requirements.
+Once we have defined all the requirements for running the tutorial, we can test these requirements, either in a locally running Galaxy or in a Docker container. Please see our tutorial about [Setting up Galaxy for Training]({{site.baseurl}}/topics/contributing/tutorials/setup-galaxy-for-training/tutorial.html) about how to test your tutorial requirements.
 
 
 # Conclusion
