@@ -301,7 +301,7 @@ On the bottom of your pull request, you can see the status of the tests:
 
     Even it is green, we recommend to check the result of the tests, as some of tests are allowed to fail (to avoid too much noise).
 
-# Staying up to date
+# Stay up to date
 
 You now want to work on a new tutorial or make some other new changes. However since you get a local copy, some changes have happened to the original GitHub repository. You need then to update your local copy of the repository before changing anything.
 
@@ -313,15 +313,15 @@ You now want to work on a new tutorial or make some other new changes. However s
 >    $ git checkout master
 >    ```
 >
-> 2. Add a reference to the original GitHub repository.
+> 2. Add a reference to the original GitHub repository
 >
 >    ```
 >    $ git remote add upstream https://github.com/galaxyproject/training-material.git
 >    ```
 >
-> > {% icon tip %}: Tip: "remote upstream already exists"
-> > If you have done step 2 before and try to `remote add` again, git will tell you that a "remote upstream already exists". In this case you can safely continue to step 4.
-> {: .tip}
+>    > {% icon tip %}: Tip: "remote upstream already exists"
+>    > If you have done step 2 before and try to `remote add` again, git will tell you that a "remote upstream already exists". In this case you can safely continue to step 4.
+>    {: .tip}
 >
 > 4. Update the local copy of the repository by "pulling" in the content of the original GitHub repository
 >
