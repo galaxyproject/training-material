@@ -48,7 +48,7 @@ This `CONTRIBUTORS.yaml` file is where we collect the information (name, email, 
 > 
 >    ![GitHub signup](../../images/github_sign_up.png)
 >
-> 2. Sign in (if you have already a GitHub account)
+> 2. Sign in (once you have a GitHub account)
 >
 {: .hands_on}
 
@@ -71,8 +71,10 @@ You can now modify the `CONTRIBUTORS.yaml` file to add your information there
 >
 >    You should use your GitHub username and add it followed by `:` (the `:` is important) at the correct position given the alphabetical order.
 >
-> 5. Go the bottom of the file
-> 6. Fill the **Propose file change** form
+> 5. Scroll down to the bottom of the file
+> 6. Fill the **Propose file change** form 
+>
+>    It can also be named **Commit changes** for the ones with write accesses to the repository
 >
 >    1. Fill the box "Update CONTRIBUTORS.yaml" with "Add < GitHub username > as contributor" (replace < GitHub username > by your GitHub username)
 >    
@@ -109,7 +111,7 @@ The GitHub interface guides you through this process: after clicking on **Propos
 > ### {% icon hands_on %} Hands-on: Edit a file
 >
 > 1. Open and read the [CONTRIBUTING.md]({{ site.github_repository }}/blob/master/CONTRIBUTING.md) file
-> 1. Come pack to the pull request
+> 1. Come back to the pull request
 > 2. Fill in the pull request description
 >
 >    ![Pull request description](../../images/github_pr_form.png)
@@ -123,7 +125,11 @@ The GitHub interface guides you through this process: after clicking on **Propos
 >       > GitHub uses [Markdown](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet), a simple Markup language, to render the Pull request messages. You can then add bold test, lists, images, etc.
 >       {: .comment} 
 >
-> 1. Check the changes you made to be sure
+> 1. Scroll down and check the changes you made
+>
+>    - In green with `+`: what you added
+>    - In red with `-`: what you deleted
+>
 > 1. Click on **Create pull request**
 {: .hands_on}
 
@@ -145,13 +151,9 @@ One of the reviewers of your pull request asked you to add your name after your 
 > 
 >     You can see here the comments the reviewers left you
 >
-> 3. Click on **Files changed** tab
+> 3. Click on **Files changed** tab and see the changes you made
 >
 >    ![Pull request files changed tab](../../images/github_pr_file_changed.png)
->
->    You can see there the changes you made:
->    - In green with `+`: what you added
->    - In red with `-`: what you deleted
 >
 > 4. Click on {% icon hands_on %} icon
 > 5. Add your name below your GitHub username
@@ -182,7 +184,7 @@ One of the reviewers of your pull request asked you to add your name after your 
 # Conclusion
 {:.no_toc}
 
-With this tutorial, you learn how to use GitHub to change a file, create a pull request and then contribute to the training material.  
+With this tutorial, you learn how to use GitHub to change a file, create a pull request and then contribute to the training material. What you have learned here can be applied to any file.
 
 > ### {% icon tip %} More about GitHub
 > Via the GitHub interface, you can also go further: create file, branch directly, etc.
