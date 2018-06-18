@@ -296,6 +296,34 @@ On the bottom of your pull request, you can see the status of the tests:
 
     Even it is green, we recommend to check the result of the tests, as some of tests are allowed to fail (to avoid too much noise).
 
+# Stay up to date
+
+You now want to start working on a new tutorial or doing new changes. But some changes happen to the original GitHub repository since you get a local copy. You need then to update your local copy before changing anything.
+
+> ### {% icon hands_on %} Hands-on: Update the local copy
+>
+> 1. Move to the `master` branch
+>    
+>    ```
+>    $ git checkout master
+>    ```
+>
+> 2. Add a reference to the original GitHub repository
+>
+>    ```
+>    $ git remote add upstream https://github.com/galaxyproject/training-material.git
+>    ```
+>
+> 3. Update the local copy by getting the content of the original GitHub repository
+>
+>    ```
+>    $ git pull upstream master
+>    ```
+>
+{: .hands_on}
+
+You can now restart the GitHub flow to propose new changes: start by [creating a new branch](#create-a-new-branch).
+
 # Conclusion
 {:.no_toc}
 
