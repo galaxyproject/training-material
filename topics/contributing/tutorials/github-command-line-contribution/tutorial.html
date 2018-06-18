@@ -224,6 +224,7 @@
   <li><a href="#open-a-pull-request" id="markdown-toc-open-a-pull-request">Open a pull request</a></li>
   <li><a href="#make-the-requested-changes" id="markdown-toc-make-the-requested-changes">Make the requested changes</a></li>
   <li><a href="#check-the-automatic-tests" id="markdown-toc-check-the-automatic-tests">Check the automatic tests</a></li>
+  <li><a href="#stay-up-to-date" id="markdown-toc-stay-up-to-date">Stay up to date</a></li>
 </ol>
 
 </blockquote>
@@ -250,7 +251,7 @@
 
   <blockquote class="comment">
     <h3 id="-comment"><i class="fa fa-commenting-o" aria-hidden="true"></i> Comment</h3>
-    <p>When you click the <strong>Fork</strong> button GitHub will show you a list with your user and any groups where you can create a fork of this repository. If you do not see yourself, it means you already have a fork.</p>
+    <p>When you click the <strong>Fork</strong> button GitHub will show you a list with your user account and any groups where you can create a fork of this repository (starting with <code class="highlighter-rouge">@</code>). If you see yourself only below “You have existing forks of this repository:”, it means you already have a fork and you have nothing to do.</p>
   </blockquote>
 
 </blockquote>
@@ -294,6 +295,11 @@
 </code></pre></div>      </div>
     </li>
   </ol>
+</blockquote>
+
+<blockquote class="comment">
+  <h3 id="-comment-1"><i class="fa fa-commenting-o" aria-hidden="true"></i> Comment</h3>
+  <p>If you already have a local copy of the GitHub repository, you need to update it before doing any changes. To learn how to do that, please follow the <a href="#keep-up-to-date">last section</a>.</p>
 </blockquote>
 
 <h1 id="create-a-new-branch">Create a new branch</h1>
@@ -348,8 +354,9 @@ Switched to a new branch 'my_new_branch'
   <h3 id="-hands-on-make-changes-in-a-branch"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Make changes in a branch</h3>
 
   <ol>
+    <li>Open with your favorite text editor the <code class="highlighter-rouge">CONTRIBUTORS.yaml</code> file that is on your computer</li>
     <li>
-      <p>Modify the <code class="highlighter-rouge">CONTRIBUTORS.yaml</code> to add yourself</p>
+      <p>Add yourself in the <code class="highlighter-rouge">CONTRIBUTORS.yaml</code> file</p>
 
       <p>You should use your GitHub username and add it followed by <code class="highlighter-rouge">:</code> at the correct position given the alphabetical order</p>
     </li>
@@ -546,13 +553,62 @@ $ git commit -m "Add ..."
   </li>
 </ul>
 
+<h1 id="stay-up-to-date">Stay up to date</h1>
+
+<p>You now want to work on a new tutorial or make some other new changes. However since you get a local copy, some changes have happened to the original GitHub repository. You need then to update your local copy of the repository before changing anything.</p>
+
+<blockquote class="hands_on">
+  <h3 id="-hands-on-update-the-local-copy"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Update the local copy</h3>
+
+  <ol>
+    <li>
+      <p>Move to the <code class="highlighter-rouge">master</code> branch</p>
+
+      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ git checkout master
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p>Add a reference to the original GitHub repository</p>
+
+      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ git remote add upstream https://github.com/galaxyproject/training-material.git
+</code></pre></div>      </div>
+
+      <blockquote class="tip">
+        <p><i class="fa fa-lightbulb-o" aria-hidden="true"></i>: Tip: “remote upstream already exists”
+If you have done step 2 before and try to <code class="highlighter-rouge">remote add</code> again, git will tell you that a “remote upstream already exists”. In this case you can safely continue to step 4.</p>
+      </blockquote>
+    </li>
+    <li>
+      <p>Update the local copy of the repository by “pulling” in the content of the original GitHub repository</p>
+
+      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ git pull upstream master
+</code></pre></div>      </div>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>You can now restart the GitHub flow to propose new changes: start by <a href="#create-a-new-branch">creating a new branch</a>.</p>
+
 <h1 class="no_toc" id="conclusion">Conclusion</h1>
 
-<p>With this tutorial, you have learned the basics of contributing using GitHub:</p>
+<p>With this tutorial, you have learned some basics <code class="highlighter-rouge">git</code> commands and principles:</p>
 
 <figure id="figure-9"><img src="../../images/PR_global_schema.png" alt="Summary of the links between GitHub, fork and local repository" title="Summary of the links between GitHub, fork and local repository" /><figcaption><span class="figcaption-prefix">Figure 9:</span> Summary of the links between GitHub, fork and local repository</figcaption></figure>
 
-<p>You can now contribute and help us to improve our tutorials.</p>
+<p>You also learned the GitHub flow and its cycle:</p>
+
+<ol>
+  <li>Create a new branch in your local copy</li>
+  <li>Commit the changes in that branch</li>
+  <li>Push that branch to your fork on GitHub</li>
+  <li>Submit a pull request from that branch to the master repository</li>
+  <li>Wait for feedbacks and make requested changes</li>
+  <li>Update your local copy</li>
+  <li>Restart the cycle</li>
+</ol>
+
+<p>You can now contribute and help us to improve our tutorials!</p>
 
 <blockquote class="tip">
   <h3 id="-git-in-depth"><i class="fa fa-lightbulb-o" aria-hidden="true"></i> Git in Depth</h3>
