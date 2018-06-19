@@ -177,7 +177,7 @@ Sometimes, you may want to have slides to support a tutorial and introduce it du
 
 > ### {% icon hands_on %} Hands-on: Add slides
 >
-> 1. Create a slide deck in `slides.html` following the [Slide tutorial]{{ site.baseurl }}/topics/contributing/tutorials/create-new-tutorial-slides/slides.html)
+> 1. Create a slide deck in `slides.html` following the [Slide tutorial]({{ site.baseurl }}/topics/contributing/tutorials/create-new-tutorial-slides/slides.html)
 > 2. Update the `metadata.yaml` file by putting `yes` in `slides`
 {: .hands_on}
 
