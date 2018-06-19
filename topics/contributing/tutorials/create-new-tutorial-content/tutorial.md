@@ -20,7 +20,7 @@ Once we set up the infrastructure, we are ready to write the tutorial.
 
 The tutorial's content will be placed in the file `tutorial.md`. Its syntax and structure are simple, and will follow the scheme:
 
-```
+```markdown
 ---
 layout: tutorial_hands_on
 topic_name: training
@@ -104,7 +104,7 @@ We added a small plugin to add a caption for each image:
 
 The preceding string "Figure" and its corresponding number is automatically added before its caption, which is in turn placed below the image by providing all information in the Markdown call of the image:
 
-```
+```markdown
 ![A textual description of the image](../images/image.png "This is my super caption")
 ```
 
@@ -135,7 +135,7 @@ To improve the learning experience in our tutorial, we defined some boxes to hig
 They are defined always with the same structure:
 
 {% raw %}
-```
+```markdown
 > ### {% icon an_icon %} Type of box: Name of the box
 > list
 {: .type_of_box}
@@ -168,7 +168,7 @@ This box at the top of each tutorial is automatically generated using the metada
 In most tutorial, the second box is the agenda box at the end of the introduction. It indicates the plan of the tutorial
 
 {% raw %}
-```
+```markdown
 > ### Agenda
 >
 > In this tutorial we will deal with:
@@ -198,7 +198,7 @@ To avoid adding the "Introduction" and "Conclusion", we add `{:.no_toc}` below t
 We think that actually walking through the tutorial by doing all its steps is important for learning its concepts. We therefore emphasize trying each step by regularly adding hands-on sections, where trainees are encouraged to do the analysis by themselves. We designed some special boxes to make these sections easy to find.
 
 {% raw %}
-```
+```markdown
 > ### {% icon hands_on %} Hands-on: Spliced mapping
 >
 > 1. **RNA STAR** {% icon tool %}: Map your reads on the reference genome with
@@ -257,7 +257,7 @@ but may be helpful in some cases (for example to distinguish between single file
 The available icons are:
 
 {% raw %}
-```
+```markdown
 > ### {% icon hands_on %} Hands-on: My Step
 >
 > 1. **My Tool** {% icon tool %} with the following parameters
@@ -289,7 +289,7 @@ Questions are there to force the trainees to think about what they are currently
 They also help the instructors by exposing and clarify common scenarios, errors, or applications.
 
 {% raw %}
-```
+```markdown
 > ### {% icon question %} Questions
 >
 > 1. Why are some tests filtered?
@@ -329,7 +329,7 @@ In the box below and hidden we add also the correct answer, so that self-trainee
 ## **Tips** box
 
 {% raw %}
-```
+```markdown
 > ### {% icon tip %} Tip: Importing data via links
 >
 > * Copy the link location
@@ -355,7 +355,7 @@ Rendered:
 ## **Comments** boxes
 
 {% raw %}
-```
+```markdown
 > ### {% icon comment %} Comments
 > - Edit the "Database/Build" to select "dm3"
 > - Rename the datasets according to the samples
@@ -375,7 +375,7 @@ Rendered:
 The detail box is used to give more background explanation on the subject. By default the box is collapsed.
 
 {% raw %}
-```
+```markdown
 > ### {% icon details %} More details on the ....
 >
 > Add more details in Markdown...
@@ -403,7 +403,7 @@ To render the boxes correctly, the syntax needs to be correct. If it doesn't wor
 Boxes can be nested, *e.g.* for having tips inside a hands-on:
 
 {% raw %}
-```
+```markdown
 > ### {% icon hands_on %} Hands-on: Defining the topic for the tutorial
 >
 > 1. Search for NCBI Blast+ on the [ToolShed](https://toolshed.g2.bx.psu.edu/)

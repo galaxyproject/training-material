@@ -7,10 +7,9 @@ tutorial_name: create-new-tutorial-technical
 # Building a Galaxy instance specifically for your training
 {:.no_toc}
 
+To be able to run the tutorial, we need a Galaxy instance where all of the needed tools and data are available. Thus we need to describe the needed technical infrastructure.
 
-To able to run the tutorial, we need a Galaxy instance where the needed tools are installed and the data. We need then to describe the needed technical infrastructure.
-
-This description will be used to automatically set up a Docker Galaxy flavour and also to test if a public Galaxy instance is able to run the tool.
+This files we define in this tutorial will be used to automatically build a Docker Galaxy flavour, and also to test if a public Galaxy instance is able to run the tool.
 
 In this tutorial, you will learn how to create a virtualised Galaxy instance, based on Docker, to run your training - either on normal computers or cloud environments.
 
@@ -25,22 +24,22 @@ In this tutorial, you will learn how to create a virtualised Galaxy instance, ba
 
 # Extracting workflows
 
-Once the tutorial is ready, we need to extract workflows with the different steps of the tutorial and add them to the `workflows` directory in the tutorial with some explanation about the tutorial in a `README.md` file
+Once the tutorial is ready, we need to develop a workflow that represents the steps taken in the tutorial, and then extract these workflow(s) and add them to the `workflows` directory in the tutorial. Additionally we will need to add some explanation about the workflow(s) in a `README.md` file
 
 > ### {% icon hands_on %} Hands-on: Extract the workflow
 >
-> 1. Extract the workflow for the tutorial
+> 1. Download the workflow for the tutorial
 > 2. Save it in the `workflow` directory of the tutorial
-> 2. Add `yes` to `workflow` in the tutorial section `metadata.yaml` file of the topic
+> 3. Set `workflow` to `yes` in the appropriate section of the topic's `metadata.yaml`.
 {: .hands_on}
 
-# Filling the `tools.yaml` (recommended)
+# Filling out the `tools.yaml` (recommended)
 
-The first file to fill is the `tools.yaml` file, containing the description of the required tools that could be installed from the ToolShed.
+The first file to fill out is the `tools.yaml` file which contains the list of the required tools that could be installed from the ToolShed.
 
 This file looks like:
 
-```
+```yaml
 ---
 api_key: admin
 galaxy_instance: http://localhost:8080
@@ -61,7 +60,7 @@ with:
 
 This list of tools can be automatically extracted from the workflow using [Ephemeris](https://ephemeris.readthedocs.io/en/latest/index.html) (which should be in the conda environment):
 
-```
+```console
 $ workflow-to-tools -w path/to/workflow -o path/to/tools.yaml
 ```
 
@@ -69,7 +68,7 @@ After the extraction, some formatting is needed:
 
 1. Add at the beginning:
 
-    ```
+    ```yaml
     ---
     api_key: admin
     galaxy_instance: http://localhost:8080
@@ -90,7 +89,7 @@ The data can also be integrated in the Galaxy instance inside a data libraries a
 
 Such data are described in the `data-library.yaml`:
 
-```
+```yaml
 libraries:
     - name: Name of the tutorial
       files:
@@ -121,7 +120,7 @@ Some of the tools require specific databases, specifically prepared for the tool
 
 If you need such data managers for your tool, you can describe their running with the `data-manager.yaml` file:
 
-```
+```yaml
 data_managers:
     - id: url to data manager on ToolShed
       params:
