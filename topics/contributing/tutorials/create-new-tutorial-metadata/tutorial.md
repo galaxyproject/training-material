@@ -51,9 +51,6 @@ After the definitining the tutorial in the topic metadata, we will also add some
 - `workflows` (`yes` or `no`): says if a workflow is available for this material (in the `workflows` subdirectory)
 - `galaxy_tour`(`yes` or `no`): says if an interactive tour is available for the tutorial (in the `tours` subdirectory)
 
-> ### {% icon comment %} When filling the pedagogical metadata
-> We recommend that you fill out the *questions* and the *learning objectives* before starting writing the tutorial content. You can still refine them afterwards, but it will help to guide you in developing your tutorial, and gives you some time to think beforehand on what topics are worth being covered.
-{: .comment}
 
 > ### {% icon hands_on %} Hands-on: Fill the technical metadata
 >
@@ -96,7 +93,7 @@ For this category of metadata, we have taken inspiration from what Software Carp
 {: .hands_on}
 
 > ### {% icon comment %} When filling the pedagogical metadata
-> We recommend you to fill the questions and the learning objectives before starting writing the tutorial content. You can still refine them afterwards, but it will help to design your tutorial and think beforehand what is worth training.
+> We recommend that you fill out the *questions* and the *learning objectives* before starting writing the tutorial content. You can still refine them afterwards, but it will help to guide you in developing your tutorial, and gives you some time to think beforehand on what topics are worth being covered.
 > 
 > For the take-home messages, it is easier to define them once the tutorial is written and you identified the issues.
 {: .comment}
