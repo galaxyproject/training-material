@@ -33,7 +33,7 @@ Once the tutorial is ready, we need to develop a workflow that represents the st
 > 3. Set `workflow` to `yes` in the appropriate section of the topic's `metadata.yaml`.
 {: .hands_on}
 
-# Filling out the `tools.yaml` (recommended)
+# Creating the `tools.yaml` (recommended)
 
 The first file to fill out is the `tools.yaml` file which contains the list of the required tools that could be installed from the ToolShed.
 
@@ -76,18 +76,18 @@ After the extraction, some formatting is needed:
 
 2. Change the `tool_panel_section_label` to something more informative
 
-> ### {% icon hands_on %} Hands-on: Fill the `tools.yaml` from your workflow
+> ### {% icon hands_on %} Hands-on: Creating the `tools.yaml` from your workflow
 >
-> 1. Fill the `tools.yaml` file using your workflow and Ephemeris
-> 2. Format the `tools.yaml` file correctly
+> 1. Create the `tools.yaml` file using your workflow and Ephemeris
+> 2. Correct the formatting of the `tools.yaml` file
 {: .hands_on}
 
 
-# Filling the `data-library.yaml` (recommended)
+# Creating the `data-library.yaml` (recommended)
 
-The data can also be integrated in the Galaxy instance inside a data libraries and then make the data shared between the users. It lets then avoid every trainees to re-download the input data.
+The datasets needed for a tutorial can also be integrated in the Galaxy instance inside of data libraries. These allow the datasets to be easily shared with all users of a Galaxy instance. Additionally it lets trainees avoid each re-downloading the input data.
 
-Such data are described in the `data-library.yaml`:
+These datasets are described in the `data-library.yaml` files:
 
 ```yaml
 libraries:
@@ -99,26 +99,26 @@ libraries:
           file_type: ""
 ```
 
-with:
+where:
 
-- `name`: name of the tutorial, where to put the data in the data libraries
+- `name`: name of the tutorial, i.e. where to put the data in the data libraries
 - `files`: list of the files to download
     - `url`: URL to the input file
     - `file-type`: type of the input file
 
-The URL must refer to the URL of the files in [Zenodo](https://zenodo.org).
+The URL must refer to the URL of the files in [Zenodo](https://zenodo.org), do not just link to the overview page.
 
-> ### {% icon hands_on %} Hands-on: Fill the `data-library.yaml`
+> ### {% icon hands_on %} Hands-on: Creating the `data-library.yaml`
 >
-> 1. Add the input files into the `data-library.yaml` file
+> 1. Add the input files from your Zenodo dataset to the `data-library.yaml` file
 > 2. Add the link to Zenodo in the `metadata.yaml` file
 {: .hands_on}
 
-# Filling the `data-manager.yaml` (optional)
+# Creating the `data-manager.yaml` (optional)
 
-Some of the tools require specific databases, specifically prepared for the tool. Then some Galaxy tools come with data managers to manage these databases.
+Some of the tools may require specific databases, specifically prepared for the tool. In this case, some Galaxy tools come with "data managers" to simplify this process.
 
-If you need such data managers for your tool, you can describe their running with the `data-manager.yaml` file:
+If you need such data managers for your training, then you should describe how to run them in the `data-manager.yaml` file:
 
 ```yaml
 data_managers:
@@ -137,10 +137,10 @@ data_managers:
         - __dbkeys__
 ```
 
-# Adding a Galaxy Interactive Tour (optional)
+# Creating the Galaxy Interactive Tour (optional)
 
 A Galaxy Interactive Tour is a way to go through an entire analysis, step by step inside Galaxy in an interactive and explorative way.
-It is a great way to run the tutorial directly inside Galaxy. To learn more about creating a Galaxy tour please have a look at our [dedicated tour training]({{site.baseurl}}/topics/contributing/tutorials/create-new-tutorial-tours/tutorial.html).
+It is a great way to help users run the tutorial directly inside Galaxy. To learn more about creating a Galaxy tour please have a look at our [dedicated tour training]({{site.baseurl}}/topics/contributing/tutorials/create-new-tutorial-tours/tutorial.html).
 
 # Testing the technical infrastructure
 
