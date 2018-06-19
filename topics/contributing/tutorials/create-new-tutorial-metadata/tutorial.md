@@ -29,7 +29,7 @@ To make a tutorial appear within a topic, we need to add metadata for the tutori
 >
 > 1. Open the `metadata.yaml` of `sequence-analysis` topic (`/topics/sequence-analysis/metadata.yaml`)
 > 2. Add in the `material` section the new tutorial:
->   
+>
 >     ```
 >     -
 >       title: "Similarity search with BLAST"
@@ -37,7 +37,7 @@ To make a tutorial appear within a topic, we need to add metadata for the tutori
 >       name: "similarity-search"
 >       hands_on: yes
 >       slides: no
->     ``` 
+>     ```
 >
 {: .hands_on}
 
@@ -55,12 +55,12 @@ After the definitining the tutorial in the topic metadata, we will also add some
 > ### {% icon hands_on %} Hands-on: Fill the technical metadata
 >
 > 2. Add in the `material` section after `slides: no` the new tutorial:
->   
+>
 >     ```
 >       zenodo_link: ""
 >       workflows: no
 >       galaxy_tour: no
->     ``` 
+>     ```
 >
 {: .hands_on}
 
@@ -94,7 +94,7 @@ For this category of metadata, we have taken inspiration from what Software Carp
 
 > ### {% icon comment %} When filling the pedagogical metadata
 > We recommend that you fill out the *questions* and the *learning objectives* before starting writing the tutorial content. You can still refine them afterwards, but it will help to guide you in developing your tutorial, and gives you some time to think beforehand on what topics are worth being covered.
-> 
+>
 > For the take-home messages, it is easier to define them once the tutorial is written and you identified the issues.
 {: .comment}
 
