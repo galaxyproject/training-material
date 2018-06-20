@@ -103,6 +103,10 @@
                                             
                                         
                                     
+                                        
+                                            
+                                        
+                                    
                                 </div>
                             </li>
                         
@@ -183,87 +187,98 @@
             <p><strong><i class="fa fa-hourglass-end" aria-hidden="true"></i> Time estimation:</strong> 15min</p>
         </blockquote>
 
-        <h1 class="no_toc" id="introduction">Introduction</h1>
-
-<p>Galaxy is a great solution to train the bioinformatics concepts:</p>
-
-<ul>
-  <li>numerous bioinformatics tools are available (almost 5,000 in the ToolShed)</li>
-  <li>it can be used by people without any computer science skills</li>
-  <li>it trains to use technology, outlining available resources and efforts that have made them accessible to researchers</li>
-  <li>it is scalable</li>
-</ul>
-
-<p>In 2016, the Galaxy Training Network decide to set up a new infrastructure for delivering easily Galaxy related training material. The idea was to develop something open and online based on a community effort, as always in Galaxy.</p>
-
-<p>We took inspiration from <a href="https://software-carpentry.org">Software Carpentry</a> and collected everything on a GitHub repository: <a href="https://github.com/galaxyproject/training-material">https://github.com/galaxyproject/training-material </a>.
-We decided on a structure based on tutorials with hands-on, fitting both for online self-training but also for workshops, grouped in topics. Each tutorial follows the same structure and comes with a virtualised instance to run the training everywhere.</p>
-
-<p>In this tutorial, you will learn how to annotate your training material with a lot of metadata, so that it can be reused and empower other services.</p>
+        <p>The <code class="highlighter-rouge">metadata.yaml</code> file is a file located in the topic directory. It describes the metadata related to a topic and its material.</p>
 
 <blockquote class="agenda">
   <h3 id="agenda">Agenda</h3>
 
-  <p>In this tutorial, we will deal with:</p>
-
 <ol id="markdown-toc">
-  <li><a href="#filling-the-metadata" id="markdown-toc-filling-the-metadata">Filling the metadata</a></li>
+  <li><a href="#make-topic-aware-of-a-tutorial" id="markdown-toc-make-topic-aware-of-a-tutorial">Make topic aware of a tutorial</a></li>
+  <li><a href="#technical-support" id="markdown-toc-technical-support">Technical support</a></li>
+  <li><a href="#pedagogical-support" id="markdown-toc-pedagogical-support">Pedagogical support</a></li>
 </ol>
 
 </blockquote>
 
-<h1 id="filling-the-metadata">Filling the metadata</h1>
+<h1 id="make-topic-aware-of-a-tutorial">Make topic aware of a tutorial</h1>
 
-<p>The first file we will fill is the <code class="highlighter-rouge">metadata.yaml</code> file describing the metadata related to a topic. We will add our tutorial and its metadata as a new <code class="highlighter-rouge">material</code> with:</p>
+<p>To make a tutorial appear within a topic, we need to add metadata for the tutorial in the topic’s <code class="highlighter-rouge">metadata.yaml</code> file:</p>
 
 <ul>
-  <li><code class="highlighter-rouge">title</code>: title of the tutorial</li>
+  <li><code class="highlighter-rouge">title</code>: title of the tutorial (it will appear on the tutorial page and the topic page)</li>
   <li><code class="highlighter-rouge">type: "tutorial"</code></li>
-  <li><code class="highlighter-rouge">enable</code>: <code class="highlighter-rouge">false</code> to hide your tutorial from the topic page</li>
   <li><code class="highlighter-rouge">name</code>: name of the tutorial (name of the subdirectory where the files related to the tutorial will be stored)</li>
-  <li><code class="highlighter-rouge">zenodo_link</code>: link on Zenodo to the input data for the tutorial (not ideal but it can be empty)</li>
-  <li><code class="highlighter-rouge">galaxy_tour</code>(<code class="highlighter-rouge">yes</code> or <code class="highlighter-rouge">no</code>): tell if at least an interactive tour is available for the tutorial (in the <code class="highlighter-rouge">tours</code> subdirectory)</li>
-  <li><code class="highlighter-rouge">workflows</code> (<code class="highlighter-rouge">yes</code> or <code class="highlighter-rouge">no</code>): tell if a workflow is available for this material</li>
-  <li><code class="highlighter-rouge">hands_on</code>(<code class="highlighter-rouge">yes</code> or <code class="highlighter-rouge">no</code>): tell if an hands on is available for this material</li>
-  <li><code class="highlighter-rouge">slides</code> (<code class="highlighter-rouge">yes</code> or <code class="highlighter-rouge">no</code>): tell if slides are available for this material its title, its type, …</li>
-  <li><code class="highlighter-rouge">requirements</code>: list of requirements specific to this tutorial (in addition to the one of the topic), with:
+  <li><code class="highlighter-rouge">enable</code>: <code class="highlighter-rouge">false</code> to hide your tutorial from the topic page</li>
+  <li><code class="highlighter-rouge">hands_on</code>(<code class="highlighter-rouge">yes</code> or <code class="highlighter-rouge">no</code>): says if the tutorial includes hands-on sections in the <code class="highlighter-rouge">tutorial.md</code></li>
+  <li><code class="highlighter-rouge">slides</code> (<code class="highlighter-rouge">yes</code> or <code class="highlighter-rouge">no</code>): says if slides are available for this material</li>
+</ul>
+
+<blockquote class="hands_on">
+  <h3 id="-hands-on-fill-the-basic-metadata"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Fill the basic metadata</h3>
+
+  <ol>
+    <li>Open the <code class="highlighter-rouge">metadata.yaml</code> of <code class="highlighter-rouge">sequence-analysis</code> topic (<code class="highlighter-rouge">/topics/sequence-analysis/metadata.yaml</code>)</li>
+    <li>
+      <p>Add in the <code class="highlighter-rouge">material</code> section the new tutorial:</p>
+
+      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> -
+   title: "Similarity search with BLAST"
+   type: "tutorial"
+   name: "similarity-search"
+   hands_on: yes
+   slides: no
+</code></pre></div>      </div>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>This information is used to automatically make the tutorial available on the website: <a href="https://galaxyproject.github.io//training-material">https://galaxyproject.github.io//training-material </a></p>
+
+<h1 id="technical-support">Technical support</h1>
+
+<p>After the definitining the tutorial in the topic metadata, we will also add some information about the technical support available for the tutorial:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">zenodo_link</code>: link on Zenodo to the input data for the tutorial</li>
+  <li><code class="highlighter-rouge">workflows</code> (<code class="highlighter-rouge">yes</code> or <code class="highlighter-rouge">no</code>): says if a workflow is available for this material (in the <code class="highlighter-rouge">workflows</code> subdirectory)</li>
+  <li><code class="highlighter-rouge">galaxy_tour</code>(<code class="highlighter-rouge">yes</code> or <code class="highlighter-rouge">no</code>): says if an interactive tour is available for the tutorial (in the <code class="highlighter-rouge">tours</code> subdirectory)</li>
+</ul>
+
+<blockquote class="hands_on">
+  <h3 id="-hands-on-fill-the-technical-metadata"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Fill the technical metadata</h3>
+
+  <ol>
+    <li>
+      <p>Add in the <code class="highlighter-rouge">material</code> section after <code class="highlighter-rouge">slides: no</code> the new tutorial:</p>
+
+      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   zenodo_link: ""
+   workflows: no
+   galaxy_tour: no
+</code></pre></div>      </div>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>This information is used to display the data, workflow and tour links from the topic and tutorial page. They are also used to check which information are missing for the tutorials.</p>
+
+<h1 id="pedagogical-support">Pedagogical support</h1>
+
+<p>We also define metadata related to the pedagogical content of the tutorial, which will appear in the top (“Overview” box) and bottom of the online tutorial:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">requirements</code>: list of resources that the reader of the material should be familiar with before starting this training:
     <ul>
       <li><code class="highlighter-rouge">title</code></li>
       <li><code class="highlighter-rouge">link</code>: relative for internal (inside training material) requirement or full for external requirement)</li>
       <li><code class="highlighter-rouge">type</code>: the type of link (<code class="highlighter-rouge">internal</code> or <code class="highlighter-rouge">external</code>)</li>
     </ul>
   </li>
-</ul>
-
-<p>This information is used to automatically make the tutorial available on the online website: <a href="https://galaxyproject.github.io//training-material">https://galaxyproject.github.io//training-material </a></p>
-
-<blockquote class="hands_on">
-  <h3 id="-hands-on-fill-the-basic-metadata"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Fill the basic metadata</h3>
-
-  <ol>
-    <li>Fill the basic metadata for our tutorial
-      <ul>
-        <li><code class="highlighter-rouge">title: Similarity search with BLAST</code></li>
-        <li><code class="highlighter-rouge">type: "tutorial"</code></li>
-        <li><code class="highlighter-rouge">name: "similarity-search"</code></li>
-        <li><code class="highlighter-rouge">zenodo_link: ""</code> (we do not have data currently)</li>
-        <li><code class="highlighter-rouge">galaxy_tour: no</code> (we do not have Galaxy Interactive Tour currently)</li>
-        <li><code class="highlighter-rouge">hands_on: yes</code></li>
-        <li><code class="highlighter-rouge">slides: no</code></li>
-        <li><code class="highlighter-rouge">workflows: no</code></li>
-        <li><code class="highlighter-rouge">requirements</code>: a requirement to “Galaxy introduction” with internal link to <code class="highlighter-rouge">introduction</code></li>
-      </ul>
-    </li>
-  </ol>
-</blockquote>
-
-<p>In the second part of the metadata, we define metadata related to the content of the tutorial, which will appear in the top and bottom of the online tutorial:</p>
-
-<ul>
   <li><code class="highlighter-rouge">time_estimation</code>: an estimation of the time needed to complete the hands-on</li>
   <li><code class="highlighter-rouge">questions</code>: list of questions that will be addressed in the tutorial</li>
   <li>
-    <p><code class="highlighter-rouge">objectives</code>: list of learning objectives of the tutorial</p>
+    <p><code class="highlighter-rouge">objectives</code>: list of learning objectives for the tutorial</p>
 
     <p>A learning objective is a single sentence describing what a learner will be able to do once they have done the tutorial</p>
   </li>
@@ -274,10 +289,10 @@ We decided on a structure based on tutorials with hands-on, fitting both for onl
   </li>
 </ul>
 
-<p>For this metadata, we take inspiration from what Software Carpentry is doing and particularly what they describe in their <a href="https://swcarpentry.github.io/instructor-training/">Instructor training</a>.</p>
+<p>For this category of metadata, we have taken inspiration from what Software Carpentry has done and particularly what they described in their <a href="https://swcarpentry.github.io/instructor-training/">Instructor training</a>.</p>
 
 <blockquote class="hands_on">
-  <h3 id="-hands-on-fill-the-pedagogical-metadata"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Fill the pedagogical metadata</h3>
+  <h3 id="-hands-on-fill-out-the-pedagogical-metadata"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Fill out the pedagogical metadata</h3>
 
   <ol>
     <li>Define 2 questions that will be addressed during the tutorial and add them to the metadata</li>
@@ -285,9 +300,12 @@ We decided on a structure based on tutorials with hands-on, fitting both for onl
   </ol>
 </blockquote>
 
-<p>We recommend you to fill the questions and the learning objectives before starting writing the tutorial content. You can still refine them afterwards, but it will help to design your tutorial and think beforehand what is worth training.</p>
+<blockquote class="comment">
+  <h3 id="-when-filling-the-pedagogical-metadata"><i class="fa fa-commenting-o" aria-hidden="true"></i> When filling the pedagogical metadata</h3>
+  <p>We recommend that you fill out the <em>questions</em> and the <em>learning objectives</em> before starting writing the tutorial content. You can still refine them afterwards, but it will help to guide you in developing your tutorial, and gives you some time to think beforehand on what topics are worth being covered.</p>
 
-<p>For the take-home messages, it is easier to define them once the tutorial is written and you identified the issues.</p>
+  <p>For the take-home messages, it is easier to define them once the tutorial is written and you identified the issues.</p>
+</blockquote>
 
 <h1 class="no_toc" id="conclusion">Conclusion</h1>
 
@@ -335,6 +353,14 @@ We decided on a structure based on tutorials with hands-on, fitting both for onl
               
               
             <li><a href="/training-material/topics/contributing/tutorials/github-command-line-contribution/tutorial.html">Contributing with GitHub via command-line</a></li>
+              
+              
+             
+            
+             
+              
+              
+            <li><a href="/training-material/topics/contributing/tutorials/create-new-tutorial/tutorial.html">Creating a new tutorial</a></li>
               
               
              

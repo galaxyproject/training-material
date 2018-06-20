@@ -103,6 +103,10 @@
                                             
                                         
                                     
+                                        
+                                            
+                                        
+                                    
                                 </div>
                             </li>
                         
@@ -161,18 +165,20 @@
             <strong><i class="fa fa-question-circle" aria-hidden="true"></i> Questions</strong>
             <ul>
             
-            <li>How to integrate a new tutorial?</li>
-            
             <li>How to write a tutorial with hands-on?</li>
+            
+            <li>What are the different boxes?</li>
+            
+            <li>How can I add a caption to an image?</li>
             
             </ul>
 
             <strong><i class="fa fa-bullseye" aria-hidden="true"></i> Objectives</strong>
             <ul>
             
-            <li>Creating a tutorial from scratch</li>
+            <li>Create hands-on</li>
             
-            <li>Creating hands-on</li>
+            <li>Use the different boxes</li>
             
             </ul>
 
@@ -183,204 +189,93 @@
 
         <h1 class="no_toc" id="introduction">Introduction</h1>
 
+<p>Once we have set up the infrastructure, we are ready to write the tutorial.</p>
+
 <blockquote class="agenda">
   <h3 id="agenda">Agenda</h3>
 
-  <p>In this tutorial, we will deal with:</p>
+  <p>In this tutorial, we will cover:</p>
 
 <ol id="markdown-toc">
-  <li><a href="#setting-up-a-new-tutorial" id="markdown-toc-setting-up-a-new-tutorial">Setting up a new tutorial</a>    <ol>
-      <li><a href="#defining-the-topic" id="markdown-toc-defining-the-topic">Defining the topic</a></li>
-      <li><a href="#creating-the-directory-for-the-tutorial" id="markdown-toc-creating-the-directory-for-the-tutorial">Creating the directory for the tutorial</a></li>
-      <li><a href="#keeping-track-of-the-changes" id="markdown-toc-keeping-track-of-the-changes">Keeping track of the changes</a></li>
+  <li><a href="#metadata" id="markdown-toc-metadata">Metadata</a></li>
+  <li><a href="#content" id="markdown-toc-content">Content</a>    <ol>
+      <li><a href="#adding-images-with-caption" id="markdown-toc-adding-images-with-caption">Adding images with caption</a></li>
+      <li><a href="#writing-mathematical-expressions" id="markdown-toc-writing-mathematical-expressions">Writing mathematical expressions</a></li>
     </ol>
   </li>
-  <li><a href="#filling-the-tutorial-content" id="markdown-toc-filling-the-tutorial-content">Filling the tutorial content</a>    <ol>
-      <li><a href="#finding-a-good-toy-dataset" id="markdown-toc-finding-a-good-toy-dataset">Finding a good toy dataset</a></li>
-      <li><a href="#filling-the-tutorial" id="markdown-toc-filling-the-tutorial">Filling the tutorial</a></li>
+  <li><a href="#improving-the-learning-experience" id="markdown-toc-improving-the-learning-experience">Improving the learning experience</a>    <ol>
+      <li><a href="#overview-box" id="markdown-toc-overview-box"><strong>Overview</strong> box</a></li>
+      <li><a href="#agenda-box" id="markdown-toc-agenda-box"><strong>Agenda</strong> box</a></li>
+      <li><a href="#hands-on-box" id="markdown-toc-hands-on-box"><strong>Hands-on</strong> box</a></li>
+      <li><a href="#questions-and-solution-boxes" id="markdown-toc-questions-and-solution-boxes"><strong>Questions</strong> and <strong>solution</strong> boxes</a></li>
+      <li><a href="#tips-box" id="markdown-toc-tips-box"><strong>Tips</strong> box</a></li>
+      <li><a href="#comments-boxes" id="markdown-toc-comments-boxes"><strong>Comments</strong> boxes</a></li>
+      <li><a href="#details-box" id="markdown-toc-details-box"><strong>Details</strong> box</a></li>
+      <li><a href="#key-points-box" id="markdown-toc-key-points-box"><strong>Key points</strong> box</a></li>
+      <li><a href="#nested-boxes" id="markdown-toc-nested-boxes">Nested boxes</a></li>
     </ol>
   </li>
-  <li><a href="#adding-slides-optional" id="markdown-toc-adding-slides-optional">Adding slides (optional)</a></li>
 </ol>
 
 </blockquote>
 
-<h1 id="setting-up-a-new-tutorial">Setting up a new tutorial</h1>
+<p>The tutorial’s content should be placed in the file <code class="highlighter-rouge">tutorial.md</code>. Its syntax and structure are simple, and will have the following structure:</p>
 
-<p>Here, we want to develop a small tutorial to explain how to use BLAST.</p>
-
-<h2 id="defining-the-topic">Defining the topic</h2>
-
-<p>The first step we need to define is in which topic to place our new tutorial. This can be tricky: when we structured the repository, we decided to use as topics the categories that are used in the <a href="https://toolshed.g2.bx.psu.edu/">ToolShed</a>. The ToolShed assigns a category to each tool. Therefore, to decide where to put your tutorial, have a look at which ToolShed’s category the main tools in your tutorial belong. For example, this tutorial will rely on the NCBI Blast+ tool.</p>
-
-<blockquote class="hands_on">
-  <h3 id="-hands-on-defining-the-topic-for-the-tutorial"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Defining the topic for the tutorial</h3>
-
-  <ol>
-    <li>Search for NCBI Blast+ on the <a href="https://toolshed.g2.bx.psu.edu/">ToolShed</a></li>
-    <li>
-      <p>Check in which category it has been placed</p>
-
-      <blockquote class="question">
-        <h3 id="-questions"><i class="fa fa-question-circle" aria-hidden="true"></i> Questions</h3>
-
-        <p>In which topic will you put the new tutorial?</p>
-
-        <blockquote class="solution">
-          <h3 id="-solution"><i class="fa fa-eye" aria-hidden="true"></i> Solution</h3>
-
-          <p>If we search for <a href="https://toolshed.g2.bx.psu.edu/view/devteam/ncbi_blast_plus/7538e2bfcd41">NCBI Blast+ in the ToolShed</a>, it is placed in 2 categories (bottom): “Next Gen Mappers”, and “Sequence Analysis”.
-We decided to put it in “Sequence analysis” because this is the most general one for this tutorial.</p>
-
-        </blockquote>
-
-      </blockquote>
-    </li>
-  </ol>
-</blockquote>
-
-<blockquote>
-  <p>Want to create a new topic? <a href="/training-material/topics/contributing/tutorials/create-new-topic/tutorial.html">Check out our tutorial to create a new topic</a></p>
-</blockquote>
-
-<h2 id="creating-the-directory-for-the-tutorial">Creating the directory for the tutorial</h2>
-
-<p>Once the topic has been chosen, we can finally create the tutorial. A tutorial in the Galaxy Training Network contains:</p>
-<ul>
-  <li>the tutorial’s content</li>
-  <li>the tutorial’s metadata (description)</li>
-  <li>the tutorial’s technical support, such as the needed tools and datasets</li>
-  <li>a workflow</li>
-  <li>a Galaxy Interactive Tour</li>
-</ul>
-
-<p>To ease this process, we created a template for new tutorials, complete with all aforementioned requirements.</p>
-
-<blockquote class="hands_on">
-  <h3 id="-hands-on-copy-the-required-files"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Copy the required files</h3>
-
-  <ol>
-    <li>Copy the <code class="highlighter-rouge">tutorial1</code> directory (you can find it in <code class="highlighter-rouge">templates/tutorials/</code>) in <code class="highlighter-rouge">topics/sequence-analysis/tutorials</code></li>
-    <li>Rename the copied directory to <code class="highlighter-rouge">similarity-search</code></li>
-  </ol>
-</blockquote>
-
-<h2 id="keeping-track-of-the-changes">Keeping track of the changes</h2>
-
-<p>You need to keep track of all your new changes with a control version system (CVS). To do so, you will use Git as VCS, and GitHub as your personal hosting service.</p>
-
-<p>This repository of tutorials is developed collaboratively. Therefore, to ease the collaboration, we are using the <a href="https://guides.github.com/introduction/flow/">GitHub flow</a> approach, which is based on forks, branches, and pull requests. To learn more how to use it, you can follow our <a href="">dedicated tutorial</a>
-Let’s start tracking your changes!</p>
-
-<blockquote class="hands_on">
-  <h3 id="-hands-on-start-keeping-track-of-the-changes"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Start keeping track of the changes</h3>
-
-  <ol>
-    <li>Create a new branch called “similarity-search” in your local copy:
- <code class="highlighter-rouge">git checkout -b similarity-search</code></li>
-    <li>Add your changes to the new branch:
- <code class="highlighter-rouge">git add topics/sequence-analysis/tutorials/similarity-search</code></li>
-    <li>Commit your changes in that branch:
- <code class="highlighter-rouge">git commit -m "Set up the similarity search tutorial"</code></li>
-    <li>Push the new branch to your fork on GitHub:
- <code class="highlighter-rouge">git push &lt;fork_name&gt; similarity-search</code></li>
-  </ol>
-</blockquote>
-
-<p>The GitHub interface can also help you in the process of editing a file. It will automatically create a fork of this repository where you can safely work.</p>
-
-<p>We will now start to fill the different files together. We recommend you to commit your changes regularly: it helps following them, but also revert them if needed.</p>
-
-<h1 id="filling-the-tutorial-content">Filling the tutorial content</h1>
-
-<p>Once we set up the infrastructure, we are ready to write the tutorial</p>
-
-<h2 id="finding-a-good-toy-dataset">Finding a good toy dataset</h2>
-
-<p>The first question to come is what data to use for walking the tutorial through the hands-on sections. The selected data must be informative enough to illustrate the meaning of using a tool or a given technique, but not too big to require long waiting times for its processing during a workshop. Typically, the selected data should be the informative subset of a full real-life dataset.</p>
-
-<p>For example for our tutorial, we generated a small dataset by</p>
-
-<ul>
-  <li>Taking one 16S sequences (used for test of a Galaxy tool)</li>
-  <li>Generating a reference database
-    <ul>
-      <li>Blasting it on the NR database on <a href="https://blast.ncbi.nlm.nih.gov/Blast.cgi?PROGRAM=blastn&amp;PAGE_TYPE=BlastSearch&amp;LINK_LOC=blasthome">NCBI Blast</a></li>
-      <li>Extracting one similar sequence found with Blast</li>
-      <li>Searching and extracting 2 other sequences of the same species using the <a href="https://www.ncbi.nlm.nih.gov/nuccore">NCBI Nucleotide database</a></li>
-    </ul>
-  </li>
-</ul>
-
-<p>We then developed the tutorial and tested it on this toy dataset. Once we were ready to share it, we uploaded the toy datasets on <a href="https://zenodo.org/">Zenodo</a> to obtain a dedicated DOI (in the <a href="https://zenodo.org/communities/galaxy-training/?page=1&amp;size=20">Galaxy training network community</a>).</p>
-
-<h2 id="filling-the-tutorial">Filling the tutorial</h2>
-
-<p>The tutorial’s content will be placed in the file <code class="highlighter-rouge">tutorial.md</code>. Its syntax and structure are simple, and will follow the scheme:</p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>---
-layout: tutorial_hands_on
-topic_name: training
-tutorial_name: create-new-tutorial
----
-# Introduction
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">---</span>
+<span class="na">layout</span><span class="pi">:</span> <span class="s">tutorial_hands_on</span>
+<span class="na">topic_name</span><span class="pi">:</span> <span class="s">training</span>
+<span class="na">tutorial_name</span><span class="pi">:</span> <span class="s">create-new-tutorial</span>
+<span class="nn">---</span>
+<span class="gh"># Introduction</span>
 {:.no_toc}
 
 blabla
 
-# Section 1
+<span class="gh"># Section 1</span>
 
 blabla
 
-## Subsection 1
+<span class="gu">## Subsection 1</span>
 
 blabla
 
-# Section 2
+<span class="gh"># Section 2</span>
 
 blabla
 
-## Subsection 2
+<span class="gu">## Subsection 2</span>
 
 blabla
 
-# Conclusion
+<span class="gh"># Conclusion</span>
 {:.no_toc}
 
 blabla
 </code></pre></div></div>
 
-<h3 id="metadata">Metadata</h3>
+<h1 id="metadata">Metadata</h1>
 
-<p>The tutorial needs to start with some metadata on its top:</p>
+<p>The <code class="highlighter-rouge">tutorial.md</code> needs to start with some metadata at the top:</p>
 
 <ul>
-  <li><code class="highlighter-rouge">layout: tutorial_hands_on</code> (keep the default)</li>
-  <li><code class="highlighter-rouge">topic_name: training</code> with the name of the topic</li>
-  <li><code class="highlighter-rouge">tutorial_name: create-new-tutorial</code> with the name of tutorial</li>
+  <li><code class="highlighter-rouge">layout: tutorial_hands_on</code>: keep the default</li>
+  <li><code class="highlighter-rouge">topic_name: training</code>: replace ‘training’ the name of the topic</li>
+  <li><code class="highlighter-rouge">tutorial_name: create-new-tutorial</code>: replace ‘create-new-tutorial’ with the <code class="highlighter-rouge">name</code> of tutorial that you used in the topic level metadata</li>
 </ul>
 
 <p>These metadata are there to help the templating system linking between the tutorial’s file and the global <a href="/training-material/topics/contributing/tutorials/create-new-tutorial-metadata/tutorial.html">metadata</a>.
-If not correctly defined, the tutorial will not be found within the website.</p>
+If this is not correctly defined, the tutorial will not be shown on the website.</p>
 
 <blockquote class="hands_on">
   <h3 id="-hands-on-fix-the-top-metadata"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Fix the top metadata</h3>
 
   <ol>
     <li>Change the <code class="highlighter-rouge">tutorial_name</code> and the <code class="highlighter-rouge">topic_name</code> to fit to the ones defined in the metadata</li>
-    <li>
-      <p>Make sure that Jekyll is running</p>
-
-      <blockquote>
-        <p>Want to learn how to start Jekyll? <a href="/training-material/topics/contributing/tutorials/running-jekyll/tutorial.html">Check out our tutorial to serve the website locally</a></p>
-      </blockquote>
-    </li>
-    <li>Check if the tutorial has been correctly added at <a href="http://localhost:4000/training-material/">http://localhost:4000/training-material/</a></li>
+    <li>(Optional) Build the website locally by following the <a href="/training-material/topics/contributing/tutorials/running-jekyll/tutorial.html">Jekyll tutorial</a> and check that the tutorial is reachable</li>
   </ol>
-
 </blockquote>
 
-<h3 id="content">Content</h3>
+<h1 id="content">Content</h1>
 
 <p>The tutorial’s content is written directly after the short section of metadata. This is written in Markdown, a simple markup language.</p>
 
@@ -397,7 +292,7 @@ If not correctly defined, the tutorial will not be found within the website.</p>
 <ul>
   <li>An introduction, to bring an overview of the tutorial with its use cases, data, and methods</li>
   <li>Multiple sections, representing the steps of the analysis, complete with their hands-on parts (practicing is an important part of the learning process)</li>
-  <li>A conclusion to summarize what has been done in the tutorial (with a scheme)</li>
+  <li>A conclusion to summarize what has been done in the tutorial (with a graphic)</li>
 </ul>
 
 <blockquote class="hands_on">
@@ -410,412 +305,350 @@ If not correctly defined, the tutorial will not be found within the website.</p>
   </ol>
 </blockquote>
 
-<blockquote class="tip">
-  <h3 id="-tip-adding-images-with-caption"><i class="fa fa-lightbulb-o" aria-hidden="true"></i> Tip: Adding images with caption</h3>
+<h2 id="adding-images-with-caption">Adding images with caption</h2>
 
-  <p>To add an image in Markdown file, we need to use <code class="highlighter-rouge">![](../../images/image.png)</code>.</p>
+<p>To add an image in Markdown file, we need to use the markdown syntax for this: <code class="highlighter-rouge">![](../../images/image.png)</code>.</p>
 
-  <p>We added a small plugin to add a caption for each image:</p>
+<p>We have also added a small plugin to add a caption for each image:</p>
 
-  <figure id="figure-1"><img src="../../images/image_caption_screenshot.png" alt="This figure shows an example of an image with a caption" title="Example of an image with a caption" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Example of an image with a caption</figcaption></figure>
+<figure id="figure-1"><img src="../../images/image_caption_screenshot.png" alt="This figure shows an example of an image with a caption" title="Example of an image with a caption" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Example of an image with a caption</figcaption></figure>
 
-  <p>The preceding string “Figure” and its corresponding number is automatically added before its caption, which is in turn placed below the image by providing all information in the Markdown call of the image:</p>
+<p>The prefix “Figure 1.” is automatically added before its caption. This is done with the following Markdown syntax:</p>
 
-  <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  ![A textual description of the image](../images/image.png "This is my super caption")
-</code></pre></div>  </div>
-
-  <p>We can also cross-reference images inside our Markdown with an anchor. For example, we can link to <a href="#figure-1">the previous figure</a> using <code class="highlighter-rouge">[the display text](#figure-nb)</code> (changing <code class="highlighter-rouge">nb</code> with the image’s number).</p>
-</blockquote>
-
-<blockquote class="tip">
-  <h3 id="-tip-writing-mathematical-expressions"><i class="fa fa-lightbulb-o" aria-hidden="true"></i> Tip: Writing mathematical expressions</h3>
-
-  <p>Mathematical expressions can be written in LaTeX, and rendered with <a href="https://www.mathjax.org/">MathJax</a>.</p>
-
-  <p>Surround your math expression with two <code class="highlighter-rouge">$</code> signs (like in LaTeX math blocks):</p>
-
-  <ul>
-    <li>inline expressions, <em>e.g.</em> <code class="highlighter-rouge">$$ 5 + 5 $$</code> will be rendered as <script type="math/tex">5 + 5</script></li>
-    <li>
-      <p>block expressions, <em>e.g.</em> <code class="highlighter-rouge">$$ 5 + 5 $$</code> will be rendered in its own line block as</p>
-
-      <script type="math/tex; mode=display">5 + 5</script>
-    </li>
-  </ul>
-
-  <p>Dollar signs are therefore <em>reserved characters</em> for instructing the templating system to open/close LaTeX math blocks. In case you don’t want any math block to be opened/closed, but still be able to write a dollar sign, you have to <em>escape</em> it. Escaping enables the templating system to render the escaped character as a normal character.</p>
-
-  <blockquote class="comment">
-    <h3 id="-comments"><i class="fa fa-commenting-o" aria-hidden="true"></i> Comments</h3>
-    <p>LaTeX code that uses the pipe symbol <code class="highlighter-rouge">|</code> in inline math statements may lead to a line being recognized as a table line by the templating system.
-This can be avoided by using the <code class="highlighter-rouge">\vert</code> command instead of <code class="highlighter-rouge">|</code></p>
-  </blockquote>
-</blockquote>
-
-<h3 id="improving-the-learning-experience">Improving the learning experience</h3>
-
-<p>To improve the learning experience in our tutorial, we defined some boxes to highlight their content.</p>
-
-<p>They are defined always with the same structure:</p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt; ### {% icon an_icon %} Type of box: Name of the box
-&gt; list
-{: .type_of_box}
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">![</span><span class="nv">A textual description of the image</span><span class="p">](</span><span class="sx">../images/image.png</span> <span class="nn">"This is my super caption"</span><span class="p">)</span>
 </code></pre></div></div>
 
-<p>For a correct rendering of the tutorial’s content, the templating system requires this structure to be kept as it.
-The different defined boxes are:</p>
+<p>We can also cross-reference images inside our Markdown with an anchor. For example, we can link to <a href="#figure-1">the previous figure</a> using <code class="highlighter-rouge">[the display text](#figure-nb)</code> (changing <code class="highlighter-rouge">nb</code> with the image’s number).</p>
+
+<h2 id="writing-mathematical-expressions">Writing mathematical expressions</h2>
+
+<p>Mathematical expressions can be written in LaTeX, and are automtaically rendered with <a href="https://www.mathjax.org/">MathJax</a>.</p>
+
+<p>Surround your math expression with two <code class="highlighter-rouge">$</code> signs (like in LaTeX math blocks):</p>
 
 <ul>
+  <li>inline expressions, <em>e.g.</em> <code class="highlighter-rouge">$$ 5 + 5 $$</code> will be rendered as <script type="math/tex">5 + 5</script></li>
   <li>
-    <p><strong>Overview</strong></p>
+    <p>block expressions, <em>e.g.</em> <code class="highlighter-rouge">$$ 5 + 5 $$</code> will be rendered in its own line block as</p>
 
-    <p>This box at the top of each tutorial is automatically generated using the metadata we defined</p>
-
-    <blockquote class="hands_on">
-      <h3 id="-hands-on-checking-the-metadata"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Checking the metadata</h3>
-
-      <ol>
-        <li>
-          <p>Check that the metadata added previously are correctly filling the overview box</p>
-
-          <blockquote class="question">
-            <h3 id="-questions-1"><i class="fa fa-question-circle" aria-hidden="true"></i> Questions</h3>
-
-            <p>What metadata hasn’t been added to this box?</p>
-
-            <blockquote class="solution">
-              <h3 id="-solution-1"><i class="fa fa-eye" aria-hidden="true"></i> Solution</h3>
-
-              <p>The take-home messages are not added to this box but into the last box of the tutorial</p>
-            </blockquote>
-          </blockquote>
-        </li>
-      </ol>
-    </blockquote>
-  </li>
-  <li>
-    <p><strong>Agenda</strong></p>
-
-    <p>In most tutorial, the second box is the agenda box at the end of the introduction. It indicates the plan of the tutorial</p>
-
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  &gt; ### Agenda
-  &gt;
-  &gt; In this tutorial we will deal with:
-  &gt;
-  &gt; 1. TOC
-  &gt; {:toc}
-  &gt;
-  {: .agenda}
-</code></pre></div>    </div>
-
-    <p>No need to fill the list, since this will be done automatically reusing each section’s title.</p>
-
-    <p>To avoid adding the “Introduction” and “Conclusion”, we add <code class="highlighter-rouge">{:.no_toc}</code> below the section name. This will be rendered as follows:</p>
-
-    <blockquote class="agenda">
-      <h3 id="agenda-1">Agenda</h3>
-
-      <p>In this tutorial we will deal with:</p>
-
-      <ol>
-        <li>TOC</li>
-      </ol>
-
-    </blockquote>
-  </li>
-  <li>
-    <p><strong>Hands-on</strong></p>
-
-    <p>We think that actually walking through the tutorial by doing all its steps is important for learning its concepts. We therefore emphasize trying each step by regularly adding hands-on sections, where trainees are encouraged to do the analysis by themselves. We designed some special boxes to make these sections easy to find.</p>
-
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  &gt; ### {% icon hands_on %} Hands-on: Spliced mapping
-  &gt;
-  &gt; 1. **RNA STAR** {% icon tool %}: Map your reads on the reference genome with
-  &gt;    - *"Single-end or paired-end reads"*:  `Paired-end (as individual datasets)`
-  &gt;    - *"RNA-Seq FASTQ/FASTA file, forward reads"*: the generated `trimmed reads pair 1` files (multiple datasets)
-  &gt;    - *"RNA-Seq FASTQ/FASTA file, reverse reads"*: the generated `trimmed reads pair 2` files (multiple datasets)
-  &gt;    - *"Custom or built-in reference genome"*: `Use a built-in index`
-  &gt;    - *"Reference genome with or without an annotation"*: `use genome reference without builtin gene-model`
-  &gt;    - *"Select reference genome"*: `Drosophila Melanogaster (dm6)`
-  &gt;    - *"Gene model (gff3,gtf) file for splice junctions"*: the imported `Drosophila_melanogaster.BDGP6.87.gtf`
-  &gt;    - *"Length of the genomic sequence around annotated junctions"*: `36`
-  &gt;
-  &gt;        This parameter should be length of reads - 1
-  &gt;
-  &gt; 2. **MultiQC** {% icon tool %}: Aggregate the STAR logs with
-  &gt;      - *"Which tool was used generate logs?"*: `STAR`
-  &gt;      - *"Type of FastQC output?"*: `Log`
-  &gt;      - *"STAR log output"*: the generated `log` files (multiple datasets)
-  {: .hands_on}
-</code></pre></div>    </div>
-
-    <p>with the</p>
-
-    <ul>
-      <li><code class="highlighter-rouge">{% icon hands_on %}</code> emoji to define that is an hands-on</li>
-      <li>Short imperative sentence to make it easy to identify the tasks</li>
-      <li>Name of the tool in bold with the <code class="highlighter-rouge">{% icon tool %}</code> emoji to make it easy to identify a Galaxy tool</li>
-      <li>Parameters for the tool as a sublist</li>
-    </ul>
-
-    <p>It will be rendered like:</p>
-
-    <blockquote class="hands_on">
-      <h3 id="-hands-on-spliced-mapping"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Spliced mapping</h3>
-
-      <ol>
-        <li><strong>RNA STAR</strong> <i class="fa fa-wrench" aria-hidden="true"></i>: Map your reads on the reference genome with
-          <ul>
-            <li><em>“Single-end or paired-end reads”</em>:  <code class="highlighter-rouge">Paired-end (as individual datasets)</code></li>
-            <li><em>“RNA-Seq FASTQ/FASTA file, forward reads”</em>: the generated <code class="highlighter-rouge">trimmed reads pair 1</code> files (multiple datasets)</li>
-            <li><em>“RNA-Seq FASTQ/FASTA file, reverse reads”</em>: the generated <code class="highlighter-rouge">trimmed reads pair 2</code> files (multiple datasets)</li>
-            <li><em>“Custom or built-in reference genome”</em>: <code class="highlighter-rouge">Use a built-in index</code></li>
-            <li><em>“Reference genome with or without an annotation”</em>: <code class="highlighter-rouge">use genome reference without builtin gene-model</code></li>
-            <li><em>“Select reference genome”</em>: <code class="highlighter-rouge">Drosophila Melanogaster (dm6)</code></li>
-            <li><em>“Gene model (gff3,gtf) file for splice junctions”</em>: the imported <code class="highlighter-rouge">Drosophila_melanogaster.BDGP6.87.gtf</code></li>
-            <li>
-              <p><em>“Length of the genomic sequence around annotated junctions”</em>: <code class="highlighter-rouge">36</code></p>
-
-              <p>This parameter should be length of reads - 1</p>
-            </li>
-          </ul>
-        </li>
-        <li><strong>MultiQC</strong> <i class="fa fa-wrench" aria-hidden="true"></i>: Aggregate the STAR logs with
-          <ul>
-            <li><em>“Which tool was used generate logs?”</em>: <code class="highlighter-rouge">STAR</code></li>
-            <li><em>“Type of FastQC output?”</em>: <code class="highlighter-rouge">Log</code></li>
-            <li><em>“STAR log output”</em>: the generated <code class="highlighter-rouge">log</code> files (multiple datasets)</li>
-          </ul>
-        </li>
-      </ol>
-    </blockquote>
-
-    <p>There are also some predefined <strong>parameter icons</strong> available which can be used to indicate the <em>type</em> of parameter. These are optional,
-  but may be helpful in some cases (for example to distinguish between single file inputs and collection inputs).</p>
-
-    <p>The available icons are:</p>
-
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  &gt; ### {% icon hands_on %} Hands-on: My Step
-  &gt;
-  &gt; 1. **My Tool** {% icon tool %} with the following parameters
-  &gt;  - {% icon param-text %} *"My text parameter"*: `my value`
-  &gt;  - {% icon param-file %} *"My input file"*: `my file`
-  &gt;  - {% icon param-files %} *"My multiple file input or collection"*: `my collection`
-  &gt;  - {% icon param-select %} *"My select menu"*: `my choice`
-  &gt;  - {% icon param-check %} *"My check box"*: `yes`
-  {: .hands_on}
-</code></pre></div>    </div>
-
-    <p>which, when rendered, look like:</p>
-
-    <blockquote class="hands_on">
-      <h3 id="-hands-on-my-step"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: My Step</h3>
-
-      <ol>
-        <li><strong>My Tool</strong> <i class="fa fa-wrench" aria-hidden="true"></i> with the following parameters
-          <ul>
-            <li><i class="fa fa-pencil" aria-hidden="true"></i> <em>“My text parameter”</em>: <code class="highlighter-rouge">my value</code></li>
-            <li><i class="fa fa-file-o" aria-hidden="true"></i> <em>“My input file”</em>: <code class="highlighter-rouge">my file</code></li>
-            <li><i class="fa fa-files-o" aria-hidden="true"></i> <em>“My multiple file input or collection”</em>: <code class="highlighter-rouge">my collection</code></li>
-            <li><i class="fa fa-filter" aria-hidden="true"></i> <em>“My select menu”</em>: <code class="highlighter-rouge">my choice</code></li>
-            <li><i class="fa fa-check-square-o" aria-hidden="true"></i> <em>“My check box”</em>: <code class="highlighter-rouge">yes</code></li>
-          </ul>
-        </li>
-      </ol>
-    </blockquote>
-  </li>
-  <li>
-    <p><strong>Questions and solution</strong></p>
-
-    <p>Questions are there to force the trainees to think about what they are currently doing, and to put things in perspective.
- They also help the instructors by exposing and clarify common scenarios, errors, or applications.</p>
-
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> &gt; ### {% icon question %} Questions
- &gt;
- &gt; 1. Why are some tests filtered?
- &gt; 2. Does it improve the *p*-value distribution?
- &gt;
- &gt;    &gt; ### {% icon solution %} Solution
- &gt;    &gt;
- &gt;    &gt; 1. Sol for the first question
- &gt;    &gt; 2. Sol for the second question
- &gt;    &gt;
- &gt;    {: .solution}
- {: .question}
-</code></pre></div>    </div>
-
-    <p>Which will be rendered as:</p>
-
-    <blockquote class="question">
-      <h3 id="-questions-2"><i class="fa fa-question-circle" aria-hidden="true"></i> Questions</h3>
-
-      <ol>
-        <li>Why are some tests filtered?</li>
-        <li>
-          <p>Does it improve the <em>p</em>-value distribution?</p>
-
-          <blockquote class="solution">
-            <h3 id="-solution-2"><i class="fa fa-eye" aria-hidden="true"></i> Solution</h3>
-
-            <ol>
-              <li>Sol for the first question</li>
-              <li>Sol for the second question</li>
-            </ol>
-
-          </blockquote>
-        </li>
-      </ol>
-    </blockquote>
-
-    <p>Questions have to be quick to answer, and answers can be also provided as multiple choices (MCQs).
- With well chosen wrong answers, MCQs can do much more than just measure how much someone knows.</p>
-
-    <p>In the box below and hidden we add also the correct answer, so that self-trainees can check the solution and its explanation.</p>
-  </li>
-  <li>
-    <p><strong>Tips</strong></p>
-
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  &gt; ### {% icon tip %} Tip: Importing data via links
-  &gt;
-  &gt; * Copy the link location
-  &gt; * Open the Galaxy Upload Manager
-  &gt; * Select **Paste/Fetch Data**
-  &gt; * Paste the link into the text field
-  &gt; * Press **Start**
-  {: .tip}
-</code></pre></div>    </div>
-
-    <p>Rendered:</p>
-
-    <blockquote class="tip">
-      <h3 id="-tip-importing-data-via-links"><i class="fa fa-lightbulb-o" aria-hidden="true"></i> Tip: Importing data via links</h3>
-
-      <ul>
-        <li>Copy the link location</li>
-        <li>Open the Galaxy Upload Manager</li>
-        <li>Select <strong>Paste/Fetch Data</strong></li>
-        <li>Paste the link into the text field</li>
-        <li>Press <strong>Start</strong></li>
-      </ul>
-    </blockquote>
-  </li>
-  <li>
-    <p><strong>Comments</strong></p>
-
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  &gt; ### {% icon comment %} Comments
-  &gt; - Edit the "Database/Build" to select "dm3"
-  &gt; - Rename the datasets according to the samples
-  {: .comment}
-</code></pre></div>    </div>
-
-    <p>Rendered:</p>
-
-    <blockquote class="comment">
-      <h3 id="-comments-1"><i class="fa fa-commenting-o" aria-hidden="true"></i> Comments</h3>
-      <ul>
-        <li>Edit the “Database/Build” to select “dm3”</li>
-        <li>Rename the datasets according to the samples</li>
-      </ul>
-    </blockquote>
-  </li>
-  <li>
-    <p><strong>Details</strong></p>
-
-    <p>The detail box is used to give more background explanation on the subject. By default the box is collapsed.</p>
-
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  &gt; ### {% icon details %} More details on the ....
-  &gt;
-  &gt; Add more details in Markdown...
-  &gt;
-  {: .details}
-</code></pre></div>    </div>
-
-    <p>Rendered:</p>
-
-    <blockquote class="details">
-      <h3 id="-more-details-on-the-"><i class="fa fa-info-circle" aria-hidden="true"></i> More details on the ….</h3>
-
-      <p>Add more details in Markdown…</p>
-
-    </blockquote>
-  </li>
-  <li>
-    <p><strong>Key points</strong></p>
-
-    <p>This last box of the tutorial is automatically filled with the take-home messages defined in the metadata</p>
+    <script type="math/tex; mode=display">5 + 5</script>
   </li>
 </ul>
 
-<p>To render the boxes correctly, the syntax needs to be correct. If it doesn’t work, have a look at similar tutorials and get inspiration.
-Boxes can be nested, <em>e.g.</em> for having tips inside a hands-on:</p>
+<p>Dollar signs are therefore <em>reserved characters</em> for instructing the templating system to open/close LaTeX math blocks. If you want to use a <code class="highlighter-rouge">$</code> within your expression, you will need to <em>escape</em> it: <code class="highlighter-rouge">$$ a + 3\$ = 5\$ $$</code> will be rendered as: <script type="math/tex">a + 3\$ = 5\$</script></p>
+
+<blockquote class="comment">
+  <h3 id="-comments"><i class="fa fa-commenting-o" aria-hidden="true"></i> Comments</h3>
+  <p>LaTeX code that uses the pipe symbol <code class="highlighter-rouge">|</code> in inline math statements may lead to a line being recognized as a table line by the templating system.
+This can be avoided by using the <code class="highlighter-rouge">\vert</code> command instead of <code class="highlighter-rouge">|</code></p>
+</blockquote>
+
+<h1 id="improving-the-learning-experience">Improving the learning experience</h1>
+
+<p>To improve the learning experience in our tutorial, we define some boxes to highlight content.</p>
+
+<p>These boxes are defined always with the same structure:</p>
+
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gt">&gt; ### {% icon an_icon %} Type of box: Name of the box</span>
+<span class="gt">&gt; list</span>
+{: .type_of_box}
+</code></pre></div></div>
+
+<p>You must follow this structure exactly for it to be rendered correctly.</p>
+
+<h2 id="overview-box"><strong>Overview</strong> box</h2>
+
+<p>This box at the top of each tutorial is automatically generated using the metadata we defined in the topic’s metadata file</p>
 
 <blockquote class="hands_on">
-  <h3 id="-hands-on-defining-the-topic-for-the-tutorial-1"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Defining the topic for the tutorial</h3>
+  <h3 id="-hands-on-checking-the-metadata"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Checking the metadata</h3>
 
   <ol>
-    <li>Search for NCBI Blast+ on the <a href="https://toolshed.g2.bx.psu.edu/">ToolShed</a></li>
     <li>
-      <p>Check in which category it is</p>
+      <p>Check that the metadata added previously are correctly filling the overview box</p>
 
       <blockquote class="question">
-        <h3 id="-questions-3"><i class="fa fa-question-circle" aria-hidden="true"></i> Questions</h3>
+        <h3 id="-questions"><i class="fa fa-question-circle" aria-hidden="true"></i> Questions</h3>
 
-        <p>In which topic will you put the tutorial?</p>
+        <p>What metadata hasn’t been added to this box?</p>
 
         <blockquote class="solution">
-          <h3 id="-solution-3"><i class="fa fa-eye" aria-hidden="true"></i> Solution</h3>
+          <h3 id="-solution"><i class="fa fa-eye" aria-hidden="true"></i> Solution</h3>
 
-          <p>If we search for <a href="https://toolshed.g2.bx.psu.edu/view/devteam/ncbi_blast_plus/7538e2bfcd41">NCBI Blast+ in the ToolShed</a>, it is attributed to 2 categories (bottom): “Next Gen Mappers” and “Sequence Analysis”.
-We decided to put it in “Sequence analysis” because this is the most general one for this tutorial.</p>
+          <p>The take-home messages are not added to this box but into the last box of the tutorial</p>
         </blockquote>
       </blockquote>
     </li>
   </ol>
 </blockquote>
 
-<h1 id="adding-slides-optional">Adding slides (optional)</h1>
+<h2 id="agenda-box"><strong>Agenda</strong> box</h2>
 
-<p>Sometimes we also need slides to support the tutorial’s topics. With the current infrastructure we are able to also provide this functionality, and integrate a tutorial with further support material.</p>
+<p>In most tutorials, the second box is the agenda box, placed at the end of the introduction. It shows the table of contents for the tutorial</p>
 
-<p>Although the slide file’s extension is .html, all slides are written in Markdown as well, and their content is rendered as a webpage thanks to <a href="https://remarkjs.com"><code class="highlighter-rouge">Remark</code></a>. However, adding slides is not enough: we first need to tell the templating system to search for them by changing <code class="highlighter-rouge">slides</code> in the metadata from <code class="highlighter-rouge">no</code> to <code class="highlighter-rouge">yes</code>.</p>
-
-<p>Once it is done, the slides for our tutorial will be accessible at <a href="http://localhost:4000/topics/sequence-analysis/tutorials/similarity-search/slides.html">http://localhost:4000/topics/sequence-analysis/tutorials/similarity-search/slides.html </a></p>
-
-<p>We can now fill the <code class="highlighter-rouge">slides.html</code> file as follows:</p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>---
-layout: tutorial_slides
-topic_name: "sequence-analysis"
-tutorial_name: search-similarity
-logo: "GTN"
----
-
-# What is similarity search?
-
----
-
-### What is blast?
-
-![](../../images/ecker_2012.jpg)
-
----
-
-### Next slide
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gt">&gt; ### Agenda</span>
+<span class="gt">&gt;</span>
+<span class="gt">&gt; In this tutorial we will deal with:</span>
+<span class="gt">&gt;</span>
+<span class="gt">&gt; 1. TOC</span>
+<span class="gt">&gt; {:toc}</span>
+<span class="gt">&gt;</span>
+{: .agenda}
 </code></pre></div></div>
 
-<p>On the top, as for the tutorial’s <code class="highlighter-rouge">tutorial.md</code>, we need to define some metadata to link the slides with the corresponding tutorial. The metadata of the tutorial can then be used also to automatically fill the first slides (with the title, requirements, etc)  and the last slide (take-home message).</p>
+<p>There is no need to fill out the list; this will be done automatically based off of your tutorial’s section title.</p>
 
-<p>Each new slide is introduced by <code class="highlighter-rouge">---</code>, and the content of each slide is written in Markdown.</p>
+<p>To avoid adding the “Introduction” and “Conclusion” sections in the agenda, you can add <code class="highlighter-rouge">{:.no_toc}</code> below the section name. This will be rendered as follows:</p>
 
-<blockquote class="hands_on">
-  <h3 id="-hands-on-add-some-slides-for-the-tutorial"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Add some slides for the tutorial</h3>
+<blockquote class="agenda">
+  <h3 id="agenda-1">Agenda</h3>
+
+  <p>In this tutorial we will deal with:</p>
 
   <ol>
-    <li>Add a few slides to explain the similarity search</li>
-    <li>Make sure they are accessible and correctly generated</li>
+    <li>TOC</li>
+  </ol>
+
+</blockquote>
+
+<h2 id="hands-on-box"><strong>Hands-on</strong> box</h2>
+
+<p>We find that having users walk through the tutorial, doing all of the steps is important for learning the concepts taught. We therefore emphasize this by regularly adding hands-on sections, where trainees are encouraged to do the analysis by themselves. We have designed some special boxes to make these sections easier to find.</p>
+
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gt">&gt; ### {% icon hands_on %} Hands-on: Spliced mapping</span>
+<span class="gt">&gt;</span>
+<span class="gt">&gt; 1. **RNA STAR** {% icon tool %}: Map your reads on the reference genome with</span>
+<span class="gt">&gt;    - *"Single-end or paired-end reads"*:  `Paired-end (as individual datasets)`</span>
+<span class="gt">&gt;    - *"RNA-Seq FASTQ/FASTA file, forward reads"*: the generated `trimmed reads pair 1` files (multiple datasets)</span>
+<span class="gt">&gt;    - *"RNA-Seq FASTQ/FASTA file, reverse reads"*: the generated `trimmed reads pair 2` files (multiple datasets)</span>
+<span class="gt">&gt;    - *"Custom or built-in reference genome"*: `Use a built-in index`</span>
+<span class="gt">&gt;    - *"Reference genome with or without an annotation"*: `use genome reference without builtin gene-model`</span>
+<span class="gt">&gt;    - *"Select reference genome"*: `Drosophila Melanogaster (dm6)`</span>
+<span class="gt">&gt;    - *"Gene model (gff3,gtf) file for splice junctions"*: the imported `Drosophila_melanogaster.BDGP6.87.gtf`</span>
+<span class="gt">&gt;    - *"Length of the genomic sequence around annotated junctions"*: `36`</span>
+<span class="gt">&gt;</span>
+<span class="gt">&gt;        This parameter should be length of reads - 1</span>
+<span class="gt">&gt;</span>
+<span class="gt">&gt; 2. **MultiQC** {% icon tool %}: Aggregate the STAR logs with</span>
+<span class="gt">&gt;      - *"Which tool was used generate logs?"*: `STAR`</span>
+<span class="gt">&gt;      - *"Type of FastQC output?"*: `Log`</span>
+<span class="gt">&gt;      - *"STAR log output"*: the generated `log` files (multiple datasets)</span>
+{: .hands_on}
+</code></pre></div></div>
+
+<p>For consistency please use:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">{% icon hands_on %}</code> emoji to define that is an hands-on</li>
+  <li>Short imperative sentences to make it easy to identify the tasks</li>
+  <li>Name of the tool in bold with the <code class="highlighter-rouge">{% icon tool %}</code> emoji to make it easy to identify a Galaxy tool</li>
+  <li>Parameters for the tool as a sublist</li>
+</ul>
+
+<p>This will be rendered like:</p>
+
+<blockquote class="hands_on">
+  <h3 id="-hands-on-spliced-mapping"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Spliced mapping</h3>
+
+  <ol>
+    <li><strong>RNA STAR</strong> <i class="fa fa-wrench" aria-hidden="true"></i>: Map your reads on the reference genome with
+      <ul>
+        <li><em>“Single-end or paired-end reads”</em>:  <code class="highlighter-rouge">Paired-end (as individual datasets)</code></li>
+        <li><em>“RNA-Seq FASTQ/FASTA file, forward reads”</em>: the generated <code class="highlighter-rouge">trimmed reads pair 1</code> files (multiple datasets)</li>
+        <li><em>“RNA-Seq FASTQ/FASTA file, reverse reads”</em>: the generated <code class="highlighter-rouge">trimmed reads pair 2</code> files (multiple datasets)</li>
+        <li><em>“Custom or built-in reference genome”</em>: <code class="highlighter-rouge">Use a built-in index</code></li>
+        <li><em>“Reference genome with or without an annotation”</em>: <code class="highlighter-rouge">use genome reference without builtin gene-model</code></li>
+        <li><em>“Select reference genome”</em>: <code class="highlighter-rouge">Drosophila Melanogaster (dm6)</code></li>
+        <li><em>“Gene model (gff3,gtf) file for splice junctions”</em>: the imported <code class="highlighter-rouge">Drosophila_melanogaster.BDGP6.87.gtf</code></li>
+        <li>
+          <p><em>“Length of the genomic sequence around annotated junctions”</em>: <code class="highlighter-rouge">36</code></p>
+
+          <p>This parameter should be length of reads - 1</p>
+        </li>
+      </ul>
+    </li>
+    <li><strong>MultiQC</strong> <i class="fa fa-wrench" aria-hidden="true"></i>: Aggregate the STAR logs with
+      <ul>
+        <li><em>“Which tool was used generate logs?”</em>: <code class="highlighter-rouge">STAR</code></li>
+        <li><em>“Type of FastQC output?”</em>: <code class="highlighter-rouge">Log</code></li>
+        <li><em>“STAR log output”</em>: the generated <code class="highlighter-rouge">log</code> files (multiple datasets)</li>
+      </ul>
+    </li>
   </ol>
 </blockquote>
+
+<p>There are also some predefined <strong>parameter icons</strong> available which can be used to indicate the <em>type</em> of parameter. These are optional,
+but may be helpful in some cases (for example to distinguish between single file inputs and collection inputs).</p>
+
+<p>The available icons are:</p>
+
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gt">&gt; ### {% icon hands_on %} Hands-on: My Step</span>
+<span class="gt">&gt;</span>
+<span class="gt">&gt; 1. **My Tool** {% icon tool %} with the following parameters</span>
+<span class="gt">&gt;  - {% icon param-text %} *"My text parameter"*: `my value`</span>
+<span class="gt">&gt;  - {% icon param-file %} *"My input file"*: `my file`</span>
+<span class="gt">&gt;  - {% icon param-files %} *"My multiple file input or collection"*: `my collection`</span>
+<span class="gt">&gt;  - {% icon param-select %} *"My select menu"*: `my choice`</span>
+<span class="gt">&gt;  - {% icon param-check %} *"My check box"*: `yes`</span>
+{: .hands_on}
+</code></pre></div></div>
+
+<p>which, when rendered, look like:</p>
+
+<blockquote class="hands_on">
+  <h3 id="-hands-on-my-step"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: My Step</h3>
+
+  <ol>
+    <li><strong>My Tool</strong> <i class="fa fa-wrench" aria-hidden="true"></i> with the following parameters
+      <ul>
+        <li><i class="fa fa-pencil" aria-hidden="true"></i> <em>“My text parameter”</em>: <code class="highlighter-rouge">my value</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i> <em>“My input file”</em>: <code class="highlighter-rouge">my file</code></li>
+        <li><i class="fa fa-files-o" aria-hidden="true"></i> <em>“My multiple file input or collection”</em>: <code class="highlighter-rouge">my collection</code></li>
+        <li><i class="fa fa-filter" aria-hidden="true"></i> <em>“My select menu”</em>: <code class="highlighter-rouge">my choice</code></li>
+        <li><i class="fa fa-check-square-o" aria-hidden="true"></i> <em>“My check box”</em>: <code class="highlighter-rouge">yes</code></li>
+      </ul>
+    </li>
+  </ol>
+</blockquote>
+
+<h2 id="questions-and-solution-boxes"><strong>Questions</strong> and <strong>solution</strong> boxes</h2>
+
+<p>Questions can be added to force trainees to think about what they are currently doing, and to put things in perspective.
+They can also help the instructors by exposing and clarifying common scenarios, errors, or applications.</p>
+
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gt">&gt; ### {% icon question %} Questions</span>
+<span class="gt">&gt;</span>
+<span class="gt">&gt; 1. Why are some tests filtered?</span>
+<span class="gt">&gt; 2. Does it improve the *p*-value distribution?</span>
+<span class="gt">&gt;</span>
+<span class="gt">&gt;    &gt; ### {% icon solution %} Solution</span>
+<span class="gt">&gt;    &gt;</span>
+<span class="gt">&gt;    &gt; 1. Sol for the first question</span>
+<span class="gt">&gt;    &gt; 2. Sol for the second question</span>
+<span class="gt">&gt;    &gt;</span>
+<span class="gt">&gt;    {: .solution}</span>
+{: .question}
+</code></pre></div></div>
+
+<p>Which will be rendered as:</p>
+
+<blockquote class="question">
+  <h3 id="-questions-1"><i class="fa fa-question-circle" aria-hidden="true"></i> Questions</h3>
+
+  <ol>
+    <li>Why are some tests filtered?</li>
+    <li>
+      <p>Does it improve the <em>p</em>-value distribution?</p>
+
+      <blockquote class="solution">
+        <h3 id="-solution-1"><i class="fa fa-eye" aria-hidden="true"></i> Solution</h3>
+
+        <ol>
+          <li>Sol for the first question</li>
+          <li>Sol for the second question</li>
+        </ol>
+
+      </blockquote>
+    </li>
+  </ol>
+</blockquote>
+
+<p>Questions should be quick to answer. You can directly ask a question and expect an answer, or you can provide some answers and create multiple choices questions (MCQs).
+With well chosen wrong answers, MCQs can do much more than just measure how much someone knows, such as exposing common misconceptions and mistakes.</p>
+
+<p>In the box below, initially hidden, we add the correct answer and possibly any additional explanation. Self-trainees can then check the solution and its explanation.</p>
+
+<h2 id="tips-box"><strong>Tips</strong> box</h2>
+
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gt">&gt; ### {% icon tip %} Tip: Importing data via links</span>
+<span class="gt">&gt;</span>
+<span class="gt">&gt; * Copy the link location</span>
+<span class="gt">&gt; * Open the Galaxy Upload Manager</span>
+<span class="gt">&gt; * Select **Paste/Fetch Data**</span>
+<span class="gt">&gt; * Paste the link into the text field</span>
+<span class="gt">&gt; * Press **Start**</span>
+{: .tip}
+</code></pre></div></div>
+
+<p>Rendered:</p>
+
+<blockquote class="tip">
+  <h3 id="-tip-importing-data-via-links"><i class="fa fa-lightbulb-o" aria-hidden="true"></i> Tip: Importing data via links</h3>
+
+  <ul>
+    <li>Copy the link location</li>
+    <li>Open the Galaxy Upload Manager</li>
+    <li>Select <strong>Paste/Fetch Data</strong></li>
+    <li>Paste the link into the text field</li>
+    <li>Press <strong>Start</strong></li>
+  </ul>
+</blockquote>
+
+<h2 id="comments-boxes"><strong>Comments</strong> boxes</h2>
+
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gt">&gt; ### {% icon comment %} Comments</span>
+<span class="gt">&gt; - Edit the "Database/Build" to select "dm3"</span>
+<span class="gt">&gt; - Rename the datasets according to the samples</span>
+{: .comment}
+</code></pre></div></div>
+
+<p>Rendered:</p>
+
+<blockquote class="comment">
+  <h3 id="-comments-1"><i class="fa fa-commenting-o" aria-hidden="true"></i> Comments</h3>
+  <ul>
+    <li>Edit the “Database/Build” to select “dm3”</li>
+    <li>Rename the datasets according to the samples</li>
+  </ul>
+</blockquote>
+
+<h2 id="details-box"><strong>Details</strong> box</h2>
+
+<p>The detail box is used to give more background explanation on the subject. By default the box is collapsed, trainees can expand it if they wish to know extra information about a topic.</p>
+
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gt">&gt; ### {% icon details %} More details on the ....</span>
+<span class="gt">&gt;</span>
+<span class="gt">&gt; Add more details in Markdown...</span>
+<span class="gt">&gt;</span>
+{: .details}
+</code></pre></div></div>
+
+<p>Rendered:</p>
+
+<blockquote class="details">
+  <h3 id="-more-details-on-the-"><i class="fa fa-info-circle" aria-hidden="true"></i> More details on the ….</h3>
+
+  <p>Add more details in Markdown…</p>
+
+</blockquote>
+
+<h2 id="key-points-box"><strong>Key points</strong> box</h2>
+
+<p>This last box of the tutorial is automatically created with the take-home messages defined in the topic’s metadata</p>
+
+<p>To render the boxes correctly, the syntax needs to be correct. If it doesn’t work, have a look at similar tutorials and get inspiration.</p>
+
+<h2 id="nested-boxes">Nested boxes</h2>
+
+<p>Boxes can be nested, <em>e.g.</em> for having tips inside a hands-on:</p>
+
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gt">&gt; ### {% icon hands_on %} Hands-on: Defining the topic for the tutorial</span>
+<span class="gt">&gt;</span>
+<span class="gt">&gt; 1. Search for NCBI Blast+ on the [ToolShed](https://toolshed.g2.bx.psu.edu/)</span>
+<span class="gt">&gt; 2. Check in which category it is</span>
+<span class="gt">&gt;</span>
+<span class="gt">&gt;    &gt; ### {% icon question %} Questions</span>
+<span class="gt">&gt;    &gt;</span>
+<span class="gt">&gt;    &gt; In which topic will you put the tutorial?</span>
+<span class="gt">&gt;    &gt;</span>
+<span class="gt">&gt;    &gt;    &gt; ### {% icon solution %} Solution</span>
+<span class="gt">&gt;    &gt;    &gt;</span>
+<span class="gt">&gt;    &gt;    &gt; If we search for [NCBI Blast+ in the ToolShed](https://toolshed.g2.bx.psu.edu/view/devteam/ncbi_blast_plus/7538e2bfcd41), it is attributed to 2 categories (bottom): "Next Gen Mappers" and "Sequence Analysis".</span>
+<span class="gt">&gt;    &gt;    &gt; We decided to put it in "Sequence analysis" because this is the most general one for this tutorial.</span>
+<span class="gt">&gt;    &gt;    {: .solution}</span>
+<span class="gt">&gt;    {: .question}</span>
+{: .hands_on}
+</code></pre></div></div>
 
 <h1 class="no_toc" id="conclusion">Conclusion</h1>
 
@@ -825,8 +658,6 @@ logo: "GTN"
             <h3><i class="fa fa-key" aria-hidden="true"></i> Key points</h3>
 
             <ul>
-                
-                <li>Finding good training datasets is hard!</li>
                 
                 <li>You can highlight questions, tools and hints with a special syntax</li>
                 
@@ -863,6 +694,14 @@ logo: "GTN"
               
               
             <li><a href="/training-material/topics/contributing/tutorials/github-command-line-contribution/tutorial.html">Contributing with GitHub via command-line</a></li>
+              
+              
+             
+            
+             
+              
+              
+            <li><a href="/training-material/topics/contributing/tutorials/create-new-tutorial/tutorial.html">Creating a new tutorial</a></li>
               
               
              
