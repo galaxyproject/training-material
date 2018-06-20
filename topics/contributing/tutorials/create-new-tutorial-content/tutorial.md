@@ -7,18 +7,18 @@ tutorial_name: create-new-tutorial-content
 # Introduction
 {:.no_toc}
 
-Once we set up the infrastructure, we are ready to write the tutorial. 
+Once we have set up the infrastructure, we are ready to write the tutorial.
 
 > ### Agenda
 >
-> In this tutorial, we will deal with:
+> In this tutorial, we will cover:
 >
 > 1. TOC
 > {:toc}
 >
 {: .agenda}
 
-The tutorial's content will be placed in the file `tutorial.md`. Its syntax and structure are simple, and will follow the scheme:
+The tutorial's content should be placed in the file `tutorial.md`. Its syntax and structure are simple, and will have the following structure:
 
 ```markdown
 ---
@@ -55,14 +55,14 @@ blabla
 
 # Metadata
 
-The tutorial needs to start with some metadata on its top:
+The `tutorial.md` needs to start with some metadata at the top:
 
-- `layout: tutorial_hands_on` (keep the default)
-- `topic_name: training` with the name of the topic
-- `tutorial_name: create-new-tutorial` with the name of tutorial
+- `layout: tutorial_hands_on`: keep the default
+- `topic_name: training`: replace 'training' the name of the topic
+- `tutorial_name: create-new-tutorial`: replace 'create-new-tutorial' with the `name` of tutorial that you used in the topic level metadata
 
 These metadata are there to help the templating system linking between the tutorial's file and the global [metadata]({{site.baseurl}}/topics/contributing/tutorials/create-new-tutorial-metadata/tutorial.html).
-If not correctly defined, the tutorial will not be found within the website.
+If this is not correctly defined, the tutorial will not be shown on the website.
 
 > ### {% icon hands_on %} Hands-on: Fix the top metadata
 >
@@ -85,7 +85,7 @@ We recommend to structure the tutorials as follows:
 
 - An introduction, to bring an overview of the tutorial with its use cases, data, and methods
 - Multiple sections, representing the steps of the analysis, complete with their hands-on parts (practicing is an important part of the learning process)
-- A conclusion to summarize what has been done in the tutorial (with a scheme)
+- A conclusion to summarize what has been done in the tutorial (with a graphic)
 
 > ### {% icon hands_on %} Hands-on: Structuring the tutorial
 >
@@ -96,13 +96,13 @@ We recommend to structure the tutorials as follows:
 
 ## Adding images with caption
 
-To add an image in Markdown file, we need to use `![](../../images/image.png)`.
+To add an image in Markdown file, we need to use the markdown syntax for this: `![](../../images/image.png)`.
 
-We added a small plugin to add a caption for each image:
+We have also added a small plugin to add a caption for each image:
 
 ![This figure shows an example of an image with a caption](../../images/image_caption_screenshot.png "Example of an image with a caption")
 
-The preceding string "Figure" and its corresponding number is automatically added before its caption, which is in turn placed below the image by providing all information in the Markdown call of the image:
+The prefix "Figure 1." is automatically added before its caption. This is done with the following Markdown syntax:
 
 ```markdown
 ![A textual description of the image](../images/image.png "This is my super caption")
@@ -112,7 +112,7 @@ We can also cross-reference images inside our Markdown with an anchor. For examp
 
 ## Writing mathematical expressions
 
-Mathematical expressions can be written in LaTeX, and rendered with [MathJax](https://www.mathjax.org/).
+Mathematical expressions can be written in LaTeX, and are automtaically rendered with [MathJax](https://www.mathjax.org/).
 
 Surround your math expression with two `$` signs (like in LaTeX math blocks):
 
@@ -121,7 +121,7 @@ Surround your math expression with two `$` signs (like in LaTeX math blocks):
 
    $$ 5 + 5 $$
 
-Dollar signs are therefore *reserved characters* for instructing the templating system to open/close LaTeX math blocks. In case you don't want any math block to be opened/closed, but still be able to write a dollar sign, you have to *escape* it. Escaping enables the templating system to render the escaped character as a normal character.
+Dollar signs are therefore *reserved characters* for instructing the templating system to open/close LaTeX math blocks. If you want to use a `$` within your expression, you will need to *escape* it: `$$ a + 3\$ = 5\$ $$` will be rendered as: $$ a + 3\$ = 5\$ $$
 
 > ### {% icon comment %} Comments
 > LaTeX code that uses the pipe symbol `|` in inline math statements may lead to a line being recognized as a table line by the templating system.
@@ -130,9 +130,9 @@ Dollar signs are therefore *reserved characters* for instructing the templating 
 
 # Improving the learning experience
 
-To improve the learning experience in our tutorial, we defined some boxes to highlight their content.
+To improve the learning experience in our tutorial, we define some boxes to highlight content.
 
-They are defined always with the same structure:
+These boxes are defined always with the same structure:
 
 {% raw %}
 ```markdown
@@ -142,11 +142,11 @@ They are defined always with the same structure:
 ```
 {% endraw %}
 
-For a correct rendering of the tutorial's content, the templating system requires this structure to be kept as it.
+You must follow this structure exactly for it to be rendered correctly.
 
 ## **Overview** box
 
-This box at the top of each tutorial is automatically generated using the metadata we defined
+This box at the top of each tutorial is automatically generated using the metadata we defined in the topic's metadata file
 
 > ### {% icon hands_on %} Hands-on: Checking the metadata
 >
@@ -165,7 +165,7 @@ This box at the top of each tutorial is automatically generated using the metada
 
 ## **Agenda** box
 
-In most tutorial, the second box is the agenda box at the end of the introduction. It indicates the plan of the tutorial
+In most tutorials, the second box is the agenda box, placed at the end of the introduction. It shows the table of contents for the tutorial
 
 {% raw %}
 ```markdown
@@ -180,9 +180,9 @@ In most tutorial, the second box is the agenda box at the end of the introductio
 ```
 {% endraw %}
 
-No need to fill the list, since this will be done automatically reusing each section's title.
+There is no need to fill out the list; this will be done automatically based off of your tutorial's section title.
 
-To avoid adding the "Introduction" and "Conclusion", we add `{:.no_toc}` below the section name. This will be rendered as follows:
+To avoid adding the "Introduction" and "Conclusion" sections in the agenda, you can add `{:.no_toc}` below the section name. This will be rendered as follows:
 
 > ### Agenda
 >
@@ -195,7 +195,7 @@ To avoid adding the "Introduction" and "Conclusion", we add `{:.no_toc}` below t
 
 ## **Hands-on** box
 
-We think that actually walking through the tutorial by doing all its steps is important for learning its concepts. We therefore emphasize trying each step by regularly adding hands-on sections, where trainees are encouraged to do the analysis by themselves. We designed some special boxes to make these sections easy to find.
+We find that having users walk through the tutorial, doing all of the steps is important for learning the concepts taught. We therefore emphasize this by regularly adding hands-on sections, where trainees are encouraged to do the analysis by themselves. We have designed some special boxes to make these sections easier to find.
 
 {% raw %}
 ```markdown
@@ -221,14 +221,14 @@ We think that actually walking through the tutorial by doing all its steps is im
 ```
 {% endraw %}
 
-with the
+For consistency please use:
 
 - {% raw %}`{% icon hands_on %}`{% endraw %} emoji to define that is an hands-on
-- Short imperative sentence to make it easy to identify the tasks
+- Short imperative sentences to make it easy to identify the tasks
 - Name of the tool in bold with the {% raw %}`{% icon tool %}`{% endraw %} emoji to make it easy to identify a Galaxy tool
 - Parameters for the tool as a sublist
 
-It will be rendered like:
+This will be rendered like:
 
 
 > ### {% icon hands_on %} Hands-on: Spliced mapping
@@ -285,8 +285,8 @@ which, when rendered, look like:
 
 ## **Questions** and **solution** boxes
 
-Questions are there to force the trainees to think about what they are currently doing, and to put things in perspective.
-They also help the instructors by exposing and clarify common scenarios, errors, or applications.
+Questions can be added to force trainees to think about what they are currently doing, and to put things in perspective.
+They can also help the instructors by exposing and clarifying common scenarios, errors, or applications.
 
 {% raw %}
 ```markdown
@@ -320,10 +320,10 @@ Which will be rendered as:
 >    {: .solution}
 {: .question}
 
-Questions have to be quick to answer, and answers can be also provided as multiple choices (MCQs).
-With well chosen wrong answers, MCQs can do much more than just measure how much someone knows.
+Questions should be quick to answer. You can directly ask a question and expect an answer, or you can provide some answers and create multiple choices questions (MCQs).
+With well chosen wrong answers, MCQs can do much more than just measure how much someone knows, such as exposing common misconceptions and mistakes.
 
-In the box below and hidden we add also the correct answer, so that self-trainees can check the solution and its explanation.
+In the box below, initially hidden, we add the correct answer and possibly any additional explanation. Self-trainees can then check the solution and its explanation.
 
 
 ## **Tips** box
@@ -372,7 +372,7 @@ Rendered:
 
 ## **Details** box
 
-The detail box is used to give more background explanation on the subject. By default the box is collapsed.
+The detail box is used to give more background explanation on the subject. By default the box is collapsed, trainees can expand it if they wish to know extra information about a topic.
 
 {% raw %}
 ```markdown
@@ -394,7 +394,7 @@ Rendered:
 
 ## **Key points** box
 
-This last box of the tutorial is automatically filled with the take-home messages defined in the metadata
+This last box of the tutorial is automatically created with the take-home messages defined in the topic's metadata
 
 To render the boxes correctly, the syntax needs to be correct. If it doesn't work, have a look at similar tutorials and get inspiration.
 
