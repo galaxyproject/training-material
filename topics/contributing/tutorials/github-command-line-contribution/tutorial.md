@@ -236,7 +236,7 @@ One of the reviewers of your pull request asked you to add your name after your 
 >
 >    It should look like
 >    
->    ```
+>    ```yaml
 >    bebatut:
 >         name: Bérénice Batut
 >    ```
