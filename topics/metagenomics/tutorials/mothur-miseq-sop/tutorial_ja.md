@@ -345,7 +345,7 @@ total # of seqs:    128872
 > ### {% icon hands_on %} ハンズオン: 配列をフィルタリングする
 >
 > - **Filter.seqs** {% icon tool %} で次のように設定する
->   - "fasta"" to good.fasta output from Sreen.seqs
+>   - "fasta"" には Sreen.seqs のアウトプットである good.fasta を選択する
 >   - "vertical" → Yes
 >   - "trump" → `.`
 >   - "Output logfile" → `yes`
@@ -381,7 +381,7 @@ Number of sequences used to construct filter: 16298
 
 
 ### プレクラスタリング
-配列をさらにノイズ除去したいので次に、`pre.cluster` コマンドを使用して配列間の2塩基までの違いを許容して配列のプレクラスタリングを行います。このコマンドはグループごとに配列を分割して This command will split the sequences by group and then sort them by abundance and go from most abundant to least and identify sequences that differ no more than 2 nucleotides from on another.  この場合、それらはマージされます。一般的に、100塩基対あたり1塩基の違いを許容することをお勧めします:
+配列をさらにノイズ除去したいので次に、`pre.cluster` コマンドを使用して配列間の2塩基までの違いを許容して配列のプレクラスタリングを行います。このコマンドはグループごとに配列を分割し、最も多いものから最も少ないものへというように配列の豊富さで並び替えて、他と 2 塩基以上異なるヌクレオチドを特定します。この場合、それらはマージされます。一般的に、100塩基対あたり1塩基の違いを許容することをお勧めします:
 
 > ### {% icon hands_on %} ハンズオン: 配列のプレクラスタリングを行う
 >
@@ -395,7 +395,7 @@ Number of sequences used to construct filter: 16298
 > >  類似度の高い配列をクラスタリングした後では一意な配列はいくつ残りましたか？
 > > <details>
 > >   <summary> クリックして解答を表示</summary>
-> >   5672塩基。 <br>
+> >   5672配列。 <br>
 > >   これは fasta のアウトプットのライン数です
 > > </details>
 > {: .question}
@@ -446,7 +446,7 @@ is flagged as chimeric in one sample, the default (`dereplicate=No`) is to remov
 
 ### 細菌以外の配列の除去
 
-クオリティコントロールの最後のステップとして、データセットに"望ましくないもの"があるかを確認する必要があります。選択したプライマーセットによっては、18S rRNA の遺伝子断片や 古細菌や、葉緑体、ミトコンドリア由来の16S rRNA が増幅されてしまいます。またランダム配列についても除去する必要があります。
+クオリティコントロールの最後のステップとして、データセットに"望ましくないもの"があるかを確認する必要があります。選択したプライマーセットによっては、18S rRNA の遺伝子断片や古細菌、葉緑体、ミトコンドリア由来の16S rRNA が増幅されてしまいます。またランダム配列についても除去する必要があります。
 
 「でも、そのようなリードも欲しい」と思われるかもしれません。分かります。ただ、私たちが使っているプライマーは特定の細菌のメンバーを増幅するためのもので、真核生物や古細菌のリードが含まれているとしても、正しいものではありません。また、葉緑体とミトコンドリアは微生物群集に対して機能的な役割を持っていないことが分かっています。
 
