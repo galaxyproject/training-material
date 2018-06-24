@@ -94,32 +94,28 @@ For demultiplexing, we use the Process Radtags tool from [STACKS](https://www.g3
 >    > 3. Can you try to explain the reason why we loose a lot of reads here?
 >    > 4. What kind of infiormation this result gives concerning the upcoming data analysis and the barcodes design in general ?
 >    >
->    >    <details>
->    >    <summary>Click to view answers</summary>
->    >    <ol type="2">
->    >    <li>8895289 total reads</li>
->    >    <li>8139531 retained reads</li>
->    >    <li>Exploring the `results.log` file allows you to see that there is no sequences filtered for low quality statement. As we don't specify the corresponding advanced option, Process radtags didn't apply quality related filtering. So here, all not retained sequences are not recorded because of an ambiguous barcode or an ambiguous RAD-Tag. This means that some barcodes are not exactly what was specified on the barcode file and that sometimes, no SbfI restriction enzyme site was found. This can be due to some sequencing problems but here, this is also due to the addition, in the original sequencing library, of RAD-seq samples from another study. This is something often used to avoid having too much sequences beginning with the exact same nucleotides sequences and thus Illumina related issues during sequencing and clusters analysis </li>
->    >    <li>Sequencing quality is essential! Each time your sequencing quality decreases, you loose data and thus essential biological information!</li>
->    >    </ol>
->    >    </details>
+>    >    > ### {% icon solution %} Solution
+>    >    > 1. 8895289 total reads
+>    >    > 2. 8139531 retained reads
+>    >    > 3. Exploring the `results.log` file allows you to see that there is no sequences filtered for low quality statement. As we don't specify the corresponding advanced option, Process radtags didn't apply quality related filtering. So here, all not retained sequences are not recorded because of an ambiguous barcode or an ambiguous RAD-Tag. This means that some barcodes are not exactly what was specified on the barcode file and that sometimes, no SbfI restriction enzyme site was found. This can be due to some sequencing problems but here, this is also due to the addition, in the original sequencing library, of RAD-seq samples from another study. This is something often used to avoid having too much sequences beginning with the exact same nucleotides sequences and thus Illumina related issues during sequencing and clusters analysis 
+>    >    > 4. Sequencing quality is essential! Each time your sequencing quality decreases, you loose data and thus essential biological information!
+>    >    {: .solution }
 >
 > 2. **Process Radtags** {% icon tool %}: Re-Run `Stacks: process radtags` on FastQ file playing with parameters
 >
 > In `advanced options`, after activation of the `Discard reads with low quality scores` option, play with the score limit (default vs 20 for example) and examine the change in reads retained. Note that you can play also with the sliding window score threshold, by default 15% of the length of the read. This sliding window parameter allows notably the user to deal with the declining quality at the 3' end of reads.
 >
 >
->    <details>
->    <summary>Click to view answers</summary>
->    The informations can be found in the results log file:
->    <ol type="1">
->    <li>8895289 total reads</li>
->    <li>8139531 retained reads</li>
->    <li>There are no sequences filtered because of low quality. This is because radtags didn't apply quality related filtering since the corresponding advanced option (Discard reads with low quality scores) has not been enabled. So here, all not retained sequences are removed because of an ambiguous barcode (626265) or an ambiguous RAD-Tag (129493). This means that some barcodes are not exactly what was specified on the barcode file and that sometimes, no SbfI restriction enzyme site was found. This can be due to some sequencing problems but here, this is also due to the addition, in the original sequencing library, of RAD-seq samples from another study. This strategy is often used to avoid having too much sequences beginning with the exact same nucleotide sequence which may cause Illumina related issues during sequencing and cluster analysis </li>
->    <li>Sequencing quality is essential! Each time your sequencing quality decreases, you loose data and thus essential biological information!</li>
->    </ol>
->    In addition to the overall statistics the numbers of retained and removed reads are also given for each bar code sequence.
->    </details>
+>    > ### {% icon solution %} Solution
+>    > The informations can be found in the results log file:
+>    >
+>    >  1. 8895289 total reads
+>    >  2. 8139531 retained reads
+>    >  3. There are no sequences filtered because of low quality. This is because radtags didn't apply quality related filtering since the corresponding advanced option (Discard reads with low quality scores) has not been enabled. So here, all not retained sequences are removed because of an ambiguous barcode (626265) or an ambiguous RAD-Tag (129493). This means that some barcodes are not exactly what was specified on the barcode file and that sometimes, no SbfI restriction enzyme site was found. This can be due to some sequencing problems but here, this is also due to the addition, in the original sequencing library, of RAD-seq samples from another study. This strategy is often used to avoid having too much sequences beginning with the exact same nucleotide sequence which may cause Illumina related issues during sequencing and cluster analysis 
+>    >  4. Sequencing quality is essential! Each time your sequencing quality decreases, you loose data and thus essential biological information!
+>    >
+>    > In addition to the overall statistics the numbers of retained and removed reads are also given for each bar code sequence.
+>    {: .solution }
 
 In order to obtain results of higher quality we will play with the advanced options:  
 
@@ -185,12 +181,9 @@ For quality control, we use similar tools as described in [NGS-QC tutorial]({{si
 >    >
 >    > 1. What is the read length?
 >    >
->    >    <details>
->    >    <summary>Click to view answers</summary>
->    >    <ol type="1">
->    >    <li>The read length is 32 bp</li>
->    >    </ol>
->    >    </details>
+>    >    > ### {% icon solution %} Solution
+>    >    > The read length is 32 bp
+>    >    {: .solution }
 >
 
 # SNP calling from radtags
@@ -230,13 +223,10 @@ Run `Stacks: De novo map` Galaxy tool. This program will run ustacks, cstacks, a
 >    > 1. What is the maximum value of FST at any SNP?
 >    > 2. How many SNPs reach this FST value?
 >    >
->    >    <details>
->    >    <summary>Click to view answers</summary>
->    >    <ol type="1">
->    >    <li>0.75</li>
->    >    <li>3500</li>
->    >    </ol>
->    >    </details>
+>    >    > ### {% icon solution %} Solution
+>    >    > 1. 0.75
+>    >    > 2. 3500
+>    >    {: .solution }
 
 # Conclusion
 {:.no_toc}

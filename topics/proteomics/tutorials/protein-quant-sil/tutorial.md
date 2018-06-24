@@ -166,14 +166,11 @@ Comment lines in the beginning of a `tabular` file may sometimes cause errors, t
 >   > 2. What might have been the mixing ratio of the input dataset?
 >   > 3. In the histogram, there is a second local maximum at about FC 0. What might that mean?
 >   >
->   >  <details>
->   >  <summary>Click to view answers</summary>
->   >   <ol type="1">
->   >     <li> With the above parameters, you should have quantified 818 peptides and 407 proteins.</li>
->   >     <li> In the histogram, you see that the peak of the density curve is between -1.1 and -1.2. In the summary statistics, you can see that the mean protein ratio was -0.98. An FC of -1 indicates that the unlabelled proteins were twice as abundant as their heavy-labelled counterparts. Indeed, the mixing ratio of the dataset was 2 parts light labelled HEK cell lysate and 1 part heavy labelled HEK cell lysate.</li>
->   >     <li> Some proteins were quantified with an FC close to 0. These may stem from incomplete SILAC labelling. Even after two weeks of cell culture in SILAC medium, some proteins with a very low turnover rate may remain unlabelled.
->   >   </ol>
->   >  </details>
+>   >  > ### {% icon solution %} Solution
+>   >  > 1.    With the above parameters, you should have quantified 818 peptides and 407 proteins.
+>   >  > 2. In the histogram, you see that the peak of the density curve is between -1.1 and -1.2. In the summary statistics, you can see that the mean protein ratio was -0.98. An FC of -1 indicates that the unlabelled proteins were twice as abundant as their heavy-labelled counterparts. Indeed, the mixing ratio of the dataset was 2 parts light labelled HEK cell lysate and 1 part heavy labelled HEK cell lysate.
+>   >  > 3. Some proteins were quantified with an FC close to 0. These may stem from incomplete SILAC labelling. Even after two weeks of cell culture in SILAC medium, some proteins with a very low turnover rate may remain unlabelled.
+>   >  {: .solution }
 >   {: .question}
 {: .hands_on}
 
@@ -285,14 +282,11 @@ Two problems typically disturb correct peptide quantitation:
 > 3. How many features could not be mapped to a peptide identification? (Click on the ProteinQuantifier output and look at the tool's infobox.)
 > 1. Which problems are most prominent in the test dataset?
 >
->  <details>
->  <summary>Click to view answers</summary>
->    <ol type="1">
->      <li> 1,395 peptide IDs could not be mapped to a feature.</li>
->      <li> 1,898 features, corresponding to 949 consensus features could not be mapped to a peptide identification.</li>
->      <li> The mapping of peptide IDs to features seems to have worked mostly fine. The main problems seem to be (1) missing peptide identifications, (2) missing features where a peptide was identified and (3) features that span a shorter RT range than the corresponding peptide's elution peak.</li>
->    </ol>
->  </details>
+>  > ### {% icon solution %} Solution
+>  > 1. 1,395 peptide IDs could not be mapped to a feature.
+>  > 2. 1,898 features, corresponding to 949 consensus features could not be mapped to a peptide identification.
+>  > 3. The mapping of peptide IDs to features seems to have worked mostly fine. The main problems seem to be (1) missing peptide identifications, (2) missing features where a peptide was identified and (3) features that span a shorter RT range than the corresponding peptide's elution peak.
+>  {: .solution }
 {: .question}
 
 ## Optimization of Quantitation Results
@@ -315,11 +309,8 @@ In the test dataset, several peptides were identified, but not quantified. Some 
 >   > ### {% icon question %} Question
 >   > 1. Which parameter improved the number of quantified proteins?
 >   >
->   >  <details>
->   >  <summary>Click to view answers</summary>
->   >    <ol type="1">
->   >      <li> Both changes led to more quantified proteins. Increasing the isotope range led to 26 \% more protein quantitations, increasing the RT tolerance led to 7 \% more protein quantitations. </li>
->   >    </ol>
->   >  </details>
+>   >  > ### {% icon solution %} Solution
+>   >  > 1. Both changes led to more quantified proteins. Increasing the isotope range led to 26 \% more protein quantitations, increasing the RT tolerance led to 7 \% more protein quantitations.
+>   >  {: .solution }
 >   {: .question}
 {: .hands_on}

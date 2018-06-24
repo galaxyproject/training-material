@@ -46,12 +46,9 @@ In this tutorial, we will explore **Protein Database Downloader** {% icon tool %
 >  > ### {% icon question %} Question
 >  > What is the difference between a "reference proteome set" and a "complete proteome set"?
 >  >
->  >  <details>
->  >  <summary>Click to view answer!</summary>
->  >  <ol type="1">
->  >  <li> A UniProt complete proteome consists of the set of proteins thought to be expressed by an organism whose genome has been completely sequenced. A reference proteome is the complete proteome of a representative, well-studied model organism or an organism of interest for biomedical research. Reference proteomes constitute a representative cross-section of the taxonomic diversity to be found within UniProtKB. They include the proteomes of well-studied model organisms and other proteomes of interest for biomedical and biotechnological research. Species of particular importance may be represented by numerous reference proteomes for specific ecotypes or strains of interest. [Link to source](http://www.uniprot.org/help/reference_proteome)</li>
->  >  </ol>
->  >  </details>
+>  >  > ### {% icon solution %} Solution
+>  >  > 1.  A UniProt complete proteome consists of the set of proteins thought to be expressed by an organism whose genome has been completely sequenced. A reference proteome is the complete proteome of a representative, well-studied model organism or an organism of interest for biomedical research. Reference proteomes constitute a representative cross-section of the taxonomic diversity to be found within UniProtKB. They include the proteomes of well-studied model organisms and other proteomes of interest for biomedical and biotechnological research. Species of particular importance may be represented by numerous reference proteomes for specific ecotypes or strains of interest. [Link to source](http://www.uniprot.org/help/reference_proteome)
+>  >  {: .solution }
 >  {: .question}
 {: .hands_on}
 
@@ -81,13 +78,10 @@ A widely used database for common contaminants is the **c**ommon **R**epository 
 >  > 1. The cRAP database contains some human proteins. What does it mean if you identify those typical contaminants in a human sample?
 >  > 2. What does it mean in a non-human sample?
 >  >
->  >  <details>
->  >  <summary>Click to view answers!</summary>
->  >  <ol type="1">
->  >  <li> In samples stemming from a human source, identified human contaminants do not necessarily mean a contaminated sample. The proteins may as well stem from the original sample. Be careful with the interpretation. </li>
->  >  <li> In samples from non-human sources, identified human contaminants do mean contamination by the experimenter. </li>
->  >  </ol>
->  >  </details>
+>  >  > ### {% icon solution %} Solution
+>  >  > 1. In samples stemming from a human source, identified human contaminants do not necessarily mean a contaminated sample. The proteins may as well stem from the original sample. Be careful with the interpretation.
+>  >  > 2. In samples from non-human sources, identified human contaminants do mean contamination by the experimenter.
+>  >  {: .solution }
 >  {: .question}
 {: .hands_on}
 

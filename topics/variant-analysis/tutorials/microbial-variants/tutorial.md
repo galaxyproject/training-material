@@ -143,16 +143,13 @@ Wildtype    190866  del GTT GT  GT:18 GTT:0 CDS -   28/1356 10/451  frameshift_v
 > 2. What is the third variant called?
 > 3. What is the product of the mutation?
 > 4. What might be the result of such a mutation?
->    
-> <details>
-> <summary>Click to view answers</summary>
-> <ol type="1">
->    <li>In the 3rd column, you have "snp" for SNP, "del" for deletion, "mnp" for </li>
->    <li>This is a T&rarr;A mutation, causing a stop codon</li>
->    <li>On the 14th column, we see that The product of this gene is a methicillin resistance protein. Methicillin is an antibiotic.</li>
->    <li>This will cause a truncation in the Methicillin gene and a loss of resistance in the organism.</li>
-> </ol>
-> </details>
+>
+> > ### {% icon solution %} Solution
+> >  1. In the 3rd column, you have "snp" for SNP, "del" for deletion, "mnp" for
+> >  2. This is a T→A mutation, causing a stop codon
+> >  3. On the 14th column, we see that The product of this gene is a methicillin resistance protein. Methicillin is an antibiotic.
+> >  4. This will cause a truncation in the Methicillin gene and a loss of resistance in the organism.
+> {: .solution}
 {: .question}
 
 # View Snippy output in JBrowse
@@ -222,13 +219,10 @@ A new file will be created in your history, this contains the JBrowse interactiv
 >     > 1. What is the correct codon at this position?
 >     > 2. What is the mutation found here?
 >     >
->     >    <details>
->     >    <summary>Click to view answers</summary>
->     >    <ol type="1">
->     >    <li>The correct codon at this position is TGT, coding for the amino acid Cysteine (middle row of the amino acid translations). </li>
->     >    <li>The mutation of T &rarr; A turns this triplet into TGA, a stop codon.</li>
->     >    </ol>
->     >    </details>
+>     >    > ### {% icon solution %} Solution
+>     >    > 1. The correct codon at this position is TGT, coding for the amino acid Cysteine (middle row of the amino acid translations).
+>     >    > 2. The mutation of T → A turns this triplet into TGA, a stop codon.
+>     >    {: .solution}
 >     {: .question}
 >
 {: .hands_on}
