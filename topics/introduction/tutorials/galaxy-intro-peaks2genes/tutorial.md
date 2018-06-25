@@ -51,7 +51,7 @@ Let's start with a fresh history.
 >
 >    > ### {% icon tip %} Starting a new history
 >    >
->    > * Click the {% icon galaxy-refresh %} (gear) icon (**History options**)  at the top of the history panel
+>    > * Click the {% icon galaxy-gear %} (gear) icon (**History options**)  at the top of the history panel
 >    > * Select the option **Create New** from the menu
 >    {: .tip}
 >
@@ -401,7 +401,7 @@ Galaxy makes this very simple with the `Extract workflow` option. This means tha
 >
 >    If you had any failed jobs (red), please remove those datasets from your history by clicking on the {% icon galaxy-cross %} (cross) button. This will make the creation of a workflow easier.
 >
-> 2. Go to the history **History options** ({% icon galaxy-refresh %} (gear) icon)
+> 2. Go to the history **History options** ({% icon galaxy-gear %} (gear) icon)
 > 3. Select the `Extract Workflow` option.
 >
 >    ![Extracting workflow in history menu](../../images/history_menu_extract_workflow.png)
@@ -440,10 +440,10 @@ Galaxy makes this very simple with the `Extract workflow` option. This means tha
 >
 > 9. Connect each input dataset to the **Intersect** {% icon tool %} tool by dragging the arrow pointing outwards on the right of its box (which denotes an output) to an arrow on the left of the **Intersect** box pointing inwards (which denotes an input)
 > 10. Rename the input datasets to `Reference regions` and `Peak regions`
-> 11. Click on the {% icon galaxy-refresh %} (gear) icon at the top right
+> 11. Click on the {% icon galaxy-gear %} (gear) icon at the top right
 > 12. Press **Auto Re-layout** to clean up our view
 >     ![Auto re-layouting](../../images/intro_07.png)
-> 13. Click on the {% icon galaxy-refresh %} (gear) icon at the top right
+> 13. Click on the {% icon galaxy-gear %} (gear) icon at the top right
 > 14. Press **Save** to save your changes
 >
 >    > ### {% icon tip %} Tip: Hiding intermediate steps
@@ -592,7 +592,7 @@ Congratulations! You should have a file with all the unique gene names and a cou
 
 One of the most important features of Galaxy comes at the end of an analysis. When you have published striking findings, it is important that other researchers are able to reproduce your in-silico experiment. Galaxy enables users to easily share their workflows and histories with others.
 
-To share a history, click on the {% icon galaxy-refresh %} (gear) symbol in the history pane and select `Share or Publish`. On this page you can do 3 things:
+To share a history, click on the {% icon galaxy-gear %} (gear) symbol in the history pane and select `Share or Publish`. On this page you can do 3 things:
 
 1. **Make accessible via Link**
 
@@ -613,7 +613,7 @@ To share a history, click on the {% icon galaxy-refresh %} (gear) symbol in the 
 > 2. See if you can do the same with your workflow!
 > 3. Find the history and/or workflow shared by your neighbour
 >
->    Histories shared with specific users can be accessed by those users in their history menu ({% icon galaxy-refresh %} (gear) icon) under `Histories shared with me`.
+>    Histories shared with specific users can be accessed by those users in their history menu ({% icon galaxy-gear %} (gear) icon) under `Histories shared with me`.
 >
 {: .hands_on}
 
