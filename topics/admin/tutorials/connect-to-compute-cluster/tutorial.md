@@ -471,7 +471,8 @@ Galaxy needs to be instructed to read `tool_conf.xml` instead of `tool_conf.xml.
 Edit `/srv/galaxy/config/galaxy.yml` and modify the value of `tool_config_file` accordingly:
 
 ```yml
-tool_config_file: /srv/galaxy/config/tool_conf.xml,/srv/galaxy/config/shed_tool_conf.xml
+galaxy:
+    tool_config_file: /srv/galaxy/config/tool_conf.xml,/srv/galaxy/config/shed_tool_conf.xml
 ```
 
 Finally, in order to read the toolbox changes, Galaxy should be restarted. You'll need to return to the `ubuntu` user to do this (since the `galaxy` user does not have `sudo` privileges). It is, as usual, `sudo supervisorctl restart all`.
@@ -541,7 +542,8 @@ The rule says:
 We also need to inform Galaxy of the path to the file we've just created, which is done using the `tool_destinations_config_file` in `galaxy.yml`:
 
 ```yml
-tool_destinations_config_file: /srv/galaxy/config/tool_destinations.yml
+galaxy:
+    tool_destinations_config_file: /srv/galaxy/config/tool_destinations.yml
 ```
 
 Once the dynamic tool definition has been written, we need to update Galaxy's job configuration to use this rule. Open `/srv/galaxy/config/job_conf.xml` and add a DTD destination:
@@ -592,7 +594,8 @@ This defines two resource fields, a select box where users can choose between 1 
 As usual, we need to instruct Galaxy of where to find this file in `galaxy.yml` using the `job_resource_params_file` option:
 
 ```yml
-job_resource_params_file: /srv/galaxy/config/job_resource_params_conf.xml
+galaxy:
+    job_resource_params_file: /srv/galaxy/config/job_resource_params_conf.xml
 ```
 
 **Part 2 - Configure Galaxy to use the resource selector**
