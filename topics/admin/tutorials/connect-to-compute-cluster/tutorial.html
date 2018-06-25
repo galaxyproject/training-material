@@ -335,6 +335,7 @@ localhost      1    debug*        idle    1    2:1:1      1        0      1   (n
 <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> srun <span class="nb">uname</span> <span class="nt">-a</span>
 <span class="gp">Linux gat2016 4.4.0-31-generic #</span>50-Ubuntu SMP Wed Jul 13 00:07:12 UTC 2016 x86_64 x86_64 x86_64 GNU/Linux
 </code></pre></div></div>
+<p>(This is an example only, output may look slightly different.)</p>
 
 <p>Although it looks like this command ran as if I had not used <code class="highlighter-rouge">srun</code>, it was in fact routed through Slurm.</p>
 
@@ -636,9 +637,10 @@ but the package was later renamed to <code class="highlighter-rouge">slurm-wlm</
 
 <p>Galaxy needs to be instructed to read <code class="highlighter-rouge">tool_conf.xml</code> instead of <code class="highlighter-rouge">tool_conf.xml.sample</code>. Normally it does this automatically if <code class="highlighter-rouge">tool_conf.xml</code> exists, but the Ansible role we used to install Galaxy explicitly instructed Galaxy to load <code class="highlighter-rouge">tool_conf.xml.sample</code>.</p>
 
-<p>Edit <code class="highlighter-rouge">/srv/galaxy/config/galaxy.ini</code> and modify the value of <code class="highlighter-rouge">tool_config_file</code> accordingly:</p>
+<p>Edit <code class="highlighter-rouge">/srv/galaxy/config/galaxy.yml</code> and modify the value of <code class="highlighter-rouge">tool_config_file</code> accordingly:</p>
 
-<div class="language-ini highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="py">tool_config_file</span> <span class="p">=</span> <span class="s">/srv/galaxy/config/tool_conf.xml,/srv/galaxy/config/shed_tool_conf.xml</span>
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">galaxy</span><span class="pi">:</span>
+    <span class="na">tool_config_file</span><span class="pi">:</span> <span class="s">/srv/galaxy/config/tool_conf.xml,/srv/galaxy/config/shed_tool_conf.xml</span>
 </code></pre></div></div>
 
 <p>Finally, in order to read the toolbox changes, Galaxy should be restarted. You’ll need to return to the <code class="highlighter-rouge">ubuntu</code> user to do this (since the <code class="highlighter-rouge">galaxy</code> user does not have <code class="highlighter-rouge">sudo</code> privileges). It is, as usual, <code class="highlighter-rouge">sudo supervisorctl restart all</code>.</p>
@@ -673,7 +675,7 @@ but the package was later renamed to <code class="highlighter-rouge">slurm-wlm</
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Running with '2' threads
 </code></pre></div></div>
 
-<h3 id="section-2---dynamically-map-a-tool-to-a-job-destination">Section 2 - Dynamically map a tool to a job destination</h3>
+<h3 id="section-5---dynamically-map-a-tool-to-a-job-destination">Section 5 - Dynamically map a tool to a job destination</h3>
 
 <p><strong>Part 1 - Write a Dynamic Tool Destination</strong></p>
 
@@ -705,9 +707,10 @@ but the package was later renamed to <code class="highlighter-rouge">slurm-wlm</
   <li>Else, run on the destination <code class="highlighter-rouge">local</code></li>
 </ul>
 
-<p>We also need to inform Galaxy of the path to the file we’ve just created, which is done using the <code class="highlighter-rouge">tool_destinations_config_file</code> in <code class="highlighter-rouge">galaxy.ini</code>:</p>
+<p>We also need to inform Galaxy of the path to the file we’ve just created, which is done using the <code class="highlighter-rouge">tool_destinations_config_file</code> in <code class="highlighter-rouge">galaxy.yml</code>:</p>
 
-<div class="language-ini highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="py">tool_destinations_config_file</span> <span class="p">=</span> <span class="s">/srv/galaxy/config/tool_destinations.yml</span>
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">galaxy</span><span class="pi">:</span>
+    <span class="na">tool_destinations_config_file</span><span class="pi">:</span> <span class="s">/srv/galaxy/config/tool_destinations.yml</span>
 </code></pre></div></div>
 
 <p>Once the dynamic tool definition has been written, we need to update Galaxy’s job configuration to use this rule. Open <code class="highlighter-rouge">/srv/galaxy/config/job_conf.xml</code> and add a DTD destination:</p>
@@ -733,7 +736,7 @@ but the package was later renamed to <code class="highlighter-rouge">slurm-wlm</
 
 <p>Our rule specified that any invocation of the <code class="highlighter-rouge">multi</code> tool with an input dataset with size &lt;16 bytes would run on the 1 core destination, whereas any with &gt;= 16 bytes would run on the 2 core destination. To verify, create a dataset using the upload paste tool of just a few (&lt;16) characters, and another with &gt;16 characters and run the Multicore Tool on each. The former will run “with ‘1’ thread” whereas the latter will run “with ‘2’ threads”.</p>
 
-<h2 id="section-5---implement-a-job-resource-selector">Section 5 - Implement a job resource selector</h2>
+<h2 id="section-6---implement-a-job-resource-selector">Section 6 - Implement a job resource selector</h2>
 
 <p><strong>Part 1 - Define the resource selector</strong></p>
 
@@ -752,9 +755,10 @@ but the package was later renamed to <code class="highlighter-rouge">slurm-wlm</
 
 <p>This defines two resource fields, a select box where users can choose between 1 and 2 cores, and a text entry field where users can input an integer value from 1-24 to set the walltime for a job.</p>
 
-<p>As usual, we need to instruct Galaxy of where to find this file in <code class="highlighter-rouge">galaxy.ini</code> using the <code class="highlighter-rouge">job_resource_params_file</code> option:</p>
+<p>As usual, we need to instruct Galaxy of where to find this file in <code class="highlighter-rouge">galaxy.yml</code> using the <code class="highlighter-rouge">job_resource_params_file</code> option:</p>
 
-<div class="language-ini highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="py">job_resource_params_file</span> <span class="p">=</span> <span class="s">/srv/galaxy/config/job_resource_params_conf.xml</span>
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">galaxy</span><span class="pi">:</span>
+    <span class="na">job_resource_params_file</span><span class="pi">:</span> <span class="s">/srv/galaxy/config/job_resource_params_conf.xml</span>
 </code></pre></div></div>
 
 <p><strong>Part 2 - Configure Galaxy to use the resource selector</strong></p>
@@ -854,9 +858,9 @@ but the package was later renamed to <code class="highlighter-rouge">slurm-wlm</
 
 <p>Once written, restart Galaxy with <code class="highlighter-rouge">sudo supervisorctl restart all</code>.</p>
 
-<p><strong>Part 4 - Verify</strong>*</p>
+<p><strong>Part 4 - Verify</strong></p>
 
-<p>Run the <em>*Multicore Tool</em> with various resource parameter selections:</p>
+<p>Run the <strong>Multicore Tool</strong> with various resource parameter selections:</p>
 <ul>
   <li>Use default job resource parameters</li>
   <li>Specify job resource parameters:
@@ -918,7 +922,6 @@ but the package was later renamed to <code class="highlighter-rouge">slurm-wlm</
   <li>Job resource parameters are not as well documented as they could be, but the <a href="https://github.com/galaxyproject/usegalaxy-playbook/blob/master/env/test/files/galaxy/config/job_resource_params_conf.xml">sample configuration file</a> shows some of the possibilities.</li>
   <li><a href="https://github.com/galaxyproject/usegalaxy-playbook/blob/master/env/main/templates/galaxy/config/job_conf.xml.j2">usegalaxy.org’s job_conf.xml</a> is publicly available for reference.</li>
 </ul>
-
 
 
         
