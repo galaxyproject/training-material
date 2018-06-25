@@ -76,7 +76,7 @@ Let's start with a fresh history.
 > 1. Download the list of peak regions (the file [`GSE37268_mof3.out.hpeak.txt.gz`](https://www.ncbi.nlm.nih.gov/geo/download/?acc=GSE37268&format=file&file=GSE37268%5Fmof3%2Eout%2Ehpeak%2Etxt%2Egz)) from [GEO](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE37268) to your computer
 > 2. Click on the upload button in the upper left ot the interface
 >
->    ![Upload icon](../../images/upload_button.png)
+>    ![Upload icon](../../../galaxy-basics/images/upload_button.png)
 >
 > 3. Press **Choose local file** and search for your file on your computer
 > 4. Select `interval` as **Type**
@@ -123,7 +123,7 @@ Galaxy will automatically unpack the file.
 > 3. Click on the {% icon galaxy-pencil %} (pencil) icon (**Edit attributes**) in your dataset in the history
 >
 >    A form to edit dataset attributes is displayed in the middle panel
-> 
+>
 > 4. Search for `mm9` in **Database/Build** attribute and select `Mouse July 2007 (NCBI37/mm9)`
 > 5. Click on **Save** on the top
 >
@@ -138,7 +138,7 @@ we also need a list of genes in mice, which we can obtain from UCSC.
 >
 >     ![UCSC Main tool in tools section](../../images/101_01.png)
 >
-> 2. Click on `UCSC Main` {% icon tool %}  
+> 2. Click on `UCSC Main` {% icon tool %}
 >
 >     You will be taken to the **UCSC table browser**, which looks something like this:
 >
@@ -270,7 +270,7 @@ In order to convert the chromosome names we have therefore two things to do:
 >
 >    > ### {% icon tip %} Tip: Rerunning a tool
 >    >
->    > * Expand the dataset information 
+>    > * Expand the dataset information
 >    > * Press the {% icon galaxy-refresh %} icon (**Run this job again**)
 >    {: .tip}
 >
@@ -284,7 +284,7 @@ In order to convert the chromosome names we have therefore two things to do:
 >
 >    Have we been successful?
 >
->    We have quite some files now and should take care that we don't loose track. 
+>    We have quite some files now and should take care that we don't loose track.
 >
 > 5. Rename the file to something more handy, e.g. `Peak regions`
 {: .hands_on}
