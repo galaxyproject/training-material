@@ -1,6 +1,6 @@
 ---
 layout: tutorial_hands_on
-topic_name: introduction
+topic_name: galaxy-basics
 tutorial_name: galaxy-intro-history
 ---
 
