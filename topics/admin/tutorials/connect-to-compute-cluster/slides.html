@@ -98,7 +98,11 @@ Tool configs: Consume `\${GALAXY_SLOTS:-4}`
 ---
 # Memory requirements
 
-No generally consumable environment variable. But for Java tools, be sure to set `-Xmx`, e.g.:
+For **Slurm only**, Galaxy will set `$GALAXY_MEMORY_MB` as an integer.
+
+**Other DRMs:** Please PR the [appropriate code](https://github.com/galaxyproject/galaxy/blob/dev/lib/galaxy/jobs/runners/util/job_script/MEMORY_STATEMENT.sh).
+
+For Java tools, be sure to set `-Xmx`, e.g.:
 
 ```xml
 <destination id="foo" ...>
