@@ -150,10 +150,10 @@ We can find the average read length in the file *general_stats* of the stats fil
 
 Now that we have good quality reads we are going to map them against the reference genome.
 
-> ### {% icon hands_on %} Hands-on: Quality Control
->We are going to use two tools to perform quality control on our reads : FastQC that is going to generate one result per file and MultiQC to aggregate all the results
->
->
+> ### {% icon hands_on %} Hands-on: Mapping
+>Now that we have good quality reads we are going to map them against the reference genome.
+> 1.  Run **BWA-MEM** tool with parameters as follows :
+>   -  
 {: .hands_on}
 
 # Search variations
