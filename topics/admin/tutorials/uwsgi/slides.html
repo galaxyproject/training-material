@@ -56,7 +56,7 @@ Can do anything you can imagine: [uWSGI configuration options](http://uwsgi-docs
 
 ---
 
-## uWSGI
+# uWSGI
 
 - **Configuration**
 - uWSGI wheel
@@ -70,24 +70,20 @@ If you have an existing Galaxy server using `galaxy.ini` and `run.sh`, **nothing
 Only new installs use uWSGI by default
 
 ---
-class: largeish
-
-## uWSGI as the default
+# uWSGI as the default
 
 **Previously**, a config file was *required*.
 
 We hid this detail a bit by reading `galaxy.ini.sample` if `galaxy.ini` was not present
 
 --
-
 **Now**:
 - If no config exists, all necessary defaults are generated as command line arguments to uWSGI
 - If a config exists, it is parsed, and any missing required options are passed as command line arguments to uWSGI
 - The sample is never used
 
 ---
-
-## uWSGI default command line
+# uWSGI default command line
 
 Without a config file, the uWSGI command line is:
 
@@ -104,9 +100,7 @@ $ /home/nate/galaxy/.venv/bin/python2.7 .venv/bin/uwsgi \
 ```
 
 ---
-class: middle, top-title
-
-## uWSGI command line
+# uWSGI command line
 
 Behind the scenes, `run.sh` calls `scripts/get_uwsgi_args.py`, which:
 - locates your config file (if any),
@@ -125,8 +119,7 @@ calling `uwsgi` directly.
 It's best to keep the proxy server, especially if you intend to host more than just a single Galaxy server on this system
 
 ---
-class: middle, top-title, center, largeish
-## YAML config
+# YAML config
 
 The INI format is limited, structured data formats (e.g. YAML) are more expressive
 
@@ -141,9 +134,7 @@ Going forward some new features may only be configurable in YAML
 [galaxy.yml.sample](https://github.com/jmchilton/galaxy/blob/78992968ecd0de1f95b99352b53ea2ecd246f954/config/galaxy.yml.sample)
 
 ---
-class: middle, top-title, largeish
-
-## YAML config
+# YAML config
 
 Here's a bit of what's possible:
 
@@ -172,8 +163,7 @@ galaxy:
 - `logging` is complex data structure of nested dictionaries and lists
 
 ---
-
-## YAML config
+# YAML config
 
 *But I don't want to convert my long and tedious `galaxy.ini` to YAML!*
 
@@ -195,27 +185,22 @@ It is now possible to validate and lint the Galaxy config file!
 Config names are defined and their values are typed in [config_schema.yml](https://github.com/jmchilton/galaxy/blob/78992968ecd0de1f95b99352b53ea2ecd246f954/lib/galaxy/webapps/galaxy/config_schema.yml)
 
 ---
-class: middle, top-title
-
-## Configuration Schema
+# Configuration Schema
 
 `config_schema.yml` is also the canonical source for config option documentation, from which:
 - `galaxy.yml.sample` is generated
 - [Galaxy configuration options documentation](https://docs.galaxyproject.org/en/master/admin/config.html) is generated
 
 ---
-class: middle, top-title
-
-## uWSGI
+# uWSGI
 
 - Configuration
 - **uWSGI wheel**
 - Job handler mules
 
 ---
-class: middle, top-title, largeish
 
-## uWSGI Wheel
+# uWSGI Wheel
 
 - The goal: Provide a no-compilation-required installation method for Galaxy that included uWSGI
 
@@ -234,8 +219,7 @@ class: middle, top-title, largeish
   - uWSGI sits on the front side of Galaxy, rather than the back
 
 ---
-
-## uWSGI Wheel
+# uWSGI Wheel
 
 The uWSGI wheel is built differently than when built from source with `pip install uwsgi`
 
@@ -247,9 +231,7 @@ The uWSGI wheel is built differently than when built from source with `pip insta
   - The only way to precompile uWSGI in a way that does not require libpython2.7.so or ship CPython
 
 ---
-class: middle, top-title, largeish
-
-## uWSGI Wheel
+# uWSGI Wheel
 
 What does this all mean?
 
@@ -263,9 +245,7 @@ We have found, reported, and fixed a few bugs with uWSGI-as-shared-library, ther
 Installing uWSGI from source via `pip` or the system package manager is still a reasonable approach for production servers
 
 ---
-class: middle, top-title
-
-## uWSGI
+# uWSGI
 
 - Configuration
 - uWSGI wheel
@@ -281,9 +261,7 @@ These processes **do not** handle jobs. For this, we start additional processes 
 Job handlers are run as [uWSGI Mules](https://uwsgi-docs.readthedocs.io/en/latest/Mules.html)
 
 ---
-class: largeish
-
-## The Job Handler Problem
+# The Job Handler Problem
 
 In the earliest days of Galaxy, it ran as a single process
 
@@ -307,9 +285,7 @@ As production servers shifted to uWSGI for web serving, the configuration became
 uWSGI presented a unique solution: *Mules*
 
 ---
-class: middle, top-title
-
-## uWSGI Mules
+# uWSGI Mules
 
 **Mules** are processes forked from the uWSGI master after the application has been loaded
 
@@ -322,9 +298,7 @@ Mules can be pooled in to *Farms*, and messages can be sent to the farm to be ha
 This design made mules ideally suited to perform as Galaxy job handlers
 
 ---
-class: middle, top-title
-
-## Mule Advantages
+# Mule Advantages
 
 - Mules are spawned by the uWSGI *master process* and therefore are killed with it
 - Due to farm messaging, mules can self-assign jobs
@@ -334,9 +308,7 @@ Thus, with mules **there is no multiprocess management complexity** and **no job
 In addition, **nonresponsive mules cannot be assigned jobs**
 
 ---
-class: middle, top-title
-
-## Job Handler Mule Configuration
+# Job Handler Mule Configuration
 
 Adding job handler mules is performed by simply instructing uWSGI to start them in `galaxy.yml`:
 
@@ -350,9 +322,7 @@ uwsgi:
 That's it! This Galaxy instance will now start and use two job handler mules.
 
 ---
-class: middle, top-title, largeish
-
-## How Mules Work
+# How Mules Work
 
 1. Master process loads Galaxy
 2. Master `fork()`s web worker processes
@@ -368,9 +338,7 @@ class: middle, top-title, largeish
 12. Job handling continues as normal
 
 ---
-class: middle, top-title, center
-
-## Mule Messaging Implementation
+# Mule Messaging Implementation
 
 Mule messaging is simply a socket open between the processes - it is up to you to implement the protocol
 
@@ -379,9 +347,7 @@ For this, we developed a generic JSON-based message format and routing system so
 This leaves many possibilities for offloading work across Galaxy
 
 ---
-class: middle, top-title, center
-
-## Job Configuration
+# Job Configuration
 
 All of the previous handler-mapping functionality is still supported with mules
 
