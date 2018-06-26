@@ -25,7 +25,7 @@ endif
 default: help
 
 install-conda: ## install Miniconda
-	wget $(MINICONDA_URL) -O miniconda.sh
+	curl $(MINICONDA_URL) -o miniconda.sh
 	bash miniconda.sh -b
 .PHONY: install-conda
 

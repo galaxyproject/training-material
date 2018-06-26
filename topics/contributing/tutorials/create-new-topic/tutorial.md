@@ -111,6 +111,7 @@ Once the topic name has been chosen, we can create it.
 >
 > 1. Copy the `templates` directory in `topics`
 > 2. Rename the copied directory to `my-favorite-topic`
+> 3. Update the index.md file in the new directory to match your topic's name.
 {: .hands_on}
 
 # Make the templating system aware about the topic
