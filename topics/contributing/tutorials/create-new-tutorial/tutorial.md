@@ -175,7 +175,7 @@ The technical support are different files:
 
 > ### {% icon hands_on %} Hands-on: Add technical support for the tutorial
 >
-> 1. Add some technical support for the tutorial following the [tutorial]({{ site.baseurl }}/topics/contributing/tutorials/create-new-tutorial-content/tutorial.html)
+> 1. Add some technical support for the tutorial following the [tutorial]({{ site.baseurl }}/topics/contributing/tutorials/create-new-tutorial-technical/tutorial.html)
 >    - Add the workflow
 >    - (Recommended) Generate the `tools.yaml`
 >    - (Recommended) Generate the `data-library.yaml`
