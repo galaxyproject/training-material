@@ -156,6 +156,7 @@ Galaxy runs `sbatch` jobs but we can use both `srun` and `sbatch` to test:
 $ srun uname -a
 Linux gat2016 4.4.0-31-generic #50-Ubuntu SMP Wed Jul 13 00:07:12 UTC 2016 x86_64 x86_64 x86_64 GNU/Linux
 ```
+(This is an example only, output may look slightly different.)
 
 Although it looks like this command ran as if I had not used `srun`, it was in fact routed through Slurm.
 
@@ -467,10 +468,11 @@ The tag to add is:
 
 Galaxy needs to be instructed to read `tool_conf.xml` instead of `tool_conf.xml.sample`. Normally it does this automatically if `tool_conf.xml` exists, but the Ansible role we used to install Galaxy explicitly instructed Galaxy to load `tool_conf.xml.sample`.
 
-Edit `/srv/galaxy/config/galaxy.ini` and modify the value of `tool_config_file` accordingly:
+Edit `/srv/galaxy/config/galaxy.yml` and modify the value of `tool_config_file` accordingly:
 
-```ini
-tool_config_file = /srv/galaxy/config/tool_conf.xml,/srv/galaxy/config/shed_tool_conf.xml
+```yml
+galaxy:
+    tool_config_file: /srv/galaxy/config/tool_conf.xml,/srv/galaxy/config/shed_tool_conf.xml
 ```
 
 Finally, in order to read the toolbox changes, Galaxy should be restarted. You'll need to return to the `ubuntu` user to do this (since the `galaxy` user does not have `sudo` privileges). It is, as usual, `sudo supervisorctl restart all`.
@@ -509,7 +511,7 @@ Now, click the rerun button on the last history item, or click **Multicore Tool*
 Running with '2' threads
 ```
 
-### Section 2 - Dynamically map a tool to a job destination
+### Section 5 - Dynamically map a tool to a job destination
 
 **Part 1 - Write a Dynamic Tool Destination**
 
@@ -537,10 +539,11 @@ The rule says:
   - If the input dataset is <16 bytes, run on the destination `slurm`
 - Else, run on the destination `local`
 
-We also need to inform Galaxy of the path to the file we've just created, which is done using the `tool_destinations_config_file` in `galaxy.ini`:
+We also need to inform Galaxy of the path to the file we've just created, which is done using the `tool_destinations_config_file` in `galaxy.yml`:
 
-```ini
-tool_destinations_config_file = /srv/galaxy/config/tool_destinations.yml
+```yml
+galaxy:
+    tool_destinations_config_file: /srv/galaxy/config/tool_destinations.yml
 ```
 
 Once the dynamic tool definition has been written, we need to update Galaxy's job configuration to use this rule. Open `/srv/galaxy/config/job_conf.xml` and add a DTD destination:
@@ -568,7 +571,7 @@ Then, restart Galaxy with `sudo supervisorctl restart all`.
 
 Our rule specified that any invocation of the `multi` tool with an input dataset with size <16 bytes would run on the 1 core destination, whereas any with >= 16 bytes would run on the 2 core destination. To verify, create a dataset using the upload paste tool of just a few (<16) characters, and another with >16 characters and run the Multicore Tool on each. The former will run "with '1' thread" whereas the latter will run "with '2' threads".
 
-## Section 5 - Implement a job resource selector
+## Section 6 - Implement a job resource selector
 
 **Part 1 - Define the resource selector**
 
@@ -588,10 +591,11 @@ Such form elements can be added to tools without modifying each tool's configura
 
 This defines two resource fields, a select box where users can choose between 1 and 2 cores, and a text entry field where users can input an integer value from 1-24 to set the walltime for a job.
 
-As usual, we need to instruct Galaxy of where to find this file in `galaxy.ini` using the `job_resource_params_file` option:
+As usual, we need to instruct Galaxy of where to find this file in `galaxy.yml` using the `job_resource_params_file` option:
 
-```ini
-job_resource_params_file = /srv/galaxy/config/job_resource_params_conf.xml
+```yml
+galaxy:
+    job_resource_params_file: /srv/galaxy/config/job_resource_params_conf.xml
 ```
 
 **Part 2 - Configure Galaxy to use the resource selector**
@@ -695,9 +699,9 @@ It is important to note that **you are responsible for parameter validation, inc
 
 Once written, restart Galaxy with `sudo supervisorctl restart all`.
 
-**Part 4 - Verify***
+**Part 4 - Verify**
 
-Run the **Multicore Tool* with various resource parameter selections:
+Run the **Multicore Tool** with various resource parameter selections:
 - Use default job resource parameters
 - Specify job resource parameters:
   - 1 core
@@ -751,6 +755,3 @@ Hopefully, you now understand:
 - [Dynamic destination documentation](https://wiki.galaxyproject.org/Admin/Config/Jobs#Dynamic_Destination_Mapping)
 - Job resource parameters are not as well documented as they could be, but the [sample configuration file](https://github.com/galaxyproject/usegalaxy-playbook/blob/master/env/test/files/galaxy/config/job_resource_params_conf.xml) shows some of the possibilities.
 - [usegalaxy.org's job_conf.xml](https://github.com/galaxyproject/usegalaxy-playbook/blob/master/env/main/templates/galaxy/config/job_conf.xml.j2) is publicly available for reference.
-
-
-

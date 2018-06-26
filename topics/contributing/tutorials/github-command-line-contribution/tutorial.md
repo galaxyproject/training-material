@@ -47,7 +47,7 @@ Forking a repository is a simple two-step process:
 >    ![Fork](../../images/PR_fork.jpg)
 >
 > > ### {% icon comment %} Comment
-> > When you click the **Fork** button GitHub will show you a list with your user and any groups where you can create a fork of this repository. If you do not see yourself, it means you already have a fork.
+> > When you click the **Fork** button GitHub will show you a list with your user account and any groups where you can create a fork of this repository (starting with `@`). If you see yourself only below "You have existing forks of this repository:", it means you already have a fork and you have nothing to do.
 > {: .comment}
 > 
 {: .hands_on}
@@ -83,6 +83,10 @@ To modify the content of the repository, you need a copy of it on your computer.
 >    $ cd training-material
 >    ```
 {: .hands_on}
+
+> ### {% icon comment %} Comment
+> If you already have a local copy of the GitHub repository, you need to update it before doing any changes. To learn how to do that, please follow the [last section](#keep-up-to-date).
+{: .comment}
 
 # Create a new branch
 
@@ -129,7 +133,8 @@ You have created your first branch! Now you want to make the change in the `CONT
 
 > ### {% icon hands_on %} Hands-on: Make changes in a branch
 >
-> 1. Modify the `CONTRIBUTORS.yaml` to add yourself
+> 1. Open with your favorite text editor the `CONTRIBUTORS.yaml` file that is on your computer
+> 2. Add yourself in the `CONTRIBUTORS.yaml` file
 >
 >    You should use your GitHub username and add it followed by `:` at the correct position given the alphabetical order
 >
@@ -231,7 +236,7 @@ One of the reviewers of your pull request asked you to add your name after your 
 >
 >    It should look like
 >    
->    ```
+>    ```yaml
 >    bebatut:
 >         name: Bérénice Batut
 >    ```
@@ -296,14 +301,56 @@ On the bottom of your pull request, you can see the status of the tests:
 
     Even it is green, we recommend to check the result of the tests, as some of tests are allowed to fail (to avoid too much noise).
 
+# Stay up to date
+
+You now want to work on a new tutorial or make some other new changes. However since you get a local copy, some changes have happened to the original GitHub repository. You need then to update your local copy of the repository before changing anything.
+
+> ### {% icon hands_on %} Hands-on: Update the local copy
+>
+> 1. Move to the `master` branch
+>    
+>    ```
+>    $ git checkout master
+>    ```
+>
+> 2. Add a reference to the original GitHub repository
+>
+>    ```
+>    $ git remote add upstream https://github.com/galaxyproject/training-material.git
+>    ```
+>
+>    > {% icon tip %}: Tip: "remote upstream already exists"
+>    > If you have done step 2 before and try to `remote add` again, git will tell you that a "remote upstream already exists". In this case you can safely continue to step 4.
+>    {: .tip}
+>
+> 4. Update the local copy of the repository by "pulling" in the content of the original GitHub repository
+>
+>    ```
+>    $ git pull upstream master
+>    ```
+>
+{: .hands_on}
+
+You can now restart the GitHub flow to propose new changes: start by [creating a new branch](#create-a-new-branch).
+
 # Conclusion
 {:.no_toc}
 
-With this tutorial, you have learned the basics of contributing using GitHub:
+With this tutorial, you have learned some basics `git` commands and principles:
 
 ![Summary of the links between GitHub, fork and local repository](../../images/PR_global_schema.png "Summary of the links between GitHub, fork and local repository")
 
-You can now contribute and help us to improve our tutorials.
+You also learned the GitHub flow and its cycle:
+
+1. Create a new branch in your local copy
+2. Commit the changes in that branch
+1. Push that branch to your fork on GitHub
+1. Submit a pull request from that branch to the master repository
+1. Wait for feedbacks and make requested changes
+1. Update your local copy
+1. Restart the cycle
+
+You can now contribute and help us to improve our tutorials!
 
 > ### {% icon tip %} Git in Depth
 > This tutorial was a quick introduction to explain the basics of contributing to the training material. We recommend that everyone follow a more detailed git tutorials:
