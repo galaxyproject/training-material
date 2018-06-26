@@ -58,34 +58,55 @@ One can see that these data are of excellent quality and no additional processin
 
 ## Generating Duplex Consensus Sequences (DCS)
 
-From tool section **NGS: Du Novo** we ran:
-
-1. **Make families** (`Tag length = 12`; `Invariant sequence length = 5`)
-2. **Align families** (This is **the most** time consuming step of the workflow. It may take multiple days to run. The _ABL1_ example took 34 hours and 7 minutes to finish. )
-3. **Make consensus reads** (`Minimum reads per family = 3`; `Minimum base quality = 20`; `FASTQ format = Sanger` ; `Output single-strand consensus sequences = Yes` :point_left: This is particularly important as explained below; also see the following image)
-
-This is the exact image of the **Make consensus reads** interface:
-
->![Make consesni](../../images/makeCons.png)
+> ### {% icon hands_on %} Hands-on: NGS: Du Novo
 >
+> 1. **Du Novo: Make families** {% icon tool %}: Run Du Novo: Make families adjusting the parameters:
+>    - "Tag length" to `12`
+>    - "Invariant sequence length" to `5`
+>
+> 2. **Du Novo: Align families** {% icon tool %}: Run Du Novo: Align families.
+>       > ### {% icon comment %} Comment
+>       >
+>       > This is **the most** time consuming step of the workflow. It may take multiple days to run. The _ABL1_ example took 34 hours and 7 minutes to finish.
+>       {: .comment}
+>
+> 3. **Du Novo: Make consensus reads** {% icon tool %}: Run Du Novo: Make consensus reads adjusting the parameters:
+>    - "Minimum reads per family" to `3`
+>    - "Minimum base quality" to `20`
+>    - "FASTQ format" to `Sanger`
+>    - "Output single-strand consensus sequences" to `Yes`
+>
+{: .hands_on}
+
 >Making DCS and SSCS. **Note** that **Output single-strand consensus sequences** is set to `Yes`. [Above](#background) we explained why single-strand consensus sequences (SSCS) may be important in some applications. [Below](#analysis-of-single-strand-consensus-data) we show how they can be used.
 
 
 ## Filtering consensuses
 
-The _Du Novo_ algorithm occasionally inserts`N`and/or [IUPAC notations](https://en.wikipedia.org/wiki/Nucleic_acid_notation) at sites where a definive base cannot be identified according to the major rule consensus. We however do not want such bases when we call variants. The tool **Sequence Content Trimmer** will help with filtering these out. Here are the parameters we used:
+The _Du Novo_ algorithm occasionally inserts`N`and/or [IUPAC notations](https://en.wikipedia.org/wiki/Nucleic_acid_notation) at sites where a definive base cannot be identified according to the major rule consensus. We however do not want such bases when we call variants. The tool **Sequence Content Trimmer** will help with filtering these out.
 
-
->![ContentTrimmer](../../images/contentTrimmer.png)
+> ### {% icon hands_on %} Hands-on: Sequence Content Trimmer
 >
->Sequence Content Trimmer settings . Where:<br>- `Paired reads = Paired` (because DCSs are reported as forward and reverse)<br>- `Bases to filter on = NRYSWKMBDHV` (all ambiguous nucleotides)<br>- `Frequency threshold = 0.2` (A window /see the next parameter below/ cannot have more than 20% of ambiguous bases)<br>- `Size of the window = 10` (Size of the window)<br>- `Invert filter bases = No`<br>- `Set a minimum read length = 50` (We do not want _very_ short reads)
+> 1. **Sequence Content Trimmer** {% icon tool %}: Run Sequence Content Trimmer adjusting the parameters:
+>    - "Paired reads" to `Paired` (because DCSs are reported as forward and reverse)
+>    - "Bases to filter on" to `NRYSWKMBDHV` (all ambiguous nucleotides)
+>    - "Frequency threshold" to `0.2` (A window /see the next parameter below/ cannot have more than 20% of ambiguous bases)
+>    - "Size of the window" to `10`
+>    - "Invert filter bases" to `No`
+>    - "Set a minimum read length" to `50`
+>
+{: .hands_on}
 
 ## Generating fastq
 
 [The previous step](#filtering-consensuses) filters forward and reverse DCSs and reports them in [FASTA](https://en.wikipedia.org/wiki/FASTA_format) format. Yet the downstream tools require [fastq](https://en.wikipedia.org/wiki/FASTQ_format) format. To address this we convert FASTA into fastq using **Combine FASTA and QUAL** from tool section **NGS: QC and manipulation**. In this case the quality values are filled in with the maximum allowed value of 93 (essentially we fake them here), which is fine as we will not rely on quality scores in the rest of the analysis.
 
->![ContentTrimmer](../../images/combineFandQ.png)
+> ### {% icon hands_on %} Hands-on: Combine FASTA and QUAL
 >
+> 1. **Combine FASTA and QUAL** {% icon tool %}: Run Sequence Content Trimmer with default parameters.
+>
+{: .hands_on}
+
 >Combine FASTA and QUAL. **Note** that here two datasets (#8 and #9) are selected simultaneously because we clicked the multiple datasets button the left of the **FASTA File** dropdown:<br> ![MultipleDataset icon](../../images/multiDataset.png)
 
 ## Calling variants
@@ -99,55 +120,85 @@ At this point we have trimmed DCSs in fastq format. We can now proceed to callin
 
 ### Align against genome with **BWA** and **BWA-MEM**
 
-Here we use two mappers for added reliability (this is not necessary in most situations as long as you use the right mapper for input data). To differentiate between results produced by each mapper we assign readgroups (this is done by clicking on **Set read groups information** dropdown). For example, for **BWA-MEM** you would set parameters like this:
+Here we use two mappers for added reliability (this is not necessary in most situations as long as you use the right mapper for input data). To differentiate between results produced by each mapper we assign readgroups (this is done by clicking on **Set read groups information** dropdown).
 
->![BWA-MEM input and parameters](../../images/bwa-mem.png)
+> ### {% icon hands_on %} Hands-on: Map with BWA-MEM
 >
->Running BWA-MEM. **Note** that we are comparing DCSs against human genome version `hg38`, use forward and reverse DCSs are the `first` and `second` set of reads. Readgroup **SM** and **ID** tags are set `bwa-mem`.
-
-We then repeat essentially the same with **BWA**:
-
->![BWA input and parameters](../../images/bwa.png)
+> 1. **Map with BWA-MEM** {% icon tool %}: Run Map with BWA-MEM adjusting the parameters:
+>    - "Using reference genome" to `hg38`
+>    - "Select first set of reads" to forward DCSs
+>    - "Select second set of reads" to reverse DCSs
+>    - "Set read groups information?" to `Set read groups (SAM/BAM specification)`
+>    - "Read group identifier (ID)" to `bwa-mem`
+>    - "Read group sample name (SM)" to `bwa-mem`
+>    - "Library name (LB)" to `abl1`
 >
->Running BWA. **Note** here we use `bwa` as the readgroup **ID** and **SM** tags.
+> 2. **Map with BWA-MEM** {% icon tool %}: Re-run Map with BWA-MEM adjusting the parameters:
+>    - "Using reference genome" to `hg38`
+>    - "Select first set of reads" to forward DCSs
+>    - "Select second set of reads" to reverse DCSs
+>    - "Set read groups information?" to `Set read groups (SAM/BAM specification)`
+>    - "Read group identifier (ID)" to `bwa`
+>    - "Read group sample name (SM)" to `bwa`
+>    - "Library name (LB)" to `abl1`
+>
+{: .hands_on}
 
 ### Merging
 
-Since we have used two mappers - we have two BAM datasets. Yet because we have set readgroups we can now merge them into a single BAM dataset. This is because the individual reads will be labelled with readgroups (you will see how it will help later). To merge we use **MergeSamFiles** from tool section **NGS: Picard**:
+Since we have used two mappers - we have two BAM datasets. Yet because we have set readgroups we can now merge them into a single BAM dataset. This is because the individual reads will be labelled with readgroups (you will see how it will help later). To merge we use **MergeSamFiles** from tool section **NGS: Picard**.
 
->![MergeSamFiles input and parameters](../../images/mergeSamFiles.png)
+> ### {% icon hands_on %} Hands-on: MergeSamFiles
 >
->Merging BAM datasets.
+> 1. **MergeSamFiles** {% icon tool %}: Run MergeSamFiles with default parameters on the outputs from BWA-MEM.
+>
+{: .hands_on}
 
 ### Left Aligning indels
 
-To normalize the positional distribution of indels we use **Left Align** utility (**NGS: Variant Analysis**) from [FreeBayes](https://github.com/ekg/freebayes#indels) package. This is necessary to avoid erroneous polymorphisms flanking regions with indels (e.g., in low complexity loci):
+To normalize the positional distribution of indels we use **Left Align** utility (**NGS: Variant Analysis**) from [FreeBayes](https://github.com/ekg/freebayes#indels) package. This is necessary to avoid erroneous polymorphisms flanking regions with indels (e.g., in low complexity loci).
 
->![Left Aligh input and parameters](../../images/leftAlign.png)
+> ### {% icon hands_on %} Hands-on: BamLeftAlign
 >
->Left aligning indels. **Note** here we use `hg38` as well. Obviously, one must use the same genome built you have aligned against with **BWA-MEM** and **BWA**.
+> 1. **BamLeftAlign** {% icon tool %}: Run BamLeftAlign adjusting parameters on the outputs from previous step:
+>    - "Using reference genome" to `hg38`
+>
+{: .hands_on}
 
 ### Tabulating the differences
 
 To identify sites containing variants we use **Naive Variant Caller (NVC)** (tool section **NGS: Variant Analysis**) which produces a simple count of differences given coverage and base quality per site (remember that our qualities were "faked" during the conversion from FASTA to fastq and cannot be used here). So in the case of _ABL1_ we set parameters as follow:
 
->![Naive Variant Caller (NVC) input and parameters](../../images/nvc.png)
+> ### {% icon hands_on %} Hands-on: Naive Variant Caller (NVC)
 >
->Finding variants with NVC. Here:<br>- `Using reference genome = hg38` (As mentioned above, needs to be set to the same genome one have mapped against.)<br>- `Restrict to regions: Chromosome = chr9` (_ABL1_ is on chromosome 9. We set this to prevent **NVC** from wandering across the genome to save time.)<br>- `Minimum number of reads needed to consider a REF/ALT = 0` (Trying to maximize the number of sites. We can filter later.)<br>- `Minimum base quality = 20` (This default and is irrelevant because of "faking" quality scores during the conversion from FASTA to fastq).<br>- `Minimum mapping quality = 20` (This is helpful because it prevents reads mapping to multiple locations from being included in the tabulation. Such reads will have mapping quality of 0.)<br>- `Ploidy = 1` (Ploidy is irrelevant here as it is a mixture of multiple genomes)<br>- `Only write out positions with possible alternate alleles = No` (We can filter later)<br>- `Report counts by strand = Yes` (This will be helpful to gauge the strand bias).
-
-The **NVC** generates a [VCF](https://en.wikipedia.org/wiki/Variant_Call_Format) file that can be viewed at genome browsers such as [IGV](https://www.broadinstitute.org/igv/). Yet one rarely finds variants by looking at genome browsers. The next step is to generate a tab-delimited dataset of nucleotide counts using **Variant Annotator** from tool section **NGS: Variant Analysis**. We ran it with the following parameters:
-
-
->![Variant Annotator input and parameters](../../images/va.png)
+> 1. **Naive Variant Caller (NVC)** {% icon tool %}: Run Naive Variant Caller (NVC) adjusting parameters on the outputs previous step:
+>    - "Using reference genome" to `hg38`
+>    - "Restrict to regions" to `+Insert Restrict to regions`
+>    - "Chromosome" to `chr9` (ABL1 is on chromosome 9. We set this to prevent NVC from wandering across the genome to save time.)
+>    - "Minimum base quality" to `20`
+>    - "Minimum mapping quality" to `20` (This is helpful because it prevents reads mapping to multiple locations from being included in the tabulation. Such reads will have mapping quality of 0.)
+>    - "Ploidy" to `1`
+>    - "Report counts by strand" to `Yes`
 >
->Annotating variable sites. Here `Coverage threshold = 10` (To reduce noise) and `Output stranded base counts = Yes` (to see strand bias)
+{: .hands_on}
 
+The **NVC** generates a [VCF](https://en.wikipedia.org/wiki/Variant_Call_Format) file that can be viewed at genome browsers such as [IGV](https://www.broadinstitute.org/igv/). Yet one rarely finds variants by looking at genome browsers. The next step is to generate a tab-delimited dataset of nucleotide counts using **Variant Annotator** from tool section **NGS: Variant Analysis**.
 
-There are 3,264 lines in the output, which is clearly too much. Using **Filter** tool (tool section **Filter and Sort**) with expression `c16 >= 0.01`(because column 16 contains minor allele frequency - MAF - and we are interested in those sites where MAF >= 1%):
-
->![Filter and Sort input and parameters](../../images/filter.png)
+> ### {% icon hands_on %} Hands-on: Variant Annotator
 >
->Filtering variable sites.
+> 1. **Variant Annotator** {% icon tool %}: Run Variant Annotator with default settings.
+>
+{: .hands_on}
+
+There are 3,264 lines in the output, which is clearly too much. Using **Filter** tool (tool section **Filter and Sort**) with expression `c16 >= 0.01`(because column 16 contains minor allele frequency - MAF - and we are interested in those sites where MAF >= 1%).
+
+> ### {% icon hands_on %} Hands-on: Filter
+>
+> 1. **Filter** {% icon tool %}: Run Filter with the following settings:
+>    - "With following condition" to `c16 >= 0.01`
+>    - "Number of header lines to skip" to `1`
+>
+{: .hands_on}
 
 will get that number to only 4 (showing just some of the columns):
 
