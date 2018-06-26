@@ -36,7 +36,7 @@ This step has to be done once.
 >     It will install some needed tools (ruby, nodejs, etc) in a protected environment, without interfering with the existing tools or versions.
 >
 >     1. Install conda (if not already installed): `make install-conda`
->     2. Add conda to the path: `export PATH="$HOME/miniconda/bin:$PATH"`
+>     2. Add conda to the path: `export PATH="$HOME/miniconda3/bin:$PATH"`
 >     3. Create conda environment: `make create-env`
 > 
 > 4. Activate the conda environment: `source activate galaxy_training_material`
