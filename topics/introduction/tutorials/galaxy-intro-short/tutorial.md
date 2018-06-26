@@ -18,14 +18,17 @@ tutorial_name: galaxy-intro-short
 
 ## What does Galaxy look like?
 
-* Browse to your Galaxy instance and log in or register.
-    * Use Chrome, Safari or Firefox as your browser, not Internet Explorer.
-    * This is an image of Galaxy Australia, located at [www.usegalaxy.org.au](https://usegalaxy.org.au/).
 
-* The particular Galaxy server that you are using may look slightly different and have a different web address.
-    * For example, the main Galaxy server is [www.usegalaxy.org](https://usegalaxy.org/).
-
-![login](../../images/galaxy-login.png)
+> ### {% icon hands_on %} Hands-on: Log in to Galaxy
+>* Browse to your Galaxy instance and log in or register.
+>    * Use Chrome, Safari or Firefox as your browser, not Internet Explorer.
+>    * This is an image of Galaxy Australia, located at [www.usegalaxy.org.au](https://usegalaxy.org.au/)
+>![login](../../images/galaxy-login.png)
+>
+>* The particular Galaxy server that you are using may look slightly different and have a different web address.
+>    * For example, the main Galaxy server is [www.usegalaxy.org](https://usegalaxy.org/)
+>    * The European Galaxy server is [www.usegalaxy.eu](https://usegalaxy.eu/)
+{: .hands_on}
 
 
 * The Galaxy page is divided into three panels:
@@ -33,7 +36,8 @@ tutorial_name: galaxy-intro-short
     * Viewing panel in the middle
     * History of analysis and files on the right
 
-![galaxy overview screenshot](../../images/galaxy-panel.png)
+
+![galaxy overview screenshot](../../images/galaxy_interface.png)
 
 
 * The first time you use Galaxy, there will be no files in your history panel.
@@ -48,11 +52,12 @@ Your "History" is in the panel at the right.
 > ### {% icon hands_on %} Hands-on: Name history
 > * Go to the History panel
 > * Click on the history name ("Unnamed history")
+>
+>    ![name history](../../../../shared/images/rename_history.png){:width="320px"}
+>
 > * Type in a new name, for example, "My-Analysis"
 > * Press Enter
 > <br>
->
-> <img src="../../images/name_history.png" style="width: 320px;"/>
 {: .hands_on}
 
 ## Upload a file
@@ -63,11 +68,11 @@ Your "Tools" are in the panel at the left.
 > * Go to the Tools panel
 > * Click "Get Data" (at the top of the list)
 > * Click "Upload File"
->
-> This brings up a box:
 > <br>
+>    This brings up a box:
+> <br>
+>    ![filebox](../../images/upload-box.png){:width="500px"}
 >
-> <img src="../../images/upload-box.png" alt="filebox" style="width: 620px;"/>
 > <br>
 > * Click "Paste/Fetch data"
 > * Paste in the address of a file: *https://zenodo.org/record/582600/files/mutant_R1.fastq*
@@ -78,19 +83,23 @@ Your "Tools" are in the panel at the left.
 
 
 When the file has uploaded to Galaxy, it will turn green.
-* Grey means "waiting to run"; yellow means "in progress".
+
+> ### {% icon comment %} Comment
+> After this you will see your first history item in Galaxy's right panel. It will go through
+> the gray (preparing/queued) and yellow (running) states to become green (success):
+>
+{: .comment}
 
 What is this file?
 
 * Click on the eye icon next to the file name, to look at the file contents.
 
-
-<img src="../../images/eye-icon.png" alt="fastq" style="width: 320px;"/>
+   ![eye](../../images/eye-icon.png){:width="320px"}
 
 The contents of the file will be displayed in the centre Galaxy panel.
 * This file contains DNA sequencing reads from a bacteria, in FASTQ format:
 
-<img src="../../images/fastq.png" alt="fastq" style="width: 620px;"/>
+   ![fastq](../../images/fastq.png){:width="620px"}
 
 ## Use a tool
 
@@ -109,19 +118,29 @@ Let's look at the quality of the reads in this file.
 ## View results
 
 We will look at the output file called *FastQC on data 1: Webpage*.
-* Note that Galaxy has given this file a name according to both the tool (FastQC) and the data file ("data 1") that it used.
-* The name "data 1" means the data file (our FASTQ file) which was file number 1 in Galaxy's current history.
+
+> ### {% icon comment %} Comment
+> * Note that Galaxy has given this file a name according to both the tool (FastQC) and the data file ("data 1") that it used.
+> * The name "data 1" means the data file (our FASTQ file) which was file number 1 in Galaxy's current history.
+>
+{: .comment}
+
 
 > ### {% icon hands_on %} Hands-on: View results
 > * Click on the eye icon next to the output file.
 > * The information is displayed in the centre panel.
 >
-> <img src="../../images/fastqc-out.png" alt="fastqc-out" style="width: 620px;"/>
+>    ![fastqc-out](../../images/fastqc-out.png){:width="620px"}
 {: .hands_on}
 
 This tool has summarised information about all of the reads in our FASTQ file.
-* What was the length of the reads in the input FASTQ file?
-* Do these reads have higher quality scores in the centre or at the ends?
+
+> ### {% icon question %} Question
+>
+> 1. What was the length of the reads in the input FASTQ file?
+> 2. Do these reads have higher quality scores in the centre or at the ends?
+>
+{: .question}
 
 
 ## Run another tool
@@ -149,7 +168,7 @@ What are the results from this filtering tool?
 * Instead, let's click on the output file name in the History panel. This expands the information about the file.
 * We can see that 1786 low-quality reads were discarded.
 
-![filter1](../../images/filter-fastq1.png)
+   ![filter1](../../images/filter-fastq1.png)
 
 ## Re-run that tool with changed settings
 
@@ -212,21 +231,6 @@ Where is your first history, called "my-analysis"?
 Your main Galaxy window will now show the current history as "Next-analysis", and it will have one file in it.
 
 You can go back into the "View all histories" page and "Switch to" a different history.
-
-
-# Summary
-
-What have we learned?
-
-* The Galaxy interface has tools on the left, viewing pane in the middle, and a history of your data analysis on the right.
-* You can create a new history for each analysis. All your histories are saved.
-* To get data into Galaxy, you can upload a file by pasting in a web address. There are other ways to get data into Galaxy (not covered in this tutorial): you can upload a file from your computer, and you can import an entire history.
-* Choose a tool and change any settings for your analysis.
-* Run the tool. The output files will be saved at the top of your history.
-* View the output files by clicking on the eye icon.
-* View all your histories and move files between them. Switch to a different history.
-* Log out of your Galaxy server. When you log back in (to the same server), your histories will all be there.
-
 
 # Conclusion
 {:.no_toc}
