@@ -437,7 +437,69 @@ $ cd seqtk_example
 $ planemo conda_install seqtk_seq.xml
 ```
 ```bash
-$ .  Hands-on
+$ . &lt;(planemo conda_env seqtk_seq.xml)
+```
+```bash
+$ planemo test seqtk_seq.xml
+```
+---
+
+class: enlarge120
+
+## Finding the Correct Requirements &amp; Packages
+
+The previous example worked because a published Bioconda recipe named `seqtk` at version `1.2`
+was previously published, but how can these be found?
+
+Two easy approaches are using `planemo conda_search` and using the Anaconda web search.
+
+---
+
+class: left
+
+### Using the Planemo `conda_search` Command
+
+The Planemo `conda_search` command is a shortcut around `conda search` that searches best
+practice channels that Galaxy is configured to work with:
+
+```sh
+$ planemo conda_search seqt
+Fetching package metadata ...............
+seqtk                        r75                           0  bioconda
+                             r82                           0  bioconda
+                             r93                           0  bioconda
+                             1.2                           0  bioconda
+```
+
+Alternatively, `conda` can be used directly:
+
+```sh
+$ $HOME/miniconda3/bin/conda search -c iuc -c bioconda -c conda-forge seqtk
+```
+
+---
+
+### Using Anaconda Search - https://anaconda.org
+
+![](../../images/anaconda_landing.png)
+
+
+???
+
+---
+
+### Using Anaconda Search - https://anaconda.org
+
+![](../../images/anaconda_result.png)
+
+???
+
+Notice that only one of these results is a best practice channel and so that is the
+only one that will be used by Galaxy by default.
+
+---
+
+### <i class="fa fa-pencil" aria-hidden="true"></i> Hands-on
 
 ![](../../images/exercise.png)
 
