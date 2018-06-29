@@ -39,18 +39,15 @@ The first step of EWAS data anylalysis is raw methylation data loading (intensit
 > 2. Import Grn and Red .IDAT files from [Zenodo](https://zenodo.org/record/1251211#.WwREQ1Mvz-Y)
 > 3. Run **minfi read450k**  {% icon tool %} with red and green .IDAT files i.e. `red files:` GSM1588704_8795207135_R01C02_Red.idat, GSM1588705_8795207119_R05C02_Red.idat, GSM1588706_8795207135_R02C02_Red.idat, GSM1588707_8795207119_R06C02_Red.idat and `green files:` GSM1588704_8795207135_R01C02_Grn.idat, GSM1588705_8795207119_R05C02_Grn.idat, GSM1588706_8795207135_R02C02_Grn.idat, GSM1588707_8795207119_R06C02_Grn.idat
 > 4. Inspect generated set of data
-{: .hands_on}
 >	> ### {% icon question %} Questions
 >	>
 >	> How are the Green and Red signals are stored?
->	> 	> ### {% icon solution %} Solution 
->	>	>
->	>	>
+>	>	> ### {% icon solution %} Solution 
 >	>	> Green and Red micro arrays are builded up into `RGChannelSet` 
 >	>	{: .solution}
 >	>
->  {: .question}  
->
+>	{: .question}  
+{: .hands_on}
 # Step 2: Preprocessing and  Quality Assessment
 Preprocessing and data quality assurance is an important step in Infinium Methylation Assay analysis. 
 `RGChannelSet` represents two color data with a green and a red channel and can be converted into methylated and unmethylated signals assigned to `MethylSet` or into Beta values build in `RatioSet`. User can convert from `RGChannelSet` into `MethylSet` using the **minfi mset** {% icon tool %} or compute Beta values using **minfi set** {% icon tool %}. The **minfi qc** {% icon tool %} tool extracts and plots the quality control data frame with two columns mMed and uMed which are the medians of `MethylSet` signals (Meth and Unmeth).Comparing them against one another allows user to detect and remove low-quality samples. 
@@ -59,13 +56,13 @@ Preprocessing and data quality assurance is an important step in Infinium Methyl
 > 2. Run **minfi qc** {% icon tool %} to estimate sample-specific quality control
 > 3. Convert methylation data from the `MethylSet` , to ratios with **minfi rset** {% icon tool %}
 > 4. Then map ratio data to the genome using **minfi maptogenome** {% icon tool %} tool  
-> 
+{: .hands_on}
 > ### {% icon tip %} Tip: Preprocess and Normalize data
 > 
 > If your files require normalisation, you might prefer to use other of preprocessing tools provided in EWAS suite i.e. **minfi ppfun** {% icon tool %} or **minfi ppquantile**  {% icon tool %} look for recomendation at (ref).
 >    {: .tip}
 > 
-{: .hands_on}
+
 # Step 3: Removing probes affected by genetic variation
 Incomplete annotation of genetic variations such as single nucleotide polymorphism (SNP) may affect DNA measurements and interfere results from downstream analysis. 
 > ### {% icon hands_on %} Hands-on: Removing probes affected by genetic variation
