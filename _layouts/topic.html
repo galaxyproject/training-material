@@ -202,7 +202,7 @@ layout: base
         {% for username in contributors_list %}
             {% assign contributor = contributors[username] %}
             <li>
-                <a href="{{ site.baseurl }}/hall-of-fame#{{ username }}"> {{ contributor.name }}</a>
+                <a href="{{ site.baseurl }}/hall-of-fame#{{ username }}">{% if contributor.name %}{{ contributor.name }}{% else %}{{ username }}{% endif %}</a>
             </li>
         {% endfor %}
         </ul>
