@@ -27,7 +27,7 @@ There are a many ways how you can upload your protein search database (FASTA fil
 *   Using a direct weblink to the database.
 *   Uploading a database from the data library.
 
-In this tutorial, we will explore **Protein Database Downloader** {% icon tool %} for generating a protein search database. Fors this we will download the proteome of an organism of interest. In this tutorial, we will use a database of the human proteome.
+In this tutorial, we will explore **Protein Database Downloader** {% icon tool %} for generating a protein search database. For this we will download the proteome of an organism of interest. In this tutorial, we will use a database of the human proteome.
 
 > ### {% icon hands_on %} Hands-on: Uploading a protein search database
 >
