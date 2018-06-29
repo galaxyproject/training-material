@@ -50,7 +50,7 @@ First we are going to use the SRA uploading tool to upload a collection of paire
 >   - {% icon param-text %} *"sra accession list"* : the `Accession List` file we downloaded from NCBI
 {: .hands_on}
 
-The downlad of the data can take a little time, and will create two collections, one of paired end data, one of single end data. When you click on the Sungle end collection, you can notice it is empty. To keep the history as clean as possible you can delete it by clicking on the cross.
+The download of the data can take a little time, and will create two collections, one of paired end data, one of single end data. When you click on the single end collection, you can notice it is empty. To keep the history as clean as possible you can delete it by clicking on the cross.
 
 When you click on the paired end collection you can notice it contains a list of pairs of files (forward and reverse), labeled with samples IDs. The names are not very informative, and in order to facilitate the analysis we want to change the names so it includes the condition of growth of the sample.
 
@@ -72,8 +72,8 @@ When you click on the paired end collection you can notice it contains a list of
 >   - {% icon param-text %} *"Select data"* : the file we just generated
 >   - {% icon param-text %} *"Merge column"* : `Column:1`
 >   - {% icon param-text %} *"with column"*  to `Column:3`
->   - {% icon param-text %} *Insert column* :
->       -  *"Add column"* : `Column:2`
+>   - {% icon param-text %} *"Insert column"* :
+>   >    *  {% icon param-text %}  *"Add column"* : `Column:2`
 > 5. **Cut columns from a table (cut)**  {% icon tool %} : Remove column with
 >   - {% icon param-text %} *"File to cut"* : the file we generated at the previous step
 >   - {% icon param-text %} *"List of Fields"* as `column:1` and `column:4` , these columns contain old and new names of our files
@@ -89,14 +89,14 @@ When you click on the paired end collection you can notice it contains a list of
 Once we got a clean collection with our sequencing data, we need to upload the genome and annotations file of the reference genome.
 You can find these files on the [Pseudomonas Genome Database Website](http://pseudomonas.com/strain/download). Download the Genomic sequence file and the gbk annotation file for *Pseudomonas aeruginosa UCBPP-PA14* (second line) and upload them in Galaxy.
 
-> ### {% icon tip %} Tip: Upload file in Galaxy through their url
+> ### {% icon tip %} Tip: Importing data via links
 >
-> 1. Get urls of the files you want to upload ![Get file url](../../images/get_file_url.png "click right on a link to copy file url")
-> 2. Click on the upload data icon ![Upload icon](../../images/upload icon.png "Upload icon")
-> 3. Click on *Paste/Fetch data* and copy the links in the text area (one per line)
->![Fetch Data](../../images/paste_urls.png "Upload files by urls")
-> 4. Click on *Start*
-> 5. Click on *Edit attribute* to give more meaningful names to the datasets.
+> 1. Copy the link location
+> 2. Open the Galaxy Upload Manager
+> 3. Select **Paste/Fetch Data**
+> 4. Paste the link into the text field
+> 5. Press **Start**
+> 6. Click on **Edit attribute** to give more meaningful names to the datasets.
 {: .tip}
 
 Now that you have the reference files in your history we can start the analysis by aligning the reads to the reference genome.
@@ -111,13 +111,13 @@ Before we can align the reads on the reference genome, we need to check the qual
 > ### {% icon hands_on %} Hands-on: Quality Control
 >We are going to use two tools to perform quality control on our reads : FastQC that is going to generate one result per file and MultiQC to aggregate all the results
 >
-> 1. Run the tool **FastQC Read Quality reports** with the parameters as follows:
->   - Set *Short Read data from your history* on the collection of paired-end data by clicking on the folder icon ![Folder icon](../../images/collection icon.png "collection icon")
-> 2. MultiQC need a simple collection as an input, we therefore need to flatten our list of pairs of files. We do that with the tool **Flatten Collection into a flat list of datasets** with parameters as follows:
->   - Set *Input Collection* on the raw data output of Fastqc. It should look like that : `FastQC on collection [...]:RawData`
-> 3. Run **MultiQC** with parameters as follows :
->   - Set *Which tool was used generate logs?* on `FastQC`
->   - Set *FastQC output* on the flatten collection we generated at the previous step
+> 1. **FastQC Read Quality reports**  {% icon tool %} : Evaluate the quality of your reads with
+>   - {% icon param-text %}  *"Short Read data from your history"* : the collection {% icon param-files %} of paired-end data
+> 2. **Flatten Collection into a flat list of datasets** {% icon tool %} : MultiQC need a simple collection as an input, we therefore need to flatten our list of pairs of files with
+>   - {% icon param-text %}  *"Input Collection"* : the raw data output of Fastqc `FastQC on collection [...]:RawData`
+> 3.  **MultiQC** {% icon tool %} : Aggregate quality control outputs with :
+>   - {% icon param-text %}  *Which tool was used generate logs?* : `FastQC`
+>   - {% icon param-text %}  *FastQC output* : the flatten collection we generated at the previous step
 {: .hands_on}
 
 MultiQC provides two outputs : a Webpage aggregating all the results from FastQC and a collection containing statistics in the text format.
@@ -153,7 +153,8 @@ Now that we have good quality reads we are going to map them against the referen
 
 > ### {% icon hands_on %} Hands-on: Mapping
 >Now that we have good quality reads we are going to map them against the reference genome.
-> 1.  Run **BWA-MEM** tool with parameters as follows :
+> 1.   **BWA-MEM**  {% icon tool %} : Map your reads against the reference with
+ 
 >   -  
 {: .hands_on}
 
