@@ -25,9 +25,9 @@ The study grew a strain of Pseudomonas aeruginosa grown in media containing diff
 
 > ### Agenda
 >
-> In this tutorial, we will deal with:
+> In this tutorial, you will learn perform the annotation and analysis of variants:
 >
->
+> 1. TOC
 > {:toc}
 >
 {: .agenda}
@@ -40,14 +40,14 @@ First we are going to use the SRA uploading tool to upload a collection of paire
 
 > ### {% icon hands_on %} Hands-on: Get the read data
 >
-> 1. Open [bioproject of the study](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA355367)
+> 1. Open the [bioproject of the study](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA355367)
 > 2. In *Related information* click on SRA, you have now access to each sample of the experiment.
 > 3. For a more interactive access, click on _Send Result to RunSelector_ on the top of the page
 > 4. In the download section, click on _Runinfo Table_ and _Accession List_
 > 5. Upload the two files in Galaxy
-> 6. Run the tool **Download and Extract Reads in FASTA/Q format from NCBI SRA** with parameters as follows :
->   - *select input type* as *List of SRA accession, one per line*
->   - *sra accession list* as the Accession List file we donloaded from NCBI
+> 6. **Download and Extract Reads in FASTA/Q format from NCBI SRA** {% icon tool %} : download SRA files with
+>   - {% icon param-text %} *"select input type"* : `List of SRA accession, one per line`
+>   - {% icon param-text %} *"sra accession list"* : the `Accession List` file we downloaded from NCBI
 {: .hands_on}
 
 The downlad of the data can take a little time, and will create two collections, one of paired end data, one of single end data. When you click on the Sungle end collection, you can notice it is empty. To keep the history as clean as possible you can delete it by clicking on the cross.
@@ -57,29 +57,30 @@ When you click on the paired end collection you can notice it contains a list of
 > ### {% icon hands_on %} Hands-on: Change the collection names
 >We are goin go use a tool to replace the old names by new ones including the condition information. This starts by creating a file containing the old and new names.
 >
-> 1. Run the tool **Cut columns from a table (cut)** with parameters as follows:
->   - *File to cut* set as the *RunInfo Table* we downloaded from NCBI
->   - *List of Fields* set as *column:9* and *column:10* , these columns contain the sample ID and the condition
-> 2.  Run the tool **Add column to an existing dataset** with parameters as follows:
->   - Set  *Add this value* with `_` (This will serve as a separator in the new names)
->   - Set *to Dataset* to the file we generated at the previous step
-> 3. Run the tool **Replace Text in a specific column** with parameters as follows:
->   - Set *File to Process* to the file we generated at the previous steps
->   - Set *in column* to *Column:2*
->   - Set *Find Pattern* to `(.{3}).*` to select the first three letters corresponding to the condition of growth
->   - Set *Replace with* to `\\1` to replace the whole string with only the condition name
-> 4. Run the tool **Merge Columns together** with parameters as follows:
->   - Set *Select data* with the file we just generated
->   - Set *Merge column* with *Column:1*
->   - Set *with column*  to *Column:3*
->   - Click on *Insert column* and set *Add column* to *Column:2*
-> 5. Run the tool **Cut columns from a table (cut)** with parameters as follows:
->   - Set *File to cut* as the file we generated at the previous step
->   - Set *List of Fields* as *column:1* and *column:4* , these columns contain old and new names of our files
-> 6. Run the tool **Relabel List Identifiers from contents of a file** with parameters as follows:
->   - Set *Input Collection* as the collection of paired-end data downloaded from SRA accessions
->   - Set *How should the new labels be specified?* as `Maps original identifiers to new ones unsing a two column table`
->   - Set *New identifiers* as the two column datasets we generated at the previous step
+> 1. **Cut columns from a table (cut)** {% icon tool %} : Remove columns with
+>   - {% icon param-text %} *"File to cut"* : the `RunInfo Table` we downloaded from NCBI
+>   - {% icon param-text %} *"List of Fields"* : `column:9` and `column:10` , these columns contain the sample ID and the condition
+> 2. **Add column to an existing dataset** {% icon tool %} : Add column with
+>   - {% icon param-text %}  *"Add this value"* : `_` (This will serve as a separator in the new names)
+>   - {% icon param-text %}  *"to Dataset"* : the file we generated at the previous step
+> 3. **Replace Text in a specific column** {% icon tool %} : Replace text with
+>   - {% icon param-text %}  *"File to Process"* : the file we generated at the previous steps
+>   - {% icon param-text %}  *"in column"* : `Column:2`
+>   - {% icon param-text %}  *"Find Pattern"* : `(.{3}).*` to select the first three letters corresponding to the condition of growth
+>   - {% icon param-text %}  *"Replace with"* : `\\1` to replace the whole string with only the condition name
+> 4. **Merge Columns together**  {% icon tool %} : Merge columns with
+>   - {% icon param-text %} *"Select data"* : the file we just generated
+>   - {% icon param-text %} *"Merge column"* : `Column:1`
+>   - {% icon param-text %} *"with column"*  to `Column:3`
+>   - {% icon param-text %} *Insert column* :
+>       -  *"Add column"* : `Column:2`
+> 5. **Cut columns from a table (cut)**  {% icon tool %} : Remove column with
+>   - {% icon param-text %} *"File to cut"* : the file we generated at the previous step
+>   - {% icon param-text %} *"List of Fields"* as `column:1` and `column:4` , these columns contain old and new names of our files
+> 6. **Relabel List Identifiers from contents of a file**  {% icon tool %} : Rename the files in your collectioni with
+>   - {% icon param-text %} *"Input Collection"* : the collection of paired-end data downloaded from SRA accessions
+>   - {% icon param-text %} *"How should the new labels be specified?"* as `Maps original identifiers to new ones using a two column table`
+>   - {% icon param-text %} *New identifiers* : the two column datasets we generated at the previous step
 > 7. Rename your collection with a meaningful name, for example `Pa14 Experiment paired Reads`
 {: .hands_on}
 
