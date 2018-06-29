@@ -42,13 +42,14 @@ The first step of EWAS data anylalysis is raw methylation data loading (intensit
 >	> ### {% icon question %} Questions
 >	>
 >	> How are the Green and Red signals are stored?
->	>	> ### {% icon solution %} Solution 
->	>	> Green and Red micro arrays are builded up into `RGChannelSet` 
->	>	{: .solution}
+>	>	
+>	> > ### {% icon solution %} Solution 
+>	>    > Green and Red micro arrays are builded up into `RGChannelSet` 
+>	> {: .solution}
 >	>
 >	{: .question}  
 {: .hands_on}
-# Step 2: Preprocessing and  Quality Assessment
+# Preprocessing and  Quality Assessment
 Preprocessing and data quality assurance is an important step in Infinium Methylation Assay analysis. 
 `RGChannelSet` represents two color data with a green and a red channel and can be converted into methylated and unmethylated signals assigned to `MethylSet` or into Beta values build in `RatioSet`. User can convert from `RGChannelSet` into `MethylSet` using the **minfi mset** {% icon tool %} or compute Beta values using **minfi set** {% icon tool %}. The **minfi qc** {% icon tool %} tool extracts and plots the quality control data frame with two columns mMed and uMed which are the medians of `MethylSet` signals (Meth and Unmeth).Comparing them against one another allows user to detect and remove low-quality samples. 
 > ### {% icon hands_on %} Hands-on: Preprocessing
@@ -56,52 +57,86 @@ Preprocessing and data quality assurance is an important step in Infinium Methyl
 > 2. Run **minfi qc** {% icon tool %} to estimate sample-specific quality control
 > 3. Convert methylation data from the `MethylSet` , to ratios with **minfi rset** {% icon tool %}
 > 4. Then map ratio data to the genome using **minfi maptogenome** {% icon tool %} tool  
-{: .hands_on}
-> ### {% icon tip %} Tip: Preprocess and Normalize data
-> 
-> If your files require normalisation, you might prefer to use other of preprocessing tools provided in EWAS suite i.e. **minfi ppfun** {% icon tool %} or **minfi ppquantile**  {% icon tool %} look for recomendation at (ref).
+> > ### {% icon tip %} Tip: Preprocess and Normalize data
+> >
+> > If your files require normalisation, you might prefer to use other of preprocessing tools provided in EWAS suite i.e. **minfi ppfun** {% icon tool %} or **minfi ppquantile**  {% icon tool %} look for recomendation at (ref).
+> >
 >    {: .tip}
 > 
-
-# Step 3: Removing probes affected by genetic variation
+{: .hands_on}
+# Removing probes affected by genetic variation
 Incomplete annotation of genetic variations such as single nucleotide polymorphism (SNP) may affect DNA measurements and interfere results from downstream analysis. 
 > ### {% icon hands_on %} Hands-on: Removing probes affected by genetic variation
 > 1. Run **minfi dropsnp** {% icon tool %} to remove the probes that contain either a SNP at the metylated loci interrogation or at the single nucleotide extension (highly recommended /ref)
-> 
-> 
-# Step 4: DMPs and DMRs Identification
+{: .hands_on}
+
+# DMPs and DMRs Identification
 The main goal of the EWAS suite is to simplify the way differentially methylated loci sites are detected. The EWAS suite contains **minfi dmp** {% icon tool %} tool detecting differentially methylated positions (DMPs) with respect to a phenotype covariate, and more complex **minfi dmr** {% icon tool %} solution for finding differentially methylated regions (DMRs). Genomic regions that are differentially methylated between two conditions can be tracked using a bump hunting algorithm. The algorithm first implements a t-statistic at each methylated loci location, with optional smoothing, then groups probes into clusters with a maximum location gap and a cutoff size to refer the lowest possible value of genomic profile hunted by our tool.
-> ### {% icon question %} Questions
->
-> 1. How are we define phenotype covariate?
->  <details>
->    <summary>Click to view answers</summary>
->    <ol type="1">
->    <li>Phenotype covariate is the set of observable characteristics of an individual resulting from the gene-environment interactions.</li>
->    </ol>
->   </details>
->  {: .question}
 > ### {% icon hands_on %} Hands-on: DMPs and DMRs Identification
+>
+> > ### {% icon question %} Questions
+> > How are we define phenotype covariate?
+> > > ### {% icon solution %} Solution
+> > > Phenotype covariate is the set of observable characteristics of an individual resulting from the gene-environment interactions.</li>
+> > {: .solution}
+>  {: .question}
+>
 > 1. Import phenotypeTable.txt from [Zenodo](https://zenodo.org/record/1251211#.WwREQ1Mvz-Y)
 > 2. Run **minfi dmp** {% icon tool %} with 
-    -  `GenomicRatioSet` from step4 and phenotypeTable.txt
-    -  Phenotype Type = categorical
-    -  qCutoff Size = 0.5 (DMPs with an FDR q-value greater than this will not be returned)
-    -  Variance Shrinkage = TRUE (is recommended when sample sizes are small <10)
+>    -  `GenomicRatioSet` from step4 and phenotypeTable.txt
+>   -  Phenotype Type = categorical
+>   -  qCutoff Size = 0.5 (DMPs with an FDR q-value greater than this will not be returned)
+>   -  Variance Shrinkage = TRUE (is recommended when sample sizes are small <10)
 > 3. Run **minfi dmr** {% icon tool %} 
-    -  `GenomicRatioSet` from step4 and phenotypeTable.txt
-    -  factor1 = sensitive factor2 = resistant (factor1 vs factor2)
-    -  maxGap Size = 250
-    - coef Size = 2
-    - Cutoff Size = 0.1
-    - nullMethod = permutation
-    - verbose = TRUE
-> ### {% icon tip %} Tip: Preprocess and Normalize data
-> 
-> Phenotype table can be in diffrent size with diffrent arguments only second column is required to contain phenotype covariate information for each sample. 
->    {: .tip}
+>   -  `GenomicRatioSet` from step4 and phenotypeTable.txt
+>   -  factor1 = sensitive factor2 = resistant (factor1 vs factor2)
+>   -  maxGap Size = 250
+>   - coef Size = 2
+>   - Cutoff Size = 0.1
+>   - nullMethod = permutation
+>   - verbose = TRUE
+>
+> > ### {% icon tip %} Tip: Phenotype table
+> >
+> > Phenotype table can be in diffrent size with diffrent arguments only second column is required to contain phenotype covariate information for each sample. 
+> >   {: .tip}
+>
+{: .hands_on}
+  
+# Annotation and Visualization
+In addition to downstream analysis users can annotate the differentially methylated loci to the promoter regions of genes with gene function description, and relationships between these concepts.
+
+> ### {% icon hands_on %} Hands-on:  Annotate Differentially Methylated Position
+> 1. Run **chipeakanno annopeaks** {% icon tool %} with
+> - Differentially Methylated Positions from Step 4
+> - **bindingType: StartSite**
+> - promoter region defined as upstream **bindingRegionStart:-5000** 
+> - downstream 3000 from TSS (transcription start sites) **bindingRegionEnd:3000**
+> - **Additional Column of Score:8** optional value if it is required 
+> 2. **Cut** {% icon tool %}  "gene_name" Column from Table of Annotated Peaks to get List of Genes
+> - Cut columns: c16
+> - Delimited by: Tab
+> 3. **Remove beginning** {% icon tool %} of Gene List
+> - Remove first: 1
+> 4. Convert List of Genes to List of  entrez ID using **clusterProfiler bitr** {% icon tool %}
+> - Input Type Gene ID: SYMBOL
+> - Output Type Gene ID: ENTREZID
+> 5. Run GO Enrichment Analysis of a gene set with **clusterProfiler go** {% icon tool %}
+>
+> > ### {% icon tip %} Tip: Biological id translator
+> >  No matter what ID we need, this tool allows various conversions suitable for different databases and annotations.
+> >    {: .tip}
+{: .hands_on}
+
+ID  | Description | pvalue | qvalue | geneID | Count
+--- | ---  | --- | --- | --- | --- 
+GO:0048732 | gland development  | 1.38E-58 | 4.23E-55 | PTGS2 / KCNC1 / FZD1 /SLC22A18 /SLC22A3 (...) | 372
+GO:1901652 | response to peptide | 3.99E-57 | 8.13E-54 | SULF1/ LAMA5/ MED1 /CFLAR/ MSX2 (...) | 359
+GO:0048545 | response to steroid hormone | 1.38EE-54 | 2.11E-51 | HDAC9/ RAB10/ CFLAR/ WDTC1 (...) | 394
+
 
 # Conclusion
 {:.no_toc}
 
 Epigenetic aberrations which involve DNA modifications give researchers an interest to identify novel non-genetic factors responsible for complex human phenotypes such as height, weight, and disease. To identify methylation changes researchers need to perform complicated and  time consuming computational analysis. Here, the EWAS suite becomes a solution for this inconvenience and provides a simplified downstream analysis available as ready to run pipline in supplementary materials. 
+
