@@ -42,15 +42,15 @@ The first step of EWAS data anylalysis is raw methylation data loading (intensit
 {: .hands_on}
 >	> ### {% icon question %} Questions
 >	>
->	>How are the Green and Red signals are stored?
->       >	>### {% icon solution %} Solution 
+>	> How are the Green and Red signals are stored?
+>	> 	> ### {% icon solution %} Solution 
 >	>	>
 >	>	>
 >	>	> Green and Red micro arrays are builded up into `RGChannelSet` 
 >	>	{: .solution}
 >	>
 >  {: .question}  
-
+>
 # Step 2: Preprocessing and  Quality Assessment
 Preprocessing and data quality assurance is an important step in Infinium Methylation Assay analysis. 
 `RGChannelSet` represents two color data with a green and a red channel and can be converted into methylated and unmethylated signals assigned to `MethylSet` or into Beta values build in `RatioSet`. User can convert from `RGChannelSet` into `MethylSet` using the **minfi mset** {% icon tool %} or compute Beta values using **minfi set** {% icon tool %}. The **minfi qc** {% icon tool %} tool extracts and plots the quality control data frame with two columns mMed and uMed which are the medians of `MethylSet` signals (Meth and Unmeth).Comparing them against one another allows user to detect and remove low-quality samples. 
