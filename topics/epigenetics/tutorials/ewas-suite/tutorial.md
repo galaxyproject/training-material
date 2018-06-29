@@ -128,6 +128,10 @@ In addition to downstream analysis users can annotate the differentially methyla
 > >    {: .tip}
 {: .hands_on}
 
+>    ![Functional annotations](../../images/funcann.pdf)
+
+
+
 ID  | Description | pvalue | qvalue | geneID | Count
 --- | ---  | --- | --- | --- | --- 
 GO:0048732 | gland development  | 1.38E-58 | 4.23E-55 | PTGS2 / KCNC1 / FZD1 /SLC22A18 /SLC22A3 (...) | 372
