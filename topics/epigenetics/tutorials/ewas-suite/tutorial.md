@@ -29,7 +29,7 @@ GSM1588707 | resistant   | BRAFi
 > 
 {: .agenda}
 
-# Step 1: Illumina Array Data Loading
+# 450K Array Data Upload
 
 The first step of EWAS data anylalysis is raw methylation data loading (intensity information files  for each two color micro array)
 
@@ -40,15 +40,15 @@ The first step of EWAS data anylalysis is raw methylation data loading (intensit
 > 3. Run **minfi read450k**  {% icon tool %} with red and green .IDAT files i.e. `red files:` GSM1588704_8795207135_R01C02_Red.idat, GSM1588705_8795207119_R05C02_Red.idat, GSM1588706_8795207135_R02C02_Red.idat, GSM1588707_8795207119_R06C02_Red.idat and `green files:` GSM1588704_8795207135_R01C02_Grn.idat, GSM1588705_8795207119_R05C02_Grn.idat, GSM1588706_8795207135_R02C02_Grn.idat, GSM1588707_8795207119_R06C02_Grn.idat
 > 4. Inspect generated set of data
 {: .hands_on}
-> ### {% icon question %} Questions
->
-> 1. How are the Green and Red signals are stored?
->  <details>
->    <summary>Click to view answers</summary>
->    <ol type="1">
->    <li> Green and Red micro arrays are builded up into `RGChannelSet` class</li>
->    </ol>
->   </details>
+>	> ### {% icon question %} Questions
+>	>
+>	>How are the Green and Red signals are stored?
+>       >	>### {% icon solution %} Solution 
+>	>	>
+>	>	>
+>	>	> Green and Red micro arrays are builded up into `RGChannelSet` 
+>	>	{: .solution}
+>	>
 >  {: .question}  
 
 # Step 2: Preprocessing and  Quality Assessment
