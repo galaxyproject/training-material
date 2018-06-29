@@ -78,7 +78,7 @@ A widely used database for common contaminants is the **c**ommon **R**epository 
 >  > 1. The cRAP database contains some human proteins. What does it mean if you identify those typical contaminants in a human sample?
 >  > 2. What does it mean in a non-human sample?
 >  >
->  >  > ### {% icon solution %} Answer
+>  >  > ### {% icon solution %} Solution
 >  >  > 1. In samples stemming from a human source, identified human contaminants do not necessarily mean a contaminated sample. The proteins may as well originate from the research study sample. Users are advised to use discretion when interpreting the data.
 >  >  > 2. In samples from non-human sources, identified human contaminants do mean contamination by the experimenter.
 >  >  {: .solution }
