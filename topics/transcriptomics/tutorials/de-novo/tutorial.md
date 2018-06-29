@@ -11,7 +11,7 @@ The data provided here are part of a Galaxy tutorial that analyzes RNA-seq data 
 
 # Analysis strategy
 
-The goal of this exercise is to identify what transcripts are present in the G1E and megakaryocyte cellular states and which transcripts are differentially expressed between the two states. We will use a *de novo* transcript reconstruction strategy to infer transcript structures from the mapped reads in the absence of the actual annotated transcript structures. This will allow us to identify novel transcripts and novel isoforms of known transcripts, as well as identify differentially expressed transcripts.
+The goal of this exercise is to identify what transcripts are present in the G1E and megakaryocyte cellualr states and which transcripts are differentially expressed between the two states. We will use a *de novo* transcript reconstruction strategy to infer transcript structures from the mapped reads in the absence of the actual annotated transcript structures. This will allow us to identify novel transcripts and novel isoforms of known transcripts, as well as identify differentially expressed transcripts.
 
 > ### Agenda
 >
@@ -136,25 +136,25 @@ Spliced mappers have been developed to efficiently map transcript-derived reads 
 
 > ### {% icon hands_on %} Hands-on: Spliced mapping
 >
-> 1. **HISAT** {% icon tool %}: Run `HISAT` on one forward/reverse read pair and modify the following settings:
->    - **Single end or paired reads?**: Individual paired-end reads
+> 1. **HISAT2** {% icon tool %}: Run `HISAT2` on one forward/reverse read pair and modify the following settings:
 >    - **Source for the reference genome to align against**: Use a built-in genome > Mouse (Mus Musculus): mm10
+>    - **Single end or paired reads?**: Individual paired-end reads
 >    - **Spliced alignment parameters**: Specify spliced alignment parameters
->    - **Specify strand-specific information**: First Strand (R/RF)
+>    - **Specify strand-specific information**: Unstranded/Forward/Reverse 
 >    - **Transcriptome assembly reporting**: Report alignments tailored for transcript assemblers including StringTie.
+>       ![HISAT2 options and parameters](../../images/hisat2.1.png)
+>     
 >
->       ![HISAT tool input and parameters](../../images/hisat_tool_form.png)
->
-> 2. **HISAT** {% icon tool %}: Run `HISAT` on the remaining forward/reverse read pairs with the same parameters.
+> 2. **HISAT2** {% icon tool %}: Run `HISAT2` on the remaining forward/reverse read pairs with the same parameters.
 >
 {: .hands_on}
 
 # De novo transcript reconstruction
-Now that we have mapped our reads to the mouse genome with `HISAT`, we want to determine transcript structures that are represented by the aligned reads. This is called *de novo* transcriptome reconstruction. This unbiased approach permits the comprehensive identification of all transcripts present in a sample, including annotated genes, novel isoforms of annotated genes, and novel genes. While common gene/transcript databases are quite large, they are not comprehensive, and the *de novo* transcriptome reconstruction approach ensures complete transcriptome(s) identification from the experimental samples. The leading tool for transcript reconstruction is `Stringtie`. Here, we will use `Stringtie` to predict transcript structures based on the reads aligned by `HISAT`.
+Now that we have mapped our reads to the mouse genome with `HISAT`, we want to determine transcript structures that are represented by the aligned reads. This is called *de novo* transcriptome reconstruction. This unbiased approach permits the comprehensive identification of all transcripts present in a sample, including annotated genes, novel isoforms of annotated genes, and novel genes. While common gene/transcript databases are quite large, they are not comprehensive, and the *de novo* transcriptome reconstruction approach ensures complete transcriptome(s) identification from the experimental samples. The leading tool for transcript reconstruction is `Stringtie`. Here, we will use `Stringtie` to predict transcript structures based on the reads aligned by `HISAT2`.
 
 > ### {% icon hands_on %} Hands-on: Transcriptome reconstruction
 >
-> 1. **Stringtie** {% icon tool %}: Run `Stringtie` on the `HISAT` alignments using the default parameters.
+> 1. **Stringtie** {% icon tool %}: Run `Stringtie` on the `HISAT2` alignments using the default parameters.
 >    - Use batch mode to run all four samples from one tool form.
 > ![Stringtie input and parameters](../../images/Stringtie.png)
 {: .hands_on}
@@ -387,7 +387,7 @@ In this last section, we will convert our aligned read data from BAM format to b
 # Conclusion
 {:.no_toc}
 
-In this tutorial, we have analyzed RNA sequencing data to extract useful information, such as which genes are expressed in the G1E and megakaryocyte cellular states and which of these genes are differentially expressed between the two cellular states. In addition, we identified unannotated genes that are expressed in a cell-state dependent manner and at a locus with relevance to differentiation and development. To identify these transcripts, we analyzed RNA sequence datasets using a de novo transcriptome reconstruction RNA-seq data analysis approach. This approach can be summed up with the following scheme:
+In this tutorial, we have analyzed real RNA sequencing data to extract useful information, such as which genes are up- or down-regulated by depletion of the Pasilla gene and which genes are regulated by the Pasilla gene. To answer these questions, we analyzed RNA sequence datasets using a reference-based RNA-seq data analysis approach. This approach can be sum up with the following scheme:
 
 ![RNAseq de novo tutorial workflow](../../images/schematic_for_RNAseq_de_novo_tutorial.png)
 
