@@ -39,16 +39,18 @@ The first step of EWAS data anylalysis is raw methylation data loading (intensit
 > 2. Import Grn and Red .IDAT files from [Zenodo](https://zenodo.org/record/1251211#.WwREQ1Mvz-Y)
 > 3. Run **minfi read450k**  {% icon tool %} with red and green .IDAT files i.e. `red files:` GSM1588704_8795207135_R01C02_Red.idat, GSM1588705_8795207119_R05C02_Red.idat, GSM1588706_8795207135_R02C02_Red.idat, GSM1588707_8795207119_R06C02_Red.idat and `green files:` GSM1588704_8795207135_R01C02_Grn.idat, GSM1588705_8795207119_R05C02_Grn.idat, GSM1588706_8795207135_R02C02_Grn.idat, GSM1588707_8795207119_R06C02_Grn.idat
 > 4. Inspect generated set of data
->	> ### {% icon question %} Questions
->	>
->	> How are the Green and Red signals are stored?
->	>	
->	> > ### {% icon solution %} Solution 
->	>    > Green and Red micro arrays are builded up into `RGChannelSet` 
->	> {: .solution}
->	>
->	{: .question}  
 {: .hands_on}
+
+> ### {% icon question %} Questions
+>
+> How are the Green and Red signals are stored?
+>	
+> > ### {% icon solution %} Solution 
+>    > Green and Red micro arrays are builded up into `RGChannelSet` 
+> {: .solution}
+>
+{: .question}  
+
 # Preprocessing and  Quality Assessment
 Preprocessing and data quality assurance is an important step in Infinium Methylation Assay analysis. 
 `RGChannelSet` represents two color data with a green and a red channel and can be converted into methylated and unmethylated signals assigned to `MethylSet` or into Beta values build in `RatioSet`. User can convert from `RGChannelSet` into `MethylSet` using the **minfi mset** {% icon tool %} or compute Beta values using **minfi set** {% icon tool %}. The **minfi qc** {% icon tool %} tool extracts and plots the quality control data frame with two columns mMed and uMed which are the medians of `MethylSet` signals (Meth and Unmeth).Comparing them against one another allows user to detect and remove low-quality samples. 
@@ -74,13 +76,6 @@ Incomplete annotation of genetic variations such as single nucleotide polymorphi
 The main goal of the EWAS suite is to simplify the way differentially methylated loci sites are detected. The EWAS suite contains **minfi dmp** {% icon tool %} tool detecting differentially methylated positions (DMPs) with respect to a phenotype covariate, and more complex **minfi dmr** {% icon tool %} solution for finding differentially methylated regions (DMRs). Genomic regions that are differentially methylated between two conditions can be tracked using a bump hunting algorithm. The algorithm first implements a t-statistic at each methylated loci location, with optional smoothing, then groups probes into clusters with a maximum location gap and a cutoff size to refer the lowest possible value of genomic profile hunted by our tool.
 > ### {% icon hands_on %} Hands-on: DMPs and DMRs Identification
 >
-> > ### {% icon question %} Questions
-> > How are we define phenotype covariate?
-> > > ### {% icon solution %} Solution
-> > > Phenotype covariate is the set of observable characteristics of an individual resulting from the gene-environment interactions.</li>
-> > {: .solution}
->  {: .question}
->
 > 1. Import phenotypeTable.txt from [Zenodo](https://zenodo.org/record/1251211#.WwREQ1Mvz-Y)
 > 2. Run **minfi dmp** {% icon tool %} with 
 >    -  `GenomicRatioSet` from step4 and phenotypeTable.txt
@@ -103,6 +98,13 @@ The main goal of the EWAS suite is to simplify the way differentially methylated
 >
 {: .hands_on}
   
+> ### {% icon question %} Questions
+> How are we define phenotype covariate?
+> > ### {% icon solution %} Solution
+> > Phenotype covariate is the set of observable characteristics of an individual resulting from the gene-environment interactions.</li>
+> {: .solution}
+{: .question}
+
 # Annotation and Visualization
 In addition to downstream analysis users can annotate the differentially methylated loci to the promoter regions of genes with gene function description, and relationships between these concepts.
 
