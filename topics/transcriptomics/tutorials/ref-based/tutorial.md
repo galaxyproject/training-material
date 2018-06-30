@@ -27,11 +27,11 @@ contributors:
 # Introduction
 {:.no_toc}
 
-In the study of [Brooks *et al.* 2011](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3032923/), the *Pasilla* (*PS*) gene, *Drosophila* homologue of the Human splicing regulators Nova-1 and Nova-2 Proteins, was depleted in *Drosophila melanogaster* by RNAi. The authors wanted to identify exons that are regulated by *Pasilla* gene using RNA sequencing data.
+In the study of [Brooks *et al.* 2011](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3032923/), the *Pasilla* (*PS*) gene, which is the *Drosophila* homologue of the mammalian splicing regulators Nova-1 and Nova-2 proteins, was depleted in *Drosophila melanogaster* by RNA interference (RNAi). The authors wanted to identify exons regulated by the *Pasilla* gene using RNA sequencing data.
 
-Total RNA was isolated and used for preparing either single-end or paired-end RNA-seq libraries for treated (PS depleted) samples and untreated samples. These libraries were sequenced to obtain a collection of RNA sequencing reads for each sample. The effects of *Pasilla* gene depletion on splicing events can then be analyzed by comparison of RNA sequencing data of the treated (PS depleted) and the untreated samples.
+Total RNA was isolated and used to prepare either single-end or paired-end RNA-seq libraries for treated (PS depleted) and untreated samples. These libraries were sequenced to obtain RNA-seq reads for each sample. The effects of *Pasilla* gene depletion on splicing events could then be analyzed by comparison of the RNA-seq data for the treated and the untreated samples.
 
-The genome of *Drosophila melanogaster* is known and assembled. It can be used as reference genome to ease this analysis.  In a reference based RNA-seq data analysis, the reads are aligned (or mapped) against a reference genome, *Drosophila melanogaster* here, to significantly improve the ability to reconstruct transcripts and then identify differences of expression between several conditions.
+In a reference-based RNA-seq data analysis the reads are aligned (or mapped) against a reference genome. This significantly improves the ability to reconstruct transcripts and identify differences in expression between conditions. The genome of *Drosophila melanogaster* is known and assembled and it can be used as the reference genome in this analysis. Note that new versions of reference genomes may be released if the assembly improves, and the latest version of the *Drosophila melanogaster* reference genome assembly is Release 6 [(dm6)](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4383921/).
 
 > ### Agenda
 >
@@ -48,14 +48,14 @@ The genome of *Drosophila melanogaster* is known and assembled. It can be used a
 
 The original data is available at NCBI Gene Expression Omnibus (GEO) under accession number [GSE18508](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE18508).
 
-We will look at the 7 first samples:
+In this tutorial we will use the first 7 samples:
 
-- 3 treated samples with *Pasilla* (PS) gene depletion: [GSM461179](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM461179), [GSM461180](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM461180), [GSM461181](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM461181)
 - 4 untreated samples: [GSM461176](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM461176), [GSM461177](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM461177), [GSM461178](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM461178), [GSM461182](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM461182)
+- 3 treated samples (*Pasilla* gene depleted by RNAi): [GSM461179](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM461179), [GSM461180](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM461180), [GSM461181](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM461181)
 
 Each sample constitutes a separate biological replicate of the corresponding condition (treated or untreated). Moreover, two of the treated and two of the untreated samples are from a paired-end sequencing assay, while the remaining samples are from a single-end sequencing experiment.
 
-We have extracted sequences from the Sequence Read Archive (SRA) files to build FASTQ files.
+We have extracted sequences from the Sequence Read Archive (SRA) files to create FASTQ files.
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
@@ -74,9 +74,13 @@ We have extracted sequences from the Sequence Read Archive (SRA) files to build 
 >       {% include snippets/import_via_link.md %}
 >       {% include snippets/import_from_data_library.md %}
 >
-> 3. Rename the datasets according to the samples
-> 4. Check that the datatype is `fastqsanger` (**not** `fastq`).
->    If the datatype is `fastq`, please change the file type to `fastqsanger`
+>    > ### {% icon comment %} Comment
+>    > Note that these are the full files for the samples and ~1.5Gb each so it may take some minutes to import. (For a quicker run-through of the tutorial a small subset of each FASTQ file (~5Mb) can be found here https://zenodo.org/record/290221).
+>    {: .comment}
+>
+> 3. Click the pencil button on each dataset in the history and rename the file according to the sample id (e.g. `GSM461177_1`) 
+> 4. Check that the datatype is `fastqsanger` (e.g. **not** `fastq`).
+>    If the datatype is not `fastqsanger`, please change the datatype to `fastqsanger`
 >
 >    {% include snippets/change_datatype.md datatype="fastqsanger" %}
 >
@@ -86,25 +90,25 @@ We have extracted sequences from the Sequence Read Archive (SRA) files to build 
 >
 {: .hands_on}
 
-The sequences are raw data from the sequencing machine, without any pretreatments. They need to be assessed for their quality.
+The reads are raw data from the sequencing machine without any pretreatments. They need to be assessed for their quality.
 
 ## Quality control
 
-For quality control, we use similar tools as described in [NGS-QC tutorial]({{site.baseurl}}/topics/sequence-analysis): [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/) and [Trim Galore](https://www.bioinformatics.babraham.ac.uk/projects/trim_galore/).
+For quality control we will use similar tools as described in [NGS-QC tutorial]({{site.baseurl}}/topics/sequence-analysis): [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/) and [Trim Galore](https://www.bioinformatics.babraham.ac.uk/projects/trim_galore/).
 
 > ### {% icon hands_on %} Hands-on: Quality control
 >
-> 1. **FastQC** {% icon tool %}: Run FastQC on the FASTQ files to control the quality of the reads
+> 1. **FastQC** {% icon tool %}: Run FastQC on the FASTQ files to assess the quality of the reads
 >       - "Short read data from your current history"
 >           - Click on "Multiple datasets"
->           - Select all raw datasets
+>           - Select all the FASTQ datasets
 >
 >       > ### {% icon tip %} Tip
 >       >
->       > You can select several files by keeping the CTRL (or COMMAND) key pressed and clicking on the interesting files
+>       > You can select several files by keeping the CTRL (or COMMAND) key pressed and clicking on the files of interest
 >       {: .tip}
 >
-> 2. Inspect on the generated webpage for `GSM461177_1` sample
+> 2. Inspect the webpage for `GSM461177_1` sample
 >
 >    > ### {% icon question %} Questions
 >    >
