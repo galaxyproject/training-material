@@ -99,7 +99,7 @@ The main goal of the EWAS suite is to simplify the way differentially methylated
 > > ### {% icon tip %} Tip: Phenotype table
 > >
 > > Phenotype table can be in diffrent size with diffrent arguments only second column is required to contain phenotype covariate information for each sample. 
-> >   {: .tip}
+> {: .tip}
 >
 {: .hands_on}
   
@@ -125,10 +125,10 @@ In addition to downstream analysis users can annotate the differentially methyla
 >
 > > ### {% icon tip %} Tip: Biological id translator
 > >  No matter what ID we need, this tool allows various conversions suitable for different databases and annotations.
-> >    {: .tip}
+>    {: .tip}
 {: .hands_on}
 
->    ![Functional annotations](../../images/funcann.pdf)
+>    ![Functional annotations](../../images/funcann.jpg)
 
 
 
