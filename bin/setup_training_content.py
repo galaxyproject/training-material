@@ -139,7 +139,7 @@ def update_tutorial(args, tuto_dir, topic_dir):
     metadata = load_yaml(metadata_path)
     found = False
     for mat in metadata["material"]:
-        if mat["name"] == "tutorial1":
+        if mat["name"] == args.tutorial_name:
             mat["name"] = args.tutorial_name
             mat["title"] = args.tutorial_title
             mat["hands_on"] = args.tutorial_hands_on
@@ -150,6 +150,7 @@ def update_tutorial(args, tuto_dir, topic_dir):
         new_mat = collections.OrderedDict()
         new_mat["title"] = args.tutorial_title
         new_mat["name"] = args.tutorial_name
+        new_mat["type"] = 'tutorial'
         new_mat["zenodo_link"] = ''
         new_mat["hands_on"] = args.tutorial_hands_on
         new_mat["slides"] = args.tutorial_slides
