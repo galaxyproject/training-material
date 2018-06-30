@@ -11,7 +11,7 @@ tutorial_name: ewas-suite
 
 The field of cancer genomics has demonstrated the power of massively parallel sequencing techniques to inform on the genes and specific alterations that drive tumor onset and progression. Although large comprehensive sequence data sets continue to be made increasingly available, data analysis remains an ongoing challenge, particularly for laboratories lacking dedicated resources and bioinformatics expertise. To address this, we have provide training based on  Galaxy tools ewas suite that represent many popular algorithms for detecting somatic genetic alterations from cancer genome and exome data.  
 
-![epimechanism](../../images/Epigenetic_mechanisms.jpg)
+![epimechanism](../../images/Epigenetic_mechanisms.jpg "How epigenetics mechanism can effect health (adapted from https://commonfund.nih.gov/epigenomics/figure)")
 
 This exercise uses the dataset from the Cell publication by Hugo, Willy, et al., 2015 (DOI: 10.1016/j.cell.2015.07.061). The goal of this article was to identify differentially methylated regions and positions associated with treatment resistant melanomas.
 
@@ -20,7 +20,7 @@ To this end, Illumina 450K Methylation array was performed in melanoma tumors fr
 
 The Infinium Methylation Assay 450k uses two different bead types to detect changes in DNA methylation levels. In the figure we can see M - methylated and U - unmethylated bead types. In our study unmethylated and methylated bead signals are reported as green and red colors respectively.
 
- ![methassay](../../images/methylationassay.png)
+ ![methassay](../../images/methylationassay.png "Infinium Methylation Assay Overview (adapted from https://emea.illumina.com/science/technology/beadarray-technology/infinium-methylation-assay.html?langsel=/gb/)")
 
 
 Accession  | Sensitivity | Treatment
@@ -75,7 +75,7 @@ Preprocessing and data quality assurance is an important step in Infinium Methyl
 > 
 {: .hands_on}
 
-> ![Quality Control](../../images/qcplot.png)
+![Quality Control](../../images/qcplot.png "Quality control plot")
 
 # Removing probes affected by genetic variation
 Incomplete annotation of genetic variations such as single nucleotide polymorphism (SNP) may affect DNA measurements and interfere results from downstream analysis. 
@@ -120,7 +120,7 @@ The main goal of the EWAS suite is to simplify the way differentially methylated
 > > Phenotype covariate is the set of observable characteristics of an individual resulting from the gene-environment interactions.</li>
 > {: .solution}
 {: .question}
-> ![Display at UCSC](../../images/ucsc.png)
+> ![Display at UCSC](../../images/ucsc.png "UCSC genome track showing differentialy methylated regions located on chromosome 6")
 # Annotation and Visualization
 In addition to downstream analysis users can annotate the differentially methylated loci to the promoter regions of genes with gene function description, and relationships between these concepts.
 
@@ -146,7 +146,7 @@ In addition to downstream analysis users can annotate the differentially methyla
 >    {: .tip}
 {: .hands_on}
 
->    ![Functional annotations](../../images/funcann.jpg)
+>    ![Functional annotations](../../images/funcann.jpg, "Results of GO enrichments analysis for DMPs)
 
 
 
