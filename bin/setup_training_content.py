@@ -2,11 +2,9 @@
 import argparse
 import collections
 import os
-import oyaml as yaml
-import requests
 import shutil
-
 from pathlib import Path
+import oyaml as yaml
 
 
 class MyDumper(yaml.Dumper):
@@ -20,7 +18,7 @@ def load_yaml(filepath):
     Load the content of a YAML file to a dictionary
 
     :param filepath: path to a YAML file
-    
+
     :return: dictionary with the content of the YAML file
     '''
     with open(filepath, "r") as m_file:
@@ -53,18 +51,18 @@ def change_topic_name(filepath):
     '''
     with open(filepath, "r") as in_f:
         content = in_f.read()
-        
+
     content = content.replace("your_topic", args.topic_name)
     content = content.replace("your_tutorial_name", "tutorial1")
 
     with open(filepath, 'w') as out_f:
         out_f.write(content)
-    
+
 
 def create_topic(args, topic_dir, template_dir):
     '''
     Create the skeleton of a new topic:
-    
+
     1. copy templates
     2. update the index.md to match your topic's name
     3. fill the metadata
@@ -91,7 +89,7 @@ def create_topic(args, topic_dir, template_dir):
     metadata['summary'] = args.topic_summary
 
     save_to_yaml(metadata, metadata_path)
-    
+
     # update the metadata in top of tutorial.md and slides.html
     tuto_path = topic_dir / Path("tutorials") / Path("tutorial1")
     hand_on_path = tuto_path / Path("tutorial.md")
@@ -116,7 +114,7 @@ def update_tuto_file(filepath, keep, args):
     if keep:
         with open(filepath, "r") as in_f:
             content = in_f.read()
-        
+
         content = content.replace("your_topic", args.topic_name)
         content = content.replace("your_tutorial_name", args.tutorial_name)
 
@@ -124,7 +122,7 @@ def update_tuto_file(filepath, keep, args):
             out_f.write(content)
 
     elif filepath.is_file():
-        filepath.unlink()    
+        filepath.unlink()
 
 
 def update_tutorial(args, tuto_dir, topic_dir):
@@ -147,7 +145,7 @@ def update_tutorial(args, tuto_dir, topic_dir):
             mat["hands_on"] = args.tutorial_hands_on
             mat["slides"] = args.tutorial_slides
             found = True
-    
+
     if not found:
         new_mat = collections.OrderedDict()
         new_mat["title"] = args.tutorial_title
@@ -169,7 +167,7 @@ def update_tutorial(args, tuto_dir, topic_dir):
     # update the metadata in top of tutorial.md or remove it if not needed
     hand_on_path = tuto_dir / Path("tutorial.md")
     update_tuto_file(hand_on_path, args.tutorial_hands_on, args)
-    
+
     # update the metadata in top of slides.md or remove it if not needed
     slides_path = tuto_dir / Path("slides.html")
     update_tuto_file(slides_path, args.tutorial_slides, args)
@@ -199,7 +197,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Create the skeleton for a new topic and/or a new tutorial')
     parser.add_argument('--topic_name', help='Name (directory name) of the topic to create or in which the tutorial should be create', required=True)
     parser.add_argument('--topic_title', help='Title of the topic to create', default='Title of the topic', required=False)
-    parser.add_argument('--topic_target', help='Target of the topic', default='use', choices=['use','admin-dev','instructors'], required=False)
+    parser.add_argument('--topic_target', help='Target of the topic', default='use', choices=['use', 'admin-dev', 'instructors'], required=False)
     parser.add_argument('--topic_summary', help='Summary of the topic', default='Summary of the topic', required=False)
     parser.add_argument('--tutorial_name', help='Name (directory name) of the new tutorial to create (it will be the directory name)', required=False)
     parser.add_argument('--tutorial_title', help='Title of the new tutorial', default='Title of the tutorial', required=False)
@@ -225,4 +223,3 @@ if __name__ == '__main__':
         else:
             print("The tutorial {} in topic {} already exists. It will be updated with the other arguments".format(args.tutorial_name, args.topic_name))
             update_tutorial(args, tuto_dir, topic_dir)
-            
