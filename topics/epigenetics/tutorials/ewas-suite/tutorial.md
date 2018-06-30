@@ -66,6 +66,9 @@ Preprocessing and data quality assurance is an important step in Infinium Methyl
 >    {: .tip}
 > 
 {: .hands_on}
+
+> ![Quality Control](../../images/qcplot.png)
+
 # Removing probes affected by genetic variation
 Incomplete annotation of genetic variations such as single nucleotide polymorphism (SNP) may affect DNA measurements and interfere results from downstream analysis. 
 > ### {% icon hands_on %} Hands-on: Removing probes affected by genetic variation
