@@ -261,7 +261,7 @@
   <p>For information about Velvet, you can check its (nice) <a href="https://en.wikipedia.org/wiki/Velvet_assembler">Wikipedia page</a>.</p>
 </blockquote>
 
-<p>For this tutorial, we have a set of reads from an imaginary <em>Staphylococcus aureus</em> bacterium with a miniature genome (197,394 bp). Our mutant strain read set was sequenced with whole genome shotgun method, using an Illumina DNA sequencing instrument. From these reads, we would like to rebuild our imaginary <em>Staphylococcus aureus</em> bacterium via a <em>de novo</em> assembly of a short read set using the Velvet assembler.</p>
+<p>For this tutorial, we have a set of reads from an imaginary <em>Staphylococcus aureus</em> bacterium with a miniature genome (197,394 bp). Our mutant strain read set was sequenced with the whole genome shotgun method, using an Illumina DNA sequencing instrument. From these reads, we would like to rebuild our imaginary <em>Staphylococcus aureus</em> bacterium via a <em>de novo</em> assembly of a short read set using the Velvet assembler.</p>
 
 <blockquote class="agenda">
   <h3 id="agenda">Agenda</h3>
@@ -307,9 +307,9 @@
       </blockquote>
     </li>
     <li>
-      <p>Change the name of the files to <code class="highlighter-rouge">mutant_R1</code> and <code class="highlighter-rouge">mutant_R2</code></p>
+      <p>Change the name of the files to <code class="highlighter-rouge">mutant_R1</code> and <code class="highlighter-rouge">mutant_R2</code>.</p>
 
-      <p>As default, Galaxy uses the link as the name of the new dataset. It also does not link the dataset to a database or a reference genome.</p>
+      <p>As a default, Galaxy uses the link as the name of the new dataset. It also does not link the dataset to a database or a reference genome.</p>
 
       <blockquote class="tip">
         <h3 id="-tip-changing-the-name-of-a-dataset"><i class="fa fa-lightbulb-o" aria-hidden="true"></i> Tip: Changing the name of a dataset</h3>
@@ -323,7 +323,7 @@
       <figure id="figure-1"><img src="../../images/starting_history.png" alt="Imported datasets will appear in the history panel" title="Imported datasets in the history panel" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Imported datasets in the history panel</figcaption></figure>
     </li>
     <li>
-      <p>Inspect the content of a file</p>
+      <p>Inspect the content of a file.</p>
 
       <blockquote class="tip">
         <h3 id="-tip-inspecting-the-content-of-a-dataset"><i class="fa fa-lightbulb-o" aria-hidden="true"></i> Tip: Inspecting the content of a dataset</h3>
@@ -345,8 +345,8 @@
             <blockquote class="solution">
               <h3 id="-solution"><i class="fa fa-eye" aria-hidden="true"></i> Solution</h3>
               <ol>
-                <li>Each sequence in a FASTQ file is represented into 4 lines: 1st line with the id, 2nd line with the sequence, 3rd line with no information here, 4th line with quality of sequencing per nucleotide</li>
-                <li>In a FASTQ file, not only the sequences are present but also information about the quality of sequencing</li>
+                <li>Each sequence in a FASTQ file is represented by 4 lines: 1st line is the id, 2nd line is the sequence, 3rd line is not used, and 4th line is the quality of sequencing per nucleotide</li>
+                <li>In a FASTQ file, not only are the sequences present, but information about the quality of sequencing is also included.</li>
               </ol>
             </blockquote>
           </li>
@@ -362,19 +362,19 @@
 <blockquote class="question">
   <h3 id="-question"><i class="fa fa-question-circle" aria-hidden="true"></i> Question</h3>
 
-  <p>Why do we have 2 files here if we only sequenced once the bacteria?</p>
+  <p>Why do we have 2 files here if we only sequenced the bacteria once?</p>
 
   <blockquote class="solution">
     <h3 id="-solution-1"><i class="fa fa-eye" aria-hidden="true"></i> Solution</h3>
     <ol>
-      <li>The bacteria has been sequenced using paired-end sequencing. The first file correspond to forward reads and the second file to reverse reads</li>
+      <li>The bacteria has been sequenced using paired-end sequencing. The first file corresponds to forward reads and the second file to reverse reads.</li>
     </ol>
   </blockquote>
 </blockquote>
 
 <h1 id="evaluate-the-input-reads">Evaluate the input reads</h1>
 
-<p>The first questions you might ask about your input reads (before doing any assembly) include:</p>
+<p>Before doing any assembly, the first questions you should ask about your input reads include:</p>
 
 <ul>
   <li>What is the coverage of my genome?</li>
@@ -404,16 +404,16 @@
 
 </blockquote>
 
-<p>MultiQC generates a webpage combining the report of FastQC on both datasets. It is including graphs and tables:</p>
+<p>MultiQC generates a webpage combining reports for FastQC on both datasets. It includes these graphs and tables:</p>
 
 <ul>
   <li>
     <p>General statistics</p>
 
-    <p>It will be important in setting maximum k-mer size value for assembly</p>
+    <p>This is important in setting maximum k-mer size for an assembly.</p>
 
     <blockquote class="tip">
-      <h3 id="-tip-having-the-length-of-sequences"><i class="fa fa-lightbulb-o" aria-hidden="true"></i> Tip: Having the length of sequences</h3>
+      <h3 id="-tip-getting-the-length-of-sequences"><i class="fa fa-lightbulb-o" aria-hidden="true"></i> Tip: Getting the length of sequences</h3>
 
       <ul>
         <li>Click on <strong>Configure Columns</strong></li>
@@ -434,7 +434,7 @@
             <h3 id="-solution-2"><i class="fa fa-eye" aria-hidden="true"></i> Solution</h3>
             <ol>
               <li>The sequences are 150 bp long</li>
-              <li>We have 2 x 12,480 sequences of 150 bp long. So the average genome coverage is: 2 * 12480 * 150 / 197394 ~ 19 X</li>
+              <li>We have 2 x 12,480 sequences of 150 bp, so the average genome coverage is: 2 * 12480 * 150 / 197394, or approximately 19 X coverage.</li>
             </ol>
           </blockquote>
         </li>
@@ -444,7 +444,7 @@
   <li>
     <p>Sequence Quality Histograms</p>
 
-    <p>Dips in quality near the beginning, middle or end of the reads: determines possible trimming/cleanup methods and parameters and may indicate technical problems with the sequencing process/machine run</p>
+    <p>Dips in quality near the beginning, middle or end of the reads may determine the trimming/cleanup methods and parameters to be used, or may indicate technical problems with the sequencing process/machine run.</p>
 
     <figure id="figure-2"><img src="../../images/fastqc_per_base_sequence_quality_plot.png" alt="Sequence Quality Histograms with the mean quality value across each base position in the read" title="The mean quality value across each base position in the read" /><figcaption><span class="figcaption-prefix">Figure 2:</span> The mean quality value across each base position in the read</figcaption></figure>
 
@@ -459,20 +459,29 @@
           <blockquote class="solution">
             <h3 id="-solution-3"><i class="fa fa-eye" aria-hidden="true"></i> Solution</h3>
             <ol>
-              <li>The y-axis represents the quality score for each base (an estimate of the error during sequencing)</li>
-              <li>The quality score is decreasing accross the length of the reads because the sequencing become less and less reliable at the end of the reads</li>
+              <li>The y-axis represents the quality score for each base (an estimate of the error during sequencing).</li>
+              <li>The quality score is decreasing accross the length of the reads because the sequencing become less and less reliable at the end of the reads.</li>
             </ol>
           </blockquote>
         </li>
       </ol>
     </blockquote>
   </li>
-  <li>Per Sequence GC Content
-  High GC organisms don’t tend to assemble well and may have an uneven read coverage distribution.</li>
-  <li>Per Base N Content
-  Presence of large numbers of Ns in reads: may point to poor quality sequencing run. You would need to trim these reads to remove Ns.</li>
-  <li>Kmer content
-  Presence of highly recurring k-mers: may point to contamination of reads with barcodes or adapter sequences.</li>
+  <li>
+    <p>Per Sequence GC Content</p>
+
+    <p>High GC organisms tend not to assemble well and may have an uneven read coverage distribution.</p>
+  </li>
+  <li>
+    <p>Per Base N Content</p>
+
+    <p>The presence of large numbers of Ns in reads may point to a poor quality sequencing run. You will need to trim these reads to remove Ns.</p>
+  </li>
+  <li>
+    <p>k-mer content</p>
+
+    <p>The presence of highly recurring k-mers may point to contamination of reads with barcodes or adapter sequences.</p>
+  </li>
 </ul>
 
 <blockquote class="comment">
@@ -500,7 +509,7 @@
         <li>“Right-hand mates” to <code class="highlighter-rouge">mutant_R2.fastq</code></li>
       </ul>
 
-      <p>Currently our paired-end reads are into 2 files (one with the forward reads and one with the reverse reads). But Velvet requires only one file where each read is next to its mate read. In other words, if the reads are indexed from 0, then reads 0 and 1 are paired, 2 and 3, 4 and 5, etc. Before doing the assembly <em>per se</em>, we need to prepare the files by combining them.</p>
+      <p>Currently our paired-end reads are in 2 files (one with the forward reads and one with the reverse reads), but Velvet requires only one file, where each read is next to its mate read. In other words, if the reads are indexed from 0, then reads 0 and 1 are paired, 2 and 3, 4 and 5, etc. Before doing the assembly <em>per se</em>, we need to prepare the files by combining them.</p>
     </li>
     <li><strong>velveth</strong> <i class="fa fa-wrench" aria-hidden="true"></i> with the following parameters
       <ul>
@@ -519,18 +528,18 @@
         <li>“Using Paired Reads” to <code class="highlighter-rouge">Yes</code></li>
       </ul>
 
-      <p>This tool does the assembly <em>per se</em>.</p>
+      <p>This last tool actually does the assembly.</p>
     </li>
   </ol>
 </blockquote>
 
-<p>2 files are generated:</p>
+<p>Two files are generated:</p>
 
 <ul>
   <li>
     <p>A “Contigs” file</p>
 
-    <p>This file contains the sequences of the contigs longer than 2k. In the header of each contig, several information is added</p>
+    <p>This file contains the sequences of the contigs longer than 2k. In the header of each contig, a bit of information is added:</p>
     <ul>
       <li>the k-mer length (called “length”): For the value of k chosen in the assembly, a measure of how many k-mers overlap (by 1 bp each overlap) to give this length</li>
       <li>the k-mer coverage (called “coverage”): For the value of k chosen in the assembly, a measure of how many k-mers overlap each base position (in the assembly).</li>
@@ -541,7 +550,7 @@
   <li>
     <p>A “Stats” file</p>
 
-    <p>It is tabular file with for each contigur the k-mer lengths, k-mer coverages and other measures.</p>
+    <p>This is a tabular file giving for each contig the k-mer lengths, k-mer coverages and other measures.</p>
 
     <p><img src="../../images/image11.png" alt="Contigs stats output" /></p>
   </li>
@@ -553,7 +562,7 @@
   <h3 id="-question-1"><i class="fa fa-question-circle" aria-hidden="true"></i> Question</h3>
 
   <ol>
-    <li>How many contigs has been built?</li>
+    <li>How many contigs have been built?</li>
     <li>
       <p>What is the mean, min and max length of the contigs?</p>
 
@@ -561,14 +570,14 @@
         <h3 id="-solution-4"><i class="fa fa-eye" aria-hidden="true"></i> Solution</h3>
         <ol>
           <li>190</li>
-          <li>To compute this information, we can use the Datamash tool and do operation on the 2nd columns (length). But be careful with the first line: the header. As a result, we obtain: 597.82 as mean, 1 as min and 12904 as max. It would mean that the smallest contig has a length of 1 bp, even smaller than k. The length on the 2nd column correspond to length of the contig in k-mers. It means that the smallest contig has a length of 1k = 29. So to obtain the real length, we need to add k-1 to the length. We obtain then a mean contig length of 625.82 bp, a min contig of 29 bp and a max contig of 12,932 bp</li>
+          <li>To compute this information, we can use the Datamash tool on the 2nd columns (length). Be careful with the first line, the header. As a result, we obtain: 597.82 as mean, 1 as min and 12904 as max. It would mean that the smallest contig has a length of 1 bp, even smaller than k. The length on the 2nd column corresponds to length of the contig in k-mers. This means that the smallest contig has a length of 1k = 29. So to obtain the real length, we need to add k-1 to the length. We then obtain a mean contig length of 625.82 bp, a min contig of 29 bp and a max contig of 12,932 bp.</li>
         </ol>
       </blockquote>
     </li>
   </ol>
 </blockquote>
 
-<p>But we are quite limited with this table. We will now collect more basic statistics on our assembly.</p>
+<p>This table is limitted, but we will now collect more basic statistics on our assembly.</p>
 
 <blockquote class="hands_on">
   <h3 id="-hands-on-collect-fasta-statistics-on-our-contigs"><i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Collect fasta statistics on our contigs</h3>
@@ -609,9 +618,9 @@
 <p>The HTML report reports many statistics computed by QUAST to assess the quality of the assembly:</p>
 
 <ul>
-  <li>Statistics about the quality of the assembly when compare to the reference (fraction of the genome, duplication ratio, etc)</li>
+  <li>Statistics about the quality of the assembly when compared to the reference (fraction of the genome, duplication ratio, etc)</li>
   <li>
-    <p>Misassembly statistics with for example the number of misassemblies</p>
+    <p>Misassembly statistics, including the number of misassemblies</p>
 
     <p>A misassembly is a position in the contigs (breakpoints) that satisfy one of the following criteria:</p>
     <ul>
@@ -622,7 +631,7 @@
   </li>
   <li>Unaligned regions in the assembly</li>
   <li>Mismatches compared to the reference genomes</li>
-  <li>Statistics about the assembly <em>per se</em>, such as the number of contigs, the length of the largest contig</li>
+  <li>Statistics about the assembly <em>per se</em>, such as the number of contigs and the length of the largest contig</li>
 </ul>
 
 <blockquote class="question">
@@ -640,12 +649,12 @@
       <blockquote class="solution">
         <h3 id="-solution-6"><i class="fa fa-eye" aria-hidden="true"></i> Solution</h3>
         <ol>
-          <li>190 contigs have been constructed, but only 47 have a length &gt; 500 bp</li>
-          <li>The contigs represents 87.965 % of the reference genome</li>
-          <li>1 misassembly has been found: it correspond to a relocation, <em>i.e.</em> a misassembly event (breakpoint) where the left flanking sequence aligns over 1 kbp away from the right flanking sequence on the reference genome</li>
-          <li>8.06 mismatches per 100 kbp and 4.03 indels per 100 kbp are found</li>
-          <li>N50 is the length for which the collection of all contigs of that length or longer covers at least half an assembly. In other words, if contigs were ordered from small to large, half of all the nucleotides will be in contigs this size or larger. And L50 is the number of contigs equal to or longer than N50: L50 is the minimal number of contigs that cover half the assembly</li>
-          <li>The GC % in the assembly is 33.64%, really similar to the one of the reference genome (33.43%)</li>
+          <li>190 contigs have been constructed, but only 47 have a length &gt; 500 bp.</li>
+          <li>The contigs represents 87.965% of the reference genome.</li>
+          <li>1 misassembly has been found: it corresponds to a relocation, <em>i.e.</em> a misassembly event (breakpoint) where the left flanking sequence aligns over 1 kbp away from the right flanking sequence on the reference genome.</li>
+          <li>8.06 mismatches per 100 kbp and 4.03 indels per 100 kbp are found.</li>
+          <li>N50 is the length for which the collection of all contigs of that length or longer covers at least half an assembly. In other words, if contigs were ordered from small to large, half of all the nucleotides will be in contigs this size or larger. And L50 is the number of contigs equal to or longer than N50: L50 is the minimal number of contigs that cover half the assembly.</li>
+          <li>The GC % in the assembly is 33.64%, really similar to the one of the reference genome (33.43%).</li>
         </ol>
       </blockquote>
     </li>
@@ -668,7 +677,7 @@
   </ol>
 </blockquote>
 
-<p>We have completed an assembly on this data set for a number of k values ranging from 29 to 101. The results a few of the assembly metrics appear below.</p>
+<p>We have completed an assembly on this data set for a number of k values ranging from 29 to 101. A few of the assembly metrics appear below.</p>
 
 <figure id="figure-3"><img src="../../images/number_of_contigs.png" alt="contigs" title="Number of contigs in the assembly for various k-mer sizes" /><figcaption><span class="figcaption-prefix">Figure 3:</span> Number of contigs in the assembly for various k-mer sizes</figcaption></figure>
 
