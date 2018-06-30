@@ -1,0 +1,156 @@
+﻿id: ewas-suite
+name: ewas-suite
+description: Epigenome-wide association studies (EWAS) analyse genome-wide activity of epigenetic marks in  cohorts of different individuals to find associations between epigenetic variation and phenotype
+title_default: "EWAS data analysis"
+steps:
+  - title: Step 1 Load Example Dataset
+    element: '#shared a[href$="/library/index"]'
+    content: ' We load now the example dataset which will be used for the tutorial. Click on Shared Data.'
+    placement: left
+  - title: Step 2 Load Example Dataset
+    element: 'a[href$="/library/list"]'
+    content: >-
+      In the dropdown menu click on Data Libraries. In the new window search for
+      ewas-suite. 
+  - title: Step 3 Select all datasets available
+    element: '#select-all-checkboxes'
+    content: Select all checkboxes
+    placement: right
+  - title: Step 4 Import data to new history
+    element: >-
+      #center .library_style_container .d-flex.align-items-center mb-2
+      .form-inline .dropdown.mr-1 show .dropdown-menu.show
+      a[href$="/library/list"]
+    content: Send datasets to history
+    placement: right
+  - title: Step 5 Select multiple datasets (Red/Grn idat Files)
+    element: >-
+      #current-history-panel .controls .actions a[href$="javascript:void(0);"]
+      .fa.fa-check-square-o
+    content: >-
+      Click operations on multiple datasets and  Build Dataset List of Red and
+      Grn idat files
+    placement: left
+  - title: Step 6 UCSC Main on Human 450k
+    element: '#tool-search'
+    content: Download UCSC Main on Human 450k updated track for annotation
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner/data_source_redirect?tool_id=ucsc_table_direct1"]
+        .tool-old-link
+  - title: >-
+      Step 7 Load idat files into RGChannelSet containing raw intensities in the
+      green and red channels
+    element: '#tool-search'
+    content: >-
+      Click on the "minfi_read450k" tool to open it and select data collection
+      input (Grn idat Files list and Red idat Files list)
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=testtoolshed.g2.bx.psu.edu%2Frepos%2Fkpbioteam%2Fminfi_read450k%2Fminfi_read450k%2F2.1.0"]
+  - title: >-
+      Step 8 Create MethylSet objects contains only the methylated and
+      unmethylated signals
+    element: '#tool-search'
+    content: Click on the "minfi_mset" tool to run it on RGChannelSet
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=testtoolshed.g2.bx.psu.edu%2Frepos%2Fkpbioteam%2Fminfi_mset%2Fminfi_mset%2F0.1.0"]
+        .tool-old-link
+  - title: Step 10 Estimating quality with "minfi_qc"
+    element: '#tool-search'
+    content: To estimate data quality click on the "minfi_qc" tool
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=testtoolshed.g2.bx.psu.edu%2Frepos%2Fkpbioteam%2Fminfi_qc%2Fminfi_qc%2F0.1.0"]
+        .tool-old-link
+  - title: Step 10 Compute Beta values
+    element: '#tool-search'
+    content: >-
+      We will now create RSet object contain respectively the Beta value matrix,
+      M value matrix and the Copy Number matrix. Click on the "minfi_rset" to
+      run the tool
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=testtoolshed.g2.bx.psu.edu%2Frepos%2Fkpbioteam%2Fminfi_rset%2Fminfi_rset%2F0.1.0"]
+        .tool-old-link
+  - title: Step 11 Align Data to Reference Genome
+    element: '#tool-search'
+    content: >-
+      We will map now the imported dataset against a reference genome. Use
+      "minfi_maptogenome" tool.
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=testtoolshed.g2.bx.psu.edu%2Frepos%2Fkpbioteam%2Fminfi_maptogenome%2Fminfi_maptogenome%2F0.1.0"]
+  - title: Step 12 Annotating probes affected by genetic variation
+    element: '#tool-search'
+    content: >-
+      Incomplete annotation of genetic variations such as single nucleotide
+      polymorphism (SNP) may affect DNA measurements and interfere results from
+      downstream analysis. Click "minfi_dropsnp" to remove unwanted probes.
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=testtoolshed.g2.bx.psu.edu%2Frepos%2Fkpbioteam%2Fminfi_dropsnp%2Fminfi_dropsnp%2F0.1.0"]
+        .tool-old-link
+  - title: Step 13 Differentially Methylated Regions
+    element: '#tool-search'
+    content: >-
+      Click on the "minfi_dmr" tool to open it. Set Factor resistant vs.
+      sensitive, change settings cutoff for 0.1.
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=testtoolshed.g2.bx.psu.edu%2Frepos%2Fkpbioteam%2Fminfi_dmr%2Fminfi_dmr%2F0.1.0"]
+        .tool-old-link
+  - title: Step 14 Differentially Methylated Positions
+    element: '#tool-search'
+    content: Click "minfi_dmp" tool and use custom Genome Table obtained from UCSC
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=testtoolshed.g2.bx.psu.edu%2Frepos%2Fkpbioteam%2Fminfi_dmp%2Fminfi_dmp%2F0.1.0"]
+        .tool-old-link
+  - title: Step 15 Annotate Differentially Methylated Positions
+    element: '#tool-search'
+    content: Click "chipeakanno_annopeaks" to annotate data
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=testtoolshed.g2.bx.psu.edu%2Frepos%2Fkpbioteam%2Fchipeakanno_annopeaks%2Fchipeakanno_annopeaks%2F0.1.0"]
+  - title: Step 16 Cut "gene_name" Column (List of Genes)
+    element: '#tool-search'
+    content: Click "Cut" tool and select "c16"
+    placement: right
+    postclick:
+      - 'a[href$="/tool_runner?tool_id=Cut1"]'
+  - title: Step 17 Remove beginning of Gene List
+    element: '#tool-search'
+    content: Click "Remove beginning" tool to run
+    placement: right
+    postclick:
+      - 'a[href$="/tool_runner?tool_id=Remove+beginning1"] .tool-old-link'
+  - title: Step 18 Convert GENE SYMBOL to ENTREZID
+    element: '#tool-search'
+    content: Use "clusterProfiler_bitr" tool
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=testtoolshed.g2.bx.psu.edu%2Frepos%2Fkpbioteam%2Fclusterprofiler_bitr%2FclusterProfiler_bitr%2F0.1.0"]
+        .tool-old-link
+  - title: Step 19  Functional Annotation and Visualization
+    element: '#tool-search'
+    content: >-
+      Now we will click on "clusterProfiler_go" to run GO Enrichment Analysis of
+      a gene set.
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=testtoolshed.g2.bx.psu.edu%2Frepos%2Fkpbioteam%2Fclusterprofiler_go%2FclusterProfiler_go%2F0.1.0"]
+        .tool-old-link
