@@ -74,6 +74,28 @@ This can be done online via the GitHub interface or locally on your computer via
 
 # Create the directory for the tutorial
 
+Each training material is related to a topic. All training materials (slides, tutorials, ...) related to a topic are found in a dedicated directory (*e.g.* `transcriptomics` directory contains the material related to exome sequencing analysis). Each topic have the following structure:
+
+```
+├── README.md
+├── metadata.yaml
+├── images
+├── docker
+│   ├── Dockerfile
+├── slides
+│   ├── index.html
+├── tutorials
+│   ├── tutorial1
+│   │   ├── tutorial.md
+│   │   ├── slides.html
+│   │   ├── tools.yaml
+│   │   ├── data-library.yaml
+│   │   ├── workflows
+│   │   │   ├── workflow.ga
+│   │   ├── tours
+│   │   │   ├── tour.yaml
+```
+
 Once the topic has been chosen and you set up your contribution environment, you can create the tutorial. An ideal tutorial in the Galaxy Training Network contains:
 - a tutorial file `tutorial.md` written in Markdown with hands-on
 - an optional slides file `slides.md` in Markdown with slides to support the tutorial
