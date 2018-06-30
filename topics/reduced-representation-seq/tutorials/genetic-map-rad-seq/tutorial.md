@@ -1,6 +1,6 @@
 ---
 layout: tutorial_hands_on
-topic_name: sequence-analysis
+topic_name: reduced-representation-seq
 tutorial_name: genetic-map-rad-seq
 ---
 
@@ -35,40 +35,37 @@ The original data is available at [STACKS website](http://catchenlab.life.illino
 > 1. Create a new history for this RAD-seq exercise. 
 > 2. Import Fasta files from parents and 20 progeny.
 >
->    > ### {% icon comment %} Comments
->    > If you are using the [GenOuest Galaxy instance](https://galaxy.genouest.org), you can load the dataset using 'Shared Data' -> 'Data Libraries' -> '1 Galaxy teaching folder' -> 'EnginesOn' -> 'RADseq' -> 'Genetic map'
->    {: .comment}
+>    ```
+>    https://zenodo.org/record/1219888/files/female
+>    https://zenodo.org/record/1219888/files/male
+>    https://zenodo.org/record/1219888/files/progeny_1
+>    https://zenodo.org/record/1219888/files/progeny_2
+>    https://zenodo.org/record/1219888/files/progeny_3
+>    https://zenodo.org/record/1219888/files/progeny_4
+>    https://zenodo.org/record/1219888/files/progeny_5
+>    https://zenodo.org/record/1219888/files/progeny_6
+>    https://zenodo.org/record/1219888/files/progeny_7
+>    https://zenodo.org/record/1219888/files/progeny_8
+>    https://zenodo.org/record/1219888/files/progeny_9
+>    https://zenodo.org/record/1219888/files/progeny_10
+>    https://zenodo.org/record/1219888/files/progeny_11
+>    https://zenodo.org/record/1219888/files/progeny_12
+>    https://zenodo.org/record/1219888/files/progeny_13
+>    https://zenodo.org/record/1219888/files/progeny_14
+>    https://zenodo.org/record/1219888/files/progeny_15
+>    https://zenodo.org/record/1219888/files/progeny_16
+>    https://zenodo.org/record/1219888/files/progeny_17
+>    https://zenodo.org/record/1219888/files/progeny_18
+>    https://zenodo.org/record/1219888/files/progeny_19
+>    https://zenodo.org/record/1219888/files/progeny_20
+>    ```
 >
 >    > ### {% icon tip %} Tip: Importing data via links
 >    >
 >    > * Copy the link location
 >    > * Open the Galaxy Upload Manager
 >    > * Select **Paste/Fetch Data**
->    > * Paste the following links into the text field
->    >  ```
->    > https://zenodo.org/record/1219888/files/female
->    > https://zenodo.org/record/1219888/files/male
->    > https://zenodo.org/record/1219888/files/progeny_1
->    > https://zenodo.org/record/1219888/files/progeny_2
->    > https://zenodo.org/record/1219888/files/progeny_3
->    > https://zenodo.org/record/1219888/files/progeny_4
->    > https://zenodo.org/record/1219888/files/progeny_5
->    > https://zenodo.org/record/1219888/files/progeny_6
->    > https://zenodo.org/record/1219888/files/progeny_7
->    > https://zenodo.org/record/1219888/files/progeny_8
->    > https://zenodo.org/record/1219888/files/progeny_9
->    > https://zenodo.org/record/1219888/files/progeny_10
->    > https://zenodo.org/record/1219888/files/progeny_11
->    > https://zenodo.org/record/1219888/files/progeny_12
->    > https://zenodo.org/record/1219888/files/progeny_13
->    > https://zenodo.org/record/1219888/files/progeny_14
->    > https://zenodo.org/record/1219888/files/progeny_15
->    > https://zenodo.org/record/1219888/files/progeny_16
->    > https://zenodo.org/record/1219888/files/progeny_17
->    > https://zenodo.org/record/1219888/files/progeny_18
->    > https://zenodo.org/record/1219888/files/progeny_19
->    > https://zenodo.org/record/1219888/files/progeny_20
->    > ```
+>    > * Paste the previous links into the text field
 >    > * Press **Start**  
 >    {: .tip}
 >
@@ -87,59 +84,51 @@ Run `Stacks: De novo map` Galaxy tool. This program will run `ustacks`, `cstacks
 
 
 > ### {% icon hands_on %} Hands-On: Stacks: De novo map
-> **Stacks: De novo map** {% icon tool %}: Run Stacks selecting the Genetic map usage. Specify each parent as a sample in the appropriate box, then each of the 20 progeny and specify a CP Cross type, 3 for the Minimum number of identical raw reads required to create a stack, 3 for minimum number of identical raw reads required to create a stack in 'progeny' individuals, 3 for the number of mismatches allowed between loci when building the catalog and activate the option "remove, or break up, highly repetitive RAD-Tags in the ustacks program".
+> 1. **Stacks: De novo map** {% icon tool %}: Run Stacks selecting the Genetic map usage. Specify each parent as a sample in the appropriate box, then each of the 20 progeny and specify a CP Cross type, 3 for the Minimum number of identical raw reads required to create a stack, 3 for minimum number of identical raw reads required to create a stack in 'progeny' individuals, 3 for the number of mismatches allowed between loci when building the catalog and activate the option "remove, or break up, highly repetitive RAD-Tags in the ustacks program".
 >
 >    ![De novo map input](../../images/RAD2_Genetic_Map/denovomap_in.png)
->
->    Once Stacks has completed running, you will see 5 new data collections and 8 datasets.
->
->    ![The output of de novo map](../../images/RAD2_Genetic_Map/denovomap_out.png)
->
->    Investigate the output files: `result.log` and `catalog.*` (snps, alleles and tags).
->
->    Looking at the first file, `denovo_map.log`, you can see the command line used and the start as end execution time.
->
->    ![De novo map log file](../../images/RAD2_Genetic_Map/denovo_map_log_top.png)
->
->    Then are the different STACKS steps:
->
->    `ustacks`
->
->    ![De novo map:ustacks log](../../images/RAD2_Genetic_Map/denovo_map_log_ustacks.png)
->
->    `cstacks`
->
->    ![De novo map: cstacks](../../images/RAD2_Genetic_Map/denovo_map_log_cstacks.png)
->
->
->    > ### {% icon question %} Question
->    >
->    > 1. Can you identify the meanning of the number 425?
->    > 2. Looking at the catalog.tags file, identify specific and shared loci from each individual. Count the number of catalog loci coming from the first individual, from the second, and find on both parents.
->    >
->    > > ### {% icon solution %} Solution
->    > > 1. Here, the catalog is made with 459 tags, 425 coming from the "reference individual", a female. Some of these 425 can be shared with the other parent.
->    > > 2. 3500
->    > {: .solution }
->    {: .question}
->    `sstacks`
->
->    ![De novo map: sstacks log](../../images/RAD2_Genetic_Map/denovo_map_log_sstacks.png)
->
->
->    Lastly, `genotypes` is executed. It searches for markers identified on the parents and the associate progenies' haplotypes. If the first parent have a GA (ex: aatggtgtGgtccctcgtAc) and AC (ex: aatggtgtAgtccctcgtCc) haplotypes, and the second parent only a GA (ex: aatggtgtGgtccctcgtAc) haplotype, STACKS declares an ab/aa marker for this locus. Genotypes program then associate GA to a and AC to b and then scan progeny to determine which haplotype is found on each of them.
->
->    ![De novo map: genotypes log](../../images/RAD2_Genetic_Map/denovo_map_log_genotypes1.png)
->
->
->    ![De novo map: genotypes log](../../images/RAD2_Genetic_Map/denovo_map_log_genotypes2.png)
->
->
->    ![De novo map: genotypes log](../../images/RAD2_Genetic_Map/denovo_map_log_end.png)
->
->    Finally, 447 loci, markers, are kept to generate the `batch_1.genotypess_1.tsv` file. 459 loci are stored on the observed haplotype file `batch_1.haplotypes_1.tsv`.
->
 {: .hands_on}
+
+Once Stacks has completed running, you will see 5 new data collections and 8 datasets.
+- Investigate the output files: `result.log` and `catalog.*` (snps, alleles and tags).
+- Looking at the first file, `denovo_map.log`, you can see the command line used and the start as end execution time.
+    
+    ![De novo map log file](../../images/RAD2_Genetic_Map/denovo_map_log_top.png)
+
+- Then are the different STACKS steps:
+    - `ustacks`
+    
+        ![De novo map:ustacks log](../../images/RAD2_Genetic_Map/denovo_map_log_ustacks.png)
+
+    - `cstacks`
+        
+        ![De novo map: cstacks](../../images/RAD2_Genetic_Map/denovo_map_log_cstacks.png)
+        
+        
+        > ### {% icon question %} Question
+        >
+        > 1. Can you identify the meanning of the number 425?
+        > 2. Looking at the catalog.tags file, identify specific and shared loci from each individual. Count the number of catalog loci coming from the first individual, from the second, and find on both parents.
+        >
+        > > ### {% icon solution %} Solution
+        > > 1. Here, the catalog is made with 459 tags, 425 coming from the "reference individual", a female. Some of these 425 can be shared with the other parent.
+        > > 2. 3500
+        > {: .solution }
+        {: .question}
+  
+    - `sstacks`
+
+        ![De novo map: sstacks log](../../images/RAD2_Genetic_Map/denovo_map_log_sstacks.png)
+
+    - `genotypes`
+
+        Lastly, `genotypes` is executed. It searches for markers identified on the parents and the associate progenies' haplotypes. If the first parent have a GA (ex: aatggtgtGgtccctcgtAc) and AC (ex: aatggtgtAgtccctcgtCc) haplotypes, and the second parent only a GA (ex: aatggtgtGgtccctcgtAc) haplotype, STACKS declares an ab/aa marker for this locus. Genotypes program then associate GA to a and AC to b and then scan progeny to determine which haplotype is found on each of them.
+
+        ![De novo map: genotypes log](../../images/RAD2_Genetic_Map/denovo_map_log_genotypes1.png)
+        ![De novo map: genotypes log](../../images/RAD2_Genetic_Map/denovo_map_log_genotypes2.png)
+        ![De novo map: genotypes log](../../images/RAD2_Genetic_Map/denovo_map_log_end.png)
+
+Finally, 447 loci, markers, are kept to generate the `batch_1.genotypess_1.tsv` file. 459 loci are stored on the observed haplotype file `batch_1.haplotypes_1.tsv`.
 
 ### Matches files
 
@@ -173,8 +162,8 @@ We can then see that Stack_ID 330 for female corresponds to the 39 for male:
 # Genotypes determination
 
 > ### {% icon hands_on %} Hands-on: Stacks: Genotypes
-> **Stacks: genotypes** {% icon tool %}: Re-Run the last step of `Stacks: De novo map` pipeline specifying more options as:
->    > 1. The genetic map type (ie F1, F2 (left figure, F1xF1), Double Haploid, Back Cross (F1xF0), Cross Pollination (right figure, F1 or F2 but resulting from the cross of pure homozygous parents))
+> 1. **Stacks: genotypes** {% icon tool %}: Re-Run the last step of `Stacks: De novo map` pipeline specifying more options as:
+>    > 1. The genetic map type (i.e. F1, F2 (left figure, F1xF1), Double Haploid, Back Cross (F1xF0), Cross Pollination (right figure, F1 or F2 but resulting from the cross of pure homozygous parents))
 >    >
 >    >    ![The genetic map type F2](../../images/RAD2_Genetic_Map/Genetic_map_F2.png)    ![The genetic map CrossPollination](../../images/RAD2_Genetic_Map/Genetic_map_CrossPollination.png)
 >    >
@@ -221,7 +210,6 @@ One line by locus, one column by individual (aa, ab, AB if automatic correction 
 > > 2. We see a moficiation of the number of unverified haplotypes
 > {: .solution }
 {: .question}
-
 
 # Conclusion
 {:.no_toc}
