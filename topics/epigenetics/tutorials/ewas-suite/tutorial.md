@@ -11,7 +11,7 @@ tutorial_name: ewas-suite
 
 The field of cancer genomics has demonstrated the power of massively parallel sequencing techniques to inform on the genes and specific alterations that drive tumor onset and progression. Although large comprehensive sequence data sets continue to be made increasingly available, data analysis remains an ongoing challenge, particularly for laboratories lacking dedicated resources and bioinformatics expertise. To address this, we have provide training based on  Galaxy tools ewas suite that represent many popular algorithms for detecting somatic genetic alterations from cancer genome and exome data.  
 
-> ![epimechanism](../../images/Epigenetic_mechanisms.jpg)
+![epimechanism](../../images/Epigenetic_mechanisms.jpg)
 
 This exercise uses the dataset from the Cell publication by Hugo, Willy, et al., 2015 (DOI: 10.1016/j.cell.2015.07.061). The goal of this article was to identify differentially methylated regions and positions associated with treatment resistant melanomas.
 
@@ -20,7 +20,7 @@ To this end, Illumina 450K Methylation array was performed in melanoma tumors fr
 
 The Infinium Methylation Assay 450k uses two different bead types to detect changes in DNA methylation levels. In the figure we can see M - methylated and U - unmethylated bead types. In our study unmethylated and methylated bead signals are reported as green and red colors respectively.
 
-> ![methassay](../../images/methylationassay.png)
+ ![methassay](../../images/methylationassay.png)
 
 
 Accession  | Sensitivity | Treatment
@@ -31,8 +31,7 @@ GSM1588706 | resistant   | BRAFi
 GSM1588707 | resistant   | BRAFi
 
 > ### Agenda
-> ![ewaschart1](../../images/ewaschart1.png)
-> ![ewaschart2](../../images/ewaschart2.png)
+
 > 1. TOC
 >{:toc}
 > 
