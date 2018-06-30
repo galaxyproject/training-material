@@ -255,7 +255,7 @@
 
         <h1 class="no_toc" id="introduction">Introduction</h1>
 
-<p>Identifying peptides in proteomic datasets is commonly done by using search engines that compare the MS2 spectra of peptides to theoretical spectra. These theoretical spectra are generated from a FASTA database containing proteins that are expected in the measured sample. Typically, those FASTA databases will contain all proteins of the organism the sample derived from.</p>
+<p>In mass spectrometry based proteomics experiments, peptides are assigned to experimentally acquired tandem mass spectra (MS2) by a method called as peptide-spectral matching. Peptide spectral matching is commonly achieved by using search algorithms to match the MS2 spectra to theoretical spectra. The theoretical spectra are generated from theoritical digestion of proteins in the FASTA database. Ideally, the protein FASTA databases will contain all proteins of the organism under investigation.</p>
 
 <blockquote class="agenda">
   <h3 id="agenda">Agenda</h3>
@@ -263,7 +263,7 @@
   <p>In this tutorial, we will deal with:</p>
 
 <ol id="markdown-toc">
-  <li><a href="#loading-a-search-database" id="markdown-toc-loading-a-search-database">Loading a Search Database</a></li>
+  <li><a href="#uploading-a-protein-search-database" id="markdown-toc-uploading-a-protein-search-database">Uploading a protein search Database</a></li>
   <li><a href="#contaminant-databases" id="markdown-toc-contaminant-databases">Contaminant databases</a></li>
   <li><a href="#merging-databases" id="markdown-toc-merging-databases">Merging databases</a></li>
   <li><a href="#creating-a-decoy-database" id="markdown-toc-creating-a-decoy-database">Creating a Decoy Database</a></li>
@@ -271,9 +271,9 @@
 
 </blockquote>
 
-<h1 id="loading-a-search-database">Loading a Search Database</h1>
+<h1 id="uploading-a-protein-search-database">Uploading a protein search Database</h1>
 
-<p>There are a many ways how you can upload your search database (FASTA file with protein sequences). Three among these are:</p>
+<p>There are a many ways how you can upload your protein search database (FASTA file with protein sequences). Three of these ways are:</p>
 
 <ul>
   <li>Using <strong>Protein Database Downloader</strong> <i class="fa fa-wrench" aria-hidden="true"></i> .</li>
@@ -281,11 +281,11 @@
   <li>Uploading a database from the data library.</li>
 </ul>
 
-<p>In this tutorial, we will explore <strong>Protein Database Downloader</strong> <i class="fa fa-wrench" aria-hidden="true"></i> for generating a searchable protein database. First we download the proteome of the organism of interest. In this tutorial, we will use a database of the human proteome.</p>
+<p>In this tutorial, we will explore <strong>Protein Database Downloader</strong> <i class="fa fa-wrench" aria-hidden="true"></i> for generating a protein search database. For this we will download the proteome of an organism of interest. In this tutorial, we will use a database of the human proteome.</p>
 
 <blockquote class="hands_on">
-  <h3 id="-hands-on-loading-a-search-database">
-<i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Loading a Search Database</h3>
+  <h3 id="-hands-on-uploading-a-protein-search-database">
+<i class="fa fa-pencil" aria-hidden="true"></i> Hands-on: Uploading a protein search database</h3>
 
   <ol>
     <li>Create a new history for this Database Handling exercise.</li>
@@ -299,7 +299,7 @@
   <blockquote class="tip">
     <h3 id="-tip-types-of-uniprot-databases">
 <i class="fa fa-lightbulb-o" aria-hidden="true"></i> Tip: Types of uniprot databases</h3>
-    <p>Uniprot offers several types of databases. You may choose to download only reviewed (UniProtKB/Swissprot) databases, only unreviewed (UniProtKB/TREMBL) or both (UniProtKB). In well researched organisms, e.g. Homo sapiens or D. melanogaster, reviewed (Swissprot) databases are always kept up-to-date and may lead to cleaner search results. In other organisms, it might be wiser to include the unreviewed (TREMBL) database not to miss important proteins.</p>
+    <p>Uniprot offers several types of databases. You may choose to download only reviewed (UniProtKB/Swissprot) databases, only unreviewed (UniProtKB/TREMBL) or both (UniProtKB). In model organisms which are well-researched, e.g. <em>Homo sapiens</em> or <em>D. melanogaster</em>, reviewed (Swissprot) databases contain curated proteins and may lead to smaller databases and cleaner search results. However, if the researcher is interested in identifying proteins that are unreviewed, it might be wiser to include the TrEMBL database.</p>
 
     <p>You may also include protein isoforms by setting the tick box <code class="highlighter-rouge">Include isoform data</code> to <code class="highlighter-rouge">Yes</code>.</p>
   </blockquote>
@@ -313,7 +313,7 @@
       <h3 id="-solution">
 <i class="fa fa-eye" aria-hidden="true"></i> Solution</h3>
       <ol>
-        <li>A UniProt complete proteome consists of the set of proteins thought to be expressed by an organism whose genome has been completely sequenced. A reference proteome is the complete proteome of a representative, well-studied model organism or an organism of interest for biomedical research. Reference proteomes constitute a representative cross-section of the taxonomic diversity to be found within UniProtKB. They include the proteomes of well-studied model organisms and other proteomes of interest for biomedical and biotechnological research. Species of particular importance may be represented by numerous reference proteomes for specific ecotypes or strains of interest. <a href="http://www.uniprot.org/help/reference_proteome">Link to source</a>
+        <li>A UniProt complete proteome consists of the set of proteins thought to be expressed by an organism whose genome has been completely sequenced. A reference proteome is the complete proteome of a representative, well-studied model organism or an organism of interest for biomedical and biotechnological research. Reference proteomes constitute a representative cross-section of the taxonomic diversity to be found within UniProtKB. Species of particular importance may be represented by numerous reference proteomes for specific ecotypes or strains of interest. <a href="http://www.uniprot.org/help/reference_proteome">Link to source</a>
 </li>
       </ol>
     </blockquote>
@@ -322,13 +322,13 @@
 
 <h1 id="contaminant-databases">Contaminant databases</h1>
 
-<p>In proteomic samples, some protein contaminants are very common, stemming from the experimenter or contaminated cell culture. Common contaminants are therefore added to the database. This has two benefits:</p>
+<p>In proteomic samples, some protein contaminants are commonly present. These protein contamianants are introduced into sample during sample preparation. The source of these contamiants could be an experimenter or contaminated cell culture. In order to avoid misidentification of spectra derived from contaminants, protein sequences of common laboratory contaminants are added to the database. This has two benefits:</p>
 <ol>
   <li>Contamination can be observed, heavily contaminated samples can be excluded from analysis.</li>
   <li>Contaminant peptides cannot be misassigned to similar peptides in the database reducing the risk of identifying false positives.</li>
 </ol>
 
-<p>A widely used database for common contaminants is the <strong>c</strong>ommon <strong>R</strong>epository of <strong>A</strong>dventitious <strong>P</strong>roteins (cRAP). When using samples generated in cell cultures, it is furthermore recommended to include Mycoplasma proteomes in the search database. Mycoplasma infections are very common in cell culture and often go unnoticed (<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3463982/">Drexler and Uphoff, Cytotechnology, 2002</a>).</p>
+<p>A widely used database for common contaminants is the <strong>c</strong>ommon <strong>R</strong>epository of <strong>A</strong>dventitious <strong>P</strong>roteins (cRAP). When using samples generated in cell cultures, it is furthermore recommended to include <em>Mycoplasma</em> proteomes in the search database. <em>Mycoplasma</em> infections are very common in cell culture and often go unnoticed (<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3463982/">Drexler and Uphoff, Cytotechnology, 2002</a>).</p>
 
 <blockquote class="hands_on">
   <h3 id="-hands-on-contaminant-databases">
@@ -360,7 +360,7 @@
       <h3 id="-solution-1">
 <i class="fa fa-eye" aria-hidden="true"></i> Solution</h3>
       <ol>
-        <li>In samples stemming from a human source, identified human contaminants do not necessarily mean a contaminated sample. The proteins may as well stem from the original sample. Be careful with the interpretation.</li>
+        <li>In samples stemming from a human source, identified human contaminants do not necessarily mean a contaminated sample. The proteins may as well originate from the research study sample. Users are advised to use discretion when interpreting the data.</li>
         <li>In samples from non-human sources, identified human contaminants do mean contamination by the experimenter.</li>
       </ol>
     </blockquote>
@@ -369,8 +369,8 @@
 
 <blockquote class="hands_on">
   <h3 id="-optional-hands-on-mycoplasma-databases">
-<i class="fa fa-pencil" aria-hidden="true"></i> Optional Hands-On: Mycoplasma databases</h3>
-  <p>90 - 95 % of mycoplasma infection in cell culture stem from the following species: M. orale, M. hyorhinis, M. arginini, M. fermentans, M. hominis and A. laidlawii (<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3463982/">Drexler and Uphoff, Cytotechnology, 2002</a>).</p>
+<i class="fa fa-pencil" aria-hidden="true"></i> Optional Hands-On: <em>Mycoplasma</em> databases</h3>
+  <p>90 - 95 % of mycoplasma infection in cell culture originates from the following species: <em>M. orale, M. hyorhinis, M. arginini, M. fermentans, M. hominis</em> and <em>A. laidlawii</em> (<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3463982/">Drexler and Uphoff, Cytotechnology, 2002</a>).</p>
 
   <ol>
     <li>Use <strong>Protein Database Downloader</strong> <i class="fa fa-wrench" aria-hidden="true"></i> to download the six mycoplasma databases. We will merge them to the main database in the next part of the tutorial.</li>
@@ -382,13 +382,13 @@
   <blockquote class="comment">
     <h3 id="-comment">
 <i class="fa fa-commenting-o" aria-hidden="true"></i> Comment</h3>
-    <p>The reviewed mycoplasma databases do not contain all known proteins. It is better to include also the TREMBL database. Mycoplasma proteomes are relatively small, so even downloading TREMBL will not bloat your main database unneccessarily.</p>
+    <p>The reviewed mycoplasma databases do not contain all known proteins. It is better to also include the TREMBL database. <em>Mycoplasma</em> proteomes are relatively small, so even downloading TrEMBL sequences will not incraese the size of your main database by much.</p>
   </blockquote>
 </blockquote>
 
 <h1 id="merging-databases">Merging databases</h1>
 
-<p>Depending on the search engine you are using you might need to merge all fasta entries (i.e. proteins of interest and contaminants) in a single database. Make sure to merge the tagged versions of your contaminant databases.</p>
+<p>Depending on the search algorithm in use,  you might need to merge all FASTA entries (i.e. proteins of interest and contaminants) in a single database. Make sure to merge the tagged versions of your contaminant databases.</p>
 
 <blockquote class="hands_on">
   <h3 id="-hands-on-merging-databases">
@@ -400,7 +400,7 @@
 
       <blockquote>
         <h3 id="optional-merging-mycoplasma-databases">Optional: Merging mycoplasma databases</h3>
-        <p>At this step you may also merge the mycoplasma protein databases that you downloaded earlier on. Simply enter them as additional inputs in <strong>FASTA Merge Files and Filter Unique Sequences</strong> <i class="fa fa-wrench" aria-hidden="true"></i>. You can enter any number of databases when you click on <code class="highlighter-rouge">Insert Input FASTA file(s)</code>.</p>
+        <p>At this step you may also merge the mycoplasma protein databases that you downloaded earlier on. Simply enter them as additional inputs in <strong>FASTA Merge Files and Filter Unique Sequences</strong> <i class="fa fa-wrench" aria-hidden="true"></i>. You can enter any number of protein databases when you click on <code class="highlighter-rouge">Insert Input FASTA file(s)</code>.</p>
       </blockquote>
     </li>
   </ol>
@@ -408,7 +408,7 @@
 
 <h1 id="creating-a-decoy-database">Creating a Decoy Database</h1>
 
-<p>The most common method of peptide and protein FDR calculation is by adding known non-existing proteins, so-called “decoys” to the database. This can be done by reverting or shuffling the real protein entries and adding those fake entries to the database. Some peptide search engines depend on premade decoy databases, others can perform this step automatically.</p>
+<p>The most common method of peptide and protein False Discovery Rate (FDR) calculation is by adding protein sequences that are not expected to be present in the sample. These are also called decoy protein sequences. This can be done by generating reverse sequences of the target protein entries and appending these protein entries to the protein database. Some search algoritmms use premade target-decoy protein sequences while others can generate a target-decoy protein sequence database from a target protein sequence database before using them for peptide spectral matching.</p>
 
 <blockquote class="hands_on">
   <h3 id="-hands-on-creating-a-decoy-database">
@@ -421,7 +421,7 @@
   <blockquote class="tip">
     <h3 id="-tip-decoy-tags">
 <i class="fa fa-lightbulb-o" aria-hidden="true"></i> Tip: Decoy tags</h3>
-    <p>The string you enter as a decoy tag will be added as a prefix or suffix (your choice) to the description of each decoy protein entry. Thus you can see from which entry in the real database the decoy was computed.</p>
+    <p>The string you enter as a decoy tag will be added as a prefix or suffix (your choice) to the description of each decoy protein entry. Thus you can see from which entry in the target database the decoy was computed.</p>
   </blockquote>
 
   <blockquote class="comment">
@@ -433,7 +433,7 @@
 
 <h1 class="no_toc" id="concluding-remarks">Concluding remarks</h1>
 
-<p>To keep your databases up-to-date, or if you need several databases for different organisms, it would make sense to create a workflow out of the Hands-On sections (to learn about workflows see <a href="/training-material/topics/introduction/tutorials/galaxy-intro-101/tutorial.html">this tutorial</a>). You might also want to combine the mycoplasma databases to a single file, which you then easily can add to each of your main databases.</p>
+<p>In order to keep your proteins databases up-to-date, it is recommended to create a workflow out of the hands-on sections (to learn about workflows see <a href="/training-material/topics/introduction/tutorials/galaxy-intro-101/tutorial.html">this tutorial</a>). You might also want to combine the mycoplasma databases to a single file, which you then easily can add to each of your main databases.</p>
 
 <p>Often you may not want to use the most recent database for reasons of reproducibility. If so, you can transfer the final database of this tutorial into other histories to work with it.</p>
 
